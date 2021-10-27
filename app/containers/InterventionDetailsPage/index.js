@@ -41,6 +41,7 @@ import { Roles } from 'models/User/UserRoles';
 import { reorderScope } from 'models/Session/ReorderScope';
 import { archived } from 'models/Status/StatusTypes';
 import { RolePermissions } from 'models/User/RolePermissions';
+import { CatMhLicenseType } from 'models/Intervention';
 import { getQuestionGroupsSaga } from 'global/reducers/questionGroups/sagas';
 import { editSessionRequest, editSessionSaga } from 'global/reducers/session';
 import { makeSelectUser } from 'global/reducers/auth';
@@ -151,7 +152,6 @@ export function InterventionDetailsPage({
     userId: interventionOwnerId,
     languageName,
     googleLanguageId,
-    hasCatSessions,
     isAccessRevoked,
     catMhPool,
     createdCatMhSessionCount,
@@ -160,7 +160,9 @@ export function InterventionDetailsPage({
 
   const testsLeft = catMhPool - createdCatMhSessionCount;
   const hasSmallNumberOfCatMhSessionsRemaining =
-    !catMhPool || testsLeft / catMhPool <= CAT_MH_TEST_COUNT_WARNING_THRESHOLD;
+    licenseType !== CatMhLicenseType.UNLIMITED &&
+    (!catMhPool ||
+      testsLeft / catMhPool <= CAT_MH_TEST_COUNT_WARNING_THRESHOLD);
 
   const editingPossible = canEdit(status);
   const sharingPossible = canShareWithParticipants(status);
@@ -436,12 +438,6 @@ export function InterventionDetailsPage({
           <SelectResearchers
             onResearchersSelected={copyInterventionToResearchers}
             onClose={closeSendCopyModal}
-            {...(hasCatSessions
-              ? {
-                  filterParams: { withCatAbility: hasCatSessions },
-                  filterWarning: formatMessage(messages.filterWarning),
-                }
-              : {})}
           />
         </Modal>
 
@@ -530,6 +526,7 @@ export function InterventionDetailsPage({
                     licenseType,
                     current: testsLeft ?? 0,
                     initial: catMhPool ?? 0,
+                    used: createdCatMhSessionCount,
                     counter: (chunks) => (
                       <span
                         style={{

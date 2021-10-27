@@ -144,17 +144,12 @@ export default defineMessages({
     id: `${scope}.translateInterventionModalLabel`,
     defaultMessage: 'Translate Intervention',
   },
-  filterWarning: {
-    id: `${scope}.filterWarning`,
-    defaultMessage:
-      'The researchers without permission to create a CAT-MH session do not appear on the list',
-  },
   catMhCounter: {
     id: `${scope}.catMhCounter`,
     defaultMessage: `<bold>CAT-MH License</bold>: {licenseType, select,
-        ${CatMhLicenseType.LIMITED} {Limited}
-        ${CatMhLicenseType.UNLIMITED} {Unlimited}
-      } (<counter>{current}/{initial}</counter> <space></space> tests left)`,
+        ${CatMhLicenseType.LIMITED} {Limited (<counter>{current}/{initial}</counter> <space></space> tests left)}
+        ${CatMhLicenseType.UNLIMITED} {Unlimited ({used} tests used)}
+      }`,
   },
   catMhCountWarning: {
     id: `${scope}.catMhCountWarning`,

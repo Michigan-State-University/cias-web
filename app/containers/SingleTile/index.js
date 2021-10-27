@@ -132,7 +132,6 @@ const SingleTile = ({
     createdAt,
     updatedAt,
     googleLanguageId,
-    hasCatSessions,
   } = tileData || {};
 
   const handleCsvRequest = () => sendCsv(id);
@@ -231,12 +230,6 @@ const SingleTile = ({
         <SelectResearchers
           onClose={closeShareWithResearchersModal}
           onResearchersSelected={copyInterventionToResearchers}
-          {...(hasCatSessions
-            ? {
-                filterParams: { withCatAbility: hasCatSessions },
-                filterWarning: formatMessage(messages.filterWarning),
-              }
-            : {})}
         />
       </Modal>
       <Modal onClose={closeTranslateModal} visible={translateModalVisible}>

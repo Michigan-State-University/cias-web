@@ -51,7 +51,6 @@ const SelectResearchers = ({
   user: { id: currentUserId },
   onResearchersSelected,
   filterParams,
-  filterWarning,
 }) => {
   const { formatMessage } = useIntl();
   const [selected, setSelected] = useState([]);
@@ -95,7 +94,6 @@ const SelectResearchers = ({
     );
   return (
     <Box>
-      {filterWarning && <ErrorAlert errorText={filterWarning} />}
       <Row pt={10} width="100%">
         <SearchInput
           ml={5}
@@ -183,7 +181,6 @@ SelectResearchers.propTypes = {
   onClose: PropTypes.func,
   onResearchersSelected: PropTypes.func,
   filterParams: PropTypes.object,
-  filterWarning: PropTypes.string,
 };
 
 const mapStateToProps = createStructuredSelector({
