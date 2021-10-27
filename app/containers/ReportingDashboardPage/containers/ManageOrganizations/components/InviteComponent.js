@@ -73,6 +73,7 @@ const InviteComponent = ({ inviteTo, onCancel, onInvite }) => {
               placeholder={formatMessage(messages.adminEmailPlaceholder)}
               label={formatMessage(messages.adminEmailLabel)}
               type="email"
+              transparent
             >
               <Icon ml={8} src={EditIcon} />
             </FormikHookInput>

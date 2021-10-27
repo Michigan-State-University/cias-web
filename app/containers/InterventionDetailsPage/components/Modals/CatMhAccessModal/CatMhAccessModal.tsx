@@ -48,7 +48,7 @@ const Component = ({ modalState: intervention, closeModal }: Props) => {
   };
 
   const onLicenseInformationChange = (
-    organizationId: string,
+    organizationId: number,
     applicationId: string,
   ): void => {
     setModalData({ ...modalData, applicationId, organizationId });

@@ -29,9 +29,10 @@ export const selectInputText = ({ target }, { start, end } = {}) => {
 };
 
 export const getAriaLabelProps = ({
+  id,
   placeholder,
   'aria-label': ariaLabel,
   'aria-labelledby': ariaLabelledBy,
 }) => ({
-  'aria-label': ariaLabel ?? (ariaLabelledBy ? undefined : placeholder),
+  'aria-label': ariaLabel ?? (id || ariaLabelledBy ? undefined : placeholder),
 });

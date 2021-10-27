@@ -12,6 +12,8 @@ import { connect } from 'react-redux';
 import { createSelector } from 'reselect';
 import { IntlProvider } from 'react-intl';
 
+import { themeColors } from 'theme';
+
 import { makeSelectLocale } from './selectors';
 
 // Those tags are handled by <Markup />
@@ -37,6 +39,9 @@ export const intlProviderConfig = {
     li: (chunks) => `<li>${chunks}</li>`,
     sup: (chunks) => `<sup>${chunks}</sup>`,
     br: () => `<br />`,
+    primaryColor: (chunks) => (
+      <span style={{ color: themeColors.primary }}>{chunks}</span>
+    ),
   },
   onError: (error) => {
     const showError = !errorsToOmit.some((errorToOmit) =>

@@ -115,7 +115,6 @@ exports[`<EmailForm /> Should render and match the snapshot 1`] = `
         width="100%"
       >
         <input
-          aria-label="Enter e-mail address"
           class="c4"
           height="46"
           id="email"
@@ -246,7 +245,6 @@ exports[`<EmailForm /> Should render error and match the snapshot 1`] = `
         width="100%"
       >
         <input
-          aria-label="Enter e-mail address"
           class="c4"
           height="46"
           id="email"

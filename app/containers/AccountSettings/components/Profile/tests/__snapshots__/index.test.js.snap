@@ -676,7 +676,6 @@ exports[`<Profile /> Should render and match the snapshot 1`] = `
             width="100%"
           >
             <input
-              aria-label="Enter first name"
               class="c18"
               height="46"
               id="firstName"
@@ -706,7 +705,6 @@ exports[`<Profile /> Should render and match the snapshot 1`] = `
             width="100%"
           >
             <input
-              aria-label="Enter last name"
               class="c18"
               height="46"
               id="lastName"
@@ -918,7 +916,6 @@ exports[`<Profile /> Should render and match the snapshot 1`] = `
               </p>
             </label>
             <input
-              aria-label="Enter phone number"
               class="c29"
               id="number"
               name="number"

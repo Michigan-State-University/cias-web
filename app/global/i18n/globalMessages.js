@@ -250,6 +250,10 @@ export default defineMessages({
       id: `${scope}.required`,
       defaultMessage: 'This field is required',
     },
+    numeric: {
+      id: `${scope}.numeric`,
+      defaultMessage: 'Only numeric values are allowed',
+    },
   },
   questionRequired: {
     id: `${scope}.questionRequired`,

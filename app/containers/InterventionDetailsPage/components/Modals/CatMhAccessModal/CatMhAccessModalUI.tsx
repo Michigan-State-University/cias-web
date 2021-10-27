@@ -1,39 +1,38 @@
-import React, { ChangeEvent, memo, useState } from 'react';
+import React, { ChangeEvent, memo, useMemo, useState } from 'react';
 import { useIntl } from 'react-intl';
-import { Markup } from 'interweave';
+import { useFormik } from 'formik';
 
 import EditIcon from 'assets/svg/edit.svg';
 
-import { themeColors } from 'theme';
-import { numericValidator } from 'utils/validators';
 import { CatMhLicenseType } from 'models/Intervention';
 
 import { Col, FullWidthContainer, Row } from 'components/ReactGridSystem';
 import Divider from 'components/Divider';
 import Text from 'components/Text';
-import StyledInput from 'components/Input/StyledInput';
-import Input from 'components/Input';
 import Radio from 'components/Radio';
 import FlexRow from 'components/Row';
 import Switch, { LabelPosition } from 'components/Switch';
 import Button, { ImageButton } from 'components/Button';
+import { FormikHookInput } from 'components/FormikInput';
 
 import messages from '../messages';
 import { SectionHeader } from './styled';
 import {
   ACCESS_LABEL_ID,
-  APPLICATION_INPUT_LABEL_ID,
   LICENSE_LIMITED_LABEL_ID,
   LICENSE_UNLIMITED_LABEL_ID,
-  ORGANIZATION_INPUT_LABEL_ID,
   TEST_NUMBER_LABEL_ID,
+  modalValidationSchema,
+  APPLICATION_ID_FORMIK_KEY,
+  ORGANIZATION_ID_FORMIK_KEY,
+  TEST_NUMBER_FORMIK_KEY,
 } from './constants';
 import { ModalUIData } from './types';
 
 type Props = {
   onAccessChange: (allow: boolean) => void;
   onLicenseInformationChange: (
-    organizationId: string,
+    organizationId: number,
     applicationId: string,
   ) => void;
   onLicenseTypeChange: (type: CatMhLicenseType) => void;
@@ -67,11 +66,34 @@ const Component = ({
     currentTestNumber,
   } = modalData;
 
+  const initialFormikValues = useMemo(
+    () => ({
+      [APPLICATION_ID_FORMIK_KEY]: applicationId,
+      [ORGANIZATION_ID_FORMIK_KEY]: `${organizationId ?? ''}`,
+      [TEST_NUMBER_FORMIK_KEY]: `${testNumber ?? 0}`,
+    }),
+    [],
+  );
+
+  const formik = useFormik({
+    initialValues: initialFormikValues,
+    validationSchema: modalValidationSchema,
+    validateOnMount: true,
+    onSubmit: () => {},
+  });
+
+  const { isValid } = formik;
+
+  const isButtonDisabled = !canSave || !isValid;
+
   const [isInputDisabled, setIsInputDisabled] = useState(true);
   const toggleInput = () => setIsInputDisabled(!isInputDisabled);
 
   const onOrganizationIdUpdate = (event: ChangeEvent<HTMLInputElement>) =>
-    onLicenseInformationChange(event.target.value, applicationId);
+    onLicenseInformationChange(
+      Number.parseInt(event.target.value, 10),
+      applicationId,
+    );
 
   const onApplicationIdUpdate = (event: ChangeEvent<HTMLInputElement>) =>
     onLicenseInformationChange(organizationId, event.target.value);
@@ -82,8 +104,8 @@ const Component = ({
   const onUnlimitedLicenseChange = () =>
     onLicenseTypeChange(CatMhLicenseType.UNLIMITED);
 
-  const handleTestNumberChange = (value: string) =>
-    onTestNumberChange(Number.parseInt(value, 10));
+  const handleTestNumberChange = (event: ChangeEvent<HTMLInputElement>) =>
+    onTestNumberChange(Number.parseInt(event.target.value, 10));
 
   const handleAccessChange = () => onAccessChange(!isAccessRevoked);
 
@@ -123,28 +145,26 @@ const Component = ({
 
       <Row>
         <Col>
-          <Text id={ORGANIZATION_INPUT_LABEL_ID} mb={12}>
-            {formatMessage(messages.organizationIdLabel)}
-          </Text>
-          <Input
-            value={organizationId}
-            onChange={onOrganizationIdUpdate}
-            aria-labelledby={ORGANIZATION_INPUT_LABEL_ID}
+          {/* @ts-ignore */}
+          <FormikHookInput
+            formikKey={ORGANIZATION_ID_FORMIK_KEY}
+            formikState={formik}
             placeholder={formatMessage(messages.numberPlaceholder)}
-            disabled={!canEdit}
+            label={formatMessage(messages.organizationIdLabel)}
+            onChange={onOrganizationIdUpdate}
+            inputProps={{ disabled: !canEdit }}
           />
         </Col>
 
         <Col>
-          <Text id={APPLICATION_INPUT_LABEL_ID} mb={12}>
-            {formatMessage(messages.applicationIdLabel)}
-          </Text>
-          <Input
-            value={applicationId}
-            onChange={onApplicationIdUpdate}
-            aria-labelledby={APPLICATION_INPUT_LABEL_ID}
+          {/* @ts-ignore */}
+          <FormikHookInput
+            formikKey={APPLICATION_ID_FORMIK_KEY}
+            formikState={formik}
             placeholder={formatMessage(messages.numberPlaceholder)}
-            disabled={!canEdit}
+            label={formatMessage(messages.applicationIdLabel)}
+            onChange={onApplicationIdUpdate}
+            inputProps={{ disabled: !canEdit }}
           />
         </Col>
       </Row>
@@ -197,19 +217,22 @@ const Component = ({
               </Text>
             </Col>
           </Row>
-          <Row align="center">
+          <Row>
             <Col>
-              <FlexRow align="center">
-                <StyledInput
-                  transparent={false}
-                  validator={numericValidator}
-                  value={`${testNumber ?? 0}`}
-                  onBlur={handleTestNumberChange}
-                  disabled={isInputDisabled || !canEdit}
-                  aria-labelledby={TEST_NUMBER_LABEL_ID}
+              <FlexRow height="50px">
+                {/* @ts-ignore */}
+                <FormikHookInput
+                  formikKey={TEST_NUMBER_FORMIK_KEY}
+                  formikState={formik}
                   placeholder={formatMessage(messages.numberPlaceholder)}
+                  onChange={handleTestNumberChange}
+                  inputProps={{
+                    disabled: isInputDisabled || !canEdit,
+                    'aria-labelledby': TEST_NUMBER_LABEL_ID,
+                  }}
                 />
                 <ImageButton
+                  height="50px"
                   onClick={toggleInput}
                   title={formatMessage(messages.testNumberLabel)}
                   src={EditIcon}
@@ -219,15 +242,10 @@ const Component = ({
             </Col>
 
             <Col align="end">
-              <Markup
-                noWrap
-                content={formatMessage(messages.testNumberLeft, {
-                  testNumber: (chunks) =>
-                    `<span style="color: ${themeColors.primary};">${chunks}</span>`,
-                  current: currentTestNumber,
-                  initial: testNumber,
-                })}
-              />
+              {formatMessage(messages.testNumberLeft, {
+                current: currentTestNumber,
+                initial: testNumber,
+              })}
             </Col>
           </Row>
         </>
@@ -239,7 +257,7 @@ const Component = ({
           <Button
             onClick={onSave}
             loading={isSaving}
-            disabled={!canSave}
+            disabled={isButtonDisabled}
             mt={40}
           >
             {formatMessage(messages.saveButton)}

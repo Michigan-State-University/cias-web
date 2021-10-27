@@ -19,7 +19,7 @@ export const mapInterventionToModalData = (
     currentTestNumber: catMhPool - createdCatMhSessionCount ?? 0,
     licenseType,
     applicationId: catMhApplicationId ?? '',
-    organizationId: catMhOrganizationId ?? '',
+    organizationId: catMhOrganizationId ?? undefined,
     isAccessRevoked,
   };
 };

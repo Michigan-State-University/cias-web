@@ -355,7 +355,6 @@ exports[`<ResetPasswordPage /> Should render and match the snapshot 1`] = `
               width="100%"
             >
               <input
-                aria-label="Enter e-mail address"
                 class="c11"
                 height="46"
                 id="email"

@@ -38,7 +38,7 @@ export interface InterventionDto {
   userId: string;
   firstSessionLanguage?: string;
   catMhApplicationId: string;
-  catMhOrganizationId: string;
+  catMhOrganizationId: number;
   catMhPool: number;
   createdCatMhSessionCount: number;
   isAccessRevoked: boolean;

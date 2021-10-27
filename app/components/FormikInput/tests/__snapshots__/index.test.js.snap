@@ -96,7 +96,6 @@ exports[`<FormikInput /> Should render and match the snapshot 1`] = `
       width="100%"
     >
       <input
-        aria-label="test"
         class="c3"
         id="test"
         name="test"

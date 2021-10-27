@@ -180,7 +180,6 @@ exports[`<CurrencyQuestion /> Should render and match the snapshot 1`] = `
           </p>
         </label>
         <input
-          aria-label="E.g. 121.12"
           class="c4"
           disabled=""
           font-size="15"

@@ -73,7 +73,6 @@ exports[`<FormikNumberInput /> Should render and match the snapshot 1`] = `
       </p>
     </label>
     <input
-      aria-label="test"
       class="c2"
       id="test"
       name="test"

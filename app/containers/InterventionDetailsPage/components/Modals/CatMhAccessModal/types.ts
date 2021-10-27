@@ -1,7 +1,7 @@
 import { CatMhLicenseType } from 'models/Intervention';
 
 export type ModalUIData = {
-  organizationId: string;
+  organizationId: number;
   applicationId: string;
   isAccessRevoked: boolean;
   licenseType: CatMhLicenseType;

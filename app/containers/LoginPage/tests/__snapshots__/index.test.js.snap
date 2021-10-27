@@ -464,7 +464,6 @@ exports[`<LoginPage /> Should render and match the snapshot 1`] = `
               width="100%"
             >
               <input
-                aria-label="Enter e-mail address"
                 class="c15"
                 height="46"
                 id="email"
@@ -505,7 +504,6 @@ exports[`<LoginPage /> Should render and match the snapshot 1`] = `
               width="100%"
             >
               <input
-                aria-label="Enter password"
                 class="c15"
                 height="46"
                 id="password"

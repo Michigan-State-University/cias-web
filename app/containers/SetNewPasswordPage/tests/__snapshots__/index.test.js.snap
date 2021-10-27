@@ -336,7 +336,6 @@ exports[`<SetNewPasswordPage /> Should render and match the snapshot 1`] = `
               width="100%"
             >
               <input
-                aria-label="Enter password"
                 class="c11"
                 height="46"
                 id="password"
@@ -366,7 +365,6 @@ exports[`<SetNewPasswordPage /> Should render and match the snapshot 1`] = `
               width="100%"
             >
               <input
-                aria-label="Retype your password"
                 class="c11"
                 height="46"
                 id="passwordConfirmation"

@@ -273,7 +273,6 @@ exports[`<PhoneQuestion /> Should render and match the snapshot 1`] = `
             </p>
           </label>
           <input
-            aria-label="Enter phone number"
             class="c8"
             disabled=""
             id="number"
