@@ -55,6 +55,12 @@ const WrappedAccordion = ({
     }
   }, []);
 
+  useEffect(() => {
+    if (narratorBlockIndex >= narrator.blocks.length) {
+      changeNarratorBlockIndex(-1);
+    }
+  }, [narrator.blocks.length]);
+
   const hideAccordion = () => {
     setDraggable(false);
     const { endPosition } = narrator.blocks[0] || {};

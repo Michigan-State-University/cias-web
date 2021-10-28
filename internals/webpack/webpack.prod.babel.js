@@ -22,8 +22,8 @@ module.exports = require('./webpack.base.babel')({
 
   // Utilize long-term caching by adding content hashes (not compilation hashes) to compiled assets
   output: {
-    filename: '[name].[chunkhash].js',
-    chunkFilename: '[name].[chunkhash].chunk.js',
+    filename: '[name].[contenthash].js',
+    chunkFilename: '[name].[contenthash].chunk.js',
   },
 
   optimization: {
@@ -46,6 +46,7 @@ module.exports = require('./webpack.base.babel')({
       }),
     ],
     nodeEnv: 'production',
+    moduleIds: 'deterministic',
     sideEffects: true,
     concatenateModules: true,
     runtimeChunk: 'single',
@@ -56,6 +57,7 @@ module.exports = require('./webpack.base.babel')({
       cacheGroups: {
         vendor: {
           test: /[\\/]node_modules[\\/]/,
+          chunks: 'all',
           name(module) {
             const packageName = module.context.match(
               /[\\/]node_modules[\\/](.*?)([\\/]|$)/,
@@ -114,7 +116,7 @@ module.exports = require('./webpack.base.babel')({
   ],
 
   performance: {
-    assetFilter: assetFilename =>
+    assetFilter: (assetFilename) =>
       !/(\.map$)|(^(main\.|favicon\.))/.test(assetFilename),
   },
 });
