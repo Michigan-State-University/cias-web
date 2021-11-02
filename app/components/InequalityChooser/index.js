@@ -10,7 +10,8 @@ import { useIntl } from 'react-intl';
 
 import { colors } from 'theme';
 
-import { numericValidator } from 'utils/validators';
+import { floatValidator } from 'utils/validators';
+import { splitAndKeep } from 'utils/splitAndKeep';
 
 import Select from 'components/Select';
 import Box from 'components/Box';
@@ -39,7 +40,7 @@ const InequalityChooser = ({
 
   useEffect(() => {
     if (inequalityValue) {
-      const newNumericValue = inequalityValue.replace(/\D/g, '');
+      const newNumericValue = splitAndKeep(inequalityValue, signs)[0];
       const newInequalitySign = inequalityValue.slice(
         0,
         inequalityValue.length - newNumericValue.length,
@@ -82,7 +83,7 @@ const InequalityChooser = ({
           textAlign="center"
           placeholder="..."
           value={numericValue}
-          validator={numericValidator}
+          validator={floatValidator}
           onBlur={(value) => setNumericValue(value)}
           aria-label={formatMessage(messages.inputLabel)}
         />
