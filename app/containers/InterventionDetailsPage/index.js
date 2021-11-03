@@ -218,10 +218,10 @@ export function InterventionDetailsPage({
     },
   });
 
-  const canCreateCatSession = useMemo(() => {
-    if (roles.includes('admin')) return true;
-    return !isAccessRevoked;
-  }, [roles, isAccessRevoked]);
+  const canCreateCatSession = useMemo(
+    () => !isAccessRevoked,
+    [isAccessRevoked],
+  );
 
   const options = [
     {
