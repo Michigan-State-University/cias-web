@@ -70,7 +70,7 @@ const ReportsList = ({
   currentFilterOption,
   match,
 }) => {
-  const { sessionId, interventionId } = match?.params;
+  const { sessionId, interventionId } = match?.params ?? {};
 
   const sortOptions = useMemo(
     () =>
