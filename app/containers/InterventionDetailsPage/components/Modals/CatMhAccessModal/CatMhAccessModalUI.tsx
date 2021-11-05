@@ -84,7 +84,8 @@ const Component = ({
 
   const { isValid } = formik;
 
-  const isButtonDisabled = !canSave || !isValid;
+  const areFieldsDisabled = !canSave || isAccessRevoked;
+  const isButtonDisabled = areFieldsDisabled || !isValid;
 
   const [isInputDisabled, setIsInputDisabled] = useState(true);
   const toggleInput = () => setIsInputDisabled(!isInputDisabled);
@@ -152,7 +153,7 @@ const Component = ({
             placeholder={formatMessage(messages.numberPlaceholder)}
             label={formatMessage(messages.organizationIdLabel)}
             onChange={onOrganizationIdUpdate}
-            inputProps={{ disabled: !canEdit }}
+            inputProps={{ disabled: areFieldsDisabled }}
           />
         </Col>
 
@@ -164,7 +165,7 @@ const Component = ({
             placeholder={formatMessage(messages.numberPlaceholder)}
             label={formatMessage(messages.applicationIdLabel)}
             onChange={onApplicationIdUpdate}
-            inputProps={{ disabled: !canEdit }}
+            inputProps={{ disabled: areFieldsDisabled }}
           />
         </Col>
       </Row>
@@ -183,7 +184,7 @@ const Component = ({
             id={LICENSE_LIMITED_LABEL_ID}
             onChange={onLimitedLicenseChange}
             checked={licenseType === CatMhLicenseType.LIMITED}
-            disabled={!canEdit}
+            disabled={areFieldsDisabled}
           >
             <Text>{formatMessage(messages.limitedTypeLabel)}</Text>
           </Radio>
@@ -194,7 +195,7 @@ const Component = ({
             id={LICENSE_UNLIMITED_LABEL_ID}
             onChange={onUnlimitedLicenseChange}
             checked={licenseType === CatMhLicenseType.UNLIMITED}
-            disabled={!canEdit}
+            disabled={areFieldsDisabled}
           >
             <Text>{formatMessage(messages.unlimitedTypeLabel)}</Text>
           </Radio>
@@ -227,7 +228,7 @@ const Component = ({
                   placeholder={formatMessage(messages.numberPlaceholder)}
                   onChange={handleTestNumberChange}
                   inputProps={{
-                    disabled: isInputDisabled || !canEdit,
+                    disabled: isInputDisabled || areFieldsDisabled,
                     'aria-labelledby': TEST_NUMBER_LABEL_ID,
                   }}
                 />
@@ -235,6 +236,7 @@ const Component = ({
                   height="50px"
                   onClick={toggleInput}
                   title={formatMessage(messages.testNumberLabel)}
+                  disabled={areFieldsDisabled}
                   src={EditIcon}
                   ml={14}
                 />
