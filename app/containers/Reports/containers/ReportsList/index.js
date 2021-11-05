@@ -20,6 +20,17 @@ import Loader from 'components/Loader';
 import Box from 'components/Box';
 
 import { colors, themeColors } from 'theme';
+
+import {
+  fetchInterventionRequest,
+  interventionReducer,
+} from 'global/reducers/intervention';
+import fetchInterventionSaga from 'global/reducers/intervention/sagas/fetchIntervention';
+import {
+  getSessionRequest,
+  getSessionSaga,
+  sessionReducer,
+} from 'global/reducers/session';
 import {
   REPORTS_PER_PAGE,
   filterOptions,
@@ -50,12 +61,16 @@ const ReportsList = ({
   reports,
   reportsLoading,
   fetchReports,
+  fetchIntervention,
+  fetchSession,
   reportsSize,
   disableFilter,
   currentPage,
   currentSortOption,
   currentFilterOption,
-  match,
+  match: {
+    params: { sessionId, interventionId },
+  },
 }) => {
   const sortOptions = useMemo(
     () =>
@@ -70,33 +85,31 @@ const ReportsList = ({
 
   const innerSetPage = pageNumber => {
     setDisplayLoader(true);
-    fetchReports(pageNumber, null, currentSortOption, match?.params?.sessionId);
+    fetchReports(pageNumber, null, currentSortOption, sessionId);
   };
 
   const handleChangeFilter = filter => {
     setDisplayLoader(true);
-    fetchReports(
-      currentPage,
-      filter,
-      currentSortOption,
-      match?.params?.sessionId,
-    );
+    fetchReports(currentPage, filter, currentSortOption, sessionId);
   };
 
   const handleChangeSort = sort => {
     setDisplayLoader(true);
-    fetchReports(currentPage, null, sort, match?.params?.sessionId);
+    fetchReports(currentPage, null, sort, sessionId);
   };
 
   const pages = Math.ceil(reportsSize / REPORTS_PER_PAGE);
 
   useEffect(() => {
-    fetchReports(
-      currentPage,
-      null,
-      currentSortOption,
-      match?.params?.sessionId,
-    );
+    fetchIntervention(interventionId);
+  }, [interventionId]);
+
+  useEffect(() => {
+    fetchSession({ sessionId, interventionId });
+  }, [sessionId, interventionId]);
+
+  useEffect(() => {
+    fetchReports(currentPage, null, currentSortOption, sessionId);
   }, []);
 
   useEffect(() => {
@@ -159,6 +172,8 @@ ReportsList.propTypes = {
   reportsSize: PropTypes.number,
   reportsLoading: PropTypes.bool,
   fetchReports: PropTypes.func,
+  fetchIntervention: PropTypes.func,
+  fetchSession: PropTypes.func,
   intl: PropTypes.shape(IntlShape),
   disableFilter: PropTypes.bool,
   currentPage: PropTypes.number,
@@ -178,6 +193,8 @@ const mapStateToProps = createStructuredSelector({
 
 const mapDispatchToProps = {
   fetchReports: fetchReportsRequest,
+  fetchIntervention: fetchInterventionRequest,
+  fetchSession: getSessionRequest,
 };
 
 const withConnect = connect(
@@ -192,6 +209,10 @@ export default compose(
   }),
   injectReducer({ key: 'generatedReports', reducer: generatedReportsReducer }),
   injectSaga({ key: 'reportsSaga', saga: fetchReportsSaga }),
+  injectReducer({ key: 'intervention', reducer: interventionReducer }),
+  injectSaga({ key: 'fetchIntervention', saga: fetchInterventionSaga }),
+  injectReducer({ key: 'session', reducer: sessionReducer }),
+  injectSaga({ key: 'getSession', saga: getSessionSaga }),
   injectIntl,
   withConnect,
   memo,
