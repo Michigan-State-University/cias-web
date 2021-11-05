@@ -49,7 +49,7 @@ import ClinicAdminRedirectPage from 'containers/ClinicAdminRedirectPage/Loadable
 import { VIEW } from 'containers/ReportingDashboardPage/constants';
 import ApiQueryMessageHandler from 'components/ApiQueryMessageHandler/Loadable';
 import ParticipantDashboard from 'containers/ParticipantDashboard/Loadable';
-import RakePanelPage from 'containers/SuperadminConsolePage/Loadable';
+import SuperadminConsolePage from 'containers/SuperadminConsolePage/Loadable';
 
 import AppRoute from 'components/AppRoute';
 import IdleTimer from 'components/IdleTimer/Loadable';
@@ -389,7 +389,7 @@ export function App({ user }) {
           exact
           protectedRoute
           path="/admin-console"
-          component={RakePanelPage}
+          component={SuperadminConsolePage}
           allowedRoles={[Roles.admin]}
           navbarProps={{
             navbarId: NAVIGATION.DEFAULT,
