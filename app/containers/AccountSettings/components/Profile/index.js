@@ -32,6 +32,7 @@ const Profile = props => {
     TimezoneComponent,
     DeactivationComponent,
     PhoneNumberComponent,
+    ResendInvitationLinkComponent,
     userId,
   } = props;
   const [passwordReset, setPasswordReset] = useState(false);
@@ -56,11 +57,12 @@ const Profile = props => {
             <AvatarComponent userId={userId} />
           </div>
         )}
-        {DeactivationComponent && (
-          <div>
-            <DeactivationComponent userId={userId} />
-          </div>
-        )}
+        <Row justify="center" flexWrap="wrap" gap={10}>
+          {ResendInvitationLinkComponent && (
+            <ResendInvitationLinkComponent userId={userId} />
+          )}
+          {DeactivationComponent && <DeactivationComponent userId={userId} />}
+        </Row>
       </Row>
       <Row mt={50}>
         {FullNameComponent && (
@@ -111,6 +113,7 @@ Profile.propTypes = {
   TimezoneComponent: PropTypes.object,
   DeactivationComponent: PropTypes.object,
   PhoneNumberComponent: PropTypes.object,
+  ResendInvitationLinkComponent: PropTypes.object,
 };
 
 Profile.defaultProps = {
@@ -120,6 +123,7 @@ Profile.defaultProps = {
   TimezoneComponent: WrappedTimezoneForm,
   PhoneNumberComponent: WrappedPhoneNumberForm,
   DeactivationComponent: null,
+  ResendInvitationLinkComponent: null,
 };
 
 export default injectIntl(Profile);

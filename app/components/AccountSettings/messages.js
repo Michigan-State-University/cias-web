@@ -196,6 +196,10 @@ export default defineMessages({
     id: `${scope}.deactivate`,
     defaultMessage: 'Deactivate account',
   },
+  resendInvitationLink: {
+    id: `${scope}.resendInvitationLink`,
+    defaultMessage: 'Resend invitation link',
+  },
   confirmCode: {
     id: `${scope}.confirmCode`,
     defaultMessage: 'Confirm your phone number',

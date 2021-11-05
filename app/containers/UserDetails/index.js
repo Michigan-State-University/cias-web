@@ -26,6 +26,7 @@ import AccountSettings from '../AccountSettings';
 import WrappedAvatarFormAdmin from './containers/WrappedAvatarFormAdmin';
 import WrappedFullNameFormAdmin from './containers/WrappedFullNameFormAdmin';
 import WrappedDeactivationAdmin from './containers/WrappedDeactivationAdmin';
+import { WrappedResendInvitationLinkAdmin } from './containers/WrappedResendInvitationLinkAdmin';
 
 export const UserDetails = ({
   userState: { user, userError, userLoading },
@@ -55,6 +56,7 @@ export const UserDetails = ({
         AvatarComponent: WrappedAvatarFormAdmin,
         FullNameComponent: WrappedFullNameFormAdmin,
         DeactivationComponent: WrappedDeactivationAdmin,
+        ResendInvitationLinkComponent: WrappedResendInvitationLinkAdmin,
       }}
       userId={user.id}
     />
