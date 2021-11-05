@@ -68,10 +68,10 @@ const ReportsList = ({
   currentPage,
   currentSortOption,
   currentFilterOption,
-  match: {
-    params: { sessionId, interventionId },
-  },
+  match,
 }) => {
+  const { sessionId, interventionId } = match?.params;
+
   const sortOptions = useMemo(
     () =>
       sortByOptions.map(value => ({
