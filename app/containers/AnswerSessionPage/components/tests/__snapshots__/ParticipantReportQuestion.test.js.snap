@@ -10,15 +10,6 @@ exports[`<ParticipantReport /> Should render and match the snapshot 1`] = `
       class="Column-sc-4zswzq-0 bGMBAA"
     >
       <div
-        class="Row-y1cs0u-0 dskFsL"
-      >
-        <p
-          class="Text-e4p0w3-0 fFURPd"
-        >
-          Would you like to receive a report generated from your responses?
-        </p>
-      </div>
-      <div
         class="Row-y1cs0u-0 goQUzT"
       >
         <img
@@ -56,7 +47,7 @@ exports[`<ParticipantReport /> Should render and match the snapshot 1`] = `
         <p
           class="Text-e4p0w3-0 fFURPd"
         >
-          Provide your email
+          Please provide your email
         </p>
         <div
           class="Box-sc-1vhutan-0 BfYRC"
