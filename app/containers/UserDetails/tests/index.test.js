@@ -38,6 +38,14 @@ describe('<UserDetails />', () => {
         lastName: 'test',
         active: true,
       },
+      loaders: {
+        user: false,
+        resendInvitationLink: false,
+      },
+      errors: {
+        user: null,
+        resendInvitationLink: null,
+      },
     },
   };
   let store;
