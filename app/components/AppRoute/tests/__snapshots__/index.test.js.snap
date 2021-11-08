@@ -137,6 +137,12 @@ exports[`<AppRoute /> Should render and match the snapshot 1`] = `
   overflow: hidden;
 }
 
+@media (max-width:767px) {
+  .c1 .user-name-info {
+    display: none;
+  }
+}
+
 @media (max-width:575px) {
   .c4 {
     -webkit-box-pack: start;
@@ -148,12 +154,6 @@ exports[`<AppRoute /> Should render and match the snapshot 1`] = `
   .c4 img {
     width: 70%;
     margin: 0;
-  }
-}
-
-@media (max-width:767px) {
-  .c1 .user-name-info {
-    display: none;
   }
 }
 
