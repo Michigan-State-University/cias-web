@@ -1,4 +1,5 @@
 import { createSelector } from 'reselect';
+
 import { initialState } from './reducer';
 
 /**
@@ -15,11 +16,20 @@ const selectUserDomain = state => state.singleUser || initialState;
  * Default selector used by User
  */
 
-const makeSelectUser = () =>
+export const makeSelectUser = () =>
   createSelector(
     selectUserDomain,
-    substate => substate,
+    ({ user }) => user,
   );
 
-export default makeSelectUser;
-export { selectUserDomain };
+export const makeSelectUserLoader = name =>
+  createSelector(
+    selectUserDomain,
+    ({ loaders }) => loaders[name],
+  );
+
+export const makeSelectUserError = name =>
+  createSelector(
+    selectUserDomain,
+    ({ errors }) => errors[name],
+  );

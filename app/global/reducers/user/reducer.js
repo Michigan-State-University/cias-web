@@ -25,9 +25,13 @@ import {
 
 export const initialState = {
   user: null,
-  userError: null,
-  userLoading: true,
   cache: {
+    user: null,
+  },
+  loaders: {
+    user: true,
+  },
+  errors: {
     user: null,
   },
 };
@@ -37,17 +41,17 @@ const userReducer = (state = initialState, { type, payload }) =>
   produce(state, draft => {
     switch (type) {
       case FETCH_USER_REQUEST:
-        draft.userLoading = true;
-        draft.userError = null;
+        draft.loaders.user = true;
+        draft.errors.user = null;
         draft.user = null;
         break;
       case FETCH_USER_SUCCESS:
         draft.user = payload;
-        draft.userLoading = false;
+        draft.loaders.user = false;
         break;
       case FETCH_USER_FAILURE:
-        draft.userError = payload;
-        draft.userLoading = false;
+        draft.errors.user = payload;
+        draft.loaders.user = false;
         break;
       case EDIT_OTHER_USER_REQUEST:
         draft.cache.user = state.user;

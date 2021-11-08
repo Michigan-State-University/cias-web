@@ -32,8 +32,8 @@ describe('intervention reducer', () => {
     const action = actionBuilder(FETCH_USER_REQUEST, {});
 
     const expectedState = cloneDeep(mockState);
-    expectedState.userLoading = true;
-    expectedState.userError = null;
+    expectedState.loaders.user = true;
+    expectedState.errors.user = null;
     expectedState.user = null;
 
     expect(userReducer(mockState, action)).toEqual(expectedState);
@@ -45,7 +45,7 @@ describe('intervention reducer', () => {
     const action = actionBuilder(FETCH_USER_SUCCESS, payloadUser);
 
     const expectedState = cloneDeep(mockState);
-    expectedState.userLoading = false;
+    expectedState.loaders.user = false;
     expectedState.user = payloadUser;
 
     expect(userReducer(mockState, action)).toEqual(expectedState);
@@ -57,8 +57,8 @@ describe('intervention reducer', () => {
     const action = actionBuilder(FETCH_USER_FAILURE, payloadError);
 
     const expectedState = cloneDeep(mockState);
-    expectedState.userLoading = false;
-    expectedState.userError = payloadError;
+    expectedState.loaders.user = false;
+    expectedState.errors.user = payloadError;
 
     expect(userReducer(mockState, action)).toEqual(expectedState);
   });
