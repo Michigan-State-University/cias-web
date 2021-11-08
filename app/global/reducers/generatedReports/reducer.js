@@ -16,7 +16,6 @@ import {
   SORT_BY_LATEST,
   PARTICIPANTS,
   THIRD_PARTY,
-  RESET_STATE,
 } from './constants';
 
 export const initialState = {
@@ -116,10 +115,6 @@ export const generatedReportsReducer = (state = initialState, action) =>
         break;
       case TOGGLE_NOTIFICATIONS_ERROR:
         draft.errors.fetchInterventionsError = action.payload.error;
-        break;
-      case RESET_STATE:
-        draft.reports = null;
-        draft.reportsSize = 0;
         break;
     }
   });
