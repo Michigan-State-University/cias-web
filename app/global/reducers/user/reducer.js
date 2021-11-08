@@ -21,6 +21,9 @@ import {
   CHANGE_ACTIVATE_STATUS_REQUEST,
   CHANGE_ACTIVATE_STATUS_ERROR,
   CHANGE_ACTIVATE_STATUS_SUCCESS,
+  RESEND_INVITATION_LINK_REQUEST,
+  RESEND_INVITATION_LINK_SUCCESS,
+  RESEND_INVITATION_LINK_ERROR,
 } from './constants';
 
 export const initialState = {
@@ -30,9 +33,11 @@ export const initialState = {
   },
   loaders: {
     user: true,
+    resendInvitationLink: false,
   },
   errors: {
     user: null,
+    resendInvitationLink: null,
   },
 };
 
@@ -98,6 +103,16 @@ const userReducer = (state = initialState, { type, payload }) =>
       case CHANGE_ACTIVATE_STATUS_ERROR:
         draft.user = draft.cache.user;
         draft.cache.user = null;
+        break;
+      case RESEND_INVITATION_LINK_REQUEST:
+        draft.loaders.resendInvitationLink = true;
+        break;
+      case RESEND_INVITATION_LINK_SUCCESS:
+        draft.loaders.resendInvitationLink = false;
+        break;
+      case RESEND_INVITATION_LINK_ERROR:
+        draft.loaders.resendInvitationLink = false;
+        draft.errors.resendInvitationLink = payload.error;
         break;
     }
   });

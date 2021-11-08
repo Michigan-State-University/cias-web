@@ -58,9 +58,7 @@ const Profile = props => {
           </div>
         )}
         <Row justify="center" flexWrap="wrap" gap={10}>
-          {ResendInvitationLinkComponent && (
-            <ResendInvitationLinkComponent userId={userId} />
-          )}
+          {ResendInvitationLinkComponent && <ResendInvitationLinkComponent />}
           {DeactivationComponent && <DeactivationComponent userId={userId} />}
         </Row>
       </Row>
