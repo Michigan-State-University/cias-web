@@ -184,7 +184,7 @@ const withConnect = connect(
 );
 
 const reduxInjectors = [
-  injectReducer({ key: 'singleUser', reducer: UserReducer }),
+  injectReducer({ key: 'user', reducer: UserReducer }),
   injectSaga({ key: 'fetchUserSaga', saga: fetchUserSaga }),
   injectSaga({ key: 'editSingleUserSaga', saga: editSingleUserSaga }),
   injectSaga({

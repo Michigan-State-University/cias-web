@@ -27,7 +27,7 @@ describe('<UserDetails />', () => {
         roles: [Roles.admin],
       },
     },
-    singleUser: {
+    user: {
       user: {
         id: '1',
         full_name: 'test test',
@@ -55,15 +55,13 @@ describe('<UserDetails />', () => {
     document.body.appendChild(mainAppContainer);
 
     props = {
-      userState: {
-        user: {
-          id: '1',
-          full_name: 'test test',
-          roles: ['participant'],
-          email: 'test@test.pl',
-          avatar: null,
-          active: true,
-        },
+      user: {
+        id: '1',
+        full_name: 'test test',
+        roles: ['participant'],
+        email: 'test@test.pl',
+        avatar: null,
+        active: true,
       },
       match: {
         params: {

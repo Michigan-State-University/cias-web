@@ -92,6 +92,6 @@ const withConnect = connect(
 
 export default compose(
   withConnect,
-  injectSaga({ key: 'singleUserSaga', saga: fetchUserSaga }),
-  injectReducer({ key: 'singleUser', reducer: UserReducer }),
+  injectSaga({ key: 'userSaga', saga: fetchUserSaga }),
+  injectReducer({ key: 'user', reducer: UserReducer }),
 )(UserDetails);

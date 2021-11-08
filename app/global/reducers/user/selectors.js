@@ -6,7 +6,7 @@ import { initialState } from './reducer';
  * Direct selector to the userList state domain
  */
 
-const selectUserDomain = state => state.singleUser || initialState;
+const selectUserDomain = state => state.user || initialState;
 
 /**
  * Other specific selectors

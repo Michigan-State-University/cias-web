@@ -113,7 +113,7 @@ Profile.propTypes = {
   TimezoneComponent: PropTypes.object,
   DeactivationComponent: PropTypes.object,
   PhoneNumberComponent: PropTypes.object,
-  ResendInvitationLinkComponent: PropTypes.object,
+  ResendInvitationLinkComponent: PropTypes.func,
 };
 
 Profile.defaultProps = {
