@@ -12,9 +12,12 @@ import {
 } from '../actions';
 
 function* resendInvitationLink({ payload: { userId } }) {
-  const requestUrl = `/v1/users/invitations/resend/${userId}`;
+  const url = '/v1/users/invitations/resend';
+  const body = {
+    id: userId,
+  };
   try {
-    yield call(axios.post, requestUrl);
+    yield call(axios.post, url, body);
     yield put(resendInvitationLinkSuccess());
     yield call(toast.info, formatMessage(messages.resendInvitationLinkSuccess));
   } catch (error) {
