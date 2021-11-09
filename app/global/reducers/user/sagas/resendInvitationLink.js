@@ -14,7 +14,7 @@ import {
 function* resendInvitationLink({ payload: { userId } }) {
   const requestUrl = `/v1/users/invitations/resend/${userId}`;
   try {
-    yield call(axios.get, requestUrl);
+    yield call(axios.post, requestUrl);
     yield put(resendInvitationLinkSuccess());
     yield call(toast.info, formatMessage(messages.resendInvitationLinkSuccess));
   } catch (error) {
