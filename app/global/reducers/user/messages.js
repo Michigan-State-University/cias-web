@@ -19,4 +19,12 @@ export default defineMessages({
     id: `${scope}.changeStatusFailure`,
     defaultMessage: 'Cannot change user status',
   },
+  resendInvitationLinkSuccess: {
+    id: `${scope}.resendInvitationLinkSuccess`,
+    defaultMessage: 'Invitation link has been sent',
+  },
+  resendInvitationLinkError: {
+    id: `${scope}.resendInvitationLinkError`,
+    defaultMessage: 'Cannot send an invitation link',
+  },
 });

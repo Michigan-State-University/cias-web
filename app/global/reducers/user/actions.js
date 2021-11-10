@@ -21,6 +21,9 @@ import {
   CHANGE_ACTIVATE_STATUS_REQUEST,
   CHANGE_ACTIVATE_STATUS_SUCCESS,
   CHANGE_ACTIVATE_STATUS_ERROR,
+  RESEND_INVITATION_LINK_REQUEST,
+  RESEND_INVITATION_LINK_SUCCESS,
+  RESEND_INVITATION_LINK_ERROR,
 } from './constants';
 
 export const fetchUserRequest = id => actionBuilder(FETCH_USER_REQUEST, { id });
@@ -55,3 +58,10 @@ export const changeActivateStatusSuccess = user =>
   actionBuilder(CHANGE_ACTIVATE_STATUS_SUCCESS, { user });
 export const changeActivateStatusError = error =>
   actionBuilder(CHANGE_ACTIVATE_STATUS_ERROR, error);
+
+export const resendInvitationLinkRequest = userId =>
+  actionBuilder(RESEND_INVITATION_LINK_REQUEST, { userId });
+export const resendInvitationLinkSuccess = () =>
+  actionBuilder(RESEND_INVITATION_LINK_SUCCESS, {});
+export const resendInvitationLinkError = error =>
+  actionBuilder(RESEND_INVITATION_LINK_ERROR, { error });

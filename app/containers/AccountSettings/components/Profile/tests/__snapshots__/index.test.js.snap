@@ -60,6 +60,9 @@ exports[`<Profile /> Should render and match the snapshot 1`] = `
           </div>
         </div>
       </div>
+      <div
+        class="Row-y1cs0u-0 hNdQax"
+      />
     </div>
     <div
       class="Row-y1cs0u-0 eDtOGP"

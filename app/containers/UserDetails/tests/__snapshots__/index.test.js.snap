@@ -93,7 +93,17 @@ exports[`<UserDetails /> Should render and match the snapshot 1`] = `
                 </div>
               </div>
             </div>
-            <div>
+            <div
+              class="Row-y1cs0u-0 hNdQax"
+            >
+              <button
+                class="StyledButton-d2s0gt-0 cHFEoA"
+                color="primary"
+                radius="100px"
+                width="180"
+              >
+                Resend invitation link
+              </button>
               <button
                 class="StyledButton-d2s0gt-0 eHTczx"
                 color="warning"
