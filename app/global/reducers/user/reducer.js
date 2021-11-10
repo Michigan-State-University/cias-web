@@ -21,14 +21,23 @@ import {
   CHANGE_ACTIVATE_STATUS_REQUEST,
   CHANGE_ACTIVATE_STATUS_ERROR,
   CHANGE_ACTIVATE_STATUS_SUCCESS,
+  RESEND_INVITATION_LINK_REQUEST,
+  RESEND_INVITATION_LINK_SUCCESS,
+  RESEND_INVITATION_LINK_ERROR,
 } from './constants';
 
 export const initialState = {
   user: null,
-  userError: null,
-  userLoading: true,
   cache: {
     user: null,
+  },
+  loaders: {
+    user: true,
+    resendInvitationLink: false,
+  },
+  errors: {
+    user: null,
+    resendInvitationLink: null,
   },
 };
 
@@ -37,17 +46,17 @@ const userReducer = (state = initialState, { type, payload }) =>
   produce(state, draft => {
     switch (type) {
       case FETCH_USER_REQUEST:
-        draft.userLoading = true;
-        draft.userError = null;
+        draft.loaders.user = true;
+        draft.errors.user = null;
         draft.user = null;
         break;
       case FETCH_USER_SUCCESS:
         draft.user = payload;
-        draft.userLoading = false;
+        draft.loaders.user = false;
         break;
       case FETCH_USER_FAILURE:
-        draft.userError = payload;
-        draft.userLoading = false;
+        draft.errors.user = payload;
+        draft.loaders.user = false;
         break;
       case EDIT_OTHER_USER_REQUEST:
         draft.cache.user = state.user;
@@ -94,6 +103,16 @@ const userReducer = (state = initialState, { type, payload }) =>
       case CHANGE_ACTIVATE_STATUS_ERROR:
         draft.user = draft.cache.user;
         draft.cache.user = null;
+        break;
+      case RESEND_INVITATION_LINK_REQUEST:
+        draft.loaders.resendInvitationLink = true;
+        break;
+      case RESEND_INVITATION_LINK_SUCCESS:
+        draft.loaders.resendInvitationLink = false;
+        break;
+      case RESEND_INVITATION_LINK_ERROR:
+        draft.loaders.resendInvitationLink = false;
+        draft.errors.resendInvitationLink = payload.error;
         break;
     }
   });

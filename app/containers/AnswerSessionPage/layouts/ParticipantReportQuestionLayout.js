@@ -37,9 +37,6 @@ const ParticipantReportLayout = ({
   return (
     <Box width="100%" padding={15}>
       <Column justify="center">
-        <Row>
-          <Text>{formatMessage(messages.reportHeader)}</Text>
-        </Row>
         <Row
           disabled={disabled}
           mt={20}

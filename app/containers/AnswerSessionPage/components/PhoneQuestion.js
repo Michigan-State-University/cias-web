@@ -15,6 +15,7 @@ const PhoneQuestion = ({
     body: {
       variable: { name },
     },
+    settings: { required },
   } = question;
 
   const onChange = event => {
@@ -32,6 +33,7 @@ const PhoneQuestion = ({
       formatMessage={formatMessage}
       onChange={onChange}
       answerBody={answerBody?.[0]}
+      required={required}
     />
   );
 };

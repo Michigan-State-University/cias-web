@@ -36,6 +36,8 @@ const ConfirmationBox = ({
     onClose();
   }, [confirmAction, onClose]);
 
+  if (!visible) return <></>;
+
   return (
     <Modal visible={visible} onClose={onClose} {...modalStyles}>
       <Column px={50} pd={30} {...contentContainerStyles}>

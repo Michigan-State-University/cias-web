@@ -53,6 +53,7 @@ function BranchingLayout({
   onRemoveTarget,
 }) {
   const [patternsSize, setPatternSize] = useState(formula.patterns.length);
+  const [isOpen, setIsOpen] = useState(false);
 
   useEffect(() => {
     if (formula.patterns.length !== patternsSize) {
@@ -85,6 +86,7 @@ function BranchingLayout({
             includeCurrentSession={includeCurrentSession}
             isMultiSession={isMultiSession}
             selectedQuestion={selectedQuestion}
+            setIsOpen={setIsOpen}
           >
             <Text
               fontWeight="bold"
@@ -113,6 +115,7 @@ function BranchingLayout({
                 placeholder={formatMessage(messages.formulaPlaceholder)}
                 value={formula.payload}
                 onBlur={val => onFormulaUpdate(val, id)}
+                forceBlur={isOpen}
               />
             </Box>
 

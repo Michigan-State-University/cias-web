@@ -13,7 +13,7 @@ import { useInjectSaga } from 'redux-injectors';
 
 import Deactivation from 'components/AccountSettings/Deactivation';
 
-const WrappedDeactivationAdmin = ({ userState: { user }, changeStatus }) => {
+const WrappedDeactivationAdmin = ({ user, changeStatus }) => {
   useInjectSaga({ key: 'changeActiveStatus', saga: changeActivateStatusSaga });
 
   const changeStatusCall = newStatus => changeStatus(user.id, newStatus);
@@ -22,12 +22,12 @@ const WrappedDeactivationAdmin = ({ userState: { user }, changeStatus }) => {
 };
 
 WrappedDeactivationAdmin.propTypes = {
-  userState: PropTypes.object,
+  user: PropTypes.object,
   changeStatus: PropTypes.func,
 };
 
 const mapStateToProps = createStructuredSelector({
-  userState: makeSelectUser(),
+  user: makeSelectUser(),
 });
 const mapDispatchToProps = {
   changeStatus: changeActivateStatusRequest,

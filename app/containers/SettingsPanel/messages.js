@@ -88,16 +88,15 @@ export default defineMessages({
   },
   logoHeader: {
     id: `${scope}.logoHeader`,
-    defaultMessage: 'Put custom logo',
+    defaultMessage: 'Put logo',
   },
   logoText: {
     id: `${scope}.logoText`,
-    defaultMessage:
-      'Unless you provide a custom image, the logo of Michigan State University will be displayed by default. ',
+    defaultMessage: 'If no image is provided, no logo will be displayed.',
   },
   logoDescriptionPlaceholder: {
     id: `${scope}.logoDescriptionPlaceholder`,
     defaultMessage:
-      'Input here the text describing the image for people with disabilities',
+      'Provide here the text describing the image for people with disabilities',
   },
 });

@@ -13,7 +13,6 @@ import {
   TOGGLE_NOTIFICATIONS_REQUEST,
   TOGGLE_NOTIFICATIONS_SUCCESS,
   TOGGLE_NOTIFICATIONS_ERROR,
-  RESET_STATE,
 } from './constants';
 
 export const fetchReportsRequest = (
@@ -53,5 +52,3 @@ export const toggleNotificationsSuccess = () =>
   actionBuilder(TOGGLE_NOTIFICATIONS_SUCCESS, {});
 export const toggleNotificationsError = error =>
   actionBuilder(TOGGLE_NOTIFICATIONS_ERROR, { error });
-
-export const resetState = () => actionBuilder(RESET_STATE, {});

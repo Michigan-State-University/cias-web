@@ -3,7 +3,6 @@ export {
   fetchLatestReportRequest,
   fetchInterventionsRequest,
   toggleNotificationsRequest,
-  resetState,
 } from './actions';
 export { generatedReportsReducer } from './reducer';
 export {

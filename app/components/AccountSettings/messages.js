@@ -196,6 +196,10 @@ export default defineMessages({
     id: `${scope}.deactivate`,
     defaultMessage: 'Deactivate account',
   },
+  resendInvitationLink: {
+    id: `${scope}.resendInvitationLink`,
+    defaultMessage: 'Resend invitation link',
+  },
   confirmCode: {
     id: `${scope}.confirmCode`,
     defaultMessage: 'Confirm your phone number',
@@ -220,5 +224,9 @@ export default defineMessages({
   resendCode: {
     id: `${scope}.resendCode`,
     defaultMessage: 'Resend verification code',
+  },
+  incorrectOldPassword: {
+    id: `${scope}.incorrectOldPassword`,
+    defaultMessage: 'Provided old password is not correct',
   },
 });

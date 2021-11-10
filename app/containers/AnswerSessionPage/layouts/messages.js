@@ -37,16 +37,11 @@ export default defineMessages({
   },
   provideEmail: {
     id: `${scope}.provideEmail`,
-    defaultMessage: 'Provide your email',
+    defaultMessage: 'Please provide your email',
   },
   emailPlaceholder: {
     id: `${scope}.emailPlaceholder`,
     defaultMessage: 'Email...',
-  },
-  reportHeader: {
-    id: `${scope}.reportHeader`,
-    defaultMessage:
-      'Would you like to receive a report generated from your responses?',
   },
   reportYesOption: {
     id: `${scope}.reportYesOption`,
@@ -71,7 +66,8 @@ export default defineMessages({
   },
   wcagExternalLinkWarning: {
     id: `${scope}.wcagExternalLinkWarning`,
-    defaultMessage: 'Please verify the validity of the External Link.',
+    defaultMessage:
+      'Clicking this link will take you to a different website. You can click the CIAS tab in your browser to return back to CIAS at any time',
   },
   sliderLabel: {
     id: `${scope}.sliderLabel`,

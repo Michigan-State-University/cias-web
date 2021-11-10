@@ -3,10 +3,7 @@ const { getCommitHash } = require('./utils');
 
 const path = require('path');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
-const WebpackPwaManifest = require('webpack-pwa-manifest');
 const SentryWebpackPlugin = require('@sentry/webpack-plugin');
-const OfflinePlugin = require('offline-plugin');
-const { HashedModuleIdsPlugin } = require('webpack');
 const TerserPlugin = require('terser-webpack-plugin');
 const CompressionPlugin = require('compression-webpack-plugin');
 const Dotenv = require('dotenv-webpack');
@@ -14,6 +11,8 @@ const Dotenv = require('dotenv-webpack');
 module.exports = require('./webpack.base.babel')({
   mode: 'production',
   devtool: 'source-map',
+  stats: 'errors-warnings',
+
   // In production, we skip all hot-reloading stuff
   entry: [
     require.resolve('react-app-polyfill/ie11'),
@@ -23,8 +22,8 @@ module.exports = require('./webpack.base.babel')({
 
   // Utilize long-term caching by adding content hashes (not compilation hashes) to compiled assets
   output: {
-    filename: '[name].[chunkhash].js',
-    chunkFilename: '[name].[chunkhash].chunk.js',
+    filename: '[name].[contenthash].js',
+    chunkFilename: '[name].[contenthash].chunk.js',
   },
 
   optimization: {
@@ -44,11 +43,10 @@ module.exports = require('./webpack.base.babel')({
           },
         },
         parallel: true,
-        cache: true,
-        sourceMap: true,
       }),
     ],
     nodeEnv: 'production',
+    moduleIds: 'deterministic',
     sideEffects: true,
     concatenateModules: true,
     runtimeChunk: 'single',
@@ -59,6 +57,7 @@ module.exports = require('./webpack.base.babel')({
       cacheGroups: {
         vendor: {
           test: /[\\/]node_modules[\\/]/,
+          chunks: 'all',
           name(module) {
             const packageName = module.context.match(
               /[\\/]node_modules[\\/](.*?)([\\/]|$)/,
@@ -90,67 +89,11 @@ module.exports = require('./webpack.base.babel')({
       inject: true,
     }),
 
-    // Put it in the end to capture all the HtmlWebpackPlugin's
-    // assets manipulations and do leak its manipulations to HtmlWebpackPlugin
-    new OfflinePlugin({
-      relativePaths: false,
-      publicPath: '/',
-      appShell: '/',
-
-      // No need to cache .htaccess. See http://mxs.is/googmp,
-      // this is applied before any match in `caches` section
-      excludes: ['.htaccess'],
-
-      caches: {
-        main: [':rest:'],
-
-        // All chunks marked as `additional`, loaded after main section
-        // and do not prevent SW to install. Change to `optional` if
-        // do not want them to be preloaded at all (cached only when first loaded)
-        additional: ['*.chunk.js'],
-      },
-
-      // Removes warning for about `additional` section usage
-      safeToUseOptionalCaches: true,
-
-      // ServiceWorker cache settings
-      ServiceWorker: {
-        events: true, // use custom events
-      },
-    }),
-
     new CompressionPlugin({
       algorithm: 'gzip',
       test: /\.js$|\.css$|\.html$/,
       threshold: 10240,
       minRatio: 0.8,
-    }),
-
-    new WebpackPwaManifest({
-      name: 'CIAS 3.0',
-      short_name: 'CIAS 3.0',
-      description: 'CIAS 3.0',
-      background_color: '#fafafa',
-      theme_color: '#b1624d',
-      inject: true,
-      ios: true,
-      icons: [
-        {
-          src: path.resolve('app/assets/images/logo-icon.png'),
-          sizes: [72, 96, 128, 144, 192, 384, 512],
-        },
-        {
-          src: path.resolve('app/assets/images/logo-icon.png'),
-          sizes: [120, 152, 167, 180],
-          ios: true,
-        },
-      ],
-    }),
-
-    new HashedModuleIdsPlugin({
-      hashFunction: 'sha256',
-      hashDigest: 'hex',
-      hashDigestLength: 20,
     }),
 
     new Dotenv({ systemvars: true }), // load environmental variables from the system

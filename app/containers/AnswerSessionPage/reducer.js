@@ -66,13 +66,17 @@ const AnswerSessionPageReducer = (state = initialState, { payload, type }) =>
         draft.answers[payload.id] = payload;
         break;
 
-      case SUBMIT_ANSWER_REQUEST:
+      case SUBMIT_ANSWER_REQUEST: {
         draft.answersError = '';
-        draft.answers[payload.answerId] = {
-          ...state.answers[payload.answerId],
+        const { skipped, answerId } = payload;
+
+        draft.answers[answerId] = {
+          ...state.answers[answerId],
+          skipped,
           loading: true,
         };
         break;
+      }
 
       case SUBMIT_ANSWER_SUCCESS:
         draft.answersError = '';

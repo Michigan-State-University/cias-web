@@ -14,11 +14,7 @@ import { useInjectSaga } from 'redux-injectors';
 
 import FullNameForm from 'components/AccountSettings/FullNameForm';
 
-const WrappedFullNameForm = ({
-  formatMessage,
-  userState: { user },
-  editUser,
-}) => {
+const WrappedFullNameForm = ({ formatMessage, user, editUser }) => {
   useInjectSaga({ key: 'editSingleUser', saga: editSingleUserSaga });
   const editUserCall = userData => editUser({ userId: user.id, ...userData });
   if (!user) {
@@ -35,12 +31,12 @@ const WrappedFullNameForm = ({
 
 WrappedFullNameForm.propTypes = {
   formatMessage: PropTypes.func,
-  userState: PropTypes.object,
+  user: PropTypes.object,
   editUser: PropTypes.func,
 };
 
 const mapStateToProps = createStructuredSelector({
-  userState: makeSelectUser(),
+  user: makeSelectUser(),
 });
 
 const mapDispatchToProps = {

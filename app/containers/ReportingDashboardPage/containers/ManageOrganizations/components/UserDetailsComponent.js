@@ -20,6 +20,7 @@ import {
   fetchUserRequest,
   editOtherUserRequest,
   changeActivateStatusRequest,
+  makeSelectUserLoader,
 } from 'global/reducers/user';
 
 import { setShouldRefetchAction } from 'global/reducers/organizations';
@@ -33,7 +34,8 @@ import messages from '../../../messages';
 import { SettingsContainer } from '../../../styled';
 
 const UserDetailsComponent = ({
-  userDomain: { user, userLoading },
+  user,
+  userLoading,
   role,
   onCancel,
   changeActivateStatus,
@@ -155,7 +157,8 @@ const UserDetailsComponent = ({
 UserDetailsComponent.propTypes = {
   onCancel: PropTypes.func,
   role: PropTypes.string,
-  userDomain: PropTypes.object,
+  user: PropTypes.object,
+  userLoading: PropTypes.bool,
   userId: PropTypes.string,
   changeActivateStatus: PropTypes.func,
   editUser: PropTypes.func,
@@ -164,7 +167,8 @@ UserDetailsComponent.propTypes = {
 };
 
 const mapStateToProps = createStructuredSelector({
-  userDomain: makeSelectUser(),
+  user: makeSelectUser(),
+  userLoading: makeSelectUserLoader('user'),
 });
 
 const mapDispatchToProps = {
@@ -180,7 +184,7 @@ const withConnect = connect(
 );
 
 const reduxInjectors = [
-  injectReducer({ key: 'singleUser', reducer: UserReducer }),
+  injectReducer({ key: 'user', reducer: UserReducer }),
   injectSaga({ key: 'fetchUserSaga', saga: fetchUserSaga }),
   injectSaga({ key: 'editSingleUserSaga', saga: editSingleUserSaga }),
   injectSaga({

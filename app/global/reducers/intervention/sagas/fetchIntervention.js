@@ -3,7 +3,6 @@ import { put, call, takeLatest } from 'redux-saga/effects';
 import orderBy from 'lodash/orderBy';
 
 import { defaultMapper } from 'utils/mapResponseObjects';
-import { resetState } from 'global/reducers/generatedReports';
 
 import { jsonApiToObject } from 'utils/jsonApiMapper';
 import { FETCH_INTERVENTION_REQUEST } from '../constants';
@@ -21,7 +20,6 @@ export function* fetchIntervention({ payload: { id } }) {
     const mappedSessions = sessions.map(defaultMapper);
     intervention.sessions = orderBy(mappedSessions, 'position');
     yield put(fetchInterventionSuccess(intervention));
-    yield put(resetState());
   } catch (error) {
     yield put(fetchInterventionError(error));
   }

@@ -73,19 +73,19 @@ describe('usePauseHelper test', () => {
     // advance half time
     await act(async () => {
       handlePauseBlock();
-      jest.runTimersToTime(HALF_DURATION);
+      jest.advanceTimersByTime(HALF_DURATION);
     });
     expect(changeBlock).not.toHaveBeenCalled();
 
     // advance almost all time
     await act(async () => {
-      jest.runTimersToTime(HALF_DURATION - 1);
+      jest.advanceTimersByTime(HALF_DURATION - 1);
     });
     expect(changeBlock).not.toHaveBeenCalled();
 
     // advance remaining time
     await act(async () => {
-      jest.runTimersToTime(1);
+      jest.advanceTimersByTime(1);
     });
     expect(changeBlock).toHaveBeenCalled();
   });
