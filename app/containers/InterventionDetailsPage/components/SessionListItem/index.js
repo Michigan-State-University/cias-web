@@ -45,7 +45,7 @@ function SessionListItem({
   session,
   index,
   isSelected,
-  handleClick,
+  handleInviteParticipantsClick,
   intl: { formatMessage },
   nextSessionName,
   handleCopySession,
@@ -205,7 +205,7 @@ function SessionListItem({
                   <Row
                     justify="end"
                     disabled={!sharingPossible}
-                    onClick={handleClick}
+                    onClick={handleInviteParticipantsClick}
                     minWidth={110}
                   >
                     <Text
@@ -267,7 +267,7 @@ SessionListItem.propTypes = {
   session: PropTypes.object.isRequired,
   index: PropTypes.number.isRequired,
   isSelected: PropTypes.bool,
-  handleClick: PropTypes.func,
+  handleInviteParticipantsClick: PropTypes.func,
   nextSessionName: PropTypes.string,
   intl: PropTypes.object,
   handleCopySession: PropTypes.func,

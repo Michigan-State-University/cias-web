@@ -317,13 +317,16 @@ const EditClassicSessionPage = ({
   }, []);
 
   const onCreateQuestion = (type: string) => {
+    const newQuestionSubtitle =
+      messages.defaultQuestionSubtitles[type] || messages.newQuestionSubtitle;
+
     createQuestion(
       instantiateEmptyQuestion(
         formatMessage(messages.newQuestionTitle),
         type,
-        formatMessage(messages.newQuestionSubtitle),
+        formatMessage(newQuestionSubtitle),
       ) as QuestionDTO,
-      sessionId,
+      params.sessionId,
     );
   };
 

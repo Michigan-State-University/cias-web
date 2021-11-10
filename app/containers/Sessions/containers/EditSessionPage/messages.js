@@ -1,5 +1,7 @@
 import { defineMessages } from 'react-intl';
 
+import { participantReport } from 'models/Session/QuestionTypes';
+
 export const scope = 'app.containers.EditSessionPage';
 
 export default defineMessages({
@@ -109,5 +111,12 @@ export default defineMessages({
   creationDate: {
     id: `${scope}.creationDate`,
     defaultMessage: 'Creation date:',
+  },
+  defaultQuestionSubtitles: {
+    [participantReport.id]: {
+      id: `${scope}.defaultQuestionSubtitles.${participantReport.id}`,
+      defaultMessage:
+        '<h2>Would you like to receive a report generated from your responses?</h2>',
+    },
   },
 });

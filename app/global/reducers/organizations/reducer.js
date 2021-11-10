@@ -1,6 +1,7 @@
 import produce from 'immer';
 
-import { EDIT_INTERVENTION_SUCCESS } from 'global/reducers/intervention';
+import { EDIT_INTERVENTION_SUCCESS } from 'global/reducers/intervention/constants';
+import { ARCHIVE_INTERVENTION_SUCCESS } from 'global/reducers/interventions/constants';
 
 import {
   CREATE_ORGANIZATION_SUCCESS,
@@ -11,6 +12,7 @@ import {
   CREATE_ORGANIZATION_ERROR,
   DELETE_ORGANIZATION_SUCCESS,
   EDIT_ORGANIZATION_SUCCESS,
+  FETCH_ORGANIZATION_INTERVENTIONS_REQUEST,
 } from './constants';
 
 import {
@@ -92,7 +94,15 @@ const organizationsReducer = (state = initialState, action) =>
         break;
       }
 
+      case FETCH_ORGANIZATION_INTERVENTIONS_REQUEST:
+        draft.shouldRefetch = false;
+        break;
+
       case EDIT_INTERVENTION_SUCCESS:
+        draft.shouldRefetch = true;
+        break;
+
+      case ARCHIVE_INTERVENTION_SUCCESS:
         draft.shouldRefetch = true;
         break;
     }

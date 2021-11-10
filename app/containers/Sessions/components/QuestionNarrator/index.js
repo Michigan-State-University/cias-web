@@ -268,16 +268,16 @@ const QuestionNarrator = ({
       canBeDragged={editingPossible}
       width={CHARACTER_SIZE.width}
     >
-      <Draggable
-        onStop={(_, { x, y }) => handleSaveOffset(x, y)}
-        position={getPosition()}
-        disabled={!editingPossible}
-        bounds="parent"
-        handle="#lottie"
-      >
-        <CharacterActiveIndicator $active={editingPossible}>
-          <div id="lottie">
-            {settings.animation && (
+      {settings.animation && (
+        <Draggable
+          onStop={(_, { x, y }) => handleSaveOffset(x, y)}
+          position={getPosition()}
+          disabled={!editingPossible}
+          bounds="parent"
+          handle="#lottie"
+        >
+          <CharacterActiveIndicator $active={editingPossible}>
+            <div id="lottie">
               <Lottie
                 ref={animationRef}
                 options={defaultOptions}
@@ -291,10 +291,10 @@ const QuestionNarrator = ({
                 }
                 ariaLabel={formatMessage(messages.narratorAlt)}
               />
-            )}
-          </div>
-        </CharacterActiveIndicator>
-      </Draggable>
+            </div>
+          </CharacterActiveIndicator>
+        </Draggable>
+      )}
     </NarratorContainer>
   );
 };

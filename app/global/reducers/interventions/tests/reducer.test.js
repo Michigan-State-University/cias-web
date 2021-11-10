@@ -107,6 +107,7 @@ describe('interventions reducer', () => {
 
     const expectedState = cloneDeep(mockStateWithInterventions);
     expectedState.cache.archiveIntervention = null;
+    expectedState.shouldRefetch = true;
 
     expect(interventionsReducer(mockStateWithInterventions, action)).toEqual(
       expectedState,

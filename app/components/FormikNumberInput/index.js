@@ -22,12 +22,13 @@ function FormikNumberInput({
   label,
   inputProps,
   countryCode,
+  required,
   ...columnStyleProps
 }) {
   const [field, meta, helpers] = useField(formikKey);
   const { value, onBlur } = field;
   const { error, touched } = meta;
-  const hasError = touched && error;
+  const hasError = touched && error && (required || value.length > 0);
   const { setValue, setTouched } = helpers;
 
   const handleChange = (inputValue) => {
@@ -71,6 +72,11 @@ FormikNumberInput.propTypes = {
   type: PropTypes.string,
   label: PropTypes.string,
   inputProps: PropTypes.object,
+  required: PropTypes.bool,
+};
+
+FormikNumberInput.defaultProps = {
+  required: true,
 };
 
 export default memo(FormikNumberInput);

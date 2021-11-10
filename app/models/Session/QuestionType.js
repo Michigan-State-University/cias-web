@@ -9,7 +9,6 @@ class QuestionType {
     this.id = id;
     this.name = name;
     this.color = color;
-    this.color = color;
     this.reservedVariable = reservedVariable;
   }
 }

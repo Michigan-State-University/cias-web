@@ -29,7 +29,7 @@ const WrappedPhoneNumberForm = ({
   changeErrorValue,
 }) => {
   useInjectSaga({ key: 'changePhoneNumber', saga: changePhoneNumberSaga });
-  const userToDisplay = userId ? otherUser.user : user;
+  const userToDisplay = userId ? otherUser : user;
   const { phone } = userToDisplay ?? {};
 
   return (

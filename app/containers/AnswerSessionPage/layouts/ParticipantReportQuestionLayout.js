@@ -37,10 +37,12 @@ const ParticipantReportLayout = ({
   return (
     <Box width="100%" padding={15}>
       <Column justify="center">
-        <Row>
-          <Text>{formatMessage(messages.reportHeader)}</Text>
-        </Row>
-        <Row mt={20} align="center">
+        <Row
+          disabled={disabled}
+          mt={20}
+          align="center"
+          onClick={handleChangeOption(YES_OPTION)}
+        >
           <Radio
             id="answer-yes"
             disabled={disabled}

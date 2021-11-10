@@ -14,8 +14,14 @@ import {
   feedbackBlockType,
   reflectionFormulaType,
 } from 'models/Narrator/BlockTypes';
+
 import { getFromQuestionTTS } from 'global/reducers/questions/utils';
+
 import { DEFAULT_PAUSE_DURATION } from 'utils/constants';
+import {
+  bodyAnimations,
+  headAnimations,
+} from 'utils/animations/animationsNames';
 
 import { Session } from './Session';
 
@@ -242,7 +248,7 @@ export const instantiateBlockForType = (type, endPosition, question) => {
   switch (type) {
     case bodyAnimationType:
       return {
-        animation: null,
+        animation: bodyAnimations[0],
         ...sharedProperties,
       };
 
@@ -276,7 +282,7 @@ export const instantiateBlockForType = (type, endPosition, question) => {
 
     case headAnimationType:
       return {
-        animation: null,
+        animation: headAnimations[0],
         ...sharedProperties,
       };
 

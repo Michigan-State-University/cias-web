@@ -3,6 +3,7 @@ import editSingleUserSaga from './editUser';
 import addSingleUserAvatarSaga from './addAvatar';
 import deleteSingleUserAvatarSaga from './deleteAvatar';
 import changeActivateStatusSaga from './changeActivateStatusSaga';
+import resendInvitationLinkSaga from './resendInvitationLink';
 
 export {
   fetchUserSaga,
@@ -10,4 +11,5 @@ export {
   addSingleUserAvatarSaga,
   deleteSingleUserAvatarSaga,
   changeActivateStatusSaga,
+  resendInvitationLinkSaga,
 };

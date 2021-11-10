@@ -80,6 +80,7 @@ export const QUESTION_SUBTITLE_ID = 'question-subtitle';
 export const NAME_QUESTION_NAME_ID = 'name-question-name';
 
 export const NAME_QUESTION_SPELL_NAME_ID = 'name-question-spell-name';
+
 export const NOT_SKIPABLE_QUESTIONS = [
   feedbackQuestion.id,
   informationQuestion.id,

@@ -55,6 +55,7 @@ import { VIEW } from 'containers/ReportingDashboardPage/constants';
 import ApiQueryMessageHandler from 'components/ApiQueryMessageHandler/Loadable';
 import ParticipantDashboard from 'containers/ParticipantDashboard/Loadable';
 import SessionMapPage from 'containers/SessionMapPage/Loadable';
+import SuperadminConsolePage from 'containers/SuperadminConsolePage/Loadable';
 
 import AppRoute from 'components/AppRoute';
 import IdleTimer from 'components/IdleTimer/Loadable';
@@ -416,6 +417,17 @@ export function App({ user, fetchSelfDetails }) {
           sidebarProps={{
             sidebarId: NAVIGATION.DEFAULT,
             activeTab: accountsTabId,
+          }}
+        />
+        <AppRoute
+          exact
+          protectedRoute
+          path="/admin-console"
+          component={SuperadminConsolePage}
+          allowedRoles={[Roles.admin]}
+          navbarProps={{
+            navbarId: NAVIGATION.DEFAULT,
+            activeTab: null,
           }}
         />
         <AppRoute

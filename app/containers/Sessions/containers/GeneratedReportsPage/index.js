@@ -1,8 +1,21 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import PropTypes from 'prop-types';
 import { compose } from 'redux';
 import { injectIntl, IntlShape } from 'react-intl';
 import { Helmet } from 'react-helmet';
+import { injectReducer, injectSaga } from 'redux-injectors';
+import { connect } from 'react-redux';
+
+import fetchInterventionSaga from 'global/reducers/intervention/sagas/fetchIntervention';
+import {
+  getSessionSaga,
+  sessionReducer,
+  getSessionRequest,
+} from 'global/reducers/session';
+import {
+  fetchInterventionRequest,
+  interventionReducer,
+} from 'global/reducers/intervention';
 
 import AppContainer from 'components/Container';
 import ReportsList from 'containers/Reports/containers/ReportsList';
@@ -13,19 +26,57 @@ const GeneratedReportsPage = ({
   intl: { formatMessage },
   disableFilter,
   match,
-}) => (
-  <AppContainer>
-    <Helmet>
-      <title>{formatMessage(messages.pageTitle)}</title>
-    </Helmet>
-    <ReportsList match={match} disableFilter={disableFilter} />
-  </AppContainer>
-);
+  fetchSession,
+  fetchIntervention,
+}) => {
+  const { sessionId, interventionId } = match?.params ?? {};
+
+  useEffect(() => {
+    if (interventionId) {
+      fetchIntervention(interventionId);
+    }
+  }, [interventionId]);
+
+  useEffect(() => {
+    if (interventionId && sessionId) {
+      fetchSession({ sessionId, interventionId });
+    }
+  }, [sessionId, interventionId]);
+
+  return (
+    <AppContainer>
+      <Helmet>
+        <title>{formatMessage(messages.pageTitle)}</title>
+      </Helmet>
+      <ReportsList
+        match={match}
+        disableFilter={disableFilter}
+        sessionId={sessionId}
+      />
+    </AppContainer>
+  );
+};
 
 GeneratedReportsPage.propTypes = {
   intl: PropTypes.shape(IntlShape),
   disableFilter: PropTypes.bool,
   match: PropTypes.object,
+  fetchIntervention: PropTypes.func,
+  fetchSession: PropTypes.func,
 };
 
-export default compose(injectIntl)(GeneratedReportsPage);
+const mapDispatchToProps = {
+  fetchIntervention: fetchInterventionRequest,
+  fetchSession: getSessionRequest,
+};
+
+const withConnect = connect(null, mapDispatchToProps);
+
+export default compose(
+  injectIntl,
+  injectReducer({ key: 'intervention', reducer: interventionReducer }),
+  injectSaga({ key: 'fetchIntervention', saga: fetchInterventionSaga }),
+  injectReducer({ key: 'session', reducer: sessionReducer }),
+  injectSaga({ key: 'getSession', saga: getSessionSaga }),
+  withConnect,
+)(GeneratedReportsPage);

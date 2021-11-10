@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, Fragment } from 'react';
+import React, { useEffect, useRef, useMemo } from 'react';
 import isEqual from 'lodash/isEqual';
 import PropTypes from 'prop-types';
 import { Formik } from 'formik';
@@ -72,6 +72,13 @@ const PasswordForm = ({
     previousLoadingState.current = loading;
   }, [loading]);
 
+  const errorMessage = useMemo(() => {
+    if (!error) return null;
+    if (error.includes('422'))
+      return formatMessage(messages.incorrectOldPassword);
+    return error;
+  }, [error]);
+
   return (
     <Modal
       visible={visible}
@@ -126,7 +133,7 @@ const PasswordForm = ({
                 title={formatMessage(messages.changePassword)}
                 loading={loading}
               />
-              {error && <ErrorAlert errorText={error} />}
+              {errorMessage && <ErrorAlert errorText={errorMessage} />}
             </>
           );
         }}

@@ -1,11 +1,12 @@
 import { createSelector } from 'reselect';
+
 import { initialState } from './reducer';
 
 /**
  * Direct selector to the userList state domain
  */
 
-const selectUserDomain = (state) => state.singleUser || initialState;
+const selectUserDomain = (state) => state.user || initialState;
 
 /**
  * Other specific selectors
@@ -15,8 +16,11 @@ const selectUserDomain = (state) => state.singleUser || initialState;
  * Default selector used by User
  */
 
-const makeSelectUser = () =>
-  createSelector(selectUserDomain, (substate) => substate);
+export const makeSelectUser = () =>
+  createSelector(selectUserDomain, ({ user }) => user);
 
-export default makeSelectUser;
-export { selectUserDomain };
+export const makeSelectUserLoader = (name) =>
+  createSelector(selectUserDomain, ({ loaders }) => loaders[name]);
+
+export const makeSelectUserError = (name) =>
+  createSelector(selectUserDomain, ({ errors }) => errors[name]);

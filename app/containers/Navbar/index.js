@@ -20,7 +20,6 @@ import Img from 'components/Img';
 import useOutsideClick from 'utils/useOutsideClick';
 import { NAVIGATION } from 'utils/navbarNames';
 import { makeSelectUser } from 'global/reducers/auth';
-import InterventionsNavbar from './components/InterventionsNavbar';
 
 import {
   NavbarStyled,
@@ -35,6 +34,7 @@ import content from './dropdownContent';
 
 import PreviewNavbar from './components/PreviewNavbar';
 import DefaultNavbar from './components/DefaultNavbar';
+import InterventionsNavbar from './components/InterventionsNavbar';
 
 const renderNavbar = (navbarProps) => {
   const { navbarId, ...restProps } = navbarProps || {};
