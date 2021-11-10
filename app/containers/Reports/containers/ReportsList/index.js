@@ -22,16 +22,6 @@ import Box from 'components/Box';
 import { colors, themeColors } from 'theme';
 
 import {
-  fetchInterventionRequest,
-  interventionReducer,
-} from 'global/reducers/intervention';
-import fetchInterventionSaga from 'global/reducers/intervention/sagas/fetchIntervention';
-import {
-  getSessionRequest,
-  getSessionSaga,
-  sessionReducer,
-} from 'global/reducers/session';
-import {
   REPORTS_PER_PAGE,
   filterOptions,
   sortByOptions,
@@ -61,17 +51,13 @@ const ReportsList = ({
   reports,
   reportsLoading,
   fetchReports,
-  fetchIntervention,
-  fetchSession,
+  sessionId,
   reportsSize,
   disableFilter,
   currentPage,
   currentSortOption,
   currentFilterOption,
-  match,
 }) => {
-  const { sessionId, interventionId } = match?.params ?? {};
-
   const sortOptions = useMemo(
     () =>
       sortByOptions.map(value => ({
@@ -99,14 +85,6 @@ const ReportsList = ({
   };
 
   const pages = Math.ceil(reportsSize / REPORTS_PER_PAGE);
-
-  useEffect(() => {
-    fetchIntervention(interventionId);
-  }, [interventionId]);
-
-  useEffect(() => {
-    fetchSession({ sessionId, interventionId });
-  }, [sessionId, interventionId]);
 
   useEffect(() => {
     fetchReports(currentPage, null, currentSortOption, sessionId);
@@ -172,14 +150,12 @@ ReportsList.propTypes = {
   reportsSize: PropTypes.number,
   reportsLoading: PropTypes.bool,
   fetchReports: PropTypes.func,
-  fetchIntervention: PropTypes.func,
-  fetchSession: PropTypes.func,
   intl: PropTypes.shape(IntlShape),
   disableFilter: PropTypes.bool,
   currentPage: PropTypes.number,
   currentSortOption: PropTypes.string,
   currentFilterOption: PropTypes.array,
-  match: PropTypes.object,
+  sessionId: PropTypes.string,
 };
 
 const mapStateToProps = createStructuredSelector({
@@ -193,8 +169,6 @@ const mapStateToProps = createStructuredSelector({
 
 const mapDispatchToProps = {
   fetchReports: fetchReportsRequest,
-  fetchIntervention: fetchInterventionRequest,
-  fetchSession: getSessionRequest,
 };
 
 const withConnect = connect(
@@ -209,10 +183,6 @@ export default compose(
   }),
   injectReducer({ key: 'generatedReports', reducer: generatedReportsReducer }),
   injectSaga({ key: 'reportsSaga', saga: fetchReportsSaga }),
-  injectReducer({ key: 'intervention', reducer: interventionReducer }),
-  injectSaga({ key: 'fetchIntervention', saga: fetchInterventionSaga }),
-  injectReducer({ key: 'session', reducer: sessionReducer }),
-  injectSaga({ key: 'getSession', saga: getSessionSaga }),
   injectIntl,
   withConnect,
   memo,
