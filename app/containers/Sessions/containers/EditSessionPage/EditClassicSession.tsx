@@ -17,7 +17,7 @@ import {
 import { Helmet } from 'react-helmet';
 import { compose } from 'redux';
 import { connect } from 'react-redux';
-import { useHistory, useLocation } from 'react-router-dom';
+import { useHistory, useLocation, useParams } from 'react-router-dom';
 import { createStructuredSelector } from 'reselect';
 import { FormattedMessage, useIntl } from 'react-intl';
 import xor from 'lodash/xor';
@@ -177,6 +177,7 @@ const EditClassicSessionPage = ({
   session: { id: sessionId, name: sessionName },
   interventionStatus,
 }: Props): JSX.Element => {
+  const params = useParams<{ sessionId: string }>();
   const { formatMessage } = useIntl();
   const [manage, setManage] = useState(false);
   const [selectedSlides, setSelectedSlides] = useState<string[]>([]);
@@ -317,13 +318,17 @@ const EditClassicSessionPage = ({
   }, []);
 
   const onCreateQuestion = (type: string) => {
+    const newQuestionSubtitle =
+      // @ts-ignore
+      messages.defaultQuestionSubtitles[type] || messages.newQuestionSubtitle;
+
     createQuestion(
       instantiateEmptyQuestion(
         formatMessage(messages.newQuestionTitle),
         type,
-        formatMessage(messages.newQuestionSubtitle),
+        formatMessage(newQuestionSubtitle),
       ) as QuestionDTO,
-      sessionId,
+      params.sessionId,
     );
   };
 

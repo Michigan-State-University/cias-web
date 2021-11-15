@@ -101,7 +101,15 @@ exports[`<Profile /> Should render and match the snapshot 1`] = `
   -ms-flex-direction: row;
   flex-direction: row;
   height: auto;
-  margin-top: 50px;
+  -webkit-box-pack: center;
+  -webkit-justify-content: center;
+  -ms-flex-pack: center;
+  justify-content: center;
+  justify-items: center;
+  -webkit-flex-wrap: wrap;
+  -ms-flex-wrap: wrap;
+  flex-wrap: wrap;
+  gap: 10px;
 }
 
 .c14 {
@@ -113,10 +121,22 @@ exports[`<Profile /> Should render and match the snapshot 1`] = `
   -ms-flex-direction: row;
   flex-direction: row;
   height: auto;
+  margin-top: 50px;
+}
+
+.c15 {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-flex-direction: row;
+  -ms-flex-direction: row;
+  flex-direction: row;
+  height: auto;
   width: 100%;
 }
 
-.c20 {
+.c21 {
   display: -webkit-box;
   display: -webkit-flex;
   display: -ms-flexbox;
@@ -140,7 +160,7 @@ exports[`<Profile /> Should render and match the snapshot 1`] = `
   width: 100%;
 }
 
-.c27 {
+.c28 {
   display: -webkit-box;
   display: -webkit-flex;
   display: -ms-flexbox;
@@ -159,7 +179,7 @@ exports[`<Profile /> Should render and match the snapshot 1`] = `
   width: 100%;
 }
 
-.c30 {
+.c31 {
   display: -webkit-box;
   display: -webkit-flex;
   display: -ms-flexbox;
@@ -183,7 +203,7 @@ exports[`<Profile /> Should render and match the snapshot 1`] = `
   width: 100%;
 }
 
-.c16 {
+.c17 {
   display: -webkit-box;
   display: -webkit-flex;
   display: -ms-flexbox;
@@ -196,7 +216,7 @@ exports[`<Profile /> Should render and match the snapshot 1`] = `
   margin-right: 20px;
 }
 
-.c19 {
+.c20 {
   display: -webkit-box;
   display: -webkit-flex;
   display: -ms-flexbox;
@@ -208,7 +228,7 @@ exports[`<Profile /> Should render and match the snapshot 1`] = `
   margin-bottom: 20px;
 }
 
-.c24 {
+.c25 {
   display: -webkit-box;
   display: -webkit-flex;
   display: -ms-flexbox;
@@ -220,7 +240,7 @@ exports[`<Profile /> Should render and match the snapshot 1`] = `
   padding-right: 10px;
 }
 
-.c26 {
+.c27 {
   display: -webkit-box;
   display: -webkit-flex;
   display: -ms-flexbox;
@@ -231,7 +251,7 @@ exports[`<Profile /> Should render and match the snapshot 1`] = `
   width: 100%;
 }
 
-.c28 {
+.c29 {
   display: -webkit-box;
   display: -webkit-flex;
   display: -ms-flexbox;
@@ -244,7 +264,7 @@ exports[`<Profile /> Should render and match the snapshot 1`] = `
   padding-right: 10px;
 }
 
-.c31 {
+.c32 {
   display: -webkit-box;
   display: -webkit-flex;
   display: -ms-flexbox;
@@ -284,7 +304,7 @@ exports[`<Profile /> Should render and match the snapshot 1`] = `
   height: fit-content;
 }
 
-.c22 {
+.c23 {
   width: auto;
   height: auto;
   display: block;
@@ -300,7 +320,7 @@ exports[`<Profile /> Should render and match the snapshot 1`] = `
   color: #2F3850;
 }
 
-.c18 {
+.c19 {
   padding: 12px;
   border-style: solid;
   border-width: 1px;
@@ -311,17 +331,17 @@ exports[`<Profile /> Should render and match the snapshot 1`] = `
   color: #2F3850;
 }
 
-.c18:focus {
+.c19:focus {
   box-shadow: none;
   outline: none;
   border-color: #107969;
 }
 
-.c18:disabled {
+.c19:disabled {
   color: #ABBBD1;
 }
 
-.c29 {
+.c30 {
   padding: 12px;
   border-style: solid;
   border-width: 1px;
@@ -331,13 +351,13 @@ exports[`<Profile /> Should render and match the snapshot 1`] = `
   color: #2F3850;
 }
 
-.c29:focus {
+.c30:focus {
   box-shadow: none;
   outline: none;
   border-color: #107969;
 }
 
-.c29:disabled {
+.c30:disabled {
   color: #ABBBD1;
 }
 
@@ -351,7 +371,7 @@ exports[`<Profile /> Should render and match the snapshot 1`] = `
   color: rgba(183,39,234,1);
 }
 
-.c17 {
+.c18 {
   font-family: DM Sans;
   font-size: 13px;
   line-height: 130%;
@@ -362,7 +382,7 @@ exports[`<Profile /> Should render and match the snapshot 1`] = `
   width: fit-content;
 }
 
-.c25 {
+.c26 {
   width: auto;
   height: auto;
   -webkit-transition: -webkit-transform 0.2s;
@@ -393,7 +413,7 @@ exports[`<Profile /> Should render and match the snapshot 1`] = `
   color: rgba(255,255,255,1);
 }
 
-.c32 {
+.c33 {
   outline: none;
   border: none;
   background: transparent;
@@ -418,16 +438,16 @@ exports[`<Profile /> Should render and match the snapshot 1`] = `
   margin-left: 20px;
 }
 
-.c21 {
+.c22 {
   margin-top: 50px;
 }
 
-.c33 {
+.c34 {
   margin-left: 25px;
   margin-top: 30px;
 }
 
-.c23 {
+.c24 {
   width: 50%;
 }
 
@@ -528,7 +548,7 @@ exports[`<Profile /> Should render and match the snapshot 1`] = `
 }
 
 @media only screen and (max-width:480px) {
-  .c15 {
+  .c16 {
     -webkit-flex-direction: column;
     -ms-flex-direction: column;
     flex-direction: column;
@@ -565,7 +585,7 @@ exports[`<Profile /> Should render and match the snapshot 1`] = `
 }
 
 @media only screen and (max-width:768px) {
-  .c21 {
+  .c22 {
     margin-top: 25px;
     -webkit-flex-direction: column;
     -ms-flex-direction: column;
@@ -578,14 +598,14 @@ exports[`<Profile /> Should render and match the snapshot 1`] = `
 }
 
 @media only screen and (max-width:768px) {
-  .c33 {
+  .c34 {
     margin-left: 0;
     margin-top: 25px;
   }
 }
 
 @media only screen and (max-width:768px) {
-  .c23 {
+  .c24 {
     margin-top: 20px;
   }
 }
@@ -649,23 +669,26 @@ exports[`<Profile /> Should render and match the snapshot 1`] = `
           </div>
         </div>
       </div>
+      <div
+        class="c13"
+      />
     </div>
     <div
-      class="c13"
+      class="c14"
     >
       <div
-        class="c14 c15"
+        class="c15 c16"
         width="100%"
       >
         <div
-          class="c16"
+          class="c17"
           data-testid="first-name-input"
         >
           <label
             for="firstName"
           >
             <p
-              class="c17"
+              class="c18"
               width="fit-content"
             >
               First Name
@@ -676,7 +699,7 @@ exports[`<Profile /> Should render and match the snapshot 1`] = `
             width="100%"
           >
             <input
-              class="c18"
+              class="c19"
               height="46"
               id="firstName"
               name="firstName"
@@ -688,13 +711,13 @@ exports[`<Profile /> Should render and match the snapshot 1`] = `
           </div>
         </div>
         <div
-          class="c19"
+          class="c20"
         >
           <label
             for="lastName"
           >
             <p
-              class="c17"
+              class="c18"
               width="fit-content"
             >
               Last name
@@ -705,7 +728,7 @@ exports[`<Profile /> Should render and match the snapshot 1`] = `
             width="100%"
           >
             <input
-              class="c18"
+              class="c19"
               height="46"
               id="lastName"
               name="lastName"
@@ -719,27 +742,27 @@ exports[`<Profile /> Should render and match the snapshot 1`] = `
       </div>
     </div>
     <div
-      class="c20 c21"
+      class="c21 c22"
       width="100%"
     >
       <div
-        class="c22 c23"
+        class="c23 c24"
       >
         <div
-          class="c24"
+          class="c25"
         >
           <label
             for="timeZone"
           >
             <p
-              class="c17"
+              class="c18"
               width="fit-content"
             >
               Time zone
             </p>
           </label>
           <div
-            class="c22"
+            class="c23"
             data-testid="select"
           >
             <div
@@ -796,7 +819,7 @@ exports[`<Profile /> Should render and match the snapshot 1`] = `
                   >
                     <img
                       alt="arrow"
-                      class="c25"
+                      class="c26"
                       src="IMAGE_MOCK"
                       transform=""
                     />
@@ -809,32 +832,32 @@ exports[`<Profile /> Should render and match the snapshot 1`] = `
       </div>
     </div>
     <div
-      class="c20 c21"
+      class="c21 c22"
       width="100%"
     >
       <div
-        class="c26"
+        class="c27"
       >
         <div
-          class="c27"
+          class="c28"
           width="100%"
         >
           <div
-            class="c28"
+            class="c29"
             width="230"
           >
             <label
               for="iso"
             >
               <p
-                class="c17"
+                class="c18"
                 width="fit-content"
               >
                 Phone prefix
               </p>
             </label>
             <div
-              class="c22"
+              class="c23"
               data-testid="select"
             >
               <div
@@ -891,7 +914,7 @@ exports[`<Profile /> Should render and match the snapshot 1`] = `
                     >
                       <img
                         alt="arrow"
-                        class="c25"
+                        class="c26"
                         src="IMAGE_MOCK"
                         transform=""
                       />
@@ -902,21 +925,21 @@ exports[`<Profile /> Should render and match the snapshot 1`] = `
             </div>
           </div>
           <div
-            class="c26"
+            class="c27"
             value=""
           >
             <label
               for="number"
             >
               <p
-                class="c17"
+                class="c18"
                 width="fit-content"
               >
                 Phone number
               </p>
             </label>
             <input
-              class="c29"
+              class="c30"
               id="number"
               name="number"
               placeholder="Enter phone number"
@@ -929,15 +952,15 @@ exports[`<Profile /> Should render and match the snapshot 1`] = `
       </div>
     </div>
     <div
-      class="c30 c21"
+      class="c31 c22"
       width="100%"
     >
       <div
-        class="c31"
+        class="c32"
         width="33%"
       >
         <button
-          class="c32 c33"
+          class="c33 c34"
           color="#B727EA"
           font-size="14"
           font-weight="bold"

@@ -125,7 +125,7 @@ const InterventionNavbar = ({
   const textMessagesCountValue = textMessagesCount || smsPlansCount || '0';
 
   const generatedReportsCountValue =
-    generatedReportCount || currentReportsCount || '0';
+    generatedReportCount ?? currentReportsCount ?? '0';
 
   const isSaving =
     questionGroupsEditing ||

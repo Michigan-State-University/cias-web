@@ -25,8 +25,6 @@ export const TOGGLE_NOTIFICATIONS_SUCCESS =
 export const TOGGLE_NOTIFICATIONS_ERROR =
   'app/GeneratedReports/TOGGLE_NOTIFICATIONS_ERROR';
 
-export const RESET_STATE = 'app/GeneratedReports/RESET_STATE';
-
 export const PARTICIPANTS = ReportFor.participant;
 export const THIRD_PARTY = ReportFor.thirdParty;
 

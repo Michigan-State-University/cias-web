@@ -29,7 +29,7 @@ exports[`<ParticipantReport /> Should render and match the snapshot 1`] = `
   justify-items: center;
 }
 
-.c15 {
+.c14 {
   display: -webkit-box;
   display: -webkit-flex;
   display: -ms-flexbox;
@@ -50,14 +50,14 @@ exports[`<ParticipantReport /> Should render and match the snapshot 1`] = `
   padding: 15px;
 }
 
-.c12 {
+.c10 {
   width: auto;
   height: auto;
   display: block;
   border-radius: 5px;
 }
 
-.c16 {
+.c15 {
   width: auto;
   height: auto;
   display: block;
@@ -80,17 +80,6 @@ exports[`<ParticipantReport /> Should render and match the snapshot 1`] = `
   -ms-flex-direction: row;
   flex-direction: row;
   height: auto;
-}
-
-.c5 {
-  display: -webkit-box;
-  display: -webkit-flex;
-  display: -ms-flexbox;
-  display: flex;
-  -webkit-flex-direction: row;
-  -ms-flex-direction: row;
-  flex-direction: row;
-  height: auto;
   -webkit-align-content: center;
   -ms-flex-line-pack: center;
   align-content: center;
@@ -99,9 +88,10 @@ exports[`<ParticipantReport /> Should render and match the snapshot 1`] = `
   -ms-flex-align: center;
   align-items: center;
   margin-top: 20px;
+  opacity: 0.5;
 }
 
-.c6 {
+.c4 {
   display: -webkit-box;
   display: -webkit-flex;
   display: -ms-flexbox;
@@ -124,7 +114,7 @@ exports[`<ParticipantReport /> Should render and match the snapshot 1`] = `
   align-items: center;
 }
 
-.c14 {
+.c13 {
   display: -webkit-box;
   display: -webkit-flex;
   display: -ms-flexbox;
@@ -143,23 +133,23 @@ exports[`<ParticipantReport /> Should render and match the snapshot 1`] = `
   margin-top: 15px;
 }
 
-.c4 {
+.c12 {
   font-family: DM Sans;
   font-size: 13px;
   line-height: 130%;
   color: #2F3850;
 }
 
-.c8 {
+.c6 {
   display: none;
 }
 
-.c7:disabled + label > .c11 {
+.c5:disabled + label > .c9 {
   opacity: 0.5;
   cursor: not-allowed;
 }
 
-.c10 {
+.c8 {
   width: 100%;
   display: -webkit-box;
   display: -webkit-flex;
@@ -171,20 +161,20 @@ exports[`<ParticipantReport /> Should render and match the snapshot 1`] = `
   align-items: center;
 }
 
-.c10:hover {
+.c8:hover {
   cursor: pointer;
 }
 
-.c7:disabled + .c9 {
+.c5:disabled + .c7 {
   opacity: 0.5;
   cursor: not-allowed;
 }
 
-.c13 {
+.c11 {
   margin-left: 5px;
 }
 
-.c17 {
+.c16 {
   padding: 12px;
   border-style: solid;
   border-width: 1px;
@@ -197,13 +187,13 @@ exports[`<ParticipantReport /> Should render and match the snapshot 1`] = `
   opacity: 0.5;
 }
 
-.c17:focus {
+.c16:focus {
   box-shadow: none;
   outline: none;
   border-color: #107969;
 }
 
-.c17:disabled {
+.c16:disabled {
   color: #ABBBD1;
 }
 
@@ -267,38 +257,30 @@ exports[`<ParticipantReport /> Should render and match the snapshot 1`] = `
     >
       <div
         class="c3"
-      >
-        <p
-          class="c4"
-        >
-          Would you like to receive a report generated from your responses?
-        </p>
-      </div>
-      <div
-        class="c5"
+        disabled=""
       >
         <div
-          class="c6"
+          class="c4"
         >
           <input
-            class="c7 c8"
+            class="c5 c6"
             disabled=""
             id="answer-yes"
             type="radio"
           />
           <label
-            class="c9 c10"
+            class="c7 c8"
             for="answer-yes"
           >
             <img
-              class="c11 "
+              class="c9 "
               src="IMAGE_MOCK"
             />
             <div
-              class="c12 c13"
+              class="c10 c11"
             >
               <p
-                class="c4"
+                class="c12"
               >
                 Yes
               </p>
@@ -307,30 +289,30 @@ exports[`<ParticipantReport /> Should render and match the snapshot 1`] = `
         </div>
       </div>
       <div
-        class="c14"
+        class="c13"
       >
         <div
-          class="c6"
+          class="c4"
         >
           <input
-            class="c7 c8"
+            class="c5 c6"
             disabled=""
             id="answer-no"
             type="radio"
           />
           <label
-            class="c9 c10"
+            class="c7 c8"
             for="answer-no"
           >
             <img
-              class="c11 "
+              class="c9 "
               src="IMAGE_MOCK"
             />
             <div
-              class="c12 c13"
+              class="c10 c11"
             >
               <p
-                class="c4"
+                class="c12"
               >
                 No
               </p>
@@ -339,20 +321,20 @@ exports[`<ParticipantReport /> Should render and match the snapshot 1`] = `
         </div>
       </div>
       <div
-        class="c15"
+        class="c14"
       >
         <p
-          class="c4"
+          class="c12"
         >
-          Provide your email
+          Please provide your email
         </p>
         <div
-          class="c16"
+          class="c15"
           width="100%"
         >
           <input
             aria-label="Email..."
-            class="c17"
+            class="c16"
             disabled=""
             placeholder="Email..."
             type="text"

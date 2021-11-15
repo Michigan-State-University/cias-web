@@ -111,6 +111,7 @@ export const interventionsReducer = (state = initialState, action) =>
           state.interventions[interventionIndex];
         break;
       case ARCHIVE_INTERVENTION_SUCCESS:
+        draft.shouldRefetch = true;
         draft.cache.archiveIntervention = null;
         break;
       case ARCHIVE_INTERVENTION_ERROR:

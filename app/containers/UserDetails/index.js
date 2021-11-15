@@ -20,6 +20,8 @@ import {
   fetchUserRequest,
   fetchUserSaga,
   UserReducer,
+  makeSelectUserLoader,
+  makeSelectUserError,
 } from 'global/reducers/user';
 
 import Spinner from 'components/Spinner';
@@ -29,10 +31,13 @@ import AccountSettings from '../AccountSettings';
 import WrappedAvatarFormAdmin from './containers/WrappedAvatarFormAdmin';
 import WrappedFullNameFormAdmin from './containers/WrappedFullNameFormAdmin';
 import WrappedDeactivationAdmin from './containers/WrappedDeactivationAdmin';
+import { WrappedResendInvitationLinkAdmin } from './containers/WrappedResendInvitationLinkAdmin';
 import messages from './messages';
 
 export const UserDetails = ({
-  userState: { user, userError, userLoading },
+  user,
+  userError,
+  userLoading,
   fetchUser,
   match: {
     params: { id },
@@ -62,6 +67,7 @@ export const UserDetails = ({
           AvatarComponent: WrappedAvatarFormAdmin,
           FullNameComponent: WrappedFullNameFormAdmin,
           DeactivationComponent: WrappedDeactivationAdmin,
+          ResendInvitationLinkComponent: WrappedResendInvitationLinkAdmin,
         }}
         userId={user.id}
       />
@@ -74,13 +80,17 @@ export const UserDetails = ({
 };
 
 UserDetails.propTypes = {
-  userState: PropTypes.object,
+  user: PropTypes.object,
+  userLoading: PropTypes.bool,
+  userError: PropTypes.object,
   match: PropTypes.object,
   fetchUser: PropTypes.func,
 };
 
 const mapStateToProps = createStructuredSelector({
-  userState: makeSelectUser(),
+  user: makeSelectUser(),
+  userLoading: makeSelectUserLoader('user'),
+  userError: makeSelectUserError('user'),
 });
 
 const mapDispatchToProps = {
@@ -91,6 +101,6 @@ const withConnect = connect(mapStateToProps, mapDispatchToProps);
 
 export default compose(
   withConnect,
-  injectSaga({ key: 'singleUserSaga', saga: fetchUserSaga }),
-  injectReducer({ key: 'singleUser', reducer: UserReducer }),
+  injectSaga({ key: 'userSaga', saga: fetchUserSaga }),
+  injectReducer({ key: 'user', reducer: UserReducer }),
 )(UserDetails);

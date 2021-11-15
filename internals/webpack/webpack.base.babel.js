@@ -29,7 +29,6 @@ module.exports = options => ({
           options: options.babelQuery,
         },
       },
-
       {
         test: /\.(ts|tsx)$/,
         exclude: /node_modules/,

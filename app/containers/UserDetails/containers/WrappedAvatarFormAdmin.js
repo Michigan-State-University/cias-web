@@ -15,11 +15,7 @@ import { useInjectSaga } from 'redux-injectors';
 
 import AvatarForm from 'components/AccountSettings/AvatarForm';
 
-const WrappedAvatarFormAdmin = ({
-  userState: { user },
-  addAvatar,
-  deleteAvatar,
-}) => {
+const WrappedAvatarFormAdmin = ({ user, addAvatar, deleteAvatar }) => {
   useInjectSaga({ key: 'addSingleUserAvatar', saga: addSingleUserAvatarSaga });
   useInjectSaga({ key: 'deleteAvatar', saga: deleteSingleUserAvatarSaga });
 
@@ -37,13 +33,13 @@ const WrappedAvatarFormAdmin = ({
 };
 
 WrappedAvatarFormAdmin.propTypes = {
-  userState: PropTypes.object,
+  user: PropTypes.object,
   addAvatar: PropTypes.func,
   deleteAvatar: PropTypes.func,
 };
 
 const mapStateToProps = createStructuredSelector({
-  userState: makeSelectUser(),
+  user: makeSelectUser(),
 });
 const mapDispatchToProps = {
   addAvatar: addOtherUserAvatarRequest,

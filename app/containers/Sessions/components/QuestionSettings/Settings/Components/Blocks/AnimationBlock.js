@@ -33,10 +33,7 @@ const AnimationBlock = ({
 }) => {
   const onChipsClick = (index, value) => () => {
     const animName = camelCase(value.toLowerCase());
-    if (block.animation === animName) {
-      updateNarratorPreviewAnimation('standStill');
-      updateAnimation(index, null, id);
-    } else {
+    if (block.animation !== animName) {
       updateNarratorPreviewAnimation(animName);
       updateAnimation(index, animName, id);
     }

@@ -446,28 +446,6 @@ exports[`<AnswerSessionPage /> Should render and match the snapshot 1`] = `
   color: rgba(255,255,255,1);
 }
 
-.c31 {
-  border-radius: 50%;
-  background-color: #E9F1FB;
-  display: -webkit-box;
-  display: -webkit-flex;
-  display: -ms-flexbox;
-  display: flex;
-  -webkit-box-pack: center;
-  -webkit-justify-content: center;
-  -ms-flex-pack: center;
-  justify-content: center;
-  -webkit-align-items: center;
-  -webkit-box-align: center;
-  -ms-flex-align: center;
-  align-items: center;
-  width: 50px;
-  height: 50px;
-  background-color: rgba(233,241,251,1);
-  opacity: 1;
-  color: #2F3850;
-}
-
 .c1 {
   position: fixed;
   width: 100%;
@@ -506,6 +484,28 @@ exports[`<AnswerSessionPage /> Should render and match the snapshot 1`] = `
 
 .c8 {
   position: relative;
+}
+
+.c31 {
+  border-radius: 50%;
+  background-color: #E9F1FB;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+  -webkit-justify-content: center;
+  -ms-flex-pack: center;
+  justify-content: center;
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  width: 50px;
+  height: 50px;
+  background-color: rgba(233,241,251,1);
+  opacity: 1;
+  color: #2F3850;
 }
 
 .c0 {
@@ -697,6 +697,12 @@ exports[`<AnswerSessionPage /> Should render and match the snapshot 1`] = `
 
 }
 
+@media (max-width:767px) {
+  .c1 .user-name-info {
+    display: none;
+  }
+}
+
 @media (max-width:575px) {
   .c4 {
     -webkit-box-pack: start;
@@ -708,12 +714,6 @@ exports[`<AnswerSessionPage /> Should render and match the snapshot 1`] = `
   .c4 img {
     width: 70%;
     margin: 0;
-  }
-}
-
-@media (max-width:767px) {
-  .c1 .user-name-info {
-    display: none;
   }
 }
 

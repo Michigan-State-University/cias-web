@@ -40,7 +40,6 @@ export function* sendSessionInvite({ payload: { emails, sessionId } }) {
     if (organizationId) {
       invitations = groupBy(invitations, 'healthClinicId');
     }
-    console.log(invitations);
     yield put(sendSessionInviteSuccess());
     yield put(fetchSessionEmailsSuccess(invitations, sessionIndex));
     yield call(toast.info, formatMessage(messages.sendInviteSuccess), {
