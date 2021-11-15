@@ -56,17 +56,18 @@ const PeedyVoiceSettings = ({
     if (selectedLanguage && selectedLanguage.value) {
       const languageVoices = ttsVoices[selectedLanguage.value];
       if (languageVoices && languageVoices.data) {
-        setSelectedVoice(
-          languageVoices.data.find(
-            ({ value }) => value === selectedVoice?.value,
-          ) ?? languageVoices.data[0],
-        );
+        if (
+          languageVoices.data.findIndex(
+            ({ value }) => value === selectedVoice.value,
+          ) === -1
+        ) {
+          setSelectedVoice(languageVoices.data[0]);
+        }
       }
     }
   };
 
   useEffect(() => {
-    onVoicesChange();
     if (selectedLanguage && selectedLanguage.value) {
       const languageVoices = ttsVoices[selectedLanguage.value];
       if (languageVoices === undefined) {
