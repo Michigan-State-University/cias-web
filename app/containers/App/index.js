@@ -7,7 +7,7 @@
  *
  */
 
-import React, { useEffect } from 'react';
+import React, { useEffect, useMemo } from 'react';
 import { Redirect, Switch } from 'react-router-dom';
 import { useLocation } from 'react-router';
 import PropTypes from 'prop-types';
@@ -45,7 +45,6 @@ import TeamsListPage from 'containers/TeamsList/Loadable';
 import TeamDetails from 'containers/TeamDetails/Loadable';
 import Logout from 'containers/Logout/Loadable';
 import UserDetails from 'containers/UserDetails/Loadable';
-import ReportsPage from 'containers/ParticipantDashboard/components/ReportsTab/Loadable';
 import GeneratedReportsPage from 'containers/Sessions/containers/GeneratedReportsPage';
 import ForbiddenPage from 'containers/ForbiddenPage/Loadable';
 import TextMessagesPage from 'containers/Sessions/containers/TextMessagesPage';
@@ -53,8 +52,11 @@ import ReportingDashboardPage from 'containers/ReportingDashboardPage/Loadable';
 import ClinicAdminRedirectPage from 'containers/ClinicAdminRedirectPage/Loadable';
 import { VIEW } from 'containers/ReportingDashboardPage/constants';
 import ApiQueryMessageHandler from 'components/ApiQueryMessageHandler/Loadable';
-import ParticipantDashboard from 'containers/ParticipantDashboard/Loadable';
+import ParticipantReports from 'containers/ParticipantDashboard/Loadable';
 import SessionMapPage from 'containers/SessionMapPage/Loadable';
+import ParticipantInterventionsPage from 'containers/ParticipantInterventionsPage/Loadable';
+import UserInterventionPage from 'containers/UserInterventionPage/Loadable';
+import UserInterventionInvitePage from 'containers/UserInterventionInvitePage/Loadable';
 import SuperadminConsolePage from 'containers/SuperadminConsolePage/Loadable';
 
 import AppRoute from 'components/AppRoute';
@@ -65,6 +67,7 @@ import {
   interventionsTabId,
   participantReportsTabId,
   teamsTabId,
+  participantInterventionsTabId,
 } from 'utils/defaultNavbarTabs';
 
 import { MODAL_PORTAL_ID, TOOLTIP_PORTAL_ID } from './constants';
@@ -80,6 +83,14 @@ export function App({ user, fetchSelfDetails }) {
       fetchSelfDetails();
     }
   }, []);
+
+  const defaultSidebarId = useMemo(() => {
+    if (user) {
+      if (user.roles[0] === Roles.participant)
+        return participantInterventionsTabId;
+      return interventionsTabId;
+    }
+  }, [user]);
 
   useEffect(() => {
     const appRoot = document.getElementById('app');
@@ -97,7 +108,7 @@ export function App({ user, fetchSelfDetails }) {
         case Roles.teamAdmin:
           return <InterventionPage />;
         case Roles.participant:
-          return <ParticipantDashboard />;
+          return <ParticipantInterventionsPage />;
         case Roles.thirdParty:
           return <GeneratedReportsPage disableFilter />;
         case Roles.eInterventionAdmin:
@@ -162,7 +173,7 @@ export function App({ user, fetchSelfDetails }) {
           }}
           sidebarProps={{
             sidebarId: NAVIGATION.DEFAULT,
-            activeTab: interventionsTabId,
+            activeTab: defaultSidebarId,
           }}
         />
         <AppRoute
@@ -214,7 +225,7 @@ export function App({ user, fetchSelfDetails }) {
         <AppRoute
           exact
           path="/reports"
-          component={ReportsPage}
+          component={ParticipantReports}
           protectedRoute
           allowedRoles={[Roles.participant]}
           navbarProps={{
@@ -305,6 +316,20 @@ export function App({ user, fetchSelfDetails }) {
           navbarProps={{
             navbarId: NAVIGATION.SESSIONS,
           }}
+        />
+        <AppRoute
+          exact
+          path="/user_interventions/:userInterventionId"
+          component={UserInterventionPage}
+          protectedRoute
+          allowedRoles={[Roles.participant]}
+        />
+        <AppRoute
+          exact
+          path="/interventions/:interventionId/invite"
+          component={UserInterventionInvitePage}
+          protectedRoute
+          allowedRoles={[Roles.participant]}
         />
         <AppRoute
           exact

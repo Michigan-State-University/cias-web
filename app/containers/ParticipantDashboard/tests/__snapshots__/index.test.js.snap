@@ -40,7 +40,7 @@ exports[`<ParticipantDashboard /> should render and match the snapshot 1`] = `
   font-family: DM Sans;
   font-size: 25px;
   line-height: 130%;
-  margin-top: 30px;
+  margin-top: 64px;
   color: #2F3850;
 }
 
@@ -51,7 +51,7 @@ exports[`<ParticipantDashboard /> should render and match the snapshot 1`] = `
   <h1
     class="c1"
   >
-    Dashboard
+    Reports
   </h1>
   <div
     class="c2"

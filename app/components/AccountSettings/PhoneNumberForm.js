@@ -44,6 +44,7 @@ const PhoneNumberForm = ({
   loading,
   disabled,
   required,
+  confirmationDisabled,
 }) => {
   const previousLoadingState = useRef(loading);
   const inputNumberRef = useRef(null);
@@ -111,7 +112,10 @@ const PhoneNumberForm = ({
   };
 
   const shouldDisplayConfirmationButton =
-    !confirmed && !isNullOrUndefined(number) && !isNullOrUndefined(iso);
+    !confirmationDisabled &&
+    !confirmed &&
+    !isNullOrUndefined(number) &&
+    !isNullOrUndefined(iso);
 
   return (
     <Column>
@@ -217,6 +221,7 @@ PhoneNumberForm.propTypes = {
   error: PropTypes.string,
   changePhoneNumber: PropTypes.func,
   disabled: PropTypes.bool,
+  confirmationDisabled: PropTypes.bool,
   required: PropTypes.bool,
 };
 

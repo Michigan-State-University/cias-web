@@ -11,6 +11,8 @@ export const urlRegex = new RegExp(
   'i',
 );
 
+export const simpleUrlRegex = /^https?:\/\//;
+
 export const passwordRegex =
   /^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[^\w\s]).{8,}$/;
 

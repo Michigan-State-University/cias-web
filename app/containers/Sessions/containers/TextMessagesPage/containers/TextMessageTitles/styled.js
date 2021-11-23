@@ -5,7 +5,7 @@ import { Container } from 'react-grid-system';
 export const StyledTile = styled.div`
   flex: 0 0 28%;
   width: 240px;
-  height: 120px;
+  height: 132px;
   background-color: ${colors.white};
   box-shadow: 0 4px 20px #e3eefb;
   border-radius: 5px;
@@ -26,7 +26,7 @@ export const StyledTile = styled.div`
 export const StyledCreateTile = styled.div`
   flex: 0 0 28%;
   width: 240px;
-  height: 120px;
+  height: 132px;
   background-color: ${themeColors.secondary};
   border-radius: 5px;
   margin: 20px;
@@ -36,7 +36,7 @@ export const StyledCreateTile = styled.div`
 export const StyledEmptyTile = styled.div`
   flex: 0 0 28%;
   width: 240px;
-  height: 120px;
+  height: 132px;
   background-color: ${colors.linkWater};
   border-radius: 5px;
   margin: 20px;

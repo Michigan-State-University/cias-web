@@ -2,7 +2,7 @@ import React from 'react';
 
 import Icon from 'components/Icon';
 
-import StyledTextButton from './StyledTextButton';
+import TextButton from './TextButton';
 
 type Props = {
   title: string;
@@ -10,23 +10,37 @@ type Props = {
   fill?: string;
   stroke?: string;
   onClick: () => void;
+  loading?: boolean;
   disabled: boolean;
 } & Record<string, unknown>;
 
 const ImageButton = React.forwardRef<HTMLElement, Props>(
-  ({ title, src, fill, stroke, disabled, onClick, ...props }: Props, ref) => (
-    <StyledTextButton
+  (
+    { title, src, fill, stroke, disabled, onClick, loading, ...props }: Props,
+    ref,
+  ) => (
+    <TextButton
+      // @ts-ignore
       ref={ref}
-      type="button"
-      title={title}
-      aria-label={title}
       disabled={disabled}
       onClick={onClick}
-      {...props}
+      loading={loading}
+      loaderProps={{
+        height: 'auto',
+        width: 'auto',
+        'aria-label': `${title} loader`,
+        ...props,
+      }}
+      buttonProps={{
+        type: 'button',
+        title,
+        'aria-label': title,
+        ...props,
+      }}
     >
       {/* @ts-ignore */}
       <Icon src={src} fill={fill} stroke={stroke}></Icon>
-    </StyledTextButton>
+    </TextButton>
   ),
 );
 

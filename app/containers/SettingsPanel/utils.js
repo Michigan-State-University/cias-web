@@ -4,6 +4,7 @@ import { Markup } from 'interweave';
 
 import { formatMessage } from 'utils/intlOutsideReact';
 
+import { InterventionType } from 'models/Intervention/InterventionDto';
 import messages from './messages';
 
 export const SHARE_IDS = {
@@ -50,5 +51,20 @@ export const shareOptions = [
         noWrap
       />
     ),
+  },
+];
+
+export const interventionTypesOption = [
+  {
+    id: InterventionType.DEFAULT,
+    label: <FormattedMessage {...messages.normalIntervention} />,
+  },
+  {
+    id: InterventionType.FLEXIBLE,
+    label: <FormattedMessage {...messages.flexibleIntervention} />,
+  },
+  {
+    id: InterventionType.FIXED,
+    label: <FormattedMessage {...messages.fixedIntervention} />,
   },
 ];

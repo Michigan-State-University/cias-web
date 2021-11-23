@@ -23,9 +23,6 @@ import {
   CHANGE_CURRENT_SESSION,
   REORDER_SESSION_LIST_SUCCESS,
   REORDER_SESSION_LIST_ERROR,
-  CHANGE_ACCESS_SETTING_REQUEST,
-  CHANGE_ACCESS_SETTING_SUCCESS,
-  CHANGE_ACCESS_SETTING_ERROR,
   ENABLE_USER_ACCESS_REQUEST,
   ENABLE_USER_ACCESS_SUCCESS,
   ENABLE_USER_ACCESS_ERROR,
@@ -243,35 +240,6 @@ describe('intervention reducer', () => {
     changeState.currentSessionIndex = payloadIndex.index;
 
     expect(interventionReducer(mockState, action)).toEqual(changeState);
-  });
-
-  it('CHANGE_ACCESS_SETTING_REQUEST', () => {
-    const payloadSetting = { setting: 'registered' };
-    const action = actionBuilder(CHANGE_ACCESS_SETTING_REQUEST, payloadSetting);
-
-    const changeState = cloneDeep(mockState);
-    changeState.intervention.sharedTo = payloadSetting.setting;
-    changeState.cache.intervention = mockState.intervention;
-
-    expect(interventionReducer(mockState, action)).toEqual(changeState);
-  });
-
-  it('CHANGE_ACCESS_SETTING_SUCCESS', () => {
-    const action = actionBuilder(CHANGE_ACCESS_SETTING_SUCCESS, {});
-
-    const expectedState = cloneDeep(mockState);
-    expectedState.cache.intervention = mockState.intervention;
-
-    expect(interventionReducer(mockState, action)).toEqual(expectedState);
-  });
-
-  it('CHANGE_ACCESS_SETTING_ERROR', () => {
-    const action = actionBuilder(CHANGE_ACCESS_SETTING_ERROR, {});
-
-    const expectedState = cloneDeep(mockState);
-    expectedState.intervention = mockState.cache.intervention;
-
-    expect(interventionReducer(mockState, action)).toEqual(expectedState);
   });
 
   it('ENABLE_USER_ACCESS_REQUEST', () => {

@@ -20,12 +20,12 @@ import { revokeUserAccessSaga } from '../index';
 import { revokeUserAccess } from '../revokeUserAccess';
 
 describe('revokeUserAccess saga', () => {
-  const payload = { interventionId: '0', userId: '0' };
+  const payload = { interventionId: '0', accessId: '0' };
 
   it('Check revokeUserAccess generator success connection', () =>
     expectSaga(revokeUserAccess, { payload })
       .provide([[matchers.call.fn(axios.delete), {}]])
-      .put(revokeUserAccessSuccess(payload.userId))
+      .put(revokeUserAccessSuccess(payload.accessId))
       .run());
 
   it('Check revokeUserAccess error connection', () => {
@@ -35,7 +35,7 @@ describe('revokeUserAccess saga', () => {
       .call(toast.error, formatMessage(messages.revokeAccessError), {
         toastId: REVOKE_USER_ACCESS_ERROR,
       })
-      .put(revokeUserAccessFailure(payload.userId, error))
+      .put(revokeUserAccessFailure(payload.accessId, error))
       .run();
   });
 

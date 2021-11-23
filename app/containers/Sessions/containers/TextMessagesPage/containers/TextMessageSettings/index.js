@@ -9,14 +9,17 @@ import {
   changeSchedulingType,
   changeSchedulingValue,
   changeSchedulingFrequency,
-  fetchVariantsRequest,
+  fetchVariantsAndPhonesRequest,
   removeTextMessageRequest,
   changeTileName,
   cloneTextMessageRequest,
+  changeType,
 } from 'global/reducers/textMessages';
 
 import binNoBg from 'assets/svg/bin-no-bg.svg';
 import copy from 'assets/svg/copy.svg';
+
+import { TextMessageType } from 'models/TextMessage';
 
 import { colors } from 'theme';
 
@@ -33,15 +36,19 @@ import messages from './messages';
 import TextMessageScheduling from '../../components/TextMessageScheduling';
 import FormulaSwitcher from '../../components/FormulaSwitcher';
 import NoFormulaMessage from '../../components/NoFormulaMessages';
+import { TextMessageTypeChooser } from '../../components/TextMessageTypeChooser';
+import { ParticipantPersonalData } from '../../components/ParticipantPersonalData';
+import { AlertPhones } from '../../components/AlertPhones';
 
 const TextMessageSettings = ({
   changeSchedulingTypeAction,
   changeSchedulingValueAction,
   changeSchedulingFrequencyAction,
-  fetchVariants,
+  fetchVariantsAndPhones,
   removeTextMessage,
   changeTileNameAction,
   cloneTextMessage,
+  changeTypeAction,
 }) => {
   const {
     formatMessage,
@@ -57,11 +64,12 @@ const TextMessageSettings = ({
       isUsedFormula,
       noFormulaText,
       originalText,
+      type,
     },
   } = useContext(TextMessagesContext);
 
   useEffect(() => {
-    fetchVariants();
+    fetchVariantsAndPhones();
   }, [id]);
 
   const onDelete = useCallback(() => {
@@ -120,6 +128,7 @@ const TextMessageSettings = ({
           />
         </div>
       </Row>
+
       <Box bg={colors.linkWater} width="100%" mt={20} padding={8}>
         <StyledInput
           type="multiline"
@@ -131,21 +140,40 @@ const TextMessageSettings = ({
           disabled={!editingPossible}
         />
       </Box>
-      <TextMessageScheduling
-        id={id}
-        selectedOption={schedule}
-        frequency={frequency}
-        endAt={endAt}
-        formatMessage={formatMessage}
-        value={schedulePayload}
-        onChangeOption={changeSchedulingTypeAction}
-        onChangeValue={changeSchedulingValueAction}
-        onChangeFrequency={changeSchedulingFrequencyAction}
+
+      <SectionDivider />
+
+      <TextMessageTypeChooser
+        type={type}
+        onTypeChange={changeTypeAction}
         disabled={!editingPossible}
       />
+
+      {type === TextMessageType.NORMAL && (
+        <TextMessageScheduling
+          id={id}
+          selectedOption={schedule}
+          frequency={frequency}
+          endAt={endAt}
+          formatMessage={formatMessage}
+          value={schedulePayload}
+          onChangeOption={changeSchedulingTypeAction}
+          onChangeValue={changeSchedulingValueAction}
+          onChangeFrequency={changeSchedulingFrequencyAction}
+          disabled={!editingPossible}
+        />
+      )}
+
       <SectionDivider />
       <FormulaSwitcher isUsedFormula={isUsedFormula} />
       {messageSection()}
+
+      {type === TextMessageType.ALERT && (
+        <>
+          <ParticipantPersonalData disabled={!editingPossible} />
+          <AlertPhones disabled={!editingPossible} />
+        </>
+      )}
     </StyledSmsSettings>
   );
 };
@@ -154,10 +182,11 @@ TextMessageSettings.propTypes = {
   changeSchedulingTypeAction: PropTypes.func,
   changeSchedulingValueAction: PropTypes.func,
   changeSchedulingFrequencyAction: PropTypes.func,
-  fetchVariants: PropTypes.func,
+  fetchVariantsAndPhones: PropTypes.func,
   removeTextMessage: PropTypes.func,
   changeTileNameAction: PropTypes.func,
   cloneTextMessage: PropTypes.func,
+  changeTypeAction: PropTypes.func,
 };
 
 const mapDispatchToProps = {
@@ -165,9 +194,10 @@ const mapDispatchToProps = {
   changeSchedulingValueAction: changeSchedulingValue,
   changeSchedulingFrequencyAction: changeSchedulingFrequency,
   changeTileNameAction: changeTileName,
-  fetchVariants: fetchVariantsRequest,
+  fetchVariantsAndPhones: fetchVariantsAndPhonesRequest,
   removeTextMessage: removeTextMessageRequest,
   cloneTextMessage: cloneTextMessageRequest,
+  changeTypeAction: changeType,
 };
 
 const withConnect = connect(null, mapDispatchToProps);

@@ -9,6 +9,9 @@ export const makeSelectTextMessagesState = () =>
 export const makeSelectTextMessages = () =>
   createSelector(dashboard, (substate) => substate.textMessages);
 
+export const makeSelectFilters = () =>
+  createSelector(dashboard, (substate) => substate.filters);
+
 export const makeSelectVariants = () =>
   createSelector(dashboard, (substate) => {
     const textMessage = substate.textMessages.find(
@@ -35,7 +38,10 @@ export const makeSelectAllLoaders = () =>
       substate.loaders.removeTextMessagesLoading ||
       substate.loaders.updateVariantLoading ||
       substate.loaders.removeVariantLoading ||
-      substate.loaders.createVariantLoading,
+      substate.loaders.createVariantLoading ||
+      substate.loaders.addPhoneLoading ||
+      substate.loaders.removePhoneLoading ||
+      substate.loaders.updatePhoneLoading,
   );
 
 export const makeSelectSelectedMessageId = () =>
@@ -48,3 +54,11 @@ export const makeSelectSelectedMessage = () =>
 
 export const makeSelectSelectedVariantId = () =>
   createSelector(dashboard, (substate) => substate.selectedVariantId);
+
+export const makeSelectPhones = () =>
+  createSelector(dashboard, (substate) => {
+    const textMessage = substate.textMessages.find(
+      ({ id }) => id === substate.selectedMessageId,
+    );
+    return textMessage?.phones || [];
+  });

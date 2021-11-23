@@ -55,6 +55,7 @@ exports[`<CollapsableLabel /> should match the snapshot 1`] = `
   padding: 2px;
   cursor: pointer;
   margin-left: 5px;
+  font-weight: 700;
   color: #2F3850;
 }
 
@@ -122,6 +123,7 @@ exports[`<CollapsableLabel /> should match the snapshot 1`] = `
       class="c5"
       data-cy="accordion-element-delete-0"
       data-testid="bin-test"
+      font-weight="bold"
       title="Delete"
       type="button"
     >

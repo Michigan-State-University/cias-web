@@ -4,6 +4,7 @@ import omit from 'lodash/omit';
 import map from 'lodash/map';
 import { toast } from 'react-toastify';
 import { push } from 'connected-react-router';
+import merge from 'lodash/merge';
 
 import { mapQuestionToStateObject } from 'utils/mapResponseObjects';
 import { formatMessage } from 'utils/intlOutsideReact';
@@ -14,6 +15,7 @@ import objectToSnakeCase from 'utils/objectToSnakeCase';
 import { makeSelectLocation } from 'containers/App/selectors';
 import { resetPhoneNumberPreview } from 'global/reducers/auth/actions';
 import { jsonApiToObject } from 'utils/jsonApiMapper';
+
 import {
   SUBMIT_ANSWER_REQUEST,
   REDIRECT_TO_PREVIEW,
@@ -92,7 +94,13 @@ function* nextQuestion({ payload: { userSessionId, questionId } }) {
 
   try {
     const {
-      data: { data, warning, next_user_session_id: newUserSessionId },
+      data: {
+        data,
+        warning,
+        next_user_session_id: newUserSessionId,
+        // eslint-disable-next-line camelcase
+        next_session_id,
+      },
     } = yield axios.get(requestUrl);
 
     if (!isNullOrUndefined(warning))
@@ -109,7 +117,15 @@ function* nextQuestion({ payload: { userSessionId, questionId } }) {
       }
       yield put(changeUserSessionId(newUserSessionId));
     }
-    yield put(nextQuestionSuccess(mapQuestionToStateObject(data)));
+
+    yield put(
+      nextQuestionSuccess(
+        mapQuestionToStateObject(
+          // eslint-disable-next-line camelcase
+          merge(data, { attributes: { next_session_id } }),
+        ),
+      ),
+    );
   } catch (error) {
     yield put(nextQuestionFailure(error));
   }

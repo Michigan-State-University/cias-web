@@ -28,6 +28,7 @@ const Pattern = ({
   setTargetChooserOpen,
   questionId,
   newPattern,
+  disableBranchingToSession,
 }) => {
   const sumPercentages = useMemo(
     () =>
@@ -95,6 +96,7 @@ const Pattern = ({
               target={target}
               uniqueTargetIndex={uniqueTargetIndex}
               invalidPercentage={sumPercentages !== 100}
+              disableBranchingToSession={disableBranchingToSession}
             />
           );
         })}
@@ -132,6 +134,7 @@ Pattern.propTypes = {
   setTargetChooserOpen: PropTypes.func,
   displayPatternTargetText: PropTypes.func,
   questionId: PropTypes.string,
+  disableBranchingToSession: PropTypes.bool,
 };
 
 export default Pattern;

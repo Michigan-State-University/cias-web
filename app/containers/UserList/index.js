@@ -182,7 +182,7 @@ function UserList({
         <Helmet>
           <title>{pageTitle ?? formatMessage(messages.manageAccount)}</title>
         </Helmet>
-        <Box mt={30} width="100%" px="10%">
+        <Box mt={64} width="100%" px="10%">
           <Box display="flex" mb={30}>
             <H1 mr={10}>
               <FormattedMessage {...messages.manageAccount} />

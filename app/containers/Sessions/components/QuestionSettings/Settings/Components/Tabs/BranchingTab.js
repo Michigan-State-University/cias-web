@@ -48,6 +48,7 @@ const BranchingTab = ({
   onAddTarget,
   onUpdateTarget,
   onRemoveTarget,
+  disableBranchingToSession,
 }) => {
   const { interventionId, sessionId } = params;
   const { sessions: sessionList } = intervention || {};
@@ -73,7 +74,9 @@ const BranchingTab = ({
       if (isQuestionType)
         return htmlToPlainText(questions[targetIndex].subtitle);
 
-      return sessionList[targetIndex].name;
+      return disableBranchingToSession
+        ? formatMessage(messages.selectQuestion)
+        : sessionList[targetIndex].name;
     }
 
     return formatMessage(messages.selectQuestion);
@@ -97,6 +100,7 @@ const BranchingTab = ({
       onUpdateTarget={onUpdateTarget}
       onRemoveTarget={onRemoveTarget}
       sessionBranching={false}
+      disableBranchingToSession={disableBranchingToSession}
     />
   );
 };
@@ -119,6 +123,7 @@ BranchingTab.propTypes = {
   onRemoveTarget: PropTypes.func,
   match: PropTypes.object,
   disabled: PropTypes.bool,
+  disableBranchingToSession: PropTypes.bool,
 };
 
 const mapStateToProps = createStructuredSelector({

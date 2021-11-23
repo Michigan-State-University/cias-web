@@ -11,9 +11,9 @@ import {
   UPDATE_TEXT_MESSAGE_SETTINGS_REQUEST,
   UPDATE_TEXT_MESSAGE_SETTINGS_SUCCESS,
   UPDATE_TEXT_MESSAGE_SETTINGS_ERROR,
-  FETCH_VARIANTS_REQUEST,
-  FETCH_VARIANTS_SUCCESS,
-  FETCH_VARIANTS_ERROR,
+  FETCH_VARIANTS_AND_PHONES_REQUEST,
+  FETCH_VARIANTS_AND_PHONES_SUCCESS,
+  FETCH_VARIANTS_AND_PHONES_ERROR,
   CREATE_VARIANT_REQUEST,
   CREATE_VARIANT_SUCCESS,
   CREATE_VARIANT_ERROR,
@@ -30,6 +30,16 @@ import {
   CLONE_TEXT_MESSAGE_SUCCESS,
   CLONE_TEXT_MESSAGE_ERROR,
   CHANGE_SELECTED_VARIANT,
+  ADD_PHONE_REQUEST,
+  ADD_PHONE_SUCCESS,
+  ADD_PHONE_ERROR,
+  REMOVE_PHONE_REQUEST,
+  REMOVE_PHONE_SUCCESS,
+  REMOVE_PHONE_ERROR,
+  UPDATE_PHONE_REQUEST,
+  UPDATE_PHONE_SUCCESS,
+  UPDATE_PHONE_ERROR,
+  SET_FILTERS,
 } from './constants';
 
 export const fetchTextMessagesRequest = (sessionId) =>
@@ -41,12 +51,12 @@ export const fetchTextMessagesSuccess = (textMessages) =>
 export const fetchTextMessagesError = (error) =>
   actionBuilder(FETCH_TEXT_MESSAGES_ERROR, { error });
 
-export const fetchVariantsRequest = () =>
-  actionBuilder(FETCH_VARIANTS_REQUEST, {});
-export const fetchVariantsSuccess = (variants) =>
-  actionBuilder(FETCH_VARIANTS_SUCCESS, { variants });
-export const fetchVariantsError = (error) =>
-  actionBuilder(FETCH_VARIANTS_ERROR, { error });
+export const fetchVariantsAndPhonesRequest = () =>
+  actionBuilder(FETCH_VARIANTS_AND_PHONES_REQUEST, {});
+export const fetchVariantsAndPhonesSuccess = (variants, phones) =>
+  actionBuilder(FETCH_VARIANTS_AND_PHONES_SUCCESS, { variants, phones });
+export const fetchVariantsAndPhonesError = (error) =>
+  actionBuilder(FETCH_VARIANTS_AND_PHONES_ERROR, { error });
 
 export const changeSelectedMessageId = (id) =>
   actionBuilder(CHANGE_SELECTED_MESSAGE, { id });
@@ -102,3 +112,25 @@ export const cloneTextMessageSuccess = (clonedTextMessage) =>
   actionBuilder(CLONE_TEXT_MESSAGE_SUCCESS, { clonedTextMessage });
 export const cloneTextMessageError = (error) =>
   actionBuilder(CLONE_TEXT_MESSAGE_ERROR, { error });
+
+export const addPhoneRequest = () => actionBuilder(ADD_PHONE_REQUEST, {});
+export const addPhoneSuccess = (phone) =>
+  actionBuilder(ADD_PHONE_SUCCESS, { phone });
+export const addPhoneError = (error) =>
+  actionBuilder(ADD_PHONE_ERROR, { error });
+
+export const removePhoneRequest = (phoneId) =>
+  actionBuilder(REMOVE_PHONE_REQUEST, { phoneId });
+export const removePhoneSuccess = (phoneId) =>
+  actionBuilder(REMOVE_PHONE_SUCCESS, { phoneId });
+export const removePhoneError = (error) =>
+  actionBuilder(REMOVE_PHONE_ERROR, { error });
+
+export const updatePhoneRequest = (phoneId, phoneAttributes) =>
+  actionBuilder(UPDATE_PHONE_REQUEST, { phoneId, phoneAttributes });
+export const updatePhoneSuccess = () => actionBuilder(UPDATE_PHONE_SUCCESS, {});
+export const updatePhoneError = (error) =>
+  actionBuilder(UPDATE_PHONE_ERROR, { error });
+
+export const setFiltersAction = (filters) =>
+  actionBuilder(SET_FILTERS, { filters });

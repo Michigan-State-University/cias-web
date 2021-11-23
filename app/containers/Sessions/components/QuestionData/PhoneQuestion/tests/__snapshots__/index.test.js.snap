@@ -74,6 +74,7 @@ exports[`<PhoneQuestion /> Should render and match the snapshot 1`] = `
   height: auto;
   display: block;
   border-radius: 5px;
+  opacity: 0.5;
 }
 
 .c7 {
@@ -192,6 +193,7 @@ exports[`<PhoneQuestion /> Should render and match the snapshot 1`] = `
           <div
             class="c6"
             data-testid="select"
+            disabled=""
           >
             <div
               class=" css-14jk2my-container"

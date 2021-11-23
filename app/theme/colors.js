@@ -67,6 +67,8 @@ const colors = {
   whiteLilac: '#F6F8FC',
   jungleGreen50: '#80b4AE',
   periwinkleGray50: '#D9E0F0',
+  supernova: '#FFC50D',
+  mischka: '#DDE0E6',
   gainsbro: '#DADADA',
 };
 

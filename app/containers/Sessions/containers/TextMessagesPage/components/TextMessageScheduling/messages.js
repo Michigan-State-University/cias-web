@@ -6,19 +6,19 @@
 import { defineMessages } from 'react-intl';
 
 import {
-  MESSAGES_SCHEDULE_OPTIONS,
-  MESSAGES_SCHEDULE_FREQUENCIES,
+  TextMessageScheduleOption,
+  TextMessageScheduleFrequency,
 } from 'models/TextMessage';
 
 export const scope = 'app.containers.TextMessageScheduling';
 
 export default defineMessages({
-  [MESSAGES_SCHEDULE_OPTIONS.daysAfterFill]: {
-    id: `${scope}.${MESSAGES_SCHEDULE_OPTIONS.daysAfterFill}`,
+  [TextMessageScheduleOption.DAYS_AFTER_FILL]: {
+    id: `${scope}.${TextMessageScheduleOption.DAYS_AFTER_FILL}`,
     defaultMessage: 'Send [X] days after session completed date',
   },
-  [MESSAGES_SCHEDULE_OPTIONS.afterFill]: {
-    id: `${scope}.${MESSAGES_SCHEDULE_OPTIONS.afterFill}`,
+  [TextMessageScheduleOption.AFTER_FILL]: {
+    id: `${scope}.${TextMessageScheduleOption.AFTER_FILL}`,
     defaultMessage: 'Send immediately after session completion',
   },
   send: {
@@ -37,20 +37,20 @@ export default defineMessages({
     id: `${scope}.sendDays`,
     defaultMessage: 'days after the session is completed',
   },
-  [MESSAGES_SCHEDULE_FREQUENCIES.once]: {
-    id: `${scope}.${MESSAGES_SCHEDULE_FREQUENCIES.once}`,
+  [TextMessageScheduleFrequency.ONCE]: {
+    id: `${scope}.${TextMessageScheduleFrequency.ONCE}`,
     defaultMessage: 'Once',
   },
-  [MESSAGES_SCHEDULE_FREQUENCIES.onceDay]: {
-    id: `${scope}.${MESSAGES_SCHEDULE_FREQUENCIES.onceDay}`,
+  [TextMessageScheduleFrequency.ONCE_DAY]: {
+    id: `${scope}.${TextMessageScheduleFrequency.ONCE_DAY}`,
     defaultMessage: 'Once a day',
   },
-  [MESSAGES_SCHEDULE_FREQUENCIES.onceWeek]: {
-    id: `${scope}.${MESSAGES_SCHEDULE_FREQUENCIES.onceWeek}`,
+  [TextMessageScheduleFrequency.ONCE_WEEK]: {
+    id: `${scope}.${TextMessageScheduleFrequency.ONCE_WEEK}`,
     defaultMessage: 'Once a week',
   },
-  [MESSAGES_SCHEDULE_FREQUENCIES.onceMonth]: {
-    id: `${scope}.${MESSAGES_SCHEDULE_FREQUENCIES.onceMonth}`,
+  [TextMessageScheduleFrequency.ONCE_MONTH]: {
+    id: `${scope}.${TextMessageScheduleFrequency.ONCE_MONTH}`,
     defaultMessage: 'Once a month',
   },
   finishBy: {

@@ -85,6 +85,7 @@ exports[`<InterventionPage /> Should render and match the snapshot with interven
   display: -ms-flexbox;
   display: flex;
   overflow: clip;
+  padding-top: 54px;
   -webkit-flex-direction: column;
   -ms-flex-direction: column;
   flex-direction: column;
@@ -99,7 +100,6 @@ exports[`<InterventionPage /> Should render and match the snapshot with interven
   font-family: DM Sans;
   font-size: 25px;
   line-height: 130%;
-  margin-top: 35px;
   color: #2F3850;
 }
 
@@ -344,6 +344,7 @@ exports[`<InterventionPage /> Should render and match the snapshot with interven
     display="flex"
     height="100% !important"
     overflow="clip"
+    pt="54"
     style="box-sizing: border-box; position: relative; margin-left: auto; margin-right: auto; padding-left: 15px; padding-right: 15px; max-width: 960px;"
   >
     <div
@@ -662,6 +663,7 @@ exports[`<InterventionPage /> Should render and match the snapshot with loader 1
   display: -ms-flexbox;
   display: flex;
   overflow: clip;
+  padding-top: 54px;
   -webkit-flex-direction: column;
   -ms-flex-direction: column;
   flex-direction: column;
@@ -676,7 +678,6 @@ exports[`<InterventionPage /> Should render and match the snapshot with loader 1
   font-family: DM Sans;
   font-size: 25px;
   line-height: 130%;
-  margin-top: 35px;
   color: #2F3850;
 }
 
@@ -921,6 +922,7 @@ exports[`<InterventionPage /> Should render and match the snapshot with loader 1
     display="flex"
     height="100% !important"
     overflow="clip"
+    pt="54"
     style="box-sizing: border-box; position: relative; margin-left: auto; margin-right: auto; padding-left: 15px; padding-right: 15px; max-width: 960px;"
   >
     <div
@@ -1239,6 +1241,7 @@ exports[`<InterventionPage /> Should render and match the snapshot without inter
   display: -ms-flexbox;
   display: flex;
   overflow: clip;
+  padding-top: 54px;
   -webkit-flex-direction: column;
   -ms-flex-direction: column;
   flex-direction: column;
@@ -1253,7 +1256,6 @@ exports[`<InterventionPage /> Should render and match the snapshot without inter
   font-family: DM Sans;
   font-size: 25px;
   line-height: 130%;
-  margin-top: 35px;
   color: #2F3850;
 }
 
@@ -1498,6 +1500,7 @@ exports[`<InterventionPage /> Should render and match the snapshot without inter
     display="flex"
     height="100% !important"
     overflow="clip"
+    pt="54"
     style="box-sizing: border-box; position: relative; margin-left: auto; margin-right: auto; padding-left: 15px; padding-right: 15px; max-width: 960px;"
   >
     <div

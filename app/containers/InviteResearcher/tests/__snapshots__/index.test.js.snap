@@ -23,6 +23,33 @@ exports[`<InviteResearcher /> Should display invalid email error 1`] = `
   align-self: center;
 }
 
+.c15 {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-flex-direction: row;
+  -ms-flex-direction: row;
+  flex-direction: row;
+  height: 46px;
+  -webkit-box-pack: justify;
+  -webkit-justify-content: space-between;
+  -ms-flex-pack: justify;
+  justify-content: space-between;
+  justify-items: space-between;
+  -webkit-align-content: center;
+  -ms-flex-line-pack: center;
+  align-content: center;
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  padding-top: 12px;
+  padding-bottom: 12px;
+  height: 46px;
+  border-bottom: 1px solid #D7DEE9;
+}
+
 .c17 {
   outline: none;
   border: none;
@@ -58,33 +85,6 @@ exports[`<InviteResearcher /> Should display invalid email error 1`] = `
   width: 100%;
   width: 100%;
   margin-bottom: 35px;
-}
-
-.c15 {
-  display: -webkit-box;
-  display: -webkit-flex;
-  display: -ms-flexbox;
-  display: flex;
-  -webkit-flex-direction: row;
-  -ms-flex-direction: row;
-  flex-direction: row;
-  height: 46px;
-  -webkit-box-pack: justify;
-  -webkit-justify-content: space-between;
-  -ms-flex-pack: justify;
-  justify-content: space-between;
-  justify-items: space-between;
-  -webkit-align-content: center;
-  -ms-flex-line-pack: center;
-  align-content: center;
-  -webkit-align-items: center;
-  -webkit-box-align: center;
-  -ms-flex-align: center;
-  align-items: center;
-  padding-top: 12px;
-  padding-bottom: 12px;
-  height: 46px;
-  border-bottom: 1px solid #D7DEE9;
 }
 
 .c12 {
@@ -502,6 +502,33 @@ exports[`<InviteResearcher /> Should display server error 1`] = `
   align-self: center;
 }
 
+.c14 {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-flex-direction: row;
+  -ms-flex-direction: row;
+  flex-direction: row;
+  height: 46px;
+  -webkit-box-pack: justify;
+  -webkit-justify-content: space-between;
+  -ms-flex-pack: justify;
+  justify-content: space-between;
+  justify-items: space-between;
+  -webkit-align-content: center;
+  -ms-flex-line-pack: center;
+  align-content: center;
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  padding-top: 12px;
+  padding-bottom: 12px;
+  height: 46px;
+  border-bottom: 1px solid #D7DEE9;
+}
+
 .c16 {
   outline: none;
   border: none;
@@ -537,33 +564,6 @@ exports[`<InviteResearcher /> Should display server error 1`] = `
   width: 100%;
   width: 100%;
   margin-bottom: 35px;
-}
-
-.c14 {
-  display: -webkit-box;
-  display: -webkit-flex;
-  display: -ms-flexbox;
-  display: flex;
-  -webkit-flex-direction: row;
-  -ms-flex-direction: row;
-  flex-direction: row;
-  height: 46px;
-  -webkit-box-pack: justify;
-  -webkit-justify-content: space-between;
-  -ms-flex-pack: justify;
-  justify-content: space-between;
-  justify-items: space-between;
-  -webkit-align-content: center;
-  -ms-flex-line-pack: center;
-  align-content: center;
-  -webkit-align-items: center;
-  -webkit-box-align: center;
-  -ms-flex-align: center;
-  align-items: center;
-  padding-top: 12px;
-  padding-bottom: 12px;
-  height: 46px;
-  border-bottom: 1px solid #D7DEE9;
 }
 
 .c12 {
@@ -964,6 +964,33 @@ exports[`<InviteResearcher /> Should render and match the snapshot 1`] = `
   align-self: center;
 }
 
+.c14 {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-flex-direction: row;
+  -ms-flex-direction: row;
+  flex-direction: row;
+  height: 46px;
+  -webkit-box-pack: justify;
+  -webkit-justify-content: space-between;
+  -ms-flex-pack: justify;
+  justify-content: space-between;
+  justify-items: space-between;
+  -webkit-align-content: center;
+  -ms-flex-line-pack: center;
+  align-content: center;
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  padding-top: 12px;
+  padding-bottom: 12px;
+  height: 46px;
+  border-bottom: 1px solid #D7DEE9;
+}
+
 .c16 {
   outline: none;
   border: none;
@@ -999,33 +1026,6 @@ exports[`<InviteResearcher /> Should render and match the snapshot 1`] = `
   width: 100%;
   width: 100%;
   margin-bottom: 35px;
-}
-
-.c14 {
-  display: -webkit-box;
-  display: -webkit-flex;
-  display: -ms-flexbox;
-  display: flex;
-  -webkit-flex-direction: row;
-  -ms-flex-direction: row;
-  flex-direction: row;
-  height: 46px;
-  -webkit-box-pack: justify;
-  -webkit-justify-content: space-between;
-  -ms-flex-pack: justify;
-  justify-content: space-between;
-  justify-items: space-between;
-  -webkit-align-content: center;
-  -ms-flex-line-pack: center;
-  align-content: center;
-  -webkit-align-items: center;
-  -webkit-box-align: center;
-  -ms-flex-align: center;
-  align-items: center;
-  padding-top: 12px;
-  padding-bottom: 12px;
-  height: 46px;
-  border-bottom: 1px solid #D7DEE9;
 }
 
 .c12 {

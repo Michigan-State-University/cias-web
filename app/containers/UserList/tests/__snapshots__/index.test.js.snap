@@ -27,7 +27,7 @@ exports[`<UserList /> Should render and match the snapshot - admin 1`] = `
   width: 100%;
   padding-right: 10%;
   padding-left: 10%;
-  margin-top: 30px;
+  margin-top: 64px;
 }
 
 .c2 {
@@ -1154,7 +1154,7 @@ exports[`<UserList /> Should render and match the snapshot - researcher 1`] = `
   width: 100%;
   padding-right: 10%;
   padding-left: 10%;
-  margin-top: 30px;
+  margin-top: 64px;
 }
 
 .c2 {

@@ -15,7 +15,6 @@ const ALLOWED_ORGANIZATION_SIDEBAR_DISPLAY = [
 ];
 
 const FORBIDDEN_LEFT_SIDEBAR_DISPLAY = [
-  Roles.participant,
   Roles.thirdParty,
   Roles.organizationAdmin,
   Roles.healthSystemAdmin,

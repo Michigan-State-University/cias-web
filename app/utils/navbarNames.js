@@ -34,7 +34,7 @@ const navbarMessages = defineMessages({
   },
   participantInterventions: {
     id: `${scope}.participantInterventions`,
-    defaultMessage: 'Dashboard',
+    defaultMessage: 'My interventions',
   },
   participantReports: {
     id: `${scope}.participantReports`,

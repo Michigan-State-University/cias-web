@@ -18,9 +18,6 @@ import {
   CHANGE_CURRENT_SESSION,
   REORDER_SESSION_LIST_SUCCESS,
   REORDER_SESSION_LIST_ERROR,
-  CHANGE_ACCESS_SETTING_REQUEST,
-  CHANGE_ACCESS_SETTING_SUCCESS,
-  CHANGE_ACCESS_SETTING_ERROR,
   ENABLE_USER_ACCESS_REQUEST,
   ENABLE_USER_ACCESS_SUCCESS,
   ENABLE_USER_ACCESS_ERROR,
@@ -61,6 +58,15 @@ import {
   TRANSLATE_INTERVENTION_REQUEST,
   TRANSLATE_INTERVENTION_SUCCESS,
   TRANSLATE_INTERVENTION_ERROR,
+  ADD_INTERVENTION_ATTACHMENTS_REQUEST,
+  ADD_INTERVENTION_ATTACHMENTS_SUCCESS,
+  DELETE_INTERVENTION_ATTACHMENT_REQUEST,
+  DELETE_INTERVENTION_ATTACHMENT_SUCCESS,
+  SEND_INTERVENTION_INVITE_REQUEST,
+  SEND_INTERVENTION_INVITE_SUCCESS,
+  SEND_INTERVENTION_INVITE_ERROR,
+  RESEND_INTERVENTION_INVITE_REQUEST,
+  ADD_INTERVENTION_ATTACHMENTS_ERROR,
 } from './constants';
 
 export const fetchInterventionRequest = (id) =>
@@ -114,12 +120,6 @@ export const updateSessionSettingsError = () =>
 
 export const changeCurrentSession = (index) =>
   actionBuilder(CHANGE_CURRENT_SESSION, { index });
-export const changeAccessSettingRequest = (id, setting) =>
-  actionBuilder(CHANGE_ACCESS_SETTING_REQUEST, { id, setting });
-export const changeAccessSettingSuccess = () =>
-  actionBuilder(CHANGE_ACCESS_SETTING_SUCCESS, {});
-export const changeAccessSettingFailure = (payload) =>
-  actionBuilder(CHANGE_ACCESS_SETTING_ERROR, payload);
 
 export const enableUserAccessRequest = (id, emails) =>
   actionBuilder(ENABLE_USER_ACCESS_REQUEST, { id, emails });
@@ -135,8 +135,8 @@ export const fetchUsersWithAccessSuccess = (userAccess) =>
 export const fetchUsersWithAccessFailure = (payload) =>
   actionBuilder(FETCH_USERS_WITH_ACCESS_ERROR, payload);
 
-export const revokeUserAccessRequest = (interventionId, userId) =>
-  actionBuilder(REVOKE_USER_ACCESS_REQUEST, { interventionId, userId });
+export const revokeUserAccessRequest = (interventionId, accessId) =>
+  actionBuilder(REVOKE_USER_ACCESS_REQUEST, { interventionId, accessId });
 export const revokeUserAccessSuccess = (userId) =>
   actionBuilder(REVOKE_USER_ACCESS_SUCCESS, { userId });
 export const revokeUserAccessFailure = (userId, error) =>
@@ -165,6 +165,24 @@ export const sendSessionInviteError = () =>
 
 export const resendSessionInviteRequest = (id, sessionId) =>
   actionBuilder(RESEND_SESSION_INVITE_REQUEST, { id, sessionId });
+
+export const sendInterventionInviteRequest = (
+  emails,
+  interventionId,
+  shouldNotUpdateStore,
+) =>
+  actionBuilder(SEND_INTERVENTION_INVITE_REQUEST, {
+    emails,
+    interventionId,
+    shouldNotUpdateStore,
+  });
+export const sendInterventionInviteSuccess = () =>
+  actionBuilder(SEND_INTERVENTION_INVITE_SUCCESS, {});
+export const sendInterventionInviteError = () =>
+  actionBuilder(SEND_INTERVENTION_INVITE_ERROR, {});
+
+export const resendInterventionInviteRequest = (id, interventionId) =>
+  actionBuilder(RESEND_INTERVENTION_INVITE_REQUEST, { id, interventionId });
 
 export const fetchSessionEmailsRequest = (index) =>
   actionBuilder(FETCH_SESSION_EMAILS_REQUEST, { index });
@@ -229,3 +247,20 @@ export const translateInterventionSuccess = (intervention) =>
   actionBuilder(TRANSLATE_INTERVENTION_SUCCESS, { intervention });
 export const translateInterventionError = (error) =>
   actionBuilder(TRANSLATE_INTERVENTION_ERROR, { error });
+export const addAttachmentRequest = (interventionId, attachments) =>
+  actionBuilder(ADD_INTERVENTION_ATTACHMENTS_REQUEST, {
+    interventionId,
+    attachments,
+  });
+export const addAttachmentSuccess = (intervention) =>
+  actionBuilder(ADD_INTERVENTION_ATTACHMENTS_SUCCESS, { intervention });
+export const addAttachmentError = (error) =>
+  actionBuilder(ADD_INTERVENTION_ATTACHMENTS_ERROR, { error });
+
+export const deleteAttachmentRequest = (interventionId, attachmentId) =>
+  actionBuilder(DELETE_INTERVENTION_ATTACHMENT_REQUEST, {
+    interventionId,
+    attachmentId,
+  });
+export const deleteAttachmentSuccess = (intervention) =>
+  actionBuilder(DELETE_INTERVENTION_ATTACHMENT_SUCCESS, { intervention });

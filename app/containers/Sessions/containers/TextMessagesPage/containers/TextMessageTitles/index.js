@@ -8,9 +8,12 @@ import Text from 'components/Text';
 import Column from 'components/Column';
 import Img from 'components/Img';
 import Loader from 'components/Loader';
+import { TextMessageTypeIndicator } from 'components/TextMessageTypeIndicator';
+import EllipsisText from 'components/Text/EllipsisText';
+import Box from 'components/Box';
 
 import addSign from 'assets/svg/addSign.svg';
-import { TextMessagesBuilder } from 'models/TextMessage';
+import { TextMessagesBuilder, TextMessageType } from 'models/TextMessage';
 import { createTextMessageRequest } from 'global/reducers/textMessages';
 import { colors } from 'theme';
 
@@ -69,6 +72,14 @@ const SmsTiles = ({ createTextMessage }) => {
           </Column>
         </StyledCreateTile>
       );
+
+    const messageDescription =
+      type === TextMessageType.ALERT
+        ? formatMessage(messages.alertMessageDescription)
+        : formatMessage(messages[schedule], {
+            days: schedulePayload ?? '_',
+          });
+
     return (
       <StyledTile
         active={selectedMessageId === id}
@@ -77,14 +88,17 @@ const SmsTiles = ({ createTextMessage }) => {
       >
         {id ? (
           <>
-            <Text fontSize={18} fontWeight="bold">
-              {name}
-            </Text>
-            <Text mt={5}>
-              {formatMessage(messages[schedule], {
-                days: schedulePayload ?? '_',
-              })}
-            </Text>
+            <TextMessageTypeIndicator type={type} mb={8} />
+            <EllipsisText
+              text={name}
+              dataFor={id}
+              lines={1}
+              fontSize={18}
+              fontWeight="bold"
+            />
+            <Box mt={8}>
+              <EllipsisText text={messageDescription} dataFor={id} lines={2} />
+            </Box>
           </>
         ) : (
           <Loader type="inline" />

@@ -1,4 +1,5 @@
 import { Formula } from 'models/Formula';
+import { InterventionInvite } from 'models/Intervention';
 
 import { SessionTargetType } from './SessionTargetType';
 
@@ -52,6 +53,8 @@ export interface Session {
   formula: Formula<SessionTargetType>;
   reportTemplatesCount: number;
   type: SessionTypes;
+  emails?: InterventionInvite[];
+  estimatedTime: number;
 }
 
 export interface ClassicSession extends Session {

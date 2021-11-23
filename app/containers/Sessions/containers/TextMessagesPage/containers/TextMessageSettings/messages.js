@@ -16,6 +16,10 @@ export default defineMessages({
     id: `${scope}.textMessageName`,
     defaultMessage: 'Tex Message Tile Name',
   },
+  SMSAlertContent: {
+    id: `${scope}.SMSAlertContent`,
+    defaultMessage: 'SMS Alert Content',
+  },
   addVariableButton: {
     id: `${scope}.addVariableButton`,
     defaultMessage: '+ Add variable',

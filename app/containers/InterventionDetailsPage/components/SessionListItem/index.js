@@ -4,7 +4,7 @@
  *
  */
 
-import React, { useState } from 'react';
+import React, { useMemo, useState } from 'react';
 import PropTypes from 'prop-types';
 import { injectIntl } from 'react-intl';
 import { Draggable } from 'react-beautiful-dnd';
@@ -24,10 +24,11 @@ import { VIEWS } from 'components/CopyModal/Components';
 import CopyModal from 'components/CopyModal';
 import Badge from 'components/Badge';
 import BadgeInput from 'components/Input/BadgeInput';
+import Input from 'components/Input/StyledInput';
 
 import { SHARE_IDS } from 'containers/SettingsPanel/utils';
 
-import { variableNameValidator } from 'utils/validators';
+import { numericValidator, variableNameValidator } from 'utils/validators';
 import globalMessages from 'global/i18n/globalMessages';
 
 import copy from 'assets/svg/copy.svg';
@@ -36,10 +37,13 @@ import mail from 'assets/svg/pink-mail.svg';
 import mailDisabled from 'assets/svg/pink-mail-disabled.svg';
 import { colors, themeColors } from 'theme';
 
+import { InterventionType } from 'models/Intervention/InterventionDto';
 import SessionSchedule from '../SessionSchedule';
 import messages from './messages';
 import { ToggleableBox, StyledRow, SessionIndex } from './styled';
 import SessionBranching from '../SessionBranching';
+
+const WCAG_ARIA_LABEL_ID = 'estimate-time-label';
 
 function SessionListItem({
   session,
@@ -57,8 +61,11 @@ function SessionListItem({
   handleExternalCopySession,
   sharedTo,
   editSession,
+  interventionType,
 }) {
   const history = useHistory();
+
+  const isModuleIntervention = interventionType !== InterventionType.DEFAULT;
 
   const [isHovered, setIsHovered] = useState(false);
   const [copyOpen, setCopyOpen] = useState(false);
@@ -74,6 +81,8 @@ function SessionListItem({
     report_templates_count: reportTemplatesCount,
     days_after_date_variable_name: daysAfterDateVariableName,
     variable,
+    estimated_time: estimatedTime,
+    estimatedTime: updatedEstimatedTime,
   } = session || {};
 
   const options = [
@@ -115,8 +124,25 @@ function SessionListItem({
     history.push(url);
   };
 
+  const estimatedTimeValue = useMemo(() => {
+    if (estimatedTime || estimatedTime === 0) return `${estimatedTime}`;
+
+    if (updatedEstimatedTime || updatedEstimatedTime === 0)
+      return `${updatedEstimatedTime}`;
+
+    return '';
+  }, [estimatedTime, updatedEstimatedTime]);
+
   const handleUpdateVariable = (value) => {
     editSession({ path: 'variable', value }, ['variable'], id);
+  };
+
+  const handleUpdateEstimatedTime = (value) => {
+    editSession(
+      { path: 'estimated_time', value: +value },
+      ['estimated_time'],
+      id,
+    );
   };
 
   const preventVariableInputRedirect = (event) => {
@@ -124,7 +150,13 @@ function SessionListItem({
     event.stopPropagation();
   };
 
-  const isSchedulingPossible = sharedTo !== SHARE_IDS.anyoneWithTheLink;
+  const isSchedulingPossible =
+    sharedTo !== SHARE_IDS.anyoneWithTheLink &&
+    interventionType !== InterventionType.FLEXIBLE &&
+    index !== 0;
+
+  const isSessionBranchingPossible =
+    interventionType === InterventionType.DEFAULT;
 
   return (
     <Draggable
@@ -202,41 +234,63 @@ function SessionListItem({
                     messages[`tooltip-${status}`] ?? messages.tooltip,
                   )}
                 >
-                  <Row
-                    justify="end"
-                    disabled={!sharingPossible}
-                    onClick={handleInviteParticipantsClick}
-                    minWidth={110}
-                  >
-                    <Text
-                      fontSize={13}
-                      clickable
+                  {!isModuleIntervention && (
+                    <Row
+                      justify="end"
                       disabled={!sharingPossible}
-                      textAlign="center"
-                      fontWeight="bold"
-                      color={themeColors.secondary}
-                      mr={5}
+                      onClick={handleInviteParticipantsClick}
+                      minWidth={110}
                     >
-                      {formatMessage(messages.inviteLabel)}
-                    </Text>
-                    <Img
-                      clickable
-                      disabled={!sharingPossible}
-                      src={sharingPossible ? mail : mailDisabled}
-                      alt="emails"
-                      data-cy={`share-session-modal-open-button-${index}`}
-                    />
-                  </Row>
+                      <Text
+                        fontSize={13}
+                        clickable
+                        disabled={!sharingPossible}
+                        textAlign="center"
+                        fontWeight="bold"
+                        color={themeColors.secondary}
+                        mr={5}
+                      >
+                        {formatMessage(messages.inviteLabel)}
+                      </Text>
+                      <Img
+                        clickable
+                        disabled={!sharingPossible}
+                        src={sharingPossible ? mail : mailDisabled}
+                        alt="emails"
+                        data-cy={`share-session-modal-open-button-${index}`}
+                      />
+                    </Row>
+                  )}
                 </Tooltip>
                 <Box mb={8}>
                   <Dropdown options={options} clickable id={id} />
                 </Box>
               </Row>
             </Row>
+
             <Row px={62} mb={20}>
               <Divider />
             </Row>
-            {index !== 0 && isSchedulingPossible && (
+
+            {interventionType !== InterventionType.DEFAULT && (
+              <Row px={62} mb={20} display="flex" align="center">
+                <Text id={WCAG_ARIA_LABEL_ID}>
+                  {formatMessage(messages.estimateTime)}
+                </Text>
+                <Input
+                  transparent={false}
+                  aria-labelledby={WCAG_ARIA_LABEL_ID}
+                  value={estimatedTimeValue}
+                  onBlur={handleUpdateEstimatedTime}
+                  mx={5}
+                  width={60}
+                  validator={numericValidator}
+                  placeholder="0"
+                />
+                <Text>{formatMessage(messages.min)}</Text>
+              </Row>
+            )}
+            {isSchedulingPossible && (
               <Row px={62}>
                 <SessionSchedule
                   disabled={disabled}
@@ -249,13 +303,15 @@ function SessionListItem({
                 />
               </Row>
             )}
-            <SessionBranching
-              disabled={disabled}
-              formula={formula}
-              session={session}
-              nextSessionName={nextSessionName}
-              status={settings.formula}
-            />
+            {isSessionBranchingPossible && (
+              <SessionBranching
+                disabled={disabled}
+                formula={formula}
+                session={session}
+                nextSessionName={nextSessionName}
+                status={settings.formula}
+              />
+            )}
           </ToggleableBox>
         </Box>
       )}
@@ -279,6 +335,7 @@ SessionListItem.propTypes = {
   status: PropTypes.string,
   sharedTo: PropTypes.string,
   editSession: PropTypes.func,
+  interventionType: PropTypes.string,
 };
 
 export default injectIntl(SessionListItem);

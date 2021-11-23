@@ -92,7 +92,7 @@ const VirtualGrid = forwardRef(
 );
 
 VirtualGrid.propTypes = {
-  children: PropTypes.object,
+  children: PropTypes.oneOfType([PropTypes.object, PropTypes.func]),
   columnCount: PropTypes.number,
   gutterHeight: PropTypes.number,
   gutterWidth: PropTypes.number,

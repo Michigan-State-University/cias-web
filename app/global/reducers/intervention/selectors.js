@@ -13,9 +13,13 @@ export const makeSelectCacheIntervention = () =>
   createSelector(selectIntervention, (substate) => substate.cache.intervention);
 
 export const makeSelectInterventionStatus = () =>
-  createSelector(selectIntervention, (substate) =>
-    substate.intervention ? substate.intervention.status : null,
+  createSelector(
+    selectIntervention,
+    (substate) => substate.intervention?.status,
   );
+
+export const makeSelectInterventionType = () =>
+  createSelector(selectIntervention, (substate) => substate.intervention?.type);
 
 export const makeSelectInterventionLoader = (name) =>
   createSelector(selectIntervention, ({ loaders }) => loaders[name]);

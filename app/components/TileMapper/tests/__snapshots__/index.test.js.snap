@@ -53,7 +53,7 @@ exports[`<TileMapper /> Should render and match the snapshot - empty 1`] = `
     <h2
       class="c1"
     >
-      Welcome to CIAS! If you request any reports from your sessions, you will be able to find them here.
+      There are no reports from your sessions
     </h2>
   </div>
 </div>

@@ -25,11 +25,11 @@ const TextMessageVariants = ({
 }) => {
   const {
     formatMessage,
-    loaders: { createVariantLoading, fetchVariantsLoading },
+    loaders: { createVariantLoading, fetchVariantsAndPhonesLoading },
     editingPossible,
   } = useContext(TextMessagesContext);
 
-  if (fetchVariantsLoading) return <Loader type="inline" />;
+  if (fetchVariantsAndPhonesLoading) return <Loader type="inline" />;
   return (
     <>
       <Variants

@@ -31,6 +31,9 @@ import {
 } from 'models/Session/QuestionTypes';
 import { Roles } from 'models/User/UserRoles';
 import { archived, closed, draft, published } from 'models/Status/StatusTypes';
+import { UserInterventionStatus } from 'models/UserIntervention/StatusTypes';
+import { UserSessionStatus } from 'models/UserSession/StatusTypes';
+import { TextMessageType } from 'models/TextMessage';
 
 export const scope = 'app.GlobalMessages';
 
@@ -213,6 +216,46 @@ export default defineMessages({
       defaultMessage: 'Archived',
     },
   },
+  userInterventionStatus: {
+    [UserInterventionStatus.READY_TO_START]: {
+      id: `${scope}.${[UserInterventionStatus.READY_TO_START]}`,
+      defaultMessage: 'Ready to start',
+    },
+    [UserInterventionStatus.IN_PROGRESS]: {
+      id: `${scope}.${[UserInterventionStatus.IN_PROGRESS]}`,
+      defaultMessage: 'In progress',
+    },
+    [UserInterventionStatus.COMPLETED]: {
+      id: `${scope}.${[UserInterventionStatus.COMPLETED]}`,
+      defaultMessage: 'Completed',
+    },
+    [UserInterventionStatus.SCHEDULE_PENDING]: {
+      id: `${scope}.${[UserInterventionStatus.SCHEDULE_PENDING]}`,
+      defaultMessage: 'Schedule session pending',
+    },
+    [UserInterventionStatus.NO_ACCESS]: {
+      id: `${scope}.${[UserInterventionStatus.NO_ACCESS]}`,
+      defaultMessage: 'No access',
+    },
+  },
+  userSessionStatus: {
+    [UserSessionStatus.READY_TO_START]: {
+      id: `${scope}.${[UserSessionStatus.READY_TO_START]}`,
+      defaultMessage: 'Ready to start',
+    },
+    [UserSessionStatus.IN_PROGRESS]: {
+      id: `${scope}.${[UserSessionStatus.IN_PROGRESS]}`,
+      defaultMessage: 'In progress',
+    },
+    [UserSessionStatus.COMPLETED]: {
+      id: `${scope}.${[UserSessionStatus.COMPLETED]}`,
+      defaultMessage: 'Completed',
+    },
+    [UserSessionStatus.NOT_AVAILABLE]: {
+      id: `${scope}.${[UserSessionStatus.NOT_AVAILABLE]}`,
+      defaultMessage: 'Not available',
+    },
+  },
   createInterventionError: {
     id: `${scope}.createInterventionError`,
     defaultMessage: `Couldn't create an intervention`,
@@ -270,5 +313,13 @@ export default defineMessages({
   CatMhWrongSettings: {
     id: `${scope}.CatMhWrongSettings`,
     defaultMessage: `Cat-MH license settings need to be properly set up. Please contact an Admin in that matter.`,
+  },
+  [TextMessageType.NORMAL]: {
+    id: `${scope}.${TextMessageType.NORMAL}`,
+    defaultMessage: 'Normal',
+  },
+  [TextMessageType.ALERT]: {
+    id: `${scope}.${TextMessageType.ALERT}`,
+    defaultMessage: 'Alert',
   },
 });

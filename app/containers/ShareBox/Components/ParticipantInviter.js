@@ -23,6 +23,7 @@ const ParticipantInviter = ({
   sendInvite,
   loading,
   disabled,
+  shareBoxType,
 }) => {
   const [emails, setEmails] = useState([]);
 
@@ -51,7 +52,9 @@ const ParticipantInviter = ({
         <ChipsInput
           value={emails}
           setValue={setEmails}
-          placeholder={formatMessage(messages.emailPlaceholder)}
+          placeholder={formatMessage(messages.emailPlaceholder, {
+            type: shareBoxType,
+          })}
         />
         <Box width={140}>
           <Button
@@ -84,6 +87,7 @@ ParticipantInviter.propTypes = {
   sendInvite: PropTypes.func,
   loading: PropTypes.bool,
   disabled: PropTypes.bool,
+  shareBoxType: PropTypes.string,
 };
 
 export default injectIntl(ParticipantInviter);

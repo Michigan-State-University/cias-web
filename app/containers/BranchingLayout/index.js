@@ -51,6 +51,7 @@ function BranchingLayout({
   onAddTarget,
   onUpdateTarget,
   onRemoveTarget,
+  disableBranchingToSession,
 }) {
   const [patternsSize, setPatternSize] = useState(formula.patterns.length);
   const [isOpen, setIsOpen] = useState(false);
@@ -167,6 +168,7 @@ function BranchingLayout({
                   updatePattern={updatePattern}
                   onUpdateTarget={onUpdateTarget}
                   onRemoveTarget={onRemoveTarget}
+                  disableBranchingToSession={disableBranchingToSession}
                 />
               );
             })}
@@ -220,6 +222,7 @@ BranchingLayout.propTypes = {
   includeAllSessions: PropTypes.bool,
   includeCurrentSession: PropTypes.bool,
   isMultiSession: PropTypes.bool,
+  disableBranchingToSession: PropTypes.bool,
 };
 
 BranchingLayout.defaultProps = {

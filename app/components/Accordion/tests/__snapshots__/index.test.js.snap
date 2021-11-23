@@ -94,6 +94,7 @@ exports[`<Accordion /> Should render multiple elements and match the snapshot 1`
   padding: 2px;
   cursor: pointer;
   margin-left: 5px;
+  font-weight: 700;
   color: #2F3850;
 }
 
@@ -143,6 +144,7 @@ exports[`<Accordion /> Should render multiple elements and match the snapshot 1`
               class="c6"
               data-cy="accordion-element-delete-0"
               data-testid="bin-Label0"
+              font-weight="bold"
               title="Delete"
               type="button"
             >
@@ -194,6 +196,7 @@ exports[`<Accordion /> Should render multiple elements and match the snapshot 1`
               class="c6"
               data-cy="accordion-element-delete-1"
               data-testid="bin-Label1"
+              font-weight="bold"
               title="Delete"
               type="button"
             >
@@ -245,6 +248,7 @@ exports[`<Accordion /> Should render multiple elements and match the snapshot 1`
               class="c6"
               data-cy="accordion-element-delete-2"
               data-testid="bin-Label2"
+              font-weight="bold"
               title="Delete"
               type="button"
             >
@@ -349,6 +353,7 @@ exports[`<Accordion /> Should render only one element and match the snapshot 1`]
   padding: 2px;
   cursor: pointer;
   margin-left: 5px;
+  font-weight: 700;
   color: #2F3850;
 }
 
@@ -383,6 +388,7 @@ exports[`<Accordion /> Should render only one element and match the snapshot 1`]
           class="c5"
           data-cy="accordion-element-delete-0"
           data-testid="bin-Label0"
+          font-weight="bold"
           title="Delete"
           type="button"
         >
@@ -515,6 +521,7 @@ exports[`<Accordion /> Should render with one element opened and match the snaps
   padding: 2px;
   cursor: pointer;
   margin-left: 5px;
+  font-weight: 700;
   color: #2F3850;
 }
 
@@ -564,6 +571,7 @@ exports[`<Accordion /> Should render with one element opened and match the snaps
               class="c6"
               data-cy="accordion-element-delete-0"
               data-testid="bin-Label0"
+              font-weight="bold"
               title="Delete"
               type="button"
             >
@@ -615,6 +623,7 @@ exports[`<Accordion /> Should render with one element opened and match the snaps
               class="c6"
               data-cy="accordion-element-delete-1"
               data-testid="bin-Label1"
+              font-weight="bold"
               title="Delete"
               type="button"
             >
@@ -666,6 +675,7 @@ exports[`<Accordion /> Should render with one element opened and match the snaps
               class="c6"
               data-cy="accordion-element-delete-2"
               data-testid="bin-Label2"
+              font-weight="bold"
               title="Delete"
               type="button"
             >

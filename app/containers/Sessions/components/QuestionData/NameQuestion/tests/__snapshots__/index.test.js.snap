@@ -182,6 +182,7 @@ exports[`<NameQuestion /> Should render and match the snapshot 1`] = `
   padding: 2px;
   cursor: not-allowed;
   opacity: 0.7;
+  font-weight: 700;
   color: #2F3850;
   cursor: pointer;
 }
@@ -298,6 +299,7 @@ exports[`<NameQuestion /> Should render and match the snapshot 1`] = `
               aria-label="Play audio"
               class="c9"
               disabled=""
+              font-weight="bold"
               title="Play audio"
               type="button"
             >

@@ -121,7 +121,7 @@ function TeamsList({
           <title>{formatMessage(messages.pageTitle)}</title>
           <meta name="description" content="List of teams" />
         </Helmet>
-        <Box mt={30} width="100%" px="10%">
+        <Box mt={64} width="100%" px="10%">
           <Box display="flex" mb={30}>
             <H1 mr={10}>
               <FormattedMessage {...messages.manageTeams} />

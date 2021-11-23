@@ -156,4 +156,8 @@ export default defineMessages({
     defaultMessage:
       'The test limit has almost been reached. Extend your license to continue to use CAT-MH with this intervention.',
   },
+  inviteToIntervention: {
+    id: `${scope}.inviteToIntervention`,
+    defaultMessage: 'Invite Participants',
+  },
 });

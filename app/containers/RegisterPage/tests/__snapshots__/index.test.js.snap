@@ -114,59 +114,6 @@ exports[`<RegisterPage /> Should render and match the researcher 1`] = `
   height: 46px;
 }
 
-.c6 {
-  display: -webkit-box;
-  display: -webkit-flex;
-  display: -ms-flexbox;
-  display: flex;
-  -webkit-flex-direction: column;
-  -ms-flex-direction: column;
-  flex-direction: column;
-  width: 100%;
-  -webkit-align-content: flex-start;
-  -ms-flex-line-pack: start;
-  align-content: flex-start;
-  -webkit-align-items: flex-start;
-  -webkit-box-align: flex-start;
-  -ms-flex-align: flex-start;
-  align-items: flex-start;
-}
-
-.c9 {
-  display: -webkit-box;
-  display: -webkit-flex;
-  display: -ms-flexbox;
-  display: flex;
-  -webkit-flex-direction: column;
-  -ms-flex-direction: column;
-  flex-direction: column;
-  width: 100%;
-  margin-bottom: 20px;
-  margin-right: 20px;
-}
-
-.c13 {
-  display: -webkit-box;
-  display: -webkit-flex;
-  display: -ms-flexbox;
-  display: flex;
-  -webkit-flex-direction: column;
-  -ms-flex-direction: column;
-  flex-direction: column;
-  width: 100%;
-  margin-bottom: 20px;
-}
-
-.c7 {
-  margin: 0;
-  font-family: DM Sans;
-  font-size: 25px;
-  line-height: 130%;
-  margin-bottom: 40px;
-  font-size: 23px;
-  color: #2F3850;
-}
-
 .c8 {
   display: -webkit-box;
   display: -webkit-flex;
@@ -219,6 +166,59 @@ exports[`<RegisterPage /> Should render and match the researcher 1`] = `
   -webkit-box-align: center;
   -ms-flex-align: center;
   align-items: center;
+}
+
+.c6 {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-flex-direction: column;
+  -ms-flex-direction: column;
+  flex-direction: column;
+  width: 100%;
+  -webkit-align-content: flex-start;
+  -ms-flex-line-pack: start;
+  align-content: flex-start;
+  -webkit-align-items: flex-start;
+  -webkit-box-align: flex-start;
+  -ms-flex-align: flex-start;
+  align-items: flex-start;
+}
+
+.c9 {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-flex-direction: column;
+  -ms-flex-direction: column;
+  flex-direction: column;
+  width: 100%;
+  margin-bottom: 20px;
+  margin-right: 20px;
+}
+
+.c13 {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-flex-direction: column;
+  -ms-flex-direction: column;
+  flex-direction: column;
+  width: 100%;
+  margin-bottom: 20px;
+}
+
+.c7 {
+  margin: 0;
+  font-family: DM Sans;
+  font-size: 25px;
+  line-height: 130%;
+  margin-bottom: 40px;
+  font-size: 23px;
+  color: #2F3850;
 }
 
 .c10 {
@@ -783,71 +783,6 @@ exports[`<RegisterPage /> Should render and match the snapshot for participant 1
   height: 46px;
 }
 
-.c25 {
-  outline: none;
-  border: none;
-  background: transparent;
-  font-weight: bold;
-  font-size: 13px;
-  line-height: 17px;
-  padding: 2px;
-  cursor: pointer;
-  color: rgba(183,39,234,1);
-}
-
-.c6 {
-  display: -webkit-box;
-  display: -webkit-flex;
-  display: -ms-flexbox;
-  display: flex;
-  -webkit-flex-direction: column;
-  -ms-flex-direction: column;
-  flex-direction: column;
-  width: 100%;
-  -webkit-align-content: flex-start;
-  -ms-flex-line-pack: start;
-  align-content: flex-start;
-  -webkit-align-items: flex-start;
-  -webkit-box-align: flex-start;
-  -ms-flex-align: flex-start;
-  align-items: flex-start;
-}
-
-.c9 {
-  display: -webkit-box;
-  display: -webkit-flex;
-  display: -ms-flexbox;
-  display: flex;
-  -webkit-flex-direction: column;
-  -ms-flex-direction: column;
-  flex-direction: column;
-  width: 100%;
-  margin-bottom: 20px;
-  margin-right: 20px;
-}
-
-.c13 {
-  display: -webkit-box;
-  display: -webkit-flex;
-  display: -ms-flexbox;
-  display: flex;
-  -webkit-flex-direction: column;
-  -ms-flex-direction: column;
-  flex-direction: column;
-  width: 100%;
-  margin-bottom: 20px;
-}
-
-.c7 {
-  margin: 0;
-  font-family: DM Sans;
-  font-size: 25px;
-  line-height: 130%;
-  margin-bottom: 40px;
-  font-size: 23px;
-  color: #2F3850;
-}
-
 .c8 {
   display: -webkit-box;
   display: -webkit-flex;
@@ -917,6 +852,71 @@ exports[`<RegisterPage /> Should render and match the snapshot for participant 1
   justify-content: center;
   justify-items: center;
   width: 100%;
+}
+
+.c25 {
+  outline: none;
+  border: none;
+  background: transparent;
+  font-weight: bold;
+  font-size: 13px;
+  line-height: 17px;
+  padding: 2px;
+  cursor: pointer;
+  color: rgba(183,39,234,1);
+}
+
+.c6 {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-flex-direction: column;
+  -ms-flex-direction: column;
+  flex-direction: column;
+  width: 100%;
+  -webkit-align-content: flex-start;
+  -ms-flex-line-pack: start;
+  align-content: flex-start;
+  -webkit-align-items: flex-start;
+  -webkit-box-align: flex-start;
+  -ms-flex-align: flex-start;
+  align-items: flex-start;
+}
+
+.c9 {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-flex-direction: column;
+  -ms-flex-direction: column;
+  flex-direction: column;
+  width: 100%;
+  margin-bottom: 20px;
+  margin-right: 20px;
+}
+
+.c13 {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-flex-direction: column;
+  -ms-flex-direction: column;
+  flex-direction: column;
+  width: 100%;
+  margin-bottom: 20px;
+}
+
+.c7 {
+  margin: 0;
+  font-family: DM Sans;
+  font-size: 25px;
+  line-height: 130%;
+  margin-bottom: 40px;
+  font-size: 23px;
+  color: #2F3850;
 }
 
 .c10 {

@@ -138,6 +138,7 @@ export function InterventionPage({
       display="flex"
       direction="column"
       overflow="clip"
+      pt={54}
     >
       {!user.feedbackCompleted && FeedbackNotification}
 
@@ -153,7 +154,7 @@ export function InterventionPage({
       )}
 
       <InitialRow fluid>
-        <H1 mt={35}>
+        <H1>
           <FormattedMessage {...messages.myInterventions} />
         </H1>
       </InitialRow>

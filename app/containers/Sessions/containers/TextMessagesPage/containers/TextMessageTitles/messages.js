@@ -4,7 +4,8 @@
  * This contains all the text for the TextMessageTiles container.
  */
 import { defineMessages } from 'react-intl';
-import { MESSAGES_SCHEDULE_OPTIONS } from 'models/TextMessage';
+
+import { TextMessageScheduleOption } from 'models/TextMessage';
 
 export const scope = 'app.containers.TextMessageTitles';
 
@@ -21,12 +22,16 @@ export default defineMessages({
     id: `${scope}.defaultName`,
     defaultMessage: 'One-way message',
   },
-  [MESSAGES_SCHEDULE_OPTIONS.afterFill]: {
-    id: `${scope}.${MESSAGES_SCHEDULE_OPTIONS.afterFill}`,
+  [TextMessageScheduleOption.AFTER_FILL]: {
+    id: `${scope}.${TextMessageScheduleOption.AFTER_FILL}`,
     defaultMessage: 'Send after the session is completed',
   },
-  [MESSAGES_SCHEDULE_OPTIONS.daysAfterFill]: {
-    id: `${scope}.${MESSAGES_SCHEDULE_OPTIONS.daysAfterFill}`,
+  [TextMessageScheduleOption.DAYS_AFTER_FILL]: {
+    id: `${scope}.${TextMessageScheduleOption.DAYS_AFTER_FILL}`,
     defaultMessage: 'Send {days} days after the session is completed',
+  },
+  alertMessageDescription: {
+    id: `${scope}.alertMessageDescription`,
+    defaultMessage: 'Send an alert to the specified number.',
   },
 });

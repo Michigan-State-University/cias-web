@@ -11,4 +11,8 @@ export default defineMessages({
     id: `${scope}.stopButtonLabel`,
     defaultMessage: 'Stop audio',
   },
+  clearFiltersLabel: {
+    id: `${scope}.clearFiltersLabel`,
+    defaultMessage: `Reset filters to default values`,
+  },
 });

@@ -72,8 +72,9 @@ import {
   getQuestionsRequest,
 } from 'global/reducers/questions';
 
-import OrganizationShareBox from 'containers/ShareBox/OrganizationShareBox';
 import SettingsPanel from 'containers/SettingsPanel';
+import TranslateInterventionModal from 'containers/TranslateInterventionModal/index';
+import { ShareBox, ShareBoxType } from 'containers/ShareBox';
 
 import Modal, {
   ConfirmationModal,
@@ -84,13 +85,11 @@ import Loader from 'components/Loader';
 import Column from 'components/Column';
 import ErrorAlert from 'components/ErrorAlert';
 import Row from 'components/Row';
-import ShareBox from 'containers/ShareBox';
 import Spinner from 'components/Spinner';
 import AppContainer from 'components/Container';
 import Icon from 'components/Icon';
 import Tooltip from 'components/Tooltip';
 
-import TranslateInterventionModal from 'containers/TranslateInterventionModal/index';
 import Header from './Header';
 import { DraggedTest } from './styled';
 import interventionDetailsPageSagas from './saga';
@@ -156,6 +155,7 @@ export function InterventionDetailsPage({
     catMhPool,
     createdCatMhSessionCount,
     licenseType,
+    type,
   } = intervention || {};
 
   const testsLeft = catMhPool - createdCatMhSessionCount;
@@ -210,12 +210,29 @@ export function InterventionDetailsPage({
       confirmAction: handleArchiveIntervention,
     },
   });
+
   const { openModal: openCatMhModal, Modal: CatMhModal } = useModal({
     type: ModalType.Modal,
     modalContentRenderer: (props) => <CatMhAccessModal {...props} />,
     props: {
       title: formatMessage(messages.catMhSettingsModalTitle),
     },
+  });
+
+  const {
+    openModal: openInterventionInviteModal,
+    Modal: InterventionInviteModal,
+  } = useModal({
+    type: ModalType.Modal,
+    props: {
+      title: formatMessage(messages.participantShareModalTitle),
+    },
+    modalContentRenderer: () => (
+      <ShareBox
+        type={ShareBoxType.INTERVENTION}
+        organizationId={organizationId}
+      />
+    ),
   });
 
   const canCreateCatSession = useMemo(
@@ -366,7 +383,7 @@ export function InterventionDetailsPage({
                     }
                     setParticipantShareModalVisible(true);
                   };
-                  const nextIntervention = sessions.find(
+                  const nextSession = sessions.find(
                     ({ position }) => position === session.position + 1,
                   );
                   return (
@@ -388,10 +405,9 @@ export function InterventionDetailsPage({
                           setDeleteConfirmationSessionId(sessionId)
                         }
                         editSession={editSession}
-                        nextSessionName={
-                          nextIntervention ? nextIntervention.name : null
-                        }
+                        nextSessionName={nextSession ? nextSession.name : null}
                         status={status}
+                        interventionType={type}
                       />
                     </Row>
                   );
@@ -465,11 +481,13 @@ export function InterventionDetailsPage({
           onClose={() => setParticipantShareModalVisible(false)}
           visible={participantShareModalVisible}
         >
-          {!organizationId && <ShareBox />}
-          {organizationId && (
-            <OrganizationShareBox organizationId={organizationId} />
-          )}
+          <ShareBox
+            type={ShareBoxType.SESSION}
+            organizationId={organizationId}
+          />
         </Modal>
+
+        <InterventionInviteModal />
 
         <Modal
           title={formatMessage(messages.assignOrganization)}
@@ -494,6 +512,9 @@ export function InterventionDetailsPage({
           status={status}
           organizationId={organizationId}
           canAccessCsv={canAccessCsv}
+          openInterventionInviteModal={openInterventionInviteModal}
+          interventionType={type}
+          sharingPossible={sharingPossible}
         />
 
         <GRow>

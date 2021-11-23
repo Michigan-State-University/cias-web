@@ -18,6 +18,8 @@ const ALLOWED_SESSION_DELETE = [draft];
 
 const ALLOWED_REPORT_TEMPLATE_EDIT = [draft];
 
+const ALLOWED_INTERVENTION_TYPE_EDIT = [draft];
+
 export const canEdit = (interventionStatus) =>
   ALLOWED_EDIT.includes(interventionStatus);
 
@@ -44,3 +46,6 @@ export const canDeleteSession = (interventionStatus) =>
 
 export const canEditReportTemplate = (interventionStatus) =>
   ALLOWED_REPORT_TEMPLATE_EDIT.includes(interventionStatus);
+
+export const canEditInterventionType = (interventionStatus) =>
+  ALLOWED_INTERVENTION_TYPE_EDIT.includes(interventionStatus);

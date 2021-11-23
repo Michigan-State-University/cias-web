@@ -283,6 +283,7 @@ exports[`<UserDetails /> Should render and match the snapshot 1`] = `
   height: auto;
   display: block;
   border-radius: 5px;
+  opacity: 0.5;
 }
 
 .c25 {
@@ -355,8 +356,8 @@ exports[`<UserDetails /> Should render and match the snapshot 1`] = `
   font-family: DM Sans;
   font-size: 25px;
   line-height: 130%;
-  margin-top: 25px;
-  margin-bottom: 25px;
+  margin-top: 16px;
+  margin-bottom: 24px;
   color: #2F3850;
 }
 
@@ -481,7 +482,7 @@ exports[`<UserDetails /> Should render and match the snapshot 1`] = `
 }
 
 .c1 {
-  padding: 60px 160px;
+  padding: 64px 160px;
 }
 
 @media only screen and (min-width:768px) {
@@ -600,19 +601,19 @@ exports[`<UserDetails /> Should render and match the snapshot 1`] = `
 
 @media only screen and (max-width:1360px) {
   .c1 {
-    padding: 30px 80px;
+    padding: 64px 80px;
   }
 }
 
 @media only screen and (max-width:768px) {
   .c1 {
-    padding: 15px 40px;
+    padding: 64px 40px;
   }
 }
 
 @media only screen and (max-width:480px) {
   .c1 {
-    padding: 15px 20px;
+    padding: 64px 20px;
   }
 }
 
@@ -829,6 +830,7 @@ exports[`<UserDetails /> Should render and match the snapshot 1`] = `
                   <div
                     class="c34"
                     data-testid="select"
+                    disabled=""
                   >
                     <div
                       class=" css-14jk2my-container"

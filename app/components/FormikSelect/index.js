@@ -47,6 +47,7 @@ function FormikSelect({
       <Select
         isOptionDisabled={disabled}
         data-testid="select"
+        disabled={disabled}
         selectProps={{
           options,
           value,

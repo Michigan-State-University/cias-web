@@ -28,6 +28,7 @@ const Target = ({
   invalidPercentage,
   onAddTarget,
   isOnlyTarget,
+  disableBranchingToSession,
 }) => {
   const onTargetClick = (e) => {
     if (onAddTarget) {
@@ -100,6 +101,7 @@ const Target = ({
               setTargetChooserOpen(-1);
               onUpdateTarget(value);
             }}
+            disableBranchingToSession={disableBranchingToSession}
           />
         </ArrowDropdown>
       </Box>
@@ -133,6 +135,7 @@ Target.propTypes = {
   setTargetChooserOpen: PropTypes.func,
   onDeleteTarget: PropTypes.func,
   onAddTarget: PropTypes.func,
+  disableBranchingToSession: PropTypes.bool,
 };
 
 export default Target;

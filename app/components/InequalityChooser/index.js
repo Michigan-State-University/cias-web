@@ -40,7 +40,7 @@ const InequalityChooser = ({
 
   useEffect(() => {
     if (inequalityValue) {
-      const newNumericValue = splitAndKeep(inequalityValue, signs)[0];
+      const newNumericValue = splitAndKeep(inequalityValue, signs)[0] ?? '';
       const newInequalitySign = inequalityValue.slice(
         0,
         inequalityValue.length - newNumericValue.length,
@@ -51,10 +51,14 @@ const InequalityChooser = ({
   }, [inequalityValue]);
 
   useEffect(() => {
-    if (inequalitySign && numericValue) {
-      onSuccessfulChange(`${inequalitySign.value}${numericValue}`);
-    }
-  }, [inequalitySign, numericValue]);
+    if (!disabled && inequalitySign && numericValue) handleSignUpdate();
+  }, [inequalitySign, numericValue, disabled]);
+
+  const handleSignUpdate = () => {
+    const newValue = `${inequalitySign.value}${numericValue}`;
+
+    if (newValue !== inequalityValue) onSuccessfulChange(newValue);
+  };
 
   const signMapper = signs.map(populateSelectOption);
 

@@ -5,16 +5,17 @@ import { Col as GCol, Row as GRow } from 'react-grid-system';
 import dayjs from 'dayjs';
 import customParseFormat from 'dayjs/plugin/customParseFormat';
 
+import {
+  TextMessageScheduleFrequency,
+  TextMessageScheduleOption,
+} from 'models/TextMessage';
+
 import Selector from 'components/Selector';
 import Column from 'components/Column';
 import Row from 'components/Row';
 import Text from 'components/Text';
 import ApprovableInput from 'components/Input/ApprovableInput';
 
-import {
-  MESSAGES_SCHEDULE_OPTIONS,
-  MESSAGES_SCHEDULE_FREQUENCIES,
-} from 'models/TextMessage/constants';
 import { numericValidator } from 'utils/validators';
 import { themeColors } from 'theme';
 
@@ -44,7 +45,7 @@ const TextMessageScheduling = ({
 
   const handleChangeFrequencySettings = (updatedSettings) => {
     if (
-      updatedSettings.frequency === MESSAGES_SCHEDULE_FREQUENCIES.once ||
+      updatedSettings.frequency === TextMessageScheduleFrequency.ONCE ||
       (updatedSettings.frequency && updatedSettings.endAt)
     ) {
       onChangeFrequency(updatedSettings);
@@ -69,35 +70,35 @@ const TextMessageScheduling = ({
   };
 
   const disableDatePicker =
-    frequencySettings.frequency === MESSAGES_SCHEDULE_FREQUENCIES.once;
+    frequencySettings.frequency === TextMessageScheduleFrequency.ONCE;
 
   const ALL_SCHEDULE_OPTIONS = {
-    [MESSAGES_SCHEDULE_OPTIONS.afterFill]: {
-      id: MESSAGES_SCHEDULE_OPTIONS.afterFill,
-      label: formatMessage(messages[MESSAGES_SCHEDULE_OPTIONS.afterFill]),
+    [TextMessageScheduleOption.AFTER_FILL]: {
+      id: TextMessageScheduleOption.AFTER_FILL,
+      label: formatMessage(messages[TextMessageScheduleOption.AFTER_FILL]),
     },
-    [MESSAGES_SCHEDULE_OPTIONS.daysAfterFill]: {
-      id: MESSAGES_SCHEDULE_OPTIONS.daysAfterFill,
-      label: formatMessage(messages[MESSAGES_SCHEDULE_OPTIONS.daysAfterFill]),
+    [TextMessageScheduleOption.DAYS_AFTER_FILL]: {
+      id: TextMessageScheduleOption.DAYS_AFTER_FILL,
+      label: formatMessage(messages[TextMessageScheduleOption.DAYS_AFTER_FILL]),
     },
   };
 
   const ALL_FREQUENCIES = {
-    [MESSAGES_SCHEDULE_FREQUENCIES.once]: {
-      id: MESSAGES_SCHEDULE_FREQUENCIES.once,
-      label: formatMessage(messages[MESSAGES_SCHEDULE_FREQUENCIES.once]),
+    [TextMessageScheduleFrequency.ONCE]: {
+      id: TextMessageScheduleFrequency.ONCE,
+      label: formatMessage(messages[TextMessageScheduleFrequency.ONCE]),
     },
-    [MESSAGES_SCHEDULE_FREQUENCIES.onceDay]: {
-      id: MESSAGES_SCHEDULE_FREQUENCIES.onceDay,
-      label: formatMessage(messages[MESSAGES_SCHEDULE_FREQUENCIES.onceDay]),
+    [TextMessageScheduleFrequency.ONCE_DAY]: {
+      id: TextMessageScheduleFrequency.ONCE_DAY,
+      label: formatMessage(messages[TextMessageScheduleFrequency.ONCE_DAY]),
     },
-    [MESSAGES_SCHEDULE_FREQUENCIES.onceWeek]: {
-      id: MESSAGES_SCHEDULE_FREQUENCIES.onceWeek,
-      label: formatMessage(messages[MESSAGES_SCHEDULE_FREQUENCIES.onceWeek]),
+    [TextMessageScheduleFrequency.ONCE_WEEK]: {
+      id: TextMessageScheduleFrequency.ONCE_WEEK,
+      label: formatMessage(messages[TextMessageScheduleFrequency.ONCE_WEEK]),
     },
-    [MESSAGES_SCHEDULE_FREQUENCIES.onceMonth]: {
-      id: MESSAGES_SCHEDULE_FREQUENCIES.onceMonth,
-      label: formatMessage(messages[MESSAGES_SCHEDULE_FREQUENCIES.onceMonth]),
+    [TextMessageScheduleFrequency.ONCE_MONTH]: {
+      id: TextMessageScheduleFrequency.ONCE_MONTH,
+      label: formatMessage(messages[TextMessageScheduleFrequency.ONCE_MONTH]),
     },
   };
   return (
@@ -111,7 +112,7 @@ const TextMessageScheduling = ({
           disabled={disabled}
         />
       </Row>
-      {selectedOption === MESSAGES_SCHEDULE_OPTIONS.daysAfterFill && (
+      {selectedOption === TextMessageScheduleOption.DAYS_AFTER_FILL && (
         <Row mt={10} align="center">
           <Text fontSize={15}>{formatMessage(messages.send)}</Text>
           <StyledInputWrapper>

@@ -101,4 +101,12 @@ export default defineMessages({
     id: `${scope}.textBoxQuestionRemainingCharacters`,
     defaultMessage: 'Remaining characters: {remaining}',
   },
+  goBackToModules: {
+    id: `${scope}.backToModules`,
+    defaultMessage: '← Back to modules view',
+  },
+  goToNextModule: {
+    id: `${scope}.goToNextModule`,
+    defaultMessage: 'Go to next module',
+  },
 });

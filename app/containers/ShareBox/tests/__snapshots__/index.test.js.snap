@@ -1,6 +1,61 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`<ShareBox /> Should render and match the snapshot 1`] = `
+.c0 {
+  width: auto;
+  height: auto;
+  display: block;
+  border-radius: 5px;
+  width: 500px;
+  height: -webkit-fit-content;
+  height: -moz-fit-content;
+  height: fit-content;
+  margin-top: 20px;
+}
+
+.c1 {
+  width: auto;
+  height: auto;
+  display: block;
+  border-radius: 5px;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-align-content: center;
+  -ms-flex-line-pack: center;
+  align-content: center;
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+}
+
+.c11 {
+  width: auto;
+  height: auto;
+  display: block;
+  border-radius: 5px;
+  width: 140px;
+}
+
+.c21 {
+  width: auto;
+  height: auto;
+  display: block;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.c3 {
+  margin: 0;
+  font-family: DM Sans;
+  font-size: 18px;
+  line-height: 130%;
+  margin-left: 15px;
+  color: #2F3850;
+}
+
 .c4 {
   display: -webkit-box;
   display: -webkit-flex;
@@ -170,52 +225,6 @@ exports[`<ShareBox /> Should render and match the snapshot 1`] = `
 
 .c27:hover {
   background-color: #E9F1FB;
-}
-
-.c0 {
-  width: auto;
-  height: auto;
-  display: block;
-  border-radius: 5px;
-  width: 500px;
-  height: -webkit-fit-content;
-  height: -moz-fit-content;
-  height: fit-content;
-  margin-top: 20px;
-}
-
-.c1 {
-  width: auto;
-  height: auto;
-  display: block;
-  border-radius: 5px;
-  display: -webkit-box;
-  display: -webkit-flex;
-  display: -ms-flexbox;
-  display: flex;
-  -webkit-align-content: center;
-  -ms-flex-line-pack: center;
-  align-content: center;
-  -webkit-align-items: center;
-  -webkit-box-align: center;
-  -ms-flex-align: center;
-  align-items: center;
-}
-
-.c11 {
-  width: auto;
-  height: auto;
-  display: block;
-  border-radius: 5px;
-  width: 140px;
-}
-
-.c21 {
-  width: auto;
-  height: auto;
-  display: block;
-  border-radius: 5px;
-  cursor: pointer;
 }
 
 .c22 {
@@ -395,15 +404,6 @@ exports[`<ShareBox /> Should render and match the snapshot 1`] = `
   min-width: 30px;
 }
 
-.c3 {
-  margin: 0;
-  font-family: DM Sans;
-  font-size: 18px;
-  line-height: 130%;
-  margin-left: 15px;
-  color: #2F3850;
-}
-
 @media only screen and (min-width:768px) {
 
 }
@@ -581,7 +581,7 @@ exports[`<ShareBox /> Should render and match the snapshot 1`] = `
               color="#B727EA"
               font-weight="bold"
             >
-              Copy link to start with this session externaly
+              Copy link to start with this session externally
             </p>
           </div>
         </div>

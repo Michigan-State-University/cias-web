@@ -7,6 +7,22 @@ export const getSessionMapUserPreviewUrl = (userSessionId: string): string => {
   return `${sessionUrl}/map?userSessionId=${userSessionId}`;
 };
 
+export const getNextSessionUrl = (sessionId: string): string => {
+  const {
+    location: { pathname },
+  } = window;
+
+  return pathname.replace(/\/sessions\/.*/, `/sessions/${sessionId}/fill`);
+};
+
+export const getBackToModulesUrl = (): string => {
+  const {
+    location: { pathname },
+  } = window;
+
+  return pathname.replace(/\/sessions\/.*/, '/invite');
+};
+
 const generateGridCellId = (prefix: string, index: number) =>
   `${prefix}-${index}`;
 

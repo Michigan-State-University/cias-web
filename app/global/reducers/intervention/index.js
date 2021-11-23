@@ -12,7 +12,6 @@ export {
   reorderSessionList,
   copySessionRequest,
   changeCurrentSession,
-  changeAccessSettingRequest,
   enableUserAccessRequest,
   fetchUsersWithAccessRequest,
   revokeUserAccessRequest,
@@ -26,6 +25,10 @@ export {
   deleteInterventionLogoRequest,
   updateInterventionLogoRequest,
   translateInterventionRequest,
+  addAttachmentRequest,
+  sendInterventionInviteRequest,
+  resendInterventionInviteRequest,
+  deleteAttachmentRequest,
 } from './actions';
 export { interventionReducer } from './reducer';
 export {
@@ -45,7 +48,6 @@ export {
   fetchInterventionSaga,
   copySessionSaga,
   reorderSessionsSaga,
-  changeAccessSettingSaga,
   giveUserAccessSaga,
   fetchUsersWithAccessSaga,
   revokeUserAccessSaga,
@@ -56,6 +58,10 @@ export {
   externalCopySessionSaga,
   interventionLogoSaga,
   translateInterventionSaga,
+  addInterventionAttachmentsSaga,
+  deleteInterventionAttachmentSaga,
+  sendInterventionInviteSaga,
+  resendInterventionInviteSaga,
 } from './sagas';
 
 export {

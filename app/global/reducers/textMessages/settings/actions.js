@@ -6,6 +6,8 @@ import {
   CHANGE_FORMULA_VALUE,
   CHANGE_TILE_NAME,
   CHANGE_FORMULA_USED,
+  CHANGE_TYPE,
+  CHANGE_INCLUDED_DATA,
 } from './constants';
 
 export const changeSchedulingType = (value) =>
@@ -47,4 +49,16 @@ export const changeNoFormulaText = (value) =>
   updateTextMessageSettingsRequest({
     type: CHANGE_FORMULA_USED,
     data: { value, field: 'noFormulaText' },
+  });
+
+export const changeType = (value) =>
+  updateTextMessageSettingsRequest({
+    type: CHANGE_TYPE,
+    data: { value, field: 'type' },
+  });
+
+export const changeIncludedData = (value) =>
+  updateTextMessageSettingsRequest({
+    type: CHANGE_INCLUDED_DATA,
+    data: { value },
   });

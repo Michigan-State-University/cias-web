@@ -10,8 +10,9 @@ import { IntlProvider } from 'react-intl';
 import { Provider } from 'react-redux';
 import { createStore } from 'redux';
 
-import ShareBox from '../index';
 import { DEFAULT_LOCALE } from '../../../i18n';
+import ShareBox from '../index';
+import { ShareBoxType } from '../types';
 
 describe('<ShareBox />', () => {
   const reducer = (state) => state;
@@ -48,7 +49,7 @@ describe('<ShareBox />', () => {
     render(
       <Provider store={store}>
         <IntlProvider locale={DEFAULT_LOCALE}>
-          <ShareBox />
+          <ShareBox type={ShareBoxType.SESSION} />
         </IntlProvider>
       </Provider>,
     );
@@ -59,7 +60,7 @@ describe('<ShareBox />', () => {
     const { container } = render(
       <Provider store={store}>
         <IntlProvider locale={DEFAULT_LOCALE}>
-          <ShareBox />
+          <ShareBox type={ShareBoxType.SESSION} />
         </IntlProvider>
       </Provider>,
     );

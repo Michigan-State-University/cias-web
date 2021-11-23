@@ -23,6 +23,7 @@ describe('<FinishScreen />', () => {
   const defaultProps = {
     selectAnswer: jest.fn(),
     formatMessage,
+    question: {},
   };
 
   const initialState = {

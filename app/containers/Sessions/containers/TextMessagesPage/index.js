@@ -9,6 +9,7 @@ import { useIntl } from 'react-intl';
 import { Helmet } from 'react-helmet';
 
 import Row from 'components/Row';
+import { Filters } from 'components/Filters';
 
 import {
   textMessagesReducer,
@@ -20,6 +21,9 @@ import {
   makeSelectSelectedMessageId,
   changeSelectedMessageId,
   makeSelectSelectedMessage,
+  makeSelectFilters,
+  INITIAL_FILTERS,
+  setFiltersAction,
 } from 'global/reducers/textMessages';
 import {
   makeSelectInterventionStatus,
@@ -27,6 +31,11 @@ import {
   fetchInterventionSaga,
   fetchInterventionRequest,
 } from 'global/reducers/intervention';
+import {
+  getSessionRequest,
+  getSessionSaga,
+  sessionReducer,
+} from 'global/reducers/session';
 
 import { canEdit } from 'models/Status/statusPermissions';
 
@@ -48,16 +57,23 @@ const TextMessagingPage = ({
   selectedMessage,
   status,
   fetchIntervention,
+  fetchSession,
+  filters,
+  setFilters,
 }) => {
   const { formatMessage } = useIntl();
 
   useEffect(() => {
     fetchTextMessages(sessionId);
-  }, [sessionId]);
+  }, [filters, sessionId]);
 
   useEffect(() => {
     fetchIntervention(interventionId);
   }, [interventionId]);
+
+  useEffect(() => {
+    fetchSession({ sessionId, interventionId });
+  }, [interventionId, sessionId]);
 
   const editingPossible = canEdit(status);
   return (
@@ -81,6 +97,12 @@ const TextMessagingPage = ({
 
       <Row maxHeigh="100%" style={{ justifyContent: 'center' }}>
         <Col md={8}>
+          <Filters
+            initialFilters={INITIAL_FILTERS}
+            filters={filters}
+            onChange={setFilters}
+            style={{ marginLeft: 20, marginTop: 40 }}
+          />
           <TextMessageTiles />
         </Col>
         {selectedMessageId && selectedMessage && (
@@ -104,9 +126,13 @@ TextMessagingPage.propTypes = {
   selectedMessage: PropTypes.object,
   status: PropTypes.string,
   fetchIntervention: PropTypes.func,
+  fetchSession: PropTypes.func,
+  setFilters: PropTypes.func,
+  filters: PropTypes.arrayOf(PropTypes.object),
 };
 
 const mapStateToProps = createStructuredSelector({
+  filters: makeSelectFilters(),
   textMessages: makeSelectTextMessages(),
   selectedMessageId: makeSelectSelectedMessageId(),
   selectedMessage: makeSelectSelectedMessage(),
@@ -119,6 +145,8 @@ const mapDispatchToProps = {
   fetchTextMessages: fetchTextMessagesRequest,
   changeSelectedId: changeSelectedMessageId,
   fetchIntervention: fetchInterventionRequest,
+  fetchSession: getSessionRequest,
+  setFilters: setFiltersAction,
 };
 
 const withConnect = connect(mapStateToProps, mapDispatchToProps);
@@ -127,7 +155,9 @@ export default compose(
   withConnect,
   injectReducer({ key: 'textMessages', reducer: textMessagesReducer }),
   injectReducer({ key: 'intervention', reducer: interventionReducer }),
+  injectReducer({ key: 'session', reducer: sessionReducer }),
   injectSaga({ key: 'textMessagesSaga', saga: allTextMessagesSagas }),
   injectSaga({ key: 'fetchIntervention', saga: fetchInterventionSaga }),
+  injectSaga({ key: 'getSession', saga: getSessionSaga }),
   memo,
 )(TextMessagingPage);

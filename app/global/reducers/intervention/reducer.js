@@ -31,9 +31,6 @@ import {
   CHANGE_CURRENT_SESSION,
   REORDER_SESSION_LIST_SUCCESS,
   REORDER_SESSION_LIST_ERROR,
-  CHANGE_ACCESS_SETTING_REQUEST,
-  CHANGE_ACCESS_SETTING_SUCCESS,
-  CHANGE_ACCESS_SETTING_ERROR,
   ENABLE_USER_ACCESS_REQUEST,
   ENABLE_USER_ACCESS_SUCCESS,
   ENABLE_USER_ACCESS_ERROR,
@@ -71,6 +68,14 @@ import {
   TRANSLATE_INTERVENTION_REQUEST,
   TRANSLATE_INTERVENTION_SUCCESS,
   TRANSLATE_INTERVENTION_ERROR,
+  SEND_INTERVENTION_INVITE_SUCCESS,
+  SEND_INTERVENTION_INVITE_REQUEST,
+  SEND_INTERVENTION_INVITE_ERROR,
+  RESEND_INTERVENTION_INVITE_REQUEST,
+  ADD_INTERVENTION_ATTACHMENTS_SUCCESS,
+  DELETE_INTERVENTION_ATTACHMENT_SUCCESS,
+  ADD_INTERVENTION_ATTACHMENTS_REQUEST,
+  ADD_INTERVENTION_ATTACHMENTS_ERROR,
 } from './constants';
 
 export const initialState = {
@@ -94,8 +99,14 @@ export const initialState = {
       id: null,
       email: null,
     },
+    sendInterventionLoading: false,
+    interventionEmailLoading: {
+      id: null,
+      email: null,
+    },
     logoLoading: false,
     translateInterventionLoading: false,
+    addAttachmentsLoading: false,
   },
   errors: {
     fetchInterventionError: null,
@@ -108,7 +119,7 @@ export const initialState = {
   },
 };
 
-const findInterventionIndex = (intervention, sessionId) =>
+const findSessionIndex = (intervention, sessionId) =>
   intervention.sessions.findIndex(({ id }) => id === sessionId);
 
 /* eslint-disable default-case, no-param-reassign */
@@ -253,16 +264,6 @@ export const interventionReducer = (state = initialState, action) =>
       case REORDER_SESSION_LIST_ERROR:
         draft.intervention = state.cache.intervention;
         break;
-      case CHANGE_ACCESS_SETTING_REQUEST:
-        draft.intervention.sharedTo = action.payload.setting;
-        draft.cache.intervention = state.intervention;
-        break;
-      case CHANGE_ACCESS_SETTING_SUCCESS:
-        draft.cache.intervention = draft.intervention;
-        break;
-      case CHANGE_ACCESS_SETTING_ERROR:
-        draft.intervention = state.cache.intervention;
-        break;
       case ENABLE_USER_ACCESS_REQUEST:
         draft.loaders.enableAccessLoading = true;
         break;
@@ -342,10 +343,7 @@ export const interventionReducer = (state = initialState, action) =>
           shouldNotUpdateStore,
         } = action.payload;
 
-        const sessionIndex = findInterventionIndex(
-          state.intervention,
-          sessionId,
-        );
+        const sessionIndex = findSessionIndex(state.intervention, sessionId);
 
         if (sessionIndex !== -1) {
           draft.loaders.sendSessionLoading = true;
@@ -381,6 +379,42 @@ export const interventionReducer = (state = initialState, action) =>
       case RESEND_SESSION_INVITE_REQUEST:
         draft.cache.intervention = state.intervention;
         draft.loaders.sessionEmailLoading = {
+          ...action.payload,
+        };
+        break;
+
+      case SEND_INTERVENTION_INVITE_REQUEST: {
+        const { emails: payloadEmails, shouldNotUpdateStore } = action.payload;
+
+        draft.loaders.sendInterventionLoading = true;
+        const mappedEmails = payloadEmails.map((email) => ({
+          email,
+        }));
+
+        if (!shouldNotUpdateStore) {
+          draft.intervention.emails = [
+            ...(state.intervention.emails ?? []),
+            ...mappedEmails,
+          ];
+        }
+
+        break;
+      }
+
+      case SEND_INTERVENTION_INVITE_SUCCESS:
+        draft.loaders.sendInterventionLoading = false;
+        draft.loaders.interventionEmailLoading =
+          initialState.loaders.interventionEmailLoading;
+        break;
+
+      case SEND_INTERVENTION_INVITE_ERROR:
+        draft.loaders.sendInterventionLoading = false;
+        draft.loaders.interventionEmailLoading =
+          initialState.loaders.interventionEmailLoading;
+        break;
+
+      case RESEND_INTERVENTION_INVITE_REQUEST:
+        draft.loaders.interventionEmailLoading = {
           ...action.payload,
         };
         break;
@@ -454,6 +488,19 @@ export const interventionReducer = (state = initialState, action) =>
       case TRANSLATE_INTERVENTION_ERROR:
         draft.loaders.translateInterventionLoading = false;
         draft.errors.translateInterventionError = action.payload.error;
+        break;
+      case ADD_INTERVENTION_ATTACHMENTS_REQUEST:
+        draft.loaders.addAttachmentsLoading = true;
+        break;
+      case ADD_INTERVENTION_ATTACHMENTS_SUCCESS:
+        draft.loaders.addAttachmentsLoading = false;
+        draft.intervention.files = action.payload.intervention.files;
+        break;
+      case ADD_INTERVENTION_ATTACHMENTS_ERROR:
+        draft.loaders.addAttachmentsLoading = false;
+        break;
+      case DELETE_INTERVENTION_ATTACHMENT_SUCCESS:
+        draft.intervention.files = action.payload.intervention.files;
         break;
     }
   });

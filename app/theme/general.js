@@ -20,7 +20,7 @@ const boxShadows = {
 
 const elements = {
   navbarHeight: 70,
-  sidebarWidth: 300,
+  sidebarWidth: 280,
   draggableContainerSize: 702,
   characterInitialPosition,
   grid: { firstColWidth: 300, colWidth: 80, leftPadding: 40 },
@@ -32,6 +32,7 @@ const elements = {
     width: 200,
     height: 100,
   },
+  userInterventionTileHeight: 200,
 };
 
 const visualAnalogScaleLabelStyles = {

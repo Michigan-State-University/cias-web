@@ -93,7 +93,7 @@ const ReportingDashboardPanel = ({
           {newOrganizationLoading && <Spinner color={themeColors.secondary} />}
         </>
       )}
-      <Box overflow="scroll">{renderOrganizations()}</Box>
+      <Box overflow="auto">{renderOrganizations()}</Box>
     </Column>
   );
 };

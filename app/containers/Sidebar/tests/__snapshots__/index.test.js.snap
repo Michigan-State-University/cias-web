@@ -1,7 +1,7 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`<Sidebar /> Should render and match the snapshot with session path 1`] = `
-.c1 {
+.c4 {
   font-family: DM Sans;
   font-size: 13px;
   line-height: 130%;
@@ -9,7 +9,7 @@ exports[`<Sidebar /> Should render and match the snapshot with session path 1`] 
   color: #2F3850;
 }
 
-.c4 {
+.c7 {
   font-family: DM Sans;
   font-size: 13px;
   line-height: 130%;
@@ -18,7 +18,7 @@ exports[`<Sidebar /> Should render and match the snapshot with session path 1`] 
   width: 100%;
 }
 
-.c2 {
+.c5 {
   margin: 0;
   font-family: DM Sans;
   font-size: 13px;
@@ -27,7 +27,7 @@ exports[`<Sidebar /> Should render and match the snapshot with session path 1`] 
   margin-bottom: 8px !important;
 }
 
-.c5 {
+.c8 {
   margin: 0;
   font-family: DM Sans;
   font-size: 13px;
@@ -39,6 +39,15 @@ exports[`<Sidebar /> Should render and match the snapshot with session path 1`] 
 }
 
 .c3 {
+  -webkit-transition: -webkit-transform 0.4s ease;
+  -webkit-transition: transform 0.4s ease;
+  transition: transform 0.4s ease;
+  -webkit-transform: rotate(180deg);
+  -ms-transform: rotate(180deg);
+  transform: rotate(180deg);
+}
+
+.c6 {
   display: -webkit-box;
   display: -webkit-flex;
   display: -ms-flexbox;
@@ -51,17 +60,37 @@ exports[`<Sidebar /> Should render and match the snapshot with session path 1`] 
   overflow: hidden;
 }
 
-.c7 {
+.c10 {
   width: auto;
   height: auto;
   display: block;
   border-radius: 5px;
-  overflow: scroll;
+  overflow: auto;
+}
+
+.c1 {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  -webkit-box-pack: center;
+  -webkit-justify-content: center;
+  -ms-flex-pack: center;
+  justify-content: center;
+  outline: none;
+  border-width: 0;
+  background-color: #FFFFFF;
+  border-radius: 0 5px 5px 0;
+  width: 40px;
+  height: 40px;
 }
 
 .c0 {
-  width: 300px;
-  height: 100vh;
+  width: 280px;
   top: 0;
   background-color: white;
   padding: 20px;
@@ -80,9 +109,18 @@ exports[`<Sidebar /> Should render and match the snapshot with session path 1`] 
   z-index: 10;
   margin-top: 70px;
   height: calc(100vh - 70px);
+  -webkit-transition: left 0.4s ease;
+  transition: left 0.4s ease;
 }
 
-.c8 {
+.c2 {
+  position: absolute;
+  top: 16px;
+  right: -40px;
+  box-shadow: 20px 0 20px rgba(0,0,0,0.08);
+}
+
+.c11 {
   display: -webkit-box;
   display: -webkit-flex;
   display: -ms-flexbox;
@@ -100,7 +138,7 @@ exports[`<Sidebar /> Should render and match the snapshot with session path 1`] 
   height: 30px;
 }
 
-.c8:after {
+.c11:after {
   content: ' ';
   display: block;
   width: 20px;
@@ -112,7 +150,7 @@ exports[`<Sidebar /> Should render and match the snapshot with session path 1`] 
   animation: hAjVGa 1.2s linear infinite;
 }
 
-.c6 {
+.c9 {
   width: 100%;
   height: 40px;
   border-radius: 5px;
@@ -131,7 +169,7 @@ exports[`<Sidebar /> Should render and match the snapshot with session path 1`] 
   padding-left: 10px;
 }
 
-.c6:hover {
+.c9:hover {
   background-color: #B727EA;
   color: #FFFFFF;
   border: 1px solid transparent;
@@ -153,27 +191,51 @@ exports[`<Sidebar /> Should render and match the snapshot with session path 1`] 
 
 }
 
+@media only screen and (max-width:1280px) {
+  .c0 {
+    position: fixed;
+    left: calc(0px - 280px);
+  }
+}
+
+@media only screen and (min-width:1400px) {
+  .c2 {
+    display: none;
+  }
+}
+
 <div
   class="c0"
 >
-  <p
+  <button
+    aria-label="Hover to show sidebar"
     class="c1 c2"
+    title="Hover to show sidebar"
+  >
+    <img
+      alt="Show sidebar icon"
+      class="c3"
+      src="IMAGE_MOCK"
+    />
+  </button>
+  <p
+    class="c4 c5"
   >
     CIAS Panel
   </p>
   <div
-    class="c3"
+    class="c6"
     overflow="hidden"
     width="100%"
   >
     <p
-      class="c4 c5"
+      class="c7 c8"
       width="100%"
     >
       Reporting panel
     </p>
     <button
-      class="c6"
+      class="c9"
       color="secondary"
       radius="5px"
       width="auto"
@@ -181,11 +243,11 @@ exports[`<Sidebar /> Should render and match the snapshot with session path 1`] 
       + Add Organization
     </button>
     <div
-      class="c7"
-      overflow="scroll"
+      class="c10"
+      overflow="auto"
     >
       <div
-        class="c8"
+        class="c11"
         color="#B727EA"
         size="30"
         width="6"
@@ -196,7 +258,7 @@ exports[`<Sidebar /> Should render and match the snapshot with session path 1`] 
 `;
 
 exports[`<Sidebar /> Should render and match the snapshot without matching path 1`] = `
-.c1 {
+.c4 {
   font-family: DM Sans;
   font-size: 13px;
   line-height: 130%;
@@ -204,7 +266,7 @@ exports[`<Sidebar /> Should render and match the snapshot without matching path 
   color: #2F3850;
 }
 
-.c4 {
+.c7 {
   font-family: DM Sans;
   font-size: 13px;
   line-height: 130%;
@@ -213,7 +275,7 @@ exports[`<Sidebar /> Should render and match the snapshot without matching path 
   width: 100%;
 }
 
-.c2 {
+.c5 {
   margin: 0;
   font-family: DM Sans;
   font-size: 13px;
@@ -222,7 +284,7 @@ exports[`<Sidebar /> Should render and match the snapshot without matching path 
   margin-bottom: 8px !important;
 }
 
-.c5 {
+.c8 {
   margin: 0;
   font-family: DM Sans;
   font-size: 13px;
@@ -234,6 +296,15 @@ exports[`<Sidebar /> Should render and match the snapshot without matching path 
 }
 
 .c3 {
+  -webkit-transition: -webkit-transform 0.4s ease;
+  -webkit-transition: transform 0.4s ease;
+  transition: transform 0.4s ease;
+  -webkit-transform: rotate(180deg);
+  -ms-transform: rotate(180deg);
+  transform: rotate(180deg);
+}
+
+.c6 {
   display: -webkit-box;
   display: -webkit-flex;
   display: -ms-flexbox;
@@ -246,17 +317,37 @@ exports[`<Sidebar /> Should render and match the snapshot without matching path 
   overflow: hidden;
 }
 
-.c7 {
+.c10 {
   width: auto;
   height: auto;
   display: block;
   border-radius: 5px;
-  overflow: scroll;
+  overflow: auto;
+}
+
+.c1 {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  -webkit-box-pack: center;
+  -webkit-justify-content: center;
+  -ms-flex-pack: center;
+  justify-content: center;
+  outline: none;
+  border-width: 0;
+  background-color: #FFFFFF;
+  border-radius: 0 5px 5px 0;
+  width: 40px;
+  height: 40px;
 }
 
 .c0 {
-  width: 300px;
-  height: 100vh;
+  width: 280px;
   top: 0;
   background-color: white;
   padding: 20px;
@@ -275,9 +366,18 @@ exports[`<Sidebar /> Should render and match the snapshot without matching path 
   z-index: 10;
   margin-top: 70px;
   height: calc(100vh - 70px);
+  -webkit-transition: left 0.4s ease;
+  transition: left 0.4s ease;
 }
 
-.c8 {
+.c2 {
+  position: absolute;
+  top: 16px;
+  right: -40px;
+  box-shadow: 20px 0 20px rgba(0,0,0,0.08);
+}
+
+.c11 {
   display: -webkit-box;
   display: -webkit-flex;
   display: -ms-flexbox;
@@ -295,7 +395,7 @@ exports[`<Sidebar /> Should render and match the snapshot without matching path 
   height: 30px;
 }
 
-.c8:after {
+.c11:after {
   content: ' ';
   display: block;
   width: 20px;
@@ -307,7 +407,7 @@ exports[`<Sidebar /> Should render and match the snapshot without matching path 
   animation: hAjVGa 1.2s linear infinite;
 }
 
-.c6 {
+.c9 {
   width: 100%;
   height: 40px;
   border-radius: 5px;
@@ -326,7 +426,7 @@ exports[`<Sidebar /> Should render and match the snapshot without matching path 
   padding-left: 10px;
 }
 
-.c6:hover {
+.c9:hover {
   background-color: #B727EA;
   color: #FFFFFF;
   border: 1px solid transparent;
@@ -348,27 +448,51 @@ exports[`<Sidebar /> Should render and match the snapshot without matching path 
 
 }
 
+@media only screen and (max-width:1280px) {
+  .c0 {
+    position: fixed;
+    left: calc(0px - 280px);
+  }
+}
+
+@media only screen and (min-width:1400px) {
+  .c2 {
+    display: none;
+  }
+}
+
 <div
   class="c0"
 >
-  <p
+  <button
+    aria-label="Hover to show sidebar"
     class="c1 c2"
+    title="Hover to show sidebar"
+  >
+    <img
+      alt="Show sidebar icon"
+      class="c3"
+      src="IMAGE_MOCK"
+    />
+  </button>
+  <p
+    class="c4 c5"
   >
     CIAS Panel
   </p>
   <div
-    class="c3"
+    class="c6"
     overflow="hidden"
     width="100%"
   >
     <p
-      class="c4 c5"
+      class="c7 c8"
       width="100%"
     >
       Reporting panel
     </p>
     <button
-      class="c6"
+      class="c9"
       color="secondary"
       radius="5px"
       width="auto"
@@ -376,11 +500,11 @@ exports[`<Sidebar /> Should render and match the snapshot without matching path 
       + Add Organization
     </button>
     <div
-      class="c7"
-      overflow="scroll"
+      class="c10"
+      overflow="auto"
     >
       <div
-        class="c8"
+        class="c11"
         color="#B727EA"
         size="30"
         width="6"

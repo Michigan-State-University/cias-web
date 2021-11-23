@@ -1,3 +1,5 @@
+import { InterventionInvite } from './InterventionInvite';
+
 enum InterventionStatus {
   DRAFT = 'draft',
   PUBLISHED = 'published',
@@ -9,6 +11,12 @@ enum InterventionSharedTo {
   ANYONE = 'anyone',
   REGISTERED = 'registered',
   INVITED = 'invited',
+}
+
+export enum InterventionType {
+  DEFAULT = 'Intervention',
+  FIXED = 'Intervention::FixedOrder',
+  FLEXIBLE = 'Intervention::FlexibleOrder',
 }
 
 export enum CatMhLicenseType {
@@ -43,4 +51,12 @@ export interface InterventionDto {
   createdCatMhSessionCount: number;
   isAccessRevoked: boolean;
   licenseType: CatMhLicenseType;
+  type: InterventionType;
+  emails?: InterventionInvite[];
+}
+
+export interface FileInfo {
+  id: string;
+  name: string;
+  url: string;
 }

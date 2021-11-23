@@ -10,11 +10,13 @@ import head from 'lodash/head';
 import isEmpty from 'lodash/isEmpty';
 import { useDropzone } from 'react-dropzone';
 
+import { themeColors } from 'theme';
+
+import Loader from 'components/Loader';
 import Box from 'components/Box';
 import Img from 'components/Img';
 import Row from 'components/Row';
 import Text from 'components/Text';
-import { themeColors } from 'theme';
 
 const UploadFileButton = ({
   icon,
@@ -23,6 +25,9 @@ const UploadFileButton = ({
   textProps,
   accept,
   className,
+  dropzoneProps,
+  iconProps,
+  isLoading,
   ...restProps
 }) => {
   const { getRootProps, getInputProps, open, acceptedFiles } = useDropzone({
@@ -30,19 +35,27 @@ const UploadFileButton = ({
     noKeyboard: true,
     accept,
     noClick: true,
+    ...dropzoneProps,
   });
 
   useEffect(() => {
-    if (!isEmpty(acceptedFiles)) onUpload(head(acceptedFiles));
+    const { multiple } = getInputProps();
+    if (!isEmpty(acceptedFiles))
+      onUpload(multiple ? acceptedFiles : head(acceptedFiles));
   }, [acceptedFiles]);
 
   return (
     <Box {...getRootProps()} className={className} {...restProps}>
-      <input {...getInputProps()} />
-      <Row align="center" onClick={open} clickable>
-        {icon && <Img src={icon} alt="upload" mr={10} />}
-        <Text {...textProps}>{children}</Text>
-      </Row>
+      {isLoading && <Loader type="inline" />}
+      {!isLoading && (
+        <>
+          <input {...getInputProps()} />
+          <Row align="center" onClick={open} clickable>
+            {icon && <Img src={icon} alt="upload" mr={10} {...iconProps} />}
+            <Text {...textProps}>{children}</Text>
+          </Row>
+        </>
+      )}
     </Box>
   );
 };
@@ -54,6 +67,9 @@ UploadFileButton.propTypes = {
   textProps: PropTypes.object,
   accept: PropTypes.string,
   className: PropTypes.string,
+  dropzoneProps: PropTypes.object,
+  iconProps: PropTypes.object,
+  isLoading: PropTypes.bool,
 };
 
 UploadFileButton.defaultProps = {

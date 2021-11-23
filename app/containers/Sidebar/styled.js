@@ -5,10 +5,10 @@ import { borders, boxShadows, elements, themeColors } from 'theme';
 import { decimalToHex } from 'utils/hexUtils';
 
 import { margin } from 'components/BaseComponentStyles';
+import { ShowHiddenContentButton } from 'components/ShowHiddenContentButton';
 
 export const SidebarStyled = styled.div`
   width: ${elements.sidebarWidth}px;
-  height: 100vh;
   top: 0;
   background-color: white;
   padding: 20px;
@@ -19,6 +19,13 @@ export const SidebarStyled = styled.div`
   z-index: 10;
   margin-top: ${elements.navbarHeight}px;
   height: calc(100vh - ${elements.navbarHeight}px);
+  transition: left 0.4s ease;
+
+  @media only screen and (max-width: 1280px) {
+    position: fixed;
+    left: calc(0px - ${elements.sidebarWidth}px);
+    ${({ isVisible }) => (isVisible ? 'left: 0;' : '')}
+  }
 `;
 
 export const SidebarItemLink = styled(Link)`
@@ -37,4 +44,14 @@ export const SidebarItemLink = styled(Link)`
       : {}}
 
   ${margin};
+`;
+
+export const ShowSidebarButton = styled(ShowHiddenContentButton)`
+  position: absolute;
+  top: 16px;
+  right: -40px;
+  box-shadow: 20px 0 20px rgba(0, 0, 0, 0.08);
+  @media only screen and (min-width: 1400px) {
+    display: none;
+  }
 `;

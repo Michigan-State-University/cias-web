@@ -157,6 +157,12 @@ exports[`<AppRoute /> Should render and match the snapshot 1`] = `
   }
 }
 
+@media only screen and (max-width:1280px) {
+  .c12 {
+    width: 100vw;
+  }
+}
+
 <div>
   <div
     class="c0"

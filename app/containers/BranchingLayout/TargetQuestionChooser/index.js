@@ -52,6 +52,7 @@ const TargetQuestionChooser = (props) => {
     sessionBranching,
     sessionIndex,
     questionGroups,
+    disableBranchingToSession,
   } = props;
   const { id, position, question_group_id: questionGroupId } = selectedQuestion;
   const currentGroup = questionGroups.find(
@@ -93,6 +94,7 @@ const TargetQuestionChooser = (props) => {
   const [isSessionView, _setIsSessionView] = useState(false);
   const setIsSessionView = (value, event) => {
     if (event) event.stopPropagation();
+    if (disableBranchingToSession) return;
     _setIsSessionView(value);
   };
   const canSelectSession = (sessionPosition) =>
@@ -131,14 +133,16 @@ const TargetQuestionChooser = (props) => {
   const renderQuestionChooser = (
     <Column data-testid={`${id}-select-target-question`}>
       <Row mb={20}>
-        <Img
-          data-testid={`${id}-select-target-question-interview-view-setter`}
-          data-cy="select-target-question-session-view-setter"
-          src={arrowLeft}
-          mr={10}
-          onClick={(event) => setIsSessionView(true, event)}
-          clickable
-        />
+        {!disableBranchingToSession && (
+          <Img
+            data-testid={`${id}-select-target-question-interview-view-setter`}
+            data-cy="select-target-question-session-view-setter"
+            src={arrowLeft}
+            mr={10}
+            onClick={(event) => setIsSessionView(true, event)}
+            clickable
+          />
+        )}
         <Img src={presentationProjector} mr={10} />
         <H3>{name}</H3>
       </Row>
@@ -275,6 +279,7 @@ TargetQuestionChooser.propTypes = {
   interventionLoading: PropTypes.bool,
   sessionBranching: PropTypes.bool,
   questionGroups: PropTypes.array,
+  disableBranchingToSession: PropTypes.bool,
 };
 
 const mapStateToProps = createStructuredSelector({

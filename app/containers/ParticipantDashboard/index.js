@@ -36,7 +36,7 @@ const ParticipantDashboard = () => {
         <title>{formatMessage(messages.pageTitle)}</title>
       </Helmet>
 
-      <H1 mt={30}>{formatMessage(messages.pageHeader)}</H1>
+      <H1 mt={64}>{formatMessage(messages.pageHeader)}</H1>
 
       <ReportsList disableFilter />
     </AppContainer>
