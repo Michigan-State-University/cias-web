@@ -91,10 +91,10 @@ export default defineMessages({
   },
   catMhSettingsOption: {
     id: `${scope}.catMhSettingsOption`,
-    defaultMessage: 'CAT-MH Access',
+    defaultMessage: 'CAT-MH™ Access',
   },
   catMhSettingsModalTitle: {
     id: `${scope}.catMhSettingsModalTitle`,
-    defaultMessage: 'Access to CAT-MH',
+    defaultMessage: 'Access to CAT-MH™',
   },
 });

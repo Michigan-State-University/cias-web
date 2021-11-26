@@ -108,7 +108,7 @@ export default defineMessages({
   },
   [FORBIDDEN_CAT_MH_BRANCHING]: {
     id: `${scope}.${FORBIDDEN_CAT_MH_BRANCHING}`,
-    defaultMessage: `There was a branching to CAT-MH session that is not available during preview. Participants will be branched correctly when filling out published intervention`,
+    defaultMessage: `There was a branching to CAT-MH™ session that is not available during preview. Participants will be branched correctly when filling out published intervention`,
   },
   emailValidationError: {
     id: `${scope}.emailValidationError`,

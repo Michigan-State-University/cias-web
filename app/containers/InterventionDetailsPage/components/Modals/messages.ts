@@ -6,7 +6,7 @@ export default defineMessages({
   modalHeader: {
     id: `${scope}.modalHeader`,
     defaultMessage:
-      'Fill the form below to give researcher access to creating CAT-MH sessions',
+      'Fill the form below to give researcher access to creating CAT-MH™ sessions',
   },
   giveAccess: {
     id: `${scope}.giveAccess`,
@@ -22,11 +22,11 @@ export default defineMessages({
   },
   organizationIdLabel: {
     id: `${scope}.organizationIdLabel`,
-    defaultMessage: 'CAT-MH Organization ID',
+    defaultMessage: 'CAT-MH™ Organization ID',
   },
   applicationIdLabel: {
     id: `${scope}.applicationIdLabel`,
-    defaultMessage: 'CAT-MH Application ID',
+    defaultMessage: 'CAT-MH™ Application ID',
   },
   licenseTypeHeader: {
     id: `${scope}.licenseTypeHeader`,

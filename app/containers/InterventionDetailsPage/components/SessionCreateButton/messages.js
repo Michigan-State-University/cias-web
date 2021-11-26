@@ -27,7 +27,7 @@ export default defineMessages({
   },
   catSession: {
     id: `${scope}.catSession`,
-    defaultMessage: 'CAT-MH<sup>TM</sup> Session',
+    defaultMessage: 'CAT-MH™ Session',
   },
   classicSessionDescription: {
     id: `${scope}.classicSessionDescription`,
@@ -37,6 +37,6 @@ export default defineMessages({
   catSessionDescription: {
     id: `${scope}.catSessionDescription`,
     defaultMessage:
-      'The CAT-MH session contains predefined screens that you cannot view or edit. The questions are displayed to the participants according to the CAT-MH algorithm.',
+      'The CAT-MH™ session contains predefined screens that you cannot view or edit. The questions are displayed to the participants according to the CAT-MH™ algorithm.',
   },
 });

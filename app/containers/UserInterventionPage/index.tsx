@@ -115,9 +115,6 @@ const UserInterventionPage = () => {
       {additionalText && (
         <>
           <Divider width={100} my={24} />
-          <Text mb={10} fontWeight="bold">
-            {formatMessage(messages.additionalText)}
-          </Text>
           <Markup content={additionalText} />
         </>
       )}

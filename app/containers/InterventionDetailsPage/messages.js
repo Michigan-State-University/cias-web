@@ -72,11 +72,11 @@ export default defineMessages({
   },
   catMhSettingsOption: {
     id: `${scope}.catMhSettingsOption`,
-    defaultMessage: 'CAT-MH Access',
+    defaultMessage: 'CAT-MH™ Access',
   },
   catMhSettingsModalTitle: {
     id: `${scope}.catMhSettingsModalTitle`,
-    defaultMessage: 'Access to CAT-MH',
+    defaultMessage: 'Access to CAT-MH™',
   },
   anyone: {
     id: `${scope}.anyone`,
@@ -146,7 +146,7 @@ export default defineMessages({
   },
   catMhCounter: {
     id: `${scope}.catMhCounter`,
-    defaultMessage: `<bold>CAT-MH License</bold>: {licenseType, select,
+    defaultMessage: `<bold>CAT-MH™ License</bold>: {licenseType, select,
         ${CatMhLicenseType.LIMITED} {Limited (<counter>{current}/{initial}</counter> <space></space> tests left)}
         ${CatMhLicenseType.UNLIMITED} {Unlimited ({used} tests used)}
       }`,
@@ -154,7 +154,7 @@ export default defineMessages({
   catMhCountWarning: {
     id: `${scope}.catMhCountWarning`,
     defaultMessage:
-      'The test limit has almost been reached. Extend your license to continue to use CAT-MH with this intervention.',
+      'The test limit has almost been reached. Extend your license to continue to use CAT-MH™ with this intervention.',
   },
   inviteToIntervention: {
     id: `${scope}.inviteToIntervention`,

@@ -8,10 +8,6 @@ export default defineMessages({
     id: `${scope}.chooseIntervention`,
     defaultMessage: 'Choose the session that you would like to fill in',
   },
-  additionalText: {
-    id: `${scope}.additionalText`,
-    defaultMessage: 'Additional text from researcher:',
-  },
   backToInterventions: {
     id: `${scope}.backToInterventions`,
     defaultMessage: 'Back to my interventions',
@@ -23,7 +19,7 @@ export default defineMessages({
   },
   helpingMaterials: {
     id: `${scope}.helpingMaterials`,
-    defaultMessage: 'Download helping materials:',
+    defaultMessage: 'Additional resources for you:',
   },
   [SCHEDULE_OPTIONS.afterFill]: {
     id: `${scope}.${[SCHEDULE_OPTIONS.afterFill]}`,
