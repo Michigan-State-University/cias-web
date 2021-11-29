@@ -7,7 +7,11 @@ import { jsonApiToObject } from 'utils/jsonApiMapper';
 
 import { ADD_INTERVENTION_ATTACHMENTS_REQUEST } from '../constants';
 import messages from '../messages';
-import { addAttachmentSuccess, addAttachmentRequest } from '../actions';
+import {
+  addAttachmentSuccess,
+  addAttachmentRequest,
+  addAttachmentError,
+} from '../actions';
 
 export function* addInterventionAttachments({
   payload: { interventionId, attachments },
@@ -28,6 +32,7 @@ export function* addInterventionAttachments({
     const mappedIntervention = jsonApiToObject(data, 'intervention');
     yield put(addAttachmentSuccess(mappedIntervention));
   } catch (error) {
+    yield put(addAttachmentError(error));
     yield call(toast.error, formatMessage(messages.addAttachmentError));
   }
 }
