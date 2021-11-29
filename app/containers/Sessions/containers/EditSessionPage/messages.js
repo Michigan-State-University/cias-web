@@ -69,7 +69,7 @@ export default defineMessages({
   },
   generalSettings: {
     id: `${scope}.generalSettings`,
-    defaultMessage: 'Cat-MH Settings',
+    defaultMessage: 'CAT-MH™ Settings',
   },
   sessionDetails: {
     id: `${scope}.sessionDetails`,

@@ -308,11 +308,11 @@ export default defineMessages({
   },
   CatMhSessionInvalid: {
     id: `${scope}.CatMhSessionInvalid`,
-    defaultMessage: `Every Cat-MH TM session needs to have all values set up.`,
+    defaultMessage: `Every CAT-MH™ session needs to have all values set up.`,
   },
   CatMhWrongSettings: {
     id: `${scope}.CatMhWrongSettings`,
-    defaultMessage: `Cat-MH license settings need to be properly set up. Please contact an Admin in that matter.`,
+    defaultMessage: `CAT-MH™ license settings need to be properly set up. Please contact an Admin in that matter.`,
   },
   [TextMessageType.NORMAL]: {
     id: `${scope}.${TextMessageType.NORMAL}`,

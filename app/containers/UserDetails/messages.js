@@ -15,6 +15,6 @@ export default defineMessages({
   },
   canCreateCatMhSession: {
     id: `${scope}.canCreateCatMhSession`,
-    defaultMessage: 'Can create Cat-MH(TM) sessions',
+    defaultMessage: 'Can create CAT-MH™ sessions',
   },
 });
