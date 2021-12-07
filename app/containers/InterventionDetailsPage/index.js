@@ -27,7 +27,7 @@ import PencilIcon from 'assets/svg/pencil-solid.svg';
 import AddAppIcon from 'assets/svg/app-add.svg';
 import TranslateIcon from 'assets/svg/translate.svg';
 import DocumentIcon from 'assets/svg/document.svg';
-import QuestionIcon from 'assets/svg/question-mark.svg';
+import QuestionMarkIcon from 'assets/svg/grey-question-mark.svg';
 
 import isNullOrUndefined from 'utils/isNullOrUndefined';
 import { reorder } from 'utils/reorder';
@@ -562,19 +562,12 @@ export function InterventionDetailsPage({
                       </span>
                     ),
                   })}
-                  {hasSmallNumberOfCatMhSessionsRemaining && (
-                    <Tooltip
-                      id="cat-mh-count-warning"
-                      text={formatMessage(messages.catMhCountWarning)}
-                    >
-                      <Icon
-                        src={QuestionIcon}
-                        fill={colors.gainsbro}
-                        width={16}
-                        height={16}
-                      />
-                    </Tooltip>
-                  )}
+                  <Tooltip
+                    id="intervention-type-tooltip"
+                    ml={8}
+                    icon={QuestionMarkIcon}
+                    content={formatMessage(messages.catMhCountInfo)}
+                  />
                 </Row>
               )}
             </Row>

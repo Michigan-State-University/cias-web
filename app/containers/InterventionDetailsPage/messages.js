@@ -147,14 +147,14 @@ export default defineMessages({
   catMhCounter: {
     id: `${scope}.catMhCounter`,
     defaultMessage: `<bold>CAT-MH™ License</bold>: {licenseType, select,
-        ${CatMhLicenseType.LIMITED} {Limited (<counter>{current}/{initial}</counter> <space></space> tests left)}
-        ${CatMhLicenseType.UNLIMITED} {Unlimited ({used} tests used)}
+        ${CatMhLicenseType.LIMITED} {Limited (<counter>{used}/{initial}</counter> <space></space> tests used)}
+        ${CatMhLicenseType.UNLIMITED} {Unlimited (<counter>{used}</counter> <space></space> tests used)}
       }`,
   },
-  catMhCountWarning: {
-    id: `${scope}.catMhCountWarning`,
+  catMhCountInfo: {
+    id: `${scope}.catMhCountInfo`,
     defaultMessage:
-      'The test limit has almost been reached. Extend your license to continue to use CAT-MH™ with this intervention.',
+      "This assessment count is for informational purposes and may not align with your institution's <bold>Adaptive Testing Technologies (ATT) CAT-MH™</bold> license and should not be relied upon for financial or budgetary purposes. Please contact your ATT project director or <bold>info@adaptivetestingtechnologies.com</bold> for license or usage questions.",
   },
   inviteToIntervention: {
     id: `${scope}.inviteToIntervention`,
