@@ -59,11 +59,6 @@ export default defineMessages({
     id: `${scope}.dashboard`,
     defaultMessage: 'Go to dashboard',
   },
-  wcagThirdPartyWarning: {
-    id: `${scope}.wcagThirdPartyWarning`,
-    defaultMessage:
-      'Please note that selecting a Person in here means that someone outside the system will receive a report based on Your answers in this Session.',
-  },
   wcagExternalLinkWarning: {
     id: `${scope}.wcagExternalLinkWarning`,
     defaultMessage:
