@@ -4,13 +4,7 @@ import PropTypes from 'prop-types';
 import Question from 'models/Session/Question';
 import SingleQuestionLayout from '../layouts/SingleQuestionLayout';
 
-const SingleQuestion = ({
-  question,
-  answerBody,
-  selectAnswer,
-  saveAnswer,
-  questionIndex,
-}) => {
+const SingleQuestion = ({ question, answerBody, selectAnswer, saveAnswer }) => {
   const [selectedAnswerIndex, setSelectedAnswerIndex] = useState(null);
   const {
     body: {
@@ -54,7 +48,6 @@ SingleQuestion.propTypes = {
   question: PropTypes.shape(Question).isRequired,
   answerBody: PropTypes.any,
   selectAnswer: PropTypes.func,
-  questionIndex: PropTypes.number,
   saveAnswer: PropTypes.func,
 };
 

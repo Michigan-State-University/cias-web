@@ -5,13 +5,7 @@ import Question from 'models/Session/Question';
 
 import GridQuestionLayout from '../layouts/GridQuestionLayout';
 
-const GridQuestion = ({
-  question,
-  answerBody,
-  selectAnswer,
-  questionIndex,
-  saveAnswer,
-}) => {
+const GridQuestion = ({ question, answerBody, selectAnswer, saveAnswer }) => {
   const [selectedAnswersIndex, setSelectedAnswersIndex] = useState({});
   const [selectedAnswers, setSelectedAnswers] = useState({});
   const [updated, setUpdated] = useState(false);
@@ -91,7 +85,6 @@ GridQuestion.propTypes = {
   question: PropTypes.shape(Question).isRequired,
   selectAnswer: PropTypes.func,
   answerBody: PropTypes.any,
-  questionIndex: PropTypes.number,
   saveAnswer: PropTypes.func,
 };
 
