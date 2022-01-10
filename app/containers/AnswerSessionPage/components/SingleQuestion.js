@@ -36,7 +36,7 @@ const SingleQuestion = ({
     setSelectedAnswerIndex(index);
 
     if (!proceedButton) {
-      saveAnswer(questionIndex + 1);
+      saveAnswer();
     }
   };
 
