@@ -84,8 +84,8 @@ const Component = ({
 
   const { isValid } = formik;
 
-  const areFieldsDisabled = !canSave || isAccessRevoked;
-  const isButtonDisabled = areFieldsDisabled || !isValid;
+  const areFieldsDisabled = !canEdit || isAccessRevoked;
+  const isButtonDisabled = !canEdit || !canSave || !isValid;
 
   const [isInputDisabled, setIsInputDisabled] = useState(true);
   const toggleInput = () => setIsInputDisabled(!isInputDisabled);
