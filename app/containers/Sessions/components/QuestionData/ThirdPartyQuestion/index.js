@@ -15,7 +15,6 @@ import PlusCircle from 'components/Circle/PlusCircle';
 
 import Row from 'components/Row';
 import Text from 'components/Text';
-import H3 from 'components/H3';
 import { BadgeInput } from 'components/Input/BadgeInput';
 import OriginalTextHover from 'components/OriginalTextHover';
 
@@ -30,7 +29,6 @@ import { canEdit } from 'models/Status/statusPermissions';
 import { emailValidator } from 'utils/validators';
 import { themeColors, colors } from 'theme';
 
-import answerPageMessages from 'containers/AnswerSessionPage/layouts/messages';
 import ReportChooser from './ReportChooser';
 import messages from './messages';
 import { ADD, UPDATE_ANSWER, REMOVE } from './constants';
@@ -182,12 +180,6 @@ const ThirdPartyQuestion = ({
           </Box>
         </HoverableBox>
       </Row>
-
-      {isNarratorTab && (
-        <H3 color={themeColors.warning} textAlign="center">
-          {formatMessage(answerPageMessages.wcagThirdPartyWarning)}
-        </H3>
-      )}
     </Column>
   );
 };

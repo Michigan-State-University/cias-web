@@ -60,7 +60,7 @@ describe('intervention reducer', () => {
 
     const expectedState = cloneDeep(mockState);
     expectedState.loaders.fetchInterventionLoading = true;
-    expectedState.loaders.fetchInterventionError = null;
+    expectedState.errors.fetchInterventionError = null;
     expectedState.intervention = null;
 
     expect(interventionReducer(mockState, action)).toEqual(expectedState);
@@ -107,7 +107,7 @@ describe('intervention reducer', () => {
 
     const expectedState = cloneDeep(mockState);
     expectedState.loaders.createInterventionLoading = true;
-    expectedState.loaders.createInterventionError = null;
+    expectedState.errors.createInterventionError = null;
 
     expect(interventionReducer(mockState, action)).toEqual(expectedState);
   });
@@ -247,6 +247,7 @@ describe('intervention reducer', () => {
 
     const expectedState = cloneDeep(mockState);
     expectedState.loaders.enableAccessLoading = true;
+    expectedState.errors.enableAccessError = null;
 
     expect(interventionReducer(mockState, action)).toEqual(expectedState);
   });

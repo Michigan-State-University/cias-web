@@ -40,6 +40,9 @@ describe('<BranchingTab />', () => {
       loaders: {
         fetchInterventionLoading: false,
       },
+      errors: {
+        fetchInterventionError: null,
+      },
       intervention: createIntervention(),
     },
   };
