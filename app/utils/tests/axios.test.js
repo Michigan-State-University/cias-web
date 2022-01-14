@@ -13,6 +13,7 @@ import { logOut } from 'global/reducers/auth';
 jest.mock('utils/localStorageService');
 jest.mock('global/reducers/auth/actions');
 jest.mock('configureStore');
+jest.mock('axios-retry');
 
 describe('axios request test', () => {
   it('should invoke getHeaders and return headers', async () => {

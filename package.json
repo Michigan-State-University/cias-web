@@ -75,6 +75,7 @@
     "@sentry/react": "^6.2.4",
     "actioncable": "^5.2.6",
     "axios": "^0.21.4",
+    "axios-retry": "^3.2.4",
     "chalk": "^2.4.2",
     "classnames": "^2.2.6",
     "color": "^3.1.3",

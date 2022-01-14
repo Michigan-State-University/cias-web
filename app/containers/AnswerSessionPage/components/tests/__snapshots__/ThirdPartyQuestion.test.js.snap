@@ -122,20 +122,6 @@ exports[`<ThirdPartyQuestion /> Should render and match the snapshot 1`] = `
   cursor: not-allowed;
 }
 
-.c11 {
-  margin-left: 5px;
-}
-
-.c12 {
-  margin: 0;
-  font-family: DM Sans;
-  font-size: 15px;
-  line-height: 150%;
-  color: rgba(210,55,29,1);
-  color: rgba(210,55,29,1);
-  text-align: center;
-}
-
 @media only screen and (min-width:768px) {
 
 }
@@ -187,14 +173,10 @@ exports[`<ThirdPartyQuestion /> Should render and match the snapshot 1`] = `
                   class="c10 "
                   src="IMAGE_MOCK"
                 />
-                <div
-                  class="c1 c11"
-                >
-                  <div>
-                    test
-                  </div>
-                </div>
               </label>
+            </div>
+            <div>
+              test
             </div>
           </div>
         </div>
@@ -227,25 +209,15 @@ exports[`<ThirdPartyQuestion /> Should render and match the snapshot 1`] = `
                   class="c10 "
                   src="IMAGE_MOCK"
                 />
-                <div
-                  class="c1 c11"
-                >
-                  <div>
-                    test
-                  </div>
-                </div>
               </label>
+            </div>
+            <div>
+              test
             </div>
           </div>
         </div>
       </div>
     </div>
-    <h3
-      class="c12"
-      color="#D2371D"
-    >
-      Please note that selecting a Person in here means that someone outside the system will receive a report based on Your answers in this Session.
-    </h3>
   </div>
 </div>
 `;

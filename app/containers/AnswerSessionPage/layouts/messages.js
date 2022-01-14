@@ -63,11 +63,6 @@ export default defineMessages({
     id: `${scope}.goToSessionMap`,
     defaultMessage: 'Go to session map',
   },
-  wcagThirdPartyWarning: {
-    id: `${scope}.wcagThirdPartyWarning`,
-    defaultMessage:
-      'Please note that selecting a Person in here means that someone outside the system will receive a report based on Your answers in this Session.',
-  },
   wcagExternalLinkWarning: {
     id: `${scope}.wcagExternalLinkWarning`,
     defaultMessage:
