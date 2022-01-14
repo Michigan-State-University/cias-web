@@ -8,8 +8,6 @@ RUN npm install
 
 COPY . .
 
-RUN npm run build:and:prune
-
 EXPOSE 4200
 
 # Configure the main process to run when running the image

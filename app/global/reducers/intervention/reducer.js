@@ -130,7 +130,7 @@ export const interventionReducer = (state = initialState, action) =>
         if (state.intervention && action.payload.id === state.intervention.id)
           break;
         draft.loaders.fetchInterventionLoading = true;
-        draft.loaders.fetchInterventionError = null;
+        draft.errors.fetchInterventionError = null;
         draft.intervention = null;
         break;
       case FETCH_INTERVENTION_SUCCESS:
@@ -147,7 +147,7 @@ export const interventionReducer = (state = initialState, action) =>
         break;
       case CREATE_INTERVENTION_REQUEST:
         draft.loaders.createInterventionLoading = true;
-        draft.loaders.createInterventionError = null;
+        draft.errors.createInterventionError = null;
         break;
       case CREATE_INTERVENTION_SUCCESS:
         draft.loaders.createInterventionLoading = false;
@@ -266,6 +266,7 @@ export const interventionReducer = (state = initialState, action) =>
         break;
       case ENABLE_USER_ACCESS_REQUEST:
         draft.loaders.enableAccessLoading = true;
+        draft.errors.enableAccessError = null;
         break;
       case ENABLE_USER_ACCESS_SUCCESS:
         draft.loaders.enableAccessLoading = false;
@@ -277,10 +278,10 @@ export const interventionReducer = (state = initialState, action) =>
         break;
       case FETCH_USERS_WITH_ACCESS_REQUEST:
         draft.loaders.fetchUserAccessLoading = true;
+        draft.errors.fetchUserAccessError = null;
         break;
       case FETCH_USERS_WITH_ACCESS_SUCCESS:
         draft.loaders.fetchUserAccessLoading = false;
-        draft.errors.fetchUserAccessError = null;
         draft.intervention.usersWithAccess = action.payload.userAccess;
         break;
       case FETCH_USERS_WITH_ACCESS_ERROR:
@@ -307,6 +308,7 @@ export const interventionReducer = (state = initialState, action) =>
         break;
       case CREATE_SESSION_REQUEST:
         draft.loaders.createSessionLoading = true;
+        draft.errors.createSessionError = null;
         break;
       case CREATE_SESSION_SUCCESS:
         draft.intervention.sessions = [
@@ -324,6 +326,7 @@ export const interventionReducer = (state = initialState, action) =>
       case FETCH_SESSION_EMAILS_REQUEST:
         if (!state.intervention.sessions[action.payload.index].emails)
           draft.loaders.fetchSessionEmailsLoading = true;
+        draft.errors.fetchSessionEmailsError = null;
         break;
       case FETCH_SESSION_EMAILS_SUCCESS:
         const { index, emails } = action.payload;
