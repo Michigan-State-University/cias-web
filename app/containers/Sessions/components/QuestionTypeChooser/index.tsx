@@ -1,16 +1,13 @@
 import React, { useMemo, useRef, useState } from 'react';
-import PropTypes from 'prop-types';
-import { injectIntl } from 'react-intl';
+import { injectIntl, useIntl } from 'react-intl';
 import { connect } from 'react-redux';
 import { createStructuredSelector } from 'reselect';
 import { compose } from 'redux';
 
 import Box from 'components/Box';
-import HoverableBox from 'components/Box/HoverableBox';
 import Row from 'components/Row';
 import Text from 'components/Text';
 import { ScrollFogBox } from 'components/Box/ScrollFog';
-import decideIfPassValue from 'utils/decideIfPassValue';
 import globalMessages from 'global/i18n/globalMessages';
 import {
   makeSelectNameQuestionExists,
@@ -19,12 +16,12 @@ import {
 } from 'global/reducers/questions';
 import useOutsideClick from 'utils/useOutsideClick';
 import {
-  finishQuestion,
-  QuestionTypes,
+  AddableQuestionTypes,
   nameQuestion,
   participantReport,
   phoneQuestion,
 } from 'models/Session/QuestionTypes';
+import { AddableGroups } from 'models/QuestionGroup/QuestionGroupTypes';
 
 import { borders, boxShadows, colors, fontSizes } from 'theme';
 
@@ -32,16 +29,26 @@ import { useDropdownPositionHelper } from 'utils/useDropdownPositionHelper';
 import { useChildSizeCalculator } from 'utils/useChildSizeCalculator';
 import DefaultButtonComponent from './DefaultButtonComponent';
 import messages from './messages';
-import { DotCircle } from './styled';
+import NewItem from './NewItem';
+
+type NonReduxProps = {
+  onClick: (type: string) => void;
+  ButtonComponent?: React.ReactNode;
+};
+
+type Props = {
+  nameQuestionExists: boolean;
+  participantReportExists: boolean;
+  phoneQuestionExists: boolean;
+} & NonReduxProps;
 
 const QuestionTypeChooser = ({
-  intl: { formatMessage },
   onClick,
-  ButtonComponent,
+  ButtonComponent = DefaultButtonComponent,
   nameQuestionExists,
   participantReportExists,
   phoneQuestionExists,
-}) => {
+}: Props) => {
   const buttonRef = useRef(null);
   const containerRef = useRef(null);
   const chooserBoxRef = useRef(null);
@@ -62,9 +69,11 @@ const QuestionTypeChooser = ({
     typeChooserOpen,
   );
 
+  const { formatMessage } = useIntl();
+
   const toggleTypeChooser = () => setTypeChooserOpen(!typeChooserOpen);
 
-  const handleClick = (type) => {
+  const handleClick = (type: string) => {
     onClick(type);
     toggleTypeChooser();
   };
@@ -73,15 +82,14 @@ const QuestionTypeChooser = ({
 
   const filteredQuestions = useMemo(
     () =>
-      QuestionTypes.filter(
+      AddableQuestionTypes.filter(
         ({ id }) =>
-          id !== finishQuestion.id &&
           !(nameQuestionExists && id === nameQuestion.id) &&
           !(participantReportExists && id === participantReport.id) &&
           !(phoneQuestionExists && id === phoneQuestion.id),
       ),
     [
-      QuestionTypes,
+      AddableQuestionTypes,
       nameQuestionExists,
       participantReportExists,
       phoneQuestionExists,
@@ -91,6 +99,7 @@ const QuestionTypeChooser = ({
   return (
     <Row data-cy="question-type-chooser">
       <Box position="relative" width="100%" ref={chooserBoxRef}>
+        {/* @ts-ignore */}
         <ButtonComponent onClick={toggleTypeChooser} ref={buttonRef} />
         {typeChooserOpen && (
           <Box
@@ -114,6 +123,7 @@ const QuestionTypeChooser = ({
                 {formatMessage(messages.header)}
               </Text>
             </Box>
+            {/* @ts-ignore */}
             <ScrollFogBox
               padding={8}
               width="100%"
@@ -122,26 +132,24 @@ const QuestionTypeChooser = ({
               ref={containerRef}
               horizontalFogVisible={false}
             >
-              {filteredQuestions.map((questionType, i) => (
-                <HoverableBox
-                  key={questionType.id}
-                  onClick={() => handleClick(questionType.id)}
-                  padding={8}
-                  mb={decideIfPassValue({
-                    index: i,
-                    arrayLength: QuestionTypes.length,
-                    value: 4,
-                  })}
-                >
-                  <Row align="center">
-                    <DotCircle mr={18} bg={questionType.color} />
-                    <Text fontWeight="medium">
-                      {formatMessage(
-                        globalMessages.questionTypes[questionType.id],
-                      )}
-                    </Text>
-                  </Row>
-                </HoverableBox>
+              {filteredQuestions.map(({ color, id }) => (
+                <NewItem
+                  key={id}
+                  color={color}
+                  handleClick={() => handleClick(id)}
+                  // @ts-ignore
+                  title={formatMessage(globalMessages.questionTypes[id])}
+                />
+              ))}
+              {AddableGroups.map(({ color, id }) => (
+                <NewItem
+                  key={id}
+                  color={color}
+                  handleClick={() => handleClick(id)}
+                  // @ts-ignore
+                  title={formatMessage(globalMessages.questionGroupTypes[id])}
+                  isGroup
+                />
               ))}
             </ScrollFogBox>
           </Box>
@@ -149,19 +157,6 @@ const QuestionTypeChooser = ({
       </Box>
     </Row>
   );
-};
-
-QuestionTypeChooser.propTypes = {
-  intl: PropTypes.object,
-  onClick: PropTypes.func.isRequired,
-  ButtonComponent: PropTypes.elementType,
-  nameQuestionExists: PropTypes.bool,
-  participantReportExists: PropTypes.bool,
-  phoneQuestionExists: PropTypes.bool,
-};
-
-QuestionTypeChooser.defaultProps = {
-  ButtonComponent: DefaultButtonComponent,
 };
 
 const mapStateToProps = createStructuredSelector({
@@ -172,4 +167,7 @@ const mapStateToProps = createStructuredSelector({
 
 const withConnect = connect(mapStateToProps, null);
 
-export default compose(withConnect, injectIntl)(QuestionTypeChooser);
+export default compose(
+  withConnect,
+  injectIntl,
+)(QuestionTypeChooser) as React.ComponentType<NonReduxProps>;

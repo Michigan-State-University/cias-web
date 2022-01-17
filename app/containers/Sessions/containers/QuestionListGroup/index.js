@@ -20,7 +20,7 @@ import arrowUp from 'assets/svg/arrow-up-black.svg';
 import reorderIcon from 'assets/svg/reorder-hand.svg';
 
 import { reorderScope } from 'models/Session/ReorderScope';
-import { FinishGroupType } from 'models/Session/GroupTypes';
+import { GroupTypes } from 'models/QuestionGroup';
 import QuestionListItem from '../../components/QuestionListItem';
 import { Spacer, DraggableContainer } from './styled';
 import messages from './messages';
@@ -50,7 +50,7 @@ const QuestionListGroup = ({
   const handleToggleCollapsable = (value = null) =>
     toggleCollapsable(id, value);
 
-  const isFinishGroup = type === FinishGroupType;
+  const isFinishGroup = type === GroupTypes.FINISH;
 
   useEffect(() => {
     handleToggleCollapsable(true);

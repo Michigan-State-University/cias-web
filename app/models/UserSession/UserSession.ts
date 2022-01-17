@@ -1,6 +1,6 @@
 import { CamelToSnakeOmitId } from 'global/types/camelToSnake';
 
-enum UserSessionTypes {
+export enum UserSessionTypes {
   CLASSIC = 'UserSession::Classic',
   CAT = 'UserSession::Cat',
 }

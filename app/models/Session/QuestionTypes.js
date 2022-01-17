@@ -118,3 +118,7 @@ export const QuestionTypes = [
   thirdPartyQuestion,
   phoneQuestion,
 ];
+
+export const AddableQuestionTypes = QuestionTypes.filter(
+  ({ id }) => id !== finishQuestion.id,
+);
