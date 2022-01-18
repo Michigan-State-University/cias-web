@@ -331,6 +331,9 @@ export const NotAnswerableQuestions = [
 export const QuestionsWithoutVariable = [
   ...NotAnswerableQuestions,
   thirdPartyQuestion.id,
+  tlfbConfig.id,
+  tlfbQuestion.id,
+  tlfbEvents.id,
 ];
 
 export const DisabledNarratorSettingsByQuestionType = {
