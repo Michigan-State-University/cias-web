@@ -1,5 +1,7 @@
 import { put, takeLatest, select } from 'redux-saga/effects';
 import axios from 'axios';
+import omit from 'lodash/omit';
+import findLast from 'lodash/findLast';
 
 import { mapQuestionToStateObject } from 'utils/mapResponseObjects';
 import { feedbackQuestion, finishQuestion } from 'models/Session/QuestionTypes';
@@ -11,15 +13,13 @@ import { setAnimationStopPosition } from 'global/reducers/localState';
 import { makeSelectQuestionGroups } from 'global/reducers/questionGroups';
 import { getNarratorPositionWhenQuestionIsAdded } from 'utils/getNarratorPosition';
 import isNullOrUndefined from 'utils/isNullOrUndefined';
-
 import { makeSelectSession } from 'global/reducers/session';
 import { instantiateBlockForType } from 'models/Session/utils';
-import { PlainGroupType } from 'models/Session/GroupTypes';
-import omit from 'lodash/omit';
+import { GroupType } from 'models/QuestionGroup';
 import { groupQuestionsSuccess } from 'global/reducers/questionGroups/actions';
-import findLast from 'lodash/findLast';
 import { jsonApiToObject } from 'utils/jsonApiMapper';
 import objectKeysToSnakeCase from 'utils/objectToSnakeCase';
+
 import { CREATE_QUESTION_REQUEST } from '../constants';
 import { createQuestionSuccess, createQuestionError } from '../actions';
 import { makeSelectQuestions, makeSelectSelectedQuestion } from '../selectors';
@@ -57,7 +57,7 @@ function* createQuestion({ payload: { question, id: sessionId } }) {
 
       const lastPlainGroup = findLast(
         groups,
-        ({ type }) => type === PlainGroupType,
+        ({ type }) => type === GroupType.PLAIN,
       );
 
       const newGroupPosition = isNullOrUndefined(lastPlainGroup)
@@ -68,7 +68,7 @@ function* createQuestion({ payload: { question, id: sessionId } }) {
         question_group: {
           title: `Group ${newGroupPosition}`,
           questions: [newQuestion],
-          type: PlainGroupType,
+          type: GroupType.PLAIN,
         },
       });
 

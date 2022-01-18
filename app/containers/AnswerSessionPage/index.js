@@ -39,7 +39,7 @@ import {
 import logInGuestSaga from 'global/reducers/auth/sagas/logInGuest';
 import { canPreview } from 'models/Status/statusPermissions';
 import { finishQuestion } from 'models/Session/QuestionTypes';
-import { UserSessionType } from 'models/Session/UserSession';
+import { UserSessionType } from 'models/UserSession/UserSession';
 
 import QuestionTranscript from 'containers/QuestionTranscript';
 

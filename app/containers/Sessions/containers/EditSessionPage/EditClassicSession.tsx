@@ -84,11 +84,10 @@ import { JumpToScreenLocationState } from 'global/types/locationState';
 
 import GroupActionButton from 'containers/Sessions/components/GroupActionButton';
 import { reorderScope } from 'models/Session/ReorderScope';
-import { FinishGroupType } from 'models/Session/GroupTypes';
 import { ClassicSession } from 'models/Session';
 
 import { QuestionDTO } from 'models/Question';
-import { GroupDto } from 'models/Groups/GroupDto';
+import { QuestionGroup, GroupType } from 'models/QuestionGroup';
 import QuestionDetails from '../../components/QuestionDetails';
 import QuestionSettings from '../../components/QuestionSettings';
 import QuestionTypeChooser from '../../components/QuestionTypeChooser';
@@ -156,7 +155,7 @@ type Props = {
   createQuestion: (question: QuestionDTO, sessionId: string) => void;
   selectedQuestion: string;
   questions: QuestionDTO[];
-  groups: GroupDto[];
+  groups: QuestionGroup[];
   selectQuestion: (id: string) => void;
 } & NonReduxProps;
 
@@ -429,10 +428,10 @@ const EditClassicSessionPage = ({
     );
   };
 
-  const finishGroup = groups.find((group) => group.type === FinishGroupType);
+  const finishGroup = groups.find((group) => group.type === GroupType.FINISH);
 
   const filteredGroups = groups.filter(
-    (group) => group.type !== FinishGroupType,
+    (group) => group.type !== GroupType.FINISH,
   );
 
   const goToSessionMap = () => {

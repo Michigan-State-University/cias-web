@@ -29,6 +29,7 @@ import {
   thirdPartyQuestion,
   participantReport,
 } from 'models/Session/QuestionTypes';
+import { GroupType } from 'models/QuestionGroup';
 import { Roles } from 'models/User/UserRoles';
 import { archived, closed, draft, published } from 'models/Status/StatusTypes';
 import { UserInterventionStatus } from 'models/UserIntervention/StatusTypes';
@@ -196,6 +197,12 @@ export default defineMessages({
     [thirdPartyQuestion.id]: {
       id: `${scope}.${thirdPartyQuestion.id}`,
       defaultMessage: 'Third Party Report',
+    },
+  },
+  questionGroupType: {
+    [GroupType.TLFB]: {
+      id: `${scope}.${GroupType.TLFB}`,
+      defaultMessage: 'Timeline followback',
     },
   },
   statuses: {

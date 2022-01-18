@@ -17,4 +17,8 @@ export default defineMessages({
     id: `${scope}.addScreen`,
     defaultMessage: '+ Add new screen',
   },
+  createsGroup: {
+    id: `${scope}.createsGroup`,
+    defaultMessage: 'Creates group',
+  },
 });
