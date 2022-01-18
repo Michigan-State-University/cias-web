@@ -70,6 +70,8 @@ const colors = {
   supernova: '#FFC50D',
   mischka: '#DDE0E6',
   gainsbro: '#DADADA',
+  ghost: '#CCD1D9',
+  babyBlue: '#D2E0F1',
   asparagus: '#6B9E59',
 };
 
