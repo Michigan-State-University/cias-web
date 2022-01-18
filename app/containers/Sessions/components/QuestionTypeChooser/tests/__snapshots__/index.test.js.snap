@@ -309,7 +309,7 @@ exports[`<QuestionTypeChooser /> should match the snapshot while being open 1`] 
   color: #2F3850;
 }
 
-.c26 {
+.c27 {
   font-family: DM Sans;
   font-size: 13px;
   line-height: 130%;
@@ -612,6 +612,29 @@ exports[`<QuestionTypeChooser /> should match the snapshot while being open 1`] 
   height: 10px;
   margin-right: 18px;
   background-color: rgba(210,55,29,1);
+  opacity: 1;
+  color: #2F3850;
+}
+
+.c26 {
+  border-radius: 50%;
+  background-color: #6B9E59;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+  -webkit-justify-content: center;
+  -ms-flex-pack: center;
+  justify-content: center;
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  width: 10px;
+  height: 10px;
+  margin-right: 18px;
+  background-color: rgba(107,158,89,1);
   opacity: 1;
   color: #2F3850;
 }
@@ -1011,7 +1034,7 @@ exports[`<QuestionTypeChooser /> should match the snapshot while being open 1`] 
                   class="c3"
                 >
                   <div
-                    class="c22"
+                    class="c26"
                     opacity="1"
                   />
                   <p
@@ -1022,7 +1045,7 @@ exports[`<QuestionTypeChooser /> should match the snapshot while being open 1`] 
                   </p>
                 </div>
                 <p
-                  class="c26"
+                  class="c27"
                   color="#107969"
                 >
                   Creates group
