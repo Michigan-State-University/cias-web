@@ -60,7 +60,6 @@ import {
   makeSelectQuestions,
   makeSelectSelectedQuestionId,
   reorderQuestionListRequest,
-  makeSelectLoader,
   deleteQuestionsRequest,
   selectQuestion as selectQuestionAction,
   createQuestionGroupRequest,
@@ -615,7 +614,6 @@ const EditClassicSessionPage = ({
 const mapStateToProps = createStructuredSelector({
   questions: makeSelectQuestions(),
   selectedQuestion: makeSelectSelectedQuestionId(),
-  createQuestionsLoader: makeSelectLoader('createQuestionLoading'),
   groups: makeSelectQuestionGroups(),
 });
 
