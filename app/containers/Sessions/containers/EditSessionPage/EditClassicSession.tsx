@@ -63,6 +63,7 @@ import {
   makeSelectLoader,
   deleteQuestionsRequest,
   selectQuestion as selectQuestionAction,
+  createQuestionGroupRequest,
 } from 'global/reducers/questions';
 import {
   reorderGroupListRequest,
@@ -88,6 +89,7 @@ import { ClassicSession } from 'models/Session';
 
 import { QuestionDTO } from 'models/Question';
 import { QuestionGroup, GroupType } from 'models/QuestionGroup';
+import { questionType } from 'models/Session/QuestionTypes';
 import QuestionDetails from '../../components/QuestionDetails';
 import QuestionSettings from '../../components/QuestionSettings';
 import QuestionTypeChooser from '../../components/QuestionTypeChooser';
@@ -157,6 +159,7 @@ type Props = {
   questions: QuestionDTO[];
   groups: QuestionGroup[];
   selectQuestion: (id: string) => void;
+  createQuestionGroup: (sessionId: string, groupType: string) => void;
 } & NonReduxProps;
 
 const EditClassicSessionPage = ({
@@ -175,6 +178,7 @@ const EditClassicSessionPage = ({
   getQuestionGroups,
   session: { id: sessionId, name: sessionName },
   interventionStatus,
+  createQuestionGroup,
 }: Props): JSX.Element => {
   const params = useParams<{ sessionId: string }>();
   const { formatMessage } = useIntl();
@@ -317,18 +321,22 @@ const EditClassicSessionPage = ({
   }, []);
 
   const onCreateQuestion = (type: string) => {
-    const newQuestionSubtitle =
-      // @ts-ignore
-      messages.defaultQuestionSubtitles[type] || messages.newQuestionSubtitle;
+    if (type.includes(questionType)) {
+      const newQuestionSubtitle =
+        // @ts-ignore
+        messages.defaultQuestionSubtitles[type] || messages.newQuestionSubtitle;
 
-    createQuestion(
-      instantiateEmptyQuestion(
-        formatMessage(messages.newQuestionTitle),
-        type,
-        formatMessage(newQuestionSubtitle),
-      ) as QuestionDTO,
-      params.sessionId,
-    );
+      createQuestion(
+        instantiateEmptyQuestion(
+          formatMessage(messages.newQuestionTitle),
+          type,
+          formatMessage(newQuestionSubtitle),
+        ) as QuestionDTO,
+        params.sessionId,
+      );
+    } else {
+      createQuestionGroup(params.sessionId, type);
+    }
   };
 
   const onDragEnd = (result: DropResult) => {
@@ -622,6 +630,7 @@ const mapDispatchToProps = {
   changeGroupName: changeGroupNameRequest,
   getQuestionGroups: getQuestionGroupsRequest,
   selectQuestion: selectQuestionAction,
+  createQuestionGroup: createQuestionGroupRequest,
 };
 
 const withConnect = connect(mapStateToProps, mapDispatchToProps);

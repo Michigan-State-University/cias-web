@@ -85,3 +85,9 @@ export const UPDATE_QUESTION_DATA = 'app/EditSessionPage/UPDATE_QUESTION_DATA';
 
 export const UPDATE_QUESTION_SETTINGS =
   'app/EditSessionPage/UPDATE_QUESTION_SETTINGS';
+
+export const CREATE_QUESTION_GROUP_REQUEST =
+  'app/EditSessionPage/CREATE_QUESTION_GROUP_REQUEST';
+
+export const CREATE_QUESTIONS_SUCCESS =
+  'app/EditSessionPage/CREATE_QUESTIONS_SUCCESS';

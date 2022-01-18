@@ -1,104 +1,122 @@
 import { colors } from 'theme';
 import QuestionType from './QuestionType';
 
+export const questionType = 'Question::';
+
 export const singleQuestion = new QuestionType(
-  'Question::Single',
+  `${questionType}Single`,
   'Single answer',
   colors.azure,
 );
 
 export const multiQuestion = new QuestionType(
-  'Question::Multiple',
+  `${questionType}Multiple`,
   'Multi answer',
   colors.electricPurple,
 );
 
 export const textboxQuestion = new QuestionType(
-  'Question::FreeResponse',
+  `${questionType}FreeResponse`,
   'Free Response',
   colors.tangerine,
 );
 
 export const thirdPartyQuestion = new QuestionType(
-  'Question::ThirdParty',
+  `${questionType}ThirdParty`,
   'Third Party',
   colors.pistachio,
 );
 
 export const nameQuestion = new QuestionType(
-  'Question::Name',
+  `${questionType}Name`,
   'Name',
   colors.aqua,
   '.:name:.',
 );
 
 export const numberQuestion = new QuestionType(
-  'Question::Number',
+  `${questionType}Number`,
   'Number',
   colors.golden,
 );
 
 export const gridQuestion = new QuestionType(
-  'Question::Grid',
+  `${questionType}Grid`,
   'Grid',
   colors.pink,
 );
 
 export const visualAnalogueScaleQuestion = new QuestionType(
-  'Question::Slider',
+  `${questionType}Slider`,
   'Slider',
   colors.pink,
 );
 
 export const informationQuestion = new QuestionType(
-  'Question::Information',
+  `${questionType}Information`,
   'Information Only',
   colors.navyBlue,
 );
 
 export const urlQuestion = new QuestionType(
-  'Question::ExternalLink',
+  `${questionType}ExternalLink`,
   'External Link',
   colors.jungleGreen,
 );
 
 export const feedbackQuestion = new QuestionType(
-  'Question::Feedback',
+  `${questionType}Feedback`,
   'Feedback',
   colors.olive,
 );
 
 export const finishQuestion = new QuestionType(
-  'Question::Finish',
+  `${questionType}Finish`,
   'Finish',
   colors.brightGreen,
 );
 
 export const phoneQuestion = new QuestionType(
-  'Question::Phone',
+  `${questionType}Phone`,
   'Phone',
   colors.vermilion,
 );
 
 export const dateQuestion = new QuestionType(
-  'Question::Date',
+  `${questionType}Date`,
   'Date',
   colors.bluewood,
 );
 
 export const participantReport = new QuestionType(
-  'Question::ParticipantReport',
+  `${questionType}ParticipantReport`,
   'ParticipantReport',
   colors.electricViolet,
 );
 
 export const currencyQuestion = new QuestionType(
-  'Question::Currency',
+  `${questionType}Currency`,
   'Currency',
   colors.olive,
 );
 
-export const questionType = 'Question::';
+export const tlfbConfig = new QuestionType(
+  `${questionType}TlfbConfig`,
+  'TLFB Config',
+  colors.asparagus,
+);
+
+export const tlfbEvents = new QuestionType(
+  `${questionType}TlfbEvents`,
+  'TLFB Events',
+  colors.asparagus,
+);
+
+export const tlfbQuestion = new QuestionType(
+  `${questionType}TlfbQuestion`,
+  'TLFB Question',
+  colors.asparagus,
+);
 
 export const QuestionTypes = [
   singleQuestion,
@@ -117,8 +135,18 @@ export const QuestionTypes = [
   participantReport,
   thirdPartyQuestion,
   phoneQuestion,
+  tlfbQuestion,
+  tlfbConfig,
+  tlfbEvents,
+];
+
+const notAddableQuestionTypes = [
+  finishQuestion.id,
+  tlfbConfig.id,
+  tlfbEvents.id,
+  tlfbQuestion.id,
 ];
 
 export const AddableQuestionTypes = QuestionTypes.filter(
-  ({ id }) => id !== finishQuestion.id,
+  ({ id }) => !notAddableQuestionTypes.includes(id),
 );
