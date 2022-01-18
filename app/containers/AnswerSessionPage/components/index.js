@@ -18,6 +18,8 @@ import {
   currencyQuestion,
   thirdPartyQuestion,
   participantReport,
+  tlfbEvents,
+  tlfbQuestion,
 } from 'models/Session/QuestionTypes';
 
 import CurrencyQuestion from './CurrencyQuestion';
@@ -36,6 +38,8 @@ import DateQuestion from './DateQuestion';
 import ParticipantReport from './ParticipantReportQuestion';
 import NameQuestion from './NameQuestion';
 import ThirdPartyQuestion from './ThirdPartyQuestion';
+import TlfbEvents from './TlfbEvents';
+import TlfbQuestion from './TlfbQuestion';
 
 export const renderQuestionByType = (question, sharedProps) => {
   const { type } = question;
@@ -74,6 +78,10 @@ export const renderQuestionByType = (question, sharedProps) => {
       return <FinishScreen question={question} {...sharedProps} />;
     case currencyQuestion.id:
       return <CurrencyQuestion question={question} {...sharedProps} />;
+    case tlfbEvents.id:
+      return <TlfbEvents question={question} {...sharedProps} />;
+    case tlfbQuestion.id:
+      return <TlfbQuestion question={question} {...sharedProps} />;
     default:
       return <ErrorAlert errorText={`CANNOT RENDER ${type}`} />;
   }
