@@ -62,7 +62,6 @@ const RenderQuestionDetails = ({
   interventionStatus,
   formatMessage,
   changeGroupName,
-  sessionId,
   currentGroupScope,
   intervention,
 }) => {
@@ -111,9 +110,7 @@ const RenderQuestionDetails = ({
                 placeholder={formatMessage(messages.groupPlaceholder)}
                 maxWidth="initial"
                 onFocus={selectInputText}
-                onBlur={(val) =>
-                  changeGroupName(val, sessionId, currentGroupScope.id)
-                }
+                onBlur={(val) => changeGroupName(val)}
                 disabled={!editingPossible}
               />
               {logoUrl && (
@@ -208,7 +205,6 @@ RenderQuestionDetails.propTypes = {
   interventionStatus: PropTypes.string,
   formatMessage: PropTypes.func,
   changeGroupName: PropTypes.func,
-  sessionId: PropTypes.string,
   currentGroupScope: PropTypes.object,
   intervention: PropTypes.object,
 };

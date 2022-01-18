@@ -44,6 +44,12 @@ export const makeSelectSelectedQuestion = () =>
     substate.questions.find(({ id }) => id === substate.selectedQuestion),
   );
 
+export const makeSelectSelectedQuestionGroupId = () =>
+  createSelector(
+    makeSelectSelectedQuestion(),
+    (question) => question.question_group_id,
+  );
+
 export const makeSelectLoaders = () =>
   createSelector(selectQuestions, (substate) => substate.loaders);
 

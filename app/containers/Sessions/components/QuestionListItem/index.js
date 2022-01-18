@@ -19,6 +19,7 @@ import { colors, themeColors } from 'theme';
 import { getNarratorPositionWhenQuestionIsChanged } from 'utils/getNarratorPosition';
 import { hasObjectProperty } from 'utils/hasObjectProperty';
 import { htmlToPlainText } from 'utils/htmlToPlainText';
+import settingsTabLabels from 'utils/settingsTabsLabels';
 import {
   copyQuestionRequest,
   deleteQuestionRequest,
@@ -42,6 +43,8 @@ import {
   nameQuestion,
   participantReport,
   phoneQuestion,
+  tlfbEvents,
+  tlfbQuestion,
 } from 'models/Session/QuestionTypes';
 import Box from 'components/Box';
 import Checkbox from 'components/Checkbox';
@@ -176,7 +179,15 @@ const QuestionListItem = ({
   const beforeRender = () => {
     setDraggable(false);
     changeNarratorBlockIndex(-1);
-    toggleSettings({ index, questionIndex: selectedQuestionIndex });
+
+    const toggleNarratorTab =
+      type === tlfbEvents.id || type === tlfbQuestion.id;
+
+    toggleSettings({
+      index,
+      questionIndex: selectedQuestionIndex,
+      tab: toggleNarratorTab ? settingsTabLabels.narrator : undefined,
+    });
   };
 
   const renderQuestion = () => (
