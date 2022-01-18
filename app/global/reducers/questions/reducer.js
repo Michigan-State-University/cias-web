@@ -16,9 +16,7 @@ import { insertAt, removeAt } from 'utils/arrayUtils';
 import { assignDraftItemsById, updateItemById } from 'utils/reduxUtils';
 import {
   SELECT_QUESTION,
-  CREATE_QUESTION_REQUEST,
   CREATE_QUESTION_SUCCESS,
-  CREATE_QUESTION_ERROR,
   GET_QUESTIONS_REQUEST,
   GET_QUESTIONS_SUCCESS,
   GET_QUESTIONS_ERROR,
@@ -83,7 +81,6 @@ export const initialState = {
   loaders: {
     getQuestionsLoading: true,
     updateQuestionLoading: false,
-    createQuestionLoading: false,
   },
 };
 
@@ -95,10 +92,6 @@ export const questionsReducer = (state = initialState, action) =>
         draft.selectedQuestion = action.payload.id;
         break;
 
-      case CREATE_QUESTION_REQUEST:
-        draft.loaders.createQuestionLoading = true;
-        break;
-
       case CREATE_QUESTION_SUCCESS:
         draft.questions = [
           ...state.questions,
@@ -107,7 +100,6 @@ export const questionsReducer = (state = initialState, action) =>
         draft.cache.questions = draft.questions;
         draft.selectedQuestion = action.payload.question.id;
         draft.lastCreatedQuestionId = action.payload.question.id;
-        draft.loaders.createQuestionLoading = false;
         break;
 
       case CREATE_QUESTIONS_SUCCESS: {
@@ -120,12 +112,8 @@ export const questionsReducer = (state = initialState, action) =>
         draft.cache.questions = draft.questions;
         draft.selectedQuestion = firstCreatedQuestion.id;
         draft.lastCreatedQuestionId = firstCreatedQuestion.id;
-        draft.loaders.createQuestionLoading = false;
         break;
       }
-      case CREATE_QUESTION_ERROR:
-        draft.loaders.createQuestionLoading = false;
-        break;
 
       case GET_QUESTIONS_REQUEST:
         draft.loaders.getQuestionsLoading = true;
