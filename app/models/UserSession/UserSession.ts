@@ -1,6 +1,6 @@
 import { CamelToSnakeOmitId } from 'global/types/camelToSnake';
 
-export enum UserSessionTypes {
+export enum UserSessionType {
   CLASSIC = 'UserSession::Classic',
   CAT = 'UserSession::Cat',
 }
@@ -14,7 +14,7 @@ export interface UserSession {
   lastAnswerAt: Nullable<String>;
   logoUrl: Nullable<String>;
   sessionId: String;
-  type: UserSessionTypes;
+  type: UserSessionType;
   scheduledAt: Nullable<string>;
 }
 

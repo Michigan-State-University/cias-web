@@ -21,7 +21,7 @@ const NewItem = ({ handleClick, title, isGroup, color }: Props) => (
     <Row justify="between">
       <Row align="center">
         <DotCircle mr={18} bg={color} />
-        <Text fontWeight="medium">{title || isGroup}</Text>
+        <Text fontWeight="medium">{title}</Text>
       </Row>
       {isGroup && (
         <Text color={colors.surfieGreen}>

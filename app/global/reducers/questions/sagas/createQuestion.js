@@ -15,7 +15,7 @@ import { getNarratorPositionWhenQuestionIsAdded } from 'utils/getNarratorPositio
 import isNullOrUndefined from 'utils/isNullOrUndefined';
 import { makeSelectSession } from 'global/reducers/session';
 import { instantiateBlockForType } from 'models/Session/utils';
-import { GroupTypes } from 'models/QuestionGroup';
+import { GroupType } from 'models/QuestionGroup';
 import { groupQuestionsSuccess } from 'global/reducers/questionGroups/actions';
 import { jsonApiToObject } from 'utils/jsonApiMapper';
 import objectKeysToSnakeCase from 'utils/objectToSnakeCase';
@@ -57,7 +57,7 @@ function* createQuestion({ payload: { question, id: sessionId } }) {
 
       const lastPlainGroup = findLast(
         groups,
-        ({ type }) => type === GroupTypes.PLAIN,
+        ({ type }) => type === GroupType.PLAIN,
       );
 
       const newGroupPosition = isNullOrUndefined(lastPlainGroup)
@@ -68,7 +68,7 @@ function* createQuestion({ payload: { question, id: sessionId } }) {
         question_group: {
           title: `Group ${newGroupPosition}`,
           questions: [newQuestion],
-          type: GroupTypes.PLAIN,
+          type: GroupType.PLAIN,
         },
       });
 

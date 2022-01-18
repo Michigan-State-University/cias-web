@@ -1,5 +1,5 @@
 import React, { useMemo, useRef, useState } from 'react';
-import { injectIntl, useIntl } from 'react-intl';
+import { useIntl } from 'react-intl';
 import { connect } from 'react-redux';
 import { createStructuredSelector } from 'reselect';
 import { compose } from 'redux';
@@ -21,7 +21,7 @@ import {
   participantReport,
   phoneQuestion,
 } from 'models/Session/QuestionTypes';
-import { AddableGroups } from 'models/QuestionGroup/QuestionGroupTypes';
+import { AddableGroups } from 'models/QuestionGroup';
 
 import { borders, boxShadows, colors, fontSizes } from 'theme';
 
@@ -147,7 +147,7 @@ const QuestionTypeChooser = ({
                   color={color}
                   handleClick={() => handleClick(id)}
                   // @ts-ignore
-                  title={formatMessage(globalMessages.questionGroupTypes[id])}
+                  title={formatMessage(globalMessages.questionGroupType[id])}
                   isGroup
                 />
               ))}
@@ -167,7 +167,6 @@ const mapStateToProps = createStructuredSelector({
 
 const withConnect = connect(mapStateToProps, null);
 
-export default compose(
-  withConnect,
-  injectIntl,
-)(QuestionTypeChooser) as React.ComponentType<NonReduxProps>;
+export default compose(withConnect)(
+  QuestionTypeChooser,
+) as any as React.ComponentType<NonReduxProps>;

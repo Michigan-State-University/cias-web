@@ -1,12 +1,12 @@
 import { colors } from 'theme';
 
 import QuestionGroupType from './QuestionGroupType';
-import { GroupTypes } from './QuestionGroup';
+import { GroupType } from './QuestionGroup';
 
 const tlfbGroup = new QuestionGroupType(
-  GroupTypes.TLFB,
+  GroupType.TLFB,
   'Timeline Followback',
-  colors.surfieGreen,
+  colors.asparagus,
 );
 
 const AddableGroups = [tlfbGroup];

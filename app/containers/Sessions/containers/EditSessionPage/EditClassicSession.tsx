@@ -87,7 +87,7 @@ import { reorderScope } from 'models/Session/ReorderScope';
 import { ClassicSession } from 'models/Session';
 
 import { QuestionDTO } from 'models/Question';
-import { QuestionGroup, GroupTypes } from 'models/QuestionGroup';
+import { QuestionGroup, GroupType } from 'models/QuestionGroup';
 import QuestionDetails from '../../components/QuestionDetails';
 import QuestionSettings from '../../components/QuestionSettings';
 import QuestionTypeChooser from '../../components/QuestionTypeChooser';
@@ -428,10 +428,10 @@ const EditClassicSessionPage = ({
     );
   };
 
-  const finishGroup = groups.find((group) => group.type === GroupTypes.FINISH);
+  const finishGroup = groups.find((group) => group.type === GroupType.FINISH);
 
   const filteredGroups = groups.filter(
-    (group) => group.type !== GroupTypes.FINISH,
+    (group) => group.type !== GroupType.FINISH,
   );
 
   const goToSessionMap = () => {

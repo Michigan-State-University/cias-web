@@ -9,7 +9,7 @@ import {
   makeSelectQuestionGroups,
 } from 'global/reducers/questionGroups/selectors';
 import findLast from 'lodash/findLast';
-import { GroupTypes } from 'models/QuestionGroup';
+import { GroupType } from 'models/QuestionGroup';
 import isNullOrUndefined from 'utils/isNullOrUndefined';
 
 import messages from '../messages';
@@ -39,7 +39,7 @@ function* copyQuestions({ payload: { questionIds, sessionId } }) {
       const groups = yield select(makeSelectQuestionGroups());
       const lastPlainGroup = findLast(
         groups,
-        ({ type }) => type === GroupTypes.PLAIN,
+        ({ type }) => type === GroupType.PLAIN,
       );
       const newGroupPosition = isNullOrUndefined(lastPlainGroup)
         ? 1

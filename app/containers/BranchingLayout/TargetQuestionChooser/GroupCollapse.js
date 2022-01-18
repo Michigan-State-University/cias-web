@@ -9,7 +9,7 @@ import Text from 'components/Text';
 
 import arrowDown from 'assets/svg/arrow-down-black.svg';
 import arrowUp from 'assets/svg/arrow-up-black.svg';
-import { GroupTypes } from 'models/QuestionGroup';
+import { GroupType } from 'models/QuestionGroup';
 import { makeSelectGroupQuestions } from 'global/reducers/questions/selectors';
 import { colors } from 'theme';
 
@@ -20,7 +20,7 @@ const GroupCollapse = ({ questionGroup, questions, questionListItemProps }) => {
   const [openCollapsable, setOpenCollapsable] = useState(false);
   const toggleCollapsable = () => setOpenCollapsable(!openCollapsable);
   if (questions.length === 0) return <></>;
-  if (questionGroup.type === GroupTypes.FINISH) {
+  if (questionGroup.type === GroupType.FINISH) {
     const question = questions[0];
     return <FinishGroupItem question={question} {...questionListItemProps} />;
   }

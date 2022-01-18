@@ -2,7 +2,7 @@ import axios from 'axios';
 import { put, takeLatest } from 'redux-saga/effects';
 import sortBy from 'lodash/sortBy';
 
-import { GroupTypes } from 'models/QuestionGroup';
+import { GroupType } from 'models/QuestionGroup';
 
 import { jsonApiToArray } from 'utils/jsonApiMapper';
 import { FETCH_QUESTION_GROUPS_REQUEST } from '../constants';
@@ -18,7 +18,7 @@ export function* fetchQuestionsGroups({ payload: { id } }) {
     const groups = jsonApiToArray(data, 'questionGroup');
 
     const sortedGroups = sortBy(groups, 'position').filter(
-      ({ type }) => type !== GroupTypes.FINISH,
+      ({ type }) => type !== GroupType.FINISH,
     );
 
     const mappedGroups = sortedGroups.map((group) => ({

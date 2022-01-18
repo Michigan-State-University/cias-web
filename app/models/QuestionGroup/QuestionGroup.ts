@@ -1,6 +1,6 @@
 import { CamelToSnakeOmitId } from 'global/types/camelToSnake';
 
-export enum GroupTypes {
+export enum GroupType {
   PLAIN = 'QuestionGroup::Plain',
   FINISH = 'QuestionGroup::Finish',
   TLFB = 'QuestionGroup::Tlfb',
@@ -11,7 +11,7 @@ export interface QuestionGroup {
   sessionId: string;
   title: string;
   position: number;
-  type: GroupTypes;
+  type: GroupType;
 }
 
 export type QuestionGroupDTO = CamelToSnakeOmitId<QuestionGroup>;

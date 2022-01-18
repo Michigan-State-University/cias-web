@@ -39,7 +39,7 @@ import {
 import logInGuestSaga from 'global/reducers/auth/sagas/logInGuest';
 import { canPreview } from 'models/Status/statusPermissions';
 import { finishQuestion } from 'models/Session/QuestionTypes';
-import { UserSessionTypes } from 'models/UserSession/UserSession';
+import { UserSessionType } from 'models/UserSession/UserSession';
 
 import QuestionTranscript from 'containers/QuestionTranscript';
 
@@ -391,7 +391,7 @@ export function AnswerSessionPage({
     const canSkipNarrator = narratorSkippable || !isAnimationOngoing;
 
     const shouldRenderSkipQuestionButton =
-      userSessionType !== UserSessionTypes.CAT_MH &&
+      userSessionType !== UserSessionType.CAT_MH &&
       !isLastScreen &&
       !NOT_SKIPABLE_QUESTIONS.includes(type);
     const skipQuestionButtonDisabled = required;
