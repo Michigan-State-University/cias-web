@@ -76,6 +76,13 @@ export interface CurrencyQuestionSettings
   extends QuestionBaseSettings,
     RequiredSetting {}
 
+// Designs do not predict any settings to be available for TLFB screens but this is what BE returns
+export interface TlfbConfigSettings extends QuestionBaseSettings {}
+
+export interface TlfbEventsSettings extends QuestionBaseSettings {}
+
+export interface TlfbQuestionSettings extends QuestionBaseSettings {}
+
 export type QuestionSettings =
   | SingleQuestionSettings
   | MultipleQuestionSettings
@@ -92,4 +99,7 @@ export type QuestionSettings =
   | PhoneQuestionSettings
   | DateQuestionSettings
   | ParticipantReportQuestionSettings
-  | CurrencyQuestionSettings;
+  | CurrencyQuestionSettings
+  | TlfbConfigSettings
+  | TlfbEventsSettings
+  | TlfbQuestionSettings;

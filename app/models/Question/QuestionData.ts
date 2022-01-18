@@ -78,6 +78,12 @@ export interface ParticipantReportQuestionData
 
 export interface CurrencyQuestionData extends QuestionPayloadData<string> {}
 
+export type TlfbConfigData = never;
+
+export type TlfbEventsData = never;
+
+export type TlfbQuestionData = never;
+
 export type QuestionData =
   | SingleQuestionData
   | MultipleQuestionData
@@ -94,4 +100,7 @@ export type QuestionData =
   | PhoneQuestionData
   | DateQuestionData
   | ParticipantReportQuestionData
-  | CurrencyQuestionData;
+  | CurrencyQuestionData
+  | TlfbConfigData
+  | TlfbEventsData
+  | TlfbQuestionData;

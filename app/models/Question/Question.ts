@@ -23,6 +23,9 @@ import {
   SingleQuestionSettings,
   SliderQuestionSettings,
   ThirdPartyQuestionSettings,
+  TlfbConfigSettings,
+  TlfbEventsSettings,
+  TlfbQuestionSettings,
 } from './QuestionSettings';
 import {
   QuestionBody,
@@ -42,6 +45,9 @@ import {
   DateQuestionBody,
   ParticipantReportQuestionBody,
   CurrencyQuestionBody,
+  TlfbConfigBody,
+  TlfbEventsBody,
+  TlfbQuestionBody,
 } from './QuestionBody';
 import { QuestionOriginalText } from './QuestionOriginalText';
 
@@ -182,6 +188,30 @@ export type CurrencyQuestion = GenericQuestion<
 >;
 export type CurrencyQuestionDTO = CamelToSnake<CurrencyQuestion>;
 
+export type TlfbConfig = GenericQuestion<
+  QuestionTypes.TLFB_CONFIG,
+  TlfbConfigBody,
+  TlfbConfigSettings
+>;
+
+export type TlfbConfigDTO = CamelToSnake<TlfbConfig>;
+
+export type TlfbEvents = GenericQuestion<
+  QuestionTypes.TLFB_EVENTS,
+  TlfbEventsBody,
+  TlfbEventsSettings
+>;
+
+export type TlfbEventsDTO = CamelToSnake<TlfbEvents>;
+
+export type TlfbQuestion = GenericQuestion<
+  QuestionTypes.TLFB_QUESTION,
+  TlfbQuestionBody,
+  TlfbQuestionSettings
+>;
+
+export type TlfbQuestionDTO = CamelToSnake<TlfbQuestion>;
+
 export type Question =
   | SingleQuestion
   | MultipleQuestion
@@ -198,5 +228,8 @@ export type Question =
   | PhoneQuestion
   | DateQuestion
   | ParticipantReportQuestion
-  | CurrencyQuestion;
+  | CurrencyQuestion
+  | TlfbConfig
+  | TlfbEvents
+  | TlfbQuestion;
 export type QuestionDTO = CamelToSnake<Question>;
