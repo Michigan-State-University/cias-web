@@ -28,6 +28,9 @@ import {
   currencyQuestion,
   thirdPartyQuestion,
   participantReport,
+  tlfbConfig,
+  tlfbEvents,
+  tlfbQuestion,
 } from 'models/Session/QuestionTypes';
 import { GroupType } from 'models/QuestionGroup';
 import { Roles } from 'models/User/UserRoles';
@@ -174,10 +177,6 @@ export default defineMessages({
       id: `${scope}.${urlQuestion.id}`,
       defaultMessage: 'External Link',
     },
-    'Question::FollowUpContact': {
-      id: `${scope}.Question::FollowUpContact`,
-      defaultMessage: 'FollowUpContact',
-    },
     [feedbackQuestion.id]: {
       id: `${scope}.${feedbackQuestion.id}`,
       defaultMessage: 'Feedback',
@@ -197,6 +196,18 @@ export default defineMessages({
     [thirdPartyQuestion.id]: {
       id: `${scope}.${thirdPartyQuestion.id}`,
       defaultMessage: 'Third Party Report',
+    },
+    [tlfbConfig.id]: {
+      id: `${scope}.${tlfbConfig.id}`,
+      defaultMessage: 'TLFB Config',
+    },
+    [tlfbEvents.id]: {
+      id: `${scope}.${tlfbEvents.id}`,
+      defaultMessage: 'TLFB Events',
+    },
+    [tlfbQuestion.id]: {
+      id: `${scope}.${tlfbQuestion.id}`,
+      defaultMessage: 'TLFB Questions',
     },
   },
   questionGroupType: {
@@ -328,5 +339,23 @@ export default defineMessages({
   [TextMessageType.ALERT]: {
     id: `${scope}.${TextMessageType.ALERT}`,
     defaultMessage: 'Alert',
+  },
+  defaultTlfbGroupName: {
+    id: `${scope}.defaultTlfbGroupName`,
+    defaultMessage: 'TLFB Group',
+  },
+  defaultTlfbTitles: {
+    [tlfbConfig.id]: {
+      id: `${scope}.${tlfbConfig.id}`,
+      defaultMessage: 'Config',
+    },
+    [tlfbEvents.id]: {
+      id: `${scope}.${tlfbEvents.id}`,
+      defaultMessage: 'Events',
+    },
+    [tlfbQuestion.id]: {
+      id: `${scope}.${tlfbQuestion.id}`,
+      defaultMessage: 'Questions',
+    },
   },
 });

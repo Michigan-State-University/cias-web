@@ -40,6 +40,8 @@ import {
   UPDATE_QUESTION_IMAGE_REQUEST,
   UPDATE_QUESTION_IMAGE_SUCCESS,
   UPDATE_QUESTION_IMAGE_ERROR,
+  CREATE_QUESTION_GROUP_REQUEST,
+  CREATE_QUESTIONS_SUCCESS,
 } from './constants';
 
 export const selectQuestion = (id) => actionBuilder(SELECT_QUESTION, { id });
@@ -149,4 +151,15 @@ export const copyExternallyQuestionSuccess = (question, isCurrent) =>
 export const copyExternallyQuestionError = (error) =>
   actionBuilder(COPY_EXTERNALLY_QUESTION_ERROR, {
     error,
+  });
+
+export const createQuestionGroupRequest = (sessionId, groupType) =>
+  actionBuilder(CREATE_QUESTION_GROUP_REQUEST, {
+    sessionId,
+    groupType,
+  });
+
+export const createQuestionsSuccess = (questions) =>
+  actionBuilder(CREATE_QUESTIONS_SUCCESS, {
+    questions,
   });

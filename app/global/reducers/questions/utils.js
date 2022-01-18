@@ -1,12 +1,21 @@
+import findLast from 'lodash/findLast';
+
 import findOrderedQuestionsByGroupId from 'utils/findOrderedQuestionsByGroupId';
 import {
   gridQuestion,
   textboxQuestion,
   numberQuestion,
+  tlfbConfig,
+  tlfbEvents,
+  tlfbQuestion,
 } from 'models/Session/QuestionTypes';
 import { splitAndKeep } from 'utils/splitAndKeep';
 import { htmlToPlainText } from 'utils/htmlToPlainText';
 import { readQuestionBlockType } from 'models/Narrator/BlockTypes';
+import isNullOrUndefined from 'utils/isNullOrUndefined';
+import { GroupType } from 'models/QuestionGroup';
+import instantiateEmptyQuestion from 'utils/instantiateEmptyQuestion';
+import globalMessages from 'global/i18n/globalMessages';
 
 export const mapQuestionDataForType = (question) => {
   switch (question.type) {
@@ -155,4 +164,47 @@ export const getNewQuestionIdInNextGroups = (
     }
   }
   return null;
+};
+
+export const getNewGroupPosition = (groups) => {
+  const lastPlainGroup = findLast(
+    groups,
+    ({ type }) => type === GroupType.PLAIN,
+  );
+
+  return isNullOrUndefined(lastPlainGroup) ? 1 : lastPlainGroup.position + 1;
+};
+
+export const prepareNewGroupQuestions = (
+  groupType,
+  formatMessage,
+  narrator,
+) => {
+  if (groupType === GroupType.TLFB) {
+    const config = {
+      ...instantiateEmptyQuestion(
+        formatMessage(globalMessages.defaultTlfbTitles[tlfbConfig.id]),
+        tlfbConfig.id,
+        formatMessage(globalMessages.defaultTlfbTitles[tlfbConfig.id]),
+      ),
+      narrator: { blocks: [], settings: narrator },
+    };
+    const events = {
+      ...instantiateEmptyQuestion(
+        formatMessage(globalMessages.defaultTlfbTitles[tlfbEvents.id]),
+        tlfbEvents.id,
+        formatMessage(globalMessages.defaultTlfbTitles[tlfbEvents.id]),
+      ),
+      narrator: { blocks: [], settings: narrator },
+    };
+    const question = {
+      ...instantiateEmptyQuestion(
+        formatMessage(globalMessages.defaultTlfbTitles[tlfbQuestion.id]),
+        tlfbQuestion.id,
+        formatMessage(globalMessages.defaultTlfbTitles[tlfbQuestion.id]),
+      ),
+      narrator: { blocks: [], settings: narrator },
+    };
+    return [config, events, question];
+  }
 };

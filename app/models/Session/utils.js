@@ -36,6 +36,9 @@ import {
   dateQuestion,
   thirdPartyQuestion,
   nameQuestion,
+  tlfbQuestion,
+  tlfbConfig,
+  tlfbEvents,
 } from './QuestionTypes';
 
 /**
@@ -135,6 +138,9 @@ export const getBranchingVariables = (questions, options) => {
       case phoneQuestion.id:
       case dateQuestion.id:
       case nameQuestion.id:
+      case tlfbQuestion.id:
+      case tlfbConfig.id:
+      case tlfbEvents.id:
         questionVariables = [];
         break;
       default:
@@ -197,6 +203,9 @@ export const getEditVariables = (questions, options) => {
       case thirdPartyQuestion.id:
       case feedbackQuestion.id:
       case finishQuestion.id:
+      case tlfbConfig.id:
+      case tlfbEvents.id:
+      case tlfbQuestion.id:
         questionVariables = [];
         break;
       default:

@@ -7,6 +7,9 @@ import {
   feedbackQuestion,
   nameQuestion,
   thirdPartyQuestion,
+  tlfbConfig,
+  tlfbEvents,
+  tlfbQuestion,
 } from '../QuestionTypes';
 
 export const getQuestionDataByType = (type) => {
@@ -74,6 +77,13 @@ export const getQuestionDataByType = (type) => {
     case thirdPartyQuestion.id:
       return {
         data: [{ payload: '', value: '', report_template_ids: [] }],
+      };
+
+    case tlfbConfig.id:
+    case tlfbEvents.id:
+    case tlfbQuestion.id:
+      return {
+        data: [],
       };
 
     default:

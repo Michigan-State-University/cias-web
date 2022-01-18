@@ -1,7 +1,6 @@
-import { put, takeLatest, select } from 'redux-saga/effects';
+import { put, takeLatest, select, call } from 'redux-saga/effects';
 import axios from 'axios';
 import omit from 'lodash/omit';
-import findLast from 'lodash/findLast';
 
 import { mapQuestionToStateObject } from 'utils/mapResponseObjects';
 import { feedbackQuestion, finishQuestion } from 'models/Session/QuestionTypes';
@@ -19,10 +18,20 @@ import { GroupType } from 'models/QuestionGroup';
 import { groupQuestionsSuccess } from 'global/reducers/questionGroups/actions';
 import { jsonApiToObject } from 'utils/jsonApiMapper';
 import objectKeysToSnakeCase from 'utils/objectToSnakeCase';
+import { formatMessage } from 'utils/intlOutsideReact';
 
-import { CREATE_QUESTION_REQUEST } from '../constants';
-import { createQuestionSuccess, createQuestionError } from '../actions';
+import globalMessages from 'global/i18n/globalMessages';
+import {
+  CREATE_QUESTION_REQUEST,
+  CREATE_QUESTION_GROUP_REQUEST,
+} from '../constants';
+import {
+  createQuestionSuccess,
+  createQuestionError,
+  createQuestionsSuccess,
+} from '../actions';
 import { makeSelectQuestions, makeSelectSelectedQuestion } from '../selectors';
+import { getNewGroupPosition, prepareNewGroupQuestions } from '../utils';
 
 function* createQuestion({ payload: { question, id: sessionId } }) {
   const selectedQuestion = yield select(makeSelectSelectedQuestion());
@@ -52,46 +61,14 @@ function* createQuestion({ payload: { question, id: sessionId } }) {
       : null;
 
   if (isNullOrUndefined(groupId)) {
-    try {
-      const requestURL = `v1/sessions/${sessionId}/question_groups`;
-
-      const lastPlainGroup = findLast(
-        groups,
-        ({ type }) => type === GroupType.PLAIN,
-      );
-
-      const newGroupPosition = isNullOrUndefined(lastPlainGroup)
-        ? 1
-        : lastPlainGroup.position + 1;
-
-      const { data } = yield axios.post(requestURL, {
-        question_group: {
-          title: `Group ${newGroupPosition}`,
-          questions: [newQuestion],
-          type: GroupType.PLAIN,
-        },
-      });
-
-      const newGroup = jsonApiToObject(data, 'questionGroup');
-
-      const groupWithoutQuestions = omit(newGroup, 'questions');
-      yield put(groupQuestionsSuccess(groupWithoutQuestions, []));
-
-      const firstQuestion = newGroup.questions[0];
-      const createdQuestion = objectKeysToSnakeCase(firstQuestion, [
-        'sha256',
-        'endPosition',
-      ]);
-
-      if (!isNullOrUndefined(createdQuestion)) {
-        yield put(createQuestionSuccess(createdQuestion));
-        yield put(setAnimationStopPosition(position.x, position.y));
-      } else {
-        yield put(createQuestionError());
-      }
-    } catch (error) {
-      yield put(createQuestionError(error));
-    }
+    yield call(
+      createNewQuestionGroup,
+      sessionId,
+      groups,
+      [newQuestion],
+      GroupType.PLAIN,
+      position,
+    );
   } else {
     const requestURL = `v1/question_groups/${groupId}/questions`;
 
@@ -109,6 +86,75 @@ function* createQuestion({ payload: { question, id: sessionId } }) {
   }
 }
 
+function* createQuestionGroup({ payload: { sessionId, groupType } }) {
+  const groups = yield select(makeSelectQuestionGroups());
+
+  const {
+    settings: { narrator },
+  } = yield select(makeSelectSession());
+
+  const questions = prepareNewGroupQuestions(
+    groupType,
+    formatMessage,
+    narrator,
+  );
+
+  yield call(
+    createNewQuestionGroup,
+    sessionId,
+    groups,
+    questions,
+    groupType,
+    {
+      x: 0,
+      y: 0,
+    },
+    formatMessage(globalMessages.defaultTlfbGroupName),
+  );
+}
+
+function* createNewQuestionGroup(
+  sessionId,
+  groups,
+  questions,
+  groupType,
+  position,
+  groupName,
+) {
+  try {
+    const requestURL = `v1/sessions/${sessionId}/question_groups`;
+
+    const newGroupPosition = getNewGroupPosition(groups);
+
+    const { data } = yield axios.post(requestURL, {
+      question_group: {
+        title: groupName || `Group ${newGroupPosition}`,
+        questions,
+        type: groupType,
+      },
+    });
+
+    const newGroup = jsonApiToObject(data, 'questionGroup');
+
+    const groupWithoutQuestions = omit(newGroup, 'questions');
+    yield put(groupQuestionsSuccess(groupWithoutQuestions, []));
+
+    const newQuestions = newGroup.questions.map((question) =>
+      objectKeysToSnakeCase(question, ['sha256', 'endPosition']),
+    );
+
+    if (!isNullOrUndefined(newQuestions) && newQuestions.length) {
+      yield put(createQuestionsSuccess(newQuestions));
+      yield put(setAnimationStopPosition(position.x, position.y));
+    } else {
+      yield put(createQuestionError());
+    }
+  } catch (error) {
+    yield put(createQuestionError(error));
+  }
+}
+
 export default function* createQuestionSaga() {
   yield takeLatest(CREATE_QUESTION_REQUEST, createQuestion);
+  yield takeLatest(CREATE_QUESTION_GROUP_REQUEST, createQuestionGroup);
 }

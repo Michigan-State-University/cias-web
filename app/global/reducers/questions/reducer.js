@@ -54,6 +54,7 @@ import {
   UPDATE_QUESTION_IMAGE_REQUEST,
   UPDATE_QUESTION_IMAGE_SUCCESS,
   UPDATE_QUESTION_IMAGE_ERROR,
+  CREATE_QUESTIONS_SUCCESS,
 } from './constants';
 
 import {
@@ -108,6 +109,20 @@ export const questionsReducer = (state = initialState, action) =>
         draft.lastCreatedQuestionId = action.payload.question.id;
         draft.loaders.createQuestionLoading = false;
         break;
+
+      case CREATE_QUESTIONS_SUCCESS: {
+        const {
+          payload: { questions },
+        } = action;
+        const firstCreatedQuestion = questions[0];
+        const mappedQuestions = questions.map(mapQuestionDataForType);
+        draft.questions = [...state.questions, ...mappedQuestions];
+        draft.cache.questions = draft.questions;
+        draft.selectedQuestion = firstCreatedQuestion.id;
+        draft.lastCreatedQuestionId = firstCreatedQuestion.id;
+        draft.loaders.createQuestionLoading = false;
+        break;
+      }
       case CREATE_QUESTION_ERROR:
         draft.loaders.createQuestionLoading = false;
         break;
@@ -479,13 +494,14 @@ export const questionsReducer = (state = initialState, action) =>
       case COPY_QUESTIONS_REQUEST:
         draft.loaders.updateQuestionLoading = true;
         break;
-      case COPY_QUESTIONS_SUCCESS:
+      case COPY_QUESTIONS_SUCCESS: {
         const { questions } = action.payload;
         const questionsList = [...state.questions, ...questions];
         draft.questions = questionsList;
         draft.cache.questions = questionsList;
         draft.loaders.updateQuestionLoading = false;
         break;
+      }
 
       case COPY_QUESTIONS_ERROR:
         draft.loaders.updateQuestionLoading = false;
