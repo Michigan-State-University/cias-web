@@ -87,7 +87,7 @@ import {
   setTransitionalUserSessionId as setTransitionalUserSessionIdAction,
 } from './actions';
 import BranchingScreen from './components/BranchingScreen';
-import { NOT_SKIPABLE_QUESTIONS } from './constants';
+import { NOT_SKIPABLE_QUESTIONS, FULL_SIZE_QUESTIONS } from './constants';
 
 const AnimationRefHelper = ({
   children,
@@ -111,8 +111,13 @@ const AnimationRefHelper = ({
     ...currentQuestion.settings,
   };
 
+  const fullSizeAnswer = FULL_SIZE_QUESTIONS.includes(currentQuestion.type);
+
   return (
-    <AnswerInterventionContent ref={animationParentRef}>
+    <AnswerInterventionContent
+      fullSizeAnswer={fullSizeAnswer}
+      ref={animationParentRef}
+    >
       {children}
       {refState !== null && (
         <CharacterAnim
@@ -479,6 +484,10 @@ export function AnswerSessionPage({
     setTransitionalUserSessionId(null);
 
   if (nextQuestionLoading && interventionStarted) return <Loader />;
+  const fullSizeAnswer =
+    interventionStarted &&
+    currentQuestion &&
+    FULL_SIZE_QUESTIONS.includes(currentQuestion.type);
 
   return (
     <Column height="100%" ref={pageRef}>
@@ -502,6 +511,7 @@ export function AnswerSessionPage({
         </Helmet>
 
         <AnswerOuterContainer
+          fullSizeAnswer={fullSizeAnswer}
           previewMode={previewMode}
           interventionStarted={interventionStarted}
         >

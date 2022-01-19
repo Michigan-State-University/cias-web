@@ -7,6 +7,8 @@
 import {
   feedbackQuestion,
   informationQuestion,
+  tlfbEvents,
+  tlfbQuestion,
   urlQuestion,
 } from 'models/Session/QuestionTypes';
 
@@ -86,3 +88,5 @@ export const NOT_SKIPABLE_QUESTIONS = [
   informationQuestion.id,
   urlQuestion.id,
 ];
+
+export const FULL_SIZE_QUESTIONS = [tlfbEvents.id, tlfbQuestion.id];
