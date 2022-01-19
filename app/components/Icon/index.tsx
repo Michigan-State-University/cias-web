@@ -9,7 +9,24 @@ import * as PropTypes from 'prop-types';
 
 import * as Styled from './styled';
 
-const Icon = ({ src, className, fill, stroke, alt, onClick, ...restProps }) => (
+type IconProps = {
+  src: string | SVGElement;
+  className?: string;
+  fill?: string;
+  stroke?: string;
+  alt?: string;
+  onClick?: () => {};
+};
+
+const Icon = ({
+  src,
+  className,
+  fill,
+  stroke,
+  alt,
+  onClick,
+  ...restProps
+}: IconProps) => (
   <Styled.SvgWrapper>
     <Styled.SVG
       src={src}
