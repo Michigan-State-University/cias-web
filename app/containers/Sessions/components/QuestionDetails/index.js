@@ -10,6 +10,7 @@ import { colors, elements } from 'theme';
 
 import { canEdit } from 'models/Status/statusPermissions';
 import { nameQuestion, finishQuestion } from 'models/Session/QuestionTypes';
+import { GroupType } from 'models/QuestionGroup';
 import { hasObjectProperty } from 'utils/hasObjectProperty';
 import isNullOrUndefined from 'utils/isNullOrUndefined';
 
@@ -22,6 +23,7 @@ import {
   makeSelectIntervention,
   makeSelectInterventionStatus,
 } from 'global/reducers/intervention';
+import globalMessages from 'global/i18n/globalMessages';
 
 import CommonLayout from 'containers/AnswerSessionPage/layouts/CommonLayout';
 
@@ -33,6 +35,7 @@ import StyledInput from 'components/Input/StyledInput';
 import { selectInputText } from 'components/Input/utils';
 import { Button } from 'components/Button';
 import Img from 'components/Img';
+import Text from 'components/Text';
 
 import QuestionData from '../QuestionData';
 import QuestionImage from '../QuestionImage';
@@ -91,6 +94,8 @@ const RenderQuestionDetails = ({
     const isNameScreen = type === nameQuestion.id;
     const isFinishScreen = type === finishQuestion.id;
 
+    const isTlfbGroup = currentGroupScope?.type === GroupType.TLFB;
+
     return (
       <AnswerOuterContainer>
         <Column width="100%" display="flex" align="center">
@@ -113,13 +118,18 @@ const RenderQuestionDetails = ({
                 onBlur={(val) => changeGroupName(val)}
                 disabled={!editingPossible}
               />
-              {logoUrl && (
+              {!isTlfbGroup && logoUrl && (
                 <Img
                   maxHeight={elements.interventionLogoSize.height}
                   maxWidth={elements.interventionLogoSize.width}
                   src={logoUrl}
                   aria-label={imageAlt}
                 />
+              )}
+              {isTlfbGroup && (
+                <Text fontWeight="medium">
+                  {formatMessage(globalMessages.questionTypes[type])}
+                </Text>
               )}
             </Row>
           )}

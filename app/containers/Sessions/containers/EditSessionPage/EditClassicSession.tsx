@@ -92,7 +92,6 @@ import { questionType } from 'models/Session/QuestionTypes';
 import QuestionDetails from '../../components/QuestionDetails';
 import QuestionSettings from '../../components/QuestionSettings';
 import QuestionTypeChooser from '../../components/QuestionTypeChooser';
-import { TlfbDetails } from '../../components/TlfbDetails';
 
 import messages from './messages';
 import { EditSessionPageContext, useLockEditSessionPageScroll } from './utils';
@@ -447,8 +446,6 @@ const EditClassicSessionPage = ({
     history.push(url, { selectedQuestionId: selectedQuestion });
   };
 
-  const isTlfbGroup = currentGroupScope?.type === GroupType.TLFB;
-
   const handleGroupNameChange = (newName: string) => {
     changeGroupName(newName, sessionId, currentGroupScope!.id);
   };
@@ -601,19 +598,11 @@ const EditClassicSessionPage = ({
         </QuestionsRow>
         <Column align="between" overflow="hidden">
           <Row overflow="hidden" filled>
-            {!isTlfbGroup && (
-              <QuestionDetails
-                formatMessage={formatMessage}
-                changeGroupName={handleGroupNameChange}
-                currentGroupScope={currentGroupScope}
-              />
-            )}
-            {isTlfbGroup && (
-              <TlfbDetails
-                questionGroup={currentGroupScope}
-                changeGroupName={handleGroupNameChange}
-              />
-            )}
+            <QuestionDetails
+              formatMessage={formatMessage}
+              changeGroupName={handleGroupNameChange}
+              currentGroupScope={currentGroupScope}
+            />
             {currentQuestion?.type !== QuestionTypes.TLFB_CONFIG && (
               // @ts-ignore
               <QuestionSettings onGoToSessionMapClick={goToSessionMap} />
