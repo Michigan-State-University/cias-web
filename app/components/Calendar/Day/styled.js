@@ -21,9 +21,9 @@ const getBorder = (active, disabled) => {
 };
 
 export const Container = styled.div`
-  height: 104px;
   border-radius: 5px;
   box-sizing: border-box;
+  height: 100%;
 
   background-color: ${({ disabled, active }) =>
     getBackgroundColor(disabled, active)};

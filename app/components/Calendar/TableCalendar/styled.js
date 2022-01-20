@@ -9,11 +9,17 @@ export const Container = styled.div`
   border-radius: 5px;
   width: 100%;
   padding: 24px;
+  height: 100%;
+
+  @media ${maxQueries.md} {
+    height: auto;
+  }
 `;
 
 export const CalendarTable = styled.table`
   width: 100%;
   table-layout: fixed;
+  height: calc(100% - 52px);
 `;
 
 export const CalendarHeader = styled.tr`
