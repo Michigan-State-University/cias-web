@@ -188,6 +188,7 @@ export const prepareNewGroupQuestions = (
         formatMessage(globalMessages.defaultTlfbTitles[tlfbConfig.id]),
       ),
       narrator: { blocks: [], settings: narrator },
+      body: { data: [{ payload: '' }] },
     };
     const events = {
       ...instantiateEmptyQuestion(

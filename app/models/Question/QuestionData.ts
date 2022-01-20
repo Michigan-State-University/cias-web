@@ -78,7 +78,7 @@ export interface ParticipantReportQuestionData
 
 export interface CurrencyQuestionData extends QuestionPayloadData<string> {}
 
-export type TlfbConfigData = never;
+export interface TlfbConfigData extends QuestionPayloadData<string> {}
 
 export type TlfbEventsData = never;
 
