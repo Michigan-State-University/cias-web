@@ -42,9 +42,15 @@ export const getCalendarMonthDates = (startDate: Dayjs) => {
   // From which weekdays the month starts and ends
   const firstDayOfMonth = dayjs()
     .month(startDate.month())
+    .year(startDate.year())
     .startOf('month')
     .day();
-  const lastDayOfMonth = dayjs().month(startDate.month()).endOf('month').day();
+
+  const lastDayOfMonth = dayjs()
+    .month(startDate.month())
+    .year(startDate.year())
+    .endOf('month')
+    .day();
 
   // No of day in month with which we should start prev month
   const startingLastMonthDay = prevLen - firstDayOfMonth;
