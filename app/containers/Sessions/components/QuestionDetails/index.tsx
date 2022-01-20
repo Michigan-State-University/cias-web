@@ -181,7 +181,10 @@ const RenderQuestionDetails = ({
                   )}
                   {video && (
                     <Row mt={10}>
-                      <QuestionVideo disabled={!editingPossible} />
+                      <QuestionVideo
+                        // @ts-ignore
+                        disabled={!editingPossible}
+                      />
                     </Row>
                   )}
                   {image && (
