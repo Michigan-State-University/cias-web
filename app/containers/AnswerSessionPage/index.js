@@ -111,13 +111,10 @@ const AnimationRefHelper = ({
     ...currentQuestion.settings,
   };
 
-  const fullSizeAnswer = FULL_SIZE_QUESTIONS.includes(currentQuestion.type);
+  const isFullSize = FULL_SIZE_QUESTIONS.includes(currentQuestion.type);
 
   return (
-    <AnswerInterventionContent
-      fullSizeAnswer={fullSizeAnswer}
-      ref={animationParentRef}
-    >
+    <AnswerInterventionContent isFullSize={isFullSize} ref={animationParentRef}>
       {children}
       {refState !== null && (
         <CharacterAnim
@@ -484,7 +481,7 @@ export function AnswerSessionPage({
     setTransitionalUserSessionId(null);
 
   if (nextQuestionLoading && interventionStarted) return <Loader />;
-  const fullSizeAnswer =
+  const isFullSize =
     interventionStarted &&
     currentQuestion &&
     FULL_SIZE_QUESTIONS.includes(currentQuestion.type);
@@ -511,7 +508,7 @@ export function AnswerSessionPage({
         </Helmet>
 
         <AnswerOuterContainer
-          fullSizeAnswer={fullSizeAnswer}
+          isFullSize={isFullSize}
           previewMode={previewMode}
           interventionStarted={interventionStarted}
         >
