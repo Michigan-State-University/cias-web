@@ -213,7 +213,7 @@ export default defineMessages({
   questionGroupType: {
     [GroupType.TLFB]: {
       id: `${scope}.${GroupType.TLFB}`,
-      defaultMessage: 'Timeline followback',
+      defaultMessage: 'Timeline Followback',
     },
   },
   statuses: {

@@ -22,7 +22,7 @@ export const AnswerInterventionContent = styled.div`
   align-items: flex-start;
   display: flex;
   max-width: ${(props) =>
-    props.fullSizeAnswer ? '100%' : `${elements.draggableContainerSize}px`};
+    props.isFullSize ? '100%' : `${elements.draggableContainerSize}px`};
   min-height: ${elements.draggableContainerSize}px;
   position: relative;
   width: 100%;
@@ -46,6 +46,6 @@ export const AnswerOuterContainer = styled.div`
     props.interventionStarted ? 'flex-start' : 'center'};
   width: 100%;
   max-width: ${(props) =>
-    props.fullSizeAnswer ? '100%' : `${elements.draggableContainerSize}px`};
+    props.isFullSize ? '100%' : `${elements.draggableContainerSize}px`};
   ${(props) => props.previewMode && getStyles(props.previewMode)}
 `;
