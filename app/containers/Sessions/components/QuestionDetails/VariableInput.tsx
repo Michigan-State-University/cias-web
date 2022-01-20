@@ -1,29 +1,45 @@
 import React from 'react';
-import PropTypes from 'prop-types';
-import { injectIntl } from 'react-intl';
-import { connect } from 'react-redux';
-import { compose } from 'redux';
+import { useIntl } from 'react-intl';
+import { useDispatch } from 'react-redux';
 
 import { BadgeInput } from 'components/Input/BadgeInput';
 import Row from 'components/Row';
 
 import { updateQuestionData } from 'global/reducers/questions';
 import globalMessages from 'global/i18n/globalMessages';
+
 import { canEdit } from 'models/Status/statusPermissions';
+import { QuestionBodyVariable } from 'models/Question';
+import { InterventionStatus } from 'models/Intervention';
+
 import { colors } from 'theme';
 import { variableNameValidator } from 'utils/validators';
 
 import { UPDATE_VARIABLE } from '../QuestionData/constants';
 
+export type VariableInputProps = {
+  isNarratorTab?: boolean;
+  variable: QuestionBodyVariable;
+  interventionStatus: InterventionStatus;
+  questionId: string;
+  disabled?: boolean;
+};
+
 const VariableInput = ({
-  intl: { formatMessage },
   isNarratorTab,
   variable,
   interventionStatus,
-  updateVariable,
   questionId,
   disabled,
-}) => {
+}: VariableInputProps) => {
+  const { formatMessage } = useIntl();
+  const dispatch = useDispatch();
+
+  const updateVariable = (name: string) =>
+    dispatch(
+      updateQuestionData({ type: UPDATE_VARIABLE, data: { name, questionId } }),
+    );
+
   const editingPossible = canEdit(interventionStatus);
   return (
     <Row display="flex" hidden={isNarratorTab}>
@@ -35,32 +51,16 @@ const VariableInput = ({
         keyboard="tel"
         validator={variableNameValidator}
         placeholder={formatMessage(
+          // @ts-ignore
           globalMessages.variables.variableNamePlaceholder,
         )}
         value={variable.name}
         color={colors.jungleGreen}
-        onBlur={(val) => updateVariable(val, questionId)}
+        onBlur={updateVariable}
         autoComplete="off"
       />
     </Row>
   );
 };
 
-VariableInput.propTypes = {
-  questionId: PropTypes.string,
-  variable: PropTypes.object,
-  intl: PropTypes.object.isRequired,
-  updateVariable: PropTypes.func.isRequired,
-  isNarratorTab: PropTypes.bool,
-  interventionStatus: PropTypes.string,
-  disabled: PropTypes.bool,
-};
-
-const mapDispatchToProps = {
-  updateVariable: (name, questionId) =>
-    updateQuestionData({ type: UPDATE_VARIABLE, data: { name, questionId } }),
-};
-
-const withConnect = connect(null, mapDispatchToProps);
-
-export default injectIntl(compose(withConnect)(VariableInput));
+export default VariableInput;

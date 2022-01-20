@@ -1,7 +1,9 @@
+// @ts-ignore
 import styled from 'styled-components';
 
 import { elements, colors } from 'theme';
 
+// @ts-ignore
 const AnswerInterventionContent = styled.div`
   align-items: flex-start;
   border: 1px dashed ${colors.botticelli};
@@ -14,6 +16,7 @@ const AnswerInterventionContent = styled.div`
   z-index: 0;
 `;
 
+// @ts-ignore
 const AnswerOuterContainer = styled.div`
   align-items: center;
   display: flex;

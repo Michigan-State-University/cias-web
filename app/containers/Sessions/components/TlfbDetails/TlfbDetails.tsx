@@ -22,6 +22,7 @@ export type TlfbDetailsProps = {
   changeGroupName: (newName: string) => void;
 };
 
+// TODO remove
 export const TlfbDetails = ({
   questionGroup,
   changeGroupName,
