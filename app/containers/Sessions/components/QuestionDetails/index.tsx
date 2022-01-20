@@ -1,18 +1,15 @@
 import React, { useRef } from 'react';
 import PropTypes from 'prop-types';
-import { FormattedMessage } from 'react-intl';
-import { compose } from 'redux';
-import { connect } from 'react-redux';
-import { createStructuredSelector } from 'reselect';
+import { FormattedMessage, useIntl } from 'react-intl';
+import { useSelector } from 'react-redux';
 import { useInjectSaga } from 'redux-injectors';
 
 import { colors, elements } from 'theme';
 
 import { canEdit } from 'models/Status/statusPermissions';
-import { nameQuestion, finishQuestion } from 'models/Session/QuestionTypes';
-import { GroupType } from 'models/QuestionGroup';
-import { hasObjectProperty } from 'utils/hasObjectProperty';
-import isNullOrUndefined from 'utils/isNullOrUndefined';
+import { GroupType, QuestionGroup } from 'models/QuestionGroup';
+import { QuestionDTO, QuestionTypes } from 'models/Question';
+import { InterventionDto, InterventionStatus } from 'models/Intervention';
 
 import { makeSelectIsNarratorTab } from 'global/reducers/localState';
 import {
@@ -47,7 +44,12 @@ import VariableInput from './VariableInput';
 import messages from './messages';
 import { AnswerOuterContainer, AnswerInterventionContent } from './styled';
 
-const QuestionDetails = (props) => (
+export type QuestionDetailsProps = {
+  changeGroupName: (name: string) => void;
+  currentGroupScope: QuestionGroup;
+};
+
+const QuestionDetails = (props: QuestionDetailsProps) => (
   <Box
     width="100%"
     display="flex"
@@ -60,14 +62,20 @@ const QuestionDetails = (props) => (
 );
 
 const RenderQuestionDetails = ({
-  selectedQuestion,
-  isNarratorTab,
-  interventionStatus,
-  formatMessage,
   changeGroupName,
   currentGroupScope,
-  intervention,
-}) => {
+}: QuestionDetailsProps) => {
+  const { formatMessage } = useIntl();
+
+  const selectedQuestion: QuestionDTO = useSelector(
+    makeSelectSelectedQuestion(),
+  );
+  const isNarratorTab: boolean = useSelector(makeSelectIsNarratorTab());
+  const interventionStatus: InterventionStatus = useSelector(
+    makeSelectInterventionStatus(),
+  );
+  const intervention: InterventionDto = useSelector(makeSelectIntervention());
+
   useInjectSaga({ key: 'editQuestion', saga: editQuestionSaga });
   const animationBoundaries = useRef(null);
 
@@ -76,23 +84,23 @@ const RenderQuestionDetails = ({
   const editingPossible = canEdit(interventionStatus);
   const isNarratorTabOrEditNotPossible = isNarratorTab || !editingPossible;
 
-  if (selectedQuestion != null) {
+  if (selectedQuestion) {
     const {
       id,
       body,
       type,
-      settings: {
-        video,
-        image,
-        title,
-        subtitle,
-        proceed_button: proceedButton,
-      } = {},
-      narrator: { settings } = {},
-    } = selectedQuestion || {};
+      settings: { video, image, title, subtitle },
+      narrator: { settings },
+    } = selectedQuestion;
 
-    const isNameScreen = type === nameQuestion.id;
-    const isFinishScreen = type === finishQuestion.id;
+    const isNameScreen = type === QuestionTypes.NAME;
+    const isFinishScreen = type === QuestionTypes.FINISH;
+
+    const proceedButton =
+      'proceed_button' in selectedQuestion.settings
+        ? selectedQuestion.settings.proceed_button
+        : true;
+    const showProceedButton = proceedButton && !isFinishScreen;
 
     const isTlfbGroup = currentGroupScope?.type === GroupType.TLFB;
 
@@ -108,6 +116,7 @@ const RenderQuestionDetails = ({
               align="center"
             >
               <StyledInput
+                // @ts-ignore
                 px={12}
                 value={currentGroupScope.title}
                 fontSize={18}
@@ -128,7 +137,10 @@ const RenderQuestionDetails = ({
               )}
               {isTlfbGroup && (
                 <Text fontWeight="medium">
-                  {formatMessage(globalMessages.questionTypes[type])}
+                  {
+                    // @ts-ignore
+                    formatMessage(globalMessages.questionTypes[type])
+                  }
                 </Text>
               )}
             </Row>
@@ -143,6 +155,7 @@ const RenderQuestionDetails = ({
               settings={{ ...settings, title, subtitle }}
             />
             <Row justify="center" width="100%">
+              {/* @ts-ignore */}
               <AppContainer disablePageTitle $width="100%">
                 {!isNarratorTabOrEditNotPossible && (
                   <>
@@ -156,7 +169,7 @@ const RenderQuestionDetails = ({
                         <QuestionSubtitle />
                       </Row>
                     )}
-                    {body && hasObjectProperty(body, 'variable') && (
+                    {'variable' in body && (
                       <Row mt={10} ml={26}>
                         <VariableInput
                           disabled={isNameScreen}
@@ -190,14 +203,14 @@ const RenderQuestionDetails = ({
                   <QuestionData />
                 </Row>
 
-                {(isNullOrUndefined(proceedButton) || proceedButton) &&
-                  !isFinishScreen && (
-                    <Box my={20} ml={26}>
-                      <Button width="180px" disabled>
-                        <FormattedMessage {...messages.nextQuestion} />
-                      </Button>
-                    </Box>
-                  )}
+                {showProceedButton && (
+                  <Box my={20} ml={26}>
+                    {/* @ts-ignore */}
+                    <Button width="180px" disabled>
+                      <FormattedMessage {...messages.nextQuestion} />
+                    </Button>
+                  </Box>
+                )}
               </AppContainer>
             </Row>
           </AnswerInterventionContent>
@@ -219,13 +232,4 @@ RenderQuestionDetails.propTypes = {
   intervention: PropTypes.object,
 };
 
-const mapStateToProps = createStructuredSelector({
-  selectedQuestion: makeSelectSelectedQuestion(),
-  isNarratorTab: makeSelectIsNarratorTab(),
-  interventionStatus: makeSelectInterventionStatus(),
-  intervention: makeSelectIntervention(),
-});
-
-const withConnect = connect(mapStateToProps);
-
-export default compose(withConnect)(QuestionDetails);
+export default QuestionDetails;

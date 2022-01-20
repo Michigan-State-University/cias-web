@@ -94,7 +94,7 @@ const QuestionData = ({
 };
 
 QuestionData.propTypes = {
-  selectedQuestionType: PropTypes.string.isRequired,
+  selectedQuestionType: PropTypes.string,
   isNarratorTab: PropTypes.bool,
   interventionStatus: PropTypes.string,
 };

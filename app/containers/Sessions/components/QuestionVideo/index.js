@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import PropTypes from 'prop-types';
+import { compose } from 'redux';
 import { connect } from 'react-redux';
 import { createStructuredSelector } from 'reselect';
 import { injectIntl, IntlShape } from 'react-intl';
@@ -107,6 +108,4 @@ const mapDispatchToProps = {
 
 const withConnect = connect(mapStateToProps, mapDispatchToProps);
 
-export const QuestionVideoWithIntl = injectIntl(QuestionVideo);
-
-export default withConnect(QuestionVideoWithIntl);
+export default compose(injectIntl, withConnect)(QuestionVideo);

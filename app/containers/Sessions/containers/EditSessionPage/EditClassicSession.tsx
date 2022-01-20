@@ -257,7 +257,7 @@ const EditClassicSessionPage = ({
   const currentQuestion = questions.find(({ id }) => id === selectedQuestion);
   const currentGroupScope = groups.find(
     ({ id }) => currentQuestion && id === currentQuestion.question_group_id,
-  );
+  )!;
 
   const groupActions = [
     {
@@ -446,8 +446,8 @@ const EditClassicSessionPage = ({
     history.push(url, { selectedQuestionId: selectedQuestion });
   };
 
-  const handleGroupNameChange = (newName: string) => {
-    changeGroupName(newName, sessionId, currentGroupScope!.id);
+  const handleGroupNameChange = (name: string) => {
+    changeGroupName(name, sessionId, currentGroupScope.id);
   };
 
   return (
@@ -599,7 +599,6 @@ const EditClassicSessionPage = ({
         <Column align="between" overflow="hidden">
           <Row overflow="hidden" filled>
             <QuestionDetails
-              formatMessage={formatMessage}
               changeGroupName={handleGroupNameChange}
               currentGroupScope={currentGroupScope}
             />
