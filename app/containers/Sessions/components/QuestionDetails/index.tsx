@@ -1,5 +1,4 @@
 import React, { useRef } from 'react';
-import PropTypes from 'prop-types';
 import { FormattedMessage, useIntl } from 'react-intl';
 import { useSelector } from 'react-redux';
 import { useInjectSaga } from 'redux-injectors';
@@ -9,17 +8,14 @@ import { colors, elements } from 'theme';
 import { canEdit } from 'models/Status/statusPermissions';
 import { GroupType, QuestionGroup } from 'models/QuestionGroup';
 import { QuestionDTO, QuestionTypes } from 'models/Question';
-import { InterventionDto, InterventionStatus } from 'models/Intervention';
+import { InterventionDto } from 'models/Intervention';
 
 import { makeSelectIsNarratorTab } from 'global/reducers/localState';
 import {
-  makeSelectSelectedQuestion,
   editQuestionSaga,
+  makeSelectSelectedQuestion,
 } from 'global/reducers/questions';
-import {
-  makeSelectIntervention,
-  makeSelectInterventionStatus,
-} from 'global/reducers/intervention';
+import { makeSelectIntervention } from 'global/reducers/intervention';
 import globalMessages from 'global/i18n/globalMessages';
 
 import CommonLayout from 'containers/AnswerSessionPage/layouts/CommonLayout';
@@ -42,7 +38,7 @@ import QuestionTitle from '../QuestionTitle';
 import QuestionVideo from '../QuestionVideo';
 import VariableInput from './VariableInput';
 import messages from './messages';
-import { AnswerOuterContainer, AnswerInterventionContent } from './styled';
+import { AnswerInterventionContent, AnswerOuterContainer } from './styled';
 
 export type QuestionDetailsProps = {
   changeGroupName: (name: string) => void;
@@ -67,169 +63,159 @@ const RenderQuestionDetails = ({
 }: QuestionDetailsProps) => {
   const { formatMessage } = useIntl();
 
-  const selectedQuestion: QuestionDTO = useSelector(
+  const selectedQuestion: Nullable<QuestionDTO> = useSelector(
     makeSelectSelectedQuestion(),
   );
-  const isNarratorTab: boolean = useSelector(makeSelectIsNarratorTab());
-  const interventionStatus: InterventionStatus = useSelector(
-    makeSelectInterventionStatus(),
+  const intervention: Nullable<InterventionDto> = useSelector(
+    makeSelectIntervention(),
   );
-  const intervention: InterventionDto = useSelector(makeSelectIntervention());
+
+  const isNarratorTab: boolean = useSelector(makeSelectIsNarratorTab());
 
   useInjectSaga({ key: 'editQuestion', saga: editQuestionSaga });
   const animationBoundaries = useRef(null);
 
-  const { logoUrl, imageAlt } = intervention ?? {};
+  if (!selectedQuestion || !intervention) return null;
 
-  const editingPossible = canEdit(interventionStatus);
+  const { logoUrl, imageAlt, status } = intervention;
+
+  const editingPossible = canEdit(status);
   const isNarratorTabOrEditNotPossible = isNarratorTab || !editingPossible;
 
-  if (selectedQuestion) {
-    const {
-      id,
-      body,
-      type,
-      settings: { video, image, title, subtitle },
-      narrator: { settings },
-    } = selectedQuestion;
+  const {
+    id,
+    body,
+    type,
+    settings: { video, image, title, subtitle },
+    narrator: { settings },
+  } = selectedQuestion;
 
-    const isNameScreen = type === QuestionTypes.NAME;
-    const isFinishScreen = type === QuestionTypes.FINISH;
+  const isNameScreen = type === QuestionTypes.NAME;
+  const isFinishScreen = type === QuestionTypes.FINISH;
+  const isTlfbGroup = currentGroupScope?.type === GroupType.TLFB;
 
-    const proceedButton =
-      'proceed_button' in selectedQuestion.settings
-        ? selectedQuestion.settings.proceed_button
-        : true;
-    const showProceedButton = proceedButton && !isFinishScreen;
+  const proceedButton =
+    'proceed_button' in selectedQuestion.settings
+      ? selectedQuestion.settings.proceed_button
+      : true;
+  const showProceedButton = proceedButton && !isTlfbGroup && !isFinishScreen;
 
-    const isTlfbGroup = currentGroupScope?.type === GroupType.TLFB;
-
-    return (
-      <AnswerOuterContainer>
-        <Column width="100%" display="flex" align="center">
-          {currentGroupScope && (
-            <Row
-              mb={10}
-              width="inherit"
-              maxWidth={elements.draggableContainerSize}
-              justify="between"
-              align="center"
-            >
-              <StyledInput
-                // @ts-ignore
-                px={12}
-                value={currentGroupScope.title}
-                fontSize={18}
-                fontWeight="bold"
-                placeholder={formatMessage(messages.groupPlaceholder)}
-                maxWidth="initial"
-                onFocus={selectInputText}
-                onBlur={(val) => changeGroupName(val)}
-                disabled={!editingPossible}
-              />
-              {!isTlfbGroup && logoUrl && (
-                <Img
-                  maxHeight={elements.interventionLogoSize.height}
-                  maxWidth={elements.interventionLogoSize.width}
-                  src={logoUrl}
-                  aria-label={imageAlt}
-                />
-              )}
-              {isTlfbGroup && (
-                <Text fontWeight="medium">
-                  {
-                    // @ts-ignore
-                    formatMessage(globalMessages.questionTypes[type])
-                  }
-                </Text>
-              )}
-            </Row>
-          )}
-          <AnswerInterventionContent
-            ref={animationBoundaries}
-            id="quill_boundaries"
+  return (
+    <AnswerOuterContainer>
+      <Column width="100%" display="flex" align="center">
+        {currentGroupScope && (
+          <Row
+            mb={10}
+            width="inherit"
+            maxWidth={elements.draggableContainerSize}
+            justify="between"
+            align="center"
           >
+            <StyledInput
+              // @ts-ignore
+              px={12}
+              value={currentGroupScope.title}
+              fontSize={18}
+              fontWeight="bold"
+              placeholder={formatMessage(messages.groupPlaceholder)}
+              maxWidth="initial"
+              onFocus={selectInputText}
+              onBlur={(val) => changeGroupName(val)}
+              disabled={!editingPossible}
+            />
+            {!isTlfbGroup && logoUrl && (
+              <Img
+                maxHeight={elements.interventionLogoSize.height}
+                maxWidth={elements.interventionLogoSize.width}
+                src={logoUrl}
+                aria-label={imageAlt}
+              />
+            )}
+            {isTlfbGroup && (
+              <Text fontWeight="medium">
+                {
+                  // @ts-ignore
+                  formatMessage(globalMessages.questionTypes[type])
+                }
+              </Text>
+            )}
+          </Row>
+        )}
+        <AnswerInterventionContent
+          ref={animationBoundaries}
+          id="quill_boundaries"
+          transparentBackground={!isTlfbGroup}
+        >
+          {!isTlfbGroup && (
             <QuestionNarrator
               questionId={id}
               animationBoundaries={animationBoundaries}
               settings={{ ...settings, title, subtitle }}
             />
-            <Row justify="center" width="100%">
-              {/* @ts-ignore */}
-              <AppContainer disablePageTitle $width="100%">
-                {!isNarratorTabOrEditNotPossible && (
-                  <>
-                    {title && (
-                      <Row width="100%">
-                        <QuestionTitle />
-                      </Row>
-                    )}
-                    {subtitle && (
-                      <Row mt={10}>
-                        <QuestionSubtitle />
-                      </Row>
-                    )}
-                    {'variable' in body && (
-                      <Row mt={10} ml={26}>
-                        <VariableInput
-                          disabled={isNameScreen}
-                          questionId={id}
-                          interventionStatus={interventionStatus}
-                          isNarratorTab={isNarratorTab}
-                          variable={body.variable}
-                        />
-                      </Row>
-                    )}
-                    {video && (
-                      <Row mt={10}>
-                        <QuestionVideo disabled={!editingPossible} />
-                      </Row>
-                    )}
-                    {image && (
-                      <Row mt={10}>
-                        <QuestionImage disabled={!editingPossible} />
-                      </Row>
-                    )}
-                  </>
-                )}
-                {isNarratorTabOrEditNotPossible && (
-                  <CommonLayout
-                    currentQuestion={selectedQuestion ?? {}}
-                    showOriginalText={!isNarratorTab}
-                  />
-                )}
+          )}
+          <Row justify="center" width="100%">
+            {/* @ts-ignore */}
+            <AppContainer disablePageTitle $width="100%">
+              {!isNarratorTabOrEditNotPossible && (
+                <>
+                  {title && (
+                    <Row width="100%">
+                      <QuestionTitle />
+                    </Row>
+                  )}
+                  {subtitle && (
+                    <Row mt={10}>
+                      <QuestionSubtitle />
+                    </Row>
+                  )}
+                  {'variable' in body && (
+                    <Row mt={10} ml={26}>
+                      <VariableInput
+                        disabled={isNameScreen}
+                        questionId={id}
+                        interventionStatus={status!}
+                        isNarratorTab={isNarratorTab}
+                        variable={body.variable}
+                      />
+                    </Row>
+                  )}
+                  {video && (
+                    <Row mt={10}>
+                      <QuestionVideo disabled={!editingPossible} />
+                    </Row>
+                  )}
+                  {image && (
+                    <Row mt={10}>
+                      <QuestionImage disabled={!editingPossible} />
+                    </Row>
+                  )}
+                </>
+              )}
+              {isNarratorTabOrEditNotPossible && (
+                <CommonLayout
+                  currentQuestion={selectedQuestion ?? {}}
+                  showOriginalText={!isNarratorTab}
+                />
+              )}
 
-                <Row>
-                  <QuestionData />
-                </Row>
+              <Row>
+                <QuestionData />
+              </Row>
 
-                {showProceedButton && (
-                  <Box my={20} ml={26}>
-                    {/* @ts-ignore */}
-                    <Button width="180px" disabled>
-                      <FormattedMessage {...messages.nextQuestion} />
-                    </Button>
-                  </Box>
-                )}
-              </AppContainer>
-            </Row>
-          </AnswerInterventionContent>
-        </Column>
-      </AnswerOuterContainer>
-    );
-  }
-
-  return null;
-};
-
-RenderQuestionDetails.propTypes = {
-  selectedQuestion: PropTypes.object,
-  isNarratorTab: PropTypes.bool,
-  interventionStatus: PropTypes.string,
-  formatMessage: PropTypes.func,
-  changeGroupName: PropTypes.func,
-  currentGroupScope: PropTypes.object,
-  intervention: PropTypes.object,
+              {showProceedButton && (
+                <Box my={20} ml={26}>
+                  {/* @ts-ignore */}
+                  <Button width="180px" disabled>
+                    <FormattedMessage {...messages.nextQuestion} />
+                  </Button>
+                </Box>
+              )}
+            </AppContainer>
+          </Row>
+        </AnswerInterventionContent>
+      </Column>
+    </AnswerOuterContainer>
+  );
 };
 
 export default QuestionDetails;
