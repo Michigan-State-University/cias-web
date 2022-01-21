@@ -5,6 +5,7 @@ import {
   GridQuestionPayload,
   QuestionPayload,
   SliderQuestionPayload,
+  TlfbEventsPayload,
 } from './QuestionPayload';
 
 export interface FeedbackSpectrumPattern {
@@ -80,7 +81,8 @@ export interface CurrencyQuestionData extends QuestionPayloadData<string> {}
 
 export interface TlfbConfigData extends QuestionPayloadData<string> {}
 
-export type TlfbEventsData = never;
+export interface TlfbEventsData
+  extends QuestionPayloadData<TlfbEventsPayload> {}
 
 export type TlfbQuestionData = never;
 

@@ -29,12 +29,16 @@ export interface SliderQuestionPayload {
 export interface FeedbackQuestionPayload {
   startValue: string;
   endValue: string;
-  targetValue: string;
-  originalText?: StartEndValueOriginalText;
+}
+
+export interface TlfbEventsPayload {
+  screenTitle: string;
+  screenQuestion: string;
 }
 
 export type QuestionPayload =
   | string
   | GridQuestionPayload
   | SliderQuestionPayload
-  | FeedbackQuestionPayload;
+  | FeedbackQuestionPayload
+  | TlfbEventsPayload;
