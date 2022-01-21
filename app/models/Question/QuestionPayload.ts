@@ -33,8 +33,13 @@ export interface FeedbackQuestionPayload {
   originalText?: StartEndValueOriginalText;
 }
 
+export interface TlfbConfigPayload {
+  daysCount: string;
+}
+
 export type QuestionPayload =
   | string
   | GridQuestionPayload
   | SliderQuestionPayload
-  | FeedbackQuestionPayload;
+  | FeedbackQuestionPayload
+  | TlfbConfigPayload;

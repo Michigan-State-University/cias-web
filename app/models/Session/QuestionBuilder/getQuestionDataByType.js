@@ -80,6 +80,14 @@ export const getQuestionDataByType = (type) => {
       };
 
     case tlfbConfig.id:
+      return {
+        data: [
+          {
+            payload: { days_count: '' },
+          },
+        ],
+      };
+
     case tlfbEvents.id:
     case tlfbQuestion.id:
       return {
