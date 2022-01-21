@@ -8,11 +8,13 @@ type CalendarDayType = {
   day: number;
   onClick?: () => void;
   active?: boolean;
+  mobile?: boolean;
 };
 
 export const Day = ({
   day,
   onClick,
+  mobile = false,
   disabled = false,
   unreachable = false,
   active = false,
@@ -22,6 +24,7 @@ export const Day = ({
     active={active}
     unreachable={unreachable}
     onClick={!disabled ? onClick : () => {}}
+    mobile={mobile}
   >
     <DayNo>{day}</DayNo>
   </Container>
