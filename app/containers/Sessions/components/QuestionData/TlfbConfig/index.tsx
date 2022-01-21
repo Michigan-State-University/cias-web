@@ -7,7 +7,7 @@ import {
   updateQuestionData,
 } from 'global/reducers/questions';
 
-import { TlfbConfig as TlbfConfigType } from 'models/Question';
+import { TlfbConfigDTO } from 'models/Question';
 import { InterventionStatus } from 'models/Intervention';
 
 import { numericValidator } from 'utils/validators';
@@ -32,7 +32,7 @@ const TlfbConfig = () => {
   const { formatMessage } = useIntl();
   const dispatch = useDispatch();
 
-  const selectedQuestion: TlbfConfigType = useSelector(
+  const selectedQuestion: TlfbConfigDTO = useSelector(
     makeSelectSelectedQuestion()!,
   );
 
