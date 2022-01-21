@@ -15,10 +15,9 @@ import { numericValidator } from 'utils/validators';
 import { themeColors } from 'theme';
 
 import H2 from 'components/H2';
-import Text from 'components/Text';
 import Row from 'components/Row';
 import Column from 'components/Column';
-import ApprovableInput from 'components/Input/ApprovableInput';
+import LabelledApprovableInput from 'components/Input/LabelledApprovableInput';
 
 import messages from './messages';
 import { UPDATE_DATA } from './constants';
@@ -51,11 +50,9 @@ const TlfbConfig = () => {
         <H2 mb={24}>{formatMessage(messages.tlfbTimeframe)}</H2>
         <H2 color={themeColors.warning}>*</H2>
       </Row>
-      <Text id="number-of-days-label" mb={8}>
-        {formatMessage(messages.noOfDaysLabel)}
-      </Text>
-      <ApprovableInput
-        aria-labelledby="number-of-days-label"
+      <LabelledApprovableInput
+        id="number-of-days-input"
+        label={formatMessage(messages.noOfDaysLabel)}
         type="singleline"
         keyboard="tel"
         placeholder={formatMessage(messages.noOfDaysPlaceholder)}
