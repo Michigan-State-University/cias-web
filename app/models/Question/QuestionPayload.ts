@@ -29,6 +29,8 @@ export interface SliderQuestionPayload {
 export interface FeedbackQuestionPayload {
   startValue: string;
   endValue: string;
+  targetValue: string;
+  originalText?: StartEndValueOriginalText;
 }
 
 export interface TlfbEventsPayload {
