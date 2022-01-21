@@ -1,6 +1,5 @@
 import styled from 'styled-components';
 import { colors } from 'theme';
-import { maxQueries } from 'components/Container/mediaQuery';
 
 const getBackgroundColor = (disabled, active) => {
   if (disabled) return colors.babyBlue;
@@ -41,20 +40,23 @@ export const Container = styled.div`
       }
     `}
 
-  @media ${maxQueries.md} {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    padding: unset;
-    width: 100%;
-    height: auto;
+  ${({ mobile }) =>
+    mobile &&
+    `
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      padding: unset;
+      width: 100%;
+      height: auto;
 
-    &:after {
-      content: '';
-      display: block;
-      padding-bottom: 100%;
-    }
-  }
+      &:after {
+        content: '';
+        display: block;
+        padding-bottom: 100%;
+      }
+
+  `}
 `;
 
 export const DayNo = styled.div`

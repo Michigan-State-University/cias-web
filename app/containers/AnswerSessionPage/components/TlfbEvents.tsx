@@ -2,12 +2,6 @@ import React from 'react';
 
 import Calendar from 'components/Calendar';
 
-import { CalendarContainer } from './styled';
-
-const TlfbEvents = () => (
-  <CalendarContainer>
-    <Calendar />
-  </CalendarContainer>
-);
+const TlfbEvents = () => <Calendar />;
 
 export default TlfbEvents;

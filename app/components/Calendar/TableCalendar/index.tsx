@@ -2,8 +2,6 @@ import React, { ReactElement } from 'react';
 import dayjs, { Dayjs } from 'dayjs';
 import localeData from 'dayjs/plugin/localeData';
 
-import { VisibleWrapper } from 'components/VisibleWrapper';
-
 import {
   Container,
   CalendarTable,
@@ -19,6 +17,7 @@ type TableCalendarProps = {
   onSelectDay: (day: Dayjs) => void;
   MonthSelectorComponent?: ReactElement;
   month: number;
+  isMobile: boolean;
 };
 
 dayjs.extend(localeData);
@@ -29,14 +28,15 @@ export const TableCalendar = ({
   onSelectDay,
   MonthSelectorComponent,
   month,
+  isMobile,
 }: TableCalendarProps) => (
   <>
-    <VisibleWrapper end="sm">{MonthSelectorComponent}</VisibleWrapper>
-    <Container>
-      <VisibleWrapper start="md">{MonthSelectorComponent}</VisibleWrapper>
+    {isMobile && MonthSelectorComponent}
+    <Container mobile={isMobile}>
+      {!isMobile && MonthSelectorComponent}
       <CalendarTable>
         <thead>
-          <CalendarHeader>
+          <CalendarHeader mobile={isMobile}>
             {dayjs.weekdaysShort().map((weekday: string) => (
               <th key={weekday}>{weekday}</th>
             ))}
@@ -53,6 +53,7 @@ export const TableCalendar = ({
                       active={selectedDay?.isSame(day, 'day')}
                       day={dayjs(day).date()}
                       unreachable={dayjs(day).month() !== month}
+                      mobile={isMobile}
                     />
                   </td>
                 ))}
