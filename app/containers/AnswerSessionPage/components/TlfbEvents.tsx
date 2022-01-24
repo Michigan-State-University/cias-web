@@ -5,8 +5,24 @@ import { fullDayToYearFormatter } from 'utils/formatters';
 
 import Calendar from 'components/Calendar';
 import { PopoverModal } from 'components/Modal';
+import TlfbTitle from 'components/TlfbTitle';
+import { TlfbEventsDTO as TlfbEventsModel } from 'models/Question';
 
-const TlfbEvents = () => {
+import { TlfbContainer } from './styled';
+
+type TlfbEventsProps = {
+  question: TlfbEventsModel;
+};
+
+const TlfbEvents = ({ question }: TlfbEventsProps) => {
+  const {
+    body: { data },
+  } = question;
+
+  const questionData = data[0]?.payload;
+  const screenQuestion = questionData?.screen_question;
+  const screenTitle = questionData?.screen_title;
+
   const [selectedDay, setSelectedDay] = useState<Dayjs>();
   const dayId = selectedDay
     ? selectedDay.format(fullDayToYearFormatter)
@@ -21,12 +37,13 @@ const TlfbEvents = () => {
   };
 
   return (
-    <>
+    <TlfbContainer>
+      <TlfbTitle smallText={screenTitle} bigText={screenQuestion} />
       <PopoverModal referenceElement={dayId} onClose={onClose}>
         {selectedDay?.toString()}
       </PopoverModal>
       <Calendar onSelectDay={onSelectDay} selectedDay={selectedDay} />
-    </>
+    </TlfbContainer>
   );
 };
 

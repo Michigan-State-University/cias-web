@@ -48,7 +48,7 @@ export const CalendarRow = styled.tr`
     ${({ mobile, rowsNumber }) =>
       !mobile &&
       `
-        height: calc(530px / ${rowsNumber});
+        height: calc(470px / ${rowsNumber});
     `}
   }
 

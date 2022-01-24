@@ -4,6 +4,7 @@ import { useContainerQuery } from 'react-container-query';
 
 import { getCalendarMonthDates } from 'utils/calendar/getCalendarMonth';
 import { containerBreakpoints } from 'components/Container/containerBreakpoints';
+import Divider from 'components/Divider';
 
 import TableCalendar from './TableCalendar';
 import MonthSelector from './MonthSelector';
@@ -56,16 +57,19 @@ export const Calendar = ({
   );
 
   return (
-    <Container mobile={!isDesktop} ref={containerRef}>
-      <TableCalendar
-        dates={dates}
-        selectedDay={selectedDay}
-        onSelectDay={handleSelectDay}
-        MonthSelectorComponent={MonthSelectorComponent}
-        month={monthDate.month()}
-        isMobile={!isDesktop}
-      />
-    </Container>
+    <>
+      {!isDesktop && <Divider mb={32} mt={-8} />}
+      <Container mobile={!isDesktop} ref={containerRef}>
+        <TableCalendar
+          dates={dates}
+          selectedDay={selectedDay}
+          onSelectDay={handleSelectDay}
+          MonthSelectorComponent={MonthSelectorComponent}
+          month={monthDate.month()}
+          isMobile={!isDesktop}
+        />
+      </Container>
+    </>
   );
 };
 

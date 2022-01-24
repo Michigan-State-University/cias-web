@@ -1,7 +1,7 @@
 import styled from 'styled-components';
 
 export const Container = styled.div`
-  height: 660px;
+  height: 600px;
 
   ${({ mobile }) =>
     mobile &&
