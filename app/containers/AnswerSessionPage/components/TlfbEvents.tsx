@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import dayjs, { Dayjs } from 'dayjs';
+import { Dayjs } from 'dayjs';
 
 import { fullDayToYearFormatter } from 'utils/formatters';
 
@@ -9,7 +9,7 @@ import { PopoverModal } from 'components/Modal';
 const TlfbEvents = () => {
   const [selectedDay, setSelectedDay] = useState<Dayjs>();
   const dayId = selectedDay
-    ? dayjs(selectedDay).format(fullDayToYearFormatter)
+    ? selectedDay.format(fullDayToYearFormatter)
     : undefined;
 
   const onClose = () => {

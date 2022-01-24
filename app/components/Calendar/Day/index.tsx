@@ -1,7 +1,10 @@
 import React, { memo, useRef } from 'react';
-import dayjs, { Dayjs } from 'dayjs';
+import { Dayjs } from 'dayjs';
 
-import { fullDayToYearFormatter } from 'utils/formatters';
+import {
+  fullDayToYearFormatter,
+  firstDayOfMonthFormatter,
+} from 'utils/formatters';
 
 import { Container, DayNo, Wrapper } from './styled';
 
@@ -23,10 +26,12 @@ export const Day = ({
   active = false,
 }: CalendarDayType) => {
   const ref = useRef<HTMLElement>();
-  const date = dayjs(day).date();
-  const id = dayjs(day).format(fullDayToYearFormatter);
+  const date = day.date();
+  const id = day.format(fullDayToYearFormatter);
 
   const handleClick = () => (!disabled && onClick ? onClick(id) : undefined);
+
+  const dayNo = date === 1 ? day.format(firstDayOfMonthFormatter) : date;
 
   return (
     <Wrapper>
@@ -39,7 +44,7 @@ export const Day = ({
         onClick={handleClick}
         mobile={mobile}
       >
-        <DayNo>{date}</DayNo>
+        <DayNo>{dayNo}</DayNo>
       </Container>
     </Wrapper>
   );

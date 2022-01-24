@@ -56,7 +56,7 @@ export const TableCalendar = ({
                       onClick={(dayId) => onSelectDay(day, dayId)}
                       active={selectedDay?.isSame(day, 'day')}
                       day={day}
-                      unreachable={dayjs(day).month() !== month}
+                      unreachable={day.month() !== month}
                       mobile={isMobile}
                     />
                   </td>
