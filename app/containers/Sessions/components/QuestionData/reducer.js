@@ -14,6 +14,7 @@ import {
   phoneQuestion,
   participantReport,
   tlfbConfig,
+  tlfbEvents,
 } from 'models/Session/QuestionTypes';
 
 import currencyQuestionReducer from './CurrencyQuestion/reducer';
@@ -31,6 +32,7 @@ import visualAnalogueScaleQuestionReducer from './VisualAnalogueScaleQuestion/re
 import thirdPartyQuestionReducer from './ThirdPartyQuestion/reducer';
 import participantReportQuestionReducer from './ParticipantReportQuestion/reducer';
 import tlfbConfigReducer from './TlfbConfig/reducer';
+import tlfbEventsReducer from './TlfbEvents/reducer';
 
 /* eslint-disable default-case, no-param-reassign */
 const questionDataReducer = (question, data) => {
@@ -65,6 +67,8 @@ const questionDataReducer = (question, data) => {
       return participantReportQuestionReducer(question, data);
     case tlfbConfig.id:
       return tlfbConfigReducer(question, data);
+    case tlfbEvents.id:
+      return tlfbEventsReducer(question, data);
     default:
       return question;
   }

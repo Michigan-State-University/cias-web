@@ -28,6 +28,7 @@ import {
   participantReport,
   finishQuestion,
   tlfbConfig,
+  tlfbEvents,
 } from 'models/Session/QuestionTypes';
 
 import CurrencyQuestion from './CurrencyQuestion';
@@ -46,6 +47,7 @@ import NameQuestion from './NameQuestion';
 import ThirdPartyQuestion from './ThirdPartyQuestion';
 import FinishScreen from './FinishScreen';
 import TlfbConfig from './TlfbConfig';
+import TlfbEvents from './TlfbEvents';
 
 const QuestionData = ({
   selectedQuestionType,
@@ -92,6 +94,8 @@ const QuestionData = ({
       return <FinishScreen {...commonProps} />;
     case tlfbConfig.id:
       return <TlfbConfig {...commonProps} />;
+    case tlfbEvents.id:
+      return <TlfbEvents {...commonProps} />;
     default:
       return null;
   }

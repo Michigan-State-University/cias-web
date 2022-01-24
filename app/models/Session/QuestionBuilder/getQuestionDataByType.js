@@ -88,12 +88,15 @@ export const getQuestionDataByType = (type) => {
         ],
       };
 
-    case tlfbEvents.id:
     case tlfbQuestion.id:
       return {
         data: [],
       };
 
+    case tlfbEvents.id:
+      return {
+        data: [{ payload: { screen_title: '', screen_question: '' } }],
+      };
     default:
       return {
         variable: { name: '' },

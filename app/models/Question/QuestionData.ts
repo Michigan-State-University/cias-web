@@ -5,6 +5,7 @@ import {
   GridQuestionPayload,
   QuestionPayload,
   SliderQuestionPayload,
+  TlfbEventsPayload,
   TlfbConfigPayload,
 } from './QuestionPayload';
 
@@ -82,7 +83,8 @@ export interface CurrencyQuestionData extends QuestionPayloadData<string> {}
 export interface TlfbConfigData
   extends QuestionPayloadData<TlfbConfigPayload> {}
 
-export type TlfbEventsData = never;
+export interface TlfbEventsData
+  extends QuestionPayloadData<TlfbEventsPayload> {}
 
 export type TlfbQuestionData = never;
 
