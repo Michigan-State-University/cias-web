@@ -11,6 +11,8 @@ import { Container } from './styled';
 
 type CalendarProps = {
   startDate?: Dayjs;
+  selectedDay?: Dayjs;
+  onSelectDay?: (day: Dayjs, id: string) => void;
 };
 
 const IS_DESKTOP = 'IS_DESKTOP';
@@ -21,9 +23,16 @@ const QUERY = {
   },
 };
 
-export const Calendar = ({ startDate = dayjs() }: CalendarProps) => {
+export const Calendar = ({
+  startDate = dayjs(),
+  selectedDay,
+  onSelectDay,
+}: CalendarProps) => {
   const [monthDate, setMonthDate] = useState(startDate);
-  const [selectedDay, setSelectedDay] = useState<Nullable<Dayjs>>(null);
+
+  const handleSelectDay = (day: Dayjs, id: string) => {
+    if (onSelectDay) onSelectDay(day, id);
+  };
 
   const dates = getCalendarMonthDates(monthDate);
 
@@ -51,7 +60,7 @@ export const Calendar = ({ startDate = dayjs() }: CalendarProps) => {
       <TableCalendar
         dates={dates}
         selectedDay={selectedDay}
-        onSelectDay={setSelectedDay}
+        onSelectDay={handleSelectDay}
         MonthSelectorComponent={MonthSelectorComponent}
         month={monthDate.month()}
         isMobile={!isDesktop}

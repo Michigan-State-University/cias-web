@@ -14,7 +14,7 @@ import Day from '../Day';
 type TableCalendarProps = {
   dates: Dayjs[][];
   selectedDay: Nullable<Dayjs>;
-  onSelectDay: (day: Dayjs) => void;
+  onSelectDay: (day: Dayjs, id: string) => void;
   MonthSelectorComponent?: ReactElement;
   month: number;
   isMobile: boolean;
@@ -49,9 +49,9 @@ export const TableCalendar = ({
                 {week.map((day) => (
                   <td key={day.toISOString()}>
                     <Day
-                      onClick={() => onSelectDay(day)}
+                      onClick={(dayId) => onSelectDay(day, dayId)}
                       active={selectedDay?.isSame(day, 'day')}
-                      day={dayjs(day).date()}
+                      day={day}
                       unreachable={dayjs(day).month() !== month}
                       mobile={isMobile}
                     />
