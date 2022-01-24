@@ -7,3 +7,4 @@ export const jsMonthToStringFormatter = (locale = 'en') =>
   new Intl.DateTimeFormat(locale, { month: 'long' });
 
 export const fullDayToYearFormatter = 'DD-MM-YYYY';
+export const firstDayOfMonthFormatter = 'D.MM';
