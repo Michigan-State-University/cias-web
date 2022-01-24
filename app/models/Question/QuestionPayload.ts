@@ -37,10 +37,14 @@ export interface TlfbEventsPayload {
   screenTitle: string;
   screenQuestion: string;
 }
+export interface TlfbConfigPayload {
+  daysCount: string;
+}
 
 export type QuestionPayload =
   | string
   | GridQuestionPayload
   | SliderQuestionPayload
   | FeedbackQuestionPayload
-  | TlfbEventsPayload;
+  | TlfbEventsPayload
+  | TlfbConfigPayload;

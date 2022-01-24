@@ -35,11 +35,11 @@ const TlfbConfig = () => {
     makeSelectSelectedQuestion()!,
   );
 
-  const handleChange = (days: string) => {
+  const handleChange = (days_count: string) => {
     dispatch(
       updateQuestionData({
         type: UPDATE_DATA,
-        data: { value: { payload: days } },
+        data: { value: { payload: { days_count } } },
       }),
     );
   };
@@ -56,7 +56,7 @@ const TlfbConfig = () => {
         type="singleline"
         keyboard="tel"
         placeholder={formatMessage(messages.noOfDaysPlaceholder)}
-        value={selectedQuestion.body.data[0].payload}
+        value={selectedQuestion.body.data[0].payload.days_count}
         validator={numericValidator}
         onCheck={handleChange}
         height={48}

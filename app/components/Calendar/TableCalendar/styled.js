@@ -1,7 +1,6 @@
 import styled from 'styled-components';
 import { colors } from 'theme';
 import Color from 'color';
-import { maxQueries } from 'components/Container/mediaQuery';
 
 export const Container = styled.div`
   background-color: ${colors.white};
@@ -11,15 +10,16 @@ export const Container = styled.div`
   padding: 24px;
   height: 100%;
 
-  @media ${maxQueries.md} {
-    height: auto;
-  }
+  ${({ mobile }) =>
+    mobile &&
+    `
+      height: auto;
+    `}
 `;
 
 export const CalendarTable = styled.table`
   width: 100%;
   table-layout: fixed;
-  height: calc(100% - 52px);
 `;
 
 export const CalendarHeader = styled.tr`
@@ -32,16 +32,26 @@ export const CalendarHeader = styled.tr`
     padding-bottom: 8px;
   }
 
-  @media ${maxQueries.md} {
-    text-align: center;
+  ${({ mobile }) =>
+    mobile &&
+    `
+      text-align: center;
 
-    & > th {
-      padding-bottom: 16px;
-    }
-  }
+      & > th {
+        padding-bottom: 16px;
+      }
+  `}
 `;
 
 export const CalendarRow = styled.tr`
+  td {
+    ${({ mobile, rowsNumber }) =>
+      !mobile &&
+      `
+        height: calc(530px / ${rowsNumber});
+    `}
+  }
+
   & > td {
     padding: 0 2px;
   }

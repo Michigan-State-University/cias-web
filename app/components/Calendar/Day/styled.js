@@ -1,6 +1,5 @@
 import styled from 'styled-components';
 import { colors } from 'theme';
-import { maxQueries } from 'components/Container/mediaQuery';
 
 const getBackgroundColor = (disabled, active) => {
   if (disabled) return colors.babyBlue;
@@ -19,6 +18,13 @@ const getBorder = (active, disabled) => {
   if (active) return `2px solid ${colors.surfieGreen}`;
   return `1px solid ${colors.linkWater}`;
 };
+
+// This Wrapper component is required for correct rendering of the table in Safari
+// Safari doesn't like padding inside cell elements
+// More info: https://stackoverflow.com/questions/6960083/safari-5-1-breaks-css-table-cell-spacing
+export const Wrapper = styled.div`
+  height: 100%;
+`;
 
 export const Container = styled.div`
   border-radius: 5px;
@@ -41,20 +47,23 @@ export const Container = styled.div`
       }
     `}
 
-  @media ${maxQueries.md} {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    padding: unset;
-    width: 100%;
-    height: auto;
+  ${({ mobile }) =>
+    mobile &&
+    `
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      padding: unset;
+      width: 100%;
+      height: auto;
 
-    &:after {
-      content: '';
-      display: block;
-      padding-bottom: 100%;
-    }
-  }
+      &:after {
+        content: '';
+        display: block;
+        padding-bottom: 100%;
+      }
+
+  `}
 `;
 
 export const DayNo = styled.div`
