@@ -440,7 +440,7 @@ exports[`<NarratorTab /> Should render and match the snapshot 1`] = `
     data-cy="narrator-blocks"
   >
     <div
-      data-rbd-droppable-context-id="1"
+      data-rbd-droppable-context-id="0"
       data-rbd-droppable-id="block-list"
     />
   </div>
