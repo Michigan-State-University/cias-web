@@ -78,7 +78,6 @@ const Settings = ({
         </div>
         <div label={formatMessage(messages[settingsTabLabels.narrator])}>
           <NarratorTab
-            formatMessage={formatMessage}
             disabled={!editingPossible}
             narrator={narrator}
             questionType={type}

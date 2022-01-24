@@ -9,14 +9,22 @@ exports[`<NarratorTab /> Should render and match the snapshot 1`] = `
   margin-bottom: 20px;
 }
 
-.c9 {
+.c1 {
+  width: auto;
+  height: auto;
+  display: block;
+  border-radius: 5px;
+  margin-bottom: 30px;
+}
+
+.c12 {
   width: auto;
   height: auto;
   display: block;
   border-radius: 5px;
 }
 
-.c16 {
+.c19 {
   width: auto;
   height: auto;
   display: block;
@@ -24,7 +32,7 @@ exports[`<NarratorTab /> Should render and match the snapshot 1`] = `
   margin-bottom: 15px;
 }
 
-.c21 {
+.c23 {
   width: auto;
   height: auto;
   display: block;
@@ -32,7 +40,7 @@ exports[`<NarratorTab /> Should render and match the snapshot 1`] = `
   position: relative;
 }
 
-.c22 {
+.c24 {
   width: auto;
   height: auto;
   display: block;
@@ -40,7 +48,7 @@ exports[`<NarratorTab /> Should render and match the snapshot 1`] = `
   margin-top: 14px;
 }
 
-.c11 {
+.c14 {
   margin: 0;
   font-family: DM Sans;
   font-size: 15px;
@@ -48,7 +56,7 @@ exports[`<NarratorTab /> Should render and match the snapshot 1`] = `
   color: #2F3850;
 }
 
-.c1 {
+.c4 {
   display: -webkit-box;
   display: -webkit-flex;
   display: -ms-flexbox;
@@ -74,7 +82,7 @@ exports[`<NarratorTab /> Should render and match the snapshot 1`] = `
   border-bottom: 1px solid #E9F1FB;
 }
 
-.c2 {
+.c5 {
   display: -webkit-box;
   display: -webkit-flex;
   display: -ms-flexbox;
@@ -97,7 +105,7 @@ exports[`<NarratorTab /> Should render and match the snapshot 1`] = `
   align-items: center;
 }
 
-.c8 {
+.c11 {
   display: -webkit-box;
   display: -webkit-flex;
   display: -ms-flexbox;
@@ -121,7 +129,7 @@ exports[`<NarratorTab /> Should render and match the snapshot 1`] = `
   width: 100%;
 }
 
-.c15 {
+.c18 {
   display: -webkit-box;
   display: -webkit-flex;
   display: -ms-flexbox;
@@ -146,7 +154,7 @@ exports[`<NarratorTab /> Should render and match the snapshot 1`] = `
   padding-bottom: 15px;
 }
 
-.c18 {
+.c20 {
   display: -webkit-box;
   display: -webkit-flex;
   display: -ms-flexbox;
@@ -157,21 +165,21 @@ exports[`<NarratorTab /> Should render and match the snapshot 1`] = `
   height: auto;
 }
 
-.c12 {
+.c15 {
   position: relative;
   display: inline-block;
   min-width: 40px;
   height: 21px;
 }
 
-.c5 {
+.c8 {
   opacity: 0;
   width: 0;
   height: 0;
   visibility: collapse;
 }
 
-.c7 {
+.c10 {
   width: 100%;
   display: -webkit-box;
   display: -webkit-flex;
@@ -183,16 +191,16 @@ exports[`<NarratorTab /> Should render and match the snapshot 1`] = `
   align-items: center;
 }
 
-.c7:hover {
+.c10:hover {
   cursor: pointer;
 }
 
-.c4:disabled + .c6 {
+.c7:disabled + .c9 {
   opacity: 0.5;
   cursor: not-allowed;
 }
 
-.c14 {
+.c17 {
   position: absolute;
   top: 0;
   left: 0;
@@ -204,20 +212,20 @@ exports[`<NarratorTab /> Should render and match the snapshot 1`] = `
   border-radius: 21px;
 }
 
-.c4:checked + .c6 .c13 {
+.c7:checked + .c9 .c16 {
   background-color: #B727EA;
 }
 
-.c4:focus + .c6 .c13 {
+.c7:focus + .c9 .c16 {
   box-shadow: 0 0 1px #B727EA;
 }
 
-.c4:disabled + .c6 .c13 {
+.c7:disabled + .c9 .c16 {
   opacity: 0.5;
   cursor: not-allowed;
 }
 
-.c14:before {
+.c17:before {
   position: absolute;
   content: '';
   left: 4px;
@@ -230,21 +238,29 @@ exports[`<NarratorTab /> Should render and match the snapshot 1`] = `
   border-radius: 50%;
 }
 
-.c4:checked + .c6 .c13:before {
+.c7:checked + .c9 .c16:before {
   -webkit-transform: translateX(18px);
   -ms-transform: translateX(18px);
   transform: translateX(18px);
 }
 
-.c10 {
+.c13 {
   margin-right: 5px;
 }
 
-.c3 {
+.c6 {
   width: 100% !important;
 }
 
-.c20 {
+.c3 {
+  font-family: DM Sans;
+  font-size: 13px;
+  line-height: 130%;
+  font-size: 14px;
+  color: #2F3850;
+}
+
+.c22 {
   font-family: DM Sans;
   font-size: 13px;
   line-height: 130%;
@@ -253,20 +269,20 @@ exports[`<NarratorTab /> Should render and match the snapshot 1`] = `
   color: rgba(210,55,29,1);
 }
 
-.c19 {
+.c21 {
   width: auto;
   height: auto;
   margin-right: 10px;
 }
 
-.c17 {
+.c2 {
   background-color: #F8FBFF;
   border: 1px solid #DFEBFC;
   border-radius: 5px;
   padding: 10px;
 }
 
-.c23 {
+.c25 {
   height: 40px;
   border: 1px dashed #B0BAC9;
   color: #B0BAC9;
@@ -289,7 +305,7 @@ exports[`<NarratorTab /> Should render and match the snapshot 1`] = `
   cursor: pointer;
 }
 
-.c23:hover {
+.c25:hover {
   background-color: #107969;
   color: #FFFFFF;
   border: none;
@@ -300,16 +316,32 @@ exports[`<NarratorTab /> Should render and match the snapshot 1`] = `
     class="c0"
   >
     <div
-      class="c1"
+      class="c1 c2"
+    >
+      <p
+        class="c3"
+        font-size="14px"
+      >
+        You 
+        <span
+          style="color: rgb(210, 55, 29);"
+        >
+          cannot edit content
+        </span>
+         on the screen while working with the Narrator.
+      </p>
+    </div>
+    <div
+      class="c4"
     >
       <div
-        class="c2 c3"
+        class="c5 c6"
       >
         <input
           aria-checked="true"
           aria-disabled="false"
           checked=""
-          class="c4 c5"
+          class="c7 c8"
           data-cy="branching-intervention-toggle"
           data-testid="switch-input"
           id="voice"
@@ -317,27 +349,27 @@ exports[`<NarratorTab /> Should render and match the snapshot 1`] = `
           type="checkbox"
         />
         <label
-          class="c6 c7"
+          class="c9 c10"
           for="voice"
         >
           <div
-            class="c8"
+            class="c11"
             width="100%"
           >
             <div
-              class="c9 c10"
+              class="c12 c13"
             >
               <h3
-                class="c11"
+                class="c14"
               >
                 Voice
               </h3>
             </div>
             <div
-              class="c12"
+              class="c15"
             >
               <span
-                class="c13 c14"
+                class="c16 c17"
               />
             </div>
           </div>
@@ -345,16 +377,16 @@ exports[`<NarratorTab /> Should render and match the snapshot 1`] = `
       </div>
     </div>
     <div
-      class="c15"
+      class="c18"
     >
       <div
-        class="c2 c3"
+        class="c5 c6"
       >
         <input
           aria-checked="true"
           aria-disabled="false"
           checked=""
-          class="c4 c5"
+          class="c7 c8"
           data-cy="branching-intervention-toggle"
           data-testid="switch-input"
           id="animation"
@@ -362,27 +394,27 @@ exports[`<NarratorTab /> Should render and match the snapshot 1`] = `
           type="checkbox"
         />
         <label
-          class="c6 c7"
+          class="c9 c10"
           for="animation"
         >
           <div
-            class="c8"
+            class="c11"
             width="100%"
           >
             <div
-              class="c9 c10"
+              class="c12 c13"
             >
               <h3
-                class="c11"
+                class="c14"
               >
                 Display Narrator
               </h3>
             </div>
             <div
-              class="c12"
+              class="c15"
             >
               <span
-                class="c13 c14"
+                class="c16 c17"
               />
             </div>
           </div>
@@ -391,17 +423,17 @@ exports[`<NarratorTab /> Should render and match the snapshot 1`] = `
     </div>
   </div>
   <div
-    class="c16 c17"
+    class="c19 c2"
   >
     <div
-      class="c18"
+      class="c20"
     >
       <img
-        class="c19"
+        class="c21"
         src="IMAGE_MOCK"
       />
       <p
-        class="c20"
+        class="c22"
         color="#D2371D"
         font-size="14px"
       >
@@ -419,10 +451,10 @@ exports[`<NarratorTab /> Should render and match the snapshot 1`] = `
     />
   </div>
   <div
-    class="c21"
+    class="c23"
   >
     <div
-      class="c22 c23"
+      class="c24 c25"
     >
       + Add block
     </div>
