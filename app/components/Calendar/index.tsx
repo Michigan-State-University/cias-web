@@ -1,20 +1,50 @@
-import React, { useState } from 'react';
+import React, { useState, useMemo } from 'react';
 import dayjs, { Dayjs } from 'dayjs';
+import { useContainerQuery } from 'react-container-query';
 
 import { getCalendarMonthDates } from 'utils/calendar/getCalendarMonth';
+import { containerBreakpoints } from 'components/Container/containerBreakpoints';
 
 import TableCalendar from './TableCalendar';
 import MonthSelector from './MonthSelector';
+import { Container } from './styled';
 
 type CalendarProps = {
   startDate?: Dayjs;
+  selectedDay?: Dayjs;
+  onSelectDay?: (day: Dayjs, id: string) => void;
 };
 
-export const Calendar = ({ startDate = dayjs() }: CalendarProps) => {
+const IS_DESKTOP = 'IS_DESKTOP';
+
+const QUERY = {
+  [IS_DESKTOP]: {
+    minWidth: containerBreakpoints.md,
+  },
+};
+
+export const Calendar = ({
+  startDate = dayjs(),
+  selectedDay,
+  onSelectDay,
+}: CalendarProps) => {
   const [monthDate, setMonthDate] = useState(startDate);
-  const [selectedDay, setSelectedDay] = useState<Nullable<Dayjs>>(null);
+
+  const handleSelectDay = (day: Dayjs, id: string) => {
+    if (onSelectDay) onSelectDay(day, id);
+  };
 
   const dates = getCalendarMonthDates(monthDate);
+
+  const [containerQueryParams, containerRef] = useContainerQuery(QUERY, {
+    width: undefined,
+    height: undefined,
+  });
+
+  const isDesktop = useMemo(
+    () => containerQueryParams[IS_DESKTOP],
+    [containerQueryParams],
+  );
 
   const MonthSelectorComponent = (
     <MonthSelector
@@ -26,13 +56,16 @@ export const Calendar = ({ startDate = dayjs() }: CalendarProps) => {
   );
 
   return (
-    <TableCalendar
-      dates={dates}
-      selectedDay={selectedDay}
-      onSelectDay={setSelectedDay}
-      MonthSelectorComponent={MonthSelectorComponent}
-      month={monthDate.month()}
-    />
+    <Container mobile={!isDesktop} ref={containerRef}>
+      <TableCalendar
+        dates={dates}
+        selectedDay={selectedDay}
+        onSelectDay={handleSelectDay}
+        MonthSelectorComponent={MonthSelectorComponent}
+        month={monthDate.month()}
+        isMobile={!isDesktop}
+      />
+    </Container>
   );
 };
 

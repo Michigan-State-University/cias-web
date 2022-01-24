@@ -1,13 +1,33 @@
-import React from 'react';
+import React, { useState } from 'react';
+import dayjs, { Dayjs } from 'dayjs';
+
+import { fullDayToYearFormatter } from 'utils/formatters';
 
 import Calendar from 'components/Calendar';
+import { PopoverModal } from 'components/Modal';
 
-import { CalendarContainer } from './styled';
+const TlfbEvents = () => {
+  const [selectedDay, setSelectedDay] = useState<Dayjs>();
+  const dayId = selectedDay
+    ? dayjs(selectedDay).format(fullDayToYearFormatter)
+    : undefined;
 
-const TlfbEvents = () => (
-  <CalendarContainer>
-    <Calendar />
-  </CalendarContainer>
-);
+  const onClose = () => {
+    setSelectedDay(undefined);
+  };
+
+  const onSelectDay = (day: Dayjs) => {
+    setSelectedDay(day);
+  };
+
+  return (
+    <>
+      <PopoverModal referenceElement={dayId} onClose={onClose}>
+        {selectedDay?.toString()}
+      </PopoverModal>
+      <Calendar onSelectDay={onSelectDay} selectedDay={selectedDay} />
+    </>
+  );
+};
 
 export default TlfbEvents;
