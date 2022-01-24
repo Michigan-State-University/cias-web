@@ -158,7 +158,7 @@ const NarratorTab = ({
         {!isTlfbGroup && (
           <InfoBox mb={30}>
             <Text fontSize={fontSizes.medium}>
-              <Markup content={formatMessage(messages.warningMessage)} noWrap />
+              {formatMessage(messages.warningMessage)}
             </Text>
           </InfoBox>
         )}

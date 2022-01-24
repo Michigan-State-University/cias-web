@@ -322,13 +322,7 @@ exports[`<NarratorTab /> Should render and match the snapshot 1`] = `
         class="c3"
         font-size="14px"
       >
-        You 
-        <span
-          style="color: rgb(210, 55, 29);"
-        >
-          cannot edit content
-        </span>
-         on the screen while working with the Narrator.
+        You &lt;warningColor&gt;cannot edit content&lt;/warningColor&gt; on the screen while working with the Narrator.
       </p>
     </div>
     <div

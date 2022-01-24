@@ -13,7 +13,6 @@ import { DEFAULT_LOCALE } from 'i18n';
 import ReactDOM from 'react-dom';
 
 import { createQuestion } from 'utils/reducerCreators';
-import { formatMessage } from 'utils/intlOutsideReact';
 
 import { createTestStore } from 'utils/testUtils/storeUtils';
 import NarratorTab from '../NarratorTab';
@@ -21,7 +20,6 @@ describe('<NarratorTab />', () => {
   const singleQuestion = createQuestion();
 
   const mockFunctions = {
-    formatMessage,
     onNarratorToggle: jest.fn(),
     onCreate: jest.fn(),
   };

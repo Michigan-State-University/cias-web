@@ -47,6 +47,9 @@ export const intlProviderConfig = {
     primaryColor: (chunks) => (
       <span style={{ color: themeColors.primary }}>{chunks}</span>
     ),
+    warningColor: (chunks) => (
+      <span style={{ color: themeColors.warning }}>{chunks}</span>
+    ),
   },
   onError: (error) => {
     const showError = !errorsToOmit.some((errorToOmit) =>
