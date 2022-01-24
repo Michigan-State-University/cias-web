@@ -12,10 +12,12 @@ import { MemoryRouter } from 'react-router-dom';
 import { DEFAULT_LOCALE } from 'i18n';
 import ReactDOM from 'react-dom';
 
+import { intlProviderConfig } from 'containers/LanguageProvider';
 import { createQuestion } from 'utils/reducerCreators';
 
 import { createTestStore } from 'utils/testUtils/storeUtils';
 import NarratorTab from '../NarratorTab';
+
 describe('<NarratorTab />', () => {
   const singleQuestion = createQuestion();
 
@@ -54,11 +56,11 @@ describe('<NarratorTab />', () => {
     document.body.appendChild(modalContainer);
   });
 
-  it.skip('Expect to not log errors in console', () => {
+  it('Expect to not log errors in console', () => {
     const spy = jest.spyOn(global.console, 'error');
     render(
       <Provider store={store}>
-        <IntlProvider locale={DEFAULT_LOCALE}>
+        <IntlProvider locale={DEFAULT_LOCALE} {...intlProviderConfig}>
           <MemoryRouter>
             <NarratorTab {...defaultProps} />
           </MemoryRouter>
@@ -71,7 +73,7 @@ describe('<NarratorTab />', () => {
   it('Should render and match the snapshot', () => {
     const { container } = render(
       <Provider store={store}>
-        <IntlProvider locale={DEFAULT_LOCALE}>
+        <IntlProvider locale={DEFAULT_LOCALE} {...intlProviderConfig}>
           <MemoryRouter>
             <NarratorTab {...defaultProps} />
           </MemoryRouter>
