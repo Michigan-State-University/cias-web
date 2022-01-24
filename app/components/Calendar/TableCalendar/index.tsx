@@ -45,7 +45,11 @@ export const TableCalendar = ({
         <tbody>
           {dates &&
             dates.map((week, index) => (
-              <CalendarRow key={`week-${index}`}>
+              <CalendarRow
+                key={`week-${index}`}
+                rowsNumber={dates.length}
+                mobile={isMobile}
+              >
                 {week.map((day) => (
                   <td key={day.toISOString()}>
                     <Day

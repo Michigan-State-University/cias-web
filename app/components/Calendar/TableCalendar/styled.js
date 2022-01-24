@@ -20,7 +20,6 @@ export const Container = styled.div`
 export const CalendarTable = styled.table`
   width: 100%;
   table-layout: fixed;
-  height: calc(100% - 52px);
 `;
 
 export const CalendarHeader = styled.tr`
@@ -45,6 +44,14 @@ export const CalendarHeader = styled.tr`
 `;
 
 export const CalendarRow = styled.tr`
+  td {
+    ${({ mobile, rowsNumber }) =>
+      !mobile &&
+      `
+        height: calc(530px / ${rowsNumber});
+    `}
+  }
+
   & > td {
     padding: 0 2px;
   }

@@ -19,6 +19,13 @@ const getBorder = (active, disabled) => {
   return `1px solid ${colors.linkWater}`;
 };
 
+// This Wrapper component is required for correct rendering of the table in Safari
+// Safari doesn't like padding inside cell elements
+// More info: https://stackoverflow.com/questions/6960083/safari-5-1-breaks-css-table-cell-spacing
+export const Wrapper = styled.div`
+  height: 100%;
+`;
+
 export const Container = styled.div`
   border-radius: 5px;
   box-sizing: border-box;

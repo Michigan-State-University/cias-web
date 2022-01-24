@@ -3,7 +3,7 @@ import dayjs, { Dayjs } from 'dayjs';
 
 import { fullDayToYearFormatter } from 'utils/formatters';
 
-import { Container, DayNo } from './styled';
+import { Container, DayNo, Wrapper } from './styled';
 
 type CalendarDayType = {
   disabled?: boolean;
@@ -29,17 +29,19 @@ export const Day = ({
   const handleClick = () => (!disabled && onClick ? onClick(id) : undefined);
 
   return (
-    <Container
-      ref={ref}
-      id={id}
-      disabled={disabled}
-      active={active}
-      unreachable={unreachable}
-      onClick={handleClick}
-      mobile={mobile}
-    >
-      <DayNo>{date}</DayNo>
-    </Container>
+    <Wrapper>
+      <Container
+        ref={ref}
+        id={id}
+        disabled={disabled}
+        active={active}
+        unreachable={unreachable}
+        onClick={handleClick}
+        mobile={mobile}
+      >
+        <DayNo>{date}</DayNo>
+      </Container>
+    </Wrapper>
   );
 };
 
