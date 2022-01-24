@@ -1,6 +1,5 @@
 import { defineMessages } from 'react-intl';
 import { feedbackActions } from 'models/Narrator/FeedbackActions';
-import { themeColors } from 'theme';
 
 export const scope = 'app.containers.DefaultSettings';
 
@@ -95,7 +94,7 @@ export default defineMessages({
   },
   warningMessage: {
     id: `${scope}.warningMessage`,
-    defaultMessage: `You <span style="color: ${themeColors.warning}">cannot edit content</span> on the screen while working with the Narrator.`,
+    defaultMessage: `You <warningColor>cannot edit content</warningColor> on the screen while working with the Narrator.`,
   },
   characterBlocked: {
     id: `${scope}.characterBlocked`,

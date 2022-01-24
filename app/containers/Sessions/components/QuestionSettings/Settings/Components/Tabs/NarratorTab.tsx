@@ -1,8 +1,7 @@
 import React, { useState } from 'react';
 import { createStructuredSelector } from 'reselect';
-import PropTypes from 'prop-types';
 import map from 'lodash/map';
-import { FormattedMessage } from 'react-intl';
+import { FormattedMessage, useIntl } from 'react-intl';
 import { compose } from 'redux';
 import { connect } from 'react-redux';
 import { Markup } from 'interweave';
@@ -14,12 +13,9 @@ import { FullWidthSwitch } from 'components/Switch';
 import Text from 'components/Text';
 import lastKey from 'utils/getLastKey';
 import { colors, borders, fontSizes, themeColors } from 'theme';
-import {
-  readQuestionBlockType,
-  feedbackBlockType,
-  getRemovedBlockForSetting,
-} from 'models/Narrator/BlockTypes';
+import { getRemovedBlockForSetting } from 'models/Narrator/BlockTypes';
 import { DisabledNarratorSettingsByQuestionType } from 'models/Session/utils';
+import { Narrator, NarratorBlockTypes } from 'models/Narrator';
 import {
   makeSelectCurrentNarratorBlockIndex,
   changeCurrentNarratorBlock,
@@ -39,8 +35,26 @@ import WrappedAccordion from '../WrappedAcoordion';
 import messages from '../messages';
 import { addBlock, updateNarratorSettings } from '../../actions';
 
+type NonReduxProps = {
+  disabled: boolean;
+  narrator: Narrator;
+  questionType: string;
+  isTlfbGroup: boolean;
+  id: string;
+};
+
+type Props = {
+  id: string;
+  onNarratorToggle: (property: string, value: boolean) => void;
+  onCreate: (type: NarratorBlockTypes, id: string, groupIds: string[]) => void;
+  currentBlockIndex: number;
+  currentQuestionType: NarratorBlockTypes;
+  disabled: boolean;
+  groupIds: string[];
+  changeNarratorBlockIndex: (index: number) => void;
+} & NonReduxProps;
+
 const NarratorTab = ({
-  formatMessage,
   narrator,
   onNarratorToggle,
   onCreate,
@@ -51,11 +65,13 @@ const NarratorTab = ({
   groupIds,
   questionType,
   changeNarratorBlockIndex,
-  showWarning,
-}) => {
+  isTlfbGroup,
+}: Props) => {
   const [confirmationOption, setConfirmationOption] = useState('');
+  const { formatMessage } = useIntl();
 
   const dismissConfirmation = () => setConfirmationOption('');
+
   const onConfirm = () => {
     onNarratorToggle(`${confirmationOption}`, false);
     dismissConfirmation();
@@ -65,27 +81,30 @@ const NarratorTab = ({
     return <></>;
   }
 
-  const onCreateBlock = (type) => {
+  const onCreateBlock = (type: NarratorBlockTypes) => {
     onCreate(type, id, groupIds);
     const blocks = narrator?.blocks?.length ?? 0;
     changeNarratorBlockIndex(blocks);
   };
 
-  const toggleAction = (index) => (value) => {
+  const toggleAction = (index: string) => (value: boolean) => {
     if (value) onNarratorToggle(`${index}`, value);
     else setConfirmationOption(index);
   };
 
   const readQuestionBlockTypePresent = Boolean(
-    narrator.blocks.find(({ type }) => type === readQuestionBlockType),
+    narrator.blocks.find(
+      ({ type }) => type === NarratorBlockTypes.READ_QUESTION,
+    ),
   );
 
   const showSpectrumBlockTypePresent = Boolean(
-    narrator.blocks.find(({ type }) => type === feedbackBlockType),
+    narrator.blocks.find(({ type }) => type === NarratorBlockTypes.FEEDBACK),
   );
 
   const last = lastKey(narrator.settings);
-  const getBorderBottom = (index) => {
+
+  const getBorderBottom = (index: string) => {
     if (index === last) return null;
     return `${borders.borderWidth} ${borders.borderStyle} ${colors.linkWater}`;
   };
@@ -100,6 +119,7 @@ const NarratorTab = ({
         {...messages.blockRemovalConfirmation}
         values={{
           setting: formatMessage(
+            // @ts-ignore
             globalMessages.animationSettings[confirmationOption],
           ),
         }}
@@ -115,6 +135,7 @@ const NarratorTab = ({
         <UL>
           {getRemovedBlockForSetting(confirmationOption).map((blockType) => (
             <LI key={blockType}>
+              {/* @ts-ignore */}
               <FormattedMessage {...globalMessages.blockTypes[blockType]} />
             </LI>
           ))}
@@ -125,6 +146,7 @@ const NarratorTab = ({
 
   return (
     <>
+      {/* @ts-ignore */}
       <ConfirmationModal
         visible={isConfirmationBoxVisible}
         onClose={dismissConfirmation}
@@ -133,10 +155,10 @@ const NarratorTab = ({
         confirmAction={onConfirm}
       />
       <Box mb={20}>
-        {showWarning && (
+        {!isTlfbGroup && (
           <InfoBox mb={30}>
             <Text fontSize={fontSizes.medium}>
-              <Markup content={formatMessage(messages.warningMessage)} noWrap />
+              {formatMessage(messages.warningMessage)}
             </Text>
           </InfoBox>
         )}
@@ -154,6 +176,7 @@ const NarratorTab = ({
                 id={index}
                 disabled={
                   disabled ||
+                  // @ts-ignore
                   DisabledNarratorSettingsByQuestionType[index]?.includes(
                     questionType,
                   )
@@ -166,35 +189,39 @@ const NarratorTab = ({
             </Row>
           ))}
       </Box>
-      <InfoBox mb={15}>
-        <Row>
-          <Img src={bulb} mr={10} />
-          <Text
-            fontSize={fontSizes.medium}
-            color={
-              isCharacterMovable && !disabled
-                ? colors.jungleGreen
-                : themeColors.warning
-            }
-          >
-            <Markup
-              content={
-                disabled
-                  ? formatMessage(messages.characterMoveDisabled)
-                  : formatMessage(messages.characterBlocked)
+      {!isTlfbGroup && (
+        <InfoBox mb={15}>
+          <Row>
+            <Img src={bulb} mr={10} />
+            <Text
+              fontSize={fontSizes.medium}
+              color={
+                isCharacterMovable && !disabled
+                  ? colors.jungleGreen
+                  : themeColors.warning
               }
-              noWrap
-            />
-          </Text>
-        </Row>
-      </InfoBox>
+            >
+              <Markup
+                content={
+                  disabled
+                    ? formatMessage(messages.characterMoveDisabled)
+                    : formatMessage(messages.characterBlocked)
+                }
+                noWrap
+              />
+            </Text>
+          </Row>
+        </InfoBox>
+      )}
       <WrappedAccordion
         disabled={disabled}
         id={id}
-        formatMessage={formatMessage}
         narrator={narrator}
+        isTlfbGroup={isTlfbGroup}
+        groupIds={groupIds}
       />
       <BlockTypeChooser
+        // @ts-ignore
         disabled={disabled}
         questionType={currentQuestionType}
         disableReadQuestionBlockType={readQuestionBlockTypePresent}
@@ -203,21 +230,6 @@ const NarratorTab = ({
       />
     </>
   );
-};
-
-NarratorTab.propTypes = {
-  formatMessage: PropTypes.func.isRequired,
-  id: PropTypes.string,
-  narrator: PropTypes.object,
-  onNarratorToggle: PropTypes.func.isRequired,
-  onCreate: PropTypes.func,
-  currentBlockIndex: PropTypes.number,
-  currentQuestionType: PropTypes.string,
-  disabled: PropTypes.bool,
-  groupIds: PropTypes.array,
-  questionType: PropTypes.string,
-  changeNarratorBlockIndex: PropTypes.func,
-  showWarning: PropTypes.bool,
 };
 
 const mapStateToProps = createStructuredSelector({
@@ -234,4 +246,6 @@ const mapDispatchToProps = {
 
 const withConnect = connect(mapStateToProps, mapDispatchToProps);
 
-export default compose(withConnect)(NarratorTab);
+export default compose(withConnect)(
+  NarratorTab,
+) as React.ComponentType<NonReduxProps>;

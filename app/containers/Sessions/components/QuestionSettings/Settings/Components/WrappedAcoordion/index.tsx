@@ -1,11 +1,11 @@
 import React, { useEffect } from 'react';
-import PropTypes from 'prop-types';
 import cloneDeep from 'lodash/cloneDeep';
 import isEqual from 'lodash/isEqual';
 import map from 'lodash/map';
 import { compose } from 'redux';
 import { connect } from 'react-redux';
 import { createStructuredSelector } from 'reselect';
+import { useIntl } from 'react-intl';
 
 import { getNarratorPositionWhenBlockIsRemoved } from 'utils/getNarratorPosition';
 import { reorder } from 'utils/reorder';
@@ -24,7 +24,8 @@ import {
 } from 'global/reducers/localState';
 import { makeSelectQuestionGroupsIds } from 'global/reducers/questionGroups';
 import globalMessages from 'global/i18n/globalMessages';
-import { feedbackBlockType } from 'models/Narrator/BlockTypes';
+import { Narrator, NarratorBlockTypes, Position } from 'models/Narrator';
+import { Question } from 'models/Question';
 
 import { ModalType, useModal } from 'components/Modal';
 import Accordion from 'components/Accordion';
@@ -32,11 +33,32 @@ import Accordion from 'components/Accordion';
 import { getBlockColor, renderBlock } from '../utils';
 import { removeBlock, reorderNarratorBlocks } from '../../actions';
 import messages from '../messages';
+import ClearAnimationButton from '../Blocks/clearAnimationButton';
+
+type NonReduxProps = {
+  disabled: boolean;
+  id: string;
+  narrator: Narrator;
+  isTlfbGroup: boolean;
+  groupIds: string[];
+};
+
+type Props = {
+  setDraggable: (isDraggable: boolean) => void;
+  setOffset: (positionX: number, positionY: number) => void;
+  animationPosition: Position;
+  deleteBlock: (index: number, narratorBlockIndex: number) => void;
+  updateNarratorPreviewAnimation: (animation: string) => void;
+  reorderBlocks: (blocks: any) => void;
+  changeNarratorBlockIndex: (index: number) => void;
+  narratorBlockIndex: number;
+  questions: Question[];
+  questionId: string;
+} & NonReduxProps;
 
 const WrappedAccordion = ({
   id,
   narrator,
-  formatMessage,
   setDraggable,
   setOffset,
   animationPosition,
@@ -49,8 +71,11 @@ const WrappedAccordion = ({
   questionId,
   disabled,
   groupIds,
-}) => {
+  isTlfbGroup,
+}: Props) => {
   const { voice, animation } = narrator.settings;
+
+  const { formatMessage } = useIntl();
 
   useEffect(() => {
     if (narrator.blocks.length !== 0) {
@@ -72,7 +97,7 @@ const WrappedAccordion = ({
     blurDocument();
   };
 
-  const openAccordion = (index) => {
+  const openAccordion = (index: number) => {
     setDraggable(true);
     const { endPosition } = narrator.blocks[index] || {};
     if (!isEqual(endPosition, animationPosition)) {
@@ -80,7 +105,7 @@ const WrappedAccordion = ({
     }
   };
 
-  const handleDelete = (index) => {
+  const handleDelete = (index: number) => {
     if (narratorBlockIndex !== -1 && index === narrator.blocks.length - 1)
       changeNarratorBlockIndex(index - 1);
     deleteBlock(index, narratorBlockIndex);
@@ -100,7 +125,7 @@ const WrappedAccordion = ({
     setOffset(position.x, position.y);
   };
 
-  const handleReorder = (previousIndex, nextIndex) => {
+  const handleReorder = (previousIndex: number, nextIndex: number) => {
     const newList = reorder(narrator.blocks, previousIndex, nextIndex);
     reorderBlocks(newList);
   };
@@ -114,10 +139,9 @@ const WrappedAccordion = ({
     props: {
       description: formatMessage(messages.deleteBlockHeader),
       content: formatMessage(messages.deleteBlockMessage),
-      confirmAction: () => handleDelete(blockToDeleteIndex),
+      confirmAction: () => handleDelete(blockToDeleteIndex as number),
     },
   });
-
   return (
     <>
       <DeleteModal />
@@ -138,11 +162,19 @@ const WrappedAccordion = ({
               data-cy={`narrator-block-${blockIndex}`}
               key={`${id}-narrator-block-${blockIndex}`}
               color={getBlockColor(block.type, { animation, voice })}
-              deleteActive={block.type !== feedbackBlockType}
+              // @ts-ignore
+              deleteActive={block.type !== NarratorBlockTypes.FEEDBACK}
               label={`${blockIndex + 1}. ${formatMessage(
+                // @ts-ignore
                 globalMessages.blockTypes[block.type],
               )}`}
             >
+              {!isTlfbGroup && (
+                <ClearAnimationButton
+                  blockIndex={blockIndex}
+                  disabled={disabled}
+                />
+              )}
               {renderBlock(
                 block,
                 blockIndex,
@@ -150,33 +182,13 @@ const WrappedAccordion = ({
                 formatMessage,
                 disabled,
                 !animation,
+                isTlfbGroup,
               )}
             </div>
           ))}
       </Accordion>
     </>
   );
-};
-
-WrappedAccordion.propTypes = {
-  formatMessage: PropTypes.func.isRequired,
-  id: PropTypes.string,
-  narrator: PropTypes.object,
-  setDraggable: PropTypes.func,
-  setOffset: PropTypes.func,
-  deleteBlock: PropTypes.func,
-  updateNarratorPreviewAnimation: PropTypes.func,
-  reorderBlocks: PropTypes.func,
-  animationPosition: PropTypes.shape({
-    x: PropTypes.number,
-    y: PropTypes.number,
-  }),
-  changeNarratorBlockIndex: PropTypes.func,
-  narratorBlockIndex: PropTypes.number,
-  questions: PropTypes.array,
-  questionId: PropTypes.string,
-  disabled: PropTypes.bool,
-  groupIds: PropTypes.array,
 };
 
 const mapDispatchToProps = {
@@ -198,4 +210,6 @@ const mapStateToProps = createStructuredSelector({
 
 const withConnect = connect(mapStateToProps, mapDispatchToProps);
 
-export default compose(withConnect)(WrappedAccordion);
+export default compose(withConnect)(
+  WrappedAccordion,
+) as React.ComponentType<NonReduxProps>;

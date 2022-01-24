@@ -48,6 +48,7 @@ export const renderBlock = (
   formatMessage,
   disabled,
   animationDisabled,
+  isTlfbGroup,
 ) => {
   const sharedProps = {
     formatMessage,
@@ -56,6 +57,7 @@ export const renderBlock = (
     blockIndex: index,
     disabled,
     animationDisabled,
+    isTlfbGroup,
   };
   switch (block.type) {
     case bodyAnimationType:

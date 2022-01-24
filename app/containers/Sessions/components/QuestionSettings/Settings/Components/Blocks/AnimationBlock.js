@@ -14,7 +14,6 @@ import {
 
 import { bodyAnimations, headAnimations } from './animations';
 import { updateNarratorAnimation } from '../../actions';
-import ClearAnimationButton from './clearAnimationButton';
 
 const getPossibleAnimations = (type, formatMessage) => {
   if (type === headAnimationType) return headAnimations(formatMessage);
@@ -41,7 +40,6 @@ const AnimationBlock = ({
 
   return (
     <>
-      <ClearAnimationButton blockIndex={blockIndex} disabled={disabled} />
       {getPossibleAnimations(block.type, formatMessage).map(
         (anim, animIndex) => {
           const isActive = block.animation === camelCase(anim.toLowerCase());
