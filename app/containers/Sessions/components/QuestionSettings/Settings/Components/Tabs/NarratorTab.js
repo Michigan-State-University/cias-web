@@ -51,7 +51,7 @@ const NarratorTab = ({
   groupIds,
   questionType,
   changeNarratorBlockIndex,
-  showWarning,
+  isTlfbGroup,
 }) => {
   const [confirmationOption, setConfirmationOption] = useState('');
 
@@ -133,7 +133,7 @@ const NarratorTab = ({
         confirmAction={onConfirm}
       />
       <Box mb={20}>
-        {showWarning && (
+        {!isTlfbGroup && (
           <InfoBox mb={30}>
             <Text fontSize={fontSizes.medium}>
               <Markup content={formatMessage(messages.warningMessage)} noWrap />
@@ -166,33 +166,36 @@ const NarratorTab = ({
             </Row>
           ))}
       </Box>
-      <InfoBox mb={15}>
-        <Row>
-          <Img src={bulb} mr={10} />
-          <Text
-            fontSize={fontSizes.medium}
-            color={
-              isCharacterMovable && !disabled
-                ? colors.jungleGreen
-                : themeColors.warning
-            }
-          >
-            <Markup
-              content={
-                disabled
-                  ? formatMessage(messages.characterMoveDisabled)
-                  : formatMessage(messages.characterBlocked)
+      {!isTlfbGroup && (
+        <InfoBox mb={15}>
+          <Row>
+            <Img src={bulb} mr={10} />
+            <Text
+              fontSize={fontSizes.medium}
+              color={
+                isCharacterMovable && !disabled
+                  ? colors.jungleGreen
+                  : themeColors.warning
               }
-              noWrap
-            />
-          </Text>
-        </Row>
-      </InfoBox>
+            >
+              <Markup
+                content={
+                  disabled
+                    ? formatMessage(messages.characterMoveDisabled)
+                    : formatMessage(messages.characterBlocked)
+                }
+                noWrap
+              />
+            </Text>
+          </Row>
+        </InfoBox>
+      )}
       <WrappedAccordion
         disabled={disabled}
         id={id}
         formatMessage={formatMessage}
         narrator={narrator}
+        isTlfbGroup={isTlfbGroup}
       />
       <BlockTypeChooser
         disabled={disabled}
@@ -217,7 +220,7 @@ NarratorTab.propTypes = {
   groupIds: PropTypes.array,
   questionType: PropTypes.string,
   changeNarratorBlockIndex: PropTypes.func,
-  showWarning: PropTypes.bool,
+  isTlfbGroup: PropTypes.bool,
 };
 
 const mapStateToProps = createStructuredSelector({

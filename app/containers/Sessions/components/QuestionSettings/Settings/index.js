@@ -82,7 +82,7 @@ const Settings = ({
             disabled={!editingPossible}
             narrator={narrator}
             questionType={type}
-            showWarning={!isTlfbGroup}
+            isTlfbGroup={isTlfbGroup}
             id={id}
           />
         </div>

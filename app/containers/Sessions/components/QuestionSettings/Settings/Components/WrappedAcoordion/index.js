@@ -32,6 +32,7 @@ import Accordion from 'components/Accordion';
 import { getBlockColor, renderBlock } from '../utils';
 import { removeBlock, reorderNarratorBlocks } from '../../actions';
 import messages from '../messages';
+import ClearAnimationButton from '../Blocks/clearAnimationButton';
 
 const WrappedAccordion = ({
   id,
@@ -49,6 +50,7 @@ const WrappedAccordion = ({
   questionId,
   disabled,
   groupIds,
+  isTlfbGroup,
 }) => {
   const { voice, animation } = narrator.settings;
 
@@ -117,7 +119,6 @@ const WrappedAccordion = ({
       confirmAction: () => handleDelete(blockToDeleteIndex),
     },
   });
-
   return (
     <>
       <DeleteModal />
@@ -143,6 +144,12 @@ const WrappedAccordion = ({
                 globalMessages.blockTypes[block.type],
               )}`}
             >
+              {!isTlfbGroup && (
+                <ClearAnimationButton
+                  blockIndex={blockIndex}
+                  disabled={disabled}
+                />
+              )}
               {renderBlock(
                 block,
                 blockIndex,
@@ -150,6 +157,7 @@ const WrappedAccordion = ({
                 formatMessage,
                 disabled,
                 !animation,
+                isTlfbGroup,
               )}
             </div>
           ))}
@@ -176,6 +184,7 @@ WrappedAccordion.propTypes = {
   questions: PropTypes.array,
   questionId: PropTypes.string,
   disabled: PropTypes.bool,
+  isTlfbGroup: PropTypes.bool,
   groupIds: PropTypes.array,
 };
 
