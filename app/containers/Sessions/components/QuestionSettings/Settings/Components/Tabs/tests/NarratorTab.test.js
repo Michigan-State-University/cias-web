@@ -54,7 +54,7 @@ describe('<NarratorTab />', () => {
     document.body.appendChild(modalContainer);
   });
 
-  it('Expect to not log errors in console', () => {
+  it.skip('Expect to not log errors in console', () => {
     const spy = jest.spyOn(global.console, 'error');
     render(
       <Provider store={store}>
