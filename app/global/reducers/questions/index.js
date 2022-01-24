@@ -35,6 +35,7 @@ export {
   makeSelectThirdPartyReportQuestionExists,
   makeSelectPhoneQuestionExists,
   makeSelectParticipantReportQuestionExists,
+  makeSelectSelectedQuestionGroupId,
 } from './selectors';
 export {
   copyQuestionSaga,

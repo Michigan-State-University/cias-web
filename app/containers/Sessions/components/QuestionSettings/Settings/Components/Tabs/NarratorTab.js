@@ -51,6 +51,7 @@ const NarratorTab = ({
   groupIds,
   questionType,
   changeNarratorBlockIndex,
+  showWarning,
 }) => {
   const [confirmationOption, setConfirmationOption] = useState('');
 
@@ -132,11 +133,13 @@ const NarratorTab = ({
         confirmAction={onConfirm}
       />
       <Box mb={20}>
-        <InfoBox mb={30}>
-          <Text fontSize={fontSizes.medium}>
-            <Markup content={formatMessage(messages.warningMessage)} noWrap />
-          </Text>
-        </InfoBox>
+        {showWarning && (
+          <InfoBox mb={30}>
+            <Text fontSize={fontSizes.medium}>
+              <Markup content={formatMessage(messages.warningMessage)} noWrap />
+            </Text>
+          </InfoBox>
+        )}
         {narrator &&
           map(narrator.settings, (val, index) => (
             <Row
@@ -214,6 +217,7 @@ NarratorTab.propTypes = {
   groupIds: PropTypes.array,
   questionType: PropTypes.string,
   changeNarratorBlockIndex: PropTypes.func,
+  showWarning: PropTypes.bool,
 };
 
 const mapStateToProps = createStructuredSelector({

@@ -82,6 +82,7 @@ const ApprovableInput = ({
   ariaLabel,
   'aria-labelledby': ariaLabelledBy,
   id,
+  transparent,
 }) => {
   const [value, setValue] = useState(propsValue);
   const [focused, setFocused] = useState(false);
@@ -190,7 +191,7 @@ const ApprovableInput = ({
           onFocus={handleFocus}
           onBlur={onBlur}
           placeholder={placeholder}
-          transparent
+          transparent={transparent}
           disabled={disabled}
           aria-label={ariaLabel}
           aria-labelledby={ariaLabelledBy}
@@ -245,7 +246,7 @@ const ApprovableInput = ({
         onBlur={onBlur}
         placeholder={placeholder}
         keyboard={keyboard}
-        transparent
+        transparent={transparent}
         disabled={disabled}
         fontSize={fontSize}
         padding={padding}
@@ -294,12 +295,14 @@ ApprovableInput.propTypes = {
   ariaLabel: PropTypes.string,
   'aria-labelledby': PropTypes.string,
   id: PropTypes.string,
+  transparent: PropTypes.bool,
 };
 
 ApprovableInput.defaultProps = {
   type: 'multiline',
   richText: false,
   autoSize: false,
+  transparent: true,
 };
 
 export default ApprovableInput;

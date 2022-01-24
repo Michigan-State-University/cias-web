@@ -1,8 +1,14 @@
+// @ts-ignore
 import styled from 'styled-components';
 
 import { elements, colors } from 'theme';
 
-const AnswerInterventionContent = styled.div`
+export type AnswerInterventionContentProps = {
+  transparentBackground: boolean;
+};
+
+// @ts-ignore
+export const AnswerInterventionContent = styled.div<AnswerInterventionContentProps>`
   align-items: flex-start;
   border: 1px dashed ${colors.botticelli};
   display: flex;
@@ -12,9 +18,12 @@ const AnswerInterventionContent = styled.div`
   position: relative;
   width: 100%;
   z-index: 0;
+  ${({ transparentBackground }: AnswerInterventionContentProps) =>
+    transparentBackground ? `` : `background-color: ${colors.white}`}
 `;
 
-const AnswerOuterContainer = styled.div`
+// @ts-ignore
+export const AnswerOuterContainer = styled.div`
   align-items: center;
   display: flex;
   flex-grow: 1;
@@ -22,5 +31,3 @@ const AnswerOuterContainer = styled.div`
   justify-content: flex-start;
   width: 100%;
 `;
-
-export { AnswerOuterContainer, AnswerInterventionContent };

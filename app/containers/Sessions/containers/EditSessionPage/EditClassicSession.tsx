@@ -86,7 +86,7 @@ import GroupActionButton from 'containers/Sessions/components/GroupActionButton'
 import { reorderScope } from 'models/Session/ReorderScope';
 import { ClassicSession } from 'models/Session';
 
-import { QuestionDTO } from 'models/Question';
+import { QuestionDTO, QuestionTypes } from 'models/Question';
 import { QuestionGroup, GroupType } from 'models/QuestionGroup';
 import { questionType } from 'models/Session/QuestionTypes';
 import QuestionDetails from '../../components/QuestionDetails';
@@ -257,7 +257,7 @@ const EditClassicSessionPage = ({
   const currentQuestion = questions.find(({ id }) => id === selectedQuestion);
   const currentGroupScope = groups.find(
     ({ id }) => currentQuestion && id === currentQuestion.question_group_id,
-  );
+  )!;
 
   const groupActions = [
     {
@@ -446,6 +446,10 @@ const EditClassicSessionPage = ({
     history.push(url, { selectedQuestionId: selectedQuestion });
   };
 
+  const handleGroupNameChange = (name: string) => {
+    changeGroupName(name, sessionId, currentGroupScope.id);
+  };
+
   return (
     <>
       <Helmet>
@@ -595,15 +599,13 @@ const EditClassicSessionPage = ({
         <Column align="between" overflow="hidden">
           <Row overflow="hidden" filled>
             <QuestionDetails
-              formatMessage={formatMessage}
-              changeGroupName={changeGroupName}
+              changeGroupName={handleGroupNameChange}
               currentGroupScope={currentGroupScope}
-              sessionId={sessionId}
             />
-            {
+            {currentQuestion?.type !== QuestionTypes.TLFB_CONFIG && (
               // @ts-ignore
               <QuestionSettings onGoToSessionMapClick={goToSessionMap} />
-            }
+            )}
           </Row>
         </Column>
       </Row>
