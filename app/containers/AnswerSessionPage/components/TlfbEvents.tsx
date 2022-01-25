@@ -32,6 +32,9 @@ const TlfbEvents = ({ question }: SharedProps<TlfbEventsWithConfig>) => {
     },
   } = question;
 
+  const tlfbStartDate = dayjs().subtract(+daysCount + 1, 'day');
+  const tlfbEndDate = dayjs().subtract(1, 'day');
+
   const [selectedDay, setSelectedDay] = useState<Dayjs>();
   const dayId = selectedDay
     ? selectedDay.format(fullDayToYearFormatter)
@@ -52,8 +55,8 @@ const TlfbEvents = ({ question }: SharedProps<TlfbEventsWithConfig>) => {
         {selectedDay?.toString()}
       </PopoverModal>
       <Calendar
-        startDate={dayjs().subtract(+daysCount + 1, 'day')}
-        endDate={dayjs().subtract(1, 'day')}
+        startDate={tlfbStartDate}
+        endDate={tlfbEndDate}
         onSelectDay={onSelectDay}
         selectedDay={selectedDay}
       />

@@ -49,12 +49,15 @@ export const Calendar = ({
     [containerQueryParams],
   );
 
+  const isNotLastMonth = monthDate.endOf('M').isBefore(endDate);
+  const isNotFirstMonth = monthDate.isAfter(startDate.endOf('M'));
+
   const MonthSelectorComponent = (
     <MonthSelector
       monthDate={monthDate}
       onSetMonth={setMonthDate}
-      canGoNext={monthDate.endOf('M').isBefore(endDate)}
-      canGoPrev={monthDate.isAfter(startDate.endOf('M'))}
+      canGoNext={isNotLastMonth}
+      canGoPrev={isNotFirstMonth}
     />
   );
 
