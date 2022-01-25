@@ -214,8 +214,13 @@ export function AnswerSessionPage({
 
   const [containerQueryParams, pageRef] = useContainerQuery(QUERY);
 
-  const isDesktop = useMemo(
-    () => previewMode === DESKTOP_MODE && containerQueryParams[IS_DESKTOP],
+  const { isDesktop, transcriptIconFixedPosition } = useMemo(
+    () => ({
+      isDesktop:
+        previewMode === DESKTOP_MODE && containerQueryParams[IS_DESKTOP],
+      transcriptIconFixedPosition:
+        previewMode === DESKTOP_MODE && containerQueryParams[IS_XXL],
+    }),
     [previewMode, containerQueryParams],
   );
 
@@ -290,7 +295,12 @@ export function AnswerSessionPage({
 
   const renderQuestionTranscript = (isRightSide) => {
     const renderTranscriptComponent = ({ maxWidth, height }) => (
-      <Box mt={30} maxWidth={maxWidth} height={height}>
+      <Box
+        mt={30}
+        mb={isFullSize && transcriptIconFixedPosition ? 30 : undefined}
+        maxWidth={maxWidth}
+        height={height}
+      >
         <QuestionTranscript
           question={currentQuestion}
           language={languageCode}
@@ -299,7 +309,7 @@ export function AnswerSessionPage({
     );
 
     const renderRightSide = () => {
-      if (isDesktop)
+      if (isDesktop && !isFullSize)
         return (
           <Visible xxl>
             {renderTranscriptComponent({ maxWidth: 300, height: 600 })}
@@ -310,7 +320,7 @@ export function AnswerSessionPage({
     };
 
     const renderBottomSide = () => {
-      if (isDesktop)
+      if (isDesktop && !isFullSize)
         return (
           <Hidden xxl>
             {renderTranscriptComponent({ maxWidth: '100%', height: 300 })}
@@ -337,10 +347,7 @@ export function AnswerSessionPage({
       />
     );
 
-    const fixedPosition =
-      previewMode === DESKTOP_MODE && containerQueryParams[IS_XXL];
-
-    if (fixedPosition) {
+    if (transcriptIconFixedPosition) {
       return (
         <Row position="fixed" right={30} bottom={30}>
           {transcriptToggleIcon}
