@@ -12,6 +12,7 @@ import { Container } from './styled';
 
 type CalendarProps = {
   startDate?: Dayjs;
+  endDate?: Dayjs;
   selectedDay?: Dayjs;
   onSelectDay?: (day: Dayjs, id: string) => void;
 };
@@ -26,10 +27,11 @@ const QUERY = {
 
 export const Calendar = ({
   startDate = dayjs(),
+  endDate = dayjs(),
   selectedDay,
   onSelectDay,
 }: CalendarProps) => {
-  const [monthDate, setMonthDate] = useState(startDate);
+  const [monthDate, setMonthDate] = useState(endDate);
 
   const handleSelectDay = (day: Dayjs, id: string) => {
     if (onSelectDay) onSelectDay(day, id);
@@ -47,12 +49,15 @@ export const Calendar = ({
     [containerQueryParams],
   );
 
+  const isNotLastMonth = monthDate.endOf('M').isBefore(endDate);
+  const isNotFirstMonth = monthDate.isAfter(startDate.endOf('M'));
+
   const MonthSelectorComponent = (
     <MonthSelector
       monthDate={monthDate}
       onSetMonth={setMonthDate}
-      canGoNext
-      canGoPrev
+      canGoNext={isNotLastMonth}
+      canGoPrev={isNotFirstMonth}
     />
   );
 
@@ -67,6 +72,8 @@ export const Calendar = ({
           MonthSelectorComponent={MonthSelectorComponent}
           month={monthDate.month()}
           isMobile={!isDesktop}
+          startDate={startDate}
+          endDate={endDate}
         />
       </Container>
     </>

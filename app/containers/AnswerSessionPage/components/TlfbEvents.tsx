@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Dayjs } from 'dayjs';
+import dayjs, { Dayjs } from 'dayjs';
 
 import { fullDayToYearFormatter } from 'utils/formatters';
 
@@ -8,23 +8,37 @@ import { ANSWER_SESSION_CONTAINER_ID } from 'containers/App/constants';
 import Calendar from 'components/Calendar';
 import { PopoverModal } from 'components/Modal';
 import TlfbTitle from 'components/TlfbTitle';
-import { TlfbEventsDTO as TlfbEventsModel } from 'models/Question';
+import { TlfbEventsWithConfigDto as TlfbEventsWithConfig } from 'models/Question';
 
 import { TlfbContainer } from './styled';
+import { SharedProps } from './sharedProps';
 
-type TlfbEventsProps = {
-  question: TlfbEventsModel;
-  isMobilePreview: boolean;
-};
-
-const TlfbEvents = ({ question, isMobilePreview }: TlfbEventsProps) => {
+const TlfbEvents = ({
+  question,
+  isMobilePreview,
+}: SharedProps<TlfbEventsWithConfig>) => {
   const {
-    body: { data },
+    body: {
+      config: {
+        data: [
+          {
+            payload: { days_count: daysCount },
+          },
+        ],
+      },
+      data: [
+        {
+          payload: {
+            screen_question: screenQuestion,
+            screen_title: screenTitle,
+          },
+        },
+      ],
+    },
   } = question;
 
-  const questionData = data[0]?.payload;
-  const screenQuestion = questionData?.screen_question;
-  const screenTitle = questionData?.screen_title;
+  const tlfbStartDate = dayjs().subtract(+daysCount + 1, 'day');
+  const tlfbEndDate = dayjs().subtract(1, 'day');
 
   const [selectedDay, setSelectedDay] = useState<Dayjs>();
   const dayId = selectedDay
@@ -51,7 +65,12 @@ const TlfbEvents = ({ question, isMobilePreview }: TlfbEventsProps) => {
       >
         {selectedDay?.toString()}
       </PopoverModal>
-      <Calendar onSelectDay={onSelectDay} selectedDay={selectedDay} />
+      <Calendar
+        startDate={tlfbStartDate}
+        endDate={tlfbEndDate}
+        onSelectDay={onSelectDay}
+        selectedDay={selectedDay}
+      />
     </TlfbContainer>
   );
 };

@@ -48,6 +48,7 @@ import {
   TlfbConfigBody,
   TlfbEventsBody,
   TlfbQuestionBody,
+  TlfbEventsBodyWithConfig,
 } from './QuestionBody';
 import { QuestionOriginalText } from './QuestionOriginalText';
 
@@ -203,6 +204,14 @@ export type TlfbEvents = GenericQuestion<
 >;
 
 export type TlfbEventsDTO = CamelToSnake<TlfbEvents>;
+
+export type TlfbEventsWithConfig = GenericQuestion<
+  QuestionTypes.TLFB_EVENTS,
+  TlfbEventsBodyWithConfig,
+  TlfbEventsSettings
+>;
+
+export type TlfbEventsWithConfigDto = CamelToSnake<TlfbEventsWithConfig>;
 
 export type TlfbQuestion = GenericQuestion<
   QuestionTypes.TLFB_QUESTION,

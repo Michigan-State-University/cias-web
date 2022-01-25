@@ -81,6 +81,9 @@ export type TlfbConfigBody = QuestionBodyWithoutVariable<TlfbConfigData>;
 
 export type TlfbEventsBody = QuestionBodyWithoutVariable<TlfbEventsData>;
 
+export type TlfbEventsBodyWithConfig =
+  QuestionBodyWithoutVariable<TlfbEventsData> & { config: TlfbConfigBody };
+
 export type TlfbQuestionBody = QuestionBodyWithoutVariable<TlfbQuestionData>;
 
 export type QuestionBody =
@@ -102,4 +105,5 @@ export type QuestionBody =
   | CurrencyQuestionBody
   | TlfbConfigBody
   | TlfbEventsBody
-  | TlfbQuestionBody;
+  | TlfbQuestionBody
+  | TlfbEventsBodyWithConfig;
