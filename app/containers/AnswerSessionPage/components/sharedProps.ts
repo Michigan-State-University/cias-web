@@ -18,5 +18,7 @@ export type SharedProps<
   setFeedbackSettings: (setting: string, value: boolean) => void;
   isAnimationOngoing: boolean;
   isDesktop: boolean;
+  isMobilePreview: boolean;
+  previewMode: string;
   question: T;
 };

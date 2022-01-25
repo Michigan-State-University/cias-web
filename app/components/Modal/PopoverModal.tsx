@@ -28,7 +28,12 @@ import { GeometryHelper } from 'utils/mathUtils';
 import { MODAL_PORTAL_ID } from 'containers/App/constants';
 import Portal from 'components/Portal';
 
-import { StyledArrow, StyledPopover, StyledPopoverContent } from './styled';
+import {
+  DimBackground,
+  StyledArrow,
+  StyledPopover,
+  StyledPopoverContent,
+} from './styled';
 import {
   popoverMainAxisPlacement,
   popoverCrossAxisPlacement,
@@ -39,12 +44,16 @@ export type Props = {
   children: ReactNode;
   referenceElement?: string;
   onClose?: () => void;
+  portalId?: string;
+  forceMobile?: boolean;
 };
 
 const PopoverModal = ({
   children,
   referenceElement,
   onClose,
+  portalId,
+  forceMobile,
 }: Props): JSX.Element => {
   const arrowRef = useRef<HTMLElement>();
   const [element, setElement] = useState<HTMLElement | null>();
@@ -153,12 +162,13 @@ const PopoverModal = ({
   if (!element) return <></>;
 
   return (
-    <Portal id={MODAL_PORTAL_ID}>
+    <Portal id={portalId ?? MODAL_PORTAL_ID}>
+      <DimBackground $forceMobile={forceMobile} />
       <StyledPopover
         ref={floating}
         id="popover"
+        $forceMobile={forceMobile}
         style={{
-          zIndex: 1,
           position: strategy,
           top: y ?? '',
           left: x ?? '',

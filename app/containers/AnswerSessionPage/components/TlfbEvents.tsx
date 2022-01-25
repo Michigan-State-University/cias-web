@@ -3,6 +3,8 @@ import dayjs, { Dayjs } from 'dayjs';
 
 import { fullDayToYearFormatter } from 'utils/formatters';
 
+import { ANSWER_SESSION_CONTAINER_ID } from 'containers/App/constants';
+
 import Calendar from 'components/Calendar';
 import { PopoverModal } from 'components/Modal';
 import TlfbTitle from 'components/TlfbTitle';
@@ -11,7 +13,10 @@ import { TlfbEventsWithConfigDto as TlfbEventsWithConfig } from 'models/Question
 import { TlfbContainer } from './styled';
 import { SharedProps } from './sharedProps';
 
-const TlfbEvents = ({ question }: SharedProps<TlfbEventsWithConfig>) => {
+const TlfbEvents = ({
+  question,
+  isMobilePreview,
+}: SharedProps<TlfbEventsWithConfig>) => {
   const {
     body: {
       config: {
@@ -51,7 +56,13 @@ const TlfbEvents = ({ question }: SharedProps<TlfbEventsWithConfig>) => {
   return (
     <TlfbContainer>
       <TlfbTitle smallText={screenTitle} bigText={screenQuestion} />
-      <PopoverModal referenceElement={dayId} onClose={onClose}>
+
+      <PopoverModal
+        referenceElement={dayId}
+        onClose={onClose}
+        portalId={ANSWER_SESSION_CONTAINER_ID}
+        forceMobile={isMobilePreview}
+      >
         {selectedDay?.toString()}
       </PopoverModal>
       <Calendar

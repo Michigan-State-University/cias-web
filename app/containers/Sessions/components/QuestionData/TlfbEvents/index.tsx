@@ -39,7 +39,7 @@ const TlfbEvents = () => {
   } = currentQuestion;
   const { formatMessage } = useIntl();
   return (
-    <Box padding={32} width="100%">
+    <Box py={32} px={17} width="100%">
       <Row>
         <H2>{formatMessage(messages.title)}</H2>
         <H2 color={themeColors.warning}>*</H2>
