@@ -10,7 +10,7 @@ import {
 import { TlfbConfigDTO } from 'models/Question';
 import { InterventionStatus } from 'models/Intervention';
 
-import { numericValidator } from 'utils/validators';
+import { naturalNumberValidator } from 'utils/validators';
 
 import { themeColors } from 'theme';
 
@@ -57,7 +57,7 @@ const TlfbConfig = () => {
         keyboard="tel"
         placeholder={formatMessage(messages.noOfDaysPlaceholder)}
         value={selectedQuestion.body.data[0].payload.days_count}
-        validator={numericValidator}
+        validator={naturalNumberValidator}
         onCheck={handleChange}
         height={48}
         transparent={false}
