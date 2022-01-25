@@ -1,5 +1,6 @@
 import { Answer } from 'models/Answer';
 import { QuestionDTO } from 'models/Question';
+import { ToastContent, ToastOptions } from 'react-toastify';
 
 export type SharedProps<
   T extends QuestionDTO = QuestionDTO,
@@ -9,7 +10,7 @@ export type SharedProps<
   answer: V;
   questionIndex: number;
   saveAnswer: () => void;
-  showError: () => void;
+  showError: (content: ToastContent, options?: ToastOptions) => void;
   feedbackScreenSettings: {
     showSpectrum: boolean;
     sliderRef: any;
