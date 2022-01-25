@@ -1,27 +1,36 @@
 import React, { useState } from 'react';
-import { Dayjs } from 'dayjs';
+import dayjs, { Dayjs } from 'dayjs';
 
 import { fullDayToYearFormatter } from 'utils/formatters';
 
 import Calendar from 'components/Calendar';
 import { PopoverModal } from 'components/Modal';
 import TlfbTitle from 'components/TlfbTitle';
-import { TlfbEventsDTO as TlfbEventsModel } from 'models/Question';
+import { TlfbEventsWithConfigDto as TlfbEventsWithConfig } from 'models/Question';
 
 import { TlfbContainer } from './styled';
+import { SharedProps } from './sharedProps';
 
-type TlfbEventsProps = {
-  question: TlfbEventsModel;
-};
-
-const TlfbEvents = ({ question }: TlfbEventsProps) => {
+const TlfbEvents = ({ question }: SharedProps<TlfbEventsWithConfig>) => {
   const {
-    body: { data },
+    body: {
+      config: {
+        data: [
+          {
+            payload: { days_count: daysCount },
+          },
+        ],
+      },
+      data: [
+        {
+          payload: {
+            screen_question: screenQuestion,
+            screen_title: screenTitle,
+          },
+        },
+      ],
+    },
   } = question;
-
-  const questionData = data[0]?.payload;
-  const screenQuestion = questionData?.screen_question;
-  const screenTitle = questionData?.screen_title;
 
   const [selectedDay, setSelectedDay] = useState<Dayjs>();
   const dayId = selectedDay
@@ -42,7 +51,12 @@ const TlfbEvents = ({ question }: TlfbEventsProps) => {
       <PopoverModal referenceElement={dayId} onClose={onClose}>
         {selectedDay?.toString()}
       </PopoverModal>
-      <Calendar onSelectDay={onSelectDay} selectedDay={selectedDay} />
+      <Calendar
+        startDate={dayjs().subtract(+daysCount + 1, 'day')}
+        endDate={dayjs().subtract(1, 'day')}
+        onSelectDay={onSelectDay}
+        selectedDay={selectedDay}
+      />
     </TlfbContainer>
   );
 };

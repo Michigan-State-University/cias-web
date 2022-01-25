@@ -18,6 +18,8 @@ type TableCalendarProps = {
   MonthSelectorComponent?: ReactElement;
   month: number;
   isMobile: boolean;
+  startDate: Dayjs;
+  endDate: Dayjs;
 };
 
 dayjs.extend(localeData);
@@ -29,6 +31,8 @@ export const TableCalendar = ({
   MonthSelectorComponent,
   month,
   isMobile,
+  startDate,
+  endDate,
 }: TableCalendarProps) => (
   <>
     {isMobile && MonthSelectorComponent}
@@ -58,6 +62,7 @@ export const TableCalendar = ({
                       day={day}
                       unreachable={day.month() !== month}
                       mobile={isMobile}
+                      disabled={day.isAfter(endDate) || day.isBefore(startDate)}
                     />
                   </td>
                 ))}
