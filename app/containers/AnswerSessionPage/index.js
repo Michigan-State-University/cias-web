@@ -42,6 +42,7 @@ import { finishQuestion } from 'models/Session/QuestionTypes';
 import { UserSessionType } from 'models/UserSession/UserSession';
 
 import QuestionTranscript from 'containers/QuestionTranscript';
+import { ANSWER_SESSION_CONTAINER_ID } from 'containers/App/constants';
 
 import {
   additionalBreakpoints,
@@ -114,7 +115,11 @@ const AnimationRefHelper = ({
   const isFullSize = FULL_SIZE_QUESTIONS.includes(currentQuestion.type);
 
   return (
-    <AnswerInterventionContent isFullSize={isFullSize} ref={animationParentRef}>
+    <AnswerInterventionContent
+      isFullSize={isFullSize}
+      ref={animationParentRef}
+      id={ANSWER_SESSION_CONTAINER_ID}
+    >
       {children}
       {refState !== null && (
         <CharacterAnim
@@ -393,6 +398,8 @@ export function AnswerSessionPage({
       setFeedbackSettings,
       isAnimationOngoing,
       isDesktop,
+      previewMode,
+      isMobilePreview: previewMode !== DESKTOP_MODE,
     };
 
     const isLastScreen = currentQuestion.type === finishQuestion.id;
