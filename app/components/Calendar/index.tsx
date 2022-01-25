@@ -53,8 +53,8 @@ export const Calendar = ({
     <MonthSelector
       monthDate={monthDate}
       onSetMonth={setMonthDate}
-      canGoNext
-      canGoPrev
+      canGoNext={monthDate.endOf('M').isBefore(endDate)}
+      canGoPrev={monthDate.isAfter(startDate.endOf('M'))}
     />
   );
 
