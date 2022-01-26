@@ -24,7 +24,7 @@ import { elements, themeColors } from 'theme';
 
 import AudioWrapper from 'utils/audioWrapper';
 import isNullOrUndefined from 'utils/isNullOrUndefined';
-import { DESKTOP_MODE } from 'utils/previewMode';
+import { DESKTOP_MODE, I_PHONE_8_PLUS_MODE } from 'utils/previewMode';
 import { makeSelectAudioInstance } from 'global/reducers/globalState';
 import {
   fetchInterventionRequest,
@@ -152,10 +152,14 @@ AnimationRefHelper.propTypes = {
 
 const IS_DESKTOP = 'IS_DESKTOP';
 const IS_XXL = 'IS_XXL';
+const IS_MOBILE = 'IS_MOBILE';
 
 const QUERY = {
   [IS_DESKTOP]: {
     minWidth: additionalBreakpoints.desktopSm,
+  },
+  [IS_MOBILE]: {
+    maxWidth: containerBreakpoints.sm,
   },
   [IS_XXL]: {
     minWidth: containerBreakpoints.xxl,
@@ -219,12 +223,14 @@ export function AnswerSessionPage({
 
   const [containerQueryParams, pageRef] = useContainerQuery(QUERY);
 
-  const { isDesktop, transcriptIconFixedPosition } = useMemo(
+  const { isDesktop, isMobile, transcriptIconFixedPosition } = useMemo(
     () => ({
       isDesktop:
         previewMode === DESKTOP_MODE && containerQueryParams[IS_DESKTOP],
       transcriptIconFixedPosition:
         previewMode === DESKTOP_MODE && containerQueryParams[IS_XXL],
+      isMobile:
+        previewMode === I_PHONE_8_PLUS_MODE || containerQueryParams[IS_MOBILE],
     }),
     [previewMode, containerQueryParams],
   );
@@ -398,6 +404,7 @@ export function AnswerSessionPage({
       setFeedbackSettings,
       isAnimationOngoing,
       isDesktop,
+      isMobile,
       previewMode,
       isMobilePreview: previewMode !== DESKTOP_MODE,
     };

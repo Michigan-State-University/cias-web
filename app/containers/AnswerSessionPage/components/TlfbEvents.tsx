@@ -6,6 +6,8 @@ import { fullDayToYearFormatter } from 'utils/formatters';
 import { ANSWER_SESSION_CONTAINER_ID } from 'containers/App/constants';
 
 import Calendar from 'components/Calendar';
+import EventCollapse from 'components/EventCollapse';
+import Box from 'components/Box';
 import { PopoverModal } from 'components/Modal';
 import TlfbTitle from 'components/TlfbTitle';
 import { TlfbEventsWithConfigDto as TlfbEventsWithConfig } from 'models/Question';
@@ -16,6 +18,7 @@ import { SharedProps } from './sharedProps';
 const TlfbEvents = ({
   question,
   isMobilePreview,
+  isMobile,
 }: SharedProps<TlfbEventsWithConfig>) => {
   const {
     body: {
@@ -53,17 +56,27 @@ const TlfbEvents = ({
     setSelectedDay(day);
   };
 
+  // TODO: handle storing and modification of events
+  const eventsMock = [{ name: 'Birthday' }, { name: 'Christmas' }];
+
   return (
     <TlfbContainer>
       <TlfbTitle smallText={screenTitle} bigText={screenQuestion} />
-
       <PopoverModal
         referenceElement={dayId}
         onClose={onClose}
         portalId={ANSWER_SESSION_CONTAINER_ID}
         forceMobile={isMobilePreview}
+        width={!isMobile ? '350px' : ''}
       >
-        {selectedDay?.toString()}
+        {eventsMock.map((event, index) => (
+          <Box mb={16} key={`event-collapsable-${index}`}>
+            <EventCollapse
+              title={`Event ${index + 1}`}
+              eventName={event.name}
+            />
+          </Box>
+        ))}
       </PopoverModal>
       <Calendar
         startDate={tlfbStartDate}

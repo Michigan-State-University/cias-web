@@ -23,6 +23,7 @@ const CollapseLabel = ({
   imgWithBackground,
   color,
   height,
+  width,
   py,
   px,
   bgOpacity,
@@ -51,6 +52,7 @@ const CollapseLabel = ({
       <StyledCollapseLabel
         bg={color}
         height={height}
+        width={width}
         py={py}
         px={px}
         onClick={onToggle}
@@ -58,7 +60,11 @@ const CollapseLabel = ({
         isOpened={isOpened}
         {...dragHandleProps}
       >
-        <Row justify="between">
+        <Row
+          justify="between"
+          fontSize={dragHandleProps?.fontSize}
+          lineHeight={dragHandleProps?.lineHeight}
+        >
           {label} {displayedImage}
         </Row>
       </StyledCollapseLabel>
@@ -87,6 +93,7 @@ CollapseLabel.propTypes = {
   onHideImg: PropTypes.any,
   color: PropTypes.string,
   height: PropTypes.string,
+  width: PropTypes.string,
   py: PropTypes.number,
   px: PropTypes.number,
   bgOpacity: PropTypes.number,

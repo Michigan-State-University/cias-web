@@ -218,7 +218,7 @@ Object {
         class="Box-sc-1vhutan-0 fvJEnC"
       >
         <div
-          class="Row-sc-y1cs0u-0 eHOYqb"
+          class="Row-sc-y1cs0u-0 gefMPs"
           data-testid="test-id-1-next-question-target"
         >
           <img
@@ -240,7 +240,7 @@ Object {
         </div>
       </div>
       <div
-        class="Row-sc-y1cs0u-0 eHOYqb"
+        class="Row-sc-y1cs0u-0 gefMPs"
       >
         <div
           class="Box-sc-1vhutan-0 cjXUYC"
@@ -250,7 +250,7 @@ Object {
             data-testid="test-id-1-select-target-question"
           >
             <div
-              class="Row-sc-y1cs0u-0 iZJGfY"
+              class="Row-sc-y1cs0u-0 bijROH"
             >
               <img
                 class="Img-sc-55j3su-0 bIBYcw"

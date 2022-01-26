@@ -46,6 +46,7 @@ export type Props = {
   onClose?: () => void;
   portalId?: string;
   forceMobile?: boolean;
+  width?: string;
 };
 
 const PopoverModal = ({
@@ -54,6 +55,7 @@ const PopoverModal = ({
   onClose,
   portalId,
   forceMobile,
+  width,
 }: Props): JSX.Element => {
   const arrowRef = useRef<HTMLElement>();
   const [element, setElement] = useState<HTMLElement | null>();
@@ -169,6 +171,7 @@ const PopoverModal = ({
         id="popover"
         $forceMobile={forceMobile}
         style={{
+          width,
           position: strategy,
           top: y ?? '',
           left: x ?? '',

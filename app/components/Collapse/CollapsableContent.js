@@ -7,7 +7,7 @@ import { StyledCollapseContent, Content } from './styled';
 const CLOSE_TIMEOUT = 500;
 export const TRANSITION_TIMEOUT = 20;
 
-const CollapseContent = ({ child, isOpened }) => {
+const CollapseContent = ({ child, isOpened, contentProps }) => {
   const [show, setShow] = useState(isOpened);
   const [transition, setTransition] = useState(false);
 
@@ -30,7 +30,7 @@ const CollapseContent = ({ child, isOpened }) => {
   }, [isOpened]);
 
   return (
-    <StyledCollapseContent>
+    <StyledCollapseContent {...contentProps}>
       <ReactCollapse isOpened={transition && isOpened}>
         {show && <Content>{child}</Content>}
       </ReactCollapse>
@@ -41,6 +41,7 @@ const CollapseContent = ({ child, isOpened }) => {
 CollapseContent.propTypes = {
   child: PropTypes.node,
   isOpened: PropTypes.bool,
+  contentProps: PropTypes.object,
 };
 
 export default CollapseContent;
