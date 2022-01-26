@@ -22,4 +22,5 @@ export type SharedProps<
   isMobilePreview: boolean;
   previewMode: string;
   question: T;
+  userSessionId?: string;
 };
