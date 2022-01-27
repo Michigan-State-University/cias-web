@@ -1,6 +1,7 @@
 /* eslint-disable no-param-reassign */
 import axios from 'axios';
 import { push } from 'connected-react-router';
+import axiosRetry from 'axios-retry';
 
 import { store } from 'configureStore';
 import { headersConst } from 'utils/getHeaders';
@@ -11,6 +12,17 @@ import { previewRegex, guestLogInRegex } from 'global/constants/regex';
 import LocalStorageService from './localStorageService';
 import { HttpMethods, HttpStatusCodes } from './constants';
 import { responseMethodEquals, responseStatusEquals } from './axiosUtils';
+
+/**
+ * by default it retries when error does not have a response (ex. status 5xx)
+ * redux ERROR action is dispatched only after all retries fail (dispatched only once)
+ */
+axiosRetry(axios, {
+  // number of retries
+  retries: 3,
+  // time interval between retries; incremental by 250ms
+  retryDelay: retryCount => retryCount * 250,
+});
 
 const { dispatch } = store;
 
@@ -47,6 +59,9 @@ axios.interceptors.response.use(
   },
   error => {
     const { response } = error;
+
+    if (!response) return Promise.reject(error);
+
     if (
       responseStatusEquals(response, HttpStatusCodes.UNAUTHORIZED) &&
       !response.config.url.endsWith('auth/sign_in')
