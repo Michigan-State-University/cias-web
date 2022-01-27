@@ -16,4 +16,5 @@ type DayData = {
 export type TlfbState = {
   days: Record<string, DayData>;
   loaders: Record<string, boolean>;
+  eventCache: null | DayData;
 };
