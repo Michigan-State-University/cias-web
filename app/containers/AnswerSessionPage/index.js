@@ -407,6 +407,7 @@ export function AnswerSessionPage({
       isMobile,
       previewMode,
       isMobilePreview: previewMode !== DESKTOP_MODE,
+      userSessionId: userSession?.id,
     };
 
     const isLastScreen = currentQuestion.type === finishQuestion.id;

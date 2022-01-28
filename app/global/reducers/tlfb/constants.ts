@@ -1,0 +1,3 @@
+export const ADD_NEW_EVENT = 'app/TLFB/ADD_NEW_EVENT';
+export const ADD_NEW_EVENT_SUCCESS = 'app/TLFB/ADD_NEW_EVENT_SUCCESS';
+export const ADD_NEW_EVENT_ERROR = 'app/TLFB/ADD_NEW_EVENT_ERROR';

@@ -149,6 +149,10 @@ export default defineMessages({
     id: `${scope}.goToSessionMap`,
     defaultMessage: 'Go to session map',
   },
+  addEvent: {
+    id: `${scope}.addEvent`,
+    defaultMessage: 'Add event',
+  },
   pageTitle: {
     id: `${scope}.pageTitle`,
     defaultMessage: `{isPreview, select,
