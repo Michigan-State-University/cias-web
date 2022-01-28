@@ -10,8 +10,8 @@ import {
   addNewTlfbEvent,
   tlfbReducer,
   makeSelectTlfbDays,
-  makeSelectTlfbLoaders,
   editEventName,
+  makeSelectTlfbLoader,
 } from 'global/reducers/tlfb';
 import { TlfbEventsWithConfigDto as TlfbEventsWithConfig } from 'models/Question';
 
@@ -40,7 +40,7 @@ const TlfbEvents = ({
 }: SharedProps<TlfbEventsWithConfig>) => {
   const dispatch = useDispatch();
   const tlfbDaysData = useSelector(makeSelectTlfbDays());
-  const createEventLoading = useSelector(makeSelectTlfbLoaders('createEvent'));
+  const createEventLoading = useSelector(makeSelectTlfbLoader('createEvent'));
 
   const {
     body: {
@@ -63,8 +63,7 @@ const TlfbEvents = ({
     question_group_id: questionGroupId,
   } = question;
 
-  const tlfbStartDate = dayjs().subtract(+daysCount + 1, 'day');
-  const tlfbEndDate = dayjs().subtract(1, 'day');
+  const tlfbStartDate = dayjs().subtract(+daysCount, 'day');
 
   const [selectedDay, setSelectedDay] = useState<Dayjs>();
   const dayId = selectedDay
@@ -143,7 +142,6 @@ const TlfbEvents = ({
       </PopoverModal>
       <Calendar
         startDate={tlfbStartDate}
-        endDate={tlfbEndDate}
         onSelectDay={onSelectDay}
         selectedDay={selectedDay}
       />
