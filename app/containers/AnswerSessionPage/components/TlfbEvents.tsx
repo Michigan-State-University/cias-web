@@ -120,6 +120,7 @@ const TlfbEvents = ({
             </Box>
           )}
           <Box
+            role="button"
             onClick={addTlfbEvent}
             cursor="pointer"
             display="flex"

@@ -4,13 +4,14 @@ import dayjs from 'dayjs';
 
 import { jsonApiToArray } from 'utils/jsonApiMapper';
 import { fullDayToYearFormatter } from 'utils/formatters';
+import { EventData } from 'models/Tlfb';
+
 import { ADD_NEW_EVENT } from '../constants';
 import {
   addNewTlfbEvent,
   addNewTlfbEventError,
   addNewTlfbEventSuccess,
 } from '../actions';
-import { EventData } from '../types';
 
 function* addNewEvent({
   payload: { userSessionId, isoDay, questionGroupId },
