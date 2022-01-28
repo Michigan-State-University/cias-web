@@ -9,5 +9,5 @@ const selectTlfbState = (state: { tlfbReducer: TlfbState }) =>
 export const makeSelectTlfbDays = () =>
   createSelector(selectTlfbState, ({ days }) => days);
 
-export const makeSelectTlfbLoaders = (loaderName: string) =>
+export const makeSelectTlfbLoader = (loaderName: string) =>
   createSelector(selectTlfbState, ({ loaders }) => loaders[loaderName]);

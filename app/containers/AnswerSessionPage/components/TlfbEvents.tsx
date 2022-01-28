@@ -10,7 +10,7 @@ import {
   addNewTlfbEvent,
   tlfbReducer,
   makeSelectTlfbDays,
-  makeSelectTlfbLoaders,
+  makeSelectTlfbLoader,
 } from 'global/reducers/tlfb';
 import { TlfbEventsWithConfigDto as TlfbEventsWithConfig } from 'models/Question';
 
@@ -39,7 +39,7 @@ const TlfbEvents = ({
 }: SharedProps<TlfbEventsWithConfig>) => {
   const dispatch = useDispatch();
   const tlfbDaysData = useSelector(makeSelectTlfbDays());
-  const createEventLoading = useSelector(makeSelectTlfbLoaders('createEvent'));
+  const createEventLoading = useSelector(makeSelectTlfbLoader('createEvent'));
 
   const {
     body: {
