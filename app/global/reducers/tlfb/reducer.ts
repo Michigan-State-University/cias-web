@@ -5,6 +5,8 @@ import {
   addNewTlfbEvent,
   addNewTlfbEventError,
   addNewTlfbEventSuccess,
+  editEventName,
+  editEventNameError,
 } from './actions';
 
 import { TlfbActions, TlfbState } from './types';
@@ -14,6 +16,7 @@ export const initialState: TlfbState = {
   loaders: {
     createEvent: false,
   },
+  eventCache: null,
 };
 
 /* eslint-disable default-case, no-param-reassign */
@@ -38,8 +41,32 @@ export const tlfbReducer = (
         } else {
           draft.days[date] = { events };
         }
-
         draft.loaders.createEvent = false;
         break;
+
+      case getType(editEventName): {
+        const {
+          payload: { dayKey, eventId, name },
+        } = action;
+        const eventIndex = state.days[dayKey]?.events.findIndex(
+          ({ id }) => id === eventId,
+        );
+        if (eventIndex !== undefined && eventIndex !== -1) {
+          draft.eventCache = state.days[dayKey];
+          draft.days[dayKey].events[eventIndex].name = name;
+        }
+        break;
+      }
+
+      case getType(editEventNameError): {
+        const {
+          payload: { dayKey },
+        } = action;
+        if (state.eventCache) {
+          draft.days[dayKey] = state.eventCache;
+          draft.eventCache = null;
+        }
+        break;
+      }
     }
   });

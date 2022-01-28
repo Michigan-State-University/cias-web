@@ -14,16 +14,19 @@ import { ContentContainer } from './styled';
 
 type EventCollapseType = {
   title: string;
-  eventName?: string;
-  onChange?: () => void;
+  eventName: string;
+  onInputBlur: (value: string) => void;
 };
 
 export const EventCollapse = ({
   title,
-  onChange,
+  onInputBlur,
   eventName = '',
 }: EventCollapseType) => {
   const [opened, setOpen] = useState(false);
+  const [eventNameValue, setEventNameValue] = useState(eventName);
+
+  const updateEvent = () => onInputBlur(eventNameValue);
 
   const toggleOpen = () => setOpen((prev) => !prev);
 
@@ -54,7 +57,14 @@ export const EventCollapse = ({
         <Text mb={8}>
           <FormattedMessage {...messages.eventNameLabel} />
         </Text>
-        <Input width="100%" value={eventName} onChange={onChange} />
+        <Input
+          width="100%"
+          onBlur={updateEvent}
+          value={eventNameValue}
+          onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
+            setEventNameValue(e.target.value)
+          }
+        />
       </ContentContainer>
     </Collapse>
   );

@@ -1,17 +1,22 @@
 import axios from 'axios';
 import { put, call, takeLatest } from 'redux-saga/effects';
 import dayjs from 'dayjs';
+import { toast } from 'react-toastify';
 
 import { jsonApiToArray } from 'utils/jsonApiMapper';
 import { fullDayToYearFormatter } from 'utils/formatters';
+import { formatMessage } from 'utils/intlOutsideReact';
+
 import { EventData } from 'models/Tlfb';
 
-import { ADD_NEW_EVENT } from '../constants';
 import {
   addNewTlfbEvent,
   addNewTlfbEventError,
   addNewTlfbEventSuccess,
 } from '../actions';
+
+import { ADD_NEW_EVENT, ADD_NEW_EVENT_ERROR } from '../constants';
+import messages from '../messages';
 
 function* addNewEvent({
   payload: { userSessionId, isoDay, questionGroupId },
@@ -28,6 +33,10 @@ function* addNewEvent({
     const date = dayjs(isoDay).format(fullDayToYearFormatter);
     yield put(addNewTlfbEventSuccess(date, newEvent));
   } catch (error) {
+    // @ts-ignore
+    yield call(toast.error, formatMessage(messages.addTlfbEventError), {
+      id: ADD_NEW_EVENT_ERROR,
+    });
     yield put(addNewTlfbEventError());
   }
 }

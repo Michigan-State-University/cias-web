@@ -6,10 +6,11 @@ import { compose } from 'redux';
 import { FormattedMessage } from 'react-intl';
 
 import {
-  addNewEventSaga,
+  allTlfbSagas,
   addNewTlfbEvent,
   tlfbReducer,
   makeSelectTlfbDays,
+  editEventName,
   makeSelectTlfbLoader,
 } from 'global/reducers/tlfb';
 import { TlfbEventsWithConfigDto as TlfbEventsWithConfig } from 'models/Question';
@@ -89,6 +90,12 @@ const TlfbEvents = ({
     }
   };
 
+  const updateEventName = (newName: string, id: number) => {
+    if (dayId) {
+      dispatch(editEventName(id, newName, dayId));
+    }
+  };
+
   const selectedDayEvents = useMemo(() => {
     if (!dayId) return [];
     return tlfbDaysData[dayId]?.events || [];
@@ -105,11 +112,12 @@ const TlfbEvents = ({
         width={!isMobile ? '350px' : ''}
       >
         <>
-          {selectedDayEvents.map((event, index) => (
-            <Box mb={16} key={`event-collapsable-${index}`}>
+          {selectedDayEvents.map(({ name, id }, index) => (
+            <Box mb={16} key={`event-collapsable-${id}`}>
               <EventCollapse
+                onInputBlur={(value: string) => updateEventName(value, id)}
                 title={`Event ${index + 1}`}
-                eventName={event.name}
+                eventName={name}
               />
             </Box>
           ))}
@@ -142,7 +150,7 @@ const TlfbEvents = ({
 };
 
 export default compose(
-  injectSaga({ key: 'addNewEvent', saga: addNewEventSaga }),
+  injectSaga({ key: 'addNewEvent', saga: allTlfbSagas }),
   // @ts-ignore
   injectReducer({ key: 'tlfbReducer', reducer: tlfbReducer }),
 )(TlfbEvents);
