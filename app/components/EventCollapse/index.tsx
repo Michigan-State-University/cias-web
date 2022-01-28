@@ -61,7 +61,9 @@ export const EventCollapse = ({
           width="100%"
           onBlur={updateEvent}
           value={eventNameValue}
-          onChange={(e: any) => setEventNameValue(e.target.value)}
+          onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
+            setEventNameValue(e.target.value)
+          }
         />
       </ContentContainer>
     </Collapse>

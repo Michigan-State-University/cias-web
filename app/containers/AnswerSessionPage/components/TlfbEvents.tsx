@@ -114,7 +114,7 @@ const TlfbEvents = ({
       >
         <>
           {selectedDayEvents.map(({ name, id }, index) => (
-            <Box mb={16} key={`event-collapsable-${index}`}>
+            <Box mb={16} key={`event-collapsable-${id}`}>
               <EventCollapse
                 onInputBlur={(value: string) => updateEventName(value, id)}
                 title={`Event ${index + 1}`}
