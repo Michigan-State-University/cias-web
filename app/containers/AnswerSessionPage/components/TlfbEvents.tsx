@@ -62,8 +62,7 @@ const TlfbEvents = ({
     question_group_id: questionGroupId,
   } = question;
 
-  const tlfbStartDate = dayjs().subtract(+daysCount + 1, 'day');
-  const tlfbEndDate = dayjs().subtract(1, 'day');
+  const tlfbStartDate = dayjs().subtract(+daysCount, 'day');
 
   const [selectedDay, setSelectedDay] = useState<Dayjs>();
   const dayId = selectedDay
@@ -135,7 +134,6 @@ const TlfbEvents = ({
       </PopoverModal>
       <Calendar
         startDate={tlfbStartDate}
-        endDate={tlfbEndDate}
         onSelectDay={onSelectDay}
         selectedDay={selectedDay}
       />
