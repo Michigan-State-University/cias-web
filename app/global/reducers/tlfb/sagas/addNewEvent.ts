@@ -7,13 +7,15 @@ import { jsonApiToArray } from 'utils/jsonApiMapper';
 import { fullDayToYearFormatter } from 'utils/formatters';
 import { formatMessage } from 'utils/intlOutsideReact';
 
-import { ADD_NEW_EVENT, ADD_NEW_EVENT_ERROR } from '../constants';
+import { EventData } from 'models/Tlfb';
+
 import {
   addNewTlfbEvent,
   addNewTlfbEventError,
   addNewTlfbEventSuccess,
 } from '../actions';
-import { EventData } from '../types';
+
+import { ADD_NEW_EVENT, ADD_NEW_EVENT_ERROR } from '../constants';
 import messages from '../messages';
 
 function* addNewEvent({

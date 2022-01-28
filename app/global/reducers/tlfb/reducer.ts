@@ -34,12 +34,12 @@ export const tlfbReducer = (
         break;
       case getType(addNewTlfbEventSuccess):
         const {
-          payload: { date, event },
+          payload: { date, events },
         } = action;
         if (state.days[date]) {
-          draft.days[date].events = [...state.days[date].events, ...event];
+          draft.days[date].events = [...state.days[date].events, ...events];
         } else {
-          draft.days[date] = { events: event };
+          draft.days[date] = { events };
         }
         draft.loaders.createEvent = false;
         break;

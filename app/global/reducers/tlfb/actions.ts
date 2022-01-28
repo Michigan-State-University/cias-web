@@ -1,5 +1,7 @@
 import { createAction } from 'typesafe-actions';
 
+import { EventData } from 'models/Tlfb';
+
 import {
   ADD_NEW_EVENT,
   ADD_NEW_EVENT_ERROR,
@@ -17,7 +19,7 @@ export const addNewTlfbEvent = createAction(
 
 export const addNewTlfbEventSuccess = createAction(
   ADD_NEW_EVENT_SUCCESS,
-  (action) => (date: string, event: any) => action({ date, event }),
+  (action) => (date: string, events: EventData[]) => action({ date, events }),
 );
 
 export const addNewTlfbEventError = createAction(
