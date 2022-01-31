@@ -79,7 +79,7 @@ export const getQuestionDataByType = (
         ],
       };
 
-    case QuestionTypes.TLFB_EVENTS:
+    case QuestionTypes.TLFB_QUESTION:
       return {
         data: [
           {
@@ -92,7 +92,7 @@ export const getQuestionDataByType = (
         ],
       };
 
-    case QuestionTypes.TLFB_QUESTION:
+    case QuestionTypes.TLFB_EVENTS:
       return {
         data: [{ payload: { screen_title: '', screen_question: '' } }],
       };
