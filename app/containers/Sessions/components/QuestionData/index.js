@@ -29,6 +29,7 @@ import {
   finishQuestion,
   tlfbConfig,
   tlfbEvents,
+  tlfbQuestion,
 } from 'models/Session/QuestionTypes';
 
 import CurrencyQuestion from './CurrencyQuestion';
@@ -48,6 +49,7 @@ import ThirdPartyQuestion from './ThirdPartyQuestion';
 import FinishScreen from './FinishScreen';
 import TlfbConfig from './TlfbConfig';
 import TlfbEvents from './TlfbEvents';
+import TlfbQuestion from './TlfbQuestion';
 
 const QuestionData = ({
   selectedQuestionType,
@@ -96,6 +98,8 @@ const QuestionData = ({
       return <TlfbConfig {...commonProps} />;
     case tlfbEvents.id:
       return <TlfbEvents {...commonProps} />;
+    case tlfbQuestion.id:
+      return <TlfbQuestion {...commonProps} />;
     default:
       return null;
   }

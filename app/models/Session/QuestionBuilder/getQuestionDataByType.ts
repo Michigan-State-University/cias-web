@@ -1,31 +1,22 @@
-import {
-  singleQuestion,
-  multiQuestion,
-  gridQuestion,
-  visualAnalogueScaleQuestion,
-  informationQuestion,
-  feedbackQuestion,
-  nameQuestion,
-  thirdPartyQuestion,
-  tlfbConfig,
-  tlfbEvents,
-  tlfbQuestion,
-} from '../QuestionTypes';
+import { QuestionDTO, QuestionTypes } from 'models/Question';
+import { nameQuestion } from '../QuestionTypes';
 
-export const getQuestionDataByType = (type) => {
+export const getQuestionDataByType = (
+  type: QuestionTypes,
+): QuestionDTO['body'] => {
   switch (type) {
-    case singleQuestion.id:
+    case QuestionTypes.SINGLE:
       return {
         variable: { name: '' },
         data: [{ payload: '', value: '1' }],
       };
 
-    case multiQuestion.id:
+    case QuestionTypes.MULTIPLE:
       return {
         data: [{ payload: '', variable: { name: '', value: '1' } }],
       };
 
-    case gridQuestion.id:
+    case QuestionTypes.GRID:
       return {
         data: [
           {
@@ -43,7 +34,7 @@ export const getQuestionDataByType = (type) => {
         ],
       };
 
-    case visualAnalogueScaleQuestion.id:
+    case QuestionTypes.SLIDER:
       return {
         variable: { name: '' },
         data: [
@@ -53,12 +44,12 @@ export const getQuestionDataByType = (type) => {
         ],
       };
 
-    case informationQuestion.id:
+    case QuestionTypes.INFORMATION:
       return {
         data: [],
       };
 
-    case feedbackQuestion.id:
+    case QuestionTypes.FEEDBACK:
       return {
         data: [
           {
@@ -68,18 +59,18 @@ export const getQuestionDataByType = (type) => {
         ],
       };
 
-    case nameQuestion.id:
+    case QuestionTypes.NAME:
       return {
         data: [{ payload: '' }],
         variable: { name: nameQuestion.reservedVariable },
       };
 
-    case thirdPartyQuestion.id:
+    case QuestionTypes.THIRD_PARTY:
       return {
         data: [{ payload: '', value: '', report_template_ids: [] }],
       };
 
-    case tlfbConfig.id:
+    case QuestionTypes.TLFB_CONFIG:
       return {
         data: [
           {
@@ -88,15 +79,24 @@ export const getQuestionDataByType = (type) => {
         ],
       };
 
-    case tlfbQuestion.id:
+    case QuestionTypes.TLFB_EVENTS:
       return {
-        data: [],
+        data: [
+          {
+            payload: {
+              question_title: '',
+              head_question: '',
+              substance_question: '',
+            },
+          },
+        ],
       };
 
-    case tlfbEvents.id:
+    case QuestionTypes.TLFB_QUESTION:
       return {
         data: [{ payload: { screen_title: '', screen_question: '' } }],
       };
+
     default:
       return {
         variable: { name: '' },

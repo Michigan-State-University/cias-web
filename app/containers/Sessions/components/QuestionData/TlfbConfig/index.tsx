@@ -31,7 +31,7 @@ const TlfbConfig = () => {
   const { formatMessage } = useIntl();
   const dispatch = useDispatch();
 
-  const selectedQuestion: TlfbConfigDTO = useSelector(
+  const selectedQuestion = useSelector<unknown, TlfbConfigDTO>(
     makeSelectSelectedQuestion()!,
   );
 

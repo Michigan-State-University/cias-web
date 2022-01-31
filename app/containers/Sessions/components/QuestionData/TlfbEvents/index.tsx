@@ -2,23 +2,27 @@ import React from 'react';
 import { useIntl } from 'react-intl';
 import { useDispatch, useSelector } from 'react-redux';
 
+import { themeColors } from 'theme';
+
 import {
   makeSelectSelectedQuestion,
   updateQuestionData,
 } from 'global/reducers/questions';
+import { TlfbEventsDTO } from 'models/Question';
 
 import Box from 'components/Box';
 import LabelledApprovableInput from 'components/Input/LabelledApprovableInput';
 import Row from 'components/Row';
 import H2 from 'components/H2';
 
-import { themeColors } from 'theme';
 import { UPDATE_SCREEN_QUESTION, UPDATE_SCREEN_TITLE } from './constants';
 import messages from './messages';
 
 const TlfbEvents = () => {
   const dispatch = useDispatch();
-  const currentQuestion = useSelector(makeSelectSelectedQuestion());
+  const currentQuestion = useSelector<unknown, TlfbEventsDTO>(
+    makeSelectSelectedQuestion(),
+  );
 
   const dispatchAction = (action: any) => dispatch(updateQuestionData(action));
 

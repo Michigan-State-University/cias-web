@@ -241,4 +241,5 @@ export type Question =
   | TlfbConfig
   | TlfbEvents
   | TlfbQuestion;
+
 export type QuestionDTO = CamelToSnake<Question>;

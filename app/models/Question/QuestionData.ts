@@ -7,6 +7,7 @@ import {
   SliderQuestionPayload,
   TlfbEventsPayload,
   TlfbConfigPayload,
+  TlfbQuestionPayload,
 } from './QuestionPayload';
 
 export interface FeedbackSpectrumPattern {
@@ -86,7 +87,8 @@ export interface TlfbConfigData
 export interface TlfbEventsData
   extends QuestionPayloadData<TlfbEventsPayload> {}
 
-export type TlfbQuestionData = never;
+export interface TlfbQuestionData
+  extends QuestionPayloadData<TlfbQuestionPayload> {}
 
 export type QuestionData =
   | SingleQuestionData

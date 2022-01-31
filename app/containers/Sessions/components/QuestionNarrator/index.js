@@ -4,7 +4,7 @@ import Lottie from 'react-lottie';
 import PropTypes from 'prop-types';
 import get from 'lodash/get';
 import { compose } from 'redux';
-import { connect } from 'react-redux';
+import { connect, useSelector } from 'react-redux';
 import { createStructuredSelector } from 'reselect';
 import { useIntl } from 'react-intl';
 
@@ -43,7 +43,7 @@ import { reducer, initialState, UPDATE } from './reducer';
 
 const QuestionNarrator = ({
   questionId,
-  draggable,
+  isDraggable,
   setOffset,
   animationPositionStored,
   updateNarratorPreviewAnimation,
@@ -65,6 +65,9 @@ const QuestionNarrator = ({
       type: UPDATE,
       newState,
     });
+
+  const draggableState = useSelector(makeSelectDraggable());
+  const draggable = isDraggable && draggableState;
 
   const onBlockFinish = () => {
     clearAnimationBlock();
@@ -300,7 +303,7 @@ const QuestionNarrator = ({
 };
 
 QuestionNarrator.propTypes = {
-  draggable: PropTypes.bool,
+  isDraggable: PropTypes.bool,
   setOffset: PropTypes.func,
   animationPositionStored: PropTypes.object,
   questionId: PropTypes.string,
@@ -315,7 +318,6 @@ QuestionNarrator.propTypes = {
 };
 
 const mapStateToProps = createStructuredSelector({
-  draggable: makeSelectDraggable(),
   animationPositionStored: makeSelectAnimationPosition(),
   previewData: makeSelectPreviewData(),
   currentBlockIndex: makeSelectCurrentNarratorBlockIndex(),
