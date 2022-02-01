@@ -3,21 +3,6 @@ import chunk from 'lodash/chunk';
 
 const weekLength = 7;
 
-// Function that creates array of dates
-const createDateArray = (
-  arrayLength: number,
-  year: number,
-  month: number,
-  offset: number = 0,
-) =>
-  new Array(arrayLength).fill(0).map((_v, i) => {
-    const date = dayjs()
-      .set('date', offset + i + 1)
-      .year(year)
-      .month(month);
-    return date;
-  });
-
 export const getCalendarMonthDates = (startDate: Dayjs) => {
   // Month ago date
   const lastMonth = startDate.subtract(1, 'month');
@@ -37,7 +22,13 @@ export const getCalendarMonthDates = (startDate: Dayjs) => {
   // Next month year
   const nextMonthYear = nextMonth.year();
 
-  const days = createDateArray(len, startDate.year(), startDate.month());
+  const days = new Array(len).fill(0).map((_v, i) => {
+    const date = dayjs(startDate)
+      .set('date', i + 1)
+      .year(startDate.year())
+      .month(startDate.month());
+    return date;
+  });
 
   // From which weekdays the month starts and ends
   const firstDayOfMonth = dayjs()
@@ -59,18 +50,23 @@ export const getCalendarMonthDates = (startDate: Dayjs) => {
   // Minus one because in dayjs weekdays are counted from 0 (Sun)
   const lengthOfNextMonthDays = weekLength - lastDayOfMonth - 1;
 
-  const previousMonthDays = createDateArray(
-    firstDayOfMonth,
-    previousMonthYear,
-    lastMonth.month(),
-    startingLastMonthDay,
-  );
+  const previousMonthDays = new Array(firstDayOfMonth).fill(0).map((_v, i) => {
+    const date = dayjs(lastMonth)
+      .set('date', startingLastMonthDay + i + 1)
+      .year(previousMonthYear)
+      .month(lastMonth.month());
+    return date;
+  });
 
-  const nextMonthDays = createDateArray(
-    lengthOfNextMonthDays,
-    nextMonthYear,
-    nextMonth.month(),
-  );
+  const nextMonthDays = new Array(lengthOfNextMonthDays)
+    .fill(0)
+    .map((_v, i) => {
+      const date = dayjs(nextMonth)
+        .set('date', i + 1)
+        .year(nextMonthYear)
+        .month(nextMonth.month());
+      return date;
+    });
 
   const calendarSets = previousMonthDays.concat(days).concat(nextMonthDays);
 
