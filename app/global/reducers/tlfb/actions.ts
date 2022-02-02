@@ -8,6 +8,8 @@ import {
   ADD_NEW_EVENT_SUCCESS,
   EDIT_EVENT_NAME_REQUEST,
   EDIT_EVENT_NAME_ERROR,
+  DELETE_EVENT_REQUEST,
+  DELETE_EVENT_ERROR,
 } from './constants';
 
 export const addNewTlfbEvent = createAction(
@@ -35,5 +37,15 @@ export const editEventName = createAction(
 
 export const editEventNameError = createAction(
   EDIT_EVENT_NAME_ERROR,
+  (action) => (dayKey: string) => action({ dayKey }),
+);
+
+export const deleteEventRequest = createAction(
+  DELETE_EVENT_REQUEST,
+  (action) => (eventId: number, dayKey: string) => action({ eventId, dayKey }),
+);
+
+export const deleteEventError = createAction(
+  DELETE_EVENT_ERROR,
   (action) => (dayKey: string) => action({ dayKey }),
 );

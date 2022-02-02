@@ -7,6 +7,8 @@ import {
   addNewTlfbEventSuccess,
   editEventName,
   editEventNameError,
+  deleteEventError,
+  deleteEventRequest,
 } from './actions';
 
 import { TlfbActions, TlfbState } from './types';
@@ -59,6 +61,30 @@ export const tlfbReducer = (
       }
 
       case getType(editEventNameError): {
+        const {
+          payload: { dayKey },
+        } = action;
+        if (state.eventCache) {
+          draft.days[dayKey] = state.eventCache;
+          draft.eventCache = null;
+        }
+        break;
+      }
+      case getType(deleteEventRequest): {
+        const {
+          payload: { dayKey, eventId },
+        } = action;
+        const eventIndex = state.days[dayKey]?.events.findIndex(
+          ({ id }) => id === eventId,
+        );
+        if (eventIndex !== undefined && eventIndex !== -1) {
+          draft.eventCache = state.days[dayKey];
+          draft.days[dayKey].events.splice(eventIndex, 1);
+        }
+        break;
+      }
+
+      case getType(deleteEventError): {
         const {
           payload: { dayKey },
         } = action;

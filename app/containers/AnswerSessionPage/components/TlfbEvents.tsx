@@ -12,6 +12,7 @@ import {
   makeSelectTlfbDays,
   editEventName,
   makeSelectTlfbLoader,
+  deleteEventRequest,
 } from 'global/reducers/tlfb';
 import { TlfbEventsWithConfigDto as TlfbEventsWithConfig } from 'models/Question';
 
@@ -101,6 +102,12 @@ const TlfbEvents = ({
     return tlfbDaysData[dayId]?.events || [];
   }, [dayId, tlfbDaysData]);
 
+  const deleteEvent = (id: number) => () => {
+    if (dayId) {
+      dispatch(deleteEventRequest(id, dayId));
+    }
+  };
+
   return (
     <TlfbContainer>
       <TlfbTitle smallText={screenTitle} bigText={screenQuestion} />
@@ -115,6 +122,7 @@ const TlfbEvents = ({
           {selectedDayEvents.map(({ name, id }, index) => (
             <Box mb={16} key={`event-collapsable-${id}`}>
               <EventCollapse
+                onDelete={deleteEvent(id)}
                 onInputBlur={(value: string) => updateEventName(value, id)}
                 title={`Event ${index + 1}`}
                 eventName={name}
