@@ -1,10 +1,10 @@
 import axios from 'axios';
 import { put, call, takeLatest } from 'redux-saga/effects';
 import dayjs from 'dayjs';
+import utc from 'dayjs/plugin/utc';
 import { toast } from 'react-toastify';
 
 import { jsonApiToArray } from 'utils/jsonApiMapper';
-import { fullDayToYearFormatter } from 'utils/formatters';
 import { formatMessage } from 'utils/intlOutsideReact';
 
 import { EventData } from 'models/Tlfb';
@@ -19,19 +19,21 @@ import { ADD_NEW_EVENT, ADD_NEW_EVENT_ERROR } from '../constants';
 import messages from '../messages';
 
 function* addNewEvent({
-  payload: { userSessionId, isoDay, questionGroupId },
+  payload: { userSessionId, dayKey, questionGroupId },
 }: ReturnType<typeof addNewTlfbEvent>) {
   const url = `/v1/tlfb/events`;
+  dayjs.extend(utc);
   try {
+    const date = dayjs(dayKey).utc(true);
+
     const { data } = yield call(axios.post, url, {
-      exact_date: isoDay,
+      exact_date: date.toISOString(),
       user_session_id: userSessionId,
       question_group_id: questionGroupId,
     });
 
     const newEvent = jsonApiToArray(data, 'event') as EventData[];
-    const date = dayjs(isoDay).format(fullDayToYearFormatter);
-    yield put(addNewTlfbEventSuccess(date, newEvent));
+    yield put(addNewTlfbEventSuccess(dayKey, newEvent));
   } catch (error) {
     // @ts-ignore
     yield call(toast.error, formatMessage(messages.addTlfbEventError), {

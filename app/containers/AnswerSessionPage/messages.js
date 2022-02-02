@@ -153,6 +153,10 @@ export default defineMessages({
     id: `${scope}.addEvent`,
     defaultMessage: 'Add event',
   },
+  goToNextDay: {
+    id: `${scope}.goToNextDay`,
+    defaultMessage: 'Go to next day',
+  },
   pageTitle: {
     id: `${scope}.pageTitle`,
     defaultMessage: `{isPreview, select,

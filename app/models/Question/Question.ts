@@ -49,6 +49,7 @@ import {
   TlfbEventsBody,
   TlfbQuestionBody,
   TlfbEventsBodyWithConfig,
+  TlfbQuestionBodyWithConfig,
 } from './QuestionBody';
 import { QuestionOriginalText } from './QuestionOriginalText';
 
@@ -220,6 +221,14 @@ export type TlfbQuestion = GenericQuestion<
 >;
 
 export type TlfbQuestionDTO = CamelToSnake<TlfbQuestion>;
+
+export type TlfbQuestionWithConfig = GenericQuestion<
+  QuestionTypes.TLFB_QUESTION,
+  TlfbQuestionBodyWithConfig,
+  TlfbQuestionSettings
+>;
+
+export type TlfbQuestionWithConfigDTO = CamelToSnake<TlfbQuestionWithConfig>;
 
 export type Question =
   | SingleQuestion
