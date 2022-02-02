@@ -9,6 +9,24 @@ exports[`<Accordion /> Should render multiple elements and match the snapshot 1`
   margin-bottom: 7px;
 }
 
+.c4 {
+  width: auto;
+  height: auto;
+  display: block;
+  border-radius: 5px;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-align-content: center;
+  -ms-flex-line-pack: center;
+  align-content: center;
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+}
+
 .c1 {
   width: 100%;
 }
@@ -63,22 +81,6 @@ exports[`<Accordion /> Should render multiple elements and match the snapshot 1`
   align-items: center;
 }
 
-.c4 {
-  display: -webkit-box;
-  display: -webkit-flex;
-  display: -ms-flexbox;
-  display: flex;
-  -webkit-flex-direction: row;
-  -ms-flex-direction: row;
-  flex-direction: row;
-  height: auto;
-  -webkit-box-pack: justify;
-  -webkit-justify-content: space-between;
-  -ms-flex-pack: justify;
-  justify-content: space-between;
-  justify-items: space-between;
-}
-
 .c5 {
   width: auto;
   height: auto;
@@ -93,6 +95,7 @@ exports[`<Accordion /> Should render multiple elements and match the snapshot 1`
   line-height: 17px;
   padding: 2px;
   cursor: pointer;
+  margin-right: 0;
   margin-left: 5px;
   font-weight: 700;
   color: #2F3850;
@@ -128,15 +131,19 @@ exports[`<Accordion /> Should render multiple elements and match the snapshot 1`
               tabindex="0"
             >
               <div
-                class="c4"
+                class="c2"
               >
                 Label0
-                 
-                <img
-                  class="c5 img"
-                  role="presentation"
-                  src="IMAGE_MOCK"
-                />
+                <div
+                  class="c4"
+                  display="flex"
+                >
+                  <img
+                    class="c5 img"
+                    role="presentation"
+                    src="IMAGE_MOCK"
+                  />
+                </div>
               </div>
             </div>
             <button
@@ -180,15 +187,19 @@ exports[`<Accordion /> Should render multiple elements and match the snapshot 1`
               tabindex="0"
             >
               <div
-                class="c4"
+                class="c2"
               >
                 Label1
-                 
-                <img
-                  class="c5 img"
-                  role="presentation"
-                  src="IMAGE_MOCK"
-                />
+                <div
+                  class="c4"
+                  display="flex"
+                >
+                  <img
+                    class="c5 img"
+                    role="presentation"
+                    src="IMAGE_MOCK"
+                  />
+                </div>
               </div>
             </div>
             <button
@@ -232,15 +243,19 @@ exports[`<Accordion /> Should render multiple elements and match the snapshot 1`
               tabindex="0"
             >
               <div
-                class="c4"
+                class="c2"
               >
                 Label2
-                 
-                <img
-                  class="c5 img"
-                  role="presentation"
-                  src="IMAGE_MOCK"
-                />
+                <div
+                  class="c4"
+                  display="flex"
+                >
+                  <img
+                    class="c5 img"
+                    role="presentation"
+                    src="IMAGE_MOCK"
+                  />
+                </div>
               </div>
             </div>
             <button
@@ -268,6 +283,24 @@ exports[`<Accordion /> Should render multiple elements and match the snapshot 1`
 `;
 
 exports[`<Accordion /> Should render only one element and match the snapshot 1`] = `
+.c3 {
+  width: auto;
+  height: auto;
+  display: block;
+  border-radius: 5px;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-align-content: center;
+  -ms-flex-line-pack: center;
+  align-content: center;
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+}
+
 .c0 {
   width: 100%;
 }
@@ -322,22 +355,6 @@ exports[`<Accordion /> Should render only one element and match the snapshot 1`]
   align-items: center;
 }
 
-.c3 {
-  display: -webkit-box;
-  display: -webkit-flex;
-  display: -ms-flexbox;
-  display: flex;
-  -webkit-flex-direction: row;
-  -ms-flex-direction: row;
-  flex-direction: row;
-  height: auto;
-  -webkit-box-pack: justify;
-  -webkit-justify-content: space-between;
-  -ms-flex-pack: justify;
-  justify-content: space-between;
-  justify-items: space-between;
-}
-
 .c4 {
   width: auto;
   height: auto;
@@ -352,6 +369,7 @@ exports[`<Accordion /> Should render only one element and match the snapshot 1`]
   line-height: 17px;
   padding: 2px;
   cursor: pointer;
+  margin-right: 0;
   margin-left: 5px;
   font-weight: 700;
   color: #2F3850;
@@ -372,15 +390,19 @@ exports[`<Accordion /> Should render only one element and match the snapshot 1`]
           height="40px"
         >
           <div
-            class="c3"
+            class="c1"
           >
             Label0
-             
-            <img
-              class="c4 img"
-              role="presentation"
-              src="IMAGE_MOCK"
-            />
+            <div
+              class="c3"
+              display="flex"
+            >
+              <img
+                class="c4 img"
+                role="presentation"
+                src="IMAGE_MOCK"
+              />
+            </div>
           </div>
         </div>
         <button
@@ -412,6 +434,24 @@ exports[`<Accordion /> Should render with one element opened and match the snaps
   display: block;
   border-radius: 5px;
   margin-bottom: 7px;
+}
+
+.c4 {
+  width: auto;
+  height: auto;
+  display: block;
+  border-radius: 5px;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-align-content: center;
+  -ms-flex-line-pack: center;
+  align-content: center;
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
 }
 
 .c1 {
@@ -490,22 +530,6 @@ exports[`<Accordion /> Should render with one element opened and match the snaps
   align-items: center;
 }
 
-.c4 {
-  display: -webkit-box;
-  display: -webkit-flex;
-  display: -ms-flexbox;
-  display: flex;
-  -webkit-flex-direction: row;
-  -ms-flex-direction: row;
-  flex-direction: row;
-  height: auto;
-  -webkit-box-pack: justify;
-  -webkit-justify-content: space-between;
-  -ms-flex-pack: justify;
-  justify-content: space-between;
-  justify-items: space-between;
-}
-
 .c5 {
   width: auto;
   height: auto;
@@ -520,6 +544,7 @@ exports[`<Accordion /> Should render with one element opened and match the snaps
   line-height: 17px;
   padding: 2px;
   cursor: pointer;
+  margin-right: 0;
   margin-left: 5px;
   font-weight: 700;
   color: #2F3850;
@@ -555,15 +580,19 @@ exports[`<Accordion /> Should render with one element opened and match the snaps
               tabindex="0"
             >
               <div
-                class="c4"
+                class="c2"
               >
                 Label0
-                 
-                <img
-                  class="c5 img"
-                  role="presentation"
-                  src="IMAGE_MOCK"
-                />
+                <div
+                  class="c4"
+                  display="flex"
+                >
+                  <img
+                    class="c5 img"
+                    role="presentation"
+                    src="IMAGE_MOCK"
+                  />
+                </div>
               </div>
             </div>
             <button
@@ -607,15 +636,19 @@ exports[`<Accordion /> Should render with one element opened and match the snaps
               tabindex="0"
             >
               <div
-                class="c4"
+                class="c2"
               >
                 Label1
-                 
-                <img
-                  class="c5 img"
-                  role="presentation"
-                  src="IMAGE_MOCK"
-                />
+                <div
+                  class="c4"
+                  display="flex"
+                >
+                  <img
+                    class="c5 img"
+                    role="presentation"
+                    src="IMAGE_MOCK"
+                  />
+                </div>
               </div>
             </div>
             <button
@@ -659,15 +692,19 @@ exports[`<Accordion /> Should render with one element opened and match the snaps
               tabindex="0"
             >
               <div
-                class="c4"
+                class="c2"
               >
                 Label2
-                 
-                <img
-                  class="c5 img"
-                  role="presentation"
-                  src="IMAGE_MOCK"
-                />
+                <div
+                  class="c4"
+                  display="flex"
+                >
+                  <img
+                    class="c5 img"
+                    role="presentation"
+                    src="IMAGE_MOCK"
+                  />
+                </div>
               </div>
             </div>
             <button

@@ -24,25 +24,27 @@ exports[`<CollapsableLabel /> should match the snapshot 1`] = `
   align-items: center;
 }
 
+.c4 {
+  width: auto;
+  height: auto;
+}
+
 .c2 {
+  width: auto;
+  height: auto;
+  display: block;
+  border-radius: 5px;
   display: -webkit-box;
   display: -webkit-flex;
   display: -ms-flexbox;
   display: flex;
-  -webkit-flex-direction: row;
-  -ms-flex-direction: row;
-  flex-direction: row;
-  height: auto;
-  -webkit-box-pack: justify;
-  -webkit-justify-content: space-between;
-  -ms-flex-pack: justify;
-  justify-content: space-between;
-  justify-items: space-between;
-}
-
-.c4 {
-  width: auto;
-  height: auto;
+  -webkit-align-content: center;
+  -ms-flex-line-pack: center;
+  align-content: center;
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
 }
 
 .c5 {
@@ -54,6 +56,7 @@ exports[`<CollapsableLabel /> should match the snapshot 1`] = `
   line-height: 17px;
   padding: 2px;
   cursor: pointer;
+  margin-right: 0;
   margin-left: 5px;
   font-weight: 700;
   color: #2F3850;
@@ -103,18 +106,22 @@ exports[`<CollapsableLabel /> should match the snapshot 1`] = `
       class="c1"
     >
       <div
-        class="c2"
+        class="c0"
       >
         test
-         
         <div
-          class="c3"
+          class="c2"
+          display="flex"
         >
-          <img
-            class="c4 img"
-            role="presentation"
-            src=""
-          />
+          <div
+            class="c3"
+          >
+            <img
+              class="c4 img"
+              role="presentation"
+              src=""
+            />
+          </div>
         </div>
       </div>
     </div>
