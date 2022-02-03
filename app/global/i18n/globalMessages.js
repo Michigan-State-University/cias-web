@@ -358,4 +358,12 @@ export default defineMessages({
       defaultMessage: 'Questions',
     },
   },
+  yes: {
+    id: `${scope}.yes`,
+    defaultMessage: 'Yes',
+  },
+  no: {
+    id: `${scope}.no`,
+    defaultMessage: 'No',
+  },
 });

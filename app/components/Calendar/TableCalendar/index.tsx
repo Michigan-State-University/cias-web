@@ -1,6 +1,5 @@
 import React, { ReactElement } from 'react';
 import dayjs, { Dayjs } from 'dayjs';
-import localeData from 'dayjs/plugin/localeData';
 
 import {
   Container,
@@ -21,8 +20,6 @@ type TableCalendarProps = {
   startDate: Dayjs;
   endDate: Dayjs;
 };
-
-dayjs.extend(localeData);
 
 export const TableCalendar = ({
   dates,

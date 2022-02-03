@@ -17,10 +17,11 @@ import { Redirect, useLocation } from 'react-router-dom';
 import { useContainerQuery } from 'react-container-query';
 import { Hidden, Visible } from 'react-grid-system';
 import { useInjectSaga, useInjectReducer } from 'redux-injectors';
+import Color from 'color';
 
 import ccIcon from 'assets/svg/closed-captions.svg';
 
-import { elements, themeColors } from 'theme';
+import { colors, elements, themeColors } from 'theme';
 
 import AudioWrapper from 'utils/audioWrapper';
 import isNullOrUndefined from 'utils/isNullOrUndefined';
@@ -88,7 +89,11 @@ import {
   setTransitionalUserSessionId as setTransitionalUserSessionIdAction,
 } from './actions';
 import BranchingScreen from './components/BranchingScreen';
-import { NOT_SKIPABLE_QUESTIONS, FULL_SIZE_QUESTIONS } from './constants';
+import {
+  NOT_SKIPABLE_QUESTIONS,
+  FULL_SIZE_QUESTIONS,
+  CONFIRMABLE_QUESTIONS,
+} from './constants';
 
 const AnimationRefHelper = ({
   children,
@@ -211,6 +216,10 @@ export function AnswerSessionPage({
 
   const [skipQuestionModalVisible, setSkipQuestionModalVisible] =
     useState(false);
+  const [
+    confirmContinueQuestionModalVisible,
+    setConfirmContinueQuestionModalVisible,
+  ] = useState(false);
 
   const {
     type,
@@ -303,6 +312,12 @@ export function AnswerSessionPage({
       userSession.id,
       skipped,
     );
+
+  const onContinueButton = () => {
+    if (CONFIRMABLE_QUESTIONS.includes(type))
+      setConfirmContinueQuestionModalVisible(true);
+    else saveAnswer(false);
+  };
 
   const renderQuestionTranscript = (isRightSide) => {
     const renderTranscriptComponent = ({ maxWidth, height }) => (
@@ -449,7 +464,7 @@ export function AnswerSessionPage({
                 margin={20}
                 width="180px"
                 loading={currentQuestion.loading || nextQuestionLoading}
-                onClick={() => saveAnswer(false)}
+                onClick={onContinueButton}
                 title={formatMessage(messages.nextQuestion)}
               />
             )}
@@ -462,7 +477,7 @@ export function AnswerSessionPage({
     );
   };
 
-  const startInterventionAsync = async () => {
+  const startSessionAsync = async () => {
     await audioInstance.prepareAutoPlay();
 
     onStartSession();
@@ -518,6 +533,29 @@ export function AnswerSessionPage({
         confirmAction={() => saveAnswer(true)}
       />
 
+      <ConfirmationModal
+        icon="info"
+        visible={confirmContinueQuestionModalVisible}
+        onClose={() => setConfirmContinueQuestionModalVisible(false)}
+        description={formatMessage(messages.confirmContinueModalHeader)}
+        content={formatMessage(messages.confirmContinueModalMessage)}
+        confirmAction={() => saveAnswer(false)}
+        confirmationButtonText={formatMessage(
+          messages.confirmContinueModalConfirmText,
+        )}
+        cancelButtonText={formatMessage(
+          messages.confirmContinueModalCancelText,
+        )}
+        confirmationButtonColor="primary"
+        cancelButtonStyles={{
+          color: Color(themeColors.primary).alpha(0.1).hexa(),
+          textColor: themeColors.primary,
+          hoverColor: colors.white,
+          hoverTextColor: themeColors.primary,
+          inverted: false,
+        }}
+      />
+
       <Box
         display="flex"
         align="center"
@@ -558,7 +596,7 @@ export function AnswerSessionPage({
               <StyledButton
                 loading={userSessionLoading || nextQuestionLoading}
                 disabled={!previewPossible}
-                onClick={startInterventionAsync}
+                onClick={startSessionAsync}
                 title={buttonText()}
                 isDesktop={isDesktop}
               />

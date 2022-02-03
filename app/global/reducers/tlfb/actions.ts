@@ -17,8 +17,8 @@ import {
 export const addNewTlfbEvent = createAction(
   ADD_NEW_EVENT,
   (action) =>
-    (questionGroupId: string, userSessionId: string, isoDay: string) =>
-      action({ questionGroupId, userSessionId, isoDay }),
+    (questionGroupId: string, userSessionId: string, dayKey: string) =>
+      action({ questionGroupId, userSessionId, dayKey }),
 );
 
 export const addNewTlfbEventSuccess = createAction(

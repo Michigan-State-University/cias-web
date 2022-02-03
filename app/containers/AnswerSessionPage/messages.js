@@ -37,6 +37,22 @@ export default defineMessages({
     id: `${scope}.skipQuestionModalMessage`,
     defaultMessage: 'Are you sure you want to leave this question empty?',
   },
+  confirmContinueModalHeader: {
+    id: `${scope}.confirmContinueModalHeader`,
+    defaultMessage: 'Is that all?',
+  },
+  confirmContinueModalMessage: {
+    id: `${scope}.confirmContinueModalMessage`,
+    defaultMessage: 'Are you sure you have marked all your events?',
+  },
+  confirmContinueModalConfirmText: {
+    id: `${scope}.confirmContinueModalConfirmText`,
+    defaultMessage: 'Yes, I am sure',
+  },
+  confirmContinueModalCancelText: {
+    id: `${scope}.confirmContinueModalCancelText`,
+    defaultMessage: 'No, let me correct',
+  },
   submitAnswer: {
     id: `${scope}.submitAnswer`,
     defaultMessage: 'Finish session',
@@ -152,6 +168,10 @@ export default defineMessages({
   addEvent: {
     id: `${scope}.addEvent`,
     defaultMessage: 'Add event',
+  },
+  goToNextDay: {
+    id: `${scope}.goToNextDay`,
+    defaultMessage: 'Go to next day',
   },
   pageTitle: {
     id: `${scope}.pageTitle`,

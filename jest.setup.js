@@ -2,6 +2,9 @@
 import React from 'react';
 import 'mutationobserver-shim';
 import 'jest-styled-components';
+import configureDayjs from './app/configureDayjs';
+
+configureDayjs();
 
 jest.mock('./app/components/Icon', () => ({
   __esModule: true,

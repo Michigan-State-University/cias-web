@@ -4,3 +4,5 @@ export enum ModalType {
 }
 
 export type PopoverPlacement = 'top' | 'bottom' | 'left' | 'right';
+
+export type IconType = 'info';
