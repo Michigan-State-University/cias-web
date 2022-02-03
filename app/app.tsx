@@ -46,6 +46,7 @@ import { polyfillI18n } from 'i18nPolyfill';
 
 import 'utils/axios';
 import { ActionCableProvider } from 'components/ActionCable';
+import configureDayjs from './configureDayjs';
 
 smoothscroll.polyfill();
 
@@ -57,6 +58,8 @@ if (!isNullOrUndefined(process.env.SENTRY_DSN))
   });
 
 const MOUNT_NODE = document.getElementById('app') || document.body;
+
+configureDayjs();
 
 const render = (messages: any) => {
   // preserve old Immer behavior (compatibility after update)

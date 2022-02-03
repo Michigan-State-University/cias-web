@@ -1,7 +1,6 @@
 import axios from 'axios';
 import { put, call, takeLatest } from 'redux-saga/effects';
 import dayjs from 'dayjs';
-import utc from 'dayjs/plugin/utc';
 import { toast } from 'react-toastify';
 
 import { jsonApiToArray } from 'utils/jsonApiMapper';
@@ -22,7 +21,6 @@ function* addNewEvent({
   payload: { userSessionId, dayKey, questionGroupId },
 }: ReturnType<typeof addNewTlfbEvent>) {
   const url = `/v1/tlfb/events`;
-  dayjs.extend(utc);
   try {
     const date = dayjs(dayKey).utc(true);
 
