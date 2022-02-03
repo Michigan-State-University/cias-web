@@ -9,6 +9,6 @@ export type TlfbState = {
   days: Record<string, DayData>;
   loaders: Record<string, boolean>;
   cache: {
-    days: Record<string, DayData>;
+    days: TlfbState['days'];
   };
 };
