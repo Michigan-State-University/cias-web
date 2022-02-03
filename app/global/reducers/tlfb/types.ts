@@ -8,5 +8,7 @@ export type TlfbActions = ActionType<typeof actions>;
 export type TlfbState = {
   days: Record<string, DayData>;
   loaders: Record<string, boolean>;
-  eventCache: null | DayData;
+  cache: {
+    days: TlfbState['days'];
+  };
 };

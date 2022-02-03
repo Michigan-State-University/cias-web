@@ -31,6 +31,8 @@ const Collapse = ({
   dragHandleProps,
   contentProps,
   containerProps,
+  isBinInCollapse,
+  binImage,
 }) => (
   <StyledCollapseContainer data-cy={cypressId} {...containerProps}>
     <CollapseLabel
@@ -52,6 +54,8 @@ const Collapse = ({
       index={index}
       animatedImg={animatedImg}
       dragHandleProps={dragHandleProps}
+      isBinInCollapse={isBinInCollapse}
+      binImage={binImage}
     />
     <CollapseContent
       child={children}
@@ -84,6 +88,8 @@ Collapse.propTypes = {
   dragHandleProps: PropTypes.object,
   contentProps: PropTypes.object,
   containerProps: PropTypes.object,
+  isBinInCollapse: PropTypes.bool,
+  binImage: PropTypes.node,
 };
 
 Collapse.defaultProps = {

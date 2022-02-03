@@ -7,6 +7,7 @@ import Divider from 'components/Divider';
 import Collapse from 'components/Collapse';
 import arrowDown from 'assets/svg/arrow-down-grey.svg';
 import arrowUp from 'assets/svg/arrow-up-grey.svg';
+import binNoBg from 'assets/svg/bin-no-bg.svg';
 
 import { colors } from 'theme';
 import messages from './messages';
@@ -16,12 +17,14 @@ type EventCollapseType = {
   title: string;
   eventName: string;
   onInputBlur: (value: string) => void;
+  onDelete: () => void;
 };
 
 export const EventCollapse = ({
   title,
   onInputBlur,
   eventName = '',
+  onDelete,
 }: EventCollapseType) => {
   const [opened, setOpen] = useState(false);
   const [eventNameValue, setEventNameValue] = useState(eventName);
@@ -36,9 +39,12 @@ export const EventCollapse = ({
       isOpened={opened}
       onToggle={toggleOpen}
       bgOpacity={0}
-      disabled
+      onDelete={onDelete}
       onHideImg={arrowDown}
+      isBinInCollapse
       onShowImg={arrowUp}
+      height="auto"
+      binImage={binNoBg}
       dragHandleProps={{
         color: colors.bluewood,
         fontWeight: 'bold',

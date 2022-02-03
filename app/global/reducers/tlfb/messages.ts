@@ -11,4 +11,8 @@ export default defineMessages({
     id: `${scope}.editTlfbEventError`,
     defaultMessage: `Couldn't edit the event name`,
   },
+  deleteTlfbEventError: {
+    id: `${scope}.deleteTlfbEventError`,
+    defaultMessage: `Couldn't delete the event`,
+  },
 });

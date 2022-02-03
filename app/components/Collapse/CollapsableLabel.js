@@ -7,6 +7,7 @@ import binGrey from 'assets/svg/bin-grey.svg';
 
 import Row from 'components/Row';
 import Img from 'components/Img';
+import Box from 'components/Box';
 import { ImageButton } from 'components/Button';
 
 import { ImageWrapper, StyledCollapseLabel } from './styled';
@@ -31,6 +32,9 @@ const CollapseLabel = ({
   index,
   animatedImg,
   dragHandleProps,
+  binNotActiveImage,
+  binImage,
+  isBinInCollapse,
 }) => {
   const { formatMessage } = useIntl();
   const currentImg = isOpened ? onShowImg : onHideImg;
@@ -47,6 +51,19 @@ const CollapseLabel = ({
   ) : (
     <ImageWrapper>{imgElement}</ImageWrapper>
   );
+
+  const deleteIcon = (
+    <ImageButton
+      src={deleteActive ? binImage : binNotActiveImage}
+      onClick={deleteActive ? onDelete : undefined}
+      title={formatMessage(messages.deleteItem)}
+      ml={isBinInCollapse ? 0 : 5}
+      mr={!isBinInCollapse ? 0 : 5}
+      data-testid={`bin-${label}`}
+      data-cy={`accordion-element-delete-${index}`}
+    />
+  );
+
   return (
     <Row justify="between" align="center">
       <StyledCollapseLabel
@@ -62,22 +79,18 @@ const CollapseLabel = ({
       >
         <Row
           justify="between"
+          align="center"
           fontSize={dragHandleProps?.fontSize}
           lineHeight={dragHandleProps?.lineHeight}
         >
-          {label} {displayedImage}
+          {label}
+          <Box display="flex" align="center">
+            {isBinInCollapse && deleteIcon}
+            {displayedImage}
+          </Box>
         </Row>
       </StyledCollapseLabel>
-      {!disabled && (
-        <ImageButton
-          src={deleteActive ? bin : binGrey}
-          onClick={deleteActive ? onDelete : undefined}
-          title={formatMessage(messages.deleteItem)}
-          ml={5}
-          data-testid={`bin-${label}`}
-          data-cy={`accordion-element-delete-${index}`}
-        />
-      )}
+      {!disabled && !isBinInCollapse && deleteIcon}
     </Row>
   );
 };
@@ -101,6 +114,15 @@ CollapseLabel.propTypes = {
   index: PropTypes.number,
   animatedImg: PropTypes.bool,
   dragHandleProps: PropTypes.object,
+  binImage: PropTypes.node,
+  binNotActiveImage: PropTypes.node,
+  isBinInCollapse: PropTypes.bool,
+};
+
+CollapseLabel.defaultProps = {
+  binImage: bin,
+  binNotActiveImage: binGrey,
+  isBinInCollapse: false,
 };
 
 export default CollapseLabel;
