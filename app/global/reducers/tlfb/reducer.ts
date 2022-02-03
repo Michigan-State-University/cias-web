@@ -9,6 +9,8 @@ import {
   editEventNameError,
   deleteEventError,
   deleteEventRequest,
+  editEventNameSuccess,
+  deleteEventSuccess,
 } from './actions';
 
 import { TlfbActions, TlfbState } from './types';
@@ -18,7 +20,9 @@ export const initialState: TlfbState = {
   loaders: {
     createEvent: false,
   },
-  eventCache: null,
+  cache: {
+    days: {},
+  },
 };
 
 /* eslint-disable default-case, no-param-reassign */
@@ -43,6 +47,7 @@ export const tlfbReducer = (
         } else {
           draft.days[date] = { events };
         }
+        draft.cache.days = draft.days;
         draft.loaders.createEvent = false;
         break;
 
@@ -54,22 +59,21 @@ export const tlfbReducer = (
           ({ id }) => id === eventId,
         );
         if (eventIndex !== undefined && eventIndex !== -1) {
-          draft.eventCache = state.days[dayKey];
           draft.days[dayKey].events[eventIndex].name = name;
         }
         break;
       }
 
-      case getType(editEventNameError): {
-        const {
-          payload: { dayKey },
-        } = action;
-        if (state.eventCache) {
-          draft.days[dayKey] = state.eventCache;
-          draft.eventCache = null;
-        }
+      case getType(editEventNameSuccess): {
+        draft.cache.days = state.days;
         break;
       }
+
+      case getType(editEventNameError): {
+        draft.days = state.cache.days;
+        break;
+      }
+
       case getType(deleteEventRequest): {
         const {
           payload: { dayKey, eventId },
@@ -78,20 +82,18 @@ export const tlfbReducer = (
           ({ id }) => id === eventId,
         );
         if (eventIndex !== undefined && eventIndex !== -1) {
-          draft.eventCache = state.days[dayKey];
           draft.days[dayKey].events.splice(eventIndex, 1);
         }
         break;
       }
 
+      case getType(deleteEventSuccess): {
+        draft.cache.days = state.days;
+        break;
+      }
+
       case getType(deleteEventError): {
-        const {
-          payload: { dayKey },
-        } = action;
-        if (state.eventCache) {
-          draft.days[dayKey] = state.eventCache;
-          draft.eventCache = null;
-        }
+        draft.days = state.cache.days;
         break;
       }
     }
