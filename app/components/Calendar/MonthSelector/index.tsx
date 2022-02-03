@@ -1,6 +1,5 @@
 import React from 'react';
 import dayjs, { Dayjs } from 'dayjs';
-import localeData from 'dayjs/plugin/localeData';
 
 import arrowGreyLeft from 'assets/svg/arrow-grey-left.svg';
 import arrowGreyRight from 'assets/svg/arrow-grey-right.svg';
@@ -13,8 +12,6 @@ type MonthSelectorProps = {
   canGoNext?: boolean;
   canGoPrev?: boolean;
 };
-
-dayjs.extend(localeData);
 
 export const MonthSelector = ({
   monthDate,
