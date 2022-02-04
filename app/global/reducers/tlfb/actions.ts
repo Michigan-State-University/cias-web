@@ -1,6 +1,6 @@
 import { createAction } from 'typesafe-actions';
 
-import { EventData } from 'models/Tlfb';
+import { EventData, SubstanceData, SubstanceBody } from 'models/Tlfb';
 
 import {
   ADD_NEW_EVENT,
@@ -12,6 +12,12 @@ import {
   DELETE_EVENT_ERROR,
   EDIT_EVENT_NAME_SUCCESS,
   DELETE_EVENT_SUCCESS,
+  ADD_NEW_SUBSTANCE_ERROR,
+  ADD_NEW_SUBSTANCE_REQUEST,
+  ADD_NEW_SUBSTANCE_SUCCESS,
+  EDIT_SUBSTANCE_ERROR,
+  EDIT_SUBSTANCE_REQUEST,
+  EDIT_SUBSTANCE_SUCCESS,
 } from './constants';
 
 export const addNewTlfbEvent = createAction(
@@ -59,5 +65,39 @@ export const deleteEventSuccess = createAction(
 
 export const deleteEventError = createAction(
   DELETE_EVENT_ERROR,
+  (action) => () => action({}),
+);
+
+export const addNewTlfbSubstance = createAction(
+  ADD_NEW_SUBSTANCE_REQUEST,
+  (action) =>
+    (dayKey: string, userSessionId: string, questionGroupId: string) =>
+      action({ dayKey, userSessionId, questionGroupId }),
+);
+
+export const addNewTlfbSubstanceError = createAction(
+  ADD_NEW_SUBSTANCE_ERROR,
+  (action) => () => action({}),
+);
+
+export const addNewTlfbSubstanceSuccess = createAction(
+  ADD_NEW_SUBSTANCE_SUCCESS,
+  (action) => (substance: SubstanceData, dayKey: string) =>
+    action({ substance, dayKey }),
+);
+
+export const editTlfbSubstance = createAction(
+  EDIT_SUBSTANCE_REQUEST,
+  (action) => (dayKey: string, body: SubstanceBody, substanceId: number) =>
+    action({ dayKey, body, substanceId }),
+);
+
+export const editTlfbSubstanceError = createAction(
+  EDIT_SUBSTANCE_ERROR,
+  (action) => () => action({}),
+);
+
+export const editTlfbSubstanceSuccess = createAction(
+  EDIT_SUBSTANCE_SUCCESS,
   (action) => () => action({}),
 );

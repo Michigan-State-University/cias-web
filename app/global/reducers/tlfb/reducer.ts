@@ -11,6 +11,12 @@ import {
   deleteEventRequest,
   editEventNameSuccess,
   deleteEventSuccess,
+  addNewTlfbSubstance,
+  addNewTlfbSubstanceError,
+  addNewTlfbSubstanceSuccess,
+  editTlfbSubstance,
+  editTlfbSubstanceError,
+  editTlfbSubstanceSuccess,
 } from './actions';
 
 import { TlfbActions, TlfbState } from './types';
@@ -19,6 +25,7 @@ export const initialState: TlfbState = {
   days: {},
   loaders: {
     createEvent: false,
+    createSubstance: false,
   },
   cache: {
     days: {},
@@ -43,7 +50,10 @@ export const tlfbReducer = (
           payload: { date, events },
         } = action;
         if (state.days[date]) {
-          draft.days[date].events = [...state.days[date].events, ...events];
+          draft.days[date].events = [
+            ...(state.days[date]?.events || []),
+            ...events,
+          ];
         } else {
           draft.days[date] = { events };
         }
@@ -55,11 +65,11 @@ export const tlfbReducer = (
         const {
           payload: { dayKey, eventId, name },
         } = action;
-        const eventIndex = state.days[dayKey]?.events.findIndex(
+        const eventIndex = state.days[dayKey]?.events?.findIndex(
           ({ id }) => id === eventId,
         );
         if (eventIndex !== undefined && eventIndex !== -1) {
-          draft.days[dayKey].events[eventIndex].name = name;
+          draft.days[dayKey]!.events![eventIndex].name = name;
         }
         break;
       }
@@ -78,11 +88,11 @@ export const tlfbReducer = (
         const {
           payload: { dayKey, eventId },
         } = action;
-        const eventIndex = state.days[dayKey]?.events.findIndex(
+        const eventIndex = state.days[dayKey]?.events?.findIndex(
           ({ id }) => id === eventId,
         );
         if (eventIndex !== undefined && eventIndex !== -1) {
-          draft.days[dayKey].events.splice(eventIndex, 1);
+          draft.days[dayKey].events?.splice(eventIndex, 1);
         }
         break;
       }
@@ -94,6 +104,51 @@ export const tlfbReducer = (
 
       case getType(deleteEventError): {
         draft.days = state.cache.days;
+        break;
+      }
+
+      case getType(addNewTlfbSubstance): {
+        draft.loaders.createSubstance = true;
+        break;
+      }
+
+      case getType(addNewTlfbSubstanceSuccess): {
+        const {
+          payload: { substance, dayKey },
+        } = action;
+        if (state.days[dayKey]) {
+          draft.days[dayKey].substance = substance;
+        } else {
+          draft.days[dayKey] = { substance };
+        }
+        draft.cache.days = draft.days;
+        draft.loaders.createSubstance = false;
+        break;
+      }
+
+      case getType(addNewTlfbSubstanceError): {
+        draft.loaders.createSubstance = false;
+        break;
+      }
+
+      case getType(editTlfbSubstance): {
+        const {
+          payload: { dayKey, body },
+        } = action;
+        if (draft.days[dayKey] && draft.days[dayKey].substance) {
+          // @ts-ignore
+          draft.days[dayKey].substance.body = body;
+        }
+        break;
+      }
+
+      case getType(editTlfbSubstanceSuccess): {
+        draft.cache.days = state.days;
+        break;
+      }
+
+      case getType(editTlfbSubstanceError): {
+        state.days = draft.cache.days;
         break;
       }
     }
