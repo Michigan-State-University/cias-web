@@ -70,6 +70,7 @@ const TlfbCalendarLayout = ({
         startDate={tlfbStartDate}
         onSelectDay={setSelectedDay}
         selectedDay={selectedDay}
+        endDate={dayjs().subtract(1, 'day')}
       />
     </TlfbContainer>
   );
