@@ -1,5 +1,6 @@
 import produce from 'immer';
 import { getType } from 'typesafe-actions';
+import { deleteItemById, updateItemById } from 'utils/reduxUtils';
 
 import {
   addNewTlfbEvent,
@@ -65,12 +66,10 @@ export const tlfbReducer = (
         const {
           payload: { dayKey, eventId, name },
         } = action;
-        const eventIndex = state.days[dayKey]?.events?.findIndex(
-          ({ id }) => id === eventId,
-        );
-        if (eventIndex !== undefined && eventIndex !== -1) {
-          draft.days[dayKey]!.events![eventIndex].name = name;
-        }
+        updateItemById(draft.days[dayKey]?.events || [], eventId, (el) => ({
+          ...el,
+          name,
+        }));
         break;
       }
 
@@ -88,12 +87,7 @@ export const tlfbReducer = (
         const {
           payload: { dayKey, eventId },
         } = action;
-        const eventIndex = state.days[dayKey]?.events?.findIndex(
-          ({ id }) => id === eventId,
-        );
-        if (eventIndex !== undefined && eventIndex !== -1) {
-          draft.days[dayKey].events?.splice(eventIndex, 1);
-        }
+        deleteItemById(draft.days[dayKey]?.events || [], eventId);
         break;
       }
 

@@ -40,7 +40,7 @@ const TlfbQuestion = ({
     makeSelectTlfbLoader('createSubstance'),
   );
 
-  const selectedDaySubstances = useMemo(() => {
+  const selectedDaySubstance = useMemo(() => {
     if (!dayId) return undefined;
     return tlfbDaysData[dayId]?.substance;
   }, [dayId, tlfbDaysData]);
@@ -64,18 +64,18 @@ const TlfbQuestion = ({
   } = question;
 
   useEffect(() => {
-    if (dayId && !selectedDaySubstances && userSessionId) {
+    if (dayId && !selectedDaySubstance && userSessionId) {
       dispatch(addNewTlfbSubstance(dayId, userSessionId, questionGroupId));
     }
-  }, [dayId, selectedDaySubstances]);
+  }, [dayId, selectedDaySubstance]);
 
   const changeSelectedDaySubstances = (value: boolean) => () => {
-    if (dayId && selectedDaySubstances) {
+    if (dayId && selectedDaySubstance) {
       dispatch(
         editTlfbSubstance(
           dayId,
           { substancesConsumed: value },
-          selectedDaySubstances.id,
+          selectedDaySubstance.id,
         ),
       );
     }
@@ -104,7 +104,7 @@ const TlfbQuestion = ({
             <Radio
               id="yes-option"
               onChange={changeSelectedDaySubstances(true)}
-              checked={selectedDaySubstances?.body.substancesConsumed === true}
+              checked={selectedDaySubstance?.body.substancesConsumed === true}
             >
               <Text mr={32}>
                 <FormattedMessage {...globalMessages.yes} />
@@ -113,7 +113,7 @@ const TlfbQuestion = ({
             <Radio
               id="no-option"
               onChange={changeSelectedDaySubstances(false)}
-              checked={!selectedDaySubstances?.body.substancesConsumed}
+              checked={!selectedDaySubstance?.body.substancesConsumed}
             >
               <Text>
                 <FormattedMessage {...globalMessages.no} />

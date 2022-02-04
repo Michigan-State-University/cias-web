@@ -5,8 +5,7 @@ import { toast } from 'react-toastify';
 
 import { jsonApiToObject } from 'utils/jsonApiMapper';
 import { formatMessage } from 'utils/intlOutsideReact';
-
-// import { EventData } from 'models/Tlfb';
+import { fullDayToYearFormatter } from 'utils/formatters';
 
 import {
   addNewTlfbSubstance,
@@ -25,7 +24,7 @@ function* addNewSubstance({
 }: ReturnType<typeof addNewTlfbSubstance>) {
   const url = `/v1/tlfb/substances`;
   try {
-    const date = dayjs(dayKey).utc(true);
+    const date = dayjs(dayKey, fullDayToYearFormatter).utc(true);
 
     const { data } = yield call(axios.post, url, {
       exact_date: date.toISOString(),

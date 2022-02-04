@@ -8,7 +8,7 @@ import { findIndexById } from 'utils/arrayUtils';
  *
  * @param {Draft<T[]>} draftCollection
  * @param id
- * @param {function(item: T, index: number): Object|Object} updater Function returning Object and taking `item` and `index` or an Object to assign to
+ * @param {Object|function(item: T, index: number):Object} updater Function returning Object and taking `item` and `index` or an Object to assign to
  * @template T
  */
 export const updateItemById = (draftCollection, id, updater) => {
