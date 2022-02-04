@@ -254,10 +254,6 @@ const CharacterAnim = ({
           break;
 
         case readQuestionBlockType:
-          if (!settings.subtitle) {
-            changeBlock();
-            break;
-          } // fallthrough intentionally
         case speechType:
         case reflectionType:
         case reflectionFormulaType:
