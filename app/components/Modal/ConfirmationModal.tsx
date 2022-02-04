@@ -16,6 +16,7 @@ import Button from 'components/Button';
 import Row from 'components/Row';
 import Column from 'components/Column';
 import Icon from 'components/Icon';
+import Text from 'components/Text';
 
 import messages from './messages';
 import Modal from './Modal';
@@ -37,6 +38,8 @@ export type Props = {
   contentStyles?: Record<string, unknown>;
   contentContainerStyles?: Record<string, unknown>;
   icon?: IconType;
+  hideCloseButton: boolean;
+  isMobile: boolean;
 } & Record<string, unknown>;
 
 const ConfirmationModal = ({
@@ -54,6 +57,8 @@ const ConfirmationModal = ({
   contentStyles,
   contentContainerStyles,
   icon,
+  hideCloseButton,
+  isMobile,
   ...modalStyles
 }: Props): JSX.Element => {
   const onConfirm = useCallback(() => {
@@ -73,8 +78,13 @@ const ConfirmationModal = ({
   };
 
   return (
-    <Modal visible={visible} onClose={onClose} {...modalStyles}>
-      <Column px={50} pd={30} {...contentContainerStyles}>
+    <Modal
+      visible={visible}
+      onClose={onClose}
+      {...modalStyles}
+      hideCloseButton={hideCloseButton}
+    >
+      <Column px={!isMobile && 50} pd={30} {...contentContainerStyles}>
         {icon && (
           <Row justify="center" mb={32}>
             <Icon src={getIcon()} />
@@ -85,7 +95,9 @@ const ConfirmationModal = ({
         </H1>
         {content && (
           <Box padded {...contentStyles}>
-            {content}
+            <Text textAlign="center" lineHeight="24px">
+              {content}
+            </Text>
           </Box>
         )}
         <Row mt={25}>

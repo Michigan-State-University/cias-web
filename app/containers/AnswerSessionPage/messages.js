@@ -13,6 +13,7 @@ import {
   RANDOMIZATION_MISS_MATCH,
   FORBIDDEN_CAT_MH_BRANCHING,
 } from 'containers/AnswerSessionPage/constants';
+import { QuestionTypes } from 'models/Question';
 
 export const scope = 'app.containers.AnswerSessionPage';
 
@@ -41,9 +42,14 @@ export default defineMessages({
     id: `${scope}.confirmContinueModalHeader`,
     defaultMessage: 'Is that all?',
   },
-  confirmContinueModalMessage: {
-    id: `${scope}.confirmContinueModalMessage`,
+  [`confirmContinueModalMessage${QuestionTypes.TLFB_EVENTS}`]: {
+    id: `${scope}.confirmContinueModalMessage${QuestionTypes.TLFB_EVENTS}`,
     defaultMessage: 'Are you sure you have marked all your events?',
+  },
+  [`confirmContinueModalMessage${QuestionTypes.TLFB_QUESTION}`]: {
+    id: `${scope}.confirmContinueModalMessage${QuestionTypes.TLFB_QUESTION}`,
+    defaultMessage:
+      'Are you sure you marked all the days you used these substances?',
   },
   confirmContinueModalConfirmText: {
     id: `${scope}.confirmContinueModalConfirmText`,

@@ -41,6 +41,7 @@ import logInGuestSaga from 'global/reducers/auth/sagas/logInGuest';
 import { canPreview } from 'models/Status/statusPermissions';
 import { finishQuestion } from 'models/Session/QuestionTypes';
 import { UserSessionType } from 'models/UserSession/UserSession';
+import { QuestionTypes } from 'models/Question';
 
 import QuestionTranscript from 'containers/QuestionTranscript';
 import { ANSWER_SESSION_CONTAINER_ID } from 'containers/App/constants';
@@ -531,6 +532,11 @@ export function AnswerSessionPage({
         description={formatMessage(messages.skipQuestionModalHeader)}
         content={formatMessage(messages.skipQuestionModalMessage)}
         confirmAction={() => saveAnswer(true)}
+        hideCloseButton
+        contentContainerStyles={{
+          mb: 20,
+        }}
+        isMobile={isMobile}
       />
 
       <ConfirmationModal
@@ -538,7 +544,9 @@ export function AnswerSessionPage({
         visible={confirmContinueQuestionModalVisible}
         onClose={() => setConfirmContinueQuestionModalVisible(false)}
         description={formatMessage(messages.confirmContinueModalHeader)}
-        content={formatMessage(messages.confirmContinueModalMessage)}
+        content={formatMessage(
+          messages[`confirmContinueModalMessage${QuestionTypes.TLFB_EVENTS}`],
+        )}
         confirmAction={() => saveAnswer(false)}
         confirmationButtonText={formatMessage(
           messages.confirmContinueModalConfirmText,
@@ -554,6 +562,12 @@ export function AnswerSessionPage({
           hoverTextColor: themeColors.primary,
           inverted: false,
         }}
+        contentContainerStyles={{
+          mb: 20,
+          mt: 10,
+        }}
+        hideCloseButton
+        isMobile={isMobile}
       />
 
       <Box
