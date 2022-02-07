@@ -182,6 +182,7 @@ const PopoverModal = ({
       >
         <StyledArrow
           ref={arrowRef}
+          $forceMobile={forceMobile}
           style={{
             left: xArrow,
             top: yArrow,

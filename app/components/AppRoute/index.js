@@ -13,7 +13,12 @@ import { arraysOverlap } from 'utils/arrayUtils';
 import Sidebar from 'containers/Sidebar';
 import Navbar from 'containers/Navbar';
 
-import { MainAppContainer, PageContainer, RowBelowNavbar } from './styled';
+import {
+  MainAppContainer,
+  UnprotectedMainAppContainer,
+  PageContainer,
+  RowBelowNavbar,
+} from './styled';
 
 class AppRoute extends Route {
   render() {
@@ -32,7 +37,11 @@ class AppRoute extends Route {
     const rolePermissions = RolePermissions(user?.roles);
 
     if (!protectedRoute) {
-      return super.render();
+      return (
+        <UnprotectedMainAppContainer>
+          {super.render()}
+        </UnprotectedMainAppContainer>
+      );
     }
     if (!user || !user.roles) {
       const queryParams = new URLSearchParams(location.search);
