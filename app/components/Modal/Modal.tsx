@@ -31,6 +31,7 @@ export type Props = {
   children: ReactNode;
   visible: boolean;
   titleProps?: Record<string, unknown>;
+  hideCloseButton?: boolean;
 } & Record<string, unknown>;
 
 const Modal = ({
@@ -39,6 +40,7 @@ const Modal = ({
   children,
   visible,
   titleProps,
+  hideCloseButton,
   ...stylesProps
 }: Props): JSX.Element => {
   const { formatMessage } = useIntl();
@@ -116,16 +118,18 @@ const Modal = ({
                 )}
               </Col>
 
-              <Col xs={2} align="end">
-                {/** @ts-ignore */}
-                <ActionIcon
-                  mr={0}
-                  data-cy="modal-close-button"
-                  onClick={onClose}
-                  data-testid="close-modal-button"
-                  ariaText={formatMessage(messages.closeButtonLabel)}
-                />
-              </Col>
+              {!hideCloseButton && (
+                <Col xs={2} align="end">
+                  {/** @ts-ignore */}
+                  <ActionIcon
+                    mr={0}
+                    data-cy="modal-close-button"
+                    onClick={onClose}
+                    data-testid="close-modal-button"
+                    ariaText={formatMessage(messages.closeButtonLabel)}
+                  />
+                </Col>
+              )}
             </Row>
 
             <Row>
