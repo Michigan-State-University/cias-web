@@ -1,5 +1,5 @@
 import React, { useEffect, useMemo, useState } from 'react';
-import { FormattedMessage } from 'react-intl';
+import { FormattedMessage, useIntl } from 'react-intl';
 import { compose } from 'redux';
 import { injectReducer, injectSaga } from 'redux-injectors';
 import { useDispatch, useSelector } from 'react-redux';
@@ -17,12 +17,15 @@ import {
   addNewTlfbSubstance,
   allTlfbSagas,
   editTlfbSubstance,
+  fetchCalendarDataRequest,
   makeSelectTlfbDays,
+  makeSelectTlfbError,
   makeSelectTlfbLoader,
   tlfbReducer,
 } from 'global/reducers/tlfb';
 import Spinner from 'components/Spinner';
 import { themeColors } from 'theme';
+import ErrorAlert from 'components/ErrorAlert';
 import { SharedProps } from './sharedProps';
 import messages from '../messages';
 import TlfbCalendarLayout from '../layouts/TlfbCalendarLayout';
@@ -39,6 +42,11 @@ const TlfbQuestion = ({
   const newSubstanceLoading = useSelector(
     makeSelectTlfbLoader('createSubstance'),
   );
+  const fetchCalendarDataError = useSelector(
+    makeSelectTlfbError('fetchCalendarData'),
+  );
+
+  const { formatMessage } = useIntl();
 
   const selectedDaySubstance = useMemo(() => {
     if (!dayId) return undefined;
@@ -64,6 +72,12 @@ const TlfbQuestion = ({
   } = question;
 
   useEffect(() => {
+    if (userSessionId) {
+      dispatch(fetchCalendarDataRequest(userSessionId, questionGroupId));
+    }
+  }, []);
+
+  useEffect(() => {
     if (dayId && !selectedDaySubstance && userSessionId) {
       dispatch(addNewTlfbSubstance(dayId, userSessionId, questionGroupId));
     }
@@ -80,6 +94,12 @@ const TlfbQuestion = ({
       );
     }
   };
+
+  if (fetchCalendarDataError) {
+    return (
+      <ErrorAlert errorText={formatMessage(messages.tlfbDataError)} fullPage />
+    );
+  }
 
   return (
     <TlfbCalendarLayout

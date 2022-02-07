@@ -1,6 +1,6 @@
 import { createAction } from 'typesafe-actions';
 
-import { EventData, SubstanceData, SubstanceBody } from 'models/Tlfb';
+import { EventData, SubstanceData, SubstanceBody, DayData } from 'models/Tlfb';
 
 import {
   ADD_NEW_EVENT,
@@ -18,6 +18,9 @@ import {
   EDIT_SUBSTANCE_ERROR,
   EDIT_SUBSTANCE_REQUEST,
   EDIT_SUBSTANCE_SUCCESS,
+  FETCH_CALENDAR_DATA_REQUEST,
+  FETCH_CALENDAR_DATA_SUCCESS,
+  FETCH_CALENDAR_DATA_ERROR,
 } from './constants';
 
 export const addNewTlfbEvent = createAction(
@@ -99,5 +102,22 @@ export const editTlfbSubstanceError = createAction(
 
 export const editTlfbSubstanceSuccess = createAction(
   EDIT_SUBSTANCE_SUCCESS,
+  (action) => () => action({}),
+);
+
+export const fetchCalendarDataRequest = createAction(
+  FETCH_CALENDAR_DATA_REQUEST,
+  (action) => (userSessionId: string, questionGroupId: string) =>
+    action({ userSessionId, questionGroupId }),
+);
+
+export const fetchCalendarDataSuccess = createAction(
+  FETCH_CALENDAR_DATA_SUCCESS,
+  (action) => (calendarData: Record<string, DayData>) =>
+    action({ calendarData }),
+);
+
+export const fetchCalendarDataError = createAction(
+  FETCH_CALENDAR_DATA_ERROR,
   (action) => () => action({}),
 );

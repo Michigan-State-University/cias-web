@@ -4,6 +4,7 @@ import { editTlfbEventNameSaga } from './editEventName';
 import { removeTlfbEventSaga } from './removeEvent';
 import { addNewSubstanceSaga } from './addNewSubstance';
 import { editSubstanceBodySaga } from './editSubstance';
+import { fetchCalendarDataSaga } from './fetchCalendarData';
 
 export default function* allTlfbSagas() {
   yield all([
@@ -12,5 +13,6 @@ export default function* allTlfbSagas() {
     removeTlfbEventSaga(),
     addNewSubstanceSaga(),
     editSubstanceBodySaga(),
+    fetchCalendarDataSaga(),
   ]);
 }

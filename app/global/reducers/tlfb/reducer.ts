@@ -18,6 +18,9 @@ import {
   editTlfbSubstance,
   editTlfbSubstanceError,
   editTlfbSubstanceSuccess,
+  fetchCalendarDataSuccess,
+  fetchCalendarDataRequest,
+  fetchCalendarDataError,
 } from './actions';
 
 import { TlfbActions, TlfbState } from './types';
@@ -30,6 +33,9 @@ export const initialState: TlfbState = {
   },
   cache: {
     days: {},
+  },
+  errors: {
+    fetchCalendarData: false,
   },
 };
 
@@ -143,6 +149,26 @@ export const tlfbReducer = (
 
       case getType(editTlfbSubstanceError): {
         state.days = draft.cache.days;
+        break;
+      }
+
+      case getType(fetchCalendarDataRequest): {
+        draft.errors.fetchCalendarData = false;
+        break;
+      }
+
+      case getType(fetchCalendarDataSuccess): {
+        const {
+          payload: { calendarData },
+        } = action;
+        state.days = calendarData;
+        draft.cache.days = calendarData;
+        draft.loaders.fetchCalendarData = false;
+        break;
+      }
+
+      case getType(fetchCalendarDataError): {
+        draft.errors.fetchCalendarData = true;
         break;
       }
     }

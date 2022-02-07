@@ -179,6 +179,11 @@ export default defineMessages({
     id: `${scope}.goToNextDay`,
     defaultMessage: 'Go to next day',
   },
+  tlfbDataError: {
+    id: `${scope}.tlfbDataError`,
+    defaultMessage:
+      'There was an error with fetching calender data. Please refresh the page',
+  },
   pageTitle: {
     id: `${scope}.pageTitle`,
     defaultMessage: `{isPreview, select,

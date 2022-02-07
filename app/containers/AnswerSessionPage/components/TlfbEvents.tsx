@@ -1,8 +1,8 @@
-import React, { useMemo, useState } from 'react';
+import React, { useMemo, useState, useEffect } from 'react';
 import { injectReducer, injectSaga } from 'redux-injectors';
 import { useDispatch, useSelector } from 'react-redux';
 import { compose } from 'redux';
-import { FormattedMessage } from 'react-intl';
+import { FormattedMessage, useIntl } from 'react-intl';
 
 import {
   allTlfbSagas,
@@ -12,6 +12,8 @@ import {
   editEventName,
   makeSelectTlfbLoader,
   deleteEventRequest,
+  fetchCalendarDataRequest,
+  makeSelectTlfbError,
 } from 'global/reducers/tlfb';
 import { TlfbEventsWithConfigDto as TlfbEventsWithConfig } from 'models/Question';
 
@@ -22,6 +24,7 @@ import Text from 'components/Text';
 import PlusCircle from 'components/Circle/PlusCircle';
 import Spinner from 'components/Spinner';
 
+import ErrorAlert from 'components/ErrorAlert';
 import { SharedProps } from './sharedProps';
 import messages from '../messages';
 import TlfbCalendarLayout from '../layouts/TlfbCalendarLayout';
@@ -35,6 +38,11 @@ const TlfbEvents = ({
   const dispatch = useDispatch();
   const tlfbDaysData = useSelector(makeSelectTlfbDays());
   const createEventLoading = useSelector(makeSelectTlfbLoader('createEvent'));
+  const fetchCalendarDataError = useSelector(
+    makeSelectTlfbError('fetchCalendarData'),
+  );
+
+  const { formatMessage } = useIntl();
 
   const {
     body: {
@@ -52,6 +60,12 @@ const TlfbEvents = ({
   } = question;
 
   const [dayId, setDayId] = useState<string | undefined>(undefined);
+
+  useEffect(() => {
+    if (userSessionId) {
+      dispatch(fetchCalendarDataRequest(userSessionId, questionGroupId));
+    }
+  }, []);
 
   const addTlfbEvent = () => {
     if (userSessionId && dayId) {
@@ -75,6 +89,12 @@ const TlfbEvents = ({
       dispatch(deleteEventRequest(id, dayId));
     }
   };
+
+  if (fetchCalendarDataError) {
+    return (
+      <ErrorAlert errorText={formatMessage(messages.tlfbDataError)} fullPage />
+    );
+  }
 
   return (
     <TlfbCalendarLayout
