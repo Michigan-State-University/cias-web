@@ -8,6 +8,7 @@ export type TlfbActions = ActionType<typeof actions>;
 export type TlfbState = {
   days: Record<string, DayData>;
   loaders: Record<string, boolean>;
+  errors: Record<string, boolean>;
   cache: {
     days: TlfbState['days'];
   };

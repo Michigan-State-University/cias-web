@@ -11,3 +11,6 @@ export const makeSelectTlfbDays = () =>
 
 export const makeSelectTlfbLoader = (loaderName: string) =>
   createSelector(selectTlfbState, ({ loaders }) => loaders[loaderName]);
+
+export const makeSelectTlfbError = (errorName: string) =>
+  createSelector(selectTlfbState, ({ loaders }) => loaders[errorName]);
