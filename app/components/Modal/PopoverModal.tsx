@@ -180,7 +180,6 @@ const PopoverModal = ({
           left: x ?? '',
         }}
       >
-        <StyledPopoverContent>{children}</StyledPopoverContent>
         <StyledArrow
           ref={arrowRef}
           style={{
@@ -191,6 +190,9 @@ const PopoverModal = ({
             [`border${capitalize(arrowCrossAxisPlacement)}Width`]: 1,
           }}
         />
+        <StyledPopoverContent $forceMobile={forceMobile}>
+          {children}
+        </StyledPopoverContent>
       </StyledPopover>
     </Portal>
   );
