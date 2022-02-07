@@ -109,6 +109,9 @@ const PopoverModal = ({
 
   useEffect(() => {
     if (element) {
+      // necessary when reference changes from one to another (from not null value to not null value)
+      update();
+
       window.addEventListener('click', handleClick, false);
 
       return () => {
