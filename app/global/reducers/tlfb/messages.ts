@@ -15,4 +15,12 @@ export default defineMessages({
     id: `${scope}.deleteTlfbEventError`,
     defaultMessage: `Couldn't delete the event`,
   },
+  addTlfbSubstanceError: {
+    id: `${scope}.addTlfbSubstanceError`,
+    defaultMessage: `Couldn't add a new substance`,
+  },
+  editTlfbSubstanceError: {
+    id: `${scope}.editTlfbSubstanceError`,
+    defaultMessage: `Couldn't edit the substance`,
+  },
 });
