@@ -3,7 +3,7 @@ import styled from 'styled-components';
 import { colors, mediaQuery } from 'theme';
 
 import Box from 'components/Box';
-import { maxQueries } from 'components/Container/mediaQuery';
+import { maxQueries, minQueries } from 'components/Container/mediaQuery';
 
 const DIM_Z_INDEX = 10;
 const POPOVER_Z_INDEX = 11;
@@ -25,6 +25,10 @@ const mobileDimStyle = {
   height: '100%',
   backgroundColor: colors.black,
   opacity: 0.4,
+};
+
+const mobileScrollStyle = {
+  maxHeight: '100% !important',
 };
 
 export const StyledBox = styled(Box)`
@@ -56,6 +60,17 @@ export const StyledPopover = styled(Box)`
 
 export const StyledPopoverContent = styled(Box)`
   padding: 24px;
+  overflow-y: auto;
+
+  @media ${minQueries.sm} {
+    max-height: 500px;
+  }
+
+  @media ${maxQueries.sm} {
+    ${mobileScrollStyle}
+  }
+
+  ${({ $forceMobile }) => $forceMobile && mobileScrollStyle}
 `;
 
 export const DimBackground = styled(Box)`
