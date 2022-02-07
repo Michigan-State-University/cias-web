@@ -24,8 +24,9 @@ import {
   tlfbReducer,
 } from 'global/reducers/tlfb';
 import Spinner from 'components/Spinner';
-import { themeColors } from 'theme';
+import { colors, themeColors } from 'theme';
 import ErrorAlert from 'components/ErrorAlert';
+import Circle from 'components/Circle';
 import { SharedProps } from './sharedProps';
 import messages from '../messages';
 import TlfbCalendarLayout from '../layouts/TlfbCalendarLayout';
@@ -51,6 +52,11 @@ const TlfbQuestion = ({
   const selectedDaySubstance = useMemo(() => {
     if (!dayId) return undefined;
     return tlfbDaysData[dayId]?.substance;
+  }, [dayId, tlfbDaysData]);
+
+  const selectedDayEvents = useMemo(() => {
+    if (!dayId) return undefined;
+    return tlfbDaysData[dayId]?.events;
   }, [dayId, tlfbDaysData]);
 
   const dispatch = useDispatch();
@@ -117,6 +123,20 @@ const TlfbQuestion = ({
       )}
       {!newSubstanceLoading && (
         <>
+          {(isMobile || isMobilePreview) &&
+            selectedDayEvents?.map(({ name, id }, index) => (
+              <Box
+                key={id}
+                align="center"
+                display="inline-flex"
+                ml={index === 0 ? 0 : 15}
+              >
+                {/* @ts-ignore */}
+                <Circle bg={colors.pictonBlue} size="5px" />
+                <Text ml={5}>{name}</Text>
+              </Box>
+            ))}
+          <Divider mb={25} mt={20} />
           <Text fontWeight="bold" fontSize={16}>
             {substanceQuestion}
           </Text>
