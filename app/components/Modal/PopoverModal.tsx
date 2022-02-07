@@ -152,8 +152,8 @@ const PopoverModal = ({
     const isInside =
       !!element &&
       GeometryHelper.doesRectContainPoint(element.getBoundingClientRect(), {
-        x: event.pageX,
-        y: event.pageY,
+        x: event.x,
+        y: event.y,
       });
 
     if (
