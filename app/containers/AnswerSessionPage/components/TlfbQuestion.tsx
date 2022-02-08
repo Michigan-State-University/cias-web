@@ -123,19 +123,16 @@ const TlfbQuestion = ({
       )}
       {!newSubstanceLoading && (
         <>
-          {(isMobile || isMobilePreview) &&
-            selectedDayEvents?.map(({ name, id }, index) => (
-              <Box
-                key={id}
-                align="center"
-                display="inline-flex"
-                ml={index === 0 ? 0 : 15}
-              >
-                {/* @ts-ignore */}
-                <Circle bg={colors.pictonBlue} size="5px" />
-                <Text ml={5}>{name}</Text>
-              </Box>
-            ))}
+          <Box display="inline-flex" flexWrap="wrap" gap="15px">
+            {(isMobile || isMobilePreview) &&
+              selectedDayEvents?.map(({ name, id }) => (
+                <Box key={id} display="flex" align="center">
+                  {/* @ts-ignore */}
+                  <Circle bg={colors.pictonBlue} size="5px" />
+                  <Text ml={5}>{name}</Text>
+                </Box>
+              ))}
+          </Box>
           <Divider mb={25} mt={20} />
           <Text fontWeight="bold" fontSize={16}>
             {substanceQuestion}
