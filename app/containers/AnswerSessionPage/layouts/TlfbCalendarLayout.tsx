@@ -2,13 +2,19 @@ import React, { useMemo, useEffect, useState } from 'react';
 import dayjs, { Dayjs } from 'dayjs';
 
 import { TlfbConfigBody } from 'models/Question';
-import { fullDayToYearFormatter } from 'utils/formatters';
+import {
+  dayNumeralFormatter,
+  fullDayToYearFormatter,
+  fullMonthNameFormatter,
+} from 'utils/formatters';
 import { CamelToSnake } from 'global/types/camelToSnake';
 
 import { ANSWER_SESSION_CONTAINER_ID } from 'containers/App/constants';
 import Calendar from 'components/Calendar';
 import { PopoverModal } from 'components/Modal';
 import TlfbTitle from 'components/TlfbTitle';
+import Text from 'components/Text';
+import Box from 'components/Box';
 import { CalendarData } from 'components/Calendar/types';
 
 import { TlfbContainer } from './styled';
@@ -57,6 +63,7 @@ const TlfbCalendarLayout = ({
     } = tlfbConfig;
     return dayjs().subtract(+daysCount, 'day');
   }, [tlfbConfig.data]);
+
   return (
     <TlfbContainer>
       <TlfbTitle smallText={smallText} bigText={bigText} />
@@ -67,7 +74,19 @@ const TlfbCalendarLayout = ({
         forceMobile={isMobilePreview}
         width={!isMobile ? '350px' : ''}
       >
-        {children}
+        <>
+          {(isMobilePreview || isMobile) && (
+            <Box display="flex">
+              <Text fontWeight="bold" fontSize="26px">
+                {selectedDay?.format(dayNumeralFormatter)},
+              </Text>
+              <Text ml={5} fontSize="26px">
+                {selectedDay?.format(fullMonthNameFormatter)}
+              </Text>
+            </Box>
+          )}
+          {children}
+        </>
       </PopoverModal>
       <Calendar
         startDate={tlfbStartDate}

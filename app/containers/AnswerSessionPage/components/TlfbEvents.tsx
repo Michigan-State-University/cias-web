@@ -23,6 +23,7 @@ import Text from 'components/Text';
 import PlusCircle from 'components/Circle/PlusCircle';
 import Spinner from 'components/Spinner';
 import ErrorAlert from 'components/ErrorAlert';
+import Divider from 'components/Divider';
 
 import { SharedProps } from './sharedProps';
 import messages from '../messages';
@@ -107,6 +108,7 @@ const TlfbEvents = ({
       calendarData={tlfbDaysData}
     >
       <>
+        {(isMobile || isMobilePreview) && <Divider mb={25} mt={20} />}
         {selectedDayEvents.map(({ name, id }, index) => (
           <Box mb={16} key={`event-collapsable-${id}`}>
             <EventCollapse
