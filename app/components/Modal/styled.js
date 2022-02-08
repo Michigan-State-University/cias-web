@@ -31,6 +31,10 @@ const mobileScrollStyle = {
   maxHeight: '100% !important',
 };
 
+const mobileArrowStyle = {
+  display: 'none',
+};
+
 export const StyledBox = styled(Box)`
   ${mediaQuery.mobile`
     max-height: calc(100% - 20px);
@@ -96,4 +100,9 @@ export const StyledArrow = styled(Box)`
   height: 8px;
   transform: rotate(45deg);
   border-radius: 0;
+
+  @media ${maxQueries.sm} {
+    ${mobileArrowStyle};
+  }
+  ${({ $forceMobile }) => $forceMobile && mobileArrowStyle}
 `;

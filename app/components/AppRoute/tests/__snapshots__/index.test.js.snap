@@ -245,4 +245,17 @@ exports[`<AppRoute /> Should render and match the snapshot 1`] = `
 
 exports[`<AppRoute /> Should render default 1`] = `<div />`;
 
-exports[`<AppRoute /> Should render public route and match the snapshot 1`] = `<div />`;
+exports[`<AppRoute /> Should render public route and match the snapshot 1`] = `
+.c0 {
+  overflow: auto;
+  height: 100vh;
+  width: 100vw;
+  position: relative;
+}
+
+<div>
+  <div
+    class="c0"
+  />
+</div>
+`;
