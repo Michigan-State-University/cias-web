@@ -9,6 +9,8 @@ import { ANSWER_SESSION_CONTAINER_ID } from 'containers/App/constants';
 import Calendar from 'components/Calendar';
 import { PopoverModal } from 'components/Modal';
 import TlfbTitle from 'components/TlfbTitle';
+import Text from 'components/Text';
+import Box from 'components/Box';
 
 import { TlfbContainer } from './styled';
 
@@ -54,6 +56,7 @@ const TlfbCalendarLayout = ({
     } = tlfbConfig;
     return dayjs().subtract(+daysCount, 'day');
   }, [tlfbConfig.data]);
+
   return (
     <TlfbContainer>
       <TlfbTitle smallText={smallText} bigText={bigText} />
@@ -64,7 +67,19 @@ const TlfbCalendarLayout = ({
         forceMobile={isMobilePreview}
         width={!isMobile ? '350px' : ''}
       >
-        {children}
+        <>
+          {(isMobilePreview || isMobile) && (
+            <Box display="flex">
+              <Text fontWeight="bold" fontSize="26px">
+                {selectedDay?.format('Do')},
+              </Text>
+              <Text ml={5} fontSize="26px">
+                {selectedDay?.format('MMMM')}
+              </Text>
+            </Box>
+          )}
+          {children}
+        </>
       </PopoverModal>
       <Calendar
         startDate={tlfbStartDate}

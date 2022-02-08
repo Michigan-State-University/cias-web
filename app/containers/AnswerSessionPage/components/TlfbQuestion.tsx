@@ -123,7 +123,12 @@ const TlfbQuestion = ({
       )}
       {!newSubstanceLoading && (
         <>
-          <Box display="inline-flex" flexWrap="wrap" gap="15px">
+          <Box
+            mt={(selectedDayEvents?.length || 0) > 0 ? 15 : 0}
+            display="inline-flex"
+            flexWrap="wrap"
+            gap="15px"
+          >
             {(isMobile || isMobilePreview) &&
               selectedDayEvents?.map(({ name, id }) => (
                 <Box key={id} display="flex" align="center">
