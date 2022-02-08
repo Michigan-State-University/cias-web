@@ -60,6 +60,7 @@ export const TableCalendar = ({
                   return (
                     <td key={day.toISOString()}>
                       <Day
+                        rowsNumber={dates.length}
                         events={calendarData[formattedDate]?.events ?? []}
                         onClick={(dayId) => onSelectDay(day, dayId)}
                         active={selectedDay?.isSame(day, 'day')}

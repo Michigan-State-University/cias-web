@@ -1,3 +1,4 @@
+import Text from 'components/Text';
 import styled from 'styled-components';
 import { colors } from 'theme';
 
@@ -90,3 +91,10 @@ export const Dot = styled.div`
     height: 7px;
 `}
 `;
+
+export const StyledText = styled(Text).attrs({
+  textOpacity: 0.7,
+  fontSize: 11,
+  lineHeight: '11px',
+  color: colors.bluewood,
+})``;
