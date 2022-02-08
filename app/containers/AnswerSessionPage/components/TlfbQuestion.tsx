@@ -124,7 +124,7 @@ const TlfbQuestion = ({
       {!newSubstanceLoading && (
         <>
           <Box
-            mt={(selectedDayEvents?.length || 0) > 0 ? 15 : 0}
+            mt={selectedDayEvents?.length ? 15 : 0}
             display="inline-flex"
             flexWrap="wrap"
             gap="15px"

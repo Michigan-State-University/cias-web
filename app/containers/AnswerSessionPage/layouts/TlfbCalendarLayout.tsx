@@ -2,7 +2,11 @@ import React, { useMemo, useEffect, useState } from 'react';
 import dayjs, { Dayjs } from 'dayjs';
 
 import { TlfbConfigBody } from 'models/Question';
-import { fullDayToYearFormatter } from 'utils/formatters';
+import {
+  dayNumeralFormatter,
+  fullDayToYearFormatter,
+  fullMonthNameFormatter,
+} from 'utils/formatters';
 import { CamelToSnake } from 'global/types/camelToSnake';
 
 import { ANSWER_SESSION_CONTAINER_ID } from 'containers/App/constants';
@@ -71,10 +75,10 @@ const TlfbCalendarLayout = ({
           {(isMobilePreview || isMobile) && (
             <Box display="flex">
               <Text fontWeight="bold" fontSize="26px">
-                {selectedDay?.format('Do')},
+                {selectedDay?.format(dayNumeralFormatter)},
               </Text>
               <Text ml={5} fontSize="26px">
-                {selectedDay?.format('MMMM')}
+                {selectedDay?.format(fullMonthNameFormatter)}
               </Text>
             </Box>
           )}
