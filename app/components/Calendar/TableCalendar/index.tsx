@@ -1,6 +1,8 @@
 import React, { ReactElement } from 'react';
 import dayjs, { Dayjs } from 'dayjs';
 
+import { CalendarData } from '../types';
+
 import {
   Container,
   CalendarTable,
@@ -19,6 +21,7 @@ type TableCalendarProps = {
   isMobile: boolean;
   startDate: Dayjs;
   endDate: Dayjs;
+  calendarData: CalendarData;
 };
 
 export const TableCalendar = ({
@@ -30,6 +33,7 @@ export const TableCalendar = ({
   isMobile,
   startDate,
   endDate,
+  calendarData,
 }: TableCalendarProps) => (
   <>
     {isMobile && MonthSelectorComponent}
@@ -51,18 +55,24 @@ export const TableCalendar = ({
                 rowsNumber={dates.length}
                 mobile={isMobile}
               >
-                {week.map((day) => (
-                  <td key={day.toISOString()}>
-                    <Day
-                      onClick={(dayId) => onSelectDay(day, dayId)}
-                      active={selectedDay?.isSame(day, 'day')}
-                      day={day}
-                      unreachable={day.month() !== month}
-                      mobile={isMobile}
-                      disabled={day.isAfter(endDate) || day.isBefore(startDate)}
-                    />
-                  </td>
-                ))}
+                {week.map((day) => {
+                  const formattedDate = dayjs(day).format('DD-MM-YYYY');
+                  return (
+                    <td key={day.toISOString()}>
+                      <Day
+                        events={calendarData[formattedDate]?.events ?? []}
+                        onClick={(dayId) => onSelectDay(day, dayId)}
+                        active={selectedDay?.isSame(day, 'day')}
+                        day={day}
+                        unreachable={day.month() !== month}
+                        mobile={isMobile}
+                        disabled={
+                          day.isAfter(endDate) || day.isBefore(startDate)
+                        }
+                      />
+                    </td>
+                  );
+                })}
               </CalendarRow>
             ))}
         </tbody>

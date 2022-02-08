@@ -9,12 +9,14 @@ import Divider from 'components/Divider';
 import TableCalendar from './TableCalendar';
 import MonthSelector from './MonthSelector';
 import { Container } from './styled';
+import { CalendarData } from './types';
 
 type CalendarProps = {
   startDate?: Dayjs;
   endDate?: Dayjs;
   selectedDay?: Dayjs;
   onSelectDay?: (day: Dayjs, id: string) => void;
+  calendarData: CalendarData;
 };
 
 const IS_DESKTOP = 'IS_DESKTOP';
@@ -30,6 +32,7 @@ export const Calendar = ({
   endDate = dayjs(),
   selectedDay,
   onSelectDay,
+  calendarData,
 }: CalendarProps) => {
   const [monthDate, setMonthDate] = useState(endDate);
 
@@ -74,6 +77,7 @@ export const Calendar = ({
           isMobile={!isDesktop}
           startDate={startDate}
           endDate={endDate}
+          calendarData={calendarData}
         />
       </Container>
     </>

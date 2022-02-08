@@ -1,6 +1,7 @@
 import { createAction } from 'typesafe-actions';
 
-import { EventData, SubstanceData, SubstanceBody, DayData } from 'models/Tlfb';
+import { EventData, SubstanceData, SubstanceBody } from 'models/Tlfb';
+import { CalendarData } from 'components/Calendar/types';
 
 import {
   ADD_NEW_EVENT,
@@ -113,8 +114,7 @@ export const fetchCalendarDataRequest = createAction(
 
 export const fetchCalendarDataSuccess = createAction(
   FETCH_CALENDAR_DATA_SUCCESS,
-  (action) => (calendarData: Record<string, DayData>) =>
-    action({ calendarData }),
+  (action) => (calendarData: CalendarData) => action({ calendarData }),
 );
 
 export const fetchCalendarDataError = createAction(

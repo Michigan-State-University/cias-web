@@ -30,6 +30,7 @@ export const initialState: TlfbState = {
   loaders: {
     createEvent: false,
     createSubstance: false,
+    fetchCalendarData: false,
   },
   cache: {
     days: {},
@@ -154,6 +155,8 @@ export const tlfbReducer = (
 
       case getType(fetchCalendarDataRequest): {
         draft.errors.fetchCalendarData = false;
+        draft.loaders.fetchCalendarData = true;
+
         break;
       }
 
@@ -164,11 +167,13 @@ export const tlfbReducer = (
         state.days = calendarData;
         draft.cache.days = calendarData;
         draft.loaders.fetchCalendarData = false;
+        draft.loaders.fetchCalendarData = false;
         break;
       }
 
       case getType(fetchCalendarDataError): {
         draft.errors.fetchCalendarData = true;
+        draft.loaders.fetchCalendarData = false;
         break;
       }
     }

@@ -9,6 +9,7 @@ import { ANSWER_SESSION_CONTAINER_ID } from 'containers/App/constants';
 import Calendar from 'components/Calendar';
 import { PopoverModal } from 'components/Modal';
 import TlfbTitle from 'components/TlfbTitle';
+import { CalendarData } from 'components/Calendar/types';
 
 import { TlfbContainer } from './styled';
 
@@ -20,6 +21,7 @@ type Props = {
   tlfbConfig: CamelToSnake<TlfbConfigBody>;
   children: React.ReactNode;
   setDayId: (dayId?: string) => void;
+  calendarData: CalendarData;
 };
 
 const TlfbCalendarLayout = ({
@@ -30,6 +32,7 @@ const TlfbCalendarLayout = ({
   tlfbConfig,
   setDayId,
   smallText,
+  calendarData,
 }: Props) => {
   const [selectedDay, setSelectedDay] = useState<Dayjs>();
   const dayId = selectedDay
@@ -71,6 +74,7 @@ const TlfbCalendarLayout = ({
         onSelectDay={setSelectedDay}
         selectedDay={selectedDay}
         endDate={dayjs().subtract(1, 'day')}
+        calendarData={calendarData}
       />
     </TlfbContainer>
   );

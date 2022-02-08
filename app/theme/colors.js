@@ -1,4 +1,5 @@
 const colors = {
+  azureBlue: '#3686F0',
   jungleGreen: '#107969',
   orchid: '#C866EA',
   bluewood: '#2F3850',
