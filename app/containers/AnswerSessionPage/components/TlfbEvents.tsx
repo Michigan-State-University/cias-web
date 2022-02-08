@@ -16,16 +16,15 @@ import {
   makeSelectTlfbError,
 } from 'global/reducers/tlfb';
 import { TlfbEventsWithConfigDto as TlfbEventsWithConfig } from 'models/Question';
-
 import { themeColors } from 'theme';
 import EventCollapse from 'components/EventCollapse';
 import Box from 'components/Box';
 import Text from 'components/Text';
 import PlusCircle from 'components/Circle/PlusCircle';
 import Spinner from 'components/Spinner';
-
 import ErrorAlert from 'components/ErrorAlert';
 import Divider from 'components/Divider';
+
 import { SharedProps } from './sharedProps';
 import messages from '../messages';
 import TlfbCalendarLayout from '../layouts/TlfbCalendarLayout';
@@ -39,6 +38,7 @@ const TlfbEvents = ({
   const dispatch = useDispatch();
   const tlfbDaysData = useSelector(makeSelectTlfbDays());
   const createEventLoading = useSelector(makeSelectTlfbLoader('createEvent'));
+
   const fetchCalendarDataError = useSelector(
     makeSelectTlfbError('fetchCalendarData'),
   );
@@ -105,6 +105,7 @@ const TlfbEvents = ({
       isMobile={isMobile}
       isMobilePreview={isMobilePreview}
       setDayId={setDayId}
+      calendarData={tlfbDaysData}
     >
       <>
         <Divider mb={25} mt={20} />

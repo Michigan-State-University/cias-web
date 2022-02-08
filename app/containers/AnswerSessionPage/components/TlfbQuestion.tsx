@@ -12,6 +12,9 @@ import Radio from 'components/Radio';
 import Box from 'components/Box';
 import Divider from 'components/Divider';
 import Button from 'components/Button';
+import ErrorAlert from 'components/ErrorAlert';
+import Spinner from 'components/Spinner';
+import Circle from 'components/Circle';
 
 import {
   addNewTlfbSubstance,
@@ -23,10 +26,8 @@ import {
   makeSelectTlfbLoader,
   tlfbReducer,
 } from 'global/reducers/tlfb';
-import Spinner from 'components/Spinner';
+
 import { colors, themeColors } from 'theme';
-import ErrorAlert from 'components/ErrorAlert';
-import Circle from 'components/Circle';
 import { SharedProps } from './sharedProps';
 import messages from '../messages';
 import TlfbCalendarLayout from '../layouts/TlfbCalendarLayout';
@@ -115,6 +116,7 @@ const TlfbQuestion = ({
       isMobilePreview={isMobilePreview}
       tlfbConfig={config}
       setDayId={setDayId}
+      calendarData={tlfbDaysData}
     >
       {newSubstanceLoading && (
         <Box mx="auto">

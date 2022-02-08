@@ -1,3 +1,4 @@
+import Text from 'components/Text';
 import styled from 'styled-components';
 import { colors } from 'theme';
 
@@ -13,9 +14,10 @@ const getColor = (disabled, unreachable) => {
   return colors.bluewood;
 };
 
-const getBorder = (active, disabled) => {
+const getBorder = (active, disabled, hasEvents, mobile) => {
   if (disabled) return 'none';
   if (active) return `2px solid ${colors.surfieGreen}`;
+  if (hasEvents && mobile) return `1px solid ${colors.azureBlue}`;
   return `1px solid ${colors.linkWater}`;
 };
 
@@ -30,11 +32,15 @@ export const Container = styled.div`
   border-radius: 5px;
   box-sizing: border-box;
   height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
 
   background-color: ${({ disabled, active }) =>
     getBackgroundColor(disabled, active)};
   color: ${({ disabled, unreachable }) => getColor(disabled, unreachable)};
-  border: ${({ active, disabled }) => getBorder(active, disabled)};
+  border: ${({ active, disabled, hasEvents, mobile }) =>
+    getBorder(active, disabled, hasEvents, mobile)};
   padding: ${({ active }) => (active ? '11' : '12')}px;
 
   ${({ disabled }) => disabled && 'opacity: 0.4;'}
@@ -50,7 +56,7 @@ export const Container = styled.div`
   ${({ mobile }) =>
     mobile &&
     `
-      display: flex;
+      flex-direction: row;
       justify-content: center;
       align-items: center;
       padding: unset;
@@ -71,3 +77,24 @@ export const DayNo = styled.div`
   line-height: 16px;
   font-weight: bold;
 `;
+
+export const Dot = styled.div`
+  width: 5px;
+  height: 5px;
+  border-radius: 50%;
+  background: ${colors.azureBlue};
+
+  ${({ mobile }) =>
+    mobile &&
+    `
+    width: 7px;
+    height: 7px;
+`}
+`;
+
+export const StyledText = styled(Text).attrs({
+  textOpacity: 0.7,
+  fontSize: 11,
+  lineHeight: '11px',
+  color: colors.bluewood,
+})``;

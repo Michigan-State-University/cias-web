@@ -2,6 +2,8 @@ import styled from 'styled-components';
 import { colors } from 'theme';
 import Color from 'color';
 
+import { CALENDAR_HEIGHT } from '../constants';
+
 export const Container = styled.div`
   background-color: ${colors.white};
   box-shadow: 0px 4px 20px ${colors.selago};
@@ -48,7 +50,7 @@ export const CalendarRow = styled.tr`
     ${({ mobile, rowsNumber }) =>
       !mobile &&
       `
-        height: calc(470px / ${rowsNumber});
+        height: calc((${CALENDAR_HEIGHT} - 130px) / ${rowsNumber});
     `}
   }
 
