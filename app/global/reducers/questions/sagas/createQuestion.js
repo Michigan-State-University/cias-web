@@ -3,7 +3,7 @@ import axios from 'axios';
 import omit from 'lodash/omit';
 
 import { mapQuestionToStateObject } from 'utils/mapResponseObjects';
-import { feedbackQuestion, finishQuestion } from 'models/Session/QuestionTypes';
+import { feedbackQuestion } from 'models/Session/QuestionTypes';
 import {
   readQuestionBlockType,
   feedbackBlockType,
@@ -55,8 +55,12 @@ function* createQuestion({ payload: { question, id: sessionId } }) {
   ];
   const newQuestion = { ...question, narrator: { blocks, settings: narrator } };
 
+  const selectedQuestionGroupType = groups.find(
+    ({ id }) => id === selectedQuestion.question_group_id,
+  )?.type;
+
   const groupId =
-    selectedQuestion?.type !== finishQuestion.id
+    selectedQuestionGroupType === GroupType.PLAIN
       ? selectedQuestion.question_group_id
       : null;
 

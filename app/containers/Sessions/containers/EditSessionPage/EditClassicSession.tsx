@@ -555,7 +555,6 @@ const EditClassicSessionPage = ({
               </DragDropContext>
               {finishGroup && (
                 <QuestionListGroup
-                  noDnd
                   editingPossible={editingPossible}
                   changeGroupName={changeGroupName}
                   checkSelectedGroup={checkSelectedGroup}
