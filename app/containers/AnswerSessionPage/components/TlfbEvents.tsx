@@ -108,7 +108,7 @@ const TlfbEvents = ({
       calendarData={tlfbDaysData}
     >
       <>
-        {(isMobile || isMobilePreview) && <Divider mb={25} mt={20} />}
+        {(isMobile || isMobilePreview) && <Divider mb={24} mt={16} />}
         {selectedDayEvents.map(({ name, id }, index) => (
           <Box mb={16} key={`event-collapsable-${id}`}>
             <EventCollapse

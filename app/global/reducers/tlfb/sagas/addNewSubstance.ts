@@ -30,7 +30,7 @@ function* addNewSubstance({
       exact_date: date.toISOString(),
       user_session_id: userSessionId,
       question_group_id: questionGroupId,
-      body: { substancesConsumed: false },
+      body: { substancesConsumed: null }, // TODO overwrite with CIAS30-2074 changes
     });
 
     const newSubstance = jsonApiToObject(data, 'substance');

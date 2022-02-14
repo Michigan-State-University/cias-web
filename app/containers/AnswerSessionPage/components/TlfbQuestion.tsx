@@ -125,22 +125,22 @@ const TlfbQuestion = ({
       )}
       {!newSubstanceLoading && (
         <>
-          <Box
-            mt={selectedDayEvents?.length ? 15 : 0}
-            display="inline-flex"
-            flexWrap="wrap"
-            gap="15px"
-          >
-            {(isMobile || isMobilePreview) &&
-              selectedDayEvents?.map(({ name, id }) => (
-                <Box key={id} display="flex" align="center">
-                  {/* @ts-ignore */}
-                  <Circle bg={colors.pictonBlue} size="5px" />
-                  <Text ml={5}>{name}</Text>
+          {(isMobile || isMobilePreview) && (
+            <>
+              {Boolean(selectedDayEvents?.length) && (
+                <Box mt={15} display="inline-flex" flexWrap="wrap" gap="15px">
+                  {selectedDayEvents?.map(({ name, id }) => (
+                    <Box key={id} display="flex" align="center">
+                      {/* @ts-ignore */}
+                      <Circle bg={colors.pictonBlue} size="5px" />
+                      <Text ml={5}>{name}</Text>
+                    </Box>
+                  ))}
                 </Box>
-              ))}
-          </Box>
-          <Divider mb={25} mt={20} />
+              )}
+              <Divider mb={24} mt={16} />
+            </>
+          )}
           <Text fontWeight="bold" fontSize={16}>
             {substanceQuestion}
           </Text>
@@ -157,7 +157,7 @@ const TlfbQuestion = ({
             <Radio
               id="no-option"
               onChange={changeSelectedDaySubstances(false)}
-              checked={!selectedDaySubstance?.body.substancesConsumed}
+              checked={selectedDaySubstance?.body.substancesConsumed === false}
             >
               <Text>
                 <FormattedMessage {...globalMessages.no} />

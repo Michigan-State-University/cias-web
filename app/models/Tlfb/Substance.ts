@@ -1,5 +1,5 @@
 export type SubstanceBody = {
-  substancesConsumed: boolean;
+  substancesConsumed: Nullable<boolean>; // TODO CIAS30-2074 remove Nullable
 };
 export type SubstanceData = {
   id: number;
