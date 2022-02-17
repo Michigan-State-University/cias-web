@@ -1,87 +1,78 @@
-import React, { memo, useRef } from 'react';
-import { Dayjs } from 'dayjs';
-import { useIntl, FormattedMessage } from 'react-intl';
-import isEmpty from 'lodash/isEmpty';
+import React, { memo } from 'react';
+import { useIntl } from 'react-intl';
+
+import { colors } from 'theme';
 
 import Box from 'components/Box';
-import { EventData } from 'models/Tlfb';
-import {
-  fullDayToYearFormatter,
-  firstDayOfMonthFormatter,
-} from 'utils/formatters';
+import Tooltip from 'components/Tooltip';
+import Text from 'components/Text';
+
+import { fullDayToYearFormatter } from 'utils/formatters';
 
 import messages from '../messages';
-import { Container, DayNo, Wrapper, Dot, StyledText } from './styled';
 import { getNumberOfEventsVisible } from '../utils';
+import { EventList } from './EventList';
+import { DayCell, DayCellProps } from './DayCell';
 
-type CalendarDayType = {
-  disabled?: boolean;
-  unreachable?: boolean;
-  day: Dayjs;
-  onClick?: (id: string) => void;
-  active?: boolean;
-  mobile?: boolean;
-  events?: EventData[];
+export type CalendarDayType = {
   rowsNumber: number;
-};
+} & Pick<
+  DayCellProps,
+  | 'day'
+  | 'events'
+  | 'unreachable'
+  | 'disabled'
+  | 'active'
+  | 'onClick'
+  | 'compact'
+>;
 
 export const Day = ({
   day,
-  onClick,
   rowsNumber,
-  mobile = false,
-  disabled = false,
-  unreachable = false,
-  active = false,
+  compact,
+  active,
   events = [],
+  ...props
 }: CalendarDayType) => {
   const { formatMessage } = useIntl();
-  const ref = useRef<HTMLElement>();
-  const date = day.date();
   const id = day.format(fullDayToYearFormatter);
 
   const numberOfEventsVisible = getNumberOfEventsVisible(rowsNumber);
   const numberOfEventsHidden = events.length - numberOfEventsVisible;
+  const shouldRenderTooltip = !compact && !active && numberOfEventsHidden > 0;
 
-  const handleClick = () => (!disabled && onClick ? onClick(id) : undefined);
+  const dayContentProps: DayCellProps = {
+    day,
+    events,
+    id,
+    compact,
+    active,
+    numberOfEventsVisible,
+    numberOfEventsHidden,
+    ...props,
+  };
 
-  const dayNo = date === 1 ? day.format(firstDayOfMonthFormatter) : date;
+  if (!shouldRenderTooltip) return <DayCell {...dayContentProps} />;
 
   return (
-    <Wrapper>
-      <Container
-        ref={ref}
-        id={id}
-        disabled={disabled}
-        active={active}
-        unreachable={unreachable}
-        onClick={handleClick}
-        mobile={mobile}
-        hasEvents={!isEmpty(events)}
-      >
-        <DayNo>{dayNo}</DayNo>
-        {!mobile && (
-          <Box>
-            {events.slice(0, numberOfEventsVisible).map((event) => (
-              <Box display="flex" align="center" mt={8}>
-                <Dot />
-                <StyledText ml={4}>
-                  {event.name || formatMessage(messages.defaultEventName)}
-                </StyledText>
-              </Box>
-            ))}
-            {numberOfEventsHidden > 0 && (
-              <StyledText mt={8}>
-                <FormattedMessage
-                  values={{ count: numberOfEventsHidden }}
-                  {...messages.moreEvents}
-                />
-              </StyledText>
-            )}
-          </Box>
-        )}
-      </Container>
-    </Wrapper>
+    // @ts-ignore
+    <Tooltip
+      id={`${id}-events-tooltip`}
+      place="right"
+      stretchContent
+      backgroundColor={colors.bluewood}
+      content={
+        <Box>
+          <Text color={colors.white} fontSize={12} fontWeight="bold" mb={4}>
+            {formatMessage(messages.events)}
+          </Text>
+          <EventList events={events} textColor={colors.white} />
+        </Box>
+      }
+    >
+      <DayCell {...dayContentProps} />
+    </Tooltip>
   );
 };
 

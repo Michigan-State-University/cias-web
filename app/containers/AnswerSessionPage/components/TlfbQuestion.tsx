@@ -35,6 +35,7 @@ import TlfbCalendarLayout from '../layouts/TlfbCalendarLayout';
 const TlfbQuestion = ({
   question,
   isMobile,
+  isDesktop,
   isMobilePreview,
   userSessionId,
 }: SharedProps<TlfbQuestionWithConfig>) => {
@@ -108,6 +109,8 @@ const TlfbQuestion = ({
     );
   }
 
+  const listEvents = Boolean(selectedDayEvents?.length);
+
   return (
     <TlfbCalendarLayout
       bigText={headQuestion}
@@ -125,20 +128,27 @@ const TlfbQuestion = ({
       )}
       {!newSubstanceLoading && (
         <>
-          {(isMobile || isMobilePreview) && (
+          {(!isDesktop || isMobilePreview) && (
             <>
-              {Boolean(selectedDayEvents?.length) && (
-                <Box mt={15} display="inline-flex" flexWrap="wrap" gap="15px">
+              {listEvents && (
+                <Box
+                  mt={isMobile || isMobilePreview ? 15 : 0}
+                  display="inline-flex"
+                  flexWrap="wrap"
+                  gap="15px"
+                >
                   {selectedDayEvents?.map(({ name, id }) => (
                     <Box key={id} display="flex" align="center">
                       {/* @ts-ignore */}
-                      <Circle bg={colors.pictonBlue} size="5px" />
+                      <Circle bg={colors.azureBlue} size="5px" />
                       <Text ml={5}>{name}</Text>
                     </Box>
                   ))}
                 </Box>
               )}
-              <Divider mb={24} mt={16} />
+              {(isMobile || isMobilePreview || listEvents) && (
+                <Divider mb={24} mt={16} />
+              )}
             </>
           )}
           <Text fontWeight="bold" fontSize={16}>

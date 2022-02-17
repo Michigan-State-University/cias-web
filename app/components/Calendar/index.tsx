@@ -67,14 +67,14 @@ export const Calendar = ({
   return (
     <>
       {!isDesktop && <Divider mb={32} mt={-8} />}
-      <Container mobile={!isDesktop} ref={containerRef}>
+      <Container isDesktop={isDesktop} ref={containerRef}>
         <TableCalendar
           dates={dates}
           selectedDay={selectedDay}
           onSelectDay={handleSelectDay}
           MonthSelectorComponent={MonthSelectorComponent}
           month={monthDate.month()}
-          isMobile={!isDesktop}
+          isDesktop={isDesktop}
           startDate={startDate}
           endDate={endDate}
           calendarData={calendarData}

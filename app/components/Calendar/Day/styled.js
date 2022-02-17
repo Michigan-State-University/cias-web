@@ -14,10 +14,10 @@ const getColor = (disabled, unreachable) => {
   return colors.bluewood;
 };
 
-const getBorder = (active, disabled, hasEvents, mobile) => {
+const getBorder = (active, disabled, hasEvents, compact) => {
   if (disabled) return 'none';
   if (active) return `2px solid ${colors.surfieGreen}`;
-  if (hasEvents && mobile) return `1px solid ${colors.azureBlue}`;
+  if (hasEvents && compact) return `1px solid ${colors.azureBlue}`;
   return `1px solid ${colors.linkWater}`;
 };
 
@@ -39,8 +39,8 @@ export const Container = styled.div`
   background-color: ${({ disabled, active }) =>
     getBackgroundColor(disabled, active)};
   color: ${({ disabled, unreachable }) => getColor(disabled, unreachable)};
-  border: ${({ active, disabled, hasEvents, mobile }) =>
-    getBorder(active, disabled, hasEvents, mobile)};
+  border: ${({ active, disabled, hasEvents, compact }) =>
+    getBorder(active, disabled, hasEvents, compact)};
   padding: ${({ active }) => (active ? '11' : '12')}px;
 
   ${({ disabled }) => disabled && 'opacity: 0.4;'}
@@ -53,8 +53,8 @@ export const Container = styled.div`
       }
     `}
 
-  ${({ mobile }) =>
-    mobile &&
+  ${({ compact }) =>
+    compact &&
     `
       flex-direction: row;
       justify-content: center;
@@ -78,23 +78,12 @@ export const DayNo = styled.div`
   font-weight: bold;
 `;
 
-export const Dot = styled.div`
-  width: 5px;
-  height: 5px;
-  border-radius: 50%;
-  background: ${colors.azureBlue};
-
-  ${({ mobile }) =>
-    mobile &&
-    `
-    width: 7px;
-    height: 7px;
-`}
-`;
-
 export const StyledText = styled(Text).attrs({
   textOpacity: 0.7,
   fontSize: 11,
   lineHeight: '11px',
-  color: colors.bluewood,
-})``;
+})`
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+`;

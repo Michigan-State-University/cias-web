@@ -18,7 +18,7 @@ type TableCalendarProps = {
   onSelectDay: (day: Dayjs, id: string) => void;
   MonthSelectorComponent?: ReactElement;
   month: number;
-  isMobile: boolean;
+  isDesktop: boolean;
   startDate: Dayjs;
   endDate: Dayjs;
   calendarData: CalendarData;
@@ -30,18 +30,18 @@ export const TableCalendar = ({
   onSelectDay,
   MonthSelectorComponent,
   month,
-  isMobile,
+  isDesktop,
   startDate,
   endDate,
   calendarData,
 }: TableCalendarProps) => (
   <>
-    {isMobile && MonthSelectorComponent}
-    <Container mobile={isMobile}>
-      {!isMobile && MonthSelectorComponent}
+    {!isDesktop && MonthSelectorComponent}
+    <Container isDesktop={isDesktop}>
+      {isDesktop && MonthSelectorComponent}
       <CalendarTable>
         <thead>
-          <CalendarHeader mobile={isMobile}>
+          <CalendarHeader isDesktop={isDesktop}>
             {dayjs.weekdaysShort().map((weekday: string) => (
               <th key={weekday}>{weekday}</th>
             ))}
@@ -53,7 +53,7 @@ export const TableCalendar = ({
               <CalendarRow
                 key={`week-${index}`}
                 rowsNumber={dates.length}
-                mobile={isMobile}
+                isDesktop={isDesktop}
               >
                 {week.map((day) => {
                   const formattedDate = dayjs(day).format('DD-MM-YYYY');
@@ -66,7 +66,7 @@ export const TableCalendar = ({
                         active={selectedDay?.isSame(day, 'day')}
                         day={day}
                         unreachable={day.month() !== month}
-                        mobile={isMobile}
+                        compact={!isDesktop}
                         disabled={
                           day.isAfter(endDate) || day.isBefore(startDate)
                         }

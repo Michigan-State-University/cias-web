@@ -11,4 +11,8 @@ export default defineMessages({
     id: `${scope}.moreEvents`,
     defaultMessage: '+{count} more',
   },
+  events: {
+    id: `${scope}.events`,
+    defaultMessage: 'Events',
+  },
 });

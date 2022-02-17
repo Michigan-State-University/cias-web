@@ -9,7 +9,7 @@ Circle.propTypes = {
     PropTypes.string,
     PropTypes.object,
     PropTypes.number,
-  ]).isRequired,
+  ]),
   bg: PropTypes.any,
   color: PropTypes.any,
   size: PropTypes.any,

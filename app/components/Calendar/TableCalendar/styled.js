@@ -6,14 +6,14 @@ import { CALENDAR_HEIGHT } from '../constants';
 
 export const Container = styled.div`
   background-color: ${colors.white};
-  box-shadow: 0px 4px 20px ${colors.selago};
+  box-shadow: 0 4px 20px ${colors.selago};
   border-radius: 5px;
   width: 100%;
   padding: 24px;
   height: 100%;
 
-  ${({ mobile }) =>
-    mobile &&
+  ${({ isDesktop }) =>
+    !isDesktop &&
     `
       height: auto;
     `}
@@ -34,8 +34,8 @@ export const CalendarHeader = styled.tr`
     padding-bottom: 8px;
   }
 
-  ${({ mobile }) =>
-    mobile &&
+  ${({ isDesktop }) =>
+    !isDesktop &&
     `
       text-align: center;
 
@@ -47,8 +47,8 @@ export const CalendarHeader = styled.tr`
 
 export const CalendarRow = styled.tr`
   td {
-    ${({ mobile, rowsNumber }) =>
-      !mobile &&
+    ${({ isDesktop, rowsNumber }) =>
+      isDesktop &&
       `
         height: calc((${CALENDAR_HEIGHT} - 130px) / ${rowsNumber});
     `}

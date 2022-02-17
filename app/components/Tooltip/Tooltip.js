@@ -32,6 +32,9 @@ const Tooltip = ({
   text,
   icon,
   content,
+  place,
+  stretchContent,
+  backgroundColor,
   ...restProps
 }) => {
   const tooltipRef = useRef();
@@ -82,17 +85,27 @@ const Tooltip = ({
     [],
   );
 
+  const stretchContentStyle = stretchContent
+    ? { width: '100%', height: '100%' }
+    : {};
+
   return (
-    <Box display="flex" {...restProps} onClick={onTooltipClick}>
+    <Box
+      display="flex"
+      {...stretchContentStyle}
+      {...restProps}
+      onClick={onTooltipClick}
+    >
       <Box
         ref={tooltipRef}
         data-tip=""
         data-for={id}
         onMouseEnter={onFocusIn}
         onTouchStart={onFocusIn}
+        {...stretchContentStyle}
       >
         {icon && <Img src={icon} alt="?" />}
-        {children && <div>{children}</div>}
+        {children && <div style={stretchContentStyle}>{children}</div>}
       </Box>
 
       {shouldShowTooltip && (
@@ -106,7 +119,9 @@ const Tooltip = ({
             getContent={getContent}
             delayHide={200}
             afterHide={onFocusOut}
-            overridePosition={calculateTooltipPosition}
+            overridePosition={place ? undefined : calculateTooltipPosition}
+            place={place}
+            backgroundColor={backgroundColor}
           />
         </Portal>
       )}
@@ -121,6 +136,9 @@ Tooltip.propTypes = {
   text: PropTypes.string,
   content: PropTypes.node,
   visible: PropTypes.bool,
+  place: PropTypes.oneOf(['top', 'right', 'bottom', 'left']),
+  stretchContent: PropTypes.bool,
+  backgroundColor: PropTypes.string,
 };
 
 Tooltip.defaultProps = {

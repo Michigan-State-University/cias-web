@@ -72,7 +72,7 @@ const TlfbCalendarLayout = ({
         onClose={onClose}
         portalId={ANSWER_SESSION_CONTAINER_ID}
         forceMobile={isMobilePreview}
-        width={!isMobile ? '350px' : ''}
+        width={isMobile ? '' : '350px'}
       >
         <>
           {(isMobilePreview || isMobile) && (
