@@ -8,7 +8,7 @@ export class SectionCaseBuilder {
 
   content = '';
 
-  formulaMatch = '';
+  formulaMatch = '=';
 
   /**
    * @param  {string} id

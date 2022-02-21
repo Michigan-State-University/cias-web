@@ -13,7 +13,12 @@ const VirtualGrid = forwardRef(
   ) => {
     const { columnCount } = props;
 
-    const isItemLoaded = index => index < items.length && items[index] !== null;
+    function isItemLoaded(index) {
+      const isLoaded = index < items.length && items[index] !== null;
+
+      return isLoaded;
+    }
+
     const itemData = useMemo(() => ({ items, itemsSize: items.length }), [
       items,
     ]);
