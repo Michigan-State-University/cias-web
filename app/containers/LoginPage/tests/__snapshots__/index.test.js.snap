@@ -133,8 +133,7 @@ exports[`<LoginPage /> Should render and match the snapshot 1`] = `
             Log in
           </button>
           <div
-            class="Row-ptbd41-0 MvYuR"
-            style="margin-left: -15px; margin-right: -15px; display: flex; flex-wrap: wrap; flex-grow: 0; flex-shrink: 0; align-items: normal; justify-content: flex-start;"
+            class="Row-y1cs0u-0 gQFDhs"
             width="100%"
           >
             <div
@@ -153,9 +152,7 @@ exports[`<LoginPage /> Should render and match the snapshot 1`] = `
             />
           </div>
           <div
-            class="Row-ptbd41-0 eaFQFD"
-            mt="30"
-            style="margin-left: -15px; margin-right: -15px; display: flex; flex-wrap: wrap; flex-grow: 0; flex-shrink: 0; align-items: normal; justify-content: center;"
+            class="Row-y1cs0u-0 cHZgkR"
             width="100%"
           >
             <div

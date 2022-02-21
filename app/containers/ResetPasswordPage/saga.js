@@ -20,7 +20,7 @@ function* resetPassword({ payload: { email } }) {
     });
     yield put(resetPasswordSuccess());
   } catch (error) {
-    yield put(resetPasswordError(error.toString()));
+    yield put(resetPasswordError(error?.toString()));
   }
 }
 

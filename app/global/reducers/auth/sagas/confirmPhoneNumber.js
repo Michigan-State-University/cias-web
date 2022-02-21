@@ -49,7 +49,7 @@ export function* confirmPhoneNumber({ payload: { smsToken, onSuccess } }) {
       toastId: CONFIRM_PHONE_NUMBER_ERROR,
     });
     yield delay(1000);
-    yield put(confirmPhoneNumberError(error.toString()));
+    yield put(confirmPhoneNumberError(error?.toString()));
   }
 }
 
