@@ -15,7 +15,7 @@ export function* copySession({ payload: { sessionId } }) {
 
   try {
     yield call(axios.post, requestURL);
-    yield call(toast.info, formatMessage(messages.sessionDuplicateSuccess), {
+    yield call(toast.info, formatMessage(messages.copySuccess), {
       toastId: COPY_SESSION_SUCCESS,
     });
   } catch (error) {
