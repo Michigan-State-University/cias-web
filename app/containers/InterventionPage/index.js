@@ -80,7 +80,7 @@ export function InterventionPage({
 
   const handleFetch = (startIndex, stopIndex) => {
     const realStartIndex = Math.max(startIndex - 1, 0);
-    const realStopIndex = stopIndex - 1;
+    const realStopIndex = stopIndex;
 
     fetchInterventions({
       paginationData: {
@@ -211,7 +211,10 @@ export function InterventionPage({
           onFetchInterventions={handleFetch}
           isLoading={fetchInterventionLoading}
           filterData={filterData}
-          infiniteLoader={{ itemCount: interventionsSize }}
+          infiniteLoader={{
+            itemCount: interventionsSize,
+            minimumBatchSize: 50,
+          }}
         />
       </Box>
     </AppContainer>

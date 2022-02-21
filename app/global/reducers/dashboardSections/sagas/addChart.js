@@ -3,6 +3,7 @@ import axios from 'axios';
 
 import { jsonApiToObject } from 'utils/jsonApiMapper';
 import objectToSnakeCase from 'utils/objectToSnakeCase';
+import { colors } from 'theme';
 
 import { ADD_CHART_REQUEST } from '../constants';
 import { addChartError, addChartSuccess, selectChartAction } from '../actions';
@@ -22,6 +23,20 @@ export function* addChart({
           description,
           dashboardSectionId,
           chartType,
+          formula: {
+            payload: '',
+            patterns: [
+              {
+                match: '=',
+                label: 'Matched',
+                color: colors.heliotrope2,
+              },
+            ],
+            defaultPattern: {
+              label: 'NotMatched',
+              color: colors.mauve,
+            },
+          },
         },
       }),
     );
