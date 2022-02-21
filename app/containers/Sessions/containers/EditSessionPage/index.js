@@ -85,7 +85,6 @@ import {
 import {
   fetchInterventionsSaga,
   interventionsReducer,
-  fetchInterventionsRequest,
 } from 'global/reducers/interventions';
 import {
   copyModalReducer,
@@ -137,7 +136,6 @@ function EditSessionPage({
   changeGroupName,
   getQuestionGroups,
   session: { id: sessionId, name: sessionName },
-  fetchInterventions,
   fetchReportTemplates,
 }) {
   const [manage, setManage] = useState(false);
@@ -271,7 +269,6 @@ function EditSessionPage({
       interventionId,
     });
     getQuestionGroups(paramSessionId);
-    fetchInterventions();
     fetchReportTemplates(paramSessionId);
   }, []);
 
@@ -552,7 +549,6 @@ EditSessionPage.propTypes = {
   shareQuestionsToResearchers: PropTypes.func,
   changeGroupName: PropTypes.func,
   getQuestionGroups: PropTypes.func,
-  fetchInterventions: PropTypes.func,
   fetchReportTemplates: PropTypes.func,
   interventionStatus: PropTypes.string,
   session: PropTypes.object,
@@ -579,7 +575,6 @@ const mapDispatchToProps = {
   shareQuestionsToResearchers: shareQuestionsToResearchersRequest,
   changeGroupName: changeGroupNameRequest,
   getQuestionGroups: getQuestionGroupsRequest,
-  fetchInterventions: fetchInterventionsRequest,
   fetchReportTemplates: fetchReportTemplatesRequest,
 };
 
