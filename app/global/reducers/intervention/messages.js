@@ -70,6 +70,7 @@ export default defineMessages({
   },
   copySuccess: {
     id: `${scope}.copySuccess`,
-    defaultMessage: 'Successfully copied session',
+    defaultMessage:
+      'CIAS is copying your session. We will send you an e-mail when this process has been finished.',
   },
 });
