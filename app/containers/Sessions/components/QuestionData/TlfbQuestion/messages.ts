@@ -5,7 +5,11 @@ export const scope = 'app.containers.TlfbEvents';
 export default defineMessages({
   title: {
     id: `${scope}.title`,
-    defaultMessage: `Question Information`,
+    defaultMessage: 'Question Information',
+  },
+  substancesTitle: {
+    id: `${scope}.substancesTitle`,
+    defaultMessage: 'Substances with groups',
   },
   questionTitle: {
     id: `${scope}.questionTitle`,
@@ -31,5 +35,17 @@ export default defineMessages({
   substanceTitlePlaceholder: {
     id: `${scope}.substanceTitlePlaceholder`,
     defaultMessage: 'E.g. Did you consume any substances on that day?',
+  },
+  addNewSubstance: {
+    id: `${scope}.addNewSubstance`,
+    defaultMessage: 'Add new substance',
+  },
+  yes: {
+    id: `${scope}.yes`,
+    defaultMessage: 'Yes',
+  },
+  no: {
+    id: `${scope}.no`,
+    defaultMessage: 'No',
   },
 });
