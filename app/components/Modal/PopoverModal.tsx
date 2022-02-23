@@ -47,6 +47,7 @@ export type Props = {
   portalId?: string;
   forceMobile?: boolean;
   width?: string;
+  disableClose?: boolean;
 };
 
 const PopoverModal = ({
@@ -56,6 +57,7 @@ const PopoverModal = ({
   portalId,
   forceMobile,
   width,
+  disableClose = false,
 }: Props): JSX.Element => {
   const arrowRef = useRef<HTMLElement>();
   const [element, setElement] = useState<HTMLElement | null>();
@@ -90,7 +92,7 @@ const PopoverModal = ({
     popoverCrossAxisPlacement;
 
   const handleClose = () => {
-    if (onClose) onClose();
+    if (onClose && !disableClose) onClose();
   };
 
   // must be synchronous to properly detect outside clicks

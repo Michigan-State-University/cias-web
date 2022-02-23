@@ -3,6 +3,7 @@ import { injectReducer, injectSaga } from 'redux-injectors';
 import { useDispatch, useSelector } from 'react-redux';
 import { compose } from 'redux';
 import { FormattedMessage, useIntl } from 'react-intl';
+import { Dayjs } from 'dayjs';
 
 import {
   allTlfbSagas,
@@ -16,6 +17,8 @@ import {
   makeSelectTlfbError,
 } from 'global/reducers/tlfb';
 import { TlfbEventsWithConfigDto as TlfbEventsWithConfig } from 'models/Question';
+import { fullDayToYearFormatter } from 'utils/formatters';
+
 import { themeColors } from 'theme';
 import EventCollapse from 'components/EventCollapse';
 import Box from 'components/Box';
@@ -39,6 +42,9 @@ const TlfbEvents = ({
   const tlfbDaysData = useSelector(makeSelectTlfbDays());
   const createEventLoading = useSelector(makeSelectTlfbLoader('createEvent'));
 
+  const fetchCalendarDataLoader = useSelector(
+    makeSelectTlfbLoader('fetchCalendarData'),
+  );
   const fetchCalendarDataError = useSelector(
     makeSelectTlfbError('fetchCalendarData'),
   );
@@ -60,7 +66,10 @@ const TlfbEvents = ({
     question_group_id: questionGroupId,
   } = question;
 
-  const [dayId, setDayId] = useState<string | undefined>(undefined);
+  const [selectedDay, setSelectedDay] = useState<Dayjs>();
+  const dayId = selectedDay
+    ? selectedDay.format(fullDayToYearFormatter)
+    : undefined;
 
   useEffect(() => {
     if (userSessionId) {
@@ -104,8 +113,11 @@ const TlfbEvents = ({
       tlfbConfig={config}
       isMobile={isMobile}
       isMobilePreview={isMobilePreview}
-      setDayId={setDayId}
+      onSelectDay={setSelectedDay}
+      selectedDay={selectedDay}
+      dayId={dayId}
       calendarData={tlfbDaysData}
+      isLoading={fetchCalendarDataLoader}
     >
       <>
         {(isMobile || isMobilePreview) && <Divider mb={24} mt={16} />}

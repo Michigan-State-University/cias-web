@@ -1,5 +1,8 @@
-import React, { ReactElement } from 'react';
+import React, { memo, ReactElement } from 'react';
 import dayjs, { Dayjs } from 'dayjs';
+
+import { EventData } from 'models/Tlfb';
+import { fullDayToYearFormatter } from 'utils/formatters';
 
 import { CalendarData } from '../types';
 
@@ -22,7 +25,11 @@ type TableCalendarProps = {
   startDate: Dayjs;
   endDate: Dayjs;
   calendarData: CalendarData;
+  disableManualDayClick?: boolean;
 };
+
+// prevent rerender
+const EMPTY_ARRAY: EventData[] = [];
 
 export const TableCalendar = ({
   dates,
@@ -34,6 +41,7 @@ export const TableCalendar = ({
   startDate,
   endDate,
   calendarData,
+  disableManualDayClick,
 }: TableCalendarProps) => (
   <>
     {!isDesktop && MonthSelectorComponent}
@@ -56,20 +64,27 @@ export const TableCalendar = ({
                 isDesktop={isDesktop}
               >
                 {week.map((day) => {
-                  const formattedDate = dayjs(day).format('DD-MM-YYYY');
+                  const formattedDate = dayjs(day).format(
+                    fullDayToYearFormatter,
+                  );
+
                   return (
                     <td key={day.toISOString()}>
                       <Day
                         rowsNumber={dates.length}
-                        events={calendarData[formattedDate]?.events ?? []}
-                        onClick={(dayId) => onSelectDay(day, dayId)}
+                        events={
+                          calendarData[formattedDate]?.events ?? EMPTY_ARRAY
+                        }
+                        onClick={onSelectDay}
                         active={selectedDay?.isSame(day, 'day')}
                         day={day}
                         unreachable={day.month() !== month}
                         compact={!isDesktop}
                         disabled={
-                          day.isAfter(endDate) || day.isBefore(startDate)
+                          day.isAfter(endDate, 'day') ||
+                          day.isBefore(startDate, 'day')
                         }
+                        disableManualDayClick={disableManualDayClick}
                       />
                     </td>
                   );
@@ -82,4 +97,4 @@ export const TableCalendar = ({
   </>
 );
 
-export default TableCalendar;
+export default memo(TableCalendar);

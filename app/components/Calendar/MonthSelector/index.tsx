@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { memo } from 'react';
 import dayjs, { Dayjs } from 'dayjs';
 
 import arrowGreyLeft from 'assets/svg/arrow-grey-left.svg';
@@ -11,6 +11,7 @@ type MonthSelectorProps = {
   onSetMonth: (monthDate: Dayjs) => void;
   canGoNext?: boolean;
   canGoPrev?: boolean;
+  disabled?: boolean;
 };
 
 export const MonthSelector = ({
@@ -18,6 +19,7 @@ export const MonthSelector = ({
   onSetMonth,
   canGoNext,
   canGoPrev,
+  disabled = false,
 }: MonthSelectorProps) => {
   const setNextMonth = () => onSetMonth(monthDate.add(1, 'month'));
   const setPrevMonth = () => onSetMonth(monthDate.subtract(1, 'month'));
@@ -30,7 +32,7 @@ export const MonthSelector = ({
         <Arrow
           src={arrowGreyLeft}
           onClick={setPrevMonth}
-          disabled={!canGoPrev}
+          disabled={!canGoPrev || disabled}
           mr={15}
         />
       )}
@@ -43,7 +45,7 @@ export const MonthSelector = ({
         <Arrow
           src={arrowGreyRight}
           onClick={setNextMonth}
-          disabled={!canGoNext}
+          disabled={!canGoNext || disabled}
           ml={15}
         />
       )}
@@ -51,4 +53,4 @@ export const MonthSelector = ({
   );
 };
 
-export default MonthSelector;
+export default memo(MonthSelector);

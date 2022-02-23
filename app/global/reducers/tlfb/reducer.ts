@@ -30,6 +30,7 @@ export const initialState: TlfbState = {
   loaders: {
     createEvent: false,
     createSubstance: false,
+    editSubstance: false,
     fetchCalendarData: false,
   },
   cache: {
@@ -133,6 +134,8 @@ export const tlfbReducer = (
       }
 
       case getType(editTlfbSubstance): {
+        draft.loaders.editSubstance = true;
+
         const {
           payload: { dayKey, body },
         } = action;
@@ -144,11 +147,13 @@ export const tlfbReducer = (
       }
 
       case getType(editTlfbSubstanceSuccess): {
+        draft.loaders.editSubstance = false;
         draft.cache.days = state.days;
         break;
       }
 
       case getType(editTlfbSubstanceError): {
+        draft.loaders.editSubstance = false;
         state.days = draft.cache.days;
         break;
       }

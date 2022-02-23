@@ -20,7 +20,7 @@ import {
 import messages from '../messages';
 
 function* addNewSubstance({
-  payload: { userSessionId, dayKey, questionGroupId },
+  payload: { userSessionId, dayKey, questionGroupId, body },
 }: ReturnType<typeof addNewTlfbSubstance>) {
   const url = `/v1/tlfb/substances`;
   try {
@@ -30,7 +30,7 @@ function* addNewSubstance({
       exact_date: date.toISOString(),
       user_session_id: userSessionId,
       question_group_id: questionGroupId,
-      body: { substancesConsumed: null }, // TODO overwrite with CIAS30-2074 changes
+      body,
     });
 
     const newSubstance = jsonApiToObject(data, 'substance');

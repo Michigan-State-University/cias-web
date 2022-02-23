@@ -3,11 +3,11 @@ import { useIntl } from 'react-intl';
 
 import { colors } from 'theme';
 
+import { fullDayToYearFormatter } from 'utils/formatters';
+
 import Box from 'components/Box';
 import Tooltip from 'components/Tooltip';
 import Text from 'components/Text';
-
-import { fullDayToYearFormatter } from 'utils/formatters';
 
 import messages from '../messages';
 import { getNumberOfEventsVisible } from '../utils';
@@ -25,6 +25,7 @@ export type CalendarDayType = {
   | 'active'
   | 'onClick'
   | 'compact'
+  | 'disableManualDayClick'
 >;
 
 export const Day = ({

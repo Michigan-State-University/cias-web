@@ -22,9 +22,10 @@ export type DayCellProps = {
   disabled?: boolean;
   active?: boolean;
   compact?: boolean;
-  onClick?: (id: string) => void;
+  onClick?: (day: Dayjs, id: string) => void;
   numberOfEventsVisible: number;
   numberOfEventsHidden: number;
+  disableManualDayClick?: boolean;
 };
 
 const DayCellComponent = ({
@@ -38,11 +39,15 @@ const DayCellComponent = ({
   onClick,
   numberOfEventsVisible,
   numberOfEventsHidden,
+  disableManualDayClick,
 }: DayCellProps) => {
   const date = day.date();
   const dayNo = date === 1 ? day.format(firstDayOfMonthFormatter) : date;
 
-  const handleClick = () => (!disabled && onClick ? onClick(id) : undefined);
+  const handleClick = () =>
+    !disabled && !disableManualDayClick && onClick
+      ? onClick(day, id)
+      : undefined;
 
   return (
     <Wrapper>
@@ -54,6 +59,7 @@ const DayCellComponent = ({
         onClick={handleClick}
         compact={compact}
         hasEvents={!isEmpty(events)}
+        $notClickable={disableManualDayClick}
       >
         <DayNo>{dayNo}</DayNo>
         {!compact && (

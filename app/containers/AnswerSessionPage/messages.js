@@ -179,6 +179,10 @@ export default defineMessages({
     id: `${scope}.goToNextDay`,
     defaultMessage: 'Go to the next day',
   },
+  saveSubstance: {
+    id: `${scope}.saveSubstance`,
+    defaultMessage: 'Save',
+  },
   tlfbDataError: {
     id: `${scope}.tlfbDataError`,
     defaultMessage:

@@ -75,8 +75,13 @@ export const deleteEventError = createAction(
 export const addNewTlfbSubstance = createAction(
   ADD_NEW_SUBSTANCE_REQUEST,
   (action) =>
-    (dayKey: string, userSessionId: string, questionGroupId: string) =>
-      action({ dayKey, userSessionId, questionGroupId }),
+    (
+      dayKey: string,
+      userSessionId: string,
+      questionGroupId: string,
+      body: SubstanceBody,
+    ) =>
+      action({ dayKey, userSessionId, questionGroupId, body }),
 );
 
 export const addNewTlfbSubstanceError = createAction(

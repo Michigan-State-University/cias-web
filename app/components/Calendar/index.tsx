@@ -1,4 +1,11 @@
-import React, { useState, useMemo } from 'react';
+import React, {
+  useState,
+  useMemo,
+  memo,
+  useCallback,
+  forwardRef,
+  useImperativeHandle,
+} from 'react';
 import dayjs, { Dayjs } from 'dayjs';
 import { useContainerQuery } from 'react-container-query';
 
@@ -9,7 +16,7 @@ import Divider from 'components/Divider';
 import TableCalendar from './TableCalendar';
 import MonthSelector from './MonthSelector';
 import { Container } from './styled';
-import { CalendarData } from './types';
+import { CalendarData, CalendarRef } from './types';
 
 type CalendarProps = {
   startDate?: Dayjs;
@@ -17,6 +24,7 @@ type CalendarProps = {
   selectedDay?: Dayjs;
   onSelectDay?: (day: Dayjs, id: string) => void;
   calendarData: CalendarData;
+  disableManualDayClick?: boolean;
 };
 
 const IS_DESKTOP = 'IS_DESKTOP';
@@ -27,61 +35,75 @@ const QUERY = {
   },
 };
 
-export const Calendar = ({
-  startDate = dayjs(),
-  endDate = dayjs(),
-  selectedDay,
-  onSelectDay,
-  calendarData,
-}: CalendarProps) => {
-  const [monthDate, setMonthDate] = useState(endDate);
+export const Calendar = forwardRef<CalendarRef, CalendarProps>(
+  (
+    {
+      startDate = dayjs(),
+      endDate = dayjs(),
+      selectedDay,
+      onSelectDay,
+      calendarData,
+      disableManualDayClick = false,
+    }: CalendarProps,
+    ref,
+  ) => {
+    const [monthDate, setMonthDate] = useState(endDate);
+    useImperativeHandle(ref, () => ({
+      setMonth: setMonthDate,
+    }));
 
-  const handleSelectDay = (day: Dayjs, id: string) => {
-    if (onSelectDay) onSelectDay(day, id);
-  };
+    const handleSelectDay = useCallback(
+      (day: Dayjs, id: string) => {
+        if (onSelectDay) onSelectDay(day, id);
+      },
+      [!!onSelectDay],
+    );
 
-  const dates = getCalendarMonthDates(monthDate);
+    const dates = useMemo(() => getCalendarMonthDates(monthDate), [monthDate]);
 
-  const [containerQueryParams, containerRef] = useContainerQuery(QUERY, {
-    width: undefined,
-    height: undefined,
-  });
+    const [containerQueryParams, containerRef] = useContainerQuery(QUERY, {
+      width: undefined,
+      height: undefined,
+    });
 
-  const isDesktop = useMemo(
-    () => containerQueryParams[IS_DESKTOP],
-    [containerQueryParams],
-  );
+    const isDesktop = useMemo(
+      () => containerQueryParams[IS_DESKTOP],
+      [containerQueryParams],
+    );
 
-  const isNotLastMonth = monthDate.endOf('M').isBefore(endDate);
-  const isNotFirstMonth = monthDate.isAfter(startDate.endOf('M'));
+    const isNotLastMonth = monthDate.endOf('M').isBefore(endDate);
+    const isNotFirstMonth = monthDate.isAfter(startDate.endOf('M'));
 
-  const MonthSelectorComponent = (
-    <MonthSelector
-      monthDate={monthDate}
-      onSetMonth={setMonthDate}
-      canGoNext={isNotLastMonth}
-      canGoPrev={isNotFirstMonth}
-    />
-  );
+    const MonthSelectorComponent = (
+      <MonthSelector
+        monthDate={monthDate}
+        onSetMonth={setMonthDate}
+        canGoNext={isNotLastMonth}
+        canGoPrev={isNotFirstMonth}
+        disabled={disableManualDayClick}
+      />
+    );
 
-  return (
-    <>
-      {!isDesktop && <Divider mb={32} mt={-8} />}
-      <Container isDesktop={isDesktop} ref={containerRef}>
-        <TableCalendar
-          dates={dates}
-          selectedDay={selectedDay}
-          onSelectDay={handleSelectDay}
-          MonthSelectorComponent={MonthSelectorComponent}
-          month={monthDate.month()}
-          isDesktop={isDesktop}
-          startDate={startDate}
-          endDate={endDate}
-          calendarData={calendarData}
-        />
-      </Container>
-    </>
-  );
-};
+    return (
+      <>
+        {!isDesktop && <Divider mb={32} mt={-8} />}
+        <Container isDesktop={isDesktop} ref={containerRef}>
+          <TableCalendar
+            dates={dates}
+            selectedDay={selectedDay}
+            onSelectDay={handleSelectDay}
+            MonthSelectorComponent={MonthSelectorComponent}
+            month={monthDate.month()}
+            isDesktop={isDesktop}
+            startDate={startDate}
+            endDate={endDate}
+            calendarData={calendarData}
+            disableManualDayClick={disableManualDayClick}
+          />
+        </Container>
+      </>
+    );
+  },
+);
 
-export default Calendar;
+export default memo(Calendar);

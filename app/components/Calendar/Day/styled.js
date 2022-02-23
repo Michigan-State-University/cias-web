@@ -1,5 +1,5 @@
 import Text from 'components/Text';
-import styled from 'styled-components';
+import styled, { css } from 'styled-components';
 import { colors } from 'theme';
 
 const getBackgroundColor = (disabled, active) => {
@@ -51,6 +51,12 @@ export const Container = styled.div`
       &:hover {
         filter: drop-shadow(0 0 80px ${colors.selago});
       }
+    `}
+
+  ${({ $notClickable }) =>
+    $notClickable &&
+    css`
+      cursor: not-allowed;
     `}
 
   ${({ compact }) =>
