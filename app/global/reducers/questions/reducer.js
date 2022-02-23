@@ -70,6 +70,7 @@ import {
   COPY_QUESTIONS_SUCCESS,
   COPY_QUESTIONS_REQUEST,
   COPY_QUESTIONS_ERROR,
+  GET_QUESTION_GROUPS_REQUEST,
 } from '../questionGroups/constants';
 
 export const initialState = {
@@ -90,6 +91,11 @@ export const initialState = {
 export const questionsReducer = (state = initialState, action) =>
   produce(state, draft => {
     switch (action.type) {
+      case GET_QUESTION_GROUPS_REQUEST:
+        draft.questions = [];
+        draft.cache.questions = [];
+        break;
+
       case SELECT_QUESTION:
         draft.selectedQuestion = action.payload.index;
         break;
