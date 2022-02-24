@@ -42,40 +42,45 @@ function* submitAnswersAsync({
   const answers = yield select(makeSelectAnswers());
   const { answerBody } = answers[answerId];
   let data = map(answerBody, singleBody => omit(singleBody, 'index')); // index is needed to remember the selected answers, but useless in request
-  if (data.length || !required) {
-    if (!data.length) {
-      data = [
-        {
-          value: '',
-          var: '',
-        },
-      ];
+
+  try {
+    if (data.length || !required) {
+      if (!data.length) {
+        data = [
+          {
+            value: '',
+            var: '',
+          },
+        ];
+      }
+
+      if (skipped)
+        data = [
+          {
+            value: '',
+            var: '',
+          },
+        ];
+
+      const type = questionType.replace('Question', 'Answer');
+
+      yield axios.post(
+        `/v1/user_sessions/${userSessionId}/answers`,
+        objectToSnakeCase({
+          answer: { type, body: { data } },
+          questionId: answerId,
+          skipped,
+        }),
+      );
+
+      yield put(submitAnswerSuccess(answerId));
+
+      yield put(nextQuestionRequest(userSessionId));
+    } else {
+      throw new Error('Choose answer');
     }
-
-    if (skipped)
-      data = [
-        {
-          value: '',
-          var: '',
-        },
-      ];
-
-    const type = questionType.replace('Question', 'Answer');
-
-    yield axios.post(
-      `/v1/user_sessions/${userSessionId}/answers`,
-      objectToSnakeCase({
-        answer: { type, body: { data } },
-        questionId: answerId,
-        skipped,
-      }),
-    );
-
-    yield put(submitAnswerSuccess(answerId));
-
-    yield put(nextQuestionRequest(userSessionId));
-  } else {
-    yield put(submitAnswerFailure(answerId, 'Choose answer'));
+  } catch (error) {
+    yield put(submitAnswerFailure(answerId, error?.toString()));
   }
 }
 

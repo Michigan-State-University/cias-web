@@ -25,7 +25,7 @@ export function* editUser({ payload }) {
     yield call(LocalStorageService.updateState, { user: pickedUser });
     yield put(editUserSuccess(pickedUser));
   } catch (error) {
-    yield call(toast.error, error.toString(), {
+    yield call(toast.error, error?.toString(), {
       toastId: EDIT_USER_ERROR,
     });
     yield put(editUserError(error));

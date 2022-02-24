@@ -16,6 +16,7 @@ const InfiniteLoader = forwardRef(
         ref={ref}
         loadMoreItems={handleLoadMoreItems}
         itemCount={Number.MAX_SAFE_INTEGER}
+        minimumBatchSize={50}
         {...props}
       >
         {children}

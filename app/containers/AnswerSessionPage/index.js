@@ -353,7 +353,11 @@ export function AnswerSessionPage({
     };
 
     const { [currentQuestionId]: answer } = answers;
-    const answerBody = answers[currentQuestionId]?.answerBody ?? [];
+    const answerBody = answer?.answerBody ?? [];
+
+    const isLoading =
+      currentQuestion.loading || nextQuestionLoading || answer?.loading;
+    const skipQuestionButtonDisabled = required || isLoading;
 
     const isAnswered = () =>
       answer &&
@@ -382,7 +386,6 @@ export function AnswerSessionPage({
 
     const shouldRenderSkipQuestionButton =
       !isLastScreen && !NOT_SKIPABLE_QUESTIONS.includes(type);
-    const skipQuestionButtonDisabled = required;
 
     const shouldRenderContinueButton =
       !isLastScreen &&
@@ -412,7 +415,7 @@ export function AnswerSessionPage({
                 disabled={isButtonDisabled()}
                 margin={20}
                 width="180px"
-                loading={currentQuestion.loading || nextQuestionLoading}
+                loading={isLoading}
                 onClick={() => saveAnswer(false)}
                 title={formatMessage(messages.nextQuestion)}
               />

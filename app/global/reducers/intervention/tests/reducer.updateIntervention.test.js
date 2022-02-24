@@ -91,7 +91,7 @@ describe('intervention reducer', () => {
     const session = createSession('formula.patterns', [
       mockPattern,
       {
-        match: '',
+        match: '=',
         target: [{ type: 'Session', id: '', probability: '100' }],
       },
     ]);

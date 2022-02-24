@@ -5,7 +5,6 @@ import {
   FETCH_INTERVENTIONS_ERROR,
   FETCH_INTERVENTIONS_SUCCESS,
   COPY_INTERVENTION_REQUEST,
-  COPY_INTERVENTION_SUCCESS,
   ARCHIVE_INTERVENTION_REQUEST,
   ARCHIVE_INTERVENTION_SUCCESS,
   ARCHIVE_INTERVENTION_ERROR,
@@ -30,8 +29,6 @@ export const fetchInterventionsError = error =>
 
 export const copyInterventionRequest = payload =>
   actionBuilder(COPY_INTERVENTION_REQUEST, payload);
-export const copyInterventionSuccess = intervention =>
-  actionBuilder(COPY_INTERVENTION_SUCCESS, { intervention });
 
 export const archiveInterventionRequest = interventionId =>
   actionBuilder(ARCHIVE_INTERVENTION_REQUEST, { interventionId });

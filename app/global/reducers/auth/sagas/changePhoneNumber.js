@@ -11,7 +11,7 @@ export function* changePhoneNumber({
   try {
     yield put(changePhoneNumberSuccess({ phoneNumber }));
   } catch (error) {
-    yield put(changePhoneNumberError(error.toString()));
+    yield put(changePhoneNumberError(error?.toString()));
   }
 }
 
