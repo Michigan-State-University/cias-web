@@ -4,12 +4,20 @@
  *
  */
 
-import React, { memo } from 'react';
-import PropTypes from 'prop-types';
+import React, { memo, ReactElement } from 'react';
 import { useField } from 'formik';
 
 import InputComponent from './InputComponent';
 import FormikHookInput from './FormikHookInput';
+
+type FormikInputType = {
+  formikKey: string;
+  placeholder?: string;
+  type?: string;
+  label?: string;
+  inputProps?: React.HTMLProps<HTMLInputElement>;
+  children?: ReactElement;
+} & Record<string, unknown>;
 
 function FormikInput({
   formikKey,
@@ -19,7 +27,7 @@ function FormikInput({
   inputProps,
   children,
   ...columnStyleProps
-}) {
+}: FormikInputType) {
   const [field, meta] = useField(formikKey);
   const { value, onBlur, onChange } = field;
   const { error, touched } = meta;
@@ -43,15 +51,6 @@ function FormikInput({
     </InputComponent>
   );
 }
-
-FormikInput.propTypes = {
-  formikKey: PropTypes.string.isRequired,
-  placeholder: PropTypes.string.isRequired,
-  type: PropTypes.string,
-  label: PropTypes.string,
-  inputProps: PropTypes.object,
-  children: PropTypes.node,
-};
 
 export { FormikHookInput };
 export default memo(FormikInput);

@@ -4,8 +4,7 @@
  *
  */
 
-import React, { memo } from 'react';
-import PropTypes from 'prop-types';
+import React, { memo, ReactElement } from 'react';
 
 import { Input } from 'components/Input';
 import Text from 'components/Text';
@@ -13,6 +12,21 @@ import Column from 'components/Column';
 
 import Row from 'components/Row';
 import { ErrorText } from './styled';
+
+type InputComponentType = {
+  id?: string;
+  children?: ReactElement;
+  error?: string;
+  hasError?: boolean;
+  inputProps?: React.HTMLProps<HTMLInputElement>;
+  label?: string;
+  name?: string;
+  onBlur?: (e: React.FocusEvent<HTMLInputElement>) => void;
+  onChange?: (e: React.ChangeEvent<HTMLInputElement>) => void;
+  placeholder?: string;
+  type?: string;
+  value?: string | number;
+};
 
 function InputComponent({
   id,
@@ -28,7 +42,7 @@ function InputComponent({
   type,
   value,
   ...columnStyleProps
-}) {
+}: InputComponentType) {
   return (
     <Column {...columnStyleProps}>
       {label && (
@@ -54,24 +68,9 @@ function InputComponent({
         />
         {children}
       </Row>
-      {hasError && <ErrorText>{error.toString()}</ErrorText>}
+      {hasError && <ErrorText>{error?.toString()}</ErrorText>}
     </Column>
   );
 }
-
-InputComponent.propTypes = {
-  children: PropTypes.node,
-  error: PropTypes.string,
-  hasError: PropTypes.bool,
-  inputProps: PropTypes.object,
-  label: PropTypes.string,
-  id: PropTypes.string,
-  name: PropTypes.string,
-  onBlur: PropTypes.func,
-  onChange: PropTypes.func,
-  placeholder: PropTypes.string.isRequired,
-  type: PropTypes.string,
-  value: PropTypes.string,
-};
 
 export default memo(InputComponent);

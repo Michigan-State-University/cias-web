@@ -8,6 +8,7 @@ exports[`<PreviewButton /> Should render and match the snapshot 1`] = `
   cursor: pointer;
   border: none;
   outline: none;
+  font-weight: bold;
   background-color: #FFFFFF;
   color: #B727EA;
   border: 1px solid #B727EA;

@@ -38,10 +38,17 @@ export interface TlfbEventsPayload {
   screenQuestion: string;
 }
 
+export type Substance = {
+  name: string;
+  variable: string;
+};
+
 export interface TlfbQuestionPayload {
   questionTitle: string;
   headQuestion: string;
   substanceQuestion: string;
+  substancesWithGroup: boolean;
+  substances: Substance[];
 }
 export interface TlfbConfigPayload {
   daysCount: string;

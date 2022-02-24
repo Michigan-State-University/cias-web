@@ -4,11 +4,9 @@ import { useDispatch, useSelector } from 'react-redux';
 
 import { themeColors } from 'theme';
 
-import {
-  makeSelectSelectedQuestion,
-  updateQuestionData,
-} from 'global/reducers/questions';
-import { TlfbQuestionDTO } from 'models/Question';
+import { makeSelectSelectedQuestion } from 'global/reducers/questions';
+import { TlfbQuestionDTO, Substance } from 'models/Question';
+import globalMessages from 'global/i18n/globalMessages';
 
 import Box from 'components/Box';
 import Radio from 'components/Radio';
@@ -24,7 +22,13 @@ import {
   UPDATE_HEAD_QUESTION,
   UPDATE_SUBSTANCE_QUESTION,
 } from './constants';
+import {
+  updateQuestion,
+  updateSubstancesWithGroupToggle,
+  addSubstance,
+} from './actions';
 import messages from './messages';
+import NewSubstanceModal from './NewSubstanceModal';
 
 const TlfbQuestion = () => {
   const { formatMessage } = useIntl();
@@ -32,12 +36,19 @@ const TlfbQuestion = () => {
   const currentQuestion = useSelector<unknown, TlfbQuestionDTO>(
     makeSelectSelectedQuestion(),
   );
-  const [isSubstancesWithGroups, setIsSubstancesWithGroups] = useState(true);
+  const [isSubstanceModalVisible, setIsSubstanceModalVisible] = useState(false);
 
-  const dispatchAction = (action: any) => dispatch(updateQuestionData(action));
+  const openModal = () => setIsSubstanceModalVisible(true);
+  const closeModal = () => setIsSubstanceModalVisible(false);
 
-  const onUpdate = (type: string) => (value: string) =>
-    dispatchAction({ type, data: { value } });
+  const onUpdateQuestion = (type: string) => (value: string) =>
+    dispatch(updateQuestion(value, type));
+
+  const onUpdateSubstancesWithGroupToggle = (option: boolean) => () =>
+    dispatch(updateSubstancesWithGroupToggle(option));
+
+  const onAddSubstance = (substance: Substance) =>
+    dispatch(addSubstance(substance));
 
   const {
     body: {
@@ -47,6 +58,7 @@ const TlfbQuestion = () => {
             question_title: questionTitle,
             head_question: headQuestion,
             substance_question: substanceQuestion,
+            substances_with_group: substancesWithGroup,
           },
         },
       ],
@@ -64,7 +76,7 @@ const TlfbQuestion = () => {
           placeholder={formatMessage(messages.questionTitlePlaceholder)}
           value={questionTitle}
           type="singleline"
-          onCheck={onUpdate(UPDATE_QUESTION_TITLE)}
+          onCheck={onUpdateQuestion(UPDATE_QUESTION_TITLE)}
           id="question-title"
           transparent={false}
           height={48}
@@ -77,7 +89,7 @@ const TlfbQuestion = () => {
           placeholder={formatMessage(messages.headTitlePlaceholder)}
           value={headQuestion}
           type="singleline"
-          onCheck={onUpdate(UPDATE_HEAD_QUESTION)}
+          onCheck={onUpdateQuestion(UPDATE_HEAD_QUESTION)}
           id="head-question"
           transparent={false}
           height={48}
@@ -90,7 +102,7 @@ const TlfbQuestion = () => {
           placeholder={formatMessage(messages.substanceTitlePlaceholder)}
           value={substanceQuestion}
           type="singleline"
-          onCheck={onUpdate(UPDATE_SUBSTANCE_QUESTION)}
+          onCheck={onUpdateQuestion(UPDATE_SUBSTANCE_QUESTION)}
           id="substance-question"
           transparent={false}
           height={48}
@@ -105,25 +117,25 @@ const TlfbQuestion = () => {
         <Box mr={24}>
           <Radio
             id="yes-subtances-with-groups-radio"
-            checked={isSubstancesWithGroups}
-            onChange={(state) => setIsSubstancesWithGroups(state)}
+            checked={substancesWithGroup}
+            onChange={onUpdateSubstancesWithGroupToggle(true)}
           >
-            <Text>{formatMessage(messages.yes)}</Text>
+            <Text>{formatMessage(globalMessages.yes)}</Text>
           </Radio>
         </Box>
         <Box>
           <Radio
             id="no-subtances-with-groups-radio"
-            checked={!isSubstancesWithGroups}
-            onChange={(state) => setIsSubstancesWithGroups(!state)}
+            checked={!substancesWithGroup}
+            onChange={onUpdateSubstancesWithGroupToggle(false)}
           >
-            <Text>{formatMessage(messages.no)}</Text>
+            <Text>{formatMessage(globalMessages.no)}</Text>
           </Radio>
         </Box>
       </Row>
 
       <Row>
-        <HoverableBox px={8} py={8} ml={-8} onClick={() => {}}>
+        <HoverableBox px={8} py={8} ml={-8} onClick={openModal}>
           <Box>
             <Row align="center">
               <PlusCircle mr={12} />
@@ -134,6 +146,13 @@ const TlfbQuestion = () => {
           </Box>
         </HoverableBox>
       </Row>
+
+      <NewSubstanceModal
+        visible={isSubstanceModalVisible}
+        onClose={closeModal}
+        loading={false}
+        onSubmitForm={onAddSubstance}
+      />
     </Box>
   );
 };

@@ -87,6 +87,8 @@ export const getQuestionDataByType = (
               question_title: '',
               head_question: '',
               substance_question: '',
+              substances_with_group: false,
+              substances: [],
             },
           },
         ],

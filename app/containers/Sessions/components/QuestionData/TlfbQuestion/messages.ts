@@ -40,12 +40,44 @@ export default defineMessages({
     id: `${scope}.addNewSubstance`,
     defaultMessage: 'Add new substance',
   },
-  yes: {
-    id: `${scope}.yes`,
-    defaultMessage: 'Yes',
+  editSubstance: {
+    id: `${scope}.editSubstance`,
+    defaultMessage: 'Edit the substance',
   },
-  no: {
-    id: `${scope}.no`,
-    defaultMessage: 'No',
+  addNewSubstanceDescription: {
+    id: `${scope}.addNewSubstanceDescription`,
+    defaultMessage: 'Type the name of the substance and its variable',
+  },
+  substanceName: {
+    id: `${scope}.substanceName`,
+    defaultMessage: 'Substance name',
+  },
+  substanceNamePlaceholder: {
+    id: `${scope}.substanceNamePlaceholder`,
+    defaultMessage: 'e.g. Alcohol',
+  },
+  substanceVariable: {
+    id: `${scope}.substanceVariable`,
+    defaultMessage: 'Substance variable',
+  },
+  substanceVariablePlaceholder: {
+    id: `${scope}.substanceVariablePlaceholder`,
+    defaultMessage: 'e.g. alcohol',
+  },
+  cancel: {
+    id: `${scope}.cancel`,
+    defaultMessage: 'Cancel',
+  },
+  addSubstance: {
+    id: `${scope}.addSubstance`,
+    defaultMessage: 'Add substance',
+  },
+  variableRequired: {
+    id: `${scope}.variableRequired`,
+    defaultMessage: 'Variable is required',
+  },
+  nameRequired: {
+    id: `${scope}.nameRequired`,
+    defaultMessage: 'Name is required',
   },
 });

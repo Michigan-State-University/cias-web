@@ -1,15 +1,34 @@
 import React from 'react';
-import PropTypes from 'prop-types';
 import { colors } from 'theme';
 
 import Spinner from 'components/Spinner';
 import { StyledButton } from './StyledButton';
 
-const Button = React.forwardRef(
-  ({ loading, title, children, disabled, inverted, ...props }, ref) => (
+type ButtonProps = {
+  title: string;
+  loading?: boolean;
+  disabled?: boolean;
+  inverted?: boolean;
+  light?: boolean;
+} & Record<string, unknown>;
+
+const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
+  (
+    {
+      loading,
+      title,
+      children,
+      disabled,
+      inverted = false,
+      light = false,
+      ...props
+    }: ButtonProps,
+    ref,
+  ) => (
     <StyledButton
       disabled={disabled || loading}
       inverted={inverted}
+      light={light}
       {...props}
       ref={ref}
     >
@@ -18,14 +37,6 @@ const Button = React.forwardRef(
     </StyledButton>
   ),
 );
-
-Button.propTypes = {
-  title: PropTypes.string,
-  loading: PropTypes.bool,
-  inverted: PropTypes.bool,
-  children: PropTypes.node,
-  disabled: PropTypes.bool,
-};
 
 export { Button };
 

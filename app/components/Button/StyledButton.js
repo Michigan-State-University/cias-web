@@ -1,6 +1,8 @@
 import styled, { css } from 'styled-components';
 import PropTypes from 'prop-types';
 import { colors, themeColors } from 'theme';
+import Color from 'color';
+
 import {
   margin,
   border,
@@ -20,6 +22,20 @@ const basicStyles = (outlined, color, textColor) => css`
   color: ${textColor ?? colors.white};
   border: 1px solid transparent;
 `;
+
+const lightStyles = (outlined, color, textColor) => css`
+  background-color: ${outlined
+    ? colors.white
+    : Color(themeColors.primary).alpha(0.1).hexa() ?? color};
+  color: ${textColor ?? themeColors.primary};
+  border: 1px solid transparent;
+`;
+
+const getStyles = (inverted, light, outlined, color, textColor) => {
+  if (light) return lightStyles(outlined, color, textColor);
+  if (inverted) return invertedStyles(color, textColor);
+  return basicStyles(outlined, color, textColor);
+};
 
 const getHoverStyles = (props) => {
   if (props.hoverable && !props.disabled) {
@@ -51,10 +67,9 @@ export const StyledButton = styled.button`
   cursor: pointer;
   border: none;
   outline: none;
-  ${(props) =>
-    props.inverted
-      ? invertedStyles(props.color, props.textColor)
-      : basicStyles(props.outlined, props.color, props.textColor)};
+  ${({ disabled }) => !disabled && 'font-weight: bold;'}
+  ${({ inverted, light, outlined, color, textColor }) =>
+    getStyles(inverted, light, outlined, color, textColor)}
   ${(props) => props.disabled && getDisabledStyles(props.inverted)};
   transition: background-color 300ms ease, color 300ms ease, border 300ms ease;
   &:hover {
