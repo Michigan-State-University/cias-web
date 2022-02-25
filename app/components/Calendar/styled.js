@@ -1,4 +1,4 @@
-import styled from 'styled-components';
+import styled, { css } from 'styled-components';
 
 import { CALENDAR_HEIGHT } from './constants';
 
@@ -7,7 +7,7 @@ export const Container = styled.div`
 
   ${({ isDesktop }) =>
     !isDesktop &&
-    `
+    css`
       height: auto;
     `}
 `;

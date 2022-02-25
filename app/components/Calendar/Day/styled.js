@@ -1,6 +1,8 @@
-import Text from 'components/Text';
 import styled, { css } from 'styled-components';
+
 import { colors } from 'theme';
+
+import Text from 'components/Text';
 
 const getBackgroundColor = (disabled, active) => {
   if (disabled) return colors.babyBlue;
@@ -43,11 +45,16 @@ export const Container = styled.div`
     getBorder(active, disabled, hasEvents, compact)};
   padding: ${({ active }) => (active ? '11' : '12')}px;
 
-  ${({ disabled }) => disabled && 'opacity: 0.4;'}
+  ${({ disabled }) =>
+    disabled &&
+    css`
+      opacity: 0.4;
+    `}
   ${({ disabled }) =>
     !disabled &&
-    `
+    css`
       cursor: pointer;
+
       &:hover {
         filter: drop-shadow(0 0 80px ${colors.selago});
       }
@@ -61,7 +68,7 @@ export const Container = styled.div`
 
   ${({ compact }) =>
     compact &&
-    `
+    css`
       flex-direction: row;
       justify-content: center;
       align-items: center;
@@ -74,8 +81,7 @@ export const Container = styled.div`
         display: block;
         padding-bottom: 100%;
       }
-
-  `}
+    `}
 `;
 
 export const DayNo = styled.div`
@@ -87,9 +93,13 @@ export const DayNo = styled.div`
 export const StyledText = styled(Text).attrs({
   textOpacity: 0.7,
   fontSize: 11,
-  lineHeight: '11px',
+  lineHeight: 1,
 })`
-  overflow: hidden;
-  white-space: nowrap;
-  text-overflow: ellipsis;
+  ${({ wrap }) =>
+    !wrap &&
+    css`
+      overflow: hidden;
+      white-space: nowrap;
+      text-overflow: ellipsis;
+    `}
 `;

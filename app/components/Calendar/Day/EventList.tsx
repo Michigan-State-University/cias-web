@@ -14,9 +14,10 @@ import { StyledText } from './styled';
 export type EventListProps = {
   events: EventData[];
   textColor?: CSSProperties['color'];
+  wrap?: boolean;
 };
 
-export const EventList = ({ events, textColor }: EventListProps) => {
+export const EventList = ({ events, textColor, wrap }: EventListProps) => {
   const { formatMessage } = useIntl();
 
   return (
@@ -24,8 +25,8 @@ export const EventList = ({ events, textColor }: EventListProps) => {
       {events.map(({ name, id }) => (
         <Box key={id} display="flex" align="center" mt={8}>
           {/* @ts-ignore */}
-          <Circle bg={colors.azureBlue} size="5px" />
-          <StyledText ml={4} color={textColor}>
+          <Circle bg={colors.azureBlue} size="5px" doNotShrink />
+          <StyledText ml={4} color={textColor} wrap={wrap}>
             {name || formatMessage(messages.defaultEventName)}
           </StyledText>
         </Box>

@@ -68,7 +68,7 @@ export const Day = ({
           <Text color={colors.white} fontSize={12} fontWeight="bold" mb={4}>
             {formatMessage(messages.events)}
           </Text>
-          <EventList events={events} textColor={colors.white} />
+          <EventList events={events} textColor={colors.white} wrap />
         </Box>
       }
     >
