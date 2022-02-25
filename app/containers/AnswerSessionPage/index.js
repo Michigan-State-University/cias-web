@@ -91,7 +91,7 @@ import {
 } from './actions';
 import BranchingScreen from './components/BranchingScreen';
 import {
-  NOT_SKIPABLE_QUESTIONS,
+  NOT_SKIPPABLE_QUESTIONS,
   FULL_SIZE_QUESTIONS,
   CONFIRMABLE_QUESTIONS,
 } from './constants';
@@ -433,7 +433,7 @@ export function AnswerSessionPage({
     const shouldRenderSkipQuestionButton =
       userSessionType !== UserSessionType.CAT_MH &&
       !isLastScreen &&
-      !NOT_SKIPABLE_QUESTIONS.includes(type);
+      !NOT_SKIPPABLE_QUESTIONS.includes(type);
     const skipQuestionButtonDisabled = required;
 
     const shouldRenderContinueButton =

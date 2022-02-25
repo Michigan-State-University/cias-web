@@ -77,10 +77,12 @@ export const NAME_QUESTION_NAME_ID = 'name-question-name';
 
 export const NAME_QUESTION_SPELL_NAME_ID = 'name-question-spell-name';
 
-export const NOT_SKIPABLE_QUESTIONS = [
+export const NOT_SKIPPABLE_QUESTIONS = [
   QuestionTypes.FEEDBACK,
   QuestionTypes.INFORMATION,
   QuestionTypes.EXTERNAL_LINK,
+  QuestionTypes.TLFB_EVENTS,
+  QuestionTypes.TLFB_QUESTION,
 ];
 
 export const FULL_SIZE_QUESTIONS = [
