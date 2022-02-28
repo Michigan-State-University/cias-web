@@ -173,7 +173,7 @@ export default defineMessages({
   },
   addEvent: {
     id: `${scope}.addEvent`,
-    defaultMessage: 'Add event',
+    defaultMessage: 'Add another event',
   },
   goToNextDay: {
     id: `${scope}.goToNextDay`,

@@ -11,7 +11,7 @@ type Props = {
   stroke?: string;
   onClick: () => void;
   loading?: boolean;
-  disabled: boolean;
+  disabled?: boolean;
 } & Record<string, unknown>;
 
 const ImageButton = React.forwardRef<HTMLElement, Props>(

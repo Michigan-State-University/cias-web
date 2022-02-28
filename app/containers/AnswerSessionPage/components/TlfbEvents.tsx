@@ -20,7 +20,7 @@ import { TlfbEventsWithConfigDto as TlfbEventsWithConfig } from 'models/Question
 import { fullDayToYearFormatter } from 'utils/formatters';
 
 import { themeColors } from 'theme';
-import EventCollapse from 'components/EventCollapse';
+import EventInput from 'components/EventInput';
 import Box from 'components/Box';
 import Text from 'components/Text';
 import PlusCircle from 'components/Circle/PlusCircle';
@@ -121,12 +121,11 @@ const TlfbEvents = ({
     >
       <>
         {(isMobile || isMobilePreview) && <Divider mb={24} mt={16} />}
-        {selectedDayEvents.map(({ name, id }, index) => (
-          <Box mb={16} key={`event-collapsable-${id}`}>
-            <EventCollapse
+        {selectedDayEvents.map(({ name, id }) => (
+          <Box mb={16} key={`event-input-${id}`}>
+            <EventInput
               onDelete={deleteEvent(id)}
               onInputBlur={(value: string) => updateEventName(value, id)}
-              title={`Event ${index + 1}`}
               eventName={name}
             />
           </Box>

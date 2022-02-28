@@ -77,6 +77,7 @@ const colors = {
   babyBlue: '#D2E0F1',
   asparagus: '#6B9E59',
   pictonBlue: '#3686F0',
+  coolGrey: '#8B92A1',
 };
 
 const themeColors = {
