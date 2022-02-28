@@ -84,6 +84,7 @@ const NewSubstanceModal = ({
         validationSchema={validationSchema(formatMessage)}
         initialValues={initialValues(substance)}
         onSubmit={onSubmit}
+        enableReinitialize
       >
         {({ handleSubmit, resetForm, isValid }) => {
           const inputProps = {
@@ -148,7 +149,9 @@ const NewSubstanceModal = ({
                       mr={16}
                       disabled={!isValid}
                     >
-                      <FormattedMessage {...messages.addSubstance} />
+                      <FormattedMessage
+                        {...messages[editMode ? 'saveChanges' : 'addSubstance']}
+                      />
                     </Button>
                     <Button
                       data-testid="close-button"

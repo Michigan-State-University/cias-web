@@ -7,6 +7,7 @@ import {
   UPDATE_SUBSTANCES_WITH_GROUP_TOGGLE,
   ADD_SUBSTANCE,
   EDIT_SUBSTANCE,
+  REMOVE_SUBSTANCE,
 } from './constants';
 
 /* eslint-disable default-case, no-param-reassign */
@@ -63,6 +64,17 @@ const tlfbQuestionsReducer = (
         data: { substance, substanceId },
       } = payload as any;
       question.body.data[0].payload.substances[substanceId] = substance;
+      return question;
+    }
+
+    case REMOVE_SUBSTANCE: {
+      const {
+        data: { substanceId },
+      } = payload as any;
+      question.body.data[0].payload.substances = [
+        ...question.body.data[0].payload.substances.slice(0, substanceId),
+        ...question.body.data[0].payload.substances.slice(substanceId + 1),
+      ];
       return question;
     }
 

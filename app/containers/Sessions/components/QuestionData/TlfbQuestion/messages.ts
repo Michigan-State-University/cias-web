@@ -80,4 +80,8 @@ export default defineMessages({
     id: `${scope}.nameRequired`,
     defaultMessage: 'Name is required',
   },
+  saveChanges: {
+    id: `${scope}.saveChanges`,
+    defaultMessage: 'Save changes',
+  },
 });

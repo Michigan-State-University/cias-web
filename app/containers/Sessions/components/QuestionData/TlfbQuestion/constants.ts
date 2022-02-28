@@ -8,3 +8,5 @@ export const UPDATE_SUBSTANCES_WITH_GROUP_TOGGLE =
   'app/EditSessionPage/TlfbQuestion/UPDATE_SUBSTANCES_WITH_GROUP_TOGGLE';
 export const ADD_SUBSTANCE = 'app/EditSessionPage/TlfbQuestion/ADD_SUBSTANCE';
 export const EDIT_SUBSTANCE = 'app/EditSessionPage/TlfbQuestion/EDIT_SUBSTANCE';
+export const REMOVE_SUBSTANCE =
+  'app/EditSessionPage/TlfbQuestion/REMOVE_SUBSTANCE';

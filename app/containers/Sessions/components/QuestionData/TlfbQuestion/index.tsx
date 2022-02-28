@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { useIntl } from 'react-intl';
 import { useDispatch, useSelector } from 'react-redux';
+import isNil from 'lodash/isNil';
 
 import { themeColors } from 'theme';
 
@@ -16,6 +17,7 @@ import PlusCircle from 'components/Circle/PlusCircle';
 import Row from 'components/Row';
 import H2 from 'components/H2';
 import Text from 'components/Text';
+import BoxTable from 'components/BoxTable';
 
 import {
   UPDATE_QUESTION_TITLE,
@@ -26,6 +28,8 @@ import {
   updateQuestion,
   updateSubstancesWithGroupToggle,
   addSubstance,
+  removeSubstance,
+  editSubstance,
 } from './actions';
 import messages from './messages';
 import NewSubstanceModal from './NewSubstanceModal';
@@ -37,9 +41,14 @@ const TlfbQuestion = () => {
     makeSelectSelectedQuestion(),
   );
   const [isSubstanceModalVisible, setIsSubstanceModalVisible] = useState(false);
+  const [activeSubstance, setActiveSubstance] =
+    useState<Nullable<number>>(null);
 
   const openModal = () => setIsSubstanceModalVisible(true);
-  const closeModal = () => setIsSubstanceModalVisible(false);
+  const closeModal = () => {
+    setIsSubstanceModalVisible(false);
+    setActiveSubstance(null);
+  };
 
   const onUpdateQuestion = (type: string) => (value: string) =>
     dispatch(updateQuestion(value, type));
@@ -50,6 +59,20 @@ const TlfbQuestion = () => {
   const onAddSubstance = (substance: Substance) =>
     dispatch(addSubstance(substance));
 
+  const onRemoveSubstance = (substanceId: number) =>
+    dispatch(removeSubstance(substanceId));
+
+  const onEditSubstance = (substanceId: number) => {
+    setActiveSubstance(substanceId);
+    openModal();
+  };
+
+  const handleEditSubstance = (substance: Substance) => {
+    if (!isNil(activeSubstance)) {
+      dispatch(editSubstance(activeSubstance, substance));
+    }
+  };
+
   const {
     body: {
       data: [
@@ -59,6 +82,7 @@ const TlfbQuestion = () => {
             head_question: headQuestion,
             substance_question: substanceQuestion,
             substances_with_group: substancesWithGroup,
+            substances,
           },
         },
       ],
@@ -134,6 +158,13 @@ const TlfbQuestion = () => {
         </Box>
       </Row>
 
+      <BoxTable
+        data={substances}
+        badgeKeys={['variable']}
+        onRowDelete={onRemoveSubstance}
+        onRowEdit={onEditSubstance}
+      />
+
       <Row>
         <HoverableBox px={8} py={8} ml={-8} onClick={openModal}>
           <Box>
@@ -148,10 +179,16 @@ const TlfbQuestion = () => {
       </Row>
 
       <NewSubstanceModal
+        substance={
+          !isNil(activeSubstance) ? substances[activeSubstance] : undefined
+        }
         visible={isSubstanceModalVisible}
         onClose={closeModal}
         loading={false}
-        onSubmitForm={onAddSubstance}
+        editMode={!isNil(activeSubstance)}
+        onSubmitForm={
+          !isNil(activeSubstance) ? handleEditSubstance : onAddSubstance
+        }
       />
     </Box>
   );

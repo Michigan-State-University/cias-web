@@ -5,6 +5,7 @@ import {
   UPDATE_SUBSTANCES_WITH_GROUP_TOGGLE,
   ADD_SUBSTANCE,
   EDIT_SUBSTANCE,
+  REMOVE_SUBSTANCE,
 } from './constants';
 
 export const updateQuestion = (value: string, type: string) =>
@@ -26,4 +27,10 @@ export const editSubstance = (substanceId: number, substance: Substance) =>
   updateQuestionData({
     type: EDIT_SUBSTANCE,
     data: { substanceId, substance },
+  });
+
+export const removeSubstance = (substanceId: number) =>
+  updateQuestionData({
+    type: REMOVE_SUBSTANCE,
+    data: { substanceId },
   });
