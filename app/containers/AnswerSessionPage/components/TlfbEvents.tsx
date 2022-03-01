@@ -27,6 +27,7 @@ import PlusCircle from 'components/Circle/PlusCircle';
 import Spinner from 'components/Spinner';
 import ErrorAlert from 'components/ErrorAlert';
 import Divider from 'components/Divider';
+import Button from 'components/Button';
 
 import { SharedProps } from './sharedProps';
 import messages from '../messages';
@@ -67,6 +68,9 @@ const TlfbEvents = ({
   } = question;
 
   const [selectedDay, setSelectedDay] = useState<Dayjs>();
+
+  const closeModal = () => setSelectedDay(undefined);
+
   const dayId = selectedDay
     ? selectedDay.format(fullDayToYearFormatter)
     : undefined;
@@ -121,15 +125,16 @@ const TlfbEvents = ({
     >
       <>
         {(isMobile || isMobilePreview) && <Divider mb={24} mt={16} />}
-        {selectedDayEvents.map(({ name, id }) => (
-          <Box mb={16} key={`event-input-${id}`}>
+        <Box display="flex" direction="column" gap={16}>
+          {selectedDayEvents.map(({ name, id }) => (
             <EventInput
               onDelete={deleteEvent(id)}
               onInputBlur={(value: string) => updateEventName(value, id)}
               eventName={name}
+              key={`event-input-${id}`}
             />
-          </Box>
-        ))}
+          ))}
+        </Box>
         {createEventLoading && (
           <Box my={10} mx="auto">
             <Spinner color={themeColors.secondary} />
@@ -141,12 +146,22 @@ const TlfbEvents = ({
           cursor="pointer"
           display="flex"
           align="center"
+          mt={selectedDayEvents.length ? 24 : 0}
         >
           <PlusCircle size="24px" />
           <Text ml={10} color={themeColors.secondary}>
             <FormattedMessage {...messages.addEvent} />
           </Text>
         </Box>
+        {(isMobile || isMobilePreview) && (
+          <>
+            <Divider my={24} />
+            {/* @ts-ignore */}
+            <Button onClick={closeModal} width="auto" px={32}>
+              <FormattedMessage {...messages.saveEvents} />
+            </Button>
+          </>
+        )}
       </>
     </TlfbCalendarLayout>
   );

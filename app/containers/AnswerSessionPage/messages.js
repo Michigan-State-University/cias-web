@@ -175,6 +175,10 @@ export default defineMessages({
     id: `${scope}.addEvent`,
     defaultMessage: 'Add another event',
   },
+  saveEvents: {
+    id: `${scope}.saveEvents`,
+    defaultMessage: 'Save events',
+  },
   goToNextDay: {
     id: `${scope}.goToNextDay`,
     defaultMessage: 'Go to the next day',

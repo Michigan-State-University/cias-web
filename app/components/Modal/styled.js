@@ -10,13 +10,14 @@ const POPOVER_Z_INDEX = 11;
 
 const mobilePopoverStyle = {
   width: '100%',
-  height: 'max(50%, 400px)',
+  maxHeight: 'max(85%, 400px)',
   bottom: '0px !important',
   left: '0px !important',
   top: 'initial !important',
   right: 'initial !important',
   border: 'initial !important',
   borderRadius: '32px 32px 0px 0px',
+  overflowY: 'auto',
 };
 
 const mobileDimStyle = {
