@@ -2,41 +2,47 @@ import { createSelector } from 'reselect';
 
 import { initialState } from './reducer';
 
-const sessions = state => state.copyModal || initialState;
+const copyModal = state => state.copyModal || initialState;
 
 export const makeSelectSessionsState = () =>
   createSelector(
-    sessions,
+    copyModal,
     substate => substate,
   );
 
 export const makeSelectInterventions = () =>
   createSelector(
-    sessions,
+    copyModal,
     substate => substate.interventions,
   );
 
 export const makeSelectSessions = () =>
   createSelector(
-    sessions,
+    copyModal,
     substate => substate.sessions,
   );
 
 export const makeSelectQuestionGroups = () =>
   createSelector(
-    sessions,
+    copyModal,
     substate => substate.questionGroups,
   );
 
 export const makeSelectQuestions = () =>
   createSelector(
-    sessions,
+    copyModal,
     substate =>
-      substate.questionGroups.map(({ questions }) => questions).flat(),
+      substate.questionGroups?.map(({ questions }) => questions).flat(),
   );
 
-export const makeSelectCopyModalLoader = () =>
+export const makeSelectCopyModalLoaders = () =>
   createSelector(
-    sessions,
-    substate => substate.loading,
+    copyModal,
+    substate => substate.loaders,
+  );
+
+export const makeSelectSavedIds = () =>
+  createSelector(
+    copyModal,
+    substate => substate.currentIds,
   );

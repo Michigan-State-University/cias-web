@@ -8,33 +8,25 @@ import { injectIntl, IntlShape } from 'react-intl';
 import Column from 'components/Column';
 import Button from 'components/Button';
 import Row from 'components/Row';
-import Question from 'models/Session/Question';
 import questionGroupIcon from 'assets/svg/question-group-icon.svg';
 import sessionIcon from 'assets/svg/session-icon.svg';
 import interventionIcon from 'assets/svg/intervention-icon.svg';
 
 import { makeSelectSession } from 'global/reducers/session';
-import {
-  makeSelectIntervention,
-  makeSelectCurrentSessionIndex,
-} from 'global/reducers/intervention';
-import {
-  makeSelectQuestions,
-  makeSelectSelectedQuestion,
-} from 'global/reducers/questions';
-import {
-  makeSelectPublishedInterventions,
-  fetchInterventionsRequest,
-} from 'global/reducers/interventions';
+import { makeSelectIntervention } from 'global/reducers/intervention';
 
 import {
   makeSelectSessions,
   fetchSessionsRequest,
   fetchQuestionGroupsRequest,
   makeSelectQuestionGroups,
-  makeSelectCopyModalLoader,
+  makeSelectCopyModalLoaders,
   changeViewAction,
+  fetchInterventionsRequest,
+  makeSelectInterventions,
+  makeSelectQuestions,
 } from 'global/reducers/copyModalReducer';
+import { makeSelectSavedIds } from 'global/reducers/copyModalReducer/selectors';
 import ChooserComponent from './ChooserComponent';
 import messages from './messages';
 import { CopyModalContext } from '../utils';
@@ -49,10 +41,9 @@ const CopyChooser = ({
   intl: { formatMessage },
   onClick,
   session: { id: sessionId, name },
-  intervention: { id: interventionId },
-  selectedQuestion: { id } = {},
+  intervention: { id: interventionId, name: interventionName },
   interventions,
-  loading,
+  loaders,
   questionGroups,
   sessions,
   fetchSessions,
@@ -64,11 +55,10 @@ const CopyChooser = ({
   disableInterventionCopy,
   changeView,
   pasteText,
+  savedIds,
 }) => {
   const { interventionStatusFilter } = useContext(CopyModalContext);
-  const { name: interventionName } =
-    interventions.find(({ id: elementId }) => elementId === interventionId) ??
-    {};
+
   const [currentView, setCurrentView] = useState(defaultView);
   const [selectedItem, setSelectedItem] = useState(null);
 
@@ -83,16 +73,22 @@ const CopyChooser = ({
   });
 
   useEffect(() => {
-    fetchInterventions();
-  }, []);
-
-  useEffect(() => {
-    fetchSessions(currentIntervention?.id);
-  }, [currentIntervention?.id]);
-
-  useEffect(() => {
-    fetchQuestionGroups(currentSession?.id);
-  }, [currentSession]);
+    if (currentView === VIEWS.INTERVENTION && !interventions) {
+      fetchInterventions();
+    } else if (
+      currentView === VIEWS.SESSION &&
+      currentIntervention &&
+      (!sessions || savedIds.interventions !== currentIntervention.id)
+    ) {
+      fetchSessions(currentIntervention.id);
+    } else if (
+      currentView === VIEWS.QUESTION_GROUP &&
+      currentSession &&
+      (!questionGroups, savedIds.session !== currentSession.id)
+    ) {
+      fetchQuestionGroups(currentSession.id);
+    }
+  }, [currentView, currentIntervention, currentSession]);
 
   const filteredInterventions = useMemo(
     () =>
@@ -102,30 +98,6 @@ const CopyChooser = ({
           )
         : [],
     [interventions, interventionStatusFilter],
-  );
-
-  const filteredSessions = useMemo(
-    () =>
-      sessions
-        ? sessions.filter(({ intervention_id: sessionIntId }) =>
-            filteredInterventions.find(
-              ({ id: intId }) => intId === sessionIntId,
-            ),
-          )
-        : [],
-    [filteredInterventions, sessions],
-  );
-
-  const filteredQuestionGroups = useMemo(
-    () =>
-      questionGroups
-        ? questionGroups.filter(({ sessionId: groupSessionId }) =>
-            filteredSessions.find(
-              ({ id: sessId }) => sessId === groupSessionId,
-            ),
-          )
-        : [],
-    [filteredSessions, questionGroups],
   );
 
   const handleCopyCurrent = () => {
@@ -147,7 +119,6 @@ const CopyChooser = ({
   };
 
   const changeToInterventionView = () => {
-    setSelectedItem(null);
     setSelectedItem(null);
     setCurrentView(VIEWS.INTERVENTION);
   };
@@ -176,8 +147,8 @@ const CopyChooser = ({
       case VIEWS.INTERVENTION:
         return (
           <ChooserComponent
-            elementId={id}
-            loading={loading}
+            elementId={selectedItem?.id}
+            loading={loaders.interventions}
             items={filteredInterventions}
             selectedItem={selectedItem}
             changeViewAction={changeToSessionView}
@@ -190,10 +161,10 @@ const CopyChooser = ({
       case VIEWS.SESSION:
         return (
           <ChooserComponent
-            elementId={id}
+            elementId={selectedItem?.id}
             backAction={changeToInterventionView}
-            loading={loading}
-            items={filteredSessions}
+            loading={loaders.sessions}
+            items={sessions}
             changeViewAction={changeToQuestionGroupsView}
             selectAction={handleSelectAction}
             disableCopy={disableSessionCopy}
@@ -206,10 +177,10 @@ const CopyChooser = ({
       case VIEWS.QUESTION_GROUP:
         return (
           <ChooserComponent
-            elementId={id}
+            elementId={selectedItem?.id}
             backAction={changeToSessionView}
-            loading={loading}
-            items={filteredQuestionGroups}
+            loading={loaders.questionGroups}
+            items={questionGroups}
             selectAction={handleSelectAction}
             currentPlaceName={currentSession?.name}
             disableCopy={disableQuestionGroupCopy}
@@ -244,8 +215,7 @@ CopyChooser.propTypes = {
   session: PropTypes.object,
   intervention: PropTypes.object,
   sessions: PropTypes.array,
-  selectedQuestion: PropTypes.shape(Question),
-  loading: PropTypes.bool,
+  loaders: PropTypes.object,
   questionGroups: PropTypes.array,
   interventions: PropTypes.array,
   fetchSessions: PropTypes.func,
@@ -256,6 +226,7 @@ CopyChooser.propTypes = {
   disableSessionCopy: PropTypes.bool,
   disableInterventionCopy: PropTypes.bool,
   changeView: PropTypes.func,
+  savedIds: PropTypes.object,
   pasteText: PropTypes.string,
 };
 
@@ -270,12 +241,11 @@ const mapStateToProps = createStructuredSelector({
   session: makeSelectSession(),
   sessions: makeSelectSessions(),
   questions: makeSelectQuestions(),
-  selectedQuestion: makeSelectSelectedQuestion(),
-  loading: makeSelectCopyModalLoader(),
+  loaders: makeSelectCopyModalLoaders(),
   intervention: makeSelectIntervention(),
-  sessionIndex: makeSelectCurrentSessionIndex(),
   questionGroups: makeSelectQuestionGroups(),
-  interventions: makeSelectPublishedInterventions(),
+  interventions: makeSelectInterventions(),
+  savedIds: makeSelectSavedIds(),
 });
 
 const mapDispatchToProps = {
