@@ -26,18 +26,17 @@ export const useDayByDayHandler = ({
   selectedDay,
   changeMonth,
 }: Props) => {
-  const { yesterday, oldestFilledDate, oldestAllowedDate } = useMemo(
+  const { yesterday, oldestFilledSubstanceDate, oldestAllowedDate } = useMemo(
     () => getCalendarMetadata(tlfbConfig, calendarData),
     [tlfbConfig, calendarData],
   );
 
   useDidUpdateEffect(() => {
     if (isLoading) return;
-
-    if (!oldestFilledDate) {
+    if (!oldestFilledSubstanceDate) {
       handleSelectDay(yesterday);
-    } else if (oldestFilledDate.isAfter(oldestAllowedDate, 'day')) {
-      handleSelectDay(oldestFilledDate.subtract(1, 'day'));
+    } else if (oldestFilledSubstanceDate.isAfter(oldestAllowedDate, 'day')) {
+      handleSelectDay(oldestFilledSubstanceDate.subtract(1, 'day'));
     }
   }, [isLoading]);
 

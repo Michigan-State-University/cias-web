@@ -1,4 +1,6 @@
 import dayjs from 'dayjs';
+import pickBy from 'lodash/pickBy';
+import isNil from 'lodash/isNil';
 
 import { fullDayToYearFormatter } from 'utils/formatters';
 import { TlfbConfigBody } from 'models/Question';
@@ -39,6 +41,13 @@ export const generateGridAnswerId = (index: number) =>
 export const generateGridQuestionId = (index: number) =>
   `${generateGridCellId('question', index)}`;
 
+const getOldestDate = (dates: CalendarData) =>
+  dayjs.min(
+    Object.keys(dates).map((dayString) =>
+      dayjs(dayString, fullDayToYearFormatter),
+    ),
+  );
+
 export const getCalendarMetadata = (
   tlfbConfig: CamelToSnake<TlfbConfigBody>,
   calendarData: CalendarData,
@@ -51,11 +60,12 @@ export const getCalendarMetadata = (
     ],
   } = tlfbConfig;
   const yesterday = dayjs().subtract(1, 'day');
-  const oldestFilledDate = dayjs.min(
-    Object.keys(calendarData).map((dayString) =>
-      dayjs(dayString, fullDayToYearFormatter),
-    ),
+  const oldestFilledDate = getOldestDate(calendarData);
+  const datesWithSubstances = pickBy(
+    calendarData,
+    (date) => !isNil(date.substance),
   );
+  const oldestFilledSubstanceDate = getOldestDate(datesWithSubstances);
   const oldestAllowedDate = dayjs().subtract(+daysCount, 'day');
   const isEverythingFilled =
     oldestFilledDate?.isSame(oldestAllowedDate, 'day') ?? false;
@@ -65,5 +75,6 @@ export const getCalendarMetadata = (
     oldestFilledDate,
     oldestAllowedDate,
     isEverythingFilled,
+    oldestFilledSubstanceDate,
   };
 };
