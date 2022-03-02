@@ -10,7 +10,6 @@ export {
   makeSelectSessions,
   makeSelectCopyModalLoaders,
   makeSelectQuestionGroups,
-  makeSelectQuestions,
   makeSelectInterventions,
 } from './selectors';
 

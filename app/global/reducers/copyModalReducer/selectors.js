@@ -28,13 +28,6 @@ export const makeSelectQuestionGroups = () =>
     substate => substate.questionGroups,
   );
 
-export const makeSelectQuestions = () =>
-  createSelector(
-    copyModal,
-    substate =>
-      substate.questionGroups?.map(({ questions }) => questions).flat(),
-  );
-
 export const makeSelectCopyModalLoaders = () =>
   createSelector(
     copyModal,

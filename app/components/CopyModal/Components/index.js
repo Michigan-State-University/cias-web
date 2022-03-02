@@ -24,7 +24,6 @@ import {
   changeViewAction,
   fetchInterventionsRequest,
   makeSelectInterventions,
-  makeSelectQuestions,
 } from 'global/reducers/copyModalReducer';
 import { makeSelectSavedIds } from 'global/reducers/copyModalReducer/selectors';
 import ChooserComponent from './ChooserComponent';
@@ -240,7 +239,6 @@ CopyChooser.defaultProps = {
 const mapStateToProps = createStructuredSelector({
   session: makeSelectSession(),
   sessions: makeSelectSessions(),
-  questions: makeSelectQuestions(),
   loaders: makeSelectCopyModalLoaders(),
   intervention: makeSelectIntervention(),
   questionGroups: makeSelectQuestionGroups(),
