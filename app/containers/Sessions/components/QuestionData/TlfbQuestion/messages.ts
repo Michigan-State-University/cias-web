@@ -48,6 +48,10 @@ export default defineMessages({
     id: `${scope}.addNewSubstanceDescription`,
     defaultMessage: 'Type the name of the substance and its variable',
   },
+  addNewGroupedSubstanceDescription: {
+    id: `${scope}.addNewGroupedSubstanceDescription`,
+    defaultMessage: 'Type the name of the substance, its unit, and variable',
+  },
   substanceName: {
     id: `${scope}.substanceName`,
     defaultMessage: 'Substance name',
@@ -83,5 +87,17 @@ export default defineMessages({
   saveChanges: {
     id: `${scope}.saveChanges`,
     defaultMessage: 'Save changes',
+  },
+  unitRequired: {
+    id: `${scope}.unitRequired`,
+    defaultMessage: 'Unit is required',
+  },
+  unitPlaceholder: {
+    id: `${scope}.unitPlaceholder`,
+    defaultMessage: 'e.g. glasses',
+  },
+  unit: {
+    id: `${scope}.unit`,
+    defaultMessage: 'Substance unit',
   },
 });

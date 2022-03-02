@@ -40,9 +40,9 @@ export interface TlfbEventsPayload {
 
 export type Substance = {
   name: string;
+  unit?: string;
   variable: string;
 };
-
 export interface TlfbQuestionPayload {
   questionTitle: string;
   headQuestion: string;

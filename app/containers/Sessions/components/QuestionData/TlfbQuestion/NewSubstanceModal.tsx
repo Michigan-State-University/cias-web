@@ -1,18 +1,12 @@
 import React, { useState, useEffect, useRef } from 'react';
-import { FormattedMessage, useIntl } from 'react-intl';
+import { useIntl } from 'react-intl';
 import { Formik, FormikHelpers, FormikState } from 'formik';
 import * as Yup from 'yup';
 
-import Button from 'components/Button';
-import Column from 'components/Column';
 import FormikInput from 'components/FormikInput';
-import Box from 'components/Box';
-import Modal from 'components/Modal';
-import ErrorAlert from 'components/ErrorAlert';
-import Row from 'components/Row';
 import { Substance } from 'models/Question';
+import { EditModal } from 'components/Modal/EditModal';
 
-import Divider from 'components/Divider';
 import messages from './messages';
 
 type NewSubstanceModalType = {
@@ -23,17 +17,24 @@ type NewSubstanceModalType = {
   editMode?: boolean;
   onClose: () => void;
   onSubmitForm: (substance: Substance) => void;
+  grouped?: boolean;
 };
 
-const validationSchema = (formatMessage: any) =>
-  Yup.object().shape({
-    name: Yup.string().required(formatMessage(messages.nameRequired)),
-    variable: Yup.string().required(formatMessage(messages.variableRequired)),
-  });
+const schema = (formatMessage: any, grouped: boolean) => ({
+  name: Yup.string().required(formatMessage(messages.nameRequired)),
+  variable: Yup.string().required(formatMessage(messages.variableRequired)),
+  ...(grouped && {
+    unit: Yup.string().required(formatMessage(messages.unitRequired)),
+  }),
+});
 
-const initialValues = (substance?: Substance): Substance => ({
+const validationSchema = (formatMessage: any, grouped: boolean) =>
+  Yup.object().shape(schema(formatMessage, grouped));
+
+const initialValues = (grouped: boolean, substance?: Substance): Substance => ({
   name: substance?.name ?? '',
   variable: substance?.variable ?? '',
+  ...(grouped && { unit: substance?.unit ?? '' }),
 });
 
 const NewSubstanceModal = ({
@@ -43,6 +44,7 @@ const NewSubstanceModal = ({
   visible,
   onClose,
   onSubmitForm,
+  grouped = false,
   editMode = false,
 }: NewSubstanceModalType) => {
   const { formatMessage } = useIntl();
@@ -81,8 +83,8 @@ const NewSubstanceModal = ({
   return (
     <>
       <Formik
-        validationSchema={validationSchema(formatMessage)}
-        initialValues={initialValues(substance)}
+        validationSchema={validationSchema(formatMessage, grouped)}
+        initialValues={initialValues(grouped, substance)}
         onSubmit={onSubmit}
         enableReinitialize
       >
@@ -93,81 +95,62 @@ const NewSubstanceModal = ({
           };
           return (
             <>
-              <Modal
+              <EditModal
                 visible={modalVisible}
                 title={formatMessage(
                   messages[editMode ? 'editSubstance' : 'addNewSubstance'],
                 )}
+                description={formatMessage(
+                  messages[
+                    grouped
+                      ? 'addNewGroupedSubstanceDescription'
+                      : 'addNewSubstanceDescription'
+                  ],
+                )}
                 onClose={handleClose(resetForm)}
-                width={500}
-                maxWidth="100%"
-                titleProps={{
-                  fontSize: 20,
-                  mb: 5,
-                }}
-                px={32}
-                py={32}
+                confirmButtonMessage={formatMessage(
+                  messages[editMode ? 'saveChanges' : 'addSubstance'],
+                )}
+                onSubmit={handleSubmit}
+                disabled={!isValid}
+                loading={loading}
+                width={grouped ? 560 : 500}
               >
-                <Column>
-                  <Box mb={40}>
-                    <FormattedMessage
-                      {...messages.addNewSubstanceDescription}
-                    />
-                    <Divider mt={16} />
-                  </Box>
-                  <Row width="100%">
+                <>
+                  <FormikInput
+                    data-testid="substance-name"
+                    formikKey="name"
+                    placeholder={formatMessage(
+                      messages.substanceNamePlaceholder,
+                    )}
+                    label={formatMessage(messages.substanceName)}
+                    type="text"
+                    inputProps={inputProps}
+                    mr={16}
+                  />
+                  {grouped && (
                     <FormikInput
-                      data-testid="substance-name"
-                      formikKey="name"
-                      placeholder={formatMessage(
-                        messages.substanceNamePlaceholder,
-                      )}
-                      label={formatMessage(messages.substanceName)}
+                      data-testid="substance-unit"
+                      formikKey="unit"
+                      placeholder={formatMessage(messages.unitPlaceholder)}
+                      label={formatMessage(messages.unit)}
                       type="text"
                       inputProps={inputProps}
                       mr={16}
                     />
-                    <FormikInput
-                      data-testid="substance-variable"
-                      formikKey="variable"
-                      placeholder={formatMessage(
-                        messages.substanceVariablePlaceholder,
-                      )}
-                      label={formatMessage(messages.substanceVariable)}
-                      type="text"
-                      inputProps={inputProps}
-                    />
-                  </Row>
-                  <Row width="100%" mt={56}>
-                    <Button
-                      hoverable
-                      onClick={handleSubmit}
-                      type="button"
-                      loading={loading}
-                      data-testid="confirm-button"
-                      width={156}
-                      mr={16}
-                      disabled={!isValid}
-                    >
-                      <FormattedMessage
-                        {...messages[editMode ? 'saveChanges' : 'addSubstance']}
-                      />
-                    </Button>
-                    <Button
-                      data-testid="close-button"
-                      mr={20}
-                      light
-                      hoverable
-                      onClick={handleClose(resetForm)}
-                      type="button"
-                      width={104}
-                    >
-                      <FormattedMessage {...messages.cancel} />
-                    </Button>
-                  </Row>
-                  {error && <ErrorAlert mt={25} errorText={error} />}
-                </Column>
-              </Modal>
+                  )}
+                  <FormikInput
+                    data-testid="substance-variable"
+                    formikKey="variable"
+                    placeholder={formatMessage(
+                      messages.substanceVariablePlaceholder,
+                    )}
+                    label={formatMessage(messages.substanceVariable)}
+                    type="text"
+                    inputProps={inputProps}
+                  />
+                </>
+              </EditModal>
             </>
           );
         }}

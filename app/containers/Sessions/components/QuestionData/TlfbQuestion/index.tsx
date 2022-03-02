@@ -159,12 +159,14 @@ const TlfbQuestion = () => {
         </Box>
       </Row>
 
-      <BoxTable
-        data={substances}
-        badgeKeys={['variable']}
-        onRowDelete={onRemoveSubstance}
-        onRowEdit={onEditSubstance}
-      />
+      {!substancesWithGroup && (
+        <BoxTable
+          data={substances}
+          badgeKeys={['variable']}
+          onRowDelete={onRemoveSubstance}
+          onRowEdit={onEditSubstance}
+        />
+      )}
 
       <Row>
         <HoverableBox px={8} py={8} ml={-8} onClick={openModal}>
@@ -186,6 +188,7 @@ const TlfbQuestion = () => {
         loading={false}
         editMode={isEditMode}
         onSubmitForm={isEditMode ? handleEditSubstance : onAddSubstance}
+        grouped={substancesWithGroup}
       />
     </Box>
   );
