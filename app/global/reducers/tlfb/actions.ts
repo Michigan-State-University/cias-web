@@ -97,8 +97,8 @@ export const addNewTlfbSubstanceSuccess = createAction(
 
 export const editTlfbSubstance = createAction(
   EDIT_SUBSTANCE_REQUEST,
-  (action) => (dayKey: string, body: SubstanceBody, substanceId: number) =>
-    action({ dayKey, body, substanceId }),
+  (action) => (dayKey: string, body: SubstanceBody, substanceIndex: number) =>
+    action({ dayKey, body, substanceIndex }),
 );
 
 export const editTlfbSubstanceError = createAction(

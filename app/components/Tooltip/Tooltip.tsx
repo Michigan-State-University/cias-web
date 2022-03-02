@@ -5,7 +5,6 @@
  */
 
 import React, {
-  MutableRefObject,
   memo,
   useCallback,
   useEffect,
@@ -56,14 +55,15 @@ const Tooltip = ({
   backgroundColor,
   ...restProps
 }: TooltipProps) => {
-  const tooltipRef = useRef() as MutableRefObject<HTMLDivElement>;
-  const contentRef = useRef();
+  const tooltipRef = useRef<HTMLDivElement>();
+  const contentRef = useRef<HTMLDivElement>();
   const [isHovered, setIsHovered] = useState(false);
 
   const onFocusIn = () => setIsHovered(true);
   const onFocusOut = () => setIsHovered(false);
 
-  const showTooltip = () => ReactTooltip.show(tooltipRef.current);
+  const showTooltip = () =>
+    tooltipRef.current && ReactTooltip.show(tooltipRef.current);
   const hideTooltip = () => ReactTooltip.hide(tooltipRef.current);
 
   const shouldShowTooltip = visible && isHovered;

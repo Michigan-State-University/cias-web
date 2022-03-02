@@ -11,9 +11,9 @@ import {
 import messages from '../messages';
 
 function* editSubstanceBody({
-  payload: { substanceId, body },
+  payload: { substanceIndex, body },
 }: ReturnType<typeof editTlfbSubstance>) {
-  const url = `/v1/tlfb/substances/${substanceId}`;
+  const url = `/v1/tlfb/substances/${substanceIndex}`;
   try {
     yield call(axios.patch, url, {
       body,

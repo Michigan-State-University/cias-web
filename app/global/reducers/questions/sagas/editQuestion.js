@@ -15,6 +15,7 @@ import {
   gridQuestion,
   multiQuestion,
   nameQuestion,
+  tlfbQuestion,
 } from 'models/Session/QuestionTypes';
 import messages from '../messages';
 import {
@@ -49,6 +50,10 @@ const validateVariable = (payload, question, variables) => {
   } else if (question.type === gridQuestion.id) {
     question.body.data[0].payload.rows.forEach((element) => {
       if (hasDuplicates(variables, element.variable.name)) throw duplicateError;
+    });
+  } else if (question.type === tlfbQuestion.id) {
+    question.body.data[0].payload.substances.forEach((substance) => {
+      if (hasDuplicates(variables, substance.variable)) throw duplicateError;
     });
   } else if (hasDuplicates(variables, question.body.variable.name)) {
     throw duplicateError;

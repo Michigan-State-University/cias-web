@@ -41,13 +41,14 @@ const TlfbQuestion = () => {
     makeSelectSelectedQuestion(),
   );
   const [isSubstanceModalVisible, setIsSubstanceModalVisible] = useState(false);
-  const [activeSubstance, setActiveSubstance] =
+  const [activeSubstanceIndex, setactiveSubstanceIndex] =
     useState<Nullable<number>>(null);
+  const isEditMode = !isNil(activeSubstanceIndex);
 
   const openModal = () => setIsSubstanceModalVisible(true);
   const closeModal = () => {
     setIsSubstanceModalVisible(false);
-    setActiveSubstance(null);
+    setactiveSubstanceIndex(null);
   };
 
   const onUpdateQuestion = (type: string) => (value: string) =>
@@ -59,17 +60,17 @@ const TlfbQuestion = () => {
   const onAddSubstance = (substance: Substance) =>
     dispatch(addSubstance(substance));
 
-  const onRemoveSubstance = (substanceId: number) =>
-    dispatch(removeSubstance(substanceId));
+  const onRemoveSubstance = (substanceIndex: number) =>
+    dispatch(removeSubstance(substanceIndex));
 
-  const onEditSubstance = (substanceId: number) => {
-    setActiveSubstance(substanceId);
+  const onEditSubstance = (substanceIndex: number) => {
+    setactiveSubstanceIndex(substanceIndex);
     openModal();
   };
 
   const handleEditSubstance = (substance: Substance) => {
-    if (!isNil(activeSubstance)) {
-      dispatch(editSubstance(activeSubstance, substance));
+    if (!isNil(activeSubstanceIndex)) {
+      dispatch(editSubstance(activeSubstanceIndex, substance));
     }
   };
 
@@ -179,16 +180,12 @@ const TlfbQuestion = () => {
       </Row>
 
       <NewSubstanceModal
-        substance={
-          !isNil(activeSubstance) ? substances[activeSubstance] : undefined
-        }
+        substance={isEditMode ? substances[activeSubstanceIndex] : undefined}
         visible={isSubstanceModalVisible}
         onClose={closeModal}
         loading={false}
-        editMode={!isNil(activeSubstance)}
-        onSubmitForm={
-          !isNil(activeSubstance) ? handleEditSubstance : onAddSubstance
-        }
+        editMode={isEditMode}
+        onSubmitForm={isEditMode ? handleEditSubstance : onAddSubstance}
       />
     </Box>
   );

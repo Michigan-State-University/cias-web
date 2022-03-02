@@ -205,8 +205,10 @@ export const getEditVariables = (questions, options) => {
       case finishQuestion.id:
       case tlfbConfig.id:
       case tlfbEvents.id:
-      case tlfbQuestion.id:
         questionVariables = [];
+        break;
+      case tlfbQuestion.id:
+        questionVariables = getTlfbVariables(question);
         break;
       default:
         questionVariables = [getDefaultVariable(question)];
@@ -248,6 +250,11 @@ const getMultiVariables = (question) =>
 
 const getGridVariables = (question) =>
   question.body.data[0].payload.rows.map((row) => row.variable.name);
+
+const getTlfbVariables = (question) =>
+  question.body.data[0].payload.substances.map(
+    (substance) => substance.variable,
+  );
 
 export const instantiateBlockForType = (type, endPosition, question) => {
   const sharedProperties = {
@@ -332,7 +339,6 @@ export const QuestionsWithoutVariable = [
   ...NotAnswerableQuestions,
   thirdPartyQuestion.id,
   tlfbConfig.id,
-  tlfbQuestion.id,
   tlfbEvents.id,
 ];
 

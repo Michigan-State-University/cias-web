@@ -23,14 +23,14 @@ export const addSubstance = (substance: Substance) =>
     data: { substance },
   });
 
-export const editSubstance = (substanceId: number, substance: Substance) =>
+export const editSubstance = (substanceIndex: number, substance: Substance) =>
   updateQuestionData({
     type: EDIT_SUBSTANCE,
-    data: { substanceId, substance },
+    data: { substanceIndex, substance },
   });
 
-export const removeSubstance = (substanceId: number) =>
+export const removeSubstance = (substanceIndex: number) =>
   updateQuestionData({
     type: REMOVE_SUBSTANCE,
-    data: { substanceId },
+    data: { substanceIndex },
   });

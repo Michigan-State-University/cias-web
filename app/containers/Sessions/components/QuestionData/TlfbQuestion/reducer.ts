@@ -61,19 +61,19 @@ const tlfbQuestionsReducer = (
 
     case EDIT_SUBSTANCE: {
       const {
-        data: { substance, substanceId },
+        data: { substance, substanceIndex },
       } = payload as any;
-      question.body.data[0].payload.substances[substanceId] = substance;
+      question.body.data[0].payload.substances[substanceIndex] = substance;
       return question;
     }
 
     case REMOVE_SUBSTANCE: {
       const {
-        data: { substanceId },
+        data: { substanceIndex },
       } = payload as any;
       question.body.data[0].payload.substances = [
-        ...question.body.data[0].payload.substances.slice(0, substanceId),
-        ...question.body.data[0].payload.substances.slice(substanceId + 1),
+        ...question.body.data[0].payload.substances.slice(0, substanceIndex),
+        ...question.body.data[0].payload.substances.slice(substanceIndex + 1),
       ];
       return question;
     }
