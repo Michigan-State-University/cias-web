@@ -67,8 +67,6 @@ export const getCalendarMetadata = (
   );
   const oldestFilledSubstanceDate = getOldestDate(datesWithSubstances);
   const oldestAllowedDate = dayjs().subtract(+daysCount, 'day');
-  const isEverythingFilled =
-    oldestFilledDate?.isSame(oldestAllowedDate, 'day') ?? false;
   const isEverySubstanceFilled =
     oldestFilledSubstanceDate?.isSame(oldestAllowedDate, 'day') ?? false;
 
@@ -77,7 +75,6 @@ export const getCalendarMetadata = (
     oldestAllowedDate,
     oldestFilledDate,
     oldestFilledSubstanceDate,
-    isEverythingFilled,
     isEverySubstanceFilled,
   };
 };
