@@ -48,7 +48,8 @@ const TlfbQuestion = ({
   isDesktop,
   isMobilePreview,
   userSessionId,
-}: SharedProps<TlfbQuestionWithConfig>) => {
+  selectAnswer,
+}: SharedProps<TlfbQuestionWithConfig, any>) => {
   const calendarRef = useRef<CalendarRef>({ setMonth: () => {} });
 
   const [selectedDay, setSelectedDay] = useState<Dayjs>();
@@ -122,6 +123,12 @@ const TlfbQuestion = ({
       dispatch(fetchCalendarDataRequest(userSessionId, questionGroupId));
     }
   }, []);
+
+  useEffect(() => {
+    if (isEverySubstanceFilled) {
+      selectAnswer([{}]);
+    }
+  }, [isEverySubstanceFilled]);
 
   const { goToNextDay } = useDayByDayHandler({
     calendarData: tlfbDaysData,
