@@ -39,3 +39,10 @@ export const makeSelectSavedIds = () =>
     copyModal,
     substate => substate.currentIds,
   );
+
+export const makeSelectQuestions = () =>
+  createSelector(
+    copyModal,
+    substate =>
+      (substate.questionGroups || []).map(({ questions }) => questions).flat(),
+  );

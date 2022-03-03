@@ -81,8 +81,8 @@ const VariableView = ({ onClick }) => {
 
     const previousQuestions = getPreviousQuestions(
       objectToCamelCase(selectedQuestion),
-      filteredQuestions,
-      questionGroups,
+      filteredQuestions || [],
+      questionGroups || [],
       includeCurrentQuestion,
     );
 

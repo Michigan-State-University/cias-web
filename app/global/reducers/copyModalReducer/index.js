@@ -11,6 +11,7 @@ export {
   makeSelectCopyModalLoaders,
   makeSelectQuestionGroups,
   makeSelectInterventions,
+  makeSelectQuestions,
 } from './selectors';
 
 export { allCopyModalSagas } from './sagas';
