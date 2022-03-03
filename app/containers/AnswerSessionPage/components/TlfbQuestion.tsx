@@ -125,10 +125,10 @@ const TlfbQuestion = ({
   }, []);
 
   useEffect(() => {
-    if (isEverythingFilled) {
+    if (isEverySubstanceFilled) {
       selectAnswer([{}]);
     }
-  }, [isEverythingFilled]);
+  }, [isEverySubstanceFilled]);
 
   const { goToNextDay } = useDayByDayHandler({
     calendarData: tlfbDaysData,
