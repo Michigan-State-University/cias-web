@@ -72,7 +72,7 @@ Object {
   width: 100%;
 }
 
-.c19 {
+.c24 {
   width: 100%;
   height: 40px;
   border-radius: 100px;
@@ -153,13 +153,93 @@ Object {
   -ms-flex-direction: row;
   flex-direction: row;
   height: auto;
+  -webkit-box-pack: start;
+  -webkit-justify-content: flex-start;
+  -ms-flex-pack: start;
+  justify-content: flex-start;
+  justify-items: flex-start;
+  -webkit-align-content: center;
+  -ms-flex-line-pack: center;
+  align-content: center;
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
   padding-top: 15px;
   padding-bottom: 15px;
   padding-right: 25px;
   padding-left: 25px;
+  width: 100%;
+  cursor: pointer;
+}
+
+.c16:hover {
+  background-color: rgba(183,39,234,0.1);
 }
 
 .c18 {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-flex-direction: row;
+  -ms-flex-direction: row;
+  flex-direction: row;
+  height: auto;
+  -webkit-box-pack: justify;
+  -webkit-justify-content: space-between;
+  -ms-flex-pack: justify;
+  justify-content: space-between;
+  justify-items: space-between;
+  -webkit-align-content: center;
+  -ms-flex-line-pack: center;
+  align-content: center;
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  margin-right: 10px;
+  width: 100%;
+}
+
+.c21 {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-flex-direction: row;
+  -ms-flex-direction: row;
+  flex-direction: row;
+  height: auto;
+  -webkit-box-pack: center;
+  -webkit-justify-content: center;
+  -ms-flex-pack: center;
+  justify-content: center;
+  justify-items: center;
+  -webkit-align-content: center;
+  -ms-flex-line-pack: center;
+  align-content: center;
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  margin-right: 10px;
+}
+
+.c22 {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-flex-direction: row;
+  -ms-flex-direction: row;
+  flex-direction: row;
+  height: auto;
+  margin-right: 25px;
+  margin-left: 25px;
+}
+
+.c23 {
   display: -webkit-box;
   display: -webkit-flex;
   display: -ms-flexbox;
@@ -205,6 +285,20 @@ Object {
   overflow: scroll;
 }
 
+.c19 {
+  width: auto;
+  height: auto;
+  display: block;
+  border-radius: 5px;
+  max-width: 170px;
+}
+
+.c17 {
+  width: auto;
+  height: auto;
+  margin-right: 10px;
+}
+
 .c5 {
   font-family: DM Sans;
   font-size: 13px;
@@ -224,14 +318,6 @@ Object {
   color: #2F3850;
 }
 
-.c17 {
-  font-family: DM Sans;
-  font-size: 13px;
-  line-height: 130%;
-  font-size: 12px;
-  color: #2F3850;
-}
-
 .c12 {
   position: relative;
   width: 100%;
@@ -239,6 +325,13 @@ Object {
   font-weight: 700;
   color: rgba(183,39,234,1);
   color: rgba(183,39,234,1);
+}
+
+.c20 {
+  position: relative;
+  width: 100%;
+  font-size: 16px;
+  color: #2F3850;
 }
 
 @media only screen and (min-width:768px) {
@@ -417,24 +510,80 @@ Object {
                 >
                   <div
                     class="c16"
+                    width="100%"
                   >
-                    <p
+                    <img
                       class="c17"
-                      font-size="12"
+                      src="IMAGE_MOCK"
+                    />
+                    <div
+                      class="c18"
+                      width="100%"
                     >
-                      No valid question groups to copy to
-                    </p>
+                      <div
+                        class="c15"
+                      >
+                        <div
+                          class="c19"
+                        >
+                          <div
+                            class="c9"
+                            width="100%"
+                          >
+                            <div
+                              class="c10"
+                              display="inline"
+                              width="100%"
+                            >
+                              <div
+                                class="c11"
+                                data-for=""
+                                data-tip=""
+                              >
+                                <div>
+                                  <span
+                                    class="c20"
+                                    data-for=""
+                                    font-size="16"
+                                    theme="[object Object]"
+                                    width="0"
+                                  >
+                                    <span />
+                                    <span />
+                                    <span
+                                      style="position: fixed; visibility: hidden; top: 0px; left: 0px;"
+                                    >
+                                      …
+                                    </span>
+                                  </span>
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                      <div
+                        class="c21"
+                      >
+                        <img
+                          src="IMAGE_MOCK"
+                        />
+                      </div>
+                    </div>
                   </div>
+                  <div
+                    class="c22"
+                  />
                 </div>
               </div>
             </div>
           </div>
         </div>
         <div
-          class="c18"
+          class="c23"
         >
           <button
-            class="c19"
+            class="c24"
             color="primary"
             disabled=""
             radius="100px"
@@ -537,15 +686,71 @@ Object {
                 class="Column-sc-4zswzq-0 ekpwZH"
               >
                 <div
-                  class="Row-y1cs0u-0 brzjBw"
+                  class="Row-y1cs0u-0 fKhBZO"
+                  width="100%"
                 >
-                  <p
-                    class="Text-e4p0w3-0 fJvJkE"
-                    font-size="12"
+                  <img
+                    class="Img-sc-55j3su-0 cYsgyu"
+                    src="IMAGE_MOCK"
+                  />
+                  <div
+                    class="Row-y1cs0u-0 klnYuL"
+                    width="100%"
                   >
-                    No valid question groups to copy to
-                  </p>
+                    <div
+                      class="Column-sc-4zswzq-0 ekpwZH"
+                    >
+                      <div
+                        class="Box-sc-1vhutan-0 czVGqI"
+                      >
+                        <div
+                          class="Row-y1cs0u-0 gQFDhs"
+                          width="100%"
+                        >
+                          <div
+                            class="Box-sc-1vhutan-0 lndiol"
+                            display="inline"
+                            width="100%"
+                          >
+                            <div
+                              class="Box-sc-1vhutan-0 dvfkZg"
+                              data-for=""
+                              data-tip=""
+                            >
+                              <div>
+                                <span
+                                  class="styled__StyledEllipsisText-h4mjfj-0 bEKqUp"
+                                  data-for=""
+                                  font-size="16"
+                                  theme="[object Object]"
+                                  width="0"
+                                >
+                                  <span />
+                                  <span />
+                                  <span
+                                    style="position: fixed; visibility: hidden; top: 0px; left: 0px;"
+                                  >
+                                    …
+                                  </span>
+                                </span>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                    <div
+                      class="Row-y1cs0u-0 eUCsFA"
+                    >
+                      <img
+                        src="IMAGE_MOCK"
+                      />
+                    </div>
+                  </div>
                 </div>
+                <div
+                  class="Row-y1cs0u-0 gjqYvI"
+                />
               </div>
             </div>
           </div>
