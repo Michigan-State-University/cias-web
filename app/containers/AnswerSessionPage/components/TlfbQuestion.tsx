@@ -110,13 +110,13 @@ const TlfbQuestion = ({
     question_group_id: questionGroupId,
   } = question;
 
-  const { isEverythingFilled, oldestAllowedDate } = useMemo(
+  const { isEverySubstanceFilled, oldestAllowedDate } = useMemo(
     () => getCalendarMetadata(config, tlfbDaysData),
     [config, tlfbDaysData],
   );
   const isLastDaySelected =
     selectedDay?.isSame(oldestAllowedDate, 'day') ?? false;
-  const isGoToNextDayDisabled = isLastDaySelected || isEverythingFilled;
+  const isGoToNextDayDisabled = isLastDaySelected || isEverySubstanceFilled;
 
   useEffect(() => {
     if (userSessionId) {
@@ -184,7 +184,7 @@ const TlfbQuestion = ({
       selectedDay={selectedDay}
       dayId={dayId}
       calendarData={tlfbDaysData}
-      disableModalClose={!isEverythingFilled}
+      disableModalClose={!isEverySubstanceFilled}
       isLoading={calendarDataLoading}
     >
       {(!isDesktop || isMobilePreview) && (
