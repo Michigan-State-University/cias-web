@@ -11,6 +11,7 @@ import { useIntl } from 'react-intl';
 
 import {
   fetchQuestionGroupsRequest,
+  makeSelectCopyModalLoaders,
   makeSelectQuestionGroups,
   makeSelectQuestions,
   makeSelectSessions,
@@ -24,7 +25,9 @@ import objectToCamelCase from 'utils/objectToCamelCase';
 
 import NoContent from 'components/NoContent';
 import Box from 'components/Box';
+import Spinner from 'components/Spinner';
 
+import { themeColors } from 'theme';
 import VariableRow from './VariableRow';
 import ViewWrapper from './ViewWrapper';
 
@@ -43,6 +46,9 @@ const VariableView = ({ onClick }) => {
   const allSessions = useSelector(makeSelectSessions());
   const allQuestions = useSelector(makeSelectQuestions());
   const questionGroups = useSelector(makeSelectQuestionGroups());
+  const { questionGroups: questionGroupsLoading } = useSelector(
+    makeSelectCopyModalLoaders(),
+  );
 
   const {
     currentInterventionId,
@@ -113,6 +119,10 @@ const VariableView = ({ onClick }) => {
     },
     [currentSessionId, initialSessionId, allSessions],
   );
+
+  if (questionGroupsLoading) {
+    return <Spinner color={themeColors.secondary} />;
+  }
 
   if (!variables || !variables.length)
     return (

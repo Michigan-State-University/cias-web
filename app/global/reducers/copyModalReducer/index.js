@@ -12,6 +12,7 @@ export {
   makeSelectQuestionGroups,
   makeSelectInterventions,
   makeSelectQuestions,
+  makeSelectSavedIds,
 } from './selectors';
 
 export { allCopyModalSagas } from './sagas';

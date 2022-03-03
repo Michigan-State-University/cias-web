@@ -6,12 +6,15 @@ import { useIntl } from 'react-intl';
 import {
   fetchInterventionsRequest,
   makeSelectInterventions,
+  makeSelectCopyModalLoaders,
 } from 'global/reducers/copyModalReducer';
 import { published } from 'models/Status/StatusTypes';
 
 import NoContent from 'components/NoContent';
 import Box from 'components/Box';
+import Spinner from 'components/Spinner';
 
+import { themeColors } from 'theme';
 import ViewWrapper from './ViewWrapper';
 import InterventionRow from './InterventionRow';
 
@@ -28,6 +31,9 @@ const InterventionView = ({ onClick }) => {
 
   // selectors
   const allInterventions = useSelector(makeSelectInterventions());
+  const { interventions: interventionsLoading } = useSelector(
+    makeSelectCopyModalLoaders(),
+  );
 
   const { initialInterventionId, organizationId } = useContext(
     VariableChooserContext,
@@ -44,6 +50,10 @@ const InterventionView = ({ onClick }) => {
 
   const isInitialIntervention = interventionId =>
     interventionId === initialInterventionId;
+
+  if (interventionsLoading) {
+    return <Spinner color={themeColors.secondary} />;
+  }
 
   if (!interventions || !interventions.length)
     return (

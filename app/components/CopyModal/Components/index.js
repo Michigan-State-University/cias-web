@@ -24,8 +24,8 @@ import {
   changeViewAction,
   fetchInterventionsRequest,
   makeSelectInterventions,
+  makeSelectSavedIds,
 } from 'global/reducers/copyModalReducer';
-import { makeSelectSavedIds } from 'global/reducers/copyModalReducer/selectors';
 import ChooserComponent from './ChooserComponent';
 import messages from './messages';
 import { CopyModalContext } from '../utils';
@@ -71,19 +71,25 @@ const CopyChooser = ({
     name,
   });
 
+  const shouldLoadInterventions = () => !interventions;
+  const shouldLoadSessions = () =>
+    !sessions || savedIds.interventions !== currentIntervention.id;
+  const shouldLoadQuestionGroups = () =>
+    !questionGroups || savedIds.session !== currentSession.id;
+
   useEffect(() => {
-    if (currentView === VIEWS.INTERVENTION && !interventions) {
+    if (currentView === VIEWS.INTERVENTION && shouldLoadInterventions()) {
       fetchInterventions();
     } else if (
       currentView === VIEWS.SESSION &&
       currentIntervention &&
-      (!sessions || savedIds.interventions !== currentIntervention.id)
+      shouldLoadSessions()
     ) {
       fetchSessions(currentIntervention.id);
     } else if (
       currentView === VIEWS.QUESTION_GROUP &&
       currentSession &&
-      (!questionGroups, savedIds.session !== currentSession.id)
+      shouldLoadQuestionGroups()
     ) {
       fetchQuestionGroups(currentSession.id);
     }
