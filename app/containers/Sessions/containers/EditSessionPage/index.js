@@ -86,10 +86,6 @@ import {
   fetchInterventionsSaga,
   interventionsReducer,
 } from 'global/reducers/interventions';
-import {
-  copyModalReducer,
-  allCopyModalSagas,
-} from 'global/reducers/copyModalReducer';
 
 import { canEdit } from 'models/Status/statusPermissions';
 
@@ -595,7 +591,6 @@ export default compose(
   injectReducer({ key: 'questionGroups', reducer: questionGroupsReducer }),
   injectReducer({ key: 'intervention', reducer: interventionReducer }),
   injectReducer({ key: 'interventions', reducer: interventionsReducer }),
-  injectReducer({ key: 'copyModal', reducer: copyModalReducer }),
   injectReducer({ key: 'reportTemplates', reducer: reportTemplatesReducer }),
   injectSaga({ key: 'getSession', saga: getSessionSaga }),
   injectSaga({
@@ -605,7 +600,6 @@ export default compose(
   injectSaga({ key: 'fetchIntervention', saga: fetchInterventionSaga }),
   injectSaga({ key: 'fetchInterventions', saga: fetchInterventionsSaga }),
   injectSaga({ key: 'reportTemplatesSaga', saga: reportTemplatesSaga }),
-  injectSaga({ key: 'copyModal', saga: allCopyModalSagas }),
   injectSaga({
     key: 'reorderQuestionGroups',
     saga: reorderQuestionGroupsSaga,

@@ -9,6 +9,7 @@ import { sessionReducer } from 'global/reducers/session';
 import { localStateReducer } from 'global/reducers/localState';
 import { interventionsReducer } from 'global/reducers/interventions';
 import { interventionReducer } from 'global/reducers/intervention';
+import { copyModalReducer } from 'global/reducers/copyModalReducer';
 
 import { draft } from 'models/Status/StatusTypes';
 
@@ -36,12 +37,18 @@ const mockSession = (suffix = 1) => ({
 describe('<CopyChooser />', () => {
   let store;
   const initialState = {
-    interventions: {
-      interventions: [mockIntervention()],
-    },
     copyModal: {
       sessions: [mockSession()],
       questionGroups: [mockSingleGroup()],
+      loaders: {
+        questionGroups: false,
+        sessions: false,
+        interventions: false,
+      },
+      currentIds: {
+        intervention: 1,
+        session: 1,
+      },
     },
     session: {
       session: mockSession(),
@@ -56,6 +63,7 @@ describe('<CopyChooser />', () => {
       localState: localStateReducer,
       interventions: interventionsReducer,
       intervention: interventionReducer,
+      copyModal: copyModalReducer,
     };
   });
 

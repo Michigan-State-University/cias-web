@@ -70,7 +70,7 @@ exports[`<CopyModal /> Should render and match the snapshot 1`] = `
   background-color: rgba(248,251,255,1);
 }
 
-.c26 {
+.c31 {
   width: 100%;
   height: 40px;
   border-radius: 100px;
@@ -176,13 +176,93 @@ exports[`<CopyModal /> Should render and match the snapshot 1`] = `
   -ms-flex-direction: row;
   flex-direction: row;
   height: auto;
+  -webkit-box-pack: start;
+  -webkit-justify-content: flex-start;
+  -ms-flex-pack: start;
+  justify-content: flex-start;
+  justify-items: flex-start;
+  -webkit-align-content: center;
+  -ms-flex-line-pack: center;
+  align-content: center;
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
   padding-top: 15px;
   padding-bottom: 15px;
   padding-right: 25px;
   padding-left: 25px;
+  width: 100%;
+  cursor: pointer;
+}
+
+.c23:hover {
+  background-color: rgba(183,39,234,0.1);
 }
 
 .c25 {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-flex-direction: row;
+  -ms-flex-direction: row;
+  flex-direction: row;
+  height: auto;
+  -webkit-box-pack: justify;
+  -webkit-justify-content: space-between;
+  -ms-flex-pack: justify;
+  justify-content: space-between;
+  justify-items: space-between;
+  -webkit-align-content: center;
+  -ms-flex-line-pack: center;
+  align-content: center;
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  margin-right: 10px;
+  width: 100%;
+}
+
+.c28 {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-flex-direction: row;
+  -ms-flex-direction: row;
+  flex-direction: row;
+  height: auto;
+  -webkit-box-pack: center;
+  -webkit-justify-content: center;
+  -ms-flex-pack: center;
+  justify-content: center;
+  justify-items: center;
+  -webkit-align-content: center;
+  -ms-flex-line-pack: center;
+  align-content: center;
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  margin-right: 10px;
+}
+
+.c29 {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-flex-direction: row;
+  -ms-flex-direction: row;
+  flex-direction: row;
+  height: auto;
+  margin-right: 25px;
+  margin-left: 25px;
+}
+
+.c30 {
   display: -webkit-box;
   display: -webkit-flex;
   display: -ms-flexbox;
@@ -288,6 +368,20 @@ exports[`<CopyModal /> Should render and match the snapshot 1`] = `
   overflow: scroll;
 }
 
+.c26 {
+  width: auto;
+  height: auto;
+  display: block;
+  border-radius: 5px;
+  max-width: 170px;
+}
+
+.c24 {
+  width: auto;
+  height: auto;
+  margin-right: 10px;
+}
+
 .c13 {
   font-family: DM Sans;
   font-size: 13px;
@@ -307,14 +401,6 @@ exports[`<CopyModal /> Should render and match the snapshot 1`] = `
   color: #2F3850;
 }
 
-.c24 {
-  font-family: DM Sans;
-  font-size: 13px;
-  line-height: 130%;
-  font-size: 12px;
-  color: #2F3850;
-}
-
 .c20 {
   position: relative;
   width: 100%;
@@ -322,6 +408,13 @@ exports[`<CopyModal /> Should render and match the snapshot 1`] = `
   font-weight: 700;
   color: rgba(183,39,234,1);
   color: rgba(183,39,234,1);
+}
+
+.c27 {
+  position: relative;
+  width: 100%;
+  font-size: 16px;
+  color: #2F3850;
 }
 
 .c5 {
@@ -584,24 +677,80 @@ exports[`<CopyModal /> Should render and match the snapshot 1`] = `
                   >
                     <div
                       class="c23"
+                      width="100%"
                     >
-                      <p
+                      <img
                         class="c24"
-                        font-size="12"
+                        src="IMAGE_MOCK"
+                      />
+                      <div
+                        class="c25"
+                        width="100%"
                       >
-                        No valid question groups to copy to
-                      </p>
+                        <div
+                          class="c3"
+                        >
+                          <div
+                            class="c26"
+                          >
+                            <div
+                              class="c17"
+                              width="100%"
+                            >
+                              <div
+                                class="c18"
+                                display="inline"
+                                width="100%"
+                              >
+                                <div
+                                  class="c19"
+                                  data-for=""
+                                  data-tip=""
+                                >
+                                  <div>
+                                    <span
+                                      class="c27"
+                                      data-for=""
+                                      font-size="16"
+                                      theme="[object Object]"
+                                      width="0"
+                                    >
+                                      <span />
+                                      <span />
+                                      <span
+                                        style="position: fixed; visibility: hidden; top: 0px; left: 0px;"
+                                      >
+                                        …
+                                      </span>
+                                    </span>
+                                  </div>
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                        <div
+                          class="c28"
+                        >
+                          <img
+                            src="IMAGE_MOCK"
+                          />
+                        </div>
+                      </div>
                     </div>
+                    <div
+                      class="c29"
+                    />
                   </div>
                 </div>
               </div>
             </div>
           </div>
           <div
-            class="c25"
+            class="c30"
           >
             <button
-              class="c26"
+              class="c31"
               color="primary"
               disabled=""
               radius="100px"

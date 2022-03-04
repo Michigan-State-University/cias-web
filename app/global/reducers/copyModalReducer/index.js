@@ -8,10 +8,11 @@ export { copyModalReducer } from './reducer';
 export {
   makeSelectSessionsState,
   makeSelectSessions,
-  makeSelectCopyModalLoader,
+  makeSelectCopyModalLoaders,
   makeSelectQuestionGroups,
-  makeSelectQuestions,
   makeSelectInterventions,
+  makeSelectQuestions,
+  makeSelectSavedIds,
 } from './selectors';
 
 export { allCopyModalSagas } from './sagas';
