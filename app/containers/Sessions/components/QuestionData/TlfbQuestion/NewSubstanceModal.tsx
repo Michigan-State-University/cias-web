@@ -52,6 +52,11 @@ const NewSubstanceModal = ({
   const [modalVisible, setModalVisible] = useState(visible);
   const closeModal = () => setModalVisible(false);
 
+  const inputProps = {
+    height: 46,
+    width: '100%',
+  };
+
   const handleClose =
     (resetForm?: (nextState?: Partial<FormikState<Substance>>) => void) =>
     () => {
@@ -88,72 +93,64 @@ const NewSubstanceModal = ({
         onSubmit={onSubmit}
         enableReinitialize
       >
-        {({ handleSubmit, resetForm, isValid }) => {
-          const inputProps = {
-            height: 46,
-            width: '100%',
-          };
-          return (
-            <>
-              <EditModal
-                visible={modalVisible}
-                title={formatMessage(
-                  messages[editMode ? 'editSubstance' : 'addNewSubstance'],
-                )}
-                description={formatMessage(
-                  messages[
-                    grouped
-                      ? 'addNewGroupedSubstanceDescription'
-                      : 'addNewSubstanceDescription'
-                  ],
-                )}
-                onClose={handleClose(resetForm)}
-                confirmButtonMessage={formatMessage(
-                  messages[editMode ? 'saveChanges' : 'addSubstance'],
-                )}
-                onSubmit={handleSubmit}
-                disabled={!isValid}
-                loading={loading}
-                width={grouped ? 560 : 500}
-              >
-                <>
+        {({ handleSubmit, resetForm, isValid }) => (
+          <>
+            <EditModal
+              visible={modalVisible}
+              title={formatMessage(
+                messages[editMode ? 'editSubstance' : 'addNewSubstance'],
+              )}
+              description={formatMessage(
+                messages[
+                  grouped
+                    ? 'addNewGroupedSubstanceDescription'
+                    : 'addNewSubstanceDescription'
+                ],
+              )}
+              onClose={handleClose(resetForm)}
+              confirmButtonMessage={formatMessage(
+                messages[editMode ? 'saveChanges' : 'addSubstance'],
+              )}
+              onSubmit={handleSubmit}
+              disabled={!isValid}
+              loading={loading}
+              width={grouped ? 560 : 500}
+            >
+              <>
+                <FormikInput
+                  data-testid="substance-name"
+                  formikKey="name"
+                  placeholder={formatMessage(messages.substanceNamePlaceholder)}
+                  label={formatMessage(messages.substanceName)}
+                  type="text"
+                  inputProps={inputProps}
+                  mr={16}
+                />
+                {grouped && (
                   <FormikInput
-                    data-testid="substance-name"
-                    formikKey="name"
-                    placeholder={formatMessage(
-                      messages.substanceNamePlaceholder,
-                    )}
-                    label={formatMessage(messages.substanceName)}
+                    data-testid="substance-unit"
+                    formikKey="unit"
+                    placeholder={formatMessage(messages.unitPlaceholder)}
+                    label={formatMessage(messages.unit)}
                     type="text"
                     inputProps={inputProps}
                     mr={16}
                   />
-                  {grouped && (
-                    <FormikInput
-                      data-testid="substance-unit"
-                      formikKey="unit"
-                      placeholder={formatMessage(messages.unitPlaceholder)}
-                      label={formatMessage(messages.unit)}
-                      type="text"
-                      inputProps={inputProps}
-                      mr={16}
-                    />
+                )}
+                <FormikInput
+                  data-testid="substance-variable"
+                  formikKey="variable"
+                  placeholder={formatMessage(
+                    messages.substanceVariablePlaceholder,
                   )}
-                  <FormikInput
-                    data-testid="substance-variable"
-                    formikKey="variable"
-                    placeholder={formatMessage(
-                      messages.substanceVariablePlaceholder,
-                    )}
-                    label={formatMessage(messages.substanceVariable)}
-                    type="text"
-                    inputProps={inputProps}
-                  />
-                </>
-              </EditModal>
-            </>
-          );
-        }}
+                  label={formatMessage(messages.substanceVariable)}
+                  type="text"
+                  inputProps={inputProps}
+                />
+              </>
+            </EditModal>
+          </>
+        )}
       </Formik>
     </>
   );

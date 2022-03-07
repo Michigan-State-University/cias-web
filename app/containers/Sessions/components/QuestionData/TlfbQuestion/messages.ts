@@ -100,4 +100,28 @@ export default defineMessages({
     id: `${scope}.unit`,
     defaultMessage: 'Substance unit',
   },
+  addSubstanceGroup: {
+    id: `${scope}.addSubstanceGroup`,
+    defaultMessage: 'Add new substance group',
+  },
+  editSubstanceGroup: {
+    id: `${scope}.editSubstanceGroup`,
+    defaultMessage: 'Edit the substance group',
+  },
+  addSubstanceGroupDescription: {
+    id: `${scope}.addSubstanceGroupDescription`,
+    defaultMessage: 'Type the name of the substance group',
+  },
+  substanceGroupName: {
+    id: `${scope}.substanceGroupName`,
+    defaultMessage: 'Substance group name',
+  },
+  substanceGroupNamePlaceholder: {
+    id: `${scope}.substanceGroupNamePlaceholder`,
+    defaultMessage: 'e.g. Alcohol Group',
+  },
+  addGroup: {
+    id: `${scope}.addGroup`,
+    defaultMessage: 'Add group',
+  },
 });

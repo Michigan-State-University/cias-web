@@ -1,86 +1,131 @@
-import concat from 'lodash/concat';
+import produce from 'immer';
 import { TlfbQuestionDTO } from 'models/Question';
+import { deleteItemByIndex } from 'utils/reduxUtils';
 import {
   UPDATE_QUESTION_TITLE,
   UPDATE_HEAD_QUESTION,
   UPDATE_SUBSTANCE_QUESTION,
   UPDATE_SUBSTANCES_WITH_GROUP_TOGGLE,
   ADD_SUBSTANCE,
+  ADD_SUBSTANCE_GROUP,
   EDIT_SUBSTANCE,
   REMOVE_SUBSTANCE,
+  EDIT_SUBSTANCE_GROUP,
+  EDIT_SUBSTANCE_IN_GROUP,
+  REMOVE_SUBSTANCE_IN_GROUP,
 } from './constants';
 
 /* eslint-disable default-case, no-param-reassign */
 const tlfbQuestionsReducer = (
   question: TlfbQuestionDTO,
   payload: { data: { value: string }; type: string },
-) => {
-  switch (payload.type) {
-    case UPDATE_QUESTION_TITLE: {
-      const {
-        data: { value },
-      } = payload;
-      question.body.data[0].payload.question_title = value;
-      return question;
-    }
+) =>
+  produce(question, (draft) => {
+    switch (payload.type) {
+      case UPDATE_QUESTION_TITLE: {
+        const {
+          data: { value },
+        } = payload;
+        draft.body.data[0].payload.question_title = value;
+        break;
+      }
 
-    case UPDATE_HEAD_QUESTION: {
-      const {
-        data: { value },
-      } = payload;
-      question.body.data[0].payload.head_question = value;
-      return question;
-    }
+      case UPDATE_HEAD_QUESTION: {
+        const {
+          data: { value },
+        } = payload;
+        draft.body.data[0].payload.head_question = value;
+        break;
+      }
 
-    case UPDATE_SUBSTANCE_QUESTION: {
-      const {
-        data: { value },
-      } = payload;
-      question.body.data[0].payload.substance_question = value;
-      return question;
-    }
+      case UPDATE_SUBSTANCE_QUESTION: {
+        const {
+          data: { value },
+        } = payload;
+        draft.body.data[0].payload.substance_question = value;
+        break;
+      }
 
-    case UPDATE_SUBSTANCES_WITH_GROUP_TOGGLE: {
-      const {
-        data: { option },
-      } = payload as any;
-      question.body.data[0].payload.substances_with_group = option;
-      return question;
-    }
+      case UPDATE_SUBSTANCES_WITH_GROUP_TOGGLE: {
+        const {
+          data: { option },
+        } = payload as any;
+        draft.body.data[0].payload.substances_with_group = option;
+        break;
+      }
 
-    case ADD_SUBSTANCE: {
-      const {
-        data: { substance },
-      } = payload as any;
-      question.body.data[0].payload.substances = concat(
-        question.body.data[0].payload.substances || [],
-        [substance],
-      );
-      return question;
-    }
+      // NOT GROUPED SUBSTANCES
 
-    case EDIT_SUBSTANCE: {
-      const {
-        data: { substance, substanceIndex },
-      } = payload as any;
-      question.body.data[0].payload.substances[substanceIndex] = substance;
-      return question;
-    }
+      case ADD_SUBSTANCE: {
+        const {
+          data: { substance },
+        } = payload as any;
+        draft.body.data[0].payload.substances.push(substance);
+        break;
+      }
 
-    case REMOVE_SUBSTANCE: {
-      const {
-        data: { substanceIndex },
-      } = payload as any;
-      question.body.data[0].payload.substances = [
-        ...question.body.data[0].payload.substances.slice(0, substanceIndex),
-        ...question.body.data[0].payload.substances.slice(substanceIndex + 1),
-      ];
-      return question;
-    }
+      case EDIT_SUBSTANCE: {
+        const {
+          data: { substance, substanceIndex },
+        } = payload as any;
+        draft.body.data[0].payload.substances[substanceIndex] = substance;
+        break;
+      }
 
-    default:
-      return question;
-  }
-};
+      case REMOVE_SUBSTANCE: {
+        const {
+          data: { substanceIndex },
+        } = payload as any;
+        deleteItemByIndex(
+          draft.body.data[0].payload.substances,
+          substanceIndex,
+        );
+        break;
+      }
+
+      // GROUPED SUBSTANCES
+
+      case ADD_SUBSTANCE_GROUP: {
+        const {
+          data: { name },
+        } = payload as any;
+        draft.body.data[0].payload.substance_groups.push({
+          name,
+          substances: [],
+        });
+        break;
+      }
+
+      case EDIT_SUBSTANCE_GROUP: {
+        const {
+          data: { name, groupIndex },
+        } = payload as any;
+        draft.body.data[0].payload.substance_groups[groupIndex].name = name;
+        break;
+      }
+
+      case EDIT_SUBSTANCE_IN_GROUP: {
+        const {
+          data: { substanceIndex, groupIndex, substance },
+        } = payload as any;
+        draft.body.data[0].payload.substance_groups[groupIndex].substances[
+          substanceIndex
+        ] = substance;
+        break;
+      }
+
+      case REMOVE_SUBSTANCE_IN_GROUP: {
+        const {
+          data: { groupIndex, substanceIndex },
+        } = payload as any;
+
+        deleteItemByIndex(
+          draft.body.data[0].payload.substance_groups[groupIndex].substances,
+          substanceIndex,
+        );
+        break;
+      }
+    }
+  });
 
 export default tlfbQuestionsReducer;

@@ -30,9 +30,17 @@ import {
   addSubstance,
   removeSubstance,
   editSubstance,
+  addSubstanceGroup,
+  editSubstanceGroup,
 } from './actions';
 import messages from './messages';
 import NewSubstanceModal from './NewSubstanceModal';
+import NewGroupModal from './NewGroupModal';
+
+enum TlfbQuestionModals {
+  substance = 'SUBSTANCE',
+  substanceGroup = 'GROUP',
+}
 
 const TlfbQuestion = () => {
   const { formatMessage } = useIntl();
@@ -40,15 +48,25 @@ const TlfbQuestion = () => {
   const currentQuestion = useSelector<unknown, TlfbQuestionDTO>(
     makeSelectSelectedQuestion(),
   );
-  const [isSubstanceModalVisible, setIsSubstanceModalVisible] = useState(false);
+
+  const [modalOpen, setModalOpen] =
+    useState<Nullable<TlfbQuestionModals>>(null);
+  const isSubstanceModalVisible = modalOpen === TlfbQuestionModals.substance;
+  const isGroupModalVisible = modalOpen === TlfbQuestionModals.substanceGroup;
+
   const [activeSubstanceIndex, setactiveSubstanceIndex] =
     useState<Nullable<number>>(null);
-  const isEditMode = !isNil(activeSubstanceIndex);
+  const [activeSubstanceGroupIndex, setActiveSubstanceGroupIndex] =
+    useState<Nullable<number>>(null);
 
-  const openModal = () => setIsSubstanceModalVisible(true);
+  const isEditMode = !isNil(activeSubstanceIndex);
+  const isGroupEditMode = !isNil(activeSubstanceGroupIndex);
+
+  const openModal = (modalType: TlfbQuestionModals) => setModalOpen(modalType);
   const closeModal = () => {
-    setIsSubstanceModalVisible(false);
+    setModalOpen(null);
     setactiveSubstanceIndex(null);
+    setActiveSubstanceGroupIndex(null);
   };
 
   const onUpdateQuestion = (type: string) => (value: string) =>
@@ -65,7 +83,7 @@ const TlfbQuestion = () => {
 
   const onEditSubstance = (substanceIndex: number) => {
     setactiveSubstanceIndex(substanceIndex);
-    openModal();
+    openModal(TlfbQuestionModals.substance);
   };
 
   const handleEditSubstance = (substance: Substance) => {
@@ -73,6 +91,20 @@ const TlfbQuestion = () => {
       dispatch(editSubstance(activeSubstanceIndex, substance));
     }
   };
+
+  const onAddSubstanceGroup = (name: string) =>
+    dispatch(addSubstanceGroup(name));
+
+  const onEditSubstanceGroup = (name: string) => {
+    if (isGroupEditMode) {
+      dispatch(editSubstanceGroup(name, activeSubstanceGroupIndex));
+    }
+  };
+
+  const onAddNewElement = () =>
+    openModal(
+      TlfbQuestionModals[substancesWithGroup ? 'substanceGroup' : 'substance'],
+    );
 
   const {
     body: {
@@ -84,6 +116,7 @@ const TlfbQuestion = () => {
             substance_question: substanceQuestion,
             substances_with_group: substancesWithGroup,
             substances,
+            substance_groups: substanceGroups,
           },
         },
       ],
@@ -169,17 +202,38 @@ const TlfbQuestion = () => {
       )}
 
       <Row>
-        <HoverableBox px={8} py={8} ml={-8} onClick={openModal}>
+        <HoverableBox px={8} py={8} ml={-8} onClick={onAddNewElement}>
           <Box>
             <Row align="center">
               <PlusCircle mr={12} />
               <Text fontWeight="bold" color={themeColors.secondary}>
-                {formatMessage(messages.addNewSubstance)}
+                {formatMessage(
+                  messages[
+                    substancesWithGroup
+                      ? 'addSubstanceGroup'
+                      : 'addNewSubstance'
+                  ],
+                )}
               </Text>
             </Row>
           </Box>
         </HoverableBox>
       </Row>
+
+      <NewGroupModal
+        substanceGroup={
+          isGroupEditMode
+            ? substanceGroups[activeSubstanceGroupIndex]
+            : undefined
+        }
+        visible={isGroupModalVisible}
+        onClose={closeModal}
+        loading={false}
+        editMode={isGroupEditMode}
+        onSubmitForm={
+          isGroupEditMode ? onEditSubstanceGroup : onAddSubstanceGroup
+        }
+      />
 
       <NewSubstanceModal
         substance={isEditMode ? substances[activeSubstanceIndex] : undefined}
