@@ -16,6 +16,8 @@ import {
   multiQuestion,
   nameQuestion,
 } from 'models/Session/QuestionTypes';
+import { objectDifference } from 'utils/objectDifference';
+import { hasObjectAnyKeys } from 'utils/getObjectKeys';
 import messages from '../messages';
 import {
   EDIT_QUESTION_REQUEST,
@@ -28,9 +30,11 @@ import {
 import { editQuestionSuccess, editQuestionError } from '../actions';
 
 import {
-  makeSelectSelectedQuestion,
   makeSelectQuestions,
   makeSelectQuestionById,
+  makeSelectQuestionByIdFromCache,
+  makeSelectSelectedQuestionFromCache,
+  makeSelectSelectedQuestion,
 } from '../selectors';
 
 const validateVariable = (payload, question, variables) => {
@@ -62,6 +66,16 @@ function* editQuestion({ payload }) {
       ? makeSelectQuestionById(questionId)
       : makeSelectSelectedQuestion(),
   );
+  const cachedQuestion = yield select(
+    questionId
+      ? makeSelectQuestionByIdFromCache(questionId)
+      : makeSelectSelectedQuestionFromCache(),
+  );
+
+  const diff = objectDifference(cachedQuestion, question);
+
+  if (!hasObjectAnyKeys(diff)) return yield put(editQuestionSuccess(question));
+
   const questions = yield select(makeSelectQuestions());
   const variables = getEditVariables(questions).filter(
     currentVariable => currentVariable && currentVariable.trim(),
@@ -82,8 +96,8 @@ function* editQuestion({ payload }) {
     question.question_group_id
   }/questions/${question.id}`;
   try {
-    const response = yield axios.put(requestURL, {
-      question,
+    const response = yield axios.patch(requestURL, {
+      question: diff,
     });
 
     const responseQuestion = mapQuestionToStateObject(response.data.data);

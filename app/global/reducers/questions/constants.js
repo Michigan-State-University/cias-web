@@ -85,3 +85,4 @@ export const UPDATE_QUESTION_DATA = 'app/EditSessionPage/UPDATE_QUESTION_DATA';
 
 export const UPDATE_QUESTION_SETTINGS =
   'app/EditSessionPage/UPDATE_QUESTION_SETTINGS';
+export const UPDATE_VARIABLE = 'app/EditSessionPage/UPDATE_VARIABLE';

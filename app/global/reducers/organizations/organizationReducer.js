@@ -1,7 +1,11 @@
 import produce from 'immer';
 import cloneDeep from 'lodash/cloneDeep';
 
-import { assignDraftItemsById, updateItemById } from 'utils/reduxUtils';
+import {
+  assignDraftItems,
+  assignDraftItemsById,
+  updateItemById,
+} from 'utils/reduxUtils';
 import {
   FETCH_ORGANIZATION_REQUEST,
   FETCH_ORGANIZATION_SUCCESS,
@@ -133,7 +137,7 @@ const organizationReducer = (state = initialState, action) =>
 
       case EDIT_ORGANIZATION_REQUEST: {
         draft.organization = {
-          ...state.cache.organization,
+          ...cloneDeep(state.organization),
           ...payload.organization,
         };
         draft.loaders.editOrganization = true;
@@ -143,7 +147,7 @@ const organizationReducer = (state = initialState, action) =>
 
       case EDIT_ORGANIZATION_SUCCESS: {
         draft.cache.organization = {
-          ...state.cache.organization,
+          ...cloneDeep(state.cache.organization),
           ...payload.organization,
         };
         draft.loaders.editOrganization = false;
@@ -152,7 +156,7 @@ const organizationReducer = (state = initialState, action) =>
       }
 
       case EDIT_ORGANIZATION_ERROR: {
-        draft.organization = state.cache.organization;
+        assignDraftItems(draft.cache.organization, draft.organization);
         draft.loaders.editOrganization = false;
         draft.errors.editOrganization = payload.error;
         break;
@@ -251,7 +255,9 @@ const organizationReducer = (state = initialState, action) =>
 
         if (state.organization.id === payload.healthSystem.organizationId) {
           draft.organization.healthSystems.unshift(payload.healthSystem);
-          draft.cache.organization.healthSystems.unshift(payload.healthSystem);
+          draft.cache.organization.healthSystems.unshift(
+            cloneDeep(payload.healthSystem),
+          );
         }
         break;
       }
@@ -295,8 +301,9 @@ const organizationReducer = (state = initialState, action) =>
         draft.loaders.editHealthSystem = false;
         draft.errors.editHealthSystem = payload.error;
 
-        draft.organization.healthSystems = cloneDeep(
-          state.cache.organization.healthSystems,
+        assignDraftItems(
+          draft.cache.organization.healthSystems,
+          draft.organization.healthSystems,
         );
 
         break;
@@ -421,8 +428,9 @@ const organizationReducer = (state = initialState, action) =>
         draft.loaders.editClinic = false;
         draft.errors.editClinic = payload.error;
 
-        draft.organization.healthSystems = cloneDeep(
-          state.cache.organization.healthSystems,
+        assignDraftItems(
+          draft.cache.organization.healthSystems,
+          draft.organization.healthSystems,
         );
 
         break;
@@ -466,7 +474,7 @@ const organizationReducer = (state = initialState, action) =>
       }
       case FETCH_ORGANIZATION_INTERVENTIONS_SUCCESS: {
         draft.organization.interventions = payload.interventions;
-        draft.cache.organization = draft.organization;
+        assignDraftItems(draft.organization, draft.cache.organization);
         draft.loaders.fetchOrganizationInterventions = false;
 
         break;

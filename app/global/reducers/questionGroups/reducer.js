@@ -4,6 +4,7 @@ import sortBy from 'lodash/sortBy';
 import { insertAt, removeAt } from 'utils/arrayUtils';
 import { FinishGroupType } from 'models/Session/GroupTypes';
 import { ternary } from 'utils/ternary';
+import { assignDraftItems } from 'utils/reduxUtils';
 import {
   GET_QUESTION_GROUPS_SUCCESS,
   CREATE_QUESTION_IN_GROUP,
@@ -31,7 +32,7 @@ export const initialState = {
     questionGroupsLoading: false,
   },
   cache: {
-    groups: null,
+    groups: [],
   },
   questionsGroupsSaving: false,
 };
@@ -49,8 +50,8 @@ const questionGroupsReducer = (state = initialState, { type, payload }) =>
         break;
       }
       case GET_QUESTION_GROUPS_SUCCESS: {
-        draft.groups = payload.groups;
-        draft.cache.groups = payload.groups;
+        draft.groups = payload.groups ?? [];
+        assignDraftItems(draft.groups, draft.cache.groups);
         draft.loaders.questionGroupsLoading = false;
         break;
       }
@@ -64,10 +65,12 @@ const questionGroupsReducer = (state = initialState, { type, payload }) =>
           ({ id }) => id === payload.groupId,
         );
         draft.groups[index].questions = true;
+        assignDraftItems(draft.groups, draft.cache.groups);
         break;
       }
       case GROUP_QUESTIONS_SUCCESS: {
         draft.groups = [...state.groups, payload.group];
+        assignDraftItems(draft.groups, draft.cache.groups);
         break;
       }
       case CHANGE_GROUP_NAME_REQUEST: {
@@ -78,11 +81,11 @@ const questionGroupsReducer = (state = initialState, { type, payload }) =>
         break;
       }
       case CHANGE_GROUP_NAME_SUCCESS: {
-        draft.cache.groups = state.groups;
+        assignDraftItems(draft.groups, draft.cache.groups);
         break;
       }
       case CHANGE_GROUP_NAME_ERROR: {
-        draft.groups = state.cache.groups;
+        assignDraftItems(draft.cache.groups, draft.groups);
         break;
       }
       case CLEAN_GROUPS: {
@@ -97,6 +100,7 @@ const questionGroupsReducer = (state = initialState, { type, payload }) =>
         );
 
         draft.groups = sortBy(filteredGroups, 'position');
+        assignDraftItems(draft.groups, draft.cache.groups);
 
         break;
       }
@@ -121,11 +125,11 @@ const questionGroupsReducer = (state = initialState, { type, payload }) =>
 
         break;
       case REORDER_GROUP_LIST_SUCCESS:
-        draft.cache.groups = state.groups;
+        assignDraftItems(draft.groups, draft.cache.groups);
         break;
 
       case REORDER_GROUP_LIST_ERROR:
-        draft.groups = state.cache.groups;
+        assignDraftItems(draft.cache.groups, draft.groups);
         break;
 
       case COPY_QUESTIONS_REQUEST:
@@ -136,14 +140,14 @@ const questionGroupsReducer = (state = initialState, { type, payload }) =>
         if (group) {
           const groupsList = [...state.groups, group];
           draft.groups = groupsList;
-          draft.cache.groups = groupsList;
+          assignDraftItems(draft.groups, draft.cache.groups);
         }
         draft.loaders.questionGroupsLoading = false;
         break;
 
       case COPY_QUESTIONS_ERROR:
         draft.loaders.questionGroupsLoading = false;
-        draft.groups = state.cache.groups;
+        assignDraftItems(draft.cache.groups, draft.groups);
         break;
     }
   });
