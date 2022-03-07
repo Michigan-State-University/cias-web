@@ -132,7 +132,11 @@ const ChooserComponent = ({
         </Row>
       </Column>
       <Box maxHeight="300px" overflow="scroll">
-        <Column bg={colors.zirkon}>
+        <Column
+          bg={colors.zirkon}
+          height={items?.length * 60}
+          maxHeight="300px"
+        >
           {loading && (
             <Box width="100%">
               <Loader type="inline" hidden={false} />
