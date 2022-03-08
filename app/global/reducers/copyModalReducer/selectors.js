@@ -46,3 +46,9 @@ export const makeSelectQuestions = () =>
     substate =>
       (substate.questionGroups || []).map(({ questions }) => questions).flat(),
   );
+
+export const makeSelectInterventionCount = () =>
+  createSelector(
+    copyModal,
+    substate => substate.interventionCount,
+  );
