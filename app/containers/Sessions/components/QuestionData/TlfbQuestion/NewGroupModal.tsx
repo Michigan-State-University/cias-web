@@ -16,7 +16,7 @@ type NewSubstanceGroupFormikType = {
 type NewSubstanceGroupModalType = {
   substanceGroup?: SubstanceGroup;
   error?: string;
-  loading: boolean;
+  loading?: boolean;
   visible: boolean;
   editMode?: boolean;
   onClose: () => void;

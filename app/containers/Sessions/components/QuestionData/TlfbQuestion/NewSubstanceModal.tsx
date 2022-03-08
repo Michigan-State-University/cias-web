@@ -12,7 +12,7 @@ import messages from './messages';
 type NewSubstanceModalType = {
   substance?: Substance;
   error?: string;
-  loading: boolean;
+  loading?: boolean;
   visible: boolean;
   editMode?: boolean;
   onClose: () => void;
@@ -69,15 +69,16 @@ const NewSubstanceModal = ({
 
   const onSubmit = (
     values: Substance,
-    { setSubmitting, resetForm }: FormikHelpers<Substance>,
+    { setSubmitting }: FormikHelpers<Substance>,
   ) => {
     onSubmitForm(values);
     setSubmitting(false);
-    handleClose(resetForm)();
   };
 
   useEffect(() => {
-    if (previousLoadingState.current && !loading && !error) handleClose();
+    if (previousLoadingState.current && !loading && !error) {
+      handleClose()();
+    }
     previousLoadingState.current = loading;
   }, [loading]);
 

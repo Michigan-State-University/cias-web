@@ -42,9 +42,11 @@ import {
   UPDATE_QUESTION_IMAGE_ERROR,
   CREATE_QUESTION_GROUP_REQUEST,
   CREATE_QUESTIONS_SUCCESS,
+  CLEAR_ERROR,
 } from './constants';
 
 export const selectQuestion = (id) => actionBuilder(SELECT_QUESTION, { id });
+export const clearError = () => actionBuilder(CLEAR_ERROR, {});
 
 export const createQuestionRequest = (question, id) =>
   actionBuilder(CREATE_QUESTION_REQUEST, { question, id });

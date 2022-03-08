@@ -19,10 +19,14 @@ import messages from './messages';
 
 type UngroupedSubstancesType = {
   substances: Substance[];
+  loading?: boolean;
+  error?: string;
 };
 
 export const UngroupedSubstances = ({
   substances,
+  loading,
+  error,
 }: UngroupedSubstancesType) => {
   const dispatch = useDispatch();
   const { formatMessage } = useIntl();
@@ -80,14 +84,17 @@ export const UngroupedSubstances = ({
           </Row>
         </Box>
       </HoverableBox>
-      <NewSubstanceModal
-        substance={isEditMode ? substances[activeSubstanceIndex] : undefined}
-        visible={isSubstanceModalVisible}
-        onClose={closeModal}
-        loading={false}
-        editMode={isEditMode}
-        onSubmitForm={isEditMode ? handleEditSubstance : onAddSubstance}
-      />
+      {isSubstanceModalVisible && (
+        <NewSubstanceModal
+          loading={!!loading}
+          substance={isEditMode ? substances[activeSubstanceIndex] : undefined}
+          visible={isSubstanceModalVisible}
+          onClose={closeModal}
+          editMode={isEditMode}
+          onSubmitForm={isEditMode ? handleEditSubstance : onAddSubstance}
+          error={error}
+        />
+      )}
     </>
   );
 };

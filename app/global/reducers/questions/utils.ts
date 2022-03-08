@@ -120,10 +120,12 @@ export const editQuestionSuccessCommon = (
   );
   draft.questions[index] = mapQuestionDataForType(payload.question);
   draft.cache.questions = draft.questions;
+  draft.errors.updateQuestionError = null;
 };
 
 /* eslint-disable default-case, no-param-reassign */
 export const editQuestionErrorCommon = (draft: Draft<any>, payload: any) => {
+  draft.errors.updateQuestionError = payload?.error || 'Error!';
   draft.loaders.updateQuestionLoading = false;
   const finder = (question: { id: string }) =>
     question.id === payload.questionId;

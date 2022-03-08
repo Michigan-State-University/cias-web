@@ -34,6 +34,7 @@ const Collapse = ({
   isBinInCollapse,
   binImage,
   binMargin,
+  disableAnimation,
 }) => (
   <StyledCollapseContainer data-cy={cypressId} {...containerProps}>
     <CollapseLabel
@@ -63,6 +64,7 @@ const Collapse = ({
       child={children}
       isOpened={isOpened}
       contentProps={contentProps}
+      disableAnimation={disableAnimation}
     />
   </StyledCollapseContainer>
 );
@@ -93,6 +95,7 @@ Collapse.propTypes = {
   isBinInCollapse: PropTypes.bool,
   binImage: PropTypes.node,
   binMargin: PropTypes.number,
+  disableAnimation: PropTypes.bool,
 };
 
 Collapse.defaultProps = {
@@ -104,6 +107,7 @@ Collapse.defaultProps = {
   px: 12,
   py: 12,
   deleteActive: true,
+  disableAnimation: false,
 };
 
 export default Collapse;

@@ -257,7 +257,6 @@ export const getTlfbVariables = (question) => {
     question.body.data[0].payload.substance_groups,
     (group) => group.substances,
   );
-
   const allSubstances = [
     ...groupedSubstancesVariables,
     ...question.body.data[0].payload.substances,

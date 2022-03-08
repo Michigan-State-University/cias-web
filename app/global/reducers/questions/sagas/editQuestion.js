@@ -80,7 +80,9 @@ function* editQuestion({ payload }) {
     yield call(toast.error, error.message, {
       toastId: EDIT_QUESTION_ERROR,
     });
-    return yield put(editQuestionError({ questionId: question.id }));
+    return yield put(
+      editQuestionError({ questionId: question.id, error: error.message }),
+    );
   }
 
   yield call(toast.dismiss, EDIT_QUESTION_ERROR);

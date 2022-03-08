@@ -34,7 +34,8 @@ export const Content = styled.div`
 
 export const StyledCollapseContent = styled.div`
   .ReactCollapse--collapse {
-    transition: height 480ms ease;
+    ${({ disableAnimation }) =>
+      !disableAnimation && `transition: height 480ms ease;`}
   }
   ${style};
   ${layout};

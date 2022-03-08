@@ -14,6 +14,7 @@ import Text from 'components/Text';
 import PlusCircle from 'components/Circle/PlusCircle';
 import Row from 'components/Row';
 
+import { clearError } from 'global/reducers/questions/actions';
 import messages from './messages';
 import NewSubstanceModal from './NewSubstanceModal';
 import NewGroupModal from './NewGroupModal';
@@ -29,10 +30,14 @@ import {
 
 type GroupedSubstancesType = {
   substanceGroups: SubstanceGroup[];
+  loading?: boolean;
+  error?: string;
 };
 
 export const GroupedSubstances = ({
   substanceGroups,
+  loading,
+  error,
 }: GroupedSubstancesType) => {
   const { formatMessage } = useIntl();
   const dispatch = useDispatch();
@@ -49,6 +54,7 @@ export const GroupedSubstances = ({
   const [isGroupModalVisible, setIsGroupModalVisible] = useState(false);
 
   const closeModal = () => {
+    dispatch(clearError());
     setActiveSubstanceGroupIndex(null);
     setActiveSubstanceIndex(null);
     setIsSubstanceModalVisible(false);
@@ -121,6 +127,7 @@ export const GroupedSubstances = ({
           onEdit={onEditGroup(index)}
           onDelete={onRemoveGroup(index)}
           mb={16}
+          disableAnimation={!!error}
         >
           <>
             <BoxTable
@@ -163,30 +170,34 @@ export const GroupedSubstances = ({
         }
         visible={isGroupModalVisible}
         onClose={closeModal}
-        loading={false}
+        loading={!!loading}
+        error={error}
         editMode={hasGroupIndex}
         onSubmitForm={
           hasGroupIndex ? onEditSubstanceGroup : onAddSubstanceGroup
         }
       />
 
-      <NewSubstanceModal
-        substance={
-          hasGroupIndex && hasSubstanceIndex
-            ? substanceGroups[activeSubstanceGroupIndex].substances[
-                activeSubstanceIndex
-              ]
-            : undefined
-        }
-        visible={isSubstanceModalVisible}
-        onClose={closeModal}
-        loading={false}
-        editMode={hasSubstanceIndex}
-        onSubmitForm={
-          hasSubstanceIndex ? onEditGroupedSubstance : onAddGroupedSubstance
-        }
-        grouped
-      />
+      {isSubstanceModalVisible && (
+        <NewSubstanceModal
+          substance={
+            hasGroupIndex && hasSubstanceIndex
+              ? substanceGroups[activeSubstanceGroupIndex].substances[
+                  activeSubstanceIndex
+                ]
+              : undefined
+          }
+          visible={isSubstanceModalVisible}
+          onClose={closeModal}
+          loading={!!loading}
+          editMode={hasSubstanceIndex}
+          onSubmitForm={
+            hasSubstanceIndex ? onEditGroupedSubstance : onAddGroupedSubstance
+          }
+          error={error}
+          grouped
+        />
+      )}
     </>
   );
 };

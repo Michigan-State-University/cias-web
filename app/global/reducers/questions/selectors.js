@@ -58,6 +58,11 @@ export const makeSelectLoader = (loader) =>
     get(substate.loaders, loader, false),
   );
 
+export const makeSelectError = (error) =>
+  createSelector(selectQuestions, (substate) =>
+    get(substate.errors, error, false),
+  );
+
 export const makeSelectQuestionsLength = () =>
   createSelector(selectQuestions, (substate) => substate.questions.length);
 

@@ -15,6 +15,7 @@ import { insertAt, removeAt } from 'utils/arrayUtils';
 
 import { assignDraftItemsById, updateItemById } from 'utils/reduxUtils';
 import {
+  CLEAR_ERROR,
   SELECT_QUESTION,
   CREATE_QUESTION_SUCCESS,
   GET_QUESTIONS_REQUEST,
@@ -82,12 +83,19 @@ export const initialState = {
     getQuestionsLoading: true,
     updateQuestionLoading: false,
   },
+  errors: {
+    updateQuestionError: null,
+  },
 };
 
 /* eslint-disable default-case, no-param-reassign */
 export const questionsReducer = (state = initialState, action) =>
   produce(state, (draft) => {
     switch (action.type) {
+      case CLEAR_ERROR:
+        draft.errors.updateQuestionError = null;
+        break;
+
       case SELECT_QUESTION:
         draft.selectedQuestion = action.payload.id;
         break;
@@ -136,6 +144,7 @@ export const questionsReducer = (state = initialState, action) =>
         break;
 
       case EDIT_QUESTION_REQUEST: {
+        draft.errors.updateQuestionError = null;
         draft.loaders.updateQuestionLoading = true;
         const questionIndex = state.questions.findIndex(
           ({ id }) => id === state.selectedQuestion,
@@ -192,6 +201,7 @@ export const questionsReducer = (state = initialState, action) =>
         break;
 
       case UPDATE_QUESTION_IMAGE_REQUEST:
+        draft.errors.updateQuestionError = null;
         draft.loaders.updateQuestionLoading = true;
         updateItemById(
           draft.questions,
@@ -203,6 +213,7 @@ export const questionsReducer = (state = initialState, action) =>
         );
         break;
       case UPDATE_QUESTION_IMAGE_SUCCESS:
+        draft.errors.updateQuestionError = null;
         draft.loaders.updateQuestionLoading = false;
         assignDraftItemsById(
           draft.questions,
@@ -419,6 +430,9 @@ export const questionsReducer = (state = initialState, action) =>
         break;
 
       case UPDATE_QUESTION_DATA: {
+        draft.errors.updateQuestionError = null;
+        draft.loaders.updateQuestionLoading = true;
+
         const questionId = get(action, 'payload.data.questionId', undefined);
         const selectedQuestionIndex = draft.questions.findIndex(
           ({ id }) => id === (questionId || draft.selectedQuestion),
@@ -438,6 +452,7 @@ export const questionsReducer = (state = initialState, action) =>
       }
 
       case UPDATE_QUESTION_SETTINGS: {
+        draft.errors.updateQuestionError = null;
         draft.loaders.updateQuestionLoading = true;
 
         const selectedQuestionIndex = draft.questions.findIndex(

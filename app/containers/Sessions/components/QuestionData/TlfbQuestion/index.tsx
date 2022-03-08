@@ -4,7 +4,11 @@ import { useDispatch, useSelector } from 'react-redux';
 
 import { themeColors } from 'theme';
 
-import { makeSelectSelectedQuestion } from 'global/reducers/questions';
+import {
+  makeSelectError,
+  makeSelectLoader,
+  makeSelectSelectedQuestion,
+} from 'global/reducers/questions';
 import { TlfbQuestionDTO } from 'models/Question';
 import globalMessages from 'global/i18n/globalMessages';
 
@@ -31,6 +35,14 @@ const TlfbQuestion = () => {
   const dispatch = useDispatch();
   const currentQuestion = useSelector<unknown, TlfbQuestionDTO>(
     makeSelectSelectedQuestion(),
+  );
+
+  const error = useSelector<string, Nullable<string>>(
+    makeSelectError('updateQuestionError'),
+  );
+
+  const isLoading = useSelector<string, boolean>(
+    makeSelectLoader('updateQuestionLoading'),
   );
 
   const onUpdateQuestion = (type: string) => (value: string) =>
@@ -126,10 +138,20 @@ const TlfbQuestion = () => {
       </Row>
 
       {substancesWithGroup && (
-        <GroupedSubstances substanceGroups={substanceGroups} />
+        <GroupedSubstances
+          substanceGroups={substanceGroups}
+          loading={isLoading}
+          error={error ?? ''}
+        />
       )}
 
-      {!substancesWithGroup && <UngroupedSubstances substances={substances} />}
+      {!substancesWithGroup && (
+        <UngroupedSubstances
+          substances={substances}
+          loading={isLoading}
+          error={error ?? ''}
+        />
+      )}
     </Box>
   );
 };

@@ -1,4 +1,5 @@
 export const SELECT_QUESTION = 'app/EditSessionPage/SELECT_QUESTION';
+export const CLEAR_ERROR = 'app/EditSessionPage/CLEAR_ERROR';
 
 export const CREATE_QUESTION_REQUEST =
   'app/EditSessionPage/CREATE_QUESTION_REQUEST';

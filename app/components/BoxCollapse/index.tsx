@@ -20,6 +20,7 @@ type BoxCollapseType = {
   label: string;
   onEdit?: () => void;
   onDelete?: () => void;
+  disableAnimation?: boolean;
 } & Record<string, unknown>;
 
 export const BoxCollapse = ({
@@ -27,6 +28,7 @@ export const BoxCollapse = ({
   label,
   onEdit,
   onDelete,
+  disableAnimation,
   ...styleProps
 }: BoxCollapseType) => {
   const [isOpened, setOpened] = useState(false);
@@ -76,6 +78,7 @@ export const BoxCollapse = ({
             />
           </Label>
         }
+        disableAnimation={disableAnimation}
       >
         <Box width="100%" px={16} pb={16}>
           <Divider mb={16} mt={1} />

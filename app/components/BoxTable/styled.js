@@ -2,9 +2,11 @@ import Color from 'color';
 import styled, { css } from 'styled-components';
 import { colors } from 'theme';
 
+const COLUMN_WIDTH = '100px';
+
 const getColumnTemplate = (columnsNo, hasEdit, hasDelete) => {
   const firstColumns =
-    columnsNo > 1 ? `repeat(${columnsNo - 1}, 100px) 1fr` : '1fr';
+    columnsNo > 1 ? `repeat(${columnsNo - 1}, ${COLUMN_WIDTH}) 1fr` : '1fr';
   const editColumns = hasEdit || hasDelete ? '32px 32px' : '';
 
   return css`
@@ -32,7 +34,7 @@ export const Header = styled.div`
 `;
 
 export const HeaderCell = styled.div`
-  width: 100px;
+  width: ${COLUMN_WIDTH};
   color: ${Color(colors.bluewood).alpha(0.7).rgb().string()};
 
   &:not(:first-of-type) {
@@ -45,9 +47,9 @@ export const Cell = styled.div`
   overflow: hidden;
 
   &:not(:last-of-type) {
-    width: 100px;
-    min-width: 100px;
-    max-width: 100px;
+    width: ${COLUMN_WIDTH};
+    min-width: ${COLUMN_WIDTH};
+    max-width: ${COLUMN_WIDTH};
     border-right: 1px solid ${colors.heather};
   }
 

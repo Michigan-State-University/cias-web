@@ -25,6 +25,7 @@ export {
   makeSelectSelectedQuestion,
   makeSelectLoaders,
   makeSelectLoader,
+  makeSelectError,
   makeSelectQuestionsLength,
   makeSelectSelectedQuestionType,
   makeSelectVisibleGroupsSize,
