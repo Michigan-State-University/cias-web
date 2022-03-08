@@ -14,32 +14,39 @@ import BinIcon from 'assets/svg/bin-no-bg.svg';
 
 import { Row, Cell, Header, HeaderCell } from './styled';
 
-type BoxTableProps = {
-  data: Record<string, string>[];
-  badgeKeys: string[];
+type BoxTableProps<T> = {
+  data: T[];
+  columnKeys?: (keyof T)[];
+  badgeKeys: (keyof T)[];
   onRowEdit?: (id: number) => void;
   onRowDelete?: (id: number) => void;
+  containerStyleProps?: Record<string, unknown>;
 };
 
-export const BoxTable = ({
+export const BoxTable = <T,>({
   data,
+  columnKeys,
   badgeKeys,
   onRowEdit,
   onRowDelete,
-}: BoxTableProps) => {
+  containerStyleProps,
+}: BoxTableProps<T>) => {
   if (isEmpty(data)) return null;
 
-  const keys = Object.keys(data[0]) as Array<string>;
+  const keys = columnKeys || (Object.keys(data[0]) as Array<keyof T>);
 
   return (
-    <Box maxWidth="100%">
+    <Box maxWidth="100%" {...containerStyleProps}>
       <Header>
         {keys.map((header) => (
-          <HeaderCell key={`header-${header}`}>{capitalize(header)}</HeaderCell>
+          <HeaderCell key={`header-${header}`}>
+            {capitalize(header.toString())}
+          </HeaderCell>
         ))}
       </Header>
       {data.map((row, index) => (
         <Row
+          key={`row-${index}`}
           columnsNo={keys.length}
           hasEdit={!!onRowEdit}
           hasDelete={!!onRowDelete}
@@ -51,7 +58,9 @@ export const BoxTable = ({
                   {row[key]}
                 </Badge>
               )}
-              {!badgeKeys.includes(key) && <EllipsisText text={row[key]} />}
+              {!badgeKeys.includes(key) && (
+                <EllipsisText text={`${row[key] ?? ''}`} />
+              )}
             </Cell>
           ))}
           {onRowEdit && (

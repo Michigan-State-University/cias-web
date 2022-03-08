@@ -22,3 +22,5 @@ export const EDIT_SUBSTANCE_IN_GROUP =
   'app/EditSessionPage/TlfbQuestion/EDIT_SUBSTANCE_IN_GROUP';
 export const REMOVE_SUBSTANCE_IN_GROUP =
   'app/EditSessionPage/TlfbQuestion/REMOVE_SUBSTANCE_IN_GROUP';
+export const REMOVE_SUBSTANCE_GROUP =
+  'app/EditSessionPage/TlfbQuestion/REMOVE_SUBSTANCE_GROUP';

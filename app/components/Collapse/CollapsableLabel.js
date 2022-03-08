@@ -35,6 +35,7 @@ const CollapseLabel = ({
   binNotActiveImage,
   binImage,
   isBinInCollapse,
+  binMargin,
 }) => {
   const { formatMessage } = useIntl();
   const currentImg = isOpened ? onShowImg : onHideImg;
@@ -57,8 +58,8 @@ const CollapseLabel = ({
       src={deleteActive ? binImage : binNotActiveImage}
       onClick={deleteActive ? onDelete : undefined}
       title={formatMessage(messages.deleteItem)}
-      ml={isBinInCollapse ? 0 : 5}
-      mr={!isBinInCollapse ? 0 : 5}
+      ml={isBinInCollapse ? 0 : binMargin || 5}
+      mr={!isBinInCollapse ? 0 : binMargin || 5}
       data-testid={`bin-${label}`}
       data-cy={`accordion-element-delete-${index}`}
     />
@@ -117,6 +118,7 @@ CollapseLabel.propTypes = {
   binImage: PropTypes.node,
   binNotActiveImage: PropTypes.node,
   isBinInCollapse: PropTypes.bool,
+  binMargin: PropTypes.number,
 };
 
 CollapseLabel.defaultProps = {

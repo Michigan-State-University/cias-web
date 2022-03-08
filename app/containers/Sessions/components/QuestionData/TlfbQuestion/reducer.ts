@@ -13,6 +13,8 @@ import {
   EDIT_SUBSTANCE_GROUP,
   EDIT_SUBSTANCE_IN_GROUP,
   REMOVE_SUBSTANCE_IN_GROUP,
+  ADD_SUBSTANCE_IN_GROUP,
+  REMOVE_SUBSTANCE_GROUP,
 } from './constants';
 
 /* eslint-disable default-case, no-param-reassign */
@@ -96,6 +98,16 @@ const tlfbQuestionsReducer = (
         break;
       }
 
+      case ADD_SUBSTANCE_IN_GROUP: {
+        const {
+          data: { groupIndex, substance },
+        } = payload as any;
+        draft.body.data[0].payload.substance_groups[groupIndex].substances.push(
+          substance,
+        );
+        break;
+      }
+
       case EDIT_SUBSTANCE_GROUP: {
         const {
           data: { name, groupIndex },
@@ -122,6 +134,18 @@ const tlfbQuestionsReducer = (
         deleteItemByIndex(
           draft.body.data[0].payload.substance_groups[groupIndex].substances,
           substanceIndex,
+        );
+        break;
+      }
+
+      case REMOVE_SUBSTANCE_GROUP: {
+        const {
+          data: { groupIndex },
+        } = payload as any;
+
+        deleteItemByIndex(
+          draft.body.data[0].payload.substance_groups,
+          groupIndex,
         );
         break;
       }

@@ -56,6 +56,7 @@ const colors = {
   sonicSilver: '#6B707C',
   vermilion: '#D2371D',
   aliceBlue: '#F1F4F9',
+  lightBlue: '#F4F8FF',
   electricPurple: '#B727EA',
   periwinkleGray: '#B3C1E1',
   solitude: '#E6EDFD',

@@ -30,7 +30,6 @@ export const Content = styled.div`
   flex-wrap: wrap;
   height: fit-content;
   width: 100%;
-  margin-bottom: 10px;
 `;
 
 export const StyledCollapseContent = styled.div`

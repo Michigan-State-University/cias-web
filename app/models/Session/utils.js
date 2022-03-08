@@ -1,6 +1,7 @@
 /* eslint-disable no-unused-vars */
 import pick from 'lodash/pick';
 import sortBy from 'lodash/sortBy';
+import flatMap from 'lodash/flatMap';
 
 import { Question } from 'models/Question';
 import { feedbackActions } from 'models/Narrator/FeedbackActions';
@@ -251,10 +252,19 @@ const getMultiVariables = (question) =>
 const getGridVariables = (question) =>
   question.body.data[0].payload.rows.map((row) => row.variable.name);
 
-const getTlfbVariables = (question) =>
-  question.body.data[0].payload.substances.map(
-    (substance) => substance.variable,
+export const getTlfbVariables = (question) => {
+  const groupedSubstancesVariables = flatMap(
+    question.body.data[0].payload.substance_groups,
+    (group) => group.substances,
   );
+
+  const allSubstances = [
+    ...groupedSubstancesVariables,
+    ...question.body.data[0].payload.substances,
+  ];
+
+  return allSubstances.map((substance) => substance.variable);
+};
 
 export const instantiateBlockForType = (type, endPosition, question) => {
   const sharedProperties = {

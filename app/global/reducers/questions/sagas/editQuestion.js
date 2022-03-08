@@ -6,6 +6,7 @@ import get from 'lodash/get';
 import {
   QuestionsWithoutVariable,
   getEditVariables,
+  getTlfbVariables,
 } from 'models/Session/utils';
 import { hasDuplicates } from 'utils/hasDuplicates';
 import { mapQuestionToStateObject } from 'utils/mapResponseObjects';
@@ -52,8 +53,9 @@ const validateVariable = (payload, question, variables) => {
       if (hasDuplicates(variables, element.variable.name)) throw duplicateError;
     });
   } else if (question.type === tlfbQuestion.id) {
-    question.body.data[0].payload.substances.forEach((substance) => {
-      if (hasDuplicates(variables, substance.variable)) throw duplicateError;
+    const tlfbVariables = getTlfbVariables(question);
+    tlfbVariables.forEach((variable) => {
+      if (hasDuplicates(variables, variable)) throw duplicateError;
     });
   } else if (hasDuplicates(variables, question.body.variable.name)) {
     throw duplicateError;

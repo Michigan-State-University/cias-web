@@ -10,6 +10,8 @@ import {
   EDIT_SUBSTANCE_GROUP,
   EDIT_SUBSTANCE_IN_GROUP,
   REMOVE_SUBSTANCE_IN_GROUP,
+  ADD_SUBSTANCE_IN_GROUP,
+  REMOVE_SUBSTANCE_GROUP,
 } from './constants';
 
 export const updateQuestion = (value: string, type: string) =>
@@ -49,6 +51,12 @@ export const addSubstanceGroup = (name: string) =>
     data: { name },
   });
 
+export const addSubstanceInGroup = (substance: Substance, groupIndex: number) =>
+  updateQuestionData({
+    type: ADD_SUBSTANCE_IN_GROUP,
+    data: { substance, groupIndex },
+  });
+
 export const editSubstanceGroup = (name: string, groupIndex: number) =>
   updateQuestionData({
     type: EDIT_SUBSTANCE_GROUP,
@@ -72,4 +80,10 @@ export const removeSubstanceInGroup = (
   updateQuestionData({
     type: REMOVE_SUBSTANCE_IN_GROUP,
     data: { groupIndex, substanceIndex },
+  });
+
+export const removeSubstanceGroup = (groupIndex: number) =>
+  updateQuestionData({
+    type: REMOVE_SUBSTANCE_GROUP,
+    data: { groupIndex },
   });
