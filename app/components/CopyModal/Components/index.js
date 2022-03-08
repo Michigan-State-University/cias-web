@@ -84,7 +84,7 @@ const CopyChooser = ({
   const requestInterventions = (startIndex, endIndex) => {
     fetchInterventionsWithPagination(
       { startIndex, endIndex },
-      { status: interventionStatusFilter },
+      { statuses: interventionStatusFilter },
     );
   };
 
