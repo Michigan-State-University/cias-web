@@ -64,10 +64,22 @@ export const fetchOrganizationsSuccess = organizations =>
 export const fetchOrganizationsFailure = error =>
   actionBuilder(FETCH_ORGANIZATIONS_ERROR, { error });
 
-export const fetchOrganizationInterventionsRequest = organizationId =>
-  actionBuilder(FETCH_ORGANIZATION_INTERVENTIONS_REQUEST, { organizationId });
-export const fetchOrganizationInterventionsSuccess = interventions =>
-  actionBuilder(FETCH_ORGANIZATION_INTERVENTIONS_SUCCESS, { interventions });
+export const fetchOrganizationInterventionsRequest = (
+  organizationId,
+  paginationData,
+) =>
+  actionBuilder(FETCH_ORGANIZATION_INTERVENTIONS_REQUEST, {
+    organizationId,
+    paginationData,
+  });
+export const fetchOrganizationInterventionsSuccess = (
+  interventions,
+  interventionCount,
+) =>
+  actionBuilder(FETCH_ORGANIZATION_INTERVENTIONS_SUCCESS, {
+    interventions,
+    interventionCount,
+  });
 export const fetchOrganizationInterventionsFailure = error =>
   actionBuilder(FETCH_ORGANIZATION_INTERVENTIONS_ERROR, { error });
 

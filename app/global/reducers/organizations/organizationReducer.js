@@ -467,13 +467,16 @@ const organizationReducer = (state = initialState, action) =>
       }
 
       case FETCH_ORGANIZATION_INTERVENTIONS_REQUEST: {
-        draft.organization.interventions = null;
         draft.loaders.fetchOrganizationInterventions = true;
         draft.errors.fetchOrganizationInterventions = null;
         break;
       }
       case FETCH_ORGANIZATION_INTERVENTIONS_SUCCESS: {
-        draft.organization.interventions = payload.interventions;
+        draft.organization.interventions = [
+          ...(state.organization.interventions || []),
+          ...payload.interventions,
+        ];
+        draft.organization.interventionCount = payload.interventionCount;
         assignDraftItems(draft.organization, draft.cache.organization);
         draft.loaders.fetchOrganizationInterventions = false;
 
