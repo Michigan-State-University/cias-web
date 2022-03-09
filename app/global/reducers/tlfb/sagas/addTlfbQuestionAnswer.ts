@@ -6,22 +6,23 @@ import { toast } from 'react-toastify';
 import { jsonApiToObject } from 'utils/jsonApiMapper';
 import { formatMessage } from 'utils/intlOutsideReact';
 import { fullDayToYearFormatter } from 'utils/formatters';
+import objectToSnakeCase from 'utils/objectToSnakeCase';
 
 import {
-  addNewTlfbSubstance,
-  addNewTlfbSubstanceError,
-  addNewTlfbSubstanceSuccess,
+  addTlfbQuestionAnswerRequest,
+  addTlfbQuestionAnswerError,
+  addTlfbQuestionAnswerSuccess,
 } from '../actions';
 
 import {
-  ADD_NEW_SUBSTANCE_REQUEST,
-  ADD_NEW_SUBSTANCE_ERROR,
+  ADD_TLFB_QUESTION_ANSWER_REQUEST,
+  ADD_TLFB_QUESTION_ANSWER_ERROR,
 } from '../constants';
 import messages from '../messages';
 
-function* addNewSubstance({
+function* addTlfbQuestionAnswer({
   payload: { userSessionId, dayKey, questionGroupId, body },
-}: ReturnType<typeof addNewTlfbSubstance>) {
+}: ReturnType<typeof addTlfbQuestionAnswerRequest>) {
   const url = `/v1/tlfb/substances`;
   try {
     const date = dayjs(dayKey, fullDayToYearFormatter).utc(true);
@@ -30,21 +31,24 @@ function* addNewSubstance({
       exact_date: date.toISOString(),
       user_session_id: userSessionId,
       question_group_id: questionGroupId,
-      body,
+      body: objectToSnakeCase(body),
     });
 
-    const newSubstance = jsonApiToObject(data, 'substance');
+    const newAnswer = jsonApiToObject(data, 'substance');
 
-    yield put(addNewTlfbSubstanceSuccess(newSubstance, dayKey));
+    yield put(addTlfbQuestionAnswerSuccess(newAnswer, dayKey));
   } catch (error) {
-    // @ts-ignore
-    yield call(toast.error, formatMessage(messages.addTlfbSubstanceError), {
-      id: ADD_NEW_SUBSTANCE_ERROR,
-    });
-    yield put(addNewTlfbSubstanceError());
+    yield call(
+      toast.error,
+      formatMessage(messages.addTlfbQuestionAnswerError),
+      {
+        toastId: ADD_TLFB_QUESTION_ANSWER_ERROR,
+      },
+    );
+    yield put(addTlfbQuestionAnswerError());
   }
 }
 
-export function* addNewSubstanceSaga() {
-  yield takeLatest(ADD_NEW_SUBSTANCE_REQUEST, addNewSubstance);
+export function* addTlfbQuestionAnswerSaga() {
+  yield takeLatest(ADD_TLFB_QUESTION_ANSWER_REQUEST, addTlfbQuestionAnswer);
 }

@@ -4,7 +4,7 @@ import { toast } from 'react-toastify';
 
 import { EDIT_EVENT_NAME_REQUEST, EDIT_EVENT_NAME_ERROR } from '../constants';
 import {
-  editEventName,
+  editEventNameRequest,
   editEventNameError,
   editEventNameSuccess,
 } from '../actions';
@@ -12,7 +12,7 @@ import messages from '../messages';
 
 function* editTlfbEventName({
   payload: { eventId, name },
-}: ReturnType<typeof editEventName>) {
+}: ReturnType<typeof editEventNameRequest>) {
   const url = `/v1/tlfb/events/${eventId}`;
   try {
     yield call(axios.patch, url, {

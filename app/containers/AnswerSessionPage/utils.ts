@@ -2,11 +2,10 @@ import dayjs from 'dayjs';
 import pickBy from 'lodash/pickBy';
 import isNil from 'lodash/isNil';
 
-import { fullDayToYearFormatter } from 'utils/formatters';
 import { TlfbConfigBody } from 'models/Question';
+import { CalendarData } from 'models/Tlfb';
 import { CamelToSnake } from 'global/types/camelToSnake';
-
-import { CalendarData } from 'components/Calendar/types';
+import { fullDayToYearFormatter } from 'utils/formatters';
 
 export const getSessionMapUserPreviewUrl = (userSessionId: string): string => {
   const {
@@ -61,20 +60,17 @@ export const getCalendarMetadata = (
   } = tlfbConfig;
   const yesterday = dayjs().subtract(1, 'day');
   const oldestFilledDate = getOldestDate(calendarData);
-  const datesWithSubstances = pickBy(
-    calendarData,
-    (date) => !isNil(date.substance),
-  );
-  const oldestFilledSubstanceDate = getOldestDate(datesWithSubstances);
+  const datesWithAnswers = pickBy(calendarData, (date) => !isNil(date.answer));
+  const oldestFilledAnswerDate = getOldestDate(datesWithAnswers);
   const oldestAllowedDate = dayjs().subtract(+daysCount, 'day');
-  const isEverySubstanceFilled =
-    oldestFilledSubstanceDate?.isSame(oldestAllowedDate, 'day') ?? false;
+  const isEveryAnswerFilled =
+    oldestFilledAnswerDate?.isSame(oldestAllowedDate, 'day') ?? false;
 
   return {
     yesterday,
     oldestAllowedDate,
     oldestFilledDate,
-    oldestFilledSubstanceDate,
-    isEverySubstanceFilled,
+    oldestFilledAnswerDate,
+    isEveryAnswerFilled,
   };
 };

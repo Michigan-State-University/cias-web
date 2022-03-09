@@ -48,6 +48,7 @@ export type SubstanceGroup = {
   name: string;
   substances: Substance[];
 };
+
 export interface TlfbQuestionPayload {
   questionTitle: string;
   headQuestion: string;
@@ -56,6 +57,7 @@ export interface TlfbQuestionPayload {
   substances: Substance[];
   substanceGroups: SubstanceGroup[];
 }
+
 export interface TlfbConfigPayload {
   daysCount: string;
 }

@@ -2,6 +2,7 @@ import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useIntl } from 'react-intl';
 
+import { RootState } from 'global/reducers';
 import {
   makeSelectSelectedQuestion,
   updateQuestionData,
@@ -31,7 +32,7 @@ const TlfbConfig = () => {
   const { formatMessage } = useIntl();
   const dispatch = useDispatch();
 
-  const selectedQuestion = useSelector<unknown, TlfbConfigDTO>(
+  const selectedQuestion = useSelector<RootState, TlfbConfigDTO>(
     makeSelectSelectedQuestion()!,
   );
 

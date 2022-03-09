@@ -2,10 +2,9 @@ import { useMemo } from 'react';
 import { Dayjs } from 'dayjs';
 
 import { TlfbConfigBody } from 'models/Question';
+import { CalendarData } from 'models/Tlfb';
 import { CamelToSnake } from 'global/types/camelToSnake';
 import useDidUpdateEffect from 'utils/useDidUpdateEffect';
-
-import { CalendarData } from 'components/Calendar/types';
 
 import { getCalendarMetadata } from './utils';
 
@@ -26,17 +25,17 @@ export const useDayByDayHandler = ({
   selectedDay,
   changeMonth,
 }: Props) => {
-  const { yesterday, oldestFilledSubstanceDate, oldestAllowedDate } = useMemo(
+  const { yesterday, oldestFilledAnswerDate, oldestAllowedDate } = useMemo(
     () => getCalendarMetadata(tlfbConfig, calendarData),
     [tlfbConfig, calendarData],
   );
 
   useDidUpdateEffect(() => {
     if (isLoading) return;
-    if (!oldestFilledSubstanceDate) {
+    if (!oldestFilledAnswerDate) {
       handleSelectDay(yesterday);
-    } else if (oldestFilledSubstanceDate.isAfter(oldestAllowedDate, 'day')) {
-      handleSelectDay(oldestFilledSubstanceDate.subtract(1, 'day'));
+    } else if (oldestFilledAnswerDate.isAfter(oldestAllowedDate, 'day')) {
+      handleSelectDay(oldestFilledAnswerDate.subtract(1, 'day'));
     }
   }, [isLoading]);
 

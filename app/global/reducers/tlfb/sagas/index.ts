@@ -2,8 +2,8 @@ import { all } from '@redux-saga/core/effects';
 import { addNewEventSaga } from './addNewEvent';
 import { editTlfbEventNameSaga } from './editEventName';
 import { removeTlfbEventSaga } from './removeEvent';
-import { addNewSubstanceSaga } from './addNewSubstance';
-import { editSubstanceBodySaga } from './editSubstance';
+import { addTlfbQuestionAnswerSaga } from './addTlfbQuestionAnswer';
+import { editTlfbQuestionAnswerSaga } from './editTlfbQuestionAnswer';
 import { fetchCalendarDataSaga } from './fetchCalendarData';
 
 export default function* allTlfbSagas() {
@@ -11,8 +11,8 @@ export default function* allTlfbSagas() {
     addNewEventSaga(),
     editTlfbEventNameSaga(),
     removeTlfbEventSaga(),
-    addNewSubstanceSaga(),
-    editSubstanceBodySaga(),
+    addTlfbQuestionAnswerSaga(),
+    editTlfbQuestionAnswerSaga(),
     fetchCalendarDataSaga(),
   ]);
 }

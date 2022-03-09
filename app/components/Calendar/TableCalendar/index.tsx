@@ -1,10 +1,8 @@
 import React, { memo, ReactElement } from 'react';
 import dayjs, { Dayjs } from 'dayjs';
 
-import { EventData } from 'models/Tlfb';
+import { EventData, CalendarData } from 'models/Tlfb';
 import { fullDayToYearFormatter } from 'utils/formatters';
-
-import { CalendarData } from '../types';
 
 import {
   Container,

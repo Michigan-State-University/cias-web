@@ -10,17 +10,17 @@ import { fullDayToYearFormatter } from 'utils/formatters';
 import { EventData } from 'models/Tlfb';
 
 import {
-  addNewTlfbEvent,
+  addNewTlfbEventRequest,
   addNewTlfbEventError,
   addNewTlfbEventSuccess,
 } from '../actions';
 
-import { ADD_NEW_EVENT, ADD_NEW_EVENT_ERROR } from '../constants';
+import { ADD_NEW_EVENT_REQUEST, ADD_NEW_EVENT_ERROR } from '../constants';
 import messages from '../messages';
 
 function* addNewEvent({
   payload: { userSessionId, dayKey, questionGroupId },
-}: ReturnType<typeof addNewTlfbEvent>) {
+}: ReturnType<typeof addNewTlfbEventRequest>) {
   const url = `/v1/tlfb/events`;
   try {
     const date = dayjs(dayKey, fullDayToYearFormatter).utc(true);
@@ -43,5 +43,5 @@ function* addNewEvent({
 }
 
 export function* addNewEventSaga() {
-  yield takeLatest(ADD_NEW_EVENT, addNewEvent);
+  yield takeLatest(ADD_NEW_EVENT_REQUEST, addNewEvent);
 }

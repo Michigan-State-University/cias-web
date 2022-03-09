@@ -2,13 +2,15 @@ import axios from 'axios';
 import { call, takeLatest, put } from 'redux-saga/effects';
 
 import { jsonApiToArray } from 'utils/jsonApiMapper';
-import { DayData } from 'models/Tlfb';
+
 import { FETCH_CALENDAR_DATA_REQUEST } from '../constants';
 import {
   fetchCalendarDataRequest,
   fetchCalendarDataSuccess,
   fetchCalendarDataError,
 } from '../actions';
+import { CalendarDataResponseItem } from '../types';
+import { mapCalendarDataResponse } from '../utils';
 
 function* fetchCalendarData({
   payload: { userSessionId, questionGroupId },
@@ -21,17 +23,8 @@ function* fetchCalendarData({
   };
   try {
     const { data } = yield call(axios.get, url, { params });
-    const days = jsonApiToArray(data, 'day');
-    const mappedDays = days.reduce(
-      (obj: Record<string, DayData>, { date, events, substances }: any) => ({
-        ...obj,
-        [date]: {
-          events,
-          substance: substances[0],
-        },
-      }),
-      {},
-    );
+    const days: CalendarDataResponseItem[] = jsonApiToArray(data, 'day');
+    const mappedDays = mapCalendarDataResponse(days);
     yield put(fetchCalendarDataSuccess(mappedDays));
   } catch (error) {
     yield put(fetchCalendarDataError());

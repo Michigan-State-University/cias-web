@@ -7,14 +7,15 @@ import { Dayjs } from 'dayjs';
 
 import {
   allTlfbSagas,
-  addNewTlfbEvent,
+  addNewTlfbEventRequest,
   tlfbReducer,
   makeSelectTlfbDays,
-  editEventName,
+  editEventNameRequest,
   makeSelectTlfbLoader,
   deleteEventRequest,
   fetchCalendarDataRequest,
   makeSelectTlfbError,
+  tlfbReducerKey,
 } from 'global/reducers/tlfb';
 import { TlfbEventsWithConfigDto as TlfbEventsWithConfig } from 'models/Question';
 import { fullDayToYearFormatter } from 'utils/formatters';
@@ -83,13 +84,13 @@ const TlfbEvents = ({
 
   const addTlfbEvent = () => {
     if (userSessionId && dayId) {
-      dispatch(addNewTlfbEvent(questionGroupId, userSessionId, dayId));
+      dispatch(addNewTlfbEventRequest(questionGroupId, userSessionId, dayId));
     }
   };
 
   const updateEventName = (newName: string, id: number) => {
     if (dayId) {
-      dispatch(editEventName(id, newName, dayId));
+      dispatch(editEventNameRequest(id, newName, dayId));
     }
   };
 
@@ -170,5 +171,5 @@ const TlfbEvents = ({
 export default compose(
   injectSaga({ key: 'addNewEvent', saga: allTlfbSagas }),
   // @ts-ignore
-  injectReducer({ key: 'tlfbReducer', reducer: tlfbReducer }),
+  injectReducer({ key: tlfbReducerKey, reducer: tlfbReducer }),
 )(TlfbEvents);

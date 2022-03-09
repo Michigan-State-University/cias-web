@@ -51,6 +51,7 @@ import {
   answersReducer,
   fetchAnswersSaga,
   FETCH_ANSWERS_ERROR,
+  answersReducerKey,
 } from 'global/reducers/answers';
 import { JumpToScreenLocationState } from 'global/types/locationState';
 
@@ -125,7 +126,7 @@ const SessionMapPage = (): JSX.Element => {
   );
 
   // @ts-ignore
-  useInjectReducer({ key: 'answers', reducer: answersReducer });
+  useInjectReducer({ key: answersReducerKey, reducer: answersReducer });
   useInjectSaga({ key: 'fetchAnswers', saga: fetchAnswersSaga });
   const answers = useSelector(makeSelectAnswers());
   const answersLoading = useSelector(makeSelectAnswersLoader('fetchAnswers'));

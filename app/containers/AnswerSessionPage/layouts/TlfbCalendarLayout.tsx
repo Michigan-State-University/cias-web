@@ -2,6 +2,7 @@ import React, { forwardRef, useMemo } from 'react';
 import dayjs, { Dayjs } from 'dayjs';
 
 import { TlfbConfigBody } from 'models/Question';
+import { CalendarData } from 'models/Tlfb';
 import { dayNumeralFormatter, fullMonthNameFormatter } from 'utils/formatters';
 import { CamelToSnake } from 'global/types/camelToSnake';
 
@@ -11,7 +12,7 @@ import { PopoverModal } from 'components/Modal';
 import TlfbTitle from 'components/TlfbTitle';
 import Text from 'components/Text';
 import Box from 'components/Box';
-import { CalendarData, CalendarRef } from 'components/Calendar/types';
+import { CalendarRef } from 'components/Calendar/types';
 import Loader from 'components/Loader';
 
 import { TlfbContainer } from './styled';

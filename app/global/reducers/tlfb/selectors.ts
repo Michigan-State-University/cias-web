@@ -1,10 +1,12 @@
 import { createSelector } from 'reselect';
 
-import { initialState } from './reducer';
+import { RootState } from 'global/reducers';
+
+import { initialState, tlfbReducerKey } from './reducer';
 import { TlfbState } from './types';
 
-const selectTlfbState = (state: { tlfbReducer: TlfbState }) =>
-  state.tlfbReducer || initialState;
+const selectTlfbState = (rootState: RootState) =>
+  rootState[tlfbReducerKey] || initialState;
 
 export const makeSelectTlfbDays = () =>
   createSelector(selectTlfbState, ({ days }) => days);
@@ -14,3 +16,9 @@ export const makeSelectTlfbLoader = (loaderName: keyof TlfbState['loaders']) =>
 
 export const makeSelectTlfbError = (errorName: keyof TlfbState['errors']) =>
   createSelector(selectTlfbState, ({ errors }) => errors[errorName]);
+
+export const makeSelectAnswerSavedSuccessfully = () =>
+  createSelector(
+    selectTlfbState,
+    ({ answerSavedSuccessfully }) => answerSavedSuccessfully,
+  );

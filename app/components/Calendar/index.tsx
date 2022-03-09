@@ -9,14 +9,16 @@ import React, {
 import dayjs, { Dayjs } from 'dayjs';
 import { useContainerQuery } from 'react-container-query';
 
+import { CalendarData } from 'models/Tlfb';
 import { getCalendarMonthDates } from 'utils/calendar/getCalendarMonth';
+
 import { containerBreakpoints } from 'components/Container/containerBreakpoints';
 import Divider from 'components/Divider';
 
 import TableCalendar from './TableCalendar';
 import MonthSelector from './MonthSelector';
 import { Container } from './styled';
-import { CalendarData, CalendarRef } from './types';
+import { CalendarRef } from './types';
 
 type CalendarProps = {
   startDate?: Dayjs;

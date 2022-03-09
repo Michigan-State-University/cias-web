@@ -4,6 +4,7 @@ import { useDispatch, useSelector } from 'react-redux';
 
 import { themeColors } from 'theme';
 
+import { RootState } from 'global/reducers';
 import {
   makeSelectError,
   makeSelectLoader,
@@ -33,15 +34,15 @@ import GroupedSubstances from './GroupedSubstances';
 const TlfbQuestion = () => {
   const { formatMessage } = useIntl();
   const dispatch = useDispatch();
-  const currentQuestion = useSelector<unknown, TlfbQuestionDTO>(
+  const currentQuestion = useSelector<RootState, TlfbQuestionDTO>(
     makeSelectSelectedQuestion(),
   );
 
-  const error = useSelector<string, Nullable<string>>(
+  const error = useSelector<RootState, Nullable<string>>(
     makeSelectError('updateQuestionError'),
   );
 
-  const isLoading = useSelector<string, boolean>(
+  const isLoading = useSelector<RootState, boolean>(
     makeSelectLoader('updateQuestionLoading'),
   );
 

@@ -183,8 +183,8 @@ export default defineMessages({
     id: `${scope}.goToNextDay`,
     defaultMessage: 'Go to the next day',
   },
-  saveSubstance: {
-    id: `${scope}.saveSubstance`,
+  saveAnswer: {
+    id: `${scope}.saveAnswer`,
     defaultMessage: 'Save',
   },
   tlfbDataError: {

@@ -4,6 +4,7 @@ import { useDispatch, useSelector } from 'react-redux';
 
 import { themeColors } from 'theme';
 
+import { RootState } from 'global/reducers';
 import {
   makeSelectSelectedQuestion,
   updateQuestionData,
@@ -20,7 +21,7 @@ import messages from './messages';
 
 const TlfbEvents = () => {
   const dispatch = useDispatch();
-  const currentQuestion = useSelector<unknown, TlfbEventsDTO>(
+  const currentQuestion = useSelector<RootState, TlfbEventsDTO>(
     makeSelectSelectedQuestion(),
   );
 

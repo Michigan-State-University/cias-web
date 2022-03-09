@@ -1,9 +1,10 @@
 import { ActionType } from 'typesafe-actions';
 
-import { CalendarData } from 'components/Calendar/types';
+import { EventData, TlfbQuestionAnswer, CalendarData } from 'models/Tlfb';
+
 import * as actions from './actions';
 
-export type TlfbActions = ActionType<typeof actions>;
+export type TlfbAction = ActionType<typeof actions>;
 
 export type TlfbState = {
   days: CalendarData;
@@ -12,4 +13,12 @@ export type TlfbState = {
   cache: {
     days: TlfbState['days'];
   };
+  answerSavedSuccessfully: boolean;
+};
+
+export type CalendarDataResponseItem = {
+  id: string;
+  date: string;
+  events?: EventData[];
+  substances?: TlfbQuestionAnswer[];
 };

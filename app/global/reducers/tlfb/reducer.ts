@@ -3,34 +3,36 @@ import { getType } from 'typesafe-actions';
 import { deleteItemById, updateItemById } from 'utils/reduxUtils';
 
 import {
-  addNewTlfbEvent,
+  addNewTlfbEventRequest,
   addNewTlfbEventError,
   addNewTlfbEventSuccess,
-  editEventName,
+  editEventNameRequest,
   editEventNameError,
   deleteEventError,
   deleteEventRequest,
   editEventNameSuccess,
   deleteEventSuccess,
-  addNewTlfbSubstance,
-  addNewTlfbSubstanceError,
-  addNewTlfbSubstanceSuccess,
-  editTlfbSubstance,
-  editTlfbSubstanceError,
-  editTlfbSubstanceSuccess,
+  addTlfbQuestionAnswerRequest,
+  addTlfbQuestionAnswerError,
+  addTlfbQuestionAnswerSuccess,
+  editTlfbQuestionAnswerRequest,
+  editTlfbQuestionAnswerError,
+  editTlfbQuestionAnswerSuccess,
   fetchCalendarDataSuccess,
   fetchCalendarDataRequest,
   fetchCalendarDataError,
 } from './actions';
 
-import { TlfbActions, TlfbState } from './types';
+import { TlfbAction, TlfbState } from './types';
+
+export const tlfbReducerKey = 'tlfb';
 
 export const initialState: TlfbState = {
   days: {},
   loaders: {
     createEvent: false,
-    createSubstance: false,
-    editSubstance: false,
+    addTlfbQuestionAnswer: false,
+    editTlfbQuestionAnswer: false,
     fetchCalendarData: false,
   },
   cache: {
@@ -39,16 +41,17 @@ export const initialState: TlfbState = {
   errors: {
     fetchCalendarData: false,
   },
+  answerSavedSuccessfully: false,
 };
 
 /* eslint-disable default-case, no-param-reassign */
 export const tlfbReducer = (
   state: TlfbState = initialState,
-  action: TlfbActions,
+  action: TlfbAction,
 ) =>
   produce(state, (draft) => {
     switch (action.type) {
-      case getType(addNewTlfbEvent):
+      case getType(addNewTlfbEventRequest):
         draft.loaders.createEvent = true;
         break;
       case getType(addNewTlfbEventError):
@@ -70,7 +73,7 @@ export const tlfbReducer = (
         draft.loaders.createEvent = false;
         break;
 
-      case getType(editEventName): {
+      case getType(editEventNameRequest): {
         const {
           payload: { dayKey, eventId, name },
         } = action;
@@ -109,51 +112,54 @@ export const tlfbReducer = (
         break;
       }
 
-      case getType(addNewTlfbSubstance): {
-        draft.loaders.createSubstance = true;
+      case getType(addTlfbQuestionAnswerRequest): {
+        draft.loaders.addTlfbQuestionAnswer = true;
+        draft.answerSavedSuccessfully = false;
         break;
       }
 
-      case getType(addNewTlfbSubstanceSuccess): {
+      case getType(addTlfbQuestionAnswerSuccess): {
         const {
-          payload: { substance, dayKey },
+          payload: { answer, dayKey },
         } = action;
         if (state.days[dayKey]) {
-          draft.days[dayKey].substance = substance;
+          draft.days[dayKey].answer = answer;
         } else {
-          draft.days[dayKey] = { substance };
+          draft.days[dayKey] = { answer };
         }
         draft.cache.days = draft.days;
-        draft.loaders.createSubstance = false;
+        draft.loaders.addTlfbQuestionAnswer = false;
+        draft.answerSavedSuccessfully = true;
         break;
       }
 
-      case getType(addNewTlfbSubstanceError): {
-        draft.loaders.createSubstance = false;
+      case getType(addTlfbQuestionAnswerError): {
+        draft.loaders.addTlfbQuestionAnswer = false;
         break;
       }
 
-      case getType(editTlfbSubstance): {
-        draft.loaders.editSubstance = true;
+      case getType(editTlfbQuestionAnswerRequest): {
+        draft.loaders.editTlfbQuestionAnswer = true;
+        draft.answerSavedSuccessfully = false;
 
         const {
           payload: { dayKey, body },
         } = action;
-        if (draft.days[dayKey] && draft.days[dayKey].substance) {
-          // @ts-ignore
-          draft.days[dayKey].substance.body = body;
+        if (draft.days[dayKey] && draft.days[dayKey].answer) {
+          draft.days[dayKey].answer!.body = body;
         }
         break;
       }
 
-      case getType(editTlfbSubstanceSuccess): {
-        draft.loaders.editSubstance = false;
+      case getType(editTlfbQuestionAnswerSuccess): {
+        draft.loaders.editTlfbQuestionAnswer = false;
+        draft.answerSavedSuccessfully = true;
         draft.cache.days = state.days;
         break;
       }
 
-      case getType(editTlfbSubstanceError): {
-        draft.loaders.editSubstance = false;
+      case getType(editTlfbQuestionAnswerError): {
+        draft.loaders.editTlfbQuestionAnswer = false;
         state.days = draft.cache.days;
         break;
       }

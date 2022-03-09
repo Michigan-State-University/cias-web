@@ -1,10 +1,14 @@
 import { createAction } from 'typesafe-actions';
 
-import { EventData, SubstanceData, SubstanceBody } from 'models/Tlfb';
-import { CalendarData } from 'components/Calendar/types';
+import {
+  EventData,
+  TlfbQuestionAnswer,
+  TlfbQuestionAnswerBody,
+  CalendarData,
+} from 'models/Tlfb';
 
 import {
-  ADD_NEW_EVENT,
+  ADD_NEW_EVENT_REQUEST,
   ADD_NEW_EVENT_ERROR,
   ADD_NEW_EVENT_SUCCESS,
   EDIT_EVENT_NAME_REQUEST,
@@ -13,19 +17,19 @@ import {
   DELETE_EVENT_ERROR,
   EDIT_EVENT_NAME_SUCCESS,
   DELETE_EVENT_SUCCESS,
-  ADD_NEW_SUBSTANCE_ERROR,
-  ADD_NEW_SUBSTANCE_REQUEST,
-  ADD_NEW_SUBSTANCE_SUCCESS,
-  EDIT_SUBSTANCE_ERROR,
-  EDIT_SUBSTANCE_REQUEST,
-  EDIT_SUBSTANCE_SUCCESS,
+  ADD_TLFB_QUESTION_ANSWER_ERROR,
+  ADD_TLFB_QUESTION_ANSWER_REQUEST,
+  ADD_TLFB_QUESTION_ANSWER_SUCCESS,
+  EDIT_TLFB_QUESTION_ANSWER_ERROR,
+  EDIT_TLFB_QUESTION_ANSWER_REQUEST,
+  EDIT_TLFB_QUESTION_ANSWER_SUCCESS,
   FETCH_CALENDAR_DATA_REQUEST,
   FETCH_CALENDAR_DATA_SUCCESS,
   FETCH_CALENDAR_DATA_ERROR,
 } from './constants';
 
-export const addNewTlfbEvent = createAction(
-  ADD_NEW_EVENT,
+export const addNewTlfbEventRequest = createAction(
+  ADD_NEW_EVENT_REQUEST,
   (action) =>
     (questionGroupId: string, userSessionId: string, dayKey: string) =>
       action({ questionGroupId, userSessionId, dayKey }),
@@ -41,7 +45,7 @@ export const addNewTlfbEventError = createAction(
   (action) => () => action({}),
 );
 
-export const editEventName = createAction(
+export const editEventNameRequest = createAction(
   EDIT_EVENT_NAME_REQUEST,
   (action) => (eventId: number, name: string, dayKey: string) =>
     action({ eventId, name, dayKey }),
@@ -72,42 +76,43 @@ export const deleteEventError = createAction(
   (action) => () => action({}),
 );
 
-export const addNewTlfbSubstance = createAction(
-  ADD_NEW_SUBSTANCE_REQUEST,
+export const addTlfbQuestionAnswerRequest = createAction(
+  ADD_TLFB_QUESTION_ANSWER_REQUEST,
   (action) =>
     (
       dayKey: string,
       userSessionId: string,
       questionGroupId: string,
-      body: SubstanceBody,
+      body: TlfbQuestionAnswerBody,
     ) =>
       action({ dayKey, userSessionId, questionGroupId, body }),
 );
 
-export const addNewTlfbSubstanceError = createAction(
-  ADD_NEW_SUBSTANCE_ERROR,
+export const addTlfbQuestionAnswerError = createAction(
+  ADD_TLFB_QUESTION_ANSWER_ERROR,
   (action) => () => action({}),
 );
 
-export const addNewTlfbSubstanceSuccess = createAction(
-  ADD_NEW_SUBSTANCE_SUCCESS,
-  (action) => (substance: SubstanceData, dayKey: string) =>
-    action({ substance, dayKey }),
+export const addTlfbQuestionAnswerSuccess = createAction(
+  ADD_TLFB_QUESTION_ANSWER_SUCCESS,
+  (action) => (answer: TlfbQuestionAnswer, dayKey: string) =>
+    action({ answer, dayKey }),
 );
 
-export const editTlfbSubstance = createAction(
-  EDIT_SUBSTANCE_REQUEST,
-  (action) => (dayKey: string, body: SubstanceBody, substanceIndex: number) =>
-    action({ dayKey, body, substanceIndex }),
+export const editTlfbQuestionAnswerRequest = createAction(
+  EDIT_TLFB_QUESTION_ANSWER_REQUEST,
+  (action) =>
+    (dayKey: string, body: TlfbQuestionAnswerBody, answerId: number) =>
+      action({ dayKey, body, answerId }),
 );
 
-export const editTlfbSubstanceError = createAction(
-  EDIT_SUBSTANCE_ERROR,
+export const editTlfbQuestionAnswerError = createAction(
+  EDIT_TLFB_QUESTION_ANSWER_ERROR,
   (action) => () => action({}),
 );
 
-export const editTlfbSubstanceSuccess = createAction(
-  EDIT_SUBSTANCE_SUCCESS,
+export const editTlfbQuestionAnswerSuccess = createAction(
+  EDIT_TLFB_QUESTION_ANSWER_SUCCESS,
   (action) => () => action({}),
 );
 

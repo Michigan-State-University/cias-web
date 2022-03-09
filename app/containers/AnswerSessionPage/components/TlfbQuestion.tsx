@@ -1,10 +1,4 @@
-import React, {
-  ChangeEvent,
-  useEffect,
-  useMemo,
-  useRef,
-  useState,
-} from 'react';
+import React, { useEffect, useMemo, useRef, useState } from 'react';
 import { FormattedMessage, useIntl } from 'react-intl';
 import { compose } from 'redux';
 import { injectReducer, injectSaga } from 'redux-injectors';
@@ -12,27 +6,28 @@ import { useDispatch, useSelector } from 'react-redux';
 import { Dayjs } from 'dayjs';
 
 import { TlfbQuestionWithConfigDTO as TlfbQuestionWithConfig } from 'models/Question';
-import globalMessages from 'global/i18n/globalMessages';
 import { fullDayToYearFormatter } from 'utils/formatters';
 
 import Text from 'components/Text';
-import Radio from 'components/Radio';
 import Box from 'components/Box';
 import Divider from 'components/Divider';
 import Button from 'components/Button';
 import ErrorAlert from 'components/ErrorAlert';
 import Circle from 'components/Circle';
 import { CalendarRef } from 'components/Calendar/types';
+import { TlfbConsumptionForm } from 'components/TlfbConsumptionForm';
 
 import {
-  addNewTlfbSubstance,
+  addTlfbQuestionAnswerRequest,
   allTlfbSagas,
-  editTlfbSubstance,
+  editTlfbQuestionAnswerRequest,
   fetchCalendarDataRequest,
+  makeSelectAnswerSavedSuccessfully,
   makeSelectTlfbDays,
   makeSelectTlfbError,
   makeSelectTlfbLoader,
   tlfbReducer,
+  tlfbReducerKey,
 } from 'global/reducers/tlfb';
 
 import { colors } from 'theme';
@@ -50,7 +45,12 @@ const TlfbQuestion = ({
   userSessionId,
   selectAnswer,
 }: SharedProps<TlfbQuestionWithConfig, any>) => {
-  const calendarRef = useRef<CalendarRef>({ setMonth: () => {} });
+  const dispatch = useDispatch();
+  const { formatMessage } = useIntl();
+
+  const calendarRef = useRef<CalendarRef>({
+    setMonth: () => {},
+  });
 
   const [selectedDay, setSelectedDay] = useState<Dayjs>();
   const dayId = selectedDay
@@ -63,36 +63,20 @@ const TlfbQuestion = ({
   const calendarDataLoading = useSelector(
     makeSelectTlfbLoader('fetchCalendarData'),
   );
-  const newSubstanceLoading = useSelector(
-    makeSelectTlfbLoader('createSubstance'),
+  const answerSavedSuccessfully = useSelector(
+    makeSelectAnswerSavedSuccessfully(),
   );
-  const editSubstanceLoading = useSelector(
-    makeSelectTlfbLoader('editSubstance'),
+  const newAnswerLoading = useSelector(
+    makeSelectTlfbLoader('addTlfbQuestionAnswer'),
+  );
+  const editAnswerLoading = useSelector(
+    makeSelectTlfbLoader('editTlfbQuestionAnswer'),
   );
   const fetchCalendarDataError = useSelector(
     makeSelectTlfbError('fetchCalendarData'),
   );
 
-  const isSubstanceLoading = newSubstanceLoading || editSubstanceLoading;
-
-  const { formatMessage } = useIntl();
-
-  const selectedDaySubstance = useMemo(() => {
-    if (!dayId) return undefined;
-    return tlfbDaysData[dayId]?.substance;
-  }, [dayId, tlfbDaysData]);
-
-  const selectedDayEvents = useMemo(() => {
-    if (!dayId) return undefined;
-    return tlfbDaysData[dayId]?.events;
-  }, [dayId, tlfbDaysData]);
-
-  const canGoToNextDay = useMemo(
-    () => (dayId ?? '') in tlfbDaysData,
-    [dayId, tlfbDaysData],
-  );
-
-  const dispatch = useDispatch();
+  const isAnswerLoading = newAnswerLoading || editAnswerLoading;
 
   const {
     body: {
@@ -103,6 +87,8 @@ const TlfbQuestion = ({
             head_question: headQuestion,
             question_title: questionTitle,
             substance_question: substanceQuestion,
+            substances,
+            substances_with_group: substancesWithGroup,
           },
         },
       ],
@@ -110,13 +96,39 @@ const TlfbQuestion = ({
     question_group_id: questionGroupId,
   } = question;
 
-  const { isEverySubstanceFilled, oldestAllowedDate } = useMemo(
+  const selectedDayEvents = useMemo(() => {
+    if (!dayId) return undefined;
+    return tlfbDaysData[dayId]?.events;
+  }, [dayId, tlfbDaysData]);
+
+  const selectedDayAnswer = useMemo(() => {
+    if (!dayId) return undefined;
+    return tlfbDaysData[dayId]?.answer;
+  }, [dayId, tlfbDaysData]);
+
+  useEffect(() => {
+    setAnswerBody(selectedDayAnswer?.body);
+  }, [selectedDayAnswer]);
+
+  const [answerBody, setAnswerBody] = useState(selectedDayAnswer?.body);
+
+  const canGoToNextDay = useMemo(() => {
+    if (!answerBody) return false;
+    const { substancesConsumed, consumptions } = answerBody;
+    if (!substancesConsumed) return true;
+    if (substancesWithGroup) {
+      return consumptions?.every(({ amount }) => Boolean(amount));
+    }
+    return consumptions?.length === substances.length;
+  }, [answerBody]);
+
+  const { isEveryAnswerFilled, oldestAllowedDate } = useMemo(
     () => getCalendarMetadata(config, tlfbDaysData),
     [config, tlfbDaysData],
   );
   const isLastDaySelected =
     selectedDay?.isSame(oldestAllowedDate, 'day') ?? false;
-  const isGoToNextDayDisabled = isLastDaySelected || isEverySubstanceFilled;
+  const isGoToNextDayDisabled = isLastDaySelected || isEveryAnswerFilled;
 
   useEffect(() => {
     if (userSessionId) {
@@ -125,10 +137,10 @@ const TlfbQuestion = ({
   }, []);
 
   useEffect(() => {
-    if (isEverySubstanceFilled) {
+    if (isEveryAnswerFilled) {
       selectAnswer([{}]);
     }
-  }, [isEverySubstanceFilled]);
+  }, [isEveryAnswerFilled]);
 
   const { goToNextDay } = useDayByDayHandler({
     calendarData: tlfbDaysData,
@@ -140,29 +152,33 @@ const TlfbQuestion = ({
     changeMonth: calendarRef.current.setMonth,
   });
 
-  const changeSelectedDaySubstances =
-    (value: boolean) => (_: boolean, event: ChangeEvent) => {
-      if (!dayId || !userSessionId) return;
+  useEffect(() => {
+    if (!selectedDay || !answerSavedSuccessfully) return;
+    if (isGoToNextDayDisabled) {
+      closeModal();
+      return;
+    }
+    goToNextDay();
+  }, [answerSavedSuccessfully]);
 
-      // prevent outside click detection (due to spinner)
-      event.stopPropagation();
+  const saveAnswer = () => {
+    if (!dayId || !userSessionId || !answerBody) return;
 
-      if (selectedDaySubstance) {
-        dispatch(
-          editTlfbSubstance(
-            dayId,
-            { substancesConsumed: value },
-            selectedDaySubstance.id,
-          ),
-        );
-      } else {
-        dispatch(
-          addNewTlfbSubstance(dayId, userSessionId, questionGroupId, {
-            substancesConsumed: value,
-          }),
-        );
-      }
-    };
+    if (selectedDayAnswer) {
+      dispatch(
+        editTlfbQuestionAnswerRequest(dayId, answerBody, selectedDayAnswer.id),
+      );
+    } else {
+      dispatch(
+        addTlfbQuestionAnswerRequest(
+          dayId,
+          userSessionId,
+          questionGroupId,
+          answerBody,
+        ),
+      );
+    }
+  };
 
   if (fetchCalendarDataError) {
     return (
@@ -184,7 +200,7 @@ const TlfbQuestion = ({
       selectedDay={selectedDay}
       dayId={dayId}
       calendarData={tlfbDaysData}
-      disableModalClose={!isEverySubstanceFilled}
+      disableModalClose={!isEveryAnswerFilled}
       isLoading={calendarDataLoading}
     >
       {(!isDesktop || isMobilePreview) && (
@@ -213,40 +229,28 @@ const TlfbQuestion = ({
       <Text fontWeight="bold" fontSize={16}>
         {substanceQuestion}
       </Text>
-      <Box my={25} display="flex">
-        <Radio
-          id="yes-option"
-          disabled={isSubstanceLoading}
-          onChange={changeSelectedDaySubstances(true)}
-          checked={selectedDaySubstance?.body.substancesConsumed === true}
-        >
-          <Text mr={32}>
-            <FormattedMessage {...globalMessages.yes} />
-          </Text>
-        </Radio>
-        <Radio
-          id="no-option"
-          disabled={isSubstanceLoading}
-          onChange={changeSelectedDaySubstances(false)}
-          checked={selectedDaySubstance?.body.substancesConsumed === false}
-        >
-          <Text>
-            <FormattedMessage {...globalMessages.no} />
-          </Text>
-        </Radio>
-      </Box>
+      {!substancesWithGroup && (
+        <TlfbConsumptionForm
+          substances={substances}
+          grouped={substancesWithGroup}
+          loading={isAnswerLoading}
+          answerBody={answerBody}
+          onChange={setAnswerBody}
+          mobile={isMobile}
+        />
+      )}
       <Divider mb={25} />
       {/* @ts-ignore */}
       <Button
-        onClick={isGoToNextDayDisabled ? closeModal : goToNextDay}
+        onClick={saveAnswer}
         disabled={!canGoToNextDay}
-        loading={isSubstanceLoading}
+        loading={isAnswerLoading}
         width="auto"
         px={30}
       >
         <FormattedMessage
           {...(isGoToNextDayDisabled
-            ? messages.saveSubstance
+            ? messages.saveAnswer
             : messages.goToNextDay)}
         />
       </Button>
@@ -257,5 +261,5 @@ const TlfbQuestion = ({
 export default compose(
   injectSaga({ key: 'addNewEvent', saga: allTlfbSagas }),
   // @ts-ignore
-  injectReducer({ key: 'tlfbReducer', reducer: tlfbReducer }),
+  injectReducer({ key: tlfbReducerKey, reducer: tlfbReducer }),
 )(TlfbQuestion);
