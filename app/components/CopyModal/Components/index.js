@@ -29,6 +29,7 @@ import {
 } from 'global/reducers/copyModalReducer';
 import ChooserComponent from './ChooserComponent';
 import messages from './messages';
+import { batchSize } from './constants';
 import { CopyModalContext } from '../utils';
 
 export const VIEWS = {
@@ -36,8 +37,6 @@ export const VIEWS = {
   SESSION: 'Session',
   INTERVENTION: 'Intervention',
 };
-
-const FETCH_COUNT = 20;
 
 const CopyChooser = ({
   intl: { formatMessage },
@@ -90,7 +89,7 @@ const CopyChooser = ({
 
   useEffect(() => {
     if (currentView === VIEWS.INTERVENTION && shouldLoadInterventions()) {
-      requestInterventions(0, FETCH_COUNT);
+      requestInterventions(0, batchSize);
     } else if (
       currentView === VIEWS.SESSION &&
       currentIntervention &&
@@ -164,7 +163,7 @@ const CopyChooser = ({
             listIcon={interventionIcon}
             infiniteLoader={{
               itemCount: interventionCount,
-              minimumBatchSize: FETCH_COUNT,
+              minimumBatchSize: batchSize,
               loadMoreItems: requestInterventions,
               loading: loaders.interventions,
             }}

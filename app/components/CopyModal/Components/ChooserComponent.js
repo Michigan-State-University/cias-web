@@ -17,8 +17,7 @@ import { VirtualGrid } from 'components/VirtualList';
 import { InfiniteScrollContext } from '../utils';
 import messages from './messages';
 import CopyItem from './CopyItem';
-
-const itemHeight = 60;
+import { chooserPanelMaxHeight, itemHeight } from './constants';
 
 const ChooserComponent = ({
   intl: { formatMessage },
@@ -62,11 +61,11 @@ const ChooserComponent = ({
           </Box>
         </Row>
       </Column>
-      <Box maxHeight="300px" overflow="scroll">
+      <Box maxHeight={chooserPanelMaxHeight} overflow="scroll">
         <Column
           bg={colors.zirkon}
           height={(items?.length || 0) * itemHeight}
-          maxHeight="300px"
+          maxHeight={chooserPanelMaxHeight}
         >
           <Box filled>
             {!!items?.length && (
