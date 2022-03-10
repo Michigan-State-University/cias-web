@@ -44,7 +44,7 @@ exports[`<ErrorPage /> should render and match the snapshot 1`] = `
             <br />
             Please 
             <a
-              href="https://docs.google.com/forms/d/e/1FAIpQLSdddPH3GwgzYPjvouNBQ6Xp64ZDyw4KhMaAIVBq6k-jlG3sEg/viewform?usp=sf_link"
+              href="https://msu.co1.qualtrics.com/jfe/form/SV_6S9MV7pPpoqFwTY"
               target="_blank"
             >
               click
