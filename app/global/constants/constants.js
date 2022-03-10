@@ -1,2 +1,2 @@
-export const GOOGLE_FORM_URL =
-  'https://docs.google.com/forms/d/e/1FAIpQLSdddPH3GwgzYPjvouNBQ6Xp64ZDyw4KhMaAIVBq6k-jlG3sEg/viewform?usp=sf_link';
+export const FEEDBACK_FORM_URL =
+  'https://msu.co1.qualtrics.com/jfe/form/SV_6S9MV7pPpoqFwTY';
