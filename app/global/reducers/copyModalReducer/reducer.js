@@ -11,12 +11,15 @@ import {
   FETCH_INTERVENTIONS_REQUEST,
   FETCH_INTERVENTIONS_SUCCESS,
   FETCH_INTERVENTIONS_ERROR,
+  FETCH_INTERVENTIONS_WITH_PAGINATION_SUCCESS,
+  FETCH_INTERVENTIONS_WITH_PAGINATION,
 } from './constants';
 
 export const initialState = {
   questionGroups: null,
   sessions: null,
   interventions: null,
+  interventionCount: 0,
   loaders: {
     questionGroups: false,
     sessions: false,
@@ -93,6 +96,18 @@ export const copyModalReducer = (state = initialState, action) =>
       case CHANGE_VIEW:
         draft.loaders.questionGroups = true;
         break;
+
+      case FETCH_INTERVENTIONS_WITH_PAGINATION:
+        draft.loaders.interventions = true;
+        break;
+
+      case FETCH_INTERVENTIONS_WITH_PAGINATION_SUCCESS:
+        draft.loaders.interventions = false;
+        draft.interventions = [
+          ...(state.interventions || []),
+          ...action.payload.interventions,
+        ];
+        draft.interventionCount = action.payload.interventionsSize;
     }
   });
 

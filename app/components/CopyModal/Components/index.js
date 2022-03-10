@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useMemo, useContext } from 'react';
+import React, { useState, useEffect, useContext } from 'react';
 import PropTypes from 'prop-types';
 import { compose } from 'redux';
 import { connect } from 'react-redux';
@@ -22,12 +22,14 @@ import {
   makeSelectQuestionGroups,
   makeSelectCopyModalLoaders,
   changeViewAction,
-  fetchInterventionsRequest,
   makeSelectInterventions,
+  fetchInterventionsWithPaginationRequest,
   makeSelectSavedIds,
+  makeSelectInterventionCount,
 } from 'global/reducers/copyModalReducer';
 import ChooserComponent from './ChooserComponent';
 import messages from './messages';
+import { batchSize } from './constants';
 import { CopyModalContext } from '../utils';
 
 export const VIEWS = {
@@ -47,7 +49,6 @@ const CopyChooser = ({
   sessions,
   fetchSessions,
   fetchQuestionGroups,
-  fetchInterventions,
   defaultView,
   disableQuestionGroupCopy,
   disableSessionCopy,
@@ -55,6 +56,8 @@ const CopyChooser = ({
   changeView,
   pasteText,
   savedIds,
+  fetchInterventionsWithPagination,
+  interventionCount,
 }) => {
   const { interventionStatusFilter } = useContext(CopyModalContext);
 
@@ -77,9 +80,16 @@ const CopyChooser = ({
   const shouldLoadQuestionGroups = () =>
     !questionGroups || savedIds.session !== currentSession.id;
 
+  const requestInterventions = (startIndex, endIndex) => {
+    fetchInterventionsWithPagination(
+      { startIndex, endIndex },
+      { statuses: interventionStatusFilter },
+    );
+  };
+
   useEffect(() => {
     if (currentView === VIEWS.INTERVENTION && shouldLoadInterventions()) {
-      fetchInterventions();
+      requestInterventions(0, batchSize);
     } else if (
       currentView === VIEWS.SESSION &&
       currentIntervention &&
@@ -94,16 +104,6 @@ const CopyChooser = ({
       fetchQuestionGroups(currentSession.id);
     }
   }, [currentView, currentIntervention, currentSession]);
-
-  const filteredInterventions = useMemo(
-    () =>
-      interventions
-        ? interventions.filter(({ status }) =>
-            interventionStatusFilter.includes(status),
-          )
-        : [],
-    [interventions, interventionStatusFilter],
-  );
 
   const handleCopyCurrent = () => {
     if (!selectedItem?.id) return;
@@ -154,13 +154,19 @@ const CopyChooser = ({
           <ChooserComponent
             elementId={selectedItem?.id}
             loading={loaders.interventions}
-            items={filteredInterventions}
+            items={interventions}
             selectedItem={selectedItem}
             changeViewAction={changeToSessionView}
             selectAction={handleSelectAction}
             disableCopy={disableInterventionCopy}
             currentPlaceTitle={formatMessage(messages.interventionsListHeader)}
             listIcon={interventionIcon}
+            infiniteLoader={{
+              itemCount: interventionCount,
+              minimumBatchSize: batchSize,
+              loadMoreItems: requestInterventions,
+              loading: loaders.interventions,
+            }}
           />
         );
       case VIEWS.SESSION:
@@ -225,7 +231,6 @@ CopyChooser.propTypes = {
   interventions: PropTypes.array,
   fetchSessions: PropTypes.func,
   fetchQuestionGroups: PropTypes.func,
-  fetchInterventions: PropTypes.func,
   defaultView: PropTypes.string,
   disableQuestionGroupCopy: PropTypes.bool,
   disableSessionCopy: PropTypes.bool,
@@ -233,6 +238,8 @@ CopyChooser.propTypes = {
   changeView: PropTypes.func,
   savedIds: PropTypes.object,
   pasteText: PropTypes.string,
+  fetchInterventionsWithPagination: PropTypes.func,
+  interventionCount: PropTypes.number,
 };
 
 CopyChooser.defaultProps = {
@@ -250,13 +257,14 @@ const mapStateToProps = createStructuredSelector({
   questionGroups: makeSelectQuestionGroups(),
   interventions: makeSelectInterventions(),
   savedIds: makeSelectSavedIds(),
+  interventionCount: makeSelectInterventionCount(),
 });
 
 const mapDispatchToProps = {
   fetchSessions: fetchSessionsRequest,
   fetchQuestionGroups: fetchQuestionGroupsRequest,
   changeView: changeViewAction,
-  fetchInterventions: fetchInterventionsRequest,
+  fetchInterventionsWithPagination: fetchInterventionsWithPaginationRequest,
 };
 
 const withConnect = connect(
