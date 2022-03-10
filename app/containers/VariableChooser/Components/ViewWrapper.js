@@ -24,7 +24,7 @@ const ViewWrapper = ({ children, goBack }) => {
   };
 
   return (
-    <Column minWidth="200px">
+    <Column minWidth="200px" height={200} overflow="scroll">
       {goBack && (
         <Img
           width="min-content"

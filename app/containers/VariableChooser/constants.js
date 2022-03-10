@@ -24,3 +24,9 @@ export const VariableChooserContext = createContext({
   selectedQuestion: '',
   setCurrentView: undefined,
 });
+
+export const InterventionViewContext = createContext({
+  onClick: null,
+});
+
+export const batchSize = 20;
