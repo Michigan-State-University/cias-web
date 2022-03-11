@@ -29,6 +29,7 @@ exports[`<DateQuestion /> Should render and match the snapshot 1`] = `
               >
                 <button
                   class="styled__StyledDateInput-sc-10udg63-1 knYUti"
+                  data-private="true"
                   disabled=""
                   height="50"
                   width="200"

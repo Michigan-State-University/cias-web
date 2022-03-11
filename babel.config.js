@@ -14,6 +14,7 @@ module.exports = {
     '@babel/plugin-proposal-optional-chaining',
     '@babel/plugin-proposal-nullish-coalescing-operator',
     '@babel/plugin-syntax-dynamic-import',
+    'add-react-displayname',
   ],
   env: {
     production: {

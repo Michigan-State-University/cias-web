@@ -290,6 +290,7 @@ exports[`<SessionSchedule /> Should render and match the snapshot 1`] = `
                     >
                       <button
                         class="c11"
+                        data-private="true"
                         height="50"
                         width="120"
                       >
