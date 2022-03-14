@@ -75,10 +75,12 @@ export const fetchOrganizationInterventionsRequest = (
 export const fetchOrganizationInterventionsSuccess = (
   interventions,
   interventionCount,
+  startIndex,
 ) =>
   actionBuilder(FETCH_ORGANIZATION_INTERVENTIONS_SUCCESS, {
     interventions,
     interventionCount,
+    startIndex,
   });
 export const fetchOrganizationInterventionsFailure = error =>
   actionBuilder(FETCH_ORGANIZATION_INTERVENTIONS_ERROR, { error });

@@ -23,7 +23,11 @@ export function* fetchOrganizationInterventions({
     });
 
     yield put(
-      fetchOrganizationInterventionsSuccess(interventions, interventionCount),
+      fetchOrganizationInterventionsSuccess(
+        interventions,
+        interventionCount,
+        startIndex,
+      ),
     );
   } catch (error) {
     yield put(fetchOrganizationInterventionsFailure(error));
