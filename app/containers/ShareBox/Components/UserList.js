@@ -42,7 +42,7 @@ const UserList = ({ users, buttons, buttonIsClose, userWithLoading }) => {
   };
 
   return (
-    <Column data-cy="user-list">
+    <Column data-cy="user-list" data-private>
       {users.map(({ email, id }, index) => (
         <HoverableRow
           data-cy={`user-list-item-${index}`}

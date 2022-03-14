@@ -92,18 +92,22 @@ exports[`<TeamDetails /> Should render and match the snapshot 1`] = `
                 Change Team Admin
               </p>
               <div
-                class="Box-sc-1vhutan-0 dvfkZg"
+                data-private="true"
               >
                 <div
-                  class="styled__InlineLoader-sc-1aaagww-1 kkTeLU"
-                  data-testid="inline-loader"
+                  class="Box-sc-1vhutan-0 dvfkZg"
                 >
                   <div
-                    class="styled__StyledSpinner-sc-129uixn-0 ehjfMD"
-                    color="#B727EA"
-                    size="50"
-                    width="6"
-                  />
+                    class="styled__InlineLoader-sc-1aaagww-1 kkTeLU"
+                    data-testid="inline-loader"
+                  >
+                    <div
+                      class="styled__StyledSpinner-sc-129uixn-0 ehjfMD"
+                      color="#B727EA"
+                      size="50"
+                      width="6"
+                    />
+                  </div>
                 </div>
               </div>
             </div>

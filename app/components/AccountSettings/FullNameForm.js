@@ -42,7 +42,7 @@ const FullNameForm = ({ formatMessage, user, editUser }) => {
           mb: 20,
         };
         return (
-          <StyledFullNameRow width="100%">
+          <StyledFullNameRow width="100%" data-private>
             <FormikInput
               formikKey="firstName"
               data-testid="first-name-input"

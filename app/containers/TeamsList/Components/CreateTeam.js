@@ -75,11 +75,13 @@ const CreateTeam = ({
         <Text mb={10} fontSize={14}>
           <FormattedMessage {...messages.researcherSectionTitle} />
         </Text>
-        <UserSelector
-          selectedUserId={selectedUser}
-          onSelect={onSelectUser}
-          rolesToInclude={[Roles.researcher, Roles.teamAdmin]}
-        />
+        <div data-private>
+          <UserSelector
+            selectedUserId={selectedUser}
+            onSelect={onSelectUser}
+            rolesToInclude={[Roles.researcher, Roles.teamAdmin]}
+          />
+        </div>
         <Button
           width={260}
           alignSelf="center"

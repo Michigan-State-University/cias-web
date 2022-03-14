@@ -12,6 +12,7 @@ exports[`<PhoneQuestion /> Should render and match the snapshot 1`] = `
     >
       <div
         class="Row-y1cs0u-0 hqAUhv"
+        data-private="true"
         width="100%"
       >
         <div

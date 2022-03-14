@@ -56,7 +56,9 @@ const InvitationList = ({
             colors.mystic
           }`}
         >
-          <Text fontSize={14}>{email}</Text>
+          <Text data-private fontSize={14}>
+            {email}
+          </Text>
           <TextButton
             onClick={() => cancelInvitation(id)}
             loading={invitationCanceling === id}

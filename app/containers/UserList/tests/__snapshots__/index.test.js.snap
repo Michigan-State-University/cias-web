@@ -176,254 +176,258 @@ exports[`<UserList /> Should render and match the snapshot - admin 1`] = `
           />
         </div>
         <div
-          class="styled__TableLoadingContainer-skadoa-0 hSHnNK"
+          data-private="true"
         >
-          <table
-            class="Table-sc-1y0iqmn-0 hyqcGV"
-            width="100%"
+          <div
+            class="styled__TableLoadingContainer-skadoa-0 hSHnNK"
           >
-            <thead
-              class="THead-sc-8drp5d-0"
+            <table
+              class="Table-sc-1y0iqmn-0 hyqcGV"
+              width="100%"
             >
-              <tr
-                class="TR-sc-1omngt7-0 StripedTR-sc-1wcdkgr-0 iNrQaF gkGuNS"
+              <thead
+                class="THead-sc-8drp5d-0"
               >
-                <th
-                  class="TH-sc-1w7ae0i-0 dcMBuC"
-                  color="#2F3850"
-                  opacity="0.6"
-                  scope="col"
-                  width="auto"
+                <tr
+                  class="TR-sc-1omngt7-0 StripedTR-sc-1wcdkgr-0 iNrQaF gkGuNS"
                 >
-                  <div
-                    class="Column-sc-4zswzq-0 gzLnhc"
+                  <th
+                    class="TH-sc-1w7ae0i-0 dcMBuC"
+                    color="#2F3850"
+                    opacity="0.6"
+                    scope="col"
+                    width="auto"
                   >
-                    Name
-                  </div>
-                </th>
-                <th
-                  class="TH-sc-1w7ae0i-0 dcMBuC"
-                  color="#2F3850"
-                  opacity="0.6"
-                  scope="col"
-                  width="auto"
-                >
-                  <div
-                    class="Column-sc-4zswzq-0 gzLnhc"
+                    <div
+                      class="Column-sc-4zswzq-0 gzLnhc"
+                    >
+                      Name
+                    </div>
+                  </th>
+                  <th
+                    class="TH-sc-1w7ae0i-0 dcMBuC"
+                    color="#2F3850"
+                    opacity="0.6"
+                    scope="col"
+                    width="auto"
                   >
-                    Email
-                  </div>
-                </th>
-                <th
-                  class="TH-sc-1w7ae0i-0 dcMBuC"
-                  color="#2F3850"
-                  opacity="0.6"
-                  scope="col"
-                  width="auto"
-                >
-                  <div
-                    class="Column-sc-4zswzq-0 gzLnhc"
+                    <div
+                      class="Column-sc-4zswzq-0 gzLnhc"
+                    >
+                      Email
+                    </div>
+                  </th>
+                  <th
+                    class="TH-sc-1w7ae0i-0 dcMBuC"
+                    color="#2F3850"
+                    opacity="0.6"
+                    scope="col"
+                    width="auto"
                   >
-                    Role
-                  </div>
-                </th>
-                <th
-                  class="TH-sc-1w7ae0i-0 dcMBuC"
-                  color="#2F3850"
-                  opacity="0.6"
-                  scope="col"
-                  width="auto"
-                >
-                  <div
-                    class="Column-sc-4zswzq-0 gzLnhc"
+                    <div
+                      class="Column-sc-4zswzq-0 gzLnhc"
+                    >
+                      Role
+                    </div>
+                  </th>
+                  <th
+                    class="TH-sc-1w7ae0i-0 dcMBuC"
+                    color="#2F3850"
+                    opacity="0.6"
+                    scope="col"
+                    width="auto"
                   >
-                    Activate/Deactivate
-                  </div>
-                </th>
-              </tr>
-            </thead>
-            <tbody
-              class="TBody-gqq9cv-0"
-            >
-              <tr
-                class="TR-sc-1omngt7-0 StripedTR-sc-1wcdkgr-0 iNrQaF krcRax"
-                color="#FFFFFF"
-                cursor="pointer"
+                    <div
+                      class="Column-sc-4zswzq-0 gzLnhc"
+                    >
+                      Activate/Deactivate
+                    </div>
+                  </th>
+                </tr>
+              </thead>
+              <tbody
+                class="TBody-gqq9cv-0"
               >
-                <td
-                  class="TD-y7762g-0 cXNZQh"
+                <tr
+                  class="TR-sc-1omngt7-0 StripedTR-sc-1wcdkgr-0 iNrQaF krcRax"
+                  color="#FFFFFF"
+                  cursor="pointer"
                 >
-                  <p
-                    class="Text-e4p0w3-0 eFoKic"
-                    color="#D2371D"
-                  >
-                    Waiting for activation
-                  </p>
-                </td>
-                <td
-                  class="TD-y7762g-0 cXNZQh"
-                >
-                  test@test.pl
-                </td>
-                <td
-                  class="TD-y7762g-0 cXNZQh"
-                >
-                  <div
-                    class="Box-sc-1vhutan-0 bUeKCS"
-                    display="inline-flex"
-                    width="max-content"
+                  <td
+                    class="TD-y7762g-0 cXNZQh"
                   >
                     <p
-                      class="Text-e4p0w3-0 eAccFX"
-                      color="#FFFFFF"
-                      font-size="14"
-                      font-weight="bold"
+                      class="Text-e4p0w3-0 eFoKic"
+                      color="#D2371D"
                     >
-                      Participant
+                      Waiting for activation
                     </p>
-                  </div>
-                </td>
-                <td
-                  class="TD-y7762g-0 cXNZQh"
-                >
-                  <div
-                    class="Row-y1cs0u-0 ggPJew"
-                    width="100%"
+                  </td>
+                  <td
+                    class="TD-y7762g-0 cXNZQh"
                   >
-                    <button
-                      class="StyledTextButton-sc-1b7egxw-0 itdyYG"
+                    test@test.pl
+                  </td>
+                  <td
+                    class="TD-y7762g-0 cXNZQh"
+                  >
+                    <div
+                      class="Box-sc-1vhutan-0 bUeKCS"
+                      display="inline-flex"
+                      width="max-content"
                     >
                       <p
-                        class="Text-e4p0w3-0 gYitek"
-                        color="#D2371D"
+                        class="Text-e4p0w3-0 eAccFX"
+                        color="#FFFFFF"
+                        font-size="14"
                         font-weight="bold"
                       >
-                        Deactivate account
+                        Participant
                       </p>
-                    </button>
-                  </div>
-                </td>
-              </tr>
-              <tr
-                class="TR-sc-1omngt7-0 StripedTR-sc-1wcdkgr-0 iNrQaF krcRax"
-                color="#FFFFFF"
-                cursor="pointer"
-              >
-                <td
-                  class="TD-y7762g-0 cXNZQh"
-                >
-                  <p
-                    class="Text-e4p0w3-0 eFoKic"
-                    color="#D2371D"
+                    </div>
+                  </td>
+                  <td
+                    class="TD-y7762g-0 cXNZQh"
                   >
-                    Waiting for activation
-                  </p>
-                </td>
-                <td
-                  class="TD-y7762g-0 cXNZQh"
+                    <div
+                      class="Row-y1cs0u-0 ggPJew"
+                      width="100%"
+                    >
+                      <button
+                        class="StyledTextButton-sc-1b7egxw-0 itdyYG"
+                      >
+                        <p
+                          class="Text-e4p0w3-0 gYitek"
+                          color="#D2371D"
+                          font-weight="bold"
+                        >
+                          Deactivate account
+                        </p>
+                      </button>
+                    </div>
+                  </td>
+                </tr>
+                <tr
+                  class="TR-sc-1omngt7-0 StripedTR-sc-1wcdkgr-0 iNrQaF krcRax"
+                  color="#FFFFFF"
+                  cursor="pointer"
                 >
-                  test2@test.pl
-                </td>
-                <td
-                  class="TD-y7762g-0 cXNZQh"
-                >
-                  <div
-                    class="Box-sc-1vhutan-0 jSbkvP"
-                    display="inline-flex"
-                    width="max-content"
+                  <td
+                    class="TD-y7762g-0 cXNZQh"
                   >
                     <p
-                      class="Text-e4p0w3-0 eAccFX"
-                      color="#FFFFFF"
-                      font-size="14"
-                      font-weight="bold"
+                      class="Text-e4p0w3-0 eFoKic"
+                      color="#D2371D"
                     >
-                      Researcher
+                      Waiting for activation
                     </p>
-                  </div>
-                </td>
-                <td
-                  class="TD-y7762g-0 cXNZQh"
-                >
-                  <div
-                    class="Row-y1cs0u-0 ggPJew"
-                    width="100%"
+                  </td>
+                  <td
+                    class="TD-y7762g-0 cXNZQh"
                   >
-                    <button
-                      class="StyledTextButton-sc-1b7egxw-0 itdyYG"
+                    test2@test.pl
+                  </td>
+                  <td
+                    class="TD-y7762g-0 cXNZQh"
+                  >
+                    <div
+                      class="Box-sc-1vhutan-0 jSbkvP"
+                      display="inline-flex"
+                      width="max-content"
                     >
                       <p
-                        class="Text-e4p0w3-0 gYitek"
-                        color="#D2371D"
+                        class="Text-e4p0w3-0 eAccFX"
+                        color="#FFFFFF"
+                        font-size="14"
                         font-weight="bold"
                       >
-                        Deactivate account
+                        Researcher
                       </p>
-                    </button>
-                  </div>
-                </td>
-              </tr>
-              <tr
-                class="TR-sc-1omngt7-0 StripedTR-sc-1wcdkgr-0 iNrQaF krcRax"
-                color="#FFFFFF"
-                cursor="pointer"
-              >
-                <td
-                  class="TD-y7762g-0 cXNZQh"
-                >
-                  <p
-                    class="Text-e4p0w3-0 eFoKic"
-                    color="#D2371D"
+                    </div>
+                  </td>
+                  <td
+                    class="TD-y7762g-0 cXNZQh"
                   >
-                    Waiting for activation
-                  </p>
-                </td>
-                <td
-                  class="TD-y7762g-0 cXNZQh"
+                    <div
+                      class="Row-y1cs0u-0 ggPJew"
+                      width="100%"
+                    >
+                      <button
+                        class="StyledTextButton-sc-1b7egxw-0 itdyYG"
+                      >
+                        <p
+                          class="Text-e4p0w3-0 gYitek"
+                          color="#D2371D"
+                          font-weight="bold"
+                        >
+                          Deactivate account
+                        </p>
+                      </button>
+                    </div>
+                  </td>
+                </tr>
+                <tr
+                  class="TR-sc-1omngt7-0 StripedTR-sc-1wcdkgr-0 iNrQaF krcRax"
+                  color="#FFFFFF"
+                  cursor="pointer"
                 >
-                  test3@test.pl
-                </td>
-                <td
-                  class="TD-y7762g-0 cXNZQh"
-                >
-                  <div
-                    class="Box-sc-1vhutan-0 iwPbyv"
-                    display="inline-flex"
-                    width="max-content"
+                  <td
+                    class="TD-y7762g-0 cXNZQh"
                   >
                     <p
-                      class="Text-e4p0w3-0 eAccFX"
-                      color="#FFFFFF"
-                      font-size="14"
-                      font-weight="bold"
+                      class="Text-e4p0w3-0 eFoKic"
+                      color="#D2371D"
                     >
-                      Admin
+                      Waiting for activation
                     </p>
-                  </div>
-                </td>
-                <td
-                  class="TD-y7762g-0 cXNZQh"
-                >
-                  <div
-                    class="Row-y1cs0u-0 ggPJew"
-                    width="100%"
+                  </td>
+                  <td
+                    class="TD-y7762g-0 cXNZQh"
                   >
-                    <button
-                      class="StyledTextButton-sc-1b7egxw-0 itdyYG"
+                    test3@test.pl
+                  </td>
+                  <td
+                    class="TD-y7762g-0 cXNZQh"
+                  >
+                    <div
+                      class="Box-sc-1vhutan-0 iwPbyv"
+                      display="inline-flex"
+                      width="max-content"
                     >
                       <p
-                        class="Text-e4p0w3-0 gYitek"
-                        color="#D2371D"
+                        class="Text-e4p0w3-0 eAccFX"
+                        color="#FFFFFF"
+                        font-size="14"
                         font-weight="bold"
                       >
-                        Deactivate account
+                        Admin
                       </p>
-                    </button>
-                  </div>
-                </td>
-              </tr>
-            </tbody>
-          </table>
+                    </div>
+                  </td>
+                  <td
+                    class="TD-y7762g-0 cXNZQh"
+                  >
+                    <div
+                      class="Row-y1cs0u-0 ggPJew"
+                      width="100%"
+                    >
+                      <button
+                        class="StyledTextButton-sc-1b7egxw-0 itdyYG"
+                      >
+                        <p
+                          class="Text-e4p0w3-0 gYitek"
+                          color="#D2371D"
+                          font-weight="bold"
+                        >
+                          Deactivate account
+                        </p>
+                      </button>
+                    </div>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
         </div>
         <div
           aria-label="Data list pagination"
@@ -629,254 +633,258 @@ exports[`<UserList /> Should render and match the snapshot - researcher 1`] = `
           />
         </div>
         <div
-          class="styled__TableLoadingContainer-skadoa-0 hSHnNK"
+          data-private="true"
         >
-          <table
-            class="Table-sc-1y0iqmn-0 hyqcGV"
-            width="100%"
+          <div
+            class="styled__TableLoadingContainer-skadoa-0 hSHnNK"
           >
-            <thead
-              class="THead-sc-8drp5d-0"
+            <table
+              class="Table-sc-1y0iqmn-0 hyqcGV"
+              width="100%"
             >
-              <tr
-                class="TR-sc-1omngt7-0 StripedTR-sc-1wcdkgr-0 iNrQaF gkGuNS"
+              <thead
+                class="THead-sc-8drp5d-0"
               >
-                <th
-                  class="TH-sc-1w7ae0i-0 dcMBuC"
-                  color="#2F3850"
-                  opacity="0.6"
-                  scope="col"
-                  width="auto"
+                <tr
+                  class="TR-sc-1omngt7-0 StripedTR-sc-1wcdkgr-0 iNrQaF gkGuNS"
                 >
-                  <div
-                    class="Column-sc-4zswzq-0 gzLnhc"
+                  <th
+                    class="TH-sc-1w7ae0i-0 dcMBuC"
+                    color="#2F3850"
+                    opacity="0.6"
+                    scope="col"
+                    width="auto"
                   >
-                    Name
-                  </div>
-                </th>
-                <th
-                  class="TH-sc-1w7ae0i-0 dcMBuC"
-                  color="#2F3850"
-                  opacity="0.6"
-                  scope="col"
-                  width="auto"
-                >
-                  <div
-                    class="Column-sc-4zswzq-0 gzLnhc"
+                    <div
+                      class="Column-sc-4zswzq-0 gzLnhc"
+                    >
+                      Name
+                    </div>
+                  </th>
+                  <th
+                    class="TH-sc-1w7ae0i-0 dcMBuC"
+                    color="#2F3850"
+                    opacity="0.6"
+                    scope="col"
+                    width="auto"
                   >
-                    Email
-                  </div>
-                </th>
-                <th
-                  class="TH-sc-1w7ae0i-0 dcMBuC"
-                  color="#2F3850"
-                  opacity="0.6"
-                  scope="col"
-                  width="auto"
-                >
-                  <div
-                    class="Column-sc-4zswzq-0 gzLnhc"
+                    <div
+                      class="Column-sc-4zswzq-0 gzLnhc"
+                    >
+                      Email
+                    </div>
+                  </th>
+                  <th
+                    class="TH-sc-1w7ae0i-0 dcMBuC"
+                    color="#2F3850"
+                    opacity="0.6"
+                    scope="col"
+                    width="auto"
                   >
-                    Role
-                  </div>
-                </th>
-                <th
-                  class="TH-sc-1w7ae0i-0 dcMBuC"
-                  color="#2F3850"
-                  opacity="0.6"
-                  scope="col"
-                  width="auto"
-                >
-                  <div
-                    class="Column-sc-4zswzq-0 gzLnhc"
+                    <div
+                      class="Column-sc-4zswzq-0 gzLnhc"
+                    >
+                      Role
+                    </div>
+                  </th>
+                  <th
+                    class="TH-sc-1w7ae0i-0 dcMBuC"
+                    color="#2F3850"
+                    opacity="0.6"
+                    scope="col"
+                    width="auto"
                   >
-                    Activate/Deactivate
-                  </div>
-                </th>
-              </tr>
-            </thead>
-            <tbody
-              class="TBody-gqq9cv-0"
-            >
-              <tr
-                class="TR-sc-1omngt7-0 StripedTR-sc-1wcdkgr-0 iNrQaF krcRax"
-                color="#FFFFFF"
-                cursor="pointer"
+                    <div
+                      class="Column-sc-4zswzq-0 gzLnhc"
+                    >
+                      Activate/Deactivate
+                    </div>
+                  </th>
+                </tr>
+              </thead>
+              <tbody
+                class="TBody-gqq9cv-0"
               >
-                <td
-                  class="TD-y7762g-0 cXNZQh"
+                <tr
+                  class="TR-sc-1omngt7-0 StripedTR-sc-1wcdkgr-0 iNrQaF krcRax"
+                  color="#FFFFFF"
+                  cursor="pointer"
                 >
-                  <p
-                    class="Text-e4p0w3-0 eFoKic"
-                    color="#D2371D"
-                  >
-                    Waiting for activation
-                  </p>
-                </td>
-                <td
-                  class="TD-y7762g-0 cXNZQh"
-                >
-                  test@test.pl
-                </td>
-                <td
-                  class="TD-y7762g-0 cXNZQh"
-                >
-                  <div
-                    class="Box-sc-1vhutan-0 bUeKCS"
-                    display="inline-flex"
-                    width="max-content"
+                  <td
+                    class="TD-y7762g-0 cXNZQh"
                   >
                     <p
-                      class="Text-e4p0w3-0 eAccFX"
-                      color="#FFFFFF"
-                      font-size="14"
-                      font-weight="bold"
+                      class="Text-e4p0w3-0 eFoKic"
+                      color="#D2371D"
                     >
-                      Participant
+                      Waiting for activation
                     </p>
-                  </div>
-                </td>
-                <td
-                  class="TD-y7762g-0 cXNZQh"
-                >
-                  <div
-                    class="Row-y1cs0u-0 ggPJew"
-                    width="100%"
+                  </td>
+                  <td
+                    class="TD-y7762g-0 cXNZQh"
                   >
-                    <button
-                      class="StyledTextButton-sc-1b7egxw-0 itdyYG"
+                    test@test.pl
+                  </td>
+                  <td
+                    class="TD-y7762g-0 cXNZQh"
+                  >
+                    <div
+                      class="Box-sc-1vhutan-0 bUeKCS"
+                      display="inline-flex"
+                      width="max-content"
                     >
                       <p
-                        class="Text-e4p0w3-0 gYitek"
-                        color="#D2371D"
+                        class="Text-e4p0w3-0 eAccFX"
+                        color="#FFFFFF"
+                        font-size="14"
                         font-weight="bold"
                       >
-                        Deactivate account
+                        Participant
                       </p>
-                    </button>
-                  </div>
-                </td>
-              </tr>
-              <tr
-                class="TR-sc-1omngt7-0 StripedTR-sc-1wcdkgr-0 iNrQaF krcRax"
-                color="#FFFFFF"
-                cursor="pointer"
-              >
-                <td
-                  class="TD-y7762g-0 cXNZQh"
-                >
-                  <p
-                    class="Text-e4p0w3-0 eFoKic"
-                    color="#D2371D"
+                    </div>
+                  </td>
+                  <td
+                    class="TD-y7762g-0 cXNZQh"
                   >
-                    Waiting for activation
-                  </p>
-                </td>
-                <td
-                  class="TD-y7762g-0 cXNZQh"
+                    <div
+                      class="Row-y1cs0u-0 ggPJew"
+                      width="100%"
+                    >
+                      <button
+                        class="StyledTextButton-sc-1b7egxw-0 itdyYG"
+                      >
+                        <p
+                          class="Text-e4p0w3-0 gYitek"
+                          color="#D2371D"
+                          font-weight="bold"
+                        >
+                          Deactivate account
+                        </p>
+                      </button>
+                    </div>
+                  </td>
+                </tr>
+                <tr
+                  class="TR-sc-1omngt7-0 StripedTR-sc-1wcdkgr-0 iNrQaF krcRax"
+                  color="#FFFFFF"
+                  cursor="pointer"
                 >
-                  test2@test.pl
-                </td>
-                <td
-                  class="TD-y7762g-0 cXNZQh"
-                >
-                  <div
-                    class="Box-sc-1vhutan-0 jSbkvP"
-                    display="inline-flex"
-                    width="max-content"
+                  <td
+                    class="TD-y7762g-0 cXNZQh"
                   >
                     <p
-                      class="Text-e4p0w3-0 eAccFX"
-                      color="#FFFFFF"
-                      font-size="14"
-                      font-weight="bold"
+                      class="Text-e4p0w3-0 eFoKic"
+                      color="#D2371D"
                     >
-                      Researcher
+                      Waiting for activation
                     </p>
-                  </div>
-                </td>
-                <td
-                  class="TD-y7762g-0 cXNZQh"
-                >
-                  <div
-                    class="Row-y1cs0u-0 ggPJew"
-                    width="100%"
+                  </td>
+                  <td
+                    class="TD-y7762g-0 cXNZQh"
                   >
-                    <button
-                      class="StyledTextButton-sc-1b7egxw-0 itdyYG"
+                    test2@test.pl
+                  </td>
+                  <td
+                    class="TD-y7762g-0 cXNZQh"
+                  >
+                    <div
+                      class="Box-sc-1vhutan-0 jSbkvP"
+                      display="inline-flex"
+                      width="max-content"
                     >
                       <p
-                        class="Text-e4p0w3-0 gYitek"
-                        color="#D2371D"
+                        class="Text-e4p0w3-0 eAccFX"
+                        color="#FFFFFF"
+                        font-size="14"
                         font-weight="bold"
                       >
-                        Deactivate account
+                        Researcher
                       </p>
-                    </button>
-                  </div>
-                </td>
-              </tr>
-              <tr
-                class="TR-sc-1omngt7-0 StripedTR-sc-1wcdkgr-0 iNrQaF krcRax"
-                color="#FFFFFF"
-                cursor="pointer"
-              >
-                <td
-                  class="TD-y7762g-0 cXNZQh"
-                >
-                  <p
-                    class="Text-e4p0w3-0 eFoKic"
-                    color="#D2371D"
+                    </div>
+                  </td>
+                  <td
+                    class="TD-y7762g-0 cXNZQh"
                   >
-                    Waiting for activation
-                  </p>
-                </td>
-                <td
-                  class="TD-y7762g-0 cXNZQh"
+                    <div
+                      class="Row-y1cs0u-0 ggPJew"
+                      width="100%"
+                    >
+                      <button
+                        class="StyledTextButton-sc-1b7egxw-0 itdyYG"
+                      >
+                        <p
+                          class="Text-e4p0w3-0 gYitek"
+                          color="#D2371D"
+                          font-weight="bold"
+                        >
+                          Deactivate account
+                        </p>
+                      </button>
+                    </div>
+                  </td>
+                </tr>
+                <tr
+                  class="TR-sc-1omngt7-0 StripedTR-sc-1wcdkgr-0 iNrQaF krcRax"
+                  color="#FFFFFF"
+                  cursor="pointer"
                 >
-                  test3@test.pl
-                </td>
-                <td
-                  class="TD-y7762g-0 cXNZQh"
-                >
-                  <div
-                    class="Box-sc-1vhutan-0 iwPbyv"
-                    display="inline-flex"
-                    width="max-content"
+                  <td
+                    class="TD-y7762g-0 cXNZQh"
                   >
                     <p
-                      class="Text-e4p0w3-0 eAccFX"
-                      color="#FFFFFF"
-                      font-size="14"
-                      font-weight="bold"
+                      class="Text-e4p0w3-0 eFoKic"
+                      color="#D2371D"
                     >
-                      Admin
+                      Waiting for activation
                     </p>
-                  </div>
-                </td>
-                <td
-                  class="TD-y7762g-0 cXNZQh"
-                >
-                  <div
-                    class="Row-y1cs0u-0 ggPJew"
-                    width="100%"
+                  </td>
+                  <td
+                    class="TD-y7762g-0 cXNZQh"
                   >
-                    <button
-                      class="StyledTextButton-sc-1b7egxw-0 itdyYG"
+                    test3@test.pl
+                  </td>
+                  <td
+                    class="TD-y7762g-0 cXNZQh"
+                  >
+                    <div
+                      class="Box-sc-1vhutan-0 iwPbyv"
+                      display="inline-flex"
+                      width="max-content"
                     >
                       <p
-                        class="Text-e4p0w3-0 gYitek"
-                        color="#D2371D"
+                        class="Text-e4p0w3-0 eAccFX"
+                        color="#FFFFFF"
+                        font-size="14"
                         font-weight="bold"
                       >
-                        Deactivate account
+                        Admin
                       </p>
-                    </button>
-                  </div>
-                </td>
-              </tr>
-            </tbody>
-          </table>
+                    </div>
+                  </td>
+                  <td
+                    class="TD-y7762g-0 cXNZQh"
+                  >
+                    <div
+                      class="Row-y1cs0u-0 ggPJew"
+                      width="100%"
+                    >
+                      <button
+                        class="StyledTextButton-sc-1b7egxw-0 itdyYG"
+                      >
+                        <p
+                          class="Text-e4p0w3-0 gYitek"
+                          color="#D2371D"
+                          font-weight="bold"
+                        >
+                          Deactivate account
+                        </p>
+                      </button>
+                    </div>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
         </div>
         <div
           aria-label="Data list pagination"
