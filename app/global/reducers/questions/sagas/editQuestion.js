@@ -4,18 +4,15 @@ import { toast } from 'react-toastify';
 import get from 'lodash/get';
 
 import {
-  QuestionsWithoutVariable,
+  QUESTIONS_WITHOUT_VARIABLE,
   getEditVariables,
+  RESERVED_VARIABLES,
 } from 'models/Session/utils';
 import { hasDuplicates } from 'utils/hasDuplicates';
 import { mapQuestionToStateObject } from 'utils/mapResponseObjects';
 import { formatMessage } from 'utils/intlOutsideReact';
 
-import {
-  gridQuestion,
-  multiQuestion,
-  nameQuestion,
-} from 'models/Session/QuestionTypes';
+import { gridQuestion, multiQuestion } from 'models/Session/QuestionTypes';
 import { objectDifference } from 'utils/objectDifference';
 import { hasObjectAnyKeys } from 'utils/getObjectKeys';
 import messages from '../messages';
@@ -38,24 +35,27 @@ import {
 } from '../selectors';
 
 const validateVariable = (payload, question, variables) => {
-  if (QuestionsWithoutVariable.includes(question.type)) {
+  if (QUESTIONS_WITHOUT_VARIABLE.includes(question.type)) {
     return;
   }
   const duplicateError = new Error(formatMessage(messages.duplicateVariable));
   const reservedError = new Error(formatMessage(messages.reservedVariable));
 
-  if (payload.data && payload.data.name === nameQuestion.reservedVariable)
-    throw reservedError;
-  else if (question.type === multiQuestion.id) {
+  const checkAgainstReservedAndExisting = name => {
+    if (RESERVED_VARIABLES.includes(name)) throw reservedError;
+    if (hasDuplicates(variables, name)) throw duplicateError;
+  };
+
+  if (question.type === multiQuestion.id) {
     question.body.data.forEach(element => {
-      if (hasDuplicates(variables, element.variable.name)) throw duplicateError;
+      checkAgainstReservedAndExisting(element.variable.name);
     });
   } else if (question.type === gridQuestion.id) {
     question.body.data[0].payload.rows.forEach(element => {
-      if (hasDuplicates(variables, element.variable.name)) throw duplicateError;
+      checkAgainstReservedAndExisting(element.variable.name);
     });
-  } else if (hasDuplicates(variables, question.body.variable.name)) {
-    throw duplicateError;
+  } else {
+    checkAgainstReservedAndExisting(question.body.variable.name);
   }
 };
 

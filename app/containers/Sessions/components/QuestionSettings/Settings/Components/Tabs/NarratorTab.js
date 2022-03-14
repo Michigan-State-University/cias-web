@@ -19,7 +19,7 @@ import {
   feedbackBlockType,
   getRemovedBlockForSetting,
 } from 'models/Narrator/BlockTypes';
-import { DisabledNarratorSettingsByQuestionType } from 'models/Session/utils';
+import { DISABLED_NARRATOR_SETTINGS_BY_QUESTION_TYPE } from 'models/Session/utils';
 import {
   makeSelectCurrentNarratorBlockIndex,
   changeCurrentNarratorBlock,
@@ -151,7 +151,7 @@ const NarratorTab = ({
               <Switch
                 disabled={
                   disabled ||
-                  DisabledNarratorSettingsByQuestionType[index]?.includes(
+                  DISABLED_NARRATOR_SETTINGS_BY_QUESTION_TYPE[index]?.includes(
                     questionType,
                   )
                 }
