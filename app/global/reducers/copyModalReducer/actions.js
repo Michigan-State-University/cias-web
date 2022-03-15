@@ -34,10 +34,12 @@ export const fetchInterventionsWithPaginationRequest = (
 export const fetchInterventionsWithPaginationSuccess = (
   interventions,
   interventionsSize,
+  startIndex,
 ) =>
   actionBuilder(FETCH_INTERVENTIONS_WITH_PAGINATION_SUCCESS, {
     interventions,
     interventionsSize,
+    startIndex,
   });
 
 export const fetchSessionsRequest = id =>

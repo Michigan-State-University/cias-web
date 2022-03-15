@@ -102,12 +102,13 @@ export const copyModalReducer = (state = initialState, action) =>
         break;
 
       case FETCH_INTERVENTIONS_WITH_PAGINATION_SUCCESS:
+        const { interventions, interventionsSize, startIndex } = action.payload;
         draft.loaders.interventions = false;
-        draft.interventions = [
-          ...(state.interventions || []),
-          ...action.payload.interventions,
-        ];
-        draft.interventionCount = action.payload.interventionsSize;
+        draft.interventions =
+          startIndex === 0
+            ? interventions
+            : [...(state.interventions || []), ...interventions];
+        draft.interventionCount = interventionsSize;
     }
   });
 

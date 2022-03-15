@@ -22,7 +22,11 @@ export function* fetchInterventionsWithPagination({
       params: objectToSnakeCase({ startIndex, endIndex, ...filterData }),
     });
     yield put(
-      fetchInterventionsWithPaginationSuccess(interventions, interventionsSize),
+      fetchInterventionsWithPaginationSuccess(
+        interventions,
+        interventionsSize,
+        startIndex,
+      ),
     );
   } catch (error) {
     yield call(toast.error, formatMessage(messages.fetchInterventionsError));
