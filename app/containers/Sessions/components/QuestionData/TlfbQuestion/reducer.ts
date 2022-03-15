@@ -53,11 +53,25 @@ const tlfbQuestionsReducer = (
           data: { option },
         } = payload as any;
         draft.body.data[0].payload.substances_with_group = option;
+        if (option) {
+          draft.body.data[0].payload.substance_groups =
+            question.body.data[0].payload.substances.map(({ name }) => ({
+              name,
+              substances: [],
+            }));
+          question.body.data[0].payload.substances = [];
+        } else {
+          draft.body.data[0].payload.substances =
+            question.body.data[0].payload.substance_groups.map(({ name }) => ({
+              name,
+              variable: '',
+            }));
+          question.body.data[0].payload.substance_groups = [];
+        }
         break;
       }
 
       // NOT GROUPED SUBSTANCES
-
       case ADD_SUBSTANCE: {
         const {
           data: { substance },
