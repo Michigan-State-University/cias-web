@@ -17,10 +17,13 @@ import {
 export const updateQuestion = (value: string, type: string) =>
   updateQuestionData({ type, data: { value } });
 
-export const updateSubstancesWithGroupToggle = (option: boolean) =>
+export const updateSubstancesWithGroupToggle = (
+  option: boolean,
+  tlfbVariables: string[],
+) =>
   updateQuestionData({
     type: UPDATE_SUBSTANCES_WITH_GROUP_TOGGLE,
-    data: { option },
+    data: { option, tlfbVariables },
   });
 
 // NOT GROUPED SUBSTANCES
