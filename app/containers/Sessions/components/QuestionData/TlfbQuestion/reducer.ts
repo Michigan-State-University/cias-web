@@ -65,12 +65,11 @@ const tlfbQuestionsReducer = (
           let variablesWithNew = [...tlfbVariables];
           draft.body.data[0].payload.substances =
             question.body.data[0].payload.substance_groups.map(({ name }) => {
-              console.log(name, variablesWithNew);
               const variable = getUniqVariable(variablesWithNew, name);
               variablesWithNew = [...variablesWithNew, variable];
               return {
-                variable,
                 name,
+                variable,
               };
             });
           draft.body.data[0].payload.substance_groups = [];
