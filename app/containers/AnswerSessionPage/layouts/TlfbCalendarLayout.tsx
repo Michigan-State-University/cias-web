@@ -85,7 +85,7 @@ const TlfbCalendarLayout = forwardRef<CalendarRef, Props>(
           portalId={ANSWER_SESSION_CONTAINER_ID}
           forceMobile={isMobilePreview}
           disableClose={disableModalClose}
-          width={isMobile ? '' : '350px'}
+          width={isMobile ? '' : '400px'}
         >
           <>
             {(isMobilePreview || isMobile) && (

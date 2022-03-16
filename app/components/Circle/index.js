@@ -6,12 +6,14 @@ import StyledCircle from './StyledCircle';
 const Circle = (props) => <StyledCircle {...props}>{props.child}</StyledCircle>;
 
 Circle.propTypes = {
+  id: PropTypes.string,
   child: PropTypes.oneOfType([
     PropTypes.string,
     PropTypes.object,
     PropTypes.number,
   ]),
   bg: PropTypes.any,
+  bgOpacity: PropTypes.number,
   color: PropTypes.any,
   size: PropTypes.any,
   doNotShrink: PropTypes.bool,

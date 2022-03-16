@@ -3,7 +3,7 @@ import { useIntl } from 'react-intl';
 
 import globalMessages from 'global/i18n/globalMessages';
 import { SubstanceConsumption, TlfbQuestionAnswerBody } from 'models/Tlfb';
-import { Substance } from 'models/Question';
+import { Substance, SubstanceGroup } from 'models/Question';
 
 import Text from 'components/Text';
 import Radio from 'components/Radio';
@@ -11,9 +11,11 @@ import Row from 'components/Row';
 import Divider from 'components/Divider';
 
 import { UngroupedSubstancesForm } from './UngroupedSubstancesForm';
+import { GroupedSubstancesForm } from './GroupedSubstancesForm';
 
 export type TlfbConsumptionFormProps = {
   substances: Substance[];
+  substanceGroups: SubstanceGroup[];
   grouped: boolean;
   loading: boolean;
   answerBody: Nullable<TlfbQuestionAnswerBody>;
@@ -23,6 +25,7 @@ export type TlfbConsumptionFormProps = {
 
 export const TlfbConsumptionForm = ({
   substances,
+  substanceGroups,
   grouped,
   loading,
   answerBody,
@@ -86,7 +89,14 @@ export const TlfbConsumptionForm = ({
               loading={loading}
             />
           )}
-          {/* {grouped && TODO CIAS30-2023 place component for scenario yes here } */}
+          {grouped && (
+            <GroupedSubstancesForm
+              substanceGroups={substanceGroups}
+              consumptions={consumptions ?? []}
+              onChange={handleConsumptionsChange}
+              loading={loading}
+            />
+          )}
         </>
       )}
     </>
