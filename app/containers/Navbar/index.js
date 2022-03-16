@@ -99,6 +99,7 @@ export function Navbar({
         <Box
           className="user-name-info"
           clickable
+          data-private
         >{`${firstName} ${lastName}`}</Box>
       </RightPanel>
     </NavbarStyled>

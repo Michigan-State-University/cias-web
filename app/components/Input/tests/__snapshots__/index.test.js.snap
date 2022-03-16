@@ -118,6 +118,7 @@ exports[`<ApprovableInput /> Should render and match the snapshot as date input 
           >
             <button
               class="c3"
+              data-private="true"
               height="50"
               width="250"
             >
@@ -1863,6 +1864,7 @@ exports[`<DateInput /> Should render and match the snapshot 1`] = `
 <div>
   <button
     class="c0"
+    data-private="true"
     height="50"
     width="250"
   >

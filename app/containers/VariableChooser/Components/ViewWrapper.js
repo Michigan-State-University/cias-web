@@ -4,14 +4,18 @@ import { useSelector } from 'react-redux';
 
 import arrowLeft from 'assets/svg/arrow-left.svg';
 
-import { makeSelectCopyModalLoader } from 'global/reducers/copyModalReducer';
+import { makeSelectCopyModalLoaders } from 'global/reducers/copyModalReducer';
 
 import Column from 'components/Column';
 import Img from 'components/Img';
 import Loader from 'components/Loader';
 
 const ViewWrapper = ({ children, goBack }) => {
-  const isLoading = useSelector(makeSelectCopyModalLoader());
+  const { interventions, sessions, questionGroups } = useSelector(
+    makeSelectCopyModalLoaders(),
+  );
+
+  const isLoading = interventions && sessions && questionGroups;
 
   const render = () => {
     if (isLoading) return <Loader type="inline" />;
@@ -20,7 +24,7 @@ const ViewWrapper = ({ children, goBack }) => {
   };
 
   return (
-    <Column minWidth="200px">
+    <Column minWidth="200px" height={200} overflow="scroll">
       {goBack && (
         <Img
           width="min-content"

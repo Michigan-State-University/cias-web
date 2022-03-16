@@ -47,6 +47,7 @@ exports[`<AnswerSessionPage /> Should render and match the snapshot 1`] = `
             <div
               class="styled__AvatarStyled-bn66gh-0 fLsauV"
               color="#FFFFFF"
+              data-private="true"
               height="30"
               width="30"
             >
@@ -58,6 +59,7 @@ exports[`<AnswerSessionPage /> Should render and match the snapshot 1`] = `
           </div>
           <div
             class="Box-sc-1vhutan-0 gfyFJD user-name-info"
+            data-private="true"
           >
             first-name last-name
           </div>
@@ -225,7 +227,7 @@ exports[`<AnswerSessionPage /> Should render and match the snapshot 1`] = `
                       >
                         <a
                           class="styled__StyledLink-ve6hnx-3 hNOXud"
-                          href="https://docs.google.com/forms/d/e/1FAIpQLSdddPH3GwgzYPjvouNBQ6Xp64ZDyw4KhMaAIVBq6k-jlG3sEg/viewform?usp=sf_link"
+                          href="https://msu.co1.qualtrics.com/jfe/form/SV_6S9MV7pPpoqFwTY"
                           target="_blank"
                         >
                           Share your thoughts here!

@@ -11,6 +11,8 @@ import {
   FETCH_INTERVENTIONS_REQUEST,
   FETCH_INTERVENTIONS_SUCCESS,
   FETCH_INTERVENTIONS_ERROR,
+  FETCH_INTERVENTIONS_WITH_PAGINATION,
+  FETCH_INTERVENTIONS_WITH_PAGINATION_SUCCESS,
 } from './constants';
 
 export const fetchInterventionsRequest = organizationId =>
@@ -19,6 +21,26 @@ export const fetchInterventionsSuccess = interventions =>
   actionBuilder(FETCH_INTERVENTIONS_SUCCESS, { interventions });
 export const fetchInterventionsError = error =>
   actionBuilder(FETCH_INTERVENTIONS_ERROR, { error });
+
+export const fetchInterventionsWithPaginationRequest = (
+  paginationData,
+  filterData,
+) =>
+  actionBuilder(FETCH_INTERVENTIONS_WITH_PAGINATION, {
+    paginationData,
+    filterData,
+  });
+
+export const fetchInterventionsWithPaginationSuccess = (
+  interventions,
+  interventionsSize,
+  startIndex,
+) =>
+  actionBuilder(FETCH_INTERVENTIONS_WITH_PAGINATION_SUCCESS, {
+    interventions,
+    interventionsSize,
+    startIndex,
+  });
 
 export const fetchSessionsRequest = id =>
   actionBuilder(FETCH_SESSIONS_REQUEST, { id });

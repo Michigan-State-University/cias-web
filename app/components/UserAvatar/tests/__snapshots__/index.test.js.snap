@@ -27,6 +27,7 @@ exports[`<UserAvatar /> Should render and match the snapshot 1`] = `
 <div
   class="c0"
   color="#FFFFFF"
+  data-private="true"
 >
   <div>
     TT

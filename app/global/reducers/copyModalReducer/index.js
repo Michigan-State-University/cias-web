@@ -3,15 +3,18 @@ export {
   fetchSessionsRequest,
   fetchQuestionGroupsRequest,
   changeViewAction,
+  fetchInterventionsWithPaginationRequest,
 } from './actions';
 export { copyModalReducer } from './reducer';
 export {
   makeSelectSessionsState,
   makeSelectSessions,
-  makeSelectCopyModalLoader,
+  makeSelectCopyModalLoaders,
   makeSelectQuestionGroups,
-  makeSelectQuestions,
   makeSelectInterventions,
+  makeSelectQuestions,
+  makeSelectSavedIds,
+  makeSelectInterventionCount,
 } from './selectors';
 
 export { allCopyModalSagas } from './sagas';

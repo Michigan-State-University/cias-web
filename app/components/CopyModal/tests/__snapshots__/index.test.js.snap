@@ -41,7 +41,7 @@ exports[`<CopyModal /> Should render and match the snapshot 1`] = `
   -ms-flex-direction: column;
   flex-direction: column;
   width: 100%;
-  height: 280px;
+  height: 100%;
 }
 
 .c11 {
@@ -67,10 +67,12 @@ exports[`<CopyModal /> Should render and match the snapshot 1`] = `
   -ms-flex-direction: column;
   flex-direction: column;
   width: 100%;
+  height: 60px;
+  max-height: 300px;
   background-color: rgba(248,251,255,1);
 }
 
-.c26 {
+.c25 {
   width: 100%;
   height: 40px;
   border-radius: 100px;
@@ -167,22 +169,7 @@ exports[`<CopyModal /> Should render and match the snapshot 1`] = `
   width: 100%;
 }
 
-.c23 {
-  display: -webkit-box;
-  display: -webkit-flex;
-  display: -ms-flexbox;
-  display: flex;
-  -webkit-flex-direction: row;
-  -ms-flex-direction: row;
-  flex-direction: row;
-  height: auto;
-  padding-top: 15px;
-  padding-bottom: 15px;
-  padding-right: 25px;
-  padding-left: 25px;
-}
-
-.c25 {
+.c24 {
   display: -webkit-box;
   display: -webkit-flex;
   display: -ms-flexbox;
@@ -288,6 +275,17 @@ exports[`<CopyModal /> Should render and match the snapshot 1`] = `
   overflow: scroll;
 }
 
+.c23 {
+  width: auto;
+  height: auto;
+  display: block;
+  border-radius: 5px;
+  -webkit-box-flex: 1;
+  -webkit-flex-grow: 1;
+  -ms-flex-positive: 1;
+  flex-grow: 1;
+}
+
 .c13 {
   font-family: DM Sans;
   font-size: 13px;
@@ -304,14 +302,6 @@ exports[`<CopyModal /> Should render and match the snapshot 1`] = `
   line-height: 130%;
   font-size: 15px;
   font-weight: 700;
-  color: #2F3850;
-}
-
-.c24 {
-  font-family: DM Sans;
-  font-size: 13px;
-  line-height: 130%;
-  font-size: 12px;
   color: #2F3850;
 }
 
@@ -499,7 +489,7 @@ exports[`<CopyModal /> Should render and match the snapshot 1`] = `
             <div
               class="c10"
               data-testid="undefined-select-target-session"
-              height="280"
+              height="100%"
             >
               <div
                 class="c11"
@@ -578,19 +568,28 @@ exports[`<CopyModal /> Should render and match the snapshot 1`] = `
               >
                 <div
                   class="c22"
+                  height="60"
                 >
                   <div
-                    class="c3"
+                    class="c23"
                   >
                     <div
-                      class="c23"
+                      class="virtual-grid-auto-sizer"
+                      style="overflow: visible; height: 0px; width: 0px;"
+                    />
+                    <div
+                      class="resize-triggers"
                     >
-                      <p
-                        class="c24"
-                        font-size="12"
+                      <div
+                        class="expand-trigger"
                       >
-                        No valid question groups to copy to
-                      </p>
+                        <div
+                          style="width: 1px; height: 1px;"
+                        />
+                      </div>
+                      <div
+                        class="contract-trigger"
+                      />
                     </div>
                   </div>
                 </div>
@@ -598,10 +597,10 @@ exports[`<CopyModal /> Should render and match the snapshot 1`] = `
             </div>
           </div>
           <div
-            class="c25"
+            class="c24"
           >
             <button
-              class="c26"
+              class="c25"
               color="primary"
               disabled=""
               radius="100px"

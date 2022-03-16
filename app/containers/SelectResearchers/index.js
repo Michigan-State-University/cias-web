@@ -142,7 +142,7 @@ const SelectResearchers = ({
                 else setSelected(remove(selected, elem => elem !== id));
               };
               return (
-                <StripedTR key={`row-th-${id}`}>
+                <StripedTR key={`row-th-${id}`} data-private>
                   <TD pl={10}>{getDisplayName(fullName)}</TD>
                   <TD>{email}</TD>
                   <TD pr={10}>

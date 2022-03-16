@@ -68,7 +68,7 @@ const organizationsReducer = (state = initialState, action) =>
 
       case CREATE_ORGANIZATION_SUCCESS: {
         draft.loaders.createOrganization = false;
-        draft.organizations = [payload.organization, ...state.organizations];
+        draft.organizations.unshift(payload.organization);
         break;
       }
 

@@ -166,6 +166,7 @@ exports[`<ShareBox /> Should render and match the snapshot 1`] = `
       <div
         class="Column-sc-4zswzq-0 ekpwZH"
         data-cy="user-list"
+        data-private="true"
       >
         <div
           class="Row-y1cs0u-0 styled__HoverableRow-sc-1achu0i-3 dHJeRo gGkmoH"

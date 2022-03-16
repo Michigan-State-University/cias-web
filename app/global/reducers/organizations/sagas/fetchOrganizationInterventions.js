@@ -1,6 +1,8 @@
 import { put, takeLatest, call } from 'redux-saga/effects';
 import axios from 'axios';
 
+import objectToSnakeCase from 'utils/objectToSnakeCase';
+
 import { FETCH_ORGANIZATION_INTERVENTIONS_REQUEST } from '../constants';
 import {
   fetchOrganizationInterventionsFailure,
@@ -8,16 +10,25 @@ import {
 } from '../actions';
 
 export function* fetchOrganizationInterventions({
-  payload: { organizationId },
+  payload: { organizationId, paginationData },
 }) {
-  const requestURL = `v1/organizations/${organizationId}/interventions`;
+  const requestURL = `v1/interventions`;
+  const { startIndex, endIndex } = paginationData ?? {};
 
   try {
     const {
-      data: { interventions },
-    } = yield call(axios.get, requestURL);
+      data: { interventions, interventions_size: interventionCount },
+    } = yield call(axios.get, requestURL, {
+      params: objectToSnakeCase({ startIndex, endIndex, organizationId }),
+    });
 
-    yield put(fetchOrganizationInterventionsSuccess(interventions));
+    yield put(
+      fetchOrganizationInterventionsSuccess(
+        interventions,
+        interventionCount,
+        startIndex,
+      ),
+    );
   } catch (error) {
     yield put(fetchOrganizationInterventionsFailure(error));
   }

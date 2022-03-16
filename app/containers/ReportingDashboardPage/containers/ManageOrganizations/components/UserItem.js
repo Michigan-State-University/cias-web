@@ -40,7 +40,7 @@ const UserItem = ({ avatarColor, user, onClick }) => {
             width={30}
           />
         </Col>
-        <Col>
+        <Col data-private>
           <EllipsisText
             fontWeight="bold"
             maxWidth="200px"

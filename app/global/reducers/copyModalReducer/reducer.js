@@ -11,15 +11,29 @@ import {
   FETCH_INTERVENTIONS_REQUEST,
   FETCH_INTERVENTIONS_SUCCESS,
   FETCH_INTERVENTIONS_ERROR,
+  FETCH_INTERVENTIONS_WITH_PAGINATION_SUCCESS,
+  FETCH_INTERVENTIONS_WITH_PAGINATION,
 } from './constants';
 
 export const initialState = {
-  questionGroups: [],
+  questionGroups: null,
   sessions: null,
-  interventions: [],
-  fetchSessionLoading: true,
-  fetchSessionError: null,
-  fetchInterventionsError: null,
+  interventions: null,
+  interventionCount: 0,
+  loaders: {
+    questionGroups: false,
+    sessions: false,
+    interventions: false,
+  },
+  errors: {
+    questionGroups: false,
+    sessions: false,
+    interventions: false,
+  },
+  currentIds: {
+    intervention: null,
+    session: null,
+  },
 };
 
 /* eslint-disable default-case, no-param-reassign */
@@ -28,58 +42,73 @@ export const copyModalReducer = (state = initialState, action) =>
   produce(state, draft => {
     switch (action.type) {
       case FETCH_INTERVENTIONS_REQUEST:
-        draft.loading = true;
+        draft.loaders.interventions = true;
         draft.fetchInterventionsError = null;
-        draft.interventions = [];
+        draft.interventions = null;
         break;
 
       case FETCH_INTERVENTIONS_SUCCESS:
-        draft.loading = false;
+        draft.loaders.interventions = false;
         draft.interventions = action.payload.interventions;
         break;
 
       case FETCH_INTERVENTIONS_ERROR:
-        draft.loading = false;
+        draft.loaders.interventions = false;
         draft.fetchInterventionsError = action.payload.error;
         break;
 
       case FETCH_SESSIONS_REQUEST:
-        draft.loading = true;
+        draft.loaders.sessions = true;
         draft.fetchSessionError = null;
-        draft.sessions = [];
+        draft.sessions = null;
+        draft.currentIds.intervention = action.payload.id;
         break;
 
       case FETCH_SESSIONS_SUCCESS:
-        draft.loading = false;
+        draft.loaders.sessions = false;
         draft.sessions = action.payload.sessions;
         break;
 
       case FETCH_SESSIONS_ERROR:
-        draft.loading = false;
+        draft.loaders.sessions = false;
         draft.fetchSessionError = action.payload.error;
-        draft.sessions = [];
+        draft.sessions = null;
         break;
 
       case FETCH_QUESTION_GROUPS_REQUEST:
-        draft.loading = true;
+        draft.loaders.questionGroups = true;
         draft.fetchQuestionGroupsError = null;
-        draft.questionGroups = [];
+        draft.questionGroups = null;
+        draft.currentIds.session = action.payload.id;
         break;
 
       case FETCH_QUESTION_GROUPS_SUCCESS:
-        draft.loading = false;
+        draft.loaders.questionGroups = false;
         draft.questionGroups = action.payload.questionGroups;
         break;
 
       case FETCH_QUESTION_GROUPS_ERROR:
-        draft.loading = false;
+        draft.loaders.questionGroups = false;
         draft.fetchQuestionGroupsError = action.payload.error;
-        draft.questionGroups = [];
+        draft.questionGroups = null;
         break;
 
       case CHANGE_VIEW:
-        draft.loading = true;
+        draft.loaders.questionGroups = true;
         break;
+
+      case FETCH_INTERVENTIONS_WITH_PAGINATION:
+        draft.loaders.interventions = true;
+        break;
+
+      case FETCH_INTERVENTIONS_WITH_PAGINATION_SUCCESS:
+        const { interventions, interventionsSize, startIndex } = action.payload;
+        draft.loaders.interventions = false;
+        draft.interventions =
+          startIndex === 0
+            ? interventions
+            : [...(state.interventions || []), ...interventions];
+        draft.interventionCount = interventionsSize;
     }
   });
 

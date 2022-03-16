@@ -55,6 +55,7 @@ exports[`<UserDetails /> Should render and match the snapshot 1`] = `
                 <div
                   class="styled__AvatarStyled-bn66gh-0 fvqhMv styled__StyledUserAvatar-sc-4bx7ap-1 dObBuO"
                   color="#FFFFFF"
+                  data-private="true"
                 >
                   <div>
                     TT
@@ -119,6 +120,7 @@ exports[`<UserDetails /> Should render and match the snapshot 1`] = `
           >
             <div
               class="Row-y1cs0u-0 styled__StyledFullNameRow-sc-4bx7ap-0 gQFDhs loGlNM"
+              data-private="true"
               width="100%"
             >
               <div
@@ -195,6 +197,7 @@ exports[`<UserDetails /> Should render and match the snapshot 1`] = `
             >
               <div
                 class="Row-y1cs0u-0 hqAUhv"
+                data-private="true"
                 width="100%"
               >
                 <div

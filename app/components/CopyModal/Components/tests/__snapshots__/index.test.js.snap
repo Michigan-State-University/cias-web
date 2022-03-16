@@ -32,7 +32,7 @@ Object {
   -ms-flex-direction: column;
   flex-direction: column;
   width: 100%;
-  height: 280px;
+  height: 100%;
 }
 
 .c3 {
@@ -58,21 +58,12 @@ Object {
   -ms-flex-direction: column;
   flex-direction: column;
   width: 100%;
+  height: 60px;
+  max-height: 300px;
   background-color: rgba(248,251,255,1);
 }
 
-.c15 {
-  display: -webkit-box;
-  display: -webkit-flex;
-  display: -ms-flexbox;
-  display: flex;
-  -webkit-flex-direction: column;
-  -ms-flex-direction: column;
-  flex-direction: column;
-  width: 100%;
-}
-
-.c19 {
+.c17 {
   width: 100%;
   height: 40px;
   border-radius: 100px;
@@ -153,21 +144,6 @@ Object {
   -ms-flex-direction: row;
   flex-direction: row;
   height: auto;
-  padding-top: 15px;
-  padding-bottom: 15px;
-  padding-right: 25px;
-  padding-left: 25px;
-}
-
-.c18 {
-  display: -webkit-box;
-  display: -webkit-flex;
-  display: -ms-flexbox;
-  display: flex;
-  -webkit-flex-direction: row;
-  -ms-flex-direction: row;
-  flex-direction: row;
-  height: auto;
   margin-top: 20px;
 }
 
@@ -205,6 +181,17 @@ Object {
   overflow: scroll;
 }
 
+.c15 {
+  width: auto;
+  height: auto;
+  display: block;
+  border-radius: 5px;
+  -webkit-box-flex: 1;
+  -webkit-flex-grow: 1;
+  -ms-flex-positive: 1;
+  flex-grow: 1;
+}
+
 .c5 {
   font-family: DM Sans;
   font-size: 13px;
@@ -224,14 +211,6 @@ Object {
   color: #2F3850;
 }
 
-.c17 {
-  font-family: DM Sans;
-  font-size: 13px;
-  line-height: 130%;
-  font-size: 12px;
-  color: #2F3850;
-}
-
 .c12 {
   position: relative;
   width: 100%;
@@ -239,22 +218,6 @@ Object {
   font-weight: 700;
   color: rgba(183,39,234,1);
   color: rgba(183,39,234,1);
-}
-
-@media only screen and (min-width:768px) {
-
-}
-
-@media only screen and (min-width:960px) {
-
-}
-
-@media only screen and (min-width:1170px) {
-
-}
-
-@media only screen and (min-width:1360px) {
-
 }
 
 @media only screen and (min-width:768px) {
@@ -332,7 +295,7 @@ Object {
           <div
             class="c2"
             data-testid="undefined-select-target-session"
-            height="280"
+            height="100%"
           >
             <div
               class="c3"
@@ -411,19 +374,28 @@ Object {
             >
               <div
                 class="c14"
+                height="60"
               >
                 <div
                   class="c15"
                 >
                   <div
-                    class="c16"
+                    class="virtual-grid-auto-sizer"
+                    style="overflow: visible; height: 0px; width: 0px;"
+                  />
+                  <div
+                    class="resize-triggers"
                   >
-                    <p
-                      class="c17"
-                      font-size="12"
+                    <div
+                      class="expand-trigger"
                     >
-                      No valid question groups to copy to
-                    </p>
+                      <div
+                        style="width: 1px; height: 1px;"
+                      />
+                    </div>
+                    <div
+                      class="contract-trigger"
+                    />
                   </div>
                 </div>
               </div>
@@ -431,10 +403,10 @@ Object {
           </div>
         </div>
         <div
-          class="c18"
+          class="c16"
         >
           <button
-            class="c19"
+            class="c17"
             color="primary"
             disabled=""
             radius="100px"
@@ -451,9 +423,9 @@ Object {
         class="Row-y1cs0u-0 dskFsL"
       >
         <div
-          class="Column-sc-4zswzq-0 crbKIj"
+          class="Column-sc-4zswzq-0 iyDzCx"
           data-testid="undefined-select-target-session"
-          height="280"
+          height="100%"
         >
           <div
             class="Column-sc-4zswzq-0 cgbIvt"
@@ -531,20 +503,29 @@ Object {
             overflow="scroll"
           >
             <div
-              class="Column-sc-4zswzq-0 gLBXpw"
+              class="Column-sc-4zswzq-0 gyZops"
+              height="60"
             >
               <div
-                class="Column-sc-4zswzq-0 ekpwZH"
+                class="Box-sc-1vhutan-0 fcQhED"
               >
                 <div
-                  class="Row-y1cs0u-0 brzjBw"
+                  class="virtual-grid-auto-sizer"
+                  style="overflow: visible; height: 0px; width: 0px;"
+                />
+                <div
+                  class="resize-triggers"
                 >
-                  <p
-                    class="Text-e4p0w3-0 fJvJkE"
-                    font-size="12"
+                  <div
+                    class="expand-trigger"
                   >
-                    No valid question groups to copy to
-                  </p>
+                    <div
+                      style="width: 1px; height: 1px;"
+                    />
+                  </div>
+                  <div
+                    class="contract-trigger"
+                  />
                 </div>
               </div>
             </div>

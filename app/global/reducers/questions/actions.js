@@ -40,6 +40,7 @@ import {
   UPDATE_QUESTION_IMAGE_REQUEST,
   UPDATE_QUESTION_IMAGE_SUCCESS,
   UPDATE_QUESTION_IMAGE_ERROR,
+  UPDATE_VARIABLE,
 } from './constants';
 
 export const selectQuestion = index =>
@@ -122,6 +123,8 @@ export const updateQuestionData = data =>
   actionBuilder(UPDATE_QUESTION_DATA, data);
 export const updateQuestionSettings = data =>
   actionBuilder(UPDATE_QUESTION_SETTINGS, data);
+export const updateVariableAction = (name, questionId) =>
+  updateQuestionData({ type: UPDATE_VARIABLE, data: { name, questionId } });
 
 export const deleteQuestionsRequest = (questionIds, sessionId, groupIds) =>
   actionBuilder(DELETE_QUESTIONS_REQUEST, { questionIds, sessionId, groupIds });

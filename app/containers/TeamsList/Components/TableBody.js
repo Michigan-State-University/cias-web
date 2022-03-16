@@ -8,7 +8,7 @@ import Team from 'models/Teams/Team';
 import TableRow from './TableRow';
 
 const TableBody = ({ teams, history, openModal, formatMessage }) => (
-  <TBody>
+  <TBody data-private>
     {teams.map(team => (
       <TableRow
         key={`row-th-${team.id}`}

@@ -200,6 +200,7 @@ exports[`<AppRoute /> Should render and match the snapshot 1`] = `
             <div
               class="c9"
               color="#FFFFFF"
+              data-private="true"
               height="30"
               width="30"
             >
@@ -211,6 +212,7 @@ exports[`<AppRoute /> Should render and match the snapshot 1`] = `
           </div>
           <div
             class="c10 user-name-info"
+            data-private="true"
           >
             John Doe
           </div>

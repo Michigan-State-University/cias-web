@@ -128,6 +128,7 @@ exports[`<TeamsList /> Should render and match the snapshot 1`] = `
             </thead>
             <tbody
               class="TBody-gqq9cv-0"
+              data-private="true"
             >
               <tr
                 class="TR-sc-1omngt7-0 StripedTR-sc-1wcdkgr-0 iNrQaF krcRax"

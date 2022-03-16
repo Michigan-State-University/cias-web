@@ -1,5 +1,5 @@
+import React, { memo, useContext } from 'react';
 import PropTypes from 'prop-types';
-import React, { memo } from 'react';
 import { useIntl } from 'react-intl';
 
 import { colors, themeColors } from 'theme';
@@ -14,17 +14,20 @@ import Badge from 'components/Badge';
 import EllipsisText from 'components/Text/EllipsisText';
 import Box from 'components/Box';
 
+import { VariableChooserContext, InterventionViewContext } from '../constants';
 import messages from '../messages';
 
-const InterventionRow = ({
-  id,
-  isInitialIntervention,
-  isLast,
-  name,
-  onClick,
-}) => {
+const InterventionRow = ({ data, index }) => {
   const { formatMessage } = useIntl();
+  const { initialInterventionId } = useContext(VariableChooserContext);
+  const { onClick } = useContext(InterventionViewContext);
 
+  const { items } = data;
+  const element = items?.[index];
+  const { id, name } = element || {};
+
+  const isInitialIntervention = id === initialInterventionId;
+  const isLast = index === items.length - 1;
   return (
     <Row
       data-testid={`${id}-select-intervention`}
@@ -58,11 +61,8 @@ const InterventionRow = ({
 };
 
 InterventionRow.propTypes = {
-  id: PropTypes.string,
-  isLast: PropTypes.bool,
-  isInitialIntervention: PropTypes.bool,
-  onClick: PropTypes.func,
-  name: PropTypes.string,
+  data: PropTypes.object,
+  index: PropTypes.number,
 };
 
 export default memo(InterventionRow);

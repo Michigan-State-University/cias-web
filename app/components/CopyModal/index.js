@@ -7,10 +7,16 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { injectIntl, IntlShape } from 'react-intl';
+import { compose } from 'redux';
+import { injectSaga, injectReducer } from 'redux-injectors';
 
 import CopyChooser, { VIEWS } from 'components/CopyModal/Components';
 
 import { draft } from 'models/Status/StatusTypes';
+import {
+  copyModalReducer,
+  allCopyModalSagas,
+} from 'global/reducers/copyModalReducer';
 
 import { CopyModalContext } from './utils';
 import Modal from '../Modal';
@@ -77,4 +83,8 @@ CopyModal.defaultProps = {
   interventionStatusFilter: [draft],
 };
 
-export default injectIntl(CopyModal);
+export default compose(
+  injectIntl,
+  injectReducer({ key: 'copyModal', reducer: copyModalReducer }),
+  injectSaga({ key: 'copyModal', saga: allCopyModalSagas }),
+)(CopyModal);

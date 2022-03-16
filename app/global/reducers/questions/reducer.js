@@ -13,7 +13,11 @@ import questionSettingsReducer from 'containers/Sessions/components/QuestionSett
 import instantiateEmptyQuestion from 'utils/instantiateEmptyQuestion';
 import { insertAt, removeAt } from 'utils/arrayUtils';
 
-import { assignDraftItemsById, updateItemById } from 'utils/reduxUtils';
+import {
+  assignDraftItems,
+  assignDraftItemsById,
+  updateItemById,
+} from 'utils/reduxUtils';
 import {
   SELECT_QUESTION,
   CREATE_QUESTION_REQUEST,
@@ -109,7 +113,7 @@ export const questionsReducer = (state = initialState, action) =>
           ...state.questions,
           mapQuestionDataForType(action.payload.question),
         ];
-        draft.cache.questions = draft.questions;
+        assignDraftItems(draft.questions, draft.cache.questions);
         draft.selectedQuestion = action.payload.question.id;
         draft.lastCreatedQuestionId = action.payload.question.id;
         draft.loaders.createQuestionLoading = false;
@@ -130,7 +134,7 @@ export const questionsReducer = (state = initialState, action) =>
         draft.questions = action.payload.questions.map(question =>
           mapQuestionDataForType(question),
         );
-        draft.cache.questions = draft.questions;
+        assignDraftItems(draft.questions, draft.cache.questions);
         break;
       case GET_QUESTIONS_ERROR:
         draft.loaders.getQuestionsLoading = false;
@@ -225,7 +229,7 @@ export const questionsReducer = (state = initialState, action) =>
           ...state.questions,
           mapQuestionDataForType(action.payload.question),
         ];
-        draft.cache.questions = draft.questions;
+        assignDraftItems(draft.questions, draft.cache.questions);
         draft.selectedQuestion = action.payload.question.id;
         break;
       case COPY_QUESTION_ERROR:
@@ -245,11 +249,13 @@ export const questionsReducer = (state = initialState, action) =>
         };
         break;
       }
+
       case CHANGE_QUESTION_TYPE_SUCCESS:
-        draft.cache.questions = draft.questions;
+        assignDraftItems(draft.questions, draft.cache.questions);
         break;
+
       case CHANGE_QUESTION_TYPE_ERROR:
-        draft.questions = draft.cache.questions;
+        assignDraftItems(draft.cache.questions, draft.questions);
         break;
 
       case REORDER_QUESTION_LIST_REQUEST: {
@@ -292,11 +298,13 @@ export const questionsReducer = (state = initialState, action) =>
 
         break;
       }
+
       case REORDER_QUESTION_LIST_SUCCESS:
-        draft.cache.questions = state.questions;
+        assignDraftItems(draft.questions, draft.cache.questions);
         break;
+
       case REORDER_QUESTION_LIST_ERROR:
-        draft.questions = state.cache.questions;
+        assignDraftItems(draft.cache.questions, draft.questions);
         break;
 
       case DELETE_QUESTIONS_REQUEST: {
@@ -353,12 +361,12 @@ export const questionsReducer = (state = initialState, action) =>
       }
 
       case DELETE_QUESTIONS_SUCCESS: {
-        draft.cache.questions = state.questions;
+        assignDraftItems(draft.questions, draft.cache.questions);
         break;
       }
 
       case DELETE_QUESTIONS_ERROR: {
-        draft.questions = state.cache.questions;
+        assignDraftItems(draft.cache.questions, draft.questions);
         break;
       }
 
@@ -410,10 +418,11 @@ export const questionsReducer = (state = initialState, action) =>
       }
 
       case DELETE_QUESTION_SUCCESS:
-        draft.cache.questions = draft.questions;
+        assignDraftItems(draft.questions, draft.cache.questions);
         break;
+
       case DELETE_QUESTION_ERROR:
-        draft.questions = draft.cache.questions;
+        assignDraftItems(draft.cache.questions, draft.questions);
         break;
 
       case UPDATE_QUESTION_DATA: {
@@ -453,7 +462,7 @@ export const questionsReducer = (state = initialState, action) =>
         };
 
         draft.questions[selectedQuestionIndex] = assignFromQuestionTTS(
-          updatedQuestion,
+          cloneDeep(updatedQuestion),
         );
         break;
       }
@@ -464,6 +473,7 @@ export const questionsReducer = (state = initialState, action) =>
             ? action.payload.group.id
             : question.question_group_id,
         }));
+        assignDraftItems(draft.questions, draft.cache.questions);
         break;
       }
       case COPY_EXTERNALLY_QUESTION_REQUEST:
@@ -471,13 +481,13 @@ export const questionsReducer = (state = initialState, action) =>
         break;
       case COPY_EXTERNALLY_QUESTION_SUCCESS:
         draft.loaders.updateQuestionLoading = false;
-        draft.cache.questions = state.questions;
         const { isCurrent, question } = action.payload;
-        if (isCurrent) draft.questions = [...state.questions, question];
+        if (isCurrent) draft.questions.push(question);
+        assignDraftItems(draft.questions, draft.cache.questions);
         break;
       case COPY_EXTERNALLY_QUESTION_ERROR:
         draft.loaders.updateQuestionLoading = false;
-        draft.questions = state.cache.questions;
+        assignDraftItems(draft.cache.questions, draft.questions);
         break;
       case COPY_QUESTIONS_REQUEST:
         draft.loaders.updateQuestionLoading = true;
@@ -486,13 +496,13 @@ export const questionsReducer = (state = initialState, action) =>
         const { questions } = action.payload;
         const questionsList = [...state.questions, ...questions];
         draft.questions = questionsList;
-        draft.cache.questions = questionsList;
+        assignDraftItems(draft.questions, draft.cache.questions);
         draft.loaders.updateQuestionLoading = false;
         break;
 
       case COPY_QUESTIONS_ERROR:
         draft.loaders.updateQuestionLoading = false;
-        draft.questions = state.cache.questions;
+        assignDraftItems(draft.cache.questions, draft.questions);
         break;
     }
   });
