@@ -329,17 +329,3 @@ export const DISABLED_NARRATOR_SETTINGS_BY_QUESTION_TYPE = {
   voice: [feedbackQuestion.id],
   animation: [feedbackQuestion.id],
 };
-
-const PREDEFINED_VARIABLES = QuestionTypes.reduce(
-  (variables, { reservedVariable }) =>
-    reservedVariable ? [...variables, reservedVariable] : variables,
-  [],
-);
-
-export const RESERVED_VARIABLES = [
-  ...PREDEFINED_VARIABLES,
-  'phoneticName',
-  'session_start',
-  'session_end',
-  'session_duration',
-];
