@@ -40,14 +40,14 @@ exports[`<SettingsSessionPage /> Should render and match the snapshot 1`] = `
       </h3>
       <input
         autocomplete="off"
-        class="Input-t9j2q5-0 kMQnkg BadgeInput-sc-1ua27xt-0 locZHQ"
+        class="Input-t9j2q5-0 eWCvXx BadgeInput-sc-1ua27xt-0 locZHQ"
         color="#107969"
         disabled=""
         name="notASearchField-Variable name..."
         placeholder="Variable name..."
         type="text"
         value=""
-        width="153px"
+        width="200px"
       />
     </div>
     <h3
