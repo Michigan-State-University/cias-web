@@ -1,6 +1,7 @@
 import produce from 'immer';
 import { TlfbQuestionDTO } from 'models/Question';
 import { deleteItemByIndex } from 'utils/reduxUtils';
+import { getUniqVariable } from 'utils/sequenceUtils';
 import {
   UPDATE_QUESTION_TITLE,
   UPDATE_HEAD_QUESTION,
@@ -50,14 +51,33 @@ const tlfbQuestionsReducer = (
 
       case UPDATE_SUBSTANCES_WITH_GROUP_TOGGLE: {
         const {
-          data: { option },
+          data: { option, tlfbVariables },
         } = payload as any;
         draft.body.data[0].payload.substances_with_group = option;
+        if (option) {
+          draft.body.data[0].payload.substance_groups =
+            question.body.data[0].payload.substances.map(({ name }) => ({
+              name,
+              substances: [],
+            }));
+          draft.body.data[0].payload.substances = [];
+        } else {
+          let variablesWithNew = [...tlfbVariables];
+          draft.body.data[0].payload.substances =
+            question.body.data[0].payload.substance_groups.map(({ name }) => {
+              const variable = getUniqVariable(variablesWithNew, name);
+              variablesWithNew = [...variablesWithNew, variable];
+              return {
+                name,
+                variable,
+              };
+            });
+          draft.body.data[0].payload.substance_groups = [];
+        }
         break;
       }
 
       // NOT GROUPED SUBSTANCES
-
       case ADD_SUBSTANCE: {
         const {
           data: { substance },

@@ -9,6 +9,7 @@ import {
   makeSelectError,
   makeSelectLoader,
   makeSelectSelectedQuestion,
+  makeSelectTlfbVariables,
 } from 'global/reducers/questions';
 import { TlfbQuestionDTO } from 'models/Question';
 import globalMessages from 'global/i18n/globalMessages';
@@ -46,11 +47,15 @@ const TlfbQuestion = () => {
     makeSelectLoader('updateQuestionLoading'),
   );
 
+  const tlfbVariables = useSelector<RootState, string[]>(
+    makeSelectTlfbVariables(),
+  );
+
   const onUpdateQuestion = (type: string) => (value: string) =>
     dispatch(updateQuestion(value, type));
 
   const onUpdateSubstancesWithGroupToggle = (option: boolean) => () =>
-    dispatch(updateSubstancesWithGroupToggle(option));
+    dispatch(updateSubstancesWithGroupToggle(option, tlfbVariables));
 
   const {
     body: {

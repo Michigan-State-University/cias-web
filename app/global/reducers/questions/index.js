@@ -37,6 +37,7 @@ export {
   makeSelectPhoneQuestionExists,
   makeSelectParticipantReportQuestionExists,
   makeSelectSelectedQuestionGroupId,
+  makeSelectTlfbVariables,
 } from './selectors';
 export {
   copyQuestionSaga,
