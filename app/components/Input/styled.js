@@ -1,7 +1,9 @@
 import styled from 'styled-components';
 import ReactQuill from 'react-quill';
+import Color from 'color';
 
 import { colors, borders, fontFamily, themeColors } from 'theme';
+
 import { margin, layout, border } from '../BaseComponentStyles';
 
 export const QuillStyled = styled(ReactQuill)`
@@ -99,4 +101,11 @@ export const SearchIcon = styled.img`
   position: absolute;
   left: 10px;
   top: 10px;
+`;
+
+export const Adornment = styled.span`
+  text-align: center;
+  color: ${Color(colors.bluewood).alpha(0.5).toString()};
+  visibility: ${({ visible }) => (visible ? 'visible' : 'hidden')};
+  ${margin};
 `;

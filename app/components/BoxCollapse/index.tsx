@@ -16,6 +16,7 @@ import ArrowUp from 'assets/svg/arrow-up-grey.svg';
 import { Label } from './styled';
 
 type BoxCollapseType = {
+  id?: string;
   children: ReactElement;
   label: string;
   onEdit?: () => void;
@@ -24,6 +25,7 @@ type BoxCollapseType = {
 } & Record<string, unknown>;
 
 export const BoxCollapse = ({
+  id,
   children,
   label,
   onEdit,
@@ -33,19 +35,21 @@ export const BoxCollapse = ({
 }: BoxCollapseType) => {
   const [isOpened, setOpened] = useState(false);
   const toggleOpen = () => setOpened((prev) => !prev);
+
+  const handleDelete = onDelete
+    ? (e: MouseEvent) => {
+        e.stopPropagation();
+        onDelete();
+      }
+    : undefined;
+
   return (
     <Box bg={colors.lightBlue} width="100%" {...styleProps}>
       <Collapse
         isOpened={isOpened}
-        isBinInCollapse
         color={colors.lightBlue}
         binImage={BinIcon}
-        onDelete={(e: MouseEvent) => {
-          if (onDelete) {
-            e.stopPropagation();
-            onDelete();
-          }
-        }}
+        onDelete={handleDelete}
         onToggle={toggleOpen}
         onHideImg={ArrowDown}
         onShowImg={ArrowUp}
@@ -61,21 +65,21 @@ export const BoxCollapse = ({
             align="center"
             py={16}
           >
-            <Text fontSize="16px" fontWeight="bold">
+            <Text fontSize="16px" fontWeight="bold" id={id}>
               {label}
             </Text>
-            <ImageButton
-              src={EditIcon}
-              onClick={(e: MouseEvent) => {
-                if (onEdit) {
+            {onEdit && (
+              <ImageButton
+                src={EditIcon}
+                onClick={(e: MouseEvent) => {
                   e.stopPropagation();
                   onEdit();
-                }
-              }}
-              mr={8}
-              title="Edit item"
-              fill={colors.heather}
-            />
+                }}
+                mr={8}
+                title="Edit item"
+                fill={colors.heather}
+              />
+            )}
           </Label>
         }
         disableAnimation={disableAnimation}

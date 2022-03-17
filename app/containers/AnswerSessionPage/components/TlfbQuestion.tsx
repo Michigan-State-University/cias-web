@@ -88,6 +88,7 @@ const TlfbQuestion = ({
             question_title: questionTitle,
             substance_question: substanceQuestion,
             substances,
+            substance_groups: substanceGroups,
             substances_with_group: substancesWithGroup,
           },
         },
@@ -114,11 +115,17 @@ const TlfbQuestion = ({
 
   const canGoToNextDay = useMemo(() => {
     if (!answerBody) return false;
+
     const { substancesConsumed, consumptions } = answerBody;
     if (!substancesConsumed) return true;
+
     if (substancesWithGroup) {
-      return consumptions?.every(({ amount }) => Boolean(amount));
+      return (
+        !!consumptions?.length &&
+        consumptions.every(({ amount }) => Boolean(amount))
+      );
     }
+
     return consumptions?.length === substances.length;
   }, [answerBody]);
 
@@ -229,16 +236,15 @@ const TlfbQuestion = ({
       <Text fontWeight="bold" fontSize={16}>
         {substanceQuestion}
       </Text>
-      {!substancesWithGroup && (
-        <TlfbConsumptionForm
-          substances={substances}
-          grouped={substancesWithGroup}
-          loading={isAnswerLoading}
-          answerBody={answerBody}
-          onChange={setAnswerBody}
-          mobile={isMobile}
-        />
-      )}
+      <TlfbConsumptionForm
+        substances={substances}
+        substanceGroups={substanceGroups}
+        grouped={substancesWithGroup}
+        loading={isAnswerLoading}
+        answerBody={answerBody}
+        onChange={setAnswerBody}
+        mobile={isMobile}
+      />
       <Divider mb={25} />
       {/* @ts-ignore */}
       <Button

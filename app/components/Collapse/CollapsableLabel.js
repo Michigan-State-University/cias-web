@@ -53,7 +53,7 @@ const CollapseLabel = ({
     <ImageWrapper>{imgElement}</ImageWrapper>
   );
 
-  const deleteIcon = (
+  const deleteIcon = onDelete ? (
     <ImageButton
       src={deleteActive ? binImage : binNotActiveImage}
       onClick={deleteActive ? onDelete : undefined}
@@ -63,6 +63,8 @@ const CollapseLabel = ({
       data-testid={`bin-${label}`}
       data-cy={`accordion-element-delete-${index}`}
     />
+  ) : (
+    <></>
   );
 
   return (
