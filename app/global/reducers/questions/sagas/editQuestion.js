@@ -6,7 +6,6 @@ import get from 'lodash/get';
 import {
   QUESTIONS_WITHOUT_VARIABLE,
   getEditVariables,
-  RESERVED_VARIABLES,
 } from 'models/Session/utils';
 import { hasDuplicates } from 'utils/hasDuplicates';
 import { mapQuestionToStateObject } from 'utils/mapResponseObjects';
@@ -39,23 +38,21 @@ const validateVariable = (payload, question, variables) => {
     return;
   }
   const duplicateError = new Error(formatMessage(messages.duplicateVariable));
-  const reservedError = new Error(formatMessage(messages.reservedVariable));
 
-  const checkAgainstReservedAndExisting = name => {
-    if (RESERVED_VARIABLES.includes(name)) throw reservedError;
+  const checkAgainstExisting = name => {
     if (hasDuplicates(variables, name)) throw duplicateError;
   };
 
   if (question.type === multiQuestion.id) {
     question.body.data.forEach(element => {
-      checkAgainstReservedAndExisting(element.variable.name);
+      checkAgainstExisting(element.variable.name);
     });
   } else if (question.type === gridQuestion.id) {
     question.body.data[0].payload.rows.forEach(element => {
-      checkAgainstReservedAndExisting(element.variable.name);
+      checkAgainstExisting(element.variable.name);
     });
   } else {
-    checkAgainstReservedAndExisting(question.body.variable.name);
+    checkAgainstExisting(question.body.variable.name);
   }
 };
 
