@@ -1,4 +1,4 @@
-import React, { useState, useRef } from 'react';
+import React, { useState, useRef, useEffect } from 'react';
 import PropTypes from 'prop-types';
 import find from 'lodash/find';
 import map from 'lodash/map';
@@ -25,6 +25,7 @@ const ChipsInput = ({
   placeholder,
   disabled,
   intl: { formatMessage },
+  onIsValid,
 }) => {
   const hiddenInput = useRef(null);
   const chipsInput = useRef(null);
@@ -35,6 +36,12 @@ const ChipsInput = ({
   const unsetFocus = () => setIsFocused(false);
 
   useOutsideClick(chipsInput, unsetFocus, isFocused);
+
+  useEffect(() => {
+    if (isEmpty(value) && onIsValid) {
+      onIsValid(false);
+    }
+  }, [value]);
 
   const handleKeyDown = event => {
     const { key, keyCode } = event;
@@ -50,6 +57,7 @@ const ChipsInput = ({
         return;
       }
     }
+
     const lastChar = inputEmailValue[inputEmailValue.length - 1];
     if (
       lastChar === ',' ||
@@ -73,9 +81,27 @@ const ChipsInput = ({
       }
       if (isEmpty(value)) setValue([newEmail]);
       else setValue([...value, newEmail]);
-
       setInputValue('');
-    } else setInputValue(inputEmailValue);
+    } else {
+      setInputValue(inputEmailValue);
+      const isValid = emailValidator(inputEmailValue);
+      const isInputValueEmpty = isEmpty(inputEmailValue);
+      const isValueEmpty = isEmpty(value);
+      if (isInputValueEmpty && isValueEmpty && onIsValid) onIsValid(false);
+      else if (onIsValid && isValueEmpty) onIsValid(isValid);
+    }
+  };
+
+  const handleBlur = ({ target }) => {
+    const inputElement = target;
+    const { value: inputEmailValue } = inputElement;
+
+    const isValid = emailValidator(inputEmailValue);
+    if (isValid) {
+      if (isEmpty(value)) setValue([inputEmailValue]);
+      else setValue([...value, inputEmailValue]);
+      setInputValue('');
+    }
   };
 
   const handleFocus = () => {
@@ -129,6 +155,7 @@ const ChipsInput = ({
           onChange={handleChange({})}
           onKeyDown={handleKeyDown}
           placeholder={isInputFilled ? null : placeholder}
+          onBlur={handleBlur}
           isInputFilled={isInputFilled}
         />
       </Row>
@@ -142,6 +169,7 @@ ChipsInput.propTypes = {
   intl: PropTypes.shape(IntlShape),
   placeholder: PropTypes.string,
   disabled: PropTypes.bool,
+  onIsValid: PropTypes.func,
 };
 
 export default compose(injectIntl)(ChipsInput);

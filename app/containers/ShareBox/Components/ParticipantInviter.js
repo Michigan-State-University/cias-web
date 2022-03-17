@@ -25,6 +25,7 @@ const ParticipantInviter = ({
   disabled,
 }) => {
   const [emails, setEmails] = useState([]);
+  const [disableSubmit, setDisableSubmit] = useState(true);
 
   const handleUploadCsv = data => {
     const parsedData = uniq(
@@ -45,6 +46,8 @@ const ParticipantInviter = ({
     setEmails([]);
   };
 
+  const onIsValidLastValue = isValid => setDisableSubmit(!isValid);
+
   return (
     <Column>
       <Row align="center" justify="between">
@@ -52,10 +55,11 @@ const ParticipantInviter = ({
           value={emails}
           setValue={setEmails}
           placeholder={formatMessage(messages.emailPlaceholder)}
+          onIsValid={onIsValidLastValue}
         />
         <Box width={140}>
           <Button
-            disabled={disabled || isEmpty(emails)}
+            disabled={disabled || (isEmpty(emails) && disableSubmit)}
             width={140}
             ml={12}
             hoverable

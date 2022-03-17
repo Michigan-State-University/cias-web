@@ -52,6 +52,7 @@ const AccessGiver = ({
   fetchUserAccessError,
 }) => {
   const [value, setValue] = useState([]);
+  const [disableSubmit, setDisableSubmit] = useState(true);
 
   const addingParticipantsPossible = canAddParticipantsToIntervention(status);
   const removingParticipantsPossible = canRemoveParticipantsFromIntervention(
@@ -85,6 +86,8 @@ const AccessGiver = ({
   const revokeAction = id => {
     if (id) revokeUserAccess(interventionId, id);
   };
+
+  const onIsValidLastValue = isValid => setDisableSubmit(!isValid);
 
   if (fetchUserAccessLoading)
     return (
@@ -135,6 +138,7 @@ const AccessGiver = ({
             value={value}
             setValue={setValue}
             placeholder={formatMessage(messages.inputPlaceholder)}
+            onIsValid={onIsValidLastValue}
           />
           <Row mt={25} align="center" justify="between">
             <Box>
@@ -148,7 +152,7 @@ const AccessGiver = ({
             </Box>
             <Button
               onClick={inviteParticipants}
-              disabled={isEmpty(value)}
+              disabled={disableSubmit && isEmpty(value)}
               width={180}
               ml={20}
               hoverable
