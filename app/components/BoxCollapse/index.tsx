@@ -47,6 +47,7 @@ export const BoxCollapse = ({
     <Box bg={colors.lightBlue} width="100%" {...styleProps}>
       <Collapse
         isOpened={isOpened}
+        isBinInCollapse
         color={colors.lightBlue}
         binImage={BinIcon}
         onDelete={handleDelete}
