@@ -11,48 +11,51 @@ import {
 
 import { DownloadProgressState } from './types';
 
-export const defaultMinZoom = 0.5;
-export const defaultMaxZoom = 2;
-export const defaultZoom = 1;
+export const DEFAULT_MIN_ZOOM = 0.5;
+export const DEFAULT_MAX_ZOOM = 2;
+export const DEFAULT_ZOOM = 1;
 
-export const detailedInfoZoomThreshold = 0.75;
+export const DETAILED_INFO_ZOOM_THRESHOLD = 0.75;
 
-export const questionNodeLabelOffset = 32;
+export const NODE_LABEL_OFFSET = 32;
 
-export const nodeThinBorderWidth = 1;
-export const nodeThickBorderWidth = 3;
+export const NODE_THIN_BORDER_WIDTH = 1;
+export const NODE_THICK_BORDER_WIDTH = 3;
 
 // vertical margin + vertical border width + vertical padding
-export const nodeVerticalNonContentWidth = 19;
+export const NODE_VERTICAL_NON_CONTENT_WIDTH = 19;
 // horizontal margin + horizontal border width + horizontal padding
-export const nodeHorizontalNonContentWidth = 25;
+export const NODE_HORIZONTAL_NON_CONTENT_WIDTH = 25;
 
-export const scrollbarsThickness = 5;
-export const scrollbarsMargin = 15;
+export const SCROLLBAR_THICKNESS = 5;
+export const SCROLLBAR_MARGIN = 15;
 
-export const sessionMapColors = {
+export const SESSION_MAP_COLORS = {
   nodeBase: colors.smokeWhite,
   nodeDetailsShown: colors.orchid,
   edgeBase: colors.periwinkleGray,
   selected: colors.jungleGreen,
   selectedLight: colors.jungleGreen50,
-  sessionNode: colors.tuftsBlue,
+  sessionNodeBackground: colors.tuftsBlue,
+  questionNodeBackground: colors.linkWater,
   grayedOut: colors.periwinkleGray50,
 };
 
 export enum SessionMapNodeType {
   QUESTION = 'question',
   SESSION = 'session',
+  TLFB = 'tlfb',
   COLLAPSE = 'collapse',
 }
 
-export const sessionMapNodeDimensions = new Map<string, NodeDimensions>([
+export const SESSION_MAP_NODE_DIMENSIONS = new Map<string, NodeDimensions>([
   [SessionMapNodeType.QUESTION, { height: 146, width: 210 }],
   [SessionMapNodeType.SESSION, { height: 110, width: 210 }],
+  [SessionMapNodeType.TLFB, { height: 110, width: 210 }],
   [SessionMapNodeType.COLLAPSE, { height: 324, width: 440 }],
 ]);
 
-export const fallbackNodeDimensions: NodeDimensions = { width: 0, height: 0 };
+export const FALLBACK_NODE_DIMENSIONS: NodeDimensions = { width: 0, height: 0 };
 
 export enum SessionMapHeadType {
   BASE = 'session-map-base',
@@ -61,54 +64,54 @@ export enum SessionMapHeadType {
   GRAYED_OUT = 'session-map-grayed-out',
 }
 
-export const edgePriorities = new Map<string, number>([
+export const EDGE_PRIORITIES = new Map<string, number>([
   [SessionMapHeadType.BASE, 1],
   [SessionMapHeadType.HIGHLIGHTED, 2],
   [SessionMapHeadType.DIRECT_CONNECTION, 3],
   [SessionMapHeadType.GRAYED_OUT, 0],
 ]);
 
-export const edgeSharedAttributes: Partial<Edge> = {
+export const EDGE_SHARED_ATTRIBUTES: Partial<Edge> = {
   type: CustomConnectionLineType.PathFind,
 };
 
-export const baseEdgeSharedAttributes: Partial<Edge> = {
-  ...edgeSharedAttributes,
+export const BASE_EDGE_SHARED_ATTRIBUTES: Partial<Edge> = {
+  ...EDGE_SHARED_ATTRIBUTES,
   // @ts-ignore
   arrowHeadType: SessionMapHeadType.BASE,
   style: {
     strokeWidth: 2,
-    stroke: sessionMapColors.edgeBase,
+    stroke: SESSION_MAP_COLORS.edgeBase,
   },
 };
 
-export const highlightedEdgeSharedAttributes: Partial<Edge> = {
-  ...edgeSharedAttributes,
+export const HIGHLIGHTED_EDGE_SHARED_ATTRIBUTES: Partial<Edge> = {
+  ...EDGE_SHARED_ATTRIBUTES,
   // @ts-ignore
   arrowHeadType: SessionMapHeadType.HIGHLIGHTED,
   style: {
     strokeWidth: 2,
-    stroke: sessionMapColors.selectedLight,
+    stroke: SESSION_MAP_COLORS.selectedLight,
   },
 };
 
-export const directConnectionEdgeSharedAttributes: Partial<Edge> = {
-  ...edgeSharedAttributes,
+export const DIRECT_CONNECTION_EDGE_SHARED_ATTRIBUTES: Partial<Edge> = {
+  ...EDGE_SHARED_ATTRIBUTES,
   // @ts-ignore
   arrowHeadType: SessionMapHeadType.DIRECT_CONNECTION,
   style: {
     strokeWidth: 3,
-    stroke: sessionMapColors.selected,
+    stroke: SESSION_MAP_COLORS.selected,
   },
 };
 
-export const grayedOutEdgeSharedAttributes: Partial<Edge> = {
-  ...edgeSharedAttributes,
+export const GRAYED_OUT_EDGE_SHARED_ATTRIBUTES: Partial<Edge> = {
+  ...EDGE_SHARED_ATTRIBUTES,
   // @ts-ignore
   arrowHeadType: SessionMapHeadType.GRAYED_OUT,
   style: {
     strokeWidth: 2,
-    stroke: sessionMapColors.grayedOut,
+    stroke: SESSION_MAP_COLORS.grayedOut,
   },
 };
 
@@ -126,15 +129,20 @@ export const INITIAL_DOWNLOAD_PROGRESS_STATE: DownloadProgressState = {
   isReadyToRestore: false,
 };
 
-export const questionTypesWithoutVariables = [
+export const QUESTIONS_WITHOUT_VARIABLES = [
   QuestionTypes.INFORMATION,
   QuestionTypes.FINISH,
   QuestionTypes.FEEDBACK,
 ];
 
-export const questionTypesWithoutAnswers = [
+export const QUESTIONS_WITHOUT_ANSWERS = [
   QuestionTypes.INFORMATION,
   QuestionTypes.FINISH,
   QuestionTypes.FEEDBACK,
   QuestionTypes.EXTERNAL_LINK,
+];
+
+export const QUESTIONS_TO_OMIT = [
+  QuestionTypes.TLFB_CONFIG,
+  QuestionTypes.TLFB_EVENTS,
 ];

@@ -14,7 +14,7 @@ import H1 from 'components/H1';
 import Text from 'components/Text';
 
 import { CollapseNodeData } from '../../types';
-import { sessionMapColors, nodeThinBorderWidth } from '../../constants';
+import { SESSION_MAP_COLORS, NODE_THIN_BORDER_WIDTH } from '../../constants';
 import messages from '../../messages';
 import { getNodeDimensions } from './utils';
 
@@ -27,7 +27,7 @@ const SessionMapCollapseNode = ({
 
   const nodeDimensions = useMemo(() => getNodeDimensions(nodeType), [nodeType]);
 
-  const verticalBorder = `${nodeThinBorderWidth}px dashed ${sessionMapColors.sessionNode}`;
+  const verticalBorder = `${NODE_THIN_BORDER_WIDTH}px dashed ${SESSION_MAP_COLORS.sessionNodeBackground}`;
 
   const collapseNodeBody = formatMessage(messages.collapseNodeBody, {
     firstCollapsedScreenNo: styleTextBold(firstCollapsedScreenNo),
@@ -53,8 +53,8 @@ const SessionMapCollapseNode = ({
       </Box>
       <ReactFlowNodeHandles
         nodeId={id}
-        showSourceHandle
-        sourceHandleColor={sessionMapColors.edgeBase}
+        displaySourceHandle
+        sourceHandleColor={SESSION_MAP_COLORS.edgeBase}
       />
     </>
   );

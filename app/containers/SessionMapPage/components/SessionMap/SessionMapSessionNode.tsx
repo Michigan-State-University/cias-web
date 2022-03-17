@@ -1,94 +1,44 @@
-import React, { memo, useMemo, useRef } from 'react';
+import React, { memo } from 'react';
 import { NodeProps } from 'react-flow-renderer';
 import { useIntl } from 'react-intl';
+import { Markup } from 'interweave';
 
-import Box from 'components/Box';
-import { ReactFlowNodeHandles } from 'components/ReactFlowGraph';
+import Text from 'components/Text';
 
 import { SessionNodeData } from '../../types';
-import {
-  sessionMapColors,
-  nodeThinBorderWidth,
-  nodeThickBorderWidth,
-  nodeVerticalNonContentWidth,
-  nodeHorizontalNonContentWidth,
-} from '../../constants';
+import { SESSION_MAP_COLORS } from '../../constants';
 import messages from '../../messages';
-import SessionMapNodeBriefInfo from './SessionMapNodeBriefInfo';
-import SessionMapSessionNodeDetailedInfo from './SessionMapSessionNodeDetailedInfo';
-import { getNodeDimensions, getNodeOpacity } from './utils';
+
+import { SessionMapInteractiveNodeContainer } from './SessionMapInteractiveNodeContainer';
 
 const SessionMapSessionNode = ({
   id,
-  data: {
-    sessionIndex,
-    showDetailedInfo,
-    selected,
-    onSelectedChange,
-    selectableOnClick,
-  },
+  data,
   type: nodeType,
 }: NodeProps<SessionNodeData>): JSX.Element => {
   const { formatMessage } = useIntl();
 
-  const nodeDimensions = useMemo(() => getNodeDimensions(nodeType), [nodeType]);
-
-  const nodeRef = useRef<HTMLElement>(null);
-
-  // save node height without border and padding on initial render
-  const detailedInfoHeight = useMemo(
-    () =>
-      nodeRef?.current?.firstElementChild?.clientHeight ??
-      nodeDimensions.height - 2 * nodeVerticalNonContentWidth,
-    [nodeRef.current?.firstElementChild?.clientHeight],
-  );
-
-  const handleClick = () =>
-    selectableOnClick && onSelectedChange(!selected, id);
+  const { sessionIndex } = data;
 
   const sessionNo = sessionIndex + 1;
 
-  const borderWidth = useMemo(
-    () => (selected ? nodeThickBorderWidth : nodeThinBorderWidth),
-    [selected],
-  );
-
-  const borderColor = useMemo(() => {
-    if (selected) return sessionMapColors.selected;
-    return sessionMapColors.nodeBase;
-  }, [selected]);
-
-  const opacity = getNodeOpacity(selectableOnClick, selected);
+  const briefInfo = formatMessage(messages.sessionNo, { no: sessionNo });
 
   return (
-    <>
-      <Box
-        py={nodeVerticalNonContentWidth - borderWidth}
-        px={nodeHorizontalNonContentWidth - borderWidth}
-        width={nodeDimensions.width}
-        bg={sessionMapColors.sessionNode}
-        bgOpacity={0.3}
-        border={`${borderWidth}px dashed ${borderColor}`}
-        cursor={selectableOnClick ? 'pointer' : 'default'}
-        opacity={opacity}
-        ref={nodeRef}
-        onClick={handleClick}
-      >
-        {showDetailedInfo && (
-          <SessionMapSessionNodeDetailedInfo sessionIndex={sessionNo} />
-        )}
-        {!showDetailedInfo && (
-          <SessionMapNodeBriefInfo
-            minHeight={detailedInfoHeight}
-            info={formatMessage(messages.sessionNo, { no: sessionNo })}
-          />
-        )}
-      </Box>
-      <ReactFlowNodeHandles
-        nodeId={id}
-        sourceHandleColor={sessionMapColors.edgeBase}
-      />
-    </>
+    <SessionMapInteractiveNodeContainer
+      nodeType={nodeType}
+      nodeId={id}
+      nodeData={data}
+      briefInfo={briefInfo}
+      backgroundColor={SESSION_MAP_COLORS.sessionNodeBackground}
+      backgroundOpacity={0.3}
+      borderStyle="dashed"
+    >
+      <Text mb={12} fontSize={12} fontWeight="bold">
+        {formatMessage(messages.redirectionTo, { no: sessionNo })}
+      </Text>
+      <Markup content={formatMessage(messages.switchSession)} noWrap />
+    </SessionMapInteractiveNodeContainer>
   );
 };
 

@@ -3,7 +3,7 @@ import cloneDeep from 'lodash/cloneDeep';
 import intersection from 'lodash/intersection';
 
 import { QuestionGroup } from 'models/QuestionGroup';
-import { QuestionTypes, QuestionDTO } from 'models/Question';
+import { QuestionTypes, QuestionDTO, TlfbQuestionDTO } from 'models/Question';
 import { Session } from 'models/Session';
 import { Answer } from 'models/Answer';
 
@@ -12,19 +12,21 @@ import {
   EdgeSharedAttributesGetter,
   QuestionNodeData,
   SessionNodeData,
+  TlfbNodeData,
 } from '../../types';
 import {
-  baseEdgeSharedAttributes,
-  directConnectionEdgeSharedAttributes,
-  fallbackNodeDimensions,
-  grayedOutEdgeSharedAttributes,
-  highlightedEdgeSharedAttributes,
+  BASE_EDGE_SHARED_ATTRIBUTES,
+  DIRECT_CONNECTION_EDGE_SHARED_ATTRIBUTES,
+  FALLBACK_NODE_DIMENSIONS,
+  GRAYED_OUT_EDGE_SHARED_ATTRIBUTES,
+  HIGHLIGHTED_EDGE_SHARED_ATTRIBUTES,
+  QUESTIONS_TO_OMIT,
   SessionMapHeadType,
-  sessionMapNodeDimensions,
+  SESSION_MAP_NODE_DIMENSIONS,
   SessionMapNodeType,
 } from '../../constants';
 
-export const sortQuestionsByGroupAndPosition = (
+export const sortAndFilterQuestions = (
   questionGroups: QuestionGroup[],
   questions: QuestionDTO[],
 ): QuestionDTO[] => {
@@ -32,9 +34,12 @@ export const sortQuestionsByGroupAndPosition = (
   const sortedQuestionGroups = questionGroups.sort((groupA, groupB) =>
     groupA.position <= groupB.position ? -1 : 1,
   );
+  const filteredQuestions = questions.filter(
+    ({ type }) => !QUESTIONS_TO_OMIT.includes(type),
+  );
   return sortedQuestionGroups.flatMap(({ id }) => {
     // questions belonging to current group
-    const groupQuestions = questions.filter(
+    const groupQuestions = filteredQuestions.filter(
       ({ question_group_id }) => question_group_id === id,
     );
     // sort questions belonging to current group by position
@@ -65,6 +70,26 @@ const createQuestionNode = (
     showDetailedInfo,
     questionIndex,
     selected: selectedNodesIds.includes(question.id),
+    onSelectedChange,
+    selectableOnClick,
+  },
+});
+
+const createTlfbNode = (
+  tlfbQuestion: TlfbQuestionDTO,
+  showDetailedInfo: boolean,
+  selectedNodesIds: string[],
+  onSelectedChange: (selected: boolean, nodeId: string) => void,
+  selectableOnClick: boolean,
+): Node<TlfbNodeData> => ({
+  id: tlfbQuestion.id,
+  type: SessionMapNodeType.TLFB,
+  position: { x: 0, y: 0 },
+  selectable: true,
+  data: {
+    tlfbQuestion,
+    showDetailedInfo,
+    selected: selectedNodesIds.includes(tlfbQuestion.id),
     onSelectedChange,
     selectableOnClick,
   },
@@ -126,9 +151,19 @@ export const createMapNodes = (
   selectedNodesIds: string[],
   onSelectedChange: (selected: boolean, nodeId: string) => void,
   selectableOnClick: boolean,
-): Node<QuestionNodeData | SessionNodeData>[] =>
+): Node<QuestionNodeData | SessionNodeData | TlfbNodeData>[] =>
   questions.flatMap((question, questionIndex) => {
-    const nodes: Node<QuestionNodeData | SessionNodeData>[] = [
+    if (question.type === QuestionTypes.TLFB_QUESTION) {
+      return createTlfbNode(
+        question,
+        showDetailedInfo,
+        selectedNodesIds,
+        onSelectedChange,
+        selectableOnClick,
+      );
+    }
+
+    const nodes: Node<QuestionNodeData | SessionNodeData | TlfbNodeData>[] = [
       createQuestionNode(
         question,
         showDetailsId,
@@ -293,7 +328,7 @@ const removeHighlightIfDirectConnectionExists = (edges: Edge[]): Edge[] => {
       ) {
         edgesCopy[edgeIndex] = {
           ...edge,
-          ...baseEdgeSharedAttributes,
+          ...BASE_EDGE_SHARED_ATTRIBUTES,
         };
       }
     });
@@ -314,12 +349,12 @@ const getEdgeSharedAttributesForSelectableNodes: EdgeSharedAttributesGetter = (
 
   switch (edgeSelectedNodesCount) {
     case 1: // if either source or target node is selected
-      return highlightedEdgeSharedAttributes;
+      return HIGHLIGHTED_EDGE_SHARED_ATTRIBUTES;
     case 2: // if both source and target node are selected
-      return directConnectionEdgeSharedAttributes;
+      return DIRECT_CONNECTION_EDGE_SHARED_ATTRIBUTES;
     case 0: // if neither source nor target node is selected
     default:
-      return baseEdgeSharedAttributes;
+      return BASE_EDGE_SHARED_ATTRIBUTES;
   }
 };
 
@@ -332,14 +367,14 @@ const getEdgeSharedAttributesForNonSelectableNodes: EdgeSharedAttributesGetter =
   ): Partial<Edge> => {
     const sourceNodeIndex = selectedNodesIds.findIndex((id) => id === source);
 
-    if (sourceNodeIndex === -1) return grayedOutEdgeSharedAttributes;
+    if (sourceNodeIndex === -1) return GRAYED_OUT_EDGE_SHARED_ATTRIBUTES;
 
     const targetNodeIndex = selectedNodesIds.findIndex((id) => id === target);
 
     if (targetNodeIndex === sourceNodeIndex + 1)
-      return directConnectionEdgeSharedAttributes;
+      return DIRECT_CONNECTION_EDGE_SHARED_ATTRIBUTES;
 
-    return grayedOutEdgeSharedAttributes;
+    return GRAYED_OUT_EDGE_SHARED_ATTRIBUTES;
   };
 
 export const createMapEdges = (
@@ -576,4 +611,4 @@ export const collapseQuestionsWithoutBranching = (
 };
 
 export const getNodeDimensions = (nodeType: SessionMapNodeType | string) =>
-  sessionMapNodeDimensions.get(nodeType) || fallbackNodeDimensions;
+  SESSION_MAP_NODE_DIMENSIONS.get(nodeType) || FALLBACK_NODE_DIMENSIONS;
