@@ -12,6 +12,7 @@ import Row from 'components/Row';
 
 type Props = {
   type: QuestionTypesEnum;
+  text?: string;
   iconSize: string;
   fontSize: number;
   fontWeight: string;
@@ -19,6 +20,7 @@ type Props = {
 
 const QuestionTypeIndicator = ({
   type,
+  text,
   iconSize,
   fontSize,
   fontWeight,
@@ -42,7 +44,7 @@ const QuestionTypeIndicator = ({
       >
         {
           // @ts-ignore
-          formatMessage(globalMessages.questionTypes[type])
+          text ?? formatMessage(globalMessages.questionTypes[type])
         }
       </Text>
     </Row>
