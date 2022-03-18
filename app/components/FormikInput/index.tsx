@@ -39,8 +39,6 @@ function FormikInput({
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     if (validator && validator(e.target.value)) {
       setValue(e.target.value);
-    } else {
-      onChange(e);
     }
   };
 
@@ -52,7 +50,7 @@ function FormikInput({
       label={label}
       name={formikKey}
       onBlur={onBlur}
-      onChange={handleChange}
+      onChange={validator ? handleChange : onChange}
       placeholder={placeholder}
       type={type}
       value={value}
