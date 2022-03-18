@@ -14,8 +14,10 @@ import Divider from 'components/Divider';
 import Button from 'components/Button';
 import ErrorAlert from 'components/ErrorAlert';
 import Circle from 'components/Circle';
+import Row from 'components/Row';
 import { CalendarRef } from 'components/Calendar/types';
 import { TlfbConsumptionForm } from 'components/TlfbConsumptionForm';
+import TlfbHelpingMaterials from 'components/TlfbHelpingMaterials';
 
 import {
   addTlfbQuestionAnswerRequest,
@@ -247,19 +249,22 @@ const TlfbQuestion = ({
       />
       <Divider mb={25} />
       {/* @ts-ignore */}
-      <Button
-        onClick={saveAnswer}
-        disabled={!canGoToNextDay}
-        loading={isAnswerLoading}
-        width="auto"
-        px={30}
-      >
-        <FormattedMessage
-          {...(isGoToNextDayDisabled
-            ? messages.saveAnswer
-            : messages.goToNextDay)}
-        />
-      </Button>
+      <Row display="flex" justify="between" align="center">
+        <Button
+          onClick={saveAnswer}
+          disabled={!canGoToNextDay}
+          loading={isAnswerLoading}
+          width="auto"
+          px={30}
+        >
+          <FormattedMessage
+            {...(isGoToNextDayDisabled
+              ? messages.saveAnswer
+              : messages.goToNextDay)}
+          />
+        </Button>
+        {(isMobile || isMobilePreview) && <TlfbHelpingMaterials />}
+      </Row>
     </TlfbCalendarLayout>
   );
 };

@@ -69,7 +69,11 @@ const TlfbCalendarLayout = forwardRef<CalendarRef, Props>(
       <TlfbContainer>
         {/* @ts-ignore */}
         {isLoading && <Loader />}
-        <TlfbTitle smallText={smallText} bigText={bigText} />
+        <TlfbTitle
+          smallText={smallText}
+          bigText={bigText}
+          displayHelpingMaterials={!isMobile && !isMobilePreview}
+        />
         <Calendar
           ref={ref}
           startDate={tlfbStartDate}
