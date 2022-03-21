@@ -23,7 +23,7 @@ import messages from '../messages';
 function* addTlfbQuestionAnswer({
   payload: { userSessionId, dayKey, questionGroupId, body },
 }: ReturnType<typeof addTlfbQuestionAnswerRequest>) {
-  const url = `/v1/tlfb/substances`;
+  const url = `/v1/tlfb/consumption_results`;
   try {
     const date = dayjs(dayKey, fullDayToYearFormatter).utc(true);
 
@@ -34,7 +34,7 @@ function* addTlfbQuestionAnswer({
       body: objectToSnakeCase(body),
     });
 
-    const newAnswer = jsonApiToObject(data, 'substance');
+    const newAnswer = jsonApiToObject(data, 'consumptionResult');
 
     yield put(addTlfbQuestionAnswerSuccess(newAnswer, dayKey));
   } catch (error) {
