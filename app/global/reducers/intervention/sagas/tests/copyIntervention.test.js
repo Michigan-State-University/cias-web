@@ -11,8 +11,11 @@ import { formatMessage } from 'utils/intlOutsideReact';
 import copySessionSaga, {
   copySession,
 } from 'global/reducers/intervention/sagas/copySession';
-import { copySessionSuccess } from '../../actions';
-import { COPY_SESSION_ERROR, COPY_SESSION_REQUEST } from '../../constants';
+import {
+  COPY_SESSION_ERROR,
+  COPY_SESSION_REQUEST,
+  COPY_SESSION_SUCCESS,
+} from '../../constants';
 import messages from '../../messages';
 
 describe('copyIntervention saga', () => {
@@ -23,7 +26,9 @@ describe('copyIntervention saga', () => {
     const apiResponse = { data: { ...mockIntervention, id: 'test-id-copied' } };
     return expectSaga(copySession, { payload })
       .provide([[matchers.call.fn(axios.post), { data: apiResponse }]])
-      .put(copySessionSuccess(apiResponse.data))
+      .call(toast.info, formatMessage(messages.copySuccess), {
+        toastId: COPY_SESSION_SUCCESS,
+      })
       .run();
   });
   it('Check copyIntervention error connection', () => {

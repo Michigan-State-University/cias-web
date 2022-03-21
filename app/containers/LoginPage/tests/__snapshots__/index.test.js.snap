@@ -211,6 +211,36 @@ exports[`<LoginPage /> Should render and match the snapshot 1`] = `
   width: 100%;
 }
 
+.c19 {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-flex-direction: row;
+  -ms-flex-direction: row;
+  flex-direction: row;
+  height: auto;
+  width: 100%;
+}
+
+.c24 {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-flex-direction: row;
+  -ms-flex-direction: row;
+  flex-direction: row;
+  height: auto;
+  -webkit-box-pack: center;
+  -webkit-justify-content: center;
+  -ms-flex-pack: center;
+  justify-content: center;
+  justify-items: center;
+  margin-top: 30px;
+  width: 100%;
+}
+
 .c17 {
   outline: none;
   border: none;
@@ -269,15 +299,6 @@ exports[`<LoginPage /> Should render and match the snapshot 1`] = `
   border-top: 1px solid #D5DEEA;
   margin-top: 40px;
   margin-left: 15px;
-}
-
-.c19 {
-  width: 100%;
-}
-
-.c24 {
-  width: 100%;
-  margin-top: 30px;
 }
 
 .c22 {
@@ -526,7 +547,6 @@ exports[`<LoginPage /> Should render and match the snapshot 1`] = `
           </button>
           <div
             class="c19"
-            style="margin-left: -15px; margin-right: -15px; display: flex; flex-wrap: wrap; flex-grow: 0; flex-shrink: 0; align-items: normal; justify-content: flex-start;"
             width="100%"
           >
             <div
@@ -546,8 +566,6 @@ exports[`<LoginPage /> Should render and match the snapshot 1`] = `
           </div>
           <div
             class="c24"
-            mt="30"
-            style="margin-left: -15px; margin-right: -15px; display: flex; flex-wrap: wrap; flex-grow: 0; flex-shrink: 0; align-items: normal; justify-content: center;"
             width="100%"
           >
             <div

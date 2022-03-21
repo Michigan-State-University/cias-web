@@ -181,13 +181,15 @@ export const TeamDetails = ({
                     <Text fontSize={14} mt={20}>
                       <FormattedMessage {...messages.researcherSectionTitle} />
                     </Text>
-                    <UserSelector
-                      disabled={singleTeamEditLoading}
-                      selectedUserId={selectedUser?.id}
-                      onSelect={handleOnSelect}
-                      rolesToInclude={[Roles.researcher, Roles.teamAdmin]}
-                      additionalUsers={[teamAdmin]}
-                    />
+                    <div data-private>
+                      <UserSelector
+                        disabled={singleTeamEditLoading}
+                        selectedUserId={selectedUser?.id}
+                        onSelect={handleOnSelect}
+                        rolesToInclude={[Roles.researcher, Roles.teamAdmin]}
+                        additionalUsers={[teamAdmin]}
+                      />
+                    </div>
                   </Col>
                 )}
               </Row>

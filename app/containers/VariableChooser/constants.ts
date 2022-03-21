@@ -48,3 +48,11 @@ export const VariableChooserContext = createContext<ContextType>({
   setCurrentView: (_) => _,
   sessionTypesWhiteList: [],
 });
+
+export const InterventionViewContext = createContext<{
+  onClick: (id: string) => void;
+}>({
+  onClick: () => {},
+});
+
+export const batchSize = 20;

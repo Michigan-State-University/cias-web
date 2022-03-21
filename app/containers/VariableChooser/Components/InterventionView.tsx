@@ -1,55 +1,69 @@
-import React, { memo, useContext, useEffect, useMemo } from 'react';
+import React, { memo, useContext, useEffect, useRef } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useIntl } from 'react-intl';
 
+import { themeColors } from 'theme';
+
 import {
-  fetchInterventionsRequest,
   makeSelectInterventions,
+  makeSelectCopyModalLoaders,
+  fetchInterventionsWithPaginationRequest,
+  makeSelectInterventionCount,
 } from 'global/reducers/copyModalReducer';
 import { published } from 'models/Status/StatusTypes';
+import { InterventionDto } from 'models/Intervention/InterventionDto';
 
 import NoContent from 'components/NoContent';
 import Box from 'components/Box';
+import Spinner from 'components/Spinner';
+import { VirtualGrid } from 'components/VirtualList';
 
-import { InterventionDto } from 'models/Intervention/InterventionDto';
 import ViewWrapper from './ViewWrapper';
 import InterventionRow from './InterventionRow';
 
 import messages from '../messages';
-import { VariableChooserContext } from '../constants';
+import {
+  VariableChooserContext,
+  InterventionViewContext,
+  batchSize,
+} from '../constants';
 
 type Props = {
   onClick: (interventionId: string) => void;
 };
 
 const InterventionView = ({ onClick }: Props) => {
+  const infiniteLoaderRef = useRef();
   const { formatMessage } = useIntl();
   const dispatch = useDispatch();
 
-  const { initialInterventionId, organizationId } = useContext(
-    VariableChooserContext,
-  );
+  const { organizationId } = useContext(VariableChooserContext);
 
   // actions
-  const fetchInterventions = (orgId: string) =>
-    dispatch(fetchInterventionsRequest(orgId));
+  const fetchInterventions = (startIndex: number, endIndex: number) =>
+    dispatch(
+      fetchInterventionsWithPaginationRequest(
+        { startIndex, endIndex },
+        { statuses: [published], organizationId },
+      ),
+    );
 
   // selectors
-  const allInterventions = useSelector(
+  const interventions = useSelector<unknown, InterventionDto[]>(
     makeSelectInterventions(),
-  ) as InterventionDto[];
+  );
+  const { interventions: interventionsLoading } = useSelector(
+    makeSelectCopyModalLoaders(),
+  );
+  const interventionCount = useSelector(makeSelectInterventionCount());
 
   useEffect(() => {
-    fetchInterventions(organizationId);
+    fetchInterventions(0, batchSize);
   }, []);
 
-  const interventions = useMemo(
-    () => allInterventions?.filter(({ status }) => status === published),
-    [allInterventions],
-  );
-
-  const isInitialIntervention = (interventionId: string) =>
-    interventionId === initialInterventionId;
+  if (interventionsLoading && !interventions?.length) {
+    return <Spinner color={themeColors.secondary} />;
+  }
 
   if (!interventions || !interventions.length)
     return (
@@ -63,16 +77,27 @@ const InterventionView = ({ onClick }: Props) => {
 
   return (
     <ViewWrapper>
-      {interventions.map(({ id, name }, index) => (
-        <InterventionRow
-          key={`${id}-select-intervention-${index}`}
-          id={id}
-          isInitialIntervention={isInitialIntervention(id)}
-          isLast={index === interventions.length - 1}
-          name={name}
-          onClick={onClick}
-        />
-      ))}
+      {interventions && (
+        <InterventionViewContext.Provider value={{ onClick }}>
+          {/* @ts-ignore */}
+          <VirtualGrid
+            ref={infiniteLoaderRef}
+            columnCount={1}
+            rowCount={interventions?.length || 0}
+            rowHeight={30}
+            items={interventions}
+            gutterHeight={0}
+            gutterWidth={0}
+            infiniteLoader={{
+              loadMoreItems: fetchInterventions,
+              itemCount: interventionCount,
+              minimumBatchSize: batchSize,
+            }}
+          >
+            {InterventionRow}
+          </VirtualGrid>
+        </InterventionViewContext.Provider>
+      )}
     </ViewWrapper>
   );
 };

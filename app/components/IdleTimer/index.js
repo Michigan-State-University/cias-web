@@ -59,6 +59,8 @@ const IdleTimer = ({ logOut, user }) => {
     onIdle: handleOnIdle,
     onActive: handleOnActive,
     startManually: true,
+    startOnMount: false,
+    stopOnIdle: true,
     events: [],
   });
 

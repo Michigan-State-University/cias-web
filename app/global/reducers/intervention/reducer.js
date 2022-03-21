@@ -3,7 +3,6 @@ import set from 'lodash/set';
 import get from 'lodash/get';
 import cloneDeep from 'lodash/cloneDeep';
 
-import { defaultMapper } from 'utils/mapResponseObjects';
 import {
   EDIT_SESSION_ERROR,
   EDIT_SESSION_REQUEST,
@@ -23,7 +22,6 @@ import {
   SEND_INTERVENTION_CSV_REQUEST,
   SEND_INTERVENTION_CSV_SUCCESS,
   SEND_INTERVENTION_CSV_ERROR,
-  COPY_SESSION_SUCCESS,
   REORDER_SESSION_LIST,
   UPDATE_SESSION_SETTINGS_REQUEST,
   UPDATE_SESSION_SETTINGS_SUCCESS,
@@ -54,7 +52,6 @@ import {
   DELETE_SESSION_SUCCESS,
   DELETE_SESSION_ERROR,
   EXTERNAL_COPY_SESSION_REQUEST,
-  EXTERNAL_COPY_SESSION_SUCCESS,
   EXTERNAL_COPY_SESSION_ERROR,
   ADD_INTERVENTION_LOGO_REQUEST,
   ADD_INTERVENTION_LOGO_SUCCESS,
@@ -225,9 +222,6 @@ export const interventionReducer = (state = initialState, action) =>
         break;
       case SEND_INTERVENTION_CSV_ERROR:
         draft.loaders.sendCsvLoading = false;
-        break;
-      case COPY_SESSION_SUCCESS:
-        draft.intervention.sessions.push(defaultMapper(action.payload.session));
         break;
       case REORDER_SESSION_LIST:
         draft.cache.intervention = state.intervention;
@@ -437,18 +431,6 @@ export const interventionReducer = (state = initialState, action) =>
         break;
       case EXTERNAL_COPY_SESSION_REQUEST:
         break;
-      case EXTERNAL_COPY_SESSION_SUCCESS: {
-        const { session, interventionId } = action.payload;
-        if (state.intervention.id === interventionId) {
-          const updateIntervention = {
-            ...state.intervention,
-            sessions: [...state.intervention.sessions, session],
-          };
-          draft.intervention = updateIntervention;
-          draft.cache.intervention = updateIntervention;
-        }
-        break;
-      }
       case EXTERNAL_COPY_SESSION_ERROR:
         draft.intervention = state.cache.intervention;
         break;

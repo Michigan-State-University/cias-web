@@ -10,7 +10,6 @@ import { colors, elements } from 'theme';
 
 import { canEdit } from 'models/Status/statusPermissions';
 import { nameQuestion, finishQuestion } from 'models/Session/QuestionTypes';
-import { hasObjectProperty } from 'utils/hasObjectProperty';
 import isNullOrUndefined from 'utils/isNullOrUndefined';
 
 import { makeSelectIsNarratorTab } from 'global/reducers/localState';
@@ -149,7 +148,7 @@ const RenderQuestionDetails = ({
                         <QuestionSubtitle />
                       </Row>
                     )}
-                    {body && hasObjectProperty(body, 'variable') && (
+                    {body?.variable && (
                       <Row mt={10} ml={26}>
                         <VariableInput
                           disabled={isNameScreen}

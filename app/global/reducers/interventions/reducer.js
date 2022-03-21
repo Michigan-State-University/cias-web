@@ -5,7 +5,6 @@ import { archived } from 'models/Status/StatusTypes';
 import {
   EDIT_INTERVENTION_SUCCESS,
   CREATE_INTERVENTION_SUCCESS,
-  TRANSLATE_INTERVENTION_SUCCESS,
 } from 'global/reducers/intervention';
 
 import isNullOrUndefined from 'utils/isNullOrUndefined';
@@ -14,7 +13,6 @@ import {
   ARCHIVE_INTERVENTION_ERROR,
   ARCHIVE_INTERVENTION_REQUEST,
   ARCHIVE_INTERVENTION_SUCCESS,
-  COPY_INTERVENTION_SUCCESS,
   FETCH_INTERVENTIONS_ERROR,
   FETCH_INTERVENTIONS_REQUEST,
   FETCH_INTERVENTIONS_SUCCESS,
@@ -98,8 +96,6 @@ export const interventionsReducer = (state = initialState, action) =>
         draft.fetchInterventionError = action.payload.error;
         break;
       case CREATE_INTERVENTION_SUCCESS:
-      case TRANSLATE_INTERVENTION_SUCCESS:
-      case COPY_INTERVENTION_SUCCESS:
         draft.interventions.unshift(action.payload.intervention);
         break;
       case ARCHIVE_INTERVENTION_REQUEST:

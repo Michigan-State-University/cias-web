@@ -17,14 +17,15 @@ export default defineMessages({
   },
   duplicateSuccess: {
     id: `${scope}.duplicateSuccess`,
-    defaultMessage: 'Duplicated "{name}" Intervention is now on the Dashboard',
+    defaultMessage:
+      'CIAS is copying your intervention. We will send you an e-mail when this process has been finished.',
   },
   copySuccess: {
     id: `${scope}.copySuccess`,
-    defaultMessage: `Copy of "{name}" was sent to the chosen {
-      userCount, plural, 
-        one {researcher}
-        other {researchers}
-    }`,
+    defaultMessage: `CIAS is copying your intervention. We will send an e-mail to {
+    userCount, plural,
+    one {researcher}
+    other {researchers}
+    } when this process has been finished.`,
   },
 });

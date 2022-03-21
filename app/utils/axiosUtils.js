@@ -7,7 +7,7 @@ import { AxiosResponse } from 'axios';
  * @param  {HttpMethods} method
  */
 export const responseMethodEquals = (response, method) =>
-  response.config.method.toUpperCase() === method.toUpperCase();
+  response && response.config.method.toUpperCase() === method.toUpperCase();
 
 /**
  * Checks if axios response `status` equals to the given one
@@ -15,4 +15,4 @@ export const responseMethodEquals = (response, method) =>
  * @param  {HttpStatusCodes} status
  */
 export const responseStatusEquals = (response, status) =>
-  response.status === status;
+  response && response.status === status;

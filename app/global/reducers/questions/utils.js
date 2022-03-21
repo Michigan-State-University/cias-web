@@ -1,12 +1,13 @@
-import findOrderedQuestionsByGroupId from 'utils/findOrderedQuestionsByGroupId';
 import {
   gridQuestion,
   textboxQuestion,
   numberQuestion,
 } from 'models/Session/QuestionTypes';
+import { readQuestionBlockType } from 'models/Narrator/BlockTypes';
+import findOrderedQuestionsByGroupId from 'utils/findOrderedQuestionsByGroupId';
 import { splitAndKeep } from 'utils/splitAndKeep';
 import { htmlToPlainText } from 'utils/htmlToPlainText';
-import { readQuestionBlockType } from 'models/Narrator/BlockTypes';
+import { assignDraftItemsById, updateItemById } from 'utils/reduxUtils';
 
 export const mapQuestionDataForType = (question) => {
   switch (question.type) {
@@ -79,21 +80,27 @@ export const assignFromQuestionTTS = (question) => {
 /* eslint-disable default-case, no-param-reassign */
 export const editQuestionSuccessCommon = (draft, payload) => {
   draft.loaders.updateQuestionLoading = false;
-  const index = draft.questions.findIndex(
-    (question) => question.id === payload.question.id,
+  updateItemById(
+    draft.questions,
+    payload.question.id,
+    mapQuestionDataForType(payload.question),
   );
-  draft.questions[index] = mapQuestionDataForType(payload.question);
-  draft.cache.questions = draft.questions;
+  assignDraftItemsById(
+    draft.questions,
+    draft.cache.questions,
+    payload.question.id,
+  );
 };
 
 /* eslint-disable default-case, no-param-reassign */
 export const editQuestionErrorCommon = (draft, payload) => {
   draft.loaders.updateQuestionLoading = false;
-  const finder = (question) => question.id === payload.questionId;
-  const cacheIndex = draft.cache.questions.findIndex(finder);
-  const index = draft.questions.findIndex(finder);
-  if (cacheIndex !== -1 && index !== -1)
-    draft.questions[index] = draft.cache.questions[cacheIndex];
+
+  assignDraftItemsById(
+    draft.cache.questions,
+    draft.questions,
+    payload.questionId,
+  );
 };
 
 export const getNewQuestionIdInsideGroup = (

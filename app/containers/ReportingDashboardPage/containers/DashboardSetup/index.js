@@ -53,7 +53,7 @@ const DashboardSetup = ({
       <Helmet>
         <title>{formatMessage(messages.dashboardSetup)}</title>
       </Helmet>
-      <Container mx="55px !important" maxWidth="100% !important">
+      <Container mx="55px !important">
         <Row>
           <Col mt={30}>
             <Row align="center">
