@@ -64,7 +64,7 @@ const TlfbCalendarLayout = forwardRef<CalendarRef, Props>(
           },
         ],
       } = tlfbConfig;
-      return dayjs().subtract(+daysCount, 'day');
+      return dayjs().subtract(+(daysCount || 1), 'day');
     }, [tlfbConfig.data]);
 
     return (
