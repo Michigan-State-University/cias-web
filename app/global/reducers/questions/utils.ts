@@ -12,6 +12,7 @@ import { splitAndKeep } from 'utils/splitAndKeep';
 import { htmlToPlainText } from 'utils/htmlToPlainText';
 import instantiateEmptyQuestion from 'utils/instantiateEmptyQuestion';
 import globalMessages from 'global/i18n/globalMessages';
+import { assignDraftItemsById, updateItemById } from 'utils/reduxUtils';
 
 const DELIMITERS = [',', '.', '?', '!'];
 
@@ -115,24 +116,30 @@ export const editQuestionSuccessCommon = (
   payload: { question: QuestionDTO },
 ) => {
   draft.loaders.updateQuestionLoading = false;
-  const index = draft.questions.findIndex(
-    (question: { id: string }) => question.id === payload.question.id,
-  );
-  draft.questions[index] = mapQuestionDataForType(payload.question);
-  draft.cache.questions = draft.questions;
   draft.errors.updateQuestionError = null;
+
+  updateItemById(
+    draft.questions,
+    payload.question.id,
+    mapQuestionDataForType(payload.question),
+  );
+  assignDraftItemsById(
+    draft.questions,
+    draft.cache.questions,
+    payload.question.id,
+  );
 };
 
 /* eslint-disable default-case, no-param-reassign */
 export const editQuestionErrorCommon = (draft: Draft<any>, payload: any) => {
   draft.errors.updateQuestionError = payload?.error || 'Error!';
   draft.loaders.updateQuestionLoading = false;
-  const finder = (question: { id: string }) =>
-    question.id === payload.questionId;
-  const cacheIndex = draft.cache.questions.findIndex(finder);
-  const index = draft.questions.findIndex(finder);
-  if (cacheIndex !== -1 && index !== -1)
-    draft.questions[index] = draft.cache.questions[cacheIndex];
+
+  assignDraftItemsById(
+    draft.cache.questions,
+    draft.questions,
+    payload.questionId,
+  );
 };
 
 export const getNewQuestionIdInsideGroup = (

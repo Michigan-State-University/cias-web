@@ -1,5 +1,6 @@
+import { UPDATE_VARIABLE } from 'global/reducers/questions/constants';
+
 import { UPDATE_DATA } from './constants';
-import { UPDATE_VARIABLE } from '../constants';
 
 /* eslint-disable default-case, no-param-reassign */
 const textboxQuestionReducer = (question, payload) => {

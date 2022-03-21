@@ -54,7 +54,9 @@ const InvitationList = ({
           py={12}
           borderBottom={`${borders.borderWidth} ${borders.borderStyle} ${colors.mystic}`}
         >
-          <Text fontSize={14}>{email}</Text>
+          <Text data-private fontSize={14}>
+            {email}
+          </Text>
           <TextButton
             onClick={() => cancelInvitation(id)}
             loading={invitationCanceling === id}

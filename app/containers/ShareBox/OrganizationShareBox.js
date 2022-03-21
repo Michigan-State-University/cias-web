@@ -61,6 +61,7 @@ const OrganizationShareBox = ({
   const [invitationArray, setInvitationArray] = useState([
     { emails: [], healthClinic: null },
   ]);
+  const [disableSubmit, setDisableSubmit] = useState(true);
 
   const editInvitationObj = (invitationObj, index) => {
     const newArray = [...invitationArray];
@@ -236,6 +237,8 @@ const OrganizationShareBox = ({
     sendInvite(invitationArrayToSend, true);
   };
 
+  const onIsValidLastValue = (isValid) => setDisableSubmit(!isValid);
+
   return (
     <ShareBoxModalParent>
       {children}
@@ -252,6 +255,7 @@ const OrganizationShareBox = ({
                 updateInvitation={(invitationObj) =>
                   editInvitationObj(invitationObj, index)
                 }
+                onIsValid={onIsValidLastValue}
               />
             ))}
             <Row dispay="flex" justify="center" align="center">
@@ -260,7 +264,10 @@ const OrganizationShareBox = ({
                 {exportExampleCsvButton()}
               </Box>
               <Button
-                disabled={!sharingPossible || invitationArray.length < 2}
+                disabled={
+                  !sharingPossible ||
+                  (invitationArray.length < 2 && disableSubmit)
+                }
                 width="100%"
                 ml={12}
                 hoverable

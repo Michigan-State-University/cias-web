@@ -21,7 +21,7 @@ export function* editSingleUser({ payload: { userId, ...newUserData } }) {
     const pickedUser = pickUserAttributes(user);
     yield put(editOtherUserSuccess(pickedUser));
   } catch (error) {
-    yield call(toast.error, error.toString(), {
+    yield call(toast.error, error?.toString(), {
       toastId: EDIT_OTHER_USER_ERROR,
     });
     yield put(editOtherUserError(error));

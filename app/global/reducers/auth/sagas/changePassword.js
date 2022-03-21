@@ -24,7 +24,7 @@ export function* changePassword({
     });
     yield put(changePasswordSuccess());
   } catch (error) {
-    yield put(changePasswordError(error.toString()));
+    yield put(changePasswordError(error?.toString()));
   }
 }
 

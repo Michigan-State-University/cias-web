@@ -4,14 +4,12 @@
  *
  */
 
-import React, { memo, useEffect, useState } from 'react';
+import React, { memo, useMemo } from 'react';
 import PropTypes from 'prop-types';
 import { useIntl } from 'react-intl';
 
 import { colors } from 'theme';
-
-import { floatValidator } from 'utils/validators';
-import { splitAndKeep } from 'utils/splitAndKeep';
+import { numericValidator } from 'utils/validators';
 
 import Select from 'components/Select';
 import Box from 'components/Box';
@@ -19,7 +17,7 @@ import Box from 'components/Box';
 import { CaseInput } from './styled';
 import messages from './messages';
 
-const signs = ['=', '<', '>', '<=', '>='];
+const SIGNS = ['=', '<', '>', '<=', '>='];
 
 const InequalityChooser = ({
   onSuccessfulChange,
@@ -33,34 +31,32 @@ const InequalityChooser = ({
     value: sign,
   });
 
-  const [inequalitySign, setInequalitySign] = useState(
-    populateSelectOption('='),
-  );
-  const [numericValue, setNumericValue] = useState('');
+  const { inequalitySign, numericValue } = useMemo(() => {
+    const newNumericValue = inequalityValue.replace(/\D/g, '');
+    const newInequalitySign = inequalityValue.slice(
+      0,
+      inequalityValue.length - newNumericValue.length,
+    );
 
-  useEffect(() => {
-    if (inequalityValue) {
-      const newNumericValue = splitAndKeep(inequalityValue, signs)[0] ?? '';
-      const newInequalitySign = inequalityValue.slice(
-        0,
-        inequalityValue.length - newNumericValue.length,
-      );
-      setNumericValue(newNumericValue);
-      setInequalitySign(populateSelectOption(newInequalitySign));
-    }
+    return {
+      numericValue: newNumericValue,
+      inequalitySign: populateSelectOption(newInequalitySign),
+    };
   }, [inequalityValue]);
 
-  useEffect(() => {
-    if (!disabled && inequalitySign && numericValue) handleSignUpdate();
-  }, [inequalitySign, numericValue, disabled]);
-
-  const handleSignUpdate = () => {
-    const newValue = `${inequalitySign.value}${numericValue}`;
-
-    if (newValue !== inequalityValue) onSuccessfulChange(newValue);
+  const onChange = (sign, value) => {
+    onSuccessfulChange(`${sign ?? ''}${value ?? ''}`);
   };
 
-  const signMapper = signs.map(populateSelectOption);
+  const onSignChange = (newSign) => {
+    onChange(newSign.value, numericValue);
+  };
+
+  const onValueChange = (newValue) => {
+    onChange(inequalitySign.value, newValue);
+  };
+
+  const signMapper = SIGNS.map(populateSelectOption);
 
   return (
     <>
@@ -73,7 +69,7 @@ const InequalityChooser = ({
           isDisabled: disabled,
           bg: colors.linkWater,
           options: signMapper,
-          onChange: (value) => setInequalitySign(value),
+          onChange: onSignChange,
           value: inequalitySign,
         }}
       />
@@ -87,8 +83,8 @@ const InequalityChooser = ({
           textAlign="center"
           placeholder="..."
           value={numericValue}
-          validator={floatValidator}
-          onBlur={(value) => setNumericValue(value)}
+          validator={numericValidator}
+          onBlur={onValueChange}
           aria-label={formatMessage(messages.inputLabel)}
         />
       </Box>

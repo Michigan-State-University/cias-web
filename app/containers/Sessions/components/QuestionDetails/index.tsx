@@ -181,7 +181,7 @@ const RenderQuestionDetails = ({
                       <VariableInput
                         disabled={isNameScreen}
                         questionId={id}
-                        interventionStatus={status!}
+                        interventionStatus={status}
                         isNarratorTab={isNarratorTab}
                         variable={body.variable}
                       />

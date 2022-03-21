@@ -92,3 +92,4 @@ export const CREATE_QUESTION_GROUP_REQUEST =
 
 export const CREATE_QUESTIONS_SUCCESS =
   'app/EditSessionPage/CREATE_QUESTIONS_SUCCESS';
+export const UPDATE_VARIABLE = 'app/EditSessionPage/UPDATE_VARIABLE';

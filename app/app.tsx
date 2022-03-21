@@ -17,6 +17,9 @@ import { ConnectedRouter } from 'connected-react-router';
 import history from 'utils/history';
 import { ToastContainer } from 'components/ReactToastify';
 import { ScreenClassProvider } from 'react-grid-system';
+import LogRocket from 'logrocket';
+import setupLogRocketReact from 'logrocket-react';
+import LogrocketFuzzySanitizer from 'logrocket-fuzzy-search-sanitizer';
 
 import smoothscroll from 'smoothscroll-polyfill';
 
@@ -56,6 +59,100 @@ if (!isNullOrUndefined(process.env.SENTRY_DSN))
     dsn: process.env.SENTRY_DSN,
     release: `${process.env.SENTRY_ENV}-v${process.env.VERSION}`,
   });
+
+const sanitizeUrl = (url: string) => {
+  const newUrl = new URL(url);
+  const { searchParams } = newUrl;
+  Array.from(searchParams.keys()).forEach((searchParamsKey) =>
+    searchParams.set(searchParamsKey, '*'),
+  );
+  newUrl.search = searchParams.toString();
+  return newUrl.toString();
+};
+
+if (process.env.LOGROCKET_ENV) {
+  const privateFieldNames = [
+    'password',
+    'Access-Token',
+    'access-token',
+    'first_name',
+    'last_name',
+    'phone',
+    'full_name',
+    'current_password',
+    'password_confirmation',
+    'token',
+    'verification_code',
+    'email',
+    'iso',
+    'prefix',
+    'avatar_url',
+    'id',
+    'uid',
+  ];
+
+  const { requestSanitizer, responseSanitizer } =
+    LogrocketFuzzySanitizer.setup(privateFieldNames);
+
+  setupLogRocketReact(LogRocket);
+  LogRocket.init(process.env.LOGROCKET_ENV, {
+    shouldCaptureIP: false,
+    network: {
+      requestSanitizer: (request) => {
+        const modRequest = requestSanitizer(request as any);
+
+        if (modRequest.headers['Access-Token']) {
+          modRequest.headers['Access-Token'] = '*';
+        }
+
+        if (modRequest.headers['Verification-Code']) {
+          modRequest.headers['Verification-Code'] = '*';
+        }
+
+        if (modRequest.headers.Uid) {
+          modRequest.headers.Uid = '*';
+        }
+
+        if (modRequest.url) {
+          modRequest.url = sanitizeUrl(modRequest.url);
+        }
+
+        return modRequest;
+      },
+      responseSanitizer: (response) => {
+        const modResponse = responseSanitizer(response as any);
+
+        if (modResponse.headers['access-token']) {
+          modResponse.headers['access-token'] = '*';
+        }
+
+        if (modResponse.headers.uid) {
+          modResponse.headers.uid = '*';
+        }
+
+        if (modResponse.url) {
+          modResponse.url = sanitizeUrl(modResponse.url);
+        }
+
+        return modResponse;
+      },
+    },
+    browser: {
+      urlSanitizer: sanitizeUrl,
+    },
+    dom: {
+      // dont record any inputs
+      inputSanitizer: true,
+    },
+  });
+
+  // Add custom param to Sentry to easily identify corresponding session in Logrocket
+  LogRocket.getSessionURL((sessionURL) => {
+    Sentry.configureScope((scope) => {
+      scope.setExtra('sessionURL', sessionURL);
+    });
+  });
+}
 
 const MOUNT_NODE = document.getElementById('app') || document.body;
 

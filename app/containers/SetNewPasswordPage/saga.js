@@ -44,7 +44,7 @@ function* setNewPassword({
     yield put(setNewPasswordSuccess());
     yield put(push('/'));
   } catch (error) {
-    yield put(setNewPasswordError(error.toString()));
+    yield put(setNewPasswordError(error?.toString()));
   }
 }
 
