@@ -27,7 +27,7 @@ export function* sendSmsToken() {
     yield put(sendSmsTokenSuccess());
   } catch (error) {
     yield delay(1000);
-    yield put(sendSmsTokenError(error.toString()));
+    yield put(sendSmsTokenError(error?.toString()));
   }
 }
 

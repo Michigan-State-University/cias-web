@@ -34,6 +34,7 @@ describe('<ReflectionBlock />', () => {
         text: ['1'],
         value: '1',
         variable: '1',
+        match: '=',
       },
     ],
   };

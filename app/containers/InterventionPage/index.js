@@ -36,7 +36,7 @@ import {
   fetchInterventionsSaga,
 } from 'global/reducers/interventions';
 import { editUserRequest, makeSelectUser } from 'global/reducers/auth';
-import { GOOGLE_FORM_URL } from 'global/constants';
+import { FEEDBACK_FORM_URL } from 'global/constants';
 
 import { colors, fontSizes } from 'theme';
 import StatusFilter from './StatusFilter';
@@ -118,7 +118,7 @@ export function InterventionPage({
       title={formatMessage(messages.feedbackTitle)}
       description={
         <StyledLink
-          href={GOOGLE_FORM_URL}
+          href={FEEDBACK_FORM_URL}
           target="_blank"
           onClick={handleFeedbackClick}
         >
@@ -213,7 +213,10 @@ export function InterventionPage({
           onFetchInterventions={handleFetch}
           isLoading={fetchInterventionLoading}
           filterData={filterData}
-          infiniteLoader={{ itemCount: interventionsSize }}
+          infiniteLoader={{
+            itemCount: interventionsSize,
+            minimumBatchSize: 50,
+          }}
         />
       </Box>
     </AppContainer>

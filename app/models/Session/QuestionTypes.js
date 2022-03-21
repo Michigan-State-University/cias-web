@@ -1,4 +1,5 @@
 import { colors } from 'theme';
+
 import QuestionType from './QuestionType';
 
 export const singleQuestion = new QuestionType(

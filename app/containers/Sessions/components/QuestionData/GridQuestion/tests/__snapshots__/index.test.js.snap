@@ -405,7 +405,7 @@ exports[`<GridQuestion /> Should render and match the snapshot 1`] = `
   border-radius: 5px;
   background-color: transparent;
   border-color: transparent;
-  width: 33px;
+  width: 37px;
   max-width: 200px;
   padding-top: 12px;
   padding-bottom: 12px;
@@ -464,7 +464,7 @@ exports[`<GridQuestion /> Should render and match the snapshot 1`] = `
   border-radius: 5px;
   background-color: transparent;
   border-color: transparent;
-  width: 41px;
+  width: 49px;
   max-width: 200px;
   padding-top: 12px;
   padding-bottom: 12px;
@@ -704,7 +704,7 @@ exports[`<GridQuestion /> Should render and match the snapshot 1`] = `
                       placeholder="Score"
                       type="tel"
                       value="1"
-                      width="33px"
+                      width="37px"
                     />
                   </div>
                   <div
@@ -754,7 +754,7 @@ exports[`<GridQuestion /> Should render and match the snapshot 1`] = `
                       placeholder="Score"
                       type="tel"
                       value="2"
-                      width="33px"
+                      width="37px"
                     />
                   </div>
                   <div
@@ -820,7 +820,7 @@ exports[`<GridQuestion /> Should render and match the snapshot 1`] = `
                         placeholder="Variable name..."
                         type="text"
                         value="11"
-                        width="41px"
+                        width="49px"
                       />
                     </div>
                     <div
@@ -913,7 +913,7 @@ exports[`<GridQuestion /> Should render and match the snapshot 1`] = `
                         placeholder="Variable name..."
                         type="text"
                         value="22"
-                        width="41px"
+                        width="49px"
                       />
                     </div>
                     <div

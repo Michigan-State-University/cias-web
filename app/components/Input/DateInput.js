@@ -20,6 +20,7 @@ const DateInput = React.forwardRef(
     ref,
   ) => (
     <StyledDateInput
+      data-private
       disabled={disabled}
       ref={ref}
       width={width}

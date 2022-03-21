@@ -63,7 +63,6 @@ import {
 import { interventionOptionsSaga } from 'global/sagas/interventionOptionsSaga';
 import {
   copyInterventionRequest,
-  fetchInterventionsRequest,
   interventionsReducer,
   fetchInterventionsSaga,
 } from 'global/reducers/interventions';
@@ -123,7 +122,6 @@ export function InterventionDetailsPage({
   fetchQuestions,
   fetchSessionEmails,
   deleteSession,
-  fetchInterventions,
   externalCopySession,
   user: { id: userId, roles },
   editSession,
@@ -295,10 +293,6 @@ export function InterventionDetailsPage({
 
   useLayoutEffect(() => {
     fetchIntervention(interventionId);
-  }, []);
-
-  useEffect(() => {
-    fetchInterventions();
   }, []);
 
   useEffect(() => {
@@ -637,7 +631,6 @@ InterventionDetailsPage.propTypes = {
   fetchQuestions: PropTypes.func,
   fetchSessionEmails: PropTypes.func,
   deleteSession: PropTypes.func,
-  fetchInterventions: PropTypes.func,
   externalCopySession: PropTypes.func,
   editSession: PropTypes.func,
   user: PropTypes.object,
@@ -653,7 +646,6 @@ const mapDispatchToProps = {
   createSession: createSessionRequest,
   fetchQuestions: getQuestionsRequest,
   fetchIntervention: fetchInterventionRequest,
-  fetchInterventions: fetchInterventionsRequest,
   editIntervention: editInterventionRequest,
   changeSessionIndex: changeCurrentSession,
   fetchSessionEmails: fetchSessionEmailsRequest,

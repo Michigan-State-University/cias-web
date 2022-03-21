@@ -110,7 +110,7 @@ exports[`<SingleQuestion /> Should render and match the snapshot 1`] = `
   background-color: transparent;
   border-color: transparent;
   margin-left: 31px;
-  width: 33px;
+  width: 37px;
   max-width: 200px;
   padding-top: 12px;
   padding-bottom: 12px;
@@ -1780,7 +1780,7 @@ exports[`<SingleQuestion /> Should render and match the snapshot 1`] = `
             placeholder="Score"
             type="tel"
             value="1"
-            width="33px"
+            width="37px"
           />
         </div>
       </div>
@@ -3238,7 +3238,7 @@ exports[`<SingleQuestion /> Should render and match the snapshot 1`] = `
             placeholder="Score"
             type="tel"
             value="2"
-            width="33px"
+            width="37px"
           />
         </div>
       </div>

@@ -36,6 +36,7 @@ import {
   dateQuestion,
   thirdPartyQuestion,
   nameQuestion,
+  QuestionTypes,
 } from './QuestionTypes';
 
 /**
@@ -313,18 +314,18 @@ export const instantiateBlockForType = (type, endPosition, question) => {
   }
 };
 
-export const NotAnswerableQuestions = [
+export const NOT_ANSWERABLE_QUESTIONS = [
   informationQuestion.id,
   finishQuestion.id,
   feedbackQuestion.id,
 ];
 
-export const QuestionsWithoutVariable = [
-  ...NotAnswerableQuestions,
+export const QUESTIONS_WITHOUT_VARIABLE = [
+  ...NOT_ANSWERABLE_QUESTIONS,
   thirdPartyQuestion.id,
 ];
 
-export const DisabledNarratorSettingsByQuestionType = {
+export const DISABLED_NARRATOR_SETTINGS_BY_QUESTION_TYPE = {
   voice: [feedbackQuestion.id],
   animation: [feedbackQuestion.id],
 };

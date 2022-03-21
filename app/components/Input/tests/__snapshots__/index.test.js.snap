@@ -118,6 +118,7 @@ exports[`<ApprovableInput /> Should render and match the snapshot as date input 
           >
             <button
               class="c3"
+              data-private="true"
               height="50"
               width="250"
             >
@@ -1788,7 +1789,7 @@ exports[`<BadgeInput /> Should render and match the snapshot 1`] = `
   border-radius: 5px;
   background-color: transparent;
   border-color: transparent;
-  width: 113px;
+  width: 157px;
   max-width: 200px;
   color: rgba(0,0,0,1);
   background-color: rgba(0,0,0,0.1);
@@ -1828,7 +1829,7 @@ exports[`<BadgeInput /> Should render and match the snapshot 1`] = `
     placeholder="Placeholder"
     type="text"
     value=""
-    width="113px"
+    width="157px"
   />
 </div>
 `;
@@ -1866,6 +1867,7 @@ exports[`<DateInput /> Should render and match the snapshot 1`] = `
 <div>
   <button
     class="c0"
+    data-private="true"
     height="50"
     width="250"
   >

@@ -153,7 +153,7 @@ const PhoneNumberForm = ({
                 modalVisible={modalVisible}
                 phone={currentPhoneNumber}
               />
-              <Row width="100%" align="start">
+              <Row width="100%" align="start" data-private>
                 <FormikSelect
                   columnStyleProps={{
                     pr: 10,

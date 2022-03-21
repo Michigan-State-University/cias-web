@@ -20,7 +20,7 @@ const reflectionFormulaBlockReducer = (block, { data, type }) => {
 
     case ADD_FORMULA_CASE:
       block.reflections.push({
-        match: '',
+        match: '=',
         text: [],
         audio_urls: [],
         sha256: [],

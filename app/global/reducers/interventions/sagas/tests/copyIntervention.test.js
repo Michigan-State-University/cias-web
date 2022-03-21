@@ -1,12 +1,10 @@
 import axios from 'axios';
-import { push } from 'connected-react-router';
 import { toast } from 'react-toastify';
 import { takeLatest } from 'redux-saga/effects';
 import * as matchers from 'redux-saga-test-plan/matchers';
 import { throwError } from 'redux-saga-test-plan/providers';
 import { expectSaga } from 'redux-saga-test-plan';
 
-import { defaultMapper } from 'utils/mapResponseObjects';
 import { formatMessage } from 'utils/intlOutsideReact';
 import { apiInterventionResponse } from 'utils/apiResponseCreators';
 import { createUser } from 'utils/reducerCreators';
@@ -15,7 +13,6 @@ import messages from 'global/reducers/interventions/messages';
 import copyInterventionSaga, {
   copyIntervention,
 } from 'global/reducers/interventions/sagas/copyIntervention';
-import { copyInterventionSuccess } from '../../actions';
 import {
   COPY_INTERVENTION_SUCCESS,
   COPY_INTERVENTION_ERROR,
@@ -36,9 +33,8 @@ describe('copyIntervention saga', () => {
     return expectSaga(copyIntervention, { payload })
       .provide([[matchers.call.fn(axios.post), { data: apiResponse }]])
       .call(
-        toast.success,
+        toast.info,
         formatMessage(messages.copySuccess, {
-          name: apiResponse.data.attributes.name,
           userCount: payload.users.length,
         }),
         {
@@ -54,8 +50,9 @@ describe('copyIntervention saga', () => {
 
     return expectSaga(copyIntervention, { payload })
       .provide([[matchers.call.fn(axios.post), { data: apiResponse }]])
-      .put(copyInterventionSuccess(defaultMapper(apiResponse.data)))
-      .put(push('/'))
+      .call(toast.info, formatMessage(messages.duplicateSuccess), {
+        toastId: `${COPY_INTERVENTION_SUCCESS}_false`,
+      })
       .run();
   });
   it('Check copyIntervention error connection', () => {

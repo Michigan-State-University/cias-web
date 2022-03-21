@@ -82,7 +82,9 @@ exports[`<InequalityChooser /> Should render and match the snapshot 1`] = `
         >
           <div
             class=" css-1uccc91-singleValue"
-          />
+          >
+            =
+          </div>
           <div
             class="css-b8ldur-Input"
           >
