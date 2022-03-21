@@ -123,6 +123,7 @@ const TlfbEvents = ({
       dayId={dayId}
       calendarData={tlfbDaysData}
       isLoading={fetchCalendarDataLoader}
+      hideHelpingMaterials
     >
       <>
         {(isMobile || isMobilePreview) && <Divider mb={24} mt={16} />}

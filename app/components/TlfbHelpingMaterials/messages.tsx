@@ -7,4 +7,8 @@ export default defineMessages({
     id: `${scope}.helpingMaterials`,
     defaultMessage: 'Helping materials',
   },
+  document: {
+    id: `${scope}.document`,
+    defaultMessage: 'See helping materials',
+  },
 });

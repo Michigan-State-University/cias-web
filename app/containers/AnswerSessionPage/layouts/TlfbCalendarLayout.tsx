@@ -30,6 +30,7 @@ type Props = {
   calendarData: CalendarData;
   disableModalClose?: boolean;
   isLoading?: boolean;
+  hideHelpingMaterials?: boolean;
 };
 
 const TlfbCalendarLayout = forwardRef<CalendarRef, Props>(
@@ -47,6 +48,7 @@ const TlfbCalendarLayout = forwardRef<CalendarRef, Props>(
       calendarData,
       disableModalClose,
       isLoading = false,
+      hideHelpingMaterials,
     }: Props,
     ref,
   ) => {
@@ -72,7 +74,9 @@ const TlfbCalendarLayout = forwardRef<CalendarRef, Props>(
         <TlfbTitle
           smallText={smallText}
           bigText={bigText}
-          displayHelpingMaterials={!isMobile && !isMobilePreview}
+          displayHelpingMaterials={
+            !hideHelpingMaterials && !isMobile && !isMobilePreview
+          }
         />
         <Calendar
           ref={ref}

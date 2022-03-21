@@ -24,7 +24,12 @@ const TlfbHelpingMaterials = () => {
         onClose={() => setModalVisible(false)}
         maxWidth={500}
       >
-        <Img maxWidth="100%" maxHeight="100%" src={StandardDrinks} />
+        <Img
+          maxWidth="100%"
+          maxHeight="100%"
+          src={StandardDrinks}
+          alt={formatMessage(messages.helpingMaterials)}
+        />
       </Modal>
       <Row
         cursor="pointer"
@@ -32,7 +37,7 @@ const TlfbHelpingMaterials = () => {
         display="flex"
         align="center"
       >
-        <Img mr={10} src={Document}></Img>
+        <Img mr={10} src={Document} alt={formatMessage(messages.document)} />
         <Text color={themeColors.primary}>
           {formatMessage(messages.helpingMaterials)}
         </Text>
