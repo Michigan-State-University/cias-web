@@ -6,6 +6,7 @@ import * as Yup from 'yup';
 import FormikInput from 'components/FormikInput';
 import { Substance } from 'models/Question';
 import { EditModal } from 'components/Modal/EditModal';
+import { variableNameValidator } from 'utils/validators';
 
 import messages from './messages';
 
@@ -147,6 +148,7 @@ const NewSubstanceModal = ({
                   label={formatMessage(messages.substanceVariable)}
                   type="text"
                   inputProps={inputProps}
+                  validator={variableNameValidator}
                 />
               </>
             </EditModal>

@@ -17,6 +17,7 @@ type FormikInputType = {
   label?: string;
   inputProps?: React.HTMLProps<HTMLInputElement>;
   children?: ReactElement;
+  validator?: (value: string) => boolean;
 } & Record<string, unknown>;
 
 function FormikInput({
@@ -26,12 +27,20 @@ function FormikInput({
   label,
   inputProps,
   children,
+  validator,
   ...columnStyleProps
 }: FormikInputType) {
-  const [field, meta] = useField(formikKey);
+  const [field, meta, helper] = useField(formikKey);
   const { value, onBlur, onChange } = field;
   const { error, touched } = meta;
+  const { setValue } = helper;
   const hasError = Boolean(touched && error);
+
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    if (validator && validator(e.target.value)) {
+      setValue(e.target.value);
+    }
+  };
 
   return (
     <InputComponent
@@ -41,7 +50,7 @@ function FormikInput({
       label={label}
       name={formikKey}
       onBlur={onBlur}
-      onChange={onChange}
+      onChange={validator ? handleChange : onChange}
       placeholder={placeholder}
       type={type}
       value={value}
