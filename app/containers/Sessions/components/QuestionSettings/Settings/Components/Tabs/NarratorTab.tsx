@@ -6,30 +6,32 @@ import { compose } from 'redux';
 import { connect } from 'react-redux';
 import { Markup } from 'interweave';
 
-import Box from 'components/Box';
-import H3 from 'components/H3';
-import Row from 'components/Row';
-import { FullWidthSwitch } from 'components/Switch';
-import Text from 'components/Text';
 import lastKey from 'utils/getLastKey';
 import { colors, borders, fontSizes, themeColors } from 'theme';
-import { getRemovedBlockForSetting } from 'models/Narrator/BlockTypes';
-import { DisabledNarratorSettingsByQuestionType } from 'models/Session/utils';
+
 import { Narrator, NarratorBlockTypes } from 'models/Narrator';
+import { getRemovedBlockForSetting } from 'models/Narrator/BlockTypes';
+import { DISABLED_NARRATOR_SETTINGS_BY_QUESTION_TYPE } from 'models/Session/utils';
 import {
   makeSelectCurrentNarratorBlockIndex,
   changeCurrentNarratorBlock,
 } from 'global/reducers/localState';
 import { makeSelectSelectedQuestionType } from 'global/reducers/questions';
 import { makeSelectQuestionGroupsIds } from 'global/reducers/questionGroups';
+import globalMessages from 'global/i18n/globalMessages';
 
 import bulb from 'assets/svg/bulb.svg';
 
+import Box from 'components/Box';
+import H3 from 'components/H3';
+import Row from 'components/Row';
+import { FullWidthSwitch } from 'components/Switch';
+import Text from 'components/Text';
 import { ConfirmationModal } from 'components/Modal';
 import InfoBox from 'components/Box/InfoBox';
 import Img from 'components/Img';
 import { LI, UL } from 'components/List';
-import globalMessages from 'global/i18n/globalMessages';
+
 import BlockTypeChooser from '../BlockTypeChooser';
 import WrappedAccordion from '../WrappedAcoordion';
 import messages from '../messages';
@@ -177,7 +179,7 @@ const NarratorTab = ({
                 disabled={
                   disabled ||
                   // @ts-ignore
-                  DisabledNarratorSettingsByQuestionType[index]?.includes(
+                  DISABLED_NARRATOR_SETTINGS_BY_QUESTION_TYPE[index]?.includes(
                     questionType,
                   )
                 }

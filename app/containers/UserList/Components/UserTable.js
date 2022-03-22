@@ -63,19 +63,23 @@ const UserTable = ({
   );
   const modalContent = (
     <>
-      <Text textAlign="center" fontWeight="bold">
+      <Text textAlign="center" fontWeight="bold" data-private>
         {pickedUser.fullName}
       </Text>
-      <Text textAlign="center">{pickedUser.email}</Text>
+      <Text textAlign="center" data-private>
+        {pickedUser.email}
+      </Text>
     </>
   );
 
   const userToRemoveModalContent = (
     <>
-      <Text textAlign="center" fontWeight="bold">
+      <Text textAlign="center" fontWeight="bold" data-private>
         {userToRemove.fullName}
       </Text>
-      <Text textAlign="center">{userToRemove.email}</Text>
+      <Text textAlign="center" data-private>
+        {userToRemove.email}
+      </Text>
     </>
   );
 
@@ -95,22 +99,24 @@ const UserTable = ({
         content={userToRemoveModalContent}
         confirmAction={handleRemoveFromTeam}
       />
-      <TableLoading
-        loading={loading}
-        width="100%"
-        mb={20}
-        shadow={boxShadows.selago}
-      >
-        <TableHeader formatMessage={formatMessage} />
-        <RemoveFromTeamModalContext.Provider value={openRemoveUserModal}>
-          <TableBody
-            users={users}
-            history={history}
-            openModal={openModal}
-            formatMessage={formatMessage}
-          />
-        </RemoveFromTeamModalContext.Provider>
-      </TableLoading>
+      <div data-private>
+        <TableLoading
+          loading={loading}
+          width="100%"
+          mb={20}
+          shadow={boxShadows.selago}
+        >
+          <TableHeader formatMessage={formatMessage} />
+          <RemoveFromTeamModalContext.Provider value={openRemoveUserModal}>
+            <TableBody
+              users={users}
+              history={history}
+              openModal={openModal}
+              formatMessage={formatMessage}
+            />
+          </RemoveFromTeamModalContext.Provider>
+        </TableLoading>
+      </div>
       <PaginationHandler setPage={setPage} page={page} pages={pages} />
     </>
   );

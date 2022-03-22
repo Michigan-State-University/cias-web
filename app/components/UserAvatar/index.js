@@ -27,6 +27,7 @@ function UserAvatar({
   }`.toUpperCase();
   return (
     <AvatarStyled
+      data-private
       color={colors.white}
       backgroundColor={backgroundColor}
       {...styleProps}

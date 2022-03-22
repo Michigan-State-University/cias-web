@@ -15,6 +15,7 @@ export {
   copyExternallyQuestionRequest,
   updateQuestionImageRequest,
   createQuestionGroupRequest,
+  updateVariableAction,
 } from './actions';
 export { questionsReducer } from './reducer';
 export {

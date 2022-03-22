@@ -7,13 +7,12 @@ import { readQuestionBlockType } from 'models/Narrator/BlockTypes';
 import { GroupType, QuestionGroupDTO } from 'models/QuestionGroup';
 import { QuestionDTO, QuestionTypes } from 'models/Question';
 import { NarratorDTO } from 'models/Narrator';
+import { instantiateBlockForType } from 'models/Session/utils';
 import findOrderedQuestionsByGroupId from 'utils/findOrderedQuestionsByGroupId';
-import { splitAndKeep } from 'utils/splitAndKeep';
-import { htmlToPlainText } from 'utils/htmlToPlainText';
 import instantiateEmptyQuestion from 'utils/instantiateEmptyQuestion';
+import { CHARACTER_FIXED_POSITION } from 'utils/characterConstants';
 import globalMessages from 'global/i18n/globalMessages';
-
-const DELIMITERS = [',', '.', '?', '!'];
+import { assignDraftItemsById, updateItemById } from 'utils/reduxUtils';
 
 export const mapQuestionDataForType = (question: QuestionDTO) => {
   switch (question.type) {
@@ -53,86 +52,36 @@ export const mapQuestionDataForType = (question: QuestionDTO) => {
   }
 };
 
-export const generateTTSArray = (text: string) =>
-  splitAndKeep(htmlToPlainText(text), DELIMITERS);
-
-export const getFromQuestionTTS = (question: QuestionDTO) => {
-  const { settings: { subtitle } = { subtitle: true } } = question;
-
-  switch (question.type) {
-    case QuestionTypes.TLFB_EVENTS: {
-      const {
-        body: {
-          data: [
-            {
-              payload: { screen_question: screenQuestion },
-            },
-          ],
-        },
-      } = question;
-      return generateTTSArray(screenQuestion);
-    }
-
-    case QuestionTypes.TLFB_QUESTION: {
-      const {
-        body: {
-          data: [
-            {
-              payload: { head_question: headQuestion },
-            },
-          ],
-        },
-      } = question;
-      return generateTTSArray(headQuestion);
-    }
-
-    default:
-      return question.subtitle && subtitle
-        ? generateTTSArray(question.subtitle)
-        : [];
-  }
-};
-
-export const assignFromQuestionTTS = (question: QuestionDTO) => ({
-  ...question,
-  narrator: {
-    ...question.narrator,
-    blocks: question.narrator.blocks.map((block) => {
-      if (block.type === readQuestionBlockType)
-        return {
-          ...block,
-          text: getFromQuestionTTS(question),
-        };
-
-      return block;
-    }),
-  },
-});
-
 /* eslint-disable default-case, no-param-reassign */
 export const editQuestionSuccessCommon = (
   draft: Draft<any>,
   payload: { question: QuestionDTO },
 ) => {
   draft.loaders.updateQuestionLoading = false;
-  const index = draft.questions.findIndex(
-    (question: { id: string }) => question.id === payload.question.id,
-  );
-  draft.questions[index] = mapQuestionDataForType(payload.question);
-  draft.cache.questions = draft.questions;
   draft.errors.updateQuestionError = null;
+
+  updateItemById(
+    draft.questions,
+    payload.question.id,
+    mapQuestionDataForType(payload.question),
+  );
+  assignDraftItemsById(
+    draft.questions,
+    draft.cache.questions,
+    payload.question.id,
+  );
 };
 
 /* eslint-disable default-case, no-param-reassign */
 export const editQuestionErrorCommon = (draft: Draft<any>, payload: any) => {
   draft.errors.updateQuestionError = payload?.error || 'Error!';
   draft.loaders.updateQuestionLoading = false;
-  const finder = (question: { id: string }) =>
-    question.id === payload.questionId;
-  const cacheIndex = draft.cache.questions.findIndex(finder);
-  const index = draft.questions.findIndex(finder);
-  if (cacheIndex !== -1 && index !== -1)
-    draft.questions[index] = draft.cache.questions[cacheIndex];
+
+  assignDraftItemsById(
+    draft.cache.questions,
+    draft.questions,
+    payload.questionId,
+  );
 };
 
 export const getNewQuestionIdInsideGroup = (
@@ -208,10 +157,10 @@ export const getNewGroupPosition = (groups: QuestionGroupDTO[]) => {
 export const prepareNewGroupQuestions = (
   groupType: GroupType,
   formatMessage: IntlFormatters['formatMessage'],
-  narrator: NarratorDTO['settings'],
+  settings: NarratorDTO['settings'],
 ) => {
   if (groupType === GroupType.TLFB) {
-    const config = {
+    const tlfbConfig = {
       ...instantiateEmptyQuestion(
         formatMessage(
           // @ts-ignore
@@ -223,37 +172,52 @@ export const prepareNewGroupQuestions = (
           globalMessages.defaultTlfbTitles[QuestionTypes.TLFB_CONFIG],
         ),
       ),
-      narrator: { blocks: [], settings: narrator },
+      narrator: { blocks: [], settings },
     };
-    const events = {
-      ...instantiateEmptyQuestion(
-        formatMessage(
-          // @ts-ignore
-          globalMessages.defaultTlfbTitles[QuestionTypes.TLFB_EVENTS],
-        ),
-        QuestionTypes.TLFB_EVENTS,
-
-        formatMessage(
-          // @ts-ignore
-          globalMessages.defaultTlfbTitles[QuestionTypes.TLFB_EVENTS],
-        ),
+    const tlfbEvents = instantiateEmptyQuestion(
+      formatMessage(
+        // @ts-ignore
+        globalMessages.defaultTlfbTitles[QuestionTypes.TLFB_EVENTS],
       ),
-      narrator: { blocks: [], settings: narrator },
-    };
-    const question = {
-      ...instantiateEmptyQuestion(
-        formatMessage(
-          // @ts-ignore
-          globalMessages.defaultTlfbTitles[QuestionTypes.TLFB_QUESTION],
-        ),
-        QuestionTypes.TLFB_QUESTION,
-        formatMessage(
-          // @ts-ignore
-          globalMessages.defaultTlfbTitles[QuestionTypes.TLFB_QUESTION],
-        ),
+      QuestionTypes.TLFB_EVENTS,
+      formatMessage(
+        // @ts-ignore
+        globalMessages.defaultTlfbTitles[QuestionTypes.TLFB_EVENTS],
       ),
-      narrator: { blocks: [], settings: narrator },
+    );
+    tlfbEvents.narrator = {
+      blocks: [
+        // @ts-ignore
+        instantiateBlockForType(
+          readQuestionBlockType,
+          CHARACTER_FIXED_POSITION,
+          tlfbEvents,
+        ),
+      ],
+      settings,
     };
-    return [config, events, question];
+    const tlfbQuestion = instantiateEmptyQuestion(
+      formatMessage(
+        // @ts-ignore
+        globalMessages.defaultTlfbTitles[QuestionTypes.TLFB_QUESTION],
+      ),
+      QuestionTypes.TLFB_QUESTION,
+      formatMessage(
+        // @ts-ignore
+        globalMessages.defaultTlfbTitles[QuestionTypes.TLFB_QUESTION],
+      ),
+    );
+    tlfbQuestion.narrator = {
+      blocks: [
+        // @ts-ignore
+        instantiateBlockForType(
+          readQuestionBlockType,
+          CHARACTER_FIXED_POSITION,
+          tlfbQuestion,
+        ),
+      ],
+      settings,
+    };
+    return [tlfbConfig, tlfbEvents, tlfbQuestion];
   }
 };

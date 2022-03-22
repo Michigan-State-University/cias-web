@@ -284,7 +284,7 @@ exports[`<QuestionDetails /> should match the snapshot 1`] = `
   border-radius: 5px;
   background-color: transparent;
   border-color: transparent;
-  width: 153px;
+  width: 200px;
   max-width: 200px;
   padding-top: 12px;
   padding-bottom: 12px;
@@ -3497,7 +3497,7 @@ exports[`<QuestionDetails /> should match the snapshot 1`] = `
                     placeholder="Variable name..."
                     type="tel"
                     value=""
-                    width="153px"
+                    width="200px"
                   />
                 </div>
               </div>

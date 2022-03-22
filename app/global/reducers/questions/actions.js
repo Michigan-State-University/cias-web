@@ -43,6 +43,7 @@ import {
   CREATE_QUESTION_GROUP_REQUEST,
   CREATE_QUESTIONS_SUCCESS,
   CLEAR_ERROR,
+  UPDATE_VARIABLE,
 } from './constants';
 
 export const selectQuestion = (id) => actionBuilder(SELECT_QUESTION, { id });
@@ -125,6 +126,8 @@ export const updateQuestionData = (data) =>
   actionBuilder(UPDATE_QUESTION_DATA, data);
 export const updateQuestionSettings = (data) =>
   actionBuilder(UPDATE_QUESTION_SETTINGS, data);
+export const updateVariableAction = (name, questionId) =>
+  updateQuestionData({ type: UPDATE_VARIABLE, data: { name, questionId } });
 
 export const deleteQuestionsRequest = (questionIds, sessionId, groupIds) =>
   actionBuilder(DELETE_QUESTIONS_REQUEST, { questionIds, sessionId, groupIds });

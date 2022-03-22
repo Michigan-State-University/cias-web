@@ -16,7 +16,7 @@ export function* createVariant() {
       data: { data },
     } = yield call(axios.post, requestUrl, {
       variant: {
-        formula_match: '<',
+        formula_match: '=',
         content: '',
       },
     });

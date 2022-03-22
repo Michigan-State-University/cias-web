@@ -1,4 +1,4 @@
-import React, { memo } from 'react';
+import React, { memo, useContext } from 'react';
 import { useIntl } from 'react-intl';
 
 import { colors, themeColors } from 'theme';
@@ -13,25 +13,25 @@ import Badge from 'components/Badge';
 import EllipsisText from 'components/Text/EllipsisText';
 import Box from 'components/Box';
 
+import { VariableChooserContext, InterventionViewContext } from '../constants';
 import messages from '../messages';
 
 type Props = {
-  id: string;
-  isInitialIntervention: boolean;
-  isLast: boolean;
-  name: string;
-  onClick: (id: string) => void;
+  index: number;
+  data: any;
 };
 
-const InterventionRow = ({
-  id,
-  isInitialIntervention,
-  isLast,
-  name,
-  onClick,
-}: Props) => {
+const InterventionRow = ({ data, index }: Props) => {
   const { formatMessage } = useIntl();
+  const { initialInterventionId } = useContext(VariableChooserContext);
+  const { onClick } = useContext(InterventionViewContext);
 
+  const { items } = data;
+  const element = items?.[index];
+  const { id, name } = element || {};
+
+  const isInitialIntervention = id === initialInterventionId;
+  const isLast = index === items.length - 1;
   return (
     <Row
       data-testid={`${id}-select-intervention`}

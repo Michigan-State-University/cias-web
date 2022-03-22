@@ -1,7 +1,7 @@
 import { calculateNextValue } from 'utils/sequenceUtils';
+import { UPDATE_VARIABLE } from 'global/reducers/questions/constants';
 
 import { ADD, UPDATE_ANSWER, REMOVE } from './constants';
-import { UPDATE_VARIABLE } from '../constants';
 
 /* eslint-disable default-case, no-param-reassign */
 const singleQuestionReducer = (question, payload) => {
