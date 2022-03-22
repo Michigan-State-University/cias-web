@@ -4,13 +4,16 @@ import { useIntl } from 'react-intl';
 
 import {
   fetchSessionsRequest,
+  makeSelectCopyModalLoaders,
   makeSelectSessions,
 } from 'global/reducers/copyModalReducer';
 import { Session } from 'models/Session';
 
 import NoContent from 'components/NoContent';
 import Box from 'components/Box';
+import Spinner from 'components/Spinner';
 
+import { themeColors } from 'theme';
 import ViewWrapper from './ViewWrapper';
 import SessionRow from './SessionRow';
 
@@ -30,7 +33,10 @@ const SessionView = ({ onClick }: Props) => {
     dispatch(fetchSessionsRequest(interventionId));
 
   // selectors
-  const allSessions = useSelector(makeSelectSessions()) as Session[];
+  const allSessions = useSelector<unknown, Session[]>(makeSelectSessions());
+  const { sessions: sessionsLoading } = useSelector(
+    makeSelectCopyModalLoaders(),
+  );
 
   const {
     currentInterventionId,
@@ -77,6 +83,10 @@ const SessionView = ({ onClick }: Props) => {
     if (currentView === VIEWS.INTERVENTION) return;
     setCurrentView(VIEWS.INTERVENTION);
   };
+
+  if (sessionsLoading) {
+    return <Spinner color={themeColors.secondary} />;
+  }
 
   if (!sessions || !sessions.length)
     return (

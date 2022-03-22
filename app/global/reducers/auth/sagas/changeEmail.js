@@ -28,7 +28,7 @@ export function* changeEmail({ payload: { oldPassword, newEmail } }) {
 
     yield put(changeEmailSuccess(mappedUser));
   } catch (error) {
-    yield put(changeEmailError(error.toString()));
+    yield put(changeEmailError(error?.toString()));
   }
 }
 

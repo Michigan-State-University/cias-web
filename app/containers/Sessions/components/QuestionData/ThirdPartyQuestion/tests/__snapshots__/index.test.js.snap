@@ -133,7 +133,7 @@ exports[`<ThirdPartyQuestion /> Should render and match the snapshot 1`] = `
   border-radius: 5px;
   background-color: transparent;
   border-color: transparent;
-  width: 89px;
+  width: 121px;
   max-width: 100%;
   color: rgba(0,134,248,1);
   text-align: center;
@@ -1803,7 +1803,7 @@ exports[`<ThirdPartyQuestion /> Should render and match the snapshot 1`] = `
             placeholder="Email(s)"
             type="text"
             value=""
-            width="89px"
+            width="121px"
           />
         </div>
       </div>

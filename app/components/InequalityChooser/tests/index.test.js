@@ -15,7 +15,7 @@ import InequalityChooser from '../index';
 describe('<InequalityChooser />', () => {
   const defaultProps = {
     onSuccessfulChange: jest.fn(),
-    inequalityValue: '5',
+    inequalityValue: '=5',
   };
   it('Expect to not log errors in console', () => {
     const spy = jest.spyOn(global.console, 'error');
@@ -53,7 +53,7 @@ describe('<InequalityChooser />', () => {
     fireEvent.blur(numericInput);
     await waitFor(() =>
       expect(defaultProps.onSuccessfulChange).toHaveBeenCalledWith(
-        `${newSign}${newValue}`,
+        `=${newValue}`,
       ),
     );
   });

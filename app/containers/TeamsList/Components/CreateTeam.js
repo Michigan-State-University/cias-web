@@ -79,12 +79,14 @@ const CreateTeam = ({
         <Text mb={10} fontSize={14} id={CHOOSE_TEAM_ADMIN_LABEL_ID}>
           <FormattedMessage {...messages.researcherSectionTitle} />
         </Text>
-        <UserSelector
-          selectedUserId={selectedUser}
-          onSelect={onSelectUser}
-          rolesToInclude={[Roles.researcher, Roles.teamAdmin]}
-          selectProps={{ 'aria-labelledby': CHOOSE_TEAM_ADMIN_LABEL_ID }}
-        />
+        <div data-private>
+          <UserSelector
+            selectedUserId={selectedUser}
+            onSelect={onSelectUser}
+            rolesToInclude={[Roles.researcher, Roles.teamAdmin]}
+            selectProps={{ 'aria-labelledby': CHOOSE_TEAM_ADMIN_LABEL_ID }}
+          />
+        </div>
         <Button
           width={260}
           alignSelf="center"

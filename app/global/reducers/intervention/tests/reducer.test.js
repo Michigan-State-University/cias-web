@@ -2,7 +2,6 @@ import cloneDeep from 'lodash/cloneDeep';
 import set from 'lodash/set';
 
 import { actionBuilder } from 'utils/actionBuilder';
-import { defaultMapper } from 'utils/mapResponseObjects';
 import { createSession, createIntervention } from 'utils/reducerCreators';
 import { editInterventionRequest } from 'global/reducers/intervention';
 import { jsonApiToObject } from 'utils/jsonApiMapper';
@@ -18,7 +17,6 @@ import {
   SEND_INTERVENTION_CSV_REQUEST,
   SEND_INTERVENTION_CSV_SUCCESS,
   SEND_INTERVENTION_CSV_ERROR,
-  COPY_SESSION_SUCCESS,
   REORDER_SESSION_LIST,
   CHANGE_CURRENT_SESSION,
   REORDER_SESSION_LIST_SUCCESS,
@@ -182,18 +180,6 @@ describe('intervention reducer', () => {
 
     const expectedState = cloneDeep(mockState);
     expectedState.loaders.sendCsvLoading = false;
-
-    expect(interventionReducer(mockState, action)).toEqual(expectedState);
-  });
-
-  it('COPY_SESSION_SUCCESS', () => {
-    const payloadIntervention = { session: createSession() };
-    const action = actionBuilder(COPY_SESSION_SUCCESS, payloadIntervention);
-
-    const expectedState = cloneDeep(mockState);
-    expectedState.intervention.sessions.push(
-      defaultMapper(payloadIntervention.session),
-    );
 
     expect(interventionReducer(mockState, action)).toEqual(expectedState);
   });

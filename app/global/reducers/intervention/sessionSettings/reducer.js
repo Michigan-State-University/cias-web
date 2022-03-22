@@ -27,7 +27,7 @@ const sessionSettingsReducer = (session, payload) => {
 
     case ADD_FORMULA_CASE:
       clonedSession.formula.patterns.push({
-        match: '',
+        match: '=',
         target: [{ type: 'Session', id: '', probability: '100' }],
       });
       return clonedSession;

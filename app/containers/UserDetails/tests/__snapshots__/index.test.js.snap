@@ -673,6 +673,7 @@ exports[`<UserDetails /> Should render and match the snapshot 1`] = `
                 <div
                   class="c10 c11"
                   color="#FFFFFF"
+                  data-private="true"
                 >
                   <div>
                     TT
@@ -737,6 +738,7 @@ exports[`<UserDetails /> Should render and match the snapshot 1`] = `
           >
             <div
               class="c23 c24"
+              data-private="true"
               width="100%"
             >
               <div
@@ -813,6 +815,7 @@ exports[`<UserDetails /> Should render and match the snapshot 1`] = `
             >
               <div
                 class="c32"
+                data-private="true"
                 width="100%"
               >
                 <div

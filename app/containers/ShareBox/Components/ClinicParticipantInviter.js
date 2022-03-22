@@ -11,6 +11,7 @@ const ClinicParticipantInviter = ({
   selectClinics,
   updateInvitation,
   invitation,
+  onIsValid,
 }) => {
   const { emails: invitationEmails, healthClinic } = invitation;
   const [emails, setEmails] = useState(invitationEmails);
@@ -38,6 +39,7 @@ const ClinicParticipantInviter = ({
         placeholder={formatMessage(messages.emailOrganizationPlaceholder)}
         value={emails}
         setValue={setEmails}
+        onIsValid={onIsValid}
       />
       <Select
         height={50}
@@ -65,6 +67,7 @@ ClinicParticipantInviter.propTypes = {
     emails: PropTypes.array,
     healthClinic: PropTypes.object,
   }),
+  onIsValid: PropTypes.func,
 };
 
 export default ClinicParticipantInviter;

@@ -86,7 +86,7 @@ const ParticipantReportLayout = ({
           </Column>
         )}
         {!showEmailInput && userEmail && (
-          <Column mt={25}>
+          <Column mt={25} data-private>
             <Markup
               content={formatMessage(messages.participantReportUserEmail, {
                 email: userEmail,

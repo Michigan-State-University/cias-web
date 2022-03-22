@@ -12,7 +12,6 @@ import {
   SEND_INTERVENTION_CSV_REQUEST,
   SEND_INTERVENTION_CSV_SUCCESS,
   SEND_INTERVENTION_CSV_ERROR,
-  COPY_SESSION_SUCCESS,
   COPY_SESSION_REQUEST,
   REORDER_SESSION_LIST,
   CHANGE_CURRENT_SESSION,
@@ -44,7 +43,6 @@ import {
   DELETE_SESSION_SUCCESS,
   DELETE_SESSION_ERROR,
   EXTERNAL_COPY_SESSION_REQUEST,
-  EXTERNAL_COPY_SESSION_SUCCESS,
   EXTERNAL_COPY_SESSION_ERROR,
   ADD_INTERVENTION_LOGO_REQUEST,
   ADD_INTERVENTION_LOGO_SUCCESS,
@@ -99,8 +97,6 @@ export const editInterventionError = (error) =>
 
 export const copySessionRequest = (payload) =>
   actionBuilder(COPY_SESSION_REQUEST, payload);
-export const copySessionSuccess = (session) =>
-  actionBuilder(COPY_SESSION_SUCCESS, { session });
 
 export const reorderSessionList = (payload) =>
   actionBuilder(REORDER_SESSION_LIST, payload);
@@ -200,8 +196,6 @@ export const deleteSessionError = (error) =>
 
 export const externalCopySessionRequest = (payload) =>
   actionBuilder(EXTERNAL_COPY_SESSION_REQUEST, payload);
-export const externalCopySessionSuccess = ({ session, interventionId }) =>
-  actionBuilder(EXTERNAL_COPY_SESSION_SUCCESS, { session, interventionId });
 export const externalCopySessionError = (error) =>
   actionBuilder(EXTERNAL_COPY_SESSION_ERROR, { error });
 

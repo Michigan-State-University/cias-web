@@ -93,6 +93,7 @@ exports[`<Navbar /> Should render and match the snapshot with session path 1`] =
       <div
         class="c3"
         color="#FFFFFF"
+        data-private="true"
         height="30"
         width="30"
       >
@@ -104,6 +105,7 @@ exports[`<Navbar /> Should render and match the snapshot with session path 1`] =
     </div>
     <div
       class="c4 user-name-info"
+      data-private="true"
     >
       test test
     </div>
@@ -204,6 +206,7 @@ exports[`<Navbar /> Should render and match the snapshot withou matching path 1`
       <div
         class="c3"
         color="#FFFFFF"
+        data-private="true"
         height="30"
         width="30"
       >
@@ -215,6 +218,7 @@ exports[`<Navbar /> Should render and match the snapshot withou matching path 1`
     </div>
     <div
       class="c4 user-name-info"
+      data-private="true"
     >
       test test
     </div>

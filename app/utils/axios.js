@@ -27,8 +27,8 @@ axiosRetry(axios, {
 const { dispatch } = store;
 
 const isGuestRequest = (locationUrl, method, requestUrl) =>
-  locationUrl.match(previewRegex) &&
-  !(method === 'post' && requestUrl.match(guestLogInRegex));
+  !!locationUrl.match(previewRegex) &&
+  !(method === 'post' && !!requestUrl.match(guestLogInRegex));
 
 axios.interceptors.request.use(
   (config) => {
@@ -99,18 +99,19 @@ axios.interceptors.response.use(
 );
 
 const setHeaders = (response, isPreview) => {
-  const kebabCamelCaseHeaders = objectToCamelKebabCase(response.headers);
-
+  const responseHeaders = objectToCamelKebabCase(response.headers);
   const currentHeaders = isPreview
     ? LocalStorageService.getGuestHeaders()
     : LocalStorageService.getHeaders();
+
   const updatedHeaders = {
     ...headersConst,
     'Access-Token':
-      kebabCamelCaseHeaders['Access-Token'] || currentHeaders['Access-Token'],
-    Client: kebabCamelCaseHeaders.Client || currentHeaders.Client,
-    Uid: kebabCamelCaseHeaders.Uid || currentHeaders.Uid,
+      responseHeaders['Access-Token']?.trim() || currentHeaders['Access-Token'],
+    Client: responseHeaders.Client?.trim() || currentHeaders.Client,
+    Uid: responseHeaders.Uid?.trim() || currentHeaders.Uid,
   };
+
   if (isPreview) {
     LocalStorageService.setGuestHeaders(updatedHeaders);
   } else {
