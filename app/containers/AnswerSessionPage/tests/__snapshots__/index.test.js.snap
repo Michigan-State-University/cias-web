@@ -49,6 +49,16 @@ exports[`<AnswerSessionPage /> Should render and match the snapshot 1`] = `
   text-align: center;
 }
 
+.c3 {
+  margin: 0;
+  font-family: DM Sans;
+  font-size: 18px;
+  line-height: 130%;
+  margin-bottom: 50px;
+  color: #2F3850;
+  text-align: center;
+}
+
 .c5 {
   width: 100%;
   height: 40px;
@@ -62,16 +72,6 @@ exports[`<AnswerSessionPage /> Should render and match the snapshot 1`] = `
   border: 1px solid transparent;
   -webkit-transition: background-color 300ms ease,color 300ms ease,border 300ms ease;
   transition: background-color 300ms ease,color 300ms ease,border 300ms ease;
-}
-
-.c3 {
-  margin: 0;
-  font-family: DM Sans;
-  font-size: 18px;
-  line-height: 130%;
-  margin-bottom: 50px;
-  color: #2F3850;
-  text-align: center;
 }
 
 .c6 {

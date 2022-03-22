@@ -16,13 +16,12 @@ import {
   reflectionFormulaType,
 } from 'models/Narrator/BlockTypes';
 
-import { getFromQuestionTTS } from 'global/reducers/questions/utils';
-
 import { DEFAULT_PAUSE_DURATION } from 'utils/constants';
 import {
   bodyAnimations,
   headAnimations,
 } from 'utils/animations/animationsNames';
+import { getFromQuestionTTS } from 'utils/tts';
 
 import { Session } from './Session';
 

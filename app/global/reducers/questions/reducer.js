@@ -12,6 +12,7 @@ import questionDataReducer from 'containers/Sessions/components/QuestionData/red
 import questionSettingsReducer from 'containers/Sessions/components/QuestionSettings/Settings/reducer';
 import instantiateEmptyQuestion from 'utils/instantiateEmptyQuestion';
 import { insertAt, removeAt } from 'utils/arrayUtils';
+import { assignFromQuestionTTS } from 'utils/tts';
 
 import {
   assignDraftItems,
@@ -62,7 +63,6 @@ import {
 
 import {
   mapQuestionDataForType,
-  assignFromQuestionTTS,
   editQuestionSuccessCommon,
   editQuestionErrorCommon,
   getNewQuestionIdInNextGroups,
