@@ -7,7 +7,7 @@ import FormikInput from 'components/FormikInput';
 import LinkButton from 'components/Button/LinkButton';
 import Button from 'components/Button';
 import Divider from 'components/Divider';
-import { Row } from 'components/ReactGridSystem';
+import Row from 'components/Row';
 import ErrorAlert from 'components/ErrorAlert';
 
 import {

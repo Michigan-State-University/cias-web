@@ -16,13 +16,12 @@ import {
   reflectionFormulaType,
 } from 'models/Narrator/BlockTypes';
 
-import { getFromQuestionTTS } from 'global/reducers/questions/utils';
-
 import { DEFAULT_PAUSE_DURATION } from 'utils/constants';
 import {
   bodyAnimations,
   headAnimations,
 } from 'utils/animations/animationsNames';
+import { getFromQuestionTTS } from 'utils/tts';
 
 import { Session } from './Session';
 
@@ -338,20 +337,20 @@ export const instantiateBlockForType = (type, endPosition, question) => {
   }
 };
 
-export const NotAnswerableQuestions = [
+export const NOT_ANSWERABLE_QUESTIONS = [
   informationQuestion.id,
   finishQuestion.id,
   feedbackQuestion.id,
 ];
 
-export const QuestionsWithoutVariable = [
-  ...NotAnswerableQuestions,
+export const QUESTIONS_WITHOUT_VARIABLE = [
+  ...NOT_ANSWERABLE_QUESTIONS,
   thirdPartyQuestion.id,
   tlfbConfig.id,
   tlfbEvents.id,
 ];
 
-export const DisabledNarratorSettingsByQuestionType = {
+export const DISABLED_NARRATOR_SETTINGS_BY_QUESTION_TYPE = {
   voice: [feedbackQuestion.id],
   animation: [feedbackQuestion.id],
 };

@@ -43,6 +43,7 @@ const colors = {
   manatee: '#8C94A6',
   orangePeel: '#FB9B0A',
   heliotrope: '#D27EF0',
+  heliotrope2: '#C766EA',
   amethyst: '#A667C4',
   mauve: '#E2B1F4',
   orangeRed: '#ED722E',

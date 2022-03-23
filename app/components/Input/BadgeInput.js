@@ -8,6 +8,7 @@ import { StyledInput } from './StyledInput';
 const BadgeInput = styled(StyledInput).attrs(({ color }) => ({
   bg: color,
   bgOpacity: 0.1,
+  averageLetterWidth: 12,
 }))`
   padding: 5px 10px;
   font-size: ${fontSizes.small};

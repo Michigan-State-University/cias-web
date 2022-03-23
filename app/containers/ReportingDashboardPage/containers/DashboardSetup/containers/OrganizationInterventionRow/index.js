@@ -11,6 +11,7 @@ import {
   makeSelectOrganizationLoaders,
   makeSelectOrganizationErrors,
   makeSelectShouldRefetchInterventions,
+  makeSelectOrganizationInterventionsCount,
 } from 'global/reducers/organizations';
 
 import Spinner from 'components/Spinner';
@@ -21,6 +22,8 @@ import Box from 'components/Box';
 import messages from '../../../../messages';
 
 const MAX_ROW_HEIGHT = elements.interventionsTileHeight + 10;
+
+const BATCH_SIZE = 20;
 
 const OrganizationInterventionRow = ({
   organizationId,
@@ -36,16 +39,25 @@ const OrganizationInterventionRow = ({
   },
   shouldRefetch,
   formatMessage,
+  interventionsCount,
 }) => {
+  const fetchInterventions = (startIndex, endIndex) => {
+    const realStartIndex = Math.max(startIndex - 1, 0);
+    const realStopIndex = endIndex;
+    organizationInterventionsFetchRequest(organizationId, {
+      startIndex: realStartIndex,
+      endIndex: realStopIndex,
+    });
+  };
   useEffect(() => {
-    organizationInterventionsFetchRequest(organizationId);
+    fetchInterventions(0, BATCH_SIZE);
   }, []);
 
   useEffect(() => {
-    if (shouldRefetch) organizationInterventionsFetchRequest(organizationId);
+    if (shouldRefetch) fetchInterventions(0, BATCH_SIZE);
   }, [shouldRefetch]);
 
-  if (fetchOrganizationInterventions) {
+  if (fetchOrganizationInterventions && !organizationInterventions?.length) {
     return <Spinner color={themeColors.secondary} />;
   }
   if (fetchOrganizationInterventionsError) {
@@ -53,7 +65,6 @@ const OrganizationInterventionRow = ({
   }
 
   const interventionsSize = organizationInterventions?.length ?? 0;
-
   return (
     <Box
       width="100%"
@@ -66,6 +77,12 @@ const OrganizationInterventionRow = ({
           newLabel={formatMessage(messages.addReportingIntervention)}
           onCreateCall={() => createOrganizationIntervention(organizationId)}
           createLoading={addOrganizationIntervention}
+          onFetchInterventions={fetchInterventions}
+          isLoading={fetchOrganizationInterventions}
+          infiniteLoader={{
+            itemCount: interventionsCount,
+            minimumBatchSize: BATCH_SIZE,
+          }}
         />
       )}
     </Box>
@@ -81,6 +98,7 @@ OrganizationInterventionRow.propTypes = {
   organizationLoaders: PropTypes.object,
   organizationErrors: PropTypes.object,
   shouldRefetch: PropTypes.bool,
+  interventionsCount: PropTypes.number,
 };
 
 OrganizationInterventionRow.defaultProps = {
@@ -92,6 +110,7 @@ const mapStateToProps = createStructuredSelector({
   organizationLoaders: makeSelectOrganizationLoaders(),
   organizationErrors: makeSelectOrganizationErrors(),
   shouldRefetch: makeSelectShouldRefetchInterventions(),
+  interventionsCount: makeSelectOrganizationInterventionsCount(),
 });
 
 const mapDispatchToProps = {

@@ -2,20 +2,18 @@ import React from 'react';
 import { useIntl } from 'react-intl';
 import { useDispatch } from 'react-redux';
 
-import { BadgeInput } from 'components/Input/BadgeInput';
-import Row from 'components/Row';
-
-import { updateQuestionData } from 'global/reducers/questions';
+import { colors } from 'theme';
+import { updateVariableAction } from 'global/reducers/questions';
 import globalMessages from 'global/i18n/globalMessages';
 
 import { canEdit } from 'models/Status/statusPermissions';
 import { QuestionBodyVariable } from 'models/Question';
 import { InterventionStatus } from 'models/Intervention';
 
-import { colors } from 'theme';
 import { variableNameValidator } from 'utils/validators';
 
-import { UPDATE_VARIABLE } from '../QuestionData/constants';
+import { BadgeInput } from 'components/Input/BadgeInput';
+import Row from 'components/Row';
 
 export type VariableInputProps = {
   isNarratorTab?: boolean;
@@ -36,11 +34,10 @@ const VariableInput = ({
   const dispatch = useDispatch();
 
   const updateVariable = (name: string) =>
-    dispatch(
-      updateQuestionData({ type: UPDATE_VARIABLE, data: { name, questionId } }),
-    );
+    dispatch(updateVariableAction(name, questionId));
 
   const editingPossible = canEdit(interventionStatus);
+
   return (
     <Row display="flex" hidden={isNarratorTab}>
       <BadgeInput

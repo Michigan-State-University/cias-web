@@ -631,6 +631,7 @@ exports[`<Profile /> Should render and match the snapshot 1`] = `
           <div
             class="c4 c5"
             color="#FFFFFF"
+            data-private="true"
           >
             <div>
               NS
@@ -678,6 +679,7 @@ exports[`<Profile /> Should render and match the snapshot 1`] = `
     >
       <div
         class="c15 c16"
+        data-private="true"
         width="100%"
       >
         <div
@@ -840,6 +842,7 @@ exports[`<Profile /> Should render and match the snapshot 1`] = `
       >
         <div
           class="c28"
+          data-private="true"
           width="100%"
         >
           <div

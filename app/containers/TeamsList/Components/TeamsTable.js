@@ -45,10 +45,12 @@ const TeamsTable = ({
 
   const modalContent = (
     <>
-      <Text textAlign="center" fontWeight="bold">
+      <Text textAlign="center" fontWeight="bold" data-private>
         {pickedTeam.name}
       </Text>
-      <Text textAlign="center">{pickedTeam.teamAdmin?.email}</Text>
+      <Text textAlign="center" data-private>
+        {pickedTeam.teamAdmin?.email}
+      </Text>
     </>
   );
   return (

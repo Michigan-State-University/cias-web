@@ -19,6 +19,7 @@ import { interventionsReducer } from 'global/reducers/interventions';
 import { interventionReducer } from 'global/reducers/intervention';
 import { draft } from 'models/Status/StatusTypes';
 
+import { copyModalReducer } from 'global/reducers/copyModalReducer';
 import CopyModal from '../index';
 
 describe('<CopyModal />', () => {
@@ -54,6 +55,15 @@ describe('<CopyModal />', () => {
     copyModal: {
       sessions: [mockSession()],
       questionGroups: [mockSingleGroup()],
+      loaders: {
+        sessions: false,
+        questionGroups: false,
+        interventions: false,
+      },
+      currentIds: {
+        session: 1,
+        intervention: 1,
+      },
     },
     session: {
       session: mockSession(),
@@ -77,6 +87,7 @@ describe('<CopyModal />', () => {
       localState: localStateReducer,
       interventions: interventionsReducer,
       intervention: interventionReducer,
+      copyModal: copyModalReducer,
     };
   });
   it('Expect to not log errors in console', () => {

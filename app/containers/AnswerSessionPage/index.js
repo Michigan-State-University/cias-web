@@ -26,6 +26,7 @@ import { colors, elements, themeColors } from 'theme';
 import AudioWrapper from 'utils/audioWrapper';
 import isNullOrUndefined from 'utils/isNullOrUndefined';
 import { DESKTOP_MODE, I_PHONE_8_PLUS_MODE } from 'utils/previewMode';
+import { CHARACTER_FIXED_POSITION_QUESTIONS } from 'utils/characterConstants';
 import { makeSelectAudioInstance } from 'global/reducers/globalState';
 import {
   fetchInterventionRequest,
@@ -52,7 +53,6 @@ import {
 } from 'components/Container/containerBreakpoints';
 import AppContainer from 'components/Container';
 import ErrorAlert from 'components/ErrorAlert';
-import { Button } from 'components/Button';
 import Row from 'components/Row';
 import Column from 'components/Column';
 import Box from 'components/Box';
@@ -65,7 +65,6 @@ import Img from 'components/Img';
 
 import renderQuestionByType from './components';
 import CharacterAnim from './components/CharacterAnim';
-import { SkipQuestionButton } from './components/SkipQuestionButton';
 import CommonLayout from './layouts/CommonLayout';
 
 import makeSelectAnswerSessionPage from './selectors';
@@ -95,6 +94,7 @@ import {
   FULL_SIZE_QUESTIONS,
   CONFIRMABLE_QUESTIONS,
 } from './constants';
+import { ActionButtons } from './components/ActionButtons';
 
 const AnimationRefHelper = ({
   children,
@@ -314,6 +314,9 @@ export function AnswerSessionPage({
       skipped,
     );
 
+  const isNarratorPositionFixed =
+    CHARACTER_FIXED_POSITION_QUESTIONS.includes(type);
+
   const onContinueButton = () => {
     if (CONFIRMABLE_QUESTIONS.includes(type))
       setConfirmContinueQuestionModalVisible(true);
@@ -399,7 +402,11 @@ export function AnswerSessionPage({
     };
 
     const { [currentQuestionId]: answer } = answers;
-    const answerBody = answers[currentQuestionId]?.answerBody ?? [];
+    const answerBody = answer?.answerBody ?? [];
+
+    const isLoading =
+      currentQuestion.loading || nextQuestionLoading || answer?.loading;
+    const skipQuestionButtonDisabled = required || isLoading;
 
     const isAnswered = () =>
       answer &&
@@ -434,7 +441,6 @@ export function AnswerSessionPage({
       userSessionType !== UserSessionType.CAT_MH &&
       !isLastScreen &&
       !NOT_SKIPPABLE_QUESTIONS.includes(type);
-    const skipQuestionButtonDisabled = required;
 
     const shouldRenderContinueButton =
       !isLastScreen &&
@@ -450,26 +456,40 @@ export function AnswerSessionPage({
             <Row>{renderQuestionByType(currentQuestion, sharedProps)}</Row>
           </Box>
 
-          <Row width="100%" my={20} justify="end" align="center">
-            {shouldRenderSkipQuestionButton && (
-              <SkipQuestionButton
-                onClick={() => setSkipQuestionModalVisible(true)}
-                disabled={skipQuestionButtonDisabled}
+          {isNarratorPositionFixed && (
+            <AnimationRefHelper
+              currentQuestion={currentQuestion}
+              currentQuestionId={currentQuestionId}
+              previewMode={previewMode}
+              answers={answers}
+              changeIsAnimationOngoing={changeIsAnimationOngoing}
+              setFeedbackSettings={setFeedbackSettings}
+              feedbackScreenSettings={feedbackScreenSettings}
+              audioInstance={audioInstance}
+            >
+              <ActionButtons
+                renderSkipQuestionButton={shouldRenderSkipQuestionButton}
+                skipQuestionButtonDisabled={skipQuestionButtonDisabled}
+                onSkipQuestionClick={() => setSkipQuestionModalVisible(true)}
+                renderContinueButton={shouldRenderContinueButton}
+                continueButtonDisabled={isButtonDisabled()}
+                continueButtonLoading={isLoading}
+                onContinueClick={onContinueButton}
               />
-            )}
+            </AnimationRefHelper>
+          )}
 
-            {shouldRenderContinueButton && (
-              <Button
-                data-cy="continue-button"
-                disabled={isButtonDisabled()}
-                margin={20}
-                width="180px"
-                loading={currentQuestion.loading || nextQuestionLoading}
-                onClick={onContinueButton}
-                title={formatMessage(messages.nextQuestion)}
-              />
-            )}
-          </Row>
+          {!isNarratorPositionFixed && (
+            <ActionButtons
+              renderSkipQuestionButton={shouldRenderSkipQuestionButton}
+              skipQuestionButtonDisabled={skipQuestionButtonDisabled}
+              onSkipQuestionClick={() => setSkipQuestionModalVisible(true)}
+              renderContinueButton={shouldRenderContinueButton}
+              continueButtonDisabled={isButtonDisabled()}
+              continueButtonLoading={isLoading}
+              onContinueClick={onContinueButton}
+            />
+          )}
 
           {renderQuestionTranscript(false)}
           {renderTranscriptToggleIcon()}
@@ -648,18 +668,23 @@ export function AnswerSessionPage({
                   currentQuestion &&
                   interventionStarted &&
                   !transitionalUserSessionId && (
-                    <AnimationRefHelper
-                      currentQuestion={currentQuestion}
-                      currentQuestionId={currentQuestionId}
-                      previewMode={previewMode}
-                      answers={answers}
-                      changeIsAnimationOngoing={changeIsAnimationOngoing}
-                      setFeedbackSettings={setFeedbackSettings}
-                      feedbackScreenSettings={feedbackScreenSettings}
-                      audioInstance={audioInstance}
-                    >
-                      {renderPage()}
-                    </AnimationRefHelper>
+                    <>
+                      {isNarratorPositionFixed && renderPage()}
+                      {!isNarratorPositionFixed && (
+                        <AnimationRefHelper
+                          currentQuestion={currentQuestion}
+                          currentQuestionId={currentQuestionId}
+                          previewMode={previewMode}
+                          answers={answers}
+                          changeIsAnimationOngoing={changeIsAnimationOngoing}
+                          setFeedbackSettings={setFeedbackSettings}
+                          feedbackScreenSettings={feedbackScreenSettings}
+                          audioInstance={audioInstance}
+                        >
+                          {renderPage()}
+                        </AnimationRefHelper>
+                      )}
+                    </>
                   )}
               </Box>
               {answersError && <ErrorAlert errorText={answersError} />}

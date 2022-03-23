@@ -19,7 +19,7 @@ import messages from '../messages';
 function* editTlfbQuestionAnswer({
   payload: { answerId, body },
 }: ReturnType<typeof editTlfbQuestionAnswerRequest>) {
-  const url = `/v1/tlfb/substances/${answerId}`;
+  const url = `/v1/tlfb/consumption_results/${answerId}`;
   try {
     yield call(axios.patch, url, {
       body: objectToSnakeCase(body),

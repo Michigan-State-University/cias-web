@@ -427,6 +427,7 @@ exports[`<InviteResearcher /> Should display invalid email error 1`] = `
                 >
                   <p
                     class="c16"
+                    data-private="true"
                     font-size="14"
                   >
                     email@gmail.com
@@ -445,6 +446,7 @@ exports[`<InviteResearcher /> Should display invalid email error 1`] = `
                 >
                   <p
                     class="c16"
+                    data-private="true"
                     font-size="14"
                   >
                     email2@gmail.com
@@ -889,6 +891,7 @@ exports[`<InviteResearcher /> Should display server error 1`] = `
                 >
                   <p
                     class="c15"
+                    data-private="true"
                     font-size="14"
                   >
                     email@gmail.com
@@ -907,6 +910,7 @@ exports[`<InviteResearcher /> Should display server error 1`] = `
                 >
                   <p
                     class="c15"
+                    data-private="true"
                     font-size="14"
                   >
                     email2@gmail.com
@@ -1351,6 +1355,7 @@ exports[`<InviteResearcher /> Should render and match the snapshot 1`] = `
                 >
                   <p
                     class="c15"
+                    data-private="true"
                     font-size="14"
                   >
                     email@gmail.com
@@ -1369,6 +1374,7 @@ exports[`<InviteResearcher /> Should render and match the snapshot 1`] = `
                 >
                   <p
                     class="c15"
+                    data-private="true"
                     font-size="14"
                   >
                     email2@gmail.com

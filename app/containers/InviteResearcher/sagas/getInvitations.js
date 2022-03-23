@@ -12,7 +12,7 @@ export function* getInvitations() {
     const invitations = jsonApiToArray(data, 'user');
     yield put(getInvitationsSuccess(invitations));
   } catch (error) {
-    yield put(getInvitationsError(error.toString()));
+    yield put(getInvitationsError(error?.toString()));
   }
 }
 

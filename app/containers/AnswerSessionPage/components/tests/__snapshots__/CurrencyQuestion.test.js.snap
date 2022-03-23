@@ -146,6 +146,7 @@ exports[`<CurrencyQuestion /> Should render and match the snapshot 1`] = `
               >
                 <button
                   class="c5"
+                  data-private="true"
                   height="50"
                   width="200"
                 >

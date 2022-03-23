@@ -22,7 +22,7 @@ const feedbackQuestionReducer = (question, payload) => {
       return question;
 
     case ADD_FORMULA_CASE:
-      questionData[0].spectrum.patterns.push({ match: '', target: '' });
+      questionData[0].spectrum.patterns.push({ match: '=', target: '' });
       return question;
 
     case REMOVE_FORMULA_CASE:

@@ -43,7 +43,6 @@ import { reducer, initialState, UPDATE } from './reducer';
 
 const QuestionNarrator = ({
   questionId,
-  isDraggable,
   setOffset,
   animationPositionStored,
   updateNarratorPreviewAnimation,
@@ -66,8 +65,7 @@ const QuestionNarrator = ({
       newState,
     });
 
-  const draggableState = useSelector(makeSelectDraggable());
-  const draggable = isDraggable && draggableState;
+  const draggable = useSelector(makeSelectDraggable());
 
   const onBlockFinish = () => {
     clearAnimationBlock();
@@ -303,7 +301,6 @@ const QuestionNarrator = ({
 };
 
 QuestionNarrator.propTypes = {
-  isDraggable: PropTypes.bool,
   setOffset: PropTypes.func,
   animationPositionStored: PropTypes.object,
   questionId: PropTypes.string,

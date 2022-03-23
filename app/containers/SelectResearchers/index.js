@@ -152,7 +152,7 @@ const SelectResearchers = ({
               const checkboxLabelId = `researcher-email-${email}`;
 
               return (
-                <StripedTR key={rowId}>
+                <StripedTR key={rowId} data-private>
                   <TD pl={10}>{getDisplayName(fullName)}</TD>
                   <TD>{email}</TD>
                   <TD pr={10}>

@@ -41,11 +41,6 @@ export const makeSelectFilteredQuestions = () =>
 export const makeSelectSelectedQuestionId = () =>
   createSelector(selectQuestions, (substate) => substate.selectedQuestion);
 
-export const makeSelectSelectedQuestion = () =>
-  createSelector(selectQuestions, (substate) =>
-    substate.questions.find(({ id }) => id === substate.selectedQuestion),
-  );
-
 export const makeSelectSelectedQuestionGroupId = () =>
   createSelector(
     makeSelectSelectedQuestion(),
@@ -90,9 +85,24 @@ export const makeSelectVisibleGroupsSize = () =>
     (substate) => uniqBy(substate.questions, 'question_group_id').length,
   );
 
+export const makeSelectSelectedQuestion = () =>
+  createSelector(selectQuestions, (substate) =>
+    substate.questions.find(({ id }) => id === substate.selectedQuestion),
+  );
+
+export const makeSelectSelectedQuestionFromCache = () =>
+  createSelector(selectQuestions, (substate) =>
+    substate.cache.questions.find(({ id }) => id === substate.selectedQuestion),
+  );
+
 export const makeSelectQuestionById = (questionId) =>
   createSelector(selectQuestions, (substate) =>
     substate.questions.find(({ id }) => id === questionId),
+  );
+
+export const makeSelectQuestionByIdFromCache = (questionId) =>
+  createSelector(selectQuestions, (substate) =>
+    substate.cache.questions.find(({ id }) => id === questionId),
   );
 
 export const makeSelectNameQuestionExists = () =>

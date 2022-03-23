@@ -39,10 +39,7 @@ import QuestionVideo from '../QuestionVideo';
 import VariableInput from './VariableInput';
 import messages from './messages';
 import { AnswerInterventionContent, AnswerOuterContainer } from './styled';
-import {
-  BLOCK_NARRATOR_DRAGGING_QUESTIONS,
-  HIDE_NARRATOR_QUESTIONS,
-} from './constants';
+import { HIDE_NARRATOR_QUESTIONS } from './constants';
 
 export type QuestionDetailsProps = {
   changeGroupName: (name: string) => void;
@@ -98,8 +95,6 @@ const RenderQuestionDetails = ({
   const isFinishScreen = type === QuestionTypes.FINISH;
   const isTlfbGroup = currentGroupScope?.type === GroupType.TLFB;
   const shouldShowNarrator = !HIDE_NARRATOR_QUESTIONS.includes(type);
-  const blockNarratorDragging =
-    BLOCK_NARRATOR_DRAGGING_QUESTIONS.includes(type);
 
   const proceedButton =
     'proceed_button' in selectedQuestion.settings
@@ -156,7 +151,6 @@ const RenderQuestionDetails = ({
           {shouldShowNarrator && (
             <QuestionNarrator
               questionId={id}
-              isDraggable={!blockNarratorDragging}
               animationBoundaries={animationBoundaries}
               settings={{ ...settings, title, subtitle }}
             />
@@ -181,7 +175,7 @@ const RenderQuestionDetails = ({
                       <VariableInput
                         disabled={isNameScreen}
                         questionId={id}
-                        interventionStatus={status!}
+                        interventionStatus={status}
                         isNarratorTab={isNarratorTab}
                         variable={body.variable}
                       />

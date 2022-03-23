@@ -282,7 +282,7 @@ exports[`<SessionListItem /> Should render and match the snapshot 1`] = `
   background-color: transparent;
   border-color: transparent;
   margin-top: 5px;
-  width: 153px;
+  width: 200px;
   max-width: 200px;
   color: rgba(16,121,105,1);
   text-align: center;
@@ -454,7 +454,7 @@ exports[`<SessionListItem /> Should render and match the snapshot 1`] = `
                 placeholder="Variable name..."
                 type="text"
                 value=""
-                width="153px"
+                width="200px"
               />
               <div
                 class="c14"
