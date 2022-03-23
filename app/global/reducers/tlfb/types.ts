@@ -20,5 +20,5 @@ export type CalendarDataResponseItem = {
   id: string;
   date: string;
   events?: EventData[];
-  substances?: TlfbQuestionAnswer[];
+  consumptionResult?: TlfbQuestionAnswer;
 };
