@@ -32,12 +32,14 @@ type GroupedSubstancesType = {
   substanceGroups: SubstanceGroup[];
   loading?: boolean;
   error?: string;
+  disabled?: boolean;
 };
 
 export const GroupedSubstances = ({
   substanceGroups,
   loading,
   error,
+  disabled = false,
 }: GroupedSubstancesType) => {
   const { formatMessage } = useIntl();
   const dispatch = useDispatch();
@@ -128,6 +130,7 @@ export const GroupedSubstances = ({
           onDelete={onRemoveGroup(index)}
           mb={16}
           disableAnimation={!!error}
+          disabled={disabled}
         >
           <>
             <BoxTable
@@ -137,10 +140,12 @@ export const GroupedSubstances = ({
               onRowDelete={(id) => onRemoveSubstanceInGroup(index, id)}
               onRowEdit={(id) => onEditSubstanceInGroup(index, id)}
               containerStyleProps={{ mb: 16 }}
+              disabled={disabled}
             />
             <TextButton
               buttonProps={{ color: themeColors.secondary }}
               onClick={onAddSubstanceInGroup(index)}
+              disabled={disabled}
             >
               {formatMessage(messages.addNewSubstance)}
             </TextButton>
@@ -153,6 +158,7 @@ export const GroupedSubstances = ({
         py={8}
         ml={-8}
         onClick={() => setIsGroupModalVisible(true)}
+        disabled={disabled}
       >
         <Box>
           <Row align="center">

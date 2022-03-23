@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { MouseEvent, useState } from 'react';
 import { useIntl } from 'react-intl';
 
 import { colors } from 'theme';
@@ -30,6 +30,11 @@ export const EventInput = ({
 
   const updateEvent = () => onInputBlur(eventNameValue);
 
+  const handleDelete = (event: MouseEvent<HTMLDivElement>) => {
+    event.stopPropagation();
+    onDelete();
+  };
+
   return (
     <ContentContainer>
       <Text mb={8}>{formatMessage(messages.eventNameLabel)}</Text>
@@ -45,7 +50,7 @@ export const EventInput = ({
         />
         <ImageButton
           src={binNoBg}
-          onClick={onDelete}
+          onClick={handleDelete}
           title={`${formatMessage(messages.delete)} ${eventName}`}
           fill={colors.coolGrey}
         />

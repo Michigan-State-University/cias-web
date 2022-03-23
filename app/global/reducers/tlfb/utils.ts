@@ -6,11 +6,11 @@ export const mapCalendarDataResponse = (
   calendarDataResponse: CalendarDataResponseItem[],
 ): CalendarData =>
   calendarDataResponse.reduce(
-    (calendarData: CalendarData, { date, events, substances }) => ({
+    (calendarData: CalendarData, { date, events, consumptionResult }) => ({
       ...calendarData,
       [date]: {
         events,
-        answer: substances?.[0],
+        answer: consumptionResult,
       },
     }),
     {},

@@ -31,6 +31,7 @@ import {
   tlfbEvents,
   tlfbQuestion,
 } from 'models/Session/QuestionTypes';
+import { STATUS_METADATA } from 'models/Intervention';
 
 import CurrencyQuestion from './CurrencyQuestion';
 import GridQuestion from './GridQuestion';
@@ -61,6 +62,7 @@ const QuestionData = ({
   const commonProps = {
     isNarratorTab,
     interventionStatus,
+    statusMetadata: STATUS_METADATA[interventionStatus],
   };
 
   switch (selectedQuestionType) {

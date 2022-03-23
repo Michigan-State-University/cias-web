@@ -21,12 +21,14 @@ type UngroupedSubstancesType = {
   substances: Substance[];
   loading?: boolean;
   error?: string;
+  disabled?: boolean;
 };
 
 export const UngroupedSubstances = ({
   substances,
   loading,
   error,
+  disabled = false,
 }: UngroupedSubstancesType) => {
   const dispatch = useDispatch();
   const { formatMessage } = useIntl();
@@ -68,12 +70,14 @@ export const UngroupedSubstances = ({
         badgeKeys={['variable']}
         onRowDelete={onRemoveSubstance}
         onRowEdit={onEditSubstance}
+        disabled={disabled}
       />
       <HoverableBox
         px={8}
         py={8}
         ml={-8}
         onClick={() => setIsSubstanceModalVisible(true)}
+        disabled={disabled}
       >
         <Box>
           <Row align="center">

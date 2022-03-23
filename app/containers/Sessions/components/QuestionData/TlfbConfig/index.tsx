@@ -6,7 +6,7 @@ import { RootState } from 'global/reducers';
 import { makeSelectSelectedQuestion } from 'global/reducers/questions';
 
 import { TlfbConfigDTO } from 'models/Question';
-import { InterventionStatus } from 'models/Intervention';
+import { InterventionStatusMetadata } from 'models/Intervention';
 
 import { naturalNumberValidator } from 'utils/validators';
 
@@ -24,10 +24,10 @@ import { updateDaysCount, updateRangeSetting } from './actions';
 
 export type TlfbConfigProps = {
   isNarratorTab: boolean;
-  interventionStatus: InterventionStatus;
+  statusMetadata: InterventionStatusMetadata;
 };
 
-const TlfbConfig = () => {
+const TlfbConfig = ({ statusMetadata: { isEditable } }: TlfbConfigProps) => {
   const { formatMessage } = useIntl();
   const dispatch = useDispatch();
 
@@ -65,6 +65,7 @@ const TlfbConfig = () => {
           id="tlfb-config-date-range"
           onChange={handleRadioChange(true)}
           checked={chooseDateRange === true}
+          disabled={!isEditable}
         >
           <Text mr={24}>{formatMessage(messages.dateRange)}</Text>
         </Radio>
@@ -72,6 +73,7 @@ const TlfbConfig = () => {
           id="tlfb-config-number-of-days"
           onChange={handleRadioChange(false)}
           checked={chooseDateRange === false}
+          disabled={!isEditable}
         >
           <Text>{formatMessage(messages.numberOfDays)}</Text>
         </Radio>
@@ -88,6 +90,7 @@ const TlfbConfig = () => {
           onCheck={handleChange}
           height={48}
           transparent={false}
+          disabled={!isEditable}
         />
       )}
     </Column>
