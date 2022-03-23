@@ -12,7 +12,7 @@ import { themeColors } from 'theme';
 
 import Box from 'components/Box';
 
-import { DropdownIndicator, Option } from './components';
+import { DefaultOption, DropdownIndicator, Option } from './components';
 
 const customStyles = ({ isMulti, bg, isDisabled }) => ({
   control: (provided) => ({
@@ -49,7 +49,7 @@ const customComponents = (isMulti) => ({
     ? {
         Option: (props) => <Option {...props} />,
       }
-    : {}),
+    : { Option: (props) => <DefaultOption {...props} /> }),
 });
 
 const Select = ({ selectProps, ...restProps }) => (

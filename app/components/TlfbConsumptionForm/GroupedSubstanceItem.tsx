@@ -1,4 +1,4 @@
-import React, { ChangeEvent, memo } from 'react';
+import React, { ChangeEvent, memo, MouseEvent } from 'react';
 import { useIntl } from 'react-intl';
 
 import { colors } from 'theme';
@@ -83,6 +83,11 @@ const Component = ({
     });
   };
 
+  const handleRemove = (event: MouseEvent<HTMLDivElement>) => {
+    event.stopPropagation();
+    onRemove();
+  };
+
   const substanceLabelId = generateSubstanceId(groupName, index);
   const amountLabelId = generateAmountId(groupName, index);
   const indexId = generateIndexId(groupName, index);
@@ -140,7 +145,7 @@ const Component = ({
         <Col xs={1}>
           <ImageButton
             src={BinIcon}
-            onClick={onRemove}
+            onClick={handleRemove}
             mr={8}
             title={formatMessage(messages.removeItem, { index: index + 1 })}
           />
