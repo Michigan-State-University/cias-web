@@ -3,10 +3,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { useIntl } from 'react-intl';
 
 import { RootState } from 'global/reducers';
-import {
-  makeSelectSelectedQuestion,
-  updateQuestionData,
-} from 'global/reducers/questions';
+import { makeSelectSelectedQuestion } from 'global/reducers/questions';
 
 import { TlfbConfigDTO } from 'models/Question';
 import { InterventionStatus } from 'models/Intervention';
@@ -23,7 +20,7 @@ import Radio from 'components/Radio';
 import Text from 'components/Text';
 
 import messages from './messages';
-import { UPDATE_DAYS_COUNT, UPDATE_RANGE_SETTINGS } from './constants';
+import { updateDaysCount, updateRangeSetting } from './actions';
 
 export type TlfbConfigProps = {
   isNarratorTab: boolean;
@@ -51,23 +48,11 @@ const TlfbConfig = () => {
     },
   } = selectedQuestion;
 
-  const handleChange = (days_count: string) => {
-    dispatch(
-      updateQuestionData({
-        type: UPDATE_DAYS_COUNT,
-        data: days_count,
-      }),
-    );
-  };
+  const handleChange = (numberOfDays: string) =>
+    dispatch(updateDaysCount(numberOfDays));
 
-  const handleRadioChange = (value: boolean) => () => {
-    dispatch(
-      updateQuestionData({
-        type: UPDATE_RANGE_SETTINGS,
-        data: value,
-      }),
-    );
-  };
+  const handleRadioChange = (value: boolean) => () =>
+    dispatch(updateRangeSetting(value));
 
   return (
     <Column py={32} px={17}>
@@ -78,7 +63,6 @@ const TlfbConfig = () => {
       <Row my={24}>
         <Radio
           id="tlfb-config-date-range"
-          // disabled={loading}
           onChange={handleRadioChange(true)}
           checked={chooseDateRange === true}
         >
@@ -86,7 +70,6 @@ const TlfbConfig = () => {
         </Radio>
         <Radio
           id="tlfb-config-number-of-days"
-          // disabled={loading}
           onChange={handleRadioChange(false)}
           checked={chooseDateRange === false}
         >

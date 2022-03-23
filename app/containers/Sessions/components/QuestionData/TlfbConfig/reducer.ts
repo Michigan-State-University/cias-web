@@ -6,13 +6,17 @@ import { UPDATE_DAYS_COUNT, UPDATE_RANGE_SETTINGS } from './constants';
 const tlfbConfigReducer = (question: TlfbConfigDTO, payload: any) => {
   switch (payload.type) {
     case UPDATE_DAYS_COUNT: {
-      const { data } = payload;
-      question.body.data[0].payload.days_count = data;
+      const {
+        data: { daysCount },
+      } = payload;
+      question.body.data[0].payload.days_count = daysCount;
       return question;
     }
     case UPDATE_RANGE_SETTINGS: {
-      const { data } = payload;
-      question.body.data[0].payload.choose_date_range = data;
+      const {
+        data: { selected },
+      } = payload;
+      question.body.data[0].payload.choose_date_range = selected;
       return question;
     }
     default:
