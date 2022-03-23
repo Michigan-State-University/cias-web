@@ -62,7 +62,7 @@ export const getCalendarMetadata = (
   const oldestFilledDate = getOldestDate(calendarData);
   const datesWithAnswers = pickBy(calendarData, (date) => !isNil(date.answer));
   const oldestFilledAnswerDate = getOldestDate(datesWithAnswers);
-  const oldestAllowedDate = dayjs().subtract(+(daysCount || 1), 'day');
+  const oldestAllowedDate = dayjs().subtract(+daysCount, 'day');
   const isEveryAnswerFilled =
     oldestFilledAnswerDate?.isSame(oldestAllowedDate, 'day') ?? false;
 
