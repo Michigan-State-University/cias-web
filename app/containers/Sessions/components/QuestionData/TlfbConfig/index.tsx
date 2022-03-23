@@ -9,7 +9,7 @@ import {
 } from 'global/reducers/questions';
 
 import { TlfbConfigDTO } from 'models/Question';
-import { InterventionStatus } from 'models/Intervention';
+import { InterventionStatusMetadata } from 'models/Intervention';
 
 import { naturalNumberValidator } from 'utils/validators';
 
@@ -25,10 +25,10 @@ import { UPDATE_DATA } from './constants';
 
 export type TlfbConfigProps = {
   isNarratorTab: boolean;
-  interventionStatus: InterventionStatus;
+  statusMetadata: InterventionStatusMetadata;
 };
 
-const TlfbConfig = () => {
+const TlfbConfig = ({ statusMetadata: { isEditable } }: TlfbConfigProps) => {
   const { formatMessage } = useIntl();
   const dispatch = useDispatch();
 
@@ -62,6 +62,7 @@ const TlfbConfig = () => {
         onCheck={handleChange}
         height={48}
         transparent={false}
+        disabled={!isEditable}
       />
     </Column>
   );

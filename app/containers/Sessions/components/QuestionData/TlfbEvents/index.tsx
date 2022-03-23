@@ -10,6 +10,7 @@ import {
   updateQuestionData,
 } from 'global/reducers/questions';
 import { TlfbEventsDTO } from 'models/Question';
+import { InterventionStatusMetadata } from 'models/Intervention';
 
 import Box from 'components/Box';
 import LabelledApprovableInput from 'components/Input/LabelledApprovableInput';
@@ -19,7 +20,11 @@ import H2 from 'components/H2';
 import { UPDATE_SCREEN_QUESTION, UPDATE_SCREEN_TITLE } from './constants';
 import messages from './messages';
 
-const TlfbEvents = () => {
+export type TlfbEventsProps = {
+  statusMetadata: InterventionStatusMetadata;
+};
+
+const TlfbEvents = ({ statusMetadata: { isEditable } }: TlfbEventsProps) => {
   const dispatch = useDispatch();
   const currentQuestion = useSelector<RootState, TlfbEventsDTO>(
     makeSelectSelectedQuestion(),
@@ -59,6 +64,7 @@ const TlfbEvents = () => {
           id="events-screen-title"
           transparent={false}
           height={48}
+          disabled={!isEditable}
         />
       </Row>
 
@@ -71,6 +77,7 @@ const TlfbEvents = () => {
         id="events-screen-questions"
         transparent={false}
         height={48}
+        disabled={!isEditable}
       />
     </Box>
   );

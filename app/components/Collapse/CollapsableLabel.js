@@ -62,6 +62,7 @@ const CollapseLabel = ({
       mr={!isBinInCollapse ? 0 : binMargin || 5}
       data-testid={`bin-${label}`}
       data-cy={`accordion-element-delete-${index}`}
+      disabled={disabled}
     />
   ) : (
     <></>

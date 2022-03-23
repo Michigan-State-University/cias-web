@@ -13,6 +13,7 @@ import {
 } from 'global/reducers/questions';
 import { TlfbQuestionDTO } from 'models/Question';
 import globalMessages from 'global/i18n/globalMessages';
+import { InterventionStatusMetadata } from 'models/Intervention';
 
 import Box from 'components/Box';
 import Radio from 'components/Radio';
@@ -32,7 +33,13 @@ import messages from './messages';
 import UngroupedSubstances from './UngroupedSubstances';
 import GroupedSubstances from './GroupedSubstances';
 
-const TlfbQuestion = () => {
+export type TlfbQuestionProps = {
+  statusMetadata: InterventionStatusMetadata;
+};
+
+const TlfbQuestion = ({
+  statusMetadata: { isEditable },
+}: TlfbQuestionProps) => {
   const { formatMessage } = useIntl();
   const dispatch = useDispatch();
   const currentQuestion = useSelector<RootState, TlfbQuestionDTO>(
@@ -89,6 +96,7 @@ const TlfbQuestion = () => {
           id="question-title"
           transparent={false}
           height={48}
+          disabled={!isEditable}
         />
       </Row>
 
@@ -102,6 +110,7 @@ const TlfbQuestion = () => {
           id="head-question"
           transparent={false}
           height={48}
+          disabled={!isEditable}
         />
       </Row>
 
@@ -115,6 +124,7 @@ const TlfbQuestion = () => {
           id="substance-question"
           transparent={false}
           height={48}
+          disabled={!isEditable}
         />
       </Row>
 
@@ -128,6 +138,7 @@ const TlfbQuestion = () => {
             id="yes-subtances-with-groups-radio"
             checked={substancesWithGroup}
             onChange={onUpdateSubstancesWithGroupToggle(true)}
+            disabled={!isEditable}
           >
             <Text>{formatMessage(globalMessages.yes)}</Text>
           </Radio>
@@ -137,6 +148,7 @@ const TlfbQuestion = () => {
             id="no-subtances-with-groups-radio"
             checked={!substancesWithGroup}
             onChange={onUpdateSubstancesWithGroupToggle(false)}
+            disabled={!isEditable}
           >
             <Text>{formatMessage(globalMessages.no)}</Text>
           </Radio>
@@ -148,6 +160,7 @@ const TlfbQuestion = () => {
           substanceGroups={substanceGroups}
           loading={isLoading}
           error={error ?? ''}
+          disabled={!isEditable}
         />
       )}
 
@@ -156,6 +169,7 @@ const TlfbQuestion = () => {
           substances={substances}
           loading={isLoading}
           error={error ?? ''}
+          disabled={!isEditable}
         />
       )}
     </Box>

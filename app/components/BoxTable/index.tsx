@@ -21,6 +21,7 @@ type BoxTableProps<T> = {
   onRowEdit?: (id: number) => void;
   onRowDelete?: (id: number) => void;
   containerStyleProps?: Record<string, unknown>;
+  disabled?: boolean;
 };
 
 export const BoxTable = <T,>({
@@ -30,6 +31,7 @@ export const BoxTable = <T,>({
   onRowEdit,
   onRowDelete,
   containerStyleProps,
+  disabled = false,
 }: BoxTableProps<T>) => {
   if (isEmpty(data)) return null;
 
@@ -68,10 +70,15 @@ export const BoxTable = <T,>({
               src={EditIcon}
               fill={colors.heather}
               onClick={() => onRowEdit(index)}
+              disabled={disabled}
             />
           )}
           {onRowDelete && (
-            <ImageButton src={BinIcon} onClick={() => onRowDelete(index)} />
+            <ImageButton
+              src={BinIcon}
+              onClick={() => onRowDelete(index)}
+              disabled={disabled}
+            />
           )}
         </Row>
       ))}
