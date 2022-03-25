@@ -457,6 +457,29 @@ exports[`<ReflectionFormulaBlock /> Should render and match the snapshot 1`] = `
   width: 100% !important;
 }
 
+.c26 {
+  resize: none;
+  padding: 12px;
+  border: 1px solid #E9F1FB;
+  border-radius: 5px;
+  margin-right: 9px;
+  width: 100%;
+  height: auto;
+  max-width: initial;
+  background-color: transparent;
+  border: 1px solid transparent;
+}
+
+.c26:focus {
+  box-shadow: none;
+  outline: none;
+  border: 1px solid #107969;
+}
+
+.c26:disabled {
+  color: #ABBBD1;
+}
+
 .c33 {
   padding: 12px;
   border-style: solid;
@@ -481,29 +504,6 @@ exports[`<ReflectionFormulaBlock /> Should render and match the snapshot 1`] = `
 }
 
 .c33:disabled {
-  color: #ABBBD1;
-}
-
-.c26 {
-  resize: none;
-  padding: 12px;
-  border: 1px solid #E9F1FB;
-  border-radius: 5px;
-  margin-right: 9px;
-  width: 100%;
-  height: auto;
-  max-width: initial;
-  background-color: transparent;
-  border: 1px solid transparent;
-}
-
-.c26:focus {
-  box-shadow: none;
-  outline: none;
-  border: 1px solid #107969;
-}
-
-.c26:disabled {
   color: #ABBBD1;
 }
 

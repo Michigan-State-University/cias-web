@@ -109,3 +109,27 @@ export const Adornment = styled.span`
   visibility: ${({ visible }) => (visible ? 'visible' : 'hidden')};
   ${margin};
 `;
+
+export const Sufix = styled.div`
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  pointer-events: none;
+  overflow: hidden;
+  display: flex;
+  padding-top: 12px;
+  padding-bottom: 12px;
+  width: 100%;
+  align-items: center;
+  justify-content: center;
+
+  .invisible {
+    visibility: hidden;
+  }
+
+  #unitsValue {
+    white-space: pre;
+  }
+`;

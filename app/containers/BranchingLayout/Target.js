@@ -9,7 +9,6 @@ import EllipsisText from 'components/Text/EllipsisText';
 import { colors } from 'theme';
 import { numericValidator } from 'utils/validators';
 import binNoBg from 'assets/svg/bin-no-bg.svg';
-import PlusCircle from 'components/Circle/PlusCircle';
 import messages from './messages';
 import TargetQuestionChooser from './TargetQuestionChooser';
 
@@ -26,38 +25,29 @@ const Target = ({
   setTargetChooserOpen,
   onDeleteTarget,
   invalidPercentage,
-  onAddTarget,
   isOnlyTarget,
   disableBranchingToSession,
-}) => {
-  const onTargetClick = (e) => {
-    if (onAddTarget) {
-      e.stopPropagation();
-      onAddTarget();
-    }
-  };
-  return (
+  bg,
+}) => (
+  <Box
+    display="flex"
+    align="center"
+    justify={sessionBranching ? 'start' : 'end'}
+    ml={sessionBranching ? 80 : null}
+  >
     <Box
-      onClick={onTargetClick}
       display="flex"
       align="center"
-      justify={sessionBranching ? 'start' : 'end'}
-      cursor={onAddTarget ? 'pointer' : undefined}
-      ml={sessionBranching ? 80 : null}
+      justify="end"
+      mr={isOnlyTarget ? 25 : null}
     >
-      <Box
-        opacity={onAddTarget ? 0.3 : 1}
-        display="flex"
-        align="center"
-        justify="end"
-        mr={isOnlyTarget ? 25 : null}
-      >
-        <Box bg={colors.linkWater} mx={6}>
+      {!isOnlyTarget && (
+        <Box bg={bg || colors.linkWater} mx={6} position="relative">
           <StyledInput
+            height={50}
             hasError={invalidPercentage}
-            width={50}
-            disabled={disabled || !!onAddTarget}
-            cursor={onAddTarget ? 'pointer' : undefined}
+            width={56}
+            disabled={disabled}
             px={0}
             py={12}
             textAlign="center"
@@ -65,60 +55,57 @@ const Target = ({
             value={target ? target.probability : ''}
             validator={numericValidator}
             onBlur={(probability) => onUpdateTarget({ probability })}
+            sufix="%"
           />
         </Box>
-        <Text whiteSpace="pre" mr={6}>
-          {formatMessage(messages.percentGoTo)}
-        </Text>
-        <ArrowDropdown
-          disabled={disabled}
-          width={130}
-          positionFrom="right"
-          setOpen={(value) => {
-            if (!onAddTarget) {
-              handleDropdownClick(value, uniqueTargetIndex);
-            }
-          }}
-          isOpened={isChooserOpened}
-          childWidthScope="child"
-          dropdownContent={
-            <Box
-              maxWidth={100}
-              data-cy={`select-question-${uniqueTargetIndex}`}
-            >
-              <EllipsisText
-                text={displayPatternTargetText(target)}
-                fontSize={13}
-              />
-            </Box>
-          }
-        >
-          <TargetQuestionChooser
-            sessionBranching={sessionBranching}
-            isVisible={isChooserOpened}
-            target={target}
-            onClick={(value) => {
-              setTargetChooserOpen(-1);
-              onUpdateTarget(value);
-            }}
-            disableBranchingToSession={disableBranchingToSession}
-          />
-        </ArrowDropdown>
-      </Box>
-      {!disabled && !onAddTarget && !isOnlyTarget && (
-        <Img
-          width="15px"
-          height="15px"
-          ml={10}
-          src={binNoBg}
-          onClick={onDeleteTarget}
-          clickable
-        />
       )}
-      {!!onAddTarget && <PlusCircle opacity={1} ml={10} size="15px" />}
+      <Text whiteSpace="pre" mr={6} fontWeight="bold">
+        {formatMessage(messages.percentGoTo)}
+      </Text>
+      <ArrowDropdown
+        bg={colors.white}
+        disabled={disabled}
+        width={isOnlyTarget ? 140 : 120}
+        positionFrom="right"
+        setOpen={(value) => {
+          handleDropdownClick(value, uniqueTargetIndex);
+        }}
+        isOpened={isChooserOpened}
+        dropdownContent={
+          <Box data-cy={`select-question-${uniqueTargetIndex}`}>
+            <EllipsisText
+              text={displayPatternTargetText(target)}
+              fontSize={13}
+              width={isOnlyTarget ? 120 : 85}
+            />
+          </Box>
+        }
+      >
+        <TargetQuestionChooser
+          sessionBranching={sessionBranching}
+          isVisible={isChooserOpened}
+          target={target}
+          onClick={(value) => {
+            setTargetChooserOpen(-1);
+            onUpdateTarget(value);
+          }}
+          disableBranchingToSession={disableBranchingToSession}
+        />
+      </ArrowDropdown>
     </Box>
-  );
-};
+
+    {!disabled && !isOnlyTarget && (
+      <Img
+        width="15px"
+        height="15px"
+        ml={10}
+        src={binNoBg}
+        onClick={onDeleteTarget}
+        clickable
+      />
+    )}
+  </Box>
+);
 
 Target.propTypes = {
   target: PropTypes.object,
@@ -134,8 +121,8 @@ Target.propTypes = {
   sessionBranching: PropTypes.bool,
   setTargetChooserOpen: PropTypes.func,
   onDeleteTarget: PropTypes.func,
-  onAddTarget: PropTypes.func,
   disableBranchingToSession: PropTypes.bool,
+  bg: PropTypes.string,
 };
 
 export default Target;

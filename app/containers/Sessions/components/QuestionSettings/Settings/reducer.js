@@ -254,7 +254,12 @@ const questionSettingsReducer = (allQuestions, payload, questionIndex) => {
       const newTargets = question.formula.patterns[patternIndex].target.filter(
         (_, deleteIndex) => deleteIndex !== targetIndex,
       );
-      question.formula.patterns[patternIndex].target = newTargets;
+
+      question.formula.patterns[patternIndex].target =
+        newTargets.length === 1
+          ? [{ ...newTargets[0], probability: '100' }]
+          : newTargets;
+
       return question;
     }
 

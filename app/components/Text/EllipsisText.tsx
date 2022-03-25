@@ -9,9 +9,16 @@ type EllipsisTextType = {
   text: string;
   dataFor?: string;
   lines?: number;
+  width?: number;
 } & Record<string, unknown>;
 
-const EllipsisText = ({ text, dataFor, lines, ...props }: EllipsisTextType) => {
+const EllipsisText = ({
+  text,
+  dataFor,
+  lines,
+  width,
+  ...props
+}: EllipsisTextType) => {
   const ref = useRef(null);
 
   const [allowTooltip, setAllowTooltip] = useState(false);
@@ -35,6 +42,7 @@ const EllipsisText = ({ text, dataFor, lines, ...props }: EllipsisTextType) => {
           data-for={dataFor ?? text ?? ''}
           lines={lines}
           onTruncate={onTruncate}
+          width={width}
           $styleProps={props}
         >
           {text}

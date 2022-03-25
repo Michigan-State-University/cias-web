@@ -14,14 +14,14 @@ import Box from 'components/Box';
 
 import { DefaultOption, DropdownIndicator, Option } from './components';
 
-const customStyles = ({ isMulti, bg, isDisabled }) => ({
+const customStyles = ({ isMulti, bg, isDisabled, height }) => ({
   control: (provided) => ({
     ...provided,
     borderWidth: '1px',
     borderRadius: '5px',
     borderColor: `${themeColors.highlight}`,
     boxShadow: '0',
-    height: isMulti ? 'auto' : '45px',
+    height: isMulti ? 'auto' : height || '45px',
     minHeight: '45px',
     width: '100%',
     background: `${bg || 'auto'}`,
