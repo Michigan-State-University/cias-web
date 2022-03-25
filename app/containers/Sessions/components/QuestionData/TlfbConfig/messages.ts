@@ -15,4 +15,12 @@ export default defineMessages({
     id: `${scope}.noOfDaysPlaceholder`,
     defaultMessage: 'E.g. 20',
   },
+  numberOfDays: {
+    id: `${scope}.numberOfDays`,
+    defaultMessage: 'Number of days',
+  },
+  dateRange: {
+    id: `${scope}.dateRange`,
+    defaultMessage: 'Date range',
+  },
 });

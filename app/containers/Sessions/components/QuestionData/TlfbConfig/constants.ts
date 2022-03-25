@@ -1,1 +1,4 @@
-export const UPDATE_DATA = 'app/EditSessionPage/TlfbConfig/UPDATE_DATA';
+export const UPDATE_DAYS_COUNT =
+  'app/EditSessionPage/TlfbConfig/UPDATE_DAYS_COUNT';
+export const UPDATE_RANGE_SETTINGS =
+  'app/EditSessionPage/TlfbConfig/UPDATE_RANGE_SETTINGS';

@@ -60,6 +60,7 @@ export interface TlfbQuestionPayload {
 
 export interface TlfbConfigPayload {
   daysCount: string;
+  chooseDateRange: boolean;
 }
 
 export type QuestionPayload =

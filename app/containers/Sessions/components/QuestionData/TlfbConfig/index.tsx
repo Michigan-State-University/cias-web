@@ -3,10 +3,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { useIntl } from 'react-intl';
 
 import { RootState } from 'global/reducers';
-import {
-  makeSelectSelectedQuestion,
-  updateQuestionData,
-} from 'global/reducers/questions';
+import { makeSelectSelectedQuestion } from 'global/reducers/questions';
 
 import { TlfbConfigDTO } from 'models/Question';
 import { InterventionStatusMetadata } from 'models/Intervention';
@@ -19,9 +16,11 @@ import H2 from 'components/H2';
 import Row from 'components/Row';
 import Column from 'components/Column';
 import LabelledApprovableInput from 'components/Input/LabelledApprovableInput';
+import Radio from 'components/Radio';
+import Text from 'components/Text';
 
 import messages from './messages';
-import { UPDATE_DATA } from './constants';
+import { updateDaysCount, updateRangeSetting } from './actions';
 
 export type TlfbConfigProps = {
   isNarratorTab: boolean;
@@ -36,34 +35,64 @@ const TlfbConfig = ({ statusMetadata: { isEditable } }: TlfbConfigProps) => {
     makeSelectSelectedQuestion()!,
   );
 
-  const handleChange = (days_count: string) => {
-    dispatch(
-      updateQuestionData({
-        type: UPDATE_DATA,
-        data: { value: { payload: { days_count } } },
-      }),
-    );
-  };
+  const {
+    body: {
+      data: [
+        {
+          payload: {
+            choose_date_range: chooseDateRange,
+            days_count: daysCount,
+          },
+        },
+      ],
+    },
+  } = selectedQuestion;
+
+  const handleChange = (numberOfDays: string) =>
+    dispatch(updateDaysCount(numberOfDays));
+
+  const handleRadioChange = (value: boolean) => () =>
+    dispatch(updateRangeSetting(value));
 
   return (
     <Column py={32} px={17}>
       <Row>
-        <H2 mb={24}>{formatMessage(messages.tlfbTimeframe)}</H2>
+        <H2>{formatMessage(messages.tlfbTimeframe)}</H2>
         <H2 color={themeColors.warning}>*</H2>
       </Row>
-      <LabelledApprovableInput
-        id="number-of-days-input"
-        label={formatMessage(messages.noOfDaysLabel)}
-        type="singleline"
-        keyboard="tel"
-        placeholder={formatMessage(messages.noOfDaysPlaceholder)}
-        value={selectedQuestion.body.data[0].payload.days_count}
-        validator={naturalNumberValidator}
-        onCheck={handleChange}
-        height={48}
-        transparent={false}
-        disabled={!isEditable}
-      />
+      <Row my={24}>
+        <Radio
+          id="tlfb-config-date-range"
+          onChange={handleRadioChange(true)}
+          checked={chooseDateRange === true}
+          disabled={!isEditable}
+        >
+          <Text mr={24}>{formatMessage(messages.dateRange)}</Text>
+        </Radio>
+        <Radio
+          id="tlfb-config-number-of-days"
+          onChange={handleRadioChange(false)}
+          checked={chooseDateRange === false}
+          disabled={!isEditable}
+        >
+          <Text>{formatMessage(messages.numberOfDays)}</Text>
+        </Radio>
+      </Row>
+      {!chooseDateRange && (
+        <LabelledApprovableInput
+          id="number-of-days-input"
+          label={formatMessage(messages.noOfDaysLabel)}
+          type="singleline"
+          keyboard="tel"
+          placeholder={formatMessage(messages.noOfDaysPlaceholder)}
+          value={daysCount}
+          validator={naturalNumberValidator}
+          onCheck={handleChange}
+          height={48}
+          transparent={false}
+          disabled={!isEditable}
+        />
+      )}
     </Column>
   );
 };
