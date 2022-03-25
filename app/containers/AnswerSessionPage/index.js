@@ -74,6 +74,7 @@ import messages from './messages';
 import {
   AnswerInterventionContent,
   AnswerOuterContainer,
+  ScreenWrapper,
   StyledButton,
 } from './styled';
 import {
@@ -118,14 +119,8 @@ const AnimationRefHelper = ({
     ...currentQuestion.settings,
   };
 
-  const isFullSize = FULL_SIZE_QUESTIONS.includes(currentQuestion.type);
-
   return (
-    <AnswerInterventionContent
-      isFullSize={isFullSize}
-      ref={animationParentRef}
-      id={ANSWER_SESSION_CONTAINER_ID}
-    >
+    <AnswerInterventionContent ref={animationParentRef}>
       {children}
       {refState !== null && (
         <CharacterAnim
@@ -668,7 +663,10 @@ export function AnswerSessionPage({
                   currentQuestion &&
                   interventionStarted &&
                   !transitionalUserSessionId && (
-                    <>
+                    <ScreenWrapper
+                      isFullSize={isFullSize}
+                      id={ANSWER_SESSION_CONTAINER_ID}
+                    >
                       {isNarratorPositionFixed && renderPage()}
                       {!isNarratorPositionFixed && (
                         <AnimationRefHelper
@@ -684,7 +682,7 @@ export function AnswerSessionPage({
                           {renderPage()}
                         </AnimationRefHelper>
                       )}
-                    </>
+                    </ScreenWrapper>
                   )}
               </Box>
               {answersError && <ErrorAlert errorText={answersError} />}
