@@ -23,4 +23,16 @@ export default defineMessages({
     id: `${scope}.dateRange`,
     defaultMessage: 'Date range',
   },
+  dateFrom: {
+    id: `${scope}.dateFrom`,
+    defaultMessage: 'Date from',
+  },
+  dateTo: {
+    id: `${scope}.dateTo`,
+    defaultMessage: 'Date to',
+  },
+  selectDate: {
+    id: `${scope}.selectDate`,
+    defaultMessage: 'Select date',
+  },
 });

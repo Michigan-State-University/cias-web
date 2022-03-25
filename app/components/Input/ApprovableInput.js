@@ -79,6 +79,7 @@ const ApprovableInput = ({
   defaultFontSize,
   styles,
   minDate,
+  maxDate,
   ariaLabel,
   'aria-labelledby': ariaLabelledBy,
   id,
@@ -205,6 +206,7 @@ const ApprovableInput = ({
             ref={ref}
             disabled={disabled}
             minDate={minDate}
+            maxDate={maxDate}
             selected={value}
             onChange={(date) => onCheck(date)}
             onFocus={onFocus}
@@ -291,6 +293,7 @@ ApprovableInput.propTypes = {
   padding: PropTypes.number,
   defaultFontSize: PropTypes.number,
   minDate: PropTypes.object,
+  maxDate: PropTypes.object,
   styles: PropTypes.object,
   ariaLabel: PropTypes.string,
   'aria-labelledby': PropTypes.string,
