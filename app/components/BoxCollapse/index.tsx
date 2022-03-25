@@ -57,7 +57,7 @@ export const BoxCollapse = ({
         onHideImg={ArrowDown}
         onShowImg={ArrowUp}
         binMargin={20}
-        px={16}
+        px={0}
         py={0}
         height={null}
         label={
@@ -89,7 +89,7 @@ export const BoxCollapse = ({
         disableAnimation={disableAnimation}
         disabled={disabled}
       >
-        <Box width="100%" px={16} pb={16}>
+        <Box width="100%" pb={16}>
           <Divider mb={16} mt={1} />
           {children}
         </Box>

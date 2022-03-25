@@ -95,6 +95,7 @@ export const TlfbConsumptionForm = ({
               consumptions={consumptions ?? []}
               onChange={handleConsumptionsChange}
               loading={loading}
+              mobile={mobile}
             />
           )}
         </>

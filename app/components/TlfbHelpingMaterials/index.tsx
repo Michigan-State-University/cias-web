@@ -13,7 +13,11 @@ import StandardDrinks from 'assets/images/standard-drinks.jpeg';
 
 import messages from './messages';
 
-const TlfbHelpingMaterials = () => {
+export type TlfbHelpingMaterialsProps = {
+  mobile?: boolean;
+};
+
+const TlfbHelpingMaterials = ({ mobile }: TlfbHelpingMaterialsProps) => {
   const [modalVisible, setModalVisible] = useState(false);
   const { formatMessage } = useIntl();
   return (
@@ -37,8 +41,13 @@ const TlfbHelpingMaterials = () => {
         display="flex"
         align="center"
       >
-        <Img mr={10} src={Document} alt={formatMessage(messages.document)} />
-        <Text color={themeColors.primary}>
+        {!mobile && (
+          <Img mr={10} src={Document} alt={formatMessage(messages.document)} />
+        )}
+        <Text
+          color={themeColors.primary}
+          fontWeight={mobile ? 'bold' : 'medium'}
+        >
           {formatMessage(messages.helpingMaterials)}
         </Text>
       </Row>

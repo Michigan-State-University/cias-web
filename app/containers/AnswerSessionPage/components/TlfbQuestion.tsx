@@ -249,7 +249,7 @@ const TlfbQuestion = ({
       />
       <Divider mb={25} />
       {/* @ts-ignore */}
-      <Row display="flex" justify="between" align="center">
+      <Row display="flex" justify="between" align="center" gap={8}>
         <Button
           onClick={saveAnswer}
           disabled={!canGoToNextDay}
@@ -263,7 +263,7 @@ const TlfbQuestion = ({
               : messages.goToNextDay)}
           />
         </Button>
-        {(isMobile || isMobilePreview) && <TlfbHelpingMaterials />}
+        {(isMobile || isMobilePreview) && <TlfbHelpingMaterials mobile />}
       </Row>
     </TlfbCalendarLayout>
   );

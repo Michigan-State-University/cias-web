@@ -6,6 +6,7 @@ import {
   floatRegex,
   floatValidatorRegex,
   naturalNumberRegex,
+  floatCharRegex,
 } from 'global/constants/regex';
 import globalMessages from 'global/i18n/globalMessages';
 
@@ -26,6 +27,9 @@ export const floatValidationSchema = Yup.string().matches(
   /* @ts-ignore */
   formatMessage(globalMessages.validators.numeric),
 );
+
+export const floatCharValidator = (target: string) =>
+  floatCharRegex.test(target);
 
 export const naturalNumberValidator = (target: string) =>
   naturalNumberRegex.test(target) || target === '';

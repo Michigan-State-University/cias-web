@@ -1,4 +1,4 @@
-import styled from 'styled-components';
+import styled, { css } from 'styled-components';
 import PropTypes from 'prop-types';
 import { themeColors, borders, colors } from 'theme';
 
@@ -56,6 +56,18 @@ const Input = styled.input.attrs((props) => {
       backgroundColor: 'transparent',
       ...(!hasError && { borderColor: 'transparent' }),
     }};
+  ${({ hideNumberArrows }) =>
+    hideNumberArrows &&
+    css`
+      /* Chrome, Safari, Edge, Opera */
+      &::-webkit-outer-spin-button,
+      &::-webkit-inner-spin-button {
+        -webkit-appearance: none;
+        margin: 0;
+      }
+      /* Firefox */
+      -moz-appearance: textfield;
+    `};
   ${margin};
   ${layout};
   ${padding};

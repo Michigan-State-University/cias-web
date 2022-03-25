@@ -23,6 +23,7 @@ export type GroupedSubstancesFormProps = {
   consumptions: SubstanceConsumption[];
   onChange: (newConsumptions: SubstanceConsumption[]) => void;
   loading: boolean;
+  mobile: boolean;
 };
 
 const Component = ({
@@ -30,6 +31,7 @@ const Component = ({
   consumptions,
   onChange,
   loading,
+  mobile,
 }: GroupedSubstancesFormProps) => {
   const { formatMessage } = useIntl();
 
@@ -76,7 +78,7 @@ const Component = ({
   };
 
   return (
-    <Column gap={8} mb={24}>
+    <Column gap={16} mb={24}>
       {substanceGroups.map((group, index) => {
         const isAddSubstanceDisabled = !groupToVariablesMap[index][0];
 
@@ -85,7 +87,7 @@ const Component = ({
             id={generateGroupId(group.name)}
             key={`substance-group-${index}`}
             label={group.name}
-            mb={16}
+            px={12}
           >
             <>
               {consumptionsMap[index].map((consumption, substanceIndex) => (
@@ -99,6 +101,7 @@ const Component = ({
                   onChange={onConsumptionsChange(consumption.variable)}
                   onRemove={onRemoveSubstanceInGroup(consumption.variable)}
                   loading={loading}
+                  mobile={mobile}
                 />
               ))}
 

@@ -103,11 +103,18 @@ export const SearchIcon = styled.img`
   top: 10px;
 `;
 
-export const Adornment = styled.span`
+export const Adornment = styled.div`
   text-align: center;
   color: ${Color(colors.bluewood).alpha(0.5).toString()};
   visibility: ${({ visible }) => (visible ? 'visible' : 'hidden')};
+  cursor: text;
   ${margin};
+  position: absolute;
+  right: 0;
+  max-width: 75%;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
 `;
 
 export const Sufix = styled.div`

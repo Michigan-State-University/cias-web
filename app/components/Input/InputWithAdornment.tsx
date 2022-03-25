@@ -1,4 +1,10 @@
-import React, { ComponentProps, memo, useCallback, useState } from 'react';
+import React, {
+  ComponentProps,
+  memo,
+  useCallback,
+  useRef,
+  useState,
+} from 'react';
 import Box from 'components/Box';
 
 import { INPUT_PADDING } from './constants';
@@ -20,17 +26,26 @@ const Component = ({ adornment, ...props }: Props) => {
     [adornment],
   );
 
+  const inputRef = useRef<HTMLInputElement>();
+
+  const focusInput = useCallback(() => {
+    inputRef.current?.focus();
+  }, [inputRef.current]);
+
   return (
-    <Box>
+    <Box width="100%" display="flex" align="center">
       <Input
         {...props}
+        ref={inputRef}
+        hideNumberArrows
         width="100%"
         pr={adornmentSize + INPUT_PADDING || undefined}
       />
       <Adornment
         ref={adornmentRef}
-        ml={-(adornmentSize + INPUT_PADDING / 2)}
+        mr={INPUT_PADDING}
         visible={!!adornmentSize}
+        onClick={focusInput}
       >
         {adornment}
       </Adornment>

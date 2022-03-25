@@ -13,11 +13,11 @@ import React, {
 } from 'react';
 import {
   arrow,
-  flip,
   shift,
   offset,
   useFloating,
   getScrollParents,
+  autoPlacement,
 } from '@floating-ui/react-dom';
 import capitalize from 'lodash/capitalize';
 
@@ -76,8 +76,10 @@ const PopoverModal = ({
     placement: 'right',
     middleware: [
       offset(8),
-      flip(),
-      shift(),
+      shift({
+        padding: 16,
+      }),
+      autoPlacement(),
       ...(arrowRef.current
         ? [arrow({ element: arrowRef.current, padding: 5 })]
         : []),

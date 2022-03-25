@@ -129,6 +129,7 @@ export const GroupedSubstances = ({
           onEdit={onEditGroup(index)}
           onDelete={onRemoveGroup(index)}
           mb={16}
+          px={16}
           disableAnimation={!!error}
           disabled={disabled}
         >

@@ -15,10 +15,6 @@ export default defineMessages({
     id: `${scope}.amountLabel`,
     defaultMessage: 'Amount',
   },
-  amountPlaceholder: {
-    id: `${scope}.amountPlaceholder`,
-    defaultMessage: 'Provide amount',
-  },
   removeItem: {
     id: `${scope}.removeItem`,
     defaultMessage: 'Remove item {index}',
