@@ -23,23 +23,27 @@ const DateRangeChooser = ({
   startDate: startDateString,
   endDate: endDateString,
 }: Props) => {
+  const { formatMessage } = useIntl();
+
   const startDate = useMemo(
     () => (startDateString ? new Date(startDateString) : null),
     [startDateString],
   );
+
   const endDate = useMemo(
     () => (endDateString ? new Date(endDateString) : null),
     [endDateString],
   );
+
   const updateStartDate = (newStartDate: Date) => {
     onDateRangeUpdate(newStartDate, endDate);
   };
+
   const updateEndDate = (newEndDate: Date) => {
     onDateRangeUpdate(startDate, newEndDate);
   };
 
-  const { formatMessage } = useIntl();
-
+  const inputStyles = { bg: 'white', textOpacity: 1 };
   return (
     <Box display="flex">
       <Box width={150} mr={12}>
@@ -56,6 +60,7 @@ const DateRangeChooser = ({
           onCheck={updateStartDate}
           fontSize={15}
           maxDate={endDate}
+          styles={inputStyles}
         />
       </Box>
       <Box width={150}>
@@ -72,6 +77,7 @@ const DateRangeChooser = ({
           onCheck={updateEndDate}
           fontSize={15}
           minDate={startDate}
+          styles={inputStyles}
         />
       </Box>
     </Box>

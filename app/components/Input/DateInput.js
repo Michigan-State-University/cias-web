@@ -30,7 +30,9 @@ const DateInput = React.forwardRef(
       {...inputStyles}
     >
       <Text
-        textOpacity={0.6}
+        textOpacity={
+          value && inputStyles.textOpacity ? inputStyles.textOpacity : 0.6
+        }
         color={value ? colors.black : colors.bluewood}
         fontSize={fontSize}
       >
