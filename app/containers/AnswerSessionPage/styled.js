@@ -21,6 +21,12 @@ export const BackButton = styled.div`
 export const AnswerInterventionContent = styled.div`
   align-items: flex-start;
   display: flex;
+  position: relative;
+`;
+
+export const ScreenWrapper = styled.div`
+  align-items: flex-start;
+  display: flex;
   max-width: ${(props) =>
     props.isFullSize ? '100%' : `${elements.draggableContainerSize}px`};
   min-height: ${elements.draggableContainerSize}px;
