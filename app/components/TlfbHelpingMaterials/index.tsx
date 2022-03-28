@@ -26,7 +26,7 @@ const TlfbHelpingMaterials = ({ mobile }: TlfbHelpingMaterialsProps) => {
         visible={modalVisible}
         title={formatMessage(messages.helpingMaterials)}
         onClose={() => setModalVisible(false)}
-        maxWidth={500}
+        maxWidth={mobile ? 400 : 500}
       >
         <Img
           maxWidth="100%"
