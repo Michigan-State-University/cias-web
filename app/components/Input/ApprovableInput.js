@@ -79,10 +79,15 @@ const ApprovableInput = ({
   defaultFontSize,
   styles,
   minDate,
+  maxDate,
   ariaLabel,
   'aria-labelledby': ariaLabelledBy,
   id,
   transparent,
+  selectsStart,
+  selectsEnd,
+  startDate,
+  endDate,
 }) => {
   const [value, setValue] = useState(propsValue);
   const [focused, setFocused] = useState(false);
@@ -205,11 +210,16 @@ const ApprovableInput = ({
             ref={ref}
             disabled={disabled}
             minDate={minDate}
+            maxDate={maxDate}
             selected={value}
             onChange={(date) => onCheck(date)}
             onFocus={onFocus}
             placeholderText={placeholder}
             dateFormat="MM/dd/yyyy"
+            selectsEnd={selectsEnd}
+            selectsStart={selectsStart}
+            startDate={startDate}
+            endDate={endDate}
             customInput={
               <DateInput
                 disabled={disabled}
@@ -291,11 +301,16 @@ ApprovableInput.propTypes = {
   padding: PropTypes.number,
   defaultFontSize: PropTypes.number,
   minDate: PropTypes.object,
+  maxDate: PropTypes.object,
   styles: PropTypes.object,
   ariaLabel: PropTypes.string,
   'aria-labelledby': PropTypes.string,
   id: PropTypes.string,
   transparent: PropTypes.bool,
+  selectsStart: PropTypes.bool,
+  selectsEnd: PropTypes.bool,
+  startDate: PropTypes.object,
+  endDate: PropTypes.object,
 };
 
 ApprovableInput.defaultProps = {

@@ -46,7 +46,7 @@ export const QuillStyled = styled(ReactQuill)`
 `;
 
 export const StyledDateInput = styled.button`
-  background-color: ${colors.zirkon};
+  background-color: ${({ bg }) => (bg ? `${bg}` : `${colors.zirkon}`)};
   border-radius: ${borders.borderRadius};
   border-style: ${borders.borderStyle};
   border-width: ${borders.borderWidth};

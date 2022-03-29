@@ -192,6 +192,7 @@
     "@types/pathfinding": "0.0.5",
     "@types/react": "^17.0.14",
     "@types/react-beautiful-dnd": "^13.1.1",
+    "@types/react-datepicker": "^4.3.4",
     "@types/react-dom": "^17.0.9",
     "@types/react-helmet": "^6.1.2",
     "@types/react-router-dom": "^5.1.8",

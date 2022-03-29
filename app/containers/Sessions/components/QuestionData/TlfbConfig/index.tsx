@@ -20,7 +20,12 @@ import Radio from 'components/Radio';
 import Text from 'components/Text';
 
 import messages from './messages';
-import { updateDaysCount, updateRangeSetting } from './actions';
+import {
+  updateDaysCount,
+  updateRangeSetting,
+  updateDateRange,
+} from './actions';
+import DateRangeChooser from './DateRangeChooser';
 
 export type TlfbConfigProps = {
   isNarratorTab: boolean;
@@ -42,6 +47,8 @@ const TlfbConfig = ({ statusMetadata: { isEditable } }: TlfbConfigProps) => {
           payload: {
             choose_date_range: chooseDateRange,
             days_count: daysCount,
+            end_date: endDate,
+            start_date: startDate,
           },
         },
       ],
@@ -53,6 +60,13 @@ const TlfbConfig = ({ statusMetadata: { isEditable } }: TlfbConfigProps) => {
 
   const handleRadioChange = (value: boolean) => () =>
     dispatch(updateRangeSetting(value));
+
+  const updateRange = (
+    newStartDate: Nullable<Date>,
+    newEndDate: Nullable<Date>,
+  ) => {
+    dispatch(updateDateRange(newStartDate, newEndDate));
+  };
 
   return (
     <Column py={32} px={17}>
@@ -91,6 +105,14 @@ const TlfbConfig = ({ statusMetadata: { isEditable } }: TlfbConfigProps) => {
           height={48}
           transparent={false}
           disabled={!isEditable}
+        />
+      )}
+      {chooseDateRange && (
+        <DateRangeChooser
+          onDateRangeUpdate={updateRange}
+          disabled={!isEditable}
+          endDate={endDate}
+          startDate={startDate}
         />
       )}
     </Column>
