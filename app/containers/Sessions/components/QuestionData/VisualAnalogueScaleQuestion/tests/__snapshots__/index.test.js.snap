@@ -106,6 +106,8 @@ exports[`<VisualAnalogueScaleQuestion /> Should render and match the snapshot 1`
   max-width: 200px;
   padding-top: 9px;
   padding-bottom: 9px;
+  padding-right: 0;
+  padding-left: 0;
   color: #2F3850;
   text-align: center;
 }

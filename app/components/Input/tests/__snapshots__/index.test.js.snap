@@ -1789,6 +1789,8 @@ exports[`<BadgeInput /> Should render and match the snapshot 1`] = `
   border-color: transparent;
   width: 157px;
   max-width: 200px;
+  padding-right: 0;
+  padding-left: 0;
   color: rgba(0,0,0,1);
   background-color: rgba(0,0,0,0.1);
   color: rgba(0,0,0,1);
@@ -2017,6 +2019,8 @@ exports[`<StyledInput /> Should render and match the snapshot as singleline 1`] 
   border-color: transparent;
   width: 100%;
   max-width: 200px;
+  padding-right: 0;
+  padding-left: 0;
   color: #2F3850;
   text-align: left;
 }

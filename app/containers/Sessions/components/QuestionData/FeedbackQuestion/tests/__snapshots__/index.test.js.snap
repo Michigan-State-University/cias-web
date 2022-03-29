@@ -76,7 +76,7 @@ exports[`<FeedbackQuestion /> Should render and match the snapshot 1`] = `
                 style="transform: translateX(-50%); left: 0%; font-size: 15px;"
               >
                 <input
-                  class="Input-t9j2q5-0 WDQRg"
+                  class="Input-t9j2q5-0 dVChuz"
                   placeholder="Least"
                   type="text"
                   value="0"
@@ -88,7 +88,7 @@ exports[`<FeedbackQuestion /> Should render and match the snapshot 1`] = `
                 style="transform: translateX(-50%); left: 100%; font-size: 15px;"
               >
                 <input
-                  class="Input-t9j2q5-0 WDQRg"
+                  class="Input-t9j2q5-0 dVChuz"
                   placeholder="Most"
                   type="text"
                   value="100"

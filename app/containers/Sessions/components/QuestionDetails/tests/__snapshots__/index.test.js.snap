@@ -224,6 +224,72 @@ exports[`<QuestionDetails /> should match the snapshot 1`] = `
   width: 100%;
 }
 
+.c14 {
+  width: 100%;
+  min-height: -webkit-max-content;
+  min-height: -moz-max-content;
+  min-height: max-content;
+  border: 1px solid transparent;
+}
+
+.c14 .ql-editor {
+  font-weight: 400;
+  padding: 10px;
+  overflow: visible;
+}
+
+.c14 .ql-editor.ql-blank::before {
+  left: 11px;
+}
+
+.c14 .ql-picker-label svg {
+  margin-bottom: 15px !important;
+}
+
+.c14 .ql-toolbar {
+  width: -webkit-max-content;
+  width: -moz-max-content;
+  width: max-content;
+}
+
+.c14 .ql-container {
+  font-size: 16px;
+  font-family: DM Sans;
+}
+
+.c17 {
+  width: 100%;
+  min-height: -webkit-max-content;
+  min-height: -moz-max-content;
+  min-height: max-content;
+  border: 1px solid transparent;
+}
+
+.c17 .ql-editor {
+  font-weight: 400;
+  padding: 10px;
+  overflow: visible;
+}
+
+.c17 .ql-editor.ql-blank::before {
+  left: 11px;
+}
+
+.c17 .ql-picker-label svg {
+  margin-bottom: 15px !important;
+}
+
+.c17 .ql-toolbar {
+  width: -webkit-max-content;
+  width: -moz-max-content;
+  width: max-content;
+}
+
+.c17 .ql-container {
+  font-size: initial;
+  font-family: DM Sans;
+}
+
 .c4 {
   padding: 12px;
   border-style: solid;
@@ -233,8 +299,8 @@ exports[`<QuestionDetails /> should match the snapshot 1`] = `
   background-color: transparent;
   border-color: transparent;
   max-width: initial;
-  padding-right: 12px;
-  padding-left: 12px;
+  padding-right: 0;
+  padding-left: 0;
   font-size: 18px;
   font-weight: 700;
   color: #2F3850;
@@ -334,72 +400,6 @@ exports[`<QuestionDetails /> should match the snapshot 1`] = `
   box-shadow: none;
   outline: none;
   border: 1px solid transparent;
-}
-
-.c14 {
-  width: 100%;
-  min-height: -webkit-max-content;
-  min-height: -moz-max-content;
-  min-height: max-content;
-  border: 1px solid transparent;
-}
-
-.c14 .ql-editor {
-  font-weight: 400;
-  padding: 10px;
-  overflow: visible;
-}
-
-.c14 .ql-editor.ql-blank::before {
-  left: 11px;
-}
-
-.c14 .ql-picker-label svg {
-  margin-bottom: 15px !important;
-}
-
-.c14 .ql-toolbar {
-  width: -webkit-max-content;
-  width: -moz-max-content;
-  width: max-content;
-}
-
-.c14 .ql-container {
-  font-size: 16px;
-  font-family: DM Sans;
-}
-
-.c17 {
-  width: 100%;
-  min-height: -webkit-max-content;
-  min-height: -moz-max-content;
-  min-height: max-content;
-  border: 1px solid transparent;
-}
-
-.c17 .ql-editor {
-  font-weight: 400;
-  padding: 10px;
-  overflow: visible;
-}
-
-.c17 .ql-editor.ql-blank::before {
-  left: 11px;
-}
-
-.c17 .ql-picker-label svg {
-  margin-bottom: 15px !important;
-}
-
-.c17 .ql-toolbar {
-  width: -webkit-max-content;
-  width: -moz-max-content;
-  width: max-content;
-}
-
-.c17 .ql-container {
-  font-size: initial;
-  font-family: DM Sans;
 }
 
 .c6 {

@@ -105,7 +105,7 @@ exports[`<CurrencyQuestion /> Should render and match the snapshot 1`] = `
           </p>
         </label>
         <input
-          class="Input-t9j2q5-0 eBbTVB"
+          class="Input-t9j2q5-0 hkUJku"
           disabled=""
           font-size="15"
           id="currencyAmountLabel"
