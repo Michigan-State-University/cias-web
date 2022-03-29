@@ -59,8 +59,10 @@ const DateRangeChooser = ({
           value={startDate}
           onCheck={updateStartDate}
           fontSize={15}
-          maxDate={endDate}
           styles={inputStyles}
+          selectsStart
+          startDate={startDate}
+          endDate={endDate}
         />
       </Box>
       <Box width={150}>
@@ -78,6 +80,9 @@ const DateRangeChooser = ({
           fontSize={15}
           minDate={startDate}
           styles={inputStyles}
+          selectsEnd
+          startDate={startDate}
+          endDate={endDate}
         />
       </Box>
     </Box>
