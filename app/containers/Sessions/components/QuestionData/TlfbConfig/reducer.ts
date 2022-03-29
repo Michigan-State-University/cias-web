@@ -1,4 +1,5 @@
 import { TlfbConfigDTO } from 'models/Question';
+import { getDiffBetweenDatesInDays } from 'utils/dateUtils';
 
 import {
   UPDATE_DAYS_COUNT,
@@ -34,8 +35,7 @@ const tlfbConfigReducer = (question: TlfbConfigDTO, payload: any) => {
       question.body.data[0].payload.start_date = startDate?.toISOString() || '';
       question.body.data[0].payload.end_date = endDate?.toISOString() || '';
       if (startDate && endDate) {
-        const diffTime = Math.abs(startDate - endDate);
-        const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24));
+        const diffDays = getDiffBetweenDatesInDays(startDate, endDate);
         question.body.data[0].payload.days_count = `${diffDays}`;
       }
       return question;
