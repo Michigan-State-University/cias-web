@@ -29,6 +29,9 @@ import {
 } from 'global/reducers/intervention';
 import { themeColors, colors } from 'theme';
 
+import copy from 'assets/svg/copy.svg';
+
+import { ImageButton } from 'components/Button/ImageButton';
 import messages from '../messages';
 import {
   updateFormula,
@@ -40,6 +43,7 @@ import {
   removeFormulaTarget,
   addNewFormula,
   removeFormula,
+  duplicateFormula,
 } from '../../actions';
 
 const BranchingTab = ({
@@ -60,6 +64,7 @@ const BranchingTab = ({
   onRemoveTarget,
   onAddFormula,
   onRemoveFormula,
+  onDuplicateFormula,
 }) => {
   const { interventionId, sessionId } = params;
   const { sessions: sessionList } = intervention || {};
@@ -91,6 +96,26 @@ const BranchingTab = ({
     return formatMessage(messages.selectQuestion);
   };
 
+  const extraIcon = index => (
+    <ImageButton
+      src={copy}
+      onClick={e => {
+        e.stopPropagation();
+        e.preventDefault();
+        onDuplicateFormula(id, index);
+      }}
+      title={formatMessage(messages.copyFormula)}
+      disabled={disabled}
+      fill={colors.manatee}
+      iconProps={{
+        width: 16,
+        height: 16,
+        mr: 10,
+        mt: 2,
+      }}
+    />
+  );
+
   return (
     <>
       {formulas?.length > 0 &&
@@ -100,6 +125,7 @@ const BranchingTab = ({
             mb={16}
             padding={4}
             label={formatMessage(messages.formula, { index: index + 1 })}
+            extraIcons={extraIcon(index)}
             onDelete={() => onRemoveFormula(id, index)}
             labelBgColor={colors.lightStealBlue}
             labelBgOpacity={0.4}
@@ -168,6 +194,7 @@ BranchingTab.propTypes = {
   onAddTarget: PropTypes.func,
   onUpdateTarget: PropTypes.func,
   onRemoveTarget: PropTypes.func,
+  onDuplicateFormula: PropTypes.func,
   match: PropTypes.object,
   disabled: PropTypes.bool,
 };
@@ -188,6 +215,7 @@ const mapDispatchToProps = {
   onRemoveTarget: removeFormulaTarget,
   onAddFormula: addNewFormula,
   onRemoveFormula: removeFormula,
+  onDuplicateFormula: duplicateFormula,
 };
 
 const withConnect = connect(

@@ -54,3 +54,5 @@ export const REMOVE_FORMULA_TARGET =
 export const ADD_NEW_FORMULA = 'app/EditSessionPage/Settings/ADD_NEW_FORMULA';
 
 export const REMOVE_FORMULA = 'app/EditSessionPage/Settings/REMOVE_FORMULA';
+export const DUPLICATE_FORMULA =
+  'app/EditSessionPage/Settings/DUPLICATE_FORMULA';

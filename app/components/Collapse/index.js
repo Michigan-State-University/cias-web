@@ -38,6 +38,7 @@ const Collapse = ({
   binFillColor,
   binProps,
   arrowColor,
+  extraIcons,
 }) => (
   <StyledCollapseContainer data-cy={cypressId} {...containerProps}>
     <CollapseLabel
@@ -65,6 +66,7 @@ const Collapse = ({
       binFillColor={binFillColor}
       binProps={binProps}
       arrowColor={arrowColor}
+      extraIcons={extraIcons}
     />
     <CollapseContent
       child={children}
@@ -105,6 +107,7 @@ Collapse.propTypes = {
   binFillColor: PropTypes.string,
   binProps: PropTypes.object,
   arrowColor: PropTypes.string,
+  extraIcons: PropTypes.node,
 };
 
 Collapse.defaultProps = {

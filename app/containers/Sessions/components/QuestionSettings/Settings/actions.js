@@ -21,6 +21,7 @@ import {
   REMOVE_FORMULA_TARGET,
   ADD_NEW_FORMULA,
   REMOVE_FORMULA,
+  DUPLICATE_FORMULA,
 } from './constants';
 
 export const updateSettings = (property, value) =>
@@ -162,5 +163,11 @@ export const addNewFormula = questionId =>
 export const removeFormula = (questionId, formulaIndex) =>
   updateQuestionSettings({
     type: REMOVE_FORMULA,
+    data: { questionId, formulaIndex },
+  });
+
+export const duplicateFormula = (questionId, formulaIndex) =>
+  updateQuestionSettings({
+    type: DUPLICATE_FORMULA,
     data: { questionId, formulaIndex },
   });

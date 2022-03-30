@@ -1,3 +1,4 @@
+import cloneDeep from 'lodash/cloneDeep';
 import { instantiateBlockForType } from 'models/Session/utils';
 import { getNarratorPositionForANewBlock } from 'utils/getNarratorPosition';
 
@@ -23,6 +24,7 @@ import {
   REMOVE_FORMULA_TARGET,
   ADD_NEW_FORMULA,
   REMOVE_FORMULA,
+  DUPLICATE_FORMULA,
 } from './constants';
 import reflectionFormulaBlockReducer from './Components/Blocks/Reflections/reducer';
 
@@ -310,6 +312,16 @@ const questionSettingsReducer = (allQuestions, payload, questionIndex) => {
       const newFormulas = question.formulas.filter(
         (_, deleteIndex) => deleteIndex !== formulaIndex,
       );
+      question.formulas = newFormulas;
+      return question;
+    }
+
+    case DUPLICATE_FORMULA: {
+      const { formulaIndex } = payload.data;
+      const newFormulas = [
+        ...question.formulas,
+        cloneDeep(question.formulas[formulaIndex]),
+      ];
       question.formulas = newFormulas;
       return question;
     }

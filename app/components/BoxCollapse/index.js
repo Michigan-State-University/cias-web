@@ -28,6 +28,7 @@ export const BoxCollapse = ({
   binProps,
   contentStyle,
   shouldBeOpenOnStart,
+  extraIcons,
   ...styleProps
 }) => {
   const [isOpened, setOpened] = useState(!!shouldBeOpenOnStart);
@@ -37,6 +38,7 @@ export const BoxCollapse = ({
     <Box bg={colors.lightBlue} width="100%" {...styleProps}>
       <Collapse
         isOpened={isOpened}
+        extraIcons={extraIcons}
         isBinInCollapse
         color={labelBgColor}
         bgOpacity={labelBgOpacity}
@@ -114,6 +116,7 @@ BoxCollapse.propTypes = {
   binProps: PropTypes.object,
   contentStyle: PropTypes.object,
   shouldBeOpenOnStart: PropTypes.bool,
+  extraIcons: PropTypes.node,
 };
 
 export default BoxCollapse;
