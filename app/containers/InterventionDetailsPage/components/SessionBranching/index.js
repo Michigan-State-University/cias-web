@@ -22,6 +22,9 @@ import BranchingLayout from 'containers/BranchingLayout';
 import BoxCollapse from 'components/BoxCollapse';
 import HoverableBox from 'components/Box/HoverableBox';
 import PlusCircle from 'components/Circle/PlusCircle';
+import { ImageButton } from 'components/Button/ImageButton';
+
+import copy from 'assets/svg/copy.svg';
 
 import { colors, themeColors } from 'theme';
 
@@ -44,6 +47,7 @@ import {
   makeSelectQuestionGroupsSessionId,
   getQuestionGroupsRequest,
 } from 'global/reducers/questionGroups';
+import { duplicateFormula } from 'global/reducers/intervention/sessionSettings/actions';
 import messages from './messages';
 
 function SessionBranching({
@@ -67,6 +71,7 @@ function SessionBranching({
   onDeleteTarget,
   onAddFormula,
   onRemoveFormula,
+  onDuplicateFormula,
 }) {
   const displayPatternTargetText = target => {
     if (!target || target.id === '')
@@ -86,6 +91,26 @@ function SessionBranching({
       fetchQuestions(id);
     }
   };
+
+  const extraIcon = index => (
+    <ImageButton
+      src={copy}
+      onClick={e => {
+        e.stopPropagation();
+        e.preventDefault();
+        onDuplicateFormula(id, index);
+      }}
+      title={formatMessage(messages.copyFormula)}
+      disabled={disabled}
+      fill={colors.manatee}
+      iconProps={{
+        width: 16,
+        height: 16,
+        mr: 10,
+        mt: 2,
+      }}
+    />
+  );
 
   return (
     <>
@@ -126,6 +151,7 @@ function SessionBranching({
                   label={formatMessage(messages.formulaTitle, {
                     index: index + 1,
                   })}
+                  extraIcons={extraIcon(index)}
                   onDelete={() => onRemoveFormula(id, index)}
                   labelBgColor={colors.lightStealBlue}
                   labelBgOpacity={0.4}
@@ -203,6 +229,7 @@ SessionBranching.propTypes = {
   onDeleteTarget: PropTypes.func,
   onAddFormula: PropTypes.func,
   onRemoveFormula: PropTypes.func,
+  onDuplicateFormula: PropTypes.func,
 };
 
 const mapStateToProps = createStructuredSelector({
@@ -223,6 +250,7 @@ const mapDispatchToProps = {
   onDeleteTarget: removeFormulaTarget,
   onAddFormula: addNewFormula,
   onRemoveFormula: removeFormula,
+  onDuplicateFormula: duplicateFormula,
 };
 
 const withConnect = connect(
