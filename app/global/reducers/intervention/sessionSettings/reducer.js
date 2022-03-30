@@ -14,6 +14,7 @@ import {
   REMOVE_FORMULA_TARGET,
   ADD_NEW_FORMULA,
   REMOVE_FORMULA,
+  DUPLICATE_FORMULA,
 } from './constants';
 
 const sessionSettingsReducer = (session, payload) => {
@@ -123,6 +124,16 @@ const sessionSettingsReducer = (session, payload) => {
       const newFormulas = clonedSession.formulas.filter(
         (_, deleteIndex) => deleteIndex !== formulaIndex,
       );
+      clonedSession.formulas = newFormulas;
+      return clonedSession;
+    }
+
+    case DUPLICATE_FORMULA: {
+      const { formulaIndex } = payload.data;
+      const newFormulas = [
+        ...clonedSession.formulas,
+        cloneDeep(clonedSession.formulas[formulaIndex]),
+      ];
       clonedSession.formulas = newFormulas;
       return clonedSession;
     }

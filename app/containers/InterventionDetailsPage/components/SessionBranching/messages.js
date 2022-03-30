@@ -40,4 +40,8 @@ export default defineMessages({
     id: `${scope}.formulaTitle`,
     defaultMessage: 'Formula { index }',
   },
+  copyFormula: {
+    id: `${scope}.copyFormula`,
+    defaultMessage: 'Copy formula',
+  },
 });

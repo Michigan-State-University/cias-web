@@ -190,4 +190,8 @@ export default defineMessages({
     id: `${scope}.formula`,
     defaultMessage: 'Formula { index }',
   },
+  copyFormula: {
+    id: `${scope}.copyFormula`,
+    defaultMessage: 'Copy formula',
+  },
 });

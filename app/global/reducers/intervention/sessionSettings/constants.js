@@ -44,3 +44,6 @@ export const REMOVE_FORMULA_TARGET =
 export const ADD_NEW_FORMULA = 'app/Dashboard/SessionSettings/ADD_NEW_FORMULA';
 
 export const REMOVE_FORMULA = 'app/Dashboard/SessionSettings/REMOVE_FORMULA';
+
+export const DUPLICATE_FORMULA =
+  'app/Dashboard/SessionSettings/DUPLICATE_FORMULA';

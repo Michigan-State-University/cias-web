@@ -14,6 +14,7 @@ import {
   REMOVE_FORMULA_TARGET,
   ADD_NEW_FORMULA,
   REMOVE_FORMULA,
+  DUPLICATE_FORMULA,
 } from './constants';
 
 export const updateFormula = (value, sessionId, formulaIndex) =>
@@ -160,6 +161,15 @@ export const addNewFormula = sessionId =>
     {
       type: ADD_NEW_FORMULA,
       data: { sessionId },
+    },
+    ['formulas'],
+  );
+
+export const duplicateFormula = (sessionId, formulaIndex) =>
+  updateSessionSettings(
+    {
+      type: DUPLICATE_FORMULA,
+      data: { sessionId, formulaIndex },
     },
     ['formulas'],
   );

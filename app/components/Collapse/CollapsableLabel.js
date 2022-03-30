@@ -40,6 +40,7 @@ const CollapseLabel = ({
   binFillColor,
   binProps,
   arrowColor,
+  extraIcons,
 }) => {
   const { formatMessage } = useIntl();
   const currentImg = isOpened ? onShowImg : onHideImg;
@@ -95,6 +96,7 @@ const CollapseLabel = ({
         >
           {label}
           <Box display="flex" align="center">
+            {extraIcons && extraIcons}
             {isBinInCollapse && onDelete && deleteIcon}
             {displayedImage}
           </Box>
@@ -131,6 +133,7 @@ CollapseLabel.propTypes = {
   binFillColor: PropTypes.string,
   binProps: PropTypes.object,
   arrowColor: PropTypes.string,
+  extraIcons: PropTypes.object,
 };
 
 CollapseLabel.defaultProps = {
