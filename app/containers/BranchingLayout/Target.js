@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useCallback, useState } from 'react';
 import PropTypes from 'prop-types';
 import ArrowDropdown from 'components/ArrowDropdown';
 import Box from 'components/Box';
@@ -29,86 +29,93 @@ const Target = ({
   onAddTarget,
   isOnlyTarget,
   bg,
-}) => (
-  <Box
-    display="flex"
-    align="center"
-    justify={sessionBranching ? 'start' : 'end'}
-    ml={sessionBranching ? 80 : 0}
-  >
-    <Box
-      opacity={onAddTarget ? 0.3 : 1}
-      display="flex"
-      align="center"
-      justify="end"
-      mr={isOnlyTarget ? 25 : 0}
-    >
-      {!isOnlyTarget && (
-        <Box bg={bg || colors.linkWater} mx={6} position="relative">
-          <StyledInput
-            hasError={invalidPercentage}
-            width={56}
-            height={50}
-            disabled={disabled}
-            cursor={onAddTarget ? 'pointer' : undefined}
-            px={0}
-            py={12}
-            textAlign="center"
-            placeholder=".."
-            value={target ? target.probability : ''}
-            validator={numericValidator}
-            onBlur={probability =>
-              onUpdateTarget({ probability }, formulaIndex)
-            }
-            sufix="%"
-          />
-        </Box>
-      )}
-      <Text whiteSpace="pre" mr={6} fontWeight="bold">
-        {formatMessage(messages.percentGoTo)}
-      </Text>
-      <ArrowDropdown
-        bg={colors.white}
-        disabled={disabled}
-        width={isOnlyTarget ? 120 : 95}
-        positionFrom="right"
-        setOpen={value => {
-          handleDropdownClick(value, uniqueTargetIndex);
-        }}
-        isOpened={isChooserOpened}
-        dropdownContent={
-          <Box data-cy={`select-question-${uniqueTargetIndex}`}>
-            <EllipsisText
-              text={displayPatternTargetText(target)}
-              fontSize={13}
-              width={isOnlyTarget ? 80 : 60}
+}) => {
+  const [width, setWidth] = useState(0);
+
+  const onRefChange = useCallback(node => setWidth(node?.offsetWidth ?? 0), []);
+
+  const maxSelectTextWidth = width - 35;
+
+  return (
+    <Box display="flex" align="center" width="100%">
+      <Box
+        opacity={onAddTarget ? 0.3 : 1}
+        display="flex"
+        align="center"
+        width="100%"
+      >
+        {!isOnlyTarget && (
+          <Box bg={bg || colors.linkWater} mr={6} ml={88} position="relative">
+            <StyledInput
+              hasError={invalidPercentage}
+              width={56}
+              height={50}
+              disabled={disabled}
+              cursor={onAddTarget ? 'pointer' : undefined}
+              px={0}
+              py={12}
+              textAlign="center"
+              placeholder=".."
+              value={target ? target.probability : ''}
+              validator={numericValidator}
+              onBlur={probability =>
+                onUpdateTarget({ probability }, formulaIndex)
+              }
+              sufix="%"
             />
           </Box>
-        }
-      >
-        <TargetQuestionChooser
-          sessionBranching={sessionBranching}
-          isVisible={isChooserOpened}
-          target={target}
-          onClick={value => {
-            setTargetChooserOpen(-1);
-            onUpdateTarget(value, formulaIndex);
-          }}
+        )}
+        <Text whiteSpace="pre" mr={6} fontWeight="bold">
+          {formatMessage(messages.percentGoTo)}
+        </Text>
+        <Box ref={onRefChange} width="100%">
+          <ArrowDropdown
+            bg={colors.white}
+            disabled={disabled}
+            width="100%"
+            positionFrom="right"
+            setOpen={value => {
+              handleDropdownClick(value, uniqueTargetIndex);
+            }}
+            isOpened={isChooserOpened}
+            dropdownContent={
+              <Box
+                data-cy={`select-question-${uniqueTargetIndex}`}
+                width="100%"
+              >
+                <EllipsisText
+                  text={displayPatternTargetText(target)}
+                  fontSize={13}
+                  width={maxSelectTextWidth}
+                />
+              </Box>
+            }
+          >
+            <TargetQuestionChooser
+              sessionBranching={sessionBranching}
+              isVisible={isChooserOpened}
+              target={target}
+              onClick={value => {
+                setTargetChooserOpen(-1);
+                onUpdateTarget(value, formulaIndex);
+              }}
+            />
+          </ArrowDropdown>
+        </Box>
+      </Box>
+      {!disabled && !isOnlyTarget && (
+        <Img
+          width="15px"
+          height="15px"
+          ml={10}
+          src={binNoBg}
+          onClick={onDeleteTarget}
+          clickable
         />
-      </ArrowDropdown>
+      )}
     </Box>
-    {!disabled && !isOnlyTarget && (
-      <Img
-        width="15px"
-        height="15px"
-        ml={10}
-        src={binNoBg}
-        onClick={onDeleteTarget}
-        clickable
-      />
-    )}
-  </Box>
-);
+  );
+};
 
 Target.propTypes = {
   formulaIndex: PropTypes.number,

@@ -16,40 +16,40 @@ import {
   REMOVE_FORMULA,
 } from './constants';
 
-export const updateFormula = (value, sessionId) =>
+export const updateFormula = (value, sessionId, formulaIndex) =>
   updateSessionSettings(
     {
       type: UPDATE_FORMULA,
-      data: { value, sessionId },
+      data: { value, sessionId, formulaIndex },
     },
-    ['formula'],
+    ['formulas'],
   );
 
-export const addFormulaCase = sessionId =>
+export const addFormulaCase = (sessionId, formulaIndex) =>
   updateSessionSettings(
     {
       type: ADD_FORMULA_CASE,
-      data: { sessionId },
+      data: { sessionId, formulaIndex },
     },
-    ['formula'],
+    ['formulas'],
   );
 
-export const removeFormulaCase = (index, sessionId) =>
+export const removeFormulaCase = (index, sessionId, formulaIndex) =>
   updateSessionSettings(
     {
       type: REMOVE_FORMULA_CASE,
-      data: { index, sessionId },
+      data: { index, sessionId, formulaIndex },
     },
-    ['formula'],
+    ['formulas'],
   );
 
-export const updateFormulaCase = (index, value, sessionId) =>
+export const updateFormulaCase = (index, value, sessionId, formulaIndex) =>
   updateSessionSettings(
     {
       type: UPDATE_FORMULA_CASE,
-      data: { index, value, sessionId },
+      data: { index, value, sessionId, formulaIndex },
     },
-    ['formula'],
+    ['formulas'],
   );
 
 export const changeFormulaStatus = (value, sessionId) =>
@@ -117,10 +117,10 @@ export const updateDaysAfterDateVariable = (value, sessionId) =>
     ],
   );
 
-export const addFormulaTarget = (sessionId, patternIndex) =>
+export const addFormulaTarget = (sessionId, patternIndex, formulaIndex) =>
   updateSessionSettings({
     type: ADD_FORMULA_TARGET,
-    data: { sessionId, patternIndex },
+    data: { sessionId, patternIndex, formulaIndex },
   });
 
 export const updateFormulaTarget = (
@@ -128,26 +128,38 @@ export const updateFormulaTarget = (
   patternIndex,
   targetIndex,
   targetData,
+  formulaIndex,
 ) =>
   updateSessionSettings({
     type: UPDATE_FORMULA_TARGET,
-    data: { sessionId, patternIndex, targetIndex, targetData },
+    data: { sessionId, patternIndex, targetIndex, targetData, formulaIndex },
   });
 
-export const removeFormulaTarget = (sessionId, patternIndex, targetIndex) =>
+export const removeFormulaTarget = (
+  sessionId,
+  patternIndex,
+  targetIndex,
+  formulaIndex,
+) =>
   updateSessionSettings({
     type: REMOVE_FORMULA_TARGET,
-    data: { sessionId, patternIndex, targetIndex },
+    data: { sessionId, patternIndex, targetIndex, formulaIndex },
   });
 
 export const removeFormula = (sessionId, formulaIndex) =>
-  updateSessionSettings({
-    type: REMOVE_FORMULA,
-    data: { sessionId, formulaIndex },
-  });
+  updateSessionSettings(
+    {
+      type: REMOVE_FORMULA,
+      data: { sessionId, formulaIndex },
+    },
+    ['formulas'],
+  );
 
 export const addNewFormula = sessionId =>
-  updateSessionSettings({
-    type: ADD_NEW_FORMULA,
-    data: { sessionId },
-  });
+  updateSessionSettings(
+    {
+      type: ADD_NEW_FORMULA,
+      data: { sessionId },
+    },
+    ['formulas'],
+  );

@@ -33,10 +33,12 @@ describe('intervention reducer', () => {
 
   const mockIntervention = {
     id: 'test-1',
-    formula: {
-      payload: '',
-      patterns: [mockPattern],
-    },
+    formulas: [
+      {
+        payload: '',
+        patterns: [mockPattern],
+      },
+    ],
     settings: {
       formula: '',
     },
@@ -61,14 +63,14 @@ describe('intervention reducer', () => {
   it('UPDATE_SESSION_SETTINGS_REQUEST -> UPDATE_FORMULA', () => {
     const payloadValue = 'test';
 
-    const session = createSession('formula.payload', payloadValue);
+    const session = createSession('formulas[0].payload', payloadValue);
     const updateState = mockState(session);
     set(updateState, 'loaders.editIntervention', true);
 
     expect(
       interventionReducer(
         mockState(mockIntervention),
-        createAction(UPDATE_FORMULA, { value: payloadValue }),
+        createAction(UPDATE_FORMULA, { value: payloadValue, formulaIndex: 0 }),
       ),
     ).toEqual(updateState);
   });
@@ -83,12 +85,14 @@ describe('intervention reducer', () => {
     expect(
       interventionReducer(
         mockState(mockIntervention),
-        createAction(CHANGE_FORMULA_STATUS, { value: payloadValue }),
+        createAction(CHANGE_FORMULA_STATUS, {
+          value: payloadValue,
+        }),
       ),
     ).toEqual(updateState);
   });
   it('UPDATE_SESSION_SETTINGS_REQUEST -> ADD_FORMULA_CASE', () => {
-    const session = createSession('formula.patterns', [
+    const session = createSession('formulas[0].patterns', [
       mockPattern,
       {
         match: '=',
@@ -101,7 +105,7 @@ describe('intervention reducer', () => {
     expect(
       interventionReducer(
         mockState(mockIntervention),
-        createAction(ADD_FORMULA_CASE, null),
+        createAction(ADD_FORMULA_CASE, { formulaIndex: 0 }),
       ),
     ).toEqual(updateState);
   });
@@ -111,27 +115,31 @@ describe('intervention reducer', () => {
       match: 'edited-match',
       target: { type: 'Session', id: 'edited-id' },
     };
-    const session = createSession('formula.patterns', [editedPattern]);
+    const session = createSession('formulas[0].patterns', [editedPattern]);
     const updateState = mockState(session);
     set(updateState, 'loaders.editIntervention', true);
 
     expect(
       interventionReducer(
         mockState(mockIntervention),
-        createAction(UPDATE_FORMULA_CASE, { index: 0, value: editedPattern }),
+        createAction(UPDATE_FORMULA_CASE, {
+          index: 0,
+          value: editedPattern,
+          formulaIndex: 0,
+        }),
       ),
     ).toEqual(updateState);
   });
 
   it('UPDATE_SESSION_SETTINGS_REQUEST -> REMOVE_FORMULA_CASE', () => {
-    const session = createSession('formula.patterns', []);
+    const session = createSession('formulas[0].patterns', []);
     const updateState = mockState(session);
     set(updateState, 'loaders.editIntervention', true);
 
     expect(
       interventionReducer(
         mockState(mockIntervention),
-        createAction(REMOVE_FORMULA_CASE, { index: 0 }),
+        createAction(REMOVE_FORMULA_CASE, { index: 0, formulaIndex: 0 }),
       ),
     ).toEqual(updateState);
   });

@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useMemo } from 'react';
+import React, { useState, useEffect, useMemo, useCallback } from 'react';
 import PropTypes from 'prop-types';
 import { compose } from 'redux';
 import { connect } from 'react-redux';
@@ -53,6 +53,11 @@ const TargetQuestionChooser = props => {
     sessionIndex,
     questionGroups,
   } = props;
+
+  const [width, setWidth] = useState(0);
+
+  const onRefChange = useCallback(node => setWidth(node?.offsetWidth ?? 0), []);
+
   const { id, position, question_group_id: questionGroupId } = selectedQuestion;
   const currentGroup = questionGroups.find(
     ({ id: groupId }) => groupId === questionGroupId,
@@ -185,6 +190,7 @@ const TargetQuestionChooser = props => {
             {filteredSessionList &&
               filteredSessionList.map((session, index) => (
                 <Row
+                  ref={onRefChange}
                   data-testid={`${id}-select-target-session-el-${index}`}
                   data-cy={`choose-session-${index}`}
                   key={`${id}-select-target-session-${index}`}
@@ -213,6 +219,7 @@ const TargetQuestionChooser = props => {
                           ? colors.black
                           : colors.grey
                       }
+                      width={width}
                     />
                   </Box>
                   {isCurrentSession(session) && (
