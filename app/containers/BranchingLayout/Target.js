@@ -13,6 +13,7 @@ import messages from './messages';
 import TargetQuestionChooser from './TargetQuestionChooser';
 
 const Target = ({
+  formulaIndex,
   target,
   disabled,
   onUpdateTarget,
@@ -47,6 +48,7 @@ const Target = ({
           <StyledInput
             hasError={invalidPercentage}
             width={56}
+            height={50}
             disabled={disabled}
             cursor={onAddTarget ? 'pointer' : undefined}
             px={0}
@@ -55,7 +57,9 @@ const Target = ({
             placeholder=".."
             value={target ? target.probability : ''}
             validator={numericValidator}
-            onBlur={probability => onUpdateTarget({ probability })}
+            onBlur={probability =>
+              onUpdateTarget({ probability }, formulaIndex)
+            }
             sufix="%"
           />
         </Box>
@@ -66,7 +70,7 @@ const Target = ({
       <ArrowDropdown
         bg={colors.white}
         disabled={disabled}
-        width={isOnlyTarget ? 140 : 120}
+        width={isOnlyTarget ? 120 : 95}
         positionFrom="right"
         setOpen={value => {
           handleDropdownClick(value, uniqueTargetIndex);
@@ -77,7 +81,7 @@ const Target = ({
             <EllipsisText
               text={displayPatternTargetText(target)}
               fontSize={13}
-              width={isOnlyTarget ? 110 : 85}
+              width={isOnlyTarget ? 80 : 60}
             />
           </Box>
         }
@@ -88,7 +92,7 @@ const Target = ({
           target={target}
           onClick={value => {
             setTargetChooserOpen(-1);
-            onUpdateTarget(value);
+            onUpdateTarget(value, formulaIndex);
           }}
         />
       </ArrowDropdown>
@@ -107,6 +111,7 @@ const Target = ({
 );
 
 Target.propTypes = {
+  formulaIndex: PropTypes.number,
   target: PropTypes.object,
   disabled: PropTypes.bool,
   onUpdateTarget: PropTypes.func,

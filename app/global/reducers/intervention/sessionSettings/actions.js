@@ -12,6 +12,8 @@ import {
   ADD_FORMULA_TARGET,
   UPDATE_FORMULA_TARGET,
   REMOVE_FORMULA_TARGET,
+  ADD_NEW_FORMULA,
+  REMOVE_FORMULA,
 } from './constants';
 
 export const updateFormula = (value, sessionId) =>
@@ -136,4 +138,16 @@ export const removeFormulaTarget = (sessionId, patternIndex, targetIndex) =>
   updateSessionSettings({
     type: REMOVE_FORMULA_TARGET,
     data: { sessionId, patternIndex, targetIndex },
+  });
+
+export const removeFormula = (sessionId, formulaIndex) =>
+  updateSessionSettings({
+    type: REMOVE_FORMULA,
+    data: { sessionId, formulaIndex },
+  });
+
+export const addNewFormula = sessionId =>
+  updateSessionSettings({
+    type: ADD_NEW_FORMULA,
+    data: { sessionId },
   });

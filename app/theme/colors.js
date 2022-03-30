@@ -54,6 +54,7 @@ const colors = {
   sonicSilver: '#6B707C',
   vermilion: '#D2371D',
   aliceBlue: '#F1F4F9',
+  lightBlue: '#F4F8FF',
   electricPurple: '#B727EA',
   red: '#BE4745',
   red5: '#FCF6F6',
@@ -63,6 +64,7 @@ const colors = {
   green10: '#EAF5F4',
   orange: '#EB7900',
   orange5: '#FEF8F2',
+  lightStealBlue: '#B3C1E1',
 };
 
 const themeColors = {

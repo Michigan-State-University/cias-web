@@ -17,6 +17,7 @@ const Collapse = ({
   disabled,
   onShowImg,
   onHideImg,
+  width,
   height,
   py,
   px,
@@ -28,9 +29,19 @@ const Collapse = ({
   animatedImg,
   'data-cy': cypressId,
   dragHandleProps,
+  contentProps,
+  containerProps,
+  isBinInCollapse,
+  binImage,
+  binMargin,
+  disableAnimation,
+  binFillColor,
+  binProps,
+  arrowColor,
 }) => (
-  <StyledCollapseContainer data-cy={cypressId}>
+  <StyledCollapseContainer data-cy={cypressId} {...containerProps}>
     <CollapseLabel
+      width={width}
       label={label}
       onToggle={onToggle}
       isOpened={isOpened}
@@ -48,8 +59,19 @@ const Collapse = ({
       index={index}
       animatedImg={animatedImg}
       dragHandleProps={dragHandleProps}
+      isBinInCollapse={isBinInCollapse}
+      binImage={binImage}
+      binMargin={binMargin}
+      binFillColor={binFillColor}
+      binProps={binProps}
+      arrowColor={arrowColor}
     />
-    <CollapseContent child={children} isOpened={isOpened} />
+    <CollapseContent
+      child={children}
+      isOpened={isOpened}
+      contentProps={contentProps}
+      disableAnimation={disableAnimation}
+    />
   </StyledCollapseContainer>
 );
 
@@ -64,6 +86,7 @@ Collapse.propTypes = {
   onHideImg: PropTypes.any,
   imgWithBackground: PropTypes.bool,
   height: PropTypes.string,
+  width: PropTypes.string,
   py: PropTypes.number,
   px: PropTypes.number,
   bgOpacity: PropTypes.number,
@@ -73,6 +96,15 @@ Collapse.propTypes = {
   animatedImg: PropTypes.bool,
   'data-cy': PropTypes.string,
   dragHandleProps: PropTypes.object,
+  contentProps: PropTypes.object,
+  containerProps: PropTypes.object,
+  isBinInCollapse: PropTypes.bool,
+  binImage: PropTypes.node,
+  binMargin: PropTypes.number,
+  disableAnimation: PropTypes.bool,
+  binFillColor: PropTypes.string,
+  binProps: PropTypes.object,
+  arrowColor: PropTypes.string,
 };
 
 Collapse.defaultProps = {
@@ -84,6 +116,7 @@ Collapse.defaultProps = {
   px: 12,
   py: 12,
   deleteActive: true,
+  disableAnimation: false,
 };
 
 export default Collapse;

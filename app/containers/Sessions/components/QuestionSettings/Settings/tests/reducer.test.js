@@ -82,10 +82,12 @@ describe('Settings reducer tests', () => {
       },
       image_url: null,
       video_url: null,
-      formula: {
-        payload: '',
-        patterns: ['first'],
-      },
+      formulas: [
+        {
+          payload: '',
+          patterns: ['first'],
+        },
+      ],
       body: {
         data: [
           {
@@ -262,6 +264,7 @@ describe('Settings reducer tests', () => {
       type: UPDATE_FORMULA,
       data: {
         value: 'test',
+        formulaIndex: 0,
       },
     };
     const resultQuestion = questionSettingsReducer(
@@ -269,21 +272,24 @@ describe('Settings reducer tests', () => {
       payload,
       questionIndex,
     );
-    expect(resultQuestion.formula.payload).toEqual(payload.data.value);
+    expect(resultQuestion.formulas[0].payload).toEqual(payload.data.value);
   });
 
   it('ADD_FORMULA_CASE', () => {
     const allQuestions = cloneDeep(mockQuestions);
     const payload = {
       type: ADD_FORMULA_CASE,
+      data: {
+        formulaIndex: 0,
+      },
     };
     const resultQuestion = questionSettingsReducer(
       allQuestions,
       payload,
       questionIndex,
     );
-    expect(resultQuestion.formula.patterns.length).toEqual(
-      mockQuestions[0].formula.patterns.length + 1,
+    expect(resultQuestion.formulas[0].patterns.length).toEqual(
+      mockQuestions[0].formulas[0].patterns.length + 1,
     );
   });
 
@@ -294,6 +300,7 @@ describe('Settings reducer tests', () => {
       data: {
         index: 0,
         value: 'test',
+        formulaIndex: 0,
       },
     };
     const resultQuestion = questionSettingsReducer(
@@ -301,7 +308,7 @@ describe('Settings reducer tests', () => {
       payload,
       questionIndex,
     );
-    expect(resultQuestion.formula.patterns[0]).toEqual(payload.data.value);
+    expect(resultQuestion.formulas[0].patterns[0]).toEqual(payload.data.value);
   });
 
   it('REMOVE_FORMULA_CASE', () => {
@@ -310,6 +317,7 @@ describe('Settings reducer tests', () => {
       type: REMOVE_FORMULA_CASE,
       data: {
         index: 0,
+        formulaIndex: 0,
       },
     };
     const resultQuestion = questionSettingsReducer(
@@ -317,8 +325,8 @@ describe('Settings reducer tests', () => {
       payload,
       questionIndex,
     );
-    expect(resultQuestion.formula.patterns.length).toEqual(
-      mockQuestions[0].formula.patterns.length - 1,
+    expect(resultQuestion.formulas[0].patterns.length).toEqual(
+      mockQuestions[0].formulas[0].patterns.length - 1,
     );
   });
 

@@ -182,4 +182,12 @@ export default defineMessages({
     id: `${scope}.textLimitSettingsPlaceholder`,
     defaultMessage: 'E.g. 250',
   },
+  addNewFormula: {
+    id: `${scope}.addNewFormula`,
+    defaultMessage: 'Add new formula',
+  },
+  formula: {
+    id: `${scope}.formula`,
+    defaultMessage: 'Formula { index }',
+  },
 });

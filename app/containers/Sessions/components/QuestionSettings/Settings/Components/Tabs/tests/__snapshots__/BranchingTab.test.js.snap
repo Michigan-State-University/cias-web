@@ -3,62 +3,31 @@
 exports[`<BranchingTab /> Should render and match the snapshot 1`] = `
 <div>
   <div
-    class="Column-sc-4zswzq-0 ekpwZH"
+    class="Box-sc-1vhutan-0 HoverableBox-zvip6a-0 donflz"
   >
     <div
-      class="Box-sc-1vhutan-0 gwcMBX"
+      class="Box-sc-1vhutan-0 dvfkZg"
     >
       <div
-        class="Row-y1cs0u-0 ddPUgf"
+        class="Row-y1cs0u-0 ecllgQ"
       >
-        Formula
         <div
-          class="Box-sc-1vhutan-0 eamgEw"
+          class="StyledCircle-sc-1dov7hv-0 jkyOQV"
+          color="#FFFFFF"
+          opacity="1"
         >
-          <div
-            class="Box-sc-1vhutan-0 gfyFJD"
-          >
-            <p
-              class="Text-e4p0w3-0 lmzfCF"
-              color="#B727EA"
-              font-weight="bold"
-            >
-              + Add variable
-            </p>
-          </div>
-          <div
-            class="Box-sc-1vhutan-0 bvPvIe"
-            display="none"
-            width="auto"
-          >
-            <div
-              class="Row-y1cs0u-0 dskFsL"
-            >
-              <div
-                class="Box-sc-1vhutan-0 fOicvH"
-              />
-            </div>
-          </div>
+          <img
+            class="Img-sc-55j3su-0 cDhXoN"
+            src="IMAGE_MOCK"
+          />
         </div>
-      </div>
-      <div
-        class="Box-sc-1vhutan-0 fuNALT"
-        width="100%"
-      >
-        <textarea
-          class="TextArea-sc-175uiux-0 kmGeZJ"
-          data-cy="text-area"
-          height="auto"
-          placeholder="Enter formula here... (You can use mathematical operators +, -, *, /)"
-          rows="5"
-          type="multiline"
-          width="100%"
-        />
-      </div>
-      <div
-        class="Box-sc-1vhutan-0 styled__DashedBox-g59fuj-0 kvIAfn hmvGQw"
-      >
-        + Add case
+        <p
+          class="Text-e4p0w3-0 cFbubw"
+          color="#B727EA"
+          font-weight="bold"
+        >
+          Add new formula
+        </p>
       </div>
     </div>
   </div>

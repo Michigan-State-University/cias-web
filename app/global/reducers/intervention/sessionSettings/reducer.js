@@ -12,6 +12,8 @@ import {
   ADD_FORMULA_TARGET,
   UPDATE_FORMULA_TARGET,
   REMOVE_FORMULA_TARGET,
+  ADD_NEW_FORMULA,
+  REMOVE_FORMULA,
 } from './constants';
 
 const sessionSettingsReducer = (session, payload) => {
@@ -81,6 +83,23 @@ const sessionSettingsReducer = (session, payload) => {
         patternIndex
       ].target.filter((_, deleteIndex) => deleteIndex !== targetIndex);
       clonedSession.formula.patterns[patternIndex].target = newTargets;
+      return clonedSession;
+    }
+
+    case ADD_NEW_FORMULA: {
+      clonedSession.formulas = [
+        ...clonedSession.formulas,
+        { payload: '', patterns: [] },
+      ];
+      return clonedSession;
+    }
+
+    case REMOVE_FORMULA: {
+      const { formulaIndex } = payload.data;
+      const newFormulas = clonedSession.formulas.filter(
+        (_, deleteIndex) => deleteIndex !== formulaIndex,
+      );
+      clonedSession.formulas = newFormulas;
       return clonedSession;
     }
 

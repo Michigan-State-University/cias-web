@@ -245,7 +245,7 @@ export const questionsReducer = (state = initialState, action) =>
             draft.questions[questionIndex].title,
             action.payload.newType,
           ),
-          formula: { payload: '', patterns: [] },
+          formulas: [{ payload: '', patterns: [] }],
         };
         break;
       }

@@ -21,6 +21,8 @@ import {
   ADD_FORMULA_TARGET,
   UPDATE_FORMULA_TARGET,
   REMOVE_FORMULA_TARGET,
+  ADD_NEW_FORMULA,
+  REMOVE_FORMULA,
 } from './constants';
 import reflectionFormulaBlockReducer from './Components/Blocks/Reflections/reducer';
 
@@ -166,34 +168,60 @@ const questionSettingsReducer = (allQuestions, payload, questionIndex) => {
       };
     }
 
-    case UPDATE_FORMULA:
+    case UPDATE_FORMULA: {
+      const { formulaIndex, value } = payload.data;
+
+      if (!question.formulas) {
+        return {
+          ...question,
+          formulas: [{ patterns: [], payload: value }],
+        };
+      }
+
       return {
         ...question,
-        formula: { ...question.formula, payload: payload.data.value },
+        formulas: [
+          ...question.formulas.slice(0, formulaIndex),
+          { ...question.formulas[formulaIndex], payload: value },
+          ...question.formulas.slice(formulaIndex + 1),
+        ],
       };
+    }
 
-    case ADD_FORMULA_CASE:
+    case ADD_FORMULA_CASE: {
+      const { formulaIndex } = payload.data;
+
       return {
         ...question,
-        formula: {
-          ...question.formula,
-          patterns: [
-            ...question.formula.patterns,
-            {
-              match: '=',
-              target: [{ type: 'Question', id: '', probability: '100' }],
-            },
-          ],
-        },
+        formulas: [
+          ...question.formulas.slice(0, formulaIndex),
+          {
+            ...question.formulas[formulaIndex],
+            patterns: [
+              ...question.formulas[formulaIndex].patterns,
+              {
+                match: '=',
+                target: [{ type: 'Question', id: '', probability: '100' }],
+              },
+            ],
+          },
+          ...question.formulas.slice(formulaIndex + 1),
+        ],
       };
+    }
 
-    case UPDATE_FORMULA_CASE:
-      question.formula.patterns[payload.data.index] = payload.data.value;
+    case UPDATE_FORMULA_CASE: {
+      const { formulaIndex } = payload.data;
+      question.formulas[formulaIndex].patterns[payload.data.index] =
+        payload.data.value;
       return question;
+    }
 
-    case REMOVE_FORMULA_CASE:
-      question.formula.patterns.splice(payload.data.index, 1);
+    case REMOVE_FORMULA_CASE: {
+      const { formulaIndex } = payload.data;
+      question.formulas[formulaIndex].patterns.splice(payload.data.index, 1);
       return question;
+    }
 
     case UPDATE_NARRATOR_MOVEMENT: {
       const positionToSet = payload.data.position;
@@ -236,28 +264,53 @@ const questionSettingsReducer = (allQuestions, payload, questionIndex) => {
       };
     }
 
-    case ADD_FORMULA_TARGET:
-      return question.formula.patterns[payload.data.patternIndex].target.push({
-        type: 'Question',
-        id: '',
-        probability: '0',
-      });
+    case ADD_FORMULA_TARGET: {
+      const { formulaIndex, patternIndex } = payload.data;
+      return question.formulas[formulaIndex].patterns[patternIndex].target.push(
+        {
+          type: 'Question',
+          id: '',
+          probability: '0',
+        },
+      );
+    }
 
     case UPDATE_FORMULA_TARGET: {
-      const { patternIndex, targetIndex, targetData } = payload.data;
-      question.formula.patterns[patternIndex].target[targetIndex] = targetData;
+      const {
+        patternIndex,
+        targetIndex,
+        targetData,
+        formulaIndex,
+      } = payload.data;
+      question.formulas[formulaIndex].patterns[patternIndex].target[
+        targetIndex
+      ] = targetData;
       return question;
     }
 
     case REMOVE_FORMULA_TARGET: {
-      const { patternIndex, targetIndex } = payload.data;
-      const newTargets = question.formula.patterns[patternIndex].target.filter(
-        (_, deleteIndex) => deleteIndex !== targetIndex,
-      );
-      question.formula.patterns[patternIndex].target =
+      const { patternIndex, targetIndex, formulaIndex } = payload.data;
+      const newTargets = question.formulas[formulaIndex].patterns[
+        patternIndex
+      ].target.filter((_, deleteIndex) => deleteIndex !== targetIndex);
+      question.formulas[formulaIndex].patterns[patternIndex].target =
         newTargets.length === 1
           ? [{ ...newTargets[0], probability: '100' }]
           : newTargets;
+      return question;
+    }
+
+    case ADD_NEW_FORMULA: {
+      question.formulas = [...question.formulas, { payload: '', patterns: [] }];
+      return question;
+    }
+
+    case REMOVE_FORMULA: {
+      const { formulaIndex } = payload.data;
+      const newFormulas = question.formulas.filter(
+        (_, deleteIndex) => deleteIndex !== formulaIndex,
+      );
+      question.formulas = newFormulas;
       return question;
     }
 
