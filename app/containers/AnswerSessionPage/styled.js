@@ -22,17 +22,17 @@ export const AnswerInterventionContent = styled.div`
   align-items: flex-start;
   display: flex;
   position: relative;
+  flex-grow: 1;
 `;
 
 export const ScreenWrapper = styled.div`
-  align-items: flex-start;
   display: flex;
   max-width: ${(props) =>
     props.isFullSize ? '100%' : `${elements.draggableContainerSize}px`};
   min-height: ${elements.draggableContainerSize}px;
   position: relative;
   width: 100%;
-  height: fit-content;
+  height: 100%;
 `;
 
 const getStyles = (previewMode) => css`

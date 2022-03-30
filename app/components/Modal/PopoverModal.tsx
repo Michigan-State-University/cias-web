@@ -4,20 +4,14 @@
  *
  */
 
-import React, {
-  useEffect,
-  ReactNode,
-  useRef,
-  useLayoutEffect,
-  useState,
-} from 'react';
+import React, { useEffect, ReactNode, useRef, useLayoutEffect } from 'react';
 import {
   arrow,
   shift,
   offset,
   useFloating,
-  getScrollParents,
-  autoPlacement,
+  autoUpdate,
+  flip,
 } from '@floating-ui/react-dom';
 import capitalize from 'lodash/capitalize';
 
@@ -60,7 +54,6 @@ const PopoverModal = ({
   disableClose = false,
 }: Props): JSX.Element => {
   const arrowRef = useRef<HTMLElement>();
-  const [element, setElement] = useState<HTMLElement | null>();
 
   const {
     x,
@@ -69,7 +62,7 @@ const PopoverModal = ({
     floating,
     strategy,
     middlewareData: { arrow: arrowMiddleware },
-    refs: { floating: floatingRef },
+    refs: { floating: floatingRef, reference: referenceRef },
     placement,
     update,
   } = useFloating({
@@ -79,7 +72,10 @@ const PopoverModal = ({
       shift({
         padding: 16,
       }),
-      autoPlacement(),
+      flip({
+        fallbackPlacements: ['left', 'top', 'bottom'],
+        fallbackStrategy: 'bestFit',
+      }),
       ...(arrowRef.current
         ? [arrow({ element: arrowRef.current, padding: 5 })]
         : []),
@@ -100,53 +96,34 @@ const PopoverModal = ({
   // must be synchronous to properly detect outside clicks
   useLayoutEffect(() => {
     if (!referenceElement) {
-      setElement(undefined);
+      reference(null);
       return;
     }
 
     const currentElement = document.getElementById(referenceElement);
     if (currentElement) {
       reference(currentElement);
-      setElement(currentElement);
     }
   }, [referenceElement]);
 
   useEffect(() => {
-    if (element) {
-      // necessary when reference changes from one to another (from not null value to not null value)
-      update();
-
+    if (referenceRef.current) {
       window.addEventListener('click', handleClick, false);
 
       return () => {
         window.removeEventListener('click', handleClick, false);
       };
     }
-  }, [element]);
+  }, [referenceRef.current]);
 
   // Update on scroll and resize for all relevant nodes
   useEffect(() => {
-    if (!element || !floatingRef.current) {
+    if (!referenceRef.current || !floatingRef.current) {
       return;
     }
 
-    const parents = [
-      ...getScrollParents(element),
-      ...getScrollParents(floatingRef.current),
-    ];
-
-    parents.forEach((parent) => {
-      parent.addEventListener('scroll', update, false);
-      parent.addEventListener('resize', update, false);
-    });
-
-    return () => {
-      parents.forEach((parent) => {
-        parent.removeEventListener('scroll', update);
-        parent.removeEventListener('resize', update);
-      });
-    };
-  }, [element, floatingRef.current]);
+    return autoUpdate(referenceRef.current, floatingRef.current, update);
+  }, [referenceRef.current, floatingRef.current]);
 
   useKeyPress(KeyCodes.ESC, handleClose);
 
@@ -154,11 +131,14 @@ const PopoverModal = ({
     const { target } = event;
 
     const isInside =
-      !!element &&
-      GeometryHelper.doesRectContainPoint(element.getBoundingClientRect(), {
-        x: event.x,
-        y: event.y,
-      });
+      !!referenceRef.current &&
+      GeometryHelper.doesRectContainPoint(
+        referenceRef.current.getBoundingClientRect() as DOMRect,
+        {
+          x: event.x,
+          y: event.y,
+        },
+      );
 
     if (
       floatingRef &&
@@ -168,7 +148,7 @@ const PopoverModal = ({
       handleClose();
   };
 
-  if (!element) return <></>;
+  if (!referenceElement) return <></>;
 
   return (
     <Portal id={portalId ?? MODAL_PORTAL_ID}>
