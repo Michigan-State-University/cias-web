@@ -8,6 +8,8 @@ import {
   EDIT_SESSION_REQUEST,
   EDIT_SESSION_SUCCESS,
 } from 'global/reducers/session/constants';
+import { findIndexById } from 'utils/arrayUtils';
+
 import sessionSettingsReducer from './sessionSettings/reducer';
 import {
   FETCH_INTERVENTION_REQUEST,
@@ -215,18 +217,18 @@ export const interventionReducer = (state = initialState, action) =>
         draft.currentSessionIndex = action.payload.index;
         break;
       case UPDATE_SESSION_SETTINGS_REQUEST: {
-        const sessionIndex = state.intervention.sessions.findIndex(
-          session => session.id === action.payload.data.sessionId,
+        const sessionIndex = findIndexById(
+          state.intervention.sessions,
+          action.payload.data.sessionId,
         );
+
         if (sessionIndex !== -1) {
           draft.currentSessionIndex = sessionIndex;
           draft.loaders.editIntervention = true;
-          draft.intervention.sessions[sessionIndex] = {
-            ...sessionSettingsReducer(
-              draft.intervention.sessions[sessionIndex],
-              action.payload,
-            ),
-          };
+          draft.intervention.sessions[sessionIndex] = sessionSettingsReducer(
+            draft.intervention.sessions[sessionIndex],
+            action.payload,
+          );
         }
         break;
       }

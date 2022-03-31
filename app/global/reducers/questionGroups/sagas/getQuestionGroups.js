@@ -26,7 +26,7 @@ function* getQuestionsGroups({ payload: { sessionId } }) {
     const sortedQuestions = sortBy(questions, 'position');
     const sortedGroups = sortBy(groupsWithoutQuestions, 'position');
     const mappedQuestions = sortedQuestions.map(q =>
-      objectKeysToSnakeCase(q, ['sha256', 'endPosition']),
+      objectKeysToSnakeCase(q, ['sha256', 'endPosition', 'pauseDuration']),
     );
     yield put(getQuestionsSuccess(mappedQuestions));
     if (!isEmpty(sortedQuestions) && sortedQuestions[0].narrator.blocks[0]) {

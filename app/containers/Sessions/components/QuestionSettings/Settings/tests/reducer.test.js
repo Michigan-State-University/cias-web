@@ -106,7 +106,6 @@ describe('Settings reducer tests', () => {
       id: 'test',
     },
   ];
-  const questionIndex = 'test';
 
   it('UPDATE_QUESTION_SETTINGS', () => {
     const allQuestions = cloneDeep(mockQuestions);
@@ -115,9 +114,9 @@ describe('Settings reducer tests', () => {
       data: { property: 'test', value: true },
     };
     const resultQuestion = questionSettingsReducer(
-      allQuestions,
+      allQuestions[0],
       payload,
-      questionIndex,
+      allQuestions,
     );
     expect(resultQuestion.settings.test).toEqual(payload.data.value);
   });
@@ -129,9 +128,9 @@ describe('Settings reducer tests', () => {
       data: { property: 'test', value: true },
     };
     const resultQuestion = questionSettingsReducer(
-      allQuestions,
+      allQuestions[0],
       payload,
-      questionIndex,
+      allQuestions,
     );
     expect(resultQuestion.narrator.settings.test).toEqual(payload.data.value);
   });
@@ -143,9 +142,9 @@ describe('Settings reducer tests', () => {
       data: { type: bodyAnimationType, groupIds: ['test'] },
     };
     const resultQuestion = questionSettingsReducer(
-      allQuestions,
+      allQuestions[0],
       payload,
-      questionIndex,
+      allQuestions,
     );
     expect(resultQuestion.narrator.blocks.length).toEqual(
       mockQuestions[0].narrator.blocks.length + 1,
@@ -159,9 +158,9 @@ describe('Settings reducer tests', () => {
       data: { index: 0 },
     };
     const resultQuestion = questionSettingsReducer(
-      allQuestions,
+      allQuestions[0],
       payload,
-      questionIndex,
+      allQuestions,
     );
     expect(resultQuestion.narrator.blocks.length).toEqual(
       mockQuestions[0].narrator.blocks.length - 1,
@@ -175,9 +174,9 @@ describe('Settings reducer tests', () => {
       data: { index: 0, value: 'test' },
     };
     const resultQuestion = questionSettingsReducer(
-      allQuestions,
+      allQuestions[0],
       payload,
-      questionIndex,
+      allQuestions,
     );
     expect(
       resultQuestion.narrator.blocks[payload.data.index].animation,
@@ -191,9 +190,9 @@ describe('Settings reducer tests', () => {
       data: { index: 0, value: { test: 'test' } },
     };
     const resultQuestion = questionSettingsReducer(
-      allQuestions,
+      allQuestions[0],
       payload,
-      questionIndex,
+      allQuestions,
     );
     expect(resultQuestion.narrator.blocks[payload.data.index].test).toEqual(
       payload.data.value.test,
@@ -207,9 +206,9 @@ describe('Settings reducer tests', () => {
       data: { blockIndex: 1, reflectionIndex: 0, value: { test: 'test' } },
     };
     const resultQuestion = questionSettingsReducer(
-      allQuestions,
+      allQuestions[0],
       payload,
-      questionIndex,
+      allQuestions,
     );
     expect(
       resultQuestion.narrator.blocks[payload.data.blockIndex].reflections[
@@ -228,9 +227,9 @@ describe('Settings reducer tests', () => {
       },
     };
     const resultQuestion = questionSettingsReducer(
-      allQuestions,
+      allQuestions[0],
       payload,
-      questionIndex,
+      allQuestions,
     );
     expect(resultQuestion.narrator.blocks[payload.data.index].type).toEqual(
       payload.data.switchTo,
@@ -248,9 +247,9 @@ describe('Settings reducer tests', () => {
       },
     };
     const resultQuestion = questionSettingsReducer(
-      allQuestions,
+      allQuestions[0],
       payload,
-      questionIndex,
+      allQuestions,
     );
 
     expect(resultQuestion.narrator.blocks[payload.data.index]).toEqual(
@@ -268,9 +267,9 @@ describe('Settings reducer tests', () => {
       },
     };
     const resultQuestion = questionSettingsReducer(
-      allQuestions,
+      allQuestions[0],
       payload,
-      questionIndex,
+      allQuestions,
     );
     expect(resultQuestion.formulas[0].payload).toEqual(payload.data.value);
   });
@@ -284,9 +283,9 @@ describe('Settings reducer tests', () => {
       },
     };
     const resultQuestion = questionSettingsReducer(
-      allQuestions,
+      allQuestions[0],
       payload,
-      questionIndex,
+      allQuestions,
     );
     expect(resultQuestion.formulas[0].patterns.length).toEqual(
       mockQuestions[0].formulas[0].patterns.length + 1,
@@ -304,9 +303,9 @@ describe('Settings reducer tests', () => {
       },
     };
     const resultQuestion = questionSettingsReducer(
-      allQuestions,
+      allQuestions[0],
       payload,
-      questionIndex,
+      allQuestions,
     );
     expect(resultQuestion.formulas[0].patterns[0]).toEqual(payload.data.value);
   });
@@ -321,9 +320,9 @@ describe('Settings reducer tests', () => {
       },
     };
     const resultQuestion = questionSettingsReducer(
-      allQuestions,
+      allQuestions[0],
       payload,
-      questionIndex,
+      allQuestions,
     );
     expect(resultQuestion.formulas[0].patterns.length).toEqual(
       mockQuestions[0].formulas[0].patterns.length - 1,
@@ -340,9 +339,9 @@ describe('Settings reducer tests', () => {
       },
     };
     const resultQuestion = questionSettingsReducer(
-      allQuestions,
+      allQuestions[0],
       payload,
-      questionIndex,
+      allQuestions,
     );
     expect(
       resultQuestion.narrator.blocks[payload.data.index].endPosition,
@@ -361,9 +360,9 @@ describe('Settings reducer tests', () => {
       },
     };
     const resultQuestion = questionSettingsReducer(
-      allQuestions,
+      allQuestions[0],
       payload,
-      questionIndex,
+      allQuestions,
     );
     expect(resultQuestion.narrator.blocks).toEqual(
       payload.data.reorderedBlocks,
@@ -380,9 +379,9 @@ describe('Settings reducer tests', () => {
       },
     };
     const resultQuestion = questionSettingsReducer(
-      allQuestions,
+      allQuestions[0],
       payload,
-      questionIndex,
+      allQuestions,
     );
     expect(
       resultQuestion.narrator.blocks[payload.data.index].pauseDuration,
@@ -395,9 +394,9 @@ describe('Settings reducer tests', () => {
       type: undefined,
     };
     const resultQuestion = questionSettingsReducer(
-      allQuestions,
+      allQuestions[0],
       payload,
-      questionIndex,
+      allQuestions,
     );
     expect(resultQuestion).toEqual(mockQuestions[0]);
   });

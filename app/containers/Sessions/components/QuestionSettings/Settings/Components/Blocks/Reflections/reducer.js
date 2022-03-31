@@ -1,6 +1,7 @@
-import set from 'lodash/set';
-import get from 'lodash/get';
+import produce from 'immer';
 import assign from 'lodash/assign';
+
+import { removeAt } from 'utils/arrayUtils';
 
 import {
   UPDATE_FORMULA,
@@ -9,39 +10,40 @@ import {
   UPDATE_FORMULA_CASE,
 } from './constants';
 
-/* eslint-disable default-case, no-param-reassign */
-const reflectionFormulaBlockReducer = (block, { data, type }) => {
-  const { index, value } = data;
+/* eslint-disable no-param-reassign */
+const reflectionFormulaBlockReducer = (block, { data, type }) =>
+  produce(block, draft => {
+    const { index, value } = data;
 
-  switch (type) {
-    case UPDATE_FORMULA:
-      set(block, 'payload', value);
-      return block;
+    switch (type) {
+      case UPDATE_FORMULA: {
+        draft.payload = value;
+        break;
+      }
 
-    case ADD_FORMULA_CASE:
-      block.reflections.push({
-        match: '=',
-        text: [],
-        audio_urls: [],
-        sha256: [],
-      });
-      return block;
+      case ADD_FORMULA_CASE: {
+        draft.reflections.push({
+          match: '=',
+          text: [],
+          audio_urls: [],
+          sha256: [],
+        });
+        break;
+      }
 
-    case REMOVE_FORMULA_CASE:
-      block.reflections.splice(index, 1);
-      return block;
+      case REMOVE_FORMULA_CASE: {
+        removeAt(draft.reflections, index);
+        break;
+      }
 
-    case UPDATE_FORMULA_CASE:
-      set(
-        block,
-        ['reflections', index],
-        assign(get(block, ['reflections', index]), value),
-      );
-      return block;
+      case UPDATE_FORMULA_CASE: {
+        assign(draft.reflections[index], value);
+        break;
+      }
 
-    default:
-      return block;
-  }
-};
+      default:
+        return draft;
+    }
+  });
 
 export default reflectionFormulaBlockReducer;

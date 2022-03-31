@@ -1,6 +1,10 @@
+import produce from 'immer';
+import assign from 'lodash/assign';
 import cloneDeep from 'lodash/cloneDeep';
+
 import { instantiateBlockForType } from 'models/Session/utils';
 import { getNarratorPositionForANewBlock } from 'utils/getNarratorPosition';
+import { removeAt } from 'utils/arrayUtils';
 
 import {
   UPDATE_QUESTION_SETTINGS,
@@ -28,307 +32,213 @@ import {
 } from './constants';
 import reflectionFormulaBlockReducer from './Components/Blocks/Reflections/reducer';
 
-/* eslint-disable default-case, no-param-reassign */
-const questionSettingsReducer = (allQuestions, payload, questionIndex) => {
-  const question = allQuestions.find(({ id }) => id === questionIndex);
-  switch (payload.type) {
-    case UPDATE_QUESTION_SETTINGS:
-      return {
-        ...question,
-        settings: {
-          ...question.settings,
-          [payload.data.property]: payload.data.value,
-        },
-      };
+/* eslint-disable no-param-reassign */
+const questionSettingsReducer = (question, { type, data }, allQuestions) =>
+  produce(question, draft => {
+    switch (type) {
+      // SETTINGS TAB
 
-    case UPDATE_NARRATOR_SETTINGS:
-      return {
-        ...question,
-        narrator: {
-          ...question.narrator,
-          settings: {
-            ...question.narrator.settings,
-            [payload.data.property]: payload.data.value,
-          },
-        },
-      };
+      case UPDATE_QUESTION_SETTINGS: {
+        const { property, value } = data;
 
-    case ADD_BLOCK:
-      const pos = getNarratorPositionForANewBlock(
-        allQuestions,
-        questionIndex,
-        payload.data.groupIds,
-      );
-      return {
-        ...question,
-        narrator: {
-          ...question.narrator,
-          blocks: [
-            ...question.narrator.blocks,
-            instantiateBlockForType(payload.data.type, pos, question),
-          ],
-        },
-      };
-
-    case REMOVE_BLOCK: {
-      const cloneBlocks = question.narrator.blocks.map(obj => ({ ...obj }));
-      cloneBlocks.splice(payload.data.index, 1);
-      return {
-        ...question,
-        narrator: {
-          ...question.narrator,
-          blocks: cloneBlocks,
-        },
-      };
-    }
-
-    case UPDATE_NARRATOR_ANIMATION: {
-      const cloneBlocks = question.narrator.blocks.map(obj => ({ ...obj }));
-      cloneBlocks[payload.data.index].animation = payload.data.value;
-      return {
-        ...question,
-        narrator: {
-          ...question.narrator,
-          blocks: cloneBlocks,
-        },
-      };
-    }
-
-    case UPDATE_BLOCK_SETTINGS: {
-      const cloneBlocks = question.narrator.blocks.map(obj => ({ ...obj }));
-      cloneBlocks[payload.data.index] = {
-        ...cloneBlocks[payload.data.index],
-        ...payload.data.value,
-      };
-
-      return {
-        ...question,
-        narrator: {
-          ...question.narrator,
-          blocks: cloneBlocks,
-        },
-      };
-    }
-
-    case UPDATE_REFLECTION: {
-      const cloneBlocks = question.narrator.blocks.map(obj => ({ ...obj }));
-      const reflection =
-        cloneBlocks[payload.data.blockIndex].reflections[
-          payload.data.reflectionIndex
-        ];
-
-      cloneBlocks[payload.data.blockIndex].reflections[
-        payload.data.reflectionIndex
-      ] = {
-        ...reflection,
-        ...payload.data.value,
-      };
-
-      return {
-        ...question,
-        narrator: {
-          ...question.narrator,
-          blocks: cloneBlocks,
-        },
-      };
-    }
-
-    case SWITCH_SPEECH_REFLECTION: {
-      const cloneBlocks = question.narrator.blocks.map(obj => ({ ...obj }));
-      const newBlockType = payload.data.switchTo;
-
-      cloneBlocks[payload.data.index] = {
-        ...instantiateBlockForType(newBlockType),
-        endPosition: cloneBlocks[payload.data.index].endPosition,
-        animation: cloneBlocks[payload.data.index].animation,
-        action: cloneBlocks[payload.data.index].action,
-      };
-
-      return {
-        ...question,
-        narrator: {
-          ...question.narrator,
-          blocks: cloneBlocks,
-        },
-      };
-    }
-
-    case UPDATE_REFLECTION_FORMULA: {
-      const cloneBlocks = question.narrator.blocks.map(obj => ({ ...obj }));
-
-      cloneBlocks[payload.data.index] = reflectionFormulaBlockReducer(
-        cloneBlocks[payload.data.index],
-        payload.data,
-      );
-
-      return {
-        ...question,
-        narrator: {
-          ...question.narrator,
-          blocks: cloneBlocks,
-        },
-      };
-    }
-
-    case UPDATE_FORMULA: {
-      const { formulaIndex, value } = payload.data;
-
-      if (!question.formulas) {
-        return {
-          ...question,
-          formulas: [{ patterns: [], payload: value }],
-        };
+        draft.settings[property] = value;
+        break;
       }
 
-      return {
-        ...question,
-        formulas: [
-          ...question.formulas.slice(0, formulaIndex),
-          { ...question.formulas[formulaIndex], payload: value },
-          ...question.formulas.slice(formulaIndex + 1),
-        ],
-      };
-    }
+      // NARRATOR TAB
 
-    case ADD_FORMULA_CASE: {
-      const { formulaIndex } = payload.data;
+      case UPDATE_NARRATOR_SETTINGS: {
+        const { property, value } = data;
 
-      return {
-        ...question,
-        formulas: [
-          ...question.formulas.slice(0, formulaIndex),
-          {
-            ...question.formulas[formulaIndex],
-            patterns: [
-              ...question.formulas[formulaIndex].patterns,
-              {
-                match: '=',
-                target: [{ type: 'Question', id: '', probability: '100' }],
-              },
-            ],
-          },
-          ...question.formulas.slice(formulaIndex + 1),
-        ],
-      };
-    }
+        draft.narrator.settings[property] = value;
+        break;
+      }
 
-    case UPDATE_FORMULA_CASE: {
-      const { formulaIndex } = payload.data;
-      question.formulas[formulaIndex].patterns[payload.data.index] =
-        payload.data.value;
-      return question;
-    }
+      case ADD_BLOCK: {
+        const { groupIds, type: blockType } = data;
 
-    case REMOVE_FORMULA_CASE: {
-      const { formulaIndex } = payload.data;
-      question.formulas[formulaIndex].patterns.splice(payload.data.index, 1);
-      return question;
-    }
+        const position = getNarratorPositionForANewBlock(
+          allQuestions,
+          question.id,
+          groupIds,
+        );
+        const block = instantiateBlockForType(blockType, position, question);
 
-    case UPDATE_NARRATOR_MOVEMENT: {
-      const positionToSet = payload.data.position;
-      // update position that animates to in current animation block
-      const cloneBlocks = question.narrator.blocks.map(obj => ({ ...obj }));
-      cloneBlocks[payload.data.index].endPosition = positionToSet;
+        draft.narrator.blocks.push(block);
+        break;
+      }
 
-      return {
-        ...question,
-        narrator: {
-          ...question.narrator,
-          blocks: cloneBlocks,
-        },
-      };
-    }
+      case REMOVE_BLOCK: {
+        const { index } = data;
 
-    case REORDER_NARRATOR_BLOCKS: {
-      const { reorderedBlocks } = payload.data;
+        removeAt(draft.narrator.blocks, index);
+        break;
+      }
 
-      return {
-        ...question,
-        narrator: {
-          ...question.narrator,
-          blocks: reorderedBlocks,
-        },
-      };
-    }
+      case UPDATE_NARRATOR_ANIMATION: {
+        const { index, value } = data;
 
-    case UPDATE_PAUSE_DURATION: {
-      const { duration, index } = payload.data;
+        draft.narrator.blocks[index].animation = value;
+        break;
+      }
 
-      const cloneBlocks = question.narrator.blocks.map(obj => ({ ...obj }));
-      cloneBlocks[index].pauseDuration = duration;
-      return {
-        ...question,
-        narrator: {
-          ...question.narrator,
-          blocks: cloneBlocks,
-        },
-      };
-    }
+      case UPDATE_BLOCK_SETTINGS: {
+        const { index, value } = data;
 
-    case ADD_FORMULA_TARGET: {
-      const { formulaIndex, patternIndex } = payload.data;
-      return question.formulas[formulaIndex].patterns[patternIndex].target.push(
-        {
+        assign(draft.narrator.blocks[index], value);
+        break;
+      }
+
+      case UPDATE_REFLECTION: {
+        const { blockIndex, reflectionIndex, value } = data;
+
+        assign(
+          draft.narrator.blocks[blockIndex].reflections[reflectionIndex],
+          value,
+        );
+        break;
+      }
+
+      case SWITCH_SPEECH_REFLECTION: {
+        const { switchTo, index } = data;
+
+        const newBlock = instantiateBlockForType(switchTo);
+        const { endPosition, animation, action } = draft.narrator.blocks[index];
+
+        draft.narrator.blocks[index] = {
+          ...newBlock,
+          endPosition,
+          animation,
+          action,
+        };
+        break;
+      }
+
+      case UPDATE_REFLECTION_FORMULA: {
+        const { index } = data;
+        const block = draft.narrator.blocks[index];
+
+        draft.narrator.blocks[index] = reflectionFormulaBlockReducer(
+          block,
+          data,
+        );
+        break;
+      }
+
+      case UPDATE_NARRATOR_MOVEMENT: {
+        const { index, position } = data;
+
+        // update position that animates to in current animation block
+        draft.narrator.blocks[index].endPosition = position;
+        break;
+      }
+
+      case REORDER_NARRATOR_BLOCKS: {
+        const { reorderedBlocks } = data;
+
+        draft.narrator.blocks = reorderedBlocks;
+        break;
+      }
+
+      case UPDATE_PAUSE_DURATION: {
+        const { duration, index } = data;
+
+        draft.narrator.blocks[index].pauseDuration = duration;
+        break;
+      }
+
+      // BRANCHING TAB
+
+      case UPDATE_FORMULA: {
+        const { formulaIndex, value } = data;
+
+        if (!draft.formulas) {
+          draft.formulas = [{ patterns: [], payload: value }];
+          break;
+        }
+
+        draft.formulas[formulaIndex].payload = value;
+        break;
+      }
+
+      case ADD_FORMULA_CASE: {
+        const { formulaIndex } = data;
+
+        draft.formulas[formulaIndex].patterns.push({
+          match: '=',
+          target: [{ type: 'Question', id: '', probability: '100' }],
+        });
+        break;
+      }
+
+      case UPDATE_FORMULA_CASE: {
+        const { formulaIndex, index, value } = data;
+
+        draft.formulas[formulaIndex].patterns[index] = value;
+        break;
+      }
+
+      case REMOVE_FORMULA_CASE: {
+        const { formulaIndex, index } = data;
+
+        removeAt(draft.formulas[formulaIndex].patterns, index);
+        break;
+      }
+
+      case ADD_FORMULA_TARGET: {
+        const { formulaIndex, patternIndex } = data;
+
+        draft.formulas[formulaIndex].patterns[patternIndex].target.push({
           type: 'Question',
           id: '',
           probability: '0',
-        },
-      );
-    }
+        });
+        break;
+      }
 
-    case UPDATE_FORMULA_TARGET: {
-      const {
-        patternIndex,
-        targetIndex,
-        targetData,
-        formulaIndex,
-      } = payload.data;
-      question.formulas[formulaIndex].patterns[patternIndex].target[
-        targetIndex
-      ] = targetData;
-      return question;
-    }
+      case UPDATE_FORMULA_TARGET: {
+        const { patternIndex, targetIndex, targetData, formulaIndex } = data;
 
-    case REMOVE_FORMULA_TARGET: {
-      const { patternIndex, targetIndex, formulaIndex } = payload.data;
-      const newTargets = question.formulas[formulaIndex].patterns[
-        patternIndex
-      ].target.filter((_, deleteIndex) => deleteIndex !== targetIndex);
-      question.formulas[formulaIndex].patterns[patternIndex].target =
-        newTargets.length === 1
-          ? [{ ...newTargets[0], probability: '100' }]
-          : newTargets;
-      return question;
-    }
+        draft.formulas[formulaIndex].patterns[patternIndex].target[
+          targetIndex
+        ] = targetData;
+        break;
+      }
 
-    case ADD_NEW_FORMULA: {
-      question.formulas = [...question.formulas, { payload: '', patterns: [] }];
-      return question;
-    }
+      case REMOVE_FORMULA_TARGET: {
+        const { patternIndex, targetIndex, formulaIndex } = data;
+        const { target } = draft.formulas[formulaIndex].patterns[patternIndex];
 
-    case REMOVE_FORMULA: {
-      const { formulaIndex } = payload.data;
-      const newFormulas = question.formulas.filter(
-        (_, deleteIndex) => deleteIndex !== formulaIndex,
-      );
-      question.formulas = newFormulas;
-      return question;
-    }
+        removeAt(target, targetIndex);
+        if (target.length === 1) {
+          target[0].probability = '100';
+        }
+        break;
+      }
 
-    case DUPLICATE_FORMULA: {
-      const { formulaIndex } = payload.data;
-      const newFormulas = [
-        ...question.formulas,
-        cloneDeep(question.formulas[formulaIndex]),
-      ];
-      question.formulas = newFormulas;
-      return question;
-    }
+      case ADD_NEW_FORMULA: {
+        draft.formulas.push({ payload: '', patterns: [] });
+        break;
+      }
 
-    default:
-      return question;
-  }
-};
+      case REMOVE_FORMULA: {
+        const { formulaIndex } = data;
+
+        removeAt(draft.formulas, formulaIndex);
+        break;
+      }
+
+      case DUPLICATE_FORMULA: {
+        const { formulaIndex } = data;
+
+        const newFormula = cloneDeep(draft.formulas[formulaIndex]);
+        draft.formulas.push(newFormula);
+        break;
+      }
+
+      default:
+        return draft;
+    }
+  });
 
 export default questionSettingsReducer;

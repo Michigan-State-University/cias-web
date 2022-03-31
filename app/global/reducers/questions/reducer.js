@@ -201,7 +201,10 @@ export const questionsReducer = (state = initialState, action) =>
         updateItemById(
           draft.questions,
           action.payload.questionId,
-          question => ({ ...question, image_alt: action.payload.description }),
+          question => ({
+            ...question,
+            image_alt: action.payload.description,
+          }),
         );
         break;
       case UPDATE_QUESTION_IMAGE_SUCCESS:
@@ -452,14 +455,11 @@ export const questionsReducer = (state = initialState, action) =>
           ({ id }) => id === draft.selectedQuestion,
         );
 
-        const updatedQuestion = {
-          ...state.questions[selectedQuestionIndex],
-          ...questionSettingsReducer(
-            state.questions,
-            action.payload,
-            state.selectedQuestion,
-          ),
-        };
+        const updatedQuestion = questionSettingsReducer(
+          state.questions[selectedQuestionIndex],
+          action.payload,
+          state.questions,
+        );
 
         draft.questions[selectedQuestionIndex] = assignFromQuestionTTS(
           cloneDeep(updatedQuestion),
