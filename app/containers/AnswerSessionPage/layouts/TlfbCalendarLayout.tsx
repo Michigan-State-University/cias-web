@@ -1,5 +1,5 @@
 import React, { forwardRef, useMemo } from 'react';
-import dayjs, { Dayjs } from 'dayjs';
+import { Dayjs } from 'dayjs';
 
 import { TlfbConfigBody } from 'models/Question';
 import { CalendarData } from 'models/Tlfb';
@@ -16,6 +16,7 @@ import { CalendarRef } from 'components/Calendar/types';
 import Loader from 'components/Loader';
 
 import { TlfbContainer } from './styled';
+import { getTlfbDateRange } from '../utils';
 
 type Props = {
   smallText: string;
@@ -56,16 +57,10 @@ const TlfbCalendarLayout = forwardRef<CalendarRef, Props>(
       onSelectDay(undefined);
     };
 
-    const tlfbStartDate = useMemo(() => {
-      const {
-        data: [
-          {
-            payload: { days_count: daysCount },
-          },
-        ],
-      } = tlfbConfig;
-      return dayjs().subtract(+daysCount, 'day');
-    }, [tlfbConfig.data]);
+    const { startDate, endDate } = useMemo(
+      () => getTlfbDateRange(tlfbConfig),
+      [tlfbConfig],
+    );
 
     return (
       <TlfbContainer>
@@ -80,10 +75,10 @@ const TlfbCalendarLayout = forwardRef<CalendarRef, Props>(
         />
         <Calendar
           ref={ref}
-          startDate={tlfbStartDate}
+          startDate={startDate}
           onSelectDay={onSelectDay}
           selectedDay={selectedDay}
-          endDate={dayjs().subtract(1, 'day')}
+          endDate={endDate}
           calendarData={calendarData}
           disableManualDayClick={disableModalClose}
         />

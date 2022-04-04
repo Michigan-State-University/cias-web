@@ -47,28 +47,46 @@ const getOldestDate = (dates: CalendarData) =>
     ),
   );
 
+export const getTlfbDateRange = (tlfbConfig: CamelToSnake<TlfbConfigBody>) => {
+  const {
+    data: [
+      {
+        payload: {
+          days_count: daysCount,
+          choose_date_range: chooseDateRange,
+          start_date: startDate,
+          end_date: endDate,
+        },
+      },
+    ],
+  } = tlfbConfig;
+
+  if (chooseDateRange)
+    return {
+      startDate: dayjs(startDate),
+      endDate: dayjs(endDate),
+    };
+
+  return {
+    startDate: dayjs().subtract(+daysCount, 'day'),
+    endDate: dayjs().subtract(1, 'day'),
+  };
+};
+
 export const getCalendarMetadata = (
   tlfbConfig: CamelToSnake<TlfbConfigBody>,
   calendarData: CalendarData,
 ) => {
-  const {
-    data: [
-      {
-        payload: { days_count: daysCount },
-      },
-    ],
-  } = tlfbConfig;
-  const yesterday = dayjs().subtract(1, 'day');
+  const { startDate, endDate } = getTlfbDateRange(tlfbConfig);
   const oldestFilledDate = getOldestDate(calendarData);
   const datesWithAnswers = pickBy(calendarData, (date) => !isNil(date.answer));
   const oldestFilledAnswerDate = getOldestDate(datesWithAnswers);
-  const oldestAllowedDate = dayjs().subtract(+daysCount, 'day');
   const isEveryAnswerFilled =
-    oldestFilledAnswerDate?.isSame(oldestAllowedDate, 'day') ?? false;
+    oldestFilledAnswerDate?.isSame(startDate, 'day') ?? false;
 
   return {
-    yesterday,
-    oldestAllowedDate,
+    startDate,
+    endDate,
     oldestFilledDate,
     oldestFilledAnswerDate,
     isEveryAnswerFilled,
