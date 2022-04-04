@@ -11,4 +11,8 @@ export default defineMessages({
     id: `${scope}.document`,
     defaultMessage: 'See helping materials',
   },
+  showPreview: {
+    id: `${scope}.showPreview`,
+    defaultMessage: 'Show preview',
+  },
 });

@@ -7,6 +7,7 @@ import Img from 'components/Img';
 import Text from 'components/Text';
 import Row from 'components/Row';
 import Modal from 'components/Modal';
+import Divider from 'components/Divider';
 
 import Document from 'assets/svg/green-document.svg';
 import StandardDrinks from 'assets/images/standard-drinks.jpeg';
@@ -15,9 +16,13 @@ import messages from './messages';
 
 export type TlfbHelpingMaterialsProps = {
   mobile?: boolean;
+  researcher?: boolean;
 };
 
-const TlfbHelpingMaterials = ({ mobile }: TlfbHelpingMaterialsProps) => {
+const TlfbHelpingMaterials = ({
+  mobile,
+  researcher,
+}: TlfbHelpingMaterialsProps) => {
   const [modalVisible, setModalVisible] = useState(false);
   const { formatMessage } = useIntl();
   return (
@@ -28,6 +33,7 @@ const TlfbHelpingMaterials = ({ mobile }: TlfbHelpingMaterialsProps) => {
         onClose={() => setModalVisible(false)}
         maxWidth={mobile ? 400 : 500}
       >
+        <Divider my={16} />
         <Img
           maxWidth="100%"
           maxHeight="100%"
@@ -41,14 +47,17 @@ const TlfbHelpingMaterials = ({ mobile }: TlfbHelpingMaterialsProps) => {
         display="flex"
         align="center"
       >
-        {!mobile && (
+        {!mobile && !researcher && (
           <Img mr={10} src={Document} alt={formatMessage(messages.document)} />
         )}
         <Text
           color={themeColors.primary}
           fontWeight={mobile ? 'bold' : 'medium'}
+          textDecoration={researcher ? 'underline' : 'none'}
         >
-          {formatMessage(messages.helpingMaterials)}
+          {formatMessage(
+            messages[researcher ? 'showPreview' : 'helpingMaterials'],
+          )}
         </Text>
       </Row>
     </>

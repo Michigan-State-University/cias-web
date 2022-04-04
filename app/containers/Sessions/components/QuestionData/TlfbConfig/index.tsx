@@ -18,6 +18,7 @@ import Column from 'components/Column';
 import LabelledApprovableInput from 'components/Input/LabelledApprovableInput';
 import Radio from 'components/Radio';
 import Text from 'components/Text';
+import TlfbHelpingMaterials from 'components/TlfbHelpingMaterials';
 
 import messages from './messages';
 import {
@@ -115,6 +116,10 @@ const TlfbConfig = ({ statusMetadata: { isEditable } }: TlfbConfigProps) => {
           startDate={startDate}
         />
       )}
+      <Row mt={32} gap={16} align="center">
+        <H2>{formatMessage(messages.helpingMaterials)}</H2>
+        <TlfbHelpingMaterials researcher />
+      </Row>
     </Column>
   );
 };

@@ -35,4 +35,8 @@ export default defineMessages({
     id: `${scope}.selectDate`,
     defaultMessage: 'Select date',
   },
+  helpingMaterials: {
+    id: `${scope}.helpingMaterials`,
+    defaultMessage: 'Helping materials',
+  },
 });
