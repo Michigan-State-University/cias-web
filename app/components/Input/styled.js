@@ -132,11 +132,11 @@ export const Sufix = styled.div`
   align-items: center;
   justify-content: center;
 
-  .invisible {
+  span:first-of-type {
     visibility: hidden;
   }
 
-  #unitsValue {
+  span:last-of-type {
     white-space: pre;
   }
 `;

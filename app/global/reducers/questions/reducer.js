@@ -266,7 +266,7 @@ export const questionsReducer = (state = initialState, action) =>
             draft.questions[questionIndex].title,
             action.payload.newType,
           ),
-          formula: { payload: '', patterns: [] },
+          formulas: [{ payload: '', patterns: [] }],
         };
         break;
       }
@@ -476,14 +476,11 @@ export const questionsReducer = (state = initialState, action) =>
           ({ id }) => id === draft.selectedQuestion,
         );
 
-        const updatedQuestion = {
-          ...state.questions[selectedQuestionIndex],
-          ...questionSettingsReducer(
-            state.questions,
-            action.payload,
-            state.selectedQuestion,
-          ),
-        };
+        const updatedQuestion = questionSettingsReducer(
+          state.questions[selectedQuestionIndex],
+          action.payload,
+          state.questions,
+        );
 
         draft.questions[selectedQuestionIndex] = assignFromQuestionTTS(
           cloneDeep(updatedQuestion),

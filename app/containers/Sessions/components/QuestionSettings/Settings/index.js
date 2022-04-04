@@ -34,7 +34,7 @@ import SettingsTab from './Components/Tabs/SettingsTab';
 import messages from './messages';
 
 const Settings = ({
-  selectedQuestion,
+  selectedQuestion: { narrator, settings, id, formulas, type } = {},
   intl: { formatMessage },
   tab,
   changeTab,
@@ -43,9 +43,6 @@ const Settings = ({
   interventionType,
   questionGroup,
 }) => {
-  if (!selectedQuestion) return <></>;
-  const { narrator, settings, id, formula, type } = selectedQuestion;
-
   const handleChange = (newTab) => {
     changeTab({ tab: newTab });
     setDraggable(false);
@@ -92,7 +89,7 @@ const Settings = ({
           <BranchingTab
             formatMessage={formatMessage}
             disabled={!editingPossible}
-            formula={formula}
+            formulas={formulas}
             id={id}
             disableBranchingToSession={
               interventionType !== InterventionType.DEFAULT
@@ -110,7 +107,7 @@ Settings.propTypes = {
     narrator: PropTypes.object,
     settings: PropTypes.object,
     id: PropTypes.string,
-    formula: PropTypes.object,
+    formulas: PropTypes.array,
     type: PropTypes.string,
   }),
   tab: PropTypes.string,

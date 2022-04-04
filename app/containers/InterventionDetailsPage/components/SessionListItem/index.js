@@ -73,7 +73,7 @@ function SessionListItem({
     id,
     name,
     intervention_id: interventionId,
-    formula,
+    formulas,
     schedule,
     schedule_at: scheduleAt,
     schedule_payload: schedulePayload,
@@ -306,7 +306,7 @@ function SessionListItem({
             {isSessionBranchingPossible && (
               <SessionBranching
                 disabled={disabled}
-                formula={formula}
+                formulas={formulas}
                 session={session}
                 nextSessionName={nextSessionName}
                 status={settings.formula}

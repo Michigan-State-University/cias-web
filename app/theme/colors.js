@@ -80,6 +80,7 @@ const colors = {
   asparagus: '#6B9E59',
   pictonBlue: '#3686F0',
   coolGrey: '#8B92A1',
+  lightStealBlue: '#B3C1E1',
 };
 
 const themeColors = {

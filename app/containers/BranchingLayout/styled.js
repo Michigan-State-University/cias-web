@@ -28,21 +28,3 @@ export const DashedBox = styled(Box)`
           cursor: 'pointer',
         }}
 `;
-
-export const Unit = styled.div`
-  position: absolute;
-  top: 0;
-  left: 0;
-  bottom: 0;
-  pointer-events: none;
-  overflow: hidden;
-  display: flex;
-
-  .invisible {
-    visibility: hidden;
-  }
-
-  #unitsValue {
-    white-space: pre;
-  }
-`;

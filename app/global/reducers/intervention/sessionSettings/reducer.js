@@ -1,4 +1,8 @@
+import produce from 'immer';
 import cloneDeep from 'lodash/cloneDeep';
+
+import { removeAt } from 'utils/arrayUtils';
+
 import {
   UPDATE_FORMULA,
   ADD_FORMULA_CASE,
@@ -12,80 +16,137 @@ import {
   ADD_FORMULA_TARGET,
   UPDATE_FORMULA_TARGET,
   REMOVE_FORMULA_TARGET,
+  ADD_NEW_FORMULA,
+  REMOVE_FORMULA,
+  DUPLICATE_FORMULA,
 } from './constants';
 
-const sessionSettingsReducer = (session, payload) => {
-  const clonedSession = cloneDeep(session);
-  switch (payload.type) {
-    case UPDATE_FORMULA:
-      clonedSession.formula.payload = payload.data.value;
-      return clonedSession;
+/* eslint-disable no-param-reassign */
+const sessionSettingsReducer = (session, { type, data }) =>
+  produce(session, (draft) => {
+    switch (type) {
+      case UPDATE_FORMULA: {
+        const { formulaIndex, value } = data;
 
-    case CHANGE_FORMULA_STATUS:
-      clonedSession.settings.formula = payload.data.value;
-      return clonedSession;
+        draft.formulas[formulaIndex].payload = value;
+        break;
+      }
 
-    case ADD_FORMULA_CASE:
-      clonedSession.formula.patterns.push({
-        match: '=',
-        target: [{ type: 'Session', id: '', probability: '100' }],
-      });
-      return clonedSession;
+      case CHANGE_FORMULA_STATUS: {
+        const { value } = data;
 
-    case UPDATE_FORMULA_CASE:
-      clonedSession.formula.patterns[payload.data.index] = payload.data.value;
-      return clonedSession;
+        draft.settings.formula = value;
+        break;
+      }
 
-    case REMOVE_FORMULA_CASE:
-      clonedSession.formula.patterns.splice(payload.data.index, 1);
-      return clonedSession;
+      case ADD_FORMULA_CASE: {
+        const { formulaIndex } = data;
 
-    case CHANGE_SCHEDULING_TYPE:
-      clonedSession.schedule = payload.data.value;
-      clonedSession.schedule_at = '';
-      clonedSession.schedule_payload = '';
-      return clonedSession;
+        draft.formulas[formulaIndex].patterns.push({
+          match: '=',
+          target: [{ type: 'Session', id: '', probability: '100' }],
+        });
+        break;
+      }
 
-    case UPDATE_SCHEDULING_PAYLOAD:
-      clonedSession.schedule_payload = parseInt(payload.data.value, 10) || '';
+      case UPDATE_FORMULA_CASE: {
+        const { formulaIndex, index, value } = data;
 
-      return clonedSession;
+        draft.formulas[formulaIndex].patterns[index] = value;
+        break;
+      }
 
-    case UPDATE_SCHEDULING_DATE:
-      clonedSession.schedule_at = payload.data.value;
-      return clonedSession;
+      case REMOVE_FORMULA_CASE: {
+        const { formulaIndex, index } = data;
 
-    case UPDATE_DAYS_AFTER_DATE_VARIABLE:
-      clonedSession.days_after_date_variable_name = payload.data.value;
-      return clonedSession;
+        removeAt(draft.formulas[formulaIndex].patterns, index);
+        break;
+      }
 
-    case ADD_FORMULA_TARGET:
-      clonedSession.formula.patterns[payload.data.patternIndex].target.push({
-        type: 'Session',
-        id: '',
-        probability: '0',
-      });
-      return clonedSession;
+      case CHANGE_SCHEDULING_TYPE: {
+        const { value } = data;
 
-    case UPDATE_FORMULA_TARGET: {
-      const { patternIndex, targetIndex, targetData } = payload.data;
-      clonedSession.formula.patterns[patternIndex].target[targetIndex] =
-        targetData;
-      return clonedSession;
+        draft.schedule = value;
+        draft.schedule_at = '';
+        draft.schedule_payload = '';
+        break;
+      }
+
+      case UPDATE_SCHEDULING_PAYLOAD: {
+        const { value } = data;
+
+        draft.schedule_payload = parseInt(value, 10) || '';
+        break;
+      }
+
+      case UPDATE_SCHEDULING_DATE: {
+        const { value } = data;
+
+        draft.schedule_at = value;
+        break;
+      }
+
+      case UPDATE_DAYS_AFTER_DATE_VARIABLE: {
+        const { value } = data;
+
+        draft.days_after_date_variable_name = value;
+        break;
+      }
+
+      case ADD_FORMULA_TARGET: {
+        const { formulaIndex, patternIndex } = data;
+
+        draft.formulas[formulaIndex].patterns[patternIndex].target.push({
+          type: 'Session',
+          id: '',
+          probability: '0',
+        });
+        break;
+      }
+
+      case UPDATE_FORMULA_TARGET: {
+        const { patternIndex, targetIndex, targetData, formulaIndex } = data;
+
+        draft.formulas[formulaIndex].patterns[patternIndex].target[
+          targetIndex
+        ] = targetData;
+        break;
+      }
+
+      case REMOVE_FORMULA_TARGET: {
+        const { patternIndex, targetIndex, formulaIndex } = data;
+        const { target } = draft.formulas[formulaIndex].patterns[patternIndex];
+
+        removeAt(target, targetIndex);
+        if (target.length === 1) {
+          target[0].probability = '100';
+        }
+        break;
+      }
+
+      case ADD_NEW_FORMULA: {
+        draft.formulas.push({ payload: '', patterns: [] });
+        break;
+      }
+
+      case REMOVE_FORMULA: {
+        const { formulaIndex } = data;
+
+        removeAt(draft.formulas, formulaIndex);
+        break;
+      }
+
+      case DUPLICATE_FORMULA: {
+        const { formulaIndex } = data;
+
+        const newFormula = cloneDeep(draft.formulas[formulaIndex]);
+        draft.formulas.push(newFormula);
+        break;
+      }
+
+      default:
+        return draft;
     }
-
-    case REMOVE_FORMULA_TARGET: {
-      const { patternIndex, targetIndex } = payload.data;
-      const newTargets = clonedSession.formula.patterns[
-        patternIndex
-      ].target.filter((_, deleteIndex) => deleteIndex !== targetIndex);
-      clonedSession.formula.patterns[patternIndex].target = newTargets;
-      return clonedSession;
-    }
-
-    default:
-      return session;
-  }
-};
+  });
 
 export default sessionSettingsReducer;

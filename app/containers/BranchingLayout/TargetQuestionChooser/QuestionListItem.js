@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState, useCallback } from 'react';
 import PropTypes from 'prop-types';
 
 import Img from 'components/Img';
@@ -18,9 +18,18 @@ const QuestionListItem = ({
   selectedQuestion,
   question: { id, subtitle, type, position, question_group_id: groupId },
 }) => {
+  const [width, setWidth] = useState(0);
+
   const canSelectQuestion = (pos) =>
     pos > selectedQuestion.position ||
     selectedQuestion.question_group_id !== groupId;
+
+  const onRefChange = useCallback(
+    (node) => setWidth(node?.offsetWidth ?? 0),
+    [],
+  );
+
+  const maxRowContentWidth = width - 70;
 
   return (
     <Row
@@ -32,6 +41,7 @@ const QuestionListItem = ({
       clickable={canSelectQuestion(position)}
       width="100%"
       data-cy={`choose-question-${htmlToPlainText(subtitle)}`}
+      ref={onRefChange}
     >
       <Img src={target.id === id ? webpageSelected : webpage} mr={10} />
       <Box maxWidth={210}>
@@ -39,6 +49,7 @@ const QuestionListItem = ({
           text={htmlToPlainText(subtitle)}
           color={!canSelectQuestion(position) ? colors.grey : ''}
           fontWeight={target.id === id ? 'bold' : ''}
+          width={maxRowContentWidth}
         />
       </Box>
     </Row>
