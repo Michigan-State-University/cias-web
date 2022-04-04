@@ -1,14 +1,17 @@
 import styled from 'styled-components';
 import { colors } from 'theme';
 
-import { style, layout, padding } from '../BaseComponentStyles';
+import { style, layout, padding, text } from '../BaseComponentStyles';
 export const StyledCollapseContainer = styled.div`
   width: 100%;
+  ${style};
 `;
 
-export const StyledCollapseLabel = styled.div`
+export const StyledCollapseLabel = styled.div.attrs({
+  defaultColor: 'white',
+})`
   border-radius: 5px;
-  color: white;
+  ${text}
   cursor: pointer;
   width: 100%;
   .animated-img {
@@ -26,13 +29,16 @@ export const Content = styled.div`
   flex-wrap: wrap;
   height: fit-content;
   width: 100%;
-  margin-bottom: 10px;
 `;
 
 export const StyledCollapseContent = styled.div`
   .ReactCollapse--collapse {
-    transition: height 480ms ease;
+    ${({ disableAnimation }) =>
+      !disableAnimation && `transition: height 480ms ease;`}
   }
+  ${style};
+  ${layout};
+  ${padding};
 `;
 
 export const ImageWrapper = styled.div`

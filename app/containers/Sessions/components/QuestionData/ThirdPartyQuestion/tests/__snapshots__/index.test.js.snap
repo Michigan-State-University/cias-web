@@ -1790,6 +1790,22 @@ exports[`<ThirdPartyQuestion /> Should render and match the snapshot 1`] = `
                 </div>
               </div>
             </div>
+<<<<<<< HEAD
+=======
+            <div
+              class="Row-y1cs0u-0 jKygjZ"
+            >
+              <input
+                class="Input-t9j2q5-0 eNeZRy BadgeInput-sc-1ua27xt-0 eSqSHP"
+                color="#0086F8"
+                data-cy="score-0-input"
+                placeholder="Email(s)"
+                type="text"
+                value=""
+                width="121px"
+              />
+            </div>
+>>>>>>> 5485b484d0e093fe53403837013d45e479d2a931
           </div>
         </div>
         <div

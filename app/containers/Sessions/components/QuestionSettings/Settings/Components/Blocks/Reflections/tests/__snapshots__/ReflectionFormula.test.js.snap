@@ -343,8 +343,12 @@ exports[`<ReflectionBlock /> Should render and match the snapshot 1`] = `
           class="c6"
         >
           <input
+<<<<<<< HEAD
             aria-label="Provide a numeric value"
             class="c7 c8"
+=======
+            class="Input-t9j2q5-0 gkqnfr styled__CaseInput-xvuzq8-0 kesThh"
+>>>>>>> 5485b484d0e093fe53403837013d45e479d2a931
             data-cy="case-value-input"
             data-testid="input"
             placeholder="..."

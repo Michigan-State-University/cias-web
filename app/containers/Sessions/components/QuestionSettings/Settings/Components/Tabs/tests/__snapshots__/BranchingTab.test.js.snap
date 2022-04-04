@@ -195,13 +195,20 @@ exports[`<BranchingTab /> Should render and match the snapshot 1`] = `
 
 <div>
   <div
+<<<<<<< HEAD
     class="c0"
   >
     <div
       class="c1"
+=======
+    class="Box-sc-1vhutan-0 HoverableBox-zvip6a-0 donflz"
+  >
+    <div
+      class="Box-sc-1vhutan-0 dvfkZg"
+>>>>>>> 5485b484d0e093fe53403837013d45e479d2a931
     >
-      Formula
       <div
+<<<<<<< HEAD
         class="c2"
       >
         <div
@@ -250,6 +257,29 @@ exports[`<BranchingTab /> Should render and match the snapshot 1`] = `
     >
       + Add case
     </div>
+=======
+        class="Row-y1cs0u-0 ecllgQ"
+      >
+        <div
+          class="StyledCircle-sc-1dov7hv-0 jkyOQV"
+          color="#FFFFFF"
+          opacity="1"
+        >
+          <img
+            class="Img-sc-55j3su-0 cDhXoN"
+            src="IMAGE_MOCK"
+          />
+        </div>
+        <p
+          class="Text-e4p0w3-0 cFbubw"
+          color="#B727EA"
+          font-weight="bold"
+        >
+          Add new formula
+        </p>
+      </div>
+    </div>
+>>>>>>> 5485b484d0e093fe53403837013d45e479d2a931
   </div>
 </div>
 `;

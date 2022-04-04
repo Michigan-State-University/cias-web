@@ -189,4 +189,16 @@ export default defineMessages({
     defaultMessage:
       'Are you sure you want to delete this Block? It will not be possible to recover it later.',
   },
+  addNewFormula: {
+    id: `${scope}.addNewFormula`,
+    defaultMessage: 'Add new formula',
+  },
+  formula: {
+    id: `${scope}.formula`,
+    defaultMessage: 'Formula { index }',
+  },
+  copyFormula: {
+    id: `${scope}.copyFormula`,
+    defaultMessage: 'Copy formula',
+  },
 });

@@ -100,3 +100,27 @@ export const SearchIcon = styled.img`
   left: 10px;
   top: 10px;
 `;
+
+export const Sufix = styled.div`
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  pointer-events: none;
+  overflow: hidden;
+  display: flex;
+  padding-top: 12px;
+  padding-bottom: 12px;
+  width: 100%;
+  align-items: center;
+  justify-content: center;
+
+  span:first-of-type {
+    visibility: hidden;
+  }
+
+  span:last-of-type {
+    white-space: pre;
+  }
+`;

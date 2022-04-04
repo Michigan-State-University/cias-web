@@ -1,7 +1,22 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`<BranchingLayout /> Should render and match the snapshot 1`] = `
+<<<<<<< HEAD
 .c1 {
+=======
+.c0 {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-flex-direction: column;
+  -ms-flex-direction: column;
+  flex-direction: column;
+  width: 100%;
+}
+
+.c2 {
+>>>>>>> 5485b484d0e093fe53403837013d45e479d2a931
   display: -webkit-box;
   display: -webkit-flex;
   display: -ms-flexbox;
@@ -24,7 +39,7 @@ exports[`<BranchingLayout /> Should render and match the snapshot 1`] = `
   align-items: center;
 }
 
-.c6 {
+.c7 {
   display: -webkit-box;
   display: -webkit-flex;
   display: -ms-flexbox;
@@ -35,12 +50,13 @@ exports[`<BranchingLayout /> Should render and match the snapshot 1`] = `
   height: auto;
 }
 
-.c2 {
+.c1 {
   width: auto;
   height: auto;
   display: block;
   border-radius: 5px;
-  position: relative;
+  padding: 8px;
+  padding-top: 24px;
 }
 
 .c3 {
@@ -48,10 +64,18 @@ exports[`<BranchingLayout /> Should render and match the snapshot 1`] = `
   height: auto;
   display: block;
   border-radius: 5px;
+  position: relative;
+}
+
+.c4 {
+  width: auto;
+  height: auto;
+  display: block;
+  border-radius: 5px;
   cursor: pointer;
 }
 
-.c5 {
+.c6 {
   width: auto;
   height: auto;
   display: block;
@@ -65,7 +89,7 @@ exports[`<BranchingLayout /> Should render and match the snapshot 1`] = `
   border-radius: 10px;
 }
 
-.c7 {
+.c8 {
   width: auto;
   height: auto;
   display: block;
@@ -77,22 +101,19 @@ exports[`<BranchingLayout /> Should render and match the snapshot 1`] = `
   flex-grow: 1;
 }
 
-.c8 {
+.c9 {
   width: auto;
   height: auto;
   display: block;
   border-radius: 5px;
   width: 100%;
-  padding-top: 8px;
-  padding-bottom: 8px;
-  padding-right: 8px;
-  padding-left: 8px;
+  padding: 8px;
   margin-top: 10px;
   margin-bottom: 20px;
-  background-color: rgba(233,241,251,1);
+  background-color: rgba(255,255,255,1);
 }
 
-.c10 {
+.c11 {
   width: auto;
   height: auto;
   display: block;
@@ -100,6 +121,7 @@ exports[`<BranchingLayout /> Should render and match the snapshot 1`] = `
   margin-top: 20px;
 }
 
+<<<<<<< HEAD
 .c0 {
   display: -webkit-box;
   display: -webkit-flex;
@@ -112,6 +134,9 @@ exports[`<BranchingLayout /> Should render and match the snapshot 1`] = `
 }
 
 .c4 {
+=======
+.c5 {
+>>>>>>> 5485b484d0e093fe53403837013d45e479d2a931
   font-family: DM Sans;
   font-size: 13px;
   line-height: 130%;
@@ -120,12 +145,12 @@ exports[`<BranchingLayout /> Should render and match the snapshot 1`] = `
   color: rgba(183,39,234,1);
 }
 
-.c4:hover {
+.c5:hover {
   -webkit-text-decoration: underline;
   text-decoration: underline;
 }
 
-.c9 {
+.c10 {
   resize: none;
   padding: 12px;
   border: 1px solid #E9F1FB;
@@ -138,20 +163,21 @@ exports[`<BranchingLayout /> Should render and match the snapshot 1`] = `
   border: 1px solid transparent;
 }
 
-.c9:focus {
+.c10:focus {
   box-shadow: none;
   outline: none;
   border: 1px solid #107969;
 }
 
-.c9:disabled {
+.c10:disabled {
   color: #ABBBD1;
 }
 
-.c11 {
+.c12 {
   height: 40px;
+  background-color: #FFFFFF;
   border: 1px dashed #B0BAC9;
-  color: #B0BAC9;
+  color: #B727EA;
   display: -webkit-box;
   display: -webkit-flex;
   display: -ms-flexbox;
@@ -171,10 +197,8 @@ exports[`<BranchingLayout /> Should render and match the snapshot 1`] = `
   cursor: pointer;
 }
 
-.c11:hover {
-  background-color: #107969;
-  color: #FFFFFF;
-  border: none;
+.c12:hover {
+  background-color: #E9F1FB;
 }
 
 @media only screen and (min-width:768px) {
@@ -200,35 +224,40 @@ exports[`<BranchingLayout /> Should render and match the snapshot 1`] = `
     <div
       class="c1"
     >
-      Formula
       <div
         class="c2"
       >
+        Formula
         <div
           class="c3"
         >
-          <p
+          <div
             class="c4"
-            color="#B727EA"
-            font-weight="bold"
           >
-            Add variable
-          </p>
-        </div>
-        <div
-          class="c5"
-          display="none"
-          width="auto"
-        >
+            <p
+              class="c5"
+              color="#B727EA"
+              font-weight="bold"
+            >
+              + Add variable
+            </p>
+          </div>
           <div
             class="c6"
+            display="none"
+            width="auto"
           >
             <div
               class="c7"
-            />
+            >
+              <div
+                class="c8"
+              />
+            </div>
           </div>
         </div>
       </div>
+<<<<<<< HEAD
     </div>
     <div
       class="c8"
@@ -236,19 +265,27 @@ exports[`<BranchingLayout /> Should render and match the snapshot 1`] = `
     >
       <textarea
         aria-label="Enter formula here... (You can use mathematical operators +, -, *, /)"
+=======
+      <div
+>>>>>>> 5485b484d0e093fe53403837013d45e479d2a931
         class="c9"
-        data-cy="text-area"
-        height="auto"
-        placeholder="Enter formula here... (You can use mathematical operators +, -, *, /)"
-        rows="5"
-        type="multiline"
         width="100%"
-      />
-    </div>
-    <div
-      class="c10 c11"
-    >
-      + Add case
+      >
+        <textarea
+          class="c10"
+          data-cy="text-area"
+          height="auto"
+          placeholder="Enter formula here... (You can use mathematical operators +, -, *, /)"
+          rows="5"
+          type="multiline"
+          width="100%"
+        />
+      </div>
+      <div
+        class="c11 c12"
+      >
+        + Add case
+      </div>
     </div>
   </div>
 </div>

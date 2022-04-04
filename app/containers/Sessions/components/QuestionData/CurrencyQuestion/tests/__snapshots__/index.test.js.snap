@@ -180,7 +180,11 @@ exports[`<CurrencyQuestion /> Should render and match the snapshot 1`] = `
           </p>
         </label>
         <input
+<<<<<<< HEAD
           class="c4"
+=======
+          class="Input-t9j2q5-0 hkUJku"
+>>>>>>> 5485b484d0e093fe53403837013d45e479d2a931
           disabled=""
           font-size="15"
           id="currencyAmountLabel"

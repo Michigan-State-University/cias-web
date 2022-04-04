@@ -23,6 +23,9 @@ const InequalityChooser = ({
   onSuccessfulChange,
   inequalityValue,
   disabled,
+  height,
+  width,
+  bg,
 }) => {
   const { formatMessage } = useIntl();
 
@@ -67,14 +70,17 @@ const InequalityChooser = ({
         data-testid="select"
         selectProps={{
           isDisabled: disabled,
-          bg: colors.linkWater,
+          bg: bg || colors.linkWater,
           options: signMapper,
           onChange: onSignChange,
           value: inequalitySign,
+          height,
         }}
       />
       <Box bg={colors.linkWater} mx={10}>
         <CaseInput
+          width={width}
+          height={height}
           data-testid="input"
           data-cy="case-value-input"
           disabled={disabled}
@@ -86,6 +92,7 @@ const InequalityChooser = ({
           validator={numericValidator}
           onBlur={onValueChange}
           aria-label={formatMessage(messages.inputLabel)}
+          bg={bg}
         />
       </Box>
     </>
@@ -96,6 +103,9 @@ InequalityChooser.propTypes = {
   inequalityValue: PropTypes.string,
   onSuccessfulChange: PropTypes.func,
   disabled: PropTypes.bool,
+  height: PropTypes.number,
+  width: PropTypes.number,
+  bg: PropTypes.string,
 };
 
 export default memo(InequalityChooser);

@@ -1,7 +1,11 @@
 import React, { useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
-import { Input } from './index';
+
+import Box from 'components/Box';
+
 import { TextArea } from './TextArea';
+import { Sufix } from './styled';
+import BaseStyledInput from './BaseStyledInput';
 
 const DEFAULT_TEXT_PADDING = 25;
 const DEFAULT_AVERAGE_LETTER_WIDTH = 8;
@@ -44,30 +48,36 @@ const StyledInput = (props) => {
       return Math.min(calculatedWidth, props.maxWidth);
     return calculatedWidth;
   };
+  if (props.type === 'singleline' && !!props.sufix)
+    return (
+      <Box>
+        <BaseStyledInput
+          {...props}
+          value={value}
+          onInputChange={onInputChange}
+          handleBlur={handleBlur}
+          handleFocus={handleFocus}
+          averageLetterWidth={props.averageLetterWidth}
+          calculateWidthFromText={calculateWidthFromText}
+        />
+        {value && (
+          <Sufix>
+            <span>{value}</span>
+            <span>{props.sufix}</span>
+          </Sufix>
+        )}
+      </Box>
+    );
   if (props.type === 'singleline')
     return (
-      <Input
+      <BaseStyledInput
         {...props}
-        textAlign={props.textAlign}
         value={value}
-        onClick={(e) => {
-          if (props.onClick) props.onClick(e);
-
-          e.stopPropagation();
-        }}
-        onChange={(event) => onInputChange(event.target.value)}
-        onBlur={handleBlur}
-        onFocus={handleFocus}
-        placeholder={props.placeholder}
-        keyboard={props.keyboard}
-        transparent={props.transparent}
-        width={
-          props.autoSize
-            ? `${calculateWidthFromText(
-                value ? value.length : props.placeholder.length,
-              )}px`
-            : props.width
-        }
+        onInputChange={onInputChange}
+        handleBlur={handleBlur}
+        handleFocus={handleFocus}
+        averageLetterWidth={props.averageLetterWidth}
+        calculateWidthFromText={calculateWidthFromText}
       />
     );
 
@@ -112,6 +122,7 @@ StyledInput.propTypes = {
   disabled: PropTypes.bool,
   forceBlur: PropTypes.bool,
   onInput: PropTypes.func,
+  sufix: PropTypes.string,
 };
 
 StyledInput.defaultProps = {

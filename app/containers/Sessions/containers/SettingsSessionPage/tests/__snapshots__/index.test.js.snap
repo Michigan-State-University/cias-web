@@ -400,8 +400,12 @@ exports[`<SettingsSessionPage /> Should render and match the snapshot 1`] = `
         Name
       </h3>
       <input
+<<<<<<< HEAD
         aria-label="e-Session Name"
         class="c5 c6"
+=======
+        class="Input-t9j2q5-0 hDrkzI styled__Input-sc-12xx0pj-0 lcXNLu"
+>>>>>>> 5485b484d0e093fe53403837013d45e479d2a931
         disabled=""
         placeholder="e-Session Name"
         type="text"
@@ -422,7 +426,11 @@ exports[`<SettingsSessionPage /> Should render and match the snapshot 1`] = `
       <input
         aria-label="Variable name..."
         autocomplete="off"
+<<<<<<< HEAD
         class="c7 c8"
+=======
+        class="Input-t9j2q5-0 byMvpe BadgeInput-sc-1ua27xt-0 locZHQ"
+>>>>>>> 5485b484d0e093fe53403837013d45e479d2a931
         color="#107969"
         disabled=""
         name="notASearchField-Variable name..."

@@ -246,6 +246,7 @@ exports[`<FeedbackQuestion /> Should render and match the snapshot 1`] = `
                 class="rc-slider-mark-text rc-slider-mark-text-active"
                 style="transform: translateX(-50%); left: 0%; font-size: 15px;"
               >
+<<<<<<< HEAD
                 <div
                   class="c8"
                   display="flex"
@@ -259,11 +260,21 @@ exports[`<FeedbackQuestion /> Should render and match the snapshot 1`] = `
                     width="120"
                   />
                 </div>
+=======
+                <input
+                  class="Input-t9j2q5-0 dVChuz"
+                  placeholder="Least"
+                  type="text"
+                  value="0"
+                  width="120"
+                />
+>>>>>>> 5485b484d0e093fe53403837013d45e479d2a931
               </span>
               <span
                 class="rc-slider-mark-text"
                 style="transform: translateX(-50%); left: 100%; font-size: 15px;"
               >
+<<<<<<< HEAD
                 <div
                   class="c8"
                   display="flex"
@@ -277,6 +288,15 @@ exports[`<FeedbackQuestion /> Should render and match the snapshot 1`] = `
                     width="120"
                   />
                 </div>
+=======
+                <input
+                  class="Input-t9j2q5-0 dVChuz"
+                  placeholder="Most"
+                  type="text"
+                  value="100"
+                  width="120"
+                />
+>>>>>>> 5485b484d0e093fe53403837013d45e479d2a931
               </span>
             </div>
           </div>

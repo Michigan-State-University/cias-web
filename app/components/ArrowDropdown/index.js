@@ -19,6 +19,7 @@ const ArrowDropdown = ({
   setOpen,
   childWidthScope,
   disabled,
+  bg,
 }) => {
   const dropdown = useRef(null);
   const buttonRef = useRef(null);
@@ -31,6 +32,7 @@ const ArrowDropdown = ({
         disabled={disabled}
         onClick={() => setOpen && setOpen(!isOpened)}
         isOpened={isOpened}
+        bg={bg}
       >
         {dropdownContent}
       </Dropdown>
@@ -60,6 +62,7 @@ ArrowDropdown.propTypes = {
   isOpened: PropTypes.bool,
   setOpen: PropTypes.func,
   disabled: PropTypes.bool,
+  bg: PropTypes.string,
 };
 
 ArrowDropdown.defaultProps = {

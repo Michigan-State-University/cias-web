@@ -9,7 +9,7 @@ import PropTypes from 'prop-types';
 import { createStructuredSelector } from 'reselect';
 import { connect } from 'react-redux';
 import { compose } from 'redux';
-import { FormattedMessage, injectIntl } from 'react-intl';
+import { injectIntl } from 'react-intl';
 
 import { makeSelectSelectedQuestion } from 'global/reducers/questions';
 
@@ -29,6 +29,7 @@ import messages from './messages';
 import Pattern from './Pattern';
 
 function BranchingLayout({
+  formulaIndex,
   formula,
   intl: { formatMessage },
   onFormulaUpdate,
@@ -53,17 +54,17 @@ function BranchingLayout({
   onRemoveTarget,
   disableBranchingToSession,
 }) {
-  const [patternsSize, setPatternSize] = useState(formula.patterns.length);
+  const [patternsSize, setPatternSize] = useState(
+    formula?.patterns?.length || 0,
+  );
   const [isOpen, setIsOpen] = useState(false);
 
   useEffect(() => {
-    if (formula.patterns.length !== patternsSize) {
-      setPatternSize(formula.patterns.length);
+    if (formula?.patterns?.length !== patternsSize) {
+      setPatternSize(formula?.patterns?.length);
     }
-  }, [formula.patterns.length]);
+  }, [formula]);
   const [targetChooserOpen, setTargetChooserOpen] = useState(-1);
-
-  const shouldDisplayElseStatement = formula.patterns.length !== 0;
 
   const handleDropdownClick = (value, index) => {
     if (value && onDropdownOpen) onDropdownOpen();
@@ -75,7 +76,7 @@ function BranchingLayout({
 
   const handleDeleteConfirm = () => {
     const { index, questionId } = caseToDelete;
-    return onRemoveCase(index, questionId);
+    return onRemoveCase(index, questionId, formulaIndex);
   };
 
   const {
@@ -91,63 +92,62 @@ function BranchingLayout({
     },
   });
 
+  const handleRemoveTarget = (questionId, index, targetIndex) =>
+    onRemoveTarget(questionId, index, targetIndex, formulaIndex);
+
+  const handleUpdateTarget = (questionId, index, targetIndex, target) =>
+    onUpdateTarget(questionId, index, targetIndex, target, formulaIndex);
+
   return (
     <>
       <DeleteModal />
 
       <Column>
-        <Row align="center" justify="between">
-          {formatMessage(messages.formula)}
+        <Box padding={8} pt={24}>
+          <Row align="center" justify="between">
+            {formatMessage(messages.formula)}
 
-          <VariableChooser
-            disabled={disabled}
-            sessionId={sessionId}
-            interventionId={interventionId}
-            onClick={(value) =>
-              onFormulaUpdate(`${formula.payload}${value}`, id)
-            }
-            includeAllVariables={includeAllVariables}
-            includeCurrentQuestion={includeCurrentQuestion}
-            includeAllSessions={includeAllSessions}
-            includeCurrentSession={includeCurrentSession}
-            isMultiSession={isMultiSession}
-            selectedQuestion={selectedQuestion}
-            setIsOpen={setIsOpen}
-          >
-            <Text
-              fontWeight="bold"
-              color={themeColors.secondary}
-              hoverDecoration="underline"
+            <VariableChooser
+              disabled={disabled}
+              sessionId={sessionId}
+              interventionId={interventionId}
+              onClick={(value) =>
+                onFormulaUpdate(`${formula.payload}${value}`, id, formulaIndex)
+              }
+              includeAllVariables={includeAllVariables}
+              includeCurrentQuestion={includeCurrentQuestion}
+              includeAllSessions={includeAllSessions}
+              includeCurrentSession={includeCurrentSession}
+              isMultiSession={isMultiSession}
+              selectedQuestion={selectedQuestion}
+              setIsOpen={setIsOpen}
             >
-              {formatMessage(messages.addVariable)}
-            </Text>
-          </VariableChooser>
-        </Row>
-        {formula && (
+              <Text
+                fontWeight="bold"
+                color={themeColors.secondary}
+                hoverDecoration="underline"
+              >
+                {formatMessage(messages.addVariable)}
+              </Text>
+            </VariableChooser>
+          </Row>
           <>
-            <Box
-              bg={colors.linkWater}
-              width="100%"
-              mt={10}
-              mb={20}
-              px={8}
-              py={8}
-            >
+            <Box bg={colors.white} width="100%" mt={10} mb={20} padding={8}>
               <StyledInput
                 disabled={disabled}
                 type="multiline"
                 rows={sessionBranching ? '1' : '5'}
                 width="100%"
                 placeholder={formatMessage(messages.formulaPlaceholder)}
-                value={formula.payload}
-                onBlur={(val) => onFormulaUpdate(val, id)}
+                value={formula?.payload || ''}
+                onBlur={(val) => onFormulaUpdate(val, id, formulaIndex)}
                 forceBlur={isOpen}
               />
             </Box>
 
-            {formula.patterns.map((pattern, index) => {
+            {formula?.patterns?.map((pattern, index) => {
               const updatePattern = (patternObj) => {
-                onUpdateCase(index, patternObj, id);
+                onUpdateCase(index, patternObj, id, formulaIndex);
               };
               return (
                 <Pattern
@@ -158,7 +158,7 @@ function BranchingLayout({
                   handleDropdownClick={handleDropdownClick}
                   index={index}
                   key={index}
-                  onAddTarget={() => onAddTarget(id, index)}
+                  onAddTarget={() => onAddTarget(id, index, formulaIndex)}
                   onRemoveCase={handleDeleteClick}
                   pattern={pattern}
                   questionId={id}
@@ -166,40 +166,28 @@ function BranchingLayout({
                   setTargetChooserOpen={setTargetChooserOpen}
                   targetChooserOpen={targetChooserOpen}
                   updatePattern={updatePattern}
-                  onUpdateTarget={onUpdateTarget}
-                  onRemoveTarget={onRemoveTarget}
+                  onUpdateTarget={handleUpdateTarget}
+                  onRemoveTarget={handleRemoveTarget}
                   disableBranchingToSession={disableBranchingToSession}
                 />
               );
             })}
-            {shouldDisplayElseStatement && (
-              // FormattedMessage needed for rich text to work
-              <Text>
-                <FormattedMessage
-                  {...messages.else}
-                  values={{
-                    message: sessionBranching
-                      ? formatMessage(messages.nextSession)
-                      : formatMessage(messages.nextScreen),
-                  }}
-                />
-              </Text>
-            )}
           </>
-        )}
-        <DashedBox
-          disabled={disabled}
-          mt={20}
-          onClick={() => !disabled && onAddCase(id)}
-        >
-          {formatMessage(messages.newCase)}
-        </DashedBox>
+          <DashedBox
+            disabled={disabled}
+            mt={20}
+            onClick={() => !disabled && onAddCase(id, formulaIndex)}
+          >
+            {formatMessage(messages.newCase)}
+          </DashedBox>
+        </Box>
       </Column>
     </>
   );
 }
 
 BranchingLayout.propTypes = {
+  formulaIndex: PropTypes.number,
   id: PropTypes.string,
   sessionId: PropTypes.string,
   interventionId: PropTypes.string,

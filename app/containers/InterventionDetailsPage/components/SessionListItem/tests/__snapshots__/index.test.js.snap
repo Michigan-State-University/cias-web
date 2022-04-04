@@ -90,7 +90,37 @@ exports[`<SessionListItem /> Should render and match the snapshot 1`] = `
   padding-left: 62px;
 }
 
+<<<<<<< HEAD
 .c23 {
+=======
+.c26 {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-flex-direction: row;
+  -ms-flex-direction: row;
+  flex-direction: row;
+  height: auto;
+  -webkit-box-pack: justify;
+  -webkit-justify-content: space-between;
+  -ms-flex-pack: justify;
+  justify-content: space-between;
+  justify-items: space-between;
+  -webkit-align-content: space-between;
+  -ms-flex-line-pack: space-between;
+  align-content: space-between;
+  -webkit-align-items: space-between;
+  -webkit-box-align: space-between;
+  -ms-flex-align: space-between;
+  align-items: space-between;
+  padding-top: 18px;
+  padding-bottom: 18px;
+  padding-right: 62px;
+  padding-left: 62px;
+}
+
+.c28 {
   display: -webkit-box;
   display: -webkit-flex;
   display: -ms-flexbox;
@@ -106,6 +136,66 @@ exports[`<SessionListItem /> Should render and match the snapshot 1`] = `
   -webkit-box-align: center;
   -ms-flex-align: center;
   align-items: center;
+  width: 100%;
+}
+
+.c32 {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-flex-direction: row;
+  -ms-flex-direction: row;
+  flex-direction: row;
+  height: auto;
+  -webkit-box-pack: end;
+  -webkit-justify-content: flex-end;
+  -ms-flex-pack: end;
+  justify-content: flex-end;
+  justify-items: flex-end;
+  -webkit-align-content: center;
+  -ms-flex-line-pack: center;
+  align-content: center;
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  width: 100%;
+}
+
+.c39 {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-flex-direction: row;
+  -ms-flex-direction: row;
+  flex-direction: row;
+  height: auto;
+  margin-right: 62px;
+  margin-left: 62px;
+  padding-top: 20px;
+  padding-bottom: 20px;
+}
+
+.c42 {
+>>>>>>> 5485b484d0e093fe53403837013d45e479d2a931
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-flex-direction: row;
+  -ms-flex-direction: row;
+  flex-direction: row;
+  height: auto;
+  -webkit-align-content: center;
+  -ms-flex-line-pack: center;
+  align-content: center;
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+<<<<<<< HEAD
   margin-bottom: 20px;
   padding-right: 62px;
   padding-left: 62px;
@@ -113,6 +203,8 @@ exports[`<SessionListItem /> Should render and match the snapshot 1`] = `
   display: -webkit-flex;
   display: -ms-flexbox;
   display: flex;
+=======
+>>>>>>> 5485b484d0e093fe53403837013d45e479d2a931
 }
 
 .c9 {
@@ -192,7 +284,29 @@ exports[`<SessionListItem /> Should render and match the snapshot 1`] = `
   align-items: flex-start;
 }
 
+<<<<<<< HEAD
 .c19 {
+=======
+.c41 {
+  width: auto;
+  height: auto;
+  display: block;
+  border-radius: 5px;
+  padding-top: 14px;
+  padding-bottom: 14px;
+  padding-right: 21px;
+  padding-left: 21px;
+  cursor: pointer;
+  border-radius: 5px;
+  border-radius: 5px;
+}
+
+.c41:hover {
+  background-color: #E9F1FB;
+}
+
+.c22 {
+>>>>>>> 5485b484d0e093fe53403837013d45e479d2a931
   display: -webkit-box;
   display: -webkit-flex;
   display: -ms-flexbox;
@@ -253,6 +367,19 @@ exports[`<SessionListItem /> Should render and match the snapshot 1`] = `
   font-size: 13px;
   line-height: 130%;
   color: #2F3850;
+<<<<<<< HEAD
+=======
+  white-space: pre;
+}
+
+.c44 {
+  font-family: DM Sans;
+  font-size: 13px;
+  line-height: 130%;
+  font-weight: 700;
+  color: rgba(183,39,234,1);
+  color: rgba(183,39,234,1);
+>>>>>>> 5485b484d0e093fe53403837013d45e479d2a931
 }
 
 .c14 {
@@ -284,6 +411,8 @@ exports[`<SessionListItem /> Should render and match the snapshot 1`] = `
   margin-top: 5px;
   width: 200px;
   max-width: 200px;
+  padding-right: 0;
+  padding-left: 0;
   color: rgba(16,121,105,1);
   text-align: center;
   background-color: rgba(16,121,105,0.1);
@@ -300,6 +429,7 @@ exports[`<SessionListItem /> Should render and match the snapshot 1`] = `
   color: #ABBBD1;
 }
 
+<<<<<<< HEAD
 .c25 {
   padding: 12px;
   border-style: solid;
@@ -323,6 +453,8 @@ exports[`<SessionListItem /> Should render and match the snapshot 1`] = `
   color: #ABBBD1;
 }
 
+=======
+>>>>>>> 5485b484d0e093fe53403837013d45e479d2a931
 .c13 {
   padding: 5px 10px;
   font-size: 13px;
@@ -381,6 +513,140 @@ exports[`<SessionListItem /> Should render and match the snapshot 1`] = `
   color: white;
 }
 
+<<<<<<< HEAD
+=======
+.c34 {
+  position: relative;
+  display: inline-block;
+  min-width: 40px;
+  height: 21px;
+  margin-left: 10px;
+}
+
+.c36 {
+  opacity: 0;
+  width: 0;
+  height: 0;
+}
+
+.c38 {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  -webkit-transition: 0.4s;
+  transition: 0.4s;
+  cursor: pointer;
+  background-color: #CED3E4;
+  border-radius: 21px;
+}
+
+.c35:checked + .c37 {
+  background-color: #B727EA;
+}
+
+.c35:focus + .c37 {
+  box-shadow: 0 0 1px #B727EA;
+}
+
+.c35:disabled + .c37 {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.c38:before {
+  position: absolute;
+  content: '';
+  left: 4px;
+  bottom: 4px;
+  -webkit-transition: 0.4s;
+  transition: 0.4s;
+  height: 13px;
+  width: 13px;
+  background-color: white;
+  border-radius: 50%;
+}
+
+.c35:checked + .c37:before {
+  -webkit-transform: translateX(18px);
+  -ms-transform: translateX(18px);
+  transform: translateX(18px);
+}
+
+.c43 {
+  border-radius: 50%;
+  background-color: #B727EA;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+  -webkit-justify-content: center;
+  -ms-flex-pack: center;
+  justify-content: center;
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  width: 32px;
+  height: 32px;
+  margin-right: 12px;
+  background-color: rgba(183,39,234,1);
+  color: rgba(255,255,255,1);
+  opacity: 1;
+  color: rgba(255,255,255,1);
+}
+
+@media only screen and (min-width:768px) {
+
+}
+
+@media only screen and (min-width:960px) {
+
+}
+
+@media only screen and (min-width:1170px) {
+
+}
+
+@media only screen and (min-width:1360px) {
+
+}
+
+@media only screen and (min-width:768px) {
+
+}
+
+@media only screen and (min-width:960px) {
+
+}
+
+@media only screen and (min-width:1170px) {
+
+}
+
+@media only screen and (min-width:1360px) {
+
+}
+
+@media only screen and (min-width:768px) {
+
+}
+
+@media only screen and (min-width:960px) {
+
+}
+
+@media only screen and (min-width:1170px) {
+
+}
+
+@media only screen and (min-width:1360px) {
+
+}
+
+>>>>>>> 5485b484d0e093fe53403837013d45e479d2a931
 @media only screen and (min-width:768px) {
 
 }
@@ -529,8 +795,41 @@ exports[`<SessionListItem /> Should render and match the snapshot 1`] = `
         <p
           class="c24"
         >
+<<<<<<< HEAD
           min
         </p>
+=======
+          <div
+            class="HoverableBox-zvip6a-0 c41"
+          >
+            <div
+              class="c1"
+            >
+              <div
+                class="c42"
+              >
+                <div
+                  class="c43"
+                  color="#FFFFFF"
+                  opacity="1"
+                >
+                  <img
+                    class="c23"
+                    src="IMAGE_MOCK"
+                  />
+                </div>
+                <p
+                  class="c44"
+                  color="#B727EA"
+                  font-weight="bold"
+                >
+                  Add new formula
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+>>>>>>> 5485b484d0e093fe53403837013d45e479d2a931
       </div>
     </div>
   </div>
