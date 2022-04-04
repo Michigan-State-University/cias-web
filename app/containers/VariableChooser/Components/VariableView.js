@@ -117,7 +117,7 @@ const VariableView = ({ onClick }) => {
 
       onClick(variableToAdd);
     },
-    [currentSessionId, initialSessionId, allSessions],
+    [currentSessionId, initialSessionId, allSessions, onClick],
   );
 
   if (questionGroupsLoading) {
