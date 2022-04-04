@@ -250,7 +250,7 @@ exports[`<QuestionDetails /> should match the snapshot 1`] = `
   width: 100%;
 }
 
-.c14 {
+.c16 {
   width: 100%;
   min-height: -webkit-max-content;
   min-height: -moz-max-content;
@@ -258,32 +258,32 @@ exports[`<QuestionDetails /> should match the snapshot 1`] = `
   border: 1px solid transparent;
 }
 
-.c14 .ql-editor {
+.c16 .ql-editor {
   font-weight: 400;
   padding: 10px;
   overflow: visible;
 }
 
-.c14 .ql-editor.ql-blank::before {
+.c16 .ql-editor.ql-blank::before {
   left: 11px;
 }
 
-.c14 .ql-picker-label svg {
+.c16 .ql-picker-label svg {
   margin-bottom: 15px !important;
 }
 
-.c14 .ql-toolbar {
+.c16 .ql-toolbar {
   width: -webkit-max-content;
   width: -moz-max-content;
   width: max-content;
 }
 
-.c14 .ql-container {
+.c16 .ql-container {
   font-size: 16px;
   font-family: DM Sans;
 }
 
-.c17 {
+.c19 {
   width: 100%;
   min-height: -webkit-max-content;
   min-height: -moz-max-content;
@@ -291,27 +291,27 @@ exports[`<QuestionDetails /> should match the snapshot 1`] = `
   border: 1px solid transparent;
 }
 
-.c17 .ql-editor {
+.c19 .ql-editor {
   font-weight: 400;
   padding: 10px;
   overflow: visible;
 }
 
-.c17 .ql-editor.ql-blank::before {
+.c19 .ql-editor.ql-blank::before {
   left: 11px;
 }
 
-.c17 .ql-picker-label svg {
+.c19 .ql-picker-label svg {
   margin-bottom: 15px !important;
 }
 
-.c17 .ql-toolbar {
+.c19 .ql-toolbar {
   width: -webkit-max-content;
   width: -moz-max-content;
   width: max-content;
 }
 
-.c17 .ql-container {
+.c19 .ql-container {
   font-size: initial;
   font-family: DM Sans;
 }
@@ -428,75 +428,6 @@ exports[`<QuestionDetails /> should match the snapshot 1`] = `
   border: 1px solid transparent;
 }
 
-<<<<<<< HEAD
-.c16 {
-  width: 100%;
-  min-height: -webkit-max-content;
-  min-height: -moz-max-content;
-  min-height: max-content;
-  border: 1px solid transparent;
-}
-
-.c16 .ql-editor {
-  font-weight: 400;
-  padding: 10px;
-  overflow: visible;
-}
-
-.c16 .ql-editor.ql-blank::before {
-  left: 11px;
-}
-
-.c16 .ql-picker-label svg {
-  margin-bottom: 15px !important;
-}
-
-.c16 .ql-toolbar {
-  width: -webkit-max-content;
-  width: -moz-max-content;
-  width: max-content;
-}
-
-.c16 .ql-container {
-  font-size: 16px;
-  font-family: DM Sans;
-}
-
-.c19 {
-  width: 100%;
-  min-height: -webkit-max-content;
-  min-height: -moz-max-content;
-  min-height: max-content;
-  border: 1px solid transparent;
-}
-
-.c19 .ql-editor {
-  font-weight: 400;
-  padding: 10px;
-  overflow: visible;
-}
-
-.c19 .ql-editor.ql-blank::before {
-  left: 11px;
-}
-
-.c19 .ql-picker-label svg {
-  margin-bottom: 15px !important;
-}
-
-.c19 .ql-toolbar {
-  width: -webkit-max-content;
-  width: -moz-max-content;
-  width: max-content;
-}
-
-.c19 .ql-container {
-  font-size: initial;
-  font-family: DM Sans;
-}
-
-=======
->>>>>>> 5485b484d0e093fe53403837013d45e479d2a931
 .c6 {
   position: absolute;
   top: 0;

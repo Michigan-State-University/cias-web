@@ -33,36 +33,6 @@ exports[`<CollapsableLabel /> should match the snapshot 1`] = `
   display: -webkit-flex;
   display: -ms-flexbox;
   display: flex;
-<<<<<<< HEAD
-  -webkit-flex-direction: row;
-  -ms-flex-direction: row;
-  flex-direction: row;
-  height: auto;
-  -webkit-box-pack: justify;
-  -webkit-justify-content: space-between;
-  -ms-flex-pack: justify;
-  justify-content: space-between;
-  justify-items: space-between;
-}
-
-.c4 {
-  width: auto;
-  height: auto;
-}
-
-.c5 {
-  outline: none;
-  border: none;
-  background: transparent;
-  font-weight: bold;
-  font-size: 13px;
-  line-height: 17px;
-  padding: 2px;
-  cursor: pointer;
-  margin-left: 5px;
-  font-weight: 700;
-  color: #2F3850;
-=======
   -webkit-align-content: center;
   -ms-flex-line-pack: center;
   align-content: center;
@@ -70,7 +40,6 @@ exports[`<CollapsableLabel /> should match the snapshot 1`] = `
   -webkit-box-align: center;
   -ms-flex-align: center;
   align-items: center;
->>>>>>> 5485b484d0e093fe53403837013d45e479d2a931
 }
 
 .c1 {
@@ -124,29 +93,6 @@ exports[`<CollapsableLabel /> should match the snapshot 1`] = `
           class="c2"
           display="flex"
         >
-<<<<<<< HEAD
-          <img
-            class="c4 img"
-            role="presentation"
-            src=""
-          />
-        </div>
-      </div>
-    </div>
-    <button
-      aria-label="Delete"
-      class="c5"
-      data-cy="accordion-element-delete-0"
-      data-testid="bin-test"
-      font-weight="bold"
-      title="Delete"
-      type="button"
-    >
-      <img
-        src="IMAGE_MOCK"
-      />
-    </button>
-=======
           <div
             class="c3"
           >
@@ -158,7 +104,6 @@ exports[`<CollapsableLabel /> should match the snapshot 1`] = `
         </div>
       </div>
     </div>
->>>>>>> 5485b484d0e093fe53403837013d45e479d2a931
   </div>
 </div>
 `;

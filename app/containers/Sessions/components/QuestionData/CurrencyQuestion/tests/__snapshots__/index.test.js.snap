@@ -45,6 +45,8 @@ exports[`<CurrencyQuestion /> Should render and match the snapshot 1`] = `
   border-radius: 5px;
   width: 200px;
   max-width: 200px;
+  padding-right: 0;
+  padding-left: 0;
   font-size: 15px;
   color: #2F3850;
   opacity: 0.5;
@@ -180,11 +182,7 @@ exports[`<CurrencyQuestion /> Should render and match the snapshot 1`] = `
           </p>
         </label>
         <input
-<<<<<<< HEAD
           class="c4"
-=======
-          class="Input-t9j2q5-0 hkUJku"
->>>>>>> 5485b484d0e093fe53403837013d45e479d2a931
           disabled=""
           font-size="15"
           id="currencyAmountLabel"

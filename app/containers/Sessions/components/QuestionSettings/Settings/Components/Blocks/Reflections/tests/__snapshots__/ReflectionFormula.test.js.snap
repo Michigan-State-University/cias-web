@@ -156,6 +156,29 @@ exports[`<ReflectionBlock /> Should render and match the snapshot 1`] = `
   height: auto;
 }
 
+.c15 {
+  resize: none;
+  padding: 12px;
+  border: 1px solid #E9F1FB;
+  border-radius: 5px;
+  margin-right: 9px;
+  width: 100%;
+  height: auto;
+  max-width: initial;
+  background-color: transparent;
+  border: 1px solid transparent;
+}
+
+.c15:focus {
+  box-shadow: none;
+  outline: none;
+  border: 1px solid #107969;
+}
+
+.c15:disabled {
+  color: #ABBBD1;
+}
+
 .c7 {
   padding: 12px;
   border-style: solid;
@@ -180,29 +203,6 @@ exports[`<ReflectionBlock /> Should render and match the snapshot 1`] = `
 }
 
 .c7:disabled {
-  color: #ABBBD1;
-}
-
-.c15 {
-  resize: none;
-  padding: 12px;
-  border: 1px solid #E9F1FB;
-  border-radius: 5px;
-  margin-right: 9px;
-  width: 100%;
-  height: auto;
-  max-width: initial;
-  background-color: transparent;
-  border: 1px solid transparent;
-}
-
-.c15:focus {
-  box-shadow: none;
-  outline: none;
-  border: 1px solid #107969;
-}
-
-.c15:disabled {
   color: #ABBBD1;
 }
 
@@ -343,12 +343,8 @@ exports[`<ReflectionBlock /> Should render and match the snapshot 1`] = `
           class="c6"
         >
           <input
-<<<<<<< HEAD
             aria-label="Provide a numeric value"
             class="c7 c8"
-=======
-            class="Input-t9j2q5-0 gkqnfr styled__CaseInput-xvuzq8-0 kesThh"
->>>>>>> 5485b484d0e093fe53403837013d45e479d2a931
             data-cy="case-value-input"
             data-testid="input"
             placeholder="..."
