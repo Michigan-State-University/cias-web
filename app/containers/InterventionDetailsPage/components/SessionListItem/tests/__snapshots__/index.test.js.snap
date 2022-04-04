@@ -284,6 +284,8 @@ exports[`<SessionListItem /> Should render and match the snapshot 1`] = `
   margin-top: 5px;
   width: 200px;
   max-width: 200px;
+  padding-right: 0;
+  padding-left: 0;
   color: rgba(16,121,105,1);
   text-align: center;
   background-color: rgba(16,121,105,0.1);
@@ -310,6 +312,8 @@ exports[`<SessionListItem /> Should render and match the snapshot 1`] = `
   margin-left: 5px;
   width: 60px;
   max-width: 200px;
+  padding-right: 0;
+  padding-left: 0;
   color: #2F3850;
 }
 

@@ -10,7 +10,7 @@ export const scope = 'app.containers.FormulaAndCases';
 export default defineMessages({
   branchingFormulaAndCases: {
     id: `${scope}.branchingFormulaAndCases`,
-    defaultMessage: 'Branching formula & cases',
+    defaultMessage: 'Branching formulas & cases',
   },
   feedbackFormulaAndCases: {
     id: `${scope}.feedbackFormulaAndCases`,

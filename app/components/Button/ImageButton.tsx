@@ -12,11 +12,22 @@ type Props = {
   onClick: () => void;
   loading?: boolean;
   disabled: boolean;
+  iconProps: object;
 } & Record<string, unknown>;
 
 const ImageButton = React.forwardRef<HTMLElement, Props>(
   (
-    { title, src, fill, stroke, disabled, onClick, loading, ...props }: Props,
+    {
+      title,
+      src,
+      fill,
+      stroke,
+      disabled,
+      onClick,
+      loading,
+      iconProps,
+      ...props
+    }: Props,
     ref,
   ) => (
     <TextButton
@@ -39,7 +50,7 @@ const ImageButton = React.forwardRef<HTMLElement, Props>(
       }}
     >
       {/* @ts-ignore */}
-      <Icon src={src} fill={fill} stroke={stroke}></Icon>
+      <Icon src={src} fill={fill} stroke={stroke} {...iconProps}></Icon>
     </TextButton>
   ),
 );

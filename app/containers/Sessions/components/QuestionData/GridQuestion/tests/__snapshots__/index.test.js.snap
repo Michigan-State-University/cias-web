@@ -397,6 +397,29 @@ exports[`<GridQuestion /> Should render and match the snapshot 1`] = `
   color: rgba(183,39,234,1);
 }
 
+.c30 {
+  resize: none;
+  padding: 12px;
+  border: 1px solid #E9F1FB;
+  border-radius: 5px;
+  margin-right: 9px;
+  width: 300px;
+  height: auto;
+  max-width: initial;
+  background-color: transparent;
+  border: 1px solid transparent;
+}
+
+.c30:focus {
+  box-shadow: none;
+  outline: none;
+  border: 1px solid #107969;
+}
+
+.c30:disabled {
+  color: #ABBBD1;
+}
+
 .c19 {
   padding: 12px;
   border-style: solid;
@@ -483,29 +506,6 @@ exports[`<GridQuestion /> Should render and match the snapshot 1`] = `
 }
 
 .c27:disabled {
-  color: #ABBBD1;
-}
-
-.c30 {
-  resize: none;
-  padding: 12px;
-  border: 1px solid #E9F1FB;
-  border-radius: 5px;
-  margin-right: 9px;
-  width: 300px;
-  height: auto;
-  max-width: initial;
-  background-color: transparent;
-  border: 1px solid transparent;
-}
-
-.c30:focus {
-  box-shadow: none;
-  outline: none;
-  border: 1px solid #107969;
-}
-
-.c30:disabled {
   color: #ABBBD1;
 }
 

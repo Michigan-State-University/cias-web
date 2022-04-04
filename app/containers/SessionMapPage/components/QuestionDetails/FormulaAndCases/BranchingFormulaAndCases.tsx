@@ -28,7 +28,7 @@ type Props = {
 };
 
 const BranchingFormulaAndCases = ({
-  question: { id, formula },
+  question: { id, formulas },
   sessions,
   questions,
 }: Props): JSX.Element => {
@@ -90,29 +90,33 @@ const BranchingFormulaAndCases = ({
       <Comment mt={30} mb={15} fontWeight="bold">
         {formatMessage(messages.branchingFormulaAndCases)}
       </Comment>
-      <Formula payload={formula.payload} />
-      <Row>
-        <Column width="auto">
-          {formula.patterns.map(({ match }, index) => (
-            <CaseMatch
-              match={match}
-              key={getCaseMatchElementId(index)}
-              caseTargetElementId={getCaseTargetElementId(index)}
-            />
-          ))}
-        </Column>
-        <Column>
-          {formula.patterns.map(({ target }, index) => (
-            <Box
-              key={getCaseTargetElementId(index)}
-              id={getCaseTargetElementId(index)}
-              mt={15}
-            >
-              {renderSubtargets(target, index)}
-            </Box>
-          ))}
-        </Column>
-      </Row>
+      {formulas.map((formula: any) => (
+        <>
+          <Formula payload={formula.payload} />
+          <Row>
+            <Column width="auto">
+              {formula.patterns.map(({ match }: any, index: number) => (
+                <CaseMatch
+                  match={match}
+                  key={getCaseMatchElementId(index)}
+                  caseTargetElementId={getCaseTargetElementId(index)}
+                />
+              ))}
+            </Column>
+            <Column>
+              {formula.patterns.map(({ target }: any, index: number) => (
+                <Box
+                  key={getCaseTargetElementId(index)}
+                  id={getCaseTargetElementId(index)}
+                  mt={15}
+                >
+                  {renderSubtargets(target, index)}
+                </Box>
+              ))}
+            </Column>
+          </Row>
+        </>
+      ))}
     </>
   );
 };

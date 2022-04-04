@@ -77,6 +77,8 @@ export {
   addFormulaTarget,
   removeFormulaTarget,
   updateFormulaTarget,
+  addNewFormula,
+  removeFormula,
 } from './sessionSettings/actions';
 
 export { SCHEDULE_OPTIONS } from './sessionSettings/constants';
