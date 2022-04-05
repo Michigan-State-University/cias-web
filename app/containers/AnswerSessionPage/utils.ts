@@ -83,6 +83,7 @@ export const getCalendarMetadata = (
   const oldestFilledAnswerDate = getOldestDate(datesWithAnswers);
   const isEveryAnswerFilled =
     oldestFilledAnswerDate?.isSame(startDate, 'day') ?? false;
+  const isMultiMonth = !endDate.isSame(startDate, 'month');
 
   return {
     startDate,
@@ -90,5 +91,6 @@ export const getCalendarMetadata = (
     oldestFilledDate,
     oldestFilledAnswerDate,
     isEveryAnswerFilled,
+    isMultiMonth,
   };
 };

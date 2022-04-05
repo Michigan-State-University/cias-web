@@ -199,4 +199,17 @@ export default defineMessages({
       other {Answer Session}
     }`,
   },
+  monthSelectorModalTitle: {
+    id: `${scope}.monthSelectorModalTitle`,
+    defaultMessage: `Month navigation`,
+  },
+  monthSelectorModalText: {
+    id: `${scope}.monthSelectorModalText`,
+    defaultMessage: `This study covers a period of more than one month. Using the arrows,
+    you can conveniently switch between them to complete all the months.`,
+  },
+  monthSelectorModalButton: {
+    id: `${scope}.monthSelectorModalButton`,
+    defaultMessage: `I understand`,
+  },
 });

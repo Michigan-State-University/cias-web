@@ -89,6 +89,7 @@ const TlfbCalendarLayout = forwardRef<CalendarRef, Props>(
           forceMobile={isMobilePreview}
           disableClose={disableModalClose}
           width={isMobile ? '' : '500px'}
+          specialMobileView
         >
           <>
             {(isMobilePreview || isMobile) && (

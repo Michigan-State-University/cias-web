@@ -4,7 +4,14 @@
  *
  */
 
-import React, { useEffect, ReactNode, useRef, useLayoutEffect } from 'react';
+import React, {
+  useEffect,
+  ReactNode,
+  useRef,
+  useLayoutEffect,
+  CSSProperties,
+  useCallback,
+} from 'react';
 import {
   arrow,
   shift,
@@ -18,6 +25,8 @@ import capitalize from 'lodash/capitalize';
 import useKeyPress from 'utils/useKeyPress';
 import { KeyCodes } from 'utils/constants';
 import { GeometryHelper } from 'utils/mathUtils';
+import { applyStyle } from 'utils/applyStyle';
+import { callback } from 'utils/callback';
 
 import { MODAL_PORTAL_ID } from 'containers/App/constants';
 import Portal from 'components/Portal';
@@ -31,6 +40,7 @@ import {
 import {
   popoverMainAxisPlacement,
   popoverCrossAxisPlacement,
+  DIM_ELEMENT_STYLE,
 } from './constants';
 import { PopoverPlacement } from './types';
 
@@ -39,9 +49,13 @@ export type Props = {
   referenceElement?: string;
   onClose?: () => void;
   portalId?: string;
+  specialMobileView?: boolean;
   forceMobile?: boolean;
+  forceDim?: boolean;
+  excludeRefDim?: boolean | Partial<CSSProperties>;
   width?: string;
   disableClose?: boolean;
+  modalStyle?: Partial<CSSProperties>;
 };
 
 const PopoverModal = ({
@@ -49,11 +63,16 @@ const PopoverModal = ({
   referenceElement,
   onClose,
   portalId,
+  specialMobileView = false,
   forceMobile,
+  forceDim = false,
+  excludeRefDim = false,
   width,
   disableClose = false,
+  modalStyle,
 }: Props): JSX.Element => {
   const arrowRef = useRef<HTMLElement>();
+  const portalRef = useRef<HTMLElement>(null);
 
   const {
     x,
@@ -89,10 +108,6 @@ const PopoverModal = ({
   const { [popoverPlacement]: arrowCrossAxisPlacement } =
     popoverCrossAxisPlacement;
 
-  const handleClose = () => {
-    if (onClose && !disableClose) onClose();
-  };
-
   // must be synchronous to properly detect outside clicks
   useLayoutEffect(() => {
     if (!referenceElement) {
@@ -100,11 +115,33 @@ const PopoverModal = ({
       return;
     }
 
-    const currentElement = document.getElementById(referenceElement);
+    referenceElementForModal(referenceElement);
+  }, [referenceElement]);
+
+  const referenceElementForModal = (referenceString: string) => {
+    const currentElement = document.getElementById(referenceString);
+
     if (currentElement) {
       reference(currentElement);
     }
-  }, [referenceElement]);
+  };
+
+  const updateModal = useCallback(() => {
+    const canUpdateOrReferenceNewElement =
+      referenceElement && portalRef.current;
+
+    if (!canUpdateOrReferenceNewElement) return;
+
+    const hasElementChangedReference = !portalRef.current.contains(
+      referenceRef.current as Element,
+    );
+
+    if (hasElementChangedReference) {
+      referenceElementForModal(referenceElement);
+    }
+
+    update();
+  }, [update, referenceElement, portalRef.current, referenceRef.current]);
 
   useEffect(() => {
     if (referenceRef.current) {
@@ -122,8 +159,18 @@ const PopoverModal = ({
       return;
     }
 
-    return autoUpdate(referenceRef.current, floatingRef.current, update);
-  }, [referenceRef.current, floatingRef.current]);
+    return callback(
+      autoUpdate(referenceRef.current, floatingRef.current, updateModal),
+      applyStyle(referenceRef.current as HTMLElement, {
+        ...DIM_ELEMENT_STYLE,
+        ...(typeof excludeRefDim === 'object' ? excludeRefDim : {}),
+      }),
+    );
+  }, [referenceRef.current, floatingRef.current, updateModal, excludeRefDim]);
+
+  const handleClose = () => {
+    if (onClose && !disableClose) onClose();
+  };
 
   useKeyPress(KeyCodes.ESC, handleClose);
 
@@ -151,21 +198,28 @@ const PopoverModal = ({
   if (!referenceElement) return <></>;
 
   return (
-    <Portal id={portalId ?? MODAL_PORTAL_ID}>
-      <DimBackground $forceMobile={forceMobile} />
+    <Portal id={portalId ?? MODAL_PORTAL_ID} ref={portalRef}>
+      <DimBackground
+        $specialMobileView={specialMobileView}
+        $forceMobile={forceMobile}
+        $forceDim={forceDim}
+      />
       <StyledPopover
         ref={floating}
         id="popover"
+        $specialMobileView={specialMobileView}
         $forceMobile={forceMobile}
         style={{
           width,
           position: strategy,
           top: y ?? '',
           left: x ?? '',
+          ...modalStyle,
         }}
       >
         <StyledArrow
           ref={arrowRef}
+          $specialMobileView={specialMobileView}
           $forceMobile={forceMobile}
           style={{
             left: xArrow,
@@ -173,9 +227,13 @@ const PopoverModal = ({
             [arrowMainAxisPlacement]: -4.5,
             [`border${capitalize(arrowMainAxisPlacement)}Width`]: 1,
             [`border${capitalize(arrowCrossAxisPlacement)}Width`]: 1,
+            borderColor: modalStyle?.borderColor,
           }}
         />
-        <StyledPopoverContent $forceMobile={forceMobile}>
+        <StyledPopoverContent
+          $specialMobileView={specialMobileView}
+          $forceMobile={forceMobile}
+        >
           {children}
         </StyledPopoverContent>
       </StyledPopover>

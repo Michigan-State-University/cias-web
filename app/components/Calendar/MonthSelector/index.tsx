@@ -5,6 +5,7 @@ import arrowGreyLeft from 'assets/svg/arrow-grey-left.svg';
 import arrowGreyRight from 'assets/svg/arrow-grey-right.svg';
 
 import { Container, Month, Year, Arrow } from './styled';
+import { MONTH_SELECTOR_ID } from '../constants';
 
 type MonthSelectorProps = {
   monthDate: Dayjs;
@@ -27,7 +28,7 @@ export const MonthSelector = ({
   const showArrows = canGoNext || canGoPrev;
 
   return (
-    <Container>
+    <Container id={MONTH_SELECTOR_ID}>
       {showArrows && (
         <Arrow
           src={arrowGreyLeft}

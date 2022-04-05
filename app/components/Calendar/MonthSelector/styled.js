@@ -6,7 +6,9 @@ export const Container = styled.div`
   display: flex;
   align-items: center;
   user-select: none;
-  margin-bottom: 32px;
+  margin-bottom: 16px;
+  width: max-content;
+  box-sizing: border-box;
 `;
 
 export const Arrow = styled(Icon).attrs((props) => ({
