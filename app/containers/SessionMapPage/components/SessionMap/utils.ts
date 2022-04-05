@@ -111,32 +111,34 @@ const createSessionNodesFromBranching = (
 ): Node<SessionNodeData>[] => {
   const nodes: Node<SessionNodeData>[] = [];
 
-  question.formula.patterns.forEach(({ target: targets }) =>
-    targets.forEach(({ id: targetId, type }) => {
-      if (!type.startsWith('Session')) return;
+  question.formulas.forEach((formula: any) =>
+    formula.patterns.forEach(({ target: targets }: any) =>
+      targets.forEach(({ id: targetId, type }: any) => {
+        if (!type.startsWith('Session')) return;
 
-      const sessionIndex = sessions.findIndex(({ id }) => id === targetId);
-      if (sessionIndex === -1) return;
+        const sessionIndex = sessions.findIndex(({ id }) => id === targetId);
+        if (sessionIndex === -1) return;
 
-      const sessionNodeId = createSessionNodeId(
-        question.id,
-        sessions[sessionIndex].id,
-      );
-      if (nodeExists(nodes, sessionNodeId)) return;
+        const sessionNodeId = createSessionNodeId(
+          question.id,
+          sessions[sessionIndex].id,
+        );
+        if (nodeExists(nodes, sessionNodeId)) return;
 
-      nodes.push({
-        id: sessionNodeId,
-        type: SessionMapNodeType.SESSION,
-        position: { x: 0, y: 0 },
-        data: {
-          sessionIndex,
-          showDetailedInfo,
-          selected: selectedNodesIds.includes(sessionNodeId),
-          onSelectedChange,
-          selectableOnClick,
-        },
-      });
-    }),
+        nodes.push({
+          id: sessionNodeId,
+          type: SessionMapNodeType.SESSION,
+          position: { x: 0, y: 0 },
+          data: {
+            sessionIndex,
+            showDetailedInfo,
+            selected: selectedNodesIds.includes(sessionNodeId),
+            onSelectedChange,
+            selectableOnClick,
+          },
+        });
+      }),
+    ),
   );
 
   return nodes;
@@ -254,44 +256,46 @@ const createMapEdgesFromBranching = (
 ): Edge[] => {
   const edges: Edge[] = cloneDeep(existingEdges);
   // check every target of every pattern of every question
-  questions.forEach(({ id: nodeId, formula: { patterns } }, questionIndex) =>
-    patterns.forEach(({ target: targets }) =>
-      targets.forEach(({ id: targetId, type }) => {
-        if (!targetId) return;
+  questions.forEach(({ id: nodeId, formulas }, questionIndex) =>
+    formulas.forEach(({ patterns }) =>
+      patterns.forEach(({ target: targets }) =>
+        targets.forEach(({ id: targetId, type }) => {
+          if (!targetId) return;
 
-        if (
-          type.startsWith('Question') &&
-          findQuestionPosition(questions, targetId) < questionIndex
-        ) {
-          // does not create an edge if target question does not exists or is a prior question
-          return;
-        }
+          if (
+            type.startsWith('Question') &&
+            findQuestionPosition(questions, targetId) < questionIndex
+          ) {
+            // does not create an edge if target question does not exists or is a prior question
+            return;
+          }
 
-        if (
-          type.startsWith('Session') &&
-          !sessions.find((session) => session.id === targetId)
-        ) {
-          // does not create an edge if target session does not exists
-          return;
-        }
+          if (
+            type.startsWith('Session') &&
+            !sessions.find((session) => session.id === targetId)
+          ) {
+            // does not create an edge if target session does not exists
+            return;
+          }
 
-        const targetNodeId = type.startsWith('Question')
-          ? targetId
-          : createSessionNodeId(nodeId, targetId);
-        const edgeId = createEdgeId(nodeId, targetNodeId);
+          const targetNodeId = type.startsWith('Question')
+            ? targetId
+            : createSessionNodeId(nodeId, targetId);
+          const edgeId = createEdgeId(nodeId, targetNodeId);
 
-        if (edgeExists(edges, edgeId)) return;
+          if (edgeExists(edges, edgeId)) return;
 
-        edges.push(
-          createEdgeObject(
-            edgeId,
-            nodeId,
-            targetNodeId,
-            selectedQuestionsIds,
-            edgeSharedAttributesGetter,
-          ),
-        );
-      }),
+          edges.push(
+            createEdgeObject(
+              edgeId,
+              nodeId,
+              targetNodeId,
+              selectedQuestionsIds,
+              edgeSharedAttributesGetter,
+            ),
+          );
+        }),
+      ),
     ),
   );
   return edges;

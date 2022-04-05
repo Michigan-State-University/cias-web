@@ -36,6 +36,10 @@ export default defineMessages({
     id: `${scope}.percentGoTo`,
     defaultMessage: 'go to',
   },
+  else: {
+    id: `${scope}.else`,
+    defaultMessage: 'In every other case go to { message }',
+  },
   nextScreen: {
     id: `${scope}.nextScreen`,
     defaultMessage: 'following screen',
@@ -47,10 +51,6 @@ export default defineMessages({
   percentagesSumInvalid: {
     id: `${scope}.percentagesSumInvalid`,
     defaultMessage: 'Sum of random branching percentages must equal 100%',
-  },
-  showRandomization: {
-    id: `${scope}.showRandomization`,
-    defaultMessage: 'Show randomization',
   },
   addRandomization: {
     id: `${scope}.addRandomization`,

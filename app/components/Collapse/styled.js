@@ -4,7 +4,6 @@ import { colors } from 'theme';
 import { style, layout, padding, text } from '../BaseComponentStyles';
 export const StyledCollapseContainer = styled.div`
   width: 100%;
-
   ${style};
 `;
 

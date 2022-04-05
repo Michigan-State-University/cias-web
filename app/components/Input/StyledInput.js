@@ -1,6 +1,8 @@
 import React, { useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
+
 import Box from 'components/Box';
+
 import { TextArea } from './TextArea';
 import { Sufix } from './styled';
 import BaseStyledInput from './BaseStyledInput';
@@ -46,7 +48,6 @@ const StyledInput = (props) => {
       return Math.min(calculatedWidth, props.maxWidth);
     return calculatedWidth;
   };
-
   if (props.type === 'singleline' && !!props.sufix)
     return (
       <Box>
@@ -61,13 +62,12 @@ const StyledInput = (props) => {
         />
         {value && (
           <Sufix>
-            <span className="invisible">{value}</span>
-            <span id="unitsValue">{props.sufix}</span>
+            <span>{value}</span>
+            <span>{props.sufix}</span>
           </Sufix>
         )}
       </Box>
     );
-
   if (props.type === 'singleline')
     return (
       <BaseStyledInput

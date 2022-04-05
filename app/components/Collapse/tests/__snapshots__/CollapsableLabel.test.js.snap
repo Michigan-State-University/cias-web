@@ -24,11 +24,6 @@ exports[`<CollapsableLabel /> should match the snapshot 1`] = `
   align-items: center;
 }
 
-.c4 {
-  width: auto;
-  height: auto;
-}
-
 .c2 {
   width: auto;
   height: auto;
@@ -102,8 +97,7 @@ exports[`<CollapsableLabel /> should match the snapshot 1`] = `
             class="c3"
           >
             <img
-              class="c4 img"
-              role="presentation"
+              class="img"
               src=""
             />
           </div>

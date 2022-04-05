@@ -32,4 +32,16 @@ export default defineMessages({
     id: `${scope}.selectQuestion`,
     defaultMessage: 'Select session',
   },
+  addNewFormula: {
+    id: `${scope}.addNewFormula`,
+    defaultMessage: 'Add new formula',
+  },
+  formulaTitle: {
+    id: `${scope}.formulaTitle`,
+    defaultMessage: 'Formula { index }',
+  },
+  copyFormula: {
+    id: `${scope}.copyFormula`,
+    defaultMessage: 'Copy formula',
+  },
 });

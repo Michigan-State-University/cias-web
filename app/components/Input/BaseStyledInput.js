@@ -11,33 +11,36 @@ export const BaseStyledInput = ({
   averageLetterWidth,
   calculateWidthFromText,
   ...props
-}) => (
-  <Input
-    {...props}
-    textAlign={props.textAlign}
-    value={value}
-    onClick={(e) => {
-      if (props.onClick) props.onClick(e);
-      e.stopPropagation();
-    }}
-    onChange={(event) => onInputChange(event.target.value)}
-    onBlur={handleBlur}
-    onFocus={handleFocus}
-    placeholder={props.placeholder}
-    keyboard={props.keyboard}
-    transparent={props.transparent}
-    width={
-      props.autoSize
-        ? `${calculateWidthFromText(
-            value ? value.length : props.placeholder.length,
-          )}px`
-        : props.width
-    }
-    px={undefined}
-    pl={0}
-    pr={props.sufix && value ? props.sufix.length * averageLetterWidth + 2 : 0}
-  />
-);
+}) => {
+  const sufixLenght = props?.sufix?.length * averageLetterWidth + 2;
+  return (
+    <Input
+      {...props}
+      textAlign={props.textAlign}
+      value={value}
+      onClick={(e) => {
+        if (props.onClick) props.onClick(e);
+        e.stopPropagation();
+      }}
+      onChange={(event) => onInputChange(event.target.value)}
+      onBlur={handleBlur}
+      onFocus={handleFocus}
+      placeholder={props.placeholder}
+      keyboard={props.keyboard}
+      transparent={props.transparent}
+      width={
+        props.autoSize
+          ? `${calculateWidthFromText(
+              value ? value.length : props.placeholder.length,
+            )}px`
+          : props.width
+      }
+      px={undefined}
+      pl={0}
+      pr={props.sufix && value ? sufixLenght : 0}
+    />
+  );
+};
 
 BaseStyledInput.propTypes = {
   value: PropTypes.string,

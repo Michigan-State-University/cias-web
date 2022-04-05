@@ -13,8 +13,6 @@ import EditIcon from 'assets/svg/edit.svg';
 import ArrowDown from 'assets/svg/arrow-down-grey.svg';
 import ArrowUp from 'assets/svg/arrow-up-grey.svg';
 
-import { Label } from './styled';
-
 type BoxCollapseType = {
   id?: string;
   children: ReactElement;
@@ -23,6 +21,16 @@ type BoxCollapseType = {
   onDelete?: () => void;
   disableAnimation?: boolean;
   disabled?: boolean;
+  labelBgColor?: string;
+  labelBgOpacity?: number;
+  labelPadding?: number;
+  showDivider?: boolean;
+  binFillColor?: string;
+  arrowColor?: string;
+  binProps?: object;
+  contentStyle?: object;
+  shouldBeOpenOnStart?: boolean;
+  extraIcons?: ReactElement[];
 } & Record<string, unknown>;
 
 export const BoxCollapse = ({
@@ -33,9 +41,19 @@ export const BoxCollapse = ({
   onDelete,
   disableAnimation,
   disabled = false,
+  extraIcons,
+  labelBgColor,
+  labelBgOpacity,
+  binFillColor,
+  binProps,
+  arrowColor,
+  labelPadding,
+  contentStyle,
+  showDivider,
+  shouldBeOpenOnStart,
   ...styleProps
 }: BoxCollapseType) => {
-  const [isOpened, setOpened] = useState(false);
+  const [isOpened, setOpened] = useState(!!shouldBeOpenOnStart);
   const toggleOpen = () => setOpened((prev) => !prev);
 
   const handleDelete = onDelete
@@ -49,34 +67,42 @@ export const BoxCollapse = ({
     <Box bg={colors.lightBlue} width="100%" {...styleProps}>
       <Collapse
         isOpened={isOpened}
+        extraIcons={extraIcons}
         isBinInCollapse
-        color={colors.lightBlue}
+        color={labelBgColor}
+        bgOpacity={labelBgOpacity}
         binImage={BinIcon}
+        binFillColor={binFillColor}
         onDelete={handleDelete}
         onToggle={toggleOpen}
         onHideImg={ArrowDown}
         onShowImg={ArrowUp}
         binMargin={20}
-        px={0}
+        px={16}
         py={0}
         height={null}
+        binProps={binProps}
+        arrowColor={arrowColor}
         label={
-          <Label
+          <Box
             display="flex"
             justify="between"
             width="100%"
             align="center"
-            py={16}
+            py={labelPadding}
+            color={colors.bluewood}
           >
-            <Text fontSize="16px" fontWeight="bold" id={id}>
+            <Text fontSize="16px" fontWeight="bold">
               {label}
             </Text>
             {onEdit && (
               <ImageButton
                 src={EditIcon}
-                onClick={(e: MouseEvent) => {
-                  e.stopPropagation();
-                  onEdit();
+                onClick={(e: React.MouseEvent) => {
+                  if (onEdit) {
+                    e.stopPropagation();
+                    onEdit();
+                  }
                 }}
                 mr={8}
                 title="Edit item"
@@ -84,13 +110,13 @@ export const BoxCollapse = ({
                 disabled={disabled}
               />
             )}
-          </Label>
+          </Box>
         }
         disableAnimation={disableAnimation}
         disabled={disabled}
       >
-        <Box width="100%" pb={16}>
-          <Divider mb={16} mt={1} />
+        <Box width="100%" px={16} pb={16} {...contentStyle}>
+          {showDivider && <Divider mb={16} mt={1} />}
           {children}
         </Box>
       </Collapse>

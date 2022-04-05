@@ -21,7 +21,7 @@ const customStyles = ({ isMulti, bg, isDisabled, height }) => ({
     borderRadius: '5px',
     borderColor: `${themeColors.highlight}`,
     boxShadow: '0',
-    height: isMulti ? 'auto' : height || '45px',
+    height: height || (isMulti ? 'auto' : '45px'),
     minHeight: '45px',
     width: '100%',
     background: `${bg || 'auto'}`,

@@ -53,7 +53,7 @@ exports[`<Accordion /> Should render multiple elements and match the snapshot 1`
   transform: rotate(180deg);
 }
 
-.c7 .ReactCollapse--collapse {
+.c6 .ReactCollapse--collapse {
   -webkit-transition: height 480ms ease;
   transition: height 480ms ease;
 }
@@ -82,11 +82,6 @@ exports[`<Accordion /> Should render multiple elements and match the snapshot 1`
 }
 
 .c5 {
-  width: auto;
-  height: auto;
-}
-
-.c6 {
   outline: none;
   border: none;
   background: transparent;
@@ -139,8 +134,7 @@ exports[`<Accordion /> Should render multiple elements and match the snapshot 1`
                   display="flex"
                 >
                   <img
-                    class="c5 img"
-                    role="presentation"
+                    class="img"
                     src="IMAGE_MOCK"
                   />
                 </div>
@@ -148,7 +142,7 @@ exports[`<Accordion /> Should render multiple elements and match the snapshot 1`
             </div>
             <button
               aria-label="Delete"
-              class="c6"
+              class="c5"
               data-cy="accordion-element-delete-0"
               data-testid="bin-Label0"
               font-weight="bold"
@@ -161,7 +155,7 @@ exports[`<Accordion /> Should render multiple elements and match the snapshot 1`
             </button>
           </div>
           <div
-            class="c7"
+            class="c6"
           />
         </div>
       </div>
@@ -195,8 +189,7 @@ exports[`<Accordion /> Should render multiple elements and match the snapshot 1`
                   display="flex"
                 >
                   <img
-                    class="c5 img"
-                    role="presentation"
+                    class="img"
                     src="IMAGE_MOCK"
                   />
                 </div>
@@ -204,7 +197,7 @@ exports[`<Accordion /> Should render multiple elements and match the snapshot 1`
             </div>
             <button
               aria-label="Delete"
-              class="c6"
+              class="c5"
               data-cy="accordion-element-delete-1"
               data-testid="bin-Label1"
               font-weight="bold"
@@ -217,7 +210,7 @@ exports[`<Accordion /> Should render multiple elements and match the snapshot 1`
             </button>
           </div>
           <div
-            class="c7"
+            class="c6"
           />
         </div>
       </div>
@@ -251,8 +244,7 @@ exports[`<Accordion /> Should render multiple elements and match the snapshot 1`
                   display="flex"
                 >
                   <img
-                    class="c5 img"
-                    role="presentation"
+                    class="img"
                     src="IMAGE_MOCK"
                   />
                 </div>
@@ -260,7 +252,7 @@ exports[`<Accordion /> Should render multiple elements and match the snapshot 1`
             </div>
             <button
               aria-label="Delete"
-              class="c6"
+              class="c5"
               data-cy="accordion-element-delete-2"
               data-testid="bin-Label2"
               font-weight="bold"
@@ -273,7 +265,7 @@ exports[`<Accordion /> Should render multiple elements and match the snapshot 1`
             </button>
           </div>
           <div
-            class="c7"
+            class="c6"
           />
         </div>
       </div>
@@ -327,7 +319,7 @@ exports[`<Accordion /> Should render only one element and match the snapshot 1`]
   transform: rotate(180deg);
 }
 
-.c6 .ReactCollapse--collapse {
+.c5 .ReactCollapse--collapse {
   -webkit-transition: height 480ms ease;
   transition: height 480ms ease;
 }
@@ -356,11 +348,6 @@ exports[`<Accordion /> Should render only one element and match the snapshot 1`]
 }
 
 .c4 {
-  width: auto;
-  height: auto;
-}
-
-.c5 {
   outline: none;
   border: none;
   background: transparent;
@@ -398,8 +385,7 @@ exports[`<Accordion /> Should render only one element and match the snapshot 1`]
               display="flex"
             >
               <img
-                class="c4 img"
-                role="presentation"
+                class="img"
                 src="IMAGE_MOCK"
               />
             </div>
@@ -407,7 +393,7 @@ exports[`<Accordion /> Should render only one element and match the snapshot 1`]
         </div>
         <button
           aria-label="Delete"
-          class="c5"
+          class="c4"
           data-cy="accordion-element-delete-0"
           data-testid="bin-Label0"
           font-weight="bold"
@@ -420,7 +406,7 @@ exports[`<Accordion /> Should render only one element and match the snapshot 1`]
         </button>
       </div>
       <div
-        class="c6"
+        class="c5"
       />
     </div>
   </div>
@@ -480,7 +466,7 @@ exports[`<Accordion /> Should render with one element opened and match the snaps
   transform: rotate0deg);
 }
 
-.c8 {
+.c7 {
   border-radius: 5px;
   color: white;
   cursor: pointer;
@@ -493,7 +479,7 @@ exports[`<Accordion /> Should render with one element opened and match the snaps
   padding-left: 12px;
 }
 
-.c8 .animated-img {
+.c7 .animated-img {
   -webkit-transition: -webkit-transform 0.3s,height 4s;
   -webkit-transition: transform 0.3s,height 4s;
   transition: transform 0.3s,height 4s;
@@ -502,7 +488,7 @@ exports[`<Accordion /> Should render with one element opened and match the snaps
   transform: rotate(180deg);
 }
 
-.c7 .ReactCollapse--collapse {
+.c6 .ReactCollapse--collapse {
   -webkit-transition: height 480ms ease;
   transition: height 480ms ease;
 }
@@ -531,11 +517,6 @@ exports[`<Accordion /> Should render with one element opened and match the snaps
 }
 
 .c5 {
-  width: auto;
-  height: auto;
-}
-
-.c6 {
   outline: none;
   border: none;
   background: transparent;
@@ -588,8 +569,7 @@ exports[`<Accordion /> Should render with one element opened and match the snaps
                   display="flex"
                 >
                   <img
-                    class="c5 img"
-                    role="presentation"
+                    class="img"
                     src="IMAGE_MOCK"
                   />
                 </div>
@@ -597,7 +577,7 @@ exports[`<Accordion /> Should render with one element opened and match the snaps
             </div>
             <button
               aria-label="Delete"
-              class="c6"
+              class="c5"
               data-cy="accordion-element-delete-0"
               data-testid="bin-Label0"
               font-weight="bold"
@@ -610,7 +590,7 @@ exports[`<Accordion /> Should render with one element opened and match the snaps
             </button>
           </div>
           <div
-            class="c7"
+            class="c6"
           />
         </div>
       </div>
@@ -627,7 +607,7 @@ exports[`<Accordion /> Should render with one element opened and match the snaps
           >
             <div
               aria-describedby="rbd-hidden-text-2-hidden-text-10"
-              class="c8"
+              class="c7"
               data-rbd-drag-handle-context-id="2"
               data-rbd-drag-handle-draggable-id="accordion-1"
               draggable="false"
@@ -644,8 +624,7 @@ exports[`<Accordion /> Should render with one element opened and match the snaps
                   display="flex"
                 >
                   <img
-                    class="c5 img"
-                    role="presentation"
+                    class="img"
                     src="IMAGE_MOCK"
                   />
                 </div>
@@ -653,7 +632,7 @@ exports[`<Accordion /> Should render with one element opened and match the snaps
             </div>
             <button
               aria-label="Delete"
-              class="c6"
+              class="c5"
               data-cy="accordion-element-delete-1"
               data-testid="bin-Label1"
               font-weight="bold"
@@ -666,7 +645,7 @@ exports[`<Accordion /> Should render with one element opened and match the snaps
             </button>
           </div>
           <div
-            class="c7"
+            class="c6"
           />
         </div>
       </div>
@@ -683,7 +662,7 @@ exports[`<Accordion /> Should render with one element opened and match the snaps
           >
             <div
               aria-describedby="rbd-hidden-text-2-hidden-text-10"
-              class="c8"
+              class="c7"
               data-rbd-drag-handle-context-id="2"
               data-rbd-drag-handle-draggable-id="accordion-2"
               draggable="false"
@@ -700,8 +679,7 @@ exports[`<Accordion /> Should render with one element opened and match the snaps
                   display="flex"
                 >
                   <img
-                    class="c5 img"
-                    role="presentation"
+                    class="img"
                     src="IMAGE_MOCK"
                   />
                 </div>
@@ -709,7 +687,7 @@ exports[`<Accordion /> Should render with one element opened and match the snaps
             </div>
             <button
               aria-label="Delete"
-              class="c6"
+              class="c5"
               data-cy="accordion-element-delete-2"
               data-testid="bin-Label2"
               font-weight="bold"
@@ -722,7 +700,7 @@ exports[`<Accordion /> Should render with one element opened and match the snaps
             </button>
           </div>
           <div
-            class="c7"
+            class="c6"
           />
         </div>
       </div>

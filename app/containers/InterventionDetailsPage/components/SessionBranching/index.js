@@ -5,8 +5,9 @@
  */
 
 import React from 'react';
+import { createStructuredSelector } from 'reselect';
 import PropTypes from 'prop-types';
-import { injectIntl } from 'react-intl';
+import { FormattedMessage, injectIntl } from 'react-intl';
 import { connect } from 'react-redux';
 import { compose } from 'redux';
 import { injectReducer } from 'redux-injectors';
@@ -16,9 +17,17 @@ import Row from 'components/Row';
 import Column from 'components/Column';
 import Switch from 'components/Switch';
 import Text from 'components/Text';
+import Box from 'components/Box';
 import BranchingLayout from 'containers/BranchingLayout';
+import BoxCollapse from 'components/BoxCollapse';
+import HoverableBox from 'components/Box/HoverableBox';
+import PlusCircle from 'components/Circle/PlusCircle';
+import { ImageButton } from 'components/Button/ImageButton';
 
-import { createStructuredSelector } from 'reselect';
+import copy from 'assets/svg/copy.svg';
+
+import { colors, themeColors } from 'theme';
+
 import {
   makeSelectIntervention,
   addFormulaCase,
@@ -30,12 +39,15 @@ import {
   addFormulaTarget,
   removeFormulaTarget,
   updateFormulaTarget,
+  addNewFormula,
+  removeFormula,
 } from 'global/reducers/intervention';
 import {
   questionGroupsReducer,
   makeSelectQuestionGroupsSessionId,
   getQuestionGroupsRequest,
 } from 'global/reducers/questionGroups';
+import { duplicateFormula } from 'global/reducers/intervention/sessionSettings/actions';
 import messages from './messages';
 
 function SessionBranching({
@@ -43,7 +55,7 @@ function SessionBranching({
   nextSessionName,
   status,
   onChangeFormulaStatus,
-  formula,
+  formulas,
   session: { id, position, intervention_id: interventionId },
   onFormulaUpdate,
   onAddCase,
@@ -57,6 +69,9 @@ function SessionBranching({
   onAddTarget,
   onUpdateTarget,
   onDeleteTarget,
+  onAddFormula,
+  onRemoveFormula,
+  onDuplicateFormula,
 }) {
   const displayPatternTargetText = (target) => {
     if (!target || target.id === '')
@@ -76,6 +91,26 @@ function SessionBranching({
       fetchQuestions(id);
     }
   };
+
+  const extraIcon = (index) => (
+    <ImageButton
+      src={copy}
+      onClick={(e) => {
+        e.stopPropagation();
+        e.preventDefault();
+        onDuplicateFormula(id, index);
+      }}
+      title={formatMessage(messages.copyFormula)}
+      disabled={disabled}
+      fill={colors.manatee}
+      iconProps={{
+        width: 16,
+        height: 16,
+        mr: 10,
+        mt: 2,
+      }}
+    />
+  );
 
   return (
     <>
@@ -109,27 +144,65 @@ function SessionBranching({
       {status && (
         <Row mx={62} py={20}>
           <Column>
-            <BranchingLayout
-              disabled={disabled}
-              displayPatternTargetText={displayPatternTargetText}
-              formatMessage={formatMessage}
-              formula={formula}
-              id={id}
-              interventionId={interventionId}
-              onAddCase={onAddCase}
-              onDropdownOpen={handleClickAddVariable}
-              onFormulaUpdate={onFormulaUpdate}
-              onRemoveCase={onRemoveCase}
-              onUpdateCase={onUpdateCase}
-              sessionId={id}
-              includeAllVariables
-              includeCurrentSession
-              isMultiSession
-              sessionBranching
-              onAddTarget={onAddTarget}
-              onUpdateTarget={onUpdateTarget}
-              onRemoveTarget={onDeleteTarget}
-            />
+            {formulas?.length > 0 &&
+              formulas.map((formula, index) => (
+                <BoxCollapse
+                  key={`formula-${index}`}
+                  mb={16}
+                  padding={4}
+                  label={formatMessage(messages.formulaTitle, {
+                    index: index + 1,
+                  })}
+                  extraIcons={extraIcon(index)}
+                  onDelete={() => onRemoveFormula(id, index)}
+                  labelBgColor={colors.lightStealBlue}
+                  labelBgOpacity={0.4}
+                  labelPadding={8}
+                  binFillColor={colors.manatee}
+                  arrowColor={themeColors.secondary}
+                  binProps={{
+                    width: 16,
+                    height: 16,
+                  }}
+                  contentStyle={{
+                    px: 8,
+                  }}
+                  shouldBeOpenOnStart
+                >
+                  <BranchingLayout
+                    formulaIndex={index}
+                    disabled={disabled}
+                    displayPatternTargetText={displayPatternTargetText}
+                    formatMessage={formatMessage}
+                    formula={formula}
+                    id={id}
+                    interventionId={interventionId}
+                    onAddCase={onAddCase}
+                    onDropdownOpen={handleClickAddVariable}
+                    onFormulaUpdate={onFormulaUpdate}
+                    onRemoveCase={onRemoveCase}
+                    onUpdateCase={onUpdateCase}
+                    sessionId={id}
+                    includeAllVariables
+                    includeCurrentSession
+                    isMultiSession
+                    sessionBranching
+                    onAddTarget={onAddTarget}
+                    onUpdateTarget={onUpdateTarget}
+                    onRemoveTarget={onDeleteTarget}
+                  />
+                </BoxCollapse>
+              ))}
+            <HoverableBox px={21} py={14} onClick={() => onAddFormula(id)}>
+              <Box>
+                <Row align="center">
+                  <PlusCircle mr={12} />
+                  <Text fontWeight="bold" color={themeColors.secondary}>
+                    <FormattedMessage {...messages.addNewFormula} />
+                  </Text>
+                </Row>
+              </Box>
+            </HoverableBox>
           </Column>
         </Row>
       )}
@@ -143,7 +216,7 @@ SessionBranching.propTypes = {
   status: PropTypes.bool,
   onChangeFormulaStatus: PropTypes.func,
   session: PropTypes.object,
-  formula: PropTypes.object,
+  formulas: PropTypes.array,
   onFormulaUpdate: PropTypes.func,
   onAddCase: PropTypes.func,
   onRemoveCase: PropTypes.func,
@@ -156,6 +229,9 @@ SessionBranching.propTypes = {
   onAddTarget: PropTypes.func,
   onUpdateTarget: PropTypes.func,
   onDeleteTarget: PropTypes.func,
+  onAddFormula: PropTypes.func,
+  onRemoveFormula: PropTypes.func,
+  onDuplicateFormula: PropTypes.func,
 };
 
 const mapStateToProps = createStructuredSelector({
@@ -174,6 +250,9 @@ const mapDispatchToProps = {
   onAddTarget: addFormulaTarget,
   onUpdateTarget: updateFormulaTarget,
   onDeleteTarget: removeFormulaTarget,
+  onAddFormula: addNewFormula,
+  onRemoveFormula: removeFormula,
+  onDuplicateFormula: duplicateFormula,
 };
 
 const withConnect = connect(mapStateToProps, mapDispatchToProps);

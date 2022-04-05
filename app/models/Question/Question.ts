@@ -69,7 +69,7 @@ export interface GenericQuestion<
   subtitle: string;
   narrator: Narrator;
   videoUrl: Nullable<string>;
-  formula: Formula<QuestionFormulaTargetType>;
+  formulas: Array<Formula<QuestionFormulaTargetType>>;
   body: TBody;
   originalText: QuestionOriginalText;
   imageUrl: Nullable<string>;

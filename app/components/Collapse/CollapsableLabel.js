@@ -6,9 +6,9 @@ import bin from 'assets/svg/bin-red.svg';
 import binGrey from 'assets/svg/bin-grey.svg';
 
 import Row from 'components/Row';
-import Img from 'components/Img';
 import Box from 'components/Box';
 import { ImageButton } from 'components/Button';
+import Icon from 'components/Icon';
 
 import { ImageWrapper, StyledCollapseLabel } from './styled';
 import messages from './messages';
@@ -36,15 +36,21 @@ const CollapseLabel = ({
   binImage,
   isBinInCollapse,
   binMargin,
+  binFillColor,
+  binProps,
+  arrowColor,
+  extraIcons,
 }) => {
   const { formatMessage } = useIntl();
   const currentImg = isOpened ? onShowImg : onHideImg;
   const img = animatedImg ? onShowImg : currentImg;
   const imgElement = (
-    <Img
+    <Icon
       className={animatedImg ? 'animated-img' : 'img'}
       src={img}
       role="presentation"
+      stroke={arrowColor}
+      fill={arrowColor}
     />
   );
   const displayedImage = !imgWithBackground ? (
@@ -53,7 +59,7 @@ const CollapseLabel = ({
     <ImageWrapper>{imgElement}</ImageWrapper>
   );
 
-  const deleteIcon = onDelete ? (
+  const deleteIcon = (
     <ImageButton
       src={deleteActive ? binImage : binNotActiveImage}
       onClick={deleteActive ? onDelete : undefined}
@@ -63,9 +69,9 @@ const CollapseLabel = ({
       data-testid={`bin-${label}`}
       data-cy={`accordion-element-delete-${index}`}
       disabled={disabled}
+      fill={binFillColor}
+      iconProps={binProps}
     />
-  ) : (
-    <></>
   );
 
   return (
@@ -89,12 +95,13 @@ const CollapseLabel = ({
         >
           {label}
           <Box display="flex" align="center">
-            {isBinInCollapse && deleteIcon}
+            {extraIcons && extraIcons}
+            {isBinInCollapse && onDelete && deleteIcon}
             {displayedImage}
           </Box>
         </Row>
       </StyledCollapseLabel>
-      {!disabled && !isBinInCollapse && deleteIcon}
+      {!disabled && !isBinInCollapse && onDelete && deleteIcon}
     </Row>
   );
 };
@@ -122,6 +129,10 @@ CollapseLabel.propTypes = {
   binNotActiveImage: PropTypes.node,
   isBinInCollapse: PropTypes.bool,
   binMargin: PropTypes.number,
+  binFillColor: PropTypes.string,
+  binProps: PropTypes.object,
+  arrowColor: PropTypes.string,
+  extraIcons: PropTypes.object,
 };
 
 CollapseLabel.defaultProps = {
