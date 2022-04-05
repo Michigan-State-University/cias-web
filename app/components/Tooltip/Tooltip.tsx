@@ -4,8 +4,14 @@
  *
  */
 
-import React, { memo, useCallback, useEffect, useRef, useState } from 'react';
-import PropTypes from 'prop-types';
+import React, {
+  memo,
+  useCallback,
+  useEffect,
+  useRef,
+  useState,
+  ReactElement,
+} from 'react';
 import ReactTooltip from 'react-tooltip';
 
 import useKeyPress from 'utils/useKeyPress';
@@ -21,6 +27,18 @@ import Portal from 'components/Portal';
 
 import { StyledTooltip } from './styled';
 
+type TooltipProps = {
+  id: string;
+  children?: ReactElement;
+  visible?: boolean;
+  text?: string;
+  icon?: any;
+  content?: ReactElement;
+  place?: 'top' | 'right' | 'bottom' | 'left';
+  stretchContent?: boolean;
+  backgroundColor?: string;
+} & Record<string, unknown>;
+
 /**
  * WARNING: It should be placed after the component with `data-tip` property, not before
  * otherwise it will not render properly
@@ -28,20 +46,24 @@ import { StyledTooltip } from './styled';
 const Tooltip = ({
   id,
   children,
-  visible,
+  visible = true,
   text,
   icon,
   content,
+  place,
+  stretchContent,
+  backgroundColor,
   ...restProps
-}) => {
-  const tooltipRef = useRef();
-  const contentRef = useRef();
+}: TooltipProps) => {
+  const tooltipRef = useRef<HTMLDivElement>();
+  const contentRef = useRef<HTMLDivElement>();
   const [isHovered, setIsHovered] = useState(false);
 
   const onFocusIn = () => setIsHovered(true);
   const onFocusOut = () => setIsHovered(false);
 
-  const showTooltip = () => ReactTooltip.show(tooltipRef.current);
+  const showTooltip = () =>
+    tooltipRef.current && ReactTooltip.show(tooltipRef.current);
   const hideTooltip = () => ReactTooltip.hide(tooltipRef.current);
 
   const shouldShowTooltip = visible && isHovered;
@@ -58,16 +80,16 @@ const Tooltip = ({
     };
   }, [shouldShowTooltip]);
 
-  const onTooltipClick = (event) => {
+  const onTooltipClick = (event: MouseEvent) => {
     const portal = document.getElementById(TOOLTIP_PORTAL_ID);
 
-    if (portal?.contains(event.target)) {
+    if (portal?.contains(event.target as Node)) {
       event.preventDefault();
       event.stopPropagation();
     }
   };
 
-  const getContent = (dataTip) => (
+  const getContent = (dataTip: string) => (
     <Box ref={contentRef}>
       <Text>{dataTip || text}</Text>
       {content}
@@ -82,17 +104,27 @@ const Tooltip = ({
     [],
   );
 
+  const stretchContentStyle = stretchContent
+    ? { width: '100%', height: '100%' }
+    : {};
+
   return (
-    <Box display="flex" {...restProps} onClick={onTooltipClick}>
+    <Box
+      display="flex"
+      {...stretchContentStyle}
+      {...restProps}
+      onClick={onTooltipClick}
+    >
       <Box
         ref={tooltipRef}
         data-tip=""
         data-for={id}
         onMouseEnter={onFocusIn}
         onTouchStart={onFocusIn}
+        {...stretchContentStyle}
       >
         {icon && <Img src={icon} alt="?" />}
-        {children && <div>{children}</div>}
+        {children && <div style={stretchContentStyle}>{children}</div>}
       </Box>
 
       {shouldShowTooltip && (
@@ -106,25 +138,14 @@ const Tooltip = ({
             getContent={getContent}
             delayHide={200}
             afterHide={onFocusOut}
-            overridePosition={calculateTooltipPosition}
+            overridePosition={place ? undefined : calculateTooltipPosition}
+            place={place}
+            backgroundColor={backgroundColor}
           />
         </Portal>
       )}
     </Box>
   );
-};
-
-Tooltip.propTypes = {
-  id: PropTypes.string.isRequired,
-  children: PropTypes.node,
-  icon: PropTypes.any,
-  text: PropTypes.string,
-  content: PropTypes.node,
-  visible: PropTypes.bool,
-};
-
-Tooltip.defaultProps = {
-  visible: true,
 };
 
 export default memo(Tooltip);
