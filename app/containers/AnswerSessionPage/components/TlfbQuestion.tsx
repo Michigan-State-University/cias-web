@@ -131,12 +131,11 @@ const TlfbQuestion = ({
     return consumptions?.length === substances.length;
   }, [answerBody]);
 
-  const { isEveryAnswerFilled, oldestAllowedDate } = useMemo(
+  const { isEveryAnswerFilled, startDate } = useMemo(
     () => getCalendarMetadata(config, tlfbDaysData),
     [config, tlfbDaysData],
   );
-  const isLastDaySelected =
-    selectedDay?.isSame(oldestAllowedDate, 'day') ?? false;
+  const isLastDaySelected = selectedDay?.isSame(startDate, 'day') ?? false;
   const isGoToNextDayDisabled = isLastDaySelected || isEveryAnswerFilled;
 
   useEffect(() => {
