@@ -19,12 +19,14 @@ import LabelledApprovableInput from 'components/Input/LabelledApprovableInput';
 import Radio from 'components/Radio';
 import Text from 'components/Text';
 import TlfbHelpingMaterials from 'components/TlfbHelpingMaterials';
+import Checkbox from 'components/Checkbox';
 
 import messages from './messages';
 import {
   updateDaysCount,
   updateRangeSetting,
   updateDateRange,
+  updateDisplayHelpingMaterials,
 } from './actions';
 import DateRangeChooser from './DateRangeChooser';
 
@@ -50,23 +52,28 @@ const TlfbConfig = ({ statusMetadata: { isEditable } }: TlfbConfigProps) => {
             days_count: daysCount,
             end_date: endDate,
             start_date: startDate,
+            display_helping_materials: displayHelpingMaterials,
           },
         },
       ],
     },
   } = selectedQuestion;
 
-  const handleChange = (numberOfDays: string) =>
+  const handleDaysCountChange = (numberOfDays: string) =>
     dispatch(updateDaysCount(numberOfDays));
 
   const handleRadioChange = (value: boolean) => () =>
     dispatch(updateRangeSetting(value));
 
-  const updateRange = (
+  const handleRangeChange = (
     newStartDate: Nullable<Date>,
     newEndDate: Nullable<Date>,
   ) => {
     dispatch(updateDateRange(newStartDate, newEndDate));
+  };
+
+  const handleDisplayHelpingMaterialsChange = (value: boolean) => {
+    dispatch(updateDisplayHelpingMaterials(value));
   };
 
   return (
@@ -102,7 +109,7 @@ const TlfbConfig = ({ statusMetadata: { isEditable } }: TlfbConfigProps) => {
           placeholder={formatMessage(messages.noOfDaysPlaceholder)}
           value={daysCount}
           validator={naturalNumberValidator}
-          onCheck={handleChange}
+          onCheck={handleDaysCountChange}
           height={48}
           transparent={false}
           disabled={!isEditable}
@@ -110,16 +117,23 @@ const TlfbConfig = ({ statusMetadata: { isEditable } }: TlfbConfigProps) => {
       )}
       {chooseDateRange && (
         <DateRangeChooser
-          onDateRangeUpdate={updateRange}
+          onDateRangeUpdate={handleRangeChange}
           disabled={!isEditable}
           endDate={endDate}
           startDate={startDate}
         />
       )}
-      <Row mt={32} gap={16} align="center">
+      <Row mt={32} mb={24} gap={16} align="center">
         <H2>{formatMessage(messages.helpingMaterials)}</H2>
         <TlfbHelpingMaterials researcher />
       </Row>
+      <Checkbox
+        checked={displayHelpingMaterials}
+        onChange={handleDisplayHelpingMaterialsChange}
+        id="display-tlfb-helping-materials-checkbox"
+      >
+        {formatMessage(messages.displayHelpingMaterials)}
+      </Checkbox>
     </Column>
   );
 };

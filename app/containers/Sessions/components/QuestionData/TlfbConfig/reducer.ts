@@ -1,3 +1,5 @@
+import produce from 'immer';
+
 import { TlfbConfigDTO } from 'models/Question';
 import { getDiffBetweenDatesInDays } from 'utils/dateUtils';
 
@@ -5,44 +7,54 @@ import {
   UPDATE_DAYS_COUNT,
   UPDATE_RANGE_SETTINGS,
   UPDATE_DATE_RANGE,
+  UPDATE_DISPLAY_HELPING_MATERIALS,
 } from './constants';
+import { TlfbConfigAction } from './types';
 
 /* eslint-disable no-param-reassign */
-const tlfbConfigReducer = (question: TlfbConfigDTO, payload: any) => {
-  switch (payload.type) {
-    case UPDATE_DAYS_COUNT: {
-      const {
-        data: { daysCount },
-      } = payload;
-      question.body.data[0].payload.days_count = daysCount;
-      return question;
-    }
-    case UPDATE_RANGE_SETTINGS: {
-      const {
-        data: { selected },
-      } = payload;
-      question.body.data[0].payload.choose_date_range = selected;
-      if (!selected) {
-        question.body.data[0].payload.start_date = '';
-        question.body.data[0].payload.end_date = '';
+const tlfbConfigReducer = (
+  question: TlfbConfigDTO,
+  { type, data }: TlfbConfigAction['payload'],
+) =>
+  produce(question, (draft) => {
+    switch (type) {
+      case UPDATE_DAYS_COUNT: {
+        const { daysCount } = data;
+        draft.body.data[0].payload.days_count = daysCount;
+        break;
       }
-      return question;
-    }
-    case UPDATE_DATE_RANGE: {
-      const {
-        data: { startDate, endDate },
-      } = payload;
-      question.body.data[0].payload.start_date = startDate?.toISOString() || '';
-      question.body.data[0].payload.end_date = endDate?.toISOString() || '';
-      if (startDate && endDate) {
-        const diffDays = getDiffBetweenDatesInDays(startDate, endDate);
-        question.body.data[0].payload.days_count = `${diffDays}`;
+
+      case UPDATE_RANGE_SETTINGS: {
+        const { selected } = data;
+        draft.body.data[0].payload.choose_date_range = selected;
+        if (!selected) {
+          draft.body.data[0].payload.start_date = '';
+          draft.body.data[0].payload.end_date = '';
+        }
+        break;
       }
-      return question;
+
+      case UPDATE_DATE_RANGE: {
+        const { startDate, endDate } = data;
+        draft.body.data[0].payload.start_date = startDate?.toISOString() || '';
+        draft.body.data[0].payload.end_date = endDate?.toISOString() || '';
+        if (startDate && endDate) {
+          const diffDays = getDiffBetweenDatesInDays(startDate, endDate);
+          draft.body.data[0].payload.days_count = `${diffDays}`;
+        }
+        break;
+      }
+
+      case UPDATE_DISPLAY_HELPING_MATERIALS: {
+        const { displayHelpingMaterials } = data;
+        draft.body.data[0].payload.display_helping_materials =
+          displayHelpingMaterials;
+        break;
+      }
+
+      default:
+        break;
     }
-    default:
-      return question;
-  }
-};
+  });
 
 export default tlfbConfigReducer;

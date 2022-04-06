@@ -99,6 +99,14 @@ const TlfbQuestion = ({
     question_group_id: questionGroupId,
   } = question;
 
+  const {
+    data: [
+      {
+        payload: { display_helping_materials: displayHelpingMaterials },
+      },
+    ],
+  } = config;
+
   const selectedDayEvents = useMemo(() => {
     if (!dayId) return undefined;
     return tlfbDaysData[dayId]?.events;
@@ -210,6 +218,7 @@ const TlfbQuestion = ({
       calendarData={tlfbDaysData}
       disableModalClose={!isEveryAnswerFilled}
       isLoading={calendarDataLoading}
+      hideHelpingMaterials={!displayHelpingMaterials}
     >
       {(!isDesktop || isMobilePreview) && (
         <>
@@ -262,7 +271,9 @@ const TlfbQuestion = ({
               : messages.goToNextDay)}
           />
         </Button>
-        {(isMobile || isMobilePreview) && <TlfbHelpingMaterials mobile />}
+        {displayHelpingMaterials && (isMobile || isMobilePreview) && (
+          <TlfbHelpingMaterials mobile />
+        )}
       </Row>
     </TlfbCalendarLayout>
   );

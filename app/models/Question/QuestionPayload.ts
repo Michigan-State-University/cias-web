@@ -63,6 +63,7 @@ export interface TlfbConfigPayload {
   chooseDateRange: boolean;
   startDate?: string;
   endDate?: string;
+  displayHelpingMaterials: boolean;
 }
 
 export type QuestionPayload =

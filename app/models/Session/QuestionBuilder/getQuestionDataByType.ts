@@ -74,7 +74,11 @@ export const getQuestionDataByType = (
       return {
         data: [
           {
-            payload: { choose_date_range: false, days_count: '1' },
+            payload: {
+              choose_date_range: false,
+              days_count: '1',
+              display_helping_materials: true,
+            },
           },
         ],
       };

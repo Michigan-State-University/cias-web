@@ -4,6 +4,7 @@ import {
   UPDATE_DAYS_COUNT,
   UPDATE_RANGE_SETTINGS,
   UPDATE_DATE_RANGE,
+  UPDATE_DISPLAY_HELPING_MATERIALS,
 } from './constants';
 
 export const updateDaysCount = (daysCount: string) =>
@@ -25,4 +26,12 @@ export const updateDateRange = (
   updateQuestionData({
     type: UPDATE_DATE_RANGE,
     data: { startDate, endDate },
+  });
+
+export const updateDisplayHelpingMaterials = (
+  displayHelpingMaterials: boolean,
+) =>
+  updateQuestionData({
+    type: UPDATE_DISPLAY_HELPING_MATERIALS,
+    data: { displayHelpingMaterials },
   });

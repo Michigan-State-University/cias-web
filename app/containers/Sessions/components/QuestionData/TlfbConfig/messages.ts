@@ -39,4 +39,8 @@ export default defineMessages({
     id: `${scope}.helpingMaterials`,
     defaultMessage: 'Helping materials',
   },
+  displayHelpingMaterials: {
+    id: `${scope}.displayHelpingMaterials`,
+    defaultMessage: 'Display helping materials to the participants',
+  },
 });
