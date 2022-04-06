@@ -86,11 +86,13 @@ const RenderQuestionDetails = ({
         subtitle,
         proceed_button: proceedButton,
       } = {},
-      narrator: { settings } = {},
+      narrator: { settings, blocks } = {},
     } = selectedQuestion || {};
 
     const isNameScreen = type === nameQuestion.id;
     const isFinishScreen = type === finishQuestion.id;
+
+    const displayNarrator = Boolean(blocks?.length);
 
     return (
       <AnswerOuterContainer>
@@ -130,11 +132,13 @@ const RenderQuestionDetails = ({
             ref={animationBoundaries}
             id="quill_boundaries"
           >
-            <QuestionNarrator
-              questionId={id}
-              animationBoundaries={animationBoundaries}
-              settings={{ ...settings, title, subtitle }}
-            />
+            {displayNarrator && (
+              <QuestionNarrator
+                questionId={id}
+                animationBoundaries={animationBoundaries}
+                settings={{ ...settings, title, subtitle }}
+              />
+            )}
             <Row justify="center" width="100%">
               <AppContainer disablePageTitle $width="100%">
                 {!isNarratorTabOrEditNotPossible && (

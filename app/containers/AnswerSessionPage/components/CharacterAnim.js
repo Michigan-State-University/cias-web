@@ -334,9 +334,11 @@ const CharacterAnim = ({
     !state.currentData.animationData ||
     !decideIfPlaySpeechAnimation();
 
+  const displayNarrator = settings.animation && Boolean(blocks.length);
+
   return (
     <NarratorContainer>
-      {settings.animation && (
+      {displayNarrator && (
         <Draggable disabled position={animationPos}>
           <Lottie
             ref={animationRef}

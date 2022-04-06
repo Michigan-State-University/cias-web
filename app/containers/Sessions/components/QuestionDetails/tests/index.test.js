@@ -48,6 +48,13 @@ describe('<QuestionDetails />', () => {
               voice: true,
               animation: true,
             },
+            blocks: [
+              {
+                animation: 'standStill',
+                type: 'BodyAnimation',
+                endPosition: elements.characterInitialPosition,
+              },
+            ],
           },
           body: {
             data: [{ payload: '' }],
