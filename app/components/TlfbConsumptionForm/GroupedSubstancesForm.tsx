@@ -1,7 +1,7 @@
 import React, { memo } from 'react';
 import { useIntl } from 'react-intl';
 
-import { themeColors } from 'theme';
+import { colors, themeColors } from 'theme';
 
 import { SubstanceConsumption } from 'models/Tlfb';
 import { SubstanceGroup } from 'models/Question';
@@ -87,7 +87,9 @@ const Component = ({
             id={generateGroupId(group.name)}
             key={`substance-group-${index}`}
             label={group.name}
-            px={12}
+            bg={colors.lightStealBlue}
+            bgOpacity={0.2}
+            labelBgOpacity={0}
           >
             <>
               {consumptionsMap[index].map((consumption, substanceIndex) => (

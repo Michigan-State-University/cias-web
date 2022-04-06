@@ -7,7 +7,7 @@ import { SubstanceGroup, Substance } from 'models/Question';
 import BoxCollapse from 'components/BoxCollapse';
 import BoxTable from 'components/BoxTable';
 import { TextButton } from 'components/Button';
-import { themeColors } from 'theme';
+import { themeColors, colors } from 'theme';
 import HoverableBox from 'components/Box/HoverableBox';
 import Box from 'components/Box';
 import Text from 'components/Text';
@@ -129,9 +129,10 @@ export const GroupedSubstances = ({
           onEdit={onEditGroup(index)}
           onDelete={onRemoveGroup(index)}
           mb={16}
-          px={16}
           disableAnimation={!!error}
           disabled={disabled}
+          labelBgColor={colors.lightBlue}
+          bg={colors.lightBlue}
         >
           <>
             <BoxTable
