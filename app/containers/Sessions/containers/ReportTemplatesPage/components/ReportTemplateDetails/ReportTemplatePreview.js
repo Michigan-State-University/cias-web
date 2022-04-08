@@ -1,31 +1,37 @@
 import React, { useContext, useEffect, useState } from 'react';
-import PropTypes from 'prop-types';
-import { compose } from 'redux';
-import { connect } from 'react-redux';
+import { useDispatch } from 'react-redux';
 import { Row, Col, Container } from 'react-grid-system';
-import { injectIntl, IntlShape } from 'react-intl';
+import { useIntl } from 'react-intl';
 
 import {
   addTemplateSectionRequest,
+  reorderTemplateSectionRequest,
   updateReportTemplateRequest,
 } from 'global/reducers/reportTemplates';
 
 import { TemplateSectionBuilder } from 'models/ReportTemplate';
 
 import DashedButton from 'components/Button/DashedButton';
-
 import Img from 'components/Img';
 import { StyledInput } from 'components/Input/StyledInput';
+import { DndSortable } from 'components/DragAndDrop';
+
 import TemplateSectionItem from './TemplateSectionItem';
 import { CardBox } from '../../styled';
 import { ReportTemplatesContext } from '../../utils';
 import messages from '../../messages';
 
-const ReportTemplatePreview = ({
-  intl: { formatMessage },
-  addSection,
-  updateReportTemplate,
-}) => {
+const ReportTemplatePreview = () => {
+  const { formatMessage } = useIntl();
+  const dispatch = useDispatch();
+
+  const addSection = (section, reportId) =>
+    dispatch(addTemplateSectionRequest(section, reportId));
+  const updateReportTemplate = (sessionId, reportTemplate, imageData) =>
+    dispatch(updateReportTemplateRequest(sessionId, reportTemplate, imageData));
+  const reorderSections = (reportId, reorderedSections) =>
+    dispatch(reorderTemplateSectionRequest(reportId, reorderedSections));
+
   const {
     selectedReportId,
     sessionId,
@@ -33,6 +39,24 @@ const ReportTemplatePreview = ({
     loaders: { updateReportTemplateLoading },
     canEdit,
   } = useContext(ReportTemplatesContext);
+
+  const [, setDraggingSectionId] = useState(null);
+
+  const onDragStart = e => {
+    setDraggingSectionId(e.active.id);
+  };
+
+  const onDragEnd = (_, items, hasChanged) => {
+    setDraggingSectionId(null);
+
+    if (!hasChanged) return;
+
+    const reorderedSections = items.map((section, index) => ({
+      ...section,
+      position: index,
+    }));
+    reorderSections(selectedReportId, reorderedSections);
+  };
 
   useEffect(() => {
     if (!updateReportTemplateLoading) setIsAddingSection(false);
@@ -85,16 +109,22 @@ const ReportTemplatePreview = ({
                   />
                 </Col>
               </Row>
-              {singleReportTemplate.sections.map(section => (
-                <Row
-                  key={`template-section-${section.id}`}
-                  style={{ padding: 0 }}
-                >
-                  <Col style={{ padding: 0 }}>
-                    <TemplateSectionItem templateSection={section} />
-                  </Col>
-                </Row>
-              ))}
+              <DndSortable
+                onDragEnd={onDragEnd}
+                onDragStart={onDragStart}
+                items={singleReportTemplate.sections}
+              >
+                {({ item, dragHandleProps }) => (
+                  <Row style={{ padding: 0 }}>
+                    <Col style={{ padding: 0 }}>
+                      <TemplateSectionItem
+                        templateSection={item}
+                        dragHandleProps={dragHandleProps}
+                      />
+                    </Col>
+                  </Row>
+                )}
+              </DndSortable>
               <Row>
                 <Col>
                   <DashedButton
@@ -114,23 +144,4 @@ const ReportTemplatePreview = ({
   );
 };
 
-const mapDispatchToProps = {
-  addSection: addTemplateSectionRequest,
-  updateReportTemplate: updateReportTemplateRequest,
-};
-
-const withConnect = connect(
-  null,
-  mapDispatchToProps,
-);
-
-ReportTemplatePreview.propTypes = {
-  intl: PropTypes.shape(IntlShape),
-  addSection: PropTypes.func,
-  updateReportTemplate: PropTypes.func,
-};
-
-export default compose(
-  withConnect,
-  injectIntl,
-)(ReportTemplatePreview);
+export default ReportTemplatePreview;

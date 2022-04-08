@@ -31,6 +31,7 @@ export {
   selectReportTemplate,
   selectTemplateSection,
   generateTestReportRequest,
+  reorderTemplateSectionRequest,
 } from './actions';
 export { ReportFor } from './constants';
 export { initialState } from './reducer';
