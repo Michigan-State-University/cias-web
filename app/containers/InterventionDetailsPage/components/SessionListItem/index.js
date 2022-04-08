@@ -30,6 +30,7 @@ import { SHARE_IDS } from 'containers/SettingsPanel/utils';
 import { variableNameValidator } from 'utils/validators';
 import globalMessages from 'global/i18n/globalMessages';
 
+import duplicateInternally from 'assets/svg/duplicate-internally.svg';
 import copy from 'assets/svg/copy.svg';
 import bin from 'assets/svg/bin-no-bg.svg';
 import mail from 'assets/svg/pink-mail.svg';
@@ -78,19 +79,19 @@ function SessionListItem({
 
   const options = [
     {
-      id: 'copy',
-      label: formatMessage(messages.copy),
-      icon: copy,
-      action: () => setCopyOpen(true),
-      color: colors.bluewood,
-    },
-    {
       id: 'duplicate',
       label: formatMessage(messages.duplicate),
       icon: copy,
       action: () => handleCopySession(id),
       color: colors.bluewood,
       disabled,
+    },
+    {
+      id: 'copy',
+      label: formatMessage(messages.copy),
+      icon: duplicateInternally,
+      action: () => setCopyOpen(true),
+      color: colors.bluewood,
     },
     {
       id: 'delete',

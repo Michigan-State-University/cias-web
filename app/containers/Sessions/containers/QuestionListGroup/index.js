@@ -118,10 +118,10 @@ const QuestionListGroup = ({
         imgWithBackground
         label={
           <Row align="center" justify="between" width="100%" mr={10}>
-            <Box display="flex">
+            <Box display="flex" align="center">
               {manage && !isFinishGroup && (
                 <Checkbox
-                  mr={2}
+                  mr={8}
                   onClick={e => {
                     e.stopPropagation();
                     toggleGroup(questions);

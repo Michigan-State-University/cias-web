@@ -48,6 +48,11 @@ import Checkbox from 'components/Checkbox';
 import ConfirmationBox from 'components/ConfirmationBox';
 import Text from 'components/Text';
 import scrollByRef from 'utils/scrollByRef';
+
+import copy from 'assets/svg/copy.svg';
+import bin from 'assets/svg/bin-no-bg.svg';
+import duplicateInternally from 'assets/svg/duplicate-internally.svg';
+
 import VariableInput from '../QuestionDetails/VariableInput';
 import { ClampedTitle, ToggleableBox } from './styled';
 import messages from './messages';
@@ -148,17 +153,19 @@ const QuestionListItem = ({
 
   const options = [
     {
-      id: 'copy',
-      label: <FormattedMessage {...messages.copy} />,
-      action: handleCopyModal,
-      color: colors.black,
-    },
-    {
       id: 'duplicate',
       label: <FormattedMessage {...messages.duplicate} />,
       action: handleCopy,
       color: colors.black,
       disabled: disabled || !canDuplicate,
+      icon: copy,
+    },
+    {
+      id: 'copy',
+      label: <FormattedMessage {...messages.copy} />,
+      action: handleCopyModal,
+      color: colors.black,
+      icon: duplicateInternally,
     },
     {
       id: 'delete',
@@ -166,6 +173,7 @@ const QuestionListItem = ({
       action: () => setDeleteOpen(true),
       color: themeColors.warning,
       disabled,
+      icon: bin,
     },
   ];
 
@@ -258,7 +266,7 @@ const QuestionListItem = ({
           </Column>
           {!manage && !isFinishScreen && (
             <Column xs={1}>
-              <Dropdown options={options} />
+              <Dropdown options={options} dropdownWidth={180} />
             </Column>
           )}
         </Row>
