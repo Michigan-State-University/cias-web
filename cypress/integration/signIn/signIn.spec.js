@@ -16,19 +16,13 @@ describe('Login test', () => {
   });
 
   it('Should display error on invalid email', () => {
-    cy.get('input[name=email]')
-      .type('some-name')
-      .blur();
+    cy.get('input[name=email]').type('some-name').blur();
     expect(cy.contains('Provide valid email')).to.exist;
   });
 
   it('Should login correctly', () => {
-    cy.get('input[name=email]')
-      .type(Cypress.env(ADMIN_EMAIL))
-      .blur();
-    cy.get('input[name=password]')
-      .type(Cypress.env(ADMIN_PASSWORD))
-      .blur();
+    cy.get('input[name=email]').type(Cypress.env(ADMIN_EMAIL)).blur();
+    cy.get('input[name=password]').type(Cypress.env(ADMIN_PASSWORD)).blur();
     cy.get('button').click();
     expect(cy.contains('My Dashboard')).to.exist;
   });

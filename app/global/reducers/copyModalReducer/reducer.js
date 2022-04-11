@@ -39,7 +39,7 @@ export const initialState = {
 /* eslint-disable default-case, no-param-reassign */
 
 export const copyModalReducer = (state = initialState, action) =>
-  produce(state, draft => {
+  produce(state, (draft) => {
     switch (action.type) {
       case FETCH_INTERVENTIONS_REQUEST:
         draft.loaders.interventions = true;

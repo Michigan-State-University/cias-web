@@ -19,7 +19,7 @@ const TemplateSectionItem = ({ templateSection, dragHandleProps }) => {
   const { formatMessage } = useIntl();
   const dispatch = useDispatch();
 
-  const selectSection = id => dispatch(selectTemplateSection(id));
+  const selectSection = (id) => dispatch(selectTemplateSection(id));
 
   const { selectedTemplateSectionId } = useContext(ReportTemplatesContext);
 

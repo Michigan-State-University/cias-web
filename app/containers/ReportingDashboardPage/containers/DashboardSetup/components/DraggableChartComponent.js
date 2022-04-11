@@ -10,7 +10,7 @@ import Icon from 'components/Icon';
 import ChartTileUI from './ChartTileUI';
 import { DashboardSectionsContext } from '../constants';
 
-const DraggableChartComponent = props => {
+const DraggableChartComponent = (props) => {
   const {
     chart: { id },
     fromDashboardView,
@@ -31,7 +31,7 @@ const DraggableChartComponent = props => {
     transition,
   };
 
-  const preventClickActions = e => {
+  const preventClickActions = (e) => {
     e.preventDefault();
     e.stopPropagation();
   };

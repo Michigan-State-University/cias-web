@@ -25,11 +25,11 @@ const CurrencySelect = ({ disabled, value, onSelect, inputId }) => {
     </Row>
   );
 
-  const handleOnSelect = option => onSelect(option.value);
+  const handleOnSelect = (option) => onSelect(option.value);
 
   const prefixOptions = useMemo(
     () =>
-      union(popularCurrencies, codes()).map(currency => ({
+      union(popularCurrencies, codes()).map((currency) => ({
         value: currency,
         label: getCodeLabel(currency),
       })),
@@ -37,7 +37,7 @@ const CurrencySelect = ({ disabled, value, onSelect, inputId }) => {
   );
 
   const selectedValue = useMemo(
-    () => prefixOptions.find(option => option.value === value),
+    () => prefixOptions.find((option) => option.value === value),
     [value],
   );
 

@@ -1,7 +1,7 @@
 import { formatMessage } from 'utils/intlOutsideReact';
 import globalMessages from 'global/i18n/globalMessages';
 
-export const requestErrorMessageHandler = error => {
+export const requestErrorMessageHandler = (error) => {
   if (!error) return formatMessage(globalMessages.errors.unknownRequestError);
 
   if (error.isAxiosError && error.response) {

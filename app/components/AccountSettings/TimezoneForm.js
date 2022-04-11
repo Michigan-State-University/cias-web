@@ -13,12 +13,10 @@ import messages from './messages';
 dayjs.extend(utc);
 dayjs.extend(timezone);
 
-const timezoneLabel = timeZone =>
-  `${timeZone} (UTC ${dayjs()
-    .tz(timeZone)
-    .format('Z')})`;
+const timezoneLabel = (timeZone) =>
+  `${timeZone} (UTC ${dayjs().tz(timeZone).format('Z')})`;
 
-const initialValues = user => {
+const initialValues = (user) => {
   const { timeZone } = user;
   return {
     timeZone: {
@@ -37,7 +35,7 @@ const TimezoneForm = ({ formatMessage, user, editUser }) => {
 
   const timezoneOptions = useMemo(
     () =>
-      TIMEZONES.map(elem => ({
+      TIMEZONES.map((elem) => ({
         value: elem,
         label: timezoneLabel(elem),
       })),

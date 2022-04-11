@@ -9,6 +9,6 @@ export default defineMessages({
   },
   pageHeader: {
     id: `${scope}.pageHeader`,
-    defaultMessage: 'Dashboard',
+    defaultMessage: 'Reports',
   },
 });

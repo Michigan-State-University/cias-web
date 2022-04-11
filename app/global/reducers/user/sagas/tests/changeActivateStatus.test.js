@@ -18,7 +18,7 @@ import changeActivateStatusSaga, {
 import messages from '../../messages';
 
 describe('changeActivateStatus saga', () => {
-  const createPayload = active => ({
+  const createPayload = (active) => ({
     userId: '0',
     active,
   });

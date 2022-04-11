@@ -43,6 +43,7 @@ const UserSelector = ({
   rolesToInclude,
   additionalUsers = [],
   disabled,
+  selectProps,
 }) => {
   useEffect(() => {
     fetchUsersRequest(rolesToInclude);
@@ -93,6 +94,7 @@ const UserSelector = ({
             onChange: handleOnSelect,
             placeholder: formatMessage(messages.inputPlaceholder),
             noOptionsMessage: () => formatMessage(messages.noUsersMessage),
+            ...selectProps,
           }}
         />
       </Row>
@@ -109,6 +111,7 @@ UserSelector.propTypes = {
   disabled: PropTypes.bool,
   rolesToInclude: PropTypes.arrayOf(PropTypes.string),
   additionalUsers: PropTypes.arrayOf(PropTypes.object),
+  selectProps: PropTypes.object,
 };
 
 UserSelector.defaultProps = {
@@ -123,10 +126,7 @@ const mapDispatchToProps = {
   fetchUsersRequest: fetchUsersSelector,
 };
 
-const withConnect = connect(
-  mapStateToProps,
-  mapDispatchToProps,
-);
+const withConnect = connect(mapStateToProps, mapDispatchToProps);
 
 const withSaga = injectSaga({ key: 'userList', saga: userListSaga });
 const withReducer = injectReducer({

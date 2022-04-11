@@ -17,14 +17,29 @@ function FormikHookInput({
   label,
   inputProps,
   children,
+  onBlur,
+  onChange,
   ...columnStyleProps
 }) {
   const field = formikState.getFieldProps(formikKey);
   const meta = formikState.getFieldMeta(formikKey);
 
-  const { value, onBlur, onChange } = field;
+  const { validateOnMount } = formikState;
+  const { value, onBlur: onFormikBlur, onChange: onFormikChange } = field;
   const { error, touched } = meta;
-  const hasError = Boolean(touched && error);
+
+  const shouldValidate = validateOnMount || touched;
+  const hasError = Boolean(shouldValidate && error);
+
+  const handleBlur = (event) => {
+    onFormikBlur(event);
+    if (onBlur) onBlur(event);
+  };
+
+  const handleChange = (event) => {
+    onFormikChange(event);
+    if (onChange) onChange(event);
+  };
 
   return (
     <TransparentFormikInput
@@ -32,9 +47,9 @@ function FormikHookInput({
       hasError={hasError}
       inputProps={inputProps}
       label={label}
-      name={formikKey}
-      onBlur={onBlur}
-      onChange={onChange}
+      id={formikKey}
+      onBlur={handleBlur}
+      onChange={handleChange}
       type={type}
       value={value}
       {...columnStyleProps}
@@ -52,6 +67,9 @@ FormikHookInput.propTypes = {
   label: PropTypes.string,
   inputProps: PropTypes.object,
   children: PropTypes.node,
+  transparent: PropTypes.bool,
+  onBlur: PropTypes.func,
+  onChange: PropTypes.func,
 };
 
 export default memo(FormikHookInput);

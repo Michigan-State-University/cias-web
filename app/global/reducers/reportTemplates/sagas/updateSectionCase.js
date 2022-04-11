@@ -13,9 +13,7 @@ import messages from '../messages';
 function* updateSectionCase({
   payload: { sectionCase, sectionId, imageData },
 }) {
-  const requestUrl = `/v1/report_templates/sections/${sectionId}/variants/${
-    sectionCase.id
-  }`;
+  const requestUrl = `/v1/report_templates/sections/${sectionId}/variants/${sectionCase.id}`;
 
   try {
     if (!imageData) {

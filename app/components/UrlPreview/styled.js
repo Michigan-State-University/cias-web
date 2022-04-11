@@ -4,15 +4,15 @@ import Text from 'components/Text';
 import H3 from 'components/H3';
 
 export const Thumbnail = styled.div`
-  background-image: url("${props => props.image}");
+  background-image: url('${(props) => props.image}');
   background-size: cover;
   background-color: ${colors.grey};
   background-position: center;
   width: 30%;
   border-bottom-right-radius: 10px;
   border-top-right-radius: 10px;
-  &:hover{
-  cursor: pointer;
+  &:hover {
+    cursor: pointer;
   }
 `;
 

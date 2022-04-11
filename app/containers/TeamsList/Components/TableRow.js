@@ -19,7 +19,7 @@ const TableRow = ({
 }) => {
   const { isAdmin } = useContext(TeamListContext);
 
-  const handleClick = e => {
+  const handleClick = (e) => {
     e.stopPropagation();
     openModal({
       id,

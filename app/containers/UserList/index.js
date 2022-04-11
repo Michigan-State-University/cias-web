@@ -11,7 +11,7 @@ import { Helmet } from 'react-helmet';
 import { compose } from 'redux';
 import { connect } from 'react-redux';
 import { createStructuredSelector } from 'reselect';
-import { injectIntl, IntlShape, FormattedMessage } from 'react-intl';
+import { FormattedMessage, useIntl } from 'react-intl';
 import { injectReducer, injectSaga } from 'redux-injectors';
 
 import { Container, Row, Col } from 'react-grid-system';
@@ -57,11 +57,13 @@ function UserList({
   sendInvitation,
   deleteError,
   filterableRoles,
-  intl: { formatMessage },
   user: { roles },
   listOnly,
   teamId,
+  pageTitle,
 }) {
+  const { formatMessage } = useIntl();
+
   const pages = Math.ceil(usersSize / PER_PAGE);
 
   const [filterText, setFilterText] = useState('');
@@ -87,7 +89,7 @@ function UserList({
     }
   }, [usersSize]);
 
-  const toggleRole = role => () => {
+  const toggleRole = (role) => () => {
     const toggledArray = xor(selectRoles, [role]);
     setSelectRoles(toggledArray);
   };
@@ -120,29 +122,30 @@ function UserList({
                       width={15}
                       onClick={() => setSelectRoles(filterableRoles)}
                       background="none"
+                      ariaText={formatMessage(messages.clearFiltersText)}
                     />
                   </Col>
                 )}
                 {clearFilters && <Box width={25} />}
                 <Col xs={12} sm={4} style={{ marginBottom: 10 }}>
-                  <Box
-                    cursor="pointer"
-                    onClick={() => setShowInactive(!showInactive)}
-                    display="inline-flex"
-                    justify="center"
-                    align="center"
+                  <Checkbox
+                    id="show-inactive"
+                    mr={5}
+                    checked={showInactive}
+                    onChange={() => setShowInactive(!showInactive)}
                   >
-                    <Checkbox mr={5} checked={showInactive} />
                     <FormattedMessage {...messages.showInactive} />
-                  </Box>
+                  </Checkbox>
                 </Col>
               </Row>
             </Col>
             <Col xs={12} xl={6} xxl={7} style={{ marginBottom: 10 }}>
               <SearchInput
                 value={filterText}
-                onChange={e => setFilterText(e.target.value)}
+                onChange={(e) => setFilterText(e.target.value)}
                 debounceTime={initialDelay}
+                placeholder={formatMessage(messages.searchPlaceholder)}
+                aria-label={formatMessage(messages.searchPlaceholder)}
               />
             </Col>
           </Row>
@@ -177,10 +180,9 @@ function UserList({
       />
       <Box height="100%" overflow="scroll" display="flex" justify="center">
         <Helmet>
-          <title>Users list</title>
-          <meta name="description" content="List of users" />
+          <title>{pageTitle ?? formatMessage(messages.manageAccount)}</title>
         </Helmet>
-        <Box mt={30} width="100%" px="10%">
+        <Box mt={64} width="100%" px="10%">
           <Box display="flex" mb={30}>
             <H1 mr={10}>
               <FormattedMessage {...messages.manageAccount} />
@@ -209,13 +211,13 @@ UserList.propTypes = {
   changeActivateStatus: PropTypes.func.isRequired,
   removeUserFromTeam: PropTypes.func.isRequired,
   userList: PropTypes.object,
-  intl: PropTypes.shape(IntlShape),
   user: PropTypes.object,
   listOnly: PropTypes.bool,
   teamId: PropTypes.string,
   deleteError: PropTypes.func,
   sendInvitation: PropTypes.func,
   filterableRoles: PropTypes.arrayOf(PropTypes.string),
+  pageTitle: PropTypes.string,
 };
 
 UserList.defaultProps = {
@@ -242,15 +244,11 @@ const mapDispatchToProps = {
   deleteError: changeErrorValue,
 };
 
-const withConnect = connect(
-  mapStateToProps,
-  mapDispatchToProps,
-);
+const withConnect = connect(mapStateToProps, mapDispatchToProps);
 
 export default compose(
   withConnect,
   injectReducer({ key: 'userList', reducer: UserListReducer }),
   injectSaga({ key: 'userList', saga: userListSaga }),
   memo,
-  injectIntl,
 )(UserList);

@@ -55,7 +55,7 @@ dayjs.extend(timezone);
 
 const passwordLength = 8;
 
-const validationSchema = formatMessage =>
+const validationSchema = (formatMessage) =>
   Yup.object().shape({
     email: Yup.string()
       .required(formatMessage(messages.emailRequired))
@@ -69,7 +69,7 @@ const validationSchema = formatMessage =>
       .test(
         'password',
         formatMessage(messages.passwordInvalid),
-        value => value && !!value.match(passwordRegex),
+        (value) => value && !!value.match(passwordRegex),
       ),
     passwordConfirmation: Yup.string().oneOf(
       [Yup.ref('password'), null],
@@ -80,7 +80,7 @@ const validationSchema = formatMessage =>
     terms: Yup.bool().oneOf([true], formatMessage(messages.termsRequired)),
   });
 
-const initialValues = email => ({
+const initialValues = (email) => ({
   email: email || '',
   password: '',
   passwordConfirmation: '',
@@ -99,10 +99,11 @@ export function RegisterPage({
   const [showTermsModal, setShowTermsModal] = useState(false);
   useInjectReducer({ key: 'registerPage', reducer });
   useInjectSaga({ key: 'allRegistrationsSaga', saga: allRegistrationsSaga });
-  const { email, invitation_token: invitationToken, role } = queryString.parse(
-    location.search,
-    { decode: false },
-  );
+  const {
+    email,
+    invitation_token: invitationToken,
+    role,
+  } = queryString.parse(location.search, { decode: false });
   const isInvite = Boolean(invitationToken) && Boolean(email);
 
   const termsAndConditionsText =
@@ -149,7 +150,7 @@ export function RegisterPage({
             initialValues={initialValues(email)}
             onSubmit={onSubmit}
           >
-            {formikProps => {
+            {(formikProps) => {
               const { handleSubmit } = formikProps;
               const sharedProps = {
                 inputProps: {
@@ -263,10 +264,7 @@ const mapDispatchToProps = {
   registerResearcher: registerResearcherRequest,
 };
 
-const withConnect = connect(
-  mapStateToProps,
-  mapDispatchToProps,
-);
+const withConnect = connect(mapStateToProps, mapDispatchToProps);
 
 export default compose(
   withConnect,

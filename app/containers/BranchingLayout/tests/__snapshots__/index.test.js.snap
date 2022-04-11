@@ -1,17 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`<BranchingLayout /> Should render and match the snapshot 1`] = `
-.c0 {
-  display: -webkit-box;
-  display: -webkit-flex;
-  display: -ms-flexbox;
-  display: flex;
-  -webkit-flex-direction: column;
-  -ms-flex-direction: column;
-  flex-direction: column;
-  width: 100%;
-}
-
 .c2 {
   display: -webkit-box;
   display: -webkit-flex;
@@ -115,6 +104,17 @@ exports[`<BranchingLayout /> Should render and match the snapshot 1`] = `
   display: block;
   border-radius: 5px;
   margin-top: 20px;
+}
+
+.c0 {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-flex-direction: column;
+  -ms-flex-direction: column;
+  flex-direction: column;
+  width: 100%;
 }
 
 .c5 {
@@ -243,6 +243,7 @@ exports[`<BranchingLayout /> Should render and match the snapshot 1`] = `
         width="100%"
       >
         <textarea
+          aria-label="Enter formula here... (You can use mathematical operators +, -, *, /)"
           class="c10"
           data-cy="text-area"
           height="auto"

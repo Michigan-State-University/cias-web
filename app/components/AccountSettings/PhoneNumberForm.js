@@ -44,6 +44,7 @@ const PhoneNumberForm = ({
   loading,
   disabled,
   required,
+  confirmationDisabled,
 }) => {
   const previousLoadingState = useRef(loading);
   const inputNumberRef = useRef(null);
@@ -89,7 +90,7 @@ const PhoneNumberForm = ({
   const getCodeLabel = (country = 'US') => (
     <Row align="center">
       <FlagIcon code={country} />
-      <Text ml={10} fintSize={18}>{`${country} +${getCountryCallingCode(
+      <Text ml={10} fontSize={18}>{`${country} +${getCountryCallingCode(
         country,
       )}`}</Text>
     </Row>
@@ -97,7 +98,7 @@ const PhoneNumberForm = ({
 
   const prefixOptions = useMemo(
     () =>
-      union(popularPrefixes, getCountriesCodes()).map(country => ({
+      union(popularPrefixes, getCountriesCodes()).map((country) => ({
         value: country,
         label: getCodeLabel(country),
         filterData: `${country} +${getCountryCallingCode(country)}`,
@@ -111,13 +112,16 @@ const PhoneNumberForm = ({
   };
 
   const shouldDisplayConfirmationButton =
-    !confirmed && !isNullOrUndefined(number) && !isNullOrUndefined(iso);
+    !confirmationDisabled &&
+    !confirmed &&
+    !isNullOrUndefined(number) &&
+    !isNullOrUndefined(iso);
 
   return (
     <Column>
       {error && <ErrorAlert mt={25} errorText={error} />}
       <Formik
-        validate={values => {
+        validate={(values) => {
           const {
             iso: { value: country },
           } = values;
@@ -217,6 +221,7 @@ PhoneNumberForm.propTypes = {
   error: PropTypes.string,
   changePhoneNumber: PropTypes.func,
   disabled: PropTypes.bool,
+  confirmationDisabled: PropTypes.bool,
   required: PropTypes.bool,
 };
 

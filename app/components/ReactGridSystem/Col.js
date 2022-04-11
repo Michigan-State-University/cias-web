@@ -4,7 +4,7 @@ import { Col as GCol } from 'react-grid-system';
 
 import { margin, layout } from 'components/BaseComponentStyles';
 
-const mapFlexProperties = property => {
+const mapFlexProperties = (property) => {
   switch (property) {
     case 'start':
       return 'flex-start';

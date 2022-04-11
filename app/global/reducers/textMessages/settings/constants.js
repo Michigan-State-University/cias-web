@@ -18,3 +18,8 @@ export const CHANGE_FORMULA_USED =
 
 export const CHANGE_NO_FORMULA_TEXT =
   'app/TextMessaging/TextMessagesSettings/CHANGE_NO_FORMULA_TEXT';
+
+export const CHANGE_TYPE = 'app/TextMessaging/TextMessagesSettings/CHANGE_TYPE';
+
+export const CHANGE_INCLUDED_DATA =
+  'app/TextMessaging/TextMessagesSettings/CHANGE_INCLUDED_DATA';

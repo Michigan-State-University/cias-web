@@ -32,7 +32,7 @@ export const BoxCollapse = ({
   ...styleProps
 }) => {
   const [isOpened, setOpened] = useState(!!shouldBeOpenOnStart);
-  const toggleOpen = () => setOpened(prev => !prev);
+  const toggleOpen = () => setOpened((prev) => !prev);
 
   return (
     <Box bg={colors.lightBlue} width="100%" {...styleProps}>
@@ -44,7 +44,7 @@ export const BoxCollapse = ({
         bgOpacity={labelBgOpacity}
         binImage={BinIcon}
         binFillColor={binFillColor}
-        onDelete={e => {
+        onDelete={(e) => {
           if (onDelete) {
             e.stopPropagation();
             onDelete();
@@ -74,7 +74,7 @@ export const BoxCollapse = ({
             {onEdit && (
               <ImageButton
                 src={EditIcon}
-                onClick={e => {
+                onClick={(e) => {
                   if (onEdit) {
                     e.stopPropagation();
                     onEdit();

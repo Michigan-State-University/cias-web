@@ -83,6 +83,7 @@ exports[`<BlockTypeChooser /> should match the snapshot while being open 1`] = `
   border-radius: 5px;
   width: 100%;
   position: absolute;
+  background-color: rgba(255,255,255,1);
   border-radius: 10px;
   box-shadow: 0px 0px 50px rgba(0,0,0,0.08);
   border-radius: 10px;
@@ -394,7 +395,7 @@ exports[`<BlockTypeChooser /> should match the snapshot while being open 1`] = `
             class="c8"
           >
             <div
-              class="HoverableBox-zvip6a-0 c9"
+              class="c9"
             >
               <div
                 class="c10"
@@ -412,7 +413,7 @@ exports[`<BlockTypeChooser /> should match the snapshot while being open 1`] = `
               </div>
             </div>
             <div
-              class="HoverableBox-zvip6a-0 c9"
+              class="c9"
             >
               <div
                 class="c10"
@@ -430,7 +431,7 @@ exports[`<BlockTypeChooser /> should match the snapshot while being open 1`] = `
               </div>
             </div>
             <div
-              class="HoverableBox-zvip6a-0 c9"
+              class="c9"
             >
               <div
                 class="c10"
@@ -448,7 +449,7 @@ exports[`<BlockTypeChooser /> should match the snapshot while being open 1`] = `
               </div>
             </div>
             <div
-              class="HoverableBox-zvip6a-0 c9"
+              class="c9"
             >
               <div
                 class="c10"
@@ -466,7 +467,7 @@ exports[`<BlockTypeChooser /> should match the snapshot while being open 1`] = `
               </div>
             </div>
             <div
-              class="HoverableBox-zvip6a-0 c16"
+              class="c16"
             >
               <div
                 class="c10"

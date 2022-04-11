@@ -1,8 +1,9 @@
-import React, { useRef } from 'react';
+import React, { useRef, memo } from 'react';
 import PropTypes from 'prop-types';
-import { injectIntl, IntlShape } from 'react-intl';
+import { useIntl } from 'react-intl';
 
 import { themeColors, colors } from 'theme';
+
 import arrowBack from 'assets/svg/arrow-back.svg';
 
 import Column from 'components/Column';
@@ -20,7 +21,6 @@ import CopyItem from './CopyItem';
 import { chooserPanelMaxHeight, itemHeight } from './constants';
 
 const ChooserComponent = ({
-  intl: { formatMessage },
   elementId,
   items,
   backAction,
@@ -35,7 +35,9 @@ const ChooserComponent = ({
   listIcon,
   infiniteLoader,
 }) => {
+  const { formatMessage } = useIntl();
   const infiniteLoaderRef = useRef();
+
   return (
     <Column data-testid={`${elementId}-select-target-session`} height="100%">
       <Column mx={25} mb={15}>
@@ -120,7 +122,6 @@ const ChooserComponent = ({
 };
 
 ChooserComponent.propTypes = {
-  intl: PropTypes.shape(IntlShape),
   items: PropTypes.array,
   selectedItem: PropTypes.oneOfType([PropTypes.string, PropTypes.object]),
   elementId: PropTypes.string,
@@ -136,4 +137,4 @@ ChooserComponent.propTypes = {
   infiniteLoader: PropTypes.object,
 };
 
-export default injectIntl(ChooserComponent);
+export default memo(ChooserComponent);

@@ -9,7 +9,7 @@ import StyledTextButton from './StyledTextButton';
 
 const DEFAULT_WIDTH = 100;
 
-const getWidth = button => {
+const getWidth = (button) => {
   const { current } = button;
   if (current) return current.clientWidth;
   return DEFAULT_WIDTH;

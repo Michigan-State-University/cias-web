@@ -77,4 +77,8 @@ export default defineMessages({
     id: `${scope}.createTeamNameInput`,
     defaultMessage: 'e.g Team n.o. 1',
   },
+  searchPlaceholder: {
+    id: `${scope}.searchPlaceholder`,
+    defaultMessage: 'Filter users by name',
+  },
 });

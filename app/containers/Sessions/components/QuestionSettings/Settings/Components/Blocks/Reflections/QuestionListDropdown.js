@@ -5,7 +5,7 @@ import { connect } from 'react-redux';
 import { createStructuredSelector } from 'reselect';
 
 import Img from 'components/Img';
-import Question from 'models/Session/Question';
+
 import Row from 'components/Row';
 import Text from 'components/Text';
 import { ScrollFogBox } from 'components/Box/ScrollFog';
@@ -51,8 +51,8 @@ const QuestionListDropdown = ({
 
   const { height } = useChildSizeCalculator(ref, containerRef);
 
-  const canSelectQuestion = questionId => id !== questionId;
-  const filteredQuestions = questions.filter(question =>
+  const canSelectQuestion = (questionId) => id !== questionId;
+  const filteredQuestions = questions.filter((question) =>
     possibleQuestions.includes(question.type),
   );
 
@@ -120,8 +120,8 @@ const QuestionListDropdown = ({
 
 QuestionListDropdown.propTypes = {
   onClick: PropTypes.func.isRequired,
-  questions: PropTypes.arrayOf(PropTypes.shape(Question)),
-  selectedQuestion: PropTypes.shape(Question),
+  questions: PropTypes.arrayOf(PropTypes.object),
+  selectedQuestion: PropTypes.object,
   chosenQuestionId: PropTypes.string,
   isVisible: PropTypes.bool,
   formatMessage: PropTypes.func,

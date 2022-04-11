@@ -15,16 +15,14 @@ const Tabs = ({
   containerProps,
   ...restProps
 }) => {
-  const {
-    label: initialLabel,
-    renderAsLink: initialRenderAsLink,
-  } = children[0].props;
+  const { label: initialLabel, renderAsLink: initialRenderAsLink } =
+    children[0].props;
 
   const [activeTab, setActiveTab] = useState(
     initialLabel || initialRenderAsLink.props.children,
   );
 
-  const onClickTabItem = tab => {
+  const onClickTabItem = (tab) => {
     if (controlled) controlledSetTabActive(tab);
     else setActiveTab(tab);
   };
@@ -33,7 +31,7 @@ const Tabs = ({
   return (
     <TabsContainer {...restProps}>
       <Row data-cy="tabs" align="end">
-        {children.map(child => {
+        {children.map((child) => {
           if (!child || !child.props) return null;
           const { label, renderAsLink, hidden, linkMatch } = child.props;
 
@@ -53,7 +51,7 @@ const Tabs = ({
         })}
       </Row>
       <ContentContainer {...containerProps}>
-        {children.map(child => {
+        {children.map((child) => {
           if (!child || !child.props) return null;
 
           const { label, children: content } = child.props;

@@ -9,7 +9,7 @@ import { splitAndKeep } from 'utils/splitAndKeep';
 import { htmlToPlainText } from 'utils/htmlToPlainText';
 import { assignDraftItemsById, updateItemById } from 'utils/reduxUtils';
 
-export const mapQuestionDataForType = question => {
+export const mapQuestionDataForType = (question) => {
   switch (question.type) {
     case textboxQuestion.id:
     case numberQuestion.id:
@@ -47,7 +47,7 @@ export const mapQuestionDataForType = question => {
   }
 };
 
-export const getFromQuestionTTS = question => {
+export const getFromQuestionTTS = (question) => {
   const delimiters = [',', '.', '?', '!'];
 
   const subtileTTS = question.subtitle
@@ -57,14 +57,14 @@ export const getFromQuestionTTS = question => {
   return subtileTTS;
 };
 
-export const assignFromQuestionTTS = question => {
+export const assignFromQuestionTTS = (question) => {
   const { subtitle } = question.settings;
 
   return {
     ...question,
     narrator: {
       ...question.narrator,
-      blocks: question.narrator.blocks.map(block => {
+      blocks: question.narrator.blocks.map((block) => {
         if (block.type === readQuestionBlockType)
           return {
             ...block,

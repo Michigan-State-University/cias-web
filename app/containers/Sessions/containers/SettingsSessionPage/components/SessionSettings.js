@@ -26,7 +26,7 @@ import globalMessages from 'global/i18n/globalMessages';
 
 import H3 from 'components/H3';
 import { LI, UL } from 'components/List';
-import ConfirmationBox from 'components/ConfirmationBox';
+import { ConfirmationModal } from 'components/Modal';
 import BadgeInput from 'components/Input/BadgeInput';
 import Option from './Option';
 import messages from './messages';
@@ -76,9 +76,9 @@ const SessionSettings = ({
     dismissConfirmation();
   };
 
-  const isNarratorActive = some(narratorSettings, setting => setting);
+  const isNarratorActive = some(narratorSettings, (setting) => setting);
 
-  const onToggle = index => val => {
+  const onToggle = (index) => (val) => {
     if (val) {
       editSession({ path: `settings.narrator.${index}`, value: val }, [
         'settings',
@@ -88,7 +88,7 @@ const SessionSettings = ({
     }
   };
 
-  const onGlobalToggle = val => {
+  const onGlobalToggle = (val) => {
     if (val) {
       editSession(
         {
@@ -131,7 +131,7 @@ const SessionSettings = ({
       <>
         <FormattedMessage {...messages.blockRemovalConfirmationDescription} />
         <UL>
-          {getRemovedBlockForSetting(confirmationOption).map(blockType => (
+          {getRemovedBlockForSetting(confirmationOption).map((blockType) => (
             <LI key={blockType}>
               <FormattedMessage {...globalMessages.blockTypes[blockType]} />
             </LI>
@@ -143,7 +143,7 @@ const SessionSettings = ({
 
   return (
     <>
-      <ConfirmationBox
+      <ConfirmationModal
         visible={isConfirmationBoxVisible}
         onClose={dismissConfirmation}
         description={getConfirmationDescription()}
@@ -160,7 +160,7 @@ const SessionSettings = ({
           width="100%"
           placeholder={formatMessage(messages.placeholder)}
           value={name}
-          onBlur={val => editSession({ path: 'name', value: val }, ['name'])}
+          onBlur={(val) => editSession({ path: 'name', value: val }, ['name'])}
         />
       </InputContainer>
 
@@ -177,7 +177,7 @@ const SessionSettings = ({
           )}
           value={variable}
           color={colors.jungleGreen}
-          onBlur={val =>
+          onBlur={(val) =>
             editSession({ path: 'variable', value: val }, ['variable'])
           }
           autoComplete="off"
@@ -229,10 +229,7 @@ const mapDispatchToProps = {
   editSession: editSessionRequest,
 };
 
-const withConnect = connect(
-  mapStateToProps,
-  mapDispatchToProps,
-);
+const withConnect = connect(mapStateToProps, mapDispatchToProps);
 
 SessionSettings.propTypes = {
   name: PropTypes.string,

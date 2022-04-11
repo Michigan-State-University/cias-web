@@ -11,6 +11,7 @@ import Comment from 'components/Text/Comment';
 import Column from 'components/Column';
 
 import messages from './messages';
+import { QUESTION_SUBTITLE_ID, QUESTION_TITLE_ID } from '../constants';
 
 const TextBoxQuestionLayout = ({
   formatMessage,
@@ -34,8 +35,8 @@ const TextBoxQuestionLayout = ({
             rows="5"
             width="100%"
             onChange={onChange}
-            aria-label={formatMessage(messages.textPlaceholder)}
-            {...isTextLimited && { maxLength: `${textLimit}` }}
+            aria-labelledby={`${QUESTION_TITLE_ID} ${QUESTION_SUBTITLE_ID}`}
+            {...(isTextLimited && { maxLength: `${textLimit}` })}
           />
         </Row>
       </Box>

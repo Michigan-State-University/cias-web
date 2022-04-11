@@ -40,6 +40,7 @@ export const OTHER_FORMULA_ERROR = 'OtherFormulaError';
 export const REFLECTION_MISS_MATCH = 'ReflectionMissMatch';
 export const NO_BRANCHING_TARGET = 'NoBranchingTarget';
 export const RANDOMIZATION_MISS_MATCH = 'RandomizationMissMatch';
+export const FORBIDDEN_CAT_MH_BRANCHING = 'ForbiddenBranchingToCatMhSession';
 
 export const CREATE_USER_SESSION_REQUEST =
   'app/AnswerSessionPage/CREATE_USER_SESSION_REQUEST';
@@ -68,6 +69,17 @@ export const SET_CURRENT_BLOCK_INDEX =
 
 export const TOGGLE_TEXT_TRANSCRIPT =
   'app/AnswerSessionPage/TOGGLE_TEXT_TRANSCRIPT';
+
+export const SET_TRANSITIONAL_USER_SESSION_ID =
+  'app/AnswerSessionPage/SET_TRANSITIONAL_USER_SESSION_ID';
+
+export const QUESTION_TITLE_ID = 'question-title';
+
+export const QUESTION_SUBTITLE_ID = 'question-subtitle';
+
+export const NAME_QUESTION_NAME_ID = 'name-question-name';
+
+export const NAME_QUESTION_SPELL_NAME_ID = 'name-question-spell-name';
 
 export const NOT_SKIPABLE_QUESTIONS = [
   feedbackQuestion.id,

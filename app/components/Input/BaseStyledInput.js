@@ -18,11 +18,11 @@ export const BaseStyledInput = ({
       {...props}
       textAlign={props.textAlign}
       value={value}
-      onClick={e => {
+      onClick={(e) => {
         if (props.onClick) props.onClick(e);
         e.stopPropagation();
       }}
-      onChange={event => onInputChange(event.target.value)}
+      onChange={(event) => onInputChange(event.target.value)}
       onBlur={handleBlur}
       onFocus={handleFocus}
       placeholder={props.placeholder}

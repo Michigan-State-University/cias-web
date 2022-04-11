@@ -22,8 +22,9 @@ function UserAvatar({
   if (avatar)
     return <Img src={avatar} alt="avatar" {...styleProps} borderRadius="50%" />;
 
-  const nameShort = `${firstName?.trim()[0] || ''}${lastName?.trim()[0] ||
-    ''}`.toUpperCase();
+  const nameShort = `${firstName?.trim()[0] || ''}${
+    lastName?.trim()[0] || ''
+  }`.toUpperCase();
   return (
     <AvatarStyled
       data-private

@@ -3,7 +3,7 @@
 exports[`<Form /> Should render, match the snapshot and not log errors in console 1`] = `
 <div>
   <form
-    class="Form-sc-1racxeh-0"
+    class=""
   />
 </div>
 `;

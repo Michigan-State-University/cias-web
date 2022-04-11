@@ -33,6 +33,7 @@ const Pattern = ({
   displayPatternTargetText,
   setTargetChooserOpen,
   questionId,
+  disableBranchingToSession,
 }) => {
   const sumPercentages = useMemo(
     () =>
@@ -69,7 +70,7 @@ const Pattern = ({
             height={50}
             width={56}
             disabled={disabled}
-            onSuccessfulChange={value =>
+            onSuccessfulChange={(value) =>
               updatePattern({ ...pattern, match: value })
             }
             inequalityValue={pattern.match}
@@ -91,6 +92,7 @@ const Pattern = ({
             setTargetChooserOpen={setTargetChooserOpen}
             sumPercentages={sumPercentages}
             isOnlyTarget
+            disableBranchingToSession={disableBranchingToSession}
           />
         )}
       </Row>
@@ -108,6 +110,7 @@ const Pattern = ({
           sessionBranching={sessionBranching}
           setTargetChooserOpen={setTargetChooserOpen}
           sumPercentages={sumPercentages}
+          disableBranchingToSession={disableBranchingToSession}
         />
       )}
       <Box display="flex" justify="end">
@@ -148,6 +151,7 @@ Pattern.propTypes = {
   setTargetChooserOpen: PropTypes.func,
   displayPatternTargetText: PropTypes.func,
   questionId: PropTypes.string,
+  disableBranchingToSession: PropTypes.bool,
 };
 
 export default Pattern;

@@ -47,6 +47,26 @@ exports[`<QuestionImage /> should match the snapshot with file 1`] = `
   background-color: rgba(233,241,251,1);
 }
 
+.c9 {
+  width: auto;
+  height: auto;
+  display: block;
+  border-radius: 5px;
+  position: relative;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-align-content: center;
+  -ms-flex-line-pack: center;
+  align-content: center;
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  gap: 15px;
+}
+
 .c0 {
   display: -webkit-box;
   display: -webkit-flex;
@@ -94,7 +114,7 @@ exports[`<QuestionImage /> should match the snapshot with file 1`] = `
   width: 100%;
 }
 
-.c9 {
+.c10 {
   display: -webkit-box;
   display: -webkit-flex;
   display: -ms-flexbox;
@@ -122,7 +142,7 @@ exports[`<QuestionImage /> should match the snapshot with file 1`] = `
   max-width: 100%;
 }
 
-.c10 {
+.c11 {
   resize: none;
   padding: 12px;
   border: 1px solid #E9F1FB;
@@ -134,13 +154,13 @@ exports[`<QuestionImage /> should match the snapshot with file 1`] = `
   border: 1px solid transparent;
 }
 
-.c10:focus {
+.c11:focus {
   box-shadow: none;
   outline: none;
   border: 1px solid #107969;
 }
 
-.c10:disabled {
+.c11:disabled {
   color: #ABBBD1;
 }
 
@@ -169,7 +189,7 @@ exports[`<QuestionImage /> should match the snapshot with file 1`] = `
       width="100%"
     >
       <div
-        class="HoverableBox-zvip6a-0 c2"
+        class="c2"
         width="100%"
       >
         <div
@@ -203,18 +223,24 @@ exports[`<QuestionImage /> should match the snapshot with file 1`] = `
     >
       <div
         class="c9"
-        width="100%"
+        display="flex"
       >
         <div
-          class="c0"
+          class="c10"
+          width="100%"
         >
-          <textarea
-            class="c10"
-            height="auto"
-            placeholder="Input here the text describing the image for people with disabilities"
-            rows="4"
-            width="100%"
-          />
+          <div
+            class="c0"
+          >
+            <textarea
+              aria-label="Input here the text describing the image for people with disabilities"
+              class="c11"
+              height="auto"
+              placeholder="Input here the text describing the image for people with disabilities"
+              rows="4"
+              width="100%"
+            />
+          </div>
         </div>
       </div>
     </div>
@@ -230,6 +256,26 @@ exports[`<QuestionImage /> should match the snapshot without file 1`] = `
   border-radius: 5px;
   margin-top: 20px;
   background-color: rgba(233,241,251,1);
+}
+
+.c10 {
+  width: auto;
+  height: auto;
+  display: block;
+  border-radius: 5px;
+  position: relative;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-align-content: center;
+  -ms-flex-line-pack: center;
+  align-content: center;
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  gap: 15px;
 }
 
 .c0 {
@@ -324,7 +370,7 @@ exports[`<QuestionImage /> should match the snapshot without file 1`] = `
   height: auto;
 }
 
-.c10 {
+.c11 {
   display: -webkit-box;
   display: -webkit-flex;
   display: -ms-flexbox;
@@ -343,7 +389,7 @@ exports[`<QuestionImage /> should match the snapshot without file 1`] = `
   color: #2F3850;
 }
 
-.c11 {
+.c12 {
   resize: none;
   padding: 12px;
   border: 1px solid #E9F1FB;
@@ -355,13 +401,13 @@ exports[`<QuestionImage /> should match the snapshot without file 1`] = `
   border: 1px solid transparent;
 }
 
-.c11:focus {
+.c12:focus {
   box-shadow: none;
   outline: none;
   border: 1px solid #107969;
 }
 
-.c11:disabled {
+.c12:disabled {
   color: #ABBBD1;
 }
 
@@ -455,18 +501,24 @@ exports[`<QuestionImage /> should match the snapshot without file 1`] = `
     >
       <div
         class="c10"
-        width="100%"
+        display="flex"
       >
         <div
-          class="c0"
+          class="c11"
+          width="100%"
         >
-          <textarea
-            class="c11"
-            height="auto"
-            placeholder="Input here the text describing the image for people with disabilities"
-            rows="4"
-            width="100%"
-          />
+          <div
+            class="c0"
+          >
+            <textarea
+              aria-label="Input here the text describing the image for people with disabilities"
+              class="c12"
+              height="auto"
+              placeholder="Input here the text describing the image for people with disabilities"
+              rows="4"
+              width="100%"
+            />
+          </div>
         </div>
       </div>
     </div>

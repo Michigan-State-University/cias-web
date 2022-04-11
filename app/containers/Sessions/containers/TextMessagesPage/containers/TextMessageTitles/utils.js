@@ -4,7 +4,7 @@ const MAX_ITEMS = MAX_ROWS * MAX_COLUMNS;
 export const EMPTY_TILE = 'EMPTY_TILE';
 export const ADD_TILE = 'ADD_TILE';
 
-export const itemsMapper = textMessages => {
+export const itemsMapper = (textMessages) => {
   let emptyItemsLength;
   const textMessagesLength = textMessages?.length ?? 0;
   const currentLength = textMessagesLength + 1;

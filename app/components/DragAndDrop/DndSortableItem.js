@@ -4,13 +4,8 @@ import { useSortable } from '@dnd-kit/sortable';
 import { CSS } from '@dnd-kit/utilities';
 
 const Component = ({ children, item, id }) => {
-  const {
-    attributes,
-    listeners,
-    setNodeRef,
-    transform,
-    transition,
-  } = useSortable({ id, data: item });
+  const { attributes, listeners, setNodeRef, transform, transition } =
+    useSortable({ id, data: item });
 
   const style = {
     transform: CSS.Translate.toString(transform),

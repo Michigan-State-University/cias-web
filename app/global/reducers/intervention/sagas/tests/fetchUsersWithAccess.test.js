@@ -27,24 +27,25 @@ describe('fetchUsersWithAccess saga', () => {
     data: [
       {
         id: '0',
-        type: 'invitation',
+        type: 'intervention_access',
         attributes: { email: 'user0@mail.com' },
       },
       {
         id: '1',
-        type: 'invitation',
+        type: 'intervention_access',
         attributes: { email: 'user1@mail.com' },
       },
     ],
   };
   const payload = { id: mockIntervention.id };
-
   it('Check fetchUsersWithAccess generator success connection', () =>
     expectSaga(fetchUsersWithAccess, { payload })
       .withState(mockState)
       .provide([[matchers.call.fn(axios.get), { data: apiResponse }]])
       .put(
-        fetchUsersWithAccessSuccess(jsonApiToArray(apiResponse, 'invitation')),
+        fetchUsersWithAccessSuccess(
+          jsonApiToArray(apiResponse, 'interventionAccess'),
+        ),
       )
       .run());
   it('Check fetchUsersWithAccess error connection', () => {

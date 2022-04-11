@@ -98,12 +98,6 @@ const mapDispatchToProps = {
   getSession: getSessionRequest,
 };
 
-const withConnect = connect(
-  mapStateToProps,
-  mapDispatchToProps,
-);
+const withConnect = connect(mapStateToProps, mapDispatchToProps);
 
-export default compose(
-  injectIntl,
-  withConnect,
-)(SettingsInterventionPage);
+export default compose(injectIntl, withConnect)(SettingsInterventionPage);

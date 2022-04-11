@@ -52,7 +52,7 @@ function AccountSettings({
       </Helmet>
       <StyledBox height="100%" width="100%">
         <BackButton to={redirectUrl}>{buttonMessage}</BackButton>
-        <H1 my={25}>
+        <H1 mt={16} mb={24}>
           <FormattedMessage {...messages.header} />
         </H1>
         <Row>
@@ -94,13 +94,6 @@ const mapStateToProps = createStructuredSelector({
   authUser: makeSelectUser(),
 });
 
-const withConnect = connect(
-  mapStateToProps,
-  null,
-);
+const withConnect = connect(mapStateToProps, null);
 
-export default compose(
-  withConnect,
-  memo,
-  injectIntl,
-)(AccountSettings);
+export default compose(withConnect, memo, injectIntl)(AccountSettings);

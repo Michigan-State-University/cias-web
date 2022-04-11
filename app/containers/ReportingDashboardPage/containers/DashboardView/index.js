@@ -107,9 +107,10 @@ const DashboardView = ({
     });
   };
 
-  const dateSelectOptions = useMemo(() => SELECT_OPTIONS(formatMessage), [
-    SELECT_OPTIONS,
-  ]);
+  const dateSelectOptions = useMemo(
+    () => SELECT_OPTIONS(formatMessage),
+    [SELECT_OPTIONS],
+  );
 
   return (
     <>
@@ -125,7 +126,7 @@ const DashboardView = ({
               value: selectedValue,
               onChange: setSelectedValue,
               isMulti: true,
-              formatLabel: label => label,
+              formatLabel: (label) => label,
             }}
           />
           <Select
@@ -168,10 +169,7 @@ const mapDispatchToProps = {
   setChartFilters: setChartFiltersRequest,
 };
 
-const withConnect = connect(
-  mapStateToProps,
-  mapDispatchToProps,
-);
+const withConnect = connect(mapStateToProps, mapDispatchToProps);
 
 export default compose(
   withConnect,

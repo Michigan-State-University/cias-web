@@ -20,7 +20,7 @@ import ChartButton from './ChartButton';
 const AddChart = ({ addChart }) => {
   const { formatMessage } = useIntl();
 
-  const onAddChart = useCallback(type => () => addChart(type), []);
+  const onAddChart = useCallback((type) => () => addChart(type), []);
 
   return (
     <Box

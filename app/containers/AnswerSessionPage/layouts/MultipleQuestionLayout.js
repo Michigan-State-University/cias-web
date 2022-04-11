@@ -31,14 +31,16 @@ const MultipleQuestionLayout = ({
             py={14}
             width={`calc(100% + ${margin}px)`}
             clickable
-            onClick={() => check(value, name, index)}
           >
             <Row align="center" py={10} height="44">
-              <Checkbox id={ariaInputId} checked={isChecked} mr={16} />
-
-              <label htmlFor={ariaInputId}>
+              <Checkbox
+                id={ariaInputId}
+                checked={isChecked}
+                mr={16}
+                onChange={() => check(value, name, index)}
+              >
                 <Markup content={payload} />
-              </label>
+              </Checkbox>
             </Row>
           </HoverableBox>
         </Row>
@@ -49,7 +51,7 @@ const MultipleQuestionLayout = ({
 
 MultipleQuestionLayout.propTypes = {
   data: PropTypes.array,
-  questionId: PropTypes.string,
+  questionId: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
   check: PropTypes.func,
   selectedAnswersIndex: PropTypes.array,
 };

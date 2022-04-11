@@ -40,12 +40,6 @@ const mapDispatchToProps = {
   editUser: editUserRequest,
 };
 
-const withConnect = connect(
-  mapStateToProps,
-  mapDispatchToProps,
-);
+const withConnect = connect(mapStateToProps, mapDispatchToProps);
 
-export default compose(
-  withConnect,
-  injectIntl,
-)(WrappedTimezoneForm);
+export default compose(withConnect, injectIntl)(WrappedTimezoneForm);

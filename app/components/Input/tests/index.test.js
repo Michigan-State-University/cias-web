@@ -1,7 +1,11 @@
 import React, { useRef } from 'react';
-import { render, fireEvent, waitFor } from '@testing-library/react';
+import { render, fireEvent, waitFor, screen } from '@testing-library/react';
 import 'jest-styled-components';
+import userEvent from '@testing-library/user-event';
 
+import { testRender } from 'utils/testUtils';
+
+import { act } from '@testing-library/react-hooks';
 import Input from '../index';
 import DateInput from '../DateInput';
 import ApprovableInput from '../ApprovableInput';
@@ -10,7 +14,7 @@ import SearchInput from '../SearchInput';
 import StyledInput from '../StyledInput';
 import TextArea from '../TextArea';
 
-const DateComponent = props => {
+const DateComponent = (props) => {
   const ref = useRef(null);
   return <DateInput ref={ref} {...props} />;
 };
@@ -60,21 +64,25 @@ describe('<SearchInput />', () => {
   };
   it('Expect to not log errors in console', () => {
     const spy = jest.spyOn(global.console, 'error');
-    render(<SearchInput {...defaultProps} />);
+    testRender(<SearchInput {...defaultProps} />);
     expect(spy).not.toHaveBeenCalled();
   });
   it('Should render and match the snapshot', () => {
-    const { container } = render(<SearchInput {...defaultProps} />);
+    const { container } = testRender(<SearchInput {...defaultProps} />);
     expect(container).toMatchSnapshot();
   });
-  it('Should invoke onCHange function', async () => {
+  it('Should invoke onChange function', async () => {
     const newProps = {
       ...defaultProps,
       value: 'Value',
     };
-    render(<SearchInput {...newProps} />);
+    act(() => {
+      const { rerender } = testRender(<SearchInput {...newProps} />);
+      rerender(<SearchInput {...newProps} />);
+    });
+    userEvent.type(screen.getByRole('textbox'), 'test');
     const img = document.querySelectorAll('img')[1];
-    fireEvent.click(img);
+    userEvent.click(img);
     await waitFor(() =>
       expect(newProps.onChange).toHaveBeenCalledWith({ target: { value: '' } }),
     );

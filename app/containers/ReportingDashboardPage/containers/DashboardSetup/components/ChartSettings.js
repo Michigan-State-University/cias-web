@@ -52,7 +52,7 @@ const ChartSettings = ({
     if (isChangingStatus && !editChartLoader) setIsChangingStatus(false);
   }, [editChartLoader]);
 
-  const wrapper = component => (
+  const wrapper = (component) => (
     <ChartSettingsContext.Provider value={{ statusPermissions }}>
       <SettingsContainer>
         <Row>
@@ -71,7 +71,7 @@ const ChartSettings = ({
   );
 
   const onEdit = useCallback(
-    field => value =>
+    (field) => (value) =>
       editChart({
         id: chart.id,
         dashboardSectionId: chart.dashboardSectionId,
@@ -83,7 +83,7 @@ const ChartSettings = ({
   const onEditName = useCallback(onEdit('name'), [chart.name, onEdit]);
 
   const onEditStatus = useCallback(
-    value => {
+    (value) => {
       setIsChangingStatus(true);
 
       onEdit('status')(value);
@@ -107,7 +107,8 @@ const ChartSettings = ({
   ]);
 
   const onEditFormula = useCallback(
-    field => value => onEdit('formula')({ ...chart.formula, [field]: value }),
+    (field) => (value) =>
+      onEdit('formula')({ ...chart.formula, [field]: value }),
     [chart.formula, onEdit],
   );
 
@@ -117,7 +118,7 @@ const ChartSettings = ({
   ]);
 
   const onEditFormulaPattern = useCallback(
-    index => newPattern =>
+    (index) => (newPattern) =>
       onEditFormula('patterns')(
         chart.formula.patterns.map((pattern, i) => {
           if (index === i) return newPattern;
@@ -129,12 +130,12 @@ const ChartSettings = ({
   );
 
   const onEditFormulaDefaultPattern = useCallback(
-    pattern => onEditFormula('defaultPattern')(pattern),
+    (pattern) => onEditFormula('defaultPattern')(pattern),
     [chart.formula.defaultPattern, onEditFormula],
   );
 
   const onDeleteFormulaPattern = useCallback(
-    index => () =>
+    (index) => () =>
       onEditFormula('patterns')(
         chart.formula.patterns.filter((_, i) => i !== index),
       ),
@@ -212,12 +213,6 @@ const mapDispatchToProps = {
   copyChart: copyChartRequest,
 };
 
-const withConnect = connect(
-  null,
-  mapDispatchToProps,
-);
+const withConnect = connect(null, mapDispatchToProps);
 
-export default compose(
-  withConnect,
-  memo,
-)(ChartSettings);
+export default compose(withConnect, memo)(ChartSettings);

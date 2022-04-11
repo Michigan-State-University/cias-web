@@ -20,7 +20,7 @@ import UserList from '../index';
 import messages from '../messages';
 
 describe('<UserList />', () => {
-  const initialState = role => ({
+  const initialState = (role) => ({
     auth: {
       user: { firstName: 'test', lastName: 'test', roles: [role] },
     },

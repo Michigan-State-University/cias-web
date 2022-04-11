@@ -10,9 +10,10 @@ import { adminColumns, teamAdminColumns, TeamListContext } from './utils';
 const TableHeader = ({ formatMessage }) => {
   const { isAdmin } = useContext(TeamListContext);
 
-  const columns = useMemo(() => (isAdmin ? adminColumns : teamAdminColumns), [
-    isAdmin,
-  ]);
+  const columns = useMemo(
+    () => (isAdmin ? adminColumns : teamAdminColumns),
+    [isAdmin],
+  );
 
   return (
     <THead>

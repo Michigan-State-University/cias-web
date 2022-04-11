@@ -12,7 +12,7 @@ import {
 
 /* eslint-disable no-param-reassign */
 const reflectionFormulaBlockReducer = (block, { data, type }) =>
-  produce(block, draft => {
+  produce(block, (draft) => {
     const { index, value } = data;
 
     switch (type) {

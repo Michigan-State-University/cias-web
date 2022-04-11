@@ -5,15 +5,16 @@ import { connect } from 'react-redux';
 import { createStructuredSelector } from 'reselect';
 import { injectIntl } from 'react-intl';
 
-import ApprovableInput from 'components/Input/ApprovableInput';
+import FlexibleWidthApprovableInput from 'components/Input/FlexibleWidthApprovableInput';
 import Box from 'components/Box';
 import Column from 'components/Column';
 import HoverableBox from 'components/Box/HoverableBox';
 import Img from 'components/Img';
 import PlusCircle from 'components/Circle/PlusCircle';
-import Question from 'models/Session/Question';
+
 import Row from 'components/Row';
 import Text from 'components/Text';
+import OriginalTextHover from 'components/OriginalTextHover';
 import bin from 'assets/svg/bin-red.svg';
 import globalMessages from 'global/i18n/globalMessages';
 import radio from 'assets/svg/radio-button.svg';
@@ -58,7 +59,7 @@ const SingleQuestion = ({
   const editingPossible = canEdit(interventionStatus);
   const isNarratorTabOrEditNotPossible = isNarratorTab || !editingPossible;
 
-  const handleMouseEnter = index => () => {
+  const handleMouseEnter = (index) => () => {
     if (!isNarratorTabOrEditNotPossible) setHovered(index);
   };
 
@@ -83,8 +84,11 @@ const SingleQuestion = ({
               >
                 <Row width="90%">
                   <Img ref={radioButtonRef} src={radio} mr={RADIO_MARGIN} />
-                  <Box width="100%">
-                    <ApprovableInput
+                  <OriginalTextHover
+                    text={value?.original_text}
+                    hidden={isNarratorTab}
+                  >
+                    <FlexibleWidthApprovableInput
                       mr={8}
                       fontSize={18}
                       type="singleline"
@@ -92,13 +96,14 @@ const SingleQuestion = ({
                         index: index + 1,
                       })}
                       value={value.payload}
-                      onCheck={newTitle =>
+                      onCheck={(newTitle) =>
                         updateAnswer(index, { ...value, payload: newTitle })
                       }
                       richText
                       disabled={isNarratorTabOrEditNotPossible}
+                      emptyWidth={105}
                     />
-                  </Box>
+                  </OriginalTextHover>
                 </Row>
                 <Row>
                   <Box
@@ -110,7 +115,7 @@ const SingleQuestion = ({
                   </Box>
                 </Row>
               </Row>
-              <Row align="center" display="flex" hidden={isNarratorTab}>
+              <Row align="center" hidden={isNarratorTab}>
                 <BadgeInput
                   data-cy={`score-${index}-input`}
                   ml={`${leftMargin}px`}
@@ -129,7 +134,7 @@ const SingleQuestion = ({
                   }
                   value={value.value}
                   color={colors.azure}
-                  onBlur={val =>
+                  onBlur={(val) =>
                     updateAnswer(index, {
                       ...value,
                       value: val,
@@ -141,7 +146,7 @@ const SingleQuestion = ({
           </HoverableBox>
         </Row>
       ))}
-      <Row display="flex" hidden={isNarratorTabOrEditNotPossible}>
+      <Row hidden={isNarratorTabOrEditNotPossible}>
         <HoverableBox px={21} py={14} onClick={addAnswer}>
           <Box>
             <Row align="center">
@@ -158,7 +163,7 @@ const SingleQuestion = ({
 };
 
 SingleQuestion.propTypes = {
-  selectedQuestion: PropTypes.shape(Question).isRequired,
+  selectedQuestion: PropTypes.object.isRequired,
   intl: PropTypes.object.isRequired,
   addAnswer: PropTypes.func.isRequired,
   updateAnswer: PropTypes.func.isRequired,
@@ -175,12 +180,10 @@ const mapDispatchToProps = {
   addAnswer: () => updateQuestionData({ type: ADD }),
   updateAnswer: (index, value) =>
     updateQuestionData({ type: UPDATE_ANSWER, data: { index, value } }),
-  removeAnswer: index => updateQuestionData({ type: REMOVE, data: { index } }),
+  removeAnswer: (index) =>
+    updateQuestionData({ type: REMOVE, data: { index } }),
 };
 
-const withConnect = connect(
-  mapStateToProps,
-  mapDispatchToProps,
-);
+const withConnect = connect(mapStateToProps, mapDispatchToProps);
 
 export default injectIntl(compose(withConnect)(SingleQuestion));

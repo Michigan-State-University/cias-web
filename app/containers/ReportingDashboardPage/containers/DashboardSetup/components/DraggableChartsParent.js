@@ -17,11 +17,11 @@ const DraggableChartsParent = ({
 }) => {
   const [draggingChartId, setDraggingChartId] = useState(null);
 
-  const onDragStart = e => {
+  const onDragStart = (e) => {
     setDraggingChartId(e.active.id);
   };
 
-  const onDragEndCallback = e => {
+  const onDragEndCallback = (e) => {
     setDraggingChartId(null);
     onDragEnd(e);
   };

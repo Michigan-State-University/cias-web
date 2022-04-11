@@ -19,7 +19,7 @@ export const PopupElement = styled.div`
   font-size: 12px;
   white-space: nowrap;
   z-index: 1;
-  ${props =>
+  ${(props) =>
     props.top ? 'bottom: calc(100% + 5px)' : 'top: calc(100% + 5px)'};
   right: ${({ right, center }) => getVerticalPosition(right, center)};
 `;

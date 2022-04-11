@@ -1,4 +1,4 @@
-import React, { useCallback, useRef, useState } from 'react';
+import { useCallback, useRef, useState } from 'react';
 
 /**
  * @param {function(node: HTMLElement): null|object} callback
@@ -12,7 +12,7 @@ export const useCallbackRef = (callback, deps = []) => {
   const [callbackResult, setCallbackResult] = useState(null);
 
   const callbackRef = useCallback(
-    node => {
+    (node) => {
       ref.current = node;
       setCallbackResult(callback(node));
     },

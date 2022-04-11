@@ -17,15 +17,19 @@ export const createSession = (id = 0) => ({
 
 export const createIntervention = (index = 0) => ({
   id: `intervention-test-${index}`,
-  status: 'draft',
-  usersWithAccess: [
-    {
-      id: `user-test-${index}`,
-      email: `user-test-${index}@user.com`,
-    },
-  ],
-  shared_to: SHARE_IDS.anyoneWithTheLink,
-  sessions: [createSession(`${index}`)],
+  attributes: {
+    id: `intervention-test-${index}`,
+    status: 'draft',
+    usersWithAccess: [
+      {
+        id: `user-test-${index}`,
+        email: `user-test-${index}@user.com`,
+      },
+    ],
+    shared_to: SHARE_IDS.anyoneWithTheLink,
+    sessions: [createSession(`${index}`)],
+  },
+  type: 'intervention',
 });
 
 export const createUser = (index = 0) => ({

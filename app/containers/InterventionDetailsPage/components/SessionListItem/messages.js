@@ -53,4 +53,16 @@ export default defineMessages({
     id: `${scope}.reportsCount`,
     defaultMessage: '{count} reports',
   },
+  wcagDescription: {
+    id: `${scope}.wcagDescription`,
+    defaultMessage: 'Tile of Session: {name}',
+  },
+  estimateTime: {
+    id: `${scope}.estimateTime`,
+    defaultMessage: 'Estimate time to complete',
+  },
+  min: {
+    id: `${scope}.min`,
+    defaultMessage: 'min',
+  },
 });

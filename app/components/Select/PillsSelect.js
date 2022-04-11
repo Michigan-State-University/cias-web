@@ -36,7 +36,7 @@ const PillsSelect = ({
     [value, data],
   );
 
-  const onFilter = deleteId => () => {
+  const onFilter = (deleteId) => () => {
     const newSelectedValue = selectedPills
       .filter(({ value: id }) => id !== deleteId)
       .map(({ value: id }) => id);

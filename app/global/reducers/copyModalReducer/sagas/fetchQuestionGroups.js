@@ -21,7 +21,7 @@ export function* fetchQuestionsGroups({ payload: { id } }) {
       ({ type }) => type !== FinishGroupType,
     );
 
-    const mappedGroups = sortedGroups.map(group => ({
+    const mappedGroups = sortedGroups.map((group) => ({
       name: group.title,
       ...group,
     }));

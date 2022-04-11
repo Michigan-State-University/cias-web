@@ -5,7 +5,7 @@ import { toast } from 'react-toastify';
 import globalMessages from 'global/i18n/globalMessages';
 import { defaultMapper } from 'utils/mapResponseObjects';
 import { formatMessage } from 'utils/intlOutsideReact';
-import { toArchive } from 'models/Status/StatusTypes';
+import { archived } from 'models/Status/StatusTypes';
 
 import {
   archiveInterventionFailure,
@@ -22,7 +22,7 @@ export function* archiveIntervention({ payload: { interventionId } }) {
     const {
       data: { data },
     } = yield call(axios.patch, requestURL, {
-      intervention: { status_event: toArchive },
+      intervention: { status: archived },
     });
     const mappedData = defaultMapper(data);
 

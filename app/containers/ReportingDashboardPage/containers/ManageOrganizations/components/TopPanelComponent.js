@@ -32,7 +32,7 @@ const TopPanelComponent = ({
   const { formatMessage } = useIntl();
 
   const onBlur = useCallback(
-    newName => {
+    (newName) => {
       onEdit({ name: newName });
     },
     [onEdit],

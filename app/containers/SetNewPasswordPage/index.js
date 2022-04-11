@@ -36,7 +36,7 @@ import { shouldRedirectToLogin } from './utils';
 
 const passwordLength = 8;
 
-const validationSchema = formatMessage =>
+const validationSchema = (formatMessage) =>
   Yup.object().shape({
     password: Yup.string()
       .required(formatMessage(messages.passwordRequired))
@@ -47,7 +47,7 @@ const validationSchema = formatMessage =>
       .test(
         'password',
         formatMessage(messages.passwordInvalid),
-        value => value && !!value.match(passwordRegex),
+        (value) => value && !!value.match(passwordRegex),
       ),
     passwordConfirmation: Yup.string().oneOf(
       [Yup.ref('password'), null],
@@ -161,10 +161,7 @@ const mapDispatchToProps = {
   setNewPassword: setNewPasswordRequest,
 };
 
-const withConnect = connect(
-  mapStateToProps,
-  mapDispatchToProps,
-);
+const withConnect = connect(mapStateToProps, mapDispatchToProps);
 
 export default compose(
   withConnect,

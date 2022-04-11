@@ -21,7 +21,7 @@ export const setNewPasswordReducer = (
   state = initialState,
   { type, payload },
 ) =>
-  produce(state, draft => {
+  produce(state, (draft) => {
     switch (type) {
       case SET_NEW_PASSWORD_REQUEST:
         draft.setNewPasswordLoading = true;

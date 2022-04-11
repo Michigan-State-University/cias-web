@@ -15,6 +15,10 @@ export const MainAppContainer = styled.div`
   width: ${({ $isSidebarVisible }) =>
     `calc(100vw - ${$isSidebarVisible ? elements.sidebarWidth : 0}px)`};
   overflow: auto;
+
+  @media only screen and (max-width: 1280px) {
+    width: 100vw;
+  }
 `;
 
 export const RowBelowNavbar = styled(Row)`

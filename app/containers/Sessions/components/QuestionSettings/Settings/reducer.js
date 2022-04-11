@@ -34,7 +34,7 @@ import reflectionFormulaBlockReducer from './Components/Blocks/Reflections/reduc
 
 /* eslint-disable no-param-reassign */
 const questionSettingsReducer = (question, { type, data }, allQuestions) =>
-  produce(question, draft => {
+  produce(question, (draft) => {
     switch (type) {
       // SETTINGS TAB
 

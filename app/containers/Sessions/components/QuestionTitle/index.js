@@ -5,11 +5,12 @@ import { connect } from 'react-redux';
 import { createStructuredSelector } from 'reselect';
 import { injectIntl } from 'react-intl';
 
-import ApprovableInput from 'components/Input/ApprovableInput';
+import FlexibleWidthApprovableInput from 'components/Input/FlexibleWidthApprovableInput';
 import Box from 'components/Box';
-import Question from 'models/Session/Question';
+
 import Row from 'components/Row';
 import { selectQuillText } from 'components/Input/utils';
+import OriginalTextHover from 'components/OriginalTextHover';
 
 import { colors, elements } from 'theme';
 import {
@@ -20,13 +21,13 @@ import {
 import messages from './messages';
 
 const QuestionTitle = ({
-  selectedQuestion: { title },
+  selectedQuestion: { id, title, original_text: originalText },
   intl: { formatMessage },
   updateTitle,
 }) => {
-  const handleUpdate = val => updateTitle({ path: 'title', value: val });
+  const handleUpdate = (val) => updateTitle({ path: 'title', value: val });
 
-  const onFocus = quill => {
+  const onFocus = (quill) => {
     selectQuillText(quill);
   };
 
@@ -40,22 +41,28 @@ const QuestionTitle = ({
       padded
     >
       <Row>
-        <ApprovableInput
-          defaultFontSize={16}
-          placeholder={formatMessage(messages.placeholder)}
-          value={title}
-          onCheck={handleUpdate}
-          onFocus={onFocus}
-          autoSize
-          richText
-        />
+        <OriginalTextHover
+          id={`question-${id}-title`}
+          text={originalText?.title}
+        >
+          <FlexibleWidthApprovableInput
+            defaultFontSize={16}
+            placeholder={formatMessage(messages.placeholder)}
+            value={title}
+            onCheck={handleUpdate}
+            onFocus={onFocus}
+            autoSize
+            richText
+            emptyWidth={155}
+          />
+        </OriginalTextHover>
       </Row>
     </Box>
   );
 };
 
 QuestionTitle.propTypes = {
-  selectedQuestion: PropTypes.shape(Question),
+  selectedQuestion: PropTypes.object,
   updateTitle: PropTypes.func,
   intl: PropTypes.object,
 };
@@ -68,12 +75,6 @@ const mapDispatchToProps = {
   updateTitle: editQuestionRequest,
 };
 
-const withConnect = connect(
-  mapStateToProps,
-  mapDispatchToProps,
-);
+const withConnect = connect(mapStateToProps, mapDispatchToProps);
 
-export default compose(
-  withConnect,
-  injectIntl,
-)(QuestionTitle);
+export default compose(withConnect, injectIntl)(QuestionTitle);

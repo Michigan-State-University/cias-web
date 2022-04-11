@@ -1,3 +1,3 @@
-const isNullOrUndefined = value => value === undefined || value === null;
+const isNullOrUndefined = (value) => value === undefined || value === null;
 
 export default isNullOrUndefined;

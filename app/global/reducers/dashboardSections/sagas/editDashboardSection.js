@@ -17,9 +17,7 @@ import messages from '../messages';
 export function* editDashboardSection({
   payload: { dashboardSection, dashboardSectionId },
 }) {
-  const requestURL = `v1/organizations/${
-    dashboardSection.organizationId
-  }/dashboard_sections/${dashboardSectionId}`;
+  const requestURL = `v1/organizations/${dashboardSection.organizationId}/dashboard_sections/${dashboardSectionId}`;
 
   try {
     const { data } = yield call(

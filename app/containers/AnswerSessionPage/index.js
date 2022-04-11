@@ -39,6 +39,7 @@ import {
 import logInGuestSaga from 'global/reducers/auth/sagas/logInGuest';
 import { canPreview } from 'models/Status/statusPermissions';
 import { finishQuestion } from 'models/Session/QuestionTypes';
+import { UserSessionType } from 'models/Session/UserSession';
 
 import QuestionTranscript from 'containers/QuestionTranscript';
 
@@ -56,7 +57,7 @@ import Loader from 'components/Loader';
 import H2 from 'components/H2';
 import H3 from 'components/H3';
 import Icon from 'components/Icon';
-import ConfirmationBox from 'components/ConfirmationBox';
+import { ConfirmationModal } from 'components/Modal';
 import Img from 'components/Img';
 
 import renderQuestionByType from './components';
@@ -83,7 +84,9 @@ import {
   nextQuestionRequest,
   clearError,
   toggleTextTranscriptAction,
+  setTransitionalUserSessionId as setTransitionalUserSessionIdAction,
 } from './actions';
+import BranchingScreen from './components/BranchingScreen';
 import { NOT_SKIPABLE_QUESTIONS } from './constants';
 
 const AnimationRefHelper = ({
@@ -175,6 +178,7 @@ export function AnswerSessionPage({
     nextQuestionError,
     currentQuestion,
     showTextTranscript,
+    transitionalUserSessionId,
   },
   isPreview,
   interventionStatus,
@@ -183,8 +187,10 @@ export function AnswerSessionPage({
   nextQuestion,
   clearErrors,
   toggleTextTranscript,
+  setTransitionalUserSessionId,
 }) {
   const { formatMessage } = useIntl();
+
   useInjectReducer({ key: 'intervention', reducer: interventionReducer });
   useInjectSaga({ key: 'fetchIntervention', saga: fetchInterventionSaga });
   useInjectSaga({ key: 'logInGuest', saga: logInGuestSaga });
@@ -192,9 +198,8 @@ export function AnswerSessionPage({
   useInjectSaga({ key: 'AnswerSessionPage', saga });
   useInjectSaga({ key: 'editPhoneNumber', saga: editPhoneNumberQuestionSaga });
 
-  const [skipQuestionModalVisible, setSkipQuestionModalVisible] = useState(
-    false,
-  );
+  const [skipQuestionModalVisible, setSkipQuestionModalVisible] =
+    useState(false);
 
   const {
     type,
@@ -218,7 +223,12 @@ export function AnswerSessionPage({
     return {};
   }, [containerQueryParams, isDesktop]);
 
-  const { logoUrl, imageAlt, languageCode } = userSession ?? {};
+  const {
+    logoUrl,
+    imageAlt,
+    languageCode,
+    type: userSessionType,
+  } = userSession ?? {};
 
   const isNewUserSession = useMemo(() => {
     const { lastAnswerAt } = userSession ?? {};
@@ -276,7 +286,7 @@ export function AnswerSessionPage({
       skipped,
     );
 
-  const renderQuestionTranscript = isRightSide => {
+  const renderQuestionTranscript = (isRightSide) => {
     const renderTranscriptComponent = ({ maxWidth, height }) => (
       <Box mt={30} maxWidth={maxWidth} height={height}>
         <QuestionTranscript
@@ -385,7 +395,9 @@ export function AnswerSessionPage({
     const canSkipNarrator = narratorSkippable || !isAnimationOngoing;
 
     const shouldRenderSkipQuestionButton =
-      !isLastScreen && !NOT_SKIPABLE_QUESTIONS.includes(type);
+      userSessionType !== UserSessionType.CAT_MH &&
+      !isLastScreen &&
+      !NOT_SKIPABLE_QUESTIONS.includes(type);
 
     const shouldRenderContinueButton =
       !isLastScreen &&
@@ -466,11 +478,14 @@ export function AnswerSessionPage({
 
   const renderPage = () => <>{renderQuestion()}</>;
 
+  const resetTransitionalUserSessionId = () =>
+    setTransitionalUserSessionId(null);
+
   if (nextQuestionLoading && interventionStarted) return <Loader />;
 
   return (
     <Column height="100%" ref={pageRef}>
-      <ConfirmationBox
+      <ConfirmationModal
         visible={skipQuestionModalVisible}
         onClose={() => setSkipQuestionModalVisible(false)}
         description={formatMessage(messages.skipQuestionModalHeader)}
@@ -486,9 +501,9 @@ export function AnswerSessionPage({
         width="100%"
       >
         <Helmet>
-          <title>Answer Session</title>
-          <meta name="description" content="Answer Session" />
+          <title>{formatMessage(messages.pageTitle, { isPreview })}</title>
         </Helmet>
+
         <AnswerOuterContainer
           previewMode={previewMode}
           interventionStarted={interventionStarted}
@@ -543,9 +558,18 @@ export function AnswerSessionPage({
                   </Box>
                 </Row>
 
+                {transitionalUserSessionId && (
+                  <BranchingScreen
+                    resetTransitionalUserSessionId={
+                      resetTransitionalUserSessionId
+                    }
+                  />
+                )}
+
                 {!nextQuestionLoading &&
                   currentQuestion &&
-                  interventionStarted && (
+                  interventionStarted &&
+                  !transitionalUserSessionId && (
                     <AnimationRefHelper
                       currentQuestion={currentQuestion}
                       currentQuestionId={currentQuestionId}
@@ -585,6 +609,7 @@ AnswerSessionPage.propTypes = {
   nextQuestion: PropTypes.func,
   clearErrors: PropTypes.func,
   toggleTextTranscript: PropTypes.func,
+  setTransitionalUserSessionId: PropTypes.func,
 };
 
 const mapStateToProps = createStructuredSelector({
@@ -604,14 +629,9 @@ const mapDispatchToProps = {
   nextQuestion: nextQuestionRequest,
   clearErrors: clearError,
   toggleTextTranscript: toggleTextTranscriptAction,
+  setTransitionalUserSessionId: setTransitionalUserSessionIdAction,
 };
 
-const withConnect = connect(
-  mapStateToProps,
-  mapDispatchToProps,
-);
+const withConnect = connect(mapStateToProps, mapDispatchToProps);
 
-export default compose(
-  withConnect,
-  memo,
-)(AnswerSessionPage);
+export default compose(withConnect, memo)(AnswerSessionPage);

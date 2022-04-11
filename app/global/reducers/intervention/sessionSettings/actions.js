@@ -156,7 +156,7 @@ export const removeFormula = (sessionId, formulaIndex) =>
     ['formulas'],
   );
 
-export const addNewFormula = sessionId =>
+export const addNewFormula = (sessionId) =>
   updateSessionSettings(
     {
       type: ADD_NEW_FORMULA,

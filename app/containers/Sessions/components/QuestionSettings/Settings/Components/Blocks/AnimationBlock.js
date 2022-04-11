@@ -85,9 +85,6 @@ const mapDispatchToProps = {
   updateNarratorPreviewAnimation: updatePreviewAnimation,
 };
 
-const withConnect = connect(
-  null,
-  mapDispatchToProps,
-);
+const withConnect = connect(null, mapDispatchToProps);
 
 export default compose(withConnect)(AnimationBlock);

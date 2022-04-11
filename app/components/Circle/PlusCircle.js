@@ -5,7 +5,7 @@ import Circle from 'components/Circle';
 import plusSign from 'assets/svg/plus-white.svg';
 import Img from 'components/Img';
 
-const PlusCircle = props => (
+const PlusCircle = (props) => (
   <Circle {...props} child={<Img src={plusSign} />} />
 );
 

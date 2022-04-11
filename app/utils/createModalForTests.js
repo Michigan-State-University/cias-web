@@ -1,7 +1,7 @@
 import ReactDOM from 'react-dom';
 
 const createModalForTests = () => {
-  ReactDOM.createPortal = jest.fn(element => element);
+  ReactDOM.createPortal = jest.fn((element) => element);
 
   const modalContainer = document.createElement('div');
   modalContainer.setAttribute('id', 'modal-portal');

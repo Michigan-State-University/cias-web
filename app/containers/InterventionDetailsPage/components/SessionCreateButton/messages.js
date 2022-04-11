@@ -9,8 +9,34 @@ import { defineMessages } from 'react-intl';
 export const scope = 'app.components.SessionCreateButton';
 
 export default defineMessages({
+  createNewSession: {
+    id: `${scope}.createNewSession`,
+    defaultMessage: 'Create a new Session',
+  },
+  selectSessionType: {
+    id: `${scope}.selectSessionType`,
+    defaultMessage: 'Select the type of new session',
+  },
   create: {
     id: `${scope}.create`,
-    defaultMessage: 'Create a new Session',
+    defaultMessage: 'Create session',
+  },
+  classicSession: {
+    id: `${scope}.classicSession`,
+    defaultMessage: 'Classic session',
+  },
+  catSession: {
+    id: `${scope}.catSession`,
+    defaultMessage: 'CAT-MH™ Session',
+  },
+  classicSessionDescription: {
+    id: `${scope}.classicSessionDescription`,
+    defaultMessage:
+      'This is a classic session in which you can arrange questions yourself, view them and edit them freely.',
+  },
+  catSessionDescription: {
+    id: `${scope}.catSessionDescription`,
+    defaultMessage:
+      'The CAT-MH™ session contains predefined screens that you cannot view or edit. The questions are displayed to the participants according to the CAT-MH™ algorithm.',
   },
 });

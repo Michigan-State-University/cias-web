@@ -35,7 +35,7 @@ const ImageUpload = ({
   const { formatMessage } = useIntl();
   const [hovered, setHovered] = useState(false);
 
-  const handleDrop = useCallback(newFiles => {
+  const handleDrop = useCallback((newFiles) => {
     const img = head(newFiles);
     onAddImage({
       image: img,
@@ -48,7 +48,7 @@ const ImageUpload = ({
   const handleRemove = () => onDeleteImage();
 
   let dropzoneAcceptedFormats = acceptedFormats
-    .map(format => `image/${format.toLowerCase()}`)
+    .map((format) => `image/${format.toLowerCase()}`)
     .join(', ');
   if (acceptedFormats.includes('JPG')) {
     dropzoneAcceptedFormats += ', image/jpeg';

@@ -34,15 +34,14 @@ const TextMessagesFormula = ({
     saga: getQuestionGroupsSaga,
   });
 
-  const { sessionId, interventionId, formatMessage } = useContext(
-    TextMessagesContext,
-  );
+  const { sessionId, interventionId, formatMessage } =
+    useContext(TextMessagesContext);
 
   useEffect(() => {
     getQuestionGroups(sessionId);
   }, []);
 
-  const handleFormulaUpdate = newFormula => {
+  const handleFormulaUpdate = (newFormula) => {
     updateFormula(newFormula);
   };
 
@@ -54,7 +53,7 @@ const TextMessagesFormula = ({
           <VariableChooser
             includeAllVariables
             disabled={disabled}
-            onClick={value => handleFormulaUpdate(`${formula ?? ''}${value}`)}
+            onClick={(value) => handleFormulaUpdate(`${formula ?? ''}${value}`)}
             sessionId={sessionId}
             interventionId={interventionId}
             isMultiSession
@@ -96,10 +95,7 @@ const mapDispatchToProps = {
   getQuestionGroups: getQuestionGroupsRequest,
 };
 
-const withConnect = connect(
-  null,
-  mapDispatchToProps,
-);
+const withConnect = connect(null, mapDispatchToProps);
 
 export default compose(
   injectReducer({ key: 'questions', reducer: questionsReducer }),

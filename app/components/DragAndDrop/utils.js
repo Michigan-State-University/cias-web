@@ -12,10 +12,10 @@ export const reorderItems = (items, dragFromId, dragToId, selector) => {
   if (dragFromId === dragToId) return { items, hasChanged: false };
 
   const dragFromIndex = items.findIndex(
-    item => selectId(item, selector) === dragFromId,
+    (item) => selectId(item, selector) === dragFromId,
   );
   const dragToIndex = items.findIndex(
-    item => selectId(item, selector) === dragToId,
+    (item) => selectId(item, selector) === dragToId,
   );
 
   if (dragFromIndex < 0 || dragToIndex < 0) return { items, hasChanged: false };

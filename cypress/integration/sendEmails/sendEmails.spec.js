@@ -59,14 +59,12 @@ describe('Send emails', () => {
       .blur();
     cy.getBySel('send-email-button').click();
     cy.wait(['@addSessionInvitations', '@addSessionInvitations']);
-    cy.get('@addSessionInvitations.all').each(response => {
+    cy.get('@addSessionInvitations.all').each((response) => {
       expect(response).to.have.property('status', 201);
     });
 
     // check if emails were added to the list
-    cy.getBySel('user-list')
-      .children()
-      .should('have.length', 2);
+    cy.getBySel('user-list').children().should('have.length', 2);
 
     // should resend all emails
     cy.getBySel('user-list-item-0')
@@ -74,7 +72,7 @@ describe('Send emails', () => {
       .invoke('attr', 'style', 'display: block')
       .click({ multiple: true });
     cy.wait(['@resendSessionInvitation', '@resendSessionInvitation']);
-    cy.get('@resendSessionInvitation.all').each(response => {
+    cy.get('@resendSessionInvitation.all').each((response) => {
       expect(response).to.have.property('status', 200);
     });
 

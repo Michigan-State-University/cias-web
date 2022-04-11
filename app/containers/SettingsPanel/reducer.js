@@ -1,6 +1,6 @@
 export const UPDATE = 'UPDATE';
 
-export const initialState = currentOption => ({
+export const initialState = (currentOption) => ({
   id: currentOption.id,
   label: currentOption.label,
   sublabel: currentOption.sublabel,

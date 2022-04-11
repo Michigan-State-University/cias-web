@@ -10,7 +10,7 @@ const useResizeObserver = ({ onResize, skipOnMount = false, targetRef }) => {
     const { current } = targetRef;
 
     if (current) {
-      resizeObserver.current = new ResizeObserver(entries => {
+      resizeObserver.current = new ResizeObserver((entries) => {
         requestAnimationFrame(() => {
           if (!Array.isArray(entries) || !entries.length) {
             return;

@@ -43,13 +43,13 @@ export const initialState = {
 const selectFilter = (currentState, filter) => {
   if (!filter) return currentState;
   if (currentState.includes(filter)) {
-    return currentState.filter(value => value !== filter);
+    return currentState.filter((value) => value !== filter);
   }
   return [...currentState, filter];
 };
 
 export const generatedReportsReducer = (state = initialState, action) =>
-  produce(state, draft => {
+  produce(state, (draft) => {
     switch (action.type) {
       case FETCH_REPORTS_REQUEST:
         const { page, filterOption, sortOption } = action.payload;
@@ -105,9 +105,8 @@ export const generatedReportsReducer = (state = initialState, action) =>
           ({ id }) => id === action.payload.id,
         );
 
-        draft.interventions[index].emailNotifications = !state.interventions[
-          index
-        ].emailNotifications;
+        draft.interventions[index].emailNotifications =
+          !state.interventions[index].emailNotifications;
 
         draft.errors.fetchInterventionsError = null;
         break;

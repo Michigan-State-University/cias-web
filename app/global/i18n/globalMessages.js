@@ -31,6 +31,9 @@ import {
 } from 'models/Session/QuestionTypes';
 import { Roles } from 'models/User/UserRoles';
 import { archived, closed, draft, published } from 'models/Status/StatusTypes';
+import { UserInterventionStatus } from 'models/UserIntervention/StatusTypes';
+import { UserSessionStatus } from 'models/UserSession/StatusTypes';
+import { TextMessageType } from 'models/TextMessage';
 
 export const scope = 'app.GlobalMessages';
 
@@ -213,6 +216,46 @@ export default defineMessages({
       defaultMessage: 'Archived',
     },
   },
+  userInterventionStatus: {
+    [UserInterventionStatus.READY_TO_START]: {
+      id: `${scope}.${[UserInterventionStatus.READY_TO_START]}`,
+      defaultMessage: 'Ready to start',
+    },
+    [UserInterventionStatus.IN_PROGRESS]: {
+      id: `${scope}.${[UserInterventionStatus.IN_PROGRESS]}`,
+      defaultMessage: 'In progress',
+    },
+    [UserInterventionStatus.COMPLETED]: {
+      id: `${scope}.${[UserInterventionStatus.COMPLETED]}`,
+      defaultMessage: 'Completed',
+    },
+    [UserInterventionStatus.SCHEDULE_PENDING]: {
+      id: `${scope}.${[UserInterventionStatus.SCHEDULE_PENDING]}`,
+      defaultMessage: 'Schedule session pending',
+    },
+    [UserInterventionStatus.NO_ACCESS]: {
+      id: `${scope}.${[UserInterventionStatus.NO_ACCESS]}`,
+      defaultMessage: 'No access',
+    },
+  },
+  userSessionStatus: {
+    [UserSessionStatus.READY_TO_START]: {
+      id: `${scope}.${[UserSessionStatus.READY_TO_START]}`,
+      defaultMessage: 'Ready to start',
+    },
+    [UserSessionStatus.IN_PROGRESS]: {
+      id: `${scope}.${[UserSessionStatus.IN_PROGRESS]}`,
+      defaultMessage: 'In progress',
+    },
+    [UserSessionStatus.COMPLETED]: {
+      id: `${scope}.${[UserSessionStatus.COMPLETED]}`,
+      defaultMessage: 'Completed',
+    },
+    [UserSessionStatus.NOT_AVAILABLE]: {
+      id: `${scope}.${[UserSessionStatus.NOT_AVAILABLE]}`,
+      defaultMessage: 'Not available',
+    },
+  },
   createInterventionError: {
     id: `${scope}.createInterventionError`,
     defaultMessage: `Couldn't create an intervention`,
@@ -250,11 +293,33 @@ export default defineMessages({
       id: `${scope}.required`,
       defaultMessage: 'This field is required',
     },
+    numeric: {
+      id: `${scope}.numeric`,
+      defaultMessage: 'Only numeric values are allowed',
+    },
   },
   questionRequired: {
     id: `${scope}.questionRequired`,
-    defaultMessage: `Required fields are marked with an asterisk<span style='color:${
-      themeColors.warning
-    };'>*</span>`,
+    defaultMessage: `Required fields are marked with an asterisk<span style='color:${themeColors.warning};'>*</span>`,
+  },
+  dragHandle: {
+    id: `${scope}.dragHandle`,
+    defaultMessage: `Hold and drag to change position`,
+  },
+  CatMhSessionInvalid: {
+    id: `${scope}.CatMhSessionInvalid`,
+    defaultMessage: `Every CAT-MH™ session needs to have all values set up.`,
+  },
+  CatMhWrongSettings: {
+    id: `${scope}.CatMhWrongSettings`,
+    defaultMessage: `CAT-MH™ license settings need to be properly set up. Please contact an Admin in that matter.`,
+  },
+  [TextMessageType.NORMAL]: {
+    id: `${scope}.${TextMessageType.NORMAL}`,
+    defaultMessage: 'Normal',
+  },
+  [TextMessageType.ALERT]: {
+    id: `${scope}.${TextMessageType.ALERT}`,
+    defaultMessage: 'Alert',
   },
 });

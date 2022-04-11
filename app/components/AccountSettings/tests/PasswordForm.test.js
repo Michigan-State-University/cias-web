@@ -18,7 +18,7 @@ describe('<PasswordForm />', () => {
     createModalForTests();
   });
   const defaultProps = {
-    formatMessage: jest.fn(msg => msg.defaultMessage),
+    formatMessage: jest.fn((msg) => msg.defaultMessage),
     changePassword: jest.fn(),
     error: '',
     loading: false,

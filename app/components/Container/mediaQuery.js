@@ -6,7 +6,7 @@ import { containerBreakpoints } from 'components/Container/containerBreakpoints'
 const generateMinQueries = () => {
   const mediaQueries = {};
 
-  forEach(keys(containerBreakpoints), breakpoint => {
+  forEach(keys(containerBreakpoints), (breakpoint) => {
     extend(mediaQueries, {
       [breakpoint]: `(min-width: ${containerBreakpoints[breakpoint]}px)`,
     });
@@ -18,7 +18,7 @@ const generateMinQueries = () => {
 const generateMaxQueries = () => {
   const mediaQueries = {};
 
-  forEach(keys(containerBreakpoints), breakpoint => {
+  forEach(keys(containerBreakpoints), (breakpoint) => {
     extend(mediaQueries, {
       [breakpoint]: `(max-width: ${containerBreakpoints[breakpoint] - 1}px)`,
     });

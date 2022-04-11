@@ -11,18 +11,18 @@ import { connect } from 'react-redux';
 import { compose } from 'redux';
 import { injectIntl } from 'react-intl';
 
-import Question from 'models/Session/Question';
-
 import { makeSelectSelectedQuestion } from 'global/reducers/questions';
 
 import { colors, themeColors } from 'theme';
+
+import VariableChooser from 'containers/VariableChooser';
 
 import Column from 'components/Column';
 import Row from 'components/Row';
 import Box from 'components/Box';
 import Text from 'components/Text';
 import { StyledInput } from 'components/Input/StyledInput';
-import VariableChooser from 'containers/VariableChooser';
+import { ModalType, useModal } from 'components/Modal';
 
 import { DashedBox } from './styled';
 import messages from './messages';
@@ -52,6 +52,7 @@ function BranchingLayout({
   onAddTarget,
   onUpdateTarget,
   onRemoveTarget,
+  disableBranchingToSession,
 }) {
   const [patternsSize, setPatternSize] = useState(
     formula?.patterns?.length || 0,
@@ -70,8 +71,26 @@ function BranchingLayout({
     setTargetChooserOpen(value ? index : -1);
   };
 
-  const handleRemoveCase = (index, questionId) =>
-    onRemoveCase(index, questionId, formulaIndex);
+  const handleDeleteClick = (index, questionId) =>
+    openDeleteModal({ index, questionId });
+
+  const handleDeleteConfirm = () => {
+    const { index, questionId } = caseToDelete;
+    return onRemoveCase(index, questionId, formulaIndex);
+  };
+
+  const {
+    openModal: openDeleteModal,
+    Modal: DeleteModal,
+    modalState: caseToDelete,
+  } = useModal({
+    type: ModalType.ConfirmationModal,
+    props: {
+      description: formatMessage(messages.deleteCaseHeader),
+      content: formatMessage(messages.deleteCaseMessage),
+      confirmAction: handleDeleteConfirm,
+    },
+  });
 
   const handleRemoveTarget = (questionId, index, targetIndex) =>
     onRemoveTarget(questionId, index, targetIndex, formulaIndex);
@@ -81,6 +100,8 @@ function BranchingLayout({
 
   return (
     <>
+      <DeleteModal />
+
       <Column>
         <Box padding={8} pt={24}>
           <Row align="center" justify="between">
@@ -90,7 +111,7 @@ function BranchingLayout({
               disabled={disabled}
               sessionId={sessionId}
               interventionId={interventionId}
-              onClick={value =>
+              onClick={(value) =>
                 onFormulaUpdate(`${formula.payload}${value}`, id, formulaIndex)
               }
               includeAllVariables={includeAllVariables}
@@ -119,13 +140,13 @@ function BranchingLayout({
                 width="100%"
                 placeholder={formatMessage(messages.formulaPlaceholder)}
                 value={formula?.payload || ''}
-                onBlur={val => onFormulaUpdate(val, id, formulaIndex)}
+                onBlur={(val) => onFormulaUpdate(val, id, formulaIndex)}
                 forceBlur={isOpen}
               />
             </Box>
 
             {formula?.patterns?.map((pattern, index) => {
-              const updatePattern = patternObj => {
+              const updatePattern = (patternObj) => {
                 onUpdateCase(index, patternObj, id, formulaIndex);
               };
               return (
@@ -138,7 +159,7 @@ function BranchingLayout({
                   index={index}
                   key={index}
                   onAddTarget={() => onAddTarget(id, index, formulaIndex)}
-                  onRemoveCase={handleRemoveCase}
+                  onRemoveCase={handleDeleteClick}
                   pattern={pattern}
                   questionId={id}
                   sessionBranching={sessionBranching}
@@ -147,6 +168,7 @@ function BranchingLayout({
                   updatePattern={updatePattern}
                   onUpdateTarget={handleUpdateTarget}
                   onRemoveTarget={handleRemoveTarget}
+                  disableBranchingToSession={disableBranchingToSession}
                 />
               );
             })}
@@ -184,10 +206,11 @@ BranchingLayout.propTypes = {
   disabled: PropTypes.bool,
   includeAllVariables: PropTypes.bool,
   includeCurrentQuestion: PropTypes.bool,
-  selectedQuestion: PropTypes.shape(Question),
+  selectedQuestion: PropTypes.object,
   includeAllSessions: PropTypes.bool,
   includeCurrentSession: PropTypes.bool,
   isMultiSession: PropTypes.bool,
+  disableBranchingToSession: PropTypes.bool,
 };
 
 BranchingLayout.defaultProps = {
@@ -200,7 +223,4 @@ const mapStateToProps = createStructuredSelector({
 
 const withConnect = connect(mapStateToProps);
 
-export default compose(
-  injectIntl,
-  withConnect,
-)(BranchingLayout);
+export default compose(injectIntl, withConnect)(BranchingLayout);

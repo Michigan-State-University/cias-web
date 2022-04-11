@@ -26,7 +26,7 @@ import {
 import { setShouldRefetchAction } from 'global/reducers/organizations';
 
 import Text from 'components/Text';
-import ConfirmationBox from 'components/ConfirmationBox';
+import { ConfirmationModal } from 'components/Modal';
 import Loader from 'components/Loader';
 
 import UserDetailsUI from './UserDetailsUI';
@@ -115,7 +115,7 @@ const UserDetailsComponent = ({
   };
 
   const handleEdit = useCallback(
-    (field, required) => value => {
+    (field, required) => (value) => {
       if (value === '' && required === true) {
         toast.warning(
           formatMessage(messages.fieldCannotBeEmpty, {
@@ -143,7 +143,7 @@ const UserDetailsComponent = ({
         onCancel={handleCancel}
       />
 
-      <ConfirmationBox
+      <ConfirmationModal
         visible={activationModalVisible}
         onClose={closeActivationModal}
         description={modalDescription}
@@ -178,10 +178,7 @@ const mapDispatchToProps = {
   setShouldRefetch: setShouldRefetchAction,
 };
 
-const withConnect = connect(
-  mapStateToProps,
-  mapDispatchToProps,
-);
+const withConnect = connect(mapStateToProps, mapDispatchToProps);
 
 const reduxInjectors = [
   injectReducer({ key: 'user', reducer: UserReducer }),
@@ -194,8 +191,5 @@ const reduxInjectors = [
 ];
 
 export default memo(
-  compose(
-    withConnect,
-    ...reduxInjectors,
-  )(UserDetailsComponent),
+  compose(withConnect, ...reduxInjectors)(UserDetailsComponent),
 );

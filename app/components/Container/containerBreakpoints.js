@@ -17,10 +17,10 @@ export const additionalBreakpoints = {
 
 export const containerWidths = [540, 750, 960, 1140, 1540];
 
-export const calculateWidth = width => {
+export const calculateWidth = (width) => {
   const lastMatchingIndex = findLastIndex(
     sortBy(values(containerBreakpoints)),
-    breakpoint => width >= breakpoint,
+    (breakpoint) => width >= breakpoint,
   );
 
   if (lastMatchingIndex > -1) return `${containerWidths[lastMatchingIndex]}px`;

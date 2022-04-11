@@ -7,11 +7,11 @@ import { DndSortableItem } from './DndSortableItem';
 import { reorderItems, selectId } from './utils';
 
 const Component = ({ items, selector, onDragEnd, onDragStart, children }) => {
-  const handleDragStart = e => {
+  const handleDragStart = (e) => {
     onDragStart(e);
   };
 
-  const handleDragEnd = e => {
+  const handleDragEnd = (e) => {
     const { active, over } = e;
 
     const { items: reorderedItems, hasChanged } = reorderItems(
@@ -24,10 +24,10 @@ const Component = ({ items, selector, onDragEnd, onDragStart, children }) => {
     onDragEnd(e, reorderedItems, hasChanged);
   };
 
-  const ids = useMemo(() => items.map(item => selectId(item, selector)), [
-    items,
-    selector,
-  ]);
+  const ids = useMemo(
+    () => items.map((item) => selectId(item, selector)),
+    [items, selector],
+  );
 
   return (
     <DndContext

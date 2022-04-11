@@ -32,7 +32,7 @@ const ReactColor = ({
 
   useOutsideClick(pickerRef, close, isOpen);
 
-  const handleChangeComplete = newColor => {
+  const handleChangeComplete = (newColor) => {
     close();
 
     onChangeComplete(newColor);
