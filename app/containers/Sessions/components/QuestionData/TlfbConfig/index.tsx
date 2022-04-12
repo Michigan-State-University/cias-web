@@ -129,6 +129,7 @@ const TlfbConfig = ({ statusMetadata: { isEditable } }: TlfbConfigProps) => {
       </Row>
       <Checkbox
         checked={displayHelpingMaterials}
+        disabled={!isEditable}
         onChange={handleDisplayHelpingMaterialsChange}
         id="display-tlfb-helping-materials-checkbox"
       >
