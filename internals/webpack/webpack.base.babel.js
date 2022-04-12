@@ -128,7 +128,7 @@ module.exports = options => ({
   },
   plugins: options.plugins.concat([
     new webpack.ProvidePlugin({
-      process: 'process/browser',
+      process: 'process/browser.js',
     }),
 
     ...(onHeroku ? [] : [gitRevisionPlugin]),

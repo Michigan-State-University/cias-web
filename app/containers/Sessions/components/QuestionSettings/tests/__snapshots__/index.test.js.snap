@@ -34,25 +34,40 @@ exports[`<QuestionSettings /> Should render and match the snapshot 1`] = `
             data-cy="tabs"
           >
             <div
-              class="styled__LabelContainer-sc-1tqggs6-2 dzwVzC"
+              class="styled__LabelContainer-sc-1tqggs6-2 fekIv"
             >
               <div>
                 Settings
               </div>
+              <div
+                class="styled__TabUnderline-sc-1tqggs6-4 jdrwGR"
+                data-projection-id="1"
+                style="transform: none; transform-origin: 50% 50% 0; opacity: 1; pointer-events: none;"
+              />
             </div>
             <div
-              class="styled__LabelContainer-sc-1tqggs6-2 dzwVzC"
+              class="styled__LabelContainer-sc-1tqggs6-2 fekIv"
             >
               <div>
                 Narrator
               </div>
+              <div
+                class="styled__TabUnderline-sc-1tqggs6-4 jdrwGR"
+                data-projection-id="2"
+                style="transform: none; transform-origin: 50% 50% 0; opacity: 1; pointer-events: none;"
+              />
             </div>
             <div
-              class="styled__LabelContainer-sc-1tqggs6-2 dzwVzC"
+              class="styled__LabelContainer-sc-1tqggs6-2 fekIv"
             >
               <div>
                 Branching
               </div>
+              <div
+                class="styled__TabUnderline-sc-1tqggs6-4 jdrwGR"
+                data-projection-id="3"
+                style="transform: none; transform-origin: 50% 50% 0; opacity: 0;"
+              />
             </div>
           </div>
           <div
