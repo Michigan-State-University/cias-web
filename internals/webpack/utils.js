@@ -4,9 +4,9 @@ const gitRevisionPlugin = new GitRevisionPlugin();
 const onHeroku = process.env.SOURCE_VERSION && process.env.STACK;
 
 const getCommitHash = () =>
-  process.env.SOURCE_VERSION || process.env.GIT_REV
-    ? process.env.SOURCE_VERSION || process.env.GIT_REV
-    : gitRevisionPlugin.commithash();
+  process.env.SOURCE_VERSION ||
+  process.env.GIT_REV ||
+  gitRevisionPlugin.commithash();
 
 exports.gitRevisionPlugin = gitRevisionPlugin;
 exports.onHeroku = onHeroku;
