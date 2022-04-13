@@ -40,15 +40,7 @@ const ReportTemplatePreview = () => {
     canEdit,
   } = useContext(ReportTemplatesContext);
 
-  const [, setDraggingSectionId] = useState(null);
-
-  const onDragStart = e => {
-    setDraggingSectionId(e.active.id);
-  };
-
   const onDragEnd = (_, items, hasChanged) => {
-    setDraggingSectionId(null);
-
     if (!hasChanged) return;
 
     const reorderedSections = items.map((section, index) => ({
@@ -111,7 +103,6 @@ const ReportTemplatePreview = () => {
               </Row>
               <DndSortable
                 onDragEnd={onDragEnd}
-                onDragStart={onDragStart}
                 items={singleReportTemplate.sections}
               >
                 {({ item, dragHandleProps }) => (

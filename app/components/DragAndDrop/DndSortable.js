@@ -1,14 +1,19 @@
-import React, { memo, useMemo } from 'react';
+import React, { memo, useMemo, useState } from 'react';
 import PropTypes from 'prop-types';
-import { DndContext, closestCenter } from '@dnd-kit/core';
+import { DndContext, closestCenter, DragOverlay } from '@dnd-kit/core';
 import { SortableContext } from '@dnd-kit/sortable';
 
 import { DndSortableItem } from './DndSortableItem';
 import { reorderItems, selectId } from './utils';
+import { EMPTY_OBJECT } from './constants';
 
 const Component = ({ items, selector, onDragEnd, onDragStart, children }) => {
+  const [draggableIem, setDraggableItem] = useState(null);
+
   const handleDragStart = e => {
-    onDragStart(e);
+    setDraggableItem(e.active.data.current);
+
+    if (onDragStart) onDragStart(e);
   };
 
   const handleDragEnd = e => {
@@ -21,6 +26,7 @@ const Component = ({ items, selector, onDragEnd, onDragStart, children }) => {
       selector,
     );
 
+    setDraggableItem(null);
     onDragEnd(e, reorderedItems, hasChanged);
   };
 
@@ -50,16 +56,26 @@ const Component = ({ items, selector, onDragEnd, onDragStart, children }) => {
           );
         })}
       </SortableContext>
+
+      <DragOverlay>
+        {draggableIem &&
+          children({
+            item: draggableIem,
+            dragHandleProps: EMPTY_OBJECT,
+            isDragging: true,
+            isOverlay: true,
+          })}
+      </DragOverlay>
     </DndContext>
   );
 };
 
 Component.propTypes = {
-  items: PropTypes.arrayOf(PropTypes.object),
+  items: PropTypes.arrayOf(PropTypes.object).isRequired,
   selector: PropTypes.oneOfType([PropTypes.string, PropTypes.func]),
-  onDragEnd: PropTypes.func,
+  onDragEnd: PropTypes.func.isRequired,
   onDragStart: PropTypes.func,
-  children: PropTypes.func,
+  children: PropTypes.func.isRequired,
 };
 
 Component.defaultProps = {
