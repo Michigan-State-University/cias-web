@@ -62,28 +62,44 @@ export const StyledDateInput = styled.button`
   ${border};
 `;
 
+// ! TODO: make granular selectors
 export const DatePickerWrapper = styled.div`
   .schedule-date-picker {
     font-family: ${fontFamily};
     background-color: ${colors.linkWater};
+
     .react-datepicker__header {
       background-color: ${colors.zirkon};
     }
     .react-datepicker__day--keyboard-selected {
-      background-color: ${themeColors.secondary};
+      background-color: ${colors.orchid};
     }
-    .react-datepicker__day--selected {
-      background-color: ${themeColors.secondary};
-    }
-    .react-datepicker__day:hover {
-      color: ${colors.black};
-      background-color: ${colors.zirkon};
+    .react-datepicker__day {
+      color: ${themeColors.text};
+
+      &:hover {
+        color: ${themeColors.text};
+        background-color: ${colors.zirkon};
+      }
     }
     .react-datepicker__year-option {
       background-color: ${colors.linkWater};
     }
     .react-datepicker__month-option {
       background-color: ${colors.linkWater};
+    }
+    .react-datepicker__day--in-range,
+    .react-datepicker__day--in-selecting-range {
+      color: ${themeColors.text};
+      background-color: ${Color(colors.orchid).alpha(0.1).toString()};
+    }
+    .react-datepicker__day--selected:not(.react-datepicker__day--in-selecting-range),
+    .react-datepicker__day--range-start:not(.react-datepicker__day--in-selecting-range),
+    .react-datepicker__day--range-end:not(.react-datepicker__day--in-selecting-range),
+    .react-datepicker__day--selecting-range-start,
+    .react-datepicker__day--selecting-range-end {
+      color: ${colors.white};
+      background-color: ${colors.orchid};
     }
   }
 `;
