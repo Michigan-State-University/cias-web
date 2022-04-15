@@ -42,6 +42,8 @@ import share from 'assets/svg/file-share.svg';
 import shareActive from 'assets/svg/file-share-active.svg';
 import groupIcon from 'assets/svg/group.svg';
 import groupIconActive from 'assets/svg/group-active.svg';
+import duplicateInternally from 'assets/svg/duplicate-internally.svg';
+import duplicateInternallyActive from 'assets/svg/duplicate-internally-active.svg';
 
 import Question from 'models/Session/Question';
 import { borders, colors, themeColors } from 'theme';
@@ -98,6 +100,8 @@ import {
   reportTemplatesReducer,
   reportTemplatesSaga,
 } from 'global/reducers/reportTemplates';
+import CopyModal from 'components/CopyModal';
+import { VIEWS } from 'components/CopyModal/Components';
 import editInterventionPageSaga from './saga';
 
 import QuestionDetails from '../../components/QuestionDetails';
@@ -140,6 +144,7 @@ function EditSessionPage({
   const [selectedSlides, setSelectedSlides] = useState([]);
   const [showList, setShowList] = useState(false);
   const [modalVisible, setModalVisible] = useState(false);
+  const [duplicateModalVisible, setDuplicateModalVisible] = useState(false);
   const [isDuringQuestionReorder, setIsDuringQuestionReorder] = useState(false);
   const openedGroups = useRef([]);
   const [openedGroupsMap, setOpenedGroupsMap] = useState({});
@@ -221,6 +226,13 @@ function EditSessionPage({
         copyQuestions(selectedSlides, params.sessionId);
         setSelectedSlides([]);
       },
+      disabled: !editingPossible,
+    },
+    {
+      label: <FormattedMessage {...messages.duplicateInternally} />,
+      inactiveIcon: duplicateInternally,
+      activeIcon: duplicateInternallyActive,
+      action: () => setDuplicateModalVisible(true),
       disabled: !editingPossible,
     },
     {
@@ -396,6 +408,15 @@ function EditSessionPage({
           onResearchersSelected={sendSlidesToResearchers}
         />
       </Modal>
+      <CopyModal
+        visible={duplicateModalVisible}
+        onClose={() => setDuplicateModalVisible(false)}
+        copyAction={(...args) => console.log(args)}
+        disableInterventionCopy
+        disableQuestionCopy
+        pasteText="Dupa"
+        defaultView={VIEWS.SESSION}
+      />
       <Row height="100%" filled>
         <QuestionsRow sm={4} isVisible={showList}>
           <Box

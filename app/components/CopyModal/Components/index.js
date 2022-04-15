@@ -183,6 +183,7 @@ const CopyChooser = ({
             backText={formatMessage(messages.interventions)}
             currentPlaceTitle={formatMessage(messages.sessionListHeader)}
             listIcon={sessionIcon}
+            selectedItem={selectedItem}
           />
         );
       case VIEWS.QUESTION_GROUP:
