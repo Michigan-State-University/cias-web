@@ -27,4 +27,12 @@ export default defineMessages({
     id: `${scope}.shareSuccess`,
     defaultMessage: 'Successfully shared questions',
   },
+  duplicateInternallySuccess: {
+    id: `${scope}.duplicateInternallySuccess`,
+    defaultMessage: 'Duplicated questions to target session',
+  },
+  duplicateInternallyError: {
+    id: `${scope}.duplicateInternallyError`,
+    defaultMessage: 'Unable to duplicate questions',
+  },
 });

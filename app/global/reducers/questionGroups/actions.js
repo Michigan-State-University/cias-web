@@ -21,6 +21,7 @@ import {
   REORDER_GROUP_LIST_SUCCESS,
   REORDER_GROUP_LIST_ERROR,
   CLEAN_GROUPS,
+  DUPLICATE_QUESTIONS_INTERNALLY_REQUEST,
 } from './constants';
 
 export const copyQuestionsRequest = (questionIds, sessionId) =>
@@ -76,3 +77,9 @@ export const reorderGroupListError = error =>
 
 export const cleanGroups = questions =>
   actionBuilder(CLEAN_GROUPS, { questions });
+
+export const duplicateQuestionsInternallyRequest = (questions, sessionId) =>
+  actionBuilder(DUPLICATE_QUESTIONS_INTERNALLY_REQUEST, {
+    questions,
+    sessionId,
+  });

@@ -57,6 +57,10 @@ export default defineMessages({
     id: `${scope}.modalTitle`,
     defaultMessage: 'Send copy to researchers',
   },
+  duplicateGroup: {
+    id: `${scope}.duplicateGroup`,
+    defaultMessage: 'Duplicate questions to session',
+  },
 
   errors: {
     duplicateVariable: {

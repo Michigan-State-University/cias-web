@@ -79,6 +79,8 @@ import {
   questionGroupsReducer,
   getQuestionGroupsRequest,
   getQuestionGroupsSaga,
+  duplicateQuestionsInternallyRequest,
+  duplicateQuestionsInternallySaga,
 } from 'global/reducers/questionGroups';
 import {
   interventionReducer,
@@ -139,6 +141,7 @@ function EditSessionPage({
   getQuestionGroups,
   session: { id: sessionId, name: sessionName },
   fetchReportTemplates,
+  duplicateQuestionsInternally,
 }) {
   const [manage, setManage] = useState(false);
   const [selectedSlides, setSelectedSlides] = useState([]);
@@ -363,6 +366,9 @@ function EditSessionPage({
   const sendSlidesToResearchers = researchers =>
     shareQuestionsToResearchers(researchers, selectedSlides);
 
+  const onDuplicateQuestionsInternally = target =>
+    duplicateQuestionsInternally(selectedSlides, target.id);
+
   if (loading || questions.length === 0) return <Loader size={100} />;
 
   const selectSlide = slideId =>
@@ -411,10 +417,10 @@ function EditSessionPage({
       <CopyModal
         visible={duplicateModalVisible}
         onClose={() => setDuplicateModalVisible(false)}
-        copyAction={(...args) => console.log(args)}
+        copyAction={onDuplicateQuestionsInternally}
         disableInterventionCopy
         disableQuestionCopy
-        pasteText="Dupa"
+        pasteText={formatMessage(messages.duplicateGroup)}
         defaultView={VIEWS.SESSION}
       />
       <Row height="100%" filled>
@@ -576,6 +582,7 @@ EditSessionPage.propTypes = {
   changeGroupName: PropTypes.func,
   getQuestionGroups: PropTypes.func,
   fetchReportTemplates: PropTypes.func,
+  duplicateQuestionsInternally: PropTypes.func,
   interventionStatus: PropTypes.string,
   session: PropTypes.object,
 };
@@ -602,6 +609,7 @@ const mapDispatchToProps = {
   changeGroupName: changeGroupNameRequest,
   getQuestionGroups: getQuestionGroupsRequest,
   fetchReportTemplates: fetchReportTemplatesRequest,
+  duplicateQuestionsInternally: duplicateQuestionsInternallyRequest,
 };
 
 const withConnect = connect(
@@ -633,6 +641,10 @@ export default compose(
   injectSaga({
     key: 'reorderQuestionGroups',
     saga: reorderQuestionGroupsSaga,
+  }),
+  injectSaga({
+    key: 'duplicateQuestionsInternally',
+    saga: duplicateQuestionsInternallySaga,
   }),
   injectIntl,
   withConnect,

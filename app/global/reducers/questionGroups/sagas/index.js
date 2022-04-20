@@ -6,6 +6,7 @@ import groupQuestionsSaga from './groupQuestions';
 import shareQuestionsToResearchersSaga from './shareQuestionsToResearchers';
 import changeGroupNameSaga from './changeGroupName';
 import getQuestionGroupsSaga from './getQuestionGroups';
+import duplicateQuestionsInternallySaga from './duplicateQuestionsInternally';
 
 export {
   copyQuestionsSaga,
@@ -14,6 +15,7 @@ export {
   changeGroupNameSaga,
   getQuestionGroupsSaga,
   reorderQuestionGroupsSaga,
+  duplicateQuestionsInternallySaga,
 };
 
 export default function* allQuestionsSagas() {
@@ -23,5 +25,6 @@ export default function* allQuestionsSagas() {
     shareQuestionsToResearchersSaga(),
     changeGroupNameSaga(),
     reorderQuestionGroupsSaga(),
+    duplicateQuestionsInternallySaga(),
   ]);
 }
