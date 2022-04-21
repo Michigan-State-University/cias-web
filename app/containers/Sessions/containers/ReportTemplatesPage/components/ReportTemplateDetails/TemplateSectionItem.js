@@ -45,12 +45,14 @@ const TemplateSectionItem = ({ templateSection, dragHandleProps }) => {
       fluid
     >
       <Row align="center">
-        <Col xs={1}>
+        <Col xs={1} {...dragHandleProps}>
           <Img
+            alt={`${formatMessage(messages.reorderIconAlt)} ${
+              templateSection.position
+            }`}
             ml={10}
             src={ReorderIcon}
             disabled={false}
-            {...dragHandleProps}
           />
         </Col>
         <Col>
