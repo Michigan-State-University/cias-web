@@ -1,4 +1,4 @@
-import React, { Fragment, useState } from 'react';
+import React, { useState } from 'react';
 import { createStructuredSelector } from 'reselect';
 import PropTypes from 'prop-types';
 import map from 'lodash/map';
@@ -10,7 +10,7 @@ import { Markup } from 'interweave';
 import Box from 'components/Box';
 import H3 from 'components/H3';
 import Row from 'components/Row';
-import Switch from 'components/Switch';
+import { FullWidthSwitch } from 'components/Switch';
 import Text from 'components/Text';
 import lastKey from 'utils/getLastKey';
 import { colors, borders, fontSizes, themeColors } from 'theme';
@@ -29,7 +29,7 @@ import { makeSelectQuestionGroupsIds } from 'global/reducers/questionGroups';
 
 import bulb from 'assets/svg/bulb.svg';
 
-import ConfirmationBox from 'components/ConfirmationBox';
+import { ConfirmationModal } from 'components/Modal';
 import InfoBox from 'components/Box/InfoBox';
 import Img from 'components/Img';
 import { LI, UL } from 'components/List';
@@ -64,13 +64,13 @@ const NarratorTab = ({
     return <></>;
   }
 
-  const onCreateBlock = type => {
+  const onCreateBlock = (type) => {
     onCreate(type, id, groupIds);
     const blocks = narrator?.blocks?.length ?? 0;
     changeNarratorBlockIndex(blocks);
   };
 
-  const toggleAction = index => value => {
+  const toggleAction = (index) => (value) => {
     if (value) onNarratorToggle(`${index}`, value);
     else setConfirmationOption(index);
   };
@@ -84,7 +84,7 @@ const NarratorTab = ({
   );
 
   const last = lastKey(narrator.settings);
-  const getBorderBottom = index => {
+  const getBorderBottom = (index) => {
     if (index === last) return null;
     return `${borders.borderWidth} ${borders.borderStyle} ${colors.linkWater}`;
   };
@@ -112,7 +112,7 @@ const NarratorTab = ({
       <>
         <FormattedMessage {...messages.blockRemovalConfirmationDescription} />
         <UL>
-          {getRemovedBlockForSetting(confirmationOption).map(blockType => (
+          {getRemovedBlockForSetting(confirmationOption).map((blockType) => (
             <LI key={blockType}>
               <FormattedMessage {...globalMessages.blockTypes[blockType]} />
             </LI>
@@ -124,7 +124,7 @@ const NarratorTab = ({
 
   return (
     <>
-      <ConfirmationBox
+      <ConfirmationModal
         visible={isConfirmationBoxVisible}
         onClose={dismissConfirmation}
         description={getConfirmationDescription()}
@@ -147,8 +147,8 @@ const NarratorTab = ({
               mb={15}
               borderBottom={getBorderBottom(index)}
             >
-              <H3>{formatMessage(messages[`${index}`])}</H3>
-              <Switch
+              <FullWidthSwitch
+                id={index}
                 disabled={
                   disabled ||
                   DISABLED_NARRATOR_SETTINGS_BY_QUESTION_TYPE[index]?.includes(
@@ -157,7 +157,9 @@ const NarratorTab = ({
                 }
                 checked={val}
                 onToggle={toggleAction(index)}
-              />
+              >
+                <H3>{formatMessage(messages[`${index}`])}</H3>
+              </FullWidthSwitch>
             </Row>
           ))}
       </Box>
@@ -226,9 +228,6 @@ const mapDispatchToProps = {
   changeNarratorBlockIndex: changeCurrentNarratorBlock,
 };
 
-const withConnect = connect(
-  mapStateToProps,
-  mapDispatchToProps,
-);
+const withConnect = connect(mapStateToProps, mapDispatchToProps);
 
 export default compose(withConnect)(NarratorTab);

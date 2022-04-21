@@ -19,11 +19,12 @@ const PieChartFormulaOtherPattern = ({ pattern, onEdit }) => {
 
   const { label, color } = pattern;
 
-  const handleEdit = field => value => onEdit({ ...pattern, [field]: value });
+  const handleEdit = (field) => (value) =>
+    onEdit({ ...pattern, [field]: value });
 
   const onEditLabel = handleEdit('label');
 
-  const onEditColor = newColor => handleEdit('color')(newColor.hex);
+  const onEditColor = (newColor) => handleEdit('color')(newColor.hex);
 
   return (
     <FullWidthContainer>

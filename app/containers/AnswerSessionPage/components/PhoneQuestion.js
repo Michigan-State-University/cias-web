@@ -1,8 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-import Question from 'models/Session/Question';
-
 import PhoneQuestionLayout from '../layouts/PhoneQuestionLayout';
 
 const PhoneQuestion = ({
@@ -18,7 +16,7 @@ const PhoneQuestion = ({
     settings: { required },
   } = question;
 
-  const onChange = event => {
+  const onChange = (event) => {
     const { prefix, number, iso, confirmed } = event ?? {};
     selectAnswer([
       {
@@ -39,7 +37,7 @@ const PhoneQuestion = ({
 };
 
 PhoneQuestion.propTypes = {
-  question: PropTypes.shape(Question).isRequired,
+  question: PropTypes.object.isRequired,
   selectAnswer: PropTypes.func,
   answerBody: PropTypes.any,
   formatMessage: PropTypes.func,

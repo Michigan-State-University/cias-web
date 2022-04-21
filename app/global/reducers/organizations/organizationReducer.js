@@ -108,7 +108,7 @@ export const initialState = {
 
 /* eslint-disable default-case, no-param-reassign */
 const organizationReducer = (state = initialState, action) =>
-  produce(state, draft => {
+  produce(state, (draft) => {
     const { type, payload } = action;
 
     switch (type) {
@@ -226,12 +226,12 @@ const organizationReducer = (state = initialState, action) =>
         updateItemById(
           draft.organization.healthSystems,
           payload.healthSystem.id,
-          item => healthSystemReducer(item, action),
+          (item) => healthSystemReducer(item, action),
         );
         updateItemById(
           draft.cache.organization.healthSystems,
           payload.healthSystem.id,
-          item => healthSystemReducer(item, action),
+          (item) => healthSystemReducer(item, action),
         );
 
         break;
@@ -279,7 +279,7 @@ const organizationReducer = (state = initialState, action) =>
         updateItemById(
           draft.organization.healthSystems,
           payload.healthSystem.id,
-          item => healthSystemReducer(item, action),
+          (item) => healthSystemReducer(item, action),
         );
 
         break;
@@ -319,7 +319,7 @@ const organizationReducer = (state = initialState, action) =>
         draft.loaders.deleteHealthSystem = false;
         draft.errors.deleteHealthSystem = null;
 
-        updateItemById(draft.organization.healthSystems, payload.id, item =>
+        updateItemById(draft.organization.healthSystems, payload.id, (item) =>
           healthSystemReducer(item, action),
         );
         assignDraftItemsById(
@@ -351,12 +351,12 @@ const organizationReducer = (state = initialState, action) =>
         updateItemById(
           draft.organization.healthSystems,
           payload.clinic.healthSystemId,
-          item => healthSystemReducer(item, action),
+          (item) => healthSystemReducer(item, action),
         );
         updateItemById(
           draft.cache.organization.healthSystems,
           payload.clinic.healthSystemId,
-          item => healthSystemReducer(item, action),
+          (item) => healthSystemReducer(item, action),
         );
 
         break;
@@ -381,12 +381,12 @@ const organizationReducer = (state = initialState, action) =>
         updateItemById(
           draft.organization.healthSystems,
           payload.clinic.healthSystemId,
-          item => healthSystemReducer(item, action),
+          (item) => healthSystemReducer(item, action),
         );
         updateItemById(
           draft.cache.organization.healthSystems,
           payload.clinic.healthSystemId,
-          item => healthSystemReducer(item, action),
+          (item) => healthSystemReducer(item, action),
         );
 
         break;
@@ -405,7 +405,7 @@ const organizationReducer = (state = initialState, action) =>
         updateItemById(
           draft.organization.healthSystems,
           payload.clinic.healthSystemId,
-          item => healthSystemReducer(item, action),
+          (item) => healthSystemReducer(item, action),
         );
 
         break;
@@ -449,12 +449,12 @@ const organizationReducer = (state = initialState, action) =>
         updateItemById(
           draft.organization.healthSystems,
           payload.healthSystemId,
-          item => healthSystemReducer(item, action),
+          (item) => healthSystemReducer(item, action),
         );
         updateItemById(
           draft.cache.organization.healthSystems,
           payload.healthSystemId,
-          item => healthSystemReducer(item, action),
+          (item) => healthSystemReducer(item, action),
         );
 
         break;

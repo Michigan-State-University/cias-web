@@ -5,7 +5,7 @@ import { StyledInput } from 'components/Input/StyledInput';
 
 import { colors, themeColors } from 'theme';
 
-export const DashedBox = styled(Box).attrs(props => ({
+export const DashedBox = styled(Box).attrs((props) => ({
   onClick: props.disabled ? null : props.onClick,
 }))`
   height: 40px;

@@ -175,10 +175,7 @@ const mapDispatchToProps = {
   reorderSections: reorderSectionsRequest,
 };
 
-const withConnect = connect(
-  mapStateToProps,
-  mapDispatchToProps,
-);
+const withConnect = connect(mapStateToProps, mapDispatchToProps);
 
 const reduxInjectors = [
   injectReducer({
@@ -191,8 +188,4 @@ const reduxInjectors = [
   }),
 ];
 
-export default compose(
-  withConnect,
-  ...reduxInjectors,
-  memo,
-)(DashboardSections);
+export default compose(withConnect, ...reduxInjectors, memo)(DashboardSections);

@@ -29,10 +29,14 @@ const Target = ({
   onAddTarget,
   isOnlyTarget,
   bg,
+  disableBranchingToSession,
 }) => {
   const [width, setWidth] = useState(0);
 
-  const onRefChange = useCallback(node => setWidth(node?.offsetWidth ?? 0), []);
+  const onRefChange = useCallback(
+    (node) => setWidth(node?.offsetWidth ?? 0),
+    [],
+  );
 
   const maxSelectTextWidth = width - 35;
 
@@ -58,7 +62,7 @@ const Target = ({
               placeholder=".."
               value={target ? target.probability : ''}
               validator={numericValidator}
-              onBlur={probability =>
+              onBlur={(probability) =>
                 onUpdateTarget({ probability }, formulaIndex)
               }
               sufix="%"
@@ -74,7 +78,7 @@ const Target = ({
             disabled={disabled}
             width="100%"
             positionFrom="right"
-            setOpen={value => {
+            setOpen={(value) => {
               handleDropdownClick(value, uniqueTargetIndex);
             }}
             isOpened={isChooserOpened}
@@ -95,10 +99,11 @@ const Target = ({
               sessionBranching={sessionBranching}
               isVisible={isChooserOpened}
               target={target}
-              onClick={value => {
+              onClick={(value) => {
                 setTargetChooserOpen(-1);
                 onUpdateTarget(value, formulaIndex);
               }}
+              disableBranchingToSession={disableBranchingToSession}
             />
           </ArrowDropdown>
         </Box>
@@ -134,6 +139,7 @@ Target.propTypes = {
   onDeleteTarget: PropTypes.func,
   bg: PropTypes.string,
   onAddTarget: PropTypes.func,
+  disableBranchingToSession: PropTypes.bool,
 };
 
 export default Target;

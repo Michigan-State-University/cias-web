@@ -23,7 +23,7 @@ import {
 
 /* eslint-disable no-param-reassign */
 const sessionSettingsReducer = (session, { type, data }) =>
-  produce(session, draft => {
+  produce(session, (draft) => {
     switch (type) {
       case UPDATE_FORMULA: {
         const { formulaIndex, value } = data;

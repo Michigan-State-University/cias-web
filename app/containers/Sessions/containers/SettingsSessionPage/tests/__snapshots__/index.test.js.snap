@@ -1,26 +1,411 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`<SettingsSessionPage /> Should render and match the snapshot 1`] = `
+.c0 {
+  width: auto;
+  height: auto;
+  display: block;
+  border-radius: 5px;
+  width: 100%;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  padding-top: 40px;
+  padding-bottom: 100px;
+  background-color: rgba(248,251,255,1);
+  -webkit-box-pack: center;
+  -webkit-justify-content: center;
+  -ms-flex-pack: center;
+  justify-content: center;
+  justify-items: center;
+  -webkit-align-content: center;
+  -ms-flex-line-pack: center;
+  align-content: center;
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+}
+
+.c18 {
+  width: auto;
+  height: auto;
+  display: block;
+  border-radius: 5px;
+}
+
+.c4 {
+  margin: 0;
+  font-family: DM Sans;
+  font-size: 15px;
+  line-height: 150%;
+  margin-bottom: 5px;
+  font-weight: 400;
+  color: #2F3850;
+}
+
+.c9 {
+  margin: 0;
+  font-family: DM Sans;
+  font-size: 15px;
+  line-height: 150%;
+  margin-top: 30px;
+  margin-bottom: 20px;
+  color: #2F3850;
+}
+
+.c10 {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-flex-direction: row;
+  -ms-flex-direction: row;
+  flex-direction: row;
+  height: auto;
+  -webkit-box-pack: justify;
+  -webkit-justify-content: space-between;
+  -ms-flex-pack: justify;
+  justify-content: space-between;
+  justify-items: space-between;
+  -webkit-align-content: center;
+  -ms-flex-line-pack: center;
+  align-content: center;
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  margin-bottom: 15px;
+  padding-bottom: 15px;
+  border-bottom: 1px solid #E9F1FB;
+}
+
+.c11 {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-flex-direction: row;
+  -ms-flex-direction: row;
+  flex-direction: row;
+  height: auto;
+  -webkit-box-pack: justify;
+  -webkit-justify-content: space-between;
+  -ms-flex-pack: justify;
+  justify-content: space-between;
+  justify-items: space-between;
+  -webkit-align-content: center;
+  -ms-flex-line-pack: center;
+  align-content: center;
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+}
+
+.c17 {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-flex-direction: row;
+  -ms-flex-direction: row;
+  flex-direction: row;
+  height: auto;
+  -webkit-box-pack: justify;
+  -webkit-justify-content: space-between;
+  -ms-flex-pack: justify;
+  justify-content: space-between;
+  justify-items: space-between;
+  -webkit-align-content: center;
+  -ms-flex-line-pack: center;
+  align-content: center;
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  width: 100%;
+}
+
+.c25 {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-flex-direction: row;
+  -ms-flex-direction: row;
+  flex-direction: row;
+  height: auto;
+  -webkit-box-pack: justify;
+  -webkit-justify-content: space-between;
+  -ms-flex-pack: justify;
+  justify-content: space-between;
+  justify-items: space-between;
+  -webkit-align-content: center;
+  -ms-flex-line-pack: center;
+  align-content: center;
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  margin-bottom: 15px;
+  padding-bottom: 15px;
+}
+
+.c20 {
+  font-family: DM Sans;
+  font-size: 13px;
+  line-height: 130%;
+  font-weight: 700;
+  color: #2F3850;
+}
+
+.c24 {
+  font-family: DM Sans;
+  font-size: 13px;
+  line-height: 130%;
+  color: #2F3850;
+}
+
+.c1 {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-flex-direction: column;
+  -ms-flex-direction: column;
+  flex-direction: column;
+  width: 100%;
+  height: 100%;
+}
+
+.c5 {
+  padding: 12px;
+  border-style: solid;
+  border-width: 1px;
+  border-color: #E9F1FB;
+  border-radius: 5px;
+  background-color: transparent;
+  border-color: transparent;
+  width: 100%;
+  max-width: 200px;
+  padding-right: 0;
+  padding-left: 0;
+  color: #2F3850;
+  opacity: 0.5;
+}
+
+.c5:focus {
+  box-shadow: none;
+  outline: none;
+  border-color: #107969;
+}
+
+.c5:disabled {
+  color: #ABBBD1;
+}
+
+.c7 {
+  padding: 12px;
+  border-style: solid;
+  border-width: 1px;
+  border-color: #E9F1FB;
+  border-radius: 5px;
+  background-color: transparent;
+  border-color: transparent;
+  width: 200px;
+  max-width: 200px;
+  padding-right: 0;
+  padding-left: 0;
+  color: rgba(16,121,105,1);
+  text-align: center;
+  background-color: rgba(16,121,105,0.1);
+  color: rgba(16,121,105,1);
+  opacity: 0.5;
+}
+
+.c7:focus {
+  box-shadow: none;
+  outline: none;
+  border-color: #107969;
+}
+
+.c7:disabled {
+  color: #ABBBD1;
+}
+
+.c8 {
+  padding: 5px 10px;
+  font-size: 13px;
+  font-weight: 600;
+  border-radius: 4px;
+  background-color: rgba(16,121,105,0.1);
+  color: rgba(16,121,105,1);
+  opacity: 0.5;
+}
+
+.c8:focus {
+  box-shadow: none;
+  outline: none;
+  border: 1px solid transparent;
+}
+
+.c21 {
+  position: relative;
+  display: inline-block;
+  min-width: 40px;
+  height: 21px;
+}
+
+.c14 {
+  opacity: 0;
+  width: 0;
+  height: 0;
+  visibility: collapse;
+}
+
+.c16 {
+  width: 100%;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+}
+
+.c16:hover {
+  cursor: pointer;
+}
+
+.c13:disabled + .c15 {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.c23 {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  -webkit-transition: 0.4s;
+  transition: 0.4s;
+  background-color: #CED3E4;
+  border-radius: 21px;
+}
+
+.c13:checked + .c15 .c22 {
+  background-color: #B727EA;
+}
+
+.c13:focus + .c15 .c22 {
+  box-shadow: 0 0 1px #B727EA;
+}
+
+.c13:disabled + .c15 .c22 {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.c23:before {
+  position: absolute;
+  content: '';
+  left: 4px;
+  bottom: 4px;
+  -webkit-transition: 0.4s;
+  transition: 0.4s;
+  height: 13px;
+  width: 13px;
+  background-color: white;
+  border-radius: 50%;
+}
+
+.c13:checked + .c15 .c22:before {
+  -webkit-transform: translateX(18px);
+  -ms-transform: translateX(18px);
+  transform: translateX(18px);
+}
+
+.c19 {
+  margin-right: 5px;
+}
+
+.c12 {
+  width: 100% !important;
+}
+
+.c6 {
+  border: none;
+  background-color: #E9F1FB;
+  outline: none;
+  height: 50px;
+  max-width: none;
+}
+
+.c6:focus {
+  border: none;
+}
+
+.c3 {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-flex-direction: column;
+  -ms-flex-direction: column;
+  flex-direction: column;
+  width: 100%;
+}
+
+.c2 {
+  width: 400px;
+  padding: 25px 20px;
+  background-color: #FFFFFF;
+  border-radius: 5px;
+  box-shadow: 0px 4px 20px #E3EEFB;
+}
+
+@media only screen and (min-width:768px) {
+
+}
+
+@media only screen and (min-width:960px) {
+
+}
+
+@media only screen and (min-width:1170px) {
+
+}
+
+@media only screen and (min-width:1360px) {
+
+}
+
 <div
-  class="Box-sc-1vhutan-0 laeLGt"
+  class="c0"
   display="flex"
   width="100%"
 >
   <div
-    class="Column-sc-4zswzq-0 styled__StyledColumn-sc-10au7g3-0 iyDzCx buHnUv"
+    class="c1 c2"
     height="100%"
   >
     <div
-      class="styled__InputContainer-sc-12xx0pj-1 gWMxgR"
+      class="c3"
     >
       <h3
-        class="H3-twxrn4-0 cJvzEt"
+        class="c4"
         font-weight="regular"
       >
         Name
       </h3>
       <input
-        class="Input-t9j2q5-0 hDrkzI styled__Input-sc-12xx0pj-0 lcXNLu"
+        aria-label="e-Session Name"
+        class="c5 c6"
         disabled=""
         placeholder="e-Session Name"
         type="text"
@@ -29,18 +414,19 @@ exports[`<SettingsSessionPage /> Should render and match the snapshot 1`] = `
       />
     </div>
     <div
-      class="styled__InputContainer-sc-12xx0pj-1 gWMxgR"
+      class="c3"
       style="margin-top: 15px;"
     >
       <h3
-        class="H3-twxrn4-0 cJvzEt"
+        class="c4"
         font-weight="regular"
       >
         Variable
       </h3>
       <input
+        aria-label="Variable name..."
         autocomplete="off"
-        class="Input-t9j2q5-0 byMvpe BadgeInput-sc-1ua27xt-0 locZHQ"
+        class="c7 c8"
         color="#107969"
         disabled=""
         name="notASearchField-Variable name..."
@@ -51,81 +437,147 @@ exports[`<SettingsSessionPage /> Should render and match the snapshot 1`] = `
       />
     </div>
     <h3
-      class="H3-twxrn4-0 bCdqfX"
+      class="c9"
     >
       Narrator Settings
     </h3>
     <div
-      class="Row-y1cs0u-0 cNUaef"
+      class="c10"
     >
-      <p
-        class="Text-e4p0w3-0 bmKPFZ"
-        font-weight="bold"
-      >
-        Narrator Active
-      </p>
       <div
-        class="styled__SwitchWrapper-k9teya-0 hucWtb"
+        class="c11 c12"
       >
         <input
+          aria-checked="true"
+          aria-disabled="true"
           checked=""
-          class="styled__SwitchInput-k9teya-1 hdJnOF"
+          class="c13 c14"
           data-cy="branching-intervention-toggle"
           data-testid="switch-input"
           disabled=""
+          id="Narrator Active"
+          role="switch"
           type="checkbox"
         />
-        <span
-          class="styled__Slider-k9teya-2 jYsxIO"
-        />
+        <label
+          class="c15 c16"
+          for="Narrator Active"
+        >
+          <div
+            class="c17"
+            width="100%"
+          >
+            <div
+              class="c18 c19"
+            >
+              <p
+                class="c20"
+                font-weight="bold"
+              >
+                Narrator Active
+              </p>
+            </div>
+            <div
+              class="c21"
+            >
+              <span
+                class="c22 c23"
+              />
+            </div>
+          </div>
+        </label>
       </div>
     </div>
     <div
-      class="Row-y1cs0u-0 cNUaef"
+      class="c10"
     >
-      <p
-        class="Text-e4p0w3-0 fFURPd"
-      >
-        Voice
-      </p>
       <div
-        class="styled__SwitchWrapper-k9teya-0 hucWtb"
+        class="c11 c12"
       >
         <input
+          aria-checked="true"
+          aria-disabled="true"
           checked=""
-          class="styled__SwitchInput-k9teya-1 hdJnOF"
+          class="c13 c14"
           data-cy="branching-intervention-toggle"
           data-testid="switch-input"
           disabled=""
+          id="Voice"
+          role="switch"
           type="checkbox"
         />
-        <span
-          class="styled__Slider-k9teya-2 jYsxIO"
-        />
+        <label
+          class="c15 c16"
+          for="Voice"
+        >
+          <div
+            class="c17"
+            width="100%"
+          >
+            <div
+              class="c18 c19"
+            >
+              <p
+                class="c24"
+              >
+                Voice
+              </p>
+            </div>
+            <div
+              class="c21"
+            >
+              <span
+                class="c22 c23"
+              />
+            </div>
+          </div>
+        </label>
       </div>
     </div>
     <div
-      class="Row-y1cs0u-0 gaoRiI"
+      class="c25"
     >
-      <p
-        class="Text-e4p0w3-0 fFURPd"
-      >
-        Display Narrator
-      </p>
       <div
-        class="styled__SwitchWrapper-k9teya-0 hucWtb"
+        class="c11 c12"
       >
         <input
+          aria-checked="true"
+          aria-disabled="true"
           checked=""
-          class="styled__SwitchInput-k9teya-1 hdJnOF"
+          class="c13 c14"
           data-cy="branching-intervention-toggle"
           data-testid="switch-input"
           disabled=""
+          id="Display Narrator"
+          role="switch"
           type="checkbox"
         />
-        <span
-          class="styled__Slider-k9teya-2 jYsxIO"
-        />
+        <label
+          class="c15 c16"
+          for="Display Narrator"
+        >
+          <div
+            class="c17"
+            width="100%"
+          >
+            <div
+              class="c18 c19"
+            >
+              <p
+                class="c24"
+              >
+                Display Narrator
+              </p>
+            </div>
+            <div
+              class="c21"
+            >
+              <span
+                class="c22 c23"
+              />
+            </div>
+          </div>
+        </label>
       </div>
     </div>
   </div>

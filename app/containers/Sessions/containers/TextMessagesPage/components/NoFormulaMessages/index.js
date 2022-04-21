@@ -14,6 +14,7 @@ import {
   textboxQuestion,
   visualAnalogueScaleQuestion,
 } from 'models/Session/QuestionTypes';
+import { SessionTypes } from 'models/Session';
 import { changeNoFormulaText } from 'global/reducers/textMessages';
 
 import VariableChooser from 'containers/VariableChooser';
@@ -23,25 +24,34 @@ import Text from 'components/Text';
 import Column from 'components/Column';
 import { StyledInput } from 'components/Input/StyledInput';
 import Box from 'components/Box';
+import OriginalTextHover from 'components/OriginalTextHover';
 
 import messages from './messages';
 import { TextMessagesContext } from '../../utils';
 import settingsMessages from '../../containers/TextMessageSettings/messages';
 
-const NoFormulaMessage = ({ noFormulaText, changeAction }) => {
-  const {
-    sessionId,
-    interventionId,
-    formatMessage,
-    editingPossible,
-  } = useContext(TextMessagesContext);
+const originalTextIconProps = {
+  position: 'absolute',
+  right: 21,
+  bottom: 12,
+};
 
-  const handleAddVariable = variable => {
+const NoFormulaMessage = ({
+  id,
+  noFormulaText,
+  originalText,
+  changeAction,
+}) => {
+  const { sessionId, interventionId, formatMessage, editingPossible } =
+    useContext(TextMessagesContext);
+
+  const handleAddVariable = (variable) => {
     const variableHelper = new VariableHelper(variable);
 
     changeAction(
-      `${noFormulaText ??
-        ''}${variableHelper.getFormattedVariableForDynamicInput()}`,
+      `${
+        noFormulaText ?? ''
+      }${variableHelper.getFormattedVariableForDynamicInput()}`,
     );
   };
 
@@ -69,6 +79,7 @@ const NoFormulaMessage = ({ noFormulaText, changeAction }) => {
           includeCurrentSession
           includeNonDigitVariables
           isMultiSession
+          sessionTypesWhiteList={[SessionTypes.CLASSIC_SESSION]}
         >
           <Text fontWeight="bold" color={themeColors.secondary}>
             {formatMessage(settingsMessages.addVariableButton)}
@@ -76,22 +87,32 @@ const NoFormulaMessage = ({ noFormulaText, changeAction }) => {
         </VariableChooser>
       </NoMarginRow>
       <Box bg={colors.linkWater} width="100%" mt={10} mb={20} px={8} py={8}>
-        <StyledInput
-          disabled={!editingPossible}
-          type="multiline"
-          rows="5"
-          width="100%"
-          placeholder={formatMessage(messages.textMessagePlaceholder)}
-          value={noFormulaText || ''}
-          onBlur={changeAction}
-        />
+        <OriginalTextHover
+          id={`sms-no-formula-message-${id}`}
+          text={originalText?.noFormulaText}
+          position="relative"
+          mr={-9}
+          iconProps={originalTextIconProps}
+        >
+          <StyledInput
+            disabled={!editingPossible}
+            type="multiline"
+            rows="5"
+            width="100%"
+            placeholder={formatMessage(messages.textMessagePlaceholder)}
+            value={noFormulaText || ''}
+            onBlur={changeAction}
+          />
+        </OriginalTextHover>
       </Box>
     </Column>
   );
 };
 
 NoFormulaMessage.propTypes = {
+  id: PropTypes.string,
   changeAction: PropTypes.func,
+  originalText: PropTypes.object,
   noFormulaText: PropTypes.string,
 };
 
@@ -99,9 +120,6 @@ const mapDispatchToProps = {
   changeAction: changeNoFormulaText,
 };
 
-const withConnect = connect(
-  null,
-  mapDispatchToProps,
-);
+const withConnect = connect(null, mapDispatchToProps);
 
 export default compose(withConnect)(NoFormulaMessage);

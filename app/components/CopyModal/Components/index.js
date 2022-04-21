@@ -8,6 +8,7 @@ import { injectIntl, IntlShape } from 'react-intl';
 import Column from 'components/Column';
 import Button from 'components/Button';
 import Row from 'components/Row';
+
 import questionGroupIcon from 'assets/svg/question-group-icon.svg';
 import sessionIcon from 'assets/svg/session-icon.svg';
 import interventionIcon from 'assets/svg/intervention-icon.svg';
@@ -119,7 +120,7 @@ const CopyChooser = ({
       });
   };
 
-  const handleSelectAction = selectedId => {
+  const handleSelectAction = (selectedId) => {
     setSelectedItem(selectedId);
   };
 
@@ -127,7 +128,7 @@ const CopyChooser = ({
     setSelectedItem(null);
     setCurrentView(VIEWS.INTERVENTION);
   };
-  const changeToSessionView = targetIntervention => {
+  const changeToSessionView = (targetIntervention) => {
     setSelectedItem(null);
     if (
       targetIntervention?.id &&
@@ -138,7 +139,7 @@ const CopyChooser = ({
     }
     setCurrentView(VIEWS.SESSION);
   };
-  const changeToQuestionGroupsView = targetSession => {
+  const changeToQuestionGroupsView = (targetSession) => {
     setSelectedItem(null);
     if (targetSession?.id) {
       changeView();
@@ -267,9 +268,6 @@ const mapDispatchToProps = {
   fetchInterventionsWithPagination: fetchInterventionsWithPaginationRequest,
 };
 
-const withConnect = connect(
-  mapStateToProps,
-  mapDispatchToProps,
-);
+const withConnect = connect(mapStateToProps, mapDispatchToProps);
 
 export default compose(withConnect)(injectIntl(CopyChooser));

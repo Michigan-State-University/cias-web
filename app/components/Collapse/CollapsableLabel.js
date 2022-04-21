@@ -8,7 +8,6 @@ import binGrey from 'assets/svg/bin-grey.svg';
 import Row from 'components/Row';
 import Box from 'components/Box';
 import Icon from 'components/Icon';
-
 import { ImageButton } from 'components/Button/ImageButton';
 
 import { ImageWrapper, StyledCollapseLabel } from './styled';

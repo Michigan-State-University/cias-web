@@ -35,14 +35,14 @@ const InviteResearcher = ({
     onClose();
   };
 
-  const onSendClick = valid => () => {
+  const onSendClick = (valid) => () => {
     if (valid) {
       sendInvitation(email);
       changeInput('');
     }
   };
 
-  const handleKeyDown = event => {
+  const handleKeyDown = (event) => {
     if (event.keyCode === 13 && isValid) {
       sendInvitation(email);
       changeInput('');
@@ -107,10 +107,7 @@ const mapDispatchToProps = {
   changeInput: changeEmailInput,
 };
 
-const withConnect = connect(
-  mapStateToProps,
-  mapDispatchToProps,
-);
+const withConnect = connect(mapStateToProps, mapDispatchToProps);
 
 export default compose(
   injectReducer({

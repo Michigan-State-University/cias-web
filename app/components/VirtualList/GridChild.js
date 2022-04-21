@@ -32,7 +32,7 @@ const GridChild = ({
 };
 
 GridChild.propTypes = {
-  children: PropTypes.object,
+  children: PropTypes.oneOfType([PropTypes.object, PropTypes.func]),
   columnCount: PropTypes.number,
   columnIndex: PropTypes.number,
   gutterHeight: PropTypes.number,

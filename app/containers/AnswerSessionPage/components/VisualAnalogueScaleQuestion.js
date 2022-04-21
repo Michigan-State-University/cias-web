@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
 
-import Question from 'models/Session/Question';
 import isNullOrUndefined from 'utils/isNullOrUndefined';
+
 import VisualAnalogueScaleQuestionLayout from '../layouts/VisualAnalogueScaleQuestionLayout';
 
 const VisualAnalogueScaleQuestion = ({
@@ -38,7 +38,7 @@ const VisualAnalogueScaleQuestion = ({
     setAnswerValue(value);
   }, [id]);
 
-  const onChange = num => setAnswerValue(num);
+  const onChange = (num) => setAnswerValue(num);
 
   const onAfterChange = () => {
     selectAnswer([
@@ -62,7 +62,7 @@ const VisualAnalogueScaleQuestion = ({
 };
 
 VisualAnalogueScaleQuestion.propTypes = {
-  question: PropTypes.shape(Question).isRequired,
+  question: PropTypes.object.isRequired,
   selectAnswer: PropTypes.func,
   answerBody: PropTypes.any,
 };

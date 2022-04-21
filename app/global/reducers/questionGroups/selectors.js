@@ -2,41 +2,37 @@ import { createSelector } from 'reselect';
 
 import { initialState } from './reducer';
 
-export const selectQuestionGroups = state =>
+export const selectQuestionGroups = (state) =>
   state.questionGroups || initialState;
 
 export const makeSelectQuestionGroupsState = () =>
-  createSelector(
-    selectQuestionGroups,
-    substate => substate,
-  );
+  createSelector(selectQuestionGroups, (substate) => substate);
 
 export const makeSelectQuestionGroups = () =>
-  createSelector(
-    selectQuestionGroups,
-    substate => substate.groups,
-  );
+  createSelector(selectQuestionGroups, (substate) => substate.groups);
 
 export const makeSelectQuestionGroupsIds = () =>
-  createSelector(
-    selectQuestionGroups,
-    substate => substate.groups.map(({ id }) => id),
+  createSelector(selectQuestionGroups, (substate) =>
+    substate.groups.map(({ id }) => id),
   );
 
 export const makeSelectQuestionGroupsLoader = () =>
   createSelector(
     selectQuestionGroups,
-    substate => substate.questionsGroupsSaving,
+    (substate) => substate.questionsGroupsSaving,
   );
 
 export const makeSelectQuestionGroupsSessionId = () =>
-  createSelector(
-    selectQuestionGroups,
-    substate => substate.sessionId,
-  );
+  createSelector(selectQuestionGroups, (substate) => substate.sessionId);
 
 export const makeSelectGetQuestionGroupLoader = () =>
   createSelector(
     selectQuestionGroups,
-    substate => substate.loaders.questionGroupsLoading,
+    (substate) => substate.loaders.questionGroupsLoading,
+  );
+
+export const makeSelectGetQuestionGroupError = () =>
+  createSelector(
+    selectQuestionGroups,
+    (substate) => substate.errors.questionGroupsError,
   );

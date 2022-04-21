@@ -11,7 +11,7 @@ import QuestionSubtitle from '../index';
 describe('<QuestionSubtitle />', () => {
   let store;
   const testId = 'test-id';
-  const reducer = state => state;
+  const reducer = (state) => state;
   const initialState = {
     questions: {
       questions: [

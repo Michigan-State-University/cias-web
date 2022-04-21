@@ -16,8 +16,29 @@ export default defineMessages({
     id: `${scope}.textMessageName`,
     defaultMessage: 'Tex Message Tile Name',
   },
+  SMSAlertContent: {
+    id: `${scope}.SMSAlertContent`,
+    defaultMessage: 'SMS Alert Content',
+  },
   addVariableButton: {
     id: `${scope}.addVariableButton`,
     defaultMessage: '+ Add variable',
+  },
+  deleteTextMessageHeader: {
+    id: `${scope}.deleteTextMessageHeader`,
+    defaultMessage: 'Delete Text Message',
+  },
+  deleteTextMessageMessage: {
+    id: `${scope}.deleteTextMessageMessage`,
+    defaultMessage:
+      'Are you sure you want to delete this Text Message? It will not be possible to recover it later.',
+  },
+  deleteIcon: {
+    id: `${scope}.deleteIcon`,
+    defaultMessage: 'Delete Text Message',
+  },
+  cloneIcon: {
+    id: `${scope}.cloneIcon`,
+    defaultMessage: 'Duplicate Text Message',
   },
 });

@@ -20,7 +20,7 @@ import {
 import messages from './messages';
 import { PlayerWrapper, Player } from './styled';
 
-const isURLValid = url =>
+const isURLValid = (url) =>
   url.includes('youtube') || url.includes('vimeo') || url.includes('youtu.be');
 
 const QuestionVideo = ({
@@ -32,7 +32,7 @@ const QuestionVideo = ({
 }) => {
   const [hovered, setHovered] = useState(false);
 
-  const setVideoUrl = url => updateVideo({ path: 'video_url', value: url });
+  const setVideoUrl = (url) => updateVideo({ path: 'video_url', value: url });
   const removeVideUrl = () => updateVideo({ path: 'video_url', value: null });
 
   if (!videoUrl || !isURLValid(videoUrl))
@@ -105,10 +105,7 @@ const mapDispatchToProps = {
   updateVideo: editQuestionRequest,
 };
 
-const withConnect = connect(
-  mapStateToProps,
-  mapDispatchToProps,
-);
+const withConnect = connect(mapStateToProps, mapDispatchToProps);
 
 export const QuestionVideoWithIntl = injectIntl(QuestionVideo);
 

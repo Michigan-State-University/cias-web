@@ -1,64 +1,340 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`<ParticipantReport /> Should render and match the snapshot 1`] = `
+.c0 {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-flex-direction: column;
+  -ms-flex-direction: column;
+  flex-direction: column;
+  width: 100%;
+  margin-top: 10px;
+}
+
+.c2 {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-flex-direction: column;
+  -ms-flex-direction: column;
+  flex-direction: column;
+  width: 100%;
+  -webkit-box-pack: center;
+  -webkit-justify-content: center;
+  -ms-flex-pack: center;
+  justify-content: center;
+  justify-items: center;
+}
+
+.c14 {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-flex-direction: column;
+  -ms-flex-direction: column;
+  flex-direction: column;
+  width: 100%;
+  margin-top: 25px;
+}
+
+.c1 {
+  width: auto;
+  height: auto;
+  display: block;
+  border-radius: 5px;
+  width: 100%;
+  padding: 15px;
+}
+
+.c10 {
+  width: auto;
+  height: auto;
+  display: block;
+  border-radius: 5px;
+}
+
+.c15 {
+  width: auto;
+  height: auto;
+  display: block;
+  border-radius: 5px;
+  width: 100%;
+  padding-top: 14px;
+  padding-bottom: 14px;
+  padding-right: 21px;
+  padding-left: 21px;
+  margin-top: 10px;
+  background-color: rgba(233,241,251,1);
+}
+
+.c3 {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-flex-direction: row;
+  -ms-flex-direction: row;
+  flex-direction: row;
+  height: auto;
+  -webkit-align-content: center;
+  -ms-flex-line-pack: center;
+  align-content: center;
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  margin-top: 20px;
+  opacity: 0.5;
+}
+
+.c4 {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-flex-direction: row;
+  -ms-flex-direction: row;
+  flex-direction: row;
+  height: auto;
+  -webkit-box-pack: justify;
+  -webkit-justify-content: space-between;
+  -ms-flex-pack: justify;
+  justify-content: space-between;
+  justify-items: space-between;
+  -webkit-align-content: center;
+  -ms-flex-line-pack: center;
+  align-content: center;
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+}
+
+.c13 {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-flex-direction: row;
+  -ms-flex-direction: row;
+  flex-direction: row;
+  height: auto;
+  -webkit-align-content: center;
+  -ms-flex-line-pack: center;
+  align-content: center;
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  margin-top: 15px;
+}
+
+.c12 {
+  font-family: DM Sans;
+  font-size: 13px;
+  line-height: 130%;
+  color: #2F3850;
+}
+
+.c6 {
+  display: none;
+}
+
+.c5:disabled + label > .c9 {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.c8 {
+  width: 100%;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+}
+
+.c8:hover {
+  cursor: pointer;
+}
+
+.c5:disabled + .c7 {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.c11 {
+  margin-left: 5px;
+}
+
+.c16 {
+  padding: 12px;
+  border-style: solid;
+  border-width: 1px;
+  border-color: #E9F1FB;
+  border-radius: 5px;
+  background-color: transparent;
+  border-color: transparent;
+  width: 100%;
+  color: #2F3850;
+  opacity: 0.5;
+}
+
+.c16:focus {
+  box-shadow: none;
+  outline: none;
+  border-color: #107969;
+}
+
+.c16:disabled {
+  color: #ABBBD1;
+}
+
+@media only screen and (min-width:768px) {
+
+}
+
+@media only screen and (min-width:960px) {
+
+}
+
+@media only screen and (min-width:1170px) {
+
+}
+
+@media only screen and (min-width:1360px) {
+
+}
+
+@media only screen and (min-width:768px) {
+
+}
+
+@media only screen and (min-width:960px) {
+
+}
+
+@media only screen and (min-width:1170px) {
+
+}
+
+@media only screen and (min-width:1360px) {
+
+}
+
+@media only screen and (min-width:768px) {
+
+}
+
+@media only screen and (min-width:960px) {
+
+}
+
+@media only screen and (min-width:1170px) {
+
+}
+
+@media only screen and (min-width:1360px) {
+
+}
+
 <div
-  class="Column-sc-4zswzq-0 fgvXEf"
+  class="c0"
 >
   <div
-    class="Box-sc-1vhutan-0 eXTwuD"
+    class="c1"
     width="100%"
   >
     <div
-      class="Column-sc-4zswzq-0 bGMBAA"
+      class="c2"
     >
       <div
-        class="Row-y1cs0u-0 fCCNDE"
+        class="c3"
         disabled=""
       >
-        <img
-          src="IMAGE_MOCK"
-        />
-        <label
-          for="answer-yes"
+        <div
+          class="c4"
         >
-          <p
-            class="Text-e4p0w3-0 fFURPd"
+          <input
+            class="c5 c6"
+            disabled=""
+            id="answer-yes"
+            type="radio"
+          />
+          <label
+            class="c7 c8"
+            for="answer-yes"
           >
-            Yes
-          </p>
-        </label>
+            <img
+              class="c9 "
+              src="IMAGE_MOCK"
+            />
+            <div
+              class="c10 c11"
+            >
+              <p
+                class="c12"
+              >
+                Yes
+              </p>
+            </div>
+          </label>
+        </div>
       </div>
       <div
-        class="Row-y1cs0u-0 edotgS"
-        disabled=""
+        class="c13"
       >
-        <img
-          src="IMAGE_MOCK"
-        />
-        <label
-          for="answer-no"
+        <div
+          class="c4"
         >
-          <p
-            class="Text-e4p0w3-0 fFURPd"
+          <input
+            class="c5 c6"
+            disabled=""
+            id="answer-no"
+            type="radio"
+          />
+          <label
+            class="c7 c8"
+            for="answer-no"
           >
-            No
-          </p>
-        </label>
+            <img
+              class="c9 "
+              src="IMAGE_MOCK"
+            />
+            <div
+              class="c10 c11"
+            >
+              <p
+                class="c12"
+              >
+                No
+              </p>
+            </div>
+          </label>
+        </div>
       </div>
       <div
-        class="Column-sc-4zswzq-0 fGhsBV"
+        class="c14"
       >
         <p
-          class="Text-e4p0w3-0 fFURPd"
+          class="c12"
         >
           Please provide your email
         </p>
         <div
-          class="Box-sc-1vhutan-0 BfYRC"
+          class="c15"
           width="100%"
         >
           <input
-            class="Input-t9j2q5-0 cfspKj"
+            aria-label="Email..."
+            class="c16"
             disabled=""
             placeholder="Email..."
             type="text"

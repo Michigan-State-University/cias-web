@@ -23,7 +23,7 @@ const TableRow = ({
   const teamId = useContext(TeamIdContext);
   const openRemoveFromTeamModal = useContext(RemoveFromTeamModalContext);
 
-  const handleClick = e => {
+  const handleClick = (e) => {
     e.stopPropagation();
     openModal({
       id,
@@ -33,7 +33,7 @@ const TableRow = ({
     });
   };
 
-  const handleRemoveFromTeamClick = e => {
+  const handleRemoveFromTeamClick = (e) => {
     e.stopPropagation();
     openRemoveFromTeamModal({
       id,

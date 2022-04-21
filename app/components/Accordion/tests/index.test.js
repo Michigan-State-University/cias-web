@@ -1,19 +1,19 @@
 import React from 'react';
-import { DEFAULT_LOCALE } from 'i18n';
-import { IntlProvider } from 'react-intl';
 import times from 'lodash/times';
-import { render, fireEvent } from '@testing-library/react';
+import { fireEvent } from '@testing-library/dom';
 import 'jest-styled-components';
+
+import { testRender } from 'utils/testUtils';
 
 import Accordion from '../index';
 
-const singleChild = index => (
+const singleChild = (index) => (
   <div key={index} label={`Label${index}`} color="red">
     {`Content${index}`}
   </div>
 );
 
-const multipleChildren = () => times(3, index => singleChild(index));
+const multipleChildren = () => times(3, (index) => singleChild(index));
 
 describe('<Accordion />', () => {
   const defaultProps = {
@@ -27,45 +27,33 @@ describe('<Accordion />', () => {
 
   it('Expect to not log errors in console', () => {
     const spy = jest.spyOn(global.console, 'error');
-    render(
-      <IntlProvider locale={DEFAULT_LOCALE}>
-        <Accordion {...defaultProps}>{multipleChildren()}</Accordion>
-      </IntlProvider>,
-    );
+    testRender(<Accordion {...defaultProps}>{multipleChildren()}</Accordion>);
     expect(spy).not.toHaveBeenCalled();
   });
   it('Should render only one element and match the snapshot', () => {
-    const { container } = render(
-      <IntlProvider locale={DEFAULT_LOCALE}>
-        <Accordion {...defaultProps}>{singleChild(0)}</Accordion>
-      </IntlProvider>,
+    const { container } = testRender(
+      <Accordion {...defaultProps}>{singleChild(0)}</Accordion>,
     );
     expect(container).toMatchSnapshot();
   });
   it('Should render multiple elements and match the snapshot', () => {
-    const { container } = render(
-      <IntlProvider locale={DEFAULT_LOCALE}>
-        <Accordion {...defaultProps}>{multipleChildren()}</Accordion>
-      </IntlProvider>,
+    const { container } = testRender(
+      <Accordion {...defaultProps}>{multipleChildren()}</Accordion>,
     );
     expect(container).toMatchSnapshot();
   });
 
   it('Should render with one element opened and match the snapshot', () => {
     const newProps = { ...defaultProps, opened: 0 };
-    const { container } = render(
-      <IntlProvider locale={DEFAULT_LOCALE}>
-        <Accordion {...newProps}>{multipleChildren()}</Accordion>
-      </IntlProvider>,
+    const { container } = testRender(
+      <Accordion {...newProps}>{multipleChildren()}</Accordion>,
     );
     expect(container).toMatchSnapshot();
   });
 
   it('Should open accordion', () => {
-    const { getByText } = render(
-      <IntlProvider locale={DEFAULT_LOCALE}>
-        <Accordion {...defaultProps}>{multipleChildren()}</Accordion>
-      </IntlProvider>,
+    const { getByText } = testRender(
+      <Accordion {...defaultProps}>{multipleChildren()}</Accordion>,
     );
     const secondEl = getByText('Label1');
     fireEvent.click(secondEl);
@@ -74,10 +62,8 @@ describe('<Accordion />', () => {
 
   it('Should close accordion', () => {
     const newProps = { ...defaultProps, opened: 1 };
-    const { getByText } = render(
-      <IntlProvider locale={DEFAULT_LOCALE}>
-        <Accordion {...newProps}>{multipleChildren()}</Accordion>
-      </IntlProvider>,
+    const { getByText } = testRender(
+      <Accordion {...newProps}>{multipleChildren()}</Accordion>,
     );
     const secondEl = getByText('Label1');
     fireEvent.click(secondEl);
@@ -87,10 +73,8 @@ describe('<Accordion />', () => {
 
   it('Should change opened accordion', () => {
     const newProps = { ...defaultProps, opened: 1 };
-    const { getByText } = render(
-      <IntlProvider locale={DEFAULT_LOCALE}>
-        <Accordion {...newProps}>{multipleChildren()}</Accordion>
-      </IntlProvider>,
+    const { getByText } = testRender(
+      <Accordion {...newProps}>{multipleChildren()}</Accordion>,
     );
     const thirdEl = getByText('Label2');
     fireEvent.click(thirdEl);
@@ -99,10 +83,8 @@ describe('<Accordion />', () => {
   });
 
   it('Should invoke onDelete function', () => {
-    const { getByTestId } = render(
-      <IntlProvider locale={DEFAULT_LOCALE}>
-        <Accordion {...defaultProps}>{multipleChildren()}</Accordion>
-      </IntlProvider>,
+    const { getByTestId } = testRender(
+      <Accordion {...defaultProps}>{multipleChildren()}</Accordion>,
     );
     const thirdEl = getByTestId('bin-Label2');
     fireEvent.click(thirdEl);

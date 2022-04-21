@@ -1,6 +1,6 @@
 import { useEffect, useRef } from 'react';
 
-const useLockBodyScroll = shouldLock => {
+const useLockBodyScroll = (shouldLock) => {
   const scrollPosition = useRef(0);
   const html = useRef(null);
 

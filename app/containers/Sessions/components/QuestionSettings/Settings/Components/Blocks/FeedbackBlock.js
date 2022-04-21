@@ -28,7 +28,7 @@ const FeedbackBlock = ({
   ];
 
   const selectedOption = selectOptions.find(
-    option => option.value === block.action,
+    (option) => option.value === block.action,
   );
 
   return (
@@ -74,9 +74,6 @@ const mapDispatchToProps = {
     ),
 };
 
-const withConnect = connect(
-  null,
-  mapDispatchToProps,
-);
+const withConnect = connect(null, mapDispatchToProps);
 
 export default compose(withConnect)(FeedbackBlock);

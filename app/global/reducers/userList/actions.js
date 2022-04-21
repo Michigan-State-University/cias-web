@@ -36,14 +36,14 @@ export const fetchUsers = (roles, name, page, includeInactive, teamId) =>
   });
 export const fetchUsersSuccess = (users, usersSize) =>
   actionBuilder(FETCH_USERS_SUCCESS, { users, usersSize });
-export const fetchUsersFailure = error =>
+export const fetchUsersFailure = (error) =>
   actionBuilder(FETCH_USERS_FAILURE, error);
 
-export const fetchResearchersRequest = () =>
-  actionBuilder(FETCH_RESEARCHERS_REQUEST, {});
+export const fetchResearchersRequest = (extraParams) =>
+  actionBuilder(FETCH_RESEARCHERS_REQUEST, { extraParams });
 export const fetchResearchersSuccess = (users, usersSize) =>
   actionBuilder(FETCH_RESEARCHERS_SUCCESS, { users, usersSize });
-export const fetchResearchersError = error =>
+export const fetchResearchersError = (error) =>
   actionBuilder(FETCH_RESEARCHERS_FAILURE, error);
 
 export const fetchUsersSelector = (
@@ -63,7 +63,7 @@ export const fetchUsersSelector = (
   });
 export const fetchUsersSelectorSuccess = (users, usersSize) =>
   actionBuilder(FETCH_USERS_SELECTOR_SUCCESS, { users, usersSize });
-export const fetchUsersSelectorFailure = error =>
+export const fetchUsersSelectorFailure = (error) =>
   actionBuilder(FETCH_USERS_SELECTOR_FAILURE, error);
 
 export const changeActivateStatusRequest = (id, active, showInactive) =>
@@ -73,11 +73,12 @@ export const changeActivateStatusSuccess = () =>
 export const changeActivateStatusFailure = () =>
   actionBuilder(CHANGE_ACTIVATE_STATUS_FAILURE, {});
 
-export const addUserToList = user => actionBuilder(ADD_USER_TO_LIST, { user });
+export const addUserToList = (user) =>
+  actionBuilder(ADD_USER_TO_LIST, { user });
 
 export const deleteUserFromTeamRequest = (userId, teamId) =>
   actionBuilder(DELETE_USER_FROM_TEAM_REQUEST, { userId, teamId });
 export const deleteUserFromTeamSuccess = () =>
   actionBuilder(DELETE_USER_FROM_TEAM_SUCCESS, {});
-export const deleteUserFromTeamFailure = error =>
+export const deleteUserFromTeamFailure = (error) =>
   actionBuilder(DELETE_USER_FROM_TEAM_FAILURE, error);

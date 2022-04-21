@@ -5,12 +5,12 @@ import { margin, padding, style, text } from '../BaseComponentStyles';
 
 const StyledCircle = styled.div`
   border-radius: 50%;
-  background-color: ${props => props.bg};
+  background-color: ${(props) => props.bg};
   display: flex;
   justify-content: center;
   align-items: center;
-  width: ${props => props.size};
-  height: ${props => props.size};
+  width: ${(props) => props.size};
+  height: ${(props) => props.size};
   ${padding};
   ${margin};
   ${style};

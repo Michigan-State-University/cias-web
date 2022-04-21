@@ -1,17 +1,58 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`<FinishScreen /> Should render and match the snapshot 1`] = `
+.c2 {
+  width: 100%;
+  height: 40px;
+  border-radius: 100px;
+  cursor: pointer;
+  border: none;
+  outline: none;
+  background-color: #107969;
+  color: #FFFFFF;
+  border: 1px solid transparent;
+  -webkit-transition: background-color 300ms ease,color 300ms ease,border 300ms ease;
+  transition: background-color 300ms ease,color 300ms ease,border 300ms ease;
+  width: 100%;
+  padding-right: 20px;
+  padding-left: 20px;
+}
+
+.c0 {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-flex-direction: row;
+  -ms-flex-direction: row;
+  flex-direction: row;
+  height: auto;
+  -webkit-box-pack: center;
+  -webkit-justify-content: center;
+  -ms-flex-pack: center;
+  justify-content: center;
+  justify-items: center;
+  gap: 15px;
+  margin-top: 50px;
+  width: 100%;
+}
+
+.c1 {
+  font-weight: bold;
+  width: auto;
+}
+
 <div>
   <div
-    class="Row-y1cs0u-0 fSJzDH"
+    class="c0"
     width="100%"
   >
     <a
-      class="styled__StyledLink-bqo6sz-8 dHBaTM"
+      class="c1"
       href="/"
     >
       <button
-        class="StyledButton-d2s0gt-0 iFDXaI"
+        class="c2"
         color="primary"
         radius="100px"
         width="100%"

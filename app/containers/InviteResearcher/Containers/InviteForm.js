@@ -26,7 +26,7 @@ const InviteForm = ({
     setError(null);
     onInputChange(value);
   };
-  const handleBlur = valid => () => {
+  const handleBlur = (valid) => () => {
     if (!valid) setError(formatMessage(messages.invalidEmail));
   };
 
@@ -36,10 +36,11 @@ const InviteForm = ({
         <FormattedMessage {...messages.sendInvite} />
       </H3>
       <Column width="100%" mb={35}>
-        <Text mb={10} fontSize={14}>
+        <Text mb={10} fontSize={14} id="researcher-email-label">
           <FormattedMessage {...messages.sectionTitle} />
         </Text>
         <Input
+          aria-labelledby="researcher-email-label"
           maxWidth="none"
           width="100%"
           transparent={false}
@@ -72,8 +73,5 @@ const mapDispatchToProps = {
   onInputChange: changeEmailInput,
 };
 
-const withConnect = connect(
-  null,
-  mapDispatchToProps,
-);
+const withConnect = connect(null, mapDispatchToProps);
 export default compose(withConnect)(InviteForm);

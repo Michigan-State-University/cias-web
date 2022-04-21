@@ -61,7 +61,7 @@ const ReportTemplatePreview = () => {
     addSection(new TemplateSectionBuilder().build(), selectedReportId);
   };
 
-  const onSummaryChange = summary => {
+  const onSummaryChange = (summary) => {
     if (summary !== singleReportTemplate.summary)
       updateReportTemplate(sessionId, { ...singleReportTemplate, summary });
   };

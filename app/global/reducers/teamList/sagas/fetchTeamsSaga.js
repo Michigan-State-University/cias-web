@@ -25,9 +25,9 @@ function* fetchTeams({ payload: { name, page } }) {
       },
     } = yield axios.get(requestUrl.concat(params));
 
-    const mappedUsers = included.map(user => mapCurrentUser(user));
+    const mappedUsers = included.map((user) => mapCurrentUser(user));
 
-    const mappedData = data.map(team =>
+    const mappedData = data.map((team) =>
       new TeamBuilder()
         .fromJson(team)
         .withTeamAdmin(

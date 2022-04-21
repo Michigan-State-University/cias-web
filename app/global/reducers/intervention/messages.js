@@ -73,4 +73,29 @@ export default defineMessages({
     defaultMessage:
       'CIAS is copying your session. We will send you an e-mail when this process has been finished.',
   },
+  translateSuccess: {
+    id: `${scope}.translateSuccess`,
+    defaultMessage:
+      'CIAS is translating your intervention. We will send you an e-mail when this process has been finished.',
+  },
+  translateError: {
+    id: `${scope}.translateError`,
+    defaultMessage: `Couldn't translate the intervention`,
+  },
+  addAttachmentSuccess: {
+    id: `${scope}.addAttachmentSuccess`,
+    defaultMessage: 'Files uploaded successfully!',
+  },
+  addAttachmentError: {
+    id: `${scope}.addAttachmentError`,
+    defaultMessage: 'An error has occured while uploading the files',
+  },
+  deleteAttachmentSuccess: {
+    id: `${scope}.deleteAttachmentSuccess`,
+    defaultMessage: 'File deleted successfully!',
+  },
+  deleteAttachmentError: {
+    id: `${scope}.deleteAttachmentError`,
+    defaultMessage: 'An error has occured while deleting your file',
+  },
 });

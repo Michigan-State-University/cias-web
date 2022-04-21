@@ -16,9 +16,8 @@ export const StyledSmsSettings = styled.div`
 
 export const SectionDivider = styled.div`
   height: 1px;
-  width: calc(100% + ${padding} * 2);
+  width: 100%;
   background-color: ${colors.linkWater};
-  left: -${padding};
   position: relative;
   margin: ${padding} 0;
 `;

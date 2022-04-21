@@ -11,7 +11,7 @@ export class TemplateSectionBuilder {
    * @param  {string} id
    * @returns  {TemplateSectionBuilder}
    */
-  withId = id => {
+  withId = (id) => {
     this.id = id;
 
     return this;
@@ -21,7 +21,7 @@ export class TemplateSectionBuilder {
    * @param  {string} reportTemplateId
    * @returns  {TemplateSectionBuilder}
    */
-  withReportTemplateId = reportTemplateId => {
+  withReportTemplateId = (reportTemplateId) => {
     this.reportTemplateId = reportTemplateId;
 
     return this;
@@ -31,7 +31,7 @@ export class TemplateSectionBuilder {
    * @param  {string} formula
    * @returns  {TemplateSectionBuilder}
    */
-  withFormula = formula => {
+  withFormula = (formula) => {
     this.formula = formula;
 
     return this;
@@ -41,7 +41,7 @@ export class TemplateSectionBuilder {
    * @param  {SectionCase[]} variants
    * @returns  {TemplateSectionBuilder}
    */
-  withVariants = variants => {
+  withVariants = (variants) => {
     this.variants = variants;
 
     return this;
@@ -51,7 +51,7 @@ export class TemplateSectionBuilder {
    * @param  {object} json
    * @returns  {TemplateSectionBuilder}
    */
-  fromJson = json => {
+  fromJson = (json) => {
     const templateSection = new TemplateSection(
       objectToCamelCase(defaultMapper(json)),
     );

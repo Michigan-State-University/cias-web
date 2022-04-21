@@ -8,7 +8,7 @@ import React, { memo, useState } from 'react';
 import PropTypes from 'prop-types';
 import { FormattedMessage, injectIntl } from 'react-intl';
 import { createStructuredSelector } from 'reselect';
-import { injectSaga } from 'redux-injectors';
+import { injectReducer, injectSaga } from 'redux-injectors';
 import { connect } from 'react-redux';
 import { compose } from 'redux';
 
@@ -17,13 +17,18 @@ import CsvIcon from 'assets/svg/csv-icon.svg';
 import FileShareIcon from 'assets/svg/file-share.svg';
 import CopyIcon from 'assets/svg/copy.svg';
 import AddAppIcon from 'assets/svg/app-add.svg';
+import TranslateIcon from 'assets/svg/translate.svg';
+import DocumentIcon from 'assets/svg/document.svg';
 
 import { colors } from 'theme';
 
 import globalMessages from 'global/i18n/globalMessages';
 import { makeSelectUserId, makeSelectUserRoles } from 'global/reducers/auth';
 import { interventionOptionsSaga } from 'global/sagas/interventionOptionsSaga';
-import { sendInterventionCsvRequest } from 'global/reducers/intervention';
+import {
+  interventionReducer,
+  sendInterventionCsvRequest,
+} from 'global/reducers/intervention';
 import {
   copyInterventionRequest,
   archiveInterventionRequest,
@@ -31,20 +36,26 @@ import {
 
 import { canArchive, canEdit } from 'models/Status/statusPermissions';
 import { RolePermissions } from 'models/User/RolePermissions';
+import { Roles } from 'models/User/UserRoles';
 
 import isNullOrUndefined from 'utils/isNullOrUndefined';
 
-import { InterventionAssignOrganizationModal } from 'containers/InterventionDetailsPage/components/Modals';
+import {
+  CatMhAccessModal,
+  InterventionAssignOrganizationModal,
+} from 'containers/InterventionDetailsPage/components/Modals';
 import SelectResearchers from 'containers/SelectResearchers';
 
 import EllipsisText from 'components/Text/EllipsisText';
 import Text from 'components/Text';
 import Tooltip from 'components/Tooltip';
 import Dropdown from 'components/Dropdown';
-import Modal from 'components/Modal';
+import Modal, { ModalType, useModal } from 'components/Modal';
 import Row from 'components/Row';
 import Badge from 'components/Badge';
 import Loader from 'components/Loader';
+import TranslateInterventionModal from 'containers/TranslateInterventionModal';
+import interventionDetailsPageSagas from 'containers/InterventionDetailsPage/saga';
 
 import InterventionDetails from './InterventionDetails';
 import messages from './messages';
@@ -73,10 +84,10 @@ const SingleTile = ({
     setShareWithResearchersModalVisible,
   ] = useState(false);
 
-  const [
-    assignOrganizationModalVisible,
-    setAssignOrganizationModalVisible,
-  ] = useState(false);
+  const [assignOrganizationModalVisible, setAssignOrganizationModalVisible] =
+    useState(false);
+
+  const [translateModalVisible, setTranslateModalVisible] = useState(false);
 
   const closeShareWithResearchersModal = () =>
     setShareWithResearchersModalVisible(false);
@@ -88,17 +99,39 @@ const SingleTile = ({
   const openAssignOrganizationModal = () =>
     setAssignOrganizationModalVisible(true);
 
+  const closeTranslateModal = () => setTranslateModalVisible(false);
+  const openTranslateModal = () => setTranslateModalVisible(true);
+
   const handleArchiveIntervention = () => archiveIntervention(id);
+
+  const { openModal: openArchiveModal, Modal: ArchiveModal } = useModal({
+    type: ModalType.ConfirmationModal,
+    props: {
+      description: formatMessage(messages.interventionArchiveHeader),
+      content: formatMessage(messages.interventionArchiveMessage),
+      confirmAction: handleArchiveIntervention,
+    },
+  });
+  const { openModal: openCatMhModal, Modal: CatMhModal } = useModal({
+    type: ModalType.Modal,
+    modalContentRenderer: (props) => <CatMhAccessModal {...props} />,
+    props: {
+      title: formatMessage(messages.catMhSettingsModalTitle),
+    },
+  });
+
+  const isAdmin = userRoles.includes(Roles.admin);
 
   const {
     name,
     status,
-    sessions_size: sessionsSize,
+    sessionsSize,
     id,
-    organization_id: organizationId,
+    organizationId,
     user,
-    created_at: createdAt,
-    updated_at: updatedAt,
+    createdAt,
+    updatedAt,
+    googleLanguageId,
   } = tileData || {};
 
   const handleCsvRequest = () => sendCsv(id);
@@ -110,6 +143,12 @@ const SingleTile = ({
     copyIntervention({ interventionId: id, withoutRedirect: true });
 
   const options = [
+    {
+      icon: TranslateIcon,
+      action: openTranslateModal,
+      label: formatMessage(messages.translate),
+      id: 'translate',
+    },
     ...(canExportCSV
       ? [
           {
@@ -129,7 +168,7 @@ const SingleTile = ({
     ...((canArchive(status) && [
       {
         icon: BinNoBgIcon,
-        action: handleArchiveIntervention,
+        action: openArchiveModal,
         label: formatMessage(messages.archive),
         id: 'Archive e-session',
       },
@@ -152,14 +191,24 @@ const SingleTile = ({
           },
         ]
       : []),
+    ...(isAdmin
+      ? [
+          {
+            icon: DocumentIcon,
+            action: () => openCatMhModal(tileData),
+            label: formatMessage(messages.catMhSettingsModalTitle),
+            id: 'catMhAccess',
+          },
+        ]
+      : []),
   ];
 
-  const preventDefault = e => {
+  const preventDefault = (e) => {
     e.stopPropagation();
     e.preventDefault();
   };
 
-  const copyInterventionToResearchers = users =>
+  const copyInterventionToResearchers = (users) =>
     copyIntervention({ interventionId: id, users });
 
   if (isLoading)
@@ -171,14 +220,24 @@ const SingleTile = ({
 
   return (
     <>
+      <CatMhModal />
+      <ArchiveModal />
       <Modal
-        title={formatMessage(messages.modalTitle)}
+        title={formatMessage(messages.sendCopyModalTitle)}
         onClose={closeShareWithResearchersModal}
         visible={shareWithResearchersModalVisible}
       >
         <SelectResearchers
           onClose={closeShareWithResearchersModal}
           onResearchersSelected={copyInterventionToResearchers}
+        />
+      </Modal>
+      <Modal onClose={closeTranslateModal} visible={translateModalVisible}>
+        <TranslateInterventionModal
+          id={id}
+          name={name}
+          googleLanguageId={googleLanguageId}
+          onTranslated={closeTranslateModal}
         />
       </Modal>
 
@@ -277,16 +336,18 @@ const mapDispatchToProps = {
 
 const SingleTileWithIntl = injectIntl(SingleTile);
 
-const withConenct = connect(
-  mapStateToProps,
-  mapDispatchToProps,
-);
+const withConnect = connect(mapStateToProps, mapDispatchToProps);
 
 export default compose(
   memo,
-  withConenct,
+  withConnect,
   injectSaga({
     key: 'interventionOptionsSaga',
     saga: interventionOptionsSaga,
   }),
+  injectSaga({
+    key: 'interventionDetailsPageSagas',
+    saga: interventionDetailsPageSagas,
+  }),
+  injectReducer({ key: 'intervention', reducer: interventionReducer }),
 )(SingleTileWithIntl);

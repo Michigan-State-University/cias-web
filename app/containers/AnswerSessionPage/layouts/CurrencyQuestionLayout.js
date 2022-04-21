@@ -26,13 +26,13 @@ const CurrencyQuestionLayout = ({ onChange, answerBody, disabled }) => {
     if (!currency) handleOnSelect('USD', false);
   }, []);
 
-  const processAmount = number => {
+  const processAmount = (number) => {
     if (number.endsWith('.')) return number.substr(0, number.length - 1);
 
     return number;
   };
 
-  const handleOnInput = newValue =>
+  const handleOnInput = (newValue) =>
     !disabled && onChange(`${currency} ${processAmount(newValue)}`);
 
   const handleOnSelect = (newValue, selectedByUser = true) =>

@@ -11,11 +11,10 @@ import Column from 'components/Column';
 import Box from 'components/Box';
 import Select from 'components/Select';
 import Row from 'components/Row';
-import Switch from 'components/Switch';
+import { FullWidthSwitch } from 'components/Switch';
 import Text from 'components/Text';
 import ArrowDropdown from 'components/ArrowDropdown';
 
-import Question from 'models/Session/Question';
 import {
   singleQuestion,
   gridQuestion,
@@ -44,12 +43,12 @@ import QuestionListDropdown from './QuestionListDropdown';
 import Reflection from './Reflection';
 import ClearAnimationButton from '../clearAnimationButton';
 
-const setUpReflections = question => {
+const setUpReflections = (question) => {
   switch (question.type) {
     case singleQuestion.id: {
       const variableName = question.body.variable.name;
 
-      return question.body.data.map(el => ({
+      return question.body.data.map((el) => ({
         variable: variableName,
         value: el.value,
         payload: htmlToPlainText(el.payload),
@@ -59,7 +58,7 @@ const setUpReflections = question => {
       }));
     }
     case multiQuestion.id: {
-      return question.body.data.map(el => ({
+      return question.body.data.map((el) => ({
         variable: el.variable.name,
         value: el.variable.value,
         payload: htmlToPlainText(el.payload),
@@ -116,7 +115,7 @@ const ReflectionBlock = ({
   const selectOptions = useMemo(() => {
     const animations = keys(speechAnimations);
 
-    return animations.map(animation => ({
+    return animations.map((animation) => ({
       value: animation,
       label: formatMessage(animationMessages[animation]),
     }));
@@ -124,21 +123,21 @@ const ReflectionBlock = ({
 
   const feedbackOptions = useMemo(() => {
     const options = values(feedbackActions).filter(
-      action => action !== feedbackActions.showSpectrum,
+      (action) => action !== feedbackActions.showSpectrum,
     );
 
-    return options.map(option => ({
+    return options.map((option) => ({
       value: option,
       label: formatMessage(messages[option]),
     }));
   }, [feedbackActions]);
 
   const selectedOption = selectOptions.find(
-    option => option.value === block.animation,
+    (option) => option.value === block.animation,
   );
 
   const selectedFeedbackOption = feedbackOptions.find(
-    option => option.value === block.action,
+    (option) => option.value === block.action,
   );
 
   const hasSpecialPositioning = block.action !== feedbackActions.noAction;
@@ -177,28 +176,32 @@ const ReflectionBlock = ({
         </>
       )}
       <Row my={15} align="center" justify="between">
-        {formatMessage(messages.reflectionToggle)}
-        <Switch
+        <FullWidthSwitch
+          id="reflection-toggle"
           disabled={disabled}
           checked
           mr={15}
           onToggle={() => switchToSpeech(blockIndex, id)}
-        />
+        >
+          {formatMessage(messages.reflectionToggle)}
+        </FullWidthSwitch>
       </Row>
       <Row mb={15} align="center" justify="between">
-        {formatMessage(messages.formulaToggle)}
-        <Switch
+        <FullWidthSwitch
+          id="formula-toggle"
           disabled={disabled}
           mr={15}
           onToggle={() => switchToReflectionFormula(blockIndex, id)}
-        />
+        >
+          {formatMessage(messages.formulaToggle)}
+        </FullWidthSwitch>
       </Row>
       <ArrowDropdown
         disabled={disabled}
         width="100%"
         childWidthScope="parent"
         positionFrom="right"
-        setOpen={value => setTargetChooserOpen(value)}
+        setOpen={(value) => setTargetChooserOpen(value)}
         isOpened={targetChooserOpen}
         dropdownContent={
           <Box>
@@ -214,7 +217,7 @@ const ReflectionBlock = ({
           formatMessage={formatMessage}
           isVisible={targetChooserOpen}
           chosenQuestionId={block.question_id}
-          onClick={question => {
+          onClick={(question) => {
             setTargetChooserOpen(false);
             updateQuestion(
               blockIndex,
@@ -260,7 +263,7 @@ ReflectionBlock.propTypes = {
   switchToSpeech: PropTypes.func,
   switchToReflectionFormula: PropTypes.func,
   updateQuestion: PropTypes.func,
-  questions: PropTypes.arrayOf(PropTypes.shape(Question)),
+  questions: PropTypes.arrayOf(PropTypes.object),
   updateAction: PropTypes.func,
   currentQuestionType: PropTypes.string,
   disabled: PropTypes.bool,
@@ -294,9 +297,6 @@ const mapDispatchToProps = {
     ),
 };
 
-const withConnect = connect(
-  mapStateToProps,
-  mapDispatchToProps,
-);
+const withConnect = connect(mapStateToProps, mapDispatchToProps);
 
 export default compose(withConnect)(ReflectionBlock);

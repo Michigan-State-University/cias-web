@@ -6,6 +6,7 @@ import globalMessages from 'global/i18n/globalMessages';
 import { defaultMapper } from 'utils/mapResponseObjects';
 import { formatMessage } from 'utils/intlOutsideReact';
 import objectToSnakeCase from 'utils/objectToSnakeCase';
+import getErrorFlag from 'utils/getErrorFlag';
 
 import { editInterventionError, editInterventionSuccess } from '../actions';
 import {
@@ -27,9 +28,10 @@ export function* editIntervention({ payload: { intervention } }) {
     const mappedData = defaultMapper(data);
     yield put(editInterventionSuccess({ ...intervention, ...mappedData }));
   } catch (error) {
+    const errorFlag = getErrorFlag(error);
     yield call(
       toast.error,
-      formatMessage(globalMessages.editInterventionError),
+      formatMessage(globalMessages[errorFlag || 'editInterventionError']),
       {
         toastId: EDIT_INTERVENTION_ERROR,
       },

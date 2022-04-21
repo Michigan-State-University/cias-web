@@ -99,4 +99,48 @@ export default defineMessages({
     defaultMessage:
       'Provide here the text describing the image for people with disabilities',
   },
+  normalIntervention: {
+    id: `${scope}.normalIntervention`,
+    defaultMessage: 'Sequential',
+  },
+  flexibleIntervention: {
+    id: `${scope}.flexibleIntervention`,
+    defaultMessage: 'Modules - Flexible order',
+  },
+  fixedIntervention: {
+    id: `${scope}.fixedIntervention`,
+    defaultMessage: 'Modules - Fixed order',
+  },
+  interventionType: {
+    id: `${scope}.interventionType`,
+    defaultMessage: 'Multi-session flow',
+  },
+  normalInterventionDescription: {
+    id: `${scope}.normalInterventionDescription`,
+    defaultMessage:
+      'Participants will be invited to one session at a time, following an order and schedule defined in advance. This type of intervention allows branching to be integrated in the sending schedule.',
+  },
+  flexibleInterventionDescription: {
+    id: `${scope}.flexibleInterventionDescription`,
+    defaultMessage:
+      'Participants will see all modules at once and can choose to complete them in any order, at their own pace.',
+  },
+  fixedInterventionDescription: {
+    id: `${scope}.fixedInterventionDescription`,
+    defaultMessage:
+      'Participants will see all modules at once, however the order and schedule in which the modules are available to complete will be defined in advance.',
+  },
+  addFilesButtonMessage: {
+    id: `${scope}.addFilesButtonMessage`,
+    defaultMessage: 'Add new files',
+  },
+  additionalText: {
+    id: `${scope}.additionalText`,
+    defaultMessage: 'Additional text for participants',
+  },
+  additionalTextPlaceholder: {
+    id: `${scope}.additionalTextPlaceholder`,
+    defaultMessage:
+      'If you have any thoughts for participants, please type it here',
+  },
 });

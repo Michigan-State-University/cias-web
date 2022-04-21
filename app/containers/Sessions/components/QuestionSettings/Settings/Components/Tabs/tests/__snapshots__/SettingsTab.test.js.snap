@@ -1,163 +1,517 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`<SettingsTab /> Should render and match the snapshot 1`] = `
+.c0 {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-flex-direction: row;
+  -ms-flex-direction: row;
+  flex-direction: row;
+  height: auto;
+  -webkit-box-pack: justify;
+  -webkit-justify-content: space-between;
+  -ms-flex-pack: justify;
+  justify-content: space-between;
+  justify-items: space-between;
+  -webkit-align-content: center;
+  -ms-flex-line-pack: center;
+  align-content: center;
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  margin-bottom: 15px;
+  padding-bottom: 15px;
+  border-bottom: 1px solid #E9F1FB;
+}
+
+.c1 {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-flex-direction: row;
+  -ms-flex-direction: row;
+  flex-direction: row;
+  height: auto;
+  -webkit-box-pack: justify;
+  -webkit-justify-content: space-between;
+  -ms-flex-pack: justify;
+  justify-content: space-between;
+  justify-items: space-between;
+  -webkit-align-content: center;
+  -ms-flex-line-pack: center;
+  align-content: center;
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+}
+
+.c7 {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-flex-direction: row;
+  -ms-flex-direction: row;
+  flex-direction: row;
+  height: auto;
+  -webkit-box-pack: justify;
+  -webkit-justify-content: space-between;
+  -ms-flex-pack: justify;
+  justify-content: space-between;
+  justify-items: space-between;
+  -webkit-align-content: center;
+  -ms-flex-line-pack: center;
+  align-content: center;
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  width: 100%;
+}
+
+.c14 {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-flex-direction: row;
+  -ms-flex-direction: row;
+  flex-direction: row;
+  height: auto;
+  -webkit-box-pack: justify;
+  -webkit-justify-content: space-between;
+  -ms-flex-pack: justify;
+  justify-content: space-between;
+  justify-items: space-between;
+  -webkit-align-content: center;
+  -ms-flex-line-pack: center;
+  align-content: center;
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  margin-bottom: 15px;
+  padding-bottom: 15px;
+}
+
+.c8 {
+  width: auto;
+  height: auto;
+  display: block;
+  border-radius: 5px;
+}
+
+.c11 {
+  position: relative;
+  display: inline-block;
+  min-width: 40px;
+  height: 21px;
+}
+
+.c4 {
+  opacity: 0;
+  width: 0;
+  height: 0;
+  visibility: collapse;
+}
+
+.c6 {
+  width: 100%;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+}
+
+.c6:hover {
+  cursor: pointer;
+}
+
+.c3:disabled + .c5 {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.c13 {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  -webkit-transition: 0.4s;
+  transition: 0.4s;
+  background-color: #CED3E4;
+  border-radius: 21px;
+}
+
+.c3:checked + .c5 .c12 {
+  background-color: #B727EA;
+}
+
+.c3:focus + .c5 .c12 {
+  box-shadow: 0 0 1px #B727EA;
+}
+
+.c3:disabled + .c5 .c12 {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.c13:before {
+  position: absolute;
+  content: '';
+  left: 4px;
+  bottom: 4px;
+  -webkit-transition: 0.4s;
+  transition: 0.4s;
+  height: 13px;
+  width: 13px;
+  background-color: white;
+  border-radius: 50%;
+}
+
+.c3:checked + .c5 .c12:before {
+  -webkit-transform: translateX(18px);
+  -ms-transform: translateX(18px);
+  transform: translateX(18px);
+}
+
+.c9 {
+  margin-right: 5px;
+}
+
+.c2 {
+  width: 100% !important;
+}
+
+.c10 {
+  margin: 0;
+  font-family: DM Sans;
+  font-size: 15px;
+  line-height: 150%;
+  color: #2F3850;
+}
+
 <div>
   <div
-    class="Row-y1cs0u-0 cNUaef"
+    class="c0"
   >
-    <h3
-      class="H3-twxrn4-0 cRKwFK"
-    >
-      Video
-    </h3>
     <div
-      class="styled__SwitchWrapper-k9teya-0 hucWtb"
+      class="c1 c2"
     >
       <input
-        class="styled__SwitchInput-k9teya-1 hdJnOF"
+        aria-checked="false"
+        aria-disabled="false"
+        class="c3 c4"
         data-cy="branching-intervention-toggle"
         data-testid="switch-input"
+        id="video"
+        role="switch"
         type="checkbox"
       />
-      <span
-        class="styled__Slider-k9teya-2 jYsxIO"
-      />
+      <label
+        class="c5 c6"
+        for="video"
+      >
+        <div
+          class="c7"
+          width="100%"
+        >
+          <div
+            class="c8 c9"
+          >
+            <h3
+              class="c10"
+            >
+              Video
+            </h3>
+          </div>
+          <div
+            class="c11"
+          >
+            <span
+              class="c12 c13"
+            />
+          </div>
+        </div>
+      </label>
     </div>
   </div>
   <div
-    class="Row-y1cs0u-0 cNUaef"
+    class="c0"
   >
-    <h3
-      class="H3-twxrn4-0 cRKwFK"
-    >
-      Image
-    </h3>
     <div
-      class="styled__SwitchWrapper-k9teya-0 hucWtb"
+      class="c1 c2"
     >
       <input
-        class="styled__SwitchInput-k9teya-1 hdJnOF"
+        aria-checked="false"
+        aria-disabled="false"
+        class="c3 c4"
         data-cy="branching-intervention-toggle"
         data-testid="switch-input"
+        id="image"
+        role="switch"
         type="checkbox"
       />
-      <span
-        class="styled__Slider-k9teya-2 jYsxIO"
-      />
+      <label
+        class="c5 c6"
+        for="image"
+      >
+        <div
+          class="c7"
+          width="100%"
+        >
+          <div
+            class="c8 c9"
+          >
+            <h3
+              class="c10"
+            >
+              Image
+            </h3>
+          </div>
+          <div
+            class="c11"
+          >
+            <span
+              class="c12 c13"
+            />
+          </div>
+        </div>
+      </label>
     </div>
   </div>
   <div
-    class="Row-y1cs0u-0 cNUaef"
+    class="c0"
   >
-    <h3
-      class="H3-twxrn4-0 cRKwFK"
-    >
-      Title
-    </h3>
     <div
-      class="styled__SwitchWrapper-k9teya-0 hucWtb"
+      class="c1 c2"
     >
       <input
+        aria-checked="true"
+        aria-disabled="false"
         checked=""
-        class="styled__SwitchInput-k9teya-1 hdJnOF"
+        class="c3 c4"
         data-cy="branching-intervention-toggle"
         data-testid="switch-input"
+        id="title"
+        role="switch"
         type="checkbox"
       />
-      <span
-        class="styled__Slider-k9teya-2 jYsxIO"
-      />
+      <label
+        class="c5 c6"
+        for="title"
+      >
+        <div
+          class="c7"
+          width="100%"
+        >
+          <div
+            class="c8 c9"
+          >
+            <h3
+              class="c10"
+            >
+              Title
+            </h3>
+          </div>
+          <div
+            class="c11"
+          >
+            <span
+              class="c12 c13"
+            />
+          </div>
+        </div>
+      </label>
     </div>
   </div>
   <div
-    class="Row-y1cs0u-0 cNUaef"
+    class="c0"
   >
-    <h3
-      class="H3-twxrn4-0 cRKwFK"
-    >
-      Main Text
-    </h3>
     <div
-      class="styled__SwitchWrapper-k9teya-0 hucWtb"
+      class="c1 c2"
     >
       <input
+        aria-checked="true"
+        aria-disabled="false"
         checked=""
-        class="styled__SwitchInput-k9teya-1 hdJnOF"
+        class="c3 c4"
         data-cy="branching-intervention-toggle"
         data-testid="switch-input"
+        id="subtitle"
+        role="switch"
         type="checkbox"
       />
-      <span
-        class="styled__Slider-k9teya-2 jYsxIO"
-      />
+      <label
+        class="c5 c6"
+        for="subtitle"
+      >
+        <div
+          class="c7"
+          width="100%"
+        >
+          <div
+            class="c8 c9"
+          >
+            <h3
+              class="c10"
+            >
+              Main Text
+            </h3>
+          </div>
+          <div
+            class="c11"
+          >
+            <span
+              class="c12 c13"
+            />
+          </div>
+        </div>
+      </label>
     </div>
   </div>
   <div
-    class="Row-y1cs0u-0 cNUaef"
+    class="c0"
   >
-    <h3
-      class="H3-twxrn4-0 cRKwFK"
-    >
-      Skippable Narrator
-    </h3>
     <div
-      class="styled__SwitchWrapper-k9teya-0 hucWtb"
+      class="c1 c2"
     >
       <input
-        class="styled__SwitchInput-k9teya-1 hdJnOF"
+        aria-checked="false"
+        aria-disabled="false"
+        class="c3 c4"
         data-cy="branching-intervention-toggle"
         data-testid="switch-input"
+        id="narrator_skippable"
+        role="switch"
         type="checkbox"
       />
-      <span
-        class="styled__Slider-k9teya-2 jYsxIO"
-      />
+      <label
+        class="c5 c6"
+        for="narrator_skippable"
+      >
+        <div
+          class="c7"
+          width="100%"
+        >
+          <div
+            class="c8 c9"
+          >
+            <h3
+              class="c10"
+            >
+              Skippable Narrator
+            </h3>
+          </div>
+          <div
+            class="c11"
+          >
+            <span
+              class="c12 c13"
+            />
+          </div>
+        </div>
+      </label>
     </div>
   </div>
   <div
-    class="Row-y1cs0u-0 cNUaef"
+    class="c0"
   >
-    <h3
-      class="H3-twxrn4-0 cRKwFK"
-    >
-      Continue Button
-    </h3>
     <div
-      class="styled__SwitchWrapper-k9teya-0 hucWtb"
+      class="c1 c2"
     >
       <input
+        aria-checked="true"
+        aria-disabled="false"
         checked=""
-        class="styled__SwitchInput-k9teya-1 hdJnOF"
+        class="c3 c4"
         data-cy="branching-intervention-toggle"
         data-testid="switch-input"
+        id="proceed_button"
+        role="switch"
         type="checkbox"
       />
-      <span
-        class="styled__Slider-k9teya-2 jYsxIO"
-      />
+      <label
+        class="c5 c6"
+        for="proceed_button"
+      >
+        <div
+          class="c7"
+          width="100%"
+        >
+          <div
+            class="c8 c9"
+          >
+            <h3
+              class="c10"
+            >
+              Continue Button
+            </h3>
+          </div>
+          <div
+            class="c11"
+          >
+            <span
+              class="c12 c13"
+            />
+          </div>
+        </div>
+      </label>
     </div>
   </div>
   <div
-    class="Row-y1cs0u-0 gaoRiI"
+    class="c14"
   >
-    <h3
-      class="H3-twxrn4-0 cRKwFK"
-    >
-      Required
-    </h3>
     <div
-      class="styled__SwitchWrapper-k9teya-0 hucWtb"
+      class="c1 c2"
     >
       <input
+        aria-checked="true"
+        aria-disabled="false"
         checked=""
-        class="styled__SwitchInput-k9teya-1 hdJnOF"
+        class="c3 c4"
         data-cy="branching-intervention-toggle"
         data-testid="switch-input"
+        id="required"
+        role="switch"
         type="checkbox"
       />
-      <span
-        class="styled__Slider-k9teya-2 jYsxIO"
-      />
+      <label
+        class="c5 c6"
+        for="required"
+      >
+        <div
+          class="c7"
+          width="100%"
+        >
+          <div
+            class="c8 c9"
+          >
+            <h3
+              class="c10"
+            >
+              Required
+            </h3>
+          </div>
+          <div
+            class="c11"
+          >
+            <span
+              class="c12 c13"
+            />
+          </div>
+        </div>
+      </label>
     </div>
   </div>
 </div>

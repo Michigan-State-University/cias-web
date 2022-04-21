@@ -22,7 +22,7 @@ const PaginationHandler = ({
     }
   }, [size]);
 
-  const changePage = pageNum => () => setPage(pageNum);
+  const changePage = (pageNum) => () => setPage(pageNum);
 
   const previousPage = page - 1;
   const nextPage = page + 1;
@@ -31,7 +31,7 @@ const PaginationHandler = ({
   const notFirstPage = page !== 1;
   const isLastPage = pages === page;
 
-  const renderButton = selectedPage => {
+  const renderButton = (selectedPage) => {
     const active = selectedPage === page;
     return (
       <Box

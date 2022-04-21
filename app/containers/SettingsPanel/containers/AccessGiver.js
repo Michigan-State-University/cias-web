@@ -55,23 +55,22 @@ const AccessGiver = ({
   const [disableSubmit, setDisableSubmit] = useState(true);
 
   const addingParticipantsPossible = canAddParticipantsToIntervention(status);
-  const removingParticipantsPossible = canRemoveParticipantsFromIntervention(
-    status,
-  );
+  const removingParticipantsPossible =
+    canRemoveParticipantsFromIntervention(status);
 
   useEffect(() => {
     fetchUsersWithAccess(interventionId);
   }, []);
 
-  const handleUploadCsv = data => {
+  const handleUploadCsv = (data) => {
     const parsedData = uniq(
       filter(
-        map(data, columns => {
+        map(data, (columns) => {
           const email = head(columns.data);
           if (email && csvEmailValidator(email)) return email;
           return null;
         }),
-        val => val !== null,
+        (val) => val !== null,
       ),
     );
 
@@ -83,11 +82,11 @@ const AccessGiver = ({
     setValue([]);
   };
 
-  const revokeAction = id => {
+  const revokeAction = (id) => {
     if (id) revokeUserAccess(interventionId, id);
   };
 
-  const onIsValidLastValue = isValid => setDisableSubmit(!isValid);
+  const onIsValidLastValue = (isValid) => setDisableSubmit(!isValid);
 
   if (fetchUserAccessLoading)
     return (
@@ -171,7 +170,9 @@ const AccessGiver = ({
             buttons={buttons}
             users={usersWithAccess || []}
             buttonIsClose
-            userWithLoading={find(usersWithAccess, user => user.loading) || {}}
+            userWithLoading={
+              find(usersWithAccess, (user) => user.loading) || {}
+            }
           />
           {enableAccessLoading && <Spinner color={themeColors.secondary} />}
         </Box>
@@ -198,18 +199,11 @@ const mapDispatchToProps = {
   revokeUserAccess: revokeUserAccessRequest,
 };
 
-const withConnect = connect(
-  null,
-  mapDispatchToProps,
-);
+const withConnect = connect(null, mapDispatchToProps);
 
 const withSaga = injectSaga({
   key: 'accessGiverContainer',
   saga: accessGiverContainerSaga,
 });
 
-export default compose(
-  withConnect,
-  withSaga,
-  injectIntl,
-)(AccessGiver);
+export default compose(withConnect, withSaga, injectIntl)(AccessGiver);

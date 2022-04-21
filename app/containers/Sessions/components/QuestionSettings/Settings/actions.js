@@ -113,7 +113,7 @@ export const saveNarratorMovement = (index, questionId, position) =>
     data: { index, questionId, position },
   });
 
-export const reorderNarratorBlocks = reorderedBlocks =>
+export const reorderNarratorBlocks = (reorderedBlocks) =>
   updateQuestionSettings({
     type: REORDER_NARRATOR_BLOCKS,
     data: { reorderedBlocks },
@@ -154,7 +154,7 @@ export const removeFormulaTarget = (
     data: { questionId, patternIndex, targetIndex, formulaIndex },
   });
 
-export const addNewFormula = questionId =>
+export const addNewFormula = (questionId) =>
   updateQuestionSettings({
     type: ADD_NEW_FORMULA,
     data: { questionId },

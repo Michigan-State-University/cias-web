@@ -42,7 +42,7 @@ const DashboardSetup = ({
       selectEntity(organizationId);
     }
   }, []);
-  const onBlur = name => {
+  const onBlur = (name) => {
     editOrganization({ id: organizationId, name });
   };
 
@@ -106,12 +106,6 @@ const mapDispatchToProps = {
   selectEntity: selectEntityAction,
   editOrganization: editOrganizationRequest,
 };
-const withConnect = connect(
-  mapStateToProps,
-  mapDispatchToProps,
-);
+const withConnect = connect(mapStateToProps, mapDispatchToProps);
 
-export default compose(
-  withConnect,
-  memo,
-)(DashboardSetup);
+export default compose(withConnect, memo)(DashboardSetup);

@@ -129,7 +129,4 @@ const mapStateToProps = createStructuredSelector({
 
 const withConnect = connect(mapStateToProps);
 
-export default compose(
-  injectIntl,
-  withConnect,
-)(ForbiddenPage);
+export default compose(injectIntl, withConnect)(ForbiddenPage);

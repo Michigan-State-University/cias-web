@@ -79,7 +79,7 @@ export const initialState = {
 
 /* eslint-disable default-case, no-param-reassign */
 export const authReducer = (state = initialState, { type, payload }) =>
-  produce(state, draft => {
+  produce(state, (draft) => {
     switch (type) {
       case LOG_IN_USER:
         draft.user = payload.user;

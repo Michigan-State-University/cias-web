@@ -59,7 +59,7 @@ const Reflection = ({
     if (previewData.type !== speechType) setIsPlaying(false);
   }, [previewData]);
 
-  const handleTextUpdate = value =>
+  const handleTextUpdate = (value) =>
     updateText(
       reflectionIndex,
       splitAndKeep(value, [',', '.', '?', '!']),
@@ -84,7 +84,7 @@ const Reflection = ({
     setIsPlaying(!isPlaying);
   };
 
-  const handleBlur = value => {
+  const handleBlur = (value) => {
     setIsSpeechUpdating(true);
     handleTextUpdate(value);
     setHasFocus(false);
@@ -102,7 +102,7 @@ const Reflection = ({
           <Text whiteSpace="pre">{formatMessage(messages.if)}</Text>
           <InequalityChooser
             disabled={disabled}
-            onSuccessfulChange={value =>
+            onSuccessfulChange={(value) =>
               updateCase(reflectionIndex, value, id, blockIndex)
             }
             inequalityValue={reflection.match}
@@ -177,9 +177,6 @@ const mapDispatchToProps = {
   onRemoveCase: removeFormulaCase,
 };
 
-const withConnect = connect(
-  mapStateToProps,
-  mapDispatchToProps,
-);
+const withConnect = connect(mapStateToProps, mapDispatchToProps);
 
 export default compose(withConnect)(Reflection);

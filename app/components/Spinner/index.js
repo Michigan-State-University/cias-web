@@ -10,7 +10,7 @@ import { colors } from 'theme';
 
 import { StyledSpinner } from './styled';
 
-const Spinner = props => <StyledSpinner {...props} />;
+const Spinner = (props) => <StyledSpinner {...props} />;
 
 Spinner.propTypes = {
   color: PropTypes.string,

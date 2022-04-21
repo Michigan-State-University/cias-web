@@ -37,12 +37,11 @@ const SingleQuestionLayout = ({
                   id={ariaInputId}
                   data-cy={`single-question-${index}-checkbox`}
                   checked={isChecked}
+                  onChange={undefined}
                   mr={16}
-                />
-
-                <label htmlFor={ariaInputId}>
+                >
                   <Markup content={payload} />
-                </label>
+                </Radio>
               </Row>
             </HoverableBox>
           </Row>
@@ -56,7 +55,7 @@ SingleQuestionLayout.propTypes = {
   data: PropTypes.array,
   handleClick: PropTypes.func,
   selectedAnswerIndex: PropTypes.number,
-  questionId: PropTypes.string,
+  questionId: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
 };
 
 export default SingleQuestionLayout;

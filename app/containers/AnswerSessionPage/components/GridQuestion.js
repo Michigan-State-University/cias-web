@@ -1,8 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
 
-import Question from 'models/Session/Question';
-
 import GridQuestionLayout from '../layouts/GridQuestionLayout';
 
 const GridQuestion = ({ question, answerBody, selectAnswer, saveAnswer }) => {
@@ -82,7 +80,7 @@ const GridQuestion = ({ question, answerBody, selectAnswer, saveAnswer }) => {
 };
 
 GridQuestion.propTypes = {
-  question: PropTypes.shape(Question).isRequired,
+  question: PropTypes.object.isRequired,
   selectAnswer: PropTypes.func,
   answerBody: PropTypes.any,
   saveAnswer: PropTypes.func,

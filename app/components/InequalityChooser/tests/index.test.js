@@ -5,8 +5,10 @@
  */
 
 import React from 'react';
-import { render, fireEvent, waitFor } from '@testing-library/react';
+import { fireEvent, waitFor } from '@testing-library/react';
 import 'jest-styled-components';
+
+import { testRender } from 'utils/testUtils';
 
 import InequalityChooser from '../index';
 
@@ -17,17 +19,17 @@ describe('<InequalityChooser />', () => {
   };
   it('Expect to not log errors in console', () => {
     const spy = jest.spyOn(global.console, 'error');
-    render(<InequalityChooser {...defaultProps} />);
+    testRender(<InequalityChooser {...defaultProps} />);
     expect(spy).not.toHaveBeenCalled();
   });
 
   it('Should render and match the snapshot', () => {
-    const { container } = render(<InequalityChooser {...defaultProps} />);
+    const { container } = testRender(<InequalityChooser {...defaultProps} />);
     expect(container).toMatchSnapshot();
   });
 
   it('Should call onSuccessfulChange correctly', async () => {
-    const { getByTestId, getByText } = render(
+    const { getByTestId, getByText } = testRender(
       <InequalityChooser {...defaultProps} />,
     );
 

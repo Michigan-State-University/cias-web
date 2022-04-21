@@ -12,6 +12,8 @@ import { connect } from 'react-redux';
 import { createSelector } from 'reselect';
 import { IntlProvider } from 'react-intl';
 
+import { themeColors } from 'theme';
+
 import { makeSelectLocale } from './selectors';
 
 // Those tags are handled by <Markup />
@@ -19,18 +21,35 @@ const errorsToOmit = ['INVALID_TAG', 'UNCLOSED_TAG'];
 
 export const intlProviderConfig = {
   defaultRichTextElements: {
-    p: chunks => `<p>${chunks}</p>`,
-    b: chunks => `<b>${chunks}</b>`,
-    h1: chunks => `<h1>${chunks}</h1>`,
-    h2: chunks => `<h2>${chunks}</h2>`,
-    h3: chunks => `<h3>${chunks}</h3>`,
-    ol: chunks => `<ol>${chunks}</ol>`,
-    ul: chunks => `<ul>${chunks}</ul>`,
-    li: chunks => `<li>${chunks}</li>`,
+    space: (chunks) => (
+      <>
+        {'\u2000'}
+        {chunks}
+      </>
+    ),
+    bold: (chunks) => <b>{chunks}</b>,
+    span: (chunks) => `<span>${chunks}</span>`,
+    p: (chunks) => `<p>${chunks}</p>`,
+    b: (chunks) => `<b>${chunks}</b>`,
+    h1: (chunks) => `<h1>${chunks}</h1>`,
+    h2: (chunks) => `<h2>${chunks}</h2>`,
+    h3: (chunks) => `<h3>${chunks}</h3>`,
+    ol: (chunks) => `<ol>${chunks}</ol>`,
+    ul: (chunks) => `<ul>${chunks}</ul>`,
+    li: (chunks) => `<li>${chunks}</li>`,
+    sup: (chunks) => `<sup>${chunks}</sup>`,
     br: () => `<br />`,
+    secondaryColorBold: (chunks) => (
+      <span style={{ color: themeColors.secondary, fontWeight: 'bold' }}>
+        {chunks}
+      </span>
+    ),
+    primaryColor: (chunks) => (
+      <span style={{ color: themeColors.primary }}>{chunks}</span>
+    ),
   },
-  onError: error => {
-    const showError = !errorsToOmit.some(errorToOmit =>
+  onError: (error) => {
+    const showError = !errorsToOmit.some((errorToOmit) =>
       error.toString().includes(errorToOmit),
     );
     // eslint-disable-next-line no-console
@@ -57,12 +76,9 @@ LanguageProvider.propTypes = {
   children: PropTypes.element.isRequired,
 };
 
-const mapStateToProps = createSelector(
-  makeSelectLocale(),
-  locale => ({
-    locale,
-  }),
-);
+const mapStateToProps = createSelector(makeSelectLocale(), (locale) => ({
+  locale,
+}));
 
 function mapDispatchToProps(dispatch) {
   return {
@@ -70,7 +86,4 @@ function mapDispatchToProps(dispatch) {
   };
 }
 
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps,
-)(LanguageProvider);
+export default connect(mapStateToProps, mapDispatchToProps)(LanguageProvider);

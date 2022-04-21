@@ -9,6 +9,7 @@ import { numericValidator } from 'utils/validators';
 import { themeColors } from 'theme';
 
 import messages from './messages';
+import { QUESTION_SUBTITLE_ID, QUESTION_TITLE_ID } from '../constants';
 
 const NumberQuestionLayout = ({ onChange, answerBody, onValidation }) => {
   const { formatMessage } = useIntl();
@@ -28,7 +29,7 @@ const NumberQuestionLayout = ({ onChange, answerBody, onValidation }) => {
           validator={numericValidator}
           onValidation={onValidation}
           onCheck={onChange}
-          ariaLabel={formatMessage(messages.numberQuestionLabel)}
+          aria-labelledby={`${QUESTION_TITLE_ID} ${QUESTION_SUBTITLE_ID}`}
         />
       </Row>
     </Box>

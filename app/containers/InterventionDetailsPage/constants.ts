@@ -1,0 +1,1 @@
+export const CAT_MH_TEST_COUNT_WARNING_THRESHOLD = 0.1;

@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 
-import Question from 'models/Session/Question';
 import isNullOrUndefined from 'utils/isNullOrUndefined';
 import { loadState } from 'utils/persist';
 
@@ -28,13 +27,13 @@ const ParticipantReportQuestion = ({
 
   const [answer, setAnswer] = useState({ value: { email: loggedInUserEmail } });
 
-  const onEmailValidation = validationResult =>
+  const onEmailValidation = (validationResult) =>
     !validationResult &&
     showError(formatMessage(messages.emailValidationError), {
       toastId: PARTICIPANT_REPORT_VALIDATION_ERROR,
     });
 
-  const saveAnswer = value =>
+  const saveAnswer = (value) =>
     selectAnswer([
       {
         var: name,
@@ -42,7 +41,7 @@ const ParticipantReportQuestion = ({
       },
     ]);
 
-  const onChange = event => {
+  const onChange = (event) => {
     const { email, receive_report: option } = event;
 
     if (option === NO_OPTION) {
@@ -69,7 +68,7 @@ const ParticipantReportQuestion = ({
 };
 
 ParticipantReportQuestion.propTypes = {
-  question: PropTypes.shape(Question).isRequired,
+  question: PropTypes.object.isRequired,
   selectAnswer: PropTypes.func,
   formatMessage: PropTypes.func,
   showError: PropTypes.func,

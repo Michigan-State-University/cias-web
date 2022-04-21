@@ -24,7 +24,7 @@ const configureStore = (reducer, initialState) => {
 };
 
 describe('<AppRoute />', () => {
-  const reducer = state => state;
+  const reducer = (state) => state;
   const initialState = {
     auth: {
       user: {

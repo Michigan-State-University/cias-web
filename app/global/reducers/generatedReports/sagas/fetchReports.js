@@ -26,7 +26,7 @@ export function* fetchReports({ payload: { page, sortOption, sessionId } }) {
     const {
       data: { data, reports_size: reportsSize },
     } = yield call(axios.get, requestUrl, requestParams);
-    const mappedReports = data.map(report =>
+    const mappedReports = data.map((report) =>
       new GeneratedReportBuilder().fromJson(report).build(),
     );
     yield put(fetchReportsSuccess(mappedReports, reportsSize));

@@ -29,6 +29,10 @@ export default defineMessages({
     id: `${scope}.email`,
     defaultMessage: 'Email',
   },
+  checkbox: {
+    id: `${scope}.checkbox`,
+    defaultMessage: 'Selected',
+  },
   waitingForActivation: {
     id: `${scope}.waitingForActivation`,
     defaultMessage: 'Waiting for activation',

@@ -6,15 +6,17 @@ import { createStructuredSelector } from 'reselect';
 import { injectIntl } from 'react-intl';
 import { toast } from 'react-toastify';
 
-import ApprovableInput from 'components/Input/ApprovableInput';
+import FlexibleWidthApprovableInput from 'components/Input/FlexibleWidthApprovableInput';
 import Box from 'components/Box';
 import Column from 'components/Column';
 import HoverableBox from 'components/Box/HoverableBox';
 import Img from 'components/Img';
 import PlusCircle from 'components/Circle/PlusCircle';
-import Question from 'models/Session/Question';
+
 import Row from 'components/Row';
 import Text from 'components/Text';
+import { BadgeInput } from 'components/Input/BadgeInput';
+import OriginalTextHover from 'components/OriginalTextHover';
 
 import bin from 'assets/svg/bin-red.svg';
 import radio from 'assets/svg/radio-button.svg';
@@ -24,7 +26,6 @@ import {
   updateQuestionData,
 } from 'global/reducers/questions';
 import { canEdit } from 'models/Status/statusPermissions';
-import { BadgeInput } from 'components/Input/BadgeInput';
 import { emailValidator } from 'utils/validators';
 import { themeColors, colors } from 'theme';
 
@@ -44,13 +45,14 @@ const ThirdPartyQuestion = ({
   const [hovered, setHovered] = useState(-1);
 
   const {
+    id,
     body: { data },
   } = selectedQuestion;
 
   const editingPossible = canEdit(interventionStatus);
   const isNarratorTabOrEditNotPossible = isNarratorTab || !editingPossible;
 
-  const handleMouseEnter = index => () => {
+  const handleMouseEnter = (index) => () => {
     if (!isNarratorTabOrEditNotPossible) setHovered(index);
   };
 
@@ -75,11 +77,11 @@ const ThirdPartyQuestion = ({
       report_template_ids: newReportTemplateIds,
     });
 
-  const handleRemove = index => removeAnswer(index);
+  const handleRemove = (index) => removeAnswer(index);
   return (
     <Column>
       {data.map((value, index) => (
-        <Row key={`question-${selectedQuestion.id}-el-${index}`} mb={12}>
+        <Row key={`question-${id}-el-${index}`} mb={12}>
           <HoverableBox
             hoverColor={isNarratorTabOrEditNotPossible ? null : undefined}
             px={21}
@@ -95,10 +97,14 @@ const ThirdPartyQuestion = ({
                 justify="between"
                 mb={isNarratorTabOrEditNotPossible ? 0 : 10}
               >
-                <Column width="90%">
-                  <Row>
-                    <Img width="max-content" src={radio} mr={15} />
-                    <ApprovableInput
+                <Row width="90%">
+                  <Img width="max-content" src={radio} mr={15} />
+                  <OriginalTextHover
+                    id={`question-${id}-answer-${index}`}
+                    text={value?.original_text}
+                    hidden={isNarratorTab}
+                  >
+                    <FlexibleWidthApprovableInput
                       fontSize={18}
                       type="singleline"
                       placeholder={
@@ -109,32 +115,15 @@ const ThirdPartyQuestion = ({
                           : ''
                       }
                       value={value.payload}
-                      onCheck={newTitle =>
+                      onCheck={(newTitle) =>
                         handleChangeTitle(newTitle, index, value)
                       }
                       richText
                       disabled={isNarratorTabOrEditNotPossible}
+                      emptyWidth={110}
                     />
-                  </Row>
-                  <Row mt={10} ml={40} align="center" hidden={isNarratorTab}>
-                    <BadgeInput
-                      data-cy={`score-${index}-input`}
-                      disabled={!editingPossible}
-                      textAlign="center"
-                      placeholder={
-                        !isNarratorTab
-                          ? formatMessage(messages.emailPlaceholder)
-                          : ''
-                      }
-                      value={value.value}
-                      color={colors.azure}
-                      onBlur={currentValue =>
-                        handleChangeVariable(index, value, currentValue)
-                      }
-                      maxWidth="100%"
-                    />
-                  </Row>
-                </Column>
+                  </OriginalTextHover>
+                </Row>
                 {data.length > 1 && (
                   <Row>
                     <Box
@@ -147,12 +136,30 @@ const ThirdPartyQuestion = ({
                   </Row>
                 )}
               </Row>
+              <Row mb={10} ml={40} align="center" hidden={isNarratorTab}>
+                <BadgeInput
+                  data-cy={`score-${index}-input`}
+                  disabled={!editingPossible}
+                  textAlign="center"
+                  placeholder={
+                    !isNarratorTab
+                      ? formatMessage(messages.emailPlaceholder)
+                      : ''
+                  }
+                  value={value.value}
+                  color={colors.azure}
+                  onBlur={(currentValue) =>
+                    handleChangeVariable(index, value, currentValue)
+                  }
+                  maxWidth="100%"
+                />
+              </Row>
             </Column>
 
             <ReportChooser
               formatMessage={formatMessage}
               value={value.report_template_ids}
-              onChange={reportTemplateIds =>
+              onChange={(reportTemplateIds) =>
                 handleChangeReportTemplateIds(reportTemplateIds, index, value)
               }
               disabled={!editingPossible}
@@ -178,7 +185,7 @@ const ThirdPartyQuestion = ({
 };
 
 ThirdPartyQuestion.propTypes = {
-  selectedQuestion: PropTypes.shape(Question).isRequired,
+  selectedQuestion: PropTypes.object.isRequired,
   intl: PropTypes.object.isRequired,
   addAnswer: PropTypes.func.isRequired,
   updateAnswer: PropTypes.func.isRequired,
@@ -195,12 +202,10 @@ const mapDispatchToProps = {
   addAnswer: () => updateQuestionData({ type: ADD }),
   updateAnswer: (index, value) =>
     updateQuestionData({ type: UPDATE_ANSWER, data: { index, value } }),
-  removeAnswer: index => updateQuestionData({ type: REMOVE, data: { index } }),
+  removeAnswer: (index) =>
+    updateQuestionData({ type: REMOVE, data: { index } }),
 };
 
-const withConnect = connect(
-  mapStateToProps,
-  mapDispatchToProps,
-);
+const withConnect = connect(mapStateToProps, mapDispatchToProps);
 
 export default injectIntl(compose(withConnect)(ThirdPartyQuestion));

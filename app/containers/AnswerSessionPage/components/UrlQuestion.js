@@ -2,8 +2,6 @@ import React, { useEffect } from 'react';
 import PropTypes from 'prop-types';
 import { useIntl } from 'react-intl';
 
-import Question from 'models/Session/Question';
-
 import UrlPreview from 'components/UrlPreview';
 import Column from 'components/Column';
 import { IconTooltip, TooltipType } from 'components/Tooltip';
@@ -20,7 +18,7 @@ const UrlQuestion = ({ question, selectAnswer }) => {
     },
   } = question;
 
-  const changeLinkState = state => {
+  const changeLinkState = (state) => {
     selectAnswer([
       {
         var: name,
@@ -50,7 +48,7 @@ const UrlQuestion = ({ question, selectAnswer }) => {
 };
 
 UrlQuestion.propTypes = {
-  question: PropTypes.shape(Question).isRequired,
+  question: PropTypes.object.isRequired,
   selectAnswer: PropTypes.func,
 };
 

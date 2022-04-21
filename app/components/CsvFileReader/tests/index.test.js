@@ -21,7 +21,7 @@ const defaultProps = {
 };
 
 describe('<CsvFileReader />', () => {
-  const reducer = state => state;
+  const reducer = (state) => state;
   const initialState = {};
   let store;
   beforeAll(() => {

@@ -7,4 +7,12 @@ export default defineMessages({
     id: `${scope}.header`,
     defaultMessage: 'Screen Details',
   },
+  settingsButtonLabel: {
+    id: `${scope}.settingsButtonLabel`,
+    defaultMessage: 'Toggle Settings visibility',
+  },
+  goToSessionMap: {
+    id: `${scope}.goToSessionMap`,
+    defaultMessage: 'Go to session map',
+  },
 });

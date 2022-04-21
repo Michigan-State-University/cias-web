@@ -6,6 +6,8 @@
 
 import { defineMessages } from 'react-intl';
 
+import { ShareBoxType } from './types';
+
 export const scope = 'app.containers.ShareBox';
 
 export default defineMessages({
@@ -16,7 +18,11 @@ export default defineMessages({
   },
   emailPlaceholder: {
     id: `${scope}.emailPlaceholder`,
-    defaultMessage: 'Enter emails to send link to this session',
+    defaultMessage: `Enter emails to send link to this {type, select,
+      ${ShareBoxType.SESSION} {session}
+      ${ShareBoxType.INTERVENTION} {intervention}
+      other {}
+    }`,
   },
   uploadText: {
     id: `${scope}.uploadText`,
@@ -28,7 +34,11 @@ export default defineMessages({
   },
   copyLabel: {
     id: `${scope}.copyLabel`,
-    defaultMessage: 'Copy link to start with this session externaly',
+    defaultMessage: `Copy link to start with this {type, select,
+      ${ShareBoxType.SESSION} {session}
+      ${ShareBoxType.INTERVENTION} {intervention}
+      other {}
+    } externally`,
   },
   resend: {
     id: `${scope}.resend`,

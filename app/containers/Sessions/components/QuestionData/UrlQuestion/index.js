@@ -16,7 +16,7 @@ import { canEdit } from 'models/Status/statusPermissions';
 import ApprovableInput from 'components/Input/ApprovableInput';
 import Box from 'components/Box';
 import Column from 'components/Column';
-import Question from 'models/Session/Question';
+
 import Row from 'components/Row';
 import UrlPreview from 'components/UrlPreview';
 import Text from 'components/Text';
@@ -85,7 +85,7 @@ const UrlQuestion = ({
 };
 
 UrlQuestion.propTypes = {
-  selectedQuestion: PropTypes.shape(Question).isRequired,
+  selectedQuestion: PropTypes.object.isRequired,
   intl: PropTypes.object.isRequired,
   updateUrl: PropTypes.func.isRequired,
   isNarratorTab: PropTypes.bool,
@@ -97,14 +97,11 @@ const mapStateToProps = createStructuredSelector({
 });
 
 const mapDispatchToProps = {
-  updateUrl: url => updateQuestionData({ type: UPDATE_URL, data: { url } }),
+  updateUrl: (url) => updateQuestionData({ type: UPDATE_URL, data: { url } }),
 };
 
 export const QuestionUrlWithIntl = injectIntl(UrlQuestion);
 
-const withConnect = connect(
-  mapStateToProps,
-  mapDispatchToProps,
-);
+const withConnect = connect(mapStateToProps, mapDispatchToProps);
 
 export default compose(withConnect)(QuestionUrlWithIntl);

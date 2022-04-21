@@ -74,9 +74,7 @@ export default defineMessages({
   },
   chartSettingsNotEditableInfo: {
     id: `${scope}.chartSettingsNotEditableInfo`,
-    defaultMessage: `Data are being collected. <span style="color: ${
-      themeColors.warning
-    };">From this moment you can not introduce any changes to the chart</span>.`,
+    defaultMessage: `Data are being collected. <span style="color: ${themeColors.warning};">From this moment you can not introduce any changes to the chart</span>.`,
   },
   chartSettingsPublishInfo: {
     id: `${scope}.chartSettingsPublishInfo`,
@@ -127,13 +125,9 @@ export default defineMessages({
   chartSettingsChartValuesDescription: {
     id: `${scope}.chartSettingsChartValuesDescription`,
     defaultMessage: `{chartType, select,
-      ${
-        ChartTypeDto.NUMERIC_BAR_CHART
-      } {The maximum Y-axis value will be the highest number of participants
+      ${ChartTypeDto.NUMERIC_BAR_CHART} {The maximum Y-axis value will be the highest number of participants
                                       that match the criteria over the given time period}
-      ${
-        ChartTypeDto.PERCENTAGE_BAR_CHART
-      } {The maximum Y-axis value will be 100%}
+      ${ChartTypeDto.PERCENTAGE_BAR_CHART} {The maximum Y-axis value will be 100%}
     }`,
   },
   chartSettingsTrendLineOption: {
@@ -183,5 +177,14 @@ export default defineMessages({
   noChartsData: {
     id: `${scope}.noChartsData`,
     defaultMessage: 'No charts data',
+  },
+  deleteChartModalHeader: {
+    id: `${scope}.deleteChartModalHeader`,
+    defaultMessage: 'Delete Chart',
+  },
+  deleteChartModalMessage: {
+    id: `${scope}.deleteChartModalMessage`,
+    defaultMessage:
+      'Are you sure you want to delete this chart? It will not be possible to recover it later.',
   },
 });

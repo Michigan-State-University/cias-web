@@ -21,7 +21,7 @@ axiosRetry(axios, {
   // number of retries
   retries: 3,
   // time interval between retries; incremental by 250ms
-  retryDelay: retryCount => retryCount * 250,
+  retryDelay: (retryCount) => retryCount * 250,
 });
 
 const { dispatch } = store;
@@ -31,7 +31,7 @@ const isGuestRequest = (locationUrl, method, requestUrl) =>
   !(method === 'post' && !!requestUrl.match(guestLogInRegex));
 
 axios.interceptors.request.use(
-  config => {
+  (config) => {
     config.baseURL = process.env.API_URL;
     const { method, url } = config;
     let headers;
@@ -47,17 +47,17 @@ axios.interceptors.request.use(
 
     return config;
   },
-  error => Promise.reject(error),
+  (error) => Promise.reject(error),
 );
 
 axios.interceptors.response.use(
-  response => {
+  (response) => {
     const { method, url } = response.config;
     setHeaders(response, isGuestRequest(window.location.pathname, method, url));
 
     return response;
   },
-  error => {
+  (error) => {
     const { response } = error;
 
     if (!response) return Promise.reject(error);

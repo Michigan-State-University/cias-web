@@ -11,5 +11,5 @@ export const resetPhoneticPreview = () =>
 export const phoneticPreviewRequest = (text, options) =>
   actionBuilder(PHONETIC_PREVIEW_REQUEST, { text, options });
 
-export const phoneticPreviewSuccess = url =>
+export const phoneticPreviewSuccess = (url) =>
   actionBuilder(PHONETIC_PREVIEW_SUCCESS, { url });

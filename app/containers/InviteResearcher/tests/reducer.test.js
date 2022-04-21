@@ -190,7 +190,7 @@ describe('inviteResearcherReducer', () => {
     expectedResult = {
       ...expectedResult,
       invitations: {
-        list: invitations.filter(el => el.id !== id),
+        list: invitations.filter((el) => el.id !== id),
         loading: false,
         error: null,
       },

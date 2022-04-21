@@ -11,7 +11,7 @@ import { createIntervention } from 'utils/reducerCreators';
 import sendSessionInviteSaga, {
   sendSessionInvite,
 } from 'global/reducers/intervention/sagas/sendSessionInvite';
-import { jsonApiToArray } from 'utils/jsonApiMapper';
+import { jsonApiToObject, jsonApiToArray } from 'utils/jsonApiMapper';
 import {
   sendSessionInviteSuccess,
   fetchSessionEmailsSuccess,
@@ -26,9 +26,16 @@ import messages from '../../messages';
 import { initialState } from '../../reducer';
 
 describe('sendInterventionInvite saga', () => {
-  const index = 0;
+  const sessionIndex = 0;
+  const mockedIntervention = jsonApiToObject(
+    { data: createIntervention(2) },
+    'intervention',
+  );
   const mockState = {
-    intervention: { ...initialState, intervention: createIntervention() },
+    intervention: {
+      ...initialState,
+      intervention: mockedIntervention,
+    },
   };
   const apiResponse = {
     data: [
@@ -37,7 +44,7 @@ describe('sendInterventionInvite saga', () => {
     ],
   };
   const payload = {
-    sessionId: mockState.intervention.intervention.sessions[index].id,
+    sessionId: mockState.intervention.intervention.sessions[sessionIndex].id,
     emails: ['user0@mail.com', 'user1@mail.com'],
   };
 
@@ -49,7 +56,7 @@ describe('sendInterventionInvite saga', () => {
       .put(
         fetchSessionEmailsSuccess(
           jsonApiToArray(apiResponse, 'invitation'),
-          index,
+          sessionIndex,
         ),
       )
       .call(toast.info, formatMessage(messages.sendInviteSuccess), {

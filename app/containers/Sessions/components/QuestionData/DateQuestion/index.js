@@ -8,7 +8,7 @@ import { injectIntl } from 'react-intl';
 import ApprovableInput from 'components/Input/ApprovableInput';
 import Box from 'components/Box';
 import Column from 'components/Column';
-import Question from 'models/Session/Question';
+
 import Row from 'components/Row';
 
 import {
@@ -38,7 +38,7 @@ const DateQuestion = ({
             placeholder={formatMessage(messages.chooseDate)}
             type="date"
             value={Date.parse(payload)}
-            onCheck={value => updateAnswer({ variable, payload: value })}
+            onCheck={(value) => updateAnswer({ variable, payload: value })}
             fontSize={15}
           />
         </Row>
@@ -48,7 +48,7 @@ const DateQuestion = ({
 };
 
 DateQuestion.propTypes = {
-  selectedQuestion: PropTypes.shape(Question).isRequired,
+  selectedQuestion: PropTypes.object.isRequired,
   intl: PropTypes.object.isRequired,
   updateAnswer: PropTypes.func.isRequired,
 };
@@ -58,13 +58,10 @@ const mapStateToProps = createStructuredSelector({
 });
 
 const mapDispatchToProps = {
-  updateAnswer: value =>
+  updateAnswer: (value) =>
     updateQuestionData({ type: UPDATE_DATA, data: { value } }),
 };
 
-const withConnect = connect(
-  mapStateToProps,
-  mapDispatchToProps,
-);
+const withConnect = connect(mapStateToProps, mapDispatchToProps);
 
 export default injectIntl(compose(withConnect)(DateQuestion));

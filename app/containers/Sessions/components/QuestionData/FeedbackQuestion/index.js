@@ -6,19 +6,24 @@ import { createStructuredSelector } from 'reselect';
 import { injectIntl } from 'react-intl';
 
 import FeedbackQuestionLayout from 'containers/AnswerSessionPage/layouts/Feedback/FeedbackQuestionLayout';
+import {
+  QUESTION_SUBTITLE_ID,
+  QUESTION_TITLE_ID,
+} from 'containers/AnswerSessionPage/constants';
 
 import AppSlider from 'components/AppSlider';
 import Box from 'components/Box';
 import Column from 'components/Column';
 import { StyledInput } from 'components/Input/StyledInput';
 import Row from 'components/Row';
-import Question from 'models/Session/Question';
+import OriginalTextHover from 'components/OriginalTextHover';
 
 import { makeSelectSelectedQuestion } from 'global/reducers/questions';
 import isNullOrUndefined from 'utils/isNullOrUndefined';
 import { canEdit } from 'models/Status/statusPermissions';
 
 import { visualAnalogScaleLabelStyles } from 'theme';
+
 import messages from './messages';
 
 import { updateLabel } from './actions';
@@ -35,7 +40,11 @@ const FeedbackQuestion = ({
     settings: { show_number: showNumber },
   } = selectedQuestion;
   const {
-    payload: { start_value: startValue, end_value: endValue },
+    payload: {
+      start_value: startValue,
+      end_value: endValue,
+      original_text: originalText,
+    },
   } = data[0];
 
   const editingPossible = canEdit(interventionStatus);
@@ -43,29 +52,37 @@ const FeedbackQuestion = ({
   const labels = {
     0: {
       label: (
-        <StyledInput
-          disabled={!editingPossible}
-          width={120}
-          py={9}
-          textAlign="center"
-          placeholder={formatMessage(messages.startValue)}
-          value={startValue}
-          onBlur={value => onUpdateLabel(value, 'start_value')}
-        />
+        <OriginalTextHover
+          id={`question-${selectedQuestion.id}-start`}
+          text={originalText?.start_value}
+          gap={5}
+        >
+          <StyledInput
+            disabled={!editingPossible}
+            width={120}
+            py={9}
+            textAlign="center"
+            placeholder={formatMessage(messages.startValue)}
+            value={startValue}
+            onBlur={(value) => onUpdateLabel(value, 'start_value')}
+          />
+        </OriginalTextHover>
       ),
       style: visualAnalogScaleLabelStyles,
     },
     100: {
       label: (
-        <StyledInput
-          disabled={!editingPossible}
-          width={120}
-          py={9}
-          textAlign="center"
-          placeholder={formatMessage(messages.endValue)}
-          value={endValue}
-          onBlur={value => onUpdateLabel(value, 'end_value')}
-        />
+        <OriginalTextHover text={originalText?.end_value} gap={5}>
+          <StyledInput
+            disabled={!editingPossible}
+            width={120}
+            py={9}
+            textAlign="center"
+            placeholder={formatMessage(messages.endValue)}
+            value={endValue}
+            onBlur={(value) => onUpdateLabel(value, 'end_value')}
+          />
+        </OriginalTextHover>
       ),
       style: visualAnalogScaleLabelStyles,
     },
@@ -82,6 +99,7 @@ const FeedbackQuestion = ({
                   marks={labels}
                   disabled
                   showValue={!isNullOrUndefined(showNumber) && showNumber}
+                  ariaLabelledByForHandle={`${QUESTION_TITLE_ID} ${QUESTION_SUBTITLE_ID}`}
                 />
               )}
               {isNarratorTab && (
@@ -100,7 +118,7 @@ const FeedbackQuestion = ({
 };
 
 FeedbackQuestion.propTypes = {
-  selectedQuestion: PropTypes.shape(Question).isRequired,
+  selectedQuestion: PropTypes.object.isRequired,
   intl: PropTypes.object.isRequired,
   onUpdateLabel: PropTypes.func.isRequired,
   isNarratorTab: PropTypes.bool,
@@ -115,9 +133,6 @@ const mapDispatchToProps = {
   onUpdateLabel: updateLabel,
 };
 
-const withConnect = connect(
-  mapStateToProps,
-  mapDispatchToProps,
-);
+const withConnect = connect(mapStateToProps, mapDispatchToProps);
 
 export default injectIntl(compose(withConnect)(FeedbackQuestion));

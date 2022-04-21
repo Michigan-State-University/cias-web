@@ -28,11 +28,11 @@ export const AnswerInterventionContent = styled.div`
   height: fit-content;
 `;
 
-const getStyles = previewMode => css`
+const getStyles = (previewMode) => css`
   height: ${sizes[previewMode].height};
   width: ${sizes[previewMode].width};
   ${previewMode !== DESKTOP_MODE &&
-    `overflow: auto;
+  `overflow: auto;
      border: 1px solid ${colors.casper};`}
 `;
 
@@ -41,9 +41,9 @@ export const AnswerOuterContainer = styled.div`
   display: flex;
   flex-direction: column;
   height: fit-content;
-  justify-content: ${props =>
+  justify-content: ${(props) =>
     props.interventionStarted ? 'flex-start' : 'center'};
   width: 100%;
   max-width: ${elements.draggableContainerSize}px;
-  ${props => props.previewMode && getStyles(props.previewMode)}
+  ${(props) => props.previewMode && getStyles(props.previewMode)}
 `;

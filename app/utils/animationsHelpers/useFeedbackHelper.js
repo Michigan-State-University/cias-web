@@ -20,7 +20,7 @@ const useFeedbackHelper = (
 
   const changeFeedback = (nextBlock, nextIndex) => {
     const nextAnim = loadedAnimations.current.find(
-      anim => anim.name === (nextBlock ? nextBlock.animation : undefined),
+      (anim) => anim.name === (nextBlock ? nextBlock.animation : undefined),
     );
 
     dispatchUpdate({

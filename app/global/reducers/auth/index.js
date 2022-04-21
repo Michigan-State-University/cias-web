@@ -22,6 +22,7 @@ export {
   editPhoneNumberPreviewRequest,
   loginRequest,
   verificationCodeRequest,
+  fetchSelfDetailsRequest,
 } from './actions';
 export { authReducer, initialState } from './reducer';
 export {
@@ -49,5 +50,6 @@ export {
   editPhoneNumberQuestionSaga,
   loginSaga,
   verifyCodeSaga,
+  fetchSelfDetailsSaga,
 } from './sagas';
 export { UserStorageController } from './UserStorageController';

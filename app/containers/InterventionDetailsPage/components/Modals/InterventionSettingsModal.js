@@ -11,9 +11,10 @@ import {
 import { Col, FullWidthContainer, Row } from 'components/ReactGridSystem';
 import ApiSelect from 'components/Select/ApiSelect';
 import Text from 'components/Text';
+import { languageSelectOptionFormatter } from 'utils/formatters';
 
-import { languageSelectOptionFormatter } from './utils';
 import messages from '../../messages';
+import { INTERVENTION_LANGUAGE_LABEL_ID } from './constants';
 
 const InterventionSettingsModal = () => {
   // redux
@@ -25,7 +26,7 @@ const InterventionSettingsModal = () => {
   );
 
   // actions
-  const editIntervention = intervention =>
+  const editIntervention = (intervention) =>
     dispatch(editInterventionRequest(intervention));
 
   const { formatMessage } = useIntl();
@@ -56,18 +57,19 @@ const InterventionSettingsModal = () => {
     <FullWidthContainer>
       <Row align="center">
         <Col>
-          <Text fontWeight="bold">
+          <Text fontWeight="bold" id={INTERVENTION_LANGUAGE_LABEL_ID}>
             {formatMessage(messages.interventionSettingsLanguageLabel)}
           </Text>
         </Col>
         <Col>
           <ApiSelect
             url="/v1/google/languages"
-            dataParser={data => jsonApiToArray(data, 'supportedLanguage')}
+            dataParser={(data) => jsonApiToArray(data, 'supportedLanguage')}
             optionsFormatter={languageSelectOptionFormatter}
             selectProps={{
               onChange: handleLanguageChange,
               value: selectedValue,
+              'aria-labelledby': INTERVENTION_LANGUAGE_LABEL_ID,
             }}
             width="100%"
           />

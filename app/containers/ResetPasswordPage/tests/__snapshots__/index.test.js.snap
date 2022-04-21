@@ -1,57 +1,361 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`<ResetPasswordPage /> Should render and match the snapshot 1`] = `
+.c5 {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-flex: 1;
+  -webkit-flex-grow: 1;
+  -ms-flex-positive: 1;
+  flex-grow: 1;
+  -webkit-box-pack: center;
+  -webkit-justify-content: center;
+  -ms-flex-pack: center;
+  justify-content: center;
+  justify-items: center;
+  -webkit-align-content: center;
+  -ms-flex-line-pack: center;
+  align-content: center;
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+}
+
+.c6 {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-flex-direction: column;
+  -ms-flex-direction: column;
+  flex-direction: column;
+  width: 100%;
+  -webkit-align-content: flex-start;
+  -ms-flex-line-pack: start;
+  align-content: flex-start;
+  -webkit-align-items: flex-start;
+  -webkit-box-align: flex-start;
+  -ms-flex-align: flex-start;
+  align-items: flex-start;
+}
+
+.c8 {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-flex-direction: column;
+  -ms-flex-direction: column;
+  flex-direction: column;
+  width: 100%;
+}
+
+.c7 {
+  margin: 0;
+  font-family: DM Sans;
+  font-size: 25px;
+  line-height: 130%;
+  margin-bottom: 40px;
+  font-size: 23px;
+  color: #2F3850;
+}
+
+.c3 {
+  width: auto;
+  height: auto;
+  height: 80px;
+}
+
+.c0 {
+  position: relative;
+  z-index: 0;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  min-width: 100%;
+  min-height: 100%;
+  background: #F8FBFF;
+}
+
+.c1 {
+  position: absolute;
+  z-index: -1;
+  background: #FFFFFF;
+}
+
+.c2 {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-flex: 0.75;
+  -ms-flex: 0.75;
+  flex: 0.75;
+  -webkit-flex-direction: column;
+  -ms-flex-direction: column;
+  flex-direction: column;
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  background: #FFFFFF;
+  padding: 0 20px 30px 20px;
+  border-radius: 5px;
+  box-shadow: 0px 4px 10px rgba(227,238,251,0.8);
+  position: fixed;
+  height: 100vh;
+  width: 50vw;
+  -webkit-box-pack: center;
+  -webkit-justify-content: center;
+  -ms-flex-pack: center;
+  justify-content: center;
+}
+
+.c4 {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-flex: 1;
+  -ms-flex: 1;
+  flex: 1;
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  -webkit-box-pack: center;
+  -webkit-justify-content: center;
+  -ms-flex-pack: center;
+  justify-content: center;
+  padding: 30px 15px;
+  margin-left: 50vw;
+}
+
+.c11 {
+  padding: 12px;
+  border-style: solid;
+  border-width: 1px;
+  border-color: #E9F1FB;
+  border-radius: 5px;
+  width: 100%;
+  height: 46px;
+  color: #2F3850;
+}
+
+.c11:focus {
+  box-shadow: none;
+  outline: none;
+  border-color: #107969;
+}
+
+.c11:disabled {
+  color: #ABBBD1;
+}
+
+.c9 {
+  font-family: DM Sans;
+  font-size: 13px;
+  line-height: 130%;
+  margin-bottom: 5px;
+  color: #2F3850;
+  width: -webkit-fit-content;
+  width: -moz-fit-content;
+  width: fit-content;
+}
+
+.c10 {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-flex-direction: row;
+  -ms-flex-direction: row;
+  flex-direction: row;
+  height: auto;
+  -webkit-align-content: center;
+  -ms-flex-line-pack: center;
+  align-content: center;
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  width: 100%;
+}
+
+.c12 {
+  width: 100%;
+  height: 40px;
+  border-radius: 100px;
+  cursor: pointer;
+  border: none;
+  outline: none;
+  background-color: #107969;
+  color: #FFFFFF;
+  border: 1px solid transparent;
+  -webkit-transition: background-color 300ms ease,color 300ms ease,border 300ms ease;
+  transition: background-color 300ms ease,color 300ms ease,border 300ms ease;
+  margin-top: 45px;
+  border-radius: 5px;
+  height: 46px;
+}
+
+.c14 {
+  outline: none;
+  border: none;
+  background: transparent;
+  font-weight: bold;
+  font-size: 13px;
+  line-height: 17px;
+  color: #B727EA;
+  cursor: pointer;
+  -webkit-text-decoration: none;
+  text-decoration: none;
+}
+
+.c13 {
+  margin-top: 25px;
+  -webkit-align-self: center;
+  -ms-flex-item-align: center;
+  align-self: center;
+}
+
+@media only screen and (min-width:768px) {
+  .c6 {
+    width: 83.33333333333334%;
+  }
+}
+
+@media only screen and (min-width:960px) {
+  .c6 {
+    width: 66.66666666666666%;
+  }
+}
+
+@media only screen and (min-width:1170px) {
+  .c6 {
+    width: 50%;
+  }
+}
+
+@media only screen and (min-width:1360px) {
+
+}
+
+@media only screen and (min-width:768px) {
+
+}
+
+@media only screen and (min-width:960px) {
+
+}
+
+@media only screen and (min-width:1170px) {
+
+}
+
+@media only screen and (min-width:1360px) {
+
+}
+
+@media only screen and (max-width:768px) {
+  .c0 {
+    -webkit-flex-direction: column;
+    -ms-flex-direction: column;
+    flex-direction: column;
+  }
+}
+
+@media only screen and (max-width:768px) {
+  .c1 {
+    background: transparent;
+    height: 400px;
+    width: 100%;
+  }
+}
+
+@media only screen and (max-width:768px) {
+  .c2 {
+    background: #FFFFFF;
+    position: relative;
+    height: auto;
+    width: 100%;
+    -webkit-box-pack: start;
+    -webkit-justify-content: flex-start;
+    -ms-flex-pack: start;
+    justify-content: flex-start;
+    background: none;
+    padding: 30px 15px;
+    -webkit-flex: initial;
+    -ms-flex: initial;
+    flex: initial;
+  }
+}
+
+@media only screen and (max-width:768px) {
+  .c4 {
+    margin-left: 0;
+    -webkit-align-items: center;
+    -webkit-box-align: center;
+    -ms-flex-align: center;
+    align-items: center;
+  }
+}
+
 <div>
   <div
-    class="styled__Background-hdmnn0-0 hmySuK"
+    class="c0"
   >
     <div
-      class="styled__TopBackground-hdmnn0-1 fKSajA"
+      class="c1"
     />
     <div
-      class="styled__Header-hdmnn0-2 hWqYDm"
+      class="c2"
     >
       <img
         alt="CIAS Application Logo"
-        class="Img-sc-55j3su-0 A-dfzT"
+        class="c3"
         height="80"
         src="IMAGE_MOCK"
       />
     </div>
     <div
-      class="styled__Content-hdmnn0-4 btbiUY"
+      class="c4"
     >
       <div
-        class="Fill-sc-12xwpzs-0 tIBAp"
+        class="c5"
       >
         <div
-          class="Column-sc-4zswzq-0 gYlaIX"
+          class="c6"
         >
           <h1
-            class="H1-sc-1k7m23t-0 ikOywA"
+            class="c7"
             font-size="23"
           >
             Reset password
           </h1>
           <div
-            class="Column-sc-4zswzq-0 ekpwZH"
+            class="c8"
           >
             <label
               for="email"
             >
               <p
-                class="Text-e4p0w3-0 kFFPgx"
+                class="c9"
                 width="fit-content"
               >
                 E-mail address
               </p>
             </label>
             <div
-              class="Row-y1cs0u-0 fgwsqb"
+              class="c10"
               width="100%"
             >
               <input
-                class="Input-t9j2q5-0 ptbLy"
+                class="c11"
                 height="46"
                 id="email"
                 name="email"
@@ -63,7 +367,7 @@ exports[`<ResetPasswordPage /> Should render and match the snapshot 1`] = `
             </div>
           </div>
           <button
-            class="StyledButton-d2s0gt-0 jFoIZF"
+            class="c12"
             color="primary"
             height="46"
             radius="100px"
@@ -72,10 +376,10 @@ exports[`<ResetPasswordPage /> Should render and match the snapshot 1`] = `
             Send a link
           </button>
           <div
-            class="styled__LinkContainer-ii5zgx-1 gKUyUU"
+            class="c13"
           >
             <a
-              class="styled__StyledLink-ii5zgx-0 iYqTXA"
+              class="c14"
               href="/login"
             >
               Back to login

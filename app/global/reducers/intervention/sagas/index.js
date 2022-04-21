@@ -10,13 +10,17 @@ import sendInterventionCsvSaga from 'global/reducers/intervention/sagas/sendInte
 import editInterventionSaga from 'global/reducers/intervention/sagas/editIntervention';
 import fetchInterventionSaga from 'global/reducers/intervention/sagas/fetchIntervention';
 import reorderSessionsSaga from './reorderSessions';
-import changeAccessSettingSaga from './changeAccessSetting';
 import giveUserAccessSaga from './giveUserAccess';
 import fetchUsersWithAccessSaga from './fetchUsersWithAccess';
 import revokeUserAccessSaga from './revokeUserAccess';
 import deleteSessionSaga from './deleteSession';
 import externalCopySessionSaga from './externalCopySession';
 import interventionLogoSaga from './interventionLogo';
+import translateInterventionSaga from './translateIntervention';
+import addInterventionAttachmentsSaga from './addAttachments';
+import deleteInterventionAttachmentSaga from './deleteAttachment';
+import sendInterventionInviteSaga from './sendInterventionInvite';
+import resendInterventionInviteSaga from './resendInterventionInvite';
 
 export {
   createInterventionSaga,
@@ -26,7 +30,6 @@ export {
   copySessionSaga,
   updateSessionSettingsSaga,
   reorderSessionsSaga,
-  changeAccessSettingSaga,
   giveUserAccessSaga,
   fetchUsersWithAccessSaga,
   revokeUserAccessSaga,
@@ -37,6 +40,11 @@ export {
   deleteSessionSaga,
   externalCopySessionSaga,
   interventionLogoSaga,
+  translateInterventionSaga,
+  addInterventionAttachmentsSaga,
+  sendInterventionInviteSaga,
+  resendInterventionInviteSaga,
+  deleteInterventionAttachmentSaga,
 };
 
 export default function* allInterventionSagas() {
@@ -48,7 +56,6 @@ export default function* allInterventionSagas() {
     copySessionSaga(),
     updateSessionSettingsSaga(),
     reorderSessionsSaga(),
-    changeAccessSettingSaga(),
     giveUserAccessSaga(),
     fetchUsersWithAccessSaga(),
     revokeUserAccessSaga(),
@@ -59,5 +66,8 @@ export default function* allInterventionSagas() {
     resendSessionInviteSaga(),
     deleteSessionSaga(),
     externalCopySessionSaga(),
+    translateInterventionSaga(),
+    sendInterventionInviteSaga(),
+    resendInterventionInviteSaga(),
   ]);
 }

@@ -22,6 +22,7 @@ const FileDownload = ({
   isFileDownloading,
   downloadFile,
   fileName,
+  ...styleProps
 }) => {
   useInjectSaga({ key: 'downloadFile', saga: downloadFileSaga });
 
@@ -37,7 +38,7 @@ const FileDownload = ({
   };
 
   return (
-    <Box onClick={handleClick} role="button">
+    <Box onClick={handleClick} role="button" {...styleProps}>
       <FileDownloadContext.Provider value={{ isDownloading }}>
         <FileDownloadContext.Consumer>
           {isFunction(children) ? children : () => children}
@@ -53,6 +54,7 @@ FileDownload.propTypes = {
   children: PropTypes.oneOfType([PropTypes.node, PropTypes.func]),
   isFileDownloading: PropTypes.bool,
   downloadFile: PropTypes.func,
+  styleProps: PropTypes.object,
 };
 
 const mapStateToProps = createStructuredSelector({
@@ -63,9 +65,6 @@ const mapDispatchToProps = {
   downloadFile: downloadFileRequest,
 };
 
-const withConnect = connect(
-  mapStateToProps,
-  mapDispatchToProps,
-);
+const withConnect = connect(mapStateToProps, mapDispatchToProps);
 
 export default compose(withConnect)(FileDownload);

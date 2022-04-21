@@ -39,7 +39,7 @@ const UserListComponent = ({
 
   const [selectedUser, setSelectedUser] = useState(null);
   const openUserDetails = useCallback(
-    user => () => {
+    (user) => () => {
       if (user.active) {
         setSelectedUser(user);
       }
@@ -50,7 +50,7 @@ const UserListComponent = ({
 
   const avatarColor = useMemo(() => RolesColors[role], [role]);
 
-  const handleInvite = useCallback(email => onInvite(email, role), [role]);
+  const handleInvite = useCallback((email) => onInvite(email, role), [role]);
 
   return (
     <FullWidthContainer>

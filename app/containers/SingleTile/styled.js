@@ -42,7 +42,7 @@ export const StatusIndicator = styled.span`
   width: 7px;
   height: 7px;
   border-radius: 50%;
-  background: ${props => statusTypeToColorMap[props.status]};
+  background: ${(props) => statusTypeToColorMap[props.status]};
   display: inline-block;
   margin-left: 5px;
 `;

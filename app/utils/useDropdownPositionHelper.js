@@ -30,10 +30,11 @@ export const useDropdownPositionHelper = (referencePointRef, options = {}) => {
     maxHeight: `${maxHeight}px`,
   });
 
-  const { ref, callbackRef } = useCallbackRef(node => {
+  const { ref, callbackRef } = useCallbackRef((node) => {
     if (node && referencePointRef && referencePointRef.current) {
       const nodeRect = node.getBoundingClientRect();
-      const referencePointRect = referencePointRef.current.getBoundingClientRect();
+      const referencePointRect =
+        referencePointRef.current.getBoundingClientRect();
 
       const nodeBottomPosition =
         referencePointRect.bottom + nodeRect.height + bottomMargin;

@@ -6,7 +6,7 @@ export const NarratorContainer = styled.div`
   top: 0;
   left: 0;
   z-index: 1500;
-  ${props =>
+  ${(props) =>
     props.canBeDragged
       ? `height: 100%;
           width: 100%;`
@@ -15,7 +15,7 @@ export const NarratorContainer = styled.div`
 
   > div {
     width: ${({ width }) => `${width}px`};
-    cursor: ${props => (props.canBeDragged ? 'grab' : 'default')};
+    cursor: ${(props) => (props.canBeDragged ? 'grab' : 'default')};
   }
   image {
     pointer-events: none;

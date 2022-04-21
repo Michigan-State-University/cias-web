@@ -224,6 +224,7 @@ exports[`<SessionSchedule /> Should render and match the snapshot 1`] = `
             class="c0"
           >
             <input
+              aria-label="Enter number"
               class="c10"
               font-size="15"
               height="50"

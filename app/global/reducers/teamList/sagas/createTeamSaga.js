@@ -22,7 +22,7 @@ function* createTeam({ payload: { name, userId } }) {
       objectToSnakeCase({ team: { name, userId } }),
     );
 
-    const mappedUsers = included.map(user => mapCurrentUser(user));
+    const mappedUsers = included.map((user) => mapCurrentUser(user));
 
     const mappedData = new TeamBuilder()
       .fromJson(data)

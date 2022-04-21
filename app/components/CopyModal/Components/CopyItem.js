@@ -41,7 +41,7 @@ const CopyItem = ({ data, index }) => {
       );
     }
   };
-  const isDisabled = count =>
+  const isDisabled = (count) =>
     disableCopy && !isNullOrUndefined(count) && count === 0;
   return (
     <Column key={`${id}-select-target-question-group-${index}`}>

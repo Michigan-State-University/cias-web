@@ -15,9 +15,9 @@ import {
   UPDATE_TEXT_MESSAGE_SETTINGS_REQUEST,
   UPDATE_TEXT_MESSAGE_SETTINGS_SUCCESS,
   UPDATE_TEXT_MESSAGE_SETTINGS_ERROR,
-  FETCH_VARIANTS_REQUEST,
-  FETCH_VARIANTS_SUCCESS,
-  FETCH_VARIANTS_ERROR,
+  FETCH_VARIANTS_AND_PHONES_REQUEST,
+  FETCH_VARIANTS_AND_PHONES_SUCCESS,
+  FETCH_VARIANTS_AND_PHONES_ERROR,
   CREATE_VARIANT_REQUEST,
   CREATE_VARIANT_SUCCESS,
   CREATE_VARIANT_ERROR,
@@ -34,6 +34,17 @@ import {
   CLONE_TEXT_MESSAGE_REQUEST,
   CLONE_TEXT_MESSAGE_SUCCESS,
   CLONE_TEXT_MESSAGE_ERROR,
+  ADD_PHONE_REQUEST,
+  ADD_PHONE_SUCCESS,
+  ADD_PHONE_ERROR,
+  REMOVE_PHONE_REQUEST,
+  REMOVE_PHONE_SUCCESS,
+  REMOVE_PHONE_ERROR,
+  UPDATE_PHONE_REQUEST,
+  UPDATE_PHONE_SUCCESS,
+  UPDATE_PHONE_ERROR,
+  INITIAL_FILTERS,
+  SET_FILTERS,
 } from './constants';
 import textMessageSettingsReducer from './settings/reducer';
 import textMessageVariantReducer from './variants/reducer';
@@ -45,33 +56,42 @@ export const initialState = {
   textMessagesSize: 0,
   loaders: {
     fetchTextMessagesLoading: true,
-    fetchVariantsLoading: false,
+    fetchVariantsAndPhonesLoading: false,
     createTextMessagesLoading: false,
     updateTextMessagesLoading: false,
     removeTextMessagesLoading: false,
     createVariantLoading: false,
     updateVariantLoading: false,
     removeVariantLoading: false,
+    addPhoneLoading: false,
+    removePhoneLoading: false,
+    updatePhoneLoading: false,
   },
   errors: {
     fetchTextMessagesError: null,
-    fetchVariantsError: null,
+    fetchVariantsAndPhonesError: null,
     createTextMessagesError: null,
     updateTextMessagesError: null,
     removeTextMessagesError: null,
     createVariantError: null,
     updateVariantError: null,
     removeVariantError: null,
+    addPhoneError: null,
+    removePhoneError: null,
+    updatePhoneError: null,
   },
   cache: {},
+  filters: INITIAL_FILTERS,
 };
 
 /* eslint-disable default-case, no-param-reassign */
 export const textMessagesReducer = (state = initialState, action) =>
-  produce(state, draft => {
+  produce(state, (draft) => {
     const selectedMessageIndex = () =>
       state.textMessages.findIndex(({ id }) => id === state.selectedMessageId);
     let textMessageIndex;
+
+    const { payload } = action;
     switch (action.type) {
       case FETCH_TEXT_MESSAGES_REQUEST:
         draft.loaders.fetchTextMessagesLoading = true;
@@ -96,24 +116,32 @@ export const textMessagesReducer = (state = initialState, action) =>
         draft.textMessages = state.cache.textMessages;
         break;
 
-      case FETCH_VARIANTS_REQUEST:
-        draft.loaders.fetchVariantsLoading = true;
+      case FETCH_VARIANTS_AND_PHONES_REQUEST:
+        draft.loaders.fetchVariantsAndPhonesLoading = true;
+        draft.loaders.fetchVariantsAndPhonesLoadingError = null;
         break;
 
-      case FETCH_VARIANTS_SUCCESS:
-        const { variants } = action.payload;
-        draft.loaders.fetchVariantsLoading = false;
-        draft.cache.textMessages = state.textMessages;
+      case FETCH_VARIANTS_AND_PHONES_SUCCESS:
+        const { variants, phones } = action.payload;
+        draft.loaders.fetchVariantsAndPhonesLoading = false;
         textMessageIndex = selectedMessageIndex();
-        if (textMessageIndex > -1)
-          draft.textMessages[textMessageIndex].variants = variants;
+
+        if (textMessageIndex > -1) {
+          draft.textMessages[textMessageIndex] = {
+            ...draft.textMessages[textMessageIndex],
+            variants,
+            phones,
+          };
+
+          draft.cache.textMessages = draft.textMessages;
+        }
         if (variants.length) draft.selectedVariantId = variants[0].id;
         break;
 
-      case FETCH_VARIANTS_ERROR:
-        draft.loaders.fetchVariantsLoading = false;
+      case FETCH_VARIANTS_AND_PHONES_ERROR:
+        draft.loaders.fetchVariantsAndPhonesLoading = false;
         draft.textMessages = state.cache.textMessages;
-        draft.errors.fetchVariantsError = action.payload.error;
+        draft.errors.fetchVariantsAndPhonesLoadingError = action.payload.error;
         break;
 
       case CREATE_TEXT_MESSAGE_REQUEST:
@@ -125,7 +153,7 @@ export const textMessagesReducer = (state = initialState, action) =>
         draft.loaders.createTextMessagesLoading = true;
         break;
 
-      case CREATE_TEXT_MESSAGE_SUCCESS:
+      case CREATE_TEXT_MESSAGE_SUCCESS: {
         const { textMessage, textMessageId } = action.payload;
         draft.cache.textMessages = state.textMessages;
         draft.loaders.createTextMessagesLoading = false;
@@ -133,7 +161,9 @@ export const textMessagesReducer = (state = initialState, action) =>
           ({ id }) => id === textMessageId,
         );
         draft.textMessages[textMessageIndex] = textMessage;
+        draft.filters = INITIAL_FILTERS;
         break;
+      }
 
       case CREATE_TEXT_MESSAGE_ERROR:
         draft.textMessages = state.cache.textMessages;
@@ -230,16 +260,15 @@ export const textMessagesReducer = (state = initialState, action) =>
           textMessageIndex
         ].variants.findIndex(({ id }) => id === variantId);
 
-        draft.textMessages[textMessageIndex].variants[
-          variantIndex
-        ] = textMessageVariantReducer(
-          state.textMessages[textMessageIndex].variants[variantIndex],
-          {
-            data: variantData,
-            type: variantType,
-            variantId,
-          },
-        );
+        draft.textMessages[textMessageIndex].variants[variantIndex] =
+          textMessageVariantReducer(
+            state.textMessages[textMessageIndex].variants[variantIndex],
+            {
+              data: variantData,
+              type: variantType,
+              variantId,
+            },
+          );
         break;
       case UPDATE_TEXT_MESSAGE_VARIANT_SUCCESS:
         draft.loaders.updateVariantLoading = false;
@@ -288,6 +317,71 @@ export const textMessagesReducer = (state = initialState, action) =>
 
       case CLONE_TEXT_MESSAGE_ERROR:
         draft.loaders.createTextMessagesLoading = false;
+        break;
+
+      case ADD_PHONE_REQUEST:
+        draft.loaders.addPhoneLoading = true;
+        draft.loaders.addPhoneError = null;
+        break;
+      case ADD_PHONE_SUCCESS:
+        draft.loaders.addPhoneLoading = false;
+        const { phone } = action.payload;
+        textMessageIndex = selectedMessageIndex();
+        if (textMessageIndex === -1) break;
+        draft.textMessages[textMessageIndex].phones = [
+          ...draft.textMessages[textMessageIndex].phones,
+          phone,
+        ];
+        break;
+      case ADD_PHONE_ERROR:
+        draft.loaders.addPhoneLoading = false;
+        draft.loaders.addPhonerError = action.payload.error;
+        break;
+
+      case REMOVE_PHONE_REQUEST:
+        draft.loaders.removePhoneLoading = true;
+        draft.loaders.removePhoneError = null;
+        break;
+      case REMOVE_PHONE_SUCCESS:
+        draft.loaders.removePhoneLoading = false;
+        textMessageIndex = selectedMessageIndex();
+        if (textMessageIndex === -1) break;
+        draft.textMessages[textMessageIndex].phones = draft.textMessages[
+          textMessageIndex
+        ].phones.filter(({ id }) => id !== action.payload.phoneId);
+        break;
+      case REMOVE_PHONE_ERROR:
+        draft.loaders.removePhoneLoading = false;
+        draft.loaders.removePhoneError = action.payload.error;
+        break;
+
+      case UPDATE_PHONE_REQUEST:
+        draft.loaders.updatePhoneLoading = true;
+        draft.loaders.updatePhoneError = null;
+        textMessageIndex = selectedMessageIndex();
+        if (textMessageIndex === -1) break;
+        const { phoneId, phoneAttributes } = action.payload;
+        const phoneIndex = draft.textMessages[
+          textMessageIndex
+        ].phones?.findIndex(({ id }) => id === phoneId);
+        if (phoneIndex > -1) {
+          draft.textMessages[textMessageIndex].phones[phoneIndex] = {
+            ...draft.textMessages[textMessageIndex].phones[phoneIndex],
+            ...phoneAttributes,
+          };
+        }
+        break;
+      case UPDATE_PHONE_SUCCESS:
+        draft.loaders.updatePhoneLoading = false;
+        draft.cache.textMessages = draft.textMessages;
+        break;
+      case UPDATE_PHONE_ERROR:
+        draft.loaders.updatePhoneLoading = false;
+        draft.loaders.updatePhoneError = action.payload.error;
+        break;
+
+      case SET_FILTERS:
+        draft.filters = payload.filters;
         break;
     }
   });

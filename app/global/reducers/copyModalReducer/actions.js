@@ -15,11 +15,11 @@ import {
   FETCH_INTERVENTIONS_WITH_PAGINATION_SUCCESS,
 } from './constants';
 
-export const fetchInterventionsRequest = organizationId =>
+export const fetchInterventionsRequest = (organizationId) =>
   actionBuilder(FETCH_INTERVENTIONS_REQUEST, { organizationId });
-export const fetchInterventionsSuccess = interventions =>
+export const fetchInterventionsSuccess = (interventions) =>
   actionBuilder(FETCH_INTERVENTIONS_SUCCESS, { interventions });
-export const fetchInterventionsError = error =>
+export const fetchInterventionsError = (error) =>
   actionBuilder(FETCH_INTERVENTIONS_ERROR, { error });
 
 export const fetchInterventionsWithPaginationRequest = (
@@ -42,18 +42,18 @@ export const fetchInterventionsWithPaginationSuccess = (
     startIndex,
   });
 
-export const fetchSessionsRequest = id =>
+export const fetchSessionsRequest = (id) =>
   actionBuilder(FETCH_SESSIONS_REQUEST, { id });
-export const fetchSessionsSuccess = sessions =>
+export const fetchSessionsSuccess = (sessions) =>
   actionBuilder(FETCH_SESSIONS_SUCCESS, { sessions });
-export const fetchSessionsError = error =>
+export const fetchSessionsError = (error) =>
   actionBuilder(FETCH_SESSIONS_ERROR, { error });
 
-export const fetchQuestionGroupsRequest = id =>
+export const fetchQuestionGroupsRequest = (id) =>
   actionBuilder(FETCH_QUESTION_GROUPS_REQUEST, { id });
-export const fetchQuestionGroupsSuccess = questionGroups =>
+export const fetchQuestionGroupsSuccess = (questionGroups) =>
   actionBuilder(FETCH_QUESTION_GROUPS_SUCCESS, { questionGroups });
-export const fetchQuestionGroupsError = error =>
+export const fetchQuestionGroupsError = (error) =>
   actionBuilder(FETCH_QUESTION_GROUPS_ERROR, { error });
 
 export const changeViewAction = () => actionBuilder(CHANGE_VIEW, {});

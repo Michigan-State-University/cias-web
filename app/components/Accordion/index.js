@@ -63,7 +63,7 @@ const Accordion = ({
     );
   };
 
-  const onDragEnd = result => {
+  const onDragEnd = (result) => {
     const { source, destination } = result;
 
     if (destination) onReorder(source.index, destination.index);
@@ -80,7 +80,7 @@ const Accordion = ({
             droppableId="block-list"
             type={reorderScope.blocks}
           >
-            {providedDroppable => (
+            {(providedDroppable) => (
               <div
                 ref={providedDroppable.innerRef}
                 {...providedDroppable.droppableProps}
@@ -92,7 +92,7 @@ const Accordion = ({
                     draggableId={`accordion-${index}`}
                     index={index}
                   >
-                    {provided => (
+                    {(provided) => (
                       <Box
                         mb={7}
                         ref={provided.innerRef}

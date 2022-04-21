@@ -96,7 +96,7 @@ exports[`<QuestionTypeChooser /> should match the snapshot 1`] = `
       width="100%"
     >
       <div
-        class="HoverableBox-zvip6a-0 c2"
+        class="c2"
         data-cy="add-screen-button"
         display="flex"
         height="80"
@@ -603,7 +603,7 @@ exports[`<QuestionTypeChooser /> should match the snapshot while being open 1`] 
       width="100%"
     >
       <div
-        class="HoverableBox-zvip6a-0 c2"
+        class="c2"
         data-cy="add-screen-button"
         display="flex"
         height="80"
@@ -649,7 +649,7 @@ exports[`<QuestionTypeChooser /> should match the snapshot while being open 1`] 
             width="100%"
           >
             <div
-              class="HoverableBox-zvip6a-0 c10"
+              class="c10"
             >
               <div
                 class="c3"
@@ -667,7 +667,7 @@ exports[`<QuestionTypeChooser /> should match the snapshot while being open 1`] 
               </div>
             </div>
             <div
-              class="HoverableBox-zvip6a-0 c10"
+              class="c10"
             >
               <div
                 class="c3"
@@ -685,7 +685,7 @@ exports[`<QuestionTypeChooser /> should match the snapshot while being open 1`] 
               </div>
             </div>
             <div
-              class="HoverableBox-zvip6a-0 c10"
+              class="c10"
             >
               <div
                 class="c3"
@@ -703,7 +703,7 @@ exports[`<QuestionTypeChooser /> should match the snapshot while being open 1`] 
               </div>
             </div>
             <div
-              class="HoverableBox-zvip6a-0 c10"
+              class="c10"
             >
               <div
                 class="c3"
@@ -721,7 +721,7 @@ exports[`<QuestionTypeChooser /> should match the snapshot while being open 1`] 
               </div>
             </div>
             <div
-              class="HoverableBox-zvip6a-0 c10"
+              class="c10"
             >
               <div
                 class="c3"
@@ -739,7 +739,7 @@ exports[`<QuestionTypeChooser /> should match the snapshot while being open 1`] 
               </div>
             </div>
             <div
-              class="HoverableBox-zvip6a-0 c10"
+              class="c10"
             >
               <div
                 class="c3"
@@ -757,7 +757,7 @@ exports[`<QuestionTypeChooser /> should match the snapshot while being open 1`] 
               </div>
             </div>
             <div
-              class="HoverableBox-zvip6a-0 c10"
+              class="c10"
             >
               <div
                 class="c3"
@@ -775,7 +775,7 @@ exports[`<QuestionTypeChooser /> should match the snapshot while being open 1`] 
               </div>
             </div>
             <div
-              class="HoverableBox-zvip6a-0 c10"
+              class="c10"
             >
               <div
                 class="c3"
@@ -793,7 +793,7 @@ exports[`<QuestionTypeChooser /> should match the snapshot while being open 1`] 
               </div>
             </div>
             <div
-              class="HoverableBox-zvip6a-0 c10"
+              class="c10"
             >
               <div
                 class="c3"
@@ -811,7 +811,7 @@ exports[`<QuestionTypeChooser /> should match the snapshot while being open 1`] 
               </div>
             </div>
             <div
-              class="HoverableBox-zvip6a-0 c10"
+              class="c10"
             >
               <div
                 class="c3"
@@ -829,7 +829,7 @@ exports[`<QuestionTypeChooser /> should match the snapshot while being open 1`] 
               </div>
             </div>
             <div
-              class="HoverableBox-zvip6a-0 c10"
+              class="c10"
             >
               <div
                 class="c3"
@@ -847,7 +847,7 @@ exports[`<QuestionTypeChooser /> should match the snapshot while being open 1`] 
               </div>
             </div>
             <div
-              class="HoverableBox-zvip6a-0 c10"
+              class="c10"
             >
               <div
                 class="c3"
@@ -865,7 +865,7 @@ exports[`<QuestionTypeChooser /> should match the snapshot while being open 1`] 
               </div>
             </div>
             <div
-              class="HoverableBox-zvip6a-0 c10"
+              class="c10"
             >
               <div
                 class="c3"
@@ -883,7 +883,7 @@ exports[`<QuestionTypeChooser /> should match the snapshot while being open 1`] 
               </div>
             </div>
             <div
-              class="HoverableBox-zvip6a-0 c10"
+              class="c10"
             >
               <div
                 class="c3"
@@ -901,7 +901,7 @@ exports[`<QuestionTypeChooser /> should match the snapshot while being open 1`] 
               </div>
             </div>
             <div
-              class="HoverableBox-zvip6a-0 c10"
+              class="c10"
             >
               <div
                 class="c3"

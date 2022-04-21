@@ -14,7 +14,7 @@ import Row from 'components/Row';
 
 import messages from './messages';
 
-const validationSchema = formatMessage =>
+const validationSchema = (formatMessage) =>
   Yup.object().shape({
     email: Yup.string().required(formatMessage(messages.emailRequired)),
     passwordConfirmation: Yup.string().required(
@@ -22,7 +22,7 @@ const validationSchema = formatMessage =>
     ),
   });
 
-const initialValues = user => ({
+const initialValues = (user) => ({
   email: user.email,
   passwordConfirmation: '',
 });
@@ -45,7 +45,7 @@ const EmailForm = ({
     setSubmitting(false);
   };
 
-  const handleBlur = email => () => {
+  const handleBlur = (email) => () => {
     if (user.email !== email) openModal();
   };
 
