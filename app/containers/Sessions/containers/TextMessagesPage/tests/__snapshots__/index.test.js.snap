@@ -374,7 +374,8 @@ exports[`<TextMessagingPage /> Should render and match the snapshot 1`] = `
   -webkit-justify-content: center !important;
   -ms-flex-pack: center !important;
   justify-content: center !important;
-  overflow: scroll;
+  overflow-y: scroll;
+  overflow-x: hidden;
   height: calc(100vh - 80px);
 }
 
@@ -459,6 +460,7 @@ exports[`<TextMessagingPage /> Should render and match the snapshot 1`] = `
       style="box-sizing: border-box; position: relative; margin-left: auto; margin-right: auto; padding-left: 15px; padding-right: 15px; max-width: 960px;"
     >
       <div
+        class=""
         md="6"
         style="margin-left: -15px; margin-right: -15px; display: flex; flex-wrap: wrap; flex-grow: 0; flex-shrink: 0; align-items: normal; justify-content: center;"
         xs="12"

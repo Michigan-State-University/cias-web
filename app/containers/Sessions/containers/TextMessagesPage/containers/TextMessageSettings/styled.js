@@ -11,7 +11,8 @@ export const StyledSmsSettings = styled.div`
   box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
   height: calc(100vh - 70px);
   padding: ${padding};
-  overflow: scroll;
+  overflow-y: scroll;
+  overflow-x: hidden;
 `;
 
 export const SectionDivider = styled.div`

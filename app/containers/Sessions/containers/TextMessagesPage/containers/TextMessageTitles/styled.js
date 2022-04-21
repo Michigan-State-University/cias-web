@@ -1,6 +1,7 @@
 import styled from 'styled-components';
 import { colors, themeColors } from 'theme';
-import { Container } from 'react-grid-system';
+
+import { Container } from 'components/ReactGridSystem';
 
 export const StyledTile = styled.div`
   flex: 0 0 28%;
@@ -46,6 +47,7 @@ export const StyledTilesContainer = styled(Container)`
   margin-top: 10px;
   padding: 0 !important;
   justify-content: center !important;
-  overflow: scroll;
+  overflow-y: scroll;
+  overflow-x: hidden;
   height: calc(100vh - 80px);
 `;
