@@ -2,9 +2,10 @@
   "name": "cias-3.0",
   "version": "0.9.10",
   "description": "CIAS 3.0 Web Application",
+  "engineStrict": true,
   "engines": {
-    "npm": "8.x",
-    "node": "16.x"
+    "npm": "6.x",
+    "node": "14.x"
   },
   "author": "HTD Health",
   "scripts": {
@@ -73,8 +74,8 @@
     "@formatjs/intl-pluralrules": "^4.0.13",
     "@formatjs/intl-relativetimeformat": "^8.1.4",
     "@sentry/react": "^6.2.4",
-    "axios": "^0.26.0",
     "actioncable": "^5.2.6",
+    "axios": "^0.26.0",
     "axios-retry": "^3.2.4",
     "babel-plugin-add-react-displayname": "0.0.5",
     "chalk": "^2.4.2",
