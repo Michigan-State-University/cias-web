@@ -186,6 +186,7 @@ function SessionListItem({
                 copyAction={externalCopy}
                 disableQuestionGroupCopy
                 disableSessionCopy
+                disableCurrentInterventionCopy
                 pasteText={formatMessage(messages.pasteSession)}
                 defaultView={VIEWS.INTERVENTION}
               />

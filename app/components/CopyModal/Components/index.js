@@ -57,6 +57,7 @@ const CopyChooser = ({
   disableInterventionCopy,
   disableCurrentQuestionGroupCopy,
   disableCurrentSessionCopy,
+  disableCurrentInterventionCopy,
   changeView,
   pasteText,
   savedIds,
@@ -172,6 +173,9 @@ const CopyChooser = ({
               loadMoreItems: requestInterventions,
               loading: loaders.interventions,
             }}
+            disabledItemsIds={
+              disableCurrentInterventionCopy ? [interventionId] : undefined
+            }
           />
         );
       case VIEWS.SESSION:
@@ -251,6 +255,7 @@ CopyChooser.propTypes = {
   disableInterventionCopy: PropTypes.bool,
   disableCurrentQuestionGroupCopy: PropTypes.bool,
   disableCurrentSessionCopy: PropTypes.bool,
+  disableCurrentInterventionCopy: PropTypes.bool,
   changeView: PropTypes.func,
   savedIds: PropTypes.object,
   pasteText: PropTypes.string,
@@ -266,6 +271,7 @@ CopyChooser.defaultProps = {
   disableInterventionCopy: false,
   disableCurrentQuestionGroupCopy: false,
   disableCurrentSessionCopy: false,
+  disableCurrentInterventionCopy: false,
 };
 
 const mapStateToProps = createStructuredSelector({
