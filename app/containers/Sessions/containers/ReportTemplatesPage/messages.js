@@ -141,4 +141,31 @@ export default defineMessages({
     id: `${scope}.if`,
     defaultMessage: 'If formula',
   },
+  deleteReportTemplateHeader: {
+    id: `${scope}.deleteReportTemplateHeader`,
+    defaultMessage: 'Delete Report Template',
+  },
+  deleteReportTemplateMessage: {
+    id: `${scope}.deleteReportTemplateMessage`,
+    defaultMessage:
+      'Are you sure you want to delete this Report Template? It will not be possible to recover it later.',
+  },
+  deleteReportTemplateSectionHeader: {
+    id: `${scope}.deleteReportTemplateSectionHeader`,
+    defaultMessage: 'Delete Report Template Section',
+  },
+  deleteReportTemplateSectionMessage: {
+    id: `${scope}.deleteReportTemplateSectionMessage`,
+    defaultMessage:
+      'Are you sure you want to delete this Report Template Section? It will not be possible to recover it later.',
+  },
+  deleteSectionCaseHeader: {
+    id: `${scope}.deleteSectionCaseHeader`,
+    defaultMessage: 'Delete Case',
+  },
+  deleteSectionCaseMessage: {
+    id: `${scope}.deleteSectionCaseMessage`,
+    defaultMessage:
+      'Are you sure you want to delete this Case? It will not be possible to recover it later.',
+  },
 });

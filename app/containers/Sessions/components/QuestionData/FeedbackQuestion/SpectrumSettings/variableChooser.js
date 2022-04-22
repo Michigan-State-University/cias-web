@@ -19,7 +19,6 @@ import { StyledInput } from 'components/Input/StyledInput';
 import InequalityChooser from 'components/InequalityChooser';
 
 import binNoBg from 'assets/svg/bin-no-bg.svg';
-import Question from 'models/Session/Question';
 
 import { themeColors, colors } from 'theme';
 import messages from '../messages';
@@ -45,7 +44,9 @@ const SpectrumVariableChooser = ({
         <VariableChooser
           disabled={disabled}
           selectedQuestion={selectedQuestion}
-          onClick={value => onFormulaUpdate(`${spectrum.payload}${value}`, id)}
+          onClick={(value) =>
+            onFormulaUpdate(`${spectrum.payload}${value}`, id)
+          }
           sessionId={sessionId}
           interventionId={interventionId}
           isMultiSession
@@ -67,7 +68,7 @@ const SpectrumVariableChooser = ({
           width="100%"
           placeholder={formatMessage(messages.formulaPlaceholder)}
           value={spectrum.payload}
-          onBlur={value => onFormulaUpdate(value, id)}
+          onBlur={(value) => onFormulaUpdate(value, id)}
         />
       </Box>
       {spectrum.patterns.map((pattern, index) => (
@@ -79,7 +80,7 @@ const SpectrumVariableChooser = ({
           <Text whiteSpace="pre">{formatMessage(messages.if)}</Text>
           <InequalityChooser
             disabled={disabled}
-            onSuccessfulChange={value =>
+            onSuccessfulChange={(value) =>
               onUpdateCase(index, { ...pattern, match: value }, id)
             }
             inequalityValue={pattern.match}
@@ -95,7 +96,7 @@ const SpectrumVariableChooser = ({
               textAlign="center"
               placeholder="..."
               value={pattern.target}
-              onBlur={value =>
+              onBlur={(value) =>
                 onUpdateCase(index, { ...pattern, target: value }, id)
               }
             />
@@ -122,7 +123,7 @@ const SpectrumVariableChooser = ({
 };
 
 SpectrumVariableChooser.propTypes = {
-  selectedQuestion: PropTypes.shape(Question),
+  selectedQuestion: PropTypes.object,
   id: PropTypes.string,
   intl: PropTypes.object,
   spectrum: PropTypes.shape({

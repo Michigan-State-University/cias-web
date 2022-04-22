@@ -7,7 +7,7 @@ export class TeamBuilder {
    * @param  {string} id
    * @returns  {TeamBuilder}
    */
-  withId = id => {
+  withId = (id) => {
     this.id = id;
 
     return this;
@@ -17,7 +17,7 @@ export class TeamBuilder {
    * @param  {string} name
    * @returns  {TeamBuilder}
    */
-  withName = name => {
+  withName = (name) => {
     this.name = name;
 
     return this;
@@ -27,7 +27,7 @@ export class TeamBuilder {
    * @param  {object} teamAdmin
    * @returns  {TeamBuilder}
    */
-  withTeamAdmin = teamAdmin => {
+  withTeamAdmin = (teamAdmin) => {
     this.teamAdmin = teamAdmin;
 
     return this;
@@ -37,7 +37,7 @@ export class TeamBuilder {
    * @param  {object} json
    * @returns  {TeamBuilder}
    */
-  fromJson = json => {
+  fromJson = (json) => {
     const team = mapTeam(json);
 
     this.id = team.id;

@@ -23,7 +23,7 @@ function* copyQuestions({ payload: { questionIds, sessionId } }) {
       data: { data },
     } = yield call(axios.post, requestURL, { ids: questionIds });
 
-    const copiedQuestions = data.map(question =>
+    const copiedQuestions = data.map((question) =>
       mapQuestionToStateObject(question),
     );
 

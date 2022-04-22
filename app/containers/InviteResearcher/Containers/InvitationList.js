@@ -52,9 +52,7 @@ const InvitationList = ({
           align="center"
           justify="between"
           py={12}
-          borderBottom={`${borders.borderWidth} ${borders.borderStyle} ${
-            colors.mystic
-          }`}
+          borderBottom={`${borders.borderWidth} ${borders.borderStyle} ${colors.mystic}`}
         >
           <Text data-private fontSize={14}>
             {email}
@@ -97,8 +95,5 @@ const mapDispatchToProps = {
   cancelInvitation: cancelInvitationRequest,
 };
 
-const withConnect = connect(
-  mapStateToProps,
-  mapDispatchToProps,
-);
+const withConnect = connect(mapStateToProps, mapDispatchToProps);
 export default compose(withConnect)(InvitationList);

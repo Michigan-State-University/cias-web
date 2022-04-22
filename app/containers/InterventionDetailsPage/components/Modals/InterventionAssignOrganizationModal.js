@@ -2,26 +2,22 @@ import React, { memo, useCallback, useEffect, useState } from 'react';
 import { useIntl } from 'react-intl';
 import { useDispatch, useSelector } from 'react-redux';
 import PropTypes from 'prop-types';
-import { injectReducer, injectSaga } from 'redux-injectors';
-import { compose } from 'redux';
 
 import { jsonApiToArray } from 'utils/jsonApiMapper';
 import {
   editInterventionRequest,
-  interventionReducer,
   makeSelectInterventionLoader,
 } from 'global/reducers/intervention';
 import { makeSelectOrganizations } from 'global/reducers/organizations';
 
-import interventionDetailsPageSagas from 'containers/InterventionDetailsPage/saga';
-
 import { Col, FullWidthContainer, Row } from 'components/ReactGridSystem';
 import ApiSelect from 'components/Select/ApiSelect';
 import Text from 'components/Text';
-
 import Button from 'components/Button';
+
 import { organizationSelectOptionFormatter } from './utils';
 import messages from '../../messages';
+import { CHOOSE_ORGANIZATION_LABEL_ID } from './constants';
 
 const InterventionAssignOrganizationModal = ({
   interventionId,
@@ -40,7 +36,7 @@ const InterventionAssignOrganizationModal = ({
   );
 
   // actions
-  const editIntervention = intervention =>
+  const editIntervention = (intervention) =>
     dispatch(editInterventionRequest(intervention));
 
   const { name: currentOrganizationName } =
@@ -75,11 +71,11 @@ const InterventionAssignOrganizationModal = ({
   }, [selectedValue?.value, interventionId]);
 
   const dataParser = useCallback(
-    data => jsonApiToArray(data, 'organization'),
+    (data) => jsonApiToArray(data, 'organization'),
     [],
   );
 
-  const onSelect = value => {
+  const onSelect = (value) => {
     if (value) setSelectedValue(value);
     else setSelectedValue(null);
   };
@@ -88,7 +84,7 @@ const InterventionAssignOrganizationModal = ({
     <FullWidthContainer>
       <Row align="center" mt={20}>
         <Col xs={4}>
-          <Text fontWeight="bold">
+          <Text fontWeight="bold" id={CHOOSE_ORGANIZATION_LABEL_ID}>
             {formatMessage(messages.assignOrganizationSelectLabel)}
           </Text>
         </Col>
@@ -102,6 +98,7 @@ const InterventionAssignOrganizationModal = ({
               onChange: onSelect,
               value: selectedValue,
               isClearable: true,
+              'aria-labelledby': CHOOSE_ORGANIZATION_LABEL_ID,
             }}
             width="100%"
           />
@@ -129,11 +126,4 @@ InterventionAssignOrganizationModal.propTypes = {
   onClose: PropTypes.func,
 };
 
-export default compose(
-  memo,
-  injectSaga({
-    key: 'interventionDetailsPageSagas',
-    saga: interventionDetailsPageSagas,
-  }),
-  injectReducer({ key: 'intervention', reducer: interventionReducer }),
-)(InterventionAssignOrganizationModal);
+export default memo(InterventionAssignOrganizationModal);

@@ -13,7 +13,7 @@ import H3 from 'components/H3';
 import EllipsisText from 'components/Text/EllipsisText';
 import Img from 'components/Img';
 import Loader from 'components/Loader';
-import Question from 'models/Session/Question';
+
 import Row from 'components/Row';
 import Text from 'components/Text';
 import arrowLeft from 'assets/svg/arrow-left.svg';
@@ -37,7 +37,7 @@ import { makeSelectQuestionGroups } from 'global/reducers/questionGroups';
 import messages from './messages';
 import GroupCollapse from './GroupCollapse';
 
-const TargetQuestionChooser = props => {
+const TargetQuestionChooser = (props) => {
   const {
     intl: { formatMessage },
     onClick,
@@ -52,11 +52,15 @@ const TargetQuestionChooser = props => {
     sessionBranching,
     sessionIndex,
     questionGroups,
+    disableBranchingToSession,
   } = props;
 
   const [width, setWidth] = useState(0);
 
-  const onRefChange = useCallback(node => setWidth(node?.offsetWidth ?? 0), []);
+  const onRefChange = useCallback(
+    (node) => setWidth(node?.offsetWidth ?? 0),
+    [],
+  );
 
   const { id, position, question_group_id: questionGroupId } = selectedQuestion;
   const currentGroup = questionGroups.find(
@@ -90,7 +94,7 @@ const TargetQuestionChooser = props => {
   const filteredSessionList = useMemo(
     () =>
       sessionList
-        ? sessionList.filter(session => session.position > sessionIndex + 1)
+        ? sessionList.filter((session) => session.position > sessionIndex + 1)
         : [],
     [sessionList, sessionIndex],
   );
@@ -98,14 +102,15 @@ const TargetQuestionChooser = props => {
   const [isSessionView, _setIsSessionView] = useState(false);
   const setIsSessionView = (value, event) => {
     if (event) event.stopPropagation();
+    if (disableBranchingToSession) return;
     _setIsSessionView(value);
   };
-  const canSelectSession = sessionPosition =>
+  const canSelectSession = (sessionPosition) =>
     !sessionBranching ||
     (sessionList[sessionIndex] &&
       sessionPosition > sessionList[sessionIndex].position);
   const isLast = currentIndex === questions.length - 1;
-  const isCurrentSession = session =>
+  const isCurrentSession = (session) =>
     !sessionBranching && sessionId === session.id;
 
   useEffect(() => {
@@ -136,14 +141,16 @@ const TargetQuestionChooser = props => {
   const renderQuestionChooser = (
     <Column data-testid={`${id}-select-target-question`}>
       <Row mb={20}>
-        <Img
-          data-testid={`${id}-select-target-question-interview-view-setter`}
-          data-cy="select-target-question-session-view-setter"
-          src={arrowLeft}
-          mr={10}
-          onClick={event => setIsSessionView(true, event)}
-          clickable
-        />
+        {!disableBranchingToSession && (
+          <Img
+            data-testid={`${id}-select-target-question-interview-view-setter`}
+            data-cy="select-target-question-session-view-setter"
+            src={arrowLeft}
+            mr={10}
+            onClick={(event) => setIsSessionView(true, event)}
+            clickable
+          />
+        )}
         <Img src={presentationProjector} mr={10} />
         <H3>{name}</H3>
       </Row>
@@ -195,7 +202,7 @@ const TargetQuestionChooser = props => {
                   data-cy={`choose-session-${index}`}
                   key={`${id}-select-target-session-${index}`}
                   mb={index !== filteredSessionList.length - 1 ? 15 : 5}
-                  onClick={event => chooseSession(session, event)}
+                  onClick={(event) => chooseSession(session, event)}
                   align="center"
                   clickable={canSelectSession(session.position)}
                 >
@@ -239,9 +246,7 @@ const TargetQuestionChooser = props => {
     <Box width={300}>
       {!sessionBranching && (
         <Box
-          borderBottom={`${borders.borderWidth} ${borders.borderStyle} ${
-            colors.linkWater
-          }`}
+          borderBottom={`${borders.borderWidth} ${borders.borderStyle} ${colors.linkWater}`}
           padded
         >
           <Row
@@ -274,8 +279,8 @@ TargetQuestionChooser.propTypes = {
   intl: PropTypes.object,
   onClick: PropTypes.func.isRequired,
   session: PropTypes.object,
-  questions: PropTypes.arrayOf(PropTypes.shape(Question)),
-  selectedQuestion: PropTypes.shape(Question),
+  questions: PropTypes.arrayOf(PropTypes.object),
+  selectedQuestion: PropTypes.object,
   target: PropTypes.shape({ id: PropTypes.string, type: PropTypes.string }),
   currentIndex: PropTypes.string,
   sessionIndex: PropTypes.number,
@@ -284,6 +289,7 @@ TargetQuestionChooser.propTypes = {
   interventionLoading: PropTypes.bool,
   sessionBranching: PropTypes.bool,
   questionGroups: PropTypes.array,
+  disableBranchingToSession: PropTypes.bool,
 };
 
 const mapStateToProps = createStructuredSelector({

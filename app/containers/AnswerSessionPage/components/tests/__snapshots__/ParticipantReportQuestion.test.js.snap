@@ -1,60 +1,306 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`<ParticipantReport /> Should render and match the snapshot 1`] = `
+.c0 {
+  width: auto;
+  height: auto;
+  display: block;
+  border-radius: 5px;
+  width: 100%;
+  padding: 15px;
+}
+
+.c9 {
+  width: auto;
+  height: auto;
+  display: block;
+  border-radius: 5px;
+}
+
+.c14 {
+  width: auto;
+  height: auto;
+  display: block;
+  border-radius: 5px;
+  width: 100%;
+  padding-top: 14px;
+  padding-bottom: 14px;
+  padding-right: 21px;
+  padding-left: 21px;
+  margin-top: 10px;
+  background-color: rgba(233,241,251,1);
+}
+
+.c2 {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-flex-direction: row;
+  -ms-flex-direction: row;
+  flex-direction: row;
+  height: auto;
+  -webkit-align-content: center;
+  -ms-flex-line-pack: center;
+  align-content: center;
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  margin-top: 20px;
+}
+
+.c3 {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-flex-direction: row;
+  -ms-flex-direction: row;
+  flex-direction: row;
+  height: auto;
+  -webkit-box-pack: justify;
+  -webkit-justify-content: space-between;
+  -ms-flex-pack: justify;
+  justify-content: space-between;
+  justify-items: space-between;
+  -webkit-align-content: center;
+  -ms-flex-line-pack: center;
+  align-content: center;
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+}
+
+.c12 {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-flex-direction: row;
+  -ms-flex-direction: row;
+  flex-direction: row;
+  height: auto;
+  -webkit-align-content: center;
+  -ms-flex-line-pack: center;
+  align-content: center;
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  margin-top: 15px;
+}
+
+.c11 {
+  font-family: DM Sans;
+  font-size: 13px;
+  line-height: 130%;
+  color: #2F3850;
+}
+
+.c1 {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-flex-direction: column;
+  -ms-flex-direction: column;
+  flex-direction: column;
+  width: 100%;
+  -webkit-box-pack: center;
+  -webkit-justify-content: center;
+  -ms-flex-pack: center;
+  justify-content: center;
+  justify-items: center;
+}
+
+.c13 {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-flex-direction: column;
+  -ms-flex-direction: column;
+  flex-direction: column;
+  width: 100%;
+  margin-top: 25px;
+}
+
+.c5 {
+  display: none;
+}
+
+.c4:disabled + label > .c8 {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.c7 {
+  width: 100%;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+}
+
+.c7:hover {
+  cursor: pointer;
+}
+
+.c4:disabled + .c6 {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.c10 {
+  margin-left: 5px;
+}
+
+.c15 {
+  padding: 12px;
+  border-style: solid;
+  border-width: 1px;
+  border-color: #E9F1FB;
+  border-radius: 5px;
+  background-color: transparent;
+  border-color: transparent;
+  width: 100%;
+  color: #2F3850;
+  opacity: 0.5;
+}
+
+.c15:focus {
+  box-shadow: none;
+  outline: none;
+  border-color: #107969;
+}
+
+.c15:disabled {
+  color: #ABBBD1;
+}
+
+@media only screen and (min-width:768px) {
+
+}
+
+@media only screen and (min-width:960px) {
+
+}
+
+@media only screen and (min-width:1170px) {
+
+}
+
+@media only screen and (min-width:1360px) {
+
+}
+
+@media only screen and (min-width:768px) {
+
+}
+
+@media only screen and (min-width:960px) {
+
+}
+
+@media only screen and (min-width:1170px) {
+
+}
+
+@media only screen and (min-width:1360px) {
+
+}
+
 <div>
   <div
-    class="Box-sc-1vhutan-0 eXTwuD"
+    class="c0"
     width="100%"
   >
     <div
-      class="Column-sc-4zswzq-0 bGMBAA"
+      class="c1"
     >
       <div
-        class="Row-y1cs0u-0 goQUzT"
+        class="c2"
       >
-        <img
-          src="IMAGE_MOCK"
-        />
-        <label
-          for="answer-yes"
+        <div
+          class="c3"
         >
-          <p
-            class="Text-e4p0w3-0 fFURPd"
+          <input
+            class="c4 c5"
+            id="answer-yes"
+            type="radio"
+          />
+          <label
+            class="c6 c7"
+            for="answer-yes"
           >
-            Yes
-          </p>
-        </label>
+            <img
+              class="c8 "
+              src="IMAGE_MOCK"
+            />
+            <div
+              class="c9 c10"
+            >
+              <p
+                class="c11"
+              >
+                Yes
+              </p>
+            </div>
+          </label>
+        </div>
       </div>
       <div
-        class="Row-y1cs0u-0 kjTQqN"
+        class="c12"
       >
-        <img
-          src="IMAGE_MOCK"
-        />
-        <label
-          for="answer-no"
+        <div
+          class="c3"
         >
-          <p
-            class="Text-e4p0w3-0 fFURPd"
+          <input
+            class="c4 c5"
+            id="answer-no"
+            type="radio"
+          />
+          <label
+            class="c6 c7"
+            for="answer-no"
           >
-            No
-          </p>
-        </label>
+            <img
+              class="c8 "
+              src="IMAGE_MOCK"
+            />
+            <div
+              class="c9 c10"
+            >
+              <p
+                class="c11"
+              >
+                No
+              </p>
+            </div>
+          </label>
+        </div>
       </div>
       <div
-        class="Column-sc-4zswzq-0 fGhsBV"
+        class="c13"
       >
         <p
-          class="Text-e4p0w3-0 fFURPd"
+          class="c11"
         >
           Please provide your email
         </p>
         <div
-          class="Box-sc-1vhutan-0 BfYRC"
+          class="c14"
           width="100%"
         >
           <input
-            class="Input-t9j2q5-0 cfspKj"
+            aria-label="Email..."
+            class="c15"
             disabled=""
             placeholder="Email..."
             type="text"

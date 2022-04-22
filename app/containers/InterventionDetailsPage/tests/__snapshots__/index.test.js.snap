@@ -1,13 +1,65 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`<InterventionDetailsPage /> Should render loader and match the snapshot 1`] = `
+.c1 {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+  -webkit-justify-content: center;
+  -ms-flex-pack: center;
+  justify-content: center;
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  margin: auto;
+  width: 100px;
+  height: 100px;
+}
+
+.c1:after {
+  content: ' ';
+  display: block;
+  width: 66.66666666666666px;
+  height: 66.66666666666666px;
+  border-radius: 50%;
+  border: 6px solid #B727EA;
+  border-color: #B727EA transparent #B727EA transparent;
+  -webkit-animation: hAjVGa 1.2s linear infinite;
+  animation: hAjVGa 1.2s linear infinite;
+}
+
+.c0 {
+  position: fixed;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  z-index: 1000;
+  -webkit-box-pack: center;
+  -webkit-justify-content: center;
+  -ms-flex-pack: center;
+  justify-content: center;
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  width: 100vw;
+  height: 100vh;
+  left: 0;
+  top: 0;
+  background-color: rgba(255,255,255,0.5);
+}
+
 <div>
   <div
-    class="styled__FillScreenLoader-sc-1aaagww-0 jdsSke"
+    class="c0"
     data-testid="fullscreen-loader"
   >
     <div
-      class="styled__StyledSpinner-sc-129uixn-0 PnEbr"
+      class="c1"
       color="#B727EA"
       size="100"
       width="6"

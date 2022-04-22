@@ -20,6 +20,7 @@ export const TargetList = ({
   sessionBranching,
   setTargetChooserOpen,
   sumPercentages,
+  disableBranchingToSession,
 }) => {
   const { formatMessage } = useIntl();
 
@@ -28,7 +29,7 @@ export const TargetList = ({
       {pattern.target.map((target, targetIndex) => {
         const uniqueTargetIndex = index * 100 + targetIndex;
         const isChooserOpened = uniqueTargetIndex === targetChooserOpen;
-        const updateTarget = newValues =>
+        const updateTarget = (newValues) =>
           onUpdateTarget(questionId, index, targetIndex, {
             ...target,
             ...newValues,
@@ -53,6 +54,7 @@ export const TargetList = ({
             uniqueTargetIndex={uniqueTargetIndex}
             invalidPercentage={sumPercentages !== 100}
             bg={colors.white}
+            disableBranchingToSession={disableBranchingToSession}
           />
         );
       })}
@@ -74,6 +76,7 @@ TargetList.propTypes = {
   setTargetChooserOpen: PropTypes.func,
   sumPercentages: PropTypes.number,
   isOnlyTarget: PropTypes.bool,
+  disableBranchingToSession: PropTypes.bool,
 };
 
 export default memo(TargetList);

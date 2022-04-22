@@ -8,9 +8,17 @@ exports[`<Comment /> should match the snapshot 1`] = `
   color: #2F3850;
 }
 
+.c1 {
+  margin: 0;
+  font-family: DM Sans;
+  font-size: 13px;
+  line-height: 130%;
+  color: #6B707C;
+}
+
 <div>
   <p
-    class="c0"
+    class="c0 c1"
   />
 </div>
 `;

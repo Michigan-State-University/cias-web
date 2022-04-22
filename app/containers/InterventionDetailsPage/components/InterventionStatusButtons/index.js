@@ -10,7 +10,7 @@ import get from 'lodash/get';
 
 import { themeColors } from 'theme';
 
-import ConfirmationBox from 'components/ConfirmationBox';
+import { ConfirmationModal } from 'components/Modal';
 import { LI, UL } from 'components/List';
 import Column from 'components/Column';
 import Divider from 'components/Divider';
@@ -50,7 +50,7 @@ function InterventionStatusButtons({
 
   const CloseButton = () => (
     <>
-      <ConfirmationBox
+      <ConfirmationModal
         visible={closeConfirmationOpen}
         onClose={closeCloseConfirmation}
         description={<FormattedMessage {...messages.closeConfirmationHeader} />}
@@ -141,7 +141,7 @@ function InterventionStatusButtons({
 
   const PublishButton = () => (
     <>
-      <ConfirmationBox
+      <ConfirmationModal
         visible={confirmationOpen}
         onClose={closeConfirmation}
         description={<FormattedMessage {...messages.confirmationTile} />}

@@ -95,6 +95,6 @@ export const ChartStatusToColorMap = {
 
 export const ALLOWED_CHART_EDIT = [ChartStatus.DRAFT];
 
-export const StatusPermissions = status => ({
+export const StatusPermissions = (status) => ({
   canBeEdited: ALLOWED_CHART_EDIT.includes(status),
 });

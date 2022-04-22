@@ -28,7 +28,7 @@ const useAnimationHelper = (
       ({ type }) => type === bodyAnimationType || type === headAnimationType,
     );
     const uniqAnimations = uniqBy(
-      filteredAnimations.filter(block => block.animation),
+      filteredAnimations.filter((block) => block.animation),
       'animation',
     );
 
@@ -67,7 +67,7 @@ const useAnimationHelper = (
 
   const changeAnimation = (nextBlock, nextIndex) => {
     const nextAnim = loadedAnimations.current.find(
-      anim => anim.name === (nextBlock ? nextBlock.animation : undefined),
+      (anim) => anim.name === (nextBlock ? nextBlock.animation : undefined),
     );
     dispatchUpdate({
       currentData: nextAnim,
@@ -105,7 +105,7 @@ const useAnimationHelper = (
   };
 
   const getIdleAnimation = () =>
-    loadedAnimations.current.find(anim => anim.name === 'standStill');
+    loadedAnimations.current.find((anim) => anim.name === 'standStill');
 
   const clearAnimationBlock = () => {
     if (animationRef.current) {

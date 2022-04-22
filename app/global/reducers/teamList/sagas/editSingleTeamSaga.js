@@ -28,7 +28,7 @@ function* editSingleTeam({ payload: { id, name, user: teamAdmin } }) {
         team: objectToSnakeCase(patchDifference),
       });
 
-      const mappedUsers = included.map(user => mapCurrentUser(user));
+      const mappedUsers = included.map((user) => mapCurrentUser(user));
       const mappedData = new TeamBuilder()
         .fromJson(data)
         .withTeamAdmin(

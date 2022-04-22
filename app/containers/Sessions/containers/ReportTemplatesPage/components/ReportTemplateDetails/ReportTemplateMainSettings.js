@@ -29,8 +29,8 @@ import ImageUpload from 'components/ImageUpload';
 import ApprovableInput from 'components/Input/ApprovableInput';
 import Box from 'components/Box';
 import Img from 'components/Img';
+import { ModalType, useModal } from 'components/Modal';
 
-import { ReportTemplate } from 'models/ReportTemplate';
 import { CardBox, Spacer } from '../../styled';
 import { ReportTemplatesContext } from '../../utils';
 import messages from '../../messages';
@@ -63,17 +63,17 @@ const ReportTemplateMainSettings = ({
   const [openCollapsable, setOpenCollapsable] = useState(false);
   const toggleCollapsable = () => setOpenCollapsable(!openCollapsable);
 
-  const onNameChange = name => {
+  const onNameChange = (name) => {
     if (name !== singleReportTemplate.name)
       updateReportTemplate(sessionId, { ...singleReportTemplate, name });
   };
 
-  const onReportForChange = reportFor => {
+  const onReportForChange = (reportFor) => {
     if (reportFor !== singleReportTemplate.reportFor)
       updateReportTemplate(sessionId, { ...singleReportTemplate, reportFor });
   };
 
-  const onLogoChange = logo => {
+  const onLogoChange = (logo) => {
     setIsUploadingImage(true);
     updateReportTemplate(sessionId, singleReportTemplate, logo.image);
   };
@@ -86,17 +86,28 @@ const ReportTemplateMainSettings = ({
     deleteReportTemplate(sessionId, singleReportTemplate.id);
   };
 
-  const onTestDownload = event => {
+  const onTestDownload = (event) => {
     event.preventDefault();
     event.stopPropagation();
 
     generateTestReport(sessionId, singleReportTemplate.id);
   };
 
+  const { openModal: openDeleteModal, Modal: DeleteModal } = useModal({
+    type: ModalType.ConfirmationModal,
+    props: {
+      description: formatMessage(messages.deleteReportTemplateHeader),
+      content: formatMessage(messages.deleteReportTemplateMessage),
+      confirmAction: onDelete,
+    },
+  });
+
   const imageUploading = updateReportTemplateLoading && isUploadingImage;
 
   return (
     <Container style={{ maxWidth: 600 }}>
+      <DeleteModal />
+
       <Row justify="between" align="center">
         <Col>
           <Collapse
@@ -147,42 +158,46 @@ const ReportTemplateMainSettings = ({
                     <Row
                       align="center"
                       style={{ margin: 0, cursor: 'pointer' }}
-                      onClick={() =>
-                        canEdit && onReportForChange(ReportFor.participant)
-                      }
                     >
                       <Radio
+                        id={`report-for-toggle-${ReportFor.participant}`}
                         mr={10}
                         disabled={!canEdit}
                         checked={
                           singleReportTemplate.reportFor ===
                           ReportFor.participant
                         }
-                      />
-                      <Text disabled={!canEdit}>
-                        {formatMessage(messages.settingsReportForParticipant)}
-                      </Text>
+                        onChange={() =>
+                          canEdit && onReportForChange(ReportFor.participant)
+                        }
+                      >
+                        <Text>
+                          {formatMessage(messages.settingsReportForParticipant)}
+                        </Text>
+                      </Radio>
                     </Row>
                   </Col>
                   <Col>
                     <Row
                       align="center"
                       style={{ cursor: canEdit ? 'pointer' : 'initial' }}
-                      onClick={() =>
-                        canEdit && onReportForChange(ReportFor.thirdParty)
-                      }
                     >
                       <Radio
+                        id={`report-for-toggle-${ReportFor.thirdParty}`}
                         mr={10}
                         disabled={!canEdit}
                         checked={
                           singleReportTemplate.reportFor ===
                           ReportFor.thirdParty
                         }
-                      />
-                      <Text disabled={!canEdit}>
-                        {formatMessage(messages.settingsReportFor3rdParty)}
-                      </Text>
+                        onChange={() =>
+                          canEdit && onReportForChange(ReportFor.thirdParty)
+                        }
+                      >
+                        <Text>
+                          {formatMessage(messages.settingsReportFor3rdParty)}
+                        </Text>
+                      </Radio>
                     </Row>
                   </Col>
                 </Row>
@@ -246,7 +261,7 @@ const ReportTemplateMainSettings = ({
                 <Row style={{ marginBottom: 10 }}>
                   <Col>
                     <TextButton
-                      onClick={onDelete}
+                      onClick={openDeleteModal}
                       whiteSpace="nowrap"
                       fontWeight="bold"
                       fontSize={14}
@@ -281,10 +296,7 @@ const mapDispatchToProps = {
   generateTestReport: generateTestReportRequest,
 };
 
-const withConnect = connect(
-  null,
-  mapDispatchToProps,
-);
+const withConnect = connect(null, mapDispatchToProps);
 
 ReportTemplateMainSettings.propTypes = {
   intl: PropTypes.shape(IntlShape),
@@ -293,10 +305,7 @@ ReportTemplateMainSettings.propTypes = {
   deleteReportTemplateLogo: PropTypes.func,
   generateTestReport: PropTypes.func,
   selectTemplate: PropTypes.func,
-  selectedReport: PropTypes.shape(ReportTemplate),
+  selectedReport: PropTypes.object,
 };
 
-export default compose(
-  withConnect,
-  injectIntl,
-)(ReportTemplateMainSettings);
+export default compose(withConnect, injectIntl)(ReportTemplateMainSettings);

@@ -12,14 +12,14 @@ import { enableUserAccessSuccess, enableUserAccessFailure } from '../actions';
 import messages from '../messages';
 
 export function* enableUserAccess({ payload: { id, emails } }) {
-  const requestURL = `v1/interventions/${id}/invitations`;
+  const requestURL = `v1/interventions/${id}/accesses`;
   try {
     const { data } = yield call(axios.post, requestURL, {
       user_session: {
         emails,
       },
     });
-    const users = jsonApiToArray(data, 'invitation');
+    const users = jsonApiToArray(data, 'interventionAccess');
     yield put(enableUserAccessSuccess(users));
   } catch (error) {
     yield call(toast.error, formatMessage(messages.giveUserAccessError), {

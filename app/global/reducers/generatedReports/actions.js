@@ -29,26 +29,26 @@ export const fetchReportsRequest = (
   });
 export const fetchReportsSuccess = (reports, reportsSize) =>
   actionBuilder(FETCH_REPORTS_SUCCESS, { reports, reportsSize });
-export const fetchReportsError = error =>
+export const fetchReportsError = (error) =>
   actionBuilder(FETCH_REPORTS_ERROR, { error });
 
 export const fetchInterventionsRequest = () =>
   actionBuilder(FETCH_INTERVENTIONS_REQUEST, {});
-export const fetchInterventionsSuccess = interventions =>
+export const fetchInterventionsSuccess = (interventions) =>
   actionBuilder(FETCH_INTERVENTIONS_SUCCESS, { interventions });
-export const fetchInterventionsError = error =>
+export const fetchInterventionsError = (error) =>
   actionBuilder(FETCH_INTERVENTIONS_ERROR, { error });
 
 export const fetchLatestReportRequest = () =>
   actionBuilder(FETCH_LATEST_REPORT_REQUEST, {});
-export const fetchLatestReportSuccess = report =>
+export const fetchLatestReportSuccess = (report) =>
   actionBuilder(FETCH_LATEST_REPORT_SUCCESS, { report });
-export const fetchLatestReportError = error =>
+export const fetchLatestReportError = (error) =>
   actionBuilder(FETCH_LATEST_REPORT_ERROR, { error });
 
-export const toggleNotificationsRequest = id =>
+export const toggleNotificationsRequest = (id) =>
   actionBuilder(TOGGLE_NOTIFICATIONS_REQUEST, { id });
 export const toggleNotificationsSuccess = () =>
   actionBuilder(TOGGLE_NOTIFICATIONS_SUCCESS, {});
-export const toggleNotificationsError = error =>
+export const toggleNotificationsError = (error) =>
   actionBuilder(TOGGLE_NOTIFICATIONS_ERROR, { error });

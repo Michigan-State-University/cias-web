@@ -1,37 +1,200 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`<PhoneQuestion /> Should render and match the snapshot 1`] = `
+.c0 {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-flex-direction: column;
+  -ms-flex-direction: column;
+  flex-direction: column;
+  width: 100%;
+  margin-top: 10px;
+}
+
+.c2 {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-flex-direction: column;
+  -ms-flex-direction: column;
+  flex-direction: column;
+  width: 100%;
+}
+
+.c4 {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-flex-direction: column;
+  -ms-flex-direction: column;
+  flex-direction: column;
+  width: 100%;
+  width: 230px;
+  padding-right: 10px;
+}
+
+.c8 {
+  padding: 12px;
+  border-style: solid;
+  border-width: 1px;
+  border-color: #E9F1FB;
+  border-radius: 5px;
+  width: 100%;
+  color: #2F3850;
+  opacity: 0.5;
+}
+
+.c8:focus {
+  box-shadow: none;
+  outline: none;
+  border-color: #107969;
+}
+
+.c8:disabled {
+  color: #ABBBD1;
+}
+
+.c5 {
+  font-family: DM Sans;
+  font-size: 13px;
+  line-height: 130%;
+  margin-bottom: 5px;
+  color: #2F3850;
+  width: -webkit-fit-content;
+  width: -moz-fit-content;
+  width: fit-content;
+}
+
+.c6 {
+  width: auto;
+  height: auto;
+  display: block;
+  border-radius: 5px;
+  opacity: 0.5;
+}
+
+.c7 {
+  width: auto;
+  height: auto;
+  -webkit-transition: -webkit-transform 0.2s;
+  -webkit-transition: transform 0.2s;
+  transition: transform 0.2s;
+}
+
+.c1 {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-flex-direction: row;
+  -ms-flex-direction: row;
+  flex-direction: row;
+  height: auto;
+}
+
+.c3 {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-flex-direction: row;
+  -ms-flex-direction: row;
+  flex-direction: row;
+  height: auto;
+  -webkit-align-content: flex-start;
+  -ms-flex-line-pack: start;
+  align-content: flex-start;
+  -webkit-align-items: flex-start;
+  -webkit-box-align: flex-start;
+  -ms-flex-align: flex-start;
+  align-items: flex-start;
+  width: 100%;
+}
+
+@media only screen and (min-width:768px) {
+
+}
+
+@media only screen and (min-width:960px) {
+
+}
+
+@media only screen and (min-width:1170px) {
+
+}
+
+@media only screen and (min-width:1360px) {
+
+}
+
+@media only screen and (min-width:768px) {
+
+}
+
+@media only screen and (min-width:960px) {
+
+}
+
+@media only screen and (min-width:1170px) {
+
+}
+
+@media only screen and (min-width:1360px) {
+
+}
+
+@media only screen and (min-width:768px) {
+
+}
+
+@media only screen and (min-width:960px) {
+
+}
+
+@media only screen and (min-width:1170px) {
+
+}
+
+@media only screen and (min-width:1360px) {
+
+}
+
 <div
-  class="Column-sc-4zswzq-0 fgvXEf"
+  class="c0"
 >
   <div
-    class="Row-y1cs0u-0 dskFsL"
+    class="c1"
   >
     <div
-      class="Column-sc-4zswzq-0 ekpwZH"
+      class="c2"
     >
       <div
-        class="Row-y1cs0u-0 hqAUhv"
+        class="c3"
         data-private="true"
         width="100%"
       >
         <div
-          class="Column-sc-4zswzq-0 HRVgp"
+          class="c4"
           width="230"
         >
           <label
             for="iso"
           >
             <p
-              class="Text-e4p0w3-0 kFFPgx"
+              class="c5"
               width="fit-content"
             >
               Phone prefix
             </p>
           </label>
           <div
-            class="Box-sc-1vhutan-0 dvfkZg"
+            class="c6"
             data-testid="select"
+            disabled=""
           >
             <div
               class=" css-14jk2my-container"
@@ -88,7 +251,7 @@ exports[`<PhoneQuestion /> Should render and match the snapshot 1`] = `
                   >
                     <img
                       alt="arrow"
-                      class="Img-sc-55j3su-0 gTKGj"
+                      class="c7"
                       src="IMAGE_MOCK"
                       transform=""
                     />
@@ -99,21 +262,21 @@ exports[`<PhoneQuestion /> Should render and match the snapshot 1`] = `
           </div>
         </div>
         <div
-          class="Column-sc-4zswzq-0 ekpwZH"
+          class="c2"
           value=""
         >
           <label
             for="number"
           >
             <p
-              class="Text-e4p0w3-0 kFFPgx"
+              class="c5"
               width="fit-content"
             >
               Phone number
             </p>
           </label>
           <input
-            class="Input-t9j2q5-0 dbKITh"
+            class="c8"
             disabled=""
             id="number"
             name="number"

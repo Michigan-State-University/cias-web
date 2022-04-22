@@ -28,7 +28,10 @@ const branching = {
 const answerOptions = [
   {
     title: 'Question 1',
-    options: [{ name: 'q11', score: 1 }, { name: 'q12', score: 2 }],
+    options: [
+      { name: 'q11', score: 1 },
+      { name: 'q12', score: 2 },
+    ],
   },
   {
     title: 'Question 2',

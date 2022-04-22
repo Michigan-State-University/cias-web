@@ -6,10 +6,10 @@
 
 import React from 'react';
 import { Provider } from 'react-redux';
-import { render } from '@testing-library/react';
 
 import { reflectionType, bodyAnimationType } from 'models/Narrator/BlockTypes';
 import { instantiateBlockForType } from 'models/Session/utils';
+import { testRender } from 'utils/testUtils';
 import { formatMessage } from 'utils/intlOutsideReact';
 import { createTestStore } from 'utils/testUtils/storeUtils';
 
@@ -57,7 +57,7 @@ describe('<ReflectionBlock />', () => {
 
   it('Expect to not log errors in console', () => {
     const spy = jest.spyOn(global.console, 'error');
-    render(
+    testRender(
       <Provider store={store}>
         <ReflectionFormula {...defaultProps} />
       </Provider>,
@@ -66,7 +66,7 @@ describe('<ReflectionBlock />', () => {
   });
 
   it('Should render and match the snapshot', () => {
-    const { container } = render(
+    const { container } = testRender(
       <Provider store={store}>
         <ReflectionFormula {...defaultProps} />
       </Provider>,

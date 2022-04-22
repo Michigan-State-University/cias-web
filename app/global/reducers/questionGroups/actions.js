@@ -16,7 +16,6 @@ import {
   GET_QUESTION_GROUPS_REQUEST,
   GET_QUESTION_GROUPS_SUCCESS,
   GET_QUESTION_GROUPS_ERROR,
-  CREATE_QUESTION_IN_GROUP,
   REORDER_GROUP_LIST_REQUEST,
   REORDER_GROUP_LIST_SUCCESS,
   REORDER_GROUP_LIST_ERROR,
@@ -28,14 +27,14 @@ export const copyQuestionsRequest = (questionIds, sessionId) =>
   actionBuilder(COPY_QUESTIONS_REQUEST, { questionIds, sessionId });
 export const copyQuestionsSuccess = (questions, group) =>
   actionBuilder(COPY_QUESTIONS_SUCCESS, { questions, group });
-export const copyQuestionsError = error =>
+export const copyQuestionsError = (error) =>
   actionBuilder(COPY_QUESTIONS_ERROR, { error });
 
 export const groupQuestionsRequest = (questionIds, sessionId) =>
   actionBuilder(GROUP_QUESTIONS_REQUEST, { questionIds, sessionId });
 export const groupQuestionsSuccess = (group, questionIds) =>
   actionBuilder(GROUP_QUESTIONS_SUCCESS, { group, questionIds });
-export const groupQuestionsError = error =>
+export const groupQuestionsError = (error) =>
   actionBuilder(GROUP_QUESTIONS_ERROR, { error });
 
 export const shareQuestionsToResearchersRequest = (
@@ -48,34 +47,31 @@ export const shareQuestionsToResearchersRequest = (
   });
 export const shareQuestionsToResearchersSuccess = () =>
   actionBuilder(SHARE_QUESTIONS_TO_RESEARCHERS_SUCCESS, {});
-export const shareQuestionsToResearchersError = error =>
+export const shareQuestionsToResearchersError = (error) =>
   actionBuilder(SHARE_QUESTIONS_TO_RESEARCHERS_ERROR, { error });
 
 export const changeGroupNameRequest = (title, sessionId, groupId) =>
   actionBuilder(CHANGE_GROUP_NAME_REQUEST, { title, sessionId, groupId });
 export const changeGroupNameSuccess = () =>
   actionBuilder(CHANGE_GROUP_NAME_SUCCESS, {});
-export const changeGroupNameError = error =>
+export const changeGroupNameError = (error) =>
   actionBuilder(CHANGE_GROUP_NAME_ERROR, { error });
 
-export const getQuestionGroupsRequest = sessionId =>
-  actionBuilder(GET_QUESTION_GROUPS_REQUEST, { sessionId });
-export const getQuestionGroupsSuccess = groups =>
+export const getQuestionGroupsRequest = (sessionId, questionToSelectId) =>
+  actionBuilder(GET_QUESTION_GROUPS_REQUEST, { sessionId, questionToSelectId });
+export const getQuestionGroupsSuccess = (groups) =>
   actionBuilder(GET_QUESTION_GROUPS_SUCCESS, { groups });
-export const getQuestionGroupsError = error =>
+export const getQuestionGroupsError = (error) =>
   actionBuilder(GET_QUESTION_GROUPS_ERROR, { error });
 
-export const createNewQuestionInGroup = (question, groupId) =>
-  actionBuilder(CREATE_QUESTION_IN_GROUP, { question, groupId });
-
-export const reorderGroupListRequest = payload =>
+export const reorderGroupListRequest = (payload) =>
   actionBuilder(REORDER_GROUP_LIST_REQUEST, payload);
 export const reorderGroupListSuccess = () =>
   actionBuilder(REORDER_GROUP_LIST_SUCCESS, {});
-export const reorderGroupListError = error =>
+export const reorderGroupListError = (error) =>
   actionBuilder(REORDER_GROUP_LIST_ERROR, { error });
 
-export const cleanGroups = questions =>
+export const cleanGroups = (questions) =>
   actionBuilder(CLEAN_GROUPS, { questions });
 
 export const duplicateGroupsInternallyRequest = (questionIds, sessionId) =>

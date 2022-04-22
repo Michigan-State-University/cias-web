@@ -10,13 +10,13 @@ import { EMPTY_OBJECT } from './constants';
 const Component = ({ items, selector, onDragEnd, onDragStart, children }) => {
   const [draggableIem, setDraggableItem] = useState(null);
 
-  const handleDragStart = e => {
+  const handleDragStart = (e) => {
     setDraggableItem(e.active.data.current);
 
     if (onDragStart) onDragStart(e);
   };
 
-  const handleDragEnd = e => {
+  const handleDragEnd = (e) => {
     const { active, over } = e;
 
     const { items: reorderedItems, hasChanged } = reorderItems(
@@ -30,10 +30,10 @@ const Component = ({ items, selector, onDragEnd, onDragStart, children }) => {
     onDragEnd(e, reorderedItems, hasChanged);
   };
 
-  const ids = useMemo(() => items.map(item => selectId(item, selector)), [
-    items,
-    selector,
-  ]);
+  const ids = useMemo(
+    () => items.map((item) => selectId(item, selector)),
+    [items, selector],
+  );
 
   return (
     <DndContext

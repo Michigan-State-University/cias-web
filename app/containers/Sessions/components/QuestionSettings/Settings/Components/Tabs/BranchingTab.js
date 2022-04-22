@@ -5,6 +5,7 @@ import { connect } from 'react-redux';
 import { createStructuredSelector } from 'reselect';
 import { FormattedMessage, injectIntl } from 'react-intl';
 import { withRouter } from 'react-router-dom';
+import { useInjectReducer, useInjectSaga } from 'redux-injectors';
 
 import BoxCollapse from 'components/BoxCollapse';
 import Row from 'components/Row';
@@ -13,12 +14,10 @@ import Text from 'components/Text';
 import PlusCircle from 'components/Circle/PlusCircle';
 import HoverableBox from 'components/Box/HoverableBox';
 import BranchingLayout from 'containers/BranchingLayout';
-import Session from 'models/Session/Session';
-import Question from 'models/Session/Question';
+
 import { questionType } from 'models/Session/QuestionTypes';
 import { htmlToPlainText } from 'utils/htmlToPlainText';
 import { makeSelectQuestions } from 'global/reducers/questions';
-import { useInjectReducer, useInjectSaga } from 'redux-injectors';
 
 import { findQuestionIndex, findInterventionIndex } from 'models/Session/utils';
 import {
@@ -62,6 +61,7 @@ const BranchingTab = ({
   onAddTarget,
   onUpdateTarget,
   onRemoveTarget,
+  disableBranchingToSession,
   onAddFormula,
   onRemoveFormula,
   onDuplicateFormula,
@@ -78,7 +78,7 @@ const BranchingTab = ({
     fetchIntervention(interventionId);
   }, []);
 
-  const displayPatternTargetText = target => {
+  const displayPatternTargetText = (target) => {
     if (!target) return formatMessage(messages.selectQuestion);
     const isQuestionType = target.type.startsWith(questionType);
 
@@ -90,16 +90,18 @@ const BranchingTab = ({
       if (isQuestionType)
         return htmlToPlainText(questions[targetIndex].subtitle);
 
-      return sessionList[targetIndex].name;
+      return disableBranchingToSession
+        ? formatMessage(messages.selectQuestion)
+        : sessionList[targetIndex].name;
     }
 
     return formatMessage(messages.selectQuestion);
   };
 
-  const extraIcon = index => (
+  const extraIcon = (index) => (
     <ImageButton
       src={copy}
-      onClick={e => {
+      onClick={(e) => {
         e.stopPropagation();
         e.preventDefault();
         onDuplicateFormula(id, index);
@@ -186,9 +188,9 @@ BranchingTab.propTypes = {
   onUpdateCase: PropTypes.func,
   onAddFormula: PropTypes.func,
   onRemoveFormula: PropTypes.func,
-  questions: PropTypes.arrayOf(PropTypes.shape(Question)),
+  questions: PropTypes.arrayOf(PropTypes.object),
   intervention: PropTypes.shape({
-    sessions: PropTypes.arrayOf(PropTypes.shape(Session)),
+    sessions: PropTypes.arrayOf(PropTypes.object),
   }),
   fetchIntervention: PropTypes.func,
   onAddTarget: PropTypes.func,
@@ -197,6 +199,7 @@ BranchingTab.propTypes = {
   onDuplicateFormula: PropTypes.func,
   match: PropTypes.object,
   disabled: PropTypes.bool,
+  disableBranchingToSession: PropTypes.bool,
 };
 
 const mapStateToProps = createStructuredSelector({
@@ -218,14 +221,6 @@ const mapDispatchToProps = {
   onDuplicateFormula: duplicateFormula,
 };
 
-const withConnect = connect(
-  mapStateToProps,
-  mapDispatchToProps,
-);
+const withConnect = connect(mapStateToProps, mapDispatchToProps);
 
-export default injectIntl(
-  compose(
-    withConnect,
-    withRouter,
-  )(BranchingTab),
-);
+export default injectIntl(compose(withConnect, withRouter)(BranchingTab));

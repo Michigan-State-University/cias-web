@@ -240,7 +240,7 @@ exports[`<QuestionListItem /> should match the snapshot 1`] = `
     width="100%"
   >
     <div
-      class="HoverableBox-zvip6a-0 c1 "
+      class="c1 "
       width="100%"
     >
       <div

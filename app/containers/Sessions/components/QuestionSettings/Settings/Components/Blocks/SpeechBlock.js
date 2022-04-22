@@ -11,7 +11,8 @@ import Box from 'components/Box';
 import Column from 'components/Column';
 import Row from 'components/Row';
 import Select from 'components/Select';
-import Switch from 'components/Switch';
+import { FullWidthSwitch } from 'components/Switch';
+import OriginalTextHover from 'components/OriginalTextHover';
 import {
   makeSelectLoader,
   makeSelectSelectedQuestionType,
@@ -72,7 +73,7 @@ const SpeechBlock = ({
   const selectOptions = useMemo(() => {
     const animations = keys(speechAnimations);
 
-    return animations.map(animation => ({
+    return animations.map((animation) => ({
       value: animation,
       label: formatMessage(animationMessages[animation]),
     }));
@@ -80,16 +81,16 @@ const SpeechBlock = ({
 
   const feedbackOptions = useMemo(() => {
     const options = values(feedbackActions).filter(
-      action => action !== feedbackActions.showSpectrum,
+      (action) => action !== feedbackActions.showSpectrum,
     );
 
-    return options.map(option => ({
+    return options.map((option) => ({
       value: option,
       label: formatMessage(messages[option]),
     }));
   }, [feedbackActions]);
 
-  const handleTextUpdate = value =>
+  const handleTextUpdate = (value) =>
     updateText(blockIndex, splitAndKeep(value, [',', '.', '?', '!']), id);
 
   useEffect(() => {
@@ -103,18 +104,18 @@ const SpeechBlock = ({
     setIsPlaying(!isPlaying);
   };
 
-  const handleBlur = value => {
+  const handleBlur = (value) => {
     setIsSpeechUpdating(true);
     handleTextUpdate(value);
     setHasFocus(false);
   };
 
   const selectedOption = selectOptions.find(
-    option => option.value === block.animation,
+    (option) => option.value === block.animation,
   );
 
   const selectedFeedbackOption = feedbackOptions.find(
-    option => option.value === block.action,
+    (option) => option.value === block.action,
   );
 
   const hasSpecialPositioning = block.action !== feedbackActions.noAction;
@@ -157,25 +158,39 @@ const SpeechBlock = ({
       {block.type !== readQuestionBlockType && (
         <>
           <Row mt={15} align="center" justify="between">
-            {formatMessage(messages.reflectionToggle)}
-            <Switch
+            <FullWidthSwitch
+              id="reflection-toggle"
               disabled={disabled}
               mr={15}
               onToggle={() => switchToReflection(blockIndex, id)}
-            />
+            >
+              {formatMessage(messages.reflectionToggle)}
+            </FullWidthSwitch>
           </Row>
-          <SpeechInput
-            formatMessage={formatMessage}
-            disabled={disabled}
-            text={text}
-            handleBlur={handleBlur}
-            handleButtonClick={handleButtonClick}
-            hasFocus={hasFocus}
-            isPlaying={isPlaying}
-            isSpeechUpdating={isSpeechUpdating}
-            setHasFocus={setHasFocus}
-            nameQuestionExists={nameQuestionExists}
-          />
+          <OriginalTextHover
+            id={`question-${id}-speech-block-${blockIndex}`}
+            text={block.original_text?.[0]}
+            align="end"
+            position="relative"
+            iconProps={{
+              position: 'absolute',
+              right: 54,
+              bottom: 12,
+            }}
+          >
+            <SpeechInput
+              formatMessage={formatMessage}
+              disabled={disabled}
+              text={text}
+              handleBlur={handleBlur}
+              handleButtonClick={handleButtonClick}
+              hasFocus={hasFocus}
+              isPlaying={isPlaying}
+              isSpeechUpdating={isSpeechUpdating}
+              setHasFocus={setHasFocus}
+              nameQuestionExists={nameQuestionExists}
+            />
+          </OriginalTextHover>
         </>
       )}
     </Column>
@@ -190,6 +205,7 @@ SpeechBlock.propTypes = {
     action: PropTypes.string,
     text: PropTypes.arrayOf(PropTypes.string),
     audio_urls: PropTypes.arrayOf(PropTypes.string),
+    original_text: PropTypes.arrayOf(PropTypes.string),
   }),
   id: PropTypes.string,
   blockIndex: PropTypes.number,
@@ -233,9 +249,6 @@ const mapDispatchToProps = {
     ),
 };
 
-const withConnect = connect(
-  mapStateToProps,
-  mapDispatchToProps,
-);
+const withConnect = connect(mapStateToProps, mapDispatchToProps);
 
 export default compose(withConnect)(SpeechBlock);

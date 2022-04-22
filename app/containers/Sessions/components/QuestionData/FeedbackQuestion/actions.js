@@ -17,7 +17,7 @@ export const updateFormula = (value, questionId) =>
     data: { value, questionId },
   });
 
-export const addFormulaCase = questionId =>
+export const addFormulaCase = (questionId) =>
   updateQuestionData({
     type: ADD_FORMULA_CASE,
     data: { questionId },

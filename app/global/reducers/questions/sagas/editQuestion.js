@@ -39,16 +39,16 @@ const validateVariable = (payload, question, variables) => {
   }
   const duplicateError = new Error(formatMessage(messages.duplicateVariable));
 
-  const checkAgainstExisting = name => {
+  const checkAgainstExisting = (name) => {
     if (hasDuplicates(variables, name)) throw duplicateError;
   };
 
   if (question.type === multiQuestion.id) {
-    question.body.data.forEach(element => {
+    question.body.data.forEach((element) => {
       checkAgainstExisting(element.variable.name);
     });
   } else if (question.type === gridQuestion.id) {
-    question.body.data[0].payload.rows.forEach(element => {
+    question.body.data[0].payload.rows.forEach((element) => {
       checkAgainstExisting(element.variable.name);
     });
   } else {
@@ -75,7 +75,7 @@ function* editQuestion({ payload }) {
 
   const questions = yield select(makeSelectQuestions());
   const variables = getEditVariables(questions).filter(
-    currentVariable => currentVariable && currentVariable.trim(),
+    (currentVariable) => currentVariable && currentVariable.trim(),
   );
 
   try {
@@ -89,9 +89,7 @@ function* editQuestion({ payload }) {
 
   yield call(toast.dismiss, EDIT_QUESTION_ERROR);
 
-  const requestURL = `v1/question_groups/${
-    question.question_group_id
-  }/questions/${question.id}`;
+  const requestURL = `v1/question_groups/${question.question_group_id}/questions/${question.id}`;
   try {
     const response = yield axios.patch(requestURL, {
       question: diff,

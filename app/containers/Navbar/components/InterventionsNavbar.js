@@ -43,6 +43,7 @@ import {
 import { redirectToPreview } from 'containers/AnswerSessionPage/actions';
 import { makeSelectInterventionStatus } from 'global/reducers/intervention';
 import { canEdit, canPreview } from 'models/Status/statusPermissions';
+import { SessionTypes } from 'models/Session';
 import messages from './messages';
 import {
   StyledLink,
@@ -60,6 +61,7 @@ const getActiveTab = (path, formatMessage) => {
     return formatMessage(messages.generatedReports);
   if (path.includes('/sms-messaging'))
     return formatMessage(messages.smsMessaging);
+  if (path.includes('/map')) return formatMessage(messages.sessionMap);
   return formatMessage(messages.sharing);
 };
 
@@ -70,6 +72,7 @@ const InterventionNavbar = ({
     smsPlansCount,
     generatedReportCount,
     interventionOwnerId,
+    type,
   },
   reportsLoaders: { updateReportTemplateLoading },
   textLoaders,
@@ -90,6 +93,8 @@ const InterventionNavbar = ({
   const { interventionId, sessionId } = params;
 
   const canAccessGeneratedReports = interventionOwnerId === userId;
+
+  const isClassicSession = type === SessionTypes.CLASSIC_SESSION;
 
   useInjectSaga({ key: 'editSession', saga: editSessionSaga });
   const [tabActive, setTabActive] = useState(
@@ -112,7 +117,8 @@ const InterventionNavbar = ({
     setTabActive(getActiveTab(pathname, formatMessage));
   }, [pathname]);
 
-  const previewDisabled = !questionsLength || !canPreview(interventionStatus);
+  const previewDisabled =
+    !questionsLength || !canPreview(interventionStatus) || !isClassicSession;
 
   const editingPossible = canEdit(interventionStatus);
 
@@ -136,6 +142,7 @@ const InterventionNavbar = ({
         <ActionIcon
           to={`/interventions/${interventionId}`}
           iconSrc={backButton}
+          ariaText={formatMessage(messages.goBackToDetails)}
         />
 
         <StyledInput
@@ -146,7 +153,7 @@ const InterventionNavbar = ({
           value={name}
           fontSize={23}
           placeholder={formatMessage(messages.placeholder)}
-          onBlur={val =>
+          onBlur={(val) =>
             updateSessionName({ path: 'name', value: val }, ['name'])
           }
           onFocus={selectInputText}
@@ -180,27 +187,29 @@ const InterventionNavbar = ({
             </StyledLink>
           }
         />
-        <div
-          linkMatch={formatMessage(messages.reportTemplates)}
-          renderAsLink={
-            <StyledLink
-              to={`/interventions/${interventionId}/sessions/${sessionId}/report-templates`}
-            >
-              <Row style={{ lineHeight: 'normal' }} align="end">
-                {formatMessage(messages.reportTemplates)}
-                <Circle
-                  bg={themeColors.secondary}
-                  color={colors.white}
-                  size="20px"
-                  child={reportTemplatesCount ?? 0}
-                  fontSize={11}
-                  ml={5}
-                />
-              </Row>
-            </StyledLink>
-          }
-        />
-        {canAccessGeneratedReports && (
+        {isClassicSession && (
+          <div
+            linkMatch={formatMessage(messages.reportTemplates)}
+            renderAsLink={
+              <StyledLink
+                to={`/interventions/${interventionId}/sessions/${sessionId}/report-templates`}
+              >
+                <Row style={{ lineHeight: 'normal' }} align="end">
+                  {formatMessage(messages.reportTemplates)}
+                  <Circle
+                    bg={themeColors.secondary}
+                    color={colors.white}
+                    size="20px"
+                    child={reportTemplatesCount ?? 0}
+                    fontSize={11}
+                    ml={5}
+                  />
+                </Row>
+              </StyledLink>
+            }
+          />
+        )}
+        {canAccessGeneratedReports && isClassicSession && (
           <div
             linkMatch={formatMessage(messages.generatedReports)}
             renderAsLink={
@@ -222,26 +231,39 @@ const InterventionNavbar = ({
             }
           />
         )}
-        <div
-          linkMatch={formatMessage(messages.smsMessaging)}
-          renderAsLink={
-            <StyledLink
-              to={`/interventions/${interventionId}/sessions/${sessionId}/sms-messaging`}
-            >
-              <Row align="end">
-                {formatMessage(messages.smsMessaging)}
-                <Circle
-                  bg={themeColors.secondary}
-                  color={colors.white}
-                  size="20px"
-                  fontSize={11}
-                  ml={5}
-                  child={textMessagesCountValue}
-                />
-              </Row>
-            </StyledLink>
-          }
-        />
+        {isClassicSession && (
+          <div
+            linkMatch={formatMessage(messages.smsMessaging)}
+            renderAsLink={
+              <StyledLink
+                to={`/interventions/${interventionId}/sessions/${sessionId}/sms-messaging`}
+              >
+                <Row align="end">
+                  {formatMessage(messages.smsMessaging)}
+                  <Circle
+                    bg={themeColors.secondary}
+                    color={colors.white}
+                    size="20px"
+                    fontSize={11}
+                    ml={5}
+                    child={textMessagesCountValue}
+                  />
+                </Row>
+              </StyledLink>
+            }
+          />
+        )}
+        {isClassicSession && (
+          <div
+            renderAsLink={
+              <StyledLink
+                to={`/interventions/${interventionId}/sessions/${sessionId}/map`}
+              >
+                {formatMessage(messages.sessionMap)}
+              </StyledLink>
+            }
+          />
+        )}
       </Tabs>
       <Box display="flex" align="center">
         <SaveInfoContainer>
@@ -256,7 +278,7 @@ const InterventionNavbar = ({
               style={{ display: 'flex', alignItems: 'center' }}
             >
               <CheckBackground>
-                <Img src={check} />
+                <Img src={check} role="presentation" />
               </CheckBackground>
               <FormattedMessage {...messages.saved} />
             </SaveInfoContainer>
@@ -280,6 +302,7 @@ InterventionNavbar.propTypes = {
     id: PropTypes.string,
     interventionOwnerId: PropTypes.string,
     generatedReportCount: PropTypes.number,
+    type: PropTypes.string,
   }),
   updateSessionName: PropTypes.func,
   intl: PropTypes.shape(IntlShape),
@@ -317,9 +340,6 @@ const mapDispatchToProps = {
   redirectToPreviewAction: redirectToPreview,
 };
 
-export default compose(
-  connect(
-    mapStateToProps,
-    mapDispatchToProps,
-  ),
-)(InterventionNavbar);
+export default compose(connect(mapStateToProps, mapDispatchToProps))(
+  InterventionNavbar,
+);

@@ -4,7 +4,6 @@ export {
   shareQuestionsToResearchersRequest,
   changeGroupNameRequest,
   getQuestionGroupsRequest,
-  createNewQuestionInGroup,
   reorderGroupListRequest,
   cleanGroups,
   duplicateGroupsInternallyRequest,
@@ -16,6 +15,7 @@ export {
   makeSelectGetQuestionGroupLoader,
   makeSelectQuestionGroupsIds,
   makeSelectQuestionGroupsSessionId,
+  makeSelectGetQuestionGroupError,
 } from './selectors';
 export {
   copyQuestionsSaga,

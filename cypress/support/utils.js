@@ -11,7 +11,7 @@ export const answerQuestionByType = ({ type, answer }) => {
   }
 };
 
-export const singleQuestionDetails = answers => questionIndex => {
+export const singleQuestionDetails = (answers) => (questionIndex) => {
   const { title, options } = answers[questionIndex];
   cy.get('p')
     .contains('Enter main text/question for screen here')

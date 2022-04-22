@@ -55,7 +55,7 @@ const Reflection = ({
     if (previewData.type !== speechType) setIsPlaying(false);
   }, [previewData]);
 
-  const handleTextUpdate = value =>
+  const handleTextUpdate = (value) =>
     updateText(
       blockIndex,
       reflectionIndex,
@@ -80,7 +80,7 @@ const Reflection = ({
     setIsPlaying(!isPlaying);
   };
 
-  const handleBlur = value => {
+  const handleBlur = (value) => {
     setIsSpeechUpdating(true);
     handleTextUpdate(value);
     setHasFocus(false);
@@ -150,9 +150,6 @@ const mapDispatchToProps = {
   updateNarratorPreviewAnimation: updatePreviewAnimation,
 };
 
-const withConnect = connect(
-  mapStateToProps,
-  mapDispatchToProps,
-);
+const withConnect = connect(mapStateToProps, mapDispatchToProps);
 
 export default compose(withConnect)(Reflection);

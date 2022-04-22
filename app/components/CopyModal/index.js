@@ -35,7 +35,7 @@ const CopyModal = ({
   defaultView,
   interventionStatusFilter,
 }) => {
-  const handleCopy = target => {
+  const handleCopy = (target) => {
     copyAction(target);
     onClose();
   };

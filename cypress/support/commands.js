@@ -97,11 +97,8 @@ Cypress.Commands.add(
   'populateSessionWithQuestions',
   (questionTypesToPopulate = questionTypes, options) => {
     const mergedOptions = { ...defaultOptions, ...options };
-    const {
-      variablePrefix,
-      questionDetails,
-      removeReadQuestionBlock,
-    } = mergedOptions;
+    const { variablePrefix, questionDetails, removeReadQuestionBlock } =
+      mergedOptions;
     forEach(questionTypesToPopulate, (questionType, questionIndex) => {
       cy.getBySel('add-screen-button').click({ force: true });
       cy.getBySel('question-type-chooser').within(() => {
@@ -113,9 +110,7 @@ Cypress.Commands.add(
         cy.get('input[placeholder="Variable name..."]').each(
           ($input, inputIndex) => {
             if (questionIndex === inputIndex) {
-              cy.wrap($input)
-                .clear()
-                .type(`${variablePrefix}${questionIndex}`);
+              cy.wrap($input).clear().type(`${variablePrefix}${questionIndex}`);
             }
           },
         );
@@ -134,20 +129,20 @@ Cypress.Commands.add('dismissAllToasts', () => {
 });
 
 Cypress.Commands.add('answerPage', () => {
-  cy.url().then(url => {
+  cy.url().then((url) => {
     if (url.includes('/edit')) {
       cy.wrap(url.replace('edit', 'fill')).as('answerPageUrl');
     }
-    cy.get('@answerPageUrl').then(answerUrl => cy.visit(answerUrl));
+    cy.get('@answerPageUrl').then((answerUrl) => cy.visit(answerUrl));
   });
 });
 
-Cypress.Commands.add('answerQuestions', answers => {
+Cypress.Commands.add('answerQuestions', (answers) => {
   cy.answerPage().then(() => {
     cy.contains('Start session')
       .click({ force: true })
       .then(() => {
-        answers.forEach(answer => {
+        answers.forEach((answer) => {
           answerQuestionByType(answer);
           cy.getBySel('continue-button').click();
           cy.wait([ANSWER_QUESTION]);
@@ -156,27 +151,22 @@ Cypress.Commands.add('answerQuestions', answers => {
   });
 });
 
-Cypress.Commands.add('createAlias', alias => {
+Cypress.Commands.add('createAlias', (alias) => {
   const { METHOD, URL, ALIAS } = ALIASES[alias];
 
   cy.route(METHOD, URL).as(ALIAS);
 });
 
-Cypress.Commands.add('openSettingsTab', index =>
+Cypress.Commands.add('openSettingsTab', (index) =>
   cy.getBySel('settings-panel').within(() => {
-    cy.getBySel('tabs')
-      .children()
-      .eq(index)
-      .click();
+    cy.getBySel('tabs').children().eq(index).click();
   }),
 );
 
 Cypress.Commands.add('setUpBranching', (formula, cases) => {
   cy.openSettingsTab(2);
 
-  cy.getBySel('text-area')
-    .type(formula)
-    .blur();
+  cy.getBySel('text-area').type(formula).blur();
 
   cases.forEach(({ sign, value, screen, session }, index) => {
     cy.contains('Add case').click();
@@ -189,9 +179,7 @@ Cypress.Commands.add('setUpBranching', (formula, cases) => {
       .click({ force: true });
     cy.wait([UPDATE_QUESTION]);
 
-    cy.getBySel('case-value-input')
-      .last()
-      .type(value);
+    cy.getBySel('case-value-input').last().type(value);
     cy.wait([UPDATE_QUESTION]);
 
     cy.getBySel(`select-question-${index}`).click({ force: true });
@@ -201,12 +189,8 @@ Cypress.Commands.add('setUpBranching', (formula, cases) => {
     if (!isNullOrUndefined(screen)) {
       const { group, title } = screen;
 
-      cy.getBySel(`"select-group-branching-${group}"`)
-        .last()
-        .click();
-      cy.getBySel(`"choose-question-${title}"`)
-        .last()
-        .click();
+      cy.getBySel(`"select-group-branching-${group}"`).last().click();
+      cy.getBySel(`"choose-question-${title}"`).last().click();
       cy.wait([UPDATE_QUESTION]);
     } else if (!isNullOrUndefined(session)) {
       const { index: sessionIndex } = session;
@@ -220,7 +204,7 @@ Cypress.Commands.add('setUpBranching', (formula, cases) => {
   });
 });
 
-Cypress.Commands.add('removeBlock', index => {
+Cypress.Commands.add('removeBlock', (index) => {
   cy.getBySel('narrator-blocks').within(() => {
     cy.getBySel(`accordion-element-delete-${index}`).click();
     cy.wait([UPDATE_QUESTION]);

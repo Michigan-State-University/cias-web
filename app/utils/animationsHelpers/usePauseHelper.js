@@ -10,8 +10,8 @@ const usePauseHelper = (
   /**
    * @param {number} time in `seconds`
    */
-  const pauseCharacter = async time =>
-    new Promise(r => setTimeout(r, time * 1000));
+  const pauseCharacter = async (time) =>
+    new Promise((r) => setTimeout(r, time * 1000));
 
   const handlePauseBlock = async () => {
     const { pauseDuration } = currentData;

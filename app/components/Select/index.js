@@ -15,7 +15,7 @@ import Box from 'components/Box';
 import { DropdownIndicator, Option } from './components';
 
 const customStyles = ({ isMulti, bg, isDisabled, height }) => ({
-  control: provided => ({
+  control: (provided) => ({
     ...provided,
     borderWidth: '1px',
     borderRadius: '5px',
@@ -30,24 +30,24 @@ const customStyles = ({ isMulti, bg, isDisabled, height }) => ({
     },
     cursor: isDisabled ? 'not-allowed' : 'pointer',
   }),
-  option: provided => ({
+  option: (provided) => ({
     ...provided,
     cursor: isDisabled ? 'not-allowed' : 'pointer',
   }),
-  menuPortal: provided => ({ ...provided, zIndex: 999 }),
-  placeholder: provided => ({
+  menuPortal: (provided) => ({ ...provided, zIndex: 999 }),
+  placeholder: (provided) => ({
     ...provided,
     color: 'hsl(0, 0%, 40%)',
   }),
 });
 
-const customComponents = isMulti => ({
+const customComponents = (isMulti) => ({
   IndicatorSeparator: () => null,
-  DropdownIndicator: props => <DropdownIndicator {...props} />,
+  DropdownIndicator: (props) => <DropdownIndicator {...props} />,
   LoadingIndicator: () => null,
   ...(isMulti
     ? {
-        Option: props => <Option {...props} />,
+        Option: (props) => <Option {...props} />,
       }
     : {}),
 });

@@ -1,6 +1,6 @@
 import PropTypes from 'prop-types';
 
-const positioning = props => ({
+const positioning = (props) => ({
   left: props.left ?? '',
   top: props.top ?? '',
   right: props.right ?? '',
@@ -14,7 +14,7 @@ positioning.propTypes = {
   bottom: PropTypes.string,
 };
 
-const layout = props => ({
+const layout = (props) => ({
   width: props.width || '',
   height: props.height || '',
   maxWidth: props.maxWidth || '',

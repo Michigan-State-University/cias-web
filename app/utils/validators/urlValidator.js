@@ -2,7 +2,7 @@ import * as Yup from 'yup';
 
 const urlSchema = Yup.string().url();
 
-export const urlValidator = target => {
+export const urlValidator = (target) => {
   try {
     // this checks if url has valid protocol
     // eslint-disable-next-line no-new

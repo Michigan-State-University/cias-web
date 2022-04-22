@@ -1,7 +1,9 @@
 /* eslint-disable camelcase,no-unused-vars */
 import { defaultMapper } from 'utils/mapResponseObjects';
 import objectToCamelCase from 'utils/objectToCamelCase';
+
 import { ReportFor } from 'global/reducers/reportTemplates/constants';
+
 import { ReportTemplate } from './ReportTemplate';
 import { TemplateSection } from './TemplateSection';
 
@@ -12,7 +14,7 @@ export class ReportTemplateBuilder {
    * @param  {string} id
    * @returns  {ReportTemplateBuilder}
    */
-  withId = id => {
+  withId = (id) => {
     this.id = id;
 
     return this;
@@ -22,7 +24,7 @@ export class ReportTemplateBuilder {
    * @param  {string} name
    * @returns  {ReportTemplateBuilder}
    */
-  withName = name => {
+  withName = (name) => {
     this.name = name;
 
     return this;
@@ -32,7 +34,7 @@ export class ReportTemplateBuilder {
    * @param  {ReportFor.participant | ReportFor.thirdParty} reportFor
    * @returns  {ReportTemplateBuilder}
    */
-  withReportFor = reportFor => {
+  withReportFor = (reportFor) => {
     this.reportFor = reportFor;
 
     return this;
@@ -42,7 +44,7 @@ export class ReportTemplateBuilder {
    * @param  {string} logoUrl
    * @returns  {ReportTemplateBuilder}
    */
-  withLogoUrl = logoUrl => {
+  withLogoUrl = (logoUrl) => {
     this.logoUrl = logoUrl;
 
     return this;
@@ -52,7 +54,7 @@ export class ReportTemplateBuilder {
    * @param  {string} summary
    * @returns  {ReportTemplateBuilder}
    */
-  withSummary = summary => {
+  withSummary = (summary) => {
     this.summary = summary;
 
     return this;
@@ -62,7 +64,7 @@ export class ReportTemplateBuilder {
    * @param  {string} sessionId
    * @returns  {ReportTemplateBuilder}
    */
-  withSessionId = sessionId => {
+  withSessionId = (sessionId) => {
     this.sessionId = sessionId;
 
     return this;
@@ -72,7 +74,7 @@ export class ReportTemplateBuilder {
    * @param  {TemplateSection[]} sections
    * @returns  {ReportTemplateBuilder}
    */
-  withSections = sections => {
+  withSections = (sections) => {
     this.sections = sections;
 
     return this;
@@ -82,10 +84,8 @@ export class ReportTemplateBuilder {
    * @param  {object} json
    * @returns  {ReportTemplateBuilder}
    */
-  fromJson = json => {
-    const reportTemplate = new ReportTemplate(
-      objectToCamelCase(defaultMapper(json)),
-    );
+  fromJson = (json) => {
+    const reportTemplate = objectToCamelCase(defaultMapper(json));
 
     this.id = reportTemplate.id;
     this.name = reportTemplate.name;
@@ -102,14 +102,13 @@ export class ReportTemplateBuilder {
   /**
    * @returns  {ReportTemplate}
    */
-  build = () =>
-    new ReportTemplate({
-      id: this.id,
-      name: this.name,
-      reportFor: this.reportFor,
-      summary: this.summary,
-      logoUrl: this.logoUrl,
-      sessionId: this.sessionId,
-      sections: this.sections,
-    });
+  build = () => ({
+    id: this.id,
+    name: this.name,
+    reportFor: this.reportFor,
+    summary: this.summary,
+    logoUrl: this.logoUrl,
+    sessionId: this.sessionId,
+    sections: this.sections,
+  });
 }

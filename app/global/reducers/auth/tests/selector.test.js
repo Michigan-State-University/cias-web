@@ -28,7 +28,7 @@ describe('makeSelectAuth', () => {
       cache: { user: mockUser },
     },
   };
-  const testSelector = selector => selector(mockedState);
+  const testSelector = (selector) => selector(mockedState);
 
   it('should select the auth', () => {
     expect(testSelector(selectAuth)).toEqual(mockedState.auth);

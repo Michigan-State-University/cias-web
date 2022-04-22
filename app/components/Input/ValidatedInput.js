@@ -12,7 +12,7 @@ const ValidatedInput = ({
 }) => {
   const [currentValue, setCurrentValue] = useState('');
 
-  const handleChange = event => {
+  const handleChange = (event) => {
     setCurrentValue(event.target.value);
   };
 

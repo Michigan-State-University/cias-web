@@ -133,7 +133,7 @@ const getNarratorPositionFromPreviousGroups = (
   questions,
 ) => {
   const { question_group_id: groupId, id: questionId } = questionToStartFrom;
-  const groupIndex = groupIds.findIndex(id => id === groupId);
+  const groupIndex = groupIds.findIndex((id) => id === groupId);
   for (let i = groupIndex; i >= 0; i -= 1) {
     const currentGroupId = groupIds[i];
     const groupQuestions = findOrderedQuestionsByGroupId(

@@ -1,8 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-import Question from 'models/Session/Question';
-
 import NumberQuestionLayout from '../layouts/NumberQuestionLayout';
 import messages from '../layouts/messages';
 import { NUMBER_VALIDATION_ERROR } from '../constants';
@@ -20,7 +18,7 @@ const NumberQuestion = ({
     },
   } = question;
 
-  const onChange = event => {
+  const onChange = (event) => {
     selectAnswer([
       {
         var: name,
@@ -29,7 +27,7 @@ const NumberQuestion = ({
     ]);
   };
 
-  const onValidation = validationResult =>
+  const onValidation = (validationResult) =>
     !validationResult &&
     showError(formatMessage(messages.numberValidationError), {
       toastId: NUMBER_VALIDATION_ERROR,
@@ -46,7 +44,7 @@ const NumberQuestion = ({
 };
 
 NumberQuestion.propTypes = {
-  question: PropTypes.shape(Question).isRequired,
+  question: PropTypes.object.isRequired,
   selectAnswer: PropTypes.func,
   answerBody: PropTypes.any,
   formatMessage: PropTypes.func,

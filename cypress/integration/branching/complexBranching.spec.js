@@ -49,11 +49,17 @@ const branching = {
 const answerOptions = [
   {
     title: 'Question 1',
-    options: [{ name: 'q11', score: 2 }, { name: 'q12', score: 4 }],
+    options: [
+      { name: 'q11', score: 2 },
+      { name: 'q12', score: 4 },
+    ],
   },
   {
     title: 'Question 2',
-    options: [{ name: 'q21', score: 3 }, { name: 'q22', score: 2 }],
+    options: [
+      { name: 'q21', score: 3 },
+      { name: 'q22', score: 2 },
+    ],
   },
   {
     title: 'Question 3',

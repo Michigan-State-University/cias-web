@@ -9,7 +9,7 @@ import {
   flex,
 } from 'components/BaseComponentStyles';
 
-const invertedStyles = color => css`
+const invertedStyles = (color) => css`
   background-color: ${colors.white};
   color: ${themeColors[color] ?? color};
   border: 1px solid ${themeColors[color]};
@@ -21,7 +21,7 @@ const basicStyles = (outlined, color) => css`
   border: 1px solid transparent;
 `;
 
-const getHoverStyles = props => {
+const getHoverStyles = (props) => {
   if (props.hoverable && !props.disabled) {
     if (props.inverted) return basicStyles(props.outlined, props.color);
     return invertedStyles(props.color);
@@ -29,11 +29,9 @@ const getHoverStyles = props => {
   return '';
 };
 
-const getDisabledStyles = inverted => {
+const getDisabledStyles = (inverted) => {
   if (inverted)
-    return `cursor: default; color: ${colors.grey}; border-color: ${
-      colors.grey
-    }`;
+    return `cursor: default; color: ${colors.grey}; border-color: ${colors.grey}`;
 
   return `cursor: default; background-color: ${colors.grey};`;
 };
@@ -41,18 +39,18 @@ const getDisabledStyles = inverted => {
 export const StyledButton = styled.button`
   width: 100%;
   height: 40px;
-  border-radius: ${props => props.radius};
+  border-radius: ${(props) => props.radius};
   cursor: pointer;
   border: none;
   outline: none;
-  ${props =>
+  ${(props) =>
     props.inverted
       ? invertedStyles(props.color)
       : basicStyles(props.outlined, props.color)};
-  ${props => props.disabled && getDisabledStyles(props.inverted)};
+  ${(props) => props.disabled && getDisabledStyles(props.inverted)};
   transition: background-color 300ms ease, color 300ms ease, border 300ms ease;
   &:hover {
-    ${props => getHoverStyles(props)};
+    ${(props) => getHoverStyles(props)};
   }
   ${margin};
   ${border};

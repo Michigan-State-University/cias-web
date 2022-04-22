@@ -16,7 +16,7 @@ describe('<TimezoneForm />', () => {
   const defaultProps = {
     user: { timeZone: 'America/New_York' },
     editUser: jest.fn(),
-    formatMessage: jest.fn(msg => msg.defaultMessage),
+    formatMessage: jest.fn((msg) => msg.defaultMessage),
   };
 
   beforeAll(() => {

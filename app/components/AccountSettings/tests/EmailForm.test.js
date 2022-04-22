@@ -18,7 +18,7 @@ describe('<EmailForm />', () => {
     createModalForTests();
   });
   const defaultProps = {
-    formatMessage: jest.fn(msg => msg.defaultMessage),
+    formatMessage: jest.fn((msg) => msg.defaultMessage),
     user: { email: 'test@test.pl' },
     changeEmail: jest.fn(),
     error: '',

@@ -24,15 +24,15 @@ export const fetchInterventionsSuccess = (
     paginationData,
     interventionsSize: interventionsSize ?? Number.MAX_SAFE_INTEGER,
   });
-export const fetchInterventionsError = error =>
+export const fetchInterventionsError = (error) =>
   actionBuilder(FETCH_INTERVENTIONS_ERROR, { error });
 
-export const copyInterventionRequest = payload =>
+export const copyInterventionRequest = (payload) =>
   actionBuilder(COPY_INTERVENTION_REQUEST, payload);
 
-export const archiveInterventionRequest = interventionId =>
+export const archiveInterventionRequest = (interventionId) =>
   actionBuilder(ARCHIVE_INTERVENTION_REQUEST, { interventionId });
-export const archiveInterventionSuccess = interventionId =>
+export const archiveInterventionSuccess = (interventionId) =>
   actionBuilder(ARCHIVE_INTERVENTION_SUCCESS, { interventionId });
-export const archiveInterventionFailure = interventionId =>
+export const archiveInterventionFailure = (interventionId) =>
   actionBuilder(ARCHIVE_INTERVENTION_ERROR, { interventionId });

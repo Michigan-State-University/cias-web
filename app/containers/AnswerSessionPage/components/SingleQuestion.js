@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
 
-import Question from 'models/Session/Question';
 import SingleQuestionLayout from '../layouts/SingleQuestionLayout';
 
 const SingleQuestion = ({ question, answerBody, selectAnswer, saveAnswer }) => {
@@ -45,7 +44,7 @@ const SingleQuestion = ({ question, answerBody, selectAnswer, saveAnswer }) => {
 };
 
 SingleQuestion.propTypes = {
-  question: PropTypes.shape(Question).isRequired,
+  question: PropTypes.object.isRequired,
   answerBody: PropTypes.any,
   selectAnswer: PropTypes.func,
   saveAnswer: PropTypes.func,

@@ -4,7 +4,7 @@
  *
  */
 
-import React, { memo, useCallback, useMemo } from 'react';
+import React, { memo, useCallback, useMemo, useState } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { createStructuredSelector } from 'reselect';
@@ -12,14 +12,20 @@ import { injectIntl, useIntl } from 'react-intl';
 import { compose } from 'redux';
 
 import { makeSelectUser } from 'global/reducers/auth';
-import { NAVIGATION } from 'utils/navbarNames';
 
-import Comment from 'components/Text/Comment';
+import { NAVIGATION } from 'utils/navbarNames';
+import { useIsTouchScreen } from 'utils/useIsTouchScreen';
+
+import menu from 'assets/svg/triangle-back-black.svg';
 
 import { RolePermissions } from 'models/User/RolePermissions';
+
+import Comment from 'components/Text/Comment';
+import { RotateIcon } from 'components/Icon/RotateIcon';
+
 import DefaultSidebar from './components/DefaultSidebar';
 
-import { SidebarStyled } from './styled';
+import { ShowSidebarButton, SidebarStyled } from './styled';
 import messages from './messages';
 import ReportingDashboardPanel from './containers/ReportingDashboardPanel';
 
@@ -37,8 +43,32 @@ export function Sidebar({ user: { roles }, sidebarProps }) {
     return null;
   }, [sidebarId, activeTab, roles]);
 
+  const [showSidebar, setShowSidebar] = useState(false);
+  const isTouchScreen = useIsTouchScreen();
+  const sidebarInteractionProps = isTouchScreen
+    ? {
+        onClick: () => setShowSidebar(!showSidebar),
+        onMouseLeave: () => setShowSidebar(false),
+      }
+    : {
+        onMouseEnter: () => setShowSidebar(true),
+        onMouseLeave: () => setShowSidebar(false),
+        onClick: () => setShowSidebar(false),
+      };
+
   return (
-    <SidebarStyled>
+    <SidebarStyled isVisible={showSidebar} {...sidebarInteractionProps}>
+      <ShowSidebarButton
+        aria-label={formatMessage(messages.showSidebarButtonLabel)}
+        title={formatMessage(messages.showSidebarButtonLabel)}
+      >
+        {/* @ts-ignore */}
+        <RotateIcon
+          src={menu}
+          $rotate={!showSidebar}
+          alt={formatMessage(messages.showSidebarIcon)}
+        />
+      </ShowSidebarButton>
       <Comment mb="8px !important">
         {formatMessage(messages.sidebarNavigationHeader)}
       </Comment>
@@ -70,9 +100,4 @@ const mapStateToProps = createStructuredSelector({
   user: makeSelectUser(),
 });
 
-export default memo(
-  compose(
-    connect(mapStateToProps),
-    injectIntl,
-  )(Sidebar),
-);
+export default memo(compose(connect(mapStateToProps), injectIntl)(Sidebar));

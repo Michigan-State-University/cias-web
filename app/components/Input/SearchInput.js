@@ -1,5 +1,6 @@
 import React, { useCallback, useEffect, useRef } from 'react';
 import PropTypes from 'prop-types';
+import { useIntl } from 'react-intl';
 import debounce from 'lodash/debounce';
 
 import search from 'assets/svg/search.svg';
@@ -8,6 +9,7 @@ import ActionIcon from 'components/ActionIcon';
 
 import Input from '.';
 import { SearchInputStyled, SearchIcon } from './styled';
+import messages from './messages';
 
 const DEFAULT_DEBOUNCE = 0;
 
@@ -18,9 +20,10 @@ const SearchInput = ({
   onChange,
   ...inputProps
 }) => {
-  const { width } = inputProps;
-
+  const { formatMessage } = useIntl();
   const inputRef = useRef(null);
+
+  const { width } = inputProps;
 
   useEffect(() => {
     if (value !== inputRef.current.value) {
@@ -44,6 +47,7 @@ const SearchInput = ({
           width={15}
           ml={10}
           background="none"
+          ariaText={formatMessage(messages.clearButtonLabel)}
         />
       )}
     </SearchInputStyled>

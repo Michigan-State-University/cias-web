@@ -3,18 +3,24 @@ import PropTypes from 'prop-types';
 import { Row as GRow, Col as GCol, useScreenClass } from 'react-grid-system';
 import { FormattedMessage, IntlShape, injectIntl } from 'react-intl';
 
+import { themeColors } from 'theme';
+import { InterventionType } from 'models/Intervention';
+import globalMessages from 'global/i18n/globalMessages';
+
+import MailIcon from 'assets/svg/pink-mail.svg';
+
 import Row from 'components/Row';
 import BackButton from 'components/BackButton';
-import messages from 'containers/InterventionDetailsPage/messages';
 import Box from 'components/Box';
 import Dropdown from 'components/Dropdown';
 import { StyledInput } from 'components/Input/StyledInput';
 import { selectInputText } from 'components/Input/utils';
+import { TextButton } from 'components/Button';
+import Icon from 'components/Icon';
 
-import globalMessages from 'global/i18n/globalMessages';
-
-import { StatusLabel, InterventionOptions } from './styled';
 import InterventionStatusButtons from './components/InterventionStatusButtons';
+import { StatusLabel, InterventionOptions } from './styled';
+import messages from './messages';
 
 const Header = ({
   intl: { formatMessage },
@@ -29,8 +35,13 @@ const Header = ({
   options,
   organizationId,
   canAccessCsv,
+  openInterventionInviteModal,
+  interventionType,
+  sharingPossible,
 }) => {
   const screenClass = useScreenClass();
+
+  const isModuleIntervention = interventionType !== InterventionType.DEFAULT;
 
   const renderBackButton = useMemo(() => {
     if (organizationId) {
@@ -51,15 +62,15 @@ const Header = ({
     <GCol>
       <GRow xl={12}>
         <GCol>
-          <Row justify="between" mt={50}>
+          <Row justify="between" mt={64}>
             {renderBackButton}
           </Row>
         </GCol>
       </GRow>
 
       <GRow>
-        <GCol xxl={6} xl={5} lg={12}>
-          <Row justify="end" align="center" mt={18}>
+        <GCol xl={7} lg={12}>
+          <Row justify="end" align="center" mt={16}>
             <Box mr={15}>
               <StatusLabel status={status}>
                 {status && formatMessage(globalMessages.statuses[status])}
@@ -79,8 +90,25 @@ const Header = ({
               maxWidth="none"
               autoComplete="off"
             />
+            {isModuleIntervention && (
+              <TextButton
+                onClick={openInterventionInviteModal}
+                buttonProps={{
+                  color: themeColors.secondary,
+                  minWidth: 180,
+                  display: 'flex',
+                  alignItems: 'center',
+                  justifyContent: 'center',
+                }}
+                disabled={!sharingPossible}
+              >
+                {formatMessage(messages.inviteToIntervention)}
+                <Icon ml={5} src={MailIcon} />
+              </TextButton>
+            )}
           </Row>
         </GCol>
+
         <GCol>
           <Row
             mt={18}
@@ -127,6 +155,9 @@ Header.propTypes = {
   organizationId: PropTypes.string,
   options: PropTypes.array,
   canAccessCsv: PropTypes.bool,
+  openInterventionInviteModal: PropTypes.func,
+  interventionType: PropTypes.string,
+  sharingPossible: PropTypes.bool,
 };
 
 export default injectIntl(Header);

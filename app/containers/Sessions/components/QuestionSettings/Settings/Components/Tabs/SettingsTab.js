@@ -19,7 +19,7 @@ const SettingsTab = ({ settings, type, onQuestionToggle, id, disabled }) => {
   const orderedSettings = orderSettings(settings);
   const last = lastKey(orderedSettings);
 
-  const renderQuestionSpecificSettings = editingDisabled => {
+  const renderQuestionSpecificSettings = (editingDisabled) => {
     let component;
 
     switch (type) {
@@ -34,9 +34,7 @@ const SettingsTab = ({ settings, type, onQuestionToggle, id, disabled }) => {
     if (component)
       return (
         <Box
-          borderTop={`${borders.borderWidth} ${borders.borderStyle} ${
-            colors.linkWater
-          }`}
+          borderTop={`${borders.borderWidth} ${borders.borderStyle} ${colors.linkWater}`}
         >
           {component}
         </Box>
@@ -74,12 +72,6 @@ const mapDispatchToProps = {
   onQuestionToggle: updateQuestionSettings,
 };
 
-const withConnect = connect(
-  null,
-  mapDispatchToProps,
-);
+const withConnect = connect(null, mapDispatchToProps);
 
-export default compose(
-  withConnect,
-  memo,
-)(SettingsTab);
+export default compose(withConnect, memo)(SettingsTab);

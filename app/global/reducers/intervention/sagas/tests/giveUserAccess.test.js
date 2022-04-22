@@ -24,12 +24,12 @@ describe('fetchUsersWithAccess saga', () => {
     data: [
       {
         id: '0',
-        type: 'invitation',
+        type: 'intervention_access',
         attributes: { email: 'user0@mail.com' },
       },
       {
         id: '1',
-        type: 'invitation',
+        type: 'intervention_access',
         attributes: { email: 'user1@mail.com' },
       },
     ],
@@ -39,7 +39,11 @@ describe('fetchUsersWithAccess saga', () => {
   it('Check giveUserAccess generator success connection', () =>
     expectSaga(enableUserAccess, { payload })
       .provide([[matchers.call.fn(axios.post), { data: apiResponse }]])
-      .put(enableUserAccessSuccess(jsonApiToArray(apiResponse, 'invitation')))
+      .put(
+        enableUserAccessSuccess(
+          jsonApiToArray(apiResponse, 'interventionAccess'),
+        ),
+      )
       .run());
   it('Check giveUserAccess error connection', () => {
     const error = new Error('test');

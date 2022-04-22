@@ -95,9 +95,7 @@ export default defineMessages({
   },
   warningMessage: {
     id: `${scope}.warningMessage`,
-    defaultMessage: `You <span style="color: ${
-      themeColors.warning
-    }">cannot edit content</span> on the screen while working with the Narrator.`,
+    defaultMessage: `You <span style="color: ${themeColors.warning}">cannot edit content</span> on the screen while working with the Narrator.`,
   },
   characterBlocked: {
     id: `${scope}.characterBlocked`,
@@ -181,6 +179,15 @@ export default defineMessages({
   textLimitSettingsPlaceholder: {
     id: `${scope}.textLimitSettingsPlaceholder`,
     defaultMessage: 'E.g. 250',
+  },
+  deleteBlockHeader: {
+    id: `${scope}.deleteBlockHeader`,
+    defaultMessage: 'Delete Block',
+  },
+  deleteBlockMessage: {
+    id: `${scope}.deleteBlockMessage`,
+    defaultMessage:
+      'Are you sure you want to delete this Block? It will not be possible to recover it later.',
   },
   addNewFormula: {
     id: `${scope}.addNewFormula`,

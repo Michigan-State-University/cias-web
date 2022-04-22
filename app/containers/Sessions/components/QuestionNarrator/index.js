@@ -60,7 +60,7 @@ const QuestionNarrator = ({
     targetRef: animationBoundaries,
   });
   const [state, dispatch] = useReducer(reducer, initialState);
-  const dispatchUpdate = newState =>
+  const dispatchUpdate = (newState) =>
     dispatch({
       type: UPDATE,
       newState,
@@ -329,9 +329,6 @@ const mapDispatchToProps = {
   savePosition: saveNarratorMovement,
 };
 
-const withConnect = connect(
-  mapStateToProps,
-  mapDispatchToProps,
-);
+const withConnect = connect(mapStateToProps, mapDispatchToProps);
 
 export default compose(withConnect)(QuestionNarrator);

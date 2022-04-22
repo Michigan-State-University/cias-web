@@ -25,6 +25,10 @@ export default defineMessages({
     id: `${scope}.sessions`,
     defaultMessage: 'Sessions ({sessionCount})',
   },
+  translate: {
+    id: `${scope}.translate`,
+    defaultMessage: 'Translate',
+  },
   exportCSV: {
     id: `${scope}.exportCSV`,
     defaultMessage: 'Export CSV',
@@ -45,8 +49,8 @@ export default defineMessages({
     id: `${scope}.assignOrganization`,
     defaultMessage: 'Assign Organization',
   },
-  modalTitle: {
-    id: `${scope}.modalTitle`,
+  sendCopyModalTitle: {
+    id: `${scope}.sendCopyModalTitle`,
     defaultMessage: 'Choose researchers to send',
   },
   isFromOrganization: {
@@ -76,5 +80,21 @@ export default defineMessages({
   lastName: {
     id: `${scope}.lastName`,
     defaultMessage: 'Last name: ',
+  },
+  interventionArchiveHeader: {
+    id: `${scope}.interventionArchiveHeader`,
+    defaultMessage: 'Archive Intervention',
+  },
+  interventionArchiveMessage: {
+    id: `${scope}.interventionArchiveMessage`,
+    defaultMessage: 'Are you sure you want to archive this Intervention?',
+  },
+  catMhSettingsOption: {
+    id: `${scope}.catMhSettingsOption`,
+    defaultMessage: 'CAT-MH™ Access',
+  },
+  catMhSettingsModalTitle: {
+    id: `${scope}.catMhSettingsModalTitle`,
+    defaultMessage: 'Access to CAT-MH™',
   },
 });

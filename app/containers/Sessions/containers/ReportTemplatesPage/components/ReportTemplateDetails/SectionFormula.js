@@ -47,7 +47,7 @@ const SectionFormula = ({
     ReportTemplatesContext,
   );
 
-  const handleFormulaUpdate = newFormula => {
+  const handleFormulaUpdate = (newFormula) => {
     updateSection(
       { ...selectedTemplateSection, formula: newFormula },
       selectedReportId,
@@ -62,7 +62,7 @@ const SectionFormula = ({
           <VariableChooser
             disabled={!canEdit}
             includeAllVariables
-            onClick={value => handleFormulaUpdate(`${formula}${value}`)}
+            onClick={(value) => handleFormulaUpdate(`${formula}${value}`)}
             sessionId={sessionId}
             interventionId={interventionId}
             isMultiSession
@@ -98,10 +98,7 @@ const mapDispatchToProps = {
   getQuestionGroups: getQuestionGroupsRequest,
 };
 
-const withConnect = connect(
-  null,
-  mapDispatchToProps,
-);
+const withConnect = connect(null, mapDispatchToProps);
 
 SectionFormula.propTypes = {
   formula: PropTypes.string,

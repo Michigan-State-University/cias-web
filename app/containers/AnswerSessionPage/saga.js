@@ -4,6 +4,7 @@ import omit from 'lodash/omit';
 import map from 'lodash/map';
 import { toast } from 'react-toastify';
 import { push } from 'connected-react-router';
+import merge from 'lodash/merge';
 
 import { mapQuestionToStateObject } from 'utils/mapResponseObjects';
 import { formatMessage } from 'utils/intlOutsideReact';
@@ -14,6 +15,7 @@ import objectToSnakeCase from 'utils/objectToSnakeCase';
 import { makeSelectLocation } from 'containers/App/selectors';
 import { resetPhoneNumberPreview } from 'global/reducers/auth/actions';
 import { jsonApiToObject } from 'utils/jsonApiMapper';
+
 import {
   SUBMIT_ANSWER_REQUEST,
   REDIRECT_TO_PREVIEW,
@@ -32,6 +34,7 @@ import {
   nextQuestionRequest,
   createUserSessionRequest,
   changeUserSessionId,
+  setTransitionalUserSessionId,
 } from './actions';
 import { makeSelectAnswers, makeSelectCurrentQuestion } from './selectors';
 import messages from './messages';
@@ -41,7 +44,7 @@ function* submitAnswersAsync({
 }) {
   const answers = yield select(makeSelectAnswers());
   const { answerBody } = answers[answerId];
-  let data = map(answerBody, singleBody => omit(singleBody, 'index')); // index is needed to remember the selected answers, but useless in request
+  let data = map(answerBody, (singleBody) => omit(singleBody, 'index')); // index is needed to remember the selected answers, but useless in request
 
   try {
     if (data.length || !required) {
@@ -96,7 +99,13 @@ function* nextQuestion({ payload: { userSessionId, questionId } }) {
 
   try {
     const {
-      data: { data, warning, next_user_session_id: newUserSessionId },
+      data: {
+        data,
+        warning,
+        next_user_session_id: newUserSessionId,
+        // eslint-disable-next-line camelcase
+        next_session_id,
+      },
     } = yield axios.get(requestUrl);
 
     if (!isNullOrUndefined(warning))
@@ -104,12 +113,24 @@ function* nextQuestion({ payload: { userSessionId, questionId } }) {
         toast.warning,
         formatMessage(messages[warning] ?? messages.unknownWarning),
       );
-
     if (newUserSessionId) {
+      const location = yield select(makeSelectLocation());
+      const isPreview = /^.*\/preview/.test(location.pathname);
+
+      if (isPreview) {
+        yield put(setTransitionalUserSessionId(newUserSessionId));
+      }
       yield put(changeUserSessionId(newUserSessionId));
     }
 
-    yield put(nextQuestionSuccess(mapQuestionToStateObject(data)));
+    yield put(
+      nextQuestionSuccess(
+        mapQuestionToStateObject(
+          // eslint-disable-next-line camelcase
+          merge(data, { attributes: { next_session_id } }),
+        ),
+      ),
+    );
   } catch (error) {
     yield put(nextQuestionFailure(error));
   }

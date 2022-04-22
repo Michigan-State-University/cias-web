@@ -32,9 +32,6 @@ export const GET_QUESTION_GROUPS_SUCCESS =
 export const GET_QUESTION_GROUPS_ERROR =
   'app/EditSessionPage/GET_QUESTION_GROUPS_ERROR';
 
-export const CREATE_QUESTION_IN_GROUP =
-  'app/EditSessionPage/CREATE_QUESTION_IN_GROUP';
-
 export const REORDER_GROUP_LIST_REQUEST =
   'app/EditSessionPage/REORDER_GROUP_LIST_REQUEST';
 export const REORDER_GROUP_LIST_SUCCESS =

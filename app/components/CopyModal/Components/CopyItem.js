@@ -42,7 +42,7 @@ const CopyItem = ({ data, index }) => {
       );
     }
   };
-  const isDisabled = count =>
+  const isDisabled = (count) =>
     disabledItemsIds?.includes(id) ||
     (disableCopy && !isNullOrUndefined(count) && count === 0);
   return (

@@ -83,7 +83,7 @@ exports[`<QuestionVideo /> should match the snapshot with video 1`] = `
   width="100%"
 >
   <div
-    class="HoverableBox-zvip6a-0 c1"
+    class="c1"
     width="100%"
   >
     <div
@@ -221,6 +221,7 @@ exports[`<QuestionVideo /> should match the snapshot without video 1`] = `
         class="c3"
       >
         <input
+          aria-label="Use videos from YouTube or Vimeo. Paste link here."
           class="c4"
           height="auto"
           placeholder="Use videos from YouTube or Vimeo. Paste link here."

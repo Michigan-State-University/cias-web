@@ -1,23 +1,291 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`<TeamDetails /> Should render and match the snapshot 1`] = `
+.c14 {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+  -webkit-justify-content: center;
+  -ms-flex-pack: center;
+  justify-content: center;
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  margin: auto;
+  width: 50px;
+  height: 50px;
+}
+
+.c14:after {
+  content: ' ';
+  display: block;
+  width: 33.33333333333333px;
+  height: 33.33333333333333px;
+  border-radius: 50%;
+  border: 6px solid #B727EA;
+  border-color: #B727EA transparent #B727EA transparent;
+  -webkit-animation: hAjVGa 1.2s linear infinite;
+  animation: hAjVGa 1.2s linear infinite;
+}
+
+.c17 {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+  -webkit-justify-content: center;
+  -ms-flex-pack: center;
+  justify-content: center;
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  margin: auto;
+  width: 100px;
+  height: 100px;
+}
+
+.c17:after {
+  content: ' ';
+  display: block;
+  width: 66.66666666666666px;
+  height: 66.66666666666666px;
+  border-radius: 50%;
+  border: 6px solid #B727EA;
+  border-color: #B727EA transparent #B727EA transparent;
+  -webkit-animation: hAjVGa 1.2s linear infinite;
+  animation: hAjVGa 1.2s linear infinite;
+}
+
+.c3 {
+  width: auto;
+  height: auto;
+  margin-bottom: 2px;
+  margin-right: 8px;
+}
+
+.c4 {
+  font-family: DM Sans;
+  font-size: 13px;
+  line-height: 130%;
+  font-weight: 700;
+  color: rgba(183,39,234,1);
+  color: rgba(183,39,234,1);
+}
+
+.c10 {
+  font-family: DM Sans;
+  font-size: 13px;
+  line-height: 130%;
+  margin-top: 20px;
+  margin-bottom: 10px;
+  font-size: 14px;
+  color: #2F3850;
+}
+
+.c12 {
+  font-family: DM Sans;
+  font-size: 13px;
+  line-height: 130%;
+  margin-top: 20px;
+  font-size: 14px;
+  color: #2F3850;
+}
+
+.c0 {
+  width: auto;
+  height: auto;
+  display: block;
+  border-radius: 5px;
+  width: 100%;
+  height: 100%;
+}
+
+.c7 {
+  width: auto;
+  height: auto;
+  display: block;
+  border-radius: 5px;
+}
+
+.c5 {
+  margin: 0;
+  font-family: DM Sans;
+  font-size: 25px;
+  line-height: 130%;
+  margin-top: 25px;
+  margin-bottom: 25px;
+  color: #2F3850;
+}
+
+.c9 {
+  margin: 0;
+  font-family: DM Sans;
+  font-size: 18px;
+  line-height: 130%;
+  margin-bottom: 20px;
+  color: #2F3850;
+}
+
+.c2 {
+  width: -webkit-max-content;
+  width: -moz-max-content;
+  width: max-content;
+  -webkit-text-decoration: none;
+  text-decoration: none;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+}
+
+.c15 {
+  width: 100%;
+  height: 40px;
+  border-radius: 100px;
+  cursor: pointer;
+  border: none;
+  outline: none;
+  background-color: #107969;
+  color: #FFFFFF;
+  border: 1px solid transparent;
+  cursor: default;
+  background-color: #9AA1B6;
+  -webkit-transition: background-color 300ms ease,color 300ms ease,border 300ms ease;
+  transition: background-color 300ms ease,color 300ms ease,border 300ms ease;
+  margin-top: 20px;
+  width: 200px;
+}
+
+.c11 {
+  padding: 12px;
+  border-style: solid;
+  border-width: 1px;
+  border-color: #E9F1FB;
+  border-radius: 5px;
+  width: 100%;
+  max-width: none;
+  color: #2F3850;
+  background-color: rgba(255,255,255,1);
+}
+
+.c11:focus {
+  box-shadow: none;
+  outline: none;
+  border-color: #107969;
+}
+
+.c11:disabled {
+  color: #ABBBD1;
+}
+
+.c16 {
+  position: fixed;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  z-index: 1000;
+  -webkit-box-pack: center;
+  -webkit-justify-content: center;
+  -ms-flex-pack: center;
+  justify-content: center;
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  width: 100vw;
+  height: 100vh;
+  left: 0;
+  top: 0;
+  background-color: rgba(255,255,255,0.5);
+}
+
+.c13 {
+  width: 100%;
+  height: 100%;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+  -webkit-justify-content: center;
+  -ms-flex-pack: center;
+  justify-content: center;
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+}
+
+.c6 {
+  outline: none;
+  border: none;
+  background: transparent;
+  font-weight: bold;
+  font-size: 13px;
+  line-height: 17px;
+  padding: 2px;
+  cursor: pointer;
+  font-weight: 700;
+  color: rgba(183,39,234,1);
+}
+
+.c1 {
+  padding: 60px 160px;
+}
+
+.c8 {
+  width: 100%;
+  background-color: #FFFFFF;
+  padding: 30px;
+  box-shadow: 0px 4px 20px #E3EEFB;
+  margin-top: 20px;
+}
+
+@media only screen and (max-width:1360px) {
+  .c1 {
+    padding: 30px 80px;
+  }
+}
+
+@media only screen and (max-width:768px) {
+  .c1 {
+    padding: 15px 40px;
+  }
+}
+
+@media only screen and (max-width:480px) {
+  .c1 {
+    padding: 15px 20px;
+  }
+}
+
 <div>
   <div
-    class="Box-sc-1vhutan-0 styled__StyledBox-sc-1x1cot6-0 dISrsd jKbXJq"
+    class="c0 c1"
     height="100%"
     width="100%"
   >
     <a
-      class="styled__StyledLink-sc-3pirdo-0 jceFfF"
+      class="c2"
       href="/teams"
     >
       <img
         alt="traingle"
-        class="Img-sc-55j3su-0 gfzPuQ"
+        class="c3"
         src="IMAGE_MOCK"
       />
       <p
-        class="Text-e4p0w3-0 cFbubw"
+        class="c4"
         color="#B727EA"
         font-weight="bold"
       >
@@ -31,7 +299,7 @@ exports[`<TeamDetails /> Should render and match the snapshot 1`] = `
         style="box-sizing: border-box; min-height: 1px; position: relative; padding-left: 15px; padding-right: 15px; width: auto; flex-basis: auto; flex-grow: 0; flex-shrink: 0; max-width: 100%; margin-left: 0%;"
       >
         <h1
-          class="H1-sc-1k7m23t-0 eMTspO"
+          class="c5"
         >
           Team Details
         </h1>
@@ -40,7 +308,7 @@ exports[`<TeamDetails /> Should render and match the snapshot 1`] = `
         style="box-sizing: border-box; min-height: 1px; position: relative; padding-left: 15px; padding-right: 15px; width: auto; flex-basis: auto; flex-grow: 0; flex-shrink: 0; max-width: 100%; margin-left: 0%;"
       >
         <button
-          class="StyledTextButton-sc-1b7egxw-0 hXDmcc"
+          class="c6"
           color="#B727EA"
           font-weight="bold"
         >
@@ -55,10 +323,10 @@ exports[`<TeamDetails /> Should render and match the snapshot 1`] = `
         style="box-sizing: border-box; min-height: 1px; position: relative; padding-left: 15px; padding-right: 15px; width: 100%; flex-basis: 0px; flex-grow: 1; flex-shrink: 0; max-width: 100%; margin-left: 0%;"
       >
         <div
-          class="Box-sc-1vhutan-0 styled__CardBox-sc-1x1cot6-3 dvfkZg jfWIRU"
+          class="c7 c8"
         >
           <h2
-            class="H2-uw8lbl-0 iUhbVg"
+            class="c9"
           >
             Edit Team
           </h2>
@@ -69,13 +337,14 @@ exports[`<TeamDetails /> Should render and match the snapshot 1`] = `
               style="box-sizing: border-box; min-height: 1px; position: relative; padding-left: 15px; padding-right: 15px; width: 50%; flex-basis: 50%; flex-grow: 0; flex-shrink: 0; max-width: 50%; margin-left: 0%;"
             >
               <p
-                class="Text-e4p0w3-0 cKQscp"
+                class="c10"
                 font-size="14"
               >
                 Change Team name
               </p>
               <input
-                class="Input-t9j2q5-0 kyuVel"
+                aria-label="e.g Team n.o. 1"
+                class="c11"
                 placeholder="e.g Team n.o. 1"
                 type="text"
                 value="Team 1"
@@ -86,7 +355,7 @@ exports[`<TeamDetails /> Should render and match the snapshot 1`] = `
               style="box-sizing: border-box; min-height: 1px; position: relative; padding-left: 15px; padding-right: 15px; width: 50%; flex-basis: 50%; flex-grow: 0; flex-shrink: 0; max-width: 50%; margin-left: 0%;"
             >
               <p
-                class="Text-e4p0w3-0 moOet"
+                class="c12"
                 font-size="14"
               >
                 Change Team Admin
@@ -95,14 +364,14 @@ exports[`<TeamDetails /> Should render and match the snapshot 1`] = `
                 data-private="true"
               >
                 <div
-                  class="Box-sc-1vhutan-0 dvfkZg"
+                  class="c7"
                 >
                   <div
-                    class="styled__InlineLoader-sc-1aaagww-1 kkTeLU"
+                    class="c13"
                     data-testid="inline-loader"
                   >
                     <div
-                      class="styled__StyledSpinner-sc-129uixn-0 ehjfMD"
+                      class="c14"
                       color="#B727EA"
                       size="50"
                       width="6"
@@ -119,7 +388,7 @@ exports[`<TeamDetails /> Should render and match the snapshot 1`] = `
               style="box-sizing: border-box; min-height: 1px; position: relative; padding-left: 15px; padding-right: 15px; width: 100%; flex-basis: 0px; flex-grow: 1; flex-shrink: 0; max-width: 100%; margin-left: 0%;"
             >
               <button
-                class="StyledButton-d2s0gt-0 bbEGQm"
+                class="c15"
                 color="primary"
                 disabled=""
                 font-size="14"
@@ -141,11 +410,11 @@ exports[`<TeamDetails /> Should render and match the snapshot 1`] = `
         style="box-sizing: border-box; min-height: 1px; position: relative; padding-left: 15px; padding-right: 15px; width: 100%; flex-basis: 0px; flex-grow: 1; flex-shrink: 0; max-width: 100%; margin-left: 0%;"
       >
         <div
-          class="styled__FillScreenLoader-sc-1aaagww-0 jdsSke"
+          class="c16"
           data-testid="fullscreen-loader"
         >
           <div
-            class="styled__StyledSpinner-sc-129uixn-0 PnEbr"
+            class="c17"
             color="#B727EA"
             size="100"
             width="6"

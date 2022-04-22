@@ -5,9 +5,8 @@ import { connect } from 'react-redux';
 import { createStructuredSelector } from 'reselect';
 import { injectIntl, IntlShape } from 'react-intl';
 
-import Column from 'components/Column';
-import Tabs from 'components/Tabs';
 import settingsTabLabels from 'utils/settingsTabsLabels';
+
 import {
   makeSelectQuestionSettingsTab,
   setQuestionSettings,
@@ -18,8 +17,14 @@ import {
   makeSelectQuestions,
 } from 'global/reducers/questions';
 import { makeSelectInterventionStatus } from 'global/reducers/intervention';
+import { makeSelectInterventionType } from 'global/reducers/intervention/selectors';
+
 import { canEdit } from 'models/Status/statusPermissions';
 import { finishQuestion } from 'models/Session/QuestionTypes';
+import { InterventionType } from 'models/Intervention/InterventionDto';
+
+import Column from 'components/Column';
+import Tabs from 'components/Tabs';
 
 import BranchingTab from './Components/Tabs/BranchingTab';
 import NarratorTab from './Components/Tabs/NarratorTab';
@@ -33,8 +38,9 @@ const Settings = ({
   changeTab,
   setDraggable,
   interventionStatus,
+  interventionType,
 }) => {
-  const handleChange = newTab => {
+  const handleChange = (newTab) => {
     changeTab({ tab: newTab });
     setDraggable(false);
   };
@@ -77,6 +83,9 @@ const Settings = ({
             disabled={!editingPossible}
             formulas={formulas}
             id={id}
+            disableBranchingToSession={
+              interventionType !== InterventionType.DEFAULT
+            }
           />
         </div>
       </Tabs>
@@ -97,6 +106,7 @@ Settings.propTypes = {
   changeTab: PropTypes.func,
   setDraggable: PropTypes.func,
   interventionStatus: PropTypes.string,
+  interventionType: PropTypes.string,
 };
 
 const mapStateToProps = createStructuredSelector({
@@ -104,6 +114,7 @@ const mapStateToProps = createStructuredSelector({
   questions: makeSelectQuestions(),
   tab: makeSelectQuestionSettingsTab(),
   interventionStatus: makeSelectInterventionStatus(),
+  interventionType: makeSelectInterventionType(),
 });
 
 const mapDispatchToProps = {
@@ -111,9 +122,6 @@ const mapDispatchToProps = {
   setDraggable: setCharacterDraggable,
 };
 
-const withConnect = connect(
-  mapStateToProps,
-  mapDispatchToProps,
-);
+const withConnect = connect(mapStateToProps, mapDispatchToProps);
 
 export default injectIntl(compose(withConnect)(Settings));

@@ -8,7 +8,7 @@ import { injectIntl } from 'react-intl';
 import ApprovableInput from 'components/Input/ApprovableInput';
 import Box from 'components/Box';
 import Column from 'components/Column';
-import Question from 'models/Session/Question';
+
 import Row from 'components/Row';
 import { colors } from 'theme/colors';
 import { numericValidator } from 'utils/validators';
@@ -16,6 +16,11 @@ import {
   makeSelectSelectedQuestion,
   updateQuestionData,
 } from 'global/reducers/questions';
+
+import {
+  QUESTION_SUBTITLE_ID,
+  QUESTION_TITLE_ID,
+} from 'containers/AnswerSessionPage/constants';
 
 import messages from './messages';
 import { UPDATE_DATA } from './constants';
@@ -44,7 +49,10 @@ const NumberQuestion = ({
             placeholder={formatMessage(messages.placeholder)}
             value={payload}
             validator={numericValidator}
-            onCheck={newTitle => updateAnswer({ variable, payload: newTitle })}
+            onCheck={(newTitle) =>
+              updateAnswer({ variable, payload: newTitle })
+            }
+            aria-labelledby={`${QUESTION_TITLE_ID} ${QUESTION_SUBTITLE_ID}`}
             disabled
           />
         </Row>
@@ -54,7 +62,7 @@ const NumberQuestion = ({
 };
 
 NumberQuestion.propTypes = {
-  selectedQuestion: PropTypes.shape(Question).isRequired,
+  selectedQuestion: PropTypes.object.isRequired,
   intl: PropTypes.object.isRequired,
   updateAnswer: PropTypes.func.isRequired,
 };
@@ -64,13 +72,10 @@ const mapStateToProps = createStructuredSelector({
 });
 
 const mapDispatchToProps = {
-  updateAnswer: value =>
+  updateAnswer: (value) =>
     updateQuestionData({ type: UPDATE_DATA, data: { value } }),
 };
 
-const withConnect = connect(
-  mapStateToProps,
-  mapDispatchToProps,
-);
+const withConnect = connect(mapStateToProps, mapDispatchToProps);
 
 export default injectIntl(compose(withConnect)(NumberQuestion));

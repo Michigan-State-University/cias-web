@@ -16,7 +16,7 @@ import FullNameForm from 'components/AccountSettings/FullNameForm';
 
 const WrappedFullNameForm = ({ formatMessage, user, editUser }) => {
   useInjectSaga({ key: 'editSingleUser', saga: editSingleUserSaga });
-  const editUserCall = userData => editUser({ userId: user.id, ...userData });
+  const editUserCall = (userData) => editUser({ userId: user.id, ...userData });
   if (!user) {
     return null;
   }
@@ -43,12 +43,6 @@ const mapDispatchToProps = {
   editUser: editOtherUserRequest,
 };
 
-const withConnect = connect(
-  mapStateToProps,
-  mapDispatchToProps,
-);
+const withConnect = connect(mapStateToProps, mapDispatchToProps);
 
-export default compose(
-  withConnect,
-  injectIntl,
-)(WrappedFullNameForm);
+export default compose(withConnect, injectIntl)(WrappedFullNameForm);

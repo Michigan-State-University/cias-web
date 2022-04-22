@@ -2,53 +2,30 @@ import { createSelector } from 'reselect';
 
 import { initialState } from './reducer';
 
-const copyModal = state => state.copyModal || initialState;
+const copyModal = (state) => state.copyModal || initialState;
 
 export const makeSelectSessionsState = () =>
-  createSelector(
-    copyModal,
-    substate => substate,
-  );
+  createSelector(copyModal, (substate) => substate);
 
 export const makeSelectInterventions = () =>
-  createSelector(
-    copyModal,
-    substate => substate.interventions,
-  );
+  createSelector(copyModal, (substate) => substate.interventions);
 
 export const makeSelectSessions = () =>
-  createSelector(
-    copyModal,
-    substate => substate.sessions,
-  );
+  createSelector(copyModal, (substate) => substate.sessions);
 
 export const makeSelectQuestionGroups = () =>
-  createSelector(
-    copyModal,
-    substate => substate.questionGroups,
-  );
+  createSelector(copyModal, (substate) => substate.questionGroups);
 
 export const makeSelectCopyModalLoaders = () =>
-  createSelector(
-    copyModal,
-    substate => substate.loaders,
-  );
+  createSelector(copyModal, (substate) => substate.loaders);
 
 export const makeSelectSavedIds = () =>
-  createSelector(
-    copyModal,
-    substate => substate.currentIds,
-  );
+  createSelector(copyModal, (substate) => substate.currentIds);
 
 export const makeSelectQuestions = () =>
-  createSelector(
-    copyModal,
-    substate =>
-      (substate.questionGroups || []).map(({ questions }) => questions).flat(),
+  createSelector(copyModal, (substate) =>
+    (substate.questionGroups || []).map(({ questions }) => questions).flat(),
   );
 
 export const makeSelectInterventionCount = () =>
-  createSelector(
-    copyModal,
-    substate => substate.interventionCount,
-  );
+  createSelector(copyModal, (substate) => substate.interventionCount);

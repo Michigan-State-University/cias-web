@@ -26,9 +26,8 @@ describe('<Loader />', () => {
     const fullScreenLoaderComponent = render(<Loader type="absolute" />);
     const inlineLoaderComponent = render(<Loader type="inline" />);
 
-    const fullScreenLoader = fullScreenLoaderComponent.getByTestId(
-      'fullscreen-loader',
-    );
+    const fullScreenLoader =
+      fullScreenLoaderComponent.getByTestId('fullscreen-loader');
     const inlineLoader = inlineLoaderComponent.getByTestId('inline-loader');
 
     expect(fullScreenLoader).not.toEqual(null);

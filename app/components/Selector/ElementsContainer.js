@@ -12,7 +12,7 @@ const ElementsContainer = ({
   setOption,
   toggleActive,
 }) => {
-  const handleSelectOption = id => {
+  const handleSelectOption = (id) => {
     toggleActive();
     setOption(id);
   };

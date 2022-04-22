@@ -9,12 +9,16 @@ import {
   visualAnalogScaleLabelStyles,
 } from 'theme';
 
+import {
+  QUESTION_SUBTITLE_ID,
+  QUESTION_TITLE_ID,
+} from 'containers/AnswerSessionPage/constants';
+
 import { containerBreakpoints } from 'components/Container/containerBreakpoints';
 import Column from 'components/Column';
 import Row from 'components/Row';
 import Box from 'components/Box';
 
-import messages from '../messages';
 import FeedbackSlider from './FeedbackSlider';
 
 const QUERY = { 'wrap-text': { maxWidth: containerBreakpoints.sm } };
@@ -81,7 +85,7 @@ const FeedbackQuestionLayout = ({
               formatMessage={formatMessage}
               withSpectrum={showSpectrum}
               className={classnames(params)}
-              ariaLabelForHandle={formatMessage(messages.feedbackLabel)}
+              ariaLabelledByForHandle={`${QUESTION_TITLE_ID} ${QUESTION_SUBTITLE_ID}`}
             />
           </Box>
         </Row>

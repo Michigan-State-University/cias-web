@@ -4,7 +4,7 @@
  * @returns {function} Cleanup function (execute to remove listener)
  */
 export const outsideClickHandler = (ref, onOutsideClick) => {
-  const handleClick = event => {
+  const handleClick = (event) => {
     const { target } = event;
     if (ref.current && !ref.current.contains(target)) {
       if (onOutsideClick) onOutsideClick();

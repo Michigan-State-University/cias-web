@@ -15,6 +15,7 @@ import Row from 'components/Row';
 import { ErrorText } from './styled';
 
 function InputComponent({
+  id,
   children,
   error,
   hasError,
@@ -31,7 +32,7 @@ function InputComponent({
   return (
     <Column {...columnStyleProps}>
       {label && (
-        <label htmlFor={name}>
+        <label htmlFor={id ?? name}>
           <Text mb={5} width="fit-content">
             {label}
           </Text>
@@ -40,7 +41,7 @@ function InputComponent({
 
       <Row width="100%" align="center">
         <Input
-          id={name}
+          id={id ?? name}
           mb={hasError ? 5 : null}
           placeholder={placeholder}
           value={value}
@@ -64,6 +65,7 @@ InputComponent.propTypes = {
   hasError: PropTypes.bool,
   inputProps: PropTypes.object,
   label: PropTypes.string,
+  id: PropTypes.string,
   name: PropTypes.string,
   onBlur: PropTypes.func,
   onChange: PropTypes.func,

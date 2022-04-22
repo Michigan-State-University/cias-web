@@ -23,27 +23,33 @@ function NotificationsSettings({
   return (
     <Box bg={colors.white} padding={30} shadow={boxShadows.selago} mt={20}>
       <H2 mb={20}>{formatMessage(messages.header)}</H2>
+
       <Row align="center" mb={13}>
         <Checkbox
+          id="notification-email"
           checked={emailNotification}
-          onClick={() =>
+          onChange={() =>
             editUser({
               emailNotification: !emailNotification,
             })
           }
-        />
-        <Text ml={10} fontSize={14}>
-          {formatMessage(messages.emailNotifications)}
-        </Text>
+        >
+          <Text ml={10} fontSize={14}>
+            {formatMessage(messages.emailNotifications)}
+          </Text>
+        </Checkbox>
       </Row>
+
       <Row align="center">
         <Checkbox
+          id="notification-sms"
           checked={smsNotification}
-          onClick={() => editUser({ smsNotification: !smsNotification })}
-        />
-        <Text ml={10} fontSize={14}>
-          {formatMessage(messages.phoneNotifications)}
-        </Text>
+          onChange={() => editUser({ smsNotification: !smsNotification })}
+        >
+          <Text ml={10} fontSize={14}>
+            {formatMessage(messages.phoneNotifications)}
+          </Text>
+        </Checkbox>
       </Row>
     </Box>
   );
@@ -63,12 +69,6 @@ const mapDispatchToProps = {
   editUser: editUserRequest,
 };
 
-const withConnect = connect(
-  mapStateToProps,
-  mapDispatchToProps,
-);
+const withConnect = connect(mapStateToProps, mapDispatchToProps);
 
-export default compose(
-  withConnect,
-  injectIntl,
-)(NotificationsSettings);
+export default compose(withConnect, injectIntl)(NotificationsSettings);

@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import { memo } from 'react';
 import { layout, margin, style, positioning } from '../BaseComponentStyles';
 
-const Img = styled.img.attrs(props => ({
+const Img = styled.img.attrs((props) => ({
   onClick: props.disabled ? null : props.onClick,
 }))`
   width: auto;

@@ -57,9 +57,9 @@ import {
 
 export const fetchReportTemplatesRequest = (sessionId, interventionId) =>
   actionBuilder(FETCH_REPORT_TEMPLATES_REQUEST, { sessionId, interventionId });
-export const fetchReportTemplatesSuccess = reportTemplates =>
+export const fetchReportTemplatesSuccess = (reportTemplates) =>
   actionBuilder(FETCH_REPORT_TEMPLATES_SUCCESS, { reportTemplates });
-export const fetchReportTemplatesFailure = error =>
+export const fetchReportTemplatesFailure = (error) =>
   actionBuilder(FETCH_REPORT_TEMPLATES_FAILURE, error);
 
 export const fetchSingleReportTemplateRequest = (
@@ -72,16 +72,16 @@ export const fetchSingleReportTemplateRequest = (
     reportId,
     interventionId,
   });
-export const fetchSingleReportTemplateSuccess = reportTemplate =>
+export const fetchSingleReportTemplateSuccess = (reportTemplate) =>
   actionBuilder(FETCH_SINGLE_REPORT_TEMPLATE_SUCCESS, { reportTemplate });
-export const fetchSingleReportTemplateFailure = error =>
+export const fetchSingleReportTemplateFailure = (error) =>
   actionBuilder(FETCH_SINGLE_REPORT_TEMPLATE_FAILURE, error);
 
 export const addReportTemplateRequest = (sessionId, reportTemplate) =>
   actionBuilder(ADD_REPORT_TEMPLATE_REQUEST, { reportTemplate, sessionId });
-export const addReportTemplateSuccess = reportTemplate =>
+export const addReportTemplateSuccess = (reportTemplate) =>
   actionBuilder(ADD_REPORT_TEMPLATE_SUCCESS, { reportTemplate });
-export const addReportTemplateFailure = error =>
+export const addReportTemplateFailure = (error) =>
   actionBuilder(ADD_REPORT_TEMPLATE_FAILURE, error);
 
 export const updateReportTemplateRequest = (
@@ -94,9 +94,9 @@ export const updateReportTemplateRequest = (
     sessionId,
     imageData,
   });
-export const updateReportTemplateSuccess = reportTemplate =>
+export const updateReportTemplateSuccess = (reportTemplate) =>
   actionBuilder(UPDATE_REPORT_TEMPLATE_SUCCESS, { reportTemplate });
-export const updateReportTemplateFailure = error =>
+export const updateReportTemplateFailure = (error) =>
   actionBuilder(UPDATE_REPORT_TEMPLATE_FAILURE, error);
 
 export const generateTestReportRequest = (sessionId, reportId) =>
@@ -106,45 +106,45 @@ export const generateTestReportRequest = (sessionId, reportId) =>
   });
 export const generateTestReportSuccess = () =>
   actionBuilder(GENERATE_TEST_REPORT_SUCCESS, {});
-export const generateTestReportFailure = error =>
+export const generateTestReportFailure = (error) =>
   actionBuilder(GENERATE_TEST_REPORT_FAILURE, error);
 
 export const deleteReportTemplateRequest = (sessionId, id) =>
   actionBuilder(DELETE_REPORT_TEMPLATE_REQUEST, { id, sessionId });
 export const deleteReportTemplateSuccess = () =>
   actionBuilder(DELETE_REPORT_TEMPLATE_SUCCESS, {});
-export const deleteReportTemplateFailure = error =>
+export const deleteReportTemplateFailure = (error) =>
   actionBuilder(DELETE_REPORT_TEMPLATE_FAILURE, error);
 
 export const deleteReportTemplateLogoRequest = (sessionId, id) =>
   actionBuilder(DELETE_REPORT_TEMPLATE_LOGO_REQUEST, { id, sessionId });
 export const deleteReportTemplateLogoSuccess = () =>
   actionBuilder(DELETE_REPORT_TEMPLATE_LOGO_SUCCESS, {});
-export const deleteReportTemplateLogoFailure = error =>
+export const deleteReportTemplateLogoFailure = (error) =>
   actionBuilder(DELETE_REPORT_TEMPLATE_LOGO_FAILURE, error);
 
-export const selectReportTemplate = id =>
+export const selectReportTemplate = (id) =>
   actionBuilder(SELECT_REPORT_TEMPLATE, { id });
 
 export const addTemplateSectionRequest = (section, reportId) =>
   actionBuilder(ADD_TEMPLATE_SECTION_REQUEST, { reportId, section });
-export const addTemplateSectionSuccess = section =>
+export const addTemplateSectionSuccess = (section) =>
   actionBuilder(ADD_TEMPLATE_SECTION_SUCCESS, { section });
-export const addTemplateSectionFailure = error =>
+export const addTemplateSectionFailure = (error) =>
   actionBuilder(ADD_TEMPLATE_SECTION_FAILURE, error);
 
 export const updateTemplateSectionRequest = (section, reportId) =>
   actionBuilder(UPDATE_TEMPLATE_SECTION_REQUEST, { reportId, section });
-export const updateTemplateSectionSuccess = section =>
+export const updateTemplateSectionSuccess = (section) =>
   actionBuilder(UPDATE_TEMPLATE_SECTION_SUCCESS, { section });
-export const updateTemplateSectionFailure = error =>
+export const updateTemplateSectionFailure = (error) =>
   actionBuilder(UPDATE_TEMPLATE_SECTION_FAILURE, error);
 
 export const deleteTemplateSectionRequest = (sectionId, reportId) =>
   actionBuilder(DELETE_TEMPLATE_SECTION_REQUEST, { reportId, sectionId });
 export const deleteTemplateSectionSuccess = () =>
   actionBuilder(DELETE_TEMPLATE_SECTION_SUCCESS, {});
-export const deleteTemplateSectionFailure = error =>
+export const deleteTemplateSectionFailure = (error) =>
   actionBuilder(DELETE_TEMPLATE_SECTION_FAILURE, error);
 
 export const addSectionCaseRequest = (sectionCase, sectionId) =>
@@ -152,9 +152,9 @@ export const addSectionCaseRequest = (sectionCase, sectionId) =>
     sectionCase,
     sectionId,
   });
-export const addSectionCaseSuccess = sectionCase =>
+export const addSectionCaseSuccess = (sectionCase) =>
   actionBuilder(ADD_SECTION_CASE_SUCCESS, { sectionCase });
-export const addSectionCaseFailure = error =>
+export const addSectionCaseFailure = (error) =>
   actionBuilder(ADD_SECTION_CASE_FAILURE, error);
 
 export const updateSectionCaseRequest = (
@@ -169,16 +169,16 @@ export const updateSectionCaseRequest = (
     imageData,
     previewChanged,
   });
-export const updateSectionCaseSuccess = sectionCase =>
+export const updateSectionCaseSuccess = (sectionCase) =>
   actionBuilder(UPDATE_SECTION_CASE_SUCCESS, { sectionCase });
-export const updateSectionCaseFailure = error =>
+export const updateSectionCaseFailure = (error) =>
   actionBuilder(UPDATE_SECTION_CASE_FAILURE, error);
 
 export const deleteSectionCaseRequest = (caseId, sectionId) =>
   actionBuilder(DELETE_SECTION_CASE_REQUEST, { sectionId, caseId });
 export const deleteSectionCaseSuccess = () =>
   actionBuilder(DELETE_SECTION_CASE_SUCCESS, {});
-export const deleteSectionCaseFailure = error =>
+export const deleteSectionCaseFailure = (error) =>
   actionBuilder(DELETE_SECTION_CASE_FAILURE, error);
 
 export const deleteSectionCaseImageRequest = (caseId, sectionId) =>
@@ -188,10 +188,10 @@ export const deleteSectionCaseImageRequest = (caseId, sectionId) =>
   });
 export const deleteSectionCaseImageSuccess = () =>
   actionBuilder(DELETE_SECTION_CASE_IMAGE_SUCCESS, {});
-export const deleteSectionCaseImageFailure = error =>
+export const deleteSectionCaseImageFailure = (error) =>
   actionBuilder(DELETE_SECTION_CASE_IMAGE_FAILURE, error);
 
-export const selectTemplateSection = id =>
+export const selectTemplateSection = (id) =>
   actionBuilder(SELECT_TEMPLATE_SECTION, { id });
 
 export const reorderTemplateSectionRequest = (reportId, reorderedSections) =>
@@ -201,5 +201,5 @@ export const reorderTemplateSectionRequest = (reportId, reorderedSections) =>
   });
 export const reorderTemplateSectionSuccess = () =>
   actionBuilder(REORDER_TEMPLATE_SECTIONS_SUCCESS, {});
-export const reorderTemplateSectionFailure = error =>
+export const reorderTemplateSectionFailure = (error) =>
   actionBuilder(REORDER_TEMPLATE_SECTIONS_ERROR, error);

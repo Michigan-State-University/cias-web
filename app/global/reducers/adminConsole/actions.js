@@ -8,5 +8,5 @@ import {
 
 export const resetAudioRequest = () => actionBuilder(RESET_AUDIO_REQUEST, {});
 export const resetAudioSuccess = () => actionBuilder(RESET_AUDIO_SUCCESS, {});
-export const resetAudioError = error =>
+export const resetAudioError = (error) =>
   actionBuilder(RESET_AUDIO_ERROR, { error });

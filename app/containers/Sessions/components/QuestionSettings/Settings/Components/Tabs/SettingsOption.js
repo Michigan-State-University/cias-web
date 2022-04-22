@@ -5,7 +5,7 @@ import { useIntl } from 'react-intl';
 import { borders, colors } from 'theme';
 import { numericValidator } from 'utils/validators';
 
-import Switch from 'components/Switch';
+import { FullWidthSwitch } from 'components/Switch';
 import H3 from 'components/H3';
 import Row from 'components/Row';
 
@@ -15,12 +15,13 @@ import messages from '../messages';
 const SettingsOption = ({ setting, index, onUpdate, disabled, isLast }) => {
   const { formatMessage } = useIntl();
 
-  const handleUpdate = useCallback(value => onUpdate(`${index}`, value), [
-    index,
-  ]);
+  const handleUpdate = useCallback(
+    (value) => onUpdate(`${index}`, value),
+    [index],
+  );
 
   const handleStringToNumericUpdate = useCallback(
-    value => handleUpdate(+value),
+    (value) => handleUpdate(+value),
     [handleUpdate],
   );
 
@@ -28,24 +29,31 @@ const SettingsOption = ({ setting, index, onUpdate, disabled, isLast }) => {
     switch (setting?.constructor) {
       case Number:
         return (
-          <Input
-            placeholder={formatMessage(messages.textLimitSettingsPlaceholder)}
-            type="singleline"
-            keyboard="tel"
-            value={`${setting}`}
-            validator={numericValidator}
-            onBlur={handleStringToNumericUpdate}
-            width={150}
-          />
+          <>
+            <H3>{formatMessage(messages[`${index}`])}</H3>
+
+            <Input
+              placeholder={formatMessage(messages.textLimitSettingsPlaceholder)}
+              type="singleline"
+              keyboard="tel"
+              value={`${setting}`}
+              validator={numericValidator}
+              onBlur={handleStringToNumericUpdate}
+              width={150}
+            />
+          </>
         );
       case Boolean:
       default:
         return (
-          <Switch
+          <FullWidthSwitch
+            id={index}
             disabled={disabled}
             checked={setting}
             onToggle={handleUpdate}
-          />
+          >
+            <H3>{formatMessage(messages[`${index}`])}</H3>
+          </FullWidthSwitch>
         );
     }
   };
@@ -62,8 +70,6 @@ const SettingsOption = ({ setting, index, onUpdate, disabled, isLast }) => {
           : null
       }
     >
-      <H3>{formatMessage(messages[`${index}`])}</H3>
-
       {renderSetting()}
     </Row>
   );

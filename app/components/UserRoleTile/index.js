@@ -40,7 +40,4 @@ UserRoleTile.propTypes = {
   intl: PropTypes.shape(IntlShape),
 };
 
-export default compose(
-  injectIntl,
-  memo,
-)(UserRoleTile);
+export default compose(injectIntl, memo)(UserRoleTile);

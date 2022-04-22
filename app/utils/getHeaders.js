@@ -3,7 +3,7 @@ export const headersConst = {
   'Token-Type': 'Bearer',
 };
 
-export const getHeaders = headers => ({
+export const getHeaders = (headers) => ({
   ...headersConst,
   'Access-Token': headers.Token,
   Client: headers.Client,

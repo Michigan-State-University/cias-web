@@ -36,7 +36,7 @@ const BlockTypeChooser = ({
 
   useOutsideClick(chooser, () => toggleTypeChooser(false), typeChooserOpen);
 
-  const handleClick = type => {
+  const handleClick = (type) => {
     onClick(type);
     toggleTypeChooser();
   };
@@ -47,17 +47,17 @@ const BlockTypeChooser = ({
 
     if (disableReadQuestionBlockType)
       filteredBlockTypes = blockTypes.filter(
-        type => type !== readQuestionBlockType,
+        (type) => type !== readQuestionBlockType,
       );
 
     if (disableFeedbackBlock)
       filteredBlockTypes = filteredBlockTypes.filter(
-        type => type !== feedbackBlockType,
+        (type) => type !== feedbackBlockType,
       );
 
     if (!isFeedbackScreen)
       filteredBlockTypes = filteredBlockTypes.filter(
-        type => type !== feedbackBlockType,
+        (type) => type !== feedbackBlockType,
       );
 
     return filteredBlockTypes;
@@ -79,11 +79,10 @@ const BlockTypeChooser = ({
           shadow={boxShadows.black}
           position="absolute"
           width="100%"
+          bg={colors.white}
         >
           <Box
-            borderBottom={`${borders.borderWidth} ${borders.borderStyle} ${
-              colors.linkWater
-            }`}
+            borderBottom={`${borders.borderWidth} ${borders.borderStyle} ${colors.linkWater}`}
             padded
           >
             <Text fontWeight="bold" fontSize={fontSizes.regular}>

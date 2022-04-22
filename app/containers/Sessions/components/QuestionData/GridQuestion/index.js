@@ -19,8 +19,8 @@ import { BadgeInput } from 'components/Input/BadgeInput';
 import { StyledInput } from 'components/Input/StyledInput';
 import { ScrollFogBox } from 'components/Box/ScrollFog';
 import { Table, THead, TBody, StripedTR, TD, TH } from 'components/Table';
+import OriginalTextHover from 'components/OriginalTextHover';
 
-import Question from 'models/Session/Question';
 import scrollByRef from 'utils/scrollByRef';
 import { numericValidator, variableNameValidator } from 'utils/validators';
 import { themeColors, colors, elements } from 'theme';
@@ -132,9 +132,7 @@ const GridQuestion = ({
                 {columns.map((column, columnIndex) => (
                   <TH
                     scope="col"
-                    key={`question-${
-                      selectedQuestion.id
-                    }-col-th-${columnIndex}`}
+                    key={`question-${selectedQuestion.id}-col-th-${columnIndex}`}
                     onMouseEnter={() => setHoveredColumn(columnIndex)}
                     onMouseLeave={() => setHoveredColumn(-1)}
                   >
@@ -171,7 +169,7 @@ const GridQuestion = ({
                           )}
                           value={column.variable.value}
                           color={colors.azure}
-                          onBlur={val =>
+                          onBlur={(val) =>
                             updateColumn(
                               { variable: { value: val } },
                               columnIndex,
@@ -188,24 +186,34 @@ const GridQuestion = ({
                           {column.payload}
                         </Column>
                       ) : (
-                        <StyledInput
-                          disabled={isNarratorTabOrEditNotPossible}
-                          cursor={
-                            isNarratorTabOrEditNotPossible ? 'text' : 'pointer'
-                          }
-                          width={110}
-                          px={0}
-                          py={12}
-                          textAlign="center"
-                          placeholder={getPlaceholder(
-                            'columnPlaceholder',
-                            columnIndex + 1,
-                          )}
-                          value={column.payload}
-                          onBlur={value =>
-                            updateColumn({ payload: value }, columnIndex)
-                          }
-                        />
+                        <OriginalTextHover
+                          id={`question-${selectedQuestion.id}-column-${columnIndex}`}
+                          text={column?.original_text}
+                          hidden={isNarratorTab}
+                          direction="column"
+                          gap={8}
+                        >
+                          <StyledInput
+                            disabled={isNarratorTabOrEditNotPossible}
+                            cursor={
+                              isNarratorTabOrEditNotPossible
+                                ? 'text'
+                                : 'pointer'
+                            }
+                            width={110}
+                            px={0}
+                            py={12}
+                            textAlign="center"
+                            placeholder={getPlaceholder(
+                              'columnPlaceholder',
+                              columnIndex + 1,
+                            )}
+                            value={column.payload}
+                            onBlur={(value) =>
+                              updateColumn({ payload: value }, columnIndex)
+                            }
+                          />
+                        </OriginalTextHover>
                       )}
                     </Column>
                   </TH>
@@ -255,7 +263,7 @@ const GridQuestion = ({
                             )}
                             value={row.variable.name}
                             color={colors.jungleGreen}
-                            onBlur={val =>
+                            onBlur={(val) =>
                               updateRow({ variable: { name: val } }, rowIndex)
                             }
                             autoComplete="off"
@@ -271,28 +279,35 @@ const GridQuestion = ({
                             {row.payload}
                           </Column>
                         ) : (
-                          <StyledInput
-                            type="multiline"
-                            rows="2"
-                            disabled={isNarratorTabOrEditNotPossible}
-                            cursor={
-                              isNarratorTabOrEditNotPossible
-                                ? 'text'
-                                : 'pointer'
-                            }
-                            width={elements.grid.firstColWidth}
-                            px={0}
-                            py={12}
-                            textAlign="center"
-                            placeholder={getPlaceholder(
-                              'rowPlaceholder',
-                              rowIndex + 1,
-                            )}
-                            value={row.payload}
-                            onBlur={value =>
-                              updateRow({ payload: value }, rowIndex)
-                            }
-                          />
+                          <OriginalTextHover
+                            id={`question-${selectedQuestion.id}-row-${rowIndex}`}
+                            text={row?.original_text}
+                            hidden={isNarratorTab}
+                            width="100%"
+                          >
+                            <StyledInput
+                              type="multiline"
+                              rows="2"
+                              disabled={isNarratorTabOrEditNotPossible}
+                              cursor={
+                                isNarratorTabOrEditNotPossible
+                                  ? 'text'
+                                  : 'pointer'
+                              }
+                              width={elements.grid.firstColWidth}
+                              px={0}
+                              py={12}
+                              textAlign="center"
+                              placeholder={getPlaceholder(
+                                'rowPlaceholder',
+                                rowIndex + 1,
+                              )}
+                              value={row.payload}
+                              onBlur={(value) =>
+                                updateRow({ payload: value }, rowIndex)
+                              }
+                            />
+                          </OriginalTextHover>
                         )}
                       </Row>
                     </Row>
@@ -300,9 +315,7 @@ const GridQuestion = ({
                   {columns.map((_, columnIndex) => (
                     <TD
                       height="inherit"
-                      key={`question-${
-                        selectedQuestion.id
-                      }-row-cell-${rowIndex}-${columnIndex}`}
+                      key={`question-${selectedQuestion.id}-row-cell-${rowIndex}-${columnIndex}`}
                     >
                       <Row justify="center" align="center">
                         <Img src={radio} />
@@ -333,7 +346,7 @@ const GridQuestion = ({
 };
 
 GridQuestion.propTypes = {
-  selectedQuestion: PropTypes.shape(Question).isRequired,
+  selectedQuestion: PropTypes.object.isRequired,
   intl: PropTypes.object.isRequired,
   addRow: PropTypes.func.isRequired,
   addColumn: PropTypes.func.isRequired,
@@ -358,14 +371,12 @@ const mapDispatchToProps = {
   updateColumn: (value, index) =>
     updateQuestionData({ type: UPDATE_COLUMN, data: { value, index } }),
 
-  deleteRow: index => updateQuestionData({ type: DELETE_ROW, data: { index } }),
-  deleteColumn: index =>
+  deleteRow: (index) =>
+    updateQuestionData({ type: DELETE_ROW, data: { index } }),
+  deleteColumn: (index) =>
     updateQuestionData({ type: DELETE_COLUMN, data: { index } }),
 };
 
-const withConnect = connect(
-  mapStateToProps,
-  mapDispatchToProps,
-);
+const withConnect = connect(mapStateToProps, mapDispatchToProps);
 
 export default injectIntl(compose(withConnect)(GridQuestion));

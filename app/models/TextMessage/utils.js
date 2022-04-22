@@ -5,8 +5,8 @@ import sortBy from 'lodash/sortBy';
  * @param {Array<TextMessage>} textMessages
  * @return {Array<TextMessage>}
  */
-export const sortTextMessagesByDate = textMessages =>
+export const sortTextMessagesByDate = (textMessages) =>
   sortBy(textMessages, [
     'schedulePayload',
-    textMessage => textMessage.name?.toLowerCase(),
+    (textMessage) => textMessage.name?.toLowerCase(),
   ]);

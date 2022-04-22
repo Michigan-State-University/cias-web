@@ -1,25 +1,141 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`<PublicLayout /> Should render and match the snapshot 1`] = `
+.c3 {
+  width: auto;
+  height: auto;
+  height: 80px;
+}
+
+.c0 {
+  position: relative;
+  z-index: 0;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  min-width: 100%;
+  min-height: 100%;
+  background: #F8FBFF;
+}
+
+.c1 {
+  position: absolute;
+  z-index: -1;
+  background: #FFFFFF;
+}
+
+.c2 {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-flex: 0.75;
+  -ms-flex: 0.75;
+  flex: 0.75;
+  -webkit-flex-direction: column;
+  -ms-flex-direction: column;
+  flex-direction: column;
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  background: #FFFFFF;
+  padding: 0 20px 30px 20px;
+  border-radius: 5px;
+  box-shadow: 0px 4px 10px rgba(227,238,251,0.8);
+  position: fixed;
+  height: 100vh;
+  width: 50vw;
+  -webkit-box-pack: center;
+  -webkit-justify-content: center;
+  -ms-flex-pack: center;
+  justify-content: center;
+}
+
+.c4 {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-flex: 1;
+  -ms-flex: 1;
+  flex: 1;
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  -webkit-box-pack: center;
+  -webkit-justify-content: center;
+  -ms-flex-pack: center;
+  justify-content: center;
+  padding: 30px 15px;
+  margin-left: 50vw;
+}
+
+@media only screen and (max-width:768px) {
+  .c0 {
+    -webkit-flex-direction: column;
+    -ms-flex-direction: column;
+    flex-direction: column;
+  }
+}
+
+@media only screen and (max-width:768px) {
+  .c1 {
+    background: transparent;
+    height: 400px;
+    width: 100%;
+  }
+}
+
+@media only screen and (max-width:768px) {
+  .c2 {
+    background: #FFFFFF;
+    position: relative;
+    height: auto;
+    width: 100%;
+    -webkit-box-pack: start;
+    -webkit-justify-content: flex-start;
+    -ms-flex-pack: start;
+    justify-content: flex-start;
+    background: none;
+    padding: 30px 15px;
+    -webkit-flex: initial;
+    -ms-flex: initial;
+    flex: initial;
+  }
+}
+
+@media only screen and (max-width:768px) {
+  .c4 {
+    margin-left: 0;
+    -webkit-align-items: center;
+    -webkit-box-align: center;
+    -ms-flex-align: center;
+    align-items: center;
+  }
+}
+
 <div>
   <div
-    class="styled__Background-hdmnn0-0 hmySuK"
+    class="c0"
   >
     <div
-      class="styled__TopBackground-hdmnn0-1 fKSajA"
+      class="c1"
     />
     <div
-      class="styled__Header-hdmnn0-2 hWqYDm"
+      class="c2"
     >
       <img
         alt="CIAS Application Logo"
-        class="Img-sc-55j3su-0 A-dfzT"
+        class="c3"
         height="80"
         src="IMAGE_MOCK"
       />
     </div>
     <div
-      class="styled__Content-hdmnn0-4 btbiUY"
+      class="c4"
     >
       <div>
         Children

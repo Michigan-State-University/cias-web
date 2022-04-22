@@ -20,11 +20,14 @@ const QuestionListItem = ({
 }) => {
   const [width, setWidth] = useState(0);
 
-  const canSelectQuestion = pos =>
+  const canSelectQuestion = (pos) =>
     pos > selectedQuestion.position ||
     selectedQuestion.question_group_id !== groupId;
 
-  const onRefChange = useCallback(node => setWidth(node?.offsetWidth ?? 0), []);
+  const onRefChange = useCallback(
+    (node) => setWidth(node?.offsetWidth ?? 0),
+    [],
+  );
 
   const maxRowContentWidth = width - 70;
 

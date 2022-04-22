@@ -68,9 +68,10 @@ export const LoginPage = ({
     }
   }, [verificationSuccess]);
 
-  const queryObject = useMemo(() => parse(search, { parseBooleans: true }), [
-    search,
-  ]);
+  const queryObject = useMemo(
+    () => parse(search, { parseBooleans: true }),
+    [search],
+  );
 
   useEffect(() => {
     if (has(queryObject, 'account_confirmation_success')) {
@@ -160,9 +161,6 @@ const mapDispatchToProps = {
   verifyCode: verificationCodeRequest,
 };
 
-const withConnect = connect(
-  mapStateToProps,
-  mapDispatchToProps,
-);
+const withConnect = connect(mapStateToProps, mapDispatchToProps);
 
 export default compose(withConnect)(LoginPage);

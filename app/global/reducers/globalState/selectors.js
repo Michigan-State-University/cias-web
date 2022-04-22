@@ -5,11 +5,11 @@ import { initialState } from './reducer';
  * Direct selector to the global state domain
  */
 
-const selectGlobalStateDomain = state => state.global || initialState;
+const selectGlobalStateDomain = (state) => state.global || initialState;
 
 const selectFileDownloadDomain = createSelector(
   selectGlobalStateDomain,
-  substate => substate.fileDownload,
+  (substate) => substate.fileDownload,
 );
 
 /**
@@ -21,25 +21,16 @@ const selectFileDownloadDomain = createSelector(
  */
 
 export const makeSelectGlobalState = () =>
-  createSelector(
-    selectGlobalStateDomain,
-    substate => substate,
-  );
+  createSelector(selectGlobalStateDomain, (substate) => substate);
 
 export const makeSelectAudioInstance = () =>
-  createSelector(
-    selectGlobalStateDomain,
-    substate => substate.audioInstance,
-  );
+  createSelector(selectGlobalStateDomain, (substate) => substate.audioInstance);
 
-export const makeSelectFile = file =>
+export const makeSelectFile = (file) =>
   createSelector(
     selectFileDownloadDomain,
-    substate => substate.cachedFiles[file],
+    (substate) => substate.cachedFiles[file],
   );
 
 export const makeSelectFileDownloadLoading = () =>
-  createSelector(
-    selectFileDownloadDomain,
-    substate => substate.isLoading,
-  );
+  createSelector(selectFileDownloadDomain, (substate) => substate.isLoading);

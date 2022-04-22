@@ -33,7 +33,7 @@ const voiceSettingRemovedBlocks = [readQuestionBlockType, speechType];
 
 const animationSettingRemovedBlocks = [bodyAnimationType, headAnimationType];
 
-export const getRemovedBlockForSetting = setting => {
+export const getRemovedBlockForSetting = (setting) => {
   if (setting === 'all')
     return [...animationSettingRemovedBlocks, ...voiceSettingRemovedBlocks];
   if (setting === 'animation') return animationSettingRemovedBlocks;

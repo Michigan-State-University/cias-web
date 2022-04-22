@@ -43,9 +43,7 @@ const ThirdPartyQuestionLayout = ({
                   checked={isChecked}
                   mr={16}
                 />
-                <label htmlFor={ariaInputId}>
-                  <Markup content={payload} />
-                </label>
+                <Markup content={payload} />
               </Row>
             </HoverableBox>
           </Row>

@@ -5,15 +5,16 @@ import { connect } from 'react-redux';
 import { createStructuredSelector } from 'reselect';
 import { injectIntl } from 'react-intl';
 
-import ApprovableInput from 'components/Input/ApprovableInput';
+import FlexibleWidthApprovableInput from 'components/Input/FlexibleWidthApprovableInput';
 import Box from 'components/Box';
 import Column from 'components/Column';
 import HoverableBox from 'components/Box/HoverableBox';
 import Img from 'components/Img';
 import PlusCircle from 'components/Circle/PlusCircle';
-import Question from 'models/Session/Question';
+
 import Row from 'components/Row';
 import Text from 'components/Text';
+import OriginalTextHover from 'components/OriginalTextHover';
 import bin from 'assets/svg/bin-red.svg';
 import checkbox from 'assets/svg/checkbox.svg';
 import globalMessages from 'global/i18n/globalMessages';
@@ -56,7 +57,7 @@ const MultiQuestion = ({
   const editingPossible = canEdit(interventionStatus);
   const isNarratorTabOrEditNotPossible = isNarratorTab || !editingPossible;
 
-  const handleMouseEnter = index => () => {
+  const handleMouseEnter = (index) => () => {
     if (!isNarratorTabOrEditNotPossible) setHovered(index);
   };
 
@@ -85,8 +86,12 @@ const MultiQuestion = ({
                     src={checkbox}
                     mr={CHECKBOX_MARGIN}
                   />
-                  <Box width="100%">
-                    <ApprovableInput
+                  <OriginalTextHover
+                    id={`question-${selectedQuestion.id}-answer-${index}`}
+                    text={value?.original_text}
+                    hidden={isNarratorTab}
+                  >
+                    <FlexibleWidthApprovableInput
                       mr={8}
                       fontSize={18}
                       type="singleline"
@@ -94,13 +99,14 @@ const MultiQuestion = ({
                         index: index + 1,
                       })}
                       value={value.payload}
-                      onCheck={newTitle =>
+                      onCheck={(newTitle) =>
                         updateAnswer(index, { ...value, payload: newTitle })
                       }
                       richText
                       disabled={isNarratorTabOrEditNotPossible}
+                      emptyWidth={105}
                     />
-                  </Box>
+                  </OriginalTextHover>
                 </Row>
                 <Row>
                   <Box
@@ -126,7 +132,7 @@ const MultiQuestion = ({
                   )}
                   value={value.variable.name}
                   color={colors.jungleGreen}
-                  onBlur={val =>
+                  onBlur={(val) =>
                     updateAnswer(index, {
                       ...value,
                       variable: { ...value.variable, name: val },
@@ -146,7 +152,7 @@ const MultiQuestion = ({
                   )}
                   value={value.variable.value}
                   color={colors.azure}
-                  onBlur={val =>
+                  onBlur={(val) =>
                     updateAnswer(index, {
                       ...value,
                       variable: { ...value.variable, value: val },
@@ -175,7 +181,7 @@ const MultiQuestion = ({
 };
 
 MultiQuestion.propTypes = {
-  selectedQuestion: PropTypes.shape(Question).isRequired,
+  selectedQuestion: PropTypes.object.isRequired,
   intl: PropTypes.object.isRequired,
   addAnswer: PropTypes.func.isRequired,
   updateAnswer: PropTypes.func.isRequired,
@@ -188,17 +194,14 @@ const mapStateToProps = createStructuredSelector({
   selectedQuestion: makeSelectSelectedQuestion(),
 });
 
-const mapDispatchToProps = dispatch => ({
+const mapDispatchToProps = (dispatch) => ({
   addAnswer: () => dispatch(updateQuestionData({ type: ADD })),
   updateAnswer: (index, value) =>
     dispatch(updateQuestionData({ type: UPDATE, data: { index, value } })),
-  removeAnswer: index =>
+  removeAnswer: (index) =>
     dispatch(updateQuestionData({ type: REMOVE, data: { index } })),
 });
 
-const withConnect = connect(
-  mapStateToProps,
-  mapDispatchToProps,
-);
+const withConnect = connect(mapStateToProps, mapDispatchToProps);
 
 export default injectIntl(compose(withConnect)(MultiQuestion));

@@ -2,7 +2,6 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import classnames from 'classnames';
 import { useContainerQuery } from 'react-container-query';
-import { useIntl } from 'react-intl';
 
 import { visualAnalogScaleLabelStyles } from 'theme';
 
@@ -12,7 +11,7 @@ import Row from 'components/Row';
 import Box from 'components/Box';
 
 import { VisualAnalogueSlider } from './styled';
-import messages from './messages';
+import { QUESTION_SUBTITLE_ID, QUESTION_TITLE_ID } from '../constants';
 
 const QUERY = { 'wrap-text': { maxWidth: containerBreakpoints.sm } };
 
@@ -24,7 +23,6 @@ const VisualAnalogueScaleQuestionLayout = ({
   answerValue,
   showNumber,
 }) => {
-  const { formatMessage } = useIntl();
   const [params, containerRef] = useContainerQuery(QUERY);
 
   const labels = {
@@ -51,7 +49,7 @@ const VisualAnalogueScaleQuestionLayout = ({
               marks={labels}
               showValue={showNumber}
               className={classnames(params)}
-              ariaLabelForHandle={formatMessage(messages.sliderLabel)}
+              ariaLabelledByForHandle={`${QUESTION_TITLE_ID} ${QUESTION_SUBTITLE_ID}`}
             />
           </Box>
         </Row>

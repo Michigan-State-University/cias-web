@@ -2,13 +2,12 @@ name: Continuous Integration
 on: push
 
 jobs:
-  verify:
-    name: Lint and set-up test chunks
+  chunk-setup:
+    name: Set-up test chunks
     runs-on: ubuntu-latest
     outputs:
       test-chunks: ${{ steps['set-test-chunks'].outputs['test-chunks'] }}
       test-chunk-ids: ${{ steps['set-test-chunk-ids'].outputs['test-chunk-ids'] }}
-
     steps:
       - name: Checkout code
         uses: actions/checkout@v2
@@ -16,7 +15,7 @@ jobs:
       - name: Set up Node
         uses: actions/setup-node@v1
         with:
-          node-version: '14'
+          node-version: '16'
 
       - name: Cache node modules
         uses: actions/cache@v2
@@ -31,14 +30,11 @@ jobs:
             ${{ runner.os }}--
 
       - name: Install Dependencies
-        run: npm ci
-
-      - name: Lint CSS and JS
-        run: npm run lint
+        run: npm ci --ignore-scripts
 
       - id: set-test-chunks
         name: Set Chunks
-        run: echo "::set-output name=test-chunks::$(npx jest --listTests --json | jq -cM '[_nwise(length / 3 | floor)]')"
+        run: echo "::set-output name=test-chunks::$(npx jest --listTests --json | jq -cM '[to_entries | group_by(.key % ${{ secrets.TEST_BATCH_COUNT }}) | .[] | map(.value)]')"
 
       - id: set-test-chunk-ids
         name: Set Chunk IDs
@@ -46,13 +42,9 @@ jobs:
         env:
           CHUNKS: ${{ steps['set-test-chunks'].outputs['test-chunks'] }}
 
-  test:
+  lint:
+    name: Lint JS, TS and CSS
     runs-on: ubuntu-latest
-    name: Test (batch ${{ matrix.chunk }})
-    needs: verify
-    strategy:
-      matrix:
-        chunk: ${{ fromJson(needs.verify.outputs['test-chunk-ids']) }}
     steps:
       - name: Checkout code
         uses: actions/checkout@v2
@@ -60,7 +52,7 @@ jobs:
       - name: Set up Node
         uses: actions/setup-node@v1
         with:
-          node-version: '14'
+          node-version: '16'
 
       - name: Cache node modules
         uses: actions/cache@v2
@@ -75,9 +67,43 @@ jobs:
             ${{ runner.os }}--
 
       - name: Install Dependencies
-        run: npm ci
+        run: npm ci --ignore-scripts
+
+      - name: Lint CSS and JS
+        run: npm run lint
+
+  test:
+    runs-on: ubuntu-latest
+    name: Test (batch ${{ matrix.chunk }})
+    needs: chunk-setup
+    strategy:
+      matrix:
+        chunk: ${{ fromJson(needs['chunk-setup'].outputs['test-chunk-ids']) }}
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+
+      - name: Set up Node
+        uses: actions/setup-node@v1
+        with:
+          node-version: '16'
+
+      - name: Cache node modules
+        uses: actions/cache@v2
+        with:
+          path: |
+            ~/.npm
+            ~/.cache
+          key: ${{ runner.os }}-build-${{ env.cache-name }}-${{ hashFiles('**/package-lock.json') }}
+          restore-keys: |
+            ${{ runner.os }}-build-${{ env.cache-name }}-
+            ${{ runner.os }}-build-
+            ${{ runner.os }}--
+
+      - name: Install Dependencies
+        run: npm ci --ignore-scripts
 
       - name: Run Tests
         run: echo $CHUNKS | jq '.[${{ matrix.chunk }}] | .[] | @text' | xargs npx cross-env NODE_ENV=test jest
         env:
-          CHUNKS: ${{ needs.verify.outputs['test-chunks'] }}
+          CHUNKS: ${{ needs['chunk-setup'].outputs['test-chunks'] }}

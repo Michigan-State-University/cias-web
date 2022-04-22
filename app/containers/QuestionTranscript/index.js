@@ -17,9 +17,10 @@ const QuestionTranscript = ({ question, language }) => {
     narrator: { blocks: allBlocks },
   } = question;
 
-  const texts = useMemo(() => mapBlockToTextWithRealIndex(allBlocks), [
-    allBlocks,
-  ]);
+  const texts = useMemo(
+    () => mapBlockToTextWithRealIndex(allBlocks),
+    [allBlocks],
+  );
 
   useEffect(() => {
     const indexExists = texts.some(

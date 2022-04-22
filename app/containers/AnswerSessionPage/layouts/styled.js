@@ -92,6 +92,7 @@ export const VisualAnalogueSlider = styled(AppSlider)`
 `;
 
 export const FirstTH = styled(TH)`
+  z-index: 1;
   background-color: inherit;
   text-align: left;
   word-break: normal;

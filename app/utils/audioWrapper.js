@@ -46,7 +46,7 @@ class AudioWrapper extends Audio {
   /**
    * Set a function to execute when starting a file load
    */
-  onLoading = onLoading => {
+  onLoading = (onLoading) => {
     this.onLoadingHandler = onLoading;
     this.addEventListener('loadstart', onLoading);
   };
@@ -54,7 +54,7 @@ class AudioWrapper extends Audio {
   /**
    * Set a function to execute when finished a file load
    */
-  onLoaded = onLoaded => {
+  onLoaded = (onLoaded) => {
     this.onLoadedHandler = onLoaded;
     this.addEventListener('canplay', onLoaded);
   };
@@ -62,7 +62,7 @@ class AudioWrapper extends Audio {
   /**
    * Set a function to execute when ended playing audio
    */
-  onEnded = onEnded => {
+  onEnded = (onEnded) => {
     this.onEndedHandler = onEnded;
     this.addEventListener('ended', onEnded);
   };
@@ -70,7 +70,7 @@ class AudioWrapper extends Audio {
   /**
    * Set a function to execute when error playing audio
    */
-  onError = onError => {
+  onError = (onError) => {
     this.onErrorHandler = onError;
     this.addEventListener('error', onError);
   };
@@ -78,7 +78,7 @@ class AudioWrapper extends Audio {
   /**
    * Set a function to execute when start playing audio
    */
-  onPlay = onPlay => {
+  onPlay = (onPlay) => {
     this.onPlayHandler = onPlay;
     this.addEventListener('play', onPlay);
   };
@@ -131,7 +131,7 @@ class AudioWrapper extends Audio {
   /**
    * Change the audio `source` and `load` the file.
    */
-  setSrc = src => {
+  setSrc = (src) => {
     this.src = src;
     this.load();
   };

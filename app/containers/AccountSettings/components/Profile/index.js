@@ -23,7 +23,7 @@ import WrappedPhoneNumberForm from './Containers/WrappedPhoneNumberForm';
 
 import { StyledRow, TextButton, StyledTimezoneBox } from './styled';
 
-const Profile = props => {
+const Profile = (props) => {
   const {
     intl: { formatMessage },
     PasswordComponent,

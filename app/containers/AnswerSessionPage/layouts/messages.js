@@ -55,9 +55,13 @@ export default defineMessages({
     id: `${scope}.participantReportUserEmail`,
     defaultMessage: 'Your email is: <b>{email}</b>',
   },
-  dashboard: {
-    id: `${scope}.dashboard`,
+  goToDashboard: {
+    id: `${scope}.goToDashboard`,
     defaultMessage: 'Go to dashboard',
+  },
+  goToSessionMap: {
+    id: `${scope}.goToSessionMap`,
+    defaultMessage: 'Go to session map',
   },
   wcagExternalLinkWarning: {
     id: `${scope}.wcagExternalLinkWarning`,
@@ -82,8 +86,7 @@ export default defineMessages({
   },
   gridLabel: {
     id: `${scope}.gridLabel`,
-    defaultMessage:
-      'Question {questionIndex}: {questionText}; Answer {answerIndex}: {answerText}.',
+    defaultMessage: 'Question {questionIndex} and Answer {answerIndex}',
   },
   numberQuestionLabel: {
     id: `${scope}.numberQuestionLabel`,
@@ -92,5 +95,13 @@ export default defineMessages({
   textBoxQuestionRemainingCharacters: {
     id: `${scope}.textBoxQuestionRemainingCharacters`,
     defaultMessage: 'Remaining characters: {remaining}',
+  },
+  goBackToModules: {
+    id: `${scope}.backToModules`,
+    defaultMessage: '← Back to modules view',
+  },
+  goToNextModule: {
+    id: `${scope}.goToNextModule`,
+    defaultMessage: 'Go to next module',
   },
 });

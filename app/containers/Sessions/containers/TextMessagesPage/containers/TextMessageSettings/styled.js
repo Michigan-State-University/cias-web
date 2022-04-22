@@ -11,14 +11,14 @@ export const StyledSmsSettings = styled.div`
   box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
   height: calc(100vh - 70px);
   padding: ${padding};
-  overflow: scroll;
+  overflow-y: scroll;
+  overflow-x: hidden;
 `;
 
 export const SectionDivider = styled.div`
   height: 1px;
-  width: calc(100% + ${padding} * 2);
+  width: 100%;
   background-color: ${colors.linkWater};
-  left: -${padding};
   position: relative;
   margin: ${padding} 0;
 `;

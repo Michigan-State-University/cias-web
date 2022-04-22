@@ -20,7 +20,7 @@ import {
 } from '../../constants';
 
 describe('copyIntervention saga', () => {
-  const createPayload = withParams => ({
+  const createPayload = (withParams) => ({
     interventionId: 'intervention-test',
     users: withParams ? [createUser(), createUser(1)] : null,
     withoutRedirect: false,

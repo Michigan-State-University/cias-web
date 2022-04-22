@@ -16,7 +16,7 @@ export const useChildSizeCalculator = (containerRef, referenceRef) => {
   useEffect(() => {
     if (containerRef.current && referenceRef.current) {
       const referenceRefs = Array.from(containerRef.current.children).filter(
-        ref => ref !== referenceRef.current,
+        (ref) => ref !== referenceRef.current,
       );
 
       setSize({

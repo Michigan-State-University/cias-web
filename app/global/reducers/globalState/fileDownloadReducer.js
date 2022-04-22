@@ -19,7 +19,7 @@ export const initialState = {
 };
 
 export const fileDownloadReducer = (state = initialState, { payload, type }) =>
-  produce(state, draft => {
+  produce(state, (draft) => {
     switch (type) {
       case DOWNLOAD_FILE_REQUEST:
         draft.isLoading = true;

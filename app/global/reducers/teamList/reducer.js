@@ -49,7 +49,7 @@ export const initialState = {
 
 /* eslint-disable default-case, no-param-reassign */
 const teamListReducer = (state = initialState, { type, payload }) =>
-  produce(state, draft => {
+  produce(state, (draft) => {
     switch (type) {
       case FETCH_TEAMS_REQUEST:
         if (isEmpty(state.teams)) draft.loaders.teamsLoading = true;

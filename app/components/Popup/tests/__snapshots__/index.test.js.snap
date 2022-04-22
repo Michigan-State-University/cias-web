@@ -1,8 +1,12 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`<Popup /> Should render and match the snapshot 1`] = `
+.c0 {
+  position: relative;
+}
+
 <div
-  class="styled__Container-u9aus1-0 kMvwSH"
+  class="c0"
 >
   <div>
     Test
@@ -11,8 +15,12 @@ exports[`<Popup /> Should render and match the snapshot 1`] = `
 `;
 
 exports[`<Popup /> Should render and match the snapshot with different 1`] = `
+.c0 {
+  position: relative;
+}
+
 <div
-  class="styled__Container-u9aus1-0 kMvwSH"
+  class="c0"
 >
   <div>
     Test

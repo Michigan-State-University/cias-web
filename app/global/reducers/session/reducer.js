@@ -1,6 +1,5 @@
 import produce from 'immer';
 import set from 'lodash/set';
-import Session from 'models/Session/Session';
 
 import {
   EDIT_QUESTION_SUCCESS,
@@ -43,10 +42,16 @@ import {
   EDIT_SESSION_REQUEST,
   EDIT_SESSION_SUCCESS,
   EDIT_SESSION_ERROR,
+  BULK_EDIT_SESSION_REQUEST,
 } from './constants';
 
 export const initialState = {
-  session: new Session('', ''),
+  session: {
+    name: '',
+    type: '',
+    questions: [],
+    settings: {},
+  },
   sessionSaving: false,
   loaders: {
     createSession: false,
@@ -54,7 +59,15 @@ export const initialState = {
     editSession: false,
   },
   cache: {
-    session: new Session('', ''),
+    session: {
+      name: '',
+      type: '',
+      questions: [],
+      settings: {},
+    },
+  },
+  errors: {
+    getSession: null,
   },
 };
 
@@ -70,6 +83,7 @@ const saving = [
   REORDER_QUESTION_LIST_REQUEST,
   CREATE_QUESTION_REQUEST,
   UPDATE_QUESTION_IMAGE_REQUEST,
+  BULK_EDIT_SESSION_REQUEST,
 ];
 const saved = [
   EDIT_SESSION_SUCCESS,
@@ -94,24 +108,38 @@ const saved = [
 
 /* eslint-disable default-case, no-param-reassign */
 const sessionReducer = (state = initialState, action) =>
-  produce(state, draft => {
+  produce(state, (draft) => {
     if (saving.includes(action.type)) draft.sessionSaving = true;
     if (saved.includes(action.type)) draft.sessionSaving = false;
     switch (action.type) {
       case GET_SESSION_REQUEST:
         draft.loaders.getSession = true;
+        draft.errors.getSession = null;
         break;
       case GET_SESSION_SUCCESS:
         draft.loaders.getSession = false;
+        draft.errors.getSession = null;
         draft.session = action.payload.session;
         draft.cache.session = action.payload.session;
         break;
       case GET_SESSION_ERROR:
         draft.loaders.getSession = false;
+        draft.errors.getSession = action.payload.error;
         break;
 
       case EDIT_SESSION_REQUEST:
         set(draft.session, action.payload.path, action.payload.value);
+        break;
+      case BULK_EDIT_SESSION_REQUEST:
+        let newSession = action.payload.session;
+        if (action.payload.session.catTests) {
+          const { catTests, ...rest } = action.payload.session;
+          newSession = {
+            ...rest,
+            catMhTestTypes: catTests.map((id) => ({ id })),
+          };
+        }
+        draft.session = { ...state.session, ...newSession };
         break;
       case EDIT_SESSION_SUCCESS:
         draft.session = objectToCamelCase(action.payload.session);

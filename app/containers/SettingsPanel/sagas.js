@@ -1,14 +1,19 @@
 import { all } from 'redux-saga/effects';
 import {
   fetchInterventionSaga,
-  changeAccessSettingSaga,
   giveUserAccessSaga,
   fetchUsersWithAccessSaga,
   revokeUserAccessSaga,
+  addInterventionAttachmentsSaga,
+  deleteInterventionAttachmentSaga,
 } from 'global/reducers/intervention';
 
 function* interventionSettingPageSaga() {
-  yield all([fetchInterventionSaga(), changeAccessSettingSaga()]);
+  yield all([
+    fetchInterventionSaga(),
+    addInterventionAttachmentsSaga(),
+    deleteInterventionAttachmentSaga(),
+  ]);
 }
 
 function* accessGiverContainerSaga() {

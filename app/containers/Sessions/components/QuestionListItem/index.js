@@ -45,7 +45,7 @@ import {
 } from 'models/Session/QuestionTypes';
 import Box from 'components/Box';
 import Checkbox from 'components/Checkbox';
-import ConfirmationBox from 'components/ConfirmationBox';
+import { ConfirmationModal } from 'components/Modal';
 import Text from 'components/Text';
 import scrollByRef from 'utils/scrollByRef';
 
@@ -139,13 +139,13 @@ const QuestionListItem = ({
     setCopyOpen(true);
   };
 
-  const handleCopy = target => {
+  const handleCopy = (target) => {
     const copied = cloneDeep(question);
     set(copied, 'id', uniqueId());
     copyQuestion({ copied, questionId: question.id, target });
   };
 
-  const handleExternallyCopy = target => {
+  const handleExternallyCopy = (target) => {
     const copied = cloneDeep(question);
     set(copied, 'id', uniqueId());
     copyExternallyQuestion(target.sessionId, target.id, copied, [question.id]);
@@ -197,7 +197,7 @@ const QuestionListItem = ({
         disableSessionCopy
         pasteText={formatMessage(messages.pasteQuestion)}
       />
-      <ConfirmationBox
+      <ConfirmationModal
         visible={deleteOpen}
         onClose={() => setDeleteOpen(false)}
         description={formatMessage(messages.deleteModalTitle)}
@@ -225,10 +225,11 @@ const QuestionListItem = ({
           {manage && !isFinishScreen && (
             <Column xs={1}>
               <Checkbox
-                onClick={e => {
+                id={`question-to-select-${id}`}
+                onChange={(_, event) => {
                   selectSlide(id);
-                  e.stopPropagation();
-                  e.preventDefault();
+                  event.stopPropagation();
+                  event.preventDefault();
                 }}
                 checked={checked}
               />
@@ -281,7 +282,7 @@ const QuestionListItem = ({
       index={index}
       isDragDisabled={disabled}
     >
-      {provided => (
+      {(provided) => (
         <Box
           width="100%"
           key={id}
@@ -342,9 +343,6 @@ const mapDispatchToProps = {
   setCharacterPosition: setAnimationStopPosition,
 };
 
-const withConnect = connect(
-  mapStateToProps,
-  mapDispatchToProps,
-);
+const withConnect = connect(mapStateToProps, mapDispatchToProps);
 
 export default injectIntl(compose(withConnect)(QuestionListItem));

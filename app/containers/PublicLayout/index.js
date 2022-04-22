@@ -49,10 +49,11 @@ PublicLayout.propTypes = {
   withMsuLogo: PropTypes.bool,
 };
 
-const withPublicLayout = Component => props => (
-  <PublicLayout>
-    <Component {...props} />
-  </PublicLayout>
-);
+const withPublicLayout = (Component) => (props) =>
+  (
+    <PublicLayout>
+      <Component {...props} />
+    </PublicLayout>
+  );
 
 export default withPublicLayout;
