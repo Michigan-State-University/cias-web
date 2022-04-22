@@ -34,6 +34,7 @@ const ChooserComponent = ({
   disableCopy,
   listIcon,
   infiniteLoader,
+  disabledItemsIds,
 }) => {
   const infiniteLoaderRef = useRef();
   return (
@@ -76,6 +77,7 @@ const ChooserComponent = ({
                   selectAction,
                   disableCopy,
                   listIcon,
+                  disabledItemsIds,
                 }}
               >
                 <VirtualGrid
@@ -134,6 +136,7 @@ ChooserComponent.propTypes = {
   backText: PropTypes.string,
   listIcon: PropTypes.string,
   infiniteLoader: PropTypes.object,
+  disabledItemsIds: PropTypes.array,
 };
 
 export default injectIntl(ChooserComponent);

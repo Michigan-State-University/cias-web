@@ -420,6 +420,7 @@ function EditSessionPage({
         copyAction={onDuplicateGroupsInternally}
         disableInterventionCopy
         disableQuestionCopy
+        disableCurrentSessionCopy
         pasteText={formatMessage(messages.duplicateGroup)}
         defaultView={VIEWS.SESSION}
       />

@@ -26,6 +26,7 @@ const CopyItem = ({ data, index }) => {
     selectAction,
     disableCopy,
     listIcon,
+    disabledItemsIds,
   } = useContext(InfiniteScrollContext);
   const { formatMessage } = useIntl();
   const { items } = data;
@@ -42,7 +43,8 @@ const CopyItem = ({ data, index }) => {
     }
   };
   const isDisabled = count =>
-    disableCopy && !isNullOrUndefined(count) && count === 0;
+    disabledItemsIds?.includes(id) ||
+    (disableCopy && !isNullOrUndefined(count) && count === 0);
   return (
     <Column key={`${id}-select-target-question-group-${index}`}>
       <Row

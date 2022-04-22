@@ -53,6 +53,7 @@ const CopyChooser = ({
   disableQuestionGroupCopy,
   disableSessionCopy,
   disableInterventionCopy,
+  disableCurrentSessionCopy,
   changeView,
   pasteText,
   savedIds,
@@ -184,6 +185,9 @@ const CopyChooser = ({
             currentPlaceTitle={formatMessage(messages.sessionListHeader)}
             listIcon={sessionIcon}
             selectedItem={selectedItem}
+            disabledItemsIds={
+              disableCurrentSessionCopy ? [sessionId] : undefined
+            }
           />
         );
       case VIEWS.QUESTION_GROUP:
@@ -236,6 +240,7 @@ CopyChooser.propTypes = {
   disableQuestionGroupCopy: PropTypes.bool,
   disableSessionCopy: PropTypes.bool,
   disableInterventionCopy: PropTypes.bool,
+  disableCurrentSessionCopy: PropTypes.bool,
   changeView: PropTypes.func,
   savedIds: PropTypes.object,
   pasteText: PropTypes.string,
@@ -248,6 +253,7 @@ CopyChooser.defaultProps = {
   disableQuestionGroupCopy: false,
   disableSessionCopy: false,
   disableInterventionCopy: false,
+  disableCurrentSessionCopy: false,
 };
 
 const mapStateToProps = createStructuredSelector({
