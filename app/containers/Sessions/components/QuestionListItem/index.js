@@ -195,6 +195,7 @@ const QuestionListItem = ({
         copyAction={handleExternallyCopy}
         disableInterventionCopy
         disableSessionCopy
+        disableCurrentQuestionGroupCopy
         pasteText={formatMessage(messages.pasteQuestion)}
       />
       <ConfirmationModal

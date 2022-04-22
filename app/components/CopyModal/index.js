@@ -30,6 +30,7 @@ const CopyModal = ({
   disableQuestionGroupCopy,
   disableSessionCopy,
   disableInterventionCopy,
+  disableCurrentQuestionGroupCopy,
   disableCurrentSessionCopy,
   pasteText,
   defaultView,
@@ -55,6 +56,7 @@ const CopyModal = ({
           disableQuestionGroupCopy={disableQuestionGroupCopy}
           disableSessionCopy={disableSessionCopy}
           disableInterventionCopy={disableInterventionCopy}
+          disableCurrentQuestionGroupCopy={disableCurrentQuestionGroupCopy}
           disableCurrentSessionCopy={disableCurrentSessionCopy}
           pasteText={pasteText}
         />
@@ -71,6 +73,7 @@ CopyModal.propTypes = {
   disableQuestionGroupCopy: PropTypes.bool,
   disableSessionCopy: PropTypes.bool,
   disableInterventionCopy: PropTypes.bool,
+  disableCurrentQuestionGroupCopy: PropTypes.bool,
   disableCurrentSessionCopy: PropTypes.bool,
   pasteText: PropTypes.string,
   defaultView: PropTypes.string,
@@ -82,6 +85,7 @@ CopyModal.defaultProps = {
   disableQuestionGroupCopy: false,
   disableSessionCopy: false,
   disableInterventionCopy: false,
+  disableCurrentQuestionGroupCopy: false,
   disableCurrentSessionCopy: false,
   defaultView: VIEWS.QUESTION_GROUP,
   interventionStatusFilter: [draft],
