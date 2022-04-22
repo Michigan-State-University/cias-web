@@ -7,7 +7,7 @@ export {
   createNewQuestionInGroup,
   reorderGroupListRequest,
   cleanGroups,
-  duplicateQuestionsInternallyRequest,
+  duplicateGroupsInternallyRequest,
 } from './actions';
 export { questionGroupsReducer } from './reducer';
 export {
@@ -24,5 +24,5 @@ export {
   changeGroupNameSaga,
   getQuestionGroupsSaga,
   reorderQuestionGroupsSaga,
-  duplicateQuestionsInternallySaga,
+  duplicateGroupsInternallySaga,
 } from './sagas';

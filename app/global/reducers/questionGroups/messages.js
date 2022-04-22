@@ -29,10 +29,10 @@ export default defineMessages({
   },
   duplicateInternallySuccess: {
     id: `${scope}.duplicateInternallySuccess`,
-    defaultMessage: 'Duplicated questions to target session',
+    defaultMessage: 'Successfully duplicated question groups',
   },
   duplicateInternallyError: {
     id: `${scope}.duplicateInternallyError`,
-    defaultMessage: 'Unable to duplicate questions',
+    defaultMessage: 'Unable to duplicate question groups',
   },
 });

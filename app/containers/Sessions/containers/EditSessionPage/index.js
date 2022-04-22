@@ -79,8 +79,8 @@ import {
   questionGroupsReducer,
   getQuestionGroupsRequest,
   getQuestionGroupsSaga,
-  duplicateQuestionsInternallyRequest,
-  duplicateQuestionsInternallySaga,
+  duplicateGroupsInternallyRequest,
+  duplicateGroupsInternallySaga,
 } from 'global/reducers/questionGroups';
 import {
   interventionReducer,
@@ -141,7 +141,7 @@ function EditSessionPage({
   getQuestionGroups,
   session: { id: sessionId, name: sessionName },
   fetchReportTemplates,
-  duplicateQuestionsInternally,
+  duplicateGroupsInternally,
 }) {
   const [manage, setManage] = useState(false);
   const [selectedSlides, setSelectedSlides] = useState([]);
@@ -366,8 +366,8 @@ function EditSessionPage({
   const sendSlidesToResearchers = researchers =>
     shareQuestionsToResearchers(researchers, selectedSlides);
 
-  const onDuplicateQuestionsInternally = target =>
-    duplicateQuestionsInternally(selectedSlides, target.id);
+  const onDuplicateGroupsInternally = target =>
+    duplicateGroupsInternally(selectedSlides, target.id);
 
   if (loading || questions.length === 0) return <Loader size={100} />;
 
@@ -417,7 +417,7 @@ function EditSessionPage({
       <CopyModal
         visible={duplicateModalVisible}
         onClose={() => setDuplicateModalVisible(false)}
-        copyAction={onDuplicateQuestionsInternally}
+        copyAction={onDuplicateGroupsInternally}
         disableInterventionCopy
         disableQuestionCopy
         pasteText={formatMessage(messages.duplicateGroup)}
@@ -582,7 +582,7 @@ EditSessionPage.propTypes = {
   changeGroupName: PropTypes.func,
   getQuestionGroups: PropTypes.func,
   fetchReportTemplates: PropTypes.func,
-  duplicateQuestionsInternally: PropTypes.func,
+  duplicateGroupsInternally: PropTypes.func,
   interventionStatus: PropTypes.string,
   session: PropTypes.object,
 };
@@ -609,7 +609,7 @@ const mapDispatchToProps = {
   changeGroupName: changeGroupNameRequest,
   getQuestionGroups: getQuestionGroupsRequest,
   fetchReportTemplates: fetchReportTemplatesRequest,
-  duplicateQuestionsInternally: duplicateQuestionsInternallyRequest,
+  duplicateGroupsInternally: duplicateGroupsInternallyRequest,
 };
 
 const withConnect = connect(
@@ -643,8 +643,8 @@ export default compose(
     saga: reorderQuestionGroupsSaga,
   }),
   injectSaga({
-    key: 'duplicateQuestionsInternally',
-    saga: duplicateQuestionsInternallySaga,
+    key: 'duplicateGroupsInternally',
+    saga: duplicateGroupsInternallySaga,
   }),
   injectIntl,
   withConnect,
