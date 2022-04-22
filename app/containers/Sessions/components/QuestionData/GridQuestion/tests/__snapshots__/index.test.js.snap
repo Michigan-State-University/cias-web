@@ -616,7 +616,7 @@ exports[`<GridQuestion /> Should render and match the snapshot 1`] = `
     display="flex"
   >
     <div
-      class="HoverableBox-sc-zvip6a-0 c2"
+      class="c2"
     >
       <div
         class="c3"
@@ -663,7 +663,7 @@ exports[`<GridQuestion /> Should render and match the snapshot 1`] = `
           class="c11"
         >
           <thead
-            class="THead-sc-8drp5d-0"
+            class=""
           >
             <tr
               class="c12 c13"
@@ -778,7 +778,7 @@ exports[`<GridQuestion /> Should render and match the snapshot 1`] = `
             </tr>
           </thead>
           <tbody
-            class="TBody-sc-gqq9cv-0"
+            class=""
           >
             <tr
               class="c12 c13"
@@ -974,7 +974,7 @@ exports[`<GridQuestion /> Should render and match the snapshot 1`] = `
     class="c32"
   >
     <div
-      class="HoverableBox-sc-zvip6a-0 c33"
+      class="c33"
     >
       <div
         class="c3"

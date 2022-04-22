@@ -272,7 +272,7 @@ exports[`<GridQuestion /> Should render and match the snapshot 1`] = `
           class="c3"
         >
           <thead
-            class="THead-sc-8drp5d-0"
+            class=""
           >
             <tr
               class="c4 c5"
@@ -311,7 +311,7 @@ exports[`<GridQuestion /> Should render and match the snapshot 1`] = `
             </tr>
           </thead>
           <tbody
-            class="TBody-sc-gqq9cv-0"
+            class=""
           >
             <tr
               class="c4 c5"

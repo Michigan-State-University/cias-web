@@ -135,11 +135,11 @@ const QuestionListGroup = ({
         imgWithBackground
         label={
           <Row align="center" justify="between" width="100%" mr={10}>
-            <Box display="flex">
+            <Box display="flex" align="center">
               {manage && isManageableGroup && (
                 <Checkbox
                   id={`group-to-select-${id}`}
-                  mr={2}
+                  mr={8}
                   onChange={(_, event) => {
                     event.stopPropagation();
                     event.preventDefault();

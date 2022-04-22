@@ -37,6 +37,7 @@ import ActionIcon from 'components/ActionIcon';
 import Text from 'components/Text';
 import Modal from 'components/Modal';
 import TextButton from 'components/Button/TextButton';
+import H2 from 'components/H2';
 
 import menu from 'assets/svg/triangle-back-black.svg';
 import cog from 'assets/svg/gear-selected.svg';
@@ -100,6 +101,7 @@ import {
   ShowListButton,
   StyledQuestionTypeChooser,
   Spacer,
+  Grid,
 } from './styled';
 import QuestionListGroup from '../QuestionListGroup';
 
@@ -261,21 +263,27 @@ const EditClassicSessionPage = ({
 
   const groupActions = [
     {
-      label: <FormattedMessage {...messages.group} />,
-      inactiveIcon: groupIcon,
-      activeIcon: groupIconActive,
+      label: <FormattedMessage {...messages.duplicate} />,
+      inactiveIcon: copy,
+      activeIcon: copyActive,
       action: () => {
-        groupQuestions(selectedSlides, sessionId);
+        copyQuestions(selectedSlides, params.sessionId);
         setSelectedSlides([]);
       },
       disabled: !editingPossible,
     },
     {
-      label: <FormattedMessage {...messages.duplicate} />,
-      inactiveIcon: copy,
-      activeIcon: copyActive,
+      label: <FormattedMessage {...messages.shareCopy} />,
+      inactiveIcon: share,
+      activeIcon: shareActive,
+      action: () => setModalVisible(true),
+    },
+    {
+      label: <FormattedMessage {...messages.group} />,
+      inactiveIcon: groupIcon,
+      activeIcon: groupIconActive,
       action: () => {
-        copyQuestions(selectedSlides, sessionId);
+        groupQuestions(selectedSlides, params.sessionId);
         setSelectedSlides([]);
       },
       disabled: !editingPossible,
@@ -289,12 +297,6 @@ const EditClassicSessionPage = ({
         setSelectedSlides([]);
       },
       disabled: !editingPossible,
-    },
-    {
-      label: <FormattedMessage {...messages.shareCopy} />,
-      inactiveIcon: share,
-      activeIcon: shareActive,
-      action: () => setModalVisible(true),
     },
   ];
 
@@ -506,17 +508,18 @@ const EditClassicSessionPage = ({
               </Row>
             )}
             {manage && (
-              <Row mb={10} justify="between">
-                <Row>{groupActions.map(mapActions)}</Row>
-                {/* @ts-ignore */}
-                <ActionIcon
-                  mr="0"
-                  onClick={handleCloseManage}
-                  ariaText={formatMessage(
-                    messages.closeQuestionManagementLabel,
-                  )}
-                />
-              </Row>
+              <Box>
+                <Row mb={16} justify="between" align="center">
+                  <H2>
+                    <FormattedMessage {...messages.manageScreens} />
+                  </H2>
+                  {/* @ts-ignore */}
+                  <ActionIcon mr="0" onClick={handleCloseManage} />
+                </Row>
+                <Row mb={10} justify="between">
+                  <Grid>{groupActions.map(mapActions)}</Grid>
+                </Row>
+              </Box>
             )}
             <Box disableScrollbar overflow="hidden auto">
               <DragDropContext

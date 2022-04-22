@@ -11,6 +11,10 @@ export default defineMessages({
     id: `${scope}.reportsEmpty`,
     defaultMessage: 'No reports yet!',
   },
+  reorderIconAlt: {
+    id: `${scope}.reorderIconAlt`,
+    defaultMessage: 'Reorder icon',
+  },
   reportsError: {
     id: `${scope}.reportsError`,
     defaultMessage:

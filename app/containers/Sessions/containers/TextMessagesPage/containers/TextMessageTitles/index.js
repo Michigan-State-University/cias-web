@@ -1,6 +1,5 @@
 import React, { useContext } from 'react';
 import PropTypes from 'prop-types';
-import { Row } from 'react-grid-system';
 import { connect } from 'react-redux';
 
 import TileMapper from 'components/TileMapper';
@@ -8,6 +7,7 @@ import Text from 'components/Text';
 import Column from 'components/Column';
 import Img from 'components/Img';
 import Loader from 'components/Loader';
+import { Row } from 'components/ReactGridSystem';
 import { TextMessageTypeIndicator } from 'components/TextMessageTypeIndicator';
 import EllipsisText from 'components/Text/EllipsisText';
 import Box from 'components/Box';
@@ -55,12 +55,13 @@ const SmsTiles = ({ createTextMessage }) => {
   const renderTile = ({ id, type, name, schedule, schedulePayload }) => {
     if (type === EMPTY_TILE)
       return <StyledEmptyTile key={`id-empty-tile-text-message-${id}`} />;
-    if (type === ADD_TILE)
+    if (type === ADD_TILE) {
+      const disabled = createTextMessagesLoading || !editingPossible;
       return (
         <StyledCreateTile key={`id-empty-tile-text-message-${id}`}>
           <Column
-            onClick={handleCreateTextMessages}
-            disabled={createTextMessagesLoading || !editingPossible}
+            onClick={disabled ? undefined : handleCreateTextMessages}
+            disabled={disabled}
             align="center"
             justify="center"
             height="100%"
@@ -72,6 +73,7 @@ const SmsTiles = ({ createTextMessage }) => {
           </Column>
         </StyledCreateTile>
       );
+    }
 
     const messageDescription =
       type === TextMessageType.ALERT

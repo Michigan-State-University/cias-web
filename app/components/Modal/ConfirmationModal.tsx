@@ -134,8 +134,4 @@ const ConfirmationModal = ({
   );
 };
 
-ConfirmationModal.defaultProps = {
-  maxWidth: 500,
-};
-
 export default ConfirmationModal;

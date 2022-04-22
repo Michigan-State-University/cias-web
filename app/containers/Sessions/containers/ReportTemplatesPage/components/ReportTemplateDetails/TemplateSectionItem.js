@@ -1,10 +1,10 @@
 import React, { useContext, useState } from 'react';
 import PropTypes from 'prop-types';
-import { compose } from 'redux';
-import { connect } from 'react-redux';
 import { Row, Col } from 'react-grid-system';
-import { injectIntl, IntlShape } from 'react-intl';
+import { useDispatch } from 'react-redux';
+import { useIntl } from 'react-intl';
 
+import ReorderIcon from 'assets/svg/reorder-hand.svg';
 import { selectTemplateSection } from 'global/reducers/reportTemplates';
 
 import { TemplateSection } from 'models/ReportTemplate';
@@ -15,11 +15,12 @@ import { SectionContainer, SectionText, SectionTitle } from '../../styled';
 import { ReportTemplatesContext } from '../../utils';
 import messages from '../../messages';
 
-const TemplateSectionItem = ({
-  intl: { formatMessage },
-  templateSection,
-  selectSection,
-}) => {
+const TemplateSectionItem = ({ templateSection, dragHandleProps }) => {
+  const { formatMessage } = useIntl();
+  const dispatch = useDispatch();
+
+  const selectSection = (id) => dispatch(selectTemplateSection(id));
+
   const { selectedTemplateSectionId } = useContext(ReportTemplatesContext);
 
   const [isHovered, setIsHovered] = useState(false);
@@ -43,58 +44,67 @@ const TemplateSectionItem = ({
       onMouseLeave={() => setIsHovered(false)}
       fluid
     >
-      {isEmpty ? (
-        <Row>
-          <Col>
-            <SectionText isSelected={isSelected || isHovered}>
-              {formatMessage(messages.emptySection)}
-            </SectionText>
-          </Col>
-        </Row>
-      ) : (
-        <>
-          <Row style={{ marginBottom: 10 }} nogutter>
-            <Col>
-              <SectionTitle isSelected={isSelected || isHovered}>
-                {previewCase.title}
-              </SectionTitle>
-            </Col>
-          </Row>
-          <Row nogutter>
-            <Col xs={previewCase.imageUrl ? 8 : 12}>
-              <SectionText isSelected={isSelected || isHovered}>
-                {previewCase.content}
-              </SectionText>
-            </Col>
-            <Col xs={4}>
-              {previewCase.imageUrl && (
-                <Img
-                  src={previewCase.imageUrl}
-                  style={{
-                    maxWidth: '112px',
-                    height: 'auto',
-                    marginLeft: 60,
-                  }}
-                />
+      <Row align="center">
+        <Col xs={1} {...dragHandleProps}>
+          <Img
+            alt={`${formatMessage(messages.reorderIconAlt)} ${
+              templateSection.position
+            }`}
+            ml={10}
+            src={ReorderIcon}
+            disabled={false}
+          />
+        </Col>
+        <Col>
+          {isEmpty ? (
+            <Row>
+              <Col>
+                <SectionText isSelected={isSelected || isHovered}>
+                  {formatMessage(messages.emptySection)}
+                </SectionText>
+              </Col>
+            </Row>
+          ) : (
+            <>
+              {previewCase.title && (
+                <Row style={{ marginBottom: 10 }} nogutter>
+                  <Col>
+                    <SectionTitle isSelected={isSelected || isHovered}>
+                      {previewCase.title}
+                    </SectionTitle>
+                  </Col>
+                </Row>
               )}
-            </Col>
-          </Row>
-        </>
-      )}
+              <Row nogutter>
+                <Col xs={previewCase.imageUrl ? 8 : 12}>
+                  <SectionText isSelected={isSelected || isHovered}>
+                    {previewCase.content}
+                  </SectionText>
+                </Col>
+                <Col xs={4}>
+                  {previewCase.imageUrl && (
+                    <Img
+                      src={previewCase.imageUrl}
+                      style={{
+                        maxWidth: '112px',
+                        height: 'auto',
+                        marginLeft: 60,
+                      }}
+                    />
+                  )}
+                </Col>
+              </Row>
+            </>
+          )}
+        </Col>
+      </Row>
     </SectionContainer>
   );
 };
 
-const mapDispatchToProps = {
-  selectSection: selectTemplateSection,
-};
-
-const withConnect = connect(null, mapDispatchToProps);
-
 TemplateSectionItem.propTypes = {
   templateSection: PropTypes.shape(TemplateSection),
-  selectSection: PropTypes.func,
-  intl: PropTypes.shape(IntlShape),
+  dragHandleProps: PropTypes.object,
 };
 
-export default compose(withConnect, injectIntl)(TemplateSectionItem);
+export default TemplateSectionItem;

@@ -437,7 +437,7 @@ exports[`<TeamsList /> Should render and match the snapshot 1`] = `
             width="100%"
           >
             <thead
-              class="THead-sc-8drp5d-0"
+              class=""
             >
               <tr
                 class="c10 c11"
@@ -497,7 +497,7 @@ exports[`<TeamsList /> Should render and match the snapshot 1`] = `
               </tr>
             </thead>
             <tbody
-              class="TBody-sc-gqq9cv-0"
+              class=""
               data-private="true"
             >
               <tr

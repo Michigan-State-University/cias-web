@@ -11,15 +11,15 @@ export const scope = 'app.containers.SessionListItem';
 export default defineMessages({
   duplicate: {
     id: `${scope}.duplicate`,
-    defaultMessage: 'Duplicate session',
+    defaultMessage: 'Duplicate here',
   },
   copy: {
     id: `${scope}.copy`,
-    defaultMessage: 'Copy session',
+    defaultMessage: 'Duplicate internally',
   },
   delete: {
     id: `${scope}.delete`,
-    defaultMessage: 'Delete session',
+    defaultMessage: 'Delete',
   },
   inviteLabel: {
     id: `${scope}.inviteLabel`,
