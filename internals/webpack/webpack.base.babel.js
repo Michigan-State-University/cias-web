@@ -8,7 +8,7 @@ const webpack = require('webpack');
 
 const { EnvironmentPlugin } = webpack;
 
-module.exports = options => ({
+module.exports = (options) => ({
   mode: options.mode,
   entry: options.entry,
   output: {
@@ -29,11 +29,24 @@ module.exports = options => ({
           options: options.babelQuery,
         },
       },
+
       {
-        test: /\.(ts|tsx)$/,
+        test: /\.tsx?$/,
         exclude: /node_modules/,
-        use: ['ts-loader'],
+        use: [
+          {
+            loader: 'babel-loader',
+            options: options.babelQuery,
+          },
+          {
+            loader: 'ts-loader',
+            options: {
+              transpileOnly: options.mode === 'production' ? true : false,
+            },
+          },
+        ],
       },
+
       {
         // Preprocess our own .css files
         // This is the place to add your own loaders (e.g. sass/less etc.)
