@@ -26,6 +26,7 @@ export type CalendarDayType = {
   | 'onClick'
   | 'compact'
   | 'disableManualDayClick'
+  | 'substanceCount'
 >;
 
 export const Day = ({
@@ -34,6 +35,7 @@ export const Day = ({
   compact,
   active,
   events = [],
+  substanceCount,
   ...props
 }: CalendarDayType) => {
   const { formatMessage } = useIntl();
@@ -51,6 +53,7 @@ export const Day = ({
     active,
     numberOfEventsVisible,
     numberOfEventsHidden,
+    substanceCount,
     ...props,
   };
 

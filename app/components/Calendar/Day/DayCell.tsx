@@ -1,6 +1,7 @@
 import React, { memo } from 'react';
 import { FormattedMessage } from 'react-intl';
 import isEmpty from 'lodash/isEmpty';
+import isNil from 'lodash/isNil';
 import { Dayjs } from 'dayjs';
 
 import { EventData } from 'models/Tlfb';
@@ -11,8 +12,9 @@ import { colors } from 'theme';
 import Box from 'components/Box';
 
 import messages from '../messages';
-import { Container, DayNo, StyledText, Wrapper } from './styled';
+import { Container, DayNo, Dot, StyledText, Wrapper } from './styled';
 import { EventList } from './EventList';
+import SubstancesCounter from './SubstancesCounter';
 
 export type DayCellProps = {
   day: Dayjs;
@@ -26,6 +28,7 @@ export type DayCellProps = {
   numberOfEventsVisible: number;
   numberOfEventsHidden: number;
   disableManualDayClick?: boolean;
+  substanceCount?: number;
 };
 
 const DayCellComponent = ({
@@ -40,6 +43,7 @@ const DayCellComponent = ({
   numberOfEventsVisible,
   numberOfEventsHidden,
   disableManualDayClick,
+  substanceCount,
 }: DayCellProps) => {
   const date = day.date();
   const dayNo = date === 1 ? day.format(firstDayOfMonthFormatter) : date;
@@ -61,7 +65,28 @@ const DayCellComponent = ({
         hasEvents={!isEmpty(events)}
         $notClickable={disableManualDayClick}
       >
-        <DayNo>{dayNo}</DayNo>
+        <Box
+          width="100%"
+          display="flex"
+          justify={!compact ? 'between' : 'center'}
+          position="relative"
+        >
+          <DayNo>{dayNo}</DayNo>
+          {!isNil(substanceCount) && (
+            <>
+              {compact && (
+                <Box mt={2} position="absolute" top={15}>
+                  <Dot red={!!substanceCount} />
+                </Box>
+              )}
+              {!compact && (
+                <Box ml={5} overflow="hidden">
+                  <SubstancesCounter substanceCount={substanceCount} />
+                </Box>
+              )}
+            </>
+          )}
+        </Box>
         {!compact && (
           <Box>
             <EventList

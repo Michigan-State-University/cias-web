@@ -15,4 +15,8 @@ export default defineMessages({
     id: `${scope}.events`,
     defaultMessage: 'Events',
   },
+  substances: {
+    id: `${scope}.substances`,
+    defaultMessage: '{count, plural, one {# substance} other {# substances}}',
+  },
 });
