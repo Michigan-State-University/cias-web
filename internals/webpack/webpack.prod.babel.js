@@ -89,13 +89,6 @@ module.exports = require('./webpack.base.babel')({
       inject: true,
     }),
 
-    new CompressionPlugin({
-      algorithm: 'gzip',
-      test: /\.js$|\.css$|\.html$/,
-      threshold: 10240,
-      minRatio: 0.8,
-    }),
-
     new Dotenv({ systemvars: true }), // load environmental variables from the system
 
     ...(process.env.SENTRY_AUTH_TOKEN
@@ -113,10 +106,19 @@ module.exports = require('./webpack.base.babel')({
           }),
         ]
       : []),
+
+    // compress AFTER sending files to Sentry
+    new CompressionPlugin({
+      algorithm: 'gzip',
+      test: /\.js$|\.css$|\.html$/,
+      threshold: 10240,
+      minRatio: 0.8,
+      exclude: /.map$/,
+    }),
   ],
 
   performance: {
-    assetFilter: assetFilename =>
+    assetFilter: (assetFilename) =>
       !/(\.map$)|(^(main\.|favicon\.))/.test(assetFilename),
   },
 });
