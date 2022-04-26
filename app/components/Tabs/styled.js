@@ -1,4 +1,5 @@
 import styled from 'styled-components';
+import { motion } from 'framer-motion';
 
 import { colors, themeColors } from 'theme';
 import { flex, layout, margin } from '../BaseComponentStyles';
@@ -18,10 +19,6 @@ export const LabelContainer = styled.div`
   bottom: -3px;
   margin: 0 10px;
   padding-bottom: 7px;
-  border-bottom-width: 2px;
-  border-bottom-style: solid;
-  border-bottom-color: ${({ isActive }) =>
-    isActive ? themeColors.secondary : colors.white};
   div {
     cursor: pointer;
   }
@@ -37,4 +34,13 @@ export const LinkContainer = styled(LabelContainer)`
   a:hover {
     color: ${themeColors.text};
   }
+`;
+
+export const TabUnderline = styled(motion.div)`
+  position: absolute;
+  bottom: -2px;
+  left: 0;
+  right: 0;
+  height: 2px;
+  background: ${themeColors.secondary};
 `;

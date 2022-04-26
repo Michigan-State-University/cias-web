@@ -6,12 +6,22 @@ exports[`<GroupActionButton /> Should render and match the snapshot 1`] = `
   height: auto;
   display: block;
   border-radius: 5px;
+  min-width: 92px;
   display: -webkit-box;
   display: -webkit-flex;
   display: -ms-flexbox;
   display: flex;
-  margin-right: 20px;
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-right: 6px;
+  padding-left: 6px;
+  background-color: rgba(200,102,234,0.05);
   cursor: pointer;
+  -webkit-box-pack: center;
+  -webkit-justify-content: center;
+  -ms-flex-pack: center;
+  justify-content: center;
+  justify-items: center;
   -webkit-align-content: center;
   -ms-flex-line-pack: center;
   align-content: center;
@@ -35,7 +45,9 @@ exports[`<GroupActionButton /> Should render and match the snapshot 1`] = `
   font-family: DM Sans;
   font-size: 13px;
   line-height: 130%;
+  font-weight: 500;
   color: rgba(183,39,234,1);
+  text-align: center;
   color: rgba(183,39,234,1);
 }
 
@@ -57,6 +69,7 @@ exports[`<GroupActionButton /> Should render and match the snapshot 1`] = `
       <p
         class="c2"
         color="#B727EA"
+        font-weight="medium"
         size="12"
       >
         label

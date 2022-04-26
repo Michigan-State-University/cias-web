@@ -88,13 +88,14 @@ const RenderQuestionDetails = ({
     body,
     type,
     settings: { video, image, title, subtitle },
-    narrator: { settings },
+    narrator: { settings, blocks },
   } = selectedQuestion;
 
   const isNameScreen = type === QuestionTypes.NAME;
   const isFinishScreen = type === QuestionTypes.FINISH;
   const isTlfbGroup = currentGroupScope?.type === GroupType.TLFB;
-  const shouldShowNarrator = !HIDE_NARRATOR_QUESTIONS.includes(type);
+  const shouldShowNarrator =
+    !!blocks?.length && !HIDE_NARRATOR_QUESTIONS.includes(type);
 
   const proceedButton =
     'proceed_button' in selectedQuestion.settings

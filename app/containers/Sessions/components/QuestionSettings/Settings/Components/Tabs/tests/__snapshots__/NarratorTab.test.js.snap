@@ -442,7 +442,7 @@ exports[`<NarratorTab /> Should render and match the snapshot 1`] = `
     </div>
   </div>
   <div
-    class="styled__AccordionContainer-sc-nwquto-0"
+    class=""
     data-cy="narrator-blocks"
   >
     <div

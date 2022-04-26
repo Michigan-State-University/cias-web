@@ -29,11 +29,24 @@ module.exports = (options) => ({
           options: options.babelQuery,
         },
       },
+
       {
-        test: /\.(ts|tsx)$/,
+        test: /\.tsx?$/,
         exclude: /node_modules/,
-        use: ['ts-loader'],
+        use: [
+          {
+            loader: 'babel-loader',
+            options: options.babelQuery,
+          },
+          {
+            loader: 'ts-loader',
+            options: {
+              transpileOnly: options.mode === 'production' ? true : false,
+            },
+          },
+        ],
       },
+
       {
         // Preprocess our own .css files
         // This is the place to add your own loaders (e.g. sass/less etc.)
@@ -132,7 +145,7 @@ module.exports = (options) => ({
   },
   plugins: options.plugins.concat([
     new webpack.ProvidePlugin({
-      process: 'process/browser',
+      process: 'process/browser.js',
     }),
 
     ...(onHeroku ? [] : [gitRevisionPlugin]),

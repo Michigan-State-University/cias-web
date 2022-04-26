@@ -77,7 +77,8 @@ describe('inviteResearcher saga', () => {
       .run();
   });
   it('Check inviteResearcher error connection', () => {
-    const error = "TypeError: Cannot read property 'data' of undefined";
+    const error =
+      "TypeError: Cannot read properties of undefined (reading 'data')";
     const email = 'email1';
     const step = stepper(inviteResearcher({ payload: { email } }));
     step();
@@ -117,7 +118,8 @@ describe('getInvitations saga', () => {
     expect(lastResponse).toEqual(undefined);
   });
   it('Check getInvitations error connection', () => {
-    const error = "TypeError: Cannot read property 'data' of undefined";
+    const error =
+      "TypeError: Cannot read properties of undefined (reading 'data')";
     const step = stepper(getInvitations());
     step();
     const errorTrigger = step();

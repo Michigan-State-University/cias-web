@@ -50,6 +50,9 @@ import {
   GENERATE_TEST_REPORT_REQUEST,
   GENERATE_TEST_REPORT_SUCCESS,
   GENERATE_TEST_REPORT_FAILURE,
+  REORDER_TEMPLATE_SECTIONS_REQUEST,
+  REORDER_TEMPLATE_SECTIONS_SUCCESS,
+  REORDER_TEMPLATE_SECTIONS_ERROR,
 } from './constants';
 
 export const fetchReportTemplatesRequest = (sessionId, interventionId) =>
@@ -190,3 +193,13 @@ export const deleteSectionCaseImageFailure = (error) =>
 
 export const selectTemplateSection = (id) =>
   actionBuilder(SELECT_TEMPLATE_SECTION, { id });
+
+export const reorderTemplateSectionRequest = (reportId, reorderedSections) =>
+  actionBuilder(REORDER_TEMPLATE_SECTIONS_REQUEST, {
+    reportId,
+    reorderedSections,
+  });
+export const reorderTemplateSectionSuccess = () =>
+  actionBuilder(REORDER_TEMPLATE_SECTIONS_SUCCESS, {});
+export const reorderTemplateSectionFailure = (error) =>
+  actionBuilder(REORDER_TEMPLATE_SECTIONS_ERROR, error);

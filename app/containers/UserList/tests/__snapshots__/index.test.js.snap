@@ -853,7 +853,7 @@ exports[`<UserList /> Should render and match the snapshot - admin 1`] = `
               width="100%"
             >
               <thead
-                class="THead-sc-8drp5d-0"
+                class=""
               >
                 <tr
                   class="c24 c25"
@@ -913,7 +913,7 @@ exports[`<UserList /> Should render and match the snapshot - admin 1`] = `
                 </tr>
               </thead>
               <tbody
-                class="TBody-sc-gqq9cv-0"
+                class=""
               >
                 <tr
                   class="c24 c28"
@@ -1964,7 +1964,7 @@ exports[`<UserList /> Should render and match the snapshot - researcher 1`] = `
               width="100%"
             >
               <thead
-                class="THead-sc-8drp5d-0"
+                class=""
               >
                 <tr
                   class="c23 c24"
@@ -2024,7 +2024,7 @@ exports[`<UserList /> Should render and match the snapshot - researcher 1`] = `
                 </tr>
               </thead>
               <tbody
-                class="TBody-sc-gqq9cv-0"
+                class=""
               >
                 <tr
                   class="c23 c27"

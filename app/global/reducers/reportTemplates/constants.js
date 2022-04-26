@@ -112,3 +112,10 @@ export const ReportFor = {
   participant: 'participant',
   thirdParty: 'third_party',
 };
+
+export const REORDER_TEMPLATE_SECTIONS_REQUEST =
+  'app/ReportTemplates/REORDER_TEMPLATE_SECTIONS_REQUEST';
+export const REORDER_TEMPLATE_SECTIONS_SUCCESS =
+  'app/ReportTemplates/REORDER_TEMPLATE_SECTIONS_SUCCESS';
+export const REORDER_TEMPLATE_SECTIONS_ERROR =
+  'app/ReportTemplates/REORDER_TEMPLATE_SECTIONS_ERROR';

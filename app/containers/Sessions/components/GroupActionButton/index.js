@@ -19,13 +19,18 @@ const GroupActionButton = ({
   return (
     <Box
       display="flex"
-      mr={20}
       direction="column"
       align="center"
+      justify="center"
       clickable={actionPossible}
       onClick={() => {
         if (actionPossible) action();
       }}
+      bg={colors.orchid}
+      bgOpacity={0.05}
+      px={6}
+      py={8}
+      minWidth={92}
     >
       <div>
         <Img
@@ -39,6 +44,8 @@ const GroupActionButton = ({
         <Text
           color={actionPossible ? themeColors.secondary : colors.waterloo}
           size={12}
+          textAlign="center"
+          fontWeight="medium"
         >
           {label}
         </Text>

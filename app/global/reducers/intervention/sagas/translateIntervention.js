@@ -2,7 +2,6 @@ import axios from 'axios';
 import { call, put, takeEvery } from 'redux-saga/effects';
 import { toast } from 'react-toastify';
 
-import { jsonApiToObject } from 'utils/jsonApiMapper';
 import { formatMessage } from 'utils/intlOutsideReact';
 
 import {
@@ -26,10 +25,9 @@ export function* translateIntervention({
   };
 
   try {
-    const { data } = yield call(axios.post, url, params);
-    const translatedIntervention = jsonApiToObject(data, 'intervention');
-    yield put(translateInterventionSuccess(translatedIntervention));
-    yield call(toast.success, formatMessage(messages.translateSuccess), {
+    yield call(axios.post, url, params);
+    yield put(translateInterventionSuccess());
+    yield call(toast.info, formatMessage(messages.translateSuccess), {
       toastId: TRANSLATE_INTERVENTION_SUCCESS,
     });
   } catch (error) {

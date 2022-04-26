@@ -36,3 +36,10 @@ export const Spacer = styled.div`
   margin-left: -${paddings.regular};
   background-color: ${colors.linkWater};
 `;
+
+export const Grid = styled.div`
+  width: 100%;
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  grid-gap: 8px;
+`;

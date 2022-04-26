@@ -237,8 +237,8 @@ export const translateInterventionRequest = (
     destinationLanguageId,
     destinationVoiceId,
   });
-export const translateInterventionSuccess = (intervention) =>
-  actionBuilder(TRANSLATE_INTERVENTION_SUCCESS, { intervention });
+export const translateInterventionSuccess = () =>
+  actionBuilder(TRANSLATE_INTERVENTION_SUCCESS, {});
 export const translateInterventionError = (error) =>
   actionBuilder(TRANSLATE_INTERVENTION_ERROR, { error });
 export const addAttachmentRequest = (interventionId, attachments) =>

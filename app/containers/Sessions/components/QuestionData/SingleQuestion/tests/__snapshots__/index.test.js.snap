@@ -332,7 +332,7 @@ exports[`<SingleQuestion /> Should render and match the snapshot 1`] = `
     class="c1"
   >
     <div
-      class="HoverableBox-sc-zvip6a-0 c2"
+      class="c2"
       width="100%"
     >
       <div
@@ -1790,7 +1790,7 @@ exports[`<SingleQuestion /> Should render and match the snapshot 1`] = `
     class="c1"
   >
     <div
-      class="HoverableBox-sc-zvip6a-0 c2"
+      class="c2"
       width="100%"
     >
       <div
@@ -3248,7 +3248,7 @@ exports[`<SingleQuestion /> Should render and match the snapshot 1`] = `
     class="c1"
   >
     <div
-      class="HoverableBox-sc-zvip6a-0 c15"
+      class="c15"
     >
       <div
         class="c8"

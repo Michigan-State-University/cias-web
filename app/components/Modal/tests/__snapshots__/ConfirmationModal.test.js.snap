@@ -38,7 +38,7 @@ exports[`<ConfirmationModal /> Should render and match the snapshot 1`] = `
   height: auto;
   display: block;
   border-radius: 5px;
-  max-width: 500px;
+  max-width: 700px;
   max-height: 90%;
   min-width: 400px;
   min-height: 200px;
@@ -379,7 +379,7 @@ exports[`<ConfirmationModal /> Should render error and match the snapshot 1`] = 
   height: auto;
   display: block;
   border-radius: 5px;
-  max-width: 500px;
+  max-width: 700px;
   max-height: 90%;
   min-width: 400px;
   min-height: 200px;

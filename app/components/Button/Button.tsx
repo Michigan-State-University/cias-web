@@ -1,10 +1,11 @@
-import React from 'react';
+import React, { ReactNode } from 'react';
 import { colors } from 'theme';
 
 import Spinner from 'components/Spinner';
 import { StyledButton } from './StyledButton';
 
 type ButtonProps = {
+  children: ReactNode;
   title: string;
   loading?: boolean;
   disabled?: boolean;

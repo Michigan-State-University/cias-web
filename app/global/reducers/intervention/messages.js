@@ -75,7 +75,8 @@ export default defineMessages({
   },
   translateSuccess: {
     id: `${scope}.translateSuccess`,
-    defaultMessage: 'The intervention translated successfully',
+    defaultMessage:
+      'CIAS is translating your intervention. We will send you an e-mail when this process has been finished.',
   },
   translateError: {
     id: `${scope}.translateError`,

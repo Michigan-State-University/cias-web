@@ -53,22 +53,6 @@ const baseRules = {
   'no-plusplus': [2, { allowForLoopAfterthoughts: true }],
   'no-unused-vars': 2,
   'no-use-before-define': 0,
-  'prefer-destructuring': [
-    1,
-    {
-      VariableDeclarator: {
-        array: false,
-        object: true,
-      },
-      AssignmentExpression: {
-        array: true,
-        object: false,
-      },
-    },
-    {
-      enforceForRenamedProperties: true,
-    },
-  ],
   'prefer-template': 2,
   'react/destructuring-assignment': 0,
   'react-hooks/rules-of-hooks': 'error',
@@ -172,6 +156,7 @@ module.exports = {
         '@typescript-eslint/no-var-requires': 0,
         '@typescript-eslint/ban-ts-comment': 'off',
         '@typescript-eslint/no-use-before-define': 0,
+        'react/no-unused-prop-types': 0,
       },
     },
   ],

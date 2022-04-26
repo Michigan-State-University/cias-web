@@ -17,6 +17,10 @@ export default defineMessages({
     id: `${scope}.manageSlides`,
     defaultMessage: 'Manage Groups',
   },
+  manageScreens: {
+    id: `${scope}.manageScreens`,
+    defaultMessage: 'Manage Screens',
+  },
   expandGroups: {
     id: `${scope}.expandGroups`,
     defaultMessage: 'Expand groups',
@@ -27,11 +31,11 @@ export default defineMessages({
   },
   duplicate: {
     id: `${scope}.duplicate`,
-    defaultMessage: 'Duplicate',
+    defaultMessage: 'Duplicate here',
   },
   shareCopy: {
     id: `${scope}.shareCopy`,
-    defaultMessage: 'Share copy',
+    defaultMessage: 'Share externally',
   },
   delete: {
     id: `${scope}.delete`,
