@@ -88,6 +88,7 @@ export const DayNo = styled.div`
   font-size: 16px;
   line-height: 16px;
   font-weight: bold;
+  white-space: nowrap;
 `;
 
 export const StyledText = styled(Text).attrs({
@@ -102,4 +103,16 @@ export const StyledText = styled(Text).attrs({
       white-space: nowrap;
       text-overflow: ellipsis;
     `}
+`;
+
+export const Dot = styled.div`
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background-color: ${({ red }) => (red ? colors.alert : colors.jungleGreen)};
+
+  @media only screen and (max-width: 350px) {
+    width: 4px;
+    height: 4px;
+  }
 `;

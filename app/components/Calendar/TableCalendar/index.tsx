@@ -1,5 +1,7 @@
 import React, { memo, ReactElement } from 'react';
 import dayjs, { Dayjs } from 'dayjs';
+import countBy from 'lodash/countBy';
+import toInteger from 'lodash/toInteger';
 
 import { EventData, CalendarData } from 'models/Tlfb';
 import { fullDayToYearFormatter } from 'utils/formatters';
@@ -66,6 +68,24 @@ export const TableCalendar = ({
                     fullDayToYearFormatter,
                   );
 
+                  const consumptions =
+                    calendarData[formattedDate]?.answer?.body?.consumptions;
+
+                  const substancesConsumed =
+                    calendarData[formattedDate]?.answer?.body
+                      ?.substancesConsumed;
+
+                  const numberOfSubstancesConsumed =
+                    countBy(
+                      consumptions,
+                      (substance) =>
+                        substance.consumed || !!toInteger(substance.amount),
+                    ).true || 0;
+
+                  const subtanceCount = substancesConsumed
+                    ? numberOfSubstancesConsumed
+                    : 0;
+
                   return (
                     <td key={day.toISOString()}>
                       <Day
@@ -83,6 +103,11 @@ export const TableCalendar = ({
                           day.isBefore(startDate, 'day')
                         }
                         disableManualDayClick={disableManualDayClick}
+                        substanceCount={
+                          calendarData[formattedDate]?.answer
+                            ? subtanceCount
+                            : undefined
+                        }
                       />
                     </td>
                   );
