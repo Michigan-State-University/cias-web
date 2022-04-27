@@ -34,6 +34,7 @@ const ChooserComponent = ({
   disableCopy,
   listIcon,
   infiniteLoader,
+  disabledItemsIds,
 }) => {
   const { formatMessage } = useIntl();
   const infiniteLoaderRef = useRef();
@@ -78,6 +79,7 @@ const ChooserComponent = ({
                   selectAction,
                   disableCopy,
                   listIcon,
+                  disabledItemsIds,
                 }}
               >
                 <VirtualGrid
@@ -135,6 +137,7 @@ ChooserComponent.propTypes = {
   backText: PropTypes.string,
   listIcon: PropTypes.string,
   infiniteLoader: PropTypes.object,
+  disabledItemsIds: PropTypes.array,
 };
 
 export default memo(ChooserComponent);

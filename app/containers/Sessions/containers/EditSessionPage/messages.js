@@ -29,8 +29,8 @@ export default defineMessages({
     id: `${scope}.collapseGroups`,
     defaultMessage: 'Collapse groups',
   },
-  duplicate: {
-    id: `${scope}.duplicate`,
+  duplicateHere: {
+    id: `${scope}.duplicateHere`,
     defaultMessage: 'Duplicate here',
   },
   shareCopy: {
@@ -45,9 +45,21 @@ export default defineMessages({
     id: `${scope}.group`,
     defaultMessage: 'Group',
   },
+  duplicateInternally: {
+    id: `${scope}.duplicateInternally`,
+    defaultMessage: 'Duplicate internally',
+  },
+  duplicateInternallyModalTitle: {
+    id: `${scope}.duplicateInternallyModalTitle`,
+    defaultMessage: 'Select a place to paste',
+  },
   modalTitle: {
     id: `${scope}.modalTitle`,
-    defaultMessage: 'Send copy to researchers',
+    defaultMessage: 'Share externally',
+  },
+  duplicateGroup: {
+    id: `${scope}.duplicateGroup`,
+    defaultMessage: 'Duplicate questions to session',
   },
   errors: {
     duplicateVariable: {

@@ -38,6 +38,8 @@ import Text from 'components/Text';
 import Modal from 'components/Modal';
 import TextButton from 'components/Button/TextButton';
 import H2 from 'components/H2';
+import CopyModal from 'components/CopyModal';
+import { VIEWS } from 'components/CopyModal/Components';
 
 import menu from 'assets/svg/triangle-back-black.svg';
 import cog from 'assets/svg/gear-selected.svg';
@@ -49,6 +51,8 @@ import share from 'assets/svg/file-share.svg';
 import shareActive from 'assets/svg/file-share-active.svg';
 import groupIcon from 'assets/svg/group.svg';
 import groupIconActive from 'assets/svg/group-active.svg';
+import duplicateInternally from 'assets/svg/duplicate-internally.svg';
+import duplicateInternallyActive from 'assets/svg/duplicate-internally-active.svg';
 
 import { borders, colors, themeColors } from 'theme';
 
@@ -68,9 +72,10 @@ import {
 import {
   reorderGroupListRequest,
   reorderQuestionGroupsSaga,
-  copyQuestionsRequest,
+  duplicateGroupsHereRequest,
+  duplicateGroupsInternallyRequest,
   groupQuestionsRequest,
-  shareQuestionsToResearchersRequest,
+  shareGroupsExternallyRequest,
   makeSelectQuestionGroups,
   changeGroupNameRequest,
   questionGroupsReducer,
@@ -86,7 +91,7 @@ import { JumpToScreenLocationState } from 'global/types/locationState';
 import GroupActionButton from 'containers/Sessions/components/GroupActionButton';
 import { reorderScope } from 'models/Session/ReorderScope';
 import { FinishGroupType } from 'models/Session/GroupTypes';
-import { ClassicSession } from 'models/Session';
+import { ClassicSession, Session } from 'models/Session';
 
 import { QuestionDTO } from 'models/Question';
 import { GroupDto } from 'models/Groups/GroupDto';
@@ -118,9 +123,10 @@ type Props = {
     sessionId: string,
     groupId: string,
   ) => void;
-  shareQuestionsToResearchers: (
+  shareGroupsExternally: (
     researchers: string[],
     questionIds: string[],
+    sessionId: string,
   ) => void;
   groupQuestions: (questionIds: string[], sessionId: string) => void;
   deleteQuestions: (
@@ -128,7 +134,8 @@ type Props = {
     sessionId: string,
     groupIds: string[],
   ) => void;
-  copyQuestions: (questionIds: string[], sessionId: string) => void;
+  duplicateGroupsHere: (questionIds: string[], sessionId: string) => void;
+  duplicateGroupsInternally: (questionIds: string[], sessionId: string) => void;
   reorderGroups: ({
     groupId,
     sourceIndex,
@@ -169,10 +176,11 @@ const EditClassicSessionPage = ({
   reorderQuestions,
   reorderGroups,
   editingPossible,
-  copyQuestions,
+  duplicateGroupsHere,
+  duplicateGroupsInternally,
   deleteQuestions,
   groupQuestions,
-  shareQuestionsToResearchers,
+  shareGroupsExternally,
   groups,
   changeGroupName,
   getQuestionGroups,
@@ -185,6 +193,7 @@ const EditClassicSessionPage = ({
   const [selectedSlides, setSelectedSlides] = useState<string[]>([]);
   const [showList, setShowList] = useState(false);
   const [modalVisible, setModalVisible] = useState(false);
+  const [duplicateModalVisible, setDuplicateModalVisible] = useState(false);
   const [isDuringQuestionReorder, setIsDuringQuestionReorder] = useState(false);
   const openedGroups = useRef<string[]>([]);
   const [openedGroupsMap, setOpenedGroupsMap] = useState({});
@@ -261,13 +270,20 @@ const EditClassicSessionPage = ({
 
   const groupActions = [
     {
-      label: <FormattedMessage {...messages.duplicate} />,
+      label: <FormattedMessage {...messages.duplicateHere} />,
       inactiveIcon: copy,
       activeIcon: copyActive,
       action: () => {
-        copyQuestions(selectedSlides, params.sessionId);
+        duplicateGroupsHere(selectedSlides, params.sessionId);
         setSelectedSlides([]);
       },
+      disabled: !editingPossible,
+    },
+    {
+      label: <FormattedMessage {...messages.duplicateInternally} />,
+      inactiveIcon: duplicateInternally,
+      activeIcon: duplicateInternallyActive,
+      action: () => setDuplicateModalVisible(true),
       disabled: !editingPossible,
     },
     {
@@ -401,7 +417,10 @@ const EditClassicSessionPage = ({
   );
 
   const sendSlidesToResearchers = (researchers: string[]) =>
-    shareQuestionsToResearchers(researchers, selectedSlides);
+    shareGroupsExternally(researchers, selectedSlides, sessionId);
+
+  const onDuplicateGroupsInternally = (target: Session) =>
+    duplicateGroupsInternally(selectedSlides, target.id);
 
   // @ts-ignore
   if (questions.length === 0) return <Loader size={100} />;
@@ -460,6 +479,16 @@ const EditClassicSessionPage = ({
           onResearchersSelected={sendSlidesToResearchers}
         />
       </Modal>
+      <CopyModal
+        visible={duplicateModalVisible}
+        onClose={() => setDuplicateModalVisible(false)}
+        copyAction={onDuplicateGroupsInternally}
+        disableInterventionCopy
+        disableQuestionCopy
+        disableCurrentSessionCopy
+        pasteText={formatMessage(messages.duplicateGroup)}
+        defaultView={VIEWS.SESSION}
+      />
       <Row height="100%" filled>
         <QuestionsRow sm={4} isVisible={showList}>
           <Box
@@ -619,10 +648,11 @@ const mapDispatchToProps = {
   createQuestion: createQuestionRequest,
   reorderQuestions: reorderQuestionListRequest,
   reorderGroups: reorderGroupListRequest,
-  copyQuestions: copyQuestionsRequest,
+  duplicateGroupsHere: duplicateGroupsHereRequest,
+  duplicateGroupsInternally: duplicateGroupsInternallyRequest,
   deleteQuestions: deleteQuestionsRequest,
   groupQuestions: groupQuestionsRequest,
-  shareQuestionsToResearchers: shareQuestionsToResearchersRequest,
+  shareGroupsExternally: shareGroupsExternallyRequest,
   changeGroupName: changeGroupNameRequest,
   getQuestionGroups: getQuestionGroupsRequest,
   selectQuestion: selectQuestionAction,

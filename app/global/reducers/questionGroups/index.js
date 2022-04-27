@@ -1,7 +1,8 @@
 export {
-  copyQuestionsRequest,
+  duplicateGroupsHereRequest,
+  duplicateGroupsInternallyRequest,
   groupQuestionsRequest,
-  shareQuestionsToResearchersRequest,
+  shareGroupsExternallyRequest,
   changeGroupNameRequest,
   getQuestionGroupsRequest,
   reorderGroupListRequest,
@@ -17,7 +18,8 @@ export {
   makeSelectGetQuestionGroupError,
 } from './selectors';
 export {
-  copyQuestionsSaga,
+  duplicateGroupsHereSaga,
+  duplicateGroupsInternallySaga,
   groupQuestionsSaga,
   shareQuestionsToResearchersSaga,
   changeGroupNameSaga,

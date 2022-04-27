@@ -23,6 +23,7 @@ export {
   makeSelectQuestions,
   makeSelectSelectedQuestionId,
   makeSelectSelectedQuestion,
+  makeSelectSelectedQuestionGroupId,
   makeSelectLoaders,
   makeSelectLoader,
   makeSelectQuestionsLength,

@@ -71,9 +71,9 @@ import {
 } from './utils';
 import {
   GROUP_QUESTIONS_SUCCESS,
-  COPY_QUESTIONS_SUCCESS,
-  COPY_QUESTIONS_REQUEST,
-  COPY_QUESTIONS_ERROR,
+  DUPLICATE_GROUPS_HERE_SUCCESS,
+  DUPLICATE_GROUPS_HERE_REQUEST,
+  DUPLICATE_GROUPS_HERE_ERROR,
   GET_QUESTION_GROUPS_REQUEST,
 } from '../questionGroups/constants';
 
@@ -490,18 +490,17 @@ export const questionsReducer = (state = initialState, action) =>
         draft.loaders.updateQuestionLoading = false;
         assignDraftItems(draft.cache.questions, draft.questions);
         break;
-      case COPY_QUESTIONS_REQUEST:
+      case DUPLICATE_GROUPS_HERE_REQUEST:
         draft.loaders.updateQuestionLoading = true;
         break;
-      case COPY_QUESTIONS_SUCCESS:
+      case DUPLICATE_GROUPS_HERE_SUCCESS:
         const { questions } = action.payload;
-        const questionsList = [...state.questions, ...questions];
-        draft.questions = questionsList;
+        draft.questions.push(...questions.map(mapQuestionDataForType));
         assignDraftItems(draft.questions, draft.cache.questions);
         draft.loaders.updateQuestionLoading = false;
         break;
 
-      case COPY_QUESTIONS_ERROR:
+      case DUPLICATE_GROUPS_HERE_ERROR:
         draft.loaders.updateQuestionLoading = false;
         assignDraftItems(draft.cache.questions, draft.questions);
         break;

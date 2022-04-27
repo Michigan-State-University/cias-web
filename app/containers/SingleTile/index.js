@@ -176,7 +176,7 @@ const SingleTile = ({
       []),
     {
       id: 'duplicate',
-      label: formatMessage(messages.duplicate),
+      label: formatMessage(messages.duplicateHere),
       icon: CopyIcon,
       action: handleClone,
     },

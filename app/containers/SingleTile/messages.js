@@ -41,9 +41,9 @@ export default defineMessages({
     id: `${scope}.archive`,
     defaultMessage: 'Archive',
   },
-  duplicate: {
-    id: `${scope}.duplicate`,
-    defaultMessage: 'Duplicate',
+  duplicateHere: {
+    id: `${scope}.duplicateHere`,
+    defaultMessage: 'Duplicate here',
   },
   assignOrganization: {
     id: `${scope}.assignOrganization`,

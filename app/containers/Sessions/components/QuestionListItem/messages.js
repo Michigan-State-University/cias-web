@@ -11,8 +11,8 @@ export default defineMessages({
     id: `${scope}.copy`,
     defaultMessage: 'Duplicate internally',
   },
-  duplicate: {
-    id: `${scope}.duplicate`,
+  duplicateHere: {
+    id: `${scope}.duplicateHere`,
     defaultMessage: 'Duplicate here',
   },
   pasteQuestion: {
