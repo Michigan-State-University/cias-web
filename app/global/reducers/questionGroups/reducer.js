@@ -19,9 +19,9 @@ import {
   CLEAN_GROUPS,
   GET_QUESTION_GROUPS_ERROR,
   GET_QUESTION_GROUPS_REQUEST,
-  COPY_QUESTIONS_SUCCESS,
-  COPY_QUESTIONS_ERROR,
-  COPY_QUESTIONS_REQUEST,
+  DUPLICATE_GROUPS_HERE_SUCCESS,
+  DUPLICATE_GROUPS_HERE_ERROR,
+  DUPLICATE_GROUPS_HERE_REQUEST,
 } from './constants';
 
 export const initialState = {
@@ -129,20 +129,17 @@ const questionGroupsReducer = (state = initialState, { type, payload }) =>
         assignDraftItems(draft.cache.groups, draft.groups);
         break;
 
-      case COPY_QUESTIONS_REQUEST:
+      case DUPLICATE_GROUPS_HERE_REQUEST:
         draft.loaders.questionGroupsLoading = true;
         break;
-      case COPY_QUESTIONS_SUCCESS:
-        const { group } = payload;
-        if (group) {
-          const groupsList = [...state.groups, group];
-          draft.groups = groupsList;
-          assignDraftItems(draft.groups, draft.cache.groups);
-        }
+      case DUPLICATE_GROUPS_HERE_SUCCESS:
+        const { groups } = payload;
+        draft.groups.push(...groups);
+        assignDraftItems(draft.groups, draft.cache.groups);
         draft.loaders.questionGroupsLoading = false;
         break;
 
-      case COPY_QUESTIONS_ERROR:
+      case DUPLICATE_GROUPS_HERE_ERROR:
         draft.loaders.questionGroupsLoading = false;
         assignDraftItems(draft.cache.groups, draft.groups);
         break;

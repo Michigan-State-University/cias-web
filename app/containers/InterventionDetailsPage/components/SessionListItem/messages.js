@@ -9,8 +9,8 @@ import { draft, closed, archived } from 'models/Status/StatusTypes';
 export const scope = 'app.containers.SessionListItem';
 
 export default defineMessages({
-  duplicate: {
-    id: `${scope}.duplicate`,
+  duplicateHere: {
+    id: `${scope}.duplicateHere`,
     defaultMessage: 'Duplicate here',
   },
   copy: {

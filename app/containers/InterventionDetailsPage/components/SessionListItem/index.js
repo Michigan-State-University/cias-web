@@ -89,7 +89,7 @@ function SessionListItem({
   const options = [
     {
       id: 'duplicate',
-      label: formatMessage(messages.duplicate),
+      label: formatMessage(messages.duplicateHere),
       icon: copy,
       action: () => handleCopySession(id),
       color: colors.bluewood,

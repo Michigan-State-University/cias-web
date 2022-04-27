@@ -1,12 +1,12 @@
 export {
-  copyQuestionsRequest,
+  duplicateGroupsHereRequest,
+  duplicateGroupsInternallyRequest,
   groupQuestionsRequest,
   shareQuestionsToResearchersRequest,
   changeGroupNameRequest,
   getQuestionGroupsRequest,
   reorderGroupListRequest,
   cleanGroups,
-  duplicateGroupsInternallyRequest,
 } from './actions';
 export { questionGroupsReducer } from './reducer';
 export {
@@ -18,11 +18,11 @@ export {
   makeSelectGetQuestionGroupError,
 } from './selectors';
 export {
-  copyQuestionsSaga,
+  duplicateGroupsHereSaga,
+  duplicateGroupsInternallySaga,
   groupQuestionsSaga,
   shareQuestionsToResearchersSaga,
   changeGroupNameSaga,
   getQuestionGroupsSaga,
   reorderQuestionGroupsSaga,
-  duplicateGroupsInternallySaga,
 } from './sagas';

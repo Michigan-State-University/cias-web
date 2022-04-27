@@ -1,9 +1,9 @@
 import { actionBuilder } from 'utils/actionBuilder';
 
 import {
-  COPY_QUESTIONS_REQUEST,
-  COPY_QUESTIONS_SUCCESS,
-  COPY_QUESTIONS_ERROR,
+  DUPLICATE_GROUPS_HERE_REQUEST,
+  DUPLICATE_GROUPS_HERE_SUCCESS,
+  DUPLICATE_GROUPS_HERE_ERROR,
   GROUP_QUESTIONS_REQUEST,
   GROUP_QUESTIONS_SUCCESS,
   GROUP_QUESTIONS_ERROR,
@@ -23,12 +23,18 @@ import {
   DUPLICATE_GROUPS_INTERNALLY_REQUEST,
 } from './constants';
 
-export const copyQuestionsRequest = (questionIds, sessionId) =>
-  actionBuilder(COPY_QUESTIONS_REQUEST, { questionIds, sessionId });
-export const copyQuestionsSuccess = (questions, group) =>
-  actionBuilder(COPY_QUESTIONS_SUCCESS, { questions, group });
-export const copyQuestionsError = (error) =>
-  actionBuilder(COPY_QUESTIONS_ERROR, { error });
+export const duplicateGroupsHereRequest = (questionIds, sessionId) =>
+  actionBuilder(DUPLICATE_GROUPS_HERE_REQUEST, { questionIds, sessionId });
+export const duplicateGroupsHereSuccess = (questions, groups) =>
+  actionBuilder(DUPLICATE_GROUPS_HERE_SUCCESS, { questions, groups });
+export const duplicateGroupsHereError = (error) =>
+  actionBuilder(DUPLICATE_GROUPS_HERE_ERROR, { error });
+
+export const duplicateGroupsInternallyRequest = (questionIds, sessionId) =>
+  actionBuilder(DUPLICATE_GROUPS_INTERNALLY_REQUEST, {
+    questionIds,
+    sessionId,
+  });
 
 export const groupQuestionsRequest = (questionIds, sessionId) =>
   actionBuilder(GROUP_QUESTIONS_REQUEST, { questionIds, sessionId });
@@ -73,9 +79,3 @@ export const reorderGroupListError = (error) =>
 
 export const cleanGroups = (questions) =>
   actionBuilder(CLEAN_GROUPS, { questions });
-
-export const duplicateGroupsInternallyRequest = (questionIds, sessionId) =>
-  actionBuilder(DUPLICATE_GROUPS_INTERNALLY_REQUEST, {
-    questionIds,
-    sessionId,
-  });

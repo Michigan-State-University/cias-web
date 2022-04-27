@@ -19,20 +19,16 @@ export default defineMessages({
     id: `${scope}.shareError`,
     defaultMessage: 'Cannot share questions!',
   },
-  copyError: {
-    id: `${scope}.copyError`,
-    defaultMessage: 'Failed to duplicate questions!',
-  },
   shareSuccess: {
     id: `${scope}.shareSuccess`,
     defaultMessage: 'Successfully shared questions',
   },
-  duplicateInternallySuccess: {
-    id: `${scope}.duplicateInternallySuccess`,
+  duplicateGroupsSuccess: {
+    id: `${scope}.duplicateGroupsSuccess`,
     defaultMessage: 'Successfully duplicated question groups',
   },
-  duplicateInternallyError: {
-    id: `${scope}.duplicateInternallyError`,
-    defaultMessage: 'Unable to duplicate question groups',
+  duplicateGroupsError: {
+    id: `${scope}.duplicateGroupsError`,
+    defaultMessage: 'Failed to duplicate question groups',
   },
 });

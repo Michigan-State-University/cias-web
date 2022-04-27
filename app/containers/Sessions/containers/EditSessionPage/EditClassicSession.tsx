@@ -72,7 +72,8 @@ import {
 import {
   reorderGroupListRequest,
   reorderQuestionGroupsSaga,
-  copyQuestionsRequest,
+  duplicateGroupsHereRequest,
+  duplicateGroupsInternallyRequest,
   groupQuestionsRequest,
   shareQuestionsToResearchersRequest,
   makeSelectQuestionGroups,
@@ -80,8 +81,6 @@ import {
   questionGroupsReducer,
   getQuestionGroupsRequest,
   getQuestionGroupsSaga,
-  duplicateGroupsInternallyRequest,
-  duplicateGroupsInternallySaga,
 } from 'global/reducers/questionGroups';
 import {
   copyModalReducer,
@@ -134,7 +133,8 @@ type Props = {
     sessionId: string,
     groupIds: string[],
   ) => void;
-  copyQuestions: (questionIds: string[], sessionId: string) => void;
+  duplicateGroupsHere: (questionIds: string[], sessionId: string) => void;
+  duplicateGroupsInternally: (questionIds: string[], sessionId: string) => void;
   reorderGroups: ({
     groupId,
     sourceIndex,
@@ -166,7 +166,6 @@ type Props = {
   questions: QuestionDTO[];
   groups: GroupDto[];
   selectQuestion: (id: string) => void;
-  duplicateGroupsInternally: (questionIds: string[], sessionId: string) => void;
 } & NonReduxProps;
 
 const EditClassicSessionPage = ({
@@ -176,7 +175,8 @@ const EditClassicSessionPage = ({
   reorderQuestions,
   reorderGroups,
   editingPossible,
-  copyQuestions,
+  duplicateGroupsHere,
+  duplicateGroupsInternally,
   deleteQuestions,
   groupQuestions,
   shareQuestionsToResearchers,
@@ -185,7 +185,6 @@ const EditClassicSessionPage = ({
   getQuestionGroups,
   session: { id: sessionId, name: sessionName },
   interventionStatus,
-  duplicateGroupsInternally,
 }: Props): JSX.Element => {
   const params = useParams<{ sessionId: string }>();
   const { formatMessage } = useIntl();
@@ -270,11 +269,11 @@ const EditClassicSessionPage = ({
 
   const groupActions = [
     {
-      label: <FormattedMessage {...messages.duplicate} />,
+      label: <FormattedMessage {...messages.duplicateHere} />,
       inactiveIcon: copy,
       activeIcon: copyActive,
       action: () => {
-        copyQuestions(selectedSlides, params.sessionId);
+        duplicateGroupsHere(selectedSlides, params.sessionId);
         setSelectedSlides([]);
       },
       disabled: !editingPossible,
@@ -648,14 +647,14 @@ const mapDispatchToProps = {
   createQuestion: createQuestionRequest,
   reorderQuestions: reorderQuestionListRequest,
   reorderGroups: reorderGroupListRequest,
-  copyQuestions: copyQuestionsRequest,
+  duplicateGroupsHere: duplicateGroupsHereRequest,
+  duplicateGroupsInternally: duplicateGroupsInternallyRequest,
   deleteQuestions: deleteQuestionsRequest,
   groupQuestions: groupQuestionsRequest,
   shareQuestionsToResearchers: shareQuestionsToResearchersRequest,
   changeGroupName: changeGroupNameRequest,
   getQuestionGroups: getQuestionGroupsRequest,
   selectQuestion: selectQuestionAction,
-  duplicateGroupsInternally: duplicateGroupsInternallyRequest,
 };
 
 const withConnect = connect(mapStateToProps, mapDispatchToProps);
@@ -673,10 +672,6 @@ export default compose(
   injectSaga({
     key: 'reorderQuestionGroups',
     saga: reorderQuestionGroupsSaga,
-  }),
-  injectSaga({
-    key: 'duplicateGroupsInternally',
-    saga: duplicateGroupsInternallySaga,
   }),
   withConnect,
 )(EditClassicSessionPage) as React.ComponentType<NonReduxProps>;

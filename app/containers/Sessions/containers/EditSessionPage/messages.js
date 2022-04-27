@@ -29,8 +29,8 @@ export default defineMessages({
     id: `${scope}.collapseGroups`,
     defaultMessage: 'Collapse groups',
   },
-  duplicate: {
-    id: `${scope}.duplicate`,
+  duplicateHere: {
+    id: `${scope}.duplicateHere`,
     defaultMessage: 'Duplicate here',
   },
   shareCopy: {

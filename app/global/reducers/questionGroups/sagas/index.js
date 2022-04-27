@@ -1,7 +1,7 @@
 import { all } from 'redux-saga/effects';
 
 import reorderQuestionGroupsSaga from './reorderQuestionGroups';
-import copyQuestionsSaga from './copyQuestions';
+import duplicateGroupsHereSaga from './duplicateGroupsHere';
 import groupQuestionsSaga from './groupQuestions';
 import shareQuestionsToResearchersSaga from './shareQuestionsToResearchers';
 import changeGroupNameSaga from './changeGroupName';
@@ -9,7 +9,7 @@ import getQuestionGroupsSaga from './getQuestionGroups';
 import duplicateGroupsInternallySaga from './duplicateGroupsInternally';
 
 export {
-  copyQuestionsSaga,
+  duplicateGroupsHereSaga,
   groupQuestionsSaga,
   shareQuestionsToResearchersSaga,
   changeGroupNameSaga,
@@ -20,7 +20,7 @@ export {
 
 export default function* allQuestionsSagas() {
   yield all([
-    copyQuestionsSaga(),
+    duplicateGroupsHereSaga(),
     groupQuestionsSaga(),
     shareQuestionsToResearchersSaga(),
     changeGroupNameSaga(),

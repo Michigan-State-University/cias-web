@@ -154,7 +154,7 @@ const QuestionListItem = ({
   const options = [
     {
       id: 'duplicate',
-      label: <FormattedMessage {...messages.duplicate} />,
+      label: <FormattedMessage {...messages.duplicateHere} />,
       action: handleCopy,
       color: colors.black,
       disabled: disabled || !canDuplicate,
