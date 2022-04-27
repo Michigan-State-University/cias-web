@@ -7,9 +7,9 @@ import {
   GROUP_QUESTIONS_REQUEST,
   GROUP_QUESTIONS_SUCCESS,
   GROUP_QUESTIONS_ERROR,
-  SHARE_QUESTIONS_TO_RESEARCHERS_REQUEST,
-  SHARE_QUESTIONS_TO_RESEARCHERS_SUCCESS,
-  SHARE_QUESTIONS_TO_RESEARCHERS_ERROR,
+  SHARE_GROUPS_EXTERNALLY_REQUEST,
+  SHARE_GROUPS_EXTERNALLY_SUCCESS,
+  SHARE_GROUPS_EXTERNALLY_ERROR,
   CHANGE_GROUP_NAME_REQUEST,
   CHANGE_GROUP_NAME_SUCCESS,
   CHANGE_GROUP_NAME_ERROR,
@@ -43,18 +43,20 @@ export const groupQuestionsSuccess = (group, questionIds) =>
 export const groupQuestionsError = (error) =>
   actionBuilder(GROUP_QUESTIONS_ERROR, { error });
 
-export const shareQuestionsToResearchersRequest = (
+export const shareGroupsExternallyRequest = (
   researcherIds,
   questionIds,
+  sessionId,
 ) =>
-  actionBuilder(SHARE_QUESTIONS_TO_RESEARCHERS_REQUEST, {
+  actionBuilder(SHARE_GROUPS_EXTERNALLY_REQUEST, {
     questionIds,
     researcherIds,
+    sessionId,
   });
-export const shareQuestionsToResearchersSuccess = () =>
-  actionBuilder(SHARE_QUESTIONS_TO_RESEARCHERS_SUCCESS, {});
-export const shareQuestionsToResearchersError = (error) =>
-  actionBuilder(SHARE_QUESTIONS_TO_RESEARCHERS_ERROR, { error });
+export const shareGroupsExternallySuccess = () =>
+  actionBuilder(SHARE_GROUPS_EXTERNALLY_SUCCESS, {});
+export const shareGroupsExternallyError = (error) =>
+  actionBuilder(SHARE_GROUPS_EXTERNALLY_ERROR, { error });
 
 export const changeGroupNameRequest = (title, sessionId, groupId) =>
   actionBuilder(CHANGE_GROUP_NAME_REQUEST, { title, sessionId, groupId });

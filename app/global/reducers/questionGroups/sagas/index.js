@@ -3,7 +3,7 @@ import { all } from 'redux-saga/effects';
 import reorderQuestionGroupsSaga from './reorderQuestionGroups';
 import duplicateGroupsHereSaga from './duplicateGroupsHere';
 import groupQuestionsSaga from './groupQuestions';
-import shareQuestionsToResearchersSaga from './shareQuestionsToResearchers';
+import shareQuestionsToResearchersSaga from './shareGroupsExternally';
 import changeGroupNameSaga from './changeGroupName';
 import getQuestionGroupsSaga from './getQuestionGroups';
 import duplicateGroupsInternallySaga from './duplicateGroupsInternally';

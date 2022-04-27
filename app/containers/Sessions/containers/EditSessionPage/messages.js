@@ -55,7 +55,7 @@ export default defineMessages({
   },
   modalTitle: {
     id: `${scope}.modalTitle`,
-    defaultMessage: 'Send copy to researchers',
+    defaultMessage: 'Share externally',
   },
   duplicateGroup: {
     id: `${scope}.duplicateGroup`,

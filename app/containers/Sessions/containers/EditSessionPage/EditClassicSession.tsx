@@ -75,7 +75,7 @@ import {
   duplicateGroupsHereRequest,
   duplicateGroupsInternallyRequest,
   groupQuestionsRequest,
-  shareQuestionsToResearchersRequest,
+  shareGroupsExternallyRequest,
   makeSelectQuestionGroups,
   changeGroupNameRequest,
   questionGroupsReducer,
@@ -123,9 +123,10 @@ type Props = {
     sessionId: string,
     groupId: string,
   ) => void;
-  shareQuestionsToResearchers: (
+  shareGroupsExternally: (
     researchers: string[],
     questionIds: string[],
+    sessionId: string,
   ) => void;
   groupQuestions: (questionIds: string[], sessionId: string) => void;
   deleteQuestions: (
@@ -179,7 +180,7 @@ const EditClassicSessionPage = ({
   duplicateGroupsInternally,
   deleteQuestions,
   groupQuestions,
-  shareQuestionsToResearchers,
+  shareGroupsExternally,
   groups,
   changeGroupName,
   getQuestionGroups,
@@ -416,7 +417,7 @@ const EditClassicSessionPage = ({
   );
 
   const sendSlidesToResearchers = (researchers: string[]) =>
-    shareQuestionsToResearchers(researchers, selectedSlides);
+    shareGroupsExternally(researchers, selectedSlides, sessionId);
 
   const onDuplicateGroupsInternally = (target: Session) =>
     duplicateGroupsInternally(selectedSlides, target.id);
@@ -651,7 +652,7 @@ const mapDispatchToProps = {
   duplicateGroupsInternally: duplicateGroupsInternallyRequest,
   deleteQuestions: deleteQuestionsRequest,
   groupQuestions: groupQuestionsRequest,
-  shareQuestionsToResearchers: shareQuestionsToResearchersRequest,
+  shareGroupsExternally: shareGroupsExternallyRequest,
   changeGroupName: changeGroupNameRequest,
   getQuestionGroups: getQuestionGroupsRequest,
   selectQuestion: selectQuestionAction,

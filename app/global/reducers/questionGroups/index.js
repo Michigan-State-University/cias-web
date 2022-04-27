@@ -2,7 +2,7 @@ export {
   duplicateGroupsHereRequest,
   duplicateGroupsInternallyRequest,
   groupQuestionsRequest,
-  shareQuestionsToResearchersRequest,
+  shareGroupsExternallyRequest,
   changeGroupNameRequest,
   getQuestionGroupsRequest,
   reorderGroupListRequest,
