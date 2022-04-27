@@ -354,6 +354,11 @@ export function InterventionDetailsPage({
     if (destination) handleReorder(source.index, destination.index);
   };
 
+  const sortedSessions = useMemo(
+    () => sessions && orderBy(sessions, 'position'),
+    [sessions],
+  );
+
   const renderList = () => (
     <DraggedTest>
       <DragDropContext onDragEnd={onDragEnd}>
@@ -367,8 +372,8 @@ export function InterventionDetailsPage({
               ref={providedDroppable.innerRef}
               {...providedDroppable.droppableProps}
             >
-              {sessions &&
-                orderBy(sessions, 'position').map((session, index) => {
+              {sortedSessions &&
+                sortedSessions.map((session, index) => {
                   const handleInviteParticipantsClick = () => {
                     fetchSessionEmails(index);
                     if (index !== sessionIndex) {
@@ -377,8 +382,8 @@ export function InterventionDetailsPage({
                     }
                     setParticipantShareModalVisible(true);
                   };
-                  const nextSession = sessions.find(
-                    ({ position }) => position === session.position + 1,
+                  const nextSession = sortedSessions.find(
+                    ({ position }) => position > session.position,
                   );
                   return (
                     <Row key={session.id}>
