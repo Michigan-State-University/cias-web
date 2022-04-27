@@ -28,9 +28,9 @@ function* duplicateGroupsHere({ payload: { questionIds, sessionId } }) {
       mapQuestionIdsToDuplicateGroupStructure,
       questionIds,
     );
-    const {
-      data: { data },
-    } = yield call(axios.post, requestURL, { question_groups: questionGroups });
+    const { data } = yield call(axios.post, requestURL, {
+      question_groups: questionGroups,
+    });
 
     const groups = jsonApiToArray(data, 'questionGroup');
     const questions = mapGroupsToQuestions(groups);
