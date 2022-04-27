@@ -10,8 +10,15 @@ import messages from '../messages';
 export const SubstancesCounter = ({
   substanceCount,
 }: {
-  substanceCount: number;
+  substanceCount: number | boolean;
 }) => {
+  if (substanceCount === true)
+    return (
+      <Text fontWeight="bold" color={colors.alert}>
+        <FormattedMessage {...globalMessages.yes} />
+      </Text>
+    );
+
   if (substanceCount === 0)
     return (
       <Text fontWeight="bold" color={colors.jungleGreen}>

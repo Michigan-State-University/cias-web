@@ -28,7 +28,7 @@ export type DayCellProps = {
   numberOfEventsVisible: number;
   numberOfEventsHidden: number;
   disableManualDayClick?: boolean;
-  substanceCount?: number;
+  substanceCount?: number | boolean;
 };
 
 const DayCellComponent = ({

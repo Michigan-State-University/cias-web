@@ -31,6 +31,17 @@ type TableCalendarProps = {
 // prevent rerender
 const EMPTY_ARRAY: EventData[] = [];
 
+const getCountOfConsumedSubstances = (
+  hasConsumedSubstances: boolean,
+  hasNoSubstancesListed: boolean,
+  numberOfSubstancesConsumed: number,
+) => {
+  if (hasConsumedSubstances && hasNoSubstancesListed) return true;
+  if (hasConsumedSubstances && !hasNoSubstancesListed)
+    return numberOfSubstancesConsumed;
+  return 0;
+};
+
 export const TableCalendar = ({
   dates,
   selectedDay,
@@ -82,9 +93,11 @@ export const TableCalendar = ({
                         substance.consumed || !!toInteger(substance.amount),
                     ).true || 0;
 
-                  const subtanceCount = substancesConsumed
-                    ? numberOfSubstancesConsumed
-                    : 0;
+                  const substanceCount = getCountOfConsumedSubstances(
+                    !!substancesConsumed,
+                    consumptions?.length === 0,
+                    numberOfSubstancesConsumed,
+                  );
 
                   return (
                     <td key={day.toISOString()}>
@@ -105,7 +118,7 @@ export const TableCalendar = ({
                         disableManualDayClick={disableManualDayClick}
                         substanceCount={
                           calendarData[formattedDate]?.answer
-                            ? subtanceCount
+                            ? substanceCount
                             : undefined
                         }
                       />
