@@ -49,6 +49,7 @@ import {
   UPDATE_PHONE_ERROR,
   INITIAL_FILTERS,
   SET_FILTERS,
+  SET_TEXT_MESSAGES_COUNT,
 } from './constants';
 import textMessageSettingsReducer from './settings/reducer';
 import textMessageVariantReducer from './variants/reducer';
@@ -402,6 +403,10 @@ export const textMessagesReducer = (state = initialState, action) =>
 
       case SET_FILTERS:
         draft.filters = payload.filters;
+        break;
+
+      case SET_TEXT_MESSAGES_COUNT:
+        draft.textMessagesSize = payload.count;
         break;
     }
   });

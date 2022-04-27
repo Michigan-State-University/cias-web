@@ -12,6 +12,7 @@ export {
   removePhoneRequest,
   updatePhoneRequest,
   setFiltersAction,
+  setTextMessagesCount,
 } from './actions';
 
 export {
