@@ -40,6 +40,7 @@ import {
   UPDATE_PHONE_SUCCESS,
   UPDATE_PHONE_ERROR,
   SET_FILTERS,
+  SET_TEXT_MESSAGES_COUNT,
 } from './constants';
 
 export const fetchTextMessagesRequest = (sessionId) =>
@@ -134,3 +135,6 @@ export const updatePhoneError = (error) =>
 
 export const setFiltersAction = (filters) =>
   actionBuilder(SET_FILTERS, { filters });
+
+export const setTextMessagesCount = (count) =>
+  actionBuilder(SET_TEXT_MESSAGES_COUNT, { count });

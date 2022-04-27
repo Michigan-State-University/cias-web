@@ -86,3 +86,6 @@ export const INITIAL_FILTERS = generateFiltersArray([
   TextMessageType.NORMAL,
   TextMessageType.ALERT,
 ]);
+
+export const SET_TEXT_MESSAGES_COUNT =
+  'app/TextMessages/SET_TEXT_MESSAGES_COUNT';

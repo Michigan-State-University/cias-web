@@ -21,7 +21,11 @@ export const makeSelectVariants = () =>
   });
 
 export const makeSelectTextMessagesSize = () =>
-  createSelector(dashboard, (substate) => substate.textMessages?.length ?? 0);
+  createSelector(
+    dashboard,
+    (substate) =>
+      substate.textMessagesSize || (substate.textMessages?.length ?? 0),
+  );
 
 export const makeSelectErrors = () =>
   createSelector(dashboard, (substate) => substate.errors);
