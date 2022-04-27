@@ -24,7 +24,7 @@ export const makeSelectTextMessagesSize = () =>
   createSelector(
     dashboard,
     (substate) =>
-      substate.textMessagesSize || (substate.textMessages?.length ?? 0),
+      substate.textMessagesSize ?? substate.textMessages?.length ?? 0,
   );
 
 export const makeSelectErrors = () =>

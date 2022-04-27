@@ -157,6 +157,8 @@ export const textMessagesReducer = (state = initialState, action) =>
 
         updateItemById(draft.textMessages, textMessageId, textMessage);
         assignDraftItems(draft.textMessages, draft.cache.textMessages);
+        draft.textMessagesSize = draft.textMessages.length;
+
         break;
       }
 
@@ -231,6 +233,8 @@ export const textMessagesReducer = (state = initialState, action) =>
       case REMOVE_TEXT_MESSAGE_SUCCESS:
         deleteItemById(draft.textMessages, state.selectedMessageId);
         assignDraftItems(draft.textMessages, draft.cache.textMessages);
+
+        draft.textMessagesSize = draft.textMessages.length;
 
         draft.loaders.removeTextMessagesLoading = false;
         draft.selectedMessageId = null;
@@ -316,6 +320,9 @@ export const textMessagesReducer = (state = initialState, action) =>
         draft.textMessages = sortTextMessagesByDate(
           current(draft.textMessages),
         );
+
+        draft.textMessagesSize = draft.textMessages.length;
+
         assignDraftItems(draft.textMessages, draft.cache.textMessages);
         break;
 
