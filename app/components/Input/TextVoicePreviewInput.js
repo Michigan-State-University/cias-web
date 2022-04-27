@@ -70,14 +70,22 @@ const TextVoicePreviewInput = ({
   const audioButtonDisabled =
     disabled || phoneticUrl === null || phoneticLoading || isAnimationOngoing;
 
+  const onSpeechReady = () => audioInstance.start();
+  const onFinish = () => {
+    audioInstance.clean();
+    audioInstance.stop();
+    setIsPlaying(false);
+  };
+
   const playPreview = () => {
-    if (audioButtonDisabled || isPlaying) return;
-    setIsPlaying(!isPlaying);
-    const onSpeechReady = () => audioInstance.start();
-    const onFinish = () => {
-      setIsPlaying(false);
-      audioInstance.clean();
-    };
+    if (isPlaying) {
+      onFinish();
+      return;
+    }
+
+    if (audioButtonDisabled) return;
+
+    setIsPlaying(true);
 
     audioInstance.onEnded(onFinish);
     audioInstance.onError(onFinish);

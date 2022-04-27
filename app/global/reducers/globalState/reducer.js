@@ -4,6 +4,7 @@
  * global reducer
  *
  */
+import { LOCATION_CHANGE } from 'connected-react-router';
 import produce from 'immer';
 import AudioWrapper from 'utils/audioWrapper';
 
@@ -33,6 +34,11 @@ export const globalStateReducer = (state = initialState, { payload, type }) =>
           payload,
           type,
         });
+        break;
+
+      case LOCATION_CHANGE:
+        state.audioInstance.clean();
+        state.audioInstance.stop();
         break;
 
       default:
