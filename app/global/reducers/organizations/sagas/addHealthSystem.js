@@ -10,11 +10,11 @@ import {
   addHealthSystemSuccess,
   selectEntityAction,
 } from '../actions';
-import { makeSelectOrganization } from '../selectors';
+import { makeSelectOrganizations } from '../selectors';
 
 export function* addHealthSystem({ payload: { name, organizationId } }) {
   const requestURL = `v1/health_systems`;
-  const organization = yield select(makeSelectOrganization());
+  const organization = yield select(makeSelectOrganizations(organizationId));
 
   try {
     const { data } = yield call(
