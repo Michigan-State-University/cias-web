@@ -80,7 +80,6 @@ const CopyChooser = ({
     name,
   });
 
-  const shouldLoadInterventions = () => !interventions;
   const shouldLoadSessions = () =>
     !sessions || savedIds.interventions !== currentIntervention.id;
   const shouldLoadQuestionGroups = () =>
@@ -94,7 +93,7 @@ const CopyChooser = ({
   };
 
   useEffect(() => {
-    if (currentView === VIEWS.INTERVENTION && shouldLoadInterventions()) {
+    if (currentView === VIEWS.INTERVENTION) {
       requestInterventions(0, batchSize);
     } else if (
       currentView === VIEWS.SESSION &&
