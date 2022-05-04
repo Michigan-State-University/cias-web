@@ -8,6 +8,7 @@
  */
 
 import React, { useEffect, useMemo } from 'react';
+import isEmpty from 'lodash/isEmpty';
 import { Redirect, Switch } from 'react-router-dom';
 import { useLocation } from 'react-router';
 import PropTypes from 'prop-types';
@@ -85,7 +86,7 @@ export function App({ user, fetchSelfDetails }) {
   }, []);
 
   const defaultSidebarId = useMemo(() => {
-    if (user) {
+    if (!isEmpty(user?.roles)) {
       if (user.roles[0] === Roles.participant)
         return participantInterventionsTabId;
       return interventionsTabId;
