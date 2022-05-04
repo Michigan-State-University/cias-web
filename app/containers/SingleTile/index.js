@@ -162,8 +162,8 @@ const SingleTile = ({
     {
       icon: FileShareIcon,
       action: openShareWithResearchersModal,
-      label: formatMessage(messages.sendCopy),
-      id: 'Send copy to researcher',
+      label: formatMessage(messages.shareExternally),
+      id: 'share externally',
     },
     ...((canArchive(status) && [
       {

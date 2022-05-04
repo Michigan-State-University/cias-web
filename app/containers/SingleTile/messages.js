@@ -33,9 +33,9 @@ export default defineMessages({
     id: `${scope}.exportCSV`,
     defaultMessage: 'Export CSV',
   },
-  sendCopy: {
-    id: `${scope}.sendCopy`,
-    defaultMessage: 'Send copy to researcher',
+  shareExternally: {
+    id: `${scope}.shareExternally`,
+    defaultMessage: 'Share externally',
   },
   archive: {
     id: `${scope}.archive`,

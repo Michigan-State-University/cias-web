@@ -50,13 +50,13 @@ export default defineMessages({
     id: `${scope}.translate`,
     defaultMessage: 'Translate',
   },
-  copy: {
-    id: `${scope}.copy`,
-    defaultMessage: 'Send copy to researcher',
+  shareExternally: {
+    id: `${scope}.shareExternally`,
+    defaultMessage: 'Share externally',
   },
-  duplicate: {
-    id: `${scope}.duplicate`,
-    defaultMessage: 'Duplicate',
+  duplicateHere: {
+    id: `${scope}.duplicateHere`,
+    defaultMessage: 'Duplicate here',
   },
   archive: {
     id: `${scope}.archive`,
