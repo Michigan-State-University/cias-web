@@ -112,7 +112,7 @@ const VariableChooser = ({
   };
 
   useLayoutEffect(() => {
-    if (isOpen) resetVariableChooser();
+    if (!isOpen) resetVariableChooser();
     if (propsSetOpen) propsSetOpen(isOpen);
   }, [isOpen]);
 
