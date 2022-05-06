@@ -122,6 +122,16 @@ const TlfbEvents = ({
     return tlfbDaysData[dayId]?.events || [];
   }, [dayId, tlfbDaysData]);
 
+  const addFirstTlfbEventForDay = () => {
+    if (dayId && !selectedDayEvents.length) {
+      addTlfbEvent();
+    }
+  };
+
+  useEffect(() => {
+    addFirstTlfbEventForDay();
+  }, [dayId]);
+
   const deleteEvent = (id: number) => () => {
     if (dayId) {
       dispatch(deleteEventRequest(id, dayId));

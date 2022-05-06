@@ -5,7 +5,7 @@ export const scope = 'app.components.EventInput';
 export default defineMessages({
   eventNameLabel: {
     id: `${scope}.eventNameLabel`,
-    defaultMessage: 'Name of your event',
+    defaultMessage: 'Please label your event (birthday, etc.)',
   },
   eventNamePlaceholder: {
     id: `${scope}.eventNamePlaceholder`,
