@@ -127,9 +127,10 @@ const TlfbQuestion = ({
     if (!answerBody) return false;
 
     const { substancesConsumed, consumptions } = answerBody;
-    if (!substancesConsumed) return true;
 
     if (substancesWithGroup) {
+      if (!substancesConsumed) return true;
+
       return (
         !!consumptions?.length &&
         consumptions.every(({ amount }) => Boolean(amount))
@@ -243,7 +244,7 @@ const TlfbQuestion = ({
           )}
         </>
       )}
-      <Text fontWeight="bold" fontSize={16}>
+      <Text fontWeight="bold" fontSize={16} mb={16}>
         {substanceQuestion}
       </Text>
       <TlfbConsumptionForm

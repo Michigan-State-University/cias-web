@@ -54,31 +54,47 @@ export const TlfbConsumptionForm = ({
       onChange(newAnswerBody);
     };
 
-  const handleConsumptionsChange = (value: SubstanceConsumption[]) => {
-    onChange({ substancesConsumed: true, consumptions: value });
+  const calculateSubstancesConsumedValue = (
+    newConsumptions: SubstanceConsumption[],
+  ) => {
+    if (grouped) return true;
+    return newConsumptions.some(({ consumed }) => consumed);
   };
+
+  const handleConsumptionsChange = (
+    newConsumptions: SubstanceConsumption[],
+  ) => {
+    onChange({
+      substancesConsumed: calculateSubstancesConsumedValue(newConsumptions),
+      consumptions: newConsumptions,
+    });
+  };
+
+  const showSubstances = !grouped || substancesConsumed;
 
   return (
     <>
-      <Row mt={16} mb={24} gap={32}>
-        <Radio
-          id="yes-option"
-          disabled={loading}
-          onChange={handleSubstancesConsumedChange(true)}
-          checked={substancesConsumed === true}
-        >
-          <Text>{formatMessage(globalMessages.yes)}</Text>
-        </Radio>
-        <Radio
-          id="no-option"
-          disabled={loading}
-          onChange={handleSubstancesConsumedChange(false)}
-          checked={substancesConsumed === false}
-        >
-          <Text>{formatMessage(globalMessages.no)}</Text>
-        </Radio>
-      </Row>
-      {substancesConsumed && (
+      {grouped && (
+        <Row mb={24} gap={32}>
+          <Radio
+            id="yes-option"
+            disabled={loading}
+            onChange={handleSubstancesConsumedChange(true)}
+            checked={substancesConsumed === true}
+          >
+            <Text>{formatMessage(globalMessages.yes)}</Text>
+          </Radio>
+          <Radio
+            id="no-option"
+            disabled={loading}
+            onChange={handleSubstancesConsumedChange(false)}
+            checked={substancesConsumed === false}
+          >
+            <Text>{formatMessage(globalMessages.no)}</Text>
+          </Radio>
+        </Row>
+      )}
+      {showSubstances && (
         <>
           {mobile && <Divider mb={26} />}
           {!grouped && (

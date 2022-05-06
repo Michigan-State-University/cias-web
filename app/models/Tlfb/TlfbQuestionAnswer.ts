@@ -10,7 +10,7 @@ export type SubstanceConsumption = {
 
 export type NoTlfbQuestionAnswerBody = {
   substancesConsumed: false;
-  consumptions: null;
+  consumptions: Nullable<SubstanceConsumption[]>;
 };
 
 export type YesTlfbQuestionAnswerBody = {
