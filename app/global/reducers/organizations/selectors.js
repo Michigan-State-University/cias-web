@@ -105,3 +105,9 @@ export const makeSelectShowDeletedEntitiesToggle = () =>
     selectOrganizationState,
     (substate) => substate.showDeletedEntities,
   );
+
+export const makeSelectOrganizationHealthSystemsSize = () =>
+  createSelector(
+    selectOrganizationState,
+    ({ organization }) => organization?.healthSystems?.length || 0,
+  );
