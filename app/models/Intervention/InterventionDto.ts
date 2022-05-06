@@ -1,6 +1,6 @@
 import { InterventionInvite } from './InterventionInvite';
 
-enum InterventionStatus {
+export enum InterventionStatus {
   DRAFT = 'draft',
   PUBLISHED = 'published',
   CLOSED = 'closed',
