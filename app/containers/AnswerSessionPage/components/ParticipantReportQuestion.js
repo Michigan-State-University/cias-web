@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 
 import isNullOrUndefined from 'utils/isNullOrUndefined';
 import { loadState } from 'utils/persist';
+import { emailValidator } from 'utils/validators';
 
 import ParticipantReportQuestionLayout, {
   NO_OPTION,
@@ -27,12 +28,6 @@ const ParticipantReportQuestion = ({
 
   const [answer, setAnswer] = useState({ value: { email: loggedInUserEmail } });
 
-  const onEmailValidation = (validationResult) =>
-    !validationResult &&
-    showError(formatMessage(messages.emailValidationError), {
-      toastId: PARTICIPANT_REPORT_VALIDATION_ERROR,
-    });
-
   const saveAnswer = (value) =>
     selectAnswer([
       {
@@ -41,18 +36,32 @@ const ParticipantReportQuestion = ({
       },
     ]);
 
+  const clearAnswer = () => {
+    selectAnswer([]);
+  };
+
+  const onEmailValidation = (validationResult) => {
+    if (!validationResult) {
+      clearAnswer();
+      setAnswer({ value: { receive_report: answer.value.receive_report } });
+      showError(formatMessage(messages.emailValidationError), {
+        toastId: PARTICIPANT_REPORT_VALIDATION_ERROR,
+      });
+    }
+  };
+
   const onChange = (event) => {
     const { email, receive_report: option } = event;
 
     if (option === NO_OPTION) {
       saveAnswer(event);
-      setAnswer({ value: event });
     }
     if (option === YES_OPTION) {
-      if (!isNullOrUndefined(email) && email !== '') saveAnswer(event);
-      else saveAnswer(undefined);
-      setAnswer({ value: event });
+      if (!isNullOrUndefined(email) && emailValidator(email)) saveAnswer(event);
+      else clearAnswer();
     }
+
+    setAnswer({ value: event });
   };
 
   return (
