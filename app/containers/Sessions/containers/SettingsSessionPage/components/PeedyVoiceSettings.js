@@ -106,7 +106,7 @@ const PeedyVoiceSettings = ({
           options: data,
           value: selectedLanguage,
           onChange: setSelectLanguage,
-          placeholder: formatMessage(messages.peedyLanguage),
+          placeholder: formatMessage(messages.voiceLanguage),
         }}
       />
     );
@@ -130,7 +130,7 @@ const PeedyVoiceSettings = ({
           options: voicesData,
           value: selectedVoice,
           onChange: setSelectedVoice,
-          placeholder: formatMessage(messages.peedyVoiceType),
+          placeholder: formatMessage(messages.voiceType),
         }}
       />
     );
@@ -150,12 +150,12 @@ const PeedyVoiceSettings = ({
       <H3 mt={30} mb={20}>
         {formatMessage(messages.voiceSettings)}
       </H3>
-      <Text mb={5}>{formatMessage(messages.peedyLanguage)}</Text>
+      <Text mb={5}>{formatMessage(messages.voiceLanguage)}</Text>
       {getLanguagesPanel()}
       {selectedLanguage !== null && (
         <>
           <Text mt={10} mb={5}>
-            {formatMessage(messages.peedyVoiceType)}
+            {formatMessage(messages.voiceType)}
           </Text>
           {getVoicesPanel()}
         </>
