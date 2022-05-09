@@ -7,11 +7,11 @@ export const scope = 'app.containers.EditSessionPage';
 export default defineMessages({
   newQuestionTitle: {
     id: `${scope}.newQuestionMessage`,
-    defaultMessage: 'Enter title here',
+    defaultMessage: '<h2>Enter title here</h2>',
   },
   newQuestionSubtitle: {
     id: `${scope}.newQuestionSubtitle`,
-    defaultMessage: '<h2>Enter main text/question for screen here</h2>',
+    defaultMessage: '<p>Enter main text/question for screen here</p>',
   },
   manageSlides: {
     id: `${scope}.manageSlides`,
@@ -132,7 +132,7 @@ export default defineMessages({
     [participantReport.id]: {
       id: `${scope}.defaultQuestionSubtitles.${participantReport.id}`,
       defaultMessage:
-        '<h2>Would you like to receive a report generated from your responses?</h2>',
+        '<p>Would you like to receive a report generated from your responses?</p>',
     },
   },
 });

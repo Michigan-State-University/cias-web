@@ -36,8 +36,8 @@ describe('Settings reducer tests', () => {
         proceed_button: true,
       },
       position: 1,
-      title: '<h1>Enter title here</h1>',
-      subtitle: 'Enter main text/question for screen here',
+      title: '<h2>Enter title here</h2>',
+      subtitle: '<p>Enter main text/question for screen here</p>',
       narrator: {
         blocks: [
           {
