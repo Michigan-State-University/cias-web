@@ -25,6 +25,56 @@ exports[`<SettingsPanel /> Should render and match the snapshot 1`] = `
   padding: 35px;
 }
 
+.c32 {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-flex-direction: column;
+  -ms-flex-direction: column;
+  flex-direction: column;
+  width: 100%;
+  -webkit-align-content: center;
+  -ms-flex-line-pack: center;
+  align-content: center;
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  left: 0px;
+  top: 0px;
+}
+
+.c34 {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-flex-direction: column;
+  -ms-flex-direction: column;
+  flex-direction: column;
+  width: 100%;
+  -webkit-align-content: center;
+  -ms-flex-line-pack: center;
+  align-content: center;
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  position: relative;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+}
+
 .c9 {
   display: -webkit-box;
   display: -webkit-flex;
@@ -105,6 +155,30 @@ exports[`<SettingsPanel /> Should render and match the snapshot 1`] = `
   width: 100%;
 }
 
+.c35 {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-flex-direction: row;
+  -ms-flex-direction: row;
+  flex-direction: row;
+  height: auto;
+  margin-top: 22px;
+  margin-bottom: 12px;
+}
+
+.c38 {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-flex-direction: row;
+  -ms-flex-direction: row;
+  flex-direction: row;
+  height: auto;
+}
+
 .c8 {
   width: auto;
   height: auto;
@@ -134,6 +208,21 @@ exports[`<SettingsPanel /> Should render and match the snapshot 1`] = `
   line-height: 130%;
   margin-top: 12px;
   font-size: 15px;
+  color: #2F3850;
+}
+
+.c30 {
+  font-family: DM Sans;
+  font-size: 13px;
+  line-height: 130%;
+  margin-bottom: 10px;
+  color: #2F3850;
+}
+
+.c39 {
+  font-family: DM Sans;
+  font-size: 13px;
+  line-height: 130%;
   color: #2F3850;
 }
 
@@ -248,11 +337,64 @@ exports[`<SettingsPanel /> Should render and match the snapshot 1`] = `
   background-color: #E9F1FB;
 }
 
+.c28 {
+  width: auto;
+  height: auto;
+  display: block;
+  border-radius: 5px;
+  padding: 35px;
+  margin-top: 30px;
+  margin-bottom: 30px;
+}
+
+.c33 {
+  width: auto;
+  height: auto;
+  display: block;
+  border-radius: 5px;
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  z-index: 1;
+  background-color: rgba(255,255,255,1);
+  opacity: 0.5;
+}
+
+.c36 {
+  margin: 0;
+  font-family: DM Sans;
+  font-size: 15px;
+  line-height: 150%;
+  -webkit-text-decoration: underline;
+  text-decoration: underline;
+  cursor: pointer;
+  color: rgba(183,39,234,1);
+  cursor: pointer;
+  color: rgba(183,39,234,1);
+}
+
+.c37 {
+  margin: 0;
+  font-family: DM Sans;
+  font-size: 15px;
+  line-height: 150%;
+  color: #2F3850;
+}
+
 .c6 {
   margin: 0;
   font-family: DM Sans;
   font-size: 18px;
   line-height: 130%;
+  color: #2F3850;
+}
+
+.c29 {
+  margin: 0;
+  font-family: DM Sans;
+  font-size: 18px;
+  line-height: 130%;
+  margin-bottom: 10px;
   color: #2F3850;
 }
 
@@ -287,6 +429,14 @@ exports[`<SettingsPanel /> Should render and match the snapshot 1`] = `
 .c27 .ql-container {
   font-size: initial;
   font-family: DM Sans;
+}
+
+.c31 {
+  border-radius: 5px;
+  border: 1px dashed #2F3850;
+  background-color: rgba(233,241,251,1);
+  padding: 50px;
+  width: 100%;
 }
 
 .c12 {
@@ -326,6 +476,38 @@ exports[`<SettingsPanel /> Should render and match the snapshot 1`] = `
 .c2 {
   box-shadow: 0px 4px 20px #E3EEFB;
   background-color: #FFFFFF;
+}
+
+@media only screen and (min-width:768px) {
+
+}
+
+@media only screen and (min-width:960px) {
+
+}
+
+@media only screen and (min-width:1170px) {
+
+}
+
+@media only screen and (min-width:1360px) {
+
+}
+
+@media only screen and (min-width:768px) {
+
+}
+
+@media only screen and (min-width:960px) {
+
+}
+
+@media only screen and (min-width:1170px) {
+
+}
+
+@media only screen and (min-width:1360px) {
+
 }
 
 @media only screen and (min-width:768px) {
@@ -2081,6 +2263,87 @@ exports[`<SettingsPanel /> Should render and match the snapshot 1`] = `
                   </div>
                 </div>
               </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div
+      class="c28 c2"
+    >
+      <div
+        class="c0"
+      >
+        <h2
+          class="c29"
+        >
+          Put logo
+        </h2>
+        <p
+          class="c30"
+        >
+          If no image is provided, no logo will be displayed.
+        </p>
+        <div
+          class="c31"
+          style="position: relative; pointer-events: all;"
+          width="100%"
+        >
+          <div
+            class="c32"
+            display="flex"
+            height="100%"
+            width="100%"
+          >
+            <div
+              class="c33"
+              disabled=""
+              height="100%"
+              opacity="0.5"
+              width="100%"
+            />
+          </div>
+          <div
+            class="c34"
+            display="flex"
+          >
+            <input
+              accept="image/jpg, image/png, image/jpeg"
+              autocomplete="off"
+              style="display: none;"
+              tabindex="-1"
+              type="file"
+            />
+            <img
+              alt="image"
+              class="c8"
+              src="IMAGE_MOCK"
+            />
+            <div
+              class="c35"
+            >
+              <h3
+                class="c36"
+                color="#B727EA"
+                cursor="pointer"
+                text-decoration="underline"
+              >
+                Upload
+              </h3>
+              <h3
+                class="c37"
+              >
+                 or drop an image right here
+              </h3>
+            </div>
+            <div
+              class="c38"
+            >
+              <p
+                class="c39"
+              >
+                It works for JPG, PNG formats, max size 5MB
+              </p>
             </div>
           </div>
         </div>

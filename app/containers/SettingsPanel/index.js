@@ -4,13 +4,7 @@
  *
  */
 
-import React, {
-  useReducer,
-  useEffect,
-  useContext,
-  useCallback,
-  useMemo,
-} from 'react';
+import React, { useReducer, useEffect, useCallback, useMemo } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { compose } from 'redux';
@@ -48,8 +42,6 @@ import ApprovableInput from 'components/Input/ApprovableInput';
 import { selectQuillText } from 'components/Input/utils';
 import HoverableBox from 'components/Box/HoverableBox';
 
-import { InterventionDetailsPageContext } from 'containers/InterventionDetailsPage/utils';
-
 import LogoUpload from './containers/LogoUpload';
 import AccessGiver from './containers/AccessGiver';
 import InterventionAccessDescription from './Components/InterventionAccessDescription';
@@ -80,7 +72,6 @@ const SettingsPanel = ({
   addInterventionAttachments,
   deleteInterventionAttachment,
 }) => {
-  const { rolePermissions } = useContext(InterventionDetailsPageContext);
   const { formatMessage } = useIntl();
 
   const [state, dispatch] = useReducer(reducer, {});
@@ -274,17 +265,15 @@ const SettingsPanel = ({
           )}
         </Column>
       </StyledBox>
-      {rolePermissions.canEditLogo && (
-        <StyledBox my={30} padding={35}>
-          <LogoUpload
-            intervention={intervention}
-            logoLoading={logoLoading}
-            addImage={onAddLogo}
-            deleteImage={onDeleteLogo}
-            updateDescription={onUpdateLogoDescription}
-          />
-        </StyledBox>
-      )}
+      <StyledBox my={30} padding={35}>
+        <LogoUpload
+          intervention={intervention}
+          logoLoading={logoLoading}
+          addImage={onAddLogo}
+          deleteImage={onDeleteLogo}
+          updateDescription={onUpdateLogoDescription}
+        />
+      </StyledBox>
     </Column>
   );
 };

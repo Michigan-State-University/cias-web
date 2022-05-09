@@ -2,7 +2,6 @@ import { arraysOverlap } from 'utils/arrayUtils';
 
 import { Roles } from './UserRoles';
 
-const ALLOWED_EDIT_LOGO = [Roles.admin];
 const ALLOWED_DOWNLOAD_INTERVENTION_CSV = [
   Roles.admin,
   Roles.teamAdmin,
@@ -39,7 +38,6 @@ const ALLOWED_CAT_MH_SETTING_DISPLAY = [
 ];
 
 export const RolePermissions = (roles) => ({
-  canEditLogo: arraysOverlap(roles, ALLOWED_EDIT_LOGO),
   canDownloadInterventionCsv: arraysOverlap(
     roles,
     ALLOWED_DOWNLOAD_INTERVENTION_CSV,
