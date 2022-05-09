@@ -4,7 +4,7 @@
  *
  */
 import produce from 'immer';
-import { DESKTOP_MODE } from 'utils/previewMode';
+import { I_PHONE_8_PLUS_MODE } from 'utils/previewMode';
 
 import {
   SUBMIT_ANSWER_ERROR,
@@ -43,7 +43,7 @@ export const initialState = {
   answersError: '',
   answers: {},
   interventionStarted: false,
-  previewMode: DESKTOP_MODE,
+  previewMode: I_PHONE_8_PLUS_MODE,
   sessionId: null,
   isAnimationOngoing: true,
   feedbackScreenSettings: getEmptyFeedbackScreenSettings(),
