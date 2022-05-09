@@ -14,14 +14,14 @@ export const SubstancesCounter = ({
 }) => {
   if (substanceCount === true)
     return (
-      <Text fontWeight="bold" color={colors.alert}>
+      <Text fontWeight="bold" color={colors.brightNavyBlue}>
         <FormattedMessage {...globalMessages.yes} />
       </Text>
     );
 
   if (substanceCount === 0)
     return (
-      <Text fontWeight="bold" color={colors.jungleGreen}>
+      <Text fontWeight="bold" color={colors.purplePlum}>
         <FormattedMessage {...globalMessages.no} />
       </Text>
     );
@@ -30,7 +30,7 @@ export const SubstancesCounter = ({
     return (
       <Text
         fontWeight="bold"
-        color={colors.alert}
+        color={colors.brightNavyBlue}
         whiteSpace="nowrap"
         maxWidth="100%"
         overflow="hidden"
