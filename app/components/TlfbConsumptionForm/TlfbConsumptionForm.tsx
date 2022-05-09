@@ -70,11 +70,14 @@ export const TlfbConsumptionForm = ({
     });
   };
 
-  const showSubstances = !grouped || substancesConsumed;
+  const showSubstancesQuestion = grouped || !substances.length;
+  const showSubstances =
+    (Boolean(substances.length) || Boolean(substanceGroups.length)) &&
+    (!grouped || substancesConsumed);
 
   return (
     <>
-      {grouped && (
+      {showSubstancesQuestion && (
         <Row mb={24} gap={32}>
           <Radio
             id="yes-option"

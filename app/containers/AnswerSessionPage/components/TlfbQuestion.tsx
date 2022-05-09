@@ -130,12 +130,18 @@ const TlfbQuestion = ({
 
     if (substancesWithGroup) {
       if (!substancesConsumed) return true;
+      if (!substanceGroups.length) return true;
+      if (!substanceGroups.some((group) => group.substances.length)) {
+        return true;
+      }
 
       return (
         !!consumptions?.length &&
         consumptions.every(({ amount }) => Boolean(amount))
       );
     }
+
+    if (!substances.length) return true;
 
     return consumptions?.length === substances.length;
   }, [answerBody]);
