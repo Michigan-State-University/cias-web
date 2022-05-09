@@ -41,6 +41,7 @@ type Props = {
   canSave: boolean;
   isSaving: boolean;
   canEdit: boolean;
+  isDraft: boolean;
   modalData: ModalUIData;
 };
 
@@ -54,6 +55,7 @@ const Component = ({
   isSaving,
   canEdit,
   modalData,
+  isDraft,
 }: Props) => {
   const { formatMessage } = useIntl();
 
@@ -153,7 +155,7 @@ const Component = ({
             placeholder={formatMessage(messages.numberPlaceholder)}
             label={formatMessage(messages.organizationIdLabel)}
             onChange={onOrganizationIdUpdate}
-            inputProps={{ disabled: areFieldsDisabled }}
+            inputProps={{ disabled: areFieldsDisabled || !isDraft }}
           />
         </Col>
 
@@ -165,7 +167,7 @@ const Component = ({
             placeholder={formatMessage(messages.numberPlaceholder)}
             label={formatMessage(messages.applicationIdLabel)}
             onChange={onApplicationIdUpdate}
-            inputProps={{ disabled: areFieldsDisabled }}
+            inputProps={{ disabled: areFieldsDisabled || !isDraft }}
           />
         </Col>
       </Row>

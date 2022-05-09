@@ -2,7 +2,11 @@ import React, { memo, useEffect, useMemo, useState } from 'react';
 import isEqual from 'lodash/isEqual';
 import { useDispatch, useSelector } from 'react-redux';
 
-import { CatMhLicenseType, InterventionDto } from 'models/Intervention';
+import {
+  CatMhLicenseType,
+  InterventionDto,
+  InterventionStatus,
+} from 'models/Intervention';
 import {
   editInterventionRequest,
   makeSelectInterventionLoader,
@@ -79,6 +83,7 @@ const Component = ({ modalState: intervention, closeModal }: Props) => {
       onLicenseInformationChange={onLicenseInformationChange}
       onLicenseTypeChange={onLicenseTypeChange}
       onTestNumberChange={onTestNumberChange}
+      isDraft={intervention.status === InterventionStatus.DRAFT}
     />
   );
 };
