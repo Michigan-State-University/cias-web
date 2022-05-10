@@ -98,6 +98,8 @@ exports[`<AnswerSessionPage /> Should render and match the snapshot 1`] = `
   justify-content: center;
   width: 100%;
   max-width: 702px;
+  height: 100%;
+  width: 100%;
 }
 
 @media only screen and (min-width:768px) {

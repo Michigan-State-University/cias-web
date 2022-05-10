@@ -212,9 +212,12 @@ export function AnswerSessionPage({
 
   const [containerQueryParams, pageRef] = useContainerQuery(QUERY);
 
+  const checkIfDesktop = (containerQuery) =>
+    isPreview ? previewMode === DESKTOP_MODE && containerQuery : containerQuery;
+
   const isDesktop = useMemo(
-    () => previewMode === DESKTOP_MODE && containerQueryParams[IS_DESKTOP],
-    [previewMode, containerQueryParams],
+    () => checkIfDesktop(containerQueryParams[IS_DESKTOP]),
+    [previewMode, containerQueryParams, isPreview],
   );
 
   const logoStyles = useMemo(() => {
@@ -335,8 +338,7 @@ export function AnswerSessionPage({
       />
     );
 
-    const fixedPosition =
-      previewMode === DESKTOP_MODE && containerQueryParams[IS_XXL];
+    const fixedPosition = checkIfDesktop(containerQueryParams[IS_XXL]);
 
     if (fixedPosition) {
       return (
@@ -505,7 +507,7 @@ export function AnswerSessionPage({
         </Helmet>
 
         <AnswerOuterContainer
-          previewMode={previewMode}
+          previewMode={isPreview ? previewMode : DESKTOP_MODE}
           interventionStarted={interventionStarted}
         >
           {interventionStarted && nextQuestionError && (
