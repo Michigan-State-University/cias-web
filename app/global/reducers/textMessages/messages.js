@@ -28,4 +28,8 @@ export default defineMessages({
     id: `${scope}.updatePhoneError`,
     defaultMessage: "Couldn't update the recipient's phone",
   },
+  reorderVariantsError: {
+    id: `${scope}.reorderVariantsError`,
+    defaultMessage: "Couldn't reorder text message variants",
+  },
 });

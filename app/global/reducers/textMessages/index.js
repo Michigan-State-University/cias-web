@@ -13,6 +13,7 @@ export {
   updatePhoneRequest,
   setFiltersAction,
   setTextMessagesCount,
+  reorderTextMessageVariantsRequest,
 } from './actions';
 
 export {

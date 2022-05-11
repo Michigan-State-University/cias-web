@@ -34,6 +34,9 @@ import {
   REMOVE_TEXT_MESSAGE_VARIANT_REQUEST,
   REMOVE_TEXT_MESSAGE_VARIANT_SUCCESS,
   REMOVE_TEXT_MESSAGE_VARIANT_ERROR,
+  REORDER_TEXT_MESSAGE_VARIANTS_REQUEST,
+  REORDER_TEXT_MESSAGE_VARIANTS_SUCCESS,
+  REORDER_TEXT_MESSAGE_VARIANTS_ERROR,
   CHANGE_SELECTED_VARIANT,
   CLONE_TEXT_MESSAGE_REQUEST,
   CLONE_TEXT_MESSAGE_SUCCESS,
@@ -71,6 +74,7 @@ export const initialState = {
     addPhoneLoading: false,
     removePhoneLoading: false,
     updatePhoneLoading: false,
+    reorderVariantsLoading: false,
   },
   errors: {
     fetchTextMessagesError: null,
@@ -84,6 +88,7 @@ export const initialState = {
     addPhoneError: null,
     removePhoneError: null,
     updatePhoneError: null,
+    reorderVariantsError: null,
   },
   cache: { textMessages: [] },
   filters: INITIAL_FILTERS,
@@ -305,6 +310,33 @@ export const textMessagesReducer = (state = initialState, action) =>
         draft.loaders.removeVariantLoading = false;
         draft.errors.removeVariantError = action.payload.error;
 
+        assignDraftItems(draft.cache.textMessages, draft.textMessages);
+        break;
+
+      case REORDER_TEXT_MESSAGE_VARIANTS_REQUEST:
+        draft.loaders.reorderVariantsLoading = true;
+        draft.loaders.reorderVariantsError = null;
+        if (state.selectedMessageId === action.payload.smsPlanId) {
+          updateItemById(
+            draft.textMessages,
+            state.selectedMessageId,
+            (textMessage) => {
+              textMessage.variants = action.payload.reorderedVariants;
+              return textMessage;
+            },
+          );
+        }
+        break;
+
+      case REORDER_TEXT_MESSAGE_VARIANTS_SUCCESS:
+        draft.loaders.reorderVariantsLoading = false;
+        draft.loaders.reorderVariantsError = null;
+        assignDraftItems(draft.textMessages, draft.cache.textMessages);
+        break;
+
+      case REORDER_TEXT_MESSAGE_VARIANTS_ERROR:
+        draft.loaders.reorderVariantsLoading = false;
+        draft.loaders.reorderVariantsError = payload;
         assignDraftItems(draft.cache.textMessages, draft.textMessages);
         break;
 

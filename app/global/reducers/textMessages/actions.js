@@ -26,6 +26,9 @@ import {
   REMOVE_TEXT_MESSAGE_VARIANT_REQUEST,
   REMOVE_TEXT_MESSAGE_VARIANT_SUCCESS,
   REMOVE_TEXT_MESSAGE_VARIANT_ERROR,
+  REORDER_TEXT_MESSAGE_VARIANTS_REQUEST,
+  REORDER_TEXT_MESSAGE_VARIANTS_SUCCESS,
+  REORDER_TEXT_MESSAGE_VARIANTS_ERROR,
   CLONE_TEXT_MESSAGE_REQUEST,
   CLONE_TEXT_MESSAGE_SUCCESS,
   CLONE_TEXT_MESSAGE_ERROR,
@@ -106,6 +109,19 @@ export const removeTextMessageVariantSuccess = () =>
   actionBuilder(REMOVE_TEXT_MESSAGE_VARIANT_SUCCESS, {});
 export const removeTextMessageVariantError = (error) =>
   actionBuilder(REMOVE_TEXT_MESSAGE_VARIANT_ERROR, { error });
+
+export const reorderTextMessageVariantsRequest = (
+  smsPlanId,
+  reorderedVariants,
+) =>
+  actionBuilder(REORDER_TEXT_MESSAGE_VARIANTS_REQUEST, {
+    smsPlanId,
+    reorderedVariants,
+  });
+export const reorderTextMessageVariantsSuccess = () =>
+  actionBuilder(REORDER_TEXT_MESSAGE_VARIANTS_SUCCESS, {});
+export const reorderTextMessageVariantsError = (error) =>
+  actionBuilder(REORDER_TEXT_MESSAGE_VARIANTS_ERROR, error);
 
 export const cloneTextMessageRequest = (textMessageId) =>
   actionBuilder(CLONE_TEXT_MESSAGE_REQUEST, { textMessageId });

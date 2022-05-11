@@ -10,6 +10,7 @@ import { colors, themeColors } from 'theme';
 import arrowDown from 'assets/svg/arrow-down-black.svg';
 import arrowUp from 'assets/svg/arrow-up-black.svg';
 import binNoBg from 'assets/svg/bin-no-bg.svg';
+import ReorderIcon from 'assets/svg/reorder-hand.svg';
 
 import { VariableHelper } from 'models/Helpers';
 import {
@@ -61,6 +62,7 @@ const VariantItem = ({
   removeVariant,
   disabled,
   changeSelectedVariant,
+  dragHandleProps,
 }) => {
   const { sessionId, interventionId, formatMessage } =
     useContext(TextMessagesContext);
@@ -111,12 +113,8 @@ const VariantItem = ({
       onShowImg={arrowUp}
       imgWithBackground
       label={
-        <Row
-          align="center"
-          justify="between"
-          style={{ width: '100%', paddingRight: 10 }}
-        >
-          <Col xs={6}>
+        <Row align="center" justify="between" style={{ paddingRight: 10 }}>
+          <Col>
             <H2>
               {formatMessage(messages.case, {
                 index,
@@ -131,6 +129,15 @@ const VariantItem = ({
             )}
           </Col>
         </Row>
+      }
+      extraIcons={
+        <Img
+          mr={10}
+          src={ReorderIcon}
+          cursor="grab"
+          disabled={false}
+          {...dragHandleProps}
+        />
       }
     >
       <Container style={{ width: '100%' }}>
@@ -222,6 +229,7 @@ VariantItem.propTypes = {
   removeVariant: PropTypes.func,
   disabled: PropTypes.bool,
   changeSelectedVariant: PropTypes.func,
+  dragHandleProps: PropTypes.object,
 };
 VariantItem.defaultProps = {
   open: false,
