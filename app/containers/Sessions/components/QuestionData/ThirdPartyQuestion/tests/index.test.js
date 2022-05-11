@@ -20,6 +20,7 @@ import ThirdPartyQuestion from '../index';
 describe('<ThirdPartyQuestion />', () => {
   const mockedFunctions = {
     updateAnswer: jest.fn(),
+    reorderAnswers: jest.fn(),
   };
 
   const defaultProps = {

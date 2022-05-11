@@ -11,4 +11,8 @@ export default defineMessages({
     id: `${scope}.addAnswer`,
     defaultMessage: 'Add new answer',
   },
+  reorderIconAlt: {
+    id: `${scope}.reorderIconAlt`,
+    defaultMessage: 'Reorder icon {index}',
+  },
 });

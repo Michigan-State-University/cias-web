@@ -36,4 +36,8 @@ export default defineMessages({
     id: `${scope}.zeroReportChosen`,
     defaultMessage: 'No reports were chosen for that answer',
   },
+  reorderIconAlt: {
+    id: `${scope}.reorderIconAlt`,
+    defaultMessage: 'Reorder icon {index}',
+  },
 });

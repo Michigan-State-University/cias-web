@@ -20,6 +20,8 @@ Object.defineProperty(window, 'ResizeObserver', {
     observe() {}
 
     unobserve() {}
+
+    disconnect() {}
   },
   writable: true,
 });

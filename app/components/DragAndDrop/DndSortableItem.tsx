@@ -1,11 +1,18 @@
 import React, { memo, useMemo } from 'react';
-import PropTypes from 'prop-types';
 import { useSortable } from '@dnd-kit/sortable';
 import { CSS } from '@dnd-kit/utilities';
 
 import { DRAGGING_ITEM_OPACITY, ITEM_OPACITY } from './constants';
+import { TChildren, TDragHandleProps } from './types';
 
-const Component = ({ children, item, id }) => {
+type Props<T> = {
+  children: TChildren<T>;
+  item: T;
+  id: string;
+  index: number;
+};
+
+const Component = <T,>({ children, item, id, index }: Props<T>) => {
   const {
     attributes,
     listeners,
@@ -24,7 +31,8 @@ const Component = ({ children, item, id }) => {
     [transform, transition, isDragging],
   );
 
-  const dragHandleProps = useMemo(
+  // @ts-ignore TS not supported - it doesn't allow exceptions to Record type
+  const dragHandleProps: TDragHandleProps = useMemo(
     () => ({
       ...attributes,
       ...listeners,
@@ -34,17 +42,9 @@ const Component = ({ children, item, id }) => {
 
   return (
     <div ref={setNodeRef} style={style}>
-      {children({ item, dragHandleProps, isDragging, isOverlay: false })}
+      {children({ item, dragHandleProps, isDragging, isOverlay: false, index })}
     </div>
   );
 };
 
-Component.propTypes = {
-  children: PropTypes.func,
-  item: PropTypes.object,
-  id: PropTypes.string,
-};
-
-Component.defaultProps = {};
-
-export const DndSortableItem = memo(Component);
+export const DndSortableItem = memo(Component) as typeof Component;

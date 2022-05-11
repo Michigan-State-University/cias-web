@@ -6,18 +6,7 @@ import { createStructuredSelector } from 'reselect';
 import { injectIntl } from 'react-intl';
 import { toast } from 'react-toastify';
 
-import FlexibleWidthApprovableInput from 'components/Input/FlexibleWidthApprovableInput';
-import Box from 'components/Box';
-import Column from 'components/Column';
-import HoverableBox from 'components/Box/HoverableBox';
-import Img from 'components/Img';
-import PlusCircle from 'components/Circle/PlusCircle';
-
-import Row from 'components/Row';
-import Text from 'components/Text';
-import { BadgeInput } from 'components/Input/BadgeInput';
-import OriginalTextHover from 'components/OriginalTextHover';
-
+import ReorderIcon from 'assets/svg/reorder-hand.svg';
 import bin from 'assets/svg/bin-red.svg';
 import radio from 'assets/svg/radio-button.svg';
 
@@ -29,15 +18,29 @@ import { canEdit } from 'models/Status/statusPermissions';
 import { emailValidator } from 'utils/validators';
 import { themeColors, colors } from 'theme';
 
+import FlexibleWidthApprovableInput from 'components/Input/FlexibleWidthApprovableInput';
+import Box from 'components/Box';
+import Column from 'components/Column';
+import HoverableBox from 'components/Box/HoverableBox';
+import Img from 'components/Img';
+import PlusCircle from 'components/Circle/PlusCircle';
+import Row from 'components/Row';
+import Text from 'components/Text';
+import { BadgeInput } from 'components/Input/BadgeInput';
+import OriginalTextHover from 'components/OriginalTextHover';
+import { DndSortable } from 'components/DragAndDrop';
+
 import ReportChooser from './ReportChooser';
 import messages from './messages';
 import { ADD, UPDATE_ANSWER, REMOVE } from './constants';
+import { reorderAnswersAction } from './actions';
 
 const ThirdPartyQuestion = ({
   selectedQuestion,
   addAnswer,
   updateAnswer,
   removeAnswer,
+  reorderAnswers,
   isNarratorTab,
   interventionStatus,
   intl: { formatMessage },
@@ -78,96 +81,117 @@ const ThirdPartyQuestion = ({
     });
 
   const handleRemove = (index) => removeAnswer(index);
+
+  const onDragEnd = (_, items, hasChanged) => {
+    if (!hasChanged) return;
+
+    reorderAnswers(items);
+  };
+
   return (
     <Column>
-      {data.map((value, index) => (
-        <Row key={`question-${id}-el-${index}`} mb={12}>
-          <HoverableBox
-            hoverColor={isNarratorTabOrEditNotPossible ? null : undefined}
-            px={21}
-            py={14}
-            width="100%"
-            onMouseEnter={handleMouseEnter(index)}
-            onMouseLeave={handleMouseLeave}
-            clickable={false}
-          >
-            <Column>
-              <Row
-                align="center"
-                justify="between"
-                mb={isNarratorTabOrEditNotPossible ? 0 : 10}
-              >
-                <Row width="90%">
-                  <Img width="max-content" src={radio} mr={15} />
-                  <OriginalTextHover
-                    id={`question-${id}-answer-${index}`}
-                    text={value?.original_text}
-                    hidden={isNarratorTab}
-                  >
-                    <FlexibleWidthApprovableInput
-                      fontSize={18}
-                      type="singleline"
-                      placeholder={
-                        !isNarratorTab
-                          ? formatMessage(messages.placeholder, {
-                              index: index + 1,
-                            })
-                          : ''
-                      }
-                      value={value.payload}
-                      onCheck={(newTitle) =>
-                        handleChangeTitle(newTitle, index, value)
-                      }
-                      richText
-                      disabled={isNarratorTabOrEditNotPossible}
-                      emptyWidth={110}
-                    />
-                  </OriginalTextHover>
-                </Row>
-                {data.length > 1 && (
-                  <Row>
-                    <Box
-                      onClick={() => handleRemove(index)}
-                      hidden={hovered !== index}
-                      clickable
+      <DndSortable onDragEnd={onDragEnd} items={data} selector={null}>
+        {({ item, index, dragHandleProps }) => (
+          <Row mb={12}>
+            <HoverableBox
+              hoverColor={isNarratorTabOrEditNotPossible ? null : undefined}
+              px={21}
+              py={14}
+              width="100%"
+              onMouseEnter={handleMouseEnter(index)}
+              onMouseLeave={handleMouseLeave}
+              clickable={false}
+            >
+              <Column>
+                <Row
+                  align="center"
+                  justify="between"
+                  mb={isNarratorTabOrEditNotPossible ? 0 : 10}
+                >
+                  <Row width="90%">
+                    {!isNarratorTabOrEditNotPossible && (
+                      <Img
+                        alt={formatMessage(messages.reorderIconAlt, {
+                          index,
+                        })}
+                        mr={10}
+                        src={ReorderIcon}
+                        disabled={false}
+                        cursor="grab"
+                        {...dragHandleProps}
+                      />
+                    )}
+                    <Img width="max-content" src={radio} mr={15} />
+                    <OriginalTextHover
+                      id={`question-${id}-answer-${index}`}
+                      text={item?.original_text}
+                      hidden={isNarratorTab}
                     >
-                      <Img src={bin} mr={16} />
-                    </Box>
+                      <FlexibleWidthApprovableInput
+                        fontSize={18}
+                        type="singleline"
+                        placeholder={
+                          !isNarratorTab
+                            ? formatMessage(messages.placeholder, {
+                                index: index + 1,
+                              })
+                            : ''
+                        }
+                        value={item.payload}
+                        onCheck={(newTitle) =>
+                          handleChangeTitle(newTitle, index, item)
+                        }
+                        richText
+                        disabled={isNarratorTabOrEditNotPossible}
+                        emptyWidth={110}
+                      />
+                    </OriginalTextHover>
                   </Row>
-                )}
-              </Row>
-              <Row mb={10} ml={40} align="center" hidden={isNarratorTab}>
-                <BadgeInput
-                  data-cy={`score-${index}-input`}
-                  disabled={!editingPossible}
-                  textAlign="center"
-                  placeholder={
-                    !isNarratorTab
-                      ? formatMessage(messages.emailPlaceholder)
-                      : ''
-                  }
-                  value={value.value}
-                  color={colors.azure}
-                  onBlur={(currentValue) =>
-                    handleChangeVariable(index, value, currentValue)
-                  }
-                  maxWidth="100%"
-                />
-              </Row>
-            </Column>
+                  {data.length > 1 && (
+                    <Row>
+                      <Box
+                        onClick={() => handleRemove(index)}
+                        hidden={hovered !== index}
+                        clickable
+                      >
+                        <Img src={bin} mr={16} />
+                      </Box>
+                    </Row>
+                  )}
+                </Row>
+                <Row mb={10} ml={40} align="center" hidden={isNarratorTab}>
+                  <BadgeInput
+                    data-cy={`score-${index}-input`}
+                    disabled={!editingPossible}
+                    textAlign="center"
+                    placeholder={
+                      !isNarratorTab
+                        ? formatMessage(messages.emailPlaceholder)
+                        : ''
+                    }
+                    value={item.value}
+                    color={colors.azure}
+                    onBlur={(currentValue) =>
+                      handleChangeVariable(index, item, currentValue)
+                    }
+                    maxWidth="100%"
+                  />
+                </Row>
+              </Column>
 
-            <ReportChooser
-              formatMessage={formatMessage}
-              value={value.report_template_ids}
-              onChange={(reportTemplateIds) =>
-                handleChangeReportTemplateIds(reportTemplateIds, index, value)
-              }
-              disabled={!editingPossible}
-              isNarratorTab={isNarratorTab}
-            />
-          </HoverableBox>
-        </Row>
-      ))}
+              <ReportChooser
+                formatMessage={formatMessage}
+                value={item.report_template_ids}
+                onChange={(reportTemplateIds) =>
+                  handleChangeReportTemplateIds(reportTemplateIds, index, item)
+                }
+                disabled={!editingPossible}
+                isNarratorTab={isNarratorTab}
+              />
+            </HoverableBox>
+          </Row>
+        )}
+      </DndSortable>
       <Row display="flex" hidden={isNarratorTabOrEditNotPossible}>
         <HoverableBox px={21} py={14} onClick={addAnswer}>
           <Box>
@@ -190,6 +214,7 @@ ThirdPartyQuestion.propTypes = {
   addAnswer: PropTypes.func.isRequired,
   updateAnswer: PropTypes.func.isRequired,
   removeAnswer: PropTypes.func.isRequired,
+  reorderAnswers: PropTypes.func.isRequired,
   isNarratorTab: PropTypes.bool,
   interventionStatus: PropTypes.string,
 };
@@ -204,6 +229,7 @@ const mapDispatchToProps = {
     updateQuestionData({ type: UPDATE_ANSWER, data: { index, value } }),
   removeAnswer: (index) =>
     updateQuestionData({ type: REMOVE, data: { index } }),
+  reorderAnswers: reorderAnswersAction,
 };
 
 const withConnect = connect(mapStateToProps, mapDispatchToProps);
