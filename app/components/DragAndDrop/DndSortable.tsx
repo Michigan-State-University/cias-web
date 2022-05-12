@@ -1,4 +1,5 @@
-import React, { memo, useMemo, useState } from 'react';
+import React, { memo, useMemo, useState, ComponentType } from 'react';
+import { createPortal } from 'react-dom';
 import {
   DndContext,
   closestCenter,
@@ -11,7 +12,7 @@ import { SortableContext } from '@dnd-kit/sortable';
 import { DndSortableItem } from './DndSortableItem';
 import { reorderItems, selectId, selectIndex } from './utils';
 import { EMPTY_OBJECT } from './constants';
-import { TChildren, TSelector } from './types';
+import { TChildren, TSelector, OverlayProps } from './types';
 
 type Props<T> = {
   children: TChildren<T>;
@@ -23,6 +24,9 @@ type Props<T> = {
     reorderedItems: T[],
     hasChanged: boolean,
   ) => void;
+  itemTag?: ComponentType | keyof JSX.IntrinsicElements;
+  itemProps?: object;
+  overlayProps?: OverlayProps;
 };
 
 const Component = <T,>({
@@ -31,6 +35,9 @@ const Component = <T,>({
   onDragEnd,
   onDragStart,
   children,
+  itemTag,
+  itemProps,
+  overlayProps,
 }: Props<T>) => {
   const [draggableItem, setDraggableItem] = useState<{
     item: T;
@@ -68,6 +75,25 @@ const Component = <T,>({
     [items, items.length, selector],
   );
 
+  const overlayChildren =
+    draggableItem &&
+    children({
+      item: draggableItem.item,
+      index: draggableItem.index,
+      dragHandleProps: EMPTY_OBJECT,
+      isDragging: true,
+      isOverlay: true,
+    });
+
+  const dragOverlayRender = (
+    <DragOverlay wrapperElement={overlayProps?.overlayWrapperTag}>
+      {!!overlayChildren &&
+        (overlayProps?.overlayInternalWrapper
+          ? overlayProps.overlayInternalWrapper(overlayChildren)
+          : overlayChildren)}
+    </DragOverlay>
+  );
+
   return (
     <DndContext
       onDragEnd={handleDragEnd}
@@ -84,6 +110,8 @@ const Component = <T,>({
               item={item}
               id={itemId}
               index={index}
+              tag={itemTag}
+              itemProps={itemProps}
             >
               {children}
             </DndSortableItem>
@@ -91,16 +119,9 @@ const Component = <T,>({
         })}
       </SortableContext>
 
-      <DragOverlay>
-        {draggableItem &&
-          children({
-            item: draggableItem.item,
-            index: draggableItem.index,
-            dragHandleProps: EMPTY_OBJECT,
-            isDragging: true,
-            isOverlay: true,
-          })}
-      </DragOverlay>
+      {overlayProps?.renderOverlayInPortal
+        ? createPortal(dragOverlayRender, document.body)
+        : dragOverlayRender}
     </DndContext>
   );
 };

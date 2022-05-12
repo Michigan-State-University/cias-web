@@ -19,4 +19,8 @@ export default defineMessages({
     id: `${scope}.columnPlaceholder`,
     defaultMessage: 'Column {index}...',
   },
+  reorderIconAlt: {
+    id: `${scope}.reorderIconAlt`,
+    defaultMessage: 'Reorder icon {index}',
+  },
 });

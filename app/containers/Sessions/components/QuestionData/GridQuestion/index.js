@@ -20,6 +20,7 @@ import { StyledInput } from 'components/Input/StyledInput';
 import { ScrollFogBox } from 'components/Box/ScrollFog';
 import { Table, THead, TBody, StripedTR, TD, TH } from 'components/Table';
 import OriginalTextHover from 'components/OriginalTextHover';
+import { DndSortable } from 'components/DragAndDrop';
 
 import scrollByRef from 'utils/scrollByRef';
 import { numericValidator, variableNameValidator } from 'utils/validators';
@@ -28,12 +29,14 @@ import {
   makeSelectSelectedQuestion,
   updateQuestionData,
 } from 'global/reducers/questions';
-
 import { canEdit } from 'models/Status/statusPermissions';
 import useResizeObserver from 'utils/useResizeObserver';
-import messages from './messages';
 
+import ReorderIcon from 'assets/svg/reorder-hand.svg';
+
+import messages from './messages';
 import { FirstTH } from './styled';
+import { reorderRowsAction, reorderColumnsAction } from './actions';
 
 import {
   ADD_ROW,
@@ -57,6 +60,8 @@ const GridQuestion = ({
   deleteColumn,
   isNarratorTab,
   interventionStatus,
+  reorderRows,
+  reorderColumns,
   intl: { formatMessage },
 }) => {
   const {
@@ -95,6 +100,18 @@ const GridQuestion = ({
   const getPlaceholder = (name, value) =>
     isNarratorTab ? '' : formatMessage(messages[name], { index: value });
 
+  const onRowsDragEnd = (_, items, hasChanged) => {
+    if (!hasChanged) return;
+
+    reorderRows(items);
+  };
+
+  const onColumnsDragEnd = (_, items, hasChanged) => {
+    if (!hasChanged) return;
+
+    reorderColumns(items);
+  };
+
   return (
     <Column width="100%" maxWidth={elements.draggableContainerSize}>
       <Row justify="end" display="flex" hidden={isNarratorTabOrEditNotPossible}>
@@ -129,201 +146,259 @@ const GridQuestion = ({
                   isFixed={isNarratorTab}
                   scope="col"
                 />
-                {columns.map((column, columnIndex) => (
-                  <TH
-                    scope="col"
-                    key={`question-${selectedQuestion.id}-col-th-${columnIndex}`}
-                    onMouseEnter={() => setHoveredColumn(columnIndex)}
-                    onMouseLeave={() => setHoveredColumn(-1)}
-                  >
-                    <Column
-                      align="center"
-                      width={isNarratorTab ? elements.grid.colWidth : '100%'}
+                <DndSortable
+                  onDragEnd={onColumnsDragEnd}
+                  items={columns}
+                  selector={null}
+                  itemTag={TH}
+                  itemProps={{
+                    scope: 'col',
+                  }}
+                  overlayProps={{
+                    overlayWrapperTag: 'table',
+                    renderOverlayInPortal: true,
+                    overlayInternalWrapper: (children) => (
+                      <thead>
+                        <tr>
+                          <TH>{children}</TH>
+                        </tr>
+                      </thead>
+                    ),
+                  }}
+                >
+                  {({ item: column, index: columnIndex, dragHandleProps }) => (
+                    <div
+                      onMouseEnter={() => setHoveredColumn(columnIndex)}
+                      onMouseLeave={() => setHoveredColumn(-1)}
                     >
-                      <Box
-                        px={8}
-                        mb={8}
-                        hidden={isNarratorTabOrEditNotPossible}
-                        height={35}
+                      <Column
+                        align="center"
+                        width={isNarratorTab ? elements.grid.colWidth : '100%'}
                       >
-                        <Img
-                          clickable
-                          onClick={() => deleteColumn(columnIndex)}
-                          src={bin}
-                          hidden={
-                            columns.length <= MINIMAL_COLUMNS_LENGTH ||
-                            hoveredColumn !== columnIndex
-                          }
-                        />
-                      </Box>
-                      <Row display="flex" hidden={isNarratorTab} mb={8}>
-                        <BadgeInput
-                          disabled={!editingPossible}
-                          px={0}
-                          py={12}
-                          textAlign="center"
-                          validator={numericValidator}
-                          keyboard="tel"
-                          placeholder={formatMessage(
-                            globalMessages.variables.variableScorePlaceholder,
-                          )}
-                          value={column.variable.value}
-                          color={colors.azure}
-                          onBlur={(val) =>
-                            updateColumn(
-                              { variable: { value: val } },
-                              columnIndex,
-                            )
-                          }
-                        />
-                      </Row>
-                      {isNarratorTab ? (
-                        <Column
-                          width={elements.grid.colWidth}
-                          height="inherit"
-                          justify="center"
+                        <Box
+                          px={8}
+                          mb={8}
+                          hidden={isNarratorTabOrEditNotPossible}
+                          height={35}
                         >
-                          {column.payload}
-                        </Column>
-                      ) : (
-                        <OriginalTextHover
-                          id={`question-${selectedQuestion.id}-column-${columnIndex}`}
-                          text={column?.original_text}
-                          hidden={isNarratorTab}
-                          direction="column"
-                          gap={8}
-                        >
-                          <StyledInput
-                            disabled={isNarratorTabOrEditNotPossible}
-                            cursor={
-                              isNarratorTabOrEditNotPossible
-                                ? 'text'
-                                : 'pointer'
-                            }
-                            width={110}
-                            px={0}
-                            py={12}
-                            textAlign="center"
-                            placeholder={getPlaceholder(
-                              'columnPlaceholder',
-                              columnIndex + 1,
-                            )}
-                            value={column.payload}
-                            onBlur={(value) =>
-                              updateColumn({ payload: value }, columnIndex)
+                          <Img
+                            clickable
+                            onClick={() => deleteColumn(columnIndex)}
+                            src={bin}
+                            hidden={
+                              columns.length <= MINIMAL_COLUMNS_LENGTH ||
+                              hoveredColumn !== columnIndex
                             }
                           />
-                        </OriginalTextHover>
-                      )}
-                    </Column>
-                  </TH>
-                ))}
-                <td ref={containerRightRef} />
-              </StripedTR>
-            </THead>
-            <TBody>
-              {rows.map((row, rowIndex) => (
-                <StripedTR
-                  key={`question-${selectedQuestion.id}-row-th-${rowIndex}`}
-                  color={colors.catskillWhite}
-                  bg={colors.zirkon}
-                >
-                  <FirstTH
-                    left={elements.grid.leftPadding}
-                    isFixed={isNarratorTab}
-                    scope="row"
-                    onMouseEnter={() => setHoveredRow(rowIndex)}
-                    onMouseLeave={() => setHoveredRow(-1)}
-                  >
-                    <Row align="center" height="100%" padding={5}>
-                      <Box width={60} hidden={isNarratorTabOrEditNotPossible}>
+                        </Box>
                         <Img
-                          clickable
-                          onClick={() => deleteRow(rowIndex)}
-                          src={bin}
-                          hidden={
-                            rows.length <= MINIMAL_ROWS_LENGTH ||
-                            hoveredRow !== rowIndex
-                          }
+                          alt={formatMessage(messages.reorderIconAlt, {
+                            index: columnIndex,
+                          })}
+                          src={ReorderIcon}
+                          disabled={false}
+                          cursor="grab"
+                          mb={10}
+                          mt={20}
+                          {...dragHandleProps}
                         />
-                        {rowIndex === rows.length - 1 && (
-                          <div ref={containerBottomRef} />
-                        )}
-                      </Box>
-                      <Row align="center" justify="between" width="100%">
-                        <Row display="flex" hidden={isNarratorTab} mr={8}>
+                        <Row display="flex" hidden={isNarratorTab} mb={8}>
                           <BadgeInput
                             disabled={!editingPossible}
                             px={0}
                             py={12}
                             textAlign="center"
-                            validator={variableNameValidator}
+                            validator={numericValidator}
+                            keyboard="tel"
                             placeholder={formatMessage(
-                              globalMessages.variables.variableNamePlaceholder,
+                              globalMessages.variables.variableScorePlaceholder,
                             )}
-                            value={row.variable.name}
-                            color={colors.jungleGreen}
+                            value={column.variable.value}
+                            color={colors.azure}
                             onBlur={(val) =>
-                              updateRow({ variable: { name: val } }, rowIndex)
+                              updateColumn(
+                                { variable: { value: val } },
+                                columnIndex,
+                              )
                             }
-                            autoComplete="off"
                           />
                         </Row>
                         {isNarratorTab ? (
                           <Column
-                            maxWidth={elements.grid.firstColWidth}
-                            width="max-content"
+                            width={elements.grid.colWidth}
                             height="inherit"
                             justify="center"
                           >
-                            {row.payload}
+                            {column.payload}
                           </Column>
                         ) : (
                           <OriginalTextHover
-                            id={`question-${selectedQuestion.id}-row-${rowIndex}`}
-                            text={row?.original_text}
+                            id={`question-${selectedQuestion.id}-column-${columnIndex}`}
+                            text={column?.original_text}
                             hidden={isNarratorTab}
-                            width="100%"
+                            direction="column"
+                            gap={8}
                           >
                             <StyledInput
-                              type="multiline"
-                              rows="2"
                               disabled={isNarratorTabOrEditNotPossible}
                               cursor={
                                 isNarratorTabOrEditNotPossible
                                   ? 'text'
                                   : 'pointer'
                               }
-                              width={elements.grid.firstColWidth}
+                              width={110}
                               px={0}
                               py={12}
                               textAlign="center"
                               placeholder={getPlaceholder(
-                                'rowPlaceholder',
-                                rowIndex + 1,
+                                'columnPlaceholder',
+                                columnIndex + 1,
                               )}
-                              value={row.payload}
+                              value={column.payload}
                               onBlur={(value) =>
-                                updateRow({ payload: value }, rowIndex)
+                                updateColumn({ payload: value }, columnIndex)
                               }
                             />
                           </OriginalTextHover>
                         )}
-                      </Row>
-                    </Row>
-                  </FirstTH>
-                  {columns.map((_, columnIndex) => (
-                    <TD
-                      height="inherit"
-                      key={`question-${selectedQuestion.id}-row-cell-${rowIndex}-${columnIndex}`}
+                      </Column>
+                    </div>
+                  )}
+                </DndSortable>
+                <td ref={containerRightRef} />
+              </StripedTR>
+            </THead>
+            <TBody>
+              <DndSortable
+                onDragEnd={onRowsDragEnd}
+                items={rows}
+                selector={null}
+                itemTag={StripedTR}
+                itemProps={{
+                  color: colors.catskillWhite,
+                  bg: colors.zirkon,
+                }}
+                overlayProps={{
+                  overlayWrapperTag: 'table',
+                  renderOverlayInPortal: true,
+                  overlayInternalWrapper: (children) => (
+                    <tbody>
+                      <StripedTR>{children}</StripedTR>
+                    </tbody>
+                  ),
+                }}
+              >
+                {({ item: row, index: rowIndex, dragHandleProps }) => (
+                  <>
+                    <FirstTH
+                      left={elements.grid.leftPadding}
+                      isFixed={isNarratorTab}
+                      scope="row"
+                      onMouseEnter={() => setHoveredRow(rowIndex)}
+                      onMouseLeave={() => setHoveredRow(-1)}
                     >
-                      <Row justify="center" align="center">
-                        <Img src={radio} />
+                      <Row align="center" height="100%" padding={5}>
+                        <Box width={60} hidden={isNarratorTabOrEditNotPossible}>
+                          <Img
+                            clickable
+                            onClick={() => deleteRow(rowIndex)}
+                            src={bin}
+                            hidden={
+                              rows.length <= MINIMAL_ROWS_LENGTH ||
+                              hoveredRow !== rowIndex
+                            }
+                          />
+                          {rowIndex === rows.length - 1 && (
+                            <div ref={containerBottomRef} />
+                          )}
+                        </Box>
+                        <Img
+                          alt={formatMessage(messages.reorderIconAlt, {
+                            index: rowIndex,
+                          })}
+                          ml={20}
+                          mr={10}
+                          src={ReorderIcon}
+                          disabled={false}
+                          cursor="grab"
+                          {...dragHandleProps}
+                        />
+                        <Row align="center" justify="between" width="100%">
+                          <Row display="flex" hidden={isNarratorTab} mr={8}>
+                            <BadgeInput
+                              disabled={!editingPossible}
+                              px={0}
+                              py={12}
+                              textAlign="center"
+                              validator={variableNameValidator}
+                              placeholder={formatMessage(
+                                globalMessages.variables
+                                  .variableNamePlaceholder,
+                              )}
+                              value={row.variable.name}
+                              color={colors.jungleGreen}
+                              onBlur={(val) =>
+                                updateRow({ variable: { name: val } }, rowIndex)
+                              }
+                              autoComplete="off"
+                            />
+                          </Row>
+                          {isNarratorTab ? (
+                            <Column
+                              maxWidth={elements.grid.firstColWidth}
+                              width="max-content"
+                              height="inherit"
+                              justify="center"
+                            >
+                              {row.payload}
+                            </Column>
+                          ) : (
+                            <OriginalTextHover
+                              id={`question-${selectedQuestion.id}-row-${rowIndex}`}
+                              text={row?.original_text}
+                              hidden={isNarratorTab}
+                              width="100%"
+                            >
+                              <StyledInput
+                                type="multiline"
+                                rows="2"
+                                disabled={isNarratorTabOrEditNotPossible}
+                                cursor={
+                                  isNarratorTabOrEditNotPossible
+                                    ? 'text'
+                                    : 'pointer'
+                                }
+                                width={elements.grid.firstColWidth}
+                                px={0}
+                                py={12}
+                                textAlign="center"
+                                placeholder={getPlaceholder(
+                                  'rowPlaceholder',
+                                  rowIndex + 1,
+                                )}
+                                value={row.payload}
+                                onBlur={(value) =>
+                                  updateRow({ payload: value }, rowIndex)
+                                }
+                              />
+                            </OriginalTextHover>
+                          )}
+                        </Row>
                       </Row>
-                    </TD>
-                  ))}
-                </StripedTR>
-              ))}
+                    </FirstTH>
+                    {columns.map((_, columnIndex) => (
+                      <TD
+                        height="inherit"
+                        key={`question-${selectedQuestion.id}-row-cell-${rowIndex}-${columnIndex}`}
+                      >
+                        <Row justify="center" align="center">
+                          <Img src={radio} />
+                        </Row>
+                      </TD>
+                    ))}
+                  </>
+                )}
+              </DndSortable>
             </TBody>
           </Table>
         </ScrollFogBox>
@@ -356,6 +431,8 @@ GridQuestion.propTypes = {
   deleteColumn: PropTypes.func.isRequired,
   isNarratorTab: PropTypes.bool,
   interventionStatus: PropTypes.string,
+  reorderRows: PropTypes.func,
+  reorderColumns: PropTypes.func,
 };
 
 const mapStateToProps = createStructuredSelector({
@@ -375,6 +452,8 @@ const mapDispatchToProps = {
     updateQuestionData({ type: DELETE_ROW, data: { index } }),
   deleteColumn: (index) =>
     updateQuestionData({ type: DELETE_COLUMN, data: { index } }),
+  reorderRows: (items) => reorderRowsAction(items),
+  reorderColumns: (items) => reorderColumnsAction(items),
 };
 
 const withConnect = connect(mapStateToProps, mapDispatchToProps);

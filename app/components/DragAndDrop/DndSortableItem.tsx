@@ -1,4 +1,4 @@
-import React, { memo, useMemo } from 'react';
+import React, { memo, useMemo, ComponentType } from 'react';
 import { useSortable } from '@dnd-kit/sortable';
 import { CSS } from '@dnd-kit/utilities';
 
@@ -10,9 +10,18 @@ type Props<T> = {
   item: T;
   id: string;
   index: number;
+  tag?: ComponentType | keyof JSX.IntrinsicElements;
+  itemProps?: object;
 };
 
-const Component = <T,>({ children, item, id, index }: Props<T>) => {
+const Component = <T,>({
+  children,
+  item,
+  id,
+  index,
+  tag: Wrapper = 'div',
+  itemProps,
+}: Props<T>) => {
   const {
     attributes,
     listeners,
@@ -40,10 +49,15 @@ const Component = <T,>({ children, item, id, index }: Props<T>) => {
     [attributes, listeners],
   );
 
+  const wrapperProps: any = {
+    ref: setNodeRef,
+    style,
+  };
+
   return (
-    <div ref={setNodeRef} style={style}>
+    <Wrapper {...itemProps} {...wrapperProps}>
       {children({ item, dragHandleProps, isDragging, isOverlay: false, index })}
-    </div>
+    </Wrapper>
   );
 };
 
