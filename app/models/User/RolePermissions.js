@@ -6,7 +6,9 @@ const ALLOWED_DOWNLOAD_INTERVENTION_CSV = [
   Roles.admin,
   Roles.teamAdmin,
   Roles.researcher,
+  Roles.eInterventionAdmin,
 ];
+
 const ALLOWED_ORGANIZATION_SIDEBAR_DISPLAY = [
   Roles.admin,
   Roles.eInterventionAdmin,
