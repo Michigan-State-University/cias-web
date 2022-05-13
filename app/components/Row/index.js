@@ -9,12 +9,12 @@ import {
   positioning,
 } from '../BaseComponentStyles';
 
-const Row = styled.div.attrs(props => ({
+const Row = styled.div.attrs((props) => ({
   onClick: props.disabled ? null : props.onClick,
 }))`
   display: flex;
   flex-direction: row;
-  height: ${props => (props.height ? `${props.height}px` : 'auto')};
+  height: ${(props) => (props.height ? `${props.height}px` : 'auto')};
   ${flex};
   ${margin};
   ${padding};

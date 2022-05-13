@@ -1,21 +1,193 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`<FeedbackQuestion /> Should render and match the snapshot 1`] = `
+.c0 {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-flex-direction: column;
+  -ms-flex-direction: column;
+  flex-direction: column;
+  width: 100%;
+  margin-top: 10px;
+}
+
+.c2 {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-flex-direction: column;
+  -ms-flex-direction: column;
+  flex-direction: column;
+  width: 100%;
+}
+
+.c3 {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-flex-direction: row;
+  -ms-flex-direction: row;
+  flex-direction: row;
+  height: auto;
+}
+
+.c1 {
+  width: auto;
+  height: auto;
+  display: block;
+  border-radius: 5px;
+  width: 100%;
+  padding-top: 30px;
+  padding-bottom: 30px;
+  padding-right: 21px;
+  padding-left: 21px;
+}
+
+.c4 {
+  width: auto;
+  height: auto;
+  display: block;
+  border-radius: 5px;
+  width: 100%;
+}
+
+.c8 {
+  width: auto;
+  height: auto;
+  display: block;
+  border-radius: 5px;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-align-content: center;
+  -ms-flex-line-pack: center;
+  align-content: center;
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  gap: 5px;
+}
+
+.c7 {
+  font-family: DM Sans;
+  font-size: 13px;
+  line-height: 130%;
+  font-size: 15px;
+  color: rgba(255,255,255,1);
+  color: rgba(255,255,255,1);
+}
+
+.c6 {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+  -webkit-justify-content: center;
+  -ms-flex-pack: center;
+  justify-content: center;
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  width: 50px;
+  height: 25px;
+  background-color: rgba(183,39,234,0.5);
+  border: none;
+  color: #FFFFFF;
+  border-radius: 3px;
+}
+
+.c5 {
+  position: absolute;
+  bottom: 50%;
+  left: 50%;
+  -webkit-transform: translateX(-50%) translateY(-50%);
+  -ms-transform: translateX(-50%) translateY(-50%);
+  transform: translateX(-50%) translateY(-50%);
+}
+
+.c9 {
+  padding: 12px;
+  border-style: solid;
+  border-width: 1px;
+  border-color: #E9F1FB;
+  border-radius: 5px;
+  background-color: transparent;
+  border-color: transparent;
+  width: 120px;
+  max-width: 200px;
+  padding-top: 9px;
+  padding-bottom: 9px;
+  padding-right: 0;
+  padding-left: 0;
+  color: #2F3850;
+  text-align: center;
+}
+
+.c9:focus {
+  box-shadow: none;
+  outline: none;
+  border-color: #107969;
+}
+
+.c9:disabled {
+  color: #ABBBD1;
+}
+
+@media only screen and (min-width:768px) {
+
+}
+
+@media only screen and (min-width:960px) {
+
+}
+
+@media only screen and (min-width:1170px) {
+
+}
+
+@media only screen and (min-width:1360px) {
+
+}
+
+@media only screen and (min-width:768px) {
+
+}
+
+@media only screen and (min-width:960px) {
+
+}
+
+@media only screen and (min-width:1170px) {
+
+}
+
+@media only screen and (min-width:1360px) {
+
+}
+
 <div
-  class="Column-sc-4zswzq-0 fgvXEf"
+  class="c0"
 >
   <div
-    class="Box-sc-1vhutan-0 dzpiGU"
+    class="c1"
     width="100%"
   >
     <div
-      class="Column-sc-4zswzq-0 ekpwZH"
+      class="c2"
     >
       <div
-        class="Row-y1cs0u-0 dskFsL"
+        class="c3"
       >
         <div
-          class="Box-sc-1vhutan-0 jtfWfT"
+          class="c4"
           width="100%"
         >
           <div
@@ -43,6 +215,7 @@ exports[`<FeedbackQuestion /> Should render and match the snapshot 1`] = `
             </div>
             <div
               aria-disabled="true"
+              aria-labelledby="question-title question-subtitle"
               aria-valuemax="100"
               aria-valuemin="0"
               aria-valuenow="0"
@@ -53,13 +226,13 @@ exports[`<FeedbackQuestion /> Should render and match the snapshot 1`] = `
               style="border-color: #b727ea; box-shadow: none; border-width: 3px; left: 0%; transform: translateX(-50%);"
             >
               <div
-                class="styled__ValueSliderWrapperStyled-sc-1tylzs2-1 ldnKSE"
+                class="c5"
               >
                 <div
-                  class="styled__ValueSliderStyled-sc-1tylzs2-0 eNBWOL"
+                  class="c6"
                 >
                   <p
-                    class="Text-e4p0w3-0 hPWiyu"
+                    class="c7"
                     color="#FFFFFF"
                     font-size="15px"
                   >
@@ -75,25 +248,37 @@ exports[`<FeedbackQuestion /> Should render and match the snapshot 1`] = `
                 class="rc-slider-mark-text rc-slider-mark-text-active"
                 style="transform: translateX(-50%); left: 0%; font-size: 15px;"
               >
-                <input
-                  class="Input-t9j2q5-0 WDQRg"
-                  placeholder="Least"
-                  type="text"
-                  value="0"
-                  width="120"
-                />
+                <div
+                  class="c8"
+                  display="flex"
+                >
+                  <input
+                    aria-label="Least"
+                    class="c9"
+                    placeholder="Least"
+                    type="text"
+                    value="0"
+                    width="120"
+                  />
+                </div>
               </span>
               <span
                 class="rc-slider-mark-text"
                 style="transform: translateX(-50%); left: 100%; font-size: 15px;"
               >
-                <input
-                  class="Input-t9j2q5-0 WDQRg"
-                  placeholder="Most"
-                  type="text"
-                  value="100"
-                  width="120"
-                />
+                <div
+                  class="c8"
+                  display="flex"
+                >
+                  <input
+                    aria-label="Most"
+                    class="c9"
+                    placeholder="Most"
+                    type="text"
+                    value="100"
+                    width="120"
+                  />
+                </div>
               </span>
             </div>
           </div>

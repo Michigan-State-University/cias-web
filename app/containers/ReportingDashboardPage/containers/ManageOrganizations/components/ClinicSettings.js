@@ -24,7 +24,7 @@ import {
 
 import { Col, Row } from 'components/ReactGridSystem';
 import Loader from 'components/Loader';
-import ConfirmationBox from 'components/ConfirmationBox';
+import { ConfirmationModal } from 'components/Modal';
 
 import { DeleteEntityModal } from '../Modals';
 import TopPanelComponent from './TopPanelComponent';
@@ -81,7 +81,7 @@ const ClinicSettings = ({
   );
 
   const onEdit = useCallback(
-    value =>
+    (value) =>
       editClinic({
         ...value,
         id,
@@ -90,16 +90,17 @@ const ClinicSettings = ({
     [id],
   );
 
-  const onInvite = useCallback((email, role) => inviteAdmin(id, email, role), [
-    id,
-  ]);
+  const onInvite = useCallback(
+    (email, role) => inviteAdmin(id, email, role),
+    [id],
+  );
 
   if (!id || fetchOrganizationLoader || fetchClinicLoader)
     return <Loader type="inline" />;
 
   return (
     <>
-      <ConfirmationBox
+      <ConfirmationModal
         visible={isDeleteModalOpen}
         onClose={closeDeleteModal}
         description={formatMessage(messages.deleteEntityModalTitle, {
@@ -162,9 +163,6 @@ const mapDispatchToProps = {
   inviteAdmin: inviteAdminRequest,
 };
 
-const withConnect = connect(
-  null,
-  mapDispatchToProps,
-);
+const withConnect = connect(null, mapDispatchToProps);
 
 export default memo(compose(withConnect)(ClinicSettings));

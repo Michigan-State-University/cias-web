@@ -6,6 +6,7 @@
 
 import React, { memo, useMemo } from 'react';
 import PropTypes from 'prop-types';
+import { useIntl } from 'react-intl';
 
 import { colors } from 'theme';
 import { numericValidator } from 'utils/validators';
@@ -14,6 +15,7 @@ import Select from 'components/Select';
 import Box from 'components/Box';
 
 import { CaseInput } from './styled';
+import messages from './messages';
 
 const SIGNS = ['=', '<', '>', '<=', '>='];
 
@@ -21,8 +23,13 @@ const InequalityChooser = ({
   onSuccessfulChange,
   inequalityValue,
   disabled,
+  height,
+  width,
+  bg,
 }) => {
-  const populateSelectOption = sign => ({
+  const { formatMessage } = useIntl();
+
+  const populateSelectOption = (sign) => ({
     label: sign,
     value: sign,
   });
@@ -44,11 +51,11 @@ const InequalityChooser = ({
     onSuccessfulChange(`${sign ?? ''}${value ?? ''}`);
   };
 
-  const onSignChange = newSign => {
+  const onSignChange = (newSign) => {
     onChange(newSign.value, numericValue);
   };
 
-  const onValueChange = newValue => {
+  const onValueChange = (newValue) => {
     onChange(inequalitySign.value, newValue);
   };
 
@@ -63,14 +70,17 @@ const InequalityChooser = ({
         data-testid="select"
         selectProps={{
           isDisabled: disabled,
-          bg: colors.linkWater,
+          bg: bg || colors.linkWater,
           options: signMapper,
           onChange: onSignChange,
           value: inequalitySign,
+          height,
         }}
       />
       <Box bg={colors.linkWater} mx={10}>
         <CaseInput
+          width={width}
+          height={height}
           data-testid="input"
           data-cy="case-value-input"
           disabled={disabled}
@@ -81,6 +91,8 @@ const InequalityChooser = ({
           value={numericValue}
           validator={numericValidator}
           onBlur={onValueChange}
+          aria-label={formatMessage(messages.inputLabel)}
+          bg={bg}
         />
       </Box>
     </>
@@ -91,6 +103,9 @@ InequalityChooser.propTypes = {
   inequalityValue: PropTypes.string,
   onSuccessfulChange: PropTypes.func,
   disabled: PropTypes.bool,
+  height: PropTypes.number,
+  width: PropTypes.number,
+  bg: PropTypes.string,
 };
 
 export default memo(InequalityChooser);

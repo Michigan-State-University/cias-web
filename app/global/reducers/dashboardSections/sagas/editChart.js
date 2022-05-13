@@ -25,9 +25,7 @@ export function* editChart({ payload: { chart } }) {
 
     if (chart.status === ChartStatus.DATA_COLLECTION) {
       const organization = yield select(makeSelectOrganization());
-      const chartDataUrl = `v1/organizations/${organization.id}/charts_data/${
-        chart.id
-      }/generate`;
+      const chartDataUrl = `v1/organizations/${organization.id}/charts_data/${chart.id}/generate`;
       const { data: chartsData } = yield call(axios.get, chartDataUrl, {
         params: {
           statuses: [ChartStatus.DATA_COLLECTION, ChartStatus.PUBLISHED],

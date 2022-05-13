@@ -8,7 +8,7 @@ import { createIntervention } from 'utils/reducerCreators';
 import { initialState } from 'global/reducers/intervention/reducer';
 import { fetchInterventionRequest } from 'global/reducers/intervention';
 import { apiSessionResponse } from 'utils/apiResponseCreators';
-import { mapJsonApiToObject } from 'utils/jsonApiMapper';
+import { jsonApiToObject, mapJsonApiToObject } from 'utils/jsonApiMapper';
 
 import { getSession } from 'global/reducers/session/sagas/getSession';
 import { getSessionSuccess, getSessionError } from '../../actions';
@@ -16,7 +16,10 @@ import { GET_SESSION_REQUEST } from '../../constants';
 import { getSessionSaga } from '../index';
 
 describe('getSession saga', () => {
-  const mockIntervention = createIntervention();
+  const mockIntervention = jsonApiToObject(
+    { data: createIntervention() },
+    'intervention',
+  );
   const mockState = {
     intervention: { ...initialState, intervention: mockIntervention },
   };

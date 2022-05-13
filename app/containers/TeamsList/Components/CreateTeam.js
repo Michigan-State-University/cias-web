@@ -3,6 +3,14 @@ import PropTypes from 'prop-types';
 import { FormattedMessage, injectIntl, IntlShape } from 'react-intl';
 import { compose } from 'redux';
 import { connect } from 'react-redux';
+import { createStructuredSelector } from 'reselect';
+
+import { colors } from 'theme';
+
+import { Roles } from 'models/User/UserRoles';
+
+import { createTeamRequest } from 'global/reducers/teamList';
+import { makeSelectTeamListLoaders } from 'global/reducers/teamList/selectors';
 
 import Button from 'components/Button';
 import Column from 'components/Column';
@@ -11,13 +19,8 @@ import Text from 'components/Text';
 import Input from 'components/Input';
 import UserSelector from 'containers/UserSelector';
 
-import { Roles } from 'models/User/UserRoles';
-import { createTeamRequest } from 'global/reducers/teamList';
-import { createStructuredSelector } from 'reselect';
-
-import { colors } from 'theme';
-import { makeSelectTeamListLoaders } from 'global/reducers/teamList/selectors';
 import messages from '../messages';
+import { CHOOSE_TEAM_ADMIN_LABEL_ID } from '../constants';
 
 const CreateTeam = ({
   visible,
@@ -33,7 +36,7 @@ const CreateTeam = ({
     setTeamName(value);
   };
 
-  const onSelectUser = user => {
+  const onSelectUser = (user) => {
     setSelectedUser(user?.id);
   };
 
@@ -59,10 +62,11 @@ const CreateTeam = ({
     >
       <Column>
         <Column width="100%" mb={35}>
-          <Text mb={10} fontSize={14}>
+          <Text mb={10} fontSize={14} id="team-name-label">
             <FormattedMessage {...messages.nameSectionTitle} />
           </Text>
           <Input
+            aria-labelledby="team-name-label"
             maxWidth="none"
             width="100%"
             transparent={false}
@@ -72,7 +76,7 @@ const CreateTeam = ({
             onChange={handleChange}
           />
         </Column>
-        <Text mb={10} fontSize={14}>
+        <Text mb={10} fontSize={14} id={CHOOSE_TEAM_ADMIN_LABEL_ID}>
           <FormattedMessage {...messages.researcherSectionTitle} />
         </Text>
         <div data-private>
@@ -80,6 +84,7 @@ const CreateTeam = ({
             selectedUserId={selectedUser}
             onSelect={onSelectUser}
             rolesToInclude={[Roles.researcher, Roles.teamAdmin]}
+            selectProps={{ 'aria-labelledby': CHOOSE_TEAM_ADMIN_LABEL_ID }}
           />
         </div>
         <Button
@@ -115,12 +120,6 @@ const mapDispatchToProps = {
   createTeam: createTeamRequest,
 };
 
-const withConnect = connect(
-  mapStateToProps,
-  mapDispatchToProps,
-);
+const withConnect = connect(mapStateToProps, mapDispatchToProps);
 
-export default compose(
-  withConnect,
-  injectIntl,
-)(CreateTeam);
+export default compose(withConnect, injectIntl)(CreateTeam);

@@ -1,6 +1,8 @@
 import axios from 'axios';
 import { put, call, takeLatest } from 'redux-saga/effects';
 
+import { jsonApiToArray } from 'utils/jsonApiMapper';
+
 import { FETCH_INTERVENTIONS_REQUEST } from '../constants';
 import { fetchInterventionsError, fetchInterventionsSuccess } from '../actions';
 
@@ -10,9 +12,9 @@ export function* fetchInterventions({ payload: { organizationId } }) {
   }interventions`;
 
   try {
-    const {
-      data: { interventions },
-    } = yield call(axios.get, interventionsRequestURL);
+    const { data } = yield call(axios.get, interventionsRequestURL);
+
+    const interventions = jsonApiToArray(data, 'intervention');
 
     yield put(fetchInterventionsSuccess(interventions));
   } catch (error) {

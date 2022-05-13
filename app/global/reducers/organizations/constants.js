@@ -144,7 +144,7 @@ export const mapRoleToFetchEndpoint = (role, id) => {
   return `v1/${entityUrl}?organization_id=${id}`;
 };
 
-export const mapRoleToDashboardViewJsonKey = role =>
+export const mapRoleToDashboardViewJsonKey = (role) =>
   camelCase(RoleToEntityUrlMap[role]).slice(0, -1);
 
 export const EntityType = {

@@ -11,6 +11,7 @@ import {
   ZERO_DIVISION_FORMULA_ERROR,
   NO_BRANCHING_TARGET,
   RANDOMIZATION_MISS_MATCH,
+  FORBIDDEN_CAT_MH_BRANCHING,
 } from 'containers/AnswerSessionPage/constants';
 
 export const scope = 'app.containers.AnswerSessionPage';
@@ -105,6 +106,10 @@ export default defineMessages({
     id: `${scope}.${RANDOMIZATION_MISS_MATCH}`,
     defaultMessage: `Randomization was setup incorrectly and you were transitioned to next screen`,
   },
+  [FORBIDDEN_CAT_MH_BRANCHING]: {
+    id: `${scope}.${FORBIDDEN_CAT_MH_BRANCHING}`,
+    defaultMessage: `There was a branching to CAT-MH™ session that is not available during preview. Participants will be branched correctly when filling out published intervention`,
+  },
   emailValidationError: {
     id: `${scope}.emailValidationError`,
     defaultMessage: 'Please enter a valid email address in the correct format',
@@ -130,5 +135,25 @@ export default defineMessages({
     id: `${scope}.narratorAlt`,
     defaultMessage:
       'This is a Narrator that speaks and moves around the screen.',
+  },
+  ongoingBranching: {
+    id: `${scope}.ongoingBranching`,
+    defaultMessage:
+      'You were branched to another session. You can see session map with questions from this preview or continue to another session.',
+  },
+  ongoingBranchingParticipantInfo: {
+    id: `${scope}.ongoingBranchingParticipantInfo`,
+    defaultMessage: 'This screen will not be visible for participants',
+  },
+  goToSessionMap: {
+    id: `${scope}.goToSessionMap`,
+    defaultMessage: 'Go to session map',
+  },
+  pageTitle: {
+    id: `${scope}.pageTitle`,
+    defaultMessage: `{isPreview, select,
+      true {Preview Session}
+      other {Answer Session}
+    }`,
   },
 });

@@ -1,15 +1,21 @@
-import React, { useMemo, useState } from 'react';
+import React, { useMemo } from 'react';
+import { FormattedMessage } from 'react-intl';
 import PropTypes from 'prop-types';
+
 import Img from 'components/Img';
 import InequalityChooser from 'components/InequalityChooser';
 import Row from 'components/Row';
 import Box from 'components/Box';
 import Text from 'components/Text';
+import H3 from 'components/H3';
+import Divider from 'components/Divider';
+import TextButton from 'components/Button/TextButton';
+
 import binNoBg from 'assets/svg/bin-no-bg.svg';
-import { themeColors } from 'theme';
-import ArrowToggle from 'components/ArrowToggle';
+import { themeColors, colors } from 'theme';
+
 import messages from './messages';
-import Target from './Target';
+import TargetList from './TargetList';
 
 const Pattern = ({
   pattern,
@@ -27,87 +33,100 @@ const Pattern = ({
   displayPatternTargetText,
   setTargetChooserOpen,
   questionId,
-  newPattern,
+  disableBranchingToSession,
 }) => {
   const sumPercentages = useMemo(
     () =>
       pattern.target.reduce((acc, { probability }) => acc + +probability, 0),
     [pattern.target],
   );
-  const [showRandomization, setShowRandomization] = useState(newPattern);
+
+  const isOnlyTarget = pattern.target.length === 1;
+
   return (
     <>
-      <Row
-        align="center"
-        mb={8}
-        justify={sessionBranching ? 'start' : 'around'}
-      >
-        <Box display="flex" align="center">
-          <Text whiteSpace="pre">{formatMessage(messages.if)}</Text>
-          <InequalityChooser
-            disabled={disabled}
-            onSuccessfulChange={value =>
-              updatePattern({ ...pattern, match: value })
-            }
-            inequalityValue={pattern.match}
-          />
-        </Box>
-        <ArrowToggle
-          setState={setShowRandomization}
-          state={showRandomization}
-          toggleDownMessage={formatMessage(messages.hideRandomization)}
-          toggleUpMessage={formatMessage(messages.showRandomization)}
-        />
+      <Box display="flex" justify="between" align="center" mt={index > 0 && 16}>
+        <H3>
+          <FormattedMessage {...messages.case} values={{ index: index + 1 }} />
+        </H3>
         {!disabled && (
           <Img
             ml={10}
             src={binNoBg}
             onClick={() => onRemoveCase(index, questionId)}
             clickable
+            width="15px"
+            height="15px"
+          />
+        )}
+      </Box>
+      <Divider my={16} />
+      <Row align="center" mb={8}>
+        <Box display="flex" align="center">
+          <Text whiteSpace="pre" fontWeight="bold">
+            {formatMessage(messages.if)}
+          </Text>
+          <InequalityChooser
+            height={50}
+            width={56}
+            disabled={disabled}
+            onSuccessfulChange={(value) =>
+              updatePattern({ ...pattern, match: value })
+            }
+            inequalityValue={pattern.match}
+            bg={colors.white}
+          />
+        </Box>
+        {isOnlyTarget && (
+          <TargetList
+            pattern={pattern}
+            index={index}
+            onUpdateTarget={onUpdateTarget}
+            targetChooserOpen={targetChooserOpen}
+            questionId={questionId}
+            onRemoveTarget={onRemoveTarget}
+            disabled={disabled}
+            displayPatternTargetText={displayPatternTargetText}
+            handleDropdownClick={handleDropdownClick}
+            sessionBranching={sessionBranching}
+            setTargetChooserOpen={setTargetChooserOpen}
+            sumPercentages={sumPercentages}
+            isOnlyTarget
+            disableBranchingToSession={disableBranchingToSession}
           />
         )}
       </Row>
-      {showRandomization &&
-        pattern.target.map((target, targetIndex) => {
-          const uniqueTargetIndex = index * 100 + targetIndex;
-          const isChooserOpened = uniqueTargetIndex === targetChooserOpen;
-          const updateTarget = newValues =>
-            onUpdateTarget(questionId, index, targetIndex, {
-              ...target,
-              ...newValues,
-            });
-          const onDeleteTarget = () =>
-            onRemoveTarget(questionId, index, targetIndex);
-
-          return (
-            <Target
-              isOnlyTarget={pattern.target.length === 1}
-              disabled={disabled}
-              displayPatternTargetText={displayPatternTargetText}
-              formatMessage={formatMessage}
-              handleDropdownClick={handleDropdownClick}
-              isChooserOpened={isChooserOpened}
-              key={uniqueTargetIndex}
-              onDeleteTarget={onDeleteTarget}
-              onUpdateTarget={updateTarget}
-              sessionBranching={sessionBranching}
-              setTargetChooserOpen={setTargetChooserOpen}
-              target={target}
-              uniqueTargetIndex={uniqueTargetIndex}
-              invalidPercentage={sumPercentages !== 100}
-            />
-          );
-        })}
-      {showRandomization && (
-        <Target
-          sessionBranching={sessionBranching}
-          onAddTarget={onAddTarget}
-          formatMessage={formatMessage}
+      {!isOnlyTarget && (
+        <TargetList
+          pattern={pattern}
+          index={index}
+          onUpdateTarget={onUpdateTarget}
+          targetChooserOpen={targetChooserOpen}
+          questionId={questionId}
+          onRemoveTarget={onRemoveTarget}
+          disabled={disabled}
           displayPatternTargetText={displayPatternTargetText}
+          handleDropdownClick={handleDropdownClick}
+          sessionBranching={sessionBranching}
+          setTargetChooserOpen={setTargetChooserOpen}
+          sumPercentages={sumPercentages}
+          disableBranchingToSession={disableBranchingToSession}
         />
       )}
-      {sumPercentages !== 100 && showRandomization && (
-        <Text my={10} ml={70} color={themeColors.warning}>
+      <Box display="flex" justify="end">
+        <TextButton
+          buttonProps={{
+            width: 'fit-content',
+            fontWeight: 'bold',
+            color: themeColors.secondary,
+          }}
+          onClick={onAddTarget}
+        >
+          {formatMessage(messages.addRandomization)}
+        </TextButton>
+      </Box>
+      {sumPercentages !== 100 && (
+        <Text my={16} ml={90} color={themeColors.warning}>
           {formatMessage(messages.percentagesSumInvalid)}
         </Text>
       )}
@@ -132,6 +151,7 @@ Pattern.propTypes = {
   setTargetChooserOpen: PropTypes.func,
   displayPatternTargetText: PropTypes.func,
   questionId: PropTypes.string,
+  disableBranchingToSession: PropTypes.bool,
 };
 
 export default Pattern;

@@ -1,7 +1,6 @@
 import React, { useMemo } from 'react';
 import PropTypes from 'prop-types';
 import isEqual from 'lodash/isEqual';
-
 import { Col } from 'react-grid-system';
 
 import {
@@ -12,18 +11,21 @@ import {
 import globalMessages from 'global/i18n/globalMessages';
 
 import ActionIcon from 'components/ActionIcon';
+
 import { FilterText, StatusLabel } from './styled';
+import messages from './messages';
 
 const StatusFilter = ({ formatMessage, onClick, active, onClear }) => {
-  const labels = useMemo(() => Object.keys(globalMessages.statuses), [
-    globalMessages.statuses,
-  ]);
+  const labels = useMemo(
+    () => Object.keys(globalMessages.statuses),
+    [globalMessages.statuses],
+  );
 
   const showIcon = active && !isEqual(statusTypes, [...active].sort());
 
   return (
     <>
-      {labels.map(status => (
+      {labels.map((status) => (
         <Col
           xs="content"
           key={status}
@@ -51,6 +53,7 @@ const StatusFilter = ({ formatMessage, onClick, active, onClear }) => {
             width={15}
             onClick={onClear}
             background="none"
+            ariaText={formatMessage(messages.clearFiltersText)}
           />
         </Col>
       )}

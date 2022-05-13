@@ -27,7 +27,10 @@ const branching = {
 const answerOptions = [
   {
     title: 'Question 1',
-    options: [{ name: 'q11', score: 1 }, { name: 'q12', score: 2 }],
+    options: [
+      { name: 'q11', score: 1 },
+      { name: 'q12', score: 2 },
+    ],
   },
   {
     title: 'Question 2',
@@ -66,12 +69,12 @@ describe('Session branching', () => {
     const { formula, cases } = branching.session;
     cy.setUpBranching(formula, cases);
 
-    cy.location('pathname').then(firstSessionUrl => {
+    cy.location('pathname').then((firstSessionUrl) => {
       const firstSessionFillUrl = firstSessionUrl.replace('/edit', '/fill');
 
       cy.go('back');
       cy.getBySel('enter-session-1').click();
-      cy.location('pathname').then(secondSessionUrl => {
+      cy.location('pathname').then((secondSessionUrl) => {
         const secondSessionFillUrl = secondSessionUrl.replace('/edit', '/fill');
 
         cy.go('back');

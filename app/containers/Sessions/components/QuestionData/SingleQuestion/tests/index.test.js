@@ -22,6 +22,7 @@ describe('<SingleQuestion />', () => {
     addAnswer: jest.fn(),
     updateAnswer: jest.fn(),
     removeAnswer: jest.fn(),
+    reorderAnswers: jest.fn(),
   };
 
   const defaultProps = {

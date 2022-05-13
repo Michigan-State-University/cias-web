@@ -17,7 +17,7 @@ const breakpoints = {
 
 const mediaQuery = {};
 
-Object.keys(breakpoints).forEach(breakpointKey => {
+Object.keys(breakpoints).forEach((breakpointKey) => {
   mediaQuery[breakpointKey] = (...args) => css`
     @media only screen and (max-width: ${breakpoints[breakpointKey]}) {
       ${css(...args)}

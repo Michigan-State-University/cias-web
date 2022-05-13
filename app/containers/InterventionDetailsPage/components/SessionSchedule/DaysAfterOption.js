@@ -47,7 +47,7 @@ const DaysAfterOption = ({
           height={50}
           mr={0}
           value={getValue()}
-          onCheck={number => setValue(number)}
+          onCheck={(number) => setValue(number)}
           fontSize={15}
           padding={5}
           textAlign="center"

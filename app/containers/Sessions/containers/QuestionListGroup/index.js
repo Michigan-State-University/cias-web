@@ -5,6 +5,7 @@ import { connect } from 'react-redux';
 import { Draggable, Droppable } from 'react-beautiful-dnd';
 
 import { makeSelectGroupQuestions } from 'global/reducers/questions/selectors';
+import globalMessages from 'global/i18n/globalMessages';
 
 import Collapse from 'components/Collapse';
 import Row from 'components/Row';
@@ -55,13 +56,13 @@ const QuestionListGroup = ({
     handleToggleCollapsable(true);
   }, [questions.length]);
 
-  const renderQuestions = providedGroupDroppable => (
+  const renderQuestions = (providedGroupDroppable) => (
     <DraggableContainer
       style={{ width: '100%' }}
-      {...!noDnd && {
+      {...(!noDnd && {
         ref: providedGroupDroppable.innerRef,
         ...providedGroupDroppable.droppableProps,
-      }}
+      })}
     >
       {questions.map((question, index) => (
         <Row key={question.id} width="100%">
@@ -91,11 +92,11 @@ const QuestionListGroup = ({
       droppableId={id}
       type={reorderScope.questions}
     >
-      {provided => renderQuestions(provided)}
+      {(provided) => renderQuestions(provided)}
     </Droppable>
   );
 
-  const renderGroup = providedGroupDraggable => (
+  const renderGroup = (providedGroupDraggable) => (
     <Row
       width="100%"
       display="block"
@@ -118,12 +119,14 @@ const QuestionListGroup = ({
         imgWithBackground
         label={
           <Row align="center" justify="between" width="100%" mr={10}>
-            <Box display="flex">
+            <Box display="flex" align="center">
               {manage && !isFinishGroup && (
                 <Checkbox
-                  mr={2}
-                  onClick={e => {
-                    e.stopPropagation();
+                  id={`group-to-select-${id}`}
+                  mr={8}
+                  onChange={(_, event) => {
+                    event.stopPropagation();
+                    event.preventDefault();
                     toggleGroup(questions);
                   }}
                   checked={checkSelectedGroup(questions)}
@@ -138,7 +141,7 @@ const QuestionListGroup = ({
                 placeholder={formatMessage(messages.groupPlaceholder)}
                 width="100%"
                 maxWidth="initial"
-                onBlur={val => changeGroupName(val, sessionId, id)}
+                onBlur={(val) => changeGroupName(val, sessionId, id)}
                 onFocus={selectInputText}
                 disabled={!editingPossible}
               />
@@ -147,6 +150,8 @@ const QuestionListGroup = ({
               <Img
                 src={reorderIcon}
                 disabled={!editingPossible}
+                aria-label={formatMessage(globalMessages.dragHandle)}
+                title={formatMessage(globalMessages.dragHandle)}
                 {...providedGroupDraggable.dragHandleProps}
               />
             )}
@@ -166,7 +171,7 @@ const QuestionListGroup = ({
       index={groupIndex}
       isDragDisabled={!editingPossible}
     >
-      {providedGroupDraggable => renderGroup(providedGroupDraggable)}
+      {(providedGroupDraggable) => renderGroup(providedGroupDraggable)}
     </Draggable>
   );
 

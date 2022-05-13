@@ -66,15 +66,15 @@ export default defineMessages({
   },
   voiceSettings: {
     id: `${scope}.voiceSettings`,
-    defaultMessage: 'Peedy voice settings',
+    defaultMessage: 'Narrator voice settings',
   },
-  peedyLanguage: {
-    id: `${scope}.peedyLanguage`,
-    defaultMessage: 'Peedy language',
+  voiceLanguage: {
+    id: `${scope}.voiceLanguage`,
+    defaultMessage: 'Narrator language',
   },
-  peedyVoiceType: {
-    id: `${scope}.peedyVoiceType`,
-    defaultMessage: 'Peedy voice type',
+  voiceType: {
+    id: `${scope}.voiceType`,
+    defaultMessage: 'Narrator voice type',
   },
   saveVoiceSettings: {
     id: `${scope}.saveVoiceSettings`,

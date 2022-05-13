@@ -16,7 +16,7 @@ const SortableTree = React.forwardRef(
     }, [treeData]);
 
     const generateNodeProps = useCallback(
-      data => {
+      (data) => {
         const { node, treeIndex } = data;
 
         const customNodeProps = customGenerateNodeProps

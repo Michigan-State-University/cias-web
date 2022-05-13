@@ -32,7 +32,7 @@ const ChartSettingsGeneralSection = ({
   const { description, formula, name, status } = chart;
 
   const handleAddVariable = useCallback(
-    variable => {
+    (variable) => {
       onEditFormulaPayload(`${formula.payload}${variable}`);
     },
     [onEditFormulaPayload, formula.payload],

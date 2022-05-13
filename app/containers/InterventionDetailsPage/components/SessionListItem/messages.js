@@ -9,17 +9,17 @@ import { draft, closed, archived } from 'models/Status/StatusTypes';
 export const scope = 'app.containers.SessionListItem';
 
 export default defineMessages({
-  duplicate: {
-    id: `${scope}.duplicate`,
-    defaultMessage: 'Duplicate session',
+  duplicateHere: {
+    id: `${scope}.duplicateHere`,
+    defaultMessage: 'Duplicate here',
   },
   copy: {
     id: `${scope}.copy`,
-    defaultMessage: 'Copy session',
+    defaultMessage: 'Duplicate internally',
   },
   delete: {
     id: `${scope}.delete`,
-    defaultMessage: 'Delete session',
+    defaultMessage: 'Delete',
   },
   inviteLabel: {
     id: `${scope}.inviteLabel`,
@@ -52,5 +52,17 @@ export default defineMessages({
   reportsCount: {
     id: `${scope}.reportsCount`,
     defaultMessage: '{count} reports',
+  },
+  wcagDescription: {
+    id: `${scope}.wcagDescription`,
+    defaultMessage: 'Tile of Session: {name}',
+  },
+  estimateTime: {
+    id: `${scope}.estimateTime`,
+    defaultMessage: 'Estimate time to complete',
+  },
+  min: {
+    id: `${scope}.min`,
+    defaultMessage: 'min',
   },
 });

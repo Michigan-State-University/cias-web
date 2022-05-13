@@ -1,8 +1,101 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`<ReportTile /> Should render and match the snapshot 1`] = `
+.c2 {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-flex-direction: row;
+  -ms-flex-direction: row;
+  flex-direction: row;
+  height: auto;
+  -webkit-align-content: center;
+  -ms-flex-line-pack: center;
+  align-content: center;
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+}
+
+.c3 {
+  font-family: DM Sans;
+  font-size: 13px;
+  line-height: 130%;
+  margin-left: 15px;
+  font-size: 18px;
+  font-weight: 700;
+  color: #2F3850;
+}
+
+.c6 {
+  font-family: DM Sans;
+  font-size: 13px;
+  line-height: 130%;
+  margin-right: 5px;
+  font-size: 13px;
+  font-weight: 700;
+  color: rgba(183,39,234,1);
+  color: rgba(183,39,234,1);
+}
+
+.c0 {
+  width: auto;
+  height: auto;
+  display: block;
+  border-radius: 5px;
+  background-color: rgba(255,255,255,1);
+  box-shadow: 0px 4px 20px #E3EEFB;
+}
+
+.c5 {
+  -webkit-text-decoration: none;
+  text-decoration: none;
+  color: black;
+  width: -webkit-fit-content;
+  width: -moz-fit-content;
+  width: fit-content;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  -webkit-box-pack: justify;
+  -webkit-justify-content: space-between;
+  -ms-flex-pack: justify;
+  justify-content: space-between;
+}
+
+.c1 {
+  width: 100%;
+  margin-top: 20px;
+  padding: 22px;
+}
+
+.c4 {
+  -webkit-box-pack: end;
+  -webkit-justify-content: flex-end;
+  -ms-flex-pack: end;
+  justify-content: flex-end;
+  white-space: nowrap;
+}
+
+@media (max-width:575px) {
+  .c4 {
+    -webkit-box-pack: start;
+    -webkit-justify-content: flex-start;
+    -ms-flex-pack: start;
+    justify-content: flex-start;
+    margin-top: 20px;
+  }
+}
+
 <div
-  class="Box-sc-1vhutan-0 styled__StyledBox-onmxmg-0 gfxlkT erHOle"
+  class="c0 c1"
 >
   <div
     height="100%"
@@ -12,13 +105,13 @@ exports[`<ReportTile /> Should render and match the snapshot 1`] = `
       style="box-sizing: border-box; min-height: 1px; position: relative; padding-left: 15px; padding-right: 15px; width: 75%; flex-basis: 75%; flex-grow: 0; flex-shrink: 0; max-width: 75%; margin-left: 0%;"
     >
       <div
-        class="Row-y1cs0u-0 ecllgQ"
+        class="c2"
       >
         <img
           src="IMAGE_MOCK"
         />
         <p
-          class="Text-e4p0w3-0 fxvuEz"
+          class="c3"
           font-size="18"
           font-weight="bold"
         >
@@ -30,15 +123,15 @@ exports[`<ReportTile /> Should render and match the snapshot 1`] = `
       style="box-sizing: border-box; min-height: 1px; position: relative; padding-left: 15px; padding-right: 15px; width: 25%; flex-basis: 25%; flex-grow: 0; flex-shrink: 0; max-width: 25%; margin-left: 0%;"
     >
       <div
-        class="Row-y1cs0u-0 styled__DownloadRow-onmxmg-1 ecllgQ NPQnz"
+        class="c2 c4"
       >
         <a
-          class="StyledLink-eun179-0 ghZnhP"
+          class="c5"
           href="/file.pdf"
           target="_blank"
         >
           <p
-            class="Text-e4p0w3-0 cVUOKf"
+            class="c6"
             color="#B727EA"
             font-size="13"
             font-weight="bold"

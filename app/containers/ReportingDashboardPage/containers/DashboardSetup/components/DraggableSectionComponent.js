@@ -8,19 +8,14 @@ import reorderIcon from 'assets/svg/reorder-hand.svg';
 import Img from 'components/Img';
 import SectionComponent from './SectionComponent';
 
-const DraggableSectionComponent = props => {
+const DraggableSectionComponent = (props) => {
   const {
     section: { id },
     fromDashboardView,
   } = props;
 
-  const {
-    attributes,
-    listeners,
-    setNodeRef,
-    transform,
-    transition,
-  } = useSortable({ id, disabled: fromDashboardView });
+  const { attributes, listeners, setNodeRef, transform, transition } =
+    useSortable({ id, disabled: fromDashboardView });
 
   const style = {
     transform: CSS.Translate.toString(transform),

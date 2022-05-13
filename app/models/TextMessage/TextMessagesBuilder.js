@@ -1,12 +1,13 @@
 /* eslint-disable camelcase */
 import { defaultMapper } from 'utils/mapResponseObjects';
 import objectToCamelCase from 'utils/objectToCamelCase';
+
 import { ReportFor } from 'global/reducers/reportTemplates/constants';
-import { TextMessage } from 'models/TextMessage/TextMessage';
-import {
-  MESSAGES_SCHEDULE_OPTIONS,
-  MESSAGES_SCHEDULE_FREQUENCIES,
-} from 'models/TextMessage/constants';
+
+import { TextMessage } from './TextMessage';
+import { TextMessageType } from './TextMessageType';
+import { TextMessageScheduleFrequency } from './TextMessageScheduleFrequency';
+import { TextMessageScheduleOption } from './TextMessageScheduleOption';
 
 export class TextMessagesBuilder {
   reportFor = ReportFor.participant;
@@ -15,7 +16,7 @@ export class TextMessagesBuilder {
    * @param  {string} id
    * @returns  {TextMessagesBuilder}
    */
-  withId = id => {
+  withId = (id) => {
     this.id = id;
 
     return this;
@@ -25,7 +26,7 @@ export class TextMessagesBuilder {
    * @param  {string} name
    * @returns  {TextMessagesBuilder}
    */
-  withName = name => {
+  withName = (name) => {
     this.name = name;
 
     return this;
@@ -35,7 +36,7 @@ export class TextMessagesBuilder {
    * @param  {string} sessionId
    * @returns  {TextMessagesBuilder}
    */
-  withSessionId = sessionId => {
+  withSessionId = (sessionId) => {
     this.sessionId = sessionId;
 
     return this;
@@ -61,10 +62,20 @@ export class TextMessagesBuilder {
   };
 
   /**
+   * @param  {TextMessageType} type
+   * @returns  {TextMessagesBuilder}
+   */
+  withType = (type) => {
+    this.type = type;
+
+    return this;
+  };
+
+  /**
    * @param  {object} json
    * @returns  {TextMessagesBuilder}
    */
-  fromJson = json => {
+  fromJson = (json) => {
     const textMessage = objectToCamelCase(defaultMapper(json));
 
     this.id = textMessage.id;
@@ -77,6 +88,12 @@ export class TextMessagesBuilder {
     this.formula = textMessage.formula;
     this.isUsedFormula = textMessage.isUsedFormula;
     this.noFormulaText = textMessage.noFormulaText;
+    this.originalText = textMessage.originalText;
+    this.type = textMessage.type;
+    this.includeFirstName = textMessage.includeFirstName;
+    this.includeLastName = textMessage.includeLastName;
+    this.includePhoneNumber = textMessage.includePhoneNumber;
+    this.includeEmail = textMessage.includeEmail;
 
     return this;
   };
@@ -84,31 +101,36 @@ export class TextMessagesBuilder {
   /**
    * @returns  {TextMessage}
    */
-  build = () =>
-    new TextMessage({
-      id: this.id,
-      name: this.name,
-      sessionId: this.sessionId,
-      schedule: this.schedule,
-      schedulePayload: this.schedulePayload,
-      frequency: this.frequency,
-      endAt: this.endAt,
-      formula: this.formula,
-      isUsedFormula: this.isUsedFormula,
-      noFormulaText: this.noFormulaText,
-    });
+  build = () => ({
+    id: this.id,
+    name: this.name,
+    sessionId: this.sessionId,
+    schedule: this.schedule,
+    schedulePayload: this.schedulePayload,
+    frequency: this.frequency,
+    endAt: this.endAt,
+    formula: this.formula,
+    isUsedFormula: this.isUsedFormula,
+    noFormulaText: this.noFormulaText,
+    originalText: this.originalText,
+    type: this.type,
+    includeFirstName: this.includeFirstName,
+    includeLastName: this.includeLastName,
+    includePhoneNumber: this.includePhoneNumber,
+    includeEmail: this.includeEmail,
+  });
 
   /**
    * @param  {string} name
    * @param  {string} sessionId
    * @returns  {TextMessage}
    */
-  buildNewTextMessage = (name, sessionId) =>
-    new TextMessage({
-      id: null,
-      name,
-      sessionId,
-      schedule: MESSAGES_SCHEDULE_OPTIONS.afterFill,
-      frequency: MESSAGES_SCHEDULE_FREQUENCIES.once,
-    });
+  buildNewTextMessage = (name, sessionId) => ({
+    id: null,
+    name,
+    sessionId,
+    schedule: TextMessageScheduleOption.AFTER_FILL,
+    frequency: TextMessageScheduleFrequency.ONCE,
+    type: TextMessageType.NORMAL,
+  });
 }

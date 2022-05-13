@@ -6,7 +6,7 @@ import { initialState } from './reducer';
  * Direct selector to the userList state domain
  */
 
-const selectUserDomain = state => state.user || initialState;
+const selectUserDomain = (state) => state.user || initialState;
 
 /**
  * Other specific selectors
@@ -17,19 +17,10 @@ const selectUserDomain = state => state.user || initialState;
  */
 
 export const makeSelectUser = () =>
-  createSelector(
-    selectUserDomain,
-    ({ user }) => user,
-  );
+  createSelector(selectUserDomain, ({ user }) => user);
 
-export const makeSelectUserLoader = name =>
-  createSelector(
-    selectUserDomain,
-    ({ loaders }) => loaders[name],
-  );
+export const makeSelectUserLoader = (name) =>
+  createSelector(selectUserDomain, ({ loaders }) => loaders[name]);
 
-export const makeSelectUserError = name =>
-  createSelector(
-    selectUserDomain,
-    ({ errors }) => errors[name],
-  );
+export const makeSelectUserError = (name) =>
+  createSelector(selectUserDomain, ({ errors }) => errors[name]);

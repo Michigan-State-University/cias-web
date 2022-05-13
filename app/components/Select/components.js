@@ -7,7 +7,7 @@ import ToggleArrow from 'components/ToggleArrow';
 
 import { OptionContainer } from './styled';
 
-const DropdownIndicator = props => {
+const DropdownIndicator = (props) => {
   const isOpen = get(props, 'selectProps.menuIsOpen', false);
   return (
     <components.DropdownIndicator {...props}>
@@ -39,8 +39,9 @@ const Option = ({
       isFocused={isFocused}
       className="custom-option"
     >
-      <Checkbox checked={isSelected} mr={15} />
-      <span>{getLabel()}</span>
+      <Checkbox id={label} checked={isSelected} mr={15}>
+        {getLabel()}
+      </Checkbox>
     </OptionContainer>
   );
 };

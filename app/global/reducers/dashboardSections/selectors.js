@@ -2,49 +2,37 @@ import { createSelector } from 'reselect';
 
 import { initialState } from './reducer';
 
-export const selectDashboardSectionsState = state =>
+export const selectDashboardSectionsState = (state) =>
   state.dashboardSections || initialState;
 
 export const makeSelectDashboardSections = () =>
   createSelector(
     selectDashboardSectionsState,
-    substate => substate.dashboardSections,
+    (substate) => substate.dashboardSections,
   );
 
 export const makeSelectSingleDashboardSection = () =>
   createSelector(
     selectDashboardSectionsState,
-    substate => substate.singleDashboardSection,
+    (substate) => substate.singleDashboardSection,
   );
 
 export const makeSelectSelectedChart = () =>
-  createSelector(
-    selectDashboardSectionsState,
-    substate => {
-      const dashboardSection = substate.dashboardSections.find(
-        ({ id }) => id === substate.selectedChart?.dashboardSectionId,
-      );
+  createSelector(selectDashboardSectionsState, (substate) => {
+    const dashboardSection = substate.dashboardSections.find(
+      ({ id }) => id === substate.selectedChart?.dashboardSectionId,
+    );
 
-      return dashboardSection?.charts.find(
-        ({ id }) => id === substate.selectedChart?.chartId,
-      );
-    },
-  );
+    return dashboardSection?.charts.find(
+      ({ id }) => id === substate.selectedChart?.chartId,
+    );
+  });
 
 export const makeSelectLoaders = () =>
-  createSelector(
-    selectDashboardSectionsState,
-    substate => substate.loaders,
-  );
+  createSelector(selectDashboardSectionsState, (substate) => substate.loaders);
 
 export const makeSelectErrors = () =>
-  createSelector(
-    selectDashboardSectionsState,
-    substate => substate.errors,
-  );
+  createSelector(selectDashboardSectionsState, (substate) => substate.errors);
 
 export const makeSelectFilters = () =>
-  createSelector(
-    selectDashboardSectionsState,
-    substate => substate.filters,
-  );
+  createSelector(selectDashboardSectionsState, (substate) => substate.filters);

@@ -1,61 +1,115 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`<BranchingTab /> Should render and match the snapshot 1`] = `
+.c2 {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-flex-direction: row;
+  -ms-flex-direction: row;
+  flex-direction: row;
+  height: auto;
+  -webkit-align-content: center;
+  -ms-flex-line-pack: center;
+  align-content: center;
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+}
+
+.c0 {
+  width: auto;
+  height: auto;
+  display: block;
+  border-radius: 5px;
+  padding-top: 14px;
+  padding-bottom: 14px;
+  padding-right: 21px;
+  padding-left: 21px;
+  cursor: pointer;
+  border-radius: 5px;
+  border-radius: 5px;
+}
+
+.c0:hover {
+  background-color: #E9F1FB;
+}
+
+.c1 {
+  width: auto;
+  height: auto;
+  display: block;
+  border-radius: 5px;
+}
+
+.c5 {
+  font-family: DM Sans;
+  font-size: 13px;
+  line-height: 130%;
+  font-weight: 700;
+  color: rgba(183,39,234,1);
+  color: rgba(183,39,234,1);
+}
+
+.c4 {
+  width: auto;
+  height: auto;
+}
+
+.c3 {
+  border-radius: 50%;
+  background-color: #B727EA;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+  -webkit-justify-content: center;
+  -ms-flex-pack: center;
+  justify-content: center;
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  width: 32px;
+  height: 32px;
+  margin-right: 12px;
+  background-color: rgba(183,39,234,1);
+  color: rgba(255,255,255,1);
+  opacity: 1;
+  color: rgba(255,255,255,1);
+}
+
 <div>
   <div
-    class="Column-sc-4zswzq-0 ekpwZH"
+    class="c0"
   >
     <div
-      class="Row-y1cs0u-0 ddPUgf"
+      class="c1"
     >
-      Formula
       <div
-        class="Box-sc-1vhutan-0 eamgEw"
+        class="c2"
       >
         <div
-          class="Box-sc-1vhutan-0 gfyFJD"
+          class="c3"
+          color="#FFFFFF"
+          opacity="1"
         >
-          <p
-            class="Text-e4p0w3-0 lmzfCF"
-            color="#B727EA"
-            font-weight="bold"
-          >
-            Add variable
-          </p>
+          <img
+            class="c4"
+            src="IMAGE_MOCK"
+          />
         </div>
-        <div
-          class="Box-sc-1vhutan-0 bvPvIe"
-          display="none"
-          width="auto"
+        <p
+          class="c5"
+          color="#B727EA"
+          font-weight="bold"
         >
-          <div
-            class="Row-y1cs0u-0 dskFsL"
-          >
-            <div
-              class="Box-sc-1vhutan-0 fOicvH"
-            />
-          </div>
-        </div>
+          Add new formula
+        </p>
       </div>
-    </div>
-    <div
-      class="Box-sc-1vhutan-0 dSHbNt"
-      width="100%"
-    >
-      <textarea
-        class="TextArea-sc-175uiux-0 kmGeZJ"
-        data-cy="text-area"
-        height="auto"
-        placeholder="Enter formula here... (You can use mathematical operators +, -, *, /)"
-        rows="5"
-        type="multiline"
-        width="100%"
-      />
-    </div>
-    <div
-      class="Box-sc-1vhutan-0 styled__DashedBox-g59fuj-0 kvIAfn dyejuR"
-    >
-      + Add case
     </div>
   </div>
 </div>

@@ -1,40 +1,195 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`<NotificationsSettings /> Should render and match the snapshot 1`] = `
+.c0 {
+  width: auto;
+  height: auto;
+  display: block;
+  border-radius: 5px;
+  padding: 30px;
+  margin-top: 20px;
+  background-color: rgba(255,255,255,1);
+  box-shadow: 0px 4px 20px #E3EEFB;
+}
+
+.c1 {
+  margin: 0;
+  font-family: DM Sans;
+  font-size: 18px;
+  line-height: 130%;
+  margin-bottom: 20px;
+  color: #2F3850;
+}
+
+.c2 {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-flex-direction: row;
+  -ms-flex-direction: row;
+  flex-direction: row;
+  height: auto;
+  -webkit-align-content: center;
+  -ms-flex-line-pack: center;
+  align-content: center;
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  margin-bottom: 13px;
+}
+
+.c3 {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-flex-direction: row;
+  -ms-flex-direction: row;
+  flex-direction: row;
+  height: auto;
+  -webkit-box-pack: justify;
+  -webkit-justify-content: space-between;
+  -ms-flex-pack: justify;
+  justify-content: space-between;
+  justify-items: space-between;
+  -webkit-align-content: center;
+  -ms-flex-line-pack: center;
+  align-content: center;
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+}
+
+.c11 {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-flex-direction: row;
+  -ms-flex-direction: row;
+  flex-direction: row;
+  height: auto;
+  -webkit-align-content: center;
+  -ms-flex-line-pack: center;
+  align-content: center;
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+}
+
+.c10 {
+  font-family: DM Sans;
+  font-size: 13px;
+  line-height: 130%;
+  margin-left: 10px;
+  font-size: 14px;
+  color: #2F3850;
+}
+
+.c5 {
+  display: none;
+}
+
+.c9 {
+  margin-right: 5px;
+}
+
+.c4:disabled + label > .c8 {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.c7 {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  width: -webkit-max-content;
+  width: -moz-max-content;
+  width: max-content;
+}
+
+.c7:hover {
+  cursor: pointer;
+}
+
+.c4:disabled + .c6 {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
 <div>
   <div
-    class="Box-sc-1vhutan-0 iCDuTP"
+    class="c0"
   >
     <h2
-      class="H2-uw8lbl-0 iUhbVg"
+      class="c1"
     >
       Notifications
     </h2>
     <div
-      class="Row-y1cs0u-0 khuIzX"
+      class="c2"
     >
-      <img
-        src="IMAGE_MOCK"
-      />
-      <p
-        class="Text-e4p0w3-0 jNexHS"
-        font-size="14"
+      <div
+        class="c3"
       >
-        Enable email notifications
-      </p>
+        <input
+          class="c4 c5"
+          id="notification-email"
+          type="checkbox"
+        />
+        <label
+          class="c6 c7"
+          for="notification-email"
+        >
+          <img
+            class="c8 c9"
+            src="IMAGE_MOCK"
+          />
+          <p
+            class="c10"
+            font-size="14"
+          >
+            Enable email notifications
+          </p>
+        </label>
+      </div>
     </div>
     <div
-      class="Row-y1cs0u-0 ecllgQ"
+      class="c11"
     >
-      <img
-        src="IMAGE_MOCK"
-      />
-      <p
-        class="Text-e4p0w3-0 jNexHS"
-        font-size="14"
+      <div
+        class="c3"
       >
-        Enable SMS notifications
-      </p>
+        <input
+          class="c4 c5"
+          id="notification-sms"
+          type="checkbox"
+        />
+        <label
+          class="c6 c7"
+          for="notification-sms"
+        >
+          <img
+            class="c8 c9"
+            src="IMAGE_MOCK"
+          />
+          <p
+            class="c10"
+            font-size="14"
+          >
+            Enable SMS notifications
+          </p>
+        </label>
+      </div>
     </div>
   </div>
 </div>

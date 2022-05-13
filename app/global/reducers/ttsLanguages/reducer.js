@@ -19,7 +19,7 @@ export const initialState = {
 
 /* eslint-disable default-case, no-param-reassign */
 const ttsLanguageReducer = (state = initialState, { type, payload }) =>
-  produce(state, draft => {
+  produce(state, (draft) => {
     switch (type) {
       case FETCH_LANGUAGES_REQUEST:
         draft.languages.loading = true;

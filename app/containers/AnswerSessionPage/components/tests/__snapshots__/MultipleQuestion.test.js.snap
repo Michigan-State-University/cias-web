@@ -1,55 +1,215 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`<MultipleQuestion /> Should render and match the snapshot 1`] = `
+.c0 {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-flex-direction: column;
+  -ms-flex-direction: column;
+  flex-direction: column;
+  width: 100%;
+}
+
+.c1 {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-flex-direction: row;
+  -ms-flex-direction: row;
+  flex-direction: row;
+  height: auto;
+  margin-bottom: 10px;
+}
+
+.c3 {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-flex-direction: row;
+  -ms-flex-direction: row;
+  flex-direction: row;
+  height: 44px;
+  -webkit-align-content: center;
+  -ms-flex-line-pack: center;
+  align-content: center;
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  padding-top: 10px;
+  padding-bottom: 10px;
+  height: 44;
+}
+
+.c4 {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-flex-direction: row;
+  -ms-flex-direction: row;
+  flex-direction: row;
+  height: auto;
+  -webkit-box-pack: justify;
+  -webkit-justify-content: space-between;
+  -ms-flex-pack: justify;
+  justify-content: space-between;
+  justify-items: space-between;
+  -webkit-align-content: center;
+  -ms-flex-line-pack: center;
+  align-content: center;
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+}
+
+.c6 {
+  display: none;
+}
+
+.c10 {
+  margin-right: 5px;
+}
+
+.c5:disabled + label > .c9 {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.c8 {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  width: -webkit-max-content;
+  width: -moz-max-content;
+  width: max-content;
+}
+
+.c8:hover {
+  cursor: pointer;
+}
+
+.c5:disabled + .c7 {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.c2 {
+  width: auto;
+  height: auto;
+  display: block;
+  border-radius: 5px;
+  width: calc(100% + 21px);
+  padding-top: 14px;
+  padding-bottom: 14px;
+  padding-right: 21px;
+  padding-left: 21px;
+  cursor: pointer;
+  border-radius: 5px;
+  border-radius: 5px;
+}
+
+.c2:hover {
+  background-color: #E9F1FB;
+}
+
+@media only screen and (min-width:768px) {
+
+}
+
+@media only screen and (min-width:960px) {
+
+}
+
+@media only screen and (min-width:1170px) {
+
+}
+
+@media only screen and (min-width:1360px) {
+
+}
+
 <div>
   <div
-    class="Column-sc-4zswzq-0 ekpwZH"
+    class="c0"
   >
     <div
-      class="Row-y1cs0u-0 eQEaUX"
+      class="c1"
     >
       <div
-        class="Box-sc-1vhutan-0 HoverableBox-zvip6a-0 kmyFFE"
+        class="c2"
         width="calc(100% + 21px)"
       >
         <div
-          class="Row-y1cs0u-0 hqiNOF"
+          class="c3"
           height="44"
         >
-          <img
-            src="IMAGE_MOCK"
-          />
-          <label
-            for="answer-1"
+          <div
+            class="c4"
           >
-            <div>
-              test
-            </div>
-          </label>
+            <input
+              class="c5 c6"
+              id="answer-1"
+              type="checkbox"
+            />
+            <label
+              class="c7 c8"
+              for="answer-1"
+            >
+              <img
+                class="c9 c10"
+                src="IMAGE_MOCK"
+              />
+              <div>
+                test
+              </div>
+            </label>
+          </div>
         </div>
       </div>
     </div>
     <div
-      class="Row-y1cs0u-0 eQEaUX"
+      class="c1"
     >
       <div
-        class="Box-sc-1vhutan-0 HoverableBox-zvip6a-0 kmyFFE"
+        class="c2"
         width="calc(100% + 21px)"
       >
         <div
-          class="Row-y1cs0u-0 hqiNOF"
+          class="c3"
           height="44"
         >
-          <img
-            src="IMAGE_MOCK"
-          />
-          <label
-            for="answer-2"
+          <div
+            class="c4"
           >
-            <div>
-              test
-            </div>
-          </label>
+            <input
+              class="c5 c6"
+              id="answer-2"
+              type="checkbox"
+            />
+            <label
+              class="c7 c8"
+              for="answer-2"
+            >
+              <img
+                class="c9 c10"
+                src="IMAGE_MOCK"
+              />
+              <div>
+                test
+              </div>
+            </label>
+          </div>
         </div>
       </div>
     </div>

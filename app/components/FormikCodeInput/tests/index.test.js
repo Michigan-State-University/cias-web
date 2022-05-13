@@ -7,8 +7,9 @@
  */
 
 import React, { Fragment } from 'react';
-import { render } from '@testing-library/react';
 import { Formik } from 'formik';
+
+import { testRender } from 'utils/testUtils';
 
 import FormikCodeInput from '../index';
 
@@ -24,7 +25,7 @@ describe('<FormikCodeInput />', () => {
   });
   it('Expect to not log errors in console', () => {
     const spy = jest.spyOn(global.console, 'error');
-    render(
+    testRender(
       <Formik initialValues={{ test: '' }} onSubmit={jest.fn()}>
         {() => (
           <>
@@ -37,7 +38,7 @@ describe('<FormikCodeInput />', () => {
   });
 
   it('Should render and match the snapshot', () => {
-    const { container } = render(
+    const { container } = testRender(
       <Formik initialValues={{ test: '' }} onSubmit={jest.fn()}>
         {() => (
           <>

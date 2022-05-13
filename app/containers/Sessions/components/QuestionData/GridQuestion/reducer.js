@@ -7,6 +7,8 @@ import {
   UPDATE_COLUMN,
   DELETE_COLUMN,
   DELETE_ROW,
+  REORDER_ROWS,
+  REORDER_COLUMNS,
 } from './constants';
 
 /* eslint-disable default-case, no-param-reassign */
@@ -52,6 +54,14 @@ const gridQuestionReducer = (question, payload) => {
 
     case DELETE_ROW:
       question.body.data[0].payload.rows.splice(payload.data.index, 1);
+      return question;
+
+    case REORDER_ROWS:
+      question.body.data[0].payload.rows = payload.data.items;
+      return question;
+
+    case REORDER_COLUMNS:
+      question.body.data[0].payload.columns = payload.data.items;
       return question;
 
     default:

@@ -31,7 +31,7 @@ const PauseBlock = ({
         <Input
           disabled={disabled}
           value={pause}
-          onChange={e => setPause(e.target.value)}
+          onChange={(e) => setPause(e.target.value)}
           type="number"
           width="100%"
           textAlign="right"
@@ -61,9 +61,6 @@ const mapDispatchToProps = {
   updateNarratorPreviewAnimation: updatePreviewAnimation,
 };
 
-const withConnect = connect(
-  null,
-  mapDispatchToProps,
-);
+const withConnect = connect(null, mapDispatchToProps);
 
 export default compose(withConnect)(PauseBlock);

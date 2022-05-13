@@ -7,7 +7,7 @@ import { fontSizes } from 'theme/fonts';
 import HoverableBox from 'components/Box/HoverableBox';
 import H3 from 'components/H3';
 
-const NumberCircle = props => (
+const NumberCircle = (props) => (
   <Circle
     {...props}
     size="23px"
@@ -24,7 +24,7 @@ NumberCircle.propTypes = {
 };
 
 const ToggleableBox = styled(HoverableBox)`
-  ${props => (props.isSelected ? { backgroundColor: colors.linkWater } : {})};
+  ${(props) => (props.isSelected ? { backgroundColor: colors.linkWater } : {})};
 `;
 
 ToggleableBox.propTypes = {

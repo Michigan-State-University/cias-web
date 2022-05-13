@@ -1,4 +1,10 @@
-import { ADD, UPDATE_ANSWER, REMOVE, UPDATE_VARIABLE } from './constants';
+import {
+  ADD,
+  UPDATE_ANSWER,
+  REMOVE,
+  UPDATE_VARIABLE,
+  REORDER,
+} from './constants';
 
 /* eslint-disable default-case, no-param-reassign */
 const thirdPartyQuestionReducer = (question, payload) => {
@@ -23,6 +29,9 @@ const thirdPartyQuestionReducer = (question, payload) => {
       return question;
     case REMOVE:
       question.body.data.splice(payload.data.index, 1);
+      return question;
+    case REORDER:
+      question.body.data = payload.data.items;
       return question;
     default:
       return question;

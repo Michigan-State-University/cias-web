@@ -19,6 +19,9 @@ import {
   ADD_FORMULA_TARGET,
   UPDATE_FORMULA_TARGET,
   REMOVE_FORMULA_TARGET,
+  ADD_NEW_FORMULA,
+  REMOVE_FORMULA,
+  DUPLICATE_FORMULA,
 } from './constants';
 
 export const updateSettings = (property, value) =>
@@ -80,28 +83,28 @@ export const updateReflectionFormulaBlock = (index, questionId, data) =>
     data: { ...data, questionId, index },
   });
 
-export const updateFormula = (value, questionId) =>
+export const updateFormula = (value, questionId, formulaIndex) =>
   updateQuestionSettings({
     type: UPDATE_FORMULA,
-    data: { value, questionId },
+    data: { value, questionId, formulaIndex },
   });
 
-export const addFormulaCase = questionId =>
+export const addFormulaCase = (questionId, formulaIndex) =>
   updateQuestionSettings({
     type: ADD_FORMULA_CASE,
-    data: { questionId },
+    data: { questionId, formulaIndex },
   });
 
-export const removeFormulaCase = (index, questionId) =>
+export const removeFormulaCase = (index, questionId, formulaIndex) =>
   updateQuestionSettings({
     type: REMOVE_FORMULA_CASE,
-    data: { index, questionId },
+    data: { index, questionId, formulaIndex },
   });
 
-export const updateFormulaCase = (index, value, questionId) =>
+export const updateFormulaCase = (index, value, questionId, formulaIndex) =>
   updateQuestionSettings({
     type: UPDATE_FORMULA_CASE,
-    data: { index, value, questionId },
+    data: { index, value, questionId, formulaIndex },
   });
 
 export const saveNarratorMovement = (index, questionId, position) =>
@@ -110,7 +113,7 @@ export const saveNarratorMovement = (index, questionId, position) =>
     data: { index, questionId, position },
   });
 
-export const reorderNarratorBlocks = reorderedBlocks =>
+export const reorderNarratorBlocks = (reorderedBlocks) =>
   updateQuestionSettings({
     type: REORDER_NARRATOR_BLOCKS,
     data: { reorderedBlocks },
@@ -122,10 +125,10 @@ export const updatePauseDuration = (index, duration) =>
     data: { index, duration },
   });
 
-export const addFormulaTarget = (questionId, patternIndex) =>
+export const addFormulaTarget = (questionId, patternIndex, formulaIndex) =>
   updateQuestionSettings({
     type: ADD_FORMULA_TARGET,
-    data: { questionId, patternIndex },
+    data: { questionId, patternIndex, formulaIndex },
   });
 
 export const updateFormulaTarget = (
@@ -133,14 +136,38 @@ export const updateFormulaTarget = (
   patternIndex,
   targetIndex,
   targetData,
+  formulaIndex,
 ) =>
   updateQuestionSettings({
     type: UPDATE_FORMULA_TARGET,
-    data: { questionId, patternIndex, targetIndex, targetData },
+    data: { questionId, patternIndex, targetIndex, targetData, formulaIndex },
   });
 
-export const removeFormulaTarget = (questionId, patternIndex, targetIndex) =>
+export const removeFormulaTarget = (
+  questionId,
+  patternIndex,
+  targetIndex,
+  formulaIndex,
+) =>
   updateQuestionSettings({
     type: REMOVE_FORMULA_TARGET,
-    data: { questionId, patternIndex, targetIndex },
+    data: { questionId, patternIndex, targetIndex, formulaIndex },
+  });
+
+export const addNewFormula = (questionId) =>
+  updateQuestionSettings({
+    type: ADD_NEW_FORMULA,
+    data: { questionId },
+  });
+
+export const removeFormula = (questionId, formulaIndex) =>
+  updateQuestionSettings({
+    type: REMOVE_FORMULA,
+    data: { questionId, formulaIndex },
+  });
+
+export const duplicateFormula = (questionId, formulaIndex) =>
+  updateQuestionSettings({
+    type: DUPLICATE_FORMULA,
+    data: { questionId, formulaIndex },
   });

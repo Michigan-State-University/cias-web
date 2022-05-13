@@ -1,0 +1,2 @@
+export const ACCEPT_INTERVENTION_INVITE =
+  'app/UserIntervention/ACCEPT_INTERVENTION_INVITE';

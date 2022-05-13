@@ -16,9 +16,9 @@ import {
 import ApprovableInput from 'components/Input/ApprovableInput';
 import Box from 'components/Box';
 import Column from 'components/Column';
-import Question from 'models/Session/Question';
+
 import Row from 'components/Row';
-import Comment from 'components/Text/Comment';
+import { Comment } from 'components/Text';
 
 import answerPageMessages from 'containers/AnswerSessionPage/layouts/messages';
 import messages from './messages';
@@ -52,7 +52,7 @@ const TextboxQuestion = ({
             rows="5"
             placeholder={formatMessage(messages.placeholder)}
             value={payload}
-            onCheck={newTitle => updateAnswer({ payload: newTitle })}
+            onCheck={(newTitle) => updateAnswer({ payload: newTitle })}
             disabled
           />
         </Row>
@@ -74,7 +74,7 @@ const TextboxQuestion = ({
 };
 
 TextboxQuestion.propTypes = {
-  selectedQuestion: PropTypes.shape(Question).isRequired,
+  selectedQuestion: PropTypes.object.isRequired,
   intl: PropTypes.object.isRequired,
   updateAnswer: PropTypes.func.isRequired,
 };
@@ -84,13 +84,10 @@ const mapStateToProps = createStructuredSelector({
 });
 
 const mapDispatchToProps = {
-  updateAnswer: value =>
+  updateAnswer: (value) =>
     updateQuestionData({ type: UPDATE_DATA, data: { value } }),
 };
 
-const withConnect = connect(
-  mapStateToProps,
-  mapDispatchToProps,
-);
+const withConnect = connect(mapStateToProps, mapDispatchToProps);
 
 export default injectIntl(compose(withConnect)(TextboxQuestion));

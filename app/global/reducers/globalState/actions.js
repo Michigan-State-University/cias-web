@@ -11,5 +11,5 @@ export const downloadFileRequest = (fileUrl, fileName) =>
 export const downloadFileSuccess = (fileBlob, fileUrl) =>
   actionBuilder(DOWNLOAD_FILE_SUCCESS, { fileBlob, fileUrl });
 
-export const downloadFileError = error =>
+export const downloadFileError = (error) =>
   actionBuilder(DOWNLOAD_FILE_ERROR, { error });

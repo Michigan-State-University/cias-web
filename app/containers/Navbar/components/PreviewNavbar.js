@@ -41,7 +41,7 @@ const PreviewNavbar = ({
     window.close();
   };
 
-  const changeMode = mode => () => changePreviewMode(mode);
+  const changeMode = (mode) => () => changePreviewMode(mode);
 
   const handleReset = () => onResetIntervention(sessionId);
 
@@ -69,7 +69,10 @@ const PreviewNavbar = ({
   return (
     <Row align="center" justify="between" width="100%">
       <Row>
-        <ActionIcon onClick={handleClose} />
+        <ActionIcon
+          onClick={handleClose}
+          ariaText={formatMessage(messages.closePreviewText)}
+        />
         <Text color="black" fontSize={23}>
           {navbarName}
         </Text>
@@ -82,7 +85,7 @@ const PreviewNavbar = ({
         </Box>
       </Row>
       <Row justify="between" align="center">
-        {previews.map(preview => {
+        {previews.map((preview) => {
           const fill = preview.id === previewMode ? fillActive : fillInactive;
           return (
             <Icon
@@ -122,9 +125,6 @@ const mapDispatchToProps = {
   onResetIntervention: resetSession,
 };
 
-export default compose(
-  connect(
-    mapStateToProps,
-    mapDispatchToProps,
-  ),
-)(PreviewNavbar);
+export default compose(connect(mapStateToProps, mapDispatchToProps))(
+  PreviewNavbar,
+);

@@ -7,7 +7,6 @@ import { ternary } from 'utils/ternary';
 import { assignDraftItems } from 'utils/reduxUtils';
 import {
   GET_QUESTION_GROUPS_SUCCESS,
-  CREATE_QUESTION_IN_GROUP,
   GROUP_QUESTIONS_SUCCESS,
   CHANGE_GROUP_NAME_REQUEST,
   SAVING_ACTIONS,
@@ -20,9 +19,9 @@ import {
   CLEAN_GROUPS,
   GET_QUESTION_GROUPS_ERROR,
   GET_QUESTION_GROUPS_REQUEST,
-  COPY_QUESTIONS_SUCCESS,
-  COPY_QUESTIONS_ERROR,
-  COPY_QUESTIONS_REQUEST,
+  DUPLICATE_GROUPS_HERE_SUCCESS,
+  DUPLICATE_GROUPS_HERE_ERROR,
+  DUPLICATE_GROUPS_HERE_REQUEST,
 } from './constants';
 
 export const initialState = {
@@ -30,6 +29,9 @@ export const initialState = {
   groups: [],
   loaders: {
     questionGroupsLoading: false,
+  },
+  errors: {
+    questionGroupsError: null,
   },
   cache: {
     groups: [],
@@ -39,13 +41,14 @@ export const initialState = {
 
 /* eslint-disable default-case, no-param-reassign */
 const questionGroupsReducer = (state = initialState, { type, payload }) =>
-  produce(state, draft => {
+  produce(state, (draft) => {
     if (SAVING_ACTIONS.includes(type)) draft.questionsGroupsSaving = true;
     if (SAVED_ACTIONS.includes(type)) draft.questionsGroupsSaving = false;
     switch (type) {
       case GET_QUESTION_GROUPS_REQUEST: {
         draft.sessionId = payload.sessionId;
         draft.loaders.questionGroupsLoading = true;
+        draft.errors.questionGroupsError = null;
         draft.groups = [];
         break;
       }
@@ -53,19 +56,13 @@ const questionGroupsReducer = (state = initialState, { type, payload }) =>
         draft.groups = payload.groups ?? [];
         assignDraftItems(draft.groups, draft.cache.groups);
         draft.loaders.questionGroupsLoading = false;
+        draft.errors.questionGroupsError = null;
         break;
       }
       case GET_QUESTION_GROUPS_ERROR: {
         draft.sessionId = null;
         draft.loaders.questionGroupsLoading = false;
-        break;
-      }
-      case CREATE_QUESTION_IN_GROUP: {
-        const index = state.groups.findIndex(
-          ({ id }) => id === payload.groupId,
-        );
-        draft.groups[index].questions = true;
-        assignDraftItems(draft.groups, draft.cache.groups);
+        draft.errors.questionGroupsError = payload.error;
         break;
       }
       case GROUP_QUESTIONS_SUCCESS: {
@@ -92,10 +89,10 @@ const questionGroupsReducer = (state = initialState, { type, payload }) =>
         const { questions } = payload;
 
         const afterReorderRemainingGroups = questions.map(
-          question => question.question_group_id,
+          (question) => question.question_group_id,
         );
 
-        const filteredGroups = state.groups.filter(group =>
+        const filteredGroups = state.groups.filter((group) =>
           afterReorderRemainingGroups.includes(group.id),
         );
 
@@ -108,7 +105,7 @@ const questionGroupsReducer = (state = initialState, { type, payload }) =>
         const { groupId, destinationIndex, sourceIndex } = payload;
 
         const sourceGroup = {
-          ...state.groups.find(group => group.id === groupId),
+          ...state.groups.find((group) => group.id === groupId),
         };
 
         removeAt(state.groups, sourceIndex);
@@ -132,20 +129,17 @@ const questionGroupsReducer = (state = initialState, { type, payload }) =>
         assignDraftItems(draft.cache.groups, draft.groups);
         break;
 
-      case COPY_QUESTIONS_REQUEST:
+      case DUPLICATE_GROUPS_HERE_REQUEST:
         draft.loaders.questionGroupsLoading = true;
         break;
-      case COPY_QUESTIONS_SUCCESS:
-        const { group } = payload;
-        if (group) {
-          const groupsList = [...state.groups, group];
-          draft.groups = groupsList;
-          assignDraftItems(draft.groups, draft.cache.groups);
-        }
+      case DUPLICATE_GROUPS_HERE_SUCCESS:
+        const { groups } = payload;
+        draft.groups.push(...groups);
+        assignDraftItems(draft.groups, draft.cache.groups);
         draft.loaders.questionGroupsLoading = false;
         break;
 
-      case COPY_QUESTIONS_ERROR:
+      case DUPLICATE_GROUPS_HERE_ERROR:
         draft.loaders.questionGroupsLoading = false;
         assignDraftItems(draft.cache.groups, draft.groups);
         break;

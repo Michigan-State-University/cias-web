@@ -1,7 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-import Question from 'models/Session/Question';
 import isNullOrUndefined from 'utils/isNullOrUndefined';
 
 import CurrencyQuestionLayout from '../layouts/CurrencyQuestionLayout';
@@ -42,7 +41,7 @@ const CurrencyQuestion = ({
 };
 
 CurrencyQuestion.propTypes = {
-  question: PropTypes.shape(Question).isRequired,
+  question: PropTypes.object.isRequired,
   selectAnswer: PropTypes.func,
   answerBody: PropTypes.any,
   formatMessage: PropTypes.func,

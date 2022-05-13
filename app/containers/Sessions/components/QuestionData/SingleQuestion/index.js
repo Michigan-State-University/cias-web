@@ -5,29 +5,34 @@ import { connect } from 'react-redux';
 import { createStructuredSelector } from 'reselect';
 import { injectIntl } from 'react-intl';
 
-import ApprovableInput from 'components/Input/ApprovableInput';
+import ReorderIcon from 'assets/svg/reorder-hand.svg';
+import radio from 'assets/svg/radio-button.svg';
+import bin from 'assets/svg/bin-red.svg';
+
+import {
+  makeSelectSelectedQuestion,
+  updateQuestionData,
+} from 'global/reducers/questions';
+import globalMessages from 'global/i18n/globalMessages';
+import { numericValidator } from 'utils/validators';
+import { canEdit } from 'models/Status/statusPermissions';
+import { themeColors, colors } from 'theme';
+
+import FlexibleWidthApprovableInput from 'components/Input/FlexibleWidthApprovableInput';
 import Box from 'components/Box';
 import Column from 'components/Column';
 import HoverableBox from 'components/Box/HoverableBox';
 import Img from 'components/Img';
 import PlusCircle from 'components/Circle/PlusCircle';
-import Question from 'models/Session/Question';
 import Row from 'components/Row';
 import Text from 'components/Text';
-import bin from 'assets/svg/bin-red.svg';
-import globalMessages from 'global/i18n/globalMessages';
-import radio from 'assets/svg/radio-button.svg';
+import OriginalTextHover from 'components/OriginalTextHover';
 import { BadgeInput } from 'components/Input/BadgeInput';
-import { numericValidator } from 'utils/validators';
-import { themeColors, colors } from 'theme';
-import {
-  makeSelectSelectedQuestion,
-  updateQuestionData,
-} from 'global/reducers/questions';
-import { canEdit } from 'models/Status/statusPermissions';
+import { DndSortable } from 'components/DragAndDrop';
 
 import messages from './messages';
 import { ADD, UPDATE_ANSWER, REMOVE } from './constants';
+import { reorderAnswersAction } from './actions';
 
 const RADIO_MARGIN = 16;
 const INPUT_PADDING = 15;
@@ -37,6 +42,7 @@ const SingleQuestion = ({
   addAnswer,
   updateAnswer,
   removeAnswer,
+  reorderAnswers,
   isNarratorTab,
   interventionStatus,
   intl: { formatMessage },
@@ -58,90 +64,115 @@ const SingleQuestion = ({
   const editingPossible = canEdit(interventionStatus);
   const isNarratorTabOrEditNotPossible = isNarratorTab || !editingPossible;
 
-  const handleMouseEnter = index => () => {
+  const handleMouseEnter = (index) => () => {
     if (!isNarratorTabOrEditNotPossible) setHovered(index);
+  };
+
+  const onDragEnd = (_, items, hasChanged) => {
+    if (!hasChanged) return;
+
+    reorderAnswers(items);
   };
 
   return (
     <Column mt={10}>
-      {data.map((value, index) => (
-        <Row key={`question-${selectedQuestion.id}-el-${index}`}>
-          <HoverableBox
-            hoverColor={isNarratorTabOrEditNotPossible ? null : undefined}
-            px={21}
-            py={14}
-            width="100%"
-            onMouseEnter={handleMouseEnter(index)}
-            onMouseLeave={() => setHovered(-1)}
-            clickable={false}
-          >
-            <Column>
-              <Row
-                align="center"
-                justify="between"
-                mb={isNarratorTabOrEditNotPossible ? 0 : 10}
-              >
-                <Row width="90%">
-                  <Img ref={radioButtonRef} src={radio} mr={RADIO_MARGIN} />
-                  <Box width="100%">
-                    <ApprovableInput
-                      mr={8}
-                      fontSize={18}
-                      type="singleline"
-                      placeholder={formatMessage(messages.placeholder, {
-                        index: index + 1,
-                      })}
-                      value={value.payload}
-                      onCheck={newTitle =>
-                        updateAnswer(index, { ...value, payload: newTitle })
-                      }
-                      richText
-                      disabled={isNarratorTabOrEditNotPossible}
-                    />
-                  </Box>
+      <DndSortable onDragEnd={onDragEnd} items={data} selector={null}>
+        {({ item, index, dragHandleProps }) => (
+          <Row>
+            <HoverableBox
+              hoverColor={isNarratorTabOrEditNotPossible ? null : undefined}
+              px={21}
+              py={14}
+              width="100%"
+              onMouseEnter={handleMouseEnter(index)}
+              onMouseLeave={() => setHovered(-1)}
+              clickable={false}
+            >
+              <Column>
+                <Row
+                  align="center"
+                  justify="between"
+                  mb={isNarratorTabOrEditNotPossible ? 0 : 10}
+                >
+                  <Row width="90%">
+                    {!isNarratorTabOrEditNotPossible && (
+                      <Img
+                        alt={formatMessage(messages.reorderIconAlt, {
+                          index,
+                        })}
+                        mr={10}
+                        src={ReorderIcon}
+                        disabled={false}
+                        cursor="grab"
+                        {...dragHandleProps}
+                      />
+                    )}
+
+                    <Img ref={radioButtonRef} src={radio} mr={RADIO_MARGIN} />
+                    <OriginalTextHover
+                      text={item?.original_text}
+                      hidden={isNarratorTab}
+                    >
+                      <FlexibleWidthApprovableInput
+                        mr={8}
+                        fontSize={18}
+                        type="singleline"
+                        placeholder={formatMessage(messages.placeholder, {
+                          index: index + 1,
+                        })}
+                        value={item.payload}
+                        onCheck={(newTitle) =>
+                          updateAnswer(index, { ...item, payload: newTitle })
+                        }
+                        richText
+                        disabled={isNarratorTabOrEditNotPossible}
+                        emptyWidth={105}
+                      />
+                    </OriginalTextHover>
+                  </Row>
+                  <Row>
+                    <Box
+                      onClick={() => removeAnswer(index)}
+                      hidden={hovered !== index}
+                      clickable
+                    >
+                      <Img src={bin} mr={16} />
+                    </Box>
+                  </Row>
                 </Row>
-                <Row>
-                  <Box
-                    onClick={() => removeAnswer(index)}
-                    hidden={hovered !== index}
-                    clickable
-                  >
-                    <Img src={bin} mr={16} />
-                  </Box>
+                <Row align="center" hidden={isNarratorTab}>
+                  <BadgeInput
+                    data-cy={`score-${index}-input`}
+                    ml={`${leftMargin}px`}
+                    disabled={!editingPossible}
+                    px={0}
+                    py={12}
+                    textAlign="center"
+                    validator={numericValidator}
+                    keyboard="tel"
+                    placeholder={
+                      !isNarratorTab
+                        ? formatMessage(
+                            globalMessages.variables.variableScorePlaceholder,
+                          )
+                        : ''
+                    }
+                    value={item.value}
+                    color={colors.azure}
+                    onBlur={(val) =>
+                      updateAnswer(index, {
+                        ...item,
+                        value: val,
+                      })
+                    }
+                  />
                 </Row>
-              </Row>
-              <Row align="center" display="flex" hidden={isNarratorTab}>
-                <BadgeInput
-                  data-cy={`score-${index}-input`}
-                  ml={`${leftMargin}px`}
-                  disabled={!editingPossible}
-                  px={0}
-                  py={12}
-                  textAlign="center"
-                  validator={numericValidator}
-                  keyboard="tel"
-                  placeholder={
-                    !isNarratorTab
-                      ? formatMessage(
-                          globalMessages.variables.variableScorePlaceholder,
-                        )
-                      : ''
-                  }
-                  value={value.value}
-                  color={colors.azure}
-                  onBlur={val =>
-                    updateAnswer(index, {
-                      ...value,
-                      value: val,
-                    })
-                  }
-                />
-              </Row>
-            </Column>
-          </HoverableBox>
-        </Row>
-      ))}
-      <Row display="flex" hidden={isNarratorTabOrEditNotPossible}>
+              </Column>
+            </HoverableBox>
+          </Row>
+        )}
+      </DndSortable>
+      <Row hidden={isNarratorTabOrEditNotPossible}>
         <HoverableBox px={21} py={14} onClick={addAnswer}>
           <Box>
             <Row align="center">
@@ -158,11 +189,12 @@ const SingleQuestion = ({
 };
 
 SingleQuestion.propTypes = {
-  selectedQuestion: PropTypes.shape(Question).isRequired,
+  selectedQuestion: PropTypes.object.isRequired,
   intl: PropTypes.object.isRequired,
   addAnswer: PropTypes.func.isRequired,
   updateAnswer: PropTypes.func.isRequired,
   removeAnswer: PropTypes.func.isRequired,
+  reorderAnswers: PropTypes.func.isRequired,
   isNarratorTab: PropTypes.bool,
   interventionStatus: PropTypes.string,
 };
@@ -175,12 +207,11 @@ const mapDispatchToProps = {
   addAnswer: () => updateQuestionData({ type: ADD }),
   updateAnswer: (index, value) =>
     updateQuestionData({ type: UPDATE_ANSWER, data: { index, value } }),
-  removeAnswer: index => updateQuestionData({ type: REMOVE, data: { index } }),
+  removeAnswer: (index) =>
+    updateQuestionData({ type: REMOVE, data: { index } }),
+  reorderAnswers: reorderAnswersAction,
 };
 
-const withConnect = connect(
-  mapStateToProps,
-  mapDispatchToProps,
-);
+const withConnect = connect(mapStateToProps, mapDispatchToProps);
 
 export default injectIntl(compose(withConnect)(SingleQuestion));

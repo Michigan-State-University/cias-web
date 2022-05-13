@@ -2,8 +2,8 @@ import { createStore } from 'redux';
 import createReducer from 'reducers';
 import { initialState as authReducerInitialState } from 'global/reducers/auth/reducer';
 
-export const createTestStore = initialState => {
-  const reducer = state => state;
+export const createTestStore = (initialState) => {
+  const reducer = (state) => state;
 
   const store = createStore(reducer, {
     auth: authReducerInitialState,

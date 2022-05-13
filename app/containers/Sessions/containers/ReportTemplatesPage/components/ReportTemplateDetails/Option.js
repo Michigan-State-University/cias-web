@@ -6,8 +6,16 @@ import Text from 'components/Text';
 import Switch from 'components/Switch';
 import { colors, borders } from 'theme';
 
-const Option = ({ withBorder, fontWeight, label, value, action, disabled }) => {
-  const handleToggle = val => {
+const Option = ({
+  labelId,
+  withBorder,
+  fontWeight,
+  label,
+  value,
+  action,
+  disabled,
+}) => {
+  const handleToggle = (val) => {
     action(val);
   };
   return (
@@ -20,15 +28,22 @@ const Option = ({ withBorder, fontWeight, label, value, action, disabled }) => {
           : null
       }
     >
-      <Text fontWeight={fontWeight} mr={10}>
-        {label}
-      </Text>
-      <Switch disabled={disabled} checked={value} onToggle={handleToggle} />
+      <Switch
+        id={labelId}
+        disabled={disabled}
+        checked={value}
+        onToggle={handleToggle}
+      >
+        <Text fontWeight={fontWeight} mr={10}>
+          {label}
+        </Text>
+      </Switch>
     </Row>
   );
 };
 
 Option.propTypes = {
+  labelId: PropTypes.string,
   withBorder: PropTypes.bool,
   label: PropTypes.string,
   value: PropTypes.bool,

@@ -46,6 +46,7 @@ Loader.propTypes = {
   color: PropTypes.string,
   hidden: PropTypes.bool,
   size: PropTypes.number,
+  width: PropTypes.oneOfType([PropTypes.number, PropTypes.string]),
   type: PropTypes.oneOf(['inline', 'absolute']),
 };
 

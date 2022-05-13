@@ -16,7 +16,7 @@ import { VIEW, ReportingDashboardPageContext } from './constants';
 const ReportingDashboardPage = ({ user, view, organizableId }) => {
   const { organizationId } = useParams();
 
-  const withContext = component => (
+  const withContext = (component) => (
     <ReportingDashboardPageContext.Provider
       value={{ user, organizationId, organizableId }}
     >

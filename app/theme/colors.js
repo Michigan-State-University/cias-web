@@ -54,7 +54,10 @@ const colors = {
   sonicSilver: '#6B707C',
   vermilion: '#D2371D',
   aliceBlue: '#F1F4F9',
+  lightBlue: '#F4F8FF',
   electricPurple: '#B727EA',
+  periwinkleGray: '#B3C1E1',
+  solitude: '#E6EDFD',
   red: '#BE4745',
   red5: '#FCF6F6',
   blue: '#3F88C5',
@@ -63,6 +66,13 @@ const colors = {
   green10: '#EAF5F4',
   orange: '#EB7900',
   orange5: '#FEF8F2',
+  whiteLilac: '#F6F8FC',
+  jungleGreen50: '#80b4AE',
+  periwinkleGray50: '#D9E0F0',
+  supernova: '#FFC50D',
+  mischka: '#DDE0E6',
+  gainsbro: '#DADADA',
+  lightStealBlue: '#B3C1E1',
 };
 
 const themeColors = {
@@ -70,6 +80,7 @@ const themeColors = {
   secondary: colors.electricPurple,
   text: colors.bluewood,
   highlight: colors.linkWater,
+  success: colors.jungleGreen,
   warning: colors.vermilion,
   comment: colors.sonicSilver,
 };

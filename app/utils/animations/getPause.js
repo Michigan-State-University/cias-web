@@ -1,4 +1,4 @@
-const getPause = type => {
+const getPause = (type) => {
   switch (type) {
     case 'standStill':
       return 0;

@@ -1,4 +1,4 @@
-const getUrlProtocol = url => {
+const getUrlProtocol = (url) => {
   const urlObj = new URL(url);
 
   return urlObj.protocol;

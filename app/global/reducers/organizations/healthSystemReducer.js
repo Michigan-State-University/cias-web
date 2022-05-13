@@ -19,7 +19,7 @@ import {
 
 /* eslint-disable default-case, no-param-reassign */
 const healthSystemReducer = (state = null, action) =>
-  produce(state, draft => {
+  produce(state, (draft) => {
     const { type, payload } = action;
 
     switch (type) {
@@ -36,7 +36,7 @@ const healthSystemReducer = (state = null, action) =>
 
       case FETCH_CLINIC_SUCCESS:
       case EDIT_CLINIC_REQUEST: {
-        updateItemById(draft.healthClinics, payload.clinic.id, item =>
+        updateItemById(draft.healthClinics, payload.clinic.id, (item) =>
           clinicReducer(item, action),
         );
 
@@ -49,20 +49,20 @@ const healthSystemReducer = (state = null, action) =>
       }
 
       case DELETE_CLINIC_SUCCESS: {
-        updateItemById(draft.healthClinics, payload.id, item =>
+        updateItemById(draft.healthClinics, payload.id, (item) =>
           clinicReducer(item, action),
         );
         break;
       }
 
       case DELETE_HEALTH_SYSTEM_SUCCESS: {
-        forEach(draft.healthClinics, clinic => {
+        forEach(draft.healthClinics, (clinic) => {
           const deleteClinicAction = deleteClinicSuccess(
             clinic.id,
             clinic.healthSystemId,
           );
 
-          updateItemById(draft.healthClinics, clinic.id, item =>
+          updateItemById(draft.healthClinics, clinic.id, (item) =>
             clinicReducer(item, deleteClinicAction),
           );
         });

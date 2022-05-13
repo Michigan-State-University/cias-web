@@ -1,35 +1,661 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`<GridQuestion /> Should render and match the snapshot 1`] = `
+.c2 {
+  width: auto;
+  height: auto;
+  display: block;
+  border-radius: 5px;
+  padding-top: 14px;
+  padding-bottom: 14px;
+  padding-right: 21px;
+  padding-left: 21px;
+  cursor: pointer;
+  border-radius: 5px;
+  border-radius: 5px;
+}
+
+.c2:hover {
+  background-color: #E9F1FB;
+}
+
+.c3 {
+  width: auto;
+  height: auto;
+  display: block;
+  border-radius: 5px;
+}
+
+.c8 {
+  width: auto;
+  height: auto;
+  display: block;
+  border-radius: 5px;
+  width: 100%;
+}
+
+.c9 {
+  width: auto;
+  height: auto;
+  display: block;
+  border-radius: 5px;
+  width: 100%;
+  height: 100%;
+  position: relative;
+}
+
+.c10 {
+  width: auto;
+  height: auto;
+  display: block;
+  border-radius: 5px;
+  -webkit-scrollbar-width: none;
+  -moz-scrollbar-width: none;
+  -ms-scrollbar-width: none;
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+  height: inherit;
+  overflow: scroll;
+  padding-top: 14px;
+  padding-bottom: 14px;
+  padding-right: 21px;
+}
+
+.c10::-webkit-scrollbar {
+  width: 0;
+}
+
+.c16 {
+  width: auto;
+  height: auto;
+  display: block;
+  border-radius: 5px;
+  height: 35px;
+  padding-right: 8px;
+  padding-left: 8px;
+  margin-bottom: 8px;
+}
+
+.c22 {
+  width: auto;
+  height: auto;
+  display: block;
+  border-radius: 5px;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-align-content: center;
+  -ms-flex-line-pack: center;
+  align-content: center;
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  -webkit-flex-direction: column;
+  -ms-flex-direction: column;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.c25 {
+  width: auto;
+  height: auto;
+  display: block;
+  border-radius: 5px;
+  width: 60px;
+}
+
+.c31 {
+  width: auto;
+  height: auto;
+  display: block;
+  border-radius: 5px;
+  width: 100%;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-align-content: center;
+  -ms-flex-line-pack: center;
+  align-content: center;
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  gap: 15px;
+}
+
+.c35 {
+  width: auto;
+  height: auto;
+  display: block;
+  border-radius: 5px;
+  padding-top: 14px;
+  padding-bottom: 14px;
+  padding-right: 21px;
+  padding-left: 21px;
+  margin-top: 20px;
+  cursor: pointer;
+  border-radius: 5px;
+  border-radius: 5px;
+}
+
+.c35:hover {
+  background-color: #E9F1FB;
+}
+
+.c0 {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-flex-direction: column;
+  -ms-flex-direction: column;
+  flex-direction: column;
+  width: 100%;
+  width: 100%;
+  max-width: 702px;
+}
+
+.c15 {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-flex-direction: column;
+  -ms-flex-direction: column;
+  flex-direction: column;
+  width: 100%;
+  -webkit-align-content: center;
+  -ms-flex-line-pack: center;
+  align-content: center;
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  width: 100%;
+}
+
+.c6 {
+  width: auto;
+  height: auto;
+}
+
+.c17 {
+  width: auto;
+  height: auto;
+  display: none;
+  cursor: pointer;
+}
+
+.c18 {
+  width: auto;
+  height: auto;
+  margin-top: 20px;
+  margin-bottom: 10px;
+  cursor: -webkit-grab;
+  cursor: -moz-grab;
+  cursor: grab;
+}
+
+.c26 {
+  width: auto;
+  height: auto;
+  margin-right: 10px;
+  margin-left: 20px;
+  cursor: -webkit-grab;
+  cursor: -moz-grab;
+  cursor: grab;
+}
+
+.c5 {
+  border-radius: 50%;
+  background-color: #B727EA;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+  -webkit-justify-content: center;
+  -ms-flex-pack: center;
+  justify-content: center;
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  width: 32px;
+  height: 32px;
+  margin-right: 12px;
+  background-color: rgba(183,39,234,1);
+  color: rgba(255,255,255,1);
+  opacity: 1;
+  color: rgba(255,255,255,1);
+}
+
+.c1 {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-flex-direction: row;
+  -ms-flex-direction: row;
+  flex-direction: row;
+  height: auto;
+  -webkit-box-pack: end;
+  -webkit-justify-content: flex-end;
+  -ms-flex-pack: end;
+  justify-content: flex-end;
+  justify-items: flex-end;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+}
+
+.c4 {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-flex-direction: row;
+  -ms-flex-direction: row;
+  flex-direction: row;
+  height: auto;
+  -webkit-align-content: center;
+  -ms-flex-line-pack: center;
+  align-content: center;
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+}
+
+.c19 {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-flex-direction: row;
+  -ms-flex-direction: row;
+  flex-direction: row;
+  height: auto;
+  margin-bottom: 8px;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+}
+
+.c24 {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-flex-direction: row;
+  -ms-flex-direction: row;
+  flex-direction: row;
+  height: 100%px;
+  -webkit-align-content: center;
+  -ms-flex-line-pack: center;
+  align-content: center;
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  padding: 5px;
+  height: 100%;
+}
+
+.c27 {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-flex-direction: row;
+  -ms-flex-direction: row;
+  flex-direction: row;
+  height: auto;
+  -webkit-box-pack: justify;
+  -webkit-justify-content: space-between;
+  -ms-flex-pack: justify;
+  justify-content: space-between;
+  justify-items: space-between;
+  -webkit-align-content: center;
+  -ms-flex-line-pack: center;
+  align-content: center;
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  width: 100%;
+}
+
+.c28 {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-flex-direction: row;
+  -ms-flex-direction: row;
+  flex-direction: row;
+  height: auto;
+  margin-right: 8px;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+}
+
+.c33 {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-flex-direction: row;
+  -ms-flex-direction: row;
+  flex-direction: row;
+  height: auto;
+  -webkit-box-pack: center;
+  -webkit-justify-content: center;
+  -ms-flex-pack: center;
+  justify-content: center;
+  justify-items: center;
+  -webkit-align-content: center;
+  -ms-flex-line-pack: center;
+  align-content: center;
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+}
+
+.c34 {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-flex-direction: row;
+  -ms-flex-direction: row;
+  flex-direction: row;
+  height: auto;
+  -webkit-box-pack: start;
+  -webkit-justify-content: flex-start;
+  -ms-flex-pack: start;
+  justify-content: flex-start;
+  justify-items: flex-start;
+}
+
+.c36 {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-flex-direction: row;
+  -ms-flex-direction: row;
+  flex-direction: row;
+  height: auto;
+  -webkit-align-content: center;
+  -ms-flex-line-pack: center;
+  align-content: center;
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+}
+
+.c7 {
+  font-family: DM Sans;
+  font-size: 13px;
+  line-height: 130%;
+  font-weight: 700;
+  color: rgba(183,39,234,1);
+  color: rgba(183,39,234,1);
+}
+
+.c32 {
+  resize: none;
+  padding: 12px;
+  border: 1px solid #E9F1FB;
+  border-radius: 5px;
+  margin-right: 9px;
+  width: 300px;
+  height: auto;
+  max-width: initial;
+  background-color: transparent;
+  border: 1px solid transparent;
+}
+
+.c32:focus {
+  box-shadow: none;
+  outline: none;
+  border: 1px solid #107969;
+}
+
+.c32:disabled {
+  color: #ABBBD1;
+}
+
+.c20 {
+  padding: 12px;
+  border-style: solid;
+  border-width: 1px;
+  border-color: #E9F1FB;
+  border-radius: 5px;
+  background-color: transparent;
+  border-color: transparent;
+  width: 37px;
+  max-width: 200px;
+  padding-top: 12px;
+  padding-bottom: 12px;
+  padding-right: 0;
+  padding-left: 0;
+  color: rgba(0,134,248,1);
+  text-align: center;
+  background-color: rgba(0,134,248,0.1);
+  color: rgba(0,134,248,1);
+}
+
+.c20:focus {
+  box-shadow: none;
+  outline: none;
+  border-color: #107969;
+}
+
+.c20:disabled {
+  color: #ABBBD1;
+}
+
+.c23 {
+  padding: 12px;
+  border-style: solid;
+  border-width: 1px;
+  border-color: #E9F1FB;
+  border-radius: 5px;
+  background-color: transparent;
+  border-color: transparent;
+  width: 110px;
+  max-width: 200px;
+  padding-top: 12px;
+  padding-bottom: 12px;
+  padding-right: 0;
+  padding-left: 0;
+  color: #2F3850;
+  text-align: center;
+  cursor: pointer;
+}
+
+.c23:focus {
+  box-shadow: none;
+  outline: none;
+  border-color: #107969;
+}
+
+.c23:disabled {
+  color: #ABBBD1;
+}
+
+.c29 {
+  padding: 12px;
+  border-style: solid;
+  border-width: 1px;
+  border-color: #E9F1FB;
+  border-radius: 5px;
+  background-color: transparent;
+  border-color: transparent;
+  width: 49px;
+  max-width: 200px;
+  padding-top: 12px;
+  padding-bottom: 12px;
+  padding-right: 0;
+  padding-left: 0;
+  color: rgba(16,121,105,1);
+  text-align: center;
+  background-color: rgba(16,121,105,0.1);
+  color: rgba(16,121,105,1);
+}
+
+.c29:focus {
+  box-shadow: none;
+  outline: none;
+  border-color: #107969;
+}
+
+.c29:disabled {
+  color: #ABBBD1;
+}
+
+.c21 {
+  padding: 5px 10px;
+  font-size: 13px;
+  font-weight: 600;
+  border-radius: 4px;
+  background-color: rgba(0,134,248,0.1);
+  color: rgba(0,134,248,1);
+}
+
+.c21:focus {
+  box-shadow: none;
+  outline: none;
+  border: 1px solid transparent;
+}
+
+.c30 {
+  padding: 5px 10px;
+  font-size: 13px;
+  font-weight: 600;
+  border-radius: 4px;
+  background-color: rgba(16,121,105,0.1);
+  color: rgba(16,121,105,1);
+}
+
+.c30:focus {
+  box-shadow: none;
+  outline: none;
+  border: 1px solid transparent;
+}
+
+.c11 {
+  font-size: 13px;
+}
+
+.c11 tr,
+.c11 th,
+.c11 td {
+  font-weight: 400;
+}
+
+.c12 {
+  height: 47.5px;
+}
+
+.c13 {
+  cursor: default;
+  color: #0E0E0E;
+  background-color: #F8FBFF;
+}
+
+.c13 td:nth-last-child(-n + ) {
+  opacity: 100%;
+}
+
+.c13:hover {
+  background: !important;
+}
+
+.c13:hover td:hover {
+  opacity: 100%;
+}
+
+.c14 {
+  width: 120px;
+}
+
+@media only screen and (min-width:768px) {
+
+}
+
+@media only screen and (min-width:960px) {
+
+}
+
+@media only screen and (min-width:1170px) {
+
+}
+
+@media only screen and (min-width:1360px) {
+
+}
+
+@media only screen and (min-width:768px) {
+
+}
+
+@media only screen and (min-width:960px) {
+
+}
+
+@media only screen and (min-width:1170px) {
+
+}
+
+@media only screen and (min-width:1360px) {
+
+}
+
 <div
-  class="Column-sc-4zswzq-0 elacnj"
+  class="c0"
   width="100%"
 >
   <div
-    class="Row-y1cs0u-0 jXtNKE"
+    class="c1"
     display="flex"
   >
     <div
-      class="Box-sc-1vhutan-0 HoverableBox-zvip6a-0 donflz"
+      class="c2"
     >
       <div
-        class="Box-sc-1vhutan-0 dvfkZg"
+        class="c3"
       >
         <div
-          class="Row-y1cs0u-0 ecllgQ"
+          class="c4"
         >
           <div
-            class="StyledCircle-sc-1dov7hv-0 jkyOQV"
+            class="c5"
             color="#FFFFFF"
             opacity="1"
           >
             <img
-              class="Img-sc-55j3su-0 cDhXoN"
+              class="c6"
               src="IMAGE_MOCK"
             />
           </div>
           <p
-            class="Text-e4p0w3-0 cFbubw"
+            class="c7"
             color="#B727EA"
             font-weight="bold"
           >
@@ -40,158 +666,212 @@ exports[`<GridQuestion /> Should render and match the snapshot 1`] = `
     </div>
   </div>
   <div
-    class="Box-sc-1vhutan-0 jtfWfT"
+    class="c8"
     width="100%"
   >
     <div
-      class="Box-sc-1vhutan-0 jOzpnJ"
+      class="c9"
       height="100%"
       width="100%"
     >
       <div
-        class="Box-sc-1vhutan-0 lhnnor"
+        class="c10"
         height="inherit"
         overflow="scroll"
       >
         <table
-          class="Table-sc-1y0iqmn-0 dCDWhF"
+          class="c11"
         >
           <thead
-            class="THead-sc-8drp5d-0"
+            class=""
           >
             <tr
-              class="TR-sc-1omngt7-0 StripedTR-sc-1wcdkgr-0 iNrQaF ctgvLd"
+              class="c12 c13"
               color="#E2EEF1"
             >
               <th
-                class="TH-sc-1w7ae0i-0 styled__FirstTH-gu7sar-0 eqAwGb dSuaLf"
+                class="c14 "
                 scope="col"
                 width="120px"
               />
               <th
-                class="TH-sc-1w7ae0i-0 eqAwGb"
+                class="c14"
                 scope="col"
+                style="opacity: 1;"
                 width="120px"
               >
-                <div
-                  class="Column-sc-4zswzq-0 hGrzdv"
-                  width="100%"
-                >
+                <div>
                   <div
-                    class="Box-sc-1vhutan-0 fqkGPW"
-                    height="35"
+                    class="c15"
+                    width="100%"
                   >
+                    <div
+                      class="c16"
+                      height="35"
+                    >
+                      <img
+                        class="c17"
+                        hidden=""
+                        src="IMAGE_MOCK"
+                      />
+                    </div>
                     <img
-                      class="Img-sc-55j3su-0 wXzUn"
-                      hidden=""
+                      alt="Reorder icon 0"
+                      aria-describedby="DndDescribedBy-2"
+                      aria-roledescription="sortable"
+                      class="c18"
+                      cursor="grab"
+                      role="button"
                       src="IMAGE_MOCK"
+                      tabindex="0"
                     />
+                    <div
+                      class="c19"
+                      display="flex"
+                    >
+                      <input
+                        aria-label="Score"
+                        class="c20 c21"
+                        color="#0086F8"
+                        placeholder="Score"
+                        type="tel"
+                        value="1"
+                        width="37px"
+                      />
+                    </div>
+                    <div
+                      class="c22"
+                      direction="column"
+                      display="flex"
+                    >
+                      <input
+                        aria-label="Column 1..."
+                        class="c23"
+                        cursor="pointer"
+                        placeholder="Column 1..."
+                        type="text"
+                        value="test-col-1"
+                        width="110"
+                      />
+                    </div>
                   </div>
-                  <div
-                    class="Row-y1cs0u-0 DXRlW"
-                    display="flex"
-                  >
-                    <input
-                      class="Input-t9j2q5-0 ciuopm BadgeInput-sc-1ua27xt-0 eSqSHP"
-                      color="#0086F8"
-                      placeholder="Score"
-                      type="tel"
-                      value="1"
-                      width="37px"
-                    />
-                  </div>
-                  <input
-                    class="Input-t9j2q5-0 tWwZo"
-                    cursor="pointer"
-                    placeholder="Column 1..."
-                    type="text"
-                    value="test-col-1"
-                    width="110"
-                  />
                 </div>
               </th>
               <th
-                class="TH-sc-1w7ae0i-0 eqAwGb"
+                class="c14"
                 scope="col"
+                style="opacity: 1;"
                 width="120px"
               >
-                <div
-                  class="Column-sc-4zswzq-0 hGrzdv"
-                  width="100%"
-                >
+                <div>
                   <div
-                    class="Box-sc-1vhutan-0 fqkGPW"
-                    height="35"
+                    class="c15"
+                    width="100%"
                   >
+                    <div
+                      class="c16"
+                      height="35"
+                    >
+                      <img
+                        class="c17"
+                        hidden=""
+                        src="IMAGE_MOCK"
+                      />
+                    </div>
                     <img
-                      class="Img-sc-55j3su-0 wXzUn"
-                      hidden=""
+                      alt="Reorder icon 1"
+                      aria-describedby="DndDescribedBy-2"
+                      aria-roledescription="sortable"
+                      class="c18"
+                      cursor="grab"
+                      role="button"
                       src="IMAGE_MOCK"
+                      tabindex="0"
                     />
+                    <div
+                      class="c19"
+                      display="flex"
+                    >
+                      <input
+                        aria-label="Score"
+                        class="c20 c21"
+                        color="#0086F8"
+                        placeholder="Score"
+                        type="tel"
+                        value="2"
+                        width="37px"
+                      />
+                    </div>
+                    <div
+                      class="c22"
+                      direction="column"
+                      display="flex"
+                    >
+                      <input
+                        aria-label="Column 2..."
+                        class="c23"
+                        cursor="pointer"
+                        placeholder="Column 2..."
+                        type="text"
+                        value="test-col-2"
+                        width="110"
+                      />
+                    </div>
                   </div>
-                  <div
-                    class="Row-y1cs0u-0 DXRlW"
-                    display="flex"
-                  >
-                    <input
-                      class="Input-t9j2q5-0 ciuopm BadgeInput-sc-1ua27xt-0 eSqSHP"
-                      color="#0086F8"
-                      placeholder="Score"
-                      type="tel"
-                      value="2"
-                      width="37px"
-                    />
-                  </div>
-                  <input
-                    class="Input-t9j2q5-0 tWwZo"
-                    cursor="pointer"
-                    placeholder="Column 2..."
-                    type="text"
-                    value="test-col-2"
-                    width="110"
-                  />
                 </div>
               </th>
               <td />
             </tr>
           </thead>
           <tbody
-            class="TBody-gqq9cv-0"
+            class=""
           >
             <tr
-              class="TR-sc-1omngt7-0 StripedTR-sc-1wcdkgr-0 iNrQaF ctgvLd"
+              class="c12 c13"
               color="#E2EEF1"
+              style="opacity: 1;"
             >
               <th
-                class="TH-sc-1w7ae0i-0 styled__FirstTH-gu7sar-0 eqAwGb dSuaLf"
+                class="c14 "
                 scope="row"
                 width="120px"
               >
                 <div
-                  class="Row-y1cs0u-0 kfmoDc"
+                  class="c24"
                   height="100%"
                 >
                   <div
-                    class="Box-sc-1vhutan-0 kWmrxp"
+                    class="c25"
                     width="60"
                   >
                     <img
-                      class="Img-sc-55j3su-0 wXzUn"
+                      class="c17"
                       hidden=""
                       src="IMAGE_MOCK"
                     />
                   </div>
+                  <img
+                    alt="Reorder icon 0"
+                    aria-describedby="DndDescribedBy-3"
+                    aria-roledescription="sortable"
+                    class="c26"
+                    cursor="grab"
+                    role="button"
+                    src="IMAGE_MOCK"
+                    tabindex="0"
+                  />
                   <div
-                    class="Row-y1cs0u-0 hCdPbQ"
+                    class="c27"
                     width="100%"
                   >
                     <div
-                      class="Row-y1cs0u-0 glcAbF"
+                      class="c28"
                       display="flex"
                     >
                       <input
+                        aria-label="Variable name..."
                         autocomplete="off"
-                        class="Input-t9j2q5-0 buGkPu BadgeInput-sc-1ua27xt-0 gmlnZr"
+                        class="c29 c30"
                         color="#107969"
                         name="notASearchField-Variable name..."
                         placeholder="Variable name..."
@@ -200,83 +880,102 @@ exports[`<GridQuestion /> Should render and match the snapshot 1`] = `
                         width="49px"
                       />
                     </div>
-                    <textarea
-                      class="TextArea-sc-175uiux-0 hDDZSW"
-                      cursor="pointer"
-                      data-cy="text-area"
-                      height="auto"
-                      placeholder="Row 1..."
-                      rows="2"
-                      type="multiline"
-                      width="300"
+                    <div
+                      class="c31"
+                      display="flex"
+                      width="100%"
                     >
-                      test-row-1
-                    </textarea>
+                      <textarea
+                        aria-label="Row 1..."
+                        class="c32"
+                        cursor="pointer"
+                        data-cy="text-area"
+                        height="auto"
+                        placeholder="Row 1..."
+                        rows="2"
+                        type="multiline"
+                        width="300"
+                      >
+                        test-row-1
+                      </textarea>
+                    </div>
                   </div>
                 </div>
               </th>
               <td
-                class="TD-y7762g-0 gxeveZ"
+                class=""
                 height="inherit"
               >
                 <div
-                  class="Row-y1cs0u-0 jawZan"
+                  class="c33"
                 >
                   <img
-                    class="Img-sc-55j3su-0 cDhXoN"
+                    class="c6"
                     src="IMAGE_MOCK"
                   />
                 </div>
               </td>
               <td
-                class="TD-y7762g-0 gxeveZ"
+                class=""
                 height="inherit"
               >
                 <div
-                  class="Row-y1cs0u-0 jawZan"
+                  class="c33"
                 >
                   <img
-                    class="Img-sc-55j3su-0 cDhXoN"
+                    class="c6"
                     src="IMAGE_MOCK"
                   />
                 </div>
               </td>
             </tr>
             <tr
-              class="TR-sc-1omngt7-0 StripedTR-sc-1wcdkgr-0 iNrQaF ctgvLd"
+              class="c12 c13"
               color="#E2EEF1"
+              style="opacity: 1;"
             >
               <th
-                class="TH-sc-1w7ae0i-0 styled__FirstTH-gu7sar-0 eqAwGb dSuaLf"
+                class="c14 "
                 scope="row"
                 width="120px"
               >
                 <div
-                  class="Row-y1cs0u-0 kfmoDc"
+                  class="c24"
                   height="100%"
                 >
                   <div
-                    class="Box-sc-1vhutan-0 kWmrxp"
+                    class="c25"
                     width="60"
                   >
                     <img
-                      class="Img-sc-55j3su-0 wXzUn"
+                      class="c17"
                       hidden=""
                       src="IMAGE_MOCK"
                     />
                     <div />
                   </div>
+                  <img
+                    alt="Reorder icon 1"
+                    aria-describedby="DndDescribedBy-3"
+                    aria-roledescription="sortable"
+                    class="c26"
+                    cursor="grab"
+                    role="button"
+                    src="IMAGE_MOCK"
+                    tabindex="0"
+                  />
                   <div
-                    class="Row-y1cs0u-0 hCdPbQ"
+                    class="c27"
                     width="100%"
                   >
                     <div
-                      class="Row-y1cs0u-0 glcAbF"
+                      class="c28"
                       display="flex"
                     >
                       <input
+                        aria-label="Variable name..."
                         autocomplete="off"
-                        class="Input-t9j2q5-0 buGkPu BadgeInput-sc-1ua27xt-0 gmlnZr"
+                        class="c29 c30"
                         color="#107969"
                         name="notASearchField-Variable name..."
                         placeholder="Variable name..."
@@ -285,43 +984,50 @@ exports[`<GridQuestion /> Should render and match the snapshot 1`] = `
                         width="49px"
                       />
                     </div>
-                    <textarea
-                      class="TextArea-sc-175uiux-0 hDDZSW"
-                      cursor="pointer"
-                      data-cy="text-area"
-                      height="auto"
-                      placeholder="Row 2..."
-                      rows="2"
-                      type="multiline"
-                      width="300"
+                    <div
+                      class="c31"
+                      display="flex"
+                      width="100%"
                     >
-                      test-row-2
-                    </textarea>
+                      <textarea
+                        aria-label="Row 2..."
+                        class="c32"
+                        cursor="pointer"
+                        data-cy="text-area"
+                        height="auto"
+                        placeholder="Row 2..."
+                        rows="2"
+                        type="multiline"
+                        width="300"
+                      >
+                        test-row-2
+                      </textarea>
+                    </div>
                   </div>
                 </div>
               </th>
               <td
-                class="TD-y7762g-0 gxeveZ"
+                class=""
                 height="inherit"
               >
                 <div
-                  class="Row-y1cs0u-0 jawZan"
+                  class="c33"
                 >
                   <img
-                    class="Img-sc-55j3su-0 cDhXoN"
+                    class="c6"
                     src="IMAGE_MOCK"
                   />
                 </div>
               </td>
               <td
-                class="TD-y7762g-0 gxeveZ"
+                class=""
                 height="inherit"
               >
                 <div
-                  class="Row-y1cs0u-0 jawZan"
+                  class="c33"
                 >
                   <img
-                    class="Img-sc-55j3su-0 cDhXoN"
+                    class="c6"
                     src="IMAGE_MOCK"
                   />
                 </div>
@@ -333,30 +1039,30 @@ exports[`<GridQuestion /> Should render and match the snapshot 1`] = `
     </div>
   </div>
   <div
-    class="Row-y1cs0u-0 jRfBok"
+    class="c34"
   >
     <div
-      class="Box-sc-1vhutan-0 HoverableBox-zvip6a-0 jPrgTs"
+      class="c35"
     >
       <div
-        class="Box-sc-1vhutan-0 dvfkZg"
+        class="c3"
       >
         <div
-          class="Row-y1cs0u-0 OKGLA"
+          class="c36"
           display="flex"
         >
           <div
-            class="StyledCircle-sc-1dov7hv-0 jkyOQV"
+            class="c5"
             color="#FFFFFF"
             opacity="1"
           >
             <img
-              class="Img-sc-55j3su-0 cDhXoN"
+              class="c6"
               src="IMAGE_MOCK"
             />
           </div>
           <p
-            class="Text-e4p0w3-0 cFbubw"
+            class="c7"
             color="#B727EA"
             font-weight="bold"
           >

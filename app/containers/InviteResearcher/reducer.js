@@ -34,7 +34,7 @@ export const initialState = {
 
 /* eslint-disable default-case, no-param-reassign */
 const inviteResearcherReducer = (state = initialState, { type, payload }) =>
-  produce(state, draft => {
+  produce(state, (draft) => {
     switch (type) {
       case INVITE_RESEARCHER_REQUEST:
         draft.invite.loading = true;

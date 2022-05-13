@@ -23,9 +23,10 @@ const CsvButtons = ({
   csvLink,
   userRoles,
 }) => {
-  const rolePermissions = useMemo(() => RolePermissions(userRoles), [
-    userRoles,
-  ]);
+  const rolePermissions = useMemo(
+    () => RolePermissions(userRoles),
+    [userRoles],
+  );
 
   const CsvDownload = () => (
     <FileDownload url={urlToDownload}>

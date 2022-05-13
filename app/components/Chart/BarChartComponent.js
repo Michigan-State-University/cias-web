@@ -52,26 +52,18 @@ const BarChartComponent = ({
   // Why that way? ResponsiveContainer needs `ref` ->
   // in function it won't work and extracting it to other component
   // with `forwardRef` is more clumsy in my opinion in that situation
-  const ChartComponent = useMemo(() => (trendLine ? ComposedChart : BarChart), [
-    trendLine,
-  ]);
+  const ChartComponent = useMemo(
+    () => (trendLine ? ComposedChart : BarChart),
+    [trendLine],
+  );
 
   const trendLineColor = useMemo(
-    () =>
-      trendLine &&
-      Color(fill)
-        .saturate(0.75)
-        .lighten(0.15)
-        .hex(),
+    () => trendLine && Color(fill).saturate(0.75).lighten(0.15).hex(),
     [fill, trendLine],
   );
 
   const stackDataKeyColor = useMemo(
-    () =>
-      stackDataKey &&
-      Color(fill)
-        .lighten(0.5)
-        .hex(),
+    () => stackDataKey && Color(fill).lighten(0.5).hex(),
     [fill, stackDataKey],
   );
 

@@ -1,28 +1,684 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`<UserList /> Should render and match the snapshot - admin 1`] = `
+.c0 {
+  width: auto;
+  height: auto;
+  display: block;
+  border-radius: 5px;
+  height: 100%;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  overflow: scroll;
+  -webkit-box-pack: center;
+  -webkit-justify-content: center;
+  -ms-flex-pack: center;
+  justify-content: center;
+  justify-items: center;
+}
+
+.c1 {
+  width: auto;
+  height: auto;
+  display: block;
+  border-radius: 5px;
+  width: 100%;
+  padding-right: 10%;
+  padding-left: 10%;
+  margin-top: 64px;
+}
+
+.c2 {
+  width: auto;
+  height: auto;
+  display: block;
+  border-radius: 5px;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  margin-bottom: 30px;
+}
+
+.c5 {
+  width: auto;
+  height: auto;
+  display: block;
+  border-radius: 5px;
+  width: -webkit-max-content;
+  width: -moz-max-content;
+  width: max-content;
+  display: -webkit-inline-box;
+  display: -webkit-inline-flex;
+  display: -ms-inline-flexbox;
+  display: inline-flex;
+  padding-top: 5px;
+  padding-bottom: 5px;
+  padding-right: 10px;
+  padding-left: 10px;
+  background-color: rgba(35,183,160,1);
+  cursor: pointer;
+  -webkit-box-pack: center;
+  -webkit-justify-content: center;
+  -ms-flex-pack: center;
+  justify-content: center;
+  justify-items: center;
+  -webkit-align-content: center;
+  -ms-flex-line-pack: center;
+  align-content: center;
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+}
+
+.c7 {
+  width: auto;
+  height: auto;
+  display: block;
+  border-radius: 5px;
+  width: -webkit-max-content;
+  width: -moz-max-content;
+  width: max-content;
+  display: -webkit-inline-box;
+  display: -webkit-inline-flex;
+  display: -ms-inline-flexbox;
+  display: inline-flex;
+  padding-top: 5px;
+  padding-bottom: 5px;
+  padding-right: 10px;
+  padding-left: 10px;
+  background-color: rgba(255,118,145,1);
+  cursor: pointer;
+  -webkit-box-pack: center;
+  -webkit-justify-content: center;
+  -ms-flex-pack: center;
+  justify-content: center;
+  justify-items: center;
+  -webkit-align-content: center;
+  -ms-flex-line-pack: center;
+  align-content: center;
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+}
+
+.c8 {
+  width: auto;
+  height: auto;
+  display: block;
+  border-radius: 5px;
+  width: -webkit-max-content;
+  width: -moz-max-content;
+  width: max-content;
+  display: -webkit-inline-box;
+  display: -webkit-inline-flex;
+  display: -ms-inline-flexbox;
+  display: inline-flex;
+  padding-top: 5px;
+  padding-bottom: 5px;
+  padding-right: 10px;
+  padding-left: 10px;
+  background-color: rgba(0,0,128,1);
+  cursor: pointer;
+  -webkit-box-pack: center;
+  -webkit-justify-content: center;
+  -ms-flex-pack: center;
+  justify-content: center;
+  justify-items: center;
+  -webkit-align-content: center;
+  -ms-flex-line-pack: center;
+  align-content: center;
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+}
+
+.c9 {
+  width: auto;
+  height: auto;
+  display: block;
+  border-radius: 5px;
+  width: -webkit-max-content;
+  width: -moz-max-content;
+  width: max-content;
+  display: -webkit-inline-box;
+  display: -webkit-inline-flex;
+  display: -ms-inline-flexbox;
+  display: inline-flex;
+  padding-top: 5px;
+  padding-bottom: 5px;
+  padding-right: 10px;
+  padding-left: 10px;
+  background-color: rgba(128,128,0,1);
+  cursor: pointer;
+  -webkit-box-pack: center;
+  -webkit-justify-content: center;
+  -ms-flex-pack: center;
+  justify-content: center;
+  justify-items: center;
+  -webkit-align-content: center;
+  -ms-flex-line-pack: center;
+  align-content: center;
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+}
+
+.c10 {
+  width: auto;
+  height: auto;
+  display: block;
+  border-radius: 5px;
+  width: -webkit-max-content;
+  width: -moz-max-content;
+  width: max-content;
+  display: -webkit-inline-box;
+  display: -webkit-inline-flex;
+  display: -ms-inline-flexbox;
+  display: inline-flex;
+  padding-top: 5px;
+  padding-bottom: 5px;
+  padding-right: 10px;
+  padding-left: 10px;
+  background-color: rgba(16,121,105,1);
+  cursor: pointer;
+  -webkit-box-pack: center;
+  -webkit-justify-content: center;
+  -ms-flex-pack: center;
+  justify-content: center;
+  justify-items: center;
+  -webkit-align-content: center;
+  -ms-flex-line-pack: center;
+  align-content: center;
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+}
+
+.c11 {
+  width: auto;
+  height: auto;
+  display: block;
+  border-radius: 5px;
+  width: 25px;
+}
+
+.c31 {
+  width: auto;
+  height: auto;
+  display: block;
+  border-radius: 5px;
+  width: -webkit-max-content;
+  width: -moz-max-content;
+  width: max-content;
+  display: -webkit-inline-box;
+  display: -webkit-inline-flex;
+  display: -ms-inline-flexbox;
+  display: inline-flex;
+  padding-top: 5px;
+  padding-bottom: 5px;
+  padding-right: 10px;
+  padding-left: 10px;
+  background-color: rgba(35,183,160,1);
+  -webkit-box-pack: center;
+  -webkit-justify-content: center;
+  -ms-flex-pack: center;
+  justify-content: center;
+  justify-items: center;
+  -webkit-align-content: center;
+  -ms-flex-line-pack: center;
+  align-content: center;
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+}
+
+.c35 {
+  width: auto;
+  height: auto;
+  display: block;
+  border-radius: 5px;
+  width: -webkit-max-content;
+  width: -moz-max-content;
+  width: max-content;
+  display: -webkit-inline-box;
+  display: -webkit-inline-flex;
+  display: -ms-inline-flexbox;
+  display: inline-flex;
+  padding-top: 5px;
+  padding-bottom: 5px;
+  padding-right: 10px;
+  padding-left: 10px;
+  background-color: rgba(255,118,145,1);
+  -webkit-box-pack: center;
+  -webkit-justify-content: center;
+  -ms-flex-pack: center;
+  justify-content: center;
+  justify-items: center;
+  -webkit-align-content: center;
+  -ms-flex-line-pack: center;
+  align-content: center;
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+}
+
+.c36 {
+  width: auto;
+  height: auto;
+  display: block;
+  border-radius: 5px;
+  width: -webkit-max-content;
+  width: -moz-max-content;
+  width: max-content;
+  display: -webkit-inline-box;
+  display: -webkit-inline-flex;
+  display: -ms-inline-flexbox;
+  display: inline-flex;
+  padding-top: 5px;
+  padding-bottom: 5px;
+  padding-right: 10px;
+  padding-left: 10px;
+  background-color: rgba(194,178,0,1);
+  -webkit-box-pack: center;
+  -webkit-justify-content: center;
+  -ms-flex-pack: center;
+  justify-content: center;
+  justify-items: center;
+  -webkit-align-content: center;
+  -ms-flex-line-pack: center;
+  align-content: center;
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+}
+
+.c38 {
+  width: auto;
+  height: auto;
+  display: block;
+  border-radius: 5px;
+  min-width: 25px;
+  min-height: 25px;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  padding-right: 10px;
+  padding-left: 10px;
+  margin-right: 10px;
+  margin-left: 10px;
+  background-color: rgba(183,39,234,1);
+  cursor: pointer;
+  border-radius: 5px;
+  border-radius: 5px;
+  -webkit-align-content: center;
+  -ms-flex-line-pack: center;
+  align-content: center;
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+}
+
+.c12 {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-flex-direction: row;
+  -ms-flex-direction: row;
+  flex-direction: row;
+  height: auto;
+  -webkit-box-pack: justify;
+  -webkit-justify-content: space-between;
+  -ms-flex-pack: justify;
+  justify-content: space-between;
+  justify-items: space-between;
+  -webkit-align-content: center;
+  -ms-flex-line-pack: center;
+  align-content: center;
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+}
+
+.c32 {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-flex-direction: row;
+  -ms-flex-direction: row;
+  flex-direction: row;
+  height: auto;
+  -webkit-box-pack: start;
+  -webkit-justify-content: flex-start;
+  -ms-flex-pack: start;
+  justify-content: flex-start;
+  justify-items: flex-start;
+  padding-right: 20px;
+  width: 100%;
+}
+
+.c37 {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-flex-direction: row;
+  -ms-flex-direction: row;
+  flex-direction: row;
+  height: auto;
+  -webkit-box-pack: center;
+  -webkit-justify-content: center;
+  -ms-flex-pack: center;
+  justify-content: center;
+  justify-items: center;
+  margin-bottom: 20px;
+  width: 100%;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+}
+
+.c14 {
+  display: none;
+}
+
+.c18 {
+  margin-right: 5px;
+}
+
+.c13:disabled + label > .c17 {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.c16 {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  width: -webkit-max-content;
+  width: -moz-max-content;
+  width: max-content;
+}
+
+.c16:hover {
+  cursor: pointer;
+}
+
+.c13:disabled + .c15 {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.c6 {
+  font-family: DM Sans;
+  font-size: 13px;
+  line-height: 130%;
+  font-size: 14px;
+  font-weight: 700;
+  color: rgba(255,255,255,1);
+  color: rgba(255,255,255,1);
+}
+
+.c30 {
+  font-family: DM Sans;
+  font-size: 13px;
+  line-height: 130%;
+  color: rgba(210,55,29,1);
+  color: rgba(210,55,29,1);
+}
+
+.c34 {
+  font-family: DM Sans;
+  font-size: 13px;
+  line-height: 130%;
+  font-weight: 700;
+  color: rgba(210,55,29,1);
+  color: rgba(210,55,29,1);
+}
+
+.c39 {
+  font-family: DM Sans;
+  font-size: 13px;
+  line-height: 130%;
+  color: rgba(255,255,255,1);
+  color: rgba(255,255,255,1);
+}
+
+.c27 {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-flex-direction: column;
+  -ms-flex-direction: column;
+  flex-direction: column;
+  width: 100%;
+  -webkit-align-content: flex-start;
+  -ms-flex-line-pack: start;
+  align-content: flex-start;
+  -webkit-align-items: flex-start;
+  -webkit-box-align: flex-start;
+  -ms-flex-align: flex-start;
+  align-items: flex-start;
+  padding-left: 20px;
+}
+
+.c3 {
+  margin: 0;
+  font-family: DM Sans;
+  font-size: 25px;
+  line-height: 130%;
+  margin-right: 10px;
+  color: #2F3850;
+}
+
+.c40 {
+  margin: 0;
+  font-family: DM Sans;
+  font-size: 25px;
+  line-height: 130%;
+  color: #2F3850;
+  cursor: pointer;
+}
+
+.c20 {
+  padding: 12px;
+  border-style: solid;
+  border-width: 1px;
+  border-color: #E9F1FB;
+  border-radius: 5px;
+  padding-right: 30px;
+  padding-left: 30px;
+  color: #2F3850;
+}
+
+.c20:focus {
+  box-shadow: none;
+  outline: none;
+  border-color: #107969;
+}
+
+.c20:disabled {
+  color: #ABBBD1;
+}
+
+.c19 {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  position: relative;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+}
+
+.c21 {
+  position: absolute;
+  left: 10px;
+  top: 10px;
+}
+
+.c4 {
+  outline: none;
+  border: none;
+  background: transparent;
+  font-weight: bold;
+  font-size: 13px;
+  line-height: 17px;
+  padding: 2px;
+  cursor: pointer;
+  font-weight: 700;
+  color: rgba(183,39,234,1);
+}
+
+.c33 {
+  outline: none;
+  border: none;
+  background: transparent;
+  font-weight: bold;
+  font-size: 13px;
+  line-height: 17px;
+  padding: 2px;
+  cursor: pointer;
+  color: #2F3850;
+  text-align: start;
+}
+
+.c23 {
+  font-size: 13px;
+  width: 100%;
+  margin-bottom: 20px;
+  box-shadow: 0px 4px 20px #E3EEFB;
+}
+
+.c23 tr,
+.c23 th,
+.c23 td {
+  font-weight: 400;
+}
+
+.c24 {
+  height: 47.5px;
+}
+
+.c25 {
+  cursor: default;
+  color: #0E0E0E;
+}
+
+.c25 td:nth-last-child(-n + ) {
+  opacity: 100%;
+}
+
+.c25:hover {
+  background: !important;
+}
+
+.c25:hover td:hover {
+  opacity: 100%;
+}
+
+.c28 {
+  cursor: pointer;
+  color: #0E0E0E;
+}
+
+.c28 td:nth-last-child(-n + 1) {
+  opacity: 0;
+}
+
+.c28:hover {
+  background: #E9F1FB !important;
+}
+
+.c28:hover td:hover {
+  opacity: 100%;
+}
+
+.c29 {
+  padding-left: 20px;
+}
+
+.c26 {
+  width: auto;
+  background-color: rgba(255,255,255,1);
+  color: rgba(47,56,80,1);
+  opacity: 0.6;
+}
+
+.c22 {
+  position: relative;
+}
+
+@media only screen and (min-width:768px) {
+
+}
+
+@media only screen and (min-width:960px) {
+
+}
+
+@media only screen and (min-width:1170px) {
+
+}
+
+@media only screen and (min-width:1360px) {
+
+}
+
 <div>
   <div
-    class="Box-sc-1vhutan-0 bOwlot"
+    class="c0"
     display="flex"
     height="100%"
     overflow="scroll"
   >
     <div
-      class="Box-sc-1vhutan-0 cDJCJC"
+      class="c1"
       width="100%"
     >
       <div
-        class="Box-sc-1vhutan-0 erkpdS"
+        class="c2"
         display="flex"
       >
         <h1
-          class="H1-sc-1k7m23t-0 hNcBIZ"
+          class="c3"
         >
           Manage accounts
         </h1>
         <button
-          class="StyledTextButton-sc-1b7egxw-0 hXDmcc"
+          class="c4"
           color="#B727EA"
           font-weight="bold"
         >
@@ -46,12 +702,12 @@ exports[`<UserList /> Should render and match the snapshot - admin 1`] = `
                   style="box-sizing: border-box; min-height: 1px; position: relative; padding-left: 15px; padding-right: 15px; width: auto; flex-basis: auto; flex-grow: 0; flex-shrink: 0; max-width: 100%; margin-left: 0%; margin-bottom: 10px;"
                 >
                   <div
-                    class="Box-sc-1vhutan-0 iqNDFB"
+                    class="c5"
                     display="inline-flex"
                     width="max-content"
                   >
                     <p
-                      class="Text-e4p0w3-0 eAccFX"
+                      class="c6"
                       color="#FFFFFF"
                       font-size="14"
                       font-weight="bold"
@@ -64,12 +720,12 @@ exports[`<UserList /> Should render and match the snapshot - admin 1`] = `
                   style="box-sizing: border-box; min-height: 1px; position: relative; padding-left: 15px; padding-right: 15px; width: auto; flex-basis: auto; flex-grow: 0; flex-shrink: 0; max-width: 100%; margin-left: 0%; margin-bottom: 10px;"
                 >
                   <div
-                    class="Box-sc-1vhutan-0 gZjjZA"
+                    class="c7"
                     display="inline-flex"
                     width="max-content"
                   >
                     <p
-                      class="Text-e4p0w3-0 eAccFX"
+                      class="c6"
                       color="#FFFFFF"
                       font-size="14"
                       font-weight="bold"
@@ -82,12 +738,12 @@ exports[`<UserList /> Should render and match the snapshot - admin 1`] = `
                   style="box-sizing: border-box; min-height: 1px; position: relative; padding-left: 15px; padding-right: 15px; width: auto; flex-basis: auto; flex-grow: 0; flex-shrink: 0; max-width: 100%; margin-left: 0%; margin-bottom: 10px;"
                 >
                   <div
-                    class="Box-sc-1vhutan-0 kdPfXJ"
+                    class="c8"
                     display="inline-flex"
                     width="max-content"
                   >
                     <p
-                      class="Text-e4p0w3-0 eAccFX"
+                      class="c6"
                       color="#FFFFFF"
                       font-size="14"
                       font-weight="bold"
@@ -100,12 +756,12 @@ exports[`<UserList /> Should render and match the snapshot - admin 1`] = `
                   style="box-sizing: border-box; min-height: 1px; position: relative; padding-left: 15px; padding-right: 15px; width: auto; flex-basis: auto; flex-grow: 0; flex-shrink: 0; max-width: 100%; margin-left: 0%; margin-bottom: 10px;"
                 >
                   <div
-                    class="Box-sc-1vhutan-0 hDkbeS"
+                    class="c9"
                     display="inline-flex"
                     width="max-content"
                   >
                     <p
-                      class="Text-e4p0w3-0 eAccFX"
+                      class="c6"
                       color="#FFFFFF"
                       font-size="14"
                       font-weight="bold"
@@ -118,12 +774,12 @@ exports[`<UserList /> Should render and match the snapshot - admin 1`] = `
                   style="box-sizing: border-box; min-height: 1px; position: relative; padding-left: 15px; padding-right: 15px; width: auto; flex-basis: auto; flex-grow: 0; flex-shrink: 0; max-width: 100%; margin-left: 0%; margin-bottom: 10px;"
                 >
                   <div
-                    class="Box-sc-1vhutan-0 gGlmVX"
+                    class="c10"
                     display="inline-flex"
                     width="max-content"
                   >
                     <p
-                      class="Text-e4p0w3-0 eAccFX"
+                      class="c6"
                       color="#FFFFFF"
                       font-size="14"
                       font-weight="bold"
@@ -133,21 +789,30 @@ exports[`<UserList /> Should render and match the snapshot - admin 1`] = `
                   </div>
                 </div>
                 <div
-                  class="Box-sc-1vhutan-0 kNvWbw"
+                  class="c11"
                   width="25"
                 />
                 <div
                   style="box-sizing: border-box; min-height: 1px; position: relative; padding-left: 15px; padding-right: 15px; width: 33.333333333333336%; flex-basis: 33.333333333333336%; flex-grow: 0; flex-shrink: 0; max-width: 33.333333333333336%; margin-left: 0%; margin-bottom: 10px;"
                 >
                   <div
-                    class="Box-sc-1vhutan-0 cVwTmA"
-                    cursor="pointer"
-                    display="inline-flex"
+                    class="c12"
                   >
-                    <img
-                      src="IMAGE_MOCK"
+                    <input
+                      class="c13 c14"
+                      id="show-inactive"
+                      type="checkbox"
                     />
-                    Show inactive accounts
+                    <label
+                      class="c15 c16"
+                      for="show-inactive"
+                    >
+                      <img
+                        class="c17 c18"
+                        src="IMAGE_MOCK"
+                      />
+                      Show inactive accounts
+                    </label>
                   </div>
                 </div>
               </div>
@@ -156,15 +821,17 @@ exports[`<UserList /> Should render and match the snapshot - admin 1`] = `
               style="box-sizing: border-box; min-height: 1px; position: relative; padding-left: 15px; padding-right: 15px; width: 100%; flex-basis: 100%; flex-grow: 0; flex-shrink: 0; max-width: 100%; margin-left: 0%; margin-bottom: 10px;"
             >
               <div
-                class="styled__SearchInputStyled-sc-10udg63-3 gFHxDg"
+                class="c19"
               >
                 <input
-                  class="Input-t9j2q5-0 hjYQaq"
+                  aria-label="Filter users by name"
+                  class="c20"
+                  placeholder="Filter users by name"
                   type="text"
                 />
                 <img
                   alt="search"
-                  class="styled__SearchIcon-sc-10udg63-4 VQGbD"
+                  class="c21"
                   src="IMAGE_MOCK"
                 />
                 
@@ -179,66 +846,66 @@ exports[`<UserList /> Should render and match the snapshot - admin 1`] = `
           data-private="true"
         >
           <div
-            class="styled__TableLoadingContainer-skadoa-0 hSHnNK"
+            class="c22"
           >
             <table
-              class="Table-sc-1y0iqmn-0 hyqcGV"
+              class="c23"
               width="100%"
             >
               <thead
-                class="THead-sc-8drp5d-0"
+                class=""
               >
                 <tr
-                  class="TR-sc-1omngt7-0 StripedTR-sc-1wcdkgr-0 iNrQaF gkGuNS"
+                  class="c24 c25"
                 >
                   <th
-                    class="TH-sc-1w7ae0i-0 dcMBuC"
+                    class="c26"
                     color="#2F3850"
                     opacity="0.6"
                     scope="col"
                     width="auto"
                   >
                     <div
-                      class="Column-sc-4zswzq-0 gzLnhc"
+                      class="c27"
                     >
                       Name
                     </div>
                   </th>
                   <th
-                    class="TH-sc-1w7ae0i-0 dcMBuC"
+                    class="c26"
                     color="#2F3850"
                     opacity="0.6"
                     scope="col"
                     width="auto"
                   >
                     <div
-                      class="Column-sc-4zswzq-0 gzLnhc"
+                      class="c27"
                     >
                       Email
                     </div>
                   </th>
                   <th
-                    class="TH-sc-1w7ae0i-0 dcMBuC"
+                    class="c26"
                     color="#2F3850"
                     opacity="0.6"
                     scope="col"
                     width="auto"
                   >
                     <div
-                      class="Column-sc-4zswzq-0 gzLnhc"
+                      class="c27"
                     >
                       Role
                     </div>
                   </th>
                   <th
-                    class="TH-sc-1w7ae0i-0 dcMBuC"
+                    class="c26"
                     color="#2F3850"
                     opacity="0.6"
                     scope="col"
                     width="auto"
                   >
                     <div
-                      class="Column-sc-4zswzq-0 gzLnhc"
+                      class="c27"
                     >
                       Activate/Deactivate
                     </div>
@@ -246,38 +913,38 @@ exports[`<UserList /> Should render and match the snapshot - admin 1`] = `
                 </tr>
               </thead>
               <tbody
-                class="TBody-gqq9cv-0"
+                class=""
               >
                 <tr
-                  class="TR-sc-1omngt7-0 StripedTR-sc-1wcdkgr-0 iNrQaF krcRax"
+                  class="c24 c28"
                   color="#FFFFFF"
                   cursor="pointer"
                 >
                   <td
-                    class="TD-y7762g-0 cXNZQh"
+                    class="c29"
                   >
                     <p
-                      class="Text-e4p0w3-0 eFoKic"
+                      class="c30"
                       color="#D2371D"
                     >
                       Waiting for activation
                     </p>
                   </td>
                   <td
-                    class="TD-y7762g-0 cXNZQh"
+                    class="c29"
                   >
                     test@test.pl
                   </td>
                   <td
-                    class="TD-y7762g-0 cXNZQh"
+                    class="c29"
                   >
                     <div
-                      class="Box-sc-1vhutan-0 bUeKCS"
+                      class="c31"
                       display="inline-flex"
                       width="max-content"
                     >
                       <p
-                        class="Text-e4p0w3-0 eAccFX"
+                        class="c6"
                         color="#FFFFFF"
                         font-size="14"
                         font-weight="bold"
@@ -287,17 +954,17 @@ exports[`<UserList /> Should render and match the snapshot - admin 1`] = `
                     </div>
                   </td>
                   <td
-                    class="TD-y7762g-0 cXNZQh"
+                    class="c29"
                   >
                     <div
-                      class="Row-y1cs0u-0 ggPJew"
+                      class="c32"
                       width="100%"
                     >
                       <button
-                        class="StyledTextButton-sc-1b7egxw-0 itdyYG"
+                        class="c33"
                       >
                         <p
-                          class="Text-e4p0w3-0 gYitek"
+                          class="c34"
                           color="#D2371D"
                           font-weight="bold"
                         >
@@ -308,35 +975,35 @@ exports[`<UserList /> Should render and match the snapshot - admin 1`] = `
                   </td>
                 </tr>
                 <tr
-                  class="TR-sc-1omngt7-0 StripedTR-sc-1wcdkgr-0 iNrQaF krcRax"
+                  class="c24 c28"
                   color="#FFFFFF"
                   cursor="pointer"
                 >
                   <td
-                    class="TD-y7762g-0 cXNZQh"
+                    class="c29"
                   >
                     <p
-                      class="Text-e4p0w3-0 eFoKic"
+                      class="c30"
                       color="#D2371D"
                     >
                       Waiting for activation
                     </p>
                   </td>
                   <td
-                    class="TD-y7762g-0 cXNZQh"
+                    class="c29"
                   >
                     test2@test.pl
                   </td>
                   <td
-                    class="TD-y7762g-0 cXNZQh"
+                    class="c29"
                   >
                     <div
-                      class="Box-sc-1vhutan-0 jSbkvP"
+                      class="c35"
                       display="inline-flex"
                       width="max-content"
                     >
                       <p
-                        class="Text-e4p0w3-0 eAccFX"
+                        class="c6"
                         color="#FFFFFF"
                         font-size="14"
                         font-weight="bold"
@@ -346,17 +1013,17 @@ exports[`<UserList /> Should render and match the snapshot - admin 1`] = `
                     </div>
                   </td>
                   <td
-                    class="TD-y7762g-0 cXNZQh"
+                    class="c29"
                   >
                     <div
-                      class="Row-y1cs0u-0 ggPJew"
+                      class="c32"
                       width="100%"
                     >
                       <button
-                        class="StyledTextButton-sc-1b7egxw-0 itdyYG"
+                        class="c33"
                       >
                         <p
-                          class="Text-e4p0w3-0 gYitek"
+                          class="c34"
                           color="#D2371D"
                           font-weight="bold"
                         >
@@ -367,35 +1034,35 @@ exports[`<UserList /> Should render and match the snapshot - admin 1`] = `
                   </td>
                 </tr>
                 <tr
-                  class="TR-sc-1omngt7-0 StripedTR-sc-1wcdkgr-0 iNrQaF krcRax"
+                  class="c24 c28"
                   color="#FFFFFF"
                   cursor="pointer"
                 >
                   <td
-                    class="TD-y7762g-0 cXNZQh"
+                    class="c29"
                   >
                     <p
-                      class="Text-e4p0w3-0 eFoKic"
+                      class="c30"
                       color="#D2371D"
                     >
                       Waiting for activation
                     </p>
                   </td>
                   <td
-                    class="TD-y7762g-0 cXNZQh"
+                    class="c29"
                   >
                     test3@test.pl
                   </td>
                   <td
-                    class="TD-y7762g-0 cXNZQh"
+                    class="c29"
                   >
                     <div
-                      class="Box-sc-1vhutan-0 iwPbyv"
+                      class="c36"
                       display="inline-flex"
                       width="max-content"
                     >
                       <p
-                        class="Text-e4p0w3-0 eAccFX"
+                        class="c6"
                         color="#FFFFFF"
                         font-size="14"
                         font-weight="bold"
@@ -405,17 +1072,17 @@ exports[`<UserList /> Should render and match the snapshot - admin 1`] = `
                     </div>
                   </td>
                   <td
-                    class="TD-y7762g-0 cXNZQh"
+                    class="c29"
                   >
                     <div
-                      class="Row-y1cs0u-0 ggPJew"
+                      class="c32"
                       width="100%"
                     >
                       <button
-                        class="StyledTextButton-sc-1b7egxw-0 itdyYG"
+                        class="c33"
                       >
                         <p
-                          class="Text-e4p0w3-0 gYitek"
+                          class="c34"
                           color="#D2371D"
                           font-weight="bold"
                         >
@@ -431,7 +1098,7 @@ exports[`<UserList /> Should render and match the snapshot - admin 1`] = `
         </div>
         <div
           aria-label="Data list pagination"
-          class="Row-y1cs0u-0 cAHLWQ"
+          class="c37"
           display="flex"
           role="navigation"
           width="100%"
@@ -439,12 +1106,12 @@ exports[`<UserList /> Should render and match the snapshot - admin 1`] = `
           <div
             aria-label="Go to page: 1"
             aria-selected="true"
-            class="Box-sc-1vhutan-0 jvUOui"
+            class="c38"
             cursor="pointer"
             display="flex"
           >
             <p
-              class="Text-e4p0w3-0 eRNSEk"
+              class="c39"
               color="#FFFFFF"
             >
               1
@@ -452,7 +1119,7 @@ exports[`<UserList /> Should render and match the snapshot - admin 1`] = `
           </div>
           <h1
             aria-label="Go to next page"
-            class="H1-sc-1k7m23t-0 fRhEzm"
+            class="c40"
             cursor="pointer"
           >
             &gt;
@@ -465,23 +1132,666 @@ exports[`<UserList /> Should render and match the snapshot - admin 1`] = `
 `;
 
 exports[`<UserList /> Should render and match the snapshot - researcher 1`] = `
+.c0 {
+  width: auto;
+  height: auto;
+  display: block;
+  border-radius: 5px;
+  height: 100%;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  overflow: scroll;
+  -webkit-box-pack: center;
+  -webkit-justify-content: center;
+  -ms-flex-pack: center;
+  justify-content: center;
+  justify-items: center;
+}
+
+.c1 {
+  width: auto;
+  height: auto;
+  display: block;
+  border-radius: 5px;
+  width: 100%;
+  padding-right: 10%;
+  padding-left: 10%;
+  margin-top: 64px;
+}
+
+.c2 {
+  width: auto;
+  height: auto;
+  display: block;
+  border-radius: 5px;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  margin-bottom: 30px;
+}
+
+.c4 {
+  width: auto;
+  height: auto;
+  display: block;
+  border-radius: 5px;
+  width: -webkit-max-content;
+  width: -moz-max-content;
+  width: max-content;
+  display: -webkit-inline-box;
+  display: -webkit-inline-flex;
+  display: -ms-inline-flexbox;
+  display: inline-flex;
+  padding-top: 5px;
+  padding-bottom: 5px;
+  padding-right: 10px;
+  padding-left: 10px;
+  background-color: rgba(35,183,160,1);
+  cursor: pointer;
+  -webkit-box-pack: center;
+  -webkit-justify-content: center;
+  -ms-flex-pack: center;
+  justify-content: center;
+  justify-items: center;
+  -webkit-align-content: center;
+  -ms-flex-line-pack: center;
+  align-content: center;
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+}
+
+.c6 {
+  width: auto;
+  height: auto;
+  display: block;
+  border-radius: 5px;
+  width: -webkit-max-content;
+  width: -moz-max-content;
+  width: max-content;
+  display: -webkit-inline-box;
+  display: -webkit-inline-flex;
+  display: -ms-inline-flexbox;
+  display: inline-flex;
+  padding-top: 5px;
+  padding-bottom: 5px;
+  padding-right: 10px;
+  padding-left: 10px;
+  background-color: rgba(255,118,145,1);
+  cursor: pointer;
+  -webkit-box-pack: center;
+  -webkit-justify-content: center;
+  -ms-flex-pack: center;
+  justify-content: center;
+  justify-items: center;
+  -webkit-align-content: center;
+  -ms-flex-line-pack: center;
+  align-content: center;
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+}
+
+.c7 {
+  width: auto;
+  height: auto;
+  display: block;
+  border-radius: 5px;
+  width: -webkit-max-content;
+  width: -moz-max-content;
+  width: max-content;
+  display: -webkit-inline-box;
+  display: -webkit-inline-flex;
+  display: -ms-inline-flexbox;
+  display: inline-flex;
+  padding-top: 5px;
+  padding-bottom: 5px;
+  padding-right: 10px;
+  padding-left: 10px;
+  background-color: rgba(0,0,128,1);
+  cursor: pointer;
+  -webkit-box-pack: center;
+  -webkit-justify-content: center;
+  -ms-flex-pack: center;
+  justify-content: center;
+  justify-items: center;
+  -webkit-align-content: center;
+  -ms-flex-line-pack: center;
+  align-content: center;
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+}
+
+.c8 {
+  width: auto;
+  height: auto;
+  display: block;
+  border-radius: 5px;
+  width: -webkit-max-content;
+  width: -moz-max-content;
+  width: max-content;
+  display: -webkit-inline-box;
+  display: -webkit-inline-flex;
+  display: -ms-inline-flexbox;
+  display: inline-flex;
+  padding-top: 5px;
+  padding-bottom: 5px;
+  padding-right: 10px;
+  padding-left: 10px;
+  background-color: rgba(128,128,0,1);
+  cursor: pointer;
+  -webkit-box-pack: center;
+  -webkit-justify-content: center;
+  -ms-flex-pack: center;
+  justify-content: center;
+  justify-items: center;
+  -webkit-align-content: center;
+  -ms-flex-line-pack: center;
+  align-content: center;
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+}
+
+.c9 {
+  width: auto;
+  height: auto;
+  display: block;
+  border-radius: 5px;
+  width: -webkit-max-content;
+  width: -moz-max-content;
+  width: max-content;
+  display: -webkit-inline-box;
+  display: -webkit-inline-flex;
+  display: -ms-inline-flexbox;
+  display: inline-flex;
+  padding-top: 5px;
+  padding-bottom: 5px;
+  padding-right: 10px;
+  padding-left: 10px;
+  background-color: rgba(16,121,105,1);
+  cursor: pointer;
+  -webkit-box-pack: center;
+  -webkit-justify-content: center;
+  -ms-flex-pack: center;
+  justify-content: center;
+  justify-items: center;
+  -webkit-align-content: center;
+  -ms-flex-line-pack: center;
+  align-content: center;
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+}
+
+.c10 {
+  width: auto;
+  height: auto;
+  display: block;
+  border-radius: 5px;
+  width: 25px;
+}
+
+.c30 {
+  width: auto;
+  height: auto;
+  display: block;
+  border-radius: 5px;
+  width: -webkit-max-content;
+  width: -moz-max-content;
+  width: max-content;
+  display: -webkit-inline-box;
+  display: -webkit-inline-flex;
+  display: -ms-inline-flexbox;
+  display: inline-flex;
+  padding-top: 5px;
+  padding-bottom: 5px;
+  padding-right: 10px;
+  padding-left: 10px;
+  background-color: rgba(35,183,160,1);
+  -webkit-box-pack: center;
+  -webkit-justify-content: center;
+  -ms-flex-pack: center;
+  justify-content: center;
+  justify-items: center;
+  -webkit-align-content: center;
+  -ms-flex-line-pack: center;
+  align-content: center;
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+}
+
+.c34 {
+  width: auto;
+  height: auto;
+  display: block;
+  border-radius: 5px;
+  width: -webkit-max-content;
+  width: -moz-max-content;
+  width: max-content;
+  display: -webkit-inline-box;
+  display: -webkit-inline-flex;
+  display: -ms-inline-flexbox;
+  display: inline-flex;
+  padding-top: 5px;
+  padding-bottom: 5px;
+  padding-right: 10px;
+  padding-left: 10px;
+  background-color: rgba(255,118,145,1);
+  -webkit-box-pack: center;
+  -webkit-justify-content: center;
+  -ms-flex-pack: center;
+  justify-content: center;
+  justify-items: center;
+  -webkit-align-content: center;
+  -ms-flex-line-pack: center;
+  align-content: center;
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+}
+
+.c35 {
+  width: auto;
+  height: auto;
+  display: block;
+  border-radius: 5px;
+  width: -webkit-max-content;
+  width: -moz-max-content;
+  width: max-content;
+  display: -webkit-inline-box;
+  display: -webkit-inline-flex;
+  display: -ms-inline-flexbox;
+  display: inline-flex;
+  padding-top: 5px;
+  padding-bottom: 5px;
+  padding-right: 10px;
+  padding-left: 10px;
+  background-color: rgba(194,178,0,1);
+  -webkit-box-pack: center;
+  -webkit-justify-content: center;
+  -ms-flex-pack: center;
+  justify-content: center;
+  justify-items: center;
+  -webkit-align-content: center;
+  -ms-flex-line-pack: center;
+  align-content: center;
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+}
+
+.c37 {
+  width: auto;
+  height: auto;
+  display: block;
+  border-radius: 5px;
+  min-width: 25px;
+  min-height: 25px;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  padding-right: 10px;
+  padding-left: 10px;
+  margin-right: 10px;
+  margin-left: 10px;
+  background-color: rgba(183,39,234,1);
+  cursor: pointer;
+  border-radius: 5px;
+  border-radius: 5px;
+  -webkit-align-content: center;
+  -ms-flex-line-pack: center;
+  align-content: center;
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+}
+
+.c11 {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-flex-direction: row;
+  -ms-flex-direction: row;
+  flex-direction: row;
+  height: auto;
+  -webkit-box-pack: justify;
+  -webkit-justify-content: space-between;
+  -ms-flex-pack: justify;
+  justify-content: space-between;
+  justify-items: space-between;
+  -webkit-align-content: center;
+  -ms-flex-line-pack: center;
+  align-content: center;
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+}
+
+.c31 {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-flex-direction: row;
+  -ms-flex-direction: row;
+  flex-direction: row;
+  height: auto;
+  -webkit-box-pack: start;
+  -webkit-justify-content: flex-start;
+  -ms-flex-pack: start;
+  justify-content: flex-start;
+  justify-items: flex-start;
+  padding-right: 20px;
+  width: 100%;
+}
+
+.c36 {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-flex-direction: row;
+  -ms-flex-direction: row;
+  flex-direction: row;
+  height: auto;
+  -webkit-box-pack: center;
+  -webkit-justify-content: center;
+  -ms-flex-pack: center;
+  justify-content: center;
+  justify-items: center;
+  margin-bottom: 20px;
+  width: 100%;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+}
+
+.c13 {
+  display: none;
+}
+
+.c17 {
+  margin-right: 5px;
+}
+
+.c12:disabled + label > .c16 {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.c15 {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  width: -webkit-max-content;
+  width: -moz-max-content;
+  width: max-content;
+}
+
+.c15:hover {
+  cursor: pointer;
+}
+
+.c12:disabled + .c14 {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.c5 {
+  font-family: DM Sans;
+  font-size: 13px;
+  line-height: 130%;
+  font-size: 14px;
+  font-weight: 700;
+  color: rgba(255,255,255,1);
+  color: rgba(255,255,255,1);
+}
+
+.c29 {
+  font-family: DM Sans;
+  font-size: 13px;
+  line-height: 130%;
+  color: rgba(210,55,29,1);
+  color: rgba(210,55,29,1);
+}
+
+.c33 {
+  font-family: DM Sans;
+  font-size: 13px;
+  line-height: 130%;
+  font-weight: 700;
+  color: rgba(210,55,29,1);
+  color: rgba(210,55,29,1);
+}
+
+.c38 {
+  font-family: DM Sans;
+  font-size: 13px;
+  line-height: 130%;
+  color: rgba(255,255,255,1);
+  color: rgba(255,255,255,1);
+}
+
+.c26 {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-flex-direction: column;
+  -ms-flex-direction: column;
+  flex-direction: column;
+  width: 100%;
+  -webkit-align-content: flex-start;
+  -ms-flex-line-pack: start;
+  align-content: flex-start;
+  -webkit-align-items: flex-start;
+  -webkit-box-align: flex-start;
+  -ms-flex-align: flex-start;
+  align-items: flex-start;
+  padding-left: 20px;
+}
+
+.c3 {
+  margin: 0;
+  font-family: DM Sans;
+  font-size: 25px;
+  line-height: 130%;
+  margin-right: 10px;
+  color: #2F3850;
+}
+
+.c39 {
+  margin: 0;
+  font-family: DM Sans;
+  font-size: 25px;
+  line-height: 130%;
+  color: #2F3850;
+  cursor: pointer;
+}
+
+.c19 {
+  padding: 12px;
+  border-style: solid;
+  border-width: 1px;
+  border-color: #E9F1FB;
+  border-radius: 5px;
+  padding-right: 30px;
+  padding-left: 30px;
+  color: #2F3850;
+}
+
+.c19:focus {
+  box-shadow: none;
+  outline: none;
+  border-color: #107969;
+}
+
+.c19:disabled {
+  color: #ABBBD1;
+}
+
+.c18 {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  position: relative;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+}
+
+.c20 {
+  position: absolute;
+  left: 10px;
+  top: 10px;
+}
+
+.c32 {
+  outline: none;
+  border: none;
+  background: transparent;
+  font-weight: bold;
+  font-size: 13px;
+  line-height: 17px;
+  padding: 2px;
+  cursor: pointer;
+  color: #2F3850;
+  text-align: start;
+}
+
+.c22 {
+  font-size: 13px;
+  width: 100%;
+  margin-bottom: 20px;
+  box-shadow: 0px 4px 20px #E3EEFB;
+}
+
+.c22 tr,
+.c22 th,
+.c22 td {
+  font-weight: 400;
+}
+
+.c23 {
+  height: 47.5px;
+}
+
+.c24 {
+  cursor: default;
+  color: #0E0E0E;
+}
+
+.c24 td:nth-last-child(-n + ) {
+  opacity: 100%;
+}
+
+.c24:hover {
+  background: !important;
+}
+
+.c24:hover td:hover {
+  opacity: 100%;
+}
+
+.c27 {
+  cursor: pointer;
+  color: #0E0E0E;
+}
+
+.c27 td:nth-last-child(-n + 1) {
+  opacity: 0;
+}
+
+.c27:hover {
+  background: #E9F1FB !important;
+}
+
+.c27:hover td:hover {
+  opacity: 100%;
+}
+
+.c28 {
+  padding-left: 20px;
+}
+
+.c25 {
+  width: auto;
+  background-color: rgba(255,255,255,1);
+  color: rgba(47,56,80,1);
+  opacity: 0.6;
+}
+
+.c21 {
+  position: relative;
+}
+
+@media only screen and (min-width:768px) {
+
+}
+
+@media only screen and (min-width:960px) {
+
+}
+
+@media only screen and (min-width:1170px) {
+
+}
+
+@media only screen and (min-width:1360px) {
+
+}
+
 <div>
   <div
-    class="Box-sc-1vhutan-0 bOwlot"
+    class="c0"
     display="flex"
     height="100%"
     overflow="scroll"
   >
     <div
-      class="Box-sc-1vhutan-0 cDJCJC"
+      class="c1"
       width="100%"
     >
       <div
-        class="Box-sc-1vhutan-0 erkpdS"
+        class="c2"
         display="flex"
       >
         <h1
-          class="H1-sc-1k7m23t-0 hNcBIZ"
+          class="c3"
         >
           Manage accounts
         </h1>
@@ -503,12 +1813,12 @@ exports[`<UserList /> Should render and match the snapshot - researcher 1`] = `
                   style="box-sizing: border-box; min-height: 1px; position: relative; padding-left: 15px; padding-right: 15px; width: auto; flex-basis: auto; flex-grow: 0; flex-shrink: 0; max-width: 100%; margin-left: 0%; margin-bottom: 10px;"
                 >
                   <div
-                    class="Box-sc-1vhutan-0 iqNDFB"
+                    class="c4"
                     display="inline-flex"
                     width="max-content"
                   >
                     <p
-                      class="Text-e4p0w3-0 eAccFX"
+                      class="c5"
                       color="#FFFFFF"
                       font-size="14"
                       font-weight="bold"
@@ -521,12 +1831,12 @@ exports[`<UserList /> Should render and match the snapshot - researcher 1`] = `
                   style="box-sizing: border-box; min-height: 1px; position: relative; padding-left: 15px; padding-right: 15px; width: auto; flex-basis: auto; flex-grow: 0; flex-shrink: 0; max-width: 100%; margin-left: 0%; margin-bottom: 10px;"
                 >
                   <div
-                    class="Box-sc-1vhutan-0 gZjjZA"
+                    class="c6"
                     display="inline-flex"
                     width="max-content"
                   >
                     <p
-                      class="Text-e4p0w3-0 eAccFX"
+                      class="c5"
                       color="#FFFFFF"
                       font-size="14"
                       font-weight="bold"
@@ -539,12 +1849,12 @@ exports[`<UserList /> Should render and match the snapshot - researcher 1`] = `
                   style="box-sizing: border-box; min-height: 1px; position: relative; padding-left: 15px; padding-right: 15px; width: auto; flex-basis: auto; flex-grow: 0; flex-shrink: 0; max-width: 100%; margin-left: 0%; margin-bottom: 10px;"
                 >
                   <div
-                    class="Box-sc-1vhutan-0 kdPfXJ"
+                    class="c7"
                     display="inline-flex"
                     width="max-content"
                   >
                     <p
-                      class="Text-e4p0w3-0 eAccFX"
+                      class="c5"
                       color="#FFFFFF"
                       font-size="14"
                       font-weight="bold"
@@ -557,12 +1867,12 @@ exports[`<UserList /> Should render and match the snapshot - researcher 1`] = `
                   style="box-sizing: border-box; min-height: 1px; position: relative; padding-left: 15px; padding-right: 15px; width: auto; flex-basis: auto; flex-grow: 0; flex-shrink: 0; max-width: 100%; margin-left: 0%; margin-bottom: 10px;"
                 >
                   <div
-                    class="Box-sc-1vhutan-0 hDkbeS"
+                    class="c8"
                     display="inline-flex"
                     width="max-content"
                   >
                     <p
-                      class="Text-e4p0w3-0 eAccFX"
+                      class="c5"
                       color="#FFFFFF"
                       font-size="14"
                       font-weight="bold"
@@ -575,12 +1885,12 @@ exports[`<UserList /> Should render and match the snapshot - researcher 1`] = `
                   style="box-sizing: border-box; min-height: 1px; position: relative; padding-left: 15px; padding-right: 15px; width: auto; flex-basis: auto; flex-grow: 0; flex-shrink: 0; max-width: 100%; margin-left: 0%; margin-bottom: 10px;"
                 >
                   <div
-                    class="Box-sc-1vhutan-0 gGlmVX"
+                    class="c9"
                     display="inline-flex"
                     width="max-content"
                   >
                     <p
-                      class="Text-e4p0w3-0 eAccFX"
+                      class="c5"
                       color="#FFFFFF"
                       font-size="14"
                       font-weight="bold"
@@ -590,21 +1900,30 @@ exports[`<UserList /> Should render and match the snapshot - researcher 1`] = `
                   </div>
                 </div>
                 <div
-                  class="Box-sc-1vhutan-0 kNvWbw"
+                  class="c10"
                   width="25"
                 />
                 <div
                   style="box-sizing: border-box; min-height: 1px; position: relative; padding-left: 15px; padding-right: 15px; width: 33.333333333333336%; flex-basis: 33.333333333333336%; flex-grow: 0; flex-shrink: 0; max-width: 33.333333333333336%; margin-left: 0%; margin-bottom: 10px;"
                 >
                   <div
-                    class="Box-sc-1vhutan-0 cVwTmA"
-                    cursor="pointer"
-                    display="inline-flex"
+                    class="c11"
                   >
-                    <img
-                      src="IMAGE_MOCK"
+                    <input
+                      class="c12 c13"
+                      id="show-inactive"
+                      type="checkbox"
                     />
-                    Show inactive accounts
+                    <label
+                      class="c14 c15"
+                      for="show-inactive"
+                    >
+                      <img
+                        class="c16 c17"
+                        src="IMAGE_MOCK"
+                      />
+                      Show inactive accounts
+                    </label>
                   </div>
                 </div>
               </div>
@@ -613,15 +1932,17 @@ exports[`<UserList /> Should render and match the snapshot - researcher 1`] = `
               style="box-sizing: border-box; min-height: 1px; position: relative; padding-left: 15px; padding-right: 15px; width: 100%; flex-basis: 100%; flex-grow: 0; flex-shrink: 0; max-width: 100%; margin-left: 0%; margin-bottom: 10px;"
             >
               <div
-                class="styled__SearchInputStyled-sc-10udg63-3 gFHxDg"
+                class="c18"
               >
                 <input
-                  class="Input-t9j2q5-0 hjYQaq"
+                  aria-label="Filter users by name"
+                  class="c19"
+                  placeholder="Filter users by name"
                   type="text"
                 />
                 <img
                   alt="search"
-                  class="styled__SearchIcon-sc-10udg63-4 VQGbD"
+                  class="c20"
                   src="IMAGE_MOCK"
                 />
                 
@@ -636,66 +1957,66 @@ exports[`<UserList /> Should render and match the snapshot - researcher 1`] = `
           data-private="true"
         >
           <div
-            class="styled__TableLoadingContainer-skadoa-0 hSHnNK"
+            class="c21"
           >
             <table
-              class="Table-sc-1y0iqmn-0 hyqcGV"
+              class="c22"
               width="100%"
             >
               <thead
-                class="THead-sc-8drp5d-0"
+                class=""
               >
                 <tr
-                  class="TR-sc-1omngt7-0 StripedTR-sc-1wcdkgr-0 iNrQaF gkGuNS"
+                  class="c23 c24"
                 >
                   <th
-                    class="TH-sc-1w7ae0i-0 dcMBuC"
+                    class="c25"
                     color="#2F3850"
                     opacity="0.6"
                     scope="col"
                     width="auto"
                   >
                     <div
-                      class="Column-sc-4zswzq-0 gzLnhc"
+                      class="c26"
                     >
                       Name
                     </div>
                   </th>
                   <th
-                    class="TH-sc-1w7ae0i-0 dcMBuC"
+                    class="c25"
                     color="#2F3850"
                     opacity="0.6"
                     scope="col"
                     width="auto"
                   >
                     <div
-                      class="Column-sc-4zswzq-0 gzLnhc"
+                      class="c26"
                     >
                       Email
                     </div>
                   </th>
                   <th
-                    class="TH-sc-1w7ae0i-0 dcMBuC"
+                    class="c25"
                     color="#2F3850"
                     opacity="0.6"
                     scope="col"
                     width="auto"
                   >
                     <div
-                      class="Column-sc-4zswzq-0 gzLnhc"
+                      class="c26"
                     >
                       Role
                     </div>
                   </th>
                   <th
-                    class="TH-sc-1w7ae0i-0 dcMBuC"
+                    class="c25"
                     color="#2F3850"
                     opacity="0.6"
                     scope="col"
                     width="auto"
                   >
                     <div
-                      class="Column-sc-4zswzq-0 gzLnhc"
+                      class="c26"
                     >
                       Activate/Deactivate
                     </div>
@@ -703,38 +2024,38 @@ exports[`<UserList /> Should render and match the snapshot - researcher 1`] = `
                 </tr>
               </thead>
               <tbody
-                class="TBody-gqq9cv-0"
+                class=""
               >
                 <tr
-                  class="TR-sc-1omngt7-0 StripedTR-sc-1wcdkgr-0 iNrQaF krcRax"
+                  class="c23 c27"
                   color="#FFFFFF"
                   cursor="pointer"
                 >
                   <td
-                    class="TD-y7762g-0 cXNZQh"
+                    class="c28"
                   >
                     <p
-                      class="Text-e4p0w3-0 eFoKic"
+                      class="c29"
                       color="#D2371D"
                     >
                       Waiting for activation
                     </p>
                   </td>
                   <td
-                    class="TD-y7762g-0 cXNZQh"
+                    class="c28"
                   >
                     test@test.pl
                   </td>
                   <td
-                    class="TD-y7762g-0 cXNZQh"
+                    class="c28"
                   >
                     <div
-                      class="Box-sc-1vhutan-0 bUeKCS"
+                      class="c30"
                       display="inline-flex"
                       width="max-content"
                     >
                       <p
-                        class="Text-e4p0w3-0 eAccFX"
+                        class="c5"
                         color="#FFFFFF"
                         font-size="14"
                         font-weight="bold"
@@ -744,17 +2065,17 @@ exports[`<UserList /> Should render and match the snapshot - researcher 1`] = `
                     </div>
                   </td>
                   <td
-                    class="TD-y7762g-0 cXNZQh"
+                    class="c28"
                   >
                     <div
-                      class="Row-y1cs0u-0 ggPJew"
+                      class="c31"
                       width="100%"
                     >
                       <button
-                        class="StyledTextButton-sc-1b7egxw-0 itdyYG"
+                        class="c32"
                       >
                         <p
-                          class="Text-e4p0w3-0 gYitek"
+                          class="c33"
                           color="#D2371D"
                           font-weight="bold"
                         >
@@ -765,35 +2086,35 @@ exports[`<UserList /> Should render and match the snapshot - researcher 1`] = `
                   </td>
                 </tr>
                 <tr
-                  class="TR-sc-1omngt7-0 StripedTR-sc-1wcdkgr-0 iNrQaF krcRax"
+                  class="c23 c27"
                   color="#FFFFFF"
                   cursor="pointer"
                 >
                   <td
-                    class="TD-y7762g-0 cXNZQh"
+                    class="c28"
                   >
                     <p
-                      class="Text-e4p0w3-0 eFoKic"
+                      class="c29"
                       color="#D2371D"
                     >
                       Waiting for activation
                     </p>
                   </td>
                   <td
-                    class="TD-y7762g-0 cXNZQh"
+                    class="c28"
                   >
                     test2@test.pl
                   </td>
                   <td
-                    class="TD-y7762g-0 cXNZQh"
+                    class="c28"
                   >
                     <div
-                      class="Box-sc-1vhutan-0 jSbkvP"
+                      class="c34"
                       display="inline-flex"
                       width="max-content"
                     >
                       <p
-                        class="Text-e4p0w3-0 eAccFX"
+                        class="c5"
                         color="#FFFFFF"
                         font-size="14"
                         font-weight="bold"
@@ -803,17 +2124,17 @@ exports[`<UserList /> Should render and match the snapshot - researcher 1`] = `
                     </div>
                   </td>
                   <td
-                    class="TD-y7762g-0 cXNZQh"
+                    class="c28"
                   >
                     <div
-                      class="Row-y1cs0u-0 ggPJew"
+                      class="c31"
                       width="100%"
                     >
                       <button
-                        class="StyledTextButton-sc-1b7egxw-0 itdyYG"
+                        class="c32"
                       >
                         <p
-                          class="Text-e4p0w3-0 gYitek"
+                          class="c33"
                           color="#D2371D"
                           font-weight="bold"
                         >
@@ -824,35 +2145,35 @@ exports[`<UserList /> Should render and match the snapshot - researcher 1`] = `
                   </td>
                 </tr>
                 <tr
-                  class="TR-sc-1omngt7-0 StripedTR-sc-1wcdkgr-0 iNrQaF krcRax"
+                  class="c23 c27"
                   color="#FFFFFF"
                   cursor="pointer"
                 >
                   <td
-                    class="TD-y7762g-0 cXNZQh"
+                    class="c28"
                   >
                     <p
-                      class="Text-e4p0w3-0 eFoKic"
+                      class="c29"
                       color="#D2371D"
                     >
                       Waiting for activation
                     </p>
                   </td>
                   <td
-                    class="TD-y7762g-0 cXNZQh"
+                    class="c28"
                   >
                     test3@test.pl
                   </td>
                   <td
-                    class="TD-y7762g-0 cXNZQh"
+                    class="c28"
                   >
                     <div
-                      class="Box-sc-1vhutan-0 iwPbyv"
+                      class="c35"
                       display="inline-flex"
                       width="max-content"
                     >
                       <p
-                        class="Text-e4p0w3-0 eAccFX"
+                        class="c5"
                         color="#FFFFFF"
                         font-size="14"
                         font-weight="bold"
@@ -862,17 +2183,17 @@ exports[`<UserList /> Should render and match the snapshot - researcher 1`] = `
                     </div>
                   </td>
                   <td
-                    class="TD-y7762g-0 cXNZQh"
+                    class="c28"
                   >
                     <div
-                      class="Row-y1cs0u-0 ggPJew"
+                      class="c31"
                       width="100%"
                     >
                       <button
-                        class="StyledTextButton-sc-1b7egxw-0 itdyYG"
+                        class="c32"
                       >
                         <p
-                          class="Text-e4p0w3-0 gYitek"
+                          class="c33"
                           color="#D2371D"
                           font-weight="bold"
                         >
@@ -888,7 +2209,7 @@ exports[`<UserList /> Should render and match the snapshot - researcher 1`] = `
         </div>
         <div
           aria-label="Data list pagination"
-          class="Row-y1cs0u-0 cAHLWQ"
+          class="c36"
           display="flex"
           role="navigation"
           width="100%"
@@ -896,12 +2217,12 @@ exports[`<UserList /> Should render and match the snapshot - researcher 1`] = `
           <div
             aria-label="Go to page: 1"
             aria-selected="true"
-            class="Box-sc-1vhutan-0 jvUOui"
+            class="c37"
             cursor="pointer"
             display="flex"
           >
             <p
-              class="Text-e4p0w3-0 eRNSEk"
+              class="c38"
               color="#FFFFFF"
             >
               1
@@ -909,7 +2230,7 @@ exports[`<UserList /> Should render and match the snapshot - researcher 1`] = `
           </div>
           <h1
             aria-label="Go to next page"
-            class="H1-sc-1k7m23t-0 fRhEzm"
+            class="c39"
             cursor="pointer"
           >
             &gt;

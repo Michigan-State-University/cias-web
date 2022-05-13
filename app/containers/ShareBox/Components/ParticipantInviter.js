@@ -23,18 +23,20 @@ const ParticipantInviter = ({
   sendInvite,
   loading,
   disabled,
+  shareBoxType,
 }) => {
   const [emails, setEmails] = useState([]);
+  const [disableSubmit, setDisableSubmit] = useState(true);
 
-  const handleUploadCsv = data => {
+  const handleUploadCsv = (data) => {
     const parsedData = uniq(
       filter(
-        map(data, columns => {
+        map(data, (columns) => {
           const email = head(columns.data);
           if (email && csvEmailValidator(email)) return email;
           return null;
         }),
-        val => val !== null,
+        (val) => val !== null,
       ),
     );
     setEmails(parsedData);
@@ -45,17 +47,22 @@ const ParticipantInviter = ({
     setEmails([]);
   };
 
+  const onIsValidLastValue = (isValid) => setDisableSubmit(!isValid);
+
   return (
     <Column>
       <Row align="center" justify="between">
         <ChipsInput
           value={emails}
           setValue={setEmails}
-          placeholder={formatMessage(messages.emailPlaceholder)}
+          placeholder={formatMessage(messages.emailPlaceholder, {
+            type: shareBoxType,
+          })}
+          onIsValid={onIsValidLastValue}
         />
         <Box width={140}>
           <Button
-            disabled={disabled || isEmpty(emails)}
+            disabled={disabled || (isEmpty(emails) && disableSubmit)}
             width={140}
             ml={12}
             hoverable
@@ -84,6 +91,7 @@ ParticipantInviter.propTypes = {
   sendInvite: PropTypes.func,
   loading: PropTypes.bool,
   disabled: PropTypes.bool,
+  shareBoxType: PropTypes.string,
 };
 
 export default injectIntl(ParticipantInviter);

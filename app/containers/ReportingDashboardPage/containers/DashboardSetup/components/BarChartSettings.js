@@ -76,24 +76,29 @@ const BarChartSettings = ({
 
           <NoMarginRow align="center">
             <Radio
+              id={`bar-chart-type-toggle-${ChartTypeDto.NUMERIC_BAR_CHART}`}
               disabled={!canBeEdited}
               checked={chartType === ChartTypeDto.NUMERIC_BAR_CHART}
-              onClick={handleChangeTypeToNumeric}
-              mr={9}
-            />
-            <Text mr={18}>
-              {formatMessage(messages.chartSettingsChartValuesNumericOption)}
-            </Text>
+              onChange={handleChangeTypeToNumeric}
+            >
+              <Text mr={18}>
+                {formatMessage(messages.chartSettingsChartValuesNumericOption)}
+              </Text>
+            </Radio>
 
             <Radio
+              id={`bar-chart-type-toggle-${ChartTypeDto.PERCENTAGE_BAR_CHART}`}
               disabled={!canBeEdited}
               checked={chartType === ChartTypeDto.PERCENTAGE_BAR_CHART}
-              onClick={handleChangeTypeToPercentage}
+              onChange={handleChangeTypeToPercentage}
               mr={9}
-            />
-            <Text>
-              {formatMessage(messages.chartSettingsChartValuesPercentageOption)}
-            </Text>
+            >
+              <Text>
+                {formatMessage(
+                  messages.chartSettingsChartValuesPercentageOption,
+                )}
+              </Text>
+            </Radio>
           </NoMarginRow>
 
           <Row mt={36}>
@@ -112,12 +117,16 @@ const BarChartSettings = ({
         <Col>
           <NoMarginRow align="center">
             <Checkbox
+              id="bar-chart-toggle-trendline"
               disabled={!canBeEdited}
               checked={trendLine}
-              onClick={handleTrendLineChange}
+              onChange={handleTrendLineChange}
               mr={9}
-            />
-            <Text>{formatMessage(messages.chartSettingsTrendLineOption)}</Text>
+            >
+              <Text>
+                {formatMessage(messages.chartSettingsTrendLineOption)}
+              </Text>
+            </Checkbox>
           </NoMarginRow>
         </Col>
       </Row>

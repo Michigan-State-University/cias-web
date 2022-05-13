@@ -5,5 +5,6 @@ export const GET_SESSION_ERROR = 'app/GET_SESSION_ERROR';
 
 // edit session constants
 export const EDIT_SESSION_REQUEST = 'app/EDIT_SESSION_REQUEST';
+export const BULK_EDIT_SESSION_REQUEST = 'app/BULK_EDIT_SESSION_REQUEST';
 export const EDIT_SESSION_SUCCESS = 'app/EDIT_SESSION_SUCCESS';
 export const EDIT_SESSION_ERROR = 'app/EDIT_SESSION_ERROR';

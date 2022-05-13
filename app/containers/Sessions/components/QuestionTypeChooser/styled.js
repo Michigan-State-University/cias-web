@@ -3,7 +3,7 @@ import StyledCircle from 'components/Circle/StyledCircle';
 import styled from 'styled-components';
 import Box from 'components/Box';
 
-const DotCircle = props => <StyledCircle {...props} size="10px" />;
+const DotCircle = (props) => <StyledCircle {...props} size="10px" />;
 
 const FadedBox = styled(Box)`
   &:after {

@@ -1,8 +1,7 @@
 import { takeLatest, put } from 'redux-saga/effects';
 import axios from 'axios';
 
-import { mapCurrentUserWithoutAttributes } from 'utils/mapResponseObjects';
-
+import { jsonApiToArray } from 'utils/jsonApiMapper';
 import { FETCH_USERS, FETCH_USERS_SELECTOR } from '../constants';
 import {
   fetchUsersFailure,
@@ -36,16 +35,15 @@ function* fetchUsers({
   if (includeInactive) params += 'active[]=true&active[]=false&';
 
   try {
-    const {
-      data: { users, users_size: usersSize },
-    } = yield axios.get(requestUrl.concat(params));
-    const mappedData = users.map(mapCurrentUserWithoutAttributes);
+    const { data } = yield axios.get(requestUrl.concat(params));
+    const users = jsonApiToArray(data, 'user');
+    const { users_size: usersSize } = data;
     switch (type) {
       case FETCH_USERS:
-        yield put(fetchUsersSuccess(mappedData, usersSize));
+        yield put(fetchUsersSuccess(users, usersSize));
         break;
       case FETCH_USERS_SELECTOR:
-        yield put(fetchUsersSelectorSuccess(mappedData, usersSize));
+        yield put(fetchUsersSelectorSuccess(users, usersSize));
         break;
       default:
         break;

@@ -11,6 +11,7 @@ import {
   createVariantRequest,
   makeSelectVariants,
   makeSelectSelectedVariantId,
+  reorderTextMessageVariantsRequest,
 } from 'global/reducers/textMessages';
 import Loader from 'components/Loader';
 
@@ -22,20 +23,27 @@ const TextMessageVariants = ({
   createVariant,
   variants,
   selectedVariantId,
+  reorderTextMessageVariants,
 }) => {
   const {
     formatMessage,
-    loaders: { createVariantLoading, fetchVariantsLoading },
+    loaders: { createVariantLoading, fetchVariantsAndPhonesLoading },
     editingPossible,
+    selectedMessage: { id },
   } = useContext(TextMessagesContext);
 
-  if (fetchVariantsLoading) return <Loader type="inline" />;
+  const onReorderTextMessageVariants = (reorderedVariants) => {
+    reorderTextMessageVariants(id, reorderedVariants);
+  };
+
+  if (fetchVariantsAndPhonesLoading) return <Loader type="inline" />;
   return (
     <>
       <Variants
         selectedVariantId={selectedVariantId}
         disabled={!editingPossible}
         variants={variants}
+        onReorder={onReorderTextMessageVariants}
       />
       <Row style={{ marginTop: 20 }}>
         <Col>
@@ -56,6 +64,7 @@ TextMessageVariants.propTypes = {
   createVariant: PropTypes.func,
   variants: PropTypes.array,
   selectedVariantId: PropTypes.string,
+  reorderTextMessageVariants: PropTypes.func,
 };
 
 const mapStateToProps = createStructuredSelector({
@@ -65,11 +74,9 @@ const mapStateToProps = createStructuredSelector({
 
 const mapDispatchToProps = {
   createVariant: createVariantRequest,
+  reorderTextMessageVariants: reorderTextMessageVariantsRequest,
 };
 
-const withConnect = connect(
-  mapStateToProps,
-  mapDispatchToProps,
-);
+const withConnect = connect(mapStateToProps, mapDispatchToProps);
 
 export default compose(withConnect)(TextMessageVariants);

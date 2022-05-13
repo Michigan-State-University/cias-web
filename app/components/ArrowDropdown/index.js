@@ -19,6 +19,7 @@ const ArrowDropdown = ({
   setOpen,
   childWidthScope,
   disabled,
+  bg,
 }) => {
   const dropdown = useRef(null);
   const buttonRef = useRef(null);
@@ -31,6 +32,7 @@ const ArrowDropdown = ({
         disabled={disabled}
         onClick={() => setOpen && setOpen(!isOpened)}
         isOpened={isOpened}
+        bg={bg}
       >
         {dropdownContent}
       </Dropdown>
@@ -41,7 +43,7 @@ const ArrowDropdown = ({
         position="absolute"
         width={childWidthScope === 'child' ? 'max-content' : '100%'}
         {...(isOpened ? { zIndex: 1 } : { display: 'none' })}
-        {...positionFrom === 'right' && { right: '0' }}
+        {...(positionFrom === 'right' && { right: '0' })}
       >
         <ArrowDropdownContext.Provider value={{ ref: buttonRef }}>
           {children}
@@ -60,6 +62,7 @@ ArrowDropdown.propTypes = {
   isOpened: PropTypes.bool,
   setOpen: PropTypes.func,
   disabled: PropTypes.bool,
+  bg: PropTypes.string,
 };
 
 ArrowDropdown.defaultProps = {

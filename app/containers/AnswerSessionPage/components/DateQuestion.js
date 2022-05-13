@@ -1,7 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-import Question from 'models/Session/Question';
 import isNullOrUndefined from 'utils/isNullOrUndefined';
 
 import DateQuestionLayout from '../layouts/DateQuestionLayout';
@@ -18,7 +17,7 @@ const DateQuestion = ({
     },
   } = question;
 
-  const onChange = event => {
+  const onChange = (event) => {
     if (isNullOrUndefined(event)) return;
     const date = new Date(event);
     selectAnswer([
@@ -39,7 +38,7 @@ const DateQuestion = ({
 };
 
 DateQuestion.propTypes = {
-  question: PropTypes.shape(Question).isRequired,
+  question: PropTypes.object.isRequired,
   selectAnswer: PropTypes.func,
   answerBody: PropTypes.any,
   formatMessage: PropTypes.func,

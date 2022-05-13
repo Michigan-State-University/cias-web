@@ -2,9 +2,13 @@ import produce from 'immer';
 import isEmpty from 'lodash/isEmpty';
 
 import { archived } from 'models/Status/StatusTypes';
-import { EDIT_INTERVENTION_SUCCESS } from 'global/reducers/intervention/constants';
+import {
+  EDIT_INTERVENTION_SUCCESS,
+  CREATE_INTERVENTION_SUCCESS,
+} from 'global/reducers/intervention';
 
 import isNullOrUndefined from 'utils/isNullOrUndefined';
+
 import {
   ARCHIVE_INTERVENTION_ERROR,
   ARCHIVE_INTERVENTION_REQUEST,
@@ -13,8 +17,6 @@ import {
   FETCH_INTERVENTIONS_REQUEST,
   FETCH_INTERVENTIONS_SUCCESS,
 } from './constants';
-
-import { CREATE_INTERVENTION_SUCCESS } from '../intervention';
 
 export const initialState = {
   filterData: undefined,
@@ -30,7 +32,7 @@ export const initialState = {
 
 /* eslint-disable default-case, no-param-reassign */
 export const interventionsReducer = (state = initialState, action) =>
-  produce(state, draft => {
+  produce(state, (draft) => {
     switch (action.type) {
       case FETCH_INTERVENTIONS_REQUEST: {
         if (state.shouldRefetch) draft.interventions = [];

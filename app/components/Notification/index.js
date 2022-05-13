@@ -12,7 +12,7 @@ import Img from 'components/Img';
 import { Col } from 'components/ReactGridSystem';
 import Circle from 'components/Circle';
 import Text from 'components/Text';
-import { CrossButton } from 'components/ActionIcon/styled';
+import ActionIcon from 'components/ActionIcon';
 
 const Notification = ({ title, description, onClose, className }) => (
   <Box
@@ -31,7 +31,7 @@ const Notification = ({ title, description, onClose, className }) => (
             <Circle
               size="50px"
               bg={colors.linkWater}
-              child={<Img src={checklist} />}
+              child={<Img src={checklist} role="presentation" />}
             />
           </Col>
           <Col xs={9}>
@@ -43,9 +43,9 @@ const Notification = ({ title, description, onClose, className }) => (
         </Row>
       </Col>
       <Col align="end" xs="content" style={{ padding: 0 }}>
-        <CrossButton margin="0px" onClick={onClose}>
+        <ActionIcon margin="0px" onClick={onClose}>
           <Img src={cross} alt="cross" />
-        </CrossButton>
+        </ActionIcon>
       </Col>
     </Row>
   </Box>

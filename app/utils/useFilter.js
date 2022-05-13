@@ -32,15 +32,13 @@ const useFilter = (array, key, configuration) => {
   const filter = () => {
     if (!list) return;
 
-    const filteredList = array.filter(element => {
+    const filteredList = array.filter((element) => {
       const castedValue = castArray(debouncedValue);
       const checks = castedValue.map(
-        val =>
-          get(element, key, '')
-            .toLowerCase()
-            .indexOf(val.toLowerCase()) !== -1,
+        (val) =>
+          get(element, key, '').toLowerCase().indexOf(val.toLowerCase()) !== -1,
       );
-      return checks.some(booleanVal => booleanVal);
+      return checks.some((booleanVal) => booleanVal);
     });
 
     if (!isEqual(filteredList, list)) setList(filteredList);

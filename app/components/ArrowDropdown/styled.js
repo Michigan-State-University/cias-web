@@ -7,7 +7,7 @@ export const ArrowDropdownWrapper = styled.div`
   ${layout};
 `;
 
-export const DropdownContainer = styled.div.attrs(props => ({
+export const DropdownContainer = styled.div.attrs((props) => ({
   onClick: props.disabled ? null : props.onClick,
 }))`
   overflow: hidden;
@@ -16,7 +16,7 @@ export const DropdownContainer = styled.div.attrs(props => ({
   margin-bottom: 5px;
   margin-top: 5px;
   border-radius: ${borders.borderRadius};
-  background-color: ${colors.linkWater};
+  background-color: ${({ bg }) => bg || colors.linkWater};
   ${layout};
   ${({ disabled }) =>
     disabled ? 'cursor: not-allowed; opacity: 0.5' : 'cursor: pointer'};

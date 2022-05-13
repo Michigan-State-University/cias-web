@@ -1,4 +1,4 @@
-import React, { useState, useRef } from 'react';
+import React, { useState, useRef, useEffect } from 'react';
 import PropTypes from 'prop-types';
 import find from 'lodash/find';
 import map from 'lodash/map';
@@ -25,6 +25,7 @@ const ChipsInput = ({
   placeholder,
   disabled,
   intl: { formatMessage },
+  onIsValid,
 }) => {
   const hiddenInput = useRef(null);
   const chipsInput = useRef(null);
@@ -36,46 +37,71 @@ const ChipsInput = ({
 
   useOutsideClick(chipsInput, unsetFocus, isFocused);
 
-  const handleKeyDown = event => {
+  useEffect(() => {
+    if (isEmpty(value) && onIsValid) {
+      onIsValid(false);
+    }
+  }, [value]);
+
+  const handleKeyDown = (event) => {
     const { key, keyCode } = event;
     handleChange({ key, keyCode })(event);
   };
 
-  const handleChange = ({ key, keyCode }) => ({
-    target: { value: inputEmailValue },
-  }) => {
-    if (key === 'Backspace' || keyCode === 8) {
-      if (value.length !== 0 && inputEmailValue.length === 0) {
-        setValue(value.slice(0, -1));
-        return;
+  const handleChange =
+    ({ key, keyCode }) =>
+    ({ target: { value: inputEmailValue } }) => {
+      if (key === 'Backspace' || keyCode === 8) {
+        if (value.length !== 0 && inputEmailValue.length === 0) {
+          setValue(value.slice(0, -1));
+          return;
+        }
       }
-    }
-    const lastChar = inputEmailValue[inputEmailValue.length - 1];
-    if (
-      lastChar === ',' ||
-      lastChar === ' ' ||
-      (key === 'Enter' && keyCode === 13)
-    ) {
-      const newEmail = inputEmailValue.trim().replace(',', '');
-      const isAlreadyExist = find(value, email => email === newEmail);
-      const isValid = emailValidator(newEmail);
-      if (isAlreadyExist) {
-        toast.error(formatMessage(messages.duplicatedEmail), {
-          toastId: DUPLICATED_EMAIL_ERROR,
-        });
-        return;
-      }
-      if (!isValid) {
-        toast.error(formatMessage(messages.invalidEmail), {
-          toastId: INVALID_EMAIL_ERROR,
-        });
-        return;
-      }
-      if (isEmpty(value)) setValue([newEmail]);
-      else setValue([...value, newEmail]);
 
+      const lastChar = inputEmailValue[inputEmailValue.length - 1];
+      if (
+        lastChar === ',' ||
+        lastChar === ' ' ||
+        (key === 'Enter' && keyCode === 13)
+      ) {
+        const newEmail = inputEmailValue.trim().replace(',', '');
+        const isAlreadyExist = find(value, (email) => email === newEmail);
+        const isValid = emailValidator(newEmail);
+        if (isAlreadyExist) {
+          toast.error(formatMessage(messages.duplicatedEmail), {
+            toastId: DUPLICATED_EMAIL_ERROR,
+          });
+          return;
+        }
+        if (!isValid) {
+          toast.error(formatMessage(messages.invalidEmail), {
+            toastId: INVALID_EMAIL_ERROR,
+          });
+          return;
+        }
+        if (isEmpty(value)) setValue([newEmail]);
+        else setValue([...value, newEmail]);
+        setInputValue('');
+      } else {
+        setInputValue(inputEmailValue);
+        const isValid = emailValidator(inputEmailValue);
+        const isInputValueEmpty = isEmpty(inputEmailValue);
+        const isValueEmpty = isEmpty(value);
+        if (isInputValueEmpty && isValueEmpty && onIsValid) onIsValid(false);
+        else if (onIsValid && isValueEmpty) onIsValid(isValid);
+      }
+    };
+
+  const handleBlur = ({ target }) => {
+    const inputElement = target;
+    const { value: inputEmailValue } = inputElement;
+
+    const isValid = emailValidator(inputEmailValue);
+    if (isValid) {
+      if (isEmpty(value)) setValue([inputEmailValue]);
+      else setValue([...value, inputEmailValue]);
       setInputValue('');
-    } else setInputValue(inputEmailValue);
+    }
   };
 
   const handleFocus = () => {
@@ -83,9 +109,9 @@ const ChipsInput = ({
     const { current } = hiddenInput;
     if (current) current.focus();
   };
-  const handleRemove = email => event => {
+  const handleRemove = (email) => (event) => {
     event.stopPropagation();
-    setValue(value.filter(val => val !== email));
+    setValue(value.filter((val) => val !== email));
   };
 
   const isInputFilled = !isEmpty(value);
@@ -128,7 +154,8 @@ const ChipsInput = ({
           value={inputValue}
           onChange={handleChange({})}
           onKeyDown={handleKeyDown}
-          placeholder={isInputFilled ? null : placeholder}
+          placeholder={placeholder}
+          onBlur={handleBlur}
           isInputFilled={isInputFilled}
         />
       </Row>
@@ -142,6 +169,7 @@ ChipsInput.propTypes = {
   intl: PropTypes.shape(IntlShape),
   placeholder: PropTypes.string,
   disabled: PropTypes.bool,
+  onIsValid: PropTypes.func,
 };
 
 export default compose(injectIntl)(ChipsInput);

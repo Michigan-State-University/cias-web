@@ -90,8 +90,10 @@ function TeamsList({
             <Col xs={12} xl={6} xxl={7} style={{ marginBottom: 10 }}>
               <SearchInput
                 value={filterText}
-                onChange={e => setFilterText(e.target.value)}
+                onChange={(e) => setFilterText(e.target.value)}
                 debounceTime={initialDelay}
+                placeholder={formatMessage(messages.searchPlaceholder)}
+                aria-label={formatMessage(messages.searchPlaceholder)}
               />
             </Col>
           </Row>
@@ -119,7 +121,7 @@ function TeamsList({
           <title>{formatMessage(messages.pageTitle)}</title>
           <meta name="description" content="List of teams" />
         </Helmet>
-        <Box mt={30} width="100%" px="10%">
+        <Box mt={64} width="100%" px="10%">
           <Box display="flex" mb={30}>
             <H1 mr={10}>
               <FormattedMessage {...messages.manageTeams} />
@@ -161,13 +163,6 @@ const mapDispatchToProps = {
   deleteTeam: deleteTeamRequest,
 };
 
-const withConnect = connect(
-  mapStateToProps,
-  mapDispatchToProps,
-);
+const withConnect = connect(mapStateToProps, mapDispatchToProps);
 
-export default compose(
-  withConnect,
-  memo,
-  injectIntl,
-)(TeamsList);
+export default compose(withConnect, memo, injectIntl)(TeamsList);

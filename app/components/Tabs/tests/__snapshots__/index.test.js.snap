@@ -28,9 +28,6 @@ exports[`<Tabs /> should render and match the snapshot 1`] = `
   bottom: -3px;
   margin: 0 10px;
   padding-bottom: 7px;
-  border-bottom-width: 2px;
-  border-bottom-style: solid;
-  border-bottom-color: #B727EA;
 }
 
 .c1 div {
@@ -38,17 +35,12 @@ exports[`<Tabs /> should render and match the snapshot 1`] = `
 }
 
 .c2 {
-  position: relative;
-  bottom: -3px;
-  margin: 0 10px;
-  padding-bottom: 7px;
-  border-bottom-width: 2px;
-  border-bottom-style: solid;
-  border-bottom-color: #FFFFFF;
-}
-
-.c2 div {
-  cursor: pointer;
+  position: absolute;
+  bottom: -2px;
+  left: 0;
+  right: 0;
+  height: 2px;
+  background: #B727EA;
 }
 
 <div
@@ -64,9 +56,14 @@ exports[`<Tabs /> should render and match the snapshot 1`] = `
       <div>
         Tab1
       </div>
+      <div
+        class="c2"
+        data-projection-id="1"
+        style="opacity: 1;"
+      />
     </div>
     <div
-      class="c2"
+      class="c1"
     >
       <div>
         Tab2
@@ -111,26 +108,9 @@ exports[`<Tabs /> should render as links and match the snapshot 1`] = `
   bottom: -3px;
   margin: 0 10px;
   padding-bottom: 7px;
-  border-bottom-width: 2px;
-  border-bottom-style: solid;
-  border-bottom-color: #B727EA;
 }
 
 .c1 div {
-  cursor: pointer;
-}
-
-.c3 {
-  position: relative;
-  bottom: -3px;
-  margin: 0 10px;
-  padding-bottom: 7px;
-  border-bottom-width: 2px;
-  border-bottom-style: solid;
-  border-bottom-color: #FFFFFF;
-}
-
-.c3 div {
   cursor: pointer;
 }
 
@@ -156,6 +136,15 @@ exports[`<Tabs /> should render as links and match the snapshot 1`] = `
   color: #2F3850;
 }
 
+.c3 {
+  position: absolute;
+  bottom: -2px;
+  left: 0;
+  right: 0;
+  height: 2px;
+  background: #B727EA;
+}
+
 <div
   class=""
 >
@@ -173,9 +162,14 @@ exports[`<Tabs /> should render as links and match the snapshot 1`] = `
           Url1
         </a>
       </div>
+      <div
+        class="c3"
+        data-projection-id="2"
+        style="opacity: 1;"
+      />
     </div>
     <div
-      class="c3 c4"
+      class="c1 c4"
     >
       <div>
         <a

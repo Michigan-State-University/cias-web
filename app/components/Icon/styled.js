@@ -2,7 +2,7 @@ import React from 'react';
 import ReactSVG from 'react-inlinesvg';
 import styled from 'styled-components';
 
-import { margin } from '../BaseComponentStyles';
+import { margin, layout } from '../BaseComponentStyles';
 
 const getCursorStyle = ({ $clickable, disabled, onClick }) => {
   if (disabled) return 'not-allowed';
@@ -26,6 +26,7 @@ export const SVG = styled(({ fill, stroke, ...props }) => (
 
   cursor: ${getCursorStyle};
   ${margin};
+  ${layout}
 `;
 
 export const SvgWrapper = styled.div`

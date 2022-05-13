@@ -14,6 +14,7 @@ import deleteTemplateSection from './deleteTemplateSection';
 import updateSectionCase from './updateSectionCase';
 import updateTemplateSection from './updateTemplateSection';
 import generateTestReport from './generateTestReport';
+import reorderTemplateSections from './reorderTemplateSections';
 
 export default function* reportTemplatesSaga() {
   yield all([
@@ -31,5 +32,6 @@ export default function* reportTemplatesSaga() {
     updateSectionCase(),
     updateTemplateSection(),
     generateTestReport(),
+    reorderTemplateSections(),
   ]);
 }

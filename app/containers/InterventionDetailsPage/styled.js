@@ -18,7 +18,7 @@ export const StatusLabel = styled.div`
   color: white;
   padding: 7px 10px;
   border-radius: 5px;
-  background: ${props => statusTypeToColorMap[props.status]};
+  background: ${(props) => statusTypeToColorMap[props.status]};
   display: flex;
   margin-left: 5px;
   min-width: 70px;

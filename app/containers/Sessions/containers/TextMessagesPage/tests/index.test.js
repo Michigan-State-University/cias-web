@@ -7,12 +7,16 @@ import { DEFAULT_LOCALE } from 'i18n';
 
 import { createTestStore } from 'utils/testUtils/storeUtils';
 import createModalForTests from 'utils/createModalForTests';
+
 import { initialState as initialData } from 'global/reducers/textMessages/reducer';
+
 import {
   TextMessagesBuilder,
-  MESSAGES_SCHEDULE_OPTIONS,
-  MESSAGES_SCHEDULE_FREQUENCIES,
+  TextMessageScheduleFrequency,
+  TextMessageScheduleOption,
+  TextMessageType,
 } from 'models/TextMessage';
+
 import TextMessagingPage from '../index';
 
 describe('<TextMessagingPage />', () => {
@@ -33,23 +37,25 @@ describe('<TextMessagingPage />', () => {
           .withId('text-message-plan-1')
           .withName('Text message plan 1')
           .withSchedule(
-            MESSAGES_SCHEDULE_OPTIONS.daysAfterFill,
+            TextMessageScheduleOption.DAYS_AFTER_FILL,
             '3',
-            MESSAGES_SCHEDULE_FREQUENCIES.once,
+            TextMessageScheduleFrequency.ONCE,
             '',
             'var1 + var2',
           )
+          .withType(TextMessageType.NORMAL)
           .build(),
         new TextMessagesBuilder()
           .withId('text-message-plan-2')
           .withName('Text message plan 2')
           .withSchedule(
-            MESSAGES_SCHEDULE_OPTIONS.afterFill,
+            TextMessageScheduleOption.AFTER_FILL,
             '3',
-            MESSAGES_SCHEDULE_FREQUENCIES.onceWeek,
+            TextMessageScheduleFrequency.ONCE_WEEK,
             '',
             'var1 + var2',
           )
+          .withType(TextMessageType.ALERT)
           .build(),
       ],
     },

@@ -6,7 +6,6 @@ import { throwError } from 'redux-saga-test-plan/providers';
 import { expectSaga } from 'redux-saga-test-plan';
 import { push } from 'connected-react-router';
 
-import { defaultMapper } from 'utils/mapResponseObjects';
 import { formatMessage } from 'utils/intlOutsideReact';
 import globalMessages from 'global/i18n/globalMessages';
 import { apiInterventionResponse } from 'utils/apiResponseCreators';
@@ -14,6 +13,7 @@ import { apiInterventionResponse } from 'utils/apiResponseCreators';
 import createInterventionSaga, {
   createIntervention,
 } from 'global/reducers/intervention/sagas/createIntervention';
+import { jsonApiToObject } from 'utils/jsonApiMapper';
 import { createInterventionSuccess } from '../../actions';
 import {
   CREATE_INTERVENTION_ERROR,
@@ -22,13 +22,16 @@ import {
 
 describe('createIntervention saga', () => {
   const mockApiResponse = apiInterventionResponse();
-
   it('Check createIntervention generator success connection', () => {
-    const apiResponse = { data: { mockApiResponse } };
+    const apiResponse = { data: { ...mockApiResponse } };
     return expectSaga(createIntervention)
-      .provide([[matchers.call.fn(axios.post), { data: apiResponse }]])
-      .put(createInterventionSuccess(defaultMapper(apiResponse.data)))
-      .put(push(`/interventions/${apiResponse.data.id}`))
+      .provide([[matchers.call.fn(axios.post), apiResponse]])
+      .put(
+        createInterventionSuccess(
+          jsonApiToObject({ data: mockApiResponse.data }, 'intervention'),
+        ),
+      )
+      .put(push(`/interventions/${mockApiResponse.data.id}`))
       .run();
   });
   it('Check createIntervention error connection', () => {

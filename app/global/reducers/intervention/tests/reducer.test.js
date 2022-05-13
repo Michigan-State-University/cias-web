@@ -4,6 +4,7 @@ import set from 'lodash/set';
 import { actionBuilder } from 'utils/actionBuilder';
 import { createSession, createIntervention } from 'utils/reducerCreators';
 import { editInterventionRequest } from 'global/reducers/intervention';
+import { jsonApiToObject } from 'utils/jsonApiMapper';
 import {
   FETCH_INTERVENTION_REQUEST,
   FETCH_INTERVENTION_SUCCESS,
@@ -20,9 +21,6 @@ import {
   CHANGE_CURRENT_SESSION,
   REORDER_SESSION_LIST_SUCCESS,
   REORDER_SESSION_LIST_ERROR,
-  CHANGE_ACCESS_SETTING_REQUEST,
-  CHANGE_ACCESS_SETTING_SUCCESS,
-  CHANGE_ACCESS_SETTING_ERROR,
   ENABLE_USER_ACCESS_REQUEST,
   ENABLE_USER_ACCESS_SUCCESS,
   ENABLE_USER_ACCESS_ERROR,
@@ -45,11 +43,14 @@ import {
 } from '../constants';
 import { initialState, interventionReducer } from '../reducer';
 
+const mockIntervention = () =>
+  jsonApiToObject({ data: createIntervention() }, 'intervention');
+
 describe('intervention reducer', () => {
   const mockState = {
     ...initialState,
-    intervention: createIntervention(2),
-    cache: { intervention: createIntervention(2) },
+    intervention: mockIntervention(),
+    cache: { intervention: mockIntervention() },
   };
 
   it('FETCH_INTERVENTION_REQUEST', () => {
@@ -65,7 +66,10 @@ describe('intervention reducer', () => {
 
   it('FETCH_INTERVENTION_SUCCESS', () => {
     const payloadIntervention = {
-      intervention: createIntervention(1),
+      intervention: jsonApiToObject(
+        { data: createIntervention(1) },
+        'intervention',
+      ),
     };
     const action = actionBuilder(
       FETCH_INTERVENTION_SUCCESS,
@@ -224,35 +228,6 @@ describe('intervention reducer', () => {
     expect(interventionReducer(mockState, action)).toEqual(changeState);
   });
 
-  it('CHANGE_ACCESS_SETTING_REQUEST', () => {
-    const payloadSetting = { setting: 'registered' };
-    const action = actionBuilder(CHANGE_ACCESS_SETTING_REQUEST, payloadSetting);
-
-    const changeState = cloneDeep(mockState);
-    changeState.intervention.sharedTo = payloadSetting.setting;
-    changeState.cache.intervention = mockState.intervention;
-
-    expect(interventionReducer(mockState, action)).toEqual(changeState);
-  });
-
-  it('CHANGE_ACCESS_SETTING_SUCCESS', () => {
-    const action = actionBuilder(CHANGE_ACCESS_SETTING_SUCCESS, {});
-
-    const expectedState = cloneDeep(mockState);
-    expectedState.cache.intervention = mockState.intervention;
-
-    expect(interventionReducer(mockState, action)).toEqual(expectedState);
-  });
-
-  it('CHANGE_ACCESS_SETTING_ERROR', () => {
-    const action = actionBuilder(CHANGE_ACCESS_SETTING_ERROR, {});
-
-    const expectedState = cloneDeep(mockState);
-    expectedState.intervention = mockState.cache.intervention;
-
-    expect(interventionReducer(mockState, action)).toEqual(expectedState);
-  });
-
   it('ENABLE_USER_ACCESS_REQUEST', () => {
     const action = actionBuilder(ENABLE_USER_ACCESS_REQUEST, {});
 
@@ -267,7 +242,7 @@ describe('intervention reducer', () => {
     const payloadEmails = {
       emails: [
         ...mockState.intervention.usersWithAccess,
-        { id: 'test', email: 'user@test.com' },
+        { id: 'user-test-0"', email: 'user-test-0@user.com' },
       ],
     };
     const action = actionBuilder(ENABLE_USER_ACCESS_SUCCESS, payloadEmails);
@@ -461,11 +436,10 @@ describe('intervention reducer', () => {
 
     expectedState.loaders.sendSessionLoading = true;
     expectedState.cache.intervention = initState.intervention;
-    expectedState.intervention.sessions[
-      index
-    ].emails = payloadEmails.emails.map(email => ({
-      email,
-    }));
+    expectedState.intervention.sessions[index].emails =
+      payloadEmails.emails.map((email) => ({
+        email,
+      }));
 
     expect(interventionReducer(initState, action)).toEqual(expectedState);
   });

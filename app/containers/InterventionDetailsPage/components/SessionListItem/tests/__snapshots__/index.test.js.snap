@@ -76,24 +76,7 @@ exports[`<SessionListItem /> Should render and match the snapshot 1`] = `
   width: 40%;
 }
 
-.c17 {
-  display: -webkit-box;
-  display: -webkit-flex;
-  display: -ms-flexbox;
-  display: flex;
-  -webkit-flex-direction: row;
-  -ms-flex-direction: row;
-  flex-direction: row;
-  height: auto;
-  -webkit-box-pack: end;
-  -webkit-justify-content: flex-end;
-  -ms-flex-pack: end;
-  justify-content: flex-end;
-  justify-items: flex-end;
-  min-width: 110px;
-}
-
-.c24 {
+.c21 {
   display: -webkit-box;
   display: -webkit-flex;
   display: -ms-flexbox;
@@ -107,7 +90,7 @@ exports[`<SessionListItem /> Should render and match the snapshot 1`] = `
   padding-left: 62px;
 }
 
-.c26 {
+.c23 {
   display: -webkit-box;
   display: -webkit-flex;
   display: -ms-flexbox;
@@ -116,114 +99,20 @@ exports[`<SessionListItem /> Should render and match the snapshot 1`] = `
   -ms-flex-direction: row;
   flex-direction: row;
   height: auto;
-  -webkit-box-pack: justify;
-  -webkit-justify-content: space-between;
-  -ms-flex-pack: justify;
-  justify-content: space-between;
-  justify-items: space-between;
-  -webkit-align-content: space-between;
-  -ms-flex-line-pack: space-between;
-  align-content: space-between;
-  -webkit-align-items: space-between;
-  -webkit-box-align: space-between;
-  -ms-flex-align: space-between;
-  align-items: space-between;
-  padding-top: 18px;
-  padding-bottom: 18px;
+  -webkit-align-content: center;
+  -ms-flex-line-pack: center;
+  align-content: center;
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  margin-bottom: 20px;
   padding-right: 62px;
   padding-left: 62px;
-}
-
-.c28 {
   display: -webkit-box;
   display: -webkit-flex;
   display: -ms-flexbox;
   display: flex;
-  -webkit-flex-direction: row;
-  -ms-flex-direction: row;
-  flex-direction: row;
-  height: auto;
-  -webkit-align-content: center;
-  -ms-flex-line-pack: center;
-  align-content: center;
-  -webkit-align-items: center;
-  -webkit-box-align: center;
-  -ms-flex-align: center;
-  align-items: center;
-  width: 100%;
-}
-
-.c32 {
-  display: -webkit-box;
-  display: -webkit-flex;
-  display: -ms-flexbox;
-  display: flex;
-  -webkit-flex-direction: row;
-  -ms-flex-direction: row;
-  flex-direction: row;
-  height: auto;
-  -webkit-box-pack: end;
-  -webkit-justify-content: flex-end;
-  -ms-flex-pack: end;
-  justify-content: flex-end;
-  justify-items: flex-end;
-  -webkit-align-content: center;
-  -ms-flex-line-pack: center;
-  align-content: center;
-  -webkit-align-items: center;
-  -webkit-box-align: center;
-  -ms-flex-align: center;
-  align-items: center;
-  width: 100%;
-}
-
-.c39 {
-  display: -webkit-box;
-  display: -webkit-flex;
-  display: -ms-flexbox;
-  display: flex;
-  -webkit-flex-direction: row;
-  -ms-flex-direction: row;
-  flex-direction: row;
-  height: auto;
-  margin-right: 62px;
-  margin-left: 62px;
-  padding-top: 20px;
-  padding-bottom: 20px;
-}
-
-.c41 {
-  display: -webkit-box;
-  display: -webkit-flex;
-  display: -ms-flexbox;
-  display: flex;
-  -webkit-flex-direction: row;
-  -ms-flex-direction: row;
-  flex-direction: row;
-  height: auto;
-  -webkit-box-pack: justify;
-  -webkit-justify-content: space-between;
-  -ms-flex-pack: justify;
-  justify-content: space-between;
-  justify-items: space-between;
-  -webkit-align-content: center;
-  -ms-flex-line-pack: center;
-  align-content: center;
-  -webkit-align-items: center;
-  -webkit-box-align: center;
-  -ms-flex-align: center;
-  align-items: center;
-}
-
-.c46 {
-  display: -webkit-box;
-  display: -webkit-flex;
-  display: -ms-flexbox;
-  display: flex;
-  -webkit-flex-direction: row;
-  -ms-flex-direction: row;
-  flex-direction: row;
-  height: auto;
 }
 
 .c9 {
@@ -239,51 +128,7 @@ exports[`<SessionListItem /> Should render and match the snapshot 1`] = `
   padding-left: 15px;
 }
 
-.c27 {
-  display: -webkit-box;
-  display: -webkit-flex;
-  display: -ms-flexbox;
-  display: flex;
-  -webkit-flex-direction: column;
-  -ms-flex-direction: column;
-  flex-direction: column;
-  width: 100%;
-  -webkit-box-pack: center;
-  -webkit-justify-content: center;
-  -ms-flex-pack: center;
-  justify-content: center;
-  justify-items: center;
-}
-
-.c31 {
-  display: -webkit-box;
-  display: -webkit-flex;
-  display: -ms-flexbox;
-  display: flex;
-  -webkit-flex-direction: column;
-  -ms-flex-direction: column;
-  flex-direction: column;
-  width: 33.33333333333333%;
-}
-
-.c40 {
-  display: -webkit-box;
-  display: -webkit-flex;
-  display: -ms-flexbox;
-  display: flex;
-  -webkit-flex-direction: column;
-  -ms-flex-direction: column;
-  flex-direction: column;
-  width: 100%;
-}
-
-.c19 {
-  width: auto;
-  height: auto;
-  cursor: pointer;
-}
-
-.c23 {
+.c20 {
   width: auto;
   height: auto;
 }
@@ -314,7 +159,7 @@ exports[`<SessionListItem /> Should render and match the snapshot 1`] = `
   display: flex;
 }
 
-.c20 {
+.c17 {
   width: auto;
   height: auto;
   display: block;
@@ -322,7 +167,7 @@ exports[`<SessionListItem /> Should render and match the snapshot 1`] = `
   margin-bottom: 8px;
 }
 
-.c21 {
+.c18 {
   width: auto;
   height: auto;
   display: block;
@@ -347,72 +192,7 @@ exports[`<SessionListItem /> Should render and match the snapshot 1`] = `
   align-items: flex-start;
 }
 
-.c42 {
-  width: auto;
-  height: auto;
-  display: block;
-  border-radius: 5px;
-  position: relative;
-}
-
-.c43 {
-  width: auto;
-  height: auto;
-  display: block;
-  border-radius: 5px;
-  cursor: pointer;
-}
-
-.c45 {
-  width: auto;
-  height: auto;
-  display: block;
-  border-radius: 5px;
-  width: auto;
-  position: absolute;
-  display: none;
-  background-color: rgba(255,255,255,1);
-  border-radius: 10px;
-  box-shadow: 0px 0px 50px rgba(0,0,0,0.08);
-  border-radius: 10px;
-}
-
-.c47 {
-  width: auto;
-  height: auto;
-  display: block;
-  border-radius: 5px;
-  padding: 8px;
-  -webkit-box-flex: 1;
-  -webkit-flex-grow: 1;
-  -ms-flex-positive: 1;
-  flex-grow: 1;
-}
-
-.c48 {
-  width: auto;
-  height: auto;
-  display: block;
-  border-radius: 5px;
-  width: 100%;
-  padding-top: 8px;
-  padding-bottom: 8px;
-  padding-right: 8px;
-  padding-left: 8px;
-  margin-top: 10px;
-  margin-bottom: 20px;
-  background-color: rgba(233,241,251,1);
-}
-
-.c50 {
-  width: auto;
-  height: auto;
-  display: block;
-  border-radius: 5px;
-  margin-top: 20px;
-}
-
-.c22 {
+.c19 {
   display: -webkit-box;
   display: -webkit-flex;
   display: -ms-flexbox;
@@ -420,7 +200,7 @@ exports[`<SessionListItem /> Should render and match the snapshot 1`] = `
   padding: 8px;
 }
 
-.c25 {
+.c22 {
   width: 100%;
   height: 0;
   -webkit-flex: 1;
@@ -468,62 +248,11 @@ exports[`<SessionListItem /> Should render and match the snapshot 1`] = `
   color: #B727EA !important;
 }
 
-.c6:hover .styled__ToggleableBox-zk98vs-0 {
-  background-color: black !important;
-}
-
-.c18 {
-  font-family: DM Sans;
-  font-size: 13px;
-  line-height: 130%;
-  margin-right: 5px;
-  font-size: 13px;
-  font-weight: 700;
-  color: rgba(183,39,234,1);
-  cursor: pointer;
-  text-align: center;
-  color: rgba(183,39,234,1);
-  cursor: pointer;
-}
-
-.c29 {
-  font-family: DM Sans;
-  font-size: 13px;
-  line-height: 130%;
-  font-size: 13px;
-  color: #2F3850;
-}
-
-.c30 {
-  font-family: DM Sans;
-  font-size: 13px;
-  line-height: 130%;
-  margin-left: 10px;
-  font-size: 13px;
-  font-weight: 700;
-  color: #2F3850;
-}
-
-.c33 {
+.c24 {
   font-family: DM Sans;
   font-size: 13px;
   line-height: 130%;
   color: #2F3850;
-  white-space: pre;
-}
-
-.c44 {
-  font-family: DM Sans;
-  font-size: 13px;
-  line-height: 130%;
-  font-weight: 700;
-  color: rgba(183,39,234,1);
-  color: rgba(183,39,234,1);
-}
-
-.c44:hover {
-  -webkit-text-decoration: underline;
-  text-decoration: underline;
 }
 
 .c14 {
@@ -555,6 +284,8 @@ exports[`<SessionListItem /> Should render and match the snapshot 1`] = `
   margin-top: 5px;
   width: 200px;
   max-width: 200px;
+  padding-right: 0;
+  padding-left: 0;
   color: rgba(16,121,105,1);
   text-align: center;
   background-color: rgba(16,121,105,0.1);
@@ -571,26 +302,28 @@ exports[`<SessionListItem /> Should render and match the snapshot 1`] = `
   color: #ABBBD1;
 }
 
-.c49 {
-  resize: none;
+.c25 {
   padding: 12px;
-  border: 1px solid #E9F1FB;
+  border-style: solid;
+  border-width: 1px;
+  border-color: #E9F1FB;
   border-radius: 5px;
-  margin-right: 9px;
-  width: 100%;
-  height: auto;
-  max-width: initial;
-  background-color: transparent;
-  border: 1px solid transparent;
+  margin-right: 5px;
+  margin-left: 5px;
+  width: 60px;
+  max-width: 200px;
+  padding-right: 0;
+  padding-left: 0;
+  color: #2F3850;
 }
 
-.c49:focus {
+.c25:focus {
   box-shadow: none;
   outline: none;
-  border: 1px solid #107969;
+  border-color: #107969;
 }
 
-.c49:disabled {
+.c25:disabled {
   color: #ABBBD1;
 }
 
@@ -652,142 +385,6 @@ exports[`<SessionListItem /> Should render and match the snapshot 1`] = `
   color: white;
 }
 
-.c34 {
-  position: relative;
-  display: inline-block;
-  min-width: 40px;
-  height: 21px;
-  margin-left: 10px;
-}
-
-.c36 {
-  opacity: 0;
-  width: 0;
-  height: 0;
-}
-
-.c38 {
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  -webkit-transition: 0.4s;
-  transition: 0.4s;
-  cursor: pointer;
-  background-color: #CED3E4;
-  border-radius: 21px;
-}
-
-.c35:checked + .c37 {
-  background-color: #B727EA;
-}
-
-.c35:focus + .c37 {
-  box-shadow: 0 0 1px #B727EA;
-}
-
-.c35:disabled + .c37 {
-  opacity: 0.5;
-  cursor: not-allowed;
-}
-
-.c38:before {
-  position: absolute;
-  content: '';
-  left: 4px;
-  bottom: 4px;
-  -webkit-transition: 0.4s;
-  transition: 0.4s;
-  height: 13px;
-  width: 13px;
-  background-color: white;
-  border-radius: 50%;
-}
-
-.c35:checked + .c37:before {
-  -webkit-transform: translateX(18px);
-  -ms-transform: translateX(18px);
-  transform: translateX(18px);
-}
-
-.c51 {
-  height: 40px;
-  border: 1px dashed #B0BAC9;
-  color: #B0BAC9;
-  display: -webkit-box;
-  display: -webkit-flex;
-  display: -ms-flexbox;
-  display: flex;
-  -webkit-box-pack: center;
-  -webkit-justify-content: center;
-  -ms-flex-pack: center;
-  justify-content: center;
-  -webkit-align-items: center;
-  -webkit-box-align: center;
-  -ms-flex-align: center;
-  align-items: center;
-  font-weight: bold;
-  border-radius: 4px;
-  -webkit-transition: 0.2s;
-  transition: 0.2s;
-  cursor: pointer;
-}
-
-.c51:hover {
-  background-color: #107969;
-  color: #FFFFFF;
-  border: none;
-}
-
-@media only screen and (min-width:768px) {
-
-}
-
-@media only screen and (min-width:960px) {
-
-}
-
-@media only screen and (min-width:1170px) {
-
-}
-
-@media only screen and (min-width:1360px) {
-
-}
-
-@media only screen and (min-width:768px) {
-
-}
-
-@media only screen and (min-width:960px) {
-
-}
-
-@media only screen and (min-width:1170px) {
-
-}
-
-@media only screen and (min-width:1360px) {
-
-}
-
-@media only screen and (min-width:768px) {
-
-}
-
-@media only screen and (min-width:960px) {
-
-}
-
-@media only screen and (min-width:1170px) {
-
-}
-
-@media only screen and (min-width:1360px) {
-
-}
-
 @media only screen and (min-width:768px) {
 
 }
@@ -821,7 +418,9 @@ exports[`<SessionListItem /> Should render and match the snapshot 1`] = `
     width="100%"
   >
     <div
+      aria-label="Tile of Session: Intervention"
       class="c1 c2"
+      role="group"
     >
       <div
         class="c3"
@@ -851,6 +450,7 @@ exports[`<SessionListItem /> Should render and match the snapshot 1`] = `
                 Intervention
               </h2>
               <input
+                aria-label="Variable name..."
                 autocomplete="off"
                 class="c12 c13"
                 color="#107969"
@@ -881,43 +481,22 @@ exports[`<SessionListItem /> Should render and match the snapshot 1`] = `
               class="c1"
               data-for="tooltip-1"
               data-tip=""
-            >
-              <div>
-                <div
-                  class="c17"
-                >
-                  <p
-                    class="c18"
-                    color="#B727EA"
-                    font-size="13"
-                    font-weight="bold"
-                  >
-                    Invite Participants
-                  </p>
-                  <img
-                    alt="emails"
-                    class="c19"
-                    data-cy="share-session-modal-open-button-0"
-                    src="IMAGE_MOCK"
-                  />
-                </div>
-              </div>
-            </div>
+            />
           </div>
           <div
-            class="c20"
+            class="c17"
           >
             <div
-              class="c21"
+              class="c18"
               display="flex"
               id="1"
             >
               <div
-                class="c22"
+                class="c19"
               >
                 <img
                   alt="dots"
-                  class="c23"
+                  class="c20"
                   src="IMAGE_MOCK"
                 />
               </div>
@@ -926,130 +505,36 @@ exports[`<SessionListItem /> Should render and match the snapshot 1`] = `
         </div>
       </div>
       <div
-        class="c24"
+        class="c21"
       >
         <div
-          class="c25"
+          class="c22"
           color="#D5DEEA"
         />
       </div>
       <div
-        class="c26"
+        class="c23"
+        display="flex"
       >
-        <div
-          class="c27"
+        <p
+          class="c24"
+          id="estimate-time-label"
         >
-          <div
-            class="c28"
-            width="100%"
-          >
-            <p
-              class="c29"
-              font-size="13"
-            >
-              Next Session:
-            </p>
-            <p
-              class="c30"
-              font-size="13"
-              font-weight="bold"
-            >
-              According to the formula below
-            </p>
-          </div>
-        </div>
-        <div
-          class="c31"
+          Estimate time to complete
+        </p>
+        <input
+          aria-labelledby="estimate-time-label"
+          class="c25"
+          placeholder="0"
+          type="text"
+          value=""
+          width="60"
+        />
+        <p
+          class="c24"
         >
-          <div
-            class="c32"
-            width="100%"
-          >
-            <p
-              class="c33"
-            >
-              Use formula
-            </p>
-            <div
-              class="c34"
-            >
-              <input
-                checked=""
-                class="c35 c36"
-                data-cy="branching-intervention-toggle"
-                data-testid="switch-input"
-                type="checkbox"
-              />
-              <span
-                class="c37 c38"
-              />
-            </div>
-          </div>
-        </div>
-      </div>
-      <div
-        class="c39"
-      >
-        <div
-          class="c40"
-        >
-          <div
-            class="c40"
-          >
-            <div
-              class="c41"
-            >
-              Formula
-              <div
-                class="c42"
-              >
-                <div
-                  class="c43"
-                >
-                  <p
-                    class="c44"
-                    color="#B727EA"
-                    font-weight="bold"
-                  >
-                    Add variable
-                  </p>
-                </div>
-                <div
-                  class="c45"
-                  display="none"
-                  width="auto"
-                >
-                  <div
-                    class="c46"
-                  >
-                    <div
-                      class="c47"
-                    />
-                  </div>
-                </div>
-              </div>
-            </div>
-            <div
-              class="c48"
-              width="100%"
-            >
-              <textarea
-                class="c49"
-                data-cy="text-area"
-                height="auto"
-                placeholder="Enter formula here... (You can use mathematical operators +, -, *, /)"
-                rows="1"
-                type="multiline"
-                width="100%"
-              />
-            </div>
-            <div
-              class="c50 c51"
-            >
-              + Add case
-            </div>
-          </div>
-        </div>
+          min
+        </p>
       </div>
     </div>
   </div>

@@ -7,6 +7,7 @@ import { expectSaga } from 'redux-saga-test-plan';
 
 import { formatMessage } from 'utils/intlOutsideReact';
 import { createIntervention } from 'utils/reducerCreators';
+import { jsonApiToArray } from 'utils/jsonApiMapper';
 
 import fetchInterventionsSaga, {
   fetchInterventions,
@@ -20,13 +21,14 @@ import messages from '../../messages';
 
 describe('fetchInterventions saga', () => {
   it('Check fetchInterventions generator success connection', () => {
-    const apiResponse = { interventions: [createIntervention()] };
+    const apiResponse = { data: [createIntervention()], interventions_size: 1 };
 
     return expectSaga(fetchInterventions, { payload: {} })
       .provide([[matchers.call.fn(axios.get), { data: apiResponse }]])
       .put(
-        fetchInterventionsSuccess(apiResponse.interventions, {
+        fetchInterventionsSuccess(jsonApiToArray(apiResponse, 'intervention'), {
           paginationData: undefined,
+          interventionsSize: 1,
         }),
       )
       .run();

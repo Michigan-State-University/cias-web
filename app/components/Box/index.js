@@ -14,13 +14,13 @@ import {
 const Box = styled.div.attrs(({ onClick, disabled }) => ({
   onClick: disabled ? null : onClick,
 }))`
-  ${props => (props.lineHeight ? `line-height: ${props.lineHeight}` : '')};
+  ${(props) => (props.lineHeight ? `line-height: ${props.lineHeight}` : '')};
   width: auto;
   height: auto;
   display: block;
   border-radius: ${borders.borderRadius};
-  ${props => (props.padded ? `padding: ${paddings.regular}` : '')};
-  ${props =>
+  ${(props) => (props.padded ? `padding: ${paddings.regular}` : '')};
+  ${(props) =>
     props.disableScrollbar
       ? 'scrollbar-width: none; -ms-overflow-style: none; &::-webkit-scrollbar { width: 0; }'
       : ''}

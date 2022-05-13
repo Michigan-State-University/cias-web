@@ -31,7 +31,7 @@ const Settings = () => {
     loaders: { fetchOrganization: fetchOrganizationLoader },
   } = useContext(ManageOrganizationsContext);
 
-  const wrapper = component => (
+  const wrapper = (component) => (
     <SettingsContainer>{component}</SettingsContainer>
   );
 

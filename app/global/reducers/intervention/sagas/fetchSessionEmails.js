@@ -15,9 +15,7 @@ export function* fetchSessionEmails({ payload: { index } }) {
   const organizationPrefix = organizationId
     ? `organizations/${organizationId}/`
     : '';
-  const requestURL = `v1/${organizationPrefix}sessions/${
-    session.id
-  }/invitations`;
+  const requestURL = `v1/${organizationPrefix}sessions/${session.id}/invitations`;
   try {
     const { data } = yield call(axios.get, requestURL);
     let invitations = jsonApiToArray(data, 'invitation');

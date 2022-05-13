@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import { useIntl } from 'react-intl';
 
 import Button from 'components/Button';
-import ConfirmationBox from 'components/ConfirmationBox';
+import { ConfirmationModal } from 'components/Modal';
 
 import messages from '../messages';
 
@@ -17,7 +17,7 @@ export const ResetAudioUI = ({ resetAudio, isLoading }) => {
 
   return (
     <>
-      <ConfirmationBox
+      <ConfirmationModal
         visible={isModalOpen}
         onClose={() => setIsModalOpen(false)}
         description={formatMessage(messages.resetAudioModalHeader)}

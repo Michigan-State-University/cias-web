@@ -29,7 +29,7 @@ const CsvFileReader = ({
 }) => {
   const readerRef = useRef(null);
 
-  const handleOpen = event => {
+  const handleOpen = (event) => {
     const { current } = readerRef;
     if (current) current.open(event);
   };

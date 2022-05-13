@@ -1,6 +1,6 @@
 import PropTypes from 'prop-types';
 
-const border = props => ({
+const border = (props) => ({
   borderTop: props.borderTop || '',
   borderBottom: props.borderBottom || '',
   borderRight: props.borderRight || '',

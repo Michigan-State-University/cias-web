@@ -15,7 +15,7 @@ const refContains = (ref, target) => {
 
 const didClickOutsideAllRefs = (refs, target) => {
   if (Array.isArray(refs))
-    return refs.every(ref => didClickOutside(ref, target));
+    return refs.every((ref) => didClickOutside(ref, target));
 
   return didClickOutside(refs, target);
 };
@@ -29,7 +29,7 @@ const didClickOutside = (ref, target) =>
  * @param {boolean} active false when we want to disable the outside click handler
  */
 const useOutsideClick = (targetRef, onClick, active) => {
-  const handleClick = event => {
+  const handleClick = (event) => {
     const { target } = event;
 
     if (didClickOutsideAllRefs(targetRef, target)) {

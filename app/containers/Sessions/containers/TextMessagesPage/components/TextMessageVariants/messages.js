@@ -32,4 +32,13 @@ export default defineMessages({
     id: `${scope}.case`,
     defaultMessage: 'Case {index}',
   },
+  deleteCaseHeader: {
+    id: `${scope}.deleteCaseHeader`,
+    defaultMessage: 'Delete Case',
+  },
+  deleteCaseMessage: {
+    id: `${scope}.deleteCaseMessage`,
+    defaultMessage:
+      'Are you sure you want to delete this Case? It will not be possible to recover it later.',
+  },
 });

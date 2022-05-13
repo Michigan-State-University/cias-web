@@ -1,6 +1,10 @@
 import styled from 'styled-components';
 import { themeColors, colors } from 'theme';
+
+import Box from 'components/Box';
+
 import { margin, padding } from '../BaseComponentStyles';
+import { LabelPosition } from './constants';
 
 const SwitchWrapper = styled.div`
   position: relative;
@@ -11,10 +15,31 @@ const SwitchWrapper = styled.div`
   ${padding};
 `;
 
-const SwitchInput = styled.input.attrs({ type: 'checkbox' })`
+const SwitchInput = styled.input.attrs(({ checked, disabled }) => ({
+  type: 'checkbox',
+  role: 'switch',
+  'aria-checked': checked,
+  'aria-disabled': disabled,
+}))`
   opacity: 0;
   width: 0;
   height: 0;
+  visibility: collapse;
+`;
+
+export const StyledLabel = styled.label`
+  width: 100%;
+  display: flex;
+  align-items: center;
+
+  &:hover {
+    cursor: pointer;
+  }
+
+  ${SwitchInput}:disabled + & {
+    opacity: 0.5;
+    cursor: not-allowed;
+  }
 `;
 
 const Slider = styled.span`
@@ -26,19 +51,18 @@ const Slider = styled.span`
 
   transition: 0.4s;
 
-  cursor: pointer;
   background-color: ${colors.blueHaze};
   border-radius: 21px;
 
-  ${SwitchInput}:checked + & {
+  ${SwitchInput}:checked + ${StyledLabel} & {
     background-color: ${themeColors.secondary};
   }
 
-  ${SwitchInput}:focus + & {
+  ${SwitchInput}:focus + ${StyledLabel} & {
     box-shadow: 0 0 1px ${themeColors.secondary};
   }
 
-  ${SwitchInput}:disabled + & {
+  ${SwitchInput}:disabled + ${StyledLabel} & {
     opacity: 0.5;
     cursor: not-allowed;
   }
@@ -56,10 +80,17 @@ const Slider = styled.span`
     background-color: white;
     border-radius: 50%;
 
-    ${SwitchInput}:checked + & {
+    ${SwitchInput}:checked + ${StyledLabel} & {
       transform: translateX(18px);
     }
   }
+`;
+
+export const LabelContent = styled(Box)`
+  ${({ $labelPosition }) =>
+    $labelPosition === LabelPosition.Left
+      ? `margin-right: 5px`
+      : `margin-left: 5px`};
 `;
 
 export { SwitchWrapper, SwitchInput, Slider };

@@ -14,7 +14,7 @@ function* fetchSingleTeam({ payload: { id } }) {
       data: { data, included },
     } = yield axios.get(requestUrl);
 
-    const mappedUsers = included.map(user => mapCurrentUser(user));
+    const mappedUsers = included.map((user) => mapCurrentUser(user));
     const mappedData = new TeamBuilder()
       .fromJson(data)
       .withTeamAdmin(

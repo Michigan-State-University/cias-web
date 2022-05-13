@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 
 import { StyledChips, ChipsText } from './styled';
 
-const Chips = props => (
+const Chips = (props) => (
   <StyledChips {...props}>
     <ChipsText isActive={props.isActive}>{props.children}</ChipsText>
   </StyledChips>

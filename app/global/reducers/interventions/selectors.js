@@ -2,29 +2,24 @@ import { draft } from 'models/Status/StatusTypes';
 import { createSelector } from 'reselect';
 import { initialState } from './reducer';
 
-const interventions = state => state.interventions || initialState;
+const interventions = (state) => state.interventions || initialState;
 
 export const makeSelectInterventionsState = () =>
-  createSelector(
-    interventions,
-    interventionsState => interventionsState,
-  );
+  createSelector(interventions, (interventionsState) => interventionsState);
 
 export const makeSelectInterventions = () =>
   createSelector(
     interventions,
-    interventionsState => interventionsState.interventions,
+    (interventionsState) => interventionsState.interventions,
   );
 
 export const makeSelectPublishedInterventions = () =>
-  createSelector(
-    interventions,
-    interventionsState =>
-      interventionsState.interventions.filter(({ status }) => status === draft),
+  createSelector(interventions, (interventionsState) =>
+    interventionsState.interventions.filter(({ status }) => status === draft),
   );
 
 export const makeSelectInterventionsLoader = () =>
   createSelector(
     interventions,
-    interventionsState => interventionsState.fetchInterventionLoading,
+    (interventionsState) => interventionsState.fetchInterventionLoading,
   );

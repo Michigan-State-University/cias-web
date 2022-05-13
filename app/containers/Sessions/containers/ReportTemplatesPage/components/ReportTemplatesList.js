@@ -131,10 +131,7 @@ const mapDispatchToProps = {
   selectTemplate: selectReportTemplate,
 };
 
-const withConnect = connect(
-  mapStateToProps,
-  mapDispatchToProps,
-);
+const withConnect = connect(mapStateToProps, mapDispatchToProps);
 
 ReportTemplatesList.propTypes = {
   intl: PropTypes.shape(IntlShape),
@@ -142,7 +139,4 @@ ReportTemplatesList.propTypes = {
   selectTemplate: PropTypes.func,
 };
 
-export default compose(
-  withConnect,
-  injectIntl,
-)(ReportTemplatesList);
+export default compose(withConnect, injectIntl)(ReportTemplatesList);

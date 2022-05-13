@@ -3,11 +3,6 @@ import { createContext } from 'react';
 import { archived, closed, draft, published } from 'models/Status/StatusTypes';
 import { RolePermissions } from 'models/User/RolePermissions';
 
-export const updateStatuses = {
-  draft: 'broadcast',
-  published: 'close',
-};
-
 export const nextStatus = {
   [draft]: published,
   [published]: closed,

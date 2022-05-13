@@ -17,9 +17,7 @@ export function* updateSessionSettings({ fields } = {}) {
   const intervention = yield select(makeSelectIntervention());
   const session = intervention.sessions[sessionIndex];
 
-  const requestURL = `v1/interventions/${session.intervention_id}/sessions/${
-    session.id
-  }`;
+  const requestURL = `v1/interventions/${session.intervention_id}/sessions/${session.id}`;
 
   const patchDifference = pickFields(session, fields);
 

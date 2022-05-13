@@ -1,55 +1,309 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`<GridQuestion /> Should render and match the snapshot 1`] = `
+.c0 {
+  width: auto;
+  height: auto;
+  display: block;
+  border-radius: 5px;
+  width: 100%;
+}
+
+.c1 {
+  width: auto;
+  height: auto;
+  display: block;
+  border-radius: 5px;
+  width: 100%;
+  height: 100%;
+  position: relative;
+}
+
+.c2 {
+  width: auto;
+  height: auto;
+  display: block;
+  border-radius: 5px;
+  -webkit-scrollbar-width: none;
+  -moz-scrollbar-width: none;
+  -ms-scrollbar-width: none;
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+  height: inherit;
+  overflow: scroll;
+  padding-top: 14px;
+  padding-bottom: 14px;
+  padding-right: 21px;
+  margin-left: 40px;
+}
+
+.c2::-webkit-scrollbar {
+  width: 0;
+}
+
+.c17 {
+  width: auto;
+  height: auto;
+  display: block;
+  border-radius: 5px;
+}
+
+.c8 {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-flex-direction: column;
+  -ms-flex-direction: column;
+  flex-direction: column;
+  width: 100%;
+}
+
+.c9 {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-flex-direction: column;
+  -ms-flex-direction: column;
+  flex-direction: column;
+  width: 100%;
+  width: -webkit-max-content;
+  width: -moz-max-content;
+  width: max-content;
+  height: inherit;
+  max-width: 300px;
+  padding: 5px;
+}
+
+.c10 {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-flex-direction: row;
+  -ms-flex-direction: row;
+  flex-direction: row;
+  height: auto;
+  -webkit-box-pack: center;
+  -webkit-justify-content: center;
+  -ms-flex-pack: center;
+  justify-content: center;
+  justify-items: center;
+  -webkit-align-content: center;
+  -ms-flex-line-pack: center;
+  align-content: center;
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  width: 100%;
+  min-width: 80px;
+}
+
+.c11 {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-flex-direction: row;
+  -ms-flex-direction: row;
+  flex-direction: row;
+  height: auto;
+  -webkit-box-pack: justify;
+  -webkit-justify-content: space-between;
+  -ms-flex-pack: justify;
+  justify-content: space-between;
+  justify-items: space-between;
+  -webkit-align-content: center;
+  -ms-flex-line-pack: center;
+  align-content: center;
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+}
+
+.c13 {
+  display: none;
+}
+
+.c12:disabled + label > .c16 {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.c15 {
+  width: 100%;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+}
+
+.c15:hover {
+  cursor: pointer;
+}
+
+.c12:disabled + .c14 {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.c18 {
+  margin-left: 5px;
+}
+
+.c3 {
+  font-size: 13px;
+}
+
+.c3 tr,
+.c3 th,
+.c3 td {
+  font-weight: 400;
+}
+
+.c4 {
+  height: 47.5px;
+}
+
+.c5 {
+  cursor: default;
+  color: #0E0E0E;
+  background-color: #F8FBFF;
+}
+
+.c5 td:nth-last-child(-n + ) {
+  opacity: 100%;
+}
+
+.c5:hover {
+  background: !important;
+}
+
+.c5:hover td:hover {
+  opacity: 100%;
+}
+
+.c6 {
+  width: 120px;
+}
+
+.c19 {
+  font-family: DM Sans;
+  font-size: 13px;
+  line-height: 130%;
+  color: #2F3850;
+}
+
+.c20 {
+  -webkit-clip: rect(0 0 0 0);
+  clip: rect(0 0 0 0);
+  -webkit-clip-path: inset(100%);
+  clip-path: inset(100%);
+  height: 1px;
+  overflow: hidden;
+  position: absolute;
+  white-space: nowrap;
+  width: 1px;
+}
+
+.c7 {
+  z-index: 1;
+  background-color: inherit;
+  text-align: left;
+  word-break: normal;
+  word-wrap: break-word;
+}
+
+@media only screen and (min-width:768px) {
+
+}
+
+@media only screen and (min-width:960px) {
+
+}
+
+@media only screen and (min-width:1170px) {
+
+}
+
+@media only screen and (min-width:1360px) {
+
+}
+
+@media only screen and (min-width:768px) {
+
+}
+
+@media only screen and (min-width:960px) {
+
+}
+
+@media only screen and (min-width:1170px) {
+
+}
+
+@media only screen and (min-width:1360px) {
+
+}
+
 <div>
   <div
-    class="Box-sc-1vhutan-0 jtfWfT"
+    class="c0"
     width="100%"
   >
     <div
-      class="Box-sc-1vhutan-0 jOzpnJ"
+      class="c1"
       height="100%"
       width="100%"
     >
       <div
-        class="Box-sc-1vhutan-0 bkzVBq"
+        class="c2"
         height="inherit"
         overflow="scroll"
       >
         <table
-          class="Table-sc-1y0iqmn-0 dCDWhF"
+          class="c3"
         >
           <thead
-            class="THead-sc-8drp5d-0"
+            class=""
           >
             <tr
-              class="TR-sc-1omngt7-0 StripedTR-sc-1wcdkgr-0 iNrQaF ctgvLd"
+              class="c4 c5"
               color="#E2EEF1"
             >
               <th
-                class="TH-sc-1w7ae0i-0 styled__FirstTH-bqo6sz-7 eqAwGb uqDUt"
+                class="c6 c7"
                 scope="col"
                 style="position: sticky; left: 0px;"
                 width="120px"
               />
               <th
-                class="TH-sc-1w7ae0i-0 eqAwGb"
+                class="c6"
                 scope="col"
                 width="120px"
               >
                 <div
-                  class="Column-sc-4zswzq-0 ekpwZH"
+                  class="c8"
+                  id="answer-0"
                 >
                   test
                 </div>
               </th>
               <th
-                class="TH-sc-1w7ae0i-0 eqAwGb"
+                class="c6"
                 scope="col"
                 width="120px"
               >
                 <div
-                  class="Column-sc-4zswzq-0 ekpwZH"
+                  class="c8"
+                  id="answer-1"
                 >
                   test
                 </div>
@@ -57,91 +311,193 @@ exports[`<GridQuestion /> Should render and match the snapshot 1`] = `
             </tr>
           </thead>
           <tbody
-            class="TBody-gqq9cv-0"
+            class=""
           >
             <tr
-              class="TR-sc-1omngt7-0 StripedTR-sc-1wcdkgr-0 iNrQaF ctgvLd"
+              class="c4 c5"
               color="#E2EEF1"
             >
               <th
-                class="TH-sc-1w7ae0i-0 styled__FirstTH-bqo6sz-7 eqAwGb uqDUt"
+                class="c6 c7"
                 scope="row"
                 style="position: sticky; left: 0px;"
                 width="120px"
               >
                 <div
-                  class="Column-sc-4zswzq-0 hIrqPf"
+                  class="c9"
                   height="inherit"
+                  id="question-0"
                   width="max-content"
                 >
                   test
                 </div>
               </th>
               <td
-                class="TD-y7762g-0 gxeveZ"
+                class=""
               >
                 <div
-                  class="Row-y1cs0u-0 iQucgI"
-                  width="80"
+                  class="c10"
+                  width="100%"
                 >
-                  <img
-                    src="IMAGE_MOCK"
-                  />
+                  <div
+                    class="c11"
+                  >
+                    <input
+                      aria-labelledby="cell-0-0 question-0 answer-0"
+                      class="c12 c13"
+                      id="cell-0-0"
+                      type="radio"
+                    />
+                    <label
+                      class="c14 c15"
+                      for="cell-0-0"
+                    >
+                      <img
+                        class="c16 "
+                        src="IMAGE_MOCK"
+                      />
+                      <div
+                        class="c17 c18"
+                      >
+                        <p
+                          class="c19 c20"
+                        >
+                          Question 1 and Answer 1
+                        </p>
+                      </div>
+                    </label>
+                  </div>
                 </div>
               </td>
               <td
-                class="TD-y7762g-0 gxeveZ"
+                class=""
               >
                 <div
-                  class="Row-y1cs0u-0 iQucgI"
-                  width="80"
+                  class="c10"
+                  width="100%"
                 >
-                  <img
-                    src="IMAGE_MOCK"
-                  />
+                  <div
+                    class="c11"
+                  >
+                    <input
+                      aria-labelledby="cell-0-1 question-0 answer-1"
+                      class="c12 c13"
+                      id="cell-0-1"
+                      type="radio"
+                    />
+                    <label
+                      class="c14 c15"
+                      for="cell-0-1"
+                    >
+                      <img
+                        class="c16 "
+                        src="IMAGE_MOCK"
+                      />
+                      <div
+                        class="c17 c18"
+                      >
+                        <p
+                          class="c19 c20"
+                        >
+                          Question 1 and Answer 2
+                        </p>
+                      </div>
+                    </label>
+                  </div>
                 </div>
               </td>
             </tr>
             <tr
-              class="TR-sc-1omngt7-0 StripedTR-sc-1wcdkgr-0 iNrQaF ctgvLd"
+              class="c4 c5"
               color="#E2EEF1"
             >
               <th
-                class="TH-sc-1w7ae0i-0 styled__FirstTH-bqo6sz-7 eqAwGb uqDUt"
+                class="c6 c7"
                 scope="row"
                 style="position: sticky; left: 0px;"
                 width="120px"
               >
                 <div
-                  class="Column-sc-4zswzq-0 hIrqPf"
+                  class="c9"
                   height="inherit"
+                  id="question-1"
                   width="max-content"
                 >
                   test
                 </div>
               </th>
               <td
-                class="TD-y7762g-0 gxeveZ"
+                class=""
               >
                 <div
-                  class="Row-y1cs0u-0 iQucgI"
-                  width="80"
+                  class="c10"
+                  width="100%"
                 >
-                  <img
-                    src="IMAGE_MOCK"
-                  />
+                  <div
+                    class="c11"
+                  >
+                    <input
+                      aria-labelledby="cell-1-0 question-1 answer-0"
+                      class="c12 c13"
+                      id="cell-1-0"
+                      type="radio"
+                    />
+                    <label
+                      class="c14 c15"
+                      for="cell-1-0"
+                    >
+                      <img
+                        class="c16 "
+                        src="IMAGE_MOCK"
+                      />
+                      <div
+                        class="c17 c18"
+                      >
+                        <p
+                          class="c19 c20"
+                        >
+                          Question 2 and Answer 1
+                        </p>
+                      </div>
+                    </label>
+                  </div>
                 </div>
               </td>
               <td
-                class="TD-y7762g-0 gxeveZ"
+                class=""
               >
                 <div
-                  class="Row-y1cs0u-0 iQucgI"
-                  width="80"
+                  class="c10"
+                  width="100%"
                 >
-                  <img
-                    src="IMAGE_MOCK"
-                  />
+                  <div
+                    class="c11"
+                  >
+                    <input
+                      aria-labelledby="cell-1-1 question-1 answer-1"
+                      class="c12 c13"
+                      id="cell-1-1"
+                      type="radio"
+                    />
+                    <label
+                      class="c14 c15"
+                      for="cell-1-1"
+                    >
+                      <img
+                        class="c16 "
+                        src="IMAGE_MOCK"
+                      />
+                      <div
+                        class="c17 c18"
+                      >
+                        <p
+                          class="c19 c20"
+                        >
+                          Question 2 and Answer 2
+                        </p>
+                      </div>
+                    </label>
+                  </div>
                 </div>
               </td>
             </tr>

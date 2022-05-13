@@ -8,4 +8,5 @@ export const InfiniteScrollContext = createContext({
   selectAction: null,
   disableCopy: null,
   listIcon: null,
+  disabledItemsIds: null,
 });

@@ -7,6 +7,10 @@ export default defineMessages({
     id: `${scope}.formula`,
     defaultMessage: 'Formula',
   },
+  case: {
+    id: `${scope}.case`,
+    defaultMessage: 'Case { index }',
+  },
   formulaPlaceholder: {
     id: `${scope}.formulaPlaceholder`,
     defaultMessage:
@@ -18,7 +22,7 @@ export default defineMessages({
   },
   addVariable: {
     id: `${scope}.addVariable`,
-    defaultMessage: 'Add variable',
+    defaultMessage: '+ Add variable',
   },
   if: {
     id: `${scope}.if`,
@@ -30,7 +34,7 @@ export default defineMessages({
   },
   percentGoTo: {
     id: `${scope}.percentGoTo`,
-    defaultMessage: '% go to',
+    defaultMessage: 'go to',
   },
   else: {
     id: `${scope}.else`,
@@ -48,12 +52,21 @@ export default defineMessages({
     id: `${scope}.percentagesSumInvalid`,
     defaultMessage: 'Sum of random branching percentages must equal 100%',
   },
-  showRandomization: {
-    id: `${scope}.showRandomization`,
-    defaultMessage: 'Show randomization',
+  addRandomization: {
+    id: `${scope}.addRandomization`,
+    defaultMessage: 'Add randomization',
   },
   hideRandomization: {
     id: `${scope}.hideRandomization`,
     defaultMessage: 'Hide randomization',
+  },
+  deleteCaseHeader: {
+    id: `${scope}.deleteCaseHeader`,
+    defaultMessage: 'Delete Case',
+  },
+  deleteCaseMessage: {
+    id: `${scope}.deleteCaseMessage`,
+    defaultMessage:
+      'Are you sure you want to delete this Case? It will not be possible to recover it later.',
   },
 });

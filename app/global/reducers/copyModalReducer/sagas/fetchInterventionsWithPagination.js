@@ -1,8 +1,9 @@
 import axios from 'axios';
 import { toast } from 'react-toastify';
-
 import { put, takeLatest, call } from 'redux-saga/effects';
+
 import { formatMessage } from 'utils/intlOutsideReact';
+import { jsonApiToArray } from 'utils/jsonApiMapper';
 import objectToSnakeCase from 'utils/objectToSnakeCase';
 
 import { fetchInterventionsWithPaginationSuccess } from '../actions';
@@ -15,12 +16,15 @@ export function* fetchInterventionsWithPagination({
 }) {
   const requestURL = `v1/interventions`;
   const { startIndex, endIndex } = paginationData ?? {};
+
   try {
-    const {
-      data: { interventions, interventions_size: interventionsSize },
-    } = yield call(axios.get, requestURL, {
+    const { data } = yield call(axios.get, requestURL, {
       params: objectToSnakeCase({ startIndex, endIndex, ...filterData }),
     });
+
+    const { interventions_size: interventionsSize } = data;
+    const interventions = jsonApiToArray(data, 'intervention');
+
     yield put(
       fetchInterventionsWithPaginationSuccess(
         interventions,

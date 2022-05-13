@@ -93,11 +93,11 @@ export const TeamDetails = ({
     setTeamName(value);
   };
 
-  const handleOnSelect = user => {
+  const handleOnSelect = (user) => {
     setSelectedUser(user);
   };
 
-  const handleSendInvite = email => {
+  const handleSendInvite = (email) => {
     inviteToTeam(email, id);
     closeInviteModal();
   };
@@ -249,13 +249,6 @@ const mapDispatchToProps = {
   inviteToTeam: inviteToTeamRequest,
 };
 
-const withConnect = connect(
-  mapStateToProps,
-  mapDispatchToProps,
-);
+const withConnect = connect(mapStateToProps, mapDispatchToProps);
 
-export default compose(
-  withConnect,
-  memo,
-  injectIntl,
-)(TeamDetails);
+export default compose(withConnect, memo, injectIntl)(TeamDetails);

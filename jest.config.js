@@ -2,14 +2,17 @@ process.env.TZ = 'UTC';
 
 module.exports = {
   testEnvironment: 'jsdom',
+  transform: {
+    '^.+\\.[jt]sx?$': 'babel-jest',
+  },
   collectCoverageFrom: [
-    'app/**/*.{js,jsx}',
-    '!app/**/*.test.{js,jsx}',
-    '!app/**/messages.js',
-    '!app/*/RbGenerated*/*.{js,jsx}',
+    'app/**/*.{js,jsx,ts,tsx}',
+    '!app/**/*.test.{js,jsx,ts,tsx}',
+    '!app/**/messages.{js,ts}',
+    '!app/*/RbGenerated*/*.{js,jsx,ts,tsx}',
     '!app/app.js',
-    '!app/global-styles.js',
-    '!app/*/*/Loadable.{js,jsx}',
+    '!app/global-styles.{js,ts}',
+    '!app/*/*/Loadable.{js,jsx,ts,tsx}',
   ],
   coverageThreshold: {},
   moduleDirectories: ['node_modules', 'app'],
@@ -22,10 +25,11 @@ module.exports = {
     '<rootDir>/internals/testing/test-bundler.js',
     '@testing-library/jest-dom/extend-expect',
     '<rootDir>/jest.setup.js',
-    'jest-extended',
+    'jest-extended/all',
   ],
   setupFiles: ['raf/polyfill', 'jest-canvas-mock'],
-  testRegex: 'tests/.*\\.test\\.js$',
+  testRegex: 'tests/.*\\.test\\.(js|ts)x?$',
+  moduleFileExtensions: ['js', 'jsx', 'ts', 'tsx'],
   snapshotSerializers: [],
   clearMocks: true,
 };

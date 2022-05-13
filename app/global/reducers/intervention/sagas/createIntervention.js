@@ -3,10 +3,10 @@ import { put, takeLatest, call } from 'redux-saga/effects';
 import { push } from 'connected-react-router';
 import { toast } from 'react-toastify';
 
-import { defaultMapper } from 'utils/mapResponseObjects';
 import { formatMessage } from 'utils/intlOutsideReact';
 import globalMessages from 'global/i18n/globalMessages';
 
+import { jsonApiToObject } from 'utils/jsonApiMapper';
 import { createInterventionSuccess } from '../actions';
 import {
   CREATE_INTERVENTION_REQUEST,
@@ -17,13 +17,14 @@ export function* createIntervention() {
   const requestURL = `v1/interventions`;
 
   try {
-    const {
-      data: { data },
-    } = yield call(axios.post, requestURL, { name: 'New e-Intervention' });
-    const mappedData = defaultMapper(data);
+    const { data } = yield call(axios.post, requestURL, {
+      name: 'New e-Intervention',
+    });
 
-    yield put(createInterventionSuccess(mappedData));
-    yield put(push(`/interventions/${mappedData.id}`));
+    const intervention = jsonApiToObject(data, 'intervention');
+
+    yield put(createInterventionSuccess(intervention));
+    yield put(push(`/interventions/${intervention.id}`));
   } catch (error) {
     yield call(
       toast.error,

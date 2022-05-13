@@ -27,9 +27,13 @@ function* registerResearcher({ payload }) {
     yield call(LocalStorageService.clearHeaders);
     yield call(LocalStorageService.clearState);
     yield call(LocalStorageService.clearGuestHeaders);
-    yield call(toast.success, formatMessage(messages.createdAccount), {
-      toastId: REGISTER_RESEARCHER_SUCCESS,
-    });
+    yield call(
+      toast.success,
+      formatMessage(messages.createdResearcherAccount),
+      {
+        toastId: REGISTER_RESEARCHER_SUCCESS,
+      },
+    );
   } catch (error) {
     yield put(registerResearcherError(requestErrorMessageHandler(error)));
   }

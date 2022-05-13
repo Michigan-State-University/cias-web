@@ -9,7 +9,7 @@ import { createIntervention } from 'utils/reducerCreators';
 import fetchSessionEmailsSaga, {
   fetchSessionEmails,
 } from 'global/reducers/intervention/sagas/fetchSessionEmails';
-import { jsonApiToArray } from 'utils/jsonApiMapper';
+import { jsonApiToArray, jsonApiToObject } from 'utils/jsonApiMapper';
 import {
   fetchSessionEmailsSuccess,
   fetchSessionEmailsError,
@@ -20,7 +20,10 @@ import { FETCH_SESSION_EMAILS_REQUEST } from '../../constants';
 describe('fetchInterventionEmails saga', () => {
   const mockIntervention = createIntervention();
   const mockState = {
-    intervention: { ...initialState, intervention: mockIntervention },
+    intervention: {
+      ...initialState,
+      intervention: jsonApiToObject({ data: mockIntervention }, 'intervention'),
+    },
   };
   const payload = { index: 0 };
 

@@ -80,17 +80,11 @@ const mapDispatchToProps = {
   selectTemplate: selectTemplateSection,
 };
 
-const withConnect = connect(
-  null,
-  mapDispatchToProps,
-);
+const withConnect = connect(null, mapDispatchToProps);
 
 ReportTemplateDetails.propTypes = {
   fetchSingleReportTemplate: PropTypes.func,
   selectTemplate: PropTypes.func,
 };
 
-export default compose(
-  withConnect,
-  injectIntl,
-)(ReportTemplateDetails);
+export default compose(withConnect, injectIntl)(ReportTemplateDetails);

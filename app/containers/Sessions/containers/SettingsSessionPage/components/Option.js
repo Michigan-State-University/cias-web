@@ -3,11 +3,11 @@ import PropTypes from 'prop-types';
 
 import Row from 'components/Row';
 import Text from 'components/Text';
-import Switch from 'components/Switch';
+import { FullWidthSwitch } from 'components/Switch';
 import { colors, borders } from 'theme';
 
 const Option = ({ withBorder, fontWeight, label, value, action, disabled }) => {
-  const handleToggle = val => {
+  const handleToggle = (val) => {
     action(val);
   };
   return (
@@ -22,8 +22,14 @@ const Option = ({ withBorder, fontWeight, label, value, action, disabled }) => {
           : null
       }
     >
-      <Text fontWeight={fontWeight}>{label}</Text>
-      <Switch disabled={disabled} checked={value} onToggle={handleToggle} />
+      <FullWidthSwitch
+        id={label}
+        disabled={disabled}
+        checked={value}
+        onToggle={handleToggle}
+      >
+        <Text fontWeight={fontWeight}>{label}</Text>
+      </FullWidthSwitch>
     </Row>
   );
 };

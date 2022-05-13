@@ -4,8 +4,9 @@ import { colors, themeColors } from 'theme';
 
 export const DashedBox = styled(Box)`
   height: 40px;
+  background-color: ${colors.white};
   border: 1px dashed ${colors.greyishBlue};
-  color: ${colors.greyishBlue};
+  color: ${themeColors.secondary};
   display: flex;
   justify-content: center;
   align-items: center;
@@ -22,10 +23,24 @@ export const DashedBox = styled(Box)`
         }
       : {
           '&:hover': {
-            backgroundColor: themeColors.primary,
-            color: colors.white,
-            border: 'none',
+            backgroundColor: colors.linkWater,
           },
           cursor: 'pointer',
         }}
+`;
+
+export const Unit = styled.div`
+  position: absolute;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  pointer-events: none;
+  overflow: hidden;
+  display: flex;
+  .invisible {
+    visibility: hidden;
+  }
+  #unitsValue {
+    white-space: pre;
+  }
 `;

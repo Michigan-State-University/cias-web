@@ -8,7 +8,7 @@ import { SEND_SMS_TOKEN_REQUEST } from '../constants';
 export function* sendSmsToken() {
   const requestURL = `v1/users/send_sms_token`;
 
-  const requestObject = phoneNumber => ({
+  const requestObject = (phoneNumber) => ({
     phone_number: phoneNumber.number,
     iso: phoneNumber.iso,
     prefix: phoneNumber.prefix,

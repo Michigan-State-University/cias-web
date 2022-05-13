@@ -415,64 +415,345 @@ Object {
       </div>
     </div>
   </body>,
-  "container": <div>
+  "container": .c0 {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-flex-direction: column;
+  -ms-flex-direction: column;
+  flex-direction: column;
+  width: 100%;
+  -webkit-box-pack: justify;
+  -webkit-justify-content: space-between;
+  -ms-flex-pack: justify;
+  justify-content: space-between;
+  justify-items: space-between;
+  -webkit-box-flex: 1;
+  -webkit-flex-grow: 1;
+  -ms-flex-positive: 1;
+  flex-grow: 1;
+}
+
+.c2 {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-flex-direction: column;
+  -ms-flex-direction: column;
+  flex-direction: column;
+  width: 100%;
+  height: 100%;
+}
+
+.c3 {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-flex-direction: column;
+  -ms-flex-direction: column;
+  flex-direction: column;
+  width: 100%;
+  margin-bottom: 15px;
+  margin-right: 25px;
+  margin-left: 25px;
+}
+
+.c14 {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-flex-direction: column;
+  -ms-flex-direction: column;
+  flex-direction: column;
+  width: 100%;
+  height: 60px;
+  max-height: 300px;
+  background-color: rgba(248,251,255,1);
+}
+
+.c17 {
+  width: 100%;
+  height: 40px;
+  border-radius: 100px;
+  cursor: pointer;
+  border: none;
+  outline: none;
+  background-color: #107969;
+  color: #FFFFFF;
+  border: 1px solid transparent;
+  cursor: default;
+  background-color: #9AA1B6;
+  -webkit-transition: background-color 300ms ease,color 300ms ease,border 300ms ease;
+  transition: background-color 300ms ease,color 300ms ease,border 300ms ease;
+  margin-right: 25px;
+  margin-left: 25px;
+}
+
+.c1 {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-flex-direction: row;
+  -ms-flex-direction: row;
+  flex-direction: row;
+  height: auto;
+}
+
+.c4 {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-flex-direction: row;
+  -ms-flex-direction: row;
+  flex-direction: row;
+  height: auto;
+  -webkit-align-content: center;
+  -ms-flex-line-pack: center;
+  align-content: center;
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  cursor: pointer;
+}
+
+.c6 {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-flex-direction: row;
+  -ms-flex-direction: row;
+  flex-direction: row;
+  height: auto;
+  margin-top: 10px;
+}
+
+.c9 {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-flex-direction: row;
+  -ms-flex-direction: row;
+  flex-direction: row;
+  height: auto;
+  width: 100%;
+}
+
+.c16 {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-flex-direction: row;
+  -ms-flex-direction: row;
+  flex-direction: row;
+  height: auto;
+  margin-top: 20px;
+}
+
+.c8 {
+  width: auto;
+  height: auto;
+  display: block;
+  border-radius: 5px;
+  max-width: 150px;
+  margin-left: 5px;
+}
+
+.c10 {
+  width: auto;
+  height: auto;
+  display: block;
+  border-radius: 5px;
+  width: 100%;
+  display: inline;
+}
+
+.c11 {
+  width: auto;
+  height: auto;
+  display: block;
+  border-radius: 5px;
+}
+
+.c13 {
+  width: auto;
+  height: auto;
+  display: block;
+  border-radius: 5px;
+  max-height: 300px;
+  overflow: scroll;
+}
+
+.c15 {
+  width: auto;
+  height: auto;
+  display: block;
+  border-radius: 5px;
+  -webkit-box-flex: 1;
+  -webkit-flex-grow: 1;
+  -ms-flex-positive: 1;
+  flex-grow: 1;
+}
+
+.c5 {
+  font-family: DM Sans;
+  font-size: 13px;
+  line-height: 130%;
+  margin-top: 2px;
+  margin-left: 5px;
+  color: rgba(183,39,234,1);
+  color: rgba(183,39,234,1);
+}
+
+.c7 {
+  font-family: DM Sans;
+  font-size: 13px;
+  line-height: 130%;
+  font-size: 15px;
+  font-weight: 700;
+  color: #2F3850;
+}
+
+.c12 {
+  position: relative;
+  width: 100%;
+  font-size: 15px;
+  font-weight: 700;
+  color: rgba(183,39,234,1);
+  color: rgba(183,39,234,1);
+}
+
+@media only screen and (min-width:768px) {
+
+}
+
+@media only screen and (min-width:960px) {
+
+}
+
+@media only screen and (min-width:1170px) {
+
+}
+
+@media only screen and (min-width:1360px) {
+
+}
+
+@media only screen and (min-width:768px) {
+
+}
+
+@media only screen and (min-width:960px) {
+
+}
+
+@media only screen and (min-width:1170px) {
+
+}
+
+@media only screen and (min-width:1360px) {
+
+}
+
+@media only screen and (min-width:768px) {
+
+}
+
+@media only screen and (min-width:960px) {
+
+}
+
+@media only screen and (min-width:1170px) {
+
+}
+
+@media only screen and (min-width:1360px) {
+
+}
+
+@media only screen and (min-width:768px) {
+
+}
+
+@media only screen and (min-width:960px) {
+
+}
+
+@media only screen and (min-width:1170px) {
+
+}
+
+@media only screen and (min-width:1360px) {
+
+}
+
+<div>
     <div
-      class="Column-sc-4zswzq-0 kVNJHr"
+      class="c0"
     >
       <div
-        class="Row-y1cs0u-0 dskFsL"
+        class="c1"
       >
         <div
-          class="Column-sc-4zswzq-0 iyDzCx"
+          class="c2"
           data-testid="undefined-select-target-session"
           height="100%"
         >
           <div
-            class="Column-sc-4zswzq-0 cgbIvt"
+            class="c3"
           >
             <div
-              class="Row-y1cs0u-0 bLAOxT"
+              class="c4"
             >
               <img
                 src="IMAGE_MOCK"
               />
               <p
-                class="Text-e4p0w3-0 lnARqL"
+                class="c5"
                 color="#B727EA"
               >
                 Sessions
               </p>
             </div>
             <div
-              class="Row-y1cs0u-0 liVUAf"
+              class="c6"
             >
               <p
-                class="Text-e4p0w3-0 kWYQnv"
+                class="c7"
                 font-size="15"
                 font-weight="bold"
               >
                 Question Groups in 
               </p>
               <div
-                class="Box-sc-1vhutan-0 kBBRkC"
+                class="c8"
               >
                 <div
-                  class="Row-y1cs0u-0 gQFDhs"
+                  class="c9"
                   width="100%"
                 >
                   <div
-                    class="Box-sc-1vhutan-0 lndiol"
+                    class="c10"
                     display="inline"
                     width="100%"
                   >
                     <div
-                      class="Box-sc-1vhutan-0 dvfkZg"
+                      class="c11"
                       data-for="Intervention test title 1"
                       data-tip=""
                     >
                       <div>
                         <span
-                          class="styled__StyledEllipsisText-h4mjfj-0 kOcmmz"
+                          class="c12"
                           color="#B727EA"
                           data-for="Intervention test title 1"
                           data-tip="Intervention test title 1"
@@ -499,15 +780,15 @@ Object {
             </div>
           </div>
           <div
-            class="Box-sc-1vhutan-0 ijYDEg"
+            class="c13"
             overflow="scroll"
           >
             <div
-              class="Column-sc-4zswzq-0 gyZops"
+              class="c14"
               height="60"
             >
               <div
-                class="Box-sc-1vhutan-0 fcQhED"
+                class="c15"
               >
                 <div
                   class="virtual-grid-auto-sizer"
@@ -533,10 +814,10 @@ Object {
         </div>
       </div>
       <div
-        class="Row-y1cs0u-0 bHvccM"
+        class="c16"
       >
         <button
-          class="StyledButton-d2s0gt-0 bYOfpf"
+          class="c17"
           color="primary"
           disabled=""
           radius="100px"
