@@ -1,23 +1,142 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`<CurrencyQuestion /> Should render and match the snapshot 1`] = `
+.c3 {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-flex-direction: column;
+  -ms-flex-direction: column;
+  flex-direction: column;
+  width: 100%;
+}
+
+.c1 {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-flex-direction: row;
+  -ms-flex-direction: row;
+  flex-direction: row;
+  height: auto;
+}
+
+.c2 {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-flex-direction: row;
+  -ms-flex-direction: row;
+  flex-direction: row;
+  height: auto;
+  width: 100%;
+}
+
+.c5 {
+  background-color: #F8FBFF;
+  border-radius: 5px;
+  border-style: solid;
+  border-width: 1px;
+  border-color: #E9F1FB;
+  margin-right: 10px;
+  margin-left: 10px;
+  width: 200px;
+  height: 50px;
+  border: 3px solid #107969;
+}
+
+.c5:hover {
+  cursor: pointer;
+}
+
+.c5:focus {
+  outline: none;
+}
+
+.c4 .schedule-date-picker {
+  font-family: DM Sans;
+  background-color: #E9F1FB;
+}
+
+.c4 .schedule-date-picker .react-datepicker__header {
+  background-color: #F8FBFF;
+}
+
+.c4 .schedule-date-picker .react-datepicker__day--keyboard-selected {
+  background-color: #B727EA;
+}
+
+.c4 .schedule-date-picker .react-datepicker__day--selected {
+  background-color: #B727EA;
+}
+
+.c4 .schedule-date-picker .react-datepicker__day:hover {
+  color: #0E0E0E;
+  background-color: #F8FBFF;
+}
+
+.c4 .schedule-date-picker .react-datepicker__year-option {
+  background-color: #E9F1FB;
+}
+
+.c4 .schedule-date-picker .react-datepicker__month-option {
+  background-color: #E9F1FB;
+}
+
+.c6 {
+  font-family: DM Sans;
+  font-size: 13px;
+  line-height: 130%;
+  font-size: 15px;
+  color: rgba(47,56,80,0.6);
+  color: rgba(47,56,80,0.6);
+}
+
+.c0 {
+  width: auto;
+  height: auto;
+  display: block;
+  border-radius: 5px;
+  width: 100%;
+  padding: 15px;
+}
+
+@media only screen and (min-width:768px) {
+
+}
+
+@media only screen and (min-width:960px) {
+
+}
+
+@media only screen and (min-width:1170px) {
+
+}
+
+@media only screen and (min-width:1360px) {
+
+}
+
 <div>
   <div
-    class="Box-sc-1vhutan-0 eXTwuD"
+    class="c0"
     width="100%"
   >
     <div
-      class="Row-y1cs0u-0 dskFsL"
+      class="c1"
     >
       <div
-        class="Row-y1cs0u-0 gQFDhs"
+        class="c2"
         width="100%"
       >
         <div
-          class="Column-sc-4zswzq-0 ekpwZH"
+          class="c3"
         >
           <div
-            class="styled__DatePickerWrapper-sc-10udg63-2 gslSJH"
+            class="c4"
           >
             <div
               class="react-datepicker-wrapper"
@@ -26,13 +145,13 @@ exports[`<CurrencyQuestion /> Should render and match the snapshot 1`] = `
                 class="react-datepicker__input-container"
               >
                 <button
-                  class="styled__StyledDateInput-sc-10udg63-1 esA-dpB"
+                  class="c5"
                   data-private="true"
                   height="50"
                   width="200"
                 >
                   <p
-                    class="Text-e4p0w3-0 gSFBZi"
+                    class="c6"
                     color="#2F3850"
                     font-size="15"
                   >

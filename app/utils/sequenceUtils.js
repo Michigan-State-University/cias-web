@@ -27,7 +27,7 @@ export const calculateNextValue = (valuesSequence, strategy) => {
   }
 };
 
-const nextValueStrategy = valuesSequence => {
+const nextValueStrategy = (valuesSequence) => {
   let { length: value } = valuesSequence;
   do {
     value += 1;
@@ -35,4 +35,4 @@ const nextValueStrategy = valuesSequence => {
   return value;
 };
 
-const highestValueStrategy = valuesSequence => max(valuesSequence) + 1;
+const highestValueStrategy = (valuesSequence) => max(valuesSequence) + 1;

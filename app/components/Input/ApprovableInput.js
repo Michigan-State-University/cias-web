@@ -9,15 +9,13 @@ import isNumber from 'lodash/isNumber';
 import useOutsideClick from 'utils/useOutsideClick';
 import { formatMessage } from 'utils/intlOutsideReact';
 
-import messages from 'components/Input/messages';
-
 import Column from '../Column';
 import Row from '../Row';
 import { Input } from './index';
 import { DatePickerWrapper, QuillStyled } from './styled';
 import { TextArea } from './TextArea';
 import DateInput from './DateInput';
-
+import messages from './messages';
 import './QuillSinglelineHandler';
 
 const quillModules = {
@@ -58,32 +56,33 @@ const quillModulesSingleline = {
   },
 };
 
-const ApprovableInput = props => {
-  const {
-    value: propsValue,
-    validator,
-    onValidation,
-    placeholder,
-    textAlign,
-    keyboard,
-    type,
-    onCheck,
-    onFocus,
-    rows,
-    richText,
-    autoSize,
-    fontSize,
-    mr,
-    disabled,
-    height,
-    width,
-    padding,
-    defaultFontSize,
-    styles,
-    minDate,
-    ariaLabel,
-    id,
-  } = props;
+const ApprovableInput = ({
+  value: propsValue,
+  validator,
+  onValidation,
+  placeholder,
+  textAlign,
+  keyboard,
+  type,
+  onValueChange,
+  onCheck,
+  onFocus,
+  rows,
+  richText,
+  autoSize,
+  fontSize,
+  mr,
+  disabled,
+  height,
+  width,
+  padding,
+  defaultFontSize,
+  styles,
+  minDate,
+  ariaLabel,
+  'aria-labelledby': ariaLabelledBy,
+  id,
+}) => {
   const [value, setValue] = useState(propsValue);
   const [focused, setFocused] = useState(false);
   const ref = useRef();
@@ -105,7 +104,7 @@ const ApprovableInput = props => {
   useOutsideClick(ref, blur, focused);
 
   const blockQuillBlur = () => {
-    const preventDefault = event => event.preventDefault();
+    const preventDefault = (event) => event.preventDefault();
     const toolbar = ref.current.editor.container.querySelector('.ql-toolbar');
 
     const block = () => toolbar.addEventListener('mousedown', preventDefault);
@@ -129,7 +128,11 @@ const ApprovableInput = props => {
     setValue(propsValue);
   }, [propsValue]);
 
-  const onInputChange = targetValue => {
+  useEffect(() => {
+    if (onValueChange) onValueChange(value);
+  }, [value, onValueChange]);
+
+  const onInputChange = (targetValue) => {
     if (!validator) setValue(targetValue);
     else {
       const validationResult = validator(targetValue);
@@ -147,7 +150,7 @@ const ApprovableInput = props => {
     }
   };
 
-  const handleFocus = event => {
+  const handleFocus = (event) => {
     setFocused(true);
     if (onFocus) onFocus(event);
   };
@@ -161,7 +164,7 @@ const ApprovableInput = props => {
           value={value}
           placeholder={placeholder}
           onFocus={() => handleFocus(ref.current)}
-          onChange={v => onInputChange(v)}
+          onChange={(v) => onInputChange(v)}
           onBlur={onBlur}
           modules={type === 'multiline' ? quillModules : quillModulesSingleline}
           bounds="#quill_boundaries"
@@ -183,13 +186,14 @@ const ApprovableInput = props => {
           {...(rows ? { rows, height: 'auto' } : {})}
           mr={isNumber(mr) ? mr : 9}
           value={value}
-          onChange={event => onInputChange(event.target.value)}
+          onChange={(event) => onInputChange(event.target.value)}
           onFocus={handleFocus}
           onBlur={onBlur}
-          placeholder={props.placeholder}
+          placeholder={placeholder}
           transparent
           disabled={disabled}
           aria-label={ariaLabel}
+          aria-labelledby={ariaLabelledBy}
           id={id}
         />
       );
@@ -201,7 +205,7 @@ const ApprovableInput = props => {
             disabled={disabled}
             minDate={minDate}
             selected={value}
-            onChange={date => onCheck(date)}
+            onChange={(date) => onCheck(date)}
             onFocus={onFocus}
             placeholderText={placeholder}
             dateFormat="MM/dd/yyyy"
@@ -236,7 +240,7 @@ const ApprovableInput = props => {
         mr={isNumber(mr) ? mr : 9}
         textAlign={textAlign}
         value={value}
-        onChange={event => onInputChange(event.target.value)}
+        onChange={(event) => onInputChange(event.target.value)}
         onFocus={handleFocus}
         onBlur={onBlur}
         placeholder={placeholder}
@@ -246,6 +250,7 @@ const ApprovableInput = props => {
         fontSize={fontSize}
         padding={padding}
         aria-label={ariaLabel}
+        aria-labelledby={ariaLabelledBy}
         id={id}
         {...styles}
       />
@@ -265,6 +270,7 @@ ApprovableInput.propTypes = {
     PropTypes.number,
     PropTypes.object,
   ]),
+  onValueChange: PropTypes.func,
   onCheck: PropTypes.func,
   onFocus: PropTypes.func,
   rows: PropTypes.string,
@@ -286,6 +292,7 @@ ApprovableInput.propTypes = {
   minDate: PropTypes.object,
   styles: PropTypes.object,
   ariaLabel: PropTypes.string,
+  'aria-labelledby': PropTypes.string,
   id: PropTypes.string,
 };
 

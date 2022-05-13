@@ -5,14 +5,14 @@ import { connect } from 'react-redux';
 import { createStructuredSelector } from 'reselect';
 import { injectIntl } from 'react-intl';
 
-import Column from 'components/Column';
-import PhoneNumberForm from 'components/AccountSettings/PhoneNumberForm';
-import Question from 'models/Session/Question';
-import Row from 'components/Row';
 import {
   makeSelectSelectedQuestion,
   updateQuestionData,
 } from 'global/reducers/questions';
+
+import Column from 'components/Column';
+import PhoneNumberForm from 'components/AccountSettings/PhoneNumberForm';
+import Row from 'components/Row';
 
 import { UPDATE_DATA } from './constants';
 
@@ -36,7 +36,7 @@ const PhoneQuestion = ({
             iso,
             confirmed: true,
           }}
-          changePhoneNumber={value =>
+          changePhoneNumber={(value) =>
             updateAnswer({ variable, payload: value })
           }
           error={null}
@@ -49,7 +49,7 @@ const PhoneQuestion = ({
 };
 
 PhoneQuestion.propTypes = {
-  selectedQuestion: PropTypes.shape(Question).isRequired,
+  selectedQuestion: PropTypes.object.isRequired,
   intl: PropTypes.object.isRequired,
   updateAnswer: PropTypes.func.isRequired,
 };
@@ -59,13 +59,10 @@ const mapStateToProps = createStructuredSelector({
 });
 
 const mapDispatchToProps = {
-  updateAnswer: value =>
+  updateAnswer: (value) =>
     updateQuestionData({ type: UPDATE_DATA, data: { ...value } }),
 };
 
-const withConnect = connect(
-  mapStateToProps,
-  mapDispatchToProps,
-);
+const withConnect = connect(mapStateToProps, mapDispatchToProps);
 
 export default injectIntl(compose(withConnect)(PhoneQuestion));

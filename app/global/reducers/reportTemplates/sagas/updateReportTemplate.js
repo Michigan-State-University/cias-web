@@ -13,9 +13,7 @@ import {
 function* updateReportTemplate({
   payload: { sessionId, reportTemplate, imageData },
 }) {
-  const requestUrl = `/v1/sessions/${sessionId}/report_templates/${
-    reportTemplate.id
-  }`;
+  const requestUrl = `/v1/sessions/${sessionId}/report_templates/${reportTemplate.id}`;
 
   try {
     if (!imageData) {

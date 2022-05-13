@@ -16,8 +16,8 @@ export const useAsync = (asyncFunction, onSuccess, options) => {
   useEffect(() => {
     let isMounted = true;
 
-    if (conditions.every(condition => condition))
-      asyncFunction().then(data => isMounted && onSuccess(data));
+    if (conditions.every((condition) => condition))
+      asyncFunction().then((data) => isMounted && onSuccess(data));
 
     return () => {
       isMounted = false;

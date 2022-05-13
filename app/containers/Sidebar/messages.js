@@ -12,4 +12,12 @@ export default defineMessages({
     id: `${scope}.sidebarNavigationHeader`,
     defaultMessage: 'CIAS Panel',
   },
+  showSidebarButtonLabel: {
+    id: `${scope}.showSidebarButtonLabel`,
+    defaultMessage: 'Hover to show sidebar',
+  },
+  showSidebarIcon: {
+    id: `${scope}.showSidebarIcon`,
+    defaultMessage: 'Show sidebar icon',
+  },
 });

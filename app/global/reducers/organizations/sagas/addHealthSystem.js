@@ -10,11 +10,13 @@ import {
   addHealthSystemSuccess,
   selectEntityAction,
 } from '../actions';
-import { makeSelectOrganization } from '../selectors';
+import { makeSelectOrganizationHealthSystemsSize } from '../selectors';
 
 export function* addHealthSystem({ payload: { name, organizationId } }) {
   const requestURL = `v1/health_systems`;
-  const organization = yield select(makeSelectOrganization());
+  const healthSystemsSize = yield select(
+    makeSelectOrganizationHealthSystemsSize(),
+  );
 
   try {
     const { data } = yield call(
@@ -22,9 +24,7 @@ export function* addHealthSystem({ payload: { name, organizationId } }) {
       requestURL,
       objectKeysToSnakeCase({
         healthSystem: {
-          name:
-            name ??
-            `New Health System ${organization.healthSystems.length + 1}`,
+          name: name ?? `New Health System ${healthSystemsSize + 1}`,
           organizationId,
         },
       }),

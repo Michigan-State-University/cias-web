@@ -27,7 +27,9 @@ exports[`<ActionIcon /> Should render and match the snapshot as button 1`] = `
 
 <div>
   <button
+    aria-label="Close"
     class="c0"
+    title="Close"
   >
     <img
       alt="cross"
@@ -61,9 +63,11 @@ exports[`<ActionIcon /> Should render and match the snapshot as link 1`] = `
 
 <div>
   <a
+    aria-label="Close"
     class="c0"
     data-cy="back-intervention-button"
     href="/"
+    title="Close"
   >
     <img
       alt="cross"
@@ -100,7 +104,9 @@ exports[`<ActionIcon /> Should render and match the snapshot with different icon
 
 <div>
   <button
+    aria-label="Close"
     class="c0"
+    title="Close"
   >
     <img
       alt="cross"

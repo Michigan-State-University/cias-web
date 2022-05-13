@@ -7,7 +7,7 @@ import TableRow from './TableRow';
 
 const TableBody = ({ users, history, openModal, formatMessage }) => (
   <TBody>
-    {users.map(user => (
+    {users.map((user) => (
       <TableRow
         key={`row-th-${user.id}`}
         user={user}

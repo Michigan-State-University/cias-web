@@ -43,42 +43,41 @@ import {
   UPDATE_VARIABLE,
 } from './constants';
 
-export const selectQuestion = index =>
-  actionBuilder(SELECT_QUESTION, { index });
+export const selectQuestion = (id) => actionBuilder(SELECT_QUESTION, { id });
 
 export const createQuestionRequest = (question, id) =>
   actionBuilder(CREATE_QUESTION_REQUEST, { question, id });
-export const createQuestionSuccess = question =>
+export const createQuestionSuccess = (question) =>
   actionBuilder(CREATE_QUESTION_SUCCESS, { question });
-export const createQuestionError = error =>
+export const createQuestionError = (error) =>
   actionBuilder(CREATE_QUESTION_ERROR, { error });
 
-export const getQuestionsRequest = sessionId =>
+export const getQuestionsRequest = (sessionId) =>
   actionBuilder(GET_QUESTIONS_REQUEST, { sessionId });
-export const getQuestionsSuccess = questions =>
-  actionBuilder(GET_QUESTIONS_SUCCESS, { questions });
-export const getQuestionsError = error =>
+export const getQuestionsSuccess = (questions, questionToSelectId) =>
+  actionBuilder(GET_QUESTIONS_SUCCESS, { questions, questionToSelectId });
+export const getQuestionsError = (error) =>
   actionBuilder(GET_QUESTIONS_ERROR, { error });
 
-export const editQuestionRequest = payload =>
+export const editQuestionRequest = (payload) =>
   actionBuilder(EDIT_QUESTION_REQUEST, payload);
-export const editQuestionSuccess = question =>
+export const editQuestionSuccess = (question) =>
   actionBuilder(EDIT_QUESTION_SUCCESS, { question });
-export const editQuestionError = payload =>
+export const editQuestionError = (payload) =>
   actionBuilder(EDIT_QUESTION_ERROR, payload);
 
-export const addQuestionImageRequest = payload =>
+export const addQuestionImageRequest = (payload) =>
   actionBuilder(ADD_QUESTION_IMAGE_REQUEST, payload);
-export const addQuestionImageSuccess = question =>
+export const addQuestionImageSuccess = (question) =>
   actionBuilder(ADD_QUESTION_IMAGE_SUCCESS, { question });
-export const addQuestionImageError = payload =>
+export const addQuestionImageError = (payload) =>
   actionBuilder(ADD_QUESTION_IMAGE_ERROR, payload);
 
-export const deleteQuestionImageRequest = payload =>
+export const deleteQuestionImageRequest = (payload) =>
   actionBuilder(DELETE_QUESTION_IMAGE_REQUEST, payload);
-export const deleteQuestionImageSuccess = question =>
+export const deleteQuestionImageSuccess = (question) =>
   actionBuilder(DELETE_QUESTION_IMAGE_SUCCESS, { question });
-export const deleteQuestionImageError = payload =>
+export const deleteQuestionImageError = (payload) =>
   actionBuilder(DELETE_QUESTION_IMAGE_ERROR, payload);
 
 export const updateQuestionImageRequest = (questionId, description) =>
@@ -86,42 +85,42 @@ export const updateQuestionImageRequest = (questionId, description) =>
     questionId,
     description,
   });
-export const updateQuestionImageSuccess = questionId =>
+export const updateQuestionImageSuccess = (questionId) =>
   actionBuilder(UPDATE_QUESTION_IMAGE_SUCCESS, { questionId });
-export const updateQuestionImageError = payload =>
+export const updateQuestionImageError = (payload) =>
   actionBuilder(UPDATE_QUESTION_IMAGE_ERROR, payload);
 
-export const copyQuestionRequest = payload =>
+export const copyQuestionRequest = (payload) =>
   actionBuilder(COPY_QUESTION_REQUEST, payload);
-export const copyQuestionSuccess = question =>
+export const copyQuestionSuccess = (question) =>
   actionBuilder(COPY_QUESTION_SUCCESS, { question });
-export const copyQuestionError = error =>
+export const copyQuestionError = (error) =>
   actionBuilder(COPY_QUESTION_ERROR, { error });
 
-export const changeQuestionTypeRequest = newType =>
+export const changeQuestionTypeRequest = (newType) =>
   actionBuilder(CHANGE_QUESTION_TYPE_REQUEST, { newType });
 export const changeQuestionTypeSuccess = () =>
   actionBuilder(CHANGE_QUESTION_TYPE_SUCCESS, {});
-export const changeQuestionTypeError = error =>
+export const changeQuestionTypeError = (error) =>
   actionBuilder(CHANGE_QUESTION_TYPE_ERROR, { error });
 
-export const reorderQuestionListRequest = payload =>
+export const reorderQuestionListRequest = (payload) =>
   actionBuilder(REORDER_QUESTION_LIST_REQUEST, payload);
 export const reorderQuestionListSuccess = () =>
   actionBuilder(REORDER_QUESTION_LIST_SUCCESS, {});
-export const reorderQuestionListError = error =>
+export const reorderQuestionListError = (error) =>
   actionBuilder(REORDER_QUESTION_LIST_ERROR, { error });
 
-export const deleteQuestionRequest = payload =>
+export const deleteQuestionRequest = (payload) =>
   actionBuilder(DELETE_QUESTION_REQUEST, payload);
 export const deleteQuestionSuccess = () =>
   actionBuilder(DELETE_QUESTION_SUCCESS, {});
-export const deleteQuestionError = error =>
+export const deleteQuestionError = (error) =>
   actionBuilder(DELETE_QUESTION_ERROR, { error });
 
-export const updateQuestionData = data =>
+export const updateQuestionData = (data) =>
   actionBuilder(UPDATE_QUESTION_DATA, data);
-export const updateQuestionSettings = data =>
+export const updateQuestionSettings = (data) =>
   actionBuilder(UPDATE_QUESTION_SETTINGS, data);
 export const updateVariableAction = (name, questionId) =>
   updateQuestionData({ type: UPDATE_VARIABLE, data: { name, questionId } });
@@ -130,7 +129,7 @@ export const deleteQuestionsRequest = (questionIds, sessionId, groupIds) =>
   actionBuilder(DELETE_QUESTIONS_REQUEST, { questionIds, sessionId, groupIds });
 export const deleteQuestionsSuccess = () =>
   actionBuilder(DELETE_QUESTIONS_SUCCESS, {});
-export const deleteQuestionsError = error =>
+export const deleteQuestionsError = (error) =>
   actionBuilder(DELETE_QUESTIONS_ERROR, { error });
 
 export const copyExternallyQuestionRequest = (
@@ -150,7 +149,7 @@ export const copyExternallyQuestionSuccess = (question, isCurrent) =>
     question,
     isCurrent,
   });
-export const copyExternallyQuestionError = error =>
+export const copyExternallyQuestionError = (error) =>
   actionBuilder(COPY_EXTERNALLY_QUESTION_ERROR, {
     error,
   });

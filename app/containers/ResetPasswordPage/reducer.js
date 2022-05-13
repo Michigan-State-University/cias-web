@@ -18,7 +18,7 @@ export const initialState = {
 
 /* eslint-disable default-case, no-param-reassign */
 export const resetPasswordReducer = (state = initialState, { type, payload }) =>
-  produce(state, draft => {
+  produce(state, (draft) => {
     switch (type) {
       case RESET_PASSWORD_REQUEST:
         draft.resetPasswordLoading = true;

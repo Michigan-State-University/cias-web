@@ -32,7 +32,6 @@ import {
   sessionReducer,
 } from 'global/reducers/session';
 
-import { ReportTemplate } from 'models/ReportTemplate';
 import { TemplateSection } from 'models/ReportTemplate/TemplateSection';
 import { canEditReportTemplate } from 'models/Status/statusPermissions';
 
@@ -116,7 +115,7 @@ ReportTemplatesPage.propTypes = {
   getSession: PropTypes.func,
   intl: PropTypes.shape(IntlShape),
   selectedReportId: PropTypes.string,
-  singleReportTemplate: PropTypes.shape(ReportTemplate),
+  singleReportTemplate: PropTypes.object,
   selectedTemplateSectionId: PropTypes.string,
   selectedTemplateSection: PropTypes.shape(TemplateSection),
   intervention: PropTypes.shape({ status: PropTypes.string }),
@@ -140,10 +139,7 @@ const mapDispatchToProps = {
   selectTemplate: selectReportTemplate,
 };
 
-const withConnect = connect(
-  mapStateToProps,
-  mapDispatchToProps,
-);
+const withConnect = connect(mapStateToProps, mapDispatchToProps);
 
 export default compose(
   injectIntl,

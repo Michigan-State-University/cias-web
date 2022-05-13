@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 import { colors } from 'theme';
-import { margin } from '../BaseComponentStyles';
+import { margin, layout } from '../BaseComponentStyles';
 
 export const StyledDivider = styled.div`
   width: 100%;
@@ -8,6 +8,7 @@ export const StyledDivider = styled.div`
   flex: 1;
   border-top: 1px solid ${({ color }) => color};
   ${margin}
+  ${layout};
 `;
 
 StyledDivider.defaultProps = {

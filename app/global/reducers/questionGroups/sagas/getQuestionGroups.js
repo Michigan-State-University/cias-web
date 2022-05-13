@@ -13,25 +13,25 @@ import { mapGroupsToQuestions } from 'global/reducers/questionGroups/utils';
 import { GET_QUESTION_GROUPS_REQUEST } from '../constants';
 import { getQuestionGroupsError, getQuestionGroupsSuccess } from '../actions';
 
-function* getQuestionsGroups({ payload: { sessionId } }) {
+function* getQuestionsGroups({ payload: { sessionId, questionToSelectId } }) {
   const groupURL = `/v1/sessions/${sessionId}/question_groups`;
 
   try {
     const { data } = yield axios.get(groupURL);
     const groups = jsonApiToArray(data, 'questionGroup');
     const questions = mapGroupsToQuestions(groups);
-    const groupsWithoutQuestions = groups.map(group =>
+    const groupsWithoutQuestions = groups.map((group) =>
       omit(group, 'questions'),
     );
     const sortedQuestions = sortBy(questions, 'position');
     const sortedGroups = sortBy(groupsWithoutQuestions, 'position');
-    const mappedQuestions = sortedQuestions.map(q =>
-      objectKeysToSnakeCase(q, ['sha256', 'endPosition']),
+    const mappedQuestions = sortedQuestions.map((q) =>
+      objectKeysToSnakeCase(q, ['sha256', 'endPosition', 'pauseDuration']),
     );
-    yield put(getQuestionsSuccess(mappedQuestions));
+    yield put(getQuestionsSuccess(mappedQuestions, questionToSelectId));
     if (!isEmpty(sortedQuestions) && sortedQuestions[0].narrator.blocks[0]) {
-      const position = sortedQuestions[0].narrator.blocks[0].endPosition;
-      yield put(setAnimationStopPosition(position.x, position.y));
+      const { x, y } = sortedQuestions[0].narrator.blocks[0].endPosition;
+      yield put(setAnimationStopPosition(x, y));
     }
     yield put(getQuestionGroupsSuccess(sortedGroups));
   } catch (error) {

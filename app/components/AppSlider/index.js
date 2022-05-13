@@ -54,7 +54,7 @@ const AppSlider =
         boxShadow: 'none',
         borderWidth: '3px',
       }}
-      handle={handleParams => renderHandle(props, handleParams)}
+      handle={(handleParams) => renderHandle(props, handleParams)}
       {...props}
     />
   ));

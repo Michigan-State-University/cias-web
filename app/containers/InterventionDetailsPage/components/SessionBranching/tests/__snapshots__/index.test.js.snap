@@ -71,6 +71,53 @@ exports[`<SessionBranching /> Should render and match the snapshot 1`] = `
   width: 100%;
 }
 
+.c7 {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-flex-direction: row;
+  -ms-flex-direction: row;
+  flex-direction: row;
+  height: auto;
+  -webkit-box-pack: justify;
+  -webkit-justify-content: space-between;
+  -ms-flex-pack: justify;
+  justify-content: space-between;
+  justify-items: space-between;
+  -webkit-align-content: center;
+  -ms-flex-line-pack: center;
+  align-content: center;
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+}
+
+.c12 {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-flex-direction: row;
+  -ms-flex-direction: row;
+  flex-direction: row;
+  height: auto;
+  -webkit-box-pack: justify;
+  -webkit-justify-content: space-between;
+  -ms-flex-pack: justify;
+  justify-content: space-between;
+  justify-items: space-between;
+  -webkit-align-content: center;
+  -ms-flex-line-pack: center;
+  align-content: center;
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  width: 100%;
+}
+
 .c1 {
   display: -webkit-box;
   display: -webkit-flex;
@@ -98,21 +145,49 @@ exports[`<SessionBranching /> Should render and match the snapshot 1`] = `
   width: 33.33333333333333%;
 }
 
-.c8 {
+.c13 {
+  width: auto;
+  height: auto;
+  display: block;
+  border-radius: 5px;
+}
+
+.c16 {
   position: relative;
   display: inline-block;
   min-width: 40px;
   height: 21px;
-  margin-left: 10px;
 }
 
-.c10 {
+.c9 {
   opacity: 0;
   width: 0;
   height: 0;
+  visibility: collapse;
 }
 
-.c12 {
+.c11 {
+  width: 100%;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+}
+
+.c11:hover {
+  cursor: pointer;
+}
+
+.c8:disabled + .c10 {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.c18 {
   position: absolute;
   top: 0;
   left: 0;
@@ -120,25 +195,24 @@ exports[`<SessionBranching /> Should render and match the snapshot 1`] = `
   bottom: 0;
   -webkit-transition: 0.4s;
   transition: 0.4s;
-  cursor: pointer;
   background-color: #CED3E4;
   border-radius: 21px;
 }
 
-.c9:checked + .c11 {
+.c8:checked + .c10 .c17 {
   background-color: #B727EA;
 }
 
-.c9:focus + .c11 {
+.c8:focus + .c10 .c17 {
   box-shadow: 0 0 1px #B727EA;
 }
 
-.c9:disabled + .c11 {
+.c8:disabled + .c10 .c17 {
   opacity: 0.5;
   cursor: not-allowed;
 }
 
-.c12:before {
+.c18:before {
   position: absolute;
   content: '';
   left: 4px;
@@ -151,10 +225,14 @@ exports[`<SessionBranching /> Should render and match the snapshot 1`] = `
   border-radius: 50%;
 }
 
-.c9:checked + .c11:before {
+.c8:checked + .c10 .c17:before {
   -webkit-transform: translateX(18px);
   -ms-transform: translateX(18px);
   transform: translateX(18px);
+}
+
+.c14 {
+  margin-right: 5px;
 }
 
 .c3 {
@@ -175,7 +253,7 @@ exports[`<SessionBranching /> Should render and match the snapshot 1`] = `
   color: #2F3850;
 }
 
-.c7 {
+.c15 {
   font-family: DM Sans;
   font-size: 13px;
   line-height: 130%;
@@ -247,23 +325,45 @@ exports[`<SessionBranching /> Should render and match the snapshot 1`] = `
       class="c6"
       width="100%"
     >
-      <p
+      <div
         class="c7"
       >
-        Use formula
-      </p>
-      <div
-        class="c8"
-      >
         <input
-          class="c9 c10"
+          aria-checked="false"
+          aria-disabled="false"
+          class="c8 c9"
           data-cy="branching-intervention-toggle"
           data-testid="switch-input"
+          id="session-undefined-formula-switch-label"
+          role="switch"
           type="checkbox"
         />
-        <span
-          class="c11 c12"
-        />
+        <label
+          class="c10 c11"
+          for="session-undefined-formula-switch-label"
+        >
+          <div
+            class="c12"
+            width="100%"
+          >
+            <div
+              class="c13 c14"
+            >
+              <p
+                class="c15"
+              >
+                Use formula
+              </p>
+            </div>
+            <div
+              class="c16"
+            >
+              <span
+                class="c17 c18"
+              />
+            </div>
+          </div>
+        </label>
       </div>
     </div>
   </div>

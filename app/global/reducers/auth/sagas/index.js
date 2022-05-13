@@ -12,6 +12,7 @@ import logInGuestSaga from './logInGuest';
 import editPhoneNumberQuestionSaga from './editPhoneNumberQuestion';
 import loginSaga from './logIn';
 import verifyCodeSaga from './verifyCode';
+import fetchSelfDetailsSaga from './fetchSelfDetails';
 
 export {
   logOutSaga,
@@ -27,6 +28,7 @@ export {
   editPhoneNumberQuestionSaga,
   loginSaga,
   verifyCodeSaga,
+  fetchSelfDetailsSaga,
 };
 
 export default function* allAuthSagas() {
@@ -43,5 +45,6 @@ export default function* allAuthSagas() {
     logInGuestSaga(),
     loginSaga(),
     verifyCodeSaga(),
+    fetchSelfDetailsSaga(),
   ]);
 }

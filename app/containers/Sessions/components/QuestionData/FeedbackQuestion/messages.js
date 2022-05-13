@@ -36,4 +36,8 @@ export default defineMessages({
     id: `${scope}.equalsTo`,
     defaultMessage: 'end user value is',
   },
+  feedbackLabel: {
+    id: `${scope}.feedbackLabel`,
+    defaultMessage: 'This is your feedback value presented on a slider scale:',
+  },
 });

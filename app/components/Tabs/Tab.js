@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-import { LabelContainer, LinkContainer } from './styled';
+import { LabelContainer, LinkContainer, TabUnderline } from './styled';
 
 const Tab = ({
   label,
@@ -15,17 +15,21 @@ const Tab = ({
     onClick(linkMatch ?? text);
   };
 
+  const isActive = activeTab === text || activeTab === linkMatch;
+
   if (label)
     return (
-      <LabelContainer isActive={activeTab === text || activeTab === linkMatch}>
+      <LabelContainer isActive={isActive}>
         <div onClick={handleClick}>{label}</div>
+        {isActive && <TabUnderline layoutId="Tab-LabelContainer-underline" />}
       </LabelContainer>
     );
 
   if (LinkComponent)
     return (
-      <LinkContainer isActive={activeTab === text || activeTab === linkMatch}>
+      <LinkContainer isActive={isActive}>
         <div onClick={handleClick}>{LinkComponent}</div>
+        {isActive && <TabUnderline layoutId="Tab-LinkContainer-underline" />}
       </LinkContainer>
     );
 

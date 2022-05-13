@@ -3,7 +3,7 @@ import axios from 'axios';
 
 import objectToCamelCase from 'utils/objectToCamelCase';
 
-export const useUrlMetadata = url => {
+export const useUrlMetadata = (url) => {
   const [state, setState] = useState({
     metadata: null,
     error: null,
@@ -23,7 +23,7 @@ export const useUrlMetadata = url => {
 
           setState({ metadata, error: null, isFetching: false });
         })
-        .catch(error => {
+        .catch((error) => {
           setState({ metadata: null, error, isFetching: false });
         });
     }

@@ -209,27 +209,159 @@ Object {
       </div>
     </div>
   </body>,
-  "container": <div>
+  "container": .c0 {
+  width: auto;
+  height: auto;
+  display: block;
+  border-radius: 5px;
+  width: 300px;
+}
+
+.c1 {
+  width: auto;
+  height: auto;
+  display: block;
+  border-radius: 5px;
+  padding: 16px;
+  border-bottom: 1px solid #E9F1FB;
+}
+
+.c4 {
+  width: auto;
+  height: auto;
+  display: block;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.c6 {
+  width: auto;
+  height: auto;
+  display: block;
+  border-radius: 5px;
+  padding: 8px;
+  -webkit-box-flex: 1;
+  -webkit-flex-grow: 1;
+  -ms-flex-positive: 1;
+  flex-grow: 1;
+}
+
+.c12 {
+  width: auto;
+  height: auto;
+  display: block;
+  border-radius: 5px;
+  max-height: 300px;
+  overflow: scroll;
+}
+
+.c7 {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-flex-direction: column;
+  -ms-flex-direction: column;
+  flex-direction: column;
+  width: 100%;
+}
+
+.c11 {
+  margin: 0;
+  font-family: DM Sans;
+  font-size: 15px;
+  line-height: 150%;
+  color: #2F3850;
+}
+
+.c3 {
+  width: auto;
+  height: auto;
+  margin-right: 5px;
+}
+
+.c9 {
+  width: auto;
+  height: auto;
+  margin-right: 10px;
+  cursor: pointer;
+}
+
+.c10 {
+  width: auto;
+  height: auto;
+  margin-right: 10px;
+}
+
+.c5 {
+  font-family: DM Sans;
+  font-size: 13px;
+  line-height: 130%;
+  font-size: 15px;
+  font-weight: 700;
+  color: #2F3850;
+}
+
+.c2 {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-flex-direction: row;
+  -ms-flex-direction: row;
+  flex-direction: row;
+  height: auto;
+}
+
+.c8 {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-flex-direction: row;
+  -ms-flex-direction: row;
+  flex-direction: row;
+  height: auto;
+  margin-bottom: 20px;
+}
+
+@media only screen and (min-width:768px) {
+
+}
+
+@media only screen and (min-width:960px) {
+
+}
+
+@media only screen and (min-width:1170px) {
+
+}
+
+@media only screen and (min-width:1360px) {
+
+}
+
+<div>
     <div
-      class="Box-sc-1vhutan-0 iSYlQg"
+      class="c0"
       width="300"
     >
       <div
-        class="Box-sc-1vhutan-0 hzkcdf"
+        class="c1"
       >
         <div
-          class="Row-y1cs0u-0 dskFsL"
+          class="c2"
           data-testid="test-id-1-next-question-target"
         >
           <img
-            class="Img-sc-55j3su-0 bYWciG"
+            class="c3"
             src="IMAGE_MOCK"
           />
           <div
-            class="Box-sc-1vhutan-0 gfyFJD"
+            class="c4"
           >
             <p
-              class="Text-e4p0w3-0 kWYQnv"
+              class="c5"
               color=""
               font-size="15px"
               font-weight="bold"
@@ -240,40 +372,40 @@ Object {
         </div>
       </div>
       <div
-        class="Row-y1cs0u-0 dskFsL"
+        class="c2"
       >
         <div
-          class="Box-sc-1vhutan-0 fOicvH"
+          class="c6"
         >
           <div
-            class="Column-sc-4zswzq-0 ekpwZH"
+            class="c7"
             data-testid="test-id-1-select-target-question"
           >
             <div
-              class="Row-y1cs0u-0 bNhwak"
+              class="c8"
             >
               <img
-                class="Img-sc-55j3su-0 eGlrSF"
+                class="c9"
                 data-cy="select-target-question-session-view-setter"
                 data-testid="test-id-1-select-target-question-interview-view-setter"
                 src="IMAGE_MOCK"
               />
               <img
-                class="Img-sc-55j3su-0 cYsgyu"
+                class="c10"
                 src="IMAGE_MOCK"
               />
               <h3
-                class="H3-twxrn4-0 cRKwFK"
+                class="c11"
               >
                 e-Session Name
               </h3>
             </div>
             <div
-              class="Box-sc-1vhutan-0 ijYDEg"
+              class="c12"
               overflow="scroll"
             >
               <div
-                class="Column-sc-4zswzq-0 ekpwZH"
+                class="c7"
               />
             </div>
           </div>

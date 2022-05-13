@@ -1,48 +1,496 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`<TextMessagingPage /> Should render and match the snapshot 1`] = `
+.c0 {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-flex-direction: row;
+  -ms-flex-direction: row;
+  flex-direction: row;
+  height: auto;
+}
+
+.c13 {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-flex-direction: row;
+  -ms-flex-direction: row;
+  flex-direction: row;
+  height: auto;
+  -webkit-align-content: center;
+  -ms-flex-line-pack: center;
+  align-content: center;
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  gap: 4px;
+  margin-bottom: 8px;
+}
+
+.c16 {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-flex-direction: row;
+  -ms-flex-direction: row;
+  flex-direction: row;
+  height: auto;
+  width: 100%;
+}
+
+.c2 {
+  width: auto;
+  height: auto;
+  display: block;
+  border-radius: 5px;
+  width: -webkit-max-content;
+  width: -moz-max-content;
+  width: max-content;
+  display: -webkit-inline-box;
+  display: -webkit-inline-flex;
+  display: -ms-inline-flexbox;
+  display: inline-flex;
+  padding-top: 5px;
+  padding-bottom: 5px;
+  padding-right: 10px;
+  padding-left: 10px;
+  background-color: rgba(183,39,234,1);
+  cursor: pointer;
+  -webkit-box-pack: center;
+  -webkit-justify-content: center;
+  -ms-flex-pack: center;
+  justify-content: center;
+  justify-items: center;
+  -webkit-align-content: center;
+  -ms-flex-line-pack: center;
+  align-content: center;
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+}
+
+.c4 {
+  width: auto;
+  height: auto;
+  display: block;
+  border-radius: 5px;
+  width: -webkit-max-content;
+  width: -moz-max-content;
+  width: max-content;
+  display: -webkit-inline-box;
+  display: -webkit-inline-flex;
+  display: -ms-inline-flexbox;
+  display: inline-flex;
+  padding-top: 5px;
+  padding-bottom: 5px;
+  padding-right: 10px;
+  padding-left: 10px;
+  background-color: rgba(210,55,29,1);
+  cursor: pointer;
+  -webkit-box-pack: center;
+  -webkit-justify-content: center;
+  -ms-flex-pack: center;
+  justify-content: center;
+  justify-items: center;
+  -webkit-align-content: center;
+  -ms-flex-line-pack: center;
+  align-content: center;
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+}
+
+.c17 {
+  width: auto;
+  height: auto;
+  display: block;
+  border-radius: 5px;
+  width: 100%;
+  display: inline;
+}
+
+.c18 {
+  width: auto;
+  height: auto;
+  display: block;
+  border-radius: 5px;
+}
+
+.c20 {
+  width: auto;
+  height: auto;
+  display: block;
+  border-radius: 5px;
+  margin-top: 8px;
+}
+
+.c3 {
+  font-family: DM Sans;
+  font-size: 13px;
+  line-height: 130%;
+  font-size: 14px;
+  font-weight: 700;
+  color: rgba(255,255,255,1);
+  color: rgba(255,255,255,1);
+}
+
+.c11 {
+  font-family: DM Sans;
+  font-size: 13px;
+  line-height: 130%;
+  margin-top: 10px;
+  font-size: 15px;
+  font-weight: 700;
+  color: rgba(255,255,255,1);
+  color: rgba(255,255,255,1);
+}
+
+.c15 {
+  font-family: DM Sans;
+  font-size: 13px;
+  line-height: 130%;
+  font-size: 11px;
+  font-weight: 500;
+  color: rgba(107,112,124,1);
+  white-space: nowrap;
+  color: rgba(107,112,124,1);
+}
+
+.c10 {
+  width: auto;
+  height: auto;
+}
+
+.c9 {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-flex-direction: column;
+  -ms-flex-direction: column;
+  flex-direction: column;
+  width: 100%;
+  -webkit-box-pack: center;
+  -webkit-justify-content: center;
+  -ms-flex-pack: center;
+  justify-content: center;
+  justify-items: center;
+  -webkit-align-content: center;
+  -ms-flex-line-pack: center;
+  align-content: center;
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  height: 100%;
+  opacity: 0.5;
+}
+
+.c19 {
+  position: relative;
+  width: 100%;
+  font-size: 18px;
+  font-weight: 700;
+  color: #2F3850;
+}
+
+.c21 {
+  position: relative;
+  width: 100%;
+  color: #2F3850;
+}
+
+.c1 {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-flex-direction: column;
+  -ms-flex-direction: column;
+  flex-direction: column;
+  -webkit-align-items: flex-start;
+  -webkit-box-align: flex-start;
+  -ms-flex-align: flex-start;
+  align-items: flex-start;
+}
+
+.c7 {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+  -webkit-justify-content: center;
+  -ms-flex-pack: center;
+  justify-content: center;
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  margin: auto;
+  width: 100px;
+  height: 100px;
+}
+
+.c7:after {
+  content: ' ';
+  display: block;
+  width: 66.66666666666666px;
+  height: 66.66666666666666px;
+  border-radius: 50%;
+  border: 6px solid #B727EA;
+  border-color: #B727EA transparent #B727EA transparent;
+  -webkit-animation: hAjVGa 1.2s linear infinite;
+  animation: hAjVGa 1.2s linear infinite;
+}
+
+.c6 {
+  position: fixed;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  z-index: 1000;
+  -webkit-box-pack: center;
+  -webkit-justify-content: center;
+  -ms-flex-pack: center;
+  justify-content: center;
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  width: 100vw;
+  height: 100vh;
+  left: 0;
+  top: 0;
+  background-color: rgba(255,255,255,0.5);
+}
+
+.c14 {
+  border-radius: 50%;
+  background-color: #107969;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+  -webkit-justify-content: center;
+  -ms-flex-pack: center;
+  justify-content: center;
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  width: 9px;
+  height: 9px;
+  background-color: rgba(16,121,105,1);
+  background: #B727EA;
+  opacity: 1;
+  color: #2F3850;
+}
+
+.c22 {
+  border-radius: 50%;
+  background-color: #107969;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+  -webkit-justify-content: center;
+  -ms-flex-pack: center;
+  justify-content: center;
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  width: 9px;
+  height: 9px;
+  background-color: rgba(16,121,105,1);
+  background: #D2371D;
+  opacity: 1;
+  color: #2F3850;
+}
+
+.c12 {
+  -webkit-flex: 0 0 28%;
+  -ms-flex: 0 0 28%;
+  flex: 0 0 28%;
+  width: 240px;
+  height: 132px;
+  background-color: #FFFFFF;
+  box-shadow: 0 4px 20px #e3eefb;
+  border-radius: 5px;
+  margin: 20px;
+  padding: 24px;
+  border-width: 1px;
+  border-color: #FFFFFF;
+  border-style: solid;
+  -webkit-transition: border-color 0.7s linear;
+  transition: border-color 0.7s linear;
+  cursor: pointer;
+}
+
+.c12:hover {
+  border-width: 1px;
+  border-color: #B727EA;
+}
+
+.c8 {
+  -webkit-flex: 0 0 28%;
+  -ms-flex: 0 0 28%;
+  flex: 0 0 28%;
+  width: 240px;
+  height: 132px;
+  background-color: #B727EA;
+  border-radius: 5px;
+  margin: 20px;
+  cursor: pointer;
+}
+
+.c23 {
+  -webkit-flex: 0 0 28%;
+  -ms-flex: 0 0 28%;
+  flex: 0 0 28%;
+  width: 240px;
+  height: 132px;
+  background-color: #E9F1FB;
+  border-radius: 5px;
+  margin: 20px;
+}
+
+.c5 {
+  margin-top: 10px;
+  padding: 0 !important;
+  -webkit-box-pack: center !important;
+  -webkit-justify-content: center !important;
+  -ms-flex-pack: center !important;
+  justify-content: center !important;
+  overflow-y: scroll;
+  overflow-x: hidden;
+  height: calc(100vh - 80px);
+}
+
+@media only screen and (min-width:768px) {
+
+}
+
+@media only screen and (min-width:960px) {
+
+}
+
+@media only screen and (min-width:1170px) {
+
+}
+
+@media only screen and (min-width:1360px) {
+
+}
+
 <div
-  class="Row-y1cs0u-0 dskFsL"
+  class="c0"
   style="justify-content: center;"
 >
   <div
     style="box-sizing: border-box; min-height: 1px; position: relative; padding-left: 0px; padding-right: 0px; width: 66.66666666666667%; flex-basis: 66.66666666666667%; flex-grow: 0; flex-shrink: 0; max-width: 66.66666666666667%; margin-left: 0%;"
   >
     <div
-      class="styled__StyledTilesContainer-z65den-3 ZailA"
+      class=""
+      style="box-sizing: border-box; position: relative; margin-left: 20px; margin-right: auto; padding-left: 15px; padding-right: 15px; margin-top: 40px;"
+    >
+      <div
+        class=""
+        style="margin-left: -15px; margin-right: -15px; display: flex; flex-wrap: wrap; flex-grow: 0; flex-shrink: 0; align-items: center; justify-content: flex-start;"
+      >
+        <div
+          align="flex-start"
+          class="c1"
+          style="box-sizing: border-box; min-height: 1px; position: relative; padding-left: 15px; padding-right: 15px; width: auto; flex-basis: auto; flex-grow: 0; flex-shrink: 0; max-width: 100%; margin-left: 0%; margin-bottom: 10px;"
+        >
+          <div
+            class="c2"
+            display="inline-flex"
+            width="max-content"
+          >
+            <p
+              class="c3"
+              color="#FFFFFF"
+              font-size="14"
+              font-weight="bold"
+            >
+              Normal
+            </p>
+          </div>
+        </div>
+        <div
+          align="flex-start"
+          class="c1"
+          style="box-sizing: border-box; min-height: 1px; position: relative; padding-left: 15px; padding-right: 15px; width: auto; flex-basis: auto; flex-grow: 0; flex-shrink: 0; max-width: 100%; margin-left: 0%; margin-bottom: 10px;"
+        >
+          <div
+            class="c4"
+            display="inline-flex"
+            width="max-content"
+          >
+            <p
+              class="c3"
+              color="#FFFFFF"
+              font-size="14"
+              font-weight="bold"
+            >
+              Alert
+            </p>
+          </div>
+        </div>
+      </div>
+      <span
+        style="display: table; clear: both;"
+      />
+    </div>
+    <div
+      class="c5"
       style="box-sizing: border-box; position: relative; margin-left: auto; margin-right: auto; padding-left: 15px; padding-right: 15px; max-width: 960px;"
     >
       <div
+        class=""
         md="6"
         style="margin-left: -15px; margin-right: -15px; display: flex; flex-wrap: wrap; flex-grow: 0; flex-shrink: 0; align-items: normal; justify-content: center;"
         xs="12"
         xxl="4"
       >
         <div
-          class="styled__FillScreenLoader-sc-1aaagww-0 jdsSke"
+          class="c6"
           data-testid="fullscreen-loader"
         >
           <div
-            class="styled__StyledSpinner-sc-129uixn-0 PnEbr"
+            class="c7"
             color="#B727EA"
             size="100"
             width="6"
           />
         </div>
         <div
-          class="styled__StyledCreateTile-z65den-1 OOgHM"
+          class="c8"
         >
           <div
-            class="Column-sc-4zswzq-0 kbCNXG"
+            class="c9"
             disabled=""
             height="100%"
           >
             <img
-              class="Img-sc-55j3su-0 cDhXoN"
+              class="c10"
               src="IMAGE_MOCK"
             />
             <p
-              class="Text-e4p0w3-0 gHdUtW"
+              class="c11"
               color="#FFFFFF"
               font-size="15"
               font-weight="bold"
@@ -52,72 +500,236 @@ exports[`<TextMessagingPage /> Should render and match the snapshot 1`] = `
           </div>
         </div>
         <div
-          class="styled__StyledTile-z65den-0 bjLbog"
+          class="c12"
         >
-          <p
-            class="Text-e4p0w3-0 jKspVy"
-            font-size="18"
-            font-weight="bold"
+          <div
+            class="c13"
           >
-            Text message plan 1
-          </p>
-          <p
-            class="Text-e4p0w3-0 jhwTed"
+            <div
+              class="c14"
+              opacity="1"
+            />
+            <p
+              class="c15"
+              color="#6B707C"
+              font-size="11px"
+              font-weight="medium"
+            >
+              Normal
+            </p>
+          </div>
+          <div
+            class="c16"
+            width="100%"
           >
-            Send 3 days after the session is completed
-          </p>
+            <div
+              class="c17"
+              display="inline"
+              width="100%"
+            >
+              <div
+                class="c18"
+                data-for="Text message plan 1"
+                data-tip=""
+              >
+                <div>
+                  <span
+                    class="c19"
+                    data-for="text-message-plan-1"
+                    data-tip="Text message plan 1"
+                    font-size="18"
+                    font-weight="bold"
+                    theme="[object Object]"
+                    width="0"
+                  >
+                    <span />
+                    <span>
+                      Text message plan 1
+                    </span>
+                    <span
+                      style="position: fixed; visibility: hidden; top: 0px; left: 0px;"
+                    >
+                      …
+                    </span>
+                  </span>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div
+            class="c20"
+          >
+            <div
+              class="c16"
+              width="100%"
+            >
+              <div
+                class="c17"
+                display="inline"
+                width="100%"
+              >
+                <div
+                  class="c18"
+                  data-for="Send 3 days after the session is completed"
+                  data-tip=""
+                >
+                  <div>
+                    <span
+                      class="c21"
+                      data-for="text-message-plan-1"
+                      data-tip="Send 3 days after the session is completed"
+                      theme="[object Object]"
+                      width="0"
+                    >
+                      <span />
+                      <span>
+                        Send 3 days after the session is completed
+                      </span>
+                      <span
+                        style="position: fixed; visibility: hidden; top: 0px; left: 0px;"
+                      >
+                        …
+                      </span>
+                    </span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
         </div>
         <div
-          class="styled__StyledTile-z65den-0 bjLbog"
+          class="c12"
         >
-          <p
-            class="Text-e4p0w3-0 jKspVy"
-            font-size="18"
-            font-weight="bold"
+          <div
+            class="c13"
           >
-            Text message plan 2
-          </p>
-          <p
-            class="Text-e4p0w3-0 jhwTed"
+            <div
+              class="c22"
+              opacity="1"
+            />
+            <p
+              class="c15"
+              color="#6B707C"
+              font-size="11px"
+              font-weight="medium"
+            >
+              Alert
+            </p>
+          </div>
+          <div
+            class="c16"
+            width="100%"
           >
-            Send after the session is completed
-          </p>
+            <div
+              class="c17"
+              display="inline"
+              width="100%"
+            >
+              <div
+                class="c18"
+                data-for="Text message plan 2"
+                data-tip=""
+              >
+                <div>
+                  <span
+                    class="c19"
+                    data-for="text-message-plan-2"
+                    data-tip="Text message plan 2"
+                    font-size="18"
+                    font-weight="bold"
+                    theme="[object Object]"
+                    width="0"
+                  >
+                    <span />
+                    <span>
+                      Text message plan 2
+                    </span>
+                    <span
+                      style="position: fixed; visibility: hidden; top: 0px; left: 0px;"
+                    >
+                      …
+                    </span>
+                  </span>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div
+            class="c20"
+          >
+            <div
+              class="c16"
+              width="100%"
+            >
+              <div
+                class="c17"
+                display="inline"
+                width="100%"
+              >
+                <div
+                  class="c18"
+                  data-for="Send an alert to the specified number."
+                  data-tip=""
+                >
+                  <div>
+                    <span
+                      class="c21"
+                      data-for="text-message-plan-2"
+                      data-tip="Send an alert to the specified number."
+                      theme="[object Object]"
+                      width="0"
+                    >
+                      <span />
+                      <span>
+                        Send an alert to the specified number.
+                      </span>
+                      <span
+                        style="position: fixed; visibility: hidden; top: 0px; left: 0px;"
+                      >
+                        …
+                      </span>
+                    </span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
         </div>
         <div
-          class="styled__StyledEmptyTile-z65den-2 kMstat"
+          class="c23"
         />
         <div
-          class="styled__StyledEmptyTile-z65den-2 kMstat"
+          class="c23"
         />
         <div
-          class="styled__StyledEmptyTile-z65den-2 kMstat"
+          class="c23"
         />
         <div
-          class="styled__StyledEmptyTile-z65den-2 kMstat"
+          class="c23"
         />
         <div
-          class="styled__StyledEmptyTile-z65den-2 kMstat"
+          class="c23"
         />
         <div
-          class="styled__StyledEmptyTile-z65den-2 kMstat"
+          class="c23"
         />
         <div
-          class="styled__StyledEmptyTile-z65den-2 kMstat"
+          class="c23"
         />
         <div
-          class="styled__StyledEmptyTile-z65den-2 kMstat"
+          class="c23"
         />
         <div
-          class="styled__StyledEmptyTile-z65den-2 kMstat"
+          class="c23"
         />
         <div
-          class="styled__StyledEmptyTile-z65den-2 kMstat"
+          class="c23"
         />
         <div
-          class="styled__StyledEmptyTile-z65den-2 kMstat"
+          class="c23"
         />
         <div
-          class="styled__StyledEmptyTile-z65den-2 kMstat"
+          class="c23"
         />
       </div>
       <span

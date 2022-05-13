@@ -32,7 +32,7 @@ export const initialState = {
 
 /* eslint-disable default-case, no-param-reassign */
 const localStateReducer = (state = initialState, { type, payload }) =>
-  produce(state, draft => {
+  produce(state, (draft) => {
     switch (type) {
       case CHANGE_CURRENT_NARRATOR_BLOCK:
         draft.currentNarratorBlockIndex = payload.index;

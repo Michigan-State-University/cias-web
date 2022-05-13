@@ -21,7 +21,7 @@ const VariableInput = ({
 }) => {
   const { formatMessage } = useIntl();
   const dispatch = useDispatch();
-  const updateVariable = name =>
+  const updateVariable = (name) =>
     dispatch(updateVariableAction(name, questionId));
 
   const editingPossible = canEdit(interventionStatus);

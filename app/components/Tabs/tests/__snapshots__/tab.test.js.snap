@@ -6,13 +6,19 @@ exports[`<Tab /> should render and match the snapshot for a label 1`] = `
   bottom: -3px;
   margin: 0 10px;
   padding-bottom: 7px;
-  border-bottom-width: 2px;
-  border-bottom-style: solid;
-  border-bottom-color: #B727EA;
 }
 
 .c0 div {
   cursor: pointer;
+}
+
+.c1 {
+  position: absolute;
+  bottom: -2px;
+  left: 0;
+  right: 0;
+  height: 2px;
+  background: #B727EA;
 }
 
 <div
@@ -21,6 +27,11 @@ exports[`<Tab /> should render and match the snapshot for a label 1`] = `
   <div>
     label
   </div>
+  <div
+    class="c1"
+    data-projection-id="1"
+    style="opacity: 1;"
+  />
 </div>
 `;
 
@@ -30,9 +41,6 @@ exports[`<Tab /> should render as links and match the snapshot 1`] = `
   bottom: -3px;
   margin: 0 10px;
   padding-bottom: 7px;
-  border-bottom-width: 2px;
-  border-bottom-style: solid;
-  border-bottom-color: #B727EA;
 }
 
 .c0 div {
@@ -50,6 +58,15 @@ exports[`<Tab /> should render as links and match the snapshot 1`] = `
   color: #2F3850;
 }
 
+.c2 {
+  position: absolute;
+  bottom: -2px;
+  left: 0;
+  right: 0;
+  height: 2px;
+  background: #B727EA;
+}
+
 <div
   class="c0 c1"
 >
@@ -60,5 +77,10 @@ exports[`<Tab /> should render as links and match the snapshot 1`] = `
       Url1
     </a>
   </div>
+  <div
+    class="c2"
+    data-projection-id="2"
+    style="opacity: 1;"
+  />
 </div>
 `;

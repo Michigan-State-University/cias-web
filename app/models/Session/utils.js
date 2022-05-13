@@ -2,6 +2,7 @@
 import pick from 'lodash/pick';
 import sortBy from 'lodash/sortBy';
 
+import { Question } from 'models/Question';
 import { feedbackActions } from 'models/Narrator/FeedbackActions';
 import {
   bodyAnimationType,
@@ -22,8 +23,7 @@ import {
   headAnimations,
 } from 'utils/animations/animationsNames';
 
-import Session from './Session';
-import Question from './Question';
+import { Session } from './Session';
 
 import {
   multiQuestion,
@@ -44,21 +44,21 @@ import {
  * @param  {string} questionId
  */
 export const findQuestionById = (questions, questionId) =>
-  questions.find(value => value.id === questionId);
+  questions.find((value) => value.id === questionId);
 
 /**
  * @param  {Array<Question>} questions
  * @param  {string} questionId
  */
 export const findQuestionIndex = (questions, questionId) =>
-  questions.findIndex(value => value.id === questionId);
+  questions.findIndex((value) => value.id === questionId);
 
 /**
  * @param  {Array<Session>} sessions
  * @param  {string} sessionId
  */
 export const findInterventionIndex = (sessions, sessionId) =>
-  sessions.findIndex(value => value.id === sessionId);
+  sessions.findIndex((value) => value.id === sessionId);
 
 /**
  * @param  {Question} currentQuestion
@@ -85,7 +85,7 @@ export const getPreviousQuestions = (
 
   const filteredQuestions = [];
 
-  sortedGroups.forEach(group => {
+  sortedGroups.forEach((group) => {
     const currentGroupQuestions = questions.filter(
       ({ questionGroupId }) => questionGroupId === group.id,
     );
@@ -118,7 +118,7 @@ export const getBranchingVariables = (questions, options) => {
   const { structure, include, noEmpty } = { ...defaultParams, ...options };
   const variables = [];
 
-  questions.forEach(question => {
+  questions.forEach((question) => {
     let questionVariables;
 
     switch (question.type) {
@@ -144,7 +144,7 @@ export const getBranchingVariables = (questions, options) => {
     }
 
     if (noEmpty)
-      questionVariables = questionVariables.filter(val => val && val.trim());
+      questionVariables = questionVariables.filter((val) => val && val.trim());
 
     switch (structure) {
       case 'group':
@@ -157,7 +157,7 @@ export const getBranchingVariables = (questions, options) => {
       default:
         if (include && include.length) {
           variables.push(
-            ...questionVariables.map(variable => ({
+            ...questionVariables.map((variable) => ({
               ...pick(question, include),
               variable,
             })),
@@ -184,7 +184,7 @@ export const getEditVariables = (questions, options) => {
   const { structure, include, noEmpty } = { ...defaultParams, ...options };
   const variables = [];
 
-  questions.forEach(question => {
+  questions.forEach((question) => {
     let questionVariables;
 
     switch (question.type) {
@@ -206,7 +206,7 @@ export const getEditVariables = (questions, options) => {
     }
 
     if (noEmpty)
-      questionVariables = questionVariables.filter(val => val && val.trim());
+      questionVariables = questionVariables.filter((val) => val && val.trim());
 
     switch (structure) {
       case 'group':
@@ -219,7 +219,7 @@ export const getEditVariables = (questions, options) => {
       default:
         if (include && include.length) {
           variables.push(
-            ...questionVariables.map(variable => ({
+            ...questionVariables.map((variable) => ({
               ...pick(question, include),
               variable,
             })),
@@ -233,13 +233,13 @@ export const getEditVariables = (questions, options) => {
   return variables;
 };
 
-const getDefaultVariable = question => question.body.variable.name;
+const getDefaultVariable = (question) => question.body.variable.name;
 
-const getMultiVariables = question =>
-  question.body.data.map(answer => answer.variable.name);
+const getMultiVariables = (question) =>
+  question.body.data.map((answer) => answer.variable.name);
 
-const getGridVariables = question =>
-  question.body.data[0].payload.rows.map(row => row.variable.name);
+const getGridVariables = (question) =>
+  question.body.data[0].payload.rows.map((row) => row.variable.name);
 
 export const instantiateBlockForType = (type, endPosition, question) => {
   const sharedProperties = {

@@ -8,7 +8,7 @@ const webpack = require('webpack');
 
 const { EnvironmentPlugin } = webpack;
 
-module.exports = options => ({
+module.exports = (options) => ({
   mode: options.mode,
   entry: options.entry,
   output: {
@@ -28,6 +28,23 @@ module.exports = options => ({
           loader: 'babel-loader',
           options: options.babelQuery,
         },
+      },
+
+      {
+        test: /\.tsx?$/,
+        exclude: /node_modules/,
+        use: [
+          {
+            loader: 'babel-loader',
+            options: options.babelQuery,
+          },
+          {
+            loader: 'ts-loader',
+            options: {
+              transpileOnly: options.mode === 'production' ? true : false,
+            },
+          },
+        ],
       },
 
       {
@@ -128,7 +145,7 @@ module.exports = options => ({
   },
   plugins: options.plugins.concat([
     new webpack.ProvidePlugin({
-      process: 'process/browser',
+      process: 'process/browser.js',
     }),
 
     ...(onHeroku ? [] : [gitRevisionPlugin]),
@@ -144,7 +161,7 @@ module.exports = options => ({
   ]),
   resolve: {
     modules: ['node_modules', 'app'],
-    extensions: ['.js', '.jsx', '.react.js'],
+    extensions: ['.tsx', '.ts', '.js', '.jsx', '.react.js'],
     mainFields: ['browser', 'jsnext:main', 'main'],
     fallback: {
       stream: false,

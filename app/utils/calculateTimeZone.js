@@ -9,11 +9,7 @@ dayjs.extend(timezone);
 /**
  * Default UTC time when the server will perform the operation of sending e-mails
  */
-const DEFAULT_TIME = dayjs()
-  .utc()
-  .hour(10)
-  .minute(0)
-  .second(0);
+const DEFAULT_TIME = dayjs().utc().hour(10).minute(0).second(0);
 
 /**
  * @param {object} utcTime dayjs object, determines the time in the user's time zone

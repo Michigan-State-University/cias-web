@@ -10,16 +10,16 @@ import {
 import { revokeUserAccessSuccess, revokeUserAccessFailure } from '../actions';
 import messages from '../messages';
 
-export function* revokeUserAccess({ payload: { interventionId, userId } }) {
-  const requestURL = `v1/interventions/${interventionId}/invitations/${userId}`;
+export function* revokeUserAccess({ payload: { interventionId, accessId } }) {
+  const requestURL = `v1/interventions/${interventionId}/accesses/${accessId}`;
   try {
     yield call(axios.delete, requestURL);
-    yield put(revokeUserAccessSuccess(userId));
+    yield put(revokeUserAccessSuccess(accessId));
   } catch (error) {
     yield call(toast.error, formatMessage(messages.revokeAccessError), {
       toastId: REVOKE_USER_ACCESS_ERROR,
     });
-    yield put(revokeUserAccessFailure(userId, error));
+    yield put(revokeUserAccessFailure(accessId, error));
   }
 }
 

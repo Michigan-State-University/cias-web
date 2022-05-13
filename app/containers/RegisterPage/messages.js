@@ -96,7 +96,13 @@ export default defineMessages({
   },
   createdAccount: {
     id: `${scope}.createdAccount`,
-    defaultMessage: 'Your account has been created',
+    defaultMessage:
+      'Your account has been successfully created. Check your e-mail inbox to confirm your registration',
+  },
+  createdResearcherAccount: {
+    id: `${scope}.createdResearcherAccount`,
+    defaultMessage:
+      'Your account has been successfully created. You can log in now.',
   },
   pageTitle: {
     id: `${scope}.pageTitle`,

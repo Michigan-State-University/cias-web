@@ -7,6 +7,7 @@ import {
   fetchInterventionRequest,
   makeSelectIntervention,
 } from 'global/reducers/intervention';
+import { setTextMessagesCount } from 'global/reducers/textMessages';
 import { mapJsonApiToObject } from 'utils/jsonApiMapper';
 import { GET_SESSION_REQUEST } from '../constants';
 import { getSessionSuccess, getSessionError } from '../actions';
@@ -27,6 +28,7 @@ export function* getSession({ payload: { sessionId, interventionId } }) {
     });
 
     yield put(getSessionSuccess(mappedData));
+    yield put(setTextMessagesCount(mappedData.smsPlansCount));
   } catch (error) {
     yield put(getSessionError(error));
   }

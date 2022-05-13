@@ -40,31 +40,19 @@ export const ToastContainer = styled(ReactToastifyToastContainer)`
 
     &progress-bar {
       &--info {
-        background-color: ${Color(colors.blue)
-          .alpha(0.7)
-          .rgb()
-          .string()};
+        background-color: ${Color(colors.blue).alpha(0.7).rgb().string()};
       }
 
       &--success {
-        background-color: ${Color(colors.green)
-          .alpha(0.7)
-          .rgb()
-          .string()};
+        background-color: ${Color(colors.green).alpha(0.7).rgb().string()};
       }
 
       &--warning {
-        background-color: ${Color(colors.orange)
-          .alpha(0.7)
-          .rgb()
-          .string()};
+        background-color: ${Color(colors.orange).alpha(0.7).rgb().string()};
       }
 
       &--error {
-        background-color: ${Color(colors.red)
-          .alpha(0.7)
-          .rgb()
-          .string()};
+        background-color: ${Color(colors.red).alpha(0.7).rgb().string()};
       }
     }
   }

@@ -1,6 +1,6 @@
 import PropTypes from 'prop-types';
 
-const padding = props => ({
+const padding = (props) => ({
   padding: props.padding ?? '',
   paddingTop: props.py ?? props.pt ?? '',
   paddingBottom: props.py ?? props.pb ?? '',

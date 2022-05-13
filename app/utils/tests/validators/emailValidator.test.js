@@ -12,7 +12,7 @@ describe('emailValidator regex', () => {
       'partcipant@gmail.com',
     ];
 
-    targets.forEach(target => expect(emailValidator(target)).toBeTruthy());
+    targets.forEach((target) => expect(emailValidator(target)).toBeTruthy());
   });
 
   it('should return false when checked against non-valid emails', () => {
@@ -24,6 +24,6 @@ describe('emailValidator regex', () => {
       'test@',
     ];
 
-    targets.forEach(target => expect(emailValidator(target)).toBeFalsy());
+    targets.forEach((target) => expect(emailValidator(target)).toBeFalsy());
   });
 });

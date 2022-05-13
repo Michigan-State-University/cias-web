@@ -9,7 +9,7 @@ import { StatusLabel } from './styled';
 
 const StatusFilter = ({ formatMessage, onClick, active }) => (
   <Row my={35} justify="between" width={250}>
-    {Object.keys(globalMessages.statuses).map(status => (
+    {Object.keys(globalMessages.statuses).map((status) => (
       <StatusLabel
         key={status}
         value={status}

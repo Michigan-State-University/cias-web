@@ -1,6 +1,7 @@
 /* eslint-disable global-require,react/prop-types,no-console */
 import React from 'react';
 import 'mutationobserver-shim';
+import 'jest-styled-components';
 
 jest.mock('./app/components/Icon', () => ({
   __esModule: true,
@@ -19,6 +20,8 @@ Object.defineProperty(window, 'ResizeObserver', {
     observe() {}
 
     unobserve() {}
+
+    disconnect() {}
   },
   writable: true,
 });
@@ -82,13 +85,13 @@ class LocalStorageMock {
     this.store = {};
   });
 
-  getItem = jest.fn().mockImplementation(key => this.store[key] || null);
+  getItem = jest.fn().mockImplementation((key) => this.store[key] || null);
 
   setItem = jest.fn().mockImplementation((key, value) => {
     this.store[key] = value;
   });
 
-  removeItem = jest.fn().mockImplementation(key => {
+  removeItem = jest.fn().mockImplementation((key) => {
     delete this.store[key];
   });
 }

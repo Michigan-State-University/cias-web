@@ -17,7 +17,7 @@ export const initialState = {
 
 /* eslint-disable default-case, no-param-reassign */
 const adminConsoleReducer = (state = initialState, { payload, type }) =>
-  produce(state, draft => {
+  produce(state, (draft) => {
     switch (type) {
       case RESET_AUDIO_REQUEST:
         draft.loaders.resetAudio = true;

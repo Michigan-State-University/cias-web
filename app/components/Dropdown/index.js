@@ -14,7 +14,7 @@ import Icon from 'components/Icon';
 
 import { StyledComment, ImageContainer, StyledRow } from './styled';
 
-const Dropdown = ({ options, top, disabled, ...restProps }) => {
+const Dropdown = ({ options, top, disabled, dropdownWidth, ...restProps }) => {
   const [open, setOpen] = useState(false);
 
   const dropdown = useRef(null);
@@ -28,7 +28,7 @@ const Dropdown = ({ options, top, disabled, ...restProps }) => {
     return { top: '35px' };
   };
 
-  const callAction = action => {
+  const callAction = (action) => {
     action();
     setOpen(false);
   };
@@ -51,9 +51,15 @@ const Dropdown = ({ options, top, disabled, ...restProps }) => {
         <Img src={dots} alt="dots" />
       </ImageContainer>
       {open && (
-        <Row position="absolute" right="0" zIndex={999} {...getPosition()}>
+        <Row
+          position="absolute"
+          right="0"
+          zIndex={999}
+          width={dropdownWidth}
+          {...getPosition()}
+        >
           <Column bg={colors.white} shadow={boxShadows.black} borderRadius={10}>
-            {options.map(option => (
+            {options.map((option) => (
               <StyledRow
                 disabled={option.disabled}
                 key={`el-dropdown-${option.id}`}
@@ -67,6 +73,7 @@ const Dropdown = ({ options, top, disabled, ...restProps }) => {
                     fill={colors.greyishBlue}
                     alt="icon"
                     mr={12}
+                    width={18}
                   />
                 )}
                 <StyledComment
@@ -89,6 +96,7 @@ Dropdown.propTypes = {
   options: PropTypes.array,
   top: PropTypes.bool,
   disabled: PropTypes.bool,
+  dropdownWidth: PropTypes.number,
 };
 
 export default Dropdown;

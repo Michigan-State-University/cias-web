@@ -1,6 +1,6 @@
 import { calculateNextValue } from 'utils/sequenceUtils';
 
-import { ADD, UPDATE, REMOVE } from './constants';
+import { ADD, UPDATE, REMOVE, REORDER } from './constants';
 
 /* eslint-disable default-case, no-param-reassign */
 const multiQuestionReducer = (question, payload) => {
@@ -26,6 +26,9 @@ const multiQuestionReducer = (question, payload) => {
       return question;
     case REMOVE:
       question.body.data.splice(payload.data.index, 1);
+      return question;
+    case REORDER:
+      question.body.data = payload.data.items;
       return question;
     default:
       return question;

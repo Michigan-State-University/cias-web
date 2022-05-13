@@ -1,47 +1,39 @@
 import { createSelector } from 'reselect';
 import { initialState } from './reducer';
 
-export const selectIntervention = state => state.intervention || initialState;
+export const selectIntervention = (state) => state.intervention || initialState;
 
 export const makeSelectInterventionState = () =>
-  createSelector(
-    selectIntervention,
-    substate => substate,
-  );
+  createSelector(selectIntervention, (substate) => substate);
 
 export const makeSelectIntervention = () =>
-  createSelector(
-    selectIntervention,
-    substate => substate.intervention,
-  );
+  createSelector(selectIntervention, (substate) => substate.intervention);
 
 export const makeSelectCacheIntervention = () =>
-  createSelector(
-    selectIntervention,
-    substate => substate.cache.intervention,
-  );
+  createSelector(selectIntervention, (substate) => substate.cache.intervention);
 
 export const makeSelectInterventionStatus = () =>
   createSelector(
     selectIntervention,
-    substate => (substate.intervention ? substate.intervention.status : null),
+    (substate) => substate.intervention?.status,
   );
 
-export const makeSelectInterventionLoader = loader =>
-  createSelector(
-    selectIntervention,
-    substate => substate.loaders[loader],
-  );
+export const makeSelectInterventionType = () =>
+  createSelector(selectIntervention, (substate) => substate.intervention?.type);
+
+export const makeSelectInterventionLoader = (name) =>
+  createSelector(selectIntervention, ({ loaders }) => loaders[name]);
+
+export const makeSelectInterventionError = (name) =>
+  createSelector(selectIntervention, ({ errors }) => errors[name]);
 
 export const makeSelectCurrentSessionIndex = () =>
   createSelector(
     selectIntervention,
-    substate => substate.currentSessionIndex,
+    (substate) => substate.currentSessionIndex,
   );
 
-export const makeSelectSessionById = sessionId =>
-  createSelector(
-    selectIntervention,
-    substate =>
-      substate.intervention.sessions.find(({ id }) => id === sessionId),
+export const makeSelectSessionById = (sessionId) =>
+  createSelector(selectIntervention, (substate) =>
+    substate.intervention.sessions.find(({ id }) => id === sessionId),
   );

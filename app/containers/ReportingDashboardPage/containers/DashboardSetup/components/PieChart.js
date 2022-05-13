@@ -32,9 +32,9 @@ const PieChart = ({
     }
   }, [patterns, defaultPattern, realChartData, status]);
 
-  const generateCellColor = useCallback(dataItem => dataItem.color, []);
+  const generateCellColor = useCallback((dataItem) => dataItem.color, []);
 
-  const wrapWithBox = comp => (
+  const wrapWithBox = (comp) => (
     <Box
       width="100%"
       height="100%"

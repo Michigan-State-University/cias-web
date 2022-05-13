@@ -13,10 +13,10 @@ export function* fetchUsersWithAccess({ payload: { id } }) {
   const intervention = yield select(makeSelectIntervention());
 
   if (intervention && intervention.id === id) {
-    const requestURL = `v1/interventions/${id}/invitations`;
+    const requestURL = `v1/interventions/${id}/accesses`;
     try {
       const { data } = yield call(axios.get, requestURL);
-      const users = jsonApiToArray(data, 'invitation');
+      const users = jsonApiToArray(data, 'interventionAccess');
       yield put(fetchUsersWithAccessSuccess(users));
     } catch (error) {
       yield put(fetchUsersWithAccessFailure(error));

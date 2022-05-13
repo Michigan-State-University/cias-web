@@ -19,6 +19,7 @@ describe('<SettingsPanel />', () => {
   const intervention = {
     name: 'Name of the session',
     id: 'as120s-as12cs',
+    sharedTo: 'anyone',
   };
 
   const initialState = {

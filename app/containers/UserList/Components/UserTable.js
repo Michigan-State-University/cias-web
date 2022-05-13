@@ -4,7 +4,7 @@ import { FormattedMessage } from 'react-intl';
 import { withRouter } from 'react-router-dom';
 import { compose } from 'redux';
 
-import ConfirmationBox from 'components/ConfirmationBox';
+import { ConfirmationModal } from 'components/Modal';
 import H1 from 'components/H1';
 import Text from 'components/Text';
 import { TableLoading } from 'components/Table';
@@ -31,10 +31,10 @@ const UserTable = ({
   const [pickedUser, setPickedUser] = useState({});
   const [userToRemove, setUserToRemove] = useState({});
 
-  const openModal = user => setPickedUser(user);
+  const openModal = (user) => setPickedUser(user);
   const closeModal = () => setPickedUser({});
 
-  const openRemoveUserModal = user => setUserToRemove(user);
+  const openRemoveUserModal = (user) => setUserToRemove(user);
   const closeRemoveUserModal = () => setUserToRemove({});
 
   const handleDeactivate = () => {
@@ -85,14 +85,14 @@ const UserTable = ({
 
   return (
     <>
-      <ConfirmationBox
+      <ConfirmationModal
         visible={Boolean(pickedUser.id)}
         onClose={closeModal}
         description={modalDescription}
         content={modalContent}
         confirmAction={handleDeactivate}
       />
-      <ConfirmationBox
+      <ConfirmationModal
         visible={Boolean(userToRemove.id)}
         onClose={closeRemoveUserModal}
         description={formatMessage(messages.deleteFromTeamConfirm)}
@@ -134,7 +134,4 @@ UserTable.propTypes = {
   history: PropTypes.object,
 };
 
-export default compose(
-  withRouter,
-  memo,
-)(UserTable);
+export default compose(withRouter, memo)(UserTable);

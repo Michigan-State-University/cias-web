@@ -1,5 +1,5 @@
 /* eslint-disable no-param-reassign */
-import { Draft } from 'immer';
+import { createDraft, current, Draft } from 'immer';
 import cloneDeep from 'lodash/cloneDeep';
 import assign from 'lodash/assign';
 
@@ -11,17 +11,18 @@ import { objectDifference } from 'utils/objectDifference';
  *
  * @param {Draft<T[]>} draftCollection
  * @param id
- * @param {function(item: T, index: number): Object|Object} updater Function returning Object and taking `item` and `index` or an Object to assign to
+ * @param {function(item: Draft<T>, index: number): T|Draft<T>} updater Function returning Object and taking `item` and `index` or an Object to assign to
  * @template T
  */
 export const updateItemById = (draftCollection, id, updater) => {
-  const index = findIndexById(draftCollection, id);
+  const state = current(draftCollection);
+  const index = findIndexById(state, id);
   let updatedValue = null;
 
   if (index !== -1) {
     switch (updater.constructor) {
       case Function:
-        updatedValue = updater(draftCollection[index], index);
+        updatedValue = updater(createDraft({ ...state[index] }), index);
         break;
       case Object:
       default:

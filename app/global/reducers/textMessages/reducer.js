@@ -1,8 +1,12 @@
-import produce from 'immer';
-import remove from 'lodash/remove';
+import produce, { current } from 'immer';
 import clone from 'lodash/cloneDeep';
 
 import { sortTextMessagesByDate } from 'models/TextMessage/utils';
+import {
+  assignDraftItems,
+  deleteItemById,
+  updateItemById,
+} from 'utils/reduxUtils';
 
 import {
   FETCH_TEXT_MESSAGES_REQUEST,
@@ -15,9 +19,9 @@ import {
   UPDATE_TEXT_MESSAGE_SETTINGS_REQUEST,
   UPDATE_TEXT_MESSAGE_SETTINGS_SUCCESS,
   UPDATE_TEXT_MESSAGE_SETTINGS_ERROR,
-  FETCH_VARIANTS_REQUEST,
-  FETCH_VARIANTS_SUCCESS,
-  FETCH_VARIANTS_ERROR,
+  FETCH_VARIANTS_AND_PHONES_REQUEST,
+  FETCH_VARIANTS_AND_PHONES_SUCCESS,
+  FETCH_VARIANTS_AND_PHONES_ERROR,
   CREATE_VARIANT_REQUEST,
   CREATE_VARIANT_SUCCESS,
   CREATE_VARIANT_ERROR,
@@ -30,10 +34,25 @@ import {
   REMOVE_TEXT_MESSAGE_VARIANT_REQUEST,
   REMOVE_TEXT_MESSAGE_VARIANT_SUCCESS,
   REMOVE_TEXT_MESSAGE_VARIANT_ERROR,
+  REORDER_TEXT_MESSAGE_VARIANTS_REQUEST,
+  REORDER_TEXT_MESSAGE_VARIANTS_SUCCESS,
+  REORDER_TEXT_MESSAGE_VARIANTS_ERROR,
   CHANGE_SELECTED_VARIANT,
   CLONE_TEXT_MESSAGE_REQUEST,
   CLONE_TEXT_MESSAGE_SUCCESS,
   CLONE_TEXT_MESSAGE_ERROR,
+  ADD_PHONE_REQUEST,
+  ADD_PHONE_SUCCESS,
+  ADD_PHONE_ERROR,
+  REMOVE_PHONE_REQUEST,
+  REMOVE_PHONE_SUCCESS,
+  REMOVE_PHONE_ERROR,
+  UPDATE_PHONE_REQUEST,
+  UPDATE_PHONE_SUCCESS,
+  UPDATE_PHONE_ERROR,
+  INITIAL_FILTERS,
+  SET_FILTERS,
+  SET_TEXT_MESSAGES_COUNT,
 } from './constants';
 import textMessageSettingsReducer from './settings/reducer';
 import textMessageVariantReducer from './variants/reducer';
@@ -45,33 +64,41 @@ export const initialState = {
   textMessagesSize: 0,
   loaders: {
     fetchTextMessagesLoading: true,
-    fetchVariantsLoading: false,
+    fetchVariantsAndPhonesLoading: false,
     createTextMessagesLoading: false,
     updateTextMessagesLoading: false,
     removeTextMessagesLoading: false,
     createVariantLoading: false,
     updateVariantLoading: false,
     removeVariantLoading: false,
+    addPhoneLoading: false,
+    removePhoneLoading: false,
+    updatePhoneLoading: false,
+    reorderVariantsLoading: false,
   },
   errors: {
     fetchTextMessagesError: null,
-    fetchVariantsError: null,
+    fetchVariantsAndPhonesError: null,
     createTextMessagesError: null,
     updateTextMessagesError: null,
     removeTextMessagesError: null,
     createVariantError: null,
     updateVariantError: null,
     removeVariantError: null,
+    addPhoneError: null,
+    removePhoneError: null,
+    updatePhoneError: null,
+    reorderVariantsError: null,
   },
-  cache: {},
+  cache: { textMessages: [] },
+  filters: INITIAL_FILTERS,
 };
 
 /* eslint-disable default-case, no-param-reassign */
 export const textMessagesReducer = (state = initialState, action) =>
-  produce(state, draft => {
-    const selectedMessageIndex = () =>
-      state.textMessages.findIndex(({ id }) => id === state.selectedMessageId);
-    let textMessageIndex;
+  produce(state, (draft) => {
+    const { payload } = action;
+
     switch (action.type) {
       case FETCH_TEXT_MESSAGES_REQUEST:
         draft.loaders.fetchTextMessagesLoading = true;
@@ -80,63 +107,68 @@ export const textMessagesReducer = (state = initialState, action) =>
 
       case FETCH_TEXT_MESSAGES_SUCCESS:
         const { textMessages, textMessagesSize } = action.payload;
+
         draft.loaders.fetchTextMessagesLoading = false;
-
-        const sortedTextMessages = sortTextMessagesByDate(textMessages);
-
-        draft.textMessages = sortedTextMessages;
-        draft.cache.textMessages = sortedTextMessages;
         draft.textMessagesSize = textMessagesSize;
+        draft.textMessages = sortTextMessagesByDate(textMessages);
+
+        assignDraftItems(draft.textMessages, draft.cache.textMessages);
         break;
 
       case FETCH_TEXT_MESSAGES_ERROR:
         draft.loaders.fetchTextMessagesLoading = false;
         draft.errors.fetchTextMessagesError = action.payload.error;
         draft.reportsSize = 0;
-        draft.textMessages = state.cache.textMessages;
         break;
 
-      case FETCH_VARIANTS_REQUEST:
-        draft.loaders.fetchVariantsLoading = true;
+      case FETCH_VARIANTS_AND_PHONES_REQUEST:
+        draft.loaders.fetchVariantsAndPhonesLoading = true;
+        draft.loaders.fetchVariantsAndPhonesLoadingError = null;
         break;
 
-      case FETCH_VARIANTS_SUCCESS:
-        const { variants } = action.payload;
-        draft.loaders.fetchVariantsLoading = false;
-        draft.cache.textMessages = state.textMessages;
-        textMessageIndex = selectedMessageIndex();
-        if (textMessageIndex > -1)
-          draft.textMessages[textMessageIndex].variants = variants;
+      case FETCH_VARIANTS_AND_PHONES_SUCCESS:
+        const { variants, phones } = action.payload;
+        draft.loaders.fetchVariantsAndPhonesLoading = false;
+
         if (variants.length) draft.selectedVariantId = variants[0].id;
+
+        updateItemById(draft.textMessages, state.selectedMessageId, {
+          variants,
+          phones,
+        });
+        assignDraftItems(draft.textMessages, draft.cache.textMessages);
         break;
 
-      case FETCH_VARIANTS_ERROR:
-        draft.loaders.fetchVariantsLoading = false;
-        draft.textMessages = state.cache.textMessages;
-        draft.errors.fetchVariantsError = action.payload.error;
+      case FETCH_VARIANTS_AND_PHONES_ERROR:
+        draft.loaders.fetchVariantsAndPhonesLoading = false;
+        draft.errors.fetchVariantsAndPhonesLoadingError = action.payload.error;
         break;
 
-      case CREATE_TEXT_MESSAGE_REQUEST:
+      case CREATE_TEXT_MESSAGE_REQUEST: {
         const newTextMessage = action.payload.textMessage;
-        draft.textMessages = sortTextMessagesByDate([
-          ...state.textMessages,
-          newTextMessage,
-        ]);
         draft.loaders.createTextMessagesLoading = true;
-        break;
 
-      case CREATE_TEXT_MESSAGE_SUCCESS:
-        const { textMessage, textMessageId } = action.payload;
-        draft.cache.textMessages = state.textMessages;
-        draft.loaders.createTextMessagesLoading = false;
-        textMessageIndex = state.textMessages.findIndex(
-          ({ id }) => id === textMessageId,
+        draft.textMessages.push(newTextMessage);
+        draft.textMessages = sortTextMessagesByDate(
+          current(draft.textMessages),
         );
-        draft.textMessages[textMessageIndex] = textMessage;
         break;
+      }
+
+      case CREATE_TEXT_MESSAGE_SUCCESS: {
+        const { textMessage, textMessageId } = action.payload;
+        draft.loaders.createTextMessagesLoading = false;
+        draft.filters = INITIAL_FILTERS;
+
+        updateItemById(draft.textMessages, textMessageId, textMessage);
+        assignDraftItems(draft.textMessages, draft.cache.textMessages);
+        draft.textMessagesSize = draft.textMessages.length;
+
+        break;
+      }
 
       case CREATE_TEXT_MESSAGE_ERROR:
-        draft.textMessages = state.cache.textMessages;
+        assignDraftItems(draft.cache.textMessages, draft.textMessages);
         draft.errors.createTextMessagesError = action.payload.error;
         draft.loaders.createTextMessagesLoading = false;
         break;
@@ -145,23 +177,22 @@ export const textMessagesReducer = (state = initialState, action) =>
         draft.loaders.createVariantLoading = true;
         break;
 
-      case CREATE_VARIANT_SUCCESS:
+      case CREATE_VARIANT_SUCCESS: {
         const { variant } = action.payload;
-        textMessageIndex = state.textMessages.findIndex(
-          ({ id }) => id === state.selectedMessageId,
-        );
-        draft.cache.textMessages = state.textMessages;
-        draft.textMessages[textMessageIndex] = {
-          ...state.textMessages[textMessageIndex],
-          variants: [...state.textMessages[textMessageIndex].variants, variant],
-        };
         draft.selectedVariantId = variant.id;
         draft.loaders.createVariantLoading = false;
+
+        updateItemById(draft.textMessages, state.selectedMessageId, (item) => {
+          item.variants.push(variant);
+
+          return item;
+        });
+        assignDraftItems(draft.textMessages, draft.cache.textMessages);
         break;
+      }
 
       case CREATE_VARIANT_ERROR:
         draft.loaders.createVariantLoading = false;
-        draft.textMessages = state.cache.textMessages;
         break;
 
       case CHANGE_SELECTED_MESSAGE:
@@ -175,14 +206,12 @@ export const textMessagesReducer = (state = initialState, action) =>
       case UPDATE_TEXT_MESSAGE_SETTINGS_REQUEST:
         draft.loaders.updateTextMessagesLoading = true;
         const { data, type } = action.payload.value;
-        const editedTextMessageIndex = selectedMessageIndex();
 
-        draft.textMessages[editedTextMessageIndex] = textMessageSettingsReducer(
-          state.textMessages[editedTextMessageIndex],
-          {
+        updateItemById(draft.textMessages, state.selectedMessageId, (item) =>
+          textMessageSettingsReducer(item, {
             data,
             type,
-          },
+          }),
         );
 
         // `draft` used on purpose -> list with updated values is needed
@@ -193,84 +222,122 @@ export const textMessagesReducer = (state = initialState, action) =>
 
       case UPDATE_TEXT_MESSAGE_SETTINGS_SUCCESS:
         draft.loaders.updateTextMessagesLoading = false;
-        draft.cache.textMessages = state.textMessages;
+        assignDraftItems(draft.textMessages, draft.cache.textMessages);
         break;
       case UPDATE_TEXT_MESSAGE_SETTINGS_ERROR:
         draft.loaders.updateTextMessagesLoading = false;
-        draft.textMessages = state.cache.textMessages;
         draft.errors.updateTextMessagesError = action.payload.error;
+
+        assignDraftItems(draft.cache.textMessages, draft.textMessages);
         break;
 
       case REMOVE_TEXT_MESSAGE_REQUEST:
         draft.loaders.removeTextMessagesLoading = true;
         break;
+
       case REMOVE_TEXT_MESSAGE_SUCCESS:
+        deleteItemById(draft.textMessages, state.selectedMessageId);
+        assignDraftItems(draft.textMessages, draft.cache.textMessages);
+
+        draft.textMessagesSize = draft.textMessages.length;
+
         draft.loaders.removeTextMessagesLoading = false;
-        draft.cache.textMessages = state.textMessages;
-        const currentState = clone(state.textMessages);
-        remove(currentState, ({ id }) => id === state.selectedMessageId);
-        draft.textMessages = currentState;
         draft.selectedMessageId = null;
         break;
+
       case REMOVE_TEXT_MESSAGE_ERROR:
         draft.loaders.removeTextMessagesLoading = false;
-        draft.textMessages = state.cache.textMessages;
         draft.errors.removeTextMessagesError = action.payload.error;
         break;
 
-      case UPDATE_TEXT_MESSAGE_VARIANT_REQUEST:
+      case UPDATE_TEXT_MESSAGE_VARIANT_REQUEST: {
         draft.loaders.updateVariantLoading = true;
         const {
           data: variantData,
           type: variantType,
           variantId,
         } = action.payload.value;
-        textMessageIndex = selectedMessageIndex();
-        const variantIndex = state.textMessages[
-          textMessageIndex
-        ].variants.findIndex(({ id }) => id === variantId);
 
-        draft.textMessages[textMessageIndex].variants[
-          variantIndex
-        ] = textMessageVariantReducer(
-          state.textMessages[textMessageIndex].variants[variantIndex],
-          {
-            data: variantData,
-            type: variantType,
-            variantId,
+        updateItemById(
+          draft.textMessages,
+          state.selectedMessageId,
+          (textMessage) => {
+            updateItemById(textMessage.variants, variantId, (variant) =>
+              textMessageVariantReducer(variant, {
+                data: variantData,
+                type: variantType,
+                variantId,
+              }),
+            );
+
+            return textMessage;
           },
         );
         break;
+      }
+
       case UPDATE_TEXT_MESSAGE_VARIANT_SUCCESS:
         draft.loaders.updateVariantLoading = false;
-        draft.cache.textMessages = state.textMessages;
+        assignDraftItems(draft.textMessages, draft.cache.textMessages);
         break;
+
       case UPDATE_TEXT_MESSAGE_VARIANT_ERROR:
         draft.loaders.updateVariantLoading = false;
-        draft.textMessages = state.cache.textMessages;
         draft.errors.updateVariantError = action.payload.error;
+
+        assignDraftItems(draft.cache.textMessages, draft.textMessages);
         break;
 
       case REMOVE_TEXT_MESSAGE_VARIANT_REQUEST:
         draft.loaders.removeVariantLoading = true;
-        textMessageIndex = selectedMessageIndex();
-        const currentVariantsState = clone(
-          state.textMessages[textMessageIndex].variants,
+        updateItemById(
+          draft.textMessages,
+          state.selectedMessageId,
+          (textMessage) => {
+            deleteItemById(textMessage.variants, action.payload.variantId);
+
+            return textMessage;
+          },
         );
-        remove(
-          currentVariantsState,
-          ({ id }) => id === action.payload.variantId,
-        );
-        draft.textMessages[textMessageIndex].variants = currentVariantsState;
         break;
+
       case REMOVE_TEXT_MESSAGE_VARIANT_SUCCESS:
         draft.loaders.removeVariantLoading = false;
-        draft.cache.textMessages = state.textMessages;
+        assignDraftItems(draft.textMessages, draft.cache.textMessages);
         break;
+
       case REMOVE_TEXT_MESSAGE_VARIANT_ERROR:
         draft.loaders.removeVariantLoading = false;
-        draft.textMessages = state.cache.textMessages;
         draft.errors.removeVariantError = action.payload.error;
+
+        assignDraftItems(draft.cache.textMessages, draft.textMessages);
+        break;
+
+      case REORDER_TEXT_MESSAGE_VARIANTS_REQUEST:
+        draft.loaders.reorderVariantsLoading = true;
+        draft.loaders.reorderVariantsError = null;
+        if (state.selectedMessageId === action.payload.smsPlanId) {
+          updateItemById(
+            draft.textMessages,
+            state.selectedMessageId,
+            (textMessage) => {
+              textMessage.variants = action.payload.reorderedVariants;
+              return textMessage;
+            },
+          );
+        }
+        break;
+
+      case REORDER_TEXT_MESSAGE_VARIANTS_SUCCESS:
+        draft.loaders.reorderVariantsLoading = false;
+        draft.loaders.reorderVariantsError = null;
+        assignDraftItems(draft.textMessages, draft.cache.textMessages);
+        break;
+
+      case REORDER_TEXT_MESSAGE_VARIANTS_ERROR:
+        draft.loaders.reorderVariantsLoading = false;
+        draft.loaders.reorderVariantsError = payload;
+        assignDraftItems(draft.cache.textMessages, draft.textMessages);
         break;
 
       case CLONE_TEXT_MESSAGE_REQUEST:
@@ -279,15 +346,106 @@ export const textMessagesReducer = (state = initialState, action) =>
 
       case CLONE_TEXT_MESSAGE_SUCCESS:
         const { clonedTextMessage } = action.payload;
-        draft.textMessages = sortTextMessagesByDate([
-          ...state.textMessages,
-          clonedTextMessage,
-        ]);
         draft.loaders.createTextMessagesLoading = false;
+
+        draft.textMessages.push(clone(clonedTextMessage));
+        draft.textMessages = sortTextMessagesByDate(
+          current(draft.textMessages),
+        );
+
+        draft.textMessagesSize = draft.textMessages.length;
+
+        assignDraftItems(draft.textMessages, draft.cache.textMessages);
         break;
 
       case CLONE_TEXT_MESSAGE_ERROR:
         draft.loaders.createTextMessagesLoading = false;
+        break;
+
+      case ADD_PHONE_REQUEST:
+        draft.loaders.addPhoneLoading = true;
+        draft.loaders.addPhoneError = null;
+        break;
+
+      case ADD_PHONE_SUCCESS:
+        draft.loaders.addPhoneLoading = false;
+        const { phone } = action.payload;
+
+        updateItemById(
+          draft.textMessages,
+          state.selectedMessageId,
+          (textMessage) => {
+            textMessage.phones.push(phone);
+
+            return textMessage;
+          },
+        );
+        assignDraftItems(draft.textMessages, draft.cache.textMessages);
+        break;
+
+      case ADD_PHONE_ERROR:
+        draft.loaders.addPhoneLoading = false;
+        draft.loaders.addPhoneError = action.payload.error;
+        break;
+
+      case REMOVE_PHONE_REQUEST:
+        draft.loaders.removePhoneLoading = true;
+        draft.loaders.removePhoneError = null;
+        break;
+
+      case REMOVE_PHONE_SUCCESS:
+        draft.loaders.removePhoneLoading = false;
+
+        updateItemById(
+          draft.textMessages,
+          state.selectedMessageId,
+          (textMessage) => {
+            deleteItemById(textMessage.phones, action.payload.phoneId);
+
+            return textMessage;
+          },
+        );
+        assignDraftItems(draft.textMessages, draft.cache.textMessages);
+        break;
+
+      case REMOVE_PHONE_ERROR:
+        draft.loaders.removePhoneLoading = false;
+        draft.loaders.removePhoneError = action.payload.error;
+        break;
+
+      case UPDATE_PHONE_REQUEST:
+        draft.loaders.updatePhoneLoading = true;
+        draft.loaders.updatePhoneError = null;
+        const { phoneId, phoneAttributes } = action.payload;
+
+        updateItemById(
+          draft.textMessages,
+          state.selectedMessageId,
+          (textMessage) => {
+            updateItemById(textMessage.phones, phoneId, phoneAttributes);
+
+            return textMessage;
+          },
+        );
+        break;
+
+      case UPDATE_PHONE_SUCCESS:
+        draft.loaders.updatePhoneLoading = false;
+        assignDraftItems(draft.textMessages, draft.cache.textMessages);
+        break;
+
+      case UPDATE_PHONE_ERROR:
+        draft.loaders.updatePhoneLoading = false;
+        draft.loaders.updatePhoneError = action.payload.error;
+        assignDraftItems(draft.cache.textMessages, draft.textMessages);
+        break;
+
+      case SET_FILTERS:
+        draft.filters = payload.filters;
+        break;
+
+      case SET_TEXT_MESSAGES_COUNT:
+        draft.textMessagesSize = payload.count;
         break;
     }
   });

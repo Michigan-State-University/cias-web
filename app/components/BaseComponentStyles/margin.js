@@ -1,6 +1,6 @@
 import PropTypes from 'prop-types';
 
-const margin = props => ({
+const margin = (props) => ({
   marginTop: props.my ?? props.mt ?? '',
   marginBottom: props.my ?? props.mb ?? '',
   marginRight: props.mx ?? props.mr ?? '',

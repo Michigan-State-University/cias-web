@@ -1,10 +1,10 @@
 export {
-  copyQuestionsRequest,
+  duplicateGroupsHereRequest,
+  duplicateGroupsInternallyRequest,
   groupQuestionsRequest,
-  shareQuestionsToResearchersRequest,
+  shareGroupsExternallyRequest,
   changeGroupNameRequest,
   getQuestionGroupsRequest,
-  createNewQuestionInGroup,
   reorderGroupListRequest,
   cleanGroups,
 } from './actions';
@@ -15,9 +15,11 @@ export {
   makeSelectGetQuestionGroupLoader,
   makeSelectQuestionGroupsIds,
   makeSelectQuestionGroupsSessionId,
+  makeSelectGetQuestionGroupError,
 } from './selectors';
 export {
-  copyQuestionsSaga,
+  duplicateGroupsHereSaga,
+  duplicateGroupsInternallySaga,
   groupQuestionsSaga,
   shareQuestionsToResearchersSaga,
   changeGroupNameSaga,

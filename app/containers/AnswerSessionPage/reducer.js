@@ -4,7 +4,7 @@
  *
  */
 import produce from 'immer';
-import { DESKTOP_MODE } from 'utils/previewMode';
+import { I_PHONE_8_PLUS_MODE } from 'utils/previewMode';
 
 import {
   SUBMIT_ANSWER_ERROR,
@@ -26,6 +26,7 @@ import {
   CHANGE_USER_SESSION_ID,
   SET_CURRENT_BLOCK_INDEX,
   TOGGLE_TEXT_TRANSCRIPT,
+  SET_TRANSITIONAL_USER_SESSION_ID,
 } from './constants';
 
 const getEmptyFeedbackScreenSettings = () => ({
@@ -42,7 +43,7 @@ export const initialState = {
   answersError: '',
   answers: {},
   interventionStarted: false,
-  previewMode: DESKTOP_MODE,
+  previewMode: I_PHONE_8_PLUS_MODE,
   sessionId: null,
   isAnimationOngoing: true,
   feedbackScreenSettings: getEmptyFeedbackScreenSettings(),
@@ -56,11 +57,13 @@ export const initialState = {
   currentQuestion: null,
   currentBlockIndex: -1,
   showTextTranscript: false,
+  transitionalUserSessionId: null,
+  previousUserSessionId: null,
 };
 
 /* eslint-disable default-case, no-param-reassign */
 const AnswerSessionPageReducer = (state = initialState, { payload, type }) =>
-  produce(state, draft => {
+  produce(state, (draft) => {
     switch (type) {
       case SELECT_ANSWER:
         draft.answers[payload.id] = payload;
@@ -150,6 +153,7 @@ const AnswerSessionPageReducer = (state = initialState, { payload, type }) =>
         break;
 
       case CHANGE_USER_SESSION_ID:
+        draft.previousUserSessionId = draft.userSession.id;
         draft.userSession.id = payload.userSessionId;
         break;
 
@@ -160,6 +164,10 @@ const AnswerSessionPageReducer = (state = initialState, { payload, type }) =>
       case TOGGLE_TEXT_TRANSCRIPT:
         draft.showTextTranscript = !state.showTextTranscript;
         break;
+
+      case SET_TRANSITIONAL_USER_SESSION_ID: {
+        draft.transitionalUserSessionId = payload.userSessionId;
+      }
     }
   });
 

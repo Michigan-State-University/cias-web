@@ -3,7 +3,7 @@ import styled from 'styled-components';
 import { fontSizes, lineHeights, colors } from 'theme';
 import { padding, style } from '../BaseComponentStyles';
 
-export const StyledChips = styled.div.attrs(props => ({
+export const StyledChips = styled.div.attrs((props) => ({
   onClick: props.disabled ? null : props.onClick,
 }))`
   width: fit-content;

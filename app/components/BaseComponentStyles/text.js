@@ -7,13 +7,13 @@ const propsToCssMapper = {
   bold: 700,
 };
 
-const text = props => ({
+const text = (props) => ({
   fontSize: props.fontSize || '',
   fontWeight: propsToCssMapper[props.fontWeight] || '',
   fontStyle: props.fontStyle || '',
   color: props.color
     ? `rgba(${hexToRgb(props.color)}, ${props.textOpacity || 1})`
-    : `${themeColors.text}`,
+    : props.defaultColor ?? `${themeColors.text}`,
   whiteSpace: props.whiteSpace || '',
   textOverflow: props.textOverflow || '',
   cursor: props.clickable ? 'pointer;' : '',

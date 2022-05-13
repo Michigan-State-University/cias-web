@@ -9,11 +9,11 @@ export default defineMessages({
   },
   copy: {
     id: `${scope}.copy`,
-    defaultMessage: 'Share copy',
+    defaultMessage: 'Duplicate internally',
   },
-  duplicate: {
-    id: `${scope}.duplicate`,
-    defaultMessage: 'Duplicate',
+  duplicateHere: {
+    id: `${scope}.duplicateHere`,
+    defaultMessage: 'Duplicate here',
   },
   pasteQuestion: {
     id: `${scope}.pasteQuestion`,

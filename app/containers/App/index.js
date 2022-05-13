@@ -7,8 +7,10 @@
  *
  */
 
-import React, { useEffect } from 'react';
+import React, { useEffect, useMemo } from 'react';
+import isEmpty from 'lodash/isEmpty';
 import { Redirect, Switch } from 'react-router-dom';
+import { useLocation } from 'react-router';
 import PropTypes from 'prop-types';
 import { useIntl } from 'react-intl';
 import { connect } from 'react-redux';
@@ -19,12 +21,16 @@ import { createStructuredSelector } from 'reselect';
 import GlobalStyle from 'global-styles';
 
 import { Roles, ResearcherRoles } from 'models/User/UserRoles';
-import navbarNames, { NAVIGATION } from 'utils/navbarNames';
+import navbarNames, { navbarMessages, NAVIGATION } from 'utils/navbarNames';
 import rootSaga from 'global/sagas/rootSaga';
-import { makeSelectUser } from 'global/reducers/auth';
+import {
+  fetchSelfDetailsRequest,
+  makeSelectUser,
+  fetchSelfDetailsSaga,
+} from 'global/reducers/auth';
 
 import AnswerSessionPage from 'containers/AnswerSessionPage/Loadable';
-import EditSessionPage from 'containers/Sessions/containers/EditSessionPage';
+import EditSessionPage from 'containers/Sessions/containers/EditSessionPage/Loadable';
 import InterventionDetailsPage from 'containers/InterventionDetailsPage/Loadable';
 import LoginPage from 'containers/LoginPage/Loadable';
 import NotFoundPage from 'containers/NotFoundPage/Loadable';
@@ -40,7 +46,6 @@ import TeamsListPage from 'containers/TeamsList/Loadable';
 import TeamDetails from 'containers/TeamDetails/Loadable';
 import Logout from 'containers/Logout/Loadable';
 import UserDetails from 'containers/UserDetails/Loadable';
-import ReportsPage from 'containers/ParticipantDashboard/components/ReportsTab/Loadable';
 import GeneratedReportsPage from 'containers/Sessions/containers/GeneratedReportsPage';
 import ForbiddenPage from 'containers/ForbiddenPage/Loadable';
 import TextMessagesPage from 'containers/Sessions/containers/TextMessagesPage';
@@ -48,7 +53,11 @@ import ReportingDashboardPage from 'containers/ReportingDashboardPage/Loadable';
 import ClinicAdminRedirectPage from 'containers/ClinicAdminRedirectPage/Loadable';
 import { VIEW } from 'containers/ReportingDashboardPage/constants';
 import ApiQueryMessageHandler from 'components/ApiQueryMessageHandler/Loadable';
-import ParticipantDashboard from 'containers/ParticipantDashboard/Loadable';
+import ParticipantReports from 'containers/ParticipantDashboard/Loadable';
+import SessionMapPage from 'containers/SessionMapPage/Loadable';
+import ParticipantInterventionsPage from 'containers/ParticipantInterventionsPage/Loadable';
+import UserInterventionPage from 'containers/UserInterventionPage/Loadable';
+import UserInterventionInvitePage from 'containers/UserInterventionInvitePage/Loadable';
 import SuperadminConsolePage from 'containers/SuperadminConsolePage/Loadable';
 
 import AppRoute from 'components/AppRoute';
@@ -59,13 +68,30 @@ import {
   interventionsTabId,
   participantReportsTabId,
   teamsTabId,
+  participantInterventionsTabId,
 } from 'utils/defaultNavbarTabs';
 
-import { TOOLTIP_PORTAL_ID } from './constants';
+import { MODAL_PORTAL_ID, TOOLTIP_PORTAL_ID } from './constants';
 
-export function App({ user }) {
-  const { locale } = useIntl();
+export function App({ user, fetchSelfDetails }) {
+  const { locale, formatMessage } = useIntl();
+  const { pathname } = useLocation();
   useInjectSaga({ key: 'app', saga: rootSaga });
+  useInjectSaga({ key: 'fetchSelfDetails', saga: fetchSelfDetailsSaga });
+
+  useEffect(() => {
+    if (user && !pathname.includes('/preview')) {
+      fetchSelfDetails();
+    }
+  }, []);
+
+  const defaultSidebarId = useMemo(() => {
+    if (!isEmpty(user?.roles)) {
+      if (user.roles[0] === Roles.participant)
+        return participantInterventionsTabId;
+      return interventionsTabId;
+    }
+  }, [user]);
 
   useEffect(() => {
     const appRoot = document.getElementById('app');
@@ -83,7 +109,7 @@ export function App({ user }) {
         case Roles.teamAdmin:
           return <InterventionPage />;
         case Roles.participant:
-          return <ParticipantDashboard />;
+          return <ParticipantInterventionsPage />;
         case Roles.thirdParty:
           return <GeneratedReportsPage disableFilter />;
         case Roles.eInterventionAdmin:
@@ -108,10 +134,19 @@ export function App({ user }) {
     if (user) {
       switch (user.roles[0]) {
         case Roles.admin:
-          return <UserListPage />;
+          return (
+            <UserListPage
+              pageTitle={formatMessage(navbarMessages.adminAccounts)}
+            />
+          );
         case Roles.eInterventionAdmin:
         case Roles.researcher:
-          return <UserListPage filterableRoles={[Roles.participant]} />;
+          return (
+            <UserListPage
+              filterableRoles={[Roles.participant]}
+              pageTitle={formatMessage(navbarMessages.researcherAccounts)}
+            />
+          );
         default:
           return NotFoundPage;
       }
@@ -124,6 +159,7 @@ export function App({ user }) {
       <IdleTimer />
 
       <div id={TOOLTIP_PORTAL_ID} />
+      <div id={MODAL_PORTAL_ID} />
 
       <Switch>
         <AppRoute
@@ -138,7 +174,7 @@ export function App({ user }) {
           }}
           sidebarProps={{
             sidebarId: NAVIGATION.DEFAULT,
-            activeTab: interventionsTabId,
+            activeTab: defaultSidebarId,
           }}
         />
         <AppRoute
@@ -190,7 +226,7 @@ export function App({ user }) {
         <AppRoute
           exact
           path="/reports"
-          component={ReportsPage}
+          component={ParticipantReports}
           protectedRoute
           allowedRoles={[Roles.participant]}
           navbarProps={{
@@ -271,6 +307,30 @@ export function App({ user }) {
           navbarProps={{
             navbarId: NAVIGATION.SESSIONS,
           }}
+        />
+        <AppRoute
+          exact
+          path="/interventions/:interventionId/sessions/:sessionId/map"
+          component={SessionMapPage}
+          protectedRoute
+          allowedRoles={[Roles.admin, ...ResearcherRoles]}
+          navbarProps={{
+            navbarId: NAVIGATION.SESSIONS,
+          }}
+        />
+        <AppRoute
+          exact
+          path="/user_interventions/:userInterventionId"
+          component={UserInterventionPage}
+          protectedRoute
+          allowedRoles={[Roles.participant]}
+        />
+        <AppRoute
+          exact
+          path="/interventions/:interventionId/invite"
+          component={UserInterventionInvitePage}
+          protectedRoute
+          allowedRoles={[Roles.participant]}
         />
         <AppRoute
           exact
@@ -414,12 +474,17 @@ export function App({ user }) {
 
 App.propTypes = {
   user: PropTypes.object,
+  fetchSelfDetails: PropTypes.func,
 };
 
 const mapStateToProps = createStructuredSelector({
   user: makeSelectUser(),
 });
 
-const withConnect = connect(mapStateToProps);
+const mapDispatchToProps = {
+  fetchSelfDetails: fetchSelfDetailsRequest,
+};
+
+const withConnect = connect(mapStateToProps, mapDispatchToProps);
 
 export default compose(withConnect)(App);

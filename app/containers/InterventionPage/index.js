@@ -91,13 +91,13 @@ export function InterventionPage({
     });
   };
 
-  const handleChange = value => () => {
+  const handleChange = (value) => () => {
     if (filterStatus.includes(value))
-      setFilterStatus(filterStatus.filter(el => el !== value));
+      setFilterStatus(filterStatus.filter((el) => el !== value));
     else setFilterStatus([...filterStatus, value]);
   };
 
-  const handleFilterStatus = e => {
+  const handleFilterStatus = (e) => {
     e.preventDefault();
     const {
       currentTarget: { value },
@@ -138,6 +138,7 @@ export function InterventionPage({
       display="flex"
       direction="column"
       overflow="clip"
+      pt={54}
     >
       {!user.feedbackCompleted && FeedbackNotification}
 
@@ -153,7 +154,7 @@ export function InterventionPage({
       )}
 
       <InitialRow fluid>
-        <H1 mt={35}>
+        <H1>
           <FormattedMessage {...messages.myInterventions} />
         </H1>
       </InitialRow>
@@ -185,8 +186,9 @@ export function InterventionPage({
               <Col>
                 <SearchInput
                   value={filterValue}
-                  onChange={e => setFilterValue(e.target.value)}
+                  onChange={(e) => setFilterValue(e.target.value)}
                   placeholder={formatMessage(messages.filter)}
+                  aria-label={formatMessage(messages.searchInterventionsLabel)}
                   debounceTime={300}
                 />
               </Col>
@@ -245,10 +247,7 @@ const mapDispatchToProps = {
   editUser: editUserRequest,
 };
 
-const withConnect = connect(
-  mapStateToProps,
-  mapDispatchToProps,
-);
+const withConnect = connect(mapStateToProps, mapDispatchToProps);
 
 export default compose(
   withConnect,

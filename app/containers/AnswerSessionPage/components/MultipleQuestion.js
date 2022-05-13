@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
 
-import Question from 'models/Session/Question';
 import MultipleQuestionLayout from '../layouts/MultipleQuestionLayout';
 
 const MultipleQuestion = ({ question, answerBody, selectAnswer }) => {
@@ -14,7 +13,7 @@ const MultipleQuestion = ({ question, answerBody, selectAnswer }) => {
 
   useEffect(() => {
     setSelectedAnswersIndex(
-      answerBody.length ? answerBody.map(answer => answer.index) : [],
+      answerBody.length ? answerBody.map((answer) => answer.index) : [],
     );
   }, [id]);
 
@@ -26,10 +25,10 @@ const MultipleQuestion = ({ question, answerBody, selectAnswer }) => {
     };
     if (selectedAnswersIndex.includes(index)) {
       setSelectedAnswersIndex(
-        selectedAnswersIndex.filter(item => item !== index),
+        selectedAnswersIndex.filter((item) => item !== index),
       );
       selectAnswer(
-        answerBody.filter(item => item.value !== selectedAnswer.value),
+        answerBody.filter((item) => item.value !== selectedAnswer.value),
       );
     } else {
       setSelectedAnswersIndex([...selectedAnswersIndex, index]);
@@ -47,7 +46,7 @@ const MultipleQuestion = ({ question, answerBody, selectAnswer }) => {
 };
 
 MultipleQuestion.propTypes = {
-  question: PropTypes.shape(Question).isRequired,
+  question: PropTypes.object.isRequired,
   answerBody: PropTypes.any,
   selectAnswer: PropTypes.func,
 };

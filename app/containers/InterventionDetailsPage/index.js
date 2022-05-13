@@ -13,7 +13,7 @@ import { createStructuredSelector } from 'reselect';
 import get from 'lodash/get';
 import { DragDropContext, Droppable } from 'react-beautiful-dnd';
 import orderBy from 'lodash/orderBy';
-import { Col as GCol, Row as GRow, useScreenClass } from 'react-grid-system';
+import { Col as GCol, Row as GRow } from 'react-grid-system';
 import { useParams } from 'react-router-dom';
 import { injectSaga, injectReducer } from 'redux-injectors';
 import { Markup } from 'interweave';
@@ -25,6 +25,9 @@ import CopyIcon from 'assets/svg/copy.svg';
 import ArchiveIcon from 'assets/svg/archive.svg';
 import PencilIcon from 'assets/svg/pencil-solid.svg';
 import AddAppIcon from 'assets/svg/app-add.svg';
+import TranslateIcon from 'assets/svg/translate.svg';
+import DocumentIcon from 'assets/svg/document.svg';
+import QuestionMarkIcon from 'assets/svg/grey-question-mark.svg';
 
 import isNullOrUndefined from 'utils/isNullOrUndefined';
 import { reorder } from 'utils/reorder';
@@ -34,12 +37,14 @@ import {
   canEdit,
   canShareWithParticipants,
 } from 'models/Status/statusPermissions';
+import { Roles } from 'models/User/UserRoles';
 import { reorderScope } from 'models/Session/ReorderScope';
 import { archived } from 'models/Status/StatusTypes';
 import { RolePermissions } from 'models/User/RolePermissions';
+import { CatMhLicenseType } from 'models/Intervention';
 import { getQuestionGroupsSaga } from 'global/reducers/questionGroups/sagas';
 import { editSessionRequest, editSessionSaga } from 'global/reducers/session';
-import { makeSelectUserRoles, makeSelectUserId } from 'global/reducers/auth';
+import { makeSelectUser } from 'global/reducers/auth';
 import {
   fetchInterventionRequest,
   makeSelectInterventionState,
@@ -61,44 +66,43 @@ import {
   interventionsReducer,
   fetchInterventionsSaga,
 } from 'global/reducers/interventions';
-
 import {
   questionsReducer,
   getQuestionsRequest,
 } from 'global/reducers/questions';
 
-import OrganizationShareBox from 'containers/ShareBox/OrganizationShareBox';
 import SettingsPanel from 'containers/SettingsPanel';
+import TranslateInterventionModal from 'containers/TranslateInterventionModal/index';
+import { ShareBox, ShareBoxType } from 'containers/ShareBox';
 
-import ConfirmationBox from 'components/ConfirmationBox';
+import Modal, {
+  ConfirmationModal,
+  ModalType,
+  useModal,
+} from 'components/Modal';
 import Loader from 'components/Loader';
 import Column from 'components/Column';
 import ErrorAlert from 'components/ErrorAlert';
 import Row from 'components/Row';
-import ShareBox from 'containers/ShareBox';
-import Modal from 'components/Modal';
 import Spinner from 'components/Spinner';
 import AppContainer from 'components/Container';
-import H3 from 'components/H3';
 import Icon from 'components/Icon';
 import Tooltip from 'components/Tooltip';
 
 import Header from './Header';
 import { DraggedTest } from './styled';
 import interventionDetailsPageSagas from './saga';
-import SessionCreateButton from './components/SessionCreateButton';
+import SessionCreateButton from './components/SessionCreateButton/index';
 import SessionListItem from './components/SessionListItem';
 import {
+  CatMhAccessModal,
   InterventionAssignOrganizationModal,
   InterventionSettingsModal,
 } from './components/Modals';
 import SelectResearchers from '../SelectResearchers';
 import messages from './messages';
-import {
-  InterventionDetailsPageContext,
-  nextStatus,
-  updateStatuses,
-} from './utils';
+import { InterventionDetailsPageContext, nextStatus } from './utils';
+import { CAT_MH_TEST_COUNT_WARNING_THRESHOLD } from './constants';
 
 export function InterventionDetailsPage({
   createSession,
@@ -119,22 +123,19 @@ export function InterventionDetailsPage({
   fetchSessionEmails,
   deleteSession,
   externalCopySession,
-  roles,
-  userId,
+  user: { id: userId, roles },
   editSession,
 }) {
   const { interventionId } = useParams();
   const { formatMessage } = useIntl();
 
-  const [
-    deleteConfirmationSessionId,
-    setDeleteConfirmationSessionId,
-  ] = useState(null);
+  const [deleteConfirmationSessionId, setDeleteConfirmationSessionId] =
+    useState(null);
 
   const rolePermissions = useMemo(() => RolePermissions(roles), [roles]);
   const { canAssignOrganizationToIntervention } = rolePermissions;
 
-  const screenClass = useScreenClass();
+  const isAdmin = roles.includes(Roles.admin);
 
   const {
     sessions,
@@ -147,7 +148,19 @@ export function InterventionDetailsPage({
     organizationId,
     userId: interventionOwnerId,
     languageName,
+    googleLanguageId,
+    isAccessRevoked,
+    catMhPool,
+    createdCatMhSessionCount,
+    licenseType,
+    type,
   } = intervention || {};
+
+  const testsLeft = catMhPool - createdCatMhSessionCount;
+  const hasSmallNumberOfCatMhSessionsRemaining =
+    licenseType !== CatMhLicenseType.UNLIMITED &&
+    (!catMhPool ||
+      testsLeft / catMhPool <= CAT_MH_TEST_COUNT_WARNING_THRESHOLD);
 
   const editingPossible = canEdit(status);
   const sharingPossible = canShareWithParticipants(status);
@@ -155,51 +168,94 @@ export function InterventionDetailsPage({
   const deletionPossible = canDeleteSession(status);
   const canAccessCsv = interventionOwnerId === userId;
 
-  const [modalVisible, setModalVisible] = useState(false);
-  const [
-    participantShareModalVisible,
-    setParticipantShareModalVisible,
-  ] = useState(false);
+  const [sendCopyModalVisible, setSendCopyModalVisible] = useState(false);
+  const [translateModalVisible, setTranslateModalVisible] = useState(false);
+  const [participantShareModalVisible, setParticipantShareModalVisible] =
+    useState(false);
   const [
     interventionSettingsModalVisible,
     setInterventionSettingsModalVisible,
   ] = useState(false);
-  const [
-    assignOrganizationModalVisible,
-    setAssignOrganizationModalVisible,
-  ] = useState(false);
+  const [assignOrganizationModalVisible, setAssignOrganizationModalVisible] =
+    useState(false);
 
-  const closeModal = () => setModalVisible(false);
-  const openModal = () => setModalVisible(true);
+  const closeSendCopyModal = () => setSendCopyModalVisible(false);
+  const openSendCopyModal = () => setSendCopyModalVisible(true);
+
+  const closeTranslateModal = () => setTranslateModalVisible(false);
+  const openTranslateModal = () => setTranslateModalVisible(true);
   const closeAssignOrganizationModal = () =>
     setAssignOrganizationModalVisible(false);
   const openAssignOrganizationModal = () =>
     setAssignOrganizationModalVisible(true);
-
   const handleCopyIntervention = () =>
     copyIntervention({ interventionId: id, withoutRedirect: true });
   const handleArchiveIntervention = () =>
     editIntervention({
-      status_event: 'to_archive',
       status: archived,
       id: interventionId,
     });
-  const handleDeleteSession = sessionId => {
+  const handleDeleteSession = (sessionId) => {
     deleteSession(sessionId, id);
     setDeleteConfirmationSessionId(null);
   };
 
+  const { openModal: openArchiveModal, Modal: ArchiveModal } = useModal({
+    type: ModalType.ConfirmationModal,
+    props: {
+      description: formatMessage(messages.interventionArchiveHeader),
+      content: formatMessage(messages.interventionArchiveMessage),
+      confirmAction: handleArchiveIntervention,
+    },
+  });
+
+  const { openModal: openCatMhModal, Modal: CatMhModal } = useModal({
+    type: ModalType.Modal,
+    modalContentRenderer: (props) => <CatMhAccessModal {...props} />,
+    props: {
+      title: formatMessage(messages.catMhSettingsModalTitle),
+    },
+  });
+
+  const {
+    openModal: openInterventionInviteModal,
+    Modal: InterventionInviteModal,
+  } = useModal({
+    type: ModalType.Modal,
+    props: {
+      title: formatMessage(messages.participantShareModalTitle),
+    },
+    modalContentRenderer: () => (
+      <ShareBox
+        type={ShareBoxType.INTERVENTION}
+        organizationId={organizationId}
+      />
+    ),
+  });
+
+  const canCreateCatSession = useMemo(
+    () => !isAccessRevoked,
+    [isAccessRevoked],
+  );
+
   const options = [
     {
-      id: 'copy',
-      label: formatMessage(messages.copy),
-      icon: FileShareIcon,
-      action: openModal,
+      id: 'translate',
+      label: formatMessage(messages.translate),
+      icon: TranslateIcon,
+      action: openTranslateModal,
       color: colors.bluewood,
     },
     {
-      id: 'duplicate',
-      label: formatMessage(messages.duplicate),
+      id: 'share externally',
+      label: formatMessage(messages.shareExternally),
+      icon: FileShareIcon,
+      action: openSendCopyModal,
+      color: colors.bluewood,
+    },
+    {
+      id: 'duplicate here',
+      label: formatMessage(messages.duplicateHere),
       icon: CopyIcon,
       action: handleCopyIntervention,
       color: colors.bluewood,
@@ -208,7 +264,7 @@ export function InterventionDetailsPage({
       id: 'archive',
       label: formatMessage(messages.archive),
       icon: ArchiveIcon,
-      action: handleArchiveIntervention,
+      action: openArchiveModal,
       color: colors.bluewood,
       disabled: !archivingPossible,
     },
@@ -220,6 +276,16 @@ export function InterventionDetailsPage({
             label: formatMessage(messages.assignOrganization),
             id: 'assignOrganization',
             disabled: !canEdit(status),
+          },
+        ]
+      : []),
+    ...(isAdmin
+      ? [
+          {
+            icon: DocumentIcon,
+            action: () => openCatMhModal(intervention),
+            label: formatMessage(messages.catMhSettingsModalTitle),
+            id: 'catMhAccess',
           },
         ]
       : []),
@@ -237,11 +303,11 @@ export function InterventionDetailsPage({
       fetchQuestions(sessions[sessionIndex].id);
   }, [intervention ? intervention.id : 0]);
 
-  const handleCopySession = sessionId => {
+  const handleCopySession = (sessionId) => {
     copySession({ sessionId });
   };
 
-  const handleExternalCopySession = params => {
+  const handleExternalCopySession = (params) => {
     const { sessionId, id: targetInterventionId } = params;
     externalCopySession({
       sessionId,
@@ -250,24 +316,23 @@ export function InterventionDetailsPage({
     });
   };
 
-  const editName = val => editIntervention({ name: val, id: interventionId });
+  const editName = (val) => editIntervention({ name: val, id: interventionId });
 
   const handleChangeStatus = () =>
     editIntervention({
-      status_event: get(updateStatuses, status, ''),
       status: get(nextStatus, status, ''),
       id: interventionId,
     });
 
   const handleSendCsv = () => sendCsv(id);
 
-  const createSessionCall = () =>
-    createSession(interventionId, sessions.length);
+  const createSessionCall = (sessionType) =>
+    createSession(interventionId, sessions.length, sessionType);
 
   const handleReorder = (previousIndex, nextIndex) => {
     const newList = reorder(sessions, previousIndex, nextIndex);
     let position = 0;
-    const orderedNewList = newList.map(session => {
+    const orderedNewList = newList.map((session) => {
       position += 1;
       return {
         ...session,
@@ -280,14 +345,19 @@ export function InterventionDetailsPage({
     });
   };
 
-  const copyInterventionToResearchers = users =>
+  const copyInterventionToResearchers = (users) =>
     copyIntervention({ interventionId, users, withoutRedirect: true });
 
-  const onDragEnd = result => {
+  const onDragEnd = (result) => {
     const { source, destination } = result;
 
     if (destination) handleReorder(source.index, destination.index);
   };
+
+  const sortedSessions = useMemo(
+    () => sessions && orderBy(sessions, 'position'),
+    [sessions],
+  );
 
   const renderList = () => (
     <DraggedTest>
@@ -297,13 +367,13 @@ export function InterventionDetailsPage({
           droppableId="session-list"
           type={reorderScope.sessions}
         >
-          {providedDroppable => (
+          {(providedDroppable) => (
             <div
               ref={providedDroppable.innerRef}
               {...providedDroppable.droppableProps}
             >
-              {sessions &&
-                orderBy(sessions, 'position').map((session, index) => {
+              {sortedSessions &&
+                sortedSessions.map((session, index) => {
                   const handleInviteParticipantsClick = () => {
                     fetchSessionEmails(index);
                     if (index !== sessionIndex) {
@@ -312,8 +382,8 @@ export function InterventionDetailsPage({
                     }
                     setParticipantShareModalVisible(true);
                   };
-                  const nextIntervention = sessions.find(
-                    ({ position }) => position === session.position + 1,
+                  const nextSession = sortedSessions.find(
+                    ({ position }) => position > session.position,
                   );
                   return (
                     <Row key={session.id}>
@@ -330,14 +400,13 @@ export function InterventionDetailsPage({
                         }
                         handleCopySession={handleCopySession}
                         handleExternalCopySession={handleExternalCopySession}
-                        handleDeleteSession={sessionId =>
+                        handleDeleteSession={(sessionId) =>
                           setDeleteConfirmationSessionId(sessionId)
                         }
                         editSession={editSession}
-                        nextSessionName={
-                          nextIntervention ? nextIntervention.name : null
-                        }
+                        nextSessionName={nextSession ? nextSession.name : null}
                         status={status}
+                        interventionType={type}
                       />
                     </Row>
                   );
@@ -367,9 +436,11 @@ export function InterventionDetailsPage({
     >
       <AppContainer>
         <Helmet>
-          <title>{name}</title>
+          <title>{formatMessage(messages.pageTitle, { name })}</title>
         </Helmet>
-        <ConfirmationBox
+        <ArchiveModal />
+        <CatMhModal />
+        <ConfirmationModal
           visible={!isNullOrUndefined(deleteConfirmationSessionId)}
           onClose={() => setDeleteConfirmationSessionId(null)}
           description={formatMessage(messages.sessionDeleteHeader)}
@@ -377,23 +448,22 @@ export function InterventionDetailsPage({
           confirmAction={() => handleDeleteSession(deleteConfirmationSessionId)}
         />
         <Modal
-          title={
-            <H3
-              mb={15}
-              fontSize={13}
-              fontWeight="bold"
-              textOpacity={0.6}
-              color={colors.bluewood}
-            >
-              {formatMessage(messages.modalTitle)}
-            </H3>
-          }
-          onClose={closeModal}
-          visible={modalVisible}
+          title={formatMessage(messages.sendCopyModalTitle)}
+          onClose={closeSendCopyModal}
+          visible={sendCopyModalVisible}
         >
           <SelectResearchers
             onResearchersSelected={copyInterventionToResearchers}
-            onClose={closeModal}
+            onClose={closeSendCopyModal}
+          />
+        </Modal>
+
+        <Modal onClose={closeTranslateModal} visible={translateModalVisible}>
+          <TranslateInterventionModal
+            id={id}
+            name={name}
+            googleLanguageId={googleLanguageId}
+            onTranslated={closeTranslateModal}
           />
         </Modal>
 
@@ -410,11 +480,13 @@ export function InterventionDetailsPage({
           onClose={() => setParticipantShareModalVisible(false)}
           visible={participantShareModalVisible}
         >
-          {!organizationId && <ShareBox />}
-          {organizationId && (
-            <OrganizationShareBox organizationId={organizationId} />
-          )}
+          <ShareBox
+            type={ShareBoxType.SESSION}
+            organizationId={organizationId}
+          />
         </Modal>
+
+        <InterventionInviteModal />
 
         <Modal
           title={formatMessage(messages.assignOrganization)}
@@ -439,37 +511,72 @@ export function InterventionDetailsPage({
           status={status}
           organizationId={organizationId}
           canAccessCsv={canAccessCsv}
+          openInterventionInviteModal={openInterventionInviteModal}
+          interventionType={type}
+          sharingPossible={sharingPossible}
         />
 
-        <Row>
-          <Tooltip
-            id="intervention-settings"
-            text={formatMessage(messages.interventionSettingsIconTooltip)}
-          >
-            <Icon
-              src={PencilIcon}
-              fill={colors.grey}
-              onClick={() => setInterventionSettingsModalVisible(true)}
-              role="button"
-              aria-label={formatMessage(
-                messages.interventionSettingsIconTooltip,
+        <GRow>
+          <GCol>
+            <Row justify="between">
+              <Row align="center">
+                <Tooltip
+                  id="intervention-settings"
+                  text={formatMessage(messages.interventionSettingsIconTooltip)}
+                >
+                  <Icon
+                    src={PencilIcon}
+                    fill={colors.grey}
+                    onClick={() => setInterventionSettingsModalVisible(true)}
+                    role="button"
+                    aria-label={formatMessage(
+                      messages.interventionSettingsIconTooltip,
+                    )}
+                    mr={10}
+                  />
+                </Tooltip>
+                <Markup
+                  content={formatMessage(messages.interventionLanguage, {
+                    language: languageName,
+                  })}
+                />
+              </Row>
+
+              {!isAccessRevoked && (
+                <Row align="center">
+                  {formatMessage(messages.catMhCounter, {
+                    licenseType,
+                    current: testsLeft ?? 0,
+                    initial: catMhPool ?? 0,
+                    used: createdCatMhSessionCount,
+                    counter: (chunks) => (
+                      <span
+                        style={{
+                          color: hasSmallNumberOfCatMhSessionsRemaining
+                            ? themeColors.warning
+                            : themeColors.success,
+                        }}
+                      >
+                        {chunks}
+                      </span>
+                    ),
+                  })}
+                  <Tooltip
+                    id="intervention-type-tooltip"
+                    ml={8}
+                    icon={QuestionMarkIcon}
+                    content={formatMessage(messages.catMhCountInfo)}
+                  />
+                </Row>
               )}
-              mr={10}
-            />
-          </Tooltip>
-          <Markup
-            content={formatMessage(messages.interventionLanguage, {
-              language: languageName,
-            })}
-          />
-        </Row>
+            </Row>
+          </GCol>
+
+          <GCol xs={0} xl={6} />
+        </GRow>
 
         <GRow>
-          <GCol
-            lg={6}
-            md={12}
-            style={{ order: ['md', 'sm', 'xs'].includes(screenClass) ? 1 : 0 }}
-          >
+          <GCol xl={6}>
             {renderList()}
             {createSessionLoading && (
               <Row my={18} align="center">
@@ -478,14 +585,17 @@ export function InterventionDetailsPage({
             )}
             {editingPossible && (
               <Row my={18} align="center">
-                <SessionCreateButton handleClick={createSessionCall} />
+                <SessionCreateButton
+                  canCreateCatSession={canCreateCatSession}
+                  handleSessionCreation={createSessionCall}
+                />
               </Row>
             )}
             {createSessionError && (
               <ErrorAlert errorText={createSessionError} />
             )}
           </GCol>
-          <GCol>
+          <GCol xl={6}>
             <Column position="sticky" top="100px" mt={18}>
               <SettingsPanel intervention={intervention} />
             </Column>
@@ -528,15 +638,13 @@ InterventionDetailsPage.propTypes = {
   deleteSession: PropTypes.func,
   externalCopySession: PropTypes.func,
   editSession: PropTypes.func,
-  roles: PropTypes.arrayOf(PropTypes.string),
-  userId: PropTypes.string,
+  user: PropTypes.object,
 };
 
 const mapStateToProps = createStructuredSelector({
   interventionState: makeSelectInterventionState(),
   sessionIndex: makeSelectCurrentSessionIndex(),
-  roles: makeSelectUserRoles(),
-  userId: makeSelectUserId(),
+  user: makeSelectUser(),
 });
 
 const mapDispatchToProps = {
@@ -555,10 +663,7 @@ const mapDispatchToProps = {
   editSession: editSessionRequest,
 };
 
-const withConnect = connect(
-  mapStateToProps,
-  mapDispatchToProps,
-);
+const withConnect = connect(mapStateToProps, mapDispatchToProps);
 export default compose(
   withConnect,
   injectReducer({

@@ -20,7 +20,7 @@ export const initialState = {
 
 /* eslint-disable default-case, no-param-reassign */
 const registerPageReducer = (state = initialState, action) =>
-  produce(state, draft => {
+  produce(state, (draft) => {
     switch (action.type) {
       case REGISTER_PARTICIPANT_REQUEST:
       case REGISTER_RESEARCHER_REQUEST:

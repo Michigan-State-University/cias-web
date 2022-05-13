@@ -65,7 +65,7 @@ const CharacterAnim = ({
 }) => {
   const { formatMessage } = useIntl();
   const [state, dispatch] = useReducer(reducer, initialState);
-  const dispatchUpdate = newState =>
+  const dispatchUpdate = (newState) =>
     dispatch({
       type: UPDATE,
       newState,
@@ -74,10 +74,10 @@ const CharacterAnim = ({
   const globalDispatch = useDispatch();
 
   // actions
-  const setCurrentBlockIndexAction = index =>
+  const setCurrentBlockIndexAction = (index) =>
     globalDispatch(setCurrentBlockIndex(index));
 
-  const changeBlock = async prevIndex => {
+  const changeBlock = async (prevIndex) => {
     clearAnimationBlock();
 
     cleanAudio();
@@ -141,17 +141,14 @@ const CharacterAnim = ({
     state.currentData,
   );
 
-  const {
-    handlePauseBlock,
-    getInitialPauseAnimation,
-    changePauseBlock,
-  } = usePauseHelper(
-    blocks,
-    state.currentData,
-    dispatchUpdate,
-    changeBlock,
-    getIdleAnimation,
-  );
+  const { handlePauseBlock, getInitialPauseAnimation, changePauseBlock } =
+    usePauseHelper(
+      blocks,
+      state.currentData,
+      dispatchUpdate,
+      changeBlock,
+      getIdleAnimation,
+    );
 
   const {
     changeSpeech,
@@ -334,9 +331,11 @@ const CharacterAnim = ({
     !state.currentData.animationData ||
     !decideIfPlaySpeechAnimation();
 
+  const displayNarrator = settings.animation && Boolean(blocks.length);
+
   return (
     <NarratorContainer>
-      {settings.animation && (
+      {displayNarrator && (
         <Draggable disabled position={animationPos}>
           <Lottie
             ref={animationRef}
@@ -362,7 +361,7 @@ CharacterAnim.propTypes = {
       type: PropTypes.string,
     }),
   ),
-  questionId: PropTypes.string,
+  questionId: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
   settings: PropTypes.object,
   animationContainer: PropTypes.shape({
     clientWidth: PropTypes.number,

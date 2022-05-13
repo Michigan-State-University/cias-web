@@ -17,12 +17,6 @@ import reduce from 'lodash/reduce';
 import forEach from 'lodash/forEach';
 
 import {
-  sendSessionInviteRequest,
-  resendSessionInviteRequest,
-  makeSelectInterventionLoader,
-  makeSelectInterventionStatus,
-} from 'global/reducers/intervention';
-import {
   makeSelectOrganization,
   fetchOrganizationRequest,
 } from 'global/reducers/organizations';
@@ -47,10 +41,8 @@ import ClinicParticipantInviter from './Components/ClinicParticipantInviter';
 import ClinicUserList from './Components/ClinicUserList';
 
 import messages from './messages';
-import { makeSelectCurrentSession } from './selectors';
 
 const OrganizationShareBox = ({
-  session,
   sendInvite,
   resendInvite,
   sendLoading,
@@ -60,11 +52,16 @@ const OrganizationShareBox = ({
   organizationId,
   organization,
   fetchOrganization,
+  children,
+  inviteUrl,
+  exportFilename,
+  emails,
 }) => {
   const [selectedClinic, setSelectedClinic] = useState(null);
   const [invitationArray, setInvitationArray] = useState([
     { emails: [], healthClinic: null },
   ]);
+  const [disableSubmit, setDisableSubmit] = useState(true);
 
   const editInvitationObj = (invitationObj, index) => {
     const newArray = [...invitationArray];
@@ -79,22 +76,12 @@ const OrganizationShareBox = ({
     fetchOrganization(organizationId);
   }, []);
 
-  const {
-    name,
-    emails,
-    position,
-    intervention_id: interventionId,
-    id: sessionId,
-  } = session || {};
-
   const link = useMemo(() => {
     if (!selectedClinic) return null;
-    return `${process.env.WEB_URL}/interventions/${interventionId}/sessions/${
-      session.id
-    }/fill?cid=${selectedClinic.value}`;
+    return `${inviteUrl}?cid=${selectedClinic.value}`;
   }, [selectedClinic]);
 
-  const handleResend = id => resendInvite(id, session.id);
+  const handleResend = (id) => resendInvite(id);
 
   const sharingPossible = canShareWithParticipants(interventionStatus);
 
@@ -145,7 +132,7 @@ const OrganizationShareBox = ({
     <Row mt={10}>
       <CsvFileExport
         filename={formatMessage(messages.exampleCsvFilename, {
-          interventionName: name,
+          interventionName: exportFilename,
         })}
         data={exampleCSVData}
       >
@@ -154,8 +141,8 @@ const OrganizationShareBox = ({
     </Row>
   );
 
-  const handleUpload = data => {
-    const parsedData = map(data, columns => {
+  const handleUpload = (data) => {
+    const parsedData = map(data, (columns) => {
       if (!columns || !columns.data) return null;
 
       const [email, healthClinicId] = columns.data;
@@ -167,7 +154,7 @@ const OrganizationShareBox = ({
         return { email, healthClinicId };
       return null;
     });
-    const filteredData = filter(parsedData, val => val !== null);
+    const filteredData = filter(parsedData, (val) => val !== null);
     const groupedData = groupBy(filteredData, 'healthClinicId');
     const outputData = map(groupedData, (groupObject, healthClinicId) => {
       const healthClinic = clinicSelectData.find(
@@ -196,7 +183,7 @@ const OrganizationShareBox = ({
       const healthClinic = clinicSelectData.find(
         ({ value }) => value === healthClinicId,
       );
-      forEach(invitedUsers, invitedUser =>
+      forEach(invitedUsers, (invitedUser) =>
         data.push({
           email: invitedUser.email,
           healthClinicId: healthClinic.value,
@@ -211,7 +198,7 @@ const OrganizationShareBox = ({
     <Row my={22}>
       <CsvFileExport
         filename={formatMessage(messages.filename, {
-          interventionName: name,
+          interventionName: exportFilename,
         })}
         data={exportData}
       >
@@ -247,114 +234,115 @@ const OrganizationShareBox = ({
       }
     }
     setInvitationArray([{ emails: [], healthClinic: null }]);
-    sendInvite(invitationArrayToSend, sessionId, true);
+    sendInvite(invitationArrayToSend, true);
   };
 
-  if (session) {
-    return (
-      <ShareBoxModalParent position={position} name={name}>
-        <Box mt={20}>
-          <Tabs containerProps={{ mb: 0 }}>
-            <div label={formatMessage(messages.inviteParticipant)}>
-              {invitationArray.map((invitationObject, index) => (
-                <ClinicParticipantInviter
-                  invitation={invitationObject}
-                  key={index}
-                  selectClinics={clinicSelectData}
-                  formatMessage={formatMessage}
-                  updateInvitation={invitationObj =>
-                    editInvitationObj(invitationObj, index)
-                  }
-                />
-              ))}
-              <Row dispay="flex" justify="center" align="center">
-                <Box>
-                  {importCsvButton()}
-                  {exportExampleCsvButton()}
-                </Box>
-                <Button
-                  disabled={!sharingPossible || invitationArray.length < 2}
-                  width="100%"
-                  ml={12}
-                  hoverable
-                  alignSelf="start"
-                  onClick={handleSend}
-                  loading={sendLoading}
-                  data-cy="send-email-button"
-                >
-                  <FormattedMessage {...messages.sendText} />
-                </Button>
-              </Row>
-              <Box
-                width="100%"
-                pt={20}
-                mt={20}
-                borderTop={`1px solid ${colors.botticelli}`}
+  const onIsValidLastValue = (isValid) => setDisableSubmit(!isValid);
+
+  return (
+    <ShareBoxModalParent>
+      {children}
+
+      <Box mt={20}>
+        <Tabs containerProps={{ mb: 0 }}>
+          <div label={formatMessage(messages.inviteParticipant)}>
+            {invitationArray.map((invitationObject, index) => (
+              <ClinicParticipantInviter
+                invitation={invitationObject}
+                key={index}
+                selectClinics={clinicSelectData}
+                formatMessage={formatMessage}
+                updateInvitation={(invitationObj) =>
+                  editInvitationObj(invitationObj, index)
+                }
+                onIsValid={onIsValidLastValue}
               />
-              <H3 mb={20}>{formatMessage(messages.generateLink)}</H3>
-              <Row display="flex" justify="between">
-                <Select
-                  width="100%"
-                  selectProps={{
-                    bg: colors.zirkon,
-                    isDisabled:
-                      !clinicSelectData || clinicSelectData.length === 0,
-                    options: clinicSelectData,
-                    value: selectedClinic,
-                    onChange: setSelectedClinic,
-                    placeholder: formatMessage(messages.selectClinicForLink),
-                    noOptionsMessage: () => formatMessage(messages.notFound),
-                  }}
-                />
-                <CopyToClipboard
-                  buttonDisabled={!selectedClinic}
-                  renderAsButton
-                  textToCopy={link}
-                />
-              </Row>
-            </div>
-            <div
-              label={formatMessage(messages.invitedParticipants, {
-                invitedLength: invitationsSize,
-              })}
-            >
-              {emails && invitationsSize !== 0 && clinicSelectData && (
-                <>
-                  {listLoading && <Loader type="inline" />}
-                  {exportCsvButton()}
-                  <H3
-                    mb={15}
-                    fontSize={13}
-                    fontWeight="bold"
-                    color={colors.bluewood}
-                    textOpacity={0.6}
-                  >
-                    <FormattedMessage {...messages.userListLabel} />
-                  </H3>
-                  <Row padding={10} display="block">
-                    <ClinicUserList
-                      clinicList={clinicSelectData}
-                      userInvites={emails}
-                      buttons={buttons}
-                      emailLoading={emailLoading}
-                    />
-                  </Row>
-                </>
-              )}
-            </div>
-          </Tabs>
-        </Box>
-      </ShareBoxModalParent>
-    );
-  }
-  return null;
+            ))}
+            <Row dispay="flex" justify="center" align="center">
+              <Box>
+                {importCsvButton()}
+                {exportExampleCsvButton()}
+              </Box>
+              <Button
+                disabled={
+                  !sharingPossible ||
+                  (invitationArray.length < 2 && disableSubmit)
+                }
+                width="100%"
+                ml={12}
+                hoverable
+                alignSelf="start"
+                onClick={handleSend}
+                loading={sendLoading}
+                data-cy="send-email-button"
+              >
+                <FormattedMessage {...messages.sendText} />
+              </Button>
+            </Row>
+            <Box
+              width="100%"
+              pt={20}
+              mt={20}
+              borderTop={`1px solid ${colors.botticelli}`}
+            />
+            <H3 mb={20}>{formatMessage(messages.generateLink)}</H3>
+            <Row display="flex" justify="between">
+              <Select
+                width="100%"
+                selectProps={{
+                  bg: colors.zirkon,
+                  isDisabled:
+                    !clinicSelectData || clinicSelectData.length === 0,
+                  options: clinicSelectData,
+                  value: selectedClinic,
+                  onChange: setSelectedClinic,
+                  placeholder: formatMessage(messages.selectClinicForLink),
+                  noOptionsMessage: () => formatMessage(messages.notFound),
+                }}
+              />
+              <CopyToClipboard
+                buttonDisabled={!selectedClinic}
+                renderAsButton
+                textToCopy={link}
+              />
+            </Row>
+          </div>
+          <div
+            label={formatMessage(messages.invitedParticipants, {
+              invitedLength: invitationsSize,
+            })}
+          >
+            {emails && invitationsSize !== 0 && clinicSelectData && (
+              <>
+                {listLoading && <Loader type="inline" />}
+                {exportCsvButton()}
+                <H3
+                  mb={15}
+                  fontSize={13}
+                  fontWeight="bold"
+                  color={colors.bluewood}
+                  textOpacity={0.6}
+                >
+                  <FormattedMessage {...messages.userListLabel} />
+                </H3>
+                <Row padding={10} display="block">
+                  <ClinicUserList
+                    clinicList={clinicSelectData}
+                    userInvites={emails}
+                    buttons={buttons}
+                    emailLoading={emailLoading}
+                  />
+                </Row>
+              </>
+            )}
+          </div>
+        </Tabs>
+      </Box>
+    </ShareBoxModalParent>
+  );
 };
 
 OrganizationShareBox.propTypes = {
-  session: PropTypes.shape({
-    id: PropTypes.string,
-    name: PropTypes.string,
-  }),
   sendInvite: PropTypes.func,
   resendInvite: PropTypes.func,
   fetchOrganization: PropTypes.func,
@@ -364,29 +352,20 @@ OrganizationShareBox.propTypes = {
   interventionStatus: PropTypes.string,
   organizationId: PropTypes.string,
   organization: PropTypes.object,
+  children: PropTypes.node,
+  inviteUrl: PropTypes.string,
+  exportFilename: PropTypes.string,
+  emails: PropTypes.arrayOf(PropTypes.object),
 };
 
 const mapStateToProps = createStructuredSelector({
-  session: makeSelectCurrentSession(),
-  sendLoading: makeSelectInterventionLoader('sendSessionLoading'),
-  listLoading: makeSelectInterventionLoader('fetchSessionEmailsLoading'),
-  emailLoading: makeSelectInterventionLoader('sessionEmailLoading'),
-  interventionStatus: makeSelectInterventionStatus(),
   organization: makeSelectOrganization(),
 });
 
 const mapDispatchToProps = {
-  sendInvite: sendSessionInviteRequest,
-  resendInvite: resendSessionInviteRequest,
   fetchOrganization: fetchOrganizationRequest,
 };
 
-const withConnect = connect(
-  mapStateToProps,
-  mapDispatchToProps,
-);
+const withConnect = connect(mapStateToProps, mapDispatchToProps);
 
-export default compose(
-  withConnect,
-  injectIntl,
-)(OrganizationShareBox);
+export default compose(withConnect, injectIntl)(OrganizationShareBox);

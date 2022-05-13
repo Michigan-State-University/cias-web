@@ -18,7 +18,7 @@ describe('createSession saga', () => {
   const mockIntervention = createIntervention();
   const payload = {
     id: mockIntervention.id,
-    lastPosition: mockIntervention.sessions.length,
+    lastPosition: mockIntervention.attributes.sessions.length,
   };
 
   const mockApiResponse = apiSessionResponse();

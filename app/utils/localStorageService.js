@@ -3,7 +3,7 @@ export const GUEST_HEADERS = 'guest-headers';
 export const STATE = 'state';
 
 const LocalStorageService = (() => {
-  const setToken = token => {
+  const setToken = (token) => {
     if (token && token !== '') {
       const headers = getHeaders();
 
@@ -14,7 +14,7 @@ const LocalStorageService = (() => {
     }
   };
 
-  const setUid = uid => {
+  const setUid = (uid) => {
     if (uid && uid !== '') {
       const headers = getHeaders();
 
@@ -40,11 +40,11 @@ const LocalStorageService = (() => {
     };
   };
 
-  const setHeaders = headers => {
+  const setHeaders = (headers) => {
     localStorage.setItem(HEADERS, JSON.stringify(headers));
   };
 
-  const setGuestHeaders = headers => {
+  const setGuestHeaders = (headers) => {
     localStorage.setItem(GUEST_HEADERS, JSON.stringify(headers));
   };
 
@@ -56,7 +56,7 @@ const LocalStorageService = (() => {
     localStorage.removeItem(HEADERS);
   };
 
-  const setState = state => {
+  const setState = (state) => {
     const serializedState = JSON.stringify(state);
     localStorage.setItem(STATE, serializedState);
   };
@@ -73,7 +73,7 @@ const LocalStorageService = (() => {
     return null;
   };
 
-  const updateState = newState => {
+  const updateState = (newState) => {
     const state = getState();
 
     if (state) return setState({ ...state, ...newState });
@@ -85,11 +85,11 @@ const LocalStorageService = (() => {
     localStorage.setItem(key, JSON.stringify(value));
   };
 
-  const removeItem = key => {
+  const removeItem = (key) => {
     localStorage.removeItem(key);
   };
 
-  const getItem = key => {
+  const getItem = (key) => {
     const item = localStorage.getItem(key);
 
     if (item) return JSON.parse(item);

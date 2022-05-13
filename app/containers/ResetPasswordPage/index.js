@@ -30,7 +30,7 @@ import { makeSelectLoader, makeSelectError } from './selectors';
 import resetPasswordSaga from './saga';
 import { resetPasswordReducer } from './reducer';
 
-const validationSchema = formatMessage =>
+const validationSchema = (formatMessage) =>
   Yup.object().shape({
     email: Yup.string()
       .required(formatMessage(messages.emailRequired))
@@ -119,10 +119,7 @@ const mapDispatchToProps = {
   resetPassword: resetPasswordRequest,
 };
 
-const withConnect = connect(
-  mapStateToProps,
-  mapDispatchToProps,
-);
+const withConnect = connect(mapStateToProps, mapDispatchToProps);
 
 export default compose(
   withConnect,

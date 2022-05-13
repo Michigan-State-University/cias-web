@@ -7,6 +7,7 @@ import cloneDeep from 'lodash/cloneDeep';
 import produce from 'immer';
 import isEmpty from 'lodash/isEmpty';
 
+import { assignDraftItems } from 'utils/reduxUtils';
 import sectionReducer from 'global/reducers/reportTemplates/sectionReducer';
 import {
   FETCH_REPORT_TEMPLATES_REQUEST,
@@ -53,6 +54,9 @@ import {
   GENERATE_TEST_REPORT_REQUEST,
   GENERATE_TEST_REPORT_SUCCESS,
   GENERATE_TEST_REPORT_FAILURE,
+  REORDER_TEMPLATE_SECTIONS_REQUEST,
+  REORDER_TEMPLATE_SECTIONS_SUCCESS,
+  REORDER_TEMPLATE_SECTIONS_ERROR,
 } from './constants';
 
 export const initialState = {
@@ -72,6 +76,7 @@ export const initialState = {
     deleteReportTemplateLoading: false,
     deleteReportTemplateLogoLoading: false,
     generateTestReportLoading: false,
+    reorderSectionsLoading: false,
     shouldRefetch: false,
   },
   errors: {
@@ -82,12 +87,13 @@ export const initialState = {
     deleteReportTemplateError: null,
     deleteReportTemplateLogoError: null,
     generateTestReportError: null,
+    reorderSectionsError: null,
   },
 };
 
 /* eslint-disable default-case, no-param-reassign */
 const reportTemplatesReducer = (state = initialState, { type, payload }) =>
-  produce(state, draft => {
+  produce(state, (draft) => {
     switch (type) {
       case FETCH_REPORT_TEMPLATES_REQUEST:
         if (isEmpty(state.reportTemplates))
@@ -322,7 +328,7 @@ const reportTemplatesReducer = (state = initialState, { type, payload }) =>
 
         draft.singleReportTemplate = {
           ...state.singleReportTemplate,
-          sections: state.singleReportTemplate.sections.map(section => {
+          sections: state.singleReportTemplate.sections.map((section) => {
             if (section.id === sectionId)
               return cloneDeep(
                 sectionReducer(section, {
@@ -337,7 +343,7 @@ const reportTemplatesReducer = (state = initialState, { type, payload }) =>
 
         draft.cache.singleReportTemplate = {
           ...state.cache.singleReportTemplate,
-          sections: state.cache.singleReportTemplate.sections.map(section => {
+          sections: state.cache.singleReportTemplate.sections.map((section) => {
             if (section.id === sectionId)
               return cloneDeep(
                 sectionReducer(section, {
@@ -365,7 +371,7 @@ const reportTemplatesReducer = (state = initialState, { type, payload }) =>
 
         draft.singleReportTemplate = {
           ...state.singleReportTemplate,
-          sections: state.singleReportTemplate.sections.map(section => {
+          sections: state.singleReportTemplate.sections.map((section) => {
             if (section.id === sectionId)
               return cloneDeep(
                 sectionReducer(section, {
@@ -398,9 +404,10 @@ const reportTemplatesReducer = (state = initialState, { type, payload }) =>
         draft.loaders.updateReportTemplateLoading = false;
         draft.errors.updateReportTemplateError = null;
 
-        const sectionCacheIndex = state.cache.singleReportTemplate.sections.findIndex(
-          ({ id }) => id === payload.sectionId,
-        );
+        const sectionCacheIndex =
+          state.cache.singleReportTemplate.sections.findIndex(
+            ({ id }) => id === payload.sectionId,
+          );
 
         if (sectionCacheIndex >= 0)
           draft.cache.singleReportTemplate.sections.splice(
@@ -426,6 +433,31 @@ const reportTemplatesReducer = (state = initialState, { type, payload }) =>
       case GENERATE_TEST_REPORT_FAILURE:
         draft.loaders.generateTestReportLoading = false;
         draft.loaders.generateTestReportError = payload;
+        break;
+
+      case REORDER_TEMPLATE_SECTIONS_REQUEST:
+        draft.loaders.reorderSectionsLoading = true;
+        draft.loaders.reorderSectionsError = null;
+        if (draft.singleReportTemplate.id === payload.reportId)
+          draft.singleReportTemplate.sections = payload.reorderedSections;
+        break;
+
+      case REORDER_TEMPLATE_SECTIONS_SUCCESS:
+        draft.loaders.reorderSectionsLoading = false;
+        draft.loaders.reorderSectionsError = null;
+        assignDraftItems(
+          draft.singleReportTemplate.sections,
+          draft.cache.singleReportTemplate.sections,
+        );
+        break;
+
+      case REORDER_TEMPLATE_SECTIONS_ERROR:
+        draft.loaders.reorderSectionsLoading = false;
+        draft.loaders.reorderSectionsError = payload;
+        assignDraftItems(
+          draft.cache.singleReportTemplate.sections,
+          draft.singleReportTemplate.sections,
+        );
         break;
     }
   });

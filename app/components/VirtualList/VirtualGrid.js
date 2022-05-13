@@ -13,15 +13,16 @@ const VirtualGrid = forwardRef(
   ) => {
     const { columnCount } = props;
 
-    function isItemLoaded(index) {
+    const isItemLoaded = (index) => {
       const isLoaded = index < items.length && items[index] !== null;
 
       return isLoaded;
-    }
+    };
 
-    const itemData = useMemo(() => ({ items, itemsSize: items.length }), [
-      items,
-    ]);
+    const itemData = useMemo(
+      () => ({ items, itemsSize: items.length }),
+      [items],
+    );
 
     const renderInfiniteLoader = (
       { onItemsRendered, ref: virtualGridRef },
@@ -46,12 +47,12 @@ const VirtualGrid = forwardRef(
       });
 
     const renderGrid = useCallback(
-      gridProps => <FixedSizeGrid {...gridProps}>{renderCell}</FixedSizeGrid>,
+      (gridProps) => <FixedSizeGrid {...gridProps}>{renderCell}</FixedSizeGrid>,
       [],
     );
 
     const renderCell = memo(
-      gridProps => (
+      (gridProps) => (
         <GridChild
           {...gridProps}
           gutterWidth={gutterWidth}
@@ -95,7 +96,7 @@ const VirtualGrid = forwardRef(
 );
 
 VirtualGrid.propTypes = {
-  children: PropTypes.object,
+  children: PropTypes.oneOfType([PropTypes.object, PropTypes.func]),
   columnCount: PropTypes.number,
   gutterHeight: PropTypes.number,
   gutterWidth: PropTypes.number,

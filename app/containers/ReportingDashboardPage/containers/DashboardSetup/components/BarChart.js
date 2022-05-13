@@ -54,7 +54,7 @@ const BarChart = ({
     return undefined;
   }, [realChartData, chartType]);
 
-  const tickFormatter = value => {
+  const tickFormatter = (value) => {
     switch (chartType) {
       case ChartTypeDto.PERCENTAGE_BAR_CHART:
         return `${value}%`;
@@ -64,7 +64,7 @@ const BarChart = ({
     }
   };
 
-  const tooltipFormatter = tooltipData => {
+  const tooltipFormatter = (tooltipData) => {
     const { active, payload, label } = tooltipData;
     switch (chartType) {
       case ChartTypeDto.PERCENTAGE_BAR_CHART: {
@@ -127,7 +127,7 @@ const BarChart = ({
 
   const tooltip = useMemo(() => ({ content: tooltipFormatter }), []);
 
-  const wrapWithBox = comp => (
+  const wrapWithBox = (comp) => (
     <Box
       width="100%"
       height="100%"

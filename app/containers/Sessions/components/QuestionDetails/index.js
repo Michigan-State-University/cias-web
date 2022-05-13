@@ -8,7 +8,6 @@ import { useInjectSaga } from 'redux-injectors';
 
 import { colors, elements } from 'theme';
 
-import Question from 'models/Session/Question';
 import { canEdit } from 'models/Status/statusPermissions';
 import { nameQuestion, finishQuestion } from 'models/Session/QuestionTypes';
 import isNullOrUndefined from 'utils/isNullOrUndefined';
@@ -44,7 +43,7 @@ import VariableInput from './VariableInput';
 import messages from './messages';
 import { AnswerOuterContainer, AnswerInterventionContent } from './styled';
 
-const QuestionDetails = props => (
+const QuestionDetails = (props) => (
   <Box
     width="100%"
     display="flex"
@@ -86,11 +85,13 @@ const RenderQuestionDetails = ({
         subtitle,
         proceed_button: proceedButton,
       } = {},
-      narrator: { settings } = {},
+      narrator: { settings, blocks } = {},
     } = selectedQuestion || {};
 
     const isNameScreen = type === nameQuestion.id;
     const isFinishScreen = type === finishQuestion.id;
+
+    const displayNarrator = Boolean(blocks?.length);
 
     return (
       <AnswerOuterContainer>
@@ -111,7 +112,7 @@ const RenderQuestionDetails = ({
                 placeholder={formatMessage(messages.groupPlaceholder)}
                 maxWidth="initial"
                 onFocus={selectInputText}
-                onBlur={val =>
+                onBlur={(val) =>
                   changeGroupName(val, sessionId, currentGroupScope.id)
                 }
                 disabled={!editingPossible}
@@ -130,11 +131,13 @@ const RenderQuestionDetails = ({
             ref={animationBoundaries}
             id="quill_boundaries"
           >
-            <QuestionNarrator
-              questionId={id}
-              animationBoundaries={animationBoundaries}
-              settings={{ ...settings, title, subtitle }}
-            />
+            {displayNarrator && (
+              <QuestionNarrator
+                questionId={id}
+                animationBoundaries={animationBoundaries}
+                settings={{ ...settings, title, subtitle }}
+              />
+            )}
             <Row justify="center" width="100%">
               <AppContainer disablePageTitle $width="100%">
                 {!isNarratorTabOrEditNotPossible && (
@@ -173,7 +176,10 @@ const RenderQuestionDetails = ({
                   </>
                 )}
                 {isNarratorTabOrEditNotPossible && (
-                  <CommonLayout currentQuestion={selectedQuestion ?? {}} />
+                  <CommonLayout
+                    currentQuestion={selectedQuestion ?? {}}
+                    showOriginalText={!isNarratorTab}
+                  />
                 )}
 
                 <Row>
@@ -200,7 +206,7 @@ const RenderQuestionDetails = ({
 };
 
 RenderQuestionDetails.propTypes = {
-  selectedQuestion: PropTypes.shape(Question),
+  selectedQuestion: PropTypes.object,
   isNarratorTab: PropTypes.bool,
   interventionStatus: PropTypes.string,
   formatMessage: PropTypes.func,

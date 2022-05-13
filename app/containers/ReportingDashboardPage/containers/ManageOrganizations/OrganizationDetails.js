@@ -48,7 +48,7 @@ const OrganizationDetails = ({
   );
 
   const onAddClinic = useCallback(
-    healthSystemId => addClinic(healthSystemId),
+    (healthSystemId) => addClinic(healthSystemId),
     [],
   );
 
@@ -92,14 +92,15 @@ const OrganizationDetails = ({
             <Col xs="content">
               <NoMarginRow align="center" justify="end">
                 <Checkbox
+                  id="organization-toggle-archived"
                   checked={showDeletedEntities}
                   mr={5}
-                  aria-labelledby="showDeletedEntities"
-                  onClick={toggleShowDeletedEntities}
-                />
-                <Text id="showDeletedEntities">
-                  {formatMessage(messages.showDeletedEntitiesToggle)}
-                </Text>
+                  onChange={toggleShowDeletedEntities}
+                >
+                  <Text>
+                    {formatMessage(messages.showDeletedEntitiesToggle)}
+                  </Text>
+                </Checkbox>
               </NoMarginRow>
             </Col>
           </Row>
@@ -127,9 +128,6 @@ const mapDispatchToProps = {
   toggleShowDeletedEntities: toggleShowDeletedEntitiesAction,
 };
 
-const withConnect = connect(
-  null,
-  mapDispatchToProps,
-);
+const withConnect = connect(null, mapDispatchToProps);
 
 export default memo(compose(withConnect)(OrganizationDetails));

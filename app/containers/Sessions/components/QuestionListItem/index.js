@@ -45,9 +45,14 @@ import {
 } from 'models/Session/QuestionTypes';
 import Box from 'components/Box';
 import Checkbox from 'components/Checkbox';
-import ConfirmationBox from 'components/ConfirmationBox';
+import { ConfirmationModal } from 'components/Modal';
 import Text from 'components/Text';
 import scrollByRef from 'utils/scrollByRef';
+
+import copy from 'assets/svg/copy.svg';
+import bin from 'assets/svg/bin-no-bg.svg';
+import duplicateInternally from 'assets/svg/duplicate-internally.svg';
+
 import VariableInput from '../QuestionDetails/VariableInput';
 import { ClampedTitle, ToggleableBox } from './styled';
 import messages from './messages';
@@ -134,13 +139,13 @@ const QuestionListItem = ({
     setCopyOpen(true);
   };
 
-  const handleCopy = target => {
+  const handleCopy = (target) => {
     const copied = cloneDeep(question);
     set(copied, 'id', uniqueId());
     copyQuestion({ copied, questionId: question.id, target });
   };
 
-  const handleExternallyCopy = target => {
+  const handleExternallyCopy = (target) => {
     const copied = cloneDeep(question);
     set(copied, 'id', uniqueId());
     copyExternallyQuestion(target.sessionId, target.id, copied, [question.id]);
@@ -148,17 +153,19 @@ const QuestionListItem = ({
 
   const options = [
     {
+      id: 'duplicate',
+      label: <FormattedMessage {...messages.duplicateHere} />,
+      action: handleCopy,
+      color: colors.black,
+      disabled: disabled || !canDuplicate,
+      icon: copy,
+    },
+    {
       id: 'copy',
       label: <FormattedMessage {...messages.copy} />,
       action: handleCopyModal,
       color: colors.black,
-    },
-    {
-      id: 'duplicate',
-      label: <FormattedMessage {...messages.duplicate} />,
-      action: handleCopy,
-      color: colors.black,
-      disabled: disabled || !canDuplicate,
+      icon: duplicateInternally,
     },
     {
       id: 'delete',
@@ -166,6 +173,7 @@ const QuestionListItem = ({
       action: () => setDeleteOpen(true),
       color: themeColors.warning,
       disabled,
+      icon: bin,
     },
   ];
 
@@ -187,9 +195,10 @@ const QuestionListItem = ({
         copyAction={handleExternallyCopy}
         disableInterventionCopy
         disableSessionCopy
+        disableCurrentQuestionGroupCopy
         pasteText={formatMessage(messages.pasteQuestion)}
       />
-      <ConfirmationBox
+      <ConfirmationModal
         visible={deleteOpen}
         onClose={() => setDeleteOpen(false)}
         description={formatMessage(messages.deleteModalTitle)}
@@ -217,10 +226,11 @@ const QuestionListItem = ({
           {manage && !isFinishScreen && (
             <Column xs={1}>
               <Checkbox
-                onClick={e => {
+                id={`question-to-select-${id}`}
+                onChange={(_, event) => {
                   selectSlide(id);
-                  e.stopPropagation();
-                  e.preventDefault();
+                  event.stopPropagation();
+                  event.preventDefault();
                 }}
                 checked={checked}
               />
@@ -258,7 +268,7 @@ const QuestionListItem = ({
           </Column>
           {!manage && !isFinishScreen && (
             <Column xs={1}>
-              <Dropdown options={options} />
+              <Dropdown options={options} dropdownWidth={180} />
             </Column>
           )}
         </Row>
@@ -273,7 +283,7 @@ const QuestionListItem = ({
       index={index}
       isDragDisabled={disabled}
     >
-      {provided => (
+      {(provided) => (
         <Box
           width="100%"
           key={id}
@@ -334,9 +344,6 @@ const mapDispatchToProps = {
   setCharacterPosition: setAnimationStopPosition,
 };
 
-const withConnect = connect(
-  mapStateToProps,
-  mapDispatchToProps,
-);
+const withConnect = connect(mapStateToProps, mapDispatchToProps);
 
 export default injectIntl(compose(withConnect)(QuestionListItem));

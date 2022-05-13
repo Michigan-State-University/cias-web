@@ -5,7 +5,7 @@ import { margin, layout, padding, flex } from 'components/BaseComponentStyles';
 import { colors, themeColors } from 'theme';
 import Box from 'components/Box';
 
-const getTransparentStyles = disabled =>
+const getTransparentStyles = (disabled) =>
   disabled
     ? {
         '&:hover': {
@@ -20,7 +20,7 @@ const getTransparentStyles = disabled =>
         cursor: 'pointer',
       };
 
-const getStandardStyles = disabled =>
+const getStandardStyles = (disabled) =>
   disabled
     ? {
         '&:hover': {

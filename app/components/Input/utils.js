@@ -27,3 +27,12 @@ export const selectQuillText = (quill, { start, end } = {}) => {
 export const selectInputText = ({ target }, { start, end } = {}) => {
   target.setSelectionRange(start ?? 0, end ?? target.value.length);
 };
+
+export const getAriaLabelProps = ({
+  id,
+  placeholder,
+  'aria-label': ariaLabel,
+  'aria-labelledby': ariaLabelledBy,
+}) => ({
+  'aria-label': ariaLabel ?? (id || ariaLabelledBy ? undefined : placeholder),
+});

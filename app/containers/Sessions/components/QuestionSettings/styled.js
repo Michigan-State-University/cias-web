@@ -32,4 +32,8 @@ export const OpenButton = styled.button`
   position: fixed;
   top: 85px;
   right: 22px;
+
+  &:hover {
+    cursor: pointer;
+  }
 `;

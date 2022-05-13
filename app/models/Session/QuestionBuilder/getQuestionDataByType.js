@@ -9,7 +9,7 @@ import {
   thirdPartyQuestion,
 } from '../QuestionTypes';
 
-export const getQuestionDataByType = type => {
+export const getQuestionDataByType = (type) => {
   switch (type) {
     case singleQuestion.id:
       return {

@@ -16,7 +16,7 @@ import { questionGroupsReducer } from 'global/reducers/questionGroups';
 import { createTestStore } from 'utils/testUtils/storeUtils';
 import TargetQuestionChooser from '../index';
 
-const executeAfterTransition = func =>
+const executeAfterTransition = (func) =>
   setTimeout(() => func(), TRANSITION_TIMEOUT);
 
 const mockSingleQuestion = (suffix = 1, hasVariable = true) => ({
@@ -44,7 +44,7 @@ const mockSession = (suffix = 1) => ({
   position: suffix,
 });
 
-const mockMostUsedStore = question => {
+const mockMostUsedStore = (question) => {
   const store = createTestStore({
     session: {
       session: {
@@ -241,18 +241,14 @@ describe('<TargetQuestionChooser />', () => {
     };
     store.injectedSagas = {};
 
-    const {
-      getAllByTestId,
-      getByTestId,
-      queryAllByTestId,
-      queryByTestId,
-    } = render(
-      <Provider store={store}>
-        <IntlProvider locale={DEFAULT_LOCALE}>
-          <TargetQuestionChooser {...props} />
-        </IntlProvider>
-      </Provider>,
-    );
+    const { getAllByTestId, getByTestId, queryAllByTestId, queryByTestId } =
+      render(
+        <Provider store={store}>
+          <IntlProvider locale={DEFAULT_LOCALE}>
+            <TargetQuestionChooser {...props} />
+          </IntlProvider>
+        </Provider>,
+      );
 
     const interventionViewSetter = getByTestId(
       `${question.id}-select-target-question-interview-view-setter`,

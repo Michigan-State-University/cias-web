@@ -140,9 +140,6 @@ const mapDispatchToProps = {
   selectEntity: selectEntityAction,
 };
 
-const withConnect = connect(
-  mapStateToProps,
-  mapDispatchToProps,
-);
+const withConnect = connect(mapStateToProps, mapDispatchToProps);
 
 export default memo(compose(withConnect)(ManageOrganizations));

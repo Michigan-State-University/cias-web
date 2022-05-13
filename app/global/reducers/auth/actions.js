@@ -40,74 +40,77 @@ import {
   VERIFICATION_CODE_ERROR,
   VERIFICATION_CODE_NEEDED,
   RESET_REDUCER,
+  FETCH_SELF_DETAILS_REQUEST,
 } from './constants';
 
-export const logIn = user => actionBuilder(LOG_IN_USER, { user });
+export const logIn = (user) => actionBuilder(LOG_IN_USER, { user });
 export const logInGuestRequest = () => actionBuilder(LOG_IN_GUEST);
 
-export const logOut = redirectTo => actionBuilder(LOG_OUT, { redirectTo });
+export const logOut = (redirectTo) => actionBuilder(LOG_OUT, { redirectTo });
 
 export const resetReducer = () => actionBuilder(RESET_REDUCER, {});
 
-export const editUserRequest = user =>
+export const editUserRequest = (user) =>
   actionBuilder(EDIT_USER_REQUEST, { user });
-export const editUserSuccess = user =>
+export const editUserSuccess = (user) =>
   actionBuilder(EDIT_USER_SUCCESS, { user });
-export const editUserError = error => actionBuilder(EDIT_USER_ERROR, { error });
+export const editUserError = (error) =>
+  actionBuilder(EDIT_USER_ERROR, { error });
 
 export const editPhoneNumberPreviewRequest = (phoneNumber, isPreview) =>
   actionBuilder(EDIT_PHONE_NUMBER_PREVIEW_REQUEST, { phoneNumber, isPreview });
 export const editPhoneNumberPreviewSuccess = (phoneNumber, isPreview) =>
   actionBuilder(EDIT_PHONE_NUMBER_PREVIEW_SUCCESS, { phoneNumber, isPreview });
-export const editPhoneNumberPreviewError = error =>
+export const editPhoneNumberPreviewError = (error) =>
   actionBuilder(EDIT_PHONE_NUMBER_PREVIEW_ERROR, { error });
 export const resetPhoneNumberPreview = () =>
   actionBuilder(RESET_PHONE_NUMBER_PREVIEW, {});
 
-export const changePasswordRequest = data =>
+export const changePasswordRequest = (data) =>
   actionBuilder(CHANGE_PASSWORD_REQUEST, data);
 export const changePasswordSuccess = () =>
   actionBuilder(CHANGE_PASSWORD_SUCCESS, {});
-export const changePasswordError = error =>
+export const changePasswordError = (error) =>
   actionBuilder(CHANGE_PASSWORD_ERROR, { error });
 
-export const changeEmailRequest = data =>
+export const changeEmailRequest = (data) =>
   actionBuilder(CHANGE_EMAIL_REQUEST, data);
-export const changeEmailSuccess = user =>
+export const changeEmailSuccess = (user) =>
   actionBuilder(CHANGE_EMAIL_SUCCESS, { user });
-export const changeEmailError = error =>
+export const changeEmailError = (error) =>
   actionBuilder(CHANGE_EMAIL_ERROR, { error });
 
-export const addAvatarRequest = data => actionBuilder(ADD_AVATAR_REQUEST, data);
-export const addAvatarSuccess = user =>
+export const addAvatarRequest = (data) =>
+  actionBuilder(ADD_AVATAR_REQUEST, data);
+export const addAvatarSuccess = (user) =>
   actionBuilder(ADD_AVATAR_SUCCESS, { user });
 export const addAvatarError = () => actionBuilder(ADD_AVATAR_ERROR, {});
 
 export const deleteAvatarRequest = () =>
   actionBuilder(DELETE_AVATAR_REQUEST, {});
-export const deleteAvatarSuccess = user =>
+export const deleteAvatarSuccess = (user) =>
   actionBuilder(DELETE_AVATAR_SUCCESS, { user });
 export const deleteAvatarError = () => actionBuilder(DELETE_AVATAR_ERROR, {});
 
-export const changePhoneNumberRequest = data =>
+export const changePhoneNumberRequest = (data) =>
   actionBuilder(CHANGE_PHONE_NUMBER_REQUEST, { data });
 export const changePhoneNumberSuccess = ({ phoneNumber }) =>
   actionBuilder(CHANGE_PHONE_NUMBER_SUCCESS, { phoneNumber });
-export const changePhoneNumberError = error =>
+export const changePhoneNumberError = (error) =>
   actionBuilder(CHANGE_PHONE_NUMBER_ERROR, { error });
 
 export const confirmPhoneNumberRequest = (smsToken, onSuccess) =>
   actionBuilder(CONFIRM_PHONE_NUMBER_REQUEST, { smsToken, onSuccess });
 export const confirmPhoneNumberSuccess = () =>
   actionBuilder(CONFIRM_PHONE_NUMBER_SUCCESS, {});
-export const confirmPhoneNumberError = error =>
+export const confirmPhoneNumberError = (error) =>
   actionBuilder(CONFIRM_PHONE_NUMBER_ERROR, { error });
 
 export const sendSmsTokenRequest = () =>
   actionBuilder(SEND_SMS_TOKEN_REQUEST, {});
 export const sendSmsTokenSuccess = () =>
   actionBuilder(SEND_SMS_TOKEN_SUCCESS, {});
-export const sendSmsTokenError = error =>
+export const sendSmsTokenError = (error) =>
   actionBuilder(SEND_SMS_TOKEN_ERROR, { error });
 
 export const changeErrorStatus = (error, value) =>
@@ -118,16 +121,19 @@ export const loginRequest = (email, password) =>
 
 export const loginSuccess = () => actionBuilder(LOGIN_SUCCESS);
 
-export const loginError = error => actionBuilder(LOGIN_ERROR, { error });
+export const loginError = (error) => actionBuilder(LOGIN_ERROR, { error });
 
 export const verificationCodeNeeded = () =>
   actionBuilder(VERIFICATION_CODE_NEEDED, {});
 
-export const verificationCodeRequest = verificationCode =>
+export const verificationCodeRequest = (verificationCode) =>
   actionBuilder(VERIFICATION_CODE_REQUEST, { verificationCode });
 
 export const verificationCodeSuccess = () =>
   actionBuilder(VERIFICATION_CODE_SUCCESS);
 
-export const verificationCodeError = error =>
+export const verificationCodeError = (error) =>
   actionBuilder(VERIFICATION_CODE_ERROR, { error });
+
+export const fetchSelfDetailsRequest = () =>
+  actionBuilder(FETCH_SELF_DETAILS_REQUEST, {});

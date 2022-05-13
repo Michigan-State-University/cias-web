@@ -209,6 +209,7 @@ exports[`<ApprovableInput /> Should render and match the snapshot as multiline 1
       class="c1"
     >
       <textarea
+        aria-label="Placeholder"
         class="c2"
         height="auto"
         placeholder="Placeholder"
@@ -1766,6 +1767,7 @@ exports[`<ApprovableInput /> Should render and match the snapshot as singleline 
       class="c1"
     >
       <input
+        aria-label="Placeholder"
         class="c2"
         font-size="14"
         height="50"
@@ -1789,6 +1791,8 @@ exports[`<BadgeInput /> Should render and match the snapshot 1`] = `
   border-color: transparent;
   width: 157px;
   max-width: 200px;
+  padding-right: 0;
+  padding-left: 0;
   color: rgba(0,0,0,1);
   background-color: rgba(0,0,0,0.1);
   color: rgba(0,0,0,1);
@@ -1821,6 +1825,7 @@ exports[`<BadgeInput /> Should render and match the snapshot 1`] = `
 
 <div>
   <input
+    aria-label="Placeholder"
     class="c0 c1"
     color="black"
     placeholder="Placeholder"
@@ -2017,6 +2022,8 @@ exports[`<StyledInput /> Should render and match the snapshot as singleline 1`] 
   border-color: transparent;
   width: 100%;
   max-width: 200px;
+  padding-right: 0;
+  padding-left: 0;
   color: #2F3850;
   text-align: left;
 }
@@ -2033,6 +2040,7 @@ exports[`<StyledInput /> Should render and match the snapshot as singleline 1`] 
 
 <div>
   <input
+    aria-label="Placeholder"
     class="c0"
     placeholder="Placeholder"
     type="text"
@@ -2068,6 +2076,7 @@ exports[`<StyledInput /> Should render and match the snapshot as textarea 1`] = 
 
 <div>
   <textarea
+    aria-label="Placeholder"
     class="c0"
     data-cy="text-area"
     height="60px"

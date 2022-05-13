@@ -16,8 +16,8 @@ const defaultProps = {
   updatedAt: '2020-09-30T10:00:00',
   user: {
     email: 'test@test.com',
-    first_name: 'UserFirstName',
-    last_name: 'UserLastName',
+    firstName: 'UserFirstName',
+    lastName: 'UserLastName',
   },
 };
 

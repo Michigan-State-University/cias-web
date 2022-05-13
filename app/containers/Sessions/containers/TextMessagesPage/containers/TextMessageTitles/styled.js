@@ -1,11 +1,12 @@
 import styled from 'styled-components';
 import { colors, themeColors } from 'theme';
-import { Container } from 'react-grid-system';
+
+import { Container } from 'components/ReactGridSystem';
 
 export const StyledTile = styled.div`
   flex: 0 0 28%;
   width: 240px;
-  height: 120px;
+  height: 132px;
   background-color: ${colors.white};
   box-shadow: 0 4px 20px #e3eefb;
   border-radius: 5px;
@@ -26,7 +27,7 @@ export const StyledTile = styled.div`
 export const StyledCreateTile = styled.div`
   flex: 0 0 28%;
   width: 240px;
-  height: 120px;
+  height: 132px;
   background-color: ${themeColors.secondary};
   border-radius: 5px;
   margin: 20px;
@@ -36,7 +37,7 @@ export const StyledCreateTile = styled.div`
 export const StyledEmptyTile = styled.div`
   flex: 0 0 28%;
   width: 240px;
-  height: 120px;
+  height: 132px;
   background-color: ${colors.linkWater};
   border-radius: 5px;
   margin: 20px;
@@ -46,6 +47,7 @@ export const StyledTilesContainer = styled(Container)`
   margin-top: 10px;
   padding: 0 !important;
   justify-content: center !important;
-  overflow: scroll;
+  overflow-y: scroll;
+  overflow-x: hidden;
   height: calc(100vh - 80px);
 `;

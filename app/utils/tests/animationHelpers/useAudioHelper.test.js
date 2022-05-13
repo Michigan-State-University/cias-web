@@ -126,10 +126,8 @@ describe('useAudioHelper test', () => {
         ),
       );
 
-      const {
-        getInitialSpeechAnimation,
-        fetchAudioAnimations,
-      } = result.current;
+      const { getInitialSpeechAnimation, fetchAudioAnimations } =
+        result.current;
 
       // load animation to allow block execution
       await act(async () => fetchAudioAnimations());

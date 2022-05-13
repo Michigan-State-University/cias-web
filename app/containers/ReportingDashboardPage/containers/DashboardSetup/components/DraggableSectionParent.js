@@ -18,7 +18,7 @@ const DraggableSectionParent = ({
   const [draggingSectionId, setDraggingSectionId] = useState(null);
   const { setIsAnySectionDragging } = useContext(DashboardSectionsContext);
 
-  const onDragStart = e => {
+  const onDragStart = (e) => {
     setIsAnySectionDragging(false);
     setDraggingSectionId(e.active.id);
   };

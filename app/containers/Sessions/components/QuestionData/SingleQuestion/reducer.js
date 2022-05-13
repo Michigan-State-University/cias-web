@@ -1,7 +1,7 @@
 import { calculateNextValue } from 'utils/sequenceUtils';
 import { UPDATE_VARIABLE } from 'global/reducers/questions/constants';
 
-import { ADD, UPDATE_ANSWER, REMOVE } from './constants';
+import { ADD, UPDATE_ANSWER, REMOVE, REORDER } from './constants';
 
 /* eslint-disable default-case, no-param-reassign */
 const singleQuestionReducer = (question, payload) => {
@@ -27,6 +27,9 @@ const singleQuestionReducer = (question, payload) => {
       return question;
     case REMOVE:
       question.body.data.splice(payload.data.index, 1);
+      return question;
+    case REORDER:
+      question.body.data = payload.data.items;
       return question;
     default:
       return question;

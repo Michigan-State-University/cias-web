@@ -10,6 +10,7 @@ import { colors, themeColors } from 'theme';
 import arrowDown from 'assets/svg/arrow-down-black.svg';
 import arrowUp from 'assets/svg/arrow-up-black.svg';
 import binNoBg from 'assets/svg/bin-no-bg.svg';
+import ReorderIcon from 'assets/svg/reorder-hand.svg';
 
 import { VariableHelper } from 'models/Helpers';
 import {
@@ -20,6 +21,7 @@ import {
   textboxQuestion,
   visualAnalogueScaleQuestion,
 } from 'models/Session/QuestionTypes';
+import { SessionTypes } from 'models/Session';
 
 import VariableChooser from 'containers/VariableChooser';
 
@@ -31,6 +33,7 @@ import Collapse from 'components/Collapse';
 import InequalityChooser from 'components/InequalityChooser';
 import H2 from 'components/H2';
 import { NoMarginRow } from 'components/ReactGridSystem';
+import OriginalTextHover from 'components/OriginalTextHover';
 
 import {
   changeFormulaMatch,
@@ -39,34 +42,41 @@ import {
   changeSelectedVariantId,
 } from 'global/reducers/textMessages';
 
+import { ModalType, useModal } from 'components/Modal';
 import settingsMessages from '../../containers/TextMessageSettings/messages';
 import { TextMessagesContext } from '../../utils';
 import messages from './messages';
 
+const originalTextIconProps = {
+  position: 'absolute',
+  right: 21,
+  bottom: 12,
+};
+
 const VariantItem = ({
   open,
   index,
-  variant: { id, formulaMatch, content },
+  variant: { id, formulaMatch, content, originalText },
   changeFormulaMatchAction,
   changeContentAction,
   removeVariant,
   disabled,
   changeSelectedVariant,
+  dragHandleProps,
 }) => {
-  const { sessionId, interventionId, formatMessage } = useContext(
-    TextMessagesContext,
-  );
+  const { sessionId, interventionId, formatMessage } =
+    useContext(TextMessagesContext);
 
   const toggleCollapsable = () => {
     if (open) changeSelectedVariant('');
     else changeSelectedVariant(id);
   };
 
-  const handleFormulaMatchChange = value => {
+  const handleFormulaMatchChange = (value) => {
     changeFormulaMatchAction(value, id);
   };
 
-  const handleContentChange = value => {
+  const handleContentChange = (value) => {
     changeContentAction(value, id);
   };
 
@@ -74,13 +84,22 @@ const VariantItem = ({
     removeVariant(id);
   };
 
-  const handleAddVariable = variable => {
+  const handleAddVariable = (variable) => {
     const variableHelper = new VariableHelper(variable);
 
     handleContentChange(
       `${content}${variableHelper.getFormattedVariableForDynamicInput()}`,
     );
   };
+
+  const { openModal: openDeleteModal, Modal: DeleteModal } = useModal({
+    type: ModalType.ConfirmationModal,
+    props: {
+      description: formatMessage(messages.deleteCaseHeader),
+      content: formatMessage(messages.deleteCaseMessage),
+      confirmAction: handleDeleteCase,
+    },
+  });
 
   return (
     <Collapse
@@ -94,12 +113,8 @@ const VariantItem = ({
       onShowImg={arrowUp}
       imgWithBackground
       label={
-        <Row
-          align="center"
-          justify="between"
-          style={{ width: '100%', paddingRight: 10 }}
-        >
-          <Col xs={6}>
+        <Row align="center" justify="between" style={{ paddingRight: 10 }}>
+          <Col>
             <H2>
               {formatMessage(messages.case, {
                 index,
@@ -115,15 +130,26 @@ const VariantItem = ({
           </Col>
         </Row>
       }
+      extraIcons={
+        <Img
+          mr={10}
+          src={ReorderIcon}
+          cursor="grab"
+          disabled={false}
+          {...dragHandleProps}
+        />
+      }
     >
       <Container style={{ width: '100%' }}>
+        <DeleteModal />
+
         <Row justfy="between" align="center" style={{ marginBottom: 20 }}>
           <Col width="content">
             <Row align="center">
               <Img
                 disabled={disabled}
                 src={binNoBg}
-                onClick={handleDeleteCase}
+                onClick={openDeleteModal}
                 mr={10}
                 clickable
               />
@@ -160,6 +186,7 @@ const VariantItem = ({
               includeCurrentSession
               includeNonDigitVariables
               isMultiSession
+              sessionTypesWhiteList={[SessionTypes.CLASSIC_SESSION]}
             >
               <Text fontWeight="bold" color={themeColors.secondary}>
                 {formatMessage(settingsMessages.addVariableButton)}
@@ -167,17 +194,25 @@ const VariantItem = ({
             </VariableChooser>
           </NoMarginRow>
           <Box bg={colors.linkWater} width="100%" mt={10} mb={20} px={8} py={8}>
-            <StyledInput
-              type="multiline"
-              rows="5"
-              width="100%"
-              placeholder={formatMessage(
-                messages.sectionCaseContentPlaceholder,
-              )}
-              value={content}
-              onBlur={handleContentChange}
-              disabled={disabled}
-            />
+            <OriginalTextHover
+              id={`sms-variant-${index}`}
+              text={originalText?.content}
+              position="relative"
+              mr={-9}
+              iconProps={originalTextIconProps}
+            >
+              <StyledInput
+                type="multiline"
+                rows="5"
+                width="100%"
+                placeholder={formatMessage(
+                  messages.sectionCaseContentPlaceholder,
+                )}
+                value={content}
+                onBlur={handleContentChange}
+                disabled={disabled}
+              />
+            </OriginalTextHover>
           </Box>
         </Row>
       </Container>
@@ -194,6 +229,7 @@ VariantItem.propTypes = {
   removeVariant: PropTypes.func,
   disabled: PropTypes.bool,
   changeSelectedVariant: PropTypes.func,
+  dragHandleProps: PropTypes.object,
 };
 VariantItem.defaultProps = {
   open: false,
@@ -206,12 +242,6 @@ const mapDispatchToProps = {
   changeSelectedVariant: changeSelectedVariantId,
 };
 
-const withConnect = connect(
-  null,
-  mapDispatchToProps,
-);
+const withConnect = connect(null, mapDispatchToProps);
 
-export default compose(
-  withConnect,
-  injectIntl,
-)(VariantItem);
+export default compose(withConnect, injectIntl)(VariantItem);

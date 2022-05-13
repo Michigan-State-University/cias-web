@@ -33,7 +33,7 @@ import inviteResearcherSaga, {
 } from '../sagas/inviteResearcher';
 import getInvitationsSaga, { getInvitations } from '../sagas/getInvitations';
 
-const stepper = fn => mock => fn.next(mock).value;
+const stepper = (fn) => (mock) => fn.next(mock).value;
 
 describe('inviteResearcher saga', () => {
   it('Check inviteResearcher generator success connection', () => {
@@ -42,9 +42,16 @@ describe('inviteResearcher saga', () => {
     const apiResponse = {
       data: {
         id: '12-a23mc-21',
-        type: 'invitation',
+        type: 'user',
         attributes: {
+          firstName: '',
+          lastName: '',
+          fullName: '',
           email: 'email@gmail.com',
+          roles: [Roles.researcher],
+          avatar: null,
+          timeZone: defaultTimeZone,
+          active: true,
         },
       },
     };
@@ -70,7 +77,8 @@ describe('inviteResearcher saga', () => {
       .run();
   });
   it('Check inviteResearcher error connection', () => {
-    const error = "TypeError: Cannot read property 'data' of undefined";
+    const error =
+      "TypeError: Cannot read properties of undefined (reading 'data')";
     const email = 'email1';
     const step = stepper(inviteResearcher({ payload: { email } }));
     step();
@@ -91,10 +99,10 @@ describe('getInvitations saga', () => {
     const apiResponse = {
       data: {
         data: [
-          { id: 17, type: 'invitation', attributes: { email: 'test@test.pl' } },
+          { id: 17, type: 'user', attributes: { email: 'test@test.pl' } },
           {
             id: 18,
-            type: 'invitation',
+            type: 'user',
             attributes: { email: 'tetS2@twst.pl' },
           },
         ],
@@ -104,15 +112,14 @@ describe('getInvitations saga', () => {
     step();
     const successTrigger = step(apiResponse);
     expect(successTrigger).toEqual(
-      put(
-        getInvitationsSuccess(jsonApiToArray(apiResponse.data, 'invitation')),
-      ),
+      put(getInvitationsSuccess(jsonApiToArray(apiResponse.data, 'user'))),
     );
     const lastResponse = step();
     expect(lastResponse).toEqual(undefined);
   });
   it('Check getInvitations error connection', () => {
-    const error = "TypeError: Cannot read property 'data' of undefined";
+    const error =
+      "TypeError: Cannot read properties of undefined (reading 'data')";
     const step = stepper(getInvitations());
     step();
     const errorTrigger = step();

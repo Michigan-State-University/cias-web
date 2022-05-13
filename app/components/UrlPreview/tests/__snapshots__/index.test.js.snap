@@ -72,7 +72,7 @@ exports[`<UrlPreview /> Should render and match the snapshot 1`] = `
 }
 
 .c10 {
-  background-image: url("image1.png");
+  background-image: url('image1.png');
   background-size: cover;
   background-color: #9AA1B6;
   background-position: center;

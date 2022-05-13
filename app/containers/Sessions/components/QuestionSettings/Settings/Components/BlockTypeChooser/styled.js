@@ -5,7 +5,7 @@ import StyledCircle from 'components/Circle/StyledCircle';
 import Box from 'components/Box';
 import { colors, themeColors } from 'theme';
 
-export const DotCircle = props => <StyledCircle {...props} size="10px" />;
+export const DotCircle = (props) => <StyledCircle {...props} size="10px" />;
 
 const hoverStyles = css`
   background-color: ${themeColors.primary};

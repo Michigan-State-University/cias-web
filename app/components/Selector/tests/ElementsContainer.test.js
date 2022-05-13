@@ -11,7 +11,10 @@ import 'jest-styled-components';
 import ElementsContainer from '../ElementsContainer';
 
 const defaultProps = {
-  options: [{ label: 'Label', id: '1' }, { label: 'Label2', id: '2' }],
+  options: [
+    { label: 'Label', id: '1' },
+    { label: 'Label2', id: '2' },
+  ],
   selectedOption: { label: 'Label', id: '1' },
   setOption: jest.fn(),
   toggleActive: jest.fn(),

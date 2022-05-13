@@ -38,13 +38,13 @@ export const CheckBackground = styled.div`
 
 export const NavbarTabLink = styled(Link)`
   text-decoration: none;
-  ${props =>
+  ${(props) =>
     props.active &&
     `
       border-bottom: 2px solid ${themeColors.secondary};
     `}
   span {
-    ${props =>
+    ${(props) =>
       !props.active &&
       `
         opacity: 0.6  ;

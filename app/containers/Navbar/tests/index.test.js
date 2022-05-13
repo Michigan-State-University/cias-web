@@ -21,7 +21,7 @@ import { DEFAULT_LOCALE } from '../../../i18n';
 
 describe('<Navbar />', () => {
   let store;
-  const reducer = state => state;
+  const reducer = (state) => state;
   const initialState = {
     auth: {
       user: { firstName: 'test', lastName: 'test', roles: [Roles.admin] },

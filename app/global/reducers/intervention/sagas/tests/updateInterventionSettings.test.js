@@ -7,6 +7,7 @@ import { expectSaga } from 'redux-saga-test-plan';
 import { createIntervention } from 'utils/reducerCreators';
 
 import { updateSessionSettings } from 'global/reducers/intervention/sagas/updateSessionSettings';
+import { jsonApiToObject } from 'utils/jsonApiMapper';
 import {
   updateSessionSettingsError,
   updateSessionSettingsSuccess,
@@ -16,11 +17,17 @@ import { updateSessionSettingsSaga } from '../index';
 import { initialState } from '../../reducer';
 
 describe('updateSessionSettings saga', () => {
+  const mockIntervention = createIntervention();
   const mockState = {
     intervention: {
       ...initialState,
-      intervention: createIntervention(),
-      cache: { intervention: createIntervention() },
+      intervention: jsonApiToObject({ data: mockIntervention }, 'intervention'),
+      cache: {
+        intervention: jsonApiToObject(
+          { data: mockIntervention },
+          'intervention',
+        ),
+      },
     },
   };
   it('Check updateSessionSettings generator success connection', () => {

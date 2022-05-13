@@ -13,7 +13,7 @@ export function* fetchOrganization({ payload: { id } }) {
     const organization = jsonApiToObject(data, 'organization');
 
     const eInterventionAdmins = organization.eInterventionAdmins.map(
-      eInterventionAdmin => {
+      (eInterventionAdmin) => {
         const userInvitation = organization.organizationInvitations.find(
           ({ userId }) => userId === eInterventionAdmin.id,
         );

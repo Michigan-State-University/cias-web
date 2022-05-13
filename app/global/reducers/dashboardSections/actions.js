@@ -40,9 +40,9 @@ import {
 
 export const addDashboardSectionRequest = (organizationId, name) =>
   actionBuilder(ADD_SECTION_REQUEST, { name, organizationId });
-export const addDashboardSectionSuccess = dashboardSection =>
+export const addDashboardSectionSuccess = (dashboardSection) =>
   actionBuilder(ADD_SECTION_SUCCESS, { dashboardSection });
-export const addDashboardSectionError = error =>
+export const addDashboardSectionError = (error) =>
   actionBuilder(ADD_SECTION_ERROR, { error });
 
 export const fetchDashboardSectionRequest = (
@@ -50,9 +50,9 @@ export const fetchDashboardSectionRequest = (
   organizationId,
 ) =>
   actionBuilder(FETCH_SECTION_REQUEST, { organizationId, dashboardSectionId });
-export const fetchDashboardSectionSuccess = dashboardSection =>
+export const fetchDashboardSectionSuccess = (dashboardSection) =>
   actionBuilder(FETCH_SECTION_SUCCESS, { dashboardSection });
-export const fetchDashboardSectionError = error =>
+export const fetchDashboardSectionError = (error) =>
   actionBuilder(FETCH_SECTION_ERROR, { error });
 
 export const fetchDashboardSectionsRequest = (
@@ -60,9 +60,9 @@ export const fetchDashboardSectionsRequest = (
   fromDashboardView,
 ) =>
   actionBuilder(FETCH_SECTIONS_REQUEST, { organizationId, fromDashboardView });
-export const fetchDashboardSectionsSuccess = dashboardSections =>
+export const fetchDashboardSectionsSuccess = (dashboardSections) =>
   actionBuilder(FETCH_SECTIONS_SUCCESS, { dashboardSections });
-export const fetchDashboardSectionsError = error =>
+export const fetchDashboardSectionsError = (error) =>
   actionBuilder(FETCH_SECTIONS_ERROR, { error });
 
 export const editDashboardSectionRequest = (
@@ -75,7 +75,7 @@ export const editDashboardSectionSuccess = (
   dashboardSectionId,
 ) =>
   actionBuilder(EDIT_SECTION_SUCCESS, { dashboardSection, dashboardSectionId });
-export const editDashboardSectionError = error =>
+export const editDashboardSectionError = (error) =>
   actionBuilder(EDIT_SECTION_ERROR, { error });
 
 export const deleteDashboardSectionRequest = (
@@ -88,7 +88,7 @@ export const deleteDashboardSectionSuccess = (
   organizationId,
 ) =>
   actionBuilder(DELETE_SECTION_SUCCESS, { dashboardSectionId, organizationId });
-export const deleteDashboardSectionError = error =>
+export const deleteDashboardSectionError = (error) =>
   actionBuilder(DELETE_SECTION_ERROR, { error });
 
 export const addChartRequest = (
@@ -105,15 +105,16 @@ export const addChartRequest = (
   });
 export const addChartSuccess = (chart, dashboardSectionId) =>
   actionBuilder(ADD_CHART_SUCCESS, { chart, dashboardSectionId });
-export const addChartError = error => actionBuilder(ADD_CHART_ERROR, { error });
+export const addChartError = (error) =>
+  actionBuilder(ADD_CHART_ERROR, { error });
 
-export const editChartRequest = chart =>
+export const editChartRequest = (chart) =>
   actionBuilder(EDIT_CHART_REQUEST, {
     chart,
   });
-export const editChartSuccess = chart =>
+export const editChartSuccess = (chart) =>
   actionBuilder(EDIT_CHART_SUCCESS, { chart });
-export const editChartError = error =>
+export const editChartError = (error) =>
   actionBuilder(EDIT_CHART_ERROR, { error });
 
 export const deleteChartRequest = (chartId, dashboardSectionId) =>
@@ -123,10 +124,10 @@ export const deleteChartRequest = (chartId, dashboardSectionId) =>
   });
 export const deleteChartSuccess = (chartId, dashboardSectionId) =>
   actionBuilder(DELETE_CHART_SUCCESS, { chartId, dashboardSectionId });
-export const deleteChartError = error =>
+export const deleteChartError = (error) =>
   actionBuilder(DELETE_CHART_ERROR, { error });
 
-export const copyChartRequest = chartId =>
+export const copyChartRequest = (chartId) =>
   actionBuilder(COPY_CHART_REQUEST, { chartId });
 
 export const copyChartSuccess = (chart, dashboardSectionId) =>
@@ -138,10 +139,10 @@ export const selectChartAction = (dashboardSectionId, chartId) =>
     chartId,
   });
 
-export const setChartsData = chartsData =>
+export const setChartsData = (chartsData) =>
   actionBuilder(SET_CHARTS_DATA, { chartsData });
 
-export const setChartFiltersRequest = filters =>
+export const setChartFiltersRequest = (filters) =>
   actionBuilder(SET_CHARTS_FILTERS, { filters });
 
 export const reorderSectionsRequest = (organizationId, dashboardSections) =>

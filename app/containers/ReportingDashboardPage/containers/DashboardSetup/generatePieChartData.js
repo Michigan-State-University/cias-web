@@ -25,7 +25,7 @@ import {
 /**
  * @param {PieChartPattern[]} patterns
  */
-export const generatePieChartPreviewData = patterns => {
+export const generatePieChartPreviewData = (patterns) => {
   const patternsSize = patterns.length;
   const patternsSizeWithoutDefaultPattern = patternsSize - 1;
 

@@ -5,7 +5,7 @@ import {
   initialState,
 } from 'global/reducers/questions/reducer';
 
-const createState = state => ({
+const createState = (state) => ({
   ...initialState,
   ...state,
 });

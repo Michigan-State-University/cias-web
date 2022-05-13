@@ -17,7 +17,7 @@ module.exports = require('./webpack.base.babel')({
   entry: [
     require.resolve('react-app-polyfill/ie11'),
     require.resolve('react-app-polyfill/stable'),
-    path.join(process.cwd(), 'app/app.js'),
+    path.join(process.cwd(), 'app/app.tsx'),
   ],
 
   // Utilize long-term caching by adding content hashes (not compilation hashes) to compiled assets
@@ -89,13 +89,6 @@ module.exports = require('./webpack.base.babel')({
       inject: true,
     }),
 
-    new CompressionPlugin({
-      algorithm: 'gzip',
-      test: /\.js$|\.css$|\.html$/,
-      threshold: 10240,
-      minRatio: 0.8,
-    }),
-
     new Dotenv({ systemvars: true }), // load environmental variables from the system
 
     ...(process.env.SENTRY_AUTH_TOKEN
@@ -113,6 +106,15 @@ module.exports = require('./webpack.base.babel')({
           }),
         ]
       : []),
+
+    // compress AFTER sending files to Sentry
+    new CompressionPlugin({
+      algorithm: 'gzip',
+      test: /\.js$|\.css$|\.html$/,
+      threshold: 10240,
+      minRatio: 0.8,
+      exclude: /.map$/,
+    }),
   ],
 
   performance: {

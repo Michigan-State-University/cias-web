@@ -2,20 +2,22 @@ import { put, call, takeLatest } from 'redux-saga/effects';
 import axios from 'axios';
 
 import { defaultMapper } from 'utils/mapResponseObjects';
+import { SessionTypes } from 'models/Session';
 import { CREATE_SESSION_REQUEST } from '../constants';
 
 import { createSessionSuccess, createSessionError } from '../actions';
 
-export function* createSession({ payload: { id, lastPosition } }) {
+export function* createSession({ payload: { id, lastPosition, type } }) {
   const requestURL = `v1/interventions/${id}/sessions`;
-
+  const sessionNamePrefix =
+    type === SessionTypes.CAT_SESSION ? '(CAT-MH™) ' : '';
   try {
     const {
       data: { data },
     } = yield call(axios.post, requestURL, {
       session: {
-        type: 'Session::Single',
-        name: 'New Session',
+        type,
+        name: `${sessionNamePrefix}New Session`,
         position: lastPosition + 1,
       },
     });

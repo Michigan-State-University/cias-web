@@ -37,7 +37,7 @@ describe('<InterventionStatusButtons />', () => {
   };
 
   beforeAll(() => {
-    ReactDOM.createPortal = jest.fn(element => element);
+    ReactDOM.createPortal = jest.fn((element) => element);
     modalContainer = document.createElement('div');
     modalContainer.setAttribute('id', 'modal-portal');
 
@@ -59,7 +59,7 @@ describe('<InterventionStatusButtons />', () => {
   });
 
   it('Should render and match the snapshot', () => {
-    statusTypes.forEach(status => {
+    statusTypes.forEach((status) => {
       const { container } = render(
         <Provider store={store}>
           <IntlProvider locale={DEFAULT_LOCALE}>

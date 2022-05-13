@@ -13,7 +13,7 @@ describe('urlValidator regex', () => {
       '172.16.254.1',
     ];
 
-    targets.forEach(target => expect(urlValidator(target)).toBeTruthy());
+    targets.forEach((target) => expect(urlValidator(target)).toBeTruthy());
   });
 
   it('should return false when checked against non-valid urls', () => {
@@ -23,6 +23,6 @@ describe('urlValidator regex', () => {
       'localhost:4200^', // invalid ^
     ];
 
-    targets.forEach(target => expect(urlValidator(target)).toBeFalsy());
+    targets.forEach((target) => expect(urlValidator(target)).toBeFalsy());
   });
 });

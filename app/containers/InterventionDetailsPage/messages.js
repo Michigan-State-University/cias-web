@@ -5,6 +5,8 @@
  */
 import { defineMessages } from 'react-intl';
 
+import { CatMhLicenseType } from 'models/Intervention';
+
 export const scope = 'app.containers.HomePage';
 
 export default defineMessages({
@@ -44,25 +46,37 @@ export default defineMessages({
     id: `${scope}.adjust`,
     defaultMessage: 'Edit',
   },
-  copy: {
-    id: `${scope}.copy`,
-    defaultMessage: 'Send copy to researcher',
+  translate: {
+    id: `${scope}.translate`,
+    defaultMessage: 'Translate',
   },
-  duplicate: {
-    id: `${scope}.duplicate`,
-    defaultMessage: 'Duplicate',
+  shareExternally: {
+    id: `${scope}.shareExternally`,
+    defaultMessage: 'Share externally',
+  },
+  duplicateHere: {
+    id: `${scope}.duplicateHere`,
+    defaultMessage: 'Duplicate here',
   },
   archive: {
     id: `${scope}.archive`,
     defaultMessage: 'Archive',
   },
-  modalTitle: {
-    id: `${scope}.modalTitle`,
+  sendCopyModalTitle: {
+    id: `${scope}.sendCopyModalTitle`,
     defaultMessage: 'Choose researchers to send',
   },
   participantShareModalTitle: {
     id: `${scope}.participantShareModalTitle`,
     defaultMessage: 'Send an email with the invitation',
+  },
+  catMhSettingsOption: {
+    id: `${scope}.catMhSettingsOption`,
+    defaultMessage: 'CAT-MH™ Access',
+  },
+  catMhSettingsModalTitle: {
+    id: `${scope}.catMhSettingsModalTitle`,
+    defaultMessage: 'Access to CAT-MH™',
   },
   anyone: {
     id: `${scope}.anyone`,
@@ -85,6 +99,14 @@ export default defineMessages({
     id: `${scope}.sessionDeleteMessage`,
     defaultMessage:
       'Are you sure you want to delete this session? It will no longer be possible to recover it later.',
+  },
+  interventionArchiveHeader: {
+    id: `${scope}.interventionArchiveHeader`,
+    defaultMessage: 'Archive Intervention',
+  },
+  interventionArchiveMessage: {
+    id: `${scope}.interventionArchiveMessage`,
+    defaultMessage: 'Are you sure you want to archive this Intervention?',
   },
   interventionLanguage: {
     id: `${scope}.interventionLanguage`,
@@ -113,5 +135,29 @@ export default defineMessages({
   saveButton: {
     id: `${scope}.saveButton`,
     defaultMessage: 'Save',
+  },
+  pageTitle: {
+    id: `${scope}.pageTitle`,
+    defaultMessage: 'Intervention: {name}',
+  },
+  translateInterventionModalLabel: {
+    id: `${scope}.translateInterventionModalLabel`,
+    defaultMessage: 'Translate Intervention',
+  },
+  catMhCounter: {
+    id: `${scope}.catMhCounter`,
+    defaultMessage: `<bold>CAT-MH™ License</bold>: {licenseType, select,
+        ${CatMhLicenseType.LIMITED} {Limited (<counter>{used}/{initial}</counter> <space></space> tests used)}
+        ${CatMhLicenseType.UNLIMITED} {Unlimited (<counter>{used}</counter> <space></space> tests used)}
+      }`,
+  },
+  catMhCountInfo: {
+    id: `${scope}.catMhCountInfo`,
+    defaultMessage:
+      "This assessment count is for informational purposes and may not align with your institution's <bold>Adaptive Testing Technologies (ATT) CAT-MH™</bold> license and should not be relied upon for financial or budgetary purposes. Please contact your ATT project director or <bold>info@adaptivetestingtechnologies.com</bold> for license or usage questions.",
+  },
+  inviteToIntervention: {
+    id: `${scope}.inviteToIntervention`,
+    defaultMessage: 'Invite Participants',
   },
 });

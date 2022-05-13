@@ -20,9 +20,9 @@ export const StatusLabel = styled.button`
   font-weight: bold;
   line-height: 16px;
   border-radius: 5px;
-  background: ${props =>
+  background: ${(props) =>
     props.active ? props.color || themeColors.highlight : colors.heather};
-  color: ${props => props.active && colors.white};
+  color: ${(props) => props.active && colors.white};
   box-shadow: ${boxShadows.selago};
   transition: 0.3s;
   &:hover {
@@ -35,7 +35,7 @@ export const StatusLabel = styled.button`
 `;
 
 export const FilterText = styled.p`
-  color: ${props => (props.active ? colors.white : props.color)};
+  color: ${(props) => (props.active ? colors.white : props.color)};
   white-space: pre;
 `;
 

@@ -8,10 +8,7 @@ import {
   feedbackBlockType,
 } from 'models/Narrator/BlockTypes';
 import { setAnimationStopPosition } from 'global/reducers/localState';
-import {
-  createNewQuestionInGroup,
-  makeSelectQuestionGroups,
-} from 'global/reducers/questionGroups';
+import { makeSelectQuestionGroups } from 'global/reducers/questionGroups';
 import { getNarratorPositionWhenQuestionIsAdded } from 'utils/getNarratorPosition';
 import isNullOrUndefined from 'utils/isNullOrUndefined';
 
@@ -88,7 +85,6 @@ function* createQuestion({ payload: { question, id: sessionId } }) {
 
       if (!isNullOrUndefined(createdQuestion)) {
         yield put(createQuestionSuccess(createdQuestion));
-        yield put(createNewQuestionInGroup(createdQuestion, newGroup.id));
         yield put(setAnimationStopPosition(position.x, position.y));
       } else {
         yield put(createQuestionError());
@@ -105,7 +101,6 @@ function* createQuestion({ payload: { question, id: sessionId } }) {
       const createdQuestion = mapQuestionToStateObject(response.data.data);
 
       yield put(createQuestionSuccess(createdQuestion));
-      yield put(createNewQuestionInGroup(createdQuestion, groupId));
 
       yield put(setAnimationStopPosition(position.x, position.y));
     } catch (error) {

@@ -2,6 +2,7 @@ import { put, takeLatest, call } from 'redux-saga/effects';
 import axios from 'axios';
 
 import objectToSnakeCase from 'utils/objectToSnakeCase';
+import { jsonApiToArray } from 'utils/jsonApiMapper';
 
 import { FETCH_ORGANIZATION_INTERVENTIONS_REQUEST } from '../constants';
 import {
@@ -16,11 +17,12 @@ export function* fetchOrganizationInterventions({
   const { startIndex, endIndex } = paginationData ?? {};
 
   try {
-    const {
-      data: { interventions, interventions_size: interventionCount },
-    } = yield call(axios.get, requestURL, {
+    const { data } = yield call(axios.get, requestURL, {
       params: objectToSnakeCase({ startIndex, endIndex, organizationId }),
     });
+
+    const { interventions_size: interventionCount } = data;
+    const interventions = jsonApiToArray(data, 'intervention');
 
     yield put(
       fetchOrganizationInterventionsSuccess(

@@ -29,12 +29,13 @@ const ScrollFogBox = React.forwardRef(
     const [topFogVisible, setTopFogVisible] = useState(false);
     const [bottomFogVisible, setBottomFogVisible] = useState(false);
 
-    const setRight = value =>
+    const setRight = (value) =>
       rightFogVisible !== value && setRightFogVisible(value);
-    const setLeft = value =>
+    const setLeft = (value) =>
       leftFogVisible !== value && setLeftFogVisible(value);
-    const setTop = value => topFogVisible !== value && setTopFogVisible(value);
-    const setBottom = value =>
+    const setTop = (value) =>
+      topFogVisible !== value && setTopFogVisible(value);
+    const setBottom = (value) =>
       bottomFogVisible !== value && setBottomFogVisible(value);
 
     const { x, y } = scrollInfo;

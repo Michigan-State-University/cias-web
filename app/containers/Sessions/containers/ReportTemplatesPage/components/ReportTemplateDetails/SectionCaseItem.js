@@ -1,9 +1,9 @@
-import React, { useContext, useEffect, useState } from 'react';
+import React, { memo, useContext, useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
 import { compose } from 'redux';
 import { connect } from 'react-redux';
 import { Row, Container } from 'react-grid-system';
-import { injectIntl, IntlShape } from 'react-intl';
+import { useIntl } from 'react-intl';
 
 import binNoBg from 'assets/svg/bin-no-bg.svg';
 
@@ -23,6 +23,7 @@ import {
   textboxQuestion,
   visualAnalogueScaleQuestion,
 } from 'models/Session/QuestionTypes';
+import { SessionTypes } from 'models/Session';
 import { colors, themeColors } from 'theme';
 
 import arrowDown from 'assets/svg/arrow-down-black.svg';
@@ -41,19 +42,30 @@ import Radio from 'components/Radio';
 import InequalityChooser from 'components/InequalityChooser';
 import ImageUpload from 'components/ImageUpload';
 import TextButton from 'components/Button/TextButton';
+import OriginalTextHover from 'components/OriginalTextHover';
+import { ModalType, useModal } from 'components/Modal';
 
 import { ReportTemplatesContext } from '../../utils';
 import messages from '../../messages';
 import Option from './Option';
 
+const originalTextIconProps = {
+  position: 'absolute',
+  right: 21,
+  bottom: 12,
+};
+
 const SectionCaseItem = ({
-  intl: { formatMessage },
   title,
   sectionCase,
   updateSectionCase,
   deleteImage,
   deleteCase,
+  openCollapsable,
+  isOpened,
 }) => {
+  const { formatMessage } = useIntl();
+
   const {
     interventionId,
     sessionId,
@@ -66,9 +78,6 @@ const SectionCaseItem = ({
     if (!updateReportTemplateLoading) setIsUploadingImage(false);
     if (!updateReportTemplateLoading) setIsUpdatingWithVariable(false);
   }, [updateReportTemplateLoading]);
-
-  const [openCollapsable, setOpenCollapsable] = useState(false);
-  const toggleCollapsable = () => setOpenCollapsable(!openCollapsable);
 
   const [titleVisible, setTitleVisible] = useState(Boolean(sectionCase.title));
   const [isUploadingImage, setIsUploadingImage] = useState(false);
@@ -87,30 +96,30 @@ const SectionCaseItem = ({
     );
   };
 
-  const handlePreviewChange = event => {
+  const handlePreviewChange = (_, event) => {
     event.preventDefault();
     event.stopPropagation();
     handleSectionCaseUpdate({ ...sectionCase, preview: true }, null, true);
   };
 
-  const handleFormulaMatchChange = formulaMatch => {
+  const handleFormulaMatchChange = (formulaMatch) => {
     handleSectionCaseUpdate({ ...sectionCase, formulaMatch });
   };
 
-  const handleTitleChange = newTitle => {
+  const handleTitleChange = (newTitle) => {
     handleSectionCaseUpdate({ ...sectionCase, title: newTitle });
   };
 
-  const handleTitleToggle = value => {
+  const handleTitleToggle = (value) => {
     if (!value) handleTitleChange('');
     setTitleVisible(value);
   };
 
-  const handleContentChange = content => {
+  const handleContentChange = (content) => {
     handleSectionCaseUpdate({ ...sectionCase, content });
   };
 
-  const handleAddVariable = variable => {
+  const handleAddVariable = (variable) => {
     setIsUpdatingWithVariable(true);
     const variableHelper = new VariableHelper(variable);
 
@@ -121,7 +130,7 @@ const SectionCaseItem = ({
     );
   };
 
-  const handleImageChange = image => {
+  const handleImageChange = (image) => {
     setIsUploadingImage(true);
 
     handleSectionCaseUpdate(sectionCase, image.image);
@@ -135,12 +144,23 @@ const SectionCaseItem = ({
     deleteCase(sectionCase.id, selectedTemplateSectionId);
   };
 
+  const { openModal: openDeleteModal, Modal: DeleteModal } = useModal({
+    type: ModalType.ConfirmationModal,
+    props: {
+      description: formatMessage(messages.deleteSectionCaseHeader),
+      content: formatMessage(messages.deleteSectionCaseMessage),
+      confirmAction: handleDeleteCase,
+    },
+  });
+
   return (
     <>
+      <DeleteModal />
+
       <Collapse
         disabled
-        isOpened={openCollapsable}
-        onToggle={toggleCollapsable}
+        isOpened={isOpened}
+        onToggle={openCollapsable}
         height="auto"
         px={0}
         bgOpacity={0}
@@ -165,37 +185,35 @@ const SectionCaseItem = ({
             </Col>
             <Col align="end" xs={6}>
               <Row align="center" justify="end" nogutter>
-                <Col xs={2}>
+                <Col>
                   <Radio
+                    id={`case-preview-toggle-${sectionCase.id}`}
                     mr={10}
                     disabled={!canEdit}
-                    onClick={handlePreviewChange}
+                    onChange={handlePreviewChange}
                     checked={sectionCase.preview}
-                  />
-                </Col>
-                <Col xs={10} align="end" style={{ textAlign: 'end' }}>
-                  <Text
-                    width="max-content"
-                    disabled={!canEdit}
-                    onClick={handlePreviewChange}
-                    whiteSpace="pre"
-                    fontWeight={sectionCase.preview ? 'bold' : 'normal'}
                   >
-                    {formatMessage(messages.previewCaseRadio)}
-                  </Text>
+                    <Text
+                      width="max-content"
+                      whiteSpace="pre"
+                      fontWeight={sectionCase.preview ? 'bold' : 'normal'}
+                    >
+                      {formatMessage(messages.previewCaseRadio)}
+                    </Text>
+                  </Radio>
                 </Col>
               </Row>
             </Col>
           </Row>
         }
       >
-        <Container style={{ width: '100%' }}>
+        <Container style={{ width: '100%' }} role="group" aria-label={title}>
           <Row justify="between" align="center" style={{ marginBottom: 20 }}>
             <Col xs="content">
               <Row align="center">
                 <Img
                   src={binNoBg}
-                  onClick={handleDeleteCase}
+                  onClick={openDeleteModal}
                   mr={10}
                   disabled={!canEdit}
                   clickable
@@ -213,6 +231,7 @@ const SectionCaseItem = ({
                 <Option
                   key="section-title-toggle"
                   label={formatMessage(messages.sectionCaseTitleToggle)}
+                  labelId={sectionCase.id}
                   value={titleVisible}
                   action={handleTitleToggle}
                   disabled={!canEdit}
@@ -251,7 +270,7 @@ const SectionCaseItem = ({
 
           <Row justify="start">
             <Col style={{ padding: 0 }}>
-              <Text whiteSpace="pre">
+              <Text whiteSpace="pre" id="section-case-content">
                 {formatMessage(messages.sectionCaseContentHeader)}
               </Text>
             </Col>
@@ -274,6 +293,7 @@ const SectionCaseItem = ({
                 includeCurrentSession
                 includeNonDigitVariables
                 isMultiSession
+                sessionTypesWhiteList={[SessionTypes.CLASSIC_SESSION]}
               >
                 <TextButton
                   whiteSpace="nowrap"
@@ -298,17 +318,26 @@ const SectionCaseItem = ({
               px={8}
               py={8}
             >
-              <StyledInput
-                type="multiline"
-                rows="5"
-                width="100%"
-                placeholder={formatMessage(
-                  messages.sectionCaseContentPlaceholder,
-                )}
-                value={sectionCase.content}
-                onBlur={handleContentChange}
-                disabled={!canEdit}
-              />
+              <OriginalTextHover
+                id={`section-case-${sectionCase.id}`}
+                text={sectionCase.originalText?.content}
+                position="relative"
+                mr={-9}
+                iconProps={originalTextIconProps}
+              >
+                <StyledInput
+                  aria-labelledby="section-case-content"
+                  type="multiline"
+                  rows="5"
+                  width="100%"
+                  placeholder={formatMessage(
+                    messages.sectionCaseContentPlaceholder,
+                  )}
+                  value={sectionCase.content}
+                  onBlur={handleContentChange}
+                  disabled={!canEdit}
+                />
+              </OriginalTextHover>
             </Box>
           </Row>
 
@@ -337,10 +366,7 @@ const mapDispatchToProps = {
   deleteCase: deleteSectionCaseRequest,
 };
 
-const withConnect = connect(
-  null,
-  mapDispatchToProps,
-);
+const withConnect = connect(null, mapDispatchToProps);
 
 SectionCaseItem.propTypes = {
   title: PropTypes.string,
@@ -348,10 +374,8 @@ SectionCaseItem.propTypes = {
   deleteCase: PropTypes.func,
   deleteImage: PropTypes.func,
   sectionCase: PropTypes.shape(SectionCase),
-  intl: PropTypes.shape(IntlShape),
+  openCollapsable: PropTypes.func,
+  isOpened: PropTypes.bool,
 };
 
-export default compose(
-  withConnect,
-  injectIntl,
-)(SectionCaseItem);
+export default compose(withConnect, memo)(SectionCaseItem);

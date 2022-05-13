@@ -11,16 +11,16 @@ import {
 
 export function* createTextMessage({ payload: { textMessage } }) {
   try {
-    const { sessionId, schedule, name, frequency } = textMessage;
+    const { sessionId, id, ...restProps } = textMessage;
     const requestUrl = 'v1/sms_plans';
     const {
       data: { data },
     } = yield call(axios.post, requestUrl, {
-      sms_plan: { session_id: sessionId, schedule, name, frequency },
+      sms_plan: { session_id: sessionId, ...restProps },
     });
     const mappedData = new TextMessagesBuilder().fromJson(data).build();
 
-    yield put(createTextMessageSuccess(mappedData, textMessage.id));
+    yield put(createTextMessageSuccess(mappedData, id));
     yield put(changeSelectedMessageId(mappedData.id));
   } catch (error) {
     yield put(createTextMessageError(error));

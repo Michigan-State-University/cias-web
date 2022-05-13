@@ -44,7 +44,7 @@ const CopyToClipboard = ({
     }, POPUP_TIMEOUT);
   };
 
-  const renderCopyToClipboard = content => (
+  const renderCopyToClipboard = (content) => (
     <ReactCopyToClipboard text={textToCopy} onCopy={onCopy}>
       {content}
     </ReactCopyToClipboard>
