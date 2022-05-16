@@ -25,6 +25,8 @@ exports[`<CopyToClipboard /> Should render and match the snapshot 1`] = `
   display: block;
   border-radius: 5px;
   cursor: pointer;
+  color: unset;
+  cursor: pointer;
 }
 
 .c1 {

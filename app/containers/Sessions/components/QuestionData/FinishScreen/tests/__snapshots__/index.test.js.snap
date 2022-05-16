@@ -59,6 +59,7 @@ exports[`<FinishScreen /> Should render and match the snapshot 1`] = `
   display: -webkit-flex;
   display: -ms-flexbox;
   display: flex;
+  color: unset;
 }
 
 .c3 {
@@ -66,6 +67,7 @@ exports[`<FinishScreen /> Should render and match the snapshot 1`] = `
   height: auto;
   display: block;
   border-radius: 5px;
+  color: unset;
 }
 
 @media only screen and (min-width:768px) {

@@ -11,6 +11,7 @@ exports[`<ShareBox /> Should render and match the snapshot 1`] = `
   height: -moz-fit-content;
   height: fit-content;
   margin-top: 20px;
+  color: unset;
 }
 
 .c1 {
@@ -29,6 +30,7 @@ exports[`<ShareBox /> Should render and match the snapshot 1`] = `
   -webkit-box-align: center;
   -ms-flex-align: center;
   align-items: center;
+  color: unset;
 }
 
 .c11 {
@@ -37,6 +39,7 @@ exports[`<ShareBox /> Should render and match the snapshot 1`] = `
   display: block;
   border-radius: 5px;
   width: 140px;
+  color: unset;
 }
 
 .c21 {
@@ -44,6 +47,8 @@ exports[`<ShareBox /> Should render and match the snapshot 1`] = `
   height: auto;
   display: block;
   border-radius: 5px;
+  cursor: pointer;
+  color: unset;
   cursor: pointer;
 }
 

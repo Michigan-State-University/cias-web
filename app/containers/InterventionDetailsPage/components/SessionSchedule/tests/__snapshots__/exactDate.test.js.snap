@@ -75,6 +75,7 @@ exports[`<SessionSchedule /> Should render and match the snapshot 1`] = `
   display: block;
   border-radius: 5px;
   position: relative;
+  color: unset;
 }
 
 .c8 {
@@ -82,6 +83,7 @@ exports[`<SessionSchedule /> Should render and match the snapshot 1`] = `
   height: auto;
   display: block;
   border-radius: 5px;
+  color: unset;
 }
 
 .c5 {

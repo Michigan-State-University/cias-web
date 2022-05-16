@@ -7,6 +7,7 @@ exports[`<Accordion /> Should render multiple elements and match the snapshot 1`
   display: block;
   border-radius: 5px;
   margin-bottom: 7px;
+  color: unset;
 }
 
 .c4 {
@@ -25,6 +26,7 @@ exports[`<Accordion /> Should render multiple elements and match the snapshot 1`
   -webkit-box-align: center;
   -ms-flex-align: center;
   align-items: center;
+  color: unset;
 }
 
 .c1 {
@@ -291,6 +293,7 @@ exports[`<Accordion /> Should render only one element and match the snapshot 1`]
   -webkit-box-align: center;
   -ms-flex-align: center;
   align-items: center;
+  color: unset;
 }
 
 .c0 {
@@ -420,6 +423,7 @@ exports[`<Accordion /> Should render with one element opened and match the snaps
   display: block;
   border-radius: 5px;
   margin-bottom: 7px;
+  color: unset;
 }
 
 .c4 {
@@ -438,6 +442,7 @@ exports[`<Accordion /> Should render with one element opened and match the snaps
   -webkit-box-align: center;
   -ms-flex-align: center;
   align-items: center;
+  color: unset;
 }
 
 .c1 {

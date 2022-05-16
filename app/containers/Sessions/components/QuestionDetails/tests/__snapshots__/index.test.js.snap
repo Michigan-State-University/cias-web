@@ -120,6 +120,7 @@ exports[`<QuestionDetails /> should match the snapshot 1`] = `
   overflow: scroll;
   padding: 30px;
   background-color: rgba(248,251,255,1);
+  color: unset;
 }
 
 .c11 {
@@ -131,6 +132,7 @@ exports[`<QuestionDetails /> should match the snapshot 1`] = `
   width: 100%;
   max-width: 702px;
   margin-bottom: 10px;
+  color: unset;
 }
 
 .c11:hover {
@@ -154,6 +156,7 @@ exports[`<QuestionDetails /> should match the snapshot 1`] = `
   -ms-flex-align: center;
   align-items: center;
   gap: 15px;
+  color: unset;
 }
 
 .c14 {
@@ -161,6 +164,7 @@ exports[`<QuestionDetails /> should match the snapshot 1`] = `
   height: auto;
   display: block;
   border-radius: 5px;
+  color: unset;
 }
 
 .c18 {
@@ -170,6 +174,7 @@ exports[`<QuestionDetails /> should match the snapshot 1`] = `
   border-radius: 5px;
   padding: 16px;
   width: 100%;
+  color: unset;
 }
 
 .c18:hover {
@@ -187,6 +192,7 @@ exports[`<QuestionDetails /> should match the snapshot 1`] = `
   padding-right: 21px;
   padding-left: 21px;
   border: 1px solid #ABBBD1;
+  color: unset;
 }
 
 .c27 {
@@ -197,6 +203,7 @@ exports[`<QuestionDetails /> should match the snapshot 1`] = `
   margin-top: 20px;
   margin-bottom: 20px;
   margin-left: 26px;
+  color: unset;
 }
 
 .c2 {

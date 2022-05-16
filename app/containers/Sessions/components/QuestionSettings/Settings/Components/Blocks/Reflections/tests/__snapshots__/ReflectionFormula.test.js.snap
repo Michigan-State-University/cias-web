@@ -63,6 +63,7 @@ exports[`<ReflectionBlock /> Should render and match the snapshot 1`] = `
   border-radius: 5px;
   min-width: 60px;
   margin-left: 10px;
+  color: unset;
 }
 
 .c6 {
@@ -73,6 +74,7 @@ exports[`<ReflectionBlock /> Should render and match the snapshot 1`] = `
   margin-right: 10px;
   margin-left: 10px;
   background-color: rgba(233,241,251,1);
+  color: unset;
 }
 
 .c13 {
@@ -81,6 +83,7 @@ exports[`<ReflectionBlock /> Should render and match the snapshot 1`] = `
   display: block;
   border-radius: 5px;
   position: relative;
+  color: unset;
 }
 
 .c14 {
@@ -91,6 +94,7 @@ exports[`<ReflectionBlock /> Should render and match the snapshot 1`] = `
   width: 100%;
   margin-top: 15px;
   background-color: rgba(233,241,251,1);
+  color: unset;
 }
 
 .c16 {
@@ -101,6 +105,7 @@ exports[`<ReflectionBlock /> Should render and match the snapshot 1`] = `
   position: absolute;
   right: 10px;
   bottom: 10px;
+  color: unset;
 }
 
 .c1 {

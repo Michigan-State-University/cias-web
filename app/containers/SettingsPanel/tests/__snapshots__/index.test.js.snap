@@ -231,6 +231,7 @@ exports[`<SettingsPanel /> Should render and match the snapshot 1`] = `
   height: auto;
   display: block;
   border-radius: 5px;
+  color: unset;
 }
 
 .c4 {
@@ -239,6 +240,7 @@ exports[`<SettingsPanel /> Should render and match the snapshot 1`] = `
   display: block;
   border-radius: 5px;
   margin-bottom: 25px;
+  color: unset;
 }
 
 .c5 {
@@ -258,6 +260,7 @@ exports[`<SettingsPanel /> Should render and match the snapshot 1`] = `
   -webkit-box-align: center;
   -ms-flex-align: center;
   align-items: center;
+  color: unset;
 }
 
 .c7 {
@@ -270,6 +273,7 @@ exports[`<SettingsPanel /> Should render and match the snapshot 1`] = `
   display: -ms-flexbox;
   display: flex;
   margin-left: 8px;
+  color: unset;
 }
 
 .c19 {
@@ -278,6 +282,7 @@ exports[`<SettingsPanel /> Should render and match the snapshot 1`] = `
   display: block;
   border-radius: 5px;
   margin-top: 40px;
+  color: unset;
 }
 
 .c21 {
@@ -293,6 +298,7 @@ exports[`<SettingsPanel /> Should render and match the snapshot 1`] = `
   padding-left: 30px;
   background-color: rgba(248,251,255,1);
   border: 1px solid #E9F1FB;
+  color: unset;
 }
 
 .c23 {
@@ -302,6 +308,7 @@ exports[`<SettingsPanel /> Should render and match the snapshot 1`] = `
   border-radius: 5px;
   margin-top: 40px;
   margin-bottom: 25px;
+  color: unset;
 }
 
 .c24 {
@@ -321,6 +328,7 @@ exports[`<SettingsPanel /> Should render and match the snapshot 1`] = `
   -ms-flex-align: center;
   align-items: center;
   gap: 15px;
+  color: unset;
 }
 
 .c25 {
@@ -331,6 +339,8 @@ exports[`<SettingsPanel /> Should render and match the snapshot 1`] = `
   cursor: pointer;
   border-radius: 10px;
   border-radius: 10px;
+  color: unset;
+  cursor: pointer;
 }
 
 .c25:hover {
@@ -345,6 +355,7 @@ exports[`<SettingsPanel /> Should render and match the snapshot 1`] = `
   padding: 35px;
   margin-top: 30px;
   margin-bottom: 30px;
+  color: unset;
 }
 
 .c33 {
@@ -358,6 +369,7 @@ exports[`<SettingsPanel /> Should render and match the snapshot 1`] = `
   z-index: 1;
   background-color: rgba(255,255,255,1);
   opacity: 0.5;
+  color: unset;
 }
 
 .c36 {

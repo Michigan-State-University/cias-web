@@ -45,7 +45,7 @@ UserAvatar.propTypes = {
 };
 
 UserAvatar.defaultProps = {
-  backgroundColor: colors.surfieGreen,
+  backgroundColor: colors.jungleGreen,
 };
 
 export default memo(UserAvatar);

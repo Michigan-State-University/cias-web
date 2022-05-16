@@ -292,6 +292,7 @@ exports[`<Profile /> Should render and match the snapshot 1`] = `
   margin-top: 20px;
   background-color: rgba(255,255,255,1);
   box-shadow: 0px 4px 20px #E3EEFB;
+  color: unset;
 }
 
 .c9 {
@@ -302,6 +303,7 @@ exports[`<Profile /> Should render and match the snapshot 1`] = `
   height: -webkit-fit-content;
   height: -moz-fit-content;
   height: fit-content;
+  color: unset;
 }
 
 .c23 {
@@ -309,6 +311,7 @@ exports[`<Profile /> Should render and match the snapshot 1`] = `
   height: auto;
   display: block;
   border-radius: 5px;
+  color: unset;
 }
 
 .c1 {

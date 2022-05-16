@@ -66,6 +66,7 @@ exports[`<Sidebar /> Should render and match the snapshot with session path 1`] 
   display: block;
   border-radius: 5px;
   overflow: auto;
+  color: unset;
 }
 
 .c1 {
@@ -323,6 +324,7 @@ exports[`<Sidebar /> Should render and match the snapshot without matching path 
   display: block;
   border-radius: 5px;
   overflow: auto;
+  color: unset;
 }
 
 .c1 {

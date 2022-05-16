@@ -6,6 +6,7 @@ exports[`<QuestionSettings /> Should render and match the snapshot 1`] = `
   height: auto;
   display: block;
   border-radius: 5px;
+  color: unset;
 }
 
 .c2 {
@@ -14,6 +15,7 @@ exports[`<QuestionSettings /> Should render and match the snapshot 1`] = `
   display: block;
   border-radius: 5px;
   height: 100%;
+  color: unset;
 }
 
 .c4 {
@@ -24,6 +26,7 @@ exports[`<QuestionSettings /> Should render and match the snapshot 1`] = `
   padding: 16px;
   width: 400px;
   height: 100%;
+  color: unset;
 }
 
 .c6 {

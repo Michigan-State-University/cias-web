@@ -53,6 +53,7 @@ exports[`<Switch /> should match the snapshot 1`] = `
   height: auto;
   display: block;
   border-radius: 5px;
+  color: unset;
 }
 
 .c8 {

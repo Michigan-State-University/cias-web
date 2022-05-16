@@ -80,6 +80,7 @@ exports[`<UrlQuestion /> Should render and match the snapshot 1`] = `
   padding-right: 21px;
   padding-left: 21px;
   background-color: rgba(233,241,251,1);
+  color: unset;
 }
 
 .c6 {
@@ -91,6 +92,7 @@ exports[`<UrlQuestion /> Should render and match the snapshot 1`] = `
   display: -webkit-flex;
   display: -ms-flexbox;
   display: flex;
+  color: unset;
 }
 
 .c7 {
@@ -98,6 +100,7 @@ exports[`<UrlQuestion /> Should render and match the snapshot 1`] = `
   height: auto;
   display: block;
   border-radius: 5px;
+  color: unset;
 }
 
 .c8 {
@@ -108,6 +111,7 @@ exports[`<UrlQuestion /> Should render and match the snapshot 1`] = `
   width: 100%;
   margin-top: 5px;
   margin-bottom: 5px;
+  color: unset;
 }
 
 @media only screen and (min-width:768px) {

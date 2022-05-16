@@ -32,6 +32,7 @@ exports[`<InterventionPage /> Should render and match the snapshot with interven
   border-radius: 10px;
   box-shadow: 0px 0px 50px rgba(0,0,0,0.08);
   border-radius: 10px;
+  color: unset;
 }
 
 .c22 {
@@ -43,6 +44,7 @@ exports[`<InterventionPage /> Should render and match the snapshot with interven
   -webkit-flex-grow: 1;
   -ms-flex-positive: 1;
   flex-grow: 1;
+  color: unset;
 }
 
 .c6 {
@@ -610,6 +612,7 @@ exports[`<InterventionPage /> Should render and match the snapshot with loader 1
   border-radius: 10px;
   box-shadow: 0px 0px 50px rgba(0,0,0,0.08);
   border-radius: 10px;
+  color: unset;
 }
 
 .c22 {
@@ -621,6 +624,7 @@ exports[`<InterventionPage /> Should render and match the snapshot with loader 1
   -webkit-flex-grow: 1;
   -ms-flex-positive: 1;
   flex-grow: 1;
+  color: unset;
 }
 
 .c6 {
@@ -1188,6 +1192,7 @@ exports[`<InterventionPage /> Should render and match the snapshot without inter
   border-radius: 10px;
   box-shadow: 0px 0px 50px rgba(0,0,0,0.08);
   border-radius: 10px;
+  color: unset;
 }
 
 .c22 {
@@ -1199,6 +1204,7 @@ exports[`<InterventionPage /> Should render and match the snapshot without inter
   -webkit-flex-grow: 1;
   -ms-flex-positive: 1;
   flex-grow: 1;
+  color: unset;
 }
 
 .c6 {

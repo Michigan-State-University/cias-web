@@ -17,6 +17,7 @@ exports[`<TeamsList /> Should render and match the snapshot 1`] = `
   -ms-flex-pack: center;
   justify-content: center;
   justify-items: center;
+  color: unset;
 }
 
 .c1 {
@@ -28,6 +29,7 @@ exports[`<TeamsList /> Should render and match the snapshot 1`] = `
   padding-right: 10%;
   padding-left: 10%;
   margin-top: 64px;
+  color: unset;
 }
 
 .c2 {
@@ -40,6 +42,7 @@ exports[`<TeamsList /> Should render and match the snapshot 1`] = `
   display: -ms-flexbox;
   display: flex;
   margin-bottom: 30px;
+  color: unset;
 }
 
 .c22 {
@@ -68,6 +71,7 @@ exports[`<TeamsList /> Should render and match the snapshot 1`] = `
   -webkit-box-align: center;
   -ms-flex-align: center;
   align-items: center;
+  color: unset;
 }
 
 .c16 {

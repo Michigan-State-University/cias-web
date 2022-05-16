@@ -144,6 +144,7 @@ exports[`<InviteResearcher /> Should display invalid email error 1`] = `
   align-items: center;
   left: 0px;
   top: 0px;
+  color: unset;
 }
 
 .c1 {
@@ -161,6 +162,7 @@ exports[`<InviteResearcher /> Should display invalid email error 1`] = `
   padding-right: 20px;
   padding-left: 20px;
   background-color: rgba(255,255,255,1);
+  color: unset;
 }
 
 .c8 {
@@ -172,6 +174,7 @@ exports[`<InviteResearcher /> Should display invalid email error 1`] = `
   margin-top: 10px;
   border-radius: 0px;
   border-radius: 0px;
+  color: unset;
 }
 
 .c5 {
@@ -615,6 +618,7 @@ exports[`<InviteResearcher /> Should display server error 1`] = `
   align-items: center;
   left: 0px;
   top: 0px;
+  color: unset;
 }
 
 .c1 {
@@ -632,6 +636,7 @@ exports[`<InviteResearcher /> Should display server error 1`] = `
   padding-right: 20px;
   padding-left: 20px;
   background-color: rgba(255,255,255,1);
+  color: unset;
 }
 
 .c8 {
@@ -643,6 +648,7 @@ exports[`<InviteResearcher /> Should display server error 1`] = `
   margin-top: 10px;
   border-radius: 0px;
   border-radius: 0px;
+  color: unset;
 }
 
 .c5 {
@@ -1079,6 +1085,7 @@ exports[`<InviteResearcher /> Should render and match the snapshot 1`] = `
   align-items: center;
   left: 0px;
   top: 0px;
+  color: unset;
 }
 
 .c1 {
@@ -1096,6 +1103,7 @@ exports[`<InviteResearcher /> Should render and match the snapshot 1`] = `
   padding-right: 20px;
   padding-left: 20px;
   background-color: rgba(255,255,255,1);
+  color: unset;
 }
 
 .c8 {
@@ -1107,6 +1115,7 @@ exports[`<InviteResearcher /> Should render and match the snapshot 1`] = `
   margin-top: 10px;
   border-radius: 0px;
   border-radius: 0px;
+  color: unset;
 }
 
 .c5 {

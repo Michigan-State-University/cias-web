@@ -154,6 +154,7 @@ Object {
   border-radius: 5px;
   max-width: 150px;
   margin-left: 5px;
+  color: unset;
 }
 
 .c10 {
@@ -163,6 +164,7 @@ Object {
   border-radius: 5px;
   width: 100%;
   display: inline;
+  color: unset;
 }
 
 .c11 {
@@ -170,6 +172,7 @@ Object {
   height: auto;
   display: block;
   border-radius: 5px;
+  color: unset;
 }
 
 .c13 {
@@ -179,6 +182,7 @@ Object {
   border-radius: 5px;
   max-height: 300px;
   overflow: scroll;
+  color: unset;
 }
 
 .c15 {
@@ -190,6 +194,7 @@ Object {
   -webkit-flex-grow: 1;
   -ms-flex-positive: 1;
   flex-grow: 1;
+  color: unset;
 }
 
 .c5 {
@@ -566,6 +571,7 @@ Object {
   border-radius: 5px;
   max-width: 150px;
   margin-left: 5px;
+  color: unset;
 }
 
 .c10 {
@@ -575,6 +581,7 @@ Object {
   border-radius: 5px;
   width: 100%;
   display: inline;
+  color: unset;
 }
 
 .c11 {
@@ -582,6 +589,7 @@ Object {
   height: auto;
   display: block;
   border-radius: 5px;
+  color: unset;
 }
 
 .c13 {
@@ -591,6 +599,7 @@ Object {
   border-radius: 5px;
   max-height: 300px;
   overflow: scroll;
+  color: unset;
 }
 
 .c15 {
@@ -602,6 +611,7 @@ Object {
   -webkit-flex-grow: 1;
   -ms-flex-positive: 1;
   flex-grow: 1;
+  color: unset;
 }
 
 .c5 {
