@@ -23,7 +23,7 @@ import { colors, themeColors } from 'theme';
 import FileShareIcon from 'assets/svg/file-share.svg';
 import CopyIcon from 'assets/svg/copy.svg';
 import ArchiveIcon from 'assets/svg/archive.svg';
-import PencilIcon from 'assets/svg/pencil-solid.svg';
+import GearIcon from 'assets/svg/gear-wo-background.svg';
 import AddAppIcon from 'assets/svg/app-add.svg';
 import TranslateIcon from 'assets/svg/translate.svg';
 import DocumentIcon from 'assets/svg/document.svg';
@@ -147,7 +147,6 @@ export function InterventionDetailsPage({
     sharedTo,
     organizationId,
     userId: interventionOwnerId,
-    languageName,
     googleLanguageId,
     isAccessRevoked,
     catMhPool,
@@ -472,7 +471,9 @@ export function InterventionDetailsPage({
           onClose={() => setInterventionSettingsModalVisible(false)}
           visible={interventionSettingsModalVisible}
         >
-          <InterventionSettingsModal />
+          <InterventionSettingsModal
+            onClose={() => setInterventionSettingsModalVisible(false)}
+          />
         </Modal>
 
         <Modal
@@ -525,7 +526,7 @@ export function InterventionDetailsPage({
                   text={formatMessage(messages.interventionSettingsIconTooltip)}
                 >
                   <Icon
-                    src={PencilIcon}
+                    src={GearIcon}
                     fill={colors.grey}
                     onClick={() => setInterventionSettingsModalVisible(true)}
                     role="button"
@@ -536,9 +537,7 @@ export function InterventionDetailsPage({
                   />
                 </Tooltip>
                 <Markup
-                  content={formatMessage(messages.interventionLanguage, {
-                    language: languageName,
-                  })}
+                  content={formatMessage(messages.interventionSettings)}
                 />
               </Row>
 

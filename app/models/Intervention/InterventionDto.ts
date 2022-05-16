@@ -53,6 +53,7 @@ export interface InterventionDto {
   licenseType: CatMhLicenseType;
   type: InterventionType;
   emails?: InterventionInvite[];
+  quickExit: boolean;
 }
 
 export interface FileInfo {
