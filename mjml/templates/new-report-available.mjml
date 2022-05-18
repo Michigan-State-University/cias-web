@@ -1,0 +1,9 @@
+<mjml>
+  <mj-head>
+    <app-header />
+  </mj-head>
+  <mj-body>
+    <app-layout header="New reports in the system are ready for you" mainText="You have {NUMBER_OF_GENERATED_REPORTS} new report(s) available for download in your dashboard. Click the link below to visit your dashboard." buttonText="Visit Dashboard" buttonUrl="{BUTTON_URL}" ignoreEmail="true">
+    </app-layout>
+    <mj-body>
+</mjml>
