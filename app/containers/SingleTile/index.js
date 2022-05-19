@@ -235,7 +235,6 @@ const SingleTile = ({
       <Modal onClose={closeTranslateModal} visible={translateModalVisible}>
         <TranslateInterventionModal
           id={id}
-          name={name}
           googleLanguageId={googleLanguageId}
           onTranslated={closeTranslateModal}
         />
