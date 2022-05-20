@@ -111,5 +111,5 @@ export const toggleTextTranscriptAction = () =>
 export const setTransitionalUserSessionId = (userSessionId) =>
   actionBuilder(SET_TRANSITIONAL_USER_SESSION_ID, { userSessionId });
 
-export const saveQuickExitEventRequest = () =>
-  actionBuilder(SAVE_QUICK_EXIT_EVENT_REQUEST, {});
+export const saveQuickExitEventRequest = (userSessionId, isPreview) =>
+  actionBuilder(SAVE_QUICK_EXIT_EVENT_REQUEST, { userSessionId, isPreview });

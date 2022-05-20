@@ -25,7 +25,6 @@ import { elements, themeColors } from 'theme';
 import AudioWrapper from 'utils/audioWrapper';
 import isNullOrUndefined from 'utils/isNullOrUndefined';
 import { DESKTOP_MODE, I_PHONE_8_PLUS_MODE } from 'utils/previewMode';
-import LocalStorageService from 'utils/localStorageService';
 import { makeSelectAudioInstance } from 'global/reducers/globalState';
 import {
   fetchInterventionRequest,
@@ -238,6 +237,7 @@ export function AnswerSessionPage({
   }, [containerQueryParams, isDesktop]);
 
   const {
+    id: userSessionId,
     logoUrl,
     imageAlt,
     languageCode,
@@ -275,7 +275,7 @@ export function AnswerSessionPage({
   }, []);
 
   useEffect(() => {
-    if (userSession) nextQuestion(userSession.id, index);
+    if (userSession) nextQuestion(userSessionId, index);
   }, [userSession]);
 
   if (questionError) {
@@ -297,7 +297,7 @@ export function AnswerSessionPage({
       get(currentQuestion, 'settings.required', false),
       get(currentQuestion, 'type', ''),
       sessionId,
-      userSession.id,
+      userSessionId,
       skipped,
     );
 
@@ -496,8 +496,7 @@ export function AnswerSessionPage({
     setTransitionalUserSessionId(null);
 
   const beforeQuickExit = () => {
-    saveQuickExitEvent();
-    LocalStorageService.clearUserData();
+    saveQuickExitEvent(userSessionId, isPreview);
   };
 
   if (nextQuestionLoading && interventionStarted) return <Loader />;
@@ -542,7 +541,7 @@ export function AnswerSessionPage({
               </H2>
               <StyledButton
                 loading={nextQuestionLoading}
-                onClick={() => nextQuestion(userSession.id)}
+                onClick={() => nextQuestion(userSessionId)}
                 title={formatMessage(messages.refetchQuestion)}
                 isDesktop={isDesktop}
               />

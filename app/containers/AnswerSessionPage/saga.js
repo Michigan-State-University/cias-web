@@ -15,6 +15,7 @@ import objectToSnakeCase from 'utils/objectToSnakeCase';
 import { makeSelectLocation } from 'containers/App/selectors';
 import { resetPhoneNumberPreview } from 'global/reducers/auth/actions';
 import { jsonApiToObject } from 'utils/jsonApiMapper';
+import objectToCamelKebabCase from 'utils/objectToCamelKebabCase';
 
 import {
   SUBMIT_ANSWER_REQUEST,
@@ -185,8 +186,22 @@ function* resetPreviewUrl(sessionId) {
   else yield put(createUserSessionRequest(sessionId));
 }
 
-function* saveQuickExitEvent() {
-  // TODO https://htdevelopers.atlassian.net/browse/CIAS30-2395 IMPLEMENT
+function* saveQuickExitEvent({ payload: { userSessionId, isPreview } }) {
+  const requestUrl = `/v1/user_sessions/${userSessionId}/quick_exit`;
+
+  const headers = objectToCamelKebabCase(
+    isPreview
+      ? LocalStorageService.getGuestHeaders()
+      : LocalStorageService.getHeaders(),
+  );
+
+  if (!isPreview) {
+    LocalStorageService.clearUserData();
+  }
+
+  yield axios.patch(requestUrl, undefined, {
+    headers,
+  });
 }
 
 // Individual exports for testing
