@@ -28,6 +28,7 @@ import {
   SET_CURRENT_BLOCK_INDEX,
   TOGGLE_TEXT_TRANSCRIPT,
   SET_TRANSITIONAL_USER_SESSION_ID,
+  SAVE_QUICK_EXIT_EVENT_REQUEST,
 } from './constants';
 
 export const selectAnswer = (payload) => actionBuilder(SELECT_ANSWER, payload);
@@ -109,3 +110,6 @@ export const toggleTextTranscriptAction = () =>
 
 export const setTransitionalUserSessionId = (userSessionId) =>
   actionBuilder(SET_TRANSITIONAL_USER_SESSION_ID, { userSessionId });
+
+export const saveQuickExitEventRequest = () =>
+  actionBuilder(SAVE_QUICK_EXIT_EVENT_REQUEST, {});

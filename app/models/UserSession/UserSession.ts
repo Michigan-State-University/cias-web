@@ -16,6 +16,7 @@ export interface UserSession {
   sessionId: String;
   type: UserSessionTypes;
   scheduledAt: Nullable<string>;
+  quickExitEnabled: boolean;
 }
 
 export type UserSessionDTO = CamelToSnakeOmitId<UserSession>;

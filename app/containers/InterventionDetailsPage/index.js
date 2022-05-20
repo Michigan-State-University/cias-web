@@ -471,6 +471,7 @@ export function InterventionDetailsPage({
           visible={interventionSettingsModalVisible}
         >
           <InterventionSettingsModal
+            editingPossible={editingPossible}
             onClose={() => setInterventionSettingsModalVisible(false)}
           />
         </Modal>

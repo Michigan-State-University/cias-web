@@ -24,7 +24,8 @@ import { elements, themeColors } from 'theme';
 
 import AudioWrapper from 'utils/audioWrapper';
 import isNullOrUndefined from 'utils/isNullOrUndefined';
-import { DESKTOP_MODE } from 'utils/previewMode';
+import { DESKTOP_MODE, I_PHONE_8_PLUS_MODE } from 'utils/previewMode';
+import LocalStorageService from 'utils/localStorageService';
 import { makeSelectAudioInstance } from 'global/reducers/globalState';
 import {
   fetchInterventionRequest,
@@ -59,6 +60,7 @@ import H3 from 'components/H3';
 import Icon from 'components/Icon';
 import { ConfirmationModal } from 'components/Modal';
 import Img from 'components/Img';
+import QuickExit from 'components/QuickExit';
 
 import renderQuestionByType from './components';
 import CharacterAnim from './components/CharacterAnim';
@@ -85,6 +87,7 @@ import {
   clearError,
   toggleTextTranscriptAction,
   setTransitionalUserSessionId as setTransitionalUserSessionIdAction,
+  saveQuickExitEventRequest,
 } from './actions';
 import BranchingScreen from './components/BranchingScreen';
 import { NOT_SKIPABLE_QUESTIONS } from './constants';
@@ -145,6 +148,7 @@ AnimationRefHelper.propTypes = {
 
 const IS_DESKTOP = 'IS_DESKTOP';
 const IS_XXL = 'IS_XXL';
+const IS_MD_AND_UP = 'IS_MD_AND_UP';
 
 const QUERY = {
   [IS_DESKTOP]: {
@@ -152,6 +156,9 @@ const QUERY = {
   },
   [IS_XXL]: {
     minWidth: containerBreakpoints.xxl,
+  },
+  [IS_MD_AND_UP]: {
+    minWidth: containerBreakpoints.md,
   },
 };
 
@@ -188,6 +195,7 @@ export function AnswerSessionPage({
   clearErrors,
   toggleTextTranscript,
   setTransitionalUserSessionId,
+  saveQuickExitEvent,
 }) {
   const { formatMessage } = useIntl();
 
@@ -215,8 +223,11 @@ export function AnswerSessionPage({
   const checkIfDesktop = (containerQuery) =>
     isPreview ? previewMode === DESKTOP_MODE && containerQuery : containerQuery;
 
-  const isDesktop = useMemo(
-    () => checkIfDesktop(containerQueryParams[IS_DESKTOP]),
+  const { isDesktop, isMediumAndUp } = useMemo(
+    () => ({
+      isDesktop: checkIfDesktop(containerQueryParams[IS_DESKTOP]),
+      isMediumAndUp: checkIfDesktop(containerQueryParams[IS_MD_AND_UP]),
+    }),
     [previewMode, containerQueryParams, isPreview],
   );
 
@@ -231,6 +242,7 @@ export function AnswerSessionPage({
     imageAlt,
     languageCode,
     type: userSessionType,
+    quickExitEnabled,
   } = userSession ?? {};
 
   const isNewUserSession = useMemo(() => {
@@ -291,7 +303,7 @@ export function AnswerSessionPage({
 
   const renderQuestionTranscript = (isRightSide) => {
     const renderTranscriptComponent = ({ maxWidth, height }) => (
-      <Box mt={30} maxWidth={maxWidth} height={height}>
+      <Box mt={isRightSide ? 120 : 30} maxWidth={maxWidth} height={height}>
         <QuestionTranscript
           question={currentQuestion}
           language={languageCode}
@@ -483,6 +495,11 @@ export function AnswerSessionPage({
   const resetTransitionalUserSessionId = () =>
     setTransitionalUserSessionId(null);
 
+  const beforeQuickExit = () => {
+    saveQuickExitEvent();
+    LocalStorageService.clearUserData();
+  };
+
   if (nextQuestionLoading && interventionStarted) return <Loader />;
 
   return (
@@ -505,6 +522,14 @@ export function AnswerSessionPage({
         <Helmet>
           <title>{formatMessage(messages.pageTitle, { isPreview })}</title>
         </Helmet>
+
+        {quickExitEnabled && (
+          <QuickExit
+            isMediumAndUp={isMediumAndUp}
+            isMobilePreview={isPreview && previewMode === I_PHONE_8_PLUS_MODE}
+            beforeQuickExit={beforeQuickExit}
+          />
+        )}
 
         <AnswerOuterContainer
           previewMode={isPreview ? previewMode : DESKTOP_MODE}
@@ -612,6 +637,7 @@ AnswerSessionPage.propTypes = {
   clearErrors: PropTypes.func,
   toggleTextTranscript: PropTypes.func,
   setTransitionalUserSessionId: PropTypes.func,
+  saveQuickExitEvent: PropTypes.func,
 };
 
 const mapStateToProps = createStructuredSelector({
@@ -632,6 +658,7 @@ const mapDispatchToProps = {
   clearErrors: clearError,
   toggleTextTranscript: toggleTextTranscriptAction,
   setTransitionalUserSessionId: setTransitionalUserSessionIdAction,
+  saveQuickExitEvent: saveQuickExitEventRequest,
 };
 
 const withConnect = connect(mapStateToProps, mapDispatchToProps);

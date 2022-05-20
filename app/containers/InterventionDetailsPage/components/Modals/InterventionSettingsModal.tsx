@@ -34,10 +34,11 @@ import {
 } from './constants';
 
 export type Props = {
+  editingPossible: boolean;
   onClose: () => void;
 };
 
-const InterventionSettingsModal = ({ onClose }: Props) => {
+const InterventionSettingsModal = ({ editingPossible, onClose }: Props) => {
   const { formatMessage } = useIntl();
 
   const dispatch = useDispatch();
@@ -130,6 +131,7 @@ const InterventionSettingsModal = ({ onClose }: Props) => {
                 label: languageName,
               },
               'aria-labelledby': INTERVENTION_LANGUAGE_LABEL_ID,
+              isDisabled: !editingPossible,
             }}
             width="100%"
           />
@@ -140,6 +142,7 @@ const InterventionSettingsModal = ({ onClose }: Props) => {
             onToggle={handleQuickExitChange}
             id={INTERVENTION_QUICK_EXIT_LABEL_ID}
             labelPosition={LabelPosition.Right}
+            disabled={!editingPossible}
           >
             <Text fontWeight="bold">
               {formatMessage(messages.interventionSettingsQuickExitLabel)}

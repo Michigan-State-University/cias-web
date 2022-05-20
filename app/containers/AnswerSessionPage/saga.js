@@ -22,6 +22,7 @@ import {
   RESET_SESSION,
   CREATE_USER_SESSION_REQUEST,
   NEXT_QUESTION_REQUEST,
+  SAVE_QUICK_EXIT_EVENT_REQUEST,
 } from './constants';
 import {
   submitAnswerSuccess,
@@ -184,12 +185,17 @@ function* resetPreviewUrl(sessionId) {
   else yield put(createUserSessionRequest(sessionId));
 }
 
+function* saveQuickExitEvent() {
+  // TODO https://htdevelopers.atlassian.net/browse/CIAS30-2395 IMPLEMENT
+}
+
 // Individual exports for testing
 export default function* AnswerSessionPageSaga() {
   yield takeLatest(SUBMIT_ANSWER_REQUEST, submitAnswersAsync);
   yield takeLatest(RESET_SESSION, resetSession);
   yield takeLatest(CREATE_USER_SESSION_REQUEST, createUserSession);
   yield takeLatest(NEXT_QUESTION_REQUEST, nextQuestion);
+  yield takeLatest(SAVE_QUICK_EXIT_EVENT_REQUEST, saveQuickExitEvent);
 }
 
 export function* redirectToPreviewSaga() {
