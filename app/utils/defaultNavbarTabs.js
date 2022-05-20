@@ -13,6 +13,7 @@ export const teamsTabId = 'teams';
 export const myTeamTabId = 'myTeam';
 export const participantInterventionsTabId = 'participantInterventions';
 export const participantReportsTabId = 'reports';
+export const conversationsTabId = 'chat';
 
 const interventionsTab = (message, icon) => ({
   id: interventionsTabId,
@@ -49,23 +50,34 @@ const participantReportsTab = (message, icon) => ({
   icon,
 });
 
+const conversationsTab = (message, icon) => ({
+  id: conversationsTabId,
+  path: '/live-chat',
+  message,
+  icon,
+});
+
 const navigationTabs = {
   [Roles.admin]: [
     interventionsTab(navbarNames.adminInterventions, folder),
     accountsTab(navbarNames.adminAccounts, peopleHR),
     teamsTab(navbarNames.adminTeams, peopleHRCircle),
+    conversationsTab(navbarNames.conversations, folder),
   ],
   [Roles.teamAdmin]: [
     interventionsTab(navbarNames.adminInterventions, folder),
     teamsTab(navbarNames.adminTeams, peopleHRCircle),
+    conversationsTab(navbarNames.conversations, folder),
   ],
   [Roles.researcher]: [
     interventionsTab(navbarNames.researcherInterventions, folder),
     accountsTab(navbarNames.researcherAccounts, peopleHR),
+    conversationsTab(navbarNames.conversations, folder),
   ],
   [Roles.eInterventionAdmin]: [
     interventionsTab(navbarNames.researcherInterventions),
     accountsTab(navbarNames.researcherAccounts),
+    conversationsTab(navbarNames.conversations, folder),
   ],
   [Roles.organizationAdmin]: [],
   [Roles.healthSystemAdmin]: [],
@@ -73,6 +85,7 @@ const navigationTabs = {
   [Roles.participant]: [
     participantInterventionsTab(navbarNames.participantInterventions, folder),
     participantReportsTab(navbarNames.participantReports, fileBarChart),
+    conversationsTab(navbarNames.conversations, folder),
   ],
   [Roles.thirdParty]: [],
   [Roles.guest]: [

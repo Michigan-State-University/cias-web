@@ -1,4 +1,4 @@
-import React, { ReactElement } from 'react';
+import React, { PropsWithChildren } from 'react';
 import { FormattedMessage } from 'react-intl';
 
 import Box from 'components/Box';
@@ -11,18 +11,20 @@ import CheckMark from 'assets/svg/check-green.svg';
 
 import messages from './messages';
 
-type Props = {
+type Props = PropsWithChildren<{
   isMine?: boolean;
   read?: boolean;
   senderName?: string;
-  children?: ReactElement;
-};
+  hideSender?: boolean;
+  [x: string]: any;
+}>;
 
 export const ChatMessage = ({
   isMine,
   read,
   senderName,
   children,
+  hideSender,
   ...style
 }: Props) => (
   <Box
@@ -38,15 +40,17 @@ export const ChatMessage = ({
       direction="column"
       align={isMine ? 'end' : 'start'}
     >
-      <Text
-        textAlign={isMine ? 'right' : 'left'}
-        color={themeColors.text}
-        textOpacity={0.5}
-        margin="0 12px 4px 12px"
-        lineHeight="12px"
-      >
-        {isMine ? <FormattedMessage {...messages.you} /> : senderName}
-      </Text>
+      {!hideSender && (
+        <Text
+          textAlign={isMine ? 'right' : 'left'}
+          color={themeColors.text}
+          textOpacity={0.5}
+          margin="0 12px 4px 12px"
+          lineHeight="12px"
+        >
+          {isMine ? <FormattedMessage {...messages.you} /> : senderName}
+        </Text>
+      )}
       <Box
         bg={isMine ? themeColors.primary : themeColors.highlight}
         padding={12}

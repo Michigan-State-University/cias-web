@@ -59,6 +59,7 @@ import ParticipantInterventionsPage from 'containers/ParticipantInterventionsPag
 import UserInterventionPage from 'containers/UserInterventionPage/Loadable';
 import UserInterventionInvitePage from 'containers/UserInterventionInvitePage/Loadable';
 import SuperadminConsolePage from 'containers/SuperadminConsolePage/Loadable';
+import InboxPage from 'containers/InboxPage/Loadable';
 
 import AppRoute from 'components/AppRoute';
 import IdleTimer from 'components/IdleTimer/Loadable';
@@ -69,6 +70,7 @@ import {
   participantReportsTabId,
   teamsTabId,
   participantInterventionsTabId,
+  conversationsTabId,
 } from 'utils/defaultNavbarTabs';
 
 import { MODAL_PORTAL_ID, TOOLTIP_PORTAL_ID } from './constants';
@@ -175,6 +177,20 @@ export function App({ user, fetchSelfDetails }) {
           sidebarProps={{
             sidebarId: NAVIGATION.DEFAULT,
             activeTab: defaultSidebarId,
+          }}
+        />
+        <AppRoute
+          exact
+          path="/live-chat"
+          component={InboxPage}
+          protectedRoute
+          allowedRoles={Roles.allRoles}
+          navbarProps={{
+            navbarId: NAVIGATION.DEFAULT,
+          }}
+          sidebarProps={{
+            sidebarId: NAVIGATION.DEFAULT,
+            activeTab: conversationsTabId,
           }}
         />
         <AppRoute

@@ -90,8 +90,6 @@ export const SearchInputStyled = styled.div`
   display: flex;
   align-items: center;
   position: relative;
-  display: flex;
-  align-items: center;
   ${layout}
 `;
 

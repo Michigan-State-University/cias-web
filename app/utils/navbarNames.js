@@ -44,6 +44,10 @@ const navbarMessages = defineMessages({
     id: `${scope}.guestInterventions`,
     defaultMessage: 'CIAS',
   },
+  conversations: {
+    id: `${scope}.conversations`,
+    defaultMessage: 'My Conversations',
+  },
 });
 
 const navbarNames = {
@@ -69,6 +73,7 @@ const navbarNames = {
   guestInterventions: (
     <FormattedMessage {...navbarMessages.guestInterventions} />
   ),
+  conversations: <FormattedMessage {...navbarMessages.conversations} />,
 };
 
 export const NAVIGATION = {

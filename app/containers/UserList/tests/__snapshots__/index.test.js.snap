@@ -551,14 +551,6 @@ exports[`<UserList /> Should render and match the snapshot - admin 1`] = `
   -ms-flex-align: center;
   align-items: center;
   position: relative;
-  display: -webkit-box;
-  display: -webkit-flex;
-  display: -ms-flexbox;
-  display: flex;
-  -webkit-align-items: center;
-  -webkit-box-align: center;
-  -ms-flex-align: center;
-  align-items: center;
 }
 
 .c21 {
@@ -1700,14 +1692,6 @@ exports[`<UserList /> Should render and match the snapshot - researcher 1`] = `
   -ms-flex-align: center;
   align-items: center;
   position: relative;
-  display: -webkit-box;
-  display: -webkit-flex;
-  display: -ms-flexbox;
-  display: flex;
-  -webkit-align-items: center;
-  -webkit-box-align: center;
-  -ms-flex-align: center;
-  align-items: center;
 }
 
 .c20 {

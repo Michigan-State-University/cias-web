@@ -329,14 +329,6 @@ exports[`<AnswerSessionPage /> Should render and match the snapshot 1`] = `
   -ms-flex-align: center;
   align-items: center;
   position: relative;
-  display: -webkit-box;
-  display: -webkit-flex;
-  display: -ms-flexbox;
-  display: flex;
-  -webkit-align-items: center;
-  -webkit-box-align: center;
-  -ms-flex-align: center;
-  align-items: center;
 }
 
 .c50 {
@@ -920,6 +912,21 @@ exports[`<AnswerSessionPage /> Should render and match the snapshot 1`] = `
                 font-weight="bold"
               >
                 Manage teams
+              </p>
+            </a>
+            <a
+              class="c21"
+              href="/live-chat"
+            >
+              <img
+                src="IMAGE_MOCK"
+              />
+              <p
+                class="c20"
+                font-size="15"
+                font-weight="bold"
+              >
+                My Conversations
               </p>
             </a>
           </div>

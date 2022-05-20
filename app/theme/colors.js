@@ -72,6 +72,7 @@ const colors = {
   mischka: '#DDE0E6',
   gainsbro: '#DADADA',
   lightStealBlue: '#B3C1E1',
+  beauBlue: '#CFDDEF',
 };
 
 const themeColors = {

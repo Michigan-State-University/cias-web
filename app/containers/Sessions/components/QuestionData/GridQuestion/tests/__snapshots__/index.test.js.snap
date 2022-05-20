@@ -438,6 +438,7 @@ exports[`<GridQuestion /> Should render and match the snapshot 1`] = `
   width: 300px;
   height: auto;
   max-width: initial;
+  cursor: pointer;
   background-color: transparent;
   border: 1px solid transparent;
 }
