@@ -118,7 +118,6 @@ export const LiveChat = ({ conversationId }: Props) => {
                   key={chatMessage.id}
                   isMine={isOwnMessage(chatMessage)}
                   senderName={`${chatMessage.firstName} ${chatMessage.lastName}`}
-                  read
                   hideSender={hideSender}
                   mt={hideSender ? 8 : 16}
                 >
