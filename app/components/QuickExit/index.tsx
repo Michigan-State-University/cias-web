@@ -4,6 +4,7 @@ import { useIntl } from 'react-intl';
 import { themeColors } from 'theme';
 import CrossIcon from 'assets/svg/cross-white-bold.svg';
 import { useIsTouchScreen } from 'utils/useIsTouchScreen';
+import { useTapAndHold } from 'utils/useTapAndHold';
 
 import Text from 'components/Text';
 import Icon from 'components/Icon';
@@ -13,6 +14,9 @@ import { QuickExitButton, QuickExitButtonContainer } from './styled';
 import {
   ESC_DOUBLE_CLICK_INTERVAL_MS,
   QUICK_EXIT_DESTINATION_URL,
+  TAP_AND_HOLD_FINGERS,
+  TAP_AND_HOLD_MOVE_THRESHOLD_PX,
+  TAP_AND_HOLD_TIMEOUT_MS,
 } from './constants';
 
 export type Props = {
@@ -63,6 +67,14 @@ const QuickExit = ({
       document.removeEventListener('keyup', handleEscClick);
     };
   }, [handleEscClick]);
+
+  useTapAndHold(
+    onQuickExit,
+    TAP_AND_HOLD_FINGERS,
+    TAP_AND_HOLD_TIMEOUT_MS,
+    TAP_AND_HOLD_MOVE_THRESHOLD_PX,
+    true,
+  );
 
   const isTouchScreen = useIsTouchScreen();
   const showExitButton = !isMobilePreview && (isMediumAndUp || !isTouchScreen);
