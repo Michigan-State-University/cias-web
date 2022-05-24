@@ -18,7 +18,7 @@ export const InboxPage = () => {
       pageTitle={formatMessage(messages.pageTitle)}
     >
       <Box width="100%" display="flex" justify="center">
-        <LiveChat chatMessages={[]} />
+        <LiveChat conversationId="fb1cc710-bf55-430d-881f-834a4bb820d2" />
       </Box>
     </AppContainer>
   );

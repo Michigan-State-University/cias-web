@@ -21,4 +21,8 @@ export default defineMessages({
     id: `${scope}.inputSendIconTitle`,
     defaultMessage: 'Send message',
   },
+  conversationError: {
+    id: `${scope}.conversationError`,
+    defaultMessage: 'There was a problem with fetching chat messages',
+  },
 });
