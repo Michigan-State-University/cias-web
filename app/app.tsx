@@ -48,7 +48,6 @@ import { translationMessages } from 'i18n';
 import { polyfillI18n } from 'i18nPolyfill';
 
 import 'utils/axios';
-import { ActionCableProvider } from 'components/ActionCable';
 
 smoothscroll.polyfill();
 
@@ -164,12 +163,10 @@ const render = (messages: any) => {
       <LanguageProvider messages={messages}>
         <ConnectedRouter history={history}>
           <ScreenClassProvider>
-            <ActionCableProvider url={`${process.env.API_URL}/cable`}>
-              <Sentry.ErrorBoundary fallback={ErrorPage}>
-                <ToastContainer />
-                <App />
-              </Sentry.ErrorBoundary>
-            </ActionCableProvider>
+            <Sentry.ErrorBoundary fallback={ErrorPage}>
+              <ToastContainer />
+              <App />
+            </Sentry.ErrorBoundary>
           </ScreenClassProvider>
         </ConnectedRouter>
       </LanguageProvider>

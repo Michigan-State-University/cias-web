@@ -63,6 +63,7 @@ import InboxPage from 'containers/InboxPage/Loadable';
 
 import AppRoute from 'components/AppRoute';
 import IdleTimer from 'components/IdleTimer/Loadable';
+import { SocketProvider } from 'components/ActionCable';
 
 import {
   accountsTabId,
@@ -156,7 +157,7 @@ export function App({ user, fetchSelfDetails }) {
   };
 
   return (
-    <>
+    <SocketProvider user={user}>
       <ApiQueryMessageHandler />
       <IdleTimer />
 
@@ -484,7 +485,7 @@ export function App({ user, fetchSelfDetails }) {
         </AppRoute>
       </Switch>
       <GlobalStyle />
-    </>
+    </SocketProvider>
   );
 }
 

@@ -5,10 +5,16 @@ import LiveChat from 'containers/LiveChat';
 import AppContainer from 'components/Container';
 import Box from 'components/Box';
 
+import useSocket from 'utils/useSocket';
+
 import messages from './messages';
 
 export const InboxPage = () => {
   const { formatMessage } = useIntl();
+  const subscription = useSocket('ConversationChannel');
+
+  console.log(subscription);
+
   return (
     <AppContainer
       justify="center"
