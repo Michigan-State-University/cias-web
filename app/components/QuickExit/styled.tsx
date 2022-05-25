@@ -4,10 +4,15 @@ import styled from 'styled-components';
 import { themeColors } from 'theme';
 
 // @ts-ignore
-export const QuickExitButtonContainer = styled.button`
+export const QuickExitPositionWrapper = styled.div`
   position: absolute;
   top: 48px;
   right: 0;
+  z-index: 1001;
+`;
+
+// @ts-ignore
+export const QuickExitButtonContainer = styled.button`
   display: flex;
   flex-direction: column;
   align-items: center;
