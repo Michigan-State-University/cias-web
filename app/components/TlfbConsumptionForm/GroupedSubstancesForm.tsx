@@ -90,6 +90,7 @@ const Component = ({
             bg={colors.lightStealBlue}
             bgOpacity={0.2}
             labelBgOpacity={0}
+            shouldBeOpenOnStart
           >
             <>
               {consumptionsMap[index].map((consumption, substanceIndex) => (

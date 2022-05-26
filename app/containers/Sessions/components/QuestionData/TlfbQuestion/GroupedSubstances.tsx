@@ -133,6 +133,7 @@ export const GroupedSubstances = ({
           disabled={disabled}
           labelBgColor={colors.lightBlue}
           bg={colors.lightBlue}
+          shouldBeOpenOnStart
         >
           <>
             <BoxTable
