@@ -19,14 +19,12 @@ export const SocketContext = createContext<Nullable<Cable>>(null);
 export const SocketProvider = ({ children, user }: Props) => {
   const headers = LocalStorageService.getHeaders();
 
-  const apiHost = process.env.API_URL && new URL(process.env.API_URL).host;
-
   const cable = useRef<Nullable<Cable>>(null);
 
   useEffect(() => {
     if (user) {
       cable.current = createCable(
-        `ws://${apiHost}/cable?access_token=${headers['Access-Token']}&uid=${headers.Uid}&client=${headers.Client}`,
+        `${process.env.WEBSOCKET_URL}?access_token=${headers['Access-Token']}&uid=${headers.Uid}&client=${headers.Client}`,
         { tokenRefresher: fetchTokenFromHTML() },
       );
     } else {
