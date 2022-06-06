@@ -5,8 +5,11 @@ import {
   fetchChatMessageError,
   fetchChatMessagesRequest,
   fetchChatMessagesSuccess,
+  onNewChatMessage,
 } from './actions';
 import { LiveChatAction, LiveChatState } from './types';
+
+export const liveChatReducerKey = 'liveChat';
 
 export const initialState: LiveChatState = {
   conversations: {},
@@ -41,10 +44,15 @@ export const liveChatReducer = (
         const {
           payload: { conversationId },
         } = action;
-        draft.conversations[conversationId] = {
-          ...state.conversations[conversationId],
-          hasError: true,
-        };
+        draft.conversations[conversationId].hasError = true;
+        break;
+      }
+      case getType(onNewChatMessage): {
+        const {
+          payload: { message },
+        } = action;
+        const { conversationId } = message;
+        draft.conversations[conversationId].messages.push(message);
         break;
       }
     }

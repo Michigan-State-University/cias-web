@@ -1,11 +1,12 @@
 import { createSelector } from 'reselect';
 
-import { initialState } from './reducer';
+import { RootState } from 'global/reducers';
+
+import { initialState, liveChatReducerKey } from './reducer';
 import { LiveChatState } from './types';
 
-const selectLiveChatState = (rootState: {
-  liveChat: LiveChatState;
-}): LiveChatState => rootState.liveChat || initialState;
+const selectLiveChatState = (rootState: RootState): LiveChatState =>
+  rootState[liveChatReducerKey] || initialState;
 
 export const makeSelectSingleConversationState = (conversationId: string) =>
   createSelector(

@@ -32,6 +32,12 @@ export const SocketProvider = ({ children, user }: Props) => {
     } else {
       cable.current = null;
     }
+
+    return () => {
+      if (cable.current) {
+        cable.current.disconnect();
+      }
+    };
   }, [user]);
 
   return (

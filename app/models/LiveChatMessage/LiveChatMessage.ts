@@ -6,3 +6,9 @@ export type LiveChatMessage = {
   lastName: string;
   userId: string;
 };
+
+export type SendLiveChatMessageDTO = {
+  conversationId: string;
+  senderId: string;
+  content: string;
+};

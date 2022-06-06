@@ -1,16 +1,13 @@
 import React, { useState, useEffect } from 'react';
 import { FormattedMessage } from 'react-intl';
 import { useDispatch, useSelector } from 'react-redux';
-import { useInjectReducer, useInjectSaga } from 'redux-injectors';
 
 import { colors, themeColors } from 'theme';
 
 import {
   fetchChatMessagesRequest,
-  liveChatReducer,
   makeSelectSingleConversationState,
 } from 'global/reducers/liveChat';
-import allLiveChatSagas from 'global/reducers/liveChat/sagas';
 import { makeSelectUserId } from 'global/reducers/auth';
 import { LiveChatMessage } from 'models/LiveChatMessage';
 
@@ -28,14 +25,16 @@ const CHAT_WIDTH = 426;
 
 type Props = {
   conversationId: string;
+  onSendMessage: (
+    content: string,
+    conversationId: string,
+    senderId: string,
+  ) => void;
 };
 
-export const LiveChat = ({ conversationId }: Props) => {
+export const LiveChat = ({ conversationId, onSendMessage }: Props) => {
   const dispatch = useDispatch();
   const [message, setMessage] = useState('');
-  useInjectSaga({ key: 'allLiveChatSagas', saga: allLiveChatSagas });
-  // @ts-ignore
-  useInjectReducer({ key: 'liveChat', reducer: liveChatReducer });
 
   const conversationState = useSelector(
     makeSelectSingleConversationState(conversationId),
@@ -133,7 +132,7 @@ export const LiveChat = ({ conversationId }: Props) => {
             onChange={setMessage}
             onSend={() => {
               if (message.trim()) {
-                console.log(`Message: "${message.trim()}" sent!`);
+                onSendMessage(message.trim(), conversationId, currentUserId);
                 setMessage('');
               }
             }}
