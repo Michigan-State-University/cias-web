@@ -3,7 +3,8 @@ import { useIntl } from 'react-intl';
 import { Markup } from 'interweave';
 
 import CrossIcon from 'assets/svg/cross-white-bold.svg';
-import GestureIcon from 'assets/svg/tap-and-hold-gesture.svg';
+import GestureIcon1 from 'assets/svg/two-fingers-tap-gesture-1.svg';
+import GestureIcon2 from 'assets/svg/two-fingers-tap-gesture-2.svg';
 import { useIsTouchScreen } from 'utils/useIsTouchScreen';
 import { useTapAndHold } from 'utils/useTapAndHold';
 
@@ -15,6 +16,8 @@ import { Button } from 'components/Button';
 import Modal, { PopoverModal } from 'components/Modal';
 import H1 from 'components/H1';
 import Column from 'components/Column';
+import Row from 'components/Row';
+import Divider from 'components/Divider';
 import { ANSWER_SESSION_PAGE_ID } from 'containers/App/constants';
 
 import messages from './messages';
@@ -185,13 +188,30 @@ const QuickExit = ({
           </PopoverModal>
         </>
       )}
-      <Modal visible={gestureOnboarding} minWidth={366} maxWidth={366}>
+      <Modal
+        visible={gestureOnboarding}
+        minWidth={366}
+        maxWidth={366}
+        py={32}
+        px={24}
+      >
         <Column align="center">
-          {/* @ts-ignore */}
-          <Icon
-            src={GestureIcon}
-            alt={formatMessage(messages.gestureOnboardingIconAlt)}
-          />
+          <Row align="center" gap={24}>
+            {/* @ts-ignore */}
+            <Icon
+              src={GestureIcon1}
+              alt={formatMessage(messages.gestureOnboardingIcon1Alt)}
+            />
+            <Text fontSize={16} fontWeight="medium">
+              {formatMessage(messages.or)}
+            </Text>
+            {/* @ts-ignore */}
+            <Icon
+              src={GestureIcon2}
+              alt={formatMessage(messages.gestureOnboardingIcon2Alt)}
+            />
+          </Row>
+          <Divider mt={32} />
           <H1 mt={32}>{formatMessage(messages.onboardingTitle)}</H1>
           <Markup
             content={formatMessage(messages.gestureOnboardingText)}

@@ -31,14 +31,22 @@ export default defineMessages({
   },
   gestureOnboardingText: {
     id: `${scope}.gestureOnboardingText`,
-    defaultMessage: `In case of a dangerous situation, you can quickly close the intervention <b>by two-finger long press (1s)</b> anywhere on the screen. Additionally, we recommend you complete Interventions in Incognito mode to not save your browsing history.`,
+    defaultMessage: `If needed, you can leave this site quickly with a <b>two-finger long press (1 second) anywhere on the screen.</b> You will be redirected to a Google search page.`,
   },
-  gestureOnboardingIconAlt: {
-    id: `${scope}.gestureOnboardingIconAlt`,
-    defaultMessage: `Tap and hold two fingers icon`,
+  gestureOnboardingIcon1Alt: {
+    id: `${scope}.gestureOnboardingIcon1Alt`,
+    defaultMessage: `Tap and hold two thumbs on the screen illustration`,
+  },
+  gestureOnboardingIcon2Alt: {
+    id: `${scope}.gestureOnboardingIcon2Alt`,
+    defaultMessage: `Tap and hold index and middle finger illustration`,
   },
   onboardingCloseButtonText: {
     id: `${scope}.onboardingCloseButtonText`,
     defaultMessage: `I understand`,
+  },
+  or: {
+    id: `${scope}.or`,
+    defaultMessage: `OR`,
   },
 });
