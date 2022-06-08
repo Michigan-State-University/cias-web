@@ -148,7 +148,6 @@ AnimationRefHelper.propTypes = {
 
 const IS_DESKTOP = 'IS_DESKTOP';
 const IS_XXL = 'IS_XXL';
-const IS_MD_AND_UP = 'IS_MD_AND_UP';
 
 const QUERY = {
   [IS_DESKTOP]: {
@@ -156,9 +155,6 @@ const QUERY = {
   },
   [IS_XXL]: {
     minWidth: containerBreakpoints.xxl,
-  },
-  [IS_MD_AND_UP]: {
-    minWidth: containerBreakpoints.md,
   },
 };
 
@@ -223,10 +219,9 @@ export function AnswerSessionPage({
   const checkIfDesktop = (containerQuery) =>
     isPreview ? previewMode === DESKTOP_MODE && containerQuery : containerQuery;
 
-  const { isDesktop, isMediumAndUp } = useMemo(
+  const { isDesktop } = useMemo(
     () => ({
       isDesktop: checkIfDesktop(containerQueryParams[IS_DESKTOP]),
-      isMediumAndUp: checkIfDesktop(containerQueryParams[IS_MD_AND_UP]),
     }),
     [previewMode, containerQueryParams, isPreview],
   );
@@ -273,7 +268,7 @@ export function AnswerSessionPage({
     createUserSession(sessionId);
 
     return clearErrors;
-  }, []);
+  }, [sessionId]);
 
   useEffect(() => {
     if (userSession) nextQuestion(userSessionId, index);
@@ -506,7 +501,6 @@ export function AnswerSessionPage({
     <Column height="100%" ref={pageRef} id={ANSWER_SESSION_PAGE_ID}>
       {quickExitEnabled && (
         <QuickExit
-          isMediumAndUp={isMediumAndUp}
           isMobilePreview={isPreview && previewMode === I_PHONE_8_PLUS_MODE}
           beforeQuickExit={beforeQuickExit}
         />

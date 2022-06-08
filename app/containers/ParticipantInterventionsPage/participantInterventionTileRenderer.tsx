@@ -57,7 +57,7 @@ const ParticipantInterventionTileRenderer = ({ data, index }: Props) => {
   ].includes(statusWithBlocked);
 
   return (
-    <GhostLink disabled={tileDisabled} href={`/user_interventions/${id}`}>
+    <GhostLink disabled={tileDisabled} to={`/user_interventions/${id}`}>
       <TileContainer bg={tileDisabled ? colors.mischka : colors.white}>
         <Box display="flex" justify="between" align="center">
           <Box px={12} py={8} bg={statusColor} borderRadius={5}>

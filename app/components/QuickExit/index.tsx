@@ -1,6 +1,7 @@
-import React, { useCallback, useEffect, useState } from 'react';
+import React, { useCallback, useEffect, useMemo, useState } from 'react';
 import { useIntl } from 'react-intl';
 import { Markup } from 'interweave';
+import { useScreenClass } from 'react-grid-system';
 
 import CrossIcon from 'assets/svg/cross-white-bold.svg';
 import GestureIcon1 from 'assets/svg/two-fingers-tap-gesture-1.svg';
@@ -36,17 +37,18 @@ import {
 } from './constants';
 
 export type Props = {
-  isMediumAndUp: boolean;
-  isMobilePreview: boolean;
+  isMobilePreview?: boolean;
   beforeQuickExit?: () => void;
 };
 
-const QuickExit = ({
-  isMediumAndUp,
-  isMobilePreview,
-  beforeQuickExit,
-}: Props) => {
+const QuickExit = ({ isMobilePreview, beforeQuickExit }: Props) => {
   const { formatMessage } = useIntl();
+
+  const screenClass = useScreenClass();
+  const isMediumAndUp = useMemo(
+    () => !['xs', 'sm'].includes(screenClass),
+    [screenClass],
+  );
 
   const onQuickExit = useCallback(() => {
     if (beforeQuickExit) beforeQuickExit();

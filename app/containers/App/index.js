@@ -267,6 +267,7 @@ export function App({ user, fetchSelfDetails }) {
             navbarId: NAVIGATION.DEFAULT,
             activeTab: interventionsTabId,
           }}
+          disableQuickExit
         />
         <AppRoute
           exact
@@ -388,6 +389,7 @@ export function App({ user, fetchSelfDetails }) {
             navbarId: NAVIGATION.PREVIEW,
             navbarName: navbarNames.preview,
           }}
+          disableQuickExit
         />
         <AppRoute
           key="previewFromCurrent"
@@ -401,6 +403,7 @@ export function App({ user, fetchSelfDetails }) {
             navbarId: NAVIGATION.PREVIEW,
             navbarName: navbarNames.preview,
           }}
+          disableQuickExit
         />
         <AppRoute
           exact
