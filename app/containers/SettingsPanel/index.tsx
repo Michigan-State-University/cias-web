@@ -5,7 +5,6 @@
  */
 
 import React, { useReducer, useEffect, useCallback, useMemo } from 'react';
-import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { compose } from 'redux';
 import { createStructuredSelector } from 'reselect';
@@ -26,7 +25,12 @@ import {
   deleteAttachmentRequest,
 } from 'global/reducers/intervention';
 import { canChangeAccessSettings } from 'models/Status/statusPermissions';
-import { InterventionType } from 'models/Intervention/InterventionDto';
+import {
+  InterventionType,
+  Intervention,
+  FileInfo,
+  InterventionSharedTo,
+} from 'models/Intervention';
 
 import Column from 'components/Column';
 import ErrorAlert from 'components/ErrorAlert';
@@ -42,16 +46,47 @@ import ApprovableInput from 'components/Input/ApprovableInput';
 import { selectQuillText } from 'components/Input/utils';
 import HoverableBox from 'components/Box/HoverableBox';
 
+import Switch from 'components/Switch';
 import LogoUpload from './containers/LogoUpload';
 import AccessGiver from './containers/AccessGiver';
 import InterventionAccessDescription from './Components/InterventionAccessDescription';
 import InterventionRadioPanel from './Components/InterventionRadioPanel';
 
 import { reducer, UPDATE } from './reducer';
-import { interventionTypesOption, shareOptions, SHARE_IDS } from './utils';
+import { interventionTypesOption, shareOptions } from './utils';
 import { interventionSettingPageSaga } from './sagas';
 import messages from './messages';
 import { StyledBox } from './styled';
+import { OptionType } from './types';
+
+interface Props {
+  intervention: Intervention;
+  updateIntervention: (interventionData: Partial<Intervention>) => void;
+  addLogo: (interventionId: string, logoData: string, logoUrl?: string) => void;
+  deleteLogo: (interventionId: string) => void;
+  updateLogo: (interventionId: string, description: string) => void;
+  interventionState: {
+    loaders: {
+      fetchInterventionLoading: boolean;
+      enableAccessLoading: boolean;
+      fetchUserAccessLoading: boolean;
+      logoLoading: boolean;
+      addAttachmentsLoading: boolean;
+    };
+    errors: {
+      fetchInterventionError: string;
+      fetchUserAccessError: string;
+    };
+  };
+  addInterventionAttachments: (
+    interventionId: string,
+    attachments: File[],
+  ) => void;
+  deleteInterventionAttachment: (
+    interventionId: string,
+    fileId: string,
+  ) => void;
+}
 
 const SettingsPanel = ({
   intervention,
@@ -71,10 +106,10 @@ const SettingsPanel = ({
   },
   addInterventionAttachments,
   deleteInterventionAttachment,
-}) => {
+}: Props) => {
   const { formatMessage } = useIntl();
 
-  const [state, dispatch] = useReducer(reducer, {});
+  const [state, dispatch] = useReducer(reducer, null);
 
   const {
     sharedTo,
@@ -92,29 +127,33 @@ const SettingsPanel = ({
   const isModuleIntervention =
     type === InterventionType.FIXED || type === InterventionType.FLEXIBLE;
 
-  const updateAccessSettings = (newSetting) =>
+  const updateAccessSettings = (newSetting: InterventionSharedTo) =>
     updateIntervention({ id: interventionId, sharedTo: newSetting });
 
-  const updateAdditionalText = (text) =>
+  const updateAdditionalText = (text: string) =>
     updateIntervention({ id: interventionId, additionalText: text });
 
-  const deleteFile = (fileInfo) =>
-    deleteInterventionAttachment(intervention.id, fileInfo.id);
+  const deleteFile = (fileInfo: FileInfo) =>
+    deleteInterventionAttachment(interventionId, fileInfo.id);
 
-  const updateType = (newType) => {
+  const updateType = (newType: InterventionType) => {
     if (
       type === InterventionType.DEFAULT &&
       newType !== InterventionType.DEFAULT &&
-      sharedTo === SHARE_IDS.anyoneWithTheLink
+      sharedTo === InterventionSharedTo.ANYONE
     ) {
       updateIntervention({
         id: interventionId,
         type: newType,
-        sharedTo: SHARE_IDS.anyoneWhoIsARegisteredParticipant,
+        sharedTo: InterventionSharedTo.REGISTERED,
       });
     } else {
       updateIntervention({ id: interventionId, type: newType });
     }
+  };
+
+  const updateNaviagtorSetting = (isChatEnabled: boolean) => {
+    updateIntervention({ id: interventionId, liveChatEnabled: isChatEnabled });
   };
 
   const onAddLogo = useCallback(
@@ -135,8 +174,8 @@ const SettingsPanel = ({
     [interventionId],
   );
 
-  const onFilesUpload = (attachments) => {
-    addInterventionAttachments(intervention.id, attachments);
+  const onFilesUpload = (attachments: File[]) => {
+    addInterventionAttachments(interventionId, attachments);
   };
 
   useEffect(() => {
@@ -153,21 +192,33 @@ const SettingsPanel = ({
     [type],
   );
 
-  const dispatchUpdate = (newState) => {
+  const dispatchUpdate = (newState: Nullable<OptionType>) => {
     dispatch({
       type: UPDATE,
-      newState: newState || currentOption,
+      newState: newState || currentOption || null,
     });
   };
 
+  // @ts-ignore
   if (fetchInterventionLoading) return <Loader />;
   if (fetchInterventionError)
+    // @ts-ignore
     return <ErrorAlert errorText={fetchInterventionError} />;
 
   return (
     <Column>
       <StyledBox>
         <Column width="100%" padding={35}>
+          <Box display="flex" align="center" mb={48}>
+            <H2 mr={24}>
+              <FormattedMessage {...messages.useNavigator} />
+            </H2>
+            <Switch
+              onToggle={updateNaviagtorSetting}
+              checked={!!intervention?.liveChatEnabled}
+              id="use-navigator-switch"
+            />
+          </Box>
           <InterventionRadioPanel
             radioPanelTitle={
               <FormattedMessage {...messages.interventionType} />
@@ -175,7 +226,7 @@ const SettingsPanel = ({
             radioOptions={interventionTypesOption}
             disabled={!changingAccessSettingsPossible}
             selectedValue={type}
-            updateSetting={updateType}
+            updateSetting={(value) => updateType(value as InterventionType)}
             nameTooltip={
               <>
                 <H3>
@@ -204,11 +255,13 @@ const SettingsPanel = ({
             radioOptions={shareOptions}
             disabled={!changingAccessSettingsPossible}
             selectedValue={sharedTo}
-            updateSetting={updateAccessSettings}
+            updateSetting={(value) =>
+              updateAccessSettings(value as InterventionSharedTo)
+            }
             disabledOptions={disabledOptions}
           />
           {state && <InterventionAccessDescription state={state} />}
-          {currentOption.id === SHARE_IDS.onlyInvitedRegisteredParticipant && (
+          {currentOption?.id === InterventionSharedTo.INVITED && (
             <AccessGiver
               usersWithAccess={usersWithAccess}
               intervention={intervention}
@@ -222,7 +275,7 @@ const SettingsPanel = ({
               <Box mt={40} mb={25}>
                 <OriginalTextHover
                   id="original-additional-text"
-                  text={originalText?.additionalText}
+                  text={originalText?.additionalText || ''}
                 >
                   <H2 id="additional-text">
                     <FormattedMessage {...messages.additionalText} />
@@ -250,6 +303,7 @@ const SettingsPanel = ({
             <>
               <FileList files={files || []} handleDelete={deleteFile} />
               <Divider mt={15} mr={15} />
+              {/* @ts-ignore */}
               <UploadFileButton
                 icon={AddIcon}
                 onUpload={onFilesUpload}
@@ -276,23 +330,6 @@ const SettingsPanel = ({
       </StyledBox>
     </Column>
   );
-};
-
-SettingsPanel.propTypes = {
-  intervention: PropTypes.object,
-  updateIntervention: PropTypes.func,
-  addLogo: PropTypes.func,
-  deleteLogo: PropTypes.func,
-  updateLogo: PropTypes.func,
-  interventionState: PropTypes.shape({
-    loaders: PropTypes.object,
-    errors: PropTypes.shape({
-      fetchInterventionError: PropTypes.string,
-      fetchUserAccessError: PropTypes.string,
-    }),
-  }),
-  addInterventionAttachments: PropTypes.func,
-  deleteInterventionAttachment: PropTypes.func,
 };
 
 const mapStateToProps = createStructuredSelector({

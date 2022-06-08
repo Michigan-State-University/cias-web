@@ -2,20 +2,15 @@ import React from 'react';
 import { FormattedMessage } from 'react-intl';
 import { Markup } from 'interweave';
 
+import { InterventionSharedTo, InterventionType } from 'models/Intervention';
 import { formatMessage } from 'utils/intlOutsideReact';
 
-import { InterventionType } from 'models/Intervention/InterventionDto';
 import messages from './messages';
+import { OptionType } from './types';
 
-export const SHARE_IDS = {
-  anyoneWithTheLink: 'anyone',
-  anyoneWhoIsARegisteredParticipant: 'registered',
-  onlyInvitedRegisteredParticipant: 'invited',
-};
-
-export const shareOptions = [
+export const shareOptions: OptionType[] = [
   {
-    id: SHARE_IDS.anyoneWithTheLink,
+    id: InterventionSharedTo.ANYONE,
     label: <FormattedMessage {...messages.anyoneWithTheLinkLabel} />,
     sublabel: (
       <Markup
@@ -25,7 +20,7 @@ export const shareOptions = [
     ),
   },
   {
-    id: SHARE_IDS.anyoneWhoIsARegisteredParticipant,
+    id: InterventionSharedTo.REGISTERED,
     label: (
       <FormattedMessage {...messages.anyoneWhoIsARegisteredParticipantLabel} />
     ),
@@ -39,7 +34,7 @@ export const shareOptions = [
     ),
   },
   {
-    id: SHARE_IDS.onlyInvitedRegisteredParticipant,
+    id: InterventionSharedTo.INVITED,
     label: (
       <FormattedMessage {...messages.onlyInvitedRegisteredParticipantsLabel} />
     ),

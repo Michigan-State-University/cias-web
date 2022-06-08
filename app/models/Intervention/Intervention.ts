@@ -7,7 +7,7 @@ export enum InterventionStatus {
   ARCHIVED = 'archived',
 }
 
-enum InterventionSharedTo {
+export enum InterventionSharedTo {
   ANYONE = 'anyone',
   REGISTERED = 'registered',
   INVITED = 'invited',
@@ -24,7 +24,13 @@ export enum CatMhLicenseType {
   UNLIMITED = 'unlimited',
 }
 
-export interface InterventionDto {
+type UserWithAccess = {
+  id: string;
+  email: string;
+  loading?: boolean;
+};
+
+export interface Intervention {
   createdAt: string;
   csvGeneratedAt: Nullable<string>;
   csvLink: Nullable<string>;
@@ -53,6 +59,11 @@ export interface InterventionDto {
   licenseType: CatMhLicenseType;
   type: InterventionType;
   emails?: InterventionInvite[];
+  additionalText: Nullable<string>;
+  originalText: Nullable<{ additionalText: string }>;
+  usersWithAccess: Nullable<UserWithAccess[]>;
+  files: FileInfo[];
+  liveChatEnabled?: boolean;
 }
 
 export interface FileInfo {

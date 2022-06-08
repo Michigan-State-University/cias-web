@@ -21,7 +21,7 @@ import { makeSelectInterventionType } from 'global/reducers/intervention/selecto
 
 import { canEdit } from 'models/Status/statusPermissions';
 import { finishQuestion } from 'models/Session/QuestionTypes';
-import { InterventionType } from 'models/Intervention/InterventionDto';
+import { InterventionType } from 'models/Intervention';
 
 import Column from 'components/Column';
 import Tabs from 'components/Tabs';

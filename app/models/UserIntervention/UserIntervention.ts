@@ -1,6 +1,5 @@
 import { CamelToSnakeOmitId } from 'global/types/camelToSnake';
-import { InterventionType } from 'models/Intervention/InterventionDto';
-import { FileInfo } from 'models/Intervention';
+import { InterventionType, FileInfo } from 'models/Intervention';
 import { Session } from 'models/Session/Session';
 import { UserSession } from 'models/UserSession/UserSession';
 import { UserInterventionStatus } from './StatusTypes';

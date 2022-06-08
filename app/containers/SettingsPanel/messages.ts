@@ -143,4 +143,8 @@ export default defineMessages({
     defaultMessage:
       'If you have any thoughts for participants, please type it here',
   },
+  useNavigator: {
+    id: `${scope}.useNavigator`,
+    defaultMessage: 'Use Navigator',
+  },
 });

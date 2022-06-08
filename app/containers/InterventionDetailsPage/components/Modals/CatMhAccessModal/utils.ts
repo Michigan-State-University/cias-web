@@ -1,9 +1,9 @@
-import { InterventionDto } from 'models/Intervention';
+import { Intervention } from 'models/Intervention';
 
 import { ModalUIData } from './types';
 
 export const mapInterventionToModalData = (
-  intervention: InterventionDto,
+  intervention: Intervention,
 ): ModalUIData => {
   const {
     catMhPool,
@@ -26,7 +26,7 @@ export const mapInterventionToModalData = (
 
 export const mapModalDataToIntervention = (
   modalData: ModalUIData,
-): Partial<InterventionDto> => {
+): Partial<Intervention> => {
   const {
     testNumber,
     licenseType,

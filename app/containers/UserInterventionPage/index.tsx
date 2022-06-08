@@ -13,7 +13,7 @@ import {
 } from 'models/UserIntervention/UserIntervention';
 import { Session } from 'models/Session/Session';
 import { UserSession } from 'models/UserSession/UserSession';
-import { FileInfo } from 'models/Intervention/InterventionDto';
+import { FileInfo, InterventionType } from 'models/Intervention';
 
 import { themeColors } from 'theme';
 
@@ -30,7 +30,6 @@ import Img from 'components/Img';
 import { Row, Col } from 'components/ReactGridSystem';
 import { FileDisplayItem } from 'components/FileDisplayItem';
 
-import { InterventionType } from 'models/Intervention';
 import messages from './messages';
 import UserSessionTile from './UserSessionTile';
 import { parseUserIntervention } from './utils';

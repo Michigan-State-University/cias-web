@@ -8,8 +8,7 @@ import {
   makeSelectIntervention,
 } from 'global/reducers/intervention';
 
-import { InterventionDto } from 'models/Intervention/InterventionDto';
-import { InterventionInvite } from 'models/Intervention';
+import { Intervention, InterventionInvite } from 'models/Intervention';
 import useGet from 'utils/useGet';
 import { jsonApiToArray } from 'utils/jsonApiMapper';
 
@@ -34,7 +33,7 @@ const Component = ({ organizationId }: Props) => {
   const dispatch = useDispatch();
 
   // selectors
-  const intervention = useSelector<unknown, InterventionDto>(
+  const intervention = useSelector<unknown, Intervention>(
     makeSelectIntervention(),
   );
   const sendLoading = useSelector<unknown, boolean>(
