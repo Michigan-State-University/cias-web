@@ -2,9 +2,11 @@ import React from 'react';
 import { useIntl } from 'react-intl';
 
 import Box from 'components/Box';
+import Row from 'components/Row';
 import { ImageButton } from 'components/Button';
+import Text from 'components/Text';
 
-import { boxShadows, colors, borders } from 'theme';
+import { themeColors } from 'theme';
 
 import AirplaneIcon from 'assets/svg/paper-airplane2.svg';
 
@@ -15,10 +17,15 @@ type Props = {
   value: string;
   onChange: (value: string) => void;
   onSend?: () => void;
+  error?: string;
 };
 
-export const MessageInput = ({ value, onChange, onSend }: Props) => {
+export const MessageInput = ({ value, onChange, onSend, error }: Props) => {
   const { formatMessage } = useIntl();
+
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    onChange(e.target.value);
+  };
 
   const handleKeyDown = (event: React.KeyboardEvent) => {
     if (onSend && value.trim() && event.key === 'Enter') {
@@ -28,33 +35,37 @@ export const MessageInput = ({ value, onChange, onSend }: Props) => {
   };
 
   return (
-    <Box width="100%" height="46px" position="relative">
-      <StyledTextArea
-        width="100%"
-        height="100%"
-        placeholder={formatMessage(messages.inputPlaceholder)}
-        borderRadius="8px"
-        shadow={`${boxShadows.selago} !important`}
-        border={`${borders.borderWidth} ${borders.borderStyle} ${colors.beauBlue}`}
-        onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
-          onChange(e.target.value)
-        }
-        value={value}
-        onKeyDown={onSend && handleKeyDown}
-      />
-      <Box
-        position="absolute"
-        top="50%"
-        right="3px"
-        transform="translate(-50%, -50%)"
-      >
-        <ImageButton
-          onClick={onSend}
-          src={AirplaneIcon}
-          title={formatMessage(messages.inputSendIconTitle)}
+    <>
+      <Box width="100%" height="46px" position="relative">
+        <StyledTextArea
+          placeholder={formatMessage(messages.inputPlaceholder)}
+          onChange={handleChange}
+          value={value}
+          onKeyDown={onSend && handleKeyDown}
+          error={Boolean(error)}
         />
+        <Box
+          position="absolute"
+          top="50%"
+          right="3px"
+          transform="translate(-50%, -50%)"
+        >
+          <ImageButton
+            onClick={onSend}
+            src={AirplaneIcon}
+            title={formatMessage(messages.inputSendIconTitle)}
+            disabled={Boolean(error)}
+          />
+        </Box>
       </Box>
-    </Box>
+      <Row height="24px" align="center">
+        {error && (
+          <Text fontSize={13} color={themeColors.warning}>
+            {error}
+          </Text>
+        )}
+      </Row>
+    </>
   );
 };
 

@@ -1,5 +1,5 @@
-import React, { useState, useEffect } from 'react';
-import { FormattedMessage } from 'react-intl';
+import React, { useState, useEffect, useMemo } from 'react';
+import { FormattedMessage, useIntl } from 'react-intl';
 import { useDispatch, useSelector } from 'react-redux';
 
 import { colors, themeColors } from 'theme';
@@ -19,9 +19,7 @@ import ErrorAlert from 'components/ErrorAlert';
 import MessageInput from './components/MessageInput';
 
 import messages from './messages';
-
-const HEADER_HEIGHT = 72;
-const CHAT_WIDTH = 426;
+import { CHAT_WIDTH, HEADER_HEIGHT, MESSAGE_MAX_LENGTH } from './constants';
 
 type Props = {
   conversationId: string;
@@ -33,6 +31,7 @@ type Props = {
 };
 
 export const LiveChat = ({ conversationId, onSendMessage }: Props) => {
+  const { formatMessage } = useIntl();
   const dispatch = useDispatch();
   const [message, setMessage] = useState('');
 
@@ -44,6 +43,13 @@ export const LiveChat = ({ conversationId, onSendMessage }: Props) => {
   useEffect(() => {
     dispatch(fetchChatMessagesRequest(conversationId));
   }, []);
+
+  const error = useMemo(() => {
+    if (message.length > MESSAGE_MAX_LENGTH)
+      return formatMessage(messages.messageTooLong, {
+        maxLength: MESSAGE_MAX_LENGTH,
+      });
+  }, [message]);
 
   if (!conversationState) {
     return <Spinner />;
@@ -61,6 +67,13 @@ export const LiveChat = ({ conversationId, onSendMessage }: Props) => {
       return prevMessage.userId === currentMessage.userId;
     }
     return false;
+  };
+
+  const handleSend = () => {
+    if (!error && message.trim()) {
+      onSendMessage(message.trim(), conversationId, currentUserId);
+      setMessage('');
+    }
   };
 
   return (
@@ -126,16 +139,12 @@ export const LiveChat = ({ conversationId, onSendMessage }: Props) => {
             })}
           </Box>
         </Box>
-        <Box padding={24} pt={0}>
+        <Box px={24}>
           <MessageInput
             value={message}
             onChange={setMessage}
-            onSend={() => {
-              if (message.trim()) {
-                onSendMessage(message.trim(), conversationId, currentUserId);
-                setMessage('');
-              }
-            }}
+            onSend={handleSend}
+            error={error}
           />
         </Box>
       </Box>

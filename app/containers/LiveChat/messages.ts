@@ -25,4 +25,8 @@ export default defineMessages({
     id: `${scope}.conversationError`,
     defaultMessage: 'There was a problem with fetching chat messages',
   },
+  messageTooLong: {
+    id: `${scope}.messageTooLong`,
+    defaultMessage: 'The maximum length for message is {maxLength} characters',
+  },
 });
