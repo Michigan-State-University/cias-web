@@ -21,6 +21,7 @@ const flex = (props) => ({
   alignSelf: propsToCssMapper[props.alignSelf] || '',
   gap: props.gap || '',
   flex: props.flex || '',
+  flexShrink: props.flexShrink ?? '',
 });
 
 flex.propTypes = {
@@ -46,6 +47,7 @@ flex.propTypes = {
   alignSelf: PropTypes.oneOf(['start', 'end', 'center']),
   gap: PropTypes.number,
   flex: PropTypes.number,
+  flexShrink: PropTypes.number,
 };
 
 export { flex };

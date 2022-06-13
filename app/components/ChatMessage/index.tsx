@@ -13,7 +13,7 @@ import messages from './messages';
 
 type Props = PropsWithChildren<{
   isMine?: boolean;
-  read?: boolean;
+  markRead?: boolean;
   senderName?: string;
   hideSender?: boolean;
   [x: string]: any;
@@ -21,7 +21,7 @@ type Props = PropsWithChildren<{
 
 export const ChatMessage = ({
   isMine,
-  read,
+  markRead,
   senderName,
   children,
   hideSender,
@@ -58,10 +58,11 @@ export const ChatMessage = ({
         fontSize="13px"
         lineHeight="18px"
         color={isMine ? colors.white : themeColors.text}
+        textAlign="left"
       >
         {children}
       </Box>
-      {read && isMine && (
+      {markRead && (
         <Box
           margin="8px 12px 0 12px"
           display="flex"

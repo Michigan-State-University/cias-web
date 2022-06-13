@@ -2,27 +2,31 @@ import axios from 'axios';
 import { put, call, takeLatest } from 'redux-saga/effects';
 
 import { jsonApiToArray } from 'utils/jsonApiMapper';
-import { LiveChatMessage } from 'models/LiveChatMessage';
+import { Message } from 'models/LiveChat';
+import { ApiData, ApiError } from 'models/Api';
 
-import { FETCH_CHAT_MESSAGES_REQUEST } from '../constants';
+import { FETCH_CONVERSATION_MESSAGES_REQUEST } from '../constants';
 import {
-  fetchChatMessagesRequest,
-  fetchChatMessagesSuccess,
-  fetchChatMessageError,
+  fetchConversationMessagesRequest,
+  fetchConversationMessagesSuccess,
+  fetchConversationMessagesError,
 } from '../actions';
 
-export function* fetchChatMessages({
+function* fetchChatMessages({
   payload: { conversationId },
-}: ReturnType<typeof fetchChatMessagesRequest>) {
+}: ReturnType<typeof fetchConversationMessagesRequest>) {
   const url = `/v1/live_chat/conversations/${conversationId}/messages`;
   try {
-    const { data } = yield call(axios.get, url);
-    const messages: LiveChatMessage[] = jsonApiToArray(data, 'message');
-    yield put(fetchChatMessagesSuccess(conversationId, messages));
+    const { data }: ApiData<Message> = yield call(axios.get, url);
+    const messages: Message[] = jsonApiToArray(data, 'message');
+    yield put(fetchConversationMessagesSuccess(conversationId, messages));
   } catch (error) {
-    yield put(fetchChatMessageError(conversationId));
+    yield put(
+      fetchConversationMessagesError(conversationId, error as ApiError),
+    );
   }
 }
-export default function* fetchChatMessagesSaga() {
-  yield takeLatest(FETCH_CHAT_MESSAGES_REQUEST, fetchChatMessages);
+
+export function* fetchChatMessagesSaga() {
+  yield takeLatest(FETCH_CONVERSATION_MESSAGES_REQUEST, fetchChatMessages);
 }

@@ -1,10 +1,12 @@
 import { all } from 'redux-saga/effects';
-import fetchChatMessagesSaga from './fetchChatMessages';
 
-export { fetchChatMessagesSaga };
+import { fetchChatMessagesSaga } from './fetchChatMessages';
+import { fetchConversationsSaga } from './fetchConversations';
+
+export { fetchChatMessagesSaga, fetchConversationsSaga };
 
 export const allLiveChatSagasKey = 'allLiveChatSagas';
 
-export default function* allLiveChatSagas() {
-  yield all([fetchChatMessagesSaga()]);
+export function* allLiveChatSagas() {
+  yield all([fetchChatMessagesSaga(), fetchConversationsSaga()]);
 }

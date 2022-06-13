@@ -2,31 +2,36 @@ import { useCallback, useContext, useEffect, useMemo, useState } from 'react';
 import { Channel } from '@anycable/web';
 
 import { SocketContext } from 'components/ActionCable';
-import {
-  LISTEN_SOCKET_MESSAGE_EVENT_NAME,
-  SENT_SOCKET_MESSAGE_EVENT_NAME,
-} from './constants';
+import { LISTEN_SOCKET_MESSAGE_EVENT_NAME } from './constants';
+import { SocketAction, SocketMessage } from './types';
 
-export const useSocket = <TChannel extends Channel>(channelName: string) => {
+export const useSocket = <
+  TMessage extends SocketMessage<string, object>,
+  TAction extends SocketAction<string, object>,
+>(
+  channelName: string,
+) => {
+  type TChannel = Channel<{}, TMessage>;
+
   const cable = useContext(SocketContext);
-  const [channel, setChannel] = useState<TChannel>();
+  const [channel, setChannel] = useState<TChannel | null>();
 
-  const subscribeToChannel = async () => {
-    if (cable) {
-      setChannel((await cable.subscribeTo(channelName)) as TChannel);
+  const subscribe = useCallback(async () => {
+    if (!channel && cable) {
+      setChannel(await cable.subscribeTo(channelName));
     }
-  };
+  }, [channel, cable]);
+
+  const unsubscribe = useCallback(() => {
+    if (channel) {
+      channel.disconnect();
+    }
+  }, [channel]);
 
   useEffect(() => {
-    if (!channel && cable) {
-      subscribeToChannel();
-    }
-    return () => {
-      if (channel) {
-        channel.disconnect();
-      }
-    };
-  }, [cable, channel]);
+    subscribe();
+    return unsubscribe;
+  }, [subscribe, unsubscribe]);
 
   const listen = useCallback(
     (callback: TChannel['receive']) => {
@@ -36,12 +41,10 @@ export const useSocket = <TChannel extends Channel>(channelName: string) => {
     [channel],
   );
 
-  const sent = useCallback(
-    // type same as incoming messages
-    // TODO remove union with object when BE implements incoming messages format
-    (data: Required<Parameters<TChannel['receive']>[0]> | object) => {
+  const perform = useCallback(
+    ({ name, data }: TAction) => {
       if (!channel) return;
-      return channel.perform(SENT_SOCKET_MESSAGE_EVENT_NAME, data);
+      return channel.perform(name, data);
     },
     [channel],
   );
@@ -51,9 +54,9 @@ export const useSocket = <TChannel extends Channel>(channelName: string) => {
 
     return {
       listen,
-      sent,
+      perform,
     };
-  }, [listen, sent]);
+  }, [listen, perform]);
 };
 
 export default useSocket;

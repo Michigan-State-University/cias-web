@@ -9,9 +9,13 @@ import { defineMessages } from 'react-intl';
 export const scope = 'app.components.LiveChat';
 
 export default defineMessages({
-  header: {
-    id: `${scope}.header`,
+  message: {
+    id: `${scope}.message`,
     defaultMessage: 'Message',
+  },
+  inbox: {
+    id: `${scope}.inbox`,
+    defaultMessage: 'Inbox',
   },
   inputPlaceholder: {
     id: `${scope}.inputPlaceholder`,
@@ -21,12 +25,24 @@ export default defineMessages({
     id: `${scope}.inputSendIconTitle`,
     defaultMessage: 'Send message',
   },
-  conversationError: {
-    id: `${scope}.conversationError`,
+  messagesError: {
+    id: `${scope}.messagesError`,
     defaultMessage: 'There was a problem with fetching chat messages',
+  },
+  conversationsError: {
+    id: `${scope}.conversationsError`,
+    defaultMessage: 'There was a problem with fetching chat conversations',
   },
   messageTooLong: {
     id: `${scope}.messageTooLong`,
     defaultMessage: 'The maximum length for message is {maxLength} characters',
+  },
+  startConversation: {
+    id: `${scope}.startConversation`,
+    defaultMessage: 'Start or open a conversation',
+  },
+  you: {
+    id: `${scope}.you`,
+    defaultMessage: 'You: ',
   },
 });

@@ -10,8 +10,8 @@ import { themeColors } from 'theme';
 
 import AirplaneIcon from 'assets/svg/paper-airplane2.svg';
 
-import { StyledTextArea } from './styled';
 import messages from '../messages';
+import { StyledTextArea } from './styled';
 
 type Props = {
   value: string;
@@ -35,7 +35,7 @@ export const MessageInput = ({ value, onChange, onSend, error }: Props) => {
   };
 
   return (
-    <>
+    <Box>
       <Box width="100%" height="46px" position="relative">
         <StyledTextArea
           placeholder={formatMessage(messages.inputPlaceholder)}
@@ -65,7 +65,7 @@ export const MessageInput = ({ value, onChange, onSend, error }: Props) => {
           </Text>
         )}
       </Row>
-    </>
+    </Box>
   );
 };
 

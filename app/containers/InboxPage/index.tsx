@@ -3,19 +3,19 @@ import { useIntl } from 'react-intl';
 import { useDispatch } from 'react-redux';
 import { useInjectReducer, useInjectSaga } from 'redux-injectors';
 
-import {
-  LiveChatMessage,
-  SendLiveChatMessageDTO,
-} from 'models/LiveChatMessage';
-import { onNewChatMessage } from 'global/reducers/liveChat/actions';
-import allLiveChatSagas, {
-  allLiveChatSagasKey,
-} from 'global/reducers/liveChat/sagas';
-import { liveChatReducer, liveChatReducerKey } from 'global/reducers/liveChat';
+import { Message, MessageReadDTO, NewMessageDTO } from 'models/LiveChat';
 
-import LiveChat from 'containers/LiveChat';
+import {
+  allLiveChatSagasKey,
+  allLiveChatSagas,
+  liveChatReducer,
+  liveChatReducerKey,
+  onMessageSentReceive,
+  onMessageReadReceive,
+} from 'global/reducers/liveChat';
+
+import LiveChatNavigatorPanel from 'containers/LiveChatNavigatorPanel';
 import AppContainer from 'components/Container';
-import Box from 'components/Box';
 
 import { useSocket } from 'utils/useSocket';
 import { jsonApiToObject } from 'utils/jsonApiMapper';
@@ -23,9 +23,10 @@ import { jsonApiToObject } from 'utils/jsonApiMapper';
 import messages from './messages';
 import {
   CONVERSATION_CHANNEL_NAME,
-  ConversationChannelTopic,
+  ConversationChannelActionName,
+  ConversationChannelMessageTopic,
 } from './constants';
-import { ConversationChannel } from './types';
+import { ConversationChannelMessage, ConversationChannelAction } from './types';
 
 export const InboxPage = () => {
   const { formatMessage } = useIntl();
@@ -35,17 +36,41 @@ export const InboxPage = () => {
   // @ts-ignore
   useInjectReducer({ key: liveChatReducerKey, reducer: liveChatReducer });
 
-  const onNewMessage = (message: LiveChatMessage) => {
-    dispatch(onNewChatMessage(message));
+  const channel = useSocket<
+    ConversationChannelMessage,
+    ConversationChannelAction
+  >(CONVERSATION_CHANNEL_NAME);
+
+  const onMessageSent = (newMessage: Message) => {
+    dispatch(onMessageSentReceive(newMessage));
   };
 
-  const channel = useSocket<ConversationChannel>(CONVERSATION_CHANNEL_NAME);
+  const onMessageRead = (messageReadDTO: MessageReadDTO) => {
+    dispatch(onMessageReadReceive(messageReadDTO));
+  };
+
+  const sendMessage = (newMessage: NewMessageDTO) => {
+    channel?.perform({
+      name: ConversationChannelActionName.ON_MESSAGE_SENT,
+      data: newMessage,
+    });
+  };
+
+  const readMessage = (messageReadDTO: MessageReadDTO) => {
+    channel?.perform({
+      name: ConversationChannelActionName.ON_MESSAGE_READ,
+      data: messageReadDTO,
+    });
+  };
 
   useEffect(() => {
     channel?.listen(({ data, topic }) => {
       switch (topic) {
-        case ConversationChannelTopic.NEW_CHAT_MESSAGE:
-          onNewMessage(jsonApiToObject(data, 'message'));
+        case ConversationChannelMessageTopic.MESSAGE_SENT:
+          onMessageSent(jsonApiToObject(data, 'message'));
+          break;
+        case ConversationChannelMessageTopic.MESSAGE_READ:
+          onMessageRead(data);
           break;
         default:
           break;
@@ -53,35 +78,19 @@ export const InboxPage = () => {
     });
   }, [channel]);
 
-  const sendMessage = (
-    content: string,
-    conversationId: string,
-    senderId: string,
-  ) => {
-    const message: SendLiveChatMessageDTO = {
-      conversationId,
-      content,
-      senderId,
-    };
-    channel?.sent(message);
-  };
-
   return (
     <AppContainer
-      justify="center"
       display="flex"
+      direction="column"
+      align="center"
       height="100%"
       py={54}
       pageTitle={formatMessage(messages.pageTitle)}
     >
-      <Box width="100%" display="flex" justify="center">
-        <LiveChat
-          // TODO: get it from backend or from somewhere
-          // conversationId="2b0dd6ed-8fef-4802-ad08-a543fa023662" for POC 1 test environment
-          conversationId="aca2d75b-5428-4c5e-845b-57b86afc071d"
-          onSendMessage={sendMessage}
-        />
-      </Box>
+      <LiveChatNavigatorPanel
+        onSendMessage={sendMessage}
+        onReadMessage={readMessage}
+      />
     </AppContainer>
   );
 };
