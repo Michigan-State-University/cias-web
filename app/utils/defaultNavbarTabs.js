@@ -64,21 +64,13 @@ const navigationTabs = {
     teamsTab(navbarNames.adminTeams, peopleHRCircle),
     conversationsTab(navbarNames.conversations, folder),
   ],
-  [Roles.teamAdmin]: [
-    interventionsTab(navbarNames.adminInterventions, folder),
-    teamsTab(navbarNames.adminTeams, peopleHRCircle),
-    conversationsTab(navbarNames.conversations, folder),
-  ],
+  [Roles.teamAdmin]: [teamsTab(navbarNames.adminTeams, peopleHRCircle)],
   [Roles.researcher]: [
     interventionsTab(navbarNames.researcherInterventions, folder),
     accountsTab(navbarNames.researcherAccounts, peopleHR),
     conversationsTab(navbarNames.conversations, folder),
   ],
-  [Roles.eInterventionAdmin]: [
-    interventionsTab(navbarNames.researcherInterventions),
-    accountsTab(navbarNames.researcherAccounts),
-    conversationsTab(navbarNames.conversations, folder),
-  ],
+  [Roles.eInterventionAdmin]: [],
   [Roles.organizationAdmin]: [],
   [Roles.healthSystemAdmin]: [],
   [Roles.clinicAdmin]: [],

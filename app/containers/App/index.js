@@ -20,7 +20,7 @@ import { createStructuredSelector } from 'reselect';
 
 import GlobalStyle from 'global-styles';
 
-import { Roles, ResearcherRoles } from 'models/User/UserRoles';
+import { Roles } from 'models/User/UserRoles';
 import navbarNames, { navbarMessages, NAVIGATION } from 'utils/navbarNames';
 import rootSaga from 'global/sagas/rootSaga';
 import {
@@ -74,6 +74,7 @@ import {
   conversationsTabId,
 } from 'utils/defaultNavbarTabs';
 
+import { arraysOverlap } from 'utils/arrayUtils';
 import { MODAL_PORTAL_ID, TOOLTIP_PORTAL_ID } from './constants';
 
 export function App({ user, fetchSelfDetails }) {
@@ -90,7 +91,7 @@ export function App({ user, fetchSelfDetails }) {
 
   const defaultSidebarId = useMemo(() => {
     if (!isEmpty(user?.roles)) {
-      if (user.roles[0] === Roles.participant)
+      if (user.roles.includes(Roles.participant))
         return participantInterventionsTabId;
       return interventionsTabId;
     }
@@ -104,55 +105,49 @@ export function App({ user, fetchSelfDetails }) {
 
   const renderDashboardByRole = () => {
     if (user) {
-      switch (user.roles[0]) {
-        case Roles.admin:
-          return <InterventionPage />;
-        case Roles.researcher:
-          return <InterventionPage />;
-        case Roles.teamAdmin:
-          return <InterventionPage />;
-        case Roles.participant:
-          return <ParticipantInterventionsPage />;
-        case Roles.thirdParty:
-          return <GeneratedReportsPage disableFilter />;
-        case Roles.eInterventionAdmin:
-          return <InterventionPage />;
-        case Roles.organizationAdmin:
-        case Roles.healthSystemAdmin:
-          return (
-            <ReportingDashboardPage
-              view={VIEW.DASHBOARD_VIEW}
-              organizableId={user.organizableId}
-            />
-          );
-        case Roles.clinicAdmin:
-          return <ClinicAdminRedirectPage />;
-        default:
-          return NotFoundPage;
-      }
-    } else return <LoginPage />;
+      if (arraysOverlap(user.roles, [Roles.admin, Roles.researcher]))
+        return <InterventionPage />;
+      if (arraysOverlap(user.roles, [Roles.participant]))
+        return <ParticipantInterventionsPage />;
+      if (arraysOverlap(user.roles, [Roles.thirdParty]))
+        return <GeneratedReportsPage disableFilter />;
+      if (
+        arraysOverlap(user.roles, [
+          Roles.organizationAdmin,
+          Roles.healthSystemAdmin,
+        ])
+      )
+        return (
+          <ReportingDashboardPage
+            view={VIEW.DASHBOARD_VIEW}
+            organizableId={user.organizableId}
+          />
+        );
+      if (arraysOverlap(user.roles, [Roles.clinicAdmin]))
+        return <ClinicAdminRedirectPage />;
+
+      return NotFoundPage;
+    }
+    return <LoginPage />;
   };
 
   const renderUserListByRole = () => {
     if (user) {
-      switch (user.roles[0]) {
-        case Roles.admin:
-          return (
-            <UserListPage
-              pageTitle={formatMessage(navbarMessages.adminAccounts)}
-            />
-          );
-        case Roles.eInterventionAdmin:
-        case Roles.researcher:
-          return (
-            <UserListPage
-              filterableRoles={[Roles.participant]}
-              pageTitle={formatMessage(navbarMessages.researcherAccounts)}
-            />
-          );
-        default:
-          return NotFoundPage;
-      }
+      if (user.roles.includes(Roles.admin))
+        return (
+          <UserListPage
+            pageTitle={formatMessage(navbarMessages.adminAccounts)}
+          />
+        );
+      if (user.roles.includes(Roles.researcher))
+        return (
+          <UserListPage
+            filterableRoles={[Roles.participant]}
+            pageTitle={formatMessage(navbarMessages.researcherAccounts)}
+          />
+        );
+
+      return NotFoundPage;
     }
   };
 
@@ -269,7 +264,7 @@ export function App({ user, fetchSelfDetails }) {
           path="/interventions/:interventionId/sessions/:sessionId/edit"
           component={EditSessionPage}
           protectedRoute
-          allowedRoles={[Roles.admin, ...ResearcherRoles]}
+          allowedRoles={[Roles.admin, Roles.researcher]}
           navbarProps={{
             navbarId: NAVIGATION.SESSIONS,
           }}
@@ -290,7 +285,7 @@ export function App({ user, fetchSelfDetails }) {
           path="/interventions/:interventionId/sessions/:sessionId/settings"
           component={SettingsInterventionPage}
           protectedRoute
-          allowedRoles={[Roles.admin, ...ResearcherRoles]}
+          allowedRoles={[Roles.admin, Roles.researcher]}
           navbarProps={{
             navbarId: NAVIGATION.SESSIONS,
           }}
@@ -300,7 +295,7 @@ export function App({ user, fetchSelfDetails }) {
           path="/interventions/:interventionId/sessions/:sessionId/report-templates"
           component={ReportTemplatesPage}
           protectedRoute
-          allowedRoles={[Roles.admin, ...ResearcherRoles]}
+          allowedRoles={[Roles.admin, Roles.researcher]}
           navbarProps={{
             navbarId: NAVIGATION.SESSIONS,
           }}
@@ -310,7 +305,7 @@ export function App({ user, fetchSelfDetails }) {
           path="/interventions/:interventionId/sessions/:sessionId/generated-reports"
           component={GeneratedReportsPage}
           protectedRoute
-          allowedRoles={[Roles.admin, ...ResearcherRoles]}
+          allowedRoles={[Roles.admin, Roles.researcher]}
           navbarProps={{
             navbarId: NAVIGATION.SESSIONS,
           }}
@@ -320,7 +315,7 @@ export function App({ user, fetchSelfDetails }) {
           path="/interventions/:interventionId/sessions/:sessionId/sms-messaging"
           component={TextMessagesPage}
           protectedRoute
-          allowedRoles={[Roles.admin, ...ResearcherRoles]}
+          allowedRoles={[Roles.admin, Roles.researcher]}
           navbarProps={{
             navbarId: NAVIGATION.SESSIONS,
           }}
@@ -330,7 +325,7 @@ export function App({ user, fetchSelfDetails }) {
           path="/interventions/:interventionId/sessions/:sessionId/map"
           component={SessionMapPage}
           protectedRoute
-          allowedRoles={[Roles.admin, ...ResearcherRoles]}
+          allowedRoles={[Roles.admin, Roles.researcher]}
           navbarProps={{
             navbarId: NAVIGATION.SESSIONS,
           }}
@@ -354,7 +349,7 @@ export function App({ user, fetchSelfDetails }) {
           path="/users"
           component={renderUserListByRole}
           protectedRoute
-          allowedRoles={[Roles.admin, ...ResearcherRoles]}
+          allowedRoles={[Roles.admin, Roles.researcher]}
           navbarProps={{
             navbarId: NAVIGATION.DEFAULT,
             activeTab: accountsTabId,
@@ -400,7 +395,7 @@ export function App({ user, fetchSelfDetails }) {
             <AnswerSessionPage match={match} isPreview />
           )}
           protectedRoute
-          allowedRoles={[Roles.admin, ...ResearcherRoles]}
+          allowedRoles={[Roles.admin, Roles.researcher]}
           navbarProps={{
             navbarId: NAVIGATION.PREVIEW,
             navbarName: navbarNames.preview,
@@ -413,7 +408,7 @@ export function App({ user, fetchSelfDetails }) {
             <AnswerSessionPage match={match} isPreview />
           )}
           protectedRoute
-          allowedRoles={[Roles.admin, ...ResearcherRoles]}
+          allowedRoles={[Roles.admin, Roles.researcher]}
           navbarProps={{
             navbarId: NAVIGATION.PREVIEW,
             navbarName: navbarNames.preview,
@@ -424,7 +419,7 @@ export function App({ user, fetchSelfDetails }) {
           path="/interventions/:interventionId"
           component={InterventionDetailsPage}
           protectedRoute
-          allowedRoles={[Roles.admin, ...ResearcherRoles]}
+          allowedRoles={[Roles.admin, Roles.researcher]}
           navbarProps={{
             navbarId: NAVIGATION.DEFAULT,
           }}

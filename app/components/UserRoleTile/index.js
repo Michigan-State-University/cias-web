@@ -24,6 +24,7 @@ const UserRoleTile = ({ role, disabled, onClick, intl: { formatMessage } }) => (
     align="center"
     px={10}
     py={5}
+    mr={10}
     clickable={!!onClick}
     onClick={onClick}
   >

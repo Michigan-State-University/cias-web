@@ -2,12 +2,7 @@ import { arraysOverlap } from 'utils/arrayUtils';
 
 import { Roles } from './UserRoles';
 
-const ALLOWED_DOWNLOAD_INTERVENTION_CSV = [
-  Roles.admin,
-  Roles.teamAdmin,
-  Roles.researcher,
-  Roles.eInterventionAdmin,
-];
+const ALLOWED_DOWNLOAD_INTERVENTION_CSV = [Roles.admin, Roles.researcher];
 
 const ALLOWED_ORGANIZATION_SIDEBAR_DISPLAY = [
   Roles.admin,
@@ -32,12 +27,7 @@ const ALLOWED_ASSIGN_ORGANIZATION_TO_INTERVENTION = [
   Roles.eInterventionAdmin,
 ];
 
-const ALLOWED_CAT_MH_SETTING_DISPLAY = [
-  Roles.admin,
-  Roles.researcher,
-  Roles.eInterventionAdmin,
-  Roles.teamAdmin,
-];
+const ALLOWED_CAT_MH_SETTING_DISPLAY = [Roles.admin, Roles.researcher];
 
 export const RolePermissions = (roles) => ({
   canDownloadInterventionCsv: arraysOverlap(

@@ -85,7 +85,7 @@ class AppRoute extends Route {
       );
     }
 
-    if (user && !allowedRoles.includes(user.roles[0]))
+    if (user && !arraysOverlap(allowedRoles, user.roles))
       return <Redirect to="/no-access" />;
 
     return super.render();

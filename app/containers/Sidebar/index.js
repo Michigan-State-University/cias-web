@@ -38,7 +38,7 @@ export function Sidebar({ user: { roles }, sidebarProps }) {
 
   const renderSidebar = useCallback(() => {
     if (sidebarId === NAVIGATION.DEFAULT)
-      return <DefaultSidebar activeTab={activeTab} userRole={roles[0]} />;
+      return <DefaultSidebar activeTab={activeTab} userRoles={roles} />;
 
     return null;
   }, [sidebarId, activeTab, roles]);
