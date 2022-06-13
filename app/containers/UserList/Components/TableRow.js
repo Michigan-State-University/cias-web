@@ -74,7 +74,11 @@ const TableRow = ({
       <TD pl={20}>{email}</TD>
       <TD pl={20}>
         {roles.map((role) => (
-          <UserRoleTile role={role} disabled={!active} />
+          <UserRoleTile
+            key={`user-role-tile-${role}`}
+            role={role}
+            disabled={!active}
+          />
         ))}
       </TD>
       <TD pl={20}>

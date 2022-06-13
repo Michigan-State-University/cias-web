@@ -61,6 +61,7 @@ exports[`<UserList /> Should render and match the snapshot - admin 1`] = `
   padding-bottom: 5px;
   padding-right: 10px;
   padding-left: 10px;
+  margin-right: 10px;
   background-color: rgba(35,183,160,1);
   cursor: pointer;
   -webkit-box-pack: center;
@@ -95,6 +96,7 @@ exports[`<UserList /> Should render and match the snapshot - admin 1`] = `
   padding-bottom: 5px;
   padding-right: 10px;
   padding-left: 10px;
+  margin-right: 10px;
   background-color: rgba(255,118,145,1);
   cursor: pointer;
   -webkit-box-pack: center;
@@ -129,6 +131,7 @@ exports[`<UserList /> Should render and match the snapshot - admin 1`] = `
   padding-bottom: 5px;
   padding-right: 10px;
   padding-left: 10px;
+  margin-right: 10px;
   background-color: rgba(0,0,128,1);
   cursor: pointer;
   -webkit-box-pack: center;
@@ -163,6 +166,7 @@ exports[`<UserList /> Should render and match the snapshot - admin 1`] = `
   padding-bottom: 5px;
   padding-right: 10px;
   padding-left: 10px;
+  margin-right: 10px;
   background-color: rgba(128,128,0,1);
   cursor: pointer;
   -webkit-box-pack: center;
@@ -197,6 +201,7 @@ exports[`<UserList /> Should render and match the snapshot - admin 1`] = `
   padding-bottom: 5px;
   padding-right: 10px;
   padding-left: 10px;
+  margin-right: 10px;
   background-color: rgba(16,121,105,1);
   cursor: pointer;
   -webkit-box-pack: center;
@@ -240,6 +245,7 @@ exports[`<UserList /> Should render and match the snapshot - admin 1`] = `
   padding-bottom: 5px;
   padding-right: 10px;
   padding-left: 10px;
+  margin-right: 10px;
   background-color: rgba(35,183,160,1);
   -webkit-box-pack: center;
   -webkit-justify-content: center;
@@ -272,6 +278,7 @@ exports[`<UserList /> Should render and match the snapshot - admin 1`] = `
   padding-bottom: 5px;
   padding-right: 10px;
   padding-left: 10px;
+  margin-right: 10px;
   background-color: rgba(255,118,145,1);
   -webkit-box-pack: center;
   -webkit-justify-content: center;
@@ -304,6 +311,7 @@ exports[`<UserList /> Should render and match the snapshot - admin 1`] = `
   padding-bottom: 5px;
   padding-right: 10px;
   padding-left: 10px;
+  margin-right: 10px;
   background-color: rgba(194,178,0,1);
   -webkit-box-pack: center;
   -webkit-justify-content: center;
@@ -1202,6 +1210,7 @@ exports[`<UserList /> Should render and match the snapshot - researcher 1`] = `
   padding-bottom: 5px;
   padding-right: 10px;
   padding-left: 10px;
+  margin-right: 10px;
   background-color: rgba(35,183,160,1);
   cursor: pointer;
   -webkit-box-pack: center;
@@ -1236,6 +1245,7 @@ exports[`<UserList /> Should render and match the snapshot - researcher 1`] = `
   padding-bottom: 5px;
   padding-right: 10px;
   padding-left: 10px;
+  margin-right: 10px;
   background-color: rgba(255,118,145,1);
   cursor: pointer;
   -webkit-box-pack: center;
@@ -1270,6 +1280,7 @@ exports[`<UserList /> Should render and match the snapshot - researcher 1`] = `
   padding-bottom: 5px;
   padding-right: 10px;
   padding-left: 10px;
+  margin-right: 10px;
   background-color: rgba(0,0,128,1);
   cursor: pointer;
   -webkit-box-pack: center;
@@ -1304,6 +1315,7 @@ exports[`<UserList /> Should render and match the snapshot - researcher 1`] = `
   padding-bottom: 5px;
   padding-right: 10px;
   padding-left: 10px;
+  margin-right: 10px;
   background-color: rgba(128,128,0,1);
   cursor: pointer;
   -webkit-box-pack: center;
@@ -1338,6 +1350,7 @@ exports[`<UserList /> Should render and match the snapshot - researcher 1`] = `
   padding-bottom: 5px;
   padding-right: 10px;
   padding-left: 10px;
+  margin-right: 10px;
   background-color: rgba(16,121,105,1);
   cursor: pointer;
   -webkit-box-pack: center;
@@ -1381,6 +1394,7 @@ exports[`<UserList /> Should render and match the snapshot - researcher 1`] = `
   padding-bottom: 5px;
   padding-right: 10px;
   padding-left: 10px;
+  margin-right: 10px;
   background-color: rgba(35,183,160,1);
   -webkit-box-pack: center;
   -webkit-justify-content: center;
@@ -1413,6 +1427,7 @@ exports[`<UserList /> Should render and match the snapshot - researcher 1`] = `
   padding-bottom: 5px;
   padding-right: 10px;
   padding-left: 10px;
+  margin-right: 10px;
   background-color: rgba(255,118,145,1);
   -webkit-box-pack: center;
   -webkit-justify-content: center;
@@ -1445,6 +1460,7 @@ exports[`<UserList /> Should render and match the snapshot - researcher 1`] = `
   padding-bottom: 5px;
   padding-right: 10px;
   padding-left: 10px;
+  margin-right: 10px;
   background-color: rgba(194,178,0,1);
   -webkit-box-pack: center;
   -webkit-justify-content: center;
