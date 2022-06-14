@@ -12,6 +12,7 @@ import { FormattedMessage, useIntl } from 'react-intl';
 import { injectSaga } from 'redux-injectors';
 
 import AddIcon from 'assets/svg/addSign2.svg';
+import cog from 'assets/svg/gear-selected.svg';
 
 import {
   fetchInterventionRequest,
@@ -47,8 +48,12 @@ import { selectQuillText } from 'components/Input/utils';
 import HoverableBox from 'components/Box/HoverableBox';
 
 import Switch from 'components/Switch';
+import Img from 'components/Img';
+import { ModalType, useModal } from 'components/Modal';
+
 import LogoUpload from './containers/LogoUpload';
 import AccessGiver from './containers/AccessGiver';
+import NavigatorSettingsModal from './containers/NavigatorSettingsModal';
 import InterventionAccessDescription from './Components/InterventionAccessDescription';
 import InterventionRadioPanel from './Components/InterventionRadioPanel';
 
@@ -110,6 +115,18 @@ const SettingsPanel = ({
   const { formatMessage } = useIntl();
 
   const [state, dispatch] = useReducer(reducer, null);
+  const { openModal: openNavigatorSettingModal, Modal: NavigatorSettingModal } =
+    useModal({
+      type: ModalType.Modal,
+      modalContentRenderer: () => (
+        <NavigatorSettingsModal interventionId={intervention.id} />
+      ),
+      props: {
+        title: formatMessage(messages.useNavigatorSettings),
+        width: 918,
+        height: 722,
+      },
+    });
 
   const {
     sharedTo,
@@ -207,6 +224,7 @@ const SettingsPanel = ({
 
   return (
     <Column>
+      <NavigatorSettingModal />
       <StyledBox>
         <Column width="100%" padding={35}>
           <Box display="flex" align="center" mb={48}>
@@ -217,6 +235,12 @@ const SettingsPanel = ({
               onToggle={updateNaviagtorSetting}
               checked={!!intervention?.liveChatEnabled}
               id="use-navigator-switch"
+            />
+            <Img
+              onClick={openNavigatorSettingModal}
+              ml={15}
+              src={cog}
+              alt="manage"
             />
           </Box>
           <InterventionRadioPanel
