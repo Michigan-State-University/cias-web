@@ -147,4 +147,20 @@ export default defineMessages({
     id: `${scope}.useNavigator`,
     defaultMessage: 'Use Navigator',
   },
+  useNavigatorSettings: {
+    id: `${scope}.useNavigatorSettings`,
+    defaultMessage: 'Use Navigator - Settings',
+  },
+  navigators: {
+    id: `${scope}.navigators`,
+    defaultMessage: 'Navigators',
+  },
+  noNavigator: {
+    id: `${scope}.noNavigator`,
+    defaultMessage: 'No Navigator available',
+  },
+  helpingMaterials: {
+    id: `${scope}.helpingMaterials`,
+    defaultMessage: 'Helping materials',
+  },
 });
