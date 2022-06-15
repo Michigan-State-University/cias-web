@@ -4,6 +4,8 @@ import { useIntl } from 'react-intl';
 import Tabs from 'components/Tabs';
 
 import messages from '../messages';
+import NavigatorModalLayout from '../Components/NavigatorModalLayout';
+import NoNavigatorsForm from './NoNavigatorsForm';
 
 type Props = {
   interventionId: string;
@@ -20,7 +22,10 @@ const NavigatorSettingsModal = ({ interventionId }: Props) => {
       </div>
       {/* @ts-ignore */}
       <div label={formatMessage(messages.noNavigator)}>
-        No navigator available
+        <NavigatorModalLayout
+          leftContent={<NoNavigatorsForm />}
+          rightContent={<>No navigators tab</>}
+        />
       </div>
       {/* @ts-ignore */}
       <div label={formatMessage(messages.helpingMaterials)}>
