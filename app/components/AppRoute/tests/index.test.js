@@ -6,7 +6,7 @@ import { createStore } from 'redux';
 import { MemoryRouter } from 'react-router-dom';
 import { IntlProvider } from 'react-intl';
 
-import { NAVIGATION, Roles } from 'models/User/RolesManager';
+import { NAVIGATION, Roles, AllRoles } from 'models/User/RolesManager';
 import { DEFAULT_LOCALE } from 'i18n';
 
 import history from 'utils/history';
@@ -42,7 +42,7 @@ describe('<AppRoute />', () => {
     exact: true,
     path: '/component',
     protectedRoute: true,
-    allowedRoles: Roles.allRoles,
+    allowedRoles: AllRoles,
     component: Component,
     navbarProps: {
       navbarId: NAVIGATION.DEFAULT,

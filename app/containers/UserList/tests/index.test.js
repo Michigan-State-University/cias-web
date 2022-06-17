@@ -50,8 +50,8 @@ describe('<UserList />', () => {
       ],
     },
   });
-  const storeAdmin = createTestStore(initialState(Roles.admin));
-  const storeResearcher = createTestStore(initialState(Roles.researcher));
+  const storeAdmin = createTestStore(initialState(Roles.Admin));
+  const storeResearcher = createTestStore(initialState(Roles.Researcher));
 
   beforeAll(() => {
     createModalForTests();

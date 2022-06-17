@@ -48,7 +48,7 @@ describe('<TeamsList />', () => {
       ],
     },
   });
-  const storeAdmin = createTestStore(initialState(Roles.admin));
+  const storeAdmin = createTestStore(initialState(Roles.Admin));
 
   beforeAll(() => {
     createModalForTests();

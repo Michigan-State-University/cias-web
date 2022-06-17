@@ -19,7 +19,7 @@ import { createTestStore } from 'utils/testUtils/storeUtils';
 import FinishScreen from '../FinishScreen';
 
 describe('<FinishScreen />', () => {
-  LocalStorageService.setState({ roles: [Roles.participant] });
+  LocalStorageService.setState({ roles: [Roles.Participant] });
   const defaultProps = {
     selectAnswer: jest.fn(),
     formatMessage,

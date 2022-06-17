@@ -22,7 +22,7 @@ describe('<AnswerSessionPage />', () => {
       user: {
         firstName: 'first-name',
         lastName: 'last-name',
-        roles: [Roles.admin],
+        roles: [Roles.Admin],
       },
     },
   };

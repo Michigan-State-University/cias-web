@@ -41,7 +41,7 @@ describe('<SingleTile />', () => {
   const initialState = {
     auth: {
       user: {
-        roles: [Roles.admin],
+        roles: [Roles.Admin],
       },
     },
   };

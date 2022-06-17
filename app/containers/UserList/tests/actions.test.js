@@ -1,6 +1,6 @@
 import { fetchUsers } from 'global/reducers/userList';
 import { FETCH_USERS, PER_PAGE } from 'global/reducers/userList/constants';
-import { Roles } from 'models/User/RolesManager';
+import { AllRoles } from 'models/User/RolesManager';
 
 describe('UserList actions', () => {
   describe('Default Action', () => {
@@ -14,19 +14,19 @@ describe('UserList actions', () => {
           name: undefined,
           roles: [
             'admin',
-            'team_admin',
-            'participant',
             'researcher',
+            'participant',
+            'team_admin',
             'third_party',
-            'organization_admin',
             'e_intervention_admin',
+            'organization_admin',
             'health_system_admin',
             'health_clinic_admin',
           ],
         },
         type: FETCH_USERS,
       };
-      expect(fetchUsers(Roles.allRoles, undefined, 1, true)).toEqual(expected);
+      expect(fetchUsers(AllRoles, undefined, 1, true)).toEqual(expected);
     });
   });
 });

@@ -24,7 +24,7 @@ describe('<Navbar />', () => {
   const reducer = (state) => state;
   const initialState = {
     auth: {
-      user: { firstName: 'test', lastName: 'test', roles: [Roles.admin] },
+      user: { firstName: 'test', lastName: 'test', roles: [Roles.Admin] },
     },
     session: {
       session: {

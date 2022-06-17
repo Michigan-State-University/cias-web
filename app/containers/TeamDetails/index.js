@@ -184,7 +184,7 @@ export const TeamDetails = ({
                         disabled={singleTeamEditLoading}
                         selectedUserId={selectedUser?.id}
                         onSelect={handleOnSelect}
-                        rolesToInclude={[Roles.researcher, Roles.teamAdmin]}
+                        rolesToInclude={[Roles.Researcher, Roles.TeamAdmin]}
                         additionalUsers={[teamAdmin]}
                       />
                     </div>
@@ -213,9 +213,9 @@ export const TeamDetails = ({
             <UserList
               teamId={id}
               filterableRoles={[
-                Roles.participant,
-                Roles.researcher,
-                Roles.eInterventionAdmin,
+                Roles.Participant,
+                Roles.Researcher,
+                Roles.EInterventionAdmin,
               ]}
               listOnly
             />

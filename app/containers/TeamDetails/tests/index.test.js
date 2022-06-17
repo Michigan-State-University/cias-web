@@ -25,7 +25,7 @@ describe('<TeamDetails />', () => {
       ...authState,
       user: {
         id: '1',
-        roles: [Roles.admin],
+        roles: [Roles.Admin],
       },
     },
     teamList: {

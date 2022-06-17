@@ -187,7 +187,7 @@ function UserList({
             <H1 mr={10}>
               <FormattedMessage {...messages.manageAccount} />
             </H1>
-            {roles.includes(Roles.admin) && (
+            {roles.includes(Roles.Admin) && (
               <TextButton
                 buttonProps={{
                   color: themeColors.secondary,

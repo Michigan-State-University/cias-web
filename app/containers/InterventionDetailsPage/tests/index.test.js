@@ -19,7 +19,7 @@ describe('<InterventionDetailsPage />', () => {
       },
     },
   };
-  const initialState = { auth: { user: { roles: [Roles.admin] } } };
+  const initialState = { auth: { user: { roles: [Roles.Admin] } } };
   const store = createTestStore(initialState);
 
   beforeAll(() => {

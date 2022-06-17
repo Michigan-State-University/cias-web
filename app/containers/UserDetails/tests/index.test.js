@@ -24,7 +24,7 @@ describe('<UserDetails />', () => {
     auth: {
       ...authState,
       user: {
-        roles: [Roles.admin],
+        roles: [Roles.Admin],
       },
     },
     user: {
