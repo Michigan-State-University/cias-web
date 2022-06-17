@@ -15,7 +15,7 @@ import { MemoryRouter } from 'react-router-dom';
 import 'jest-styled-components';
 
 import { DEFAULT_LOCALE } from 'i18n';
-import { Roles } from 'models/User/UserRoles';
+import { Roles } from 'models/User/RolesManager';
 import { createTestStore } from 'utils/testUtils/storeUtils';
 
 import Sidebar from '../index';

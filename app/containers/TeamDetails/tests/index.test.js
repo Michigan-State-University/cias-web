@@ -15,7 +15,7 @@ import { initialState as authState } from 'global/reducers/auth';
 import { createTestStore } from 'utils/testUtils/storeUtils';
 import { TeamBuilder } from 'models/Teams/TeamBuilder';
 import intlOutsideReact from 'utils/intlOutsideReact';
-import { Roles } from 'models/User/UserRoles';
+import { Roles } from 'models/User/RolesManager';
 import { TeamDetails } from '../index';
 
 describe('<TeamDetails />', () => {

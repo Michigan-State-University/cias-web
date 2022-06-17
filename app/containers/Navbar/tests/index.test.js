@@ -15,7 +15,7 @@ import { createStore } from 'redux';
 
 import 'jest-styled-components';
 
-import { Roles } from 'models/User/UserRoles';
+import { Roles } from 'models/User/RolesManager';
 import Navbar from '../index';
 import { DEFAULT_LOCALE } from '../../../i18n';
 

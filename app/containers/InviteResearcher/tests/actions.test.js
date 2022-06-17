@@ -1,4 +1,4 @@
-import { Roles } from 'models/User/UserRoles';
+import { Roles } from 'models/User/RolesManager';
 import { defaultTimeZone } from 'utils/timezones';
 
 import {

@@ -12,7 +12,7 @@ import { MemoryRouter } from 'react-router-dom';
 import { Provider } from 'react-redux';
 
 import LocalStorageService from 'utils/localStorageService';
-import { Roles } from 'models/User/UserRoles';
+import { Roles } from 'models/User/RolesManager';
 import { formatMessage } from 'utils/intlOutsideReact';
 import { createTestStore } from 'utils/testUtils/storeUtils';
 

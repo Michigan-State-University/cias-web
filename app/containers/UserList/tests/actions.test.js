@@ -1,6 +1,6 @@
 import { fetchUsers } from 'global/reducers/userList';
 import { FETCH_USERS, PER_PAGE } from 'global/reducers/userList/constants';
-import { Roles } from 'models/User/UserRoles';
+import { Roles } from 'models/User/RolesManager';
 
 describe('UserList actions', () => {
   describe('Default Action', () => {

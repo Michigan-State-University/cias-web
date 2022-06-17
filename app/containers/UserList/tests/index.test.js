@@ -11,7 +11,7 @@ import { Provider } from 'react-redux';
 import { MemoryRouter } from 'react-router-dom';
 import { DEFAULT_LOCALE } from 'i18n';
 
-import { Roles } from 'models/User/UserRoles';
+import { Roles } from 'models/User/RolesManager';
 import { UserListReducer } from 'global/reducers/userList';
 import createModalForTests from 'utils/createModalForTests';
 import { createTestStore } from 'utils/testUtils/storeUtils';
