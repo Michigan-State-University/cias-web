@@ -1,7 +1,6 @@
 import { createContext } from 'react';
 
 import { archived, closed, draft, published } from 'models/Status/StatusTypes';
-import { RolePermissions } from 'models/User/RolePermissions';
 
 export const nextStatus = {
   [draft]: published,
@@ -14,5 +13,4 @@ export const InterventionDetailsPageContext = createContext({
   canShareWithParticipants: false,
   canArchive: false,
   canDeleteSession: false,
-  rolePermissions: RolePermissions([]),
 });

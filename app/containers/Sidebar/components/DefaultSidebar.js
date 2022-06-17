@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import flatten from 'lodash/flatten';
 import uniqBy from 'lodash/uniqBy';
 
-import navigationTabs from 'utils/defaultNavbarTabs';
+import navigationTabs from 'models/User/RolesManager/defaultNavbarTabs';
 
 import Column from 'components/Column';
 

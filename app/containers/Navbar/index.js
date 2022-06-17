@@ -18,7 +18,7 @@ import Row from 'components/Row';
 import Img from 'components/Img';
 
 import useOutsideClick from 'utils/useOutsideClick';
-import { NAVIGATION } from 'utils/navbarNames';
+import { NAVIGATION } from 'models/User/RolesManager/navbarNames';
 import { makeSelectUser } from 'global/reducers/auth';
 
 import {

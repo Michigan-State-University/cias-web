@@ -7,7 +7,7 @@ import { createStructuredSelector } from 'reselect';
 import { Row, Col } from 'react-grid-system';
 
 import { makeSelectUser, REDIRECT_QUERY_KEY } from 'global/reducers/auth';
-import { RolePermissions } from 'models/User/RolePermissions';
+import { canDisplayLeftSidebar } from 'models/User/RolesManager';
 import { arraysOverlap } from 'utils/arrayUtils';
 
 import Sidebar from 'containers/Sidebar';
@@ -29,8 +29,6 @@ class AppRoute extends Route {
       },
     } = this;
 
-    const rolePermissions = RolePermissions(user?.roles);
-
     if (!protectedRoute) {
       return super.render();
     }
@@ -49,7 +47,7 @@ class AppRoute extends Route {
 
     if (user && arraysOverlap(allowedRoles, user.roles)) {
       const isSidebarVisible =
-        Boolean(sidebarProps) && rolePermissions.canDisplayLeftSidebar;
+        Boolean(sidebarProps) && canDisplayLeftSidebar(user?.roles);
 
       return (
         <>

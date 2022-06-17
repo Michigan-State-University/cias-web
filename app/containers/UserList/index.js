@@ -25,7 +25,7 @@ import Loader from 'components/Loader';
 import SearchInput from 'components/Input/SearchInput';
 import TextButton from 'components/Button/TextButton';
 import UserRoleTile from 'components/UserRoleTile';
-import { Roles } from 'models/User/UserRoles';
+import { Roles } from 'models/User/RolesManager';
 import {
   fetchUsers,
   userListSaga,
@@ -223,11 +223,11 @@ UserList.propTypes = {
 UserList.defaultProps = {
   listOnly: false,
   filterableRoles: [
-    Roles.participant,
-    Roles.researcher,
-    Roles.teamAdmin,
-    Roles.thirdParty,
-    Roles.eInterventionAdmin,
+    Roles.Participant,
+    Roles.Researcher,
+    Roles.TeamAdmin,
+    Roles.ThirdParty,
+    Roles.EInterventionAdmin,
   ],
 };
 
