@@ -6,15 +6,15 @@ import Column from 'components/Column';
 import Row from 'components/Row';
 
 type Props = {
-  leftContent: JSX.Element;
-  rightContent: JSX.Element;
+  leftContent: React.ReactNode;
+  rightContent: React.ReactNode;
 };
 
 const NavigatorModalLayout = ({ leftContent, rightContent }: Props) => (
   <Row display="flex" justifyContent="between">
-    <Column mr={40}>{leftContent}</Column>
-    <Column width={1} bg={colors.linkWater} />
-    <Column ml={40}>{rightContent}</Column>
+    <Column>{leftContent}</Column>
+    <Column width={1} mx={40} bg={colors.linkWater} />
+    <Column>{rightContent}</Column>
   </Row>
 );
 

@@ -13,7 +13,7 @@ import messages from '../messages';
 const NoNavigatorsForm = () => {
   const { formatMessage } = useIntl();
   return (
-    <div>
+    <>
       <Box display="flex">
         <H3>{formatMessage(messages.notifyNavigator)}</H3>
         <Switch checked onToggle={() => {}} />
@@ -26,7 +26,7 @@ const NoNavigatorsForm = () => {
           <Text>{formatMessage(messages.notifyByEmail)}</Text>
         </Radio>
       </Box>
-    </div>
+    </>
   );
 };
 
