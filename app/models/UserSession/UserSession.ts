@@ -16,6 +16,7 @@ export interface UserSession {
   sessionId: String;
   type: UserSessionTypes;
   scheduledAt: Nullable<string>;
+  liveChatEnabled: boolean;
 }
 
 export type UserSessionDTO = CamelToSnakeOmitId<UserSession>;

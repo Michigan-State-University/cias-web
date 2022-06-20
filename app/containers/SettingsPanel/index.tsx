@@ -25,7 +25,10 @@ import {
   addAttachmentRequest,
   deleteAttachmentRequest,
 } from 'global/reducers/intervention';
-import { canChangeAccessSettings } from 'models/Status/statusPermissions';
+import {
+  canChangeAccessSettings,
+  canEnableChat,
+} from 'models/Status/statusPermissions';
 import {
   InterventionType,
   Intervention,
@@ -140,6 +143,7 @@ const SettingsPanel = ({
   } = intervention || {};
 
   const changingAccessSettingsPossible = canChangeAccessSettings(status);
+  const changingChatSettingsPossible = canEnableChat(status);
 
   const isModuleIntervention =
     type === InterventionType.FIXED || type === InterventionType.FLEXIBLE;
@@ -235,6 +239,7 @@ const SettingsPanel = ({
               onToggle={updateNaviagtorSetting}
               checked={!!intervention?.liveChatEnabled}
               id="use-navigator-switch"
+              disabled={!changingChatSettingsPossible}
             />
             <Img
               onClick={openNavigatorSettingModal}
