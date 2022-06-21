@@ -1,6 +1,6 @@
 import PropTypes from 'prop-types';
 import React, { memo, useCallback, useContext } from 'react';
-import { connect, useSelector } from 'react-redux';
+import { connect } from 'react-redux';
 import { compose } from 'redux';
 import { useIntl } from 'react-intl';
 
@@ -12,9 +12,7 @@ import {
   inviteAdminRequest,
 } from 'global/reducers/organizations';
 
-import { makeSelectUserRoles } from 'global/reducers/auth';
-import { RolePermissions } from 'models/User/RolePermissions';
-import { Roles } from 'models/User/UserRoles';
+import { useRoleManager, Roles } from 'models/User/RolesManager';
 
 import { Col, Row } from 'components/ReactGridSystem';
 import { ConfirmationModal } from 'components/Modal';
@@ -34,12 +32,9 @@ const OrganizationSettings = ({
   editOrganization,
   inviteAdmin,
 }) => {
-  // selectors
-  const userRoles = useSelector(makeSelectUserRoles());
-
   const { formatMessage } = useIntl();
 
-  const { canDeleteOrganization } = RolePermissions(userRoles);
+  const { canDeleteOrganization } = useRoleManager();
 
   const {
     organization: { eInterventionAdmins, id, name, organizationAdmins },
@@ -98,7 +93,7 @@ const OrganizationSettings = ({
             helper={formatMessage(messages.interventionAdminsHelper)}
             inviteTo={name}
             onInvite={onInvite}
-            role={Roles.eInterventionAdmin}
+            role={Roles.EInterventionAdmin}
             users={eInterventionAdmins}
           />
         </Col>
@@ -111,7 +106,7 @@ const OrganizationSettings = ({
             helper={formatMessage(messages.organizationAdminsHelper)}
             inviteTo={name}
             onInvite={onInvite}
-            role={Roles.organizationAdmin}
+            role={Roles.OrganizationAdmin}
             users={organizationAdmins}
           />
         </Col>

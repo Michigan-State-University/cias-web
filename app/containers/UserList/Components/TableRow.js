@@ -73,7 +73,13 @@ const TableRow = ({
       <TD pl={20}>{nameColumn}</TD>
       <TD pl={20}>{email}</TD>
       <TD pl={20}>
-        <UserRoleTile role={roles[0]} disabled={!active} />
+        {roles.map((role) => (
+          <UserRoleTile
+            key={`user-role-tile-${role}`}
+            role={role}
+            disabled={!active}
+          />
+        ))}
       </TD>
       <TD pl={20}>
         <Row width="100%" justify="start" pr={20}>

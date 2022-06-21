@@ -24,7 +24,7 @@ import { Markup } from 'interweave';
 import { useInjectSaga, useInjectReducer } from 'redux-injectors';
 
 import { themeColors } from 'theme';
-import { Roles } from 'models/User/UserRoles';
+import { Roles } from 'models/User/RolesManager';
 import { passwordRegex } from 'global/constants/regex';
 
 import withPublicLayout from 'containers/PublicLayout';
@@ -107,7 +107,7 @@ export function RegisterPage({
   const isInvite = Boolean(invitationToken) && Boolean(email);
 
   const termsAndConditionsText =
-    role === Roles.participant || !role
+    role === Roles.Participant || !role
       ? formatMessage(messages.termsAndConditionsParticipantText)
       : formatMessage(messages.termsAndConditionsOtherRolesText);
 

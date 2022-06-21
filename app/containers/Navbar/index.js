@@ -18,7 +18,7 @@ import Row from 'components/Row';
 import Img from 'components/Img';
 
 import useOutsideClick from 'utils/useOutsideClick';
-import { NAVIGATION } from 'utils/navbarNames';
+import { NAVIGATION } from 'models/User/RolesManager/navbarNames';
 import { makeSelectUser } from 'global/reducers/auth';
 
 import {
@@ -30,7 +30,7 @@ import {
   StyledComment,
 } from './styled';
 import messages from './messages';
-import content from './dropdownContent';
+import { navbarElements } from './dropdownContent';
 
 import PreviewNavbar from './components/PreviewNavbar';
 import DefaultNavbar from './components/DefaultNavbar';
@@ -46,7 +46,7 @@ const renderNavbar = (navbarProps) => {
 };
 
 export function Navbar({
-  user: { firstName, lastName, roles, avatar },
+  user: { firstName, lastName, avatar },
   navbarProps,
   match,
   location,
@@ -62,7 +62,6 @@ export function Navbar({
         match,
         location,
         intl,
-        userRole: roles[0],
       })}
       <RightPanel onClick={() => !menuVisible && setMenuVisible(true)}>
         <DropDownContainer>
@@ -77,7 +76,7 @@ export function Navbar({
           <div ref={dropdownRef}>
             {menuVisible && (
               <DropDownContent>
-                {content[roles[0]].map(({ url, messagesKey, icon }, index) => (
+                {navbarElements.map(({ url, messagesKey, icon }, index) => (
                   <StyledRow key={index} onClick={() => setMenuVisible(false)}>
                     <Link to={url}>
                       <Row>

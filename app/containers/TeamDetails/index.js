@@ -4,7 +4,7 @@
  *
  */
 
-import React, { memo, useEffect, useMemo, useState } from 'react';
+import React, { memo, useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { compose } from 'redux';
@@ -27,7 +27,7 @@ import {
 
 import { Col, Row } from 'react-grid-system';
 
-import { Roles } from 'models/User/UserRoles';
+import { useRoleManager, Roles } from 'models/User/RolesManager';
 
 import H1 from 'components/H1';
 import H2 from 'components/H2';
@@ -38,7 +38,6 @@ import Text from 'components/Text';
 import Input from 'components/Input';
 import UserList from 'containers/UserList';
 import UserSelector from 'containers/UserSelector';
-import { makeSelectUser } from 'global/reducers/auth';
 import InviteResearcher from 'containers/InviteResearcher';
 import TextButton from 'components/Button/TextButton';
 import messages from './messages';
@@ -57,12 +56,11 @@ export const TeamDetails = ({
     params: { id },
   },
   intl: { formatMessage },
-  user: { roles },
 }) => {
   useInjectReducer({ key: 'teamList', reducer: TeamListReducer });
   useInjectSaga({ key: 'teamList', saga: teamListSaga });
 
-  const isAdmin = useMemo(() => roles.includes(Roles.admin), [roles]);
+  const { isAdmin } = useRoleManager();
 
   const { teamAdmin, name } = team;
 
@@ -186,7 +184,7 @@ export const TeamDetails = ({
                         disabled={singleTeamEditLoading}
                         selectedUserId={selectedUser?.id}
                         onSelect={handleOnSelect}
-                        rolesToInclude={[Roles.researcher, Roles.teamAdmin]}
+                        rolesToInclude={[Roles.Researcher, Roles.TeamAdmin]}
                         additionalUsers={[teamAdmin]}
                       />
                     </div>
@@ -215,9 +213,9 @@ export const TeamDetails = ({
             <UserList
               teamId={id}
               filterableRoles={[
-                Roles.participant,
-                Roles.researcher,
-                Roles.eInterventionAdmin,
+                Roles.Participant,
+                Roles.Researcher,
+                Roles.EInterventionAdmin,
               ]}
               listOnly
             />
@@ -235,12 +233,10 @@ TeamDetails.propTypes = {
   editTeam: PropTypes.func,
   inviteToTeam: PropTypes.func,
   intl: PropTypes.shape(IntlShape),
-  user: PropTypes.shape({ roles: PropTypes.arrayOf(PropTypes.string) }),
 };
 
 const mapStateToProps = createStructuredSelector({
   teamList: makeSelectTeamList(),
-  user: makeSelectUser(),
 });
 
 const mapDispatchToProps = {

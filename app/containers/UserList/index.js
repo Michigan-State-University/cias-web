@@ -25,7 +25,7 @@ import Loader from 'components/Loader';
 import SearchInput from 'components/Input/SearchInput';
 import TextButton from 'components/Button/TextButton';
 import UserRoleTile from 'components/UserRoleTile';
-import { Roles } from 'models/User/UserRoles';
+import { Roles } from 'models/User/RolesManager';
 import {
   fetchUsers,
   userListSaga,
@@ -187,7 +187,7 @@ function UserList({
             <H1 mr={10}>
               <FormattedMessage {...messages.manageAccount} />
             </H1>
-            {roles.includes(Roles.admin) && (
+            {roles.includes(Roles.Admin) && (
               <TextButton
                 buttonProps={{
                   color: themeColors.secondary,
@@ -223,11 +223,11 @@ UserList.propTypes = {
 UserList.defaultProps = {
   listOnly: false,
   filterableRoles: [
-    Roles.participant,
-    Roles.researcher,
-    Roles.teamAdmin,
-    Roles.thirdParty,
-    Roles.eInterventionAdmin,
+    Roles.Participant,
+    Roles.Researcher,
+    Roles.TeamAdmin,
+    Roles.ThirdParty,
+    Roles.EInterventionAdmin,
   ],
 };
 

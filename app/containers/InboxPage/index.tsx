@@ -78,7 +78,7 @@ export const InboxPage = () => {
         <LiveChat
           // TODO: get it from backend or from somewhere
           // conversationId="2b0dd6ed-8fef-4802-ad08-a543fa023662" for POC 1 test environment
-          conversationId="2b0dd6ed-8fef-4802-ad08-a543fa023662"
+          conversationId="aca2d75b-5428-4c5e-845b-57b86afc071d"
           onSendMessage={sendMessage}
         />
       </Box>

@@ -15,7 +15,7 @@ import { createStore } from 'redux';
 
 import 'jest-styled-components';
 
-import { Roles } from 'models/User/UserRoles';
+import { Roles } from 'models/User/RolesManager';
 import Navbar from '../index';
 import { DEFAULT_LOCALE } from '../../../i18n';
 
@@ -24,7 +24,7 @@ describe('<Navbar />', () => {
   const reducer = (state) => state;
   const initialState = {
     auth: {
-      user: { firstName: 'test', lastName: 'test', roles: [Roles.admin] },
+      user: { firstName: 'test', lastName: 'test', roles: [Roles.Admin] },
     },
     session: {
       session: {

@@ -37,10 +37,9 @@ import {
   canEdit,
   canShareWithParticipants,
 } from 'models/Status/statusPermissions';
-import { Roles } from 'models/User/UserRoles';
+import { useRoleManager } from 'models/User/RolesManager';
 import { reorderScope } from 'models/Session/ReorderScope';
 import { archived } from 'models/Status/StatusTypes';
-import { RolePermissions } from 'models/User/RolePermissions';
 import { CatMhLicenseType } from 'models/Intervention';
 import { getQuestionGroupsSaga } from 'global/reducers/questionGroups/sagas';
 import { editSessionRequest, editSessionSaga } from 'global/reducers/session';
@@ -123,7 +122,7 @@ export function InterventionDetailsPage({
   fetchSessionEmails,
   deleteSession,
   externalCopySession,
-  user: { id: userId, roles },
+  user: { id: userId },
   editSession,
 }) {
   const { interventionId } = useParams();
@@ -132,10 +131,7 @@ export function InterventionDetailsPage({
   const [deleteConfirmationSessionId, setDeleteConfirmationSessionId] =
     useState(null);
 
-  const rolePermissions = useMemo(() => RolePermissions(roles), [roles]);
-  const { canAssignOrganizationToIntervention } = rolePermissions;
-
-  const isAdmin = roles.includes(Roles.admin);
+  const { isAdmin, canAssignOrganizationToIntervention } = useRoleManager();
 
   const {
     sessions,
@@ -431,7 +427,6 @@ export function InterventionDetailsPage({
         canShareWithParticipants: sharingPossible,
         canArchive: archivingPossible,
         canDeleteSession: deletionPossible,
-        rolePermissions,
       }}
     >
       <AppContainer>

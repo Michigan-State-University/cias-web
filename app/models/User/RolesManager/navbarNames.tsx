@@ -3,7 +3,7 @@ import { FormattedMessage, defineMessages } from 'react-intl';
 
 const scope = 'app.navbarNames';
 
-const navbarMessages = defineMessages({
+export const navbarMessages = defineMessages({
   preview: {
     id: `${scope}.preview`,
     defaultMessage: 'Preview',
@@ -50,7 +50,7 @@ const navbarMessages = defineMessages({
   },
 });
 
-const navbarNames = {
+export const navbarNames = {
   preview: <FormattedMessage {...navbarMessages.preview} />,
   adminInterventions: (
     <FormattedMessage {...navbarMessages.adminInterventions} />
@@ -81,6 +81,3 @@ export const NAVIGATION = {
   SESSIONS: 'SESSIONS',
   PREVIEW: 'PREVIEW',
 };
-
-export { navbarMessages };
-export default navbarNames;
