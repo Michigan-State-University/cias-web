@@ -7,10 +7,10 @@
  *
  */
 
-import React, { useEffect, useMemo } from 'react';
+import React, { useEffect, useMemo, useState } from 'react';
 import isEmpty from 'lodash/isEmpty';
 import { Redirect, Switch } from 'react-router-dom';
-import { useLocation } from 'react-router';
+import { useLocation, matchPath } from 'react-router';
 import PropTypes from 'prop-types';
 import { useIntl } from 'react-intl';
 import { connect } from 'react-redux';
@@ -62,10 +62,11 @@ import ApiQueryMessageHandler from 'components/ApiQueryMessageHandler/Loadable';
 import ParticipantReports from 'containers/ParticipantDashboard/Loadable';
 import SessionMapPage from 'containers/SessionMapPage/Loadable';
 import ParticipantInterventionsPage from 'containers/ParticipantInterventionsPage/Loadable';
-import UserInterventionPage from 'containers/UserInterventionPage/Loadable';
 import UserInterventionInvitePage from 'containers/UserInterventionInvitePage/Loadable';
 import SuperadminConsolePage from 'containers/SuperadminConsolePage/Loadable';
 import InboxPage from 'containers/InboxPage/Loadable';
+import UserInterventionPage from 'containers/UserInterventionPage/Loadable';
+import ChatWidget from 'containers/ChatWidget';
 
 import AppRoute from 'components/AppRoute';
 import IdleTimer from 'components/IdleTimer/Loadable';
@@ -94,6 +95,26 @@ export function App({ user, fetchSelfDetails }) {
       fetchSelfDetails();
     }
   }, []);
+
+  const [shouldDisplayChatWidget, setShouldDisplayChatWidget] = useState(false);
+
+  useEffect(() => {
+    const isUserInterventionPage = matchPath(pathname, {
+      path: '/user_interventions/:userInterventionId',
+      exact: true,
+      strict: false,
+    });
+
+    const isUserAnswerSessionPage = matchPath(pathname, {
+      path: '/interventions/:interventionId/sessions/:sessionId/fill',
+      exact: true,
+      strict: false,
+    });
+
+    setShouldDisplayChatWidget(
+      !!isUserInterventionPage || !!isUserAnswerSessionPage,
+    );
+  }, [pathname]);
 
   const defaultSidebarId = useMemo(() => {
     if (!isEmpty(user?.roles)) {
@@ -493,6 +514,7 @@ export function App({ user, fetchSelfDetails }) {
           </AppRoute>
         </Switch>
         <GlobalStyle />
+        {shouldDisplayChatWidget && <ChatWidget />}
       </RolesManagerContext.Provider>
     </SocketProvider>
   );

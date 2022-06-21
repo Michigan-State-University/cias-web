@@ -16,6 +16,7 @@ export interface UserIntervention {
     imageAlt: Nullable<string>;
     id: string;
     files: FileInfo[];
+    liveChatEnabled: boolean;
   };
   lastAnswerDate: Nullable<string>;
   sessionsInIntervention: number;

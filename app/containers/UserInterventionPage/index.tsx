@@ -1,9 +1,11 @@
-import React, { useMemo } from 'react';
+import React, { useEffect, useMemo } from 'react';
+import { useDispatch } from 'react-redux';
 import { useParams } from 'react-router';
 import { useIntl } from 'react-intl';
 import { Helmet } from 'react-helmet';
 import groupBy from 'lodash/groupBy';
 import { Markup } from 'interweave';
+import { useInjectReducer } from 'redux-injectors';
 
 import useGet from 'utils/useGet';
 
@@ -14,6 +16,12 @@ import {
 import { Session } from 'models/Session/Session';
 import { UserSession } from 'models/UserSession/UserSession';
 import { FileInfo, InterventionType } from 'models/Intervention';
+
+import {
+  ChatWidgetReducer,
+  chatWidgetReducerKey,
+  setChatEnabled,
+} from 'global/reducers/chatWidget';
 
 import { themeColors } from 'theme';
 
@@ -40,6 +48,11 @@ interface Params {
 
 const UserInterventionPage = () => {
   const { userInterventionId } = useParams<Params>();
+
+  const globalDispatch = useDispatch();
+
+  // @ts-ignore
+  useInjectReducer({ key: chatWidgetReducerKey, reducer: ChatWidgetReducer });
 
   const { data, error, isFetching } = useGet<
     UserInterventionDTO,
@@ -71,6 +84,19 @@ const UserInterventionPage = () => {
   ]);
 
   const { formatMessage } = useIntl();
+
+  useEffect(() => {
+    if (!data || !setChatEnabled) return;
+
+    if (userIntervention.intervention.type === InterventionType.DEFAULT) {
+      globalDispatch(setChatEnabled(false));
+      return;
+    }
+
+    globalDispatch(
+      setChatEnabled(data.userIntervention.intervention.liveChatEnabled),
+    );
+  }, [data]);
 
   if (error) {
     return <ErrorAlert fullPage errorText={error} />;
