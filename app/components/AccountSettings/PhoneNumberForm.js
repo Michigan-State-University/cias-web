@@ -45,6 +45,8 @@ const PhoneNumberForm = ({
   disabled,
   required,
   confirmationDisabled,
+  prefixLabelMessage,
+  phoneLabel,
 }) => {
   const previousLoadingState = useRef(loading);
   const inputNumberRef = useRef(null);
@@ -160,7 +162,7 @@ const PhoneNumberForm = ({
                     width: 230,
                   }}
                   disabled={disabled}
-                  label={formatMessage(messages.phoneNumberPrefixLabel)}
+                  label={formatMessage(prefixLabelMessage)}
                   formikKey="iso"
                   options={prefixOptions}
                   inputProps={{
@@ -177,7 +179,7 @@ const PhoneNumberForm = ({
                   }}
                 />
                 <FormikNumberInput
-                  label={formatMessage(messages.phoneNumberLabel)}
+                  label={formatMessage(phoneLabel)}
                   value={numberValue}
                   formikKey="number"
                   placeholder={formatMessage(messages.phoneNumber)}
@@ -223,11 +225,15 @@ PhoneNumberForm.propTypes = {
   disabled: PropTypes.bool,
   confirmationDisabled: PropTypes.bool,
   required: PropTypes.bool,
+  prefixLabelMessage: PropTypes.object,
+  phoneLabel: PropTypes.object,
 };
 
 PhoneNumberForm.defaultProps = {
   disabled: false,
   required: true,
+  prefixLabelMessage: messages.phoneNumberPrefixLabel,
+  phoneLabel: messages.phoneNumberLabel,
 };
 
 export default PhoneNumberForm;
