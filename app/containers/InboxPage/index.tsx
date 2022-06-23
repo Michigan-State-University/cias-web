@@ -4,28 +4,37 @@ import { useDispatch } from 'react-redux';
 import { useInjectReducer, useInjectSaga } from 'redux-injectors';
 
 import {
-  LiveChatMessage,
-  SendLiveChatMessageDTO,
-} from 'models/LiveChatMessage';
-import { onNewChatMessage } from 'global/reducers/liveChat/actions';
-import allLiveChatSagas, {
-  allLiveChatSagasKey,
-} from 'global/reducers/liveChat/sagas';
-import { liveChatReducer, liveChatReducerKey } from 'global/reducers/liveChat';
+  Message,
+  MessageReadDTO,
+  ConversationCreatedDTO,
+  MessageSentDTO,
+  Conversation,
+} from 'models/LiveChat';
 
-import LiveChat from 'containers/LiveChat';
+import {
+  allLiveChatSagasKey,
+  allLiveChatSagas,
+  liveChatReducer,
+  liveChatReducerKey,
+  onMessageSentReceive,
+  onMessageReadReceive,
+  onConversationCreatedReceive,
+} from 'global/reducers/liveChat';
+import { mapConversationCreatedMessageData } from 'global/reducers/liveChat/utils';
+
+import LiveChatNavigatorPanel from 'containers/LiveChatNavigatorPanel';
 import AppContainer from 'components/Container';
-import Box from 'components/Box';
 
 import { useSocket } from 'utils/useSocket';
 import { jsonApiToObject } from 'utils/jsonApiMapper';
 
-import messages from './messages';
+import i18nMessages from './messages';
 import {
   CONVERSATION_CHANNEL_NAME,
-  ConversationChannelTopic,
+  ConversationChannelActionName,
+  ConversationChannelMessageTopic,
 } from './constants';
-import { ConversationChannel } from './types';
+import { ConversationChannelMessage, ConversationChannelAction } from './types';
 
 export const InboxPage = () => {
   const { formatMessage } = useIntl();
@@ -35,17 +44,57 @@ export const InboxPage = () => {
   // @ts-ignore
   useInjectReducer({ key: liveChatReducerKey, reducer: liveChatReducer });
 
-  const onNewMessage = (message: LiveChatMessage) => {
-    dispatch(onNewChatMessage(message));
+  const channel = useSocket<
+    ConversationChannelMessage,
+    ConversationChannelAction
+  >(CONVERSATION_CHANNEL_NAME);
+
+  const onMessageSent = (newMessage: Message) => {
+    dispatch(onMessageSentReceive(newMessage));
   };
 
-  const channel = useSocket<ConversationChannel>(CONVERSATION_CHANNEL_NAME);
+  const onMessageRead = (messageReadDTO: MessageReadDTO) => {
+    dispatch(onMessageReadReceive(messageReadDTO));
+  };
+
+  const onConversationCreated = (newConversation: Conversation) => {
+    dispatch(onConversationCreatedReceive(newConversation));
+  };
+
+  const sendMessage = (messageSentDTO: MessageSentDTO) => {
+    channel?.perform({
+      name: ConversationChannelActionName.ON_MESSAGE_SENT,
+      data: messageSentDTO,
+    });
+  };
+
+  const readMessage = (messageReadDTO: MessageReadDTO) => {
+    channel?.perform({
+      name: ConversationChannelActionName.ON_MESSAGE_READ,
+      data: messageReadDTO,
+    });
+  };
+
+  const createConversation = (
+    conversationCreatedDTO: ConversationCreatedDTO,
+  ) => {
+    channel?.perform({
+      name: ConversationChannelActionName.ON_CONVERSATION_CREATED,
+      data: conversationCreatedDTO,
+    });
+  };
 
   useEffect(() => {
     channel?.listen(({ data, topic }) => {
       switch (topic) {
-        case ConversationChannelTopic.NEW_CHAT_MESSAGE:
-          onNewMessage(jsonApiToObject(data, 'message'));
+        case ConversationChannelMessageTopic.MESSAGE_SENT:
+          onMessageSent(jsonApiToObject(data, 'message'));
+          break;
+        case ConversationChannelMessageTopic.MESSAGE_READ:
+          onMessageRead(data);
+          break;
+        case ConversationChannelMessageTopic.CONVERSATION_CREATED:
+          onConversationCreated(mapConversationCreatedMessageData(data));
           break;
         default:
           break;
@@ -53,35 +102,20 @@ export const InboxPage = () => {
     });
   }, [channel]);
 
-  const sendMessage = (
-    content: string,
-    conversationId: string,
-    senderId: string,
-  ) => {
-    const message: SendLiveChatMessageDTO = {
-      conversationId,
-      content,
-      senderId,
-    };
-    channel?.sent(message);
-  };
-
   return (
     <AppContainer
-      justify="center"
       display="flex"
+      direction="column"
+      align="center"
       height="100%"
       py={54}
-      pageTitle={formatMessage(messages.pageTitle)}
+      pageTitle={formatMessage(i18nMessages.pageTitle)}
     >
-      <Box width="100%" display="flex" justify="center">
-        <LiveChat
-          // TODO: get it from backend or from somewhere
-          // conversationId="2b0dd6ed-8fef-4802-ad08-a543fa023662" for POC 1 test environment
-          conversationId="aca2d75b-5428-4c5e-845b-57b86afc071d"
-          onSendMessage={sendMessage}
-        />
-      </Box>
+      <LiveChatNavigatorPanel
+        onSendMessage={sendMessage}
+        onReadMessage={readMessage}
+        onCreateConversation={createConversation}
+      />
     </AppContainer>
   );
 };
