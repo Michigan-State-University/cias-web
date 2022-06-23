@@ -67,6 +67,8 @@ import messages from './messages';
 import { StyledBox } from './styled';
 import { OptionType } from './types';
 
+const NAVIGATOR_SETTINGS_MODAL_WIDTH = 918;
+
 interface Props {
   intervention: Intervention;
   updateIntervention: (interventionData: Partial<Intervention>) => void;
@@ -126,8 +128,9 @@ const SettingsPanel = ({
       ),
       props: {
         title: formatMessage(messages.useNavigatorSettings),
-        width: 918,
+        width: NAVIGATOR_SETTINGS_MODAL_WIDTH,
         height: 722,
+        maxWidth: NAVIGATOR_SETTINGS_MODAL_WIDTH,
       },
     });
 
@@ -246,6 +249,7 @@ const SettingsPanel = ({
               ml={15}
               src={cog}
               alt="manage"
+              cursor="pointer"
             />
           </Box>
           <InterventionRadioPanel
