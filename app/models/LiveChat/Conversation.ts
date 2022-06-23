@@ -12,3 +12,7 @@ export type Conversation = {
   lastMessage: Nullable<LastMessage>;
   liveChatInterlocutors: Record<Interlocutor['id'], Interlocutor>;
 };
+
+export type ConversationCreatedDTO = {
+  userId: string;
+};

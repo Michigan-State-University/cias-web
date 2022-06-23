@@ -14,6 +14,7 @@ import {
   FETCH_CONVERSATION_MESSAGES_ERROR,
   FETCH_CONVERSATION_MESSAGES_REQUEST,
   FETCH_CONVERSATION_MESSAGES_SUCCESS,
+  ON_CONVERSATION_CREATED_RECEIVE,
   READ_MESSAGE,
 } from './constants';
 
@@ -75,4 +76,9 @@ export const onMessageSentReceive = createAction(
 export const onMessageReadReceive = createAction(
   ON_MESSAGE_READ_RECEIVE,
   (action) => (messageReadDTO: MessageReadDTO) => action({ messageReadDTO }),
+);
+
+export const onConversationCreatedReceive = createAction(
+  ON_CONVERSATION_CREATED_RECEIVE,
+  (action) => (conversation: Conversation) => action({ conversation }),
 );

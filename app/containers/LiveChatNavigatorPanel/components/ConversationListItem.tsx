@@ -8,6 +8,8 @@ import { colors } from 'theme';
 
 import { Conversation } from 'models/LiveChat';
 
+import { formatInterlocutorName } from 'utils/liveChatUtils';
+
 import UserAvatar from 'components/UserAvatar';
 import Column from 'components/Column';
 import Row from 'components/Row';
@@ -60,10 +62,6 @@ export const ConversationListItem = ({
     ({ userId }) => userId !== currentUserId,
   );
 
-  const conversationLabel = otherInterlocutor
-    ? `${otherInterlocutor?.firstName} ${otherInterlocutor?.lastName}`
-    : '?';
-
   const markUnread =
     lastMessage &&
     !lastMessage.isRead &&
@@ -95,7 +93,7 @@ export const ConversationListItem = ({
             whiteSpace="nowrap"
             overflow="hidden"
           >
-            {conversationLabel}
+            {formatInterlocutorName(otherInterlocutor)}
           </Text>
           {lastMessage && (
             <Column flexShrink={0} width="auto">

@@ -15,7 +15,7 @@ export type LastMessage = {
   createdAt: string;
 };
 
-export type NewMessageDTO = {
+export type MessageSentDTO = {
   conversationId: string;
   interlocutorId: string;
   content: string;

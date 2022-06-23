@@ -32,9 +32,9 @@ export const NavigatorPanelGridRow = styled(GRow)`
   background-color: ${colors.white};
   padding: 0 24px;
   flex: 1 !important;
+  min-height: 0;
   width: 100%;
   max-width: ${CHAT_WIDTH}px;
-  max-height: 100%;
 `;
 
 export const NavigatorPanelGridColumn = styled(GCol)`

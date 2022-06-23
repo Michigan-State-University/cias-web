@@ -1,11 +1,8 @@
-import {
-  Conversation,
-  DenormalizedConversation,
-  Interlocutor,
-} from 'models/LiveChat';
+import { Conversation, DenormalizedConversation } from 'models/LiveChat';
 import { ApiData } from 'models/Api';
 
-import { jsonApiToArray } from 'utils/jsonApiMapper';
+import { jsonApiToArray, jsonApiToObject } from 'utils/jsonApiMapper';
+import { normalizeArrayToObject } from 'utils/normalizeArrayToObject';
 
 export const mapFetchConversationsResponse = (
   data: ApiData<DenormalizedConversation>,
@@ -18,13 +15,9 @@ export const mapFetchConversationsResponse = (
   // normalizes conversation recursively with interlocutors
   // param reassign used for improving performance
   return denormalizedConversations.reduce((conversations, conversation) => {
-    const normalizedInterlocutors = conversation.liveChatInterlocutors.reduce(
-      (interlocutors, interlocutor) => {
-        // eslint-disable-next-line no-param-reassign
-        interlocutors[interlocutor.id] = interlocutor;
-        return interlocutors;
-      },
-      {} as Record<Interlocutor['id'], Interlocutor>,
+    const normalizedInterlocutors = normalizeArrayToObject(
+      conversation.liveChatInterlocutors,
+      'id',
     );
 
     // eslint-disable-next-line no-param-reassign
@@ -35,4 +28,23 @@ export const mapFetchConversationsResponse = (
 
     return conversations;
   }, {} as Record<Conversation['id'], Conversation>);
+};
+
+export const mapConversationCreatedMessageData = (
+  data: ApiData<DenormalizedConversation>,
+): Conversation => {
+  const denormalizedConversation: DenormalizedConversation = jsonApiToObject(
+    data,
+    'conversation',
+  );
+
+  const normalizedInterlocutors = normalizeArrayToObject(
+    denormalizedConversation.liveChatInterlocutors,
+    'id',
+  );
+
+  return {
+    ...denormalizedConversation,
+    liveChatInterlocutors: normalizedInterlocutors,
+  };
 };

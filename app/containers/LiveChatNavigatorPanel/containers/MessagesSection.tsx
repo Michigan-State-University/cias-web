@@ -5,7 +5,7 @@ import findLastIndex from 'lodash/findLastIndex';
 
 import { themeColors } from 'theme';
 
-import { NewMessageDTO, MessageReadDTO } from 'models/LiveChat';
+import { MessageSentDTO, MessageReadDTO } from 'models/LiveChat';
 
 import {
   fetchConversationMessagesRequest,
@@ -27,7 +27,7 @@ import MessageList from '../components/MessageList';
 import { MessagesSectionContainer } from '../components/styled';
 
 export type Props = {
-  onSendMessage: (newMessage: NewMessageDTO) => void;
+  onSendMessage: (messageSentDTO: MessageSentDTO) => void;
   onReadMessage: (messageReadDTO: MessageReadDTO) => void;
 };
 
@@ -127,7 +127,7 @@ export const MessagesSection = ({ onSendMessage, onReadMessage }: Props) => {
       {error && (
         <ErrorAlert fullPage={false} errorText={i18nMessages.messagesError} />
       )}
-      {!loading && !error && conversation && currentInterlocutorId && (
+      {!loading && !error && conversation && (
         <>
           <MessageList
             currentInterlocutorId={currentInterlocutorId}

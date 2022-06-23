@@ -3,7 +3,13 @@ import { useIntl } from 'react-intl';
 import { useDispatch } from 'react-redux';
 import { useInjectReducer, useInjectSaga } from 'redux-injectors';
 
-import { Message, MessageReadDTO, NewMessageDTO } from 'models/LiveChat';
+import {
+  Message,
+  MessageReadDTO,
+  ConversationCreatedDTO,
+  MessageSentDTO,
+  Conversation,
+} from 'models/LiveChat';
 
 import {
   allLiveChatSagasKey,
@@ -12,7 +18,9 @@ import {
   liveChatReducerKey,
   onMessageSentReceive,
   onMessageReadReceive,
+  onConversationCreatedReceive,
 } from 'global/reducers/liveChat';
+import { mapConversationCreatedMessageData } from 'global/reducers/liveChat/utils';
 
 import LiveChatNavigatorPanel from 'containers/LiveChatNavigatorPanel';
 import AppContainer from 'components/Container';
@@ -20,7 +28,7 @@ import AppContainer from 'components/Container';
 import { useSocket } from 'utils/useSocket';
 import { jsonApiToObject } from 'utils/jsonApiMapper';
 
-import messages from './messages';
+import i18nMessages from './messages';
 import {
   CONVERSATION_CHANNEL_NAME,
   ConversationChannelActionName,
@@ -49,10 +57,14 @@ export const InboxPage = () => {
     dispatch(onMessageReadReceive(messageReadDTO));
   };
 
-  const sendMessage = (newMessage: NewMessageDTO) => {
+  const onConversationCreated = (newConversation: Conversation) => {
+    dispatch(onConversationCreatedReceive(newConversation));
+  };
+
+  const sendMessage = (messageSentDTO: MessageSentDTO) => {
     channel?.perform({
       name: ConversationChannelActionName.ON_MESSAGE_SENT,
-      data: newMessage,
+      data: messageSentDTO,
     });
   };
 
@@ -60,6 +72,15 @@ export const InboxPage = () => {
     channel?.perform({
       name: ConversationChannelActionName.ON_MESSAGE_READ,
       data: messageReadDTO,
+    });
+  };
+
+  const createConversation = (
+    conversationCreatedDTO: ConversationCreatedDTO,
+  ) => {
+    channel?.perform({
+      name: ConversationChannelActionName.ON_CONVERSATION_CREATED,
+      data: conversationCreatedDTO,
     });
   };
 
@@ -71,6 +92,9 @@ export const InboxPage = () => {
           break;
         case ConversationChannelMessageTopic.MESSAGE_READ:
           onMessageRead(data);
+          break;
+        case ConversationChannelMessageTopic.CONVERSATION_CREATED:
+          onConversationCreated(mapConversationCreatedMessageData(data));
           break;
         default:
           break;
@@ -85,11 +109,12 @@ export const InboxPage = () => {
       align="center"
       height="100%"
       py={54}
-      pageTitle={formatMessage(messages.pageTitle)}
+      pageTitle={formatMessage(i18nMessages.pageTitle)}
     >
       <LiveChatNavigatorPanel
         onSendMessage={sendMessage}
         onReadMessage={readMessage}
+        onCreateConversation={createConversation}
       />
     </AppContainer>
   );

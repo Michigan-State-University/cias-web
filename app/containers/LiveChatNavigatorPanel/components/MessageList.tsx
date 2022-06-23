@@ -1,13 +1,19 @@
 import React, { memo, useCallback, useMemo } from 'react';
 import findLastIndex from 'lodash/findLastIndex';
+import { useIntl } from 'react-intl';
 
 import { Interlocutor, Message } from 'models/LiveChat';
 
+import { formatInterlocutorName } from 'utils/liveChatUtils';
+
 import Box from 'components/Box';
 import ChatMessage from 'components/ChatMessage';
+import Text from 'components/Text';
+
+import i18nMessages from '../messages';
 
 export type Props = {
-  currentInterlocutorId: string;
+  currentInterlocutorId: Nullable<string>;
   messages: Message[];
   interlocutors: Record<Interlocutor['id'], Interlocutor>;
   newestOtherUserMessageIndex?: number;
@@ -19,6 +25,8 @@ const MessageList = ({
   interlocutors,
   newestOtherUserMessageIndex = -1,
 }: Props) => {
+  const { formatMessage } = useIntl();
+
   const isOwnMessage = (liveChatMessage: Message) =>
     liveChatMessage.interlocutorId === currentInterlocutorId;
 
@@ -57,8 +65,7 @@ const MessageList = ({
   const getSenderName = useCallback(
     (interlocutorId: string) => {
       const interlocutor = interlocutors[interlocutorId];
-      if (!interlocutor) return '';
-      return `${interlocutor?.firstName ?? ''} ${interlocutor?.lastName ?? ''}`;
+      return formatInterlocutorName(interlocutor);
     },
     [interlocutors],
   );
@@ -73,6 +80,9 @@ const MessageList = ({
       pr={16}
     >
       <Box mb={24}>
+        {!messages.length && (
+          <Text>{formatMessage(i18nMessages.noMessages)}</Text>
+        )}
         {messages.map((chatMessage, index) => {
           const hideSender = shouldHideSender(chatMessage, messages[index - 1]);
           const { id, interlocutorId, content } = chatMessage;

@@ -45,4 +45,20 @@ export default defineMessages({
     id: `${scope}.you`,
     defaultMessage: 'You: ',
   },
+  createConversation: {
+    id: `${scope}.createConversation`,
+    defaultMessage: 'Create conversation',
+  },
+  userId: {
+    id: `${scope}.userId`,
+    defaultMessage: 'User ID',
+  },
+  noConversations: {
+    id: `${scope}.noConversations`,
+    defaultMessage: "You don't have any active conversations",
+  },
+  noMessages: {
+    id: `${scope}.noMessages`,
+    defaultMessage: 'No messages yet',
+  },
 });

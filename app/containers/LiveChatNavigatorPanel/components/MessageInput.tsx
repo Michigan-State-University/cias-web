@@ -10,7 +10,7 @@ import { themeColors } from 'theme';
 
 import AirplaneIcon from 'assets/svg/paper-airplane2.svg';
 
-import messages from '../messages';
+import i18nMessages from '../messages';
 import { StyledTextArea } from './styled';
 
 type Props = {
@@ -38,7 +38,7 @@ export const MessageInput = ({ value, onChange, onSend, error }: Props) => {
     <Box>
       <Box width="100%" height="46px" position="relative">
         <StyledTextArea
-          placeholder={formatMessage(messages.inputPlaceholder)}
+          placeholder={formatMessage(i18nMessages.inputPlaceholder)}
           onChange={handleChange}
           value={value}
           onKeyDown={onSend && handleKeyDown}
@@ -53,7 +53,7 @@ export const MessageInput = ({ value, onChange, onSend, error }: Props) => {
           <ImageButton
             onClick={onSend}
             src={AirplaneIcon}
-            title={formatMessage(messages.inputSendIconTitle)}
+            title={formatMessage(i18nMessages.inputSendIconTitle)}
             disabled={Boolean(error)}
           />
         </Box>

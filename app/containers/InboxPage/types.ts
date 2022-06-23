@@ -1,5 +1,11 @@
 import { ApiData } from 'models/Api';
-import { Message, MessageReadDTO, NewMessageDTO } from 'models/LiveChat';
+import {
+  DenormalizedConversation,
+  Message,
+  MessageReadDTO,
+  ConversationCreatedDTO,
+  MessageSentDTO,
+} from 'models/LiveChat';
 
 import { SocketAction, SocketMessage } from 'utils/useSocket';
 
@@ -20,16 +26,22 @@ export type MessageReadSocketMessage = SocketMessage<
   MessageReadDTO
 >;
 
+export type ConversationCreatedSocketMessage = SocketMessage<
+  ConversationChannelMessageTopic.CONVERSATION_CREATED,
+  ApiData<DenormalizedConversation>
+>;
+
 // Create a union type with any new SocketMessage type
 export type ConversationChannelMessage =
   | MessageSentSocketMessage
-  | MessageReadSocketMessage;
+  | MessageReadSocketMessage
+  | ConversationCreatedSocketMessage;
 
 // SOCKET ACTIONS
 
 export type OnMessageSentSocketAction = SocketAction<
   ConversationChannelActionName.ON_MESSAGE_SENT,
-  NewMessageDTO
+  MessageSentDTO
 >;
 
 export type OnMessageReadSocketAction = SocketAction<
@@ -37,7 +49,13 @@ export type OnMessageReadSocketAction = SocketAction<
   MessageReadDTO
 >;
 
+export type OnConversationCreatedSocketAction = SocketAction<
+  ConversationChannelActionName.ON_CONVERSATION_CREATED,
+  ConversationCreatedDTO
+>;
+
 // Create a union type with any new SocketAction type
 export type ConversationChannelAction =
   | OnMessageSentSocketAction
-  | OnMessageReadSocketAction;
+  | OnMessageReadSocketAction
+  | OnConversationCreatedSocketAction;
