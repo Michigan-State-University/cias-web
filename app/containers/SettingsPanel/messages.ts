@@ -175,4 +175,38 @@ export default defineMessages({
     id: `${scope}.notifyBySms`,
     defaultMessage: 'Notify by SMS',
   },
+  hotlinePrefix: {
+    id: `${scope}.hotlinePrefix`,
+    defaultMessage: 'Hotline prefix',
+  },
+  hotlinePhoneNumber: {
+    id: `${scope}.hotlinePhoneNumber`,
+    defaultMessage: 'Hotline phone number',
+  },
+  saveChanges: {
+    id: `${scope}.saveChanges`,
+    defaultMessage: 'Save changes',
+  },
+  emailPlaceholder: {
+    id: `${scope}.emailPlaceholder`,
+    defaultMessage: 'e.g. contact@cias.app',
+  },
+  emailLabel: {
+    id: `${scope}.emailLabel`,
+    defaultMessage: 'Contact e-mail address',
+  },
+  messageLabel: {
+    id: `${scope}.messageLabel`,
+    defaultMessage:
+      'Message to participant when no navigator is available<warningColor>*</warningColor>',
+  },
+  messagePlaceholder: {
+    id: `${scope}.messagePlaceholder`,
+    defaultMessage:
+      'e.g. Sorry, but all our navigators are busy at the moment :(',
+  },
+  textInformation: {
+    id: `${scope}.textInformation`,
+    defaultMessage: 'Text information for participant',
+  },
 });

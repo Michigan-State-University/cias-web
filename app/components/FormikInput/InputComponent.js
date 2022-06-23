@@ -64,7 +64,7 @@ InputComponent.propTypes = {
   error: PropTypes.string,
   hasError: PropTypes.bool,
   inputProps: PropTypes.object,
-  label: PropTypes.string,
+  label: PropTypes.oneOfType([PropTypes.string, PropTypes.array]),
   id: PropTypes.string,
   name: PropTypes.string,
   onBlur: PropTypes.func,
