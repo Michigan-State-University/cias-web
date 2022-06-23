@@ -209,4 +209,8 @@ export default defineMessages({
     id: `${scope}.textInformation`,
     defaultMessage: 'Text information for participant',
   },
+  navigatorSetupError: {
+    id: `${scope}.navigatorSetupError`,
+    defaultMessage: `Couldn't fetch navigator setup`,
+  },
 });
