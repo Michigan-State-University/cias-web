@@ -14,6 +14,7 @@ import {
   fetchConversationsRequest,
   fetchConversationsSuccess,
   fetchConversationsError,
+  readMessage,
 } from './actions';
 import { LiveChatAction, LiveChatState } from './types';
 
@@ -47,6 +48,17 @@ export const liveChatReducer = (
       }
       case getType(closeConversation): {
         draft.openedConversationId = null;
+        break;
+      }
+      case getType(readMessage): {
+        const { conversationId, messageId } = payload;
+        const { lastMessage } = draft.conversations[conversationId];
+        if (lastMessage?.id === messageId) {
+          lastMessage.isRead = true;
+        }
+        updateItemById(draft.messages[conversationId], messageId, {
+          isRead: true,
+        });
         break;
       }
       case getType(fetchConversationsRequest): {

@@ -14,6 +14,7 @@ import {
   FETCH_CONVERSATION_MESSAGES_ERROR,
   FETCH_CONVERSATION_MESSAGES_REQUEST,
   FETCH_CONVERSATION_MESSAGES_SUCCESS,
+  READ_MESSAGE,
 } from './constants';
 
 export const openConversation = createAction(
@@ -24,6 +25,12 @@ export const openConversation = createAction(
 export const closeConversation = createAction(
   CLOSE_CONVERSATION,
   (action) => () => action({}),
+);
+
+export const readMessage = createAction(
+  READ_MESSAGE,
+  (action) => (conversationId: string, messageId: string) =>
+    action({ conversationId, messageId }),
 );
 
 export const fetchConversationsRequest = createAction(

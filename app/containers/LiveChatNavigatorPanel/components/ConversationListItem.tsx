@@ -64,6 +64,11 @@ export const ConversationListItem = ({
     ? `${otherInterlocutor?.firstName} ${otherInterlocutor?.lastName}`
     : '?';
 
+  const markUnread =
+    lastMessage &&
+    !lastMessage.isRead &&
+    lastMessage.interlocutorId === otherInterlocutor?.id;
+
   return (
     <ConversationListItemContainer highlighted={opened} onClick={handleClick}>
       <Column flexShrink={0} width="auto">
@@ -85,7 +90,7 @@ export const ConversationListItem = ({
             fontSize={14}
             lineHeight="14px"
             color={colors.bluewood}
-            textOpacity={0.7}
+            textOpacity={markUnread ? 1 : 0.7}
             textOverflow="ellipsis"
             whiteSpace="nowrap"
             overflow="hidden"
@@ -99,7 +104,7 @@ export const ConversationListItem = ({
                 fontSize={12}
                 lineHeight="14px"
                 color={colors.bluewood}
-                textOpacity={0.7}
+                textOpacity={markUnread ? 1 : 0.7}
               >
                 {dayjs(lastMessage.createdAt).fromNow(true)}
               </Text>
@@ -115,7 +120,8 @@ export const ConversationListItem = ({
                   fontSize={12}
                   lineHeight="12px"
                   color={colors.bluewood}
-                  textOpacity={0.7}
+                  textOpacity={markUnread ? 1 : 0.7}
+                  fontWeight={markUnread ? 'bold' : 'regular'}
                 >
                   {formatMessage(i18nMessages.you)}&nbsp;
                 </Text>
@@ -125,7 +131,8 @@ export const ConversationListItem = ({
               fontSize={12}
               lineHeight="12px"
               color={colors.bluewood}
-              textOpacity={0.7}
+              textOpacity={markUnread ? 1 : 0.7}
+              fontWeight={markUnread ? 'bold' : 'regular'}
               textOverflow="ellipsis"
               whiteSpace="nowrap"
               overflow="hidden"
@@ -135,6 +142,11 @@ export const ConversationListItem = ({
           </Row>
         )}
       </Column>
+      <Column
+        flexShrink={0}
+        width={2}
+        background={markUnread ? colors.vermilion : 'inherit'}
+      />
     </ConversationListItemContainer>
   );
 };

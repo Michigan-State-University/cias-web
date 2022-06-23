@@ -1,5 +1,6 @@
 export const OPEN_CONVERSATION = 'app/LiveChat/OPEN_CONVERSATION';
 export const CLOSE_CONVERSATION = 'app/LiveChat/CLOSE_CONVERSATION';
+export const READ_MESSAGE = 'app/LiveChat/READ_MESSAGE';
 
 export const FETCH_CONVERSATIONS_REQUEST =
   'app/LiveChat/FETCH_CONVERSATIONS_REQUEST';

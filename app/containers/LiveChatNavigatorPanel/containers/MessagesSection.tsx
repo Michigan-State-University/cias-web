@@ -14,6 +14,7 @@ import {
   makeSelectLiveChatLoader,
   makeSelectOpenedConversation,
   makeSelectOpenedConversationMessages,
+  readMessage,
 } from 'global/reducers/liveChat';
 
 import Spinner from 'components/Spinner';
@@ -72,9 +73,14 @@ export const MessagesSection = ({ onSendMessage, onReadMessage }: Props) => {
     const newestOtherUserMessage = messages[newestOtherUserMessageIndex];
 
     if (!newestOtherUserMessage.isRead) {
+      const conversationId = conversation.id;
+      const messageId = newestOtherUserMessage.id;
+
+      dispatch(readMessage(conversationId, messageId));
+
       onReadMessage({
-        messageId: newestOtherUserMessage.id,
-        conversationId: conversation.id,
+        conversationId,
+        messageId,
       });
     }
   }, [messagesLoading, error, newestOtherUserMessageIndex]);
