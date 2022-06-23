@@ -207,6 +207,7 @@ exports[`<SettingsPanel /> Should render and match the snapshot 1`] = `
   width: auto;
   height: auto;
   margin-left: 15px;
+  cursor: pointer;
 }
 
 .c21 {
@@ -754,6 +755,7 @@ exports[`<SettingsPanel /> Should render and match the snapshot 1`] = `
           <img
             alt="manage"
             class="c16"
+            cursor="pointer"
             src="IMAGE_MOCK"
           />
         </div>
