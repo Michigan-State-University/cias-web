@@ -228,6 +228,7 @@ UserList.defaultProps = {
     Roles.TeamAdmin,
     Roles.ThirdParty,
     Roles.EInterventionAdmin,
+    Roles.Navigator,
   ],
 };
 
