@@ -152,6 +152,7 @@ export function App({ user, fetchSelfDetails }) {
         );
       if (arraysOverlap(user.roles, [Roles.ClinicAdmin]))
         return <ClinicAdminRedirectPage />;
+      if (arraysOverlap(user.roles, [Roles.Navigator])) return <InboxPage />;
 
       return NotFoundPage;
     }

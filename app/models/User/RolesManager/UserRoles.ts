@@ -9,6 +9,7 @@ export enum Roles {
   EInterventionAdmin = 'e_intervention_admin',
   HealthSystemAdmin = 'health_system_admin',
   ClinicAdmin = 'health_clinic_admin',
+  Navigator = 'navigator',
 }
 
 export const AllRoles = [
@@ -21,4 +22,5 @@ export const AllRoles = [
   Roles.OrganizationAdmin,
   Roles.HealthSystemAdmin,
   Roles.ClinicAdmin,
+  Roles.Navigator,
 ];
