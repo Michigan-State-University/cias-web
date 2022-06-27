@@ -61,4 +61,8 @@ export default defineMessages({
     id: `${scope}.noMessages`,
     defaultMessage: 'No messages yet',
   },
+  interventionId: {
+    id: `${scope}.interventionId`,
+    defaultMessage: 'Intervention ID',
+  },
 });
