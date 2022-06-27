@@ -22,6 +22,7 @@ describe('UserList actions', () => {
             'organization_admin',
             'health_system_admin',
             'health_clinic_admin',
+            'navigator',
           ],
         },
         type: FETCH_USERS,

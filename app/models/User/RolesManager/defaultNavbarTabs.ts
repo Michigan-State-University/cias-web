@@ -59,7 +59,14 @@ const conversationsTab = (message: JSX.Element, icon: SVGElement) => ({
   icon,
 });
 
-const navigationTabs = {
+const navigationTabs: {
+  [key in Roles]: {
+    id: string;
+    path: string;
+    icon: SVGElement;
+    message: JSX.Element;
+  }[];
+} = {
   [Roles.Admin]: [
     interventionsTab(navbarNames.adminInterventions, folder),
     accountsTab(navbarNames.adminAccounts, peopleHR),
@@ -82,11 +89,8 @@ const navigationTabs = {
     conversationsTab(navbarNames.conversations, folder),
   ],
   [Roles.ThirdParty]: [],
-  [Roles.Guest]: [
-    {
-      message: navbarNames.guestInterventions,
-    },
-  ],
+  [Roles.Guest]: [],
+  [Roles.Navigator]: [conversationsTab(navbarNames.conversations, folder)],
 };
 
 export default navigationTabs;
