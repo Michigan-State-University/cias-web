@@ -1,12 +1,15 @@
-import React from 'react';
+import React, { useMemo } from 'react';
 import { useIntl } from 'react-intl';
 import { useFormik } from 'formik';
 import * as Yup from 'yup';
+import { useSelector } from 'react-redux';
 
+import { makeSelectNavigatorSetupLoader } from 'global/reducers/navigatorSetup';
 import {
   emailFormValidationSchema,
   requiredValidationSchema,
 } from 'utils/validators';
+import { NavigatorSetup, NotifyByOptions } from 'models/NavigatorSetup';
 
 import Box from 'components/Box';
 import Switch from 'components/Switch';
@@ -20,32 +23,70 @@ import Button from 'components/Button';
 import messages from '../messages';
 
 const validationSchema = Yup.object().shape({
-  message: requiredValidationSchema,
-  email: emailFormValidationSchema,
+  noNavigatorAvailableMessage: requiredValidationSchema,
+  contactEmail: emailFormValidationSchema,
 });
 
-// type Props = {};
-const NoNavigatorsForm = () => {
+type Props = Pick<
+  NavigatorSetup,
+  | 'contactEmail'
+  | 'isNavigatorNotificationOn'
+  | 'noNavigatorAvailableMessage'
+  | 'notifyBy'
+  | 'phone'
+> & {
+  updateNavigatorSettings: (
+    newData: Partial<Omit<NavigatorSetup, 'id'>>,
+  ) => void;
+};
+
+const NoNavigatorsForm = ({
+  contactEmail,
+  isNavigatorNotificationOn,
+  noNavigatorAvailableMessage,
+  notifyBy,
+  phone,
+  updateNavigatorSettings,
+}: Props) => {
   const { formatMessage } = useIntl();
+  const isUpdating = useSelector(makeSelectNavigatorSetupLoader('updateForm'));
+
+  const initialValues = useMemo(
+    () => ({
+      noNavigatorAvailableMessage,
+      contactEmail,
+      prefix: phone?.prefix || '',
+      phoneNumber: phone?.number || '',
+      iso: phone?.iso || '',
+    }),
+    [],
+  );
+
   const formik = useFormik({
-    initialValues: {
-      message: '',
-      email: '',
-      prefix: '',
-      phoneNumber: '',
-      iso: '',
-    },
+    initialValues,
     validationSchema,
     validateOnMount: false,
-    onSubmit: (fields) => console.log(fields),
+    onSubmit: ({
+      noNavigatorAvailableMessage: message,
+      contactEmail: email,
+      prefix: phonePrefix,
+      phoneNumber: number,
+      iso: phoneIso,
+    }) =>
+      updateNavigatorSettings({
+        contactEmail: email,
+        noNavigatorAvailableMessage: message,
+        phone: { iso: phoneIso, prefix: phonePrefix, number },
+      }),
   });
+
   return (
     <>
       <Box>
         <H3 mb={30}>{formatMessage(messages.textInformation)}</H3>
         {/* @ts-ignore */}
         <FormikHookInput
-          formikKey="message"
+          formikKey="noNavigatorAvailableMessage"
           formikState={formik}
           placeholder={formatMessage(messages.messagePlaceholder)}
           label={formatMessage(messages.messageLabel)}
@@ -54,7 +95,7 @@ const NoNavigatorsForm = () => {
         <Box my={30}>
           <PhoneNumberForm
             formatMessage={formatMessage}
-            // phone={phone}
+            phone={phone}
             changePhoneNumber={({
               phoneAttributes: { number, prefix, iso },
             }) => {
@@ -69,7 +110,7 @@ const NoNavigatorsForm = () => {
         </Box>
         {/* @ts-ignore */}
         <FormikHookInput
-          formikKey="email"
+          formikKey="contactEmail"
           formikState={formik}
           placeholder={formatMessage(messages.emailPlaceholder)}
           label={formatMessage(messages.emailLabel)}
@@ -79,7 +120,7 @@ const NoNavigatorsForm = () => {
         <Button
           type="submit"
           disabled={!formik.isValid}
-          loading={formik.isSubmitting}
+          loading={isUpdating}
           px={20}
           width="auto"
           mt={20}
@@ -91,13 +132,31 @@ const NoNavigatorsForm = () => {
       </Box>
       <Box display="flex">
         <H3>{formatMessage(messages.notifyNavigator)}</H3>
-        <Switch checked onToggle={() => {}} />
+        <Switch
+          checked={isNavigatorNotificationOn}
+          onToggle={(newValue) =>
+            updateNavigatorSettings({ isNavigatorNotificationOn: newValue })
+          }
+          id="navigator-notification"
+        />
       </Box>
       <Box display="flex" mt={20}>
-        <Radio id="notify_by_sms_radio" onChange={() => {}} checked={false}>
+        <Radio
+          id="notify_by_sms_radio"
+          onChange={() =>
+            updateNavigatorSettings({ notifyBy: NotifyByOptions.SMS })
+          }
+          checked={notifyBy === NotifyByOptions.SMS}
+        >
           <Text mr={32}>{formatMessage(messages.notifyBySms)}</Text>
         </Radio>
-        <Radio id="notify_by_email_radio" onChange={() => {}} checked>
+        <Radio
+          id="notify_by_email_radio"
+          onChange={() =>
+            updateNavigatorSettings({ notifyBy: NotifyByOptions.EMAIL })
+          }
+          checked={notifyBy === NotifyByOptions.EMAIL}
+        >
           <Text>{formatMessage(messages.notifyByEmail)}</Text>
         </Radio>
       </Box>

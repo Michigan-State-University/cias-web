@@ -1,11 +1,28 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { useIntl } from 'react-intl';
+import { injectReducer, injectSaga } from 'redux-injectors';
+import { compose } from 'redux';
+import { useDispatch, useSelector } from 'react-redux';
 
+import {
+  allNavigatorSetupSagas,
+  navigatorSetupReducer,
+  fetchNavigatorSetupRequest,
+  makeSelectNavigatorSetupLoader,
+  makeSelectNavigatorSetupError,
+  makeSelectNavigatorSetupData,
+  updateNavigatorSetupRequest,
+} from 'global/reducers/navigatorSetup';
 import Tabs from 'components/Tabs';
+import ErrorAlert from 'components/ErrorAlert';
+import Spinner from 'components/Spinner';
+
+import { themeColors } from 'theme';
+import { NavigatorSetup } from 'models/NavigatorSetup';
+import NoNavigatorsForm from './NoNavigatorsForm';
 
 import messages from '../messages';
 import NavigatorModalLayout from '../Components/NavigatorModalLayout';
-import NoNavigatorsForm from './NoNavigatorsForm';
 
 type Props = {
   interventionId: string;
@@ -13,17 +30,61 @@ type Props = {
 
 const NavigatorSettingsModal = ({ interventionId }: Props) => {
   const { formatMessage } = useIntl();
+  const dispatch = useDispatch();
+
+  const loading = useSelector(makeSelectNavigatorSetupLoader('fetching'));
+  const error = useSelector(makeSelectNavigatorSetupError());
+  const navigatorSetupData = useSelector(makeSelectNavigatorSetupData());
+
+  useEffect(() => {
+    dispatch(fetchNavigatorSetupRequest(interventionId));
+  }, []);
+
+  const updateNavigatorSettings = (
+    newData: Partial<Omit<NavigatorSetup, 'id'>>,
+  ) => {
+    dispatch(updateNavigatorSetupRequest(interventionId, newData));
+  };
+
+  if (loading) {
+    return <Spinner color={themeColors.secondary} />;
+  }
+
+  if (error || !navigatorSetupData) {
+    return (
+      <ErrorAlert
+        errorText={error || formatMessage(messages.navigatorSetupError)}
+        fullPage={false}
+      />
+    );
+  }
+
+  const {
+    contactEmail,
+    isNavigatorNotificationOn,
+    noNavigatorAvailableMessage,
+    notifyBy,
+    phone,
+  } = navigatorSetupData;
+
   return (
     // @ts-ignore
     <Tabs withBottomBorder>
       {/* @ts-ignore */}
-      <div label={formatMessage(messages.navigators)}>
-        Navigators {interventionId}
-      </div>
+      <div label={formatMessage(messages.navigators)}>Navigators</div>
       {/* @ts-ignore */}
       <div label={formatMessage(messages.noNavigator)}>
         <NavigatorModalLayout
-          leftContent={<NoNavigatorsForm />}
+          leftContent={
+            <NoNavigatorsForm
+              contactEmail={contactEmail}
+              isNavigatorNotificationOn={isNavigatorNotificationOn}
+              noNavigatorAvailableMessage={noNavigatorAvailableMessage}
+              notifyBy={notifyBy}
+              phone={phone}
+              updateNavigatorSettings={updateNavigatorSettings}
+            />
+          }
           rightContent={<>No navigators tab</>}
         />
       </div>
@@ -35,4 +96,8 @@ const NavigatorSettingsModal = ({ interventionId }: Props) => {
   );
 };
 
-export default NavigatorSettingsModal;
+export default compose(
+  // @ts-ignore
+  injectReducer({ key: 'navigatorSetup', reducer: navigatorSetupReducer }),
+  injectSaga({ key: 'allNavigatorSetupSagas', saga: allNavigatorSetupSagas }),
+)(NavigatorSettingsModal) as React.ComponentType<Props>;
