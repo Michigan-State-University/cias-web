@@ -67,6 +67,10 @@ export default defineMessages({
       id: `${scope}.${Roles.EInterventionAdmin}`,
       defaultMessage: 'E-Intervention Admin',
     },
+    [Roles.Navigator]: {
+      id: `${scope}.${Roles.Navigator}`,
+      defaultMessage: 'Navigator',
+    },
   },
   variables: {
     variableNamePlaceholder: {

@@ -59,14 +59,15 @@ const conversationsTab = (message: JSX.Element, icon: SVGElement) => ({
   icon,
 });
 
-const navigationTabs: {
-  [key in Roles]: {
+const navigationTabs: Record<
+  Roles,
+  {
     id: string;
     path: string;
     icon: SVGElement;
     message: JSX.Element;
-  }[];
-} = {
+  }[]
+> = {
   [Roles.Admin]: [
     interventionsTab(navbarNames.adminInterventions, folder),
     accountsTab(navbarNames.adminAccounts, peopleHR),
