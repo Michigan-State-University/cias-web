@@ -13,8 +13,11 @@ function* fetchConversations() {
   try {
     const { data }: AxiosResponse<ApiData<DenormalizedConversation>> =
       yield call(axios.get, url);
-    const conversations = mapFetchConversationsResponse(data);
-    yield put(fetchConversationsSuccess(conversations));
+    const { conversations, interventionConversations } =
+      mapFetchConversationsResponse(data);
+    yield put(
+      fetchConversationsSuccess(interventionConversations, conversations),
+    );
   } catch (error) {
     yield put(fetchConversationsError(error as ApiError));
   }

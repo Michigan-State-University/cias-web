@@ -1,6 +1,12 @@
 import { createAction } from 'typesafe-actions';
 
-import { Conversation, Message, MessageReadDTO } from 'models/LiveChat';
+import {
+  InterventionConversation,
+  Conversation,
+  Message,
+  MessageReadDTO,
+  DenormalizedConversation,
+} from 'models/LiveChat';
 import { ApiError } from 'models/Api';
 
 import {
@@ -41,8 +47,12 @@ export const fetchConversationsRequest = createAction(
 
 export const fetchConversationsSuccess = createAction(
   FETCH_CONVERSATIONS_SUCCESS,
-  (action) => (conversations: Record<Conversation['id'], Conversation>) =>
-    action({ conversations }),
+  (action) =>
+    (
+      interventionConversations: Record<string, InterventionConversation>,
+      conversations: Record<Conversation['id'], Conversation>,
+    ) =>
+      action({ interventionConversations, conversations }),
 );
 
 export const fetchConversationsError = createAction(
@@ -80,5 +90,10 @@ export const onMessageReadReceive = createAction(
 
 export const onConversationCreatedReceive = createAction(
   ON_CONVERSATION_CREATED_RECEIVE,
-  (action) => (conversation: Conversation) => action({ conversation }),
+  (action) =>
+    (
+      conversation: Omit<DenormalizedConversation, 'liveChatInterlocutors'> &
+        Pick<Conversation, 'liveChatInterlocutors'>,
+    ) =>
+      action({ conversation }),
 );

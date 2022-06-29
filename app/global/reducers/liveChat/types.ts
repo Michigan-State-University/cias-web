@@ -1,6 +1,10 @@
 import { ActionType } from 'typesafe-actions';
 
-import { Conversation, Message } from 'models/LiveChat';
+import {
+  Conversation,
+  InterventionConversation,
+  Message,
+} from 'models/LiveChat';
 import { ApiError } from 'models/Api';
 
 import * as actions from './actions';
@@ -8,6 +12,7 @@ import * as actions from './actions';
 export type LiveChatAction = ActionType<typeof actions>;
 
 export type LiveChatState = {
+  interventionConversations: Record<string, InterventionConversation>;
   conversations: Record<Conversation['id'], Conversation>;
   messages: Record<Conversation['id'], Message[]>;
   openedConversationId: Nullable<string>;
@@ -19,4 +24,9 @@ export type LiveChatState = {
     conversations: Nullable<ApiError>;
     messages: Nullable<ApiError>;
   };
+};
+
+export type ReducedData = {
+  interventionConversations: Record<string, InterventionConversation>;
+  conversations: Record<Conversation['id'], Conversation>;
 };

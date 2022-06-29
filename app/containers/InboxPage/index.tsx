@@ -9,6 +9,7 @@ import {
   ConversationCreatedDTO,
   MessageSentDTO,
   Conversation,
+  DenormalizedConversation,
 } from 'models/LiveChat';
 
 import {
@@ -57,7 +58,10 @@ export const InboxPage = () => {
     dispatch(onMessageReadReceive(messageReadDTO));
   };
 
-  const onConversationCreated = (newConversation: Conversation) => {
+  const onConversationCreated = (
+    newConversation: Omit<DenormalizedConversation, 'liveChatInterlocutors'> &
+      Pick<Conversation, 'liveChatInterlocutors'>,
+  ) => {
     dispatch(onConversationCreatedReceive(newConversation));
   };
 

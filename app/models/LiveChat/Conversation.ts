@@ -5,6 +5,8 @@ export type DenormalizedConversation = {
   id: string;
   lastMessage: Nullable<LastMessage>;
   liveChatInterlocutors: Interlocutor[];
+  interventionId: string;
+  interventionName: string;
 };
 
 export type Conversation = {

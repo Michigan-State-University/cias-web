@@ -22,6 +22,7 @@ import { LiveChatAction, LiveChatState } from './types';
 export const liveChatReducerKey = 'liveChat';
 
 export const initialState: LiveChatState = {
+  interventionConversations: {},
   conversations: {},
   messages: {},
   openedConversationId: null,
@@ -68,7 +69,8 @@ export const liveChatReducer = (
         break;
       }
       case getType(fetchConversationsSuccess): {
-        const { conversations } = payload;
+        const { interventionConversations, conversations } = payload;
+        draft.interventionConversations = interventionConversations;
         draft.conversations = conversations;
         draft.loaders.conversations = false;
         break;
@@ -119,7 +121,27 @@ export const liveChatReducer = (
         break;
       }
       case getType(onConversationCreatedReceive): {
-        const { conversation } = payload;
+        const {
+          conversation: {
+            id,
+            interventionId,
+            interventionName,
+            lastMessage,
+            liveChatInterlocutors,
+          },
+        } = payload;
+        const conversation = { id, lastMessage, liveChatInterlocutors };
+        if (state.interventionConversations[interventionId]) {
+          draft.interventionConversations[interventionId].conversationIds.push(
+            id,
+          );
+        } else {
+          draft.interventionConversations[interventionId] = {
+            interventionId,
+            interventionName,
+            conversationIds: [id],
+          };
+        }
         draft.conversations[conversation.id] = conversation;
         draft.messages[conversation.id] = [];
         break;
