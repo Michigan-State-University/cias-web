@@ -15,4 +15,5 @@ export type Conversation = {
 
 export type ConversationCreatedDTO = {
   userId: string;
+  interventionId: string;
 };

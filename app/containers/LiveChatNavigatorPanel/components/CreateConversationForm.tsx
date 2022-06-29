@@ -21,21 +21,34 @@ export const CreateConversationForm = ({ onCreateConversation }: Props) => {
   const { formatMessage } = useIntl();
 
   const [userId, setUserId] = useState('');
+  const [interventionId, setInterventionId] = useState('');
 
   const createConversation = () => {
-    onCreateConversation({ userId });
+    onCreateConversation({ userId, interventionId });
   };
 
   return (
     <Row mb={16} gap={16} align="end" flexWrap="wrap" maxWidth="100%">
-      <Column width={320} align="start">
+      <Column width={250} align="start">
         <Text mb={4}>{formatMessage(i18nMessages.userId)}</Text>
         <StyledInput
           value={userId}
           onBlur={setUserId}
           transparent={false}
           width="100%"
-          maxWidth={320}
+          maxWidth={250}
+          // @ts-ignore
+          style={{ padding: 12 }}
+        />
+      </Column>
+      <Column width={250} align="start">
+        <Text mb={4}>{formatMessage(i18nMessages.interventionId)}</Text>
+        <StyledInput
+          value={interventionId}
+          onBlur={setInterventionId}
+          transparent={false}
+          width="100%"
+          maxWidth={250}
           // @ts-ignore
           style={{ padding: 12 }}
         />
@@ -45,7 +58,7 @@ export const CreateConversationForm = ({ onCreateConversation }: Props) => {
         color="primary"
         px={20}
         width="auto"
-        disabled={!userId}
+        disabled={!userId || !interventionId}
         onClick={createConversation}
       >
         {formatMessage(i18nMessages.createConversation)}
