@@ -1,7 +1,7 @@
 import { colors } from 'theme';
 import { Roles } from './UserRoles';
 
-export const RolesColors: { [key in Roles]: string } = {
+export const RolesColors: Record<Roles, string> = {
   [Roles.Participant]: colors.jungleGreenLighter,
   [Roles.Researcher]: colors.pink,
   [Roles.Admin]: colors.buddhaGold,
