@@ -1,13 +1,13 @@
-import { DenormalizedConversation, Conversation } from 'models/LiveChat';
+import { DenormalizedConversation } from 'models/LiveChat';
 import { ApiData } from 'models/Api';
 
 import { jsonApiToArray, jsonApiToObject } from 'utils/jsonApiMapper';
 import { normalizeArrayToObject } from 'utils/normalizeArrayToObject';
-import { ReducedData } from './types';
+import { NewConversationData, ReducedConversationsData } from './types';
 
 export const mapFetchConversationsResponse = (
   data: ApiData<DenormalizedConversation>,
-): ReducedData => {
+): ReducedConversationsData => {
   const denormalizedConversations: DenormalizedConversation[] = jsonApiToArray(
     data,
     'conversation',
@@ -33,18 +33,17 @@ export const mapFetchConversationsResponse = (
         'id',
       );
 
-      accumulator.interventionConversations[interventionId] = {
-        interventionId,
-        interventionName,
-        conversationIds: [
-          ...(
-            accumulator.interventionConversations[interventionId] || {
-              conversationIds: [],
-            }
-          ).conversationIds,
-          id,
-        ],
-      };
+      if (accumulator.interventionConversations[interventionId]) {
+        accumulator.interventionConversations[
+          interventionId
+        ].conversationIds.push(id);
+      } else {
+        accumulator.interventionConversations[interventionId] = {
+          interventionId,
+          interventionName,
+          conversationIds: [id],
+        };
+      }
 
       // eslint-disable-next-line no-param-reassign
       accumulator.conversations[conversation.id] = {
@@ -54,26 +53,39 @@ export const mapFetchConversationsResponse = (
 
       return accumulator;
     },
-    { interventionConversations: {}, conversations: {} } as ReducedData,
+    {
+      interventionConversations: {},
+      conversations: {},
+    } as ReducedConversationsData,
   );
 };
 
 export const mapConversationCreatedMessageData = (
   data: ApiData<DenormalizedConversation>,
-): Omit<DenormalizedConversation, 'liveChatInterlocutors'> &
-  Pick<Conversation, 'liveChatInterlocutors'> => {
-  const denormalizedConversation: DenormalizedConversation = jsonApiToObject(
-    data,
-    'conversation',
-  );
+): NewConversationData => {
+  const {
+    id,
+    interventionId,
+    interventionName,
+    lastMessage,
+    liveChatInterlocutors,
+  }: DenormalizedConversation = jsonApiToObject(data, 'conversation');
 
   const normalizedInterlocutors = normalizeArrayToObject(
-    denormalizedConversation.liveChatInterlocutors,
+    liveChatInterlocutors,
     'id',
   );
 
   return {
-    ...denormalizedConversation,
-    liveChatInterlocutors: normalizedInterlocutors,
+    conversation: {
+      id,
+      lastMessage,
+      liveChatInterlocutors: normalizedInterlocutors,
+    },
+    interventionConversation: {
+      conversationIds: [id],
+      interventionId,
+      interventionName,
+    },
   };
 };

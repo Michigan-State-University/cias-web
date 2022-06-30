@@ -26,7 +26,12 @@ export type LiveChatState = {
   };
 };
 
-export type ReducedData = {
+export type ReducedConversationsData = {
   interventionConversations: Record<string, InterventionConversation>;
   conversations: Record<Conversation['id'], Conversation>;
+};
+
+export type NewConversationData = {
+  conversation: Conversation;
+  interventionConversation: InterventionConversation;
 };

@@ -122,25 +122,16 @@ export const liveChatReducer = (
       }
       case getType(onConversationCreatedReceive): {
         const {
-          conversation: {
-            id,
-            interventionId,
-            interventionName,
-            lastMessage,
-            liveChatInterlocutors,
-          },
+          newConversationData: { conversation, interventionConversation },
         } = payload;
-        const conversation = { id, lastMessage, liveChatInterlocutors };
+        const { interventionId } = interventionConversation;
         if (state.interventionConversations[interventionId]) {
           draft.interventionConversations[interventionId].conversationIds.push(
-            id,
+            conversation.id,
           );
         } else {
-          draft.interventionConversations[interventionId] = {
-            interventionId,
-            interventionName,
-            conversationIds: [id],
-          };
+          draft.interventionConversations[interventionId] =
+            interventionConversation;
         }
         draft.conversations[conversation.id] = conversation;
         draft.messages[conversation.id] = [];

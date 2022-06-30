@@ -5,7 +5,6 @@ import {
   Conversation,
   Message,
   MessageReadDTO,
-  DenormalizedConversation,
 } from 'models/LiveChat';
 import { ApiError } from 'models/Api';
 
@@ -91,9 +90,9 @@ export const onMessageReadReceive = createAction(
 export const onConversationCreatedReceive = createAction(
   ON_CONVERSATION_CREATED_RECEIVE,
   (action) =>
-    (
-      conversation: Omit<DenormalizedConversation, 'liveChatInterlocutors'> &
-        Pick<Conversation, 'liveChatInterlocutors'>,
-    ) =>
-      action({ conversation }),
+    (newConversationData: {
+      conversation: Conversation;
+      interventionConversation: InterventionConversation;
+    }) =>
+      action({ newConversationData }),
 );

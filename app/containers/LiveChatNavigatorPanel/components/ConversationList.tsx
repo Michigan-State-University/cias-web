@@ -14,7 +14,7 @@ import { ConversationListItem } from './ConversationListItem';
 import { MESSAGE_TIMESTAMP_REFRESH_PERIOD } from '../constants';
 
 import i18nMessages from '../messages';
-import InterventionConversationListItem from './InterventionConversationListItem';
+import InterventionConversationCollapse from './InterventionConversationsCollapse';
 
 export type Props = {
   interventionConversations: InterventionConversation[];
@@ -57,11 +57,16 @@ const ConversationList = ({
           borderRadius="0"
           pb={16}
         >
-          <InterventionConversationListItem
+          <InterventionConversationCollapse
             interventionConversation={interventionConversation}
-            renderConversation={renderConversationListItem}
             isFirst={index === 0}
-          />
+          >
+            <Box>
+              {interventionConversation.conversationIds.map(
+                renderConversationListItem,
+              )}
+            </Box>
+          </InterventionConversationCollapse>
         </Box>
       ))}
     </Column>

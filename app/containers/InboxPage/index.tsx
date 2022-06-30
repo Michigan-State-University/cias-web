@@ -8,8 +8,6 @@ import {
   MessageReadDTO,
   ConversationCreatedDTO,
   MessageSentDTO,
-  Conversation,
-  DenormalizedConversation,
 } from 'models/LiveChat';
 
 import {
@@ -20,6 +18,7 @@ import {
   onMessageSentReceive,
   onMessageReadReceive,
   onConversationCreatedReceive,
+  NewConversationData,
 } from 'global/reducers/liveChat';
 import { mapConversationCreatedMessageData } from 'global/reducers/liveChat/utils';
 
@@ -58,10 +57,7 @@ export const InboxPage = () => {
     dispatch(onMessageReadReceive(messageReadDTO));
   };
 
-  const onConversationCreated = (
-    newConversation: Omit<DenormalizedConversation, 'liveChatInterlocutors'> &
-      Pick<Conversation, 'liveChatInterlocutors'>,
-  ) => {
+  const onConversationCreated = (newConversation: NewConversationData) => {
     dispatch(onConversationCreatedReceive(newConversation));
   };
 
