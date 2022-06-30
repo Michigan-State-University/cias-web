@@ -76,6 +76,7 @@ const UrlQuestion = ({
               {formatMessage(answerPageMessages.wcagExternalLinkWarning)}
             </Comment>
           }
+          stretchContent
         >
           <UrlPreview link={payload} />
         </IconTooltip>
