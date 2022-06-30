@@ -1,20 +1,24 @@
 import React, { memo } from 'react';
 import { useIntl } from 'react-intl';
 
-import { Conversation } from 'models/LiveChat';
+import { Conversation, InterventionConversation } from 'models/LiveChat';
 
 import useRefreshComponent from 'utils/useRefreshComponent';
 
 import Column from 'components/Column';
 import Text from 'components/Text';
+import Box from 'components/Box';
 
+import { colors } from 'theme';
 import { ConversationListItem } from './ConversationListItem';
 import { MESSAGE_TIMESTAMP_REFRESH_PERIOD } from '../constants';
 
 import i18nMessages from '../messages';
+import InterventionConversationCollapse from './InterventionConversationsCollapse';
 
 export type Props = {
-  conversations: Conversation[];
+  interventionConversations: InterventionConversation[];
+  conversations: Record<string, Conversation>;
   openedConversationId: Nullable<string>;
   currentUserId: string;
   openConversation: (conversationId: string) => void;
@@ -25,24 +29,45 @@ const ConversationList = ({
   openedConversationId,
   currentUserId,
   openConversation,
+  interventionConversations,
 }: Props) => {
   const { formatMessage } = useIntl();
 
   useRefreshComponent(MESSAGE_TIMESTAMP_REFRESH_PERIOD);
 
+  const renderConversationListItem = (conversationId: string) => (
+    <ConversationListItem
+      key={conversationId}
+      conversation={conversations[conversationId]}
+      currentUserId={currentUserId}
+      opened={conversationId === openedConversationId}
+      onClick={openConversation}
+    />
+  );
+
   return (
     <Column gap={16} overflow="auto" maxHeight="100%" mr={-8} pr={8}>
-      {!conversations.length && (
+      {!interventionConversations.length && (
         <Text>{formatMessage(i18nMessages.noConversations)}</Text>
       )}
-      {conversations.map((conversation) => (
-        <ConversationListItem
-          key={conversation.id}
-          conversation={conversation}
-          currentUserId={currentUserId}
-          opened={conversation.id === openedConversationId}
-          onClick={openConversation}
-        />
+      {interventionConversations.map((interventionConversation, index) => (
+        <Box
+          key={interventionConversation.interventionId}
+          borderBottom={`1px solid ${colors.linkWater}`}
+          borderRadius="0"
+          pb={16}
+        >
+          <InterventionConversationCollapse
+            interventionConversation={interventionConversation}
+            isFirst={index === 0}
+          >
+            <Box>
+              {interventionConversation.conversationIds.map(
+                renderConversationListItem,
+              )}
+            </Box>
+          </InterventionConversationCollapse>
+        </Box>
       ))}
     </Column>
   );

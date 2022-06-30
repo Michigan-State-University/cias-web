@@ -7,6 +7,7 @@ import {
   closeConversation,
   fetchConversationsRequest,
   makeSelectConversations,
+  makeSelectInterventionConversations,
   makeSelectLiveChatError,
   makeSelectLiveChatLoader,
   makeSelectOpenedConversationId,
@@ -23,15 +24,18 @@ import i18nMessages from '../messages';
 export const ConversationsSection = () => {
   const dispatch = useDispatch();
 
+  const interventionConversations = useSelector(
+    makeSelectInterventionConversations(),
+  );
   const conversations = useSelector(makeSelectConversations());
   const loading = useSelector(makeSelectLiveChatLoader('conversations'));
   const error = useSelector(makeSelectLiveChatError('conversations'));
   const openedConversationId = useSelector(makeSelectOpenedConversationId());
   const currentUserId = useSelector(makeSelectUserId());
 
-  const conversationsValues = useMemo(
-    () => Object.values(conversations),
-    [conversations],
+  const interventionConversationValues = useMemo(
+    () => Object.values(interventionConversations),
+    [interventionConversations],
   );
 
   useEffect(() => {
@@ -41,9 +45,13 @@ export const ConversationsSection = () => {
   useEffect(() => {
     if (loading || error) return;
 
-    const firstConversation = conversationsValues[0];
-    if (firstConversation) {
-      dispatch(openConversation(firstConversation.id));
+    const firstInterventionConversation = interventionConversationValues[0];
+    if (firstInterventionConversation) {
+      const firstConversation =
+        firstInterventionConversation.conversationIds[0];
+      if (firstConversation) {
+        dispatch(openConversation(firstConversation));
+      }
     }
   }, [loading, error]);
 
@@ -69,7 +77,8 @@ export const ConversationsSection = () => {
       )}
       {!loading && !error && (
         <ConversationList
-          conversations={conversationsValues}
+          interventionConversations={interventionConversationValues}
+          conversations={conversations}
           openedConversationId={openedConversationId}
           currentUserId={currentUserId}
           openConversation={handleOpenConversation}

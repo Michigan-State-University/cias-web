@@ -17,6 +17,12 @@ export const makeSelectLiveChatLoader = (
 export const makeSelectLiveChatError = (name: keyof LiveChatState['errors']) =>
   createSelector(selectLiveChatState, ({ errors }) => errors[name]);
 
+export const makeSelectInterventionConversations = () =>
+  createSelector(
+    selectLiveChatState,
+    ({ interventionConversations }) => interventionConversations,
+  );
+
 export const makeSelectConversations = () =>
   createSelector(selectLiveChatState, ({ conversations }) => conversations);
 
