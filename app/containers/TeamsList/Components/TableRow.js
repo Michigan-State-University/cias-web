@@ -36,7 +36,6 @@ const TableRow = ({
 
   return (
     <StripedTR
-      lastItemHoverable={isAdmin ? 1 : 0}
       cursor="pointer"
       hoverBg={colors.linkWater}
       color={colors.white}
