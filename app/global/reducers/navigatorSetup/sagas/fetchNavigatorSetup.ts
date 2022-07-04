@@ -16,7 +16,7 @@ import {
 export function* fetchNavigatorSetup({
   payload: { interventionId },
 }: ReturnType<typeof fetchNavigatorSetupRequest>) {
-  const url = `/v1/live_chat/intervention/${interventionId}/navigator_setups`;
+  const url = `/v1/live_chat/intervention/${interventionId}/navigator_setup`;
   try {
     const { data } = yield call(axios.get, url);
     const navigatorSetup = jsonApiToObject(
