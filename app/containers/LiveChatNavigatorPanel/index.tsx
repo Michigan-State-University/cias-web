@@ -44,7 +44,7 @@ export const LiveChatNavigatorPanel = ({
             <FormattedMessage {...i18nMessages.inbox} />
           </H2>
         </SectionHeader>
-        <SectionBody pr={12} py={16}>
+        <SectionBody pr={12} pb={16}>
           <ConversationsSection />
         </SectionBody>
       </NavigatorPanelGridColumn>

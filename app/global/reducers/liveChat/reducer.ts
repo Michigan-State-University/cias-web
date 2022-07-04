@@ -55,12 +55,17 @@ export const liveChatReducer = (
       case getType(readMessage): {
         const { conversationId, messageId } = payload;
         const { lastMessage } = draft.conversations[conversationId];
+
         if (lastMessage?.id === messageId) {
           lastMessage.isRead = true;
         }
-        updateItemById(draft.messages[conversationId], messageId, {
-          isRead: true,
-        });
+
+        const messages = draft.messages[conversationId];
+        if (messages) {
+          updateItemById(messages, messageId, {
+            isRead: true,
+          });
+        }
         break;
       }
       case getType(fetchConversationsRequest): {
@@ -101,8 +106,12 @@ export const liveChatReducer = (
       case getType(onMessageSentReceive): {
         const { message } = payload;
         const { conversationId } = message;
-        draft.messages[conversationId].push(message);
-        draft.conversations[conversationId].lastMessage = message;
+        draft.messages[conversationId]?.push(message);
+
+        const conversation = draft.conversations[conversationId];
+        if (conversation) {
+          conversation.lastMessage = message;
+        }
         break;
       }
       case getType(onMessageReadReceive): {
@@ -110,11 +119,14 @@ export const liveChatReducer = (
           messageReadDTO: { messageId, conversationId },
         } = payload;
 
-        updateItemById(draft.messages[conversationId], messageId, {
-          isRead: true,
-        });
+        const messages = draft.messages[conversationId];
+        if (messages) {
+          updateItemById(messages, messageId, {
+            isRead: true,
+          });
+        }
 
-        const { lastMessage } = draft.conversations[conversationId];
+        const { lastMessage } = draft.conversations[conversationId] ?? {};
         if (lastMessage && lastMessage.id === messageId) {
           lastMessage.isRead = true;
         }
@@ -134,7 +146,6 @@ export const liveChatReducer = (
             interventionConversation;
         }
         draft.conversations[conversation.id] = conversation;
-        draft.messages[conversation.id] = [];
         break;
       }
     }

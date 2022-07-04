@@ -110,6 +110,7 @@ export const InboxPage = () => {
       height="100%"
       py={54}
       pageTitle={formatMessage(i18nMessages.pageTitle)}
+      $maxWidth="100%"
     >
       <LiveChatNavigatorPanel
         onSendMessage={sendMessage}

@@ -1,6 +1,8 @@
 import { createSelector } from 'reselect';
 import isNil from 'lodash/isNil';
 
+import { InterventionConversation } from 'models/LiveChat';
+
 import { RootState } from 'global/reducers';
 import { makeSelectUserId } from 'global/reducers/auth';
 
@@ -17,10 +19,9 @@ export const makeSelectLiveChatLoader = (
 export const makeSelectLiveChatError = (name: keyof LiveChatState['errors']) =>
   createSelector(selectLiveChatState, ({ errors }) => errors[name]);
 
-export const makeSelectInterventionConversations = () =>
-  createSelector(
-    selectLiveChatState,
-    ({ interventionConversations }) => interventionConversations,
+export const makeSelectInterventionConversationsValues = () =>
+  createSelector(selectLiveChatState, ({ interventionConversations }) =>
+    Object.values(interventionConversations),
   );
 
 export const makeSelectConversations = () =>
@@ -60,4 +61,31 @@ export const makeSelectCurrentInterlocutorId = () =>
         )?.id ?? null
       );
     },
+  );
+
+export const makeSelectUnreadConversationsCounts = () =>
+  createSelector(
+    makeSelectInterventionConversationsValues(),
+    makeSelectConversations(),
+    makeSelectUserId(),
+    (interventionConversationsValues, conversations, currentUserId) =>
+      interventionConversationsValues.reduce(
+        (unreadConversationsCounts, { interventionId, conversationIds }) => {
+          const count = conversationIds.filter((conversationId) => {
+            const { lastMessage, liveChatInterlocutors } =
+              conversations[conversationId];
+            if (!lastMessage || lastMessage.isRead) return false;
+
+            return (
+              liveChatInterlocutors[lastMessage.interlocutorId]?.userId !==
+              currentUserId
+            );
+          }).length;
+
+          // eslint-disable-next-line no-param-reassign
+          unreadConversationsCounts[interventionId] = count;
+          return unreadConversationsCounts;
+        },
+        {} as Record<InterventionConversation['interventionId'], number>,
+      ),
   );

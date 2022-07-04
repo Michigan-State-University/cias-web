@@ -1,18 +1,19 @@
 export type Message = {
-  content: string;
-  conversationId: string;
   id: string;
+  conversationId: string;
   interlocutorId: string;
-  isRead: boolean;
+  interventionId: string;
   createdAt: string;
+  content: string;
+  isRead: boolean;
 };
 
 export type LastMessage = {
-  content: string;
   id: string;
   interlocutorId: string;
-  isRead: boolean;
   createdAt: string;
+  content: string;
+  isRead: boolean;
 };
 
 export type MessageSentDTO = {

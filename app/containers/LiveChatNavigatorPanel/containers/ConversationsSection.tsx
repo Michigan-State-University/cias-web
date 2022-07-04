@@ -1,4 +1,4 @@
-import React, { useEffect, useMemo } from 'react';
+import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 
 import { themeColors } from 'theme';
@@ -7,10 +7,11 @@ import {
   closeConversation,
   fetchConversationsRequest,
   makeSelectConversations,
-  makeSelectInterventionConversations,
+  makeSelectInterventionConversationsValues,
   makeSelectLiveChatError,
   makeSelectLiveChatLoader,
   makeSelectOpenedConversationId,
+  makeSelectUnreadConversationsCounts,
   openConversation,
 } from 'global/reducers/liveChat';
 import { makeSelectUserId } from 'global/reducers/auth';
@@ -24,18 +25,16 @@ import i18nMessages from '../messages';
 export const ConversationsSection = () => {
   const dispatch = useDispatch();
 
-  const interventionConversations = useSelector(
-    makeSelectInterventionConversations(),
+  const interventionConversationValues = useSelector(
+    makeSelectInterventionConversationsValues(),
   );
   const conversations = useSelector(makeSelectConversations());
   const loading = useSelector(makeSelectLiveChatLoader('conversations'));
   const error = useSelector(makeSelectLiveChatError('conversations'));
   const openedConversationId = useSelector(makeSelectOpenedConversationId());
   const currentUserId = useSelector(makeSelectUserId());
-
-  const interventionConversationValues = useMemo(
-    () => Object.values(interventionConversations),
-    [interventionConversations],
+  const unreadConversationsCounts = useSelector(
+    makeSelectUnreadConversationsCounts(),
   );
 
   useEffect(() => {
@@ -79,6 +78,7 @@ export const ConversationsSection = () => {
         <ConversationList
           interventionConversations={interventionConversationValues}
           conversations={conversations}
+          unreadConversationsCounts={unreadConversationsCounts}
           openedConversationId={openedConversationId}
           currentUserId={currentUserId}
           openConversation={handleOpenConversation}

@@ -78,4 +78,5 @@ export const ConversationListItemContainer = styled(Box)`
   }
   display: flex;
   gap: 16px;
+  width: 100%;
 `;

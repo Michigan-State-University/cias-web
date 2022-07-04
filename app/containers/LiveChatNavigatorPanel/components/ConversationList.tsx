@@ -7,9 +7,7 @@ import useRefreshComponent from 'utils/useRefreshComponent';
 
 import Column from 'components/Column';
 import Text from 'components/Text';
-import Box from 'components/Box';
 
-import { colors } from 'theme';
 import { ConversationListItem } from './ConversationListItem';
 import { MESSAGE_TIMESTAMP_REFRESH_PERIOD } from '../constants';
 
@@ -19,6 +17,7 @@ import InterventionConversationCollapse from './InterventionConversationsCollaps
 export type Props = {
   interventionConversations: InterventionConversation[];
   conversations: Record<string, Conversation>;
+  unreadConversationsCounts: Record<string, number>;
   openedConversationId: Nullable<string>;
   currentUserId: string;
   openConversation: (conversationId: string) => void;
@@ -27,6 +26,7 @@ export type Props = {
 const ConversationList = ({
   conversations,
   openedConversationId,
+  unreadConversationsCounts,
   currentUserId,
   openConversation,
   interventionConversations,
@@ -46,29 +46,24 @@ const ConversationList = ({
   );
 
   return (
-    <Column gap={16} overflow="auto" maxHeight="100%" mr={-8} pr={8}>
+    <Column overflow="auto" maxHeight="100%">
       {!interventionConversations.length && (
         <Text>{formatMessage(i18nMessages.noConversations)}</Text>
       )}
-      {interventionConversations.map((interventionConversation, index) => (
-        <Box
-          key={interventionConversation.interventionId}
-          borderBottom={`1px solid ${colors.linkWater}`}
-          borderRadius="0"
-          pb={16}
-        >
+      {interventionConversations.map(
+        ({ interventionId, conversationIds, interventionName }, index) => (
           <InterventionConversationCollapse
-            interventionConversation={interventionConversation}
+            key={interventionId}
+            interventionName={interventionName}
             isFirst={index === 0}
+            unreadConversationsCount={unreadConversationsCounts[interventionId]}
           >
-            <Box>
-              {interventionConversation.conversationIds.map(
-                renderConversationListItem,
-              )}
-            </Box>
+            <Column gap={16} pb={16}>
+              {conversationIds.map(renderConversationListItem)}
+            </Column>
           </InterventionConversationCollapse>
-        </Box>
-      ))}
+        ),
+      )}
     </Column>
   );
 };
