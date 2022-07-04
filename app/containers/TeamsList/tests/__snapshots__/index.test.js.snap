@@ -232,16 +232,8 @@ exports[`<TeamsList /> Should render and match the snapshot 1`] = `
   color: #0E0E0E;
 }
 
-.c10 td:nth-last-child(-n + ) {
-  opacity: 100%;
-}
-
 .c10:hover {
   background: !important;
-}
-
-.c10:hover td:hover {
-  opacity: 100%;
 }
 
 .c13 {
@@ -249,16 +241,8 @@ exports[`<TeamsList /> Should render and match the snapshot 1`] = `
   color: #0E0E0E;
 }
 
-.c13 td:nth-last-child(-n + 0) {
-  opacity: 100%;
-}
-
 .c13:hover {
   background: #E9F1FB !important;
-}
-
-.c13:hover td:hover {
-  opacity: 100%;
 }
 
 .c14 {

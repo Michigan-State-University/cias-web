@@ -28,9 +28,7 @@ function* registerParticipant({ payload }) {
     });
     yield put(registerParticipantSuccess());
     yield put(push('/login'));
-    yield call(LocalStorageService.clearHeaders);
-    yield call(LocalStorageService.clearState);
-    yield call(LocalStorageService.clearGuestHeaders);
+    yield call(LocalStorageService.clearUserData);
     yield call(toast.success, formatMessage(messages.createdAccount), {
       toastId: REGISTER_PARTICIPANT_SUCCESS,
     });

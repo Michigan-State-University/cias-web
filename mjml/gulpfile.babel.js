@@ -8,12 +8,15 @@ import mjml2html from 'mjml'
 import { registerComponent } from 'mjml-core'
 
 const walkSync = (dir, filelist = []) => {
-  fs.readdirSync(dir).forEach(file => {
-    filelist = fs.statSync(path.join(dir, file)).isDirectory()
-      ? walkSync(path.join(dir, file), filelist)
-      : filelist.concat(path.join(dir, file))
+  let files = filelist
+
+  fs.readdirSync(dir).forEach((file) => {
+    files = fs.statSync(path.join(dir, file)).isDirectory()
+      ? walkSync(path.join(dir, file), files)
+      : files.concat(path.join(dir, file))
   })
-  return filelist
+
+  return files
 }
 
 const watchedComponents = walkSync('./components')
@@ -30,16 +33,19 @@ const compile = () =>
     .on('error', log)
     .pipe(gulp.dest('lib'))
     .on('end', () => {
-      watchedComponents.forEach(compPath => {
+      watchedComponents.forEach((compPath) => {
         const fullPath = path.join(process.cwd(), compPath.replace(/^components/, 'lib'))
         delete require.cache[fullPath]
+        // eslint-disable-next-line import/no-dynamic-require, global-require
         registerComponent(require(fullPath).default)
       })
 
-      templates.forEach(templPath => {
+      templates.forEach((templPath) => {
         fs.readFile(path.normalize(templPath), 'utf8', (err, data) => {
           if (err) throw err
-          const result = mjml2html(data, { minify: true, minifyCSS: true })
+          const result = mjml2html(data, {
+            useMjmlConfigOptions: true,
+          })
           const basename = path.basename(templPath)
           const targetDir = path.normalize(`html/${basename.replace('.mjml', '.html')}`)
 

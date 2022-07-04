@@ -182,16 +182,8 @@ exports[`<GridQuestion /> Should render and match the snapshot 1`] = `
   background-color: #F8FBFF;
 }
 
-.c5 td:nth-last-child(-n + ) {
-  opacity: 100%;
-}
-
 .c5:hover {
   background: !important;
-}
-
-.c5:hover td:hover {
-  opacity: 100%;
 }
 
 .c6 {

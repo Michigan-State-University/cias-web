@@ -15,6 +15,7 @@ import objectToSnakeCase from 'utils/objectToSnakeCase';
 import { makeSelectLocation } from 'containers/App/selectors';
 import { resetPhoneNumberPreview } from 'global/reducers/auth/actions';
 import { jsonApiToObject } from 'utils/jsonApiMapper';
+import objectToCamelKebabCase from 'utils/objectToCamelKebabCase';
 
 import {
   SUBMIT_ANSWER_REQUEST,
@@ -22,6 +23,7 @@ import {
   RESET_SESSION,
   CREATE_USER_SESSION_REQUEST,
   NEXT_QUESTION_REQUEST,
+  SAVE_QUICK_EXIT_EVENT_REQUEST,
 } from './constants';
 import {
   submitAnswerSuccess,
@@ -184,12 +186,31 @@ function* resetPreviewUrl(sessionId) {
   else yield put(createUserSessionRequest(sessionId));
 }
 
+function* saveQuickExitEvent({ payload: { userSessionId, isPreview } }) {
+  const requestUrl = `/v1/user_sessions/${userSessionId}/quick_exit`;
+
+  const headers = objectToCamelKebabCase(
+    isPreview
+      ? LocalStorageService.getGuestHeaders()
+      : LocalStorageService.getHeaders(),
+  );
+
+  if (!isPreview) {
+    LocalStorageService.clearUserData();
+  }
+
+  yield axios.patch(requestUrl, undefined, {
+    headers,
+  });
+}
+
 // Individual exports for testing
 export default function* AnswerSessionPageSaga() {
   yield takeLatest(SUBMIT_ANSWER_REQUEST, submitAnswersAsync);
   yield takeLatest(RESET_SESSION, resetSession);
   yield takeLatest(CREATE_USER_SESSION_REQUEST, createUserSession);
   yield takeLatest(NEXT_QUESTION_REQUEST, nextQuestion);
+  yield takeLatest(SAVE_QUICK_EXIT_EVENT_REQUEST, saveQuickExitEvent);
 }
 
 export function* redirectToPreviewSaga() {

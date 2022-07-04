@@ -24,9 +24,7 @@ function* registerResearcher({ payload }) {
     });
     yield put(registerResearcherSuccess());
     yield put(push('/login'));
-    yield call(LocalStorageService.clearHeaders);
-    yield call(LocalStorageService.clearState);
-    yield call(LocalStorageService.clearGuestHeaders);
+    yield call(LocalStorageService.clearUserData);
     yield call(
       toast.success,
       formatMessage(messages.createdResearcherAccount),

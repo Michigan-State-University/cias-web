@@ -60,9 +60,7 @@ exports[`<UrlPreview /> Should render and match the snapshot 1`] = `
   margin-bottom: 3px;
   font-size: 9px;
   color: rgba(183,39,234,1);
-  white-space: pre;
-  text-overflow: hidden;
-  overflow: hidden;
+  word-break: break-all;
   color: rgba(183,39,234,1);
 }
 
@@ -161,7 +159,6 @@ exports[`<UrlPreview /> Should render and match the snapshot 1`] = `
               class="c9"
               color="#B727EA"
               font-size="9"
-              overflow="hidden"
             >
               test-url
             </p>

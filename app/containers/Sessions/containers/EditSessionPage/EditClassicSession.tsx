@@ -363,11 +363,11 @@ const EditClassicSessionPage = ({
           const destinationIndex = destination?.index;
           const destinationGroupId = destination?.droppableId;
           const questionId = draggableId;
-          if (!destinationIndex || !destinationGroupId) break;
+          if (isNullOrUndefined(destinationIndex) || !destinationGroupId) break;
           reorderQuestions({
             sourceIndex,
             sourceGroupId,
-            destinationIndex,
+            destinationIndex: destinationIndex!,
             destinationGroupId,
             questionId,
             sessionId,

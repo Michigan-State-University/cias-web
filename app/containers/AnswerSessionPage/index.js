@@ -24,7 +24,7 @@ import { elements, themeColors } from 'theme';
 
 import AudioWrapper from 'utils/audioWrapper';
 import isNullOrUndefined from 'utils/isNullOrUndefined';
-import { DESKTOP_MODE } from 'utils/previewMode';
+import { DESKTOP_MODE, I_PHONE_8_PLUS_MODE } from 'utils/previewMode';
 import { makeSelectAudioInstance } from 'global/reducers/globalState';
 import {
   fetchInterventionRequest,
@@ -47,6 +47,7 @@ import { finishQuestion } from 'models/Session/QuestionTypes';
 import { UserSessionType } from 'models/Session/UserSession';
 
 import QuestionTranscript from 'containers/QuestionTranscript';
+import { ANSWER_SESSION_PAGE_ID } from 'containers/App/constants';
 
 import {
   additionalBreakpoints,
@@ -64,6 +65,7 @@ import H3 from 'components/H3';
 import Icon from 'components/Icon';
 import { ConfirmationModal } from 'components/Modal';
 import Img from 'components/Img';
+import QuickExit from 'components/QuickExit';
 
 import renderQuestionByType from './components';
 import CharacterAnim from './components/CharacterAnim';
@@ -90,6 +92,7 @@ import {
   clearError,
   toggleTextTranscriptAction,
   setTransitionalUserSessionId as setTransitionalUserSessionIdAction,
+  saveQuickExitEventRequest,
 } from './actions';
 import BranchingScreen from './components/BranchingScreen';
 import { NOT_SKIPABLE_QUESTIONS } from './constants';
@@ -194,6 +197,7 @@ export function AnswerSessionPage({
   toggleTextTranscript,
   setTransitionalUserSessionId,
   setLiveChatEnabled,
+  saveQuickExitEvent,
 }) {
   const { formatMessage } = useIntl();
 
@@ -222,8 +226,10 @@ export function AnswerSessionPage({
   const checkIfDesktop = (containerQuery) =>
     isPreview ? previewMode === DESKTOP_MODE && containerQuery : containerQuery;
 
-  const isDesktop = useMemo(
-    () => checkIfDesktop(containerQueryParams[IS_DESKTOP]),
+  const { isDesktop } = useMemo(
+    () => ({
+      isDesktop: checkIfDesktop(containerQueryParams[IS_DESKTOP]),
+    }),
     [previewMode, containerQueryParams, isPreview],
   );
 
@@ -234,10 +240,12 @@ export function AnswerSessionPage({
   }, [containerQueryParams, isDesktop]);
 
   const {
+    id: userSessionId,
     logoUrl,
     imageAlt,
     languageCode,
     type: userSessionType,
+    quickExitEnabled,
   } = userSession ?? {};
 
   const isNewUserSession = useMemo(() => {
@@ -267,11 +275,11 @@ export function AnswerSessionPage({
     createUserSession(sessionId);
 
     return clearErrors;
-  }, []);
+  }, [sessionId]);
 
   useEffect(() => {
     if (userSession) {
-      nextQuestion(userSession.id, index);
+      nextQuestion(userSessionId, index);
       if (setLiveChatEnabled) setLiveChatEnabled(userSession.liveChatEnabled);
     }
   }, [userSession]);
@@ -295,13 +303,13 @@ export function AnswerSessionPage({
       get(currentQuestion, 'settings.required', false),
       get(currentQuestion, 'type', ''),
       sessionId,
-      userSession.id,
+      userSessionId,
       skipped,
     );
 
   const renderQuestionTranscript = (isRightSide) => {
     const renderTranscriptComponent = ({ maxWidth, height }) => (
-      <Box mt={30} maxWidth={maxWidth} height={height}>
+      <Box mt={isRightSide ? 120 : 30} maxWidth={maxWidth} height={height}>
         <QuestionTranscript
           question={currentQuestion}
           language={languageCode}
@@ -493,114 +501,129 @@ export function AnswerSessionPage({
   const resetTransitionalUserSessionId = () =>
     setTransitionalUserSessionId(null);
 
-  if (nextQuestionLoading && interventionStarted) return <Loader />;
+  const beforeQuickExit = () => {
+    saveQuickExitEvent(userSessionId, isPreview);
+  };
+
+  const showLoader = nextQuestionLoading && interventionStarted;
 
   return (
-    <Column height="100%" ref={pageRef}>
-      <ConfirmationModal
-        visible={skipQuestionModalVisible}
-        onClose={() => setSkipQuestionModalVisible(false)}
-        description={formatMessage(messages.skipQuestionModalHeader)}
-        content={formatMessage(messages.skipQuestionModalMessage)}
-        confirmAction={() => saveAnswer(true)}
-      />
+    <Column height="100%" ref={pageRef} id={ANSWER_SESSION_PAGE_ID}>
+      {quickExitEnabled && (
+        <QuickExit
+          isMobilePreview={isPreview && previewMode === I_PHONE_8_PLUS_MODE}
+          beforeQuickExit={beforeQuickExit}
+        />
+      )}
+      {showLoader && <Loader />}
+      {!showLoader && (
+        <>
+          <ConfirmationModal
+            visible={skipQuestionModalVisible}
+            onClose={() => setSkipQuestionModalVisible(false)}
+            description={formatMessage(messages.skipQuestionModalHeader)}
+            content={formatMessage(messages.skipQuestionModalMessage)}
+            confirmAction={() => saveAnswer(true)}
+          />
 
-      <Box
-        display="flex"
-        align="center"
-        justify="center"
-        height="100%"
-        width="100%"
-      >
-        <Helmet>
-          <title>{formatMessage(messages.pageTitle, { isPreview })}</title>
-        </Helmet>
+          <Box
+            display="flex"
+            align="center"
+            justify="center"
+            height="100%"
+            width="100%"
+          >
+            <Helmet>
+              <title>{formatMessage(messages.pageTitle, { isPreview })}</title>
+            </Helmet>
 
-        <AnswerOuterContainer
-          previewMode={isPreview ? previewMode : DESKTOP_MODE}
-          interventionStarted={interventionStarted}
-        >
-          {interventionStarted && nextQuestionError && (
-            <Column align="center" mt={30}>
-              <H2 textAlign="center" mb={30}>
-                {formatMessage(messages.nextQuestionError)}
-              </H2>
-              <StyledButton
-                loading={nextQuestionLoading}
-                onClick={() => nextQuestion(userSession.id)}
-                title={formatMessage(messages.refetchQuestion)}
-                isDesktop={isDesktop}
-              />
-            </Column>
-          )}
-          {!interventionStarted && !nextQuestionError && (
-            <>
-              <H2 textAlign="center" mb={50}>
-                {pageHeaderText()}
-              </H2>
-              <H3 textAlign="center" color={themeColors.warning} mb={50}>
-                {formatMessage(messages.wcagWarning)}
-              </H3>
-              <StyledButton
-                loading={userSessionLoading || nextQuestionLoading}
-                disabled={!previewPossible}
-                onClick={startInterventionAsync}
-                title={buttonText()}
-                isDesktop={isDesktop}
-              />
-            </>
-          )}
-          {interventionStarted && !nextQuestionError && (
-            <>
-              <Box width="100%">
-                <Row padding={30} pb={isDesktop ? 10 : 0}>
-                  <Box {...logoStyles}>
-                    <Row justify="end">
-                      {logoUrl && (
-                        <Img
-                          maxHeight={elements.interventionLogoSize.height}
-                          maxWidth={elements.interventionLogoSize.width}
-                          src={logoUrl}
-                          aria-label={imageAlt}
-                        />
-                      )}
+            <AnswerOuterContainer
+              previewMode={isPreview ? previewMode : DESKTOP_MODE}
+              interventionStarted={interventionStarted}
+            >
+              {interventionStarted && nextQuestionError && (
+                <Column align="center" mt={30}>
+                  <H2 textAlign="center" mb={30}>
+                    {formatMessage(messages.nextQuestionError)}
+                  </H2>
+                  <StyledButton
+                    loading={nextQuestionLoading}
+                    onClick={() => nextQuestion(userSessionId)}
+                    title={formatMessage(messages.refetchQuestion)}
+                    isDesktop={isDesktop}
+                  />
+                </Column>
+              )}
+              {!interventionStarted && !nextQuestionError && (
+                <>
+                  <H2 textAlign="center" mb={50}>
+                    {pageHeaderText()}
+                  </H2>
+                  <H3 textAlign="center" color={themeColors.warning} mb={50}>
+                    {formatMessage(messages.wcagWarning)}
+                  </H3>
+                  <StyledButton
+                    loading={userSessionLoading || nextQuestionLoading}
+                    disabled={!previewPossible}
+                    onClick={startInterventionAsync}
+                    title={buttonText()}
+                    isDesktop={isDesktop}
+                  />
+                </>
+              )}
+              {interventionStarted && !nextQuestionError && (
+                <>
+                  <Box width="100%">
+                    <Row padding={30} pb={isDesktop ? 10 : 0}>
+                      <Box {...logoStyles}>
+                        <Row justify="end">
+                          {logoUrl && (
+                            <Img
+                              maxHeight={elements.interventionLogoSize.height}
+                              maxWidth={elements.interventionLogoSize.width}
+                              src={logoUrl}
+                              aria-label={imageAlt}
+                            />
+                          )}
+                        </Row>
+
+                        {renderQuestionTranscript(true)}
+                      </Box>
                     </Row>
 
-                    {renderQuestionTranscript(true)}
+                    {transitionalUserSessionId && (
+                      <BranchingScreen
+                        resetTransitionalUserSessionId={
+                          resetTransitionalUserSessionId
+                        }
+                      />
+                    )}
+
+                    {!nextQuestionLoading &&
+                      currentQuestion &&
+                      interventionStarted &&
+                      !transitionalUserSessionId && (
+                        <AnimationRefHelper
+                          currentQuestion={currentQuestion}
+                          currentQuestionId={currentQuestionId}
+                          previewMode={previewMode}
+                          answers={answers}
+                          changeIsAnimationOngoing={changeIsAnimationOngoing}
+                          setFeedbackSettings={setFeedbackSettings}
+                          feedbackScreenSettings={feedbackScreenSettings}
+                          audioInstance={audioInstance}
+                        >
+                          {renderPage()}
+                        </AnimationRefHelper>
+                      )}
                   </Box>
-                </Row>
-
-                {transitionalUserSessionId && (
-                  <BranchingScreen
-                    resetTransitionalUserSessionId={
-                      resetTransitionalUserSessionId
-                    }
-                  />
-                )}
-
-                {!nextQuestionLoading &&
-                  currentQuestion &&
-                  interventionStarted &&
-                  !transitionalUserSessionId && (
-                    <AnimationRefHelper
-                      currentQuestion={currentQuestion}
-                      currentQuestionId={currentQuestionId}
-                      previewMode={previewMode}
-                      answers={answers}
-                      changeIsAnimationOngoing={changeIsAnimationOngoing}
-                      setFeedbackSettings={setFeedbackSettings}
-                      feedbackScreenSettings={feedbackScreenSettings}
-                      audioInstance={audioInstance}
-                    >
-                      {renderPage()}
-                    </AnimationRefHelper>
-                  )}
-              </Box>
-              {answersError && <ErrorAlert errorText={answersError} />}
-            </>
-          )}
-        </AnswerOuterContainer>
-      </Box>
+                  {answersError && <ErrorAlert errorText={answersError} />}
+                </>
+              )}
+            </AnswerOuterContainer>
+          </Box>
+        </>
+      )}
     </Column>
   );
 }
@@ -623,6 +646,7 @@ AnswerSessionPage.propTypes = {
   toggleTextTranscript: PropTypes.func,
   setTransitionalUserSessionId: PropTypes.func,
   setLiveChatEnabled: PropTypes.func,
+  saveQuickExitEvent: PropTypes.func,
 };
 
 const mapStateToProps = createStructuredSelector({
@@ -644,6 +668,7 @@ const mapDispatchToProps = {
   toggleTextTranscript: toggleTextTranscriptAction,
   setTransitionalUserSessionId: setTransitionalUserSessionIdAction,
   setLiveChatEnabled: setChatEnabled,
+  saveQuickExitEvent: saveQuickExitEventRequest,
 };
 
 const withConnect = connect(mapStateToProps, mapDispatchToProps);

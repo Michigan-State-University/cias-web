@@ -45,7 +45,6 @@ export const QuestionImage = ({
     addImage({
       image: image.image,
       imageUrl: image.imageUrl,
-      selectedQuestionId: id,
     });
   };
 

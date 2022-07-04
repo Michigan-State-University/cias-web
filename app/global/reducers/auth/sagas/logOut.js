@@ -9,9 +9,7 @@ import { resetReducer } from '../actions';
 export function* logOut(
   { payload: { redirectTo } } = { payload: { redirectTo: null } },
 ) {
-  yield call(LocalStorageService.clearHeaders);
-  yield call(LocalStorageService.clearState);
-  yield call(LocalStorageService.clearGuestHeaders);
+  yield call(LocalStorageService.clearUserData);
 
   const queryParams = new URLSearchParams(window.location.search);
 
