@@ -6,10 +6,12 @@ exports[`<Tab /> should render and match the snapshot for a label 1`] = `
   bottom: -3px;
   margin: 0 10px;
   padding-bottom: 7px;
+  font-weight: 400 !important;
 }
 
 .c0 div {
   cursor: pointer;
+  color: undefined !important;
 }
 
 .c1 {
@@ -41,10 +43,12 @@ exports[`<Tab /> should render as links and match the snapshot 1`] = `
   bottom: -3px;
   margin: 0 10px;
   padding-bottom: 7px;
+  font-weight: 400 !important;
 }
 
 .c0 div {
   cursor: pointer;
+  color: undefined !important;
 }
 
 .c1 a {
