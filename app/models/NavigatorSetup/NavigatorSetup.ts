@@ -5,12 +5,18 @@ export enum NotifyByOptions {
   SMS = 'sms',
 }
 
+export type ParticipantLink = {
+  id: string;
+  displayName: string;
+  url: string;
+};
+
 export type NavigatorSetup = {
   contactEmail: string;
   id: string;
   noNavigatorAvailableMessage: string;
   notifyBy: NotifyByOptions;
-  participantLinks: any[];
+  participantLinks: ParticipantLink[];
   phone: Nullable<Omit<Phone, 'id' | 'confirmed'>>;
   isNavigatorNotificationOn: boolean;
 };

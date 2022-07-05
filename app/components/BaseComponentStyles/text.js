@@ -17,6 +17,7 @@ const text = (props) => ({
   whiteSpace: props.whiteSpace || '',
   textOverflow: props.textOverflow || '',
   cursor: props.clickable ? 'pointer;' : '',
+  textDecoration: props.textDecoration || '',
   '&:hover': {
     textDecoration: props.hoverDecoration || '',
   },
@@ -38,6 +39,7 @@ text.propTypes = {
   lineHeight: PropTypes.string,
   textAlign: PropTypes.oneOf(['left', 'right', 'center', 'justify']),
   wordBreak: PropTypes.oneOf(['normal', 'break-all', 'keep-all']),
+  decoration: PropTypes.string,
 };
 
 export { text };

@@ -1,5 +1,6 @@
 import styled from 'styled-components';
-import { colors } from 'theme';
+import { colors, themeColors } from 'theme';
+import Color from 'color';
 
 import { style, layout, padding, text } from '../BaseComponentStyles';
 export const StyledCollapseContainer = styled.div`
@@ -50,4 +51,26 @@ export const ImageWrapper = styled.div`
   border-radius: 4px;
   background: ${colors.linkWater};
   cursor: pointer;
+`;
+
+const activeStyles = `background-color: ${Color(themeColors.primary)
+  .alpha(0.2)
+  .rgb()
+  .string()};
+
+  svg {
+    *[fill^='#'] {
+        fill: ${themeColors.primary};
+    }
+  }`;
+
+export const ActiveIcon = styled.div`
+  border-radius: 8px;
+  padding: 4px;
+
+  ${({ active }) => active && `${activeStyles}`}
+
+  &:hover {
+    ${activeStyles}
+  }
 `;

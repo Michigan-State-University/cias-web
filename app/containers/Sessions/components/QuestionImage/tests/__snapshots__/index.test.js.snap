@@ -333,12 +333,12 @@ exports[`<QuestionImage /> should match the snapshot without file 1`] = `
   font-family: DM Sans;
   font-size: 15px;
   line-height: 150%;
+  cursor: pointer;
+  color: rgba(183,39,234,1);
+  cursor: pointer;
+  color: rgba(183,39,234,1);
   -webkit-text-decoration: underline;
   text-decoration: underline;
-  cursor: pointer;
-  color: rgba(183,39,234,1);
-  cursor: pointer;
-  color: rgba(183,39,234,1);
 }
 
 .c6 {

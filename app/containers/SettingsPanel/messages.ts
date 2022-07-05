@@ -213,4 +213,32 @@ export default defineMessages({
     id: `${scope}.navigatorSetupError`,
     defaultMessage: `Couldn't fetch navigator setup`,
   },
+  participantLinks: {
+    id: `${scope}.participantLinks`,
+    defaultMessage: 'Links for participant',
+  },
+  addNewLink: {
+    id: `${scope}.addNewLink`,
+    defaultMessage: 'Add new link',
+  },
+  newLink: {
+    id: `${scope}.newLink`,
+    defaultMessage: 'New link',
+  },
+  displayName: {
+    id: `${scope}.displayName`,
+    defaultMessage: 'Display name',
+  },
+  link: {
+    id: `${scope}.link`,
+    defaultMessage: 'Link',
+  },
+  linkPlaceholder: {
+    id: `${scope}.linkPlaceholder`,
+    defaultMessage: 'e.g. https://www.google.com/',
+  },
+  urlValidationError: {
+    id: `${scope}.urlValidationError`,
+    defaultMessage: 'This field should be a valid URL',
+  },
 });

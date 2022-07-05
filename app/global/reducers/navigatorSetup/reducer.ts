@@ -1,6 +1,8 @@
 import produce from 'immer';
 import { getType } from 'typesafe-actions';
 
+import { deleteItemById } from 'utils/reduxUtils';
+
 import {
   fetchNavigatorSetupError,
   fetchNavigatorSetupRequest,
@@ -8,6 +10,12 @@ import {
   updateNavigatorSetupRequest,
   updateNavigatorSetupError,
   updateNavigatorSetupSuccess,
+  addParticipantLinkRequest,
+  addParticipantLinkSuccess,
+  addParticipantLinkError,
+  removeParticipantLinkSuccess,
+  removeParticipantLinkError,
+  removeParticipantLinkRequest,
 } from './actions';
 import { NavigatorSetupState, NavigatorSetupAction } from './types';
 
@@ -15,6 +23,7 @@ export const initialState: NavigatorSetupState = {
   loaders: {
     fetching: false,
     updatingForm: false,
+    updatingLinks: false,
   },
   navigatorData: null,
   error: null,
@@ -52,6 +61,30 @@ export const navigatorSetupReducer = (
       case getType(updateNavigatorSetupError):
       case getType(updateNavigatorSetupSuccess):
         draft.loaders.fetching = false;
+        break;
+
+      case getType(addParticipantLinkRequest):
+        draft.loaders.updatingLinks = true;
+        break;
+      case getType(addParticipantLinkSuccess):
+        const { navigatorSetup } = action.payload;
+        draft.navigatorData = navigatorSetup;
+        break;
+      case getType(addParticipantLinkError):
+        draft.loaders.updatingLinks = false;
+        break;
+
+      case getType(removeParticipantLinkRequest):
+        draft.loaders.updatingLinks = true;
+        break;
+      case getType(removeParticipantLinkSuccess):
+        const { linkId } = action.payload;
+        if (draft.navigatorData) {
+          deleteItemById(draft.navigatorData.participantLinks, linkId);
+        }
+        break;
+      case getType(removeParticipantLinkError):
+        draft.loaders.updatingLinks = false;
         break;
     }
   });
