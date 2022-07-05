@@ -5,8 +5,8 @@
   <mj-body>
     <app-layout 
       header="Navigator intervention invite" 
-      mainText="You have been invited as navigator to <span style='color:#C866EA;'>{INTERVENTION_TITLE}</span><br/><br/>Click the link accept invitation" 
-      buttonText="Accent invitation" 
+      mainText="You have been invited as a navigator to <span style='color:#C866EA;'>{INTERVENTION_TITLE}</span><br/><br/>Click the link to accept the invitation"
+      buttonText="Accept invitation" 
       buttonUrl="{BUTTON_URL}" 
       footNote=""
     >
