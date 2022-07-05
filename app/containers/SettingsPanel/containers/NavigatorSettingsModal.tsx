@@ -16,7 +16,6 @@ import {
 import Tabs from 'components/Tabs';
 import ErrorAlert from 'components/ErrorAlert';
 import Spinner from 'components/Spinner';
-import H3 from 'components/H3';
 
 import { themeColors } from 'theme';
 import { NavigatorSetup } from 'models/NavigatorSetup';
@@ -26,6 +25,7 @@ import messages from '../messages';
 import NavigatorModalLayout from '../Components/NavigatorModalLayout';
 import NavigatorEmailInvitationPanel from './NavigatorEmailInvitationPanel';
 import TeamNavigatorsPanel from './TeamNavigatorsPanel';
+import AddedNavigatorPanel from './AddedNavigatorsPanel';
 
 type Props = {
   interventionId: string;
@@ -82,7 +82,7 @@ const NavigatorSettingsModal = ({ interventionId }: Props) => {
               <TeamNavigatorsPanel />
             </>
           }
-          rightContent={<H3>Navigators added to this intervention</H3>}
+          rightContent={<AddedNavigatorPanel />}
         />
       </div>
       {/* @ts-ignore */}

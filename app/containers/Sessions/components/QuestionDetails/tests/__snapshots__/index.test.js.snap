@@ -257,72 +257,6 @@ exports[`<QuestionDetails /> should match the snapshot 1`] = `
   width: 100%;
 }
 
-.c16 {
-  width: 100%;
-  min-height: -webkit-max-content;
-  min-height: -moz-max-content;
-  min-height: max-content;
-  border: 1px solid transparent;
-}
-
-.c16 .ql-editor {
-  font-weight: 400;
-  padding: 10px;
-  overflow: visible;
-}
-
-.c16 .ql-editor.ql-blank::before {
-  left: 11px;
-}
-
-.c16 .ql-picker-label svg {
-  margin-bottom: 15px !important;
-}
-
-.c16 .ql-toolbar {
-  width: -webkit-max-content;
-  width: -moz-max-content;
-  width: max-content;
-}
-
-.c16 .ql-container {
-  font-size: 16px;
-  font-family: DM Sans;
-}
-
-.c19 {
-  width: 100%;
-  min-height: -webkit-max-content;
-  min-height: -moz-max-content;
-  min-height: max-content;
-  border: 1px solid transparent;
-}
-
-.c19 .ql-editor {
-  font-weight: 400;
-  padding: 10px;
-  overflow: visible;
-}
-
-.c19 .ql-editor.ql-blank::before {
-  left: 11px;
-}
-
-.c19 .ql-picker-label svg {
-  margin-bottom: 15px !important;
-}
-
-.c19 .ql-toolbar {
-  width: -webkit-max-content;
-  width: -moz-max-content;
-  width: max-content;
-}
-
-.c19 .ql-container {
-  font-size: initial;
-  font-family: DM Sans;
-}
-
 .c4 {
   padding: 12px;
   border-style: solid;
@@ -401,6 +335,72 @@ exports[`<QuestionDetails /> should match the snapshot 1`] = `
 
 .c26:disabled {
   color: #ABBBD1;
+}
+
+.c16 {
+  width: 100%;
+  min-height: -webkit-max-content;
+  min-height: -moz-max-content;
+  min-height: max-content;
+  border: 1px solid transparent;
+}
+
+.c16 .ql-editor {
+  font-weight: 400;
+  padding: 10px;
+  overflow: visible;
+}
+
+.c16 .ql-editor.ql-blank::before {
+  left: 11px;
+}
+
+.c16 .ql-picker-label svg {
+  margin-bottom: 15px !important;
+}
+
+.c16 .ql-toolbar {
+  width: -webkit-max-content;
+  width: -moz-max-content;
+  width: max-content;
+}
+
+.c16 .ql-container {
+  font-size: 16px;
+  font-family: DM Sans;
+}
+
+.c19 {
+  width: 100%;
+  min-height: -webkit-max-content;
+  min-height: -moz-max-content;
+  min-height: max-content;
+  border: 1px solid transparent;
+}
+
+.c19 .ql-editor {
+  font-weight: 400;
+  padding: 10px;
+  overflow: visible;
+}
+
+.c19 .ql-editor.ql-blank::before {
+  left: 11px;
+}
+
+.c19 .ql-picker-label svg {
+  margin-bottom: 15px !important;
+}
+
+.c19 .ql-toolbar {
+  width: -webkit-max-content;
+  width: -moz-max-content;
+  width: max-content;
+}
+
+.c19 .ql-container {
+  font-size: initial;
+  font-family: DM Sans;
 }
 
 .c28 {

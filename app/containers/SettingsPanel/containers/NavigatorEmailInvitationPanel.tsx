@@ -54,25 +54,35 @@ const NavigatorEmailInvitationPanel = () => {
           {formatMessage(messages.invite)}
         </Button>
       </Row>
-      <Text mb={10} mt={20}>
-        {formatMessage(messages.waitingForAcceptance)}
-      </Text>
-      <Box height={SINGLE_EMAIL_HEIGHT * 3 + ITEM_MARGIN * 2} overflow="scroll">
-        {API_EMAILS.map((email, index) => (
+      {API_EMAILS.length !== 0 && (
+        <>
+          <Text mb={10} mt={20}>
+            {formatMessage(messages.waitingForAcceptance)}
+          </Text>
           <Box
-            display="flex"
-            justify="between"
-            background={colors.lightBlue}
-            padding={12}
-            key={email}
-            maxHeight={SINGLE_EMAIL_HEIGHT}
-            mt={index === 0 ? 0 : ITEM_MARGIN}
+            height={
+              SINGLE_EMAIL_HEIGHT * Math.min(3, API_EMAILS.length) +
+              ITEM_MARGIN * Math.min(2, API_EMAILS.length)
+            }
+            overflow="scroll"
           >
-            <Text>{email}</Text>
-            <Img src={bin} />
+            {API_EMAILS.map((email, index) => (
+              <Box
+                display="flex"
+                justify="between"
+                background={colors.lightBlue}
+                padding={12}
+                key={email}
+                maxHeight={SINGLE_EMAIL_HEIGHT}
+                mt={index === 0 ? 0 : ITEM_MARGIN}
+              >
+                <Text>{email}</Text>
+                <Img src={bin} />
+              </Box>
+            ))}
           </Box>
-        ))}
-      </Box>
+        </>
+      )}
     </Box>
   );
 };

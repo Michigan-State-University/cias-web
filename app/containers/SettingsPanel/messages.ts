@@ -241,4 +241,16 @@ export default defineMessages({
     id: `${scope}.add`,
     defaultMessage: `Add`,
   },
+  navigatorsAddedToIntervention: {
+    id: `${scope}.navigatorsAddedToIntervention`,
+    defaultMessage: `Navigators added to this intervention`,
+  },
+  noAddedNavigators: {
+    id: `${scope}.noAddedNavigators`,
+    defaultMessage: `There are no navigators added to this intervention.`,
+  },
+  noTeamNavigators: {
+    id: `${scope}.noTeamNavigators`,
+    defaultMessage: `There are no navigators in your team.`,
+  },
 });
