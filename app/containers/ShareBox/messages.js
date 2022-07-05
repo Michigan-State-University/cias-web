@@ -48,14 +48,6 @@ export default defineMessages({
     id: `${scope}.userListLabel`,
     defaultMessage: 'Email has been already sent to',
   },
-  invalidEmail: {
-    id: `${scope}.invalidEmail`,
-    defaultMessage: 'Email is invalid!',
-  },
-  duplicatedEmail: {
-    id: `${scope}.duplicatedEmail`,
-    defaultMessage: 'Such email is already provided!',
-  },
   filename: {
     id: `${scope}.filename`,
     defaultMessage: 'participants_emails_{interventionName}_invite',

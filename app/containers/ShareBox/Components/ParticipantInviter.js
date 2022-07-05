@@ -15,7 +15,7 @@ import Row from 'components/Row';
 import CsvFileReader from 'components/CsvFileReader';
 import Box from 'components/Box';
 
-import ChipsInput from './ChipsInput';
+import ChipsInput from '../../../components/Input/ChipsInput';
 import messages from '../messages';
 
 const ParticipantInviter = ({

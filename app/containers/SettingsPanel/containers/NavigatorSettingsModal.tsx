@@ -16,6 +16,7 @@ import {
 import Tabs from 'components/Tabs';
 import ErrorAlert from 'components/ErrorAlert';
 import Spinner from 'components/Spinner';
+import H3 from 'components/H3';
 
 import { themeColors } from 'theme';
 import { NavigatorSetup } from 'models/NavigatorSetup';
@@ -23,6 +24,8 @@ import NoNavigatorsForm from './NoNavigatorsForm';
 
 import messages from '../messages';
 import NavigatorModalLayout from '../Components/NavigatorModalLayout';
+import NavigatorEmailInvitationPanel from './NavigatorEmailInvitationPanel';
+import TeamNavigatorsPanel from './TeamNavigatorsPanel';
 
 type Props = {
   interventionId: string;
@@ -71,7 +74,17 @@ const NavigatorSettingsModal = ({ interventionId }: Props) => {
     // @ts-ignore
     <Tabs withBottomBorder>
       {/* @ts-ignore */}
-      <div label={formatMessage(messages.navigators)}>Navigators</div>
+      <div label={formatMessage(messages.navigators)}>
+        <NavigatorModalLayout
+          leftContent={
+            <>
+              <NavigatorEmailInvitationPanel />
+              <TeamNavigatorsPanel />
+            </>
+          }
+          rightContent={<H3>Navigators added to this intervention</H3>}
+        />
+      </div>
       {/* @ts-ignore */}
       <div label={formatMessage(messages.noNavigator)}>
         <NavigatorModalLayout

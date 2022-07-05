@@ -30,6 +30,7 @@ export const navigatorSetupReducer = (
       case getType(fetchNavigatorSetupRequest):
         draft.loaders.fetching = true;
         draft.navigatorData = null;
+        draft.error = null;
         break;
 
       case getType(fetchNavigatorSetupSuccess):

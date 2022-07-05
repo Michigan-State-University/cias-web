@@ -1,7 +1,10 @@
 import styled from 'styled-components';
 import ReactQuill from 'react-quill';
 
-import { colors, borders, fontFamily, themeColors } from 'theme';
+import { colors, borders, fontFamily, themeColors, paddings } from 'theme';
+
+import Input from 'components/Input';
+
 import { margin, layout, border } from '../BaseComponentStyles';
 
 export const QuillStyled = styled(ReactQuill)`
@@ -121,4 +124,27 @@ export const Sufix = styled.div`
   span:last-of-type {
     white-space: pre;
   }
+`;
+
+export const StyledChipsInput = styled.div`
+  padding: ${({ isInputFilled }) =>
+    isInputFilled ? `8px 6px 3px 6px` : paddings.small};
+  border-style: ${borders.borderStyle};
+  border-width: ${borders.borderWidth};
+  border-color: ${({ isFocused }) =>
+    isFocused ? themeColors.primary : themeColors.highlight};
+  border-radius: ${borders.borderRadius};
+  width: 100%;
+  background-color: ${colors.zirkon};
+  ${margin};
+`;
+
+export const HiddenInput = styled(Input)`
+  height: ${({ isInputFilled }) => (isInputFilled ? '31px' : '100%')};
+  width: ${({ isInputFilled }) => (isInputFilled ? 'auto' : '100%')};
+  border: none;
+  outline: none;
+  background-color: ${colors.zirkon};
+  margin-left: ${({ isInputFilled }) => (isInputFilled ? '2px' : '0')};
+  flex: 1;
 `;

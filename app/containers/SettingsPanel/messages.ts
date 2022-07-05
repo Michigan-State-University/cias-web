@@ -213,4 +213,32 @@ export default defineMessages({
     id: `${scope}.navigatorSetupError`,
     defaultMessage: `Couldn't fetch navigator setup`,
   },
+  inviteNavigatorsByEmail: {
+    id: `${scope}.inviteNavigatorsByEmail`,
+    defaultMessage: `Invite navigators by e-mail`,
+  },
+  waitingForAcceptance: {
+    id: `${scope}.waitingForAcceptance`,
+    defaultMessage: `Waiting for invitation acceptance`,
+  },
+  navigatorEmail: {
+    id: `${scope}.navigatorEmail`,
+    defaultMessage: `Navigator’s e-mail address`,
+  },
+  navigatorExampleEmail: {
+    id: `${scope}.navigatorExampleEmail`,
+    defaultMessage: `e.g. john.doe@example.com`,
+  },
+  invite: {
+    id: `${scope}.invite`,
+    defaultMessage: `Invite`,
+  },
+  navigatorsFromTeam: {
+    id: `${scope}.navigatorsFromTeam`,
+    defaultMessage: `Add navigators from your team`,
+  },
+  add: {
+    id: `${scope}.add`,
+    defaultMessage: `Add`,
+  },
 });

@@ -5,20 +5,26 @@
  */
 
 import React, { memo } from 'react';
-import PropTypes from 'prop-types';
 
 import Img from 'components/Img';
 import { colors } from 'theme/colors';
 
 import { AvatarStyled } from './styled';
 
+type Props = {
+  avatar?: string;
+  firstName: string;
+  lastName: string;
+  backgroundColor?: string;
+} & Record<string, unknown>;
+
 function UserAvatar({
   avatar,
   firstName,
   lastName,
-  backgroundColor,
+  backgroundColor = colors.jungleGreen,
   ...styleProps
-}) {
+}: Props) {
   if (avatar)
     return <Img src={avatar} alt="avatar" {...styleProps} borderRadius="50%" />;
 
@@ -36,16 +42,5 @@ function UserAvatar({
     </AvatarStyled>
   );
 }
-
-UserAvatar.propTypes = {
-  firstName: PropTypes.string,
-  lastName: PropTypes.string,
-  avatar: PropTypes.string,
-  backgroundColor: PropTypes.string,
-};
-
-UserAvatar.defaultProps = {
-  backgroundColor: colors.jungleGreen,
-};
 
 export default memo(UserAvatar);
