@@ -1,29 +1,22 @@
-import React from 'react';
+import React, { CSSProperties, PropsWithChildren } from 'react';
+import { LinkProps } from 'react-router-dom';
 
 import { EmptyAnchor } from './styled';
 
-interface Props {
-  href: string;
-  target?: React.HTMLAttributeAnchorTarget;
-  children: React.ReactNode;
-  width?: string | number;
+type Props = PropsWithChildren<{
+  width?: CSSProperties['width'];
   disabled?: boolean;
-}
+}> &
+  Partial<Pick<LinkProps, 'to' | 'href' | 'target'>>;
 
-const GhostLink = ({ disabled, href, children, target, width }: Props) => {
+const GhostLink = ({ disabled, children, ...props }: Props) => {
   const preventDefault = (e: any) => {
     if (disabled) {
       e.preventDefault();
     }
   };
   return (
-    <EmptyAnchor
-      onClick={preventDefault}
-      href={href}
-      target={target}
-      width={width}
-      disabled={disabled}
-    >
+    <EmptyAnchor onClick={preventDefault} disabled={disabled} {...props}>
       {children}
     </EmptyAnchor>
   );

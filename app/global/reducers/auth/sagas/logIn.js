@@ -1,5 +1,5 @@
 import { put, takeLatest, call, select, delay } from 'redux-saga/effects';
-import { push } from 'connected-react-router';
+import { replace } from 'connected-react-router';
 import axios from 'axios';
 
 import LocalStorageService from 'utils/localStorageService';
@@ -49,9 +49,11 @@ function* login({ payload: { email, password } }) {
     const location = yield select(makeSelectLocation());
     const queryParams = new URLSearchParams(location.search);
 
-    if (queryParams.has(REDIRECT_QUERY_KEY))
-      yield put(push(decodeURIComponent(queryParams.get(REDIRECT_QUERY_KEY))));
-    else yield put(push('/'));
+    if (queryParams.has(REDIRECT_QUERY_KEY)) {
+      yield put(
+        replace(decodeURIComponent(queryParams.get(REDIRECT_QUERY_KEY))),
+      );
+    } else yield put(replace('/'));
   } catch (error) {
     yield delay(300);
     yield put(loginError(requestErrorMessageHandler(error)));

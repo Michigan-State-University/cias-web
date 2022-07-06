@@ -103,6 +103,12 @@ const LocalStorageService = (() => {
     else setItem(key, value);
   };
 
+  const clearUserData = () => {
+    clearHeaders();
+    clearState();
+    clearGuestHeaders();
+  };
+
   return {
     setToken,
     setUid,
@@ -120,6 +126,7 @@ const LocalStorageService = (() => {
     removeItem,
     getItem,
     updateItem,
+    clearUserData,
   };
 })();
 

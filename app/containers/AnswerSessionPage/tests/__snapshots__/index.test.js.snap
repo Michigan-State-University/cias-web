@@ -128,6 +128,7 @@ exports[`<AnswerSessionPage /> Should render and match the snapshot 1`] = `
 <div
   class="c0"
   height="100%"
+  id="answer-session-page"
 >
   <div
     class="c1"

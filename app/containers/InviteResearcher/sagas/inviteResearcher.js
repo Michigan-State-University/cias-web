@@ -16,7 +16,7 @@ import { inviteResearcherSuccess, inviteResearcherError } from '../actions';
 
 export function* inviteResearcher({ payload: { email } }) {
   const requestUrl = '/v1/users/invitations';
-  const body = { invitation: { email } };
+  const body = { invitation: { email: email.toLowerCase() } };
   try {
     const { data } = yield call(axios.post, requestUrl, body);
     const user = jsonApiToObject(data, 'user');

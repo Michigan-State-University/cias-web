@@ -73,6 +73,9 @@ export const TOGGLE_TEXT_TRANSCRIPT =
 export const SET_TRANSITIONAL_USER_SESSION_ID =
   'app/AnswerSessionPage/SET_TRANSITIONAL_USER_SESSION_ID';
 
+export const SAVE_QUICK_EXIT_EVENT_REQUEST =
+  'app/AnswerSessionPage/SAVE_QUICK_EXIT_EVENT_REQUEST';
+
 export const QUESTION_TITLE_ID = 'question-title';
 
 export const QUESTION_SUBTITLE_ID = 'question-subtitle';

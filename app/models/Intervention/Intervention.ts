@@ -64,6 +64,7 @@ export interface Intervention {
   usersWithAccess: Nullable<UserWithAccess[]>;
   files: FileInfo[];
   liveChatEnabled?: boolean;
+  quickExit: boolean;
 }
 
 export interface FileInfo {

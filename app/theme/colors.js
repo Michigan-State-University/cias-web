@@ -73,6 +73,7 @@ const colors = {
   gainsbro: '#DADADA',
   lightStealBlue: '#B3C1E1',
   beauBlue: '#CFDDEF',
+  lightDivider: '#EAF1FA',
 };
 
 const themeColors = {

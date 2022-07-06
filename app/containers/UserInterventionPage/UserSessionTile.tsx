@@ -130,7 +130,7 @@ const UserSessionTile = ({
     <GhostLink
       disabled={disabledTile}
       width="100%"
-      href={`/interventions/${interventionId}/sessions/${id}/fill`}
+      to={`/interventions/${interventionId}/sessions/${id}/fill`}
     >
       <TileContainer bg={tileBackground}>
         <Box display="flex" justify="between" align="center">
