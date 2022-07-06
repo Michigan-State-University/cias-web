@@ -61,7 +61,7 @@ const FinishScreenLayout = ({ formatMessage, question }) => {
             <TextButton>{formatMessage(messages.goBackToModules)}</TextButton>
           </StyledLink>
           {nextSessionId && (
-            <GhostLink href={nextSessionUrl}>
+            <GhostLink to={nextSessionUrl}>
               <Button px={20} width="100%">
                 {formatMessage(messages.goToNextModule)}
               </Button>

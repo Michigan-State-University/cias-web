@@ -253,4 +253,36 @@ export default defineMessages({
     id: `${scope}.noTeamNavigators`,
     defaultMessage: `There are no navigators in your team.`,
   },
+  participantLinks: {
+    id: `${scope}.participantLinks`,
+    defaultMessage: 'Links for participant',
+  },
+  addNewLink: {
+    id: `${scope}.addNewLink`,
+    defaultMessage: 'Add new link',
+  },
+  newLink: {
+    id: `${scope}.newLink`,
+    defaultMessage: 'New link',
+  },
+  displayName: {
+    id: `${scope}.displayName`,
+    defaultMessage: 'Display name',
+  },
+  link: {
+    id: `${scope}.link`,
+    defaultMessage: 'Link',
+  },
+  linkPlaceholder: {
+    id: `${scope}.linkPlaceholder`,
+    defaultMessage: 'e.g. https://www.google.com/',
+  },
+  urlValidationError: {
+    id: `${scope}.urlValidationError`,
+    defaultMessage: 'This field should be a valid URL',
+  },
+  noLinksForParticipant: {
+    id: `${scope}.noLinksForParticipant`,
+    defaultMessage: `You haven’t added any links for participants yet. Let’s click on <primaryColorBold>Add new link</primaryColorBold> above to add some links.`,
+  },
 });

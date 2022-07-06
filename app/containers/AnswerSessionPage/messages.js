@@ -156,4 +156,16 @@ export default defineMessages({
       other {Answer Session}
     }`,
   },
+  exit: {
+    id: `${scope}.exit`,
+    defaultMessage: `Exit`,
+  },
+  exitButtonTitle: {
+    id: `${scope}.exitButtonTitle`,
+    defaultMessage: `Quickly close the intervention`,
+  },
+  exitIconAlt: {
+    id: `${scope}.exitIconAlt`,
+    defaultMessage: `Quick Exit button icon`,
+  },
 });

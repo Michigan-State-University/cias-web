@@ -17,7 +17,6 @@ const TableRow = ({
   user: { id, email, fullName, roles, active },
   history,
   openModal,
-
   formatMessage,
 }) => {
   const teamId = useContext(TeamIdContext);
@@ -63,7 +62,6 @@ const TableRow = ({
   );
   return (
     <StripedTR
-      lastItemHoverable={teamId ? 2 : 1}
       cursor="pointer"
       hoverBg={colors.linkWater}
       color={colors.white}

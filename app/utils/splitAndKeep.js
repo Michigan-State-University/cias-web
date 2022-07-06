@@ -21,6 +21,11 @@ export const splitAndKeep = (text, delimiters) => {
     .reduce((chunks, item, index, original) => {
       if (!item.match(regex)) {
         chunks.push(`${item}${original[index + 1] || ''}`);
+        return chunks;
+      }
+
+      if (index === 0) {
+        chunks.push(item);
       }
 
       return chunks;

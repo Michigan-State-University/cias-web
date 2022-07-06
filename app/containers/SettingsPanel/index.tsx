@@ -244,13 +244,15 @@ const SettingsPanel = ({
               id="use-navigator-switch"
               disabled={!changingChatSettingsPossible}
             />
-            <Img
-              onClick={openNavigatorSettingModal}
-              ml={15}
-              src={cog}
-              alt="manage"
-              cursor="pointer"
-            />
+            {intervention?.liveChatEnabled && (
+              <Img
+                onClick={openNavigatorSettingModal}
+                ml={15}
+                src={cog}
+                alt="manage"
+                cursor="pointer"
+              />
+            )}
           </Box>
           <InterventionRadioPanel
             radioPanelTitle={

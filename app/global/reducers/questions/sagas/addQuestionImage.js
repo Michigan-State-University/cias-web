@@ -1,14 +1,14 @@
-import { put, takeLatest } from 'redux-saga/effects';
+import { put, takeLatest, select } from 'redux-saga/effects';
 import axios from 'axios';
 
 import { mapQuestionToStateObject } from 'utils/mapResponseObjects';
 
 import { ADD_QUESTION_IMAGE_REQUEST } from '../constants';
 import { addQuestionImageSuccess, addQuestionImageError } from '../actions';
+import { makeSelectSelectedQuestionId } from '../selectors';
 
-function* addQuestionImage({
-  payload: { image, imageUrl, selectedQuestionId },
-}) {
+function* addQuestionImage({ payload: { image, imageUrl } }) {
+  const selectedQuestionId = yield select(makeSelectSelectedQuestionId());
   const requestURL = `v1/questions/${selectedQuestionId}/images`;
 
   const formData = new FormData();

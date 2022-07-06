@@ -23,6 +23,7 @@ export {
   loginRequest,
   verificationCodeRequest,
   fetchSelfDetailsRequest,
+  fetchSelfDetailsSuccess,
 } from './actions';
 export { authReducer, initialState } from './reducer';
 export {

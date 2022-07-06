@@ -47,7 +47,6 @@ import messages from './messages';
 
 type Props = {
   id: string;
-  name: string;
   googleLanguageId: number;
   onTranslated?: () => void;
   translateInterventionLoading: boolean;
@@ -57,7 +56,6 @@ type Props = {
 
 const TranslateInterventionModal = ({
   id,
-  name,
   googleLanguageId,
   onTranslated,
   translateInterventionLoading,
@@ -114,9 +112,6 @@ const TranslateInterventionModal = ({
 
   return (
     <>
-      <H2 mb={10} color={themeColors.primary}>
-        {name}
-      </H2>
       <H1 mb={20} id={MODAL_TITLE_ID}>
         <FormattedMessage {...messages.title} />
       </H1>
@@ -157,9 +152,14 @@ const TranslateInterventionModal = ({
         </>
       )}
       <Row mt={50}>
-        <Comment width="100%">
+        <Text
+          color={themeColors.warning}
+          fontWeight="medium"
+          lineHeight="20px"
+          width="100%"
+        >
           <FormattedMessage {...messages.costsComment} />
-        </Comment>
+        </Text>
         {
           // @ts-ignore
           <Button

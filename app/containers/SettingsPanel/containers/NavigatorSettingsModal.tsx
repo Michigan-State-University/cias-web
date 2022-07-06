@@ -12,20 +12,25 @@ import {
   makeSelectNavigatorSetupError,
   makeSelectNavigatorSetupData,
   updateNavigatorSetupRequest,
+  addParticipantLinkRequest,
+  updateParticipantLinkRequest,
+  removeParticipantLinkRequest,
 } from 'global/reducers/navigatorSetup';
 import Tabs from 'components/Tabs';
 import ErrorAlert from 'components/ErrorAlert';
 import Spinner from 'components/Spinner';
 
 import { themeColors } from 'theme';
-import { NavigatorSetup } from 'models/NavigatorSetup';
-import NoNavigatorsForm from './NoNavigatorsForm';
+import { NavigatorSetup, ParticipantLink } from 'models/NavigatorSetup';
 
 import messages from '../messages';
 import NavigatorModalLayout from '../Components/NavigatorModalLayout';
 import NavigatorEmailInvitationPanel from './NavigatorEmailInvitationPanel';
 import TeamNavigatorsPanel from './TeamNavigatorsPanel';
 import AddedNavigatorPanel from './AddedNavigatorsPanel';
+
+import NoNavigatorsForm from './NoNavigatorsForm';
+import LinksForParticipant from './LinksForParticipant';
 
 type Props = {
   interventionId: string;
@@ -49,6 +54,22 @@ const NavigatorSettingsModal = ({ interventionId }: Props) => {
     dispatch(updateNavigatorSetupRequest(interventionId, newData));
   };
 
+  const addNewParticipantLink = () =>
+    dispatch(
+      addParticipantLinkRequest(interventionId, {
+        displayName: '',
+        url: '',
+      }),
+    );
+
+  const updateParticipantLink = (
+    linkId: string,
+    data: Partial<Omit<ParticipantLink, 'id'>>,
+  ) => dispatch(updateParticipantLinkRequest(interventionId, linkId, data));
+
+  const removeParticipantLink = (linkId: string) =>
+    dispatch(removeParticipantLinkRequest(interventionId, linkId));
+
   if (loading) {
     return <Spinner color={themeColors.secondary} />;
   }
@@ -68,11 +89,12 @@ const NavigatorSettingsModal = ({ interventionId }: Props) => {
     noNavigatorAvailableMessage,
     notifyBy,
     phone,
+    participantLinks,
   } = navigatorSetupData;
 
   return (
     // @ts-ignore
-    <Tabs withBottomBorder>
+    <Tabs withBottomBorder emphasizeActiveLink>
       {/* @ts-ignore */}
       <div label={formatMessage(messages.navigators)}>
         <NavigatorModalLayout
@@ -98,7 +120,14 @@ const NavigatorSettingsModal = ({ interventionId }: Props) => {
               updateNavigatorSettings={updateNavigatorSettings}
             />
           }
-          rightContent={<>No navigators tab</>}
+          rightContent={
+            <LinksForParticipant
+              links={participantLinks}
+              addParticipantLink={addNewParticipantLink}
+              updateParticipantLink={updateParticipantLink}
+              removeParticipantLink={removeParticipantLink}
+            />
+          }
         />
       </div>
       {/* @ts-ignore */}

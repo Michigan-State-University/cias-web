@@ -9,8 +9,7 @@ import { LOG_OUT } from '../../constants';
 describe('logOut saga', () => {
   it('Check editUser generator success connection', () =>
     expectSaga(logOut)
-      .call.fn(LocalStorageService.clearHeaders)
-      .call.fn(LocalStorageService.clearState)
+      .call.fn(LocalStorageService.clearUserData)
       .put(push('/login'))
       .run());
   it('Check logOut connection', () => {

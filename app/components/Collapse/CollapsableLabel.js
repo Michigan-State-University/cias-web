@@ -8,10 +8,10 @@ import binGrey from 'assets/svg/bin-grey.svg';
 import Row from 'components/Row';
 import Box from 'components/Box';
 import Icon from 'components/Icon';
-import { ImageButton } from 'components/Button/ImageButton';
 
 import { ImageWrapper, StyledCollapseLabel } from './styled';
 import messages from './messages';
+import CollapseIcon from './CollapseIcon';
 
 const CollapseLabel = ({
   isOpened,
@@ -40,6 +40,7 @@ const CollapseLabel = ({
   binProps,
   arrowColor,
   extraIcons,
+  showHoverEffect,
 }) => {
   const { formatMessage } = useIntl();
   const currentImg = isOpened ? onShowImg : onHideImg;
@@ -60,17 +61,20 @@ const CollapseLabel = ({
   );
 
   const deleteIcon = (
-    <ImageButton
-      src={deleteActive ? binImage : binNotActiveImage}
-      onClick={deleteActive ? onDelete : undefined}
-      title={formatMessage(messages.deleteItem)}
+    <CollapseIcon
       ml={isBinInCollapse ? 0 : binMargin || 5}
       mr={!isBinInCollapse ? 0 : binMargin || 5}
-      data-testid={`bin-${label}`}
-      data-cy={`accordion-element-delete-${index}`}
+      icon={deleteActive ? binImage : binNotActiveImage}
+      onClick={deleteActive ? onDelete : undefined}
+      title={formatMessage(messages.deleteItem)}
       disabled={disabled}
       fill={binFillColor}
       iconProps={binProps}
+      buttonProps={{
+        'data-testid': `bin-${label}`,
+        'data-cy': `accordion-element-delete-${index}`,
+      }}
+      showHoverEffect={showHoverEffect}
     />
   );
 
@@ -133,6 +137,7 @@ CollapseLabel.propTypes = {
   binProps: PropTypes.object,
   arrowColor: PropTypes.string,
   extraIcons: PropTypes.object,
+  showHoverEffect: PropTypes.bool,
 };
 
 CollapseLabel.defaultProps = {

@@ -57,13 +57,36 @@ available [here](https://medium.com/mjml-making-responsive-email-easy/tutorial-c
 
 #### Generated htmls are in `mjml/html` directory
 
+**Tags**
+For easier maintaining and searching for proper sections and variables, there are tags in `.html` files:
+1. `LOGO START` and `LOGO END`
+2. `HEADER START` and `HEADER END`
+3. `MAIN-TEXT START` and `MAIN-TEXT END`
+4. `BUTTON START` and `BUTTON END`
+5. `FOOTNOTE START` and `FOOTNOTE END`
+
 **Variables:**
 
-* *confirm-email.html*: {BUTTON_URL}, {RECIPIENT_NAME}
-* *csv-download.html*: {BUTTON_URL}, {SESSION_TITLE}
-* *invite-session.html*: {BUTTON_URL}, {SESSION_TITLE}
-* *reset-password.html*: {BUTTON_URL}
-* *invite-email.html*: {BUTTON_URL}
+* *`cloned-intervention.html`*: **`{INTERVENTION_NAME}`**, **`{BUTTON_URL}`**
+* *`cloned-session.html`*: **`{SESSION_NAME}`**, **`{BUTTON_URL}`**
+* *`csv-answers-preview.html`*: **`{INTERVENTION_NAME}`**, **`{REQUESTED_AT}`**
+* *`csv-answers.html`*: **`{BUTTON_URL}`**, **`{INTERVENTION_NAME}`**, **`{REQUESTED_AT}`**
+* *`confirmation-instructions.html`*: **`{BUTTON_URL}`**, **`{RECIPIENT_NAME}`**
+* *`invitation-instructions.html`*: **`{BUTTON_URL}`**, **`{TEXT}`**
+* *`duplicate-confirmation.html`*: **`{BUTTON_URL}`**, **`{SESSION_NAME}`**, **`{INTERVENTION_NAME}`**
+* *`new-report-available.html`*: **`{BUTTON_URL}`**, {NUMBER_OF_GENERATED_REPORTS}
+* *`intervention-inform-to-an-email.html`*: **`{BUTTON_URL}`**, **`{INTERVENTION_NAME}`**
+* *`session-inform-to-an-email.html`*: **`{BUTTON_URL}`**, **`{SESSION_NAME}`**
+* *`organizable-invite-user.html`*: **`{BUTTON_URL}`**, **`{ORGANIZABLE_NAME}`**, **`{ORGANIZABLE_TYPE}`**
+* *`team-invite-user.html`*: **`{BUTTON_URL}`**, **`{TEAM_NAME}`**
+* *`template-preview.html`*: **`{REPORT_TEMPLATE_NAME}`**
+* *`translation-confirmation.html`*: **`{BUTTON_URL}`**, **`{REPORT_TEMPLATE_NAME}`**
+* *`send-verification-login-code.html`*: **`{VERIFICATION_CODE}`**
+* *`translation-error.html`*:
+* *`clone-error.html`*:
+* *`clone-result.html`*: **`{BUTTON_URL}`**, **`{INTERVENTION_NAME}`**, **`{REQUESTED_AT}`**
+* *`csv-download.html`*: **`{BUTTON_URL}`**, **`{SESSION_NAME}`**
+* *`reset-password-instructions.html`*: **`{BUTTON_URL}`**
 
 #### Report templates are in `template` directory
 

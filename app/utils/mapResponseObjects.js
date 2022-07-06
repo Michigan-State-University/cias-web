@@ -19,23 +19,24 @@ export const mapAccessToStateObject = ({ user_id: id, email }) => ({
   email,
 });
 
-export const mapCurrentUser = (user) => ({
-  id: user.id,
-  firstName: user.attributes.first_name,
-  lastName: user.attributes.last_name,
-  fullName: user.attributes.full_name,
-  email: user.attributes.email,
-  roles: user.attributes.roles,
-  avatar: user.attributes.avatar_url,
-  timeZone: user.attributes.time_zone,
-  active: user.attributes.active,
-  phone: user.attributes.phone,
-  teamId: user.attributes.team_id,
-  teamName: user.attributes.team_name,
-  emailNotification: user.attributes.email_notification,
-  smsNotification: user.attributes.sms_notification,
-  feedbackCompleted: user.attributes.feedback_completed,
-  organizableId: user.attributes.organizable_id,
+export const mapCurrentUser = ({ id, attributes }) => ({
+  id,
+  firstName: attributes.first_name,
+  lastName: attributes.last_name,
+  fullName: attributes.full_name,
+  email: attributes.email,
+  roles: attributes.roles,
+  avatar: attributes.avatar_url,
+  timeZone: attributes.time_zone,
+  active: attributes.active,
+  phone: attributes.phone,
+  teamId: attributes.team_id,
+  teamName: attributes.team_name,
+  emailNotification: attributes.email_notification,
+  smsNotification: attributes.sms_notification,
+  feedbackCompleted: attributes.feedback_completed,
+  organizableId: attributes.organizable_id,
+  quickExitEnabled: attributes.quick_exit_enabled,
 });
 
 export const pickUserAttributes = (user) =>
@@ -55,6 +56,7 @@ export const pickUserAttributes = (user) =>
     'emailNotification',
     'smsNotification',
     'feedbackCompleted',
+    'quickExitEnabled',
   ]);
 
 export const mapTeam = (team) => ({

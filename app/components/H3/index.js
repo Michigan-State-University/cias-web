@@ -7,7 +7,6 @@ const H3 = styled.h3`
   font-family: ${fontFamily};
   font-size: ${fontSizes.h3};
   line-height: ${lineHeights.regular};
-  text-decoration: ${({ textDecoration }) => textDecoration || ''};
   cursor: ${({ cursor }) => cursor || ''};
   ${margin}
   ${style}

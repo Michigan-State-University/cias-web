@@ -1,0 +1,9 @@
+<mjml>
+  <mj-head>
+    <app-header />
+  </mj-head>
+  <mj-body>
+    <app-layout header="Verify your Identity in CIAS" mainText="You recently logged in to CIAS from a browser or app that we don't recognize or your last verification was over 30 days ago.<br/><br/>To ensure your account's security, we need to verify your identity. Enter the following code where prompted by CIAS.<br/><br/>Verification code: {VERIFICATION_CODE}" buttonText="" buttonUrl="" ignoreEmail="true">
+    </app-layout>
+    <mj-body>
+</mjml>
