@@ -120,7 +120,7 @@ exports[`<QuestionSettings /> Should render and match the snapshot 1`] = `
 
 .c9 div {
   cursor: pointer;
-  color: undefined !important;
+  color: #2F3850 !important;
 }
 
 .c10 {

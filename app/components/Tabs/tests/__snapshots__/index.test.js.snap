@@ -33,7 +33,7 @@ exports[`<Tabs /> should render and match the snapshot 1`] = `
 
 .c1 div {
   cursor: pointer;
-  color: undefined !important;
+  color: #2F3850 !important;
 }
 
 .c2 {
@@ -115,7 +115,7 @@ exports[`<Tabs /> should render as links and match the snapshot 1`] = `
 
 .c1 div {
   cursor: pointer;
-  color: undefined !important;
+  color: #2F3850 !important;
 }
 
 .c2 a {
