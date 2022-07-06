@@ -91,7 +91,7 @@ const NavigatorSettingsModal = ({ interventionId }: Props) => {
 
   return (
     // @ts-ignore
-    <Tabs withBottomBorder>
+    <Tabs withBottomBorder emphasizeActiveLink>
       {/* @ts-ignore */}
       <div label={formatMessage(messages.navigators)}>Navigators</div>
       {/* @ts-ignore */}

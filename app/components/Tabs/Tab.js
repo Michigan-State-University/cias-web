@@ -10,6 +10,7 @@ const Tab = ({
   onClick,
   activeTab,
   linkMatch,
+  emphasizeActiveLink,
 }) => {
   const handleClick = () => {
     onClick(linkMatch ?? text);
@@ -19,7 +20,10 @@ const Tab = ({
 
   if (label)
     return (
-      <LabelContainer isActive={isActive}>
+      <LabelContainer
+        isActive={isActive}
+        emphasizeActiveLink={emphasizeActiveLink}
+      >
         <div onClick={handleClick}>{label}</div>
         {isActive && <TabUnderline layoutId="Tab-LabelContainer-underline" />}
       </LabelContainer>
@@ -43,6 +47,7 @@ Tab.propTypes = {
   text: PropTypes.oneOfType([PropTypes.string, PropTypes.object]),
   renderAsLink: PropTypes.node,
   linkMatch: PropTypes.string,
+  emphasizeActiveLink: PropTypes.bool,
 };
 
 export default Tab;

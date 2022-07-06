@@ -15,6 +15,7 @@ const Tabs = ({
   controlledSetTabActive,
   containerProps,
   withBottomBorder,
+  emphasizeActiveLink,
   ...restProps
 }) => {
   const { label: initialLabel, renderAsLink: initialRenderAsLink } =
@@ -54,6 +55,7 @@ const Tabs = ({
               renderAsLink={renderAsLink}
               linkMatch={linkMatch}
               onClick={onClickTabItem}
+              emphasizeActiveLink={emphasizeActiveLink}
             />
           );
         })}
@@ -81,10 +83,12 @@ Tabs.propTypes = {
   controlledSetTabActive: PropTypes.func,
   containerProps: PropTypes.object,
   withBottomBorder: PropTypes.bool,
+  emphasizeActiveLink: PropTypes.bool,
 };
 
 Tabs.defaultProps = {
   withBottomBorder: false,
+  emphasizeActiveLink: false,
 };
 
 export default Tabs;

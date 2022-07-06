@@ -28,10 +28,12 @@ exports[`<Tabs /> should render and match the snapshot 1`] = `
   bottom: -3px;
   margin: 0 10px;
   padding-bottom: 7px;
+  font-weight: 400 !important;
 }
 
 .c1 div {
   cursor: pointer;
+  color: #2F3850 !important;
 }
 
 .c2 {
@@ -108,10 +110,12 @@ exports[`<Tabs /> should render as links and match the snapshot 1`] = `
   bottom: -3px;
   margin: 0 10px;
   padding-bottom: 7px;
+  font-weight: 400 !important;
 }
 
 .c1 div {
   cursor: pointer;
+  color: #2F3850 !important;
 }
 
 .c2 a {
