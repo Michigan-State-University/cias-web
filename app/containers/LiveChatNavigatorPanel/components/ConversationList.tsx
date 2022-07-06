@@ -46,7 +46,7 @@ const ConversationList = ({
   );
 
   return (
-    <Column overflow="auto" maxHeight="100%">
+    <Column overflow="auto" maxHeight="100%" pr={16}>
       {!interventionConversations.length && (
         <Text>{formatMessage(i18nMessages.noConversations)}</Text>
       )}
