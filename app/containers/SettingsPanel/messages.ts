@@ -241,4 +241,8 @@ export default defineMessages({
     id: `${scope}.urlValidationError`,
     defaultMessage: 'This field should be a valid URL',
   },
+  noLinksForParticipant: {
+    id: `${scope}.noLinksForParticipant`,
+    defaultMessage: `You haven’t added any links for participants yet. Let’s click on <primaryColorBold>Add new link</primaryColorBold> above to add some links.`,
+  },
 });

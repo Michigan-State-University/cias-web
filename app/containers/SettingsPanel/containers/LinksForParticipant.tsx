@@ -1,4 +1,5 @@
 import React from 'react';
+import isEmpty from 'lodash/isEmpty';
 import { FormattedMessage } from 'react-intl';
 
 import Box from 'components/Box';
@@ -6,7 +7,7 @@ import H3 from 'components/H3';
 import TextButton from 'components/Button/TextButton';
 import { ParticipantLink } from 'models/NavigatorSetup';
 
-import { themeColors } from 'theme';
+import { colors, themeColors } from 'theme';
 
 import messages from '../messages';
 import NavigatorLinkBox from '../Components/NavigatorLinkBox';
@@ -42,6 +43,11 @@ export const LinksForParticipant = ({
       </TextButton>
     </Box>
     <Box maxHeight={500} overflow="auto">
+      {isEmpty(links) && (
+        <Box color={colors.slateGray} lineHeight="23px" fontSize={13}>
+          <FormattedMessage {...messages.noLinksForParticipant} />
+        </Box>
+      )}
       {links?.map((link) => (
         <Box mb={8} key={link.id}>
           <NavigatorLinkBox
