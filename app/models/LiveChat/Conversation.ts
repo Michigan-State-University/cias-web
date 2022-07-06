@@ -16,6 +16,6 @@ export type Conversation = {
 };
 
 export type ConversationCreatedDTO = {
-  userId: string;
+  firstMessageContent: string;
   interventionId: string;
 };

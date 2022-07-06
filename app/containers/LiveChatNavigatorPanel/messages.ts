@@ -49,9 +49,9 @@ export default defineMessages({
     id: `${scope}.createConversation`,
     defaultMessage: 'Create conversation',
   },
-  userId: {
-    id: `${scope}.userId`,
-    defaultMessage: 'User ID',
+  firstMessage: {
+    id: `${scope}.firstMessage`,
+    defaultMessage: 'First message',
   },
   noConversations: {
     id: `${scope}.noConversations`,
