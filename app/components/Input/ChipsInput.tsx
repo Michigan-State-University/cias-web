@@ -16,8 +16,10 @@ import useOutsideClick from 'utils/useOutsideClick';
 import messages from './messages';
 import { StyledChipsInput, HiddenInput } from './styled';
 
-const INVALID_EMAIL_ERROR = 'app/containers//ShareBox/INVALID_EMAIL_ERROR';
-const DUPLICATED_EMAIL_ERROR = 'app/containers/ShareBox/DUPLICATED_EMAIL_ERROR';
+const INVALID_EMAIL_ERROR =
+  'app/components/Input/ChipsInput/INVALID_EMAIL_ERROR';
+const DUPLICATED_EMAIL_ERROR =
+  'app/components/Input/ChipsInput/DUPLICATED_EMAIL_ERROR';
 
 type Props = {
   value: string[];
@@ -51,14 +53,16 @@ const ChipsInput = ({
     }
   }, [value]);
 
-  const handleKeyDown = (event: any) => {
+  const handleKeyDown = (event: React.KeyboardEvent<HTMLInputElement>) => {
     const { key, keyCode } = event;
-    handleChange({ key, keyCode })(event);
+    handleChange({ key, keyCode })(event as any);
   };
 
   const handleChange =
-    ({ key, keyCode }: any) =>
-    ({ target: { value: inputEmailValue } }: any) => {
+    ({ key, keyCode }: { key?: string; keyCode?: number }) =>
+    ({
+      target: { value: inputEmailValue },
+    }: React.ChangeEvent<HTMLInputElement>) => {
       if (key === 'Backspace' || keyCode === 8) {
         if (value.length !== 0 && inputEmailValue.length === 0) {
           setValue(value.slice(0, -1));
@@ -100,7 +104,7 @@ const ChipsInput = ({
       }
     };
 
-  const handleBlur = ({ target }: any) => {
+  const handleBlur = ({ target }: React.FocusEvent<HTMLInputElement>) => {
     const inputElement = target;
     const { value: inputEmailValue } = inputElement;
 
@@ -117,10 +121,11 @@ const ChipsInput = ({
     const { current } = hiddenInput;
     if (current) current.focus();
   };
-  const handleRemove = (email: string) => (event: any) => {
-    event.stopPropagation();
-    setValue(value.filter((val) => val !== email));
-  };
+  const handleRemove =
+    (email: string) => (event: React.FocusEvent<HTMLInputElement>) => {
+      event.stopPropagation();
+      setValue(value.filter((val) => val !== email));
+    };
 
   const isInputFilled = !isEmpty(value);
   return (

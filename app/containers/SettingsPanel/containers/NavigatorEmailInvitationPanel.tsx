@@ -1,17 +1,18 @@
 import React, { useState } from 'react';
 import { useIntl } from 'react-intl';
 
+import { colors } from 'theme';
+
+import bin from 'assets/svg/bin-no-bg.svg';
+
 import Box from 'components/Box';
 import H3 from 'components/H3';
 import Text from 'components/Text';
 import Row from 'components/Row';
 import ChipsInput from 'components/Input/ChipsInput';
 import Button from 'components/Button';
-
-import bin from 'assets/svg/bin-no-bg.svg';
-
 import Img from 'components/Img';
-import { colors } from 'theme';
+
 import messages from '../messages';
 
 const SINGLE_EMAIL_HEIGHT = 44;
