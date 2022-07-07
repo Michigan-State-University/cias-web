@@ -25,6 +25,9 @@ import { NavigatorSetup, ParticipantLink } from 'models/NavigatorSetup';
 
 import messages from '../messages';
 import NavigatorModalLayout from '../Components/NavigatorModalLayout';
+import NavigatorEmailInvitationPanel from './NavigatorEmailInvitationPanel';
+import TeamNavigatorsPanel from './TeamNavigatorsPanel';
+import AddedNavigatorPanel from './AddedNavigatorsPanel';
 
 import NoNavigatorsForm from './NoNavigatorsForm';
 import LinksForParticipant from './LinksForParticipant';
@@ -93,7 +96,17 @@ const NavigatorSettingsModal = ({ interventionId }: Props) => {
     // @ts-ignore
     <Tabs withBottomBorder emphasizeActiveLink>
       {/* @ts-ignore */}
-      <div label={formatMessage(messages.navigators)}>Navigators</div>
+      <div label={formatMessage(messages.navigators)}>
+        <NavigatorModalLayout
+          leftContent={
+            <>
+              <NavigatorEmailInvitationPanel />
+              <TeamNavigatorsPanel />
+            </>
+          }
+          rightContent={<AddedNavigatorPanel />}
+        />
+      </div>
       {/* @ts-ignore */}
       <div label={formatMessage(messages.noNavigator)}>
         <NavigatorModalLayout

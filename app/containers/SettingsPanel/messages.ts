@@ -213,6 +213,46 @@ export default defineMessages({
     id: `${scope}.navigatorSetupError`,
     defaultMessage: `Couldn't fetch navigator setup`,
   },
+  inviteNavigatorsByEmail: {
+    id: `${scope}.inviteNavigatorsByEmail`,
+    defaultMessage: `Invite navigators by e-mail`,
+  },
+  waitingForAcceptance: {
+    id: `${scope}.waitingForAcceptance`,
+    defaultMessage: `Waiting for invitation acceptance`,
+  },
+  navigatorEmail: {
+    id: `${scope}.navigatorEmail`,
+    defaultMessage: `Navigator’s e-mail address`,
+  },
+  navigatorExampleEmail: {
+    id: `${scope}.navigatorExampleEmail`,
+    defaultMessage: `e.g. john.doe@example.com`,
+  },
+  invite: {
+    id: `${scope}.invite`,
+    defaultMessage: `Invite`,
+  },
+  navigatorsFromTeam: {
+    id: `${scope}.navigatorsFromTeam`,
+    defaultMessage: `Add navigators from your team`,
+  },
+  add: {
+    id: `${scope}.add`,
+    defaultMessage: `Add`,
+  },
+  navigatorsAddedToIntervention: {
+    id: `${scope}.navigatorsAddedToIntervention`,
+    defaultMessage: `Navigators added to this intervention`,
+  },
+  noAddedNavigators: {
+    id: `${scope}.noAddedNavigators`,
+    defaultMessage: `There are no navigators added to this intervention.`,
+  },
+  noTeamNavigators: {
+    id: `${scope}.noTeamNavigators`,
+    defaultMessage: `There are no navigators in your team.`,
+  },
   participantLinks: {
     id: `${scope}.participantLinks`,
     defaultMessage: 'Links for participant',

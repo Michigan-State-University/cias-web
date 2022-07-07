@@ -364,7 +364,6 @@ exports[`<ShareBox /> Should render and match the snapshot 1`] = `
 }
 
 .c7 {
-  padding: 12px;
   border-style: solid;
   border-width: 1px;
   border-color: #E9F1FB;
@@ -372,6 +371,7 @@ exports[`<ShareBox /> Should render and match the snapshot 1`] = `
   width: 100%;
   background-color: #F8FBFF;
   margin-top: -5px;
+  padding: 12px;
 }
 
 .c10 {

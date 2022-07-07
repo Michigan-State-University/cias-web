@@ -76,9 +76,9 @@ export const ConversationListItem = ({
           backgroundColor={
             otherInterlocutor?.userId ? colors.jungleGreen : colors.manatee
           }
-          avatar={otherInterlocutor?.avatarUrl}
-          firstName={otherInterlocutor?.firstName}
-          lastName={otherInterlocutor?.lastName}
+          avatar={otherInterlocutor?.avatarUrl || ''}
+          firstName={otherInterlocutor?.firstName || ''}
+          lastName={otherInterlocutor?.lastName || ''}
         />
       </Column>
       <Column flex={1} gap={12} minWidth="0">

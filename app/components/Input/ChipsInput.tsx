@@ -1,11 +1,9 @@
 import React, { useState, useRef, useEffect } from 'react';
-import PropTypes from 'prop-types';
 import find from 'lodash/find';
 import map from 'lodash/map';
 import isEmpty from 'lodash/isEmpty';
-import { compose } from 'redux';
 import { toast } from 'react-toastify';
-import { injectIntl, IntlShape } from 'react-intl';
+import { useIntl } from 'react-intl';
 
 import Box from 'components/Box';
 import Img from 'components/Img';
@@ -15,22 +13,36 @@ import { colors } from 'theme';
 import { emailValidator } from 'utils/validators/emailValidator';
 
 import useOutsideClick from 'utils/useOutsideClick';
-import messages from '../messages';
-import { INVALID_EMAIL_ERROR, DUPLICATED_EMAIL_ERROR } from '../constants';
-import { StyledChipsInput, HiddenInput } from '../styled';
+import messages from './messages';
+import { StyledChipsInput, HiddenInput } from './styled';
+
+const INVALID_EMAIL_ERROR =
+  'app/components/Input/ChipsInput/INVALID_EMAIL_ERROR';
+const DUPLICATED_EMAIL_ERROR =
+  'app/components/Input/ChipsInput/DUPLICATED_EMAIL_ERROR';
+
+type Props = {
+  value: string[];
+  setValue: (newValues: string[]) => void;
+  placeholder: string;
+  disabled?: boolean;
+  onIsValid: (isValid: boolean) => void;
+  compact?: boolean;
+};
 
 const ChipsInput = ({
   value,
   setValue,
   placeholder,
-  disabled,
-  intl: { formatMessage },
   onIsValid,
-}) => {
-  const hiddenInput = useRef(null);
+  disabled = false,
+  compact = false,
+}: Props) => {
+  const hiddenInput = useRef<HTMLInputElement>(null);
   const chipsInput = useRef(null);
   const [isFocused, setIsFocused] = useState(false);
   const [inputValue, setInputValue] = useState('');
+  const { formatMessage } = useIntl();
 
   const setFocus = () => setIsFocused(true);
   const unsetFocus = () => setIsFocused(false);
@@ -43,14 +55,16 @@ const ChipsInput = ({
     }
   }, [value]);
 
-  const handleKeyDown = (event) => {
+  const handleKeyDown = (event: React.KeyboardEvent<HTMLInputElement>) => {
     const { key, keyCode } = event;
-    handleChange({ key, keyCode })(event);
+    handleChange({ key, keyCode })(event as any);
   };
 
   const handleChange =
-    ({ key, keyCode }) =>
-    ({ target: { value: inputEmailValue } }) => {
+    ({ key, keyCode }: { key?: string; keyCode?: number }) =>
+    ({
+      target: { value: inputEmailValue },
+    }: React.ChangeEvent<HTMLInputElement>) => {
       if (key === 'Backspace' || keyCode === 8) {
         if (value.length !== 0 && inputEmailValue.length === 0) {
           setValue(value.slice(0, -1));
@@ -92,7 +106,7 @@ const ChipsInput = ({
       }
     };
 
-  const handleBlur = ({ target }) => {
+  const handleBlur = ({ target }: React.FocusEvent<HTMLInputElement>) => {
     const inputElement = target;
     const { value: inputEmailValue } = inputElement;
 
@@ -109,10 +123,11 @@ const ChipsInput = ({
     const { current } = hiddenInput;
     if (current) current.focus();
   };
-  const handleRemove = (email) => (event) => {
-    event.stopPropagation();
-    setValue(value.filter((val) => val !== email));
-  };
+  const handleRemove =
+    (email: string) => (event: React.FocusEvent<HTMLInputElement>) => {
+      event.stopPropagation();
+      setValue(value.filter((val) => val !== email));
+    };
 
   const isInputFilled = !isEmpty(value);
   return (
@@ -122,6 +137,7 @@ const ChipsInput = ({
       onClick={() => !disabled && handleFocus()}
       ref={chipsInput}
       mt={-5}
+      compact={compact}
     >
       <Row flexWrap="wrap" width="100%">
         {map(value, (email, index) => (
@@ -163,13 +179,4 @@ const ChipsInput = ({
   );
 };
 
-ChipsInput.propTypes = {
-  value: PropTypes.array,
-  setValue: PropTypes.func,
-  intl: PropTypes.shape(IntlShape),
-  placeholder: PropTypes.string,
-  disabled: PropTypes.bool,
-  onIsValid: PropTypes.func,
-};
-
-export default compose(injectIntl)(ChipsInput);
+export default ChipsInput;

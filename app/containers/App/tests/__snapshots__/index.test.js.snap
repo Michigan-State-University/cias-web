@@ -319,24 +319,6 @@ exports[`<AnswerSessionPage /> Should render and match the snapshot 1`] = `
   margin: 0px;
 }
 
-.c48 {
-  display: -webkit-box;
-  display: -webkit-flex;
-  display: -ms-flexbox;
-  display: flex;
-  -webkit-align-items: center;
-  -webkit-box-align: center;
-  -ms-flex-align: center;
-  align-items: center;
-  position: relative;
-}
-
-.c50 {
-  position: absolute;
-  left: 10px;
-  top: 10px;
-}
-
 .c49 {
   padding: 12px;
   border-style: solid;
@@ -356,6 +338,24 @@ exports[`<AnswerSessionPage /> Should render and match the snapshot 1`] = `
 
 .c49:disabled {
   color: #ABBBD1;
+}
+
+.c48 {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  position: relative;
+}
+
+.c50 {
+  position: absolute;
+  left: 10px;
+  top: 10px;
 }
 
 .c30 {
