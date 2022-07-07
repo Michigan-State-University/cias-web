@@ -1,7 +1,11 @@
 import { createAction } from 'typesafe-actions';
 
 import { ApiError } from 'models/Api';
-import { NavigatorSetup, ParticipantLink } from 'models/NavigatorSetup';
+import {
+  NoNavigatorAvailableData,
+  NotAcceptedNavigators,
+  ParticipantLink,
+} from 'models/NavigatorSetup';
 
 import {
   ADD_PARTICIPANT_LINK_ERROR,
@@ -19,6 +23,8 @@ import {
   UPDATE_PARTICIPANT_LINK_REQUEST,
   UPDATE_PARTICIPANT_LINK_SUCCESS,
   UPDATE_PARTICIPANT_LINK_ERROR,
+  INVITE_NAVIGATOR_BY_EMAIL_REQUEST,
+  INVITE_NAVIGATOR_BY_EMAIL_SUCCESS,
 } from './constants';
 
 export const fetchNavigatorSetupRequest = createAction(
@@ -27,7 +33,12 @@ export const fetchNavigatorSetupRequest = createAction(
 );
 export const fetchNavigatorSetupSuccess = createAction(
   FETCH_NAVIGATOR_SETUP_SUCCESS,
-  (action) => (navigatorSetup: NavigatorSetup) => action({ navigatorSetup }),
+  (action) =>
+    (
+      noNavigatorsData: NoNavigatorAvailableData,
+      notAcceptedNavigators: NotAcceptedNavigators[],
+    ) =>
+      action({ noNavigatorsData, notAcceptedNavigators }),
 );
 export const fetchNavigatorSetupError = createAction(
   FETCH_NAVIGATOR_SETUP_ERROR,
@@ -39,9 +50,9 @@ export const updateNavigatorSetupRequest = createAction(
   (action) =>
     (
       interventionId: string,
-      navigatorSetupData: Partial<Omit<NavigatorSetup, 'id'>>,
+      noNavigatorsData: Partial<Omit<NoNavigatorAvailableData, 'id'>>,
     ) =>
-      action({ interventionId, navigatorSetupData }),
+      action({ interventionId, noNavigatorsData }),
 );
 
 export const updateNavigatorSetupSuccess = createAction(
@@ -66,7 +77,8 @@ export const addParticipantLinkRequest = createAction(
 
 export const addParticipantLinkSuccess = createAction(
   ADD_PARTICIPANT_LINK_SUCCESS,
-  (action) => (navigatorSetup: NavigatorSetup) => action({ navigatorSetup }),
+  (action) => (navigatorSetup: NoNavigatorAvailableData) =>
+    action({ navigatorSetup }),
 );
 
 export const addParticipantLinkError = createAction(
@@ -109,4 +121,15 @@ export const updateParticipantLinkSuccess = createAction(
 export const updateParticipantLinkError = createAction(
   UPDATE_PARTICIPANT_LINK_ERROR,
   (action) => (error: ApiError) => action({ error }),
+);
+
+export const inviteNavigatorsByEmailRequest = createAction(
+  INVITE_NAVIGATOR_BY_EMAIL_REQUEST,
+  (action) => (emails: string[]) => action({ emails }),
+);
+
+export const inviteNavigatorsByEmailSuccess = createAction(
+  INVITE_NAVIGATOR_BY_EMAIL_SUCCESS,
+  (action) => (notAcceptedNavigators: NotAcceptedNavigators[]) =>
+    action({ notAcceptedNavigators }),
 );

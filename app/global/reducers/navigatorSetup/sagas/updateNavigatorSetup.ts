@@ -19,7 +19,7 @@ import {
 import messages from '../messages';
 
 export function* updateNavigatorSetup({
-  payload: { interventionId, navigatorSetupData: navigatorSetup },
+  payload: { interventionId, noNavigatorsData: navigatorSetup },
 }: ReturnType<typeof updateNavigatorSetupRequest>) {
   const url = `/v1/live_chat/intervention/${interventionId}/navigator_setup`;
   try {

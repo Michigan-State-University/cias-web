@@ -1,14 +1,24 @@
 import { ActionType } from 'typesafe-actions';
 
 import { ApiError } from 'models/Api';
-import { NavigatorSetup } from 'models/NavigatorSetup';
+import {
+  NoNavigatorAvailableData,
+  NotAcceptedNavigators,
+} from 'models/NavigatorSetup';
 
 import * as actions from './actions';
 
 export type NavigatorSetupAction = ActionType<typeof actions>;
 
+type ModalTabsData = {
+  noNavigatorAvailable: NoNavigatorAvailableData;
+  navigatorsData: {
+    notAcceptedNavigators: NotAcceptedNavigators[];
+  };
+};
+
 export type NavigatorSetupState = {
-  navigatorData: Nullable<NavigatorSetup>;
+  modalTabsData: Nullable<ModalTabsData>;
   loaders: Record<string, boolean>;
   error: Nullable<ApiError>;
 };

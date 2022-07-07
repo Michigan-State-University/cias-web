@@ -9,7 +9,10 @@ import {
   emailFormValidationSchema,
   requiredValidationSchema,
 } from 'utils/validators';
-import { NavigatorSetup, NotifyByOptions } from 'models/NavigatorSetup';
+import {
+  NoNavigatorAvailableData,
+  NotifyByOptions,
+} from 'models/NavigatorSetup';
 
 import Box from 'components/Box';
 import Switch from 'components/Switch';
@@ -28,7 +31,7 @@ const validationSchema = Yup.object().shape({
 });
 
 type Props = Pick<
-  NavigatorSetup,
+  NoNavigatorAvailableData,
   | 'contactEmail'
   | 'isNavigatorNotificationOn'
   | 'noNavigatorAvailableMessage'
@@ -36,7 +39,7 @@ type Props = Pick<
   | 'phone'
 > & {
   updateNavigatorSettings: (
-    newData: Partial<Omit<NavigatorSetup, 'id'>>,
+    newData: Partial<Omit<NoNavigatorAvailableData, 'id'>>,
   ) => void;
 };
 

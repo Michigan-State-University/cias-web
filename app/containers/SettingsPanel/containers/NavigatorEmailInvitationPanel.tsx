@@ -13,25 +13,27 @@ import ChipsInput from 'components/Input/ChipsInput';
 import Button from 'components/Button';
 import Img from 'components/Img';
 
+import { NotAcceptedNavigators } from 'models/NavigatorSetup';
 import messages from '../messages';
 
 const SINGLE_EMAIL_HEIGHT = 44;
 const ITEM_MARGIN = 8;
 
-const API_EMAILS = [
-  'test1@email.com',
-  'test2@email.com',
-  'test3@email.com',
-  'test4@email.com',
-];
+type Props = {
+  notAcceptedNavigators: NotAcceptedNavigators[];
+  inviteNavigatorsByEmail: (emails: string[]) => void;
+};
 
-const NavigatorEmailInvitationPanel = () => {
+const NavigatorEmailInvitationPanel = ({
+  notAcceptedNavigators,
+  inviteNavigatorsByEmail,
+}: Props) => {
   const { formatMessage } = useIntl();
   const [emails, setEmails] = useState<string[]>([]);
   const [valid, setValid] = useState(false);
 
   const inviteNavigators = () => {
-    console.log(emails);
+    inviteNavigatorsByEmail(emails);
     setEmails([]);
   };
 
@@ -55,25 +57,25 @@ const NavigatorEmailInvitationPanel = () => {
           {formatMessage(messages.invite)}
         </Button>
       </Row>
-      {API_EMAILS.length !== 0 && (
+      {notAcceptedNavigators.length !== 0 && (
         <>
           <Text mb={10} mt={20}>
             {formatMessage(messages.waitingForAcceptance)}
           </Text>
           <Box
             height={
-              SINGLE_EMAIL_HEIGHT * Math.min(3, API_EMAILS.length) +
-              ITEM_MARGIN * Math.min(2, API_EMAILS.length)
+              SINGLE_EMAIL_HEIGHT * Math.min(3, notAcceptedNavigators.length) +
+              ITEM_MARGIN * Math.min(2, notAcceptedNavigators.length)
             }
             overflow="scroll"
           >
-            {API_EMAILS.map((email, index) => (
+            {notAcceptedNavigators.map(({ email, id }, index) => (
               <Box
                 display="flex"
                 justify="between"
                 background={colors.lightBlue}
                 padding={12}
-                key={email}
+                key={id}
                 maxHeight={SINGLE_EMAIL_HEIGHT}
                 mt={index === 0 ? 0 : ITEM_MARGIN}
               >

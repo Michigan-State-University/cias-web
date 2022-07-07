@@ -11,7 +11,7 @@ export type ParticipantLink = {
   url: string;
 };
 
-export type NavigatorSetup = {
+export type NoNavigatorAvailableData = {
   contactEmail: string;
   id: string;
   noNavigatorAvailableMessage: string;

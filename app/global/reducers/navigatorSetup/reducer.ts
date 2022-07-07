@@ -16,6 +16,7 @@ import {
   removeParticipantLinkSuccess,
   removeParticipantLinkError,
   removeParticipantLinkRequest,
+  inviteNavigatorsByEmailSuccess,
 } from './actions';
 import { NavigatorSetupState, NavigatorSetupAction } from './types';
 
@@ -25,7 +26,7 @@ export const initialState: NavigatorSetupState = {
     updatingForm: false,
     updatingLinks: false,
   },
-  navigatorData: null,
+  modalTabsData: null,
   error: null,
 };
 
@@ -38,14 +39,21 @@ export const navigatorSetupReducer = (
     switch (action.type) {
       case getType(fetchNavigatorSetupRequest):
         draft.loaders.fetching = true;
-        draft.navigatorData = null;
+        draft.modalTabsData = null;
         draft.error = null;
         break;
 
-      case getType(fetchNavigatorSetupSuccess):
-        draft.navigatorData = action.payload.navigatorSetup;
+      case getType(fetchNavigatorSetupSuccess): {
+        const { noNavigatorsData, notAcceptedNavigators } = action.payload;
+        draft.modalTabsData = {
+          navigatorsData: {
+            notAcceptedNavigators,
+          },
+          noNavigatorAvailable: noNavigatorsData,
+        };
         draft.loaders.fetching = false;
         break;
+      }
       case getType(fetchNavigatorSetupError):
         draft.loaders.fetching = false;
         draft.error = action.payload.error;
@@ -53,9 +61,9 @@ export const navigatorSetupReducer = (
 
       case getType(updateNavigatorSetupRequest):
         // @ts-ignore
-        draft.navigatorData = {
-          ...state.navigatorData,
-          ...action.payload.navigatorSetupData,
+        draft.modalTabsData.noNavigatorAvailable = {
+          ...state.modalTabsData?.noNavigatorAvailable,
+          ...action.payload.noNavigatorsData,
         };
         draft.loaders.updatingForm = true;
         break;
@@ -69,7 +77,7 @@ export const navigatorSetupReducer = (
         break;
       case getType(addParticipantLinkSuccess):
         const { navigatorSetup } = action.payload;
-        draft.navigatorData = navigatorSetup;
+        draft.modalTabsData!.noNavigatorAvailable = navigatorSetup;
         break;
       case getType(addParticipantLinkError):
         draft.loaders.updatingLinks = false;
@@ -80,12 +88,22 @@ export const navigatorSetupReducer = (
         break;
       case getType(removeParticipantLinkSuccess):
         const { linkId } = action.payload;
-        if (draft.navigatorData) {
-          deleteItemById(draft.navigatorData.participantLinks, linkId);
+        if (draft.modalTabsData) {
+          deleteItemById(
+            draft.modalTabsData.noNavigatorAvailable.participantLinks,
+            linkId,
+          );
         }
         break;
       case getType(removeParticipantLinkError):
         draft.loaders.updatingLinks = false;
         break;
+      case getType(inviteNavigatorsByEmailSuccess): {
+        draft.modalTabsData!.navigatorsData.notAcceptedNavigators = [
+          ...state.modalTabsData!.navigatorsData.notAcceptedNavigators,
+          ...action.payload.notAcceptedNavigators,
+        ];
+        break;
+      }
     }
   });

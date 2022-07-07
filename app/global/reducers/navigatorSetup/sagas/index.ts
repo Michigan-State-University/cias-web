@@ -5,6 +5,7 @@ import updateNavigatorSetup from './updateNavigatorSetup';
 import addParticipantLink from './addParticipantLink';
 import updateParticipantLink from './updateParticipantLink';
 import removeParticipantLink from './removeParticipantLink';
+import inviteNavigatorByEmail from './inviteNavigatorByEmail';
 
 export function* allNavigatorSetupSagas() {
   yield all([
@@ -13,5 +14,6 @@ export function* allNavigatorSetupSagas() {
     addParticipantLink(),
     updateParticipantLink(),
     removeParticipantLink(),
+    inviteNavigatorByEmail(),
   ]);
 }

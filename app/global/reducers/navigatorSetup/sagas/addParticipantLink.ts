@@ -7,7 +7,7 @@ import objectToSnakeCase from 'utils/objectToSnakeCase';
 import { formatMessage } from 'utils/intlOutsideReact';
 
 import { ApiError } from 'models/Api';
-import { NavigatorSetup } from 'models/NavigatorSetup';
+import { NoNavigatorAvailableData } from 'models/NavigatorSetup';
 
 import {
   ADD_PARTICIPANT_LINK_REQUEST,
@@ -34,7 +34,7 @@ export function* addParticipantLink({
     const navigatorSetup = jsonApiToObject(
       data,
       'navigatorSetup',
-    ) as NavigatorSetup;
+    ) as NoNavigatorAvailableData;
 
     yield put(addParticipantLinkSuccess(navigatorSetup));
   } catch (error) {
