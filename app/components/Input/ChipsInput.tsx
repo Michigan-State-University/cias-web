@@ -27,14 +27,16 @@ type Props = {
   placeholder: string;
   disabled?: boolean;
   onIsValid: (isValid: boolean) => void;
+  compact?: boolean;
 };
 
 const ChipsInput = ({
   value,
   setValue,
   placeholder,
-  disabled = false,
   onIsValid,
+  disabled = false,
+  compact = false,
 }: Props) => {
   const hiddenInput = useRef<HTMLInputElement>(null);
   const chipsInput = useRef(null);
@@ -135,6 +137,7 @@ const ChipsInput = ({
       onClick={() => !disabled && handleFocus()}
       ref={chipsInput}
       mt={-5}
+      compact={compact}
     >
       <Row flexWrap="wrap" width="100%">
         {map(value, (email, index) => (

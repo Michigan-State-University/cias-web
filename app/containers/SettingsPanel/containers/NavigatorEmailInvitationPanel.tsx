@@ -41,6 +41,7 @@ const NavigatorEmailInvitationPanel = () => {
       <Text mb={10}>{formatMessage(messages.navigatorEmail)}</Text>
       <Row align="center">
         <ChipsInput
+          compact
           value={emails}
           setValue={setEmails}
           placeholder={

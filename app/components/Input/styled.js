@@ -126,9 +126,16 @@ export const Sufix = styled.div`
   }
 `;
 
+const getChipsInputPadding = (isInputFilled, compact) => {
+  if (isInputFilled) {
+    if (compact) return `5px 0 0 0`;
+    return `8px 6px 3px 6px`;
+  }
+  if (compact) return '0';
+  return paddings.small;
+};
+
 export const StyledChipsInput = styled.div`
-  padding: ${({ isInputFilled }) =>
-    isInputFilled ? `8px 6px 3px 6px` : paddings.small};
   border-style: ${borders.borderStyle};
   border-width: ${borders.borderWidth};
   border-color: ${({ isFocused }) =>
@@ -137,6 +144,8 @@ export const StyledChipsInput = styled.div`
   width: 100%;
   background-color: ${colors.zirkon};
   ${margin};
+  padding: ${({ isInputFilled, compact }) =>
+    getChipsInputPadding(isInputFilled, compact)};
 `;
 
 export const HiddenInput = styled(Input)`
