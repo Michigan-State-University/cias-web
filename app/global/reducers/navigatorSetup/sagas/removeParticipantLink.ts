@@ -28,7 +28,7 @@ export function* removeParticipantLink({
     yield call(toast.error, formatMessage(messages.updateError), {
       toastId: REMOVE_PARTICIPANT_LINK_ERROR,
     });
-    yield put(removeParticipantLinkError(error as ApiError));
+    yield put(removeParticipantLinkError(linkId, error as ApiError));
   }
 }
 

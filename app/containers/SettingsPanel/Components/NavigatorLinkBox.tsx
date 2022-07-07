@@ -67,7 +67,7 @@ export const NavigatorLinkBox = ({
         </Text>
       }
       onEdit={() => setOpen((prev) => !prev)}
-      onDelete={removeParticipantLink}
+      onDelete={!link.deleting ? removeParticipantLink : undefined}
       showArrow={false}
       isOpen={open}
       setOpen={() => setOpen((prev) => !prev)}
