@@ -131,6 +131,8 @@ const SettingsPanel = ({
         width: NAVIGATOR_SETTINGS_MODAL_WIDTH,
         height: 722,
         maxWidth: NAVIGATOR_SETTINGS_MODAL_WIDTH,
+        py: 32,
+        px: 32,
       },
     });
 

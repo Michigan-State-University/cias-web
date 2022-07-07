@@ -121,7 +121,7 @@ const NoNavigatorsForm = ({
           type="submit"
           disabled={!formik.isValid}
           loading={isUpdating}
-          px={20}
+          px={24}
           width="auto"
           mt={20}
           mb={30}
@@ -130,7 +130,7 @@ const NoNavigatorsForm = ({
           {formatMessage(messages.saveChanges)}
         </Button>
       </Box>
-      <Box display="flex">
+      <Box display="flex" mt={20}>
         <H3>{formatMessage(messages.notifyNavigator)}</H3>
         <Switch
           checked={isNavigatorNotificationOn}
@@ -148,7 +148,9 @@ const NoNavigatorsForm = ({
           }
           checked={notifyBy === NotifyByOptions.SMS}
         >
-          <Text mr={32}>{formatMessage(messages.notifyBySms)}</Text>
+          <Text mr={32} fontWeight={notifyBy === NotifyByOptions.SMS && 'bold'}>
+            {formatMessage(messages.notifyBySms)}
+          </Text>
         </Radio>
         <Radio
           id="notify_by_email_radio"
@@ -157,7 +159,9 @@ const NoNavigatorsForm = ({
           }
           checked={notifyBy === NotifyByOptions.EMAIL}
         >
-          <Text>{formatMessage(messages.notifyByEmail)}</Text>
+          <Text fontWeight={notifyBy === NotifyByOptions.EMAIL && 'bold'}>
+            {formatMessage(messages.notifyByEmail)}
+          </Text>
         </Radio>
       </Box>
     </>
