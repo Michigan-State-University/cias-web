@@ -14,6 +14,7 @@ type ModalTabsData = {
   noNavigatorAvailable: NoNavigatorAvailableData;
   navigatorsData: {
     notAcceptedNavigators: NotAcceptedNavigators[];
+    interventionNavigators: any[];
   };
 };
 

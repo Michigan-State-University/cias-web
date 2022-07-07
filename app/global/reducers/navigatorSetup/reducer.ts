@@ -17,6 +17,10 @@ import {
   removeParticipantLinkError,
   removeParticipantLinkRequest,
   inviteNavigatorsByEmailSuccess,
+  removeNavigatorEmailInvitationSuccess,
+  inviteNavigatorsByEmailRequest,
+  inviteNavigatorsByEmailError,
+  removeInterventionNavigatorSuccess,
 } from './actions';
 import { NavigatorSetupState, NavigatorSetupAction } from './types';
 
@@ -25,6 +29,7 @@ export const initialState: NavigatorSetupState = {
     fetching: false,
     updatingForm: false,
     updatingLinks: false,
+    navigatorEmailInvitation: false,
   },
   modalTabsData: null,
   error: null,
@@ -44,10 +49,15 @@ export const navigatorSetupReducer = (
         break;
 
       case getType(fetchNavigatorSetupSuccess): {
-        const { noNavigatorsData, notAcceptedNavigators } = action.payload;
+        const {
+          noNavigatorsData,
+          notAcceptedNavigators,
+          interventionNavigators,
+        } = action.payload;
         draft.modalTabsData = {
           navigatorsData: {
             notAcceptedNavigators,
+            interventionNavigators,
           },
           noNavigatorAvailable: noNavigatorsData,
         };
@@ -98,11 +108,32 @@ export const navigatorSetupReducer = (
       case getType(removeParticipantLinkError):
         draft.loaders.updatingLinks = false;
         break;
+      case getType(inviteNavigatorsByEmailRequest):
+        draft.loaders.navigatorEmailInvitation = true;
+        break;
       case getType(inviteNavigatorsByEmailSuccess): {
         draft.modalTabsData!.navigatorsData.notAcceptedNavigators = [
           ...state.modalTabsData!.navigatorsData.notAcceptedNavigators,
           ...action.payload.notAcceptedNavigators,
         ];
+        draft.loaders.navigatorEmailInvitation = false;
+        break;
+      }
+      case getType(inviteNavigatorsByEmailError):
+        draft.loaders.navigatorEmailInvitation = false;
+        break;
+      case getType(removeNavigatorEmailInvitationSuccess): {
+        deleteItemById(
+          draft.modalTabsData!.navigatorsData.notAcceptedNavigators,
+          action.payload.invitationId,
+        );
+        break;
+      }
+      case getType(removeInterventionNavigatorSuccess): {
+        deleteItemById(
+          draft.modalTabsData!.navigatorsData.interventionNavigators,
+          action.payload.interventionNavigatorId,
+        );
         break;
       }
     }

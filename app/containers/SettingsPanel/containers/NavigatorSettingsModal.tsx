@@ -16,6 +16,8 @@ import {
   updateParticipantLinkRequest,
   removeParticipantLinkRequest,
   inviteNavigatorsByEmailRequest,
+  removeNavigatorEmailInvitationRequest,
+  removeInterventionNavigatorRequest,
 } from 'global/reducers/navigatorSetup';
 import Tabs from 'components/Tabs';
 import ErrorAlert from 'components/ErrorAlert';
@@ -30,7 +32,7 @@ import {
 import messages from '../messages';
 import NavigatorModalLayout from '../Components/NavigatorModalLayout';
 import NavigatorEmailInvitationPanel from './NavigatorEmailInvitationPanel';
-import TeamNavigatorsPanel from './TeamNavigatorsPanel';
+// import TeamNavigatorsPanel from './TeamNavigatorsPanel';
 import AddedNavigatorPanel from './AddedNavigatorsPanel';
 
 import NoNavigatorsForm from '../Components/NoNavigatorsForm';
@@ -45,6 +47,9 @@ const NavigatorSettingsModal = ({ interventionId }: Props) => {
   const dispatch = useDispatch();
 
   const loading = useSelector(makeSelectNavigatorSetupLoader('fetching'));
+  const navigatorEmailInvitationLoading = useSelector(
+    makeSelectNavigatorSetupLoader('navigatorEmailInvitation'),
+  );
   const error = useSelector(makeSelectNavigatorSetupError());
   const navigatorSettingsTabData = useSelector(makeSelectTabsData());
 
@@ -75,7 +80,19 @@ const NavigatorSettingsModal = ({ interventionId }: Props) => {
     dispatch(removeParticipantLinkRequest(interventionId, linkId));
 
   const inviteNavigatorsByEmail = (emails: string[]) =>
-    dispatch(inviteNavigatorsByEmailRequest(emails));
+    dispatch(inviteNavigatorsByEmailRequest(interventionId, emails));
+
+  const removeNavigatorEmailInvitation = (invitationId: string) =>
+    dispatch(
+      removeNavigatorEmailInvitationRequest(interventionId, invitationId),
+    );
+  const removeInterventionNavigator = (interventionNavigatorId: string) =>
+    dispatch(
+      removeInterventionNavigatorRequest(
+        interventionId,
+        interventionNavigatorId,
+      ),
+    );
 
   if (loading) {
     return <Spinner color={themeColors.secondary} />;
@@ -99,7 +116,7 @@ const NavigatorSettingsModal = ({ interventionId }: Props) => {
       phone,
       participantLinks,
     },
-    navigatorsData: { notAcceptedNavigators },
+    navigatorsData: { notAcceptedNavigators, interventionNavigators },
   } = navigatorSettingsTabData;
 
   return (
@@ -113,11 +130,19 @@ const NavigatorSettingsModal = ({ interventionId }: Props) => {
               <NavigatorEmailInvitationPanel
                 notAcceptedNavigators={notAcceptedNavigators}
                 inviteNavigatorsByEmail={inviteNavigatorsByEmail}
+                removeNavigatorEmailInvitation={removeNavigatorEmailInvitation}
+                invitationLoading={navigatorEmailInvitationLoading}
               />
-              <TeamNavigatorsPanel />
+              {/* REMOVED FOR NOW AS WE DON'T SUPPORT TEAM INVITATIONS YET */}
+              {/* <TeamNavigatorsPanel /> */}
             </>
           }
-          rightContent={<AddedNavigatorPanel />}
+          rightContent={
+            <AddedNavigatorPanel
+              interventionNavigators={interventionNavigators}
+              removeInterventionNavigator={removeInterventionNavigator}
+            />
+          }
         />
       </div>
       {/* @ts-ignore */}

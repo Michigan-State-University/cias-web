@@ -1,4 +1,4 @@
 export type NotAcceptedNavigators = {
-  id: number;
+  id: string;
   email: string;
 };

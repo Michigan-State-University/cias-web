@@ -25,6 +25,11 @@ import {
   UPDATE_PARTICIPANT_LINK_ERROR,
   INVITE_NAVIGATOR_BY_EMAIL_REQUEST,
   INVITE_NAVIGATOR_BY_EMAIL_SUCCESS,
+  REMOVE_NAVIGATOR_EMAIL_INVITATION_REQUEST,
+  REMOVE_NAVIGATOR_EMAIL_INVITATION_SUCCESS,
+  INVITE_NAVIGATOR_BY_EMAIL_ERROR,
+  REMOVE_INTERVENTION_NAVIGATOR_REQUEST,
+  REMOVE_INTERVENTION_NAVIGATOR_SUCCESS,
 } from './constants';
 
 export const fetchNavigatorSetupRequest = createAction(
@@ -37,8 +42,13 @@ export const fetchNavigatorSetupSuccess = createAction(
     (
       noNavigatorsData: NoNavigatorAvailableData,
       notAcceptedNavigators: NotAcceptedNavigators[],
+      interventionNavigators: any[],
     ) =>
-      action({ noNavigatorsData, notAcceptedNavigators }),
+      action({
+        noNavigatorsData,
+        notAcceptedNavigators,
+        interventionNavigators,
+      }),
 );
 export const fetchNavigatorSetupError = createAction(
   FETCH_NAVIGATOR_SETUP_ERROR,
@@ -125,11 +135,40 @@ export const updateParticipantLinkError = createAction(
 
 export const inviteNavigatorsByEmailRequest = createAction(
   INVITE_NAVIGATOR_BY_EMAIL_REQUEST,
-  (action) => (emails: string[]) => action({ emails }),
+  (action) => (interventionId: string, emails: string[]) =>
+    action({ emails, interventionId }),
 );
 
 export const inviteNavigatorsByEmailSuccess = createAction(
   INVITE_NAVIGATOR_BY_EMAIL_SUCCESS,
   (action) => (notAcceptedNavigators: NotAcceptedNavigators[]) =>
     action({ notAcceptedNavigators }),
+);
+
+export const inviteNavigatorsByEmailError = createAction(
+  INVITE_NAVIGATOR_BY_EMAIL_ERROR,
+  (action) => () => action({}),
+);
+
+export const removeNavigatorEmailInvitationRequest = createAction(
+  REMOVE_NAVIGATOR_EMAIL_INVITATION_REQUEST,
+  (action) => (interventionId: string, invitationId: string) =>
+    action({ interventionId, invitationId }),
+);
+
+export const removeNavigatorEmailInvitationSuccess = createAction(
+  REMOVE_NAVIGATOR_EMAIL_INVITATION_SUCCESS,
+  (action) => (invitationId: string) => action({ invitationId }),
+);
+
+export const removeInterventionNavigatorRequest = createAction(
+  REMOVE_INTERVENTION_NAVIGATOR_REQUEST,
+  (action) => (interventionId: string, interventionNavigatorId: string) =>
+    action({ interventionId, interventionNavigatorId }),
+);
+
+export const removeInterventionNavigatorSuccess = createAction(
+  REMOVE_INTERVENTION_NAVIGATOR_SUCCESS,
+  (action) => (interventionNavigatorId: string) =>
+    action({ interventionNavigatorId }),
 );

@@ -16,106 +16,26 @@ import messages from '../messages';
 const SINGLE_ITEM_HEIGHT = 60;
 const ITEM_MARGIN = 8;
 
-const NAVIGATOR_ACCOUNTS = [
-  {
-    id: 1,
-    user: {
-      firstName: 'test',
-      lastName: 'user',
-      avatarUrl: '',
-      email: 'Test@test.pl',
-    },
-  },
-  {
-    id: 2,
-    user: {
-      firstName: 'Other',
-      lastName: 'Test',
-      avatarUrl: '',
-      email: 'Test2@test.pl',
-    },
-  },
-  {
-    id: 3,
-    user: {
-      firstName: 'Michał',
-      lastName: 'Smierc',
-      avatarUrl: '',
-      email: 'Test3@test.pl',
-    },
-  },
-  {
-    id: 4,
-    user: {
-      firstName: 'Lubie',
-      lastName: 'Placki',
-      avatarUrl: '',
-      email: 'Test4@test.pl',
-    },
-  },
-  {
-    id: 5,
-    user: {
-      firstName: 'Lubie',
-      lastName: 'Placki',
-      avatarUrl: '',
-      email: 'Test4@test.pl',
-    },
-  },
-  {
-    id: 6,
-    user: {
-      firstName: 'Lubie',
-      lastName: 'Placki',
-      avatarUrl: '',
-      email: 'Test4@test.pl',
-    },
-  },
-  {
-    id: 7,
-    user: {
-      firstName: 'Lubie',
-      lastName: 'Placki',
-      avatarUrl: '',
-      email: 'Test4@test.pl',
-    },
-  },
-  {
-    id: 8,
-    user: {
-      firstName: 'Lubie',
-      lastName: 'Placki',
-      avatarUrl: '',
-      email: 'Test4@test.pl',
-    },
-  },
-  {
-    id: 9,
-    user: {
-      firstName: 'Lubie',
-      lastName: 'Placki',
-      avatarUrl: '',
-      email: 'Test4@test.pl',
-    },
-  },
-];
+type Props = {
+  interventionNavigators: any[];
+  removeInterventionNavigator: (interventionNavigatorId: string) => void;
+};
 
-const AddedNavigatorPanel = () => {
+const AddedNavigatorPanel = ({
+  interventionNavigators,
+  removeInterventionNavigator,
+}: Props) => {
   const { formatMessage } = useIntl();
-
-  const removeNavigator = (navigatorId: number) => {
-    console.log(navigatorId);
-  };
 
   return (
     <Box>
       <H3 mb={30}>{formatMessage(messages.navigatorsAddedToIntervention)}</H3>
-      {NAVIGATOR_ACCOUNTS.length === 0 && (
+      {interventionNavigators.length === 0 && (
         <Text color={colors.grey}>
           {formatMessage(messages.noAddedNavigators)}
         </Text>
       )}
-      {NAVIGATOR_ACCOUNTS.map(
+      {interventionNavigators.map(
         ({ id, user: { avatarUrl, firstName, lastName, email } }, index) => (
           <Row
             justify="between"
@@ -139,7 +59,11 @@ const AddedNavigatorPanel = () => {
                 <Text>{email}</Text>
               </Box>
             </Row>
-            <Row onClick={() => removeNavigator(id)} align="center">
+            <Row
+              cursor="pointer"
+              onClick={() => removeInterventionNavigator(id)}
+              align="center"
+            >
               <Img width={24} height={24} src={minus} />
               <Text ml={16} color={colors.manatee} fontWeight="bold">
                 {formatMessage(messages.remove)}

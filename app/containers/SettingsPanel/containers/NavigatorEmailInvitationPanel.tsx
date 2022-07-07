@@ -22,11 +22,15 @@ const ITEM_MARGIN = 8;
 type Props = {
   notAcceptedNavigators: NotAcceptedNavigators[];
   inviteNavigatorsByEmail: (emails: string[]) => void;
+  removeNavigatorEmailInvitation: (invitationId: string) => void;
+  invitationLoading: boolean;
 };
 
 const NavigatorEmailInvitationPanel = ({
   notAcceptedNavigators,
   inviteNavigatorsByEmail,
+  removeNavigatorEmailInvitation,
+  invitationLoading,
 }: Props) => {
   const { formatMessage } = useIntl();
   const [emails, setEmails] = useState<string[]>([]);
@@ -53,7 +57,13 @@ const NavigatorEmailInvitationPanel = ({
           onIsValid={setValid}
         />
         {/* @ts-ignore */}
-        <Button onClick={inviteNavigators} ml={12} width={90} disabled={!valid}>
+        <Button
+          loading={invitationLoading}
+          onClick={inviteNavigators}
+          ml={12}
+          width={90}
+          disabled={!valid}
+        >
           {formatMessage(messages.invite)}
         </Button>
       </Row>
@@ -80,7 +90,11 @@ const NavigatorEmailInvitationPanel = ({
                 mt={index === 0 ? 0 : ITEM_MARGIN}
               >
                 <Text>{email}</Text>
-                <Img src={bin} />
+                <Img
+                  cursor="pointer"
+                  onClick={() => removeNavigatorEmailInvitation(id)}
+                  src={bin}
+                />
               </Box>
             ))}
           </Box>
