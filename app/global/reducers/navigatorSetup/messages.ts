@@ -19,4 +19,12 @@ export default defineMessages({
     id: `${scope}.removeInterventionNavigatorError`,
     defaultMessage: `Couldn't remove navigator from intervention!`,
   },
+  navigatorHasBeenInvited: {
+    id: `${scope}.navigatorHasBeenInvited`,
+    defaultMessage: `Navigator(s) invitation has been send`,
+  },
+  navigatorRemovedSuccess: {
+    id: `${scope}.navigatorRemovedSuccess`,
+    defaultMessage: `Navigator invitation has been removed`,
+  },
 });

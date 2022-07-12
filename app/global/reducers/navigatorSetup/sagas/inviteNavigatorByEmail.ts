@@ -4,9 +4,12 @@ import { toast } from 'react-toastify';
 
 import { formatMessage } from 'utils/intlOutsideReact';
 
+import { jsonApiToArray } from 'utils/jsonApiMapper';
+import { NotAcceptedNavigators } from 'models/NavigatorSetup';
 import {
   INVITE_NAVIGATOR_BY_EMAIL_REQUEST,
   INVITE_NAVIGATOR_BY_EMAIL_ERROR,
+  INVITE_NAVIGATOR_BY_EMAIL_SUCCESS,
 } from '../constants';
 import {
   inviteNavigatorsByEmailSuccess,
@@ -17,19 +20,22 @@ import messages from '../messages';
 export function* inviteNavigatorByEmail({
   payload: { emails, interventionId },
 }: ReturnType<typeof inviteNavigatorsByEmailRequest>) {
-  const url = `/v1/live_chat/navigators/invitations`;
+  const url = `/v1/interventions/${interventionId}/navigator_invitations`;
   try {
-    yield call(axios.post, url, {
+    const { data } = yield call(axios.post, url, {
       navigator_invitation: {
         emails,
         intervention_id: interventionId,
       },
     });
-    yield put(
-      inviteNavigatorsByEmailSuccess(
-        emails.map((email) => ({ email, id: `${Math.random()}` })),
-      ),
-    );
+    const invitations = jsonApiToArray(
+      data,
+      'navigatorInvitation',
+    ) as NotAcceptedNavigators[];
+    yield put(inviteNavigatorsByEmailSuccess(invitations));
+    yield call(toast.success, formatMessage(messages.navigatorHasBeenInvited), {
+      toastId: INVITE_NAVIGATOR_BY_EMAIL_SUCCESS,
+    });
   } catch (error) {
     yield call(toast.error, formatMessage(messages.updateError), {
       toastId: INVITE_NAVIGATOR_BY_EMAIL_ERROR,
