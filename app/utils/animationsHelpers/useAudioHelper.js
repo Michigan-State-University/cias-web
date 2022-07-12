@@ -1,16 +1,18 @@
 /* eslint-disable no-await-in-loop */
 /* eslint-disable no-restricted-syntax */
+import { useRef } from 'react';
 import uniqBy from 'lodash/uniqBy';
 import filter from 'lodash/filter';
+import toPairs from 'lodash/toPairs';
+import * as Sentry from '@sentry/browser';
+
 import {
   readQuestionBlockType,
   reflectionFormulaType,
   reflectionType,
   speechType,
 } from 'models/Narrator/BlockTypes';
-import { useRef } from 'react';
 import { speechAnimations } from 'utils/animations/animationsNames';
-import toPairs from 'lodash/toPairs';
 
 const animationTimeout = 200;
 
@@ -175,17 +177,45 @@ const useAudioHelper = (
     }
   };
 
+  const getInvalidText = ({
+    text,
+    currentAudioIndex,
+    type,
+    currentReflectionIndex,
+    reflections,
+  }) => {
+    switch (type) {
+      case speechType:
+      case readQuestionBlockType:
+        return text[currentAudioIndex];
+
+      case reflectionFormulaType:
+      case reflectionType:
+        return reflections[currentReflectionIndex].text[currentAudioIndex];
+      default:
+        return type;
+    }
+  };
+
+  const handleAudioError = () => {
+    const text = getInvalidText(currentData);
+    Sentry.captureMessage(`Issue with audio with text: ${text}`, 'error');
+  };
+
   const handleSpeech = (audioUrls) => {
     audioInstance.onPlay(playAnimation);
     audioInstance.onLoaded(onSpeechReady);
     audioInstance.onEnded(() => onSpeechEnded(audioUrls));
-    audioInstance.onError(() => onSpeechEnded(audioUrls));
+    audioInstance.onError(() => {
+      handleAudioError();
+      onSpeechEnded(audioUrls);
+    });
 
     if (!audioUrls.length || !audioUrls[currentData.currentAudioIndex])
       onSpeechEnded(audioUrls);
     else
       audioInstance.setSrc(
-        `${process.env.API_URL}${audioUrls[currentData.currentAudioIndex]}`,
+        `https://api-msu.cias.app/rails/active_storage/blobs/redirect/eyJfcmFpbHMiOnsibWVzc2FnZSI6IkJBaEpJaWsxTlRFeU1USmhOaTFpWTJKaExUUmhZMlF0WWpBM1pTMDFPV0U0WldJM05EUmtNMllHT2daRlZBPT0iLCJleHAiOm51bGwsInB1ciI6ImJsb2JfaWQifX0=--50b2233dc23b023a9c9512ebc1bdacc0bc17709a/c15890010641727f33d0f7339a0b2f8a8a8f9d81aeeb84ef65e477756415909a.mp3`,
       );
   };
 
