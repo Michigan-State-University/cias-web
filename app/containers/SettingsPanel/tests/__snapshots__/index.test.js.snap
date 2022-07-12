@@ -75,7 +75,7 @@ exports[`<SettingsPanel /> Should render and match the snapshot 1`] = `
   display: flex;
 }
 
-.c6 {
+.c5 {
   display: -webkit-box;
   display: -webkit-flex;
   display: -ms-flexbox;
@@ -98,7 +98,7 @@ exports[`<SettingsPanel /> Should render and match the snapshot 1`] = `
   align-items: center;
 }
 
-.c11 {
+.c10 {
   display: -webkit-box;
   display: -webkit-flex;
   display: -ms-flexbox;
@@ -437,7 +437,7 @@ exports[`<SettingsPanel /> Should render and match the snapshot 1`] = `
   color: #2F3850;
 }
 
-.c5 {
+.c12 {
   margin: 0;
   font-family: DM Sans;
   font-size: 18px;
@@ -503,14 +503,14 @@ exports[`<SettingsPanel /> Should render and match the snapshot 1`] = `
   height: 21px;
 }
 
-.c8 {
+.c7 {
   opacity: 0;
   width: 0;
   height: 0;
   visibility: collapse;
 }
 
-.c10 {
+.c9 {
   width: 100%;
   display: -webkit-box;
   display: -webkit-flex;
@@ -522,11 +522,11 @@ exports[`<SettingsPanel /> Should render and match the snapshot 1`] = `
   align-items: center;
 }
 
-.c10:hover {
+.c9:hover {
   cursor: pointer;
 }
 
-.c7:disabled + .c9 {
+.c6:disabled + .c8 {
   opacity: 0.5;
   cursor: not-allowed;
 }
@@ -543,15 +543,15 @@ exports[`<SettingsPanel /> Should render and match the snapshot 1`] = `
   border-radius: 21px;
 }
 
-.c7:checked + .c9 .c14 {
+.c6:checked + .c8 .c14 {
   background-color: #B727EA;
 }
 
-.c7:focus + .c9 .c14 {
+.c6:focus + .c8 .c14 {
   box-shadow: 0 0 1px #B727EA;
 }
 
-.c7:disabled + .c9 .c14 {
+.c6:disabled + .c8 .c14 {
   opacity: 0.5;
   cursor: not-allowed;
 }
@@ -569,13 +569,13 @@ exports[`<SettingsPanel /> Should render and match the snapshot 1`] = `
   border-radius: 50%;
 }
 
-.c7:checked + .c9 .c14:before {
+.c6:checked + .c8 .c14:before {
   -webkit-transform: translateX(18px);
   -ms-transform: translateX(18px);
   transform: translateX(18px);
 }
 
-.c12 {
+.c11 {
   margin-right: 5px;
 }
 
@@ -705,18 +705,13 @@ exports[`<SettingsPanel /> Should render and match the snapshot 1`] = `
           class="c4"
           display="flex"
         >
-          <h2
-            class="c5"
-          >
-            Use Navigator
-          </h2>
           <div
-            class="c6"
+            class="c5"
           >
             <input
               aria-checked="false"
               aria-disabled="true"
-              class="c7 c8"
+              class="c6 c7"
               data-cy="branching-intervention-toggle"
               data-testid="switch-input"
               disabled=""
@@ -725,16 +720,22 @@ exports[`<SettingsPanel /> Should render and match the snapshot 1`] = `
               type="checkbox"
             />
             <label
-              class="c9 c10"
+              class="c8 c9"
               for="use-navigator-switch"
             >
               <div
-                class="c11"
+                class="c10"
                 width="100%"
               >
                 <div
-                  class="c1 c12"
-                />
+                  class="c1 c11"
+                >
+                  <h2
+                    class="c12"
+                  >
+                    Use Navigator
+                  </h2>
+                </div>
                 <div
                   class="c13"
                 >
@@ -780,7 +781,7 @@ exports[`<SettingsPanel /> Should render and match the snapshot 1`] = `
             width="fit-content"
           >
             <div
-              class="c6"
+              class="c5"
             >
               <input
                 class="c22 c23"
@@ -816,7 +817,7 @@ exports[`<SettingsPanel /> Should render and match the snapshot 1`] = `
             width="fit-content"
           >
             <div
-              class="c6"
+              class="c5"
             >
               <input
                 class="c22 c23"
@@ -852,7 +853,7 @@ exports[`<SettingsPanel /> Should render and match the snapshot 1`] = `
             width="fit-content"
           >
             <div
-              class="c6"
+              class="c5"
             >
               <input
                 class="c22 c23"
@@ -905,7 +906,7 @@ exports[`<SettingsPanel /> Should render and match the snapshot 1`] = `
             width="fit-content"
           >
             <div
-              class="c6"
+              class="c5"
             >
               <input
                 checked=""
@@ -942,7 +943,7 @@ exports[`<SettingsPanel /> Should render and match the snapshot 1`] = `
             width="fit-content"
           >
             <div
-              class="c6"
+              class="c5"
             >
               <input
                 class="c22 c23"
@@ -978,7 +979,7 @@ exports[`<SettingsPanel /> Should render and match the snapshot 1`] = `
             width="fit-content"
           >
             <div
-              class="c6"
+              class="c5"
             >
               <input
                 class="c22 c23"
