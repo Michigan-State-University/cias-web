@@ -104,7 +104,7 @@ export function* fetchNavigatorSetup({
   payload: { interventionId },
 }: ReturnType<typeof fetchNavigatorSetupRequest>) {
   const noNavigatorsUrl = `/v1/live_chat/intervention/${interventionId}/navigator_setup`;
-  const notAcceptedNavigatorsUrl = `/v1/interventions/${interventionId}/navigators/invitations`;
+  const notAcceptedNavigatorsUrl = `/v1/interventions/${interventionId}/navigator_invitations`;
   try {
     const { data: noNavigatorsData } = yield call(axios.get, noNavigatorsUrl);
     const noNavigatorAvailableData = jsonApiToObject(
