@@ -280,7 +280,9 @@ export function AnswerSessionPage({
   useEffect(() => {
     if (userSession) {
       nextQuestion(userSessionId, index);
-      if (setLiveChatEnabled) setLiveChatEnabled(userSession.liveChatEnabled);
+      if (userSession.liveChatEnabled && interventionId) {
+        setLiveChatEnabled(interventionId);
+      }
     }
   }, [userSession]);
 

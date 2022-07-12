@@ -1,18 +1,17 @@
 import styled from 'styled-components';
-import { colors } from 'theme';
+import { colors, ZIndex } from 'theme';
 
 export const NarratorContainer = styled.div`
   position: absolute;
   top: 0;
   left: 0;
-  z-index: 1500;
+  z-index: ${ZIndex.NARRATOR_CONTAINER};
   ${(props) =>
     props.canBeDragged
       ? `height: 100%;
           width: 100%;`
       : `height: 0%;
           width: 0%`}
-
   > div {
     width: ${({ width }) => `${width}px`};
     cursor: ${(props) => (props.canBeDragged ? 'grab' : 'default')};

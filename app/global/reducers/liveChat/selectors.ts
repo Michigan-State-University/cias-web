@@ -89,3 +89,9 @@ export const makeSelectUnreadConversationsCounts = () =>
         {} as Record<InterventionConversation['interventionId'], number>,
       ),
   );
+
+export const makeSelectCreatingConversation = () =>
+  createSelector(
+    selectLiveChatState,
+    ({ creatingConversation }) => creatingConversation,
+  );

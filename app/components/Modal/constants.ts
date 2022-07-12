@@ -1,7 +1,6 @@
 import { CSSProperties } from 'react';
 
-export const DIM_Z_INDEX = 10;
-export const POPOVER_Z_INDEX = 11;
+import { ZIndex } from 'theme';
 
 export const MODAL_TITLE_ID = 'modal-title';
 export const MODAL_DESCRIPTION_ID = 'modal-description';
@@ -21,6 +20,6 @@ export const popoverCrossAxisPlacement = {
 };
 
 export const DIM_ELEMENT_STYLE: Partial<CSSProperties> = {
-  zIndex: POPOVER_Z_INDEX,
+  zIndex: ZIndex.POPOVER_MODAL,
   position: 'relative',
 };

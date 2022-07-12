@@ -1,4 +1,5 @@
 import styled from 'styled-components';
+import { ZIndex } from 'theme';
 
 export const Container = styled.div`
   position: relative;
@@ -18,7 +19,7 @@ export const PopupElement = styled.div`
   color: white;
   font-size: 12px;
   white-space: nowrap;
-  z-index: 1;
+  z-index: ${ZIndex.POPUP};
   ${(props) =>
     props.top ? 'bottom: calc(100% + 5px)' : 'top: calc(100% + 5px)'};
   right: ${({ right, center }) => getVerticalPosition(right, center)};

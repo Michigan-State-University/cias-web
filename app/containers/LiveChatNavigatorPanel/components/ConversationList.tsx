@@ -48,7 +48,7 @@ const ConversationList = ({
   return (
     <Column overflow="auto" maxHeight="100%" pr={16}>
       {!interventionConversations.length && (
-        <Text>{formatMessage(i18nMessages.noConversations)}</Text>
+        <Text mt={16}>{formatMessage(i18nMessages.noConversations)}</Text>
       )}
       {interventionConversations.map(
         ({ interventionId, conversationIds, interventionName }, index) => (

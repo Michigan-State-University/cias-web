@@ -20,6 +20,7 @@ import { FileInfo, InterventionType } from 'models/Intervention';
 import {
   ChatWidgetReducer,
   chatWidgetReducerKey,
+  setChatDisabled,
   setChatEnabled,
 } from 'global/reducers/chatWidget';
 
@@ -86,16 +87,16 @@ const UserInterventionPage = () => {
   const { formatMessage } = useIntl();
 
   useEffect(() => {
-    if (!data || !setChatEnabled) return;
+    if (!data) return;
 
-    if (userIntervention.intervention.type === InterventionType.DEFAULT) {
-      globalDispatch(setChatEnabled(false));
+    const { type, liveChatEnabled, id } = data.userIntervention.intervention;
+
+    if (type === InterventionType.DEFAULT || !liveChatEnabled) {
+      globalDispatch(setChatDisabled());
       return;
     }
 
-    globalDispatch(
-      setChatEnabled(data.userIntervention.intervention.liveChatEnabled),
-    );
+    globalDispatch(setChatEnabled(id));
   }, [data]);
 
   if (error) {

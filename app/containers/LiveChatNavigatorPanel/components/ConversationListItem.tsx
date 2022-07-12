@@ -10,10 +10,10 @@ import { Conversation } from 'models/LiveChat';
 
 import { formatInterlocutorName } from 'utils/liveChatUtils';
 
-import UserAvatar from 'components/UserAvatar';
 import Column from 'components/Column';
 import Row from 'components/Row';
 import Text from 'components/Text';
+import ChatAvatar from 'components/ChatAvatar';
 
 import { ConversationListItemContainer } from './styled';
 import i18nMessages from '../messages';
@@ -70,16 +70,7 @@ export const ConversationListItem = ({
   return (
     <ConversationListItemContainer highlighted={opened} onClick={handleClick}>
       <Column flexShrink={0} width="auto">
-        <UserAvatar
-          height={36}
-          width={36}
-          backgroundColor={
-            otherInterlocutor?.userId ? colors.jungleGreen : colors.manatee
-          }
-          avatar={otherInterlocutor?.avatarUrl || ''}
-          firstName={otherInterlocutor?.firstName || ''}
-          lastName={otherInterlocutor?.lastName || ''}
-        />
+        <ChatAvatar interlocutor={otherInterlocutor} />
       </Column>
       <Column flex={1} gap={12} minWidth="0">
         <Row justify="between" gap={8}>

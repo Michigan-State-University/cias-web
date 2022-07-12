@@ -1,7 +1,5 @@
-import React, { useCallback, useEffect, useMemo, useState } from 'react';
-import { useIntl } from 'react-intl';
+import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import findLastIndex from 'lodash/findLastIndex';
 
 import { themeColors } from 'theme';
 
@@ -14,16 +12,14 @@ import {
   makeSelectLiveChatLoader,
   makeSelectOpenedConversation,
   makeSelectOpenedConversationMessages,
-  readMessage,
 } from 'global/reducers/liveChat';
 
 import Spinner from 'components/Spinner';
 import ErrorAlert from 'components/ErrorAlert';
+import ChatMessageList from 'components/ChatMessageList';
+import ChatMessageInput from 'components/ChatMessageInput';
 
-import { MESSAGE_MAX_LENGTH } from '../constants';
 import i18nMessages from '../messages';
-import { MessageInput } from '../components/MessageInput';
-import MessageList from '../components/MessageList';
 import { MessagesSectionContainer } from '../components/styled';
 
 export type Props = {
@@ -32,7 +28,6 @@ export type Props = {
 };
 
 export const MessagesSection = ({ onSendMessage, onReadMessage }: Props) => {
-  const { formatMessage } = useIntl();
   const dispatch = useDispatch();
 
   const conversation = useSelector(makeSelectOpenedConversation());
@@ -50,66 +45,15 @@ export const MessagesSection = ({ onSendMessage, onReadMessage }: Props) => {
     }
   }, [conversation?.id]);
 
-  const newestOtherUserMessageIndex = useMemo(() => {
-    if (!messages) return -1;
-    if (!conversation?.liveChatInterlocutors) return -1;
-    return findLastIndex(
-      messages,
-      ({ interlocutorId }) => interlocutorId !== currentInterlocutorId,
-    );
-  }, [messages, conversation?.liveChatInterlocutors, currentInterlocutorId]);
-
-  const readNewestOtherUserMessage = useCallback(() => {
-    if (
-      !conversation ||
-      !messages ||
-      messagesLoading ||
-      error ||
-      newestOtherUserMessageIndex === -1
-    ) {
-      return;
-    }
-
-    const newestOtherUserMessage = messages[newestOtherUserMessageIndex];
-
-    if (!newestOtherUserMessage.isRead) {
-      const conversationId = conversation.id;
-      const messageId = newestOtherUserMessage.id;
-
-      dispatch(readMessage(conversationId, messageId));
-
-      onReadMessage({
-        conversationId,
-        messageId,
-      });
-    }
-  }, [messagesLoading, error, newestOtherUserMessageIndex]);
-
-  useEffect(() => {
-    readNewestOtherUserMessage();
-  }, [readNewestOtherUserMessage]);
-
   const [message, setMessage] = useState('');
 
   useEffect(() => {
     setMessage('');
   }, [conversation?.id]);
 
-  const messageError = useMemo(() => {
-    if (message.length > MESSAGE_MAX_LENGTH)
-      return formatMessage(i18nMessages.messageTooLong, {
-        maxLength: MESSAGE_MAX_LENGTH,
-      });
-  }, [message]);
-
   const handleSend = () => {
     const trimmedMessage = message.trim();
-    if (
-      conversation &&
-      currentInterlocutorId &&
-      !messageError &&
-      trimmedMessage
-    ) {
+    if (conversation && currentInterlocutorId && trimmedMessage) {
       onSendMessage({
         conversationId: conversation.id,
         content: trimmedMessage,
@@ -129,17 +73,16 @@ export const MessagesSection = ({ onSendMessage, onReadMessage }: Props) => {
       )}
       {!loading && !error && conversation && (
         <>
-          <MessageList
+          <ChatMessageList
             currentInterlocutorId={currentInterlocutorId}
             messages={messages ?? []}
             interlocutors={conversation.liveChatInterlocutors}
-            newestOtherUserMessageIndex={newestOtherUserMessageIndex}
+            onReadMessage={onReadMessage}
           />
-          <MessageInput
+          <ChatMessageInput
             value={message}
             onChange={setMessage}
             onSend={handleSend}
-            error={messageError}
           />
         </>
       )}

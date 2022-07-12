@@ -1,7 +1,7 @@
 import styled from 'styled-components';
 import { Link } from 'react-router-dom';
 
-import { borders, boxShadows, elements, themeColors } from 'theme';
+import { borders, boxShadows, elements, themeColors, ZIndex } from 'theme';
 import { decimalToHex } from 'utils/hexUtils';
 
 import { margin } from 'components/BaseComponentStyles';
@@ -16,7 +16,7 @@ export const SidebarStyled = styled.div`
   display: flex;
   flex-direction: column;
   align-items: flex-start;
-  z-index: 10;
+  z-index: ${ZIndex.SIDEBAR};
   margin-top: ${elements.navbarHeight}px;
   height: calc(100vh - ${elements.navbarHeight}px);
   transition: left 0.4s ease;

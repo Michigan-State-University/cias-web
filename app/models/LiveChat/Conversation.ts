@@ -3,7 +3,7 @@ import { Interlocutor } from './Interlocutor';
 
 export type DenormalizedConversation = {
   id: string;
-  lastMessage: Nullable<LastMessage>;
+  lastMessage: LastMessage;
   liveChatInterlocutors: Interlocutor[];
   interventionId: string;
   interventionName: string;
@@ -11,7 +11,7 @@ export type DenormalizedConversation = {
 
 export type Conversation = {
   id: string;
-  lastMessage: Nullable<LastMessage>;
+  lastMessage: LastMessage;
   liveChatInterlocutors: Record<Interlocutor['id'], Interlocutor>;
 };
 

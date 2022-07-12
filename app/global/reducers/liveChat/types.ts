@@ -12,10 +12,14 @@ import * as actions from './actions';
 export type LiveChatAction = ActionType<typeof actions>;
 
 export type LiveChatState = {
-  interventionConversations: Record<string, InterventionConversation>;
+  interventionConversations: Record<
+    InterventionConversation['interventionId'],
+    InterventionConversation
+  >;
   conversations: Record<Conversation['id'], Conversation>;
   messages: Record<Conversation['id'], Message[]>;
   openedConversationId: Nullable<string>;
+  creatingConversation: boolean;
   loaders: {
     conversations: boolean;
     messages: boolean;

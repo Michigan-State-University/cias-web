@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 
-import { elements, colors } from 'theme';
+import { elements, colors, ZIndex } from 'theme';
 
 const AnswerInterventionContent = styled.div`
   align-items: flex-start;
@@ -11,7 +11,7 @@ const AnswerInterventionContent = styled.div`
   min-height: ${elements.draggableContainerSize}px;
   position: relative;
   width: 100%;
-  z-index: 0;
+  z-index: ${ZIndex.ANSWER_INTERVENTION_CONTENT};
 `;
 
 const AnswerOuterContainer = styled.div`

@@ -2,7 +2,7 @@ import React, {
   createContext,
   PropsWithChildren,
   useEffect,
-  useRef,
+  useState,
 } from 'react';
 import { createCable, fetchTokenFromHTML } from '@anycable/web';
 import { Cable } from '@anycable/core';
@@ -22,29 +22,29 @@ export const SocketProvider = ({ children, user }: Props) => {
 
   const URIEncodedHeaders = URIEncodeObject(headers);
 
-  const cable = useRef<Nullable<Cable>>(null);
+  const [cable, setCable] = useState<Nullable<Cable>>(null);
 
   useEffect(() => {
     if (user) {
-      cable.current = createCable(
-        `${process.env.WEBSOCKET_URL}?access_token=${URIEncodedHeaders['Access-Token']}&uid=${URIEncodedHeaders.Uid}&client=${URIEncodedHeaders.Client}`,
-        { tokenRefresher: fetchTokenFromHTML() },
+      setCable(
+        createCable(
+          `${process.env.WEBSOCKET_URL}?access_token=${URIEncodedHeaders['Access-Token']}&uid=${URIEncodedHeaders.Uid}&client=${URIEncodedHeaders.Client}`,
+          { tokenRefresher: fetchTokenFromHTML() },
+        ),
       );
     } else {
-      cable.current = null;
+      setCable(null);
     }
 
     return () => {
-      if (cable.current) {
-        cable.current.disconnect();
+      if (cable) {
+        cable.disconnect();
       }
     };
   }, [user]);
 
   return (
-    <SocketContext.Provider value={cable.current}>
-      {children}
-    </SocketContext.Provider>
+    <SocketContext.Provider value={cable}>{children}</SocketContext.Provider>
   );
 };
 

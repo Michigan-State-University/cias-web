@@ -20,7 +20,8 @@ import {
   FETCH_CONVERSATION_MESSAGES_REQUEST,
   FETCH_CONVERSATION_MESSAGES_SUCCESS,
   ON_CONVERSATION_CREATED_RECEIVE,
-  READ_MESSAGE,
+  MARK_MESSAGE_READ_LOCALLY,
+  SET_CREATING_CONVERSATION,
 } from './constants';
 
 export const openConversation = createAction(
@@ -31,12 +32,6 @@ export const openConversation = createAction(
 export const closeConversation = createAction(
   CLOSE_CONVERSATION,
   (action) => () => action({}),
-);
-
-export const readMessage = createAction(
-  READ_MESSAGE,
-  (action) => (conversationId: string, messageId: string) =>
-    action({ conversationId, messageId }),
 );
 
 export const fetchConversationsRequest = createAction(
@@ -82,9 +77,21 @@ export const onMessageSentReceive = createAction(
   (action) => (message: Message) => action({ message }),
 );
 
+export const markMessageReadLocally = createAction(
+  MARK_MESSAGE_READ_LOCALLY,
+  (action) => (conversationId: string, messageId: string) =>
+    action({ conversationId, messageId }),
+);
+
 export const onMessageReadReceive = createAction(
   ON_MESSAGE_READ_RECEIVE,
   (action) => (messageReadDTO: MessageReadDTO) => action({ messageReadDTO }),
+);
+
+export const setCreatingConversation = createAction(
+  SET_CREATING_CONVERSATION,
+  (action) => (creatingConversation: boolean) =>
+    action({ creatingConversation }),
 );
 
 export const onConversationCreatedReceive = createAction(

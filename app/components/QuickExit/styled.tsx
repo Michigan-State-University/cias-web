@@ -1,14 +1,14 @@
 // @ts-ignore
 import styled from 'styled-components';
 
-import { themeColors } from 'theme';
+import { themeColors, ZIndex } from 'theme';
 
 // @ts-ignore
 export const QuickExitPositionWrapper = styled.div`
   position: absolute;
   top: 48px;
   right: 0;
-  z-index: 1001;
+  z-index: ${ZIndex.QUICK_EXIT};
 `;
 
 // @ts-ignore

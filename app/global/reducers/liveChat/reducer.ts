@@ -15,7 +15,8 @@ import {
   fetchConversationsSuccess,
   fetchConversationsError,
   onConversationCreatedReceive,
-  readMessage,
+  markMessageReadLocally,
+  setCreatingConversation,
 } from './actions';
 import { LiveChatAction, LiveChatState } from './types';
 
@@ -26,6 +27,7 @@ export const initialState: LiveChatState = {
   conversations: {},
   messages: {},
   openedConversationId: null,
+  creatingConversation: false,
   loaders: {
     conversations: false,
     messages: false,
@@ -50,22 +52,6 @@ export const liveChatReducer = (
       }
       case getType(closeConversation): {
         draft.openedConversationId = null;
-        break;
-      }
-      case getType(readMessage): {
-        const { conversationId, messageId } = payload;
-        const { lastMessage } = draft.conversations[conversationId];
-
-        if (lastMessage?.id === messageId) {
-          lastMessage.isRead = true;
-        }
-
-        const messages = draft.messages[conversationId];
-        if (messages) {
-          updateItemById(messages, messageId, {
-            isRead: true,
-          });
-        }
         break;
       }
       case getType(fetchConversationsRequest): {
@@ -114,6 +100,22 @@ export const liveChatReducer = (
         }
         break;
       }
+      case getType(markMessageReadLocally): {
+        const { conversationId, messageId } = payload;
+        const { lastMessage } = draft.conversations[conversationId];
+
+        if (lastMessage?.id === messageId) {
+          lastMessage.isRead = true;
+        }
+
+        const messages = draft.messages[conversationId];
+        if (messages) {
+          updateItemById(messages, messageId, {
+            isRead: true,
+          });
+        }
+        break;
+      }
       case getType(onMessageReadReceive): {
         const {
           messageReadDTO: { messageId, conversationId },
@@ -132,6 +134,10 @@ export const liveChatReducer = (
         }
         break;
       }
+      case getType(setCreatingConversation): {
+        draft.creatingConversation = payload.creatingConversation;
+        break;
+      }
       case getType(onConversationCreatedReceive): {
         const {
           newConversationData: { conversation, interventionConversation },
@@ -146,6 +152,7 @@ export const liveChatReducer = (
             interventionConversation;
         }
         draft.conversations[conversation.id] = conversation;
+        draft.messages[conversation.id] = [conversation.lastMessage];
         break;
       }
     }

@@ -2,7 +2,7 @@ import styled from 'styled-components';
 import ReactPlayer from 'react-player/lazy';
 import { Link } from 'react-router-dom';
 
-import { themeColors } from 'theme';
+import { themeColors, ZIndex } from 'theme';
 
 import AppSlider from 'components/AppSlider';
 import { TH } from 'components/Table';
@@ -92,7 +92,7 @@ export const VisualAnalogueSlider = styled(AppSlider)`
 `;
 
 export const FirstTH = styled(TH)`
-  z-index: 1;
+  z-index: ${ZIndex.GRID_QUESTION_LAYOUT_TH};
   background-color: inherit;
   text-align: left;
   word-break: normal;
