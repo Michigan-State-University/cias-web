@@ -215,7 +215,7 @@ const useAudioHelper = (
       onSpeechEnded(audioUrls);
     else
       audioInstance.setSrc(
-        `https://api-msu.cias.app/rails/active_storage/blobs/redirect/eyJfcmFpbHMiOnsibWVzc2FnZSI6IkJBaEpJaWsxTlRFeU1USmhOaTFpWTJKaExUUmhZMlF0WWpBM1pTMDFPV0U0WldJM05EUmtNMllHT2daRlZBPT0iLCJleHAiOm51bGwsInB1ciI6ImJsb2JfaWQifX0=--50b2233dc23b023a9c9512ebc1bdacc0bc17709a/c15890010641727f33d0f7339a0b2f8a8a8f9d81aeeb84ef65e477756415909a.mp3`,
+        `${process.env.API_URL}${audioUrls[currentData.currentAudioIndex]}`,
       );
   };
 
