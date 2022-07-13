@@ -1,16 +1,18 @@
 /* eslint-disable no-await-in-loop */
 /* eslint-disable no-restricted-syntax */
+import { useRef } from 'react';
 import uniqBy from 'lodash/uniqBy';
 import filter from 'lodash/filter';
+import toPairs from 'lodash/toPairs';
+import * as Sentry from '@sentry/browser';
+
 import {
   readQuestionBlockType,
   reflectionFormulaType,
   reflectionType,
   speechType,
 } from 'models/Narrator/BlockTypes';
-import { useRef } from 'react';
 import { speechAnimations } from 'utils/animations/animationsNames';
-import toPairs from 'lodash/toPairs';
 
 const animationTimeout = 200;
 
@@ -175,11 +177,39 @@ const useAudioHelper = (
     }
   };
 
+  const getInvalidText = ({
+    text,
+    currentAudioIndex,
+    type,
+    currentReflectionIndex,
+    reflections,
+  }) => {
+    switch (type) {
+      case speechType:
+      case readQuestionBlockType:
+        return text[currentAudioIndex];
+
+      case reflectionFormulaType:
+      case reflectionType:
+        return reflections[currentReflectionIndex].text[currentAudioIndex];
+      default:
+        return type;
+    }
+  };
+
+  const handleAudioError = () => {
+    const text = getInvalidText(currentData);
+    Sentry.captureMessage(`Issue with audio with text: ${text}`, 'error');
+  };
+
   const handleSpeech = (audioUrls) => {
     audioInstance.onPlay(playAnimation);
     audioInstance.onLoaded(onSpeechReady);
     audioInstance.onEnded(() => onSpeechEnded(audioUrls));
-    audioInstance.onError(() => onSpeechEnded(audioUrls));
+    audioInstance.onError(() => {
+      handleAudioError();
+      onSpeechEnded(audioUrls);
+    });
 
     if (!audioUrls.length || !audioUrls[currentData.currentAudioIndex])
       onSpeechEnded(audioUrls);
