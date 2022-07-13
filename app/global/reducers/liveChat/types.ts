@@ -19,8 +19,9 @@ export type LiveChatState = {
   conversations: Record<Conversation['id'], Conversation>;
   messages: Record<Conversation['id'], Message[]>;
   openedConversationId: Nullable<string>;
-  creatingConversation: boolean;
   guestInterlocutorId: Nullable<string>;
+  creatingConversation: boolean;
+  archivingConversation: boolean;
   loaders: {
     conversations: boolean;
     messages: boolean;

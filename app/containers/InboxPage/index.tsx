@@ -11,7 +11,8 @@ import i18nMessages from './messages';
 export const InboxPage = () => {
   const { formatMessage } = useIntl();
 
-  const { sendMessage, readMessage } = useConversationChannel();
+  const { sendMessage, readMessage, endConversation } =
+    useConversationChannel();
 
   return (
     <AppContainer
@@ -26,6 +27,7 @@ export const InboxPage = () => {
       <LiveChatNavigatorPanel
         onSendMessage={sendMessage}
         onReadMessage={readMessage}
+        onArchivedConversation={endConversation}
       />
     </AppContainer>
   );

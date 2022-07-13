@@ -54,18 +54,21 @@ export const ConversationListItem = ({
 }: Props) => {
   const { formatMessage } = useIntl();
 
-  const { lastMessage, liveChatInterlocutors } = conversation;
+  const {
+    id: conversationId,
+    lastMessage,
+    liveChatInterlocutors,
+    archived,
+  } = conversation;
 
-  const handleClick = () => onClick(conversation.id);
+  const handleClick = () => onClick(conversationId);
 
   const otherInterlocutor = Object.values(liveChatInterlocutors).find(
     ({ userId }) => userId !== currentUserId,
   );
 
   const markUnread =
-    lastMessage &&
-    !lastMessage.isRead &&
-    lastMessage.interlocutorId === otherInterlocutor?.id;
+    !lastMessage.isRead && lastMessage.interlocutorId === otherInterlocutor?.id;
 
   return (
     <ConversationListItemContainer highlighted={opened} onClick={handleClick}>
@@ -86,8 +89,8 @@ export const ConversationListItem = ({
           >
             {formatInterlocutorName(otherInterlocutor)}
           </Text>
-          {lastMessage && (
-            <Column flexShrink={0} width="auto">
+          <Column flexShrink={0} width="auto">
+            {!archived && (
               <Text
                 fontWeight="bold"
                 fontSize={12}
@@ -97,39 +100,47 @@ export const ConversationListItem = ({
               >
                 {dayjs(lastMessage.createdAt).fromNow(true)}
               </Text>
+            )}
+            {archived && (
+              <Text
+                fontWeight="medium"
+                fontSize={12}
+                lineHeight="14px"
+                color={colors.vermilion}
+              >
+                {formatMessage(i18nMessages.archived)}
+              </Text>
+            )}
+          </Column>
+        </Row>
+        <Row width="100%">
+          {liveChatInterlocutors[lastMessage.interlocutorId]?.userId ===
+            currentUserId && (
+            <Column flexShrink={0} width="auto">
+              <Text
+                fontSize={12}
+                lineHeight="12px"
+                color={colors.bluewood}
+                textOpacity={markUnread ? 1 : 0.7}
+                fontWeight={markUnread ? 'bold' : 'regular'}
+              >
+                {formatMessage(i18nMessages.you)}&nbsp;
+              </Text>
             </Column>
           )}
+          <Text
+            fontSize={12}
+            lineHeight="12px"
+            color={colors.bluewood}
+            textOpacity={markUnread ? 1 : 0.7}
+            fontWeight={markUnread ? 'bold' : 'regular'}
+            textOverflow="ellipsis"
+            whiteSpace="nowrap"
+            overflow="hidden"
+          >
+            {lastMessage.content}
+          </Text>
         </Row>
-        {lastMessage && (
-          <Row width="100%">
-            {liveChatInterlocutors[lastMessage.interlocutorId]?.userId ===
-              currentUserId && (
-              <Column flexShrink={0} width="auto">
-                <Text
-                  fontSize={12}
-                  lineHeight="12px"
-                  color={colors.bluewood}
-                  textOpacity={markUnread ? 1 : 0.7}
-                  fontWeight={markUnread ? 'bold' : 'regular'}
-                >
-                  {formatMessage(i18nMessages.you)}&nbsp;
-                </Text>
-              </Column>
-            )}
-            <Text
-              fontSize={12}
-              lineHeight="12px"
-              color={colors.bluewood}
-              textOpacity={markUnread ? 1 : 0.7}
-              fontWeight={markUnread ? 'bold' : 'regular'}
-              textOverflow="ellipsis"
-              whiteSpace="nowrap"
-              overflow="hidden"
-            >
-              {lastMessage.content}
-            </Text>
-          </Row>
-        )}
       </Column>
       <Column
         flexShrink={0}

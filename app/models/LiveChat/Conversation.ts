@@ -5,6 +5,7 @@ export type DenormalizedConversation = {
   id: string;
   lastMessage: LastMessage;
   liveChatInterlocutors: Interlocutor[];
+  archived: boolean;
   interventionId: string;
   interventionName: string;
 };
@@ -13,9 +14,14 @@ export type Conversation = {
   id: string;
   lastMessage: LastMessage;
   liveChatInterlocutors: Record<Interlocutor['id'], Interlocutor>;
+  archived: boolean;
 };
 
 export type ConversationCreatedDTO = {
   firstMessageContent: string;
   interventionId: string;
+};
+
+export type ConversationArchivedDTO = {
+  conversationId: string;
 };

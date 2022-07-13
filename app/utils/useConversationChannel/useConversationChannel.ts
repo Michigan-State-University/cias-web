@@ -4,6 +4,7 @@ import { useInjectReducer, useInjectSaga } from 'redux-injectors';
 
 import {
   ConversationCreatedDTO,
+  ConversationArchivedDTO,
   Message,
   MessageReadDTO,
   MessageSentDTO,
@@ -17,14 +18,16 @@ import {
   allLiveChatSagasKey,
   liveChatReducer,
   liveChatReducerKey,
-  NewConversationData,
-  onConversationCreatedReceive,
-  onMessageReadReceive,
-  onMessageSentReceive,
   mapConversationCreatedMessageData,
   markMessageReadLocally,
-  setCreatingConversation,
+  NewConversationData,
+  onConversationCreatedReceive,
+  onConversationArchivedReceive,
+  onMessageReadReceive,
+  onMessageSentReceive,
   openConversation,
+  setCreatingConversation,
+  setArchivingConversation,
   setGuestInterlocutorId,
 } from 'global/reducers/liveChat';
 import { makeSelectUserId } from 'global/reducers/auth';
@@ -79,6 +82,13 @@ export const useConversationChannel = () => {
     }
   };
 
+  const onConversationArchived = (
+    conversationArchivedDTO: ConversationArchivedDTO,
+  ) => {
+    dispatch(onConversationArchivedReceive(conversationArchivedDTO));
+    dispatch(setArchivingConversation(false));
+  };
+
   const sendMessage = (messageSentDTO: MessageSentDTO) => {
     channel?.perform({
       name: ConversationChannelActionName.ON_MESSAGE_SENT,
@@ -109,6 +119,16 @@ export const useConversationChannel = () => {
     });
   };
 
+  const endConversation = (
+    conversationArchivedDTO: ConversationArchivedDTO,
+  ) => {
+    dispatch(setArchivingConversation(true));
+    channel?.perform({
+      name: ConversationChannelActionName.ON_CONVERSATION_ARCHIVED,
+      data: conversationArchivedDTO,
+    });
+  };
+
   useEffect(() => {
     channel?.listen(({ data, topic }) => {
       switch (topic) {
@@ -121,11 +141,14 @@ export const useConversationChannel = () => {
         case ConversationChannelMessageTopic.CONVERSATION_CREATED:
           onConversationCreated(mapConversationCreatedMessageData(data));
           break;
+        case ConversationChannelMessageTopic.CONVERSATION_ARCHIVED:
+          onConversationArchived(data);
+          break;
         default:
           break;
       }
     });
   }, [channel]);
 
-  return { sendMessage, readMessage, createConversation };
+  return { sendMessage, readMessage, createConversation, endConversation };
 };

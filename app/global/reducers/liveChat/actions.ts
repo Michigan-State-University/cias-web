@@ -5,6 +5,7 @@ import {
   Conversation,
   Message,
   MessageReadDTO,
+  ConversationArchivedDTO,
 } from 'models/LiveChat';
 import { ApiError } from 'models/Api';
 
@@ -23,6 +24,8 @@ import {
   MARK_MESSAGE_READ_LOCALLY,
   SET_CREATING_CONVERSATION,
   SET_GUEST_INTERLOCUTOR_ID,
+  SET_ARCHIVING_CONVERSATION,
+  ON_CONVERSATION_ARCHIVED_RECEIVE,
 } from './constants';
 
 export const openConversation = createAction(
@@ -108,4 +111,16 @@ export const onConversationCreatedReceive = createAction(
 export const setGuestInterlocutorId = createAction(
   SET_GUEST_INTERLOCUTOR_ID,
   (action) => (guestInterlocutorId: string) => action({ guestInterlocutorId }),
+);
+
+export const setArchivingConversation = createAction(
+  SET_ARCHIVING_CONVERSATION,
+  (action) => (archivingConversation: boolean) =>
+    action({ archivingConversation }),
+);
+
+export const onConversationArchivedReceive = createAction(
+  ON_CONVERSATION_ARCHIVED_RECEIVE,
+  (action) => (conversationArchivedDTO: ConversationArchivedDTO) =>
+    action({ conversationArchivedDTO }),
 );

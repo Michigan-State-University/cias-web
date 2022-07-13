@@ -19,36 +19,35 @@ export const mapFetchConversationsResponse = (
     (
       accumulator,
       {
-        id,
+        id: conversationId,
         interventionId,
         interventionName,
-        lastMessage,
         liveChatInterlocutors,
+        ...restProps
       },
     ) => {
-      const conversation = { id, lastMessage, liveChatInterlocutors };
-
       const normalizedInterlocutors = normalizeArrayToObject(
-        conversation.liveChatInterlocutors,
+        liveChatInterlocutors,
         'id',
       );
 
       if (accumulator.interventionConversations[interventionId]) {
         accumulator.interventionConversations[
           interventionId
-        ].conversationIds.push(id);
+        ].conversationIds.push(conversationId);
       } else {
         accumulator.interventionConversations[interventionId] = {
           interventionId,
           interventionName,
-          conversationIds: [id],
+          conversationIds: [conversationId],
         };
       }
 
       // eslint-disable-next-line no-param-reassign
-      accumulator.conversations[conversation.id] = {
-        ...conversation,
+      accumulator.conversations[conversationId] = {
+        id: conversationId,
         liveChatInterlocutors: normalizedInterlocutors,
+        ...restProps,
       };
 
       return accumulator;
@@ -67,8 +66,8 @@ export const mapConversationCreatedMessageData = (
     id,
     interventionId,
     interventionName,
-    lastMessage,
     liveChatInterlocutors,
+    ...restProps
   }: DenormalizedConversation = jsonApiToObject(data, 'conversation');
 
   const normalizedInterlocutors = normalizeArrayToObject(
@@ -79,8 +78,8 @@ export const mapConversationCreatedMessageData = (
   return {
     conversation: {
       id,
-      lastMessage,
       liveChatInterlocutors: normalizedInterlocutors,
+      ...restProps,
     },
     interventionConversation: {
       conversationIds: [id],

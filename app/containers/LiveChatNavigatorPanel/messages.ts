@@ -55,7 +55,7 @@ export default defineMessages({
   },
   noConversations: {
     id: `${scope}.noConversations`,
-    defaultMessage: "You don't have any active conversations",
+    defaultMessage: "You don't have any conversations",
   },
   noMessages: {
     id: `${scope}.noMessages`,
@@ -64,5 +64,26 @@ export default defineMessages({
   interventionId: {
     id: `${scope}.interventionId`,
     defaultMessage: 'Intervention ID',
+  },
+  archive: {
+    id: `${scope}.archive`,
+    defaultMessage: 'Archive',
+  },
+  archiveIconAlt: {
+    id: `${scope}.archiveIconAlt`,
+    defaultMessage: 'Archive icon',
+  },
+  archiveConfirmationModalTitle: {
+    id: `${scope}.archiveConfirmationModalTitle`,
+    defaultMessage: 'Archive conversation',
+  },
+  archiveConfirmationModalMessage: {
+    id: `${scope}.archiveConfirmationModalMessage`,
+    defaultMessage:
+      'Are you sure you want to archive this conversation? This operation is irreversible.',
+  },
+  archived: {
+    id: `${scope}.archived`,
+    defaultMessage: 'Archived',
   },
 });

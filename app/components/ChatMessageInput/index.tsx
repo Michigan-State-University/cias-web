@@ -62,6 +62,7 @@ export const ChatMessageInput = ({
           value={value}
           onKeyDown={onSend && handleKeyDown}
           error={Boolean(error)}
+          disabled={disabled}
         />
         <Box
           position="absolute"
@@ -73,7 +74,7 @@ export const ChatMessageInput = ({
             onClick={onSend}
             src={AirplaneIcon}
             title={formatMessage(i18nMessages.inputSendIconTitle)}
-            disabled={Boolean(error)}
+            disabled={Boolean(error) || disabled}
           />
         </Box>
       </Box>

@@ -41,6 +41,7 @@ const ConversationChatDialog = ({
   const [message, setMessage] = useState('');
 
   const handleSend = () => {
+    if (creatingConversation) return;
     const trimmedMessage = message.trim();
     if (!trimmedMessage) return;
     onSendMessage(trimmedMessage);
@@ -80,9 +81,9 @@ const ConversationChatDialog = ({
       </Column>
       <ChatMessageInput
         value={message}
-        disabled={creatingConversation}
         onChange={setMessage}
         onSend={handleSend}
+        disabled={conversation?.archived}
       />
     </ChatDialog>
   );

@@ -23,11 +23,16 @@ export const NavigatorPanelGridColumn = styled(GCol)`
   height: 100%;
 `;
 
-export const SectionHeader = styled.div`
+export const SectionHeaderContainer = styled(Box)`
   height: ${HEADER_HEIGHT};
-  padding: 24px 0;
+  padding-top: 24px;
+  padding-bottom: 24px;
   border-bottom: 1px solid ${themeColors.highlight};
+  border-radius: 0;
   text-align: left;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
 `;
 
 export const SectionBody = styled(Box)`

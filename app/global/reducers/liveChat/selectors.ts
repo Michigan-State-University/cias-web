@@ -106,3 +106,9 @@ export const makeSelectCreatingConversation = () =>
     selectLiveChatState,
     ({ creatingConversation }) => creatingConversation,
   );
+
+export const makeSelectArchivingConversation = () =>
+  createSelector(
+    selectLiveChatState,
+    ({ archivingConversation }) => archivingConversation,
+  );

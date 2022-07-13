@@ -7,6 +7,7 @@ import { MessageSentDTO, MessageReadDTO } from 'models/LiveChat';
 
 import {
   fetchConversationMessagesRequest,
+  makeSelectArchivingConversation,
   makeSelectCurrentInterlocutorId,
   makeSelectLiveChatError,
   makeSelectLiveChatLoader,
@@ -34,6 +35,7 @@ export const MessagesSection = ({ onSendMessage, onReadMessage }: Props) => {
   const conversationsLoading = useSelector(
     makeSelectLiveChatLoader('conversations'),
   );
+  const archivingConversation = useSelector(makeSelectArchivingConversation());
   const messages = useSelector(makeSelectOpenedConversationMessages());
   const messagesLoading = useSelector(makeSelectLiveChatLoader('messages'));
   const error = useSelector(makeSelectLiveChatError('messages'));
@@ -83,6 +85,7 @@ export const MessagesSection = ({ onSendMessage, onReadMessage }: Props) => {
             value={message}
             onChange={setMessage}
             onSend={handleSend}
+            disabled={conversation.archived || archivingConversation}
           />
         </>
       )}

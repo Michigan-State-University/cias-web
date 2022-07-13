@@ -18,6 +18,8 @@ import {
   markMessageReadLocally,
   setCreatingConversation,
   setGuestInterlocutorId,
+  setArchivingConversation,
+  onConversationArchivedReceive,
 } from './actions';
 import { LiveChatAction, LiveChatState } from './types';
 
@@ -28,8 +30,9 @@ export const initialState: LiveChatState = {
   conversations: {},
   messages: {},
   openedConversationId: null,
-  creatingConversation: false,
   guestInterlocutorId: null,
+  creatingConversation: false,
+  archivingConversation: false,
   loaders: {
     conversations: false,
     messages: false,
@@ -159,6 +162,18 @@ export const liveChatReducer = (
       }
       case getType(setGuestInterlocutorId): {
         draft.guestInterlocutorId = payload.guestInterlocutorId;
+        break;
+      }
+      case getType(setArchivingConversation): {
+        draft.archivingConversation = payload.archivingConversation;
+        break;
+      }
+      case getType(onConversationArchivedReceive): {
+        const { conversationId } = payload.conversationArchivedDTO;
+        const conversation = draft.conversations[conversationId];
+        if (conversation) {
+          conversation.archived = true;
+        }
       }
     }
   });
