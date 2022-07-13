@@ -22,6 +22,7 @@ import {
   ON_CONVERSATION_CREATED_RECEIVE,
   MARK_MESSAGE_READ_LOCALLY,
   SET_CREATING_CONVERSATION,
+  SET_GUEST_INTERLOCUTOR_ID,
 } from './constants';
 
 export const openConversation = createAction(
@@ -102,4 +103,9 @@ export const onConversationCreatedReceive = createAction(
       interventionConversation: InterventionConversation;
     }) =>
       action({ newConversationData }),
+);
+
+export const setGuestInterlocutorId = createAction(
+  SET_GUEST_INTERLOCUTOR_ID,
+  (action) => (guestInterlocutorId: string) => action({ guestInterlocutorId }),
 );

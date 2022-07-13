@@ -1,3 +1,5 @@
+import { writeStorage, deleteFromStorage } from '@rehooks/local-storage';
+
 export const HEADERS = 'headers';
 export const GUEST_HEADERS = 'guest-headers';
 export const STATE = 'state';
@@ -7,10 +9,7 @@ const LocalStorageService = (() => {
     if (token && token !== '') {
       const headers = getHeaders();
 
-      localStorage.setItem(
-        HEADERS,
-        JSON.stringify({ ...headers, 'Access-Token': token }),
-      );
+      writeStorage(HEADERS, { ...headers, 'Access-Token': token });
     }
   };
 
@@ -18,7 +17,7 @@ const LocalStorageService = (() => {
     if (uid && uid !== '') {
       const headers = getHeaders();
 
-      localStorage.setItem(HEADERS, JSON.stringify({ ...headers, Uid: uid }));
+      writeStorage(HEADERS, { ...headers, Uid: uid });
     }
   };
 
@@ -41,28 +40,27 @@ const LocalStorageService = (() => {
   };
 
   const setHeaders = (headers) => {
-    localStorage.setItem(HEADERS, JSON.stringify(headers));
+    writeStorage(HEADERS, headers);
   };
 
   const setGuestHeaders = (headers) => {
-    localStorage.setItem(GUEST_HEADERS, JSON.stringify(headers));
+    writeStorage(GUEST_HEADERS, headers);
   };
 
   const clearGuestHeaders = () => {
-    localStorage.removeItem(GUEST_HEADERS);
+    deleteFromStorage(GUEST_HEADERS);
   };
 
   const clearHeaders = () => {
-    localStorage.removeItem(HEADERS);
+    deleteFromStorage(HEADERS);
   };
 
   const setState = (state) => {
-    const serializedState = JSON.stringify(state);
-    localStorage.setItem(STATE, serializedState);
+    writeStorage(STATE, state);
   };
 
   const clearState = () => {
-    localStorage.removeItem(STATE);
+    deleteFromStorage(STATE);
   };
 
   const getState = () => {
@@ -82,11 +80,11 @@ const LocalStorageService = (() => {
   };
 
   const setItem = (key, value) => {
-    localStorage.setItem(key, JSON.stringify(value));
+    writeStorage(key, value);
   };
 
   const removeItem = (key) => {
-    localStorage.removeItem(key);
+    deleteFromStorage(key);
   };
 
   const getItem = (key) => {

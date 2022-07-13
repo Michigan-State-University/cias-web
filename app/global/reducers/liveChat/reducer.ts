@@ -17,6 +17,7 @@ import {
   onConversationCreatedReceive,
   markMessageReadLocally,
   setCreatingConversation,
+  setGuestInterlocutorId,
 } from './actions';
 import { LiveChatAction, LiveChatState } from './types';
 
@@ -28,6 +29,7 @@ export const initialState: LiveChatState = {
   messages: {},
   openedConversationId: null,
   creatingConversation: false,
+  guestInterlocutorId: null,
   loaders: {
     conversations: false,
     messages: false,
@@ -154,6 +156,9 @@ export const liveChatReducer = (
         draft.conversations[conversation.id] = conversation;
         draft.messages[conversation.id] = [conversation.lastMessage];
         break;
+      }
+      case getType(setGuestInterlocutorId): {
+        draft.guestInterlocutorId = payload.guestInterlocutorId;
       }
     }
   });

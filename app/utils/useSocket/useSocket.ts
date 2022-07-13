@@ -25,6 +25,8 @@ export const useSocket = <
   const unsubscribe = useCallback(() => {
     if (channel) {
       channel.disconnect();
+      channel.close();
+      setChannel(null);
     }
   }, [channel]);
 

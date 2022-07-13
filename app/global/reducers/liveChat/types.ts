@@ -20,6 +20,7 @@ export type LiveChatState = {
   messages: Record<Conversation['id'], Message[]>;
   openedConversationId: Nullable<string>;
   creatingConversation: boolean;
+  guestInterlocutorId: Nullable<string>;
   loaders: {
     conversations: boolean;
     messages: boolean;

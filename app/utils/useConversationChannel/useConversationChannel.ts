@@ -25,6 +25,7 @@ import {
   markMessageReadLocally,
   setCreatingConversation,
   openConversation,
+  setGuestInterlocutorId,
 } from 'global/reducers/liveChat';
 import { makeSelectUserId } from 'global/reducers/auth';
 
@@ -61,13 +62,20 @@ export const useConversationChannel = () => {
 
     const { lastMessage, liveChatInterlocutors, id } =
       newConversation.conversation;
+
+    const isGuest = !currentUserId;
     const isCreatedByCurrentUser =
       liveChatInterlocutors[lastMessage.interlocutorId].userId ===
       currentUserId;
 
-    if (isCreatedByCurrentUser) {
+    // if user is not logged in and receives conversation_created message it means that they created this conversation
+    if (isGuest || isCreatedByCurrentUser) {
       dispatch(openConversation(id));
       dispatch(setCreatingConversation(false));
+    }
+
+    if (isGuest) {
+      dispatch(setGuestInterlocutorId(lastMessage.interlocutorId));
     }
   };
 

@@ -39,7 +39,7 @@ const ChatMessageList = ({
   };
 
   const newestOtherUserMessageIndex = useMemo(() => {
-    if (!messages) return -1;
+    if (!messages || !currentInterlocutorId) return -1;
     return findLastIndex(
       messages,
       ({ interlocutorId }) => interlocutorId !== currentInterlocutorId,

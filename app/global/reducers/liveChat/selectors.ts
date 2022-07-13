@@ -48,18 +48,29 @@ export const makeSelectOpenedConversationMessages = () =>
     return messages[openedConversationId];
   });
 
+export const makeSelectGuestInterlocutorId = () =>
+  createSelector(
+    selectLiveChatState,
+    ({ guestInterlocutorId }) => guestInterlocutorId,
+  );
+
 export const makeSelectCurrentInterlocutorId = () =>
   createSelector(
     makeSelectOpenedConversation(),
     makeSelectUserId(),
-    (openedConversation, currentUserId) => {
+    makeSelectGuestInterlocutorId(),
+    (openedConversation, currentUserId, guestInterlocutorId) => {
       if (isNil(openedConversation)) return null;
-      if (isNil(currentUserId)) return null;
-      return (
-        Object.values(openedConversation.liveChatInterlocutors).find(
-          ({ userId }) => userId === currentUserId,
-        )?.id ?? null
-      );
+
+      if (currentUserId) {
+        return (
+          Object.values(openedConversation.liveChatInterlocutors).find(
+            ({ userId }) => userId === currentUserId,
+          )?.id ?? null
+        );
+      }
+
+      return guestInterlocutorId;
     },
   );
 

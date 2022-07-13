@@ -41,7 +41,13 @@ export const ChatMessageInput = ({
   };
 
   const handleKeyDown = (event: React.KeyboardEvent) => {
-    if (onSend && value.trim() && !error && event.key === 'Enter') {
+    if (
+      onSend &&
+      value.trim() &&
+      !error &&
+      !disabled &&
+      event.key === 'Enter'
+    ) {
       onSend();
       event.preventDefault();
     }
@@ -56,7 +62,6 @@ export const ChatMessageInput = ({
           value={value}
           onKeyDown={onSend && handleKeyDown}
           error={Boolean(error)}
-          disabled={disabled}
         />
         <Box
           position="absolute"
