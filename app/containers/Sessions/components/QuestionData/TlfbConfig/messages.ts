@@ -35,12 +35,12 @@ export default defineMessages({
     id: `${scope}.selectDate`,
     defaultMessage: 'Select date',
   },
-  helpingMaterials: {
-    id: `${scope}.helpingMaterials`,
-    defaultMessage: 'Helping materials',
+  standardDrinkChart: {
+    id: `${scope}.standardDrinkChart`,
+    defaultMessage: 'Standard drink chart',
   },
   displayHelpingMaterials: {
     id: `${scope}.displayHelpingMaterials`,
-    defaultMessage: 'Display helping materials to the participants',
+    defaultMessage: 'Display standard drink chart to the participants',
   },
 });

@@ -10,7 +10,7 @@ import Modal from 'components/Modal';
 import Divider from 'components/Divider';
 
 import Document from 'assets/svg/green-document.svg';
-import StandardDrinks from 'assets/images/standard-drinks.jpeg';
+import StandardDrinks from 'assets/images/standard-drinks.png';
 
 import messages from './messages';
 
@@ -29,16 +29,16 @@ const TlfbHelpingMaterials = ({
     <>
       <Modal
         visible={modalVisible}
-        title={formatMessage(messages.helpingMaterials)}
+        title={formatMessage(messages.standardDrinkChart)}
         onClose={() => setModalVisible(false)}
-        maxWidth={mobile ? 400 : 500}
+        maxWidth="90%"
       >
         <Divider my={16} />
         <Img
           maxWidth="100%"
           maxHeight="100%"
           src={StandardDrinks}
-          alt={formatMessage(messages.helpingMaterials)}
+          alt={formatMessage(messages.standardDrinkChart)}
         />
       </Modal>
       <Row
@@ -56,7 +56,7 @@ const TlfbHelpingMaterials = ({
           textDecoration={researcher ? 'underline' : 'none'}
         >
           {formatMessage(
-            messages[researcher ? 'showPreview' : 'helpingMaterials'],
+            messages[researcher ? 'showPreview' : 'standardDrinkChart'],
           )}
         </Text>
       </Row>

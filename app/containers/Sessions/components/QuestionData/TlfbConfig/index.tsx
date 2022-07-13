@@ -124,7 +124,7 @@ const TlfbConfig = ({ statusMetadata: { isEditable } }: TlfbConfigProps) => {
         />
       )}
       <Row mt={32} mb={24} gap={16} align="center">
-        <H2>{formatMessage(messages.helpingMaterials)}</H2>
+        <H2>{formatMessage(messages.standardDrinkChart)}</H2>
         <TlfbHelpingMaterials researcher />
       </Row>
       <Checkbox
