@@ -1,7 +1,9 @@
 import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
+import { useIntl } from 'react-intl';
 
 import { themeColors } from 'theme';
+import NoConversationOpenedIcon from 'assets/svg/no-conversation-opened.svg';
 
 import { MessageSentDTO, MessageReadDTO } from 'models/LiveChat';
 
@@ -19,16 +21,23 @@ import Spinner from 'components/Spinner';
 import ErrorAlert from 'components/ErrorAlert';
 import ChatMessageList from 'components/ChatMessageList';
 import ChatMessageInput from 'components/ChatMessageInput';
+import IconInfo from 'components/IconInfo';
+import Column from 'components/Column';
 
 import i18nMessages from '../messages';
-import { MessagesSectionContainer } from '../components/styled';
+import { MessagesSectionContainer, SectionBody } from '../components/styled';
+import { NO_CONVERSATION_OPENED_INFO_MAX_WIDTH } from '../constants';
 
 export type Props = {
   onSendMessage: (messageSentDTO: MessageSentDTO) => void;
   onReadMessage: (messageReadDTO: MessageReadDTO) => void;
 };
 
-export const MessagesSection = ({ onSendMessage, onReadMessage }: Props) => {
+export const MessagesSectionBody = ({
+  onSendMessage,
+  onReadMessage,
+}: Props) => {
+  const { formatMessage } = useIntl();
   const dispatch = useDispatch();
 
   const conversation = useSelector(makeSelectOpenedConversation());
@@ -68,13 +77,25 @@ export const MessagesSection = ({ onSendMessage, onReadMessage }: Props) => {
   const loading = messagesLoading || conversationsLoading;
 
   return (
-    <MessagesSectionContainer>
-      {loading && <Spinner color={themeColors.secondary} />}
+    <SectionBody borderLeft={`1px solid ${themeColors.highlight}`} pl={24}>
+      {loading && (
+        <Column height="100%">
+          <Spinner color={themeColors.secondary} />
+        </Column>
+      )}
       {error && (
         <ErrorAlert fullPage={false} errorText={i18nMessages.messagesError} />
       )}
+      {!loading && !error && !conversation && (
+        <IconInfo
+          maxWidth={NO_CONVERSATION_OPENED_INFO_MAX_WIDTH}
+          iconSrc={NoConversationOpenedIcon}
+          iconAlt={formatMessage(i18nMessages.noConversationOpenedIconAlt)}
+          message={formatMessage(i18nMessages.noConversationOpened)}
+        />
+      )}
       {!loading && !error && conversation && (
-        <>
+        <MessagesSectionContainer>
           <ChatMessageList
             currentInterlocutorId={currentInterlocutorId}
             messages={messages ?? []}
@@ -87,8 +108,8 @@ export const MessagesSection = ({ onSendMessage, onReadMessage }: Props) => {
             onSend={handleSend}
             disabled={conversation.archived || archivingConversation}
           />
-        </>
+        </MessagesSectionContainer>
       )}
-    </MessagesSectionContainer>
+    </SectionBody>
   );
 };

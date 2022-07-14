@@ -55,7 +55,21 @@ export default defineMessages({
   },
   noConversations: {
     id: `${scope}.noConversations`,
-    defaultMessage: "You don't have any conversations",
+    defaultMessage:
+      "It seems you don't have any conversations in inbox. Wait for messages from participant or go to the <bold>Archive</bold> to see archived conversations.",
+  },
+  noConversationsIconAlt: {
+    id: `${scope}.noConversationsIconAlt`,
+    defaultMessage: 'No conversations available icon',
+  },
+  noConversationOpened: {
+    id: `${scope}.noConversationOpened`,
+    defaultMessage:
+      'Please, <bold>select a conversation</bold> to talk with participant',
+  },
+  noConversationOpenedIconAlt: {
+    id: `${scope}.noConversationOpenedIconAlt`,
+    defaultMessage: 'Select a conversation icon',
   },
   noMessages: {
     id: `${scope}.noMessages`,

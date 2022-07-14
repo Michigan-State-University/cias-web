@@ -1,6 +1,5 @@
 import React from 'react';
-
-import { themeColors } from 'theme';
+import { useSelector } from 'react-redux';
 
 import {
   MessageSentDTO,
@@ -8,13 +7,14 @@ import {
   ConversationArchivedDTO,
 } from 'models/LiveChat';
 
-import { MessagesSection } from './containers/MessagesSection';
+import { makeSelectNoConversationsAvailable } from 'global/reducers/liveChat';
+
+import { MessagesSectionBody } from './containers/MessagesSectionBody';
 import MessagesSectionHeader from './containers/MessagesSectionHeader';
-import { ConversationsSection } from './containers/ConversationsSection';
+import { ConversationsSectionBody } from './containers/ConversationsSectionBody';
 import {
   NavigatorPanelGridRow,
   NavigatorPanelGridColumn,
-  SectionBody,
 } from './components/styled';
 import ConversationsSectionHeader from './components/ConversationsSectionHeader';
 
@@ -30,26 +30,32 @@ export const LiveChatNavigatorPanel = ({
   onSendMessage,
   onReadMessage,
   onArchivedConversation,
-}: Props) => (
-  <>
-    <NavigatorPanelGridRow nogutter>
-      <NavigatorPanelGridColumn xs={5}>
-        <ConversationsSectionHeader />
-        <SectionBody pb={16}>
-          <ConversationsSection />
-        </SectionBody>
-      </NavigatorPanelGridColumn>
-      <NavigatorPanelGridColumn xs={7}>
-        <MessagesSectionHeader onArchiveConversation={onArchivedConversation} />
-        <SectionBody borderLeft={`1px solid ${themeColors.highlight}`} pl={24}>
-          <MessagesSection
-            onSendMessage={onSendMessage}
-            onReadMessage={onReadMessage}
-          />
-        </SectionBody>
-      </NavigatorPanelGridColumn>
-    </NavigatorPanelGridRow>
-  </>
-);
+}: Props) => {
+  const noConversationsAvailable = useSelector(
+    makeSelectNoConversationsAvailable(),
+  );
+
+  return (
+    <>
+      <NavigatorPanelGridRow nogutter>
+        <NavigatorPanelGridColumn xs={noConversationsAvailable ? 12 : 5}>
+          <ConversationsSectionHeader />
+          <ConversationsSectionBody />
+        </NavigatorPanelGridColumn>
+        {!noConversationsAvailable && (
+          <NavigatorPanelGridColumn xs={7}>
+            <MessagesSectionHeader
+              onArchiveConversation={onArchivedConversation}
+            />
+            <MessagesSectionBody
+              onSendMessage={onSendMessage}
+              onReadMessage={onReadMessage}
+            />
+          </NavigatorPanelGridColumn>
+        )}
+      </NavigatorPanelGridRow>
+    </>
+  );
+};
 
 export default LiveChatNavigatorPanel;

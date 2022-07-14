@@ -27,6 +27,15 @@ export const makeSelectInterventionConversationsValues = () =>
 export const makeSelectConversations = () =>
   createSelector(selectLiveChatState, ({ conversations }) => conversations);
 
+export const makeSelectNoConversationsAvailable = () =>
+  createSelector(
+    makeSelectLiveChatLoader('conversations'),
+    makeSelectLiveChatError('conversations'),
+    makeSelectInterventionConversationsValues(),
+    (loading, error, interventionConversationsValues) =>
+      !loading && !error && !interventionConversationsValues.length,
+  );
+
 export const makeSelectOpenedConversationId = () =>
   createSelector(
     selectLiveChatState,
