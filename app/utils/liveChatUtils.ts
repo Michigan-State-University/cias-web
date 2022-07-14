@@ -5,10 +5,10 @@ export const formatInterlocutorName = (
 ) => {
   if (!interlocutor) return '?';
 
-  const { id, firstName, lastName } = interlocutor;
-  const formattedName = `${firstName ?? ''} ${lastName ?? ''}`;
+  const { firstName, lastName, userId } = interlocutor;
+  const formattedName = `${firstName ?? ''} ${lastName ?? ''}`.trim();
 
-  if (formattedName.trim().length === 0) return `ID: ${id}`;
+  if (formattedName.length === 0) return `ID: ${userId}`;
 
   return formattedName;
 };

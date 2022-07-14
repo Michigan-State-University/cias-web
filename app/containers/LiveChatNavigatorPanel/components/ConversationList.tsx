@@ -1,17 +1,14 @@
 import React, { memo } from 'react';
-import { useIntl } from 'react-intl';
 
 import { Conversation, InterventionConversation } from 'models/LiveChat';
 
 import useRefreshComponent from 'utils/useRefreshComponent';
 
 import Column from 'components/Column';
-import Text from 'components/Text';
 
 import { ConversationListItem } from './ConversationListItem';
 import { MESSAGE_TIMESTAMP_REFRESH_PERIOD } from '../constants';
 
-import i18nMessages from '../messages';
 import InterventionConversationCollapse from './InterventionConversationsCollapse';
 
 export type Props = {
@@ -31,8 +28,6 @@ const ConversationList = ({
   openConversation,
   interventionConversations,
 }: Props) => {
-  const { formatMessage } = useIntl();
-
   useRefreshComponent(MESSAGE_TIMESTAMP_REFRESH_PERIOD);
 
   const renderConversationListItem = (conversationId: string) => (
@@ -47,9 +42,6 @@ const ConversationList = ({
 
   return (
     <Column overflow="auto" maxHeight="100%" pr={16}>
-      {!interventionConversations.length && (
-        <Text>{formatMessage(i18nMessages.noConversations)}</Text>
-      )}
       {interventionConversations.map(
         ({ interventionId, conversationIds, interventionName }, index) => (
           <InterventionConversationCollapse

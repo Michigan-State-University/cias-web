@@ -110,7 +110,7 @@ export const removeParticipantLinkSuccess = createAction(
 
 export const removeParticipantLinkError = createAction(
   REMOVE_PARTICIPANT_LINK_ERROR,
-  (action) => (error: ApiError) => action({ error }),
+  (action) => (linkId: string, error: ApiError) => action({ linkId, error }),
 );
 
 export const updateParticipantLinkRequest = createAction(

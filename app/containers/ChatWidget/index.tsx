@@ -3,17 +3,20 @@ import { useSelector, useDispatch } from 'react-redux';
 import { useInjectReducer } from 'redux-injectors';
 
 import {
-  makeSelectLiveChatEnabled,
+  makeSelectLiveChatInterventionId,
   ChatWidgetReducer,
   chatWidgetReducerKey,
-  setChatEnabled,
+  setChatDisabled,
 } from 'global/reducers/chatWidget';
 
-import ChatIcon from './ChatIcon';
+import { LiveChatParticipantPanel } from 'containers/LiveChatParticipantPanel';
+
 import { Container } from './styled';
 
 export const ChatWidget = () => {
-  const liveChatEnabled = useSelector(makeSelectLiveChatEnabled());
+  const liveChatInterventionId = useSelector(
+    makeSelectLiveChatInterventionId(),
+  );
 
   const globalDispatch = useDispatch();
 
@@ -22,16 +25,16 @@ export const ChatWidget = () => {
 
   useEffect(
     () => () => {
-      globalDispatch(setChatEnabled(false));
+      globalDispatch(setChatDisabled());
     },
     [],
   );
 
-  if (!liveChatEnabled) return null;
+  if (!liveChatInterventionId) return null;
 
   return (
     <Container>
-      <ChatIcon online />
+      <LiveChatParticipantPanel interventionId={liveChatInterventionId} />
     </Container>
   );
 };

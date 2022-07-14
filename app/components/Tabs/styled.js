@@ -2,11 +2,12 @@ import styled from 'styled-components';
 import { motion } from 'framer-motion';
 
 import { colors, fontWeights, themeColors } from 'theme';
-import { flex, layout, margin } from '../BaseComponentStyles';
+import { flex, layout, margin, style, text } from '../BaseComponentStyles';
 
 export const TabsContainer = styled.div`
   ${flex};
   ${layout};
+  ${margin};
 `;
 
 export const ContentContainer = styled.div`
@@ -20,18 +21,18 @@ export const LabelContainer = styled.div`
   margin: 0 10px;
   padding-bottom: 7px;
   div {
+    ${style};
+    ${text};
     cursor: pointer;
-    ${({ emphasizeActiveLink, isActive }) => `
-      color: ${
-        emphasizeActiveLink && isActive
-          ? themeColors.secondary
-          : themeColors.text
-      } !important};
-      font-weight: ${
-        emphasizeActiveLink && isActive ? fontWeights.bold : fontWeights.regular
-      } !important;
+    ${({ emphasizeActiveLink, isActive }) =>
+      emphasizeActiveLink && isActive
+        ? `
+      color: ${themeColors.text} !important;
+      font-weight: ${fontWeights.bold} !important;
+    `
+        : `
+      font-weight: ${fontWeights.regular} !important;
     `}
-  }
 `;
 
 export const LinkContainer = styled(LabelContainer)`

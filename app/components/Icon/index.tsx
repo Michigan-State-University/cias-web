@@ -9,7 +9,7 @@ import { Props as SVGProperies } from 'react-inlinesvg';
 
 import * as Styled from './styled';
 
-type Props = {
+export type Props = {
   src: SVGElement | string;
   alt?: string;
 } & Omit<SVGProperies, 'src'> &

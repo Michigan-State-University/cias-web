@@ -1,7 +1,9 @@
 import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
+import { useIntl } from 'react-intl';
 
 import { themeColors } from 'theme';
+import NoConversationsIcon from 'assets/svg/no-conversations.svg';
 
 import {
   closeConversation,
@@ -10,6 +12,7 @@ import {
   makeSelectInterventionConversationsValues,
   makeSelectLiveChatError,
   makeSelectLiveChatLoader,
+  makeSelectNoConversationsAvailable,
   makeSelectOpenedConversationId,
   makeSelectUnreadConversationsCounts,
   openConversation,
@@ -18,15 +21,23 @@ import { makeSelectUserId } from 'global/reducers/auth';
 
 import Spinner from 'components/Spinner';
 import ErrorAlert from 'components/ErrorAlert';
+import IconInfo from 'components/IconInfo';
+import Column from 'components/Column';
 
 import ConversationList from '../components/ConversationList';
+import { SectionBody } from '../components/styled';
 import i18nMessages from '../messages';
+import { NO_CONVERSATIONS_INFO_MAX_WIDTH } from '../constants';
 
-export const ConversationsSection = () => {
+export const ConversationsSectionBody = () => {
+  const { formatMessage } = useIntl();
   const dispatch = useDispatch();
 
   const interventionConversationValues = useSelector(
     makeSelectInterventionConversationsValues(),
+  );
+  const noConversationsAvailable = useSelector(
+    makeSelectNoConversationsAvailable(),
   );
   const conversations = useSelector(makeSelectConversations());
   const loading = useSelector(makeSelectLiveChatLoader('conversations'));
@@ -41,19 +52,6 @@ export const ConversationsSection = () => {
     dispatch(fetchConversationsRequest());
   }, []);
 
-  useEffect(() => {
-    if (loading || error) return;
-
-    const firstInterventionConversation = interventionConversationValues[0];
-    if (firstInterventionConversation) {
-      const firstConversation =
-        firstInterventionConversation.conversationIds[0];
-      if (firstConversation) {
-        dispatch(openConversation(firstConversation));
-      }
-    }
-  }, [loading, error]);
-
   useEffect(
     () => () => {
       dispatch(closeConversation());
@@ -66,15 +64,27 @@ export const ConversationsSection = () => {
   };
 
   return (
-    <>
-      {loading && <Spinner color={themeColors.secondary} />}
+    <SectionBody pb={16}>
+      {loading && (
+        <Column height="100%">
+          <Spinner color={themeColors.secondary} />
+        </Column>
+      )}
       {error && (
         <ErrorAlert
           fullPage={false}
           errorText={i18nMessages.conversationsError}
         />
       )}
-      {!loading && !error && (
+      {noConversationsAvailable && (
+        <IconInfo
+          maxWidth={NO_CONVERSATIONS_INFO_MAX_WIDTH}
+          iconSrc={NoConversationsIcon}
+          iconAlt={formatMessage(i18nMessages.noConversationsIconAlt)}
+          message={formatMessage(i18nMessages.noConversations)}
+        />
+      )}
+      {!loading && !error && !noConversationsAvailable && (
         <ConversationList
           interventionConversations={interventionConversationValues}
           conversations={conversations}
@@ -84,6 +94,6 @@ export const ConversationsSection = () => {
           openConversation={handleOpenConversation}
         />
       )}
-    </>
+    </SectionBody>
   );
 };

@@ -55,7 +55,21 @@ export default defineMessages({
   },
   noConversations: {
     id: `${scope}.noConversations`,
-    defaultMessage: "You don't have any active conversations",
+    defaultMessage:
+      "It seems you don't have any conversations in inbox. Wait for messages from participant or go to the <bold>Archive</bold> to see archived conversations.",
+  },
+  noConversationsIconAlt: {
+    id: `${scope}.noConversationsIconAlt`,
+    defaultMessage: 'No conversations available icon',
+  },
+  noConversationOpened: {
+    id: `${scope}.noConversationOpened`,
+    defaultMessage:
+      'Please, <bold>select a conversation</bold> to talk with participant',
+  },
+  noConversationOpenedIconAlt: {
+    id: `${scope}.noConversationOpenedIconAlt`,
+    defaultMessage: 'Select a conversation icon',
   },
   noMessages: {
     id: `${scope}.noMessages`,
@@ -64,5 +78,26 @@ export default defineMessages({
   interventionId: {
     id: `${scope}.interventionId`,
     defaultMessage: 'Intervention ID',
+  },
+  archive: {
+    id: `${scope}.archive`,
+    defaultMessage: 'Archive',
+  },
+  archiveIconAlt: {
+    id: `${scope}.archiveIconAlt`,
+    defaultMessage: 'Archive icon',
+  },
+  archiveConfirmationModalTitle: {
+    id: `${scope}.archiveConfirmationModalTitle`,
+    defaultMessage: 'Archive conversation',
+  },
+  archiveConfirmationModalMessage: {
+    id: `${scope}.archiveConfirmationModalMessage`,
+    defaultMessage:
+      'Are you sure you want to archive this conversation? This operation is irreversible.',
+  },
+  archived: {
+    id: `${scope}.archived`,
+    defaultMessage: 'Archived',
   },
 });

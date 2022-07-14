@@ -9,6 +9,7 @@ export type ParticipantLink = {
   id: string;
   displayName: string;
   url: string;
+  deleting?: boolean;
 };
 
 export type NoNavigatorAvailableData = {

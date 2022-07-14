@@ -3,7 +3,7 @@ import styled from 'styled-components';
 import Row from 'components/Row';
 import Comment from 'components/Comment';
 
-import { elements, colors, hexToRgb } from 'theme';
+import { elements, colors, hexToRgb, ZIndex } from 'theme';
 import { maxQueries } from 'components/Container/mediaQuery';
 
 export const NavbarStyled = styled.div`
@@ -15,7 +15,7 @@ export const NavbarStyled = styled.div`
   box-shadow: 0px 4px 10px rgba(227, 238, 251, 0.8);
   display: flex;
   align-items: center;
-  z-index: 10;
+  z-index: ${ZIndex.NAVBAR};
   height: ${elements.navbarHeight}px;
 
   .user-name-info {

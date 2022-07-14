@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useMemo } from 'react';
 import { useIntl } from 'react-intl';
 
 import Box from 'components/Box';
@@ -10,25 +10,44 @@ import { themeColors } from 'theme';
 
 import AirplaneIcon from 'assets/svg/paper-airplane2.svg';
 
-import i18nMessages from '../messages';
+import i18nMessages from './messages';
 import { StyledTextArea } from './styled';
+import { MESSAGE_MAX_LENGTH } from './constants';
 
 type Props = {
   value: string;
+  disabled?: boolean;
   onChange: (value: string) => void;
   onSend?: () => void;
-  error?: string;
 };
 
-export const MessageInput = ({ value, onChange, onSend, error }: Props) => {
+export const ChatMessageInput = ({
+  value,
+  disabled,
+  onChange,
+  onSend,
+}: Props) => {
   const { formatMessage } = useIntl();
+
+  const error = useMemo(() => {
+    if (value.length > MESSAGE_MAX_LENGTH)
+      return formatMessage(i18nMessages.messageTooLong, {
+        maxLength: MESSAGE_MAX_LENGTH,
+      });
+  }, [value]);
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     onChange(e.target.value);
   };
 
   const handleKeyDown = (event: React.KeyboardEvent) => {
-    if (onSend && value.trim() && event.key === 'Enter') {
+    if (
+      onSend &&
+      value.trim() &&
+      !error &&
+      !disabled &&
+      event.key === 'Enter'
+    ) {
       onSend();
       event.preventDefault();
     }
@@ -43,6 +62,7 @@ export const MessageInput = ({ value, onChange, onSend, error }: Props) => {
           value={value}
           onKeyDown={onSend && handleKeyDown}
           error={Boolean(error)}
+          disabled={disabled}
         />
         <Box
           position="absolute"
@@ -54,7 +74,7 @@ export const MessageInput = ({ value, onChange, onSend, error }: Props) => {
             onClick={onSend}
             src={AirplaneIcon}
             title={formatMessage(i18nMessages.inputSendIconTitle)}
-            disabled={Boolean(error)}
+            disabled={Boolean(error) || disabled}
           />
         </Box>
       </Box>
@@ -69,4 +89,4 @@ export const MessageInput = ({ value, onChange, onSend, error }: Props) => {
   );
 };
 
-export default MessageInput;
+export default ChatMessageInput;

@@ -27,6 +27,15 @@ export const makeSelectInterventionConversationsValues = () =>
 export const makeSelectConversations = () =>
   createSelector(selectLiveChatState, ({ conversations }) => conversations);
 
+export const makeSelectNoConversationsAvailable = () =>
+  createSelector(
+    makeSelectLiveChatLoader('conversations'),
+    makeSelectLiveChatError('conversations'),
+    makeSelectInterventionConversationsValues(),
+    (loading, error, interventionConversationsValues) =>
+      !loading && !error && !interventionConversationsValues.length,
+  );
+
 export const makeSelectOpenedConversationId = () =>
   createSelector(
     selectLiveChatState,
@@ -48,18 +57,29 @@ export const makeSelectOpenedConversationMessages = () =>
     return messages[openedConversationId];
   });
 
+export const makeSelectGuestInterlocutorId = () =>
+  createSelector(
+    selectLiveChatState,
+    ({ guestInterlocutorId }) => guestInterlocutorId,
+  );
+
 export const makeSelectCurrentInterlocutorId = () =>
   createSelector(
     makeSelectOpenedConversation(),
     makeSelectUserId(),
-    (openedConversation, currentUserId) => {
+    makeSelectGuestInterlocutorId(),
+    (openedConversation, currentUserId, guestInterlocutorId) => {
       if (isNil(openedConversation)) return null;
-      if (isNil(currentUserId)) return null;
-      return (
-        Object.values(openedConversation.liveChatInterlocutors).find(
-          ({ userId }) => userId === currentUserId,
-        )?.id ?? null
-      );
+
+      if (currentUserId) {
+        return (
+          Object.values(openedConversation.liveChatInterlocutors).find(
+            ({ userId }) => userId === currentUserId,
+          )?.id ?? null
+        );
+      }
+
+      return guestInterlocutorId;
     },
   );
 
@@ -88,4 +108,16 @@ export const makeSelectUnreadConversationsCounts = () =>
         },
         {} as Record<InterventionConversation['interventionId'], number>,
       ),
+  );
+
+export const makeSelectCreatingConversation = () =>
+  createSelector(
+    selectLiveChatState,
+    ({ creatingConversation }) => creatingConversation,
+  );
+
+export const makeSelectArchivingConversation = () =>
+  createSelector(
+    selectLiveChatState,
+    ({ archivingConversation }) => archivingConversation,
   );

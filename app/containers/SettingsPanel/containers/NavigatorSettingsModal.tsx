@@ -23,7 +23,7 @@ import Tabs from 'components/Tabs';
 import ErrorAlert from 'components/ErrorAlert';
 import Spinner from 'components/Spinner';
 
-import { themeColors } from 'theme';
+import { themeColors, colors } from 'theme';
 import {
   NoNavigatorAvailableData,
   ParticipantLink,
@@ -121,7 +121,13 @@ const NavigatorSettingsModal = ({ interventionId }: Props) => {
 
   return (
     // @ts-ignore
-    <Tabs withBottomBorder emphasizeActiveLink>
+    <Tabs
+      mt={30}
+      withBottomBorder
+      emphasizeActiveLink
+      labelStyle={{ color: colors.slateGray }}
+      containerProps={{ mb: 0, mt: 40 }}
+    >
       {/* @ts-ignore */}
       <div label={formatMessage(messages.navigators)}>
         <NavigatorModalLayout

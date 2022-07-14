@@ -2,26 +2,34 @@ import React from 'react';
 import { useIntl } from 'react-intl';
 
 import Icon from 'components/Icon';
-import Box from 'components/Box';
 
 import chatIconOnline from 'assets/svg/chat-active.svg';
 import chatIconOffline from 'assets/svg/chat-inactive.svg';
 
-import messages from './messages';
+import messages from '../messages';
+import { ChatIconButton } from './styled';
 
 type Props = {
   online: boolean;
+  panelMinimized: boolean;
+  onClick: () => void;
 };
 
-export const ChatIcon = ({ online }: Props) => {
+export const ChatIcon = ({ online, panelMinimized, onClick }: Props) => {
   const { formatMessage } = useIntl();
+
   return (
-    <Box cursor="pointer">
+    <ChatIconButton
+      onClick={onClick}
+      title={formatMessage(
+        panelMinimized ? messages.openPanelTitle : messages.minimizePanelTitle,
+      )}
+    >
       <Icon
         src={online ? chatIconOnline : chatIconOffline}
         alt={formatMessage(messages.iconAlt)}
       />
-    </Box>
+    </ChatIconButton>
   );
 };
 

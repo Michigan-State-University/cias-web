@@ -1,7 +1,7 @@
 import produce from 'immer';
 import { getType } from 'typesafe-actions';
 
-import { deleteItemById } from 'utils/reduxUtils';
+import { deleteItemById, updateItemById } from 'utils/reduxUtils';
 
 import {
   fetchNavigatorSetupError,
@@ -94,6 +94,11 @@ export const navigatorSetupReducer = (
         break;
 
       case getType(removeParticipantLinkRequest):
+        updateItemById(
+          draft.navigatorData?.participantLinks || [],
+          action.payload.linkId,
+          { deleting: true },
+        );
         draft.loaders.updatingLinks = true;
         break;
       case getType(removeParticipantLinkSuccess):
@@ -106,6 +111,11 @@ export const navigatorSetupReducer = (
         }
         break;
       case getType(removeParticipantLinkError):
+        updateItemById(
+          draft.navigatorData?.participantLinks || [],
+          action.payload.linkId,
+          { deleting: false },
+        );
         draft.loaders.updatingLinks = false;
         break;
       case getType(inviteNavigatorsByEmailRequest):

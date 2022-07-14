@@ -75,6 +75,7 @@
     "@formatjs/intl-numberformat": "^6.2.5",
     "@formatjs/intl-pluralrules": "^4.0.13",
     "@formatjs/intl-relativetimeformat": "^8.1.4",
+    "@rehooks/local-storage": "^2.4.4",
     "@sentry/react": "^6.2.4",
     "axios": "^0.26.0",
     "axios-retry": "^3.2.4",

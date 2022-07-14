@@ -2,31 +2,11 @@ import styled from 'styled-components';
 import { Col as GCol, Row as GRow } from 'react-grid-system';
 import Color from 'color';
 
-import { boxShadows, borders, colors, themeColors } from 'theme';
+import { colors, themeColors } from 'theme';
 
-import TextArea from 'components/Input/TextArea';
 import Box from 'components/Box';
 
 import { CHAT_WIDTH, HEADER_HEIGHT } from '../constants';
-
-export const StyledTextArea = styled(TextArea)`
-  padding: 12px 42px 12px 16px;
-  font-size: 13px;
-  line-height: 19px;
-  width: 100%;
-  height: 100%;
-  box-shadow: ${boxShadows.selago};
-  border-radius: 8px;
-  border-width: ${borders.borderWidth};
-  border-style: ${borders.borderStyle};
-  border-color: ${({ error }) =>
-    error ? themeColors.warning : colors.beauBlue};
-
-  &:focus {
-    border-color: ${({ error }) =>
-      error ? themeColors.warning : themeColors.primary};
-  }
-`;
 
 export const NavigatorPanelGridRow = styled(GRow)`
   background-color: ${colors.white};
@@ -43,11 +23,16 @@ export const NavigatorPanelGridColumn = styled(GCol)`
   height: 100%;
 `;
 
-export const SectionHeader = styled.div`
+export const SectionHeaderContainer = styled(Box)`
   height: ${HEADER_HEIGHT};
-  padding: 24px 0;
+  padding-top: 24px;
+  padding-bottom: 24px;
   border-bottom: 1px solid ${themeColors.highlight};
+  border-radius: 0;
   text-align: left;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
 `;
 
 export const SectionBody = styled(Box)`

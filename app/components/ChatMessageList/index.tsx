@@ -1,8 +1,8 @@
-import React, { memo, useCallback, useMemo } from 'react';
+import React, { memo, useCallback, useEffect, useMemo } from 'react';
 import findLastIndex from 'lodash/findLastIndex';
 import { useIntl } from 'react-intl';
 
-import { Interlocutor, Message } from 'models/LiveChat';
+import { Interlocutor, Message, MessageReadDTO } from 'models/LiveChat';
 
 import { formatInterlocutorName } from 'utils/liveChatUtils';
 
@@ -10,20 +10,20 @@ import Box from 'components/Box';
 import ChatMessage from 'components/ChatMessage';
 import Text from 'components/Text';
 
-import i18nMessages from '../messages';
+import i18nMessages from './messages';
 
 export type Props = {
   currentInterlocutorId: Nullable<string>;
   messages: Message[];
   interlocutors: Record<Interlocutor['id'], Interlocutor>;
-  newestOtherUserMessageIndex?: number;
+  onReadMessage: (messageReadDTO: MessageReadDTO) => void;
 };
 
-const MessageList = ({
+const ChatMessageList = ({
   currentInterlocutorId,
   messages,
   interlocutors,
-  newestOtherUserMessageIndex = -1,
+  onReadMessage,
 }: Props) => {
   const { formatMessage } = useIntl();
 
@@ -37,6 +37,34 @@ const MessageList = ({
     }
     return false;
   };
+
+  const newestOtherUserMessageIndex = useMemo(() => {
+    if (!messages || !currentInterlocutorId) return -1;
+    return findLastIndex(
+      messages,
+      ({ interlocutorId }) => interlocutorId !== currentInterlocutorId,
+    );
+  }, [messages, currentInterlocutorId]);
+
+  const readNewestOtherUserMessage = useCallback(() => {
+    if (!messages || newestOtherUserMessageIndex === -1) {
+      return;
+    }
+
+    const { id, conversationId, isRead } =
+      messages[newestOtherUserMessageIndex];
+
+    if (!isRead) {
+      onReadMessage({
+        conversationId,
+        messageId: id,
+      });
+    }
+  }, [newestOtherUserMessageIndex]);
+
+  useEffect(() => {
+    readNewestOtherUserMessage();
+  }, [readNewestOtherUserMessage]);
 
   const newestReadCurrentUserMessageIndex = useMemo(
     () =>
@@ -104,4 +132,4 @@ const MessageList = ({
   );
 };
 
-export default memo(MessageList);
+export default memo(ChatMessageList);

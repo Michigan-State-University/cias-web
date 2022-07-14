@@ -180,7 +180,7 @@ export function App({ user, fetchSelfDetails }) {
   };
 
   return (
-    <SocketProvider user={user}>
+    <SocketProvider>
       <RolesManagerContext.Provider value={{ userRoles: user?.roles || [] }}>
         <ApiQueryMessageHandler />
         <IdleTimer />

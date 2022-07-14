@@ -5,6 +5,7 @@ import {
   MessageReadDTO,
   ConversationCreatedDTO,
   MessageSentDTO,
+  ConversationArchivedDTO,
 } from 'models/LiveChat';
 
 import { SocketAction, SocketMessage } from 'utils/useSocket';
@@ -31,11 +32,17 @@ export type ConversationCreatedSocketMessage = SocketMessage<
   ApiData<DenormalizedConversation>
 >;
 
+export type ConversationArchivedSocketMessage = SocketMessage<
+  ConversationChannelMessageTopic.CONVERSATION_ARCHIVED,
+  ConversationArchivedDTO
+>;
+
 // Create a union type with any new SocketMessage type
 export type ConversationChannelMessage =
   | MessageSentSocketMessage
   | MessageReadSocketMessage
-  | ConversationCreatedSocketMessage;
+  | ConversationCreatedSocketMessage
+  | ConversationArchivedSocketMessage;
 
 // SOCKET ACTIONS
 
@@ -54,8 +61,14 @@ export type OnConversationCreatedSocketAction = SocketAction<
   ConversationCreatedDTO
 >;
 
+export type OnConversationArchivedSocketAction = SocketAction<
+  ConversationChannelActionName.ON_CONVERSATION_ARCHIVED,
+  ConversationArchivedDTO
+>;
+
 // Create a union type with any new SocketAction type
 export type ConversationChannelAction =
   | OnMessageSentSocketAction
   | OnMessageReadSocketAction
-  | OnConversationCreatedSocketAction;
+  | OnConversationCreatedSocketAction
+  | OnConversationArchivedSocketAction;

@@ -1,12 +1,12 @@
 import produce from 'immer';
 import { Reducer } from 'redux';
 import { getType } from 'typesafe-actions';
-import { setChatEnabled } from './actions';
+import { setChatEnabled, setChatDisabled } from './actions';
 
 import { ChatWidgetAction, ChatWidgetState } from './types';
 
-export const initialState = {
-  liveChatEnabled: false,
+export const initialState: ChatWidgetState = {
+  interventionId: null,
 };
 
 export const chatWidgetReducerKey = 'chatWidget';
@@ -19,7 +19,10 @@ const ChatWidgetReducer: Reducer<ChatWidgetState, ChatWidgetAction> = (
   produce(state, (draft) => {
     switch (type) {
       case getType(setChatEnabled):
-        draft.liveChatEnabled = payload;
+        draft.interventionId = payload.interventionId;
+        break;
+      case getType(setChatDisabled):
+        draft.interventionId = null;
         break;
     }
   });

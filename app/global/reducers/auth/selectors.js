@@ -36,4 +36,4 @@ export const makeSelectVerificationSuccess = () =>
   createSelector(selectAuth, (authState) => authState.verificationCodeSuccess);
 
 export const makeSelectUserId = () =>
-  createSelector(selectAuth, (authState) => authState.user.id);
+  createSelector(selectAuth, (authState) => authState.user?.id);

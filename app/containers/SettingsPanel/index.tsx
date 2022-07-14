@@ -131,6 +131,8 @@ const SettingsPanel = ({
         width: NAVIGATOR_SETTINGS_MODAL_WIDTH,
         height: 722,
         maxWidth: NAVIGATOR_SETTINGS_MODAL_WIDTH,
+        py: 32,
+        px: 32,
       },
     });
 
@@ -235,15 +237,16 @@ const SettingsPanel = ({
       <StyledBox>
         <Column width="100%" padding={35}>
           <Box display="flex" align="center" mb={48}>
-            <H2 mr={24}>
-              <FormattedMessage {...messages.useNavigator} />
-            </H2>
             <Switch
               onToggle={updateNaviagtorSetting}
               checked={!!intervention?.liveChatEnabled}
               id="use-navigator-switch"
               disabled={!changingChatSettingsPossible}
-            />
+            >
+              <H2 mr={24}>
+                <FormattedMessage {...messages.useNavigator} />
+              </H2>
+            </Switch>
             {intervention?.liveChatEnabled && (
               <Img
                 onClick={openNavigatorSettingModal}

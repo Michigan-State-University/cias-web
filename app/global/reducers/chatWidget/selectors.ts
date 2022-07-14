@@ -9,5 +9,5 @@ import { ChatWidgetState } from './types';
 const selectChatWidgetState = (rootState: RootState): ChatWidgetState =>
   rootState[chatWidgetReducerKey] || initialState;
 
-export const makeSelectLiveChatEnabled = () =>
-  createSelector(selectChatWidgetState, (substate) => substate.liveChatEnabled);
+export const makeSelectLiveChatInterventionId = () =>
+  createSelector(selectChatWidgetState, (substate) => substate.interventionId);

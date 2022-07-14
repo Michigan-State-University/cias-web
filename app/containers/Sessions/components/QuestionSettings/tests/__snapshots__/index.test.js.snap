@@ -115,12 +115,12 @@ exports[`<QuestionSettings /> Should render and match the snapshot 1`] = `
   bottom: -3px;
   margin: 0 10px;
   padding-bottom: 7px;
-  font-weight: 400 !important;
 }
 
 .c9 div {
+  color: #2F3850;
   cursor: pointer;
-  color: #2F3850 !important;
+  font-weight: 400 !important;
 }
 
 .c10 {
