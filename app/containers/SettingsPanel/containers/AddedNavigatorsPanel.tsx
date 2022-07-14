@@ -2,6 +2,7 @@ import React from 'react';
 import { useIntl } from 'react-intl';
 
 import { colors } from 'theme';
+import { InterventionNavigator } from 'models/NavigatorSetup';
 import minus from 'assets/svg/grey-minus.svg';
 
 import Box from 'components/Box';
@@ -17,7 +18,7 @@ const SINGLE_ITEM_HEIGHT = 60;
 const ITEM_MARGIN = 8;
 
 type Props = {
-  interventionNavigators: any[];
+  interventionNavigators: InterventionNavigator[];
   removeInterventionNavigator: (interventionNavigatorId: string) => void;
 };
 
@@ -36,7 +37,7 @@ const AddedNavigatorPanel = ({
         </Text>
       )}
       {interventionNavigators.map(
-        ({ id, user: { avatarUrl, firstName, lastName, email } }, index) => (
+        ({ id, avatarUrl, email, firstName, lastName }, index) => (
           <Row
             justify="between"
             align="center"
@@ -50,7 +51,7 @@ const AddedNavigatorPanel = ({
               <UserAvatar
                 height={32}
                 width={32}
-                avatar={avatarUrl}
+                avatar={avatarUrl || ''}
                 firstName={firstName}
                 lastName={lastName}
               />

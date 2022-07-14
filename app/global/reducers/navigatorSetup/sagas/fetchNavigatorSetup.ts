@@ -5,6 +5,7 @@ import { jsonApiToArray, jsonApiToObject } from 'utils/jsonApiMapper';
 
 import { ApiError } from 'models/Api';
 import {
+  InterventionNavigator,
   NoNavigatorAvailableData,
   NotAcceptedNavigators,
 } from 'models/NavigatorSetup';
@@ -16,95 +17,12 @@ import {
   fetchNavigatorSetupSuccess,
 } from '../actions';
 
-const NAVIGATOR_ACCOUNTS = [
-  {
-    id: 1,
-    user: {
-      firstName: 'test',
-      lastName: 'user',
-      avatarUrl: '',
-      email: 'Test@test.pl',
-    },
-  },
-  {
-    id: 2,
-    user: {
-      firstName: 'Other',
-      lastName: 'Test',
-      avatarUrl: '',
-      email: 'Test2@test.pl',
-    },
-  },
-  {
-    id: 3,
-    user: {
-      firstName: 'Michał',
-      lastName: 'Smierc',
-      avatarUrl: '',
-      email: 'Test3@test.pl',
-    },
-  },
-  {
-    id: 4,
-    user: {
-      firstName: 'Lubie',
-      lastName: 'Placki',
-      avatarUrl: '',
-      email: 'Test4@test.pl',
-    },
-  },
-  {
-    id: 5,
-    user: {
-      firstName: 'Lubie',
-      lastName: 'Placki',
-      avatarUrl: '',
-      email: 'Test4@test.pl',
-    },
-  },
-  {
-    id: 6,
-    user: {
-      firstName: 'Lubie',
-      lastName: 'Placki',
-      avatarUrl: '',
-      email: 'Test4@test.pl',
-    },
-  },
-  {
-    id: 7,
-    user: {
-      firstName: 'Lubie',
-      lastName: 'Placki',
-      avatarUrl: '',
-      email: 'Test4@test.pl',
-    },
-  },
-  {
-    id: 8,
-    user: {
-      firstName: 'Lubie',
-      lastName: 'Placki',
-      avatarUrl: '',
-      email: 'Test4@test.pl',
-    },
-  },
-  {
-    id: 9,
-    user: {
-      firstName: 'Lubie',
-      lastName: 'Placki',
-      avatarUrl: '',
-      email: 'Test4@test.pl',
-    },
-  },
-];
-
 export function* fetchNavigatorSetup({
   payload: { interventionId },
 }: ReturnType<typeof fetchNavigatorSetupRequest>) {
   const noNavigatorsUrl = `/v1/live_chat/intervention/${interventionId}/navigator_setup`;
   const notAcceptedNavigatorsUrl = `/v1/interventions/${interventionId}/navigator_invitations`;
+  const interventionNavigatorUrl = `/v1/live_chat/intervention/${interventionId}/navigators`;
   try {
     const { data: noNavigatorsData } = yield call(axios.get, noNavigatorsUrl);
     const noNavigatorAvailableData = jsonApiToObject(
@@ -120,11 +38,20 @@ export function* fetchNavigatorSetup({
       'navigatorInvitation',
     ) as NotAcceptedNavigators[];
 
+    const { data: interventionNavigatorsData } = yield call(
+      axios.get,
+      interventionNavigatorUrl,
+    );
+    const interventionNavigators = jsonApiToArray(
+      interventionNavigatorsData,
+      'navigator',
+    ) as InterventionNavigator[];
+
     yield put(
       fetchNavigatorSetupSuccess(
         noNavigatorAvailableData,
         notAcceptedNavigators,
-        NAVIGATOR_ACCOUNTS,
+        interventionNavigators,
       ),
     );
   } catch (error) {

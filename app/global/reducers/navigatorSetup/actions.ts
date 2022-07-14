@@ -2,6 +2,7 @@ import { createAction } from 'typesafe-actions';
 
 import { ApiError } from 'models/Api';
 import {
+  InterventionNavigator,
   NoNavigatorAvailableData,
   NotAcceptedNavigators,
   ParticipantLink,
@@ -42,7 +43,7 @@ export const fetchNavigatorSetupSuccess = createAction(
     (
       noNavigatorsData: NoNavigatorAvailableData,
       notAcceptedNavigators: NotAcceptedNavigators[],
-      interventionNavigators: any[],
+      interventionNavigators: InterventionNavigator[],
     ) =>
       action({
         noNavigatorsData,
