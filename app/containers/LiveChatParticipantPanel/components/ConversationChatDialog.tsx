@@ -79,6 +79,13 @@ const ConversationChatDialog = ({
         )}
         {creatingConversation && <Spinner color={themeColors.secondary} />}
       </Column>
+      {conversation?.archived && (
+        <Column py={24}>
+          <Text fontSize={12} fontWeight="medium" textAlign="center">
+            {formatMessage(i18nMessages.conversationArchived)}
+          </Text>
+        </Column>
+      )}
       <ChatMessageInput
         value={message}
         onChange={setMessage}

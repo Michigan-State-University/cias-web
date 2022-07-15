@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 
-import { boxShadows, borders, colors, themeColors } from 'theme';
+import { borders, colors, themeColors } from 'theme';
 
 import TextArea from 'components/Input/TextArea';
 
@@ -10,7 +10,7 @@ export const StyledTextArea = styled(TextArea)`
   line-height: 19px;
   width: 100%;
   height: 100%;
-  box-shadow: ${boxShadows.selago};
+  box-shadow: 0 4px 20px ${colors.selago};
   border-radius: 8px;
   border-width: ${borders.borderWidth};
   border-style: ${borders.borderStyle};

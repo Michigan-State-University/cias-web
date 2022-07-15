@@ -25,4 +25,8 @@ export default defineMessages({
     defaultMessage:
       'Write a message to start a new conversation with navigator',
   },
+  conversationArchived: {
+    id: `${scope}.conversationArchived`,
+    defaultMessage: '- Navigator ended this conversation -',
+  },
 });
