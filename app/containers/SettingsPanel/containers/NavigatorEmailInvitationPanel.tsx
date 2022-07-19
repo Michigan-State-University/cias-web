@@ -10,24 +10,23 @@ import H3 from 'components/H3';
 import Text from 'components/Text';
 import Row from 'components/Row';
 import ChipsInput from 'components/Input/ChipsInput';
-import Button from 'components/Button';
-import Img from 'components/Img';
+import Button, { ImageButton } from 'components/Button';
 
-import { NotAcceptedNavigators } from 'models/NavigatorSetup';
+import { PendingNavigatorInvitations } from 'models/NavigatorSetup';
 import messages from '../messages';
 
 const SINGLE_EMAIL_HEIGHT = 44;
 const ITEM_MARGIN = 8;
 
 type Props = {
-  notAcceptedNavigators: NotAcceptedNavigators[];
+  pendingNavigatorInvitations: PendingNavigatorInvitations[];
   inviteNavigatorsByEmail: (emails: string[]) => void;
   removeNavigatorEmailInvitation: (invitationId: string) => void;
   invitationLoading: boolean;
 };
 
 const NavigatorEmailInvitationPanel = ({
-  notAcceptedNavigators,
+  pendingNavigatorInvitations,
   inviteNavigatorsByEmail,
   removeNavigatorEmailInvitation,
   invitationLoading,
@@ -68,19 +67,20 @@ const NavigatorEmailInvitationPanel = ({
           {formatMessage(messages.invite)}
         </Button>
       </Row>
-      {notAcceptedNavigators.length !== 0 && (
+      {pendingNavigatorInvitations.length !== 0 && (
         <>
           <Text mb={10} mt={20}>
             {formatMessage(messages.waitingForAcceptance)}
           </Text>
           <Box
             height={
-              SINGLE_EMAIL_HEIGHT * Math.min(3, notAcceptedNavigators.length) +
-              ITEM_MARGIN * Math.min(2, notAcceptedNavigators.length)
+              SINGLE_EMAIL_HEIGHT *
+                Math.min(3, pendingNavigatorInvitations.length) +
+              ITEM_MARGIN * Math.min(2, pendingNavigatorInvitations.length)
             }
             overflow="scroll"
           >
-            {notAcceptedNavigators.map(({ email, id }, index) => (
+            {pendingNavigatorInvitations.map(({ email, id }, index) => (
               <Box
                 display="flex"
                 justify="between"
@@ -90,9 +90,9 @@ const NavigatorEmailInvitationPanel = ({
                 maxHeight={SINGLE_EMAIL_HEIGHT}
                 mt={index === 0 ? 0 : ITEM_MARGIN}
               >
-                <Text>{email}</Text>
-                <Img
-                  cursor="pointer"
+                <Text overflow="hidden">{email}</Text>
+                {/* @ts-ignore */}
+                <ImageButton
                   onClick={() => removeNavigatorEmailInvitation(id)}
                   src={bin}
                 />

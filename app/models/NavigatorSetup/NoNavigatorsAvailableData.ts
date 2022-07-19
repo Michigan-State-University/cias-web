@@ -12,10 +12,10 @@ export type ParticipantLink = {
   deleting?: boolean;
 };
 
-export type NoNavigatorAvailableData = {
+export type NoNavigatorsAvailableData = {
   contactEmail: string;
   id: string;
-  noNavigatorAvailableMessage: string;
+  noNavigatorsAvailableMessage: string;
   notifyBy: NotifyByOptions;
   participantLinks: ParticipantLink[];
   phone: Nullable<Omit<Phone, 'id' | 'confirmed'>>;

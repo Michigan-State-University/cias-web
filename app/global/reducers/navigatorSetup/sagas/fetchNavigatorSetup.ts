@@ -6,8 +6,8 @@ import { jsonApiToArray, jsonApiToObject } from 'utils/jsonApiMapper';
 import { ApiError } from 'models/Api';
 import {
   InterventionNavigator,
-  NoNavigatorAvailableData,
-  NotAcceptedNavigators,
+  NoNavigatorsAvailableData,
+  PendingNavigatorInvitations,
 } from 'models/NavigatorSetup';
 
 import { FETCH_NAVIGATOR_SETUP_REQUEST } from '../constants';
@@ -21,22 +21,22 @@ export function* fetchNavigatorSetup({
   payload: { interventionId },
 }: ReturnType<typeof fetchNavigatorSetupRequest>) {
   const noNavigatorsUrl = `/v1/live_chat/intervention/${interventionId}/navigator_setup`;
-  const notAcceptedNavigatorsUrl = `/v1/interventions/${interventionId}/navigator_invitations`;
+  const pendingNavigatorInvitationsUrl = `/v1/interventions/${interventionId}/navigator_invitations`;
   const interventionNavigatorUrl = `/v1/live_chat/intervention/${interventionId}/navigators`;
   try {
     const { data: noNavigatorsData } = yield call(axios.get, noNavigatorsUrl);
-    const noNavigatorAvailableData = jsonApiToObject(
+    const noNavigatorsAvailableData = jsonApiToObject(
       noNavigatorsData,
       'navigatorSetup',
-    ) as NoNavigatorAvailableData;
-    const { data: notAcceptedNavigatorsData } = yield call(
+    ) as NoNavigatorsAvailableData;
+    const { data: pendingNavigatorInvitationsData } = yield call(
       axios.get,
-      notAcceptedNavigatorsUrl,
+      pendingNavigatorInvitationsUrl,
     );
-    const notAcceptedNavigators = jsonApiToArray(
-      notAcceptedNavigatorsData,
+    const pendingNavigatorInvitations = jsonApiToArray(
+      pendingNavigatorInvitationsData,
       'navigatorInvitation',
-    ) as NotAcceptedNavigators[];
+    ) as PendingNavigatorInvitations[];
 
     const { data: interventionNavigatorsData } = yield call(
       axios.get,
@@ -49,8 +49,8 @@ export function* fetchNavigatorSetup({
 
     yield put(
       fetchNavigatorSetupSuccess(
-        noNavigatorAvailableData,
-        notAcceptedNavigators,
+        noNavigatorsAvailableData,
+        pendingNavigatorInvitations,
         interventionNavigators,
       ),
     );

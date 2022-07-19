@@ -1,3 +1,3 @@
-export * from './NoNavigatorAvailableData';
-export * from './NotAcceptedNavigators';
+export * from './NoNavigatorsAvailableData';
+export * from './PendingNavigatorInvitations';
 export * from './InterventionNavigator';

@@ -12,6 +12,7 @@ import Row from 'components/Row';
 import Img from 'components/Img';
 import UserAvatar from 'components/UserAvatar';
 
+import { TextButton } from 'components/Button';
 import messages from '../messages';
 
 const SINGLE_ITEM_HEIGHT = 60;
@@ -60,16 +61,15 @@ const AddedNavigatorPanel = ({
                 <Text>{email}</Text>
               </Box>
             </Row>
-            <Row
-              cursor="pointer"
+            <TextButton
               onClick={() => removeInterventionNavigator(id)}
-              align="center"
+              buttonProps={{ display: 'flex', align: 'center' }}
             >
               <Img width={24} height={24} src={minus} />
               <Text ml={16} color={colors.manatee} fontWeight="bold">
                 {formatMessage(messages.remove)}
               </Text>
-            </Row>
+            </TextButton>
           </Row>
         ),
       )}

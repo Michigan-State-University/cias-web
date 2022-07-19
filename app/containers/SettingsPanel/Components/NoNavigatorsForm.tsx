@@ -10,7 +10,7 @@ import {
   requiredValidationSchema,
 } from 'utils/validators';
 import {
-  NoNavigatorAvailableData,
+  NoNavigatorsAvailableData,
   NotifyByOptions,
 } from 'models/NavigatorSetup';
 
@@ -26,37 +26,37 @@ import Button from 'components/Button';
 import messages from '../messages';
 
 const validationSchema = Yup.object().shape({
-  noNavigatorAvailableMessage: requiredValidationSchema,
+  noNavigatorsAvailableMessage: requiredValidationSchema,
   contactEmail: emailFormValidationSchema,
 });
 
 type Props = Pick<
-  NoNavigatorAvailableData,
+  NoNavigatorsAvailableData,
   | 'contactEmail'
   | 'isNavigatorNotificationOn'
-  | 'noNavigatorAvailableMessage'
+  | 'noNavigatorsAvailableMessage'
   | 'notifyBy'
   | 'phone'
 > & {
-  updateNavigatorSettings: (
-    newData: Partial<Omit<NoNavigatorAvailableData, 'id'>>,
+  updateNoNavigatorTabData: (
+    newData: Partial<Omit<NoNavigatorsAvailableData, 'id'>>,
   ) => void;
 };
 
 const NoNavigatorsForm = ({
   contactEmail,
   isNavigatorNotificationOn,
-  noNavigatorAvailableMessage,
+  noNavigatorsAvailableMessage,
   notifyBy,
   phone,
-  updateNavigatorSettings,
+  updateNoNavigatorTabData,
 }: Props) => {
   const { formatMessage } = useIntl();
   const isUpdating = useSelector(makeSelectNavigatorSetupLoader('updateForm'));
 
   const initialValues = useMemo(
     () => ({
-      noNavigatorAvailableMessage,
+      noNavigatorsAvailableMessage,
       contactEmail,
       prefix: phone?.prefix || '',
       phoneNumber: phone?.number || '',
@@ -70,15 +70,15 @@ const NoNavigatorsForm = ({
     validationSchema,
     validateOnMount: false,
     onSubmit: ({
-      noNavigatorAvailableMessage: message,
+      noNavigatorsAvailableMessage: message,
       contactEmail: email,
       prefix: phonePrefix,
       phoneNumber: number,
       iso: phoneIso,
     }) =>
-      updateNavigatorSettings({
+      updateNoNavigatorTabData({
         contactEmail: email,
-        noNavigatorAvailableMessage: message,
+        noNavigatorsAvailableMessage: message,
         phone: { iso: phoneIso, prefix: phonePrefix, number },
       }),
   });
@@ -89,7 +89,7 @@ const NoNavigatorsForm = ({
         <H3 mb={30}>{formatMessage(messages.textInformation)}</H3>
         {/* @ts-ignore */}
         <FormikHookInput
-          formikKey="noNavigatorAvailableMessage"
+          formikKey="noNavigatorsAvailableMessage"
           formikState={formik}
           placeholder={formatMessage(messages.messagePlaceholder)}
           label={formatMessage(messages.messageLabel)}
@@ -138,7 +138,7 @@ const NoNavigatorsForm = ({
         <Switch
           checked={isNavigatorNotificationOn}
           onToggle={(newValue) =>
-            updateNavigatorSettings({ isNavigatorNotificationOn: newValue })
+            updateNoNavigatorTabData({ isNavigatorNotificationOn: newValue })
           }
           id="navigator-notification"
         />
@@ -147,7 +147,7 @@ const NoNavigatorsForm = ({
         <Radio
           id="notify_by_sms_radio"
           onChange={() =>
-            updateNavigatorSettings({ notifyBy: NotifyByOptions.SMS })
+            updateNoNavigatorTabData({ notifyBy: NotifyByOptions.SMS })
           }
           checked={notifyBy === NotifyByOptions.SMS}
         >
@@ -158,7 +158,7 @@ const NoNavigatorsForm = ({
         <Radio
           id="notify_by_email_radio"
           onChange={() =>
-            updateNavigatorSettings({ notifyBy: NotifyByOptions.EMAIL })
+            updateNoNavigatorTabData({ notifyBy: NotifyByOptions.EMAIL })
           }
           checked={notifyBy === NotifyByOptions.EMAIL}
         >

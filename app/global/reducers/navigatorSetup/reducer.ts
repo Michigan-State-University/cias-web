@@ -7,9 +7,9 @@ import {
   fetchNavigatorSetupError,
   fetchNavigatorSetupRequest,
   fetchNavigatorSetupSuccess,
-  updateNavigatorSetupRequest,
-  updateNavigatorSetupError,
-  updateNavigatorSetupSuccess,
+  updateNoNavigatorTabRequest,
+  updateNoNavigatorsTabError,
+  updateNoNavigatorsTabSuccess,
   addParticipantLinkRequest,
   addParticipantLinkSuccess,
   addParticipantLinkError,
@@ -51,15 +51,15 @@ export const navigatorSetupReducer = (
       case getType(fetchNavigatorSetupSuccess): {
         const {
           noNavigatorsData,
-          notAcceptedNavigators,
+          pendingNavigatorInvitations,
           interventionNavigators,
         } = action.payload;
         draft.modalTabsData = {
           navigatorsData: {
-            notAcceptedNavigators,
+            pendingNavigatorInvitations,
             interventionNavigators,
           },
-          noNavigatorAvailable: noNavigatorsData,
+          noNavigatorsAvailable: noNavigatorsData,
         };
         draft.loaders.fetching = false;
         break;
@@ -69,16 +69,17 @@ export const navigatorSetupReducer = (
         draft.error = action.payload.error;
         break;
 
-      case getType(updateNavigatorSetupRequest):
-        // @ts-ignore
-        draft.modalTabsData.noNavigatorAvailable = {
-          ...state.modalTabsData?.noNavigatorAvailable,
-          ...action.payload.noNavigatorsData,
-        };
-        draft.loaders.updatingForm = true;
+      case getType(updateNoNavigatorTabRequest):
+        if (state.modalTabsData && draft.modalTabsData) {
+          draft.modalTabsData.noNavigatorsAvailable = {
+            ...state.modalTabsData?.noNavigatorsAvailable,
+            ...action.payload.noNavigatorsData,
+          };
+          draft.loaders.updatingForm = true;
+        }
         break;
-      case getType(updateNavigatorSetupError):
-      case getType(updateNavigatorSetupSuccess):
+      case getType(updateNoNavigatorsTabError):
+      case getType(updateNoNavigatorsTabSuccess):
         draft.loaders.fetching = false;
         break;
 
@@ -86,8 +87,10 @@ export const navigatorSetupReducer = (
         draft.loaders.updatingLinks = true;
         break;
       case getType(addParticipantLinkSuccess):
-        const { navigatorSetup } = action.payload;
-        draft.modalTabsData!.noNavigatorAvailable = navigatorSetup;
+        if (draft.modalTabsData) {
+          const { noNavigatorsData } = action.payload;
+          draft.modalTabsData.noNavigatorsAvailable = noNavigatorsData;
+        }
         break;
       case getType(addParticipantLinkError):
         draft.loaders.updatingLinks = false;
@@ -95,7 +98,7 @@ export const navigatorSetupReducer = (
 
       case getType(removeParticipantLinkRequest):
         updateItemById(
-          draft.navigatorData?.participantLinks || [],
+          draft.modalTabsData?.noNavigatorsAvailable.participantLinks || [],
           action.payload.linkId,
           { deleting: true },
         );
@@ -105,14 +108,14 @@ export const navigatorSetupReducer = (
         const { linkId } = action.payload;
         if (draft.modalTabsData) {
           deleteItemById(
-            draft.modalTabsData.noNavigatorAvailable.participantLinks,
+            draft.modalTabsData.noNavigatorsAvailable.participantLinks,
             linkId,
           );
         }
         break;
       case getType(removeParticipantLinkError):
         updateItemById(
-          draft.navigatorData?.participantLinks || [],
+          draft.modalTabsData?.noNavigatorsAvailable.participantLinks || [],
           action.payload.linkId,
           { deleting: false },
         );
@@ -122,10 +125,14 @@ export const navigatorSetupReducer = (
         draft.loaders.navigatorEmailInvitation = true;
         break;
       case getType(inviteNavigatorsByEmailSuccess): {
-        draft.modalTabsData!.navigatorsData.notAcceptedNavigators = [
-          ...state.modalTabsData!.navigatorsData.notAcceptedNavigators,
-          ...action.payload.notAcceptedNavigators,
-        ];
+        if (draft.modalTabsData) {
+          const {
+            payload: { pendingNavigatorInvitations },
+          } = action;
+          draft.modalTabsData.navigatorsData.pendingNavigatorInvitations.push(
+            ...pendingNavigatorInvitations,
+          );
+        }
         draft.loaders.navigatorEmailInvitation = false;
         break;
       }
@@ -133,17 +140,21 @@ export const navigatorSetupReducer = (
         draft.loaders.navigatorEmailInvitation = false;
         break;
       case getType(removeNavigatorEmailInvitationSuccess): {
-        deleteItemById(
-          draft.modalTabsData!.navigatorsData.notAcceptedNavigators,
-          action.payload.invitationId,
-        );
+        if (draft.modalTabsData) {
+          deleteItemById(
+            draft.modalTabsData.navigatorsData.pendingNavigatorInvitations,
+            action.payload.invitationId,
+          );
+        }
         break;
       }
       case getType(removeInterventionNavigatorSuccess): {
-        deleteItemById(
-          draft.modalTabsData!.navigatorsData.interventionNavigators,
-          action.payload.interventionNavigatorId,
-        );
+        if (draft.modalTabsData) {
+          deleteItemById(
+            draft.modalTabsData.navigatorsData.interventionNavigators,
+            action.payload.interventionNavigatorId,
+          );
+        }
         break;
       }
     }

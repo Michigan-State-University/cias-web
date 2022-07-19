@@ -3,8 +3,8 @@ import { createAction } from 'typesafe-actions';
 import { ApiError } from 'models/Api';
 import {
   InterventionNavigator,
-  NoNavigatorAvailableData,
-  NotAcceptedNavigators,
+  NoNavigatorsAvailableData,
+  PendingNavigatorInvitations,
   ParticipantLink,
 } from 'models/NavigatorSetup';
 
@@ -18,9 +18,9 @@ import {
   REMOVE_PARTICIPANT_LINK_ERROR,
   REMOVE_PARTICIPANT_LINK_REQUEST,
   REMOVE_PARTICIPANT_LINK_SUCCESS,
-  UPDATE_NAVIGATOR_SETUP_ERROR,
-  UPDATE_NAVIGATOR_SETUP_REQUEST,
-  UPDATE_NAVIGATOR_SETUP_SUCCESS,
+  UPDATE_NO_NAVIGATOR_TAB_ERROR,
+  UPDATE_NO_NAVIGATOR_TAB_REQUEST,
+  UPDATE_NO_NAVIGATOR_TAB_SUCCESS,
   UPDATE_PARTICIPANT_LINK_REQUEST,
   UPDATE_PARTICIPANT_LINK_SUCCESS,
   UPDATE_PARTICIPANT_LINK_ERROR,
@@ -41,13 +41,13 @@ export const fetchNavigatorSetupSuccess = createAction(
   FETCH_NAVIGATOR_SETUP_SUCCESS,
   (action) =>
     (
-      noNavigatorsData: NoNavigatorAvailableData,
-      notAcceptedNavigators: NotAcceptedNavigators[],
+      noNavigatorsData: NoNavigatorsAvailableData,
+      pendingNavigatorInvitations: PendingNavigatorInvitations[],
       interventionNavigators: InterventionNavigator[],
     ) =>
       action({
         noNavigatorsData,
-        notAcceptedNavigators,
+        pendingNavigatorInvitations,
         interventionNavigators,
       }),
 );
@@ -56,23 +56,23 @@ export const fetchNavigatorSetupError = createAction(
   (action) => (error: ApiError) => action({ error }),
 );
 
-export const updateNavigatorSetupRequest = createAction(
-  UPDATE_NAVIGATOR_SETUP_REQUEST,
+export const updateNoNavigatorTabRequest = createAction(
+  UPDATE_NO_NAVIGATOR_TAB_REQUEST,
   (action) =>
     (
       interventionId: string,
-      noNavigatorsData: Partial<Omit<NoNavigatorAvailableData, 'id'>>,
+      noNavigatorsData: Partial<Omit<NoNavigatorsAvailableData, 'id'>>,
     ) =>
       action({ interventionId, noNavigatorsData }),
 );
 
-export const updateNavigatorSetupSuccess = createAction(
-  UPDATE_NAVIGATOR_SETUP_SUCCESS,
+export const updateNoNavigatorsTabSuccess = createAction(
+  UPDATE_NO_NAVIGATOR_TAB_SUCCESS,
   (action) => () => action(),
 );
 
-export const updateNavigatorSetupError = createAction(
-  UPDATE_NAVIGATOR_SETUP_ERROR,
+export const updateNoNavigatorsTabError = createAction(
+  UPDATE_NO_NAVIGATOR_TAB_ERROR,
   (action) => (error: ApiError) => action({ error }),
 );
 
@@ -88,8 +88,8 @@ export const addParticipantLinkRequest = createAction(
 
 export const addParticipantLinkSuccess = createAction(
   ADD_PARTICIPANT_LINK_SUCCESS,
-  (action) => (navigatorSetup: NoNavigatorAvailableData) =>
-    action({ navigatorSetup }),
+  (action) => (noNavigatorsData: NoNavigatorsAvailableData) =>
+    action({ noNavigatorsData }),
 );
 
 export const addParticipantLinkError = createAction(
@@ -142,8 +142,8 @@ export const inviteNavigatorsByEmailRequest = createAction(
 
 export const inviteNavigatorsByEmailSuccess = createAction(
   INVITE_NAVIGATOR_BY_EMAIL_SUCCESS,
-  (action) => (notAcceptedNavigators: NotAcceptedNavigators[]) =>
-    action({ notAcceptedNavigators }),
+  (action) => (pendingNavigatorInvitations: PendingNavigatorInvitations[]) =>
+    action({ pendingNavigatorInvitations }),
 );
 
 export const inviteNavigatorsByEmailError = createAction(
