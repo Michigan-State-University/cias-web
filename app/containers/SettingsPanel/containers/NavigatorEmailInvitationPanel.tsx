@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { useIntl } from 'react-intl';
 
-import { colors } from 'theme';
+import { colors, themeColors } from 'theme';
 
 import bin from 'assets/svg/bin-no-bg.svg';
 
@@ -13,6 +13,7 @@ import ChipsInput from 'components/Input/ChipsInput';
 import Button, { ImageButton } from 'components/Button';
 
 import { PendingNavigatorInvitation } from 'models/NavigatorSetup';
+import Spinner from 'components/Spinner';
 import messages from '../messages';
 
 const SINGLE_EMAIL_HEIGHT = 36;
@@ -76,27 +77,36 @@ const NavigatorEmailInvitationPanel = ({
             maxHeight={3 * SINGLE_EMAIL_HEIGHT + 2 * ITEM_MARGIN}
             overflow="scroll"
           >
-            {pendingNavigatorInvitations.map(({ email, id }, index) => (
-              <Box
-                display="flex"
-                justify="between"
-                background={colors.lightBlue}
-                key={id}
-                px={11.5}
-                gap={11.5}
-                minHeight={SINGLE_EMAIL_HEIGHT}
-                mt={index === 0 ? 0 : ITEM_MARGIN}
-              >
-                <Box py={11.5}>
-                  <Text lineHeight="13px">{email}</Text>
+            {pendingNavigatorInvitations.map(
+              ({ email, id, inDeletion }, index) => (
+                <Box
+                  display="flex"
+                  justify="between"
+                  background={colors.lightBlue}
+                  key={id}
+                  px={11.5}
+                  gap={11.5}
+                  minHeight={SINGLE_EMAIL_HEIGHT}
+                  mt={index === 0 ? 0 : ITEM_MARGIN}
+                >
+                  <Box py={11.5}>
+                    <Text lineHeight="13px">{email}</Text>
+                  </Box>
+                  {/* @ts-ignore */}
+                  {!inDeletion && (
+                    <ImageButton
+                      onClick={() => removeNavigatorEmailInvitation(id)}
+                      src={bin}
+                    />
+                  )}
+                  {inDeletion && (
+                    <div>
+                      <Spinner color={themeColors.secondary} />
+                    </div>
+                  )}
                 </Box>
-                {/* @ts-ignore */}
-                <ImageButton
-                  onClick={() => removeNavigatorEmailInvitation(id)}
-                  src={bin}
-                />
-              </Box>
-            ))}
+              ),
+            )}
           </Box>
         </>
       )}

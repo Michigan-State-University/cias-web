@@ -52,7 +52,9 @@ const NoNavigatorsForm = ({
   updateNoNavigatorTabData,
 }: Props) => {
   const { formatMessage } = useIntl();
-  const isUpdating = useSelector(makeSelectNavigatorSetupLoader('updateForm'));
+  const isUpdating = useSelector(
+    makeSelectNavigatorSetupLoader('updatingForm'),
+  );
 
   const initialValues = useMemo(
     () => ({

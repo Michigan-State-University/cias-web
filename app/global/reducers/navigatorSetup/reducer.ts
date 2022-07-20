@@ -21,6 +21,10 @@ import {
   inviteNavigatorsByEmailRequest,
   inviteNavigatorsByEmailError,
   removeInterventionNavigatorSuccess,
+  removeNavigatorEmailInvitationRequest,
+  removeNavigatorEmailInvitationError,
+  removeInterventionNavigatorRequest,
+  removeInterventionNavigatorError,
 } from './actions';
 import { NavigatorSetupState, NavigatorSetupAction } from './types';
 
@@ -80,7 +84,7 @@ export const navigatorSetupReducer = (
         break;
       case getType(updateNoNavigatorsTabError):
       case getType(updateNoNavigatorsTabSuccess):
-        draft.loaders.fetching = false;
+        draft.loaders.updatingForm = false;
         break;
 
       case getType(addParticipantLinkRequest):
@@ -139,6 +143,16 @@ export const navigatorSetupReducer = (
       case getType(inviteNavigatorsByEmailError):
         draft.loaders.navigatorEmailInvitation = false;
         break;
+      case getType(removeNavigatorEmailInvitationRequest): {
+        if (draft.modalTabsData) {
+          updateItemById(
+            draft.modalTabsData.navigatorsData.pendingNavigatorInvitations,
+            action.payload.invitationId,
+            { inDeletion: true },
+          );
+        }
+        break;
+      }
       case getType(removeNavigatorEmailInvitationSuccess): {
         if (draft.modalTabsData) {
           deleteItemById(
@@ -148,11 +162,41 @@ export const navigatorSetupReducer = (
         }
         break;
       }
+      case getType(removeNavigatorEmailInvitationError): {
+        if (draft.modalTabsData) {
+          updateItemById(
+            draft.modalTabsData.navigatorsData.pendingNavigatorInvitations,
+            action.payload.invitationId,
+            { inDeletion: false },
+          );
+        }
+        break;
+      }
       case getType(removeInterventionNavigatorSuccess): {
         if (draft.modalTabsData) {
           deleteItemById(
             draft.modalTabsData.navigatorsData.interventionNavigators,
             action.payload.interventionNavigatorId,
+          );
+        }
+        break;
+      }
+      case getType(removeInterventionNavigatorRequest): {
+        if (draft.modalTabsData) {
+          updateItemById(
+            draft.modalTabsData.navigatorsData.interventionNavigators,
+            action.payload.interventionNavigatorId,
+            { inDeletion: true },
+          );
+        }
+        break;
+      }
+      case getType(removeInterventionNavigatorError): {
+        if (draft.modalTabsData) {
+          updateItemById(
+            draft.modalTabsData.navigatorsData.interventionNavigators,
+            action.payload.interventionNavigatorId,
+            { inDeletion: false },
           );
         }
         break;

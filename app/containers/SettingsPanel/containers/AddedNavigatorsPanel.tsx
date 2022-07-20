@@ -1,7 +1,7 @@
 import React from 'react';
 import { useIntl } from 'react-intl';
 
-import { colors } from 'theme';
+import { colors, themeColors } from 'theme';
 import { InterventionNavigator } from 'models/NavigatorSetup';
 // import minus from 'assets/svg/grey-minus.svg';
 
@@ -13,6 +13,7 @@ import Row from 'components/Row';
 import UserAvatar from 'components/UserAvatar';
 
 // import { TextButton } from 'components/Button';
+import Spinner from 'components/Spinner';
 import messages from '../messages';
 
 const SINGLE_ITEM_HEIGHT = 60;
@@ -40,7 +41,7 @@ const AddedNavigatorPanel = ({
         </Text>
       )}
       {interventionNavigators.map(
-        ({ id, avatarUrl, email, firstName, lastName }, index) => (
+        ({ id, avatarUrl, email, firstName, lastName, inDeletion }, index) => (
           <Row
             justify="between"
             align="center"
@@ -66,15 +67,22 @@ const AddedNavigatorPanel = ({
               </Box>
             </Row>
             {/* WAITING FOR BE */}
-            {/* <TextButton
-              onClick={() => removeInterventionNavigator(id)}
-              buttonProps={{ display: 'flex', align: 'center' }}
-            >
-              <Img width={24} height={24} src={minus} />
-              <Text ml={16} color={colors.manatee} fontWeight="bold">
-                {formatMessage(messages.remove)}
-              </Text>
-            </TextButton> */}
+            {/* {!inDeletion && (
+              <TextButton
+                onClick={() => removeInterventionNavigator(id)}
+                buttonProps={{ display: 'flex', align: 'center' }}
+              >
+                <Img width={24} height={24} src={minus} />
+                <Text ml={16} color={colors.manatee} fontWeight="bold">
+                  {formatMessage(messages.remove)}
+                </Text>
+              </TextButton>
+            )} */}
+            {inDeletion && (
+              <div>
+                <Spinner color={themeColors.secondary} />
+              </div>
+            )}
           </Row>
         ),
       )}

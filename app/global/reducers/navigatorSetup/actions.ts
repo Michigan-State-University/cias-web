@@ -28,9 +28,11 @@ import {
   INVITE_NAVIGATOR_BY_EMAIL_SUCCESS,
   REMOVE_NAVIGATOR_EMAIL_INVITATION_REQUEST,
   REMOVE_NAVIGATOR_EMAIL_INVITATION_SUCCESS,
+  REMOVE_NAVIGATOR_EMAIL_INVITATION_ERROR,
   INVITE_NAVIGATOR_BY_EMAIL_ERROR,
   REMOVE_INTERVENTION_NAVIGATOR_REQUEST,
   REMOVE_INTERVENTION_NAVIGATOR_SUCCESS,
+  REMOVE_INTERVENTION_NAVIGATOR_ERROR,
 } from './constants';
 
 export const fetchNavigatorSetupRequest = createAction(
@@ -162,6 +164,11 @@ export const removeNavigatorEmailInvitationSuccess = createAction(
   (action) => (invitationId: string) => action({ invitationId }),
 );
 
+export const removeNavigatorEmailInvitationError = createAction(
+  REMOVE_NAVIGATOR_EMAIL_INVITATION_ERROR,
+  (action) => (invitationId: string) => action({ invitationId }),
+);
+
 export const removeInterventionNavigatorRequest = createAction(
   REMOVE_INTERVENTION_NAVIGATOR_REQUEST,
   (action) => (interventionId: string, interventionNavigatorId: string) =>
@@ -170,6 +177,12 @@ export const removeInterventionNavigatorRequest = createAction(
 
 export const removeInterventionNavigatorSuccess = createAction(
   REMOVE_INTERVENTION_NAVIGATOR_SUCCESS,
+  (action) => (interventionNavigatorId: string) =>
+    action({ interventionNavigatorId }),
+);
+
+export const removeInterventionNavigatorError = createAction(
+  REMOVE_INTERVENTION_NAVIGATOR_ERROR,
   (action) => (interventionNavigatorId: string) =>
     action({ interventionNavigatorId }),
 );

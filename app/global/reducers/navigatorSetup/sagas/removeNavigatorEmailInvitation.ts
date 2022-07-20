@@ -12,6 +12,7 @@ import {
 import {
   removeNavigatorEmailInvitationSuccess,
   removeNavigatorEmailInvitationRequest,
+  removeNavigatorEmailInvitationError,
 } from '../actions';
 import messages from '../messages';
 
@@ -26,6 +27,7 @@ export function* removeNavigatorEmailInvitation({
       toastId: REMOVE_NAVIGATOR_EMAIL_INVITATION_SUCCESS,
     });
   } catch (error) {
+    yield put(removeNavigatorEmailInvitationError(invitationId));
     yield call(
       toast.error,
       formatMessage(messages.removeNavigatorEmailInvitationError),
