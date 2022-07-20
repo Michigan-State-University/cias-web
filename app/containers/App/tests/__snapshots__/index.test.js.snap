@@ -914,21 +914,6 @@ exports[`<AnswerSessionPage /> Should render and match the snapshot 1`] = `
                 Manage teams
               </p>
             </a>
-            <a
-              class="c21"
-              href="/live-chat"
-            >
-              <img
-                src="IMAGE_MOCK"
-              />
-              <p
-                class="c20"
-                font-size="15"
-                font-weight="bold"
-              >
-                My Conversations
-              </p>
-            </a>
           </div>
           <div
             class="c22"

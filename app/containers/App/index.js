@@ -209,7 +209,7 @@ export function App({ user, fetchSelfDetails }) {
             path="/live-chat"
             component={InboxPage}
             protectedRoute
-            allowedRoles={AllRoles}
+            allowedRoles={[Roles.Navigator]}
             navbarProps={{
               navbarId: NAVIGATION.DEFAULT,
             }}

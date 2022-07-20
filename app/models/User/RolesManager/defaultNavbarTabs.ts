@@ -72,13 +72,11 @@ const navigationTabs: Record<
     interventionsTab(navbarNames.adminInterventions, folder),
     accountsTab(navbarNames.adminAccounts, peopleHR),
     teamsTab(navbarNames.adminTeams, peopleHRCircle),
-    conversationsTab(navbarNames.conversations, folder),
   ],
   [Roles.TeamAdmin]: [teamsTab(navbarNames.adminTeams, peopleHRCircle)],
   [Roles.Researcher]: [
     interventionsTab(navbarNames.researcherInterventions, folder),
     accountsTab(navbarNames.researcherAccounts, peopleHR),
-    conversationsTab(navbarNames.conversations, folder),
   ],
   [Roles.EInterventionAdmin]: [],
   [Roles.OrganizationAdmin]: [],
@@ -87,7 +85,6 @@ const navigationTabs: Record<
   [Roles.Participant]: [
     participantInterventionsTab(navbarNames.participantInterventions, folder),
     participantReportsTab(navbarNames.participantReports, fileBarChart),
-    conversationsTab(navbarNames.conversations, folder),
   ],
   [Roles.ThirdParty]: [],
   [Roles.Guest]: [],
