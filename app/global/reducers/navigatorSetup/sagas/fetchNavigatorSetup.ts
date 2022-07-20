@@ -1,5 +1,5 @@
 import axios from 'axios';
-import { put, call, takeLatest } from 'redux-saga/effects';
+import { put, call, takeLatest, all } from 'redux-saga/effects';
 
 import { jsonApiToArray, jsonApiToObject } from 'utils/jsonApiMapper';
 
@@ -24,24 +24,26 @@ export function* fetchNavigatorSetup({
   const pendingNavigatorInvitationsUrl = `/v1/interventions/${interventionId}/navigator_invitations`;
   const interventionNavigatorUrl = `/v1/live_chat/intervention/${interventionId}/navigators`;
   try {
-    const { data: noNavigatorsData } = yield call(axios.get, noNavigatorsUrl);
+    const {
+      fetchNoNavigators: { data: noNavigatorsData },
+      fetchPendingInvitations: { data: pendingNavigatorInvitationsData },
+      fetchInterventionNavigators: { data: interventionNavigatorsData },
+    } = yield all({
+      fetchNoNavigators: call(axios.get, noNavigatorsUrl),
+      fetchPendingInvitations: call(axios.get, pendingNavigatorInvitationsUrl),
+      fetchInterventionNavigators: call(axios.get, interventionNavigatorUrl),
+    });
+
     const noNavigatorsAvailableData = jsonApiToObject(
       noNavigatorsData,
       'navigatorSetup',
     ) as NoNavigatorsAvailableData;
-    const { data: pendingNavigatorInvitationsData } = yield call(
-      axios.get,
-      pendingNavigatorInvitationsUrl,
-    );
+
     const pendingNavigatorInvitations = jsonApiToArray(
       pendingNavigatorInvitationsData,
       'navigatorInvitation',
     ) as PendingNavigatorInvitations[];
 
-    const { data: interventionNavigatorsData } = yield call(
-      axios.get,
-      interventionNavigatorUrl,
-    );
     const interventionNavigators = jsonApiToArray(
       interventionNavigatorsData,
       'navigator',

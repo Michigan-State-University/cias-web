@@ -25,7 +25,6 @@ export function* inviteNavigatorByEmail({
     const { data } = yield call(axios.post, url, {
       navigator_invitation: {
         emails,
-        intervention_id: interventionId,
       },
     });
     const invitations = jsonApiToArray(
