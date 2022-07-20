@@ -20,6 +20,8 @@ import { createStructuredSelector } from 'reselect';
 
 import GlobalStyle from 'global-styles';
 
+import { useNotificationChannel } from 'utils/useNotificationChannel';
+
 import {
   Roles,
   navbarMessages,
@@ -70,7 +72,6 @@ import ChatWidget from 'containers/ChatWidget';
 
 import AppRoute from 'components/AppRoute';
 import IdleTimer from 'components/IdleTimer/Loadable';
-import { SocketProvider } from 'components/ActionCable';
 
 import {
   accountsTabId,
@@ -85,6 +86,8 @@ import { arraysOverlap } from 'utils/arrayUtils';
 import { MODAL_PORTAL_ID, TOOLTIP_PORTAL_ID } from './constants';
 
 export function App({ user, fetchSelfDetails }) {
+  useNotificationChannel();
+
   const { locale, formatMessage } = useIntl();
   const { pathname } = useLocation();
   useInjectSaga({ key: 'app', saga: rootSaga });
@@ -180,344 +183,336 @@ export function App({ user, fetchSelfDetails }) {
   };
 
   return (
-    <SocketProvider>
-      <RolesManagerContext.Provider value={{ userRoles: user?.roles || [] }}>
-        <ApiQueryMessageHandler />
-        <IdleTimer />
+    <RolesManagerContext.Provider value={{ userRoles: user?.roles || [] }}>
+      <ApiQueryMessageHandler />
+      <IdleTimer />
 
-        <div id={TOOLTIP_PORTAL_ID} />
-        <div id={MODAL_PORTAL_ID} />
+      <div id={TOOLTIP_PORTAL_ID} />
+      <div id={MODAL_PORTAL_ID} />
 
-        <Switch>
-          <AppRoute
-            exact
-            path="/"
-            render={() => renderDashboardByRole()}
-            protectedRoute
-            allowedRoles={AllRoles}
-            navbarProps={{
-              navbarId: NAVIGATION.DEFAULT,
-              activeTab: interventionsTabId,
-            }}
-            sidebarProps={{
-              sidebarId: NAVIGATION.DEFAULT,
-              activeTab: defaultSidebarId,
-            }}
-          />
-          <AppRoute
-            exact
-            path="/live-chat"
-            component={InboxPage}
-            protectedRoute
-            allowedRoles={[Roles.Navigator]}
-            navbarProps={{
-              navbarId: NAVIGATION.DEFAULT,
-            }}
-            sidebarProps={{
-              sidebarId: NAVIGATION.DEFAULT,
-              activeTab: conversationsTabId,
-            }}
-          />
-          <AppRoute
-            exact
-            path="/organization/:organizationId"
-            render={() => (
-              <ReportingDashboardPage view={VIEW.MANAGE_ORGANIZATIONS} />
-            )}
-            protectedRoute
-            allowedRoles={[Roles.Admin, Roles.EInterventionAdmin]}
-            sidebarProps={{
-              sidebarId: NAVIGATION.DEFAULT,
-            }}
-            navbarProps={{
-              navbarId: NAVIGATION.DEFAULT,
-            }}
-          />
-          <AppRoute
-            exact
-            path="/organization/:organizationId/dashboard-setup"
-            render={() => (
-              <ReportingDashboardPage view={VIEW.DASHBOARD_SETUP} />
-            )}
-            protectedRoute
-            allowedRoles={[Roles.Admin, Roles.EInterventionAdmin]}
-            sidebarProps={{
-              sidebarId: NAVIGATION.DEFAULT,
-            }}
-            navbarProps={{
-              navbarId: NAVIGATION.DEFAULT,
-            }}
-          />
-          <AppRoute
-            exact
-            path="/organization/:organizationId/dashboard"
-            render={() => <ReportingDashboardPage view={VIEW.DASHBOARD_VIEW} />}
-            protectedRoute
-            allowedRoles={[
-              Roles.Admin,
-              Roles.EInterventionAdmin,
-              Roles.OrganizationAdmin,
-              Roles.ClinicAdmin,
-            ]}
-            sidebarProps={{
-              sidebarId: NAVIGATION.DEFAULT,
-            }}
-            navbarProps={{
-              navbarId: NAVIGATION.DEFAULT,
-            }}
-          />
-          <AppRoute
-            exact
-            path="/reports"
-            component={ParticipantReports}
-            protectedRoute
-            allowedRoles={[Roles.Participant]}
-            navbarProps={{
-              navbarId: NAVIGATION.DEFAULT,
-              activeTab: participantReportsTabId,
-            }}
-            sidebarProps={{
-              sidebarId: NAVIGATION.DEFAULT,
-              activeTab: participantReportsTabId,
-            }}
-          />
-          <AppRoute exact path="/login" component={LoginPage} />
-          <AppRoute exact path="/register" component={RegisterPage} />
-          <AppRoute
-            exact
-            path="/reset-password"
-            component={ResetPasswordPage}
-          />
-          <AppRoute
-            exact
-            path="/set-new-password"
-            component={SetNewPasswordPage}
-          />
-          <AppRoute exact path="/logout" component={Logout} />
-          <AppRoute
-            exact
-            path="/interventions/:interventionId/sessions/:sessionId/edit"
-            component={EditSessionPage}
-            protectedRoute
-            allowedRoles={[Roles.Admin, Roles.Researcher]}
-            navbarProps={{
-              navbarId: NAVIGATION.SESSIONS,
-            }}
-          />
-          <AppRoute
-            exact
-            path="/interventions/:interventionId/sessions/:sessionId/fill"
-            component={AnswerSessionPage}
-            allowedRoles={AllRoles}
-            user
-            navbarProps={{
-              navbarId: NAVIGATION.DEFAULT,
-              activeTab: interventionsTabId,
-            }}
-          />
-          <AppRoute
-            exact
-            path="/interventions/:interventionId/sessions/:sessionId/settings"
-            component={SettingsInterventionPage}
-            protectedRoute
-            allowedRoles={[Roles.Admin, Roles.Researcher]}
-            navbarProps={{
-              navbarId: NAVIGATION.SESSIONS,
-            }}
-          />
-          <AppRoute
-            exact
-            path="/interventions/:interventionId/sessions/:sessionId/report-templates"
-            component={ReportTemplatesPage}
-            protectedRoute
-            allowedRoles={[Roles.Admin, Roles.Researcher]}
-            navbarProps={{
-              navbarId: NAVIGATION.SESSIONS,
-            }}
-          />
-          <AppRoute
-            exact
-            path="/interventions/:interventionId/sessions/:sessionId/generated-reports"
-            component={GeneratedReportsPage}
-            protectedRoute
-            allowedRoles={[Roles.Admin, Roles.Researcher]}
-            navbarProps={{
-              navbarId: NAVIGATION.SESSIONS,
-            }}
-          />
-          <AppRoute
-            exact
-            path="/interventions/:interventionId/sessions/:sessionId/sms-messaging"
-            component={TextMessagesPage}
-            protectedRoute
-            allowedRoles={[Roles.Admin, Roles.Researcher]}
-            navbarProps={{
-              navbarId: NAVIGATION.SESSIONS,
-            }}
-          />
-          <AppRoute
-            exact
-            path="/interventions/:interventionId/sessions/:sessionId/map"
-            component={SessionMapPage}
-            protectedRoute
-            allowedRoles={[Roles.Admin, Roles.Researcher]}
-            navbarProps={{
-              navbarId: NAVIGATION.SESSIONS,
-            }}
-          />
-          <AppRoute
-            exact
-            path="/user_interventions/:userInterventionId"
-            component={UserInterventionPage}
-            protectedRoute
-            allowedRoles={[Roles.Participant]}
-          />
-          <AppRoute
-            exact
-            path="/interventions/:interventionId/invite"
-            component={UserInterventionInvitePage}
-            protectedRoute
-            allowedRoles={[Roles.Participant]}
-          />
-          <AppRoute
-            exact
-            path="/users"
-            component={renderUserListByRole}
-            protectedRoute
-            allowedRoles={[Roles.Admin, Roles.Researcher]}
-            navbarProps={{
-              navbarId: NAVIGATION.DEFAULT,
-              activeTab: accountsTabId,
-            }}
-            sidebarProps={{
-              sidebarId: NAVIGATION.DEFAULT,
-              activeTab: accountsTabId,
-            }}
-          />
-          <AppRoute
-            exact
-            path="/teams"
-            component={TeamsListPage}
-            protectedRoute
-            allowedRoles={[Roles.Admin, Roles.TeamAdmin]}
-            navbarProps={{
-              navbarId: NAVIGATION.DEFAULT,
-              activeTab: teamsTabId,
-            }}
-            sidebarProps={{
-              sidebarId: NAVIGATION.DEFAULT,
-              activeTab: teamsTabId,
-            }}
-          />
-          <AppRoute
-            exact
-            path="/teams/:id"
-            component={TeamDetails}
-            protectedRoute
-            allowedRoles={[Roles.Admin, Roles.TeamAdmin]}
-            navbarProps={{
-              navbarId: NAVIGATION.DEFAULT,
-            }}
-            sidebarProps={{
-              sidebarId: NAVIGATION.DEFAULT,
-            }}
-          />
-          <AppRoute
-            exact
-            key="previewFromStart"
-            path="/interventions/:interventionId/sessions/:sessionId/preview"
-            component={({ match }) => (
-              <AnswerSessionPage match={match} isPreview />
-            )}
-            protectedRoute
-            allowedRoles={[Roles.Admin, Roles.Researcher]}
-            navbarProps={{
-              navbarId: NAVIGATION.PREVIEW,
-              navbarName: navbarNames.preview,
-            }}
-          />
-          <AppRoute
-            key="previewFromCurrent"
-            path="/interventions/:interventionId/sessions/:sessionId/preview/:index"
-            component={({ match }) => (
-              <AnswerSessionPage match={match} isPreview />
-            )}
-            protectedRoute
-            allowedRoles={[Roles.Admin, Roles.Researcher]}
-            navbarProps={{
-              navbarId: NAVIGATION.PREVIEW,
-              navbarName: navbarNames.preview,
-            }}
-          />
-          <AppRoute
-            exact
-            path="/interventions/:interventionId"
-            component={InterventionDetailsPage}
-            protectedRoute
-            allowedRoles={[Roles.Admin, Roles.Researcher]}
-            navbarProps={{
-              navbarId: NAVIGATION.DEFAULT,
-            }}
-            sidebarProps={{
-              sidebarId: NAVIGATION.DEFAULT,
-            }}
-          />
-          <AppRoute
-            exact
-            path="/profile"
-            component={AccountSettings}
-            protectedRoute
-            allowedRoles={AllRoles}
-            navbarProps={{
-              navbarId: NAVIGATION.DEFAULT,
-              activeTab: null,
-            }}
-            sidebarProps={{
-              sidebarId: NAVIGATION.DEFAULT,
-              activeTab: null,
-            }}
-          />
-          <AppRoute
-            exact
-            path="/users/:id"
-            component={UserDetails}
-            protectedRoute
-            allowedRoles={[Roles.Admin, Roles.TeamAdmin]}
-            navbarProps={{
-              navbarId: NAVIGATION.DEFAULT,
-              activeTab: accountsTabId,
-            }}
-            sidebarProps={{
-              sidebarId: NAVIGATION.DEFAULT,
-              activeTab: accountsTabId,
-            }}
-          />
-          <AppRoute
-            exact
-            protectedRoute
-            path="/admin-console"
-            component={SuperadminConsolePage}
-            allowedRoles={[Roles.Admin]}
-            navbarProps={{
-              navbarId: NAVIGATION.DEFAULT,
-              activeTab: null,
-            }}
-          />
-          <AppRoute
-            exact
-            path="/no-access"
-            component={ForbiddenPage}
-            allowedRoles={AllRoles}
-          />
-          <AppRoute exact path="/not-found-page" component={NotFoundPage} />
-          <AppRoute path="*">
-            <Redirect to="/not-found-page" />
-          </AppRoute>
-        </Switch>
-        <GlobalStyle />
-        {shouldDisplayChatWidget && <ChatWidget />}
-      </RolesManagerContext.Provider>
-    </SocketProvider>
+      <Switch>
+        <AppRoute
+          exact
+          path="/"
+          render={() => renderDashboardByRole()}
+          protectedRoute
+          allowedRoles={AllRoles}
+          navbarProps={{
+            navbarId: NAVIGATION.DEFAULT,
+            activeTab: interventionsTabId,
+          }}
+          sidebarProps={{
+            sidebarId: NAVIGATION.DEFAULT,
+            activeTab: defaultSidebarId,
+          }}
+        />
+        <AppRoute
+          exact
+          path="/live-chat"
+          component={InboxPage}
+          protectedRoute
+          allowedRoles={[Roles.Navigator]}
+          navbarProps={{
+            navbarId: NAVIGATION.DEFAULT,
+          }}
+          sidebarProps={{
+            sidebarId: NAVIGATION.DEFAULT,
+            activeTab: conversationsTabId,
+          }}
+        />
+        <AppRoute
+          exact
+          path="/organization/:organizationId"
+          render={() => (
+            <ReportingDashboardPage view={VIEW.MANAGE_ORGANIZATIONS} />
+          )}
+          protectedRoute
+          allowedRoles={[Roles.Admin, Roles.EInterventionAdmin]}
+          sidebarProps={{
+            sidebarId: NAVIGATION.DEFAULT,
+          }}
+          navbarProps={{
+            navbarId: NAVIGATION.DEFAULT,
+          }}
+        />
+        <AppRoute
+          exact
+          path="/organization/:organizationId/dashboard-setup"
+          render={() => <ReportingDashboardPage view={VIEW.DASHBOARD_SETUP} />}
+          protectedRoute
+          allowedRoles={[Roles.Admin, Roles.EInterventionAdmin]}
+          sidebarProps={{
+            sidebarId: NAVIGATION.DEFAULT,
+          }}
+          navbarProps={{
+            navbarId: NAVIGATION.DEFAULT,
+          }}
+        />
+        <AppRoute
+          exact
+          path="/organization/:organizationId/dashboard"
+          render={() => <ReportingDashboardPage view={VIEW.DASHBOARD_VIEW} />}
+          protectedRoute
+          allowedRoles={[
+            Roles.Admin,
+            Roles.EInterventionAdmin,
+            Roles.OrganizationAdmin,
+            Roles.ClinicAdmin,
+          ]}
+          sidebarProps={{
+            sidebarId: NAVIGATION.DEFAULT,
+          }}
+          navbarProps={{
+            navbarId: NAVIGATION.DEFAULT,
+          }}
+        />
+        <AppRoute
+          exact
+          path="/reports"
+          component={ParticipantReports}
+          protectedRoute
+          allowedRoles={[Roles.Participant]}
+          navbarProps={{
+            navbarId: NAVIGATION.DEFAULT,
+            activeTab: participantReportsTabId,
+          }}
+          sidebarProps={{
+            sidebarId: NAVIGATION.DEFAULT,
+            activeTab: participantReportsTabId,
+          }}
+        />
+        <AppRoute exact path="/login" component={LoginPage} />
+        <AppRoute exact path="/register" component={RegisterPage} />
+        <AppRoute exact path="/reset-password" component={ResetPasswordPage} />
+        <AppRoute
+          exact
+          path="/set-new-password"
+          component={SetNewPasswordPage}
+        />
+        <AppRoute exact path="/logout" component={Logout} />
+        <AppRoute
+          exact
+          path="/interventions/:interventionId/sessions/:sessionId/edit"
+          component={EditSessionPage}
+          protectedRoute
+          allowedRoles={[Roles.Admin, Roles.Researcher]}
+          navbarProps={{
+            navbarId: NAVIGATION.SESSIONS,
+          }}
+        />
+        <AppRoute
+          exact
+          path="/interventions/:interventionId/sessions/:sessionId/fill"
+          component={AnswerSessionPage}
+          allowedRoles={AllRoles}
+          user
+          navbarProps={{
+            navbarId: NAVIGATION.DEFAULT,
+            activeTab: interventionsTabId,
+          }}
+        />
+        <AppRoute
+          exact
+          path="/interventions/:interventionId/sessions/:sessionId/settings"
+          component={SettingsInterventionPage}
+          protectedRoute
+          allowedRoles={[Roles.Admin, Roles.Researcher]}
+          navbarProps={{
+            navbarId: NAVIGATION.SESSIONS,
+          }}
+        />
+        <AppRoute
+          exact
+          path="/interventions/:interventionId/sessions/:sessionId/report-templates"
+          component={ReportTemplatesPage}
+          protectedRoute
+          allowedRoles={[Roles.Admin, Roles.Researcher]}
+          navbarProps={{
+            navbarId: NAVIGATION.SESSIONS,
+          }}
+        />
+        <AppRoute
+          exact
+          path="/interventions/:interventionId/sessions/:sessionId/generated-reports"
+          component={GeneratedReportsPage}
+          protectedRoute
+          allowedRoles={[Roles.Admin, Roles.Researcher]}
+          navbarProps={{
+            navbarId: NAVIGATION.SESSIONS,
+          }}
+        />
+        <AppRoute
+          exact
+          path="/interventions/:interventionId/sessions/:sessionId/sms-messaging"
+          component={TextMessagesPage}
+          protectedRoute
+          allowedRoles={[Roles.Admin, Roles.Researcher]}
+          navbarProps={{
+            navbarId: NAVIGATION.SESSIONS,
+          }}
+        />
+        <AppRoute
+          exact
+          path="/interventions/:interventionId/sessions/:sessionId/map"
+          component={SessionMapPage}
+          protectedRoute
+          allowedRoles={[Roles.Admin, Roles.Researcher]}
+          navbarProps={{
+            navbarId: NAVIGATION.SESSIONS,
+          }}
+        />
+        <AppRoute
+          exact
+          path="/user_interventions/:userInterventionId"
+          component={UserInterventionPage}
+          protectedRoute
+          allowedRoles={[Roles.Participant]}
+        />
+        <AppRoute
+          exact
+          path="/interventions/:interventionId/invite"
+          component={UserInterventionInvitePage}
+          protectedRoute
+          allowedRoles={[Roles.Participant]}
+        />
+        <AppRoute
+          exact
+          path="/users"
+          component={renderUserListByRole}
+          protectedRoute
+          allowedRoles={[Roles.Admin, Roles.Researcher]}
+          navbarProps={{
+            navbarId: NAVIGATION.DEFAULT,
+            activeTab: accountsTabId,
+          }}
+          sidebarProps={{
+            sidebarId: NAVIGATION.DEFAULT,
+            activeTab: accountsTabId,
+          }}
+        />
+        <AppRoute
+          exact
+          path="/teams"
+          component={TeamsListPage}
+          protectedRoute
+          allowedRoles={[Roles.Admin, Roles.TeamAdmin]}
+          navbarProps={{
+            navbarId: NAVIGATION.DEFAULT,
+            activeTab: teamsTabId,
+          }}
+          sidebarProps={{
+            sidebarId: NAVIGATION.DEFAULT,
+            activeTab: teamsTabId,
+          }}
+        />
+        <AppRoute
+          exact
+          path="/teams/:id"
+          component={TeamDetails}
+          protectedRoute
+          allowedRoles={[Roles.Admin, Roles.TeamAdmin]}
+          navbarProps={{
+            navbarId: NAVIGATION.DEFAULT,
+          }}
+          sidebarProps={{
+            sidebarId: NAVIGATION.DEFAULT,
+          }}
+        />
+        <AppRoute
+          exact
+          key="previewFromStart"
+          path="/interventions/:interventionId/sessions/:sessionId/preview"
+          component={({ match }) => (
+            <AnswerSessionPage match={match} isPreview />
+          )}
+          protectedRoute
+          allowedRoles={[Roles.Admin, Roles.Researcher]}
+          navbarProps={{
+            navbarId: NAVIGATION.PREVIEW,
+            navbarName: navbarNames.preview,
+          }}
+        />
+        <AppRoute
+          key="previewFromCurrent"
+          path="/interventions/:interventionId/sessions/:sessionId/preview/:index"
+          component={({ match }) => (
+            <AnswerSessionPage match={match} isPreview />
+          )}
+          protectedRoute
+          allowedRoles={[Roles.Admin, Roles.Researcher]}
+          navbarProps={{
+            navbarId: NAVIGATION.PREVIEW,
+            navbarName: navbarNames.preview,
+          }}
+        />
+        <AppRoute
+          exact
+          path="/interventions/:interventionId"
+          component={InterventionDetailsPage}
+          protectedRoute
+          allowedRoles={[Roles.Admin, Roles.Researcher]}
+          navbarProps={{
+            navbarId: NAVIGATION.DEFAULT,
+          }}
+          sidebarProps={{
+            sidebarId: NAVIGATION.DEFAULT,
+          }}
+        />
+        <AppRoute
+          exact
+          path="/profile"
+          component={AccountSettings}
+          protectedRoute
+          allowedRoles={AllRoles}
+          navbarProps={{
+            navbarId: NAVIGATION.DEFAULT,
+            activeTab: null,
+          }}
+          sidebarProps={{
+            sidebarId: NAVIGATION.DEFAULT,
+            activeTab: null,
+          }}
+        />
+        <AppRoute
+          exact
+          path="/users/:id"
+          component={UserDetails}
+          protectedRoute
+          allowedRoles={[Roles.Admin, Roles.TeamAdmin]}
+          navbarProps={{
+            navbarId: NAVIGATION.DEFAULT,
+            activeTab: accountsTabId,
+          }}
+          sidebarProps={{
+            sidebarId: NAVIGATION.DEFAULT,
+            activeTab: accountsTabId,
+          }}
+        />
+        <AppRoute
+          exact
+          protectedRoute
+          path="/admin-console"
+          component={SuperadminConsolePage}
+          allowedRoles={[Roles.Admin]}
+          navbarProps={{
+            navbarId: NAVIGATION.DEFAULT,
+            activeTab: null,
+          }}
+        />
+        <AppRoute
+          exact
+          path="/no-access"
+          component={ForbiddenPage}
+          allowedRoles={AllRoles}
+        />
+        <AppRoute exact path="/not-found-page" component={NotFoundPage} />
+        <AppRoute path="*">
+          <Redirect to="/not-found-page" />
+        </AppRoute>
+      </Switch>
+      <GlobalStyle />
+      {shouldDisplayChatWidget && <ChatWidget />}
+    </RolesManagerContext.Provider>
   );
 }
 

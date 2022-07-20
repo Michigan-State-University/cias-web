@@ -37,3 +37,6 @@ export const makeSelectVerificationSuccess = () =>
 
 export const makeSelectUserId = () =>
   createSelector(selectAuth, (authState) => authState.user?.id);
+
+export const makeSelectIsUserLoggedIn = () =>
+  createSelector(selectAuth, (authState) => Boolean(authState.user));

@@ -7,9 +7,10 @@ import { SocketAction, SocketMessage } from './types';
 
 export const useSocket = <
   TMessage extends SocketMessage<string, object>,
-  TAction extends SocketAction<string, object>,
+  TAction extends SocketAction<string, object> | null = null,
 >(
   channelName: string,
+  suspend: boolean = false,
 ) => {
   type TChannel = Channel<{}, TMessage>;
 
@@ -17,10 +18,10 @@ export const useSocket = <
   const [channel, setChannel] = useState<TChannel | null>();
 
   const subscribe = useCallback(async () => {
-    if (!channel && cable) {
+    if (!channel && cable && !suspend) {
       setChannel(await cable.subscribeTo(channelName));
     }
-  }, [channel, cable]);
+  }, [channel, cable, suspend]);
 
   const unsubscribe = useCallback(() => {
     if (channel) {
@@ -44,8 +45,9 @@ export const useSocket = <
   );
 
   const perform = useCallback(
-    ({ name, data }: TAction) => {
-      if (!channel) return;
+    (action: TAction) => {
+      if (!channel || !action) return;
+      const { name, data } = action;
       return channel.perform(name, data);
     },
     [channel],

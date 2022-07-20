@@ -11,7 +11,8 @@ import { useLocalStorage } from '@rehooks/local-storage';
 
 import { HEADERS } from 'utils/localStorageService';
 
-import { createCableUrl, getUidFromCableUrl, tokenRefresher } from './utils';
+import { createCableUrl, getUidFromCableUrl } from './utils';
+import { CABLE_CREATE_OPTIONS } from './constants';
 
 type Props = PropsWithChildren<{}>;
 
@@ -26,18 +27,13 @@ export const SocketProvider = ({ children }: Props) => {
 
   useEffect(() => {
     if (!cableUrl) {
-      cable?.disconnect();
       cable?.close();
       setCable(null);
       return;
     }
 
     if (!cable) {
-      setCable(
-        createCable(cableUrl, {
-          tokenRefresher,
-        }),
-      );
+      setCable(createCable(cableUrl, CABLE_CREATE_OPTIONS));
       return;
     }
 

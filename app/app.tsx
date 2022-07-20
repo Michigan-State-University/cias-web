@@ -47,6 +47,8 @@ import { setAutoFreeze } from 'immer';
 import { translationMessages } from 'i18n';
 import { polyfillI18n } from 'i18nPolyfill';
 
+import { SocketProvider } from 'components/ActionCable';
+
 import 'utils/axios';
 
 smoothscroll.polyfill();
@@ -164,8 +166,10 @@ const render = (messages: any) => {
         <ConnectedRouter history={history}>
           <ScreenClassProvider>
             <Sentry.ErrorBoundary fallback={ErrorPage}>
-              <ToastContainer />
-              <App />
+              <SocketProvider>
+                <ToastContainer />
+                <App />
+              </SocketProvider>
             </Sentry.ErrorBoundary>
           </ScreenClassProvider>
         </ConnectedRouter>
