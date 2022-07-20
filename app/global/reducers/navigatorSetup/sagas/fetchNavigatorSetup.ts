@@ -1,10 +1,14 @@
 import axios from 'axios';
-import { put, call, takeLatest } from 'redux-saga/effects';
+import { put, call, takeLatest, all } from 'redux-saga/effects';
 
-import { jsonApiToObject } from 'utils/jsonApiMapper';
+import { jsonApiToArray, jsonApiToObject } from 'utils/jsonApiMapper';
 
 import { ApiError } from 'models/Api';
-import { NavigatorSetup } from 'models/NavigatorSetup';
+import {
+  InterventionNavigator,
+  NoNavigatorsAvailableData,
+  PendingNavigatorInvitation,
+} from 'models/NavigatorSetup';
 
 import { FETCH_NAVIGATOR_SETUP_REQUEST } from '../constants';
 import {
@@ -16,14 +20,42 @@ import {
 export function* fetchNavigatorSetup({
   payload: { interventionId },
 }: ReturnType<typeof fetchNavigatorSetupRequest>) {
-  const url = `/v1/live_chat/intervention/${interventionId}/navigator_setup`;
+  const noNavigatorsUrl = `/v1/live_chat/intervention/${interventionId}/navigator_setup`;
+  const pendingNavigatorInvitationsUrl = `/v1/interventions/${interventionId}/navigator_invitations`;
+  const interventionNavigatorUrl = `/v1/live_chat/intervention/${interventionId}/navigators`;
   try {
-    const { data } = yield call(axios.get, url);
-    const navigatorSetup = jsonApiToObject(
-      data,
+    const {
+      fetchNoNavigators: { data: noNavigatorsData },
+      fetchPendingInvitations: { data: pendingNavigatorInvitationsData },
+      fetchInterventionNavigators: { data: interventionNavigatorsData },
+    } = yield all({
+      fetchNoNavigators: call(axios.get, noNavigatorsUrl),
+      fetchPendingInvitations: call(axios.get, pendingNavigatorInvitationsUrl),
+      fetchInterventionNavigators: call(axios.get, interventionNavigatorUrl),
+    });
+
+    const noNavigatorsAvailableData = jsonApiToObject(
+      noNavigatorsData,
       'navigatorSetup',
-    ) as NavigatorSetup;
-    yield put(fetchNavigatorSetupSuccess(navigatorSetup));
+    ) as NoNavigatorsAvailableData;
+
+    const pendingNavigatorInvitations = jsonApiToArray(
+      pendingNavigatorInvitationsData,
+      'navigatorInvitation',
+    ) as PendingNavigatorInvitation[];
+
+    const interventionNavigators = jsonApiToArray(
+      interventionNavigatorsData,
+      'navigator',
+    ) as InterventionNavigator[];
+
+    yield put(
+      fetchNavigatorSetupSuccess(
+        noNavigatorsAvailableData,
+        pendingNavigatorInvitations,
+        interventionNavigators,
+      ),
+    );
   } catch (error) {
     yield put(fetchNavigatorSetupError(error as ApiError));
   }

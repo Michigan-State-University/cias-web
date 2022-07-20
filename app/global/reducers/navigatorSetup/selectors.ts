@@ -7,8 +7,8 @@ const selectNavigatorSetup = (rootState: {
   navigatorSetup: NavigatorSetupState;
 }): NavigatorSetupState => rootState.navigatorSetup || initialState;
 
-export const makeSelectNavigatorSetupData = () =>
-  createSelector(selectNavigatorSetup, ({ navigatorData }) => navigatorData);
+export const makeSelectTabsData = () =>
+  createSelector(selectNavigatorSetup, ({ modalTabsData }) => modalTabsData);
 
 export const makeSelectNavigatorSetupLoader = (loaderName: string) =>
   createSelector(selectNavigatorSetup, ({ loaders }) => loaders[loaderName]);

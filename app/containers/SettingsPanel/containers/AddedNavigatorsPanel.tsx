@@ -2,149 +2,79 @@ import React from 'react';
 import { useIntl } from 'react-intl';
 
 import { colors } from 'theme';
-import minus from 'assets/svg/grey-minus.svg';
+import { InterventionNavigator } from 'models/NavigatorSetup';
+// import minus from 'assets/svg/grey-minus.svg';
 
 import Box from 'components/Box';
 import H3 from 'components/H3';
 import Text from 'components/Text';
 import Row from 'components/Row';
-import Img from 'components/Img';
+// import Img from 'components/Img';
 import UserAvatar from 'components/UserAvatar';
 
+// import { TextButton } from 'components/Button';
 import messages from '../messages';
 
 const SINGLE_ITEM_HEIGHT = 60;
 const ITEM_MARGIN = 8;
 
-const NAVIGATOR_ACCOUNTS = [
-  {
-    id: 1,
-    user: {
-      firstName: 'test',
-      lastName: 'user',
-      avatarUrl: '',
-      email: 'Test@test.pl',
-    },
-  },
-  {
-    id: 2,
-    user: {
-      firstName: 'Other',
-      lastName: 'Test',
-      avatarUrl: '',
-      email: 'Test2@test.pl',
-    },
-  },
-  {
-    id: 3,
-    user: {
-      firstName: 'Michał',
-      lastName: 'Smierc',
-      avatarUrl: '',
-      email: 'Test3@test.pl',
-    },
-  },
-  {
-    id: 4,
-    user: {
-      firstName: 'Lubie',
-      lastName: 'Placki',
-      avatarUrl: '',
-      email: 'Test4@test.pl',
-    },
-  },
-  {
-    id: 5,
-    user: {
-      firstName: 'Lubie',
-      lastName: 'Placki',
-      avatarUrl: '',
-      email: 'Test4@test.pl',
-    },
-  },
-  {
-    id: 6,
-    user: {
-      firstName: 'Lubie',
-      lastName: 'Placki',
-      avatarUrl: '',
-      email: 'Test4@test.pl',
-    },
-  },
-  {
-    id: 7,
-    user: {
-      firstName: 'Lubie',
-      lastName: 'Placki',
-      avatarUrl: '',
-      email: 'Test4@test.pl',
-    },
-  },
-  {
-    id: 8,
-    user: {
-      firstName: 'Lubie',
-      lastName: 'Placki',
-      avatarUrl: '',
-      email: 'Test4@test.pl',
-    },
-  },
-  {
-    id: 9,
-    user: {
-      firstName: 'Lubie',
-      lastName: 'Placki',
-      avatarUrl: '',
-      email: 'Test4@test.pl',
-    },
-  },
-];
+type Props = {
+  interventionNavigators: InterventionNavigator[];
+  removeInterventionNavigator: (interventionNavigatorId: string) => void;
+};
 
-const AddedNavigatorPanel = () => {
+const AddedNavigatorPanel = ({
+  interventionNavigators,
+  removeInterventionNavigator,
+}: Props) => {
   const { formatMessage } = useIntl();
 
-  const removeNavigator = (navigatorId: number) => {
-    console.log(navigatorId);
-  };
+  console.log(removeInterventionNavigator);
 
   return (
     <Box>
       <H3 mb={30}>{formatMessage(messages.navigatorsAddedToIntervention)}</H3>
-      {NAVIGATOR_ACCOUNTS.length === 0 && (
+      {interventionNavigators.length === 0 && (
         <Text color={colors.grey}>
           {formatMessage(messages.noAddedNavigators)}
         </Text>
       )}
-      {NAVIGATOR_ACCOUNTS.map(
-        ({ id, user: { avatarUrl, firstName, lastName, email } }, index) => (
+      {interventionNavigators.map(
+        ({ id, avatarUrl, email, firstName, lastName }, index) => (
           <Row
             justify="between"
             align="center"
             background={colors.lightBlue}
             padding={12}
             key={id}
-            maxHeight={SINGLE_ITEM_HEIGHT}
+            minHeight={SINGLE_ITEM_HEIGHT}
             mt={index === 0 ? 0 : ITEM_MARGIN}
           >
             <Row align="center">
-              <UserAvatar
-                height={32}
-                width={32}
-                avatar={avatarUrl}
-                firstName={firstName}
-                lastName={lastName}
-              />
+              <Box flexShrink={0}>
+                <UserAvatar
+                  height={32}
+                  width={32}
+                  avatar={avatarUrl || ''}
+                  firstName={firstName}
+                  lastName={lastName}
+                />
+              </Box>
               <Box ml={16}>
                 <Text fontWeight="bold">{`${firstName} ${lastName}`}</Text>
                 <Text>{email}</Text>
               </Box>
             </Row>
-            <Row onClick={() => removeNavigator(id)} align="center">
+            {/* WAITING FOR BE */}
+            {/* <TextButton
+              onClick={() => removeInterventionNavigator(id)}
+              buttonProps={{ display: 'flex', align: 'center' }}
+            >
               <Img width={24} height={24} src={minus} />
               <Text ml={16} color={colors.manatee} fontWeight="bold">
                 {formatMessage(messages.remove)}
               </Text>
-            </Row>
+            </TextButton> */}
           </Row>
         ),
       )}

@@ -10,26 +10,32 @@ import {
   fetchNavigatorSetupRequest,
   makeSelectNavigatorSetupLoader,
   makeSelectNavigatorSetupError,
-  makeSelectNavigatorSetupData,
-  updateNavigatorSetupRequest,
+  makeSelectTabsData,
+  updateNoNavigatorTabRequest,
   addParticipantLinkRequest,
   updateParticipantLinkRequest,
   removeParticipantLinkRequest,
+  inviteNavigatorsByEmailRequest,
+  removeNavigatorEmailInvitationRequest,
+  removeInterventionNavigatorRequest,
 } from 'global/reducers/navigatorSetup';
 import Tabs from 'components/Tabs';
 import ErrorAlert from 'components/ErrorAlert';
 import Spinner from 'components/Spinner';
 
 import { themeColors, colors } from 'theme';
-import { NavigatorSetup, ParticipantLink } from 'models/NavigatorSetup';
+import {
+  NoNavigatorsAvailableData,
+  ParticipantLink,
+} from 'models/NavigatorSetup';
 
 import messages from '../messages';
 import NavigatorModalLayout from '../Components/NavigatorModalLayout';
 import NavigatorEmailInvitationPanel from './NavigatorEmailInvitationPanel';
-import TeamNavigatorsPanel from './TeamNavigatorsPanel';
+// import TeamNavigatorsPanel from './TeamNavigatorsPanel';
 import AddedNavigatorPanel from './AddedNavigatorsPanel';
 
-import NoNavigatorsForm from './NoNavigatorsForm';
+import NoNavigatorsForm from '../Components/NoNavigatorsForm';
 import LinksForParticipant from './LinksForParticipant';
 
 type Props = {
@@ -41,17 +47,20 @@ const NavigatorSettingsModal = ({ interventionId }: Props) => {
   const dispatch = useDispatch();
 
   const loading = useSelector(makeSelectNavigatorSetupLoader('fetching'));
+  const navigatorEmailInvitationLoading = useSelector(
+    makeSelectNavigatorSetupLoader('navigatorEmailInvitation'),
+  );
   const error = useSelector(makeSelectNavigatorSetupError());
-  const navigatorSetupData = useSelector(makeSelectNavigatorSetupData());
+  const navigatorSettingsTabData = useSelector(makeSelectTabsData());
 
   useEffect(() => {
     dispatch(fetchNavigatorSetupRequest(interventionId));
   }, []);
 
-  const updateNavigatorSettings = (
-    newData: Partial<Omit<NavigatorSetup, 'id'>>,
+  const updateNoNavigatorTabData = (
+    newData: Partial<Omit<NoNavigatorsAvailableData, 'id'>>,
   ) => {
-    dispatch(updateNavigatorSetupRequest(interventionId, newData));
+    dispatch(updateNoNavigatorTabRequest(interventionId, newData));
   };
 
   const addNewParticipantLink = () =>
@@ -70,11 +79,26 @@ const NavigatorSettingsModal = ({ interventionId }: Props) => {
   const removeParticipantLink = (linkId: string) =>
     dispatch(removeParticipantLinkRequest(interventionId, linkId));
 
+  const inviteNavigatorsByEmail = (emails: string[]) =>
+    dispatch(inviteNavigatorsByEmailRequest(interventionId, emails));
+
+  const removeNavigatorEmailInvitation = (invitationId: string) =>
+    dispatch(
+      removeNavigatorEmailInvitationRequest(interventionId, invitationId),
+    );
+  const removeInterventionNavigator = (interventionNavigatorId: string) =>
+    dispatch(
+      removeInterventionNavigatorRequest(
+        interventionId,
+        interventionNavigatorId,
+      ),
+    );
+
   if (loading) {
     return <Spinner color={themeColors.secondary} />;
   }
 
-  if (error || !navigatorSetupData) {
+  if (error || !navigatorSettingsTabData) {
     return (
       <ErrorAlert
         errorText={error || formatMessage(messages.navigatorSetupError)}
@@ -84,13 +108,16 @@ const NavigatorSettingsModal = ({ interventionId }: Props) => {
   }
 
   const {
-    contactEmail,
-    isNavigatorNotificationOn,
-    noNavigatorAvailableMessage,
-    notifyBy,
-    phone,
-    participantLinks,
-  } = navigatorSetupData;
+    noNavigatorsAvailableData: {
+      contactEmail,
+      isNavigatorNotificationOn,
+      noNavigatorsAvailableMessage,
+      notifyBy,
+      phone,
+      participantLinks,
+    },
+    navigatorsData: { pendingNavigatorInvitations, interventionNavigators },
+  } = navigatorSettingsTabData;
 
   return (
     // @ts-ignore
@@ -106,11 +133,22 @@ const NavigatorSettingsModal = ({ interventionId }: Props) => {
         <NavigatorModalLayout
           leftContent={
             <>
-              <NavigatorEmailInvitationPanel />
-              <TeamNavigatorsPanel />
+              <NavigatorEmailInvitationPanel
+                pendingNavigatorInvitations={pendingNavigatorInvitations}
+                inviteNavigatorsByEmail={inviteNavigatorsByEmail}
+                removeNavigatorEmailInvitation={removeNavigatorEmailInvitation}
+                invitationLoading={navigatorEmailInvitationLoading}
+              />
+              {/* REMOVED FOR NOW AS WE DON'T SUPPORT TEAM INVITATIONS YET */}
+              {/* <TeamNavigatorsPanel /> */}
             </>
           }
-          rightContent={<AddedNavigatorPanel />}
+          rightContent={
+            <AddedNavigatorPanel
+              interventionNavigators={interventionNavigators}
+              removeInterventionNavigator={removeInterventionNavigator}
+            />
+          }
         />
       </div>
       {/* @ts-ignore */}
@@ -118,12 +156,12 @@ const NavigatorSettingsModal = ({ interventionId }: Props) => {
         <NavigatorModalLayout
           leftContent={
             <NoNavigatorsForm
-              contactEmail={contactEmail}
               isNavigatorNotificationOn={isNavigatorNotificationOn}
-              noNavigatorAvailableMessage={noNavigatorAvailableMessage}
+              contactEmail={contactEmail}
+              noNavigatorsAvailableMessage={noNavigatorsAvailableMessage}
               notifyBy={notifyBy}
               phone={phone}
-              updateNavigatorSettings={updateNavigatorSettings}
+              updateNoNavigatorTabData={updateNoNavigatorTabData}
             />
           }
           rightContent={
