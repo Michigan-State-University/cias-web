@@ -92,7 +92,6 @@ const NavigatorEmailInvitationPanel = ({
                   <Box py={11.5}>
                     <Text lineHeight="13px">{email}</Text>
                   </Box>
-                  {/* @ts-ignore */}
                   {!inDeletion && (
                     <ImageButton
                       onClick={() => removeNavigatorEmailInvitation(id)}
