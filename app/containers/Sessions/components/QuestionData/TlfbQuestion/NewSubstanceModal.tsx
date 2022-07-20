@@ -9,6 +9,7 @@ import { EditModal } from 'components/Modal/EditModal';
 import { variableNameValidator } from 'utils/validators';
 
 import messages from './messages';
+import { maximumLength } from './constants';
 
 type NewSubstanceModalType = {
   substance?: Substance;
@@ -22,7 +23,12 @@ type NewSubstanceModalType = {
 };
 
 const schema = (formatMessage: any, grouped: boolean) => ({
-  name: Yup.string().required(formatMessage(messages.nameRequired)),
+  name: Yup.string()
+    .required(formatMessage(messages.nameRequired))
+    .max(
+      maximumLength,
+      formatMessage(messages.maxSize, { maximumLength, type: 'Substance' }),
+    ),
   variable: Yup.string().required(formatMessage(messages.variableRequired)),
   ...(grouped && {
     unit: Yup.string().required(formatMessage(messages.unitRequired)),

@@ -1,33 +1,36 @@
 import React, { CSSProperties } from 'react';
 import { useIntl } from 'react-intl';
 
-import { EventData } from 'models/Tlfb';
-
 import { colors } from 'theme';
 
 import Box from 'components/Box';
 import Circle from 'components/Circle';
 
-import messages from '../messages';
+import globalMessages from 'global/i18n/globalMessages';
 import { StyledText } from './styled';
+import { SubstanceUsage } from '../types';
 
-export type EventListProps = {
-  events: EventData[];
+export type SubstanceUsageListProps = {
+  substanceUsages: SubstanceUsage[];
   textColor?: CSSProperties['color'];
   wrap?: boolean;
 };
 
-const EventList = ({ events, textColor, wrap }: EventListProps) => {
+export const SubstanceUsageList = ({
+  substanceUsages,
+  textColor,
+  wrap,
+}: SubstanceUsageListProps) => {
   const { formatMessage } = useIntl();
 
   return (
     <>
-      {events.map(({ name, id }) => (
+      {substanceUsages.map(({ name, consumed }) => (
         <Box
-          key={id}
+          key={name}
           display="flex"
           align="center"
-          mt={events.length > 1 ? 8 : 0}
+          mt={substanceUsages.length > 1 ? 8 : 0}
           textOverflow="ellipsis"
           overflow="hidden"
           whiteSpace="nowrap"
@@ -35,7 +38,9 @@ const EventList = ({ events, textColor, wrap }: EventListProps) => {
           {/* @ts-ignore */}
           <Circle bg={colors.azureBlue} size="5px" doNotShrink />
           <StyledText ml={4} color={textColor} wrap={wrap} ellipsis>
-            {name || formatMessage(messages.defaultEventName)}
+            {`${name}: ${formatMessage(
+              globalMessages[consumed ? 'yes' : 'no'],
+            )}`}
           </StyledText>
         </Box>
       ))}
@@ -43,4 +48,4 @@ const EventList = ({ events, textColor, wrap }: EventListProps) => {
   );
 };
 
-export default EventList;
+export default SubstanceUsageList;

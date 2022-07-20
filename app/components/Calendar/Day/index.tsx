@@ -1,5 +1,5 @@
-import React, { memo } from 'react';
-import { useIntl } from 'react-intl';
+import React, { memo, useMemo } from 'react';
+import { FormattedMessage, useIntl } from 'react-intl';
 
 import { colors } from 'theme';
 
@@ -9,24 +9,34 @@ import Box from 'components/Box';
 import Tooltip from 'components/Tooltip';
 import Text from 'components/Text';
 
+import { EventData } from 'models/Tlfb';
+import TlfbYesNoText from 'components/TlfbYesNoText';
+import globalMessages from 'global/i18n/globalMessages';
+
 import messages from '../messages';
-import { getNumberOfEventsVisible } from '../utils';
-import { EventList } from './EventList';
+import EventList from './EventList';
+import SubstancesUsageList from './SubstancesUsageList';
 import { DayCell, DayCellProps } from './DayCell';
+import { StyledText } from './styled';
+import { SubstanceUsage } from '../types';
+import {
+  NUMBER_OF_EVENTS_VISIBLE,
+  NUMBER_OF_SUBSTANCES_VISIBLE,
+} from '../constants';
 
 export type CalendarDayType = {
   rowsNumber: number;
+  orderedGroupNames: string[];
 } & Pick<
   DayCellProps,
   | 'day'
-  | 'events'
+  | 'dayData'
   | 'unreachable'
   | 'disabled'
   | 'active'
   | 'onClick'
   | 'compact'
   | 'disableManualDayClick'
-  | 'substanceCount'
 >;
 
 export const Day = ({
@@ -34,26 +44,94 @@ export const Day = ({
   rowsNumber,
   compact,
   active,
-  events = [],
-  substanceCount,
+  dayData,
+  orderedGroupNames,
   ...props
 }: CalendarDayType) => {
   const { formatMessage } = useIntl();
   const id = day.format(fullDayToYearFormatter);
 
-  const numberOfEventsVisible = getNumberOfEventsVisible(rowsNumber);
-  const numberOfEventsHidden = events.length - numberOfEventsVisible;
-  const shouldRenderTooltip = !compact && !active && numberOfEventsHidden > 0;
+  const events: EventData[] = dayData?.events || [];
+
+  const substancesGroupUsages = useMemo<SubstanceUsage[]>(() => {
+    const consumptions = dayData?.answer?.body.consumptions || [];
+    if (consumptions.length === 0) return [];
+    const substances = consumptions.reduce<NormalizedData<boolean>>(
+      (acc, { name, consumed, amount }) => ({
+        ...acc,
+        [name]: acc[name] || consumed || amount !== null,
+      }),
+      {},
+    );
+    return orderedGroupNames.map((name) => ({
+      name,
+      consumed: substances[name],
+    }));
+  }, [orderedGroupNames, dayData]);
+
+  const substancesLabel = useMemo(() => {
+    if (!dayData || !dayData.answer || !dayData.answer.body) return null;
+
+    const { consumptions, substancesConsumed } = dayData!.answer!.body;
+    if (substancesConsumed === false) return <TlfbYesNoText yes={false} />;
+    if (substancesConsumed && consumptions.length === 0)
+      return <TlfbYesNoText yes />;
+
+    return (
+      <>
+        {substancesGroupUsages
+          .slice(0, NUMBER_OF_SUBSTANCES_VISIBLE)
+          .map(({ consumed, name }) => (
+            <Text
+              key={name}
+              textAlign="right"
+              fontWeight="bold"
+              color={colors.brightNavyBlue}
+              fontSize={11}
+              whiteSpace="nowrap"
+              overflow="hidden"
+            >
+              {`${name}: ${formatMessage(
+                globalMessages[consumed ? 'yes' : 'no'],
+              )}`}
+            </Text>
+          ))}
+        {substancesGroupUsages.length > NUMBER_OF_SUBSTANCES_VISIBLE && (
+          <StyledText textAlign="right" color={colors.bluewood} ml={12}>
+            <FormattedMessage
+              values={{
+                count:
+                  substancesGroupUsages.length - NUMBER_OF_SUBSTANCES_VISIBLE,
+              }}
+              {...messages.moreToDisplay}
+            />
+          </StyledText>
+        )}
+      </>
+    );
+  }, [dayData, substancesGroupUsages]);
+
+  const numberOfEventsHidden = events.length - NUMBER_OF_EVENTS_VISIBLE;
+  const numberOfSubstancesHidden =
+    substancesGroupUsages.length - NUMBER_OF_SUBSTANCES_VISIBLE;
+  const shouldRenderTooltip =
+    !compact &&
+    !active &&
+    (numberOfEventsHidden > 0 ||
+      (numberOfSubstancesHidden > 0 &&
+        (!dayData ||
+          !dayData.answer ||
+          !dayData.answer.body ||
+          dayData.answer.body.substancesConsumed)));
 
   const dayContentProps: DayCellProps = {
     day,
-    events,
+    dayData,
     id,
     compact,
     active,
-    numberOfEventsVisible,
     numberOfEventsHidden,
-    substanceCount,
+    substancesLabel,
     ...props,
   };
 
@@ -68,9 +146,23 @@ export const Day = ({
       backgroundColor={colors.bluewood}
       content={
         <Box>
-          <Text color={colors.white} fontSize={12} fontWeight="bold" mb={4}>
-            {formatMessage(messages.events)}
-          </Text>
+          {substancesGroupUsages.length > 0 && (
+            <Text color={colors.white} fontSize={12} fontWeight="bold" mb={4}>
+              {formatMessage(messages.substances, {
+                count: substancesGroupUsages.length,
+              })}
+            </Text>
+          )}
+          <SubstancesUsageList
+            substanceUsages={substancesGroupUsages}
+            textColor={colors.white}
+            wrap
+          />
+          {events.length > 0 && (
+            <Text color={colors.white} fontSize={12} fontWeight="bold" my={4}>
+              {formatMessage(messages.events)}
+            </Text>
+          )}
           <EventList events={events} textColor={colors.white} wrap />
         </Box>
       }

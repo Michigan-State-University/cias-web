@@ -7,8 +7,8 @@ export default defineMessages({
     id: `${scope}.defaultEventName`,
     defaultMessage: 'Event',
   },
-  moreEvents: {
-    id: `${scope}.moreEvents`,
+  moreToDisplay: {
+    id: `${scope}.moreToDisplay`,
     defaultMessage: '+{count} more',
   },
   events: {

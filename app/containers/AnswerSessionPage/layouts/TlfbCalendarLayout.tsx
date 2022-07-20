@@ -32,6 +32,7 @@ type Props = {
   disableModalClose?: boolean;
   isLoading?: boolean;
   hideHelpingMaterials?: boolean;
+  orderedGroupNames?: string[];
 };
 
 const TlfbCalendarLayout = forwardRef<CalendarRef, Props>(
@@ -50,6 +51,7 @@ const TlfbCalendarLayout = forwardRef<CalendarRef, Props>(
       disableModalClose,
       isLoading = false,
       hideHelpingMaterials,
+      orderedGroupNames,
     }: Props,
     ref,
   ) => {
@@ -81,6 +83,7 @@ const TlfbCalendarLayout = forwardRef<CalendarRef, Props>(
           endDate={endDate}
           calendarData={calendarData}
           disableManualDayClick={disableModalClose}
+          orderedGroupNames={orderedGroupNames || []}
         />
         <PopoverModal
           referenceElement={dayId}

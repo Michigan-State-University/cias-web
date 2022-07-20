@@ -146,6 +146,11 @@ const TlfbQuestion = ({
     return consumptions?.length === substances.length;
   }, [answerBody]);
 
+  const orderedGroupNames = useMemo(
+    () => [...substanceGroups, ...substances].map(({ name }) => name),
+    [substancesWithGroup, substances],
+  );
+
   const { isEveryAnswerFilled, startDate } = useMemo(
     () => getCalendarMetadata(config, tlfbDaysData),
     [config, tlfbDaysData],
@@ -226,6 +231,7 @@ const TlfbQuestion = ({
       disableModalClose={!isEveryAnswerFilled}
       isLoading={calendarDataLoading}
       hideHelpingMaterials={!displayHelpingMaterials}
+      orderedGroupNames={orderedGroupNames}
     >
       {(!isDesktop || isMobilePreview) && (
         <>

@@ -125,7 +125,11 @@ export const GroupedSubstances = ({
       {substanceGroups.map((group, index) => (
         <BoxCollapse
           key={`substance-group-${index}`}
-          label={group.name}
+          label={
+            <Text fontSize="16px" fontWeight="bold">
+              {group.name}
+            </Text>
+          }
           onEdit={onEditGroup(index)}
           onDelete={onRemoveGroup(index)}
           mb={16}

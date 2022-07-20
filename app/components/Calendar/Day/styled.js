@@ -99,9 +99,14 @@ export const StyledText = styled(Text).attrs({
   ${({ wrap }) =>
     !wrap &&
     css`
-      overflow: hidden;
       white-space: nowrap;
+    `}
+
+  ${({ ellipsis }) =>
+    ellipsis &&
+    css`
       text-overflow: ellipsis;
+      overflow: hidden;
     `}
 `;
 

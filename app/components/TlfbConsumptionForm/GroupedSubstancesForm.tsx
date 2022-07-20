@@ -10,6 +10,11 @@ import Column from 'components/Column';
 import BoxCollapse from 'components/BoxCollapse';
 import { TextButton } from 'components/Button';
 
+import Row from 'components/Row';
+import Text from 'components/Text';
+import TlfbYesNoText from 'components/TlfbYesNoText';
+import Box from 'components/Box';
+
 import messages from './messages';
 import { GroupedSubstanceItem } from './GroupedSubstanceItem';
 import {
@@ -56,13 +61,18 @@ const Component = ({
       onChange(newConsumptions);
     };
 
-  const onAddSubstanceInGroup = (index: number) => () => {
+  const onAddSubstanceInGroup = (index: number, name: string) => () => {
     const remainingVariable = groupToVariablesMap[index][0];
 
     if (remainingVariable) {
       const newConsumptions: SubstanceConsumption[] = [
         ...consumptions,
-        { amount: null, consumed: null, variable: remainingVariable },
+        {
+          amount: null,
+          consumed: null,
+          variable: remainingVariable,
+          name,
+        },
       ];
 
       onChange(newConsumptions);
@@ -77,16 +87,33 @@ const Component = ({
     onChange(newConsumptions);
   };
 
+  const isAnySubstanceInGroupConsumed = (
+    groupConsumptions: SubstanceConsumption[],
+  ) => {
+    if (groupConsumptions.length === 0) return false;
+    return groupConsumptions.some(({ amount }) => amount !== null);
+  };
+
   return (
     <Column gap={16} mb={24}>
-      {substanceGroups.map((group, index) => {
+      {substanceGroups.map(({ name, substances }, index) => {
         const isAddSubstanceDisabled = !groupToVariablesMap[index][0];
 
         return (
           <BoxCollapse
-            id={generateGroupId(group.name)}
+            id={generateGroupId(name)}
             key={`substance-group-${index}`}
-            label={group.name}
+            label={
+              <Row align="center">
+                <Text fontSize={16} fontWeight="bold">
+                  {name}
+                </Text>
+                <Box mx={10} width={1} height={15} bg={colors.periwinkleGray} />
+                <TlfbYesNoText
+                  yes={isAnySubstanceInGroupConsumed(consumptionsMap[index])}
+                />
+              </Row>
+            }
             bg={colors.lightStealBlue}
             bgOpacity={0.2}
             labelBgOpacity={0}
@@ -97,9 +124,9 @@ const Component = ({
                 <GroupedSubstanceItem
                   key={`substance-group-item-${index}-${substanceIndex}`}
                   index={substanceIndex}
-                  groupName={group.name}
+                  groupName={name}
                   consumption={consumption}
-                  substances={group.substances}
+                  substances={substances}
                   consumptions={consumptionsMap[index] ?? []}
                   onChange={onConsumptionsChange(consumption.variable)}
                   onRemove={onRemoveSubstanceInGroup(consumption.variable)}
@@ -111,7 +138,7 @@ const Component = ({
               <TextButton
                 disabled={isAddSubstanceDisabled}
                 buttonProps={{ color: themeColors.secondary }}
-                onClick={onAddSubstanceInGroup(index)}
+                onClick={onAddSubstanceInGroup(index, name)}
               >
                 {formatMessage(messages.addSubstance)}
               </TextButton>

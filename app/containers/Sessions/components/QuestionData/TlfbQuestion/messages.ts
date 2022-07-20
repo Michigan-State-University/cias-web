@@ -124,4 +124,8 @@ export default defineMessages({
     id: `${scope}.addGroup`,
     defaultMessage: 'Add group',
   },
+  maxSize: {
+    id: `${scope}.maxSize`,
+    defaultMessage: '{type} name can have only {maximumLength} characters',
+  },
 });

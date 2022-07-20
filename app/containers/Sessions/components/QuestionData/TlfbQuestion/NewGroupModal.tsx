@@ -8,6 +8,7 @@ import { SubstanceGroup } from 'models/Question';
 import { EditModal } from 'components/Modal/EditModal';
 
 import messages from './messages';
+import { maximumLength } from './constants';
 
 type NewSubstanceGroupFormikType = {
   name: string;
@@ -24,7 +25,12 @@ type NewSubstanceGroupModalType = {
 };
 
 const schema = (formatMessage: any) => ({
-  name: Yup.string().required(formatMessage(messages.nameRequired)),
+  name: Yup.string()
+    .required(formatMessage(messages.nameRequired))
+    .max(
+      maximumLength,
+      formatMessage(messages.maxSize, { maximumLength, type: 'Group' }),
+    ),
 });
 
 const validationSchema = (formatMessage: any) =>

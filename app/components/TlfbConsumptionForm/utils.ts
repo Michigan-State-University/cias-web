@@ -17,11 +17,13 @@ export const normalizeUngroupedConsumptions = (
 
 export const denormalizeUngroupedConsumptions = (
   consumptions: NormalizedData<boolean>,
+  substanceNameMap: NormalizedData<string>,
 ): SubstanceConsumption[] =>
   Object.entries(consumptions).map(([variable, consumed]) => ({
     variable,
     consumed,
     amount: null,
+    name: substanceNameMap[variable],
   }));
 
 export const normalizeGroupedConsumptions = (

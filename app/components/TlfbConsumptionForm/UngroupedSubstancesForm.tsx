@@ -1,4 +1,4 @@
-import React, { memo } from 'react';
+import React, { memo, useMemo } from 'react';
 import { useIntl } from 'react-intl';
 
 import { SubstanceConsumption } from 'models/Tlfb';
@@ -33,6 +33,15 @@ const Component = ({
 
   const consumptionsMap = normalizeUngroupedConsumptions(consumptions);
 
+  const substanceNameMap = useMemo<NormalizedData<string>>(
+    () =>
+      substances.reduce(
+        (acc, { name, variable }) => ({ ...acc, [variable]: name }),
+        {},
+      ),
+    [substances],
+  );
+
   const options = substances.map(({ name, variable }) => ({
     name,
     variable,
@@ -41,11 +50,13 @@ const Component = ({
 
   const handleConsumptionChange =
     (variable: string, consumed: boolean) => () => {
-      const newConsumptions = denormalizeUngroupedConsumptions({
-        ...consumptionsMap,
-        [variable]: consumed,
-      });
-
+      const newConsumptions = denormalizeUngroupedConsumptions(
+        {
+          ...consumptionsMap,
+          [variable]: consumed,
+        },
+        substanceNameMap,
+      );
       onChange(newConsumptions);
     };
 

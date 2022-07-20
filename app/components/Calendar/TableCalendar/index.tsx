@@ -1,9 +1,7 @@
 import React, { memo, ReactElement } from 'react';
 import dayjs, { Dayjs } from 'dayjs';
-import countBy from 'lodash/countBy';
-import toInteger from 'lodash/toInteger';
 
-import { EventData, CalendarData } from 'models/Tlfb';
+import { CalendarData } from 'models/Tlfb';
 import { fullDayToYearFormatter } from 'utils/formatters';
 
 import {
@@ -26,21 +24,10 @@ type TableCalendarProps = {
   endDate: Dayjs;
   calendarData: CalendarData;
   disableManualDayClick?: boolean;
+  orderedGroupNames: string[];
 };
 
 // prevent rerender
-const EMPTY_ARRAY: EventData[] = [];
-
-const getCountOfConsumedSubstances = (
-  hasConsumedSubstances: boolean,
-  hasNoSubstancesListed: boolean,
-  numberOfSubstancesConsumed: number,
-) => {
-  if (hasConsumedSubstances && hasNoSubstancesListed) return true;
-  if (hasConsumedSubstances && !hasNoSubstancesListed)
-    return numberOfSubstancesConsumed;
-  return 0;
-};
 
 export const TableCalendar = ({
   dates,
@@ -53,6 +40,7 @@ export const TableCalendar = ({
   endDate,
   calendarData,
   disableManualDayClick,
+  orderedGroupNames,
 }: TableCalendarProps) => (
   <>
     {!isDesktop && MonthSelectorComponent}
@@ -79,33 +67,10 @@ export const TableCalendar = ({
                     fullDayToYearFormatter,
                   );
 
-                  const consumptions =
-                    calendarData[formattedDate]?.answer?.body?.consumptions;
-
-                  const substancesConsumed =
-                    calendarData[formattedDate]?.answer?.body
-                      ?.substancesConsumed;
-
-                  const numberOfSubstancesConsumed =
-                    countBy(
-                      consumptions,
-                      (substance) =>
-                        substance.consumed || !!toInteger(substance.amount),
-                    ).true || 0;
-
-                  const substanceCount = getCountOfConsumedSubstances(
-                    !!substancesConsumed,
-                    consumptions?.length === 0,
-                    numberOfSubstancesConsumed,
-                  );
-
                   return (
                     <td key={day.toISOString()}>
                       <Day
                         rowsNumber={dates.length}
-                        events={
-                          calendarData[formattedDate]?.events ?? EMPTY_ARRAY
-                        }
                         onClick={onSelectDay}
                         active={selectedDay?.isSame(day, 'day')}
                         day={day}
@@ -116,11 +81,8 @@ export const TableCalendar = ({
                           day.isBefore(startDate, 'day')
                         }
                         disableManualDayClick={disableManualDayClick}
-                        substanceCount={
-                          calendarData[formattedDate]?.answer
-                            ? substanceCount
-                            : undefined
-                        }
+                        dayData={calendarData[formattedDate]}
+                        orderedGroupNames={orderedGroupNames}
                       />
                     </td>
                   );

@@ -1,10 +1,10 @@
-import React, { memo } from 'react';
+import React, { memo, ReactNode } from 'react';
 import { FormattedMessage } from 'react-intl';
 import isEmpty from 'lodash/isEmpty';
 import isNil from 'lodash/isNil';
 import { Dayjs } from 'dayjs';
 
-import { EventData } from 'models/Tlfb';
+import { DayData, EventData } from 'models/Tlfb';
 
 import { firstDayOfMonthFormatter } from 'utils/formatters';
 
@@ -13,40 +13,38 @@ import Box from 'components/Box';
 
 import messages from '../messages';
 import { Container, DayNo, Dot, StyledText, Wrapper } from './styled';
-import { EventList } from './EventList';
-import SubstancesCounter from './SubstancesCounter';
+import EventList from './EventList';
 
 export type DayCellProps = {
   day: Dayjs;
-  events: EventData[];
   id: string;
   unreachable?: boolean;
   disabled?: boolean;
   active?: boolean;
   compact?: boolean;
   onClick?: (day: Dayjs, id: string) => void;
-  numberOfEventsVisible: number;
   numberOfEventsHidden: number;
   disableManualDayClick?: boolean;
-  substanceCount?: number | boolean;
+  substancesLabel: Nullable<ReactNode>;
+  dayData?: DayData;
 };
 
 const DayCellComponent = ({
   day,
-  events,
   id,
   unreachable = false,
   disabled = false,
   active,
   compact,
   onClick,
-  numberOfEventsVisible,
   numberOfEventsHidden,
   disableManualDayClick,
-  substanceCount,
+  substancesLabel,
+  dayData,
 }: DayCellProps) => {
   const date = day.date();
   const dayNo = date === 1 ? day.format(firstDayOfMonthFormatter) : date;
+  const events: EventData[] = dayData?.events || [];
 
   const handleClick = () =>
     !disabled && !disableManualDayClick && onClick
@@ -72,32 +70,32 @@ const DayCellComponent = ({
           position="relative"
         >
           <DayNo>{dayNo}</DayNo>
-          {!isNil(substanceCount) && (
+          {!isNil(substancesLabel) && (
             <>
               {compact && (
                 <Box mt={2} position="absolute" top={15}>
-                  <Dot red={!!substanceCount} />
+                  <Dot red />
                 </Box>
               )}
               {!compact && (
                 <Box ml={5} overflow="hidden">
-                  <SubstancesCounter substanceCount={substanceCount} />
+                  {substancesLabel}
                 </Box>
               )}
             </>
           )}
         </Box>
         {!compact && (
-          <Box>
+          <Box display="flex" align="center" width="100%">
             <EventList
-              events={events.slice(0, numberOfEventsVisible)}
+              events={events.slice(0, 1)}
               textColor={colors.bluewood}
             />
             {numberOfEventsHidden > 0 && (
-              <StyledText color={colors.bluewood} mt={8}>
+              <StyledText color={colors.bluewood} ml={12}>
                 <FormattedMessage
                   values={{ count: numberOfEventsHidden }}
-                  {...messages.moreEvents}
+                  {...messages.moreToDisplay}
                 />
               </StyledText>
             )}

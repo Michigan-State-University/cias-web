@@ -4,6 +4,7 @@ export type SubstanceConsumption = {
   variable: string;
   consumed: Nullable<boolean>;
   amount: Nullable<string>;
+  name: string;
 };
 
 // BODY

@@ -27,6 +27,7 @@ type CalendarProps = {
   onSelectDay?: (day: Dayjs, id: string) => void;
   calendarData: CalendarData;
   disableManualDayClick?: boolean;
+  orderedGroupNames: string[];
 };
 
 const IS_DESKTOP = 'IS_DESKTOP';
@@ -46,6 +47,7 @@ export const Calendar = forwardRef<CalendarRef, CalendarProps>(
       onSelectDay,
       calendarData,
       disableManualDayClick = false,
+      orderedGroupNames,
     }: CalendarProps,
     ref,
   ) => {
@@ -101,6 +103,7 @@ export const Calendar = forwardRef<CalendarRef, CalendarProps>(
             endDate={endDate}
             calendarData={calendarData}
             disableManualDayClick={disableManualDayClick}
+            orderedGroupNames={orderedGroupNames}
           />
         </Container>
       </>

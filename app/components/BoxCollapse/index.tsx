@@ -2,7 +2,6 @@ import React, { ReactElement, useState } from 'react';
 
 import Collapse from 'components/Collapse';
 import { ImageButton } from 'components/Button';
-import Text from 'components/Text';
 import Box from 'components/Box';
 import Divider from 'components/Divider';
 
@@ -16,7 +15,7 @@ import ArrowUp from 'assets/svg/arrow-up-grey.svg';
 type BoxCollapseType = {
   id?: string;
   children: ReactElement;
-  label: string;
+  label: string | ReactElement;
   onEdit?: () => void;
   onDelete?: () => void;
   disableAnimation?: boolean;
@@ -92,9 +91,7 @@ export const BoxCollapse = ({
             py={labelPadding}
             color={colors.bluewood}
           >
-            <Text fontSize="16px" fontWeight="bold">
-              {label}
-            </Text>
+            {label}
             {onEdit && (
               <ImageButton
                 src={EditIcon}

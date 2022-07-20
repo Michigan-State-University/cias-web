@@ -1,6 +1,6 @@
-export const MAX_VISIBLE_EVENTS_SMALL = 1;
-export const MAX_VISIBLE_EVENTS_MEDIUM = 2;
-export const MAX_VISIBLE_EVENTS_LARGE = 3;
+export const NUMBER_OF_EVENTS_VISIBLE = 1;
+
+export const NUMBER_OF_SUBSTANCES_VISIBLE = 3;
 
 export const CALENDAR_HEIGHT = '710px';
 
