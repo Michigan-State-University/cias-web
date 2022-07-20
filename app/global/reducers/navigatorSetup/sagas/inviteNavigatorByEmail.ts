@@ -5,7 +5,7 @@ import { toast } from 'react-toastify';
 import { formatMessage } from 'utils/intlOutsideReact';
 
 import { jsonApiToArray } from 'utils/jsonApiMapper';
-import { PendingNavigatorInvitations } from 'models/NavigatorSetup';
+import { PendingNavigatorInvitation } from 'models/NavigatorSetup';
 import {
   INVITE_NAVIGATOR_BY_EMAIL_REQUEST,
   INVITE_NAVIGATOR_BY_EMAIL_ERROR,
@@ -30,7 +30,7 @@ export function* inviteNavigatorByEmail({
     const invitations = jsonApiToArray(
       data,
       'navigatorInvitation',
-    ) as PendingNavigatorInvitations[];
+    ) as PendingNavigatorInvitation[];
     yield put(inviteNavigatorsByEmailSuccess(invitations));
     yield call(toast.success, formatMessage(messages.navigatorHasBeenInvited), {
       toastId: INVITE_NAVIGATOR_BY_EMAIL_SUCCESS,

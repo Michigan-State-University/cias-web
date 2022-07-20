@@ -4,7 +4,7 @@ import { ApiError } from 'models/Api';
 import {
   InterventionNavigator,
   NoNavigatorsAvailableData,
-  PendingNavigatorInvitations,
+  PendingNavigatorInvitation,
 } from 'models/NavigatorSetup';
 
 import * as actions from './actions';
@@ -12,12 +12,12 @@ import * as actions from './actions';
 export type NavigatorSetupAction = ActionType<typeof actions>;
 
 type NavigatorsData = {
-  pendingNavigatorInvitations: PendingNavigatorInvitations[];
+  pendingNavigatorInvitations: PendingNavigatorInvitation[];
   interventionNavigators: InterventionNavigator[];
 };
 
 type ModalTabsData = {
-  noNavigatorsAvailable: NoNavigatorsAvailableData;
+  noNavigatorsAvailableData: NoNavigatorsAvailableData;
   navigatorsData: NavigatorsData;
 };
 

@@ -12,14 +12,14 @@ import Row from 'components/Row';
 import ChipsInput from 'components/Input/ChipsInput';
 import Button, { ImageButton } from 'components/Button';
 
-import { PendingNavigatorInvitations } from 'models/NavigatorSetup';
+import { PendingNavigatorInvitation } from 'models/NavigatorSetup';
 import messages from '../messages';
 
-const SINGLE_EMAIL_HEIGHT = 44;
+const SINGLE_EMAIL_HEIGHT = 36;
 const ITEM_MARGIN = 8;
 
 type Props = {
-  pendingNavigatorInvitations: PendingNavigatorInvitations[];
+  pendingNavigatorInvitations: PendingNavigatorInvitation[];
   inviteNavigatorsByEmail: (emails: string[]) => void;
   removeNavigatorEmailInvitation: (invitationId: string) => void;
   invitationLoading: boolean;
@@ -73,11 +73,7 @@ const NavigatorEmailInvitationPanel = ({
             {formatMessage(messages.waitingForAcceptance)}
           </Text>
           <Box
-            height={
-              SINGLE_EMAIL_HEIGHT *
-                Math.min(3, pendingNavigatorInvitations.length) +
-              ITEM_MARGIN * Math.min(2, pendingNavigatorInvitations.length)
-            }
+            maxHeight={3 * SINGLE_EMAIL_HEIGHT + 2 * ITEM_MARGIN}
             overflow="scroll"
           >
             {pendingNavigatorInvitations.map(({ email, id }, index) => (
@@ -85,12 +81,15 @@ const NavigatorEmailInvitationPanel = ({
                 display="flex"
                 justify="between"
                 background={colors.lightBlue}
-                padding={12}
                 key={id}
-                maxHeight={SINGLE_EMAIL_HEIGHT}
+                px={11.5}
+                gap={11.5}
+                minHeight={SINGLE_EMAIL_HEIGHT}
                 mt={index === 0 ? 0 : ITEM_MARGIN}
               >
-                <Text overflow="hidden">{email}</Text>
+                <Box py={11.5}>
+                  <Text lineHeight="13px">{email}</Text>
+                </Box>
                 {/* @ts-ignore */}
                 <ImageButton
                   onClick={() => removeNavigatorEmailInvitation(id)}

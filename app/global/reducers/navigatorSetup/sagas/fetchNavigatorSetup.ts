@@ -7,7 +7,7 @@ import { ApiError } from 'models/Api';
 import {
   InterventionNavigator,
   NoNavigatorsAvailableData,
-  PendingNavigatorInvitations,
+  PendingNavigatorInvitation,
 } from 'models/NavigatorSetup';
 
 import { FETCH_NAVIGATOR_SETUP_REQUEST } from '../constants';
@@ -42,7 +42,7 @@ export function* fetchNavigatorSetup({
     const pendingNavigatorInvitations = jsonApiToArray(
       pendingNavigatorInvitationsData,
       'navigatorInvitation',
-    ) as PendingNavigatorInvitations[];
+    ) as PendingNavigatorInvitation[];
 
     const interventionNavigators = jsonApiToArray(
       interventionNavigatorsData,

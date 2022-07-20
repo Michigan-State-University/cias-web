@@ -108,7 +108,7 @@ const NavigatorSettingsModal = ({ interventionId }: Props) => {
   }
 
   const {
-    noNavigatorsAvailable: {
+    noNavigatorsAvailableData: {
       contactEmail,
       isNavigatorNotificationOn,
       noNavigatorsAvailableMessage,

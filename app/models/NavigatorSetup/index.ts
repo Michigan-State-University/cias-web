@@ -1,3 +1,3 @@
 export * from './NoNavigatorsAvailableData';
-export * from './PendingNavigatorInvitations';
+export * from './PendingNavigatorInvitation';
 export * from './InterventionNavigator';

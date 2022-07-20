@@ -47,17 +47,19 @@ const AddedNavigatorPanel = ({
             background={colors.lightBlue}
             padding={12}
             key={id}
-            maxHeight={SINGLE_ITEM_HEIGHT}
+            minHeight={SINGLE_ITEM_HEIGHT}
             mt={index === 0 ? 0 : ITEM_MARGIN}
           >
             <Row align="center">
-              <UserAvatar
-                height={32}
-                width={32}
-                avatar={avatarUrl || ''}
-                firstName={firstName}
-                lastName={lastName}
-              />
+              <Box flexShrink={0}>
+                <UserAvatar
+                  height={32}
+                  width={32}
+                  avatar={avatarUrl || ''}
+                  firstName={firstName}
+                  lastName={lastName}
+                />
+              </Box>
               <Box ml={16}>
                 <Text fontWeight="bold">{`${firstName} ${lastName}`}</Text>
                 <Text>{email}</Text>

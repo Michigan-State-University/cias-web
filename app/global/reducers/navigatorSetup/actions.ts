@@ -4,7 +4,7 @@ import { ApiError } from 'models/Api';
 import {
   InterventionNavigator,
   NoNavigatorsAvailableData,
-  PendingNavigatorInvitations,
+  PendingNavigatorInvitation,
   ParticipantLink,
 } from 'models/NavigatorSetup';
 
@@ -42,7 +42,7 @@ export const fetchNavigatorSetupSuccess = createAction(
   (action) =>
     (
       noNavigatorsData: NoNavigatorsAvailableData,
-      pendingNavigatorInvitations: PendingNavigatorInvitations[],
+      pendingNavigatorInvitations: PendingNavigatorInvitation[],
       interventionNavigators: InterventionNavigator[],
     ) =>
       action({
@@ -142,7 +142,7 @@ export const inviteNavigatorsByEmailRequest = createAction(
 
 export const inviteNavigatorsByEmailSuccess = createAction(
   INVITE_NAVIGATOR_BY_EMAIL_SUCCESS,
-  (action) => (pendingNavigatorInvitations: PendingNavigatorInvitations[]) =>
+  (action) => (pendingNavigatorInvitations: PendingNavigatorInvitation[]) =>
     action({ pendingNavigatorInvitations }),
 );
 

@@ -59,7 +59,7 @@ export const navigatorSetupReducer = (
             pendingNavigatorInvitations,
             interventionNavigators,
           },
-          noNavigatorsAvailable: noNavigatorsData,
+          noNavigatorsAvailableData: noNavigatorsData,
         };
         draft.loaders.fetching = false;
         break;
@@ -71,8 +71,8 @@ export const navigatorSetupReducer = (
 
       case getType(updateNoNavigatorTabRequest):
         if (state.modalTabsData && draft.modalTabsData) {
-          draft.modalTabsData.noNavigatorsAvailable = {
-            ...state.modalTabsData?.noNavigatorsAvailable,
+          draft.modalTabsData.noNavigatorsAvailableData = {
+            ...state.modalTabsData?.noNavigatorsAvailableData,
             ...action.payload.noNavigatorsData,
           };
           draft.loaders.updatingForm = true;
@@ -89,7 +89,7 @@ export const navigatorSetupReducer = (
       case getType(addParticipantLinkSuccess):
         if (draft.modalTabsData) {
           const { noNavigatorsData } = action.payload;
-          draft.modalTabsData.noNavigatorsAvailable = noNavigatorsData;
+          draft.modalTabsData.noNavigatorsAvailableData = noNavigatorsData;
         }
         break;
       case getType(addParticipantLinkError):
@@ -98,7 +98,7 @@ export const navigatorSetupReducer = (
 
       case getType(removeParticipantLinkRequest):
         updateItemById(
-          draft.modalTabsData?.noNavigatorsAvailable.participantLinks || [],
+          draft.modalTabsData?.noNavigatorsAvailableData.participantLinks || [],
           action.payload.linkId,
           { deleting: true },
         );
@@ -108,14 +108,14 @@ export const navigatorSetupReducer = (
         const { linkId } = action.payload;
         if (draft.modalTabsData) {
           deleteItemById(
-            draft.modalTabsData.noNavigatorsAvailable.participantLinks,
+            draft.modalTabsData.noNavigatorsAvailableData.participantLinks,
             linkId,
           );
         }
         break;
       case getType(removeParticipantLinkError):
         updateItemById(
-          draft.modalTabsData?.noNavigatorsAvailable.participantLinks || [],
+          draft.modalTabsData?.noNavigatorsAvailableData.participantLinks || [],
           action.payload.linkId,
           { deleting: false },
         );
