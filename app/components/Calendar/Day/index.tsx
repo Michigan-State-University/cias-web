@@ -82,19 +82,29 @@ export const Day = ({
         {substancesGroupUsages
           .slice(0, NUMBER_OF_SUBSTANCES_VISIBLE)
           .map(({ consumed, name }) => (
-            <Text
-              key={name}
-              textAlign="right"
-              fontWeight="bold"
-              color={colors.brightNavyBlue}
-              fontSize={11}
-              whiteSpace="nowrap"
-              overflow="hidden"
-            >
-              {`${name}: ${formatMessage(
-                globalMessages[consumed ? 'yes' : 'no'],
-              )}`}
-            </Text>
+            <Box display="flex" align="center" justify="end">
+              <Text
+                key={name}
+                fontWeight="bold"
+                color={colors.brightNavyBlue}
+                fontSize={11}
+                textOverflow="ellipsis"
+                whiteSpace="nowrap"
+                overflow="hidden"
+                textAlign="right"
+              >
+                {name}
+              </Text>
+              <Box flexShrink={0}>
+                <Text
+                  fontWeight="bold"
+                  color={colors.brightNavyBlue}
+                  fontSize={11}
+                >
+                  : {formatMessage(globalMessages[consumed ? 'yes' : 'no'])}
+                </Text>
+              </Box>
+            </Box>
           ))}
         {substancesGroupUsages.length > NUMBER_OF_SUBSTANCES_VISIBLE && (
           <StyledText textAlign="right" color={colors.bluewood} ml={12}>
