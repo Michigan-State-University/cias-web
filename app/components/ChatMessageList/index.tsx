@@ -2,9 +2,10 @@ import React, { memo, useCallback, useEffect, useMemo } from 'react';
 import findLastIndex from 'lodash/findLastIndex';
 import { useIntl } from 'react-intl';
 
-import { Interlocutor, Message, MessageReadDTO } from 'models/LiveChat';
+import { Interlocutor, Message } from 'models/LiveChat';
 
 import { formatInterlocutorName } from 'utils/liveChatUtils';
+import { ReadMessageData } from 'utils/useConversationChannel';
 
 import Box from 'components/Box';
 import ChatMessage from 'components/ChatMessage';
@@ -16,7 +17,7 @@ export type Props = {
   currentInterlocutorId: Nullable<string>;
   messages: Message[];
   interlocutors: Record<Interlocutor['id'], Interlocutor>;
-  onReadMessage: (messageReadDTO: MessageReadDTO) => void;
+  onReadMessage: (data: ReadMessageData) => void;
 };
 
 const ChatMessageList = ({

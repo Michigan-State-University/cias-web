@@ -1,16 +1,9 @@
 import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useInjectReducer, useInjectSaga } from 'redux-injectors';
+import { toast } from 'react-toastify';
 
-import {
-  ConversationCreatedDTO,
-  ConversationArchivedDTO,
-  Message,
-  MessageReadDTO,
-  MessageSentDTO,
-} from 'models/LiveChat';
-
-import { useSocket } from 'utils/useSocket';
+import { SocketErrorMessageData, useSocket } from 'utils/useSocket';
 import { jsonApiToObject } from 'utils/jsonApiMapper';
 
 import {
@@ -20,7 +13,6 @@ import {
   liveChatReducerKey,
   mapConversationCreatedMessageData,
   markMessageReadLocally,
-  NewConversationData,
   onConversationCreatedReceive,
   onConversationArchivedReceive,
   onMessageReadReceive,
@@ -32,7 +24,18 @@ import {
 } from 'global/reducers/liveChat';
 import { makeSelectUserId } from 'global/reducers/auth';
 
-import { ConversationChannelAction, ConversationChannelMessage } from './types';
+import {
+  ConversationArchivedData,
+  ConversationChannelAction,
+  ConversationChannelMessage,
+  MessageReadData,
+  SendMessageData,
+  ReadMessageData,
+  CreateConversationData,
+  ArchiveConversationData,
+  MessageSentData,
+  ConversationCreatedData,
+} from './types';
 import {
   CONVERSATION_CHANNEL_NAME,
   ConversationChannelActionName,
@@ -52,15 +55,21 @@ export const useConversationChannel = () => {
     ConversationChannelAction
   >(CONVERSATION_CHANNEL_NAME);
 
-  const onMessageSent = (newMessage: Message) => {
+  const showErrorToast = ({ error }: SocketErrorMessageData) => {
+    toast.error(error);
+  };
+
+  const onMessageSent = (data: MessageSentData) => {
+    const newMessage = jsonApiToObject(data, 'message');
     dispatch(onMessageSentReceive(newMessage));
   };
 
-  const onMessageRead = (messageReadDTO: MessageReadDTO) => {
-    dispatch(onMessageReadReceive(messageReadDTO));
+  const onMessageRead = ({ conversationId, messageId }: MessageReadData) => {
+    dispatch(onMessageReadReceive(conversationId, messageId));
   };
 
-  const onConversationCreated = (newConversation: NewConversationData) => {
+  const onConversationCreated = (data: ConversationCreatedData) => {
+    const newConversation = mapConversationCreatedMessageData(data);
     dispatch(onConversationCreatedReceive(newConversation));
 
     const { lastMessage, liveChatInterlocutors, id } =
@@ -82,50 +91,45 @@ export const useConversationChannel = () => {
     }
   };
 
-  const onConversationArchived = (
-    conversationArchivedDTO: ConversationArchivedDTO,
-  ) => {
-    dispatch(onConversationArchivedReceive(conversationArchivedDTO));
+  const onNavigatorUnavailable = () => {
+    dispatch(setCreatingConversation(false));
+  };
+
+  const onConversationArchived = ({
+    conversationId,
+  }: ConversationArchivedData) => {
+    dispatch(onConversationArchivedReceive(conversationId));
     dispatch(setArchivingConversation(false));
   };
 
-  const sendMessage = (messageSentDTO: MessageSentDTO) => {
+  const sendMessage = (data: SendMessageData) => {
     channel?.perform({
       name: ConversationChannelActionName.ON_MESSAGE_SENT,
-      data: messageSentDTO,
+      data,
     });
   };
 
-  const readMessage = (messageReadDTO: MessageReadDTO) => {
-    dispatch(
-      markMessageReadLocally(
-        messageReadDTO.conversationId,
-        messageReadDTO.messageId,
-      ),
-    );
+  const readMessage = (data: ReadMessageData) => {
+    dispatch(markMessageReadLocally(data.conversationId, data.messageId));
     channel?.perform({
       name: ConversationChannelActionName.ON_MESSAGE_READ,
-      data: messageReadDTO,
+      data,
     });
   };
 
-  const createConversation = (
-    conversationCreatedDTO: ConversationCreatedDTO,
-  ) => {
+  const createConversation = (data: CreateConversationData) => {
     dispatch(setCreatingConversation(true));
     channel?.perform({
       name: ConversationChannelActionName.ON_CONVERSATION_CREATED,
-      data: conversationCreatedDTO,
+      data,
     });
   };
 
-  const endConversation = (
-    conversationArchivedDTO: ConversationArchivedDTO,
-  ) => {
+  const archiveConversation = (data: ArchiveConversationData) => {
     dispatch(setArchivingConversation(true));
     channel?.perform({
       name: ConversationChannelActionName.ON_CONVERSATION_ARCHIVED,
-      data: conversationArchivedDTO,
+      data,
     });
   };
 
@@ -133,13 +137,20 @@ export const useConversationChannel = () => {
     channel?.listen(({ data, topic }) => {
       switch (topic) {
         case ConversationChannelMessageTopic.MESSAGE_SENT:
-          onMessageSent(jsonApiToObject(data, 'message'));
+          onMessageSent(data);
+          break;
+        case ConversationChannelMessageTopic.MESSAGE_ERROR:
+          showErrorToast(data);
           break;
         case ConversationChannelMessageTopic.MESSAGE_READ:
           onMessageRead(data);
           break;
         case ConversationChannelMessageTopic.CONVERSATION_CREATED:
-          onConversationCreated(mapConversationCreatedMessageData(data));
+          onConversationCreated(data);
+          break;
+        case ConversationChannelMessageTopic.NAVIGATOR_UNAVAILABLE:
+          showErrorToast(data);
+          onNavigatorUnavailable();
           break;
         case ConversationChannelMessageTopic.CONVERSATION_ARCHIVED:
           onConversationArchived(data);
@@ -150,5 +161,5 @@ export const useConversationChannel = () => {
     });
   }, [channel]);
 
-  return { sendMessage, readMessage, createConversation, endConversation };
+  return { sendMessage, readMessage, createConversation, archiveConversation };
 };

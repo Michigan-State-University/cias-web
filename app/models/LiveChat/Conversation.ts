@@ -16,12 +16,3 @@ export type Conversation = {
   liveChatInterlocutors: Record<Interlocutor['id'], Interlocutor>;
   archived: boolean;
 };
-
-export type ConversationCreatedDTO = {
-  firstMessageContent: string;
-  interventionId: string;
-};
-
-export type ConversationArchivedDTO = {
-  conversationId: string;
-};

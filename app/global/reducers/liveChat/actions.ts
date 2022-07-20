@@ -4,8 +4,6 @@ import {
   InterventionConversation,
   Conversation,
   Message,
-  MessageReadDTO,
-  ConversationArchivedDTO,
 } from 'models/LiveChat';
 import { ApiError } from 'models/Api';
 
@@ -89,7 +87,8 @@ export const markMessageReadLocally = createAction(
 
 export const onMessageReadReceive = createAction(
   ON_MESSAGE_READ_RECEIVE,
-  (action) => (messageReadDTO: MessageReadDTO) => action({ messageReadDTO }),
+  (action) => (conversationId: string, messageId: string) =>
+    action({ conversationId, messageId }),
 );
 
 export const setCreatingConversation = createAction(
@@ -121,6 +120,5 @@ export const setArchivingConversation = createAction(
 
 export const onConversationArchivedReceive = createAction(
   ON_CONVERSATION_ARCHIVED_RECEIVE,
-  (action) => (conversationArchivedDTO: ConversationArchivedDTO) =>
-    action({ conversationArchivedDTO }),
+  (action) => (conversationId: string) => action({ conversationId }),
 );

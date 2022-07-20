@@ -1,7 +1,9 @@
 import React, { useState } from 'react';
 import { useIntl } from 'react-intl';
 
-import { Conversation, Message, MessageReadDTO } from 'models/LiveChat';
+import { Conversation, Message } from 'models/LiveChat';
+
+import { ReadMessageData } from 'utils/useConversationChannel';
 
 import { themeColors } from 'theme';
 
@@ -24,7 +26,7 @@ export type Props = {
   creatingConversation: boolean;
   onMinimizeDialog: () => void;
   onSendMessage: (content: string) => void;
-  onReadMessage: (messageReadDTO: MessageReadDTO) => void;
+  onReadMessage: (data: ReadMessageData) => void;
 };
 
 const ConversationChatDialog = ({

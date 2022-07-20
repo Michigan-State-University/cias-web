@@ -5,7 +5,7 @@ import { useIntl } from 'react-intl';
 import { themeColors } from 'theme';
 import NoConversationOpenedIcon from 'assets/svg/no-conversation-opened.svg';
 
-import { MessageSentDTO, MessageReadDTO } from 'models/LiveChat';
+import { ReadMessageData, SendMessageData } from 'utils/useConversationChannel';
 
 import {
   fetchConversationMessagesRequest,
@@ -29,8 +29,8 @@ import { MessagesSectionContainer, SectionBody } from '../components/styled';
 import { NO_CONVERSATION_OPENED_INFO_MAX_WIDTH } from '../constants';
 
 export type Props = {
-  onSendMessage: (messageSentDTO: MessageSentDTO) => void;
-  onReadMessage: (messageReadDTO: MessageReadDTO) => void;
+  onSendMessage: (data: SendMessageData) => void;
+  onReadMessage: (data: ReadMessageData) => void;
 };
 
 export const MessagesSectionBody = ({

@@ -2,10 +2,10 @@ import React from 'react';
 import { useSelector } from 'react-redux';
 
 import {
-  MessageSentDTO,
-  MessageReadDTO,
-  ConversationArchivedDTO,
-} from 'models/LiveChat';
+  ArchiveConversationData,
+  ReadMessageData,
+  SendMessageData,
+} from 'utils/useConversationChannel';
 
 import { makeSelectNoConversationsAvailable } from 'global/reducers/liveChat';
 
@@ -19,17 +19,15 @@ import {
 import ConversationsSectionHeader from './components/ConversationsSectionHeader';
 
 type Props = {
-  onSendMessage: (messageSentDTO: MessageSentDTO) => void;
-  onReadMessage: (messageReadDTO: MessageReadDTO) => void;
-  onArchivedConversation: (
-    conversationArchivedDTO: ConversationArchivedDTO,
-  ) => void;
+  onSendMessage: (data: SendMessageData) => void;
+  onReadMessage: (data: ReadMessageData) => void;
+  onArchiveConversation: (data: ArchiveConversationData) => void;
 };
 
 export const LiveChatNavigatorPanel = ({
   onSendMessage,
   onReadMessage,
-  onArchivedConversation,
+  onArchiveConversation,
 }: Props) => {
   const noConversationsAvailable = useSelector(
     makeSelectNoConversationsAvailable(),
@@ -45,7 +43,7 @@ export const LiveChatNavigatorPanel = ({
         {!noConversationsAvailable && (
           <NavigatorPanelGridColumn xs={7}>
             <MessagesSectionHeader
-              onArchiveConversation={onArchivedConversation}
+              onArchiveConversation={onArchiveConversation}
             />
             <MessagesSectionBody
               onSendMessage={onSendMessage}

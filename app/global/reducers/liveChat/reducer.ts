@@ -122,9 +122,7 @@ export const liveChatReducer = (
         break;
       }
       case getType(onMessageReadReceive): {
-        const {
-          messageReadDTO: { messageId, conversationId },
-        } = payload;
+        const { messageId, conversationId } = payload;
 
         const messages = draft.messages[conversationId];
         if (messages) {
@@ -169,7 +167,7 @@ export const liveChatReducer = (
         break;
       }
       case getType(onConversationArchivedReceive): {
-        const { conversationId } = payload.conversationArchivedDTO;
+        const { conversationId } = payload;
         const conversation = draft.conversations[conversationId];
         if (conversation) {
           conversation.archived = true;

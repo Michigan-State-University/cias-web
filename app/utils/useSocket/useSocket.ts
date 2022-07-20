@@ -3,10 +3,22 @@ import { Channel } from '@anycable/web';
 
 import { SocketContext } from 'components/ActionCable';
 import { LISTEN_SOCKET_MESSAGE_EVENT_NAME } from './constants';
-import { SocketAction, SocketMessage } from './types';
+import {
+  SocketAction,
+  SocketErrorMessage,
+  SocketErrorMessageData,
+  SocketErrorMessageStatus,
+  SocketMessage,
+} from './types';
 
 export const useSocket = <
-  TMessage extends SocketMessage<string, object>,
+  TMessage extends
+    | SocketMessage<string, object>
+    | SocketErrorMessage<
+        string,
+        SocketErrorMessageData,
+        SocketErrorMessageStatus
+      >,
   TAction extends SocketAction<string, object> | null = null,
 >(
   channelName: string,

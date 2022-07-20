@@ -16,14 +16,3 @@ export type LastMessage = {
   content: string;
   isRead: boolean;
 };
-
-export type MessageSentDTO = {
-  conversationId: string;
-  interlocutorId: string;
-  content: string;
-};
-
-export type MessageReadDTO = {
-  conversationId: string;
-  messageId: string;
-};

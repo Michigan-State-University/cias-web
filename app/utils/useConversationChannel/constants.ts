@@ -2,9 +2,11 @@ export const CONVERSATION_CHANNEL_NAME = 'ConversationChannel';
 
 export enum ConversationChannelMessageTopic {
   MESSAGE_SENT = 'message_sent',
+  MESSAGE_ERROR = 'message_error',
   MESSAGE_READ = 'message_read',
   CONVERSATION_CREATED = 'conversation_created',
   CONVERSATION_ARCHIVED = 'conversation_archived',
+  NAVIGATOR_UNAVAILABLE = 'navigator_unavailable',
 }
 
 export enum ConversationChannelActionName {

@@ -4,7 +4,7 @@ import { useSelector } from 'react-redux';
 
 import ArchiveIcon from 'assets/svg/archive2.svg';
 
-import { ConversationArchivedDTO } from 'models/LiveChat';
+import { ArchiveConversationData } from 'utils/useConversationChannel';
 
 import {
   makeSelectArchivingConversation,
@@ -21,9 +21,7 @@ import i18nMessages from '../messages';
 import SectionHeader from '../components/SectionHeader';
 
 export type Props = {
-  onArchiveConversation: (
-    conversationArchivedDTO: ConversationArchivedDTO,
-  ) => void;
+  onArchiveConversation: (data: ArchiveConversationData) => void;
 };
 
 const MessageSectionHeader = ({ onArchiveConversation }: Props) => {

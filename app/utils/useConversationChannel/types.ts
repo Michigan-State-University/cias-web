@@ -1,74 +1,118 @@
 import { ApiData } from 'models/Api';
-import {
-  DenormalizedConversation,
-  Message,
-  MessageReadDTO,
-  ConversationCreatedDTO,
-  MessageSentDTO,
-  ConversationArchivedDTO,
-} from 'models/LiveChat';
+import { DenormalizedConversation, Message } from 'models/LiveChat';
 
-import { SocketAction, SocketMessage } from 'utils/useSocket';
+import {
+  SocketAction,
+  SocketErrorMessage,
+  SocketErrorMessageData,
+  SocketMessage,
+} from 'utils/useSocket';
 
 import {
   ConversationChannelActionName,
   ConversationChannelMessageTopic,
 } from './constants';
 
+// DATA TYPES
+
+export type MessageSentData = ApiData<Message>;
+export type SendMessageData = {
+  conversationId: string;
+  interlocutorId: string;
+  content: string;
+};
+
+export type MessageErrorData = SocketErrorMessageData<{
+  conversationId: string;
+}>;
+
+export type MessageReadData = {
+  conversationId: string;
+  messageId: string;
+};
+export type ReadMessageData = MessageReadData;
+
+export type ConversationCreatedData = ApiData<DenormalizedConversation>;
+export type CreateConversationData = {
+  firstMessageContent: string;
+  interventionId: string;
+};
+
+export type NavigatorUnavailableData = SocketErrorMessageData;
+
+export type ConversationArchivedData = {
+  conversationId: string;
+};
+export type ArchiveConversationData = ConversationArchivedData;
+
 // SOCKET MESSAGES
 
 export type MessageSentSocketMessage = SocketMessage<
   ConversationChannelMessageTopic.MESSAGE_SENT,
-  ApiData<Message>
+  MessageSentData
+>;
+
+export type MessageErrorSocketErrorMessage = SocketErrorMessage<
+  ConversationChannelMessageTopic.MESSAGE_ERROR,
+  MessageErrorData,
+  422
 >;
 
 export type MessageReadSocketMessage = SocketMessage<
   ConversationChannelMessageTopic.MESSAGE_READ,
-  MessageReadDTO
+  MessageReadData
 >;
 
 export type ConversationCreatedSocketMessage = SocketMessage<
   ConversationChannelMessageTopic.CONVERSATION_CREATED,
-  ApiData<DenormalizedConversation>
+  ConversationCreatedData
+>;
+
+export type NavigatorUnavailableSocketErrorMessage = SocketErrorMessage<
+  ConversationChannelMessageTopic.NAVIGATOR_UNAVAILABLE,
+  NavigatorUnavailableData,
+  404
 >;
 
 export type ConversationArchivedSocketMessage = SocketMessage<
   ConversationChannelMessageTopic.CONVERSATION_ARCHIVED,
-  ConversationArchivedDTO
+  ConversationArchivedData
 >;
 
 // Create a union type with any new SocketMessage type
 export type ConversationChannelMessage =
   | MessageSentSocketMessage
+  | MessageErrorSocketErrorMessage
   | MessageReadSocketMessage
   | ConversationCreatedSocketMessage
+  | NavigatorUnavailableSocketErrorMessage
   | ConversationArchivedSocketMessage;
 
 // SOCKET ACTIONS
 
-export type OnMessageSentSocketAction = SocketAction<
+export type SendMessageSocketAction = SocketAction<
   ConversationChannelActionName.ON_MESSAGE_SENT,
-  MessageSentDTO
+  SendMessageData
 >;
 
-export type OnMessageReadSocketAction = SocketAction<
+export type ReadMessageSocketAction = SocketAction<
   ConversationChannelActionName.ON_MESSAGE_READ,
-  MessageReadDTO
+  ReadMessageData
 >;
 
-export type OnConversationCreatedSocketAction = SocketAction<
+export type CreateConversationSocketAction = SocketAction<
   ConversationChannelActionName.ON_CONVERSATION_CREATED,
-  ConversationCreatedDTO
+  CreateConversationData
 >;
 
-export type OnConversationArchivedSocketAction = SocketAction<
+export type ArchiveConversationSocketAction = SocketAction<
   ConversationChannelActionName.ON_CONVERSATION_ARCHIVED,
-  ConversationArchivedDTO
+  ArchiveConversationData
 >;
 
 // Create a union type with any new SocketAction type
 export type ConversationChannelAction =
-  | OnMessageSentSocketAction
-  | OnMessageReadSocketAction
-  | OnConversationCreatedSocketAction
-  | OnConversationArchivedSocketAction;
+  | SendMessageSocketAction
+  | ReadMessageSocketAction
+  | CreateConversationSocketAction
+  | ArchiveConversationSocketAction;
