@@ -36,181 +36,195 @@ const initialValues = ({ number, iso }) => {
   };
 };
 
-const PhoneNumberForm = ({
-  formatMessage,
-  phone,
-  changePhoneNumber,
-  error,
-  loading,
-  disabled,
-  required,
-  confirmationDisabled,
-  prefixLabelMessage,
-  phoneLabel,
-}) => {
-  const previousLoadingState = useRef(loading);
-  const inputNumberRef = useRef(null);
-  const [modalVisible, setModalVisible] = useState(false);
-  const openModal = () => setModalVisible(true);
-  const closeModal = () => setModalVisible(false);
-
-  const { number, iso, prefix, confirmed } = phone ?? {};
-
-  const onSubmit = (
-    { number: submitNumber, iso: isoValue },
-    { setSubmitting },
+const PhoneNumberForm = React.forwardRef(
+  (
+    {
+      formatMessage,
+      phone,
+      changePhoneNumber,
+      error,
+      loading,
+      disabled,
+      required,
+      confirmationDisabled,
+      prefixLabelMessage,
+      phoneLabel,
+      onError,
+      allowPartial,
+    },
+    ref,
   ) => {
-    const prefixValue = `+${getCountryCallingCode(isoValue.value)}`;
-    const parsedNumber = parsePhoneNumber(submitNumber, isoValue.value);
-    const submitPayload = {
-      number: parsedNumber.nationalNumber,
-      iso: isoValue.value,
-      prefix: prefixValue,
+    const previousLoadingState = useRef(loading);
+    const inputNumberRef = useRef(null);
+    const [modalVisible, setModalVisible] = useState(false);
+    const openModal = () => setModalVisible(true);
+    const closeModal = () => setModalVisible(false);
+
+    const { number, iso, prefix, confirmed } = phone ?? {};
+
+    const onSubmit = (
+      { number: submitNumber, iso: { value: isoValue } },
+      { setSubmitting },
+    ) => {
+      const prefixValue = `+${getCountryCallingCode(isoValue)}`;
+      const parsedNumber = parsePhoneNumber(submitNumber, isoValue);
+      const submitPayload = {
+        number: parsedNumber?.nationalNumber ?? '',
+        iso: isoValue,
+        prefix: prefixValue,
+      };
+      const hasPhoneNumberChanged = !isEqual(
+        {
+          number,
+          iso,
+          prefix,
+        },
+        submitPayload,
+      );
+
+      if (hasPhoneNumberChanged)
+        changePhoneNumber({
+          phoneAttributes: {
+            ...submitPayload,
+          },
+        });
+      setSubmitting(false);
     };
-    const hasPhoneNumberChanged = !isEqual(
-      {
-        number,
-        iso,
-        prefix,
-      },
-      submitPayload,
+
+    useEffect(() => {
+      previousLoadingState.current = loading;
+    }, [loading]);
+
+    const getCodeLabel = (country = 'US') => (
+      <Row align="center">
+        <FlagIcon code={country} />
+        <Text ml={10} fontSize={18}>{`${country} +${getCountryCallingCode(
+          country,
+        )}`}</Text>
+      </Row>
     );
 
-    if (hasPhoneNumberChanged)
-      changePhoneNumber({
-        phoneAttributes: {
-          ...submitPayload,
-        },
-      });
-    setSubmitting(false);
-  };
+    const prefixOptions = useMemo(
+      () =>
+        union(popularPrefixes, getCountriesCodes()).map((country) => ({
+          value: country,
+          label: getCodeLabel(country),
+          filterData: `${country} +${getCountryCallingCode(country)}`,
+        })),
+      [],
+    );
 
-  useEffect(() => {
-    previousLoadingState.current = loading;
-  }, [loading]);
+    const filterOption = ({ data: { filterData } }, value) => {
+      if (!value) return true;
+      return filterData.toUpperCase().includes(value.toUpperCase());
+    };
 
-  const getCodeLabel = (country = 'US') => (
-    <Row align="center">
-      <FlagIcon code={country} />
-      <Text ml={10} fontSize={18}>{`${country} +${getCountryCallingCode(
-        country,
-      )}`}</Text>
-    </Row>
-  );
+    const shouldDisplayConfirmationButton =
+      !confirmationDisabled &&
+      !confirmed &&
+      !isNullOrUndefined(number) &&
+      !isNullOrUndefined(iso);
 
-  const prefixOptions = useMemo(
-    () =>
-      union(popularPrefixes, getCountriesCodes()).map((country) => ({
-        value: country,
-        label: getCodeLabel(country),
-        filterData: `${country} +${getCountryCallingCode(country)}`,
-      })),
-    [],
-  );
+    return (
+      <Column>
+        {error && <ErrorAlert mt={25} errorText={error} />}
+        <Formik
+          validate={(values) => {
+            const {
+              iso: { value: country },
+            } = values;
+            const schema = phoneNumberSchema(
+              formatMessage,
+              country,
+              required,
+              allowPartial,
+            );
+            try {
+              validateYupSchema(values, schema, true);
+            } catch (err) {
+              if (onError) onError(err);
+              return yupToFormErrors(err);
+            }
+          }}
+          initialValues={initialValues({ number, iso })}
+          onSubmit={onSubmit}
+          innerRef={ref}
+        >
+          {({
+            handleSubmit,
+            isValid,
+            values: { number: numberValue, iso: isoValue },
+          }) => {
+            const isButtonActive = !isValid;
 
-  const filterOption = ({ data: { filterData } }, value) => {
-    if (!value) return true;
-    return filterData.toUpperCase().includes(value.toUpperCase());
-  };
+            const currentPhoneNumber = isoValue?.value
+              ? ` +${getCountryCallingCode(isoValue.value)} ${numberValue}`
+              : '';
 
-  const shouldDisplayConfirmationButton =
-    !confirmationDisabled &&
-    !confirmed &&
-    !isNullOrUndefined(number) &&
-    !isNullOrUndefined(iso);
-
-  return (
-    <Column>
-      {error && <ErrorAlert mt={25} errorText={error} />}
-      <Formik
-        validate={(values) => {
-          const {
-            iso: { value: country },
-          } = values;
-          const schema = phoneNumberSchema(formatMessage, country, required);
-          try {
-            validateYupSchema(values, schema, true);
-          } catch (err) {
-            return yupToFormErrors(err);
-          }
-        }}
-        initialValues={initialValues({ number, iso })}
-        onSubmit={onSubmit}
-      >
-        {({
-          handleSubmit,
-          isValid,
-          values: { number: numberValue, iso: isoValue },
-        }) => {
-          const isButtonActive = !isValid;
-
-          const currentPhoneNumber = isoValue?.value
-            ? ` +${getCountryCallingCode(isoValue.value)} ${numberValue}`
-            : '';
-
-          return (
-            <>
-              <PhoneNumberCodeModal
-                closeModal={closeModal}
-                modalVisible={modalVisible}
-                phone={currentPhoneNumber}
-              />
-              <Row width="100%" align="start" data-private>
-                <FormikSelect
-                  columnStyleProps={{
-                    pr: 10,
-                    width: 230,
-                  }}
-                  disabled={disabled}
-                  label={formatMessage(prefixLabelMessage)}
-                  formikKey="iso"
-                  options={prefixOptions}
-                  inputProps={{
-                    filterOption,
-                    placeholder: formatMessage(messages.countryCode),
-                    onMenuClose: () => inputNumberRef.current.focus(),
-                    value: isoValue.value
-                      ? {
-                          value: isoValue.value,
-                          label: getCodeLabel(isoValue.value),
-                        }
-                      : null,
-                    disabled,
-                  }}
+            return (
+              <>
+                <PhoneNumberCodeModal
+                  closeModal={closeModal}
+                  modalVisible={modalVisible}
+                  phone={currentPhoneNumber}
                 />
-                <FormikNumberInput
-                  label={formatMessage(phoneLabel)}
-                  value={numberValue}
-                  formikKey="number"
-                  placeholder={formatMessage(messages.phoneNumber)}
-                  type="tel"
-                  countryCode={isoValue.value}
-                  inputProps={{
-                    ref: inputNumberRef,
-                    width: '100%',
-                    onBlur: handleSubmit,
-                    disabled,
-                  }}
-                  required={required}
-                />
-              </Row>
+                <Row width="100%" align="start" data-private>
+                  <FormikSelect
+                    columnStyleProps={{
+                      pr: 10,
+                      width: 230,
+                    }}
+                    disabled={disabled}
+                    label={formatMessage(prefixLabelMessage)}
+                    formikKey="iso"
+                    options={prefixOptions}
+                    inputProps={{
+                      filterOption,
+                      placeholder: formatMessage(messages.countryCode),
+                      onMenuClose: () => inputNumberRef.current.focus(),
+                      value: isoValue.value
+                        ? {
+                            value: isoValue.value,
+                            label: getCodeLabel(isoValue.value),
+                          }
+                        : null,
+                      disabled,
+                    }}
+                  />
+                  <FormikNumberInput
+                    label={formatMessage(phoneLabel)}
+                    value={numberValue}
+                    formikKey="number"
+                    placeholder={formatMessage(messages.phoneNumber)}
+                    type="tel"
+                    countryCode={isoValue.value}
+                    inputProps={{
+                      ref: inputNumberRef,
+                      width: '100%',
+                      onBlur: handleSubmit,
+                      disabled,
+                    }}
+                    required={required}
+                  />
+                </Row>
 
-              {shouldDisplayConfirmationButton && (
-                <ConfirmButton
-                  type="submit"
-                  disabled={isButtonActive}
-                  onClick={openModal}
-                >
-                  {formatMessage(messages.confirmCodeButton)}
-                </ConfirmButton>
-              )}
-            </>
-          );
-        }}
-      </Formik>
-    </Column>
-  );
-};
+                {shouldDisplayConfirmationButton && (
+                  <ConfirmButton
+                    type="submit"
+                    disabled={isButtonActive}
+                    onClick={openModal}
+                  >
+                    {formatMessage(messages.confirmCodeButton)}
+                  </ConfirmButton>
+                )}
+              </>
+            );
+          }}
+        </Formik>
+      </Column>
+    );
+  },
+);
 
 PhoneNumberForm.propTypes = {
   formatMessage: PropTypes.func,
@@ -227,6 +241,8 @@ PhoneNumberForm.propTypes = {
   required: PropTypes.bool,
   prefixLabelMessage: PropTypes.object,
   phoneLabel: PropTypes.object,
+  onError: PropTypes.func,
+  allowPartial: PropTypes.bool,
 };
 
 PhoneNumberForm.defaultProps = {

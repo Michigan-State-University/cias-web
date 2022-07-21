@@ -1,18 +1,22 @@
-import React, { useMemo } from 'react';
+import React, { useCallback, useEffect, useState } from 'react';
 import { useIntl } from 'react-intl';
-import { useFormik } from 'formik';
+import { FormikProps, useFormik } from 'formik';
 import * as Yup from 'yup';
 import { useSelector } from 'react-redux';
+import { formatIncompletePhoneNumber } from 'libphonenumber-js/max';
 
 import { makeSelectNavigatorSetupLoader } from 'global/reducers/navigatorSetup';
 import {
-  emailFormValidationSchema,
   requiredValidationSchema,
+  emailFormValidationSchema,
 } from 'utils/validators';
+import { useCallbackRef } from 'utils/useCallbackRef';
+
 import {
   NoNavigatorsAvailableData,
   NotifyByOptions,
 } from 'models/NavigatorSetup';
+import { PhoneAttributes } from 'models/Phone';
 
 import Box from 'components/Box';
 import Switch from 'components/Switch';
@@ -22,19 +26,31 @@ import H3 from 'components/H3';
 import { FormikHookInput } from 'components/FormikInput';
 import PhoneNumberForm from 'components/AccountSettings/PhoneNumberForm';
 import Button from 'components/Button';
+import { PhoneNumberFormCalculatedValue } from 'components/AccountSettings/types';
 
 import messages from '../messages';
 
 const validationSchema = Yup.object().shape({
-  noNavigatorsAvailableMessage: requiredValidationSchema,
-  contactEmail: emailFormValidationSchema,
+  noNavigatorAvailableMessage: requiredValidationSchema,
+  contactEmail: emailFormValidationSchema.notRequired(),
 });
+
+const defaultPhone: NoNavigatorsAvailableData['phone'] = {
+  iso: 'US',
+  prefix: '+1',
+  number: '',
+};
+
+type FormikValues = Pick<
+  NoNavigatorsAvailableData,
+  'noNavigatorAvailableMessage' | 'contactEmail'
+>;
 
 type Props = Pick<
   NoNavigatorsAvailableData,
   | 'contactEmail'
   | 'isNavigatorNotificationOn'
-  | 'noNavigatorsAvailableMessage'
+  | 'noNavigatorAvailableMessage'
   | 'notifyBy'
   | 'phone'
 > & {
@@ -46,7 +62,7 @@ type Props = Pick<
 const NoNavigatorsForm = ({
   contactEmail,
   isNavigatorNotificationOn,
-  noNavigatorsAvailableMessage,
+  noNavigatorAvailableMessage,
   notifyBy,
   phone,
   updateNoNavigatorTabData,
@@ -54,34 +70,74 @@ const NoNavigatorsForm = ({
   const { formatMessage } = useIntl();
   const isUpdating = useSelector(makeSelectNavigatorSetupLoader('updateForm'));
 
-  const initialValues = useMemo(
-    () => ({
-      noNavigatorsAvailableMessage,
-      contactEmail,
-      prefix: phone?.prefix || '',
-      phoneNumber: phone?.number || '',
-      iso: phone?.iso || '',
-    }),
-    [],
+  const [phoneDirty, setPhoneDirty] = useState(false);
+  const [phoneValid, setPhoneValid] = useState(true);
+
+  const { callbackRef: phoneNumberFormCallbackRef, ref: phoneNumberFormRef } =
+    useCallbackRef(
+      (
+        phoneNumberForm: Nullable<FormikProps<PhoneNumberFormCalculatedValue>>,
+      ) => {
+        setPhoneValid(!!phoneNumberForm?.isValid);
+        setPhoneDirty(!!phoneNumberForm?.dirty);
+        return null;
+      },
+    );
+
+  const [newPhone, setNewPhone] = useState<PhoneAttributes>(
+    phone ?? defaultPhone,
   );
 
-  const formik = useFormik({
-    initialValues,
+  const onPhoneNumberFormChange = ({
+    phoneAttributes,
+  }: PhoneNumberFormCalculatedValue) => {
+    setNewPhone(phoneAttributes);
+  };
+
+  const onSaveChanges = () => {
+    updateNoNavigatorTabData({
+      ...formik.values,
+      phone: newPhone?.number ? newPhone : null,
+    });
+  };
+
+  const resetForms = useCallback(() => {
+    formik.resetForm({
+      values: {
+        noNavigatorAvailableMessage,
+        contactEmail,
+      },
+    });
+
+    const { number, iso: isoValue } = phone ?? defaultPhone;
+    const parsedNumber = formatIncompletePhoneNumber(number, isoValue);
+
+    phoneNumberFormRef.current?.resetForm({
+      values: {
+        number: parsedNumber ?? '',
+        iso: {
+          value: isoValue,
+        },
+      },
+    });
+  }, [noNavigatorAvailableMessage, contactEmail, phone]);
+
+  useEffect(() => {
+    resetForms();
+  }, [resetForms]);
+
+  const formik = useFormik<FormikValues>({
+    initialValues: {
+      noNavigatorAvailableMessage,
+      contactEmail,
+    },
     validationSchema,
     validateOnMount: false,
-    onSubmit: ({
-      noNavigatorsAvailableMessage: message,
-      contactEmail: email,
-      prefix: phonePrefix,
-      phoneNumber: number,
-      iso: phoneIso,
-    }) =>
-      updateNoNavigatorTabData({
-        contactEmail: email,
-        noNavigatorsAvailableMessage: message,
-        phone: { iso: phoneIso, prefix: phonePrefix, number },
-      }),
+    onSubmit: () => {},
   });
+
+  const isSaveDisabled =
+    !formik.isValid || !phoneValid || (!formik.dirty && !phoneDirty);
 
   return (
     <>
@@ -89,7 +145,7 @@ const NoNavigatorsForm = ({
         <H3 mb={30}>{formatMessage(messages.textInformation)}</H3>
         {/* @ts-ignore */}
         <FormikHookInput
-          formikKey="noNavigatorsAvailableMessage"
+          formikKey="noNavigatorAvailableMessage"
           formikState={formik}
           placeholder={formatMessage(messages.messagePlaceholder)}
           label={formatMessage(messages.messageLabel)}
@@ -97,18 +153,16 @@ const NoNavigatorsForm = ({
         />
         <Box my={30}>
           <PhoneNumberForm
+            // @ts-ignore
             formatMessage={formatMessage}
-            phone={phone}
-            changePhoneNumber={({
-              phoneAttributes: { number, prefix, iso },
-            }) => {
-              formik.setFieldValue('iso', iso);
-              formik.setFieldValue('phoneNumber', number);
-              formik.setFieldValue('prefix', prefix);
-            }}
+            phone={phone ?? defaultPhone}
+            changePhoneNumber={onPhoneNumberFormChange}
             confirmationDisabled
             prefixLabelMessage={messages.hotlinePrefix}
             phoneLabel={messages.hotlinePhoneNumber}
+            required={false}
+            allowPartial
+            ref={phoneNumberFormCallbackRef}
           />
         </Box>
         {/* @ts-ignore */}
@@ -122,13 +176,13 @@ const NoNavigatorsForm = ({
         {/* @ts-ignore */}
         <Button
           type="submit"
-          disabled={!formik.isValid}
+          disabled={isSaveDisabled}
           loading={isUpdating}
           px={24}
           width="auto"
           mt={20}
           mb={30}
-          onClick={formik.submitForm}
+          onClick={onSaveChanges}
         >
           {formatMessage(messages.saveChanges)}
         </Button>
@@ -151,7 +205,10 @@ const NoNavigatorsForm = ({
           }
           checked={notifyBy === NotifyByOptions.SMS}
         >
-          <Text mr={32} fontWeight={notifyBy === NotifyByOptions.SMS && 'bold'}>
+          <Text
+            mr={32}
+            fontWeight={notifyBy === NotifyByOptions.SMS ? 'bold' : undefined}
+          >
             {formatMessage(messages.notifyBySms)}
           </Text>
         </Radio>
@@ -162,7 +219,9 @@ const NoNavigatorsForm = ({
           }
           checked={notifyBy === NotifyByOptions.EMAIL}
         >
-          <Text fontWeight={notifyBy === NotifyByOptions.EMAIL && 'bold'}>
+          <Text
+            fontWeight={notifyBy === NotifyByOptions.EMAIL ? 'bold' : undefined}
+          >
             {formatMessage(messages.notifyByEmail)}
           </Text>
         </Radio>

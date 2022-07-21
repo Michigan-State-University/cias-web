@@ -111,7 +111,7 @@ const NavigatorSettingsModal = ({ interventionId }: Props) => {
     noNavigatorsAvailableData: {
       contactEmail,
       isNavigatorNotificationOn,
-      noNavigatorsAvailableMessage,
+      noNavigatorAvailableMessage,
       notifyBy,
       phone,
       participantLinks,
@@ -158,7 +158,7 @@ const NavigatorSettingsModal = ({ interventionId }: Props) => {
             <NoNavigatorsForm
               isNavigatorNotificationOn={isNavigatorNotificationOn}
               contactEmail={contactEmail}
-              noNavigatorsAvailableMessage={noNavigatorsAvailableMessage}
+              noNavigatorAvailableMessage={noNavigatorAvailableMessage}
               notifyBy={notifyBy}
               phone={phone}
               updateNoNavigatorTabData={updateNoNavigatorTabData}

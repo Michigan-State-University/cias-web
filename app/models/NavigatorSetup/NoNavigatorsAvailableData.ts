@@ -1,4 +1,4 @@
-import { Phone } from 'models/Phone';
+import { PhoneAttributes } from 'models/Phone';
 
 export enum NotifyByOptions {
   EMAIL = 'email',
@@ -15,9 +15,9 @@ export type ParticipantLink = {
 export type NoNavigatorsAvailableData = {
   contactEmail: string;
   id: string;
-  noNavigatorsAvailableMessage: string;
+  noNavigatorAvailableMessage: string;
   notifyBy: NotifyByOptions;
   participantLinks: ParticipantLink[];
-  phone: Nullable<Omit<Phone, 'id' | 'confirmed'>>;
+  phone: Nullable<PhoneAttributes>;
   isNavigatorNotificationOn: boolean;
 };
