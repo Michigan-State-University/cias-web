@@ -87,10 +87,6 @@ export default defineMessages({
     id: `${scope}.archiveIconAlt`,
     defaultMessage: 'Archive icon',
   },
-  archiveConfirmationModalTitle: {
-    id: `${scope}.archiveConfirmationModalTitle`,
-    defaultMessage: 'Archive conversation',
-  },
   archiveConfirmationModalMessage: {
     id: `${scope}.archiveConfirmationModalMessage`,
     defaultMessage: `Are you sure you want to archive this conversation?`,
