@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { useIntl } from 'react-intl';
 
-import { colors, themeColors } from 'theme';
+import { colors } from 'theme';
 
 import bin from 'assets/svg/bin-no-bg.svg';
 
@@ -13,7 +13,6 @@ import ChipsInput from 'components/Input/ChipsInput';
 import Button, { ImageButton } from 'components/Button';
 
 import { PendingNavigatorInvitation } from 'models/NavigatorSetup';
-import Spinner from 'components/Spinner';
 import messages from '../messages';
 
 const SINGLE_EMAIL_HEIGHT = 36;
@@ -92,17 +91,12 @@ const NavigatorEmailInvitationPanel = ({
                   <Box py={11.5}>
                     <Text lineHeight="13px">{email}</Text>
                   </Box>
-                  {!inDeletion && (
-                    <ImageButton
-                      onClick={() => removeNavigatorEmailInvitation(id)}
-                      src={bin}
-                    />
-                  )}
-                  {inDeletion && (
-                    <div>
-                      <Spinner color={themeColors.secondary} />
-                    </div>
-                  )}
+                  <ImageButton
+                    title={formatMessage(messages.cancelNavigatorInvitation)}
+                    onClick={() => removeNavigatorEmailInvitation(id)}
+                    src={bin}
+                    loading={inDeletion}
+                  />
                 </Box>
               ),
             )}
