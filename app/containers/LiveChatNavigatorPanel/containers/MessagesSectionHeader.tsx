@@ -44,8 +44,12 @@ const MessageSectionHeader = ({ onArchiveConversation }: Props) => {
   } = useModal({
     type: ModalType.ConfirmationModal,
     props: {
-      title: formatMessage(i18nMessages.archiveConfirmationModalTitle),
-      content: formatMessage(i18nMessages.archiveConfirmationModalMessage),
+      description: formatMessage(i18nMessages.archiveConfirmationModalMessage),
+      content: (
+        <Text textAlign="center">
+          {formatMessage(i18nMessages.archiveConfirmationModalContent)}
+        </Text>
+      ),
       confirmAction: archiveConversation,
     },
   });

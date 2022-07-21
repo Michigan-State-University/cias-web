@@ -87,14 +87,13 @@ export default defineMessages({
     id: `${scope}.archiveIconAlt`,
     defaultMessage: 'Archive icon',
   },
-  archiveConfirmationModalTitle: {
-    id: `${scope}.archiveConfirmationModalTitle`,
-    defaultMessage: 'Archive conversation',
-  },
   archiveConfirmationModalMessage: {
     id: `${scope}.archiveConfirmationModalMessage`,
-    defaultMessage:
-      'Are you sure you want to archive this conversation? This operation is irreversible.',
+    defaultMessage: `Are you sure you want to archive this conversation?`,
+  },
+  archiveConfirmationModalContent: {
+    id: `${scope}.archiveConfirmationModalContent`,
+    defaultMessage: `This operation is irreversible.`,
   },
   archived: {
     id: `${scope}.archived`,
