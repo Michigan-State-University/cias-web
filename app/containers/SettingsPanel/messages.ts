@@ -285,4 +285,8 @@ export default defineMessages({
     id: `${scope}.noLinksForParticipant`,
     defaultMessage: `You haven’t added any links for participants yet. Let’s click on <primaryColorBold>Add new link</primaryColorBold> above to add some links.`,
   },
+  cancelNavigatorInvitation: {
+    id: `${scope}.cancelNavigatorInvitation`,
+    defaultMessage: 'Cancel Navigator invitation',
+  },
 });

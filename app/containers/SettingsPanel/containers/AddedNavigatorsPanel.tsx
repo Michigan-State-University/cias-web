@@ -67,14 +67,15 @@ const AddedNavigatorPanel = ({
             </Row>
             {/* WAITING FOR BE */}
             {/* <TextButton
-              onClick={() => removeInterventionNavigator(id)}
-              buttonProps={{ display: 'flex', align: 'center' }}
-            >
-              <Img width={24} height={24} src={minus} />
-              <Text ml={16} color={colors.manatee} fontWeight="bold">
-                {formatMessage(messages.remove)}
-              </Text>
-            </TextButton> */}
+                onClick={() => removeInterventionNavigator(id)}
+                buttonProps={{ display: 'flex', align: 'center' }}
+                loading={inDeletion}
+              >
+                <Img width={24} height={24} src={minus} />
+                <Text ml={16} color={colors.manatee} fontWeight="bold">
+                  {formatMessage(messages.remove)}
+                </Text>
+              </TextButton> */}
           </Row>
         ),
       )}

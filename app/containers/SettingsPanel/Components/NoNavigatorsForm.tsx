@@ -68,7 +68,9 @@ const NoNavigatorsForm = ({
   updateNoNavigatorTabData,
 }: Props) => {
   const { formatMessage } = useIntl();
-  const isUpdating = useSelector(makeSelectNavigatorSetupLoader('updateForm'));
+  const isUpdating = useSelector(
+    makeSelectNavigatorSetupLoader('updatingForm'),
+  );
 
   const [phoneDirty, setPhoneDirty] = useState(false);
   const [phoneValid, setPhoneValid] = useState(true);

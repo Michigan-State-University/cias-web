@@ -4,4 +4,5 @@ export type InterventionNavigator = {
   firstName: string;
   id: string;
   lastName: string;
+  inDeletion?: boolean;
 };
