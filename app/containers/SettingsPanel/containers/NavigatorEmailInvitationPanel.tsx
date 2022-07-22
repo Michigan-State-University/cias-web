@@ -6,7 +6,7 @@ import { colors } from 'theme';
 import bin from 'assets/svg/bin-no-bg.svg';
 
 import Box from 'components/Box';
-import H3 from 'components/H3';
+import H2 from 'components/H2';
 import Text from 'components/Text';
 import Row from 'components/Row';
 import ChipsInput from 'components/Input/ChipsInput';
@@ -42,7 +42,9 @@ const NavigatorEmailInvitationPanel = ({
 
   return (
     <Box>
-      <H3 mb={30}>{formatMessage(messages.inviteNavigatorsByEmail)}</H3>
+      <H2 fontSize={16} lineHeight="24px" mb={30}>
+        {formatMessage(messages.inviteNavigatorsByEmail)}
+      </H2>
       <Text mb={10}>{formatMessage(messages.navigatorEmail)}</Text>
       <Row align="center">
         <ChipsInput

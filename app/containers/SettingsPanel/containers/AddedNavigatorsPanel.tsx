@@ -6,7 +6,7 @@ import { InterventionNavigator } from 'models/NavigatorSetup';
 // import minus from 'assets/svg/grey-minus.svg';
 
 import Box from 'components/Box';
-import H3 from 'components/H3';
+import H2 from 'components/H2';
 import Text from 'components/Text';
 import Row from 'components/Row';
 // import Img from 'components/Img';
@@ -33,7 +33,9 @@ const AddedNavigatorPanel = ({
 
   return (
     <Box>
-      <H3 mb={30}>{formatMessage(messages.navigatorsAddedToIntervention)}</H3>
+      <H2 fontSize={16} lineHeight="24px" mb={30}>
+        {formatMessage(messages.navigatorsAddedToIntervention)}
+      </H2>
       {interventionNavigators.length === 0 && (
         <Text color={colors.grey}>
           {formatMessage(messages.noAddedNavigators)}
