@@ -1,6 +1,6 @@
 /**
  *
- * Tests for ParticipantDashboard
+ * Tests for ParticipantReportsPage
  *
  */
 
@@ -11,9 +11,9 @@ import { IntlProvider } from 'react-intl';
 import { Provider } from 'react-redux';
 import configureStore from 'configureStore';
 import { browserHistory, MemoryRouter } from 'react-router-dom';
-import ParticipantDashboard from '../index';
+import ParticipantReportsPage from '../index';
 
-describe('<ParticipantDashboard />', () => {
+describe('<ParticipantReportsPage />', () => {
   let store;
 
   beforeAll(() => {
@@ -27,7 +27,7 @@ describe('<ParticipantDashboard />', () => {
       <IntlProvider locale="en">
         <Provider store={store}>
           <MemoryRouter>
-            <ParticipantDashboard />
+            <ParticipantReportsPage />
           </MemoryRouter>
         </Provider>
       </IntlProvider>,
