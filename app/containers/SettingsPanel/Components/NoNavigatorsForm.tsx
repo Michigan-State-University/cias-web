@@ -22,7 +22,7 @@ import Box from 'components/Box';
 import Switch from 'components/Switch';
 import Radio from 'components/Radio';
 import Text from 'components/Text';
-import H3 from 'components/H3';
+import H2 from 'components/H2';
 import { FormikHookInput } from 'components/FormikInput';
 import PhoneNumberForm from 'components/AccountSettings/PhoneNumberForm';
 import Button from 'components/Button';
@@ -144,7 +144,9 @@ const NoNavigatorsForm = ({
   return (
     <>
       <Box>
-        <H3 mb={30}>{formatMessage(messages.textInformation)}</H3>
+        <H2 fontSize={16} lineHeight="24px" mb={30}>
+          {formatMessage(messages.textInformation)}
+        </H2>
         {/* @ts-ignore */}
         <FormikHookInput
           formikKey="noNavigatorAvailableMessage"
@@ -189,15 +191,18 @@ const NoNavigatorsForm = ({
           {formatMessage(messages.saveChanges)}
         </Button>
       </Box>
-      <Box display="flex" mt={20}>
-        <H3>{formatMessage(messages.notifyNavigator)}</H3>
+      <Box display="flex" mt={20} mb={30}>
         <Switch
           checked={isNavigatorNotificationOn}
           onToggle={(newValue) =>
             updateNoNavigatorTabData({ isNavigatorNotificationOn: newValue })
           }
           id="navigator-notification"
-        />
+        >
+          <H2 fontSize={16} lineHeight="24px">
+            {formatMessage(messages.notifyNavigator)}
+          </H2>
+        </Switch>
       </Box>
       <Box display="flex" mt={20}>
         <Radio
