@@ -20,6 +20,7 @@ import {
   setGuestInterlocutorId,
   setArchivingConversation,
   onConversationArchivedReceive,
+  setNavigatorUnavailable,
 } from './actions';
 import { LiveChatAction, LiveChatState } from './types';
 
@@ -33,6 +34,7 @@ export const initialState: LiveChatState = {
   guestInterlocutorId: null,
   creatingConversation: false,
   archivingConversation: false,
+  navigatorUnavailable: false,
   loaders: {
     conversations: false,
     messages: false,
@@ -164,6 +166,10 @@ export const liveChatReducer = (
       }
       case getType(setArchivingConversation): {
         draft.archivingConversation = payload.archivingConversation;
+        break;
+      }
+      case getType(setNavigatorUnavailable): {
+        draft.navigatorUnavailable = payload.navigatorUnavailable;
         break;
       }
       case getType(onConversationArchivedReceive): {

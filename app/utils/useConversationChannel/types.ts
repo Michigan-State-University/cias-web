@@ -39,6 +39,7 @@ export type CreateConversationData = {
 };
 
 export type NavigatorUnavailableData = SocketErrorMessageData;
+export type NavigatorUnavailableErrorData = SocketErrorMessageData;
 
 export type ConversationArchivedData = {
   conversationId: string;
@@ -74,6 +75,12 @@ export type NavigatorUnavailableSocketErrorMessage = SocketErrorMessage<
   404
 >;
 
+export type NavigatorUnavailableErrorSocketErrorMessage = SocketErrorMessage<
+  ConversationChannelMessageTopic.NAVIGATOR_UNAVAILABLE_ERROR,
+  NavigatorUnavailableErrorData,
+  404
+>;
+
 export type ConversationArchivedSocketMessage = SocketMessage<
   ConversationChannelMessageTopic.CONVERSATION_ARCHIVED,
   ConversationArchivedData
@@ -86,7 +93,8 @@ export type ConversationChannelMessage =
   | MessageReadSocketMessage
   | ConversationCreatedSocketMessage
   | NavigatorUnavailableSocketErrorMessage
-  | ConversationArchivedSocketMessage;
+  | ConversationArchivedSocketMessage
+  | NavigatorUnavailableErrorSocketErrorMessage;
 
 // SOCKET ACTIONS
 

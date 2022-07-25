@@ -121,3 +121,9 @@ export const makeSelectArchivingConversation = () =>
     selectLiveChatState,
     ({ archivingConversation }) => archivingConversation,
   );
+
+export const makeSelectNavigatorUnavailable = () =>
+  createSelector(
+    selectLiveChatState,
+    ({ navigatorUnavailable }) => navigatorUnavailable,
+  );

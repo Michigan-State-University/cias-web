@@ -9,6 +9,7 @@ import {
   SocketErrorMessageData,
   SocketErrorMessageStatus,
   SocketMessage,
+  SocketOptions,
 } from './types';
 
 export const useSocket = <
@@ -22,7 +23,7 @@ export const useSocket = <
   TAction extends SocketAction<string, object> | null = null,
 >(
   channelName: string,
-  suspend: boolean = false,
+  { socketConnectionParams = {}, suspend = false }: SocketOptions,
 ) => {
   type TChannel = Channel<{}, TMessage>;
 
@@ -31,9 +32,9 @@ export const useSocket = <
 
   const subscribe = useCallback(async () => {
     if (!channel && cable && !suspend) {
-      setChannel(await cable.subscribeTo(channelName));
+      setChannel(await cable.subscribeTo(channelName, socketConnectionParams));
     }
-  }, [channel, cable, suspend]);
+  }, [channel, cable, socketConnectionParams, suspend]);
 
   const unsubscribe = useCallback(() => {
     if (channel) {

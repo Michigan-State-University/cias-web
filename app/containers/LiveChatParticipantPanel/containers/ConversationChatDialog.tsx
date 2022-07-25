@@ -1,9 +1,16 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useIntl } from 'react-intl';
+import { useDispatch, useSelector } from 'react-redux';
 
-import { Conversation, Message } from 'models/LiveChat';
+import { useConversationChannel } from 'utils/useConversationChannel';
 
-import { ReadMessageData } from 'utils/useConversationChannel';
+import {
+  closeConversation,
+  makeSelectCreatingConversation,
+  makeSelectCurrentInterlocutorId,
+  makeSelectOpenedConversation,
+  makeSelectOpenedConversationMessages,
+} from 'global/reducers/liveChat';
 
 import { themeColors } from 'theme';
 
@@ -15,38 +22,60 @@ import Divider from 'components/Divider';
 import Text from 'components/Text';
 import Spinner from 'components/Spinner';
 
-import ChatDialog from './ChatDialog';
-import ConversationChatDialogHeader from './ConversationChatDialogHeader';
 import i18nMessages from '../messages';
+import ChatDialog from '../components/ChatDialog';
+import ConversationChatDialogHeader from '../components/ConversationChatDialogHeader';
 
 export type Props = {
-  conversation: Nullable<Conversation>;
-  messages: Nullable<Message[]>;
-  currentInterlocutorId: Nullable<string>;
-  creatingConversation: boolean;
+  interventionId: string;
   onMinimizeDialog: () => void;
-  onSendMessage: (content: string) => void;
-  onReadMessage: (data: ReadMessageData) => void;
+  conversationChannel: ReturnType<typeof useConversationChannel>;
 };
 
 const ConversationChatDialog = ({
-  conversation,
-  messages,
-  currentInterlocutorId,
-  creatingConversation,
+  interventionId,
   onMinimizeDialog,
-  onSendMessage,
-  onReadMessage,
+  conversationChannel,
 }: Props) => {
+  const { createConversation, readMessage, sendMessage } = conversationChannel;
   const { formatMessage } = useIntl();
 
   const [message, setMessage] = useState('');
+
+  const dispatch = useDispatch();
+
+  const creatingConversation = useSelector(makeSelectCreatingConversation());
+  const messages = useSelector(makeSelectOpenedConversationMessages());
+  const conversation = useSelector(makeSelectOpenedConversation());
+  const currentInterlocutorId = useSelector(makeSelectCurrentInterlocutorId());
+
+  useEffect(
+    () => () => {
+      dispatch(closeConversation());
+    },
+    [interventionId],
+  );
+
+  const handleSendMessage = (content: string) => {
+    if (conversation && currentInterlocutorId) {
+      sendMessage({
+        conversationId: conversation.id,
+        content,
+        interlocutorId: currentInterlocutorId,
+      });
+    } else {
+      createConversation({
+        firstMessageContent: content,
+        interventionId,
+      });
+    }
+  };
 
   const handleSend = () => {
     if (creatingConversation) return;
     const trimmedMessage = message.trim();
     if (!trimmedMessage) return;
-    onSendMessage(trimmedMessage);
+    handleSendMessage(trimmedMessage);
     setMessage('');
   };
 
@@ -70,7 +99,7 @@ const ConversationChatDialog = ({
           currentInterlocutorId={currentInterlocutorId}
           messages={messages ?? []}
           interlocutors={conversation.liveChatInterlocutors}
-          onReadMessage={onReadMessage}
+          onReadMessage={readMessage}
         />
       )}
       <Column flex={1}>
