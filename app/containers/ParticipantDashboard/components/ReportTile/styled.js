@@ -10,7 +10,7 @@ export const StyledBox = styled(Box)`
 `;
 
 export const DownloadRow = styled(Row)`
-  justify-content: space-between;
+  justify-content: flex-end;
   white-space: nowrap;
 
   @media ${maxQueries.sm} {

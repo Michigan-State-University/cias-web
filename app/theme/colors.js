@@ -74,7 +74,6 @@ const colors = {
   gainsbro: '#DADADA',
   lightStealBlue: '#B3C1E1',
   lightDivider: '#EAF1FA',
-  fireIsland: '#DD533C',
 };
 
 const themeColors = {

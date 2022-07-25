@@ -4,5 +4,3 @@ import fetchReportsSaga from './fetchReports';
 export default function* allReportsSagas() {
   yield all([fetchReportsSaga()]);
 }
-
-export { fetchReportsSaga };

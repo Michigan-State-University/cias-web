@@ -20,7 +20,7 @@ export function ReportsFilter({
   noContent,
 }) {
   return (
-    <Row my={24} align="center" justify={disableFilter ? 'end' : 'between'}>
+    <Row my={30} align="center" justify={disableFilter ? 'end' : 'between'}>
       {!disableFilter && (
         <Row align="center">
           <Text mr={15} fontWeight="bold">

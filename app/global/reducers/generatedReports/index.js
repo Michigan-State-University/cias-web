@@ -1,5 +1,17 @@
-export * from './actions';
+export {
+  fetchReportsRequest,
+  fetchLatestReportRequest,
+  fetchInterventionsRequest,
+  toggleNotificationsRequest,
+} from './actions';
 export { generatedReportsReducer } from './reducer';
-export * from './selectors';
-export * from './constants';
-export * from './sagas';
+export {
+  makeSelectDashboardState,
+  makeSelectReports,
+  makeSelectLatestReport,
+  makeSelectInterventions,
+  makeSelectError,
+  makeSelectLoader,
+  makeSelectPendingSessions,
+  makeSelectReportsSize,
+} from './selectors';

@@ -1,6 +1,6 @@
 /**
  *
- * Asynchronously loads the component for ParticipantReportsPage
+ * Asynchronously loads the component for ParticipantDashboard
  *
  */
 

@@ -1,6 +1,10 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`<ParticipantReportsPage /> should render and match the snapshot 1`] = `
+exports[`<ParticipantDashboard /> should render and match the snapshot 1`] = `
+.c0 {
+  max-width: 960px !important;
+}
+
 .c2 {
   display: -webkit-box;
   display: -webkit-flex;
@@ -38,10 +42,6 @@ exports[`<ParticipantReportsPage /> should render and match the snapshot 1`] = `
   line-height: 130%;
   margin-top: 64px;
   color: #2F3850;
-}
-
-.c0 {
-  max-width: 960px !important;
 }
 
 <div

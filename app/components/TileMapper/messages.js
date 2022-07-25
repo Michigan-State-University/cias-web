@@ -1,6 +1,6 @@
 import { defineMessages } from 'react-intl';
 
-export const scope = 'app.containers.TileMapper';
+export const scope = 'app.containers.ParticipantDashboard';
 
 export default defineMessages({
   noResults: {

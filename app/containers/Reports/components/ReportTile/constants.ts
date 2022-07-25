@@ -1,1 +1,0 @@
-export const NOT_DOWNLOADED_REPORT_CIRCLE_SIZE = '6px';

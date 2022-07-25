@@ -25,18 +25,22 @@ import {
   REPORTS_PER_PAGE,
   filterOptions,
   sortByOptions,
-  fetchReportsSaga,
+} from 'global/reducers/generatedReports/constants';
+import fetchReportsSaga from 'global/reducers/generatedReports/sagas/fetchReports';
+import {
   generatedReportsReducer,
   fetchReportsRequest,
   makeSelectLoader,
   makeSelectReports,
   makeSelectReportsSize,
-  makeSelectCurrentPage,
-  makeSelectCurrentSortOption,
-  makeSelectCurrentFilterOption,
 } from 'global/reducers/generatedReports';
 
 import PaginationHandler from 'containers/UserList/Components/PaginationHelper';
+import {
+  makeSelectCurrentPage,
+  makeSelectCurrentSortOption,
+  makeSelectCurrentFilterOption,
+} from 'global/reducers/generatedReports/selectors';
 
 import { ReportTile } from '../../components/ReportTile';
 import { ReportsFilter } from '../../components/ReportsFilter';
@@ -90,8 +94,8 @@ const ReportsList = ({
     if (!reportsLoading) setDisplayLoader(false);
   }, [reportsLoading]);
 
-  const renderReport = (report) => (
-    <Row mb={5} width="100%" key={`report-tile-${report.id}`}>
+  const renderReport = (report, itemIndex) => (
+    <Row mb={5} width="100%" key={`report-tile-${itemIndex}`}>
       <ReportTile formatMessage={formatMessage} {...report} />
     </Row>
   );
@@ -126,7 +130,7 @@ const ReportsList = ({
         activeSort={currentSortOption}
         noContent={noContent}
       />
-      <Column mb={40}>
+      <Column mb={20}>
         <TileMapper items={reports} component={renderReport} />
       </Column>
       {!noContent && (
