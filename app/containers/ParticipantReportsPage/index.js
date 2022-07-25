@@ -1,6 +1,6 @@
 /**
  *
- * ParticipantDashboard
+ * ParticipantReportsPage
  *
  */
 
@@ -8,12 +8,10 @@ import React, { memo } from 'react';
 import { useInjectReducer, useInjectSaga } from 'redux-injectors';
 import { Helmet } from 'react-helmet';
 import { useIntl } from 'react-intl';
-import PropTypes from 'prop-types';
 
 import allReportsSagas from 'global/reducers/generatedReports/sagas';
 import { generatedReportsReducer } from 'global/reducers/generatedReports';
 
-import GeneratedReportsPage from 'containers/Sessions/containers/GeneratedReportsPage';
 import ReportsList from 'containers/Reports/containers/ReportsList';
 
 import AppContainer from 'components/Container';
@@ -21,7 +19,7 @@ import AppContainer from 'components/Container';
 import H1 from 'components/H1';
 import messages from './messages';
 
-const ParticipantDashboard = () => {
+const ParticipantReportsPage = () => {
   useInjectReducer({
     key: 'generatedReports',
     reducer: generatedReportsReducer,
@@ -33,7 +31,7 @@ const ParticipantDashboard = () => {
   return (
     <AppContainer>
       <Helmet>
-        <title>{formatMessage(messages.pageTitle)}</title>
+        <title>{formatMessage(messages.pageHeader)}</title>
       </Helmet>
 
       <H1 mt={64}>{formatMessage(messages.pageHeader)}</H1>
@@ -43,9 +41,4 @@ const ParticipantDashboard = () => {
   );
 };
 
-GeneratedReportsPage.propTypes = {
-  disableFilter: PropTypes.bool,
-  match: PropTypes.object,
-};
-
-export default memo(ParticipantDashboard);
+export default memo(ParticipantReportsPage);

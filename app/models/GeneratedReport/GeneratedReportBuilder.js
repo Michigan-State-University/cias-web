@@ -29,6 +29,7 @@ export class GeneratedReportBuilder {
     this.createdAt = generatedReport.createdAt;
     this.pdfReportUrl = generatedReport.pdfReportUrl;
     this.reportFor = generatedReport.reportFor;
+    this.downloaded = generatedReport.downloaded;
 
     return this;
   };
@@ -43,5 +44,6 @@ export class GeneratedReportBuilder {
       createdAt: this.createdAt,
       pdfReportUrl: this.pdfReportUrl,
       reportFor: this.reportFor,
+      downloaded: this.downloaded,
     });
 }
