@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useRef } from 'react';
 import { useIntl } from 'react-intl';
 import dayjs from 'dayjs';
 import relativeTime from 'dayjs/plugin/relativeTime';
@@ -9,14 +9,18 @@ import { colors } from 'theme';
 import { Conversation } from 'models/LiveChat';
 
 import { formatInterlocutorName } from 'utils/liveChatUtils';
+import useResizeObserver from 'utils/useResizeObserver';
 
 import Column from 'components/Column';
 import Row from 'components/Row';
-import Text from 'components/Text';
+import Text, { EllipsisText } from 'components/Text';
 import ChatAvatar from 'components/ChatAvatar';
 
-import { ConversationListItemContainer } from './styled';
+import { ConversationListItemContainer, LabelRow } from './styled';
 import i18nMessages from '../messages';
+
+const AVATAR_AND_DATE_WIDTH = 90;
+const AVATAR_AND_ARCHIVED_WIDTH = 125;
 
 dayjs.extend(relativeTime);
 dayjs.extend(updateLocale);
@@ -70,14 +74,24 @@ export const ConversationListItem = ({
   const markUnread =
     !lastMessage.isRead && lastMessage.interlocutorId === otherInterlocutor?.id;
 
+  const interlocutorRef = useRef();
+  const { width: interlocutorWidth } = useResizeObserver({
+    targetRef: interlocutorRef,
+    onResize: undefined,
+  });
+
   return (
-    <ConversationListItemContainer highlighted={opened} onClick={handleClick}>
+    <ConversationListItemContainer
+      highlighted={opened}
+      onClick={handleClick}
+      ref={interlocutorRef}
+    >
       <Column flexShrink={0} width="auto">
         <ChatAvatar interlocutor={otherInterlocutor} />
       </Column>
       <Column flex={1} gap={12} minWidth="0">
-        <Row justify="between" gap={8}>
-          <Text
+        <LabelRow justify="between" gap={8} width="100%">
+          <EllipsisText
             fontWeight="bold"
             fontSize={14}
             lineHeight="14px"
@@ -86,9 +100,14 @@ export const ConversationListItem = ({
             textOverflow="ellipsis"
             whiteSpace="nowrap"
             overflow="hidden"
-          >
-            {formatInterlocutorName(otherInterlocutor)}
-          </Text>
+            width={
+              interlocutorWidth
+                ? interlocutorWidth -
+                  (archived ? AVATAR_AND_ARCHIVED_WIDTH : AVATAR_AND_DATE_WIDTH)
+                : 0
+            }
+            text={formatInterlocutorName(otherInterlocutor)}
+          />
           <Column flexShrink={0} width="auto">
             {!archived && (
               <Text
@@ -112,7 +131,7 @@ export const ConversationListItem = ({
               </Text>
             )}
           </Column>
-        </Row>
+        </LabelRow>
         <Row width="100%">
           {liveChatInterlocutors[lastMessage.interlocutorId]?.userId ===
             currentUserId && (

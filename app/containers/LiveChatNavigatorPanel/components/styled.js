@@ -1,6 +1,7 @@
 import styled from 'styled-components';
 import { Col as GCol, Row as GRow } from 'react-grid-system';
 import Color from 'color';
+import Row from 'components/Row';
 
 import { colors, themeColors } from 'theme';
 
@@ -64,4 +65,10 @@ export const ConversationListItemContainer = styled(Box)`
   display: flex;
   gap: 16px;
   width: 100%;
+`;
+
+export const LabelRow = styled(Row)`
+  & > div {
+    text-align: left;
+  }
 `;
