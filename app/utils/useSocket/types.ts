@@ -33,7 +33,7 @@ export type SocketAction<Action extends string, Data extends object> = {
   data: Data;
 };
 
-export type SocketOptions = {
+export type SocketOptions<TConnectionParams> = {
   suspend?: boolean;
-  socketConnectionParams?: Record<string, any>;
+  socketConnectionParams?: TConnectionParams;
 };

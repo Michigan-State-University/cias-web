@@ -2,6 +2,8 @@ import { useCallback, useContext, useEffect, useMemo, useState } from 'react';
 import { Channel } from '@anycable/web';
 
 import { SocketContext } from 'components/ActionCable';
+import useDeepObjectMemo from 'utils/useDeepObjectMemo';
+import { ChannelParamsMap } from '@anycable/core/channel';
 import { LISTEN_SOCKET_MESSAGE_EVENT_NAME } from './constants';
 import {
   SocketAction,
@@ -21,20 +23,23 @@ export const useSocket = <
         SocketErrorMessageStatus
       >,
   TAction extends SocketAction<string, object> | null = null,
+  TSocketParams extends ChannelParamsMap | undefined = undefined,
 >(
   channelName: string,
-  { socketConnectionParams = {}, suspend = false }: SocketOptions,
+  { socketConnectionParams, suspend = false }: SocketOptions<TSocketParams>,
 ) => {
   type TChannel = Channel<{}, TMessage>;
 
   const cable = useContext(SocketContext);
   const [channel, setChannel] = useState<TChannel | null>();
 
+  const memoizedParams = useDeepObjectMemo(socketConnectionParams);
+
   const subscribe = useCallback(async () => {
     if (!channel && cable && !suspend) {
-      setChannel(await cable.subscribeTo(channelName, socketConnectionParams));
+      setChannel(await cable.subscribeTo(channelName, memoizedParams));
     }
-  }, [channel, cable, socketConnectionParams, suspend]);
+  }, [channel, cable, memoizedParams, suspend]);
 
   const unsubscribe = useCallback(() => {
     if (channel) {

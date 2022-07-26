@@ -18,9 +18,7 @@ export const LiveChatParticipantPanel = ({ interventionId }: Props) => {
   const toggleDialog = () => setDialogMinimized(!dialogMinimized);
   const minimizeDialog = () => setDialogMinimized(true);
 
-  const conversationChannel = useConversationChannel({
-    intervention_id: interventionId,
-  });
+  const conversationChannel = useConversationChannel(interventionId);
 
   const navigatorUnavailable = useSelector(makeSelectNavigatorUnavailable());
 

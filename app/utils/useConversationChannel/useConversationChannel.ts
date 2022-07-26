@@ -36,6 +36,7 @@ import {
   ArchiveConversationData,
   MessageSentData,
   ConversationCreatedData,
+  ConversationChannelConnectionParams,
 } from './types';
 import {
   CONVERSATION_CHANNEL_NAME,
@@ -43,9 +44,7 @@ import {
   ConversationChannelMessageTopic,
 } from './constants';
 
-export const useConversationChannel = (
-  socketConnectionParams?: Record<string, any>,
-) => {
+export const useConversationChannel = (interventionId?: string) => {
   const dispatch = useDispatch();
   useInjectSaga({ key: allLiveChatSagasKey, saga: allLiveChatSagas });
   // @ts-ignore
@@ -55,8 +54,11 @@ export const useConversationChannel = (
 
   const channel = useSocket<
     ConversationChannelMessage,
-    ConversationChannelAction
-  >(CONVERSATION_CHANNEL_NAME, { socketConnectionParams });
+    ConversationChannelAction,
+    ConversationChannelConnectionParams
+  >(CONVERSATION_CHANNEL_NAME, {
+    socketConnectionParams: { intervention_id: interventionId },
+  });
 
   const showErrorToast = ({ error }: SocketErrorMessageData) => {
     toast.error(error);
@@ -95,8 +97,11 @@ export const useConversationChannel = (
   };
 
   const onNavigatorUnavailable = () => {
-    dispatch(setCreatingConversation(false));
     dispatch(setNavigatorUnavailable(true));
+  };
+
+  const onNavigatorUnavailableError = () => {
+    dispatch(setCreatingConversation(false));
   };
 
   const onConversationArchived = ({
@@ -159,7 +164,8 @@ export const useConversationChannel = (
           onConversationArchived(data);
           break;
         case ConversationChannelMessageTopic.NAVIGATOR_UNAVAILABLE_ERROR:
-          onNavigatorUnavailable();
+          showErrorToast(data);
+          onNavigatorUnavailableError();
           break;
         default:
           break;
