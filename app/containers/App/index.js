@@ -84,6 +84,7 @@ import {
 
 import { arraysOverlap } from 'utils/arrayUtils';
 import { MODAL_PORTAL_ID, TOOLTIP_PORTAL_ID } from './constants';
+import { shouldFetchSelfDetailsOnPath } from './utils';
 
 export function App({ user, fetchSelfDetails }) {
   useNotificationChannel();
@@ -94,7 +95,7 @@ export function App({ user, fetchSelfDetails }) {
   useInjectSaga({ key: 'fetchSelfDetails', saga: fetchSelfDetailsSaga });
 
   useEffect(() => {
-    if (user && !pathname.includes('/preview')) {
+    if (user && shouldFetchSelfDetailsOnPath(pathname)) {
       fetchSelfDetails();
     }
   }, []);
