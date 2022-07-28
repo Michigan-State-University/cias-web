@@ -597,16 +597,8 @@ exports[`<UserList /> Should render and match the snapshot - admin 1`] = `
   color: #0E0E0E;
 }
 
-.c25 td:nth-last-child(-n + ) {
-  opacity: 100%;
-}
-
 .c25:hover {
   background: !important;
-}
-
-.c25:hover td:hover {
-  opacity: 100%;
 }
 
 .c28 {
@@ -614,16 +606,8 @@ exports[`<UserList /> Should render and match the snapshot - admin 1`] = `
   color: #0E0E0E;
 }
 
-.c28 td:nth-last-child(-n + 1) {
-  opacity: 0;
-}
-
 .c28:hover {
   background: #E9F1FB !important;
-}
-
-.c28:hover td:hover {
-  opacity: 100%;
 }
 
 .c29 {
@@ -1715,16 +1699,8 @@ exports[`<UserList /> Should render and match the snapshot - researcher 1`] = `
   color: #0E0E0E;
 }
 
-.c24 td:nth-last-child(-n + ) {
-  opacity: 100%;
-}
-
 .c24:hover {
   background: !important;
-}
-
-.c24:hover td:hover {
-  opacity: 100%;
 }
 
 .c27 {
@@ -1732,16 +1708,8 @@ exports[`<UserList /> Should render and match the snapshot - researcher 1`] = `
   color: #0E0E0E;
 }
 
-.c27 td:nth-last-child(-n + 1) {
-  opacity: 0;
-}
-
 .c27:hover {
   background: #E9F1FB !important;
-}
-
-.c27:hover td:hover {
-  opacity: 100%;
 }
 
 .c28 {

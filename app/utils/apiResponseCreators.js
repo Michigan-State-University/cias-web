@@ -11,6 +11,13 @@ export const apiUserResponse = (id = 0) => ({
       active: true,
       roles: ['admin'],
       avatar_url: `test-avatar-${id}`,
+      phone: `test-phone-${id}`,
+      team_id: `test-team-id-${id}`,
+      team_name: `test-team-name-${id}`,
+      email_notification: true,
+      sms_notification: true,
+      feedback_completed: false,
+      quick_exit_enabled: false,
     },
   },
 });

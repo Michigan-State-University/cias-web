@@ -87,4 +87,14 @@ export class GeometryHelper {
 
     return { curveStartPoint: curveStartPoint!, curveEndPoint: curveEndPoint! };
   }
+
+  static doesRectContainPoint(rect: DOMRect, point: Point2D): boolean {
+    const { top, bottom, left, right } = rect;
+    const { x, y } = point;
+
+    if (x < left || x > right) return false;
+    if (y < top || y > bottom) return false;
+
+    return true;
+  }
 }

@@ -49,9 +49,7 @@ const UrlPreview = ({ link, handleClick }) => {
               {metadata.url && (
                 <Url href={metadata.url} target="_blank" onClick={handleClick}>
                   <Text
-                    textOverflow="hidden"
-                    whiteSpace="pre"
-                    overflow="hidden"
+                    wordBreak="break-all"
                     my={3}
                     fontSize={9}
                     color={themeColors.secondary}

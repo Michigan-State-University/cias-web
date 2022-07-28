@@ -40,6 +40,7 @@ const UrlQuestion = ({ question, selectAnswer }) => {
         content={
           <Comment>{formatMessage(messages.wcagExternalLinkWarning)}</Comment>
         }
+        stretchContent
       >
         <UrlPreview handleClick={onClick} link={payload} />
       </IconTooltip>

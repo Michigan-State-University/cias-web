@@ -1,6 +1,9 @@
+/* eslint-disable no-use-before-define */
 import { registerDependencies } from 'mjml-validator'
 import { BodyComponent } from 'mjml-core'
-import { ciasLogo } from '../assets/rawImages'
+import flow from 'lodash/flow'
+
+import { LOGO_URL, TEXT } from '../utils/constants'
 
 registerDependencies({
   // Tell the validator which tags are allowed as our component's children
@@ -20,7 +23,9 @@ export default class AppLayout extends BodyComponent {
     mainText: 'string',
     buttonText: 'string',
     buttonUrl: 'string',
-    footNote: 'string',
+    ignoreEmail: 'boolean',
+    doNotReply: 'boolean',
+    noPwdChange: 'boolean',
     buttonColor: 'color',
     buttonTextColor: 'color',
   }
@@ -31,7 +36,9 @@ export default class AppLayout extends BodyComponent {
     mainText: 'Main <span style="color:red;">text</span>!',
     buttonText: 'Link',
     buttonUrl: '#',
-    footNote: 'Footnote',
+    ignoreEmail: false,
+    noPwdChange: false,
+    doNotReply: true,
     buttonColor: '#107969',
     buttonTextColor: '#FFF',
   }
@@ -41,9 +48,34 @@ export default class AppLayout extends BodyComponent {
     const mainText = this.getAttribute('mainText')
     const buttonText = this.getAttribute('buttonText')
     const buttonUrl = this.getAttribute('buttonUrl')
-    const footNote = this.getAttribute('footNote')
+    const ignoreEmail = this.getAttribute('ignoreEmail')
+    const noPwdChange = this.getAttribute('noPwdChange')
+    const doNotReply = this.getAttribute('doNotReply')
     const buttonColor = this.getAttribute('buttonColor')
     const buttonTextColor = this.getAttribute('buttonTextColor')
+
+    const textWithBreak = (text) => textBuilder(text, [textSpaceDecorator])
+
+    const textBuilder = (text, decorators) => (decorators ? flow(...decorators)(text) : text)
+
+    const textSpaceDecorator = (text) => `${text}<br/><br/> `
+
+    const createFootNote = () => {
+      const textArray = []
+
+      if (ignoreEmail) textArray.push(textWithBreak(TEXT.IGNORE_EMAIL))
+
+      if (noPwdChange) textArray.push(textWithBreak(TEXT.NO_PWD_CHANGE))
+
+      if (doNotReply) textArray.push(textWithBreak(TEXT.DO_NOT_REPLY))
+
+      return textArray.join('')
+    }
+
+    const footNote = createFootNote()
+
+    const hasFootNote = !!(footNote && footNote.length)
+
     /*
       Components are supposed to return html. If we want to return mjml so as to
       use existing components, we need to process it manually using this.renderMJML()
@@ -52,32 +84,56 @@ export default class AppLayout extends BodyComponent {
       <mj-wrapper padding="0" background-color="#FFF">
         <mj-section full-width="full-width">
           <mj-column>
-            <mj-image width="100%" src="${ciasLogo}" />
+            <! -- LOGO START -->
+            <mj-image width="100%" src="${LOGO_URL}" />
+            <! -- LOGO END -->
           </mj-column>
         </mj-section>
         <mj-section>
           <mj-column>
-           <mj-text align="center" font-weight="700" font-size="30px">${header}</mj-text>
+
+          <mj-text align="center" font-weight="700" font-size="30px">
+            <! -- HEADER START -->
+            ${header}
+            <! -- HEADER END -->
+          </mj-text>
+
           </mj-column>
-        </mj-section>
-        <mj-section>
+          </mj-section>
+          <mj-section>
           <mj-column>
-           <mj-text align="center" font-weight="700" font-size="20px">${mainText}</mj-text>
+          <mj-text align="center" font-weight="700" font-size="20px">
+            <! -- MAIN-TEXT START -->
+            ${mainText}
+            <! -- MAIN-TEXT END -->
+          </mj-text>
           </mj-column>
         </mj-section>
-        <mj-section>
+        ${
+          buttonUrl &&
+          buttonText &&
+          `<mj-section>
           <mj-column>
             <mj-button border="1px solid ${buttonColor}" border-radius="100px" background-color="${buttonColor}" color="${buttonTextColor}" font-size="16px" font-weight="700" href="${buttonUrl}">
-              ${buttonText}
+            <! -- BUTTON START -->
+            ${buttonText}
+            <! -- BUTTON END -->
             </mj-button>
           </mj-column>
-        </mj-section>
-        ${footNote &&
+        </mj-section>`
+        }
+        ${
+          hasFootNote &&
           `<mj-section>
         <mj-column>
-         <mj-text align="center" font-size="15px">${footNote}</mj-text>
+         <mj-text align="center" font-size="15px">
+         <! -- FOOTNOTE START -->
+         ${footNote}
+         <! -- FOOTNOTE END -->
+         </mj-text>
         </mj-column>
-      </mj-section>`}
+      </mj-section>`
+        }
       </mj-wrapper>`)
   }
 }

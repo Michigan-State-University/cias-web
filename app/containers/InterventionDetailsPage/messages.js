@@ -108,9 +108,9 @@ export default defineMessages({
     id: `${scope}.interventionArchiveMessage`,
     defaultMessage: 'Are you sure you want to archive this Intervention?',
   },
-  interventionLanguage: {
-    id: `${scope}.interventionLanguage`,
-    defaultMessage: '<b>Language</b>: {language}',
+  interventionSettings: {
+    id: `${scope}.interventionSettings`,
+    defaultMessage: '<b>Intervention Settings</b> (Language, Quick Exit)',
   },
   interventionSettingsIconTooltip: {
     id: `${scope}.interventionSettingsIconTooltip`,
@@ -120,9 +120,21 @@ export default defineMessages({
     id: `${scope}.interventionSettingsModalTitle`,
     defaultMessage: 'Intervention Settings',
   },
+  interventionSettingsModalSubtitle: {
+    id: `${scope}.interventionSettingsModalSubtitle`,
+    defaultMessage: 'Change the default settings for the entire intervention',
+  },
   interventionSettingsLanguageLabel: {
     id: `${scope}.interventionSettingsLanguageLabel`,
-    defaultMessage: 'Intervention Language:',
+    defaultMessage: 'Language',
+  },
+  interventionSettingsQuickExit: {
+    id: `${scope}.interventionSettingsQuickExit`,
+    defaultMessage: 'Quick Exit',
+  },
+  interventionSettingsQuickExitLabel: {
+    id: `${scope}.interventionSettingsQuickExitLabel`,
+    defaultMessage: 'Turn on Quick Exit',
   },
   assignOrganization: {
     id: `${scope}.assignOrganization`,
@@ -131,6 +143,14 @@ export default defineMessages({
   assignOrganizationSelectLabel: {
     id: `${scope}.assignOrganizationSelectLabel`,
     defaultMessage: 'Choose Organization:',
+  },
+  applyChangesButton: {
+    id: `${scope}.applyChangesButton`,
+    defaultMessage: 'Apply global changes',
+  },
+  cancelButton: {
+    id: `${scope}.cancelButton`,
+    defaultMessage: 'Cancel',
   },
   saveButton: {
     id: `${scope}.saveButton`,

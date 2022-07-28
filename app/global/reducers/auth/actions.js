@@ -41,6 +41,7 @@ import {
   VERIFICATION_CODE_NEEDED,
   RESET_REDUCER,
   FETCH_SELF_DETAILS_REQUEST,
+  FETCH_SELF_DETAILS_SUCCESS,
 } from './constants';
 
 export const logIn = (user) => actionBuilder(LOG_IN_USER, { user });
@@ -137,3 +138,5 @@ export const verificationCodeError = (error) =>
 
 export const fetchSelfDetailsRequest = () =>
   actionBuilder(FETCH_SELF_DETAILS_REQUEST, {});
+export const fetchSelfDetailsSuccess = (user) =>
+  actionBuilder(FETCH_SELF_DETAILS_SUCCESS, { user });

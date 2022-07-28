@@ -25,13 +25,14 @@ describe('fetchUser saga', () => {
       ...apiResponse.data.attributes,
     };
 
+    const attributes = {
+      ...apiResponseWithoutAttributes,
+      avatar: apiResponseWithoutAttributes.avatar_url,
+    };
+
     return expectSaga(fetchUser, { payload })
       .provide([[matchers.call.fn(axios.get), { data: apiResponse }]])
-      .put(
-        fetchUserSuccess(
-          pickUserAttributes(objectToCamelCase(apiResponseWithoutAttributes)),
-        ),
-      )
+      .put(fetchUserSuccess(pickUserAttributes(objectToCamelCase(attributes))))
       .run();
   });
   it('Check fetchUser error connection', () => {

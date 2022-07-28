@@ -9,9 +9,11 @@ import { Row, Col } from 'react-grid-system';
 import { makeSelectUser, REDIRECT_QUERY_KEY } from 'global/reducers/auth';
 import { RolePermissions } from 'models/User/RolePermissions';
 import { arraysOverlap } from 'utils/arrayUtils';
+import LocalStorageService from 'utils/localStorageService';
 
 import Sidebar from 'containers/Sidebar';
 import Navbar from 'containers/Navbar';
+import QuickExit from 'components/QuickExit';
 
 import { MainAppContainer, PageContainer, RowBelowNavbar } from './styled';
 
@@ -26,13 +28,23 @@ class AppRoute extends Route {
         sidebarProps,
         computedMatch,
         location,
+        disableQuickExit,
       },
     } = this;
+
+    const render = () => (
+      <>
+        {!disableQuickExit && user?.quickExitEnabled && (
+          <QuickExit beforeQuickExit={LocalStorageService.clearUserData} />
+        )}
+        {super.render()}
+      </>
+    );
 
     const rolePermissions = RolePermissions(user?.roles);
 
     if (!protectedRoute) {
-      return super.render();
+      return render();
     }
     if (!user || !user.roles) {
       const queryParams = new URLSearchParams(location.search);
@@ -76,7 +88,7 @@ class AppRoute extends Route {
                   id="main-app-container"
                   $isSidebarVisible={isSidebarVisible}
                 >
-                  {super.render()}
+                  {render()}
                 </MainAppContainer>
               </Col>
             </RowBelowNavbar>
@@ -88,13 +100,14 @@ class AppRoute extends Route {
     if (user && !allowedRoles.includes(user.roles[0]))
       return <Redirect to="/no-access" />;
 
-    return super.render();
+    return render();
   }
 }
 
 AppRoute.propTypes = {
   protectedRoute: PropTypes.bool,
   logOut: PropTypes.func,
+  disableQuickExit: PropTypes.bool,
 };
 
 AppRoute.defaultProps = {
