@@ -56,6 +56,7 @@ const colors = {
   lightBlue: '#F4F8FF',
   electricPurple: '#B727EA',
   periwinkleGray: '#B3C1E1',
+  perwinkleCrayola: '#C0CFE3',
   solitude: '#E6EDFD',
   red: '#BE4745',
   red5: '#FCF6F6',

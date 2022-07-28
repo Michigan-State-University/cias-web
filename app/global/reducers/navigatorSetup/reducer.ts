@@ -25,6 +25,9 @@ import {
   removeNavigatorEmailInvitationError,
   removeInterventionNavigatorRequest,
   removeInterventionNavigatorError,
+  addParticipantFileRequest,
+  addParticipantFileSuccess,
+  addParticipantFileError,
 } from './actions';
 import { NavigatorSetupState, NavigatorSetupAction } from './types';
 
@@ -33,6 +36,7 @@ export const initialState: NavigatorSetupState = {
     fetching: false,
     updatingForm: false,
     updatingLinks: false,
+    updatingParticipantFiles: false,
     navigatorEmailInvitation: false,
   },
   modalTabsData: null,
@@ -54,16 +58,16 @@ export const navigatorSetupReducer = (
 
       case getType(fetchNavigatorSetupSuccess): {
         const {
-          noNavigatorsData,
           pendingNavigatorInvitations,
           interventionNavigators,
+          navigatorSetupData,
         } = action.payload;
         draft.modalTabsData = {
           navigatorsData: {
             pendingNavigatorInvitations,
             interventionNavigators,
           },
-          noNavigatorsAvailableData: noNavigatorsData,
+          navigatorSetupData,
         };
         draft.loaders.fetching = false;
         break;
@@ -75,8 +79,8 @@ export const navigatorSetupReducer = (
 
       case getType(updateNoNavigatorTabRequest):
         if (state.modalTabsData && draft.modalTabsData) {
-          draft.modalTabsData.noNavigatorsAvailableData = {
-            ...state.modalTabsData?.noNavigatorsAvailableData,
+          draft.modalTabsData.navigatorSetupData = {
+            ...state.modalTabsData?.navigatorSetupData,
             ...action.payload.noNavigatorsData,
           };
           draft.loaders.updatingForm = true;
@@ -91,18 +95,33 @@ export const navigatorSetupReducer = (
         draft.loaders.updatingLinks = true;
         break;
       case getType(addParticipantLinkSuccess):
+        draft.loaders.updatingLinks = false;
         if (draft.modalTabsData) {
-          const { noNavigatorsData } = action.payload;
-          draft.modalTabsData.noNavigatorsAvailableData = noNavigatorsData;
+          const { navigatorSetupData } = action.payload;
+          draft.modalTabsData.navigatorSetupData = navigatorSetupData;
         }
         break;
       case getType(addParticipantLinkError):
         draft.loaders.updatingLinks = false;
         break;
 
+      case getType(addParticipantFileRequest):
+        draft.loaders.updatingParticipantFiles = true;
+        break;
+      case getType(addParticipantFileSuccess):
+        draft.loaders.updatingParticipantFiles = false;
+        if (draft.modalTabsData) {
+          const { navigatorSetupData } = action.payload;
+          draft.modalTabsData.navigatorSetupData = navigatorSetupData;
+        }
+        break;
+      case getType(addParticipantFileError):
+        draft.loaders.updatingParticipantFiles = false;
+        break;
+
       case getType(removeParticipantLinkRequest):
         updateItemById(
-          draft.modalTabsData?.noNavigatorsAvailableData.participantLinks || [],
+          draft.modalTabsData?.navigatorSetupData.participantLinks || [],
           action.payload.linkId,
           { deleting: true },
         );
@@ -112,14 +131,14 @@ export const navigatorSetupReducer = (
         const { linkId } = action.payload;
         if (draft.modalTabsData) {
           deleteItemById(
-            draft.modalTabsData.noNavigatorsAvailableData.participantLinks,
+            draft.modalTabsData.navigatorSetupData.participantLinks,
             linkId,
           );
         }
         break;
       case getType(removeParticipantLinkError):
         updateItemById(
-          draft.modalTabsData?.noNavigatorsAvailableData.participantLinks || [],
+          draft.modalTabsData?.navigatorSetupData.participantLinks || [],
           action.payload.linkId,
           { deleting: false },
         );

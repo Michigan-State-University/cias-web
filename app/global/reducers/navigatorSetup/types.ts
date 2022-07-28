@@ -3,7 +3,7 @@ import { ActionType } from 'typesafe-actions';
 import { ApiError } from 'models/Api';
 import {
   InterventionNavigator,
-  NoNavigatorsAvailableData,
+  NavigatorSetupData,
   PendingNavigatorInvitation,
 } from 'models/NavigatorSetup';
 
@@ -17,7 +17,7 @@ type NavigatorsData = {
 };
 
 type ModalTabsData = {
-  noNavigatorsAvailableData: NoNavigatorsAvailableData;
+  navigatorSetupData: NavigatorSetupData;
   navigatorsData: NavigatorsData;
 };
 

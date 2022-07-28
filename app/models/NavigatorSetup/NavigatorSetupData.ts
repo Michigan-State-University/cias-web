@@ -12,6 +12,12 @@ export type ParticipantLink = {
   deleting?: boolean;
 };
 
+export type ParticipantFile = {
+  id: string;
+  name: string;
+  url: string;
+};
+
 export type NoNavigatorsAvailableData = {
   contactEmail: string;
   id: string;
@@ -21,3 +27,10 @@ export type NoNavigatorsAvailableData = {
   phone: Nullable<PhoneAttributes>;
   isNavigatorNotificationOn: boolean;
 };
+
+export type HelpingMaterialsData = {
+  participantFiles: ParticipantFile[];
+};
+
+export type NavigatorSetupData = NoNavigatorsAvailableData &
+  HelpingMaterialsData;

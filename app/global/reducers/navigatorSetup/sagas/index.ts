@@ -8,6 +8,7 @@ import removeParticipantLink from './removeParticipantLink';
 import inviteNavigatorByEmail from './inviteNavigatorByEmail';
 import removeNavigatorEmailInvitation from './removeNavigatorEmailInvitation';
 import removeInterventionNavigator from './removeInterventionNavigator';
+import addParticipantFile from './addParticipantFile';
 
 export function* allNavigatorSetupSagas() {
   yield all([
@@ -19,5 +20,6 @@ export function* allNavigatorSetupSagas() {
     inviteNavigatorByEmail(),
     removeNavigatorEmailInvitation(),
     removeInterventionNavigator(),
+    addParticipantFile(),
   ]);
 }

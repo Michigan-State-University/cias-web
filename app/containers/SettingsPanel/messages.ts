@@ -289,4 +289,12 @@ export default defineMessages({
     id: `${scope}.cancelNavigatorInvitation`,
     defaultMessage: 'Cancel Navigator invitation',
   },
+  importFile: {
+    id: `${scope}.importFile`,
+    defaultMessage: 'Import file',
+  },
+  filesForParticipant: {
+    id: `${scope}.filesForParticipant`,
+    defaultMessage: 'Files for participant',
+  },
 });

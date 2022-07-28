@@ -5,7 +5,6 @@
  */
 
 import React from 'react';
-import PropTypes from 'prop-types';
 
 import { themeColors } from 'theme';
 
@@ -13,7 +12,22 @@ import Spinner from 'components/Spinner';
 
 import { FillScreenLoader, InlineLoader } from './styled';
 
-const Loader = ({ color, hidden, size, type, width, ...styleProps }) => {
+type Props = {
+  color?: string;
+  hidden?: boolean;
+  size?: number;
+  width?: number;
+  type?: 'inline' | 'absolute';
+} & Record<string, unknown>;
+
+const Loader = ({
+  color = themeColors.secondary,
+  hidden,
+  size,
+  type = 'absolute',
+  width,
+  ...styleProps
+}: Props) => {
   const typeSize = size || (type === 'absolute' ? 100 : 50);
 
   const fullScreenLoader = (
@@ -40,19 +54,6 @@ const Loader = ({ color, hidden, size, type, width, ...styleProps }) => {
     default:
       return fullScreenLoader;
   }
-};
-
-Loader.propTypes = {
-  color: PropTypes.string,
-  hidden: PropTypes.bool,
-  size: PropTypes.number,
-  width: PropTypes.oneOfType([PropTypes.number, PropTypes.string]),
-  type: PropTypes.oneOf(['inline', 'absolute']),
-};
-
-Loader.defaultProps = {
-  color: themeColors.secondary,
-  type: 'absolute',
 };
 
 export default Loader;

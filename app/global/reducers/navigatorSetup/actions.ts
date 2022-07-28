@@ -6,6 +6,7 @@ import {
   NoNavigatorsAvailableData,
   PendingNavigatorInvitation,
   ParticipantLink,
+  NavigatorSetupData,
 } from 'models/NavigatorSetup';
 
 import {
@@ -33,6 +34,9 @@ import {
   REMOVE_INTERVENTION_NAVIGATOR_REQUEST,
   REMOVE_INTERVENTION_NAVIGATOR_SUCCESS,
   REMOVE_INTERVENTION_NAVIGATOR_ERROR,
+  ADD_PARTICIPANT_FILE_REQUEST,
+  ADD_PARTICIPANT_FILE_ERROR,
+  ADD_PARTICIPANT_FILE_SUCCESS,
 } from './constants';
 
 export const fetchNavigatorSetupRequest = createAction(
@@ -43,12 +47,12 @@ export const fetchNavigatorSetupSuccess = createAction(
   FETCH_NAVIGATOR_SETUP_SUCCESS,
   (action) =>
     (
-      noNavigatorsData: NoNavigatorsAvailableData,
       pendingNavigatorInvitations: PendingNavigatorInvitation[],
       interventionNavigators: InterventionNavigator[],
+      navigatorSetupData: NavigatorSetupData,
     ) =>
       action({
-        noNavigatorsData,
+        navigatorSetupData,
         pendingNavigatorInvitations,
         interventionNavigators,
       }),
@@ -63,7 +67,7 @@ export const updateNoNavigatorTabRequest = createAction(
   (action) =>
     (
       interventionId: string,
-      noNavigatorsData: Partial<Omit<NoNavigatorsAvailableData, 'id'>>,
+      noNavigatorsData: Partial<NoNavigatorsAvailableData>,
     ) =>
       action({ interventionId, noNavigatorsData }),
 );
@@ -90,8 +94,8 @@ export const addParticipantLinkRequest = createAction(
 
 export const addParticipantLinkSuccess = createAction(
   ADD_PARTICIPANT_LINK_SUCCESS,
-  (action) => (noNavigatorsData: NoNavigatorsAvailableData) =>
-    action({ noNavigatorsData }),
+  (action) => (navigatorSetupData: NavigatorSetupData) =>
+    action({ navigatorSetupData }),
 );
 
 export const addParticipantLinkError = createAction(
@@ -185,4 +189,21 @@ export const removeInterventionNavigatorError = createAction(
   REMOVE_INTERVENTION_NAVIGATOR_ERROR,
   (action) => (interventionNavigatorId: string) =>
     action({ interventionNavigatorId }),
+);
+
+export const addParticipantFileRequest = createAction(
+  ADD_PARTICIPANT_FILE_REQUEST,
+  (action) => (interventionId: string, files: File[]) =>
+    action({ interventionId, files }),
+);
+
+export const addParticipantFileSuccess = createAction(
+  ADD_PARTICIPANT_FILE_SUCCESS,
+  (action) => (navigatorSetupData: NavigatorSetupData) =>
+    action({ navigatorSetupData }),
+);
+
+export const addParticipantFileError = createAction(
+  ADD_PARTICIPANT_FILE_ERROR,
+  (action) => (error: ApiError) => action({ error }),
 );

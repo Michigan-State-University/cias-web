@@ -55,7 +55,7 @@ type Props = Pick<
   | 'phone'
 > & {
   updateNoNavigatorTabData: (
-    newData: Partial<Omit<NoNavigatorsAvailableData, 'id'>>,
+    newData: Partial<NoNavigatorsAvailableData>,
   ) => void;
 };
 

@@ -18,6 +18,7 @@ import {
   inviteNavigatorsByEmailRequest,
   removeNavigatorEmailInvitationRequest,
   removeInterventionNavigatorRequest,
+  addParticipantFileRequest,
 } from 'global/reducers/navigatorSetup';
 import Tabs from 'components/Tabs';
 import ErrorAlert from 'components/ErrorAlert';
@@ -25,8 +26,8 @@ import Spinner from 'components/Spinner';
 
 import { themeColors, colors } from 'theme';
 import {
-  NoNavigatorsAvailableData,
   ParticipantLink,
+  NoNavigatorsAvailableData,
 } from 'models/NavigatorSetup';
 
 import messages from '../messages';
@@ -37,6 +38,7 @@ import AddedNavigatorPanel from './AddedNavigatorsPanel';
 
 import NoNavigatorsForm from '../Components/NoNavigatorsForm';
 import LinksForParticipant from './LinksForParticipant';
+import FilesForParticipant from '../Components/FilesForParticipant';
 
 type Props = {
   interventionId: string;
@@ -53,12 +55,16 @@ const NavigatorSettingsModal = ({ interventionId }: Props) => {
   const error = useSelector(makeSelectNavigatorSetupError());
   const navigatorSettingsTabData = useSelector(makeSelectTabsData());
 
+  const participantFileLoading = useSelector(
+    makeSelectNavigatorSetupLoader('updatingParticipantFiles'),
+  );
+
   useEffect(() => {
     dispatch(fetchNavigatorSetupRequest(interventionId));
   }, []);
 
   const updateNoNavigatorTabData = (
-    newData: Partial<Omit<NoNavigatorsAvailableData, 'id'>>,
+    newData: Partial<NoNavigatorsAvailableData>,
   ) => {
     dispatch(updateNoNavigatorTabRequest(interventionId, newData));
   };
@@ -94,6 +100,10 @@ const NavigatorSettingsModal = ({ interventionId }: Props) => {
       ),
     );
 
+  const addFileForParticipant = (files: File[]) => {
+    dispatch(addParticipantFileRequest(interventionId, files));
+  };
+
   if (loading) {
     return <Spinner color={themeColors.secondary} />;
   }
@@ -108,7 +118,7 @@ const NavigatorSettingsModal = ({ interventionId }: Props) => {
   }
 
   const {
-    noNavigatorsAvailableData: {
+    navigatorSetupData: {
       contactEmail,
       isNavigatorNotificationOn,
       noNavigatorAvailableMessage,
@@ -176,7 +186,15 @@ const NavigatorSettingsModal = ({ interventionId }: Props) => {
       </div>
       {/* @ts-ignore */}
       <div label={formatMessage(messages.helpingMaterials)}>
-        Helping materials
+        <NavigatorModalLayout
+          leftContent={<div>Left content</div>}
+          rightContent={
+            <FilesForParticipant
+              fileUploadLoading={participantFileLoading}
+              addFileForParticipant={addFileForParticipant}
+            />
+          }
+        />
       </div>
     </Tabs>
   );
