@@ -102,6 +102,7 @@ export const useConversationChannel = (interventionId?: string) => {
 
   const onNavigatorUnavailableError = () => {
     dispatch(setCreatingConversation(false));
+    dispatch(setNavigatorUnavailable(true));
   };
 
   const onConversationArchived = ({
