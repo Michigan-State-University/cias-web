@@ -125,6 +125,7 @@ const NavigatorSettingsModal = ({ interventionId }: Props) => {
       notifyBy,
       phone,
       participantLinks,
+      participantFiles,
     },
     navigatorsData: { pendingNavigatorInvitations, interventionNavigators },
   } = navigatorSettingsTabData;
@@ -192,6 +193,7 @@ const NavigatorSettingsModal = ({ interventionId }: Props) => {
             <FilesForParticipant
               fileUploadLoading={participantFileLoading}
               addFileForParticipant={addFileForParticipant}
+              files={participantFiles}
             />
           }
         />

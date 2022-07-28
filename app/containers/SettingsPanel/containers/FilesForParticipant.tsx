@@ -8,7 +8,7 @@ import Column from 'components/Column';
 
 import { ParticipantFile } from 'models/NavigatorSetup';
 
-import FileBox from './FileBox';
+import FileBox from '../Components/FileBox';
 import messages from '../messages';
 
 type Props = {
@@ -51,5 +51,3 @@ export const FilesForParticipant = ({
     </>
   );
 };
-
-export default FilesForParticipant;

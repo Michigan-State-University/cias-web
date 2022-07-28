@@ -26,6 +26,7 @@ export type NoNavigatorsAvailableData = {
   participantLinks: ParticipantLink[];
   phone: Nullable<PhoneAttributes>;
   isNavigatorNotificationOn: boolean;
+  participantFiles: ParticipantFile[];
 };
 
 export type HelpingMaterialsData = {

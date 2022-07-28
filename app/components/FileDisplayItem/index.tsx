@@ -14,10 +14,11 @@ import Row from 'components/Row';
 import Box from 'components/Box';
 
 interface FileDisplayProps {
-  fileInfo: FileInfo;
+  fileInfo: Omit<FileInfo, 'id'>;
+  textProps?: object;
 }
 
-export const FileDisplayItem = ({ fileInfo }: FileDisplayProps) => (
+export const FileDisplayItem = ({ fileInfo, textProps }: FileDisplayProps) => (
   <Row width="100%" align="center">
     <Img
       alt="file"
@@ -39,6 +40,7 @@ export const FileDisplayItem = ({ fileInfo }: FileDisplayProps) => (
             text={fileInfo.name}
             color={themeColors.primary}
             fontSize={fontSizes.medium}
+            {...textProps}
           />
         }
       </FileDownload>
