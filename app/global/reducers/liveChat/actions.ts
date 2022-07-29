@@ -24,6 +24,7 @@ import {
   SET_GUEST_INTERLOCUTOR_ID,
   SET_ARCHIVING_CONVERSATION,
   ON_CONVERSATION_ARCHIVED_RECEIVE,
+  SET_NAVIGATOR_UNAVAILABLE,
 } from './constants';
 
 export const openConversation = createAction(
@@ -95,6 +96,12 @@ export const setCreatingConversation = createAction(
   SET_CREATING_CONVERSATION,
   (action) => (creatingConversation: boolean) =>
     action({ creatingConversation }),
+);
+
+export const setNavigatorUnavailable = createAction(
+  SET_NAVIGATOR_UNAVAILABLE,
+  (action) => (navigatorUnavailable: boolean) =>
+    action({ navigatorUnavailable }),
 );
 
 export const onConversationCreatedReceive = createAction(

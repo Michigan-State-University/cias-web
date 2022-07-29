@@ -32,3 +32,8 @@ export type SocketAction<Action extends string, Data extends object> = {
   name: Action;
   data: Data;
 };
+
+export type SocketOptions<TConnectionParams> = {
+  suspend?: boolean;
+  socketConnectionParams?: TConnectionParams;
+};

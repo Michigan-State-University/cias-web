@@ -21,6 +21,7 @@ import {
   setCreatingConversation,
   setArchivingConversation,
   setGuestInterlocutorId,
+  setNavigatorUnavailable,
 } from 'global/reducers/liveChat';
 import { makeSelectUserId } from 'global/reducers/auth';
 
@@ -35,6 +36,7 @@ import {
   ArchiveConversationData,
   MessageSentData,
   ConversationCreatedData,
+  ConversationChannelConnectionParams,
 } from './types';
 import {
   CONVERSATION_CHANNEL_NAME,
@@ -42,7 +44,7 @@ import {
   ConversationChannelMessageTopic,
 } from './constants';
 
-export const useConversationChannel = () => {
+export const useConversationChannel = (interventionId?: string) => {
   const dispatch = useDispatch();
   useInjectSaga({ key: allLiveChatSagasKey, saga: allLiveChatSagas });
   // @ts-ignore
@@ -52,8 +54,11 @@ export const useConversationChannel = () => {
 
   const channel = useSocket<
     ConversationChannelMessage,
-    ConversationChannelAction
-  >(CONVERSATION_CHANNEL_NAME);
+    ConversationChannelAction,
+    ConversationChannelConnectionParams
+  >(CONVERSATION_CHANNEL_NAME, {
+    socketConnectionParams: { intervention_id: interventionId },
+  });
 
   const showErrorToast = ({ error }: SocketErrorMessageData) => {
     toast.error(error);
@@ -92,7 +97,12 @@ export const useConversationChannel = () => {
   };
 
   const onNavigatorUnavailable = () => {
+    dispatch(setNavigatorUnavailable(true));
+  };
+
+  const onNavigatorUnavailableError = () => {
     dispatch(setCreatingConversation(false));
+    dispatch(setNavigatorUnavailable(true));
   };
 
   const onConversationArchived = ({
@@ -149,11 +159,14 @@ export const useConversationChannel = () => {
           onConversationCreated(data);
           break;
         case ConversationChannelMessageTopic.NAVIGATOR_UNAVAILABLE:
-          showErrorToast(data);
           onNavigatorUnavailable();
           break;
         case ConversationChannelMessageTopic.CONVERSATION_ARCHIVED:
           onConversationArchived(data);
+          break;
+        case ConversationChannelMessageTopic.NAVIGATOR_UNAVAILABLE_ERROR:
+          showErrorToast(data);
+          onNavigatorUnavailableError();
           break;
         default:
           break;

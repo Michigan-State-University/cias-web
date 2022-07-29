@@ -7,6 +7,7 @@ export enum ConversationChannelMessageTopic {
   CONVERSATION_CREATED = 'conversation_created',
   CONVERSATION_ARCHIVED = 'conversation_archived',
   NAVIGATOR_UNAVAILABLE = 'navigator_unavailable',
+  NAVIGATOR_UNAVAILABLE_ERROR = 'navigator_unavailable_error',
 }
 
 export enum ConversationChannelActionName {

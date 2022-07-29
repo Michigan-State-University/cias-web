@@ -16,7 +16,7 @@ export const useNotificationChannel = () => {
 
   const channel = useSocket<NotificationChannelMessage>(
     NOTIFICATION_CHANNEL_NAME,
-    !isLoggedIn,
+    { suspend: !isLoggedIn },
   );
 
   useEffect(() => {

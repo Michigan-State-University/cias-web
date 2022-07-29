@@ -14,6 +14,7 @@ import {
 import {
   inviteNavigatorsByEmailSuccess,
   inviteNavigatorsByEmailRequest,
+  inviteNavigatorsByEmailError,
 } from '../actions';
 import messages from '../messages';
 
@@ -36,6 +37,7 @@ export function* inviteNavigatorByEmail({
       toastId: INVITE_NAVIGATOR_BY_EMAIL_SUCCESS,
     });
   } catch (error) {
+    yield put(inviteNavigatorsByEmailError());
     yield call(toast.error, formatMessage(messages.updateError), {
       toastId: INVITE_NAVIGATOR_BY_EMAIL_ERROR,
     });

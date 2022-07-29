@@ -1,7 +1,10 @@
 import { useCallback, useContext, useEffect, useMemo, useState } from 'react';
 import { Channel } from '@anycable/web';
+import { ChannelParamsMap } from '@anycable/core/channel';
 
+import useDeepObjectMemo from 'utils/useDeepObjectMemo';
 import { SocketContext } from 'components/ActionCable';
+
 import { LISTEN_SOCKET_MESSAGE_EVENT_NAME } from './constants';
 import {
   SocketAction,
@@ -9,6 +12,7 @@ import {
   SocketErrorMessageData,
   SocketErrorMessageStatus,
   SocketMessage,
+  SocketOptions,
 } from './types';
 
 export const useSocket = <
@@ -20,20 +24,23 @@ export const useSocket = <
         SocketErrorMessageStatus
       >,
   TAction extends SocketAction<string, object> | null = null,
+  TSocketParams extends ChannelParamsMap | undefined = undefined,
 >(
   channelName: string,
-  suspend: boolean = false,
+  { socketConnectionParams, suspend = false }: SocketOptions<TSocketParams>,
 ) => {
   type TChannel = Channel<{}, TMessage>;
 
   const cable = useContext(SocketContext);
   const [channel, setChannel] = useState<TChannel | null>();
 
+  const memoizedParams = useDeepObjectMemo(socketConnectionParams);
+
   const subscribe = useCallback(async () => {
     if (!channel && cable && !suspend) {
-      setChannel(await cable.subscribeTo(channelName));
+      setChannel(await cable.subscribeTo(channelName, memoizedParams));
     }
-  }, [channel, cable, suspend]);
+  }, [channel, cable, memoizedParams, suspend]);
 
   const unsubscribe = useCallback(() => {
     if (channel) {
