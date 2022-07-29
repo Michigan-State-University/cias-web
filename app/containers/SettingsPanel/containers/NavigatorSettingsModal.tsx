@@ -19,6 +19,7 @@ import {
   removeNavigatorEmailInvitationRequest,
   removeInterventionNavigatorRequest,
   addParticipantFileRequest,
+  removeParticipantFileRequest,
 } from 'global/reducers/navigatorSetup';
 import Tabs from 'components/Tabs';
 import ErrorAlert from 'components/ErrorAlert';
@@ -102,6 +103,10 @@ const NavigatorSettingsModal = ({ interventionId }: Props) => {
 
   const addFileForParticipant = (files: File[]) => {
     dispatch(addParticipantFileRequest(interventionId, files));
+  };
+
+  const removeFileForParticipant = (fileId: string) => {
+    dispatch(removeParticipantFileRequest(interventionId, fileId));
   };
 
   if (loading) {
@@ -193,6 +198,7 @@ const NavigatorSettingsModal = ({ interventionId }: Props) => {
             <FilesForParticipant
               fileUploadLoading={participantFileLoading}
               addFileForParticipant={addFileForParticipant}
+              removeFileForParticipant={removeFileForParticipant}
               files={participantFiles}
             />
           }

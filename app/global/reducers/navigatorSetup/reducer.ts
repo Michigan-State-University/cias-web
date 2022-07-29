@@ -28,6 +28,9 @@ import {
   addParticipantFileRequest,
   addParticipantFileSuccess,
   addParticipantFileError,
+  removeParticipantFileError,
+  removeParticipantFileRequest,
+  removeParticipantFileSuccess,
 } from './actions';
 import { NavigatorSetupState, NavigatorSetupAction } from './types';
 
@@ -220,5 +223,28 @@ export const navigatorSetupReducer = (
         }
         break;
       }
+      case getType(removeParticipantFileRequest):
+        updateItemById(
+          draft.modalTabsData?.navigatorSetupData.participantFiles || [],
+          action.payload.fileId,
+          { deleting: true },
+        );
+        break;
+      case getType(removeParticipantFileSuccess):
+        const { fileId } = action.payload;
+        if (draft.modalTabsData) {
+          deleteItemById(
+            draft.modalTabsData.navigatorSetupData.participantFiles,
+            fileId,
+          );
+        }
+        break;
+      case getType(removeParticipantFileError):
+        updateItemById(
+          draft.modalTabsData?.navigatorSetupData.participantFiles || [],
+          action.payload.fileId,
+          { deleting: false },
+        );
+        break;
     }
   });

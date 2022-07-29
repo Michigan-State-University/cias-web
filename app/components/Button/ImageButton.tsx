@@ -2,7 +2,7 @@ import React from 'react';
 
 import Icon from 'components/Icon';
 
-import TextButton from './TextButton';
+import { HoverTextButton } from './styled';
 
 type Props = {
   title: string;
@@ -13,6 +13,7 @@ type Props = {
   loading?: boolean;
   disabled: boolean;
   iconProps: object;
+  showHoverEffect?: boolean;
 } & Record<string, unknown>;
 
 const ImageButton = React.forwardRef<HTMLElement, Props>(
@@ -26,11 +27,12 @@ const ImageButton = React.forwardRef<HTMLElement, Props>(
       onClick,
       loading,
       iconProps,
+      showHoverEffect = false,
       ...props
     }: Props,
     ref,
   ) => (
-    <TextButton
+    <HoverTextButton
       // @ts-ignore
       ref={ref}
       disabled={disabled}
@@ -48,10 +50,11 @@ const ImageButton = React.forwardRef<HTMLElement, Props>(
         'aria-label': title,
         ...props,
       }}
+      showHoverEffect={showHoverEffect}
     >
       {/* @ts-ignore */}
       <Icon src={src} fill={fill} stroke={stroke} {...iconProps}></Icon>
-    </TextButton>
+    </HoverTextButton>
   ),
 );
 

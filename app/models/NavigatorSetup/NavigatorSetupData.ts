@@ -16,6 +16,7 @@ export type ParticipantFile = {
   id: string;
   name: string;
   url: string;
+  deleting?: boolean;
 };
 
 export type NoNavigatorsAvailableData = {

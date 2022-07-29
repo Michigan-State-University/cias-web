@@ -8,15 +8,16 @@ type Props = {
   extraIcons?: ReactElement[];
   name: string;
   url: string;
-};
+} & Record<string, unknown>;
 
-export const FileBox = ({ name, url, extraIcons }: Props) => (
+export const FileBox = ({ name, url, extraIcons, ...styles }: Props) => (
   <Box
     display="flex"
     justify="between"
     bg={colors.lightBlue}
     borderRadius="5px"
-    padding="13px 12px"
+    padding="9px 12px"
+    {...styles}
   >
     <FileDisplayItem
       fileInfo={{ name, url }}

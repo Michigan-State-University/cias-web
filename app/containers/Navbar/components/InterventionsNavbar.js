@@ -15,7 +15,6 @@ import PreviewButton from 'components/PreviewButton';
 import Img from 'components/Img';
 import Box from 'components/Box';
 import ActionIcon from 'components/ActionIcon';
-import Circle from 'components/Circle';
 
 import {
   makeSelectQuestionsLength,
@@ -32,7 +31,7 @@ import { makeSelectQuestionGroupsLoader } from 'global/reducers/questionGroups';
 import { makeSelectReportTemplatesLoaders } from 'global/reducers/reportTemplates';
 import { makeSelectUserId } from 'global/reducers/auth';
 
-import { colors, themeColors } from 'theme';
+import { themeColors } from 'theme';
 import check from 'assets/svg/check-green.svg';
 
 import backButton from 'assets/svg/arrow-black.svg';
@@ -50,6 +49,7 @@ import {
   SaveInfoContainer,
   SavingContainer,
   CheckBackground,
+  StyledCircle,
 } from './styled';
 
 const getActiveTab = (path, formatMessage) => {
@@ -196,9 +196,8 @@ const InterventionNavbar = ({
               >
                 <Row style={{ lineHeight: 'normal' }} align="end">
                   {formatMessage(messages.reportTemplates)}
-                  <Circle
+                  <StyledCircle
                     bg={themeColors.secondary}
-                    color={colors.white}
                     size="20px"
                     child={reportTemplatesCount ?? 0}
                     fontSize={11}
@@ -218,9 +217,8 @@ const InterventionNavbar = ({
               >
                 <Row align="end">
                   {formatMessage(messages.generatedReports)}
-                  <Circle
+                  <StyledCircle
                     bg={themeColors.secondary}
-                    color={colors.white}
                     child={generatedReportsCountValue}
                     size="20px"
                     fontSize={11}
@@ -240,9 +238,8 @@ const InterventionNavbar = ({
               >
                 <Row align="end">
                   {formatMessage(messages.smsMessaging)}
-                  <Circle
+                  <StyledCircle
                     bg={themeColors.secondary}
-                    color={colors.white}
                     size="20px"
                     fontSize={11}
                     ml={5}

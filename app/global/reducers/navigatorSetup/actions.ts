@@ -37,6 +37,9 @@ import {
   ADD_PARTICIPANT_FILE_REQUEST,
   ADD_PARTICIPANT_FILE_ERROR,
   ADD_PARTICIPANT_FILE_SUCCESS,
+  REMOVE_PARTICIPANT_FILE_REQUEST,
+  REMOVE_PARTICIPANT_FILE_SUCCESS,
+  REMOVE_PARTICIPANT_FILE_ERROR,
 } from './constants';
 
 export const fetchNavigatorSetupRequest = createAction(
@@ -206,4 +209,20 @@ export const addParticipantFileSuccess = createAction(
 export const addParticipantFileError = createAction(
   ADD_PARTICIPANT_FILE_ERROR,
   (action) => (error: ApiError) => action({ error }),
+);
+
+export const removeParticipantFileRequest = createAction(
+  REMOVE_PARTICIPANT_FILE_REQUEST,
+  (action) => (interventionId: string, fileId: string) =>
+    action({ interventionId, fileId }),
+);
+
+export const removeParticipantFileSuccess = createAction(
+  REMOVE_PARTICIPANT_FILE_SUCCESS,
+  (action) => (fileId: string) => action({ fileId }),
+);
+
+export const removeParticipantFileError = createAction(
+  REMOVE_PARTICIPANT_FILE_ERROR,
+  (action) => (fileId: string, error: ApiError) => action({ fileId, error }),
 );

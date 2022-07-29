@@ -155,7 +155,7 @@ exports[`<Accordion /> Should render multiple elements and match the snapshot 1`
             >
               <button
                 aria-label="Delete"
-                class="c6"
+                class="c6 "
                 data-cy="accordion-element-delete-0"
                 data-testid="bin-Label0"
                 font-weight="bold"
@@ -214,7 +214,7 @@ exports[`<Accordion /> Should render multiple elements and match the snapshot 1`
             >
               <button
                 aria-label="Delete"
-                class="c6"
+                class="c6 "
                 data-cy="accordion-element-delete-1"
                 data-testid="bin-Label1"
                 font-weight="bold"
@@ -273,7 +273,7 @@ exports[`<Accordion /> Should render multiple elements and match the snapshot 1`
             >
               <button
                 aria-label="Delete"
-                class="c6"
+                class="c6 "
                 data-cy="accordion-element-delete-2"
                 data-testid="bin-Label2"
                 font-weight="bold"
@@ -427,7 +427,7 @@ exports[`<Accordion /> Should render only one element and match the snapshot 1`]
         >
           <button
             aria-label="Delete"
-            class="c5"
+            class="c5 "
             data-cy="accordion-element-delete-0"
             data-testid="bin-Label0"
             font-weight="bold"
@@ -625,7 +625,7 @@ exports[`<Accordion /> Should render with one element opened and match the snaps
             >
               <button
                 aria-label="Delete"
-                class="c6"
+                class="c6 "
                 data-cy="accordion-element-delete-0"
                 data-testid="bin-Label0"
                 font-weight="bold"
@@ -684,7 +684,7 @@ exports[`<Accordion /> Should render with one element opened and match the snaps
             >
               <button
                 aria-label="Delete"
-                class="c6"
+                class="c6 "
                 data-cy="accordion-element-delete-1"
                 data-testid="bin-Label1"
                 font-weight="bold"
@@ -743,7 +743,7 @@ exports[`<Accordion /> Should render with one element opened and match the snaps
             >
               <button
                 aria-label="Delete"
-                class="c6"
+                class="c6 "
                 data-cy="accordion-element-delete-2"
                 data-testid="bin-Label2"
                 font-weight="bold"

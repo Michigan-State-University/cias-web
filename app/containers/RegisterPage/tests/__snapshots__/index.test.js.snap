@@ -114,6 +114,26 @@ exports[`<RegisterPage /> Should render and match the researcher 1`] = `
   height: 46px;
 }
 
+.c15 {
+  width: auto;
+  height: auto;
+  display: block;
+  border-radius: 5px;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  margin-bottom: 5px;
+  -webkit-align-content: center;
+  -ms-flex-line-pack: center;
+  align-content: center;
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  color: unset;
+}
+
 .c8 {
   display: -webkit-box;
   display: -webkit-flex;
@@ -243,26 +263,6 @@ exports[`<RegisterPage /> Should render and match the researcher 1`] = `
   line-height: 1.5em;
   color: rgba(183,39,234,1);
   cursor: pointer;
-}
-
-.c15 {
-  width: auto;
-  height: auto;
-  display: block;
-  border-radius: 5px;
-  display: -webkit-box;
-  display: -webkit-flex;
-  display: -ms-flexbox;
-  display: flex;
-  margin-bottom: 5px;
-  -webkit-align-content: center;
-  -ms-flex-line-pack: center;
-  align-content: center;
-  -webkit-align-items: center;
-  -webkit-box-align: center;
-  -ms-flex-align: center;
-  align-items: center;
-  color: unset;
 }
 
 .c12 {
@@ -784,6 +784,26 @@ exports[`<RegisterPage /> Should render and match the snapshot for participant 1
   height: 46px;
 }
 
+.c14 {
+  width: auto;
+  height: auto;
+  display: block;
+  border-radius: 5px;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  margin-bottom: 5px;
+  -webkit-align-content: center;
+  -ms-flex-line-pack: center;
+  align-content: center;
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  color: unset;
+}
+
 .c8 {
   display: -webkit-box;
   display: -webkit-flex;
@@ -942,26 +962,6 @@ exports[`<RegisterPage /> Should render and match the snapshot for participant 1
   line-height: 1.5em;
   color: rgba(183,39,234,1);
   cursor: pointer;
-}
-
-.c14 {
-  width: auto;
-  height: auto;
-  display: block;
-  border-radius: 5px;
-  display: -webkit-box;
-  display: -webkit-flex;
-  display: -ms-flexbox;
-  display: flex;
-  margin-bottom: 5px;
-  -webkit-align-content: center;
-  -ms-flex-line-pack: center;
-  align-content: center;
-  -webkit-align-items: center;
-  -webkit-box-align: center;
-  -ms-flex-align: center;
-  align-items: center;
-  color: unset;
 }
 
 .c12 {

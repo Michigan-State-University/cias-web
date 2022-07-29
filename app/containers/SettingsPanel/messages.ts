@@ -297,4 +297,8 @@ export default defineMessages({
     id: `${scope}.filesForParticipant`,
     defaultMessage: 'Files for participant',
   },
+  deleteFile: {
+    id: `${scope}.deleteFile`,
+    defaultMessage: 'Delete file',
+  },
 });

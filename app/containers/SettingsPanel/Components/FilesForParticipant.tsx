@@ -5,13 +5,17 @@ import isEmpty from 'lodash/isEmpty';
 import FileUpload from 'components/FileUpload';
 import H2 from 'components/H2';
 import Column from 'components/Column';
+import { ImageButton } from 'components/Button';
+import Loader from 'components/Loader';
 
+import binNoBg from 'assets/svg/bin-no-bg.svg';
 import { ParticipantFile } from 'models/NavigatorSetup';
 
 import FileBox from './FileBox';
 import messages from '../messages';
 
 type Props = {
+  removeFileForParticipant: (fileId: string) => void;
   addFileForParticipant: (files: File[]) => void;
   fileUploadLoading: boolean;
   files: ParticipantFile[];
@@ -19,10 +23,32 @@ type Props = {
 
 export const FilesForParticipant = ({
   addFileForParticipant,
+  removeFileForParticipant,
   fileUploadLoading,
   files,
 }: Props) => {
   const { formatMessage } = useIntl();
+
+  const deleteIcon = (index: string, deleting?: boolean) =>
+    deleting ? (
+      <Loader type="inline" size={18} />
+    ) : (
+      <ImageButton
+        src={binNoBg}
+        onClick={(e: React.MouseEvent) => {
+          e.stopPropagation();
+          e.preventDefault();
+          removeFileForParticipant(index);
+        }}
+        title={formatMessage(messages.deleteFile)}
+        disabled={false}
+        iconProps={{
+          width: 16,
+          height: 16,
+        }}
+        showHoverEffect
+      />
+    );
 
   return (
     <>
@@ -43,8 +69,15 @@ export const FilesForParticipant = ({
           mt={16}
           gap={8}
         >
-          {files.map(({ url, name, id }) => (
-            <FileBox name={name} url={url} key={id} />
+          {files.map(({ url, name, id, deleting }) => (
+            <FileBox
+              name={name}
+              url={url}
+              key={id}
+              extraIcons={[deleteIcon(id, deleting)]}
+              maxHeight={44}
+              minHeight={44}
+            />
           ))}
         </Column>
       )}
