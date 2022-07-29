@@ -1,9 +1,10 @@
 import { useCallback, useContext, useEffect, useMemo, useState } from 'react';
 import { Channel } from '@anycable/web';
-
-import { SocketContext } from 'components/ActionCable';
-import useDeepObjectMemo from 'utils/useDeepObjectMemo';
 import { ChannelParamsMap } from '@anycable/core/channel';
+
+import useDeepObjectMemo from 'utils/useDeepObjectMemo';
+import { SocketContext } from 'components/ActionCable';
+
 import { LISTEN_SOCKET_MESSAGE_EVENT_NAME } from './constants';
 import {
   SocketAction,
