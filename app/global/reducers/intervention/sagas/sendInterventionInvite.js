@@ -1,9 +1,10 @@
 import axios from 'axios';
 import { put, select, takeLatest, call } from 'redux-saga/effects';
 import { toast } from 'react-toastify';
+import groupBy from 'lodash/groupBy';
 
 import { formatMessage } from 'utils/intlOutsideReact';
-
+import { jsonApiToArray } from 'utils/jsonApiMapper';
 import objectKeysToSnakeCase from 'utils/objectToSnakeCase';
 
 import {
@@ -24,7 +25,7 @@ export function* sendInterventionInvite({
   const { organizationId } = yield select(makeSelectIntervention());
 
   const organizationPrefix = organizationId
-    ? `/organizations/${organizationId}/`
+    ? `organizations/${organizationId}/`
     : '';
   const requestURL = `v1/${organizationPrefix}interventions/${interventionId}/invitations`;
   const requestBody = organizationId
@@ -35,9 +36,18 @@ export function* sendInterventionInvite({
         intervention_invitation: { emails },
       };
   try {
-    yield call(axios.post, requestURL, objectKeysToSnakeCase(requestBody));
+    const { data } = yield call(
+      axios.post,
+      requestURL,
+      objectKeysToSnakeCase(requestBody),
+    );
 
-    yield put(sendInterventionInviteSuccess());
+    let invitations = jsonApiToArray(data, 'invitation');
+    if (organizationId) {
+      invitations = groupBy(invitations, 'healthClinicId');
+    }
+
+    yield put(sendInterventionInviteSuccess(invitations));
     yield call(toast.info, formatMessage(messages.sendInviteSuccess), {
       toastId: SEND_INTERVENTION_INVITE_SUCCESS,
     });

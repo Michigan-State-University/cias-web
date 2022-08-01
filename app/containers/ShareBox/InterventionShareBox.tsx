@@ -1,28 +1,27 @@
-import React, { memo } from 'react';
+import React, { memo, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
+
+import { ApiError } from 'models/Api';
 
 import {
   sendInterventionInviteRequest,
   resendInterventionInviteRequest,
   makeSelectInterventionLoader,
   makeSelectIntervention,
+  fetchInterventionInvitesRequest,
+  makeSelectInterventionError,
+  makeSelectInterventionInvites,
 } from 'global/reducers/intervention';
 
 import { InterventionDto } from 'models/Intervention/InterventionDto';
 import { InterventionInvite } from 'models/Intervention';
-import useGet from 'utils/useGet';
-import { jsonApiToArray } from 'utils/jsonApiMapper';
 
 import Box from 'components/Box';
 import H2 from 'components/H2';
 
 import ShareBoxModalParent from './Components/ShareBoxModalParent';
 import { NormalShareBox } from './NormalShareBox';
-import {
-  EmailLoadingType,
-  InterventionInviteApiResponse,
-  ShareBoxType,
-} from './types';
+import { EmailLoadingType, ShareBoxType } from './types';
 import OrganizationShareBox from './OrganizationShareBox';
 
 type Props = {
@@ -34,15 +33,26 @@ const Component = ({ organizationId }: Props) => {
   const dispatch = useDispatch();
 
   // selectors
-  const intervention = useSelector<unknown, InterventionDto>(
+  const intervention = useSelector<unknown, Nullable<InterventionDto>>(
     makeSelectIntervention(),
   );
+  const invites = useSelector<unknown, InterventionInvite[]>(
+    makeSelectInterventionInvites(),
+  );
+  const invitesLoading = useSelector<unknown, boolean>(
+    makeSelectInterventionLoader('fetchInterventionInvites'),
+  );
+  const invitesError = useSelector<unknown, ApiError>(
+    makeSelectInterventionError('fetchInterventionInvites'),
+  );
   const sendLoading = useSelector<unknown, boolean>(
-    makeSelectInterventionLoader('sendInterventionLoading'),
+    makeSelectInterventionLoader('sendInterventionInvite'),
   );
   const emailLoading = useSelector<unknown, EmailLoadingType>(
     makeSelectInterventionLoader('interventionEmailLoading'),
   );
+
+  const { name, id, status } = intervention || {};
 
   // actions
   const sendInvite = (emails: string[]): void => {
@@ -52,27 +62,21 @@ const Component = ({ organizationId }: Props) => {
     dispatch(resendInterventionInviteRequest(inviteId, id));
   };
 
-  const { name, id, status } = intervention || {};
-  const url = `/v1/interventions/${id}/invitations`;
-  const {
-    data: emails,
-    isFetching,
-    error,
-  } = useGet<InterventionInviteApiResponse, InterventionInvite[]>(url, (data) =>
-    jsonApiToArray(data, 'invitation'),
-  );
+  useEffect(() => {
+    dispatch(fetchInterventionInvitesRequest(id));
+  }, [id]);
 
-  if (!intervention || error) return null;
+  if (!intervention || invitesError) return null;
 
   const sharedProps = {
-    emails: emails ?? [],
+    emails: invites,
     exportFilename: name,
     interventionStatus: status,
     inviteUrl: `${process.env.WEB_URL}/interventions/${id}/invite`,
     resendInvite,
     sendInvite,
     emailLoading,
-    listLoading: isFetching,
+    listLoading: invitesLoading,
     sendLoading,
     shareBoxType: ShareBoxType.INTERVENTION,
   };
@@ -88,6 +92,7 @@ const Component = ({ organizationId }: Props) => {
 
   return (
     <ShareBoxModalParent>
+      {/* @ts-ignore */}
       <NormalShareBox {...sharedProps}>
         <Box display="flex" align="center">
           <H2>{name}</H2>
