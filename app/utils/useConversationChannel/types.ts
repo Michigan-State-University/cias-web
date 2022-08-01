@@ -1,5 +1,6 @@
 import { ApiData } from 'models/Api';
 import { DenormalizedConversation, Message } from 'models/LiveChat';
+import { NoNavigatorsAvailableData } from 'models/NavigatorSetup';
 
 import {
   SocketAction,
@@ -47,6 +48,13 @@ export type ConversationArchivedData = {
 };
 export type ArchiveConversationData = ConversationArchivedData;
 
+export type FetchNavigatorUnavailableSetupData = {
+  interventionId: string;
+};
+
+export type NoNavigatorAvailableMessageData =
+  ApiData<NoNavigatorsAvailableData>;
+
 // SOCKET MESSAGES
 
 export type MessageSentSocketMessage = SocketMessage<
@@ -86,6 +94,11 @@ export type ConversationArchivedSocketMessage = SocketMessage<
   ConversationArchivedData
 >;
 
+export type NavigatorUnavailableSetupSentSocketMessage = SocketMessage<
+  ConversationChannelMessageTopic.NAVIGATOR_UNAVAILABLE_SETUP_SENT,
+  NoNavigatorAvailableMessageData
+>;
+
 // Create a union type with any new SocketMessage type
 export type ConversationChannelMessage =
   | MessageSentSocketMessage
@@ -94,7 +107,8 @@ export type ConversationChannelMessage =
   | ConversationCreatedSocketMessage
   | NavigatorUnavailableSocketMessage
   | ConversationArchivedSocketMessage
-  | NavigatorUnavailableErrorSocketErrorMessage;
+  | NavigatorUnavailableErrorSocketErrorMessage
+  | NavigatorUnavailableSetupSentSocketMessage;
 
 // SOCKET ACTIONS
 
@@ -118,12 +132,18 @@ export type ArchiveConversationSocketAction = SocketAction<
   ArchiveConversationData
 >;
 
+export type FetchNavigatorUnavailableSetup = SocketAction<
+  ConversationChannelActionName.FETCH_NAVIGATOR_UNAVAILABLE_SETUP,
+  FetchNavigatorUnavailableSetupData
+>;
+
 // Create a union type with any new SocketAction type
 export type ConversationChannelAction =
   | SendMessageSocketAction
   | ReadMessageSocketAction
   | CreateConversationSocketAction
-  | ArchiveConversationSocketAction;
+  | ArchiveConversationSocketAction
+  | FetchNavigatorUnavailableSetup;
 
 export type ConversationChannelConnectionParams = {
   intervention_id?: string;

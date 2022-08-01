@@ -22,6 +22,7 @@ import {
   setArchivingConversation,
   setGuestInterlocutorId,
   setNavigatorUnavailable,
+  onNavigatorUnavailableSetupReceive,
 } from 'global/reducers/liveChat';
 import { makeSelectUserId } from 'global/reducers/auth';
 
@@ -37,6 +38,7 @@ import {
   MessageSentData,
   ConversationCreatedData,
   ConversationChannelConnectionParams,
+  NoNavigatorAvailableMessageData,
 } from './types';
 import {
   CONVERSATION_CHANNEL_NAME,
@@ -96,13 +98,24 @@ export const useConversationChannel = (interventionId?: string) => {
     }
   };
 
+  const fetchNavigatorUnavailableSetup = () => {
+    if (interventionId) {
+      channel?.perform({
+        name: ConversationChannelActionName.FETCH_NAVIGATOR_UNAVAILABLE_SETUP,
+        data: { interventionId },
+      });
+    }
+  };
+
   const onNavigatorUnavailable = () => {
     dispatch(setNavigatorUnavailable(true));
+    fetchNavigatorUnavailableSetup();
   };
 
   const onNavigatorUnavailableError = () => {
     dispatch(setCreatingConversation(false));
     dispatch(setNavigatorUnavailable(true));
+    fetchNavigatorUnavailableSetup();
   };
 
   const onConversationArchived = ({
@@ -110,6 +123,13 @@ export const useConversationChannel = (interventionId?: string) => {
   }: ConversationArchivedData) => {
     dispatch(onConversationArchivedReceive(conversationId));
     dispatch(setArchivingConversation(false));
+  };
+
+  const onReceiveNavigatorUnavailableSetup = (
+    data: NoNavigatorAvailableMessageData,
+  ) => {
+    const setup = jsonApiToObject(data, 'navigatorSetup');
+    dispatch(onNavigatorUnavailableSetupReceive(setup));
   };
 
   const sendMessage = (data: SendMessageData) => {
@@ -167,6 +187,9 @@ export const useConversationChannel = (interventionId?: string) => {
         case ConversationChannelMessageTopic.NAVIGATOR_UNAVAILABLE_ERROR:
           showErrorToast(data);
           onNavigatorUnavailableError();
+          break;
+        case ConversationChannelMessageTopic.NAVIGATOR_UNAVAILABLE_SETUP_SENT:
+          onReceiveNavigatorUnavailableSetup(data);
           break;
         default:
           break;

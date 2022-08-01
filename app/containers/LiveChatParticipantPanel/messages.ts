@@ -29,4 +29,33 @@ export default defineMessages({
     id: `${scope}.conversationArchived`,
     defaultMessage: '- Navigator ended this conversation -',
   },
+  navigatorsBusy: {
+    id: `${scope}.navigatorsBusy`,
+    defaultMessage: 'Sorry, but all our navigators are busy at the moment.',
+  },
+  phoneEmailContact: {
+    id: `${scope}.phoneEmailContact`,
+    defaultMessage:
+      'You can contact us directly by calling a hotline or sending us e-mail',
+  },
+  phoneContact: {
+    id: `${scope}.phoneContact`,
+    defaultMessage: 'You can contact us directly by calling a hotline',
+  },
+  emailContact: {
+    id: `${scope}.emailContact`,
+    defaultMessage: 'You can contact us directly by sending us e-mail',
+  },
+  usefulLinks: {
+    id: `${scope}.usefulLinks`,
+    defaultMessage: 'Useful links',
+  },
+  downloadInstructions: {
+    id: `${scope}.downloadInstructions`,
+    defaultMessage: 'Download instructions:',
+  },
+  navigatorUnavailable: {
+    id: `${scope}.navigatorUnavailable`,
+    defaultMessage: 'All navigators are unavailable',
+  },
 });

@@ -21,6 +21,7 @@ import {
   setArchivingConversation,
   onConversationArchivedReceive,
   setNavigatorUnavailable,
+  onNavigatorUnavailableSetupReceive,
 } from './actions';
 import { LiveChatAction, LiveChatState } from './types';
 
@@ -35,6 +36,7 @@ export const initialState: LiveChatState = {
   creatingConversation: false,
   archivingConversation: false,
   navigatorUnavailable: false,
+  navigatorUnavailableSetup: null,
   loaders: {
     conversations: false,
     messages: false,
@@ -178,6 +180,11 @@ export const liveChatReducer = (
         if (conversation) {
           conversation.archived = true;
         }
+        break;
+      }
+      case getType(onNavigatorUnavailableSetupReceive): {
+        draft.navigatorUnavailableSetup = payload.noNavigatorSetup;
+        break;
       }
     }
   });

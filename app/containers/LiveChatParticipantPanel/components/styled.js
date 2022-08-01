@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 
-import { colors } from 'theme';
+import { colors, themeColors } from 'theme';
 
 import Column from 'components/Column';
 
@@ -20,4 +20,12 @@ export const ParticipantChatDialogContainer = styled(Column)`
   width: 100%;
   height: 550px;
   min-height: 0;
+`;
+
+export const LinkNoUnderline = styled.a`
+  text-decoration: none;
+`;
+
+export const LinkPrimaryUnderline = styled.a`
+  text-decoration-color: ${themeColors.primary};
 `;

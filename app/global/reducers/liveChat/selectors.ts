@@ -127,3 +127,9 @@ export const makeSelectNavigatorUnavailable = () =>
     selectLiveChatState,
     ({ navigatorUnavailable }) => navigatorUnavailable,
   );
+
+export const makeSelectNavigatorUnavailableSetup = () =>
+  createSelector(
+    selectLiveChatState,
+    ({ navigatorUnavailableSetup }) => navigatorUnavailableSetup,
+  );

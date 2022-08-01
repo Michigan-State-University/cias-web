@@ -5,6 +5,7 @@ import {
   InterventionConversation,
   Message,
 } from 'models/LiveChat';
+import { NoNavigatorsAvailableData } from 'models/NavigatorSetup';
 import { ApiError } from 'models/Api';
 
 import * as actions from './actions';
@@ -23,6 +24,7 @@ export type LiveChatState = {
   creatingConversation: boolean;
   archivingConversation: boolean;
   navigatorUnavailable: boolean;
+  navigatorUnavailableSetup: Nullable<NoNavigatorsAvailableData>;
   loaders: {
     conversations: boolean;
     messages: boolean;
