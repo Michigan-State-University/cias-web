@@ -27,15 +27,15 @@ import ChatDialog from '../components/ChatDialog';
 import ConversationChatDialogHeader from '../components/ConversationChatDialogHeader';
 
 export type Props = {
+  conversationChannel: ReturnType<typeof useConversationChannel>;
   interventionId: string;
   onMinimizeDialog: () => void;
-  conversationChannel: ReturnType<typeof useConversationChannel>;
 };
 
 const ConversationChatDialog = ({
+  conversationChannel,
   interventionId,
   onMinimizeDialog,
-  conversationChannel,
 }: Props) => {
   const { createConversation, readMessage, sendMessage } = conversationChannel;
   const { formatMessage } = useIntl();

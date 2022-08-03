@@ -23,6 +23,7 @@ export const LiveChatParticipantPanel = ({ interventionId }: Props) => {
   const navigatorUnavailable = useSelector(makeSelectNavigatorUnavailable());
 
   const sharedProps = {
+    conversationChannel,
     interventionId,
     onMinimizeDialog: minimizeDialog,
   };
@@ -30,10 +31,7 @@ export const LiveChatParticipantPanel = ({ interventionId }: Props) => {
   return (
     <>
       {!dialogMinimized && !navigatorUnavailable && (
-        <ConversationChatDialog
-          conversationChannel={conversationChannel}
-          {...sharedProps}
-        />
+        <ConversationChatDialog {...sharedProps} />
       )}
       {!dialogMinimized && navigatorUnavailable && (
         <NarratorUnavailableDialog {...sharedProps} />

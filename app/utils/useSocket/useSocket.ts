@@ -12,6 +12,7 @@ import {
   SocketErrorMessageData,
   SocketErrorMessageStatus,
   SocketMessage,
+  SocketMessageListener,
   SocketOptions,
 } from './types';
 
@@ -24,12 +25,13 @@ export const useSocket = <
         SocketErrorMessageStatus
       >,
   TAction extends SocketAction<string, object> | null = null,
-  TSocketParams extends ChannelParamsMap | undefined = undefined,
+  TConnectionParams extends ChannelParamsMap = {},
 >(
   channelName: string,
-  { socketConnectionParams, suspend = false }: SocketOptions<TSocketParams>,
+  messageListener: SocketMessageListener<TMessage>,
+  { socketConnectionParams, suspend = false }: SocketOptions<TConnectionParams>,
 ) => {
-  type TChannel = Channel<{}, TMessage>;
+  type TChannel = Channel<TConnectionParams, TMessage>;
 
   const cable = useContext(SocketContext);
   const [channel, setChannel] = useState<TChannel | null>();
@@ -38,7 +40,12 @@ export const useSocket = <
 
   const subscribe = useCallback(async () => {
     if (!channel && cable && !suspend) {
-      setChannel(await cable.subscribeTo(channelName, memoizedParams));
+      const newChannel = (await cable.subscribeTo(
+        channelName,
+        memoizedParams,
+      )) as TChannel;
+      newChannel.on(LISTEN_SOCKET_MESSAGE_EVENT_NAME, messageListener);
+      setChannel(newChannel);
     }
   }, [channel, cable, memoizedParams, suspend]);
 
@@ -55,14 +62,6 @@ export const useSocket = <
     return unsubscribe;
   }, [subscribe, unsubscribe]);
 
-  const listen = useCallback(
-    (callback: TChannel['receive']) => {
-      if (!channel) return;
-      return channel.on(LISTEN_SOCKET_MESSAGE_EVENT_NAME, callback);
-    },
-    [channel],
-  );
-
   const perform = useCallback(
     (action: TAction) => {
       if (!channel || !action) return;
@@ -76,10 +75,9 @@ export const useSocket = <
     if (!channel) return undefined;
 
     return {
-      listen,
       perform,
     };
-  }, [listen, perform]);
+  }, [perform]);
 };
 
 export default useSocket;

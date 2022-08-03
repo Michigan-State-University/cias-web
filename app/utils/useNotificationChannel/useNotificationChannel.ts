@@ -1,7 +1,6 @@
-import { useEffect } from 'react';
 import { useSelector } from 'react-redux';
 
-import { useSocket } from 'utils/useSocket';
+import { SocketMessageListener, useSocket } from 'utils/useSocket';
 
 import { makeSelectIsUserLoggedIn } from 'global/reducers/auth';
 
@@ -14,21 +13,22 @@ import {
 export const useNotificationChannel = () => {
   const isLoggedIn = useSelector(makeSelectIsUserLoggedIn());
 
-  const channel = useSocket<NotificationChannelMessage>(
+  const messageListener: SocketMessageListener<NotificationChannelMessage> = ({
+    topic,
+  }) => {
+    switch (topic) {
+      case NotificationChannelMessageTopic.PLACEHOLDER:
+        break;
+      default:
+        break;
+    }
+  };
+
+  useSocket<NotificationChannelMessage>(
     NOTIFICATION_CHANNEL_NAME,
+    messageListener,
     { suspend: !isLoggedIn },
   );
-
-  useEffect(() => {
-    channel?.listen(({ topic }) => {
-      switch (topic) {
-        case NotificationChannelMessageTopic.PLACEHOLDER:
-          break;
-        default:
-          break;
-      }
-    });
-  }, [channel]);
 
   return {};
 };

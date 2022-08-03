@@ -1,9 +1,11 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { useIntl } from 'react-intl';
 import { useSelector } from 'react-redux';
 
 import { colors, themeColors } from 'theme';
 import { makeSelectNavigatorUnavailableSetup } from 'global/reducers/liveChat';
+
+import { useConversationChannel } from 'utils/useConversationChannel';
 
 import H2 from 'components/H2';
 import Box from 'components/Box';
@@ -17,14 +19,23 @@ import ContactDetails from '../components/ContactDetails';
 import ParticipantUsefulLinks from '../components/ParticipantUsefulLinks';
 
 type NarratorUnavailableDialogProps = {
+  conversationChannel: ReturnType<typeof useConversationChannel>;
   onMinimizeDialog: () => void;
 };
 
 const NarratorUnavailableDialog = ({
+  conversationChannel,
   onMinimizeDialog,
 }: NarratorUnavailableDialogProps) => {
+  const { fetchNavigatorUnavailableSetup } = conversationChannel;
   const { formatMessage } = useIntl();
   const navigatorSetup = useSelector(makeSelectNavigatorUnavailableSetup());
+
+  useEffect(() => {
+    if (!navigatorSetup) {
+      fetchNavigatorUnavailableSetup();
+    }
+  }, [navigatorSetup]);
 
   const chatDialogHoc = (content: React.ReactNode) => (
     <ChatDialog

@@ -1,3 +1,5 @@
+import { Message } from '@anycable/core';
+
 export type SocketErrorMessageData<AdditionalErrorData extends object = {}> = {
   error: string;
 } & AdditionalErrorData;
@@ -37,3 +39,5 @@ export type SocketOptions<TConnectionParams> = {
   suspend?: boolean;
   socketConnectionParams?: TConnectionParams;
 };
+
+export type SocketMessageListener<T extends Message> = (message: T) => void;

@@ -1,9 +1,12 @@
-import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useInjectReducer, useInjectSaga } from 'redux-injectors';
 import { toast } from 'react-toastify';
 
-import { SocketErrorMessageData, useSocket } from 'utils/useSocket';
+import {
+  SocketErrorMessageData,
+  SocketMessageListener,
+  useSocket,
+} from 'utils/useSocket';
 import { jsonApiToObject } from 'utils/jsonApiMapper';
 
 import {
@@ -54,14 +57,6 @@ export const useConversationChannel = (interventionId?: string) => {
 
   const currentUserId = useSelector(makeSelectUserId());
 
-  const channel = useSocket<
-    ConversationChannelMessage,
-    ConversationChannelAction,
-    ConversationChannelConnectionParams
-  >(CONVERSATION_CHANNEL_NAME, {
-    socketConnectionParams: { intervention_id: interventionId },
-  });
-
   const showErrorToast = ({ error }: SocketErrorMessageData) => {
     toast.error(error);
   };
@@ -98,24 +93,13 @@ export const useConversationChannel = (interventionId?: string) => {
     }
   };
 
-  const fetchNavigatorUnavailableSetup = () => {
-    if (interventionId) {
-      channel?.perform({
-        name: ConversationChannelActionName.FETCH_NAVIGATOR_UNAVAILABLE_SETUP,
-        data: { interventionId },
-      });
-    }
-  };
-
   const onNavigatorUnavailable = () => {
     dispatch(setNavigatorUnavailable(true));
-    fetchNavigatorUnavailableSetup();
   };
 
   const onNavigatorUnavailableError = () => {
     dispatch(setCreatingConversation(false));
     dispatch(setNavigatorUnavailable(true));
-    fetchNavigatorUnavailableSetup();
   };
 
   const onConversationArchived = ({
@@ -131,6 +115,49 @@ export const useConversationChannel = (interventionId?: string) => {
     const setup = jsonApiToObject(data, 'navigatorSetup');
     dispatch(onNavigatorUnavailableSetupReceive(setup));
   };
+
+  const messageListener: SocketMessageListener<ConversationChannelMessage> = ({
+    data,
+    topic,
+  }) => {
+    switch (topic) {
+      case ConversationChannelMessageTopic.MESSAGE_SENT:
+        onMessageSent(data);
+        break;
+      case ConversationChannelMessageTopic.MESSAGE_ERROR:
+        showErrorToast(data);
+        break;
+      case ConversationChannelMessageTopic.MESSAGE_READ:
+        onMessageRead(data);
+        break;
+      case ConversationChannelMessageTopic.CONVERSATION_CREATED:
+        onConversationCreated(data);
+        break;
+      case ConversationChannelMessageTopic.NAVIGATOR_UNAVAILABLE:
+        onNavigatorUnavailable();
+        break;
+      case ConversationChannelMessageTopic.CONVERSATION_ARCHIVED:
+        onConversationArchived(data);
+        break;
+      case ConversationChannelMessageTopic.NAVIGATOR_UNAVAILABLE_ERROR:
+        showErrorToast(data);
+        onNavigatorUnavailableError();
+        break;
+      case ConversationChannelMessageTopic.NAVIGATOR_UNAVAILABLE_SETUP_SENT:
+        onReceiveNavigatorUnavailableSetup(data);
+        break;
+      default:
+        break;
+    }
+  };
+
+  const channel = useSocket<
+    ConversationChannelMessage,
+    ConversationChannelAction,
+    ConversationChannelConnectionParams
+  >(CONVERSATION_CHANNEL_NAME, messageListener, {
+    socketConnectionParams: { intervention_id: interventionId },
+  });
 
   const sendMessage = (data: SendMessageData) => {
     channel?.perform({
@@ -163,39 +190,20 @@ export const useConversationChannel = (interventionId?: string) => {
     });
   };
 
-  useEffect(() => {
-    channel?.listen(({ data, topic }) => {
-      switch (topic) {
-        case ConversationChannelMessageTopic.MESSAGE_SENT:
-          onMessageSent(data);
-          break;
-        case ConversationChannelMessageTopic.MESSAGE_ERROR:
-          showErrorToast(data);
-          break;
-        case ConversationChannelMessageTopic.MESSAGE_READ:
-          onMessageRead(data);
-          break;
-        case ConversationChannelMessageTopic.CONVERSATION_CREATED:
-          onConversationCreated(data);
-          break;
-        case ConversationChannelMessageTopic.NAVIGATOR_UNAVAILABLE:
-          onNavigatorUnavailable();
-          break;
-        case ConversationChannelMessageTopic.CONVERSATION_ARCHIVED:
-          onConversationArchived(data);
-          break;
-        case ConversationChannelMessageTopic.NAVIGATOR_UNAVAILABLE_ERROR:
-          showErrorToast(data);
-          onNavigatorUnavailableError();
-          break;
-        case ConversationChannelMessageTopic.NAVIGATOR_UNAVAILABLE_SETUP_SENT:
-          onReceiveNavigatorUnavailableSetup(data);
-          break;
-        default:
-          break;
-      }
-    });
-  }, [channel]);
+  const fetchNavigatorUnavailableSetup = () => {
+    if (interventionId) {
+      channel?.perform({
+        name: ConversationChannelActionName.FETCH_NAVIGATOR_UNAVAILABLE_SETUP,
+        data: { interventionId },
+      });
+    }
+  };
 
-  return { sendMessage, readMessage, createConversation, archiveConversation };
+  return {
+    sendMessage,
+    readMessage,
+    createConversation,
+    archiveConversation,
+    fetchNavigatorUnavailableSetup,
+  };
 };
