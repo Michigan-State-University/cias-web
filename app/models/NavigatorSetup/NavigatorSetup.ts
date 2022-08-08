@@ -1,16 +1,11 @@
 import { PhoneAttributes } from 'models/Phone';
 
+import { NavigatorLink, ParticipantLink } from './Link';
+
 export enum NotifyByOptions {
   EMAIL = 'email',
   SMS = 'sms',
 }
-
-export type ParticipantLink = {
-  id: string;
-  displayName: string;
-  url: string;
-  deleting?: boolean;
-};
 
 export type ParticipantFile = {
   id: string;
@@ -20,19 +15,20 @@ export type ParticipantFile = {
 };
 
 export type NoNavigatorsAvailableData = {
-  contactEmail: string;
-  id: string;
   noNavigatorAvailableMessage: string;
+  phone: Nullable<PhoneAttributes>;
+  contactEmail: string;
+  isNavigatorNotificationOn: boolean;
   notifyBy: NotifyByOptions;
   participantLinks: ParticipantLink[];
-  phone: Nullable<PhoneAttributes>;
-  isNavigatorNotificationOn: boolean;
-  participantFiles: ParticipantFile[];
 };
 
 export type HelpingMaterialsData = {
+  navigatorLinks: NavigatorLink[];
   participantFiles: ParticipantFile[];
 };
 
-export type NavigatorSetupData = NoNavigatorsAvailableData &
+export type NavigatorSetup = {
+  id: string;
+} & NoNavigatorsAvailableData &
   HelpingMaterialsData;

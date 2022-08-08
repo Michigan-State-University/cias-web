@@ -18,6 +18,7 @@ const CollapseLabel = ({
   onToggle,
   label,
   onDelete,
+  deleting,
   disabled,
   onShowImg,
   onHideImg,
@@ -73,8 +74,11 @@ const CollapseLabel = ({
       buttonProps={{
         'data-testid': `bin-${label}`,
         'data-cy': `accordion-element-delete-${index}`,
+        width: deleting ? 28 : undefined,
+        height: deleting ? 28 : undefined,
       }}
       showHoverEffect={showHoverEffect}
+      loading={deleting}
     />
   );
 
@@ -115,6 +119,7 @@ CollapseLabel.propTypes = {
   onToggle: PropTypes.func,
   isOpened: PropTypes.bool,
   onDelete: PropTypes.func,
+  deleting: PropTypes.bool,
   disabled: PropTypes.bool,
   imgWithBackground: PropTypes.bool,
   onShowImg: PropTypes.any,

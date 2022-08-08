@@ -6,7 +6,7 @@ import { jsonApiToArray, jsonApiToObject } from 'utils/jsonApiMapper';
 import { ApiError } from 'models/Api';
 import {
   InterventionNavigator,
-  NavigatorSetupData,
+  NavigatorSetup,
   PendingNavigatorInvitation,
 } from 'models/NavigatorSetup';
 
@@ -34,10 +34,10 @@ export function* fetchNavigatorSetup({
       fetchInterventionNavigators: call(axios.get, interventionNavigatorUrl),
     });
 
-    const navigatorSetupData = jsonApiToObject(
+    const navigatorSetup = jsonApiToObject(
       noNavigatorsData,
       'navigatorSetup',
-    ) as NavigatorSetupData;
+    ) as NavigatorSetup;
 
     const pendingNavigatorInvitations = jsonApiToArray(
       pendingNavigatorInvitationsData,
@@ -53,7 +53,7 @@ export function* fetchNavigatorSetup({
       fetchNavigatorSetupSuccess(
         pendingNavigatorInvitations,
         interventionNavigators,
-        navigatorSetupData,
+        navigatorSetup,
       ),
     );
   } catch (error) {

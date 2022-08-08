@@ -5,8 +5,8 @@ import {
   InterventionNavigator,
   NoNavigatorsAvailableData,
   PendingNavigatorInvitation,
-  ParticipantLink,
-  NavigatorSetupData,
+  NavigatorSetup,
+  LinkData,
 } from 'models/NavigatorSetup';
 
 import {
@@ -40,6 +40,15 @@ import {
   REMOVE_PARTICIPANT_FILE_REQUEST,
   REMOVE_PARTICIPANT_FILE_SUCCESS,
   REMOVE_PARTICIPANT_FILE_ERROR,
+  ADD_NAVIGATOR_LINK_REQUEST,
+  ADD_NAVIGATOR_LINK_SUCCESS,
+  ADD_NAVIGATOR_LINK_ERROR,
+  UPDATE_NAVIGATOR_LINK_REQUEST,
+  UPDATE_NAVIGATOR_LINK_SUCCESS,
+  UPDATE_NAVIGATOR_LINK_ERROR,
+  REMOVE_NAVIGATOR_LINK_REQUEST,
+  REMOVE_NAVIGATOR_LINK_SUCCESS,
+  REMOVE_NAVIGATOR_LINK_ERROR,
 } from './constants';
 
 export const fetchNavigatorSetupRequest = createAction(
@@ -52,10 +61,10 @@ export const fetchNavigatorSetupSuccess = createAction(
     (
       pendingNavigatorInvitations: PendingNavigatorInvitation[],
       interventionNavigators: InterventionNavigator[],
-      navigatorSetupData: NavigatorSetupData,
+      navigatorSetup: NavigatorSetup,
     ) =>
       action({
-        navigatorSetupData,
+        navigatorSetup,
         pendingNavigatorInvitations,
         interventionNavigators,
       }),
@@ -87,18 +96,13 @@ export const updateNoNavigatorsTabError = createAction(
 
 export const addParticipantLinkRequest = createAction(
   ADD_PARTICIPANT_LINK_REQUEST,
-  (action) =>
-    (
-      interventionId: string,
-      participantLink: Partial<Omit<ParticipantLink, 'id'>>,
-    ) =>
-      action({ interventionId, participantLink }),
+  (action) => (interventionId: string, linkData: LinkData) =>
+    action({ interventionId, linkData }),
 );
 
 export const addParticipantLinkSuccess = createAction(
   ADD_PARTICIPANT_LINK_SUCCESS,
-  (action) => (navigatorSetupData: NavigatorSetupData) =>
-    action({ navigatorSetupData }),
+  (action) => (navigatorSetup: NavigatorSetup) => action({ navigatorSetup }),
 );
 
 export const addParticipantLinkError = createAction(
@@ -124,13 +128,8 @@ export const removeParticipantLinkError = createAction(
 
 export const updateParticipantLinkRequest = createAction(
   UPDATE_PARTICIPANT_LINK_REQUEST,
-  (action) =>
-    (
-      interventionId: string,
-      linkId: string,
-      participantLink: Partial<Omit<ParticipantLink, 'id'>>,
-    ) =>
-      action({ interventionId, linkId, participantLink }),
+  (action) => (interventionId: string, linkId: string, linkData: LinkData) =>
+    action({ interventionId, linkId, linkData }),
 );
 
 export const updateParticipantLinkSuccess = createAction(
@@ -140,6 +139,54 @@ export const updateParticipantLinkSuccess = createAction(
 
 export const updateParticipantLinkError = createAction(
   UPDATE_PARTICIPANT_LINK_ERROR,
+  (action) => (error: ApiError) => action({ error }),
+);
+
+export const addNavigatorLinkRequest = createAction(
+  ADD_NAVIGATOR_LINK_REQUEST,
+  (action) => (interventionId: string, linkData: LinkData) =>
+    action({ interventionId, linkData }),
+);
+
+export const addNavigatorLinkSuccess = createAction(
+  ADD_NAVIGATOR_LINK_SUCCESS,
+  (action) => (navigatorSetup: NavigatorSetup) => action({ navigatorSetup }),
+);
+
+export const addNavigatorLinkError = createAction(
+  ADD_NAVIGATOR_LINK_ERROR,
+  (action) => (error: ApiError) => action({ error }),
+);
+
+export const removeNavigatorLinkRequest = createAction(
+  REMOVE_NAVIGATOR_LINK_REQUEST,
+  (action) => (interventionId: string, linkId: string) =>
+    action({ interventionId, linkId }),
+);
+
+export const removeNavigatorLinkSuccess = createAction(
+  REMOVE_NAVIGATOR_LINK_SUCCESS,
+  (action) => (linkId: string) => action({ linkId }),
+);
+
+export const removeNavigatorLinkError = createAction(
+  REMOVE_NAVIGATOR_LINK_ERROR,
+  (action) => (linkId: string, error: ApiError) => action({ linkId, error }),
+);
+
+export const updateNavigatorLinkRequest = createAction(
+  UPDATE_NAVIGATOR_LINK_REQUEST,
+  (action) => (interventionId: string, linkId: string, linkData: LinkData) =>
+    action({ interventionId, linkId, linkData }),
+);
+
+export const updateNavigatorLinkSuccess = createAction(
+  UPDATE_NAVIGATOR_LINK_SUCCESS,
+  (action) => () => action(),
+);
+
+export const updateNavigatorLinkError = createAction(
+  UPDATE_NAVIGATOR_LINK_ERROR,
   (action) => (error: ApiError) => action({ error }),
 );
 
@@ -202,8 +249,7 @@ export const addParticipantFileRequest = createAction(
 
 export const addParticipantFileSuccess = createAction(
   ADD_PARTICIPANT_FILE_SUCCESS,
-  (action) => (navigatorSetupData: NavigatorSetupData) =>
-    action({ navigatorSetupData }),
+  (action) => (navigatorSetup: NavigatorSetup) => action({ navigatorSetup }),
 );
 
 export const addParticipantFileError = createAction(

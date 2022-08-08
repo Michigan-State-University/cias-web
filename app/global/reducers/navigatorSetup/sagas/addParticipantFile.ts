@@ -6,7 +6,7 @@ import { jsonApiToObject } from 'utils/jsonApiMapper';
 import { formatMessage } from 'utils/intlOutsideReact';
 
 import { ApiError } from 'models/Api';
-import { NavigatorSetupData } from 'models/NavigatorSetup';
+import { NavigatorSetup } from 'models/NavigatorSetup';
 
 import {
   ADD_PARTICIPANT_FILE_REQUEST,
@@ -37,7 +37,7 @@ export function* addParticipantFile({
     const navigatorSetup = jsonApiToObject(
       data,
       'navigatorSetup',
-    ) as NavigatorSetupData;
+    ) as NavigatorSetup;
 
     yield put(addParticipantFileSuccess(navigatorSetup));
   } catch (error) {

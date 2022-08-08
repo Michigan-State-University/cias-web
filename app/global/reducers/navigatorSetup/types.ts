@@ -3,7 +3,7 @@ import { ActionType } from 'typesafe-actions';
 import { ApiError } from 'models/Api';
 import {
   InterventionNavigator,
-  NavigatorSetupData,
+  NavigatorSetup,
   PendingNavigatorInvitation,
 } from 'models/NavigatorSetup';
 
@@ -11,18 +11,17 @@ import * as actions from './actions';
 
 export type NavigatorSetupAction = ActionType<typeof actions>;
 
-type NavigatorsData = {
+export type NavigatorSetupState = {
+  navigatorSetup: Nullable<NavigatorSetup>;
   pendingNavigatorInvitations: PendingNavigatorInvitation[];
   interventionNavigators: InterventionNavigator[];
-};
-
-type ModalTabsData = {
-  navigatorSetupData: NavigatorSetupData;
-  navigatorsData: NavigatorsData;
-};
-
-export type NavigatorSetupState = {
-  modalTabsData: Nullable<ModalTabsData>;
-  loaders: Record<string, boolean>;
+  loaders: {
+    fetchingNavigatorSetup: boolean;
+    updatingNoNavigatorsData: boolean;
+    addingParticipantLink: boolean;
+    addingNavigatorLink: boolean;
+    updatingParticipantFiles: boolean;
+    navigatorEmailInvitation: boolean;
+  };
   error: Nullable<ApiError>;
 };

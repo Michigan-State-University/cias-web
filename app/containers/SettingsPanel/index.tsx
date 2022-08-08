@@ -133,6 +133,10 @@ const SettingsPanel = ({
         maxWidth: NAVIGATOR_SETTINGS_MODAL_WIDTH,
         py: 32,
         px: 32,
+        titleProps: {
+          fontSize: 24,
+          lineHeight: 1,
+        },
       },
     });
 

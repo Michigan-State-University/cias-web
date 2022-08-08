@@ -23,6 +23,7 @@ type BoxCollapseType = {
   label: ReactElement | string;
   onEdit?: () => void;
   onDelete?: () => void;
+  deleting?: boolean;
   disableAnimation?: boolean;
   disabled?: boolean;
   labelBgColor?: string;
@@ -49,6 +50,7 @@ export const BoxCollapse = ({
   label,
   onEdit,
   onDelete,
+  deleting,
   disableAnimation,
   disabled = false,
   extraIcons,
@@ -104,6 +106,7 @@ export const BoxCollapse = ({
         binImage={BinIcon}
         binFillColor={binFillColor}
         onDelete={onDelete}
+        deleting={deleting}
         onToggle={setOpen || toggleOpen}
         onHideImg={showArrow && ArrowDown}
         onShowImg={showArrow && ArrowUp}

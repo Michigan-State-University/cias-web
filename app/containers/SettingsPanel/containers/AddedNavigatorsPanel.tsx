@@ -33,7 +33,7 @@ const AddedNavigatorPanel = ({
 
   return (
     <Box>
-      <H2 fontSize={16} lineHeight="24px" mb={30}>
+      <H2 fontSize={16} lineHeight="24px" mb={24}>
         {formatMessage(messages.navigatorsAddedToIntervention)}
       </H2>
       {interventionNavigators.length === 0 && (

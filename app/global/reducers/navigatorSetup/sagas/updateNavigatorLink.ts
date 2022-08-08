@@ -8,32 +8,31 @@ import objectToSnakeCase from 'utils/objectToSnakeCase';
 import { formatMessage } from 'utils/intlOutsideReact';
 
 import {
-  ADD_PARTICIPANT_LINK_ERROR,
-  UPDATE_PARTICIPANT_LINK_REQUEST,
+  UPDATE_NAVIGATOR_LINK_ERROR,
+  UPDATE_NAVIGATOR_LINK_REQUEST,
 } from '../constants';
 import {
-  addParticipantLinkError,
-  updateParticipantLinkSuccess,
-  updateParticipantLinkRequest,
+  addNavigatorLinkError,
+  updateNavigatorLinkRequest,
+  updateNavigatorLinkSuccess,
 } from '../actions';
 import messages from '../messages';
 
-export function* updateParticipantLink({
+function* updateNavigatorLink({
   payload: { interventionId, linkId, linkData },
-}: ReturnType<typeof updateParticipantLinkRequest>) {
+}: ReturnType<typeof updateNavigatorLinkRequest>) {
   const url = `/v1/live_chat/intervention/${interventionId}/navigator_setups/links/${linkId}`;
   try {
     yield call(axios.patch, url, objectToSnakeCase({ link: linkData }));
-
-    yield put(updateParticipantLinkSuccess());
+    yield put(updateNavigatorLinkSuccess());
   } catch (error) {
     yield call(toast.error, formatMessage(messages.updateError), {
-      toastId: ADD_PARTICIPANT_LINK_ERROR,
+      toastId: UPDATE_NAVIGATOR_LINK_ERROR,
     });
-    yield put(addParticipantLinkError(error as ApiError));
+    yield put(addNavigatorLinkError(error as ApiError));
   }
 }
 
-export default function* updateParticipantLinkSaga() {
-  yield takeLatest(UPDATE_PARTICIPANT_LINK_REQUEST, updateParticipantLink);
+export default function* updateNavigatorLinkSaga() {
+  yield takeLatest(UPDATE_NAVIGATOR_LINK_REQUEST, updateNavigatorLink);
 }

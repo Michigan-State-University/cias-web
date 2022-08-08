@@ -161,7 +161,7 @@ export default defineMessages({
   },
   helpingMaterials: {
     id: `${scope}.helpingMaterials`,
-    defaultMessage: 'Helping materials',
+    defaultMessage: 'Help materials',
   },
   notifyNavigator: {
     id: `${scope}.notifyNavigator`,
@@ -257,6 +257,10 @@ export default defineMessages({
     id: `${scope}.participantLinks`,
     defaultMessage: 'Links for participant',
   },
+  navigatorLinks: {
+    id: `${scope}.navigatorLinks`,
+    defaultMessage: 'Links for navigator',
+  },
   addNewLink: {
     id: `${scope}.addNewLink`,
     defaultMessage: 'Add new link',
@@ -284,6 +288,10 @@ export default defineMessages({
   noLinksForParticipant: {
     id: `${scope}.noLinksForParticipant`,
     defaultMessage: `You haven’t added any links for participants yet. Let’s click on <primaryColorBold>Add new link</primaryColorBold> above to add some links.`,
+  },
+  noLinksForNavigator: {
+    id: `${scope}.noLinksForNavigator`,
+    defaultMessage: `You haven’t added any links for navigators yet. Let’s click on <primaryColorBold>Add new link</primaryColorBold> above to add some links.`,
   },
   cancelNavigatorInvitation: {
     id: `${scope}.cancelNavigatorInvitation`,

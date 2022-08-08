@@ -3,6 +3,7 @@ import { colors, themeColors } from 'theme';
 import Color from 'color';
 
 import { style, layout, padding, text } from '../BaseComponentStyles';
+
 export const StyledCollapseContainer = styled.div`
   width: 100%;
   ${style};
@@ -68,8 +69,8 @@ export const ActiveIcon = styled.div`
   border-radius: 8px;
   padding: 4px;
 
+  ${({ loading }) => loading && `padding: 0;`}
   ${({ active }) => active && `${activeStyles}`}
-
   &:hover {
     ${activeStyles}
   }

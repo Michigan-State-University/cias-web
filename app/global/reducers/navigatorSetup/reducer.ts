@@ -31,18 +31,29 @@ import {
   removeParticipantFileError,
   removeParticipantFileRequest,
   removeParticipantFileSuccess,
+  addNavigatorLinkRequest,
+  addNavigatorLinkSuccess,
+  addNavigatorLinkError,
+  removeNavigatorLinkRequest,
+  removeNavigatorLinkSuccess,
+  removeNavigatorLinkError,
 } from './actions';
 import { NavigatorSetupState, NavigatorSetupAction } from './types';
 
+export const navigatorSetupReducerKey = 'navigatorSetup';
+
 export const initialState: NavigatorSetupState = {
+  navigatorSetup: null,
+  pendingNavigatorInvitations: [],
+  interventionNavigators: [],
   loaders: {
-    fetching: false,
-    updatingForm: false,
-    updatingLinks: false,
+    fetchingNavigatorSetup: false,
+    updatingNoNavigatorsData: false,
+    addingParticipantLink: false,
+    addingNavigatorLink: false,
     updatingParticipantFiles: false,
     navigatorEmailInvitation: false,
   },
-  modalTabsData: null,
   error: null,
 };
 
@@ -54,8 +65,10 @@ export const navigatorSetupReducer = (
   produce(state, (draft) => {
     switch (action.type) {
       case getType(fetchNavigatorSetupRequest):
-        draft.loaders.fetching = true;
-        draft.modalTabsData = null;
+        draft.loaders.fetchingNavigatorSetup = true;
+        draft.navigatorSetup = null;
+        draft.pendingNavigatorInvitations = [];
+        draft.interventionNavigators = [];
         draft.error = null;
         break;
 
@@ -63,102 +76,131 @@ export const navigatorSetupReducer = (
         const {
           pendingNavigatorInvitations,
           interventionNavigators,
-          navigatorSetupData,
+          navigatorSetup,
         } = action.payload;
-        draft.modalTabsData = {
-          navigatorsData: {
-            pendingNavigatorInvitations,
-            interventionNavigators,
-          },
-          navigatorSetupData,
-        };
-        draft.loaders.fetching = false;
+        draft.navigatorSetup = navigatorSetup;
+        draft.pendingNavigatorInvitations = pendingNavigatorInvitations;
+        draft.interventionNavigators = interventionNavigators;
+        draft.loaders.fetchingNavigatorSetup = false;
         break;
       }
       case getType(fetchNavigatorSetupError):
-        draft.loaders.fetching = false;
+        draft.loaders.fetchingNavigatorSetup = false;
         draft.error = action.payload.error;
         break;
 
       case getType(updateNoNavigatorTabRequest):
-        if (state.modalTabsData && draft.modalTabsData) {
-          draft.modalTabsData.navigatorSetupData = {
-            ...state.modalTabsData?.navigatorSetupData,
+        if (state.navigatorSetup && draft.navigatorSetup) {
+          draft.navigatorSetup = {
+            ...draft.navigatorSetup,
             ...action.payload.noNavigatorsData,
           };
-          draft.loaders.updatingForm = true;
+          draft.loaders.updatingNoNavigatorsData = true;
         }
         break;
       case getType(updateNoNavigatorsTabError):
       case getType(updateNoNavigatorsTabSuccess):
-        draft.loaders.updatingForm = false;
+        draft.loaders.updatingNoNavigatorsData = false;
         break;
-
       case getType(addParticipantLinkRequest):
-        draft.loaders.updatingLinks = true;
+        draft.loaders.addingParticipantLink = true;
         break;
       case getType(addParticipantLinkSuccess):
-        draft.loaders.updatingLinks = false;
-        if (draft.modalTabsData) {
-          const { navigatorSetupData } = action.payload;
-          draft.modalTabsData.navigatorSetupData = navigatorSetupData;
+        draft.loaders.addingParticipantLink = false;
+        if (draft.navigatorSetup) {
+          const { navigatorSetup } = action.payload;
+          draft.navigatorSetup = navigatorSetup;
         }
         break;
       case getType(addParticipantLinkError):
-        draft.loaders.updatingLinks = false;
+        draft.loaders.addingParticipantLink = false;
         break;
-
+      case getType(removeParticipantLinkRequest):
+        if (draft.navigatorSetup) {
+          updateItemById(
+            draft.navigatorSetup.participantLinks,
+            action.payload.linkId,
+            { deleting: true },
+          );
+        }
+        break;
+      case getType(removeParticipantLinkSuccess):
+        if (draft.navigatorSetup) {
+          deleteItemById(
+            draft.navigatorSetup.participantLinks,
+            action.payload.linkId,
+          );
+        }
+        break;
+      case getType(removeParticipantLinkError):
+        if (draft.navigatorSetup) {
+          updateItemById(
+            draft.navigatorSetup.participantLinks,
+            action.payload.linkId,
+            { deleting: false },
+          );
+        }
+        break;
+      case getType(addNavigatorLinkRequest):
+        draft.loaders.addingNavigatorLink = true;
+        break;
+      case getType(addNavigatorLinkSuccess):
+        draft.loaders.addingNavigatorLink = false;
+        if (draft.navigatorSetup) {
+          const { navigatorSetup } = action.payload;
+          draft.navigatorSetup = navigatorSetup;
+        }
+        break;
+      case getType(addNavigatorLinkError):
+        draft.loaders.addingNavigatorLink = false;
+        break;
+      case getType(removeNavigatorLinkRequest):
+        if (draft.navigatorSetup) {
+          updateItemById(
+            draft.navigatorSetup.navigatorLinks,
+            action.payload.linkId,
+            { deleting: true },
+          );
+        }
+        break;
+      case getType(removeNavigatorLinkSuccess):
+        if (draft.navigatorSetup) {
+          deleteItemById(
+            draft.navigatorSetup.navigatorLinks,
+            action.payload.linkId,
+          );
+        }
+        break;
+      case getType(removeNavigatorLinkError):
+        if (draft.navigatorSetup) {
+          updateItemById(
+            draft.navigatorSetup.navigatorLinks,
+            action.payload.linkId,
+            { deleting: false },
+          );
+        }
+        break;
       case getType(addParticipantFileRequest):
         draft.loaders.updatingParticipantFiles = true;
         break;
       case getType(addParticipantFileSuccess):
         draft.loaders.updatingParticipantFiles = false;
-        if (draft.modalTabsData) {
-          const { navigatorSetupData } = action.payload;
-          draft.modalTabsData.navigatorSetupData = navigatorSetupData;
+        if (draft.navigatorSetup) {
+          const { navigatorSetup } = action.payload;
+          draft.navigatorSetup = navigatorSetup;
         }
         break;
       case getType(addParticipantFileError):
         draft.loaders.updatingParticipantFiles = false;
         break;
-
-      case getType(removeParticipantLinkRequest):
-        updateItemById(
-          draft.modalTabsData?.navigatorSetupData.participantLinks || [],
-          action.payload.linkId,
-          { deleting: true },
-        );
-        draft.loaders.updatingLinks = true;
-        break;
-      case getType(removeParticipantLinkSuccess):
-        const { linkId } = action.payload;
-        if (draft.modalTabsData) {
-          deleteItemById(
-            draft.modalTabsData.navigatorSetupData.participantLinks,
-            linkId,
-          );
-        }
-        break;
-      case getType(removeParticipantLinkError):
-        updateItemById(
-          draft.modalTabsData?.navigatorSetupData.participantLinks || [],
-          action.payload.linkId,
-          { deleting: false },
-        );
-        draft.loaders.updatingLinks = false;
-        break;
       case getType(inviteNavigatorsByEmailRequest):
         draft.loaders.navigatorEmailInvitation = true;
         break;
       case getType(inviteNavigatorsByEmailSuccess): {
-        if (draft.modalTabsData) {
-          const {
-            payload: { pendingNavigatorInvitations },
-          } = action;
-          draft.modalTabsData.navigatorsData.pendingNavigatorInvitations.push(
-            ...pendingNavigatorInvitations,
-          );
-        }
+        const {
+          payload: { pendingNavigatorInvitations },
+        } = action;
+        draft.pendingNavigatorInvitations.push(...pendingNavigatorInvitations);
         draft.loaders.navigatorEmailInvitation = false;
         break;
       }
@@ -166,85 +208,74 @@ export const navigatorSetupReducer = (
         draft.loaders.navigatorEmailInvitation = false;
         break;
       case getType(removeNavigatorEmailInvitationRequest): {
-        if (draft.modalTabsData) {
-          updateItemById(
-            draft.modalTabsData.navigatorsData.pendingNavigatorInvitations,
-            action.payload.invitationId,
-            { inDeletion: true },
-          );
-        }
+        updateItemById(
+          draft.pendingNavigatorInvitations,
+          action.payload.invitationId,
+          { inDeletion: true },
+        );
         break;
       }
       case getType(removeNavigatorEmailInvitationSuccess): {
-        if (draft.modalTabsData) {
-          deleteItemById(
-            draft.modalTabsData.navigatorsData.pendingNavigatorInvitations,
-            action.payload.invitationId,
-          );
-        }
+        deleteItemById(
+          draft.pendingNavigatorInvitations,
+          action.payload.invitationId,
+        );
         break;
       }
       case getType(removeNavigatorEmailInvitationError): {
-        if (draft.modalTabsData) {
-          updateItemById(
-            draft.modalTabsData.navigatorsData.pendingNavigatorInvitations,
-            action.payload.invitationId,
-            { inDeletion: false },
-          );
-        }
+        updateItemById(
+          draft.pendingNavigatorInvitations,
+          action.payload.invitationId,
+          { inDeletion: false },
+        );
         break;
       }
       case getType(removeInterventionNavigatorSuccess): {
-        if (draft.modalTabsData) {
-          deleteItemById(
-            draft.modalTabsData.navigatorsData.interventionNavigators,
-            action.payload.interventionNavigatorId,
-          );
-        }
+        deleteItemById(
+          draft.interventionNavigators,
+          action.payload.interventionNavigatorId,
+        );
         break;
       }
       case getType(removeInterventionNavigatorRequest): {
-        if (draft.modalTabsData) {
-          updateItemById(
-            draft.modalTabsData.navigatorsData.interventionNavigators,
-            action.payload.interventionNavigatorId,
-            { inDeletion: true },
-          );
-        }
+        updateItemById(
+          draft.interventionNavigators,
+          action.payload.interventionNavigatorId,
+          { inDeletion: true },
+        );
         break;
       }
       case getType(removeInterventionNavigatorError): {
-        if (draft.modalTabsData) {
-          updateItemById(
-            draft.modalTabsData.navigatorsData.interventionNavigators,
-            action.payload.interventionNavigatorId,
-            { inDeletion: false },
-          );
-        }
+        updateItemById(
+          draft.interventionNavigators,
+          action.payload.interventionNavigatorId,
+          { inDeletion: false },
+        );
         break;
       }
       case getType(removeParticipantFileRequest):
-        updateItemById(
-          draft.modalTabsData?.navigatorSetupData.participantFiles || [],
-          action.payload.fileId,
-          { deleting: true },
-        );
-        break;
-      case getType(removeParticipantFileSuccess):
-        const { fileId } = action.payload;
-        if (draft.modalTabsData) {
-          deleteItemById(
-            draft.modalTabsData.navigatorSetupData.participantFiles,
-            fileId,
+        if (draft.navigatorSetup) {
+          updateItemById(
+            draft.navigatorSetup.participantFiles,
+            action.payload.fileId,
+            { deleting: true },
           );
         }
         break;
+      case getType(removeParticipantFileSuccess):
+        const { fileId } = action.payload;
+        if (draft.navigatorSetup) {
+          deleteItemById(draft.navigatorSetup.participantFiles, fileId);
+        }
+        break;
       case getType(removeParticipantFileError):
-        updateItemById(
-          draft.modalTabsData?.navigatorSetupData.participantFiles || [],
-          action.payload.fileId,
-          { deleting: false },
-        );
+        if (draft.navigatorSetup) {
+          updateItemById(
+            draft.navigatorSetup.participantFiles,
+            action.payload.fileId,
+            { deleting: false },
+          );
+        }
         break;
     }
   });

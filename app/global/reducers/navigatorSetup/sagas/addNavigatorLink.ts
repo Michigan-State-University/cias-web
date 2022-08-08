@@ -10,19 +10,19 @@ import { ApiError } from 'models/Api';
 import { LinkFor, NavigatorSetup } from 'models/NavigatorSetup';
 
 import {
-  ADD_PARTICIPANT_LINK_REQUEST,
-  ADD_PARTICIPANT_LINK_ERROR,
+  ADD_NAVIGATOR_LINK_REQUEST,
+  ADD_NAVIGATOR_LINK_ERROR,
 } from '../constants';
 import {
-  addParticipantLinkError,
-  addParticipantLinkRequest,
-  addParticipantLinkSuccess,
+  addNavigatorLinkRequest,
+  addNavigatorLinkSuccess,
+  addNavigatorLinkError,
 } from '../actions';
 import messages from '../messages';
 
-export function* addParticipantLink({
+function* addNavigatorLink({
   payload: { interventionId, linkData },
-}: ReturnType<typeof addParticipantLinkRequest>) {
+}: ReturnType<typeof addNavigatorLinkRequest>) {
   const url = `/v1/live_chat/intervention/${interventionId}/navigator_setups/links`;
   try {
     const { data } = yield call(
@@ -31,7 +31,7 @@ export function* addParticipantLink({
       objectToSnakeCase({
         link: {
           ...linkData,
-          linkFor: LinkFor.PARTICIPANTS,
+          linkFor: LinkFor.NAVIGATORS,
         },
       }),
     );
@@ -41,15 +41,15 @@ export function* addParticipantLink({
       'navigatorSetup',
     ) as NavigatorSetup;
 
-    yield put(addParticipantLinkSuccess(navigatorSetup));
+    yield put(addNavigatorLinkSuccess(navigatorSetup));
   } catch (error) {
     yield call(toast.error, formatMessage(messages.updateError), {
-      toastId: ADD_PARTICIPANT_LINK_ERROR,
+      toastId: ADD_NAVIGATOR_LINK_ERROR,
     });
-    yield put(addParticipantLinkError(error as ApiError));
+    yield put(addNavigatorLinkError(error as ApiError));
   }
 }
 
-export default function* addParticipantLinkSaga() {
-  yield takeLatest(ADD_PARTICIPANT_LINK_REQUEST, addParticipantLink);
+export default function* addNavigatorLinkSaga() {
+  yield takeLatest(ADD_NAVIGATOR_LINK_REQUEST, addNavigatorLink);
 }

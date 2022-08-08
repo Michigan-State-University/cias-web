@@ -1,7 +1,7 @@
 import React from 'react';
 
 import { themeColors } from 'theme';
-import { ParticipantLink } from 'models/NavigatorSetup';
+import { Link } from 'models/NavigatorSetup';
 
 import Box from 'components/Box';
 import Text from 'components/Text';
@@ -9,7 +9,7 @@ import Text from 'components/Text';
 import { LinkPrimaryUnderline } from './styled';
 
 type Props = {
-  participantLinks: ParticipantLink[];
+  participantLinks: Link[];
 };
 const ParticipantUsefulLinks = ({ participantLinks }: Props) => (
   <Box maxHeight="69px" overflow="scroll" width="100%">

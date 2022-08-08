@@ -69,7 +69,7 @@ const NoNavigatorsForm = ({
 }: Props) => {
   const { formatMessage } = useIntl();
   const isUpdating = useSelector(
-    makeSelectNavigatorSetupLoader('updatingForm'),
+    makeSelectNavigatorSetupLoader('updatingNoNavigatorsData'),
   );
 
   const [phoneDirty, setPhoneDirty] = useState(false);
@@ -144,7 +144,7 @@ const NoNavigatorsForm = ({
   return (
     <>
       <Box>
-        <H2 fontSize={16} lineHeight="24px" mb={30}>
+        <H2 fontSize={16} lineHeight="24px" mb={24}>
           {formatMessage(messages.textInformation)}
         </H2>
         {/* @ts-ignore */}
@@ -155,7 +155,7 @@ const NoNavigatorsForm = ({
           label={formatMessage(messages.messageLabel)}
           inputProps={{ width: '100%' }}
         />
-        <Box my={30}>
+        <Box my={24}>
           <PhoneNumberForm
             // @ts-ignore
             formatMessage={formatMessage}
@@ -184,14 +184,13 @@ const NoNavigatorsForm = ({
           loading={isUpdating}
           px={24}
           width="auto"
-          mt={20}
-          mb={30}
+          mt={24}
           onClick={onSaveChanges}
         >
           {formatMessage(messages.saveChanges)}
         </Button>
       </Box>
-      <Box display="flex" mt={20} mb={30}>
+      <Box display="flex" mt={48}>
         <Switch
           checked={isNavigatorNotificationOn}
           onToggle={(newValue) =>
@@ -199,12 +198,12 @@ const NoNavigatorsForm = ({
           }
           id="navigator-notification"
         >
-          <H2 fontSize={16} lineHeight="24px">
+          <H2 fontSize={16} lineHeight="26px" mr={24}>
             {formatMessage(messages.notifyNavigator)}
           </H2>
         </Switch>
       </Box>
-      <Box display="flex" mt={20}>
+      <Box display="flex" mt={24}>
         <Radio
           id="notify_by_sms_radio"
           onChange={() =>

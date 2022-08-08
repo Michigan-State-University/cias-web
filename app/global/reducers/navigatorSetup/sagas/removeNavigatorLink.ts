@@ -7,31 +7,31 @@ import { ApiError } from 'models/Api';
 import { formatMessage } from 'utils/intlOutsideReact';
 
 import {
-  REMOVE_PARTICIPANT_LINK_ERROR,
-  REMOVE_PARTICIPANT_LINK_REQUEST,
+  REMOVE_NAVIGATOR_LINK_REQUEST,
+  REMOVE_NAVIGATOR_LINK_ERROR,
 } from '../constants';
 import {
-  removeParticipantLinkSuccess,
-  removeParticipantLinkError,
-  removeParticipantLinkRequest,
+  removeNavigatorLinkRequest,
+  removeNavigatorLinkSuccess,
+  removeNavigatorLinkError,
 } from '../actions';
 import messages from '../messages';
 
-export function* removeParticipantLink({
+function* removeNavigatorLink({
   payload: { interventionId, linkId },
-}: ReturnType<typeof removeParticipantLinkRequest>) {
+}: ReturnType<typeof removeNavigatorLinkRequest>) {
   const url = `/v1/live_chat/intervention/${interventionId}/navigator_setups/links/${linkId}`;
   try {
     yield call(axios.delete, url);
-    yield put(removeParticipantLinkSuccess(linkId));
+    yield put(removeNavigatorLinkSuccess(linkId));
   } catch (error) {
     yield call(toast.error, formatMessage(messages.updateError), {
-      toastId: REMOVE_PARTICIPANT_LINK_ERROR,
+      toastId: REMOVE_NAVIGATOR_LINK_ERROR,
     });
-    yield put(removeParticipantLinkError(linkId, error as ApiError));
+    yield put(removeNavigatorLinkError(linkId, error as ApiError));
   }
 }
 
-export default function* removeParticipantLinkSaga() {
-  yield takeLatest(REMOVE_PARTICIPANT_LINK_REQUEST, removeParticipantLink);
+export default function* removeNavigatorLinkSaga() {
+  yield takeLatest(REMOVE_NAVIGATOR_LINK_REQUEST, removeNavigatorLink);
 }

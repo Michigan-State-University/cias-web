@@ -14,6 +14,7 @@ const Collapse = ({
   onToggle,
   label,
   onDelete,
+  deleting,
   disabled,
   onShowImg,
   onHideImg,
@@ -48,6 +49,7 @@ const Collapse = ({
       onToggle={onToggle}
       isOpened={isOpened}
       onDelete={onDelete}
+      deleting={deleting}
       disabled={disabled}
       onShowImg={onShowImg}
       onHideImg={onHideImg}
@@ -85,6 +87,7 @@ Collapse.propTypes = {
   onToggle: PropTypes.func,
   isOpened: PropTypes.bool,
   onDelete: PropTypes.func,
+  deleting: PropTypes.bool,
   disabled: PropTypes.bool,
   onShowImg: PropTypes.any,
   onHideImg: PropTypes.any,

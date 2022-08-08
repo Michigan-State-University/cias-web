@@ -29,6 +29,7 @@ export const CollapseIcon = ({
   disabled,
   iconProps,
   fill,
+  loading,
   buttonProps,
   ...styleProps
 }: Props) => (
@@ -36,7 +37,7 @@ export const CollapseIcon = ({
     <ConditionalWrapper
       if={showHoverEffect && !disabled}
       with={ActiveIcon}
-      wrapperProps={{ active }}
+      wrapperProps={{ active, loading }}
     >
       <ImageButton
         src={icon}
@@ -50,6 +51,7 @@ export const CollapseIcon = ({
         fill={fill || colors.heather}
         disabled={disabled}
         iconProps={iconProps}
+        loading={loading}
         {...buttonProps}
       />
     </ConditionalWrapper>
