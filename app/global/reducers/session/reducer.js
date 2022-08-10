@@ -33,6 +33,10 @@ import {
   ADD_REPORT_TEMPLATE_SUCCESS,
   DELETE_REPORT_TEMPLATE_SUCCESS,
 } from 'global/reducers/reportTemplates/constants';
+import {
+  CREATE_TEXT_MESSAGE_SUCCESS,
+  REMOVE_TEXT_MESSAGE_SUCCESS,
+} from 'global/reducers/textMessages/constants';
 
 import objectToCamelCase from 'utils/objectToCamelCase';
 import {
@@ -155,6 +159,13 @@ const sessionReducer = (state = initialState, action) =>
       case DELETE_REPORT_TEMPLATE_SUCCESS:
         draft.session.reportTemplatesCount -= 1;
         break;
+
+      case CREATE_TEXT_MESSAGE_SUCCESS:
+        draft.session.smsPlansCount += 1;
+        break;
+
+      case REMOVE_TEXT_MESSAGE_SUCCESS:
+        draft.session.smsPlansCount -= 1;
     }
   });
 
