@@ -47,7 +47,7 @@ import { editSessionRequest, editSessionSaga } from 'global/reducers/session';
 import { makeSelectUser } from 'global/reducers/auth';
 import {
   fetchInterventionRequest,
-  makeSelectInterventionState,
+  makeSelectIntervention,
   editInterventionRequest,
   interventionReducer,
   sendInterventionCsvRequest,
@@ -59,6 +59,8 @@ import {
   fetchSessionEmailsRequest,
   deleteSessionRequest,
   externalCopySessionRequest,
+  makeSelectInterventionError,
+  makeSelectInterventionLoader,
 } from 'global/reducers/intervention';
 import { interventionOptionsSaga } from 'global/sagas/interventionOptionsSaga';
 import {
@@ -108,11 +110,11 @@ export function InterventionDetailsPage({
   createSession,
   editIntervention,
   fetchIntervention,
-  interventionState: {
-    intervention,
-    loaders: { fetchInterventionLoading, createSessionLoading },
-    errors: { fetchInterventionError, createSessionError },
-  },
+  intervention,
+  fetchInterventionLoading,
+  createSessionLoading,
+  fetchInterventionError,
+  createSessionError,
   sessionIndex,
   changeSessionIndex,
   sendCsv,
@@ -608,23 +610,11 @@ export function InterventionDetailsPage({
 InterventionDetailsPage.propTypes = {
   createSession: PropTypes.func,
   fetchIntervention: PropTypes.func,
-  interventionState: PropTypes.shape({
-    sessions: PropTypes.array,
-    fetchInterventionError: PropTypes.string,
-    fetchInterventionLoading: PropTypes.bool,
-    intervention: PropTypes.shape({
-      id: PropTypes.string,
-      userId: PropTypes.string,
-    }),
-    errors: PropTypes.shape({
-      fetchInterventionError: PropTypes.string,
-      createSessionError: PropTypes.string,
-    }),
-    loaders: PropTypes.shape({
-      fetchInterventionLoading: PropTypes.bool,
-      createSessionLoading: PropTypes.bool,
-    }),
-  }),
+  intervention: PropTypes.object,
+  fetchInterventionError: PropTypes.string,
+  createSessionError: PropTypes.string,
+  fetchInterventionLoading: PropTypes.bool,
+  createSessionLoading: PropTypes.bool,
   editIntervention: PropTypes.func,
   sessionIndex: PropTypes.number,
   changeSessionIndex: PropTypes.func,
@@ -641,7 +631,13 @@ InterventionDetailsPage.propTypes = {
 };
 
 const mapStateToProps = createStructuredSelector({
-  interventionState: makeSelectInterventionState(),
+  intervention: makeSelectIntervention(),
+  fetchInterventionLoading: makeSelectInterventionLoader(
+    'fetchInterventionLoading',
+  ),
+  createSessionLoading: makeSelectInterventionLoader('createSessionLoading'),
+  fetchInterventionError: makeSelectInterventionError('fetchInterventionError'),
+  createSessionError: makeSelectInterventionError('createSessionError'),
   sessionIndex: makeSelectCurrentSessionIndex(),
   user: makeSelectUser(),
 });

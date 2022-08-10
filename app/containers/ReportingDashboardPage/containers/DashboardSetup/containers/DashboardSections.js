@@ -30,6 +30,7 @@ import Loader from 'components/Loader';
 import Comment from 'components/Text/Comment';
 import DashedButton from 'components/Button/DashedButton';
 import Divider from 'components/Divider';
+import ErrorAlert from 'components/ErrorAlert';
 
 import DraggableSectionComponent from '../components/DraggableSectionComponent';
 import { ReportingDashboardPageContext } from '../../../constants';
@@ -105,12 +106,19 @@ const DashboardSections = ({
           </Col>
         </Row>
 
+        {errors.fetchDashboardSectionsError !== null && (
+          <ErrorAlert
+            mb={40}
+            errorText={formatMessage(messages.dashboardSectionsError)}
+            fullPage={false}
+          />
+        )}
+
         <Row>
           <Col mb={30}>
             <Comment>{formatMessage(messages.dashboardSectionsHeader)}</Comment>
           </Col>
         </Row>
-
         <Row>
           <Col mt={10}>
             <DraggableSectionParent

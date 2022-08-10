@@ -37,3 +37,12 @@ export const makeSelectSessionById = (sessionId) =>
   createSelector(selectIntervention, (substate) =>
     substate.intervention.sessions.find(({ id }) => id === sessionId),
   );
+
+export const makeSelectInterventionOrganizationId = () =>
+  createSelector(
+    makeSelectIntervention(),
+    ({ organizationId }) => organizationId,
+  );
+
+export const makeSelectInterventionInvites = () =>
+  createSelector(selectIntervention, ({ invites }) => invites);

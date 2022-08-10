@@ -20,13 +20,6 @@ import Column from 'components/Column';
 import Row from 'components/Row';
 import Divider from 'components/Divider';
 import { ANSWER_SESSION_PAGE_ID } from 'containers/App/constants';
-
-import messages from './messages';
-import {
-  QuickExitButton,
-  QuickExitButtonContainer,
-  QuickExitPositionWrapper,
-} from './styled';
 import {
   ESC_DOUBLE_CLICK_INTERVAL_MS,
   QUICK_EXIT_BUTTON_ID,
@@ -35,6 +28,12 @@ import {
   TAP_AND_HOLD_MOVE_THRESHOLD_PX,
   TAP_AND_HOLD_TIMEOUT_MS,
 } from './constants';
+import {
+  QuickExitButton,
+  QuickExitButtonContainer,
+  QuickExitPositionWrapper,
+} from './styled';
+import messages from './messages';
 
 export type Props = {
   isMobilePreview?: boolean;

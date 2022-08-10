@@ -42,6 +42,7 @@ const TextVoicePreviewInput = ({
   resetAudioPreview,
   phoneticPreviewParams,
   previewValidation,
+  onTextReady,
 }) => {
   const { formatMessage } = useIntl();
 
@@ -59,13 +60,17 @@ const TextVoicePreviewInput = ({
   }, [value]);
 
   useEffect(() => {
+    if (onTextReady && previewText) onTextReady(previewText);
+  }, [previewText]);
+
+  useEffect(() => {
     if (
       previewText.length !== 0 &&
       (!previewValidation || previewValidation())
     ) {
       audioPreviewRequest(previewText, phoneticPreviewParams);
     }
-  }, [previewText, previewValidation, phoneticPreviewParams]);
+  }, [previewText, previewValidation]);
 
   const audioButtonDisabled =
     disabled || phoneticUrl === null || phoneticLoading || isAnimationOngoing;
@@ -177,6 +182,7 @@ TextVoicePreviewInput.propTypes = {
   resetAudioPreview: PropTypes.func,
   phoneticPreviewParams: PropTypes.object,
   previewValidation: PropTypes.func,
+  onTextReady: PropTypes.func,
 };
 
 TextVoicePreviewInput.defaultProps = {

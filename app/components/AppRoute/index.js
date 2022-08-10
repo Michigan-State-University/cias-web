@@ -32,16 +32,18 @@ class AppRoute extends Route {
       },
     } = this;
 
+    const { canUseQuickExit, canDisplayLeftSidebar } = RolePermissions(
+      user?.roles,
+    );
+
     const render = () => (
       <>
-        {!disableQuickExit && user?.quickExitEnabled && (
+        {!disableQuickExit && user?.quickExitEnabled && canUseQuickExit && (
           <QuickExit beforeQuickExit={LocalStorageService.clearUserData} />
         )}
         {super.render()}
       </>
     );
-
-    const rolePermissions = RolePermissions(user?.roles);
 
     if (!protectedRoute) {
       return render();
@@ -60,8 +62,7 @@ class AppRoute extends Route {
     }
 
     if (user && arraysOverlap(allowedRoles, user.roles)) {
-      const isSidebarVisible =
-        Boolean(sidebarProps) && rolePermissions.canDisplayLeftSidebar;
+      const isSidebarVisible = Boolean(sidebarProps) && canDisplayLeftSidebar;
 
       return (
         <>

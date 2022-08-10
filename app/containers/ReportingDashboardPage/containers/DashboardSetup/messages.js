@@ -187,4 +187,9 @@ export default defineMessages({
     defaultMessage:
       'Are you sure you want to delete this chart? It will not be possible to recover it later.',
   },
+  dashboardSectionsError: {
+    id: `${scope}.dashboardSectionsError`,
+    defaultMessage:
+      'There was an issue with collecting your chart data. Please contact us at cias@msu.edu',
+  },
 });

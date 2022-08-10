@@ -27,7 +27,7 @@ export default defineMessages({
   },
   buttonOnboardingText: {
     id: `${scope}.buttonOnboardingText`,
-    defaultMessage: `In case of a dangerous situation, you can quickly close the intervention by <b>clicking the “X” in the top right corner</b> or by <b>double pressing Escape</b> on your keyboard. Additionally, we recommend you complete Interventions in Incognito mode to not save your browsing history.`,
+    defaultMessage: `If needed, you can leave this site quickly by <b>clicking the “X” in the top right corner</b> or by <b>double pressing Escape</b> on your keyboard. You will be redirected to a Google search page.`,
   },
   gestureOnboardingText: {
     id: `${scope}.gestureOnboardingText`,

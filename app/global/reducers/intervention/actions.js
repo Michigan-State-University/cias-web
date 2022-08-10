@@ -65,6 +65,9 @@ import {
   SEND_INTERVENTION_INVITE_ERROR,
   RESEND_INTERVENTION_INVITE_REQUEST,
   ADD_INTERVENTION_ATTACHMENTS_ERROR,
+  FETCH_INTERVENTION_INVITES_REQUEST,
+  FETCH_INTERVENTION_INVITES_SUCCESS,
+  FETCH_INTERVENTION_INVITES_ERROR,
 } from './constants';
 
 export const fetchInterventionRequest = (id) =>
@@ -162,18 +165,22 @@ export const sendSessionInviteError = () =>
 export const resendSessionInviteRequest = (id, sessionId) =>
   actionBuilder(RESEND_SESSION_INVITE_REQUEST, { id, sessionId });
 
-export const sendInterventionInviteRequest = (
-  emails,
-  interventionId,
-  shouldNotUpdateStore,
-) =>
+export const fetchInterventionInvitesRequest = (interventionId) =>
+  actionBuilder(FETCH_INTERVENTION_INVITES_REQUEST, {
+    interventionId,
+  });
+export const fetchInterventionInvitesSuccess = (invites) =>
+  actionBuilder(FETCH_INTERVENTION_INVITES_SUCCESS, { invites });
+export const fetchInterventionInvitesError = (error) =>
+  actionBuilder(FETCH_INTERVENTION_INVITES_ERROR, { error });
+
+export const sendInterventionInviteRequest = (emails, interventionId) =>
   actionBuilder(SEND_INTERVENTION_INVITE_REQUEST, {
     emails,
     interventionId,
-    shouldNotUpdateStore,
   });
-export const sendInterventionInviteSuccess = () =>
-  actionBuilder(SEND_INTERVENTION_INVITE_SUCCESS, {});
+export const sendInterventionInviteSuccess = (invites) =>
+  actionBuilder(SEND_INTERVENTION_INVITE_SUCCESS, { invites });
 export const sendInterventionInviteError = () =>
   actionBuilder(SEND_INTERVENTION_INVITE_ERROR, {});
 

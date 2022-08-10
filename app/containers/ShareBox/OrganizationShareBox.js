@@ -355,7 +355,7 @@ OrganizationShareBox.propTypes = {
   children: PropTypes.node,
   inviteUrl: PropTypes.string,
   exportFilename: PropTypes.string,
-  emails: PropTypes.arrayOf(PropTypes.object),
+  emails: PropTypes.arrayOf(PropTypes.object, PropTypes.array),
 };
 
 const mapStateToProps = createStructuredSelector({

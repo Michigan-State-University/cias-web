@@ -122,7 +122,7 @@ const InterventionNavbar = ({
 
   const editingPossible = canEdit(interventionStatus);
 
-  const textMessagesCountValue = textMessagesCount ?? smsPlansCount ?? '0';
+  const textMessagesCountValue = smsPlansCount ?? textMessagesCount ?? '0';
 
   const generatedReportsCountValue =
     generatedReportCount ?? currentReportsCount ?? '0';

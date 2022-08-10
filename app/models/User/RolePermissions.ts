@@ -1,4 +1,5 @@
 import { arraysOverlap } from 'utils/arrayUtils';
+import { UserRoles } from './User';
 
 import { Roles } from './UserRoles';
 
@@ -39,7 +40,11 @@ const ALLOWED_CAT_MH_SETTING_DISPLAY = [
   Roles.teamAdmin,
 ];
 
-export const RolePermissions = (roles) => ({
+const ALLOWED_QUICK_EXIT_ROLES = [Roles.guest, Roles.participant];
+
+export const RolePermissions = (
+  roles: UserRoles[],
+): Record<string, boolean> => ({
   canDownloadInterventionCsv: arraysOverlap(
     roles,
     ALLOWED_DOWNLOAD_INTERVENTION_CSV,
@@ -60,4 +65,5 @@ export const RolePermissions = (roles) => ({
     ALLOWED_ASSIGN_ORGANIZATION_TO_INTERVENTION,
   ),
   canDisplayCatMhSetting: arraysOverlap(roles, ALLOWED_CAT_MH_SETTING_DISPLAY),
+  canUseQuickExit: arraysOverlap(roles, ALLOWED_QUICK_EXIT_ROLES),
 });
