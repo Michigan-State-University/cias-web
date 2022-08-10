@@ -1,6 +1,6 @@
 import { ApiData } from 'models/Api';
 import { DenormalizedConversation, Message } from 'models/LiveChat';
-import { NoNavigatorsAvailableData } from 'models/NavigatorSetup';
+import { LiveChatSetup } from 'models/NavigatorSetup';
 
 import {
   SocketAction,
@@ -48,12 +48,11 @@ export type ConversationArchivedData = {
 };
 export type ArchiveConversationData = ConversationArchivedData;
 
-export type FetchNavigatorUnavailableSetupData = {
+export type FetchLiveChatSetupData = {
   interventionId: string;
 };
 
-export type NoNavigatorAvailableMessageData =
-  ApiData<NoNavigatorsAvailableData>;
+export type LiveChatSetupFetchedData = ApiData<LiveChatSetup>;
 
 // SOCKET MESSAGES
 
@@ -94,9 +93,9 @@ export type ConversationArchivedSocketMessage = SocketMessage<
   ConversationArchivedData
 >;
 
-export type NavigatorUnavailableSetupSentSocketMessage = SocketMessage<
-  ConversationChannelMessageTopic.NAVIGATOR_UNAVAILABLE_SETUP_SENT,
-  NoNavigatorAvailableMessageData
+export type LiveChatSetupFetchedSocketMessage = SocketMessage<
+  ConversationChannelMessageTopic.LIVE_CHAT_SETUP_FETCHED,
+  LiveChatSetupFetchedData
 >;
 
 // Create a union type with any new SocketMessage type
@@ -108,7 +107,7 @@ export type ConversationChannelMessage =
   | NavigatorUnavailableSocketMessage
   | ConversationArchivedSocketMessage
   | NavigatorUnavailableErrorSocketErrorMessage
-  | NavigatorUnavailableSetupSentSocketMessage;
+  | LiveChatSetupFetchedSocketMessage;
 
 // SOCKET ACTIONS
 
@@ -132,9 +131,9 @@ export type ArchiveConversationSocketAction = SocketAction<
   ArchiveConversationData
 >;
 
-export type FetchNavigatorUnavailableSetup = SocketAction<
-  ConversationChannelActionName.FETCH_NAVIGATOR_UNAVAILABLE_SETUP,
-  FetchNavigatorUnavailableSetupData
+export type FetchLiveChatSetupSocketAction = SocketAction<
+  ConversationChannelActionName.ON_FETCH_LIVE_CHAT_SETUP,
+  FetchLiveChatSetupData
 >;
 
 // Create a union type with any new SocketAction type
@@ -143,7 +142,7 @@ export type ConversationChannelAction =
   | ReadMessageSocketAction
   | CreateConversationSocketAction
   | ArchiveConversationSocketAction
-  | FetchNavigatorUnavailableSetup;
+  | FetchLiveChatSetupSocketAction;
 
 export type ConversationChannelConnectionParams = {
   intervention_id?: string;

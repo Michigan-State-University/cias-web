@@ -25,7 +25,7 @@ import {
   setArchivingConversation,
   setGuestInterlocutorId,
   setNavigatorUnavailable,
-  onNavigatorUnavailableSetupReceive,
+  onLiveChatSetupFetchedReceive,
 } from 'global/reducers/liveChat';
 import { makeSelectUserId } from 'global/reducers/auth';
 
@@ -41,7 +41,7 @@ import {
   MessageSentData,
   ConversationCreatedData,
   ConversationChannelConnectionParams,
-  NoNavigatorAvailableMessageData,
+  LiveChatSetupFetchedData,
 } from './types';
 import {
   CONVERSATION_CHANNEL_NAME,
@@ -109,11 +109,9 @@ export const useConversationChannel = (interventionId?: string) => {
     dispatch(setArchivingConversation(false));
   };
 
-  const onReceiveNavigatorUnavailableSetup = (
-    data: NoNavigatorAvailableMessageData,
-  ) => {
-    const setup = jsonApiToObject(data, 'navigatorSetup');
-    dispatch(onNavigatorUnavailableSetupReceive(setup));
+  const onLiveChatSetupFetched = (data: LiveChatSetupFetchedData) => {
+    const liveChatSetup = jsonApiToObject(data, 'liveChatSetup');
+    dispatch(onLiveChatSetupFetchedReceive(liveChatSetup));
   };
 
   const messageListener: SocketMessageListener<ConversationChannelMessage> = ({
@@ -143,8 +141,8 @@ export const useConversationChannel = (interventionId?: string) => {
         showErrorToast(data);
         onNavigatorUnavailableError();
         break;
-      case ConversationChannelMessageTopic.NAVIGATOR_UNAVAILABLE_SETUP_SENT:
-        onReceiveNavigatorUnavailableSetup(data);
+      case ConversationChannelMessageTopic.LIVE_CHAT_SETUP_FETCHED:
+        onLiveChatSetupFetched(data);
         break;
       default:
         break;
@@ -190,10 +188,10 @@ export const useConversationChannel = (interventionId?: string) => {
     });
   };
 
-  const fetchNavigatorUnavailableSetup = () => {
+  const fetchNavigatorSetup = () => {
     if (interventionId) {
       channel?.perform({
-        name: ConversationChannelActionName.FETCH_NAVIGATOR_UNAVAILABLE_SETUP,
+        name: ConversationChannelActionName.ON_FETCH_LIVE_CHAT_SETUP,
         data: { interventionId },
       });
     }
@@ -204,6 +202,6 @@ export const useConversationChannel = (interventionId?: string) => {
     readMessage,
     createConversation,
     archiveConversation,
-    fetchNavigatorUnavailableSetup,
+    fetchNavigatorSetup,
   };
 };

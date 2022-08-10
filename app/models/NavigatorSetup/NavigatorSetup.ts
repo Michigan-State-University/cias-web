@@ -32,3 +32,14 @@ export type NavigatorSetup = {
   id: string;
 } & NoNavigatorsAvailableData &
   HelpingMaterialsData;
+
+// Fetched by participant
+export type LiveChatSetup = Pick<
+  NavigatorSetup,
+  | 'id'
+  | 'noNavigatorAvailableMessage'
+  | 'phone'
+  | 'contactEmail'
+  | 'participantLinks'
+  | 'participantFiles'
+>;

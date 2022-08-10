@@ -7,7 +7,7 @@ import {
 } from 'models/LiveChat';
 import { ApiError } from 'models/Api';
 
-import { NoNavigatorsAvailableData } from 'models/NavigatorSetup';
+import { LiveChatSetup } from 'models/NavigatorSetup';
 import {
   ON_MESSAGE_SENT_RECEIVE,
   OPEN_CONVERSATION,
@@ -26,7 +26,7 @@ import {
   SET_ARCHIVING_CONVERSATION,
   ON_CONVERSATION_ARCHIVED_RECEIVE,
   SET_NAVIGATOR_UNAVAILABLE,
-  ON_NAVIGATOR_UNAVAILABLE_SETUP_RECEIVE,
+  ON_LIVE_CHAT_SETUP_FETCHED_RECEIVE,
 } from './constants';
 
 export const openConversation = createAction(
@@ -132,8 +132,7 @@ export const onConversationArchivedReceive = createAction(
   (action) => (conversationId: string) => action({ conversationId }),
 );
 
-export const onNavigatorUnavailableSetupReceive = createAction(
-  ON_NAVIGATOR_UNAVAILABLE_SETUP_RECEIVE,
-  (action) => (noNavigatorSetup: NoNavigatorsAvailableData) =>
-    action({ noNavigatorSetup }),
+export const onLiveChatSetupFetchedReceive = createAction(
+  ON_LIVE_CHAT_SETUP_FETCHED_RECEIVE,
+  (action) => (liveChatSetup: LiveChatSetup) => action({ liveChatSetup }),
 );

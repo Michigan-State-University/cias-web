@@ -21,7 +21,7 @@ import {
   setArchivingConversation,
   onConversationArchivedReceive,
   setNavigatorUnavailable,
-  onNavigatorUnavailableSetupReceive,
+  onLiveChatSetupFetchedReceive,
 } from './actions';
 import { LiveChatAction, LiveChatState } from './types';
 
@@ -36,7 +36,7 @@ export const initialState: LiveChatState = {
   creatingConversation: false,
   archivingConversation: false,
   navigatorUnavailable: false,
-  navigatorUnavailableSetup: null,
+  liveChatSetup: null,
   loaders: {
     conversations: false,
     messages: false,
@@ -182,8 +182,8 @@ export const liveChatReducer = (
         }
         break;
       }
-      case getType(onNavigatorUnavailableSetupReceive): {
-        draft.navigatorUnavailableSetup = payload.noNavigatorSetup;
+      case getType(onLiveChatSetupFetchedReceive): {
+        draft.liveChatSetup = payload.liveChatSetup;
         break;
       }
     }

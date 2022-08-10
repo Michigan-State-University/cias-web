@@ -3,7 +3,7 @@ import { useIntl } from 'react-intl';
 import { useSelector } from 'react-redux';
 
 import { colors, themeColors } from 'theme';
-import { makeSelectNavigatorUnavailableSetup } from 'global/reducers/liveChat';
+import { makeSelectLiveChatSetup } from 'global/reducers/liveChat';
 
 import { useConversationChannel } from 'utils/useConversationChannel';
 
@@ -27,15 +27,15 @@ const NarratorUnavailableDialog = ({
   conversationChannel,
   onMinimizeDialog,
 }: NarratorUnavailableDialogProps) => {
-  const { fetchNavigatorUnavailableSetup } = conversationChannel;
+  const { fetchNavigatorSetup } = conversationChannel;
   const { formatMessage } = useIntl();
-  const navigatorSetup = useSelector(makeSelectNavigatorUnavailableSetup());
+  const liveChatSetup = useSelector(makeSelectLiveChatSetup());
 
   useEffect(() => {
-    if (!navigatorSetup) {
-      fetchNavigatorUnavailableSetup();
+    if (!liveChatSetup) {
+      fetchNavigatorSetup();
     }
-  }, [navigatorSetup]);
+  }, [liveChatSetup]);
 
   const chatDialogHoc = (content: React.ReactNode) => (
     <ChatDialog
@@ -50,11 +50,11 @@ const NarratorUnavailableDialog = ({
     </ChatDialog>
   );
 
-  if (!navigatorSetup)
+  if (!liveChatSetup)
     return chatDialogHoc(<Spinner color={themeColors.primary} />);
 
   const { contactEmail, participantLinks, phone, noNavigatorAvailableMessage } =
-    navigatorSetup;
+    liveChatSetup;
 
   return chatDialogHoc(
     <>
