@@ -4,13 +4,11 @@
  *
  */
 
-import React, { memo, useEffect, useState, useMemo } from 'react';
-import { compose } from 'redux';
-import { createStructuredSelector } from 'reselect';
-import { connect } from 'react-redux';
-import { injectReducer, injectSaga } from 'redux-injectors';
+import React, { useEffect, useState, useMemo } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { useInjectReducer, useInjectSaga } from 'redux-injectors';
 import PropTypes from 'prop-types';
-import { injectIntl, IntlShape } from 'react-intl';
+import { useIntl } from 'react-intl';
 
 import Column from 'components/Column';
 import Row from 'components/Row';
@@ -22,18 +20,21 @@ import Box from 'components/Box';
 import { colors, themeColors } from 'theme';
 
 import {
+  allGeneratedReportsSagas,
   REPORTS_PER_PAGE,
   filterOptions,
   sortByOptions,
-  fetchReportsSaga,
   generatedReportsReducer,
   fetchReportsRequest,
+  markReportDownloadedRequest,
   makeSelectLoader,
   makeSelectReports,
   makeSelectReportsSize,
   makeSelectCurrentPage,
   makeSelectCurrentSortOption,
   makeSelectCurrentFilterOption,
+  generatedReportsReducerKey,
+  generatedReportsSagasKey,
 } from 'global/reducers/generatedReports';
 
 import PaginationHandler from 'containers/UserList/Components/PaginationHelper';
@@ -42,18 +43,26 @@ import { ReportTile } from '../../components/ReportTile';
 import { ReportsFilter } from '../../components/ReportsFilter';
 import messages from '../../components/ReportsFilter/messages';
 
-const ReportsList = ({
-  intl: { formatMessage },
-  reports,
-  reportsLoading,
-  fetchReports,
-  sessionId,
-  reportsSize,
-  disableFilter,
-  currentPage,
-  currentSortOption,
-  currentFilterOption,
-}) => {
+const ReportsList = ({ sessionId, disableFilter }) => {
+  const { formatMessage } = useIntl();
+  const dispatch = useDispatch();
+
+  useInjectReducer({
+    key: generatedReportsReducerKey,
+    reducer: generatedReportsReducer,
+  });
+  useInjectSaga({
+    key: generatedReportsSagasKey,
+    saga: allGeneratedReportsSagas,
+  });
+
+  const reports = useSelector(makeSelectReports());
+  const reportsSize = useSelector(makeSelectReportsSize());
+  const reportsLoading = useSelector(makeSelectLoader('fetchReportsLoading'));
+  const currentPage = useSelector(makeSelectCurrentPage());
+  const currentSortOption = useSelector(makeSelectCurrentSortOption());
+  const currentFilterOption = useSelector(makeSelectCurrentFilterOption());
+
   const sortOptions = useMemo(
     () =>
       sortByOptions.map((value) => ({
@@ -67,32 +76,46 @@ const ReportsList = ({
 
   const innerSetPage = (pageNumber) => {
     setDisplayLoader(true);
-    fetchReports(pageNumber, null, currentSortOption, sessionId);
+    dispatch(
+      fetchReportsRequest(pageNumber, null, currentSortOption, sessionId),
+    );
   };
 
   const handleChangeFilter = (filter) => {
     setDisplayLoader(true);
-    fetchReports(currentPage, filter, currentSortOption, sessionId);
+    dispatch(
+      fetchReportsRequest(currentPage, filter, currentSortOption, sessionId),
+    );
   };
 
   const handleChangeSort = (sort) => {
     setDisplayLoader(true);
-    fetchReports(currentPage, null, sort, sessionId);
+    dispatch(fetchReportsRequest(currentPage, null, sort, sessionId));
   };
 
   const pages = Math.ceil(reportsSize / REPORTS_PER_PAGE);
 
   useEffect(() => {
-    fetchReports(currentPage, null, currentSortOption, sessionId);
+    dispatch(
+      fetchReportsRequest(currentPage, null, currentSortOption, sessionId),
+    );
   }, []);
 
   useEffect(() => {
     if (!reportsLoading) setDisplayLoader(false);
   }, [reportsLoading]);
 
+  const markReportDownloaded = (reportId) => {
+    dispatch(markReportDownloadedRequest(reportId));
+  };
+
   const renderReport = (report) => (
     <Row mb={5} width="100%" key={`report-tile-${report.id}`}>
-      <ReportTile formatMessage={formatMessage} {...report} />
+      <ReportTile
+        formatMessage={formatMessage}
+        report={report}
+        onFirstDownload={markReportDownloaded}
+      />
     </Row>
   );
 
@@ -142,41 +165,8 @@ const ReportsList = ({
 };
 
 ReportsList.propTypes = {
-  reports: PropTypes.arrayOf(PropTypes.object),
-  reportsSize: PropTypes.number,
-  reportsLoading: PropTypes.bool,
-  fetchReports: PropTypes.func,
-  intl: PropTypes.shape(IntlShape),
   disableFilter: PropTypes.bool,
-  currentPage: PropTypes.number,
-  currentSortOption: PropTypes.string,
-  currentFilterOption: PropTypes.array,
   sessionId: PropTypes.string,
 };
 
-const mapStateToProps = createStructuredSelector({
-  reports: makeSelectReports(),
-  reportsSize: makeSelectReportsSize(),
-  reportsLoading: makeSelectLoader('fetchReportsLoading'),
-  currentPage: makeSelectCurrentPage(),
-  currentSortOption: makeSelectCurrentSortOption(),
-  currentFilterOption: makeSelectCurrentFilterOption(),
-});
-
-const mapDispatchToProps = {
-  fetchReports: fetchReportsRequest,
-};
-
-const withConnect = connect(mapStateToProps, mapDispatchToProps);
-
-export default compose(
-  injectReducer({
-    key: 'generatedReports',
-    reducer: generatedReportsReducer,
-  }),
-  injectReducer({ key: 'generatedReports', reducer: generatedReportsReducer }),
-  injectSaga({ key: 'reportsSaga', saga: fetchReportsSaga }),
-  injectIntl,
-  withConnect,
-  memo,
-)(ReportsList);
+export default ReportsList;

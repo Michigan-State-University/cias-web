@@ -20,15 +20,15 @@ import { NOT_DOWNLOADED_REPORT_CIRCLE_SIZE } from './constants';
 
 export function ReportTile({
   formatMessage,
-  id,
-  name,
-  createdAt,
-  pdfReportUrl,
-  reportFor,
-  downloaded,
+  report: { id, name, createdAt, pdfReportUrl, reportFor, downloaded },
+  onFirstDownload,
 }) {
+  const markIfFirstDownload = () => {
+    if (!downloaded) onFirstDownload(id);
+  };
+
   return (
-    <StyledBox key={`Tile-${id}`} shadow={boxShadows.selago} bg={colors.white}>
+    <StyledBox shadow={boxShadows.selago} bg={colors.white}>
       <GRow height="100%" align="center">
         <Col sm={5}>
           <Row align="center">
@@ -55,7 +55,10 @@ export function ReportTile({
           <DownloadRow align="center">
             <Text mr={10}>{new Date(createdAt).toDateString()}</Text>
 
-            <FileDownload url={pdfReportUrl}>
+            <FileDownload
+              url={pdfReportUrl}
+              onDownloadStart={markIfFirstDownload}
+            >
               <Row clickable>
                 <Text
                   mr={5}
@@ -76,11 +79,7 @@ export function ReportTile({
 }
 
 ReportTile.propTypes = {
-  id: PropTypes.string,
-  name: PropTypes.string,
-  createdAt: PropTypes.string,
-  reportFor: PropTypes.string,
-  pdfReportUrl: PropTypes.string,
+  report: PropTypes.object,
   formatMessage: PropTypes.func,
-  downloaded: PropTypes.bool,
+  onFirstDownload: PropTypes.func,
 };

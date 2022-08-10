@@ -18,8 +18,10 @@ import { ReportTile } from '../index';
 
 describe('<ReportTile />', () => {
   const defaultProps = {
-    id: 'test',
-    title: 'test',
+    report: {
+      id: 'test',
+      title: 'test',
+    },
     formatMessage: jest.fn(),
   };
   let store;

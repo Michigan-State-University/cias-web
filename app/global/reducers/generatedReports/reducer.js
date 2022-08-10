@@ -1,5 +1,7 @@
 import produce from 'immer';
 
+import { updateItemById } from 'utils/reduxUtils';
+
 import {
   FETCH_REPORTS_ERROR,
   FETCH_REPORTS_REQUEST,
@@ -7,6 +9,9 @@ import {
   SORT_BY_LATEST,
   PARTICIPANTS,
   THIRD_PARTY,
+  MARK_REPORT_DOWNLOADED_SUCCESS,
+  MARK_REPORT_DOWNLOADED_ERROR,
+  MARK_REPORT_DOWNLOADED_REQUEST,
 } from './constants';
 
 export const initialState = {
@@ -15,19 +20,17 @@ export const initialState = {
   reportsPage: 1,
   reportsSortOption: SORT_BY_LATEST,
   reportsFilterOption: [PARTICIPANTS, THIRD_PARTY],
-  latestReport: null,
-  interventions: null,
   loaders: {
     fetchReportsLoading: true,
-    fetchInterventionsLoading: true,
-    fetchLatestReportLoading: true,
+    markReportDownloadedLoading: false,
   },
   errors: {
     fetchReportsError: null,
-    fetchInterventionsError: null,
-    fetchLatestReportError: null,
+    markReportDownloadedError: null,
   },
 };
+
+export const generatedReportsReducerKey = 'generatedReports';
 
 /* eslint-disable default-case, no-param-reassign */
 
@@ -62,6 +65,25 @@ export const generatedReportsReducer = (state = initialState, action) =>
         draft.loaders.fetchReportsLoading = false;
         draft.errors.fetchReportsError = action.payload.error;
         draft.reportsSize = 0;
+        break;
+      case MARK_REPORT_DOWNLOADED_REQUEST:
+        draft.errors.markReportDownloadedError = null;
+        draft.loaders.markReportDownloadedLoading = true;
+        break;
+      case MARK_REPORT_DOWNLOADED_SUCCESS:
+        const { reportId } = action.payload;
+        if (draft.reports) {
+          updateItemById(draft.reports, reportId, { downloaded: true });
+          // There is a bug - immer doesn't recognize change in nested state although it should:
+          // https://immerjs.github.io/immer/update-patterns/#nested-data-structures
+          draft.reports = [...draft.reports];
+        }
+        draft.loaders.markReportDownloadedLoading = false;
+        break;
+      case MARK_REPORT_DOWNLOADED_ERROR:
+        const { error } = action.payload;
+        draft.errors.markReportDownloadedError = error;
+        draft.loaders.markReportDownloadedLoading = false;
         break;
     }
   });
