@@ -22,6 +22,7 @@ const FileDownload = ({
   isFileDownloading,
   downloadFile,
   fileName,
+  onDownloadStart,
   ...styleProps
 }) => {
   useInjectSaga({ key: 'downloadFile', saga: downloadFileSaga });
@@ -34,6 +35,7 @@ const FileDownload = ({
 
   const handleClick = () => {
     setIsDownloading(true);
+    if (onDownloadStart) onDownloadStart();
     downloadFile(url, fileName);
   };
 
@@ -54,6 +56,7 @@ FileDownload.propTypes = {
   children: PropTypes.oneOfType([PropTypes.node, PropTypes.func]),
   isFileDownloading: PropTypes.bool,
   downloadFile: PropTypes.func,
+  onDownloadStart: PropTypes.func,
   styleProps: PropTypes.object,
 };
 

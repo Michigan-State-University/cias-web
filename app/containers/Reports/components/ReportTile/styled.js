@@ -5,8 +5,8 @@ import { maxQueries } from 'components/Container/mediaQuery';
 
 export const StyledBox = styled(Box)`
   width: 100%;
-  margin-top: 20px;
-  padding: 22px;
+  margin-top: 8px;
+  padding: 16px 24px 16px 10px;
 `;
 
 export const DownloadRow = styled(Row)`
