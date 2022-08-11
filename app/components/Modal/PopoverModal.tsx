@@ -19,7 +19,9 @@ import {
   useFloating,
   autoUpdate,
   flip,
+  Placement,
 } from '@floating-ui/react-dom';
+import { Options as OffsetOptions } from '@floating-ui/core/src/middleware/offset';
 import capitalize from 'lodash/capitalize';
 
 import useKeyPress from 'utils/useKeyPress';
@@ -55,7 +57,10 @@ export type Props = {
   excludeRefDim?: boolean | Partial<CSSProperties>;
   width?: string;
   disableClose?: boolean;
+  defaultPlacement?: Placement;
+  offsetOptions?: OffsetOptions;
   modalStyle?: Partial<CSSProperties>;
+  contentPadding?: CSSProperties['padding'];
 };
 
 const PopoverModal = ({
@@ -69,7 +74,10 @@ const PopoverModal = ({
   excludeRefDim = false,
   width,
   disableClose = false,
+  defaultPlacement = 'right',
+  offsetOptions = 8,
   modalStyle,
+  contentPadding,
 }: Props): JSX.Element => {
   const arrowRef = useRef<HTMLElement>();
   const portalRef = useRef<HTMLElement>(null);
@@ -85,9 +93,9 @@ const PopoverModal = ({
     placement,
     update,
   } = useFloating({
-    placement: 'right',
+    placement: defaultPlacement,
     middleware: [
-      offset(8),
+      offset(offsetOptions),
       shift({
         padding: 16,
       }),
@@ -233,6 +241,7 @@ const PopoverModal = ({
         <StyledPopoverContent
           $specialMobileView={specialMobileView}
           $forceMobile={forceMobile}
+          padding={contentPadding}
         >
           {children}
         </StyledPopoverContent>

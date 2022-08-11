@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useCallback, useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 
 import { useConversationChannel } from 'utils/useConversationChannel';
@@ -12,6 +12,7 @@ import {
 import ChatIcon from './components/ChatIcon';
 import ConversationChatDialog from './containers/ConversationChatDialog';
 import NarratorUnavailableDialog from './containers/NarratorUnavailableDialog';
+import NavigatorArrivedPopover from './components/NavigatorArrivedPopover';
 
 export type Props = {
   interventionId: string;
@@ -20,8 +21,14 @@ export type Props = {
 export const LiveChatParticipantPanel = ({ interventionId }: Props) => {
   const dispatch = useDispatch();
 
+  const [navigatorArrivedPopoverVisible, setNavigatorArrivedPopoverVisible] =
+    useState(false);
+
   const [dialogMinimized, setDialogMinimized] = useState(true);
-  const toggleDialog = () => setDialogMinimized(!dialogMinimized);
+  const toggleDialog = () => {
+    setDialogMinimized(!dialogMinimized);
+    setNavigatorArrivedPopoverVisible(false);
+  };
   const minimizeDialog = () => setDialogMinimized(true);
 
   const conversationChannel = useConversationChannel(interventionId);
@@ -35,6 +42,19 @@ export const LiveChatParticipantPanel = ({ interventionId }: Props) => {
     },
     [interventionId],
   );
+
+  const showNavigatorArrivedPopover = useCallback(() => {
+    // show information if navigator became available (navigatorUnavailable changed)
+    // and participant had helping materials shown at the moment
+    if (!navigatorUnavailable && !dialogMinimized && !conversationId) {
+      setDialogMinimized(true);
+      setNavigatorArrivedPopoverVisible(true);
+    } else {
+      setNavigatorArrivedPopoverVisible(false);
+    }
+  }, [navigatorUnavailable]);
+
+  useEffect(showNavigatorArrivedPopover, [showNavigatorArrivedPopover]);
 
   const sharedProps = {
     conversationChannel,
@@ -52,6 +72,7 @@ export const LiveChatParticipantPanel = ({ interventionId }: Props) => {
       {!dialogMinimized && !liveChatActive && (
         <NarratorUnavailableDialog {...sharedProps} />
       )}
+      {navigatorArrivedPopoverVisible && <NavigatorArrivedPopover />}
       <ChatIcon
         online={liveChatActive}
         panelMinimized={dialogMinimized}

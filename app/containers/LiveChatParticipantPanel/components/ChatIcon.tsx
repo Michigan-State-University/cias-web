@@ -8,6 +8,7 @@ import chatIconOffline from 'assets/svg/chat-inactive.svg';
 
 import messages from '../messages';
 import { ChatIconButton } from './styled';
+import { LIVE_CHAT_ICON_ID } from '../constants';
 
 type Props = {
   online: boolean;
@@ -20,6 +21,7 @@ export const ChatIcon = ({ online, panelMinimized, onClick }: Props) => {
 
   return (
     <ChatIconButton
+      id={LIVE_CHAT_ICON_ID}
       onClick={onClick}
       title={formatMessage(
         panelMinimized ? messages.openPanelTitle : messages.minimizePanelTitle,

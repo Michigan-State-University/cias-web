@@ -66,7 +66,7 @@ export const StyledPopover = styled(Box)`
 `;
 
 export const StyledPopoverContent = styled(Box)`
-  padding: 24px;
+  padding: ${({ padding }) => padding ?? '24px'};
   overflow-y: auto;
 
   ${({ $specialMobileView }) =>

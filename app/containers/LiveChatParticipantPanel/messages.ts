@@ -58,4 +58,13 @@ export default defineMessages({
     id: `${scope}.navigatorUnavailable`,
     defaultMessage: 'All navigators are unavailable',
   },
+  hello: {
+    id: `${scope}.hello`,
+    defaultMessage: 'Hello!',
+  },
+  navigatorArrived: {
+    id: `${scope}.navigatorArrived`,
+    defaultMessage:
+      'The navigator just arrived. If you have any questions feel free to ask.',
+  },
 });
