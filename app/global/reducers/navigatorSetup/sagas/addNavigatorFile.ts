@@ -9,23 +9,23 @@ import { ApiError } from 'models/Api';
 import { FileFor, NavigatorSetup } from 'models/NavigatorSetup';
 
 import {
-  ADD_PARTICIPANT_FILE_REQUEST,
-  ADD_PARTICIPANT_FILE_ERROR,
+  ADD_NAVIGATOR_FILE_REQUEST,
+  ADD_NAVIGATOR_FILE_ERROR,
 } from '../constants';
 import {
-  addParticipantFileError,
-  addParticipantFileRequest,
-  addParticipantFileSuccess,
+  addNavigatorFileError,
+  addNavigatorFileRequest,
+  addNavigatorFileSuccess,
 } from '../actions';
 import messages from '../messages';
 
-export function* addParticipantFile({
+export function* addNavigatorFile({
   payload: { interventionId, files },
-}: ReturnType<typeof addParticipantFileRequest>) {
+}: ReturnType<typeof addNavigatorFileRequest>) {
   const url = `/v1/live_chat/intervention/${interventionId}/navigator_setups/files`;
 
   const formData = new FormData();
-  formData.set(`navigator_setup[files_for]`, FileFor.PARTICIPANTS);
+  formData.set(`navigator_setup[files_for]`, FileFor.NAVIGATORS);
   files.forEach((file: File) =>
     formData.append(`navigator_setup[files][]`, file),
   );
@@ -40,15 +40,15 @@ export function* addParticipantFile({
       'navigatorSetup',
     ) as NavigatorSetup;
 
-    yield put(addParticipantFileSuccess(navigatorSetup));
+    yield put(addNavigatorFileSuccess(navigatorSetup));
   } catch (error) {
     yield call(toast.error, formatMessage(messages.updateError), {
-      toastId: ADD_PARTICIPANT_FILE_ERROR,
+      toastId: ADD_NAVIGATOR_FILE_ERROR,
     });
-    yield put(addParticipantFileError(error as ApiError));
+    yield put(addNavigatorFileError(error as ApiError));
   }
 }
 
-export default function* addParticipantFileSaga() {
-  yield takeLatest(ADD_PARTICIPANT_FILE_REQUEST, addParticipantFile);
+export default function* addNavigatorFileSaga() {
+  yield takeLatest(ADD_NAVIGATOR_FILE_REQUEST, addNavigatorFile);
 }

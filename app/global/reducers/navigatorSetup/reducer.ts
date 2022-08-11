@@ -37,6 +37,12 @@ import {
   removeNavigatorLinkRequest,
   removeNavigatorLinkSuccess,
   removeNavigatorLinkError,
+  addNavigatorFileRequest,
+  addNavigatorFileSuccess,
+  addNavigatorFileError,
+  removeNavigatorFileRequest,
+  removeNavigatorFileSuccess,
+  removeNavigatorFileError,
 } from './actions';
 import { NavigatorSetupState, NavigatorSetupAction } from './types';
 
@@ -51,7 +57,8 @@ export const initialState: NavigatorSetupState = {
     updatingNoNavigatorsData: false,
     addingParticipantLink: false,
     addingNavigatorLink: false,
-    updatingParticipantFiles: false,
+    uploadingNavigatorFile: false,
+    uploadingParticipantFile: false,
     navigatorEmailInvitation: false,
   },
   error: null,
@@ -180,19 +187,6 @@ export const navigatorSetupReducer = (
           );
         }
         break;
-      case getType(addParticipantFileRequest):
-        draft.loaders.updatingParticipantFiles = true;
-        break;
-      case getType(addParticipantFileSuccess):
-        draft.loaders.updatingParticipantFiles = false;
-        if (draft.navigatorSetup) {
-          const { navigatorSetup } = action.payload;
-          draft.navigatorSetup = navigatorSetup;
-        }
-        break;
-      case getType(addParticipantFileError):
-        draft.loaders.updatingParticipantFiles = false;
-        break;
       case getType(inviteNavigatorsByEmailRequest):
         draft.loaders.navigatorEmailInvitation = true;
         break;
@@ -253,7 +247,21 @@ export const navigatorSetupReducer = (
         );
         break;
       }
-      case getType(removeParticipantFileRequest):
+      case getType(addParticipantFileRequest): {
+        draft.loaders.uploadingParticipantFile = true;
+        break;
+      }
+      case getType(addParticipantFileSuccess): {
+        draft.loaders.uploadingParticipantFile = false;
+        const { navigatorSetup } = action.payload;
+        draft.navigatorSetup = navigatorSetup;
+        break;
+      }
+      case getType(addParticipantFileError): {
+        draft.loaders.uploadingParticipantFile = false;
+        break;
+      }
+      case getType(removeParticipantFileRequest): {
         if (draft.navigatorSetup) {
           updateItemById(
             draft.navigatorSetup.participantFiles,
@@ -262,13 +270,17 @@ export const navigatorSetupReducer = (
           );
         }
         break;
-      case getType(removeParticipantFileSuccess):
-        const { fileId } = action.payload;
+      }
+      case getType(removeParticipantFileSuccess): {
         if (draft.navigatorSetup) {
-          deleteItemById(draft.navigatorSetup.participantFiles, fileId);
+          deleteItemById(
+            draft.navigatorSetup.participantFiles,
+            action.payload.fileId,
+          );
         }
         break;
-      case getType(removeParticipantFileError):
+      }
+      case getType(removeParticipantFileError): {
         if (draft.navigatorSetup) {
           updateItemById(
             draft.navigatorSetup.participantFiles,
@@ -277,5 +289,49 @@ export const navigatorSetupReducer = (
           );
         }
         break;
+      }
+      case getType(addNavigatorFileRequest): {
+        draft.loaders.uploadingNavigatorFile = true;
+        break;
+      }
+      case getType(addNavigatorFileSuccess): {
+        draft.loaders.uploadingNavigatorFile = false;
+        const { navigatorSetup } = action.payload;
+        draft.navigatorSetup = navigatorSetup;
+        break;
+      }
+      case getType(addNavigatorFileError): {
+        draft.loaders.uploadingNavigatorFile = false;
+        break;
+      }
+      case getType(removeNavigatorFileRequest): {
+        if (draft.navigatorSetup) {
+          updateItemById(
+            draft.navigatorSetup.navigatorFiles,
+            action.payload.fileId,
+            { deleting: true },
+          );
+        }
+        break;
+      }
+      case getType(removeNavigatorFileSuccess): {
+        if (draft.navigatorSetup) {
+          deleteItemById(
+            draft.navigatorSetup.navigatorFiles,
+            action.payload.fileId,
+          );
+        }
+        break;
+      }
+      case getType(removeNavigatorFileError): {
+        if (draft.navigatorSetup) {
+          updateItemById(
+            draft.navigatorSetup.navigatorFiles,
+            action.payload.fileId,
+            { deleting: false },
+          );
+        }
+        break;
+      }
     }
   });

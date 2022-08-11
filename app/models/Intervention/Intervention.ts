@@ -1,3 +1,5 @@
+import { AppFile } from 'models/File';
+
 import { InterventionInvite } from './InterventionInvite';
 
 export enum InterventionStatus {
@@ -62,13 +64,7 @@ export interface Intervention {
   additionalText: Nullable<string>;
   originalText: Nullable<{ additionalText: string }>;
   usersWithAccess: Nullable<UserWithAccess[]>;
-  files: FileInfo[];
+  files: AppFile[];
   liveChatEnabled?: boolean;
   quickExit: boolean;
-}
-
-export interface FileInfo {
-  id: string;
-  name: string;
-  url: string;
 }

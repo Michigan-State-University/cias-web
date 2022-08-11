@@ -42,3 +42,15 @@ export const makeSelectNavigatorLinks = () =>
     if (!navigatorSetup) return null;
     return navigatorSetup.navigatorLinks;
   });
+
+export const makeSelectParticipantFiles = () =>
+  createSelector(makeSelectNavigatorSetup(), (navigatorSetup) => {
+    if (!navigatorSetup) return null;
+    return navigatorSetup.participantFiles;
+  });
+
+export const makeSelectNavigatorFiles = () =>
+  createSelector(makeSelectNavigatorSetup(), (navigatorSetup) => {
+    if (!navigatorSetup) return null;
+    return navigatorSetup.navigatorFiles;
+  });

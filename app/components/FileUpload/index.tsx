@@ -52,11 +52,15 @@ export const FileUpload = ({
 
   return (
     <>
-      {label && <Text mb={12}>{label}</Text>}
+      {label && (
+        <Text mb={12} fontSize={13} lineHeight={1}>
+          {label}
+        </Text>
+      )}
       <Dropzone
         border={`${borders.borderWidth} dashed ${colors.perwinkleCrayola}`}
         width="100%"
-        padding={17}
+        padding={12}
         withShadow={isDragActive}
         style={{
           position: 'relative',

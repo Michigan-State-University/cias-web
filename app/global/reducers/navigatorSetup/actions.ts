@@ -49,6 +49,12 @@ import {
   REMOVE_NAVIGATOR_LINK_REQUEST,
   REMOVE_NAVIGATOR_LINK_SUCCESS,
   REMOVE_NAVIGATOR_LINK_ERROR,
+  ADD_NAVIGATOR_FILE_REQUEST,
+  ADD_NAVIGATOR_FILE_SUCCESS,
+  ADD_NAVIGATOR_FILE_ERROR,
+  REMOVE_NAVIGATOR_FILE_REQUEST,
+  REMOVE_NAVIGATOR_FILE_SUCCESS,
+  REMOVE_NAVIGATOR_FILE_ERROR,
 } from './constants';
 
 export const fetchNavigatorSetupRequest = createAction(
@@ -270,5 +276,37 @@ export const removeParticipantFileSuccess = createAction(
 
 export const removeParticipantFileError = createAction(
   REMOVE_PARTICIPANT_FILE_ERROR,
+  (action) => (fileId: string, error: ApiError) => action({ fileId, error }),
+);
+
+export const addNavigatorFileRequest = createAction(
+  ADD_NAVIGATOR_FILE_REQUEST,
+  (action) => (interventionId: string, files: File[]) =>
+    action({ interventionId, files }),
+);
+
+export const addNavigatorFileSuccess = createAction(
+  ADD_NAVIGATOR_FILE_SUCCESS,
+  (action) => (navigatorSetup: NavigatorSetup) => action({ navigatorSetup }),
+);
+
+export const addNavigatorFileError = createAction(
+  ADD_NAVIGATOR_FILE_ERROR,
+  (action) => (error: ApiError) => action({ error }),
+);
+
+export const removeNavigatorFileRequest = createAction(
+  REMOVE_NAVIGATOR_FILE_REQUEST,
+  (action) => (interventionId: string, fileId: string) =>
+    action({ interventionId, fileId }),
+);
+
+export const removeNavigatorFileSuccess = createAction(
+  REMOVE_NAVIGATOR_FILE_SUCCESS,
+  (action) => (fileId: string) => action({ fileId }),
+);
+
+export const removeNavigatorFileError = createAction(
+  REMOVE_NAVIGATOR_FILE_ERROR,
   (action) => (fileId: string, error: ApiError) => action({ fileId, error }),
 );

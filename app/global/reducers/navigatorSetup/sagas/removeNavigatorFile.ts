@@ -7,31 +7,31 @@ import { ApiError } from 'models/Api';
 import { formatMessage } from 'utils/intlOutsideReact';
 
 import {
-  REMOVE_PARTICIPANT_FILE_ERROR,
-  REMOVE_PARTICIPANT_FILE_REQUEST,
+  REMOVE_NAVIGATOR_FILE_ERROR,
+  REMOVE_NAVIGATOR_FILE_REQUEST,
 } from '../constants';
 import {
-  removeParticipantFileSuccess,
-  removeParticipantFileError,
-  removeParticipantFileRequest,
+  removeNavigatorFileSuccess,
+  removeNavigatorFileError,
+  removeNavigatorFileRequest,
 } from '../actions';
 import messages from '../messages';
 
-export function* removeParticipantFile({
+export function* removeNavigatorFile({
   payload: { interventionId, fileId },
-}: ReturnType<typeof removeParticipantFileRequest>) {
+}: ReturnType<typeof removeNavigatorFileRequest>) {
   const url = `/v1/live_chat/intervention/${interventionId}/navigator_setups/files/${fileId}`;
   try {
     yield call(axios.delete, url);
-    yield put(removeParticipantFileSuccess(fileId));
+    yield put(removeNavigatorFileSuccess(fileId));
   } catch (error) {
     yield call(toast.error, formatMessage(messages.updateError), {
-      toastId: REMOVE_PARTICIPANT_FILE_ERROR,
+      toastId: REMOVE_NAVIGATOR_FILE_ERROR,
     });
-    yield put(removeParticipantFileError(fileId, error as ApiError));
+    yield put(removeNavigatorFileError(fileId, error as ApiError));
   }
 }
 
-export default function* removeParticipantFileSaga() {
-  yield takeLatest(REMOVE_PARTICIPANT_FILE_REQUEST, removeParticipantFile);
+export default function* removeNavigatorFileSaga() {
+  yield takeLatest(REMOVE_NAVIGATOR_FILE_REQUEST, removeNavigatorFile);
 }

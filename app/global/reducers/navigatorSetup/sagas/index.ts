@@ -10,6 +10,8 @@ import removeNavigatorEmailInvitation from './removeNavigatorEmailInvitation';
 import removeInterventionNavigator from './removeInterventionNavigator';
 import addParticipantFile from './addParticipantFile';
 import removeParticipantFile from './removeParticipantFile';
+import addNavigatorFile from './addNavigatorFile';
+import removeNavigatorFile from './removeNavigatorFile';
 import addNavigatorLink from './addNavigatorLink';
 import updateNavigatorLink from './updateNavigatorLink';
 import removeNavigatorLink from './removeNavigatorLink';
@@ -26,6 +28,8 @@ export function* allNavigatorSetupSagas() {
     removeInterventionNavigator(),
     addParticipantFile(),
     removeParticipantFile(),
+    addNavigatorFile(),
+    removeNavigatorFile(),
     addNavigatorLink(),
     updateNavigatorLink(),
     removeNavigatorLink(),

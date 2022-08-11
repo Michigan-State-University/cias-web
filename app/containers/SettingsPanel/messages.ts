@@ -301,6 +301,10 @@ export default defineMessages({
     id: `${scope}.importFile`,
     defaultMessage: 'Import file',
   },
+  filesForNavigator: {
+    id: `${scope}.filesForNavigator`,
+    defaultMessage: 'Files for navigator',
+  },
   filesForParticipant: {
     id: `${scope}.filesForParticipant`,
     defaultMessage: 'Files for participant',

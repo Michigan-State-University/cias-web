@@ -15,8 +15,6 @@ import {
   inviteNavigatorsByEmailRequest,
   removeNavigatorEmailInvitationRequest,
   removeInterventionNavigatorRequest,
-  addParticipantFileRequest,
-  removeParticipantFileRequest,
   navigatorSetupReducerKey,
   makeSelectPendingNavigatorInvitations,
   makeSelectInterventionNavigators,
@@ -24,6 +22,7 @@ import {
 import Tabs from 'components/Tabs';
 import ErrorAlert from 'components/ErrorAlert';
 import Spinner from 'components/Spinner';
+import Column from 'components/Column';
 
 import { themeColors, colors } from 'theme';
 import { NoNavigatorsAvailableData } from 'models/NavigatorSetup';
@@ -35,9 +34,10 @@ import NavigatorEmailInvitationPanel from './NavigatorEmailInvitationPanel';
 import AddedNavigatorPanel from './AddedNavigatorsPanel';
 
 import NoNavigatorsForm from '../Components/NoNavigatorsForm';
-import FilesForParticipant from '../Components/FilesForParticipant';
 import ParticipantLinksPanel from './ParticipantLinksPanel';
 import NavigatorLinksPanel from './NavigatorLinksPanel';
+import NavigatorFilesPanel from './NavigatorFilesPanel';
+import ParticipantFilesPanel from './ParticipantFilesPanel';
 
 type Props = {
   interventionId: string;
@@ -62,10 +62,6 @@ const NavigatorSettingsModal = ({ interventionId }: Props) => {
     makeSelectNavigatorSetupLoader('navigatorEmailInvitation'),
   );
   const error = useSelector(makeSelectNavigatorSetupError());
-
-  const participantFileLoading = useSelector(
-    makeSelectNavigatorSetupLoader('updatingParticipantFiles'),
-  );
 
   useEffect(() => {
     dispatch(fetchNavigatorSetupRequest(interventionId));
@@ -92,14 +88,6 @@ const NavigatorSettingsModal = ({ interventionId }: Props) => {
       ),
     );
 
-  const addFileForParticipant = (files: File[]) => {
-    dispatch(addParticipantFileRequest(interventionId, files));
-  };
-
-  const removeFileForParticipant = (fileId: string) => {
-    dispatch(removeParticipantFileRequest(interventionId, fileId));
-  };
-
   if (loading) {
     return <Spinner color={themeColors.secondary} />;
   }
@@ -119,7 +107,6 @@ const NavigatorSettingsModal = ({ interventionId }: Props) => {
     noNavigatorAvailableMessage,
     notifyBy,
     phone,
-    participantFiles,
   } = navigatorSetup;
 
   return (
@@ -177,12 +164,10 @@ const NavigatorSettingsModal = ({ interventionId }: Props) => {
         <NavigatorModalLayout
           leftContent={<NavigatorLinksPanel interventionId={interventionId} />}
           rightContent={
-            <FilesForParticipant
-              fileUploadLoading={participantFileLoading}
-              addFileForParticipant={addFileForParticipant}
-              removeFileForParticipant={removeFileForParticipant}
-              files={participantFiles}
-            />
+            <Column gap={32}>
+              <NavigatorFilesPanel interventionId={interventionId} />
+              <ParticipantFilesPanel interventionId={interventionId} />
+            </Column>
           }
         />
       </div>

@@ -20,7 +20,8 @@ export type NavigatorSetupState = {
     updatingNoNavigatorsData: boolean;
     addingParticipantLink: boolean;
     addingNavigatorLink: boolean;
-    updatingParticipantFiles: boolean;
+    uploadingNavigatorFile: boolean;
+    uploadingParticipantFile: boolean;
     navigatorEmailInvitation: boolean;
   };
   error: Nullable<ApiError>;

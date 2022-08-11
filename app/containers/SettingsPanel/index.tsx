@@ -32,9 +32,9 @@ import {
 import {
   InterventionType,
   Intervention,
-  FileInfo,
   InterventionSharedTo,
 } from 'models/Intervention';
+import { AppFile } from 'models/File';
 
 import Column from 'components/Column';
 import ErrorAlert from 'components/ErrorAlert';
@@ -163,7 +163,7 @@ const SettingsPanel = ({
   const updateAdditionalText = (text: string) =>
     updateIntervention({ id: interventionId, additionalText: text });
 
-  const deleteFile = (fileInfo: FileInfo) =>
+  const deleteFile = (fileInfo: AppFile) =>
     deleteInterventionAttachment(interventionId, fileInfo.id);
 
   const updateType = (newType: InterventionType) => {

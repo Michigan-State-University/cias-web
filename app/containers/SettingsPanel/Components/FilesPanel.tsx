@@ -1,6 +1,8 @@
 import React from 'react';
-import { FormattedMessage, useIntl } from 'react-intl';
+import { useIntl } from 'react-intl';
 import isEmpty from 'lodash/isEmpty';
+
+import { AppFile } from 'models/File';
 
 import FileUpload from 'components/FileUpload';
 import H2 from 'components/H2';
@@ -9,23 +11,24 @@ import { ImageButton } from 'components/Button';
 import Loader from 'components/Loader';
 
 import binNoBg from 'assets/svg/bin-no-bg.svg';
-import { ParticipantFile } from 'models/NavigatorSetup';
 
 import FileBox from './FileBox';
 import messages from '../messages';
 
 type Props = {
-  removeFileForParticipant: (fileId: string) => void;
-  addFileForParticipant: (files: File[]) => void;
-  fileUploadLoading: boolean;
-  files: ParticipantFile[];
+  title: string;
+  files: AppFile[];
+  uploadingFile: boolean;
+  addFile: (files: File[]) => void;
+  removeFile: (fileId: string) => void;
 };
 
-export const FilesForParticipant = ({
-  addFileForParticipant,
-  removeFileForParticipant,
-  fileUploadLoading,
+export const FilesPanel = ({
+  title,
   files,
+  uploadingFile,
+  addFile,
+  removeFile,
 }: Props) => {
   const { formatMessage } = useIntl();
 
@@ -38,7 +41,7 @@ export const FilesForParticipant = ({
         onClick={(e: React.MouseEvent) => {
           e.stopPropagation();
           e.preventDefault();
-          removeFileForParticipant(index);
+          removeFile(index);
         }}
         title={formatMessage(messages.deleteFile)}
         disabled={false}
@@ -51,19 +54,19 @@ export const FilesForParticipant = ({
     );
 
   return (
-    <>
+    <div>
       <H2 fontSize={16} lineHeight="24px" mb={24}>
-        <FormattedMessage {...messages.filesForParticipant} />
+        {title}
       </H2>
       <FileUpload
-        onAddFile={addFileForParticipant}
-        loading={fileUploadLoading}
+        onAddFile={addFile}
+        loading={uploadingFile}
         label={formatMessage(messages.importFile)}
       />
       {!isEmpty(files) && (
         <Column
           width="calc(100% + 16px)"
-          maxHeight={115}
+          maxHeight={110}
           overflow="auto"
           pr={16}
           mt={16}
@@ -81,8 +84,8 @@ export const FilesForParticipant = ({
           ))}
         </Column>
       )}
-    </>
+    </div>
   );
 };
 
-export default FilesForParticipant;
+export default FilesPanel;

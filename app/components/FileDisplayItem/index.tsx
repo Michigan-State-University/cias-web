@@ -1,6 +1,6 @@
 import React from 'react';
 
-import { FileInfo } from 'models/Intervention';
+import { AppFile } from 'models/File';
 
 import { getFileUrl } from 'utils/getApiFileUrl';
 import { getIconForExtension } from 'utils/fileIcons';
@@ -14,7 +14,7 @@ import Row from 'components/Row';
 import Box from 'components/Box';
 
 interface FileDisplayProps {
-  fileInfo: Omit<FileInfo, 'id'>;
+  fileInfo: Omit<AppFile, 'id'>;
   textProps?: object;
 }
 

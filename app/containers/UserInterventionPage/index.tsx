@@ -15,7 +15,8 @@ import {
 } from 'models/UserIntervention/UserIntervention';
 import { Session } from 'models/Session/Session';
 import { UserSession } from 'models/UserSession/UserSession';
-import { FileInfo, InterventionType } from 'models/Intervention';
+import { InterventionType } from 'models/Intervention';
+import { AppFile } from 'models/File';
 
 import {
   ChatWidgetReducer,
@@ -160,7 +161,7 @@ const UserInterventionPage = () => {
         <>
           <H3>{formatMessage(messages.helpingMaterials)}</H3>
           <Row overflow="auto" maxHeight={100} mt={10} mb={50}>
-            {files.map((fileInfo: FileInfo) => (
+            {files.map((fileInfo: AppFile) => (
               <Col xs={12} md={6} xxl={4} mb={10} key={fileInfo.id}>
                 <FileDisplayItem fileInfo={fileInfo} />
               </Col>
