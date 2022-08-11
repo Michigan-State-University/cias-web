@@ -23,9 +23,13 @@ export function* removeNavigatorEmailInvitation({
   try {
     yield call(axios.delete, url);
     yield put(removeNavigatorEmailInvitationSuccess(invitationId));
-    yield call(toast.success, formatMessage(messages.navigatorRemovedSuccess), {
-      toastId: REMOVE_NAVIGATOR_EMAIL_INVITATION_SUCCESS,
-    });
+    yield call(
+      toast.success,
+      formatMessage(messages.navigatorInvitationRemovedSuccess),
+      {
+        toastId: REMOVE_NAVIGATOR_EMAIL_INVITATION_SUCCESS,
+      },
+    );
   } catch (error) {
     yield put(removeNavigatorEmailInvitationError(invitationId));
     yield call(

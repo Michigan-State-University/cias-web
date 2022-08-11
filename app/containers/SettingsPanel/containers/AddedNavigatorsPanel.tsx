@@ -3,16 +3,16 @@ import { useIntl } from 'react-intl';
 
 import { colors } from 'theme';
 import { InterventionNavigator } from 'models/NavigatorSetup';
-// import minus from 'assets/svg/grey-minus.svg';
+import minus from 'assets/svg/grey-minus.svg';
 
 import Box from 'components/Box';
 import H2 from 'components/H2';
 import Text from 'components/Text';
 import Row from 'components/Row';
-// import Img from 'components/Img';
+import Img from 'components/Img';
 import UserAvatar from 'components/UserAvatar';
+import { TextButton } from 'components/Button';
 
-// import { TextButton } from 'components/Button';
 import messages from '../messages';
 
 const SINGLE_ITEM_HEIGHT = 60;
@@ -29,8 +29,6 @@ const AddedNavigatorPanel = ({
 }: Props) => {
   const { formatMessage } = useIntl();
 
-  console.log(removeInterventionNavigator);
-
   return (
     <Box>
       <H2 fontSize={16} lineHeight="24px" mb={24}>
@@ -42,7 +40,7 @@ const AddedNavigatorPanel = ({
         </Text>
       )}
       {interventionNavigators.map(
-        ({ id, avatarUrl, email, firstName, lastName }, index) => (
+        ({ id, avatarUrl, email, firstName, lastName, inDeletion }, index) => (
           <Row
             justify="between"
             align="center"
@@ -62,22 +60,21 @@ const AddedNavigatorPanel = ({
                   lastName={lastName}
                 />
               </Box>
-              <Box ml={16}>
+              <Box ml={8}>
                 <Text fontWeight="bold">{`${firstName} ${lastName}`}</Text>
                 <Text>{email}</Text>
               </Box>
             </Row>
-            {/* WAITING FOR BE */}
-            {/* <TextButton
-                onClick={() => removeInterventionNavigator(id)}
-                buttonProps={{ display: 'flex', align: 'center' }}
-                loading={inDeletion}
-              >
-                <Img width={24} height={24} src={minus} />
-                <Text ml={16} color={colors.manatee} fontWeight="bold">
-                  {formatMessage(messages.remove)}
-                </Text>
-              </TextButton> */}
+            <TextButton
+              onClick={() => removeInterventionNavigator(id)}
+              buttonProps={{ display: 'flex', align: 'center' }}
+              loading={inDeletion}
+            >
+              <Img width={24} height={24} src={minus} mr={4} />
+              <Text color={colors.manatee} fontWeight="bold">
+                {formatMessage(messages.remove)}
+              </Text>
+            </TextButton>
           </Row>
         ),
       )}

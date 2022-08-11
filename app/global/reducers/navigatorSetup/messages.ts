@@ -23,8 +23,12 @@ export default defineMessages({
     id: `${scope}.navigatorHasBeenInvited`,
     defaultMessage: `Navigator(s) invitation has been send`,
   },
+  navigatorInvitationRemovedSuccess: {
+    id: `${scope}.navigatorInvitationRemovedSuccess`,
+    defaultMessage: `Navigator invitation has been removed`,
+  },
   navigatorRemovedSuccess: {
     id: `${scope}.navigatorRemovedSuccess`,
-    defaultMessage: `Navigator invitation has been removed`,
+    defaultMessage: `Navigator has been successfully removed`,
   },
 });
