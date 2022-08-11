@@ -39,8 +39,6 @@ export type CreateConversationData = {
   interventionId: string;
 };
 
-export type NavigatorUnavailableData = {};
-
 export type NavigatorUnavailableErrorData = SocketErrorMessageData;
 
 export type ConversationArchivedData = {
@@ -77,10 +75,8 @@ export type ConversationCreatedSocketMessage = SocketMessage<
   ConversationCreatedData
 >;
 
-export type NavigatorUnavailableSocketMessage = SocketMessage<
-  ConversationChannelMessageTopic.NAVIGATOR_UNAVAILABLE,
-  NavigatorUnavailableData
->;
+export type NavigatorUnavailableSocketMessage =
+  SocketMessage<ConversationChannelMessageTopic.NAVIGATOR_UNAVAILABLE>;
 
 export type NavigatorUnavailableErrorSocketErrorMessage = SocketErrorMessage<
   ConversationChannelMessageTopic.NAVIGATOR_UNAVAILABLE_ERROR,
@@ -98,6 +94,9 @@ export type LiveChatSetupFetchedSocketMessage = SocketMessage<
   LiveChatSetupFetchedData
 >;
 
+export type NavigatorAvailableSocketMessage =
+  SocketMessage<ConversationChannelMessageTopic.NAVIGATOR_AVAILABLE>;
+
 // Create a union type with any new SocketMessage type
 export type ConversationChannelMessage =
   | MessageSentSocketMessage
@@ -107,7 +106,8 @@ export type ConversationChannelMessage =
   | NavigatorUnavailableSocketMessage
   | ConversationArchivedSocketMessage
   | NavigatorUnavailableErrorSocketErrorMessage
-  | LiveChatSetupFetchedSocketMessage;
+  | LiveChatSetupFetchedSocketMessage
+  | NavigatorAvailableSocketMessage;
 
 // SOCKET ACTIONS
 

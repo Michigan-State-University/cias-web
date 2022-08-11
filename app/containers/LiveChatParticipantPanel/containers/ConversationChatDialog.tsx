@@ -1,11 +1,10 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import { useIntl } from 'react-intl';
-import { useDispatch, useSelector } from 'react-redux';
+import { useSelector } from 'react-redux';
 
 import { useConversationChannel } from 'utils/useConversationChannel';
 
 import {
-  closeConversation,
   makeSelectCreatingConversation,
   makeSelectCurrentInterlocutorId,
   makeSelectOpenedConversation,
@@ -42,19 +41,10 @@ const ConversationChatDialog = ({
 
   const [message, setMessage] = useState('');
 
-  const dispatch = useDispatch();
-
   const creatingConversation = useSelector(makeSelectCreatingConversation());
   const messages = useSelector(makeSelectOpenedConversationMessages());
   const conversation = useSelector(makeSelectOpenedConversation());
   const currentInterlocutorId = useSelector(makeSelectCurrentInterlocutorId());
-
-  useEffect(
-    () => () => {
-      dispatch(closeConversation());
-    },
-    [interventionId],
-  );
 
   const handleSendMessage = (content: string) => {
     if (conversation && currentInterlocutorId) {

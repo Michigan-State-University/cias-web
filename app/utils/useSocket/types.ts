@@ -10,7 +10,7 @@ export type SocketErrorMessageStatus = 422 | 404;
 // incoming message
 export type SocketMessage<
   Topic extends string,
-  Data extends object,
+  Data extends object | undefined = undefined,
   Status extends SocketMessageStatus = 200,
 > = {
   topic: Topic;

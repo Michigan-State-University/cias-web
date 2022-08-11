@@ -9,6 +9,7 @@ export enum ConversationChannelMessageTopic {
   NAVIGATOR_UNAVAILABLE = 'navigator_unavailable',
   NAVIGATOR_UNAVAILABLE_ERROR = 'navigator_unavailable_error',
   LIVE_CHAT_SETUP_FETCHED = 'live_chat_setup_fetched',
+  NAVIGATOR_AVAILABLE = 'navigator_available',
 }
 
 export enum ConversationChannelActionName {

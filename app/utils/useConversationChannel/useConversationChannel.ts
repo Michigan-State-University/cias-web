@@ -114,6 +114,10 @@ export const useConversationChannel = (interventionId?: string) => {
     dispatch(onLiveChatSetupFetchedReceive(liveChatSetup));
   };
 
+  const onNavigatorAvailable = () => {
+    dispatch(setNavigatorUnavailable(false));
+  };
+
   const messageListener: SocketMessageListener<ConversationChannelMessage> = ({
     data,
     topic,
@@ -143,6 +147,9 @@ export const useConversationChannel = (interventionId?: string) => {
         break;
       case ConversationChannelMessageTopic.LIVE_CHAT_SETUP_FETCHED:
         onLiveChatSetupFetched(data);
+        break;
+      case ConversationChannelMessageTopic.NAVIGATOR_AVAILABLE:
+        onNavigatorAvailable();
         break;
       default:
         break;

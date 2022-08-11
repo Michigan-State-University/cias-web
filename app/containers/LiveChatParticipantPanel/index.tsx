@@ -1,9 +1,13 @@
-import React, { useState } from 'react';
-import { useSelector } from 'react-redux';
+import React, { useEffect, useState } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 
 import { useConversationChannel } from 'utils/useConversationChannel';
 
-import { makeSelectNavigatorUnavailable } from 'global/reducers/liveChat';
+import {
+  closeConversation,
+  makeSelectNavigatorUnavailable,
+  makeSelectOpenedConversationId,
+} from 'global/reducers/liveChat';
 
 import ChatIcon from './components/ChatIcon';
 import ConversationChatDialog from './containers/ConversationChatDialog';
@@ -14,6 +18,8 @@ export type Props = {
 };
 
 export const LiveChatParticipantPanel = ({ interventionId }: Props) => {
+  const dispatch = useDispatch();
+
   const [dialogMinimized, setDialogMinimized] = useState(true);
   const toggleDialog = () => setDialogMinimized(!dialogMinimized);
   const minimizeDialog = () => setDialogMinimized(true);
@@ -21,6 +27,14 @@ export const LiveChatParticipantPanel = ({ interventionId }: Props) => {
   const conversationChannel = useConversationChannel(interventionId);
 
   const navigatorUnavailable = useSelector(makeSelectNavigatorUnavailable());
+  const conversationId = useSelector(makeSelectOpenedConversationId());
+
+  useEffect(
+    () => () => {
+      dispatch(closeConversation());
+    },
+    [interventionId],
+  );
 
   const sharedProps = {
     conversationChannel,
@@ -28,16 +42,18 @@ export const LiveChatParticipantPanel = ({ interventionId }: Props) => {
     onMinimizeDialog: minimizeDialog,
   };
 
+  const liveChatActive = Boolean(conversationId) || !navigatorUnavailable;
+
   return (
     <>
-      {!dialogMinimized && !navigatorUnavailable && (
+      {!dialogMinimized && liveChatActive && (
         <ConversationChatDialog {...sharedProps} />
       )}
-      {!dialogMinimized && navigatorUnavailable && (
+      {!dialogMinimized && !liveChatActive && (
         <NarratorUnavailableDialog {...sharedProps} />
       )}
       <ChatIcon
-        online={!navigatorUnavailable}
+        online={liveChatActive}
         panelMinimized={dialogMinimized}
         onClick={toggleDialog}
       />
