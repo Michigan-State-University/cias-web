@@ -11,4 +11,8 @@ export default defineMessages({
     id: `${scope}.tooltip`,
     defaultMessage: 'Visible only for logged in participants',
   },
+  closeMySession: {
+    id: `${scope}.closeMySession`,
+    defaultMessage: 'Close my session',
+  },
 });

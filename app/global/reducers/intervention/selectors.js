@@ -46,3 +46,9 @@ export const makeSelectInterventionOrganizationId = () =>
 
 export const makeSelectInterventionInvites = () =>
   createSelector(selectIntervention, ({ invites }) => invites);
+
+export const makeSelectInterventionSharedTo = () =>
+  createSelector(
+    selectIntervention,
+    (substate) => substate.intervention?.sharedTo,
+  );

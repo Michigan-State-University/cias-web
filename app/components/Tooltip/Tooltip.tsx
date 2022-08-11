@@ -33,7 +33,7 @@ type TooltipProps = {
   visible?: boolean;
   text?: string;
   icon?: any;
-  content?: ReactElement;
+  content?: ReactElement | string;
   place?: 'top' | 'right' | 'bottom' | 'left';
   stretchContent?: boolean;
   backgroundColor?: string;

@@ -1,11 +1,11 @@
 import React from 'react';
-import PropTypes from 'prop-types';
-import { compose } from 'redux';
-import { connect } from 'react-redux';
-import { createStructuredSelector } from 'reselect';
+import { useSelector } from 'react-redux';
 
 import { makeSelectIsNarratorTab } from 'global/reducers/localState';
-import { makeSelectInterventionStatus } from 'global/reducers/intervention';
+import {
+  makeSelectInterventionSharedTo,
+  makeSelectInterventionStatus,
+} from 'global/reducers/intervention';
 import {
   updateQuestionDataSaga,
   makeSelectSelectedQuestionType,
@@ -45,16 +45,18 @@ import NameQuestion from './NameQuestion';
 import ThirdPartyQuestion from './ThirdPartyQuestion';
 import FinishScreen from './FinishScreen';
 
-const QuestionData = ({
-  selectedQuestionType,
-  isNarratorTab,
-  interventionStatus,
-}) => {
+const QuestionData = () => {
   useInjectSaga({ key: 'updateQuestionData', saga: updateQuestionDataSaga });
+
+  const selectedQuestionType = useSelector(makeSelectSelectedQuestionType());
+  const isNarratorTab = useSelector(makeSelectIsNarratorTab());
+  const interventionStatus = useSelector(makeSelectInterventionStatus());
+  const sharedTo = useSelector(makeSelectInterventionSharedTo());
 
   const commonProps = {
     isNarratorTab,
     interventionStatus,
+    sharedTo,
   };
 
   switch (selectedQuestionType) {
@@ -81,6 +83,7 @@ const QuestionData = ({
     case visualAnalogueScaleQuestion.id:
       return <VisualAnalogueScaleQuestion {...commonProps} />;
     case urlQuestion.id:
+      // @ts-ignore
       return <UrlQuestion {...commonProps} />;
     case feedbackQuestion.id:
       return <FeedbackQuestion {...commonProps} />;
@@ -93,20 +96,4 @@ const QuestionData = ({
   }
 };
 
-QuestionData.propTypes = {
-  selectedQuestionType: PropTypes.string.isRequired,
-  isNarratorTab: PropTypes.bool,
-  interventionStatus: PropTypes.string,
-};
-
-const mapStateToProps = createStructuredSelector({
-  selectedQuestionType: makeSelectSelectedQuestionType(),
-  isNarratorTab: makeSelectIsNarratorTab(),
-  interventionStatus: makeSelectInterventionStatus(),
-});
-
-const mapDispatchToProps = () => ({});
-
-const withConnect = connect(mapStateToProps, mapDispatchToProps);
-
-export default compose(withConnect)(QuestionData);
+export default QuestionData;

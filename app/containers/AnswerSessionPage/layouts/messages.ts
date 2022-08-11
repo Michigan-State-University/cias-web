@@ -104,4 +104,8 @@ export default defineMessages({
     id: `${scope}.goToNextModule`,
     defaultMessage: 'Go to next module',
   },
+  closeMySession: {
+    id: `${scope}.closeMySession`,
+    defaultMessage: 'Close my session',
+  },
 });
