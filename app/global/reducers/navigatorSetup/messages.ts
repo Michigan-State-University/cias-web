@@ -21,7 +21,7 @@ export default defineMessages({
   },
   navigatorHasBeenInvited: {
     id: `${scope}.navigatorHasBeenInvited`,
-    defaultMessage: `Navigator(s) invitation has been send`,
+    defaultMessage: `Navigator(s) invitation has been send. Keep in mind only navigators that are not invited already will receive an e-mail`,
   },
   navigatorInvitationRemovedSuccess: {
     id: `${scope}.navigatorInvitationRemovedSuccess`,

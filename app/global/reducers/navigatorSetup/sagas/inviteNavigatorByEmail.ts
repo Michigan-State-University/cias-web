@@ -33,7 +33,7 @@ export function* inviteNavigatorByEmail({
       'navigatorInvitation',
     ) as PendingNavigatorInvitation[];
     yield put(inviteNavigatorsByEmailSuccess(invitations));
-    yield call(toast.success, formatMessage(messages.navigatorHasBeenInvited), {
+    yield call(toast.info, formatMessage(messages.navigatorHasBeenInvited), {
       toastId: INVITE_NAVIGATOR_BY_EMAIL_SUCCESS,
     });
   } catch (error) {
