@@ -31,4 +31,12 @@ export default defineMessages({
     id: `${scope}.navigatorRemovedSuccess`,
     defaultMessage: `Navigator has been successfully removed`,
   },
+  teamNavigatorHasBeenInvited: {
+    id: `${scope}.teamNavigatorHasBeenInvited`,
+    defaultMessage: `Team navigator has been invited`,
+  },
+  teamNavigatorHasBeenInvitedError: {
+    id: `${scope}.teamNavigatorHasBeenInvitedError`,
+    defaultMessage: `There was a problem with inviting team navigator`,
+  },
 });

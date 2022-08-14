@@ -2,7 +2,7 @@ import React from 'react';
 import { useIntl } from 'react-intl';
 
 import { colors } from 'theme';
-import { InterventionNavigator } from 'models/NavigatorSetup';
+import { NavigatorModalUser } from 'models/NavigatorSetup';
 import minus from 'assets/svg/grey-minus.svg';
 
 import Box from 'components/Box';
@@ -19,7 +19,7 @@ const SINGLE_ITEM_HEIGHT = 60;
 const ITEM_MARGIN = 8;
 
 type Props = {
-  interventionNavigators: InterventionNavigator[];
+  interventionNavigators: NavigatorModalUser[];
   removeInterventionNavigator: (interventionNavigatorId: string) => void;
 };
 

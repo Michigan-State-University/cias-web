@@ -31,6 +31,9 @@ export const makeSelectInterventionNavigators = () =>
     ({ interventionNavigators }) => interventionNavigators,
   );
 
+export const makeSelectTeamNavigators = () =>
+  createSelector(selectNavigatorSetup, ({ teamNavigators }) => teamNavigators);
+
 export const makeSelectParticipantLinks = () =>
   createSelector(makeSelectNavigatorSetup(), (navigatorSetup) => {
     if (!navigatorSetup) return null;

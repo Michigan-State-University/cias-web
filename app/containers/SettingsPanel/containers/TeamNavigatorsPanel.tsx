@@ -1,31 +1,35 @@
 import React from 'react';
 import { useIntl } from 'react-intl';
 
+import { NavigatorModalUser } from 'models/NavigatorSetup';
 import { colors, themeColors } from 'theme';
+
 import Box from 'components/Box';
 import Row from 'components/Row';
 import H3 from 'components/H3';
 import Img from 'components/Img';
 import Text from 'components/Text';
 import UserAvatar from 'components/UserAvatar';
+import { TextButton } from 'components/Button';
 
 import addSign from 'assets/svg/addSign2.svg';
 import messages from '../messages';
 
-const TEAM_MEMBERS = [
-  { id: 1, firstName: 'test', lastName: 'user', avatarUrl: '' },
-  { id: 2, firstName: 'Other', lastName: 'Test', avatarUrl: '' },
-  { id: 3, firstName: 'Michał', lastName: 'Smierc', avatarUrl: '' },
-  { id: 4, firstName: 'Lubie', lastName: 'Placki', avatarUrl: '' },
-];
-
 const SINGLE_ITEM_HEIGHT = 56;
 const SINGLE_ITEM_MARGIN = 8;
-const TeamNavigatorsPanel = () => {
+
+type Props = {
+  teamNavigators: NavigatorModalUser[];
+  addNavigatorFromTeam: (user: NavigatorModalUser) => void;
+};
+const TeamNavigatorsPanel = ({
+  teamNavigators,
+  addNavigatorFromTeam,
+}: Props) => {
   const { formatMessage } = useIntl();
 
-  const onAddNavigator = (userId: number) => {
-    console.log(userId);
+  const onAddNavigator = (user: NavigatorModalUser) => {
+    addNavigatorFromTeam(user);
   };
 
   return (
@@ -33,47 +37,54 @@ const TeamNavigatorsPanel = () => {
       <H3 mt={30} mb={20}>
         {formatMessage(messages.navigatorsFromTeam)}
       </H3>
-      {TEAM_MEMBERS.length === 0 && (
+      {teamNavigators.length === 0 && (
         <Text color={colors.grey}>
           {formatMessage(messages.noTeamNavigators)}
         </Text>
       )}
-      {TEAM_MEMBERS.length !== 0 && (
+      {teamNavigators.length !== 0 && (
         <Box
           height={SINGLE_ITEM_HEIGHT * 3 + SINGLE_ITEM_MARGIN * 2}
           overflow="scroll"
         >
-          {TEAM_MEMBERS.map(({ avatarUrl, firstName, id, lastName }, index) => (
-            <Row
-              justify="between"
-              align="center"
-              background={colors.lightBlue}
-              padding={12}
-              key={id}
-              maxHeight={SINGLE_ITEM_HEIGHT}
-              mt={index === 0 ? 0 : SINGLE_ITEM_MARGIN}
-            >
-              <Row align="center">
-                <UserAvatar
-                  height={32}
-                  width={32}
-                  avatar={avatarUrl}
-                  firstName={firstName}
-                  lastName={lastName}
-                />
-                <Text
-                  ml={16}
-                  fontWeight="bold"
-                >{`${firstName} ${lastName}`}</Text>
+          {teamNavigators.map((user, index) => {
+            const { id, avatarUrl, firstName, lastName, inDeletion } = user;
+            return (
+              <Row
+                justify="between"
+                align="center"
+                background={colors.lightBlue}
+                padding={12}
+                key={id}
+                maxHeight={SINGLE_ITEM_HEIGHT}
+                mt={index === 0 ? 0 : SINGLE_ITEM_MARGIN}
+              >
+                <Row align="center">
+                  <UserAvatar
+                    height={32}
+                    width={32}
+                    avatar={avatarUrl}
+                    firstName={firstName}
+                    lastName={lastName}
+                  />
+                  <Text
+                    ml={16}
+                    fontWeight="bold"
+                  >{`${firstName} ${lastName}`}</Text>
+                </Row>
+                <TextButton
+                  onClick={() => onAddNavigator(user)}
+                  buttonProps={{ display: 'flex', align: 'center' }}
+                  loading={inDeletion}
+                >
+                  <Img width={24} height={24} src={addSign} mr={4} />
+                  <Text color={themeColors.secondary} fontWeight="bold">
+                    {formatMessage(messages.add)}
+                  </Text>
+                </TextButton>
               </Row>
-              <Row onClick={onAddNavigator} align="center">
-                <Img width={24} height={24} src={addSign} />
-                <Text ml={16} color={themeColors.secondary} fontWeight="bold">
-                  {formatMessage(messages.add)}
-                </Text>
-              </Row>
-            </Row>
-          ))}
+            );
+          })}
         </Box>
       )}
     </>

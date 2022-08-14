@@ -18,22 +18,25 @@ import {
   navigatorSetupReducerKey,
   makeSelectPendingNavigatorInvitations,
   makeSelectInterventionNavigators,
+  makeSelectTeamNavigators,
+  addNavigatorFromTeamRequest,
 } from 'global/reducers/navigatorSetup';
+import { themeColors, colors } from 'theme';
+import { SimpleUser } from 'models/User';
+import { NoNavigatorsAvailableData } from 'models/NavigatorSetup';
+
 import Tabs from 'components/Tabs';
 import ErrorAlert from 'components/ErrorAlert';
 import Spinner from 'components/Spinner';
 import Column from 'components/Column';
 
-import { themeColors, colors } from 'theme';
-import { NoNavigatorsAvailableData } from 'models/NavigatorSetup';
-
-import messages from '../messages';
 import NavigatorModalLayout from '../Components/NavigatorModalLayout';
-import NavigatorEmailInvitationPanel from './NavigatorEmailInvitationPanel';
-// import TeamNavigatorsPanel from './TeamNavigatorsPanel';
-import AddedNavigatorPanel from './AddedNavigatorsPanel';
-
 import NoNavigatorsForm from '../Components/NoNavigatorsForm';
+import messages from '../messages';
+
+import NavigatorEmailInvitationPanel from './NavigatorEmailInvitationPanel';
+import TeamNavigatorsPanel from './TeamNavigatorsPanel';
+import AddedNavigatorPanel from './AddedNavigatorsPanel';
 import ParticipantLinksPanel from './ParticipantLinksPanel';
 import NavigatorLinksPanel from './NavigatorLinksPanel';
 import NavigatorFilesPanel from './NavigatorFilesPanel';
@@ -54,6 +57,9 @@ const NavigatorSettingsModal = ({ interventionId }: Props) => {
   const interventionNavigators = useSelector(
     makeSelectInterventionNavigators(),
   );
+
+  const teamNavigators = useSelector(makeSelectTeamNavigators());
+
   const loading = useSelector(
     makeSelectNavigatorSetupLoader('fetchingNavigatorSetup'),
   );
@@ -87,6 +93,9 @@ const NavigatorSettingsModal = ({ interventionId }: Props) => {
         interventionNavigatorId,
       ),
     );
+
+  const addNavigatorFromTeam = (user: SimpleUser) =>
+    dispatch(addNavigatorFromTeamRequest(user));
 
   if (loading) {
     return <Spinner color={themeColors.secondary} />;
@@ -129,8 +138,10 @@ const NavigatorSettingsModal = ({ interventionId }: Props) => {
                 removeNavigatorEmailInvitation={removeNavigatorEmailInvitation}
                 invitationLoading={navigatorEmailInvitationLoading}
               />
-              {/* REMOVED FOR NOW AS WE DON'T SUPPORT TEAM INVITATIONS YET */}
-              {/* <TeamNavigatorsPanel /> */}
+              <TeamNavigatorsPanel
+                teamNavigators={teamNavigators}
+                addNavigatorFromTeam={addNavigatorFromTeam}
+              />
             </>
           }
           rightContent={

@@ -1,11 +1,11 @@
 import axios from 'axios';
 import { put, call, takeLatest, all } from 'redux-saga/effects';
 
-import { jsonApiToArray, jsonApiToObject } from 'utils/jsonApiMapper';
+import { jsonApiToObject } from 'utils/jsonApiMapper';
 
 import { ApiError } from 'models/Api';
 import {
-  InterventionNavigator,
+  NavigatorModalUser,
   NavigatorSetup,
   PendingNavigatorInvitation,
 } from 'models/NavigatorSetup';
@@ -21,17 +21,15 @@ export function* fetchNavigatorSetup({
   payload: { interventionId },
 }: ReturnType<typeof fetchNavigatorSetupRequest>) {
   const noNavigatorsUrl = `/v1/live_chat/intervention/${interventionId}/navigator_setup`;
-  const pendingNavigatorInvitationsUrl = `/v1/interventions/${interventionId}/navigator_invitations`;
-  const interventionNavigatorUrl = `/v1/live_chat/intervention/${interventionId}/navigators`;
+  const navigatorTabUrl = `/v1/live_chat/intervention/${interventionId}/navigator_tab`;
+
   try {
     const {
       fetchNoNavigators: { data: noNavigatorsData },
-      fetchPendingInvitations: { data: pendingNavigatorInvitationsData },
-      fetchInterventionNavigators: { data: interventionNavigatorsData },
+      navigatorsTab: { data: navigatorsTabData },
     } = yield all({
       fetchNoNavigators: call(axios.get, noNavigatorsUrl),
-      fetchPendingInvitations: call(axios.get, pendingNavigatorInvitationsUrl),
-      fetchInterventionNavigators: call(axios.get, interventionNavigatorUrl),
+      navigatorsTab: call(axios.get, navigatorTabUrl),
     });
 
     const navigatorSetup = jsonApiToObject(
@@ -39,21 +37,21 @@ export function* fetchNavigatorSetup({
       'navigatorSetup',
     ) as NavigatorSetup;
 
-    const pendingNavigatorInvitations = jsonApiToArray(
-      pendingNavigatorInvitationsData,
-      'navigatorInvitation',
-    ) as PendingNavigatorInvitation[];
-
-    const interventionNavigators = jsonApiToArray(
-      interventionNavigatorsData,
-      'navigator',
-    ) as InterventionNavigator[];
+    const { navigators, navigatorsInTeam, sendInvitations } = jsonApiToObject(
+      navigatorsTabData,
+      'navigatorTab',
+    ) as {
+      navigators: NavigatorModalUser[];
+      sendInvitations: PendingNavigatorInvitation[];
+      navigatorsInTeam: NavigatorModalUser[];
+    };
 
     yield put(
       fetchNavigatorSetupSuccess(
-        pendingNavigatorInvitations,
-        interventionNavigators,
+        sendInvitations,
+        navigators,
         navigatorSetup,
+        navigatorsInTeam,
       ),
     );
   } catch (error) {

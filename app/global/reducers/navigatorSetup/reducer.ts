@@ -43,6 +43,9 @@ import {
   removeNavigatorFileRequest,
   removeNavigatorFileSuccess,
   removeNavigatorFileError,
+  addNavigatorFromTeamRequest,
+  addNavigatorFromTeamSuccess,
+  addNavigatorFromTeamError,
 } from './actions';
 import { NavigatorSetupState, NavigatorSetupAction } from './types';
 
@@ -52,6 +55,7 @@ export const initialState: NavigatorSetupState = {
   navigatorSetup: null,
   pendingNavigatorInvitations: [],
   interventionNavigators: [],
+  teamNavigators: [],
   loaders: {
     fetchingNavigatorSetup: false,
     updatingNoNavigatorsData: false,
@@ -84,10 +88,12 @@ export const navigatorSetupReducer = (
           pendingNavigatorInvitations,
           interventionNavigators,
           navigatorSetup,
+          navigatorsInTeam,
         } = action.payload;
         draft.navigatorSetup = navigatorSetup;
         draft.pendingNavigatorInvitations = pendingNavigatorInvitations;
         draft.interventionNavigators = interventionNavigators;
+        draft.teamNavigators = navigatorsInTeam;
         draft.loaders.fetchingNavigatorSetup = false;
         break;
       }
@@ -331,6 +337,25 @@ export const navigatorSetupReducer = (
             { deleting: false },
           );
         }
+        break;
+      }
+
+      case getType(addNavigatorFromTeamRequest): {
+        updateItemById(draft.teamNavigators, action.payload.user.id, {
+          inDeletion: true,
+        });
+        break;
+      }
+      case getType(addNavigatorFromTeamSuccess): {
+        const { user } = action.payload;
+        deleteItemById(draft.teamNavigators, user.id);
+        draft.interventionNavigators.push(user);
+        break;
+      }
+      case getType(addNavigatorFromTeamError): {
+        updateItemById(draft.teamNavigators, action.payload.id, {
+          inDeletion: false,
+        });
         break;
       }
     }
