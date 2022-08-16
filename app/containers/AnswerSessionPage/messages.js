@@ -43,7 +43,7 @@ export default defineMessages({
   },
   startSession: {
     id: `${scope}.startSession`,
-    defaultMessage: 'Start session',
+    defaultMessage: 'Start new session',
   },
   continueSession: {
     id: `${scope}.continueSession`,

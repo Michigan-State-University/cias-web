@@ -1,9 +1,10 @@
-import React, { useMemo } from 'react';
-import { useSelector } from 'react-redux';
+import React, { useEffect, useMemo } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 import { IntlShape } from 'react-intl';
 
 import LocalStorageService from 'utils/localStorageService';
 import { previewRegex } from 'global/constants/regex';
+import { resetReducer } from 'global/reducers/auth/actions';
 import { InterventionSharedTo, InterventionType } from 'models/Intervention';
 import { FinishQuestionDTO } from 'models/Question';
 
@@ -19,6 +20,7 @@ import {
   getSessionMapUserPreviewUrl,
   getNextSessionUrl,
 } from '../utils';
+import { createUserSessionRequest } from '../actions';
 
 type Props = {
   formatMessage: IntlShape['formatMessage'];
@@ -26,9 +28,24 @@ type Props = {
 };
 
 const FinishScreenLayout = ({ formatMessage, question }: Props) => {
+  // If there is no state in LocalStorageService it means that that is anonymous user with anyone in the link
+  const isNotLoggedInUser = !LocalStorageService.getState();
+
+  useEffect(() => {
+    if (isNotLoggedInUser) {
+      LocalStorageService.clearHeaders();
+    }
+  }, []);
+
+  const dispatch = useDispatch();
   const userSession = useSelector(makeSelectUserSession());
 
-  const { id: userSessionId, interventionType, sharedTo } = userSession;
+  const {
+    id: userSessionId,
+    interventionType,
+    sharedTo,
+    sessionId,
+  } = userSession;
   // @ts-ignore
   const { next_session_id: nextSessionId } = question;
 
@@ -58,15 +75,15 @@ const FinishScreenLayout = ({ formatMessage, question }: Props) => {
     window.opener?.close();
   };
 
-  const clearHeaders = () => {
-    console.log('I will clear headers');
+  const reloadPage = () => {
+    dispatch(resetReducer());
+    dispatch(createUserSessionRequest(sessionId));
   };
 
-  // If there is no state in LocalStorageService it means that that is anonymous user with anyone in the link
-  if (!LocalStorageService.getState()) {
+  if (isNotLoggedInUser) {
     return (
       <Row mt={50} justify="center" width="100%">
-        <Button onClick={clearHeaders()} px={20} width="auto">
+        <Button onClick={reloadPage} px={20} width="auto">
           {formatMessage(messages.closeMySession)}
         </Button>
       </Row>
