@@ -13,7 +13,7 @@ export default defineMessages({
   },
   sectionTitle: {
     id: `${scope}.sectionTitle`,
-    defaultMessage: 'Researcher’s e-mail address',
+    defaultMessage: `User's e-mail address`,
   },
   invitationsSection: {
     id: `${scope}.invitationsSection`,
@@ -46,5 +46,13 @@ export default defineMessages({
   cancel: {
     id: `${scope}.cancel`,
     defaultMessage: 'Cancel',
+  },
+  userRole: {
+    id: `${scope}.userRole`,
+    defaultMessage: `User's role`,
+  },
+  userRoleComment: {
+    id: `${scope}.userRoleComment`,
+    defaultMessage: `To send an invitation you must choose at least one role`,
   },
 });

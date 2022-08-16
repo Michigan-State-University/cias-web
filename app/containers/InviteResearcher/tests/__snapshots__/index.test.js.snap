@@ -399,12 +399,12 @@ exports[`<InviteResearcher /> Should display invalid email error 1`] = `
                   <p
                     class="c12"
                     font-size="14"
-                    id="researcher-email-label"
+                    id="user-email-label"
                   >
-                    Researcher’s e-mail address
+                    User's e-mail address
                   </p>
                   <input
-                    aria-labelledby="researcher-email-label"
+                    aria-labelledby="user-email-label"
                     class="c13"
                     placeholder="e.g john.doe@contact.com"
                     type="text"
@@ -873,12 +873,12 @@ exports[`<InviteResearcher /> Should display server error 1`] = `
                   <p
                     class="c12"
                     font-size="14"
-                    id="researcher-email-label"
+                    id="user-email-label"
                   >
-                    Researcher’s e-mail address
+                    User's e-mail address
                   </p>
                   <input
-                    aria-labelledby="researcher-email-label"
+                    aria-labelledby="user-email-label"
                     class="c13"
                     placeholder="e.g john.doe@contact.com"
                     type="text"
@@ -1340,12 +1340,12 @@ exports[`<InviteResearcher /> Should render and match the snapshot 1`] = `
                   <p
                     class="c12"
                     font-size="14"
-                    id="researcher-email-label"
+                    id="user-email-label"
                   >
-                    Researcher’s e-mail address
+                    User's e-mail address
                   </p>
                   <input
-                    aria-labelledby="researcher-email-label"
+                    aria-labelledby="user-email-label"
                     class="c13"
                     placeholder="e.g john.doe@contact.com"
                     type="text"

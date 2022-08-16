@@ -95,8 +95,8 @@ export const TeamDetails = ({
     setSelectedUser(user);
   };
 
-  const handleSendInvite = (email) => {
-    inviteToTeam(email, id);
+  const handleSendInvite = (email, roles) => {
+    inviteToTeam(email, id, roles);
     closeInviteModal();
   };
 
@@ -125,9 +125,11 @@ export const TeamDetails = ({
         <InviteResearcher
           visible={inviteModalVisible}
           sendInvitation={handleSendInvite}
-          deleteError={() => {}}
           onClose={closeInviteModal}
           inviteOnly
+          availableRoles={[Roles.Researcher, Roles.Navigator]}
+          titleMessage={messages.inviteUser}
+          modalDescription={formatMessage(messages.modalDescription)}
         />
       )}
       <StyledBox height="100%" width="100%">
@@ -216,6 +218,7 @@ export const TeamDetails = ({
                 Roles.Participant,
                 Roles.Researcher,
                 Roles.EInterventionAdmin,
+                Roles.Navigator,
               ]}
               listOnly
             />
