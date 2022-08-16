@@ -56,7 +56,8 @@ class AppRoute extends Route {
         encodeURIComponent(location.pathname),
       );
 
-      if (location.pathname === '/') return <Redirect to="/login" />;
+      if (location.pathname === '/')
+        return <Redirect to={`/login${location.search}`} />;
 
       return <Redirect to={`/no-access?${queryParams.toString()}`} />;
     }
