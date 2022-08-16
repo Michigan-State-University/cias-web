@@ -1,0 +1,14 @@
+<mjml>
+    <mj-head>
+        <app-header/>
+    </mj-head>
+    <mj-body>
+        <app-layout
+                header="Navigator intervention invite"
+                mainText="You have been invited as navigator to <span style='color:#C866EA;'>{INTERVENTION_NAME}</span>.<br/><br/>Now you can chat with participants to help them with their troubles or concerns in this intervention."
+                buttonText=""
+                buttonUrl=""
+        >
+        </app-layout>
+        <mj-body>
+</mjml>
