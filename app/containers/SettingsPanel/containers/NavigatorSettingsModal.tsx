@@ -95,7 +95,7 @@ const NavigatorSettingsModal = ({ interventionId }: Props) => {
     );
 
   const addNavigatorFromTeam = (user: SimpleUser) =>
-    dispatch(addNavigatorFromTeamRequest(user));
+    dispatch(addNavigatorFromTeamRequest(user, interventionId));
 
   if (loading) {
     return <Spinner color={themeColors.secondary} />;

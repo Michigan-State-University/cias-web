@@ -319,7 +319,8 @@ export const removeNavigatorFileError = createAction(
 
 export const addNavigatorFromTeamRequest = createAction(
   ADD_NAVIGATOR_FROM_TEAM_REQUEST,
-  (action) => (user: SimpleUser) => action({ user }),
+  (action) => (user: SimpleUser, interventionId: string) =>
+    action({ user, interventionId }),
 );
 
 export const addNavigatorFromTeamSuccess = createAction(

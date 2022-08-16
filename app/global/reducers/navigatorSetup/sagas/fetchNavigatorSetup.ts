@@ -37,18 +37,18 @@ export function* fetchNavigatorSetup({
       'navigatorSetup',
     ) as NavigatorSetup;
 
-    const { navigators, navigatorsInTeam, sendInvitations } = jsonApiToObject(
+    const { navigators, navigatorsInTeam, sentInvitations } = jsonApiToObject(
       navigatorsTabData,
       'navigatorTab',
     ) as {
       navigators: NavigatorModalUser[];
-      sendInvitations: PendingNavigatorInvitation[];
+      sentInvitations: PendingNavigatorInvitation[];
       navigatorsInTeam: NavigatorModalUser[];
     };
 
     yield put(
       fetchNavigatorSetupSuccess(
-        sendInvitations,
+        sentInvitations,
         navigators,
         navigatorSetup,
         navigatorsInTeam,

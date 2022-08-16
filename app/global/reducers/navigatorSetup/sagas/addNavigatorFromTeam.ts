@@ -1,5 +1,5 @@
-// import axios from 'axios';
-import { takeLatest, put, call, delay } from 'redux-saga/effects';
+import axios from 'axios';
+import { takeLatest, put, call } from 'redux-saga/effects';
 import { toast } from 'react-toastify';
 
 import { formatMessage } from 'utils/intlOutsideReact';
@@ -18,21 +18,11 @@ import {
 import messages from '../messages';
 
 export function* addNavigatorFromTeam({
-  payload: { user },
+  payload: { user, interventionId },
 }: ReturnType<typeof addNavigatorFromTeamRequest>) {
-  console.log(user);
-  // const url = `/v1/interventions/${interventionId}/navigator_invitations`;
+  const url = `/v1/live_chat/intervention/${interventionId}/navigators`;
   try {
-    yield delay(2000);
-    // const { data } = yield call(axios.post, url, {
-    //   navigator_invitation: {
-    //     emails,
-    //   },
-    // });
-    // const invitations = jsonApiToArray(
-    //   data,
-    //   'navigatorInvitation',
-    // ) as PendingNavigatorInvitation[];
+    yield call(axios.post, url, { navigator_id: user.id });
     yield put(addNavigatorFromTeamSuccess(user));
     yield call(
       toast.info,
@@ -42,7 +32,6 @@ export function* addNavigatorFromTeam({
       },
     );
   } catch (error) {
-    console.log(error);
     yield put(addNavigatorFromTeamError(user.id));
     yield call(
       toast.error,
