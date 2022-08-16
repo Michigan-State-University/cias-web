@@ -35,10 +35,12 @@ const PreviewNavbar = ({
   match: { params },
 }) => {
   const { sessionId } = params;
+
   const handleClose = () => {
     window.opener = null;
     window.open('', '_self');
-    window.close();
+    // Safari PLS https://twitter.com/gryzzly/status/177061204114685952
+    setTimeout(window.close, 1);
   };
 
   const changeMode = (mode) => () => changePreviewMode(mode);
