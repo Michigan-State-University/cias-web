@@ -60,20 +60,17 @@ const NarratorUnavailableDialog = ({
     <>
       <Box
         px={20}
+        py={32}
         textAlign="center"
         display="flex"
         align="center"
         direction="column"
+        overflow="auto"
       >
-        <H2 mt={30}> {noNavigatorAvailableMessage}</H2>
+        <H2> {noNavigatorAvailableMessage}</H2>
         <Box height="2px" bg={colors.linkWater} width="56px" my={16} />
         <ContactDetails phone={phone} contactEmail={contactEmail} />
-        <Text color={colors.bluewood} textOpacity={0.7} mt={24} mb={8}>
-          {formatMessage(messages.usefulLinks)}
-        </Text>
-        {Boolean(participantLinks.length) && (
-          <ParticipantUsefulLinks participantLinks={participantLinks} />
-        )}
+        <ParticipantUsefulLinks participantLinks={participantLinks} />
         {/* WATING FOR BACKEND */}
         {/* <Text color={colors.bluewood} textOpacity={0.7} mt={24} mb={8}>
           {formatMessage(messages.downloadInstructions)}
