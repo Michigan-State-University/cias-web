@@ -2,12 +2,13 @@ import { createAction } from 'typesafe-actions';
 
 import { ApiError } from 'models/Api';
 import {
-  InterventionNavigator,
+  NavigatorModalUser,
   NoNavigatorsAvailableData,
   PendingNavigatorInvitation,
   NavigatorSetup,
   LinkData,
 } from 'models/NavigatorSetup';
+import { SimpleUser } from 'models/User';
 
 import {
   ADD_PARTICIPANT_LINK_ERROR,
@@ -55,6 +56,9 @@ import {
   REMOVE_NAVIGATOR_FILE_REQUEST,
   REMOVE_NAVIGATOR_FILE_SUCCESS,
   REMOVE_NAVIGATOR_FILE_ERROR,
+  ADD_NAVIGATOR_FROM_TEAM_REQUEST,
+  ADD_NAVIGATOR_FROM_TEAM_SUCCESS,
+  ADD_NAVIGATOR_FROM_TEAM_ERROR,
 } from './constants';
 
 export const fetchNavigatorSetupRequest = createAction(
@@ -66,13 +70,15 @@ export const fetchNavigatorSetupSuccess = createAction(
   (action) =>
     (
       pendingNavigatorInvitations: PendingNavigatorInvitation[],
-      interventionNavigators: InterventionNavigator[],
+      interventionNavigators: NavigatorModalUser[],
       navigatorSetup: NavigatorSetup,
+      navigatorsInTeam: NavigatorModalUser[],
     ) =>
       action({
         navigatorSetup,
         pendingNavigatorInvitations,
         interventionNavigators,
+        navigatorsInTeam,
       }),
 );
 export const fetchNavigatorSetupError = createAction(
@@ -309,4 +315,20 @@ export const removeNavigatorFileSuccess = createAction(
 export const removeNavigatorFileError = createAction(
   REMOVE_NAVIGATOR_FILE_ERROR,
   (action) => (fileId: string, error: ApiError) => action({ fileId, error }),
+);
+
+export const addNavigatorFromTeamRequest = createAction(
+  ADD_NAVIGATOR_FROM_TEAM_REQUEST,
+  (action) => (user: SimpleUser, interventionId: string) =>
+    action({ user, interventionId }),
+);
+
+export const addNavigatorFromTeamSuccess = createAction(
+  ADD_NAVIGATOR_FROM_TEAM_SUCCESS,
+  (action) => (user: SimpleUser) => action({ user }),
+);
+
+export const addNavigatorFromTeamError = createAction(
+  ADD_NAVIGATOR_FROM_TEAM_ERROR,
+  (action) => (id: string) => action({ id }),
 );

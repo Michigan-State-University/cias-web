@@ -12,7 +12,7 @@ import { colors } from 'theme/colors';
 import { AvatarStyled } from './styled';
 
 type Props = {
-  avatar?: string;
+  avatar?: Nullable<string>;
   firstName: string;
   lastName: string;
   backgroundColor?: string;

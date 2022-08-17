@@ -2,7 +2,7 @@ import { ActionType } from 'typesafe-actions';
 
 import { ApiError } from 'models/Api';
 import {
-  InterventionNavigator,
+  NavigatorModalUser,
   NavigatorSetup,
   PendingNavigatorInvitation,
 } from 'models/NavigatorSetup';
@@ -14,7 +14,8 @@ export type NavigatorSetupAction = ActionType<typeof actions>;
 export type NavigatorSetupState = {
   navigatorSetup: Nullable<NavigatorSetup>;
   pendingNavigatorInvitations: PendingNavigatorInvitation[];
-  interventionNavigators: InterventionNavigator[];
+  interventionNavigators: NavigatorModalUser[];
+  teamNavigators: NavigatorModalUser[];
   loaders: {
     fetchingNavigatorSetup: boolean;
     updatingNoNavigatorsData: boolean;

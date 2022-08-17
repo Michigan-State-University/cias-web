@@ -182,7 +182,7 @@ const SettingsPanel = ({
     }
   };
 
-  const updateNaviagtorSetting = (isChatEnabled: boolean) => {
+  const updateNavigatorSetting = (isChatEnabled: boolean) => {
     updateIntervention({ id: interventionId, liveChatEnabled: isChatEnabled });
   };
 
@@ -242,7 +242,7 @@ const SettingsPanel = ({
         <Column width="100%" padding={35}>
           <Box display="flex" align="center" mb={48}>
             <Switch
-              onToggle={updateNaviagtorSetting}
+              onToggle={updateNavigatorSetting}
               checked={!!intervention?.liveChatEnabled}
               id="use-navigator-switch"
               disabled={!changingChatSettingsPossible}

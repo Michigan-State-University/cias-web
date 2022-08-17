@@ -18,4 +18,12 @@ export interface User {
   quickExitEnabled: boolean;
 }
 
+export interface SimpleUser {
+  avatarUrl: Nullable<string>;
+  firstName: string;
+  id: string;
+  lastName: string;
+  email: string;
+}
+
 export type UserDTO = CamelToSnakeOmitId<User>;
