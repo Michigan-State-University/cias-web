@@ -57,6 +57,7 @@ import Box from 'components/Box';
 import Loader from 'components/Loader';
 import H2 from 'components/H2';
 import H3 from 'components/H3';
+import Text from 'components/Text';
 import Icon from 'components/Icon';
 import { ConfirmationModal } from 'components/Modal';
 import Img from 'components/Img';
@@ -481,11 +482,6 @@ export function AnswerSessionPage({
     return continueButtonText();
   };
 
-  const pageHeaderText = () =>
-    isPreview
-      ? formatMessage(messages.previewHeader)
-      : formatMessage(messages.fillHeader);
-
   const renderPage = () => <>{renderQuestion()}</>;
 
   const resetTransitionalUserSessionId = () =>
@@ -546,12 +542,17 @@ export function AnswerSessionPage({
               )}
               {!interventionStarted && !nextQuestionError && (
                 <>
-                  <H2 textAlign="center" mb={50}>
-                    {pageHeaderText()}
-                  </H2>
-                  <H3 textAlign="center" color={themeColors.warning} mb={50}>
-                    {formatMessage(messages.wcagWarning)}
-                  </H3>
+                  <Box mx={32} maxWidth={600}>
+                    <H2 textAlign="center" mb={50}>
+                      {formatMessage(messages.fillHeader)}
+                    </H2>
+                    <Text textAlign="center" mb={50}>
+                      {formatMessage(messages.clickToStart)}
+                    </Text>
+                    <H3 textAlign="center" color={themeColors.warning} mb={50}>
+                      {formatMessage(messages.wcagWarning)}
+                    </H3>
+                  </Box>
                   <StyledButton
                     loading={userSessionLoading || nextQuestionLoading}
                     disabled={!previewPossible}

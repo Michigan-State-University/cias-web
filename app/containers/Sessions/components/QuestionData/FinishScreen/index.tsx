@@ -23,7 +23,7 @@ const FinishScreen = ({ sharedTo }: Props) => {
             messages[
               sharedTo !== InterventionSharedTo.ANYONE
                 ? 'dashboard'
-                : 'closeMySession'
+                : 'completeSession'
             ],
           )}
         </Button>

@@ -84,7 +84,7 @@ const FinishScreenLayout = ({ formatMessage, question }: Props) => {
     return (
       <Row mt={50} justify="center" width="100%">
         <Button onClick={reloadPage} px={20} width="auto">
-          {formatMessage(messages.closeMySession)}
+          {formatMessage(messages.completeSession)}
         </Button>
       </Row>
     );
@@ -125,7 +125,7 @@ const FinishScreenLayout = ({ formatMessage, question }: Props) => {
           {formatMessage(
             messages[
               isPreview && sharedTo === InterventionSharedTo.ANYONE
-                ? 'closeMySession'
+                ? 'completeSession'
                 : 'goToDashboard'
             ],
           )}
