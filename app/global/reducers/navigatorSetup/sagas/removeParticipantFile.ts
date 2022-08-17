@@ -3,6 +3,7 @@ import { put, call, takeLatest } from 'redux-saga/effects';
 import { toast } from 'react-toastify';
 
 import { ApiError } from 'models/Api';
+import { FileFor } from 'models/NavigatorSetup';
 
 import { formatMessage } from 'utils/intlOutsideReact';
 
@@ -20,7 +21,7 @@ import messages from '../messages';
 export function* removeParticipantFile({
   payload: { interventionId, fileId },
 }: ReturnType<typeof removeParticipantFileRequest>) {
-  const url = `/v1/live_chat/intervention/${interventionId}/navigator_setups/files/${fileId}`;
+  const url = `/v1/live_chat/intervention/${interventionId}/navigator_setups/files/${fileId}?files_for=${FileFor.PARTICIPANTS}`;
   try {
     yield call(axios.delete, url);
     yield put(removeParticipantFileSuccess(fileId));
