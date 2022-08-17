@@ -11,6 +11,7 @@ import Row from 'components/Row';
 import { AppFile } from 'models/File';
 
 import i18nMessages from '../messages';
+import { BoxWithUnderShadow } from './styled';
 
 const CHAT_DIALOG_PX = 2 * 16;
 
@@ -22,7 +23,7 @@ const ParticipantFilesPanel = ({ participantFiles }: Props) => {
   const { formatMessage } = useIntl();
 
   return (
-    <Box
+    <BoxWithUnderShadow
       position="absolute"
       bg={colors.white}
       width={`calc(100% - ${CHAT_DIALOG_PX}px)`}
@@ -49,7 +50,7 @@ const ParticipantFilesPanel = ({ participantFiles }: Props) => {
           </Row>
         ))}
       </Box>
-    </Box>
+    </BoxWithUnderShadow>
   );
 };
 
