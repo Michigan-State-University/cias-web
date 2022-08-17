@@ -1,5 +1,6 @@
 import styled from 'styled-components';
 import { Link } from 'react-router-dom';
+import Color from 'color';
 
 import { borders, boxShadows, elements, themeColors, ZIndex } from 'theme';
 import { decimalToHex } from 'utils/hexUtils';
@@ -44,6 +45,29 @@ export const SidebarItemLink = styled(Link)`
       : {}}
 
   ${margin};
+`;
+
+export const SidebarSubItemsContainer = styled.div`
+  padding: 12px 20px 12px 40px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+`;
+
+export const SidebarSubItemLink = styled(Link)`
+  text-decoration: none;
+  font-size: 15px;
+  line-height: 150%;
+  ${({ $isActive }) =>
+    $isActive
+      ? {
+          fontWeight: 700,
+          color: themeColors.text,
+        }
+      : {
+          fontWeight: 400,
+          color: Color(themeColors.text).alpha(0.7),
+        }}
 `;
 
 export const ShowSidebarButton = styled(ShowHiddenContentButton)`

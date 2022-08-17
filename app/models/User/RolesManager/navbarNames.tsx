@@ -48,6 +48,14 @@ export const navbarMessages = defineMessages({
     id: `${scope}.conversations`,
     defaultMessage: 'My Conversations',
   },
+  inbox: {
+    id: `${scope}.inbox`,
+    defaultMessage: 'Inbox',
+  },
+  archive: {
+    id: `${scope}.archive`,
+    defaultMessage: 'Archive',
+  },
 });
 
 export const navbarNames = {
@@ -74,6 +82,8 @@ export const navbarNames = {
     <FormattedMessage {...navbarMessages.guestInterventions} />
   ),
   conversations: <FormattedMessage {...navbarMessages.conversations} />,
+  inbox: <FormattedMessage {...navbarMessages.inbox} />,
+  archive: <FormattedMessage {...navbarMessages.archive} />,
 };
 
 export const NAVIGATION = {

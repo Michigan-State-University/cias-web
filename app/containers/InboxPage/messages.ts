@@ -11,6 +11,6 @@ export const scope = 'app.containers.InboxPage';
 export default defineMessages({
   pageTitle: {
     id: `${scope}.pageTitle`,
-    defaultMessage: 'Live chat',
+    defaultMessage: 'Live chat - Inbox',
   },
 });

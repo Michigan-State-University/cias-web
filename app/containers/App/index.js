@@ -67,6 +67,7 @@ import ParticipantInterventionsPage from 'containers/ParticipantInterventionsPag
 import UserInterventionInvitePage from 'containers/UserInterventionInvitePage/Loadable';
 import SuperadminConsolePage from 'containers/SuperadminConsolePage/Loadable';
 import InboxPage from 'containers/InboxPage/Loadable';
+import ArchivePage from 'containers/ArchivePage/Loadable';
 import UserInterventionPage from 'containers/UserInterventionPage/Loadable';
 import ChatWidget from 'containers/ChatWidget';
 
@@ -80,6 +81,8 @@ import {
   teamsTabId,
   participantInterventionsTabId,
   conversationsTabId,
+  inboxSubTabId,
+  archiveSubTabId,
 } from 'models/User/RolesManager/defaultNavbarTabs';
 
 import { arraysOverlap } from 'utils/arrayUtils';
@@ -156,7 +159,8 @@ export function App({ user, fetchSelfDetails }) {
         );
       if (arraysOverlap(user.roles, [Roles.ClinicAdmin]))
         return <ClinicAdminRedirectPage />;
-      if (arraysOverlap(user.roles, [Roles.Navigator])) return <InboxPage />;
+      if (arraysOverlap(user.roles, [Roles.Navigator]))
+        return <Redirect to="/live-chat" />;
 
       return NotFoundPage;
     }
@@ -219,6 +223,22 @@ export function App({ user, fetchSelfDetails }) {
           sidebarProps={{
             sidebarId: NAVIGATION.DEFAULT,
             activeTab: conversationsTabId,
+            activeSubTab: inboxSubTabId,
+          }}
+        />
+        <AppRoute
+          exact
+          path="/live-chat/archive"
+          component={ArchivePage}
+          protectedRoute
+          allowedRoles={[Roles.Navigator]}
+          navbarProps={{
+            navbarId: NAVIGATION.DEFAULT,
+          }}
+          sidebarProps={{
+            sidebarId: NAVIGATION.DEFAULT,
+            activeTab: conversationsTabId,
+            activeSubTab: archiveSubTabId,
           }}
         />
         <AppRoute

@@ -35,14 +35,20 @@ export function Sidebar({ sidebarProps }) {
     userRoles,
   } = useRoleManager();
 
-  const { activeTab, sidebarId } = sidebarProps || {};
+  const { activeTab, activeSubTab, sidebarId } = sidebarProps || {};
 
   const renderSidebar = useCallback(() => {
     if (sidebarId === NAVIGATION.DEFAULT)
-      return <DefaultSidebar activeTab={activeTab} userRoles={userRoles} />;
+      return (
+        <DefaultSidebar
+          activeTab={activeTab}
+          activeSubTab={activeSubTab}
+          userRoles={userRoles}
+        />
+      );
 
     return null;
-  }, [sidebarId, activeTab, userRoles]);
+  }, [sidebarId, activeTab, activeSubTab, userRoles]);
 
   const [showSidebar, setShowSidebar] = useState(false);
   const isTouchScreen = useIsTouchScreen();
