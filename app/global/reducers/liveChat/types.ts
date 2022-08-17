@@ -28,6 +28,7 @@ export type LiveChatState = {
   loaders: {
     conversations: boolean;
     messages: boolean;
+    liveChatSetup: boolean;
   };
   errors: {
     conversations: Nullable<ApiError>;

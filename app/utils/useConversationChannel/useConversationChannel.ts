@@ -26,6 +26,7 @@ import {
   setGuestInterlocutorId,
   setNavigatorUnavailable,
   onLiveChatSetupFetchedReceive,
+  setFetchingNavigatorSetup,
 } from 'global/reducers/liveChat';
 import { makeSelectUserId } from 'global/reducers/auth';
 
@@ -197,6 +198,7 @@ export const useConversationChannel = (interventionId?: string) => {
 
   const fetchNavigatorSetup = () => {
     if (interventionId) {
+      dispatch(setFetchingNavigatorSetup(true));
       channel?.perform({
         name: ConversationChannelActionName.ON_FETCH_LIVE_CHAT_SETUP,
         data: { interventionId },

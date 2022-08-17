@@ -90,22 +90,30 @@ export const DashedBox = styled(Box)`
   cursor: not-allowed;
 `;
 
+const activeStyles = `
+  background-color: ${Color(themeColors.primary).alpha(0.2).rgb().string()};
+
+  svg {
+    *[fill^='#'] {
+      fill: ${themeColors.primary};
+    }
+  }`;
+
 export const HoverTextButton = styled(TextButton)`
-  ${({ showHoverEffect }) =>
+  ${({ showHoverEffect, active }) =>
     showHoverEffect &&
     `
     background-color: transparent;
     padding: 4px;
     border-radius: 8px;
+
   
     &:hover {
-      background-color: ${Color(themeColors.primary).alpha(0.2).rgb().string()};
-      
-        svg {
-          *[fill^='#'] {
-              fill: ${themeColors.primary};
-          }
-        }
-                
-    }`}
+      ${activeStyles}        
+    }
+  
+    ${active ? activeStyles : ''}
+  `}
+
+  ${({ styles }) => styles};
 `;

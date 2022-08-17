@@ -130,3 +130,9 @@ export const makeSelectNavigatorUnavailable = () =>
 
 export const makeSelectLiveChatSetup = () =>
   createSelector(selectLiveChatState, ({ liveChatSetup }) => liveChatSetup);
+
+export const makeSelectParticipantFiles = () =>
+  createSelector(
+    selectLiveChatState,
+    ({ liveChatSetup }) => liveChatSetup?.participantFiles,
+  );

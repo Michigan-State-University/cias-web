@@ -20,6 +20,10 @@ export default defineMessages({
     id: `${scope}.minimizePanelTitle`,
     defaultMessage: 'Minimize chat panel',
   },
+  showParticipantFiles: {
+    id: `${scope}.showParticipantFiles`,
+    defaultMessage: 'Show or hide supporting materials',
+  },
   startConversation: {
     id: `${scope}.startConversation`,
     defaultMessage:

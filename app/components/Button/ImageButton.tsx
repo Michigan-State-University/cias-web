@@ -14,6 +14,8 @@ type Props = {
   disabled: boolean;
   iconProps: object;
   showHoverEffect?: boolean;
+  isActive?: boolean;
+  styles?: object;
 } & Record<string, unknown>;
 
 const ImageButton = React.forwardRef<HTMLElement, Props>(
@@ -28,6 +30,8 @@ const ImageButton = React.forwardRef<HTMLElement, Props>(
       loading,
       iconProps,
       showHoverEffect = false,
+      isActive = false,
+      styles = {},
       ...props
     }: Props,
     ref,
@@ -51,6 +55,8 @@ const ImageButton = React.forwardRef<HTMLElement, Props>(
         ...props,
       }}
       showHoverEffect={showHoverEffect}
+      active={isActive}
+      styles={styles}
     >
       {/* @ts-ignore */}
       <Icon src={src} fill={fill} stroke={stroke} {...iconProps}></Icon>

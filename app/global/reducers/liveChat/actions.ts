@@ -27,6 +27,7 @@ import {
   ON_CONVERSATION_ARCHIVED_RECEIVE,
   SET_NAVIGATOR_UNAVAILABLE,
   ON_LIVE_CHAT_SETUP_FETCHED_RECEIVE,
+  SET_FETCHING_NAVIGATOR_SETUP,
 } from './constants';
 
 export const openConversation = createAction(
@@ -135,4 +136,10 @@ export const onConversationArchivedReceive = createAction(
 export const onLiveChatSetupFetchedReceive = createAction(
   ON_LIVE_CHAT_SETUP_FETCHED_RECEIVE,
   (action) => (liveChatSetup: LiveChatSetup) => action({ liveChatSetup }),
+);
+
+export const setFetchingNavigatorSetup = createAction(
+  SET_FETCHING_NAVIGATOR_SETUP,
+  (action) => (fetchingNavigatorSetup: boolean) =>
+    action({ fetchingNavigatorSetup }),
 );

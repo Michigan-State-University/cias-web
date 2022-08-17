@@ -7,6 +7,8 @@ import {
   closeConversation,
   makeSelectNavigatorUnavailable,
   makeSelectOpenedConversationId,
+  makeSelectLiveChatLoader,
+  makeSelectLiveChatSetup,
 } from 'global/reducers/liveChat';
 
 import ChatIcon from './components/ChatIcon';
@@ -32,9 +34,20 @@ export const LiveChatParticipantPanel = ({ interventionId }: Props) => {
   const minimizeDialog = () => setDialogMinimized(true);
 
   const conversationChannel = useConversationChannel(interventionId);
-
   const navigatorUnavailable = useSelector(makeSelectNavigatorUnavailable());
   const conversationId = useSelector(makeSelectOpenedConversationId());
+  const liveChatLoading = useSelector(
+    makeSelectLiveChatLoader('liveChatSetup'),
+  );
+  const liveChatSetup = useSelector(makeSelectLiveChatSetup());
+
+  const { fetchNavigatorSetup } = conversationChannel;
+
+  useEffect(() => {
+    if (!liveChatSetup && !dialogMinimized && !liveChatLoading) {
+      fetchNavigatorSetup();
+    }
+  }, [dialogMinimized]);
 
   useEffect(
     () => () => {

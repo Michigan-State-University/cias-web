@@ -5,17 +5,29 @@
  */
 
 import React from 'react';
-import PropTypes from 'prop-types';
 import { useIntl } from 'react-intl';
 
-import cross from 'assets/svg/cross.svg';
-
 import Icon from 'components/Icon';
+
+import cross from 'assets/svg/cross.svg';
 
 import { CrossLink, CrossButton } from './styled';
 import messages from './messages';
 
-const ActionIcon = ({ to, onClick, iconSrc, ariaText, ...restProps }) => {
+type Props = {
+  to?: string;
+  onClick?: () => void;
+  iconSrc: SVGElement;
+  ariaText: string;
+} & Record<string, unknown>;
+
+const ActionIcon = ({
+  to,
+  onClick,
+  iconSrc = cross,
+  ariaText,
+  ...restProps
+}: Props) => {
   const { formatMessage } = useIntl();
 
   const icon = <Icon src={iconSrc} alt="cross" />;
@@ -43,17 +55,6 @@ const ActionIcon = ({ to, onClick, iconSrc, ariaText, ...restProps }) => {
       </CrossButton>
     );
   return null;
-};
-
-ActionIcon.propTypes = {
-  to: PropTypes.string,
-  onClick: PropTypes.func,
-  iconSrc: PropTypes.any,
-  ariaText: PropTypes.string,
-};
-
-ActionIcon.defaultProps = {
-  iconSrc: cross,
 };
 
 export default ActionIcon;
