@@ -67,6 +67,18 @@ export default defineMessages({
       id: `${scope}.${Roles.eInterventionAdmin}`,
       defaultMessage: 'E-Intervention Admin',
     },
+    [Roles.clinicAdmin]: {
+      id: `${scope}.${Roles.clinicAdmin}`,
+      defaultMessage: 'Clinic Admin',
+    },
+    [Roles.healthSystemAdmin]: {
+      id: `${scope}.${Roles.healthSystemAdmin}`,
+      defaultMessage: 'Health System Admin',
+    },
+    [Roles.organizationAdmin]: {
+      id: `${scope}.${Roles.organizationAdmin}`,
+      defaultMessage: 'Organization Admin',
+    },
   },
   variables: {
     variableNamePlaceholder: {

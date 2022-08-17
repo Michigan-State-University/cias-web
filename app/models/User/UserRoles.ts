@@ -40,5 +40,5 @@ export const RolesColors = {
   [Roles.eInterventionAdmin]: colors.jungleGreen,
   [Roles.organizationAdmin]: colors.azure,
   [Roles.healthSystemAdmin]: colors.orangePeel,
-  [Roles.clinicAdmin]: colors.pink,
+  [Roles.clinicAdmin]: colors.electricViolet,
 };

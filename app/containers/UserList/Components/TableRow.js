@@ -2,6 +2,7 @@ import React, { useContext } from 'react';
 import PropTypes from 'prop-types';
 import trim from 'lodash/trim';
 
+import Box from 'components/Box';
 import Row from 'components/Row';
 import StyledTextButton from 'components/Button/StyledTextButton';
 import Text from 'components/Text';
@@ -71,7 +72,11 @@ const TableRow = ({
       <TD pl={20}>{nameColumn}</TD>
       <TD pl={20}>{email}</TD>
       <TD pl={20}>
-        <UserRoleTile role={roles[0]} disabled={!active} />
+        {roles.map((role, index) => (
+          <Box mb={roles.length > 1 ? 5 : 0} key={`role-${index}`}>
+            <UserRoleTile role={role} disabled={!active} />
+          </Box>
+        ))}
       </TD>
       <TD pl={20}>
         <Row width="100%" justify="start" pr={20}>
