@@ -24,7 +24,7 @@ const ParticipantUsefulLinks = ({ participantLinks }: Props) => {
       <Text color={colors.bluewood} textOpacity={0.7} mt={24} mb={8}>
         {formatMessage(messages.usefulLinks)}
       </Text>
-      <Box maxHeight="69px" overflow="scroll" width="100%" flexShrink={0}>
+      <Box width="100%" flexShrink={0}>
         {participantLinks.map(({ displayName, id, url }) => (
           <LinkPrimaryUnderline key={id} target="_blank" href={url}>
             <Text fontSize="14px" mb={4} color={themeColors.primary}>
