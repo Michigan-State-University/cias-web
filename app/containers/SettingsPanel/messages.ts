@@ -251,7 +251,7 @@ export default defineMessages({
   },
   noTeamNavigators: {
     id: `${scope}.noTeamNavigators`,
-    defaultMessage: `There are no navigators in your team.`,
+    defaultMessage: `There are no navigators in your team that are not navigators in this intervention already.`,
   },
   participantLinks: {
     id: `${scope}.participantLinks`,
