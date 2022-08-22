@@ -212,7 +212,6 @@
     "circular-dependency-plugin": "^5.2.2",
     "compare-versions": "^3.6.0",
     "compression-webpack-plugin": "^9.0.0",
-    "copy-webpack-plugin": "^11.0.0",
     "coveralls": "3.0.3",
     "css-loader": "^6.4.0",
     "cypress": "^8.5.0",
