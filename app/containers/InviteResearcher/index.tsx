@@ -143,7 +143,9 @@ const InviteResearcher = ({
 
         {availableRoles.length > 1 && (
           <>
-            <H3 mb={8}>{formatMessage(messages.userRole)}</H3>
+            <Text fontSize={14} fontWeight="bold" mb={8}>
+              {formatMessage(messages.userRole)}
+            </Text>
             <Comment mb={24}>{formatMessage(messages.userRoleComment)}</Comment>
             <Box display="flex" gap="24px">
               {availableRoles.map((role) => (
