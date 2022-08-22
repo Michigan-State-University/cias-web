@@ -21,9 +21,13 @@ import {
   makeSelectTeamNavigators,
   addNavigatorFromTeamRequest,
 } from 'global/reducers/navigatorSetup';
-import { themeColors, colors } from 'theme';
+import { makeSelectUser } from 'global/reducers/auth';
+
 import { SimpleUser } from 'models/User';
 import { NoNavigatorsAvailableData } from 'models/NavigatorSetup';
+import { Roles } from 'models/User/RolesManager';
+
+import { themeColors, colors } from 'theme';
 
 import Tabs from 'components/Tabs';
 import ErrorAlert from 'components/ErrorAlert';
@@ -68,6 +72,8 @@ const NavigatorSettingsModal = ({ interventionId }: Props) => {
     makeSelectNavigatorSetupLoader('navigatorEmailInvitation'),
   );
   const error = useSelector(makeSelectNavigatorSetupError());
+
+  const { teamId, roles } = useSelector(makeSelectUser());
 
   useEffect(() => {
     dispatch(fetchNavigatorSetupRequest(interventionId));
@@ -138,10 +144,12 @@ const NavigatorSettingsModal = ({ interventionId }: Props) => {
                 removeNavigatorEmailInvitation={removeNavigatorEmailInvitation}
                 invitationLoading={navigatorEmailInvitationLoading}
               />
-              <TeamNavigatorsPanel
-                teamNavigators={teamNavigators}
-                addNavigatorFromTeam={addNavigatorFromTeam}
-              />
+              {(teamId ?? roles.includes(Roles.Admin)) && (
+                <TeamNavigatorsPanel
+                  teamNavigators={teamNavigators}
+                  addNavigatorFromTeam={addNavigatorFromTeam}
+                />
+              )}
             </>
           }
           rightContent={
