@@ -15,7 +15,8 @@ export const NavigatorPanelGridRow = styled(GRow)`
   flex: 1 !important;
   min-height: 0;
   width: 100%;
-  max-width: ${CHAT_WIDTH}px;
+  ${({ conversationsUnavailable }) =>
+    conversationsUnavailable ? `${CHAT_WIDTH}px` : ``}
 `;
 
 export const NavigatorPanelGridColumn = styled(GCol)`

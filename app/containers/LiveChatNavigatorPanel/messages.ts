@@ -105,4 +105,8 @@ export default defineMessages({
     defaultMessage:
       'Please, <bold>select a conversation</bold> to see messages',
   },
+  helpingMaterials: {
+    id: `${scope}.helpingMaterials`,
+    defaultMessage: 'Helping materials',
+  },
 });
