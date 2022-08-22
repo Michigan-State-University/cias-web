@@ -313,4 +313,12 @@ export default defineMessages({
     id: `${scope}.deleteFile`,
     defaultMessage: 'Delete file',
   },
+  scriptsForNavigator: {
+    id: `${scope}.scriptsForNavigator`,
+    defaultMessage: 'Example scripts for navigator',
+  },
+  downloadTemplate: {
+    id: `${scope}.downloadTemplate`,
+    defaultMessage: 'Download template',
+  },
 });
