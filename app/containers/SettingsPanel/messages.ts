@@ -161,7 +161,7 @@ export default defineMessages({
   },
   helpingMaterials: {
     id: `${scope}.helpingMaterials`,
-    defaultMessage: 'Help materials',
+    defaultMessage: 'Help Resources',
   },
   notifyNavigator: {
     id: `${scope}.notifyNavigator`,

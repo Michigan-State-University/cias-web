@@ -29,11 +29,15 @@ import { MessagesSectionContainer, SectionBody } from '../components/styled';
 import { NO_CONVERSATION_OPENED_INFO_MAX_WIDTH } from '../constants';
 
 export type Props = {
-  onSendMessage: (data: SendMessageData) => void;
-  onReadMessage: (data: ReadMessageData) => void;
+  isArchive: boolean;
+  conversationsLoading: boolean;
+  onSendMessage?: (data: SendMessageData) => void;
+  onReadMessage?: (data: ReadMessageData) => void;
 };
 
 export const MessagesSectionBody = ({
+  isArchive,
+  conversationsLoading,
   onSendMessage,
   onReadMessage,
 }: Props) => {
@@ -41,13 +45,10 @@ export const MessagesSectionBody = ({
   const dispatch = useDispatch();
 
   const conversation = useSelector(makeSelectOpenedConversation());
-  const conversationsLoading = useSelector(
-    makeSelectLiveChatLoader('conversations'),
-  );
   const archivingConversation = useSelector(makeSelectArchivingConversation());
   const messages = useSelector(makeSelectOpenedConversationMessages());
   const messagesLoading = useSelector(makeSelectLiveChatLoader('messages'));
-  const error = useSelector(makeSelectLiveChatError('messages'));
+  const messagesError = useSelector(makeSelectLiveChatError('messages'));
   const currentInterlocutorId = useSelector(makeSelectCurrentInterlocutorId());
 
   useEffect(() => {
@@ -62,7 +63,13 @@ export const MessagesSectionBody = ({
     setMessage('');
   }, [conversation?.id]);
 
+  const handleRead = (data: ReadMessageData) => {
+    if (!onReadMessage) return;
+    onReadMessage(data);
+  };
+
   const handleSend = () => {
+    if (!onSendMessage) return;
     const trimmedMessage = message.trim();
     if (conversation && currentInterlocutorId && trimmedMessage) {
       onSendMessage({
@@ -83,24 +90,30 @@ export const MessagesSectionBody = ({
           <Spinner color={themeColors.secondary} />
         </Column>
       )}
-      {error && (
-        <ErrorAlert fullPage={false} errorText={i18nMessages.messagesError} />
+      {messagesError && (
+        <ErrorAlert fullPage={false} errorText={messagesError.message} />
       )}
-      {!loading && !error && !conversation && (
+      {!loading && !messagesError && !conversation && (
         <IconInfo
           maxWidth={NO_CONVERSATION_OPENED_INFO_MAX_WIDTH}
           iconSrc={NoConversationOpenedIcon}
           iconAlt={formatMessage(i18nMessages.noConversationOpenedIconAlt)}
-          message={formatMessage(i18nMessages.noConversationOpened)}
+          message={formatMessage(
+            i18nMessages[
+              isArchive
+                ? 'noArchivedConversationOpened'
+                : 'noActiveConversationOpened'
+            ],
+          )}
         />
       )}
-      {!loading && !error && conversation && (
+      {!loading && !messagesError && conversation && (
         <MessagesSectionContainer>
           <ChatMessageList
             currentInterlocutorId={currentInterlocutorId}
             messages={messages ?? []}
             interlocutors={conversation.liveChatInterlocutors}
-            onReadMessage={onReadMessage}
+            onReadMessage={handleRead}
           />
           <ChatMessageInput
             value={message}

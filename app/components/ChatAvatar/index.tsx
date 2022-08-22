@@ -10,15 +10,20 @@ export type Props = {
   interlocutor: Nullable<Interlocutor>;
 };
 
-const ChatAvatar = ({ interlocutor }: Props) => (
-  <UserAvatar
-    height={36}
-    width={36}
-    backgroundColor={interlocutor?.userId ? colors.jungleGreen : colors.manatee}
-    avatar={interlocutor?.avatarUrl || ''}
-    firstName={interlocutor?.firstName || ''}
-    lastName={interlocutor?.lastName || ''}
-  />
-);
+const ChatAvatar = ({ interlocutor }: Props) => {
+  const { avatarUrl, firstName, lastName } = interlocutor ?? {};
+  return (
+    <UserAvatar
+      height={36}
+      width={36}
+      backgroundColor={
+        firstName && lastName ? colors.jungleGreen : colors.manatee
+      }
+      avatar={avatarUrl ?? ''}
+      firstName={firstName ?? ''}
+      lastName={lastName ?? ''}
+    />
+  );
+};
 
 export default ChatAvatar;

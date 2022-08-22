@@ -13,11 +13,11 @@ import * as actions from './actions';
 export type LiveChatAction = ActionType<typeof actions>;
 
 export type LiveChatState = {
-  interventionConversations: Record<
+  activeInterventionConversations: Record<
     InterventionConversation['interventionId'],
     InterventionConversation
   >;
-  conversations: Record<Conversation['id'], Conversation>;
+  activeConversations: Record<Conversation['id'], Conversation>;
   messages: Record<Conversation['id'], Message[]>;
   openedConversationId: Nullable<string>;
   guestInterlocutorId: Nullable<string>;
@@ -26,12 +26,12 @@ export type LiveChatState = {
   navigatorUnavailable: boolean;
   liveChatSetup: Nullable<LiveChatSetup>;
   loaders: {
-    conversations: boolean;
+    activeConversations: boolean;
     messages: boolean;
     liveChatSetup: boolean;
   };
   errors: {
-    conversations: Nullable<ApiError>;
+    activeConversations: Nullable<ApiError>;
     messages: Nullable<ApiError>;
   };
 };

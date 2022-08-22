@@ -40,21 +40,27 @@ const ChatDialog = ({ header, children, onMinimize }: Props) => {
   const participantFiles = useSelector(makeSelectParticipantFiles());
   const isSetupLoading = useSelector(makeSelectLiveChatLoader('liveChatSetup'));
 
+  const participantFilesButtonTitle = formatMessage(
+    i18nMessages[
+      participantFilesVisible ? 'hideParticipantFiles' : 'showParticipantFiles'
+    ],
+  );
+
   return (
     <ParticipantChatDialogContainer>
-      <Row align="center" justify="between" gap={12}>
+      <Row align="center" justify="between" gap={12} pb={16}>
         {header}
         <Box display="flex" align="center">
           {!isEmpty(participantFiles) && (
             <Tooltip
               id="show-or-hide-participant-files-tooltip"
-              text={formatMessage(i18nMessages.showParticipantFiles)}
+              text={participantFilesButtonTitle}
             >
               <ImageButton
                 showHoverEffect
                 src={fileIcon}
                 onClick={toggleParticipantFilesVisible}
-                title={formatMessage(i18nMessages.showParticipantFiles)}
+                title={participantFilesButtonTitle}
                 mr={8}
                 isActive={participantFilesVisible}
                 styles={{

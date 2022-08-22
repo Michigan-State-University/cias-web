@@ -11,9 +11,9 @@ import {
   openConversation,
   onMessageReadReceive,
   closeConversation,
-  fetchConversationsRequest,
-  fetchConversationsSuccess,
-  fetchConversationsError,
+  fetchActiveConversationsRequest,
+  fetchActiveConversationsSuccess,
+  fetchActiveConversationsError,
   onConversationCreatedReceive,
   markMessageReadLocally,
   setCreatingConversation,
@@ -29,8 +29,8 @@ import { LiveChatAction, LiveChatState } from './types';
 export const liveChatReducerKey = 'liveChat';
 
 export const initialState: LiveChatState = {
-  interventionConversations: {},
-  conversations: {},
+  activeInterventionConversations: {},
+  activeConversations: {},
   messages: {},
   openedConversationId: null,
   guestInterlocutorId: null,
@@ -39,12 +39,12 @@ export const initialState: LiveChatState = {
   navigatorUnavailable: false,
   liveChatSetup: null,
   loaders: {
-    conversations: false,
+    activeConversations: false,
     messages: false,
     liveChatSetup: false,
   },
   errors: {
-    conversations: null,
+    activeConversations: null,
     messages: null,
   },
 };
@@ -65,22 +65,22 @@ export const liveChatReducer = (
         draft.openedConversationId = null;
         break;
       }
-      case getType(fetchConversationsRequest): {
-        draft.loaders.conversations = true;
-        draft.errors.conversations = null;
+      case getType(fetchActiveConversationsRequest): {
+        draft.loaders.activeConversations = true;
+        draft.errors.activeConversations = null;
         break;
       }
-      case getType(fetchConversationsSuccess): {
+      case getType(fetchActiveConversationsSuccess): {
         const { interventionConversations, conversations } = payload;
-        draft.interventionConversations = interventionConversations;
-        draft.conversations = conversations;
-        draft.loaders.conversations = false;
+        draft.activeInterventionConversations = interventionConversations;
+        draft.activeConversations = conversations;
+        draft.loaders.activeConversations = false;
         break;
       }
-      case getType(fetchConversationsError): {
+      case getType(fetchActiveConversationsError): {
         const { error } = payload;
-        draft.loaders.conversations = false;
-        draft.errors.conversations = error;
+        draft.loaders.activeConversations = false;
+        draft.errors.activeConversations = error;
         break;
       }
       case getType(fetchConversationMessagesRequest): {
@@ -105,7 +105,7 @@ export const liveChatReducer = (
         const { conversationId } = message;
         draft.messages[conversationId]?.push(message);
 
-        const conversation = draft.conversations[conversationId];
+        const conversation = draft.activeConversations[conversationId];
         if (conversation) {
           conversation.lastMessage = message;
         }
@@ -113,7 +113,7 @@ export const liveChatReducer = (
       }
       case getType(markMessageReadLocally): {
         const { conversationId, messageId } = payload;
-        const { lastMessage } = draft.conversations[conversationId];
+        const { lastMessage } = draft.activeConversations[conversationId];
 
         if (lastMessage?.id === messageId) {
           lastMessage.isRead = true;
@@ -137,7 +137,7 @@ export const liveChatReducer = (
           });
         }
 
-        const { lastMessage } = draft.conversations[conversationId] ?? {};
+        const { lastMessage } = draft.activeConversations[conversationId] ?? {};
         if (lastMessage && lastMessage.id === messageId) {
           lastMessage.isRead = true;
         }
@@ -152,15 +152,15 @@ export const liveChatReducer = (
           newConversationData: { conversation, interventionConversation },
         } = payload;
         const { interventionId } = interventionConversation;
-        if (state.interventionConversations[interventionId]) {
-          draft.interventionConversations[interventionId].conversationIds.push(
-            conversation.id,
-          );
+        if (state.activeInterventionConversations[interventionId]) {
+          draft.activeInterventionConversations[
+            interventionId
+          ].conversationIds.push(conversation.id);
         } else {
-          draft.interventionConversations[interventionId] =
+          draft.activeInterventionConversations[interventionId] =
             interventionConversation;
         }
-        draft.conversations[conversation.id] = conversation;
+        draft.activeConversations[conversation.id] = conversation;
         draft.messages[conversation.id] = [conversation.lastMessage];
         break;
       }
@@ -178,7 +178,7 @@ export const liveChatReducer = (
       }
       case getType(onConversationArchivedReceive): {
         const { conversationId } = payload;
-        const conversation = draft.conversations[conversationId];
+        const conversation = draft.activeConversations[conversationId];
         if (conversation) {
           conversation.archived = true;
         }

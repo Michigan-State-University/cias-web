@@ -1,4 +1,4 @@
-import React, { memo } from 'react';
+import React, { memo, useMemo } from 'react';
 
 import { Conversation, InterventionConversation } from 'models/LiveChat';
 
@@ -10,11 +10,11 @@ import { ConversationListItem } from './ConversationListItem';
 import { MESSAGE_TIMESTAMP_REFRESH_PERIOD } from '../constants';
 
 import InterventionConversationCollapse from './InterventionConversationsCollapse';
+import { countUnreadConversations } from '../utils';
 
 export type Props = {
-  interventionConversations: InterventionConversation[];
+  interventionConversationsValues: InterventionConversation[];
   conversations: Record<string, Conversation>;
-  unreadConversationsCounts: Record<string, number>;
   openedConversationId: Nullable<string>;
   currentUserId: string;
   openConversation: (conversationId: string) => void;
@@ -23,12 +23,21 @@ export type Props = {
 const ConversationList = ({
   conversations,
   openedConversationId,
-  unreadConversationsCounts,
   currentUserId,
   openConversation,
-  interventionConversations,
+  interventionConversationsValues,
 }: Props) => {
   useRefreshComponent(MESSAGE_TIMESTAMP_REFRESH_PERIOD);
+
+  const unreadConversationsCounts = useMemo(
+    () =>
+      countUnreadConversations(
+        interventionConversationsValues,
+        conversations,
+        currentUserId,
+      ),
+    [interventionConversationsValues, conversations, currentUserId],
+  );
 
   const renderConversationListItem = (conversationId: string) => (
     <ConversationListItem
@@ -42,7 +51,7 @@ const ConversationList = ({
 
   return (
     <Column overflow="auto" maxHeight="100%" pr={16}>
-      {interventionConversations.map(
+      {interventionConversationsValues.map(
         ({ interventionId, conversationIds, interventionName }, index) => (
           <InterventionConversationCollapse
             key={interventionId}

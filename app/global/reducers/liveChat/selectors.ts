@@ -1,8 +1,6 @@
 import { createSelector } from 'reselect';
 import isNil from 'lodash/isNil';
 
-import { InterventionConversation } from 'models/LiveChat';
-
 import { RootState } from 'global/reducers';
 import { makeSelectUserId } from 'global/reducers/auth';
 
@@ -19,21 +17,16 @@ export const makeSelectLiveChatLoader = (
 export const makeSelectLiveChatError = (name: keyof LiveChatState['errors']) =>
   createSelector(selectLiveChatState, ({ errors }) => errors[name]);
 
-export const makeSelectInterventionConversationsValues = () =>
-  createSelector(selectLiveChatState, ({ interventionConversations }) =>
-    Object.values(interventionConversations),
+export const makeSelectActiveInterventionConversations = () =>
+  createSelector(
+    selectLiveChatState,
+    ({ activeInterventionConversations }) => activeInterventionConversations,
   );
 
-export const makeSelectConversations = () =>
-  createSelector(selectLiveChatState, ({ conversations }) => conversations);
-
-export const makeSelectNoConversationsAvailable = () =>
+export const makeSelectActiveConversations = () =>
   createSelector(
-    makeSelectLiveChatLoader('conversations'),
-    makeSelectLiveChatError('conversations'),
-    makeSelectInterventionConversationsValues(),
-    (loading, error, interventionConversationsValues) =>
-      !loading && !error && !interventionConversationsValues.length,
+    selectLiveChatState,
+    ({ activeConversations }) => activeConversations,
   );
 
 export const makeSelectOpenedConversationId = () =>
@@ -45,9 +38,9 @@ export const makeSelectOpenedConversationId = () =>
 export const makeSelectOpenedConversation = () =>
   createSelector(
     selectLiveChatState,
-    ({ conversations, openedConversationId }) => {
+    ({ activeConversations, openedConversationId }) => {
       if (isNil(openedConversationId)) return null;
-      return conversations[openedConversationId];
+      return activeConversations[openedConversationId];
     },
   );
 
@@ -81,33 +74,6 @@ export const makeSelectCurrentInterlocutorId = () =>
 
       return guestInterlocutorId;
     },
-  );
-
-export const makeSelectUnreadConversationsCounts = () =>
-  createSelector(
-    makeSelectInterventionConversationsValues(),
-    makeSelectConversations(),
-    makeSelectUserId(),
-    (interventionConversationsValues, conversations, currentUserId) =>
-      interventionConversationsValues.reduce(
-        (unreadConversationsCounts, { interventionId, conversationIds }) => {
-          const count = conversationIds.filter((conversationId) => {
-            const { lastMessage, liveChatInterlocutors } =
-              conversations[conversationId];
-            if (!lastMessage || lastMessage.isRead) return false;
-
-            return (
-              liveChatInterlocutors[lastMessage.interlocutorId]?.userId !==
-              currentUserId
-            );
-          }).length;
-
-          // eslint-disable-next-line no-param-reassign
-          unreadConversationsCounts[interventionId] = count;
-          return unreadConversationsCounts;
-        },
-        {} as Record<InterventionConversation['interventionId'], number>,
-      ),
   );
 
 export const makeSelectCreatingConversation = () =>

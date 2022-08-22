@@ -61,7 +61,7 @@ const ChatMessageList = ({
         messageId: id,
       });
     }
-  }, [newestOtherUserMessageIndex]);
+  }, [newestOtherUserMessageIndex, onReadMessage]);
 
   useEffect(() => {
     readNewestOtherUserMessage();

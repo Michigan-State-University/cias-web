@@ -22,7 +22,11 @@ export default defineMessages({
   },
   showParticipantFiles: {
     id: `${scope}.showParticipantFiles`,
-    defaultMessage: 'Show or hide supporting materials',
+    defaultMessage: 'Show Help Resources',
+  },
+  hideParticipantFiles: {
+    id: `${scope}.hideParticipantFiles`,
+    defaultMessage: 'Hide Help Resources',
   },
   startConversation: {
     id: `${scope}.startConversation`,
@@ -56,7 +60,7 @@ export default defineMessages({
   },
   downloadInstructions: {
     id: `${scope}.downloadInstructions`,
-    defaultMessage: 'Download instructions:',
+    defaultMessage: 'Download Resources:',
   },
   navigatorUnavailable: {
     id: `${scope}.navigatorUnavailable`,

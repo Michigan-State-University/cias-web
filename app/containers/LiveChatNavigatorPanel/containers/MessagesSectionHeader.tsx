@@ -21,7 +21,7 @@ import i18nMessages from '../messages';
 import SectionHeader from '../components/SectionHeader';
 
 export type Props = {
-  onArchiveConversation: (data: ArchiveConversationData) => void;
+  onArchiveConversation?: (data: ArchiveConversationData) => void;
 };
 
 const MessageSectionHeader = ({ onArchiveConversation }: Props) => {
@@ -31,7 +31,7 @@ const MessageSectionHeader = ({ onArchiveConversation }: Props) => {
   const archivingConversation = useSelector(makeSelectArchivingConversation());
 
   const archiveConversation = () => {
-    if (conversation) {
+    if (onArchiveConversation && conversation) {
       onArchiveConversation({
         conversationId: conversation.id,
       });
@@ -61,26 +61,27 @@ const MessageSectionHeader = ({ onArchiveConversation }: Props) => {
         {conversation && (
           <Row align="center" gap={24}>
             {/* place download button here */}
-            <TextButton
-              loading={archivingConversation}
-              disabled={conversation?.archived}
-              onClick={openArchiveConfirmationModal}
-              buttonProps={{
-                display: 'flex',
-                align: 'center',
-                gap: 8,
-                fontWeight: 'medium',
-              }}
-              spinnerProps={{
-                size: 22,
-              }}
-            >
-              <Icon
-                src={ArchiveIcon}
-                alt={formatMessage(i18nMessages.archiveIconAlt)}
-              />
-              <Text>{formatMessage(i18nMessages.archive)}</Text>
-            </TextButton>
+            {!conversation.archived && onArchiveConversation && (
+              <TextButton
+                loading={archivingConversation}
+                onClick={openArchiveConfirmationModal}
+                buttonProps={{
+                  display: 'flex',
+                  align: 'center',
+                  gap: 8,
+                  fontWeight: 'medium',
+                }}
+                spinnerProps={{
+                  size: 22,
+                }}
+              >
+                <Icon
+                  src={ArchiveIcon}
+                  alt={formatMessage(i18nMessages.archiveIconAlt)}
+                />
+                <Text>{formatMessage(i18nMessages.archive)}</Text>
+              </TextButton>
+            )}
           </Row>
         )}
       </SectionHeader>

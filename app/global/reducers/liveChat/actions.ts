@@ -13,9 +13,9 @@ import {
   OPEN_CONVERSATION,
   ON_MESSAGE_READ_RECEIVE,
   CLOSE_CONVERSATION,
-  FETCH_CONVERSATIONS_REQUEST,
-  FETCH_CONVERSATIONS_SUCCESS,
-  FETCH_CONVERSATIONS_ERROR,
+  FETCH_ACTIVE_CONVERSATIONS_REQUEST,
+  FETCH_ACTIVE_CONVERSATIONS_SUCCESS,
+  FETCH_ACTIVE_CONVERSATIONS_ERROR,
   FETCH_CONVERSATION_MESSAGES_ERROR,
   FETCH_CONVERSATION_MESSAGES_REQUEST,
   FETCH_CONVERSATION_MESSAGES_SUCCESS,
@@ -40,13 +40,13 @@ export const closeConversation = createAction(
   (action) => () => action({}),
 );
 
-export const fetchConversationsRequest = createAction(
-  FETCH_CONVERSATIONS_REQUEST,
+export const fetchActiveConversationsRequest = createAction(
+  FETCH_ACTIVE_CONVERSATIONS_REQUEST,
   (action) => () => action({}),
 );
 
-export const fetchConversationsSuccess = createAction(
-  FETCH_CONVERSATIONS_SUCCESS,
+export const fetchActiveConversationsSuccess = createAction(
+  FETCH_ACTIVE_CONVERSATIONS_SUCCESS,
   (action) =>
     (
       interventionConversations: Record<string, InterventionConversation>,
@@ -55,8 +55,8 @@ export const fetchConversationsSuccess = createAction(
       action({ interventionConversations, conversations }),
 );
 
-export const fetchConversationsError = createAction(
-  FETCH_CONVERSATIONS_ERROR,
+export const fetchActiveConversationsError = createAction(
+  FETCH_ACTIVE_CONVERSATIONS_ERROR,
   (action) => (error: ApiError) => action({ error }),
 );
 

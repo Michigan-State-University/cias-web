@@ -4,25 +4,34 @@ import { put, call, takeLatest } from 'redux-saga/effects';
 import { ApiData, ApiError } from 'models/Api';
 import { DenormalizedConversation } from 'models/LiveChat';
 
-import { FETCH_CONVERSATIONS_REQUEST } from '../constants';
-import { fetchConversationsSuccess, fetchConversationsError } from '../actions';
+import { FETCH_ACTIVE_CONVERSATIONS_REQUEST } from '../constants';
+import {
+  fetchActiveConversationsSuccess,
+  fetchActiveConversationsError,
+} from '../actions';
 import { mapFetchConversationsResponse } from '../utils';
 
-function* fetchConversations() {
+function* fetchActiveConversations() {
   const url = `/v1/live_chat/conversations`;
+  const params = {
+    archived: false,
+  };
   try {
     const { data }: AxiosResponse<ApiData<DenormalizedConversation>> =
-      yield call(axios.get, url);
+      yield call(axios.get, url, { params });
     const { conversations, interventionConversations } =
       mapFetchConversationsResponse(data);
     yield put(
-      fetchConversationsSuccess(interventionConversations, conversations),
+      fetchActiveConversationsSuccess(interventionConversations, conversations),
     );
   } catch (error) {
-    yield put(fetchConversationsError(error as ApiError));
+    yield put(fetchActiveConversationsError(error as ApiError));
   }
 }
 
-export function* fetchConversationsSaga() {
-  yield takeLatest(FETCH_CONVERSATIONS_REQUEST, fetchConversations);
+export function* fetchActiveConversationsSaga() {
+  yield takeLatest(
+    FETCH_ACTIVE_CONVERSATIONS_REQUEST,
+    fetchActiveConversations,
+  );
 }

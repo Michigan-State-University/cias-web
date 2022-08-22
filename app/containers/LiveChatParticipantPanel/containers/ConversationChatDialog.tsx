@@ -82,7 +82,7 @@ const ConversationChatDialog = ({
       onMinimize={onMinimizeDialog}
     >
       <Row>
-        <Divider mt={16} />
+        <Divider />
       </Row>
       {conversation && (
         <ChatMessageList

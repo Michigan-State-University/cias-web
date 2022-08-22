@@ -13,10 +13,6 @@ export default defineMessages({
     id: `${scope}.message`,
     defaultMessage: 'Message',
   },
-  inbox: {
-    id: `${scope}.inbox`,
-    defaultMessage: 'Inbox',
-  },
   inputPlaceholder: {
     id: `${scope}.inputPlaceholder`,
     defaultMessage: 'Type your message here...',
@@ -24,14 +20,6 @@ export default defineMessages({
   inputSendIconTitle: {
     id: `${scope}.inputSendIconTitle`,
     defaultMessage: 'Send message',
-  },
-  messagesError: {
-    id: `${scope}.messagesError`,
-    defaultMessage: 'There was a problem with fetching chat messages',
-  },
-  conversationsError: {
-    id: `${scope}.conversationsError`,
-    defaultMessage: 'There was a problem with fetching chat conversations',
   },
   messageTooLong: {
     id: `${scope}.messageTooLong`,
@@ -53,19 +41,9 @@ export default defineMessages({
     id: `${scope}.firstMessage`,
     defaultMessage: 'First message',
   },
-  noConversations: {
-    id: `${scope}.noConversations`,
-    defaultMessage:
-      "It seems you don't have any conversations in inbox. Wait for messages from participant or go to the <bold>Archive</bold> to see archived conversations.",
-  },
   noConversationsIconAlt: {
     id: `${scope}.noConversationsIconAlt`,
     defaultMessage: 'No conversations available icon',
-  },
-  noConversationOpened: {
-    id: `${scope}.noConversationOpened`,
-    defaultMessage:
-      'Please, <bold>select a conversation</bold> to talk with participant',
   },
   noConversationOpenedIconAlt: {
     id: `${scope}.noConversationOpenedIconAlt`,
@@ -98,5 +76,33 @@ export default defineMessages({
   archived: {
     id: `${scope}.archived`,
     defaultMessage: 'Archived',
+  },
+  inbox: {
+    id: `${scope}.inbox`,
+    defaultMessage: 'Inbox',
+  },
+  archivedMessages: {
+    id: `${scope}.archivedMessages`,
+    defaultMessage: 'Archived messages',
+  },
+  noActiveConversations: {
+    id: `${scope}.noActiveConversations`,
+    defaultMessage:
+      "It seems you don't have any conversations in inbox. Wait for messages from participant or go to the <bold>Archive</bold> to see archived conversations.",
+  },
+  noArchivedConversations: {
+    id: `${scope}.noArchivedConversations`,
+    defaultMessage:
+      "It seems you don't have any archived conversations. Go to the <bold>Inbox</bold> to see active chats.",
+  },
+  noActiveConversationOpened: {
+    id: `${scope}.noActiveConversationOpened`,
+    defaultMessage:
+      'Please, <bold>select a conversation</bold> to talk with participant',
+  },
+  noArchivedConversationOpened: {
+    id: `${scope}.noArchivedConversationOpened`,
+    defaultMessage:
+      'Please, <bold>select a conversation</bold> to see messages',
   },
 });
