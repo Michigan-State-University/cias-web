@@ -10,6 +10,7 @@ import {
 } from 'global/reducers/session/constants';
 import { findIndexById } from 'utils/arrayUtils';
 
+import { updateItemById } from 'utils/reduxUtils';
 import sessionSettingsReducer from './sessionSettings/reducer';
 import {
   FETCH_INTERVENTION_REQUEST,
@@ -289,12 +290,14 @@ export const interventionReducer = (state = initialState, action) =>
         draft.loaders.fetchUserAccessLoading = false;
         draft.errors.fetchUserAccessError = action.payload.message;
         break;
-      case REVOKE_USER_ACCESS_REQUEST:
-        let userIndex = state.intervention.usersWithAccess.findIndex(
-          ({ id }) => id === action.payload.userId,
+      case REVOKE_USER_ACCESS_REQUEST: {
+        updateItemById(
+          draft.intervention.usersWithAccess,
+          action.payload.userId,
+          { loading: true },
         );
-        draft.intervention.usersWithAccess[userIndex].loading = true;
         break;
+      }
       case REVOKE_USER_ACCESS_SUCCESS:
         draft.intervention.usersWithAccess =
           state.intervention.usersWithAccess.filter(
@@ -302,10 +305,11 @@ export const interventionReducer = (state = initialState, action) =>
           );
         break;
       case REVOKE_USER_ACCESS_ERROR:
-        userIndex = state.intervention.usersWithAccess.findIndex(
-          ({ id }) => id === action.payload.userId,
+        updateItemById(
+          draft.intervention.usersWithAccess,
+          action.payload.userId,
+          { loading: false },
         );
-        draft.intervention.usersWithAccess[userIndex].loading = false;
         break;
       case CREATE_SESSION_REQUEST:
         draft.loaders.createSessionLoading = true;

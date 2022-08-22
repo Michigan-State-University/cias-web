@@ -1,8 +1,8 @@
 import { put, takeLatest, call } from 'redux-saga/effects';
 import axios from 'axios';
+import { toast } from 'react-toastify';
 
 import objectToCamelCase from 'utils/objectToCamelCase';
-import { toast } from 'react-toastify';
 import { formatMessage } from 'utils/intlOutsideReact';
 import { ChartStatus, SET_CHARTS_FILTERS } from '../constants';
 import { setChartsData } from '../actions';

@@ -1,21 +1,17 @@
 import produce from 'immer';
 
+import { updateItemById } from 'utils/reduxUtils';
+
 import {
   FETCH_REPORTS_ERROR,
   FETCH_REPORTS_REQUEST,
   FETCH_REPORTS_SUCCESS,
-  FETCH_INTERVENTIONS_REQUEST,
-  FETCH_INTERVENTIONS_SUCCESS,
-  FETCH_INTERVENTIONS_ERROR,
-  FETCH_LATEST_REPORT_REQUEST,
-  FETCH_LATEST_REPORT_SUCCESS,
-  FETCH_LATEST_REPORT_ERROR,
-  TOGGLE_NOTIFICATIONS_REQUEST,
-  TOGGLE_NOTIFICATIONS_SUCCESS,
-  TOGGLE_NOTIFICATIONS_ERROR,
   SORT_BY_LATEST,
   PARTICIPANTS,
   THIRD_PARTY,
+  MARK_REPORT_DOWNLOADED_SUCCESS,
+  MARK_REPORT_DOWNLOADED_ERROR,
+  MARK_REPORT_DOWNLOADED_REQUEST,
 } from './constants';
 
 export const initialState = {
@@ -24,19 +20,17 @@ export const initialState = {
   reportsPage: 1,
   reportsSortOption: SORT_BY_LATEST,
   reportsFilterOption: [PARTICIPANTS, THIRD_PARTY],
-  latestReport: null,
-  interventions: null,
   loaders: {
     fetchReportsLoading: true,
-    fetchInterventionsLoading: true,
-    fetchLatestReportLoading: true,
+    markReportDownloadedLoading: false,
   },
   errors: {
     fetchReportsError: null,
-    fetchInterventionsError: null,
-    fetchLatestReportError: null,
+    markReportDownloadedError: null,
   },
 };
+
+export const generatedReportsReducerKey = 'generatedReports';
 
 /* eslint-disable default-case, no-param-reassign */
 
@@ -72,48 +66,24 @@ export const generatedReportsReducer = (state = initialState, action) =>
         draft.errors.fetchReportsError = action.payload.error;
         draft.reportsSize = 0;
         break;
-
-      case FETCH_INTERVENTIONS_REQUEST:
-        if (!draft.interventions)
-          draft.loaders.fetchInterventionsLoading = true;
-        draft.errors.fetchInterventionsError = null;
+      case MARK_REPORT_DOWNLOADED_REQUEST:
+        draft.errors.markReportDownloadedError = null;
+        draft.loaders.markReportDownloadedLoading = true;
         break;
-      case FETCH_INTERVENTIONS_SUCCESS:
-        draft.loaders.fetchInterventionsLoading = false;
-        draft.interventions = action.payload.interventions;
+      case MARK_REPORT_DOWNLOADED_SUCCESS:
+        const { reportId } = action.payload;
+        if (draft.reports) {
+          updateItemById(draft.reports, reportId, { downloaded: true });
+          // There is a bug - immer doesn't recognize change in nested state although it should:
+          // https://immerjs.github.io/immer/update-patterns/#nested-data-structures
+          draft.reports = [...draft.reports];
+        }
+        draft.loaders.markReportDownloadedLoading = false;
         break;
-      case FETCH_INTERVENTIONS_ERROR:
-        draft.loaders.fetchInterventionsLoading = false;
-        draft.errors.fetchInterventionsError = action.payload.error;
-        break;
-
-      case FETCH_LATEST_REPORT_REQUEST:
-        if (!draft.latestReport) draft.loaders.fetchLatestReportLoading = true;
-        draft.errors.fetchLatestReportError = null;
-        break;
-      case FETCH_LATEST_REPORT_SUCCESS:
-        draft.loaders.fetchLatestReportLoading = false;
-        draft.latestReport = action.payload.report;
-        break;
-      case FETCH_LATEST_REPORT_ERROR:
-        draft.loaders.fetchLatestReportLoading = false;
-        draft.errors.fetchLatestReportError = action.payload.error;
-        break;
-
-      case TOGGLE_NOTIFICATIONS_REQUEST:
-        const index = state.interventions.findIndex(
-          ({ id }) => id === action.payload.id,
-        );
-
-        draft.interventions[index].emailNotifications =
-          !state.interventions[index].emailNotifications;
-
-        draft.errors.fetchInterventionsError = null;
-        break;
-      case TOGGLE_NOTIFICATIONS_SUCCESS:
-        break;
-      case TOGGLE_NOTIFICATIONS_ERROR:
-        draft.errors.fetchInterventionsError = action.payload.error;
+      case MARK_REPORT_DOWNLOADED_ERROR:
+        const { error } = action.payload;
+        draft.errors.markReportDownloadedError = error;
+        draft.loaders.markReportDownloadedLoading = false;
         break;
     }
   });

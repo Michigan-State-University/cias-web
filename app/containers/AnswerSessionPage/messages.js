@@ -37,17 +37,17 @@ export default defineMessages({
     id: `${scope}.skipQuestionModalMessage`,
     defaultMessage: 'Are you sure you want to leave this question empty?',
   },
-  submitAnswer: {
-    id: `${scope}.submitAnswer`,
-    defaultMessage: 'Finish session',
-  },
   startSession: {
     id: `${scope}.startSession`,
-    defaultMessage: 'Start session',
+    defaultMessage: 'Start Session',
+  },
+  clickToStart: {
+    id: `${scope}.clickToStart`,
+    defaultMessage: 'Click the button below to start a new session.',
   },
   continueSession: {
     id: `${scope}.continueSession`,
-    defaultMessage: 'Continue session',
+    defaultMessage: 'Continue Session',
   },
   startPreview: {
     id: `${scope}.startPreview`,
@@ -123,13 +123,9 @@ export default defineMessages({
     id: `${scope}.showTranscriptToggle`,
     defaultMessage: 'Show Transcript',
   },
-  previewHeader: {
-    id: `${scope}.previewHeader`,
-    defaultMessage: 'Preview Session',
-  },
   fillHeader: {
     id: `${scope}.fillHeader`,
-    defaultMessage: 'Fill Session',
+    defaultMessage: 'Welcome!',
   },
   narratorAlt: {
     id: `${scope}.narratorAlt`,

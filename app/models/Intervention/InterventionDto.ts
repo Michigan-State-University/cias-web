@@ -7,7 +7,7 @@ export enum InterventionStatus {
   ARCHIVED = 'archived',
 }
 
-enum InterventionSharedTo {
+export enum InterventionSharedTo {
   ANYONE = 'anyone',
   REGISTERED = 'registered',
   INVITED = 'invited',

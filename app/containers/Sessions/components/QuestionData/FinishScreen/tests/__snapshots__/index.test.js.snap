@@ -31,7 +31,7 @@ exports[`<FinishScreen /> Should render and match the snapshot 1`] = `
   width: 100%;
 }
 
-.c4 {
+.c2 {
   width: 100%;
   height: 40px;
   border-radius: 100px;
@@ -45,27 +45,9 @@ exports[`<FinishScreen /> Should render and match the snapshot 1`] = `
   background-color: #9AA1B6;
   -webkit-transition: background-color 300ms ease,color 300ms ease,border 300ms ease;
   transition: background-color 300ms ease,color 300ms ease,border 300ms ease;
-  width: 100%;
+  width: auto;
   padding-right: 20px;
   padding-left: 20px;
-}
-
-.c2 {
-  width: auto;
-  height: auto;
-  display: block;
-  border-radius: 5px;
-  display: -webkit-box;
-  display: -webkit-flex;
-  display: -ms-flexbox;
-  display: flex;
-}
-
-.c3 {
-  width: auto;
-  height: auto;
-  display: block;
-  border-radius: 5px;
 }
 
 @media only screen and (min-width:768px) {
@@ -91,28 +73,15 @@ exports[`<FinishScreen /> Should render and match the snapshot 1`] = `
     class="c1"
     width="100%"
   >
-    <div
+    <button
       class="c2"
-      display="flex"
+      color="primary"
+      disabled=""
+      radius="100px"
+      width="auto"
     >
-      <div
-        class="c3"
-        data-for="tooltip-finish-screen"
-        data-tip=""
-      >
-        <div>
-          <button
-            class="c4"
-            color="primary"
-            disabled=""
-            radius="100px"
-            width="100%"
-          >
-            Go to dashboard
-          </button>
-        </div>
-      </div>
-    </div>
+      Go to dashboard
+    </button>
   </div>
 </div>
 `;

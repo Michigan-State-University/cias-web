@@ -12,7 +12,7 @@ import messages from './messages';
 const TileMapper = ({ items, component, loading }) => (
   <>
     {loading && <Loader />}
-    {items && items.map((item, itemIndex) => component(item, itemIndex))}
+    {items && items.map(component)}
     {!loading && (isNullOrUndefined(items) || items.length === 0) && (
       <Column width="100%" align="center" mt={50}>
         <H2>

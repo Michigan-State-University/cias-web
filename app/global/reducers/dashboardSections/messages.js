@@ -43,4 +43,8 @@ export default defineMessages({
     id: `${scope}.chartReorderError`,
     defaultMessage: `Couldn't reorder charts`,
   },
+  filterChartDataError: {
+    id: `${scope}.filterChartDataError`,
+    defaultMessage: `There was an error fetching charts data`,
+  },
 });
