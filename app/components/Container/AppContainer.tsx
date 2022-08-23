@@ -8,7 +8,7 @@ import { calculateWidth } from './containerBreakpoints';
 import StyledContainer from './styled';
 import messages from './messages';
 
-type Props = PropsWithChildren<{
+export type Props = PropsWithChildren<{
   pageTitle?: string;
   disablePageTitle?: boolean;
   [x: string]: any;

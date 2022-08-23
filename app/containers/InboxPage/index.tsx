@@ -1,6 +1,7 @@
 import React, { useEffect } from 'react';
 import { useIntl } from 'react-intl';
 import { useDispatch, useSelector } from 'react-redux';
+import { useInjectReducer, useInjectSaga } from 'redux-injectors';
 
 import { useConversationChannel } from 'utils/useConversationChannel';
 
@@ -10,16 +11,20 @@ import {
   makeSelectActiveInterventionConversations,
   makeSelectLiveChatError,
   makeSelectLiveChatLoader,
+  withAllLiveChatSagas,
+  withLiveChatReducer,
 } from 'global/reducers/liveChat';
 
 import LiveChatNavigatorPanel from 'containers/LiveChatNavigatorPanel';
-import AppContainer from 'components/Container';
+import { FillAppContainer } from 'components/Container';
 
 import i18nMessages from './messages';
 
 export const InboxPage = () => {
   const { formatMessage } = useIntl();
   const dispatch = useDispatch();
+  useInjectReducer(withLiveChatReducer);
+  useInjectSaga(withAllLiveChatSagas);
 
   const { sendMessage, readMessage, archiveConversation } =
     useConversationChannel();
@@ -40,15 +45,7 @@ export const InboxPage = () => {
   }, []);
 
   return (
-    <AppContainer
-      display="flex"
-      direction="column"
-      align="center"
-      height="100%"
-      py={54}
-      pageTitle={formatMessage(i18nMessages.pageTitle)}
-      $maxWidth="100%"
-    >
+    <FillAppContainer pageTitle={formatMessage(i18nMessages.pageTitle)}>
       <LiveChatNavigatorPanel
         isArchive={false}
         conversations={activeConversations}
@@ -59,7 +56,7 @@ export const InboxPage = () => {
         onReadMessage={readMessage}
         onArchiveConversation={archiveConversation}
       />
-    </AppContainer>
+    </FillAppContainer>
   );
 };
 

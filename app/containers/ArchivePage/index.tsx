@@ -1,25 +1,54 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { useIntl } from 'react-intl';
+import { useDispatch, useSelector } from 'react-redux';
+import { useInjectReducer, useInjectSaga } from 'redux-injectors';
 
-import AppContainer from 'components/Container';
+import {
+  fetchArchivedConversationsRequest,
+  makeSelectArchivedConversations,
+  makeSelectArchivedInterventionConversations,
+  makeSelectLiveChatError,
+  makeSelectLiveChatLoader,
+  withAllLiveChatSagas,
+  withLiveChatReducer,
+} from 'global/reducers/liveChat';
+
+import LiveChatNavigatorPanel from 'containers/LiveChatNavigatorPanel';
+import { FillAppContainer } from 'components/Container';
 
 import i18nMessages from './messages';
 
 export const ArchivePage = () => {
   const { formatMessage } = useIntl();
+  const dispatch = useDispatch();
+  useInjectReducer(withLiveChatReducer);
+  useInjectSaga(withAllLiveChatSagas);
+
+  const archivedConversations = useSelector(makeSelectArchivedConversations());
+  const archivedConversationsLoading = useSelector(
+    makeSelectLiveChatLoader('archivedConversations'),
+  );
+  const archivedConversationsError = useSelector(
+    makeSelectLiveChatError('archivedConversations'),
+  );
+  const archivedInterventionConversations = useSelector(
+    makeSelectArchivedInterventionConversations(),
+  );
+
+  useEffect(() => {
+    dispatch(fetchArchivedConversationsRequest());
+  }, []);
 
   return (
-    <AppContainer
-      display="flex"
-      direction="column"
-      align="center"
-      height="100%"
-      py={54}
-      pageTitle={formatMessage(i18nMessages.pageTitle)}
-      $maxWidth="100%"
-    >
-      Archive
-    </AppContainer>
+    <FillAppContainer pageTitle={formatMessage(i18nMessages.pageTitle)}>
+      <LiveChatNavigatorPanel
+        isArchive
+        conversations={archivedConversations}
+        conversationsError={archivedConversationsError?.message}
+        conversationsLoading={archivedConversationsLoading}
+        interventionConversations={archivedInterventionConversations}
+      />
+    </FillAppContainer>
   );
 };
 

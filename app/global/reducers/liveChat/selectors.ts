@@ -23,10 +23,23 @@ export const makeSelectActiveInterventionConversations = () =>
     ({ activeInterventionConversations }) => activeInterventionConversations,
   );
 
+export const makeSelectArchivedInterventionConversations = () =>
+  createSelector(
+    selectLiveChatState,
+    ({ archivedInterventionConversations }) =>
+      archivedInterventionConversations,
+  );
+
 export const makeSelectActiveConversations = () =>
   createSelector(
     selectLiveChatState,
     ({ activeConversations }) => activeConversations,
+  );
+
+export const makeSelectArchivedConversations = () =>
+  createSelector(
+    selectLiveChatState,
+    ({ archivedConversations }) => archivedConversations,
   );
 
 export const makeSelectOpenedConversationId = () =>
@@ -38,9 +51,12 @@ export const makeSelectOpenedConversationId = () =>
 export const makeSelectOpenedConversation = () =>
   createSelector(
     selectLiveChatState,
-    ({ activeConversations, openedConversationId }) => {
+    ({ activeConversations, archivedConversations, openedConversationId }) => {
       if (isNil(openedConversationId)) return null;
-      return activeConversations[openedConversationId];
+      return (
+        activeConversations[openedConversationId] ??
+        archivedConversations[openedConversationId]
+      );
     },
   );
 

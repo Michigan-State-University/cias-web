@@ -1,5 +1,5 @@
 import { useDispatch, useSelector } from 'react-redux';
-import { useInjectReducer, useInjectSaga } from 'redux-injectors';
+import { useInjectReducer } from 'redux-injectors';
 import { toast } from 'react-toastify';
 
 import {
@@ -10,10 +10,6 @@ import {
 import { jsonApiToObject } from 'utils/jsonApiMapper';
 
 import {
-  allLiveChatSagas,
-  allLiveChatSagasKey,
-  liveChatReducer,
-  liveChatReducerKey,
   mapConversationCreatedMessageData,
   markMessageReadLocally,
   onConversationCreatedReceive,
@@ -27,6 +23,7 @@ import {
   setNavigatorUnavailable,
   onLiveChatSetupFetchedReceive,
   setFetchingNavigatorSetup,
+  withLiveChatReducer,
 } from 'global/reducers/liveChat';
 import { makeSelectUserId } from 'global/reducers/auth';
 
@@ -52,9 +49,7 @@ import {
 
 export const useConversationChannel = (interventionId?: string) => {
   const dispatch = useDispatch();
-  useInjectSaga({ key: allLiveChatSagasKey, saga: allLiveChatSagas });
-  // @ts-ignore
-  useInjectReducer({ key: liveChatReducerKey, reducer: liveChatReducer });
+  useInjectReducer(withLiveChatReducer);
 
   const currentUserId = useSelector(makeSelectUserId());
 

@@ -28,6 +28,9 @@ import {
   SET_NAVIGATOR_UNAVAILABLE,
   ON_LIVE_CHAT_SETUP_FETCHED_RECEIVE,
   SET_FETCHING_NAVIGATOR_SETUP,
+  FETCH_ARCHIVED_CONVERSATIONS_REQUEST,
+  FETCH_ARCHIVED_CONVERSATIONS_SUCCESS,
+  FETCH_ARCHIVED_CONVERSATIONS_ERROR,
 } from './constants';
 
 export const openConversation = createAction(
@@ -57,6 +60,26 @@ export const fetchActiveConversationsSuccess = createAction(
 
 export const fetchActiveConversationsError = createAction(
   FETCH_ACTIVE_CONVERSATIONS_ERROR,
+  (action) => (error: ApiError) => action({ error }),
+);
+
+export const fetchArchivedConversationsRequest = createAction(
+  FETCH_ARCHIVED_CONVERSATIONS_REQUEST,
+  (action) => () => action({}),
+);
+
+export const fetchArchivedConversationsSuccess = createAction(
+  FETCH_ARCHIVED_CONVERSATIONS_SUCCESS,
+  (action) =>
+    (
+      interventionConversations: Record<string, InterventionConversation>,
+      conversations: Record<Conversation['id'], Conversation>,
+    ) =>
+      action({ interventionConversations, conversations }),
+);
+
+export const fetchArchivedConversationsError = createAction(
+  FETCH_ARCHIVED_CONVERSATIONS_ERROR,
   (action) => (error: ApiError) => action({ error }),
 );
 

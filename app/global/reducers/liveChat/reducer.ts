@@ -3,6 +3,8 @@ import { getType } from 'typesafe-actions';
 
 import { updateItemById } from 'utils/reduxUtils';
 
+import { WithReducer } from 'global/reducers/types';
+
 import {
   fetchConversationMessagesError,
   fetchConversationMessagesRequest,
@@ -23,6 +25,9 @@ import {
   setNavigatorUnavailable,
   onLiveChatSetupFetchedReceive,
   setFetchingNavigatorSetup,
+  fetchArchivedConversationsRequest,
+  fetchArchivedConversationsSuccess,
+  fetchArchivedConversationsError,
 } from './actions';
 import { LiveChatAction, LiveChatState } from './types';
 
@@ -31,6 +36,8 @@ export const liveChatReducerKey = 'liveChat';
 export const initialState: LiveChatState = {
   activeInterventionConversations: {},
   activeConversations: {},
+  archivedInterventionConversations: {},
+  archivedConversations: {},
   messages: {},
   openedConversationId: null,
   guestInterlocutorId: null,
@@ -40,11 +47,13 @@ export const initialState: LiveChatState = {
   liveChatSetup: null,
   loaders: {
     activeConversations: false,
+    archivedConversations: false,
     messages: false,
     liveChatSetup: false,
   },
   errors: {
     activeConversations: null,
+    archivedConversations: null,
     messages: null,
   },
 };
@@ -81,6 +90,24 @@ export const liveChatReducer = (
         const { error } = payload;
         draft.loaders.activeConversations = false;
         draft.errors.activeConversations = error;
+        break;
+      }
+      case getType(fetchArchivedConversationsRequest): {
+        draft.loaders.archivedConversations = true;
+        draft.errors.archivedConversations = null;
+        break;
+      }
+      case getType(fetchArchivedConversationsSuccess): {
+        const { interventionConversations, conversations } = payload;
+        draft.archivedInterventionConversations = interventionConversations;
+        draft.archivedConversations = conversations;
+        draft.loaders.archivedConversations = false;
+        break;
+      }
+      case getType(fetchArchivedConversationsError): {
+        const { error } = payload;
+        draft.loaders.archivedConversations = false;
+        draft.errors.archivedConversations = error;
         break;
       }
       case getType(fetchConversationMessagesRequest): {
@@ -196,3 +223,9 @@ export const liveChatReducer = (
       }
     }
   });
+
+export const withLiveChatReducer: WithReducer = {
+  key: liveChatReducerKey,
+  // @ts-ignore
+  reducer: liveChatReducer,
+};
