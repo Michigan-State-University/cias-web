@@ -7,7 +7,7 @@ import { colors, themeColors } from 'theme';
 
 import Box from 'components/Box';
 
-import { CHAT_WIDTH, HEADER_HEIGHT } from '../constants';
+import { HEADER_HEIGHT } from '../constants';
 
 export const NavigatorPanelGridRow = styled(GRow)`
   background-color: ${colors.white};
@@ -15,8 +15,6 @@ export const NavigatorPanelGridRow = styled(GRow)`
   flex: 1 !important;
   min-height: 0;
   width: 100%;
-  ${({ conversationsUnavailable }) =>
-    conversationsUnavailable ? `${CHAT_WIDTH}px` : ``}
 `;
 
 export const NavigatorPanelGridColumn = styled(GCol)`

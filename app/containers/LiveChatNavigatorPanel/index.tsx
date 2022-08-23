@@ -1,5 +1,4 @@
 import React, { useMemo } from 'react';
-import { useIntl } from 'react-intl';
 
 import { Conversation, InterventionConversation } from 'models/LiveChat';
 
@@ -14,13 +13,12 @@ import MessagesSectionHeader from './containers/MessagesSectionHeader';
 import HelpingMaterialsSectionBody from './containers/HelpingMaterialsSectionBody';
 import { ConversationsSectionBody } from './containers/ConversationsSectionBody';
 import ConversationsSectionHeader from './components/ConversationsSectionHeader';
+import HelpingMaterialsSectionHeader from './components/HelpingMaterialsSectionHeader';
+
 import {
   NavigatorPanelGridRow,
   NavigatorPanelGridColumn,
 } from './components/styled';
-import SectionHeader from './components/SectionHeader';
-
-import messages from './messages';
 
 type Props = {
   isArchive: boolean;
@@ -46,7 +44,6 @@ export const LiveChatNavigatorPanel = ({
   onReadMessage,
   onArchiveConversation,
 }: Props) => {
-  const { formatMessage } = useIntl();
   const interventionConversationsValues = useMemo(
     () => Object.values(interventionConversations),
     [interventionConversations],
@@ -84,10 +81,7 @@ export const LiveChatNavigatorPanel = ({
             />
           </NavigatorPanelGridColumn>
           <NavigatorPanelGridColumn xs={3}>
-            <SectionHeader
-              title={formatMessage(messages.helpingMaterials)}
-              pl={24}
-            />
+            <HelpingMaterialsSectionHeader />
 
             <HelpingMaterialsSectionBody />
           </NavigatorPanelGridColumn>

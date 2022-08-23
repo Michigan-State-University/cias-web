@@ -84,7 +84,7 @@ export const MessagesSectionBody = ({
   const loading = messagesLoading || conversationsLoading;
 
   return (
-    <SectionBody borderLeft={`1px solid ${themeColors.highlight}`} pl={24}>
+    <SectionBody borderLeft={`1px solid ${themeColors.highlight}`} px={24}>
       {loading && (
         <Column height="100%">
           <Spinner color={themeColors.secondary} />
