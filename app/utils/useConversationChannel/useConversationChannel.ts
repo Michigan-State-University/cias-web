@@ -24,6 +24,7 @@ import {
   onLiveChatSetupFetchedReceive,
   setFetchingNavigatorSetup,
   withLiveChatReducer,
+  closeConversation,
 } from 'global/reducers/liveChat';
 import { makeSelectUserId } from 'global/reducers/auth';
 
@@ -103,6 +104,10 @@ export const useConversationChannel = (interventionId?: string) => {
   }: ConversationArchivedData) => {
     dispatch(onConversationArchivedReceive(conversationId));
     dispatch(setArchivingConversation(false));
+    // close conversation for navigator
+    if (!interventionId) {
+      dispatch(closeConversation());
+    }
   };
 
   const onLiveChatSetupFetched = (data: LiveChatSetupFetchedData) => {

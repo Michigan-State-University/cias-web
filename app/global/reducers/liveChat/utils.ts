@@ -46,6 +46,7 @@ export const mapFetchConversationsResponse = (
       // eslint-disable-next-line no-param-reassign
       accumulator.conversations[conversationId] = {
         id: conversationId,
+        interventionId,
         liveChatInterlocutors: normalizedInterlocutors,
         ...restProps,
       };
@@ -78,6 +79,7 @@ export const mapConversationCreatedMessageData = (
   return {
     conversation: {
       id,
+      interventionId,
       liveChatInterlocutors: normalizedInterlocutors,
       ...restProps,
     },

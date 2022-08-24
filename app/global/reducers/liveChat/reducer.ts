@@ -1,5 +1,6 @@
 import produce from 'immer';
 import { getType } from 'typesafe-actions';
+import { pull } from 'lodash';
 
 import { updateItemById } from 'utils/reduxUtils';
 
@@ -204,10 +205,42 @@ export const liveChatReducer = (
         break;
       }
       case getType(onConversationArchivedReceive): {
+        // find conversation to archive
         const { conversationId } = payload;
         const conversation = draft.activeConversations[conversationId];
-        if (conversation) {
-          conversation.archived = true;
+        if (!conversation) break;
+
+        // mark conversation as archive and move to archived conversations
+        conversation.archived = true;
+        draft.archivedConversations[conversationId] = conversation;
+        delete draft.activeConversations[conversationId];
+
+        // find intervention conversation associated with the archived conversation
+        const { interventionId } = conversation;
+        const activeInterventionConversation =
+          draft.activeInterventionConversations[interventionId];
+        if (!activeInterventionConversation) break;
+
+        // remove conversation from active intervention conversation
+        // and delete active intervention conversation if doesn't refer to
+        // any conversation anymore
+        pull(activeInterventionConversation.conversationIds, conversationId);
+        if (activeInterventionConversation.conversationIds.length === 0) {
+          delete draft.activeInterventionConversations[interventionId];
+        }
+
+        // add conversation to an existing archived intervention conversation
+        // or create one if doesn't exist yet
+        const archivedInterventionConversation =
+          draft.archivedInterventionConversations[interventionId];
+        if (archivedInterventionConversation) {
+          archivedInterventionConversation.conversationIds.push(conversationId);
+        } else {
+          draft.archivedInterventionConversations[interventionId] = {
+            interventionId,
+            interventionName: activeInterventionConversation.interventionName,
+            conversationIds: [conversationId],
+          };
         }
         break;
       }
