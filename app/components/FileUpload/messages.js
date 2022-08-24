@@ -15,4 +15,8 @@ export default defineMessages({
     id: `${scope}.dragAndDrop`,
     defaultMessage: 'or drag and drop file here',
   },
+  deleteFile: {
+    id: `${scope}.deleteFile`,
+    defaultMessage: 'Delete file',
+  },
 });

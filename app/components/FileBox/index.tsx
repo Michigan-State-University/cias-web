@@ -16,7 +16,7 @@ export const FileBox = ({ name, url, extraIcons, ...styles }: Props) => (
     justify="between"
     bg={colors.lightBlue}
     borderRadius="5px"
-    padding="9px 12px"
+    padding="9px 13px"
     {...styles}
   >
     <FileDisplayItem

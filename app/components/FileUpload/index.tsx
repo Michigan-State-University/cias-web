@@ -8,11 +8,13 @@ import TextButton from 'components/Button/TextButton';
 import Dropzone from 'components/Dropzone';
 import Text from 'components/Text';
 import Loader from 'components/Loader';
-import { FileDisplayItem } from 'components/FileDisplayItem';
+import { ImageButton } from 'components/Button';
+import FileBox from 'components/FileBox';
 
 import { AppFile } from 'models/File';
 import { MAX_FILE_SIZE } from 'global/constants';
 import { colors, borders } from 'theme';
+import binNoBg from 'assets/svg/bin-no-bg.svg';
 
 import messages from './messages';
 
@@ -26,12 +28,14 @@ type MultipleFilesProps = CommonProps & {
   multiple: true;
   value: AppFile[];
   onUpload: (files: File[]) => void;
+  onRemoveFile?: never;
 };
 
 type SingleFileProps = CommonProps & {
   multiple: false;
   value: Nullable<AppFile>;
   onUpload: (file: File) => void;
+  onRemoveFile?: () => void;
 };
 
 export type FileUploadProps = MultipleFilesProps | SingleFileProps;
@@ -40,14 +44,33 @@ export const FileUpload = ({
   acceptedFormats,
   label,
   loading = false,
-  multiple,
   value,
+  multiple,
   onUpload,
+  onRemoveFile,
 }: FileUploadProps) => {
   const { formatMessage } = useIntl();
 
   const canUploadFile = !loading && (multiple || !value);
   const shouldDisplayFile = !loading && !multiple && value;
+
+  const deleteIcon = onRemoveFile ? (
+    <ImageButton
+      src={binNoBg}
+      onClick={(e: React.MouseEvent) => {
+        e.stopPropagation();
+        e.preventDefault();
+        onRemoveFile();
+      }}
+      title={formatMessage(messages.deleteFile)}
+      disabled={false}
+      iconProps={{
+        width: 16,
+        height: 16,
+      }}
+      showHoverEffect
+    />
+  ) : null;
 
   const handleDrop = useCallback(
     (newFiles: File[]) => {
@@ -81,7 +104,7 @@ export const FileUpload = ({
       <Dropzone
         border={`${borders.borderWidth} dashed ${colors.perwinkleCrayola}`}
         width="100%"
-        padding={shouldDisplayFile ? 5 : 12}
+        padding={shouldDisplayFile ? 5 : 15}
         withShadow={isDragActive}
         style={{
           position: 'relative',
@@ -107,21 +130,15 @@ export const FileUpload = ({
             </>
           )}
           {loading && <Loader type="inline" size={21} />}
-          {shouldDisplayFile && (
-            <Box
-              display="flex"
-              justify="between"
-              bg={colors.lightBlue}
-              borderRadius="5px"
-              padding="9px 12px"
+          {!loading && !multiple && value && (
+            <FileBox
+              name={value.name}
+              url={value.url}
+              padding="8px 12px"
               width="100%"
               fontWeight="bold"
-            >
-              <FileDisplayItem
-                // @ts-ignore
-                fileInfo={{ name: value.name, url: value.url }}
-              />
-            </Box>
+              extraIcons={deleteIcon ? [deleteIcon] : []}
+            />
           )}
           <input {...getInputProps()} />
         </Box>

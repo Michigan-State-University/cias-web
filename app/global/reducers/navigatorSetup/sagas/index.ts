@@ -17,6 +17,7 @@ import updateNavigatorLink from './updateNavigatorLink';
 import removeNavigatorLink from './removeNavigatorLink';
 import addNavigatorFromTeam from './addNavigatorFromTeam';
 import uploadFilledScriptTemplate from './uploadFilledScriptTemplate';
+import removeFilledScriptTemplate from './removeFilledScriptTemplate';
 
 export function* allNavigatorSetupSagas() {
   yield all([
@@ -37,5 +38,6 @@ export function* allNavigatorSetupSagas() {
     removeNavigatorLink(),
     addNavigatorFromTeam(),
     uploadFilledScriptTemplate(),
+    removeFilledScriptTemplate(),
   ]);
 }

@@ -9,6 +9,7 @@ import {
   uploadFilledScriptTemplateRequest,
   makeSelectFilledScriptFile,
   makeSelectNavigatorSetupLoader,
+  removeFilledScriptTemplateRequest,
 } from 'global/reducers/navigatorSetup';
 
 import DownloadScriptTemplatePanel from '../Components/DownloadScriptTemplatePanel';
@@ -29,13 +30,12 @@ export const NavigatorScripts = ({ interventionId }: Props) => {
     dispatch(uploadFilledScriptTemplateRequest(interventionId, file));
   };
 
-  // TODO: remove navigator script file
-  // const removeFilledNavigatorScript = () => {
-  //   dispatch(removeFilledNavigatorScriptRequest(interventionId));
-  // };
+  const removeFilledNavigatorScript = () => {
+    dispatch(removeFilledScriptTemplateRequest(interventionId));
+  };
 
-  const uploadingFilledNavigatorScript = useSelector(
-    makeSelectNavigatorSetupLoader('uploadingFilledNavigatorScript'),
+  const updatingFilledNavigatorScript = useSelector(
+    makeSelectNavigatorSetupLoader('updatingFilledNavigatorScript'),
   );
 
   return (
@@ -46,8 +46,8 @@ export const NavigatorScripts = ({ interventionId }: Props) => {
       <DownloadScriptTemplatePanel />
       <FilesPanel
         onUpload={uploadFilledScriptFile}
-        removeFile={() => console.log('remove file!')}
-        uploadingFile={uploadingFilledNavigatorScript}
+        removeFile={removeFilledNavigatorScript}
+        uploadingFile={updatingFilledNavigatorScript}
         label={formatMessage(messages.filledTemplate)}
         acceptedFormats="text/csv"
         value={filledNavigatorScript}

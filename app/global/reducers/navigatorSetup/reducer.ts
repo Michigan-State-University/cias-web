@@ -49,6 +49,9 @@ import {
   uploadFilledScriptTemplateSuccess,
   uploadFilledScriptTemplateError,
   uploadFilledScriptTemplateRequest,
+  removeFilledScriptTemplateRequest,
+  removeFilledScriptTemplateSuccess,
+  removeFilledScriptTemplateError,
 } from './actions';
 import { NavigatorSetupState, NavigatorSetupAction } from './types';
 
@@ -67,7 +70,7 @@ export const initialState: NavigatorSetupState = {
     uploadingNavigatorFile: false,
     uploadingParticipantFile: false,
     navigatorEmailInvitation: false,
-    uploadingFilledNavigatorScript: false,
+    updatingFilledNavigatorScript: false,
   },
   error: null,
 };
@@ -364,11 +367,11 @@ export const navigatorSetupReducer = (
       }
 
       case getType(uploadFilledScriptTemplateRequest): {
-        draft.loaders.uploadingFilledNavigatorScript = true;
+        draft.loaders.updatingFilledNavigatorScript = true;
         break;
       }
       case getType(uploadFilledScriptTemplateSuccess): {
-        draft.loaders.uploadingFilledNavigatorScript = false;
+        draft.loaders.updatingFilledNavigatorScript = false;
         if (draft.navigatorSetup) {
           const { navigatorSetup } = action.payload;
           draft.navigatorSetup = navigatorSetup;
@@ -376,7 +379,24 @@ export const navigatorSetupReducer = (
         break;
       }
       case getType(uploadFilledScriptTemplateError): {
-        draft.loaders.uploadingFilledNavigatorScript = false;
+        draft.loaders.updatingFilledNavigatorScript = false;
+        break;
+      }
+
+      case getType(removeFilledScriptTemplateRequest): {
+        draft.loaders.updatingFilledNavigatorScript = true;
+        break;
+      }
+      case getType(removeFilledScriptTemplateSuccess): {
+        draft.loaders.updatingFilledNavigatorScript = false;
+        if (draft.navigatorSetup) {
+          const { navigatorSetup } = action.payload;
+          draft.navigatorSetup = navigatorSetup;
+        }
+        break;
+      }
+      case getType(removeFilledScriptTemplateError): {
+        draft.loaders.updatingFilledNavigatorScript = false;
         break;
       }
     }

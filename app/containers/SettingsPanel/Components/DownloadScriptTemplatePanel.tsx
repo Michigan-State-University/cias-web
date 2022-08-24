@@ -5,10 +5,10 @@ import Box from 'components/Box';
 import Text from 'components/Text';
 import { ImageButton } from 'components/Button';
 import FileDownload from 'components/FileDownload';
+import FileBox from 'components/FileBox';
 
 import downloadIcon from 'assets/svg/downloadCloud.svg';
 
-import FileBox from './FileBox';
 import messages from '../messages';
 
 export const DownloadScriptTemplatePanel = () => {

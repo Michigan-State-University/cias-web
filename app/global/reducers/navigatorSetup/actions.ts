@@ -62,6 +62,9 @@ import {
   UPLOAD_FILLED_SCRIPT_TEMPLATE_REQUEST,
   UPLOAD_FILLED_SCRIPT_TEMPLATE_SUCCESS,
   UPLOAD_FILLED_SCRIPT_TEMPLATE_ERROR,
+  REMOVE_FILLED_SCRIPT_TEMPLATE_REQUEST,
+  REMOVE_FILLED_SCRIPT_TEMPLATE_SUCCESS,
+  REMOVE_FILLED_SCRIPT_TEMPLATE_ERROR,
 } from './constants';
 
 export const fetchNavigatorSetupRequest = createAction(
@@ -349,5 +352,20 @@ export const uploadFilledScriptTemplateSuccess = createAction(
 
 export const uploadFilledScriptTemplateError = createAction(
   UPLOAD_FILLED_SCRIPT_TEMPLATE_ERROR,
+  (action) => (error: ApiError) => action({ error }),
+);
+
+export const removeFilledScriptTemplateRequest = createAction(
+  REMOVE_FILLED_SCRIPT_TEMPLATE_REQUEST,
+  (action) => (interventionId: string) => action({ interventionId }),
+);
+
+export const removeFilledScriptTemplateSuccess = createAction(
+  REMOVE_FILLED_SCRIPT_TEMPLATE_SUCCESS,
+  (action) => (navigatorSetup: NavigatorSetup) => action({ navigatorSetup }),
+);
+
+export const removeFilledScriptTemplateError = createAction(
+  REMOVE_FILLED_SCRIPT_TEMPLATE_ERROR,
   (action) => (error: ApiError) => action({ error }),
 );

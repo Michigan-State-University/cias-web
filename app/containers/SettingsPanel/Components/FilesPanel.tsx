@@ -6,19 +6,30 @@ import H2 from 'components/H2';
 import Column from 'components/Column';
 import { ImageButton } from 'components/Button';
 import Loader from 'components/Loader';
+import FileBox from 'components/FileBox';
 
 import binNoBg from 'assets/svg/bin-no-bg.svg';
 
-import FileBox from './FileBox';
 import messages from '../messages';
 
-type Props = {
+type CommonProps = {
   title?: string;
   label?: string;
   uploadingFile: boolean;
-  removeFile: (fileId: string) => void;
   acceptedFormats?: string;
-} & Pick<FileUploadProps, 'multiple' | 'value' | 'onUpload'>;
+} & Pick<FileUploadProps, 'value' | 'onUpload'>;
+
+type MultipleFilesProps = CommonProps & {
+  multiple: true;
+  removeFile: (fileId: string) => void;
+};
+
+type SingleFileProps = CommonProps & {
+  multiple: false;
+  removeFile: () => void;
+};
+
+type Props = MultipleFilesProps | SingleFileProps;
 
 export const FilesPanel = ({
   title,
@@ -68,6 +79,7 @@ export const FilesPanel = ({
         acceptedFormats={acceptedFormats}
         value={value}
         multiple={multiple}
+        onRemoveFile={multiple ? undefined : removeFile}
       />
       {multiple && (
         <Column
