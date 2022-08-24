@@ -10,8 +10,11 @@ import {
 
 import { MessagesSectionBody } from './containers/MessagesSectionBody';
 import MessagesSectionHeader from './containers/MessagesSectionHeader';
+import HelpingMaterialsSectionBody from './containers/HelpingMaterialsSectionBody';
 import { ConversationsSectionBody } from './containers/ConversationsSectionBody';
 import ConversationsSectionHeader from './components/ConversationsSectionHeader';
+import HelpingMaterialsSectionHeader from './components/HelpingMaterialsSectionHeader';
+
 import {
   NavigatorPanelGridRow,
   NavigatorPanelGridColumn,
@@ -52,8 +55,8 @@ export const LiveChatNavigatorPanel = ({
     !interventionConversationsValues.length;
 
   return (
-    <NavigatorPanelGridRow nogutter>
-      <NavigatorPanelGridColumn xs={conversationsUnavailable ? 12 : 5}>
+    <NavigatorPanelGridRow nogutter fullWidth={conversationsUnavailable}>
+      <NavigatorPanelGridColumn xs={conversationsUnavailable ? 12 : 3}>
         <ConversationsSectionHeader isArchive={isArchive} />
         <ConversationsSectionBody
           isArchive={isArchive}
@@ -65,17 +68,24 @@ export const LiveChatNavigatorPanel = ({
         />
       </NavigatorPanelGridColumn>
       {!conversationsUnavailable && (
-        <NavigatorPanelGridColumn xs={7}>
-          <MessagesSectionHeader
-            onArchiveConversation={onArchiveConversation}
-          />
-          <MessagesSectionBody
-            isArchive={isArchive}
-            conversationsLoading={conversationsLoading}
-            onSendMessage={onSendMessage}
-            onReadMessage={onReadMessage}
-          />
-        </NavigatorPanelGridColumn>
+        <>
+          <NavigatorPanelGridColumn xs={6}>
+            <MessagesSectionHeader
+              onArchiveConversation={onArchiveConversation}
+            />
+            <MessagesSectionBody
+              isArchive={isArchive}
+              conversationsLoading={conversationsLoading}
+              onSendMessage={onSendMessage}
+              onReadMessage={onReadMessage}
+            />
+          </NavigatorPanelGridColumn>
+          <NavigatorPanelGridColumn xs={3}>
+            <HelpingMaterialsSectionHeader />
+
+            <HelpingMaterialsSectionBody />
+          </NavigatorPanelGridColumn>
+        </>
       )}
     </NavigatorPanelGridRow>
   );

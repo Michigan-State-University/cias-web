@@ -57,7 +57,7 @@ const MessageSectionHeader = ({ onArchiveConversation }: Props) => {
   return (
     <>
       <ArchiveConfirmationModal />
-      <SectionHeader title={formatMessage(i18nMessages.message)} pl={24}>
+      <SectionHeader title={formatMessage(i18nMessages.message)} px={24}>
         {conversation && (
           <Row align="center" gap={24}>
             {/* place download button here */}
