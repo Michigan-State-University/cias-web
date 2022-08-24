@@ -59,6 +59,9 @@ import {
   ADD_NAVIGATOR_FROM_TEAM_REQUEST,
   ADD_NAVIGATOR_FROM_TEAM_SUCCESS,
   ADD_NAVIGATOR_FROM_TEAM_ERROR,
+  UPLOAD_FILLED_SCRIPT_TEMPLATE_REQUEST,
+  UPLOAD_FILLED_SCRIPT_TEMPLATE_SUCCESS,
+  UPLOAD_FILLED_SCRIPT_TEMPLATE_ERROR,
 } from './constants';
 
 export const fetchNavigatorSetupRequest = createAction(
@@ -331,4 +334,20 @@ export const addNavigatorFromTeamSuccess = createAction(
 export const addNavigatorFromTeamError = createAction(
   ADD_NAVIGATOR_FROM_TEAM_ERROR,
   (action) => (id: string) => action({ id }),
+);
+
+export const uploadFilledScriptTemplateRequest = createAction(
+  UPLOAD_FILLED_SCRIPT_TEMPLATE_REQUEST,
+  (action) => (interventionId: string, file: File) =>
+    action({ interventionId, file }),
+);
+
+export const uploadFilledScriptTemplateSuccess = createAction(
+  UPLOAD_FILLED_SCRIPT_TEMPLATE_SUCCESS,
+  (action) => (navigatorSetup: NavigatorSetup) => action({ navigatorSetup }),
+);
+
+export const uploadFilledScriptTemplateError = createAction(
+  UPLOAD_FILLED_SCRIPT_TEMPLATE_ERROR,
+  (action) => (error: ApiError) => action({ error }),
 );

@@ -46,6 +46,9 @@ import {
   addNavigatorFromTeamRequest,
   addNavigatorFromTeamSuccess,
   addNavigatorFromTeamError,
+  uploadFilledScriptTemplateSuccess,
+  uploadFilledScriptTemplateError,
+  uploadFilledScriptTemplateRequest,
 } from './actions';
 import { NavigatorSetupState, NavigatorSetupAction } from './types';
 
@@ -64,6 +67,7 @@ export const initialState: NavigatorSetupState = {
     uploadingNavigatorFile: false,
     uploadingParticipantFile: false,
     navigatorEmailInvitation: false,
+    uploadingFilledNavigatorScript: false,
   },
   error: null,
 };
@@ -356,6 +360,23 @@ export const navigatorSetupReducer = (
         updateItemById(draft.teamNavigators, action.payload.id, {
           inDeletion: false,
         });
+        break;
+      }
+
+      case getType(uploadFilledScriptTemplateRequest): {
+        draft.loaders.uploadingFilledNavigatorScript = true;
+        break;
+      }
+      case getType(uploadFilledScriptTemplateSuccess): {
+        draft.loaders.uploadingFilledNavigatorScript = false;
+        if (draft.navigatorSetup) {
+          const { navigatorSetup } = action.payload;
+          draft.navigatorSetup = navigatorSetup;
+        }
+        break;
+      }
+      case getType(uploadFilledScriptTemplateError): {
+        draft.loaders.uploadingFilledNavigatorScript = false;
         break;
       }
     }

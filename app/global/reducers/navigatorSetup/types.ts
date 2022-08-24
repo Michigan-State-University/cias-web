@@ -24,6 +24,7 @@ export type NavigatorSetupState = {
     uploadingNavigatorFile: boolean;
     uploadingParticipantFile: boolean;
     navigatorEmailInvitation: boolean;
+    uploadingFilledNavigatorScript: boolean;
   };
   error: Nullable<ApiError>;
 };

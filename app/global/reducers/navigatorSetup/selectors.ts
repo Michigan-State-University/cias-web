@@ -57,3 +57,9 @@ export const makeSelectNavigatorFiles = () =>
     if (!navigatorSetup) return null;
     return navigatorSetup.navigatorFiles;
   });
+
+export const makeSelectFilledScriptFile = () =>
+  createSelector(makeSelectNavigatorSetup(), (navigatorSetup) => {
+    if (!navigatorSetup) return null;
+    return navigatorSetup.filledScriptTemplate;
+  });

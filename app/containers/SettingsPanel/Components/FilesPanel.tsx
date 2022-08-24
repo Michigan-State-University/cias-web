@@ -1,10 +1,7 @@
 import React from 'react';
 import { useIntl } from 'react-intl';
-import isEmpty from 'lodash/isEmpty';
 
-import { AppFile } from 'models/File';
-
-import FileUpload from 'components/FileUpload';
+import FileUpload, { FileUploadProps } from 'components/FileUpload';
 import H2 from 'components/H2';
 import Column from 'components/Column';
 import { ImageButton } from 'components/Button';
@@ -16,19 +13,22 @@ import FileBox from './FileBox';
 import messages from '../messages';
 
 type Props = {
-  title: string;
-  files: AppFile[];
+  title?: string;
+  label?: string;
   uploadingFile: boolean;
-  addFile: (files: File[]) => void;
   removeFile: (fileId: string) => void;
-};
+  acceptedFormats?: string;
+} & Pick<FileUploadProps, 'multiple' | 'value' | 'onUpload'>;
 
 export const FilesPanel = ({
   title,
-  files,
+  label,
+  value,
   uploadingFile,
-  addFile,
   removeFile,
+  acceptedFormats,
+  onUpload,
+  multiple,
 }: Props) => {
   const { formatMessage } = useIntl();
 
@@ -55,15 +55,21 @@ export const FilesPanel = ({
 
   return (
     <div>
-      <H2 fontSize={16} lineHeight="24px" mb={24}>
-        {title}
-      </H2>
+      {title && (
+        <H2 fontSize={16} lineHeight="24px" mb={24}>
+          {title}
+        </H2>
+      )}
+      {/* @ts-ignore */}
       <FileUpload
-        onAddFile={addFile}
+        onUpload={onUpload}
         loading={uploadingFile}
-        label={formatMessage(messages.importFile)}
+        label={label ?? formatMessage(messages.importFile)}
+        acceptedFormats={acceptedFormats}
+        value={value}
+        multiple={multiple}
       />
-      {!isEmpty(files) && (
+      {multiple && (
         <Column
           width="calc(100% + 16px)"
           maxHeight={110}
@@ -72,7 +78,8 @@ export const FilesPanel = ({
           mt={16}
           gap={8}
         >
-          {files.map(({ url, name, id, deleting }) => (
+          {/* @ts-ignore */}
+          {value.map(({ url, name, id, deleting }) => (
             <FileBox
               name={name}
               url={url}

@@ -22,6 +22,7 @@ export function* updateNoNavigatorsTab({
   payload: { interventionId, noNavigatorsData },
 }: ReturnType<typeof updateNoNavigatorTabRequest>) {
   const url = `/v1/live_chat/intervention/${interventionId}/navigator_setup`;
+
   try {
     yield call(
       axios.patch,

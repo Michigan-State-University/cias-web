@@ -8,32 +8,53 @@ import TextButton from 'components/Button/TextButton';
 import Dropzone from 'components/Dropzone';
 import Text from 'components/Text';
 import Loader from 'components/Loader';
+import { FileDisplayItem } from 'components/FileDisplayItem';
 
+import { AppFile } from 'models/File';
 import { MAX_FILE_SIZE } from 'global/constants';
 import { colors, borders } from 'theme';
 
 import messages from './messages';
 
-type Props = {
-  onAddFile: (files: File[]) => void;
-  acceptedFormats?: string;
+type CommonProps = {
+  acceptedFormats?: string | string[];
   loading?: boolean;
   label?: string;
 };
 
+type MultipleFilesProps = CommonProps & {
+  multiple: true;
+  value: AppFile[];
+  onUpload: (files: File[]) => void;
+};
+
+type SingleFileProps = CommonProps & {
+  multiple: false;
+  value: Nullable<AppFile>;
+  onUpload: (file: File) => void;
+};
+
+export type FileUploadProps = MultipleFilesProps | SingleFileProps;
+
 export const FileUpload = ({
-  onAddFile,
   acceptedFormats,
   label,
   loading = false,
-}: Props) => {
+  multiple,
+  value,
+  onUpload,
+}: FileUploadProps) => {
   const { formatMessage } = useIntl();
+
+  const canUploadFile = !loading && (multiple || !value);
+  const shouldDisplayFile = !loading && !multiple && value;
 
   const handleDrop = useCallback(
     (newFiles: File[]) => {
-      onAddFile(newFiles);
+      if (!multiple) onUpload(newFiles[0]);
+      else onUpload(newFiles);
     },
-    [onAddFile],
+    [multiple, onUpload],
   );
 
   const handleReject = (response: any) => {
@@ -43,7 +64,7 @@ export const FileUpload = ({
   const { getRootProps, getInputProps, open, isDragActive } = useDropzone({
     onDropAccepted: handleDrop,
     onDropRejected: handleReject,
-    multiple: true,
+    multiple,
     noKeyboard: true,
     accept: acceptedFormats,
     noClick: true,
@@ -60,7 +81,7 @@ export const FileUpload = ({
       <Dropzone
         border={`${borders.borderWidth} dashed ${colors.perwinkleCrayola}`}
         width="100%"
-        padding={12}
+        padding={shouldDisplayFile ? 5 : 12}
         withShadow={isDragActive}
         style={{
           position: 'relative',
@@ -69,7 +90,7 @@ export const FileUpload = ({
         {...getRootProps()}
       >
         <Box display="flex" justify="center" align="center">
-          {!loading && (
+          {canUploadFile && (
             <>
               <TextButton
                 onClick={open}
@@ -86,6 +107,22 @@ export const FileUpload = ({
             </>
           )}
           {loading && <Loader type="inline" size={21} />}
+          {shouldDisplayFile && (
+            <Box
+              display="flex"
+              justify="between"
+              bg={colors.lightBlue}
+              borderRadius="5px"
+              padding="9px 12px"
+              width="100%"
+              fontWeight="bold"
+            >
+              <FileDisplayItem
+                // @ts-ignore
+                fileInfo={{ name: value.name, url: value.url }}
+              />
+            </Box>
+          )}
           <input {...getInputProps()} />
         </Box>
       </Dropzone>

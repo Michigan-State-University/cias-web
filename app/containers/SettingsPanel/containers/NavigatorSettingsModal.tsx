@@ -45,6 +45,7 @@ import ParticipantLinksPanel from './ParticipantLinksPanel';
 import NavigatorLinksPanel from './NavigatorLinksPanel';
 import NavigatorFilesPanel from './NavigatorFilesPanel';
 import ParticipantFilesPanel from './ParticipantFilesPanel';
+import NavigatorScripts from './NavigatorScripts';
 
 type Props = {
   interventionId: string;
@@ -181,7 +182,12 @@ const NavigatorSettingsModal = ({ interventionId }: Props) => {
       {/* @ts-ignore */}
       <div label={formatMessage(messages.helpingMaterials)}>
         <NavigatorModalLayout
-          leftContent={<NavigatorLinksPanel interventionId={interventionId} />}
+          leftContent={
+            <Column gap={32}>
+              <NavigatorScripts interventionId={interventionId} />
+              <NavigatorLinksPanel interventionId={interventionId} />
+            </Column>
+          }
           rightContent={
             <Column gap={32}>
               <NavigatorFilesPanel interventionId={interventionId} />
