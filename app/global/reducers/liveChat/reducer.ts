@@ -141,7 +141,7 @@ export const liveChatReducer = (
       }
       case getType(markMessageReadLocally): {
         const { conversationId, messageId } = payload;
-        const { lastMessage } = draft.activeConversations[conversationId];
+        const { lastMessage } = draft.activeConversations[conversationId] ?? {};
 
         if (lastMessage?.id === messageId) {
           lastMessage.isRead = true;
