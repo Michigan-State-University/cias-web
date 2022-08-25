@@ -63,3 +63,11 @@ export const interventionTypesOption = [
     label: <FormattedMessage {...messages.fixedIntervention} />,
   },
 ];
+
+export const navigatorScriptConfig = {
+  headers: [
+    { name: 'Header', inputName: 'header', required: true },
+    { name: 'Sample message', inputName: 'sampleMessage', required: true },
+  ],
+  isHeaderNameOptional: false,
+};

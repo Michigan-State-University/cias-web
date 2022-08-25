@@ -325,4 +325,22 @@ export default defineMessages({
     id: `${scope}.filledTemplate`,
     defaultMessage: 'Filled template',
   },
+  failedCsvValidation: {
+    id: `${scope}.failedCsvValidation`,
+    defaultMessage:
+      'The file is invalid. Please make sure that you used the provided template and that it is filled correctly.',
+  },
+  csvValidationError: {
+    id: `${scope}.csvValidationError`,
+    defaultMessage: 'An error occurred when validating a CSV file.',
+  },
+  navigatorScriptUploadTooltipTilte: {
+    id: `${scope}.navigatorScriptUploadTooltipTilte`,
+    defaultMessage: 'How script file should look like?',
+  },
+  navigatorScriptUploadTooltipDescription: {
+    id: `${scope}.navigatorScriptUploadTooltipDescription`,
+    defaultMessage:
+      'Below you find a screenshot which represents correctly filled template',
+  },
 });

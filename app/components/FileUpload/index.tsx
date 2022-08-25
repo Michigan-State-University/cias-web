@@ -10,11 +10,13 @@ import Text from 'components/Text';
 import Loader from 'components/Loader';
 import { ImageButton } from 'components/Button';
 import FileBox from 'components/FileBox';
+import Tooltip from 'components/Tooltip';
 
 import { AppFile } from 'models/File';
 import { MAX_FILE_SIZE } from 'global/constants';
 import { colors, borders } from 'theme';
 import binNoBg from 'assets/svg/bin-no-bg.svg';
+import questionMark from 'assets/svg/grey-question-mark.svg';
 
 import messages from './messages';
 
@@ -22,6 +24,7 @@ type CommonProps = {
   acceptedFormats?: string | string[];
   loading?: boolean;
   label?: string;
+  tooltipContent?: JSX.Element;
 };
 
 type MultipleFilesProps = CommonProps & {
@@ -48,6 +51,7 @@ export const FileUpload = ({
   multiple,
   onUpload,
   onRemoveFile,
+  tooltipContent,
 }: FileUploadProps) => {
   const { formatMessage } = useIntl();
 
@@ -96,11 +100,22 @@ export const FileUpload = ({
 
   return (
     <>
-      {label && (
-        <Text mb={12} fontSize={13} lineHeight={1}>
-          {label}
-        </Text>
-      )}
+      <Box display="flex" align="center" mb={12}>
+        {label && (
+          <Text fontSize={13} lineHeight={1}>
+            {label}
+          </Text>
+        )}
+        {tooltipContent && (
+          <Tooltip
+            id="file-upload-tooltip"
+            ml={label && 8}
+            icon={questionMark}
+            content={tooltipContent}
+            place="right"
+          />
+        )}
+      </Box>
       <Dropzone
         border={`${borders.borderWidth} dashed ${colors.perwinkleCrayola}`}
         width="100%"

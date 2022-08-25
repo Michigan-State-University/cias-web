@@ -86,6 +86,7 @@
     "compression": "1.7.4",
     "connected-react-router": "^6.9.1",
     "cross-env": "5.2.0",
+    "csv-file-validator": "^2.0.0",
     "currency-codes": "^2.1.0",
     "currency-flags": "^3.1.0",
     "dagre": "^0.8.5",

@@ -773,10 +773,10 @@ exports[`<AnswerSessionPage /> Should render and match the snapshot 1`] = `
 
 <div>
   <div
-    id="tooltip-portal"
+    id="modal-portal"
   />
   <div
-    id="modal-portal"
+    id="tooltip-portal"
   />
   <div
     class="c0"

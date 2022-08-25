@@ -192,8 +192,8 @@ export function App({ user, fetchSelfDetails }) {
       <ApiQueryMessageHandler />
       <IdleTimer />
 
-      <div id={TOOLTIP_PORTAL_ID} />
       <div id={MODAL_PORTAL_ID} />
+      <div id={TOOLTIP_PORTAL_ID} />
 
       <Switch>
         <AppRoute

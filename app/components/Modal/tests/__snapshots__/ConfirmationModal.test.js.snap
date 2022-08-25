@@ -480,6 +480,10 @@ exports[`<ConfirmationModal /> Should render error and match the snapshot 1`] = 
   align-items: center;
 }
 
+.c14 p {
+  color: #2F3850;
+}
+
 .c12 {
   width: 100%;
   height: 40px;
