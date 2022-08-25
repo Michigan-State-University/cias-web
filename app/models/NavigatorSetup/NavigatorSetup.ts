@@ -44,3 +44,9 @@ export type LiveChatSetup = Pick<
   | 'participantLinks'
   | 'participantFiles'
 >;
+
+// Fetched by navigator
+export type NavigatorHelpingMaterials = Pick<
+  HelpingMaterialsData,
+  'filledScriptTemplate' | 'navigatorLinks' | 'navigatorFiles'
+>;

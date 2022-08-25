@@ -118,3 +118,25 @@ export const makeSelectParticipantFiles = () =>
     selectLiveChatState,
     ({ liveChatSetup }) => liveChatSetup?.participantFiles,
   );
+
+export const makeSelectOpenedConversationInterventionId = () =>
+  createSelector(
+    makeSelectOpenedConversation(),
+    (openedConversation) => openedConversation?.interventionId,
+  );
+
+export const makeSelectNavigatorHelpingMaterialsStates = () =>
+  createSelector(
+    selectLiveChatState,
+    ({ navigatorHelpingMaterialsStates }) => navigatorHelpingMaterialsStates,
+  );
+
+export const makeSelectOpenedConversationNavigatorHelpingMaterialsState = () =>
+  createSelector(
+    makeSelectOpenedConversationInterventionId(),
+    makeSelectNavigatorHelpingMaterialsStates(),
+    (interventionId, navigatorHelpingMaterialsStates) => {
+      if (!interventionId) return null;
+      return navigatorHelpingMaterialsStates[interventionId];
+    },
+  );

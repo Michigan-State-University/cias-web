@@ -66,7 +66,7 @@ export const ConversationsSectionBody = ({
         </Column>
       )}
       {conversationsError && (
-        <ErrorAlert fullPage={false} errorText={conversationsError} />
+        <ErrorAlert errorText={conversationsError} mt={24} mr={16} />
       )}
       {conversationsUnavailable && (
         <IconInfo

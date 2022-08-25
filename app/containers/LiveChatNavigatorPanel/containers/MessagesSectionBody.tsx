@@ -91,7 +91,7 @@ export const MessagesSectionBody = ({
         </Column>
       )}
       {messagesError && (
-        <ErrorAlert fullPage={false} errorText={messagesError.message} />
+        <ErrorAlert errorText={messagesError.message} mt={24} />
       )}
       {!loading && !messagesError && !conversation && (
         <IconInfo

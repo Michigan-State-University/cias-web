@@ -22,7 +22,7 @@ import {
   setGuestInterlocutorId,
   setNavigatorUnavailable,
   onLiveChatSetupFetchedReceive,
-  setFetchingNavigatorSetup,
+  setFetchingLiveChatSetup,
   withLiveChatReducer,
   closeConversation,
 } from 'global/reducers/liveChat';
@@ -196,9 +196,9 @@ export const useConversationChannel = (interventionId?: string) => {
     });
   };
 
-  const fetchNavigatorSetup = () => {
+  const fetchLiveChatSetup = () => {
     if (interventionId) {
-      dispatch(setFetchingNavigatorSetup(true));
+      dispatch(setFetchingLiveChatSetup(true));
       channel?.perform({
         name: ConversationChannelActionName.ON_FETCH_LIVE_CHAT_SETUP,
         data: { interventionId },
@@ -211,6 +211,6 @@ export const useConversationChannel = (interventionId?: string) => {
     readMessage,
     createConversation,
     archiveConversation,
-    fetchNavigatorSetup,
+    fetchLiveChatSetup,
   };
 };

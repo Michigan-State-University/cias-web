@@ -5,10 +5,14 @@ import {
   InterventionConversation,
   Message,
 } from 'models/LiveChat';
-import { LiveChatSetup } from 'models/NavigatorSetup';
+import {
+  LiveChatSetup,
+  NavigatorHelpingMaterials,
+} from 'models/NavigatorSetup';
 import { ApiError } from 'models/Api';
 
 import * as actions from './actions';
+import { Intervention } from '../../../models/Intervention';
 
 export type LiveChatAction = ActionType<typeof actions>;
 
@@ -16,6 +20,12 @@ export type InterventionConversations = Record<
   InterventionConversation['interventionId'],
   InterventionConversation
 >;
+
+export type NavigatorHelpingMaterialsState = {
+  data: Nullable<NavigatorHelpingMaterials>;
+  loading: boolean;
+  error: Nullable<ApiError>;
+};
 
 export type Conversations = Record<Conversation['id'], Conversation>;
 
@@ -31,6 +41,10 @@ export type LiveChatState = {
   archivingConversation: boolean;
   navigatorUnavailable: boolean;
   liveChatSetup: Nullable<LiveChatSetup>;
+  navigatorHelpingMaterialsStates: Record<
+    Intervention['id'],
+    NavigatorHelpingMaterialsState
+  >;
   loaders: {
     activeConversations: boolean;
     archivedConversations: boolean;

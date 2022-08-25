@@ -25,10 +25,13 @@ import {
   onConversationArchivedReceive,
   setNavigatorUnavailable,
   onLiveChatSetupFetchedReceive,
-  setFetchingNavigatorSetup,
+  setFetchingLiveChatSetup,
   fetchArchivedConversationsRequest,
   fetchArchivedConversationsSuccess,
   fetchArchivedConversationsError,
+  fetchNavigatorHelpingMaterialsRequest,
+  fetchNavigatorHelpingMaterialsSuccess,
+  fetchNavigatorHelpingMaterialsError,
 } from './actions';
 import { LiveChatAction, LiveChatState } from './types';
 
@@ -40,6 +43,7 @@ export const initialState: LiveChatState = {
   archivedInterventionConversations: {},
   archivedConversations: {},
   messages: {},
+  navigatorHelpingMaterialsStates: {},
   openedConversationId: null,
   guestInterlocutorId: null,
   creatingConversation: false,
@@ -249,9 +253,33 @@ export const liveChatReducer = (
         draft.liveChatSetup = payload.liveChatSetup;
         break;
       }
-
-      case getType(setFetchingNavigatorSetup): {
-        draft.loaders.liveChatSetup = payload.fetchingNavigatorSetup;
+      case getType(setFetchingLiveChatSetup): {
+        draft.loaders.liveChatSetup = payload.fetchingLiveChatSetup;
+        break;
+      }
+      case getType(fetchNavigatorHelpingMaterialsRequest): {
+        const { interventionId } = payload;
+        draft.navigatorHelpingMaterialsStates[interventionId] = {
+          data: null,
+          loading: true,
+          error: null,
+        };
+        break;
+      }
+      case getType(fetchNavigatorHelpingMaterialsSuccess): {
+        const { interventionId, helpingMaterials } = payload;
+        const navigatorHelpingMaterials =
+          draft.navigatorHelpingMaterialsStates[interventionId];
+        navigatorHelpingMaterials.data = helpingMaterials;
+        navigatorHelpingMaterials.loading = false;
+        break;
+      }
+      case getType(fetchNavigatorHelpingMaterialsError): {
+        const { interventionId, error } = payload;
+        const navigatorHelpingMaterials =
+          draft.navigatorHelpingMaterialsStates[interventionId];
+        navigatorHelpingMaterials.error = error;
+        navigatorHelpingMaterials.loading = false;
         break;
       }
     }

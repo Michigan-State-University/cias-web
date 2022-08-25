@@ -7,7 +7,10 @@ import {
 } from 'models/LiveChat';
 import { ApiError } from 'models/Api';
 
-import { LiveChatSetup } from 'models/NavigatorSetup';
+import {
+  LiveChatSetup,
+  NavigatorHelpingMaterials,
+} from 'models/NavigatorSetup';
 import {
   ON_MESSAGE_SENT_RECEIVE,
   OPEN_CONVERSATION,
@@ -27,10 +30,13 @@ import {
   ON_CONVERSATION_ARCHIVED_RECEIVE,
   SET_NAVIGATOR_UNAVAILABLE,
   ON_LIVE_CHAT_SETUP_FETCHED_RECEIVE,
-  SET_FETCHING_NAVIGATOR_SETUP,
+  SET_FETCHING_LIVE_CHAT_SETUP,
   FETCH_ARCHIVED_CONVERSATIONS_REQUEST,
   FETCH_ARCHIVED_CONVERSATIONS_SUCCESS,
   FETCH_ARCHIVED_CONVERSATIONS_ERROR,
+  FETCH_NAVIGATOR_HELPING_MATERIALS_REQUEST,
+  FETCH_NAVIGATOR_HELPING_MATERIALS_SUCCESS,
+  FETCH_NAVIGATOR_HELPING_MATERIALS_ERROR,
 } from './constants';
 
 export const openConversation = createAction(
@@ -161,8 +167,26 @@ export const onLiveChatSetupFetchedReceive = createAction(
   (action) => (liveChatSetup: LiveChatSetup) => action({ liveChatSetup }),
 );
 
-export const setFetchingNavigatorSetup = createAction(
-  SET_FETCHING_NAVIGATOR_SETUP,
-  (action) => (fetchingNavigatorSetup: boolean) =>
-    action({ fetchingNavigatorSetup }),
+export const setFetchingLiveChatSetup = createAction(
+  SET_FETCHING_LIVE_CHAT_SETUP,
+  (action) => (fetchingLiveChatSetup: boolean) =>
+    action({ fetchingLiveChatSetup }),
+);
+
+export const fetchNavigatorHelpingMaterialsRequest = createAction(
+  FETCH_NAVIGATOR_HELPING_MATERIALS_REQUEST,
+  (action) => (interventionId: string) => action({ interventionId }),
+);
+
+export const fetchNavigatorHelpingMaterialsSuccess = createAction(
+  FETCH_NAVIGATOR_HELPING_MATERIALS_SUCCESS,
+  (action) =>
+    (interventionId: string, helpingMaterials: NavigatorHelpingMaterials) =>
+      action({ interventionId, helpingMaterials }),
+);
+
+export const fetchNavigatorHelpingMaterialsError = createAction(
+  FETCH_NAVIGATOR_HELPING_MATERIALS_ERROR,
+  (action) => (interventionId: string, error: ApiError) =>
+    action({ interventionId, error }),
 );

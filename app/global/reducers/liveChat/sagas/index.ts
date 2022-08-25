@@ -5,6 +5,7 @@ import { WithSaga } from 'global/reducers/types';
 import { fetchChatMessagesSaga } from './fetchChatMessages';
 import { fetchActiveConversationsSaga } from './fetchActiveConversations';
 import { fetchArchivedConversationsSaga } from './fetchArchivedConversations';
+import { fetchNavigatorHelpingMaterialsSaga } from './fetchNavigatorHelpingMaterials';
 
 export { fetchChatMessagesSaga, fetchActiveConversationsSaga };
 
@@ -15,6 +16,7 @@ function* allLiveChatSagas() {
     fetchChatMessagesSaga(),
     fetchActiveConversationsSaga(),
     fetchArchivedConversationsSaga(),
+    fetchNavigatorHelpingMaterialsSaga(),
   ]);
 }
 
