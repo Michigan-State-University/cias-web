@@ -1,8 +1,9 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useMemo } from 'react';
 import { useIntl } from 'react-intl';
 import { injectReducer, injectSaga } from 'redux-injectors';
 import { compose } from 'redux';
 import { useDispatch, useSelector } from 'react-redux';
+import differenceBy from 'lodash/differenceBy';
 
 import {
   allNavigatorSetupSagas,
@@ -25,7 +26,7 @@ import { makeSelectUser } from 'global/reducers/auth';
 
 import { SimpleUser } from 'models/User';
 import { NoNavigatorsAvailableData } from 'models/NavigatorSetup';
-import { Roles } from 'models/User/RolesManager';
+import { useRoleManager } from 'models/User/RolesManager';
 
 import { themeColors, colors } from 'theme';
 
@@ -65,6 +66,11 @@ const NavigatorSettingsModal = ({ interventionId }: Props) => {
 
   const teamNavigators = useSelector(makeSelectTeamNavigators());
 
+  const availableTeamNavigators = useMemo(
+    () => differenceBy(teamNavigators, interventionNavigators, 'id'),
+    [teamNavigators, interventionNavigators],
+  );
+
   const loading = useSelector(
     makeSelectNavigatorSetupLoader('fetchingNavigatorSetup'),
   );
@@ -74,7 +80,9 @@ const NavigatorSettingsModal = ({ interventionId }: Props) => {
   );
   const error = useSelector(makeSelectNavigatorSetupError());
 
-  const { teamId, roles } = useSelector(makeSelectUser());
+  const { teamId } = useSelector(makeSelectUser());
+
+  const { canDisplayTeamNavigatorPanel } = useRoleManager();
 
   useEffect(() => {
     dispatch(fetchNavigatorSetupRequest(interventionId));
@@ -145,9 +153,9 @@ const NavigatorSettingsModal = ({ interventionId }: Props) => {
                 removeNavigatorEmailInvitation={removeNavigatorEmailInvitation}
                 invitationLoading={navigatorEmailInvitationLoading}
               />
-              {(teamId ?? roles.includes(Roles.Admin)) && (
+              {(teamId ?? canDisplayTeamNavigatorPanel) && (
                 <TeamNavigatorsPanel
-                  teamNavigators={teamNavigators}
+                  teamNavigators={availableTeamNavigators}
                   addNavigatorFromTeam={addNavigatorFromTeam}
                 />
               )}

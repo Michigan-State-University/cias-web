@@ -355,7 +355,9 @@ export const navigatorSetupReducer = (
       }
       case getType(addNavigatorFromTeamSuccess): {
         const { user } = action.payload;
-        deleteItemById(draft.teamNavigators, user.id);
+        updateItemById(draft.teamNavigators, user.id, {
+          inDeletion: false,
+        });
         draft.interventionNavigators.push(user);
         break;
       }

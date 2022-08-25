@@ -36,6 +36,8 @@ const ALLOWED_FULL_ORG_ACCESS = [
 
 const ALLOWED_CAT_MH_SETTING_DISPLAY = [Roles.Admin, Roles.Researcher];
 
+const ALLOWED_TEAM_NAVIGATOR_DISPLAY = [Roles.Admin, Roles.TeamAdmin];
+
 export const canDisplayLeftSidebar = (userRoles: Roles[]) =>
   !arraysOverlap(userRoles, FORBIDDEN_LEFT_SIDEBAR_DISPLAY);
 
@@ -76,6 +78,10 @@ export const useRoleManager = () => {
     userRoles,
     ALLOWED_CAT_MH_SETTING_DISPLAY,
   );
+  const canDisplayTeamNavigatorPanel = arraysOverlap(
+    userRoles,
+    ALLOWED_TEAM_NAVIGATOR_DISPLAY,
+  );
 
   return {
     isAdmin,
@@ -89,6 +95,7 @@ export const useRoleManager = () => {
     canDeleteOrganization,
     canAssignOrganizationToIntervention,
     hasFullOrgAccess,
+    canDisplayTeamNavigatorPanel,
     userRoles,
   };
 };
