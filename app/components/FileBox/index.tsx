@@ -1,7 +1,7 @@
 import React, { ReactElement } from 'react';
 
-import Box from 'components/Box';
 import { colors } from 'theme';
+import Box from 'components/Box';
 import { FileDisplayItem } from 'components/FileDisplayItem';
 
 type Props = {

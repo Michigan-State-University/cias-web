@@ -1,13 +1,13 @@
 import React from 'react';
 import { useIntl } from 'react-intl';
 
-import { themeColors, colors } from 'theme';
+import { colors } from 'theme';
 import { Link } from 'models/NavigatorSetup';
 
 import Box from 'components/Box';
 import Text from 'components/Text';
+import { PrimaryLink } from 'components/Links';
 
-import { LinkPrimaryUnderline } from './styled';
 import messages from '../messages';
 
 type Props = {
@@ -26,11 +26,11 @@ const ParticipantUsefulLinks = ({ participantLinks }: Props) => {
       </Text>
       <Box width="100%" flexShrink={0}>
         {participantLinks.map(({ displayName, id, url }) => (
-          <LinkPrimaryUnderline key={id} target="_blank" href={url}>
-            <Text fontSize="14px" mb={4} color={themeColors.primary}>
+          <PrimaryLink key={id} target="_blank" href={url}>
+            <Text fontSize="14px" mb={4}>
               {displayName}
             </Text>
-          </LinkPrimaryUnderline>
+          </PrimaryLink>
         ))}
       </Box>
     </>

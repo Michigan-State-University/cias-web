@@ -109,4 +109,12 @@ export default defineMessages({
     id: `${scope}.helpingMaterials`,
     defaultMessage: 'Helping materials',
   },
+  usefulLinks: {
+    id: `${scope}.usefulLinks`,
+    defaultMessage: 'Useful links',
+  },
+  filesToDownload: {
+    id: `${scope}.filesToDownload`,
+    defaultMessage: 'Files to download',
+  },
 });
