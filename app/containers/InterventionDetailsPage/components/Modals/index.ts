@@ -2,4 +2,4 @@ export { default as InterventionSettingsModal } from './InterventionSettingsModa
 
 export { default as InterventionAssignOrganizationModal } from './InterventionAssignOrganizationModal';
 
-export { CatMhAccessModal } from './CatMhAccessModal';
+export { ThirdPartyToolsAccessModal } from './ThirdPartyToolsAccessModal';

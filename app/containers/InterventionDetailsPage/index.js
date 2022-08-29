@@ -26,7 +26,7 @@ import ArchiveIcon from 'assets/svg/archive.svg';
 import GearIcon from 'assets/svg/gear-wo-background.svg';
 import AddAppIcon from 'assets/svg/app-add.svg';
 import TranslateIcon from 'assets/svg/translate.svg';
-import DocumentIcon from 'assets/svg/document.svg';
+import PadlockIcon from 'assets/svg/padlock.svg';
 import QuestionMarkIcon from 'assets/svg/grey-question-mark.svg';
 
 import isNullOrUndefined from 'utils/isNullOrUndefined';
@@ -97,7 +97,7 @@ import interventionDetailsPageSagas from './saga';
 import SessionCreateButton from './components/SessionCreateButton/index';
 import SessionListItem from './components/SessionListItem';
 import {
-  CatMhAccessModal,
+  ThirdPartyToolsAccessModal,
   InterventionAssignOrganizationModal,
   InterventionSettingsModal,
 } from './components/Modals';
@@ -210,11 +210,14 @@ export function InterventionDetailsPage({
     },
   });
 
-  const { openModal: openCatMhModal, Modal: CatMhModal } = useModal({
+  const {
+    openModal: openThirdPartyToolsAccessModal,
+    Modal: ThirdPartyToolsModal,
+  } = useModal({
     type: ModalType.Modal,
-    modalContentRenderer: (props) => <CatMhAccessModal {...props} />,
+    modalContentRenderer: (props) => <ThirdPartyToolsAccessModal {...props} />,
     props: {
-      title: formatMessage(messages.catMhSettingsModalTitle),
+      title: formatMessage(messages.thirdPartyToolsAccessModalTitle),
     },
   });
 
@@ -283,10 +286,10 @@ export function InterventionDetailsPage({
     ...(isAdmin
       ? [
           {
-            icon: DocumentIcon,
-            action: () => openCatMhModal(intervention),
-            label: formatMessage(messages.catMhSettingsModalTitle),
-            id: 'catMhAccess',
+            icon: PadlockIcon,
+            action: () => openThirdPartyToolsAccessModal(intervention),
+            label: formatMessage(messages.thirdPartyToolsAccessModalTitle),
+            id: 'thirdPartyToolsAccess',
           },
         ]
       : []),
@@ -440,7 +443,7 @@ export function InterventionDetailsPage({
           <title>{formatMessage(messages.pageTitle, { name })}</title>
         </Helmet>
         <ArchiveModal />
-        <CatMhModal />
+        <ThirdPartyToolsModal />
         <ConfirmationModal
           visible={!isNullOrUndefined(deleteConfirmationSessionId)}
           onClose={() => setDeleteConfirmationSessionId(null)}

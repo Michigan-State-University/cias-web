@@ -88,4 +88,4 @@ const Component = ({ modalState: intervention, closeModal }: Props) => {
   );
 };
 
-export const CatMhAccessModal = memo(Component);
+export const ThirdPartyToolsAccessModal = memo(Component);

@@ -18,7 +18,7 @@ import FileShareIcon from 'assets/svg/file-share.svg';
 import CopyIcon from 'assets/svg/copy.svg';
 import AddAppIcon from 'assets/svg/app-add.svg';
 import TranslateIcon from 'assets/svg/translate.svg';
-import DocumentIcon from 'assets/svg/document.svg';
+import PadlockIcon from 'assets/svg/padlock.svg';
 
 import { colors } from 'theme';
 
@@ -41,7 +41,7 @@ import { Roles } from 'models/User/UserRoles';
 import isNullOrUndefined from 'utils/isNullOrUndefined';
 
 import {
-  CatMhAccessModal,
+  ThirdPartyToolsAccessModal,
   InterventionAssignOrganizationModal,
 } from 'containers/InterventionDetailsPage/components/Modals';
 import SelectResearchers from 'containers/SelectResearchers';
@@ -112,11 +112,14 @@ const SingleTile = ({
       confirmAction: handleArchiveIntervention,
     },
   });
-  const { openModal: openCatMhModal, Modal: CatMhModal } = useModal({
+  const {
+    openModal: openThirdPartyToolsAccessModal,
+    Modal: ThirdPartyToolsModal,
+  } = useModal({
     type: ModalType.Modal,
-    modalContentRenderer: (props) => <CatMhAccessModal {...props} />,
+    modalContentRenderer: (props) => <ThirdPartyToolsAccessModal {...props} />,
     props: {
-      title: formatMessage(messages.catMhSettingsModalTitle),
+      title: formatMessage(messages.thirdPartyToolsAccessModalTitle),
     },
   });
 
@@ -194,10 +197,10 @@ const SingleTile = ({
     ...(isAdmin
       ? [
           {
-            icon: DocumentIcon,
-            action: () => openCatMhModal(tileData),
-            label: formatMessage(messages.catMhSettingsModalTitle),
-            id: 'catMhAccess',
+            icon: PadlockIcon,
+            action: () => openThirdPartyToolsAccessModal(tileData),
+            label: formatMessage(messages.thirdPartyToolsAccessModalTitle),
+            id: 'thirdPartyToolsAccess',
           },
         ]
       : []),
@@ -220,7 +223,7 @@ const SingleTile = ({
 
   return (
     <>
-      <CatMhModal />
+      <ThirdPartyToolsModal />
       <ArchiveModal />
       <Modal
         title={formatMessage(messages.sendCopyModalTitle)}
