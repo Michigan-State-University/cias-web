@@ -14,21 +14,21 @@ import {
 
 import {
   SessionMapHeadType,
-  defaultZoom,
-  defaultMaxZoom,
-  sessionMapColors,
-  detailedInfoZoomThreshold,
+  DEFAULT_ZOOM,
+  DEFAULT_MAX_ZOOM,
+  SESSION_MAP_COLORS,
+  DETAILED_INFO_ZOOM_THRESHOLD,
   SessionMapNodeType,
-  defaultMinZoom,
-  questionNodeLabelOffset,
-  scrollbarsThickness,
-  scrollbarsMargin,
-  edgePriorities,
+  DEFAULT_MIN_ZOOM,
+  NODE_LABEL_OFFSET,
+  SCROLLBAR_THICKNESS,
+  SCROLLBAR_MARGIN,
+  EDGE_PRIORITIES,
   SESSION_MAP_ID,
-  sessionMapNodeDimensions,
+  SESSION_MAP_NODE_DIMENSIONS,
 } from '../../constants';
 import {
-  sortQuestionsByGroupAndPosition,
+  sortAndFilterQuestions,
   createMapNodes,
   createMapEdges,
   collapseQuestionsWithoutBranching,
@@ -36,10 +36,12 @@ import {
 import SessionMapSessionNode from './SessionMapSessionNode';
 import SessionMapQuestionNode from './SessionMapQuestionNode';
 import SessionMapCollapseNode from './SessionMapCollapseNode';
+import SessionMapTlfbNode from './SessionMapTlfbNode';
 
 const nodeTypes: NodeTypesType = {
   [SessionMapNodeType.QUESTION]: SessionMapQuestionNode,
   [SessionMapNodeType.SESSION]: SessionMapSessionNode,
+  [SessionMapNodeType.TLFB]: SessionMapTlfbNode,
   [SessionMapNodeType.COLLAPSE]: SessionMapCollapseNode,
 };
 
@@ -110,12 +112,12 @@ const SessionMap = ({
   );
 
   const showDetailedInfo = useMemo(
-    () => zoom > detailedInfoZoomThreshold,
+    () => zoom > DETAILED_INFO_ZOOM_THRESHOLD,
     [zoom],
   );
 
   const sortedQuestions = useMemo(
-    () => sortQuestionsByGroupAndPosition(questionGroups, questions),
+    () => sortAndFilterQuestions(questionGroups, questions),
     [questions, questionGroups],
   );
 
@@ -168,23 +170,23 @@ const SessionMap = ({
   }, [showWithBranchingOnly, nodes, edges]);
 
   const sessionMapGraphProps: ReactFlowGraphProps = {
-    defaultMinZoom,
-    defaultMaxZoom,
-    defaultZoom,
+    defaultMinZoom: DEFAULT_MIN_ZOOM,
+    defaultMaxZoom: DEFAULT_MAX_ZOOM,
+    defaultZoom: DEFAULT_ZOOM,
     zoom,
     onZoomChange,
     minZoom,
     onMinZoomChange,
     elements,
     nodeTypes,
-    nodeTopMargin: questionNodeLabelOffset,
-    nodeDimensions: sessionMapNodeDimensions,
+    nodeTopMargin: NODE_LABEL_OFFSET,
+    nodeDimensions: SESSION_MAP_NODE_DIMENSIONS,
     pickedNodeId: showDetailsId,
     nodesDraggable: false,
     nodesConnectable: false,
-    scrollbarsThickness,
-    scrollbarsMargin,
-    edgePriorities,
+    scrollbarsThickness: SCROLLBAR_THICKNESS,
+    scrollbarsMargin: SCROLLBAR_MARGIN,
+    edgePriorities: EDGE_PRIORITIES,
   };
 
   return (
@@ -192,19 +194,19 @@ const SessionMap = ({
       <ReactFlowGraph {...sessionMapGraphProps} id={SESSION_MAP_ID}>
         <ReactFlowArrowHead
           type={SessionMapHeadType.BASE}
-          color={sessionMapColors.edgeBase}
+          color={SESSION_MAP_COLORS.edgeBase}
         />
         <ReactFlowArrowHead
           type={SessionMapHeadType.HIGHLIGHTED}
-          color={sessionMapColors.selectedLight}
+          color={SESSION_MAP_COLORS.selectedLight}
         />
         <ReactFlowArrowHead
           type={SessionMapHeadType.DIRECT_CONNECTION}
-          color={sessionMapColors.selected}
+          color={SESSION_MAP_COLORS.selected}
         />
         <ReactFlowArrowHead
           type={SessionMapHeadType.GRAYED_OUT}
-          color={sessionMapColors.grayedOut}
+          color={SESSION_MAP_COLORS.grayedOut}
         />
       </ReactFlowGraph>
     </>

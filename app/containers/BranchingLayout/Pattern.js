@@ -13,7 +13,6 @@ import TextButton from 'components/Button/TextButton';
 
 import binNoBg from 'assets/svg/bin-no-bg.svg';
 import { themeColors, colors } from 'theme';
-
 import messages from './messages';
 import TargetList from './TargetList';
 
@@ -91,8 +90,8 @@ const Pattern = ({
             sessionBranching={sessionBranching}
             setTargetChooserOpen={setTargetChooserOpen}
             sumPercentages={sumPercentages}
-            isOnlyTarget
             disableBranchingToSession={disableBranchingToSession}
+            isOnlyTarget
           />
         )}
       </Row>
@@ -140,7 +139,6 @@ Pattern.propTypes = {
   onAddTarget: PropTypes.func,
   onUpdateTarget: PropTypes.func,
   onRemoveTarget: PropTypes.func,
-  newPattern: PropTypes.bool,
   sessionBranching: PropTypes.bool,
   handleDropdownClick: PropTypes.func,
   formatMessage: PropTypes.func,

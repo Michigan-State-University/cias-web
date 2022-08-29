@@ -102,7 +102,7 @@ module.exports = (options) => ({
       },
 
       {
-        test: /\.(jpg|png|gif)$/,
+        test: /\.(jpg|png|gif|jpeg)$/,
         type: 'asset',
         parser: {
           dataUrlCondition: {
@@ -128,7 +128,7 @@ module.exports = (options) => ({
                 optimizationLevel: 7,
               },
               pngquant: {
-                quality: '65-90',
+                quality: [0.65, 0.9],
                 speed: 4,
               },
             },

@@ -53,8 +53,8 @@ export const TargetList = ({
             target={target}
             uniqueTargetIndex={uniqueTargetIndex}
             invalidPercentage={sumPercentages !== 100}
-            bg={colors.white}
             disableBranchingToSession={disableBranchingToSession}
+            bg={colors.white}
           />
         );
       })}
@@ -75,8 +75,8 @@ TargetList.propTypes = {
   sessionBranching: PropTypes.bool,
   setTargetChooserOpen: PropTypes.func,
   sumPercentages: PropTypes.number,
-  isOnlyTarget: PropTypes.bool,
   disableBranchingToSession: PropTypes.bool,
+  isOnlyTarget: PropTypes.bool,
 };
 
 export default memo(TargetList);

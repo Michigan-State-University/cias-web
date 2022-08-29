@@ -51,7 +51,7 @@ exports[`<SessionSchedule /> Should render and match the snapshot 1`] = `
   width: 100%;
 }
 
-.c13 {
+.c14 {
   display: -webkit-box;
   display: -webkit-flex;
   display: -ms-flexbox;
@@ -135,7 +135,7 @@ exports[`<SessionSchedule /> Should render and match the snapshot 1`] = `
   color: #2F3850;
 }
 
-.c12 {
+.c13 {
   font-family: DM Sans;
   font-size: 13px;
   line-height: 130%;
@@ -144,7 +144,7 @@ exports[`<SessionSchedule /> Should render and match the snapshot 1`] = `
   color: rgba(14,14,14,0.6);
 }
 
-.c14 {
+.c15 {
   font-family: DM Sans;
   font-size: 13px;
   line-height: 130%;
@@ -154,7 +154,7 @@ exports[`<SessionSchedule /> Should render and match the snapshot 1`] = `
   color: rgba(210,55,29,1);
 }
 
-.c11 {
+.c12 {
   background-color: #F8FBFF;
   border-radius: 5px;
   border-style: solid;
@@ -166,41 +166,56 @@ exports[`<SessionSchedule /> Should render and match the snapshot 1`] = `
   height: 50px;
 }
 
-.c11:hover {
+.c12:hover {
   cursor: pointer;
 }
 
-.c11:focus {
+.c12:focus {
   outline: none;
 }
 
-.c10 .schedule-date-picker {
+.c11 .schedule-date-picker {
   font-family: DM Sans;
   background-color: #E9F1FB;
 }
 
-.c10 .schedule-date-picker .react-datepicker__header {
+.c11 .schedule-date-picker .react-datepicker__header {
   background-color: #F8FBFF;
 }
 
-.c10 .schedule-date-picker .react-datepicker__day--keyboard-selected {
-  background-color: #B727EA;
+.c11 .schedule-date-picker .react-datepicker__day {
+  color: #2F3850;
 }
 
-.c10 .schedule-date-picker .react-datepicker__day--selected {
-  background-color: #B727EA;
+.c11 .schedule-date-picker .react-datepicker__day:hover {
+  color: #FFFFFF;
+  background-color: rgba(200,102,234,0.7);
 }
 
-.c10 .schedule-date-picker .react-datepicker__day:hover {
-  color: #0E0E0E;
-  background-color: #F8FBFF;
+.c11 .schedule-date-picker .react-datepicker__day--keyboard-selected {
+  background-color: #C866EA;
 }
 
-.c10 .schedule-date-picker .react-datepicker__year-option {
+.c11 .schedule-date-picker .react-datepicker__day--in-range,
+.c11 .schedule-date-picker .react-datepicker__day--in-selecting-range {
+  color: #2F3850;
+  background-color: rgba(200,102,234,0.1);
+}
+
+.c10 .schedule-date-picker .react-datepicker__day--selected:not(.c10 .schedule-date-picker .react-datepicker__day--in-selecting-range),
+.c11 .schedule-date-picker .react-datepicker__day--range-start:not(.c11 .schedule-date-picker .react-datepicker__day--in-selecting-range),
+.c11 .schedule-date-picker .react-datepicker__day--range-end:not(.c11 .schedule-date-picker .react-datepicker__day--in-selecting-range),
+.c11 .schedule-date-picker .react-datepicker__day--selecting-range-start,
+.c11 .schedule-date-picker .react-datepicker__day--selecting-range-end {
+  color: #FFFFFF;
+  background-color: #C866EA;
+}
+
+.c11 .schedule-date-picker .react-datepicker__year-option {
   background-color: #E9F1FB;
 }
 
-.c10 .schedule-date-picker .react-datepicker__month-option {
+.c11 .schedule-date-picker .react-datepicker__month-option {
   background-color: #E9F1FB;
 }
 
@@ -280,7 +295,7 @@ exports[`<SessionSchedule /> Should render and match the snapshot 1`] = `
                 class="c0"
               >
                 <div
-                  class="c10"
+                  class="c10 c11"
                 >
                   <div
                     class="react-datepicker-wrapper"
@@ -289,13 +304,13 @@ exports[`<SessionSchedule /> Should render and match the snapshot 1`] = `
                       class="react-datepicker__input-container"
                     >
                       <button
-                        class="c11"
+                        class="c12"
                         data-private="true"
                         height="50"
                         width="120"
                       >
                         <p
-                          class="c12"
+                          class="c13"
                           color="#0E0E0E"
                           font-size="15"
                         >
@@ -310,11 +325,11 @@ exports[`<SessionSchedule /> Should render and match the snapshot 1`] = `
           </div>
         </div>
         <div
-          class="c13"
+          class="c14"
           width="100%"
         >
           <p
-            class="c14"
+            class="c15"
             color="#D2371D"
             font-size="12"
           >

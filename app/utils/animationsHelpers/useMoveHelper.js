@@ -1,5 +1,6 @@
 import { useState, useEffect, useRef } from 'react';
 import isEqual from 'lodash/isEqual';
+import clamp from 'lodash/clamp';
 
 import { elements } from 'theme';
 import { moveAnimations as moveAnimationsNames } from 'utils/animations/animationsNames';
@@ -16,11 +17,13 @@ const useMoveHelper = (animationContainer, blocks, dispatchUpdate) => {
 
   const loadedMoveAnimations = useRef([]);
 
+  const clampPosition = (value) => clamp(value, 0, Number.MAX_SAFE_INTEGER);
+
   const getScaledPosition = (scale, position) => {
     const { clientWidth, clientHeight } = animationContainer || defaultCurrent;
     return {
-      x: Math.min(position.x * scale.x, clientWidth - 100),
-      y: Math.min(position.y, clientHeight - 100),
+      x: clampPosition(Math.min(position.x * scale.x, clientWidth - 100)),
+      y: clampPosition(Math.min(position.y, clientHeight - 100)),
     };
   };
 

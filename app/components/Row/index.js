@@ -22,6 +22,8 @@ const Row = styled.div.attrs((props) => ({
   ${border};
   ${style};
   ${positioning};
+  ${({ lineHeight }) => lineHeight && `line-height: ${lineHeight};`}
+  ${({ fontSize }) => fontSize && `font-size: ${fontSize};`}
 `;
 
 export default Row;

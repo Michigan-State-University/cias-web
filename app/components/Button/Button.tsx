@@ -12,13 +12,15 @@ type Props = {
   inverted?: boolean;
   children?: React.ReactNode;
   disabled?: boolean;
+  light?: boolean;
 } & Record<string, any>;
 
-const Button = React.forwardRef<{}, Props>(
-  ({ loading, title, children, disabled, inverted, ...props }, ref) => (
+const Button = React.forwardRef<HTMLButtonElement, Props>(
+  ({ loading, title, children, disabled, inverted, light, ...props }, ref) => (
     <StyledButton
       disabled={disabled || loading}
       inverted={inverted}
+      light={light}
       {...props}
       ref={ref}
     >

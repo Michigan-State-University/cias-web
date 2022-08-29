@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useMemo } from 'react';
 import PropTypes from 'prop-types';
 import { createStructuredSelector } from 'reselect';
 import { connect } from 'react-redux';
@@ -20,10 +20,14 @@ import arrowUp from 'assets/svg/arrow-up-black.svg';
 import reorderIcon from 'assets/svg/reorder-hand.svg';
 
 import { reorderScope } from 'models/Session/ReorderScope';
-import { FinishGroupType } from 'models/Session/GroupTypes';
 import QuestionListItem from '../../components/QuestionListItem';
 import { Spacer, DraggableContainer } from './styled';
 import messages from './messages';
+import {
+  NON_DRAGGABLE_GROUPS,
+  NON_MANAGEABLE_GROUPS,
+  SCREENS_NON_DRAGGABLE_GROUPS,
+} from './constants';
 
 const QuestionListGroup = ({
   questionGroup,
@@ -40,7 +44,6 @@ const QuestionListGroup = ({
   interventionStatus,
   index: groupIndex,
   formatMessage,
-  noDnd,
   groupIds,
   isOpened,
   toggleCollapsable,
@@ -50,7 +53,20 @@ const QuestionListGroup = ({
   const handleToggleCollapsable = (value = null) =>
     toggleCollapsable(id, value);
 
-  const isFinishGroup = type === FinishGroupType;
+  const isManageableGroup = useMemo(
+    () => !NON_MANAGEABLE_GROUPS.includes(type),
+    [type],
+  );
+
+  const isDraggableGroup = useMemo(
+    () => !NON_DRAGGABLE_GROUPS.includes(type),
+    [type],
+  );
+
+  const areDraggableScreens = useMemo(
+    () => !SCREENS_NON_DRAGGABLE_GROUPS.includes(type),
+    [type],
+  );
 
   useEffect(() => {
     handleToggleCollapsable(true);
@@ -59,7 +75,7 @@ const QuestionListGroup = ({
   const renderQuestions = (providedGroupDroppable) => (
     <DraggableContainer
       style={{ width: '100%' }}
-      {...(!noDnd && {
+      {...(areDraggableScreens && {
         ref: providedGroupDroppable.innerRef,
         ...providedGroupDroppable.droppableProps,
       })}
@@ -78,11 +94,11 @@ const QuestionListGroup = ({
             sessionId={sessionId}
             disabled={!editingPossible}
             interventionStatus={interventionStatus}
-            noDnd={noDnd}
+            isDraggableScreen={areDraggableScreens}
           />
         </Row>
       ))}
-      {!noDnd && providedGroupDroppable.placeholder}
+      {areDraggableScreens && providedGroupDroppable.placeholder}
     </DraggableContainer>
   );
 
@@ -100,12 +116,12 @@ const QuestionListGroup = ({
     <Row
       width="100%"
       display="block"
-      {...(noDnd
-        ? { key: `group-${id}` }
-        : {
+      {...(isDraggableGroup
+        ? {
             ref: providedGroupDraggable.innerRef,
             ...providedGroupDraggable.draggableProps,
-          })}
+          }
+        : { key: `group-${id}` })}
     >
       <Collapse
         disabled
@@ -120,7 +136,7 @@ const QuestionListGroup = ({
         label={
           <Row align="center" justify="between" width="100%" mr={10}>
             <Box display="flex" align="center">
-              {manage && !isFinishGroup && (
+              {manage && isManageableGroup && (
                 <Checkbox
                   id={`group-to-select-${id}`}
                   mr={8}
@@ -146,7 +162,7 @@ const QuestionListGroup = ({
                 disabled={!editingPossible}
               />
             </Box>
-            {!noDnd && (
+            {isDraggableGroup && (
               <Img
                 src={reorderIcon}
                 disabled={!editingPossible}
@@ -158,7 +174,7 @@ const QuestionListGroup = ({
           </Row>
         }
       >
-        {noDnd ? renderQuestions() : renderQuestionsWithDnd()}
+        {areDraggableScreens ? renderQuestionsWithDnd() : renderQuestions()}
       </Collapse>
       <Spacer />
     </Row>
@@ -176,7 +192,7 @@ const QuestionListGroup = ({
   );
 
   if (questions.length === 0) return <></>;
-  return noDnd ? renderGroup() : renderGroupWithDnd();
+  return isDraggableGroup ? renderGroupWithDnd() : renderGroup();
 };
 
 QuestionListGroup.propTypes = {
@@ -195,7 +211,6 @@ QuestionListGroup.propTypes = {
   interventionStatus: PropTypes.string,
   isDuringQuestionReorder: PropTypes.bool,
   index: PropTypes.number,
-  noDnd: PropTypes.bool,
   groupIds: PropTypes.array,
   isOpened: PropTypes.bool,
   toggleCollapsable: PropTypes.func,

@@ -157,6 +157,7 @@ exports[`<Sidebar /> Should render and match the snapshot with session path 1`] 
   cursor: pointer;
   border: none;
   outline: none;
+  font-weight: bold;
   background-color: #FFFFFF;
   color: #B727EA;
   border: 1px solid #B727EA;
@@ -414,6 +415,7 @@ exports[`<Sidebar /> Should render and match the snapshot without matching path 
   cursor: pointer;
   border: none;
   outline: none;
+  font-weight: bold;
   background-color: #FFFFFF;
   color: #B727EA;
   border: 1px solid #B727EA;

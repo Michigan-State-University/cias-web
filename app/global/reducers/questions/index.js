@@ -14,6 +14,7 @@ export {
   deleteQuestionsRequest,
   copyExternallyQuestionRequest,
   updateQuestionImageRequest,
+  createQuestionGroupRequest,
   updateVariableAction,
 } from './actions';
 export { questionsReducer } from './reducer';
@@ -26,6 +27,7 @@ export {
   makeSelectSelectedQuestionGroupId,
   makeSelectLoaders,
   makeSelectLoader,
+  makeSelectError,
   makeSelectQuestionsLength,
   makeSelectSelectedQuestionType,
   makeSelectVisibleGroupsSize,
@@ -36,6 +38,7 @@ export {
   makeSelectThirdPartyReportQuestionExists,
   makeSelectPhoneQuestionExists,
   makeSelectParticipantReportQuestionExists,
+  makeSelectTlfbVariables,
 } from './selectors';
 export {
   copyQuestionSaga,
