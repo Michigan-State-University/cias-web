@@ -26,7 +26,7 @@ export type HelpingMaterialsData = {
   navigatorLinks: NavigatorLink[];
   navigatorFiles: AppFile[];
   participantFiles: AppFile[];
-  filledScriptTemplate: AppFile;
+  filledScriptTemplate: Nullable<AppFile>;
 };
 
 export type NavigatorSetup = {

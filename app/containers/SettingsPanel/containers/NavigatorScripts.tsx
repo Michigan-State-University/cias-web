@@ -5,6 +5,8 @@ import CSVFileValidator from 'csv-file-validator';
 import { toast } from 'react-toastify';
 import isEmpty from 'lodash/isEmpty';
 
+import { navigatorScriptConfig } from 'models/NavigatorSetup';
+
 import Column from 'components/Column';
 import H2 from 'components/H2';
 import ErrorAlert from 'components/ErrorAlert';
@@ -24,7 +26,6 @@ import navigatorScriptExample from 'assets/images/navigator-script-example.png';
 import DownloadScriptTemplatePanel from '../Components/DownloadScriptTemplatePanel';
 import FilesPanel from '../Components/FilesPanel';
 import messages from '../messages';
-import { navigatorScriptConfig } from '../utils';
 
 type Props = {
   interventionId: string;

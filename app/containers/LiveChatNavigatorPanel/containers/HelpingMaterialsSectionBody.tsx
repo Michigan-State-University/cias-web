@@ -1,6 +1,6 @@
-import { useIntl } from 'react-intl';
 import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
+import isEmpty from 'lodash/isEmpty';
 
 import { themeColors } from 'theme';
 import {
@@ -9,18 +9,16 @@ import {
   makeSelectOpenedConversationInterventionId,
 } from 'global/reducers/liveChat';
 
-import Text from 'components/Text';
-import FileBox from 'components/FileBox';
-import { PrimaryLink } from 'components/Links';
 import Column from 'components/Column';
 import Loader from 'components/Loader';
 import ErrorAlert from 'components/ErrorAlert';
 
 import { SectionBody } from '../components/styled';
-import messages from '../messages';
+import NavigatorScriptsList from '../components/NavigatorScriptsList';
+import NavigatorLinksList from '../components/NavigatorLinksList';
+import NavigatorFilesList from '../components/NavigatorFilesList';
 
 const HelpingMaterialsSectionBody = () => {
-  const { formatMessage } = useIntl();
   const dispatch = useDispatch();
 
   const interventionId = useSelector(
@@ -43,39 +41,25 @@ const HelpingMaterialsSectionBody = () => {
     <SectionBody
       borderLeft={`1px solid ${themeColors.highlight}`}
       pl={16}
-      py={24}
+      pt={24}
+      pb={16}
+      mr={-16}
       textAlign="left"
-      overflow="scroll"
     >
       {loading && <Loader type="inline" />}
       {error && <ErrorAlert errorText={error.message} />}
       {!loading && !error && data && (
-        <>
-          <Text mb={8} fontWeight="bold">
-            {formatMessage(messages.usefulLinks)}
-          </Text>
-          <Column gap={4}>
-            {data.navigatorLinks.map(({ displayName, url, id }) => (
-              <PrimaryLink key={id} href={url} target="_blank">
-                {displayName}
-              </PrimaryLink>
-            ))}
-          </Column>
-          <Text mt={32} mb={8} fontWeight="bold">
-            {formatMessage(messages.filesToDownload)}
-          </Text>
-          <Column gap={8}>
-            {data.navigatorFiles.map(({ id, name, url }) => (
-              <FileBox
-                name={name}
-                url={url}
-                key={id}
-                maxHeight={44}
-                minHeight={44}
-              />
-            ))}
-          </Column>
-        </>
+        <Column gap={32} maxHeight="100%" overflow="auto" pr={16}>
+          {data.filledScriptTemplate && (
+            <NavigatorScriptsList scriptsFile={data.filledScriptTemplate} />
+          )}
+          {!isEmpty(data.navigatorLinks) && (
+            <NavigatorLinksList navigatorLinks={data.navigatorLinks} />
+          )}
+          {!isEmpty(data.navigatorFiles) && (
+            <NavigatorFilesList navigatorFiles={data.navigatorFiles} />
+          )}
+        </Column>
       )}
     </SectionBody>
   );

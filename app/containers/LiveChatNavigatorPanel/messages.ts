@@ -117,4 +117,8 @@ export default defineMessages({
     id: `${scope}.filesToDownload`,
     defaultMessage: 'Files to download',
   },
+  scriptsFromResearcher: {
+    id: `${scope}.scriptsFromResearcher`,
+    defaultMessage: 'Scripts from researcher',
+  },
 });

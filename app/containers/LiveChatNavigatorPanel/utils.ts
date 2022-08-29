@@ -1,4 +1,8 @@
 import { Conversation, InterventionConversation } from 'models/LiveChat';
+import {
+  ParsedNavigatorScriptsFileRow,
+  NavigatorScriptsGroup,
+} from 'models/NavigatorSetup';
 
 export const countUnreadConversations = (
   interventionConversationsValues: InterventionConversation[],
@@ -23,3 +27,23 @@ export const countUnreadConversations = (
     },
     {} as Record<InterventionConversation['interventionId'], number>,
   );
+
+export const groupNavigatorScripts = (
+  parsedNavigatorScriptsFileRows: ParsedNavigatorScriptsFileRow[],
+): NavigatorScriptsGroup[] => {
+  const reducedScripts = parsedNavigatorScriptsFileRows.reduce<
+    Record<string, string[]>
+  >((accumulator, { header, sampleMessage }) => {
+    const reducedGroup = accumulator[header];
+    if (reducedGroup) {
+      reducedGroup.push(sampleMessage);
+    } else {
+      accumulator[header] = [sampleMessage];
+    }
+    return accumulator;
+  }, {});
+  return Object.entries(reducedScripts).map(([header, sampleMessages]) => ({
+    header,
+    sampleMessages,
+  }));
+};
