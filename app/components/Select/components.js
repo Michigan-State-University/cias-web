@@ -32,6 +32,18 @@ const Option = ({
     if (!additionalData) return formatLabel(label);
     return formatLabel(label, additionalData);
   };
+
+  /*
+      Make react-select not propagate click event up the DOM as it breaks outside click handler
+   */
+  const onClick = (e) => {
+    e.nativeEvent.stopImmediatePropagation();
+    innerProps.onClick(e);
+  };
+
+  // eslint-disable-next-line no-param-reassign
+  innerProps = { ...innerProps, onClick };
+
   return (
     <OptionContainer
       ref={innerRef}
@@ -48,4 +60,20 @@ const Option = ({
 
 Option.propTypes = components.Option.propTypes;
 
-export { DropdownIndicator, Option };
+const DefaultOption = ({ innerProps, ...props }) => {
+  /*
+      Make react-select not propagate click event up the DOM as it breaks outside click handler
+   */
+  const onClick = (e) => {
+    e.nativeEvent.stopImmediatePropagation();
+    innerProps.onClick(e);
+  };
+
+  // eslint-disable-next-line no-param-reassign
+  props.innerProps = { ...innerProps, onClick };
+  return <components.Option {...props} />;
+};
+
+DefaultOption.propTypes = components.Option.propTypes;
+
+export { DropdownIndicator, Option, DefaultOption };

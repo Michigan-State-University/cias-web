@@ -8,6 +8,8 @@ import {
 } from './actions';
 import { AnswersAction, AnswersState } from './types';
 
+export const answersReducerKey = 'answers';
+
 export const initialState: AnswersState = {
   answers: [],
   loaders: {

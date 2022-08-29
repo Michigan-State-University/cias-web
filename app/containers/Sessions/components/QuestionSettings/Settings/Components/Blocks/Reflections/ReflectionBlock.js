@@ -41,7 +41,6 @@ import { updateBlockSettings, switchSpeechReflection } from '../../../actions';
 
 import QuestionListDropdown from './QuestionListDropdown';
 import Reflection from './Reflection';
-import ClearAnimationButton from '../clearAnimationButton';
 
 const setUpReflections = (question) => {
   switch (question.type) {
@@ -144,7 +143,6 @@ const ReflectionBlock = ({
 
   return (
     <Column>
-      <ClearAnimationButton blockIndex={blockIndex} disabled={disabled} />
       {currentQuestionType === feedbackQuestion.id && (
         <>
           <Box mt={15}>{formatMessage(messages.selectActionPosition)}</Box>

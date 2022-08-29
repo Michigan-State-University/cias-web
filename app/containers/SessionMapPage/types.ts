@@ -1,8 +1,8 @@
 import { Edge, FlowTransform } from 'react-flow-renderer';
 
-import { QuestionDTO } from 'models/Question';
+import { QuestionDTO, TlfbQuestionDTO } from 'models/Question';
 
-interface InteractiveNodeData {
+export interface InteractiveNodeData {
   showDetailedInfo: boolean;
   selectableOnClick: boolean;
   selected: boolean;
@@ -18,6 +18,10 @@ export interface QuestionNodeData extends InteractiveNodeData {
 
 export interface SessionNodeData extends InteractiveNodeData {
   sessionIndex: number;
+}
+
+export interface TlfbNodeData extends InteractiveNodeData {
+  tlfbQuestion: TlfbQuestionDTO;
 }
 
 export interface CollapseNodeData {

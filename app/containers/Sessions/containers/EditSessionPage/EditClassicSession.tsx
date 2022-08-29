@@ -65,9 +65,9 @@ import {
   makeSelectQuestions,
   makeSelectSelectedQuestionId,
   reorderQuestionListRequest,
-  makeSelectLoader,
   deleteQuestionsRequest,
   selectQuestion as selectQuestionAction,
+  createQuestionGroupRequest,
 } from 'global/reducers/questions';
 import {
   reorderGroupListRequest,
@@ -90,11 +90,11 @@ import { JumpToScreenLocationState } from 'global/types/locationState';
 
 import GroupActionButton from 'containers/Sessions/components/GroupActionButton';
 import { reorderScope } from 'models/Session/ReorderScope';
-import { FinishGroupType } from 'models/Session/GroupTypes';
 import { ClassicSession, Session } from 'models/Session';
 
-import { QuestionDTO } from 'models/Question';
-import { GroupDto } from 'models/Groups/GroupDto';
+import { QuestionDTO, QuestionTypes } from 'models/Question';
+import { QuestionGroup, GroupType } from 'models/QuestionGroup';
+import { questionType } from 'models/Session/QuestionTypes';
 import QuestionDetails from '../../components/QuestionDetails';
 import QuestionSettings from '../../components/QuestionSettings';
 import QuestionTypeChooser from '../../components/QuestionTypeChooser';
@@ -165,8 +165,9 @@ type Props = {
   createQuestion: (question: QuestionDTO, sessionId: string) => void;
   selectedQuestion: string;
   questions: QuestionDTO[];
-  groups: GroupDto[];
+  groups: QuestionGroup[];
   selectQuestion: (id: string) => void;
+  createQuestionGroup: (sessionId: string, groupType: string) => void;
 } & NonReduxProps;
 
 const EditClassicSessionPage = ({
@@ -186,6 +187,7 @@ const EditClassicSessionPage = ({
   getQuestionGroups,
   session: { id: sessionId, name: sessionName },
   interventionStatus,
+  createQuestionGroup,
 }: Props): JSX.Element => {
   const params = useParams<{ sessionId: string }>();
   const { formatMessage } = useIntl();
@@ -266,7 +268,7 @@ const EditClassicSessionPage = ({
   const currentQuestion = questions.find(({ id }) => id === selectedQuestion);
   const currentGroupScope = groups.find(
     ({ id }) => currentQuestion && id === currentQuestion.question_group_id,
-  );
+  )!;
 
   const groupActions = [
     {
@@ -336,18 +338,22 @@ const EditClassicSessionPage = ({
   }, []);
 
   const onCreateQuestion = (type: string) => {
-    const newQuestionSubtitle =
-      // @ts-ignore
-      messages.defaultQuestionSubtitles[type] || messages.newQuestionSubtitle;
+    if (type.includes(questionType)) {
+      const newQuestionSubtitle =
+        // @ts-ignore
+        messages.defaultQuestionSubtitles[type] || messages.newQuestionSubtitle;
 
-    createQuestion(
-      instantiateEmptyQuestion(
-        formatMessage(messages.newQuestionTitle),
-        type,
-        formatMessage(newQuestionSubtitle),
-      ) as QuestionDTO,
-      params.sessionId,
-    );
+      createQuestion(
+        instantiateEmptyQuestion(
+          formatMessage(messages.newQuestionTitle),
+          type,
+          formatMessage(newQuestionSubtitle),
+        ) as QuestionDTO,
+        params.sessionId,
+      );
+    } else {
+      createQuestionGroup(params.sessionId, type);
+    }
   };
 
   const onDragEnd = (result: DropResult) => {
@@ -450,15 +456,19 @@ const EditClassicSessionPage = ({
     );
   };
 
-  const finishGroup = groups.find((group) => group.type === FinishGroupType);
+  const finishGroup = groups.find((group) => group.type === GroupType.FINISH);
 
   const filteredGroups = groups.filter(
-    (group) => group.type !== FinishGroupType,
+    (group) => group.type !== GroupType.FINISH,
   );
 
   const goToSessionMap = () => {
     const url = `/interventions/${interventionId}/sessions/${sessionId}/map`;
     history.push(url, { selectedQuestionId: selectedQuestion });
+  };
+
+  const handleGroupNameChange = (name: string) => {
+    changeGroupName(name, sessionId, currentGroupScope.id);
   };
 
   return (
@@ -577,7 +587,6 @@ const EditClassicSessionPage = ({
               </DragDropContext>
               {finishGroup && (
                 <QuestionListGroup
-                  noDnd
                   editingPossible={editingPossible}
                   changeGroupName={changeGroupName}
                   checkSelectedGroup={checkSelectedGroup}
@@ -621,15 +630,13 @@ const EditClassicSessionPage = ({
         <Column align="between" overflow="hidden">
           <Row overflow="hidden" filled>
             <QuestionDetails
-              formatMessage={formatMessage}
-              changeGroupName={changeGroupName}
+              changeGroupName={handleGroupNameChange}
               currentGroupScope={currentGroupScope}
-              sessionId={sessionId}
             />
-            {
+            {currentQuestion?.type !== QuestionTypes.TLFB_CONFIG && (
               // @ts-ignore
               <QuestionSettings onGoToSessionMapClick={goToSessionMap} />
-            }
+            )}
           </Row>
         </Column>
       </Row>
@@ -640,7 +647,6 @@ const EditClassicSessionPage = ({
 const mapStateToProps = createStructuredSelector({
   questions: makeSelectQuestions(),
   selectedQuestion: makeSelectSelectedQuestionId(),
-  createQuestionsLoader: makeSelectLoader('createQuestionLoading'),
   groups: makeSelectQuestionGroups(),
 });
 
@@ -656,6 +662,7 @@ const mapDispatchToProps = {
   changeGroupName: changeGroupNameRequest,
   getQuestionGroups: getQuestionGroupsRequest,
   selectQuestion: selectQuestionAction,
+  createQuestionGroup: createQuestionGroupRequest,
 };
 
 const withConnect = connect(mapStateToProps, mapDispatchToProps);

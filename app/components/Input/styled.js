@@ -1,7 +1,9 @@
 import styled from 'styled-components';
 import ReactQuill from 'react-quill';
+import Color from 'color';
 
 import { colors, borders, fontFamily, themeColors } from 'theme';
+
 import { margin, layout, border } from '../BaseComponentStyles';
 
 export const QuillStyled = styled(ReactQuill)`
@@ -44,7 +46,7 @@ export const QuillStyled = styled(ReactQuill)`
 `;
 
 export const StyledDateInput = styled.button`
-  background-color: ${colors.zirkon};
+  background-color: ${({ bg }) => (bg ? `${bg}` : `${colors.zirkon}`)};
   border-radius: ${borders.borderRadius};
   border-style: ${borders.borderStyle};
   border-width: ${borders.borderWidth};
@@ -64,24 +66,47 @@ export const DatePickerWrapper = styled.div`
   .schedule-date-picker {
     font-family: ${fontFamily};
     background-color: ${colors.linkWater};
-    .react-datepicker__header {
-      background-color: ${colors.zirkon};
-    }
-    .react-datepicker__day--keyboard-selected {
-      background-color: ${themeColors.secondary};
-    }
-    .react-datepicker__day--selected {
-      background-color: ${themeColors.secondary};
-    }
-    .react-datepicker__day:hover {
-      color: ${colors.black};
-      background-color: ${colors.zirkon};
-    }
-    .react-datepicker__year-option {
-      background-color: ${colors.linkWater};
-    }
-    .react-datepicker__month-option {
-      background-color: ${colors.linkWater};
+
+    .react-datepicker {
+      &__header {
+        background-color: ${colors.zirkon};
+      }
+
+      &__day {
+        color: ${themeColors.text};
+
+        &:hover {
+          color: ${colors.white};
+          background-color: ${Color(colors.orchid).alpha(0.7).toString()};
+        }
+
+        &--keyboard-selected {
+          background-color: ${colors.orchid};
+        }
+
+        &--in-range,
+        &--in-selecting-range {
+          color: ${themeColors.text};
+          background-color: ${Color(colors.orchid).alpha(0.1).toString()};
+        }
+
+        &--selected:not(&--in-selecting-range),
+        &--range-start:not(&--in-selecting-range),
+        &--range-end:not(&--in-selecting-range),
+        &--selecting-range-start,
+        &--selecting-range-end {
+          color: ${colors.white};
+          background-color: ${colors.orchid};
+        }
+      }
+
+      &__year-option {
+        background-color: ${colors.linkWater};
+      }
+
+      &__month-option {
+        background-color: ${colors.linkWater};
+      }
     }
   }
 `;
@@ -99,6 +124,20 @@ export const SearchIcon = styled.img`
   position: absolute;
   left: 10px;
   top: 10px;
+`;
+
+export const Adornment = styled.div`
+  text-align: center;
+  color: ${Color(colors.bluewood).alpha(0.5).toString()};
+  visibility: ${({ visible }) => (visible ? 'visible' : 'hidden')};
+  cursor: text;
+  ${margin};
+  position: absolute;
+  right: 0;
+  max-width: 75%;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
 `;
 
 export const Sufix = styled.div`

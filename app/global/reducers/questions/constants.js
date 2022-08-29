@@ -1,4 +1,5 @@
 export const SELECT_QUESTION = 'app/EditSessionPage/SELECT_QUESTION';
+export const CLEAR_ERROR = 'app/EditSessionPage/CLEAR_ERROR';
 
 export const CREATE_QUESTION_REQUEST =
   'app/EditSessionPage/CREATE_QUESTION_REQUEST';
@@ -85,4 +86,10 @@ export const UPDATE_QUESTION_DATA = 'app/EditSessionPage/UPDATE_QUESTION_DATA';
 
 export const UPDATE_QUESTION_SETTINGS =
   'app/EditSessionPage/UPDATE_QUESTION_SETTINGS';
+
+export const CREATE_QUESTION_GROUP_REQUEST =
+  'app/EditSessionPage/CREATE_QUESTION_GROUP_REQUEST';
+
+export const CREATE_QUESTIONS_SUCCESS =
+  'app/EditSessionPage/CREATE_QUESTIONS_SUCCESS';
 export const UPDATE_VARIABLE = 'app/EditSessionPage/UPDATE_VARIABLE';

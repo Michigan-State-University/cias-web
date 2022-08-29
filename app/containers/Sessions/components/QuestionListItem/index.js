@@ -19,6 +19,7 @@ import { colors, themeColors } from 'theme';
 import { getNarratorPositionWhenQuestionIsChanged } from 'utils/getNarratorPosition';
 import { hasObjectProperty } from 'utils/hasObjectProperty';
 import { htmlToPlainText } from 'utils/htmlToPlainText';
+import settingsTabLabels from 'utils/settingsTabsLabels';
 import {
   copyQuestionRequest,
   deleteQuestionRequest,
@@ -36,13 +37,7 @@ import {
 } from 'global/reducers/localState';
 
 import StyledCircle from 'components/Circle/StyledCircle';
-import {
-  finishQuestion,
-  QuestionTypes,
-  nameQuestion,
-  participantReport,
-  phoneQuestion,
-} from 'models/Session/QuestionTypes';
+import { QuestionTypes } from 'models/Session/QuestionTypes';
 import Box from 'components/Box';
 import Checkbox from 'components/Checkbox';
 import { ConfirmationModal } from 'components/Modal';
@@ -57,6 +52,12 @@ import VariableInput from '../QuestionDetails/VariableInput';
 import { ClampedTitle, ToggleableBox } from './styled';
 import messages from './messages';
 import getIndex from './utils';
+import {
+  NON_DUPLICABLE_SCREENS,
+  NON_MANAGEABLE_SCREENS,
+  ONLY_NARRATOR_TAB_SCREENS,
+  VARIABLE_NON_EDITABLE_SCREENS,
+} from './constants';
 
 const QuestionListItem = ({
   question,
@@ -77,7 +78,7 @@ const QuestionListItem = ({
   manage,
   interventionStatus,
   disabled,
-  noDnd,
+  isDraggableScreen,
   groupIds,
   allQuestions,
   sessionId,
@@ -89,14 +90,18 @@ const QuestionListItem = ({
   const { type, subtitle, id, body, question_group_id: groupId } = question;
   const isSelected = selectedQuestionIndex === id;
 
-  const isFinishScreen = useMemo(() => type === finishQuestion.id, [type]);
-  const isNameScreen = useMemo(() => type === nameQuestion.id, [type]);
+  const isManageableScreen = useMemo(
+    () => !NON_MANAGEABLE_SCREENS.includes(type),
+    [type],
+  );
 
-  const canDuplicate = useMemo(
-    () =>
-      type !== nameQuestion.id &&
-      type !== participantReport.id &&
-      type !== phoneQuestion.id,
+  const isDuplicableScreen = useMemo(
+    () => !NON_DUPLICABLE_SCREENS.includes(type),
+    [type],
+  );
+
+  const isVariableEditable = useMemo(
+    () => !VARIABLE_NON_EDITABLE_SCREENS.includes(type),
     [type],
   );
 
@@ -157,7 +162,7 @@ const QuestionListItem = ({
       label: <FormattedMessage {...messages.duplicateHere} />,
       action: handleCopy,
       color: colors.black,
-      disabled: disabled || !canDuplicate,
+      disabled: disabled || !isDuplicableScreen,
       icon: copy,
     },
     {
@@ -184,7 +189,14 @@ const QuestionListItem = ({
   const beforeRender = () => {
     setDraggable(false);
     changeNarratorBlockIndex(-1);
-    toggleSettings({ index, questionIndex: selectedQuestionIndex });
+
+    const toggleNarratorTab = ONLY_NARRATOR_TAB_SCREENS.includes(type);
+
+    toggleSettings({
+      index,
+      questionIndex: selectedQuestionIndex,
+      tab: toggleNarratorTab ? settingsTabLabels.narrator : undefined,
+    });
   };
 
   const renderQuestion = () => (
@@ -223,7 +235,7 @@ const QuestionListItem = ({
         }`}
       >
         <Row justify="between" ref={questionRef}>
-          {manage && !isFinishScreen && (
+          {manage && isManageableScreen && (
             <Column xs={1}>
               <Checkbox
                 id={`question-to-select-${id}`}
@@ -261,12 +273,12 @@ const QuestionListItem = ({
                   questionId={id}
                   variable={body.variable}
                   interventionStatus={interventionStatus}
-                  disabled={isNameScreen}
+                  disabled={!isVariableEditable}
                 />
               </Row>
             )}
           </Column>
-          {!manage && !isFinishScreen && (
+          {!manage && isManageableScreen && (
             <Column xs={1}>
               <Dropdown options={options} dropdownWidth={180} />
             </Column>
@@ -297,7 +309,7 @@ const QuestionListItem = ({
     </Draggable>
   );
 
-  return noDnd ? renderQuestion() : renderQuestionWithDnd();
+  return isDraggableScreen ? renderQuestionWithDnd() : renderQuestion();
 };
 
 QuestionListItem.propTypes = {
@@ -321,7 +333,7 @@ QuestionListItem.propTypes = {
   selectSlide: PropTypes.func,
   disabled: PropTypes.bool,
   interventionStatus: PropTypes.string,
-  noDnd: PropTypes.bool,
+  isDraggableScreen: PropTypes.bool,
   groupIds: PropTypes.array,
   allQuestions: PropTypes.array,
   lastCreatedQuestionId: PropTypes.string,

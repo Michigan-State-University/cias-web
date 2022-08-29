@@ -5,6 +5,9 @@ import {
   GridQuestionPayload,
   QuestionPayload,
   SliderQuestionPayload,
+  TlfbEventsPayload,
+  TlfbConfigPayload,
+  TlfbQuestionPayload,
 } from './QuestionPayload';
 
 export interface FeedbackSpectrumPattern {
@@ -78,6 +81,15 @@ export interface ParticipantReportQuestionData
 
 export interface CurrencyQuestionData extends QuestionPayloadData<string> {}
 
+export interface TlfbConfigData
+  extends QuestionPayloadData<TlfbConfigPayload> {}
+
+export interface TlfbEventsData
+  extends QuestionPayloadData<TlfbEventsPayload> {}
+
+export interface TlfbQuestionData
+  extends QuestionPayloadData<TlfbQuestionPayload> {}
+
 export type QuestionData =
   | SingleQuestionData
   | MultipleQuestionData
@@ -94,4 +106,7 @@ export type QuestionData =
   | PhoneQuestionData
   | DateQuestionData
   | ParticipantReportQuestionData
-  | CurrencyQuestionData;
+  | CurrencyQuestionData
+  | TlfbConfigData
+  | TlfbEventsData
+  | TlfbQuestionData;
