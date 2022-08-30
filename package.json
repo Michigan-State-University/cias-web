@@ -4,8 +4,8 @@
   "description": "CIAS 3.0 Web Application",
   "engineStrict": true,
   "engines": {
-    "npm": "6.x",
-    "node": "14.x"
+    "npm": "8.x",
+    "node": "16.x"
   },
   "author": "HTD Health",
   "scripts": {
