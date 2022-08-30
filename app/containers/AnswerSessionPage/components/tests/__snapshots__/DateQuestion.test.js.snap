@@ -35,7 +35,7 @@ exports[`<DateQuestion /> Should render and match the snapshot 1`] = `
   width: 100%;
 }
 
-.c5 {
+.c6 {
   background-color: #F8FBFF;
   border-radius: 5px;
   border-style: solid;
@@ -48,45 +48,60 @@ exports[`<DateQuestion /> Should render and match the snapshot 1`] = `
   border: 3px solid #107969;
 }
 
-.c5:hover {
+.c6:hover {
   cursor: pointer;
 }
 
-.c5:focus {
+.c6:focus {
   outline: none;
 }
 
-.c4 .schedule-date-picker {
+.c5 .schedule-date-picker {
   font-family: DM Sans;
   background-color: #E9F1FB;
 }
 
-.c4 .schedule-date-picker .react-datepicker__header {
+.c5 .schedule-date-picker .react-datepicker__header {
   background-color: #F8FBFF;
 }
 
-.c4 .schedule-date-picker .react-datepicker__day--keyboard-selected {
-  background-color: #B727EA;
+.c5 .schedule-date-picker .react-datepicker__day {
+  color: #2F3850;
 }
 
-.c4 .schedule-date-picker .react-datepicker__day--selected {
-  background-color: #B727EA;
+.c5 .schedule-date-picker .react-datepicker__day:hover {
+  color: #FFFFFF;
+  background-color: rgba(200,102,234,0.7);
 }
 
-.c4 .schedule-date-picker .react-datepicker__day:hover {
-  color: #0E0E0E;
-  background-color: #F8FBFF;
+.c5 .schedule-date-picker .react-datepicker__day--keyboard-selected {
+  background-color: #C866EA;
 }
 
-.c4 .schedule-date-picker .react-datepicker__year-option {
+.c5 .schedule-date-picker .react-datepicker__day--in-range,
+.c5 .schedule-date-picker .react-datepicker__day--in-selecting-range {
+  color: #2F3850;
+  background-color: rgba(200,102,234,0.1);
+}
+
+.c4 .schedule-date-picker .react-datepicker__day--selected:not(.c4 .schedule-date-picker .react-datepicker__day--in-selecting-range),
+.c5 .schedule-date-picker .react-datepicker__day--range-start:not(.c5 .schedule-date-picker .react-datepicker__day--in-selecting-range),
+.c5 .schedule-date-picker .react-datepicker__day--range-end:not(.c5 .schedule-date-picker .react-datepicker__day--in-selecting-range),
+.c5 .schedule-date-picker .react-datepicker__day--selecting-range-start,
+.c5 .schedule-date-picker .react-datepicker__day--selecting-range-end {
+  color: #FFFFFF;
+  background-color: #C866EA;
+}
+
+.c5 .schedule-date-picker .react-datepicker__year-option {
   background-color: #E9F1FB;
 }
 
-.c4 .schedule-date-picker .react-datepicker__month-option {
+.c5 .schedule-date-picker .react-datepicker__month-option {
   background-color: #E9F1FB;
 }
 
-.c6 {
+.c7 {
   font-family: DM Sans;
   font-size: 13px;
   line-height: 130%;
@@ -136,7 +151,7 @@ exports[`<DateQuestion /> Should render and match the snapshot 1`] = `
           class="c3"
         >
           <div
-            class="c4"
+            class="c4 c5"
           >
             <div
               class="react-datepicker-wrapper"
@@ -145,13 +160,13 @@ exports[`<DateQuestion /> Should render and match the snapshot 1`] = `
                 class="react-datepicker__input-container"
               >
                 <button
-                  class="c5"
+                  class="c6"
                   data-private="true"
                   height="50"
                   width="200"
                 >
                   <p
-                    class="c6"
+                    class="c7"
                     color="#2F3850"
                     font-size="15"
                   >

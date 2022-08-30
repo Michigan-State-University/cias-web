@@ -16,7 +16,7 @@ import { themeColors } from 'theme';
 import Text from 'components/Text';
 import Comment from 'components/Text/Comment';
 
-import { questionTypesWithoutAnswers } from '../../../constants';
+import { QUESTIONS_WITHOUT_ANSWERS } from '../../../constants';
 import messages from './messages';
 import SingleUserAnswer from './SingleUserAnswer';
 import MultiUserAnswer from './MultiUserAnswer';
@@ -41,7 +41,7 @@ const UserAnswer = ({ question, answer }: Props): JSX.Element => {
   const { type: questionType } = question;
 
   const renderUserAnswerByQuestionType = (): JSX.Element[] | JSX.Element => {
-    if (questionTypesWithoutAnswers.includes(questionType)) {
+    if (QUESTIONS_WITHOUT_ANSWERS.includes(questionType)) {
       return (
         <Text color={themeColors.warning}>
           {formatMessage(messages[questionType])}

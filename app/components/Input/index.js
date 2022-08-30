@@ -1,9 +1,10 @@
-import styled from 'styled-components';
+import styled, { css } from 'styled-components';
 import PropTypes from 'prop-types';
-import { themeColors, borders, paddings, colors } from 'theme';
+import { themeColors, borders, colors } from 'theme';
 
 import { margin, layout, padding, text, style } from '../BaseComponentStyles';
 import { getAriaLabelProps } from './utils';
+import { INPUT_PADDING } from './constants';
 
 const getBorderColor = (hasError, currentColor) => {
   if (hasError) return themeColors.warning;
@@ -38,7 +39,7 @@ const Input = styled.input.attrs((props) => {
     ...getAutoComplete(props),
   };
 })`
-  padding: ${paddings.small};
+  padding: ${INPUT_PADDING}px;
   border-style: ${borders.borderStyle};
   border-width: ${borders.borderWidth};
   border-color: ${({ hasError }) =>
@@ -55,6 +56,18 @@ const Input = styled.input.attrs((props) => {
       backgroundColor: 'transparent',
       ...(!hasError && { borderColor: 'transparent' }),
     }};
+  ${({ hideNumberArrows }) =>
+    hideNumberArrows &&
+    css`
+      /* Chrome, Safari, Edge, Opera */
+      &::-webkit-outer-spin-button,
+      &::-webkit-inner-spin-button {
+        -webkit-appearance: none;
+        margin: 0;
+      }
+      /* Firefox */
+      -moz-appearance: textfield;
+    `};
   ${margin};
   ${layout};
   ${padding};

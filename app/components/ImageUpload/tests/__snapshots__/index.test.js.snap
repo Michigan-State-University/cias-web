@@ -43,6 +43,8 @@ exports[`<ImageUpload /> should match the snapshot 1`] = `
   color: rgba(183,39,234,1);
   cursor: pointer;
   color: rgba(183,39,234,1);
+  -webkit-text-decoration: underline;
+  text-decoration: underline;
 }
 
 .c5 {

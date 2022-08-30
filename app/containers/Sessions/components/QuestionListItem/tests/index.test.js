@@ -8,7 +8,7 @@ import { Provider } from 'react-redux';
 import { browserHistory } from 'react-router-dom';
 import configureStore from 'configureStore';
 
-import { singleQuestion } from 'models/Session/QuestionTypes';
+import { QuestionTypes } from 'models/Question';
 import { withDroppable } from 'utils/testUtils/dndUtils';
 
 import QuestionListItem from '../index';
@@ -30,7 +30,7 @@ describe('<QuestionListItem />', () => {
       id: 'test-1',
       title: 'Test title',
       subtitle: 'Test subtitle',
-      type: singleQuestion.id,
+      type: QuestionTypes.SINGLE,
     };
 
     const {
@@ -38,7 +38,13 @@ describe('<QuestionListItem />', () => {
     } = render(
       <Provider store={store}>
         <IntlProvider locale={DEFAULT_LOCALE}>
-          {withDroppable(<QuestionListItem question={question} index={0} />)}
+          {withDroppable(
+            <QuestionListItem
+              question={question}
+              index={0}
+              isDraggableScreen
+            />,
+          )}
         </IntlProvider>
       </Provider>,
     );

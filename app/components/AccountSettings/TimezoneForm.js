@@ -2,16 +2,11 @@ import React, { useMemo } from 'react';
 import PropTypes from 'prop-types';
 import { Formik } from 'formik';
 import dayjs from 'dayjs';
-import utc from 'dayjs/plugin/utc';
-import timezone from 'dayjs/plugin/timezone';
 
 import FormikSelect from 'components/FormikSelect';
 import { TIMEZONES } from 'utils/timezones';
 
 import messages from './messages';
-
-dayjs.extend(utc);
-dayjs.extend(timezone);
 
 const timezoneLabel = (timeZone) =>
   `${timeZone} (UTC ${dayjs().tz(timeZone).format('Z')})`;

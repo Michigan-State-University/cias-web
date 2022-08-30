@@ -11,7 +11,7 @@ import {
   makeSelectQuestions,
   makeSelectSelectedQuestionId,
 } from 'global/reducers/questions/selectors';
-import { PlainGroupType } from 'models/Session/GroupTypes';
+import { GroupType } from 'models/QuestionGroup';
 
 import { getNarratorPositionWhenQuestionIsChanged } from 'utils/getNarratorPosition';
 import { setAnimationStopPosition } from 'global/reducers/localState';
@@ -33,7 +33,7 @@ function* groupQuestions({ payload: { questionIds, sessionId } }) {
   const groups = yield select(makeSelectQuestionGroups());
   const lastPlainGroup = findLast(
     groups,
-    ({ type }) => type === PlainGroupType,
+    ({ type }) => type === GroupType.PLAIN,
   );
 
   const newGroupPosition = isNullOrUndefined(lastPlainGroup)
@@ -45,7 +45,7 @@ function* groupQuestions({ payload: { questionIds, sessionId } }) {
       question_group: {
         title: `Group ${newGroupPosition}`,
         question_ids: questionIds,
-        type: PlainGroupType,
+        type: GroupType.PLAIN,
       },
     });
 

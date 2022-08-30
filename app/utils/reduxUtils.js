@@ -11,7 +11,7 @@ import { objectDifference } from 'utils/objectDifference';
  *
  * @param {Draft<T[]>} draftCollection
  * @param id
- * @param {function(item: Draft<T>, index: number): T|Draft<T>} updater Function returning Object and taking `item` and `index` or an Object to assign to
+ * @param {Object|function(item: Draft<T>, index: number): T|Draft<T>} updater Function returning Object and taking `item` and `index` or an Object to assign to
  * @template T
  */
 export const updateItemById = (draftCollection, id, updater) => {
@@ -45,6 +45,17 @@ export const deleteItemById = (draftCollection, id) => {
   const index = findIndexById(draftCollection, id);
 
   if (index !== -1) draftCollection.splice(index, 1);
+};
+
+/**
+ * Delete Immer draft item from collection based on the collection index
+ *
+ * @param {Draft<T[]>} draftCollection
+ * @param index
+ * @template T
+ */
+export const deleteItemByIndex = (draftCollection, index) => {
+  draftCollection.splice(index, 1);
 };
 
 /**
