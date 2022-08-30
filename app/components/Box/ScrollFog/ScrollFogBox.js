@@ -61,7 +61,7 @@ const ScrollFogBox = React.forwardRef(
         if (y.percentage !== 0) setTop(true);
         else setTop(false);
 
-        if (y.percentage !== 1) setBottom(true);
+        if (y.percentage < 1) setBottom(true);
         else setBottom(false);
       } else {
         setTop(false);
