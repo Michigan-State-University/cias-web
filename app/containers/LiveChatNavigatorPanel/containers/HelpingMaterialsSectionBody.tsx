@@ -18,7 +18,11 @@ import NavigatorScriptsList from '../components/NavigatorScriptsList';
 import NavigatorLinksList from '../components/NavigatorLinksList';
 import NavigatorFilesList from '../components/NavigatorFilesList';
 
-const HelpingMaterialsSectionBody = () => {
+export type Props = {
+  isArchive: boolean;
+};
+
+const HelpingMaterialsSectionBody = ({ isArchive }: Props) => {
   const dispatch = useDispatch();
 
   const interventionId = useSelector(
@@ -51,7 +55,10 @@ const HelpingMaterialsSectionBody = () => {
       {!loading && !error && data && (
         <Column gap={32} maxHeight="100%" overflow="auto" pr={16}>
           {data.filledScriptTemplate && (
-            <NavigatorScriptsList scriptsFile={data.filledScriptTemplate} />
+            <NavigatorScriptsList
+              scriptsFile={data.filledScriptTemplate}
+              disabled={isArchive}
+            />
           )}
           {!isEmpty(data.navigatorLinks) && (
             <NavigatorLinksList navigatorLinks={data.navigatorLinks} />

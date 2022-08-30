@@ -17,9 +17,15 @@ type Props = {
   scriptsGroup: NavigatorScriptsGroup;
   opened: boolean;
   onToggle: () => void;
+  disabled: boolean;
 };
 
-const NarratorScriptsCollapse = ({ scriptsGroup, opened, onToggle }: Props) => {
+const NarratorScriptsCollapse = ({
+  scriptsGroup,
+  opened,
+  onToggle,
+  disabled,
+}: Props) => {
   const { header, sampleMessages } = scriptsGroup;
 
   return (
@@ -37,11 +43,12 @@ const NarratorScriptsCollapse = ({ scriptsGroup, opened, onToggle }: Props) => {
         borderRadius: '8px',
       }}
     >
-      <Column gap={16} mt={16} mb={8}>
+      <Column gap={16} mt={16} mb={8} px={8}>
         {sampleMessages.map((sampleMessage, index) => (
           <NavigatorScriptsListItem
             key={`${header}-${index}`}
             sampleMessage={sampleMessage}
+            disabled={disabled}
           />
         ))}
       </Column>

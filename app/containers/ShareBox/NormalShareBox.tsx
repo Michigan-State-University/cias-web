@@ -2,6 +2,8 @@ import Loader from 'components/Loader';
 import React, { memo, ReactNode } from 'react';
 import { FormattedMessage } from 'react-intl';
 
+import share from 'assets/svg/share.svg';
+
 import { colors } from 'theme';
 import { canShareWithParticipants } from 'models/Status/statusPermissions';
 import { formatMessage } from 'utils/intlOutsideReact';
@@ -84,8 +86,12 @@ const Component = ({
       </Row>
       {exportCsvButton()}
       <Row mt={15}>
-        {/* @ts-ignore */}
-        <CopyToClipboard textToCopy={inviteUrl}>
+        <CopyToClipboard
+          // @ts-ignore
+          textToCopy={inviteUrl}
+          icon={share}
+          iconAlt={formatMessage(messages.share)}
+        >
           <FormattedMessage
             {...messages.copyLabel}
             values={{ type: shareBoxType }}

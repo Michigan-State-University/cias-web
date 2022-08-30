@@ -40,6 +40,10 @@ export default defineMessages({
       other {}
     } externally`,
   },
+  share: {
+    id: `${scope}.share`,
+    defaultMessage: 'share',
+  },
   resend: {
     id: `${scope}.resend`,
     defaultMessage: 'Resend email',

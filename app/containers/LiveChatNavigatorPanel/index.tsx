@@ -82,8 +82,7 @@ export const LiveChatNavigatorPanel = ({
           </NavigatorPanelGridColumn>
           <NavigatorPanelGridColumn xs={3}>
             <HelpingMaterialsSectionHeader />
-
-            <HelpingMaterialsSectionBody />
+            <HelpingMaterialsSectionBody isArchive={isArchive} />
           </NavigatorPanelGridColumn>
         </>
       )}

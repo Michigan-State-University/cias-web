@@ -14,7 +14,7 @@ const style = (props) => ({
   cursor:
     props.cursor ||
     (props.clickable
-      ? ternary(props.disabled, 'not-allowed;', 'pointer;')
+      ? ternary(props.disabled, 'not-allowed !important;', 'pointer;')
       : ''),
   '&:hover': {
     backgroundColor: props.hoverColor || '',

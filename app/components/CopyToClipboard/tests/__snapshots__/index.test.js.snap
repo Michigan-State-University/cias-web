@@ -52,10 +52,6 @@ exports[`<CopyToClipboard /> Should render and match the snapshot 1`] = `
       <div
         class="c2"
       >
-        <img
-          alt="share"
-          src="IMAGE_MOCK"
-        />
         <p
           class="c3"
           color="#B727EA"

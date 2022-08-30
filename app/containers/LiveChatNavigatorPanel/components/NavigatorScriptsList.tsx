@@ -19,9 +19,10 @@ import NarratorScriptsCollapse from './NarratorScriptsCollapse';
 
 export type Props = {
   scriptsFile: AppFile;
+  disabled: boolean;
 };
 
-const NavigatorScriptsList = ({ scriptsFile }: Props) => {
+const NavigatorScriptsList = ({ scriptsFile, disabled }: Props) => {
   const { formatMessage } = useIntl();
 
   const [openedGroupIndex, setOpenedGroupIndex] = useState<Nullable<number>>(0);
@@ -61,6 +62,7 @@ const NavigatorScriptsList = ({ scriptsFile }: Props) => {
               opened={openedGroupIndex === index}
               onToggle={() => onCollapseToggle(index)}
               scriptsGroup={group}
+              disabled={disabled}
             />
           ))}
         </Column>

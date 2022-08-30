@@ -121,4 +121,8 @@ export default defineMessages({
     id: `${scope}.scriptsFromResearcher`,
     defaultMessage: 'Scripts from researcher',
   },
+  copy: {
+    id: `${scope}.copy`,
+    defaultMessage: 'Copy',
+  },
 });
