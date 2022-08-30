@@ -27,9 +27,7 @@ const ParticipantUsefulLinks = ({ participantLinks }: Props) => {
       <Box width="100%" flexShrink={0}>
         {participantLinks.map(({ displayName, id, url }) => (
           <PrimaryLink key={id} target="_blank" href={url}>
-            <Text fontSize="14px" mb={4}>
-              {displayName}
-            </Text>
+            {displayName}
           </PrimaryLink>
         ))}
       </Box>

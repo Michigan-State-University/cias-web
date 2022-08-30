@@ -58,9 +58,6 @@ const NarratorUnavailableDialog = ({
         <H2> {noNavigatorAvailableMessage}</H2>
         <Box height="2px" bg={colors.linkWater} width="56px" my={16} />
         <ContactDetails phone={phone} contactEmail={contactEmail} />
-        <Text color={colors.bluewood} textOpacity={0.7} mt={24} mb={8}>
-          {formatMessage(messages.usefulLinks)}
-        </Text>
         {Boolean(participantLinks.length) && (
           <ParticipantUsefulLinks participantLinks={participantLinks} />
         )}
