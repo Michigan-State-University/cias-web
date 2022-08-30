@@ -430,7 +430,7 @@ export function AnswerSessionPage({
       isDesktop,
       isMobile,
       previewMode,
-      isMobilePreview: previewMode !== DESKTOP_MODE,
+      isMobilePreview: isPreview && previewMode !== DESKTOP_MODE,
       userSessionId: userSession?.id,
     };
 
