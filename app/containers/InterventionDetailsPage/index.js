@@ -97,9 +97,9 @@ import interventionDetailsPageSagas from './saga';
 import SessionCreateButton from './components/SessionCreateButton/index';
 import SessionListItem from './components/SessionListItem';
 import {
-  ThirdPartyToolsAccessModal,
   InterventionAssignOrganizationModal,
   InterventionSettingsModal,
+  useThirdPartyToolsAccessModal,
 } from './components/Modals';
 import SelectResearchers from '../SelectResearchers';
 import messages from './messages';
@@ -210,16 +210,8 @@ export function InterventionDetailsPage({
     },
   });
 
-  const {
-    openModal: openThirdPartyToolsAccessModal,
-    Modal: ThirdPartyToolsModal,
-  } = useModal({
-    type: ModalType.Modal,
-    modalContentRenderer: (props) => <ThirdPartyToolsAccessModal {...props} />,
-    props: {
-      title: formatMessage(messages.thirdPartyToolsAccessModalTitle),
-    },
-  });
+  const { openThirdPartyToolsAccessModal, ThirdPartyToolsModal } =
+    useThirdPartyToolsAccessModal();
 
   const {
     openModal: openInterventionInviteModal,

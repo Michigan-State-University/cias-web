@@ -41,8 +41,8 @@ import { Roles } from 'models/User/UserRoles';
 import isNullOrUndefined from 'utils/isNullOrUndefined';
 
 import {
-  ThirdPartyToolsAccessModal,
   InterventionAssignOrganizationModal,
+  useThirdPartyToolsAccessModal,
 } from 'containers/InterventionDetailsPage/components/Modals';
 import SelectResearchers from 'containers/SelectResearchers';
 
@@ -112,16 +112,9 @@ const SingleTile = ({
       confirmAction: handleArchiveIntervention,
     },
   });
-  const {
-    openModal: openThirdPartyToolsAccessModal,
-    Modal: ThirdPartyToolsModal,
-  } = useModal({
-    type: ModalType.Modal,
-    modalContentRenderer: (props) => <ThirdPartyToolsAccessModal {...props} />,
-    props: {
-      title: formatMessage(messages.thirdPartyToolsAccessModalTitle),
-    },
-  });
+
+  const { openThirdPartyToolsAccessModal, ThirdPartyToolsModal } =
+    useThirdPartyToolsAccessModal();
 
   const isAdmin = userRoles.includes(Roles.admin);
 

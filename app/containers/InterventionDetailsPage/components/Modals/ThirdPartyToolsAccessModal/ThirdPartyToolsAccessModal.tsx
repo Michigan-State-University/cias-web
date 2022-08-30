@@ -1,7 +1,9 @@
 import React, { memo, useEffect, useMemo, useState } from 'react';
+import { useIntl } from 'react-intl';
 import isEqual from 'lodash/isEqual';
 import { useDispatch, useSelector } from 'react-redux';
 
+import Tabs from 'components/Tabs';
 import {
   CatMhLicenseType,
   InterventionDto,
@@ -12,6 +14,9 @@ import {
   makeSelectInterventionLoader,
 } from 'global/reducers/intervention';
 
+import { colors } from 'theme';
+
+import messages from '../messages';
 import { CatMhAccessModalUI } from './CatMhAccessModalUI';
 import { ModalUIData } from './types';
 import {
@@ -19,12 +24,14 @@ import {
   mapModalDataToIntervention,
 } from './utils';
 
-type Props = {
+export type Props = {
   modalState: InterventionDto;
   closeModal: () => void;
 };
 
 const Component = ({ modalState: intervention, closeModal }: Props) => {
+  const { formatMessage } = useIntl();
+
   // redux
   const dispatch = useDispatch();
 
@@ -73,18 +80,32 @@ const Component = ({ modalState: intervention, closeModal }: Props) => {
   const canSave = !isEqual(initialData, modalData);
 
   return (
-    <CatMhAccessModalUI
-      modalData={modalData}
-      canSave={canSave}
-      isSaving={isEditing}
-      canEdit={!isEditing}
-      onSave={onSave}
-      onAccessChange={onAccessChange}
-      onLicenseInformationChange={onLicenseInformationChange}
-      onLicenseTypeChange={onLicenseTypeChange}
-      onTestNumberChange={onTestNumberChange}
-      isDraft={intervention.status === InterventionStatus.DRAFT}
-    />
+    // @ts-ignore
+    <Tabs
+      mt={24}
+      withBottomBorder
+      emphasizeActiveLink
+      labelStyle={{ color: colors.slateGray }}
+      containerProps={{ mb: 0, mt: 40 }}
+    >
+      {/* @ts-ignore */}
+      <div label={formatMessage(messages.catMhLabel)}>
+        <CatMhAccessModalUI
+          modalData={modalData}
+          canSave={canSave}
+          isSaving={isEditing}
+          canEdit={!isEditing}
+          onSave={onSave}
+          onAccessChange={onAccessChange}
+          onLicenseInformationChange={onLicenseInformationChange}
+          onLicenseTypeChange={onLicenseTypeChange}
+          onTestNumberChange={onTestNumberChange}
+          isDraft={intervention.status === InterventionStatus.DRAFT}
+        />
+      </div>
+      {/* @ts-ignore */}
+      <div label={formatMessage(messages.henryFordLabel)}>TODO: HF content</div>
+    </Tabs>
   );
 };
 

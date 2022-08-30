@@ -75,6 +75,7 @@ const colors = {
   lightStealBlue: '#B3C1E1',
   lightDivider: '#EAF1FA',
   fireIsland: '#DD533C',
+  slateGray: '#6D7485',
 };
 
 const themeColors = {

@@ -3,18 +3,13 @@ import { defineMessages } from 'react-intl';
 export const scope = 'app.components.InterventionModals';
 
 export default defineMessages({
-  modalHeader: {
-    id: `${scope}.modalHeader`,
-    defaultMessage:
-      'Fill the form below to give researcher access to creating CAT-MH™ sessions',
-  },
   giveAccess: {
     id: `${scope}.giveAccess`,
-    defaultMessage: 'Allow',
+    defaultMessage: 'Allow access',
   },
   revokeAccess: {
     id: `${scope}.revokeAccess`,
-    defaultMessage: 'Revoke',
+    defaultMessage: 'Revoke access',
   },
   licenseDataHeader: {
     id: `${scope}.licenseDataHeader`,
@@ -59,5 +54,17 @@ export default defineMessages({
   saveButton: {
     id: `${scope}.saveButton`,
     defaultMessage: 'Save changes',
+  },
+  thirdPartyToolsAccessModalTitle: {
+    id: `${scope}.thirdPartyToolsAccessModalTitle`,
+    defaultMessage: 'Access to 3rd party tools',
+  },
+  catMhLabel: {
+    id: `${scope}.catMhLabel`,
+    defaultMessage: 'CAT-MH',
+  },
+  henryFordLabel: {
+    id: `${scope}.henryFordLabel`,
+    defaultMessage: 'Henry Ford',
   },
 });
