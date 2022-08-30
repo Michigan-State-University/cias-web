@@ -328,7 +328,7 @@ export default defineMessages({
   failedCsvValidation: {
     id: `${scope}.failedCsvValidation`,
     defaultMessage:
-      'The file is invalid. Please make sure that you used the provided template and that it is filled correctly.',
+      'File contains errors. Fill it in according to the example.',
   },
   csvValidationError: {
     id: `${scope}.csvValidationError`,

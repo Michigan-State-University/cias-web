@@ -18,6 +18,7 @@ type CommonProps = {
   uploadingFile: boolean;
   acceptedFormats?: string;
   labelTooltipContent?: JSX.Element;
+  error?: string;
 } & Pick<FileUploadProps, 'value' | 'onUpload'>;
 
 type MultipleFilesProps = CommonProps & {
@@ -42,6 +43,7 @@ export const FilesPanel = ({
   onUpload,
   multiple,
   labelTooltipContent,
+  error,
 }: Props) => {
   const { formatMessage } = useIntl();
 
@@ -83,6 +85,7 @@ export const FilesPanel = ({
         multiple={multiple}
         onRemoveFile={multiple ? undefined : removeFile}
         tooltipContent={labelTooltipContent}
+        error={error}
       />
       {multiple && (
         <Column

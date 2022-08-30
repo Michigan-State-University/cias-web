@@ -9,7 +9,6 @@ import { navigatorScriptConfig } from 'models/NavigatorSetup';
 
 import Column from 'components/Column';
 import H2 from 'components/H2';
-import ErrorAlert from 'components/ErrorAlert';
 import Text from 'components/Text';
 import Img from 'components/Img';
 import H3 from 'components/H3';
@@ -91,13 +90,12 @@ export const NavigatorScripts = ({ interventionId }: Props) => {
         value={filledNavigatorScript}
         multiple={false}
         labelTooltipContent={labelTooltipContent}
+        error={
+          validationError
+            ? formatMessage(messages.failedCsvValidation)
+            : undefined
+        }
       />
-      {validationError && (
-        <ErrorAlert
-          errorText={formatMessage(messages.failedCsvValidation)}
-          fontSize="12px"
-        />
-      )}
     </Column>
   );
 };

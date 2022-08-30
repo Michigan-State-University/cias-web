@@ -1,4 +1,5 @@
-import React, { useCallback } from 'react';
+import React, { useCallback, useState, useEffect } from 'react';
+import { motion, AnimatePresence } from 'framer-motion';
 import { FormattedMessage, useIntl } from 'react-intl';
 import { useDropzone } from 'react-dropzone';
 import { toast } from 'react-toastify';
@@ -14,7 +15,7 @@ import Tooltip from 'components/Tooltip';
 
 import { AppFile } from 'models/File';
 import { MAX_FILE_SIZE } from 'global/constants';
-import { colors, borders } from 'theme';
+import { colors, borders, themeColors } from 'theme';
 import binNoBg from 'assets/svg/bin-no-bg.svg';
 import questionMark from 'assets/svg/grey-question-mark.svg';
 
@@ -25,6 +26,7 @@ type CommonProps = {
   loading?: boolean;
   label?: string;
   tooltipContent?: JSX.Element;
+  error?: string;
 };
 
 type MultipleFilesProps = CommonProps & {
@@ -52,8 +54,17 @@ export const FileUpload = ({
   onUpload,
   onRemoveFile,
   tooltipContent,
+  error,
 }: FileUploadProps) => {
   const { formatMessage } = useIntl();
+
+  const [inputError, setInputError] = useState(error);
+
+  useEffect(() => {
+    setInputError(error);
+  }, [error]);
+
+  const clearInputError = () => setInputError(undefined);
 
   const canUploadFile = !loading && (multiple || !value);
   const shouldDisplayFile = !loading && !multiple && value;
@@ -117,7 +128,11 @@ export const FileUpload = ({
         )}
       </Box>
       <Dropzone
-        border={`${borders.borderWidth} dashed ${colors.perwinkleCrayola}`}
+        border={
+          inputError
+            ? `${borders.borderWidth} solid ${themeColors.alert}`
+            : `${borders.borderWidth} dashed ${colors.perwinkleCrayola}`
+        }
         width="100%"
         padding={shouldDisplayFile ? 5 : 15}
         withShadow={isDragActive}
@@ -126,6 +141,7 @@ export const FileUpload = ({
           pointerEvents: loading ? 'none' : 'all',
         }}
         {...getRootProps()}
+        onBlur={clearInputError}
       >
         <Box display="flex" justify="center" align="center">
           {canUploadFile && (
@@ -158,6 +174,17 @@ export const FileUpload = ({
           <input {...getInputProps()} />
         </Box>
       </Dropzone>
+      <AnimatePresence initial={false}>
+        {inputError && (
+          <motion.div exit={{ opacity: 0 }} key="file-upload-error-box">
+            <Box mt={12}>
+              <Text color={themeColors.alert} fontWeight="bold">
+                {inputError}
+              </Text>
+            </Box>
+          </motion.div>
+        )}
+      </AnimatePresence>
     </>
   );
 };

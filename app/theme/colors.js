@@ -76,6 +76,7 @@ const colors = {
   beauBlue: '#CFDDEF',
   slateGray: '#6D7485',
   lightDivider: '#EAF1FA',
+  cinnabar: '#DD533C',
 };
 
 const themeColors = {
@@ -86,6 +87,7 @@ const themeColors = {
   success: colors.jungleGreen,
   warning: colors.vermilion,
   comment: colors.sonicSilver,
+  alert: colors.cinnabar,
 };
 
 export { colors, themeColors };
