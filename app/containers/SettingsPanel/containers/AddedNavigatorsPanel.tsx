@@ -7,7 +7,7 @@ import minus from 'assets/svg/grey-minus.svg';
 
 import Box from 'components/Box';
 import H2 from 'components/H2';
-import Text from 'components/Text';
+import Text, { EllipsisText } from 'components/Text';
 import Row from 'components/Row';
 import Img from 'components/Img';
 import UserAvatar from 'components/UserAvatar';
@@ -62,12 +62,12 @@ const AddedNavigatorPanel = ({
               </Box>
               <Box ml={8}>
                 <Text fontWeight="bold">{`${firstName} ${lastName}`}</Text>
-                <Text>{email}</Text>
+                <EllipsisText text={email} lines={1} />
               </Box>
             </Row>
             <TextButton
               onClick={() => removeInterventionNavigator(id)}
-              buttonProps={{ display: 'flex', align: 'center' }}
+              buttonProps={{ display: 'flex', align: 'center', minWidth: 85 }}
               loading={inDeletion}
             >
               <Img width={24} height={24} src={minus} mr={4} />
