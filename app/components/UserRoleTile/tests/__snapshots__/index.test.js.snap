@@ -17,7 +17,6 @@ exports[`<UserRoleTile /> Should render and match the snapshot 1`] = `
   padding-bottom: 5px;
   padding-right: 10px;
   padding-left: 10px;
-  margin-right: 10px;
   background-color: rgba(194,178,0,1);
   -webkit-box-pack: center;
   -webkit-justify-content: center;
@@ -79,7 +78,6 @@ exports[`<UserRoleTile /> Should render and match the snapshot for disabled 1`] 
   padding-bottom: 5px;
   padding-right: 10px;
   padding-left: 10px;
-  margin-right: 10px;
   background-color: rgba(154,161,182,1);
   -webkit-box-pack: center;
   -webkit-justify-content: center;

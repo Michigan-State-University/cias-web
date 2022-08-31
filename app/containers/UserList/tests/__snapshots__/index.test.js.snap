@@ -61,7 +61,6 @@ exports[`<UserList /> Should render and match the snapshot - admin 1`] = `
   padding-bottom: 5px;
   padding-right: 10px;
   padding-left: 10px;
-  margin-right: 10px;
   background-color: rgba(35,183,160,1);
   cursor: pointer;
   -webkit-box-pack: center;
@@ -96,7 +95,6 @@ exports[`<UserList /> Should render and match the snapshot - admin 1`] = `
   padding-bottom: 5px;
   padding-right: 10px;
   padding-left: 10px;
-  margin-right: 10px;
   background-color: rgba(255,118,145,1);
   cursor: pointer;
   -webkit-box-pack: center;
@@ -131,7 +129,6 @@ exports[`<UserList /> Should render and match the snapshot - admin 1`] = `
   padding-bottom: 5px;
   padding-right: 10px;
   padding-left: 10px;
-  margin-right: 10px;
   background-color: rgba(0,0,128,1);
   cursor: pointer;
   -webkit-box-pack: center;
@@ -166,7 +163,6 @@ exports[`<UserList /> Should render and match the snapshot - admin 1`] = `
   padding-bottom: 5px;
   padding-right: 10px;
   padding-left: 10px;
-  margin-right: 10px;
   background-color: rgba(128,128,0,1);
   cursor: pointer;
   -webkit-box-pack: center;
@@ -201,7 +197,6 @@ exports[`<UserList /> Should render and match the snapshot - admin 1`] = `
   padding-bottom: 5px;
   padding-right: 10px;
   padding-left: 10px;
-  margin-right: 10px;
   background-color: rgba(16,121,105,1);
   cursor: pointer;
   -webkit-box-pack: center;
@@ -236,7 +231,6 @@ exports[`<UserList /> Should render and match the snapshot - admin 1`] = `
   padding-bottom: 5px;
   padding-right: 10px;
   padding-left: 10px;
-  margin-right: 10px;
   background-color: rgba(240,104,74,1);
   cursor: pointer;
   -webkit-box-pack: center;
@@ -269,35 +263,20 @@ exports[`<UserList /> Should render and match the snapshot - admin 1`] = `
   height: auto;
   display: block;
   border-radius: 5px;
-  width: -webkit-max-content;
-  width: -moz-max-content;
-  width: max-content;
-  display: -webkit-inline-box;
-  display: -webkit-inline-flex;
-  display: -ms-inline-flexbox;
-  display: inline-flex;
-  padding-top: 5px;
-  padding-bottom: 5px;
-  padding-right: 10px;
-  padding-left: 10px;
-  margin-right: 10px;
-  background-color: rgba(35,183,160,1);
-  -webkit-box-pack: center;
-  -webkit-justify-content: center;
-  -ms-flex-pack: center;
-  justify-content: center;
-  justify-items: center;
-  -webkit-align-content: center;
-  -ms-flex-line-pack: center;
-  align-content: center;
-  -webkit-align-items: center;
-  -webkit-box-align: center;
-  -ms-flex-align: center;
-  align-items: center;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  padding-top: 8px;
+  padding-bottom: 8px;
+  -webkit-flex-wrap: wrap;
+  -ms-flex-wrap: wrap;
+  flex-wrap: wrap;
+  gap: 8px;
   color: unset;
 }
 
-.c36 {
+.c33 {
   width: auto;
   height: auto;
   display: block;
@@ -313,8 +292,7 @@ exports[`<UserList /> Should render and match the snapshot - admin 1`] = `
   padding-bottom: 5px;
   padding-right: 10px;
   padding-left: 10px;
-  margin-right: 10px;
-  background-color: rgba(255,118,145,1);
+  background-color: rgba(35,183,160,1);
   -webkit-box-pack: center;
   -webkit-justify-content: center;
   -ms-flex-pack: center;
@@ -346,7 +324,38 @@ exports[`<UserList /> Should render and match the snapshot - admin 1`] = `
   padding-bottom: 5px;
   padding-right: 10px;
   padding-left: 10px;
-  margin-right: 10px;
+  background-color: rgba(255,118,145,1);
+  -webkit-box-pack: center;
+  -webkit-justify-content: center;
+  -ms-flex-pack: center;
+  justify-content: center;
+  justify-items: center;
+  -webkit-align-content: center;
+  -ms-flex-line-pack: center;
+  align-content: center;
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  color: unset;
+}
+
+.c38 {
+  width: auto;
+  height: auto;
+  display: block;
+  border-radius: 5px;
+  width: -webkit-max-content;
+  width: -moz-max-content;
+  width: max-content;
+  display: -webkit-inline-box;
+  display: -webkit-inline-flex;
+  display: -ms-inline-flexbox;
+  display: inline-flex;
+  padding-top: 5px;
+  padding-bottom: 5px;
+  padding-right: 10px;
+  padding-left: 10px;
   background-color: rgba(194,178,0,1);
   -webkit-box-pack: center;
   -webkit-justify-content: center;
@@ -363,7 +372,7 @@ exports[`<UserList /> Should render and match the snapshot - admin 1`] = `
   color: unset;
 }
 
-.c39 {
+.c40 {
   width: auto;
   height: auto;
   display: block;
@@ -415,7 +424,7 @@ exports[`<UserList /> Should render and match the snapshot - admin 1`] = `
   align-items: center;
 }
 
-.c33 {
+.c34 {
   display: -webkit-box;
   display: -webkit-flex;
   display: -ms-flexbox;
@@ -433,7 +442,7 @@ exports[`<UserList /> Should render and match the snapshot - admin 1`] = `
   width: 100%;
 }
 
-.c38 {
+.c39 {
   display: -webkit-box;
   display: -webkit-flex;
   display: -ms-flexbox;
@@ -509,7 +518,7 @@ exports[`<UserList /> Should render and match the snapshot - admin 1`] = `
   color: rgba(210,55,29,1);
 }
 
-.c35 {
+.c36 {
   font-family: DM Sans;
   font-size: 13px;
   line-height: 130%;
@@ -518,7 +527,7 @@ exports[`<UserList /> Should render and match the snapshot - admin 1`] = `
   color: rgba(210,55,29,1);
 }
 
-.c40 {
+.c41 {
   font-family: DM Sans;
   font-size: 13px;
   line-height: 130%;
@@ -554,7 +563,7 @@ exports[`<UserList /> Should render and match the snapshot - admin 1`] = `
   color: #2F3850;
 }
 
-.c41 {
+.c42 {
   margin: 0;
   font-family: DM Sans;
   font-size: 25px;
@@ -615,7 +624,7 @@ exports[`<UserList /> Should render and match the snapshot - admin 1`] = `
   color: rgba(183,39,234,1);
 }
 
-.c34 {
+.c35 {
   outline: none;
   border: none;
   background: transparent;
@@ -995,31 +1004,36 @@ exports[`<UserList /> Should render and match the snapshot - admin 1`] = `
                   >
                     <div
                       class="c32"
-                      display="inline-flex"
-                      width="max-content"
+                      display="flex"
                     >
-                      <p
-                        class="c6"
-                        color="#FFFFFF"
-                        font-size="14"
-                        font-weight="bold"
+                      <div
+                        class="c33"
+                        display="inline-flex"
+                        width="max-content"
                       >
-                        Participant
-                      </p>
+                        <p
+                          class="c6"
+                          color="#FFFFFF"
+                          font-size="14"
+                          font-weight="bold"
+                        >
+                          Participant
+                        </p>
+                      </div>
                     </div>
                   </td>
                   <td
                     class="c30"
                   >
                     <div
-                      class="c33"
+                      class="c34"
                       width="100%"
                     >
                       <button
-                        class="c34"
+                        class="c35"
                       >
                         <p
-                          class="c35"
+                          class="c36"
                           color="#D2371D"
                           font-weight="bold"
                         >
@@ -1053,32 +1067,37 @@ exports[`<UserList /> Should render and match the snapshot - admin 1`] = `
                     class="c30"
                   >
                     <div
-                      class="c36"
-                      display="inline-flex"
-                      width="max-content"
+                      class="c32"
+                      display="flex"
                     >
-                      <p
-                        class="c6"
-                        color="#FFFFFF"
-                        font-size="14"
-                        font-weight="bold"
+                      <div
+                        class="c37"
+                        display="inline-flex"
+                        width="max-content"
                       >
-                        Researcher
-                      </p>
+                        <p
+                          class="c6"
+                          color="#FFFFFF"
+                          font-size="14"
+                          font-weight="bold"
+                        >
+                          Researcher
+                        </p>
+                      </div>
                     </div>
                   </td>
                   <td
                     class="c30"
                   >
                     <div
-                      class="c33"
+                      class="c34"
                       width="100%"
                     >
                       <button
-                        class="c34"
+                        class="c35"
                       >
                         <p
-                          class="c35"
+                          class="c36"
                           color="#D2371D"
                           font-weight="bold"
                         >
@@ -1112,32 +1131,37 @@ exports[`<UserList /> Should render and match the snapshot - admin 1`] = `
                     class="c30"
                   >
                     <div
-                      class="c37"
-                      display="inline-flex"
-                      width="max-content"
+                      class="c32"
+                      display="flex"
                     >
-                      <p
-                        class="c6"
-                        color="#FFFFFF"
-                        font-size="14"
-                        font-weight="bold"
+                      <div
+                        class="c38"
+                        display="inline-flex"
+                        width="max-content"
                       >
-                        Admin
-                      </p>
+                        <p
+                          class="c6"
+                          color="#FFFFFF"
+                          font-size="14"
+                          font-weight="bold"
+                        >
+                          Admin
+                        </p>
+                      </div>
                     </div>
                   </td>
                   <td
                     class="c30"
                   >
                     <div
-                      class="c33"
+                      class="c34"
                       width="100%"
                     >
                       <button
-                        class="c34"
+                        class="c35"
                       >
                         <p
-                          class="c35"
+                          class="c36"
                           color="#D2371D"
                           font-weight="bold"
                         >
@@ -1153,7 +1177,7 @@ exports[`<UserList /> Should render and match the snapshot - admin 1`] = `
         </div>
         <div
           aria-label="Data list pagination"
-          class="c38"
+          class="c39"
           display="flex"
           role="navigation"
           width="100%"
@@ -1161,12 +1185,12 @@ exports[`<UserList /> Should render and match the snapshot - admin 1`] = `
           <div
             aria-label="Go to page: 1"
             aria-selected="true"
-            class="c39"
+            class="c40"
             cursor="pointer"
             display="flex"
           >
             <p
-              class="c40"
+              class="c41"
               color="#FFFFFF"
             >
               1
@@ -1174,7 +1198,7 @@ exports[`<UserList /> Should render and match the snapshot - admin 1`] = `
           </div>
           <h1
             aria-label="Go to next page"
-            class="c41"
+            class="c42"
             cursor="pointer"
           >
             &gt;
@@ -1247,7 +1271,6 @@ exports[`<UserList /> Should render and match the snapshot - researcher 1`] = `
   padding-bottom: 5px;
   padding-right: 10px;
   padding-left: 10px;
-  margin-right: 10px;
   background-color: rgba(35,183,160,1);
   cursor: pointer;
   -webkit-box-pack: center;
@@ -1282,7 +1305,6 @@ exports[`<UserList /> Should render and match the snapshot - researcher 1`] = `
   padding-bottom: 5px;
   padding-right: 10px;
   padding-left: 10px;
-  margin-right: 10px;
   background-color: rgba(255,118,145,1);
   cursor: pointer;
   -webkit-box-pack: center;
@@ -1317,7 +1339,6 @@ exports[`<UserList /> Should render and match the snapshot - researcher 1`] = `
   padding-bottom: 5px;
   padding-right: 10px;
   padding-left: 10px;
-  margin-right: 10px;
   background-color: rgba(0,0,128,1);
   cursor: pointer;
   -webkit-box-pack: center;
@@ -1352,7 +1373,6 @@ exports[`<UserList /> Should render and match the snapshot - researcher 1`] = `
   padding-bottom: 5px;
   padding-right: 10px;
   padding-left: 10px;
-  margin-right: 10px;
   background-color: rgba(128,128,0,1);
   cursor: pointer;
   -webkit-box-pack: center;
@@ -1387,7 +1407,6 @@ exports[`<UserList /> Should render and match the snapshot - researcher 1`] = `
   padding-bottom: 5px;
   padding-right: 10px;
   padding-left: 10px;
-  margin-right: 10px;
   background-color: rgba(16,121,105,1);
   cursor: pointer;
   -webkit-box-pack: center;
@@ -1422,7 +1441,6 @@ exports[`<UserList /> Should render and match the snapshot - researcher 1`] = `
   padding-bottom: 5px;
   padding-right: 10px;
   padding-left: 10px;
-  margin-right: 10px;
   background-color: rgba(240,104,74,1);
   cursor: pointer;
   -webkit-box-pack: center;
@@ -1455,35 +1473,20 @@ exports[`<UserList /> Should render and match the snapshot - researcher 1`] = `
   height: auto;
   display: block;
   border-radius: 5px;
-  width: -webkit-max-content;
-  width: -moz-max-content;
-  width: max-content;
-  display: -webkit-inline-box;
-  display: -webkit-inline-flex;
-  display: -ms-inline-flexbox;
-  display: inline-flex;
-  padding-top: 5px;
-  padding-bottom: 5px;
-  padding-right: 10px;
-  padding-left: 10px;
-  margin-right: 10px;
-  background-color: rgba(35,183,160,1);
-  -webkit-box-pack: center;
-  -webkit-justify-content: center;
-  -ms-flex-pack: center;
-  justify-content: center;
-  justify-items: center;
-  -webkit-align-content: center;
-  -ms-flex-line-pack: center;
-  align-content: center;
-  -webkit-align-items: center;
-  -webkit-box-align: center;
-  -ms-flex-align: center;
-  align-items: center;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  padding-top: 8px;
+  padding-bottom: 8px;
+  -webkit-flex-wrap: wrap;
+  -ms-flex-wrap: wrap;
+  flex-wrap: wrap;
+  gap: 8px;
   color: unset;
 }
 
-.c35 {
+.c32 {
   width: auto;
   height: auto;
   display: block;
@@ -1499,8 +1502,7 @@ exports[`<UserList /> Should render and match the snapshot - researcher 1`] = `
   padding-bottom: 5px;
   padding-right: 10px;
   padding-left: 10px;
-  margin-right: 10px;
-  background-color: rgba(255,118,145,1);
+  background-color: rgba(35,183,160,1);
   -webkit-box-pack: center;
   -webkit-justify-content: center;
   -ms-flex-pack: center;
@@ -1532,7 +1534,38 @@ exports[`<UserList /> Should render and match the snapshot - researcher 1`] = `
   padding-bottom: 5px;
   padding-right: 10px;
   padding-left: 10px;
-  margin-right: 10px;
+  background-color: rgba(255,118,145,1);
+  -webkit-box-pack: center;
+  -webkit-justify-content: center;
+  -ms-flex-pack: center;
+  justify-content: center;
+  justify-items: center;
+  -webkit-align-content: center;
+  -ms-flex-line-pack: center;
+  align-content: center;
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  color: unset;
+}
+
+.c37 {
+  width: auto;
+  height: auto;
+  display: block;
+  border-radius: 5px;
+  width: -webkit-max-content;
+  width: -moz-max-content;
+  width: max-content;
+  display: -webkit-inline-box;
+  display: -webkit-inline-flex;
+  display: -ms-inline-flexbox;
+  display: inline-flex;
+  padding-top: 5px;
+  padding-bottom: 5px;
+  padding-right: 10px;
+  padding-left: 10px;
   background-color: rgba(194,178,0,1);
   -webkit-box-pack: center;
   -webkit-justify-content: center;
@@ -1549,7 +1582,7 @@ exports[`<UserList /> Should render and match the snapshot - researcher 1`] = `
   color: unset;
 }
 
-.c38 {
+.c39 {
   width: auto;
   height: auto;
   display: block;
@@ -1601,7 +1634,7 @@ exports[`<UserList /> Should render and match the snapshot - researcher 1`] = `
   align-items: center;
 }
 
-.c32 {
+.c33 {
   display: -webkit-box;
   display: -webkit-flex;
   display: -ms-flexbox;
@@ -1619,7 +1652,7 @@ exports[`<UserList /> Should render and match the snapshot - researcher 1`] = `
   width: 100%;
 }
 
-.c37 {
+.c38 {
   display: -webkit-box;
   display: -webkit-flex;
   display: -ms-flexbox;
@@ -1695,7 +1728,7 @@ exports[`<UserList /> Should render and match the snapshot - researcher 1`] = `
   color: rgba(210,55,29,1);
 }
 
-.c34 {
+.c35 {
   font-family: DM Sans;
   font-size: 13px;
   line-height: 130%;
@@ -1704,7 +1737,7 @@ exports[`<UserList /> Should render and match the snapshot - researcher 1`] = `
   color: rgba(210,55,29,1);
 }
 
-.c39 {
+.c40 {
   font-family: DM Sans;
   font-size: 13px;
   line-height: 130%;
@@ -1740,7 +1773,7 @@ exports[`<UserList /> Should render and match the snapshot - researcher 1`] = `
   color: #2F3850;
 }
 
-.c40 {
+.c41 {
   margin: 0;
   font-family: DM Sans;
   font-size: 25px;
@@ -1788,7 +1821,7 @@ exports[`<UserList /> Should render and match the snapshot - researcher 1`] = `
   top: 10px;
 }
 
-.c33 {
+.c34 {
   outline: none;
   border: none;
   background: transparent;
@@ -2161,31 +2194,36 @@ exports[`<UserList /> Should render and match the snapshot - researcher 1`] = `
                   >
                     <div
                       class="c31"
-                      display="inline-flex"
-                      width="max-content"
+                      display="flex"
                     >
-                      <p
-                        class="c5"
-                        color="#FFFFFF"
-                        font-size="14"
-                        font-weight="bold"
+                      <div
+                        class="c32"
+                        display="inline-flex"
+                        width="max-content"
                       >
-                        Participant
-                      </p>
+                        <p
+                          class="c5"
+                          color="#FFFFFF"
+                          font-size="14"
+                          font-weight="bold"
+                        >
+                          Participant
+                        </p>
+                      </div>
                     </div>
                   </td>
                   <td
                     class="c29"
                   >
                     <div
-                      class="c32"
+                      class="c33"
                       width="100%"
                     >
                       <button
-                        class="c33"
+                        class="c34"
                       >
                         <p
-                          class="c34"
+                          class="c35"
                           color="#D2371D"
                           font-weight="bold"
                         >
@@ -2219,32 +2257,37 @@ exports[`<UserList /> Should render and match the snapshot - researcher 1`] = `
                     class="c29"
                   >
                     <div
-                      class="c35"
-                      display="inline-flex"
-                      width="max-content"
+                      class="c31"
+                      display="flex"
                     >
-                      <p
-                        class="c5"
-                        color="#FFFFFF"
-                        font-size="14"
-                        font-weight="bold"
+                      <div
+                        class="c36"
+                        display="inline-flex"
+                        width="max-content"
                       >
-                        Researcher
-                      </p>
+                        <p
+                          class="c5"
+                          color="#FFFFFF"
+                          font-size="14"
+                          font-weight="bold"
+                        >
+                          Researcher
+                        </p>
+                      </div>
                     </div>
                   </td>
                   <td
                     class="c29"
                   >
                     <div
-                      class="c32"
+                      class="c33"
                       width="100%"
                     >
                       <button
-                        class="c33"
+                        class="c34"
                       >
                         <p
-                          class="c34"
+                          class="c35"
                           color="#D2371D"
                           font-weight="bold"
                         >
@@ -2278,32 +2321,37 @@ exports[`<UserList /> Should render and match the snapshot - researcher 1`] = `
                     class="c29"
                   >
                     <div
-                      class="c36"
-                      display="inline-flex"
-                      width="max-content"
+                      class="c31"
+                      display="flex"
                     >
-                      <p
-                        class="c5"
-                        color="#FFFFFF"
-                        font-size="14"
-                        font-weight="bold"
+                      <div
+                        class="c37"
+                        display="inline-flex"
+                        width="max-content"
                       >
-                        Admin
-                      </p>
+                        <p
+                          class="c5"
+                          color="#FFFFFF"
+                          font-size="14"
+                          font-weight="bold"
+                        >
+                          Admin
+                        </p>
+                      </div>
                     </div>
                   </td>
                   <td
                     class="c29"
                   >
                     <div
-                      class="c32"
+                      class="c33"
                       width="100%"
                     >
                       <button
-                        class="c33"
+                        class="c34"
                       >
                         <p
-                          class="c34"
+                          class="c35"
                           color="#D2371D"
                           font-weight="bold"
                         >
@@ -2319,7 +2367,7 @@ exports[`<UserList /> Should render and match the snapshot - researcher 1`] = `
         </div>
         <div
           aria-label="Data list pagination"
-          class="c37"
+          class="c38"
           display="flex"
           role="navigation"
           width="100%"
@@ -2327,12 +2375,12 @@ exports[`<UserList /> Should render and match the snapshot - researcher 1`] = `
           <div
             aria-label="Go to page: 1"
             aria-selected="true"
-            class="c38"
+            class="c39"
             cursor="pointer"
             display="flex"
           >
             <p
-              class="c39"
+              class="c40"
               color="#FFFFFF"
             >
               1
@@ -2340,7 +2388,7 @@ exports[`<UserList /> Should render and match the snapshot - researcher 1`] = `
           </div>
           <h1
             aria-label="Go to next page"
-            class="c40"
+            class="c41"
             cursor="pointer"
           >
             &gt;

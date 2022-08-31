@@ -7,6 +7,7 @@ import StyledTextButton from 'components/Button/StyledTextButton';
 import Text from 'components/Text';
 import UserRoleTile from 'components/UserRoleTile';
 import { StripedTR, TD } from 'components/Table';
+import Box from 'components/Box';
 import { colors, themeColors } from 'theme';
 import { ternary } from 'utils/ternary';
 
@@ -71,13 +72,15 @@ const TableRow = ({
       <TD pl={20}>{nameColumn}</TD>
       <TD pl={20}>{email}</TD>
       <TD pl={20}>
-        {roles.map((role) => (
-          <UserRoleTile
-            key={`user-role-tile-${role}`}
-            role={role}
-            disabled={!active}
-          />
-        ))}
+        <Box py={8} display="flex" gap="8px" flexWrap="wrap">
+          {roles.map((role) => (
+            <UserRoleTile
+              key={`user-role-tile-${role}`}
+              role={role}
+              disabled={!active}
+            />
+          ))}
+        </Box>
       </TD>
       <TD pl={20}>
         <Row width="100%" justify="start" pr={20}>
