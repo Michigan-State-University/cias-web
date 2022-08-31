@@ -2,16 +2,16 @@ import React from 'react';
 
 import { colors } from 'theme';
 
-import { Interlocutor } from 'models/LiveChat';
+import { InterlocutorAvatarData } from 'models/LiveChat';
 
 import UserAvatar from 'components/UserAvatar';
 
 export type Props = {
-  interlocutor: Nullable<Interlocutor>;
+  interlocutorAvatarData: Nullable<InterlocutorAvatarData>;
 };
 
-const ChatAvatar = ({ interlocutor }: Props) => {
-  const { avatarUrl, firstName, lastName } = interlocutor ?? {};
+const ChatAvatar = ({ interlocutorAvatarData }: Props) => {
+  const { avatarUrl, firstName, lastName } = interlocutorAvatarData ?? {};
   return (
     <UserAvatar
       height={36}

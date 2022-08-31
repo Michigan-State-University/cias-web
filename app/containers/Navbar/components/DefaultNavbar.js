@@ -7,6 +7,8 @@ import Row from 'components/Row';
 import useOutsideClick from 'utils/useOutsideClick';
 
 import { StyledLogos } from './styled';
+import { MSULogoContainer } from '../styled';
+import { LOGO_MAX_HEIGHT } from '../constants';
 
 const DefaultNavbar = () => {
   const dropdownRef = useRef(null);
@@ -17,9 +19,11 @@ const DefaultNavbar = () => {
     <Row width="100%" justify="start">
       <StyledLogos>
         <Link to="/">
-          <CIASLogo maxHeight={51} mr={15} />
+          <CIASLogo maxHeight={LOGO_MAX_HEIGHT} mr={15} />
         </Link>
-        <MSULogo maxHeight={51} ml={10} />
+        <MSULogoContainer>
+          <MSULogo maxHeight={LOGO_MAX_HEIGHT} ml={10} />
+        </MSULogoContainer>
       </StyledLogos>
     </Row>
   );

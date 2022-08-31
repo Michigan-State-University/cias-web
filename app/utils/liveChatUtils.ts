@@ -1,11 +1,11 @@
-import { Interlocutor } from 'models/LiveChat';
+import { InterlocutorNameData } from 'models/LiveChat';
 
 export const formatInterlocutorName = (
-  interlocutor: Nullable<Interlocutor>,
+  interlocutorNameData: Nullable<InterlocutorNameData>,
 ) => {
-  if (!interlocutor) return '?';
+  if (!interlocutorNameData) return '?';
 
-  const { firstName, lastName, userId } = interlocutor;
+  const { firstName, lastName, userId } = interlocutorNameData;
   const formattedName = `${firstName ?? ''} ${lastName ?? ''}`.trim();
 
   if (formattedName.length === 0) return `ID: ${userId}`;

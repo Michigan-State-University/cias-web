@@ -1,6 +1,5 @@
 import styled from 'styled-components';
 import { Col as GCol, Row as GRow } from 'react-grid-system';
-import Color from 'color';
 import Row from 'components/Row';
 
 import { colors, themeColors } from 'theme';
@@ -47,23 +46,6 @@ export const MessagesSectionContainer = styled(Box)`
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-`;
-
-export const ConversationListItemContainer = styled(Box)`
-  cursor: pointer;
-  padding: 8px;
-  border-radius: 8px;
-  background-color: ${({ highlighted }) =>
-    highlighted ? themeColors.highlight : colors.white};
-  &:hover {
-    background-color: ${({ highlighted }) =>
-      highlighted
-        ? themeColors.highlight
-        : Color(themeColors.highlight).alpha(0.3)};
-  }
-  display: flex;
-  gap: 16px;
-  width: 100%;
 `;
 
 export const LabelRow = styled(Row)`

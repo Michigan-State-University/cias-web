@@ -16,7 +16,7 @@ export type Props = {
 const ConversationChatDialogHeader = ({ interlocutor }: Props) => (
   <Row align="center" gap={12} minWidth="0" flexGrow={1}>
     <Box flexShrink={0}>
-      <ChatAvatar interlocutor={interlocutor} />
+      <ChatAvatar interlocutorAvatarData={interlocutor} />
     </Box>
     <Box flexGrow={1} minWidth="0">
       {interlocutor && (

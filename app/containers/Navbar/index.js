@@ -31,6 +31,7 @@ import {
 } from './styled';
 import messages from './messages';
 import { navbarElements } from './dropdownContent';
+import NotificationsPanel from './NotificationsPanel';
 
 import PreviewNavbar from './components/PreviewNavbar';
 import DefaultNavbar from './components/DefaultNavbar';
@@ -63,8 +64,9 @@ export function Navbar({
         location,
         intl,
       })}
-      <RightPanel onClick={() => !menuVisible && setMenuVisible(true)}>
-        <DropDownContainer>
+      <RightPanel>
+        <NotificationsPanel />
+        <DropDownContainer onClick={() => !menuVisible && setMenuVisible(true)}>
           <UserAvatar
             mr={10}
             width={30}

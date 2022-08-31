@@ -24,4 +24,12 @@ export default defineMessages({
     id: `${scope}.users`,
     defaultMessage: 'Users',
   },
+  notifications: {
+    id: `${scope}.notifications`,
+    defaultMessage: 'Notifications',
+  },
+  toggleNotifications: {
+    id: `${scope}.toggleNotifications`,
+    defaultMessage: 'Toggle notifications visibility',
+  },
 });

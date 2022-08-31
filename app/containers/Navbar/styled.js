@@ -3,7 +3,7 @@ import styled from 'styled-components';
 import Row from 'components/Row';
 import Comment from 'components/Comment';
 
-import { elements, colors, hexToRgb, ZIndex } from 'theme';
+import { elements, colors, hexToRgb, ZIndex, mediaQuery } from 'theme';
 import { maxQueries } from 'components/Container/mediaQuery';
 
 export const NavbarStyled = styled.div`
@@ -83,4 +83,10 @@ export const StyledRow = styled(Row)`
 
 export const DropDownContainer = styled.div`
   position: relative;
+`;
+
+export const MSULogoContainer = styled.div`
+  ${mediaQuery.mobile`
+    display: none
+  `}
 `;
