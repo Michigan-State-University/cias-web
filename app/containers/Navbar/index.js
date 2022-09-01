@@ -67,14 +67,6 @@ export function Navbar({
       <RightPanel>
         <NotificationsPanel />
         <DropDownContainer onClick={() => !menuVisible && setMenuVisible(true)}>
-          <UserAvatar
-            mr={10}
-            width={30}
-            height={30}
-            avatar={avatar}
-            lastName={lastName}
-            firstName={firstName}
-          />
           <div ref={dropdownRef}>
             {menuVisible && (
               <DropDownContent>
@@ -96,12 +88,19 @@ export function Navbar({
               </DropDownContent>
             )}
           </div>
+          <UserAvatar
+            width={30}
+            height={30}
+            avatar={avatar}
+            lastName={lastName}
+            firstName={firstName}
+          />
+          <Box
+            className="user-name-info"
+            clickable
+            data-private
+          >{`${firstName} ${lastName}`}</Box>
         </DropDownContainer>
-        <Box
-          className="user-name-info"
-          clickable
-          data-private
-        >{`${firstName} ${lastName}`}</Box>
       </RightPanel>
     </NavbarStyled>
   );

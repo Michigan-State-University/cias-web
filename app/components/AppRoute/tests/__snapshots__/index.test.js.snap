@@ -3,7 +3,39 @@
 exports[`<AppRoute /> Should redirect to login 1`] = `<div />`;
 
 exports[`<AppRoute /> Should render and match the snapshot 1`] = `
+.c9 {
+  width: auto;
+  height: auto;
+  display: block;
+  border-radius: 5px;
+  position: relative;
+  color: unset;
+}
+
+.c11 {
+  width: auto;
+  height: auto;
+  display: block;
+  border-radius: 5px;
+  position: absolute;
+  z-index: 12;
+  top: 0;
+  right: 0;
+  color: unset;
+}
+
 .c12 {
+  width: auto;
+  height: auto;
+  display: block;
+  border-radius: 5px;
+  -webkit-flex-shrink: 0;
+  -ms-flex-negative: 0;
+  flex-shrink: 0;
+  color: unset;
+}
+
+.c16 {
   width: auto;
   height: auto;
   display: block;
@@ -56,7 +88,7 @@ exports[`<AppRoute /> Should render and match the snapshot 1`] = `
   height: auto;
 }
 
-.c11 {
+.c15 {
   width: 30px;
   height: 30px;
   font-size: 15px;
@@ -78,7 +110,6 @@ exports[`<AppRoute /> Should render and match the snapshot 1`] = `
   cursor: pointer;
   width: 30px;
   height: 30px;
-  margin-right: 10px;
   color: rgba(255,255,255,1);
 }
 
@@ -116,13 +147,23 @@ exports[`<AppRoute /> Should render and match the snapshot 1`] = `
   -webkit-box-align: center;
   -ms-flex-align: center;
   align-items: center;
+  gap: 32px;
+}
+
+.c14 {
+  position: relative;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  gap: 10px;
 }
 
 .c10 {
-  position: relative;
-}
-
-.c9 {
   height: 28px;
   width: 28px;
   display: -webkit-box;
@@ -147,8 +188,34 @@ exports[`<AppRoute /> Should render and match the snapshot 1`] = `
   background-color: rgba(255,255,255,1);
   width: 24px;
   height: 24px;
-  position: relative;
-  margin-right: 32px;
+  z-index: 11;
+  margin-right: 0;
+}
+
+.c13 {
+  border-radius: 50%;
+  background-color: #D2371D;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+  -webkit-justify-content: center;
+  -ms-flex-pack: center;
+  justify-content: center;
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  width: 16px;
+  height: 16px;
+  background-color: rgba(210,55,29,1);
+  color: rgba(255,255,255,1);
+  opacity: 1;
+  font-size: 9.6px;
+  font-weight: 700;
+  color: rgba(255,255,255,1);
+  border: 1px solid #FFFFFF;
 }
 
 .c0 {
@@ -156,7 +223,7 @@ exports[`<AppRoute /> Should render and match the snapshot 1`] = `
   margin: 0 !important;
 }
 
-.c14 {
+.c18 {
   position: relative;
   margin-top: 70px;
   height: calc(100vh - 70px) !important;
@@ -164,7 +231,7 @@ exports[`<AppRoute /> Should render and match the snapshot 1`] = `
   overflow: auto;
 }
 
-.c13 {
+.c17 {
   overflow: hidden;
 }
 
@@ -195,7 +262,7 @@ exports[`<AppRoute /> Should render and match the snapshot 1`] = `
 }
 
 @media only screen and (max-width:1280px) {
-  .c14 {
+  .c18 {
     width: 100vw;
   }
 }
@@ -241,24 +308,46 @@ exports[`<AppRoute /> Should render and match the snapshot 1`] = `
         <div
           class="c8"
         >
-          <button
-            aria-label="Toggle notifications visibility"
-            class="c9"
-            height="24"
-            id="NOTIFICATION_BELL_ID"
-            title="Toggle notifications visibility"
-            width="24"
-          >
-            <img
-              alt="cross"
-              src="IMAGE_MOCK"
-            />
-          </button>
           <div
-            class="c10"
+            class="c9"
           >
+            <button
+              aria-label="Toggle notifications visibility"
+              class="c10"
+              height="24"
+              id="NOTIFICATION_BUTTON_ID"
+              title="Toggle notifications visibility"
+              width="24"
+            >
+              <img
+                alt="cross"
+                src="IMAGE_MOCK"
+              />
+              <div
+                class="c11"
+              >
+                <div
+                  class="c12"
+                >
+                  <div
+                    class="c13"
+                    color="#FFFFFF"
+                    font-size="9.6px"
+                    font-weight="bold"
+                    opacity="1"
+                  >
+                    3
+                  </div>
+                </div>
+              </div>
+            </button>
+          </div>
+          <div
+            class="c14"
+          >
+            <div />
             <div
-              class="c11"
+              class="c15"
               color="#FFFFFF"
               data-private="true"
               height="30"
@@ -268,26 +357,25 @@ exports[`<AppRoute /> Should render and match the snapshot 1`] = `
                 JD
               </div>
             </div>
-            <div />
-          </div>
-          <div
-            class="c12 user-name-info"
-            data-private="true"
-          >
-            John Doe
+            <div
+              class="c16 user-name-info"
+              data-private="true"
+            >
+              John Doe
+            </div>
           </div>
         </div>
       </div>
     </div>
     <div
-      class="c13"
+      class="c17"
       style="margin-left: 0px; margin-right: 0px; display: flex; flex-wrap: wrap; flex-grow: 0; flex-shrink: 0; align-items: normal; justify-content: flex-start;"
     >
       <div
         style="box-sizing: border-box; min-height: 1px; position: relative; padding-left: 0px; padding-right: 0px; width: 100%; flex-basis: 0px; flex-grow: 1; flex-shrink: 0; max-width: 100%; margin-left: 0%;"
       >
         <div
-          class="c14"
+          class="c18"
           id="main-app-container"
         />
       </div>

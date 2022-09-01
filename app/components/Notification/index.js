@@ -4,7 +4,6 @@ import { Row } from 'react-grid-system';
 
 import { boxShadows, colors, themeColors } from 'theme';
 
-import cross from 'assets/svg/cross.svg';
 import checklist from 'assets/svg/checklist.svg';
 
 import Box from 'components/Box';
@@ -43,9 +42,7 @@ const Notification = ({ title, description, onClose, className }) => (
         </Row>
       </Col>
       <Col align="end" xs="content" style={{ padding: 0 }}>
-        <ActionIcon margin="0px" onClick={onClose}>
-          <Img src={cross} alt="cross" />
-        </ActionIcon>
+        <ActionIcon margin="0px" onClick={onClose} />
       </Col>
     </Row>
   </Box>

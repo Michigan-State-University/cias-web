@@ -1,7 +1,7 @@
 import styled from 'styled-components';
 import PropTypes from 'prop-types';
 import { themeColors } from 'theme';
-import { margin, padding, style, text } from '../BaseComponentStyles';
+import { border, margin, padding, style, text } from '../BaseComponentStyles';
 
 const StyledCircle = styled.div`
   border-radius: 50%;
@@ -15,6 +15,7 @@ const StyledCircle = styled.div`
   ${margin};
   ${style};
   ${text};
+  ${border};
 `;
 
 StyledCircle.propTypes = {

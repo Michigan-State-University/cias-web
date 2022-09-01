@@ -4,7 +4,7 @@
  *
  */
 
-import React from 'react';
+import React, { PropsWithChildren } from 'react';
 import { useIntl } from 'react-intl';
 
 import Icon from 'components/Icon';
@@ -14,18 +14,20 @@ import cross from 'assets/svg/cross.svg';
 import { CrossLink, CrossButton } from './styled';
 import messages from './messages';
 
-type Props = {
+type Props = PropsWithChildren<{
   to?: string;
   onClick?: () => void;
   iconSrc: SVGElement;
   ariaText: string;
-} & Record<string, unknown>;
+}> &
+  Record<string, unknown>;
 
 const ActionIcon = ({
   to,
   onClick,
   iconSrc = cross,
   ariaText,
+  children,
   ...restProps
 }: Props) => {
   const { formatMessage } = useIntl();
@@ -41,6 +43,7 @@ const ActionIcon = ({
         {...restProps}
       >
         {icon}
+        {children}
       </CrossLink>
     );
   if (onClick)
@@ -52,6 +55,7 @@ const ActionIcon = ({
         {...restProps}
       >
         {icon}
+        {children}
       </CrossButton>
     );
   return null;

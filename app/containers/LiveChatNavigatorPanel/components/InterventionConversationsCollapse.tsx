@@ -5,7 +5,7 @@ import { colors } from 'theme';
 import Collapse from 'components/Collapse';
 import { EllipsisText } from 'components/Text';
 import Box from 'components/Box';
-import StyledCircle from 'components/Circle/StyledCircle';
+import { CircleCounter } from 'components/CircleCounter';
 
 import useResizeObserver from 'utils/useResizeObserver';
 
@@ -73,19 +73,7 @@ const InterventionConversationCollapse = ({
             width="100%"
           >
             {hasUnreadConversations && (
-              <Box flexShrink={0}>
-                <StyledCircle
-                  size="20px"
-                  bg={colors.vermilion}
-                  color={colors.white}
-                  fontWeight="bold"
-                  fontSize="12px"
-                >
-                  {unreadConversationsCount > 9
-                    ? `9+`
-                    : unreadConversationsCount}
-                </StyledCircle>
-              </Box>
+              <CircleCounter count={unreadConversationsCount} size={20} />
             )}
             <EllipsisText
               fontWeight={unreadConversationsCount ? 'bold' : 'medium'}
