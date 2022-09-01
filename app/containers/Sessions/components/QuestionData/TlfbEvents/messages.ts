@@ -5,7 +5,7 @@ export const scope = 'app.containers.TlfbEvents';
 export default defineMessages({
   title: {
     id: `${scope}.title`,
-    defaultMessage: `Events Screen Informations`,
+    defaultMessage: `Events Screen Information`,
   },
   eventsScreenTitle: {
     id: `${scope}.eventsScreenTitle`,
