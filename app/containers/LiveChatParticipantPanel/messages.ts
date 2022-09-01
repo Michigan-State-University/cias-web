@@ -22,11 +22,11 @@ export default defineMessages({
   },
   showParticipantFiles: {
     id: `${scope}.showParticipantFiles`,
-    defaultMessage: 'Show Help Resources',
+    defaultMessage: 'Show resources',
   },
   hideParticipantFiles: {
     id: `${scope}.hideParticipantFiles`,
-    defaultMessage: 'Hide Help Resources',
+    defaultMessage: 'Hide resources',
   },
   startConversation: {
     id: `${scope}.startConversation`,

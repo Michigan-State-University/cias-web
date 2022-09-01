@@ -107,7 +107,7 @@ export default defineMessages({
   },
   helpingMaterials: {
     id: `${scope}.helpingMaterials`,
-    defaultMessage: 'Helping materials',
+    defaultMessage: 'Resources',
   },
   usefulLinks: {
     id: `${scope}.usefulLinks`,
