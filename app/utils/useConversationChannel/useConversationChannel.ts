@@ -207,6 +207,7 @@ export const useConversationChannel = (interventionId?: string) => {
   };
 
   return {
+    isConnected: channel?.state === 'connected',
     sendMessage,
     readMessage,
     createConversation,

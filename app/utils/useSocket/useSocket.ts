@@ -76,6 +76,7 @@ export const useSocket = <
 
     return {
       perform,
+      state: channel.state,
     };
   }, [perform]);
 };

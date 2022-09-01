@@ -41,13 +41,14 @@ export const LiveChatParticipantPanel = ({ interventionId }: Props) => {
   );
   const liveChatSetup = useSelector(makeSelectLiveChatSetup());
 
-  const { fetchLiveChatSetup } = conversationChannel;
+  const { fetchLiveChatSetup, isConnected } = conversationChannel;
 
   useEffect(() => {
+    if (!isConnected) return;
     if (!liveChatSetup && !dialogMinimized && !liveChatLoading) {
       fetchLiveChatSetup();
     }
-  }, [dialogMinimized]);
+  }, [dialogMinimized, isConnected]);
 
   useEffect(
     () => () => {
