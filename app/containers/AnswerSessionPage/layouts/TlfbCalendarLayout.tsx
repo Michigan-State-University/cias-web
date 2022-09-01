@@ -3,7 +3,11 @@ import { Dayjs } from 'dayjs';
 
 import { TlfbConfigBody } from 'models/Question';
 import { CalendarData } from 'models/Tlfb';
-import { dayNumeralFormatter, fullMonthNameFormatter } from 'utils/formatters';
+import {
+  dayNumeralFormatter,
+  fullDayOfWeekFormatter,
+  fullMonthNameFormatter,
+} from 'utils/formatters';
 import { CamelToSnake } from 'global/types/camelToSnake';
 
 import { ANSWER_SESSION_CONTAINER_ID } from 'containers/App/constants';
@@ -97,11 +101,13 @@ const TlfbCalendarLayout = forwardRef<CalendarRef, Props>(
           <>
             {(isMobilePreview || isMobile) && (
               <Box display="flex">
-                <Text fontWeight="bold" fontSize="26px">
-                  {selectedDay?.format(dayNumeralFormatter)},
+                <Text fontSize="26px">
+                  {selectedDay?.format(fullDayOfWeekFormatter)},
                 </Text>
-                <Text ml={5} fontSize="26px">
-                  {selectedDay?.format(fullMonthNameFormatter)}
+                <Text fontWeight="bold" ml={5} fontSize="26px">
+                  {`${selectedDay?.format(
+                    fullMonthNameFormatter,
+                  )} ${selectedDay?.format(dayNumeralFormatter)}`}
                 </Text>
               </Box>
             )}
