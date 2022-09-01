@@ -9,9 +9,7 @@ exports[`<Tab /> should render and match the snapshot for a label 1`] = `
 }
 
 .c0 div {
-  color: #2F3850;
   cursor: pointer;
-  font-weight: 400 !important;
 }
 
 .c1 {
@@ -46,9 +44,7 @@ exports[`<Tab /> should render as links and match the snapshot 1`] = `
 }
 
 .c0 div {
-  color: #2F3850;
   cursor: pointer;
-  font-weight: 400 !important;
 }
 
 .c1 a {

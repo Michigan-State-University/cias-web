@@ -24,7 +24,7 @@ const Tab = ({
       <LabelContainer
         isActive={isActive}
         emphasizeActiveLink={emphasizeActiveLink}
-        {...labelStyle}
+        labelStyle={labelStyle}
       >
         <div onClick={handleClick}>{label}</div>
         {isActive && <TabUnderline layoutId="Tab-LabelContainer-underline" />}
