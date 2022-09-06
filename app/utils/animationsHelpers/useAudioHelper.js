@@ -62,7 +62,7 @@ const useAudioHelper = (
               animationsData.end = animationsData.start;
             else
               animationsData[key] = await import(
-                `assets/animations/${value}.json`
+                `assets/animations/peedy/${value}.json`
               );
           }
 

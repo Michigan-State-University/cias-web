@@ -61,7 +61,9 @@ const useMoveHelper = (animationContainer, blocks, dispatchUpdate) => {
     if (blocks.length) {
       await Promise.all(
         moveAnimationsNames.map(async (animation) => {
-          const data = await import(`assets/animations/${animation}.json`);
+          const data = await import(
+            `assets/animations/peedy/${animation}.json`
+          );
           moveAnimations.push({
             name: animation,
             animationData: data,

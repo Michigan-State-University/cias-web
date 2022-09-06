@@ -35,7 +35,7 @@ const useAnimationHelper = (
     await Promise.all(
       uniqAnimations.map(async ({ animation, type }) => {
         const data = await import(
-          `assets/animations/${animation || 'standStill'}.json`
+          `assets/animations/peedy/${animation || 'standStill'}.json`
         );
 
         bodyAnimations.push({
@@ -48,7 +48,9 @@ const useAnimationHelper = (
       }),
     );
 
-    const standStillData = await import(`assets/animations/standStill.json`);
+    const standStillData = await import(
+      `assets/animations/peedy/standStill.json`
+    );
     bodyAnimations.push({
       name: 'standStill',
       animationData: standStillData,
