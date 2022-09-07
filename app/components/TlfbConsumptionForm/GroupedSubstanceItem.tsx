@@ -1,18 +1,18 @@
-import React, { ChangeEvent, memo, MouseEvent } from 'react';
+import React, { ChangeEvent, memo } from 'react';
 import { useIntl } from 'react-intl';
 
 import { colors } from 'theme';
-import BinIcon from 'assets/svg/bin-no-bg.svg';
 
 import { SubstanceConsumption } from 'models/Tlfb';
 import { Substance } from 'models/Question';
 
 import { floatValidator, floatCharValidator } from 'utils/validators';
 
-import { ImageButton } from 'components/Button';
+import Text from 'components/Text';
 import Circle from 'components/Circle';
 import { Col, Container, Row } from 'components/ReactGridSystem';
-import Select from 'components/Select';
+import Box from 'components/Box';
+
 import { InputWithAdornment } from 'components/Input/InputWithAdornment';
 
 import messages from './messages';
@@ -31,7 +31,6 @@ export type GroupedSubstanceItemProps = {
   substances: Substance[];
   consumptions: SubstanceConsumption[];
   onChange: (consumption: SubstanceConsumption) => void;
-  onRemove: () => void;
   loading: boolean;
   mobile: boolean;
 };
@@ -43,7 +42,6 @@ const Component = ({
   substances,
   consumptions,
   onChange,
-  onRemove,
   mobile,
 }: GroupedSubstanceItemProps) => {
   const { formatMessage } = useIntl();
@@ -75,10 +73,6 @@ const Component = ({
   const onConsumptionsChange = (newValue: Partial<SubstanceConsumption>) =>
     onChange({ ...consumption, ...newValue });
 
-  const onSelect = ({ value }: ArrayElement<typeof options>) => {
-    onConsumptionsChange({ variable: value });
-  };
-
   const onAmountKeyPress = (event: React.KeyboardEvent<HTMLInputElement>) => {
     if (event.key === '.' && event.currentTarget.value.includes('.')) {
       event.preventDefault();
@@ -93,9 +87,13 @@ const Component = ({
 
   const onAmountChange = (event: ChangeEvent<HTMLInputElement>) => {
     const originalValue = event.target.value;
+    const originalValueInt = parseInt(originalValue, 10);
+    const isZero = originalValueInt === 0;
+
     if (floatValidator(originalValue)) {
       onConsumptionsChange({
         amount: originalValue,
+        consumed: !isZero,
       });
       return;
     }
@@ -104,13 +102,9 @@ const Component = ({
     if (floatValidator(zeroAppendedValue)) {
       onConsumptionsChange({
         amount: zeroAppendedValue,
+        consumed: !isZero,
       });
     }
-  };
-
-  const handleRemove = (event: MouseEvent<HTMLDivElement>) => {
-    event.stopPropagation();
-    onRemove();
   };
 
   const substanceLabelId = generateSubstanceId(groupName, index);
@@ -130,10 +124,9 @@ const Component = ({
         <Col xs={mobile ? 5 : 4} id={substanceLabelId}>
           {formatMessage(messages.substanceSelectLabel)}
         </Col>
-        <Col xs={6} id={amountLabelId}>
+        <Col xs={7} id={amountLabelId}>
           {formatMessage(messages.amountLabel)}
         </Col>
-        <Col xs={1} />
       </Row>
 
       <Row align="center" gutterWidth={8}>
@@ -149,17 +142,17 @@ const Component = ({
           </Col>
         )}
         <Col xs={mobile ? 5 : 4}>
-          <Select
+          <Box
             width="100%"
-            selectProps={{
-              options,
-              value: selectedValue,
-              onChange: onSelect,
-              'aria-labelledby': `${groupId} ${substanceLabelId} ${indexId}`,
-            }}
-          />
+            bg={colors.white}
+            height={42}
+            align="center"
+            padding={12}
+          >
+            <Text>{selectedValue?.label}</Text>
+          </Box>
         </Col>
-        <Col xs={6}>
+        <Col xs={7}>
           <InputWithAdornment
             value={consumption.amount ?? ''}
             keyboard="number"
@@ -168,14 +161,7 @@ const Component = ({
             onPaste={onAmountPaste}
             onChange={onAmountChange}
             aria-labelledby={`${groupId} ${amountLabelId} ${indexId}`}
-          />
-        </Col>
-        <Col xs={1}>
-          <ImageButton
-            src={BinIcon}
-            onClick={handleRemove}
-            mr={8}
-            title={formatMessage(messages.removeItem, { index: index + 1 })}
+            onWheel={(e: any) => e.target.blur()}
           />
         </Col>
       </Row>

@@ -123,6 +123,12 @@ const TlfbQuestion = ({
 
   const [answerBody, setAnswerBody] = useState(selectedDayAnswer?.body);
 
+  const totalSubstanceLength = useMemo(
+    () =>
+      substanceGroups.reduce((sum, group) => sum + group.substances.length, 0),
+    [substanceGroups],
+  );
+
   const canGoToNextDay = useMemo(() => {
     if (!answerBody) return false;
 
@@ -137,6 +143,7 @@ const TlfbQuestion = ({
 
       return (
         !!consumptions?.length &&
+        consumptions.length === totalSubstanceLength &&
         consumptions.every(({ amount }) => Boolean(amount))
       );
     }
