@@ -1,8 +1,9 @@
 import React, { forwardRef, useMemo } from 'react';
 import { Dayjs } from 'dayjs';
+import some from 'lodash/some';
 
 import { TlfbConfigBody } from 'models/Question';
-import { CalendarData } from 'models/Tlfb';
+import { CalendarData, DayData } from 'models/Tlfb';
 import {
   dayNumeralFormatter,
   fullDayOfWeekFormatter,
@@ -20,6 +21,7 @@ import { CalendarRef } from 'components/Calendar/types';
 import Loader from 'components/Loader';
 
 import { colors } from 'theme';
+import { CalendarLegend } from 'components/Calendar/CalendarLegend';
 import { TlfbContainer } from './styled';
 import { getTlfbDateRange } from '../utils';
 
@@ -71,6 +73,8 @@ const TlfbCalendarLayout = forwardRef<CalendarRef, Props>(
 
     const isMobileView = isMobile || isMobilePreview;
     const shouldDisplayTitleRow = smallText || bigText || !hideHelpingMaterials;
+    const shouldDisplayLegend =
+      isMobileView && some(calendarData, (day: DayData) => !!day.answer);
 
     return (
       <TlfbContainer>
@@ -93,6 +97,11 @@ const TlfbCalendarLayout = forwardRef<CalendarRef, Props>(
           disableManualDayClick={disableModalClose}
           orderedGroupNames={orderedGroupNames || []}
         />
+        {shouldDisplayLegend && (
+          <Box mt={16}>
+            <CalendarLegend />
+          </Box>
+        )}
         {isMobileView && (
           <Modal
             visible={!!selectedDay}
