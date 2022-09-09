@@ -116,6 +116,7 @@ const AnimationRefHelper = ({
 }) => {
   const animationParentRef = useRef();
   const [refState, setRefState] = useState(null);
+
   useEffect(() => {
     setRefState(animationParentRef.current);
   }, [animationParentRef]);
@@ -248,12 +249,6 @@ export function AnswerSessionPage({
     }),
     [previewMode, containerQueryParams, isPreview],
   );
-
-  const logoStyles = useMemo(() => {
-    if (isDesktop) return { position: 'absolute', right: '30px' };
-
-    return {};
-  }, [containerQueryParams, isDesktop]);
 
   const {
     id: userSessionId,
@@ -553,6 +548,18 @@ export function AnswerSessionPage({
           beforeQuickExit={beforeQuickExit}
         />
       )}
+
+      {interventionStarted && !nextQuestionError && logoUrl && isDesktop && (
+        <Row justify="start" pl={24} pt={24}>
+          <Img
+            maxHeight={elements.interventionLogoSize.height}
+            maxWidth={elements.interventionLogoSize.width}
+            src={logoUrl}
+            aria-label={imageAlt}
+          />
+        </Row>
+      )}
+
       {showLoader && <Loader />}
       {!showLoader && (
         <>
@@ -654,23 +661,29 @@ export function AnswerSessionPage({
                 </>
               )}
               {interventionStarted && !nextQuestionError && (
-                <>
+                <Box
+                  id={ANSWER_SESSION_CONTAINER_ID}
+                  position="relative"
+                  height="100%"
+                  width="100%"
+                >
                   <Box width="100%">
-                    <Row padding={30} pb={isDesktop ? 10 : 0}>
-                      <Box {...logoStyles}>
-                        <Row justify="end">
-                          {logoUrl && (
-                            <Img
-                              maxHeight={elements.interventionLogoSize.height}
-                              maxWidth={elements.interventionLogoSize.width}
-                              src={logoUrl}
-                              aria-label={imageAlt}
-                            />
-                          )}
+                    <Row
+                      padding={!isDesktop || isMobile ? 30 : 0}
+                      pb={isDesktop || (!isDesktop && logoUrl) ? 24 : 0}
+                      width="100%"
+                    >
+                      {!isDesktop && (
+                        <Row>
+                          <Img
+                            maxHeight={elements.interventionLogoSize.height}
+                            maxWidth={elements.interventionLogoSize.width}
+                            src={logoUrl}
+                            aria-label={imageAlt}
+                          />
                         </Row>
-
-                        {renderQuestionTranscript(true)}
-                      </Box>
+                      )}
+                      {renderQuestionTranscript(true)}
                     </Row>
 
                     {transitionalUserSessionId && (
@@ -685,10 +698,7 @@ export function AnswerSessionPage({
                       currentQuestion &&
                       interventionStarted &&
                       !transitionalUserSessionId && (
-                        <ScreenWrapper
-                          isFullSize={isFullSize}
-                          id={ANSWER_SESSION_CONTAINER_ID}
-                        >
+                        <ScreenWrapper isFullSize={isFullSize}>
                           {isNarratorPositionFixed && renderPage()}
                           {!isNarratorPositionFixed && (
                             <AnimationRefHelper
@@ -710,7 +720,7 @@ export function AnswerSessionPage({
                       )}
                   </Box>
                   {answersError && <ErrorAlert errorText={answersError} />}
-                </>
+                </Box>
               )}
             </AnswerOuterContainer>
           </Box>

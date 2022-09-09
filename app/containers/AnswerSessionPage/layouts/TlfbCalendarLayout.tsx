@@ -1,8 +1,9 @@
 import React, { forwardRef, useMemo } from 'react';
 import { Dayjs } from 'dayjs';
+import some from 'lodash/some';
 
 import { TlfbConfigBody } from 'models/Question';
-import { CalendarData } from 'models/Tlfb';
+import { CalendarData, DayData } from 'models/Tlfb';
 import {
   dayNumeralFormatter,
   fullDayOfWeekFormatter,
@@ -12,13 +13,15 @@ import { CamelToSnake } from 'global/types/camelToSnake';
 
 import { ANSWER_SESSION_CONTAINER_ID } from 'containers/App/constants';
 import Calendar from 'components/Calendar';
-import { PopoverModal } from 'components/Modal';
+import Modal, { PopoverModal } from 'components/Modal';
 import TlfbTitle from 'components/TlfbTitle';
 import Text from 'components/Text';
 import Box from 'components/Box';
 import { CalendarRef } from 'components/Calendar/types';
 import Loader from 'components/Loader';
 
+import { colors } from 'theme';
+import { CalendarLegend } from 'components/Calendar/CalendarLegend';
 import { TlfbContainer } from './styled';
 import { getTlfbDateRange } from '../utils';
 
@@ -68,17 +71,22 @@ const TlfbCalendarLayout = forwardRef<CalendarRef, Props>(
       [tlfbConfig],
     );
 
+    const isMobileView = isMobile || isMobilePreview;
+    const shouldDisplayTitleRow = smallText || bigText || !hideHelpingMaterials;
+    const shouldDisplayLegend =
+      isMobileView && some(calendarData, (day: DayData) => !!day.answer);
+
     return (
       <TlfbContainer>
         {/* @ts-ignore */}
         {isLoading && <Loader />}
-        <TlfbTitle
-          smallText={smallText}
-          bigText={bigText}
-          displayHelpingMaterials={
-            !hideHelpingMaterials && !isMobile && !isMobilePreview
-          }
-        />
+        {shouldDisplayTitleRow && (
+          <TlfbTitle
+            smallText={smallText}
+            bigText={bigText}
+            displayHelpingMaterials={!hideHelpingMaterials && !isMobileView}
+          />
+        )}
         <Calendar
           ref={ref}
           startDate={startDate}
@@ -89,31 +97,48 @@ const TlfbCalendarLayout = forwardRef<CalendarRef, Props>(
           disableManualDayClick={disableModalClose}
           orderedGroupNames={orderedGroupNames || []}
         />
-        <PopoverModal
-          referenceElement={dayId}
-          onClose={onClose}
-          portalId={ANSWER_SESSION_CONTAINER_ID}
-          forceMobile={isMobilePreview}
-          disableClose={disableModalClose}
-          width={isMobile ? '' : '500px'}
-          specialMobileView
-        >
-          <>
-            {(isMobilePreview || isMobile) && (
-              <Box display="flex">
-                <Text fontSize="26px">
-                  {selectedDay?.format(fullDayOfWeekFormatter)},
-                </Text>
-                <Text fontWeight="bold" ml={5} fontSize="26px">
-                  {`${selectedDay?.format(
-                    fullMonthNameFormatter,
-                  )} ${selectedDay?.format(dayNumeralFormatter)}`}
-                </Text>
-              </Box>
-            )}
+        {shouldDisplayLegend && (
+          <Box mt={16}>
+            <CalendarLegend />
+          </Box>
+        )}
+        {isMobileView && (
+          <Modal
+            visible={!!selectedDay}
+            onClose={onClose}
+            portalId={isMobilePreview ? ANSWER_SESSION_CONTAINER_ID : undefined}
+            disableClose={disableModalClose}
+            hideCloseButton={disableModalClose}
+            width={isMobile ? '' : '500px'}
+            height={isMobile && !isMobilePreview ? '100vh' : '100%'}
+            bg={colors.linkWater}
+          >
+            <Box>
+              <Text fontSize="24px" as="span">
+                {selectedDay?.format(fullDayOfWeekFormatter)},
+              </Text>
+              <Text fontWeight="bold" ml={5} fontSize="24px" as="span">
+                {`${selectedDay?.format(
+                  fullMonthNameFormatter,
+                )} ${selectedDay?.format(dayNumeralFormatter)}`}
+              </Text>
+            </Box>
             {children}
-          </>
-        </PopoverModal>
+          </Modal>
+        )}
+        {!isMobileView && (
+          <PopoverModal
+            referenceElement={dayId}
+            onClose={onClose}
+            portalId={ANSWER_SESSION_CONTAINER_ID}
+            forceMobile={isMobilePreview}
+            disableClose={disableModalClose}
+            width={isMobile ? '' : '500px'}
+            specialMobileView
+          >
+            {children}
+          </PopoverModal>
+        )}
       </TlfbContainer>
     );
   },

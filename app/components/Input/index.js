@@ -31,9 +31,10 @@ const getAutoComplete = ({ autoComplete, placeholder }) => {
 };
 
 const Input = styled.input.attrs((props) => {
-  const { keyboard } = props;
+  const { keyboard, onWheel } = props;
 
   return {
+    onWheel,
     type: keyboard,
     ...getAriaLabelProps(props),
     ...getAutoComplete(props),

@@ -45,6 +45,7 @@ const DayCellComponent = ({
   const date = day.date();
   const dayNo = date === 1 ? day.format(firstDayOfMonthFormatter) : date;
   const events: EventData[] = dayData?.events || [];
+  const substancesConsumed = dayData?.answer?.body?.substancesConsumed;
 
   const handleClick = () =>
     !disabled && !disableManualDayClick && onClick
@@ -74,7 +75,7 @@ const DayCellComponent = ({
             <>
               {compact && (
                 <Box mt={2} position="absolute" top={15}>
-                  <Dot red />
+                  <Dot blue={substancesConsumed} />
                 </Box>
               )}
               {!compact && (

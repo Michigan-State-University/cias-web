@@ -114,7 +114,8 @@ export const Dot = styled.div`
   width: 7px;
   height: 7px;
   border-radius: 50%;
-  background-color: ${({ red }) => (red ? colors.alert : colors.jungleGreen)};
+  background-color: ${({ blue }) =>
+    blue ? colors.brightNavyBlue : colors.purplePlum};
 
   @media only screen and (max-width: 350px) {
     width: 4px;
