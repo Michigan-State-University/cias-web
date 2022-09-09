@@ -1,5 +1,7 @@
 import { defineMessages } from 'react-intl';
+
 import { feedbackActions } from 'models/Narrator/FeedbackActions';
+import { CharacterType } from 'models/Character';
 
 export const scope = 'app.containers.DefaultSettings';
 
@@ -199,5 +201,13 @@ export default defineMessages({
   copyFormula: {
     id: `${scope}.copyFormula`,
     defaultMessage: 'Copy formula',
+  },
+  [CharacterType.PEEDY]: {
+    id: `${scope}.${CharacterType.PEEDY}`,
+    defaultMessage: 'Peedy',
+  },
+  [CharacterType.FRIDA]: {
+    id: `${scope}.${CharacterType.FRIDA}`,
+    defaultMessage: 'Frida',
   },
 });

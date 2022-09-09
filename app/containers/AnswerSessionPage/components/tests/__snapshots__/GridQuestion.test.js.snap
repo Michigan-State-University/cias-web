@@ -155,6 +155,7 @@ exports[`<GridQuestion /> Should render and match the snapshot 1`] = `
 }
 
 .c18 {
+  width: 100%;
   margin-left: 5px;
 }
 

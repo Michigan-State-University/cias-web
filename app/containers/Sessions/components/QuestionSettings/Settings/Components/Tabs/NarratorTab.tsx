@@ -23,9 +23,7 @@ import globalMessages from 'global/i18n/globalMessages';
 import bulb from 'assets/svg/bulb.svg';
 
 import Box from 'components/Box';
-import H3 from 'components/H3';
 import Row from 'components/Row';
-import { FullWidthSwitch } from 'components/Switch';
 import Text from 'components/Text';
 import { ConfirmationModal } from 'components/Modal';
 import InfoBox from 'components/Box/InfoBox';
@@ -36,6 +34,7 @@ import BlockTypeChooser from '../BlockTypeChooser';
 import WrappedAccordion from '../WrappedAcoordion';
 import messages from '../messages';
 import { addBlock, updateNarratorSettings } from '../../actions';
+import { NarratorSetting } from './NarratorSetting';
 
 type NonReduxProps = {
   disabled: boolean;
@@ -47,7 +46,7 @@ type NonReduxProps = {
 
 type Props = {
   id: string;
-  onNarratorToggle: (property: string, value: boolean) => void;
+  onNarratorToggle: (property: string, value: boolean | string) => void;
   onCreate: (type: NarratorBlockTypes, id: string, groupIds: string[]) => void;
   currentBlockIndex: number;
   currentQuestionType: NarratorBlockTypes;
@@ -89,7 +88,7 @@ const NarratorTab = ({
     changeNarratorBlockIndex(blocks);
   };
 
-  const toggleAction = (index: string) => (value: boolean) => {
+  const toggleAction = (index: string) => (value: boolean | string) => {
     if (value) onNarratorToggle(`${index}`, value);
     else setConfirmationOption(index);
   };
@@ -174,8 +173,8 @@ const NarratorTab = ({
               mb={15}
               borderBottom={getBorderBottom(index)}
             >
-              <FullWidthSwitch
-                id={index}
+              <NarratorSetting
+                setting={index}
                 disabled={
                   disabled ||
                   // @ts-ignore
@@ -183,11 +182,9 @@ const NarratorTab = ({
                     questionType,
                   )
                 }
-                checked={val}
-                onToggle={toggleAction(index)}
-              >
-                <H3>{formatMessage(messages[`${index}`])}</H3>
-              </FullWidthSwitch>
+                value={val}
+                onChange={toggleAction(index)}
+              />
             </Row>
           ))}
       </Box>

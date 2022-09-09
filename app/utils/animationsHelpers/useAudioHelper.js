@@ -14,6 +14,8 @@ import {
 } from 'models/Narrator/BlockTypes';
 import { speechAnimations } from 'utils/animations/animationsNames';
 
+import { importAnimation } from './utils';
+
 const animationTimeout = 200;
 
 const useAudioHelper = (
@@ -23,10 +25,10 @@ const useAudioHelper = (
   currentIndex,
   animationCurrent,
   changeBlock,
-  answers,
   settings,
   audioInstance,
 ) => {
+  const { animation: isAnimationEnabled, character } = settings;
   const loadedSpeechAnimations = useRef([]);
 
   const fetchAudioAnimations = async () => {
@@ -49,21 +51,17 @@ const useAudioHelper = (
     );
 
     const animations = [];
-    if (settings.animation && blocks.length) {
+    if (isAnimationEnabled && blocks.length) {
       await Promise.all(
         uniqAnimations.map(async ({ animation }) => {
           const animationNames = toPairs(
             speechAnimations[animation].animations,
           );
           const animationsData = {};
-
           for (const [key, value] of animationNames) {
             if (key === 'end' && speechAnimations[animation].isEndReversed)
               animationsData.end = animationsData.start;
-            else
-              animationsData[key] = await import(
-                `assets/animations/peedy/${value}.json`
-              );
+            else animationsData[key] = await importAnimation(character, value);
           }
 
           animations.push({
@@ -80,7 +78,6 @@ const useAudioHelper = (
 
   const changeSpeech = (nextBlock, nextIndex) => {
     const speechData = getSpeechData(nextIndex);
-
     if (speechData)
       dispatchUpdate({
         currentData: getSpeechData(nextIndex),
@@ -247,7 +244,7 @@ const useAudioHelper = (
   };
 
   const playAnimation = () => {
-    if (settings.animation) {
+    if (isAnimationEnabled) {
       const { anim } = animationCurrent;
 
       if (currentData.currentAnimation === 'end' && currentData.isEndReversed) {
@@ -297,7 +294,7 @@ const useAudioHelper = (
     stopAnimation();
 
     setTimeout(() => {
-      if (settings.animation && currentData.animationData.end)
+      if (isAnimationEnabled && currentData.animationData.end)
         updateAnimation();
       else speechEndUpdate();
     }, animationTimeout);
@@ -336,7 +333,7 @@ const useAudioHelper = (
   };
 
   const stopAnimation = () => {
-    if (settings.animation) {
+    if (isAnimationEnabled) {
       const { anim } = animationCurrent;
       anim.stop();
     }

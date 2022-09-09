@@ -11,11 +11,14 @@ import filter from 'lodash/filter';
 import get from 'lodash/get';
 import { autoRestAnimations } from 'utils/animations/animationsNames';
 
+import { importAnimation } from './utils';
+
 const useAnimationHelper = (
   blocks,
   dispatchUpdate,
   changeBlock,
   currentData,
+  character,
 ) => {
   const loadedAnimations = useRef([]);
   const animationRef = useRef(null);
@@ -34,8 +37,9 @@ const useAnimationHelper = (
 
     await Promise.all(
       uniqAnimations.map(async ({ animation, type }) => {
-        const data = await import(
-          `assets/animations/peedy/${animation || 'standStill'}.json`
+        const data = await importAnimation(
+          character,
+          animation || 'standStill',
         );
 
         bodyAnimations.push({
@@ -48,9 +52,7 @@ const useAnimationHelper = (
       }),
     );
 
-    const standStillData = await import(
-      `assets/animations/peedy/standStill.json`
-    );
+    const standStillData = await importAnimation(character, 'standStill');
     bodyAnimations.push({
       name: 'standStill',
       animationData: standStillData,

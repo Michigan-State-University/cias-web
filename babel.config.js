@@ -17,6 +17,12 @@ module.exports = {
     },
     test: {
       plugins: [
+        [
+          '@babel/plugin-transform-react-jsx',
+          {
+            runtime: 'automatic',
+          },
+        ],
         '@babel/plugin-transform-modules-commonjs',
         'dynamic-import-node',
       ],

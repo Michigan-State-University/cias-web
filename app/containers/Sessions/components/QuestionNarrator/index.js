@@ -92,8 +92,8 @@ const QuestionNarrator = ({
     dispatchUpdate,
     onBlockFinish,
     state.currentData,
+    settings.character,
   );
-
   const {
     getInitialSpeechAnimation,
     cleanAudio,
@@ -108,7 +108,6 @@ const QuestionNarrator = ({
     state.currentBlockIndex,
     animationRef.current,
     onBlockFinish,
-    {},
     settings,
     audioInstance,
   );

@@ -15,6 +15,7 @@ import isNullOrUndefined from 'utils/isNullOrUndefined';
 import { makeSelectSession } from 'global/reducers/session';
 import { instantiateBlockForType } from 'models/Session/utils';
 import { GroupType } from 'models/QuestionGroup';
+import { CharacterType } from 'models/Character';
 import { groupQuestionsSuccess } from 'global/reducers/questionGroups/actions';
 import { jsonApiToObject } from 'utils/jsonApiMapper';
 import objectKeysToSnakeCase from 'utils/objectToSnakeCase';
@@ -53,7 +54,13 @@ function* createQuestion({ payload: { question, id: sessionId } }) {
       ? [instantiateBlockForType(feedbackBlockType, position, question)]
       : []),
   ];
-  const newQuestion = { ...question, narrator: { blocks, settings: narrator } };
+  const newQuestion = {
+    ...question,
+    narrator: {
+      blocks,
+      settings: { ...narrator, character: CharacterType.PEEDY },
+    },
+  };
 
   const selectedQuestionGroupType = groups.find(
     ({ id }) => id === selectedQuestion.question_group_id,

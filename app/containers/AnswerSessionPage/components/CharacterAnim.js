@@ -57,7 +57,6 @@ const CharacterAnim = ({
   settings,
   animationContainer,
   previewMode,
-  answers,
   changeIsAnimationOngoing,
   setFeedbackSettings,
   feedbackScreenSettings: { sliderRef },
@@ -139,6 +138,7 @@ const CharacterAnim = ({
     dispatchUpdate,
     changeBlock,
     state.currentData,
+    settings.character,
   );
 
   const { handlePauseBlock, getInitialPauseAnimation, changePauseBlock } =
@@ -149,7 +149,6 @@ const CharacterAnim = ({
       changeBlock,
       getIdleAnimation,
     );
-
   const {
     changeSpeech,
     getInitialSpeechAnimation,
@@ -165,7 +164,6 @@ const CharacterAnim = ({
     state.currentBlockIndex,
     animationRef.current,
     changeBlock,
-    answers,
     settings,
     audioInstance,
   );
@@ -185,11 +183,11 @@ const CharacterAnim = ({
     animationRef.current,
     loadedAnimations,
   );
-
   const { animationPos, moveAnimation, fetchMoveAnimations } = useMoveHelper(
     animationContainer,
     blocks,
     dispatchUpdate,
+    settings.character,
   );
 
   const getInitialData = () => {
@@ -364,7 +362,6 @@ CharacterAnim.propTypes = {
     clientHeight: PropTypes.number,
   }),
   previewMode: PropTypes.string,
-  answers: PropTypes.object,
   changeIsAnimationOngoing: PropTypes.func,
   setFeedbackSettings: PropTypes.func,
   feedbackScreenSettings: PropTypes.object,

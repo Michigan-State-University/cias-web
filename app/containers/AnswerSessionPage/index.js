@@ -108,7 +108,6 @@ const AnimationRefHelper = ({
   currentQuestion,
   currentQuestionId,
   previewMode,
-  answers,
   changeIsAnimationOngoing,
   setFeedbackSettings,
   feedbackScreenSettings,
@@ -135,7 +134,6 @@ const AnimationRefHelper = ({
           questionId={currentQuestionId}
           settings={settings}
           previewMode={previewMode}
-          answers={answers}
           changeIsAnimationOngoing={changeIsAnimationOngoing}
           setFeedbackSettings={setFeedbackSettings}
           feedbackScreenSettings={feedbackScreenSettings}
@@ -150,7 +148,6 @@ AnimationRefHelper.propTypes = {
   currentQuestion: PropTypes.any,
   currentQuestionId: PropTypes.any,
   previewMode: PropTypes.any,
-  answers: PropTypes.object,
   changeIsAnimationOngoing: PropTypes.func,
   setFeedbackSettings: PropTypes.func,
   feedbackScreenSettings: PropTypes.object,
@@ -462,7 +459,6 @@ export function AnswerSessionPage({
               currentQuestion={currentQuestion}
               currentQuestionId={currentQuestionId}
               previewMode={previewMode}
-              answers={answers}
               changeIsAnimationOngoing={changeIsAnimationOngoing}
               setFeedbackSettings={setFeedbackSettings}
               feedbackScreenSettings={feedbackScreenSettings}
@@ -695,7 +691,6 @@ export function AnswerSessionPage({
                               currentQuestion={currentQuestion}
                               currentQuestionId={currentQuestionId}
                               previewMode={previewMode}
-                              answers={answers}
                               changeIsAnimationOngoing={
                                 changeIsAnimationOngoing
                               }

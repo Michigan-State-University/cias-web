@@ -1,5 +1,7 @@
 import { CamelToSnake } from 'global/types/camelToSnake';
 
+import { CharacterType } from 'models/Character';
+
 import { NarratorBlockTypes } from './NarratorBlockTypes';
 
 export interface Position {
@@ -22,6 +24,7 @@ export interface NarratorBlock {
 export interface NarratorSettings {
   voice: boolean;
   animation: boolean;
+  character: CharacterType;
 }
 
 export interface Narrator {

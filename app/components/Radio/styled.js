@@ -32,6 +32,7 @@ export const StyledLabel = styled.label`
 `;
 
 export const LabelContent = styled(Box)`
+  width: 100%;
   ${({ $labelPosition }) =>
     $labelPosition === LabelPosition.Left
       ? `margin-right: 5px`

@@ -6,13 +6,19 @@ import { elements } from 'theme';
 import { moveAnimations as moveAnimationsNames } from 'utils/animations/animationsNames';
 
 import { animationDuration } from './constants';
+import { importAnimation } from './utils';
 
 const defaultCurrent = {
   clientWidth: elements.draggableContainerSize,
   clientHeight: elements.draggableContainerSize,
 };
 
-const useMoveHelper = (animationContainer, blocks, dispatchUpdate) => {
+const useMoveHelper = (
+  animationContainer,
+  blocks,
+  dispatchUpdate,
+  character,
+) => {
   const [scaleFactor, setScaleFactor] = useState({ x: 1, y: 1 });
 
   const loadedMoveAnimations = useRef([]);
@@ -61,9 +67,7 @@ const useMoveHelper = (animationContainer, blocks, dispatchUpdate) => {
     if (blocks.length) {
       await Promise.all(
         moveAnimationsNames.map(async (animation) => {
-          const data = await import(
-            `assets/animations/peedy/${animation}.json`
-          );
+          const data = importAnimation(character, 'standStill');
           moveAnimations.push({
             name: animation,
             animationData: data,

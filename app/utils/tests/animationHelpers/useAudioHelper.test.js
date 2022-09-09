@@ -23,7 +23,6 @@ describe('useAudioHelper test', () => {
   let currentData;
   let currentIndex;
   let changeBlock;
-  let answers;
   let settings;
   let audioInstance;
   let animationCurrent;
@@ -34,8 +33,7 @@ describe('useAudioHelper test', () => {
     currentData = {};
     currentIndex = 0;
     changeBlock = jest.fn();
-    answers = [];
-    settings = { voice: true, animation: true };
+    settings = { voice: true, animation: true, character: 'peedy' };
     audioInstance = new AudioWrapper();
     animationCurrent = {
       anim: {
@@ -53,7 +51,6 @@ describe('useAudioHelper test', () => {
         currentIndex,
         null,
         changeBlock,
-        answers,
         settings,
       ),
     );
@@ -77,7 +74,6 @@ describe('useAudioHelper test', () => {
         currentIndex,
         null,
         changeBlock,
-        answers,
         settings,
       ),
     );
@@ -120,7 +116,6 @@ describe('useAudioHelper test', () => {
           currentIndex,
           animationCurrent,
           changeBlock,
-          answers,
           settings,
           audioInstance,
         ),
