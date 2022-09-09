@@ -113,11 +113,11 @@ const TlfbCalendarLayout = forwardRef<CalendarRef, Props>(
             height={isMobile && !isMobilePreview ? '100vh' : '100%'}
             bg={colors.linkWater}
           >
-            <Box display="flex">
-              <Text fontSize="26px">
+            <Box>
+              <Text fontSize="24px" as="span">
                 {selectedDay?.format(fullDayOfWeekFormatter)},
               </Text>
-              <Text fontWeight="bold" ml={5} fontSize="26px">
+              <Text fontWeight="bold" ml={5} fontSize="24px" as="span">
                 {`${selectedDay?.format(
                   fullMonthNameFormatter,
                 )} ${selectedDay?.format(dayNumeralFormatter)}`}
