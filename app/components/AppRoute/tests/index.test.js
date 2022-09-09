@@ -2,28 +2,20 @@ import React from 'react';
 import { render } from '@testing-library/react';
 import 'jest-styled-components';
 import { Provider } from 'react-redux';
-import { createStore } from 'redux';
 import { MemoryRouter } from 'react-router-dom';
 import { IntlProvider } from 'react-intl';
 
 import { NAVIGATION, Roles, AllRoles } from 'models/User/RolesManager';
 import { DEFAULT_LOCALE } from 'i18n';
 
+import { createTestStore } from 'utils/testUtils/storeUtils';
 import history from 'utils/history';
+
 import AppRoute from '../index';
 
 const Component = () => <div>Component</div>;
 
-const configureStore = (reducer, initialState) => {
-  const store = createStore(reducer, initialState);
-  store.runSaga = () => {};
-  store.injectedReducers = {};
-  store.injectedSagas = {};
-  return store;
-};
-
 describe('<AppRoute />', () => {
-  const reducer = (state) => state;
   const initialState = {
     auth: {
       user: {
@@ -36,7 +28,7 @@ describe('<AppRoute />', () => {
   };
   let store;
   beforeAll(() => {
-    store = configureStore(reducer, initialState);
+    store = createTestStore(initialState);
   });
   const defaultProps = {
     exact: true,
@@ -93,7 +85,7 @@ describe('<AppRoute />', () => {
       ...initialState,
       auth: { ...initialState.auth, user: undefined },
     };
-    store = configureStore(reducer, newState);
+    store = createTestStore(newState);
     const { container } = render(
       <Provider store={store}>
         <IntlProvider locale={DEFAULT_LOCALE}>
@@ -118,7 +110,7 @@ describe('<AppRoute />', () => {
       ...defaultProps,
       allowedRoles: [Roles.Admin],
     };
-    store = configureStore(reducer, newState);
+    store = createTestStore(newState);
     const { container } = render(
       <Provider store={store}>
         <IntlProvider locale={DEFAULT_LOCALE}>

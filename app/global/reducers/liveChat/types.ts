@@ -10,9 +10,9 @@ import {
   NavigatorHelpingMaterials,
 } from 'models/NavigatorSetup';
 import { ApiError } from 'models/Api';
+import { Intervention } from 'models/Intervention';
 
 import * as actions from './actions';
-import { Intervention } from '../../../models/Intervention';
 
 export type LiveChatAction = ActionType<typeof actions>;
 

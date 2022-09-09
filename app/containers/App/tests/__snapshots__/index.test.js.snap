@@ -10,30 +10,7 @@ exports[`<AnswerSessionPage /> Should render and match the snapshot 1`] = `
   color: unset;
 }
 
-.c11 {
-  width: auto;
-  height: auto;
-  display: block;
-  border-radius: 5px;
-  position: absolute;
-  z-index: 12;
-  top: 0;
-  right: 0;
-  color: unset;
-}
-
-.c12 {
-  width: auto;
-  height: auto;
-  display: block;
-  border-radius: 5px;
-  -webkit-flex-shrink: 0;
-  -ms-flex-negative: 0;
-  flex-shrink: 0;
-  color: unset;
-}
-
-.c16 {
+.c13 {
   width: auto;
   height: auto;
   display: block;
@@ -43,7 +20,7 @@ exports[`<AnswerSessionPage /> Should render and match the snapshot 1`] = `
   cursor: pointer;
 }
 
-.c32 {
+.c29 {
   width: auto;
   height: auto;
   display: block;
@@ -52,7 +29,7 @@ exports[`<AnswerSessionPage /> Should render and match the snapshot 1`] = `
   color: unset;
 }
 
-.c37 {
+.c34 {
   width: auto;
   height: auto;
   display: block;
@@ -69,7 +46,7 @@ exports[`<AnswerSessionPage /> Should render and match the snapshot 1`] = `
   color: unset;
 }
 
-.c57 {
+.c54 {
   width: auto;
   height: auto;
   display: block;
@@ -81,7 +58,7 @@ exports[`<AnswerSessionPage /> Should render and match the snapshot 1`] = `
   color: unset;
 }
 
-.c48 {
+.c45 {
   margin: 0;
   font-family: DM Sans;
   font-size: 25px;
@@ -132,12 +109,12 @@ exports[`<AnswerSessionPage /> Should render and match the snapshot 1`] = `
   margin-left: 10px;
 }
 
-.c41 {
+.c38 {
   width: auto;
   height: auto;
 }
 
-.c22 {
+.c19 {
   font-family: DM Sans;
   font-size: 13px;
   line-height: 130%;
@@ -145,7 +122,7 @@ exports[`<AnswerSessionPage /> Should render and match the snapshot 1`] = `
   color: #2F3850;
 }
 
-.c26 {
+.c23 {
   font-family: DM Sans;
   font-size: 13px;
   line-height: 130%;
@@ -154,7 +131,7 @@ exports[`<AnswerSessionPage /> Should render and match the snapshot 1`] = `
   color: #2F3850;
 }
 
-.c29 {
+.c26 {
   font-family: DM Sans;
   font-size: 13px;
   line-height: 130%;
@@ -163,7 +140,7 @@ exports[`<AnswerSessionPage /> Should render and match the snapshot 1`] = `
   width: 100%;
 }
 
-.c42 {
+.c39 {
   font-family: DM Sans;
   font-size: 13px;
   line-height: 130%;
@@ -171,7 +148,7 @@ exports[`<AnswerSessionPage /> Should render and match the snapshot 1`] = `
   color: #2F3850;
 }
 
-.c43 {
+.c40 {
   font-family: DM Sans;
   font-size: 13px;
   line-height: 130%;
@@ -180,7 +157,7 @@ exports[`<AnswerSessionPage /> Should render and match the snapshot 1`] = `
   color: rgba(183,39,234,1);
 }
 
-.c23 {
+.c20 {
   margin: 0;
   font-family: DM Sans;
   font-size: 13px;
@@ -189,7 +166,7 @@ exports[`<AnswerSessionPage /> Should render and match the snapshot 1`] = `
   margin-bottom: 8px !important;
 }
 
-.c30 {
+.c27 {
   margin: 0;
   font-family: DM Sans;
   font-size: 13px;
@@ -200,7 +177,7 @@ exports[`<AnswerSessionPage /> Should render and match the snapshot 1`] = `
   border-top: 1px solid #D5DEEA;
 }
 
-.c24 {
+.c21 {
   display: -webkit-box;
   display: -webkit-flex;
   display: -ms-flexbox;
@@ -217,7 +194,7 @@ exports[`<AnswerSessionPage /> Should render and match the snapshot 1`] = `
   width: 100%;
 }
 
-.c28 {
+.c25 {
   display: -webkit-box;
   display: -webkit-flex;
   display: -ms-flexbox;
@@ -230,7 +207,7 @@ exports[`<AnswerSessionPage /> Should render and match the snapshot 1`] = `
   overflow: hidden;
 }
 
-.c33 {
+.c30 {
   display: -webkit-box;
   display: -webkit-flex;
   display: -ms-flexbox;
@@ -248,7 +225,7 @@ exports[`<AnswerSessionPage /> Should render and match the snapshot 1`] = `
   height: 30px;
 }
 
-.c33:after {
+.c30:after {
   content: ' ';
   display: block;
   width: 20px;
@@ -260,7 +237,7 @@ exports[`<AnswerSessionPage /> Should render and match the snapshot 1`] = `
   animation: hAjVGa 1.2s linear infinite;
 }
 
-.c31 {
+.c28 {
   width: 100%;
   height: 40px;
   border-radius: 5px;
@@ -279,13 +256,13 @@ exports[`<AnswerSessionPage /> Should render and match the snapshot 1`] = `
   padding-left: 10px;
 }
 
-.c31:hover {
+.c28:hover {
   background-color: #B727EA;
   color: #FFFFFF;
   border: 1px solid transparent;
 }
 
-.c39 {
+.c36 {
   display: -webkit-box;
   display: -webkit-flex;
   display: -ms-flexbox;
@@ -299,7 +276,7 @@ exports[`<AnswerSessionPage /> Should render and match the snapshot 1`] = `
   align-items: flex-start;
 }
 
-.c45 {
+.c42 {
   display: -webkit-box;
   display: -webkit-flex;
   display: -ms-flexbox;
@@ -313,7 +290,7 @@ exports[`<AnswerSessionPage /> Should render and match the snapshot 1`] = `
   align-items: flex-end;
 }
 
-.c35 {
+.c32 {
   height: 100% !important;
   display: -webkit-box;
   display: -webkit-flex;
@@ -355,7 +332,7 @@ exports[`<AnswerSessionPage /> Should render and match the snapshot 1`] = `
   margin-right: 0;
 }
 
-.c46 {
+.c43 {
   height: 28px;
   width: 28px;
   display: -webkit-box;
@@ -380,7 +357,7 @@ exports[`<AnswerSessionPage /> Should render and match the snapshot 1`] = `
   margin: 0px;
 }
 
-.c55 {
+.c52 {
   padding: 12px;
   border-style: solid;
   border-width: 1px;
@@ -391,17 +368,17 @@ exports[`<AnswerSessionPage /> Should render and match the snapshot 1`] = `
   color: #2F3850;
 }
 
-.c55:focus {
+.c52:focus {
   box-shadow: none;
   outline: none;
   border-color: #107969;
 }
 
-.c55:disabled {
+.c52:disabled {
   color: #ABBBD1;
 }
 
-.c54 {
+.c51 {
   display: -webkit-box;
   display: -webkit-flex;
   display: -ms-flexbox;
@@ -413,43 +390,17 @@ exports[`<AnswerSessionPage /> Should render and match the snapshot 1`] = `
   position: relative;
 }
 
-.c56 {
+.c53 {
   position: absolute;
   left: 10px;
   top: 10px;
 }
 
-.c36 {
+.c33 {
   max-width: 960px !important;
 }
 
-.c13 {
-  border-radius: 50%;
-  background-color: #D2371D;
-  display: -webkit-box;
-  display: -webkit-flex;
-  display: -ms-flexbox;
-  display: flex;
-  -webkit-box-pack: center;
-  -webkit-justify-content: center;
-  -ms-flex-pack: center;
-  justify-content: center;
-  -webkit-align-items: center;
-  -webkit-box-align: center;
-  -ms-flex-align: center;
-  align-items: center;
-  width: 16px;
-  height: 16px;
-  background-color: rgba(210,55,29,1);
-  color: rgba(255,255,255,1);
-  opacity: 1;
-  font-size: 9.6px;
-  font-weight: 700;
-  color: rgba(255,255,255,1);
-  border: 1px solid #FFFFFF;
-}
-
-.c40 {
+.c37 {
   border-radius: 50%;
   background-color: #E9F1FB;
   display: -webkit-box;
@@ -471,7 +422,7 @@ exports[`<AnswerSessionPage /> Should render and match the snapshot 1`] = `
   color: #2F3850;
 }
 
-.c15 {
+.c12 {
   width: 30px;
   height: 30px;
   font-size: 15px;
@@ -496,7 +447,7 @@ exports[`<AnswerSessionPage /> Should render and match the snapshot 1`] = `
   color: rgba(255,255,255,1);
 }
 
-.c21 {
+.c18 {
   -webkit-transition: -webkit-transform 0.4s ease;
   -webkit-transition: transform 0.4s ease;
   transition: transform 0.4s ease;
@@ -505,7 +456,7 @@ exports[`<AnswerSessionPage /> Should render and match the snapshot 1`] = `
   transform: rotate(180deg);
 }
 
-.c19 {
+.c16 {
   display: -webkit-box;
   display: -webkit-flex;
   display: -ms-flexbox;
@@ -526,7 +477,7 @@ exports[`<AnswerSessionPage /> Should render and match the snapshot 1`] = `
   height: 40px;
 }
 
-.c18 {
+.c15 {
   width: 280px;
   top: 0;
   background-color: white;
@@ -550,7 +501,7 @@ exports[`<AnswerSessionPage /> Should render and match the snapshot 1`] = `
   transition: left 0.4s ease;
 }
 
-.c25 {
+.c22 {
   display: -webkit-box;
   display: -webkit-flex;
   display: -ms-flexbox;
@@ -565,11 +516,11 @@ exports[`<AnswerSessionPage /> Should render and match the snapshot 1`] = `
   border-radius: 5px;
 }
 
-.c25 * {
+.c22 * {
   color: #B727EA;
 }
 
-.c27 {
+.c24 {
   display: -webkit-box;
   display: -webkit-flex;
   display: -ms-flexbox;
@@ -582,7 +533,7 @@ exports[`<AnswerSessionPage /> Should render and match the snapshot 1`] = `
   width: max-content;
 }
 
-.c20 {
+.c17 {
   position: absolute;
   top: 16px;
   right: -40px;
@@ -626,7 +577,7 @@ exports[`<AnswerSessionPage /> Should render and match the snapshot 1`] = `
   gap: 32px;
 }
 
-.c14 {
+.c11 {
   position: relative;
   display: -webkit-box;
   display: -webkit-flex;
@@ -644,7 +595,7 @@ exports[`<AnswerSessionPage /> Should render and match the snapshot 1`] = `
   margin: 0 !important;
 }
 
-.c34 {
+.c31 {
   position: relative;
   margin-top: 70px;
   height: calc(100vh - 70px) !important;
@@ -652,17 +603,17 @@ exports[`<AnswerSessionPage /> Should render and match the snapshot 1`] = `
   overflow: auto;
 }
 
-.c17 {
+.c14 {
   overflow: hidden;
 }
 
-.c47 {
+.c44 {
   padding: 0 !important;
   margin-top: 10px;
   width: 100%;
 }
 
-.c49 {
+.c46 {
   border: none;
   width: -webkit-max-content;
   width: -moz-max-content;
@@ -683,16 +634,16 @@ exports[`<AnswerSessionPage /> Should render and match the snapshot 1`] = `
   transition: 0.3s;
 }
 
-.c49:hover {
+.c46:hover {
   cursor: pointer;
 }
 
-.c49:focus {
+.c46:focus {
   outline: none;
   outline-offset: 0px;
 }
 
-.c51 {
+.c48 {
   border: none;
   width: -webkit-max-content;
   width: -moz-max-content;
@@ -713,16 +664,16 @@ exports[`<AnswerSessionPage /> Should render and match the snapshot 1`] = `
   transition: 0.3s;
 }
 
-.c51:hover {
+.c48:hover {
   cursor: pointer;
 }
 
-.c51:focus {
+.c48:focus {
   outline: none;
   outline-offset: 0px;
 }
 
-.c52 {
+.c49 {
   border: none;
   width: -webkit-max-content;
   width: -moz-max-content;
@@ -743,16 +694,16 @@ exports[`<AnswerSessionPage /> Should render and match the snapshot 1`] = `
   transition: 0.3s;
 }
 
-.c52:hover {
+.c49:hover {
   cursor: pointer;
 }
 
-.c52:focus {
+.c49:focus {
   outline: none;
   outline-offset: 0px;
 }
 
-.c53 {
+.c50 {
   border: none;
   width: -webkit-max-content;
   width: -moz-max-content;
@@ -772,25 +723,25 @@ exports[`<AnswerSessionPage /> Should render and match the snapshot 1`] = `
   transition: 0.3s;
 }
 
-.c53:hover {
+.c50:hover {
   cursor: pointer;
 }
 
-.c53:focus {
+.c50:focus {
   outline: none;
   outline-offset: 0px;
 }
 
-.c50 {
+.c47 {
   color: #FFFFFF;
   white-space: pre;
 }
 
-.c44 {
+.c41 {
   color: #B727EA;
 }
 
-.c38 {
+.c35 {
   position: absolute;
   right: 16px;
   top: 16px;
@@ -829,14 +780,14 @@ exports[`<AnswerSessionPage /> Should render and match the snapshot 1`] = `
 }
 
 @media only screen and (max-width:1280px) {
-  .c18 {
+  .c15 {
     position: fixed;
     left: calc(0px - 280px);
   }
 }
 
 @media only screen and (min-width:1400px) {
-  .c20 {
+  .c17 {
     display: none;
   }
 }
@@ -868,7 +819,7 @@ exports[`<AnswerSessionPage /> Should render and match the snapshot 1`] = `
 }
 
 @media only screen and (max-width:1280px) {
-  .c34 {
+  .c31 {
     width: 100vw;
   }
 }
@@ -935,31 +886,14 @@ exports[`<AnswerSessionPage /> Should render and match the snapshot 1`] = `
                 alt="cross"
                 src="IMAGE_MOCK"
               />
-              <div
-                class="c11"
-              >
-                <div
-                  class="c12"
-                >
-                  <div
-                    class="c13"
-                    color="#FFFFFF"
-                    font-size="9.6px"
-                    font-weight="bold"
-                    opacity="1"
-                  >
-                    3
-                  </div>
-                </div>
-              </div>
             </button>
           </div>
           <div
-            class="c14"
+            class="c11"
           >
             <div />
             <div
-              class="c15"
+              class="c12"
               color="#FFFFFF"
               data-private="true"
               height="30"
@@ -970,7 +904,7 @@ exports[`<AnswerSessionPage /> Should render and match the snapshot 1`] = `
               </div>
             </div>
             <div
-              class="c16 user-name-info"
+              class="c13 user-name-info"
               data-private="true"
             >
               first-name last-name
@@ -980,44 +914,44 @@ exports[`<AnswerSessionPage /> Should render and match the snapshot 1`] = `
       </div>
     </div>
     <div
-      class="c17"
+      class="c14"
       style="margin-left: 0px; margin-right: 0px; display: flex; flex-wrap: wrap; flex-grow: 0; flex-shrink: 0; align-items: normal; justify-content: flex-start;"
     >
       <div
         style="box-sizing: border-box; min-height: 1px; position: relative; padding-left: 0px; padding-right: 0px; max-width: 100%; margin-left: 0%;"
       >
         <div
-          class="c18"
+          class="c15"
         >
           <button
             aria-label="Hover to show sidebar"
-            class="c19 c20"
+            class="c16 c17"
             title="Hover to show sidebar"
           >
             <img
               alt="Show sidebar icon"
-              class="c21"
+              class="c18"
               src="IMAGE_MOCK"
             />
           </button>
           <p
-            class="c22 c23"
+            class="c19 c20"
           >
             CIAS Panel
           </p>
           <div
-            class="c24"
+            class="c21"
             width="100%"
           >
             <a
-              class="c25"
+              class="c22"
               href="/"
             >
               <img
                 src="IMAGE_MOCK"
               />
               <p
-                class="c26"
+                class="c23"
                 font-size="15"
                 font-weight="bold"
               >
@@ -1025,14 +959,14 @@ exports[`<AnswerSessionPage /> Should render and match the snapshot 1`] = `
               </p>
             </a>
             <a
-              class="c27"
+              class="c24"
               href="/users"
             >
               <img
                 src="IMAGE_MOCK"
               />
               <p
-                class="c26"
+                class="c23"
                 font-size="15"
                 font-weight="bold"
               >
@@ -1040,14 +974,14 @@ exports[`<AnswerSessionPage /> Should render and match the snapshot 1`] = `
               </p>
             </a>
             <a
-              class="c27"
+              class="c24"
               href="/teams"
             >
               <img
                 src="IMAGE_MOCK"
               />
               <p
-                class="c26"
+                class="c23"
                 font-size="15"
                 font-weight="bold"
               >
@@ -1056,18 +990,18 @@ exports[`<AnswerSessionPage /> Should render and match the snapshot 1`] = `
             </a>
           </div>
           <div
-            class="c28"
+            class="c25"
             overflow="hidden"
             width="100%"
           >
             <p
-              class="c29 c30"
+              class="c26 c27"
               width="100%"
             >
               Reporting panel
             </p>
             <button
-              class="c31"
+              class="c28"
               color="secondary"
               radius="5px"
               width="auto"
@@ -1075,11 +1009,11 @@ exports[`<AnswerSessionPage /> Should render and match the snapshot 1`] = `
               + Add Organization
             </button>
             <div
-              class="c32"
+              class="c29"
               overflow="auto"
             >
               <div
-                class="c33"
+                class="c30"
                 color="#B727EA"
                 size="30"
                 width="6"
@@ -1092,11 +1026,11 @@ exports[`<AnswerSessionPage /> Should render and match the snapshot 1`] = `
         style="box-sizing: border-box; min-height: 1px; position: relative; padding-left: 0px; padding-right: 0px; width: 100%; flex-basis: 0px; flex-grow: 1; flex-shrink: 0; max-width: 100%; margin-left: 0%;"
       >
         <div
-          class="c34"
+          class="c31"
           id="main-app-container"
         >
           <div
-            class="c35 c36"
+            class="c32 c33"
             direction="column"
             display="flex"
             height="100% !important"
@@ -1105,7 +1039,7 @@ exports[`<AnswerSessionPage /> Should render and match the snapshot 1`] = `
             style="box-sizing: border-box; position: relative; margin-left: auto; margin-right: auto; padding-left: 15px; padding-right: 15px; max-width: 960px;"
           >
             <div
-              class="c37 c38"
+              class="c34 c35"
               width="max-content"
             >
               <div
@@ -1113,7 +1047,7 @@ exports[`<AnswerSessionPage /> Should render and match the snapshot 1`] = `
               >
                 <div
                   align="flex-start"
-                  class="c39"
+                  class="c36"
                   style="box-sizing: border-box; min-height: 1px; position: relative; width: 100%; flex-basis: 0px; flex-grow: 1; flex-shrink: 0; max-width: 100%; margin-left: 0%; padding: 8px;"
                 >
                   <div
@@ -1121,15 +1055,15 @@ exports[`<AnswerSessionPage /> Should render and match the snapshot 1`] = `
                   >
                     <div
                       align="flex-start"
-                      class="c39"
+                      class="c36"
                       style="box-sizing: border-box; min-height: 1px; position: relative; padding-left: 15px; padding-right: 15px; width: 25%; flex-basis: 25%; flex-grow: 0; flex-shrink: 0; max-width: 25%; margin-left: 0%;"
                     >
                       <div
-                        class="c40"
+                        class="c37"
                         opacity="1"
                       >
                         <img
-                          class="c41"
+                          class="c38"
                           role="presentation"
                           src="IMAGE_MOCK"
                         />
@@ -1137,22 +1071,22 @@ exports[`<AnswerSessionPage /> Should render and match the snapshot 1`] = `
                     </div>
                     <div
                       align="flex-start"
-                      class="c39"
+                      class="c36"
                       style="box-sizing: border-box; min-height: 1px; position: relative; padding-left: 15px; padding-right: 15px; width: 75%; flex-basis: 75%; flex-grow: 0; flex-shrink: 0; max-width: 75%; margin-left: 0%;"
                     >
                       <p
-                        class="c42"
+                        class="c39"
                         font-weight="bold"
                       >
                         Something went wrong? Have a new idea?
                       </p>
                       <p
-                        class="c43"
+                        class="c40"
                         color="#B727EA"
                         font-weight="bold"
                       >
                         <a
-                          class="c44"
+                          class="c41"
                           href="https://msu.co1.qualtrics.com/jfe/form/SV_6S9MV7pPpoqFwTY"
                           target="_blank"
                         >
@@ -1164,12 +1098,12 @@ exports[`<AnswerSessionPage /> Should render and match the snapshot 1`] = `
                 </div>
                 <div
                   align="end"
-                  class="c45"
+                  class="c42"
                   style="box-sizing: border-box; min-height: 1px; position: relative; width: auto; flex-basis: auto; flex-grow: 0; flex-shrink: 0; max-width: 100%; margin-left: 0%; padding: 0px;"
                 >
                   <button
                     aria-label="Close"
-                    class="c46"
+                    class="c43"
                     title="Close"
                   >
                     <img
@@ -1181,11 +1115,11 @@ exports[`<AnswerSessionPage /> Should render and match the snapshot 1`] = `
               </div>
             </div>
             <div
-              class="c47"
+              class="c44"
               style="box-sizing: border-box; position: relative; margin-left: auto; margin-right: auto; padding-left: 15px; padding-right: 15px;"
             >
               <h1
-                class="c48"
+                class="c45"
               >
                 My Dashboard
               </h1>
@@ -1194,7 +1128,7 @@ exports[`<AnswerSessionPage /> Should render and match the snapshot 1`] = `
               />
             </div>
             <div
-              class="c47"
+              class="c44"
               style="box-sizing: border-box; position: relative; margin-left: auto; margin-right: auto; padding-left: 15px; padding-right: 15px;"
             >
               <div
@@ -1211,12 +1145,12 @@ exports[`<AnswerSessionPage /> Should render and match the snapshot 1`] = `
                       style="box-sizing: border-box; min-height: 1px; position: relative; padding-left: 15px; padding-right: 15px; width: auto; flex-basis: auto; flex-grow: 0; flex-shrink: 0; max-width: 100%; margin-left: 0%; margin-top: 5px; margin-bottom: 5px;"
                     >
                       <button
-                        class="c49"
+                        class="c46"
                         color="#107969"
                         value="draft"
                       >
                         <p
-                          class="c50"
+                          class="c47"
                           color="#FFFFFF"
                         >
                           Draft
@@ -1227,12 +1161,12 @@ exports[`<AnswerSessionPage /> Should render and match the snapshot 1`] = `
                       style="box-sizing: border-box; min-height: 1px; position: relative; padding-left: 15px; padding-right: 15px; width: auto; flex-basis: auto; flex-grow: 0; flex-shrink: 0; max-width: 100%; margin-left: 0%; margin-top: 5px; margin-bottom: 5px;"
                     >
                       <button
-                        class="c51"
+                        class="c48"
                         color="#8CBD00"
                         value="published"
                       >
                         <p
-                          class="c50"
+                          class="c47"
                           color="#FFFFFF"
                         >
                           Published
@@ -1243,12 +1177,12 @@ exports[`<AnswerSessionPage /> Should render and match the snapshot 1`] = `
                       style="box-sizing: border-box; min-height: 1px; position: relative; padding-left: 15px; padding-right: 15px; width: auto; flex-basis: auto; flex-grow: 0; flex-shrink: 0; max-width: 100%; margin-left: 0%; margin-top: 5px; margin-bottom: 5px;"
                     >
                       <button
-                        class="c52"
+                        class="c49"
                         color="#F0684A"
                         value="closed"
                       >
                         <p
-                          class="c50"
+                          class="c47"
                           color="#FFFFFF"
                         >
                           Closed
@@ -1259,12 +1193,12 @@ exports[`<AnswerSessionPage /> Should render and match the snapshot 1`] = `
                       style="box-sizing: border-box; min-height: 1px; position: relative; padding-left: 15px; padding-right: 15px; width: auto; flex-basis: auto; flex-grow: 0; flex-shrink: 0; max-width: 100%; margin-left: 0%; margin-top: 5px; margin-bottom: 5px;"
                     >
                       <button
-                        class="c53"
+                        class="c50"
                         color="#0E0E0E"
                         value="archived"
                       >
                         <p
-                          class="c50"
+                          class="c47"
                           color="#FFFFFF"
                         >
                           Archived
@@ -1283,17 +1217,17 @@ exports[`<AnswerSessionPage /> Should render and match the snapshot 1`] = `
                       style="box-sizing: border-box; min-height: 1px; position: relative; padding-left: 15px; padding-right: 15px; width: 100%; flex-basis: 0px; flex-grow: 1; flex-shrink: 0; max-width: 100%; margin-left: 0%;"
                     >
                       <div
-                        class="c54"
+                        class="c51"
                       >
                         <input
                           aria-label="Filter Interventions by name"
-                          class="c55"
+                          class="c52"
                           placeholder="Filter by name"
                           type="text"
                         />
                         <img
                           alt="search"
-                          class="c56"
+                          class="c53"
                           src="IMAGE_MOCK"
                         />
                         
@@ -1307,7 +1241,7 @@ exports[`<AnswerSessionPage /> Should render and match the snapshot 1`] = `
               />
             </div>
             <div
-              class="c57"
+              class="c54"
             >
               <div
                 class="virtual-grid-auto-sizer"

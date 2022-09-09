@@ -11,9 +11,10 @@ import { render } from '@testing-library/react';
 import { IntlProvider } from 'react-intl';
 import { Provider } from 'react-redux';
 import { MemoryRouter } from 'react-router-dom';
-import { createStore } from 'redux';
 
 import 'jest-styled-components';
+
+import { createTestStore } from 'utils/testUtils/storeUtils';
 
 import { Roles } from 'models/User/RolesManager';
 import Navbar from '../index';
@@ -21,7 +22,6 @@ import { DEFAULT_LOCALE } from '../../../i18n';
 
 describe('<Navbar />', () => {
   let store;
-  const reducer = (state) => state;
   const initialState = {
     auth: {
       user: { firstName: 'test', lastName: 'test', roles: [Roles.Admin] },
@@ -32,10 +32,13 @@ describe('<Navbar />', () => {
         name: 'e-Session New',
       },
     },
+    notifications: {
+      notifications: [],
+    },
   };
 
   beforeAll(() => {
-    store = createStore(reducer, initialState);
+    store = createTestStore(initialState);
   });
 
   it('Expect to not log errors in console', () => {

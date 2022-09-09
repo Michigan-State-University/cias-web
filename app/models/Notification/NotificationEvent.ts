@@ -1,4 +1,4 @@
 export enum NotificationEvent {
-  NEW_MESSAGE = 0,
-  AUTO_GENERATED_CONVERSATION = 1,
+  NEW_CONVERSATION = 'new_conversation_notification',
+  AUTO_GENERATED_CONVERSATION = 'auto_generated_conversation_notification',
 }

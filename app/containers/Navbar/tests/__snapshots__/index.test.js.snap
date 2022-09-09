@@ -1,7 +1,7 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`<Navbar /> Should render and match the snapshot with session path 1`] = `
-.c8 {
+.c5 {
   width: 30px;
   height: 30px;
   font-size: 15px;
@@ -35,30 +35,7 @@ exports[`<Navbar /> Should render and match the snapshot with session path 1`] =
   color: unset;
 }
 
-.c4 {
-  width: auto;
-  height: auto;
-  display: block;
-  border-radius: 5px;
-  position: absolute;
-  z-index: 12;
-  top: 0;
-  right: 0;
-  color: unset;
-}
-
-.c5 {
-  width: auto;
-  height: auto;
-  display: block;
-  border-radius: 5px;
-  -webkit-flex-shrink: 0;
-  -ms-flex-negative: 0;
-  flex-shrink: 0;
-  color: unset;
-}
-
-.c9 {
+.c6 {
   width: auto;
   height: auto;
   display: block;
@@ -105,7 +82,7 @@ exports[`<Navbar /> Should render and match the snapshot with session path 1`] =
   gap: 32px;
 }
 
-.c7 {
+.c4 {
   position: relative;
   display: -webkit-box;
   display: -webkit-flex;
@@ -147,32 +124,6 @@ exports[`<Navbar /> Should render and match the snapshot with session path 1`] =
   margin-right: 0;
 }
 
-.c6 {
-  border-radius: 50%;
-  background-color: #D2371D;
-  display: -webkit-box;
-  display: -webkit-flex;
-  display: -ms-flexbox;
-  display: flex;
-  -webkit-box-pack: center;
-  -webkit-justify-content: center;
-  -ms-flex-pack: center;
-  justify-content: center;
-  -webkit-align-items: center;
-  -webkit-box-align: center;
-  -ms-flex-align: center;
-  align-items: center;
-  width: 16px;
-  height: 16px;
-  background-color: rgba(210,55,29,1);
-  color: rgba(255,255,255,1);
-  opacity: 1;
-  font-size: 9.6px;
-  font-weight: 700;
-  color: rgba(255,255,255,1);
-  border: 1px solid #FFFFFF;
-}
-
 @media (max-width:767px) {
   .c0 .user-name-info {
     display: none;
@@ -200,31 +151,14 @@ exports[`<Navbar /> Should render and match the snapshot with session path 1`] =
           alt="cross"
           src="IMAGE_MOCK"
         />
-        <div
-          class="c4"
-        >
-          <div
-            class="c5"
-          >
-            <div
-              class="c6"
-              color="#FFFFFF"
-              font-size="9.6px"
-              font-weight="bold"
-              opacity="1"
-            >
-              3
-            </div>
-          </div>
-        </div>
       </button>
     </div>
     <div
-      class="c7"
+      class="c4"
     >
       <div />
       <div
-        class="c8"
+        class="c5"
         color="#FFFFFF"
         data-private="true"
         height="30"
@@ -235,7 +169,7 @@ exports[`<Navbar /> Should render and match the snapshot with session path 1`] =
         </div>
       </div>
       <div
-        class="c9 user-name-info"
+        class="c6 user-name-info"
         data-private="true"
       >
         test test
@@ -246,7 +180,7 @@ exports[`<Navbar /> Should render and match the snapshot with session path 1`] =
 `;
 
 exports[`<Navbar /> Should render and match the snapshot withou matching path 1`] = `
-.c8 {
+.c5 {
   width: 30px;
   height: 30px;
   font-size: 15px;
@@ -280,30 +214,7 @@ exports[`<Navbar /> Should render and match the snapshot withou matching path 1`
   color: unset;
 }
 
-.c4 {
-  width: auto;
-  height: auto;
-  display: block;
-  border-radius: 5px;
-  position: absolute;
-  z-index: 12;
-  top: 0;
-  right: 0;
-  color: unset;
-}
-
-.c5 {
-  width: auto;
-  height: auto;
-  display: block;
-  border-radius: 5px;
-  -webkit-flex-shrink: 0;
-  -ms-flex-negative: 0;
-  flex-shrink: 0;
-  color: unset;
-}
-
-.c9 {
+.c6 {
   width: auto;
   height: auto;
   display: block;
@@ -350,7 +261,7 @@ exports[`<Navbar /> Should render and match the snapshot withou matching path 1`
   gap: 32px;
 }
 
-.c7 {
+.c4 {
   position: relative;
   display: -webkit-box;
   display: -webkit-flex;
@@ -392,32 +303,6 @@ exports[`<Navbar /> Should render and match the snapshot withou matching path 1`
   margin-right: 0;
 }
 
-.c6 {
-  border-radius: 50%;
-  background-color: #D2371D;
-  display: -webkit-box;
-  display: -webkit-flex;
-  display: -ms-flexbox;
-  display: flex;
-  -webkit-box-pack: center;
-  -webkit-justify-content: center;
-  -ms-flex-pack: center;
-  justify-content: center;
-  -webkit-align-items: center;
-  -webkit-box-align: center;
-  -ms-flex-align: center;
-  align-items: center;
-  width: 16px;
-  height: 16px;
-  background-color: rgba(210,55,29,1);
-  color: rgba(255,255,255,1);
-  opacity: 1;
-  font-size: 9.6px;
-  font-weight: 700;
-  color: rgba(255,255,255,1);
-  border: 1px solid #FFFFFF;
-}
-
 @media (max-width:767px) {
   .c0 .user-name-info {
     display: none;
@@ -445,31 +330,14 @@ exports[`<Navbar /> Should render and match the snapshot withou matching path 1`
           alt="cross"
           src="IMAGE_MOCK"
         />
-        <div
-          class="c4"
-        >
-          <div
-            class="c5"
-          >
-            <div
-              class="c6"
-              color="#FFFFFF"
-              font-size="9.6px"
-              font-weight="bold"
-              opacity="1"
-            >
-              3
-            </div>
-          </div>
-        </div>
       </button>
     </div>
     <div
-      class="c7"
+      class="c4"
     >
       <div />
       <div
-        class="c8"
+        class="c5"
         color="#FFFFFF"
         data-private="true"
         height="30"
@@ -480,7 +348,7 @@ exports[`<Navbar /> Should render and match the snapshot withou matching path 1`
         </div>
       </div>
       <div
-        class="c9 user-name-info"
+        class="c6 user-name-info"
         data-private="true"
       >
         test test

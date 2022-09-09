@@ -1,10 +1,19 @@
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 
 import { SocketMessageListener, useSocket } from 'utils/useSocket';
+import { jsonApiToArray, jsonApiToObject } from 'utils/jsonApiMapper';
 
 import { makeSelectIsUserLoggedIn } from 'global/reducers/auth';
+import {
+  onNewNotificationReceive,
+  onUnreadNotificationsFetchedReceive,
+} from 'global/reducers/notifications/actions';
 
-import { NotificationChannelMessage } from './types';
+import {
+  NewNotificationData,
+  NotificationChannelMessage,
+  UnreadNotificationsFetchedData,
+} from './types';
 import {
   NOTIFICATION_CHANNEL_NAME,
   NotificationChannelMessageTopic,
@@ -12,12 +21,31 @@ import {
 
 export const useNotificationChannel = () => {
   const isLoggedIn = useSelector(makeSelectIsUserLoggedIn());
+  const dispatch = useDispatch();
+
+  const onUnreadNotificationsFetched = (
+    data: UnreadNotificationsFetchedData,
+  ) => {
+    const notifications = jsonApiToArray(data, 'notification');
+    notifications.reverse();
+    dispatch(onUnreadNotificationsFetchedReceive(notifications));
+  };
+
+  const onNewNotification = (data: NewNotificationData) => {
+    const notification = jsonApiToObject(data, 'notification');
+    dispatch(onNewNotificationReceive(notification));
+  };
 
   const messageListener: SocketMessageListener<NotificationChannelMessage> = ({
+    data,
     topic,
   }) => {
     switch (topic) {
-      case NotificationChannelMessageTopic.PLACEHOLDER:
+      case NotificationChannelMessageTopic.UNREAD_NOTIFICATIONS_FETCHED:
+        onUnreadNotificationsFetched(data);
+        break;
+      case NotificationChannelMessageTopic.NEW_NOTIFICATION:
+        onNewNotification(data);
         break;
       default:
         break;

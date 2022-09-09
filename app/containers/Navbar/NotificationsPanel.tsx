@@ -1,127 +1,37 @@
 import React, { useMemo, useState } from 'react';
 import { useIntl } from 'react-intl';
-import dayjs from 'dayjs';
+import { useInjectReducer } from 'redux-injectors';
+import { useSelector } from 'react-redux';
 
 import { boxShadows, colors } from 'theme';
 
-import { Notification, NotificationEvent } from 'models/Notification';
+import {
+  makeSelectNotifications,
+  withNotificationsReducer,
+} from 'global/reducers/notifications';
 
 import { PopoverModal } from 'components/Modal';
 import H2 from 'components/H2';
 import Box from 'components/Box';
 import Divider from 'components/Divider';
 
-import messages from './messages';
-import SingleNotification from './components/SingleNotification';
 import {
   NOTIFICATIONS_LIST_MAX_HEIGHT,
   NOTIFICATIONS_POPOVER_SCREEN_PADDING,
   NOTIFICATIONS_LIST_MAX_WIDTH,
 } from './constants';
+import messages from './messages';
+import SingleNotification from './components/SingleNotification';
 import {
   NOTIFICATION_BUTTON_ID,
   NotificationsButton,
 } from './components/NotificationsButton';
 
-const notifications: Notification[] = [
-  {
-    notifiableId: '1',
-    notifiableType: 'Conversation',
-    event: NotificationEvent.NEW_MESSAGE,
-    isRead: false,
-    createdAt: dayjs().subtract(2, 's').toISOString(),
-    data: {
-      conversationId: '1',
-      userId: '1',
-      avatarUrl: null,
-      firstName: 'Test',
-      lastName: 'Testowski',
-      message:
-        'Hello Hello Hello Hello Hello Hello Hello Hello Hello Hello Hello Hello Hello Hello Hello Hello Hello Hello ',
-    },
-  },
-  {
-    notifiableId: '2',
-    notifiableType: 'Conversation',
-    event: NotificationEvent.NEW_MESSAGE,
-    isRead: false,
-    createdAt: dayjs().subtract(3, 'm').toISOString(),
-    data: {
-      conversationId: '2',
-      userId: '2',
-      avatarUrl: null,
-      firstName: 'Jan',
-      lastName: 'Kowalski',
-      message: 'Hello Hello Hello',
-    },
-  },
-  {
-    notifiableId: '3',
-    notifiableType: 'Conversation',
-    event: NotificationEvent.NEW_MESSAGE,
-    isRead: false,
-    createdAt: dayjs().subtract(1, 'h').toISOString(),
-    data: {
-      conversationId: '3',
-      userId:
-        '3283nu329j8ru3j0289nucr029n3tjr029unctj2093nr02rk209nrkx3029rkx320n9',
-      avatarUrl: null,
-      firstName: '',
-      lastName: '',
-      message: 'Hello',
-    },
-  },
-  {
-    notifiableId: '4',
-    notifiableType: 'Conversation',
-    event: NotificationEvent.NEW_MESSAGE,
-    isRead: true,
-    createdAt: dayjs().subtract(4, 'd').toISOString(),
-    data: {
-      conversationId: '4',
-      userId: '4',
-      avatarUrl: null,
-      firstName: 'Jaaaaaaaaaaaaaaaaan',
-      lastName: 'Kowaaaaaaaaaaaaaaaaalski',
-      message:
-        'Hellofjfdsjdisdshdsfjhdsbjoshusujiodhusjoifhujoishuijosdhugjiosdghujijodghkkjdfhbknflijfhkdnvfjsdkhnkjvlns',
-    },
-  },
-  {
-    notifiableId: '5',
-    notifiableType: 'Conversation',
-    event: NotificationEvent.NEW_MESSAGE,
-    isRead: true,
-    createdAt: dayjs().subtract(6, 'd').toISOString(),
-    data: {
-      conversationId: '5',
-      userId: '5',
-      avatarUrl: null,
-      firstName: 'Iks',
-      lastName: 'Iksiński',
-      message: 'Hello',
-    },
-  },
-  {
-    notifiableId: '6',
-    notifiableType: 'Conversation',
-    event: NotificationEvent.NEW_MESSAGE,
-    isRead: true,
-    createdAt: dayjs().subtract(6, 'd').toISOString(),
-    data: {
-      conversationId: '6',
-      userId:
-        '6328ju2r78kur9w7hefjk0u8c9ghuejfxiku2jchnexfjudi2fchefjxiu2hecifuxi9f2u8hg3',
-      avatarUrl: null,
-      firstName: '',
-      lastName: '',
-      message: 'Hello',
-    },
-  },
-];
-
 const NotificationsPanel = () => {
   const { formatMessage } = useIntl();
+
+  useInjectReducer(withNotificationsReducer);
+  const notifications = useSelector(makeSelectNotifications());
 
   const [notificationBoxVisible, setNotificationBoxVisible] = useState(false);
   const toggleNotifications = () =>
@@ -169,7 +79,7 @@ const NotificationsPanel = () => {
           >
             {notifications.map((notification) => (
               <SingleNotification
-                key={notification.notifiableId}
+                key={notification.id}
                 notification={notification}
               />
             ))}
