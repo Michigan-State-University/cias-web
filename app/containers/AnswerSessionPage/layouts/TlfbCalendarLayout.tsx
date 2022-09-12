@@ -26,8 +26,8 @@ import { TlfbContainer } from './styled';
 import { getTlfbDateRange } from '../utils';
 
 type Props = {
-  smallText: string;
-  bigText: string;
+  title: string;
+  subtitle: string;
   isMobilePreview: boolean;
   isMobile: boolean;
   tlfbConfig: CamelToSnake<TlfbConfigBody>;
@@ -45,7 +45,6 @@ type Props = {
 const TlfbCalendarLayout = forwardRef<CalendarRef, Props>(
   (
     {
-      bigText,
       children,
       isMobile,
       isMobilePreview,
@@ -53,7 +52,8 @@ const TlfbCalendarLayout = forwardRef<CalendarRef, Props>(
       selectedDay,
       dayId,
       onSelectDay,
-      smallText,
+      title,
+      subtitle,
       calendarData,
       disableModalClose,
       isLoading = false,
@@ -72,7 +72,7 @@ const TlfbCalendarLayout = forwardRef<CalendarRef, Props>(
     );
 
     const isMobileView = isMobile || isMobilePreview;
-    const shouldDisplayTitleRow = smallText || bigText || !hideHelpingMaterials;
+    const shouldDisplayTitleRow = title || subtitle || !hideHelpingMaterials;
     const shouldDisplayLegend =
       isMobileView && some(calendarData, (day: DayData) => !!day.answer);
 
@@ -82,8 +82,8 @@ const TlfbCalendarLayout = forwardRef<CalendarRef, Props>(
         {isLoading && <Loader />}
         {shouldDisplayTitleRow && (
           <TlfbTitle
-            smallText={smallText}
-            bigText={bigText}
+            title={title}
+            subtitle={subtitle}
             displayHelpingMaterials={!hideHelpingMaterials && !isMobileView}
           />
         )}

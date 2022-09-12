@@ -88,6 +88,7 @@ const ApprovableInput = ({
   selectsEnd,
   startDate,
   endDate,
+  richTextBlurTransparentBorder,
 }) => {
   const [value, setValue] = useState(propsValue);
   const [focused, setFocused] = useState(false);
@@ -180,6 +181,7 @@ const ApprovableInput = ({
           fontSize={fontSize}
           readOnly={disabled}
           defaultFontSize={defaultFontSize}
+          blurTransparentBorder={richTextBlurTransparentBorder}
         />
       );
 
@@ -311,6 +313,7 @@ ApprovableInput.propTypes = {
   selectsEnd: PropTypes.bool,
   startDate: PropTypes.object,
   endDate: PropTypes.object,
+  richTextBlurTransparentBorder: PropTypes.bool,
 };
 
 ApprovableInput.defaultProps = {
@@ -318,6 +321,7 @@ ApprovableInput.defaultProps = {
   richText: false,
   autoSize: false,
   transparent: true,
+  richTextBlurTransparentBorder: true,
 };
 
 export default ApprovableInput;

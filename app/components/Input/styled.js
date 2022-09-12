@@ -11,16 +11,24 @@ export const QuillStyled = styled(ReactQuill)`
   min-height: ${({ autoSize }) => autoSize && 'max-content'};
   height: ${({ autoSize, singleline }) =>
     singleline ? 'auto' : !autoSize && '150px'};
-  ${({ focused }) =>
-    focused
-      ? {
-          border: `1px solid ${colors.jungleGreen}`,
-          borderRadius: `10px`,
-          '.ql-bubble': {
-            zIndex: 1000,
-          },
-        }
-      : { border: '1px solid transparent' }}
+
+  ${({ blurTransparentBorder }) =>
+    blurTransparentBorder
+      ? { border: '1px solid transparent' }
+      : {
+          ...borders,
+          borderColor: themeColors.highlight,
+        }}
+
+  ${({ focused, blurTransparentBorder }) =>
+    focused && {
+      border: `1px solid ${colors.jungleGreen}`,
+      // ternary to prevent modifying existing inputs
+      borderRadius: blurTransparentBorder ? `10px` : borders.borderRadius,
+      '.ql-bubble': {
+        zIndex: 1000,
+      },
+    }}
 
   .ql-editor {
     font-weight: 400;
@@ -35,9 +43,11 @@ export const QuillStyled = styled(ReactQuill)`
   .ql-picker-label svg {
     margin-bottom: 15px !important;
   }
+
   .ql-toolbar {
     width: max-content;
   }
+
   .ql-container {
     font-size: ${({ defaultFontSize }) =>
       defaultFontSize ? `${defaultFontSize}px` : 'initial'};
@@ -51,12 +61,15 @@ export const StyledDateInput = styled.button`
   border-style: ${borders.borderStyle};
   border-width: ${borders.borderWidth};
   border-color: ${colors.linkWater};
+
   &:hover {
     ${({ disabled }) => (disabled ? 'cursor: not-allowed' : 'cursor: pointer')};
   }
+
   &:focus {
     outline: none;
   }
+
   ${margin};
   ${layout};
   ${border};
