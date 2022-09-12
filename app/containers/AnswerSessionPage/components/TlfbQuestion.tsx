@@ -4,6 +4,7 @@ import { compose } from 'redux';
 import { injectReducer, injectSaga } from 'redux-injectors';
 import { useDispatch, useSelector } from 'react-redux';
 import { Dayjs } from 'dayjs';
+import { Markup } from 'interweave';
 
 import { TlfbQuestionWithConfigDTO as TlfbQuestionWithConfig } from 'models/Question';
 import { fullDayToYearFormatter } from 'utils/formatters';
@@ -226,8 +227,8 @@ const TlfbQuestion = ({
   return (
     <TlfbCalendarLayout
       ref={calendarRef}
-      bigText={headQuestion}
-      smallText={questionTitle}
+      subtitle={headQuestion}
+      title={questionTitle}
       isMobile={isMobile}
       isMobilePreview={isMobilePreview}
       tlfbConfig={config}
@@ -263,9 +264,7 @@ const TlfbQuestion = ({
           )}
         </>
       )}
-      <Text fontWeight="bold" fontSize={16} mb={16}>
-        {substanceQuestion}
-      </Text>
+      <Markup content={substanceQuestion} />
       <TlfbConsumptionForm
         substances={substances}
         substanceGroups={substanceGroups}

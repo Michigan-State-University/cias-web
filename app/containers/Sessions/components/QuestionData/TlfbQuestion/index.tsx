@@ -21,6 +21,7 @@ import LabelledApprovableInput from 'components/Input/LabelledApprovableInput';
 import Row from 'components/Row';
 import H2 from 'components/H2';
 import Text from 'components/Text';
+import { selectQuillText } from 'components/Input/utils';
 
 import {
   UPDATE_QUESTION_TITLE,
@@ -91,12 +92,15 @@ const TlfbQuestion = ({
           label={formatMessage(messages.questionTitle)}
           placeholder={formatMessage(messages.questionTitlePlaceholder)}
           value={questionTitle}
-          type="singleline"
+          type="multiline"
           onCheck={onUpdateQuestion(UPDATE_QUESTION_TITLE)}
+          onFocus={selectQuillText}
           id="question-title"
           transparent={false}
-          height={48}
           disabled={!isEditable}
+          richText
+          richTextBlurTransparentBorder={false}
+          autoSize
         />
       </Row>
 
@@ -105,12 +109,15 @@ const TlfbQuestion = ({
           label={formatMessage(messages.headTitle)}
           placeholder={formatMessage(messages.headTitlePlaceholder)}
           value={headQuestion}
-          type="singleline"
+          type="multiline"
           onCheck={onUpdateQuestion(UPDATE_HEAD_QUESTION)}
+          onFocus={selectQuillText}
           id="head-question"
           transparent={false}
-          height={48}
           disabled={!isEditable}
+          richText
+          richTextBlurTransparentBorder={false}
+          autoSize
         />
       </Row>
 
@@ -119,12 +126,15 @@ const TlfbQuestion = ({
           label={formatMessage(messages.substanceTitle)}
           placeholder={formatMessage(messages.substanceTitlePlaceholder)}
           value={substanceQuestion}
-          type="singleline"
+          type="multiline"
           onCheck={onUpdateQuestion(UPDATE_SUBSTANCE_QUESTION)}
+          onFocus={selectQuillText}
           id="substance-question"
           transparent={false}
-          height={48}
           disabled={!isEditable}
+          richText
+          richTextBlurTransparentBorder={false}
+          autoSize
         />
       </Row>
 

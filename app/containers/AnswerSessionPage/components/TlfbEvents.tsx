@@ -147,8 +147,8 @@ const TlfbEvents = ({
   return (
     <>
       <TlfbCalendarLayout
-        smallText={screenTitle}
-        bigText={screenQuestion}
+        title={screenTitle}
+        subtitle={screenQuestion}
         tlfbConfig={config}
         isMobile={isMobile}
         isMobilePreview={isMobilePreview}
