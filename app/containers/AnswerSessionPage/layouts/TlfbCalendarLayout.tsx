@@ -15,7 +15,7 @@ import { ANSWER_SESSION_CONTAINER_ID } from 'containers/App/constants';
 import Calendar from 'components/Calendar';
 import Modal, { PopoverModal } from 'components/Modal';
 import TlfbTitle from 'components/TlfbTitle';
-import Text from 'components/Text';
+import H1 from 'components/H1';
 import Box from 'components/Box';
 import { CalendarRef } from 'components/Calendar/types';
 import Loader from 'components/Loader';
@@ -113,16 +113,13 @@ const TlfbCalendarLayout = forwardRef<CalendarRef, Props>(
             height={isMobile && !isMobilePreview ? '100vh' : '100%'}
             bg={colors.linkWater}
           >
-            <Box>
-              <Text fontSize="24px" as="span">
-                {selectedDay?.format(fullDayOfWeekFormatter)},
-              </Text>
-              <Text fontWeight="bold" ml={5} fontSize="24px" as="span">
-                {`${selectedDay?.format(
-                  fullMonthNameFormatter,
-                )} ${selectedDay?.format(dayNumeralFormatter)}`}
-              </Text>
-            </Box>
+            <H1 fontSize={24}>
+              {selectedDay?.format(fullDayOfWeekFormatter)}
+              {', '}
+              {`${selectedDay?.format(
+                fullMonthNameFormatter,
+              )} ${selectedDay?.format(dayNumeralFormatter)}`}
+            </H1>
             {children}
           </Modal>
         )}

@@ -264,7 +264,9 @@ const TlfbQuestion = ({
           )}
         </>
       )}
-      <Markup content={substanceQuestion} />
+      <Box mb={8}>
+        <Markup content={substanceQuestion} />
+      </Box>
       <TlfbConsumptionForm
         substances={substances}
         substanceGroups={substanceGroups}
