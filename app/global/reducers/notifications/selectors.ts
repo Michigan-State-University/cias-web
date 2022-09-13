@@ -8,6 +8,12 @@ import { initialState, notificationsReducerKey } from './reducer';
 const selectNotificationsState = (rootState: RootState): NotificationsState =>
   rootState[notificationsReducerKey] || initialState;
 
+export const makeSelectNotificationsListVisible = () =>
+  createSelector(
+    selectNotificationsState,
+    ({ notificationsListVisible }) => notificationsListVisible,
+  );
+
 export const makeSelectNotifications = () =>
   createSelector(
     selectNotificationsState,

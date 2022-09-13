@@ -38,6 +38,8 @@ const ALLOWED_CAT_MH_SETTING_DISPLAY = [Roles.Admin, Roles.Researcher];
 
 const ALLOWED_TEAM_NAVIGATOR_DISPLAY = [Roles.Admin, Roles.TeamAdmin];
 
+const ALLOWED_LIVE_CHAT_NOTIFICATIONS_DISPLAY = [Roles.Navigator];
+
 export const canDisplayLeftSidebar = (userRoles: Roles[]) =>
   !arraysOverlap(userRoles, FORBIDDEN_LEFT_SIDEBAR_DISPLAY);
 
@@ -82,6 +84,10 @@ export const useRoleManager = () => {
     userRoles,
     ALLOWED_TEAM_NAVIGATOR_DISPLAY,
   );
+  const canDisplayLiveChatNotifications = arraysOverlap(
+    userRoles,
+    ALLOWED_LIVE_CHAT_NOTIFICATIONS_DISPLAY,
+  );
 
   return {
     isAdmin,
@@ -96,6 +102,7 @@ export const useRoleManager = () => {
     canAssignOrganizationToIntervention,
     hasFullOrgAccess,
     canDisplayTeamNavigatorPanel,
+    canDisplayLiveChatNotifications,
     userRoles,
   };
 };

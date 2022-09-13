@@ -15,7 +15,7 @@ import PropTypes from 'prop-types';
 import { useIntl } from 'react-intl';
 import { connect } from 'react-redux';
 import { compose } from 'redux';
-import { useInjectSaga } from 'redux-injectors';
+import { useInjectReducer, useInjectSaga } from 'redux-injectors';
 import { createStructuredSelector } from 'reselect';
 
 import GlobalStyle from 'global-styles';
@@ -36,6 +36,10 @@ import {
   makeSelectUser,
   fetchSelfDetailsSaga,
 } from 'global/reducers/auth';
+import {
+  withNotificationsReducer,
+  withAllNotificationsSagas,
+} from 'global/reducers/notifications';
 
 import AnswerSessionPage from 'containers/AnswerSessionPage/Loadable';
 import EditSessionPage from 'containers/Sessions/containers/EditSessionPage/Loadable';
@@ -86,10 +90,13 @@ import {
 } from 'models/User/RolesManager/defaultNavbarTabs';
 
 import { arraysOverlap } from 'utils/arrayUtils';
+
 import { MODAL_PORTAL_ID, TOOLTIP_PORTAL_ID } from './constants';
 import { shouldFetchSelfDetailsOnPath } from './utils';
 
 export function App({ user, fetchSelfDetails }) {
+  useInjectReducer(withNotificationsReducer);
+  useInjectSaga(withAllNotificationsSagas);
   useNotificationChannel();
 
   const { locale, formatMessage } = useIntl();

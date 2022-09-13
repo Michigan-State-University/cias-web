@@ -1,16 +1,100 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`<AnswerSessionPage /> Should render and match the snapshot 1`] = `
-.c9 {
-  width: auto;
-  height: auto;
-  display: block;
-  border-radius: 5px;
-  position: relative;
-  color: unset;
+.c19 {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-flex-direction: column;
+  -ms-flex-direction: column;
+  flex-direction: column;
+  width: 100%;
+  -webkit-box-pack: center;
+  -webkit-justify-content: center;
+  -ms-flex-pack: center;
+  justify-content: center;
+  justify-items: center;
+  width: 100%;
 }
 
-.c13 {
+.c23 {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-flex-direction: column;
+  -ms-flex-direction: column;
+  flex-direction: column;
+  width: 100%;
+  width: 100%;
+  overflow: hidden;
+}
+
+.c17 {
+  font-family: DM Sans;
+  font-size: 13px;
+  line-height: 130%;
+  margin-bottom: 8px !important;
+  color: #2F3850;
+}
+
+.c21 {
+  font-family: DM Sans;
+  font-size: 13px;
+  line-height: 130%;
+  font-size: 15px;
+  font-weight: 700;
+  color: #2F3850;
+}
+
+.c24 {
+  font-family: DM Sans;
+  font-size: 13px;
+  line-height: 130%;
+  margin-top: 20px;
+  color: #2F3850;
+  width: 100%;
+}
+
+.c37 {
+  font-family: DM Sans;
+  font-size: 13px;
+  line-height: 130%;
+  font-weight: 700;
+  color: #2F3850;
+}
+
+.c38 {
+  font-family: DM Sans;
+  font-size: 13px;
+  line-height: 130%;
+  font-weight: 700;
+  color: rgba(183,39,234,1);
+  color: rgba(183,39,234,1);
+}
+
+.c18 {
+  margin: 0;
+  font-family: DM Sans;
+  font-size: 13px;
+  line-height: 130%;
+  color: #6B707C;
+  margin-bottom: 8px !important;
+}
+
+.c25 {
+  margin: 0;
+  font-family: DM Sans;
+  font-size: 13px;
+  line-height: 130%;
+  color: #6B707C;
+  padding-top: 20px;
+  margin-top: 20px;
+  border-top: 1px solid #D5DEEA;
+}
+
+.c11 {
   width: auto;
   height: auto;
   display: block;
@@ -20,7 +104,7 @@ exports[`<AnswerSessionPage /> Should render and match the snapshot 1`] = `
   cursor: pointer;
 }
 
-.c29 {
+.c27 {
   width: auto;
   height: auto;
   display: block;
@@ -29,7 +113,7 @@ exports[`<AnswerSessionPage /> Should render and match the snapshot 1`] = `
   color: unset;
 }
 
-.c34 {
+.c32 {
   width: auto;
   height: auto;
   display: block;
@@ -46,7 +130,7 @@ exports[`<AnswerSessionPage /> Should render and match the snapshot 1`] = `
   color: unset;
 }
 
-.c54 {
+.c52 {
   width: auto;
   height: auto;
   display: block;
@@ -58,12 +142,24 @@ exports[`<AnswerSessionPage /> Should render and match the snapshot 1`] = `
   color: unset;
 }
 
-.c45 {
-  margin: 0;
-  font-family: DM Sans;
-  font-size: 25px;
-  line-height: 130%;
-  color: #2F3850;
+.c5 {
+  width: auto;
+  height: auto;
+  max-height: 51px;
+  margin-right: 15px;
+}
+
+.c7 {
+  width: auto;
+  height: auto;
+  max-width: 200px;
+  max-height: 100px;
+  margin-left: 10px;
+}
+
+.c36 {
+  width: auto;
+  height: auto;
 }
 
 .c2 {
@@ -94,335 +190,7 @@ exports[`<AnswerSessionPage /> Should render and match the snapshot 1`] = `
   height: auto;
 }
 
-.c5 {
-  width: auto;
-  height: auto;
-  max-height: 51px;
-  margin-right: 15px;
-}
-
-.c7 {
-  width: auto;
-  height: auto;
-  max-width: 200px;
-  max-height: 100px;
-  margin-left: 10px;
-}
-
-.c38 {
-  width: auto;
-  height: auto;
-}
-
-.c19 {
-  font-family: DM Sans;
-  font-size: 13px;
-  line-height: 130%;
-  margin-bottom: 8px !important;
-  color: #2F3850;
-}
-
-.c23 {
-  font-family: DM Sans;
-  font-size: 13px;
-  line-height: 130%;
-  font-size: 15px;
-  font-weight: 700;
-  color: #2F3850;
-}
-
-.c26 {
-  font-family: DM Sans;
-  font-size: 13px;
-  line-height: 130%;
-  margin-top: 20px;
-  color: #2F3850;
-  width: 100%;
-}
-
-.c39 {
-  font-family: DM Sans;
-  font-size: 13px;
-  line-height: 130%;
-  font-weight: 700;
-  color: #2F3850;
-}
-
-.c40 {
-  font-family: DM Sans;
-  font-size: 13px;
-  line-height: 130%;
-  font-weight: 700;
-  color: rgba(183,39,234,1);
-  color: rgba(183,39,234,1);
-}
-
-.c20 {
-  margin: 0;
-  font-family: DM Sans;
-  font-size: 13px;
-  line-height: 130%;
-  color: #6B707C;
-  margin-bottom: 8px !important;
-}
-
-.c27 {
-  margin: 0;
-  font-family: DM Sans;
-  font-size: 13px;
-  line-height: 130%;
-  color: #6B707C;
-  padding-top: 20px;
-  margin-top: 20px;
-  border-top: 1px solid #D5DEEA;
-}
-
-.c21 {
-  display: -webkit-box;
-  display: -webkit-flex;
-  display: -ms-flexbox;
-  display: flex;
-  -webkit-flex-direction: column;
-  -ms-flex-direction: column;
-  flex-direction: column;
-  width: 100%;
-  -webkit-box-pack: center;
-  -webkit-justify-content: center;
-  -ms-flex-pack: center;
-  justify-content: center;
-  justify-items: center;
-  width: 100%;
-}
-
-.c25 {
-  display: -webkit-box;
-  display: -webkit-flex;
-  display: -ms-flexbox;
-  display: flex;
-  -webkit-flex-direction: column;
-  -ms-flex-direction: column;
-  flex-direction: column;
-  width: 100%;
-  width: 100%;
-  overflow: hidden;
-}
-
-.c30 {
-  display: -webkit-box;
-  display: -webkit-flex;
-  display: -ms-flexbox;
-  display: flex;
-  -webkit-box-pack: center;
-  -webkit-justify-content: center;
-  -ms-flex-pack: center;
-  justify-content: center;
-  -webkit-align-items: center;
-  -webkit-box-align: center;
-  -ms-flex-align: center;
-  align-items: center;
-  margin: auto;
-  width: 30px;
-  height: 30px;
-}
-
-.c30:after {
-  content: ' ';
-  display: block;
-  width: 20px;
-  height: 20px;
-  border-radius: 50%;
-  border: 6px solid #B727EA;
-  border-color: #B727EA transparent #B727EA transparent;
-  -webkit-animation: hAjVGa 1.2s linear infinite;
-  animation: hAjVGa 1.2s linear infinite;
-}
-
-.c28 {
-  width: 100%;
-  height: 40px;
-  border-radius: 5px;
-  cursor: pointer;
-  border: none;
-  outline: none;
-  background-color: #FFFFFF;
-  color: #B727EA;
-  border: 1px solid #B727EA;
-  -webkit-transition: background-color 300ms ease,color 300ms ease,border 300ms ease;
-  transition: background-color 300ms ease,color 300ms ease,border 300ms ease;
-  margin-top: 20px;
-  margin-bottom: 20px;
-  width: auto;
-  padding-right: 10px;
-  padding-left: 10px;
-}
-
-.c28:hover {
-  background-color: #B727EA;
-  color: #FFFFFF;
-  border: 1px solid transparent;
-}
-
-.c36 {
-  display: -webkit-box;
-  display: -webkit-flex;
-  display: -ms-flexbox;
-  display: flex;
-  -webkit-flex-direction: column;
-  -ms-flex-direction: column;
-  flex-direction: column;
-  -webkit-align-items: flex-start;
-  -webkit-box-align: flex-start;
-  -ms-flex-align: flex-start;
-  align-items: flex-start;
-}
-
-.c42 {
-  display: -webkit-box;
-  display: -webkit-flex;
-  display: -ms-flexbox;
-  display: flex;
-  -webkit-flex-direction: column;
-  -ms-flex-direction: column;
-  flex-direction: column;
-  -webkit-align-items: flex-end;
-  -webkit-box-align: flex-end;
-  -ms-flex-align: flex-end;
-  align-items: flex-end;
-}
-
-.c32 {
-  height: 100% !important;
-  display: -webkit-box;
-  display: -webkit-flex;
-  display: -ms-flexbox;
-  display: flex;
-  overflow: clip;
-  padding-top: 54px;
-  -webkit-flex-direction: column;
-  -ms-flex-direction: column;
-  flex-direction: column;
-}
-
 .c10 {
-  height: 28px;
-  width: 28px;
-  display: -webkit-box;
-  display: -webkit-flex;
-  display: -ms-flexbox;
-  display: flex;
-  -webkit-box-pack: center;
-  -webkit-justify-content: center;
-  -ms-flex-pack: center;
-  justify-content: center;
-  -webkit-align-items: center;
-  -webkit-box-align: center;
-  -ms-flex-align: center;
-  align-items: center;
-  border-radius: 4px;
-  background: #E9F1FB;
-  margin-right: 35px;
-  cursor: pointer;
-  border: none;
-  outline: none;
-  padding: 0;
-  background-color: rgba(255,255,255,1);
-  width: 24px;
-  height: 24px;
-  z-index: 11;
-  margin-right: 0;
-}
-
-.c43 {
-  height: 28px;
-  width: 28px;
-  display: -webkit-box;
-  display: -webkit-flex;
-  display: -ms-flexbox;
-  display: flex;
-  -webkit-box-pack: center;
-  -webkit-justify-content: center;
-  -ms-flex-pack: center;
-  justify-content: center;
-  -webkit-align-items: center;
-  -webkit-box-align: center;
-  -ms-flex-align: center;
-  align-items: center;
-  border-radius: 4px;
-  background: #E9F1FB;
-  margin-right: 35px;
-  cursor: pointer;
-  border: none;
-  outline: none;
-  padding: 0;
-  margin: 0px;
-}
-
-.c52 {
-  padding: 12px;
-  border-style: solid;
-  border-width: 1px;
-  border-color: #E9F1FB;
-  border-radius: 5px;
-  padding-right: 30px;
-  padding-left: 30px;
-  color: #2F3850;
-}
-
-.c52:focus {
-  box-shadow: none;
-  outline: none;
-  border-color: #107969;
-}
-
-.c52:disabled {
-  color: #ABBBD1;
-}
-
-.c51 {
-  display: -webkit-box;
-  display: -webkit-flex;
-  display: -ms-flexbox;
-  display: flex;
-  -webkit-align-items: center;
-  -webkit-box-align: center;
-  -ms-flex-align: center;
-  align-items: center;
-  position: relative;
-}
-
-.c53 {
-  position: absolute;
-  left: 10px;
-  top: 10px;
-}
-
-.c33 {
-  max-width: 960px !important;
-}
-
-.c37 {
-  border-radius: 50%;
-  background-color: #E9F1FB;
-  display: -webkit-box;
-  display: -webkit-flex;
-  display: -ms-flexbox;
-  display: flex;
-  -webkit-box-pack: center;
-  -webkit-justify-content: center;
-  -ms-flex-pack: center;
-  justify-content: center;
-  -webkit-align-items: center;
-  -webkit-box-align: center;
-  -ms-flex-align: center;
-  align-items: center;
-  width: 50px;
-  height: 50px;
-  background-color: rgba(233,241,251,1);
-  opacity: 1;
-  color: #2F3850;
-}
-
-.c12 {
   width: 30px;
   height: 30px;
   font-size: 15px;
@@ -447,7 +215,201 @@ exports[`<AnswerSessionPage /> Should render and match the snapshot 1`] = `
   color: rgba(255,255,255,1);
 }
 
-.c18 {
+.c43 {
+  margin: 0;
+  font-family: DM Sans;
+  font-size: 25px;
+  line-height: 130%;
+  color: #2F3850;
+}
+
+.c28 {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+  -webkit-justify-content: center;
+  -ms-flex-pack: center;
+  justify-content: center;
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  margin: auto;
+  width: 30px;
+  height: 30px;
+}
+
+.c28:after {
+  content: ' ';
+  display: block;
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  border: 6px solid #B727EA;
+  border-color: #B727EA transparent #B727EA transparent;
+  -webkit-animation: hAjVGa 1.2s linear infinite;
+  animation: hAjVGa 1.2s linear infinite;
+}
+
+.c26 {
+  width: 100%;
+  height: 40px;
+  border-radius: 5px;
+  cursor: pointer;
+  border: none;
+  outline: none;
+  background-color: #FFFFFF;
+  color: #B727EA;
+  border: 1px solid #B727EA;
+  -webkit-transition: background-color 300ms ease,color 300ms ease,border 300ms ease;
+  transition: background-color 300ms ease,color 300ms ease,border 300ms ease;
+  margin-top: 20px;
+  margin-bottom: 20px;
+  width: auto;
+  padding-right: 10px;
+  padding-left: 10px;
+}
+
+.c26:hover {
+  background-color: #B727EA;
+  color: #FFFFFF;
+  border: 1px solid transparent;
+}
+
+.c34 {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-flex-direction: column;
+  -ms-flex-direction: column;
+  flex-direction: column;
+  -webkit-align-items: flex-start;
+  -webkit-box-align: flex-start;
+  -ms-flex-align: flex-start;
+  align-items: flex-start;
+}
+
+.c40 {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-flex-direction: column;
+  -ms-flex-direction: column;
+  flex-direction: column;
+  -webkit-align-items: flex-end;
+  -webkit-box-align: flex-end;
+  -ms-flex-align: flex-end;
+  align-items: flex-end;
+}
+
+.c30 {
+  height: 100% !important;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  overflow: clip;
+  padding-top: 54px;
+  -webkit-flex-direction: column;
+  -ms-flex-direction: column;
+  flex-direction: column;
+}
+
+.c41 {
+  height: 28px;
+  width: 28px;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+  -webkit-justify-content: center;
+  -ms-flex-pack: center;
+  justify-content: center;
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  border-radius: 4px;
+  background: #E9F1FB;
+  margin-right: 35px;
+  cursor: pointer;
+  border: none;
+  outline: none;
+  padding: 0;
+  margin: 0px;
+}
+
+.c50 {
+  padding: 12px;
+  border-style: solid;
+  border-width: 1px;
+  border-color: #E9F1FB;
+  border-radius: 5px;
+  padding-right: 30px;
+  padding-left: 30px;
+  color: #2F3850;
+}
+
+.c50:focus {
+  box-shadow: none;
+  outline: none;
+  border-color: #107969;
+}
+
+.c50:disabled {
+  color: #ABBBD1;
+}
+
+.c49 {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  position: relative;
+}
+
+.c51 {
+  position: absolute;
+  left: 10px;
+  top: 10px;
+}
+
+.c31 {
+  max-width: 960px !important;
+}
+
+.c35 {
+  border-radius: 50%;
+  background-color: #E9F1FB;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+  -webkit-justify-content: center;
+  -ms-flex-pack: center;
+  justify-content: center;
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  width: 50px;
+  height: 50px;
+  background-color: rgba(233,241,251,1);
+  opacity: 1;
+  color: #2F3850;
+}
+
+.c16 {
   -webkit-transition: -webkit-transform 0.4s ease;
   -webkit-transition: transform 0.4s ease;
   transition: transform 0.4s ease;
@@ -456,7 +418,7 @@ exports[`<AnswerSessionPage /> Should render and match the snapshot 1`] = `
   transform: rotate(180deg);
 }
 
-.c16 {
+.c14 {
   display: -webkit-box;
   display: -webkit-flex;
   display: -ms-flexbox;
@@ -477,7 +439,7 @@ exports[`<AnswerSessionPage /> Should render and match the snapshot 1`] = `
   height: 40px;
 }
 
-.c15 {
+.c13 {
   width: 280px;
   top: 0;
   background-color: white;
@@ -501,7 +463,7 @@ exports[`<AnswerSessionPage /> Should render and match the snapshot 1`] = `
   transition: left 0.4s ease;
 }
 
-.c22 {
+.c20 {
   display: -webkit-box;
   display: -webkit-flex;
   display: -ms-flexbox;
@@ -516,11 +478,11 @@ exports[`<AnswerSessionPage /> Should render and match the snapshot 1`] = `
   border-radius: 5px;
 }
 
-.c22 * {
+.c20 * {
   color: #B727EA;
 }
 
-.c24 {
+.c22 {
   display: -webkit-box;
   display: -webkit-flex;
   display: -ms-flexbox;
@@ -533,7 +495,7 @@ exports[`<AnswerSessionPage /> Should render and match the snapshot 1`] = `
   width: max-content;
 }
 
-.c17 {
+.c15 {
   position: absolute;
   top: 16px;
   right: -40px;
@@ -577,7 +539,7 @@ exports[`<AnswerSessionPage /> Should render and match the snapshot 1`] = `
   gap: 32px;
 }
 
-.c11 {
+.c9 {
   position: relative;
   display: -webkit-box;
   display: -webkit-flex;
@@ -595,7 +557,7 @@ exports[`<AnswerSessionPage /> Should render and match the snapshot 1`] = `
   margin: 0 !important;
 }
 
-.c31 {
+.c29 {
   position: relative;
   margin-top: 70px;
   height: calc(100vh - 70px) !important;
@@ -603,17 +565,17 @@ exports[`<AnswerSessionPage /> Should render and match the snapshot 1`] = `
   overflow: auto;
 }
 
-.c14 {
+.c12 {
   overflow: hidden;
 }
 
-.c44 {
+.c42 {
   padding: 0 !important;
   margin-top: 10px;
   width: 100%;
 }
 
-.c46 {
+.c44 {
   border: none;
   width: -webkit-max-content;
   width: -moz-max-content;
@@ -634,16 +596,16 @@ exports[`<AnswerSessionPage /> Should render and match the snapshot 1`] = `
   transition: 0.3s;
 }
 
-.c46:hover {
+.c44:hover {
   cursor: pointer;
 }
 
-.c46:focus {
+.c44:focus {
   outline: none;
   outline-offset: 0px;
 }
 
-.c48 {
+.c46 {
   border: none;
   width: -webkit-max-content;
   width: -moz-max-content;
@@ -664,16 +626,16 @@ exports[`<AnswerSessionPage /> Should render and match the snapshot 1`] = `
   transition: 0.3s;
 }
 
-.c48:hover {
+.c46:hover {
   cursor: pointer;
 }
 
-.c48:focus {
+.c46:focus {
   outline: none;
   outline-offset: 0px;
 }
 
-.c49 {
+.c47 {
   border: none;
   width: -webkit-max-content;
   width: -moz-max-content;
@@ -694,16 +656,16 @@ exports[`<AnswerSessionPage /> Should render and match the snapshot 1`] = `
   transition: 0.3s;
 }
 
-.c49:hover {
+.c47:hover {
   cursor: pointer;
 }
 
-.c49:focus {
+.c47:focus {
   outline: none;
   outline-offset: 0px;
 }
 
-.c50 {
+.c48 {
   border: none;
   width: -webkit-max-content;
   width: -moz-max-content;
@@ -723,25 +685,25 @@ exports[`<AnswerSessionPage /> Should render and match the snapshot 1`] = `
   transition: 0.3s;
 }
 
-.c50:hover {
+.c48:hover {
   cursor: pointer;
 }
 
-.c50:focus {
+.c48:focus {
   outline: none;
   outline-offset: 0px;
 }
 
-.c47 {
+.c45 {
   color: #FFFFFF;
   white-space: pre;
 }
 
-.c41 {
+.c39 {
   color: #B727EA;
 }
 
-.c35 {
+.c33 {
   position: absolute;
   right: 16px;
   top: 16px;
@@ -780,14 +742,14 @@ exports[`<AnswerSessionPage /> Should render and match the snapshot 1`] = `
 }
 
 @media only screen and (max-width:1280px) {
-  .c15 {
+  .c13 {
     position: fixed;
     left: calc(0px - 280px);
   }
 }
 
 @media only screen and (min-width:1400px) {
-  .c17 {
+  .c15 {
     display: none;
   }
 }
@@ -819,7 +781,7 @@ exports[`<AnswerSessionPage /> Should render and match the snapshot 1`] = `
 }
 
 @media only screen and (max-width:1280px) {
-  .c31 {
+  .c29 {
     width: 100vw;
   }
 }
@@ -874,26 +836,9 @@ exports[`<AnswerSessionPage /> Should render and match the snapshot 1`] = `
           <div
             class="c9"
           >
-            <button
-              aria-label="Toggle notifications visibility"
-              class="c10"
-              height="24"
-              id="NOTIFICATION_BUTTON_ID"
-              title="Toggle notifications visibility"
-              width="24"
-            >
-              <img
-                alt="cross"
-                src="IMAGE_MOCK"
-              />
-            </button>
-          </div>
-          <div
-            class="c11"
-          >
             <div />
             <div
-              class="c12"
+              class="c10"
               color="#FFFFFF"
               data-private="true"
               height="30"
@@ -904,7 +849,7 @@ exports[`<AnswerSessionPage /> Should render and match the snapshot 1`] = `
               </div>
             </div>
             <div
-              class="c13 user-name-info"
+              class="c11 user-name-info"
               data-private="true"
             >
               first-name last-name
@@ -914,44 +859,44 @@ exports[`<AnswerSessionPage /> Should render and match the snapshot 1`] = `
       </div>
     </div>
     <div
-      class="c14"
+      class="c12"
       style="margin-left: 0px; margin-right: 0px; display: flex; flex-wrap: wrap; flex-grow: 0; flex-shrink: 0; align-items: normal; justify-content: flex-start;"
     >
       <div
         style="box-sizing: border-box; min-height: 1px; position: relative; padding-left: 0px; padding-right: 0px; max-width: 100%; margin-left: 0%;"
       >
         <div
-          class="c15"
+          class="c13"
         >
           <button
             aria-label="Hover to show sidebar"
-            class="c16 c17"
+            class="c14 c15"
             title="Hover to show sidebar"
           >
             <img
               alt="Show sidebar icon"
-              class="c18"
+              class="c16"
               src="IMAGE_MOCK"
             />
           </button>
           <p
-            class="c19 c20"
+            class="c17 c18"
           >
             CIAS Panel
           </p>
           <div
-            class="c21"
+            class="c19"
             width="100%"
           >
             <a
-              class="c22"
+              class="c20"
               href="/"
             >
               <img
                 src="IMAGE_MOCK"
               />
               <p
-                class="c23"
+                class="c21"
                 font-size="15"
                 font-weight="bold"
               >
@@ -959,14 +904,14 @@ exports[`<AnswerSessionPage /> Should render and match the snapshot 1`] = `
               </p>
             </a>
             <a
-              class="c24"
+              class="c22"
               href="/users"
             >
               <img
                 src="IMAGE_MOCK"
               />
               <p
-                class="c23"
+                class="c21"
                 font-size="15"
                 font-weight="bold"
               >
@@ -974,14 +919,14 @@ exports[`<AnswerSessionPage /> Should render and match the snapshot 1`] = `
               </p>
             </a>
             <a
-              class="c24"
+              class="c22"
               href="/teams"
             >
               <img
                 src="IMAGE_MOCK"
               />
               <p
-                class="c23"
+                class="c21"
                 font-size="15"
                 font-weight="bold"
               >
@@ -990,18 +935,18 @@ exports[`<AnswerSessionPage /> Should render and match the snapshot 1`] = `
             </a>
           </div>
           <div
-            class="c25"
+            class="c23"
             overflow="hidden"
             width="100%"
           >
             <p
-              class="c26 c27"
+              class="c24 c25"
               width="100%"
             >
               Reporting panel
             </p>
             <button
-              class="c28"
+              class="c26"
               color="secondary"
               radius="5px"
               width="auto"
@@ -1009,11 +954,11 @@ exports[`<AnswerSessionPage /> Should render and match the snapshot 1`] = `
               + Add Organization
             </button>
             <div
-              class="c29"
+              class="c27"
               overflow="auto"
             >
               <div
-                class="c30"
+                class="c28"
                 color="#B727EA"
                 size="30"
                 width="6"
@@ -1026,11 +971,11 @@ exports[`<AnswerSessionPage /> Should render and match the snapshot 1`] = `
         style="box-sizing: border-box; min-height: 1px; position: relative; padding-left: 0px; padding-right: 0px; width: 100%; flex-basis: 0px; flex-grow: 1; flex-shrink: 0; max-width: 100%; margin-left: 0%;"
       >
         <div
-          class="c31"
+          class="c29"
           id="main-app-container"
         >
           <div
-            class="c32 c33"
+            class="c30 c31"
             direction="column"
             display="flex"
             height="100% !important"
@@ -1039,7 +984,7 @@ exports[`<AnswerSessionPage /> Should render and match the snapshot 1`] = `
             style="box-sizing: border-box; position: relative; margin-left: auto; margin-right: auto; padding-left: 15px; padding-right: 15px; max-width: 960px;"
           >
             <div
-              class="c34 c35"
+              class="c32 c33"
               width="max-content"
             >
               <div
@@ -1047,7 +992,7 @@ exports[`<AnswerSessionPage /> Should render and match the snapshot 1`] = `
               >
                 <div
                   align="flex-start"
-                  class="c36"
+                  class="c34"
                   style="box-sizing: border-box; min-height: 1px; position: relative; width: 100%; flex-basis: 0px; flex-grow: 1; flex-shrink: 0; max-width: 100%; margin-left: 0%; padding: 8px;"
                 >
                   <div
@@ -1055,15 +1000,15 @@ exports[`<AnswerSessionPage /> Should render and match the snapshot 1`] = `
                   >
                     <div
                       align="flex-start"
-                      class="c36"
+                      class="c34"
                       style="box-sizing: border-box; min-height: 1px; position: relative; padding-left: 15px; padding-right: 15px; width: 25%; flex-basis: 25%; flex-grow: 0; flex-shrink: 0; max-width: 25%; margin-left: 0%;"
                     >
                       <div
-                        class="c37"
+                        class="c35"
                         opacity="1"
                       >
                         <img
-                          class="c38"
+                          class="c36"
                           role="presentation"
                           src="IMAGE_MOCK"
                         />
@@ -1071,22 +1016,22 @@ exports[`<AnswerSessionPage /> Should render and match the snapshot 1`] = `
                     </div>
                     <div
                       align="flex-start"
-                      class="c36"
+                      class="c34"
                       style="box-sizing: border-box; min-height: 1px; position: relative; padding-left: 15px; padding-right: 15px; width: 75%; flex-basis: 75%; flex-grow: 0; flex-shrink: 0; max-width: 75%; margin-left: 0%;"
                     >
                       <p
-                        class="c39"
+                        class="c37"
                         font-weight="bold"
                       >
                         Something went wrong? Have a new idea?
                       </p>
                       <p
-                        class="c40"
+                        class="c38"
                         color="#B727EA"
                         font-weight="bold"
                       >
                         <a
-                          class="c41"
+                          class="c39"
                           href="https://msu.co1.qualtrics.com/jfe/form/SV_6S9MV7pPpoqFwTY"
                           target="_blank"
                         >
@@ -1098,12 +1043,12 @@ exports[`<AnswerSessionPage /> Should render and match the snapshot 1`] = `
                 </div>
                 <div
                   align="end"
-                  class="c42"
+                  class="c40"
                   style="box-sizing: border-box; min-height: 1px; position: relative; width: auto; flex-basis: auto; flex-grow: 0; flex-shrink: 0; max-width: 100%; margin-left: 0%; padding: 0px;"
                 >
                   <button
                     aria-label="Close"
-                    class="c43"
+                    class="c41"
                     title="Close"
                   >
                     <img
@@ -1115,11 +1060,11 @@ exports[`<AnswerSessionPage /> Should render and match the snapshot 1`] = `
               </div>
             </div>
             <div
-              class="c44"
+              class="c42"
               style="box-sizing: border-box; position: relative; margin-left: auto; margin-right: auto; padding-left: 15px; padding-right: 15px;"
             >
               <h1
-                class="c45"
+                class="c43"
               >
                 My Dashboard
               </h1>
@@ -1128,7 +1073,7 @@ exports[`<AnswerSessionPage /> Should render and match the snapshot 1`] = `
               />
             </div>
             <div
-              class="c44"
+              class="c42"
               style="box-sizing: border-box; position: relative; margin-left: auto; margin-right: auto; padding-left: 15px; padding-right: 15px;"
             >
               <div
@@ -1145,12 +1090,12 @@ exports[`<AnswerSessionPage /> Should render and match the snapshot 1`] = `
                       style="box-sizing: border-box; min-height: 1px; position: relative; padding-left: 15px; padding-right: 15px; width: auto; flex-basis: auto; flex-grow: 0; flex-shrink: 0; max-width: 100%; margin-left: 0%; margin-top: 5px; margin-bottom: 5px;"
                     >
                       <button
-                        class="c46"
+                        class="c44"
                         color="#107969"
                         value="draft"
                       >
                         <p
-                          class="c47"
+                          class="c45"
                           color="#FFFFFF"
                         >
                           Draft
@@ -1161,12 +1106,12 @@ exports[`<AnswerSessionPage /> Should render and match the snapshot 1`] = `
                       style="box-sizing: border-box; min-height: 1px; position: relative; padding-left: 15px; padding-right: 15px; width: auto; flex-basis: auto; flex-grow: 0; flex-shrink: 0; max-width: 100%; margin-left: 0%; margin-top: 5px; margin-bottom: 5px;"
                     >
                       <button
-                        class="c48"
+                        class="c46"
                         color="#8CBD00"
                         value="published"
                       >
                         <p
-                          class="c47"
+                          class="c45"
                           color="#FFFFFF"
                         >
                           Published
@@ -1177,12 +1122,12 @@ exports[`<AnswerSessionPage /> Should render and match the snapshot 1`] = `
                       style="box-sizing: border-box; min-height: 1px; position: relative; padding-left: 15px; padding-right: 15px; width: auto; flex-basis: auto; flex-grow: 0; flex-shrink: 0; max-width: 100%; margin-left: 0%; margin-top: 5px; margin-bottom: 5px;"
                     >
                       <button
-                        class="c49"
+                        class="c47"
                         color="#F0684A"
                         value="closed"
                       >
                         <p
-                          class="c47"
+                          class="c45"
                           color="#FFFFFF"
                         >
                           Closed
@@ -1193,12 +1138,12 @@ exports[`<AnswerSessionPage /> Should render and match the snapshot 1`] = `
                       style="box-sizing: border-box; min-height: 1px; position: relative; padding-left: 15px; padding-right: 15px; width: auto; flex-basis: auto; flex-grow: 0; flex-shrink: 0; max-width: 100%; margin-left: 0%; margin-top: 5px; margin-bottom: 5px;"
                     >
                       <button
-                        class="c50"
+                        class="c48"
                         color="#0E0E0E"
                         value="archived"
                       >
                         <p
-                          class="c47"
+                          class="c45"
                           color="#FFFFFF"
                         >
                           Archived
@@ -1217,17 +1162,17 @@ exports[`<AnswerSessionPage /> Should render and match the snapshot 1`] = `
                       style="box-sizing: border-box; min-height: 1px; position: relative; padding-left: 15px; padding-right: 15px; width: 100%; flex-basis: 0px; flex-grow: 1; flex-shrink: 0; max-width: 100%; margin-left: 0%;"
                     >
                       <div
-                        class="c51"
+                        class="c49"
                       >
                         <input
                           aria-label="Filter Interventions by name"
-                          class="c52"
+                          class="c50"
                           placeholder="Filter by name"
                           type="text"
                         />
                         <img
                           alt="search"
-                          class="c53"
+                          class="c51"
                           src="IMAGE_MOCK"
                         />
                         
@@ -1241,7 +1186,7 @@ exports[`<AnswerSessionPage /> Should render and match the snapshot 1`] = `
               />
             </div>
             <div
-              class="c54"
+              class="c52"
             >
               <div
                 class="virtual-grid-auto-sizer"

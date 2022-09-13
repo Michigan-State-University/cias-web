@@ -6,12 +6,14 @@ import { CustomDayjsLocale } from 'utils/dayjs';
 
 import { ConversationInfoBox } from 'components/ConversationInfoBox';
 
-type Props = {
+export type Props = {
   notification: Notification;
+  timeFormatLocale: CustomDayjsLocale;
 };
 
 const SingleNotification = ({
   notification: { createdAt, isRead, data },
+  timeFormatLocale,
 }: Props) => {
   const { message } = data;
 
@@ -23,7 +25,7 @@ const SingleNotification = ({
       messageContent={message}
       messageSentByCurrentUser={false}
       interlocutorData={data}
-      timeFormatLocale={CustomDayjsLocale.EN_LONG_RELATIVE_TIME}
+      timeFormatLocale={timeFormatLocale}
     />
   );
 };

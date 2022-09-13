@@ -7,5 +7,6 @@ import * as actions from './actions';
 export type NotificationsAction = ActionType<typeof actions>;
 
 export type NotificationsState = {
+  notificationsListVisible: boolean;
   notifications: Notification[];
 };

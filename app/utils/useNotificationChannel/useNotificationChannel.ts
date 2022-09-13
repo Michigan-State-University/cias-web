@@ -20,8 +20,9 @@ import {
 } from './constants';
 
 export const useNotificationChannel = () => {
-  const isLoggedIn = useSelector(makeSelectIsUserLoggedIn());
   const dispatch = useDispatch();
+
+  const isLoggedIn = useSelector(makeSelectIsUserLoggedIn());
 
   const onUnreadNotificationsFetched = (
     data: UnreadNotificationsFetchedData,

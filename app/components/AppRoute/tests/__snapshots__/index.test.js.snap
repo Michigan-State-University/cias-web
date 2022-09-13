@@ -3,16 +3,7 @@
 exports[`<AppRoute /> Should redirect to login 1`] = `<div />`;
 
 exports[`<AppRoute /> Should render and match the snapshot 1`] = `
-.c9 {
-  width: auto;
-  height: auto;
-  display: block;
-  border-radius: 5px;
-  position: relative;
-  color: unset;
-}
-
-.c13 {
+.c11 {
   width: auto;
   height: auto;
   display: block;
@@ -65,7 +56,7 @@ exports[`<AppRoute /> Should render and match the snapshot 1`] = `
   height: auto;
 }
 
-.c12 {
+.c10 {
   width: 30px;
   height: 30px;
   font-size: 15px;
@@ -127,7 +118,7 @@ exports[`<AppRoute /> Should render and match the snapshot 1`] = `
   gap: 32px;
 }
 
-.c11 {
+.c9 {
   position: relative;
   display: -webkit-box;
   display: -webkit-flex;
@@ -140,41 +131,12 @@ exports[`<AppRoute /> Should render and match the snapshot 1`] = `
   gap: 10px;
 }
 
-.c10 {
-  height: 28px;
-  width: 28px;
-  display: -webkit-box;
-  display: -webkit-flex;
-  display: -ms-flexbox;
-  display: flex;
-  -webkit-box-pack: center;
-  -webkit-justify-content: center;
-  -ms-flex-pack: center;
-  justify-content: center;
-  -webkit-align-items: center;
-  -webkit-box-align: center;
-  -ms-flex-align: center;
-  align-items: center;
-  border-radius: 4px;
-  background: #E9F1FB;
-  margin-right: 35px;
-  cursor: pointer;
-  border: none;
-  outline: none;
-  padding: 0;
-  background-color: rgba(255,255,255,1);
-  width: 24px;
-  height: 24px;
-  z-index: 11;
-  margin-right: 0;
-}
-
 .c0 {
   padding: 0 !important;
   margin: 0 !important;
 }
 
-.c15 {
+.c13 {
   position: relative;
   margin-top: 70px;
   height: calc(100vh - 70px) !important;
@@ -182,7 +144,7 @@ exports[`<AppRoute /> Should render and match the snapshot 1`] = `
   overflow: auto;
 }
 
-.c14 {
+.c12 {
   overflow: hidden;
 }
 
@@ -213,7 +175,7 @@ exports[`<AppRoute /> Should render and match the snapshot 1`] = `
 }
 
 @media only screen and (max-width:1280px) {
-  .c15 {
+  .c13 {
     width: 100vw;
   }
 }
@@ -262,26 +224,9 @@ exports[`<AppRoute /> Should render and match the snapshot 1`] = `
           <div
             class="c9"
           >
-            <button
-              aria-label="Toggle notifications visibility"
-              class="c10"
-              height="24"
-              id="NOTIFICATION_BUTTON_ID"
-              title="Toggle notifications visibility"
-              width="24"
-            >
-              <img
-                alt="cross"
-                src="IMAGE_MOCK"
-              />
-            </button>
-          </div>
-          <div
-            class="c11"
-          >
             <div />
             <div
-              class="c12"
+              class="c10"
               color="#FFFFFF"
               data-private="true"
               height="30"
@@ -292,7 +237,7 @@ exports[`<AppRoute /> Should render and match the snapshot 1`] = `
               </div>
             </div>
             <div
-              class="c13 user-name-info"
+              class="c11 user-name-info"
               data-private="true"
             >
               John Doe
@@ -302,14 +247,14 @@ exports[`<AppRoute /> Should render and match the snapshot 1`] = `
       </div>
     </div>
     <div
-      class="c14"
+      class="c12"
       style="margin-left: 0px; margin-right: 0px; display: flex; flex-wrap: wrap; flex-grow: 0; flex-shrink: 0; align-items: normal; justify-content: flex-start;"
     >
       <div
         style="box-sizing: border-box; min-height: 1px; position: relative; padding-left: 0px; padding-right: 0px; width: 100%; flex-basis: 0px; flex-grow: 1; flex-shrink: 0; max-width: 100%; margin-left: 0%;"
       >
         <div
-          class="c15"
+          class="c13"
           id="main-app-container"
         />
       </div>

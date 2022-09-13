@@ -1,27 +1,31 @@
-import React, { useMemo, useState } from 'react';
+import React, { useMemo } from 'react';
 import { useIntl } from 'react-intl';
-import { useInjectReducer } from 'redux-injectors';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
+
+import { useRoleManager } from 'models/User/RolesManager';
 
 import { boxShadows, colors } from 'theme';
 
+import { CustomDayjsLocale } from 'utils/dayjs';
+
 import {
   makeSelectNotifications,
-  withNotificationsReducer,
+  makeSelectNotificationsListVisible,
+  setNotificationsListVisible,
 } from 'global/reducers/notifications';
 
 import { PopoverModal } from 'components/Modal';
 import H2 from 'components/H2';
 import Box from 'components/Box';
 import Divider from 'components/Divider';
+import SingleNotification from 'components/SingleNotification';
 
 import {
   NOTIFICATIONS_LIST_MAX_HEIGHT,
-  NOTIFICATIONS_POPOVER_SCREEN_PADDING,
   NOTIFICATIONS_LIST_MAX_WIDTH,
+  NOTIFICATIONS_POPOVER_SCREEN_PADDING,
 } from './constants';
 import messages from './messages';
-import SingleNotification from './components/SingleNotification';
 import {
   NOTIFICATION_BUTTON_ID,
   NotificationsButton,
@@ -29,19 +33,28 @@ import {
 
 const NotificationsPanel = () => {
   const { formatMessage } = useIntl();
+  const dispatch = useDispatch();
 
-  useInjectReducer(withNotificationsReducer);
+  const { canDisplayLiveChatNotifications } = useRoleManager();
+
+  const notificationsListVisible = useSelector(
+    makeSelectNotificationsListVisible(),
+  );
   const notifications = useSelector(makeSelectNotifications());
 
-  const [notificationBoxVisible, setNotificationBoxVisible] = useState(false);
   const toggleNotifications = () =>
-    setNotificationBoxVisible((value) => !value);
-  const hideNotifications = () => setNotificationBoxVisible(false);
+    dispatch(setNotificationsListVisible(!notificationsListVisible));
+  const closeNotifications = () => dispatch(setNotificationsListVisible(false));
 
   const unreadNotificationsCount = useMemo(
     () => notifications.filter(({ isRead }) => !isRead).length,
     [notifications],
   );
+
+  // Remove or update this check when making other roles see notifications
+  if (!canDisplayLiveChatNotifications) {
+    return null;
+  }
 
   return (
     <>
@@ -49,11 +62,11 @@ const NotificationsPanel = () => {
         onClick={toggleNotifications}
         unreadNotificationsCount={unreadNotificationsCount}
       />
-      {notificationBoxVisible && (
+      {notificationsListVisible && (
         <PopoverModal
           referenceElement={NOTIFICATION_BUTTON_ID}
           defaultPlacement="bottom"
-          onClose={hideNotifications}
+          onClose={closeNotifications}
           contentPadding="24px 24px 8px 24px"
           offsetOptions={40}
           modalStyle={{
@@ -81,6 +94,7 @@ const NotificationsPanel = () => {
               <SingleNotification
                 key={notification.id}
                 notification={notification}
+                timeFormatLocale={CustomDayjsLocale.EN_LONG_RELATIVE_TIME}
               />
             ))}
           </Box>
