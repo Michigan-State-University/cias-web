@@ -1,12 +1,17 @@
-import React, { useMemo } from 'react';
+import React, { useEffect, useMemo } from 'react';
+import { useDispatch } from 'react-redux';
+import { useHistory } from 'react-router-dom';
 
 import { Conversation, InterventionConversation } from 'models/LiveChat';
+
+import { openConversation } from 'global/reducers/liveChat';
 
 import {
   ArchiveConversationData,
   ReadMessageData,
   SendMessageData,
 } from 'utils/useConversationChannel';
+import useQuery from 'utils/useQuery';
 
 import { MessagesSectionBody } from './containers/MessagesSectionBody';
 import MessagesSectionHeader from './containers/MessagesSectionHeader';
@@ -48,6 +53,16 @@ export const LiveChatNavigatorPanel = ({
     () => Object.values(interventionConversations),
     [interventionConversations],
   );
+  const openedConversationId = useQuery('conversation_id');
+  const dispatch = useDispatch();
+  const { replace } = useHistory();
+
+  useEffect(() => {
+    if (openedConversationId) {
+      dispatch(openConversation(openedConversationId));
+      replace({ search: undefined });
+    }
+  }, [openedConversationId]);
 
   const conversationsUnavailable =
     !conversationsLoading &&

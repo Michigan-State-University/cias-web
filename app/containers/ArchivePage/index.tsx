@@ -21,6 +21,7 @@ import i18nMessages from './messages';
 export const ArchivePage = () => {
   const { formatMessage } = useIntl();
   const dispatch = useDispatch();
+
   useInjectReducer(withLiveChatReducer);
   useInjectSaga(withAllLiveChatSagas);
 

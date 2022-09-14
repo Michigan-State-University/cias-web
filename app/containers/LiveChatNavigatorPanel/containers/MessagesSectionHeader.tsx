@@ -1,20 +1,25 @@
 import React from 'react';
 import { useIntl } from 'react-intl';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 
 import ArchiveIcon from 'assets/svg/archive2.svg';
+import DownloadIcon from 'assets/svg/download-icon.svg';
+import TranscriptIcon from 'assets/svg/transcript-icon.svg';
 
 import { ArchiveConversationData } from 'utils/useConversationChannel';
+import { getFileUrl } from 'utils/getApiFileUrl';
 
 import {
   makeSelectArchivingConversation,
   makeSelectOpenedConversation,
+  generateConversationTranscriptRequest,
 } from 'global/reducers/liveChat';
 
 import Icon from 'components/Icon';
 import Text from 'components/Text';
 import TextButton from 'components/Button/TextButton';
 import Row from 'components/Row';
+import FileDownload from 'components/FileDownload';
 import { ModalType, useModal } from 'components/Modal';
 
 import i18nMessages from '../messages';
@@ -24,11 +29,19 @@ export type Props = {
   onArchiveConversation?: (data: ArchiveConversationData) => void;
 };
 
+const topFunctionButtonProps = {
+  display: 'flex',
+  align: 'center',
+  gap: 8,
+  fontWeight: 'medium',
+};
+
 const MessageSectionHeader = ({ onArchiveConversation }: Props) => {
   const { formatMessage } = useIntl();
 
   const conversation = useSelector(makeSelectOpenedConversation());
   const archivingConversation = useSelector(makeSelectArchivingConversation());
+  const dispatch = useDispatch();
 
   const archiveConversation = () => {
     if (onArchiveConversation && conversation) {
@@ -54,23 +67,50 @@ const MessageSectionHeader = ({ onArchiveConversation }: Props) => {
     },
   });
 
+  const generateTranscript = () => {
+    if (conversation) {
+      dispatch(generateConversationTranscriptRequest(conversation.id));
+    }
+  };
+
   return (
     <>
       <ArchiveConfirmationModal />
       <SectionHeader title={formatMessage(i18nMessages.message)} px={24}>
         {conversation && (
           <Row align="center" gap={24}>
-            {/* place download button here */}
+            <FileDownload
+              url={getFileUrl(conversation.transcript?.url ?? '')}
+              disabled={!conversation.transcript}
+              {...topFunctionButtonProps}
+            >
+              <TextButton
+                buttonProps={topFunctionButtonProps}
+                disabled={!conversation.transcript}
+              >
+                <Icon
+                  src={DownloadIcon}
+                  alt={formatMessage(i18nMessages.downloadTranscriptIconAlt)}
+                />
+                <Text>{formatMessage(i18nMessages.downloadTranscript)}</Text>
+              </TextButton>
+            </FileDownload>
+            <TextButton
+              buttonProps={topFunctionButtonProps}
+              onClick={generateTranscript}
+              disabled={conversation.transcript && conversation.archived}
+            >
+              <Icon
+                alt={formatMessage(i18nMessages.generateTranscriptIconAlt)}
+                src={TranscriptIcon}
+              />
+              <Text>{formatMessage(i18nMessages.generateTranscript)}</Text>
+            </TextButton>
             {!conversation.archived && onArchiveConversation && (
               <TextButton
                 loading={archivingConversation}
                 onClick={openArchiveConfirmationModal}
-                buttonProps={{
-                  display: 'flex',
-                  align: 'center',
-                  gap: 8,
-                  fontWeight: 'medium',
-                }}
+                buttonProps={topFunctionButtonProps}
                 spinnerProps={{
                   size: 22,
                 }}

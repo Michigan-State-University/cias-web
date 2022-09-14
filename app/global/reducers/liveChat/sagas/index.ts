@@ -6,6 +6,7 @@ import { fetchChatMessagesSaga } from './fetchChatMessages';
 import { fetchActiveConversationsSaga } from './fetchActiveConversations';
 import { fetchArchivedConversationsSaga } from './fetchArchivedConversations';
 import { fetchNavigatorHelpingMaterialsSaga } from './fetchNavigatorHelpingMaterials';
+import { generateConversationTranscriptSaga } from './generateConversationTranscript';
 
 export { fetchChatMessagesSaga, fetchActiveConversationsSaga };
 
@@ -17,6 +18,7 @@ function* allLiveChatSagas() {
     fetchActiveConversationsSaga(),
     fetchArchivedConversationsSaga(),
     fetchNavigatorHelpingMaterialsSaga(),
+    generateConversationTranscriptSaga(),
   ]);
 }
 

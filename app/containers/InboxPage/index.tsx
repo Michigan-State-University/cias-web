@@ -23,6 +23,7 @@ import i18nMessages from './messages';
 export const InboxPage = () => {
   const { formatMessage } = useIntl();
   const dispatch = useDispatch();
+
   useInjectReducer(withLiveChatReducer);
   useInjectSaga(withAllLiveChatSagas);
 

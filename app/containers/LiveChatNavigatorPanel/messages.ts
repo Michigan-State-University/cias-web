@@ -77,6 +77,31 @@ export default defineMessages({
     id: `${scope}.archived`,
     defaultMessage: 'Archived',
   },
+  downloadTranscript: {
+    id: `${scope}.downloadTranscript`,
+    defaultMessage: 'Download CSV',
+  },
+  downloadTranscriptIconAlt: {
+    id: `${scope}.downloadTranscriptIconAlt`,
+    defaultMessage: 'Download CSV icon',
+  },
+  generateTranscript: {
+    id: `${scope}.generateTranscript`,
+    defaultMessage: 'Generate CSV',
+  },
+  generateTranscriptIconAlt: {
+    id: `${scope}.generateTranscriptIconAlt`,
+    defaultMessage: 'Generate CSV icon',
+  },
+  generateConversationTranscriptSuccess: {
+    id: `${scope}.generateConversationTranscriptSuccess`,
+    defaultMessage:
+      'Generation of your transcript has just begun. You will receive an email after it is done.',
+  },
+  generateConversationTranscriptError: {
+    id: `${scope}.generateConversationTranscriptError`,
+    defaultMessage: 'Could not generate conversation transcript.',
+  },
   inbox: {
     id: `${scope}.inbox`,
     defaultMessage: 'Inbox',

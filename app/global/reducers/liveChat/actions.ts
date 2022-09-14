@@ -38,6 +38,7 @@ import {
   FETCH_NAVIGATOR_HELPING_MATERIALS_REQUEST,
   FETCH_NAVIGATOR_HELPING_MATERIALS_SUCCESS,
   FETCH_NAVIGATOR_HELPING_MATERIALS_ERROR,
+  GENERATE_CONVERSATION_TRANSCRIPT_REQUEST,
   ON_CURRENT_SCREEN_TITLE_CHANGED,
 } from './constants';
 
@@ -191,6 +192,11 @@ export const fetchNavigatorHelpingMaterialsError = createAction(
   FETCH_NAVIGATOR_HELPING_MATERIALS_ERROR,
   (action) => (interventionId: string, error: ApiError) =>
     action({ interventionId, error }),
+);
+
+export const generateConversationTranscriptRequest = createAction(
+  GENERATE_CONVERSATION_TRANSCRIPT_REQUEST,
+  (action) => (conversationId: string) => action({ conversationId }),
 );
 
 export const onCurrentScreenTitleChanged = createAction(

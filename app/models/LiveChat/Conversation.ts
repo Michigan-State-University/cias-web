@@ -1,3 +1,4 @@
+import { AppFile } from 'models/File';
 import { LastMessage } from './Message';
 import { Interlocutor } from './Interlocutor';
 
@@ -8,6 +9,7 @@ export type DenormalizedConversation = {
   archived: boolean;
   interventionId: string;
   interventionName: string;
+  transcript: Nullable<AppFile>;
   currentScreenTitle: string;
 };
 
@@ -17,5 +19,6 @@ export type Conversation = {
   lastMessage: LastMessage;
   liveChatInterlocutors: Record<Interlocutor['id'], Interlocutor>;
   archived: boolean;
+  transcript: Nullable<AppFile>;
   currentScreenTitle: string;
 };
