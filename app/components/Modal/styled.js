@@ -106,18 +106,17 @@ export const DimBackground = styled(Box)`
       }
     `}
 
-  ${({ $specialMobileView, $forceMobile }) =>
-    $specialMobileView &&
-    $forceMobile &&
-    css`
-      position: absolute !important;
-      ${mobileDimStyle};
-    `}
-
   ${({ $forceDim }) =>
     $forceDim &&
     css`
       position: fixed !important;
+      ${mobileDimStyle};
+    `}
+
+  ${({ $forceMobile }) =>
+    $forceMobile &&
+    css`
+      position: absolute !important;
       ${mobileDimStyle};
     `}
 `;

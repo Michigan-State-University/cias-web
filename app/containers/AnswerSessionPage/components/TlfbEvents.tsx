@@ -212,6 +212,7 @@ const TlfbEvents = ({
           borderColor: 'transparent',
         }}
         forceDim
+        forceMobile={isMobilePreview}
         excludeRefDim={{
           backgroundColor: colors.white,
           padding: '16px',

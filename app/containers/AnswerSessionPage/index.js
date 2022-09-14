@@ -666,6 +666,7 @@ export function AnswerSessionPage({
                   position="relative"
                   height="100%"
                   width="100%"
+                  borderRadius="0px"
                 >
                   <Box width="100%">
                     <Row
