@@ -32,6 +32,7 @@ import {
   fetchNavigatorHelpingMaterialsRequest,
   fetchNavigatorHelpingMaterialsSuccess,
   fetchNavigatorHelpingMaterialsError,
+  onCurrentScreenTitleChanged,
 } from './actions';
 import { LiveChatAction, LiveChatState } from './types';
 
@@ -281,6 +282,11 @@ export const liveChatReducer = (
         navigatorHelpingMaterials.error = error;
         navigatorHelpingMaterials.loading = false;
         break;
+      }
+      case getType(onCurrentScreenTitleChanged): {
+        const { conversationId, currentScreenTitle } = payload;
+        const conversation = draft.activeConversations[conversationId];
+        conversation.currentScreenTitle = currentScreenTitle;
       }
     }
   });

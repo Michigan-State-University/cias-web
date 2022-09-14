@@ -50,6 +50,11 @@ export type FetchLiveChatSetupData = {
   interventionId: string;
 };
 
+export type ChangeScreenTitleData = {
+  conversationId: string;
+  currentScreenTitle: string;
+};
+
 export type LiveChatSetupFetchedData = ApiData<LiveChatSetup>;
 
 // SOCKET MESSAGES
@@ -97,6 +102,11 @@ export type LiveChatSetupFetchedSocketMessage = SocketMessage<
 export type NavigatorAvailableSocketMessage =
   SocketMessage<ConversationChannelMessageTopic.NAVIGATOR_AVAILABLE>;
 
+export type CurrentScreenTitleChangedMessage = SocketMessage<
+  ConversationChannelMessageTopic.CURRENT_SCREEN_TITLE_CHANGED,
+  ChangeScreenTitleData
+>;
+
 // Create a union type with any new SocketMessage type
 export type ConversationChannelMessage =
   | MessageSentSocketMessage
@@ -107,7 +117,8 @@ export type ConversationChannelMessage =
   | ConversationArchivedSocketMessage
   | NavigatorUnavailableErrorSocketErrorMessage
   | LiveChatSetupFetchedSocketMessage
-  | NavigatorAvailableSocketMessage;
+  | NavigatorAvailableSocketMessage
+  | CurrentScreenTitleChangedMessage;
 
 // SOCKET ACTIONS
 
@@ -136,13 +147,19 @@ export type FetchLiveChatSetupSocketAction = SocketAction<
   FetchLiveChatSetupData
 >;
 
+export type ChangeScreenTitleAction = SocketAction<
+  ConversationChannelActionName.ON_CURRENT_SCREEN_TITLE_CHANGED,
+  ChangeScreenTitleData
+>;
+
 // Create a union type with any new SocketAction type
 export type ConversationChannelAction =
   | SendMessageSocketAction
   | ReadMessageSocketAction
   | CreateConversationSocketAction
   | ArchiveConversationSocketAction
-  | FetchLiveChatSetupSocketAction;
+  | FetchLiveChatSetupSocketAction
+  | ChangeScreenTitleAction;
 
 export type ConversationChannelConnectionParams = {
   intervention_id?: string;

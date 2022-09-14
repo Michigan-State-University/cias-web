@@ -75,4 +75,16 @@ export default defineMessages({
     defaultMessage:
       'The navigator just arrived. If you have any questions feel free to ask.',
   },
+  currentScreenTitle: {
+    id: `${scope}.currentScreenTitle`,
+    defaultMessage: '{sessionName} - <b>{screenTitle}</b>',
+  },
+  initialScreen: {
+    id: `${scope}.initialScreen`,
+    defaultMessage: 'Initial screen',
+  },
+  interventionPageTitle: {
+    id: `${scope}.interventionPageTitle`,
+    defaultMessage: 'Intervention page',
+  },
 });

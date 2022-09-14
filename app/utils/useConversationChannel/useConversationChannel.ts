@@ -25,6 +25,7 @@ import {
   setFetchingLiveChatSetup,
   withLiveChatReducer,
   closeConversation,
+  onCurrentScreenTitleChanged,
 } from 'global/reducers/liveChat';
 import { makeSelectUserId } from 'global/reducers/auth';
 
@@ -41,6 +42,7 @@ import {
   ConversationCreatedData,
   ConversationChannelConnectionParams,
   LiveChatSetupFetchedData,
+  ChangeScreenTitleData,
 } from './types';
 import {
   CONVERSATION_CHANNEL_NAME,
@@ -119,6 +121,13 @@ export const useConversationChannel = (interventionId?: string) => {
     dispatch(setNavigatorUnavailable(false));
   };
 
+  const onChangedScreenTitle = ({
+    conversationId,
+    currentScreenTitle,
+  }: ChangeScreenTitleData) => {
+    dispatch(onCurrentScreenTitleChanged(conversationId, currentScreenTitle));
+  };
+
   const messageListener: SocketMessageListener<ConversationChannelMessage> = ({
     data,
     topic,
@@ -151,6 +160,9 @@ export const useConversationChannel = (interventionId?: string) => {
         break;
       case ConversationChannelMessageTopic.NAVIGATOR_AVAILABLE:
         onNavigatorAvailable();
+        break;
+      case ConversationChannelMessageTopic.CURRENT_SCREEN_TITLE_CHANGED:
+        onChangedScreenTitle(data);
         break;
       default:
         break;
@@ -206,6 +218,13 @@ export const useConversationChannel = (interventionId?: string) => {
     }
   };
 
+  const changeScreenTitle = (data: ChangeScreenTitleData) => {
+    channel?.perform({
+      name: ConversationChannelActionName.ON_CURRENT_SCREEN_TITLE_CHANGED,
+      data,
+    });
+  };
+
   return {
     isConnected: channel?.state === 'connected',
     sendMessage,
@@ -213,5 +232,6 @@ export const useConversationChannel = (interventionId?: string) => {
     createConversation,
     archiveConversation,
     fetchLiveChatSetup,
+    changeScreenTitle,
   };
 };

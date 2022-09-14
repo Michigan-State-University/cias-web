@@ -8,6 +8,7 @@ export type DenormalizedConversation = {
   archived: boolean;
   interventionId: string;
   interventionName: string;
+  currentScreenTitle: string;
 };
 
 export type Conversation = {
@@ -16,4 +17,5 @@ export type Conversation = {
   lastMessage: LastMessage;
   liveChatInterlocutors: Record<Interlocutor['id'], Interlocutor>;
   archived: boolean;
+  currentScreenTitle: string;
 };

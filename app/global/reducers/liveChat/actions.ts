@@ -11,6 +11,7 @@ import {
   LiveChatSetup,
   NavigatorHelpingMaterials,
 } from 'models/NavigatorSetup';
+
 import {
   ON_MESSAGE_SENT_RECEIVE,
   OPEN_CONVERSATION,
@@ -37,6 +38,7 @@ import {
   FETCH_NAVIGATOR_HELPING_MATERIALS_REQUEST,
   FETCH_NAVIGATOR_HELPING_MATERIALS_SUCCESS,
   FETCH_NAVIGATOR_HELPING_MATERIALS_ERROR,
+  ON_CURRENT_SCREEN_TITLE_CHANGED,
 } from './constants';
 
 export const openConversation = createAction(
@@ -189,4 +191,10 @@ export const fetchNavigatorHelpingMaterialsError = createAction(
   FETCH_NAVIGATOR_HELPING_MATERIALS_ERROR,
   (action) => (interventionId: string, error: ApiError) =>
     action({ interventionId, error }),
+);
+
+export const onCurrentScreenTitleChanged = createAction(
+  ON_CURRENT_SCREEN_TITLE_CHANGED,
+  (action) => (conversationId: string, currentScreenTitle: string) =>
+    action({ conversationId, currentScreenTitle }),
 );

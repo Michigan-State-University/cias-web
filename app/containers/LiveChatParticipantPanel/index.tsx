@@ -1,5 +1,7 @@
 import React, { useCallback, useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
+import { useInjectReducer, useInjectSaga } from 'redux-injectors';
+import { useIntl } from 'react-intl';
 
 import { useConversationChannel } from 'utils/useConversationChannel';
 
@@ -11,10 +13,20 @@ import {
   makeSelectLiveChatSetup,
 } from 'global/reducers/liveChat';
 
+import { sessionReducer, getSessionSaga } from 'global/reducers/session';
+
+import {
+  makeSelectCurrentQuestion,
+  makeSelectInterventionStarted,
+  makeSelectUserSession,
+} from 'containers/AnswerSessionPage/selectors';
+
 import ChatIcon from './components/ChatIcon';
 import ConversationChatDialog from './containers/ConversationChatDialog';
 import NarratorUnavailableDialog from './containers/NarratorUnavailableDialog';
 import NavigatorArrivedPopover from './components/NavigatorArrivedPopover';
+
+import messages from './messages';
 
 export type Props = {
   interventionId: string;
@@ -22,6 +34,7 @@ export type Props = {
 
 export const LiveChatParticipantPanel = ({ interventionId }: Props) => {
   const dispatch = useDispatch();
+  const { formatMessage } = useIntl();
 
   const [navigatorArrivedPopoverVisible, setNavigatorArrivedPopoverVisible] =
     useState(false);
@@ -34,14 +47,56 @@ export const LiveChatParticipantPanel = ({ interventionId }: Props) => {
   const minimizeDialog = () => setDialogMinimized(true);
 
   const conversationChannel = useConversationChannel(interventionId);
+
   const navigatorUnavailable = useSelector(makeSelectNavigatorUnavailable());
   const conversationId = useSelector(makeSelectOpenedConversationId());
   const liveChatLoading = useSelector(
     makeSelectLiveChatLoader('liveChatSetup'),
   );
   const liveChatSetup = useSelector(makeSelectLiveChatSetup());
+  const currentQuestion = useSelector(makeSelectCurrentQuestion());
+  const interventionStarted = useSelector(makeSelectInterventionStarted());
+  const userSession = useSelector(makeSelectUserSession());
 
-  const { fetchLiveChatSetup, isConnected } = conversationChannel;
+  const sessionName = userSession?.sessionName;
+
+  useInjectReducer({ key: 'session', reducer: sessionReducer });
+  useInjectSaga({ key: 'getSession', saga: getSessionSaga });
+
+  const { fetchLiveChatSetup, isConnected, changeScreenTitle } =
+    conversationChannel;
+
+  useEffect(() => {
+    if (!isConnected || !conversationId) return;
+
+    if (!sessionName) {
+      changeScreenTitle({
+        conversationId,
+        currentScreenTitle: formatMessage(messages.interventionPageTitle),
+      });
+      return;
+    }
+
+    const screenTitle = !interventionStarted
+      ? formatMessage(messages.initialScreen)
+      : currentQuestion?.title.replace(/<[^>]*>?/gm, '');
+
+    if (sessionName) {
+      changeScreenTitle({
+        conversationId,
+        currentScreenTitle: formatMessage(messages.currentScreenTitle, {
+          sessionName,
+          screenTitle,
+        }),
+      });
+    }
+  }, [
+    currentQuestion,
+    interventionStarted,
+    sessionName,
+    isConnected,
+    conversationId,
+  ]);
 
   useEffect(() => {
     if (!isConnected) return;
