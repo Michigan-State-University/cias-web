@@ -128,10 +128,8 @@ const TlfbCalendarLayout = forwardRef<CalendarRef, Props>(
             referenceElement={dayId}
             onClose={onClose}
             portalId={ANSWER_SESSION_CONTAINER_ID}
-            forceMobile={isMobilePreview}
             disableClose={disableModalClose}
             width={isMobile ? '' : '500px'}
-            specialMobileView
           >
             {children}
           </PopoverModal>
