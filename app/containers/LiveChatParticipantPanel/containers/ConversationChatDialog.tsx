@@ -9,6 +9,7 @@ import {
   makeSelectCurrentInterlocutorId,
   makeSelectOpenedConversation,
   makeSelectOpenedConversationMessages,
+  makeSelectOtherInterlocutor,
 } from 'global/reducers/liveChat';
 
 import { themeColors } from 'theme';
@@ -45,6 +46,7 @@ const ConversationChatDialog = ({
   const messages = useSelector(makeSelectOpenedConversationMessages());
   const conversation = useSelector(makeSelectOpenedConversation());
   const currentInterlocutorId = useSelector(makeSelectCurrentInterlocutorId());
+  const otherInterlocutor = useSelector(makeSelectOtherInterlocutor());
 
   const handleSendMessage = (content: string) => {
     if (conversation && currentInterlocutorId) {
@@ -68,13 +70,6 @@ const ConversationChatDialog = ({
     handleSendMessage(trimmedMessage);
     setMessage('');
   };
-
-  const otherInterlocutor =
-    conversation && currentInterlocutorId
-      ? Object.values(conversation.liveChatInterlocutors).find(
-          ({ id }) => id !== currentInterlocutorId,
-        )
-      : undefined;
 
   return (
     <ChatDialog

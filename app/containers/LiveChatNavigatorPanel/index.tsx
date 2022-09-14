@@ -17,6 +17,7 @@ import { MessagesSectionBody } from './containers/MessagesSectionBody';
 import MessagesSectionHeader from './containers/MessagesSectionHeader';
 import HelpingMaterialsSectionBody from './containers/HelpingMaterialsSectionBody';
 import { ConversationsSectionBody } from './containers/ConversationsSectionBody';
+import InterlocutorHeader from './containers/InterlocutorHeader';
 import ConversationsSectionHeader from './components/ConversationsSectionHeader';
 import HelpingMaterialsSectionHeader from './components/HelpingMaterialsSectionHeader';
 
@@ -88,6 +89,7 @@ export const LiveChatNavigatorPanel = ({
             <MessagesSectionHeader
               onArchiveConversation={onArchiveConversation}
             />
+            <InterlocutorHeader />
             <MessagesSectionBody
               isArchive={isArchive}
               conversationsLoading={conversationsLoading}

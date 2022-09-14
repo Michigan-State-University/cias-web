@@ -140,3 +140,18 @@ export const makeSelectOpenedConversationNavigatorHelpingMaterialsState = () =>
       return navigatorHelpingMaterialsStates[interventionId];
     },
   );
+
+export const makeSelectOtherInterlocutor = () =>
+  createSelector(
+    makeSelectOpenedConversation(),
+    makeSelectUserId(),
+    (openedConversation, currentUserId) => {
+      const liveChatInterlocutors = openedConversation?.liveChatInterlocutors;
+      return (
+        liveChatInterlocutors &&
+        Object.values(liveChatInterlocutors).find(
+          ({ userId }) => userId !== currentUserId,
+        )
+      );
+    },
+  );
