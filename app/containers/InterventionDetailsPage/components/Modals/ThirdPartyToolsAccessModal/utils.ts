@@ -12,6 +12,7 @@ export const mapInterventionToModalData = (
     catMhOrganizationId,
     isAccessRevoked,
     createdCatMhSessionCount,
+    hfhsAccess,
   } = intervention;
 
   return {
@@ -21,6 +22,7 @@ export const mapInterventionToModalData = (
     applicationId: catMhApplicationId ?? '',
     organizationId: catMhOrganizationId ?? undefined,
     isAccessRevoked,
+    hfhsAccess,
   };
 };
 
@@ -33,6 +35,7 @@ export const mapModalDataToIntervention = (
     applicationId,
     organizationId,
     isAccessRevoked,
+    hfhsAccess,
   } = modalData;
 
   return {
@@ -41,5 +44,6 @@ export const mapModalDataToIntervention = (
     catMhApplicationId: applicationId,
     catMhOrganizationId: organizationId,
     isAccessRevoked,
+    hfhsAccess,
   };
 };

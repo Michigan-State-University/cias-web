@@ -18,6 +18,7 @@ import { colors } from 'theme';
 
 import messages from '../messages';
 import { CatMhAccessModalUI } from './CatMhAccessModalUI';
+import { HfHsAccessModalUI } from './HfHsAccessModalUI';
 import { ModalUIData } from './types';
 import {
   mapInterventionToModalData,
@@ -77,6 +78,9 @@ const Component = ({ modalState: intervention, closeModal }: Props) => {
     editIntervention(mapModalDataToIntervention(modalData));
   };
 
+  const onHfHsAccessChange = (hfhsAccess: boolean): void =>
+    setModalData({ ...modalData, hfhsAccess });
+
   const canSave = !isEqual(initialData, modalData);
 
   return (
@@ -104,7 +108,15 @@ const Component = ({ modalState: intervention, closeModal }: Props) => {
         />
       </div>
       {/* @ts-ignore */}
-      <div label={formatMessage(messages.henryFordLabel)}>TODO: HF content</div>
+      <div label={formatMessage(messages.henryFordLabel)}>
+        <HfHsAccessModalUI
+          modalData={modalData}
+          onAccessChange={onHfHsAccessChange}
+          onSave={onSave}
+          canSave={canSave}
+          isSaving={isEditing}
+        />
+      </div>
     </Tabs>
   );
 };

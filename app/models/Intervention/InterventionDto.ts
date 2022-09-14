@@ -54,6 +54,7 @@ export interface InterventionDto {
   type: InterventionType;
   emails?: InterventionInvite[];
   quickExit: boolean;
+  hfhsAccess: boolean;
 }
 
 export interface FileInfo {

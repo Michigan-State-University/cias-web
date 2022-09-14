@@ -67,4 +67,12 @@ export default defineMessages({
     id: `${scope}.henryFordLabel`,
     defaultMessage: 'Henry Ford',
   },
+  hfhsRevokeAccess: {
+    id: `${scope}.hfhsRevokeAccess`,
+    defaultMessage: 'Revoke access',
+  },
+  hfhsGiveAccess: {
+    id: `${scope}.hfhsGiveAccess`,
+    defaultMessage: 'Allow access',
+  },
 });

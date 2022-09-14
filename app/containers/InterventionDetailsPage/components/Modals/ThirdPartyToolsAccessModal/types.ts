@@ -7,4 +7,5 @@ export type ModalUIData = {
   licenseType: CatMhLicenseType;
   testNumber: number;
   currentTestNumber: number;
+  hfhsAccess: boolean;
 };

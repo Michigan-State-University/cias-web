@@ -6,6 +6,7 @@ import {
 } from 'utils/validators';
 
 export const ACCESS_LABEL_ID = 'id-access';
+export const HFHS_ACCESS_LABEL_ID = 'id-hfhs-access';
 
 export const LICENSE_LIMITED_LABEL_ID = 'id-license-type-limited';
 export const LICENSE_UNLIMITED_LABEL_ID = 'id-license-type-unlimited';
