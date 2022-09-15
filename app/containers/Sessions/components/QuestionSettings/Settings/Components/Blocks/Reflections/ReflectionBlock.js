@@ -4,7 +4,6 @@ import { createStructuredSelector } from 'reselect';
 import PropTypes from 'prop-types';
 import { compose } from 'redux';
 import { connect } from 'react-redux';
-import keys from 'lodash/keys';
 import values from 'lodash/values';
 
 import Column from 'components/Column';
@@ -34,7 +33,7 @@ import { makeSelectPreviewData } from 'global/reducers/localState';
 
 import { speechType, reflectionFormulaType } from 'models/Narrator/BlockTypes';
 import { feedbackActions } from 'models/Narrator/FeedbackActions';
-import { speechAnimations } from 'utils/animations/animationsNames';
+import { characterToSpeechAnimationsMap } from 'utils/animations/animationsNames';
 import messages from '../../messages';
 import animationMessages from '../messages';
 import { updateBlockSettings, switchSpeechReflection } from '../../../actions';
@@ -106,19 +105,20 @@ const ReflectionBlock = ({
   updateAction,
   switchToReflectionFormula,
   disabled,
+  character,
 }) => {
   const [targetChooserOpen, setTargetChooserOpen] = useState(false);
 
   const selectedQuestion = findQuestionById(questions, block.question_id);
 
   const selectOptions = useMemo(() => {
-    const animations = keys(speechAnimations);
+    const animations = characterToSpeechAnimationsMap[character];
 
     return animations.map((animation) => ({
       value: animation,
       label: formatMessage(animationMessages[animation]),
     }));
-  }, [speechAnimations]);
+  }, [character]);
 
   const feedbackOptions = useMemo(() => {
     const options = values(feedbackActions).filter(
@@ -265,6 +265,7 @@ ReflectionBlock.propTypes = {
   updateAction: PropTypes.func,
   currentQuestionType: PropTypes.string,
   disabled: PropTypes.bool,
+  character: PropTypes.string,
 };
 
 const mapStateToProps = createStructuredSelector({

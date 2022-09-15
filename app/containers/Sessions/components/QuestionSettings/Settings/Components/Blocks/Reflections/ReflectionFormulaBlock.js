@@ -4,7 +4,6 @@ import { createStructuredSelector } from 'reselect';
 import PropTypes from 'prop-types';
 import { compose } from 'redux';
 import { connect } from 'react-redux';
-import keys from 'lodash/keys';
 import values from 'lodash/values';
 
 import { colors, themeColors } from 'theme';
@@ -31,7 +30,7 @@ import {
   makeSelectSelectedQuestionType,
 } from 'global/reducers/questions';
 import { makeSelectPreviewData } from 'global/reducers/localState';
-import { speechAnimations } from 'utils/animations/animationsNames';
+import { characterToSpeechAnimationsMap } from 'utils/animations/animationsNames';
 
 import messages from '../../messages';
 import animationMessages from '../messages';
@@ -55,17 +54,18 @@ const ReflectionFormulaBlock = ({
   onAddCase,
   disabled,
   selectedQuestion,
+  character,
 }) => {
   const { sessionId, interventionId } = useContext(EditSessionPageContext);
 
   const selectOptions = useMemo(() => {
-    const animations = keys(speechAnimations);
+    const animations = characterToSpeechAnimationsMap[character];
 
     return animations.map((animation) => ({
       value: animation,
       label: formatMessage(animationMessages[animation]),
     }));
-  }, [speechAnimations]);
+  }, [character]);
 
   const feedbackOptions = useMemo(() => {
     const options = values(feedbackActions).filter(
@@ -219,6 +219,7 @@ ReflectionFormulaBlock.propTypes = {
   onAddCase: PropTypes.func,
   disabled: PropTypes.bool,
   selectedQuestion: PropTypes.object,
+  character: PropTypes.string,
 };
 
 const mapStateToProps = createStructuredSelector({

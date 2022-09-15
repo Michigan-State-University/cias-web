@@ -18,10 +18,11 @@ import {
 
 import { DEFAULT_PAUSE_DURATION } from 'utils/constants';
 import {
-  bodyAnimations,
-  headAnimations,
+  getBodyAnimations,
+  getHeadAnimations,
 } from 'utils/animations/animationsNames';
 import { getFromQuestionTTS } from 'utils/tts';
+import { CharacterType } from 'models/Character';
 
 import { Session } from './Session';
 
@@ -269,10 +270,14 @@ export const instantiateBlockForType = (type, endPosition, question) => {
     type,
     endPosition,
   };
+
+  const character =
+    question?.narrator?.settins?.character ?? CharacterType.PEEDY; // no destructuring, because question can be null
+
   switch (type) {
     case bodyAnimationType:
       return {
-        animation: bodyAnimations[0],
+        animation: getBodyAnimations(character)[0],
         ...sharedProperties,
       };
 
@@ -306,7 +311,7 @@ export const instantiateBlockForType = (type, endPosition, question) => {
 
     case headAnimationType:
       return {
-        animation: headAnimations[0],
+        animation: getHeadAnimations(character)[0],
         ...sharedProperties,
       };
 

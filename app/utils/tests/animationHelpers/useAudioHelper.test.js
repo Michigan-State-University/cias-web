@@ -13,7 +13,7 @@ import {
   reflectionType,
   speechType,
 } from 'models/Narrator/BlockTypes';
-import { speechAnimations } from 'utils/animations/animationsNames';
+import { speechAnimationsMapper } from 'utils/animations/animationsNames';
 import AudioWrapper from 'utils/audioWrapper';
 
 describe('useAudioHelper test', () => {
@@ -87,7 +87,7 @@ describe('useAudioHelper test', () => {
         name: 'rest',
         animationData: {
           speech: await import(
-            `assets/animations/peedy/${speechAnimations.rest.animations.speech}.json`
+            `assets/animations/peedy/${speechAnimationsMapper.rest.animations.speech}.json`
           ),
         },
         isEndReversed: undefined,

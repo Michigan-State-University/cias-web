@@ -14,6 +14,7 @@ import { feedbackActions } from 'models/Narrator/FeedbackActions';
 import { readQuestionBlockType } from 'models/Narrator/BlockTypes';
 import { createTestStore } from 'utils/testUtils/storeUtils';
 
+import { CharacterType } from 'models/Character';
 import CharacterAnim from '../CharacterAnim';
 
 describe('<CharacterAnim />', () => {
@@ -39,7 +40,7 @@ describe('<CharacterAnim />', () => {
       },
     ],
     questionId: 'test',
-    settings: {},
+    settings: { character: CharacterType.PEEDY },
     animationContainer: { clientWidth: 0, clientHeight: 0 },
     previewMode: '',
     answers: {},

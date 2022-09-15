@@ -1,15 +1,14 @@
-import { useRef } from 'react';
+import { useMemo, useRef } from 'react';
+import uniqBy from 'lodash/uniqBy';
+import filter from 'lodash/filter';
+import get from 'lodash/get';
 
 import getPause from 'utils/animations/getPause';
+import { getAutoRestAnimations } from 'utils/animations/animationsNames';
 import {
   bodyAnimationType,
   headAnimationType,
 } from 'models/Narrator/BlockTypes';
-
-import uniqBy from 'lodash/uniqBy';
-import filter from 'lodash/filter';
-import get from 'lodash/get';
-import { autoRestAnimations } from 'utils/animations/animationsNames';
 
 import { importAnimation } from './utils';
 
@@ -22,6 +21,10 @@ const useAnimationHelper = (
 ) => {
   const loadedAnimations = useRef([]);
   const animationRef = useRef(null);
+  const autoRestAnimations = useMemo(
+    () => getAutoRestAnimations(character),
+    [character],
+  );
 
   const loadAnimations = async () => {
     const bodyAnimations = [];

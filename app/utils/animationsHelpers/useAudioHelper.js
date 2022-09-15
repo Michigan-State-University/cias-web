@@ -12,7 +12,7 @@ import {
   reflectionType,
   speechType,
 } from 'models/Narrator/BlockTypes';
-import { speechAnimations } from 'utils/animations/animationsNames';
+import { speechAnimationsMapper } from 'utils/animations/animationsNames';
 
 import { importAnimation } from './utils';
 
@@ -55,11 +55,14 @@ const useAudioHelper = (
       await Promise.all(
         uniqAnimations.map(async ({ animation }) => {
           const animationNames = toPairs(
-            speechAnimations[animation].animations,
+            speechAnimationsMapper[animation].animations,
           );
           const animationsData = {};
           for (const [key, value] of animationNames) {
-            if (key === 'end' && speechAnimations[animation].isEndReversed)
+            if (
+              key === 'end' &&
+              speechAnimationsMapper[animation].isEndReversed
+            )
               animationsData.end = animationsData.start;
             else animationsData[key] = await importAnimation(character, value);
           }
@@ -67,7 +70,7 @@ const useAudioHelper = (
           animations.push({
             name: animation,
             animationData: animationsData,
-            isEndReversed: speechAnimations[animation].isEndReversed,
+            isEndReversed: speechAnimationsMapper[animation].isEndReversed,
           });
         }),
       );

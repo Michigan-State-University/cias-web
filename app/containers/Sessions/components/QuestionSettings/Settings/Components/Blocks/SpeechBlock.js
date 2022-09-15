@@ -1,7 +1,6 @@
 import React, { useEffect, useState, useMemo } from 'react';
 import PropTypes from 'prop-types';
 import join from 'lodash/join';
-import keys from 'lodash/keys';
 import { compose } from 'redux';
 import { connect } from 'react-redux';
 import { createStructuredSelector } from 'reselect';
@@ -18,7 +17,7 @@ import {
   makeSelectSelectedQuestionType,
   makeSelectNameQuestionExists,
 } from 'global/reducers/questions';
-import { speechAnimations } from 'utils/animations/animationsNames';
+import { characterToSpeechAnimationsMap } from 'utils/animations/animationsNames';
 import { splitAndKeep } from 'utils/splitAndKeep';
 import {
   makeSelectPreviewData,
@@ -55,6 +54,7 @@ const SpeechBlock = ({
   disabled,
   animationDisabled,
   nameQuestionExists,
+  character,
 }) => {
   const [isPlaying, setIsPlaying] = useState(false);
   const [text, setText] = useState(join(block.text, ''));
@@ -70,13 +70,13 @@ const SpeechBlock = ({
   }, [previewData]);
 
   const selectOptions = useMemo(() => {
-    const animations = keys(speechAnimations);
+    const animations = characterToSpeechAnimationsMap[character];
 
     return animations.map((animation) => ({
       value: animation,
       label: formatMessage(animationMessages[animation]),
     }));
-  }, [speechAnimations]);
+  }, [character]);
 
   const feedbackOptions = useMemo(() => {
     const options = values(feedbackActions).filter(
@@ -219,6 +219,7 @@ SpeechBlock.propTypes = {
   disabled: PropTypes.bool,
   animationDisabled: PropTypes.bool,
   nameQuestionExists: PropTypes.bool,
+  character: PropTypes.string,
 };
 
 const mapStateToProps = createStructuredSelector({

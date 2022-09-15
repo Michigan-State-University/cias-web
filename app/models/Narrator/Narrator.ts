@@ -2,6 +2,7 @@ import { CamelToSnake } from 'global/types/camelToSnake';
 
 import { CharacterType } from 'models/Character';
 
+import { NarratorAnimation } from './Animation';
 import { NarratorBlockTypes } from './NarratorBlockTypes';
 
 export interface Position {
@@ -14,7 +15,7 @@ export interface NarratorBlock {
   type: NarratorBlockTypes;
   action?: string;
   sha256?: string[];
-  animation: string;
+  animation: NarratorAnimation;
   audioUrls?: string[];
   endPosition: Position;
   pauseDuration?: number;

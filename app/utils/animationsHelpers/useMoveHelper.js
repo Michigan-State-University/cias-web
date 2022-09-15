@@ -3,7 +3,7 @@ import isEqual from 'lodash/isEqual';
 import clamp from 'lodash/clamp';
 
 import { elements } from 'theme';
-import { moveAnimations as moveAnimationsNames } from 'utils/animations/animationsNames';
+import { characterToMoveAnimationsMap } from 'utils/animations/animationsNames';
 
 import { animationDuration } from './constants';
 import { importAnimation } from './utils';
@@ -66,7 +66,7 @@ const useMoveHelper = (
     const moveAnimations = [];
     if (blocks.length) {
       await Promise.all(
-        moveAnimationsNames.map(async (animation) => {
+        characterToMoveAnimationsMap[character].map(async (animation) => {
           const data = importAnimation(character, 'standStill');
           moveAnimations.push({
             name: animation,

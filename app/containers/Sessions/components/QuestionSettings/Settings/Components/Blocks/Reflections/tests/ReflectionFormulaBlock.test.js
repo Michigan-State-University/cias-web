@@ -15,6 +15,7 @@ import { instantiateBlockForType } from 'models/Session/utils';
 import { singleQuestion } from 'models/Session/QuestionTypes';
 import { formatMessage } from 'utils/intlOutsideReact';
 import { createTestStore } from 'utils/testUtils/storeUtils';
+import { CharacterType } from 'models/Character';
 
 import ReflectionFormulaBlock from '../ReflectionFormulaBlock';
 
@@ -49,6 +50,7 @@ describe('<ReflectionFormulaBlock />', () => {
     id: 'test',
     currentQuestionType: singleQuestion.id,
     disabled: false,
+    character: CharacterType.PEEDY,
     ...mockFunctions,
   };
 
