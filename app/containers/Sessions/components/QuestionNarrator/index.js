@@ -157,8 +157,8 @@ const QuestionNarrator = ({
         currentBlockIndex: 0,
       }),
     {
-      deps: [previewData.animation],
-      conditions: [previewData.animation],
+      deps: [previewData.animation, settings.character],
+      conditions: [previewData.animation, settings.character],
       cleanUpFunction: stopSpeech,
     },
   );
