@@ -1,4 +1,4 @@
-import React, { useMemo } from 'react';
+import React from 'react';
 import { useIntl } from 'react-intl';
 import { useDispatch, useSelector } from 'react-redux';
 
@@ -18,6 +18,7 @@ import { PopoverModal } from 'components/Modal';
 import H2 from 'components/H2';
 import Box from 'components/Box';
 import Divider from 'components/Divider';
+import Text from 'components/Text';
 import SingleNotification from 'components/SingleNotification';
 
 import {
@@ -46,21 +47,18 @@ const NotificationsPanel = () => {
     dispatch(setNotificationsListVisible(!notificationsListVisible));
   const closeNotifications = () => dispatch(setNotificationsListVisible(false));
 
-  const unreadNotificationsCount = useMemo(
-    () => notifications.filter(({ isRead }) => !isRead).length,
-    [notifications],
-  );
-
   // Remove or update this check when making other roles see notifications
   if (!canDisplayLiveChatNotifications) {
     return null;
   }
 
+  const hasUnreadNotifications = Boolean(notifications.length);
+
   return (
     <>
       <NotificationsButton
         onClick={toggleNotifications}
-        unreadNotificationsCount={unreadNotificationsCount}
+        unreadNotificationsCount={notifications.length}
       />
       {notificationsListVisible && (
         <PopoverModal
@@ -82,22 +80,27 @@ const NotificationsPanel = () => {
         >
           <H2 lineHeight="28px">{formatMessage(messages.notifications)}</H2>
           <Divider my={16} color={colors.linkWater} />
-          <Box
-            display="flex"
-            direction="column"
-            gap={8}
-            overflow="scroll"
-            maxHeight={NOTIFICATIONS_LIST_MAX_HEIGHT}
-            disableScrollbar
-          >
-            {notifications.map((notification) => (
-              <SingleNotification
-                key={notification.id}
-                notification={notification}
-                timeFormatLocale={CustomDayjsLocale.EN_LONG_RELATIVE_TIME}
-              />
-            ))}
-          </Box>
+          {hasUnreadNotifications && (
+            <Box
+              display="flex"
+              direction="column"
+              gap={8}
+              overflow="scroll"
+              maxHeight={NOTIFICATIONS_LIST_MAX_HEIGHT}
+              disableScrollbar
+            >
+              {notifications.map((notification) => (
+                <SingleNotification
+                  key={notification.id}
+                  notification={notification}
+                  timeFormatLocale={CustomDayjsLocale.EN_LONG_RELATIVE_TIME}
+                />
+              ))}
+            </Box>
+          )}
+          {!hasUnreadNotifications && (
+            <Text mb={8}>{formatMessage(messages.noUnreadNotifications)}</Text>
+          )}
         </PopoverModal>
       )}
     </>

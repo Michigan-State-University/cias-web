@@ -1,10 +1,13 @@
-import React, { useEffect, useMemo } from 'react';
-import { useDispatch } from 'react-redux';
+import React, { useContext, useEffect, useMemo } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 import { useHistory } from 'react-router-dom';
 
 import { Conversation, InterventionConversation } from 'models/LiveChat';
 
-import { openConversation } from 'global/reducers/liveChat';
+import {
+  makeSelectOpenedConversationId,
+  openConversation,
+} from 'global/reducers/liveChat';
 
 import {
   ArchiveConversationData,
@@ -12,6 +15,8 @@ import {
   SendMessageData,
 } from 'utils/useConversationChannel';
 import useQuery from 'utils/useQuery';
+
+import { NotificationsActionsContext } from 'containers/NotificationsActionsProvider';
 
 import { MessagesSectionBody } from './containers/MessagesSectionBody';
 import MessagesSectionHeader from './containers/MessagesSectionHeader';
@@ -50,20 +55,31 @@ export const LiveChatNavigatorPanel = ({
   onReadMessage,
   onArchiveConversation,
 }: Props) => {
+  const { readConversationNotifications } =
+    useContext(NotificationsActionsContext) ?? {};
+
+  const openedConversationId = useSelector(makeSelectOpenedConversationId());
+
+  useEffect(() => {
+    if (openedConversationId && readConversationNotifications) {
+      readConversationNotifications(openedConversationId);
+    }
+  }, [openedConversationId]);
+
   const interventionConversationsValues = useMemo(
     () => Object.values(interventionConversations),
     [interventionConversations],
   );
-  const openedConversationId = useQuery('conversation_id');
+  const conversationToOpenId = useQuery('conversation_id');
   const dispatch = useDispatch();
   const { replace } = useHistory();
 
   useEffect(() => {
-    if (openedConversationId) {
-      dispatch(openConversation(openedConversationId));
+    if (conversationToOpenId) {
+      dispatch(openConversation(conversationToOpenId));
       replace({ search: undefined });
     }
-  }, [openedConversationId]);
+  }, [conversationToOpenId]);
 
   const conversationsUnavailable =
     !conversationsLoading &&

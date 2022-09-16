@@ -1,21 +1,26 @@
 import { useDispatch, useSelector } from 'react-redux';
+import { toast } from 'react-toastify';
 
 import { SocketMessageListener, useSocket } from 'utils/useSocket';
 import { jsonApiToArray, jsonApiToObject } from 'utils/jsonApiMapper';
 
 import { makeSelectIsUserLoggedIn } from 'global/reducers/auth';
 import {
+  markNotificationReadLocally,
   onNewNotificationReceive,
   onUnreadNotificationsFetchedReceive,
 } from 'global/reducers/notifications/actions';
 
 import {
   NewNotificationData,
+  NotificationChannelAction,
   NotificationChannelMessage,
+  ReadNotificationData,
   UnreadNotificationsFetchedData,
 } from './types';
 import {
   NOTIFICATION_CHANNEL_NAME,
+  NotificationChannelActionName,
   NotificationChannelMessageTopic,
 } from './constants';
 
@@ -53,11 +58,22 @@ export const useNotificationChannel = () => {
     }
   };
 
-  useSocket<NotificationChannelMessage>(
-    NOTIFICATION_CHANNEL_NAME,
-    messageListener,
-    { suspend: !isLoggedIn },
-  );
+  const channel = useSocket<
+    NotificationChannelMessage,
+    NotificationChannelAction
+  >(NOTIFICATION_CHANNEL_NAME, messageListener, { suspend: !isLoggedIn });
 
-  return {};
+  const readNotification = (data: ReadNotificationData) => {
+    const { notificationId } = data;
+    dispatch(markNotificationReadLocally(notificationId));
+    channel?.perform({
+      name: NotificationChannelActionName.ON_READ_NOTIFICATION,
+      data,
+    });
+    toast.dismiss(notificationId);
+  };
+
+  return {
+    readNotification,
+  };
 };

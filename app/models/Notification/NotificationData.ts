@@ -1,4 +1,4 @@
-export type ConversationCreatedNotificationData = {
+export type NewConversationNotificationData = {
   conversationId: string;
   userId: string;
   avatarUrl?: Nullable<string>;
@@ -8,4 +8,4 @@ export type ConversationCreatedNotificationData = {
 };
 
 // Union type
-export type NotificationData = ConversationCreatedNotificationData;
+export type NotificationData = NewConversationNotificationData;

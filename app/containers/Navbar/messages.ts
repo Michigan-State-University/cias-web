@@ -32,4 +32,8 @@ export default defineMessages({
     id: `${scope}.toggleNotifications`,
     defaultMessage: 'Toggle notifications visibility',
   },
+  noUnreadNotifications: {
+    id: `${scope}.noUnreadNotifications`,
+    defaultMessage: "You don't have any unread notifications.",
+  },
 });

@@ -1,33 +1,30 @@
 import React from 'react';
 
-import { Notification } from 'models/Notification';
+import { Notification, NotificationEvent } from 'models/Notification';
 
 import { CustomDayjsLocale } from 'utils/dayjs';
 
-import { ConversationInfoBox } from 'components/ConversationInfoBox';
+import { NewConversationNotificationLayout } from './components';
 
-export type Props = {
+type Props = {
   notification: Notification;
   timeFormatLocale: CustomDayjsLocale;
 };
 
-const SingleNotification = ({
-  notification: { createdAt, isRead, data },
-  timeFormatLocale,
-}: Props) => {
-  const { message } = data;
+const SingleNotification = ({ notification, timeFormatLocale }: Props) => {
+  const { event } = notification;
 
-  return (
-    <ConversationInfoBox
-      highlighted={!isRead}
-      unread={!isRead}
-      messageCreatedAt={createdAt}
-      messageContent={message}
-      messageSentByCurrentUser={false}
-      interlocutorData={data}
-      timeFormatLocale={timeFormatLocale}
-    />
-  );
+  switch (event) {
+    case NotificationEvent.NEW_CONVERSATION:
+      return (
+        <NewConversationNotificationLayout
+          notification={notification}
+          timeFormatLocale={timeFormatLocale}
+        />
+      );
+    default:
+      return null;
+  }
 };
 
 export default SingleNotification;

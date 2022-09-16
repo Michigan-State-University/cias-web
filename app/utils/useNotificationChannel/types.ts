@@ -1,15 +1,25 @@
 import { ApiData } from 'models/Api';
 import { Notification } from 'models/Notification';
 
-import { SocketMessage } from 'utils/useSocket';
+import { SocketAction, SocketMessage } from 'utils/useSocket';
 
-import { NotificationChannelMessageTopic } from './constants';
+import {
+  NotificationChannelActionName,
+  NotificationChannelMessageTopic,
+} from './constants';
+
+// DATA TYPES
 
 export type UnreadNotificationsFetchedData = ApiData<Notification[]>;
 
 export type NewNotificationData = ApiData<Notification>;
 
+export type ReadNotificationData = {
+  notificationId: string;
+};
+
 // SOCKET MESSAGES
+
 export type UnreadNotificationsFetchedSocketMessage = SocketMessage<
   NotificationChannelMessageTopic.UNREAD_NOTIFICATIONS_FETCHED,
   UnreadNotificationsFetchedData
@@ -24,3 +34,12 @@ export type NewNotificationSocketMessage = SocketMessage<
 export type NotificationChannelMessage =
   | NewNotificationSocketMessage
   | UnreadNotificationsFetchedSocketMessage;
+
+// SOCKET ACTIONS
+
+export type ReadNotificationSocketAction = SocketAction<
+  NotificationChannelActionName.ON_READ_NOTIFICATION,
+  ReadNotificationData
+>;
+
+export type NotificationChannelAction = ReadNotificationSocketAction;

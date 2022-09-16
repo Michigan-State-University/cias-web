@@ -25,7 +25,10 @@ function* showNotificationToast({
           notification,
           timeFormatLocale: CustomDayjsLocale.EN_SHORT_RELATIVE_TIME,
         }),
-      CustomNotificationToastClassnames,
+      {
+        ...CustomNotificationToastClassnames,
+        toastId: notification.id,
+      },
     );
   }
 }

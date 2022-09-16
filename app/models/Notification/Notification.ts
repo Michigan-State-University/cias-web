@@ -1,6 +1,6 @@
 import { NotificationEvent } from './NotificationEvent';
 import {
-  ConversationCreatedNotificationData,
+  NewConversationNotificationData,
   NotificationData,
 } from './NotificationData';
 
@@ -17,10 +17,10 @@ export type GenericNotification<
   data: Data;
 };
 
-export type ConversationCreatedNotification = GenericNotification<
+export type NewConversationNotification = GenericNotification<
   NotificationEvent.NEW_CONVERSATION,
-  ConversationCreatedNotificationData
+  NewConversationNotificationData
 >;
 
 // Union type
-export type Notification = ConversationCreatedNotification;
+export type Notification = NewConversationNotification;

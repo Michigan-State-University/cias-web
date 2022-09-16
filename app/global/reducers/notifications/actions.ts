@@ -3,6 +3,7 @@ import { createAction } from 'typesafe-actions';
 import { Notification } from 'models/Notification';
 
 import {
+  MARK_NOTIFICATION_READ_LOCALLY,
   ON_NEW_NOTIFICATION_RECEIVE,
   ON_UNREAD_NOTIFICATIONS_FETCHED_RECEIVE,
   SET_NOTIFICATIONS_LIST_VISIBLE,
@@ -22,4 +23,10 @@ export const onUnreadNotificationsFetchedReceive = createAction(
 export const onNewNotificationReceive = createAction(
   ON_NEW_NOTIFICATION_RECEIVE,
   (action) => (notification: Notification) => action({ notification }),
+);
+
+export const markNotificationReadLocally = createAction(
+  MARK_NOTIFICATION_READ_LOCALLY,
+  (action) => (notificationId: Notification['id']) =>
+    action({ notificationId }),
 );

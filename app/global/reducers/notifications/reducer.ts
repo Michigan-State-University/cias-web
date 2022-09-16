@@ -3,8 +3,11 @@ import { getType, Reducer } from 'typesafe-actions';
 
 import { WithReducer } from 'global/reducers/types';
 
+import { deleteItemById } from 'utils/reduxUtils';
+
 import { NotificationsAction, NotificationsState } from './types';
 import {
+  markNotificationReadLocally,
   onNewNotificationReceive,
   onUnreadNotificationsFetchedReceive,
   setNotificationsListVisible,
@@ -37,6 +40,11 @@ export const notificationsReducer: Reducer<
       case getType(onNewNotificationReceive): {
         const { notification } = payload;
         draft.notifications.unshift(notification);
+        break;
+      }
+      case getType(markNotificationReadLocally): {
+        const { notificationId } = payload;
+        deleteItemById(draft.notifications, notificationId);
         break;
       }
     }
