@@ -4,6 +4,7 @@ import { useInjectReducer, useInjectSaga } from 'redux-injectors';
 import { useIntl } from 'react-intl';
 
 import { useConversationChannel } from 'utils/useConversationChannel';
+import { htmlToPlainText } from 'utils/htmlToPlainText';
 
 import {
   closeConversation,
@@ -76,10 +77,21 @@ export const LiveChatParticipantPanel = ({ interventionId }: Props) => {
       });
       return;
     }
+    const currentQuestionSubtitle =
+      currentQuestion?.settings?.subtitle && currentQuestion?.subtitle
+        ? htmlToPlainText(currentQuestion?.subtitle)
+        : null;
+
+    const currentQuestionTitle =
+      currentQuestion?.settings?.title && currentQuestion?.title
+        ? htmlToPlainText(currentQuestion?.title)
+        : null;
 
     const screenTitle = !interventionStarted
       ? formatMessage(messages.initialScreen)
-      : currentQuestion?.title.replace(/<[^>]*>?/gm, '');
+      : currentQuestionSubtitle ||
+        currentQuestionTitle ||
+        formatMessage(messages.noTitle);
 
     if (sessionName) {
       changeScreenTitle({

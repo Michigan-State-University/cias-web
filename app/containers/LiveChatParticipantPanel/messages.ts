@@ -87,4 +87,8 @@ export default defineMessages({
     id: `${scope}.interventionPageTitle`,
     defaultMessage: 'Intervention page',
   },
+  noTitle: {
+    id: `${scope}.noTitle`,
+    defaultMessage: 'No title',
+  },
 });
