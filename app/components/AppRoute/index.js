@@ -48,6 +48,7 @@ class AppRoute extends Route {
     if (!protectedRoute) {
       return render();
     }
+
     if (!user || !user.roles) {
       const queryParams = new URLSearchParams(location.search);
 

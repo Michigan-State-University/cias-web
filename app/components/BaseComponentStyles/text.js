@@ -20,12 +20,14 @@ const text = (props) => ({
   '&:hover': {
     textDecoration: props.hoverDecoration || '',
   },
+  textDecoration: props.textDecoration || '',
   lineHeight: props.lineHeight || '',
   textAlign: props.textAlign || '',
   wordBreak: props.wordBreak || '',
 });
 
 text.propTypes = {
+  defaultColor: PropTypes.string,
   fontSize: PropTypes.string,
   fontWeight: PropTypes.oneOf(['regular', 'medium', 'bold']),
   fontStyle: PropTypes.string,
@@ -35,6 +37,12 @@ text.propTypes = {
   textOverflow: PropTypes.string,
   clickable: PropTypes.bool,
   hoverDecoration: PropTypes.oneOf(['underline', 'overline', 'line-through']),
+  textDecoration: PropTypes.oneOf([
+    'underline',
+    'overline',
+    'line-through',
+    'none',
+  ]),
   lineHeight: PropTypes.string,
   textAlign: PropTypes.oneOf(['left', 'right', 'center', 'justify']),
   wordBreak: PropTypes.oneOf(['normal', 'break-all', 'keep-all']),

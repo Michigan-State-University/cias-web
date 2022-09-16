@@ -103,6 +103,7 @@ exports[`<RegisterPage /> Should render and match the researcher 1`] = `
   cursor: pointer;
   border: none;
   outline: none;
+  font-weight: bold;
   background-color: #107969;
   color: #FFFFFF;
   border: 1px solid transparent;
@@ -772,6 +773,7 @@ exports[`<RegisterPage /> Should render and match the snapshot for participant 1
   cursor: pointer;
   border: none;
   outline: none;
+  font-weight: bold;
   background-color: #107969;
   color: #FFFFFF;
   border: 1px solid transparent;

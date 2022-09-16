@@ -27,7 +27,11 @@ import {
   thirdPartyQuestion,
   participantReport,
   finishQuestion,
+  tlfbConfig,
+  tlfbEvents,
+  tlfbQuestion,
 } from 'models/Session/QuestionTypes';
+import { STATUS_METADATA } from 'models/Intervention';
 
 import CurrencyQuestion from './CurrencyQuestion';
 import GridQuestion from './GridQuestion';
@@ -44,6 +48,9 @@ import ParticipantReportQuestion from './ParticipantReportQuestion';
 import NameQuestion from './NameQuestion';
 import ThirdPartyQuestion from './ThirdPartyQuestion';
 import FinishScreen from './FinishScreen';
+import TlfbConfig from './TlfbConfig';
+import TlfbEvents from './TlfbEvents';
+import TlfbQuestion from './TlfbQuestion';
 
 const QuestionData = () => {
   useInjectSaga({ key: 'updateQuestionData', saga: updateQuestionDataSaga });
@@ -57,6 +64,8 @@ const QuestionData = () => {
     isNarratorTab,
     interventionStatus,
     sharedTo,
+    // @ts-ignore
+    statusMetadata: STATUS_METADATA[interventionStatus],
   };
 
   switch (selectedQuestionType) {
@@ -91,6 +100,12 @@ const QuestionData = () => {
       return <CurrencyQuestion {...commonProps} />;
     case finishQuestion.id:
       return <FinishScreen {...commonProps} />;
+    case tlfbConfig.id:
+      return <TlfbConfig {...commonProps} />;
+    case tlfbEvents.id:
+      return <TlfbEvents {...commonProps} />;
+    case tlfbQuestion.id:
+      return <TlfbQuestion {...commonProps} />;
     default:
       return null;
   }

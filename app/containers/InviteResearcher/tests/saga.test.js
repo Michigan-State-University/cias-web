@@ -20,9 +20,7 @@ import {
 } from '../constants';
 import {
   cancelInvitationSuccess,
-  getInvitationsError,
   getInvitationsSuccess,
-  inviteResearcherError,
   inviteResearcherSuccess,
 } from '../actions';
 import cancelInvitationSaga, {
@@ -76,15 +74,6 @@ describe('inviteResearcher saga', () => {
       })
       .run();
   });
-  it('Check inviteResearcher error connection', () => {
-    const error =
-      "TypeError: Cannot read properties of undefined (reading 'data')";
-    const email = 'email1';
-    const step = stepper(inviteResearcher({ payload: { email } }));
-    step();
-    const errorTrigger = step();
-    expect(errorTrigger).toEqual(put(inviteResearcherError(error.toString())));
-  });
   it('Check inviteResearcherSaga connection', () => {
     const sagaFunction = inviteResearcherSaga();
     const takeLatestDescriptor = sagaFunction.next().value;
@@ -116,14 +105,6 @@ describe('getInvitations saga', () => {
     );
     const lastResponse = step();
     expect(lastResponse).toEqual(undefined);
-  });
-  it('Check getInvitations error connection', () => {
-    const error =
-      "TypeError: Cannot read properties of undefined (reading 'data')";
-    const step = stepper(getInvitations());
-    step();
-    const errorTrigger = step();
-    expect(errorTrigger).toEqual(put(getInvitationsError(error.toString())));
   });
   it('Check getInvitations connection', () => {
     const sagaFunction = getInvitationsSaga();

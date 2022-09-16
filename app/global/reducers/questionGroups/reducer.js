@@ -2,7 +2,7 @@ import produce from 'immer';
 import sortBy from 'lodash/sortBy';
 
 import { insertAt, removeAt } from 'utils/arrayUtils';
-import { FinishGroupType } from 'models/Session/GroupTypes';
+import { GroupType } from 'models/QuestionGroup';
 import { ternary } from 'utils/ternary';
 import { assignDraftItems } from 'utils/reduxUtils';
 import {
@@ -114,7 +114,7 @@ const questionGroupsReducer = (state = initialState, { type, payload }) =>
         draft.groups = state.groups.map((group, index) => ({
           ...group,
           position: ternary(
-            group.type === FinishGroupType,
+            group.type === GroupType.FINISH,
             group.position,
             index + 1,
           ),
@@ -132,6 +132,7 @@ const questionGroupsReducer = (state = initialState, { type, payload }) =>
       case DUPLICATE_GROUPS_HERE_REQUEST:
         draft.loaders.questionGroupsLoading = true;
         break;
+
       case DUPLICATE_GROUPS_HERE_SUCCESS:
         const { groups } = payload;
         draft.groups.push(...groups);

@@ -7,7 +7,9 @@ import {
   participantReport,
   phoneQuestion,
   thirdPartyQuestion,
+  tlfbQuestion,
 } from 'models/Session/QuestionTypes';
+import { getEditVariables } from 'models/Session/utils';
 import { initialState } from './reducer';
 
 export const selectQuestions = (state) => state.questions || initialState;
@@ -45,6 +47,11 @@ export const makeSelectLoaders = () =>
 export const makeSelectLoader = (loader) =>
   createSelector(selectQuestions, (substate) =>
     get(substate.loaders, loader, false),
+  );
+
+export const makeSelectError = (error) =>
+  createSelector(selectQuestions, (substate) =>
+    get(substate.errors, error, false),
   );
 
 export const makeSelectQuestionsLength = () =>
@@ -120,3 +127,10 @@ export const makeSelectPhoneQuestionExists = () =>
 
 export const makeSelectLastCreatedQuestionId = () =>
   createSelector(selectQuestions, (substate) => substate.lastCreatedQuestionId);
+
+export const makeSelectTlfbVariables = () =>
+  createSelector(selectQuestions, (substate) =>
+    getEditVariables(
+      substate.questions.filter(({ type }) => type === tlfbQuestion.id),
+    ),
+  );

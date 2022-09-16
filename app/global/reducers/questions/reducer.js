@@ -12,6 +12,7 @@ import questionDataReducer from 'containers/Sessions/components/QuestionData/red
 import questionSettingsReducer from 'containers/Sessions/components/QuestionSettings/Settings/reducer';
 import instantiateEmptyQuestion from 'utils/instantiateEmptyQuestion';
 import { insertAt, removeAt } from 'utils/arrayUtils';
+import { assignFromQuestionTTS } from 'utils/tts';
 
 import {
   assignDraftItems,
@@ -19,10 +20,9 @@ import {
   updateItemById,
 } from 'utils/reduxUtils';
 import {
+  CLEAR_ERROR,
   SELECT_QUESTION,
-  CREATE_QUESTION_REQUEST,
   CREATE_QUESTION_SUCCESS,
-  CREATE_QUESTION_ERROR,
   GET_QUESTIONS_REQUEST,
   GET_QUESTIONS_SUCCESS,
   GET_QUESTIONS_ERROR,
@@ -58,11 +58,11 @@ import {
   UPDATE_QUESTION_IMAGE_REQUEST,
   UPDATE_QUESTION_IMAGE_SUCCESS,
   UPDATE_QUESTION_IMAGE_ERROR,
+  CREATE_QUESTIONS_SUCCESS,
 } from './constants';
 
 import {
   mapQuestionDataForType,
-  assignFromQuestionTTS,
   editQuestionSuccessCommon,
   editQuestionErrorCommon,
   getNewQuestionIdInNextGroups,
@@ -87,7 +87,9 @@ export const initialState = {
   loaders: {
     getQuestionsLoading: true,
     updateQuestionLoading: false,
-    createQuestionLoading: false,
+  },
+  errors: {
+    updateQuestionError: null,
   },
 };
 
@@ -95,6 +97,10 @@ export const initialState = {
 export const questionsReducer = (state = initialState, action) =>
   produce(state, (draft) => {
     switch (action.type) {
+      case CLEAR_ERROR:
+        draft.errors.updateQuestionError = null;
+        break;
+
       case GET_QUESTION_GROUPS_REQUEST:
         draft.questions = [];
         draft.cache.questions = [];
@@ -102,10 +108,6 @@ export const questionsReducer = (state = initialState, action) =>
 
       case SELECT_QUESTION:
         draft.selectedQuestion = action.payload.id;
-        break;
-
-      case CREATE_QUESTION_REQUEST:
-        draft.loaders.createQuestionLoading = true;
         break;
 
       case CREATE_QUESTION_SUCCESS:
@@ -116,11 +118,22 @@ export const questionsReducer = (state = initialState, action) =>
         assignDraftItems(draft.questions, draft.cache.questions);
         draft.selectedQuestion = action.payload.question.id;
         draft.lastCreatedQuestionId = action.payload.question.id;
-        draft.loaders.createQuestionLoading = false;
         break;
-      case CREATE_QUESTION_ERROR:
-        draft.loaders.createQuestionLoading = false;
+
+      case CREATE_QUESTIONS_SUCCESS: {
+        const {
+          payload: { questions },
+        } = action;
+
+        const firstCreatedQuestion = questions[0];
+        const mappedQuestions = questions.map(mapQuestionDataForType);
+        draft.questions.push(...mappedQuestions);
+        assignDraftItems(draft.questions, draft.cache.questions);
+
+        draft.selectedQuestion = firstCreatedQuestion.id;
+        draft.lastCreatedQuestionId = firstCreatedQuestion.id;
         break;
+      }
 
       case GET_QUESTIONS_REQUEST:
         draft.loaders.getQuestionsLoading = true;
@@ -143,6 +156,7 @@ export const questionsReducer = (state = initialState, action) =>
         break;
 
       case EDIT_QUESTION_REQUEST: {
+        draft.errors.updateQuestionError = null;
         draft.loaders.updateQuestionLoading = true;
         const questionIndex = state.questions.findIndex(
           ({ id }) => id === state.selectedQuestion,
@@ -199,6 +213,7 @@ export const questionsReducer = (state = initialState, action) =>
         break;
 
       case UPDATE_QUESTION_IMAGE_REQUEST:
+        draft.errors.updateQuestionError = null;
         draft.loaders.updateQuestionLoading = true;
         updateItemById(
           draft.questions,
@@ -210,6 +225,7 @@ export const questionsReducer = (state = initialState, action) =>
         );
         break;
       case UPDATE_QUESTION_IMAGE_SUCCESS:
+        draft.errors.updateQuestionError = null;
         draft.loaders.updateQuestionLoading = false;
         assignDraftItemsById(
           draft.questions,
@@ -431,6 +447,9 @@ export const questionsReducer = (state = initialState, action) =>
         break;
 
       case UPDATE_QUESTION_DATA: {
+        draft.errors.updateQuestionError = null;
+        draft.loaders.updateQuestionLoading = true;
+
         const questionId = get(action, 'payload.data.questionId', undefined);
         const selectedQuestionIndex = draft.questions.findIndex(
           ({ id }) => id === (questionId || draft.selectedQuestion),
@@ -450,6 +469,7 @@ export const questionsReducer = (state = initialState, action) =>
       }
 
       case UPDATE_QUESTION_SETTINGS: {
+        draft.errors.updateQuestionError = null;
         draft.loaders.updateQuestionLoading = true;
 
         const selectedQuestionIndex = draft.questions.findIndex(
@@ -499,7 +519,6 @@ export const questionsReducer = (state = initialState, action) =>
         assignDraftItems(draft.questions, draft.cache.questions);
         draft.loaders.updateQuestionLoading = false;
         break;
-
       case DUPLICATE_GROUPS_HERE_ERROR:
         draft.loaders.updateQuestionLoading = false;
         assignDraftItems(draft.cache.questions, draft.questions);

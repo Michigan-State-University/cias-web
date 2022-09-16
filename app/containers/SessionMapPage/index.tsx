@@ -51,6 +51,7 @@ import {
   answersReducer,
   fetchAnswersSaga,
   FETCH_ANSWERS_ERROR,
+  answersReducerKey,
 } from 'global/reducers/answers';
 import { JumpToScreenLocationState } from 'global/types/locationState';
 
@@ -66,7 +67,7 @@ import Column from 'components/Column';
 import Row from 'components/Row';
 
 import messages from './messages';
-import { defaultMaxZoom, defaultMinZoom, defaultZoom } from './constants';
+import { DEFAULT_MAX_ZOOM, DEFAULT_MIN_ZOOM, DEFAULT_ZOOM } from './constants';
 import SessionMapHeader from './components/SessionMapHeader';
 import SessionMap from './components/SessionMap';
 import SessionMapFooter from './components/SessionMapFooter';
@@ -125,7 +126,7 @@ const SessionMapPage = (): JSX.Element => {
   );
 
   // @ts-ignore
-  useInjectReducer({ key: 'answers', reducer: answersReducer });
+  useInjectReducer({ key: answersReducerKey, reducer: answersReducer });
   useInjectSaga({ key: 'fetchAnswers', saga: fetchAnswersSaga });
   const answers = useSelector(makeSelectAnswers());
   const answersLoading = useSelector(makeSelectAnswersLoader('fetchAnswers'));
@@ -154,9 +155,9 @@ const SessionMapPage = (): JSX.Element => {
   const [showWithBranchingOnlyEnabled, setShowWithBranchingOnlyEnabled] =
     useState(false);
 
-  const [zoom, setZoom] = useState(defaultZoom);
-  const [minZoom, setMinZoom] = useState(defaultMinZoom);
-  const handleZoomIn = () => setZoom(Math.min(defaultMaxZoom, zoom + 0.25));
+  const [zoom, setZoom] = useState(DEFAULT_ZOOM);
+  const [minZoom, setMinZoom] = useState(DEFAULT_MIN_ZOOM);
+  const handleZoomIn = () => setZoom(Math.min(DEFAULT_MAX_ZOOM, zoom + 0.25));
   const handleZoomOut = () => setZoom(Math.max(minZoom, zoom - 0.25));
 
   useEffect(() => {
@@ -278,7 +279,7 @@ const SessionMapPage = (): JSX.Element => {
                 afterPreview={Boolean(userSessionId)}
                 zoomIn={handleZoomIn}
                 zoomOut={handleZoomOut}
-                zoomInDisabled={zoom === defaultMaxZoom}
+                zoomInDisabled={zoom === DEFAULT_MAX_ZOOM}
                 zoomOutDisabled={zoom === minZoom}
               />
             </ReactFlowProvider>
