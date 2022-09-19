@@ -1,5 +1,6 @@
 import styled from 'styled-components';
-import { colors, boxShadows } from 'theme';
+
+import { colors, boxShadows, ZIndex } from 'theme';
 import { statusTypeToColorMap } from 'models/Status/StatusTypes';
 
 export const InterventionOptions = styled.div`
@@ -29,6 +30,6 @@ export const StatusLabel = styled.div`
 
 export const DraggedTest = styled.div`
   .dragged {
-    z-index: 10000;
+    z-index: ${ZIndex.DRAGGED_TEST};
   }
 `;

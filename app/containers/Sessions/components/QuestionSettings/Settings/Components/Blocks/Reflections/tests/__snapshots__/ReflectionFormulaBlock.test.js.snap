@@ -180,6 +180,7 @@ exports[`<ReflectionFormulaBlock /> Should render and match the snapshot 1`] = `
   display: block;
   border-radius: 5px;
   margin-top: 15px;
+  color: unset;
 }
 
 .c2 {
@@ -187,6 +188,7 @@ exports[`<ReflectionFormulaBlock /> Should render and match the snapshot 1`] = `
   height: auto;
   display: block;
   border-radius: 5px;
+  color: unset;
 }
 
 .c19 {
@@ -195,6 +197,7 @@ exports[`<ReflectionFormulaBlock /> Should render and match the snapshot 1`] = `
   display: block;
   border-radius: 5px;
   position: relative;
+  color: unset;
 }
 
 .c20 {
@@ -202,6 +205,8 @@ exports[`<ReflectionFormulaBlock /> Should render and match the snapshot 1`] = `
   height: auto;
   display: block;
   border-radius: 5px;
+  cursor: pointer;
+  color: unset;
   cursor: pointer;
 }
 
@@ -217,6 +222,7 @@ exports[`<ReflectionFormulaBlock /> Should render and match the snapshot 1`] = `
   border-radius: 10px;
   box-shadow: 0px 0px 50px rgba(0,0,0,0.08);
   border-radius: 10px;
+  color: unset;
 }
 
 .c24 {
@@ -229,6 +235,7 @@ exports[`<ReflectionFormulaBlock /> Should render and match the snapshot 1`] = `
   -webkit-flex-grow: 1;
   -ms-flex-positive: 1;
   flex-grow: 1;
+  color: unset;
 }
 
 .c25 {
@@ -244,6 +251,7 @@ exports[`<ReflectionFormulaBlock /> Should render and match the snapshot 1`] = `
   margin-top: 10px;
   margin-bottom: 40px;
   background-color: rgba(233,241,251,1);
+  color: unset;
 }
 
 .c31 {
@@ -253,6 +261,7 @@ exports[`<ReflectionFormulaBlock /> Should render and match the snapshot 1`] = `
   border-radius: 5px;
   min-width: 60px;
   margin-left: 10px;
+  color: unset;
 }
 
 .c32 {
@@ -263,6 +272,7 @@ exports[`<ReflectionFormulaBlock /> Should render and match the snapshot 1`] = `
   margin-right: 10px;
   margin-left: 10px;
   background-color: rgba(233,241,251,1);
+  color: unset;
 }
 
 .c37 {
@@ -273,6 +283,7 @@ exports[`<ReflectionFormulaBlock /> Should render and match the snapshot 1`] = `
   width: 100%;
   margin-top: 15px;
   background-color: rgba(233,241,251,1);
+  color: unset;
 }
 
 .c38 {
@@ -283,6 +294,7 @@ exports[`<ReflectionFormulaBlock /> Should render and match the snapshot 1`] = `
   position: absolute;
   right: 10px;
   bottom: 10px;
+  color: unset;
 }
 
 .c40 {
@@ -291,6 +303,7 @@ exports[`<ReflectionFormulaBlock /> Should render and match the snapshot 1`] = `
   display: block;
   border-radius: 5px;
   margin-top: 20px;
+  color: unset;
 }
 
 .c3 {
@@ -935,7 +948,7 @@ exports[`<ReflectionFormulaBlock /> Should render and match the snapshot 1`] = `
             >
               <button
                 aria-label="Play audio"
-                class="c39"
+                class="c39 "
                 font-weight="bold"
                 title="Play audio"
                 type="button"

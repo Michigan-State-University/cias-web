@@ -40,6 +40,10 @@ export default defineMessages({
       other {}
     } externally`,
   },
+  share: {
+    id: `${scope}.share`,
+    defaultMessage: 'share',
+  },
   resend: {
     id: `${scope}.resend`,
     defaultMessage: 'Resend email',
@@ -47,14 +51,6 @@ export default defineMessages({
   userListLabel: {
     id: `${scope}.userListLabel`,
     defaultMessage: 'Email has been already sent to',
-  },
-  invalidEmail: {
-    id: `${scope}.invalidEmail`,
-    defaultMessage: 'Email is invalid!',
-  },
-  duplicatedEmail: {
-    id: `${scope}.duplicatedEmail`,
-    defaultMessage: 'Such email is already provided!',
   },
   filename: {
     id: `${scope}.filename`,

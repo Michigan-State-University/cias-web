@@ -4,6 +4,7 @@ import { themeColors, colors, hexToRgb } from 'theme';
 import { margin } from 'components/BaseComponentStyles';
 import Row from 'components/Row';
 import { maxQueries } from 'components/Container/mediaQuery';
+import Circle from 'components/Circle';
 
 export const StyledLink = styled(Link)`
   font-size: 13px;
@@ -77,4 +78,8 @@ export const StyledLogos = styled(Row)`
       margin: 0;
     }
   }
+`;
+
+export const StyledCircle = styled(Circle)`
+  color: ${colors.white} !important;
 `;

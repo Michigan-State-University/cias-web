@@ -1,12 +1,13 @@
 import styled from 'styled-components';
 import { motion } from 'framer-motion';
 
-import { colors, themeColors } from 'theme';
+import { colors, fontWeights, themeColors } from 'theme';
 import { flex, layout, margin } from '../BaseComponentStyles';
 
 export const TabsContainer = styled.div`
   ${flex};
   ${layout};
+  ${margin};
 `;
 
 export const ContentContainer = styled.div`
@@ -21,6 +22,14 @@ export const LabelContainer = styled.div`
   padding-bottom: 7px;
   div {
     cursor: pointer;
+    ${({ emphasizeActiveLink, isActive }) =>
+      emphasizeActiveLink &&
+      isActive &&
+      `
+      color: ${themeColors.text} !important;
+      font-weight: ${fontWeights.bold} !important;
+    `}
+    ${({ labelStyle }) => labelStyle};
   }
 `;
 

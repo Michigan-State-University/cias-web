@@ -7,6 +7,7 @@ exports[`<NarratorTab /> Should render and match the snapshot 1`] = `
   display: block;
   border-radius: 5px;
   margin-bottom: 20px;
+  color: unset;
 }
 
 .c1 {
@@ -15,6 +16,7 @@ exports[`<NarratorTab /> Should render and match the snapshot 1`] = `
   display: block;
   border-radius: 5px;
   margin-bottom: 30px;
+  color: unset;
 }
 
 .c12 {
@@ -22,6 +24,7 @@ exports[`<NarratorTab /> Should render and match the snapshot 1`] = `
   height: auto;
   display: block;
   border-radius: 5px;
+  color: unset;
 }
 
 .c19 {
@@ -30,6 +33,7 @@ exports[`<NarratorTab /> Should render and match the snapshot 1`] = `
   display: block;
   border-radius: 5px;
   margin-bottom: 15px;
+  color: unset;
 }
 
 .c23 {
@@ -38,6 +42,7 @@ exports[`<NarratorTab /> Should render and match the snapshot 1`] = `
   display: block;
   border-radius: 5px;
   position: relative;
+  color: unset;
 }
 
 .c24 {
@@ -46,6 +51,7 @@ exports[`<NarratorTab /> Should render and match the snapshot 1`] = `
   display: block;
   border-radius: 5px;
   margin-top: 14px;
+  color: unset;
 }
 
 .c14 {

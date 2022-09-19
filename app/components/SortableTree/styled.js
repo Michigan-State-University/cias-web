@@ -3,7 +3,7 @@ import SortableTree from 'react-sortable-tree';
 import 'react-sortable-tree/style.css';
 import arrow from 'assets/svg/arrow-down-select.svg';
 
-import { themeColors } from 'theme';
+import { themeColors, ZIndex } from 'theme';
 
 export const StyledSortableTree = styled(SortableTree)`
   .rst__rowContents {
@@ -27,7 +27,7 @@ export const StyledSortableTree = styled(SortableTree)`
       transform: rotate(180deg);
       left: initial !important;
       right: -15px;
-      z-index: 1;
+      z-index: ${ZIndex.SORTABLE_TREE};
       background: initial;
       background-image: url('${arrow}');
       background-repeat: inherit;

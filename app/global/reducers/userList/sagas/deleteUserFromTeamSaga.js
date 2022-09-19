@@ -13,7 +13,7 @@ import {
 import { DELETE_USER_FROM_TEAM_REQUEST } from '../constants';
 
 function* deleteUserFromTeam({ payload: { userId, teamId } }) {
-  const requestUrl = `/v1/teams/${teamId}/remove_researcher`;
+  const requestUrl = `/v1/teams/${teamId}/remove_team_member`;
   try {
     yield axios.delete(requestUrl, { data: objectToSnakeCase({ userId }) });
     yield put(deleteUserFromTeamSuccess());

@@ -3,7 +3,7 @@ import styled from 'styled-components';
 import Row from 'components/Row';
 import Comment from 'components/Comment';
 
-import { elements, colors, hexToRgb } from 'theme';
+import { elements, colors, hexToRgb, ZIndex, mediaQuery } from 'theme';
 import { maxQueries } from 'components/Container/mediaQuery';
 
 export const NavbarStyled = styled.div`
@@ -15,7 +15,7 @@ export const NavbarStyled = styled.div`
   box-shadow: 0px 4px 10px rgba(227, 238, 251, 0.8);
   display: flex;
   align-items: center;
-  z-index: 10;
+  z-index: ${ZIndex.NAVBAR};
   height: ${elements.navbarHeight}px;
 
   .user-name-info {
@@ -31,6 +31,7 @@ export const RightPanel = styled.div`
   margin-right: 0;
   display: flex;
   align-items: center;
+  gap: 32px;
 `;
 
 export const DropDownContent = styled.div`
@@ -43,7 +44,7 @@ export const DropDownContent = styled.div`
   border-radius: 10px;
   box-shadow: 0px 0px 50px rgba(${hexToRgb(colors.black)}, 0.08);
   padding: 16px;
-  @media ${maxQueries.sm} {
+  @media ${maxQueries.md} {
     left: calc(100% - 150px);
   }
 `;
@@ -83,4 +84,13 @@ export const StyledRow = styled(Row)`
 
 export const DropDownContainer = styled.div`
   position: relative;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+`;
+
+export const MSULogoContainer = styled.div`
+  ${mediaQuery.mobile`
+    display: none
+  `}
 `;

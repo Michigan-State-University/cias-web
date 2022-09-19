@@ -117,6 +117,7 @@ exports[`<CurrencyQuestion /> Should render and match the snapshot 1`] = `
   border-radius: 5px;
   width: 100%;
   padding: 15px;
+  color: unset;
 }
 
 @media only screen and (min-width:768px) {
