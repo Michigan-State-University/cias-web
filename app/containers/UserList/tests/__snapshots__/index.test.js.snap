@@ -254,11 +254,79 @@ exports[`<UserList /> Should render and match the snapshot - admin 1`] = `
   height: auto;
   display: block;
   border-radius: 5px;
+  width: -webkit-max-content;
+  width: -moz-max-content;
+  width: max-content;
+  display: -webkit-inline-box;
+  display: -webkit-inline-flex;
+  display: -ms-inline-flexbox;
+  display: inline-flex;
+  padding-top: 5px;
+  padding-bottom: 5px;
+  padding-right: 10px;
+  padding-left: 10px;
+  background-color: rgba(0,134,248,1);
+  cursor: pointer;
+  -webkit-box-pack: center;
+  -webkit-justify-content: center;
+  -ms-flex-pack: center;
+  justify-content: center;
+  justify-items: center;
+  -webkit-align-content: center;
+  -ms-flex-line-pack: center;
+  align-content: center;
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  color: unset;
+  cursor: pointer;
+}
+
+.c13 {
+  width: auto;
+  height: auto;
+  display: block;
+  border-radius: 5px;
+  width: -webkit-max-content;
+  width: -moz-max-content;
+  width: max-content;
+  display: -webkit-inline-box;
+  display: -webkit-inline-flex;
+  display: -ms-inline-flexbox;
+  display: inline-flex;
+  padding-top: 5px;
+  padding-bottom: 5px;
+  padding-right: 10px;
+  padding-left: 10px;
+  background-color: rgba(251,155,10,1);
+  cursor: pointer;
+  -webkit-box-pack: center;
+  -webkit-justify-content: center;
+  -ms-flex-pack: center;
+  justify-content: center;
+  justify-items: center;
+  -webkit-align-content: center;
+  -ms-flex-line-pack: center;
+  align-content: center;
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  color: unset;
+  cursor: pointer;
+}
+
+.c14 {
+  width: auto;
+  height: auto;
+  display: block;
+  border-radius: 5px;
   width: 25px;
   color: unset;
 }
 
-.c32 {
+.c34 {
   width: auto;
   height: auto;
   display: block;
@@ -276,7 +344,7 @@ exports[`<UserList /> Should render and match the snapshot - admin 1`] = `
   color: unset;
 }
 
-.c33 {
+.c35 {
   width: auto;
   height: auto;
   display: block;
@@ -308,7 +376,7 @@ exports[`<UserList /> Should render and match the snapshot - admin 1`] = `
   color: unset;
 }
 
-.c37 {
+.c39 {
   width: auto;
   height: auto;
   display: block;
@@ -340,7 +408,7 @@ exports[`<UserList /> Should render and match the snapshot - admin 1`] = `
   color: unset;
 }
 
-.c38 {
+.c40 {
   width: auto;
   height: auto;
   display: block;
@@ -372,7 +440,7 @@ exports[`<UserList /> Should render and match the snapshot - admin 1`] = `
   color: unset;
 }
 
-.c40 {
+.c42 {
   width: auto;
   height: auto;
   display: block;
@@ -401,7 +469,7 @@ exports[`<UserList /> Should render and match the snapshot - admin 1`] = `
   color: unset;
 }
 
-.c13 {
+.c15 {
   display: -webkit-box;
   display: -webkit-flex;
   display: -ms-flexbox;
@@ -424,7 +492,7 @@ exports[`<UserList /> Should render and match the snapshot - admin 1`] = `
   align-items: center;
 }
 
-.c34 {
+.c36 {
   display: -webkit-box;
   display: -webkit-flex;
   display: -ms-flexbox;
@@ -442,7 +510,7 @@ exports[`<UserList /> Should render and match the snapshot - admin 1`] = `
   width: 100%;
 }
 
-.c39 {
+.c41 {
   display: -webkit-box;
   display: -webkit-flex;
   display: -ms-flexbox;
@@ -464,20 +532,20 @@ exports[`<UserList /> Should render and match the snapshot - admin 1`] = `
   display: flex;
 }
 
-.c15 {
+.c17 {
   display: none;
 }
 
-.c19 {
+.c21 {
   margin-right: 5px;
 }
 
-.c14:disabled + label > .c18 {
+.c16:disabled + label > .c20 {
   opacity: 0.5;
   cursor: not-allowed;
 }
 
-.c17 {
+.c19 {
   display: -webkit-box;
   display: -webkit-flex;
   display: -ms-flexbox;
@@ -491,11 +559,11 @@ exports[`<UserList /> Should render and match the snapshot - admin 1`] = `
   width: max-content;
 }
 
-.c17:hover {
+.c19:hover {
   cursor: pointer;
 }
 
-.c14:disabled + .c16 {
+.c16:disabled + .c18 {
   opacity: 0.5;
   cursor: not-allowed;
 }
@@ -510,7 +578,7 @@ exports[`<UserList /> Should render and match the snapshot - admin 1`] = `
   color: rgba(255,255,255,1);
 }
 
-.c31 {
+.c33 {
   font-family: DM Sans;
   font-size: 13px;
   line-height: 130%;
@@ -518,7 +586,7 @@ exports[`<UserList /> Should render and match the snapshot - admin 1`] = `
   color: rgba(210,55,29,1);
 }
 
-.c36 {
+.c38 {
   font-family: DM Sans;
   font-size: 13px;
   line-height: 130%;
@@ -527,7 +595,7 @@ exports[`<UserList /> Should render and match the snapshot - admin 1`] = `
   color: rgba(210,55,29,1);
 }
 
-.c41 {
+.c43 {
   font-family: DM Sans;
   font-size: 13px;
   line-height: 130%;
@@ -535,7 +603,7 @@ exports[`<UserList /> Should render and match the snapshot - admin 1`] = `
   color: rgba(255,255,255,1);
 }
 
-.c28 {
+.c30 {
   display: -webkit-box;
   display: -webkit-flex;
   display: -ms-flexbox;
@@ -563,7 +631,7 @@ exports[`<UserList /> Should render and match the snapshot - admin 1`] = `
   color: #2F3850;
 }
 
-.c42 {
+.c44 {
   margin: 0;
   font-family: DM Sans;
   font-size: 25px;
@@ -572,7 +640,7 @@ exports[`<UserList /> Should render and match the snapshot - admin 1`] = `
   cursor: pointer;
 }
 
-.c21 {
+.c23 {
   padding: 12px;
   border-style: solid;
   border-width: 1px;
@@ -583,17 +651,17 @@ exports[`<UserList /> Should render and match the snapshot - admin 1`] = `
   color: #2F3850;
 }
 
-.c21:focus {
+.c23:focus {
   box-shadow: none;
   outline: none;
   border-color: #107969;
 }
 
-.c21:disabled {
+.c23:disabled {
   color: #ABBBD1;
 }
 
-.c20 {
+.c22 {
   display: -webkit-box;
   display: -webkit-flex;
   display: -ms-flexbox;
@@ -605,7 +673,7 @@ exports[`<UserList /> Should render and match the snapshot - admin 1`] = `
   position: relative;
 }
 
-.c22 {
+.c24 {
   position: absolute;
   left: 10px;
   top: 10px;
@@ -624,7 +692,7 @@ exports[`<UserList /> Should render and match the snapshot - admin 1`] = `
   color: rgba(183,39,234,1);
 }
 
-.c35 {
+.c37 {
   outline: none;
   border: none;
   background: transparent;
@@ -637,53 +705,53 @@ exports[`<UserList /> Should render and match the snapshot - admin 1`] = `
   text-align: start;
 }
 
-.c24 {
+.c26 {
   font-size: 13px;
   width: 100%;
   margin-bottom: 20px;
   box-shadow: 0px 4px 20px #E3EEFB;
 }
 
-.c24 tr,
-.c24 th,
-.c24 td {
+.c26 tr,
+.c26 th,
+.c26 td {
   font-weight: 400;
 }
 
-.c25 {
+.c27 {
   height: 47.5px;
 }
 
-.c26 {
+.c28 {
   cursor: default;
   color: #0E0E0E;
 }
 
-.c26:hover {
+.c28:hover {
   background: !important;
 }
 
-.c29 {
+.c31 {
   cursor: pointer;
   color: #0E0E0E;
 }
 
-.c29:hover {
+.c31:hover {
   background: #E9F1FB !important;
 }
 
-.c30 {
+.c32 {
   padding-left: 20px;
 }
 
-.c27 {
+.c29 {
   width: auto;
   background-color: rgba(255,255,255,1);
   color: rgba(47,56,80,1);
   opacity: 0.6;
 }
 
-.c23 {
+.c25 {
   position: relative;
 }
 
@@ -736,7 +804,7 @@ exports[`<UserList /> Should render and match the snapshot - admin 1`] = `
           style="box-sizing: border-box; position: relative; margin-left: auto; margin-right: auto; margin-bottom: 40px; padding: 0px;"
         >
           <div
-            style="margin-left: -15px; margin-right: -15px; display: flex; flex-wrap: wrap; flex-grow: 0; flex-shrink: 0; align-items: center; justify-content: flex-start;"
+            style="margin-left: -15px; margin-right: -15px; display: flex; flex-wrap: wrap; flex-grow: 0; flex-shrink: 0; align-items: center; justify-content: space-between;"
           >
             <div
               style="box-sizing: border-box; min-height: 1px; position: relative; padding-left: 15px; padding-right: 15px; width: 100%; flex-basis: 100%; flex-grow: 0; flex-shrink: 0; max-width: 100%; margin-left: 0%;"
@@ -853,26 +921,80 @@ exports[`<UserList /> Should render and match the snapshot - admin 1`] = `
                   </div>
                 </div>
                 <div
-                  class="c12"
+                  style="box-sizing: border-box; min-height: 1px; position: relative; padding-left: 15px; padding-right: 15px; width: auto; flex-basis: auto; flex-grow: 0; flex-shrink: 0; max-width: 100%; margin-left: 0%; margin-bottom: 10px;"
+                >
+                  <div
+                    class="c7"
+                    display="inline-flex"
+                    width="max-content"
+                  >
+                    <p
+                      class="c6"
+                      color="#FFFFFF"
+                      font-size="14"
+                      font-weight="bold"
+                    >
+                      Clinic Admin
+                    </p>
+                  </div>
+                </div>
+                <div
+                  style="box-sizing: border-box; min-height: 1px; position: relative; padding-left: 15px; padding-right: 15px; width: auto; flex-basis: auto; flex-grow: 0; flex-shrink: 0; max-width: 100%; margin-left: 0%; margin-bottom: 10px;"
+                >
+                  <div
+                    class="c12"
+                    display="inline-flex"
+                    width="max-content"
+                  >
+                    <p
+                      class="c6"
+                      color="#FFFFFF"
+                      font-size="14"
+                      font-weight="bold"
+                    >
+                      Organization Admin
+                    </p>
+                  </div>
+                </div>
+                <div
+                  style="box-sizing: border-box; min-height: 1px; position: relative; padding-left: 15px; padding-right: 15px; width: auto; flex-basis: auto; flex-grow: 0; flex-shrink: 0; max-width: 100%; margin-left: 0%; margin-bottom: 10px;"
+                >
+                  <div
+                    class="c13"
+                    display="inline-flex"
+                    width="max-content"
+                  >
+                    <p
+                      class="c6"
+                      color="#FFFFFF"
+                      font-size="14"
+                      font-weight="bold"
+                    >
+                      Health System Admin
+                    </p>
+                  </div>
+                </div>
+                <div
+                  class="c14"
                   width="25"
                 />
                 <div
                   style="box-sizing: border-box; min-height: 1px; position: relative; padding-left: 15px; padding-right: 15px; width: 33.333333333333336%; flex-basis: 33.333333333333336%; flex-grow: 0; flex-shrink: 0; max-width: 33.333333333333336%; margin-left: 0%; margin-bottom: 10px;"
                 >
                   <div
-                    class="c13"
+                    class="c15"
                   >
                     <input
-                      class="c14 c15"
+                      class="c16 c17"
                       id="show-inactive"
                       type="checkbox"
                     />
                     <label
-                      class="c16 c17"
+                      class="c18 c19"
                       for="show-inactive"
                     >
                       <img
-                        class="c18 c19"
+                        class="c20 c21"
                         src="IMAGE_MOCK"
                       />
                       Show inactive accounts
@@ -882,20 +1004,20 @@ exports[`<UserList /> Should render and match the snapshot - admin 1`] = `
               </div>
             </div>
             <div
-              style="box-sizing: border-box; min-height: 1px; position: relative; padding-left: 15px; padding-right: 15px; width: 100%; flex-basis: 100%; flex-grow: 0; flex-shrink: 0; max-width: 100%; margin-left: 0%; margin-bottom: 10px;"
+              style="box-sizing: border-box; min-height: 1px; position: relative; padding-left: 15px; padding-right: 15px; width: 100%; flex-basis: 100%; flex-grow: 0; flex-shrink: 0; max-width: 100%; margin-left: 0%; margin-top: 10px;"
             >
               <div
-                class="c20"
+                class="c22"
               >
                 <input
                   aria-label="Filter users by name"
-                  class="c21"
+                  class="c23"
                   placeholder="Filter users by name"
                   type="text"
                 />
                 <img
                   alt="search"
-                  class="c22"
+                  class="c24"
                   src="IMAGE_MOCK"
                 />
                 
@@ -910,66 +1032,66 @@ exports[`<UserList /> Should render and match the snapshot - admin 1`] = `
           data-private="true"
         >
           <div
-            class="c23"
+            class="c25"
           >
             <table
-              class="c24"
+              class="c26"
               width="100%"
             >
               <thead
                 class=""
               >
                 <tr
-                  class="c25 c26"
+                  class="c27 c28"
                 >
                   <th
-                    class="c27"
+                    class="c29"
                     color="#2F3850"
                     opacity="0.6"
                     scope="col"
                     width="auto"
                   >
                     <div
-                      class="c28"
+                      class="c30"
                     >
                       Name
                     </div>
                   </th>
                   <th
-                    class="c27"
+                    class="c29"
                     color="#2F3850"
                     opacity="0.6"
                     scope="col"
                     width="auto"
                   >
                     <div
-                      class="c28"
+                      class="c30"
                     >
                       Email
                     </div>
                   </th>
                   <th
-                    class="c27"
+                    class="c29"
                     color="#2F3850"
                     opacity="0.6"
                     scope="col"
                     width="auto"
                   >
                     <div
-                      class="c28"
+                      class="c30"
                     >
                       Role
                     </div>
                   </th>
                   <th
-                    class="c27"
+                    class="c29"
                     color="#2F3850"
                     opacity="0.6"
                     scope="col"
                     width="auto"
                   >
                     <div
-                      class="c28"
+                      class="c30"
                     >
                       Activate/Deactivate
                     </div>
@@ -980,34 +1102,34 @@ exports[`<UserList /> Should render and match the snapshot - admin 1`] = `
                 class=""
               >
                 <tr
-                  class="c25 c29"
+                  class="c27 c31"
                   color="#FFFFFF"
                   cursor="pointer"
                 >
                   <td
-                    class="c30"
+                    class="c32"
                   >
                     <p
-                      class="c31"
+                      class="c33"
                       color="#D2371D"
                     >
                       Waiting for activation
                     </p>
                   </td>
                   <td
-                    class="c30"
+                    class="c32"
                   >
                     test@test.pl
                   </td>
                   <td
-                    class="c30"
+                    class="c32"
                   >
                     <div
-                      class="c32"
+                      class="c34"
                       display="flex"
                     >
                       <div
-                        class="c33"
+                        class="c35"
                         display="inline-flex"
                         width="max-content"
                       >
@@ -1023,17 +1145,17 @@ exports[`<UserList /> Should render and match the snapshot - admin 1`] = `
                     </div>
                   </td>
                   <td
-                    class="c30"
+                    class="c32"
                   >
                     <div
-                      class="c34"
+                      class="c36"
                       width="100%"
                     >
                       <button
-                        class="c35"
+                        class="c37"
                       >
                         <p
-                          class="c36"
+                          class="c38"
                           color="#D2371D"
                           font-weight="bold"
                         >
@@ -1044,34 +1166,34 @@ exports[`<UserList /> Should render and match the snapshot - admin 1`] = `
                   </td>
                 </tr>
                 <tr
-                  class="c25 c29"
+                  class="c27 c31"
                   color="#FFFFFF"
                   cursor="pointer"
                 >
                   <td
-                    class="c30"
+                    class="c32"
                   >
                     <p
-                      class="c31"
+                      class="c33"
                       color="#D2371D"
                     >
                       Waiting for activation
                     </p>
                   </td>
                   <td
-                    class="c30"
+                    class="c32"
                   >
                     test2@test.pl
                   </td>
                   <td
-                    class="c30"
+                    class="c32"
                   >
                     <div
-                      class="c32"
+                      class="c34"
                       display="flex"
                     >
                       <div
-                        class="c37"
+                        class="c39"
                         display="inline-flex"
                         width="max-content"
                       >
@@ -1087,17 +1209,17 @@ exports[`<UserList /> Should render and match the snapshot - admin 1`] = `
                     </div>
                   </td>
                   <td
-                    class="c30"
+                    class="c32"
                   >
                     <div
-                      class="c34"
+                      class="c36"
                       width="100%"
                     >
                       <button
-                        class="c35"
+                        class="c37"
                       >
                         <p
-                          class="c36"
+                          class="c38"
                           color="#D2371D"
                           font-weight="bold"
                         >
@@ -1108,34 +1230,34 @@ exports[`<UserList /> Should render and match the snapshot - admin 1`] = `
                   </td>
                 </tr>
                 <tr
-                  class="c25 c29"
+                  class="c27 c31"
                   color="#FFFFFF"
                   cursor="pointer"
                 >
                   <td
-                    class="c30"
+                    class="c32"
                   >
                     <p
-                      class="c31"
+                      class="c33"
                       color="#D2371D"
                     >
                       Waiting for activation
                     </p>
                   </td>
                   <td
-                    class="c30"
+                    class="c32"
                   >
                     test3@test.pl
                   </td>
                   <td
-                    class="c30"
+                    class="c32"
                   >
                     <div
-                      class="c32"
+                      class="c34"
                       display="flex"
                     >
                       <div
-                        class="c38"
+                        class="c40"
                         display="inline-flex"
                         width="max-content"
                       >
@@ -1151,17 +1273,17 @@ exports[`<UserList /> Should render and match the snapshot - admin 1`] = `
                     </div>
                   </td>
                   <td
-                    class="c30"
+                    class="c32"
                   >
                     <div
-                      class="c34"
+                      class="c36"
                       width="100%"
                     >
                       <button
-                        class="c35"
+                        class="c37"
                       >
                         <p
-                          class="c36"
+                          class="c38"
                           color="#D2371D"
                           font-weight="bold"
                         >
@@ -1177,7 +1299,7 @@ exports[`<UserList /> Should render and match the snapshot - admin 1`] = `
         </div>
         <div
           aria-label="Data list pagination"
-          class="c39"
+          class="c41"
           display="flex"
           role="navigation"
           width="100%"
@@ -1185,12 +1307,12 @@ exports[`<UserList /> Should render and match the snapshot - admin 1`] = `
           <div
             aria-label="Go to page: 1"
             aria-selected="true"
-            class="c40"
+            class="c42"
             cursor="pointer"
             display="flex"
           >
             <p
-              class="c41"
+              class="c43"
               color="#FFFFFF"
             >
               1
@@ -1198,7 +1320,7 @@ exports[`<UserList /> Should render and match the snapshot - admin 1`] = `
           </div>
           <h1
             aria-label="Go to next page"
-            class="c42"
+            class="c44"
             cursor="pointer"
           >
             &gt;
@@ -1464,11 +1586,79 @@ exports[`<UserList /> Should render and match the snapshot - researcher 1`] = `
   height: auto;
   display: block;
   border-radius: 5px;
+  width: -webkit-max-content;
+  width: -moz-max-content;
+  width: max-content;
+  display: -webkit-inline-box;
+  display: -webkit-inline-flex;
+  display: -ms-inline-flexbox;
+  display: inline-flex;
+  padding-top: 5px;
+  padding-bottom: 5px;
+  padding-right: 10px;
+  padding-left: 10px;
+  background-color: rgba(0,134,248,1);
+  cursor: pointer;
+  -webkit-box-pack: center;
+  -webkit-justify-content: center;
+  -ms-flex-pack: center;
+  justify-content: center;
+  justify-items: center;
+  -webkit-align-content: center;
+  -ms-flex-line-pack: center;
+  align-content: center;
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  color: unset;
+  cursor: pointer;
+}
+
+.c12 {
+  width: auto;
+  height: auto;
+  display: block;
+  border-radius: 5px;
+  width: -webkit-max-content;
+  width: -moz-max-content;
+  width: max-content;
+  display: -webkit-inline-box;
+  display: -webkit-inline-flex;
+  display: -ms-inline-flexbox;
+  display: inline-flex;
+  padding-top: 5px;
+  padding-bottom: 5px;
+  padding-right: 10px;
+  padding-left: 10px;
+  background-color: rgba(251,155,10,1);
+  cursor: pointer;
+  -webkit-box-pack: center;
+  -webkit-justify-content: center;
+  -ms-flex-pack: center;
+  justify-content: center;
+  justify-items: center;
+  -webkit-align-content: center;
+  -ms-flex-line-pack: center;
+  align-content: center;
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  color: unset;
+  cursor: pointer;
+}
+
+.c13 {
+  width: auto;
+  height: auto;
+  display: block;
+  border-radius: 5px;
   width: 25px;
   color: unset;
 }
 
-.c31 {
+.c33 {
   width: auto;
   height: auto;
   display: block;
@@ -1486,7 +1676,7 @@ exports[`<UserList /> Should render and match the snapshot - researcher 1`] = `
   color: unset;
 }
 
-.c32 {
+.c34 {
   width: auto;
   height: auto;
   display: block;
@@ -1518,7 +1708,7 @@ exports[`<UserList /> Should render and match the snapshot - researcher 1`] = `
   color: unset;
 }
 
-.c36 {
+.c38 {
   width: auto;
   height: auto;
   display: block;
@@ -1550,7 +1740,7 @@ exports[`<UserList /> Should render and match the snapshot - researcher 1`] = `
   color: unset;
 }
 
-.c37 {
+.c39 {
   width: auto;
   height: auto;
   display: block;
@@ -1582,7 +1772,7 @@ exports[`<UserList /> Should render and match the snapshot - researcher 1`] = `
   color: unset;
 }
 
-.c39 {
+.c41 {
   width: auto;
   height: auto;
   display: block;
@@ -1611,7 +1801,7 @@ exports[`<UserList /> Should render and match the snapshot - researcher 1`] = `
   color: unset;
 }
 
-.c12 {
+.c14 {
   display: -webkit-box;
   display: -webkit-flex;
   display: -ms-flexbox;
@@ -1634,7 +1824,7 @@ exports[`<UserList /> Should render and match the snapshot - researcher 1`] = `
   align-items: center;
 }
 
-.c33 {
+.c35 {
   display: -webkit-box;
   display: -webkit-flex;
   display: -ms-flexbox;
@@ -1652,7 +1842,7 @@ exports[`<UserList /> Should render and match the snapshot - researcher 1`] = `
   width: 100%;
 }
 
-.c38 {
+.c40 {
   display: -webkit-box;
   display: -webkit-flex;
   display: -ms-flexbox;
@@ -1674,20 +1864,20 @@ exports[`<UserList /> Should render and match the snapshot - researcher 1`] = `
   display: flex;
 }
 
-.c14 {
+.c16 {
   display: none;
 }
 
-.c18 {
+.c20 {
   margin-right: 5px;
 }
 
-.c13:disabled + label > .c17 {
+.c15:disabled + label > .c19 {
   opacity: 0.5;
   cursor: not-allowed;
 }
 
-.c16 {
+.c18 {
   display: -webkit-box;
   display: -webkit-flex;
   display: -ms-flexbox;
@@ -1701,11 +1891,11 @@ exports[`<UserList /> Should render and match the snapshot - researcher 1`] = `
   width: max-content;
 }
 
-.c16:hover {
+.c18:hover {
   cursor: pointer;
 }
 
-.c13:disabled + .c15 {
+.c15:disabled + .c17 {
   opacity: 0.5;
   cursor: not-allowed;
 }
@@ -1720,7 +1910,7 @@ exports[`<UserList /> Should render and match the snapshot - researcher 1`] = `
   color: rgba(255,255,255,1);
 }
 
-.c30 {
+.c32 {
   font-family: DM Sans;
   font-size: 13px;
   line-height: 130%;
@@ -1728,7 +1918,7 @@ exports[`<UserList /> Should render and match the snapshot - researcher 1`] = `
   color: rgba(210,55,29,1);
 }
 
-.c35 {
+.c37 {
   font-family: DM Sans;
   font-size: 13px;
   line-height: 130%;
@@ -1737,7 +1927,7 @@ exports[`<UserList /> Should render and match the snapshot - researcher 1`] = `
   color: rgba(210,55,29,1);
 }
 
-.c40 {
+.c42 {
   font-family: DM Sans;
   font-size: 13px;
   line-height: 130%;
@@ -1745,7 +1935,7 @@ exports[`<UserList /> Should render and match the snapshot - researcher 1`] = `
   color: rgba(255,255,255,1);
 }
 
-.c27 {
+.c29 {
   display: -webkit-box;
   display: -webkit-flex;
   display: -ms-flexbox;
@@ -1773,7 +1963,7 @@ exports[`<UserList /> Should render and match the snapshot - researcher 1`] = `
   color: #2F3850;
 }
 
-.c41 {
+.c43 {
   margin: 0;
   font-family: DM Sans;
   font-size: 25px;
@@ -1782,7 +1972,7 @@ exports[`<UserList /> Should render and match the snapshot - researcher 1`] = `
   cursor: pointer;
 }
 
-.c20 {
+.c22 {
   padding: 12px;
   border-style: solid;
   border-width: 1px;
@@ -1793,17 +1983,17 @@ exports[`<UserList /> Should render and match the snapshot - researcher 1`] = `
   color: #2F3850;
 }
 
-.c20:focus {
+.c22:focus {
   box-shadow: none;
   outline: none;
   border-color: #107969;
 }
 
-.c20:disabled {
+.c22:disabled {
   color: #ABBBD1;
 }
 
-.c19 {
+.c21 {
   display: -webkit-box;
   display: -webkit-flex;
   display: -ms-flexbox;
@@ -1815,13 +2005,13 @@ exports[`<UserList /> Should render and match the snapshot - researcher 1`] = `
   position: relative;
 }
 
-.c21 {
+.c23 {
   position: absolute;
   left: 10px;
   top: 10px;
 }
 
-.c34 {
+.c36 {
   outline: none;
   border: none;
   background: transparent;
@@ -1834,53 +2024,53 @@ exports[`<UserList /> Should render and match the snapshot - researcher 1`] = `
   text-align: start;
 }
 
-.c23 {
+.c25 {
   font-size: 13px;
   width: 100%;
   margin-bottom: 20px;
   box-shadow: 0px 4px 20px #E3EEFB;
 }
 
-.c23 tr,
-.c23 th,
-.c23 td {
+.c25 tr,
+.c25 th,
+.c25 td {
   font-weight: 400;
 }
 
-.c24 {
+.c26 {
   height: 47.5px;
 }
 
-.c25 {
+.c27 {
   cursor: default;
   color: #0E0E0E;
 }
 
-.c25:hover {
+.c27:hover {
   background: !important;
 }
 
-.c28 {
+.c30 {
   cursor: pointer;
   color: #0E0E0E;
 }
 
-.c28:hover {
+.c30:hover {
   background: #E9F1FB !important;
 }
 
-.c29 {
+.c31 {
   padding-left: 20px;
 }
 
-.c26 {
+.c28 {
   width: auto;
   background-color: rgba(255,255,255,1);
   color: rgba(47,56,80,1);
   opacity: 0.6;
 }
 
-.c22 {
+.c24 {
   position: relative;
 }
 
@@ -1926,7 +2116,7 @@ exports[`<UserList /> Should render and match the snapshot - researcher 1`] = `
           style="box-sizing: border-box; position: relative; margin-left: auto; margin-right: auto; margin-bottom: 40px; padding: 0px;"
         >
           <div
-            style="margin-left: -15px; margin-right: -15px; display: flex; flex-wrap: wrap; flex-grow: 0; flex-shrink: 0; align-items: center; justify-content: flex-start;"
+            style="margin-left: -15px; margin-right: -15px; display: flex; flex-wrap: wrap; flex-grow: 0; flex-shrink: 0; align-items: center; justify-content: space-between;"
           >
             <div
               style="box-sizing: border-box; min-height: 1px; position: relative; padding-left: 15px; padding-right: 15px; width: 100%; flex-basis: 100%; flex-grow: 0; flex-shrink: 0; max-width: 100%; margin-left: 0%;"
@@ -2043,26 +2233,80 @@ exports[`<UserList /> Should render and match the snapshot - researcher 1`] = `
                   </div>
                 </div>
                 <div
-                  class="c11"
+                  style="box-sizing: border-box; min-height: 1px; position: relative; padding-left: 15px; padding-right: 15px; width: auto; flex-basis: auto; flex-grow: 0; flex-shrink: 0; max-width: 100%; margin-left: 0%; margin-bottom: 10px;"
+                >
+                  <div
+                    class="c6"
+                    display="inline-flex"
+                    width="max-content"
+                  >
+                    <p
+                      class="c5"
+                      color="#FFFFFF"
+                      font-size="14"
+                      font-weight="bold"
+                    >
+                      Clinic Admin
+                    </p>
+                  </div>
+                </div>
+                <div
+                  style="box-sizing: border-box; min-height: 1px; position: relative; padding-left: 15px; padding-right: 15px; width: auto; flex-basis: auto; flex-grow: 0; flex-shrink: 0; max-width: 100%; margin-left: 0%; margin-bottom: 10px;"
+                >
+                  <div
+                    class="c11"
+                    display="inline-flex"
+                    width="max-content"
+                  >
+                    <p
+                      class="c5"
+                      color="#FFFFFF"
+                      font-size="14"
+                      font-weight="bold"
+                    >
+                      Organization Admin
+                    </p>
+                  </div>
+                </div>
+                <div
+                  style="box-sizing: border-box; min-height: 1px; position: relative; padding-left: 15px; padding-right: 15px; width: auto; flex-basis: auto; flex-grow: 0; flex-shrink: 0; max-width: 100%; margin-left: 0%; margin-bottom: 10px;"
+                >
+                  <div
+                    class="c12"
+                    display="inline-flex"
+                    width="max-content"
+                  >
+                    <p
+                      class="c5"
+                      color="#FFFFFF"
+                      font-size="14"
+                      font-weight="bold"
+                    >
+                      Health System Admin
+                    </p>
+                  </div>
+                </div>
+                <div
+                  class="c13"
                   width="25"
                 />
                 <div
                   style="box-sizing: border-box; min-height: 1px; position: relative; padding-left: 15px; padding-right: 15px; width: 33.333333333333336%; flex-basis: 33.333333333333336%; flex-grow: 0; flex-shrink: 0; max-width: 33.333333333333336%; margin-left: 0%; margin-bottom: 10px;"
                 >
                   <div
-                    class="c12"
+                    class="c14"
                   >
                     <input
-                      class="c13 c14"
+                      class="c15 c16"
                       id="show-inactive"
                       type="checkbox"
                     />
                     <label
-                      class="c15 c16"
+                      class="c17 c18"
                       for="show-inactive"
                     >
                       <img
-                        class="c17 c18"
+                        class="c19 c20"
                         src="IMAGE_MOCK"
                       />
                       Show inactive accounts
@@ -2072,20 +2316,20 @@ exports[`<UserList /> Should render and match the snapshot - researcher 1`] = `
               </div>
             </div>
             <div
-              style="box-sizing: border-box; min-height: 1px; position: relative; padding-left: 15px; padding-right: 15px; width: 100%; flex-basis: 100%; flex-grow: 0; flex-shrink: 0; max-width: 100%; margin-left: 0%; margin-bottom: 10px;"
+              style="box-sizing: border-box; min-height: 1px; position: relative; padding-left: 15px; padding-right: 15px; width: 100%; flex-basis: 100%; flex-grow: 0; flex-shrink: 0; max-width: 100%; margin-left: 0%; margin-top: 10px;"
             >
               <div
-                class="c19"
+                class="c21"
               >
                 <input
                   aria-label="Filter users by name"
-                  class="c20"
+                  class="c22"
                   placeholder="Filter users by name"
                   type="text"
                 />
                 <img
                   alt="search"
-                  class="c21"
+                  class="c23"
                   src="IMAGE_MOCK"
                 />
                 
@@ -2100,66 +2344,66 @@ exports[`<UserList /> Should render and match the snapshot - researcher 1`] = `
           data-private="true"
         >
           <div
-            class="c22"
+            class="c24"
           >
             <table
-              class="c23"
+              class="c25"
               width="100%"
             >
               <thead
                 class=""
               >
                 <tr
-                  class="c24 c25"
+                  class="c26 c27"
                 >
                   <th
-                    class="c26"
+                    class="c28"
                     color="#2F3850"
                     opacity="0.6"
                     scope="col"
                     width="auto"
                   >
                     <div
-                      class="c27"
+                      class="c29"
                     >
                       Name
                     </div>
                   </th>
                   <th
-                    class="c26"
+                    class="c28"
                     color="#2F3850"
                     opacity="0.6"
                     scope="col"
                     width="auto"
                   >
                     <div
-                      class="c27"
+                      class="c29"
                     >
                       Email
                     </div>
                   </th>
                   <th
-                    class="c26"
+                    class="c28"
                     color="#2F3850"
                     opacity="0.6"
                     scope="col"
                     width="auto"
                   >
                     <div
-                      class="c27"
+                      class="c29"
                     >
                       Role
                     </div>
                   </th>
                   <th
-                    class="c26"
+                    class="c28"
                     color="#2F3850"
                     opacity="0.6"
                     scope="col"
                     width="auto"
                   >
                     <div
-                      class="c27"
+                      class="c29"
                     >
                       Activate/Deactivate
                     </div>
@@ -2170,34 +2414,34 @@ exports[`<UserList /> Should render and match the snapshot - researcher 1`] = `
                 class=""
               >
                 <tr
-                  class="c24 c28"
+                  class="c26 c30"
                   color="#FFFFFF"
                   cursor="pointer"
                 >
                   <td
-                    class="c29"
+                    class="c31"
                   >
                     <p
-                      class="c30"
+                      class="c32"
                       color="#D2371D"
                     >
                       Waiting for activation
                     </p>
                   </td>
                   <td
-                    class="c29"
+                    class="c31"
                   >
                     test@test.pl
                   </td>
                   <td
-                    class="c29"
+                    class="c31"
                   >
                     <div
-                      class="c31"
+                      class="c33"
                       display="flex"
                     >
                       <div
-                        class="c32"
+                        class="c34"
                         display="inline-flex"
                         width="max-content"
                       >
@@ -2213,17 +2457,17 @@ exports[`<UserList /> Should render and match the snapshot - researcher 1`] = `
                     </div>
                   </td>
                   <td
-                    class="c29"
+                    class="c31"
                   >
                     <div
-                      class="c33"
+                      class="c35"
                       width="100%"
                     >
                       <button
-                        class="c34"
+                        class="c36"
                       >
                         <p
-                          class="c35"
+                          class="c37"
                           color="#D2371D"
                           font-weight="bold"
                         >
@@ -2234,34 +2478,34 @@ exports[`<UserList /> Should render and match the snapshot - researcher 1`] = `
                   </td>
                 </tr>
                 <tr
-                  class="c24 c28"
+                  class="c26 c30"
                   color="#FFFFFF"
                   cursor="pointer"
                 >
                   <td
-                    class="c29"
+                    class="c31"
                   >
                     <p
-                      class="c30"
+                      class="c32"
                       color="#D2371D"
                     >
                       Waiting for activation
                     </p>
                   </td>
                   <td
-                    class="c29"
+                    class="c31"
                   >
                     test2@test.pl
                   </td>
                   <td
-                    class="c29"
+                    class="c31"
                   >
                     <div
-                      class="c31"
+                      class="c33"
                       display="flex"
                     >
                       <div
-                        class="c36"
+                        class="c38"
                         display="inline-flex"
                         width="max-content"
                       >
@@ -2277,17 +2521,17 @@ exports[`<UserList /> Should render and match the snapshot - researcher 1`] = `
                     </div>
                   </td>
                   <td
-                    class="c29"
+                    class="c31"
                   >
                     <div
-                      class="c33"
+                      class="c35"
                       width="100%"
                     >
                       <button
-                        class="c34"
+                        class="c36"
                       >
                         <p
-                          class="c35"
+                          class="c37"
                           color="#D2371D"
                           font-weight="bold"
                         >
@@ -2298,34 +2542,34 @@ exports[`<UserList /> Should render and match the snapshot - researcher 1`] = `
                   </td>
                 </tr>
                 <tr
-                  class="c24 c28"
+                  class="c26 c30"
                   color="#FFFFFF"
                   cursor="pointer"
                 >
                   <td
-                    class="c29"
+                    class="c31"
                   >
                     <p
-                      class="c30"
+                      class="c32"
                       color="#D2371D"
                     >
                       Waiting for activation
                     </p>
                   </td>
                   <td
-                    class="c29"
+                    class="c31"
                   >
                     test3@test.pl
                   </td>
                   <td
-                    class="c29"
+                    class="c31"
                   >
                     <div
-                      class="c31"
+                      class="c33"
                       display="flex"
                     >
                       <div
-                        class="c37"
+                        class="c39"
                         display="inline-flex"
                         width="max-content"
                       >
@@ -2341,17 +2585,17 @@ exports[`<UserList /> Should render and match the snapshot - researcher 1`] = `
                     </div>
                   </td>
                   <td
-                    class="c29"
+                    class="c31"
                   >
                     <div
-                      class="c33"
+                      class="c35"
                       width="100%"
                     >
                       <button
-                        class="c34"
+                        class="c36"
                       >
                         <p
-                          class="c35"
+                          class="c37"
                           color="#D2371D"
                           font-weight="bold"
                         >
@@ -2367,7 +2611,7 @@ exports[`<UserList /> Should render and match the snapshot - researcher 1`] = `
         </div>
         <div
           aria-label="Data list pagination"
-          class="c38"
+          class="c40"
           display="flex"
           role="navigation"
           width="100%"
@@ -2375,12 +2619,12 @@ exports[`<UserList /> Should render and match the snapshot - researcher 1`] = `
           <div
             aria-label="Go to page: 1"
             aria-selected="true"
-            class="c39"
+            class="c41"
             cursor="pointer"
             display="flex"
           >
             <p
-              class="c40"
+              class="c42"
               color="#FFFFFF"
             >
               1
@@ -2388,7 +2632,7 @@ exports[`<UserList /> Should render and match the snapshot - researcher 1`] = `
           </div>
           <h1
             aria-label="Go to next page"
-            class="c41"
+            class="c43"
             cursor="pointer"
           >
             &gt;

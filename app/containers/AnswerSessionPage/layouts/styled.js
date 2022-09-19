@@ -109,3 +109,8 @@ export const MarkupContainer = styled.div`
     line-height: 1.42 !important;
   }
 `;
+
+export const TlfbContainer = styled.div`
+  display: flex;
+  flex-direction: column;
+`;

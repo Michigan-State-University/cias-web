@@ -24,7 +24,7 @@ export function* sendSessionInvite({ payload: { emails, sessionId } }) {
     (session) => session.id === sessionId,
   );
   const organizationPrefix = organizationId
-    ? `/organizations/${organizationId}/`
+    ? `organizations/${organizationId}/`
     : '';
   const requestURL = `v1/${organizationPrefix}sessions/${sessionId}/invitations`;
   const requestBody = organizationId

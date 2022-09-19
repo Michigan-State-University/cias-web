@@ -103,6 +103,7 @@ export const BoxCollapse = ({
         isBinInCollapse
         color={labelBgColor}
         bgOpacity={labelBgOpacity}
+        // @ts-ignore
         binImage={BinIcon}
         binFillColor={binFillColor}
         onDelete={onDelete}

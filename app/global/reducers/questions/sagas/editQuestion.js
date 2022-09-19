@@ -4,16 +4,22 @@ import { toast } from 'react-toastify';
 import get from 'lodash/get';
 
 import {
+  gridQuestion,
+  multiQuestion,
+  tlfbQuestion,
+} from 'models/Session/QuestionTypes';
+import {
   QUESTIONS_WITHOUT_VARIABLE,
   getEditVariables,
+  getTlfbVariables,
 } from 'models/Session/utils';
+
 import { hasDuplicates } from 'utils/hasDuplicates';
 import { mapQuestionToStateObject } from 'utils/mapResponseObjects';
 import { formatMessage } from 'utils/intlOutsideReact';
-
-import { gridQuestion, multiQuestion } from 'models/Session/QuestionTypes';
 import { objectDifference } from 'utils/objectDifference';
 import { hasObjectAnyKeys } from 'utils/getObjectKeys';
+
 import messages from '../messages';
 import {
   EDIT_QUESTION_REQUEST,
@@ -51,6 +57,11 @@ const validateVariable = (payload, question, variables) => {
     question.body.data[0].payload.rows.forEach((element) => {
       checkAgainstExisting(element.variable.name);
     });
+  } else if (question.type === tlfbQuestion.id) {
+    const tlfbVariables = getTlfbVariables(question);
+    tlfbVariables.forEach((variable) => {
+      if (hasDuplicates(variables, variable)) throw duplicateError;
+    });
   } else {
     checkAgainstExisting(question.body.variable.name);
   }
@@ -84,7 +95,9 @@ function* editQuestion({ payload }) {
     yield call(toast.error, error.message, {
       toastId: EDIT_QUESTION_ERROR,
     });
-    return yield put(editQuestionError({ questionId: question.id }));
+    return yield put(
+      editQuestionError({ questionId: question.id, error: error.message }),
+    );
   }
 
   yield call(toast.dismiss, EDIT_QUESTION_ERROR);

@@ -1,29 +1,17 @@
 import { ReportFor } from 'global/reducers/reportTemplates';
 
-export const FETCH_REPORTS_REQUEST = 'app/Dashboard/FETCH_REPORTS_REQUEST';
-export const FETCH_REPORTS_SUCCESS = 'app/Dashboard/FETCH_REPORTS_SUCCESS';
-export const FETCH_REPORTS_ERROR = 'app/Dashboard/FETCH_REPORTS_ERROR';
+export const FETCH_REPORTS_REQUEST =
+  'app/GeneratedReports/FETCH_REPORTS_REQUEST';
+export const FETCH_REPORTS_SUCCESS =
+  'app/GeneratedReports/FETCH_REPORTS_SUCCESS';
+export const FETCH_REPORTS_ERROR = 'app/GeneratedReports/FETCH_REPORTS_ERROR';
 
-export const FETCH_INTERVENTIONS_REQUEST =
-  'app/GeneratedReports/FETCH_INTERVENTIONS_REQUEST';
-export const FETCH_INTERVENTIONS_SUCCESS =
-  'app/GeneratedReports/FETCH_INTERVENTIONS_SUCCESS';
-export const FETCH_INTERVENTIONS_ERROR =
-  'app/GeneratedReports/FETCH_INTERVENTIONS_ERROR';
-
-export const FETCH_LATEST_REPORT_REQUEST =
-  'app/GeneratedReports/FETCH_LATEST_REPORT_REQUEST';
-export const FETCH_LATEST_REPORT_SUCCESS =
-  'app/GeneratedReports/FETCH_LATEST_REPORT_SUCCESS';
-export const FETCH_LATEST_REPORT_ERROR =
-  'app/GeneratedReports/FETCH_LATEST_REPORT_ERROR';
-
-export const TOGGLE_NOTIFICATIONS_REQUEST =
-  'app/GeneratedReports/TOGGLE_NOTIFICATIONS_REQUEST';
-export const TOGGLE_NOTIFICATIONS_SUCCESS =
-  'app/GeneratedReports/TOGGLE_NOTIFICATIONS_SUCCESS';
-export const TOGGLE_NOTIFICATIONS_ERROR =
-  'app/GeneratedReports/TOGGLE_NOTIFICATIONS_ERROR';
+export const MARK_REPORT_DOWNLOADED_REQUEST =
+  'app/GeneratedReports/MARK_REPORT_DOWNLOADED_REQUEST';
+export const MARK_REPORT_DOWNLOADED_SUCCESS =
+  'app/GeneratedReports/MARK_REPORT_DOWNLOADED_SUCCESS';
+export const MARK_REPORT_DOWNLOADED_ERROR =
+  'app/GeneratedReports/MARK_REPORT_DOWNLOADED_ERROR';
 
 export const PARTICIPANTS = ReportFor.participant;
 export const THIRD_PARTY = ReportFor.thirdParty;

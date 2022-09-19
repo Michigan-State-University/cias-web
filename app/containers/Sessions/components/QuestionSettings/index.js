@@ -5,6 +5,7 @@ import { connect } from 'react-redux';
 import { createStructuredSelector } from 'reselect';
 import { injectIntl } from 'react-intl';
 
+import { elements } from 'theme';
 import Box from 'components/Box';
 import H2 from 'components/H2';
 import Row from 'components/Row';
@@ -15,7 +16,6 @@ import cross from 'assets/svg/cross-white-small.svg';
 import { useInjectSaga } from 'redux-injectors';
 import {
   makeSelectQuestionSettingsVisibility,
-  setQuestionSettings,
   toggleQuestionSettings,
 } from 'global/reducers/localState';
 import {
@@ -44,7 +44,7 @@ const QuestionSettings = ({
   return (
     <Container isVisible={isVisible}>
       <SettingsBar isVisible={isVisible} height="100%">
-        <Box width={400} height="100%" padded>
+        <Box width={elements.screenSettingsWidth} height="100%" padded>
           <Row align="center" justify="between" mb={40}>
             <H2>{formatMessage(messages.header)}</H2>
           </Row>
@@ -82,7 +82,6 @@ const mapStateToProps = createStructuredSelector({
 });
 
 const mapDispatchToProps = {
-  setSettings: setQuestionSettings,
   toggleSettings: toggleQuestionSettings,
 };
 

@@ -1,6 +1,8 @@
 import styled from 'styled-components';
 import PropTypes from 'prop-types';
+
 import { themeColors } from 'theme';
+
 import { border, margin, padding, style, text } from '../BaseComponentStyles';
 
 const StyledCircle = styled.div`
@@ -10,7 +12,9 @@ const StyledCircle = styled.div`
   justify-content: center;
   align-items: center;
   width: ${(props) => props.size};
+  ${({ doNotShrink, size }) => doNotShrink && `min-width: ${size}`};
   height: ${(props) => props.size};
+  ${({ doNotShrink, size }) => doNotShrink && `min-height: ${size}`};
   ${padding};
   ${margin};
   ${style};
@@ -21,6 +25,7 @@ const StyledCircle = styled.div`
 StyledCircle.propTypes = {
   padded: PropTypes.bool,
   size: PropTypes.string,
+  doNotShrink: PropTypes.bool,
 };
 
 StyledCircle.defaultProps = {

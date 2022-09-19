@@ -446,6 +446,7 @@ exports[`<UserDetails /> Should render and match the snapshot 1`] = `
   cursor: pointer;
   border: none;
   outline: none;
+  font-weight: bold;
   background-color: #FFFFFF;
   color: #107969;
   border: 1px solid #107969;
@@ -463,6 +464,7 @@ exports[`<UserDetails /> Should render and match the snapshot 1`] = `
   cursor: pointer;
   border: none;
   outline: none;
+  font-weight: bold;
   background-color: #D2371D;
   color: #FFFFFF;
   border: 1px solid transparent;

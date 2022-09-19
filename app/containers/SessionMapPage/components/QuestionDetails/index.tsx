@@ -24,7 +24,7 @@ import Row from 'components/Row';
 import QuestionTypeIndicator from 'components/QuestionTypeIndicator';
 import Button from 'components/Button';
 
-import { questionTypesWithoutVariables } from '../../constants';
+import { QUESTIONS_WITHOUT_VARIABLES } from '../../constants';
 import messages from './messages';
 import VariablesAndScores from './VariablesAndScores';
 import {
@@ -89,7 +89,7 @@ const SessionMapQuestionDetails = ({
               />
             </Column>
           </Row>
-          {!questionTypesWithoutVariables.includes(type) && (
+          {!QUESTIONS_WITHOUT_VARIABLES.includes(type) && (
             <VariablesAndScores
               question={shownQuestion}
               reportTemplates={reportTemplates}

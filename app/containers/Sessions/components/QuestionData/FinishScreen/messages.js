@@ -11,4 +11,8 @@ export default defineMessages({
     id: `${scope}.tooltip`,
     defaultMessage: 'Visible only for logged in participants',
   },
+  completeSession: {
+    id: `${scope}.completeSession`,
+    defaultMessage: 'Complete Session',
+  },
 });

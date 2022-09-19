@@ -5,13 +5,13 @@ import { SourceHandle, TargetHandle } from './styled';
 
 type Props = {
   nodeId: string;
-  showSourceHandle?: boolean;
+  displaySourceHandle?: boolean;
   sourceHandleColor: string;
 };
 
 const ReactFlowNodeHandles = ({
   nodeId,
-  showSourceHandle,
+  displaySourceHandle,
   sourceHandleColor,
 }: Props): JSX.Element => (
   <>
@@ -20,7 +20,7 @@ const ReactFlowNodeHandles = ({
       position={Position.Left}
       id={`${nodeId}-target-handle`}
     />
-    {showSourceHandle && (
+    {displaySourceHandle && (
       <SourceHandle
         type="source"
         position={Position.Right}

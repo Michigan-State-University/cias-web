@@ -4,11 +4,7 @@
  *
  */
 
-import {
-  feedbackQuestion,
-  informationQuestion,
-  urlQuestion,
-} from 'models/Session/QuestionTypes';
+import { QuestionTypes } from 'models/Question';
 
 export const SUBMIT_ANSWER_REQUEST =
   'app/AnswerSessionPage/SUBMIT_ANSWER_REQUEST';
@@ -84,8 +80,20 @@ export const NAME_QUESTION_NAME_ID = 'name-question-name';
 
 export const NAME_QUESTION_SPELL_NAME_ID = 'name-question-spell-name';
 
-export const NOT_SKIPABLE_QUESTIONS = [
-  feedbackQuestion.id,
-  informationQuestion.id,
-  urlQuestion.id,
+export const NOT_SKIPPABLE_QUESTIONS = [
+  QuestionTypes.FEEDBACK,
+  QuestionTypes.INFORMATION,
+  QuestionTypes.EXTERNAL_LINK,
+  QuestionTypes.TLFB_EVENTS,
+  QuestionTypes.TLFB_QUESTION,
+];
+
+export const FULL_SIZE_QUESTIONS = [
+  QuestionTypes.TLFB_EVENTS,
+  QuestionTypes.TLFB_QUESTION,
+];
+
+export const CONFIRMABLE_QUESTIONS = [
+  QuestionTypes.TLFB_EVENTS,
+  QuestionTypes.TLFB_QUESTION,
 ];

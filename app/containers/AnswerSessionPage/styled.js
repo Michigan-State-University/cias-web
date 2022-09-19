@@ -21,11 +21,18 @@ export const BackButton = styled.div`
 export const AnswerInterventionContent = styled.div`
   align-items: flex-start;
   display: flex;
-  max-width: ${elements.draggableContainerSize}px;
+  position: relative;
+  flex-grow: 1;
+`;
+
+export const ScreenWrapper = styled.div`
+  display: flex;
+  max-width: ${(props) =>
+    props.isFullSize ? '100%' : `${elements.draggableContainerSize}px`};
   min-height: ${elements.draggableContainerSize}px;
   position: relative;
   width: 100%;
-  height: fit-content;
+  height: 100%;
 `;
 
 const getStyles = (previewMode) => css`
@@ -44,6 +51,7 @@ export const AnswerOuterContainer = styled.div`
   justify-content: ${(props) =>
     props.interventionStarted ? 'flex-start' : 'center'};
   width: 100%;
-  max-width: ${elements.draggableContainerSize}px;
+  max-width: ${(props) =>
+    props.isFullSize ? '100%' : `${elements.draggableContainerSize}px`};
   ${(props) => props.previewMode && getStyles(props.previewMode)}
 `;

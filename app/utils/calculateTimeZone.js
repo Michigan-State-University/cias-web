@@ -1,10 +1,5 @@
 import { loadState } from 'utils/persist';
 import dayjs from 'dayjs';
-import utc from 'dayjs/plugin/utc';
-import timezone from 'dayjs/plugin/timezone';
-
-dayjs.extend(utc);
-dayjs.extend(timezone);
 
 /**
  * Default UTC time when the server will perform the operation of sending e-mails

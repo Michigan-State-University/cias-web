@@ -48,6 +48,17 @@ export const deleteItemById = (draftCollection, id) => {
 };
 
 /**
+ * Delete Immer draft item from collection based on the collection index
+ *
+ * @param {Draft<T[]>} draftCollection
+ * @param index
+ * @template T
+ */
+export const deleteItemByIndex = (draftCollection, index) => {
+  draftCollection.splice(index, 1);
+};
+
+/**
  * Assign two Immer draft items in a collection based on the `id`
  *
  * @param {Draft<T[]>} assignFrom

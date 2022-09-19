@@ -59,7 +59,7 @@ import ReportingDashboardPage from 'containers/ReportingDashboardPage/Loadable';
 import ClinicAdminRedirectPage from 'containers/ClinicAdminRedirectPage/Loadable';
 import { VIEW } from 'containers/ReportingDashboardPage/constants';
 import ApiQueryMessageHandler from 'components/ApiQueryMessageHandler/Loadable';
-import ParticipantReports from 'containers/ParticipantDashboard/Loadable';
+import ParticipantReportsPage from 'containers/ParticipantReportsPage/Loadable';
 import SessionMapPage from 'containers/SessionMapPage/Loadable';
 import ParticipantInterventionsPage from 'containers/ParticipantInterventionsPage/Loadable';
 import UserInterventionInvitePage from 'containers/UserInterventionInvitePage/Loadable';
@@ -287,7 +287,7 @@ export function App({ user, fetchSelfDetails }) {
         <AppRoute
           exact
           path="/reports"
-          component={ParticipantReports}
+          component={ParticipantReportsPage}
           protectedRoute
           allowedRoles={[Roles.Participant]}
           navbarProps={{

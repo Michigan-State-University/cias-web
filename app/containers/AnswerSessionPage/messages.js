@@ -13,6 +13,7 @@ import {
   RANDOMIZATION_MISS_MATCH,
   FORBIDDEN_CAT_MH_BRANCHING,
 } from 'containers/AnswerSessionPage/constants';
+import { QuestionTypes } from 'models/Question';
 
 export const scope = 'app.containers.AnswerSessionPage';
 
@@ -37,17 +38,42 @@ export default defineMessages({
     id: `${scope}.skipQuestionModalMessage`,
     defaultMessage: 'Are you sure you want to leave this question empty?',
   },
+  confirmContinueModalHeader: {
+    id: `${scope}.confirmContinueModalHeader`,
+    defaultMessage: 'Is that all?',
+  },
+  [`confirmContinueModalMessage${QuestionTypes.TLFB_EVENTS}`]: {
+    id: `${scope}.confirmContinueModalMessage${QuestionTypes.TLFB_EVENTS}`,
+    defaultMessage: 'Are you sure you have marked all your events?',
+  },
+  [`confirmContinueModalMessage${QuestionTypes.TLFB_QUESTION}`]: {
+    id: `${scope}.confirmContinueModalMessage${QuestionTypes.TLFB_QUESTION}`,
+    defaultMessage:
+      'Are you sure you marked all the days you used these substances?',
+  },
+  confirmContinueModalConfirmText: {
+    id: `${scope}.confirmContinueModalConfirmText`,
+    defaultMessage: 'Yes, I am sure',
+  },
+  confirmContinueModalCancelText: {
+    id: `${scope}.confirmContinueModalCancelText`,
+    defaultMessage: 'No, let me correct',
+  },
   submitAnswer: {
     id: `${scope}.submitAnswer`,
     defaultMessage: 'Finish session',
   },
   startSession: {
     id: `${scope}.startSession`,
-    defaultMessage: 'Start session',
+    defaultMessage: 'Start Session',
+  },
+  clickToStart: {
+    id: `${scope}.clickToStart`,
+    defaultMessage: 'Click the button below to start a new session.',
   },
   continueSession: {
     id: `${scope}.continueSession`,
-    defaultMessage: 'Continue session',
+    defaultMessage: 'Continue Session',
   },
   startPreview: {
     id: `${scope}.startPreview`,
@@ -123,13 +149,9 @@ export default defineMessages({
     id: `${scope}.showTranscriptToggle`,
     defaultMessage: 'Show Transcript',
   },
-  previewHeader: {
-    id: `${scope}.previewHeader`,
-    defaultMessage: 'Preview Session',
-  },
   fillHeader: {
     id: `${scope}.fillHeader`,
-    defaultMessage: 'Fill Session',
+    defaultMessage: 'Welcome!',
   },
   narratorAlt: {
     id: `${scope}.narratorAlt`,
@@ -149,6 +171,27 @@ export default defineMessages({
     id: `${scope}.goToSessionMap`,
     defaultMessage: 'Go to session map',
   },
+  addEvent: {
+    id: `${scope}.addEvent`,
+    defaultMessage: 'Add another event',
+  },
+  saveEvents: {
+    id: `${scope}.saveEvents`,
+    defaultMessage: 'Save events',
+  },
+  goToNextDay: {
+    id: `${scope}.goToNextDay`,
+    defaultMessage: 'Go to the next day',
+  },
+  saveAnswer: {
+    id: `${scope}.saveAnswer`,
+    defaultMessage: 'Save',
+  },
+  tlfbDataError: {
+    id: `${scope}.tlfbDataError`,
+    defaultMessage:
+      'There was an error with fetching calender data. Please refresh the page',
+  },
   pageTitle: {
     id: `${scope}.pageTitle`,
     defaultMessage: `{isPreview, select,
@@ -167,5 +210,18 @@ export default defineMessages({
   exitIconAlt: {
     id: `${scope}.exitIconAlt`,
     defaultMessage: `Quick Exit button icon`,
+  },
+  monthSelectorModalTitle: {
+    id: `${scope}.monthSelectorModalTitle`,
+    defaultMessage: `Month navigation`,
+  },
+  monthSelectorModalText: {
+    id: `${scope}.monthSelectorModalText`,
+    defaultMessage: `This study covers a period of more than one month. Using the arrows,
+    you can conveniently switch between them to complete all the months.`,
+  },
+  monthSelectorModalButton: {
+    id: `${scope}.monthSelectorModalButton`,
+    defaultMessage: `I understand`,
   },
 });

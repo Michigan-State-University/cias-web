@@ -27,6 +27,17 @@ exports[`<AnswerSessionPage /> Should render and match the snapshot 1`] = `
   color: unset;
 }
 
+.c3 {
+  width: auto;
+  height: auto;
+  display: block;
+  border-radius: 5px;
+  max-width: 600px;
+  margin-right: 32px;
+  margin-left: 32px;
+  color: unset;
+}
+
 .c0 {
   display: -webkit-box;
   display: -webkit-flex;
@@ -39,7 +50,7 @@ exports[`<AnswerSessionPage /> Should render and match the snapshot 1`] = `
   height: 100%;
 }
 
-.c4 {
+.c6 {
   margin: 0;
   font-family: DM Sans;
   font-size: 15px;
@@ -51,20 +62,15 @@ exports[`<AnswerSessionPage /> Should render and match the snapshot 1`] = `
 }
 
 .c5 {
-  width: 100%;
-  height: 40px;
-  border-radius: 100px;
-  cursor: pointer;
-  border: none;
-  outline: none;
-  background-color: #107969;
-  color: #FFFFFF;
-  border: 1px solid transparent;
-  -webkit-transition: background-color 300ms ease,color 300ms ease,border 300ms ease;
-  transition: background-color 300ms ease,color 300ms ease,border 300ms ease;
+  font-family: DM Sans;
+  font-size: 13px;
+  line-height: 130%;
+  margin-bottom: 50px;
+  color: #2F3850;
+  text-align: center;
 }
 
-.c3 {
+.c4 {
   margin: 0;
   font-family: DM Sans;
   font-size: 18px;
@@ -74,7 +80,22 @@ exports[`<AnswerSessionPage /> Should render and match the snapshot 1`] = `
   text-align: center;
 }
 
-.c6 {
+.c7 {
+  width: 100%;
+  height: 40px;
+  border-radius: 100px;
+  cursor: pointer;
+  border: none;
+  outline: none;
+  font-weight: bold;
+  background-color: #107969;
+  color: #FFFFFF;
+  border: 1px solid transparent;
+  -webkit-transition: background-color 300ms ease,color 300ms ease,border 300ms ease;
+  transition: background-color 300ms ease,color 300ms ease,border 300ms ease;
+}
+
+.c8 {
   width: 80%;
 }
 
@@ -120,7 +141,7 @@ exports[`<AnswerSessionPage /> Should render and match the snapshot 1`] = `
 }
 
 @media only screen and (max-width:480px) {
-  .c6 {
+  .c8 {
     width: 80%;
   }
 }
@@ -139,23 +160,32 @@ exports[`<AnswerSessionPage /> Should render and match the snapshot 1`] = `
     <div
       class="c2"
     >
-      <h2
+      <div
         class="c3"
       >
-        Fill Session
-      </h2>
-      <h3
-        class="c4"
-        color="#D2371D"
-      >
-        Please be aware that after clicking the button, audio may be played automatically and the content could change its position dynamically.
-      </h3>
+        <h2
+          class="c4"
+        >
+          Welcome!
+        </h2>
+        <p
+          class="c5"
+        >
+          Click the button below to start a new session.
+        </p>
+        <h3
+          class="c6"
+          color="#D2371D"
+        >
+          Please be aware that after clicking the button, audio may be played automatically and the content could change its position dynamically.
+        </h3>
+      </div>
       <button
-        class="c5 c6"
+        class="c7 c8"
         color="primary"
         radius="100px"
       >
-        Start session
+        Start Session
       </button>
     </div>
   </div>

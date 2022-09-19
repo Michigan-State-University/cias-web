@@ -26,7 +26,6 @@ const Target = ({
   setTargetChooserOpen,
   onDeleteTarget,
   invalidPercentage,
-  onAddTarget,
   isOnlyTarget,
   bg,
   disableBranchingToSession,
@@ -42,12 +41,7 @@ const Target = ({
 
   return (
     <Box display="flex" align="center" width="100%">
-      <Box
-        opacity={onAddTarget ? 0.3 : 1}
-        display="flex"
-        align="center"
-        width="100%"
-      >
+      <Box display="flex" align="center" width="100%">
         {!isOnlyTarget && (
           <Box bg={bg || colors.linkWater} mr={6} ml={88} position="relative">
             <StyledInput
@@ -55,7 +49,6 @@ const Target = ({
               width={56}
               height={50}
               disabled={disabled}
-              cursor={onAddTarget ? 'pointer' : undefined}
               px={0}
               py={12}
               textAlign="center"
@@ -138,7 +131,6 @@ Target.propTypes = {
   setTargetChooserOpen: PropTypes.func,
   onDeleteTarget: PropTypes.func,
   bg: PropTypes.string,
-  onAddTarget: PropTypes.func,
   disableBranchingToSession: PropTypes.bool,
 };
 

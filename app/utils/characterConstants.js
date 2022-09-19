@@ -1,3 +1,5 @@
+import { QuestionTypes } from 'models/Question';
+
 const POSITION_VALUES = {
   minXPosition: 0,
   minYPosition: 0,
@@ -30,3 +32,11 @@ export const characterInitialPosition = {
   x: CHARACTER_POSITIONS.bottomRightCorner.x,
   y: CHARACTER_POSITIONS.bottomRightCorner.y - offsetFromBottom,
 };
+
+export const CHARACTER_FIXED_POSITION = CHARACTER_POSITIONS.topLeftCorner;
+
+export const CHARACTER_FIXED_POSITION_QUESTIONS = [
+  QuestionTypes.TLFB_CONFIG,
+  QuestionTypes.TLFB_EVENTS,
+  QuestionTypes.TLFB_QUESTION,
+];

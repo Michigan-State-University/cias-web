@@ -9,7 +9,8 @@ export default defineMessages({
   },
   groupError: {
     id: `${scope}.groupError`,
-    defaultMessage: 'Cannot group question',
+    defaultMessage:
+      'Something goes wrong while grouping. Please check that you not trying to group TLFB with other groups.',
   },
   reorderError: {
     id: `${scope}.reorderError`,
@@ -17,7 +18,13 @@ export default defineMessages({
   },
   shareError: {
     id: `${scope}.shareError`,
-    defaultMessage: 'Cannot share questions!',
+    defaultMessage:
+      'Something goes wrong while sharing copy. Please check that you not trying to share copy of TLFB with other groups.',
+  },
+  copyError: {
+    id: `${scope}.copyError`,
+    defaultMessage:
+      'Something goes wrong while duplicating. Please check that you not trying to duplicate TLFB with other groups.',
   },
   shareSuccess: {
     id: `${scope}.shareSuccess`,

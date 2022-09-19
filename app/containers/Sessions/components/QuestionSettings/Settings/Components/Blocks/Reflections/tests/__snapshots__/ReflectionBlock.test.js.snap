@@ -12,7 +12,7 @@ exports[`<ReflectionBlock /> Should render and match the snapshot 1`] = `
   width: 100%;
 }
 
-.c2 {
+.c1 {
   width: auto;
   height: auto;
   display: block;
@@ -21,7 +21,7 @@ exports[`<ReflectionBlock /> Should render and match the snapshot 1`] = `
   color: unset;
 }
 
-.c3 {
+.c2 {
   width: auto;
   height: auto;
   display: block;
@@ -29,7 +29,7 @@ exports[`<ReflectionBlock /> Should render and match the snapshot 1`] = `
   color: unset;
 }
 
-.c23 {
+.c22 {
   width: auto;
   height: auto;
   display: block;
@@ -45,7 +45,7 @@ exports[`<ReflectionBlock /> Should render and match the snapshot 1`] = `
   color: unset;
 }
 
-.c24 {
+.c23 {
   width: auto;
   height: auto;
   display: block;
@@ -54,7 +54,7 @@ exports[`<ReflectionBlock /> Should render and match the snapshot 1`] = `
   color: unset;
 }
 
-.c25 {
+.c24 {
   width: auto;
   height: auto;
   display: block;
@@ -65,7 +65,7 @@ exports[`<ReflectionBlock /> Should render and match the snapshot 1`] = `
   color: unset;
 }
 
-.c27 {
+.c26 {
   width: auto;
   height: auto;
   display: block;
@@ -74,6 +74,31 @@ exports[`<ReflectionBlock /> Should render and match the snapshot 1`] = `
   right: 10px;
   bottom: 10px;
   color: unset;
+}
+
+.c4 {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-flex-direction: row;
+  -ms-flex-direction: row;
+  flex-direction: row;
+  height: auto;
+  -webkit-box-pack: justify;
+  -webkit-justify-content: space-between;
+  -ms-flex-pack: justify;
+  justify-content: space-between;
+  justify-items: space-between;
+  -webkit-align-content: center;
+  -ms-flex-line-pack: center;
+  align-content: center;
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  margin-top: 15px;
+  margin-bottom: 15px;
 }
 
 .c5 {
@@ -97,34 +122,9 @@ exports[`<ReflectionBlock /> Should render and match the snapshot 1`] = `
   -webkit-box-align: center;
   -ms-flex-align: center;
   align-items: center;
-  margin-top: 15px;
-  margin-bottom: 15px;
 }
 
-.c6 {
-  display: -webkit-box;
-  display: -webkit-flex;
-  display: -ms-flexbox;
-  display: flex;
-  -webkit-flex-direction: row;
-  -ms-flex-direction: row;
-  flex-direction: row;
-  height: auto;
-  -webkit-box-pack: justify;
-  -webkit-justify-content: space-between;
-  -ms-flex-pack: justify;
-  justify-content: space-between;
-  justify-items: space-between;
-  -webkit-align-content: center;
-  -ms-flex-line-pack: center;
-  align-content: center;
-  -webkit-align-items: center;
-  -webkit-box-align: center;
-  -ms-flex-align: center;
-  align-items: center;
-}
-
-.c12 {
+.c11 {
   display: -webkit-box;
   display: -webkit-flex;
   display: -ms-flexbox;
@@ -148,7 +148,7 @@ exports[`<ReflectionBlock /> Should render and match the snapshot 1`] = `
   width: 100%;
 }
 
-.c17 {
+.c16 {
   display: -webkit-box;
   display: -webkit-flex;
   display: -ms-flexbox;
@@ -172,7 +172,7 @@ exports[`<ReflectionBlock /> Should render and match the snapshot 1`] = `
   margin-bottom: 15px;
 }
 
-.c20 {
+.c19 {
   display: -webkit-box;
   display: -webkit-flex;
   display: -ms-flexbox;
@@ -196,7 +196,7 @@ exports[`<ReflectionBlock /> Should render and match the snapshot 1`] = `
   height: 100%;
 }
 
-.c4 {
+.c3 {
   width: auto;
   height: auto;
   -webkit-transition: -webkit-transform 0.2s;
@@ -204,26 +204,26 @@ exports[`<ReflectionBlock /> Should render and match the snapshot 1`] = `
   transition: transform 0.2s;
 }
 
-.c22 {
+.c21 {
   width: auto;
   height: auto;
 }
 
-.c14 {
+.c13 {
   position: relative;
   display: inline-block;
   min-width: 40px;
   height: 21px;
 }
 
-.c9 {
+.c8 {
   opacity: 0;
   width: 0;
   height: 0;
   visibility: collapse;
 }
 
-.c11 {
+.c10 {
   width: 100%;
   display: -webkit-box;
   display: -webkit-flex;
@@ -235,16 +235,16 @@ exports[`<ReflectionBlock /> Should render and match the snapshot 1`] = `
   align-items: center;
 }
 
-.c11:hover {
+.c10:hover {
   cursor: pointer;
 }
 
-.c8:disabled + .c10 {
+.c7:disabled + .c9 {
   opacity: 0.5;
   cursor: not-allowed;
 }
 
-.c16 {
+.c15 {
   position: absolute;
   top: 0;
   left: 0;
@@ -256,20 +256,20 @@ exports[`<ReflectionBlock /> Should render and match the snapshot 1`] = `
   border-radius: 21px;
 }
 
-.c8:checked + .c10 .c15 {
+.c7:checked + .c9 .c14 {
   background-color: #B727EA;
 }
 
-.c8:focus + .c10 .c15 {
+.c7:focus + .c9 .c14 {
   box-shadow: 0 0 1px #B727EA;
 }
 
-.c8:disabled + .c10 .c15 {
+.c7:disabled + .c9 .c14 {
   opacity: 0.5;
   cursor: not-allowed;
 }
 
-.c16:before {
+.c15:before {
   position: absolute;
   content: '';
   left: 4px;
@@ -282,21 +282,21 @@ exports[`<ReflectionBlock /> Should render and match the snapshot 1`] = `
   border-radius: 50%;
 }
 
-.c8:checked + .c10 .c15:before {
+.c7:checked + .c9 .c14:before {
   -webkit-transform: translateX(18px);
   -ms-transform: translateX(18px);
   transform: translateX(18px);
 }
 
-.c13 {
+.c12 {
   margin-right: 5px;
 }
 
-.c7 {
+.c6 {
   width: 100% !important;
 }
 
-.c21 {
+.c20 {
   font-family: DM Sans;
   font-size: 13px;
   line-height: 130%;
@@ -306,12 +306,12 @@ exports[`<ReflectionBlock /> Should render and match the snapshot 1`] = `
   overflow: hidden;
 }
 
-.c18 {
+.c17 {
   position: relative;
   width: 100%;
 }
 
-.c19 {
+.c18 {
   overflow: hidden;
   height: 50px;
   padding: 5px 10px;
@@ -322,7 +322,7 @@ exports[`<ReflectionBlock /> Should render and match the snapshot 1`] = `
   cursor: pointer;
 }
 
-.c26 {
+.c25 {
   resize: none;
   padding: 12px;
   border: 1px solid #E9F1FB;
@@ -335,32 +335,17 @@ exports[`<ReflectionBlock /> Should render and match the snapshot 1`] = `
   border: 1px solid transparent;
 }
 
-.c26:focus {
+.c25:focus {
   box-shadow: none;
   outline: none;
   border: 1px solid #107969;
 }
 
-.c26:disabled {
+.c25:disabled {
   color: #ABBBD1;
 }
 
-.c1 {
-  width: 100%;
-  height: 40px;
-  border-radius: 100px;
-  cursor: pointer;
-  border: none;
-  outline: none;
-  background-color: #107969;
-  color: #FFFFFF;
-  border: 1px solid transparent;
-  -webkit-transition: background-color 300ms ease,color 300ms ease,border 300ms ease;
-  transition: background-color 300ms ease,color 300ms ease,border 300ms ease;
-  margin-top: 15px;
-}
-
-.c28 {
+.c27 {
   outline: none;
   border: none;
   background: transparent;
@@ -394,23 +379,16 @@ exports[`<ReflectionBlock /> Should render and match the snapshot 1`] = `
   <div
     class="c0"
   >
-    <button
-      class="c1"
-      color="primary"
-      radius="100px"
-    >
-      Reset Narrator to previous block position
-    </button>
     <div
-      class="c2"
+      class="c1"
     >
       Select Speech Animation
     </div>
     <div
-      class="c2"
+      class="c1"
     >
       <div
-        class="c3"
+        class="c2"
       >
         <div
           class=" css-2b097c-container"
@@ -466,7 +444,7 @@ exports[`<ReflectionBlock /> Should render and match the snapshot 1`] = `
               >
                 <img
                   alt="arrow"
-                  class="c4"
+                  class="c3"
                   src="IMAGE_MOCK"
                   transform=""
                 />
@@ -477,16 +455,16 @@ exports[`<ReflectionBlock /> Should render and match the snapshot 1`] = `
       </div>
     </div>
     <div
-      class="c5"
+      class="c4"
     >
       <div
-        class="c6 c7"
+        class="c5 c6"
       >
         <input
           aria-checked="true"
           aria-disabled="false"
           checked=""
-          class="c8 c9"
+          class="c7 c8"
           data-cy="branching-intervention-toggle"
           data-testid="switch-input"
           id="reflection-toggle"
@@ -494,23 +472,63 @@ exports[`<ReflectionBlock /> Should render and match the snapshot 1`] = `
           type="checkbox"
         />
         <label
-          class="c10 c11"
+          class="c9 c10"
           for="reflection-toggle"
         >
           <div
-            class="c12"
+            class="c11"
             width="100%"
           >
             <div
-              class="c3 c13"
+              class="c2 c12"
             >
               Use Reflection
             </div>
             <div
-              class="c14"
+              class="c13"
             >
               <span
-                class="c15 c16"
+                class="c14 c15"
+              />
+            </div>
+          </div>
+        </label>
+      </div>
+    </div>
+    <div
+      class="c16"
+    >
+      <div
+        class="c5 c6"
+      >
+        <input
+          aria-checked="false"
+          aria-disabled="false"
+          class="c7 c8"
+          data-cy="branching-intervention-toggle"
+          data-testid="switch-input"
+          id="formula-toggle"
+          role="switch"
+          type="checkbox"
+        />
+        <label
+          class="c9 c10"
+          for="formula-toggle"
+        >
+          <div
+            class="c11"
+            width="100%"
+          >
+            <div
+              class="c2 c12"
+            >
+              Use Formula
+            </div>
+            <div
+              class="c13"
+            >
+              <span
+                class="c14 c15"
               />
             </div>
           </div>
@@ -519,63 +537,23 @@ exports[`<ReflectionBlock /> Should render and match the snapshot 1`] = `
     </div>
     <div
       class="c17"
-    >
-      <div
-        class="c6 c7"
-      >
-        <input
-          aria-checked="false"
-          aria-disabled="false"
-          class="c8 c9"
-          data-cy="branching-intervention-toggle"
-          data-testid="switch-input"
-          id="formula-toggle"
-          role="switch"
-          type="checkbox"
-        />
-        <label
-          class="c10 c11"
-          for="formula-toggle"
-        >
-          <div
-            class="c12"
-            width="100%"
-          >
-            <div
-              class="c3 c13"
-            >
-              Use Formula
-            </div>
-            <div
-              class="c14"
-            >
-              <span
-                class="c15 c16"
-              />
-            </div>
-          </div>
-        </label>
-      </div>
-    </div>
-    <div
-      class="c18"
       width="100%"
     >
       <div
-        class="c19"
+        class="c18"
       >
         <div
-          class="c20"
+          class="c19"
           height="100%"
         >
           <div
-            class="c3"
+            class="c2"
           >
             <div
-              class="c3"
+              class="c2"
             >
               <p
-                class="c21"
+                class="c20"
                 overflow="hidden"
               >
                 Choose Question
@@ -583,25 +561,25 @@ exports[`<ReflectionBlock /> Should render and match the snapshot 1`] = `
             </div>
           </div>
           <img
-            class="c22"
+            class="c21"
             src="IMAGE_MOCK"
           />
         </div>
       </div>
       <div
-        class="c23"
+        class="c22"
         display="none"
         width="100%"
       />
     </div>
     <div
-      class="c2"
+      class="c1"
     >
       <div
         class="c0"
       >
         <div
-          class="c2"
+          class="c1"
         >
           1
         </div>
@@ -609,15 +587,15 @@ exports[`<ReflectionBlock /> Should render and match the snapshot 1`] = `
           class="c0"
         >
           <div
-            class="c24"
+            class="c23"
           >
             <div
-              class="c25"
+              class="c24"
               width="100%"
             >
               <textarea
                 aria-label="Enter speech here..."
-                class="c26"
+                class="c25"
                 data-cy="text-area"
                 height="auto"
                 placeholder="Enter speech here..."
@@ -629,11 +607,11 @@ exports[`<ReflectionBlock /> Should render and match the snapshot 1`] = `
               </textarea>
             </div>
             <div
-              class="c27"
+              class="c26"
             >
               <button
                 aria-label="Play audio"
-                class="c28 "
+                class="c27 "
                 font-weight="bold"
                 title="Play audio"
                 type="button"

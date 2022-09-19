@@ -17,14 +17,16 @@ import { Redirect, useLocation } from 'react-router-dom';
 import { useContainerQuery } from 'react-container-query';
 import { Hidden, Visible } from 'react-grid-system';
 import { useInjectSaga, useInjectReducer } from 'redux-injectors';
+import Color from 'color';
 
 import ccIcon from 'assets/svg/closed-captions.svg';
 
-import { elements, themeColors } from 'theme';
+import { colors, elements, themeColors } from 'theme';
 
 import AudioWrapper from 'utils/audioWrapper';
 import isNullOrUndefined from 'utils/isNullOrUndefined';
 import { DESKTOP_MODE, I_PHONE_8_PLUS_MODE } from 'utils/previewMode';
+import { CHARACTER_FIXED_POSITION_QUESTIONS } from 'utils/characterConstants';
 import { makeSelectAudioInstance } from 'global/reducers/globalState';
 import {
   fetchInterventionRequest,
@@ -44,10 +46,14 @@ import {
 } from 'global/reducers/chatWidget';
 import { canPreview } from 'models/Status/statusPermissions';
 import { finishQuestion } from 'models/Session/QuestionTypes';
-import { UserSessionType } from 'models/Session/UserSession';
+import { UserSessionType } from 'models/UserSession/UserSession';
+import { QuestionTypes } from 'models/Question';
 
 import QuestionTranscript from 'containers/QuestionTranscript';
-import { ANSWER_SESSION_PAGE_ID } from 'containers/App/constants';
+import {
+  ANSWER_SESSION_PAGE_ID,
+  ANSWER_SESSION_CONTAINER_ID,
+} from 'containers/App/constants';
 
 import {
   additionalBreakpoints,
@@ -55,13 +61,13 @@ import {
 } from 'components/Container/containerBreakpoints';
 import AppContainer from 'components/Container';
 import ErrorAlert from 'components/ErrorAlert';
-import { Button } from 'components/Button';
 import Row from 'components/Row';
 import Column from 'components/Column';
 import Box from 'components/Box';
 import Loader from 'components/Loader';
 import H2 from 'components/H2';
 import H3 from 'components/H3';
+import Text from 'components/Text';
 import Icon from 'components/Icon';
 import { ConfirmationModal } from 'components/Modal';
 import Img from 'components/Img';
@@ -69,7 +75,6 @@ import QuickExit from 'components/QuickExit';
 
 import renderQuestionByType from './components';
 import CharacterAnim from './components/CharacterAnim';
-import { SkipQuestionButton } from './components/SkipQuestionButton';
 import CommonLayout from './layouts/CommonLayout';
 
 import makeSelectAnswerSessionPage from './selectors';
@@ -79,6 +84,7 @@ import messages from './messages';
 import {
   AnswerInterventionContent,
   AnswerOuterContainer,
+  ScreenWrapper,
   StyledButton,
 } from './styled';
 import {
@@ -95,7 +101,12 @@ import {
   saveQuickExitEventRequest,
 } from './actions';
 import BranchingScreen from './components/BranchingScreen';
-import { NOT_SKIPABLE_QUESTIONS } from './constants';
+import {
+  NOT_SKIPPABLE_QUESTIONS,
+  FULL_SIZE_QUESTIONS,
+  CONFIRMABLE_QUESTIONS,
+} from './constants';
+import { ActionButtons } from './components/ActionButtons';
 
 const AnimationRefHelper = ({
   children,
@@ -110,6 +121,7 @@ const AnimationRefHelper = ({
 }) => {
   const animationParentRef = useRef();
   const [refState, setRefState] = useState(null);
+
   useEffect(() => {
     setRefState(animationParentRef.current);
   }, [animationParentRef]);
@@ -153,10 +165,14 @@ AnimationRefHelper.propTypes = {
 
 const IS_DESKTOP = 'IS_DESKTOP';
 const IS_XXL = 'IS_XXL';
+const IS_MOBILE = 'IS_MOBILE';
 
 const QUERY = {
   [IS_DESKTOP]: {
     minWidth: additionalBreakpoints.desktopSm,
+  },
+  [IS_MOBILE]: {
+    maxWidth: containerBreakpoints.sm,
   },
   [IS_XXL]: {
     minWidth: containerBreakpoints.xxl,
@@ -211,6 +227,10 @@ export function AnswerSessionPage({
 
   const [skipQuestionModalVisible, setSkipQuestionModalVisible] =
     useState(false);
+  const [
+    confirmContinueQuestionModalVisible,
+    setConfirmContinueQuestionModalVisible,
+  ] = useState(false);
 
   const {
     type,
@@ -226,18 +246,16 @@ export function AnswerSessionPage({
   const checkIfDesktop = (containerQuery) =>
     isPreview ? previewMode === DESKTOP_MODE && containerQuery : containerQuery;
 
-  const { isDesktop } = useMemo(
+  const { isDesktop, isMobile, transcriptIconFixedPosition } = useMemo(
     () => ({
       isDesktop: checkIfDesktop(containerQueryParams[IS_DESKTOP]),
+      transcriptIconFixedPosition: checkIfDesktop(containerQueryParams[IS_XXL]),
+      isMobile: isPreview
+        ? previewMode === I_PHONE_8_PLUS_MODE
+        : containerQueryParams[IS_MOBILE],
     }),
     [previewMode, containerQueryParams, isPreview],
   );
-
-  const logoStyles = useMemo(() => {
-    if (isDesktop) return { position: 'absolute', right: '30px' };
-
-    return {};
-  }, [containerQueryParams, isDesktop]);
 
   const {
     id: userSessionId,
@@ -309,6 +327,15 @@ export function AnswerSessionPage({
       skipped,
     );
 
+  const isNarratorPositionFixed =
+    CHARACTER_FIXED_POSITION_QUESTIONS.includes(type);
+
+  const onContinueButton = () => {
+    if (CONFIRMABLE_QUESTIONS.includes(type))
+      setConfirmContinueQuestionModalVisible(true);
+    else saveAnswer(false);
+  };
+
   const renderQuestionTranscript = (isRightSide) => {
     const renderTranscriptComponent = ({ maxWidth, height }) => (
       <Box mt={isRightSide ? 120 : 30} maxWidth={maxWidth} height={height}>
@@ -320,7 +347,7 @@ export function AnswerSessionPage({
     );
 
     const renderRightSide = () => {
-      if (isDesktop)
+      if (isDesktop && !isFullSize)
         return (
           <Visible xxl>
             {renderTranscriptComponent({ maxWidth: 300, height: 600 })}
@@ -331,7 +358,7 @@ export function AnswerSessionPage({
     };
 
     const renderBottomSide = () => {
-      if (isDesktop)
+      if (isDesktop && !isFullSize)
         return (
           <Hidden xxl>
             {renderTranscriptComponent({ maxWidth: '100%', height: 300 })}
@@ -358,9 +385,7 @@ export function AnswerSessionPage({
       />
     );
 
-    const fixedPosition = checkIfDesktop(containerQueryParams[IS_XXL]);
-
-    if (fixedPosition) {
+    if (transcriptIconFixedPosition) {
       return (
         <Row position="fixed" right={30} bottom={30}>
           {transcriptToggleIcon}
@@ -410,6 +435,10 @@ export function AnswerSessionPage({
       setFeedbackSettings,
       isAnimationOngoing,
       isDesktop,
+      isMobile,
+      previewMode,
+      isMobilePreview: isPreview && previewMode !== DESKTOP_MODE,
+      userSessionId: userSession?.id,
     };
 
     const isLastScreen = currentQuestion.type === finishQuestion.id;
@@ -419,7 +448,7 @@ export function AnswerSessionPage({
     const shouldRenderSkipQuestionButton =
       userSessionType !== UserSessionType.CAT_MH &&
       !isLastScreen &&
-      !NOT_SKIPABLE_QUESTIONS.includes(type);
+      !NOT_SKIPPABLE_QUESTIONS.includes(type);
 
     const shouldRenderContinueButton =
       !isLastScreen &&
@@ -435,26 +464,40 @@ export function AnswerSessionPage({
             <Row>{renderQuestionByType(currentQuestion, sharedProps)}</Row>
           </Box>
 
-          <Row width="100%" my={20} justify="end" align="center">
-            {shouldRenderSkipQuestionButton && (
-              <SkipQuestionButton
-                onClick={() => setSkipQuestionModalVisible(true)}
-                disabled={skipQuestionButtonDisabled}
+          {isNarratorPositionFixed && (
+            <AnimationRefHelper
+              currentQuestion={currentQuestion}
+              currentQuestionId={currentQuestionId}
+              previewMode={previewMode}
+              answers={answers}
+              changeIsAnimationOngoing={changeIsAnimationOngoing}
+              setFeedbackSettings={setFeedbackSettings}
+              feedbackScreenSettings={feedbackScreenSettings}
+              audioInstance={audioInstance}
+            >
+              <ActionButtons
+                renderSkipQuestionButton={shouldRenderSkipQuestionButton}
+                skipQuestionButtonDisabled={skipQuestionButtonDisabled}
+                onSkipQuestionClick={() => setSkipQuestionModalVisible(true)}
+                renderContinueButton={shouldRenderContinueButton}
+                continueButtonDisabled={isButtonDisabled()}
+                continueButtonLoading={isLoading}
+                onContinueClick={onContinueButton}
               />
-            )}
+            </AnimationRefHelper>
+          )}
 
-            {shouldRenderContinueButton && (
-              <Button
-                data-cy="continue-button"
-                disabled={isButtonDisabled()}
-                margin={20}
-                width="180px"
-                loading={isLoading}
-                onClick={() => saveAnswer(false)}
-                title={formatMessage(messages.nextQuestion)}
-              />
-            )}
-          </Row>
+          {!isNarratorPositionFixed && (
+            <ActionButtons
+              renderSkipQuestionButton={shouldRenderSkipQuestionButton}
+              skipQuestionButtonDisabled={skipQuestionButtonDisabled}
+              onSkipQuestionClick={() => setSkipQuestionModalVisible(true)}
+              renderContinueButton={shouldRenderContinueButton}
+              continueButtonDisabled={isButtonDisabled()}
+              continueButtonLoading={isLoading}
+              onContinueClick={onContinueButton}
+            />
+          )}
 
           {renderQuestionTranscript(false)}
           {renderTranscriptToggleIcon()}
@@ -493,11 +536,6 @@ export function AnswerSessionPage({
     return continueButtonText();
   };
 
-  const pageHeaderText = () =>
-    isPreview
-      ? formatMessage(messages.previewHeader)
-      : formatMessage(messages.fillHeader);
-
   const renderPage = () => <>{renderQuestion()}</>;
 
   const resetTransitionalUserSessionId = () =>
@@ -509,6 +547,11 @@ export function AnswerSessionPage({
 
   const showLoader = nextQuestionLoading && interventionStarted;
 
+  const isFullSize =
+    interventionStarted &&
+    currentQuestion &&
+    FULL_SIZE_QUESTIONS.includes(currentQuestion.type);
+
   return (
     <Column height="100%" ref={pageRef} id={ANSWER_SESSION_PAGE_ID}>
       {quickExitEnabled && (
@@ -517,6 +560,18 @@ export function AnswerSessionPage({
           beforeQuickExit={beforeQuickExit}
         />
       )}
+
+      {interventionStarted && !nextQuestionError && logoUrl && isDesktop && (
+        <Row justify="start" pl={24} pt={24}>
+          <Img
+            maxHeight={elements.interventionLogoSize.height}
+            maxWidth={elements.interventionLogoSize.width}
+            src={logoUrl}
+            aria-label={imageAlt}
+          />
+        </Row>
+      )}
+
       {showLoader && <Loader />}
       {!showLoader && (
         <>
@@ -526,6 +581,44 @@ export function AnswerSessionPage({
             description={formatMessage(messages.skipQuestionModalHeader)}
             content={formatMessage(messages.skipQuestionModalMessage)}
             confirmAction={() => saveAnswer(true)}
+            hideCloseButton
+            contentContainerStyles={{
+              mb: 20,
+            }}
+            isMobile={isMobile}
+          />
+
+          <ConfirmationModal
+            icon="info"
+            visible={confirmContinueQuestionModalVisible}
+            onClose={() => setConfirmContinueQuestionModalVisible(false)}
+            description={formatMessage(messages.confirmContinueModalHeader)}
+            content={formatMessage(
+              messages[
+                `confirmContinueModalMessage${QuestionTypes.TLFB_EVENTS}`
+              ],
+            )}
+            confirmAction={() => saveAnswer(false)}
+            confirmationButtonText={formatMessage(
+              messages.confirmContinueModalConfirmText,
+            )}
+            cancelButtonText={formatMessage(
+              messages.confirmContinueModalCancelText,
+            )}
+            confirmationButtonColor="primary"
+            cancelButtonStyles={{
+              color: Color(themeColors.primary).alpha(0.1).hexa(),
+              textColor: themeColors.primary,
+              hoverColor: colors.white,
+              hoverTextColor: themeColors.primary,
+              inverted: false,
+            }}
+            contentContainerStyles={{
+              mb: 20,
+              mt: 10,
+            }}
+            hideCloseButton
+            isMobile={isMobile}
           />
 
           <Box
@@ -540,6 +633,7 @@ export function AnswerSessionPage({
             </Helmet>
 
             <AnswerOuterContainer
+              isFullSize={isFullSize}
               previewMode={isPreview ? previewMode : DESKTOP_MODE}
               interventionStarted={interventionStarted}
             >
@@ -558,12 +652,17 @@ export function AnswerSessionPage({
               )}
               {!interventionStarted && !nextQuestionError && (
                 <>
-                  <H2 textAlign="center" mb={50}>
-                    {pageHeaderText()}
-                  </H2>
-                  <H3 textAlign="center" color={themeColors.warning} mb={50}>
-                    {formatMessage(messages.wcagWarning)}
-                  </H3>
+                  <Box mx={32} maxWidth={600}>
+                    <H2 textAlign="center" mb={50}>
+                      {formatMessage(messages.fillHeader)}
+                    </H2>
+                    <Text textAlign="center" mb={50}>
+                      {formatMessage(messages.clickToStart)}
+                    </Text>
+                    <H3 textAlign="center" color={themeColors.warning} mb={50}>
+                      {formatMessage(messages.wcagWarning)}
+                    </H3>
+                  </Box>
                   <StyledButton
                     loading={userSessionLoading || nextQuestionLoading}
                     disabled={!previewPossible}
@@ -574,23 +673,30 @@ export function AnswerSessionPage({
                 </>
               )}
               {interventionStarted && !nextQuestionError && (
-                <>
+                <Box
+                  id={ANSWER_SESSION_CONTAINER_ID}
+                  position="relative"
+                  height="100%"
+                  width="100%"
+                  borderRadius="0px"
+                >
                   <Box width="100%">
-                    <Row padding={30} pb={isDesktop ? 10 : 0}>
-                      <Box {...logoStyles}>
-                        <Row justify="end">
-                          {logoUrl && (
-                            <Img
-                              maxHeight={elements.interventionLogoSize.height}
-                              maxWidth={elements.interventionLogoSize.width}
-                              src={logoUrl}
-                              aria-label={imageAlt}
-                            />
-                          )}
+                    <Row
+                      padding={!isDesktop || isMobile ? 30 : 0}
+                      pb={isDesktop || (!isDesktop && logoUrl) ? 24 : 0}
+                      width="100%"
+                    >
+                      {!isDesktop && (
+                        <Row>
+                          <Img
+                            maxHeight={elements.interventionLogoSize.height}
+                            maxWidth={elements.interventionLogoSize.width}
+                            src={logoUrl}
+                            aria-label={imageAlt}
+                          />
                         </Row>
-
-                        {renderQuestionTranscript(true)}
-                      </Box>
+                      )}
+                      {renderQuestionTranscript(true)}
                     </Row>
 
                     {transitionalUserSessionId && (
@@ -605,22 +711,29 @@ export function AnswerSessionPage({
                       currentQuestion &&
                       interventionStarted &&
                       !transitionalUserSessionId && (
-                        <AnimationRefHelper
-                          currentQuestion={currentQuestion}
-                          currentQuestionId={currentQuestionId}
-                          previewMode={previewMode}
-                          answers={answers}
-                          changeIsAnimationOngoing={changeIsAnimationOngoing}
-                          setFeedbackSettings={setFeedbackSettings}
-                          feedbackScreenSettings={feedbackScreenSettings}
-                          audioInstance={audioInstance}
-                        >
-                          {renderPage()}
-                        </AnimationRefHelper>
+                        <ScreenWrapper isFullSize={isFullSize}>
+                          {isNarratorPositionFixed && renderPage()}
+                          {!isNarratorPositionFixed && (
+                            <AnimationRefHelper
+                              currentQuestion={currentQuestion}
+                              currentQuestionId={currentQuestionId}
+                              previewMode={previewMode}
+                              answers={answers}
+                              changeIsAnimationOngoing={
+                                changeIsAnimationOngoing
+                              }
+                              setFeedbackSettings={setFeedbackSettings}
+                              feedbackScreenSettings={feedbackScreenSettings}
+                              audioInstance={audioInstance}
+                            >
+                              {renderPage()}
+                            </AnimationRefHelper>
+                          )}
+                        </ScreenWrapper>
                       )}
                   </Box>
                   {answersError && <ErrorAlert errorText={answersError} />}
-                </>
+                </Box>
               )}
             </AnswerOuterContainer>
           </Box>

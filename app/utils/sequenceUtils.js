@@ -36,3 +36,19 @@ const nextValueStrategy = (valuesSequence) => {
 };
 
 const highestValueStrategy = (valuesSequence) => max(valuesSequence) + 1;
+
+/**
+ * Generates uniq variable based on provided sequence
+ * @param  {Array<string>} valuesSequence
+ * @returns {string}
+ */
+export const getUniqVariable = (valuesSequence, baseVariable) => {
+  if (!valuesSequence || !valuesSequence.length) return baseVariable;
+  let variable = baseVariable;
+  let index = 0;
+  do {
+    if (!valuesSequence.includes(variable)) return variable;
+    index += 1;
+    variable = `${baseVariable}_${index}`;
+  } while (true);
+};

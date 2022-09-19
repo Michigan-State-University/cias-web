@@ -84,6 +84,7 @@ const InterventionConversationCollapse = ({
         }
         bgOpacity={0}
       >
+        {/* @ts-ignore */}
         {children}
       </Collapse>
     </Box>
