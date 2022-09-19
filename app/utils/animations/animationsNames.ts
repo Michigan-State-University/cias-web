@@ -88,7 +88,10 @@ const fridaAutoRestHeadAnimations = [
   HeadAutoRestAnimation.BLINK,
   HeadAutoRestAnimation.ACKNOWLEDGE,
 ];
-const characterToAutoRestHeadAnimationsMap: Record<CharacterType, string[]> = {
+const characterToAutoRestHeadAnimationsMap: Record<
+  CharacterType,
+  HeadAutoRestAnimation[]
+> = {
   [CharacterType.PEEDY]: peedyAutoRestHeadAnimations,
   [CharacterType.FRIDA]: fridaAutoRestHeadAnimations,
 };

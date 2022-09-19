@@ -30,12 +30,14 @@ export enum BodyReverseAnimation {
   THINK = 'think',
   WRITE = 'write',
 }
+
+export type BodyAnimation = BodyAutoRestAnimation | BodyReverseAnimation;
+
+// eslint-disable-next-line @typescript-eslint/no-redeclare -- intentionally naming the variable the same as the type
 export const BodyAnimation = {
   ...BodyAutoRestAnimation,
   ...BodyReverseAnimation,
 };
-// eslint-disable-next-line @typescript-eslint/no-redeclare -- intentionally naming the variable the same as the type
-export type BodyAnimation = typeof BodyAnimation;
 
 export enum HeadAutoRestAnimation {
   BLINK = 'blink',
@@ -59,12 +61,14 @@ export enum HeadReverseAnimation {
   GLANCE_LEFT = 'glanceLeft',
   GLANCE_RIGHT = 'glanceRight',
 }
+
+export type HeadAnimation = HeadAutoRestAnimation | HeadReverseAnimation;
+
+// eslint-disable-next-line @typescript-eslint/no-redeclare -- intentionally naming the variable the same as the type
 export const HeadAnimation = {
   ...HeadAutoRestAnimation,
   ...HeadReverseAnimation,
 };
-// eslint-disable-next-line @typescript-eslint/no-redeclare -- intentionally naming the variable the same as the type
-export type HeadAnimation = typeof HeadAnimation;
 
 export enum SpeechAnimation {
   REST = 'rest',
@@ -117,11 +121,16 @@ export enum MoveAnimation {
   MOVE_RIGHT = 'moveRight',
 }
 
+export type NarratorAnimation =
+  | BodyAnimation
+  | HeadAnimation
+  | SpeechAnimation
+  | MoveAnimation;
+
+// eslint-disable-next-line @typescript-eslint/no-redeclare -- intentionally naming the variable the same as the type
 export const NarratorAnimation = {
   ...BodyAnimation,
   ...HeadAnimation,
   ...SpeechAnimation,
   ...MoveAnimation,
 };
-// eslint-disable-next-line @typescript-eslint/no-redeclare -- intentionally naming the variable the same as the type
-export type NarratorAnimation = typeof NarratorAnimation;
