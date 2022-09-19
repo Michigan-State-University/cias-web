@@ -10,6 +10,7 @@ exports[`<InterventionStatusButtons /> Should render and match the snapshot 2`] 
   cursor: pointer;
   border: none;
   outline: none;
+  font-weight: bold;
   background-color: #107969;
   color: #FFFFFF;
   border: 1px solid transparent;
@@ -50,6 +51,7 @@ exports[`<InterventionStatusButtons /> Should render and match the snapshot 3`] 
   cursor: pointer;
   border: none;
   outline: none;
+  font-weight: bold;
   background-color: #107969;
   color: #FFFFFF;
   border: 1px solid transparent;

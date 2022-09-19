@@ -10,7 +10,6 @@ import Select from 'components/Select';
 import { feedbackActions } from 'models/Narrator/FeedbackActions';
 import messages from '../messages';
 import { updateBlockSettings } from '../../actions';
-import ClearAnimationButton from './clearAnimationButton';
 
 const FeedbackBlock = ({
   formatMessage,
@@ -33,7 +32,6 @@ const FeedbackBlock = ({
 
   return (
     <Column>
-      <ClearAnimationButton blockIndex={blockIndex} />
       <Box mt={15}>{formatMessage(messages.selectAction)}</Box>
       <Box mt={15}>
         <Select

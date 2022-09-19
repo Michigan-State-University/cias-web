@@ -16,6 +16,9 @@ import {
   SingleQuestionData,
   SliderQuestionData,
   ThirdPartyReportQuestionData,
+  TlfbConfigData,
+  TlfbEventsData,
+  TlfbQuestionData,
 } from './QuestionData';
 
 export interface QuestionBodyVariable {
@@ -74,6 +77,18 @@ export type ParticipantReportQuestionBody =
 export type CurrencyQuestionBody =
   QuestionBodyWithVariable<CurrencyQuestionData>;
 
+export type TlfbConfigBody = QuestionBodyWithoutVariable<TlfbConfigData>;
+
+export type TlfbEventsBody = QuestionBodyWithoutVariable<TlfbEventsData>;
+
+export type TlfbEventsBodyWithConfig =
+  QuestionBodyWithoutVariable<TlfbEventsData> & { config: TlfbConfigBody };
+
+export type TlfbQuestionBody = QuestionBodyWithoutVariable<TlfbQuestionData>;
+
+export type TlfbQuestionBodyWithConfig =
+  QuestionBodyWithoutVariable<TlfbQuestionData> & { config: TlfbConfigBody };
+
 export type QuestionBody =
   | SingleQuestionBody
   | MultipleQuestionBody
@@ -90,4 +105,9 @@ export type QuestionBody =
   | PhoneQuestionBody
   | DateQuestionBody
   | ParticipantReportQuestionBody
-  | CurrencyQuestionBody;
+  | CurrencyQuestionBody
+  | TlfbConfigBody
+  | TlfbEventsBody
+  | TlfbQuestionBody
+  | TlfbEventsBodyWithConfig
+  | TlfbQuestionBodyWithConfig;

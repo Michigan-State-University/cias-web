@@ -1,6 +1,7 @@
 import { createSelector } from 'reselect';
 
 import { initialState } from './reducer';
+import { makeSelectSelectedQuestionGroupId } from '../questions';
 
 export const selectQuestionGroups = (state) =>
   state.questionGroups || initialState;
@@ -35,4 +36,12 @@ export const makeSelectGetQuestionGroupError = () =>
   createSelector(
     selectQuestionGroups,
     (substate) => substate.errors.questionGroupsError,
+  );
+
+export const makeSelectSelectedQuestionGroup = () =>
+  createSelector(
+    makeSelectSelectedQuestionGroupId(),
+    makeSelectQuestionGroups(),
+    (selectedQuestionGroupId, questionGroups) =>
+      questionGroups.find(({ id }) => id === selectedQuestionGroupId),
   );

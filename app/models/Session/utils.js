@@ -1,6 +1,7 @@
 /* eslint-disable no-unused-vars */
 import pick from 'lodash/pick';
 import sortBy from 'lodash/sortBy';
+import flatMap from 'lodash/flatMap';
 
 import { Question } from 'models/Question';
 import { feedbackActions } from 'models/Narrator/FeedbackActions';
@@ -15,13 +16,12 @@ import {
   reflectionFormulaType,
 } from 'models/Narrator/BlockTypes';
 
-import { getFromQuestionTTS } from 'global/reducers/questions/utils';
-
 import { DEFAULT_PAUSE_DURATION } from 'utils/constants';
 import {
   bodyAnimations,
   headAnimations,
 } from 'utils/animations/animationsNames';
+import { getFromQuestionTTS } from 'utils/tts';
 
 import { Session } from './Session';
 
@@ -36,7 +36,9 @@ import {
   dateQuestion,
   thirdPartyQuestion,
   nameQuestion,
-  QuestionTypes,
+  tlfbQuestion,
+  tlfbConfig,
+  tlfbEvents,
 } from './QuestionTypes';
 
 /**
@@ -136,6 +138,9 @@ export const getBranchingVariables = (questions, options) => {
       case phoneQuestion.id:
       case dateQuestion.id:
       case nameQuestion.id:
+      case tlfbQuestion.id:
+      case tlfbConfig.id:
+      case tlfbEvents.id:
         questionVariables = [];
         break;
       default:
@@ -198,7 +203,12 @@ export const getEditVariables = (questions, options) => {
       case thirdPartyQuestion.id:
       case feedbackQuestion.id:
       case finishQuestion.id:
+      case tlfbConfig.id:
+      case tlfbEvents.id:
         questionVariables = [];
+        break;
+      case tlfbQuestion.id:
+        questionVariables = getTlfbVariables(question);
         break;
       default:
         questionVariables = [getDefaultVariable(question)];
@@ -240,6 +250,19 @@ const getMultiVariables = (question) =>
 
 const getGridVariables = (question) =>
   question.body.data[0].payload.rows.map((row) => row.variable.name);
+
+export const getTlfbVariables = (question) => {
+  const groupedSubstancesVariables = flatMap(
+    question.body.data[0].payload.substance_groups,
+    (group) => group.substances,
+  );
+  const allSubstances = [
+    ...groupedSubstancesVariables,
+    ...question.body.data[0].payload.substances,
+  ];
+
+  return allSubstances.map((substance) => substance.variable);
+};
 
 export const instantiateBlockForType = (type, endPosition, question) => {
   const sharedProperties = {
@@ -323,6 +346,8 @@ export const NOT_ANSWERABLE_QUESTIONS = [
 export const QUESTIONS_WITHOUT_VARIABLE = [
   ...NOT_ANSWERABLE_QUESTIONS,
   thirdPartyQuestion.id,
+  tlfbConfig.id,
+  tlfbEvents.id,
 ];
 
 export const DISABLED_NARRATOR_SETTINGS_BY_QUESTION_TYPE = {

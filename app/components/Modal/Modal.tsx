@@ -9,7 +9,7 @@ import { useIntl } from 'react-intl';
 
 import { colors } from 'theme';
 
-import useLockBodyScroll from 'utils/useLockBodyScroll';
+import useBodyLockScroll, { useElementLockScroll } from 'utils/useLockScroll';
 import useKeyPress from 'utils/useKeyPress';
 import { KeyCodes } from 'utils/constants';
 
@@ -31,6 +31,11 @@ export type Props = {
   children: ReactNode;
   visible: boolean;
   titleProps?: Record<string, unknown>;
+  hideCloseButton?: boolean;
+  portalId?: string;
+  disableClose?: boolean;
+  zIndex?: number;
+  disableScrollLock?: boolean;
 } & Record<string, unknown>;
 
 const Modal = ({
@@ -39,17 +44,25 @@ const Modal = ({
   children,
   visible,
   titleProps,
+  hideCloseButton,
+  portalId,
+  disableClose,
+  zIndex,
+  disableScrollLock,
   ...stylesProps
 }: Props): JSX.Element => {
   const { formatMessage } = useIntl();
 
   const handleClose = () => {
-    if (onClose) onClose();
+    if (onClose && !disableClose) onClose();
   };
 
   const modalContent = useRef<HTMLElement>(null);
   const modalOverlay = useRef<HTMLElement>(null);
-  useLockBodyScroll(visible);
+
+  useBodyLockScroll(visible && !disableScrollLock);
+  useElementLockScroll(visible && !disableScrollLock, portalId);
+
   useKeyPress(KeyCodes.ESC, handleClose);
 
   const handleClick = (event: MouseEvent) => {
@@ -75,17 +88,17 @@ const Modal = ({
   if (!visible) return <></>;
 
   return (
-    <Portal id={MODAL_PORTAL_ID}>
+    <Portal id={portalId || MODAL_PORTAL_ID}>
       <Box
         ref={modalOverlay}
         height="100%"
         width="100%"
         top="0px"
         left="0px"
-        position="fixed"
+        position={portalId ? 'absolute' : 'fixed'}
         bg={colors.black}
         bgOpacity={0.4}
-        zIndex={999}
+        zIndex={zIndex ?? 999}
         borderRadius="0px"
         display="flex"
         align="center"
@@ -116,16 +129,18 @@ const Modal = ({
                 )}
               </Col>
 
-              <Col xs={2} align="end">
-                {/** @ts-ignore */}
-                <ActionIcon
-                  mr={0}
-                  data-cy="modal-close-button"
-                  onClick={onClose}
-                  data-testid="close-modal-button"
-                  ariaText={formatMessage(messages.closeButtonLabel)}
-                />
-              </Col>
+              {!hideCloseButton && (
+                <Col xs={2} align="end">
+                  {/** @ts-ignore */}
+                  <ActionIcon
+                    mr={0}
+                    data-cy="modal-close-button"
+                    onClick={onClose}
+                    data-testid="close-modal-button"
+                    ariaText={formatMessage(messages.closeButtonLabel)}
+                  />
+                </Col>
+              )}
             </Row>
 
             <Row>
