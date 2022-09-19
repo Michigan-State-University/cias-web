@@ -611,7 +611,7 @@ exports[`<ReflectionBlock /> Should render and match the snapshot 1`] = `
             >
               <button
                 aria-label="Play audio"
-                class="c27"
+                class="c27 "
                 font-weight="bold"
                 title="Play audio"
                 type="button"

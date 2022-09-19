@@ -35,6 +35,7 @@ exports[`<AnswerSessionPage /> Should render and match the snapshot 1`] = `
   max-width: 600px;
   margin-right: 32px;
   margin-left: 32px;
+  color: unset;
 }
 
 .c0 {

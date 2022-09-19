@@ -84,6 +84,7 @@ exports[`<ReportTile /> Should render and match the snapshot 1`] = `
   border-radius: 5px;
   width: 6px;
   margin-right: 10px;
+  color: unset;
 }
 
 .c9 {
