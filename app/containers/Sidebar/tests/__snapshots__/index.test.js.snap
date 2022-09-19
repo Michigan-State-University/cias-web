@@ -79,6 +79,78 @@ exports[`<Sidebar /> Should render and match the snapshot with session path 1`] 
   box-shadow: 20px 0 20px rgba(0,0,0,0.08);
 }
 
+.c11 {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+  -webkit-justify-content: center;
+  -ms-flex-pack: center;
+  justify-content: center;
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  margin: auto;
+  width: 30px;
+  height: 30px;
+}
+
+.c11:after {
+  content: ' ';
+  display: block;
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  border: 6px solid #B727EA;
+  border-color: #B727EA transparent #B727EA transparent;
+  -webkit-animation: hAjVGa 1.2s linear infinite;
+  animation: hAjVGa 1.2s linear infinite;
+}
+
+.c9 {
+  width: 100%;
+  height: 40px;
+  border-radius: 5px;
+  cursor: pointer;
+  border: none;
+  outline: none;
+  font-weight: bold;
+  background-color: #FFFFFF;
+  color: #B727EA;
+  border: 1px solid #B727EA;
+  -webkit-transition: background-color 300ms ease,color 300ms ease,border 300ms ease;
+  transition: background-color 300ms ease,color 300ms ease,border 300ms ease;
+  margin-top: 20px;
+  margin-bottom: 20px;
+  width: auto;
+  padding-right: 10px;
+  padding-left: 10px;
+}
+
+.c9:hover {
+  background-color: #B727EA;
+  color: #FFFFFF;
+  border: 1px solid transparent;
+}
+
+@media only screen and (min-width:768px) {
+
+}
+
+@media only screen and (min-width:960px) {
+
+}
+
+@media only screen and (min-width:1170px) {
+
+}
+
+@media only screen and (min-width:1360px) {
+
+}
+
 @media only screen and (max-width:1280px) {
   .c0 {
     position: fixed;
@@ -191,6 +263,78 @@ exports[`<Sidebar /> Should render and match the snapshot without matching path 
   top: 16px;
   right: -40px;
   box-shadow: 20px 0 20px rgba(0,0,0,0.08);
+}
+
+.c11 {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+  -webkit-justify-content: center;
+  -ms-flex-pack: center;
+  justify-content: center;
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  margin: auto;
+  width: 30px;
+  height: 30px;
+}
+
+.c11:after {
+  content: ' ';
+  display: block;
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  border: 6px solid #B727EA;
+  border-color: #B727EA transparent #B727EA transparent;
+  -webkit-animation: hAjVGa 1.2s linear infinite;
+  animation: hAjVGa 1.2s linear infinite;
+}
+
+.c9 {
+  width: 100%;
+  height: 40px;
+  border-radius: 5px;
+  cursor: pointer;
+  border: none;
+  outline: none;
+  font-weight: bold;
+  background-color: #FFFFFF;
+  color: #B727EA;
+  border: 1px solid #B727EA;
+  -webkit-transition: background-color 300ms ease,color 300ms ease,border 300ms ease;
+  transition: background-color 300ms ease,color 300ms ease,border 300ms ease;
+  margin-top: 20px;
+  margin-bottom: 20px;
+  width: auto;
+  padding-right: 10px;
+  padding-left: 10px;
+}
+
+.c9:hover {
+  background-color: #B727EA;
+  color: #FFFFFF;
+  border: 1px solid transparent;
+}
+
+@media only screen and (min-width:768px) {
+
+}
+
+@media only screen and (min-width:960px) {
+
+}
+
+@media only screen and (min-width:1170px) {
+
+}
+
+@media only screen and (min-width:1360px) {
+
 }
 
 @media only screen and (max-width:1280px) {

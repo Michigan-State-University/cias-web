@@ -1,10 +1,12 @@
 import { createSelector } from 'reselect';
 
-import { initialState } from './reducer';
+import { RootState } from 'global/reducers';
+
+import { answersReducerKey, initialState } from './reducer';
 import { AnswersState } from './types';
 
-const selectAnswers = (rootState: { answers: AnswersState }): AnswersState =>
-  rootState.answers || initialState;
+const selectAnswers = (rootState: RootState): AnswersState =>
+  rootState[answersReducerKey] || initialState;
 
 export const makeSelectAnswers = () =>
   createSelector(selectAnswers, ({ answers }) => answers);

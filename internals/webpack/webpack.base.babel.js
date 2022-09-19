@@ -103,7 +103,7 @@ module.exports = (options) => ({
       },
 
       {
-        test: /\.(jpg|png|gif)$/,
+        test: /\.(jpg|png|gif|jpeg)$/,
         type: 'asset',
         parser: {
           dataUrlCondition: {

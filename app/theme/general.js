@@ -33,6 +33,7 @@ const elements = {
     height: 100,
   },
   userInterventionTileHeight: 200,
+  screenSettingsWidth: 400,
 };
 
 const visualAnalogScaleLabelStyles = {

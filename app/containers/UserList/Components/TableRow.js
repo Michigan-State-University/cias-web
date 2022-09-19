@@ -2,12 +2,12 @@ import React, { useContext } from 'react';
 import PropTypes from 'prop-types';
 import trim from 'lodash/trim';
 
+import Box from 'components/Box';
 import Row from 'components/Row';
 import StyledTextButton from 'components/Button/StyledTextButton';
 import Text from 'components/Text';
 import UserRoleTile from 'components/UserRoleTile';
 import { StripedTR, TD } from 'components/Table';
-import Box from 'components/Box';
 import { colors, themeColors } from 'theme';
 import { ternary } from 'utils/ternary';
 

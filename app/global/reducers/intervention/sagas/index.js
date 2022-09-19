@@ -21,6 +21,7 @@ import addInterventionAttachmentsSaga from './addAttachments';
 import deleteInterventionAttachmentSaga from './deleteAttachment';
 import sendInterventionInviteSaga from './sendInterventionInvite';
 import resendInterventionInviteSaga from './resendInterventionInvite';
+import fetchInterventionInvitesSaga from './fetchInterventionInvites';
 
 export {
   createInterventionSaga,
@@ -45,6 +46,7 @@ export {
   sendInterventionInviteSaga,
   resendInterventionInviteSaga,
   deleteInterventionAttachmentSaga,
+  fetchInterventionInvitesSaga,
 };
 
 export default function* allInterventionSagas() {
@@ -69,5 +71,6 @@ export default function* allInterventionSagas() {
     translateInterventionSaga(),
     sendInterventionInviteSaga(),
     resendInterventionInviteSaga(),
+    fetchInterventionInvitesSaga(),
   ]);
 }

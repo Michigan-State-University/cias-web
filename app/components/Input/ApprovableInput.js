@@ -79,9 +79,16 @@ const ApprovableInput = ({
   defaultFontSize,
   styles,
   minDate,
+  maxDate,
   ariaLabel,
   'aria-labelledby': ariaLabelledBy,
   id,
+  transparent,
+  selectsStart,
+  selectsEnd,
+  startDate,
+  endDate,
+  richTextBlurTransparentBorder,
 }) => {
   const [value, setValue] = useState(propsValue);
   const [focused, setFocused] = useState(false);
@@ -174,6 +181,7 @@ const ApprovableInput = ({
           fontSize={fontSize}
           readOnly={disabled}
           defaultFontSize={defaultFontSize}
+          blurTransparentBorder={richTextBlurTransparentBorder}
         />
       );
 
@@ -190,7 +198,7 @@ const ApprovableInput = ({
           onFocus={handleFocus}
           onBlur={onBlur}
           placeholder={placeholder}
-          transparent
+          transparent={transparent}
           disabled={disabled}
           aria-label={ariaLabel}
           aria-labelledby={ariaLabelledBy}
@@ -204,11 +212,16 @@ const ApprovableInput = ({
             ref={ref}
             disabled={disabled}
             minDate={minDate}
+            maxDate={maxDate}
             selected={value}
             onChange={(date) => onCheck(date)}
             onFocus={onFocus}
             placeholderText={placeholder}
             dateFormat="MM/dd/yyyy"
+            selectsEnd={selectsEnd}
+            selectsStart={selectsStart}
+            startDate={startDate}
+            endDate={endDate}
             customInput={
               <DateInput
                 disabled={disabled}
@@ -245,7 +258,7 @@ const ApprovableInput = ({
         onBlur={onBlur}
         placeholder={placeholder}
         keyboard={keyboard}
-        transparent
+        transparent={transparent}
         disabled={disabled}
         fontSize={fontSize}
         padding={padding}
@@ -290,16 +303,25 @@ ApprovableInput.propTypes = {
   padding: PropTypes.number,
   defaultFontSize: PropTypes.number,
   minDate: PropTypes.object,
+  maxDate: PropTypes.object,
   styles: PropTypes.object,
   ariaLabel: PropTypes.string,
   'aria-labelledby': PropTypes.string,
   id: PropTypes.string,
+  transparent: PropTypes.bool,
+  selectsStart: PropTypes.bool,
+  selectsEnd: PropTypes.bool,
+  startDate: PropTypes.object,
+  endDate: PropTypes.object,
+  richTextBlurTransparentBorder: PropTypes.bool,
 };
 
 ApprovableInput.defaultProps = {
   type: 'multiline',
   richText: false,
   autoSize: false,
+  transparent: true,
+  richTextBlurTransparentBorder: true,
 };
 
 export default ApprovableInput;

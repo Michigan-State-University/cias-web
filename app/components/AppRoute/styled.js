@@ -21,6 +21,13 @@ export const MainAppContainer = styled.div`
   }
 `;
 
+export const UnprotectedMainAppContainer = styled.div`
+  overflow: auto;
+  height: 100vh;
+  width: 100vw;
+  position: relative;
+`;
+
 export const RowBelowNavbar = styled(Row)`
   overflow: hidden;
 `;

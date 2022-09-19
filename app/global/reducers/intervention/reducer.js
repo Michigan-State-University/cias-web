@@ -10,6 +10,7 @@ import {
 } from 'global/reducers/session/constants';
 import { findIndexById } from 'utils/arrayUtils';
 
+import { updateItemById } from 'utils/reduxUtils';
 import sessionSettingsReducer from './sessionSettings/reducer';
 import {
   FETCH_INTERVENTION_REQUEST,
@@ -75,12 +76,15 @@ import {
   DELETE_INTERVENTION_ATTACHMENT_SUCCESS,
   ADD_INTERVENTION_ATTACHMENTS_REQUEST,
   ADD_INTERVENTION_ATTACHMENTS_ERROR,
+  FETCH_INTERVENTION_INVITES_REQUEST,
+  FETCH_INTERVENTION_INVITES_SUCCESS,
+  FETCH_INTERVENTION_INVITES_ERROR,
 } from './constants';
 
 export const initialState = {
   currentSessionIndex: 0,
   intervention: null,
-  emails: [],
+  invites: [],
   cache: {
     intervention: null,
   },
@@ -98,7 +102,8 @@ export const initialState = {
       id: null,
       email: null,
     },
-    sendInterventionLoading: false,
+    fetchInterventionInvites: false,
+    sendInterventionInvites: false,
     interventionEmailLoading: {
       id: null,
       email: null,
@@ -115,6 +120,7 @@ export const initialState = {
     fetchUserAccessError: null,
     createSessionError: null,
     translateInterventionError: null,
+    fetchInterventionInvites: null,
   },
 };
 
@@ -284,12 +290,14 @@ export const interventionReducer = (state = initialState, action) =>
         draft.loaders.fetchUserAccessLoading = false;
         draft.errors.fetchUserAccessError = action.payload.message;
         break;
-      case REVOKE_USER_ACCESS_REQUEST:
-        let userIndex = state.intervention.usersWithAccess.findIndex(
-          ({ id }) => id === action.payload.userId,
+      case REVOKE_USER_ACCESS_REQUEST: {
+        updateItemById(
+          draft.intervention.usersWithAccess,
+          action.payload.userId,
+          { loading: true },
         );
-        draft.intervention.usersWithAccess[userIndex].loading = true;
         break;
+      }
       case REVOKE_USER_ACCESS_SUCCESS:
         draft.intervention.usersWithAccess =
           state.intervention.usersWithAccess.filter(
@@ -297,10 +305,11 @@ export const interventionReducer = (state = initialState, action) =>
           );
         break;
       case REVOKE_USER_ACCESS_ERROR:
-        userIndex = state.intervention.usersWithAccess.findIndex(
-          ({ id }) => id === action.payload.userId,
+        updateItemById(
+          draft.intervention.usersWithAccess,
+          action.payload.userId,
+          { loading: false },
         );
-        draft.intervention.usersWithAccess[userIndex].loading = false;
         break;
       case CREATE_SESSION_REQUEST:
         draft.loaders.createSessionLoading = true;
@@ -382,32 +391,41 @@ export const interventionReducer = (state = initialState, action) =>
         };
         break;
 
+      case FETCH_INTERVENTION_INVITES_REQUEST: {
+        draft.errors.fetchInterventionInvites = null;
+        draft.loaders.fetchInterventionInvites = true;
+        break;
+      }
+
+      case FETCH_INTERVENTION_INVITES_SUCCESS: {
+        const { invites } = action.payload;
+        draft.invites = invites;
+        draft.loaders.fetchInterventionInvites = false;
+        break;
+      }
+
+      case FETCH_INTERVENTION_INVITES_ERROR: {
+        const { error } = action.payload;
+        draft.errors.fetchInterventionInvites = error;
+        draft.loaders.fetchInterventionInvites = false;
+        break;
+      }
+
       case SEND_INTERVENTION_INVITE_REQUEST: {
-        const { emails: payloadEmails, shouldNotUpdateStore } = action.payload;
-
-        draft.loaders.sendInterventionLoading = true;
-        const mappedEmails = payloadEmails.map((email) => ({
-          email,
-        }));
-
-        if (!shouldNotUpdateStore) {
-          draft.intervention.emails = [
-            ...(state.intervention.emails ?? []),
-            ...mappedEmails,
-          ];
-        }
-
+        draft.loaders.sendInterventionInvites = true;
         break;
       }
 
       case SEND_INTERVENTION_INVITE_SUCCESS:
-        draft.loaders.sendInterventionLoading = false;
+        const { invites } = action.payload;
+        draft.invites = invites;
+        draft.loaders.sendInterventionInvites = false;
         draft.loaders.interventionEmailLoading =
           initialState.loaders.interventionEmailLoading;
         break;
 
       case SEND_INTERVENTION_INVITE_ERROR:
-        draft.loaders.sendInterventionLoading = false;
+        draft.loaders.sendInterventionInvites = false;
         draft.loaders.interventionEmailLoading =
           initialState.loaders.interventionEmailLoading;
         break;

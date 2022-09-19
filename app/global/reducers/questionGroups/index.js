@@ -16,6 +16,7 @@ export {
   makeSelectQuestionGroupsIds,
   makeSelectQuestionGroupsSessionId,
   makeSelectGetQuestionGroupError,
+  makeSelectSelectedQuestionGroup,
 } from './selectors';
 export {
   duplicateGroupsHereSaga,

@@ -18,10 +18,12 @@ import {
 } from 'global/reducers/questions';
 import { makeSelectInterventionStatus } from 'global/reducers/intervention';
 import { makeSelectInterventionType } from 'global/reducers/intervention/selectors';
+import { makeSelectSelectedQuestionGroup } from 'global/reducers/questionGroups';
 
 import { canEdit } from 'models/Status/statusPermissions';
 import { finishQuestion } from 'models/Session/QuestionTypes';
-import { InterventionType } from 'models/Intervention';
+import { InterventionType } from 'models/Intervention/Intervention';
+import { GroupType } from 'models/QuestionGroup';
 
 import Column from 'components/Column';
 import Tabs from 'components/Tabs';
@@ -39,6 +41,7 @@ const Settings = ({
   setDraggable,
   interventionStatus,
   interventionType,
+  questionGroup,
 }) => {
   const handleChange = (newTab) => {
     changeTab({ tab: newTab });
@@ -46,7 +49,9 @@ const Settings = ({
   };
 
   const editingPossible = canEdit(interventionStatus);
+
   const isFinishScreen = type === finishQuestion.id;
+  const isTlfbGroup = questionGroup?.type === GroupType.TLFB;
 
   return (
     <Column>
@@ -56,7 +61,10 @@ const Settings = ({
         controlledSetTabActive={handleChange}
         data-cy="settings-panel"
       >
-        <div label={formatMessage(messages[settingsTabLabels.settings])}>
+        <div
+          label={formatMessage(messages[settingsTabLabels.settings])}
+          hidden={isTlfbGroup}
+        >
           <SettingsTab
             formatMessage={formatMessage}
             disabled={!editingPossible}
@@ -67,16 +75,16 @@ const Settings = ({
         </div>
         <div label={formatMessage(messages[settingsTabLabels.narrator])}>
           <NarratorTab
-            formatMessage={formatMessage}
             disabled={!editingPossible}
             narrator={narrator}
             questionType={type}
+            isTlfbGroup={isTlfbGroup}
             id={id}
           />
         </div>
         <div
           label={formatMessage(messages[settingsTabLabels.branching])}
-          hidden={isFinishScreen}
+          hidden={isFinishScreen || isTlfbGroup}
         >
           <BranchingTab
             formatMessage={formatMessage}
@@ -107,6 +115,7 @@ Settings.propTypes = {
   setDraggable: PropTypes.func,
   interventionStatus: PropTypes.string,
   interventionType: PropTypes.string,
+  questionGroup: PropTypes.object,
 };
 
 const mapStateToProps = createStructuredSelector({
@@ -115,6 +124,7 @@ const mapStateToProps = createStructuredSelector({
   tab: makeSelectQuestionSettingsTab(),
   interventionStatus: makeSelectInterventionStatus(),
   interventionType: makeSelectInterventionType(),
+  questionGroup: makeSelectSelectedQuestionGroup(),
 });
 
 const mapDispatchToProps = {

@@ -150,9 +150,13 @@ function SessionBranching({
                   key={`formula-${index}`}
                   mb={16}
                   padding={4}
-                  label={formatMessage(messages.formulaTitle, {
-                    index: index + 1,
-                  })}
+                  label={
+                    <Text fontSize="16px" fontWeight="bold">
+                      {formatMessage(messages.formulaTitle, {
+                        index: index + 1,
+                      })}
+                    </Text>
+                  }
                   extraIcons={extraIcon(index)}
                   onDelete={() => onRemoveFormula(id, index)}
                   labelBgColor={colors.lightStealBlue}

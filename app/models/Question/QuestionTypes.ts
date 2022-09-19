@@ -15,4 +15,7 @@ export enum QuestionTypes {
   DATE = 'Question::Date',
   PARTICIPANT_REPORT = 'Question::ParticipantReport',
   CURRENCY = 'Question::Currency',
+  TLFB_CONFIG = 'Question::TlfbConfig',
+  TLFB_EVENTS = 'Question::TlfbEvents',
+  TLFB_QUESTION = 'Question::TlfbQuestion',
 }

@@ -33,8 +33,44 @@ export interface FeedbackQuestionPayload {
   originalText?: StartEndValueOriginalText;
 }
 
+export interface TlfbEventsPayload {
+  screenTitle: string;
+  screenQuestion: string;
+}
+
+export type Substance = {
+  name: string;
+  unit?: string;
+  variable: string;
+};
+
+export type SubstanceGroup = {
+  name: string;
+  substances: Substance[];
+};
+
+export interface TlfbQuestionPayload {
+  questionTitle: string;
+  headQuestion: string;
+  substanceQuestion: string;
+  substancesWithGroup: boolean;
+  substances: Substance[];
+  substanceGroups: SubstanceGroup[];
+}
+
+export interface TlfbConfigPayload {
+  daysCount: string;
+  chooseDateRange: boolean;
+  startDate?: string;
+  endDate?: string;
+  displayHelpingMaterials: boolean;
+}
+
 export type QuestionPayload =
   | string
   | GridQuestionPayload
   | SliderQuestionPayload
-  | FeedbackQuestionPayload;
+  | FeedbackQuestionPayload
+  | TlfbEventsPayload
+  | TlfbConfigPayload
+  | TlfbQuestionPayload;

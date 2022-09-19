@@ -28,7 +28,11 @@ import {
   currencyQuestion,
   thirdPartyQuestion,
   participantReport,
+  tlfbConfig,
+  tlfbEvents,
+  tlfbQuestion,
 } from 'models/Session/QuestionTypes';
+import { GroupType } from 'models/QuestionGroup';
 import { Roles } from 'models/User/RolesManager';
 import { archived, closed, draft, published } from 'models/Status/StatusTypes';
 import { UserInterventionStatus } from 'models/UserIntervention/StatusTypes';
@@ -70,6 +74,18 @@ export default defineMessages({
     [Roles.Navigator]: {
       id: `${scope}.${Roles.Navigator}`,
       defaultMessage: 'Navigator',
+    },
+    [Roles.ClinicAdmin]: {
+      id: `${scope}.${Roles.ClinicAdmin}`,
+      defaultMessage: 'Clinic Admin',
+    },
+    [Roles.HealthSystemAdmin]: {
+      id: `${scope}.${Roles.HealthSystemAdmin}`,
+      defaultMessage: 'Health System Admin',
+    },
+    [Roles.OrganizationAdmin]: {
+      id: `${scope}.${Roles.OrganizationAdmin}`,
+      defaultMessage: 'Organization Admin',
     },
   },
   variables: {
@@ -177,10 +193,6 @@ export default defineMessages({
       id: `${scope}.${urlQuestion.id}`,
       defaultMessage: 'External Link',
     },
-    'Question::FollowUpContact': {
-      id: `${scope}.Question::FollowUpContact`,
-      defaultMessage: 'FollowUpContact',
-    },
     [feedbackQuestion.id]: {
       id: `${scope}.${feedbackQuestion.id}`,
       defaultMessage: 'Feedback',
@@ -200,6 +212,24 @@ export default defineMessages({
     [thirdPartyQuestion.id]: {
       id: `${scope}.${thirdPartyQuestion.id}`,
       defaultMessage: 'Third Party Report',
+    },
+    [tlfbConfig.id]: {
+      id: `${scope}.${tlfbConfig.id}`,
+      defaultMessage: 'TLFB Config',
+    },
+    [tlfbEvents.id]: {
+      id: `${scope}.${tlfbEvents.id}`,
+      defaultMessage: 'TLFB Events',
+    },
+    [tlfbQuestion.id]: {
+      id: `${scope}.${tlfbQuestion.id}`,
+      defaultMessage: 'TLFB Questions',
+    },
+  },
+  questionGroupType: {
+    [GroupType.TLFB]: {
+      id: `${scope}.${GroupType.TLFB}`,
+      defaultMessage: 'Timeline Followback',
     },
   },
   statuses: {
@@ -325,5 +355,31 @@ export default defineMessages({
   [TextMessageType.ALERT]: {
     id: `${scope}.${TextMessageType.ALERT}`,
     defaultMessage: 'Alert',
+  },
+  defaultTlfbGroupName: {
+    id: `${scope}.defaultTlfbGroupName`,
+    defaultMessage: 'TLFB Group',
+  },
+  defaultTlfbTitles: {
+    [tlfbConfig.id]: {
+      id: `${scope}.${tlfbConfig.id}`,
+      defaultMessage: 'Config',
+    },
+    [tlfbEvents.id]: {
+      id: `${scope}.${tlfbEvents.id}`,
+      defaultMessage: 'Events',
+    },
+    [tlfbQuestion.id]: {
+      id: `${scope}.${tlfbQuestion.id}`,
+      defaultMessage: 'Questions',
+    },
+  },
+  yes: {
+    id: `${scope}.yes`,
+    defaultMessage: 'Yes',
+  },
+  no: {
+    id: `${scope}.no`,
+    defaultMessage: 'No',
   },
 });

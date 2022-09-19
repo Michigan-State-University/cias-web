@@ -1,14 +1,22 @@
 import { put, takeLatest, call } from 'redux-saga/effects';
 import axios from 'axios';
+import { toast } from 'react-toastify';
 
 import { jsonApiToArray } from 'utils/jsonApiMapper';
 import objectToCamelCase from 'utils/objectToCamelCase';
-import { ChartStatus, FETCH_SECTIONS_REQUEST } from '../constants';
+import { formatMessage } from 'utils/intlOutsideReact';
+
+import {
+  ChartStatus,
+  FETCH_SECTIONS_REQUEST,
+  FETCH_SECTIONS_ERROR,
+} from '../constants';
 import {
   fetchDashboardSectionsError,
   fetchDashboardSectionsSuccess,
   setChartsData,
 } from '../actions';
+import messages from '../messages';
 
 export function* fetchDashboardSections({
   payload: { organizationId, fromDashboardView },
@@ -33,6 +41,12 @@ export function* fetchDashboardSections({
     const parsedData = objectToCamelCase(chartsData.data_for_charts);
     yield put(setChartsData(parsedData));
   } catch (error) {
+    yield call(
+      toast.error,
+      formatMessage(messages.filterChartDataError, {
+        toastId: FETCH_SECTIONS_ERROR,
+      }),
+    );
     yield put(fetchDashboardSectionsError(error));
   }
 }

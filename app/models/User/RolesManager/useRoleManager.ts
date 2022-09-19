@@ -40,8 +40,13 @@ const ALLOWED_TEAM_NAVIGATOR_DISPLAY = [Roles.Admin, Roles.TeamAdmin];
 
 const ALLOWED_LIVE_CHAT_NOTIFICATIONS_DISPLAY = [Roles.Navigator];
 
+const ALLOWED_QUICK_EXIT_USE = [Roles.Participant];
+
 export const canDisplayLeftSidebar = (userRoles: Roles[]) =>
   !arraysOverlap(userRoles, FORBIDDEN_LEFT_SIDEBAR_DISPLAY);
+
+export const canUseQuickExit = (userRoles: Roles[]) =>
+  !arraysOverlap(userRoles, ALLOWED_QUICK_EXIT_USE);
 
 export const useRoleManager = () => {
   const { userRoles } = useContext(RolesManagerContext);
@@ -104,5 +109,7 @@ export const useRoleManager = () => {
     canDisplayTeamNavigatorPanel,
     canDisplayLiveChatNotifications,
     userRoles,
+    canDisplayLeftSidebar,
+    canUseQuickExit,
   };
 };

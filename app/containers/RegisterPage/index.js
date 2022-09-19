@@ -15,8 +15,6 @@ import { Formik } from 'formik';
 import * as Yup from 'yup';
 import { Link } from 'react-router-dom';
 import dayjs from 'dayjs';
-import utc from 'dayjs/plugin/utc';
-import timezone from 'dayjs/plugin/timezone';
 import set from 'lodash/set';
 import lowerCase from 'lodash/lowerCase';
 import queryString from 'query-string';
@@ -49,9 +47,6 @@ import {
   registerResearcherRequest,
 } from './actions';
 import { TermsAndConditions } from './styled';
-
-dayjs.extend(utc);
-dayjs.extend(timezone);
 
 const passwordLength = 8;
 

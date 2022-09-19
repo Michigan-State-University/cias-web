@@ -6,8 +6,12 @@ import { compose } from 'redux';
 import { createStructuredSelector } from 'reselect';
 import { Row, Col } from 'react-grid-system';
 
+import {
+  canDisplayLeftSidebar,
+  canUseQuickExit,
+} from 'models/User/RolesManager';
+
 import { makeSelectUser, REDIRECT_QUERY_KEY } from 'global/reducers/auth';
-import { canDisplayLeftSidebar } from 'models/User/RolesManager';
 import { arraysOverlap } from 'utils/arrayUtils';
 import LocalStorageService from 'utils/localStorageService';
 
@@ -34,9 +38,11 @@ class AppRoute extends Route {
 
     const render = () => (
       <>
-        {!disableQuickExit && user?.quickExitEnabled && (
-          <QuickExit beforeQuickExit={LocalStorageService.clearUserData} />
-        )}
+        {!disableQuickExit &&
+          user?.quickExitEnabled &&
+          canUseQuickExit(user?.roles) && (
+            <QuickExit beforeQuickExit={LocalStorageService.clearUserData} />
+          )}
         {super.render()}
       </>
     );
@@ -44,6 +50,7 @@ class AppRoute extends Route {
     if (!protectedRoute) {
       return render();
     }
+
     if (!user || !user.roles) {
       const queryParams = new URLSearchParams(location.search);
 
@@ -52,7 +59,8 @@ class AppRoute extends Route {
         encodeURIComponent(location.pathname),
       );
 
-      if (location.pathname === '/') return <Redirect to="/login" />;
+      if (location.pathname === '/')
+        return <Redirect to={`/login${location.search}`} />;
 
       return <Redirect to={`/no-access?${queryParams.toString()}`} />;
     }

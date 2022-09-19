@@ -4,7 +4,7 @@
  *
  */
 
-import React, { memo, useEffect, useState } from 'react';
+import React, { memo, useEffect, useState, useMemo } from 'react';
 import PropTypes from 'prop-types';
 import xor from 'lodash/xor';
 import { Helmet } from 'react-helmet';
@@ -13,8 +13,7 @@ import { connect } from 'react-redux';
 import { createStructuredSelector } from 'reselect';
 import { FormattedMessage, useIntl } from 'react-intl';
 import { injectReducer, injectSaga } from 'redux-injectors';
-
-import { Container, Row, Col } from 'react-grid-system';
+import { Container, Row, Col, useScreenClass } from 'react-grid-system';
 
 import ActionIcon from 'components/ActionIcon';
 import Box from 'components/Box';
@@ -72,6 +71,12 @@ function UserList({
   const [modalVisible, setModalVisible] = useState(false);
   const [page, setPage] = useState(1);
 
+  const screenClass = useScreenClass();
+  const isBig = useMemo(
+    () => ['xl', 'xxl'].includes(screenClass),
+    [screenClass],
+  );
+
   const clearFilters = selectRoles.length === filterableRoles.length;
 
   useEffect(() => {
@@ -103,8 +108,8 @@ function UserList({
     return (
       <div>
         <Container style={{ marginBottom: 40, padding: 0 }} fluid>
-          <Row align="center">
-            <Col xs={12} xl={6} xxl={5}>
+          <Row align="center" justify="between">
+            <Col xs={12} xl={9}>
               <Row align="center">
                 {filterableRoles.map((role, index) => (
                   <Col key={index} xs="content" style={{ marginBottom: 10 }}>
@@ -139,7 +144,18 @@ function UserList({
                 </Col>
               </Row>
             </Col>
-            <Col xs={12} xl={6} xxl={7} style={{ marginBottom: 10 }}>
+            <Col
+              xs={12}
+              xl={3}
+              style={
+                isBig
+                  ? {
+                      justifyContent: 'end',
+                      display: 'flex',
+                    }
+                  : { marginTop: 10 }
+              }
+            >
               <SearchInput
                 value={filterText}
                 onChange={(e) => setFilterText(e.target.value)}
@@ -229,6 +245,9 @@ UserList.defaultProps = {
     Roles.ThirdParty,
     Roles.EInterventionAdmin,
     Roles.Navigator,
+    Roles.ClinicAdmin,
+    Roles.OrganizationAdmin,
+    Roles.HealthSystemAdmin,
   ],
 };
 

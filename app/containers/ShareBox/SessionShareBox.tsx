@@ -57,9 +57,8 @@ export const Component = ({ organizationId }: Props): JSX.Element => {
   const resendInvite = (inviteId: string): void => {
     dispatch(resendSessionInviteRequest(inviteId, session.id));
   };
-
-  const { name, interventionId, emails, position } =
-    objectToCamelCase(session) || {};
+  const { emails } = session || {};
+  const { name, interventionId, position } = objectToCamelCase(session) || {};
 
   if (!session) return <></>;
 

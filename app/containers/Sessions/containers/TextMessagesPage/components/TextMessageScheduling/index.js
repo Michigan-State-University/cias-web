@@ -3,7 +3,6 @@ import PropTypes from 'prop-types';
 import values from 'lodash/values';
 import { Col as GCol, Row as GRow } from 'react-grid-system';
 import dayjs from 'dayjs';
-import customParseFormat from 'dayjs/plugin/customParseFormat';
 
 import {
   TextMessageScheduleFrequency,
@@ -33,7 +32,6 @@ const TextMessageScheduling = ({
   onChangeFrequency,
   disabled,
 }) => {
-  dayjs.extend(customParseFormat);
   const [frequencySettings, setFrequencySettings] = useState({
     frequency,
     endAt,

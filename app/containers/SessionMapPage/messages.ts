@@ -33,6 +33,18 @@ export default defineMessages({
     id: `${scope}.screenNo`,
     defaultMessage: 'Screen {no}',
   },
+  tlfbAssessment: {
+    id: `${scope}.tlfbAssessment`,
+    defaultMessage: 'TLFB Assessment',
+  },
+  tlfb: {
+    id: `${scope}.tlfb`,
+    defaultMessage: 'TLFB',
+  },
+  timelineFollowback: {
+    id: `${scope}.timelineFollowback`,
+    defaultMessage: 'Timeline Followback',
+  },
   zoomInLabel: {
     id: `${scope}.zoomInLabel`,
     defaultMessage: 'Zoom In',
