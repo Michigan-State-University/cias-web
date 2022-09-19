@@ -40,13 +40,13 @@ const ALLOWED_TEAM_NAVIGATOR_DISPLAY = [Roles.Admin, Roles.TeamAdmin];
 
 const ALLOWED_LIVE_CHAT_NOTIFICATIONS_DISPLAY = [Roles.Navigator];
 
-const ALLOWED_QUICK_EXIT_USE = [Roles.Participant];
+const ALLOWED_QUICK_EXIT_USE = [Roles.Participant, Roles.Guest];
 
 export const canDisplayLeftSidebar = (userRoles: Roles[]) =>
   !arraysOverlap(userRoles, FORBIDDEN_LEFT_SIDEBAR_DISPLAY);
 
 export const canUseQuickExit = (userRoles: Roles[]) =>
-  !arraysOverlap(userRoles, ALLOWED_QUICK_EXIT_USE);
+  arraysOverlap(userRoles, ALLOWED_QUICK_EXIT_USE);
 
 export const useRoleManager = () => {
   const { userRoles } = useContext(RolesManagerContext);
@@ -94,6 +94,10 @@ export const useRoleManager = () => {
     ALLOWED_LIVE_CHAT_NOTIFICATIONS_DISPLAY,
   );
 
+  const canUserDisplayLeftSidebar = canDisplayLeftSidebar(userRoles);
+
+  const canUserUseQuickExit = canUseQuickExit(userRoles);
+
   return {
     isAdmin,
     isHealthClinicAdmin,
@@ -109,7 +113,7 @@ export const useRoleManager = () => {
     canDisplayTeamNavigatorPanel,
     canDisplayLiveChatNotifications,
     userRoles,
-    canDisplayLeftSidebar,
-    canUseQuickExit,
+    canUserDisplayLeftSidebar,
+    canUserUseQuickExit,
   };
 };
