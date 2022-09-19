@@ -24,7 +24,7 @@ const NewItem = ({ handleClick, title, isGroup, color }: Props) => (
         <Text fontWeight="medium">{title}</Text>
       </Row>
       {isGroup && (
-        <Text color={colors.surfieGreen}>
+        <Text color={colors.jungleGreen}>
           <FormattedMessage {...messages.createsGroup} />
         </Text>
       )}
