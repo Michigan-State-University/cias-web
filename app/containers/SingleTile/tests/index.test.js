@@ -12,7 +12,7 @@ import { MemoryRouter } from 'react-router-dom';
 import 'jest-styled-components';
 
 import { Provider } from 'react-redux';
-import { Roles } from 'models/User/UserRoles';
+import { Roles } from 'models/User/RolesManager';
 import { DEFAULT_LOCALE } from 'i18n';
 import { createTestStore } from 'utils/testUtils/storeUtils';
 import SingleTile from '../index';
@@ -41,7 +41,7 @@ describe('<SingleTile />', () => {
   const initialState = {
     auth: {
       user: {
-        roles: [Roles.admin],
+        roles: [Roles.Admin],
       },
     },
   };

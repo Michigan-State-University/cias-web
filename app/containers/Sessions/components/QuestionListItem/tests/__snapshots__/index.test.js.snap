@@ -50,6 +50,7 @@ exports[`<QuestionListItem /> should match the snapshot 1`] = `
   display: block;
   border-radius: 5px;
   width: 100%;
+  color: unset;
 }
 
 .c1 {
@@ -65,6 +66,8 @@ exports[`<QuestionListItem /> should match the snapshot 1`] = `
   border-radius: 5px;
   border: 1px solid #EFEFEF;
   border-radius: 5px;
+  color: unset;
+  cursor: pointer;
 }
 
 .c1:hover {
@@ -87,6 +90,7 @@ exports[`<QuestionListItem /> should match the snapshot 1`] = `
   -webkit-box-align: center;
   -ms-flex-align: center;
   align-items: center;
+  color: unset;
 }
 
 .c12 {
@@ -111,6 +115,7 @@ exports[`<QuestionListItem /> should match the snapshot 1`] = `
   -webkit-box-align: flex-start;
   -ms-flex-align: flex-start;
   align-items: flex-start;
+  color: unset;
 }
 
 .c2 {

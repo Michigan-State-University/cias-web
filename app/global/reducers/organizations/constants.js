@@ -1,7 +1,3 @@
-import camelCase from 'lodash/camelCase';
-
-import { Roles } from 'models/User/UserRoles';
-
 export const CREATE_ORGANIZATION_REQUEST =
   'app/organizations/CREATE_ORGANIZATION_REQUEST';
 export const CREATE_ORGANIZATION_SUCCESS =
@@ -113,39 +109,6 @@ export const FETCH_DASHBOARD_VIEW_SELECT_OPTIONS_SUCCESS =
   'app/organizations/FETCH_DASHBOARD_VIEW_SELECT_OPTIONS_SUCCESS';
 export const FETCH_DASHBOARD_VIEW_SELECT_OPTIONS_FAILURE =
   'app/organizations/FETCH_DASHBOARD_VIEW_SELECT_OPTIONS_FAILURE';
-
-const RoleToEntityUrlMap = {
-  [Roles.admin]: 'organizations',
-  [Roles.eInterventionAdmin]: 'organizations',
-  [Roles.organizationAdmin]: 'organizations',
-  [Roles.healthSystemAdmin]: 'health_systems',
-  [Roles.clinicAdmin]: 'health_clinics',
-};
-
-const RoleToInviteUrlMap = {
-  [Roles.eInterventionAdmin]: 'invite_intervention_admin',
-  [Roles.organizationAdmin]: 'invite_organization_admin',
-  [Roles.healthSystemAdmin]: 'invite_health_system_admin',
-  [Roles.clinicAdmin]: 'invite_health_clinic_admin',
-};
-
-export const mapRoleToInviteEndpoint = (role, id) => {
-  const entityUrl = RoleToEntityUrlMap[role];
-  const inviteUrl = RoleToInviteUrlMap[role];
-
-  return `v1/${entityUrl}/${id}/invitations/${inviteUrl}`;
-};
-
-export const mapRoleToFetchEndpoint = (role, id) => {
-  const entityUrl = RoleToEntityUrlMap[role];
-
-  if (role !== Roles.clinicAdmin) return `v1/${entityUrl}/${id}`;
-
-  return `v1/${entityUrl}?organization_id=${id}`;
-};
-
-export const mapRoleToDashboardViewJsonKey = (role) =>
-  camelCase(RoleToEntityUrlMap[role]).slice(0, -1);
 
 export const EntityType = {
   organization: 'ORGANIZATION',

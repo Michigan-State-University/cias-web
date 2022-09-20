@@ -28,7 +28,6 @@ const colors = {
   pistachio: '#8CBD00',
   burntSienna: '#F0684A',
   casper: '#ABBBD1',
-  surfieGreen: '#107969',
   selago: '#E3EEFB',
   electricViolet: '#B302FF',
   coral: '#FF7F50',
@@ -63,6 +62,7 @@ const colors = {
   electricPurple: '#B727EA',
   purplePlum: '#AC43D1',
   periwinkleGray: '#B3C1E1',
+  perwinkleCrayola: '#C0CFE3',
   solitude: '#E6EDFD',
   red: '#BE4745',
   red5: '#FCF6F6',
@@ -84,7 +84,10 @@ const colors = {
   pictonBlue: '#3686F0',
   coolGrey: '#8B92A1',
   lightStealBlue: '#B3C1E1',
+  beauBlue: '#CFDDEF',
+  slateGray: '#6D7485',
   lightDivider: '#EAF1FA',
+  cinnabar: '#DD533C',
   fireIsland: '#DD533C',
 };
 
@@ -96,6 +99,7 @@ const themeColors = {
   success: colors.jungleGreen,
   warning: colors.vermilion,
   comment: colors.sonicSilver,
+  alert: colors.cinnabar,
 };
 
 export { colors, themeColors };

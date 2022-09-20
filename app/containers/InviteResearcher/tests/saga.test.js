@@ -2,7 +2,7 @@ import { toast } from 'react-toastify';
 import { takeLatest, put, call } from 'redux-saga/effects';
 import { expectSaga } from 'redux-saga-test-plan';
 
-import { Roles } from 'models/User/UserRoles';
+import { Roles } from 'models/User/RolesManager';
 import { addUserToList } from 'global/reducers/userList';
 import { defaultTimeZone } from 'utils/timezones';
 import { formatMessage } from 'utils/intlOutsideReact';
@@ -46,7 +46,7 @@ describe('inviteResearcher saga', () => {
           lastName: '',
           fullName: '',
           email: 'email@gmail.com',
-          roles: [Roles.researcher],
+          roles: [Roles.Researcher],
           avatar: null,
           timeZone: defaultTimeZone,
           active: true,
@@ -59,7 +59,7 @@ describe('inviteResearcher saga', () => {
       lastName: '',
       fullName: '',
       email: 'email@gmail.com',
-      roles: [Roles.researcher],
+      roles: [Roles.Researcher],
       avatar: null,
       timeZone: defaultTimeZone,
       active: true,

@@ -9,14 +9,14 @@ import { FileDisplayItem } from 'components/FileDisplayItem';
 
 import trashBin from 'assets/svg/bin-no-bg.svg';
 
-import { FileInfo } from 'models/Intervention';
+import { AppFile } from 'models/File';
 
 import messages from './messages';
 import { FileListItem, StyledFileList } from './styled';
 
 interface Props {
-  files: FileInfo[];
-  handleDelete: (fileInfo: FileInfo) => void;
+  files: AppFile[];
+  handleDelete: (fileInfo: AppFile) => void;
 }
 
 const FileListComponent = ({ files, handleDelete }: Props) => (
@@ -31,7 +31,7 @@ const FileListComponent = ({ files, handleDelete }: Props) => (
         </H3>
       ) : (
         <StyledFileList>
-          {files.map((file: FileInfo) => (
+          {files.map((file) => (
             <FileListItem key={file.id}>
               <FileDisplayItem fileInfo={file} key={file.id} />
               <Img

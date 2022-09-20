@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import Row from 'components/Row';
 import Select from 'components/Select';
 import { colors } from 'theme';
-import ChipsInput from './ChipsInput';
+import ChipsInput from '../../../components/Input/ChipsInput';
 import messages from '../messages';
 
 const ClinicParticipantInviter = ({

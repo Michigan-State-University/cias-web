@@ -4,43 +4,38 @@
  *
  */
 
-import React, { memo, ReactElement } from 'react';
-import identity from 'lodash/identity';
+import React from 'react';
 
 import Row from 'components/Row';
 import Img from 'components/Img';
 import Text from 'components/Text';
+import ConditionalWrapper from 'components/ConditionalWrapper';
 import exclamationMark from 'assets/svg/exclamationMark.svg';
 
 import { AlertContainer } from './styled';
 
-type ErrorAlertProps = {
-  errorText: string;
+type Props = {
+  errorText: string | object;
   fullPage?: boolean;
-} & Record<string, unknown>;
+} & Record<string, any>;
 
-const ErrorAlert = ({ errorText, fullPage, ...restProps }: ErrorAlertProps) => {
+const ErrorAlert = ({ errorText, fullPage, ...restProps }: Props) => {
   const toDisplay = errorText.toString().split('\n')[0];
 
-  const wrapWithRow = (child: ReactElement) => (
-    <Row width="100%" justify="center" mt={100}>
-      {child}
-    </Row>
-  );
-
-  const wrapper = fullPage ? wrapWithRow : identity;
   return (
-    <>
-      {wrapper(
-        <AlertContainer {...restProps}>
-          <Img src={exclamationMark} alt="error" mr={15} />
-          <Text fontWeight="bold" fontSize={15}>
-            {toDisplay}
-          </Text>
-        </AlertContainer>,
-      )}
-    </>
+    <ConditionalWrapper
+      if={fullPage}
+      with={Row}
+      wrapperProps={{ width: '100%', justify: 'center', mt: 100 }}
+    >
+      <AlertContainer {...restProps}>
+        <Img src={exclamationMark} alt="error" mr={15} />
+        <Text fontWeight="bold" fontSize={15}>
+          {toDisplay}
+        </Text>
+      </AlertContainer>
+    </ConditionalWrapper>
   );
 };
 
-export default memo(ErrorAlert);
+export default ErrorAlert;

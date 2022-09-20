@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 
-import { colors } from 'theme';
+import { colors, ZIndex } from 'theme';
 import { style, layout } from 'components/BaseComponentStyles';
 
 export const FillScreenLoader = styled.div.attrs({
@@ -9,7 +9,7 @@ export const FillScreenLoader = styled.div.attrs({
 })`
   position: fixed;
   display: flex;
-  z-index: 1000;
+  z-index: ${ZIndex.LOADER};
   justify-content: center;
   align-items: center;
   width: 100vw;

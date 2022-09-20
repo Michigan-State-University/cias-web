@@ -38,6 +38,7 @@ exports[`<PreviewButton /> Should render and match the snapshot 1`] = `
   height: auto;
   display: block;
   border-radius: 5px;
+  color: unset;
 }
 
 .c1 {
@@ -132,6 +133,7 @@ exports[`<PreviewButton /> Should render and match the snapshot of disabled butt
   height: auto;
   display: block;
   border-radius: 5px;
+  color: unset;
 }
 
 .c1 {

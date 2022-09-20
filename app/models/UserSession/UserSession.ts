@@ -16,6 +16,7 @@ export interface UserSession {
   sessionId: String;
   type: UserSessionType;
   scheduledAt: Nullable<string>;
+  liveChatEnabled: boolean;
   quickExitEnabled: boolean;
 }
 

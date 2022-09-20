@@ -39,6 +39,11 @@ import {
   REDIRECT_QUERY_KEY,
 } from 'global/reducers/auth';
 import logInGuestSaga from 'global/reducers/auth/sagas/logInGuest';
+import {
+  ChatWidgetReducer,
+  chatWidgetReducerKey,
+  setChatEnabled,
+} from 'global/reducers/chatWidget';
 import { canPreview } from 'models/Status/statusPermissions';
 import { finishQuestion } from 'models/Session/QuestionTypes';
 import { UserSessionType } from 'models/UserSession/UserSession';
@@ -207,6 +212,7 @@ export function AnswerSessionPage({
   clearErrors,
   toggleTextTranscript,
   setTransitionalUserSessionId,
+  setLiveChatEnabled,
   saveQuickExitEvent,
 }) {
   const { formatMessage } = useIntl();
@@ -217,6 +223,7 @@ export function AnswerSessionPage({
   useInjectReducer({ key: 'AnswerSessionPage', reducer });
   useInjectSaga({ key: 'AnswerSessionPage', saga });
   useInjectSaga({ key: 'editPhoneNumber', saga: editPhoneNumberQuestionSaga });
+  useInjectReducer({ key: chatWidgetReducerKey, reducer: ChatWidgetReducer });
 
   const [skipQuestionModalVisible, setSkipQuestionModalVisible] =
     useState(false);
@@ -289,7 +296,12 @@ export function AnswerSessionPage({
   }, [sessionId]);
 
   useEffect(() => {
-    if (userSession) nextQuestion(userSessionId, index);
+    if (userSession) {
+      nextQuestion(userSessionId, index);
+      if (userSession.liveChatEnabled && interventionId) {
+        setLiveChatEnabled(interventionId);
+      }
+    }
   }, [userSession]);
 
   if (questionError) {
@@ -748,6 +760,7 @@ AnswerSessionPage.propTypes = {
   clearErrors: PropTypes.func,
   toggleTextTranscript: PropTypes.func,
   setTransitionalUserSessionId: PropTypes.func,
+  setLiveChatEnabled: PropTypes.func,
   saveQuickExitEvent: PropTypes.func,
 };
 
@@ -769,6 +782,7 @@ const mapDispatchToProps = {
   clearErrors: clearError,
   toggleTextTranscript: toggleTextTranscriptAction,
   setTransitionalUserSessionId: setTransitionalUserSessionIdAction,
+  setLiveChatEnabled: setChatEnabled,
   saveQuickExitEvent: saveQuickExitEventRequest,
 };
 

@@ -9,6 +9,7 @@ exports[`<AvatarForm /> Should render and match the snapshot 1`] = `
   height: -webkit-fit-content;
   height: -moz-fit-content;
   height: fit-content;
+  color: unset;
 }
 
 .c0 {

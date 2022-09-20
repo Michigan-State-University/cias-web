@@ -23,7 +23,7 @@ import DocumentIcon from 'assets/svg/document.svg';
 import { colors } from 'theme';
 
 import globalMessages from 'global/i18n/globalMessages';
-import { makeSelectUserId, makeSelectUserRoles } from 'global/reducers/auth';
+import { makeSelectUserId } from 'global/reducers/auth';
 import { interventionOptionsSaga } from 'global/sagas/interventionOptionsSaga';
 import {
   interventionReducer,
@@ -35,8 +35,7 @@ import {
 } from 'global/reducers/interventions';
 
 import { canArchive, canEdit } from 'models/Status/statusPermissions';
-import { RolePermissions } from 'models/User/RolePermissions';
-import { Roles } from 'models/User/UserRoles';
+import { useRoleManager } from 'models/User/RolesManager';
 
 import isNullOrUndefined from 'utils/isNullOrUndefined';
 
@@ -76,7 +75,6 @@ const SingleTile = ({
   archiveIntervention,
   intl: { formatMessage },
   userId,
-  userRoles,
   isLoading,
 }) => {
   const [
@@ -120,7 +118,7 @@ const SingleTile = ({
     },
   });
 
-  const isAdmin = userRoles.includes(Roles.admin);
+  const { isAdmin, canAssignOrganizationToIntervention } = useRoleManager();
 
   const {
     name,
@@ -137,7 +135,6 @@ const SingleTile = ({
   const handleCsvRequest = () => sendCsv(id);
 
   const canExportCSV = userId === user?.id;
-  const { canAssignOrganizationToIntervention } = RolePermissions(userRoles);
 
   const handleClone = () =>
     copyIntervention({ interventionId: id, withoutRedirect: true });
@@ -318,13 +315,11 @@ SingleTile.propTypes = {
   copyIntervention: PropTypes.func,
   archiveIntervention: PropTypes.func,
   userId: PropTypes.string,
-  userRoles: PropTypes.arrayOf(PropTypes.string),
   isLoading: PropTypes.bool,
 };
 
 const mapStateToProps = createStructuredSelector({
   userId: makeSelectUserId(),
-  userRoles: makeSelectUserRoles(),
 });
 
 const mapDispatchToProps = {

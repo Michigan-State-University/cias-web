@@ -2,11 +2,12 @@ import styled from 'styled-components';
 import PropTypes from 'prop-types';
 import { themeColors, borders, paddings, colors } from 'theme';
 
-import { margin, layout } from '../BaseComponentStyles';
+import { margin, layout, border, style } from '../BaseComponentStyles';
 import { getAriaLabelProps } from './utils';
 
 const TextArea = styled.textarea.attrs((props) => ({
   ...getAriaLabelProps(props),
+  disabledColor: colors.casper,
 }))`
   resize: none;
   padding: ${paddings.small};
@@ -19,14 +20,13 @@ const TextArea = styled.textarea.attrs((props) => ({
   }
   ${margin};
   ${layout};
+  ${style};
   ${({ transparent }) =>
     transparent && {
       backgroundColor: 'transparent',
       border: `${borders.borderWidth} ${borders.borderStyle} transparent`,
     }};
-  &:disabled {
-    color: ${colors.casper};
-  }
+  ${border};
 `;
 
 TextArea.propTypes = {

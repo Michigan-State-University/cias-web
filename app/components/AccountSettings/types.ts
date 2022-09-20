@@ -1,5 +1,11 @@
+import { CountryCode } from 'libphonenumber-js/types';
+
 export interface PhoneAttributes {
-  iso: string;
+  iso: CountryCode;
   number: string;
   prefix: string;
 }
+
+export type PhoneNumberFormCalculatedValue = {
+  phoneAttributes: PhoneAttributes;
+};

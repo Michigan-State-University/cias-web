@@ -1,0 +1,1 @@
+export const FONT_SIZE_TO_CIRCLE_SIZE_RATIO = 0.6;

@@ -11,7 +11,7 @@ import { objectDifference } from 'utils/objectDifference';
  *
  * @param {Draft<T[]>} draftCollection
  * @param id
- * @param {Object|function(item: Draft<T>, index: number): T|Draft<T>} updater Function returning Object and taking `item` and `index` or an Object to assign to
+ * @param {(function(item: Draft<T>, index: number): T|Draft<T>) | object} updater Function returning Object and taking `item` and `index` or an Object to assign to
  * @template T
  */
 export const updateItemById = (draftCollection, id, updater) => {

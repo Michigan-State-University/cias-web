@@ -45,4 +45,12 @@ export default defineMessages({
     id: `${scope}.inviteToTeam`,
     defaultMessage: '+ Invite to team',
   },
+  inviteUser: {
+    id: `${scope}.inviteUser`,
+    defaultMessage: 'Invite user to team',
+  },
+  modalDescription: {
+    id: `${scope}.modalDescription`,
+    defaultMessage: `Type the email of the user and choose their role(s)`,
+  },
 });

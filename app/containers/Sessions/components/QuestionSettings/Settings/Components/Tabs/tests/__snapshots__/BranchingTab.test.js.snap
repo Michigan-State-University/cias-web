@@ -31,6 +31,8 @@ exports[`<BranchingTab /> Should render and match the snapshot 1`] = `
   cursor: pointer;
   border-radius: 5px;
   border-radius: 5px;
+  color: unset;
+  cursor: pointer;
 }
 
 .c0:hover {
@@ -42,6 +44,7 @@ exports[`<BranchingTab /> Should render and match the snapshot 1`] = `
   height: auto;
   display: block;
   border-radius: 5px;
+  color: unset;
 }
 
 .c5 {

@@ -8,6 +8,7 @@ exports[`<QuestionImage /> should match the snapshot with file 1`] = `
   border-radius: 5px;
   width: 100%;
   margin-top: 10px;
+  color: unset;
 }
 
 .c2 {
@@ -22,6 +23,7 @@ exports[`<QuestionImage /> should match the snapshot with file 1`] = `
   padding-left: 21px;
   border-radius: 5px;
   border-radius: 5px;
+  color: unset;
 }
 
 .c2:hover {
@@ -36,6 +38,8 @@ exports[`<QuestionImage /> should match the snapshot with file 1`] = `
   visibility: hidden;
   margin-left: 15px;
   cursor: pointer;
+  color: unset;
+  cursor: pointer;
 }
 
 .c8 {
@@ -45,6 +49,7 @@ exports[`<QuestionImage /> should match the snapshot with file 1`] = `
   border-radius: 5px;
   margin-top: 20px;
   background-color: rgba(233,241,251,1);
+  color: unset;
 }
 
 .c9 {
@@ -65,6 +70,7 @@ exports[`<QuestionImage /> should match the snapshot with file 1`] = `
   -ms-flex-align: center;
   align-items: center;
   gap: 15px;
+  color: unset;
 }
 
 .c0 {
@@ -256,6 +262,7 @@ exports[`<QuestionImage /> should match the snapshot without file 1`] = `
   border-radius: 5px;
   margin-top: 20px;
   background-color: rgba(233,241,251,1);
+  color: unset;
 }
 
 .c10 {
@@ -276,6 +283,7 @@ exports[`<QuestionImage /> should match the snapshot without file 1`] = `
   -ms-flex-align: center;
   align-items: center;
   gap: 15px;
+  color: unset;
 }
 
 .c0 {
@@ -325,8 +333,6 @@ exports[`<QuestionImage /> should match the snapshot without file 1`] = `
   font-family: DM Sans;
   font-size: 15px;
   line-height: 150%;
-  -webkit-text-decoration: underline;
-  text-decoration: underline;
   cursor: pointer;
   color: rgba(183,39,234,1);
   cursor: pointer;

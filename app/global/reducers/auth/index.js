@@ -37,6 +37,7 @@ export {
   makeSelectVerificationNeeded,
   makeSelectVerificationSuccess,
   makeSelectUserId,
+  makeSelectIsUserLoggedIn,
 } from './selectors';
 export {
   logOutSaga,

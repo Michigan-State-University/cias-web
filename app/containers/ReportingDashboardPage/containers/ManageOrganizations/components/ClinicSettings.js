@@ -12,7 +12,7 @@ import { useIntl } from 'react-intl';
 
 import ClinicIcon from 'assets/svg/clinic-icon.svg';
 
-import { Roles } from 'models/User/UserRoles';
+import { Roles } from 'models/User/RolesManager';
 
 import {
   inviteAdminRequest,
@@ -137,7 +137,7 @@ const ClinicSettings = ({
             helper={formatMessage(messages.clinicAdminsHelper)}
             inviteTo={name}
             onInvite={onInvite}
-            role={Roles.clinicAdmin}
+            role={Roles.ClinicAdmin}
             users={healthClinicAdmins}
           />
         </Col>

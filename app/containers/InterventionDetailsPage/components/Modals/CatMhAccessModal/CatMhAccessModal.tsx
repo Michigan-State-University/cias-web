@@ -4,7 +4,7 @@ import { useDispatch, useSelector } from 'react-redux';
 
 import {
   CatMhLicenseType,
-  InterventionDto,
+  Intervention,
   InterventionStatus,
 } from 'models/Intervention';
 import {
@@ -20,7 +20,7 @@ import {
 } from './utils';
 
 type Props = {
-  modalState: InterventionDto;
+  modalState: Intervention;
   closeModal: () => void;
 };
 
@@ -34,7 +34,7 @@ const Component = ({ modalState: intervention, closeModal }: Props) => {
   );
 
   // actions
-  const editIntervention = (newValue: Partial<InterventionDto>) =>
+  const editIntervention = (newValue: Partial<Intervention>) =>
     dispatch(editInterventionRequest({ id: intervention.id, ...newValue }));
 
   const initialData = useMemo(

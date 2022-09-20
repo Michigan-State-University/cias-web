@@ -14,7 +14,7 @@ import {
   UserInterventionStatus,
 } from 'models/UserIntervention/StatusTypes';
 import { UserIntervention } from 'models/UserIntervention/UserIntervention';
-import { InterventionType } from 'models/Intervention/InterventionDto';
+import { InterventionType } from 'models/Intervention';
 
 import { TileContainer } from './styled';
 import messages from './messages';

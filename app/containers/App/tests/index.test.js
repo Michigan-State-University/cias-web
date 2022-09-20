@@ -12,7 +12,7 @@ import { MemoryRouter } from 'react-router-dom';
 import { DEFAULT_LOCALE } from 'i18n';
 
 import { createTestStore } from 'utils/testUtils/storeUtils';
-import { Roles } from 'models/User/UserRoles';
+import { Roles } from 'models/User/RolesManager';
 
 import App from '../index';
 
@@ -22,7 +22,7 @@ describe('<AnswerSessionPage />', () => {
       user: {
         firstName: 'first-name',
         lastName: 'last-name',
-        roles: [Roles.admin],
+        roles: [Roles.Admin],
       },
     },
   };

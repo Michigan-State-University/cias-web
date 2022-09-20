@@ -14,6 +14,7 @@ const Collapse = ({
   onToggle,
   label,
   onDelete,
+  deleting,
   disabled,
   onShowImg,
   onHideImg,
@@ -39,6 +40,7 @@ const Collapse = ({
   binProps,
   arrowColor,
   extraIcons,
+  showHoverEffect,
 }) => (
   <StyledCollapseContainer data-cy={cypressId} {...containerProps}>
     <CollapseLabel
@@ -47,6 +49,7 @@ const Collapse = ({
       onToggle={onToggle}
       isOpened={isOpened}
       onDelete={onDelete}
+      deleting={deleting}
       disabled={disabled}
       onShowImg={onShowImg}
       onHideImg={onHideImg}
@@ -67,6 +70,7 @@ const Collapse = ({
       binProps={binProps}
       arrowColor={arrowColor}
       extraIcons={extraIcons}
+      showHoverEffect={showHoverEffect}
     />
     <CollapseContent
       child={children}
@@ -83,6 +87,7 @@ Collapse.propTypes = {
   onToggle: PropTypes.func,
   isOpened: PropTypes.bool,
   onDelete: PropTypes.func,
+  deleting: PropTypes.bool,
   disabled: PropTypes.bool,
   onShowImg: PropTypes.any,
   onHideImg: PropTypes.any,
@@ -108,6 +113,7 @@ Collapse.propTypes = {
   binProps: PropTypes.object,
   arrowColor: PropTypes.string,
   extraIcons: PropTypes.node,
+  showHoverEffect: PropTypes.bool,
 };
 
 Collapse.defaultProps = {

@@ -252,6 +252,7 @@ exports[`<MultiQuestion /> Should render and match the snapshot 1`] = `
   padding-left: 21px;
   border-radius: 5px;
   border-radius: 5px;
+  color: unset;
 }
 
 .c2:hover {
@@ -275,6 +276,7 @@ exports[`<MultiQuestion /> Should render and match the snapshot 1`] = `
   -ms-flex-align: center;
   align-items: center;
   gap: 15px;
+  color: unset;
 }
 
 .c9 {
@@ -282,6 +284,7 @@ exports[`<MultiQuestion /> Should render and match the snapshot 1`] = `
   height: auto;
   display: block;
   border-radius: 5px;
+  color: unset;
 }
 
 .c12 {
@@ -290,6 +293,8 @@ exports[`<MultiQuestion /> Should render and match the snapshot 1`] = `
   display: block;
   border-radius: 5px;
   display: none;
+  cursor: pointer;
+  color: unset;
   cursor: pointer;
 }
 
@@ -305,6 +310,8 @@ exports[`<MultiQuestion /> Should render and match the snapshot 1`] = `
   cursor: pointer;
   border-radius: 5px;
   border-radius: 5px;
+  color: unset;
+  cursor: pointer;
 }
 
 .c19:hover {

@@ -22,7 +22,7 @@ type Props = {
   children: React.ReactNode;
   id: string;
   text: string;
-  hidden: boolean;
+  hidden?: boolean;
   iconProps?: Record<string, unknown>;
 };
 

@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 
+import { colors } from 'theme';
 import Row from 'components/Row';
 
 import Tab from './Tab';
@@ -13,6 +14,9 @@ const Tabs = ({
   controlledTabActive,
   controlledSetTabActive,
   containerProps,
+  withBottomBorder,
+  emphasizeActiveLink,
+  labelStyle,
   ...restProps
 }) => {
   const { label: initialLabel, renderAsLink: initialRenderAsLink } =
@@ -30,7 +34,13 @@ const Tabs = ({
   const tab = controlled ? controlledTabActive : activeTab;
   return (
     <TabsContainer {...restProps}>
-      <Row data-cy="tabs" align="end">
+      <Row
+        data-cy="tabs"
+        align="end"
+        {...(withBottomBorder
+          ? { borderBottom: `1px solid ${colors.linkWater}`, pb: 4 }
+          : {})}
+      >
         {children.map((child) => {
           if (!child || !child.props) return null;
           const { label, renderAsLink, hidden, linkMatch } = child.props;
@@ -46,6 +56,8 @@ const Tabs = ({
               renderAsLink={renderAsLink}
               linkMatch={linkMatch}
               onClick={onClickTabItem}
+              emphasizeActiveLink={emphasizeActiveLink}
+              labelStyle={labelStyle}
             />
           );
         })}
@@ -72,6 +84,14 @@ Tabs.propTypes = {
   ]),
   controlledSetTabActive: PropTypes.func,
   containerProps: PropTypes.object,
+  withBottomBorder: PropTypes.bool,
+  emphasizeActiveLink: PropTypes.bool,
+  labelStyle: PropTypes.object,
+};
+
+Tabs.defaultProps = {
+  withBottomBorder: false,
+  emphasizeActiveLink: false,
 };
 
 export default Tabs;

@@ -9,12 +9,7 @@ import Radio from 'components/Radio';
 import H2 from 'components/H2';
 import Tooltip from 'components/Tooltip';
 import questionMark from 'assets/svg/grey-question-mark.svg';
-
-interface OptionType {
-  id: string;
-  label: string;
-  sublabel?: string;
-}
+import { OptionType } from '../types';
 
 interface Props {
   onOptionHover?: (option: Nullable<OptionType>) => void;

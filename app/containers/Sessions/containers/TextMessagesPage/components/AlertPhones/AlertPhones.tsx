@@ -18,7 +18,10 @@ import { themeColors } from 'theme';
 
 import Text from 'components/Text';
 import PhoneNumberForm from 'components/AccountSettings/PhoneNumberForm';
-import { PhoneAttributes } from 'components/AccountSettings/types';
+import {
+  PhoneAttributes,
+  PhoneNumberFormCalculatedValue,
+} from 'components/AccountSettings/types';
 import { ImageButton } from 'components/Button';
 import Row from 'components/Row';
 import TextButton from 'components/Button/TextButton';
@@ -67,9 +70,12 @@ export const AlertPhones = ({ disabled }: Props): JSX.Element => {
       {phones.map((phone) => (
         <Row align="center" mb={16} key={`text-message-phone-${phone.id}`}>
           <PhoneNumberForm
+            // @ts-ignore
             formatMessage={formatMessage}
             phone={phone}
-            changePhoneNumber={(payload) => handleChange(phone.id, payload)}
+            changePhoneNumber={(payload: PhoneNumberFormCalculatedValue) =>
+              handleChange(phone.id, payload)
+            }
             confirmationDisabled
             disabled={disabled}
           />

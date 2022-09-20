@@ -1,11 +1,6 @@
-import React, { memo } from 'react';
+import React from 'react';
 import PropTypes from 'prop-types';
-import { createStructuredSelector } from 'reselect';
-import { connect } from 'react-redux';
-import { compose } from 'redux';
 import { useParams } from 'react-router';
-
-import { makeSelectUser } from 'global/reducers/auth';
 
 import ManageOrganizations from './containers/ManageOrganizations/Loadable';
 import DashboardSetup from './containers/DashboardSetup/Loadable';
@@ -13,12 +8,12 @@ import DashboardView from './containers/DashboardView/Loadable';
 
 import { VIEW, ReportingDashboardPageContext } from './constants';
 
-const ReportingDashboardPage = ({ user, view, organizableId }) => {
+const ReportingDashboardPage = ({ view, organizableId }) => {
   const { organizationId } = useParams();
 
   const withContext = (component) => (
     <ReportingDashboardPageContext.Provider
-      value={{ user, organizationId, organizableId }}
+      value={{ organizationId, organizableId }}
     >
       {component}
     </ReportingDashboardPageContext.Provider>
@@ -42,10 +37,4 @@ ReportingDashboardPage.propTypes = {
   organizableId: PropTypes.string,
 };
 
-const mapStateToProps = createStructuredSelector({
-  user: makeSelectUser(),
-});
-
-const withConnect = connect(mapStateToProps);
-
-export default memo(compose(withConnect)(ReportingDashboardPage));
+export default ReportingDashboardPage;

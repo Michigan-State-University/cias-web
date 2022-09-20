@@ -1,7 +1,10 @@
-import React, { ReactElement, useState } from 'react';
+import React, { ReactElement, ReactNode, useState, useEffect } from 'react';
+import { useIntl } from 'react-intl';
+import isNil from 'lodash/isNil';
 
 import Collapse from 'components/Collapse';
-import { ImageButton } from 'components/Button';
+import CollapseIcon from 'components/Collapse/CollapseIcon';
+import Text from 'components/Text';
 import Box from 'components/Box';
 import Divider from 'components/Divider';
 
@@ -12,12 +15,15 @@ import EditIcon from 'assets/svg/edit.svg';
 import ArrowDown from 'assets/svg/arrow-down-grey.svg';
 import ArrowUp from 'assets/svg/arrow-up-grey.svg';
 
+import messages from './messages';
+
 type BoxCollapseType = {
   id?: string;
-  children: ReactElement;
-  label: string | ReactElement;
+  children: ReactNode;
+  label: ReactElement | string;
   onEdit?: () => void;
   onDelete?: () => void;
+  deleting?: boolean;
   disableAnimation?: boolean;
   disabled?: boolean;
   labelBgColor?: string;
@@ -30,6 +36,12 @@ type BoxCollapseType = {
   contentStyle?: object;
   shouldBeOpenOnStart?: boolean;
   extraIcons?: ReactElement[];
+  isOpen?: boolean;
+  showArrow?: boolean;
+  setOpen?: () => void;
+  binMargin?: number;
+  showHoverEffect?: boolean;
+  iconProps?: object;
 } & Record<string, unknown>;
 
 export const BoxCollapse = ({
@@ -38,6 +50,7 @@ export const BoxCollapse = ({
   label,
   onEdit,
   onDelete,
+  deleting,
   disableAnimation,
   disabled = false,
   extraIcons,
@@ -50,17 +63,37 @@ export const BoxCollapse = ({
   contentStyle,
   showDivider,
   shouldBeOpenOnStart,
+  isOpen = undefined,
+  showArrow = true,
+  setOpen,
+  binMargin,
+  showHoverEffect,
+  iconProps,
   ...styleProps
 }: BoxCollapseType) => {
   const [isOpened, setOpened] = useState(!!shouldBeOpenOnStart);
   const toggleOpen = () => setOpened((prev) => !prev);
+  const { formatMessage } = useIntl();
 
-  const handleDelete = onDelete
-    ? (e: MouseEvent) => {
-        e.stopPropagation();
-        onDelete();
-      }
-    : undefined;
+  useEffect(() => {
+    if (!isNil(isOpen)) {
+      setOpened(isOpen);
+    }
+  }, [isOpen]);
+
+  const EditButton = (
+    <CollapseIcon
+      mr={showHoverEffect ? 4 : 8}
+      icon={EditIcon}
+      onClick={onEdit}
+      title={formatMessage(messages.editItem)}
+      fill={colors.heather}
+      disabled={disabled}
+      showHoverEffect={showHoverEffect}
+      active={isOpened}
+      iconProps={iconProps}
+    />
+  );
 
   return (
     <Box bg={colors.lightBlue} width="100%" {...styleProps}>
@@ -73,16 +106,18 @@ export const BoxCollapse = ({
         // @ts-ignore
         binImage={BinIcon}
         binFillColor={binFillColor}
-        onDelete={handleDelete}
-        onToggle={toggleOpen}
-        onHideImg={ArrowDown}
-        onShowImg={ArrowUp}
-        binMargin={20}
+        onDelete={onDelete}
+        deleting={deleting}
+        onToggle={setOpen || toggleOpen}
+        onHideImg={showArrow && ArrowDown}
+        onShowImg={showArrow && ArrowUp}
+        binMargin={binMargin ?? 20}
         px={16}
         py={0}
         height={null}
-        binProps={binProps}
+        binProps={{ ...binProps, ...iconProps }}
         arrowColor={arrowColor}
+        showHoverEffect={showHoverEffect}
         label={
           <Box
             display="flex"
@@ -92,22 +127,14 @@ export const BoxCollapse = ({
             py={labelPadding}
             color={colors.bluewood}
           >
-            {label}
-            {onEdit && (
-              <ImageButton
-                src={EditIcon}
-                onClick={(e: React.MouseEvent) => {
-                  if (onEdit) {
-                    e.stopPropagation();
-                    onEdit();
-                  }
-                }}
-                mr={8}
-                title="Edit item"
-                fill={colors.heather}
-                disabled={disabled}
-              />
+            {typeof label === 'string' ? (
+              <Text fontSize="16px" fontWeight="bold">
+                {label}
+              </Text>
+            ) : (
+              label
             )}
+            {onEdit && EditButton}
           </Box>
         }
         disableAnimation={disableAnimation}
