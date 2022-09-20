@@ -91,4 +91,8 @@ export default defineMessages({
     id: `${scope}.noTitle`,
     defaultMessage: 'No title',
   },
+  tlfb: {
+    id: `${scope}.tlfb`,
+    defaultMessage: 'TLFB',
+  },
 });

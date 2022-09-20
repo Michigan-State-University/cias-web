@@ -3,6 +3,8 @@ import { useDispatch, useSelector } from 'react-redux';
 import { useInjectReducer, useInjectSaga } from 'redux-injectors';
 import { useIntl } from 'react-intl';
 
+import { TLFB_QUESTION_TYPES } from 'models/Question';
+
 import { useConversationChannel } from 'utils/useConversationChannel';
 import { htmlToPlainText } from 'utils/htmlToPlainText';
 
@@ -77,6 +79,11 @@ export const LiveChatParticipantPanel = ({ interventionId }: Props) => {
       });
       return;
     }
+
+    const isTlfb =
+      currentQuestion && TLFB_QUESTION_TYPES.includes(currentQuestion.type);
+    const tlfbTitle = isTlfb ? formatMessage(messages.tlfb) : null;
+
     const currentQuestionSubtitle =
       currentQuestion?.settings?.subtitle && currentQuestion?.subtitle
         ? htmlToPlainText(currentQuestion?.subtitle)
@@ -89,7 +96,8 @@ export const LiveChatParticipantPanel = ({ interventionId }: Props) => {
 
     const screenTitle = !interventionStarted
       ? formatMessage(messages.initialScreen)
-      : currentQuestionSubtitle ||
+      : tlfbTitle ||
+        currentQuestionSubtitle ||
         currentQuestionTitle ||
         formatMessage(messages.noTitle);
 
