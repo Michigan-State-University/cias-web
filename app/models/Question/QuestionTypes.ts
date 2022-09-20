@@ -19,3 +19,9 @@ export enum QuestionTypes {
   TLFB_EVENTS = 'Question::TlfbEvents',
   TLFB_QUESTION = 'Question::TlfbQuestion',
 }
+
+export const TLFB_QUESTION_TYPES = [
+  QuestionTypes.TLFB_CONFIG,
+  QuestionTypes.TLFB_EVENTS,
+  QuestionTypes.TLFB_QUESTION,
+];
