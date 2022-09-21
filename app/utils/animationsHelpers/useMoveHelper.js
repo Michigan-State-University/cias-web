@@ -67,7 +67,7 @@ const useMoveHelper = (
     if (blocks.length) {
       await Promise.all(
         characterToMoveAnimationsMap[character].map(async (animation) => {
-          const data = importAnimation(character, 'standStill');
+          const data = await importAnimation(character, animation);
           moveAnimations.push({
             name: animation,
             animationData: data,
