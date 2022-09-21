@@ -70,6 +70,8 @@ export const HeadAnimation = {
   ...HeadReverseAnimation,
 };
 
+export type RestAnimation = BodyAutoRestAnimation | HeadAutoRestAnimation;
+
 export enum SpeechAnimation {
   REST = 'rest',
   EXPLAIN = 'explain',

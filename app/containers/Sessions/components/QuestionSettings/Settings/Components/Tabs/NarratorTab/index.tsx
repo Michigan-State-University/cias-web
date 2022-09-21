@@ -7,6 +7,11 @@ import { connect } from 'react-redux';
 import { Markup } from 'interweave';
 
 import lastKey from 'utils/getLastKey';
+import {
+  getAvailableBlockAnimations,
+  getDefaultBlockAnimation,
+} from 'utils/animations/animationsNames';
+
 import { colors, borders, fontSizes, themeColors } from 'theme';
 
 import { Narrator, NarratorBlockTypes } from 'models/Narrator';
@@ -29,12 +34,22 @@ import { ConfirmationModal } from 'components/Modal';
 import InfoBox from 'components/Box/InfoBox';
 import Img from 'components/Img';
 import { LI, UL } from 'components/List';
+import { CharacterType } from 'models/Character';
 
-import BlockTypeChooser from '../BlockTypeChooser';
-import WrappedAccordion from '../WrappedAcoordion';
-import messages from '../messages';
-import { addBlock, updateNarratorSettings } from '../../actions';
-import { NarratorSetting } from './NarratorSetting';
+import MissingAnimationsModal from './MissingAnimationsModal';
+import BlockTypeChooser from '../../BlockTypeChooser';
+import WrappedAccordion from '../../WrappedAcoordion';
+import messages from '../../messages';
+import {
+  addBlock,
+  updateEntireNarrator,
+  updateNarratorSettings,
+} from '../../../actions';
+import { NarratorSetting } from '../NarratorSetting';
+import {
+  MissingAnimationModalState,
+  MissingAnimationReplacement,
+} from './types';
 
 type NonReduxProps = {
   disabled: boolean;
@@ -53,6 +68,7 @@ type Props = {
   disabled: boolean;
   groupIds: string[];
   changeNarratorBlockIndex: (index: number) => void;
+  updateNarrator: (newNarrator: Narrator) => void;
 } & NonReduxProps;
 
 const NarratorTab = ({
@@ -67,8 +83,11 @@ const NarratorTab = ({
   questionType,
   changeNarratorBlockIndex,
   isTlfbGroup,
+  updateNarrator,
 }: Props) => {
   const [confirmationOption, setConfirmationOption] = useState('');
+  const [missingAnimationModalState, setMissingAnimationModalState] =
+    useState<MissingAnimationModalState>(null);
   const { formatMessage } = useIntl();
 
   const dismissConfirmation = () => setConfirmationOption('');
@@ -88,7 +107,57 @@ const NarratorTab = ({
     changeNarratorBlockIndex(blocks);
   };
 
+  const getMissingAnimationsList = (
+    character: CharacterType,
+  ): MissingAnimationModalState => {
+    const missingAnimations: MissingAnimationReplacement[] = [];
+    if (!narrator) return { missingAnimations };
+
+    const newBlocks =
+      narrator.blocks?.map((block) => {
+        const { type, animation } = block;
+        const newNarratorAnimations =
+          getAvailableBlockAnimations(character, type) || [];
+        if (
+          newNarratorAnimations?.length &&
+          !newNarratorAnimations?.includes(animation)
+        ) {
+          const outcomeAnimation = getDefaultBlockAnimation(character, type);
+          missingAnimations.push({ from: animation, to: outcomeAnimation });
+          return { ...block, animation: outcomeAnimation };
+        }
+        return block;
+      }) || [];
+
+    return {
+      missingAnimations,
+      newNarrator: {
+        blocks: newBlocks,
+        settings: { ...narrator.settings, character },
+      },
+    };
+  };
+
+  const onNarratorChangeConfirm = () => {
+    if (missingAnimationModalState?.newNarrator) {
+      updateNarrator(missingAnimationModalState.newNarrator);
+      setMissingAnimationModalState(null);
+    }
+  };
+
   const toggleAction = (index: string) => (value: boolean | string) => {
+    if (index === 'character') {
+      const misingAnimationModalData = getMissingAnimationsList(
+        value as CharacterType,
+      );
+      if (
+        misingAnimationModalData &&
+        misingAnimationModalData?.missingAnimations?.length > 0
+      ) {
+        setMissingAnimationModalState(misingAnimationModalData);
+        return;
+      }
+    }
     if (value) onNarratorToggle(`${index}`, value);
     else setConfirmationOption(index);
   };
@@ -154,6 +223,12 @@ const NarratorTab = ({
         description={getConfirmationDescription()}
         content={getConfirmationContent()}
         confirmAction={onConfirm}
+      />
+      <MissingAnimationsModal
+        animations={missingAnimationModalState?.missingAnimations || []}
+        visible={missingAnimationModalState !== null}
+        onClose={() => setMissingAnimationModalState(null)}
+        onChangeNarrator={onNarratorChangeConfirm}
       />
       <Box mb={20}>
         {!isTlfbGroup && (
@@ -241,6 +316,7 @@ const mapDispatchToProps = {
   onCreate: addBlock,
   onNarratorToggle: updateNarratorSettings,
   changeNarratorBlockIndex: changeCurrentNarratorBlock,
+  updateNarrator: updateEntireNarrator,
 };
 
 const withConnect = connect(mapStateToProps, mapDispatchToProps);

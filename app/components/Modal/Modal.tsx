@@ -4,7 +4,7 @@
  *
  */
 
-import React, { useRef, useEffect, ReactNode } from 'react';
+import React, { useRef, useEffect, ReactElement, ReactNode } from 'react';
 import { useIntl } from 'react-intl';
 
 import { colors } from 'theme';
@@ -20,6 +20,7 @@ import Box from 'components/Box';
 import H1 from 'components/H1';
 import ActionIcon from 'components/ActionIcon';
 import Portal from 'components/Portal';
+import Text from 'components/Text';
 
 import messages from './messages';
 import { StyledBox } from './styled';
@@ -32,6 +33,9 @@ export type Props = {
   visible: boolean;
   titleProps?: Record<string, unknown>;
   hideCloseButton?: boolean;
+  description?: string;
+  titleIcon?: ReactElement;
+  titleIconWidth?: number;
 } & Record<string, unknown>;
 
 const Modal = ({
@@ -41,6 +45,9 @@ const Modal = ({
   visible,
   titleProps,
   hideCloseButton,
+  description,
+  titleIcon,
+  titleIconWidth,
   ...stylesProps
 }: Props): JSX.Element => {
   const { formatMessage } = useIntl();
@@ -109,8 +116,14 @@ const Modal = ({
           {...stylesProps}
         >
           <FullWidthContainer>
-            <Row align="center" justify="between">
-              <Col xs={10}>
+            <Row align={titleIcon ? 'start' : 'center'} justify="between">
+              {titleIcon && (
+                <Col xs={2} width={titleIconWidth}>
+                  {titleIcon}
+                </Col>
+              )}
+
+              <Col xs={titleIcon ? 8 : 10}>
                 {title && (
                   <H1 id={MODAL_TITLE_ID} {...titleProps}>
                     {title}
@@ -131,6 +144,16 @@ const Modal = ({
                 </Col>
               )}
             </Row>
+            {description && (
+              <Row align="start" justify="center">
+                {titleIcon && <Col xs={2} width={titleIconWidth} />}
+                <Col xs={titleIcon ? 10 : 12}>
+                  <Text mt={6} lineHeight="18px" fontSize="13px">
+                    {description}
+                  </Text>
+                </Col>
+              </Row>
+            )}
 
             <Row>
               <Col xs={12}>

@@ -1,11 +1,16 @@
 import keys from 'lodash/keys';
 import { CharacterType } from 'models/Character';
 import {
+  BodyAnimation,
   BodyAutoRestAnimation,
   BodyReverseAnimation,
+  HeadAnimation,
   HeadAutoRestAnimation,
   HeadReverseAnimation,
   MoveAnimation,
+  NarratorAnimation,
+  NarratorBlockTypes,
+  RestAnimation,
   SpeechAnimation,
   SpeechAnimationFile,
 } from 'models/Narrator';
@@ -234,26 +239,70 @@ const characterToMoveAnimationsMap: Record<CharacterType, MoveAnimation[]> = {
   [CharacterType.FRIDA]: moveAnimations,
 };
 
-const getBodyAnimations = (character: CharacterType) => [
+const getBodyAnimations = (character: CharacterType): BodyAnimation[] => [
   ...characterToAutoRestBodyAnimationsMap[character],
   ...characterToReverseBodyAnimationsMap[character],
 ];
 
-const getHeadAnimations = (character: CharacterType) => [
+const getHeadAnimations = (character: CharacterType): HeadAnimation[] => [
   ...characterToAutoRestHeadAnimationsMap[character],
   ...characterToReverseHeadAnimationsMap[character],
 ];
 
-const getAutoRestAnimations = (character: CharacterType) => [
+const getAutoRestAnimations = (character: CharacterType): RestAnimation[] => [
   ...characterToAutoRestBodyAnimationsMap[character],
   ...characterToAutoRestHeadAnimationsMap[character],
 ];
 
+const getAvailableBlockAnimations = (
+  character: CharacterType,
+  block: NarratorBlockTypes,
+): NarratorAnimation[] => {
+  if ([NarratorBlockTypes.FEEDBACK, NarratorBlockTypes.PAUSE].includes(block))
+    return [];
+  if (
+    [
+      NarratorBlockTypes.SPEECH,
+      NarratorBlockTypes.REFLECTION,
+      NarratorBlockTypes.REFLECTION_FORMULA,
+      NarratorBlockTypes.READ_QUESTION,
+    ].includes(block)
+  )
+    return characterToSpeechAnimationsMap[character];
+  if (NarratorBlockTypes.BODY_ANIMATION === block)
+    return getBodyAnimations(character);
+  if (NarratorBlockTypes.HEAD_ANIMATION === block)
+    return getHeadAnimations(character);
+  return [];
+};
+
+const getDefaultBlockAnimation = (
+  character: CharacterType,
+  block: NarratorBlockTypes,
+): NarratorAnimation => {
+  if (
+    [
+      NarratorBlockTypes.SPEECH,
+      NarratorBlockTypes.REFLECTION,
+      NarratorBlockTypes.REFLECTION_FORMULA,
+      NarratorBlockTypes.READ_QUESTION,
+    ].includes(block)
+  )
+    return SpeechAnimation.REST;
+  if (NarratorBlockTypes.BODY_ANIMATION === block)
+    return BodyAutoRestAnimation.STAND_STILL;
+  if (NarratorBlockTypes.HEAD_ANIMATION === block)
+    return getHeadAnimations(character)[0];
+  return getAvailableBlockAnimations(character, block)[0];
+};
+
 export {
   getAutoRestAnimations,
   getBodyAnimations,
-  characterToMoveAnimationsMap,
   getHeadAnimations,
+  characterToMoveAnimationsMap,
   speechAnimationsMapper,
   characterToSpeechAnimationsMap,
+  getAvailableBlockAnimations,
+  getDefaultBlockAnimation,
 };
