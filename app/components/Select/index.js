@@ -14,20 +14,34 @@ import Box from 'components/Box';
 
 import { DefaultOption, DropdownIndicator, Option } from './components';
 
-const customStyles = ({ isMulti, bg, isDisabled, height }) => ({
-  control: (provided) => ({
+const getBorderColor = (hasError, isFocused) => {
+  if (hasError) return themeColors.warning;
+  if (isFocused) return themeColors.primary;
+  return themeColors.highlight;
+};
+
+const customStyles = ({
+  isMulti,
+  bg,
+  isDisabled,
+  height,
+  placeholderColor,
+  placeholderOpacity,
+  hasError,
+}) => ({
+  control: (provided, { isFocused }) => ({
     ...provided,
     borderWidth: '1px',
     borderRadius: '5px',
-    borderColor: `${themeColors.highlight}`,
+    borderColor: getBorderColor(hasError, isFocused),
+    '&:hover': {
+      borderColor: getBorderColor(hasError, isFocused),
+    },
     boxShadow: '0',
     height: height || (isMulti ? 'auto' : '45px'),
     minHeight: '45px',
     width: '100%',
     background: `${bg || 'auto'}`,
-    '&:hover': {
-      borderColor: `${themeColors.highlight}`,
-    },
     cursor: isDisabled ? 'not-allowed' : 'pointer',
   }),
   option: (provided) => ({
@@ -37,7 +51,8 @@ const customStyles = ({ isMulti, bg, isDisabled, height }) => ({
   menuPortal: (provided) => ({ ...provided, zIndex: 999 }),
   placeholder: (provided) => ({
     ...provided,
-    color: 'hsl(0, 0%, 40%)',
+    color: placeholderColor ?? 'hsl(0, 0%, 40%)',
+    opacity: placeholderOpacity ?? '',
   }),
 });
 
@@ -53,7 +68,10 @@ const customComponents = (isMulti) => ({
 });
 
 const Select = ({ selectProps, ...restProps }) => (
-  <Box {...restProps}>
+  <Box
+    cursor={selectProps.isDisabled ? 'not-allowed' : 'pointer'}
+    {...restProps}
+  >
     <ReactSelect
       components={customComponents(selectProps.isMulti)}
       menuPortalTarget={document.body}

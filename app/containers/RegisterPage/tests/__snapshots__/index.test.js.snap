@@ -212,6 +212,17 @@ exports[`<RegisterPage /> Should render and match the researcher 1`] = `
   margin-bottom: 20px;
 }
 
+.c15 {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-flex-direction: column;
+  -ms-flex-direction: column;
+  flex-direction: column;
+  width: 100%;
+}
+
 .c7 {
   margin: 0;
   font-family: DM Sans;
@@ -244,25 +255,6 @@ exports[`<RegisterPage /> Should render and match the researcher 1`] = `
   line-height: 1.5em;
   color: rgba(183,39,234,1);
   cursor: pointer;
-}
-
-.c15 {
-  width: auto;
-  height: auto;
-  display: block;
-  border-radius: 5px;
-  display: -webkit-box;
-  display: -webkit-flex;
-  display: -ms-flexbox;
-  display: flex;
-  margin-bottom: 5px;
-  -webkit-align-content: center;
-  -ms-flex-line-pack: center;
-  align-content: center;
-  -webkit-align-items: center;
-  -webkit-box-align: center;
-  -ms-flex-align: center;
-  align-items: center;
 }
 
 .c12 {
@@ -404,6 +396,22 @@ exports[`<RegisterPage /> Should render and match the researcher 1`] = `
   .c6 {
     width: 50%;
   }
+}
+
+@media only screen and (min-width:1360px) {
+
+}
+
+@media only screen and (min-width:768px) {
+
+}
+
+@media only screen and (min-width:960px) {
+
+}
+
+@media only screen and (min-width:1170px) {
+
 }
 
 @media only screen and (min-width:1360px) {
@@ -626,7 +634,6 @@ exports[`<RegisterPage /> Should render and match the researcher 1`] = `
         </div>
         <div
           class="c15"
-          display="flex"
         >
           <div
             class="c16"
@@ -911,6 +918,17 @@ exports[`<RegisterPage /> Should render and match the snapshot for participant 1
   margin-bottom: 20px;
 }
 
+.c14 {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-flex-direction: column;
+  -ms-flex-direction: column;
+  flex-direction: column;
+  width: 100%;
+}
+
 .c7 {
   margin: 0;
   font-family: DM Sans;
@@ -943,25 +961,6 @@ exports[`<RegisterPage /> Should render and match the snapshot for participant 1
   line-height: 1.5em;
   color: rgba(183,39,234,1);
   cursor: pointer;
-}
-
-.c14 {
-  width: auto;
-  height: auto;
-  display: block;
-  border-radius: 5px;
-  display: -webkit-box;
-  display: -webkit-flex;
-  display: -ms-flexbox;
-  display: flex;
-  margin-bottom: 5px;
-  -webkit-align-content: center;
-  -ms-flex-line-pack: center;
-  align-content: center;
-  -webkit-align-items: center;
-  -webkit-box-align: center;
-  -ms-flex-align: center;
-  align-items: center;
 }
 
 .c12 {
@@ -1081,6 +1080,22 @@ exports[`<RegisterPage /> Should render and match the snapshot for participant 1
   .c6 {
     width: 50%;
   }
+}
+
+@media only screen and (min-width:1360px) {
+
+}
+
+@media only screen and (min-width:768px) {
+
+}
+
+@media only screen and (min-width:960px) {
+
+}
+
+@media only screen and (min-width:1170px) {
+
 }
 
 @media only screen and (min-width:1360px) {
@@ -1302,7 +1317,6 @@ exports[`<RegisterPage /> Should render and match the snapshot for participant 1
         </div>
         <div
           class="c14"
-          display="flex"
         >
           <div
             class="c15"

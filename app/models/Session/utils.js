@@ -39,6 +39,7 @@ import {
   tlfbQuestion,
   tlfbConfig,
   tlfbEvents,
+  henryFordInitialScreen,
 } from './QuestionTypes';
 
 /**
@@ -141,6 +142,7 @@ export const getBranchingVariables = (questions, options) => {
       case tlfbQuestion.id:
       case tlfbConfig.id:
       case tlfbEvents.id:
+      case henryFordInitialScreen.id:
         questionVariables = [];
         break;
       default:
@@ -205,6 +207,7 @@ export const getEditVariables = (questions, options) => {
       case finishQuestion.id:
       case tlfbConfig.id:
       case tlfbEvents.id:
+      case henryFordInitialScreen.id:
         questionVariables = [];
         break;
       case tlfbQuestion.id:
@@ -348,6 +351,7 @@ export const QUESTIONS_WITHOUT_VARIABLE = [
   thirdPartyQuestion.id,
   tlfbConfig.id,
   tlfbEvents.id,
+  henryFordInitialScreen.id,
 ];
 
 export const DISABLED_NARRATOR_SETTINGS_BY_QUESTION_TYPE = {

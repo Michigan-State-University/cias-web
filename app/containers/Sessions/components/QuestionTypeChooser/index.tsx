@@ -1,8 +1,6 @@
 import React, { useMemo, useRef, useState } from 'react';
 import { useIntl } from 'react-intl';
-import { connect } from 'react-redux';
-import { createStructuredSelector } from 'reselect';
-import { compose } from 'redux';
+import { useSelector } from 'react-redux';
 
 import Box from 'components/Box';
 import Row from 'components/Row';
@@ -13,13 +11,17 @@ import {
   makeSelectNameQuestionExists,
   makeSelectParticipantReportQuestionExists,
   makeSelectPhoneQuestionExists,
+  makeSelectHenryFordInitialScreenExists,
 } from 'global/reducers/questions';
+import { makeSelectInterventionHfhsAccess } from 'global/reducers/intervention';
+
 import useOutsideClick from 'utils/useOutsideClick';
 import {
   AddableQuestionTypes,
   nameQuestion,
   participantReport,
   phoneQuestion,
+  henryFordInitialScreen,
 } from 'models/Session/QuestionTypes';
 import { AddableGroups } from 'models/QuestionGroup';
 
@@ -31,24 +33,25 @@ import DefaultButtonComponent from './DefaultButtonComponent';
 import messages from './messages';
 import NewItem from './NewItem';
 
-type NonReduxProps = {
+type Props = {
   onClick: (type: string) => void;
   ButtonComponent?: React.ReactNode;
 };
 
-type Props = {
-  nameQuestionExists: boolean;
-  participantReportExists: boolean;
-  phoneQuestionExists: boolean;
-} & NonReduxProps;
-
 const QuestionTypeChooser = ({
   onClick,
   ButtonComponent = DefaultButtonComponent,
-  nameQuestionExists,
-  participantReportExists,
-  phoneQuestionExists,
 }: Props) => {
+  const nameQuestionExists = useSelector(makeSelectNameQuestionExists());
+  const participantReportExists = useSelector(
+    makeSelectParticipantReportQuestionExists(),
+  );
+  const phoneQuestionExists = useSelector(makeSelectPhoneQuestionExists());
+  const henryFordInitialScreenExists = useSelector(
+    makeSelectHenryFordInitialScreenExists(),
+  );
+  const hasHfhsAccess = useSelector(makeSelectInterventionHfhsAccess());
+
   const buttonRef = useRef(null);
   const containerRef = useRef(null);
   const chooserBoxRef = useRef(null);
@@ -86,13 +89,19 @@ const QuestionTypeChooser = ({
         ({ id }) =>
           !(nameQuestionExists && id === nameQuestion.id) &&
           !(participantReportExists && id === participantReport.id) &&
-          !(phoneQuestionExists && id === phoneQuestion.id),
+          !(phoneQuestionExists && id === phoneQuestion.id) &&
+          !(
+            (henryFordInitialScreenExists || !hasHfhsAccess) &&
+            id === henryFordInitialScreen.id
+          ),
       ),
     [
       AddableQuestionTypes,
       nameQuestionExists,
       participantReportExists,
       phoneQuestionExists,
+      henryFordInitialScreenExists,
+      hasHfhsAccess,
     ],
   );
 
@@ -159,14 +168,4 @@ const QuestionTypeChooser = ({
   );
 };
 
-const mapStateToProps = createStructuredSelector({
-  nameQuestionExists: makeSelectNameQuestionExists(),
-  participantReportExists: makeSelectParticipantReportQuestionExists(),
-  phoneQuestionExists: makeSelectPhoneQuestionExists(),
-});
-
-const withConnect = connect(mapStateToProps, null);
-
-export default compose(withConnect)(
-  QuestionTypeChooser,
-) as any as React.ComponentType<NonReduxProps>;
+export default QuestionTypeChooser;

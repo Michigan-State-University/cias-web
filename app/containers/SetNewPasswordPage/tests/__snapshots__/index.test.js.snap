@@ -157,17 +157,6 @@ exports[`<SetNewPasswordPage /> Should render and match the snapshot 1`] = `
   color: #ABBBD1;
 }
 
-.c9 {
-  font-family: DM Sans;
-  font-size: 13px;
-  line-height: 130%;
-  margin-bottom: 5px;
-  color: #2F3850;
-  width: -webkit-fit-content;
-  width: -moz-fit-content;
-  width: fit-content;
-}
-
 .c10 {
   display: -webkit-box;
   display: -webkit-flex;
@@ -185,6 +174,17 @@ exports[`<SetNewPasswordPage /> Should render and match the snapshot 1`] = `
   -ms-flex-align: center;
   align-items: center;
   width: 100%;
+}
+
+.c9 {
+  font-family: DM Sans;
+  font-size: 13px;
+  line-height: 130%;
+  margin-bottom: 5px;
+  color: #2F3850;
+  width: -webkit-fit-content;
+  width: -moz-fit-content;
+  width: fit-content;
 }
 
 .c12 {

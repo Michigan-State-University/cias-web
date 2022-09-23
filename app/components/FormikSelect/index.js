@@ -7,11 +7,9 @@
 import React, { memo } from 'react';
 import PropTypes from 'prop-types';
 import { useField, useFormikContext } from 'formik';
-import Text from 'components/Text';
-import Column from 'components/Column';
 
 import Select from 'components/Select';
-import { ErrorText } from './styled';
+import FormikControlLayout from 'components/FormikControlLayout';
 
 function FormikSelect({
   formikKey,
@@ -20,45 +18,47 @@ function FormikSelect({
   columnStyleProps,
   inputProps,
   disabled,
+  submitOnChange,
 }) {
   const { submitForm, validateForm } = useFormikContext();
-  const [field, meta, form] = useField(formikKey);
-  const { value } = field;
-  const { setValue } = form;
+  const [field, meta, helpers] = useField(formikKey);
   const { error, touched } = meta;
+  const { setValue } = helpers;
   const hasError = touched && error;
 
   const onChange = async (e) => {
-    await validateForm();
-    setValue(e);
-    await submitForm();
+    if (submitOnChange) {
+      await validateForm();
+      setValue(e);
+      await submitForm();
+    } else {
+      setValue(e);
+    }
   };
 
   return (
-    <Column {...columnStyleProps}>
-      {label && (
-        <label htmlFor={formikKey}>
-          <Text mb={5} width="fit-content">
-            {label}
-          </Text>
-        </label>
-      )}
-
+    <FormikControlLayout
+      formikKey={formikKey}
+      label={label}
+      touched={touched}
+      error={error}
+      {...columnStyleProps}
+    >
       <Select
         isOptionDisabled={disabled}
         data-testid="select"
         disabled={disabled}
         selectProps={{
           options,
-          value,
-          onChange,
           isDisabled: disabled,
           inputId: formikKey,
+          hasError,
+          ...field,
+          onChange,
           ...inputProps,
         }}
       />
-      {hasError && <ErrorText>{error.value.toString()}</ErrorText>}
-    </Column>
+    </FormikControlLayout>
   );
 }
 
@@ -69,6 +69,7 @@ FormikSelect.propTypes = {
   options: PropTypes.array,
   columnStyleProps: PropTypes.object,
   disabled: PropTypes.bool,
+  submitOnChange: PropTypes.bool,
 };
 
 export default memo(FormikSelect);

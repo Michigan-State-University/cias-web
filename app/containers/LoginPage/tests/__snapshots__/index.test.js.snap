@@ -172,26 +172,6 @@ exports[`<LoginPage /> Should render and match the snapshot 1`] = `
   color: #ABBBD1;
 }
 
-.c13 {
-  font-family: DM Sans;
-  font-size: 13px;
-  line-height: 130%;
-  margin-bottom: 5px;
-  color: #2F3850;
-  width: -webkit-fit-content;
-  width: -moz-fit-content;
-  width: fit-content;
-}
-
-.c21 {
-  font-family: DM Sans;
-  font-size: 13px;
-  line-height: 130%;
-  margin-bottom: -5px;
-  font-weight: 700;
-  color: #2F3850;
-}
-
 .c14 {
   display: -webkit-box;
   display: -webkit-flex;
@@ -239,6 +219,26 @@ exports[`<LoginPage /> Should render and match the snapshot 1`] = `
   justify-items: center;
   margin-top: 30px;
   width: 100%;
+}
+
+.c13 {
+  font-family: DM Sans;
+  font-size: 13px;
+  line-height: 130%;
+  margin-bottom: 5px;
+  color: #2F3850;
+  width: -webkit-fit-content;
+  width: -moz-fit-content;
+  width: fit-content;
+}
+
+.c21 {
+  font-family: DM Sans;
+  font-size: 13px;
+  line-height: 130%;
+  margin-bottom: -5px;
+  font-weight: 700;
+  color: #2F3850;
 }
 
 .c17 {

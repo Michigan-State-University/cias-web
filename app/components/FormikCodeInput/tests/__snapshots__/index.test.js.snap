@@ -115,13 +115,17 @@ exports[`<FormikCodeInput /> Should render and match the snapshot 1`] = `
   <div
     class="c0"
   >
-    <p
-      class="c1"
-      font-weight="bold"
-      width="fit-content"
+    <label
+      for="test"
     >
-      Label
-    </p>
+      <p
+        class="c1"
+        font-weight="bold"
+        width="fit-content"
+      >
+        Label
+      </p>
+    </label>
     <p
       class="c2"
       id="code-input-general"

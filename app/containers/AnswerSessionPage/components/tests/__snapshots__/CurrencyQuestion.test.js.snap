@@ -46,6 +46,7 @@ exports[`<CurrencyQuestion /> Should render and match the snapshot 1`] = `
   width: 200px;
   height: 50px;
   border: 3px solid #107969;
+  color: #2F3850;
 }
 
 .c6:hover {
@@ -99,6 +100,10 @@ exports[`<CurrencyQuestion /> Should render and match the snapshot 1`] = `
 
 .c5 .schedule-date-picker .react-datepicker__month-option {
   background-color: #E9F1FB;
+}
+
+.c5 .react-datepicker-wrapper {
+  width: 100%;
 }
 
 .c7 {

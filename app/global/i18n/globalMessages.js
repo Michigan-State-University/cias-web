@@ -31,6 +31,7 @@ import {
   tlfbConfig,
   tlfbEvents,
   tlfbQuestion,
+  henryFordInitialScreen,
 } from 'models/Session/QuestionTypes';
 import { GroupType } from 'models/QuestionGroup';
 import { Roles } from 'models/User/UserRoles';
@@ -38,6 +39,7 @@ import { archived, closed, draft, published } from 'models/Status/StatusTypes';
 import { UserInterventionStatus } from 'models/UserIntervention/StatusTypes';
 import { UserSessionStatus } from 'models/UserSession/StatusTypes';
 import { TextMessageType } from 'models/TextMessage';
+import { Sex } from 'models/HfhsPatient';
 
 export const scope = 'app.GlobalMessages';
 
@@ -221,6 +223,10 @@ export default defineMessages({
       id: `${scope}.${tlfbQuestion.id}`,
       defaultMessage: 'TLFB Questions',
     },
+    [henryFordInitialScreen.id]: {
+      id: `${scope}.${henryFordInitialScreen.id}`,
+      defaultMessage: 'Henry Ford Initial Screen',
+    },
   },
   questionGroupType: {
     [GroupType.TLFB]: {
@@ -327,6 +333,10 @@ export default defineMessages({
       id: `${scope}.numeric`,
       defaultMessage: 'Only numeric values are allowed',
     },
+    zipCode: {
+      id: `${scope}.zipCode`,
+      defaultMessage: "ZIP Code's format is incorrect",
+    },
   },
   questionRequired: {
     id: `${scope}.questionRequired`,
@@ -377,5 +387,31 @@ export default defineMessages({
   no: {
     id: `${scope}.no`,
     defaultMessage: 'No',
+  },
+  sex: {
+    [Sex.AMBIGUOUS]: {
+      id: `${scope}.${Sex.AMBIGUOUS}`,
+      defaultMessage: 'Ambiguous',
+    },
+    [Sex.MALE]: {
+      id: `${scope}.${Sex.MALE}`,
+      defaultMessage: 'Male',
+    },
+    [Sex.FEMALE]: {
+      id: `${scope}.${Sex.FEMALE}`,
+      defaultMessage: 'Female',
+    },
+    [Sex.NOT_APPLICABLE]: {
+      id: `${scope}.${Sex.NOT_APPLICABLE}`,
+      defaultMessage: 'Not applicable',
+    },
+    [Sex.OTHER]: {
+      id: `${scope}.${Sex.OTHER}`,
+      defaultMessage: 'Other',
+    },
+    [Sex.UNKNOWN]: {
+      id: `${scope}.${Sex.UNKNOWN}`,
+      defaultMessage: 'Unknown',
+    },
   },
 });

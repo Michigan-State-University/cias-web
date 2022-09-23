@@ -4,7 +4,7 @@ import Color from 'color';
 
 import { colors, borders, fontFamily, themeColors } from 'theme';
 
-import { margin, layout, border } from '../BaseComponentStyles';
+import { margin, layout, border, text, padding } from '../BaseComponentStyles';
 
 export const QuillStyled = styled(ReactQuill)`
   width: 100%;
@@ -19,7 +19,6 @@ export const QuillStyled = styled(ReactQuill)`
           ...borders,
           borderColor: themeColors.highlight,
         }}
-
   ${({ focused, blurTransparentBorder }) =>
     focused && {
       border: `1px solid ${colors.jungleGreen}`,
@@ -29,7 +28,6 @@ export const QuillStyled = styled(ReactQuill)`
         zIndex: 1000,
       },
     }}
-
   .ql-editor {
     font-weight: 400;
     padding: 10px;
@@ -71,8 +69,10 @@ export const StyledDateInput = styled.button`
   }
 
   ${margin};
+  ${padding};
   ${layout};
   ${border};
+  ${text};
 `;
 
 export const DatePickerWrapper = styled.div`
@@ -121,6 +121,10 @@ export const DatePickerWrapper = styled.div`
         background-color: ${colors.linkWater};
       }
     }
+  }
+
+  .react-datepicker-wrapper {
+    width: 100%;
   }
 `;
 

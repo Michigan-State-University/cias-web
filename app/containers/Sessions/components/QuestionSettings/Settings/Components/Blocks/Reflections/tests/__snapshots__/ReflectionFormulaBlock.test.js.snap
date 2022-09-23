@@ -73,7 +73,7 @@ exports[`<ReflectionFormulaBlock /> Should render and match the snapshot 1`] = `
   width: 100%;
 }
 
-.c16 {
+.c17 {
   display: -webkit-box;
   display: -webkit-flex;
   display: -ms-flexbox;
@@ -97,7 +97,7 @@ exports[`<ReflectionFormulaBlock /> Should render and match the snapshot 1`] = `
   margin-bottom: 15px;
 }
 
-.c17 {
+.c18 {
   display: -webkit-box;
   display: -webkit-flex;
   display: -ms-flexbox;
@@ -121,7 +121,7 @@ exports[`<ReflectionFormulaBlock /> Should render and match the snapshot 1`] = `
   margin-top: 20px;
 }
 
-.c23 {
+.c24 {
   display: -webkit-box;
   display: -webkit-flex;
   display: -ms-flexbox;
@@ -132,7 +132,7 @@ exports[`<ReflectionFormulaBlock /> Should render and match the snapshot 1`] = `
   height: auto;
 }
 
-.c28 {
+.c29 {
   display: -webkit-box;
   display: -webkit-flex;
   display: -ms-flexbox;
@@ -156,7 +156,7 @@ exports[`<ReflectionFormulaBlock /> Should render and match the snapshot 1`] = `
   margin-bottom: 8px;
 }
 
-.c29 {
+.c30 {
   display: -webkit-box;
   display: -webkit-flex;
   display: -ms-flexbox;
@@ -187,14 +187,14 @@ exports[`<ReflectionFormulaBlock /> Should render and match the snapshot 1`] = `
   height: auto;
   display: block;
   border-radius: 5px;
+  cursor: pointer;
 }
 
-.c19 {
+.c12 {
   width: auto;
   height: auto;
   display: block;
   border-radius: 5px;
-  position: relative;
 }
 
 .c20 {
@@ -202,10 +202,18 @@ exports[`<ReflectionFormulaBlock /> Should render and match the snapshot 1`] = `
   height: auto;
   display: block;
   border-radius: 5px;
+  position: relative;
+}
+
+.c21 {
+  width: auto;
+  height: auto;
+  display: block;
+  border-radius: 5px;
   cursor: pointer;
 }
 
-.c22 {
+.c23 {
   width: auto;
   height: auto;
   display: block;
@@ -219,7 +227,7 @@ exports[`<ReflectionFormulaBlock /> Should render and match the snapshot 1`] = `
   border-radius: 10px;
 }
 
-.c24 {
+.c25 {
   width: auto;
   height: auto;
   display: block;
@@ -231,7 +239,7 @@ exports[`<ReflectionFormulaBlock /> Should render and match the snapshot 1`] = `
   flex-grow: 1;
 }
 
-.c25 {
+.c26 {
   width: auto;
   height: auto;
   display: block;
@@ -246,16 +254,17 @@ exports[`<ReflectionFormulaBlock /> Should render and match the snapshot 1`] = `
   background-color: rgba(233,241,251,1);
 }
 
-.c31 {
+.c32 {
   width: auto;
   height: auto;
   display: block;
   border-radius: 5px;
   min-width: 60px;
   margin-left: 10px;
+  cursor: pointer;
 }
 
-.c32 {
+.c33 {
   width: auto;
   height: auto;
   display: block;
@@ -265,7 +274,7 @@ exports[`<ReflectionFormulaBlock /> Should render and match the snapshot 1`] = `
   background-color: rgba(233,241,251,1);
 }
 
-.c37 {
+.c38 {
   width: auto;
   height: auto;
   display: block;
@@ -275,7 +284,7 @@ exports[`<ReflectionFormulaBlock /> Should render and match the snapshot 1`] = `
   background-color: rgba(233,241,251,1);
 }
 
-.c38 {
+.c39 {
   width: auto;
   height: auto;
   display: block;
@@ -285,7 +294,7 @@ exports[`<ReflectionFormulaBlock /> Should render and match the snapshot 1`] = `
   bottom: 10px;
 }
 
-.c40 {
+.c41 {
   width: auto;
   height: auto;
   display: block;
@@ -301,7 +310,7 @@ exports[`<ReflectionFormulaBlock /> Should render and match the snapshot 1`] = `
   transition: transform 0.2s;
 }
 
-.c36 {
+.c37 {
   width: auto;
   height: auto;
   margin-left: 10px;
@@ -319,7 +328,7 @@ exports[`<ReflectionFormulaBlock /> Should render and match the snapshot 1`] = `
   width: 100%;
 }
 
-.c27 {
+.c28 {
   display: -webkit-box;
   display: -webkit-flex;
   display: -ms-flexbox;
@@ -331,7 +340,7 @@ exports[`<ReflectionFormulaBlock /> Should render and match the snapshot 1`] = `
   margin-bottom: 16px;
 }
 
-.c18 {
+.c19 {
   font-family: DM Sans;
   font-size: 13px;
   line-height: 130%;
@@ -339,7 +348,7 @@ exports[`<ReflectionFormulaBlock /> Should render and match the snapshot 1`] = `
   color: #2F3850;
 }
 
-.c21 {
+.c22 {
   font-family: DM Sans;
   font-size: 13px;
   line-height: 130%;
@@ -348,12 +357,12 @@ exports[`<ReflectionFormulaBlock /> Should render and match the snapshot 1`] = `
   color: rgba(183,39,234,1);
 }
 
-.c21:hover {
+.c22:hover {
   -webkit-text-decoration: underline;
   text-decoration: underline;
 }
 
-.c30 {
+.c31 {
   font-family: DM Sans;
   font-size: 13px;
   line-height: 130%;
@@ -361,7 +370,7 @@ exports[`<ReflectionFormulaBlock /> Should render and match the snapshot 1`] = `
   white-space: pre;
 }
 
-.c35 {
+.c36 {
   font-family: DM Sans;
   font-size: 13px;
   line-height: 130%;
@@ -370,7 +379,7 @@ exports[`<ReflectionFormulaBlock /> Should render and match the snapshot 1`] = `
   white-space: pre;
 }
 
-.c13 {
+.c14 {
   position: relative;
   display: inline-block;
   min-width: 40px;
@@ -405,7 +414,7 @@ exports[`<ReflectionFormulaBlock /> Should render and match the snapshot 1`] = `
   cursor: not-allowed;
 }
 
-.c15 {
+.c16 {
   position: absolute;
   top: 0;
   left: 0;
@@ -417,20 +426,20 @@ exports[`<ReflectionFormulaBlock /> Should render and match the snapshot 1`] = `
   border-radius: 21px;
 }
 
-.c7:checked + .c9 .c14 {
+.c7:checked + .c9 .c15 {
   background-color: #B727EA;
 }
 
-.c7:focus + .c9 .c14 {
+.c7:focus + .c9 .c15 {
   box-shadow: 0 0 1px #B727EA;
 }
 
-.c7:disabled + .c9 .c14 {
+.c7:disabled + .c9 .c15 {
   opacity: 0.5;
   cursor: not-allowed;
 }
 
-.c15:before {
+.c16:before {
   position: absolute;
   content: '';
   left: 4px;
@@ -443,13 +452,13 @@ exports[`<ReflectionFormulaBlock /> Should render and match the snapshot 1`] = `
   border-radius: 50%;
 }
 
-.c7:checked + .c9 .c14:before {
+.c7:checked + .c9 .c15:before {
   -webkit-transform: translateX(18px);
   -ms-transform: translateX(18px);
   transform: translateX(18px);
 }
 
-.c12 {
+.c13 {
   margin-right: 5px;
 }
 
@@ -457,7 +466,7 @@ exports[`<ReflectionFormulaBlock /> Should render and match the snapshot 1`] = `
   width: 100% !important;
 }
 
-.c26 {
+.c27 {
   resize: none;
   padding: 12px;
   border: 1px solid #E9F1FB;
@@ -470,17 +479,17 @@ exports[`<ReflectionFormulaBlock /> Should render and match the snapshot 1`] = `
   border: 1px solid transparent;
 }
 
-.c26:focus {
+.c27:focus {
   box-shadow: none;
   outline: none;
   border: 1px solid #107969;
 }
 
-.c26:disabled {
+.c27:disabled {
   color: #ABBBD1;
 }
 
-.c33 {
+.c34 {
   padding: 12px;
   border-style: solid;
   border-width: 1px;
@@ -497,17 +506,17 @@ exports[`<ReflectionFormulaBlock /> Should render and match the snapshot 1`] = `
   text-align: center;
 }
 
-.c33:focus {
+.c34:focus {
   box-shadow: none;
   outline: none;
   border-color: #107969;
 }
 
-.c33:disabled {
+.c34:disabled {
   color: #ABBBD1;
 }
 
-.c41 {
+.c42 {
   height: 40px;
   border: 1px dashed #B0BAC9;
   color: #B0BAC9;
@@ -528,17 +537,17 @@ exports[`<ReflectionFormulaBlock /> Should render and match the snapshot 1`] = `
   cursor: pointer;
 }
 
-.c41:hover {
+.c42:hover {
   background-color: #107969;
   color: #FFFFFF;
   border: none;
 }
 
-.c34 {
+.c35 {
   width: 50px;
 }
 
-.c39 {
+.c40 {
   outline: none;
   border: none;
   background: transparent;
@@ -598,6 +607,7 @@ exports[`<ReflectionFormulaBlock /> Should render and match the snapshot 1`] = `
     >
       <div
         class="c2"
+        cursor="pointer"
       >
         <div
           class=" css-2b097c-container"
@@ -689,15 +699,15 @@ exports[`<ReflectionFormulaBlock /> Should render and match the snapshot 1`] = `
             width="100%"
           >
             <div
-              class="c2 c12"
+              class="c12 c13"
             >
               Use Reflection
             </div>
             <div
-              class="c13"
+              class="c14"
             >
               <span
-                class="c14 c15"
+                class="c15 c16"
               />
             </div>
           </div>
@@ -705,7 +715,7 @@ exports[`<ReflectionFormulaBlock /> Should render and match the snapshot 1`] = `
       </div>
     </div>
     <div
-      class="c16"
+      class="c17"
     >
       <div
         class="c5 c6"
@@ -730,15 +740,15 @@ exports[`<ReflectionFormulaBlock /> Should render and match the snapshot 1`] = `
             width="100%"
           >
             <div
-              class="c2 c12"
+              class="c12 c13"
             >
               Use Formula
             </div>
             <div
-              class="c13"
+              class="c14"
             >
               <span
-                class="c14 c15"
+                class="c15 c16"
               />
             </div>
           </div>
@@ -746,22 +756,22 @@ exports[`<ReflectionFormulaBlock /> Should render and match the snapshot 1`] = `
       </div>
     </div>
     <div
-      class="c17"
+      class="c18"
     >
       <p
-        class="c18"
+        class="c19"
         font-weight="bold"
       >
         Formula
       </p>
       <div
-        class="c19"
+        class="c20"
       >
         <div
-          class="c20"
+          class="c21"
         >
           <p
-            class="c21"
+            class="c22"
             color="#B727EA"
             font-weight="bold"
           >
@@ -769,27 +779,27 @@ exports[`<ReflectionFormulaBlock /> Should render and match the snapshot 1`] = `
           </p>
         </div>
         <div
-          class="c22"
+          class="c23"
           display="none"
           width="auto"
         >
           <div
-            class="c23"
+            class="c24"
           >
             <div
-              class="c24"
+              class="c25"
             />
           </div>
         </div>
       </div>
     </div>
     <div
-      class="c25"
+      class="c26"
       width="100%"
     >
       <textarea
         aria-label="Enter formula here... (You can use mathematical operators +, -, *, /)"
-        class="c26"
+        class="c27"
         data-cy="text-area"
         height="auto"
         placeholder="Enter formula here... (You can use mathematical operators +, -, *, /)"
@@ -799,21 +809,22 @@ exports[`<ReflectionFormulaBlock /> Should render and match the snapshot 1`] = `
       />
     </div>
     <div
-      class="c27"
+      class="c28"
     >
       <div
-        class="c28"
+        class="c29"
       >
         <div
-          class="c29"
+          class="c30"
         >
           <p
-            class="c30"
+            class="c31"
           >
             If
           </p>
           <div
-            class="c31"
+            class="c32"
+            cursor="pointer"
             data-cy="case-select"
             data-testid="select"
           >
@@ -881,11 +892,11 @@ exports[`<ReflectionFormulaBlock /> Should render and match the snapshot 1`] = `
             </div>
           </div>
           <div
-            class="c32"
+            class="c33"
           >
             <input
               aria-label="Provide a numeric value"
-              class="c33 c34"
+              class="c34 c35"
               data-cy="case-value-input"
               data-testid="input"
               placeholder="..."
@@ -894,32 +905,32 @@ exports[`<ReflectionFormulaBlock /> Should render and match the snapshot 1`] = `
             />
           </div>
           <p
-            class="c35"
+            class="c36"
           >
             Narrator will say:
           </p>
         </div>
         <img
-          class="c36"
+          class="c37"
           src="IMAGE_MOCK"
         />
       </div>
       <div
-        class="c23"
+        class="c24"
       >
         <div
           class="c0"
         >
           <div
-            class="c19"
+            class="c20"
           >
             <div
-              class="c37"
+              class="c38"
               width="100%"
             >
               <textarea
                 aria-label="Enter speech here..."
-                class="c26"
+                class="c27"
                 data-cy="text-area"
                 height="auto"
                 placeholder="Enter speech here..."
@@ -931,11 +942,11 @@ exports[`<ReflectionFormulaBlock /> Should render and match the snapshot 1`] = `
               </textarea>
             </div>
             <div
-              class="c38"
+              class="c39"
             >
               <button
                 aria-label="Play audio"
-                class="c39"
+                class="c40"
                 font-weight="bold"
                 title="Play audio"
                 type="button"
@@ -950,7 +961,7 @@ exports[`<ReflectionFormulaBlock /> Should render and match the snapshot 1`] = `
       </div>
     </div>
     <div
-      class="c40 c41"
+      class="c41 c42"
     >
       + Add another case
     </div>

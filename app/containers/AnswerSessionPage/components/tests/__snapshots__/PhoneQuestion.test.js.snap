@@ -21,6 +21,30 @@ exports[`<PhoneQuestion /> Should render and match the snapshot 1`] = `
   color: #ABBBD1;
 }
 
+.c0 {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-flex-direction: column;
+  -ms-flex-direction: column;
+  flex-direction: column;
+  width: 100%;
+}
+
+.c2 {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-flex-direction: column;
+  -ms-flex-direction: column;
+  flex-direction: column;
+  width: 100%;
+  width: 230px;
+  padding-right: 10px;
+}
+
 .c3 {
   font-family: DM Sans;
   font-size: 13px;
@@ -46,6 +70,7 @@ exports[`<PhoneQuestion /> Should render and match the snapshot 1`] = `
   height: auto;
   display: block;
   border-radius: 5px;
+  cursor: pointer;
 }
 
 .c7 {
@@ -54,30 +79,6 @@ exports[`<PhoneQuestion /> Should render and match the snapshot 1`] = `
   -webkit-transition: -webkit-transform 0.2s;
   -webkit-transition: transform 0.2s;
   transition: transform 0.2s;
-}
-
-.c0 {
-  display: -webkit-box;
-  display: -webkit-flex;
-  display: -ms-flexbox;
-  display: flex;
-  -webkit-flex-direction: column;
-  -ms-flex-direction: column;
-  flex-direction: column;
-  width: 100%;
-}
-
-.c2 {
-  display: -webkit-box;
-  display: -webkit-flex;
-  display: -ms-flexbox;
-  display: flex;
-  -webkit-flex-direction: column;
-  -ms-flex-direction: column;
-  flex-direction: column;
-  width: 100%;
-  width: 230px;
-  padding-right: 10px;
 }
 
 .c1 {
@@ -174,6 +175,7 @@ exports[`<PhoneQuestion /> Should render and match the snapshot 1`] = `
         </label>
         <div
           class="c4"
+          cursor="pointer"
           data-testid="select"
         >
           <div
@@ -251,6 +253,11 @@ exports[`<PhoneQuestion /> Should render and match the snapshot 1`] = `
                 </div>
               </div>
             </div>
+            <input
+              name="iso"
+              type="hidden"
+              value="US"
+            />
           </div>
         </div>
       </div>

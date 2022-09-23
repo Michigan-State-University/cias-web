@@ -1,7 +1,8 @@
 import { createSelector } from 'reselect';
 
+import { makeSelectSelectedQuestionGroupId } from 'global/reducers/questions/selectors';
+
 import { initialState } from './reducer';
-import { makeSelectSelectedQuestionGroupId } from '../questions';
 
 export const selectQuestionGroups = (state) =>
   state.questionGroups || initialState;

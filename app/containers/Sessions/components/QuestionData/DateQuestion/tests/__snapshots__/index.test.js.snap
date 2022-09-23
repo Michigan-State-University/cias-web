@@ -57,6 +57,7 @@ exports[`<DateQuestion /> Should render and match the snapshot 1`] = `
   margin-left: 10px;
   width: 200px;
   height: 50px;
+  color: #2F3850;
 }
 
 .c7:hover {
@@ -110,6 +111,10 @@ exports[`<DateQuestion /> Should render and match the snapshot 1`] = `
 
 .c6 .schedule-date-picker .react-datepicker__month-option {
   background-color: #E9F1FB;
+}
+
+.c6 .react-datepicker-wrapper {
+  width: 100%;
 }
 
 .c8 {

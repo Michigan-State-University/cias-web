@@ -13,6 +13,7 @@ import {
   FinishQuestionSettings,
   FreeResponseQuestionSettings,
   GridQuestionSettings,
+  HenryFordInitialScreenSettings,
   InformationQuestionSettings,
   MultipleQuestionSettings,
   NameQuestionSettings,
@@ -50,6 +51,7 @@ import {
   TlfbQuestionBody,
   TlfbEventsBodyWithConfig,
   TlfbQuestionBodyWithConfig,
+  HenryFordInitialScreenBody,
 } from './QuestionBody';
 import { QuestionOriginalText } from './QuestionOriginalText';
 
@@ -230,6 +232,14 @@ export type TlfbQuestionWithConfig = GenericQuestion<
 
 export type TlfbQuestionWithConfigDTO = CamelToSnake<TlfbQuestionWithConfig>;
 
+export type HenryFordInitialScreen = GenericQuestion<
+  QuestionTypes.HENRY_FORD_INITIAL,
+  HenryFordInitialScreenBody,
+  HenryFordInitialScreenSettings
+>;
+
+export type HenryFordInitialScreenDTO = CamelToSnake<HenryFordInitialScreen>;
+
 export type Question =
   | SingleQuestion
   | MultipleQuestion
@@ -249,6 +259,6 @@ export type Question =
   | CurrencyQuestion
   | TlfbConfig
   | TlfbEvents
-  | TlfbQuestion;
-
+  | TlfbQuestion
+  | HenryFordInitialScreen;
 export type QuestionDTO = CamelToSnake<Question>;

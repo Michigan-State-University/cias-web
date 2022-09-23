@@ -20,6 +20,7 @@ import {
   participantReport,
   tlfbEvents,
   tlfbQuestion,
+  henryFordInitialScreen,
 } from 'models/Session/QuestionTypes';
 
 import CurrencyQuestion from './CurrencyQuestion';
@@ -40,6 +41,7 @@ import NameQuestion from './NameQuestion';
 import ThirdPartyQuestion from './ThirdPartyQuestion';
 import TlfbEvents from './TlfbEvents';
 import TlfbQuestion from './TlfbQuestion';
+import HenryFordInitialScreen from './HenryFordInitialScreen';
 
 export const renderQuestionByType = (question, sharedProps) => {
   const { type } = question;
@@ -82,6 +84,8 @@ export const renderQuestionByType = (question, sharedProps) => {
       return <TlfbEvents question={question} {...sharedProps} />;
     case tlfbQuestion.id:
       return <TlfbQuestion question={question} {...sharedProps} />;
+    case henryFordInitialScreen.id:
+      return <HenryFordInitialScreen question={question} {...sharedProps} />;
     default:
       return <ErrorAlert errorText={`CANNOT RENDER ${type}`} />;
   }

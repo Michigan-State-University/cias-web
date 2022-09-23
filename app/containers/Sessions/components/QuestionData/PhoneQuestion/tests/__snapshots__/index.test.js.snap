@@ -74,6 +74,7 @@ exports[`<PhoneQuestion /> Should render and match the snapshot 1`] = `
   height: auto;
   display: block;
   border-radius: 5px;
+  cursor: not-allowed;
   opacity: 0.5;
 }
 
@@ -193,6 +194,7 @@ exports[`<PhoneQuestion /> Should render and match the snapshot 1`] = `
           </label>
           <div
             class="c6"
+            cursor="not-allowed"
             data-testid="select"
             disabled=""
           >
@@ -212,7 +214,7 @@ exports[`<PhoneQuestion /> Should render and match the snapshot 1`] = `
                   class=" css-g1d714-ValueContainer"
                 >
                   <div
-                    class=" css-q5ew0g-placeholder"
+                    class=" css-1jyq7ds-placeholder"
                   >
                     Code
                   </div>

@@ -21,7 +21,6 @@ import { makeSelectInterventionType } from 'global/reducers/intervention/selecto
 import { makeSelectSelectedQuestionGroup } from 'global/reducers/questionGroups';
 
 import { canEdit } from 'models/Status/statusPermissions';
-import { finishQuestion } from 'models/Session/QuestionTypes';
 import { InterventionType } from 'models/Intervention/InterventionDto';
 import { GroupType } from 'models/QuestionGroup';
 
@@ -32,6 +31,10 @@ import BranchingTab from './Components/Tabs/BranchingTab';
 import NarratorTab from './Components/Tabs/NarratorTab';
 import SettingsTab from './Components/Tabs/SettingsTab';
 import messages from './messages';
+import {
+  HIDE_BRANCHING_TAB_QUESTIONS,
+  HIDE_SETTINGS_TAB_QUESTIONS,
+} from '../constants';
 
 const Settings = ({
   selectedQuestion: { narrator, settings, id, formulas, type } = {},
@@ -50,8 +53,10 @@ const Settings = ({
 
   const editingPossible = canEdit(interventionStatus);
 
-  const isFinishScreen = type === finishQuestion.id;
   const isTlfbGroup = questionGroup?.type === GroupType.TLFB;
+
+  const hideSettingsTab = HIDE_SETTINGS_TAB_QUESTIONS.includes(type);
+  const hideBranchingTab = HIDE_BRANCHING_TAB_QUESTIONS.includes(type);
 
   return (
     <Column>
@@ -63,7 +68,7 @@ const Settings = ({
       >
         <div
           label={formatMessage(messages[settingsTabLabels.settings])}
-          hidden={isTlfbGroup}
+          hidden={hideSettingsTab}
         >
           <SettingsTab
             formatMessage={formatMessage}
@@ -84,7 +89,7 @@ const Settings = ({
         </div>
         <div
           label={formatMessage(messages[settingsTabLabels.branching])}
-          hidden={isFinishScreen || isTlfbGroup}
+          hidden={hideBranchingTab}
         >
           <BranchingTab
             formatMessage={formatMessage}

@@ -175,6 +175,7 @@ const PhoneNumberForm = ({
                       : null,
                     disabled,
                   }}
+                  submitOnChange
                 />
                 <FormikNumberInput
                   label={formatMessage(messages.phoneNumberLabel)}

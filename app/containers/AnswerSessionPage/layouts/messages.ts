@@ -108,4 +108,44 @@ export default defineMessages({
     id: `${scope}.completeSession`,
     defaultMessage: 'Complete Session',
   },
+  firstName: {
+    id: `${scope}.firstName`,
+    defaultMessage: 'First Name',
+  },
+  firstNamePlaceholder: {
+    id: `${scope}.firstNamePlaceholder`,
+    defaultMessage: 'Enter your first name here',
+  },
+  lastName: {
+    id: `${scope}.lastName`,
+    defaultMessage: 'Last Name',
+  },
+  lastNamePlaceholder: {
+    id: `${scope}.lastNamePlaceholder`,
+    defaultMessage: 'Enter your last name here',
+  },
+  sex: {
+    id: `${scope}.sex`,
+    defaultMessage: 'Sex',
+  },
+  sexPlaceholder: {
+    id: `${scope}.sexPlaceholder`,
+    defaultMessage: 'Choose your sex',
+  },
+  dateOfBirth: {
+    id: `${scope}.dateOfBirth`,
+    defaultMessage: 'Date of Birth',
+  },
+  dateOfBirthPlaceholder: {
+    id: `${scope}.dateOfBirthPlaceholder`,
+    defaultMessage: 'Select date',
+  },
+  zipCode: {
+    id: `${scope}.zipCode`,
+    defaultMessage: 'ZIP Code',
+  },
+  zipCodePlaceholder: {
+    id: `${scope}.zipCodePlaceholder`,
+    defaultMessage: 'Enter your ZIP Code here',
+  },
 });

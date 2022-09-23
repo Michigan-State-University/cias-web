@@ -104,6 +104,11 @@ export const getQuestionDataByType = (
         data: [{ payload: { screen_title: '', screen_question: '' } }],
       };
 
+    case QuestionTypes.HENRY_FORD_INITIAL:
+      return {
+        data: [],
+      };
+
     default:
       return {
         variable: { name: '' },

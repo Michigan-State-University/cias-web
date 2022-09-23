@@ -46,6 +46,7 @@ function FormikInput({
     <InputComponent
       error={error}
       hasError={hasError}
+      touched={touched}
       inputProps={inputProps}
       label={label}
       name={formikKey}

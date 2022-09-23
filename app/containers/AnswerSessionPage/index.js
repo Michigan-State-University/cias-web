@@ -40,7 +40,6 @@ import {
 } from 'global/reducers/auth';
 import logInGuestSaga from 'global/reducers/auth/sagas/logInGuest';
 import { canPreview } from 'models/Status/statusPermissions';
-import { finishQuestion } from 'models/Session/QuestionTypes';
 import { UserSessionType } from 'models/UserSession/UserSession';
 import { QuestionTypes } from 'models/Question';
 
@@ -100,6 +99,7 @@ import {
   NOT_SKIPPABLE_QUESTIONS,
   FULL_SIZE_QUESTIONS,
   CONFIRMABLE_QUESTIONS,
+  NO_CONTINUE_BUTTON_QUESTIONS,
 } from './constants';
 import { ActionButtons } from './components/ActionButtons';
 
@@ -429,19 +429,16 @@ export function AnswerSessionPage({
       userSessionId: userSession?.id,
     };
 
-    const isLastScreen = currentQuestion.type === finishQuestion.id;
-
     const canSkipNarrator = narratorSkippable || !isAnimationOngoing;
 
     const shouldRenderSkipQuestionButton =
       userSessionType !== UserSessionType.CAT_MH &&
-      !isLastScreen &&
       !NOT_SKIPPABLE_QUESTIONS.includes(type);
 
     const shouldRenderContinueButton =
-      !isLastScreen &&
       (isNullOrUndefined(proceedButton) || proceedButton) &&
-      canSkipNarrator;
+      canSkipNarrator &&
+      !NO_CONTINUE_BUTTON_QUESTIONS.includes(type);
 
     return (
       <Row justify="center" width="100%">

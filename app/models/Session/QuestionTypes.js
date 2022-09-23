@@ -119,6 +119,12 @@ export const tlfbQuestion = new QuestionType(
   colors.asparagus,
 );
 
+export const henryFordInitialScreen = new QuestionType(
+  `${questionType}HenryFordInitial`,
+  'Henry Ford Initial Screen',
+  colors.kleinBlue,
+);
+
 export const QuestionTypes = [
   singleQuestion,
   multiQuestion,
@@ -139,6 +145,7 @@ export const QuestionTypes = [
   tlfbQuestion,
   tlfbConfig,
   tlfbEvents,
+  henryFordInitialScreen,
 ];
 
 const notAddableQuestionTypes = [

@@ -47,6 +47,7 @@ const TimezoneForm = ({ formatMessage, user, editUser }) => {
           formikKey="timeZone"
           label={formatMessage(messages.timeZoneLabel)}
           options={timezoneOptions}
+          submitOnChange
         />
       )}
     </Formik>

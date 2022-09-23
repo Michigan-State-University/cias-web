@@ -6,6 +6,7 @@ exports[`<Select /> Should render and match the snapshot 1`] = `
   height: auto;
   display: block;
   border-radius: 5px;
+  cursor: pointer;
 }
 
 .c1 {
@@ -18,6 +19,7 @@ exports[`<Select /> Should render and match the snapshot 1`] = `
 
 <div
   class="c0"
+  cursor="pointer"
 >
   <div
     class=" css-2b097c-container"

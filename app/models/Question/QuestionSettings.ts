@@ -83,6 +83,8 @@ export interface TlfbEventsSettings extends QuestionBaseSettings {}
 
 export interface TlfbQuestionSettings extends QuestionBaseSettings {}
 
+export interface HenryFordInitialScreenSettings extends QuestionBaseSettings {}
+
 export type QuestionSettings =
   | SingleQuestionSettings
   | MultipleQuestionSettings
@@ -102,4 +104,5 @@ export type QuestionSettings =
   | CurrencyQuestionSettings
   | TlfbConfigSettings
   | TlfbEventsSettings
-  | TlfbQuestionSettings;
+  | TlfbQuestionSettings
+  | HenryFordInitialScreenSettings;

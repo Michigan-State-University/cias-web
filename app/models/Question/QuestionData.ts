@@ -90,6 +90,8 @@ export interface TlfbEventsData
 export interface TlfbQuestionData
   extends QuestionPayloadData<TlfbQuestionPayload> {}
 
+export type HenryFordInitialScreenData = never;
+
 export type QuestionData =
   | SingleQuestionData
   | MultipleQuestionData
@@ -109,4 +111,5 @@ export type QuestionData =
   | CurrencyQuestionData
   | TlfbConfigData
   | TlfbEventsData
-  | TlfbQuestionData;
+  | TlfbQuestionData
+  | HenryFordInitialScreenData;

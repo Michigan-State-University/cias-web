@@ -30,8 +30,13 @@ import {
   tlfbConfig,
   tlfbEvents,
   tlfbQuestion,
+  henryFordInitialScreen,
 } from 'models/Session/QuestionTypes';
-import { STATUS_METADATA } from 'models/Intervention';
+import {
+  InterventionSharedTo,
+  InterventionStatus,
+  STATUS_METADATA,
+} from 'models/Intervention';
 
 import CurrencyQuestion from './CurrencyQuestion';
 import GridQuestion from './GridQuestion';
@@ -51,20 +56,26 @@ import FinishScreen from './FinishScreen';
 import TlfbConfig from './TlfbConfig';
 import TlfbEvents from './TlfbEvents';
 import TlfbQuestion from './TlfbQuestion';
+import HenryFordInitialScreen from './HenryFordInitialScreen';
+
+import { CommonQuestionProps } from './types';
 
 const QuestionData = () => {
   useInjectSaga({ key: 'updateQuestionData', saga: updateQuestionDataSaga });
 
   const selectedQuestionType = useSelector(makeSelectSelectedQuestionType());
   const isNarratorTab = useSelector(makeSelectIsNarratorTab());
-  const interventionStatus = useSelector(makeSelectInterventionStatus());
-  const sharedTo = useSelector(makeSelectInterventionSharedTo());
+  const interventionStatus: InterventionStatus = useSelector(
+    makeSelectInterventionStatus(),
+  );
+  const sharedTo: InterventionSharedTo = useSelector(
+    makeSelectInterventionSharedTo(),
+  );
 
-  const commonProps = {
+  const commonProps: CommonQuestionProps = {
     isNarratorTab,
     interventionStatus,
     sharedTo,
-    // @ts-ignore
     statusMetadata: STATUS_METADATA[interventionStatus],
   };
 
@@ -106,6 +117,8 @@ const QuestionData = () => {
       return <TlfbEvents {...commonProps} />;
     case tlfbQuestion.id:
       return <TlfbQuestion {...commonProps} />;
+    case henryFordInitialScreen.id:
+      return <HenryFordInitialScreen {...commonProps} />;
     default:
       return null;
   }

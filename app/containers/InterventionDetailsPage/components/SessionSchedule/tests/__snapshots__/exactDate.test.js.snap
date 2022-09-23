@@ -164,6 +164,7 @@ exports[`<SessionSchedule /> Should render and match the snapshot 1`] = `
   margin-left: 10px;
   width: 120px;
   height: 50px;
+  color: #2F3850;
 }
 
 .c12:hover {
@@ -217,6 +218,10 @@ exports[`<SessionSchedule /> Should render and match the snapshot 1`] = `
 
 .c11 .schedule-date-picker .react-datepicker__month-option {
   background-color: #E9F1FB;
+}
+
+.c11 .react-datepicker-wrapper {
+  width: 100%;
 }
 
 @media only screen and (min-width:768px) {

@@ -9,11 +9,9 @@ import PropTypes from 'prop-types';
 import { useField } from 'formik';
 
 import { Input } from 'components/Input';
-import Text from 'components/Text';
 import { formatIncompletePhoneNumber } from 'libphonenumber-js/mobile';
 
-import Column from 'components/Column';
-import { ErrorText } from './styled';
+import FormikControlLayout from 'components/FormikControlLayout';
 
 function FormikNumberInput({
   formikKey,
@@ -39,18 +37,15 @@ function FormikNumberInput({
   };
 
   return (
-    <Column {...columnStyleProps}>
-      {label && (
-        <label htmlFor={formikKey}>
-          <Text mb={5} width="fit-content">
-            {label}
-          </Text>
-        </label>
-      )}
-
+    <FormikControlLayout
+      formikKey={formikKey}
+      label={label}
+      touched={touched}
+      error={error}
+      {...columnStyleProps}
+    >
       <Input
         id={formikKey}
-        mb={hasError ? 5 : null}
         placeholder={placeholder}
         value={value}
         name={formikKey}
@@ -60,8 +55,7 @@ function FormikNumberInput({
         keyboard={type}
         {...inputProps}
       />
-      {hasError && <ErrorText>{error.toString()}</ErrorText>}
-    </Column>
+    </FormikControlLayout>
   );
 }
 

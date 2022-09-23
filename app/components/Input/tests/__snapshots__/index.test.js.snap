@@ -11,6 +11,7 @@ exports[`<ApprovableInput /> Should render and match the snapshot as date input 
   margin-left: 10px;
   width: 250px;
   height: 50px;
+  color: #2F3850;
 }
 
 .c4:hover {
@@ -64,6 +65,10 @@ exports[`<ApprovableInput /> Should render and match the snapshot as date input 
 
 .c3 .schedule-date-picker .react-datepicker__month-option {
   background-color: #E9F1FB;
+}
+
+.c3 .react-datepicker-wrapper {
+  width: 100%;
 }
 
 .c5 {
@@ -1862,6 +1867,7 @@ exports[`<DateInput /> Should render and match the snapshot 1`] = `
   margin-left: 10px;
   width: 250px;
   height: 50px;
+  color: #2F3850;
 }
 
 .c0:hover {

@@ -1,4 +1,4 @@
-import { updateQuestionData } from 'global/reducers/questions';
+import { updateQuestionData } from 'global/reducers/questions/actions';
 
 import {
   UPDATE_DAYS_COUNT,

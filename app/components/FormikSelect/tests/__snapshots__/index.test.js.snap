@@ -1,22 +1,12 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`<FormikSelect /> Should render and match the snapshot 1`] = `
-.c1 {
-  font-family: DM Sans;
-  font-size: 13px;
-  line-height: 130%;
-  margin-bottom: 5px;
-  color: #2F3850;
-  width: -webkit-fit-content;
-  width: -moz-fit-content;
-  width: fit-content;
-}
-
 .c2 {
   width: auto;
   height: auto;
   display: block;
   border-radius: 5px;
+  cursor: pointer;
 }
 
 .c3 {
@@ -36,6 +26,17 @@ exports[`<FormikSelect /> Should render and match the snapshot 1`] = `
   -ms-flex-direction: column;
   flex-direction: column;
   width: 100%;
+}
+
+.c1 {
+  font-family: DM Sans;
+  font-size: 13px;
+  line-height: 130%;
+  margin-bottom: 5px;
+  color: #2F3850;
+  width: -webkit-fit-content;
+  width: -moz-fit-content;
+  width: fit-content;
 }
 
 @media only screen and (min-width:768px) {
@@ -70,6 +71,7 @@ exports[`<FormikSelect /> Should render and match the snapshot 1`] = `
     </label>
     <div
       class="c2"
+      cursor="pointer"
       data-testid="select"
     >
       <div
@@ -133,6 +135,11 @@ exports[`<FormikSelect /> Should render and match the snapshot 1`] = `
             </div>
           </div>
         </div>
+        <input
+          name="test"
+          type="hidden"
+          value="option"
+        />
       </div>
     </div>
   </div>
