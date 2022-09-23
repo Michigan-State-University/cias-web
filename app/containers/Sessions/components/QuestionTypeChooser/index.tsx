@@ -29,6 +29,7 @@ import { borders, boxShadows, colors, fontSizes } from 'theme';
 
 import { useDropdownPositionHelper } from 'utils/useDropdownPositionHelper';
 import { useChildSizeCalculator } from 'utils/useChildSizeCalculator';
+import QuestionType from 'models/Session/QuestionType';
 import DefaultButtonComponent from './DefaultButtonComponent';
 import messages from './messages';
 import NewItem from './NewItem';
@@ -83,20 +84,36 @@ const QuestionTypeChooser = ({
 
   const isVisible = visible && height;
 
-  const filteredQuestions = useMemo(
-    () =>
-      AddableQuestionTypes.filter(
-        ({ id }) =>
-          !(nameQuestionExists && id === nameQuestion.id) &&
-          !(participantReportExists && id === participantReport.id) &&
-          !(phoneQuestionExists && id === phoneQuestion.id) &&
-          !(
-            (henryFordInitialScreenExists || !hasHfhsAccess) &&
-            id === henryFordInitialScreen.id
-          ),
-      ),
+  const conditionalQuestions = useMemo(
+    () => [
+      {
+        id: nameQuestion.id,
+        available: !nameQuestionExists,
+        message: formatMessage(messages.questionAvailableOncePerSession),
+      },
+      {
+        id: participantReport.id,
+        available: !participantReportExists,
+        message: formatMessage(messages.questionAvailableOncePerSession),
+      },
+      {
+        id: phoneQuestion.id,
+        available: !phoneQuestionExists,
+        message: formatMessage(messages.questionAvailableOncePerSession),
+      },
+      {
+        id: henryFordInitialScreen.id,
+        available: !(henryFordInitialScreenExists || !hasHfhsAccess),
+        message: formatMessage(
+          messages[
+            henryFordInitialScreenExists
+              ? 'questionAvailableOncePerSession'
+              : 'noHfhsAccess'
+          ],
+        ),
+      },
+    ],
     [
-      AddableQuestionTypes,
       nameQuestionExists,
       participantReportExists,
       phoneQuestionExists,
@@ -104,6 +121,13 @@ const QuestionTypeChooser = ({
       hasHfhsAccess,
     ],
   );
+
+  const disabledQuestions = conditionalQuestions.map(
+    (question) => !question.available && question.id,
+  );
+
+  const getDisabledQuestionMessage = (id: QuestionType['id']) =>
+    conditionalQuestions.find((question) => question.id === id)?.message;
 
   return (
     <Row data-cy="question-type-chooser">
@@ -141,13 +165,15 @@ const QuestionTypeChooser = ({
               ref={containerRef}
               horizontalFogVisible={false}
             >
-              {filteredQuestions.map(({ color, id }) => (
+              {AddableQuestionTypes.map(({ color, id }) => (
                 <NewItem
                   key={id}
                   color={color}
                   handleClick={() => handleClick(id)}
                   // @ts-ignore
                   title={formatMessage(globalMessages.questionTypes[id])}
+                  disabled={disabledQuestions.includes(id)}
+                  disabledMessage={getDisabledQuestionMessage(id)}
                 />
               ))}
               {AddableGroups.map(({ color, id }) => (
