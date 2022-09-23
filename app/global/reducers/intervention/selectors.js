@@ -21,6 +21,12 @@ export const makeSelectInterventionStatus = () =>
 export const makeSelectInterventionType = () =>
   createSelector(selectIntervention, (substate) => substate.intervention?.type);
 
+export const makeSelectInterventionHfHsAccess = () =>
+  createSelector(
+    selectIntervention,
+    (substate) => substate.intervention?.hfhsAccess ?? false,
+  );
+
 export const makeSelectInterventionLoader = (name) =>
   createSelector(selectIntervention, ({ loaders }) => loaders[name]);
 

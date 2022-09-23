@@ -1,7 +1,7 @@
 import React, { useContext, useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
 import { compose } from 'redux';
-import { connect } from 'react-redux';
+import { connect, useSelector } from 'react-redux';
 import { Row, Container } from 'react-grid-system';
 import { FormattedMessage, injectIntl, IntlShape } from 'react-intl';
 
@@ -11,9 +11,10 @@ import {
   deleteReportTemplateRequest,
   selectReportTemplate,
   updateReportTemplateRequest,
-  ReportFor,
   generateTestReportRequest,
+  ReportFor,
 } from 'global/reducers/reportTemplates';
+import { makeSelectInterventionHfHsAccess } from 'global/reducers/intervention';
 
 import arrowDown from 'assets/svg/arrow-down-black.svg';
 import arrowUp from 'assets/svg/arrow-up-black.svg';
@@ -30,6 +31,7 @@ import ApprovableInput from 'components/Input/ApprovableInput';
 import Box from 'components/Box';
 import Img from 'components/Img';
 import { ModalType, useModal } from 'components/Modal';
+import Tooltip from 'components/Tooltip';
 
 import { CardBox, Spacer } from '../../styled';
 import { ReportTemplatesContext } from '../../utils';
@@ -53,6 +55,8 @@ const ReportTemplateMainSettings = ({
     },
     canEdit,
   } = useContext(ReportTemplatesContext);
+
+  const hfhsAccess = useSelector(makeSelectInterventionHfHsAccess());
 
   useEffect(() => {
     if (!updateReportTemplateLoading) setIsUploadingImage(false);
@@ -103,6 +107,11 @@ const ReportTemplateMainSettings = ({
   });
 
   const imageUploading = updateReportTemplateLoading && isUploadingImage;
+
+  const hfhRadioButtonDisabled =
+    !canEdit ||
+    (!hfhsAccess &&
+      singleReportTemplate.reportFor === ReportFor.henryFordHealth);
 
   return (
     <Container style={{ maxWidth: 600 }}>
@@ -180,7 +189,7 @@ const ReportTemplateMainSettings = ({
                   <Col>
                     <Row
                       align="center"
-                      style={{ cursor: canEdit ? 'pointer' : 'initial' }}
+                      cursor={canEdit ? 'pointer' : 'initial'}
                     >
                       <Radio
                         id={`report-for-toggle-${ReportFor.thirdParty}`}
@@ -200,6 +209,51 @@ const ReportTemplateMainSettings = ({
                       </Radio>
                     </Row>
                   </Col>
+                  {(hfhsAccess || hfhRadioButtonDisabled) && (
+                    <Col>
+                      <Row
+                        align="center"
+                        cursor={canEdit ? 'pointer' : 'initial'}
+                      >
+                        <Radio
+                          id={`report-for-toggle-${ReportFor.henryFordsHospital}`}
+                          mr={10}
+                          disabled={hfhRadioButtonDisabled}
+                          checked={
+                            singleReportTemplate.reportFor ===
+                            ReportFor.henryFordHealth
+                          }
+                          onChange={() =>
+                            canEdit &&
+                            onReportForChange(ReportFor.henryFordHealth)
+                          }
+                        >
+                          {hfhRadioButtonDisabled ? (
+                            <Tooltip
+                              id="hfhs-access-revoked-template-type"
+                              place="top"
+                              stretchContent
+                              text={formatMessage(
+                                messages.hfhReportTypeTooltipContent,
+                              )}
+                            >
+                              <Text>
+                                {formatMessage(
+                                  messages.settingsReportForHenryFordHealth,
+                                )}
+                              </Text>
+                            </Tooltip>
+                          ) : (
+                            <Text>
+                              {formatMessage(
+                                messages.settingsReportForHenryFordHealth,
+                              )}
+                            </Text>
+                          )}
+                        </Radio>
+                      </Row>
+                    </Col>
+                  )}
                 </Row>
 
                 <Row style={{ marginBottom: 20 }}>
