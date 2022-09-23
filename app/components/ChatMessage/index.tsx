@@ -1,5 +1,7 @@
-import React, { PropsWithChildren } from 'react';
+import React from 'react';
 import { FormattedMessage } from 'react-intl';
+import { Interweave } from 'interweave';
+import { UrlMatcher } from 'interweave-autolink';
 
 import Box from 'components/Box';
 import Text from 'components/Text';
@@ -10,20 +12,22 @@ import { colors, themeColors } from 'theme';
 import CheckMark from 'assets/svg/check-green.svg';
 
 import messages from './messages';
+import { MessageContainer } from './styled';
 
-type Props = PropsWithChildren<{
+type Props = {
   isMine?: boolean;
   markRead?: boolean;
   senderName?: string;
   hideSender?: boolean;
+  message?: string;
   [x: string]: any;
-}>;
+};
 
 export const ChatMessage = ({
   isMine,
   markRead,
   senderName,
-  children,
+  message,
   hideSender,
   ...style
 }: Props) => (
@@ -51,7 +55,7 @@ export const ChatMessage = ({
           {isMine ? <FormattedMessage {...messages.you} /> : senderName}
         </Text>
       )}
-      <Box
+      <MessageContainer
         bg={isMine ? themeColors.primary : themeColors.highlight}
         padding={12}
         borderRadius={8}
@@ -60,8 +64,12 @@ export const ChatMessage = ({
         color={isMine ? colors.white : themeColors.text}
         textAlign="left"
       >
-        {children}
-      </Box>
+        <Interweave
+          content={message}
+          matchers={[new UrlMatcher('url')]}
+          newWindow
+        />
+      </MessageContainer>
       {markRead && (
         <Box
           margin="8px 12px 0 12px"

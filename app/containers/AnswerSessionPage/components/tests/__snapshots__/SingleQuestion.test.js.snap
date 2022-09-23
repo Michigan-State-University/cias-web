@@ -183,9 +183,9 @@ exports[`<SingleQuestion /> Should render and match the snapshot 1`] = `
                 <div
                   class="c1 c11"
                 >
-                  <div>
+                  <span>
                     test
-                  </div>
+                  </span>
                 </div>
               </label>
             </div>
@@ -223,9 +223,9 @@ exports[`<SingleQuestion /> Should render and match the snapshot 1`] = `
                 <div
                   class="c1 c11"
                 >
-                  <div>
+                  <span>
                     test
-                  </div>
+                  </span>
                 </div>
               </label>
             </div>
