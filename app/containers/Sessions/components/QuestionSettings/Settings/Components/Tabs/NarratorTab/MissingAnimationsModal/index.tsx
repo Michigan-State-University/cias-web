@@ -90,11 +90,13 @@ export const MissingAnimationsModal = ({
                 color={colors.linkWater}
               >
                 <TD padding={8}>
-                  <FormattedMessage
-                    {...animationMessages[
-                      animation.from as keyof typeof animationMessages
-                    ]}
-                  />
+                  <Text fontWeight="bold">
+                    <FormattedMessage
+                      {...animationMessages[
+                        animation.from as keyof typeof animationMessages
+                      ]}
+                    />
+                  </Text>
                 </TD>
                 <TD padding={8}>
                   <FormattedMessage
