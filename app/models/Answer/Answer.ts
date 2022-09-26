@@ -43,7 +43,16 @@ export interface ThirdPartyReportAnswerData extends AnswerData<string> {
   reportTemplateIds: string[];
 }
 
-export type AnswerDataType = VariableAnswerData | ThirdPartyReportAnswerData;
+export interface HenryFordQuestionAnswerData
+  extends VariableAnswerData<string> {
+  hfhValue: string;
+  index?: number;
+}
+
+export type AnswerDataType =
+  | VariableAnswerData
+  | ThirdPartyReportAnswerData
+  | HenryFordQuestionAnswerData;
 
 // answer body
 
@@ -142,6 +151,12 @@ export type PhoneAnswer = GenericAnswer<
   VariableAnswerData<PhoneAnswerValue | ''>
 >;
 
+export type HenryFordQuestionAnswer = GenericAnswer<
+  AnswerType.HENRY_FORD,
+  // value is an empty string if question is skipped
+  HenryFordQuestionAnswerData
+>;
+
 export type Answer =
   | SingleAnswer
   | MultiAnswer
@@ -157,4 +172,5 @@ export type Answer =
   | FeedbackAnswer
   | ParticipantReportAnswer
   | ThirdPartyReportAnswer
-  | PhoneAnswer;
+  | PhoneAnswer
+  | HenryFordQuestionAnswer;

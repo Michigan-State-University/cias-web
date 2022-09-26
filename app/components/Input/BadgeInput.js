@@ -5,8 +5,8 @@ import { style } from 'components/BaseComponentStyles';
 
 import { StyledInput } from './StyledInput';
 
-const BadgeInput = styled(StyledInput).attrs(({ color }) => ({
-  bg: color,
+const BadgeInput = styled(StyledInput).attrs(({ color, bgColor }) => ({
+  bg: bgColor || color,
   bgOpacity: 0.1,
   averageLetterWidth: 12,
 }))`

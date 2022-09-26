@@ -6,6 +6,7 @@ import {
   FinishQuestionData,
   FreeResponseQuestionData,
   GridQuestionData,
+  HenryFordQuestionData,
   HenryFordInitialScreenData,
   InformationOnlyQuestionData,
   MultipleQuestionData,
@@ -90,6 +91,8 @@ export type TlfbQuestionBody = QuestionBodyWithoutVariable<TlfbQuestionData>;
 export type TlfbQuestionBodyWithConfig =
   QuestionBodyWithoutVariable<TlfbQuestionData> & { config: TlfbConfigBody };
 
+export type HenryFordQuestionBody =
+  QuestionBodyWithVariable<HenryFordQuestionData>;
 export type HenryFordInitialScreenBody =
   QuestionBodyWithoutVariable<HenryFordInitialScreenData>;
 
@@ -114,4 +117,5 @@ export type QuestionBody =
   | TlfbEventsBody
   | TlfbQuestionBody
   | TlfbEventsBodyWithConfig
-  | TlfbQuestionBodyWithConfig;
+  | TlfbQuestionBodyWithConfig
+  | HenryFordQuestionBody;

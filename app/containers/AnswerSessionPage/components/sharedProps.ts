@@ -1,13 +1,15 @@
-import { Answer } from 'models/Answer';
+import { GenericAnswer } from 'models/Answer';
 import { QuestionDTO } from 'models/Question';
 import { ToastContent, ToastOptions } from 'react-toastify';
 
 export type SharedProps<
   T extends QuestionDTO = QuestionDTO,
-  V extends null | Answer = null,
+  V extends
+    | null
+    | GenericAnswer['decryptedBody']['data'] = GenericAnswer['decryptedBody']['data'],
 > = {
   selectAnswer: (answer: V, selectedByUser?: boolean) => void;
-  answer: V;
+  answerBody: V;
   questionIndex: number;
   saveAnswer: () => void;
   showError: (content: ToastContent, options?: ToastOptions) => void;

@@ -20,6 +20,7 @@ import {
   participantReport,
   tlfbEvents,
   tlfbQuestion,
+  henryFordQuestion,
   henryFordInitialScreen,
 } from 'models/Session/QuestionTypes';
 
@@ -41,6 +42,7 @@ import NameQuestion from './NameQuestion';
 import ThirdPartyQuestion from './ThirdPartyQuestion';
 import TlfbEvents from './TlfbEvents';
 import TlfbQuestion from './TlfbQuestion';
+import HenryFordQuestion from './HenryFordQuestion';
 import HenryFordInitialScreen from './HenryFordInitialScreen';
 
 export const renderQuestionByType = (question, sharedProps) => {
@@ -84,6 +86,8 @@ export const renderQuestionByType = (question, sharedProps) => {
       return <TlfbEvents question={question} {...sharedProps} />;
     case tlfbQuestion.id:
       return <TlfbQuestion question={question} {...sharedProps} />;
+    case henryFordQuestion.id:
+      return <HenryFordQuestion question={question} {...sharedProps} />;
     case henryFordInitialScreen.id:
       return <HenryFordInitialScreen question={question} {...sharedProps} />;
     default:

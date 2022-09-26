@@ -18,5 +18,6 @@ export enum QuestionTypes {
   TLFB_CONFIG = 'Question::TlfbConfig',
   TLFB_EVENTS = 'Question::TlfbEvents',
   TLFB_QUESTION = 'Question::TlfbQuestion',
+  HENRY_FORD_QUESTION = 'Question::HenryFord',
   HENRY_FORD_INITIAL = 'Question::HenryFordInitial',
 }

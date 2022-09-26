@@ -238,7 +238,7 @@ exports[`<QuestionTypeChooser /> should match the snapshot while being open 1`] 
   background-color: #E9F1FB;
 }
 
-.c26 {
+.c27 {
   width: auto;
   height: auto;
   display: block;
@@ -250,11 +250,11 @@ exports[`<QuestionTypeChooser /> should match the snapshot while being open 1`] 
   border-radius: 5px;
 }
 
-.c26:hover {
+.c27:hover {
   background-color: #E9F1FB;
 }
 
-.c28 {
+.c29 {
   width: auto;
   height: auto;
   display: block;
@@ -266,7 +266,7 @@ exports[`<QuestionTypeChooser /> should match the snapshot while being open 1`] 
   margin-left: 8px;
 }
 
-.c29 {
+.c30 {
   width: auto;
   height: auto;
   display: block;
@@ -344,7 +344,7 @@ exports[`<QuestionTypeChooser /> should match the snapshot while being open 1`] 
   color: #2F3850;
 }
 
-.c32 {
+.c33 {
   font-family: DM Sans;
   font-size: 13px;
   line-height: 130%;
@@ -352,7 +352,7 @@ exports[`<QuestionTypeChooser /> should match the snapshot while being open 1`] 
   color: rgba(16,121,105,1);
 }
 
-.c30 {
+.c31 {
   width: auto;
   height: auto;
 }
@@ -656,7 +656,30 @@ exports[`<QuestionTypeChooser /> should match the snapshot while being open 1`] 
   color: #2F3850;
 }
 
-.c27 {
+.c26 {
+  border-radius: 50%;
+  background-color: #5339F0;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+  -webkit-justify-content: center;
+  -ms-flex-pack: center;
+  justify-content: center;
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  width: 10px;
+  height: 10px;
+  margin-right: 18px;
+  background-color: rgba(83,57,240,1);
+  opacity: 1;
+  color: #2F3850;
+}
+
+.c28 {
   border-radius: 50%;
   background-color: #5339F0;
   display: -webkit-box;
@@ -679,7 +702,7 @@ exports[`<QuestionTypeChooser /> should match the snapshot while being open 1`] 
   color: #2F3850;
 }
 
-.c31 {
+.c32 {
   border-radius: 50%;
   background-color: #6B9E59;
   display: -webkit-box;
@@ -1088,7 +1111,29 @@ exports[`<QuestionTypeChooser /> should match the snapshot while being open 1`] 
               </div>
             </div>
             <div
-              class="c26"
+              class="c10"
+            >
+              <div
+                class="c11"
+              >
+                <div
+                  class="c3"
+                >
+                  <div
+                    class="c26"
+                    opacity="1"
+                  />
+                  <p
+                    class="c13"
+                    font-weight="medium"
+                  >
+                    Henry Ford Question
+                  </p>
+                </div>
+              </div>
+            </div>
+            <div
+              class="c27"
               disabled=""
             >
               <div
@@ -1098,7 +1143,7 @@ exports[`<QuestionTypeChooser /> should match the snapshot while being open 1`] 
                   class="c3"
                 >
                   <div
-                    class="c27"
+                    class="c28"
                     opacity="0.5"
                   />
                   <p
@@ -1108,17 +1153,17 @@ exports[`<QuestionTypeChooser /> should match the snapshot while being open 1`] 
                     Henry Ford Initial Screen
                   </p>
                   <div
-                    class="c28"
+                    class="c29"
                     display="flex"
                   >
                     <div
-                      class="c29"
+                      class="c30"
                       data-for="new-item-disabled-message-Henry Ford Initial Screen"
                       data-tip=""
                     >
                       <img
                         alt="?"
-                        class="c30"
+                        class="c31"
                         src="IMAGE_MOCK"
                       />
                     </div>
@@ -1136,7 +1181,7 @@ exports[`<QuestionTypeChooser /> should match the snapshot while being open 1`] 
                   class="c3"
                 >
                   <div
-                    class="c31"
+                    class="c32"
                     opacity="1"
                   />
                   <p
@@ -1147,7 +1192,7 @@ exports[`<QuestionTypeChooser /> should match the snapshot while being open 1`] 
                   </p>
                 </div>
                 <p
-                  class="c32"
+                  class="c33"
                   color="#107969"
                 >
                   Creates group

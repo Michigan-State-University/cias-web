@@ -87,6 +87,7 @@ const colors = {
   lightDivider: '#EAF1FA',
   fireIsland: '#DD533C',
   slateGray: '#6D7485',
+  titanWhite: '#E9E5FF',
   kleinBlue: '#5339F0',
 };
 

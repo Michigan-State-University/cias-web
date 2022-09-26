@@ -16,6 +16,7 @@ import {
   tlfbConfig,
   tlfbEvents,
   tlfbQuestion,
+  henryFordQuestion,
 } from 'models/Session/QuestionTypes';
 
 import currencyQuestionReducer from './CurrencyQuestion/reducer';
@@ -35,6 +36,7 @@ import participantReportQuestionReducer from './ParticipantReportQuestion/reduce
 import tlfbConfigReducer from './TlfbConfig/reducer';
 import tlfbEventsReducer from './TlfbEvents/reducer';
 import tlfbQuestionsReducer from './TlfbQuestion/reducer';
+import henryFordQuestionReducer from './HenryFordQuestion/reducer';
 
 /* eslint-disable default-case, no-param-reassign */
 const questionDataReducer = (question, data) => {
@@ -73,6 +75,8 @@ const questionDataReducer = (question, data) => {
       return tlfbEventsReducer(question, data);
     case tlfbQuestion.id:
       return tlfbQuestionsReducer(question, data);
+    case henryFordQuestion.id:
+      return henryFordQuestionReducer(question, data);
     default:
       return question;
   }

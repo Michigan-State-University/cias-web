@@ -19,7 +19,7 @@ const SingleQuestionLayout = ({
   <Column>
     <Box>
       {data.map((questionAnswer, index) => {
-        const { payload, value } = questionAnswer;
+        const { payload, value, hfh_value: hfhValue } = questionAnswer;
         const isChecked = selectedAnswerIndex === index;
         const ariaInputId = `answer-${index + 1}`;
 
@@ -30,7 +30,7 @@ const SingleQuestionLayout = ({
               py={14}
               width={`calc(100% + ${margin}px)`}
               clickable
-              onClick={() => handleClick(value, index)}
+              onClick={() => handleClick(value, index, hfhValue)}
             >
               <Row align="center" height="44">
                 <Radio

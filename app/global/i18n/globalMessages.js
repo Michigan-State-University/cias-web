@@ -31,6 +31,7 @@ import {
   tlfbConfig,
   tlfbEvents,
   tlfbQuestion,
+  henryFordQuestion,
   henryFordInitialScreen,
 } from 'models/Session/QuestionTypes';
 import { GroupType } from 'models/QuestionGroup';
@@ -110,6 +111,10 @@ export default defineMessages({
     emptyVariable: {
       id: `${scope}.emptyBadge`,
       defaultMessage: 'No assigned variable',
+    },
+    hfhValuePlaceholder: {
+      id: `${scope}.hfhValuePlaceholder`,
+      defaultMessage: 'Value to send to HFH',
     },
   },
   blockTypes: {
@@ -222,6 +227,10 @@ export default defineMessages({
     [tlfbQuestion.id]: {
       id: `${scope}.${tlfbQuestion.id}`,
       defaultMessage: 'TLFB Questions',
+    },
+    [henryFordQuestion.id]: {
+      id: `${scope}.${tlfbQuestion.id}`,
+      defaultMessage: 'Henry Ford Question',
     },
     [henryFordInitialScreen.id]: {
       id: `${scope}.${henryFordInitialScreen.id}`,

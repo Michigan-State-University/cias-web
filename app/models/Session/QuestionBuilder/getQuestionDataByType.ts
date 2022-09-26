@@ -114,5 +114,11 @@ export const getQuestionDataByType = (
         variable: { name: '' },
         data: [{ payload: '' }],
       };
+
+    case QuestionTypes.HENRY_FORD_QUESTION:
+      return {
+        variable: { name: '' },
+        data: [{ payload: '', value: '1', hfh_value: '' }],
+      };
   }
 };

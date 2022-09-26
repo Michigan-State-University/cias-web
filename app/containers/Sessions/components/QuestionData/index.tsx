@@ -30,6 +30,7 @@ import {
   tlfbConfig,
   tlfbEvents,
   tlfbQuestion,
+  henryFordQuestion,
   henryFordInitialScreen,
 } from 'models/Session/QuestionTypes';
 import {
@@ -56,6 +57,7 @@ import FinishScreen from './FinishScreen';
 import TlfbConfig from './TlfbConfig';
 import TlfbEvents from './TlfbEvents';
 import TlfbQuestion from './TlfbQuestion';
+import HenryFordQuestion from './HenryFordQuestion';
 import HenryFordInitialScreen from './HenryFordInitialScreen';
 
 import { CommonQuestionProps } from './types';
@@ -117,6 +119,8 @@ const QuestionData = () => {
       return <TlfbEvents {...commonProps} />;
     case tlfbQuestion.id:
       return <TlfbQuestion {...commonProps} />;
+    case henryFordQuestion.id:
+      return <HenryFordQuestion {...commonProps} />;
     case henryFordInitialScreen.id:
       return <HenryFordInitialScreen {...commonProps} />;
     default:
