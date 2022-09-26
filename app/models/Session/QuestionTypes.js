@@ -151,8 +151,8 @@ export const QuestionTypes = [
   tlfbQuestion,
   tlfbConfig,
   tlfbEvents,
-  henryFordQuestion,
   henryFordInitialScreen,
+  henryFordQuestion,
 ];
 
 const notAddableQuestionTypes = [

@@ -22,6 +22,7 @@ import {
   participantReport,
   phoneQuestion,
   henryFordInitialScreen,
+  henryFordQuestion,
 } from 'models/Session/QuestionTypes';
 import { AddableGroups } from 'models/QuestionGroup';
 
@@ -103,12 +104,21 @@ const QuestionTypeChooser = ({
       },
       {
         id: henryFordInitialScreen.id,
-        available: !(henryFordInitialScreenExists || !hasHfhsAccess),
+        available: !henryFordInitialScreenExists && hasHfhsAccess,
         message: formatMessage(
           messages[
             henryFordInitialScreenExists
               ? 'questionAvailableOncePerSession'
               : 'noHfhsAccess'
+          ],
+        ),
+      },
+      {
+        id: henryFordQuestion.id,
+        available: henryFordInitialScreenExists && hasHfhsAccess,
+        message: formatMessage(
+          messages[
+            hasHfhsAccess ? 'hfhsInitialScreenRequired' : 'noHfhsAccess'
           ],
         ),
       },

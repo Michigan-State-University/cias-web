@@ -29,4 +29,9 @@ export default defineMessages({
     id: `${scope}.noHfhsAccess`,
     defaultMessage: 'This question requires Henry Ford access',
   },
+  hfhsInitialScreenRequired: {
+    id: `${scope}.hfhsInitialScreenRequired`,
+    defaultMessage:
+      'This question requires Henry Ford Initial Screen to be present in a session',
+  },
 });
