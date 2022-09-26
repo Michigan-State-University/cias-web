@@ -11,7 +11,7 @@ export default defineMessages({
   missingAnimationsModalTitleDescription: {
     id: `${scope}.missingAnimationsModalTitleDescription`,
     defaultMessage:
-      'The new narrator does not support several animations from the previous narrator. We will replace missing animations with default animations.',
+      'The new narrator does not support several animations from the previous narrator. We will replace missing animations with <bold>default</bold> animations.',
   },
   missingAnimationColumnHeader: {
     id: `${scope}.missingAnimationColumnHeader`,
