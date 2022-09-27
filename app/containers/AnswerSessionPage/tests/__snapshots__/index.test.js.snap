@@ -27,7 +27,7 @@ exports[`<AnswerSessionPage /> Should render and match the snapshot 1`] = `
   color: unset;
 }
 
-.c3 {
+.c5 {
   width: auto;
   height: auto;
   display: block;
@@ -35,6 +35,18 @@ exports[`<AnswerSessionPage /> Should render and match the snapshot 1`] = `
   max-width: 600px;
   margin-right: 32px;
   margin-left: 32px;
+  color: unset;
+}
+
+.c9 {
+  width: auto;
+  height: auto;
+  display: block;
+  border-radius: 5px;
+  position: absolute;
+  margin-right: 24px;
+  margin-left: 24px;
+  bottom: 48px;
   color: unset;
 }
 
@@ -50,27 +62,56 @@ exports[`<AnswerSessionPage /> Should render and match the snapshot 1`] = `
   height: 100%;
 }
 
-.c6 {
+.c3 {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-flex-direction: column;
+  -ms-flex-direction: column;
+  flex-direction: column;
+  width: 100%;
+  -webkit-box-pack: center;
+  -webkit-justify-content: center;
+  -ms-flex-pack: center;
+  justify-content: center;
+  justify-items: center;
+  height: 100%;
+  position: relative;
+}
+
+.c10 {
   margin: 0;
   font-family: DM Sans;
   font-size: 15px;
   line-height: 150%;
-  margin-bottom: 50px;
   color: rgba(210,55,29,1);
   color: rgba(210,55,29,1);
-  text-align: center;
-}
-
-.c5 {
-  font-family: DM Sans;
-  font-size: 13px;
-  line-height: 130%;
-  margin-bottom: 50px;
-  color: #2F3850;
   text-align: center;
 }
 
 .c4 {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-flex-direction: row;
+  -ms-flex-direction: row;
+  flex-direction: row;
+  height: auto;
+  -webkit-align-content: center;
+  -ms-flex-line-pack: center;
+  align-content: center;
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  -webkit-flex-direction: column;
+  -ms-flex-direction: column;
+  flex-direction: column;
+}
+
+.c6 {
   margin: 0;
   font-family: DM Sans;
   font-size: 18px;
@@ -140,6 +181,22 @@ exports[`<AnswerSessionPage /> Should render and match the snapshot 1`] = `
 
 }
 
+@media only screen and (min-width:768px) {
+
+}
+
+@media only screen and (min-width:960px) {
+
+}
+
+@media only screen and (min-width:1170px) {
+
+}
+
+@media only screen and (min-width:1360px) {
+
+}
+
 @media only screen and (max-width:480px) {
   .c8 {
     width: 80%;
@@ -162,31 +219,40 @@ exports[`<AnswerSessionPage /> Should render and match the snapshot 1`] = `
     >
       <div
         class="c3"
+        height="100%"
       >
-        <h2
+        <div
           class="c4"
+          direction="column"
         >
-          Welcome!
-        </h2>
-        <p
-          class="c5"
+          <div
+            class="c5"
+          >
+            <h2
+              class="c6"
+            >
+              Let’s fill the session
+            </h2>
+          </div>
+          <button
+            class="c7 c8"
+            color="primary"
+            radius="100px"
+          >
+            Start session
+          </button>
+        </div>
+        <div
+          class="c9"
         >
-          Click the button below to start a new session.
-        </p>
-        <h3
-          class="c6"
-          color="#D2371D"
-        >
-          Please be aware that after clicking the button, audio may be played automatically and the content could change its position dynamically.
-        </h3>
+          <h3
+            class="c10"
+            color="#D2371D"
+          >
+            Please be aware that after clicking the button, audio may be played automatically and the content could change its position dynamically.
+          </h3>
+        </div>
       </div>
-      <button
-        class="c7 c8"
-        color="primary"
-        radius="100px"
-      >
-        Start Session
-      </button>
     </div>
   </div>
 </div>

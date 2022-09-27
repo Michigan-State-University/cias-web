@@ -67,7 +67,6 @@ import Box from 'components/Box';
 import Loader from 'components/Loader';
 import H2 from 'components/H2';
 import H3 from 'components/H3';
-import Text from 'components/Text';
 import Icon from 'components/Icon';
 import { ConfirmationModal } from 'components/Modal';
 import Img from 'components/Img';
@@ -651,26 +650,33 @@ export function AnswerSessionPage({
                 </Column>
               )}
               {!interventionStarted && !nextQuestionError && (
-                <>
-                  <Box mx={32} maxWidth={600}>
-                    <H2 textAlign="center" mb={50}>
-                      {formatMessage(messages.fillHeader)}
-                    </H2>
-                    <Text textAlign="center" mb={50}>
-                      {formatMessage(messages.clickToStart)}
-                    </Text>
-                    <H3 textAlign="center" color={themeColors.warning} mb={50}>
+                <Column justify="center" height="100%" position="relative">
+                  <Row direction="column" align="center">
+                    <Box mx={32} maxWidth={600}>
+                      <H2 textAlign="center" mb={50}>
+                        {formatMessage(messages.fillHeader)}
+                      </H2>
+                    </Box>
+                    <StyledButton
+                      loading={userSessionLoading || nextQuestionLoading}
+                      disabled={!previewPossible}
+                      onClick={startInterventionAsync}
+                      title={buttonText()}
+                      isDesktop={isDesktop}
+                    />
+                  </Row>
+                  <Box
+                    position="absolute"
+                    bottom={
+                      userSession?.liveChatEnabled && !isDesktop ? 90 : 48
+                    }
+                    mx={24}
+                  >
+                    <H3 textAlign="center" color={themeColors.warning}>
                       {formatMessage(messages.wcagWarning)}
                     </H3>
                   </Box>
-                  <StyledButton
-                    loading={userSessionLoading || nextQuestionLoading}
-                    disabled={!previewPossible}
-                    onClick={startInterventionAsync}
-                    title={buttonText()}
-                    isDesktop={isDesktop}
-                  />
-                </>
+                </Column>
               )}
               {interventionStarted && !nextQuestionError && (
                 <Box
