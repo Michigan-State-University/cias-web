@@ -34,8 +34,7 @@ export const ChatMessage = ({
   <Box
     width="100%"
     display="flex"
-    direction="column"
-    align={isMine ? 'end' : 'start'}
+    justify={isMine ? 'end' : 'start'}
     {...style}
   >
     <Box
@@ -43,17 +42,20 @@ export const ChatMessage = ({
       display="flex"
       direction="column"
       align={isMine ? 'end' : 'start'}
+      textAlign={isMine ? 'right' : 'left'}
     >
       {!hideSender && (
-        <Text
-          textAlign={isMine ? 'right' : 'left'}
-          color={themeColors.text}
-          textOpacity={0.5}
-          margin="0 12px 4px 12px"
-          lineHeight="12px"
-        >
-          {isMine ? <FormattedMessage {...messages.you} /> : senderName}
-        </Text>
+        <Box>
+          <Text
+            textAlign={isMine ? 'right' : 'left'}
+            color={themeColors.text}
+            textOpacity={0.5}
+            margin="0 12px 4px 12px"
+            lineHeight="12px"
+          >
+            {isMine ? <FormattedMessage {...messages.you} /> : senderName}
+          </Text>
+        </Box>
       )}
       <MessageContainer
         bg={isMine ? themeColors.primary : themeColors.highlight}
@@ -63,6 +65,7 @@ export const ChatMessage = ({
         lineHeight="18px"
         color={isMine ? colors.white : themeColors.text}
         textAlign="left"
+        width="fit-content"
       >
         <Interweave
           content={message}
