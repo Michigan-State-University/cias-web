@@ -13,9 +13,7 @@ import messages from '../messages';
 export function* changeEmail({ payload: { oldPassword, newEmail } }) {
   const requestURL = `/v1/auth`;
   try {
-    const {
-      data: { data },
-    } = yield call(axios.patch, requestURL, {
+    const { data } = yield call(axios.patch, requestURL, {
       current_password: oldPassword,
       email: newEmail,
     });

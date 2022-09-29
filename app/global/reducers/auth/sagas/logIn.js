@@ -31,9 +31,7 @@ function* login({ payload: { email, password } }) {
         headers: { 'Verification-Code': verificationCode },
       };
 
-    const {
-      data: { data },
-    } = yield axios.post(
+    const { data } = yield axios.post(
       requestURL,
       {
         email,

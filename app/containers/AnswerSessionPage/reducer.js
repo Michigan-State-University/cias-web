@@ -27,6 +27,9 @@ import {
   SET_CURRENT_BLOCK_INDEX,
   TOGGLE_TEXT_TRANSCRIPT,
   SET_TRANSITIONAL_USER_SESSION_ID,
+  VERIFY_PATIENT_DATA_REQUEST,
+  VERIFY_PATIENT_DATA_SUCCESS,
+  VERIFY_PATIENT_DATA_ERROR,
 } from './constants';
 
 const getEmptyFeedbackScreenSettings = () => ({
@@ -59,6 +62,8 @@ export const initialState = {
   showTextTranscript: false,
   transitionalUserSessionId: null,
   previousUserSessionId: null,
+  verifyPatientDataLoading: false,
+  verifyPatientDataError: null,
 };
 
 /* eslint-disable default-case, no-param-reassign */
@@ -167,6 +172,22 @@ const AnswerSessionPageReducer = (state = initialState, { payload, type }) =>
 
       case SET_TRANSITIONAL_USER_SESSION_ID: {
         draft.transitionalUserSessionId = payload.userSessionId;
+        break;
+      }
+
+      case VERIFY_PATIENT_DATA_REQUEST: {
+        draft.verifyPatientDataLoading = true;
+        break;
+      }
+      case VERIFY_PATIENT_DATA_SUCCESS: {
+        draft.verifyPatientDataLoading = false;
+        draft.verifyPatientDataError = null;
+        break;
+      }
+      case VERIFY_PATIENT_DATA_ERROR: {
+        draft.verifyPatientDataLoading = false;
+        draft.verifyPatientDataError = payload.error;
+        break;
       }
     }
   });

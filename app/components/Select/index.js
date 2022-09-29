@@ -25,9 +25,12 @@ const customStyles = ({
   bg,
   isDisabled,
   height,
-  placeholderColor,
   placeholderOpacity,
   hasError,
+  placeholderColorActive,
+  placeholderColorDisabled,
+  valueColorActive,
+  valueColorDisabled,
 }) => ({
   control: (provided, { isFocused }) => ({
     ...provided,
@@ -43,6 +46,8 @@ const customStyles = ({
     width: '100%',
     background: `${bg || 'auto'}`,
     cursor: isDisabled ? 'not-allowed' : 'pointer',
+    color:
+      (isDisabled ? valueColorDisabled : valueColorActive) ?? provided.color,
   }),
   option: (provided) => ({
     ...provided,
@@ -51,8 +56,20 @@ const customStyles = ({
   menuPortal: (provided) => ({ ...provided, zIndex: 999 }),
   placeholder: (provided) => ({
     ...provided,
-    color: placeholderColor ?? 'hsl(0, 0%, 40%)',
+    color:
+      (isDisabled ? placeholderColorDisabled : placeholderColorActive) ??
+      'hsl(0, 0%, 40%)',
     opacity: placeholderOpacity ?? '',
+  }),
+  singleValue: (provided) => ({
+    ...provided,
+    color:
+      (isDisabled ? valueColorDisabled : valueColorActive) ?? provided.color,
+  }),
+  multiValue: (provided) => ({
+    ...provided,
+    color:
+      (isDisabled ? valueColorDisabled : valueColorActive) ?? provided.color,
   }),
 });
 

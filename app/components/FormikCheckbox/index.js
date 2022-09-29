@@ -7,6 +7,7 @@
 import React, { memo } from 'react';
 import PropTypes from 'prop-types';
 import { useField } from 'formik';
+import isNil from 'lodash/isNil';
 
 import { themeColors } from 'theme';
 
@@ -19,7 +20,7 @@ function FormikCheckbox({ formikKey, children }) {
   const { error, touched } = meta;
   const { setValue, setTouched } = helpers;
 
-  const hasError = Boolean(touched && error);
+  const hasError = touched && !isNil(error);
 
   return (
     <FormikControlLayout touched={touched} error={error}>

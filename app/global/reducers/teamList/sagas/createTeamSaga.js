@@ -4,9 +4,8 @@ import axios from 'axios';
 
 import { formatMessage } from 'utils/intlOutsideReact';
 import objectToSnakeCase from 'utils/objectToSnakeCase';
+import { jsonApiToObject } from 'utils/jsonApiMapper';
 
-import { mapCurrentUser } from 'utils/mapResponseObjects';
-import { TeamBuilder } from 'models/Teams/TeamBuilder';
 import { createTeamSuccess, createTeamFailure } from '../actions';
 import { CREATE_TEAM_REQUEST } from '../constants';
 
@@ -15,23 +14,12 @@ import messages from './messages';
 function* createTeam({ payload: { name, userId } }) {
   const requestUrl = `/v1/teams`;
   try {
-    const {
-      data: { data, included },
-    } = yield axios.post(
+    const { data } = yield axios.post(
       requestUrl,
       objectToSnakeCase({ team: { name, userId } }),
     );
 
-    const mappedUsers = included.map((user) => mapCurrentUser(user));
-
-    const mappedData = new TeamBuilder()
-      .fromJson(data)
-      .withTeamAdmin(
-        mappedUsers.find(
-          ({ id }) => id === data.relationships?.team_admin?.data?.id,
-        ),
-      )
-      .build();
+    const mappedData = jsonApiToObject(data, 'team');
 
     yield put(createTeamSuccess(mappedData));
     yield call(toast.success, formatMessage(messages.createTeamSuccess));

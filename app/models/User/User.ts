@@ -1,5 +1,7 @@
 import { CamelToSnakeOmitId } from 'global/types/camelToSnake';
 
+import { HfhsPatientDetail } from 'models/HfhsPatient';
+
 export enum UserRoles {
   ADMIN = 'admin',
   RESEARCHER = 'researcher',
@@ -29,6 +31,7 @@ export interface User {
   teamId: Nullable<string>;
   teamName: Nullable<string>;
   quickExitEnabled: boolean;
+  hfhsPatientDetail?: Nullable<HfhsPatientDetail>;
 }
 
 export type UserDTO = CamelToSnakeOmitId<User>;

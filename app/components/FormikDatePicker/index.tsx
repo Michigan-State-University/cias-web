@@ -1,6 +1,7 @@
 import React, { PropsWithChildren } from 'react';
 import { useField } from 'formik';
 import DatePicker, { ReactDatePickerProps } from 'react-datepicker';
+import isNil from 'lodash/isNil';
 
 import { colors } from 'theme';
 
@@ -33,7 +34,7 @@ const FormikDatePicker = ({
   const { error, touched } = meta;
   const { setValue } = helpers;
 
-  const hasError = Boolean(touched && error);
+  const hasError = touched && !isNil(error);
 
   return (
     <FormikControlLayout

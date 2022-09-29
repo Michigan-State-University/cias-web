@@ -11,7 +11,7 @@ export type SharedProps<
   selectAnswer: (answer: V, selectedByUser?: boolean) => void;
   answerBody: V;
   questionIndex: number;
-  saveAnswer: () => void;
+  saveAnswer: (skipped?: boolean) => void;
   showError: (content: ToastContent, options?: ToastOptions) => void;
   feedbackScreenSettings: {
     showSpectrum: boolean;
@@ -22,6 +22,7 @@ export type SharedProps<
   isDesktop: boolean;
   isMobile: boolean;
   isMobilePreview: boolean;
+  isPreview?: boolean;
   previewMode: string;
   question: T;
   userSessionId?: string;

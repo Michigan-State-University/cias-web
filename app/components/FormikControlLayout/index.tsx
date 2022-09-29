@@ -23,7 +23,7 @@ const FormikControlLayout = ({
   children,
   ...columnStyleProps
 }: Props) => {
-  const hasError = Boolean(touched && error);
+  const showErrorMessage = touched && error;
 
   return (
     <Column {...columnStyleProps}>
@@ -35,7 +35,7 @@ const FormikControlLayout = ({
         </label>
       )}
       {children}
-      {hasError && <ErrorText>{error?.toString()}</ErrorText>}
+      {showErrorMessage && <ErrorText>{error.toString()}</ErrorText>}
     </Column>
   );
 };

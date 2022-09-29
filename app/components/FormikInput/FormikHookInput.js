@@ -7,6 +7,7 @@
 import React, { memo } from 'react';
 import PropTypes from 'prop-types';
 import { FormikProps } from 'formik';
+import isNil from 'lodash/isNil';
 
 import TransparentFormikInput from './TransparentFormikInput';
 
@@ -29,7 +30,7 @@ function FormikHookInput({
   const { error, touched } = meta;
 
   const shouldValidate = validateOnMount || touched;
-  const hasError = Boolean(shouldValidate && error);
+  const hasError = Boolean(shouldValidate && !isNil(error));
 
   const handleBlur = (event) => {
     onFormikBlur(event);

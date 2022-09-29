@@ -424,6 +424,7 @@ export function AnswerSessionPage({
       isAnimationOngoing,
       isDesktop,
       isMobile,
+      isPreview,
       previewMode,
       isMobilePreview: isPreview && previewMode !== DESKTOP_MODE,
       userSessionId: userSession?.id,

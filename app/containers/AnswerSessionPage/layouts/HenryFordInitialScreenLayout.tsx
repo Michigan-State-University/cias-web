@@ -1,7 +1,7 @@
-import React, { MutableRefObject, useRef } from 'react';
+import React, { MutableRefObject, useEffect, useMemo, useRef } from 'react';
 import { useIntl } from 'react-intl';
 import { Col, Container, Row, ScreenClassMap } from 'react-grid-system';
-import { Formik, FormikConfig } from 'formik';
+import { Form, Formik, FormikConfig, FormikProps } from 'formik';
 import * as Yup from 'yup';
 import { IntlShape } from 'react-intl/src/types';
 
@@ -9,19 +9,20 @@ import { colors, themeColors } from 'theme';
 import globalMessages from 'global/i18n/globalMessages';
 import { zipCodeRegex } from 'global/constants';
 
-import { HfhsPatientData, Sex } from 'models/HfhsPatient';
-import { HenryFordInitialScreenDTO } from 'models/Question';
+import { HfhsPatientData, HfhsPatientDetail, Sex } from 'models/HfhsPatient';
+import { ApiMessageError } from 'models/Api';
 
 import { requiredValidationSchema } from 'utils/validators';
+import { getUTCDateString } from 'utils/dateUtils';
 
 import Box from 'components/Box';
 import { SelectOption } from 'components/Select/types';
 import FormikInput from 'components/FormikInput';
 import FormikSelect from 'components/FormikSelect';
 import FormikDatePicker from 'components/FormikDatePicker';
+import Text from 'components/Text';
 
 import { ActionButtons } from '../components/ActionButtons';
-import { SharedProps } from '../components/sharedProps';
 import messages from './messages';
 
 const inputStyles = {
@@ -61,7 +62,7 @@ const schema = (formatMessage: IntlShape['formatMessage']) =>
     ),
   });
 
-const initialValues: PatientDataFormValues = {
+const emptyInitialValues: PatientDataFormValues = {
   firstName: '',
   lastName: '',
   sexOption: null,
@@ -72,12 +73,21 @@ const initialValues: PatientDataFormValues = {
 export type Props = {
   forceMobile?: boolean;
   disabled?: boolean;
-} & Partial<Pick<SharedProps<HenryFordInitialScreenDTO>, 'saveAnswer'>>;
+  showContinueButton?: boolean;
+  onSubmitPatientData?: (patientData: HfhsPatientData) => void;
+  verifying?: boolean;
+  verifyingError?: Nullable<ApiMessageError>;
+  hfhsPatientDetail?: Nullable<HfhsPatientDetail>;
+};
 
 const HenryFordInitialScreenLayout = ({
   forceMobile,
   disabled,
-  saveAnswer,
+  showContinueButton,
+  onSubmitPatientData,
+  verifying = false,
+  verifyingError,
+  hfhsPatientDetail,
 }: Props) => {
   const { formatMessage } = useIntl();
 
@@ -94,106 +104,149 @@ const HenryFordInitialScreenLayout = ({
     })),
   );
 
+  const initialValues: PatientDataFormValues = useMemo(() => {
+    if (!hfhsPatientDetail) return emptyInitialValues;
+    const { sex, dob, ...restValues } = hfhsPatientDetail;
+    return {
+      ...restValues,
+      sexOption: sexSelectOptions.current.find(({ value }) => value === sex),
+      dobDate: new Date(dob),
+    };
+  }, [hfhsPatientDetail]);
+
   const onSubmit: FormikConfig<PatientDataFormValues>['onSubmit'] = (
     values,
-    { setSubmitting },
   ) => {
-    if (saveAnswer) {
-      saveAnswer();
+    if (onSubmitPatientData) {
+      const { sexOption, dobDate, ...restValues } = values;
+      onSubmitPatientData({
+        ...restValues,
+        sex: sexOption!.value,
+        dob: getUTCDateString(dobDate!),
+      });
     }
-    setSubmitting(false);
   };
+
+  const formRef = useRef<FormikProps<PatientDataFormValues>>(null);
+
+  useEffect(() => {
+    if (verifyingError && formRef.current) {
+      formRef.current.setErrors({
+        firstName: '',
+        lastName: '',
+        sexOption: '',
+        dobDate: '',
+        zipCode: '',
+      });
+    }
+  }, [verifyingError]);
 
   return (
     <Formik
       validationSchema={schema(formatMessage)}
       initialValues={initialValues}
       onSubmit={onSubmit}
+      innerRef={formRef}
     >
-      {({ handleSubmit, isSubmitting, isValid }) => (
-        <Box my={24} mx={12} width="100%">
-          <Container fluid>
-            <Row gutterWidth={24} style={{ rowGap: '24px' }}>
-              <Col {...columnClassMap}>
-                <FormikInput
-                  formikKey="firstName"
-                  label={formatMessage(messages.firstName)}
-                  placeholder={formatMessage(messages.firstNamePlaceholder)}
-                  type="text"
-                  inputProps={{
-                    ...inputStyles,
-                    disabled,
-                  }}
+      {({ handleSubmit, isValid }) => (
+        <Form>
+          <Box my={24} mx={26}>
+            <Container fluid style={{ padding: 0 }}>
+              <Row gutterWidth={24} style={{ rowGap: '24px' }}>
+                <Col {...columnClassMap}>
+                  <FormikInput
+                    formikKey="firstName"
+                    label={formatMessage(messages.firstName)}
+                    placeholder={formatMessage(messages.firstNamePlaceholder)}
+                    type="text"
+                    inputProps={{
+                      ...inputStyles,
+                      disabled,
+                    }}
+                  />
+                </Col>
+                <Col {...columnClassMap}>
+                  <FormikInput
+                    formikKey="lastName"
+                    label={formatMessage(messages.lastName)}
+                    placeholder={formatMessage(messages.lastNamePlaceholder)}
+                    type="text"
+                    inputProps={{
+                      ...inputStyles,
+                      disabled,
+                    }}
+                  />
+                </Col>
+                <Col {...columnClassMap}>
+                  <FormikSelect
+                    formikKey="sexOption"
+                    label={formatMessage(messages.sex)}
+                    options={sexSelectOptions.current}
+                    submitOnChange={false}
+                    inputProps={{
+                      ...inputStyles,
+                      isDisabled: disabled,
+                      placeholder: formatMessage(messages.sexPlaceholder),
+                      placeholderOpacity: 0.54,
+                      placeholderColorActive: colors.bluewood,
+                      placeholderColorDisabled: colors.casper,
+                      valueColorDisabled: colors.casper,
+                    }}
+                  />
+                </Col>
+                <Col {...columnClassMap}>
+                  <FormikDatePicker
+                    formikKey="dobDate"
+                    label={formatMessage(messages.dateOfBirth)}
+                    placeholder={formatMessage(messages.dateOfBirthPlaceholder)}
+                    disabled={disabled}
+                    inputProps={{
+                      ...inputStyles,
+                    }}
+                    datePickerProps={{
+                      maxDate: new Date(),
+                    }}
+                  />
+                </Col>
+                <Col {...columnClassMap}>
+                  <FormikInput
+                    formikKey="zipCode"
+                    label={formatMessage(messages.zipCode)}
+                    placeholder={formatMessage(messages.zipCodePlaceholder)}
+                    type="text"
+                    inputProps={{
+                      ...inputStyles,
+                      disabled,
+                    }}
+                  />
+                </Col>
+              </Row>
+            </Container>
+            {verifyingError && (
+              <Text
+                color={themeColors.warning}
+                fontWeight="bold"
+                lineHeight="23px"
+                mt={32}
+              >
+                {formatMessage(messages.hfhsVerificationFailedMessage)}
+              </Text>
+            )}
+            {showContinueButton && (
+              <Box>
+                <ActionButtons
+                  renderSkipQuestionButton={false}
+                  skipQuestionButtonDisabled={false}
+                  onSkipQuestionClick={() => {}}
+                  renderContinueButton
+                  continueButtonDisabled={!isValid}
+                  continueButtonLoading={verifying}
+                  onContinueClick={handleSubmit}
                 />
-              </Col>
-              <Col {...columnClassMap}>
-                <FormikInput
-                  formikKey="lastName"
-                  label={formatMessage(messages.lastName)}
-                  placeholder={formatMessage(messages.lastNamePlaceholder)}
-                  type="text"
-                  inputProps={{
-                    ...inputStyles,
-                    disabled,
-                  }}
-                />
-              </Col>
-              <Col {...columnClassMap}>
-                <FormikSelect
-                  formikKey="sexOption"
-                  label={formatMessage(messages.sex)}
-                  options={sexSelectOptions.current}
-                  submitOnChange={false}
-                  inputProps={{
-                    ...inputStyles,
-                    isDisabled: disabled,
-                    placeholder: formatMessage(messages.sexPlaceholder),
-                    placeholderOpacity: 0.54,
-                    placeholderColor: disabled
-                      ? colors.casper
-                      : colors.bluewood,
-                  }}
-                />
-              </Col>
-              <Col {...columnClassMap}>
-                <FormikDatePicker
-                  formikKey="dobDate"
-                  label={formatMessage(messages.dateOfBirth)}
-                  placeholder={formatMessage(messages.dateOfBirthPlaceholder)}
-                  disabled={disabled}
-                  inputProps={{
-                    ...inputStyles,
-                  }}
-                />
-              </Col>
-              <Col {...columnClassMap}>
-                <FormikInput
-                  formikKey="zipCode"
-                  label={formatMessage(messages.zipCode)}
-                  placeholder={formatMessage(messages.zipCodePlaceholder)}
-                  type="text"
-                  inputProps={{
-                    ...inputStyles,
-                    disabled,
-                  }}
-                />
-              </Col>
-            </Row>
-          </Container>
-          {!disabled && (
-            <Box>
-              <ActionButtons
-                renderSkipQuestionButton={false}
-                skipQuestionButtonDisabled={false}
-                onSkipQuestionClick={() => {}}
-                renderContinueButton
-                continueButtonDisabled={!isValid}
-                continueButtonLoading={isSubmitting}
-                onContinueClick={handleSubmit}
-              />
-            </Box>
-          )}
-        </Box>
+              </Box>
+            )}
+          </Box>
+        </Form>
       )}
     </Formik>
   );

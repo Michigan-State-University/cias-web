@@ -1,7 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { injectIntl } from 'react-intl';
-import dayjs from 'dayjs';
 
 import ApprovableInput from 'components/Input/ApprovableInput';
 import Text from 'components/Text';
@@ -9,7 +8,7 @@ import Box from 'components/Box';
 
 import { themeColors } from 'theme';
 import calculateTimeZone from 'utils/calculateTimeZone';
-import { getUTCTime } from 'utils/dateUtils';
+import { getUTCTime, getUTCDateString } from 'utils/dateUtils';
 
 import Row from 'components/Row';
 import Column from 'components/Column';
@@ -24,9 +23,7 @@ const ExactDateOption = ({
   const timeInfoMessage = () =>
     `${formatMessage(messages.timeInfo)} ${calculateTimeZone()}`;
 
-  const parseDate = (date) => dayjs(date).format('YYYY-MM-DD');
-
-  const onChange = (changeValue) => setValue(parseDate(changeValue));
+  const onChange = (changeValue) => setValue(getUTCDateString(changeValue));
 
   return (
     <Column>

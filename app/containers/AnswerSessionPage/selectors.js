@@ -58,6 +58,15 @@ const makeSelectPreviousUserSessionId = () =>
     (substate) => substate.previousUserSessionId,
   );
 
+const makeSelectVerifyPatientDataState = () =>
+  createSelector(
+    selectAnswerSessionPageDomain,
+    ({ verifyPatientDataLoading, verifyPatientDataError }) => ({
+      loading: verifyPatientDataLoading,
+      error: verifyPatientDataError,
+    }),
+  );
+
 export default makeSelectAnswerSessionPage;
 export {
   selectAnswerSessionPageDomain,
@@ -68,4 +77,5 @@ export {
   makeSelectCurrentBlockIndex,
   makeSelectShowTextTranscript,
   makeSelectPreviousUserSessionId,
+  makeSelectVerifyPatientDataState,
 };

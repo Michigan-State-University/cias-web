@@ -1,4 +1,5 @@
 import pick from 'lodash/pick';
+import { jsonApiToObject } from './jsonApiMapper';
 
 export const mapQuestionToStateObject = (question) => ({
   ...question.attributes,
@@ -19,25 +20,12 @@ export const mapAccessToStateObject = ({ user_id: id, email }) => ({
   email,
 });
 
-export const mapCurrentUser = ({ id, attributes }) => ({
-  id,
-  firstName: attributes.first_name,
-  lastName: attributes.last_name,
-  fullName: attributes.full_name,
-  email: attributes.email,
-  roles: attributes.roles,
-  avatar: attributes.avatar_url,
-  timeZone: attributes.time_zone,
-  active: attributes.active,
-  phone: attributes.phone,
-  teamId: attributes.team_id,
-  teamName: attributes.team_name,
-  emailNotification: attributes.email_notification,
-  smsNotification: attributes.sms_notification,
-  feedbackCompleted: attributes.feedback_completed,
-  organizableId: attributes.organizable_id,
-  quickExitEnabled: attributes.quick_exit_enabled,
-});
+export const mapCurrentUser = (data) => {
+  const mappedUser = jsonApiToObject(data, 'user');
+  mappedUser.avatar = mappedUser?.avatarUrl;
+  delete mappedUser.avatarUrl;
+  return mappedUser;
+};
 
 export const pickUserAttributes = (user) =>
   pick(user, [
@@ -57,6 +45,7 @@ export const pickUserAttributes = (user) =>
     'smsNotification',
     'feedbackCompleted',
     'quickExitEnabled',
+    'hfhsPatientDetail',
   ]);
 
 export const mapTeam = (team) => ({

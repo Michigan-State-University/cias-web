@@ -44,6 +44,7 @@ import {
   VERIFICATION_CODE_REQUEST,
   VERIFICATION_CODE_SUCCESS,
   VERIFICATION_CODE_ERROR,
+  SAVE_HFHS_PATIENT_DETAIL,
 } from './constants';
 
 export const initialState = {
@@ -283,6 +284,12 @@ export const authReducer = (state = initialState, { type, payload }) =>
       case VERIFICATION_CODE_ERROR:
         draft.loaders.verificationCodeLoading = false;
         draft.errors.verificationCodeError = payload.error;
+        break;
+
+      case SAVE_HFHS_PATIENT_DETAIL:
+        if (draft.user) {
+          draft.user.hfhsPatientDetail = payload.hfhsPatientDetail;
+        }
         break;
     }
   });

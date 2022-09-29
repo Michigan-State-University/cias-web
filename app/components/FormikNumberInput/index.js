@@ -7,6 +7,7 @@
 import React, { memo } from 'react';
 import PropTypes from 'prop-types';
 import { useField } from 'formik';
+import isNil from 'lodash/isNil';
 
 import { Input } from 'components/Input';
 import { formatIncompletePhoneNumber } from 'libphonenumber-js/mobile';
@@ -26,7 +27,7 @@ function FormikNumberInput({
   const [field, meta, helpers] = useField(formikKey);
   const { value, onBlur } = field;
   const { error, touched } = meta;
-  const hasError = touched && error && (required || value.length > 0);
+  const hasError = touched && !isNil(error) && (required || value.length > 0);
   const { setValue, setTouched } = helpers;
 
   const handleChange = (inputValue) => {

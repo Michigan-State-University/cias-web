@@ -13,7 +13,10 @@ import { logInGuest } from 'global/reducers/auth/sagas/logInGuest';
 import LocalStorageService from 'utils/localStorageService';
 import objectToSnakeCase from 'utils/objectToSnakeCase';
 import { makeSelectLocation } from 'containers/App/selectors';
-import { resetPhoneNumberPreview } from 'global/reducers/auth/actions';
+import {
+  resetPhoneNumberPreview,
+  saveHfhsPatientDetail,
+} from 'global/reducers/auth/actions';
 import { jsonApiToObject } from 'utils/jsonApiMapper';
 import objectToCamelKebabCase from 'utils/objectToCamelKebabCase';
 
@@ -24,6 +27,7 @@ import {
   CREATE_USER_SESSION_REQUEST,
   NEXT_QUESTION_REQUEST,
   SAVE_QUICK_EXIT_EVENT_REQUEST,
+  VERIFY_PATIENT_DATA_REQUEST,
 } from './constants';
 import {
   submitAnswerSuccess,
@@ -37,8 +41,15 @@ import {
   createUserSessionRequest,
   changeUserSessionId,
   setTransitionalUserSessionId,
+  verifyPatientDataError,
+  verifyPatientDataSuccess,
+  submitAnswer,
 } from './actions';
-import { makeSelectAnswers, makeSelectCurrentQuestion } from './selectors';
+import {
+  makeSelectAnswers,
+  makeSelectCurrentQuestion,
+  makeSelectUserSession,
+} from './selectors';
 import messages from './messages';
 
 function* submitAnswersAsync({
@@ -204,6 +215,38 @@ function* saveQuickExitEvent({ payload: { userSessionId, isPreview } }) {
   });
 }
 
+function* verifyPatientData({ payload }) {
+  const requestUrl = '/v1/henry_ford/verify';
+
+  const question = yield select(makeSelectCurrentQuestion());
+  const userSession = yield select(makeSelectUserSession());
+
+  try {
+    const { data } = yield axios.post(requestUrl, objectToSnakeCase(payload));
+
+    const hfhsPatientDetail = jsonApiToObject(data, 'hfhsPatientDetail');
+    yield put(saveHfhsPatientDetail(hfhsPatientDetail));
+    yield put(verifyPatientDataSuccess());
+
+    if (!question || !userSession) return;
+    const { id: questionId, type, settings } = question;
+    const { id: userSessionId, sessionId } = userSession;
+
+    yield put(
+      submitAnswer(
+        questionId,
+        settings?.required ?? false,
+        type,
+        sessionId,
+        userSessionId,
+        false,
+      ),
+    );
+  } catch (error) {
+    yield put(verifyPatientDataError(error));
+  }
+}
+
 // Individual exports for testing
 export default function* AnswerSessionPageSaga() {
   yield takeLatest(SUBMIT_ANSWER_REQUEST, submitAnswersAsync);
@@ -211,6 +254,7 @@ export default function* AnswerSessionPageSaga() {
   yield takeLatest(CREATE_USER_SESSION_REQUEST, createUserSession);
   yield takeLatest(NEXT_QUESTION_REQUEST, nextQuestion);
   yield takeLatest(SAVE_QUICK_EXIT_EVENT_REQUEST, saveQuickExitEvent);
+  yield takeLatest(VERIFY_PATIENT_DATA_REQUEST, verifyPatientData);
 }
 
 export function* redirectToPreviewSaga() {

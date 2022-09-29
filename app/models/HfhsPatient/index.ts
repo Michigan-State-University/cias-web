@@ -1,2 +1,2 @@
-export * from './HfhsPatientData';
+export * from './HfhsPatient';
 export * from './Sex';

@@ -29,6 +29,9 @@ import {
   TOGGLE_TEXT_TRANSCRIPT,
   SET_TRANSITIONAL_USER_SESSION_ID,
   SAVE_QUICK_EXIT_EVENT_REQUEST,
+  VERIFY_PATIENT_DATA_REQUEST,
+  VERIFY_PATIENT_DATA_SUCCESS,
+  VERIFY_PATIENT_DATA_ERROR,
 } from './constants';
 
 export const selectAnswer = (payload) => actionBuilder(SELECT_ANSWER, payload);
@@ -113,3 +116,10 @@ export const setTransitionalUserSessionId = (userSessionId) =>
 
 export const saveQuickExitEventRequest = (userSessionId, isPreview) =>
   actionBuilder(SAVE_QUICK_EXIT_EVENT_REQUEST, { userSessionId, isPreview });
+
+export const verifyPatientDataRequest = (hfhsPatientData) =>
+  actionBuilder(VERIFY_PATIENT_DATA_REQUEST, { hfhsPatientData });
+export const verifyPatientDataSuccess = () =>
+  actionBuilder(VERIFY_PATIENT_DATA_SUCCESS, {});
+export const verifyPatientDataError = (error) =>
+  actionBuilder(VERIFY_PATIENT_DATA_ERROR, { error });

@@ -6,6 +6,7 @@
 
 import React, { memo, ReactElement } from 'react';
 import { useField } from 'formik';
+import isNil from 'lodash/isNil';
 
 import InputComponent from './InputComponent';
 import FormikHookInput from './FormikHookInput';
@@ -34,7 +35,7 @@ function FormikInput({
   const { value, onBlur, onChange } = field;
   const { error, touched } = meta;
   const { setValue } = helper;
-  const hasError = Boolean(touched && error);
+  const hasError = touched && !isNil(error);
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     if (validator && validator(e.target.value)) {

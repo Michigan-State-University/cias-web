@@ -72,6 +72,13 @@ export const SET_TRANSITIONAL_USER_SESSION_ID =
 export const SAVE_QUICK_EXIT_EVENT_REQUEST =
   'app/AnswerSessionPage/SAVE_QUICK_EXIT_EVENT_REQUEST';
 
+export const VERIFY_PATIENT_DATA_REQUEST =
+  'app/AnswerSessionPage/VERIFY_PATIENT_DATA_REQUEST';
+export const VERIFY_PATIENT_DATA_SUCCESS =
+  'app/AnswerSessionPage/VERIFY_PATIENT_DATA_SUCCESS';
+export const VERIFY_PATIENT_DATA_ERROR =
+  'app/AnswerSessionPage/VERIFY_PATIENT_DATA_ERROR';
+
 export const QUESTION_TITLE_ID = 'question-title';
 
 export const QUESTION_SUBTITLE_ID = 'question-subtitle';

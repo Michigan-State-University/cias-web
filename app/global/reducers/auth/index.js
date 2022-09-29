@@ -6,51 +6,8 @@ export {
   ACCOUNT_CONFIRMATION_SUCCESS,
   RESET_REDUCER,
 } from './constants';
-export {
-  logIn,
-  logOut,
-  editUserRequest,
-  changePasswordRequest,
-  changeErrorStatus,
-  addAvatarRequest,
-  deleteAvatarRequest,
-  changeEmailRequest,
-  changePhoneNumberRequest,
-  confirmPhoneNumberRequest,
-  sendSmsTokenRequest,
-  logInGuestRequest,
-  editPhoneNumberPreviewRequest,
-  loginRequest,
-  verificationCodeRequest,
-  fetchSelfDetailsRequest,
-  fetchSelfDetailsSuccess,
-} from './actions';
+export * from './actions';
 export { authReducer, initialState } from './reducer';
-export {
-  makeSelectAuth,
-  makeSelectUser,
-  makeSelectErrors,
-  makeSelectLoaders,
-  makeSelectUserRoles,
-  makeSelectPhoneNumberPreview,
-  makeSelectLoginFormData,
-  makeSelectVerificationNeeded,
-  makeSelectVerificationSuccess,
-  makeSelectUserId,
-} from './selectors';
-export {
-  logOutSaga,
-  editUserSaga,
-  changePasswordSaga,
-  addAvatarSaga,
-  deleteAvatarSaga,
-  changeEmailSaga,
-  changePhoneNumberSaga,
-  confirmPhoneNumberSaga,
-  sendSmsTokenSaga,
-  editPhoneNumberQuestionSaga,
-  loginSaga,
-  verifyCodeSaga,
-  fetchSelfDetailsSaga,
-} from './sagas';
+export * from './selectors';
+export * from './sagas';
 export { UserStorageController } from './UserStorageController';

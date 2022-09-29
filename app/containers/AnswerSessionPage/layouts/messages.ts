@@ -148,4 +148,9 @@ export default defineMessages({
     id: `${scope}.zipCodePlaceholder`,
     defaultMessage: 'Enter your ZIP Code here',
   },
+  hfhsVerificationFailedMessage: {
+    id: `${scope}.hfhsVerificationFailedMessage`,
+    defaultMessage:
+      'Oops, we couldn’t find your data in the Henry Ford database. Check if you provided the correct data or enter your medical number below.',
+  },
 });

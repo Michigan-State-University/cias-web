@@ -96,7 +96,7 @@ const HenryFordQuestion = ({ isNarratorTab, interventionStatus }: Props) => {
         {({ item, index, dragHandleProps }) => {
           const onUpdateAnswer = (
             updateValue: Partial<HenryFordQuestionDTO['body']['data'][0]>,
-          ) => updateAnswer(index, { ...item, updateValue });
+          ) => updateAnswer(index, { ...item, ...updateValue });
           return (
             <Row>
               <HoverableBox

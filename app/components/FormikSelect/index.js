@@ -7,6 +7,7 @@
 import React, { memo } from 'react';
 import PropTypes from 'prop-types';
 import { useField, useFormikContext } from 'formik';
+import isNil from 'lodash/isNil';
 
 import Select from 'components/Select';
 import FormikControlLayout from 'components/FormikControlLayout';
@@ -24,7 +25,7 @@ function FormikSelect({
   const [field, meta, helpers] = useField(formikKey);
   const { error, touched } = meta;
   const { setValue } = helpers;
-  const hasError = touched && error;
+  const hasError = touched && !isNil(error);
 
   const onChange = async (e) => {
     if (submitOnChange) {
