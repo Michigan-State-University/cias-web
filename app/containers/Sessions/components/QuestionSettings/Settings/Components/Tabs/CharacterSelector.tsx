@@ -23,7 +23,7 @@ const Component = ({ value, disabled, onChange }: Props) => {
 
   return (
     <FullWidthContainer>
-      <Row>
+      <Row style={{ rowGap: '16px' }}>
         <Col>
           <CharacterRadio
             character={CharacterType.PEEDY}
@@ -35,9 +35,9 @@ const Component = ({ value, disabled, onChange }: Props) => {
 
         <Col>
           <CharacterRadio
-            character={CharacterType.FRIDA}
-            onChange={setCharacter(CharacterType.FRIDA)}
-            checked={value === CharacterType.FRIDA}
+            character={CharacterType.EMMI}
+            onChange={setCharacter(CharacterType.EMMI)}
+            checked={value === CharacterType.EMMI}
             disabled={disabled}
           />
         </Col>

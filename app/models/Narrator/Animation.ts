@@ -15,6 +15,11 @@ export enum BodyAutoRestAnimation {
   OPEN_BOOK = 'openBook',
   CLOSE_BOOK = 'closeBook',
   ANNOUNCE = 'announce',
+  POINT_LEFT_UP = 'pointLeftUp',
+  POINT_RIGHT_UP = 'pointRightUp',
+  REST_SHOULDER_RUBBING = 'restShoulderRubbing',
+  REST_STRETCHING = 'restStretching',
+  REST_WEIGHT_SHIFT = 'restWeightShift',
 }
 export enum BodyReverseAnimation {
   UNCERTAIN = 'uncertain',
@@ -42,7 +47,10 @@ export const BodyAnimation = {
 export enum HeadAutoRestAnimation {
   BLINK = 'blink',
   ACKNOWLEDGE = 'acknowledge',
+  ACKNOWLEDGE_THOUGHTFUL = 'acknowledgeThoughtful',
   DECLINE = 'decline',
+  DECLINE_ANNOYED = 'declineAnnoyed',
+  DECLINE_THOUGHTFUL = 'declineThoughtful',
   PLEASED = 'pleased',
   HEAR_BOTH_EARS = 'hearBothEars',
   YAWN = 'yawn',

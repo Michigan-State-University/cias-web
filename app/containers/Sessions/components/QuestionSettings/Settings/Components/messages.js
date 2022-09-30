@@ -206,8 +206,8 @@ export default defineMessages({
     id: `${scope}.${CharacterType.PEEDY}`,
     defaultMessage: 'Peedy',
   },
-  [CharacterType.FRIDA]: {
-    id: `${scope}.${CharacterType.FRIDA}`,
-    defaultMessage: 'Frida',
+  [CharacterType.EMMI]: {
+    id: `${scope}.${CharacterType.EMMI}`,
+    defaultMessage: 'Emmi',
   },
 });

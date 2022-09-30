@@ -3,13 +3,16 @@ import { useIntl } from 'react-intl';
 
 import { CharacterType } from 'models/Character';
 
-import { Col, FullWidthContainer, Row } from 'components/ReactGridSystem';
 import Icon from 'components/Icon';
 import Text from 'components/Text';
+import Row from 'components/Row';
+import Box from 'components/Box';
 
 import { SelectCharacterRadio } from './styled';
 import { characterToIconMap } from './constants';
 import messages from '../messages';
+
+const characterIconSize = 40;
 
 type Props = {
   character: CharacterType;
@@ -28,19 +31,20 @@ const Component = ({ character, checked, disabled, onChange }: Props) => {
       checked={checked}
       disabled={disabled}
     >
-      <FullWidthContainer>
-        <Row align="center">
-          <Col xs={6}>
-            <Text whiteSpace="nowrap">
-              {formatMessage(messages[character])}
-            </Text>
-          </Col>
+      <Row align="center" justify="between">
+        <Box>
+          <Text whiteSpace="nowrap">{formatMessage(messages[character])}</Text>
+        </Box>
 
-          <Col>
-            <Icon src={characterToIconMap[character]} />
-          </Col>
-        </Row>
-      </FullWidthContainer>
+        <Box>
+          <Icon
+            src={characterToIconMap[character]}
+            // @ts-ignore
+            height={characterIconSize}
+            width={characterIconSize}
+          />
+        </Box>
+      </Row>
     </SelectCharacterRadio>
   );
 };

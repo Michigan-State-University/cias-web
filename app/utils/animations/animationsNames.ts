@@ -36,11 +36,13 @@ const peedyAutoRestBodyAnimations = [
   BodyAutoRestAnimation.ANNOUNCE,
 ];
 
-const fridaAutoResetBodyAnimations = [
+const emmiAutoRestBodyAnimations = [
   BodyAutoRestAnimation.STAND_STILL,
-  BodyAutoRestAnimation.CONFUSED,
-  BodyAutoRestAnimation.DO_MAGIC,
-  BodyAutoRestAnimation.ANNOUNCE,
+  BodyAutoRestAnimation.POINT_LEFT_UP,
+  BodyAutoRestAnimation.POINT_RIGHT_UP,
+  BodyAutoRestAnimation.REST_SHOULDER_RUBBING,
+  BodyAutoRestAnimation.REST_STRETCHING,
+  BodyAutoRestAnimation.REST_WEIGHT_SHIFT,
 ];
 
 const characterToAutoRestBodyAnimationsMap: Record<
@@ -48,7 +50,7 @@ const characterToAutoRestBodyAnimationsMap: Record<
   BodyAutoRestAnimation[]
 > = {
   [CharacterType.PEEDY]: peedyAutoRestBodyAnimations,
-  [CharacterType.FRIDA]: fridaAutoResetBodyAnimations,
+  [CharacterType.EMMI]: emmiAutoRestBodyAnimations,
 };
 
 const peedyReverseBodyAnimations = [
@@ -65,10 +67,9 @@ const peedyReverseBodyAnimations = [
   BodyReverseAnimation.THINK,
 ];
 
-const fridaReverseBodyAnimations = [
+const emmiReverseBodyAnimations = [
+  BodyReverseAnimation.THINK,
   BodyReverseAnimation.UNCERTAIN,
-  BodyReverseAnimation.WAVE,
-  BodyReverseAnimation.CONGRATULATE,
 ];
 
 const characterToReverseBodyAnimationsMap: Record<
@@ -76,7 +77,7 @@ const characterToReverseBodyAnimationsMap: Record<
   BodyReverseAnimation[]
 > = {
   [CharacterType.PEEDY]: peedyReverseBodyAnimations,
-  [CharacterType.FRIDA]: fridaReverseBodyAnimations,
+  [CharacterType.EMMI]: emmiReverseBodyAnimations,
 };
 
 const peedyAutoRestHeadAnimations = [
@@ -89,16 +90,20 @@ const peedyAutoRestHeadAnimations = [
   HeadAutoRestAnimation.EAT_CRACKER,
 ];
 
-const fridaAutoRestHeadAnimations = [
-  HeadAutoRestAnimation.BLINK,
+const emmiAutoRestHeadAnimations = [
   HeadAutoRestAnimation.ACKNOWLEDGE,
+  HeadAutoRestAnimation.ACKNOWLEDGE_THOUGHTFUL,
+  HeadAutoRestAnimation.BLINK,
+  HeadAutoRestAnimation.DECLINE,
+  HeadAutoRestAnimation.DECLINE_ANNOYED,
+  HeadAutoRestAnimation.DECLINE_THOUGHTFUL,
 ];
 const characterToAutoRestHeadAnimationsMap: Record<
   CharacterType,
   HeadAutoRestAnimation[]
 > = {
   [CharacterType.PEEDY]: peedyAutoRestHeadAnimations,
-  [CharacterType.FRIDA]: fridaAutoRestHeadAnimations,
+  [CharacterType.EMMI]: emmiAutoRestHeadAnimations,
 };
 
 const peedyReverseHeadAnimations = [
@@ -115,14 +120,14 @@ const peedyReverseHeadAnimations = [
   HeadReverseAnimation.GLANCE_RIGHT,
 ];
 
-const fridaReverseHeadAnimations: HeadReverseAnimation[] = [];
+const emmiReverseHeadAnimations: HeadReverseAnimation[] = [];
 
 const characterToReverseHeadAnimationsMap: Record<
   CharacterType,
   HeadReverseAnimation[]
 > = {
   [CharacterType.PEEDY]: peedyReverseHeadAnimations,
-  [CharacterType.FRIDA]: fridaReverseHeadAnimations,
+  [CharacterType.EMMI]: emmiReverseHeadAnimations,
 };
 
 const speechAnimationsMapper: Record<SpeechAnimation, TSpeechAnimation> = {
@@ -225,18 +230,18 @@ const speechAnimationsMapper: Record<SpeechAnimation, TSpeechAnimation> = {
   },
 };
 
-const fridaSpeechAnimations = [SpeechAnimation.REST];
+const emmiSpeechAnimations = [SpeechAnimation.REST];
 
 const characterToSpeechAnimationsMap: Record<CharacterType, SpeechAnimation[]> =
   {
     [CharacterType.PEEDY]: keys(speechAnimationsMapper) as SpeechAnimation[],
-    [CharacterType.FRIDA]: fridaSpeechAnimations,
+    [CharacterType.EMMI]: emmiSpeechAnimations,
   };
 
 const moveAnimations = [MoveAnimation.MOVE_LEFT, MoveAnimation.MOVE_RIGHT];
 const characterToMoveAnimationsMap: Record<CharacterType, MoveAnimation[]> = {
   [CharacterType.PEEDY]: moveAnimations,
-  [CharacterType.FRIDA]: moveAnimations,
+  [CharacterType.EMMI]: moveAnimations,
 };
 
 const getBodyAnimations = (character: CharacterType): BodyAnimation[] => [

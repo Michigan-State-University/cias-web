@@ -31,6 +31,14 @@ export default defineMessages({
     id: `${scope}.pointDown`,
     defaultMessage: 'Point down',
   },
+  pointLeftUp: {
+    id: `${scope}.pointLeftUp`,
+    defaultMessage: 'Point left up',
+  },
+  pointRightUp: {
+    id: `${scope}.pointRightUp`,
+    defaultMessage: 'Point right up',
+  },
   explain: {
     id: `${scope}.explain`,
     defaultMessage: 'Explain',
@@ -38,6 +46,18 @@ export default defineMessages({
   rest: {
     id: `${scope}.rest`,
     defaultMessage: 'Rest',
+  },
+  restShoulderRubbing: {
+    id: `${scope}.restShoulderRubbing`,
+    defaultMessage: 'Rest shoulder rubbing',
+  },
+  restStretching: {
+    id: `${scope}.restStretching`,
+    defaultMessage: 'Rest stretching',
+  },
+  restWeightShift: {
+    id: `${scope}.restWeightShift`,
+    defaultMessage: 'Rest weight shift',
   },
   read: {
     id: `${scope}.read`,
@@ -131,6 +151,10 @@ export default defineMessages({
     id: `${scope}.acknowledge`,
     defaultMessage: 'Acknowledge',
   },
+  acknowledgeThoughtful: {
+    id: `${scope}.acknowledgeThoughtful`,
+    defaultMessage: 'Acknowledge thoughtful',
+  },
   browsUp: {
     id: `${scope}.browsUp`,
     defaultMessage: 'Brows up',
@@ -138,6 +162,14 @@ export default defineMessages({
   decline: {
     id: `${scope}.decline`,
     defaultMessage: 'Decline',
+  },
+  declineAnnoyed: {
+    id: `${scope}.declineAnnoyed`,
+    defaultMessage: 'Decline annoyed',
+  },
+  declineThoughtful: {
+    id: `${scope}.declineThoughtful`,
+    defaultMessage: 'Decline thoughtful',
   },
   pleased: {
     id: `${scope}.pleased`,

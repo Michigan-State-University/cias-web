@@ -1,4 +1,4 @@
 export enum CharacterType {
-  FRIDA = 'frida',
+  EMMI = 'emmi',
   PEEDY = 'peedy',
 }
