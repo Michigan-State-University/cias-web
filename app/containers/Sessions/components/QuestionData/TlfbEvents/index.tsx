@@ -44,6 +44,7 @@ const TlfbEvents = ({ statusMetadata: { isEditable } }: TlfbEventsProps) => {
             screen_title: screenTitle,
             screen_question: screenQuestion,
           },
+          original_text: originalText,
         },
       ],
     },
@@ -69,6 +70,7 @@ const TlfbEvents = ({ statusMetadata: { isEditable } }: TlfbEventsProps) => {
           richText
           richTextBlurTransparentBorder={false}
           autoSize
+          originalTextHover={originalText?.screen_title}
         />
       </Row>
 
@@ -85,6 +87,7 @@ const TlfbEvents = ({ statusMetadata: { isEditable } }: TlfbEventsProps) => {
         richText
         richTextBlurTransparentBorder={false}
         autoSize
+        originalTextHover={originalText?.screen_question}
       />
     </Box>
   );
