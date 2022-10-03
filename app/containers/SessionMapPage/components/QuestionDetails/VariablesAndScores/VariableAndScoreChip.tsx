@@ -1,18 +1,20 @@
 import React from 'react';
 
 import { colors } from 'theme';
-import { ColoredChip, DoubleColoredChip } from 'components/ColoredChip';
+import { ColoredChip, MultiColoredChip } from 'components/ColoredChip';
 
 type Props = {
   variable: Nullable<string>;
   score?: Nullable<string>;
   variableOnly?: boolean;
+  hsValue?: Nullable<string>;
 };
 
 const VariableAndScoreChip = ({
   variable,
   score,
   variableOnly,
+  hsValue,
 }: Props): JSX.Element => {
   if (variableOnly) {
     return (
@@ -20,8 +22,21 @@ const VariableAndScoreChip = ({
     );
   }
 
+  if (hsValue) {
+    return (
+      <MultiColoredChip
+        leftChipColor={colors.jungleGreen}
+        leftChipContent={variable || '-'}
+        rightChipColor={colors.kleinBlue}
+        rightChipContent={hsValue}
+        middleChipColor={colors.azure}
+        middleChipContent={score || '-'}
+      />
+    );
+  }
+
   return (
-    <DoubleColoredChip
+    <MultiColoredChip
       leftChipColor={colors.jungleGreen}
       leftChipContent={variable || '-'}
       rightChipColor={colors.azure}
