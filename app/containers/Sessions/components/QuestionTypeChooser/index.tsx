@@ -25,15 +25,17 @@ import {
   henryFordQuestion,
 } from 'models/Session/QuestionTypes';
 import { AddableGroups } from 'models/QuestionGroup';
+import { Question } from 'models/Question';
 
 import { borders, boxShadows, colors, fontSizes } from 'theme';
 
 import { useDropdownPositionHelper } from 'utils/useDropdownPositionHelper';
 import { useChildSizeCalculator } from 'utils/useChildSizeCalculator';
-import QuestionType from 'models/Session/QuestionType';
+
 import DefaultButtonComponent from './DefaultButtonComponent';
 import messages from './messages';
 import NewItem from './NewItem';
+import { ConditionalAppearanceConfig } from './types';
 
 type Props = {
   onClick: (type: string) => void;
@@ -85,44 +87,34 @@ const QuestionTypeChooser = ({
 
   const isVisible = visible && height;
 
-  const conditionalQuestions = useMemo(
-    () => [
-      {
-        id: nameQuestion.id,
-        available: !nameQuestionExists,
-        message: formatMessage(messages.questionAvailableOncePerSession),
+  const conditionalAppearanceConfigs: Record<
+    Question['id'],
+    ConditionalAppearanceConfig
+  > = useMemo(
+    () => ({
+      [nameQuestion.id]: {
+        disabled: nameQuestionExists,
+        disabledMessage: messages.questionAvailableOncePerSession,
       },
-      {
-        id: participantReport.id,
-        available: !participantReportExists,
-        message: formatMessage(messages.questionAvailableOncePerSession),
+      [participantReport.id]: {
+        disabled: participantReportExists,
+        disabledMessage: messages.questionAvailableOncePerSession,
       },
-      {
-        id: phoneQuestion.id,
-        available: !phoneQuestionExists,
-        message: formatMessage(messages.questionAvailableOncePerSession),
+      [phoneQuestion.id]: {
+        disabled: phoneQuestionExists,
+        disabledMessage: messages.questionAvailableOncePerSession,
       },
-      {
-        id: henryFordInitialScreen.id,
-        available: !henryFordInitialScreenExists && hasHfhsAccess,
-        message: formatMessage(
-          messages[
-            henryFordInitialScreenExists
-              ? 'questionAvailableOncePerSession'
-              : 'noHfhsAccess'
-          ],
-        ),
+      [henryFordInitialScreen.id]: {
+        hidden: !hasHfhsAccess,
+        disabled: henryFordInitialScreenExists,
+        disabledMessage: messages.questionAvailableOncePerSession,
       },
-      {
-        id: henryFordQuestion.id,
-        available: henryFordInitialScreenExists && hasHfhsAccess,
-        message: formatMessage(
-          messages[
-            hasHfhsAccess ? 'hfhsInitialScreenRequired' : 'noHfhsAccess'
-          ],
-        ),
+      [henryFordQuestion.id]: {
+        hidden: !hasHfhsAccess,
+        disabled: !henryFordInitialScreenExists,
+        disabledMessage: messages.hfhsInitialScreenRequired,
       },
-    ],
+    }),
     [
       nameQuestionExists,
       participantReportExists,
@@ -131,13 +123,6 @@ const QuestionTypeChooser = ({
       hasHfhsAccess,
     ],
   );
-
-  const disabledQuestions = conditionalQuestions.map(
-    (question) => !question.available && question.id,
-  );
-
-  const getDisabledQuestionMessage = (id: QuestionType['id']) =>
-    conditionalQuestions.find((question) => question.id === id)?.message;
 
   return (
     <Row data-cy="question-type-chooser">
@@ -182,8 +167,7 @@ const QuestionTypeChooser = ({
                   handleClick={() => handleClick(id)}
                   // @ts-ignore
                   title={formatMessage(globalMessages.questionTypes[id])}
-                  disabled={disabledQuestions.includes(id)}
-                  disabledMessage={getDisabledQuestionMessage(id)}
+                  conditionalAppearanceConfig={conditionalAppearanceConfigs[id]}
                 />
               ))}
               {AddableGroups.map(({ color, id }) => (
