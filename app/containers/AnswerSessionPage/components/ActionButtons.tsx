@@ -7,15 +7,33 @@ import { Button } from 'components/Button';
 import messages from '../messages';
 import { SkipQuestionButton } from './SkipQuestionButton';
 
-export type ActionButtonsProps = {
-  renderSkipQuestionButton: boolean;
-  skipQuestionButtonDisabled: boolean;
-  onSkipQuestionClick: () => void;
-  renderContinueButton: boolean;
-  continueButtonDisabled: boolean;
-  continueButtonLoading: boolean;
-  onContinueClick: () => void;
-};
+type SkipButtonProps =
+  | {
+      renderSkipQuestionButton: true;
+      onSkipQuestionClick: () => void;
+      skipQuestionButtonDisabled?: boolean;
+    }
+  | {
+      renderSkipQuestionButton?: false;
+      onSkipQuestionClick?: undefined;
+      skipQuestionButtonDisabled?: undefined;
+    };
+
+type ContinueButtonProps =
+  | {
+      renderContinueButton: true;
+      onContinueClick: () => void;
+      continueButtonDisabled?: boolean;
+      continueButtonLoading?: boolean;
+    }
+  | {
+      renderContinueButton?: false;
+      onContinueClick?: undefined;
+      continueButtonDisabled?: undefined;
+      continueButtonLoading?: undefined;
+    };
+
+export type ActionButtonsProps = SkipButtonProps & ContinueButtonProps;
 
 const Component = ({
   renderSkipQuestionButton,
@@ -28,11 +46,16 @@ const Component = ({
 }: ActionButtonsProps) => {
   const { formatMessage } = useIntl();
 
+  const handleSkipButtonClick = () =>
+    onSkipQuestionClick && onSkipQuestionClick();
+
+  const handleContinueButtonClick = () => onContinueClick && onContinueClick();
+
   return (
     <Row width="100%" my={20} justify="end" align="center">
       {renderSkipQuestionButton && (
         <SkipQuestionButton
-          onClick={onSkipQuestionClick}
+          onClick={handleSkipButtonClick}
           disabled={skipQuestionButtonDisabled}
         />
       )}
@@ -44,7 +67,7 @@ const Component = ({
           margin={20}
           width="180px"
           loading={continueButtonLoading}
-          onClick={onContinueClick}
+          onClick={handleContinueButtonClick}
           title={formatMessage(messages.nextQuestion)}
         />
       )}

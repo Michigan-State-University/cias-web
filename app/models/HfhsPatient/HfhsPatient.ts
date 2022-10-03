@@ -1,14 +1,21 @@
 import { Sex } from './Sex';
 
-// Used when verifying patient on the HF initial screen
-export type HfhsPatientData = {
+export type BaseHfhsPatientData = {
   firstName: string;
   lastName: string;
   dob: string;
   sex: Sex;
   zipCode: string;
-  mrn?: Nullable<string>;
 };
+
+export type MedicalNumberHfhsPatientData = {
+  mrn: string;
+};
+
+// Used when verifying patient on the HF initial screen
+export type HfhsPatientData =
+  | BaseHfhsPatientData
+  | MedicalNumberHfhsPatientData;
 
 // Returned from BE
 export type HfhsPatientDetail = {
