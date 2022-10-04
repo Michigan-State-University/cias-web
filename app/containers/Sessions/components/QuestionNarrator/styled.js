@@ -46,13 +46,14 @@ export const CharacterActiveIndicator = styled.div`
         ? {
             display: 'inherit',
             backgroundColor: colors.blueHaze,
+            transform: 'scale(0.4)',
             width: 200,
             height: 200,
             left: '-50%',
             top: '-45%',
             opacity: 0.5,
             borderRadius: '50%',
-            animation: 'indicator .6s linear 0s infinite alternate',
+            animation: 'indicator .6s linear 0.0001s infinite alternate',
           }
         : {}};
   }
