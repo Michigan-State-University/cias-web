@@ -65,15 +65,11 @@ export default defineMessages({
   },
   startSession: {
     id: `${scope}.startSession`,
-    defaultMessage: 'Start Session',
-  },
-  clickToStart: {
-    id: `${scope}.clickToStart`,
-    defaultMessage: 'Click the button below to start a new session.',
+    defaultMessage: 'Start session',
   },
   continueSession: {
     id: `${scope}.continueSession`,
-    defaultMessage: 'Continue Session',
+    defaultMessage: 'Continue session',
   },
   startPreview: {
     id: `${scope}.startPreview`,
@@ -151,7 +147,7 @@ export default defineMessages({
   },
   fillHeader: {
     id: `${scope}.fillHeader`,
-    defaultMessage: 'Welcome!',
+    defaultMessage: 'Let’s fill the session',
   },
   narratorAlt: {
     id: `${scope}.narratorAlt`,
