@@ -11,6 +11,7 @@ export const NON_DUPLICABLE_SCREENS = [
   QuestionTypes.NAME,
   QuestionTypes.PARTICIPANT_REPORT,
   QuestionTypes.PHONE,
+  QuestionTypes.HENRY_FORD_INITIAL,
 ];
 
 // screens whose variable is not editable
