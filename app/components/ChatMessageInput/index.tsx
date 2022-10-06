@@ -6,7 +6,7 @@ import Row from 'components/Row';
 import { ImageButton } from 'components/Button';
 import Text from 'components/Text';
 
-import { themeColors } from 'theme';
+import { colors, themeColors } from 'theme';
 
 import AirplaneIcon from 'assets/svg/paper-airplane2.svg';
 
@@ -75,6 +75,7 @@ export const ChatMessageInput = ({
             src={AirplaneIcon}
             title={formatMessage(i18nMessages.inputSendIconTitle)}
             disabled={Boolean(error) || disabled}
+            fill={disabled ? colors.cadetBlueCrayola : themeColors.primary}
           />
         </Box>
       </Box>

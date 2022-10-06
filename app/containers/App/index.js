@@ -90,7 +90,7 @@ import { shouldFetchSelfDetailsOnPath } from './utils';
 
 export function App({ user, fetchSelfDetails }) {
   const { locale, formatMessage } = useIntl();
-  const { pathname } = useLocation();
+  const { pathname, search } = useLocation();
   useInjectSaga({ key: 'app', saga: rootSaga });
   useInjectSaga({ key: 'fetchSelfDetails', saga: fetchSelfDetailsSaga });
 
@@ -157,7 +157,7 @@ export function App({ user, fetchSelfDetails }) {
       if (arraysOverlap(user.roles, [Roles.ClinicAdmin]))
         return <ClinicAdminRedirectPage />;
       if (arraysOverlap(user.roles, [Roles.Navigator]))
-        return <Redirect to="/live-chat" />;
+        return <Redirect to={{ pathname: '/live-chat', search }} />;
 
       return NotFoundPage;
     }

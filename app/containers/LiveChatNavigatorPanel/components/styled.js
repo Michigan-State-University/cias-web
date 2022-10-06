@@ -6,7 +6,7 @@ import { colors, themeColors } from 'theme';
 
 import Box from 'components/Box';
 
-import { HEADER_HEIGHT } from '../constants';
+import { HEADER_HEIGHT, INTERLOCUTOR_INFO_HEIGHT } from '../constants';
 
 export const NavigatorPanelGridRow = styled(GRow)`
   background-color: ${colors.white};
@@ -23,7 +23,7 @@ export const NavigatorPanelGridColumn = styled(GCol)`
 `;
 
 export const SectionHeaderContainer = styled(Box)`
-  height: ${HEADER_HEIGHT};
+  height: ${HEADER_HEIGHT}px;
   padding-top: 24px;
   padding-bottom: 24px;
   border-bottom: 1px solid ${themeColors.highlight};
@@ -36,7 +36,7 @@ export const SectionHeaderContainer = styled(Box)`
 
 export const SectionBody = styled(Box)`
   flex: 1 !important;
-  max-height: calc(100% - ${HEADER_HEIGHT}px);
+  height: calc(100% - ${HEADER_HEIGHT}px - ${INTERLOCUTOR_INFO_HEIGHT}px);
   border-radius: 0;
 `;
 

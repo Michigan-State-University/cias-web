@@ -89,6 +89,7 @@ const colors = {
   lightDivider: '#EAF1FA',
   cinnabar: '#DD533C',
   fireIsland: '#DD533C',
+  cadetBlueCrayola: '#B3BAC7',
 };
 
 const themeColors = {

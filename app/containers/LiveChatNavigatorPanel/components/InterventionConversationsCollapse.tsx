@@ -17,7 +17,7 @@ import { LabelRow } from './styled';
 type Props = {
   interventionName: string;
   children: React.ReactNode;
-  isFirst: boolean;
+  isOpen: boolean;
   unreadConversationsCount: number;
 };
 
@@ -27,10 +27,10 @@ const EMPTY_SPACE = 5;
 const InterventionConversationCollapse = ({
   interventionName,
   children,
-  isFirst,
+  isOpen,
   unreadConversationsCount,
 }: Props) => {
-  const [openCollapsible, setOpenCollapsible] = useState(isFirst);
+  const [openCollapsible, setOpenCollapsible] = useState(isOpen);
   const toggleCollapsible = () => setOpenCollapsible(!openCollapsible);
   const hasUnreadConversations = Boolean(unreadConversationsCount);
 

@@ -33,7 +33,7 @@ const LoginForm = ({
   const formData = useMemo(() => generateInitialValues(initialFormData), []);
 
   const onSubmit = ({ email, password }, actions) => {
-    onLogin(email, password);
+    onLogin(email.trim(), password);
     actions.setSubmitting(false);
   };
 
