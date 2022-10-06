@@ -123,9 +123,8 @@ const ChatMessageList = ({
               hideSender={hideSender}
               markRead={shouldMarkRead(index)}
               mt={hideSender ? 8 : 16}
-            >
-              {content}
-            </ChatMessage>
+              message={content}
+            />
           );
         })}
       </Box>

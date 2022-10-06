@@ -1,10 +1,13 @@
 import React, { memo, useMemo } from 'react';
+import { useSelector } from 'react-redux';
 
 import { Conversation, InterventionConversation } from 'models/LiveChat';
 
 import useRefreshComponent from 'utils/useRefreshComponent';
 
 import Column from 'components/Column';
+
+import { makeSelectOpenedConversationInterventionId } from 'global/reducers/liveChat';
 
 import { ConversationListItem } from './ConversationListItem';
 import { MESSAGE_TIMESTAMP_REFRESH_PERIOD } from '../constants';
@@ -28,6 +31,10 @@ const ConversationList = ({
   interventionConversationsValues,
 }: Props) => {
   useRefreshComponent(MESSAGE_TIMESTAMP_REFRESH_PERIOD);
+
+  const openedConversationInterventionId = useSelector(
+    makeSelectOpenedConversationInterventionId(),
+  );
 
   const unreadConversationsCounts = useMemo(
     () =>
@@ -56,7 +63,11 @@ const ConversationList = ({
           <InterventionConversationCollapse
             key={interventionId}
             interventionName={interventionName}
-            isFirst={index === 0}
+            isOpen={
+              openedConversationId
+                ? openedConversationInterventionId === interventionId
+                : index === 0
+            }
             unreadConversationsCount={unreadConversationsCounts[interventionId]}
           >
             <Column gap={16} pb={16}>

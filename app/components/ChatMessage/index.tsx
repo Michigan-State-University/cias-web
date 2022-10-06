@@ -1,5 +1,7 @@
-import React, { PropsWithChildren } from 'react';
+import React from 'react';
 import { FormattedMessage } from 'react-intl';
+import { Interweave } from 'interweave';
+import { UrlMatcher } from 'interweave-autolink';
 
 import Box from 'components/Box';
 import Text from 'components/Text';
@@ -10,28 +12,29 @@ import { colors, themeColors } from 'theme';
 import CheckMark from 'assets/svg/check-green.svg';
 
 import messages from './messages';
+import { MessageContainer } from './styled';
 
-type Props = PropsWithChildren<{
+type Props = {
   isMine?: boolean;
   markRead?: boolean;
   senderName?: string;
   hideSender?: boolean;
+  message?: string;
   [x: string]: any;
-}>;
+};
 
 export const ChatMessage = ({
   isMine,
   markRead,
   senderName,
-  children,
+  message,
   hideSender,
   ...style
 }: Props) => (
   <Box
     width="100%"
     display="flex"
-    direction="column"
-    align={isMine ? 'end' : 'start'}
+    justify={isMine ? 'end' : 'start'}
     {...style}
   >
     <Box
@@ -39,19 +42,22 @@ export const ChatMessage = ({
       display="flex"
       direction="column"
       align={isMine ? 'end' : 'start'}
+      textAlign={isMine ? 'right' : 'left'}
     >
       {!hideSender && (
-        <Text
-          textAlign={isMine ? 'right' : 'left'}
-          color={themeColors.text}
-          textOpacity={0.5}
-          margin="0 12px 4px 12px"
-          lineHeight="12px"
-        >
-          {isMine ? <FormattedMessage {...messages.you} /> : senderName}
-        </Text>
+        <Box>
+          <Text
+            textAlign={isMine ? 'right' : 'left'}
+            color={themeColors.text}
+            textOpacity={0.5}
+            margin="0 12px 4px 12px"
+            lineHeight="12px"
+          >
+            {isMine ? <FormattedMessage {...messages.you} /> : senderName}
+          </Text>
+        </Box>
       )}
-      <Box
+      <MessageContainer
         bg={isMine ? themeColors.primary : themeColors.highlight}
         padding={12}
         borderRadius={8}
@@ -59,9 +65,14 @@ export const ChatMessage = ({
         lineHeight="18px"
         color={isMine ? colors.white : themeColors.text}
         textAlign="left"
+        width="fit-content"
       >
-        {children}
-      </Box>
+        <Interweave
+          content={message}
+          matchers={[new UrlMatcher('url')]}
+          newWindow
+        />
+      </MessageContainer>
       {markRead && (
         <Box
           margin="8px 12px 0 12px"
