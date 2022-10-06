@@ -15,7 +15,7 @@ type FormikInputType = {
   formikKey: string;
   placeholder?: string;
   type?: string;
-  label?: string;
+  label?: string | ReactElement;
   inputProps?: React.HTMLProps<HTMLInputElement>;
   children?: ReactElement;
   validator?: (value: string) => boolean;

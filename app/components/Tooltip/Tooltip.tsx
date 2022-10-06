@@ -11,6 +11,7 @@ import React, {
   useRef,
   useState,
   ReactElement,
+  CSSProperties,
 } from 'react';
 import ReactTooltip from 'react-tooltip';
 
@@ -37,6 +38,8 @@ type TooltipProps = {
   place?: 'top' | 'right' | 'bottom' | 'left';
   stretchContent?: boolean;
   backgroundColor?: string;
+  tooltipProps?: Partial<CSSProperties>;
+  iconProps: object;
 } & Record<string, unknown>;
 
 /**
@@ -53,6 +56,8 @@ const Tooltip = ({
   place,
   stretchContent,
   backgroundColor,
+  tooltipProps,
+  iconProps,
   ...restProps
 }: TooltipProps) => {
   const tooltipRef = useRef<HTMLDivElement>();
@@ -123,7 +128,7 @@ const Tooltip = ({
         onTouchStart={onFocusIn}
         {...stretchContentStyle}
       >
-        {icon && <Img src={icon} alt="?" />}
+        {icon && <Img src={icon} alt="?" {...iconProps} />}
         {children && <div style={stretchContentStyle}>{children}</div>}
       </Box>
 
@@ -141,6 +146,7 @@ const Tooltip = ({
             overridePosition={place ? undefined : calculateTooltipPosition}
             place={place}
             backgroundColor={backgroundColor}
+            tooltipProps={tooltipProps}
           />
         </Portal>
       )}

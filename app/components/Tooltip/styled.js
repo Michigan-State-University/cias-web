@@ -18,4 +18,6 @@ export const StyledTooltip = styled(ReactTooltip).attrs({
     visibility: visible !important;
     pointer-events: auto !important;
   }
+
+  ${({ tooltipProps }) => tooltipProps}
 `;

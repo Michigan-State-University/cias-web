@@ -1,4 +1,4 @@
-import React, { ComponentProps, PropsWithChildren } from 'react';
+import React, { ComponentProps, PropsWithChildren, ReactElement } from 'react';
 
 import Column from 'components/Column';
 import Text from 'components/Text';
@@ -7,7 +7,7 @@ import { ErrorText } from './styled';
 
 export type Props = PropsWithChildren<{
   formikKey?: string;
-  label?: string;
+  label?: string | ReactElement;
   touched: boolean;
   error: Nullable<string>;
   labelProps?: Partial<ComponentProps<typeof Text>>;

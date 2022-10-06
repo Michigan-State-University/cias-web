@@ -14,6 +14,7 @@ import { IntlShape } from 'react-intl/src/types';
 import { colors, themeColors } from 'theme';
 import globalMessages from 'global/i18n/globalMessages';
 import { zipCodeRegex } from 'global/constants';
+import questionMark from 'assets/svg/grey-question-mark.svg';
 
 import {
   BaseHfhsPatientData,
@@ -27,6 +28,7 @@ import { ApiMessageError } from 'models/Api';
 import { requiredValidationSchema } from 'utils/validators';
 import { getUTCDateString } from 'utils/dateUtils';
 
+import Tooltip from 'components/Tooltip';
 import Box from 'components/Box';
 import { SelectOption } from 'components/Select/types';
 import FormikInput from 'components/FormikInput';
@@ -113,6 +115,7 @@ export type Props = {
   verifying?: boolean;
   verifyingError?: Nullable<ApiMessageError>;
   hfhsPatientDetail?: Nullable<HfhsPatientDetail>;
+  previewMedicalNumberInput?: boolean;
 };
 
 const HenryFordInitialScreenLayout = ({
@@ -123,6 +126,7 @@ const HenryFordInitialScreenLayout = ({
   verifying = false,
   verifyingError,
   hfhsPatientDetail,
+  previewMedicalNumberInput,
 }: Props) => {
   const { formatMessage } = useIntl();
 
@@ -295,30 +299,54 @@ const HenryFordInitialScreenLayout = ({
                   {formatMessage(messages.baseDataVerificationErrorMessage)}
                 </Text>
               )}
-              {showMedicalNumberInput && (
-                <>
-                  {formError === PatientDataFormError.MRN_VERIFICATION && (
-                    <Divider mt={54.5} mb={22.5} />
-                  )}
-                  <Container fluid style={{ padding: '32px 0 0 0' }}>
-                    <Row gutterWidth={24} style={{ rowGap: '24px' }}>
-                      <Col {...columnClassMap}>
-                        <FormikInput
-                          formikKey="mrn"
-                          label={formatMessage(messages.medicalNumber)}
-                          placeholder={formatMessage(
-                            messages.medicalNumberPlaceholder,
-                          )}
-                          type="text"
-                          inputProps={{
-                            ...inputStyles,
-                            disabled,
-                          }}
-                        />
-                      </Col>
-                    </Row>
-                  </Container>
-                </>
+              {formError === PatientDataFormError.MRN_VERIFICATION && (
+                <Divider mt={54.5} mb={22.5} />
+              )}
+              {(previewMedicalNumberInput || showMedicalNumberInput) && (
+                <Container fluid style={{ padding: '32px 0 0 0' }}>
+                  <Row gutterWidth={24} style={{ rowGap: '24px' }}>
+                    <Col {...columnClassMap}>
+                      <FormikInput
+                        formikKey="mrn"
+                        label={
+                          previewMedicalNumberInput ? (
+                            <Box display="flex" align="center">
+                              <Text>
+                                {formatMessage(messages.medicalNumber)}
+                              </Text>
+                              <Tooltip
+                                id="el-tooltip-mrn-researcher-info"
+                                icon={questionMark}
+                                text={formatMessage(
+                                  messages.medicalNumberResearcherInfo,
+                                )}
+                                place="top"
+                                ml={8}
+                                tooltipProps={{
+                                  width: '200px',
+                                  padding: '16px !important',
+                                }}
+                                iconProps={{
+                                  width: '16px',
+                                }}
+                              />
+                            </Box>
+                          ) : (
+                            formatMessage(messages.medicalNumber)
+                          )
+                        }
+                        placeholder={formatMessage(
+                          messages.medicalNumberPlaceholder,
+                        )}
+                        type="text"
+                        inputProps={{
+                          ...inputStyles,
+                          disabled,
+                        }}
+                      />
+                    </Col>
+                  </Row>
+                </Container>
               )}
               {formError === PatientDataFormError.MRN_VERIFICATION && (
                 <Text

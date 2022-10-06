@@ -166,4 +166,9 @@ export default defineMessages({
     id: `${scope}.medicalNumberPlaceholder`,
     defaultMessage: 'Your medical number',
   },
+  medicalNumberResearcherInfo: {
+    id: `${scope}.medicalNumberResearcherInfo`,
+    defaultMessage:
+      'Participant will be asked to provide their medical record number <bold>if the above data is incorrect.</bold>',
+  },
 });
