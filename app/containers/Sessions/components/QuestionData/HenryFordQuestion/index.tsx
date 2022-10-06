@@ -10,6 +10,7 @@ import bin from 'assets/svg/bin-red.svg';
 import {
   makeSelectSelectedQuestion,
   updateQuestionData,
+  makeSelectHenryFordInitialScreenExists,
 } from 'global/reducers/questions';
 import globalMessages from 'global/i18n/globalMessages';
 import { hfhValueValidator, numericValidator } from 'utils/validators';
@@ -45,6 +46,10 @@ const HenryFordQuestion = ({ isNarratorTab, interventionStatus }: Props) => {
 
   const selectedQuestion = useSelector<RootState, HenryFordQuestionDTO>(
     makeSelectSelectedQuestion(),
+  );
+
+  const henryFordInitialScreenExists = useSelector(
+    makeSelectHenryFordInitialScreenExists(),
   );
 
   const dispatch = useDispatch();
@@ -181,7 +186,9 @@ const HenryFordQuestion = ({ isNarratorTab, interventionStatus }: Props) => {
                     />
                     <BadgeInput
                       ml={10}
-                      disabled={!editingPossible}
+                      disabled={
+                        !editingPossible || !henryFordInitialScreenExists
+                      }
                       px={0}
                       py={12}
                       textAlign="center"
