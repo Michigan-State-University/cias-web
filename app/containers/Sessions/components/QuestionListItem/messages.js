@@ -21,10 +21,19 @@ export default defineMessages({
   },
   deleteModalTitle: {
     id: `${scope}.deleteModalTitle`,
-    defaultMessage: 'Are you sure you want to delete this Screen?',
+    defaultMessage: 'Do you want to delete this screen?',
   },
   deleteModalContent: {
     id: `${scope}.deleteModalContent`,
     defaultMessage: 'This operation is irreversible!',
+  },
+  deleteHFInitialScreenModalContent: {
+    id: `${scope}.deleteHFInitialScreenModalContent`,
+    defaultMessage:
+      'Deleting this screen will disable sending data to Henry Ford.',
+  },
+  confirmDeletingScreen: {
+    id: `${scope}.confirmDeletingScreen`,
+    defaultMessage: 'Yes, delete',
   },
 });

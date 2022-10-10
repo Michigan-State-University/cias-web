@@ -17,11 +17,10 @@ import { Redirect, useLocation } from 'react-router-dom';
 import { useContainerQuery } from 'react-container-query';
 import { Hidden, Visible } from 'react-grid-system';
 import { useInjectSaga, useInjectReducer } from 'redux-injectors';
-import Color from 'color';
 
 import ccIcon from 'assets/svg/closed-captions.svg';
 
-import { colors, elements, themeColors } from 'theme';
+import { elements, themeColors } from 'theme';
 
 import AudioWrapper from 'utils/audioWrapper';
 import isNullOrUndefined from 'utils/isNullOrUndefined';
@@ -568,9 +567,6 @@ export function AnswerSessionPage({
             content={formatMessage(messages.skipQuestionModalMessage)}
             confirmAction={() => saveAnswer(true)}
             hideCloseButton
-            contentContainerStyles={{
-              mb: 20,
-            }}
             isMobile={isMobile}
           />
 
@@ -591,17 +587,11 @@ export function AnswerSessionPage({
             cancelButtonText={formatMessage(
               messages.confirmContinueModalCancelText,
             )}
-            confirmationButtonColor="primary"
-            cancelButtonStyles={{
-              color: Color(themeColors.primary).alpha(0.1).hexa(),
-              textColor: themeColors.primary,
-              hoverColor: colors.white,
-              hoverTextColor: themeColors.primary,
-              inverted: false,
+            confirmButtonStyles={{
+              width: 191,
             }}
-            contentContainerStyles={{
-              mb: 20,
-              mt: 10,
+            cancelButtonStyles={{
+              width: 191,
             }}
             hideCloseButton
             isMobile={isMobile}
