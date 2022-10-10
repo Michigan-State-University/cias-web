@@ -43,6 +43,9 @@ const emmiAutoRestBodyAnimations = [
   BodyAutoRestAnimation.REST_SHOULDER_RUBBING,
   BodyAutoRestAnimation.REST_STRETCHING,
   BodyAutoRestAnimation.REST_WEIGHT_SHIFT,
+  BodyAutoRestAnimation.THINK,
+  BodyAutoRestAnimation.UNCERTAIN,
+  BodyAutoRestAnimation.WAVE,
 ];
 
 const characterToAutoRestBodyAnimationsMap: Record<
@@ -67,10 +70,7 @@ const peedyReverseBodyAnimations = [
   BodyReverseAnimation.THINK,
 ];
 
-const emmiReverseBodyAnimations = [
-  BodyReverseAnimation.THINK,
-  BodyReverseAnimation.UNCERTAIN,
-];
+const emmiReverseBodyAnimations: BodyReverseAnimation[] = [];
 
 const characterToReverseBodyAnimationsMap: Record<
   CharacterType,

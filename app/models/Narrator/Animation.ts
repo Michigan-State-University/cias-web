@@ -20,6 +20,9 @@ export enum BodyAutoRestAnimation {
   REST_SHOULDER_RUBBING = 'restShoulderRubbing',
   REST_STRETCHING = 'restStretching',
   REST_WEIGHT_SHIFT = 'restWeightShift',
+  THINK = 'think',
+  UNCERTAIN = 'uncertain',
+  WAVE = 'wave',
 }
 export enum BodyReverseAnimation {
   UNCERTAIN = 'uncertain',
