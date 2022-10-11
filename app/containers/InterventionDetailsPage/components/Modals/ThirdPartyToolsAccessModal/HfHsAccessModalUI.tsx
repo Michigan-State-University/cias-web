@@ -1,4 +1,5 @@
 import React, { memo } from 'react';
+import { Markup } from 'interweave';
 import { useIntl } from 'react-intl';
 
 import Switch, { LabelPosition } from 'components/Switch';
@@ -36,19 +37,31 @@ const Component = ({
 
   return (
     <FlexCol minHeight={537}>
-      <FlexRow flex={1} align="start">
+      <FlexRow flex={1} align="start" direction="column">
         <FlexRow align="center">
-          <Text mr={8}>{formatMessage(messages.hfhsRevokeAccess)}</Text>
+          <Text mr={8} fontSize="15px">
+            {formatMessage(messages.hfhsRevokeAccess)}
+          </Text>
           <Switch
             id={HFHS_ACCESS_LABEL_ID}
             onToggle={handleAccessChange}
             labelPosition={LabelPosition.Right}
             checked={hfhsAccess}
           >
-            <Text fontWeight={hfhsAccess ? 'bold' : 'normal'}>
+            <Text fontSize="15px" fontWeight={hfhsAccess ? 'bold' : 'normal'}>
               {formatMessage(messages.hfhsGiveAccess)}
             </Text>
           </Switch>
+        </FlexRow>
+        <FlexRow mt={56}>
+          <Markup
+            content={formatMessage(messages.hfhsAccessNote)}
+            attributes={{
+              fontStyle: 'italic',
+              lineHeight: '23px',
+            }}
+            tagName={Text}
+          />
         </FlexRow>
       </FlexRow>
       <Row align="end">

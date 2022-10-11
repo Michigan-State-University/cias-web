@@ -75,4 +75,8 @@ export default defineMessages({
     id: `${scope}.hfhsGiveAccess`,
     defaultMessage: 'Allow access',
   },
+  hfhsAccessNote: {
+    id: `${scope}.hfhsAccessNote`,
+    defaultMessage: `Note: If you revoke access to Henry Ford for this intervention HF Initial Screens (if exist) will be removed from all sessions. HF Questions will work like <b>Single Answer Questions</b>, so any data won’t be sent to Henry Ford.<br /><br />If you turn on HF for this intervention again you will be able to add HF Initial Screen and then <b>data will be sent to HF</b>.`,
+  },
 });

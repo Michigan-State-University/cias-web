@@ -115,7 +115,9 @@ const Component = ({
       <Row>
         <Col>
           <FlexRow align="center">
-            <Text mr={8}>{formatMessage(messages.revokeAccess)}</Text>
+            <Text mr={8} fontSize="15px">
+              {formatMessage(messages.revokeAccess)}
+            </Text>
             <Switch
               id={ACCESS_LABEL_ID}
               onToggle={handleAccessChange}
@@ -123,7 +125,7 @@ const Component = ({
               checked={!isAccessRevoked}
               disabled={!canEdit}
             >
-              <Text fontWeight={!isAccessRevoked && 'bold'}>
+              <Text fontWeight={!isAccessRevoked && 'bold'} fontSize="15px">
                 {formatMessage(messages.giveAccess)}
               </Text>
             </Switch>

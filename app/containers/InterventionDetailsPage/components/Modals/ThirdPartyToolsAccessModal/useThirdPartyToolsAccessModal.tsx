@@ -24,7 +24,7 @@ export const useThirdPartyToolsAccessModal = () => {
       title: formatMessage(messages.thirdPartyToolsAccessModalTitle),
       height: 740,
       maxWidth: '100%',
-      minWidth: 542,
+      width: 542,
       padding: 32,
     },
   });
