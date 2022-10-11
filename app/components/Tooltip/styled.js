@@ -9,10 +9,15 @@ export const StyledTooltip = styled(ReactTooltip).attrs({
   box-shadow: ${boxShadows.selago};
   border-radius: 5px;
   max-width: 380px;
-  padding: 15px;
+  padding: 16px !important;
   opacity: 1 !important;
   ${({ visible }) => !visible && 'display: none;'}
   pointer-events: auto !important;
+
+  p {
+    font-size: 12px;
+    line-height: 20px !important;
+  }
 
   &:hover {
     visibility: visible !important;

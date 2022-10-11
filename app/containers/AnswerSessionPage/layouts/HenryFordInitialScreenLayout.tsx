@@ -324,7 +324,6 @@ const HenryFordInitialScreenLayout = ({
                                 ml={8}
                                 tooltipProps={{
                                   width: '200px',
-                                  padding: '16px !important',
                                 }}
                                 iconProps={{
                                   width: '16px',

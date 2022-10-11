@@ -39,7 +39,7 @@ type TooltipProps = {
   stretchContent?: boolean;
   backgroundColor?: string;
   tooltipProps?: Partial<CSSProperties>;
-  iconProps: object;
+  iconProps?: object;
 } & Record<string, unknown>;
 
 /**

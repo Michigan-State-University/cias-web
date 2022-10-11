@@ -30,6 +30,7 @@ import Text from 'components/Text';
 import OriginalTextHover from 'components/OriginalTextHover';
 import { BadgeInput } from 'components/Input/BadgeInput';
 import { DndSortable } from 'components/DragAndDrop';
+import Tooltip from 'components/Tooltip';
 
 import messages from './messages';
 import { ADD, UPDATE_ANSWER, REMOVE } from './constants';
@@ -184,27 +185,36 @@ const HenryFordQuestion = ({ isNarratorTab, interventionStatus }: Props) => {
                       color={colors.azure}
                       onBlur={(value: string) => onUpdateAnswer({ value })}
                     />
-                    <BadgeInput
-                      ml={10}
-                      disabled={
-                        !editingPossible || !henryFordInitialScreenExists
-                      }
-                      px={0}
-                      py={12}
-                      textAlign="center"
-                      placeholder={formatMessage(
-                        // @ts-ignore
-                        globalMessages.variables.hfhValuePlaceholder,
-                      )}
-                      value={item.hfh_value}
-                      color={colors.kleinBlue}
-                      bg={colors.titanWhite}
-                      validator={hfhValueValidator}
-                      bgOpacity={1}
-                      onBlur={(hfhValue: string) =>
-                        onUpdateAnswer({ hfh_value: hfhValue })
-                      }
-                    />
+                    <Tooltip
+                      id={`hfhs-value-${index}`}
+                      text={formatMessage(messages.disabledHfhsValuesTooltip)}
+                      place="right"
+                      tooltipProps={{
+                        width: 216,
+                      }}
+                    >
+                      <BadgeInput
+                        ml={10}
+                        disabled={
+                          !editingPossible || !henryFordInitialScreenExists
+                        }
+                        px={0}
+                        py={12}
+                        textAlign="center"
+                        placeholder={formatMessage(
+                          // @ts-ignore
+                          globalMessages.variables.hfhValuePlaceholder,
+                        )}
+                        value={item.hfh_value}
+                        color={colors.kleinBlue}
+                        bg={colors.titanWhite}
+                        validator={hfhValueValidator}
+                        bgOpacity={1}
+                        onBlur={(hfhValue: string) =>
+                          onUpdateAnswer({ hfh_value: hfhValue })
+                        }
+                      />
+                    </Tooltip>
                   </Row>
                 </Column>
               </HoverableBox>
