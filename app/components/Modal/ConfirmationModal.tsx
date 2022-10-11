@@ -106,7 +106,7 @@ const ConfirmationModal = ({
           {description}
         </H1>
         {content && (
-          <Box padded {...contentStyles}>
+          <Box py={16} {...contentStyles}>
             <Text
               textAlign="center"
               lineHeight="24px"

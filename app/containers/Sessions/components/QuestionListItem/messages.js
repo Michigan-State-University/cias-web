@@ -29,8 +29,7 @@ export default defineMessages({
   },
   deleteHFInitialScreenModalContent: {
     id: `${scope}.deleteHFInitialScreenModalContent`,
-    defaultMessage:
-      'Deleting this screen will disable sending data to Henry Ford.',
+    defaultMessage: `Deleting Henry Ford Initial Screen <bold>doesn’t affect HF Question screens</bold>. We don't delete them, but they won't be sent to HF. They will <bold>work as Single Answer screens</bold>.`,
   },
   confirmDeletingScreen: {
     id: `${scope}.confirmDeletingScreen`,
