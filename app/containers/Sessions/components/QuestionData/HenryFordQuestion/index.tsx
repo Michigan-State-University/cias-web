@@ -192,6 +192,7 @@ const HenryFordQuestion = ({ isNarratorTab, interventionStatus }: Props) => {
                       tooltipProps={{
                         width: 216,
                       }}
+                      visible={!henryFordInitialScreenExists}
                     >
                       <BadgeInput
                         ml={10}
