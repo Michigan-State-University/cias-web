@@ -47,6 +47,7 @@ const Component = <T extends boolean | string>({
           // @ts-ignore type narrowing not working correctly
           onToggle={onChange}
         >
+          {/* @ts-ignore */}
           <H3>{formatMessage(messages[setting])}</H3>
         </FullWidthSwitch>
       );

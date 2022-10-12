@@ -4,7 +4,7 @@ import sortBy from 'lodash/sortBy';
 import flatMap from 'lodash/flatMap';
 
 import { Question } from 'models/Question';
-import { feedbackActions } from 'models/Narrator/FeedbackActions';
+import { EFeedbackAction } from 'models/Narrator/FeedbackActions';
 import {
   bodyAnimationType,
   speechType,
@@ -283,7 +283,7 @@ export const instantiateBlockForType = (type, endPosition, question) => {
 
     case speechType:
       return {
-        action: feedbackActions.noAction,
+        action: EFeedbackAction.NO_ACTION,
         text: [],
         audio_urls: [],
         sha256: [],
@@ -293,7 +293,7 @@ export const instantiateBlockForType = (type, endPosition, question) => {
 
     case reflectionType:
       return {
-        action: feedbackActions.noAction,
+        action: EFeedbackAction.NO_ACTION,
         question_id: '',
         reflections: [],
         animation: 'rest',
@@ -302,7 +302,7 @@ export const instantiateBlockForType = (type, endPosition, question) => {
 
     case reflectionFormulaType:
       return {
-        action: feedbackActions.noAction,
+        action: EFeedbackAction.NO_ACTION,
         payload: '',
         reflections: [],
         animation: 'rest',
@@ -317,7 +317,7 @@ export const instantiateBlockForType = (type, endPosition, question) => {
 
     case readQuestionBlockType:
       return {
-        action: feedbackActions.noAction,
+        action: EFeedbackAction.NO_ACTION,
         animation: 'rest',
         text: getFromQuestionTTS(question),
         audio_urls: [],
@@ -334,7 +334,7 @@ export const instantiateBlockForType = (type, endPosition, question) => {
     case feedbackBlockType:
       return {
         animation: 'standStill',
-        action: feedbackActions.showSpectrum,
+        action: EFeedbackAction.SHOW_SPECTRUM,
         ...sharedProperties,
       };
     default:

@@ -14,7 +14,7 @@ import {
 
 import { colors, borders, fontSizes, themeColors } from 'theme';
 
-import { Narrator, NarratorBlockTypes } from 'models/Narrator';
+import { Narrator, NarratorBlock, NarratorBlockTypes } from 'models/Narrator';
 import { getRemovedBlockForSetting } from 'models/Narrator/BlockTypes';
 import { DISABLED_NARRATOR_SETTINGS_BY_QUESTION_TYPE } from 'models/Session/utils';
 import {
@@ -132,7 +132,7 @@ const NarratorTab = ({
     return {
       missingAnimations,
       newNarrator: {
-        blocks: newBlocks,
+        blocks: newBlocks as NarratorBlock[],
         settings: { ...narrator.settings, character },
       },
     };

@@ -7,37 +7,36 @@ import type { LottieRef } from 'react-lottie';
 import getPause from 'utils/animations/getPause';
 import { getAutoRestAnimations } from 'utils/animations/animationsNames';
 import {
-  bodyAnimationType,
-  headAnimationType,
-} from 'models/Narrator/BlockTypes';
-import {
   BodyAutoRestAnimation,
   HeadAutoRestAnimation,
+  IBodyAnimationBlock,
+  IHeadAnimationBlock,
   NarratorBlock,
+  NarratorBlockTypes,
 } from 'models/Narrator';
 import { CharacterType } from 'models/Character';
 
 import { importAnimation } from './utils';
-import { TAnimationData } from './types';
+import { ILoadedAnimationData } from './types';
 
 type TUseAnimationHelper = (
   blocks: NarratorBlock[],
   dispatchUpdate: (state: {
-    currentData: Nullable<TAnimationData>;
+    currentData: Nullable<ILoadedAnimationData>;
     currentBlockIndex: number;
   }) => void,
   changeBlock: (currentIndex?: number) => Promise<void>,
-  currentData: TAnimationData,
+  currentData: ILoadedAnimationData,
   character: CharacterType,
 ) => {
-  getInitialBodyOrHeadAnimation: () => TAnimationData;
+  getInitialBodyOrHeadAnimation: () => ILoadedAnimationData;
   changeAnimation: (nextBlock: NarratorBlock, nextIndex: number) => void;
   handleBodyOrHeadAnimationBlock: () => void;
-  getIdleAnimation: () => TAnimationData;
+  getIdleAnimation: () => ILoadedAnimationData;
   clearAnimationBlock: () => void;
   animationRef: MutableRefObject<LottieRef | undefined>;
   fetchBodyAndHeadAnimations: () => Promise<void>;
-  loadedAnimations: MutableRefObject<TAnimationData[]>;
+  loadedAnimations: MutableRefObject<ILoadedAnimationData[]>;
 };
 
 const useAnimationHelper: TUseAnimationHelper = (
@@ -47,24 +46,29 @@ const useAnimationHelper: TUseAnimationHelper = (
   currentData,
   character,
 ) => {
-  const loadedAnimations = useRef<TAnimationData[]>([]);
+  const loadedAnimations = useRef<ILoadedAnimationData[]>([]);
   const animationRef = useRef<LottieRef>();
 
   const autoRestAnimations: Array<
     BodyAutoRestAnimation | HeadAutoRestAnimation
   > = useMemo(() => getAutoRestAnimations(character), [character]);
 
-  const loadAnimations = async (): Promise<TAnimationData[]> => {
-    const filteredAnimations: NarratorBlock[] = filter(
-      blocks,
-      ({ type }) => type === bodyAnimationType || type === headAnimationType,
-    );
-    const uniqAnimations: NarratorBlock[] = uniqBy(
-      filteredAnimations.filter((block) => block.animation),
-      'animation',
-    );
+  const loadAnimations = async (): Promise<ILoadedAnimationData[]> => {
+    const filteredAnimations: Array<IBodyAnimationBlock | IHeadAnimationBlock> =
+      filter(
+        blocks,
+        ({ type }) =>
+          type === NarratorBlockTypes.BODY_ANIMATION ||
+          type === NarratorBlockTypes.HEAD_ANIMATION,
+      ) as Array<IBodyAnimationBlock | IHeadAnimationBlock>;
 
-    const animations: TAnimationData[] = await Promise.all(
+    const uniqAnimations: Array<IBodyAnimationBlock | IHeadAnimationBlock> =
+      uniqBy(
+        filteredAnimations.filter((block) => block.animation),
+        'animation',
+      );
+
+    const animations: ILoadedAnimationData[] = await Promise.all(
       uniqAnimations.map(async ({ animation, type }) => {
         const data: JSON = await importAnimation(
           character,

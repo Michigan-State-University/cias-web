@@ -7,7 +7,7 @@ import Column from 'components/Column';
 import Box from 'components/Box';
 import Select from 'components/Select';
 
-import { feedbackActions } from 'models/Narrator/FeedbackActions';
+import { EFeedbackAction } from 'models/Narrator/FeedbackActions';
 import messages from '../messages';
 import { updateBlockSettings } from '../../actions';
 
@@ -21,8 +21,8 @@ const FeedbackBlock = ({
 }) => {
   const selectOptions = [
     {
-      value: feedbackActions.showSpectrum,
-      label: formatMessage(messages[feedbackActions.showSpectrum]),
+      value: EFeedbackAction.SHOW_SPECTRUM,
+      label: formatMessage(messages[EFeedbackAction.SHOW_SPECTRUM]),
     },
   ];
 
@@ -66,7 +66,7 @@ const mapDispatchToProps = {
       {
         action,
         animation:
-          action === feedbackActions.noAction ? 'standStill' : 'pointUp',
+          action === EFeedbackAction.NO_ACTION ? 'standStill' : 'pointUp',
       },
       id,
     ),

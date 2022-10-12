@@ -10,7 +10,7 @@ import { Provider } from 'react-redux';
 import { IntlProvider } from 'react-intl';
 import { DEFAULT_LOCALE } from 'i18n';
 
-import { feedbackActions } from 'models/Narrator/FeedbackActions';
+import { EFeedbackAction } from 'models/Narrator/FeedbackActions';
 import { readQuestionBlockType } from 'models/Narrator/BlockTypes';
 import { createTestStore } from 'utils/testUtils/storeUtils';
 
@@ -28,7 +28,7 @@ describe('<CharacterAnim />', () => {
   const defaultProps = {
     blocks: [
       {
-        action: feedbackActions.noAction,
+        action: EFeedbackAction.NO_ACTION,
         animation: 'rest',
         audio_urls: ['/example/1'],
         endPosition: {

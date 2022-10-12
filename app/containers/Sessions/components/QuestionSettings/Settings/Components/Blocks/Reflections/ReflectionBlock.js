@@ -32,7 +32,7 @@ import {
 import { makeSelectPreviewData } from 'global/reducers/localState';
 
 import { speechType, reflectionFormulaType } from 'models/Narrator/BlockTypes';
-import { feedbackActions } from 'models/Narrator/FeedbackActions';
+import { EFeedbackAction } from 'models/Narrator/FeedbackActions';
 import { characterToSpeechAnimationsMap } from 'utils/animations/animationsNames';
 import messages from '../../messages';
 import animationMessages from '../messages';
@@ -121,15 +121,15 @@ const ReflectionBlock = ({
   }, [character]);
 
   const feedbackOptions = useMemo(() => {
-    const options = values(feedbackActions).filter(
-      (action) => action !== feedbackActions.showSpectrum,
+    const options = values(EFeedbackAction).filter(
+      (action) => action !== EFeedbackAction.SHOW_SPECTRUM,
     );
 
     return options.map((option) => ({
       value: option,
       label: formatMessage(messages[option]),
     }));
-  }, [feedbackActions]);
+  }, [EFeedbackAction]);
 
   const selectedOption = selectOptions.find(
     (option) => option.value === block.animation,
@@ -139,7 +139,7 @@ const ReflectionBlock = ({
     (option) => option.value === block.action,
   );
 
-  const hasSpecialPositioning = block.action !== feedbackActions.noAction;
+  const hasSpecialPositioning = block.action !== EFeedbackAction.NO_ACTION;
 
   return (
     <Column>
@@ -290,7 +290,7 @@ const mapDispatchToProps = {
       index,
       {
         action,
-        animation: action === feedbackActions.noAction ? 'rest' : 'pointUp',
+        animation: action === EFeedbackAction.NO_ACTION ? 'rest' : 'pointUp',
       },
       id,
     ),

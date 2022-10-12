@@ -1,5 +1,5 @@
 import { calculatePercentageValue } from 'utils/percentageCalculator';
-import { feedbackActions } from 'models/Narrator/FeedbackActions';
+import { EFeedbackAction } from 'models/Narrator/FeedbackActions';
 
 const MARK_MARGIN = 20;
 
@@ -35,7 +35,7 @@ const useFeedbackHelper = (
 
   const handleFeedbackBlock = () => {
     switch (currentData.action) {
-      case feedbackActions.showSpectrum:
+      case EFeedbackAction.SHOW_SPECTRUM:
         setFeedbackSettings('showSpectrum', true);
         break;
       default:
@@ -46,7 +46,7 @@ const useFeedbackHelper = (
 
   const calculatePosition = (action, currentPosition) => {
     switch (action) {
-      case feedbackActions.showUserValue: {
+      case EFeedbackAction.SHOW_USER_VALUE: {
         const targetValue = sliderRef.props.value;
         const characterOffset = getCharacterHandOffset();
 
@@ -62,7 +62,7 @@ const useFeedbackHelper = (
         };
       }
 
-      case feedbackActions.showHigherValue: {
+      case EFeedbackAction.SHOW_HIGHER_VALUE: {
         const targetValue = sliderRef.props.value;
         const characterOffset = getCharacterHandOffset();
         const spectrumPosition = targetValue + (100 - targetValue) / 2;
@@ -79,7 +79,7 @@ const useFeedbackHelper = (
         };
       }
 
-      case feedbackActions.showLowerValue: {
+      case EFeedbackAction.SHOW_LOWER_VALUE: {
         const targetValue = sliderRef.props.value;
         const characterOffset = getCharacterHandOffset();
         const spectrumPosition = targetValue / 2;

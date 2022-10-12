@@ -21,7 +21,7 @@ import { StyledInput } from 'components/Input/StyledInput';
 
 import { feedbackQuestion } from 'models/Session/QuestionTypes';
 import { speechType, reflectionType } from 'models/Narrator/BlockTypes';
-import { feedbackActions } from 'models/Narrator/FeedbackActions';
+import { EFeedbackAction } from 'models/Narrator/FeedbackActions';
 
 import {
   makeSelectLoader,
@@ -68,15 +68,15 @@ const ReflectionFormulaBlock = ({
   }, [character]);
 
   const feedbackOptions = useMemo(() => {
-    const options = values(feedbackActions).filter(
-      (action) => action !== feedbackActions.showSpectrum,
+    const options = values(EFeedbackAction).filter(
+      (action) => action !== EFeedbackAction.SHOW_SPECTRUM,
     );
 
     return options.map((option) => ({
       value: option,
       label: formatMessage(messages[option]),
     }));
-  }, [feedbackActions]);
+  }, [EFeedbackAction]);
 
   const selectedOption = selectOptions.find(
     (option) => option.value === block.animation,
@@ -86,7 +86,7 @@ const ReflectionFormulaBlock = ({
     (option) => option.value === block.action,
   );
 
-  const hasSpecialPositioning = block.action !== feedbackActions.noAction;
+  const hasSpecialPositioning = block.action !== EFeedbackAction.NO_ACTION;
 
   return (
     <Column>
@@ -242,7 +242,7 @@ const mapDispatchToProps = {
       index,
       {
         action,
-        animation: action === feedbackActions.noAction ? 'rest' : 'pointUp',
+        animation: action === EFeedbackAction.NO_ACTION ? 'rest' : 'pointUp',
       },
       id,
     ),

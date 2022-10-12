@@ -31,7 +31,7 @@ import {
 } from 'models/Narrator/BlockTypes';
 
 import { feedbackQuestion } from 'models/Session/QuestionTypes';
-import { feedbackActions } from 'models/Narrator/FeedbackActions';
+import { EFeedbackAction } from 'models/Narrator/FeedbackActions';
 import animationMessages from './messages';
 import { updateBlockSettings, switchSpeechReflection } from '../../actions';
 import messages from '../messages';
@@ -79,15 +79,15 @@ const SpeechBlock = ({
   }, [character]);
 
   const feedbackOptions = useMemo(() => {
-    const options = values(feedbackActions).filter(
-      (action) => action !== feedbackActions.showSpectrum,
+    const options = values(EFeedbackAction).filter(
+      (action) => action !== EFeedbackAction.SHOW_SPECTRUM,
     );
 
     return options.map((option) => ({
       value: option,
       label: formatMessage(messages[option]),
     }));
-  }, [feedbackActions]);
+  }, [EFeedbackAction]);
 
   const handleTextUpdate = (value) =>
     updateText(blockIndex, splitAndKeep(value, [',', '.', '?', '!']), id);
@@ -117,7 +117,7 @@ const SpeechBlock = ({
     (option) => option.value === block.action,
   );
 
-  const hasSpecialPositioning = block.action !== feedbackActions.noAction;
+  const hasSpecialPositioning = block.action !== EFeedbackAction.NO_ACTION;
   const isAnimationDisabled = disabled || animationDisabled;
 
   return (
@@ -242,7 +242,7 @@ const mapDispatchToProps = {
       index,
       {
         action,
-        animation: action === feedbackActions.noAction ? 'rest' : 'pointUp',
+        animation: action === EFeedbackAction.NO_ACTION ? 'rest' : 'pointUp',
       },
       id,
     ),

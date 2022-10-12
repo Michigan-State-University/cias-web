@@ -1,8 +1,14 @@
 export type TSpeechAnimation = {
   animations: {
-    start?: string;
-    speech: string;
-    end?: string;
+    [ESpeechPhase.START]?: string;
+    [ESpeechPhase.SPEECH]: string;
+    [ESpeechPhase.END]?: string;
   };
   isEndReversed?: boolean;
 };
+
+export enum ESpeechPhase {
+  START = 'start',
+  SPEECH = 'speech',
+  END = 'end',
+}
