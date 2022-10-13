@@ -34,6 +34,7 @@ const elements = {
   },
   userInterventionTileHeight: 200,
   screenSettingsWidth: 400,
+  continueButtonWidth: 120,
 };
 
 const visualAnalogScaleLabelStyles = {

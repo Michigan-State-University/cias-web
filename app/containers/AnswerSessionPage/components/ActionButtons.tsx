@@ -1,6 +1,8 @@
 import React, { memo } from 'react';
 import { useIntl } from 'react-intl';
 
+import { elements } from 'theme';
+
 import Row from 'components/Row';
 import { Button } from 'components/Button';
 
@@ -49,7 +51,7 @@ const Component = ({
           data-cy="continue-button"
           disabled={continueButtonDisabled}
           margin={20}
-          width="180px"
+          width={elements.continueButtonWidth}
           loading={continueButtonLoading}
           onClick={onContinueClick}
           title={formatMessage(messages.nextQuestion)}

@@ -211,7 +211,7 @@ const RenderQuestionDetails = ({
               {showProceedButton && (
                 <Box my={20} ml={26}>
                   {/* @ts-ignore */}
-                  <Button width="180px" disabled>
+                  <Button width={elements.continueButtonWidth} disabled>
                     <FormattedMessage {...messages.nextQuestion} />
                   </Button>
                 </Box>
