@@ -4,19 +4,33 @@ import clamp from 'lodash/clamp';
 
 import { elements } from 'theme';
 
-import { CHARACTER_CONFIGS } from 'models/Character';
+import { CHARACTER_CONFIGS, CharacterType } from 'models/Character';
 
 import { characterToMoveAnimationsMap } from 'utils/animations/animationsNames';
+import { NarratorBlock, MoveAnimation } from 'models/Narrator';
+import { Point2D } from 'global/types/math';
 
 import { animationDuration } from './constants';
 import { importAnimation } from './utils';
+import { ILoadedMoveData } from './types';
 
 const defaultCurrent = {
   clientWidth: elements.draggableContainerSize,
   clientHeight: elements.draggableContainerSize,
 };
 
-const useMoveHelper = (
+type TUseMoveHelper = (
+  animationContainer: HTMLElement,
+  blocks: NarratorBlock[],
+  dispatchUpdate: (state: { currentData: Nullable<ILoadedMoveData> }) => void,
+  character: CharacterType,
+) => {
+  animationPos: Point2D;
+  moveAnimation: (nextBlock: NarratorBlock) => Promise<void>;
+  fetchMoveAnimations: () => Promise<void>;
+};
+
+const useMoveHelper: TUseMoveHelper = (
   animationContainer,
   blocks,
   dispatchUpdate,
@@ -24,11 +38,12 @@ const useMoveHelper = (
 ) => {
   const [scaleFactor, setScaleFactor] = useState({ x: 1, y: 1 });
 
-  const loadedMoveAnimations = useRef([]);
+  const loadedMoveAnimations = useRef<ILoadedMoveData[]>([]);
 
-  const clampPosition = (value) => clamp(value, 0, Number.MAX_SAFE_INTEGER);
+  const clampPosition = (value: number) =>
+    clamp(value, 0, Number.MAX_SAFE_INTEGER);
 
-  const getScaledPosition = (scale, position) => {
+  const getScaledPosition = (scale: Point2D, position: Point2D): Point2D => {
     const { clientWidth, clientHeight } = animationContainer || defaultCurrent;
     const { height, width } = CHARACTER_CONFIGS[character].size;
     return {
@@ -52,7 +67,7 @@ const useMoveHelper = (
     return { x: scaleX, y: scaleY };
   };
 
-  const getInitialAnimationPosition = (firstBlock) => {
+  const getInitialAnimationPosition = (firstBlock: NarratorBlock) => {
     if (!firstBlock) return elements.characterInitialPosition;
     return getScaledPosition(getScaleFactor(), firstBlock.endPosition);
   };
@@ -67,16 +82,18 @@ const useMoveHelper = (
   }, []);
 
   const loadMoveAnimations = async () => {
-    const moveAnimations = [];
+    const moveAnimations: ILoadedMoveData[] = [];
     if (blocks.length) {
       await Promise.all(
-        characterToMoveAnimationsMap[character].map(async (animation) => {
-          const data = await importAnimation(character, animation);
-          moveAnimations.push({
-            name: animation,
-            animationData: data,
-          });
-        }),
+        characterToMoveAnimationsMap[character].map(
+          async (animation: MoveAnimation) => {
+            const data = await importAnimation(character, 'standStill');
+            moveAnimations.push({
+              name: animation,
+              animationData: data,
+            });
+          },
+        ),
       );
     }
     return moveAnimations;
@@ -86,10 +103,10 @@ const useMoveHelper = (
     loadedMoveAnimations.current = await loadMoveAnimations();
   };
 
-  const setPosition = (position) =>
+  const setPosition = (position: Point2D) =>
     setAnimationPos(getScaledPosition(scaleFactor, position));
 
-  const findMoveAnimation = (position) => (anim) => {
+  const findMoveAnimation = (position: Point2D) => (anim: ILoadedMoveData) => {
     const direction =
       getScaledPosition(scaleFactor, position).x > animationPos.x
         ? 'Left'
@@ -97,7 +114,7 @@ const useMoveHelper = (
     return anim.name === `move${direction}`;
   };
 
-  const moveAnimation = async (nextBlock) => {
+  const moveAnimation = async (nextBlock: NarratorBlock) => {
     if (!nextBlock) return;
     const { endPosition } = nextBlock;
     if (isEqual(getScaledPosition(scaleFactor, endPosition), animationPos))

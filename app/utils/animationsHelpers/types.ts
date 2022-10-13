@@ -1,6 +1,7 @@
 import {
   IReflection,
   IReflectionFormula,
+  MoveAnimation,
   NarratorAnimation,
   NarratorBlockTypes,
   SpeechAnimation,
@@ -19,6 +20,11 @@ export interface ILoadedAudioData {
   name: SpeechAnimation;
   animationData: ISpeechAnimationData;
   isEndReversed: boolean;
+}
+
+export interface ILoadedMoveData {
+  name: MoveAnimation;
+  animationData: JSON;
 }
 
 export interface ISpeechAnimationData {
