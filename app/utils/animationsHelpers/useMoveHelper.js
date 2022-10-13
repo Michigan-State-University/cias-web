@@ -3,6 +3,9 @@ import isEqual from 'lodash/isEqual';
 import clamp from 'lodash/clamp';
 
 import { elements } from 'theme';
+
+import { CHARACTER_CONFIGS } from 'models/Character';
+
 import { characterToMoveAnimationsMap } from 'utils/animations/animationsNames';
 
 import { animationDuration } from './constants';
@@ -27,9 +30,10 @@ const useMoveHelper = (
 
   const getScaledPosition = (scale, position) => {
     const { clientWidth, clientHeight } = animationContainer || defaultCurrent;
+    const { height, width } = CHARACTER_CONFIGS[character].size;
     return {
-      x: clampPosition(Math.min(position.x * scale.x, clientWidth - 100)),
-      y: clampPosition(Math.min(position.y, clientHeight - 100)),
+      x: clampPosition(Math.min(position.x * scale.x, clientWidth - width)),
+      y: clampPosition(Math.min(position.y, clientHeight - height)),
     };
   };
 

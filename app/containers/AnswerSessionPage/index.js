@@ -43,6 +43,7 @@ import { canPreview } from 'models/Status/statusPermissions';
 import { finishQuestion } from 'models/Session/QuestionTypes';
 import { UserSessionType } from 'models/UserSession/UserSession';
 import { QuestionTypes } from 'models/Question';
+import { CHARACTER_CONFIGS } from 'models/Character';
 
 import QuestionTranscript from 'containers/QuestionTranscript';
 import {
@@ -455,25 +456,38 @@ export function AnswerSessionPage({
           </Box>
 
           {isNarratorPositionFixed && (
-            <AnimationRefHelper
-              currentQuestion={currentQuestion}
-              currentQuestionId={currentQuestionId}
-              previewMode={previewMode}
-              changeIsAnimationOngoing={changeIsAnimationOngoing}
-              setFeedbackSettings={setFeedbackSettings}
-              feedbackScreenSettings={feedbackScreenSettings}
-              audioInstance={audioInstance}
-            >
-              <ActionButtons
-                renderSkipQuestionButton={shouldRenderSkipQuestionButton}
-                skipQuestionButtonDisabled={skipQuestionButtonDisabled}
-                onSkipQuestionClick={() => setSkipQuestionModalVisible(true)}
-                renderContinueButton={shouldRenderContinueButton}
-                continueButtonDisabled={isButtonDisabled()}
-                continueButtonLoading={isLoading}
-                onContinueClick={onContinueButton}
-              />
-            </AnimationRefHelper>
+            <Row mt={isMobile ? 32 : 16}>
+              <AnimationRefHelper
+                currentQuestion={currentQuestion}
+                currentQuestionId={currentQuestionId}
+                previewMode={previewMode}
+                changeIsAnimationOngoing={changeIsAnimationOngoing}
+                setFeedbackSettings={setFeedbackSettings}
+                feedbackScreenSettings={feedbackScreenSettings}
+                audioInstance={audioInstance}
+              >
+                <ActionButtons
+                  renderSkipQuestionButton={shouldRenderSkipQuestionButton}
+                  skipQuestionButtonDisabled={skipQuestionButtonDisabled}
+                  onSkipQuestionClick={() => setSkipQuestionModalVisible(true)}
+                  renderContinueButton={shouldRenderContinueButton}
+                  continueButtonDisabled={isButtonDisabled()}
+                  continueButtonLoading={isLoading}
+                  onContinueClick={onContinueButton}
+                  containerStyle={{
+                    my: 0,
+                    height:
+                      CHARACTER_CONFIGS[
+                        currentQuestion.narrator.settings.character
+                      ]?.size?.height,
+                    align: isMobile ? 'end' : 'center',
+                  }}
+                  continueButtonStyle={{
+                    margin: 0,
+                  }}
+                />
+              </AnimationRefHelper>
+            </Row>
           )}
 
           {!isNarratorPositionFixed && (

@@ -5,7 +5,7 @@ export type MissingAnimationReplacement = {
   to: NarratorAnimation;
 };
 
-export type MissingAnimationModalState = Nullable<{
+export type MissingAnimationModalData = {
   missingAnimations: MissingAnimationReplacement[];
-  newNarrator?: Narrator;
-}>;
+  newNarrator: Narrator;
+};

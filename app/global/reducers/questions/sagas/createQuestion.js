@@ -101,14 +101,14 @@ function* createQuestionGroup({ payload: { sessionId, groupType } }) {
   const groups = yield select(makeSelectQuestionGroups());
 
   const {
-    settings: { narrator },
+    settings: { narrator: narratorSettings },
   } = yield select(makeSelectSession());
 
-  const questions = prepareNewGroupQuestions(
-    groupType,
-    formatMessage,
-    narrator,
-  );
+  const questions = prepareNewGroupQuestions(groupType, formatMessage, {
+    // TODO CIAS30-2732 Get default character from settings
+    character: CharacterType.PEEDY,
+    ...narratorSettings,
+  });
 
   yield call(
     createNewQuestionGroup,

@@ -14,6 +14,7 @@ import useMoveHelper from 'utils/animationsHelpers/useMoveHelper';
 import useAudioHelper from 'utils/animationsHelpers/useAudioHelper';
 import useAnimationHelper from 'utils/animationsHelpers/useAnimationHelper';
 import { useAsync } from 'utils/useAsync';
+
 import {
   bodyAnimationType,
   speechType,
@@ -24,6 +25,7 @@ import {
   feedbackBlockType,
   reflectionFormulaType,
 } from 'models/Narrator/BlockTypes';
+import { CHARACTER_CONFIGS } from 'models/Character';
 
 import { setCurrentBlockIndex } from 'containers/AnswerSessionPage/actions';
 
@@ -45,10 +47,6 @@ const reducer = (state, action) => {
 const initialState = {
   currentData: null,
   currentBlockIndex: 0,
-};
-
-const lottieStyles = {
-  margin: 'none',
 };
 
 const CharacterAnim = ({
@@ -327,6 +325,10 @@ const CharacterAnim = ({
 
   const displayNarrator = settings.animation && Boolean(blocks.length);
 
+  const characterConfig = CHARACTER_CONFIGS[settings.character];
+  const { height: animationHeight, width: animationWidth } =
+    characterConfig.size;
+
   return (
     <NarratorContainer>
       {displayNarrator && (
@@ -334,9 +336,9 @@ const CharacterAnim = ({
           <Lottie
             ref={animationRef}
             options={defaultOptions}
-            height={100}
-            width={100}
-            style={lottieStyles}
+            height={animationHeight}
+            width={animationWidth}
+            style={characterConfig.lottieStyles}
             isClickToPauseDisabled
             isStopped={isStopped}
             ariaLabel={formatMessage(messages.narratorAlt)}

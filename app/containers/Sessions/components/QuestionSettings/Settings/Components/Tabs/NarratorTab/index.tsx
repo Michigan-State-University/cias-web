@@ -5,6 +5,7 @@ import { FormattedMessage, useIntl } from 'react-intl';
 import { compose } from 'redux';
 import { connect } from 'react-redux';
 import { Markup } from 'interweave';
+import isEqual from 'lodash/isEqual';
 
 import lastKey from 'utils/getLastKey';
 import {
@@ -14,12 +15,14 @@ import {
 
 import { colors, borders, fontSizes, themeColors } from 'theme';
 
+import { CharacterType, CHARACTER_CONFIGS } from 'models/Character';
 import { Narrator, NarratorBlock, NarratorBlockTypes } from 'models/Narrator';
 import { getRemovedBlockForSetting } from 'models/Narrator/BlockTypes';
 import { DISABLED_NARRATOR_SETTINGS_BY_QUESTION_TYPE } from 'models/Session/utils';
 import {
   makeSelectCurrentNarratorBlockIndex,
   changeCurrentNarratorBlock,
+  setAnimationStopPosition,
 } from 'global/reducers/localState';
 import { makeSelectSelectedQuestionType } from 'global/reducers/questions';
 import { makeSelectQuestionGroupsIds } from 'global/reducers/questionGroups';
@@ -34,7 +37,6 @@ import { ConfirmationModal } from 'components/Modal';
 import InfoBox from 'components/Box/InfoBox';
 import Img from 'components/Img';
 import { LI, UL } from 'components/List';
-import { CharacterType } from 'models/Character';
 
 import MissingAnimationsModal from './MissingAnimationsModal';
 import BlockTypeChooser from '../../BlockTypeChooser';
@@ -47,9 +49,10 @@ import {
 } from '../../../actions';
 import { NarratorSetting } from '../NarratorSetting';
 import {
-  MissingAnimationModalState,
+  MissingAnimationModalData,
   MissingAnimationReplacement,
 } from './types';
+import { getBlocksFittingDraggableContainer } from './utils';
 
 type NonReduxProps = {
   disabled: boolean;
@@ -69,6 +72,7 @@ type Props = {
   groupIds: string[];
   changeNarratorBlockIndex: (index: number) => void;
   updateNarrator: (newNarrator: Narrator) => void;
+  setOffset: (x: number, y: number) => void;
 } & NonReduxProps;
 
 const NarratorTab = ({
@@ -84,10 +88,11 @@ const NarratorTab = ({
   changeNarratorBlockIndex,
   isTlfbGroup,
   updateNarrator,
+  setOffset,
 }: Props) => {
   const [confirmationOption, setConfirmationOption] = useState('');
   const [missingAnimationModalState, setMissingAnimationModalState] =
-    useState<MissingAnimationModalState>(null);
+    useState<Nullable<MissingAnimationModalData & { newSize: boolean }>>(null);
   const { formatMessage } = useIntl();
 
   const dismissConfirmation = () => setConfirmationOption('');
@@ -109,10 +114,8 @@ const NarratorTab = ({
 
   const getMissingAnimationsList = (
     character: CharacterType,
-  ): MissingAnimationModalState => {
+  ): MissingAnimationModalData => {
     const missingAnimations: MissingAnimationReplacement[] = [];
-    if (!narrator) return { missingAnimations };
-
     const newBlocks =
       narrator.blocks?.map((block) => {
         const { type, animation } = block;
@@ -138,23 +141,56 @@ const NarratorTab = ({
     };
   };
 
+  const moveNarratorPreview = (blocks: NarratorBlock[]) => {
+    const { x, y } = blocks[currentBlockIndex].endPosition;
+    setOffset(x, y);
+  };
+
   const onNarratorChangeConfirm = () => {
-    if (missingAnimationModalState?.newNarrator) {
-      updateNarrator(missingAnimationModalState.newNarrator);
+    if (missingAnimationModalState) {
+      const { newNarrator, newSize } = missingAnimationModalState;
+      updateNarrator(newNarrator);
+      if (newSize) {
+        moveNarratorPreview(newNarrator.blocks);
+      }
       setMissingAnimationModalState(null);
     }
   };
 
   const toggleAction = (index: string) => (value: boolean | string) => {
     if (index === 'character') {
-      const misingAnimationModalData = getMissingAnimationsList(
+      const { newNarrator, missingAnimations } = getMissingAnimationsList(
         value as CharacterType,
       );
-      if (
-        misingAnimationModalData &&
-        misingAnimationModalData?.missingAnimations?.length > 0
-      ) {
-        setMissingAnimationModalState(misingAnimationModalData);
+
+      const oldCharacterSize =
+        CHARACTER_CONFIGS[narrator.settings.character].size;
+      const newCharacterSize = CHARACTER_CONFIGS[value as CharacterType].size;
+
+      const hasNewCharacterDifferentSize = !isEqual(
+        oldCharacterSize,
+        newCharacterSize,
+      );
+
+      if (hasNewCharacterDifferentSize) {
+        newNarrator.blocks = getBlocksFittingDraggableContainer(
+          newNarrator.blocks,
+          newCharacterSize,
+        );
+      }
+
+      if (missingAnimations.length > 0) {
+        setMissingAnimationModalState({
+          newNarrator,
+          missingAnimations,
+          newSize: hasNewCharacterDifferentSize,
+        });
+        return;
+      }
+
+      if (hasNewCharacterDifferentSize) {
+        updateNarrator(newNarrator);
+        moveNarratorPreview(newNarrator.blocks);
         return;
       }
     }
@@ -317,6 +353,7 @@ const mapDispatchToProps = {
   onNarratorToggle: updateNarratorSettings,
   changeNarratorBlockIndex: changeCurrentNarratorBlock,
   updateNarrator: updateEntireNarrator,
+  setOffset: setAnimationStopPosition,
 };
 
 const withConnect = connect(mapStateToProps, mapDispatchToProps);

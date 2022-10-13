@@ -13,6 +13,7 @@ import useAnimationHelper from 'utils/animationsHelpers/useAnimationHelper';
 import useAudioHelper from 'utils/animationsHelpers/useAudioHelper';
 import useDidUpdateEffect from 'utils/useDidUpdateEffect';
 import useResizeObserver from 'utils/useResizeObserver';
+
 import {
   setAnimationStopPosition,
   updatePreviewAnimation,
@@ -29,16 +30,12 @@ import {
 import { makeSelectAudioInstance } from 'global/reducers/globalState';
 import { makeSelectInterventionStatus } from 'global/reducers/intervention';
 import { canEdit } from 'models/Status/statusPermissions';
+import { CHARACTER_CONFIGS } from 'models/Character';
 
 import { elements } from 'theme';
 import messages from 'containers/AnswerSessionPage/messages';
-import {
-  NarratorContainer,
-  lottieStyles,
-  CharacterActiveIndicator,
-} from './styled';
+import { NarratorContainer, CharacterActiveIndicator } from './styled';
 import { saveNarratorMovement } from '../QuestionSettings/Settings/actions';
-import { CHARACTER_SIZE } from './utils';
 import { reducer, initialState, UPDATE } from './reducer';
 
 const QuestionNarrator = ({
@@ -209,6 +206,10 @@ const QuestionNarrator = ({
     ...getAnimationOptions(),
   };
 
+  const characterConfig = CHARACTER_CONFIGS[settings.character];
+  const { height: characterHeight, width: characterWidth } =
+    characterConfig.size;
+
   const handleSaveOffset = (x, y) => {
     const containerWidthWithBorders = width + 2;
     const scaleX = Math.max(
@@ -218,7 +219,7 @@ const QuestionNarrator = ({
     if (scaleX > 1) {
       const isCharacterOnTheRightHandSide = x > 0.5 * containerWidthWithBorders;
       const characterSizeOffset = isCharacterOnTheRightHandSide
-        ? CHARACTER_SIZE.width * scaleX - CHARACTER_SIZE.width
+        ? characterWidth * scaleX - characterWidth
         : 0;
       const posX = Math.ceil(x * scaleX + characterSizeOffset);
       savePosition(currentBlockIndex, questionId, { x: posX, y });
@@ -231,7 +232,7 @@ const QuestionNarrator = ({
 
   const getPosition = () => {
     const posY = Math.min(
-      height !== 0 ? height - 100 : Number.POSITIVE_INFINITY,
+      height !== 0 ? height - characterHeight : Number.POSITIVE_INFINITY,
       animationPositionStored.y,
     );
     const containerWidthWithBorders = width + 2;
@@ -250,12 +251,12 @@ const QuestionNarrator = ({
     const isCharacterOnTheRightHandSide =
       animationPositionStored.x > 0.5 * elements.draggableContainerSize;
     const characterSizeOffset = isCharacterOnTheRightHandSide
-      ? CHARACTER_SIZE.width - CHARACTER_SIZE.width * scaleX
+      ? characterWidth - characterWidth * scaleX
       : 0;
     return {
       x: Math.min(
         Math.floor(animationPositionStored.x * scaleX - characterSizeOffset),
-        elements.draggableContainerSize - CHARACTER_SIZE.width,
+        elements.draggableContainerSize - characterWidth,
       ),
       y: posY,
     };
@@ -264,10 +265,7 @@ const QuestionNarrator = ({
   const editingPossible = draggable && canEdit(interventionStatus);
 
   return (
-    <NarratorContainer
-      canBeDragged={editingPossible}
-      width={CHARACTER_SIZE.width}
-    >
+    <NarratorContainer canBeDragged={editingPossible} width={characterWidth}>
       {settings.animation && (
         <Draggable
           onStop={(_, { x, y }) => handleSaveOffset(x, y)}
@@ -276,14 +274,17 @@ const QuestionNarrator = ({
           bounds="parent"
           handle="#lottie"
         >
-          <CharacterActiveIndicator $active={editingPossible}>
+          <CharacterActiveIndicator
+            $active={editingPossible}
+            $characterConfig={characterConfig}
+          >
             <div id="lottie">
               <Lottie
                 ref={animationRef}
                 options={defaultOptions}
-                height={CHARACTER_SIZE.height}
-                width={CHARACTER_SIZE.width}
-                style={lottieStyles}
+                height={characterHeight}
+                width={characterWidth}
+                style={characterConfig.lottieStyles}
                 isClickToPauseDisabled
                 isStopped={
                   previewData.animation === 'standStill' ||
