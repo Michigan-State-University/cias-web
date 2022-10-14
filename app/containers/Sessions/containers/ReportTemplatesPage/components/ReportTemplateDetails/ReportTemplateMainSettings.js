@@ -107,11 +107,11 @@ const ReportTemplateMainSettings = ({
   });
 
   const imageUploading = updateReportTemplateLoading && isUploadingImage;
+  const isReportForHenryFord =
+    singleReportTemplate.reportFor === ReportFor.henryFordHealth;
 
   const hfhRadioButtonDisabled =
-    !canEdit ||
-    (!hfhsAccess &&
-      singleReportTemplate.reportFor === ReportFor.henryFordHealth);
+    !canEdit || (!hfhsAccess && isReportForHenryFord);
 
   return (
     <Container style={{ maxWidth: 600 }}>
@@ -209,7 +209,7 @@ const ReportTemplateMainSettings = ({
                       </Radio>
                     </Row>
                   </Col>
-                  {(hfhsAccess || hfhRadioButtonDisabled) && (
+                  {(hfhsAccess || (hfhRadioButtonDisabled && canEdit)) && (
                     <Col>
                       <Row
                         align="center"
@@ -219,37 +219,29 @@ const ReportTemplateMainSettings = ({
                           id={`report-for-toggle-${ReportFor.henryFordsHospital}`}
                           mr={10}
                           disabled={hfhRadioButtonDisabled}
-                          checked={
-                            singleReportTemplate.reportFor ===
-                            ReportFor.henryFordHealth
-                          }
+                          checked={isReportForHenryFord}
                           onChange={() =>
                             canEdit &&
                             onReportForChange(ReportFor.henryFordHealth)
                           }
                         >
-                          {hfhRadioButtonDisabled ? (
-                            <Tooltip
-                              id="hfhs-access-revoked-template-type"
-                              place="top"
-                              stretchContent
-                              text={formatMessage(
-                                messages.hfhReportTypeTooltipContent,
-                              )}
-                            >
-                              <Text>
-                                {formatMessage(
-                                  messages.settingsReportForHenryFordHealth,
-                                )}
-                              </Text>
-                            </Tooltip>
-                          ) : (
+                          <Tooltip
+                            id="hfhs-access-revoked-template-type"
+                            place="top"
+                            stretchContent
+                            text={formatMessage(
+                              messages.hfhReportTypeTooltipContent,
+                            )}
+                            visible={
+                              !hfhsAccess && canEdit && isReportForHenryFord
+                            }
+                          >
                             <Text>
                               {formatMessage(
                                 messages.settingsReportForHenryFordHealth,
                               )}
                             </Text>
-                          )}
+                          </Tooltip>
                         </Radio>
                       </Row>
                     </Col>
