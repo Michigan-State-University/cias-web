@@ -8,4 +8,5 @@ export enum NotificationChannelMessageTopic {
 
 export enum NotificationChannelActionName {
   ON_READ_NOTIFICATION = 'on_read_notification',
+  ON_NAVIGATOR_AVAILABILITY_SET = 'on_navigator_availability_set',
 }

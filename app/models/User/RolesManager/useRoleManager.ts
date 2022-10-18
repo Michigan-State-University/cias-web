@@ -42,7 +42,7 @@ const ALLOWED_LIVE_CHAT_NOTIFICATIONS_DISPLAY = [Roles.Navigator];
 
 const ALLOWED_QUICK_EXIT_USE = [Roles.Participant, Roles.Guest];
 
-const REQUIRED_NAVIGATORS_AVAILABILITY_SET = [Roles.Admin, Roles.Researcher];
+const REQUIRED_NAVIGATOR_AVAILABILITY_SET = [Roles.Admin, Roles.Researcher];
 
 export const canDisplayLeftSidebar = (userRoles: Roles[]) =>
   !arraysOverlap(userRoles, FORBIDDEN_LEFT_SIDEBAR_DISPLAY);
@@ -101,9 +101,9 @@ export const useRoleManager = () => {
 
   const canUserUseQuickExit = canUseQuickExit(userRoles);
 
-  const mustSetNavigatorsAvailability =
+  const mustSetNavigatorAvailability =
     isNavigator &&
-    arraysOverlap(userRoles, REQUIRED_NAVIGATORS_AVAILABILITY_SET);
+    arraysOverlap(userRoles, REQUIRED_NAVIGATOR_AVAILABILITY_SET);
 
   return {
     isAdmin,
@@ -122,6 +122,6 @@ export const useRoleManager = () => {
     userRoles,
     canUserDisplayLeftSidebar,
     canUserUseQuickExit,
-    mustSetNavigatorsAvailability,
+    mustSetNavigatorAvailability,
   };
 };

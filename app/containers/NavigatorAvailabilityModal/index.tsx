@@ -6,39 +6,36 @@ import { useRoleManager } from 'models/User/RolesManager';
 import { ModalType, useModal } from 'components/Modal';
 
 import messages from './messages';
-import NavigatorsAvailabilityModalUI from './NavigatorsAvailabilityModalUI';
+import NavigatorAvailabilityModalUI from './NavigatorAvailabilityModalUI';
 
 const NavigatorsAvailabilityModal = () => {
   const { formatMessage } = useIntl();
 
-  const { mustSetNavigatorsAvailability } = useRoleManager();
-
-  const saveNavigatorsAvailability = () => {};
+  const { mustSetNavigatorAvailability } = useRoleManager();
 
   const { openModal, Modal } = useModal({
     type: ModalType.Modal,
     props: {
       visible: true,
-      title: formatMessage(messages.navigatorsAvailabilityDialogTitle),
+      title: formatMessage(messages.navigatorAvailabilityDialogTitle),
       titleProps: {
         fontSize: 20,
         lineHeight: 1,
       },
-      confirmAction: saveNavigatorsAvailability,
       disableClose: true,
       hideCloseButton: true,
       maxWidth: 458,
       px: 32,
       py: 32,
     },
-    modalContentRenderer: NavigatorsAvailabilityModalUI,
+    modalContentRenderer: NavigatorAvailabilityModalUI,
   });
 
   useEffect(() => {
-    if (mustSetNavigatorsAvailability) {
+    if (mustSetNavigatorAvailability) {
       openModal(true);
     }
-  }, [mustSetNavigatorsAvailability]);
+  }, [mustSetNavigatorAvailability]);
 
   return <Modal />;
 };

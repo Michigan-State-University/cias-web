@@ -12,7 +12,7 @@ import {
 
 export type NotificationsActionsContextType = {
   readConversationNotifications: (conversationId: string) => void;
-};
+} & Pick<ReturnType<typeof useNotificationChannel>, 'setNavigatorAvailability'>;
 
 export const NotificationsActionsContext =
   createContext<Nullable<NotificationsActionsContextType>>(null);
@@ -24,7 +24,8 @@ export const NotificationsActionsProvider = ({
   useInjectSaga(withAllNotificationsSagas);
   const notifications = useSelector(makeSelectNotifications());
 
-  const { readNotification } = useNotificationChannel();
+  const { readNotification, setNavigatorAvailability } =
+    useNotificationChannel();
 
   const readConversationNotifications = (conversationId: string) => {
     notifications.forEach(({ id, data }) => {
@@ -36,7 +37,7 @@ export const NotificationsActionsProvider = ({
 
   return (
     <NotificationsActionsContext.Provider
-      value={{ readConversationNotifications }}
+      value={{ readConversationNotifications, setNavigatorAvailability }}
     >
       {children}
     </NotificationsActionsContext.Provider>

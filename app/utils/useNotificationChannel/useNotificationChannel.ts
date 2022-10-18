@@ -9,6 +9,7 @@ import {
   markNotificationReadLocally,
   onNewNotificationReceive,
   onUnreadNotificationsFetchedReceive,
+  setNavigatorAvailabilityLocally,
 } from 'global/reducers/notifications/actions';
 
 import {
@@ -16,6 +17,7 @@ import {
   NotificationChannelAction,
   NotificationChannelMessage,
   ReadNotificationData,
+  SetNavigatorAvailabilityData,
   UnreadNotificationsFetchedData,
 } from './types';
 import {
@@ -73,7 +75,17 @@ export const useNotificationChannel = () => {
     toast.dismiss(notificationId);
   };
 
+  const setNavigatorAvailability = (data: SetNavigatorAvailabilityData) => {
+    const { online } = data;
+    dispatch(setNavigatorAvailabilityLocally(online));
+    channel?.perform({
+      name: NotificationChannelActionName.ON_NAVIGATOR_AVAILABILITY_SET,
+      data,
+    });
+  };
+
   return {
     readNotification,
+    setNavigatorAvailability,
   };
 };

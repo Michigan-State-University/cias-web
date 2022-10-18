@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useContext, useState } from 'react';
 import { useIntl } from 'react-intl';
 import isNil from 'lodash/isNil';
 
@@ -10,10 +10,11 @@ import Column from 'components/Column';
 import Button from 'components/Button';
 import { BoxRadio } from 'components/Radio';
 import { ModalProps } from 'components/Modal';
+import { NotificationsActionsContext } from 'containers/NotificationsActionsProvider';
 
 import messages from './messages';
 
-const NavigatorsAvailabilityModalUI: ModalProps['modalContentRenderer'] = ({
+const NavigatorAvailabilityModalUI: ModalProps['modalContentRenderer'] = ({
   // eslint-disable-next-line react/prop-types
   closeModal,
 }) => {
@@ -21,10 +22,20 @@ const NavigatorsAvailabilityModalUI: ModalProps['modalContentRenderer'] = ({
 
   const [online, setOnline] = useState<Nullable<boolean>>(null);
 
+  const { setNavigatorAvailability } =
+    useContext(NotificationsActionsContext) ?? {};
+
+  const handleSave = () => {
+    if (setNavigatorAvailability && !isNil(online)) {
+      setNavigatorAvailability({ online });
+    }
+    closeModal();
+  };
+
   return (
     <>
       <Text lineHeight="20px">
-        {formatMessage(messages.navigatorsAvailabilityDialogSubtitle)}
+        {formatMessage(messages.navigatorAvailabilityDialogSubtitle)}
       </Text>
       <Divider mt={16} mb={40} color={colors.lightDivider} />
       <Column gap={20}>
@@ -45,7 +56,7 @@ const NavigatorsAvailabilityModalUI: ModalProps['modalContentRenderer'] = ({
       </Column>
       <Button
         disabled={isNil(online)}
-        onClick={closeModal}
+        onClick={handleSave}
         px={30}
         width="auto"
         mt={56}
@@ -56,4 +67,4 @@ const NavigatorsAvailabilityModalUI: ModalProps['modalContentRenderer'] = ({
   );
 };
 
-export default NavigatorsAvailabilityModalUI;
+export default NavigatorAvailabilityModalUI;

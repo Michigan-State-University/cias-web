@@ -6,6 +6,7 @@ import {
   MARK_NOTIFICATION_READ_LOCALLY,
   ON_NEW_NOTIFICATION_RECEIVE,
   ON_UNREAD_NOTIFICATIONS_FETCHED_RECEIVE,
+  SET_NAVIGATOR_AVAILABILITY_LOCALLY,
   SET_NOTIFICATIONS_LIST_VISIBLE,
 } from './constants';
 
@@ -29,4 +30,9 @@ export const markNotificationReadLocally = createAction(
   MARK_NOTIFICATION_READ_LOCALLY,
   (action) => (notificationId: Notification['id']) =>
     action({ notificationId }),
+);
+
+export const setNavigatorAvailabilityLocally = createAction(
+  SET_NAVIGATOR_AVAILABILITY_LOCALLY,
+  (action) => (online: boolean) => action({ online }),
 );

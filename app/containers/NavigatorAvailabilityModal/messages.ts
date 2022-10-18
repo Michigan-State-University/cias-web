@@ -1,16 +1,16 @@
 import { defineMessages } from 'react-intl';
 
-export const scope = 'app.containers.NavigatorsAvailabilityModal';
+export const scope = 'app.containers.NavigatorAvailabilityModal';
 
 export default defineMessages({
-  navigatorsAvailabilityDialogTitle: {
-    id: `${scope}.navigatorsAvailabilityDialogTitle`,
+  navigatorAvailabilityDialogTitle: {
+    id: `${scope}.navigatorAvailabilityDialogTitle`,
     defaultMessage: 'Open to live chat messages?',
   },
-  navigatorsAvailabilityDialogSubtitle: {
-    id: `${scope}.navigatorsAvailabilityDialogSubtitle`,
+  navigatorAvailabilityDialogSubtitle: {
+    id: `${scope}.navigatorAvailabilityDialogSubtitle`,
     defaultMessage:
-      "You can decide if you want to reveive a new messages from live chat or stay focus on researcher's work.",
+      "You can decide if you want to receive a new messages from live chat or stay focus on researcher's work.",
   },
   noOptionTitle: {
     id: `${scope}.noOptionTitle`,
