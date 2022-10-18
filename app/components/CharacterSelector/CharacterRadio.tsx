@@ -10,7 +10,7 @@ import Box from 'components/Box';
 
 import { SelectCharacterRadio } from './styled';
 import { characterToIconMap } from './constants';
-import messages from '../messages';
+import messages from './messages';
 
 const characterIconSize = 40;
 

@@ -6,7 +6,7 @@ import { CharacterType } from 'models/Character';
 import { FullWidthSwitch } from 'components/Switch';
 import H3 from 'components/H3';
 
-import { CharacterSelector } from './CharacterSelector';
+import CharacterSelector from 'components/CharacterSelector';
 import messages from '../messages';
 
 type Props<T extends boolean | string> = {
@@ -28,7 +28,6 @@ const Component = <T extends boolean | string>({
       if (setting === 'character')
         return (
           <CharacterSelector
-            setting={setting}
             value={value as CharacterType}
             disabled={disabled}
             // @ts-ignore type narrowing not working correctly

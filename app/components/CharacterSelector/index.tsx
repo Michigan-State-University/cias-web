@@ -45,4 +45,4 @@ const Component = ({ value, disabled, onChange }: Props) => {
   );
 };
 
-export const CharacterSelector = memo(Component);
+export default memo(Component);

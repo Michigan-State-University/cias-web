@@ -12,6 +12,7 @@ import {
 } from 'global/reducers/intervention';
 import { colors } from 'theme';
 import { InterventionDto } from 'models/Intervention';
+import { CharacterType } from 'models/Character';
 
 import {
   Col as GCol,
@@ -26,9 +27,8 @@ import { LabelPosition } from 'components/Switch';
 import Switch from 'components/Switch/Switch';
 import Button from 'components/Button';
 import Row from 'components/Row';
+import CharacterSelector from 'components/CharacterSelector';
 
-import { CharacterSelector } from 'containers/Sessions/components/QuestionSettings/Settings/Components/Tabs/CharacterSelector';
-import { CharacterType } from 'models/Character';
 import messages from '../../messages';
 import {
   INTERVENTION_LANGUAGE_LABEL_ID,
