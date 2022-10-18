@@ -68,6 +68,7 @@ import InboxPage from 'containers/InboxPage/Loadable';
 import ArchivePage from 'containers/ArchivePage/Loadable';
 import UserInterventionPage from 'containers/UserInterventionPage/Loadable';
 import ChatWidget from 'containers/ChatWidget';
+import NavigatorsAvailabilityModal from 'containers/NavigatorsAvailabilityModal';
 
 import AppRoute from 'components/AppRoute';
 import IdleTimer from 'components/IdleTimer/Loadable';
@@ -530,6 +531,7 @@ export function App({ user, fetchSelfDetails }) {
       </Switch>
       <GlobalStyle />
       {shouldDisplayChatWidget && <ChatWidget />}
+      <NavigatorsAvailabilityModal />
     </RolesManagerContext.Provider>
   );
 }

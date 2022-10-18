@@ -90,6 +90,7 @@ const colors = {
   cinnabar: '#DD533C',
   fireIsland: '#DD533C',
   cadetBlueCrayola: '#B3BAC7',
+  stormGrey: '#707688',
 };
 
 const themeColors = {
