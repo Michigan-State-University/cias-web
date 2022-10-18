@@ -27,6 +27,8 @@ import Switch from 'components/Switch/Switch';
 import Button from 'components/Button';
 import Row from 'components/Row';
 
+import { CharacterSelector } from 'containers/Sessions/components/QuestionSettings/Settings/Components/Tabs/CharacterSelector';
+import { CharacterType } from 'models/Character';
 import messages from '../../messages';
 import {
   INTERVENTION_LANGUAGE_LABEL_ID,
@@ -46,7 +48,8 @@ const InterventionSettingsModal = ({ editingPossible, onClose }: Props) => {
 
   const [changedIntervention, setChangedIntervention] =
     useState(originalIntervention);
-  const { id, languageCode, languageName, quickExit } = changedIntervention;
+  const { id, languageCode, languageName, quickExit, narrator } =
+    changedIntervention;
 
   useEffect(() => {
     setChangedIntervention(originalIntervention);
@@ -60,14 +63,17 @@ const InterventionSettingsModal = ({ editingPossible, onClose }: Props) => {
   const saveChanges = useCallback(() => {
     const changes = objectDifference(originalIntervention, changedIntervention);
     dispatch(
-      editInterventionRequest({
-        ...changes,
-        id,
-      }),
+      editInterventionRequest(
+        {
+          ...changes,
+          id,
+        },
+        changedIntervention.narrator !== originalIntervention.narrator,
+      ),
     );
   }, [originalIntervention, changedIntervention]);
 
-  const changeIntervention = (changes: Partial<InterventionDto>) => {
+  const changeIntervention = (changes: any) => {
     setChangedIntervention({
       ...changedIntervention,
       ...changes,
@@ -93,6 +99,12 @@ const InterventionSettingsModal = ({ editingPossible, onClose }: Props) => {
     changeIntervention({
       quickExit: value,
     });
+
+  const handleNarratorChange = (value: CharacterType) => {
+    changeIntervention({
+      narrator: value,
+    });
+  };
 
   const onSaveClick = () => {
     saveChanges();
@@ -148,6 +160,20 @@ const InterventionSettingsModal = ({ editingPossible, onClose }: Props) => {
               {formatMessage(messages.interventionSettingsQuickExitLabel)}
             </Text>
           </Switch>
+        </GCol>
+      </GRow>
+      <GRow mb={16} mt={40}>
+        <GCol>
+          <H3>{formatMessage(messages.defaultNarrator)}</H3>
+        </GCol>
+      </GRow>
+      <GRow mb={16}>
+        <GCol>
+          <CharacterSelector
+            value={narrator || CharacterType.PEEDY}
+            onChange={handleNarratorChange}
+            disabled={!editingPossible}
+          />
         </GCol>
       </GRow>
       <Row gap={16} mt={56}>

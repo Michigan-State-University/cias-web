@@ -91,8 +91,11 @@ export const createInterventionSuccess = (intervention) =>
 export const createInterventionError = (error) =>
   actionBuilder(CREATE_INTERVENTION_ERROR, { error });
 
-export const editInterventionRequest = (intervention) =>
-  actionBuilder(EDIT_INTERVENTION_REQUEST, { intervention });
+export const editInterventionRequest = (intervention, hasNarratorChanged) =>
+  actionBuilder(EDIT_INTERVENTION_REQUEST, {
+    intervention,
+    hasNarratorChanged,
+  });
 export const editInterventionSuccess = (intervention) =>
   actionBuilder(EDIT_INTERVENTION_SUCCESS, { intervention });
 export const editInterventionError = (error) =>

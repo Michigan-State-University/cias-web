@@ -7,7 +7,6 @@ import { Col, FullWidthContainer, Row } from 'components/ReactGridSystem';
 import { CharacterRadio } from './CharacterRadio';
 
 type Props = {
-  setting: string;
   value: CharacterType;
   disabled: boolean;
   onChange: (value: CharacterType) => void;
