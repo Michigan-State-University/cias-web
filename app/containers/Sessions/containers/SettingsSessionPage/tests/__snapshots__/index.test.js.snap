@@ -168,6 +168,14 @@ exports[`<SettingsSessionPage /> Should render and match the snapshot 1`] = `
   color: #2F3850;
 }
 
+.c35 {
+  font-family: DM Sans;
+  font-size: 13px;
+  line-height: 130%;
+  color: #2F3850;
+  white-space: nowrap;
+}
+
 .c1 {
   display: -webkit-box;
   display: -webkit-flex;
@@ -178,6 +186,27 @@ exports[`<SettingsSessionPage /> Should render and match the snapshot 1`] = `
   flex-direction: column;
   width: 100%;
   height: 100%;
+}
+
+.c27 {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-flex-direction: column;
+  -ms-flex-direction: column;
+  flex-direction: column;
+  -webkit-align-items: flex-start;
+  -webkit-box-align: flex-start;
+  -ms-flex-align: flex-start;
+  align-items: flex-start;
+}
+
+.c26 {
+  max-width: 100% !important;
+  width: 100%;
+  margin: 0 !important;
+  padding: 0 !important;
 }
 
 .c5 {
@@ -249,6 +278,60 @@ exports[`<SettingsSessionPage /> Should render and match the snapshot 1`] = `
   box-shadow: none;
   outline: none;
   border: 1px solid transparent;
+}
+
+.c30 {
+  display: none;
+}
+
+.c29:disabled + label > .c33 {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.c32 {
+  width: 100%;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+}
+
+.c32:hover {
+  cursor: pointer;
+}
+
+.c29:disabled + .c31 {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.c34 {
+  width: 100%;
+  margin-left: 5px;
+}
+
+.c28 {
+  width: 100%;
+  padding: 16px;
+  border: 1px solid #E9F1FB;
+  border-radius: 5px;
+}
+
+.c36 {
+  width: 100%;
+  padding: 16px;
+  border: 1px solid #E9F1FB;
+  border-radius: 5px;
+  border-color: #107969;
+}
+
+.c36 label {
+  font-weight: 700;
 }
 
 .c21 {
@@ -579,6 +662,123 @@ exports[`<SettingsSessionPage /> Should render and match the snapshot 1`] = `
           </div>
         </label>
       </div>
+    </div>
+    <h3
+      class="c9"
+    >
+      Default narrator
+    </h3>
+    <div
+      class="c26"
+      style="box-sizing: border-box; position: relative; margin-left: auto; margin-right: auto; padding-left: 15px; padding-right: 15px; max-width: 960px;"
+    >
+      <div
+        class=""
+        style="margin-left: -15px; margin-right: -15px; display: flex; flex-wrap: wrap; flex-grow: 0; flex-shrink: 0; align-items: normal; justify-content: flex-start; row-gap: 16px;"
+      >
+        <div
+          align="flex-start"
+          class="c27"
+          style="box-sizing: border-box; min-height: 1px; position: relative; padding-left: 15px; padding-right: 15px; width: 100%; flex-basis: 0px; flex-grow: 1; flex-shrink: 0; max-width: 100%; margin-left: 0%;"
+        >
+          <div
+            class="c11 c28"
+          >
+            <input
+              class="c29 c30"
+              disabled=""
+              id="character-setting-peedy"
+              type="radio"
+            />
+            <label
+              class="c31 c32"
+              for="character-setting-peedy"
+            >
+              <img
+                class="c33 "
+                src="IMAGE_MOCK"
+              />
+              <div
+                class="c18 c34"
+              >
+                <div
+                  class="c11"
+                >
+                  <div
+                    class="c18"
+                  >
+                    <p
+                      class="c35"
+                    >
+                      Peedy
+                    </p>
+                  </div>
+                  <div
+                    class="c18"
+                  >
+                    <img
+                      src="IMAGE_MOCK"
+                    />
+                  </div>
+                </div>
+              </div>
+            </label>
+          </div>
+        </div>
+        <div
+          align="flex-start"
+          class="c27"
+          style="box-sizing: border-box; min-height: 1px; position: relative; padding-left: 15px; padding-right: 15px; width: 100%; flex-basis: 0px; flex-grow: 1; flex-shrink: 0; max-width: 100%; margin-left: 0%;"
+        >
+          <div
+            class="c11 c36"
+          >
+            <input
+              checked=""
+              class="c29 c30"
+              disabled=""
+              id="character-setting-emmi"
+              type="radio"
+            />
+            <label
+              class="c31 c32"
+              for="character-setting-emmi"
+            >
+              <img
+                class="c33 "
+                src="IMAGE_MOCK"
+              />
+              <div
+                class="c18 c34"
+              >
+                <div
+                  class="c11"
+                >
+                  <div
+                    class="c18"
+                  >
+                    <p
+                      class="c35"
+                    >
+                      Emmi
+                    </p>
+                  </div>
+                  <div
+                    class="c18"
+                  >
+                    <img
+                      src="IMAGE_MOCK"
+                    />
+                  </div>
+                </div>
+              </div>
+            </label>
+          </div>
+        </div>
+      </div>
+      <span
+        style="display: table; clear: both;"
+      />
     </div>
   </div>
 </div>
