@@ -14,6 +14,7 @@ import lastKey from 'utils/getLastKey';
 
 import { canEdit } from 'models/Status/statusPermissions';
 import { getRemovedBlockForSetting } from 'models/Narrator/BlockTypes';
+import { CharacterType } from 'models/Character';
 
 import { editSessionRequest, editSessionSaga } from 'global/reducers/session';
 import { questionsReducer } from 'global/reducers/questions';
@@ -28,6 +29,8 @@ import H3 from 'components/H3';
 import { LI, UL } from 'components/List';
 import { ConfirmationModal } from 'components/Modal';
 import BadgeInput from 'components/Input/BadgeInput';
+import CharacterSelector from 'components/CharacterSelector';
+
 import Option from './Option';
 import messages from './messages';
 import PeedyVoiceSettings from './PeedyVoiceSettings';
@@ -42,6 +45,7 @@ const SessionSettings = ({
   interventionStatus,
   googleTtsVoice,
 }) => {
+  const character = CharacterType.EMMI;
   useInjectReducer({ key: 'intervention', reducer: interventionReducer });
   useInjectReducer({ key: 'questions', reducer: questionsReducer });
   useInjectSaga({ key: 'editSession', saga: editSessionSaga });
@@ -217,6 +221,15 @@ const SessionSettings = ({
           editingPossible={editingPossible}
         />
       )}
+
+      <H3 mt={30} mb={20}>
+        {formatMessage(messages.defaultNarrator)}
+      </H3>
+      <CharacterSelector
+        disabled={!editingPossible}
+        onChange={() => {}}
+        value={character}
+      />
     </>
   );
 };
