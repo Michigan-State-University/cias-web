@@ -7,19 +7,17 @@
 import React, { memo, ReactElement } from 'react';
 
 import { Input } from 'components/Input';
-import Text from 'components/Text';
-import Column from 'components/Column';
-
 import Row from 'components/Row';
-import { ErrorText } from './styled';
+import FormikControlLayout from 'components/FormikControlLayout';
 
 type InputComponentType = {
   id?: string;
   children?: ReactElement;
   error?: string;
   hasError?: boolean;
+  touched: boolean;
   inputProps?: React.HTMLProps<HTMLInputElement>;
-  label?: string;
+  label?: string | ReactElement;
   name?: string;
   onBlur?: (e: React.FocusEvent<HTMLInputElement>) => void;
   onChange?: (e: React.ChangeEvent<HTMLInputElement>) => void;
@@ -33,6 +31,7 @@ function InputComponent({
   children,
   error,
   hasError,
+  touched,
   inputProps,
   label,
   name,
@@ -44,19 +43,16 @@ function InputComponent({
   ...columnStyleProps
 }: InputComponentType) {
   return (
-    <Column {...columnStyleProps}>
-      {label && (
-        <label htmlFor={id ?? name}>
-          <Text mb={5} width="fit-content">
-            {label}
-          </Text>
-        </label>
-      )}
-
+    <FormikControlLayout
+      formikKey={name}
+      label={label}
+      touched={touched}
+      error={error}
+      {...columnStyleProps}
+    >
       <Row width="100%" align="center">
         <Input
           id={id ?? name}
-          mb={hasError ? 5 : null}
           placeholder={placeholder}
           value={value}
           name={name}
@@ -68,8 +64,7 @@ function InputComponent({
         />
         {children}
       </Row>
-      {hasError && <ErrorText>{error?.toString()}</ErrorText>}
-    </Column>
+    </FormikControlLayout>
   );
 }
 

@@ -97,6 +97,7 @@ exports[`<NotificationsSettings /> Should render and match the snapshot 1`] = `
 
 .c9 {
   margin-right: 5px;
+  border-radius: 5px;
 }
 
 .c4:disabled + label > .c8 {

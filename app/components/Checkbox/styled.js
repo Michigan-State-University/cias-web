@@ -8,6 +8,7 @@ export const StyledCheckbox = styled.input.attrs({ type: 'checkbox' })`
 
 export const StyledIcon = styled(Icon)`
   margin-right: 5px;
+  border-radius: 5px;
 
   ${StyledCheckbox}:disabled + label > & {
     opacity: 0.5;

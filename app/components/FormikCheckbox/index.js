@@ -7,10 +7,12 @@
 import React, { memo } from 'react';
 import PropTypes from 'prop-types';
 import { useField } from 'formik';
-import Checkbox from 'components/Checkbox';
-import Box from 'components/Box';
+import isNil from 'lodash/isNil';
+
 import { themeColors } from 'theme';
-import { ErrorText } from './styled';
+
+import Checkbox from 'components/Checkbox';
+import FormikControlLayout from 'components/FormikControlLayout';
 
 function FormikCheckbox({ formikKey, children }) {
   const [field, meta, helpers] = useField(formikKey);
@@ -18,26 +20,23 @@ function FormikCheckbox({ formikKey, children }) {
   const { error, touched } = meta;
   const { setValue, setTouched } = helpers;
 
-  const hasError = Boolean(touched && error);
+  const hasError = touched && !isNil(error);
 
   return (
-    <>
-      <Box mb={5} display="flex" align="center">
-        <Checkbox
-          id={formikKey}
-          onChange={() => {
-            setTouched(true);
-            setValue(!value);
-          }}
-          mr={10}
-          checked={value}
-          stroke={hasError && themeColors.warning}
-        >
-          {children}
-        </Checkbox>
-      </Box>
-      {hasError && <ErrorText>{error}</ErrorText>}
-    </>
+    <FormikControlLayout touched={touched} error={error}>
+      <Checkbox
+        id={formikKey}
+        onChange={() => {
+          setTouched(true);
+          setValue(!value);
+        }}
+        mr={10}
+        checked={value}
+        stroke={hasError && themeColors.warning}
+      >
+        {children}
+      </Checkbox>
+    </FormikControlLayout>
   );
 }
 

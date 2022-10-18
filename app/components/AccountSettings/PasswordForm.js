@@ -126,7 +126,6 @@ const PasswordForm = ({
                 data-testid="submit-button"
                 type="submit"
                 height={46}
-                borderRadius={5}
                 disabled={isEqual(values, initialValues)}
                 my={25}
                 onClick={handleSubmit}

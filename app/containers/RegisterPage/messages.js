@@ -13,9 +13,13 @@ export default defineMessages({
     id: `${scope}.header`,
     defaultMessage: 'Register participant account',
   },
+  subHeader: {
+    id: `${scope}.subHeader`,
+    defaultMessage: `Fields with an asterisk<warningColor>*</warningColor> are required`,
+  },
   register: {
     id: `${scope}.register`,
-    defaultMessage: 'Register',
+    defaultMessage: 'Create an account',
   },
   login: {
     id: `${scope}.login`,

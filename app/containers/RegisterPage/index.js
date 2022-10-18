@@ -37,6 +37,7 @@ import Modal from 'components/Modal';
 import FormikInput from 'components/FormikInput';
 import ErrorAlert from 'components/ErrorAlert';
 import FormikCheckbox from 'components/FormikCheckbox';
+import Box from 'components/Box';
 
 import makeSelectRegisterPage from './selectors';
 import reducer from './reducer';
@@ -134,12 +135,17 @@ export function RegisterPage({
       </Modal>
       <Fill justify="center" align="center">
         <Column sm={10} md={8} lg={6} align="start">
-          <H1 mb={40} fontSize={23}>
-            <FormattedMessage
-              {...messages[isInvite ? 'headerInvite' : 'header']}
-              values={{ role: lowerCase(role) }}
-            />
-          </H1>
+          <Box mb={40}>
+            <H1 mb={8} fontSize={23}>
+              <FormattedMessage
+                {...messages[isInvite ? 'headerInvite' : 'header']}
+                values={{ role: lowerCase(role) }}
+              />
+            </H1>
+            <Text fontSize="12px" lineHeight="12px">
+              <FormattedMessage {...messages.subHeader} />
+            </Text>
+          </Box>
           <Formik
             validationSchema={validationSchema(formatMessage)}
             initialValues={initialValues(email)}
@@ -153,6 +159,7 @@ export function RegisterPage({
                   width: '100%',
                 },
                 mb: 20,
+                required: true,
               };
               return (
                 <>
@@ -182,6 +189,7 @@ export function RegisterPage({
                       ...sharedProps.inputProps,
                       disabled: isInvite,
                     }}
+                    required
                     mb={20}
                   />
                   <FormikInput
@@ -198,25 +206,26 @@ export function RegisterPage({
                     type="password"
                     {...sharedProps}
                   />
-                  <FormikCheckbox formikKey="terms">
-                    {formatMessage(messages.accept)}
-                    <Text
-                      clickable
-                      ml={3}
-                      lineHeight="1.5em"
-                      fontWeight="bold"
-                      color={themeColors.secondary}
-                      onClick={() => {
-                        setShowTermsModal(true);
-                      }}
-                    >
-                      {formatMessage(messages.termsAndConditions)}
-                    </Text>
-                  </FormikCheckbox>
+                  <Row my={20}>
+                    <FormikCheckbox formikKey="terms">
+                      {formatMessage(messages.accept)}
+                      <Text
+                        clickable
+                        ml={3}
+                        lineHeight="1.5em"
+                        fontWeight="bold"
+                        color={themeColors.secondary}
+                        onClick={() => {
+                          setShowTermsModal(true);
+                        }}
+                      >
+                        {formatMessage(messages.termsAndConditions)}
+                      </Text>
+                    </FormikCheckbox>
+                  </Row>
                   <Button
                     type="submit"
                     height={46}
-                    borderRadius={5}
                     my={25}
                     loading={loading}
                     onClick={handleSubmit}
