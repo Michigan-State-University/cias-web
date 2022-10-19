@@ -70,7 +70,10 @@ export const MenuContent = styled.div`
 `;
 
 export const StyledLogos = styled(Row)`
+  gap: 16px;
+
   @media ${maxQueries.sm} {
+    gap: 8px;
     justify-content: start;
 
     img {

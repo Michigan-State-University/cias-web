@@ -19,10 +19,10 @@ const DefaultNavbar = () => {
     <Row width="100%" justify="start">
       <StyledLogos>
         <Link to="/">
-          <CIASLogo maxHeight={LOGO_MAX_HEIGHT} mr={15} />
+          <CIASLogo maxHeight={LOGO_MAX_HEIGHT} width="100%" />
         </Link>
         <MSULogoContainer>
-          <MSULogo maxHeight={LOGO_MAX_HEIGHT} ml={10} />
+          <MSULogo maxHeight={LOGO_MAX_HEIGHT} width="100%" />
         </MSULogoContainer>
       </StyledLogos>
     </Row>
