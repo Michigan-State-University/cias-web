@@ -1,3 +1,4 @@
+import { CharacterType } from 'models/Character';
 import { InterventionInvite } from './InterventionInvite';
 
 export enum InterventionStatus {
@@ -54,6 +55,7 @@ export interface InterventionDto {
   type: InterventionType;
   emails?: InterventionInvite[];
   quickExit: boolean;
+  currentNarrator: CharacterType;
 }
 
 export interface FileInfo {

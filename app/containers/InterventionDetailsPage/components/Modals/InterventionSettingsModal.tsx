@@ -48,7 +48,7 @@ const InterventionSettingsModal = ({ editingPossible, onClose }: Props) => {
 
   const [changedIntervention, setChangedIntervention] =
     useState(originalIntervention);
-  const { id, languageCode, languageName, quickExit, narrator } =
+  const { id, languageCode, languageName, quickExit, currentNarrator } =
     changedIntervention;
 
   useEffect(() => {
@@ -68,12 +68,13 @@ const InterventionSettingsModal = ({ editingPossible, onClose }: Props) => {
           ...changes,
           id,
         },
-        changedIntervention.narrator !== originalIntervention.narrator,
+        changedIntervention.currentNarrator !==
+          originalIntervention.currentNarrator,
       ),
     );
   }, [originalIntervention, changedIntervention]);
 
-  const changeIntervention = (changes: any) => {
+  const changeIntervention = (changes: Partial<InterventionDto>) => {
     setChangedIntervention({
       ...changedIntervention,
       ...changes,
@@ -102,7 +103,7 @@ const InterventionSettingsModal = ({ editingPossible, onClose }: Props) => {
 
   const handleNarratorChange = (value: CharacterType) => {
     changeIntervention({
-      narrator: value,
+      currentNarrator: value,
     });
   };
 
@@ -170,7 +171,7 @@ const InterventionSettingsModal = ({ editingPossible, onClose }: Props) => {
       <GRow mb={16}>
         <GCol>
           <CharacterSelector
-            value={narrator || CharacterType.PEEDY}
+            value={currentNarrator}
             onChange={handleNarratorChange}
             disabled={!editingPossible}
           />
