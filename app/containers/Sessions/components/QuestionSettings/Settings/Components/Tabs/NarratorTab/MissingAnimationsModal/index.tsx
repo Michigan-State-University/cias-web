@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { FormattedMessage, useIntl } from 'react-intl';
 
 import Modal from 'components/Modal';
@@ -7,22 +7,25 @@ import Img from 'components/Img';
 import Divider from 'components/Divider';
 import Row from 'components/Row';
 import Button from 'components/Button';
-import { Table, THead, TBody, TR, TH, StripedTR, TD } from 'components/Table';
+import { Table, THead, TBody, TR, TH } from 'components/Table';
 import Text from 'components/Text';
 
-import animationMessages from 'containers/Sessions/components/QuestionSettings/Settings/Components/Blocks/messages';
 import { colors, themeColors } from 'theme';
 import questionMarkIcon from 'assets/svg/question-mark-square.svg';
 import globalMessages from 'global/i18n/globalMessages';
 
+import { NarratorAnimation } from 'models/Narrator';
 import messages from './messages';
 import { MissingAnimationReplacement } from '../types';
+import SingleAnimationRow from './SingleAnimationRow';
 
 const MODAL_WIDTH = '480px';
 
 type Props = {
   onClose: () => void;
-  onChangeNarrator: () => void;
+  onChangeNarrator: (
+    animationReplacement: MissingAnimationReplacement[],
+  ) => void;
   visible: boolean;
   animations: MissingAnimationReplacement[];
 };
@@ -34,6 +37,24 @@ export const MissingAnimationsModal = ({
   animations,
 }: Props) => {
   const { formatMessage } = useIntl();
+  const [newAnimationState, setNewAnimationState] = useState(animations);
+
+  useEffect(() => {
+    setNewAnimationState(animations);
+  }, [animations]);
+
+  const updateNewAnimationState = (
+    newOutcomeAnimation: NarratorAnimation,
+    indexToChange: number,
+  ) => {
+    setNewAnimationState((currentState) =>
+      currentState.map((stateAnimation, index) => {
+        if (indexToChange !== index) return stateAnimation;
+        return { ...stateAnimation, to: newOutcomeAnimation };
+      }),
+    );
+  };
+
   return (
     <Modal
       title={formatMessage(messages.missingAnimationsModalTitle)}
@@ -82,30 +103,13 @@ export const MissingAnimationsModal = ({
             </TR>
           </THead>
           <TBody>
-            {animations.map((animation, index) => (
-              <StripedTR
+            {newAnimationState.map((animation, index) => (
+              <SingleAnimationRow
+                animation={animation}
                 key={`${animation.from}-${index}`}
-                height={32}
-                stripesPlacement="odd"
-                color={colors.linkWater}
-              >
-                <TD padding={8}>
-                  <Text fontWeight="bold">
-                    <FormattedMessage
-                      {...animationMessages[
-                        animation.from as keyof typeof animationMessages
-                      ]}
-                    />
-                  </Text>
-                </TD>
-                <TD padding={8}>
-                  <FormattedMessage
-                    {...animationMessages[
-                      animation.to as keyof typeof animationMessages
-                    ]}
-                  />
-                </TD>
-              </StripedTR>
+                updateAnimation={updateNewAnimationState}
+                index={index}
+              />
             ))}
           </TBody>
         </Table>
@@ -115,7 +119,7 @@ export const MissingAnimationsModal = ({
             px={30}
             width="auto"
             title={formatMessage(messages.changeNarratorButton)}
-            onClick={onChangeNarrator}
+            onClick={() => onChangeNarrator(newAnimationState)}
           />
           <Button
             // @ts-ignore
