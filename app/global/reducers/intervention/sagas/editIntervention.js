@@ -18,9 +18,16 @@ export function* editIntervention({
   payload: { intervention, hasNarratorChanged },
 }) {
   const requestURL = `v1/interventions/${intervention.id}`;
-  const narratorChangeURL = `/v1/interventions/${intervention.id}/change_narrator`;
+  const narratorChangeURL = `${requestURL}/change_narrator`;
 
   try {
+    if (hasNarratorChanged) {
+      yield call(axios.post, narratorChangeURL, {
+        narrator: { name: intervention.currentNarrator },
+      });
+      return;
+    }
+
     const {
       data: { data },
     } = yield call(
@@ -28,12 +35,6 @@ export function* editIntervention({
       requestURL,
       objectToSnakeCase({ intervention }),
     );
-
-    if (hasNarratorChanged) {
-      yield call(axios.post, narratorChangeURL, {
-        narrator: { name: intervention.currentNarrator },
-      });
-    }
 
     const mappedData = defaultMapper(data);
     yield put(editInterventionSuccess({ ...intervention, ...mappedData }));
