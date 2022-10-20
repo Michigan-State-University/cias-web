@@ -1,18 +1,5 @@
 import { CamelToSnakeOmitId } from 'global/types/camelToSnake';
-
-export enum UserRoles {
-  ADMIN = 'admin',
-  RESEARCHER = 'researcher',
-  PARTICIPANT = 'participant',
-  GUEST = 'guest',
-  PREVIEW_SESSION = 'preview_session',
-  THIRD_PARTY = 'third_party',
-  HEALTH_CLINIC_ADMIN = 'health_clinic_admin',
-  HEALTH_SYSTEM_ADMIN = 'health_system_admin',
-  ORGANIZATION_ADMIN = 'organization_admin',
-  E_INTERVENTION_ADMIN = 'e_intervention_admin',
-  TEAM_ADMIN = 'team_admin',
-}
+import { Roles } from './RolesManager/UserRoles';
 
 export interface User {
   active: boolean;
@@ -24,11 +11,19 @@ export interface User {
   id: string;
   lastName: string;
   phoneName: Nullable<string>;
-  roles: UserRoles[];
+  roles: Roles[];
   smsNotification: boolean;
   teamId: Nullable<string>;
   teamName: Nullable<string>;
   quickExitEnabled: boolean;
+}
+
+export interface SimpleUser {
+  avatarUrl: Nullable<string>;
+  firstName: string;
+  id: string;
+  lastName: string;
+  email: string;
 }
 
 export type UserDTO = CamelToSnakeOmitId<User>;

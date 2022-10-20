@@ -20,7 +20,7 @@ export const SessionIndex = styled.div`
   width: 30px;
   height: 30px;
   border-radius: 50%;
-  background-color: ${colors.surfieGreen};
+  background-color: ${colors.jungleGreen};
   color: white;
   display: flex;
   justify-content: center;

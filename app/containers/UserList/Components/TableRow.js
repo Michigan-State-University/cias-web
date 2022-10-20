@@ -72,11 +72,15 @@ const TableRow = ({
       <TD pl={20}>{nameColumn}</TD>
       <TD pl={20}>{email}</TD>
       <TD pl={20}>
-        {roles.map((role, index) => (
-          <Box mb={roles.length > 1 ? 5 : 0} key={`role-${index}`}>
-            <UserRoleTile role={role} disabled={!active} />
-          </Box>
-        ))}
+        <Box py={8} display="flex" gap="8px" flexWrap="wrap">
+          {roles.map((role) => (
+            <UserRoleTile
+              key={`user-role-tile-${role}`}
+              role={role}
+              disabled={!active}
+            />
+          ))}
+        </Box>
       </TD>
       <TD pl={20}>
         <Row width="100%" justify="start" pr={20}>

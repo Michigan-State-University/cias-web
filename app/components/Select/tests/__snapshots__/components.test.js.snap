@@ -30,6 +30,7 @@ exports[`<Option /> Should render and match the snapshot 1`] = `
 
 .c7 {
   margin-right: 5px;
+  border-radius: 5px;
 }
 
 .c2:disabled + label > .c6 {
@@ -132,6 +133,7 @@ exports[`<Option /> Should render and match the snapshot 2`] = `
 
 .c7 {
   margin-right: 5px;
+  border-radius: 5px;
 }
 
 .c2:disabled + label > .c6 {

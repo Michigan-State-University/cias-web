@@ -16,7 +16,7 @@ import {
 } from 'global/reducers/session';
 import { CatSession } from 'models/Session';
 import { makeSelectIntervention } from 'global/reducers/intervention';
-import { InterventionDto } from 'models/Intervention/InterventionDto';
+import { Intervention } from 'models/Intervention';
 
 import Box from 'components/Box';
 import Text from 'components/Text';
@@ -37,7 +37,7 @@ type EditCatSessionProps = {
   editingPossible: boolean;
   editSession: any;
   editSessionSetting: any;
-  intervention: InterventionDto;
+  intervention: Intervention;
 };
 
 const EditCatSession = ({

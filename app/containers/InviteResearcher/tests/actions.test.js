@@ -1,4 +1,4 @@
-import { Roles } from 'models/User/UserRoles';
+import { Roles } from 'models/User/RolesManager';
 import { defaultTimeZone } from 'utils/timezones';
 
 import {
@@ -46,7 +46,7 @@ describe('Invite researcher actions', () => {
       lastName: '',
       fullName: '',
       email: 'email@gmail.com',
-      roles: [Roles.researcher],
+      roles: [Roles.Researcher],
       avatar: null,
       timeZone: defaultTimeZone,
       active: true,

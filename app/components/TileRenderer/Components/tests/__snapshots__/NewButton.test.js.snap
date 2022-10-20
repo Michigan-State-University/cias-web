@@ -120,6 +120,7 @@ exports[`<NewButton /> Should render and match the snapshot 1`] = `
   -webkit-flex-direction: column;
   -ms-flex-direction: column;
   flex-direction: column;
+  color: unset;
 }
 
 <div

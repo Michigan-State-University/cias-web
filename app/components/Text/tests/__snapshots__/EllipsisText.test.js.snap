@@ -8,6 +8,7 @@ exports[`<EllipsisText /> should match the snapshot 1`] = `
   border-radius: 5px;
   width: 100%;
   display: inline;
+  color: unset;
 }
 
 .c2 {
@@ -15,6 +16,7 @@ exports[`<EllipsisText /> should match the snapshot 1`] = `
   height: auto;
   display: block;
   border-radius: 5px;
+  color: unset;
 }
 
 .c0 {
@@ -80,6 +82,7 @@ exports[`<EllipsisText /> should match the snapshot 2`] = `
   border-radius: 5px;
   width: 100%;
   display: inline;
+  color: unset;
 }
 
 .c2 {
@@ -87,6 +90,7 @@ exports[`<EllipsisText /> should match the snapshot 2`] = `
   height: auto;
   display: block;
   border-radius: 5px;
+  color: unset;
 }
 
 .c0 {

@@ -2,7 +2,7 @@ import { toast } from 'react-toastify';
 import { takeLatest, put, call } from 'redux-saga/effects';
 import { expectSaga } from 'redux-saga-test-plan';
 
-import { Roles } from 'models/User/UserRoles';
+import { Roles } from 'models/User/RolesManager';
 import { addUserToList } from 'global/reducers/userList';
 import { defaultTimeZone } from 'utils/timezones';
 import { formatMessage } from 'utils/intlOutsideReact';
@@ -20,9 +20,7 @@ import {
 } from '../constants';
 import {
   cancelInvitationSuccess,
-  getInvitationsError,
   getInvitationsSuccess,
-  inviteResearcherError,
   inviteResearcherSuccess,
 } from '../actions';
 import cancelInvitationSaga, {
@@ -48,7 +46,7 @@ describe('inviteResearcher saga', () => {
           lastName: '',
           fullName: '',
           email: 'email@gmail.com',
-          roles: [Roles.researcher],
+          roles: [Roles.Researcher],
           avatar: null,
           timeZone: defaultTimeZone,
           active: true,
@@ -61,7 +59,7 @@ describe('inviteResearcher saga', () => {
       lastName: '',
       fullName: '',
       email: 'email@gmail.com',
-      roles: [Roles.researcher],
+      roles: [Roles.Researcher],
       avatar: null,
       timeZone: defaultTimeZone,
       active: true,
@@ -75,15 +73,6 @@ describe('inviteResearcher saga', () => {
         toastId: INVITE_RESEARCHER_SUCCESS,
       })
       .run();
-  });
-  it('Check inviteResearcher error connection', () => {
-    const error =
-      "TypeError: Cannot read properties of undefined (reading 'data')";
-    const email = 'email1';
-    const step = stepper(inviteResearcher({ payload: { email } }));
-    step();
-    const errorTrigger = step();
-    expect(errorTrigger).toEqual(put(inviteResearcherError(error.toString())));
   });
   it('Check inviteResearcherSaga connection', () => {
     const sagaFunction = inviteResearcherSaga();
@@ -116,14 +105,6 @@ describe('getInvitations saga', () => {
     );
     const lastResponse = step();
     expect(lastResponse).toEqual(undefined);
-  });
-  it('Check getInvitations error connection', () => {
-    const error =
-      "TypeError: Cannot read properties of undefined (reading 'data')";
-    const step = stepper(getInvitations());
-    step();
-    const errorTrigger = step();
-    expect(errorTrigger).toEqual(put(getInvitationsError(error.toString())));
   });
   it('Check getInvitations connection', () => {
     const sagaFunction = getInvitationsSaga();

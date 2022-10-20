@@ -9,6 +9,7 @@ Object {
   display: block;
   border-radius: 5px;
   width: 300px;
+  color: unset;
 }
 
 .c1 {
@@ -18,6 +19,7 @@ Object {
   border-radius: 5px;
   padding: 16px;
   border-bottom: 1px solid #E9F1FB;
+  color: unset;
 }
 
 .c4 {
@@ -25,6 +27,8 @@ Object {
   height: auto;
   display: block;
   border-radius: 5px;
+  cursor: pointer;
+  color: unset;
   cursor: pointer;
 }
 
@@ -38,6 +42,7 @@ Object {
   -webkit-flex-grow: 1;
   -ms-flex-positive: 1;
   flex-grow: 1;
+  color: unset;
 }
 
 .c12 {
@@ -47,6 +52,7 @@ Object {
   border-radius: 5px;
   max-height: 300px;
   overflow: scroll;
+  color: unset;
 }
 
 .c7 {
@@ -215,6 +221,7 @@ Object {
   display: block;
   border-radius: 5px;
   width: 300px;
+  color: unset;
 }
 
 .c1 {
@@ -224,6 +231,7 @@ Object {
   border-radius: 5px;
   padding: 16px;
   border-bottom: 1px solid #E9F1FB;
+  color: unset;
 }
 
 .c4 {
@@ -231,6 +239,8 @@ Object {
   height: auto;
   display: block;
   border-radius: 5px;
+  cursor: pointer;
+  color: unset;
   cursor: pointer;
 }
 
@@ -244,6 +254,7 @@ Object {
   -webkit-flex-grow: 1;
   -ms-flex-positive: 1;
   flex-grow: 1;
+  color: unset;
 }
 
 .c12 {
@@ -253,6 +264,7 @@ Object {
   border-radius: 5px;
   max-height: 300px;
   overflow: scroll;
+  color: unset;
 }
 
 .c7 {

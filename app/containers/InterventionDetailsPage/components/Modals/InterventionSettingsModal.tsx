@@ -11,7 +11,7 @@ import {
   makeSelectIntervention,
 } from 'global/reducers/intervention';
 import { colors } from 'theme';
-import { InterventionDto } from 'models/Intervention';
+import { Intervention } from 'models/Intervention';
 import { CharacterType } from 'models/Character';
 
 import {
@@ -74,7 +74,7 @@ const InterventionSettingsModal = ({ editingPossible, onClose }: Props) => {
     );
   }, [originalIntervention, changedIntervention]);
 
-  const changeIntervention = (changes: Partial<InterventionDto>) => {
+  const changeIntervention = (changes: Partial<Intervention>) => {
     setChangedIntervention({
       ...changedIntervention,
       ...changes,
@@ -86,8 +86,8 @@ const InterventionSettingsModal = ({ editingPossible, onClose }: Props) => {
     label,
     googleLanguageId,
   }: {
-    value: InterventionDto['languageCode'];
-    label: InterventionDto['languageName'];
+    value: Intervention['languageCode'];
+    label: Intervention['languageName'];
     googleLanguageId: string | number;
   }) =>
     changeIntervention({
@@ -96,7 +96,7 @@ const InterventionSettingsModal = ({ editingPossible, onClose }: Props) => {
       googleLanguageId: +googleLanguageId,
     });
 
-  const handleQuickExitChange = (value: InterventionDto['quickExit']) =>
+  const handleQuickExitChange = (value: Intervention['quickExit']) =>
     changeIntervention({
       quickExit: value,
     });

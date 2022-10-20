@@ -11,7 +11,7 @@ import { Provider } from 'react-redux';
 import { MemoryRouter } from 'react-router-dom';
 import { DEFAULT_LOCALE } from 'i18n';
 
-import { Roles } from 'models/User/UserRoles';
+import { Roles } from 'models/User/RolesManager';
 import {
   TeamListReducer,
   initialState as init,
@@ -48,7 +48,7 @@ describe('<TeamsList />', () => {
       ],
     },
   });
-  const storeAdmin = createTestStore(initialState(Roles.admin));
+  const storeAdmin = createTestStore(initialState(Roles.Admin));
 
   beforeAll(() => {
     createModalForTests();

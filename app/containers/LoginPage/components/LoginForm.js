@@ -33,7 +33,7 @@ const LoginForm = ({
   const formData = useMemo(() => generateInitialValues(initialFormData), []);
 
   const onSubmit = ({ email, password }, actions) => {
-    onLogin(email, password);
+    onLogin(email.trim(), password);
     actions.setSubmitting(false);
   };
 
@@ -79,7 +79,6 @@ const LoginForm = ({
             />
             <Button
               height={46}
-              borderRadius={5}
               mt={25}
               loading={isLoading}
               title={formatMessage(messages.loginButton)}

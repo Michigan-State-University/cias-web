@@ -179,7 +179,7 @@ exports[`<UserDetails /> Should render and match the snapshot 1`] = `
   width: 100%;
 }
 
-.c37 {
+.c38 {
   display: -webkit-box;
   display: -webkit-flex;
   display: -ms-flexbox;
@@ -210,7 +210,7 @@ exports[`<UserDetails /> Should render and match the snapshot 1`] = `
   margin-right: 8px;
 }
 
-.c35 {
+.c36 {
   width: auto;
   height: auto;
   -webkit-transition: -webkit-transform 0.2s;
@@ -242,6 +242,18 @@ exports[`<UserDetails /> Should render and match the snapshot 1`] = `
   font-size: 13px;
   line-height: 130%;
   margin-bottom: 5px;
+  font-size: 12px;
+  color: #2F3850;
+  width: -webkit-fit-content;
+  width: -moz-fit-content;
+  width: fit-content;
+}
+
+.c34 {
+  font-family: DM Sans;
+  font-size: 13px;
+  line-height: 130%;
+  margin-bottom: 5px;
   color: #2F3850;
   width: -webkit-fit-content;
   width: -moz-fit-content;
@@ -255,6 +267,7 @@ exports[`<UserDetails /> Should render and match the snapshot 1`] = `
   border-radius: 5px;
   width: 100%;
   height: 100%;
+  color: unset;
 }
 
 .c6 {
@@ -266,6 +279,7 @@ exports[`<UserDetails /> Should render and match the snapshot 1`] = `
   margin-top: 20px;
   background-color: rgba(255,255,255,1);
   box-shadow: 0px 4px 20px #E3EEFB;
+  color: unset;
 }
 
 .c15 {
@@ -276,14 +290,16 @@ exports[`<UserDetails /> Should render and match the snapshot 1`] = `
   height: -webkit-fit-content;
   height: -moz-fit-content;
   height: fit-content;
+  color: unset;
 }
 
-.c34 {
+.c35 {
   width: auto;
   height: auto;
   display: block;
   border-radius: 5px;
   opacity: 0.5;
+  color: unset;
 }
 
 .c25 {
@@ -391,7 +407,7 @@ exports[`<UserDetails /> Should render and match the snapshot 1`] = `
   color: #ABBBD1;
 }
 
-.c36 {
+.c37 {
   padding: 12px;
   border-style: solid;
   border-width: 1px;
@@ -402,13 +418,13 @@ exports[`<UserDetails /> Should render and match the snapshot 1`] = `
   opacity: 0.5;
 }
 
-.c36:focus {
+.c37:focus {
   box-shadow: none;
   outline: none;
   border-color: #107969;
 }
 
-.c36:disabled {
+.c37:disabled {
   color: #ABBBD1;
 }
 
@@ -690,6 +706,7 @@ exports[`<UserDetails /> Should render and match the snapshot 1`] = `
                       height="fit-content"
                     >
                       <input
+                        accept="image/jpg, image/png, image/jpeg"
                         autocomplete="off"
                         style="display: none;"
                         tabindex="-1"
@@ -750,6 +767,7 @@ exports[`<UserDetails /> Should render and match the snapshot 1`] = `
                 >
                   <p
                     class="c26"
+                    font-size="12px"
                     width="fit-content"
                   >
                     First Name
@@ -779,6 +797,7 @@ exports[`<UserDetails /> Should render and match the snapshot 1`] = `
                 >
                   <p
                     class="c26"
+                    font-size="12px"
                     width="fit-content"
                   >
                     Last name
@@ -826,14 +845,14 @@ exports[`<UserDetails /> Should render and match the snapshot 1`] = `
                     for="iso"
                   >
                     <p
-                      class="c26"
+                      class="c34"
                       width="fit-content"
                     >
                       Phone prefix
                     </p>
                   </label>
                   <div
-                    class="c34"
+                    class="c35"
                     data-testid="select"
                     disabled=""
                   >
@@ -892,7 +911,7 @@ exports[`<UserDetails /> Should render and match the snapshot 1`] = `
                           >
                             <img
                               alt="arrow"
-                              class="c35"
+                              class="c36"
                               src="IMAGE_MOCK"
                               transform=""
                             />
@@ -910,14 +929,14 @@ exports[`<UserDetails /> Should render and match the snapshot 1`] = `
                     for="number"
                   >
                     <p
-                      class="c26"
+                      class="c34"
                       width="fit-content"
                     >
                       Phone number
                     </p>
                   </label>
                   <input
-                    class="c36"
+                    class="c37"
                     disabled=""
                     id="number"
                     name="number"
@@ -931,7 +950,7 @@ exports[`<UserDetails /> Should render and match the snapshot 1`] = `
             </div>
           </div>
           <div
-            class="c37 c30"
+            class="c38 c30"
             width="100%"
           />
         </div>

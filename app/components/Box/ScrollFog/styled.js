@@ -3,13 +3,13 @@ import PropTypes from 'prop-types';
 
 import Box from 'components/Box/index';
 
-import { colors, hexToRgb } from 'theme';
+import { colors, hexToRgb, ZIndex } from 'theme';
 
 const FogBox = styled(Box)`
   &:after {
     content: '';
     position: absolute;
-    z-index: 1;
+    z-index: ${ZIndex.SCROLL_FOG};
     pointer-events: none;
     background-image: linear-gradient(
       to ${({ side }) => side},

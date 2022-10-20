@@ -16,6 +16,7 @@ import Box from 'components/Box';
 import LabelledApprovableInput from 'components/Input/LabelledApprovableInput';
 import Row from 'components/Row';
 import H2 from 'components/H2';
+import { selectQuillText } from 'components/Input/utils';
 
 import { UPDATE_SCREEN_QUESTION, UPDATE_SCREEN_TITLE } from './constants';
 import messages from './messages';
@@ -43,6 +44,7 @@ const TlfbEvents = ({ statusMetadata: { isEditable } }: TlfbEventsProps) => {
             screen_title: screenTitle,
             screen_question: screenQuestion,
           },
+          original_text: originalText,
         },
       ],
     },
@@ -59,12 +61,16 @@ const TlfbEvents = ({ statusMetadata: { isEditable } }: TlfbEventsProps) => {
           label={formatMessage(messages.eventsScreenTitle)}
           placeholder={formatMessage(messages.eventsScreenTitlePlaceholder)}
           value={screenTitle}
-          type="singleline"
+          type="multiline"
           onCheck={updateEventQuestionData(UPDATE_SCREEN_TITLE)}
+          onFocus={selectQuillText}
           id="events-screen-title"
           transparent={false}
-          height={48}
           disabled={!isEditable}
+          richText
+          richTextBlurTransparentBorder={false}
+          autoSize
+          originalTextHover={originalText?.screen_title}
         />
       </Row>
 
@@ -72,12 +78,16 @@ const TlfbEvents = ({ statusMetadata: { isEditable } }: TlfbEventsProps) => {
         label={formatMessage(messages.eventsScreenQuestion)}
         placeholder={formatMessage(messages.eventsScreenQuestionPlaceholder)}
         value={screenQuestion}
-        type="singleline"
+        type="multiline"
         onCheck={updateEventQuestionData(UPDATE_SCREEN_QUESTION)}
+        onFocus={selectQuillText}
         id="events-screen-questions"
         transparent={false}
-        height={48}
         disabled={!isEditable}
+        richText
+        richTextBlurTransparentBorder={false}
+        autoSize
+        originalTextHover={originalText?.screen_question}
       />
     </Box>
   );

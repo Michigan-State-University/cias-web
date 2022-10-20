@@ -8,7 +8,7 @@ import React from 'react';
 import { render } from '@testing-library/react';
 import 'jest-styled-components';
 
-import { Roles } from 'models/User/UserRoles';
+import { Roles } from 'models/User/RolesManager';
 import { IntlProvider } from 'react-intl';
 import { DEFAULT_LOCALE } from 'i18n';
 import UserRoleTile from '../index';
@@ -18,7 +18,7 @@ describe('<UserRoleTile />', () => {
     const spy = jest.spyOn(global.console, 'error');
     render(
       <IntlProvider locale={DEFAULT_LOCALE}>
-        <UserRoleTile role={Roles.admin} />
+        <UserRoleTile role={Roles.Admin} />
       </IntlProvider>,
     );
     expect(spy).not.toHaveBeenCalled();
@@ -27,7 +27,7 @@ describe('<UserRoleTile />', () => {
   it('Should render and match the snapshot', () => {
     const { container } = render(
       <IntlProvider locale={DEFAULT_LOCALE}>
-        <UserRoleTile role={Roles.admin} />
+        <UserRoleTile role={Roles.Admin} />
       </IntlProvider>,
     );
     expect(container).toMatchSnapshot();
@@ -36,7 +36,7 @@ describe('<UserRoleTile />', () => {
   it('Should render and match the snapshot for disabled', () => {
     const { container } = render(
       <IntlProvider locale={DEFAULT_LOCALE}>
-        <UserRoleTile role={Roles.admin} disabled />
+        <UserRoleTile role={Roles.Admin} disabled />
       </IntlProvider>,
     );
     expect(container).toMatchSnapshot();

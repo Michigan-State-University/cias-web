@@ -2,7 +2,9 @@ import styled from 'styled-components';
 import ReactQuill from 'react-quill';
 import Color from 'color';
 
-import { colors, borders, fontFamily, themeColors } from 'theme';
+import { colors, borders, fontFamily, themeColors, paddings } from 'theme';
+
+import Input from 'components/Input';
 
 import { margin, layout, border } from '../BaseComponentStyles';
 
@@ -11,16 +13,24 @@ export const QuillStyled = styled(ReactQuill)`
   min-height: ${({ autoSize }) => autoSize && 'max-content'};
   height: ${({ autoSize, singleline }) =>
     singleline ? 'auto' : !autoSize && '150px'};
-  ${({ focused }) =>
-    focused
-      ? {
-          border: `1px solid ${colors.jungleGreen}`,
-          borderRadius: `10px`,
-          '.ql-bubble': {
-            zIndex: 1000,
-          },
-        }
-      : { border: '1px solid transparent' }}
+
+  ${({ blurTransparentBorder }) =>
+    blurTransparentBorder
+      ? { border: '1px solid transparent' }
+      : {
+          ...borders,
+          borderColor: themeColors.highlight,
+        }}
+
+  ${({ focused, blurTransparentBorder }) =>
+    focused && {
+      border: `1px solid ${colors.jungleGreen}`,
+      // ternary to prevent modifying existing inputs
+      borderRadius: blurTransparentBorder ? `10px` : borders.borderRadius,
+      '.ql-bubble': {
+        zIndex: 1000,
+      },
+    }}
 
   .ql-editor {
     font-weight: 400;
@@ -35,9 +45,11 @@ export const QuillStyled = styled(ReactQuill)`
   .ql-picker-label svg {
     margin-bottom: 15px !important;
   }
+
   .ql-toolbar {
     width: max-content;
   }
+
   .ql-container {
     font-size: ${({ defaultFontSize }) =>
       defaultFontSize ? `${defaultFontSize}px` : 'initial'};
@@ -51,12 +63,15 @@ export const StyledDateInput = styled.button`
   border-style: ${borders.borderStyle};
   border-width: ${borders.borderWidth};
   border-color: ${colors.linkWater};
+
   &:hover {
     ${({ disabled }) => (disabled ? 'cursor: not-allowed' : 'cursor: pointer')};
   }
+
   &:focus {
     outline: none;
   }
+
   ${margin};
   ${layout};
   ${border};
@@ -115,8 +130,6 @@ export const SearchInputStyled = styled.div`
   display: flex;
   align-items: center;
   position: relative;
-  display: flex;
-  align-items: center;
   ${layout}
 `;
 
@@ -162,4 +175,36 @@ export const Sufix = styled.div`
   span:last-of-type {
     white-space: pre;
   }
+`;
+
+const getChipsInputPadding = (isInputFilled, compact) => {
+  if (isInputFilled) {
+    if (compact) return `5px 0 0 0`;
+    return `8px 6px 3px 6px`;
+  }
+  if (compact) return '0';
+  return paddings.small;
+};
+
+export const StyledChipsInput = styled.div`
+  border-style: ${borders.borderStyle};
+  border-width: ${borders.borderWidth};
+  border-color: ${({ isFocused }) =>
+    isFocused ? themeColors.primary : themeColors.highlight};
+  border-radius: ${borders.borderRadius};
+  width: 100%;
+  background-color: ${colors.zirkon};
+  ${margin};
+  padding: ${({ isInputFilled, compact }) =>
+    getChipsInputPadding(isInputFilled, compact)};
+`;
+
+export const HiddenInput = styled(Input)`
+  height: ${({ isInputFilled }) => (isInputFilled ? '31px' : '100%')};
+  width: ${({ isInputFilled }) => (isInputFilled ? 'auto' : '100%')};
+  border: none;
+  outline: none;
+  background-color: ${colors.zirkon};
+  margin-left: ${({ isInputFilled }) => (isInputFilled ? '2px' : '0')};
+  flex: 1;
 `;

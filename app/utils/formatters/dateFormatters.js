@@ -7,7 +7,6 @@ export const jsMonthToStringFormatter = (locale = 'en') =>
   new Intl.DateTimeFormat(locale, { month: 'long' });
 
 export const fullDayToYearFormatter = 'DD-MM-YYYY';
-export const firstDayOfMonthFormatter = 'D.MM';
 export const dayNumeralFormatter = 'Do';
 export const fullMonthNameFormatter = 'MMMM';
 export const fullDayOfWeekFormatter = 'dddd';

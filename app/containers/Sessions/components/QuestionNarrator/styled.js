@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 
-import { colors } from 'theme';
+import { colors, ZIndex } from 'theme';
 
 import { ActiveIndicatorType } from 'models/Character';
 
@@ -10,6 +10,7 @@ export const NarratorContainer = styled.div`
   left: 0;
   z-index: 1500;
 
+  z-index: ${ZIndex.NARRATOR_CONTAINER};
   ${(props) =>
     props.canBeDragged
       ? `height: 100%;

@@ -4,7 +4,7 @@ import { useIntl } from 'react-intl';
 
 import { colors, themeColors } from 'theme';
 
-import { RolesColors } from 'models/User/UserRoles';
+import { RolesColors } from 'models/User/RolesManager';
 
 import { Col, Row, NoMarginRow } from 'components/ReactGridSystem';
 import Box from 'components/Box';
