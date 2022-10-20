@@ -147,8 +147,8 @@ const TlfbEvents = ({
   return (
     <>
       <TlfbCalendarLayout
-        smallText={screenTitle}
-        bigText={screenQuestion}
+        title={screenTitle}
+        subtitle={screenQuestion}
         tlfbConfig={config}
         isMobile={isMobile}
         isMobilePreview={isMobilePreview}
@@ -212,6 +212,7 @@ const TlfbEvents = ({
           borderColor: 'transparent',
         }}
         forceDim
+        forceMobile={isMobilePreview}
         excludeRefDim={{
           backgroundColor: colors.white,
           padding: '16px',

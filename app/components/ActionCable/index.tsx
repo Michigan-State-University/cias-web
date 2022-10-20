@@ -1,3 +1,3 @@
-import { ActionCableProvider, ActionCableContext } from './ActionCableProvider';
+import { SocketProvider, SocketContext } from './SocketProvider';
 
-export { ActionCableProvider, ActionCableContext };
+export { SocketProvider, SocketContext };

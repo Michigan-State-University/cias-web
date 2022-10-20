@@ -7,7 +7,7 @@ import { finishQuestion } from 'models/Session/QuestionTypes';
 import messages from '../../messages';
 import { QuestionNodeData } from '../../types';
 
-import { SessionMapInteractiveNodeContainer } from './SessionMapInteractiveNodeContainer';
+import SessionMapInteractiveNodeContainer from './SessionMapInteractiveNodeContainer';
 import { SESSION_MAP_COLORS } from '../../constants';
 import { SessionMapScreenInfo } from './SessionMapScreenInfo';
 

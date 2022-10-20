@@ -1,7 +1,7 @@
 import { useCallback, useRef, useState } from 'react';
 
 /**
- * @param {function(node: HTMLElement): null|object} callback
+ * @param {function(node: HTMLElement | object): null|object} callback
  * @param {any[]} deps
  * @returns {{ref: React.MutableRefObject,
  * callbackRef: function(React.MutableRefObject),

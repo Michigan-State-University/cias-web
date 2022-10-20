@@ -23,6 +23,69 @@ exports[`<InviteResearcher /> Should display invalid email error 1`] = `
   align-self: center;
 }
 
+.c0 {
+  width: auto;
+  height: auto;
+  display: block;
+  border-radius: 5px;
+  width: 100%;
+  height: 100%;
+  position: fixed;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  z-index: 999;
+  background-color: rgba(14,14,14,0.4);
+  border-radius: 0px;
+  border-radius: 0px;
+  -webkit-box-pack: center;
+  -webkit-justify-content: center;
+  -ms-flex-pack: center;
+  justify-content: center;
+  justify-items: center;
+  -webkit-align-content: center;
+  -ms-flex-line-pack: center;
+  align-content: center;
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  left: 0px;
+  top: 0px;
+  color: unset;
+}
+
+.c1 {
+  width: auto;
+  height: auto;
+  display: block;
+  border-radius: 5px;
+  max-width: 700px;
+  max-height: 90%;
+  min-width: 450px;
+  min-height: 200px;
+  overflow: auto;
+  padding-top: 20px;
+  padding-bottom: 20px;
+  padding-right: 20px;
+  padding-left: 20px;
+  background-color: rgba(255,255,255,1);
+  color: unset;
+}
+
+.c8 {
+  width: auto;
+  height: auto;
+  display: block;
+  border-radius: 5px;
+  width: 100%;
+  margin-top: 10px;
+  border-radius: 0px;
+  border-radius: 0px;
+  color: unset;
+}
+
 .c15 {
   display: -webkit-box;
   display: -webkit-flex;
@@ -112,66 +175,6 @@ exports[`<InviteResearcher /> Should display invalid email error 1`] = `
   font-weight: 700;
   color: rgba(210,55,29,1);
   color: rgba(210,55,29,1);
-}
-
-.c0 {
-  width: auto;
-  height: auto;
-  display: block;
-  border-radius: 5px;
-  width: 100%;
-  height: 100%;
-  position: fixed;
-  display: -webkit-box;
-  display: -webkit-flex;
-  display: -ms-flexbox;
-  display: flex;
-  z-index: 999;
-  background-color: rgba(14,14,14,0.4);
-  border-radius: 0px;
-  border-radius: 0px;
-  -webkit-box-pack: center;
-  -webkit-justify-content: center;
-  -ms-flex-pack: center;
-  justify-content: center;
-  justify-items: center;
-  -webkit-align-content: center;
-  -ms-flex-line-pack: center;
-  align-content: center;
-  -webkit-align-items: center;
-  -webkit-box-align: center;
-  -ms-flex-align: center;
-  align-items: center;
-  left: 0px;
-  top: 0px;
-}
-
-.c1 {
-  width: auto;
-  height: auto;
-  display: block;
-  border-radius: 5px;
-  max-width: 700px;
-  max-height: 90%;
-  min-width: 450px;
-  min-height: 200px;
-  overflow: auto;
-  padding-top: 20px;
-  padding-bottom: 20px;
-  padding-right: 20px;
-  padding-left: 20px;
-  background-color: rgba(255,255,255,1);
-}
-
-.c8 {
-  width: auto;
-  height: auto;
-  display: block;
-  border-radius: 5px;
-  width: 100%;
-  margin-top: 10px;
-  border-radius: 0px;
-  border-radius: 0px;
 }
 
 .c5 {
@@ -396,12 +399,12 @@ exports[`<InviteResearcher /> Should display invalid email error 1`] = `
                   <p
                     class="c12"
                     font-size="14"
-                    id="researcher-email-label"
+                    id="user-email-label"
                   >
-                    Researcher’s e-mail address
+                    User's e-mail address
                   </p>
                   <input
-                    aria-labelledby="researcher-email-label"
+                    aria-labelledby="user-email-label"
                     class="c13"
                     placeholder="e.g john.doe@contact.com"
                     type="text"
@@ -504,6 +507,69 @@ exports[`<InviteResearcher /> Should display server error 1`] = `
   align-self: center;
 }
 
+.c0 {
+  width: auto;
+  height: auto;
+  display: block;
+  border-radius: 5px;
+  width: 100%;
+  height: 100%;
+  position: fixed;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  z-index: 999;
+  background-color: rgba(14,14,14,0.4);
+  border-radius: 0px;
+  border-radius: 0px;
+  -webkit-box-pack: center;
+  -webkit-justify-content: center;
+  -ms-flex-pack: center;
+  justify-content: center;
+  justify-items: center;
+  -webkit-align-content: center;
+  -ms-flex-line-pack: center;
+  align-content: center;
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  left: 0px;
+  top: 0px;
+  color: unset;
+}
+
+.c1 {
+  width: auto;
+  height: auto;
+  display: block;
+  border-radius: 5px;
+  max-width: 700px;
+  max-height: 90%;
+  min-width: 450px;
+  min-height: 200px;
+  overflow: auto;
+  padding-top: 20px;
+  padding-bottom: 20px;
+  padding-right: 20px;
+  padding-left: 20px;
+  background-color: rgba(255,255,255,1);
+  color: unset;
+}
+
+.c8 {
+  width: auto;
+  height: auto;
+  display: block;
+  border-radius: 5px;
+  width: 100%;
+  margin-top: 10px;
+  border-radius: 0px;
+  border-radius: 0px;
+  color: unset;
+}
+
 .c14 {
   display: -webkit-box;
   display: -webkit-flex;
@@ -583,66 +649,6 @@ exports[`<InviteResearcher /> Should display server error 1`] = `
   line-height: 130%;
   font-size: 14px;
   color: #2F3850;
-}
-
-.c0 {
-  width: auto;
-  height: auto;
-  display: block;
-  border-radius: 5px;
-  width: 100%;
-  height: 100%;
-  position: fixed;
-  display: -webkit-box;
-  display: -webkit-flex;
-  display: -ms-flexbox;
-  display: flex;
-  z-index: 999;
-  background-color: rgba(14,14,14,0.4);
-  border-radius: 0px;
-  border-radius: 0px;
-  -webkit-box-pack: center;
-  -webkit-justify-content: center;
-  -ms-flex-pack: center;
-  justify-content: center;
-  justify-items: center;
-  -webkit-align-content: center;
-  -ms-flex-line-pack: center;
-  align-content: center;
-  -webkit-align-items: center;
-  -webkit-box-align: center;
-  -ms-flex-align: center;
-  align-items: center;
-  left: 0px;
-  top: 0px;
-}
-
-.c1 {
-  width: auto;
-  height: auto;
-  display: block;
-  border-radius: 5px;
-  max-width: 700px;
-  max-height: 90%;
-  min-width: 450px;
-  min-height: 200px;
-  overflow: auto;
-  padding-top: 20px;
-  padding-bottom: 20px;
-  padding-right: 20px;
-  padding-left: 20px;
-  background-color: rgba(255,255,255,1);
-}
-
-.c8 {
-  width: auto;
-  height: auto;
-  display: block;
-  border-radius: 5px;
-  width: 100%;
-  margin-top: 10px;
-  border-radius: 0px;
-  border-radius: 0px;
 }
 
 .c5 {
@@ -867,12 +873,12 @@ exports[`<InviteResearcher /> Should display server error 1`] = `
                   <p
                     class="c12"
                     font-size="14"
-                    id="researcher-email-label"
+                    id="user-email-label"
                   >
-                    Researcher’s e-mail address
+                    User's e-mail address
                   </p>
                   <input
-                    aria-labelledby="researcher-email-label"
+                    aria-labelledby="user-email-label"
                     class="c13"
                     placeholder="e.g john.doe@contact.com"
                     type="text"
@@ -968,6 +974,69 @@ exports[`<InviteResearcher /> Should render and match the snapshot 1`] = `
   align-self: center;
 }
 
+.c0 {
+  width: auto;
+  height: auto;
+  display: block;
+  border-radius: 5px;
+  width: 100%;
+  height: 100%;
+  position: fixed;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  z-index: 999;
+  background-color: rgba(14,14,14,0.4);
+  border-radius: 0px;
+  border-radius: 0px;
+  -webkit-box-pack: center;
+  -webkit-justify-content: center;
+  -ms-flex-pack: center;
+  justify-content: center;
+  justify-items: center;
+  -webkit-align-content: center;
+  -ms-flex-line-pack: center;
+  align-content: center;
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  left: 0px;
+  top: 0px;
+  color: unset;
+}
+
+.c1 {
+  width: auto;
+  height: auto;
+  display: block;
+  border-radius: 5px;
+  max-width: 700px;
+  max-height: 90%;
+  min-width: 450px;
+  min-height: 200px;
+  overflow: auto;
+  padding-top: 20px;
+  padding-bottom: 20px;
+  padding-right: 20px;
+  padding-left: 20px;
+  background-color: rgba(255,255,255,1);
+  color: unset;
+}
+
+.c8 {
+  width: auto;
+  height: auto;
+  display: block;
+  border-radius: 5px;
+  width: 100%;
+  margin-top: 10px;
+  border-radius: 0px;
+  border-radius: 0px;
+  color: unset;
+}
+
 .c14 {
   display: -webkit-box;
   display: -webkit-flex;
@@ -1047,66 +1116,6 @@ exports[`<InviteResearcher /> Should render and match the snapshot 1`] = `
   line-height: 130%;
   font-size: 14px;
   color: #2F3850;
-}
-
-.c0 {
-  width: auto;
-  height: auto;
-  display: block;
-  border-radius: 5px;
-  width: 100%;
-  height: 100%;
-  position: fixed;
-  display: -webkit-box;
-  display: -webkit-flex;
-  display: -ms-flexbox;
-  display: flex;
-  z-index: 999;
-  background-color: rgba(14,14,14,0.4);
-  border-radius: 0px;
-  border-radius: 0px;
-  -webkit-box-pack: center;
-  -webkit-justify-content: center;
-  -ms-flex-pack: center;
-  justify-content: center;
-  justify-items: center;
-  -webkit-align-content: center;
-  -ms-flex-line-pack: center;
-  align-content: center;
-  -webkit-align-items: center;
-  -webkit-box-align: center;
-  -ms-flex-align: center;
-  align-items: center;
-  left: 0px;
-  top: 0px;
-}
-
-.c1 {
-  width: auto;
-  height: auto;
-  display: block;
-  border-radius: 5px;
-  max-width: 700px;
-  max-height: 90%;
-  min-width: 450px;
-  min-height: 200px;
-  overflow: auto;
-  padding-top: 20px;
-  padding-bottom: 20px;
-  padding-right: 20px;
-  padding-left: 20px;
-  background-color: rgba(255,255,255,1);
-}
-
-.c8 {
-  width: auto;
-  height: auto;
-  display: block;
-  border-radius: 5px;
-  width: 100%;
-  margin-top: 10px;
-  border-radius: 0px;
-  border-radius: 0px;
 }
 
 .c5 {
@@ -1331,12 +1340,12 @@ exports[`<InviteResearcher /> Should render and match the snapshot 1`] = `
                   <p
                     class="c12"
                     font-size="14"
-                    id="researcher-email-label"
+                    id="user-email-label"
                   >
-                    Researcher’s e-mail address
+                    User's e-mail address
                   </p>
                   <input
-                    aria-labelledby="researcher-email-label"
+                    aria-labelledby="user-email-label"
                     class="c13"
                     placeholder="e.g john.doe@contact.com"
                     type="text"

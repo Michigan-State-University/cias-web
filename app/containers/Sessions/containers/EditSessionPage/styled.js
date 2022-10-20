@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import { colors, paddings } from 'theme';
+import { colors, paddings, ZIndex } from 'theme';
 
 import Row from 'components/Row';
 import { ShowHiddenContentButton } from 'components/ShowHiddenContentButton';
@@ -8,7 +8,7 @@ export const QuestionsRow = styled(Row)`
   transition: left 0.4s ease;
   @media only screen and (max-width: 1400px) {
     position: fixed;
-    z-index: 2;
+    z-index: ${ZIndex.EDIT_SESSION_QUESTIONS_ROW};
     height: calc(100% - 70px);
     left: -350px;
     ${({ isVisible }) => isVisible && 'left: 0;'}

@@ -4,7 +4,7 @@
  *
  */
 
-import React, { memo, useEffect, useMemo, useState } from 'react';
+import React, { memo, useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
 import { Helmet } from 'react-helmet';
 import { compose } from 'redux';
@@ -31,8 +31,7 @@ import { themeColors } from 'theme';
 import { PER_PAGE } from 'global/reducers/userList/constants';
 import { useInjectReducer, useInjectSaga } from 'redux-injectors';
 
-import { makeSelectUser } from 'global/reducers/auth';
-import { Roles } from 'models/User/UserRoles';
+import { useRoleManager } from 'models/User/RolesManager';
 import { TeamListContext } from './Components/utils';
 import CreateTeam from './Components/CreateTeam';
 import TeamsTable from './Components/TeamsTable';
@@ -51,13 +50,11 @@ function TeamsList({
   fetchTeams,
   deleteTeam,
   intl: { formatMessage },
-  user: { roles },
 }) {
   useInjectReducer({ key: 'teamList', reducer: TeamListReducer });
   useInjectSaga({ key: 'teamList', saga: teamListSaga });
   const pages = Math.ceil(teamsSize / PER_PAGE);
-
-  const isAdmin = useMemo(() => roles.includes(Roles.admin), [roles]);
+  const { isAdmin } = useRoleManager();
 
   const [filterText, setFilterText] = useState('');
   const [modalVisible, setModalVisible] = useState(false);
@@ -150,12 +147,10 @@ TeamsList.propTypes = {
   deleteTeam: PropTypes.func.isRequired,
   teamList: PropTypes.object,
   intl: PropTypes.shape(IntlShape),
-  user: PropTypes.object,
 };
 
 const mapStateToProps = createStructuredSelector({
   teamList: makeSelectTeamList(),
-  user: makeSelectUser(),
 });
 
 const mapDispatchToProps = {

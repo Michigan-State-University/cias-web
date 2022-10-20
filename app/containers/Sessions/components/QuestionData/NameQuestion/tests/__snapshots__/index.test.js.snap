@@ -55,7 +55,7 @@ exports[`<NameQuestion /> Should render and match the snapshot 1`] = `
   margin-top: 5px;
   width: 80px;
   height: 25px;
-  cursor: not-allowed;
+  cursor: not-allowed !important;
   opacity: 0.5;
 }
 
@@ -144,6 +144,7 @@ exports[`<NameQuestion /> Should render and match the snapshot 1`] = `
   -ms-flex-pack: center;
   justify-content: center;
   justify-items: center;
+  color: unset;
 }
 
 .c6 {
@@ -170,6 +171,7 @@ exports[`<NameQuestion /> Should render and match the snapshot 1`] = `
   -webkit-box-align: center;
   -ms-flex-align: center;
   align-items: center;
+  color: unset;
 }
 
 .c9 {
@@ -297,7 +299,7 @@ exports[`<NameQuestion /> Should render and match the snapshot 1`] = `
           >
             <button
               aria-label="Play audio"
-              class="c9"
+              class="c9 "
               disabled=""
               font-weight="bold"
               title="Play audio"

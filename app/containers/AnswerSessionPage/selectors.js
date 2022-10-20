@@ -58,6 +58,12 @@ const makeSelectPreviousUserSessionId = () =>
     (substate) => substate.previousUserSessionId,
   );
 
+const makeSelectInterventionStarted = () =>
+  createSelector(
+    selectAnswerSessionPageDomain,
+    (substate) => substate.interventionStarted,
+  );
+
 export default makeSelectAnswerSessionPage;
 export {
   selectAnswerSessionPageDomain,
@@ -68,4 +74,5 @@ export {
   makeSelectCurrentBlockIndex,
   makeSelectShowTextTranscript,
   makeSelectPreviousUserSessionId,
+  makeSelectInterventionStarted,
 };

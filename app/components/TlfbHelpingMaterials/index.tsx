@@ -32,6 +32,8 @@ const TlfbHelpingMaterials = ({
         title={formatMessage(messages.standardDrinkChart)}
         onClose={() => setModalVisible(false)}
         maxWidth="90%"
+        zIndex={1000}
+        disableScrollLock
       >
         <Divider my={16} />
         <Img

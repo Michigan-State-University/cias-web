@@ -4,6 +4,7 @@ import messages from './messages';
 export const generateLoginFormValidationSchema = (formatMessage) =>
   Yup.object().shape({
     email: Yup.string()
+      .trim()
       .required(formatMessage(messages.emailRequired))
       .email(formatMessage(messages.validEmail)),
     password: Yup.string().required(formatMessage(messages.passwordRequired)),

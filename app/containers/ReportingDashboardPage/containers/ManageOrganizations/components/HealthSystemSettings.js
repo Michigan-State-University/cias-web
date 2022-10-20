@@ -20,7 +20,7 @@ import {
   inviteAdminRequest,
 } from 'global/reducers/organizations';
 
-import { Roles } from 'models/User/UserRoles';
+import { Roles } from 'models/User/RolesManager';
 
 import { Col, Row } from 'components/ReactGridSystem';
 import Loader from 'components/Loader';
@@ -126,7 +126,7 @@ const HealthSystemSettings = ({
             helper={formatMessage(messages.healthSystemAdminsHelper)}
             inviteTo={name}
             onInvite={onInvite}
-            role={Roles.healthSystemAdmin}
+            role={Roles.HealthSystemAdmin}
             users={healthSystemAdmins}
           />
         </Col>

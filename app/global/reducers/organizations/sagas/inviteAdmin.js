@@ -6,12 +6,12 @@ import { formatMessage } from 'utils/intlOutsideReact';
 import { responseStatusEquals } from 'utils/axiosUtils';
 import { HttpStatusCodes } from 'utils/constants';
 
-import { Roles } from 'models/User/UserRoles';
+import { Roles } from 'models/User/RolesManager';
+import { mapRoleToInviteEndpoint } from 'models/User/RolesManager/organizationRoleHelper';
 import {
   INVITE_ADMIN_ERROR,
   INVITE_ADMIN_REQUEST,
   INVITE_ADMIN_SUCCESS,
-  mapRoleToInviteEndpoint,
 } from '../constants';
 import { inviteAdminFailure, inviteAdminSuccess } from '../actions';
 import messages from '../messages';
@@ -27,7 +27,7 @@ export function* inviteAdmin({ payload: { email, role, id } }) {
     yield put(inviteAdminSuccess());
 
     const message =
-      role === Roles.clinicAdmin
+      role === Roles.ClinicAdmin
         ? messages.inviteClinicAdminSuccess
         : messages.inviteAdminSuccess;
 

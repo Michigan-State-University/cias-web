@@ -1,27 +1,27 @@
 import React from 'react';
+import { Markup } from 'interweave';
 
-import Text from 'components/Text';
-import H2 from 'components/H2';
+import Box from 'components/Box';
 import Row from 'components/Row';
 import TlfbHelpingMaterials from 'components/TlfbHelpingMaterials';
 
 type TlfbTitleProps = {
-  smallText: string;
-  bigText: string;
+  title: string;
+  subtitle: string;
   displayHelpingMaterials: boolean;
 };
 
 export const TlfbTitle = ({
-  smallText,
-  bigText,
+  title,
+  subtitle,
   displayHelpingMaterials,
 }: TlfbTitleProps) => (
   <div>
-    <Text mb={12} lineHeight="13px" style={{ opacity: '0.9' }}>
-      {smallText}
-    </Text>
-    <Row display="flex" justify="between" mb={32}>
-      <H2 fontSize={20}>{bigText}</H2>
+    <Box mb={12}>
+      <Markup content={title} />
+    </Box>
+    <Row display="flex" justify="between" mb={32} gap={16}>
+      <Markup content={subtitle} />
       {displayHelpingMaterials && <TlfbHelpingMaterials />}
     </Row>
   </div>

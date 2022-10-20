@@ -4,6 +4,7 @@ import { compose } from 'redux';
 import { injectReducer, injectSaga } from 'redux-injectors';
 import { useDispatch, useSelector } from 'react-redux';
 import { Dayjs } from 'dayjs';
+import { Markup } from 'interweave';
 
 import { TlfbQuestionWithConfigDTO as TlfbQuestionWithConfig } from 'models/Question';
 import { fullDayToYearFormatter } from 'utils/formatters';
@@ -123,6 +124,12 @@ const TlfbQuestion = ({
 
   const [answerBody, setAnswerBody] = useState(selectedDayAnswer?.body);
 
+  const totalSubstanceLength = useMemo(
+    () =>
+      substanceGroups.reduce((sum, group) => sum + group.substances.length, 0),
+    [substanceGroups],
+  );
+
   const canGoToNextDay = useMemo(() => {
     if (!answerBody) return false;
 
@@ -137,6 +144,7 @@ const TlfbQuestion = ({
 
       return (
         !!consumptions?.length &&
+        consumptions.length === totalSubstanceLength &&
         consumptions.every(({ amount }) => Boolean(amount))
       );
     }
@@ -219,8 +227,8 @@ const TlfbQuestion = ({
   return (
     <TlfbCalendarLayout
       ref={calendarRef}
-      bigText={headQuestion}
-      smallText={questionTitle}
+      subtitle={headQuestion}
+      title={questionTitle}
       isMobile={isMobile}
       isMobilePreview={isMobilePreview}
       tlfbConfig={config}
@@ -256,9 +264,9 @@ const TlfbQuestion = ({
           )}
         </>
       )}
-      <Text fontWeight="bold" fontSize={16} mb={16}>
-        {substanceQuestion}
-      </Text>
+      <Box mb={8}>
+        <Markup content={substanceQuestion} />
+      </Box>
       <TlfbConsumptionForm
         substances={substances}
         substanceGroups={substanceGroups}

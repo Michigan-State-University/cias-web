@@ -13,7 +13,7 @@ import { MemoryRouter } from 'react-router-dom';
 
 import { createTestStore } from 'utils/testUtils/storeUtils';
 import { DEFAULT_LOCALE } from 'i18n';
-import { Roles } from 'models/User/UserRoles';
+import { Roles } from 'models/User/RolesManager';
 import InterventionPage from '../index';
 
 describe('<InterventionPage />', () => {
@@ -23,7 +23,7 @@ describe('<InterventionPage />', () => {
   const initialState = {
     auth: {
       user: {
-        roles: [Roles.admin],
+        roles: [Roles.Admin],
       },
     },
     interventions: {

@@ -13,7 +13,7 @@ import { createStructuredSelector } from 'reselect';
 import { compose } from 'redux';
 import { toast } from 'react-toastify';
 import get from 'lodash/get';
-import { Redirect, useLocation } from 'react-router-dom';
+import { Redirect, useHistory, useLocation } from 'react-router-dom';
 import { useContainerQuery } from 'react-container-query';
 import { Hidden, Visible } from 'react-grid-system';
 import { useInjectSaga, useInjectReducer } from 'redux-injectors';
@@ -39,6 +39,11 @@ import {
   REDIRECT_QUERY_KEY,
 } from 'global/reducers/auth';
 import logInGuestSaga from 'global/reducers/auth/sagas/logInGuest';
+import {
+  ChatWidgetReducer,
+  chatWidgetReducerKey,
+  setChatEnabled,
+} from 'global/reducers/chatWidget';
 import { canPreview } from 'models/Status/statusPermissions';
 import { finishQuestion } from 'models/Session/QuestionTypes';
 import { UserSessionType } from 'models/UserSession/UserSession';
@@ -63,9 +68,8 @@ import Box from 'components/Box';
 import Loader from 'components/Loader';
 import H2 from 'components/H2';
 import H3 from 'components/H3';
-import Text from 'components/Text';
 import Icon from 'components/Icon';
-import { ConfirmationModal } from 'components/Modal';
+import { ConfirmationModal, ModalType, useModal } from 'components/Modal';
 import Img from 'components/Img';
 import QuickExit from 'components/QuickExit';
 
@@ -116,6 +120,7 @@ const AnimationRefHelper = ({
 }) => {
   const animationParentRef = useRef();
   const [refState, setRefState] = useState(null);
+
   useEffect(() => {
     setRefState(animationParentRef.current);
   }, [animationParentRef]);
@@ -204,9 +209,11 @@ export function AnswerSessionPage({
   clearErrors,
   toggleTextTranscript,
   setTransitionalUserSessionId,
+  setLiveChatEnabled,
   saveQuickExitEvent,
 }) {
   const { formatMessage } = useIntl();
+  const history = useHistory();
 
   useInjectReducer({ key: 'intervention', reducer: interventionReducer });
   useInjectSaga({ key: 'fetchIntervention', saga: fetchInterventionSaga });
@@ -214,6 +221,7 @@ export function AnswerSessionPage({
   useInjectReducer({ key: 'AnswerSessionPage', reducer });
   useInjectSaga({ key: 'AnswerSessionPage', saga });
   useInjectSaga({ key: 'editPhoneNumber', saga: editPhoneNumberQuestionSaga });
+  useInjectReducer({ key: chatWidgetReducerKey, reducer: ChatWidgetReducer });
 
   const [skipQuestionModalVisible, setSkipQuestionModalVisible] =
     useState(false);
@@ -247,12 +255,6 @@ export function AnswerSessionPage({
     [previewMode, containerQueryParams, isPreview],
   );
 
-  const logoStyles = useMemo(() => {
-    if (isDesktop) return { position: 'absolute', right: '30px' };
-
-    return {};
-  }, [containerQueryParams, isDesktop]);
-
   const {
     id: userSessionId,
     logoUrl,
@@ -274,6 +276,8 @@ export function AnswerSessionPage({
     return Boolean(finishedAt);
   }, [userSession]);
 
+  const isCatMhSession = userSessionType === UserSessionType.CAT_MH;
+
   const location = useLocation();
 
   const { sessionId, interventionId, index } = params;
@@ -292,8 +296,38 @@ export function AnswerSessionPage({
   }, [sessionId]);
 
   useEffect(() => {
-    if (userSession) nextQuestion(userSessionId, index);
+    if (userSession) {
+      nextQuestion(userSessionId, index);
+      if (userSession.liveChatEnabled && interventionId) {
+        setLiveChatEnabled(interventionId);
+      }
+    }
   }, [userSession]);
+
+  const { openModal, Modal } = useModal({
+    type: ModalType.ConfirmationModal,
+    props: {
+      icon: 'info',
+      visible: true,
+      confirmationButtonColor: themeColors.primary,
+      confirmationButtonText: formatMessage(messages.goBackToHomePage),
+      confirmationButtonStyles: { width: 'auto', px: 30 },
+      confirmAction: () => history.push('/'),
+      description: formatMessage(messages.catMhErrorModalTitle),
+      content: nextQuestionError?.error?.response?.data?.body ?? '',
+      hideCloseButton: true,
+      hideCancelButton: true,
+      maxWidth: 500,
+      contentContainerStyles: { px: 20, py: 20 },
+      disableClose: true,
+    },
+  });
+
+  useEffect(() => {
+    if (nextQuestionError && isCatMhSession) {
+      openModal();
+    }
+  }, [nextQuestionError]);
 
   if (questionError) {
     const queryParams = new URLSearchParams(location.search);
@@ -437,7 +471,7 @@ export function AnswerSessionPage({
     const canSkipNarrator = narratorSkippable || !isAnimationOngoing;
 
     const shouldRenderSkipQuestionButton =
-      userSessionType !== UserSessionType.CAT_MH &&
+      !isCatMhSession &&
       !isLastScreen &&
       !NOT_SKIPPABLE_QUESTIONS.includes(type);
 
@@ -563,6 +597,18 @@ export function AnswerSessionPage({
           beforeQuickExit={beforeQuickExit}
         />
       )}
+
+      {interventionStarted && !nextQuestionError && logoUrl && isDesktop && (
+        <Row justify="start" pl={24} pt={24}>
+          <Img
+            maxHeight={elements.interventionLogoSize.height}
+            maxWidth={elements.interventionLogoSize.width}
+            src={logoUrl}
+            aria-label={imageAlt}
+          />
+        </Row>
+      )}
+
       {showLoader && <Loader />}
       {!showLoader && (
         <>
@@ -612,6 +658,8 @@ export function AnswerSessionPage({
             isMobile={isMobile}
           />
 
+          <Modal />
+
           <Box
             display="flex"
             align="center"
@@ -642,45 +690,59 @@ export function AnswerSessionPage({
                 </Column>
               )}
               {!interventionStarted && !nextQuestionError && (
-                <>
-                  <Box mx={32} maxWidth={600}>
-                    <H2 textAlign="center" mb={50}>
-                      {formatMessage(messages.fillHeader)}
-                    </H2>
-                    <Text textAlign="center" mb={50}>
-                      {formatMessage(messages.clickToStart)}
-                    </Text>
-                    <H3 textAlign="center" color={themeColors.warning} mb={50}>
+                <Column justify="center" height="100%" position="relative">
+                  <Row direction="column" align="center">
+                    <Box mx={32} maxWidth={600}>
+                      <H2 textAlign="center" mb={50}>
+                        {formatMessage(messages.fillHeader)}
+                      </H2>
+                    </Box>
+                    <StyledButton
+                      loading={userSessionLoading || nextQuestionLoading}
+                      disabled={!previewPossible}
+                      onClick={startInterventionAsync}
+                      title={buttonText()}
+                      isDesktop={isDesktop}
+                    />
+                  </Row>
+                  <Box
+                    position="absolute"
+                    bottom={
+                      userSession?.liveChatEnabled && !isDesktop ? 90 : 48
+                    }
+                    mx={24}
+                  >
+                    <H3 textAlign="center" color={themeColors.warning}>
                       {formatMessage(messages.wcagWarning)}
                     </H3>
                   </Box>
-                  <StyledButton
-                    loading={userSessionLoading || nextQuestionLoading}
-                    disabled={!previewPossible}
-                    onClick={startInterventionAsync}
-                    title={buttonText()}
-                    isDesktop={isDesktop}
-                  />
-                </>
+                </Column>
               )}
               {interventionStarted && !nextQuestionError && (
-                <>
+                <Box
+                  id={ANSWER_SESSION_CONTAINER_ID}
+                  position="relative"
+                  height="100%"
+                  width="100%"
+                  borderRadius="0px"
+                >
                   <Box width="100%">
-                    <Row padding={30} pb={isDesktop ? 10 : 0}>
-                      <Box {...logoStyles}>
-                        <Row justify="end">
-                          {logoUrl && (
-                            <Img
-                              maxHeight={elements.interventionLogoSize.height}
-                              maxWidth={elements.interventionLogoSize.width}
-                              src={logoUrl}
-                              aria-label={imageAlt}
-                            />
-                          )}
+                    <Row
+                      padding={!isDesktop || isMobile ? 30 : 0}
+                      pb={isDesktop || (!isDesktop && logoUrl) ? 24 : 0}
+                      width="100%"
+                    >
+                      {!isDesktop && (
+                        <Row>
+                          <Img
+                            maxHeight={elements.interventionLogoSize.height}
+                            maxWidth={elements.interventionLogoSize.width}
+                            src={logoUrl}
+                            aria-label={imageAlt}
+                          />
                         </Row>
-
-                        {renderQuestionTranscript(true)}
-                      </Box>
+                      )}
+                      {renderQuestionTranscript(true)}
                     </Row>
 
                     {transitionalUserSessionId && (
@@ -695,10 +757,7 @@ export function AnswerSessionPage({
                       currentQuestion &&
                       interventionStarted &&
                       !transitionalUserSessionId && (
-                        <ScreenWrapper
-                          isFullSize={isFullSize}
-                          id={ANSWER_SESSION_CONTAINER_ID}
-                        >
+                        <ScreenWrapper isFullSize={isFullSize}>
                           {isNarratorPositionFixed && renderPage()}
                           {!isNarratorPositionFixed && (
                             <AnimationRefHelper
@@ -719,7 +778,7 @@ export function AnswerSessionPage({
                       )}
                   </Box>
                   {answersError && <ErrorAlert errorText={answersError} />}
-                </>
+                </Box>
               )}
             </AnswerOuterContainer>
           </Box>
@@ -746,6 +805,7 @@ AnswerSessionPage.propTypes = {
   clearErrors: PropTypes.func,
   toggleTextTranscript: PropTypes.func,
   setTransitionalUserSessionId: PropTypes.func,
+  setLiveChatEnabled: PropTypes.func,
   saveQuickExitEvent: PropTypes.func,
 };
 
@@ -767,6 +827,7 @@ const mapDispatchToProps = {
   clearErrors: clearError,
   toggleTextTranscript: toggleTextTranscriptAction,
   setTransitionalUserSessionId: setTransitionalUserSessionIdAction,
+  setLiveChatEnabled: setChatEnabled,
   saveQuickExitEvent: saveQuickExitEventRequest,
 };
 

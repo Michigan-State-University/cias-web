@@ -7,17 +7,18 @@ import binGrey from 'assets/svg/bin-grey.svg';
 
 import Row from 'components/Row';
 import Box from 'components/Box';
-import { ImageButton } from 'components/Button';
 import Icon from 'components/Icon';
 
 import { ImageWrapper, StyledCollapseLabel } from './styled';
 import messages from './messages';
+import CollapseIcon from './CollapseIcon';
 
 const CollapseLabel = ({
   isOpened,
   onToggle,
   label,
   onDelete,
+  deleting,
   disabled,
   onShowImg,
   onHideImg,
@@ -40,6 +41,7 @@ const CollapseLabel = ({
   binProps,
   arrowColor,
   extraIcons,
+  showHoverEffect,
 }) => {
   const { formatMessage } = useIntl();
   const currentImg = isOpened ? onShowImg : onHideImg;
@@ -60,17 +62,23 @@ const CollapseLabel = ({
   );
 
   const deleteIcon = (
-    <ImageButton
-      src={deleteActive ? binImage : binNotActiveImage}
-      onClick={deleteActive ? onDelete : undefined}
-      title={formatMessage(messages.deleteItem)}
+    <CollapseIcon
       ml={isBinInCollapse ? 0 : binMargin || 5}
       mr={!isBinInCollapse ? 0 : binMargin || 5}
-      data-testid={`bin-${label}`}
-      data-cy={`accordion-element-delete-${index}`}
+      icon={deleteActive ? binImage : binNotActiveImage}
+      onClick={deleteActive ? onDelete : undefined}
+      title={formatMessage(messages.deleteItem)}
       disabled={disabled}
       fill={binFillColor}
       iconProps={binProps}
+      buttonProps={{
+        'data-testid': `bin-${label}`,
+        'data-cy': `accordion-element-delete-${index}`,
+        width: deleting ? 28 : undefined,
+        height: deleting ? 28 : undefined,
+      }}
+      showHoverEffect={showHoverEffect}
+      loading={deleting}
     />
   );
 
@@ -111,6 +119,7 @@ CollapseLabel.propTypes = {
   onToggle: PropTypes.func,
   isOpened: PropTypes.bool,
   onDelete: PropTypes.func,
+  deleting: PropTypes.bool,
   disabled: PropTypes.bool,
   imgWithBackground: PropTypes.bool,
   onShowImg: PropTypes.any,
@@ -133,6 +142,7 @@ CollapseLabel.propTypes = {
   binProps: PropTypes.object,
   arrowColor: PropTypes.string,
   extraIcons: PropTypes.object,
+  showHoverEffect: PropTypes.bool,
 };
 
 CollapseLabel.defaultProps = {

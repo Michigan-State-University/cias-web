@@ -1,7 +1,13 @@
 import styled from 'styled-components';
 
 import { borders, hexToRgb, themeColors } from 'theme';
-import { margin, padding, flex, layout } from 'components/BaseComponentStyles';
+import {
+  margin,
+  padding,
+  flex,
+  layout,
+  text,
+} from 'components/BaseComponentStyles';
 
 const transparentWarning = `rgba(${hexToRgb(themeColors.warning)}, 0.3)`;
 
@@ -18,4 +24,8 @@ export const AlertContainer = styled.div`
   ${padding};
   ${flex};
   ${layout};
+
+  p {
+    ${text};
+  }
 `;

@@ -71,6 +71,7 @@ exports[`<SingleQuestion /> Should render and match the snapshot 1`] = `
   height: auto;
   display: block;
   border-radius: 5px;
+  color: unset;
 }
 
 .c3 {
@@ -86,6 +87,8 @@ exports[`<SingleQuestion /> Should render and match the snapshot 1`] = `
   cursor: pointer;
   border-radius: 5px;
   border-radius: 5px;
+  color: unset;
+  cursor: pointer;
 }
 
 .c3:hover {
@@ -181,9 +184,9 @@ exports[`<SingleQuestion /> Should render and match the snapshot 1`] = `
                 <div
                   class="c1 c11"
                 >
-                  <div>
+                  <span>
                     test
-                  </div>
+                  </span>
                 </div>
               </label>
             </div>
@@ -221,9 +224,9 @@ exports[`<SingleQuestion /> Should render and match the snapshot 1`] = `
                 <div
                   class="c1 c11"
                 >
-                  <div>
+                  <span>
                     test
-                  </div>
+                  </span>
                 </div>
               </label>
             </div>

@@ -15,6 +15,7 @@ import PlusCircle from 'components/Circle/PlusCircle';
 import Row from 'components/Row';
 
 import { clearError } from 'global/reducers/questions/actions';
+import OriginalTextHover from 'components/OriginalTextHover';
 import messages from './messages';
 import NewSubstanceModal from './NewSubstanceModal';
 import NewGroupModal from './NewGroupModal';
@@ -30,6 +31,7 @@ import {
 
 type GroupedSubstancesType = {
   substanceGroups: SubstanceGroup[];
+  originalText?: SubstanceGroup[];
   loading?: boolean;
   error?: string;
   disabled?: boolean;
@@ -37,6 +39,7 @@ type GroupedSubstancesType = {
 
 export const GroupedSubstances = ({
   substanceGroups,
+  originalText,
   loading,
   error,
   disabled = false,
@@ -126,9 +129,15 @@ export const GroupedSubstances = ({
         <BoxCollapse
           key={`substance-group-${index}`}
           label={
-            <Text fontSize="16px" fontWeight="bold">
-              {group.name}
-            </Text>
+            <OriginalTextHover
+              id={`substance-group-${index}`}
+              hidden={!originalText?.[index]?.name}
+              text={originalText?.[index]?.name || ''}
+            >
+              <Text fontSize="16px" fontWeight="bold">
+                {group.name}
+              </Text>
+            </OriginalTextHover>
           }
           onEdit={onEditGroup(index)}
           onDelete={onRemoveGroup(index)}
@@ -141,6 +150,7 @@ export const GroupedSubstances = ({
         >
           <>
             <BoxTable
+              originalText={originalText?.[index]?.substances}
               data={group.substances}
               badgeKeys={['variable']}
               columnKeys={['name', 'unit', 'variable']}

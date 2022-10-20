@@ -9,10 +9,10 @@ import { INVITE_TO_TEAM_REQUEST } from '../constants';
 
 import messages from './messages';
 
-function* inviteToTeam({ payload: { email, teamId } }) {
+function* inviteToTeam({ payload: { email, teamId, roles } }) {
   const requestUrl = `/v1/teams/${teamId}/invitations`;
   try {
-    yield axios.post(requestUrl, { email });
+    yield axios.post(requestUrl, { email, roles });
 
     yield put(inviteToTeamSuccess());
     yield call(toast.info, formatMessage(messages.inviteToTeamSuccess));

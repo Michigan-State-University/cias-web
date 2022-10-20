@@ -7,7 +7,7 @@ import { toast } from 'react-toastify';
 
 import bin from 'assets/svg/bin-red.svg';
 import imagePlaceholder from 'assets/svg/image-placeholder.svg';
-
+import { MAX_FILE_SIZE } from 'global/constants';
 import { themeColors, borders, colors } from 'theme';
 
 import Box from 'components/Box';
@@ -61,7 +61,7 @@ const ImageUpload = ({
     noKeyboard: true,
     accept: dropzoneAcceptedFormats,
     noClick: true,
-    maxSize: 5242880,
+    maxSize: MAX_FILE_SIZE,
   });
 
   if (!image || typeof image !== 'string')

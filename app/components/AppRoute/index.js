@@ -6,8 +6,12 @@ import { compose } from 'redux';
 import { createStructuredSelector } from 'reselect';
 import { Row, Col } from 'react-grid-system';
 
+import {
+  canDisplayLeftSidebar,
+  canUseQuickExit,
+} from 'models/User/RolesManager';
+
 import { makeSelectUser, REDIRECT_QUERY_KEY } from 'global/reducers/auth';
-import { RolePermissions } from 'models/User/RolePermissions';
 import { arraysOverlap } from 'utils/arrayUtils';
 import LocalStorageService from 'utils/localStorageService';
 
@@ -32,15 +36,13 @@ class AppRoute extends Route {
       },
     } = this;
 
-    const { canUseQuickExit, canDisplayLeftSidebar } = RolePermissions(
-      user?.roles,
-    );
-
     const render = () => (
       <>
-        {!disableQuickExit && user?.quickExitEnabled && canUseQuickExit && (
-          <QuickExit beforeQuickExit={LocalStorageService.clearUserData} />
-        )}
+        {!disableQuickExit &&
+          user?.quickExitEnabled &&
+          canUseQuickExit(user?.roles) && (
+            <QuickExit beforeQuickExit={LocalStorageService.clearUserData} />
+          )}
         {super.render()}
       </>
     );
@@ -64,7 +66,8 @@ class AppRoute extends Route {
     }
 
     if (user && arraysOverlap(allowedRoles, user.roles)) {
-      const isSidebarVisible = Boolean(sidebarProps) && canDisplayLeftSidebar;
+      const isSidebarVisible =
+        Boolean(sidebarProps) && canDisplayLeftSidebar(user?.roles);
 
       return (
         <>
@@ -100,7 +103,7 @@ class AppRoute extends Route {
       );
     }
 
-    if (user && !allowedRoles.includes(user.roles[0]))
+    if (user && !arraysOverlap(allowedRoles, user.roles))
       return <Redirect to="/no-access" />;
 
     return render();

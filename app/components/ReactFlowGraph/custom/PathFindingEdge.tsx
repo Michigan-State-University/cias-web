@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { memo } from 'react';
 import { EdgeProps, getMarkerEnd } from 'react-flow-renderer';
 
 import { SvgPathBuilder } from 'utils/svg';
@@ -57,4 +57,4 @@ const generateEdgePath = (
   return edgePath;
 };
 
-export default PathFindingEdge;
+export default memo(PathFindingEdge);
