@@ -4,6 +4,10 @@ import type { AnimationItem } from 'lottie-web';
 
 declare module 'react-lottie' {
   export interface LottieRef {
+    props: {
+      width: number;
+      height: number;
+    };
     anim: AnimationItem;
   }
 }
