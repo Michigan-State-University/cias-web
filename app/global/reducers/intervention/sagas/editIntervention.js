@@ -31,7 +31,7 @@ export function* editIntervention({
 
     if (hasNarratorChanged) {
       yield call(axios.post, narratorChangeURL, {
-        narrator: { name: intervention.narrator },
+        narrator: { name: intervention.currentNarrator },
       });
     }
 
