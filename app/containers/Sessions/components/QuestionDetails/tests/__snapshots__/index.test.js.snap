@@ -440,6 +440,7 @@ exports[`<QuestionDetails /> should match the snapshot 1`] = `
   top: 0;
   left: 0;
   z-index: 1500;
+  z-index: 1500;
   height: 0%;
 }
 
