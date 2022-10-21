@@ -19,4 +19,12 @@ export default defineMessages({
     id: `${scope}.substances`,
     defaultMessage: '{count, plural, one {# substance} other {# substances}}',
   },
+  substanceLegend: {
+    id: `${scope}.substanceLegend`,
+    defaultMessage: 'Substance(s)',
+  },
+  noSubstanceLegend: {
+    id: `${scope}.noSubstanceLegend`,
+    defaultMessage: 'No substance(s)',
+  },
 });

@@ -23,4 +23,12 @@ export default defineMessages({
     id: `${scope}.stopButtonLabel`,
     defaultMessage: 'Stop audio',
   },
+  invalidEmail: {
+    id: `${scope}.invalidEmail`,
+    defaultMessage: 'Email is invalid!',
+  },
+  duplicatedEmail: {
+    id: `${scope}.duplicatedEmail`,
+    defaultMessage: 'Such email is already provided!',
+  },
 });

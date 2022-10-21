@@ -8,7 +8,7 @@ import { colors, elements } from 'theme';
 import { canEdit } from 'models/Status/statusPermissions';
 import { GroupType, QuestionGroup } from 'models/QuestionGroup';
 import { QuestionDTO, QuestionTypes } from 'models/Question';
-import { InterventionDto } from 'models/Intervention';
+import { Intervention } from 'models/Intervention';
 
 import { makeSelectIsNarratorTab } from 'global/reducers/localState';
 import {
@@ -67,7 +67,7 @@ const RenderQuestionDetails = ({
   const selectedQuestion: Nullable<QuestionDTO> = useSelector(
     makeSelectSelectedQuestion(),
   );
-  const intervention: Nullable<InterventionDto> = useSelector(
+  const intervention: Nullable<Intervention> = useSelector(
     makeSelectIntervention(),
   );
 

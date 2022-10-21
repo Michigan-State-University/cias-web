@@ -1,12 +1,12 @@
 import styled from 'styled-components';
 
-import { colors, mediaQuery } from 'theme';
+import { colors, mediaQuery, ZIndex } from 'theme';
 
 const SIDEBAR_WIDTH = '50vw';
 
 export const Background = styled.div`
   position: relative;
-  z-index: 0;
+  z-index: ${ZIndex.PUBLIC_LAYOUT_BACKGROUND};
   display: flex;
   min-width: 100%;
   min-height: 100%;
@@ -18,7 +18,7 @@ export const Background = styled.div`
 
 export const TopBackground = styled.div`
   position: absolute;
-  z-index: -1;
+  z-index: ${ZIndex.PUBLIC_LAYOUT_TOP_BACKGROUND};
   background: ${colors.white};
   ${mediaQuery.tablet`
     background: transparent;

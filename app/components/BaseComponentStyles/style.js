@@ -14,17 +14,22 @@ const style = (props) => ({
   cursor:
     props.cursor ||
     (props.clickable
-      ? ternary(props.disabled, 'not-allowed;', 'pointer;')
+      ? ternary(props.disabled, 'not-allowed !important;', 'pointer;')
       : ''),
   '&:hover': {
     backgroundColor: props.hoverColor || '',
+  },
+  '&:disabled': {
+    color: props.disabledColor || '',
   },
   background: props.background || '',
   borderRadius: props.borderRadius || '',
   boxShadow: props.shadow || '',
   transform: props.transform || '',
   transition: props.transition || '',
-  opacity: props.opacity || ternary(props.disabled, 0.5, ''),
+  opacity:
+    props.opacity ||
+    (props.disabledColor ? '' : ternary(props.disabled, 0.5, '')),
 });
 
 style.propTypes = {

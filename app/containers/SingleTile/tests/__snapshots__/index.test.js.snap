@@ -23,6 +23,7 @@ exports[`<SingleTile /> Should render and match the snapshot 1`] = `
   -webkit-box-align: flex-start;
   -ms-flex-align: flex-start;
   align-items: flex-start;
+  color: unset;
 }
 
 .c8 {
@@ -32,6 +33,7 @@ exports[`<SingleTile /> Should render and match the snapshot 1`] = `
   border-radius: 5px;
   width: 100%;
   display: inline;
+  color: unset;
 }
 
 .c9 {
@@ -39,6 +41,7 @@ exports[`<SingleTile /> Should render and match the snapshot 1`] = `
   height: auto;
   display: block;
   border-radius: 5px;
+  color: unset;
 }
 
 .c12 {
@@ -50,6 +53,7 @@ exports[`<SingleTile /> Should render and match the snapshot 1`] = `
   display: -webkit-flex;
   display: -ms-flexbox;
   display: flex;
+  color: unset;
 }
 
 .c7 {

@@ -8,6 +8,7 @@ exports[`<ParticipantReport /> Should render and match the snapshot 1`] = `
   border-radius: 5px;
   width: 100%;
   padding: 15px;
+  color: unset;
 }
 
 .c9 {
@@ -15,6 +16,7 @@ exports[`<ParticipantReport /> Should render and match the snapshot 1`] = `
   height: auto;
   display: block;
   border-radius: 5px;
+  color: unset;
 }
 
 .c14 {
@@ -29,6 +31,7 @@ exports[`<ParticipantReport /> Should render and match the snapshot 1`] = `
   padding-left: 21px;
   margin-top: 10px;
   background-color: rgba(233,241,251,1);
+  color: unset;
 }
 
 .c2 {

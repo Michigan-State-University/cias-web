@@ -1,6 +1,9 @@
 import React from 'react';
-import StyledCircle from 'components/Circle/StyledCircle';
 import styled from 'styled-components';
+
+import { ZIndex } from 'theme';
+
+import StyledCircle from 'components/Circle/StyledCircle';
 import Box from 'components/Box';
 
 const DotCircle = (props) => <StyledCircle {...props} size="10px" />;
@@ -9,7 +12,7 @@ const FadedBox = styled(Box)`
   &:after {
     content: '';
     position: absolute;
-    z-index: 1;
+    z-index: ${ZIndex.QUESTION_TYPE_CHOOSER};
     bottom: 0;
     left: 0;
     pointer-events: none;

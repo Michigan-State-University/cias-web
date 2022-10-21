@@ -11,7 +11,8 @@ import {
   makeSelectIntervention,
 } from 'global/reducers/intervention';
 import { colors } from 'theme';
-import { InterventionDto } from 'models/Intervention';
+import { Intervention } from 'models/Intervention';
+import { CharacterType } from 'models/Character';
 
 import {
   Col as GCol,
@@ -26,6 +27,7 @@ import { LabelPosition } from 'components/Switch';
 import Switch from 'components/Switch/Switch';
 import Button from 'components/Button';
 import Row from 'components/Row';
+import CharacterSelector from 'components/CharacterSelector';
 
 import messages from '../../messages';
 import {
@@ -46,7 +48,8 @@ const InterventionSettingsModal = ({ editingPossible, onClose }: Props) => {
 
   const [changedIntervention, setChangedIntervention] =
     useState(originalIntervention);
-  const { id, languageCode, languageName, quickExit } = changedIntervention;
+  const { id, languageCode, languageName, quickExit, currentNarrator } =
+    changedIntervention;
 
   useEffect(() => {
     setChangedIntervention(originalIntervention);
@@ -60,14 +63,18 @@ const InterventionSettingsModal = ({ editingPossible, onClose }: Props) => {
   const saveChanges = useCallback(() => {
     const changes = objectDifference(originalIntervention, changedIntervention);
     dispatch(
-      editInterventionRequest({
-        ...changes,
-        id,
-      }),
+      editInterventionRequest(
+        {
+          ...changes,
+          id,
+        },
+        changedIntervention.currentNarrator !==
+          originalIntervention.currentNarrator,
+      ),
     );
   }, [originalIntervention, changedIntervention]);
 
-  const changeIntervention = (changes: Partial<InterventionDto>) => {
+  const changeIntervention = (changes: Partial<Intervention>) => {
     setChangedIntervention({
       ...changedIntervention,
       ...changes,
@@ -79,8 +86,8 @@ const InterventionSettingsModal = ({ editingPossible, onClose }: Props) => {
     label,
     googleLanguageId,
   }: {
-    value: InterventionDto['languageCode'];
-    label: InterventionDto['languageName'];
+    value: Intervention['languageCode'];
+    label: Intervention['languageName'];
     googleLanguageId: string | number;
   }) =>
     changeIntervention({
@@ -89,10 +96,16 @@ const InterventionSettingsModal = ({ editingPossible, onClose }: Props) => {
       googleLanguageId: +googleLanguageId,
     });
 
-  const handleQuickExitChange = (value: InterventionDto['quickExit']) =>
+  const handleQuickExitChange = (value: Intervention['quickExit']) =>
     changeIntervention({
       quickExit: value,
     });
+
+  const handleNarratorChange = (value: CharacterType) => {
+    changeIntervention({
+      currentNarrator: value,
+    });
+  };
 
   const onSaveClick = () => {
     saveChanges();
@@ -148,6 +161,20 @@ const InterventionSettingsModal = ({ editingPossible, onClose }: Props) => {
               {formatMessage(messages.interventionSettingsQuickExitLabel)}
             </Text>
           </Switch>
+        </GCol>
+      </GRow>
+      <GRow mb={16} mt={40}>
+        <GCol>
+          <H3>{formatMessage(messages.defaultNarrator)}</H3>
+        </GCol>
+      </GRow>
+      <GRow mb={16}>
+        <GCol>
+          <CharacterSelector
+            value={currentNarrator}
+            onChange={handleNarratorChange}
+            disabled={!editingPossible}
+          />
         </GCol>
       </GRow>
       <Row gap={16} mt={56}>

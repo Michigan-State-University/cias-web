@@ -1,5 +1,5 @@
-import intersectionBy from 'lodash/intersectionBy';
 import differenceBy from 'lodash/differenceBy';
+import find from 'lodash/find';
 
 import { Substance, SubstanceGroup } from 'models/Question';
 import { SubstanceConsumption } from 'models/Tlfb';
@@ -29,33 +29,32 @@ export const denormalizeUngroupedConsumptions = (
 export const normalizeGroupedConsumptions = (
   substanceGroups: SubstanceGroup[],
   consumptions: SubstanceConsumption[],
-): NormalizedData<SubstanceConsumption[]> =>
-  substanceGroups.reduce<NormalizedData<SubstanceConsumption[]>>(
-    (value, { substances }, index) => ({
+): NormalizedData<SubstanceConsumption[]> => {
+  const allSubstances = substanceGroups.map((group: SubstanceGroup) =>
+    group.substances.map((substance: Substance) => {
+      const consumption = find(consumptions, { variable: substance.variable });
+
+      return {
+        variable: substance.variable,
+        consumed: consumption?.consumed ?? null,
+        amount: consumption?.amount ?? null,
+        name: group.name,
+      };
+    }),
+  );
+
+  const normalizedConsumptions = allSubstances.reduce<
+    NormalizedData<SubstanceConsumption[]>
+  >(
+    (value, substances, index) => ({
       ...value,
-      [index]: intersectionBy(
-        consumptions,
-        substances,
-        ({ variable }) => variable,
-      ),
+      [index]: substances,
     }),
     {},
   );
 
-export const generateGroupToVariablesMap = (
-  substanceGroups: SubstanceGroup[],
-  consumptionsMap: NormalizedData<SubstanceConsumption[]>,
-): NormalizedData<string[]> =>
-  substanceGroups.reduce<NormalizedData<string[]>>(
-    (value, { substances }, index) => ({
-      ...value,
-      [index]: getAllRemainingVariablesInGroup(
-        substances,
-        consumptionsMap[index],
-      ),
-    }),
-    {},
-  );
+  return normalizedConsumptions;
+};
 
 export const getAllRemainingVariablesInGroup = (
   substancesFromGroup: Substance[],

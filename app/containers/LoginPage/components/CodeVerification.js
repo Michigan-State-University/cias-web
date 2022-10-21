@@ -83,7 +83,6 @@ const CodeVerification = ({ goBack, verifyCode, isLoading, error }) => {
                   <Button
                     disabled={isSubmitDisabled}
                     height={46}
-                    borderRadius={5}
                     mt={25}
                     loading={isLoading}
                     title={formatMessage(messages.codeVerificationButton)}

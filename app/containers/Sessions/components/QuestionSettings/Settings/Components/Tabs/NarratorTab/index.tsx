@@ -126,7 +126,11 @@ const NarratorTab = ({
           !newNarratorAnimations?.includes(animation)
         ) {
           const outcomeAnimation = getDefaultBlockAnimation(character, type);
-          missingAnimations.push({ from: animation, to: outcomeAnimation });
+          missingAnimations.push({
+            from: animation,
+            to: outcomeAnimation,
+            availableAnimations: newNarratorAnimations,
+          });
           return { ...block, animation: outcomeAnimation };
         }
         return block;
@@ -146,10 +150,42 @@ const NarratorTab = ({
     setOffset(x, y);
   };
 
-  const onNarratorChangeConfirm = () => {
+  const mapNewAnimationReplacements = (
+    newNarrator: Narrator,
+    replacementAnimations: MissingAnimationReplacement[],
+  ) => {
+    if (
+      isEqual(
+        replacementAnimations,
+        missingAnimationModalState?.missingAnimations,
+      )
+    )
+      return newNarrator;
+
+    const newBlocks = narrator.blocks.map((block) => {
+      const replacement = replacementAnimations.find(
+        ({ from }) => from === block.animation,
+      );
+
+      if (replacement)
+        return {
+          ...block,
+          animation: replacement.to,
+        };
+      return block;
+    });
+
+    return { ...newNarrator, blocks: newBlocks as NarratorBlock[] };
+  };
+
+  const onNarratorChangeConfirm = (
+    newAnimationState: MissingAnimationReplacement[],
+  ) => {
     if (missingAnimationModalState) {
       const { newNarrator, newSize } = missingAnimationModalState;
-      updateNarrator(newNarrator);
+      updateNarrator(
+        mapNewAnimationReplacements(newNarrator, newAnimationState),
+      );
       if (newSize) {
         moveNarratorPreview(newNarrator.blocks);
       }

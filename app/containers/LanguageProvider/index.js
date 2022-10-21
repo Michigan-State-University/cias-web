@@ -44,6 +44,11 @@ export const intlProviderConfig = {
         {chunks}
       </span>
     ),
+    primaryColorBold: (chunks) => (
+      <span style={{ color: themeColors.primary, fontWeight: 'bold' }}>
+        {chunks}
+      </span>
+    ),
     primaryColor: (chunks) => (
       <span style={{ color: themeColors.primary }}>{chunks}</span>
     ),

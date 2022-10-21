@@ -1,11 +1,9 @@
 import styled, { css } from 'styled-components';
 
-import { colors, mediaQuery } from 'theme';
+import { colors, mediaQuery, ZIndex } from 'theme';
 
 import Box from 'components/Box';
 import { maxQueries, minQueries } from 'components/Container/mediaQuery';
-
-import { DIM_Z_INDEX, POPOVER_Z_INDEX } from './constants';
 
 const mobilePopoverStyle = css`
   width: 100%;
@@ -47,7 +45,7 @@ export const StyledBox = styled(Box)`
 export const StyledPopover = styled(Box)`
   background-color: ${colors.linkWater};
   border: 1px solid ${colors.periwinkleGray};
-  z-index: ${POPOVER_Z_INDEX};
+  z-index: ${ZIndex.POPOVER_MODAL};
 
   ${({ $specialMobileView }) =>
     $specialMobileView &&
@@ -68,7 +66,7 @@ export const StyledPopover = styled(Box)`
 `;
 
 export const StyledPopoverContent = styled(Box)`
-  padding: 24px;
+  padding: ${({ padding }) => padding ?? '24px'};
   overflow-y: auto;
 
   ${({ $specialMobileView }) =>
@@ -88,13 +86,12 @@ export const StyledPopoverContent = styled(Box)`
     `}
 
 
-
   ${({ $specialMobileView, $forceMobile }) =>
     $specialMobileView && $forceMobile && mobileScrollStyle}
 `;
 
 export const DimBackground = styled(Box)`
-  z-index: ${DIM_Z_INDEX};
+  z-index: ${ZIndex.DIM_BACKGROUND};
   border-radius: 0;
 
   ${({ $specialMobileView }) =>
@@ -106,18 +103,17 @@ export const DimBackground = styled(Box)`
       }
     `}
 
-  ${({ $specialMobileView, $forceMobile }) =>
-    $specialMobileView &&
-    $forceMobile &&
-    css`
-      position: absolute !important;
-      ${mobileDimStyle};
-    `}
-
   ${({ $forceDim }) =>
     $forceDim &&
     css`
       position: fixed !important;
+      ${mobileDimStyle};
+    `}
+
+  ${({ $forceMobile }) =>
+    $forceMobile &&
+    css`
+      position: absolute !important;
       ${mobileDimStyle};
     `}
 `;

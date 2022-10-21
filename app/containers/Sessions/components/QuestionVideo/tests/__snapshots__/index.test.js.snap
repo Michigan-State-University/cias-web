@@ -30,6 +30,7 @@ exports[`<QuestionVideo /> should match the snapshot with video 1`] = `
   display: block;
   border-radius: 5px;
   width: 100%;
+  color: unset;
 }
 
 .c1 {
@@ -44,6 +45,7 @@ exports[`<QuestionVideo /> should match the snapshot with video 1`] = `
   padding-left: 21px;
   border-radius: 5px;
   border-radius: 5px;
+  color: unset;
 }
 
 .c1:hover {
@@ -57,6 +59,8 @@ exports[`<QuestionVideo /> should match the snapshot with video 1`] = `
   border-radius: 5px;
   visibility: hidden;
   margin-left: 15px;
+  cursor: pointer;
+  color: unset;
   cursor: pointer;
 }
 
@@ -187,6 +191,7 @@ exports[`<QuestionVideo /> should match the snapshot without video 1`] = `
   padding-right: 16px;
   padding-left: 16px;
   background-color: rgba(233,241,251,1);
+  color: unset;
 }
 
 @media only screen and (min-width:768px) {

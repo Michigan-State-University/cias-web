@@ -1,9 +1,11 @@
-import React, { useMemo } from 'react';
+import React, { useEffect, useMemo } from 'react';
+import { useDispatch } from 'react-redux';
 import { useParams } from 'react-router';
 import { useIntl } from 'react-intl';
 import { Helmet } from 'react-helmet';
 import groupBy from 'lodash/groupBy';
 import { Markup } from 'interweave';
+import { useInjectReducer } from 'redux-injectors';
 
 import useGet from 'utils/useGet';
 
@@ -13,7 +15,15 @@ import {
 } from 'models/UserIntervention/UserIntervention';
 import { Session } from 'models/Session/Session';
 import { UserSession } from 'models/UserSession/UserSession';
-import { FileInfo } from 'models/Intervention/InterventionDto';
+import { InterventionType } from 'models/Intervention';
+import { AppFile } from 'models/File';
+
+import {
+  ChatWidgetReducer,
+  chatWidgetReducerKey,
+  setChatDisabled,
+  setChatEnabled,
+} from 'global/reducers/chatWidget';
 
 import { themeColors } from 'theme';
 
@@ -30,7 +40,6 @@ import Img from 'components/Img';
 import { Row, Col } from 'components/ReactGridSystem';
 import { FileDisplayItem } from 'components/FileDisplayItem';
 
-import { InterventionType } from 'models/Intervention';
 import messages from './messages';
 import UserSessionTile from './UserSessionTile';
 import { parseUserIntervention } from './utils';
@@ -41,6 +50,11 @@ interface Params {
 
 const UserInterventionPage = () => {
   const { userInterventionId } = useParams<Params>();
+
+  const globalDispatch = useDispatch();
+
+  // @ts-ignore
+  useInjectReducer({ key: chatWidgetReducerKey, reducer: ChatWidgetReducer });
 
   const { data, error, isFetching } = useGet<
     UserInterventionDTO,
@@ -72,6 +86,19 @@ const UserInterventionPage = () => {
   ]);
 
   const { formatMessage } = useIntl();
+
+  useEffect(() => {
+    if (!data) return;
+
+    const { type, liveChatEnabled, id } = data.userIntervention.intervention;
+
+    if (type === InterventionType.DEFAULT || !liveChatEnabled) {
+      globalDispatch(setChatDisabled());
+      return;
+    }
+
+    globalDispatch(setChatEnabled(id));
+  }, [data]);
 
   if (error) {
     return <ErrorAlert fullPage errorText={error} />;
@@ -134,7 +161,7 @@ const UserInterventionPage = () => {
         <>
           <H3>{formatMessage(messages.helpingMaterials)}</H3>
           <Row overflow="auto" maxHeight={100} mt={10} mb={50}>
-            {files.map((fileInfo: FileInfo) => (
+            {files.map((fileInfo: AppFile) => (
               <Col xs={12} md={6} xxl={4} mb={10} key={fileInfo.id}>
                 <FileDisplayItem fileInfo={fileInfo} />
               </Col>

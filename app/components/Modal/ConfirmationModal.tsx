@@ -28,17 +28,19 @@ export type Props = {
   description: ReactNode;
   onClose: () => void;
   confirmAction: () => void;
-  loading: boolean;
+  loading?: boolean;
   error?: string | object;
   content: ReactNode;
   confirmationButtonColor?: string;
   confirmationButtonText?: string;
+  confirmationButtonStyles?: Record<string, unknown>;
   cancelButtonText?: string;
   cancelButtonStyles?: Record<string, unknown>;
   contentStyles?: Record<string, unknown>;
   contentContainerStyles?: Record<string, unknown>;
   icon?: IconType;
-  hideCloseButton: boolean;
+  hideCloseButton?: boolean;
+  hideCancelButton?: boolean;
   isMobile: boolean;
 } & Record<string, unknown>;
 
@@ -52,12 +54,14 @@ const ConfirmationModal = ({
   content,
   confirmationButtonColor = 'warning',
   confirmationButtonText,
+  confirmationButtonStyles,
   cancelButtonText,
   cancelButtonStyles,
   contentStyles,
   contentContainerStyles,
   icon,
   hideCloseButton,
+  hideCancelButton,
   isMobile,
   ...modalStyles
 }: Props): JSX.Element => {
@@ -100,18 +104,20 @@ const ConfirmationModal = ({
             </Text>
           </Box>
         )}
-        <Row mt={25}>
+        <Row mt={25} justify="center">
           {/* @ts-ignore */}
-          <Button
-            inverted
-            hoverable
-            onClick={onClose}
-            type="button"
-            mr={25}
-            {...cancelButtonStyles}
-          >
-            {cancelButtonText ?? <FormattedMessage {...messages.cancel} />}
-          </Button>
+          {!hideCancelButton && (
+            <Button
+              inverted
+              hoverable
+              onClick={onClose}
+              type="button"
+              mr={25}
+              {...cancelButtonStyles}
+            >
+              {cancelButtonText ?? <FormattedMessage {...messages.cancel} />}
+            </Button>
+          )}
           {/* @ts-ignore */}
           <Button
             color={confirmationButtonColor}
@@ -121,6 +127,7 @@ const ConfirmationModal = ({
             onClick={onConfirm}
             type="button"
             data-cy="confirmation-box-confirm-button"
+            {...confirmationButtonStyles}
           >
             {confirmationButtonText ?? (
               <FormattedMessage {...messages.confirmCanceling} />

@@ -14,6 +14,8 @@ const ALLOWED_ADDING_PARTICIPANTS_TO_INTERVENTION = [draft, published];
 
 const ALLOWED_REMOVING_PARTICIPANTS_FROM_INTERVENTION = [draft, published];
 
+const ALLOWED_ENABLE_CHAT = [draft, published];
+
 const ALLOWED_SESSION_DELETE = [draft];
 
 const ALLOWED_REPORT_TEMPLATE_EDIT = [draft];
@@ -49,3 +51,6 @@ export const canEditReportTemplate = (interventionStatus) =>
 
 export const canEditInterventionType = (interventionStatus) =>
   ALLOWED_INTERVENTION_TYPE_EDIT.includes(interventionStatus);
+
+export const canEnableChat = (interventionStatus) =>
+  ALLOWED_ENABLE_CHAT.includes(interventionStatus);

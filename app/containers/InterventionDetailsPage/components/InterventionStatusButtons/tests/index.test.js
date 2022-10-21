@@ -15,7 +15,7 @@ import { Provider } from 'react-redux';
 import 'jest-styled-components';
 import { DEFAULT_LOCALE } from 'i18n';
 
-import { Roles } from 'models/User/UserRoles';
+import { Roles } from 'models/User/RolesManager';
 import { draft, statusTypes } from 'models/Status/StatusTypes';
 
 import { createTestStore } from 'utils/testUtils/storeUtils';
@@ -27,7 +27,7 @@ describe('<InterventionStatusButtons />', () => {
 
   const initialState = {
     auth: {
-      user: { firstName: 'test', lastName: 'test', roles: [Roles.admin] },
+      user: { firstName: 'test', lastName: 'test', roles: [Roles.Admin] },
     },
   };
 

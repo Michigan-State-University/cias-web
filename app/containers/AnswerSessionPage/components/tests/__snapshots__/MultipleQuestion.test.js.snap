@@ -74,6 +74,7 @@ exports[`<MultipleQuestion /> Should render and match the snapshot 1`] = `
 
 .c10 {
   margin-right: 5px;
+  border-radius: 5px;
 }
 
 .c5:disabled + label > .c9 {
@@ -117,6 +118,8 @@ exports[`<MultipleQuestion /> Should render and match the snapshot 1`] = `
   cursor: pointer;
   border-radius: 5px;
   border-radius: 5px;
+  color: unset;
+  cursor: pointer;
 }
 
 .c2:hover {
@@ -170,9 +173,9 @@ exports[`<MultipleQuestion /> Should render and match the snapshot 1`] = `
                 class="c9 c10"
                 src="IMAGE_MOCK"
               />
-              <div>
+              <span>
                 test
-              </div>
+              </span>
             </label>
           </div>
         </div>
@@ -205,9 +208,9 @@ exports[`<MultipleQuestion /> Should render and match the snapshot 1`] = `
                 class="c9 c10"
                 src="IMAGE_MOCK"
               />
-              <div>
+              <span>
                 test
-              </div>
+              </span>
             </label>
           </div>
         </div>

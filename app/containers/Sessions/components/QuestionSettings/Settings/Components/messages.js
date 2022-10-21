@@ -1,7 +1,6 @@
 import { defineMessages } from 'react-intl';
 
 import { EFeedbackAction } from 'models/Narrator/FeedbackActions';
-import { CharacterType } from 'models/Character';
 
 export const scope = 'app.containers.DefaultSettings';
 
@@ -201,13 +200,5 @@ export default defineMessages({
   copyFormula: {
     id: `${scope}.copyFormula`,
     defaultMessage: 'Copy formula',
-  },
-  [CharacterType.PEEDY]: {
-    id: `${scope}.${CharacterType.PEEDY}`,
-    defaultMessage: 'Peedy',
-  },
-  [CharacterType.EMMI]: {
-    id: `${scope}.${CharacterType.EMMI}`,
-    defaultMessage: 'Emmi',
   },
 });

@@ -14,10 +14,20 @@ import {
   EDIT_INTERVENTION_ERROR,
 } from '../constants';
 
-export function* editIntervention({ payload: { intervention } }) {
+export function* editIntervention({
+  payload: { intervention, hasNarratorChanged },
+}) {
   const requestURL = `v1/interventions/${intervention.id}`;
+  const narratorChangeURL = `${requestURL}/change_narrator`;
 
   try {
+    if (hasNarratorChanged) {
+      yield call(axios.post, narratorChangeURL, {
+        narrator: { name: intervention.currentNarrator },
+      });
+      return;
+    }
+
     const {
       data: { data },
     } = yield call(
@@ -25,6 +35,7 @@ export function* editIntervention({ payload: { intervention } }) {
       requestURL,
       objectToSnakeCase({ intervention }),
     );
+
     const mappedData = defaultMapper(data);
     yield put(editInterventionSuccess({ ...intervention, ...mappedData }));
   } catch (error) {

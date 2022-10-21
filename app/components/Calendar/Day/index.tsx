@@ -59,7 +59,10 @@ export const Day = ({
     const substances = consumptions.reduce<NormalizedData<boolean>>(
       (acc, { name, consumed, amount }) => ({
         ...acc,
-        [name]: acc[name] || consumed || amount !== null,
+        [name]:
+          acc[name] ||
+          consumed ||
+          (amount ? parseInt(amount, 10) !== 0 : false),
       }),
       {},
     );

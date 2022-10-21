@@ -96,7 +96,7 @@ exports[`<RegisterPage /> Should render and match the researcher 1`] = `
   align-items: center;
 }
 
-.c24 {
+.c28 {
   width: 100%;
   height: 40px;
   border-radius: 100px;
@@ -111,11 +111,19 @@ exports[`<RegisterPage /> Should render and match the researcher 1`] = `
   transition: background-color 300ms ease,color 300ms ease,border 300ms ease;
   margin-top: 25px;
   margin-bottom: 25px;
-  border-radius: 5px;
   height: 46px;
 }
 
-.c8 {
+.c7 {
+  width: auto;
+  height: auto;
+  display: block;
+  border-radius: 5px;
+  margin-bottom: 40px;
+  color: unset;
+}
+
+.c10 {
   display: -webkit-box;
   display: -webkit-flex;
   display: -ms-flexbox;
@@ -127,7 +135,7 @@ exports[`<RegisterPage /> Should render and match the researcher 1`] = `
   width: 100%;
 }
 
-.c11 {
+.c14 {
   display: -webkit-box;
   display: -webkit-flex;
   display: -ms-flexbox;
@@ -146,7 +154,20 @@ exports[`<RegisterPage /> Should render and match the researcher 1`] = `
   width: 100%;
 }
 
-.c16 {
+.c18 {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-flex-direction: row;
+  -ms-flex-direction: row;
+  flex-direction: row;
+  height: auto;
+  margin-top: 20px;
+  margin-bottom: 20px;
+}
+
+.c20 {
   display: -webkit-box;
   display: -webkit-flex;
   display: -ms-flexbox;
@@ -187,7 +208,7 @@ exports[`<RegisterPage /> Should render and match the researcher 1`] = `
   align-items: flex-start;
 }
 
-.c9 {
+.c11 {
   display: -webkit-box;
   display: -webkit-flex;
   display: -ms-flexbox;
@@ -200,7 +221,7 @@ exports[`<RegisterPage /> Should render and match the researcher 1`] = `
   margin-right: 20px;
 }
 
-.c13 {
+.c16 {
   display: -webkit-box;
   display: -webkit-flex;
   display: -ms-flexbox;
@@ -212,28 +233,57 @@ exports[`<RegisterPage /> Should render and match the researcher 1`] = `
   margin-bottom: 20px;
 }
 
-.c7 {
+.c19 {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-flex-direction: column;
+  -ms-flex-direction: column;
+  flex-direction: column;
+  width: 100%;
+}
+
+.c8 {
   margin: 0;
   font-family: DM Sans;
   font-size: 25px;
   line-height: 130%;
-  margin-bottom: 40px;
+  margin-bottom: 8px;
   font-size: 23px;
   color: #2F3850;
 }
 
-.c10 {
+.c9 {
+  font-family: DM Sans;
+  font-size: 13px;
+  line-height: 130%;
+  font-size: 12px;
+  color: #2F3850;
+  line-height: 12px;
+}
+
+.c12 {
   font-family: DM Sans;
   font-size: 13px;
   line-height: 130%;
   margin-bottom: 5px;
+  font-size: 12px;
   color: #2F3850;
   width: -webkit-fit-content;
   width: -moz-fit-content;
   width: fit-content;
 }
 
-.c23 {
+.c13 {
+  font-family: DM Sans;
+  font-size: 13px;
+  line-height: 130%;
+  color: rgba(210,55,29,1);
+  color: rgba(210,55,29,1);
+}
+
+.c27 {
   font-family: DM Sans;
   font-size: 13px;
   line-height: 130%;
@@ -247,25 +297,6 @@ exports[`<RegisterPage /> Should render and match the researcher 1`] = `
 }
 
 .c15 {
-  width: auto;
-  height: auto;
-  display: block;
-  border-radius: 5px;
-  display: -webkit-box;
-  display: -webkit-flex;
-  display: -ms-flexbox;
-  display: flex;
-  margin-bottom: 5px;
-  -webkit-align-content: center;
-  -ms-flex-line-pack: center;
-  align-content: center;
-  -webkit-align-items: center;
-  -webkit-box-align: center;
-  -ms-flex-align: center;
-  align-items: center;
-}
-
-.c12 {
   padding: 12px;
   border-style: solid;
   border-width: 1px;
@@ -276,17 +307,17 @@ exports[`<RegisterPage /> Should render and match the researcher 1`] = `
   color: #2F3850;
 }
 
-.c12:focus {
+.c15:focus {
   box-shadow: none;
   outline: none;
   border-color: #107969;
 }
 
-.c12:disabled {
+.c15:disabled {
   color: #ABBBD1;
 }
 
-.c14 {
+.c17 {
   padding: 12px;
   border-style: solid;
   border-width: 1px;
@@ -298,30 +329,31 @@ exports[`<RegisterPage /> Should render and match the researcher 1`] = `
   opacity: 0.5;
 }
 
-.c14:focus {
+.c17:focus {
   box-shadow: none;
   outline: none;
   border-color: #107969;
 }
 
-.c14:disabled {
+.c17:disabled {
   color: #ABBBD1;
 }
 
-.c18 {
+.c22 {
   display: none;
 }
 
-.c22 {
+.c26 {
   margin-right: 5px;
+  border-radius: 5px;
 }
 
-.c17:disabled + label > .c21 {
+.c21:disabled + label > .c25 {
   opacity: 0.5;
   cursor: not-allowed;
 }
 
-.c20 {
+.c24 {
   display: -webkit-box;
   display: -webkit-flex;
   display: -ms-flexbox;
@@ -335,11 +367,11 @@ exports[`<RegisterPage /> Should render and match the researcher 1`] = `
   width: max-content;
 }
 
-.c20:hover {
+.c24:hover {
   cursor: pointer;
 }
 
-.c17:disabled + .c19 {
+.c21:disabled + .c23 {
   opacity: 0.5;
   cursor: not-allowed;
 }
@@ -442,6 +474,22 @@ exports[`<RegisterPage /> Should render and match the researcher 1`] = `
 
 }
 
+@media only screen and (min-width:768px) {
+
+}
+
+@media only screen and (min-width:960px) {
+
+}
+
+@media only screen and (min-width:1170px) {
+
+}
+
+@media only screen and (min-width:1360px) {
+
+}
+
 <div
   class="c0"
 >
@@ -467,35 +515,52 @@ exports[`<RegisterPage /> Should render and match the researcher 1`] = `
       <div
         class="c6"
       >
-        <h1
-          class="c7"
-          font-size="23"
-        >
-          Register  account
-        </h1>
         <div
-          class="c8"
+          class="c7"
+        >
+          <h1
+            class="c8"
+            font-size="23"
+          >
+            Register  account
+          </h1>
+          <p
+            class="c9"
+            font-size="12px"
+          >
+            Fields with an asterisk&lt;warningColor&gt;*&lt;/warningColor&gt; are required
+          </p>
+        </div>
+        <div
+          class="c10"
           width="100%"
         >
           <div
-            class="c9"
+            class="c11"
           >
             <label
               for="firstName"
             >
               <p
-                class="c10"
+                class="c12"
+                font-size="12px"
                 width="fit-content"
               >
                 First Name
+                <span
+                  class="c13"
+                  color="#D2371D"
+                >
+                  *
+                </span>
               </p>
             </label>
             <div
-              class="c11"
+              class="c14"
               width="100%"
             >
               <input
-                class="c12"
+                class="c15"
                 height="46"
                 id="firstName"
                 name="firstName"
@@ -507,24 +572,31 @@ exports[`<RegisterPage /> Should render and match the researcher 1`] = `
             </div>
           </div>
           <div
-            class="c13"
+            class="c16"
           >
             <label
               for="lastName"
             >
               <p
-                class="c10"
+                class="c12"
+                font-size="12px"
                 width="fit-content"
               >
                 Last name
+                <span
+                  class="c13"
+                  color="#D2371D"
+                >
+                  *
+                </span>
               </p>
             </label>
             <div
-              class="c11"
+              class="c14"
               width="100%"
             >
               <input
-                class="c12"
+                class="c15"
                 height="46"
                 id="lastName"
                 name="lastName"
@@ -537,24 +609,31 @@ exports[`<RegisterPage /> Should render and match the researcher 1`] = `
           </div>
         </div>
         <div
-          class="c13"
+          class="c16"
         >
           <label
             for="email"
           >
             <p
-              class="c10"
+              class="c12"
+              font-size="12px"
               width="fit-content"
             >
               E-mail address
+              <span
+                class="c13"
+                color="#D2371D"
+              >
+                *
+              </span>
             </p>
           </label>
           <div
-            class="c11"
+            class="c14"
             width="100%"
           >
             <input
-              class="c14"
+              class="c17"
               disabled=""
               height="46"
               id="email"
@@ -567,24 +646,31 @@ exports[`<RegisterPage /> Should render and match the researcher 1`] = `
           </div>
         </div>
         <div
-          class="c13"
+          class="c16"
         >
           <label
             for="password"
           >
             <p
-              class="c10"
+              class="c12"
+              font-size="12px"
               width="fit-content"
             >
               Password
+              <span
+                class="c13"
+                color="#D2371D"
+              >
+                *
+              </span>
             </p>
           </label>
           <div
-            class="c11"
+            class="c14"
             width="100%"
           >
             <input
-              class="c12"
+              class="c15"
               height="46"
               id="password"
               name="password"
@@ -596,24 +682,31 @@ exports[`<RegisterPage /> Should render and match the researcher 1`] = `
           </div>
         </div>
         <div
-          class="c13"
+          class="c16"
         >
           <label
             for="passwordConfirmation"
           >
             <p
-              class="c10"
+              class="c12"
+              font-size="12px"
               width="fit-content"
             >
               Password confirmation
+              <span
+                class="c13"
+                color="#D2371D"
+              >
+                *
+              </span>
             </p>
           </label>
           <div
-            class="c11"
+            class="c14"
             width="100%"
           >
             <input
-              class="c12"
+              class="c15"
               height="46"
               id="passwordConfirmation"
               name="passwordConfirmation"
@@ -625,44 +718,47 @@ exports[`<RegisterPage /> Should render and match the researcher 1`] = `
           </div>
         </div>
         <div
-          class="c15"
-          display="flex"
+          class="c18"
         >
           <div
-            class="c16"
+            class="c19"
           >
-            <input
-              class="c17 c18"
-              id="terms"
-              type="checkbox"
-            />
-            <label
-              class="c19 c20"
-              for="terms"
+            <div
+              class="c20"
             >
-              <img
+              <input
                 class="c21 c22"
-                src="IMAGE_MOCK"
+                id="terms"
+                type="checkbox"
               />
-              Accept
-              <p
-                class="c23"
-                color="#B727EA"
-                font-weight="bold"
+              <label
+                class="c23 c24"
+                for="terms"
               >
-                Terms and conditions & Privacy Policy
-              </p>
-            </label>
+                <img
+                  class="c25 c26"
+                  src="IMAGE_MOCK"
+                />
+                Accept
+                <p
+                  class="c27"
+                  color="#B727EA"
+                  font-weight="bold"
+                >
+                  Terms and conditions & Privacy Policy
+                </p>
+              </label>
+            </div>
           </div>
         </div>
         <button
-          class="c24"
+          class="c28"
           color="primary"
           height="46"
           radius="100px"
           type="submit"
         >
-          Register
+          Create an account
         </button>
       </div>
     </div>
@@ -766,7 +862,7 @@ exports[`<RegisterPage /> Should render and match the snapshot for participant 1
   align-items: center;
 }
 
-.c23 {
+.c27 {
   width: 100%;
   height: 40px;
   border-radius: 100px;
@@ -781,11 +877,19 @@ exports[`<RegisterPage /> Should render and match the snapshot for participant 1
   transition: background-color 300ms ease,color 300ms ease,border 300ms ease;
   margin-top: 25px;
   margin-bottom: 25px;
-  border-radius: 5px;
   height: 46px;
 }
 
-.c8 {
+.c7 {
+  width: auto;
+  height: auto;
+  display: block;
+  border-radius: 5px;
+  margin-bottom: 40px;
+  color: unset;
+}
+
+.c10 {
   display: -webkit-box;
   display: -webkit-flex;
   display: -ms-flexbox;
@@ -797,7 +901,7 @@ exports[`<RegisterPage /> Should render and match the snapshot for participant 1
   width: 100%;
 }
 
-.c11 {
+.c14 {
   display: -webkit-box;
   display: -webkit-flex;
   display: -ms-flexbox;
@@ -816,7 +920,20 @@ exports[`<RegisterPage /> Should render and match the snapshot for participant 1
   width: 100%;
 }
 
-.c15 {
+.c17 {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-flex-direction: row;
+  -ms-flex-direction: row;
+  flex-direction: row;
+  height: auto;
+  margin-top: 20px;
+  margin-bottom: 20px;
+}
+
+.c19 {
   display: -webkit-box;
   display: -webkit-flex;
   display: -ms-flexbox;
@@ -839,7 +956,7 @@ exports[`<RegisterPage /> Should render and match the snapshot for participant 1
   align-items: center;
 }
 
-.c24 {
+.c28 {
   display: -webkit-box;
   display: -webkit-flex;
   display: -ms-flexbox;
@@ -856,7 +973,7 @@ exports[`<RegisterPage /> Should render and match the snapshot for participant 1
   width: 100%;
 }
 
-.c25 {
+.c29 {
   outline: none;
   border: none;
   background: transparent;
@@ -886,7 +1003,7 @@ exports[`<RegisterPage /> Should render and match the snapshot for participant 1
   align-items: flex-start;
 }
 
-.c9 {
+.c11 {
   display: -webkit-box;
   display: -webkit-flex;
   display: -ms-flexbox;
@@ -899,7 +1016,7 @@ exports[`<RegisterPage /> Should render and match the snapshot for participant 1
   margin-right: 20px;
 }
 
-.c13 {
+.c16 {
   display: -webkit-box;
   display: -webkit-flex;
   display: -ms-flexbox;
@@ -911,28 +1028,57 @@ exports[`<RegisterPage /> Should render and match the snapshot for participant 1
   margin-bottom: 20px;
 }
 
-.c7 {
+.c18 {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-flex-direction: column;
+  -ms-flex-direction: column;
+  flex-direction: column;
+  width: 100%;
+}
+
+.c8 {
   margin: 0;
   font-family: DM Sans;
   font-size: 25px;
   line-height: 130%;
-  margin-bottom: 40px;
+  margin-bottom: 8px;
   font-size: 23px;
   color: #2F3850;
 }
 
-.c10 {
+.c9 {
+  font-family: DM Sans;
+  font-size: 13px;
+  line-height: 130%;
+  font-size: 12px;
+  color: #2F3850;
+  line-height: 12px;
+}
+
+.c12 {
   font-family: DM Sans;
   font-size: 13px;
   line-height: 130%;
   margin-bottom: 5px;
+  font-size: 12px;
   color: #2F3850;
   width: -webkit-fit-content;
   width: -moz-fit-content;
   width: fit-content;
 }
 
-.c22 {
+.c13 {
+  font-family: DM Sans;
+  font-size: 13px;
+  line-height: 130%;
+  color: rgba(210,55,29,1);
+  color: rgba(210,55,29,1);
+}
+
+.c26 {
   font-family: DM Sans;
   font-size: 13px;
   line-height: 130%;
@@ -945,26 +1091,7 @@ exports[`<RegisterPage /> Should render and match the snapshot for participant 1
   cursor: pointer;
 }
 
-.c14 {
-  width: auto;
-  height: auto;
-  display: block;
-  border-radius: 5px;
-  display: -webkit-box;
-  display: -webkit-flex;
-  display: -ms-flexbox;
-  display: flex;
-  margin-bottom: 5px;
-  -webkit-align-content: center;
-  -ms-flex-line-pack: center;
-  align-content: center;
-  -webkit-align-items: center;
-  -webkit-box-align: center;
-  -ms-flex-align: center;
-  align-items: center;
-}
-
-.c12 {
+.c15 {
   padding: 12px;
   border-style: solid;
   border-width: 1px;
@@ -975,30 +1102,31 @@ exports[`<RegisterPage /> Should render and match the snapshot for participant 1
   color: #2F3850;
 }
 
-.c12:focus {
+.c15:focus {
   box-shadow: none;
   outline: none;
   border-color: #107969;
 }
 
-.c12:disabled {
+.c15:disabled {
   color: #ABBBD1;
 }
 
-.c17 {
+.c21 {
   display: none;
 }
 
-.c21 {
+.c25 {
   margin-right: 5px;
+  border-radius: 5px;
 }
 
-.c16:disabled + label > .c20 {
+.c20:disabled + label > .c24 {
   opacity: 0.5;
   cursor: not-allowed;
 }
 
-.c19 {
+.c23 {
   display: -webkit-box;
   display: -webkit-flex;
   display: -ms-flexbox;
@@ -1012,11 +1140,11 @@ exports[`<RegisterPage /> Should render and match the snapshot for participant 1
   width: max-content;
 }
 
-.c19:hover {
+.c23:hover {
   cursor: pointer;
 }
 
-.c16:disabled + .c18 {
+.c20:disabled + .c22 {
   opacity: 0.5;
   cursor: not-allowed;
 }
@@ -1119,6 +1247,22 @@ exports[`<RegisterPage /> Should render and match the snapshot for participant 1
 
 }
 
+@media only screen and (min-width:768px) {
+
+}
+
+@media only screen and (min-width:960px) {
+
+}
+
+@media only screen and (min-width:1170px) {
+
+}
+
+@media only screen and (min-width:1360px) {
+
+}
+
 <div
   class="c0"
 >
@@ -1144,35 +1288,52 @@ exports[`<RegisterPage /> Should render and match the snapshot for participant 1
       <div
         class="c6"
       >
-        <h1
-          class="c7"
-          font-size="23"
-        >
-          Register participant account
-        </h1>
         <div
-          class="c8"
+          class="c7"
+        >
+          <h1
+            class="c8"
+            font-size="23"
+          >
+            Register participant account
+          </h1>
+          <p
+            class="c9"
+            font-size="12px"
+          >
+            Fields with an asterisk&lt;warningColor&gt;*&lt;/warningColor&gt; are required
+          </p>
+        </div>
+        <div
+          class="c10"
           width="100%"
         >
           <div
-            class="c9"
+            class="c11"
           >
             <label
               for="firstName"
             >
               <p
-                class="c10"
+                class="c12"
+                font-size="12px"
                 width="fit-content"
               >
                 First Name
+                <span
+                  class="c13"
+                  color="#D2371D"
+                >
+                  *
+                </span>
               </p>
             </label>
             <div
-              class="c11"
+              class="c14"
               width="100%"
             >
               <input
-                class="c12"
+                class="c15"
                 height="46"
                 id="firstName"
                 name="firstName"
@@ -1184,24 +1345,31 @@ exports[`<RegisterPage /> Should render and match the snapshot for participant 1
             </div>
           </div>
           <div
-            class="c13"
+            class="c16"
           >
             <label
               for="lastName"
             >
               <p
-                class="c10"
+                class="c12"
+                font-size="12px"
                 width="fit-content"
               >
                 Last name
+                <span
+                  class="c13"
+                  color="#D2371D"
+                >
+                  *
+                </span>
               </p>
             </label>
             <div
-              class="c11"
+              class="c14"
               width="100%"
             >
               <input
-                class="c12"
+                class="c15"
                 height="46"
                 id="lastName"
                 name="lastName"
@@ -1214,24 +1382,31 @@ exports[`<RegisterPage /> Should render and match the snapshot for participant 1
           </div>
         </div>
         <div
-          class="c13"
+          class="c16"
         >
           <label
             for="email"
           >
             <p
-              class="c10"
+              class="c12"
+              font-size="12px"
               width="fit-content"
             >
               E-mail address
+              <span
+                class="c13"
+                color="#D2371D"
+              >
+                *
+              </span>
             </p>
           </label>
           <div
-            class="c11"
+            class="c14"
             width="100%"
           >
             <input
-              class="c12"
+              class="c15"
               height="46"
               id="email"
               name="email"
@@ -1243,24 +1418,31 @@ exports[`<RegisterPage /> Should render and match the snapshot for participant 1
           </div>
         </div>
         <div
-          class="c13"
+          class="c16"
         >
           <label
             for="password"
           >
             <p
-              class="c10"
+              class="c12"
+              font-size="12px"
               width="fit-content"
             >
               Password
+              <span
+                class="c13"
+                color="#D2371D"
+              >
+                *
+              </span>
             </p>
           </label>
           <div
-            class="c11"
+            class="c14"
             width="100%"
           >
             <input
-              class="c12"
+              class="c15"
               height="46"
               id="password"
               name="password"
@@ -1272,24 +1454,31 @@ exports[`<RegisterPage /> Should render and match the snapshot for participant 1
           </div>
         </div>
         <div
-          class="c13"
+          class="c16"
         >
           <label
             for="passwordConfirmation"
           >
             <p
-              class="c10"
+              class="c12"
+              font-size="12px"
               width="fit-content"
             >
               Password confirmation
+              <span
+                class="c13"
+                color="#D2371D"
+              >
+                *
+              </span>
             </p>
           </label>
           <div
-            class="c11"
+            class="c14"
             width="100%"
           >
             <input
-              class="c12"
+              class="c15"
               height="46"
               id="passwordConfirmation"
               name="passwordConfirmation"
@@ -1301,54 +1490,57 @@ exports[`<RegisterPage /> Should render and match the snapshot for participant 1
           </div>
         </div>
         <div
-          class="c14"
-          display="flex"
+          class="c17"
         >
           <div
-            class="c15"
+            class="c18"
           >
-            <input
-              class="c16 c17"
-              id="terms"
-              type="checkbox"
-            />
-            <label
-              class="c18 c19"
-              for="terms"
+            <div
+              class="c19"
             >
-              <img
+              <input
                 class="c20 c21"
-                src="IMAGE_MOCK"
+                id="terms"
+                type="checkbox"
               />
-              Accept
-              <p
-                class="c22"
-                color="#B727EA"
-                font-weight="bold"
+              <label
+                class="c22 c23"
+                for="terms"
               >
-                Terms and conditions & Privacy Policy
-              </p>
-            </label>
+                <img
+                  class="c24 c25"
+                  src="IMAGE_MOCK"
+                />
+                Accept
+                <p
+                  class="c26"
+                  color="#B727EA"
+                  font-weight="bold"
+                >
+                  Terms and conditions & Privacy Policy
+                </p>
+              </label>
+            </div>
           </div>
         </div>
         <button
-          class="c23"
+          class="c27"
           color="primary"
           height="46"
           radius="100px"
           type="submit"
         >
-          Register
+          Create an account
         </button>
         <div
-          class="c24"
+          class="c28"
           width="100%"
         >
           <a
             href="/login"
           >
             <button
-              class="c25"
+              class="c29"
               color="#B727EA"
             >
               I already have an account

@@ -1,0 +1,15 @@
+<mjml>
+  <mj-head>
+    <app-header />
+  </mj-head>
+  <mj-body>
+    <app-layout
+      header="CIAS Invitation"
+      mainText="You have been invited to complete <span style='color: #c866ea;'>{INTERVENTION_NAME}</span>.<br /><br />Click the button below to access."
+      buttonText="Create an account and go to the intervention"
+      buttonUrl="{BUTTON_URL}"
+      ignoreEmail="true"
+    >
+    </app-layout>
+  </mj-body>
+</mjml>

@@ -6,6 +6,7 @@ exports[`<ArrowDropdown /> Should render and match the snapshot when is closed 1
   height: auto;
   display: block;
   border-radius: 5px;
+  color: unset;
 }
 
 .c5 {
@@ -23,6 +24,7 @@ exports[`<ArrowDropdown /> Should render and match the snapshot when is closed 1
   box-shadow: 0px 0px 50px rgba(0,0,0,0.08);
   border-radius: 10px;
   right: 0;
+  color: unset;
 }
 
 .c2 {
@@ -114,6 +116,7 @@ exports[`<ArrowDropdown /> Should render and match the snapshot when is opened 1
   height: auto;
   display: block;
   border-radius: 5px;
+  color: unset;
 }
 
 .c5 {
@@ -131,6 +134,7 @@ exports[`<ArrowDropdown /> Should render and match the snapshot when is opened 1
   box-shadow: 0px 0px 50px rgba(0,0,0,0.08);
   border-radius: 10px;
   right: 0;
+  color: unset;
 }
 
 .c2 {
@@ -221,6 +225,7 @@ exports[`<ArrowDropdown /> Should render and match the snapshot with different s
   height: auto;
   display: block;
   border-radius: 5px;
+  color: unset;
 }
 
 .c5 {
@@ -235,6 +240,7 @@ exports[`<ArrowDropdown /> Should render and match the snapshot with different s
   border-radius: 10px;
   box-shadow: 0px 0px 50px rgba(0,0,0,0.08);
   border-radius: 10px;
+  color: unset;
 }
 
 .c2 {
