@@ -8,6 +8,7 @@ import {
   EDIT_SESSION_SUCCESS,
   EDIT_SESSION_ERROR,
   BULK_EDIT_SESSION_REQUEST,
+  UPDATE_NARRATOR_SUCCESS,
 } from './constants';
 
 export const getSessionRequest = (payload) =>
@@ -25,3 +26,5 @@ export const editSessionSuccess = (session) =>
   actionBuilder(EDIT_SESSION_SUCCESS, { session });
 export const editSessionError = (error) =>
   actionBuilder(EDIT_SESSION_ERROR, { error });
+export const updateNarratorSuccess = () =>
+  actionBuilder(UPDATE_NARRATOR_SUCCESS, {});

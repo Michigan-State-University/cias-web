@@ -1,11 +1,9 @@
 import React, { useEffect } from 'react';
-import PropTypes from 'prop-types';
 import { Helmet } from 'react-helmet';
-import { compose } from 'redux';
-import { connect } from 'react-redux';
-import { createStructuredSelector } from 'reselect';
-import { injectIntl, IntlShape } from 'react-intl';
+import { useDispatch, useSelector } from 'react-redux';
+import { useIntl } from 'react-intl';
 import { useInjectReducer, useInjectSaga } from 'redux-injectors';
+import { useParams } from 'react-router-dom';
 
 import { colors } from 'theme';
 
@@ -18,29 +16,34 @@ import {
 
 import Box from 'components/Box';
 
+import { Session } from 'models/Session';
 import SessionSettings from './components/SessionSettings';
 import messages from './messages';
 import { StyledColumn } from './styled';
 
-const SettingsInterventionPage = ({
-  session: {
+const SettingsInterventionPage = () => {
+  const dispatch = useDispatch();
+  const session = useSelector<unknown, Session>(makeSelectSession());
+  const { formatMessage } = useIntl();
+  const params = useParams<{ interventionId: string; sessionId: string }>();
+
+  const {
     name,
     variable,
     settings: { narrator: narratorSettings } = {},
     googleTtsVoice,
-  },
-  match: { params },
-  getSession,
-  intl: { formatMessage },
-}) => {
+    currentNarrator,
+  } = session;
   useInjectReducer({ key: 'session', reducer: sessionReducer });
   useInjectSaga({ key: 'getSession', saga: getSessionSaga });
 
   useEffect(() => {
-    getSession({
-      interventionId: params.interventionId,
-      sessionId: params.sessionId,
-    });
+    dispatch(
+      getSessionRequest({
+        interventionId: params.interventionId,
+        sessionId: params.sessionId,
+      }),
+    );
   }, []);
 
   return (
@@ -64,6 +67,7 @@ const SettingsInterventionPage = ({
             narratorSettings={narratorSettings}
             formatMessage={formatMessage}
             googleTtsVoice={googleTtsVoice}
+            currentNarrator={currentNarrator}
           />
         </StyledColumn>
       </Box>
@@ -71,33 +75,4 @@ const SettingsInterventionPage = ({
   );
 };
 
-SettingsInterventionPage.propTypes = {
-  session: PropTypes.shape({
-    id: PropTypes.string,
-    name: PropTypes.string,
-    variable: PropTypes.string,
-    settings: PropTypes.shape({
-      narrator: PropTypes.shape({
-        voice: PropTypes.bool,
-        narrator: PropTypes.bool,
-      }),
-      account_required: PropTypes.bool,
-    }),
-    googleTtsVoice: PropTypes.object,
-  }),
-  match: PropTypes.object,
-  getSession: PropTypes.func,
-  intl: PropTypes.shape(IntlShape),
-};
-
-const mapStateToProps = createStructuredSelector({
-  session: makeSelectSession(),
-});
-
-const mapDispatchToProps = {
-  getSession: getSessionRequest,
-};
-
-const withConnect = connect(mapStateToProps, mapDispatchToProps);
-
-export default compose(injectIntl, withConnect)(SettingsInterventionPage);
+export default SettingsInterventionPage;

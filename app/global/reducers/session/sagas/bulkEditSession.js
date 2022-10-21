@@ -7,18 +7,31 @@ import { jsonApiToObject } from 'utils/jsonApiMapper';
 import objectKeysToSnakeCase from 'utils/objectToSnakeCase';
 
 import { BULK_EDIT_SESSION_REQUEST } from '../constants';
-import { editSessionSuccess, editSessionError } from '../actions';
+import {
+  editSessionSuccess,
+  editSessionError,
+  updateNarratorSuccess,
+} from '../actions';
 import { makeSelectSession } from '../selectors';
 import messages from '../messages';
 
 export function* bulkEditSession({ payload: { session: editedSession } } = {}) {
   const session = yield select(makeSelectSession());
 
-  const requestURL = `v1/interventions/${
-    session.intervention_id ?? session.interventionId
-  }/sessions/${session.id}`;
+  const interventionId = session.intervention_id ?? session.interventionId;
+
+  const requestURL = `v1/interventions/${interventionId}/sessions/${session.id}`;
+  const narratorChangeURL = `${requestURL}/change_narrator`;
 
   try {
+    if (editedSession.currentNarrator) {
+      yield call(axios.post, narratorChangeURL, {
+        narrator: { name: editedSession.currentNarrator },
+      });
+      yield put(updateNarratorSuccess());
+      return;
+    }
+
     const { data } = yield call(axios.put, requestURL, {
       session: objectKeysToSnakeCase(editedSession),
     });

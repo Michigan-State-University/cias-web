@@ -324,18 +324,6 @@ exports[`<SettingsSessionPage /> Should render and match the snapshot 1`] = `
   border-radius: 5px;
 }
 
-.c36 {
-  width: 100%;
-  padding: 16px;
-  border: 1px solid #E9F1FB;
-  border-radius: 5px;
-  border-color: #107969;
-}
-
-.c36 label {
-  font-weight: 700;
-}
-
 .c21 {
   position: relative;
   display: inline-block;
@@ -733,10 +721,9 @@ exports[`<SettingsSessionPage /> Should render and match the snapshot 1`] = `
           style="box-sizing: border-box; min-height: 1px; position: relative; padding-left: 15px; padding-right: 15px; width: 100%; flex-basis: 0px; flex-grow: 1; flex-shrink: 0; max-width: 100%; margin-left: 0%;"
         >
           <div
-            class="c11 c36"
+            class="c11 c28"
           >
             <input
-              checked=""
               class="c29 c30"
               disabled=""
               id="character-setting-emmi"

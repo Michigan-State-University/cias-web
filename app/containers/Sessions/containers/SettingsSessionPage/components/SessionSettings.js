@@ -14,9 +14,13 @@ import lastKey from 'utils/getLastKey';
 
 import { canEdit } from 'models/Status/statusPermissions';
 import { getRemovedBlockForSetting } from 'models/Narrator/BlockTypes';
-import { CharacterType } from 'models/Character';
 
-import { editSessionRequest, editSessionSaga } from 'global/reducers/session';
+import {
+  bulkEditSessionRequest,
+  editSessionRequest,
+  editSessionSaga,
+  bulkEditSession,
+} from 'global/reducers/session';
 import { questionsReducer } from 'global/reducers/questions';
 import {
   fetchInterventionSaga,
@@ -41,15 +45,17 @@ const SessionSettings = ({
   variable,
   narratorSettings,
   formatMessage,
-  editSession,
+  editSessionSettings,
   interventionStatus,
   googleTtsVoice,
+  currentNarrator,
+  editSession,
 }) => {
-  const character = CharacterType.EMMI;
   useInjectReducer({ key: 'intervention', reducer: interventionReducer });
   useInjectReducer({ key: 'questions', reducer: questionsReducer });
   useInjectSaga({ key: 'editSession', saga: editSessionSaga });
   useInjectSaga({ key: 'fetchIntervention', saga: fetchInterventionSaga });
+  useInjectSaga({ saga: bulkEditSession, key: 'bulkEditSession' });
 
   const [confirmationOption, setConfirmationOption] = useState('');
   const dismissConfirmation = () => setConfirmationOption('');
@@ -58,7 +64,7 @@ const SessionSettings = ({
 
   const onConfirm = () => {
     if (isAllSettingsConfirmation) {
-      editSession(
+      editSessionSettings(
         {
           path: `settings.narrator`,
           value: {
@@ -69,7 +75,7 @@ const SessionSettings = ({
         ['settings'],
       );
     } else {
-      editSession(
+      editSessionSettings(
         {
           path: `settings.narrator.${confirmationOption}`,
           value: false,
@@ -84,7 +90,7 @@ const SessionSettings = ({
 
   const onToggle = (index) => (val) => {
     if (val) {
-      editSession({ path: `settings.narrator.${index}`, value: val }, [
+      editSessionSettings({ path: `settings.narrator.${index}`, value: val }, [
         'settings',
       ]);
     } else {
@@ -94,7 +100,7 @@ const SessionSettings = ({
 
   const onGlobalToggle = (val) => {
     if (val) {
-      editSession(
+      editSessionSettings(
         {
           path: `settings.narrator`,
           value: {
@@ -107,6 +113,10 @@ const SessionSettings = ({
     } else {
       setConfirmationOption('all');
     }
+  };
+
+  const onNarratorChange = (newNarrator) => {
+    editSession({ currentNarrator: newNarrator });
   };
 
   const editingPossible = canEdit(interventionStatus);
@@ -164,7 +174,7 @@ const SessionSettings = ({
           width="100%"
           placeholder={formatMessage(messages.placeholder)}
           value={name}
-          onBlur={(val) => editSession({ path: 'name', value: val }, ['name'])}
+          onBlur={(val) => editSession({ name: val })}
         />
       </InputContainer>
 
@@ -181,9 +191,7 @@ const SessionSettings = ({
           )}
           value={variable}
           color={colors.jungleGreen}
-          onBlur={(val) =>
-            editSession({ path: 'variable', value: val }, ['variable'])
-          }
+          onBlur={(val) => editSession({ variable: val })}
           autoComplete="off"
         />
       </InputContainer>
@@ -216,7 +224,7 @@ const SessionSettings = ({
       {googleTtsVoice && (
         <PeedyVoiceSettings
           googleTtsVoice={googleTtsVoice}
-          editSession={editSession}
+          editSession={editSessionSettings}
           formatMessage={formatMessage}
           editingPossible={editingPossible}
         />
@@ -227,8 +235,8 @@ const SessionSettings = ({
       </H3>
       <CharacterSelector
         disabled={!editingPossible}
-        onChange={() => {}}
-        value={character}
+        onChange={onNarratorChange}
+        value={currentNarrator}
       />
     </>
   );
@@ -239,7 +247,8 @@ const mapStateToProps = createStructuredSelector({
 });
 
 const mapDispatchToProps = {
-  editSession: editSessionRequest,
+  editSessionSettings: editSessionRequest,
+  editSession: bulkEditSessionRequest,
 };
 
 const withConnect = connect(mapStateToProps, mapDispatchToProps);
@@ -253,8 +262,10 @@ SessionSettings.propTypes = {
   }),
   googleTtsVoice: PropTypes.object,
   formatMessage: PropTypes.func,
-  editSession: PropTypes.func,
+  editSessionSettings: PropTypes.func,
   interventionStatus: PropTypes.string,
+  currentNarrator: PropTypes.string,
+  editSession: PropTypes.func,
 };
 
 export default compose(withConnect)(SessionSettings);
