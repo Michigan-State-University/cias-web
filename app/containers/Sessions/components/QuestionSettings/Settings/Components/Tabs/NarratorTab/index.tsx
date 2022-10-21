@@ -162,17 +162,19 @@ const NarratorTab = ({
     )
       return newNarrator;
 
-    const animationToReplace = replacementAnimations.map(({ from }) => from);
-
     const newBlocks = narrator.blocks.map((block) => {
-      const replacementIndex = animationToReplace.indexOf(block.animation);
-      if (replacementIndex !== -1)
+      const replacement = replacementAnimations.find(
+        ({ from }) => from === block.animation,
+      );
+
+      if (replacement)
         return {
           ...block,
-          animation: replacementAnimations[replacementIndex].to,
+          animation: replacement.to,
         };
       return block;
     });
+
     return { ...newNarrator, blocks: newBlocks as NarratorBlock[] };
   };
 

@@ -1,6 +1,11 @@
 import React, { useEffect, useState } from 'react';
 import { FormattedMessage, useIntl } from 'react-intl';
 
+import { NarratorAnimation } from 'models/Narrator';
+import { colors, themeColors } from 'theme';
+import questionMarkIcon from 'assets/svg/question-mark-square.svg';
+import globalMessages from 'global/i18n/globalMessages';
+
 import Modal from 'components/Modal';
 import Box from 'components/Box';
 import Img from 'components/Img';
@@ -10,14 +15,9 @@ import Button from 'components/Button';
 import { Table, THead, TBody, TR, TH } from 'components/Table';
 import Text from 'components/Text';
 
-import { colors, themeColors } from 'theme';
-import questionMarkIcon from 'assets/svg/question-mark-square.svg';
-import globalMessages from 'global/i18n/globalMessages';
-
-import { NarratorAnimation } from 'models/Narrator';
 import messages from './messages';
-import { MissingAnimationReplacement } from '../types';
 import SingleAnimationRow from './SingleAnimationRow';
+import { MissingAnimationReplacement } from '../types';
 
 const MODAL_WIDTH = '480px';
 

@@ -1,14 +1,16 @@
 import React, { useMemo } from 'react';
 import { FormattedMessage, useIntl } from 'react-intl';
+
 import { colors } from 'theme';
+import { NarratorAnimation } from 'models/Narrator';
 
 import { StripedTR, TD } from 'components/Table';
 import Text from 'components/Text';
 import Select from 'components/Select';
+import { SelectOption } from 'components/Select/types';
 
-import animationMessages from 'containers/Sessions/components/QuestionSettings/Settings/Components/Blocks/messages';
-import { NarratorAnimation } from 'models/Narrator';
 import { MissingAnimationReplacement } from '../types';
+import animationMessages from '../../../Blocks/messages';
 
 type Props = {
   animation: MissingAnimationReplacement;
@@ -23,13 +25,14 @@ const SingleAnimationRow = ({ animation, updateAnimation, index }: Props) => {
   const { formatMessage } = useIntl();
 
   const { selectOptions, selectedOption } = useMemo(() => {
-    const options = animation.availableAnimations.map((singleAnimation) => ({
-      value: singleAnimation,
-      label: formatMessage(
-        animationMessages[singleAnimation as keyof typeof animationMessages],
-      ),
-    }));
-    const option = {
+    const options: SelectOption<NarratorAnimation>[] =
+      animation.availableAnimations.map((singleAnimation) => ({
+        value: singleAnimation,
+        label: formatMessage(
+          animationMessages[singleAnimation as keyof typeof animationMessages],
+        ),
+      }));
+    const option: SelectOption<NarratorAnimation> = {
       value: animation.to,
       label: formatMessage(
         animationMessages[animation.to as keyof typeof animationMessages],
@@ -38,7 +41,7 @@ const SingleAnimationRow = ({ animation, updateAnimation, index }: Props) => {
     return { selectOptions: options, selectedOption: option };
   }, [animation]);
 
-  const onSelectOptionChange = (option: any) => {
+  const onSelectOptionChange = (option: SelectOption<NarratorAnimation>) => {
     updateAnimation(option.value, index);
   };
 
