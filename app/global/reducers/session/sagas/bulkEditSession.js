@@ -15,7 +15,9 @@ import {
 import { makeSelectSession } from '../selectors';
 import messages from '../messages';
 
-export function* bulkEditSession({ payload: { session: editedSession } } = {}) {
+export function* bulkEditSession({
+  payload: { session: editedSession, options },
+} = {}) {
   const session = yield select(makeSelectSession());
 
   const interventionId = session.intervention_id ?? session.interventionId;
@@ -26,7 +28,10 @@ export function* bulkEditSession({ payload: { session: editedSession } } = {}) {
   try {
     if (editedSession.currentNarrator) {
       yield call(axios.post, narratorChangeURL, {
-        narrator: { name: editedSession.currentNarrator },
+        narrator: {
+          name: editedSession.currentNarrator,
+          replaced_animations: options?.replacementAnimations || {},
+        },
       });
       yield put(updateNarratorSuccess());
       return;

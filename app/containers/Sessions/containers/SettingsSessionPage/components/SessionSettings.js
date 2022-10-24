@@ -28,7 +28,6 @@ import {
   interventionReducer,
 } from 'global/reducers/intervention';
 import globalMessages from 'global/i18n/globalMessages';
-import { CharacterType } from 'models/Character';
 
 import H3 from 'components/H3';
 import { LI, UL } from 'components/List';
@@ -60,7 +59,7 @@ const SessionSettings = ({
   useInjectSaga({ saga: bulkEditSession, key: 'bulkEditSession' });
 
   const [confirmationOption, setConfirmationOption] = useState('');
-  const [narrator, setNewNarrator] = useState(null);
+  const [newNarrator, setNewNarrator] = useState(null);
   const dismissConfirmation = () => setConfirmationOption('');
   const isConfirmationBoxVisible = confirmationOption !== '';
   const isAllSettingsConfirmation = confirmationOption === 'all';
@@ -118,8 +117,9 @@ const SessionSettings = ({
     }
   };
 
-  const onNarratorChange = (newNarrator) => {
-    editSession({ currentNarrator: newNarrator });
+  const onNarratorChange = (replacementAnimations) => {
+    editSession({ currentNarrator: newNarrator }, { replacementAnimations });
+    setNewNarrator(null);
   };
 
   const editingPossible = canEdit(interventionStatus);
@@ -169,13 +169,11 @@ const SessionSettings = ({
       />
 
       <GlobalReplacementModal
-        sourceNarrator={CharacterType.EMMI}
-        destinationNarrator={narrator}
-        visible={narrator !== null}
+        sourceNarrator={currentNarrator}
+        destinationNarrator={newNarrator}
+        visible={newNarrator !== null}
         onClose={() => setNewNarrator(null)}
-        onChangeNarrator={(replacement) => {
-          console.log(replacement);
-        }}
+        onChangeNarrator={onNarratorChange}
       />
 
       <InputContainer>
@@ -248,7 +246,7 @@ const SessionSettings = ({
       </H3>
       <CharacterSelector
         disabled={!editingPossible}
-        onChange={onNarratorChange}
+        onChange={setNewNarrator}
         value={currentNarrator}
       />
     </>

@@ -31,7 +31,7 @@ const MODAL_WIDTH = '480px';
 type Props = {
   onClose: () => void;
   onChangeNarrator: (
-    animationReplacement: MissingAnimationReplacement[],
+    animationReplacement: Record<NarratorAnimation, NarratorAnimation>,
   ) => void;
   visible: boolean;
   sourceNarrator: CharacterType;
@@ -40,7 +40,7 @@ type Props = {
 
 export const GlobalReplacementModal = ({
   onClose,
-  // onChangeNarrator,
+  onChangeNarrator,
   visible,
   sourceNarrator,
   destinationNarrator,
@@ -127,10 +127,13 @@ export const GlobalReplacementModal = ({
   const updateNarrator = () => {
     const replacement = [
       ...headAnimationState,
-      ...headAnimationState,
+      ...bodyAnimationsState,
       ...speechAnimationsState,
-    ].map(({ from, to }) => ({ [from]: to }));
-    console.log(replacement);
+    ].reduce(
+      (accumulator, { from, to }) => ({ ...accumulator, [from]: to }),
+      {} as Record<NarratorAnimation, NarratorAnimation>,
+    );
+    onChangeNarrator(replacement);
   };
 
   useEffect(() => {
@@ -193,30 +196,33 @@ export const GlobalReplacementModal = ({
     >
       <Box>
         <Divider mt={16} mb={32} color={colors.lightDivider} />
-        {wrapWithBoxCollapse(
-          <AnimationsTable
-            updater={setHeadAnimationState}
-            updateAnimations={updateNewAnimationState}
-            tableAnimations={headAnimationState}
-          />,
-          formatMessage(messages.headAnimation),
-        )}
-        {wrapWithBoxCollapse(
-          <AnimationsTable
-            updater={setBodyAnimationState}
-            updateAnimations={updateNewAnimationState}
-            tableAnimations={bodyAnimationsState}
-          />,
-          formatMessage(messages.bodyAnimation),
-        )}
-        {wrapWithBoxCollapse(
-          <AnimationsTable
-            updater={setSpeechAnimationState}
-            updateAnimations={updateNewAnimationState}
-            tableAnimations={speechAnimationsState}
-          />,
-          formatMessage(messages.speechAnimations),
-        )}
+        {headAnimationState.length !== 0 &&
+          wrapWithBoxCollapse(
+            <AnimationsTable
+              updater={setHeadAnimationState}
+              updateAnimations={updateNewAnimationState}
+              tableAnimations={headAnimationState}
+            />,
+            formatMessage(messages.headAnimation),
+          )}
+        {bodyAnimationsState.length !== 0 &&
+          wrapWithBoxCollapse(
+            <AnimationsTable
+              updater={setBodyAnimationState}
+              updateAnimations={updateNewAnimationState}
+              tableAnimations={bodyAnimationsState}
+            />,
+            formatMessage(messages.bodyAnimation),
+          )}
+        {speechAnimationsState.length !== 0 &&
+          wrapWithBoxCollapse(
+            <AnimationsTable
+              updater={setSpeechAnimationState}
+              updateAnimations={updateNewAnimationState}
+              tableAnimations={speechAnimationsState}
+            />,
+            formatMessage(messages.speechAnimations),
+          )}
         <Row gap={16} mt={56}>
           <Button
             // @ts-ignore

@@ -3,13 +3,13 @@ import { FormattedMessage, useIntl } from 'react-intl';
 
 import { colors } from 'theme';
 import { NarratorAnimation } from 'models/Narrator';
+import animationNames from 'global/i18n/animationNames';
 
 import { StripedTR, TD } from 'components/Table';
 import Text from 'components/Text';
 import Select from 'components/Select';
 import { SelectOption } from 'components/Select/types';
 
-import animationNames from 'global/i18n/animationNames';
 import { MissingAnimationReplacement } from './types';
 
 type Props = {

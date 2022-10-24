@@ -28,7 +28,9 @@ import Switch from 'components/Switch/Switch';
 import Button from 'components/Button';
 import Row from 'components/Row';
 import CharacterSelector from 'components/CharacterSelector';
+import { GlobalReplacementModal } from 'components/MissingAnimationsModal';
 
+import { NarratorAnimation } from 'models/Narrator';
 import messages from '../../messages';
 import {
   INTERVENTION_LANGUAGE_LABEL_ID,
@@ -48,6 +50,7 @@ const InterventionSettingsModal = ({ editingPossible, onClose }: Props) => {
 
   const [changedIntervention, setChangedIntervention] =
     useState(originalIntervention);
+  const [newNarrator, setNewNarrator] = useState(null);
   const { id, languageCode, languageName, quickExit, currentNarrator } =
     changedIntervention;
 
@@ -60,18 +63,44 @@ const InterventionSettingsModal = ({ editingPossible, onClose }: Props) => {
     [originalIntervention, changedIntervention],
   );
 
-  const saveChanges = useCallback(() => {
+  const onSaveNarrator = (
+    replacementAnimations: { [key in NarratorAnimation]: NarratorAnimation },
+  ) => {
     const changes = objectDifference(originalIntervention, changedIntervention);
+    onClose();
     dispatch(
       editInterventionRequest(
         {
           ...changes,
           id,
         },
-        changedIntervention.currentNarrator !==
-          originalIntervention.currentNarrator,
+        {
+          hasNarratorChanged: true,
+          replacementAnimations,
+        },
       ),
     );
+  };
+
+  const saveChanges = useCallback(() => {
+    if (
+      changedIntervention.currentNarrator !==
+      originalIntervention.currentNarrator
+    ) {
+      setNewNarrator(changedIntervention.currentNarrator);
+    } else {
+      const changes = objectDifference(
+        originalIntervention,
+        changedIntervention,
+      );
+      onClose();
+      dispatch(
+        editInterventionRequest({
+          ...changes,
+          id,
+        }),
+      );
+    }
   }, [originalIntervention, changedIntervention]);
 
   const changeIntervention = (changes: Partial<Intervention>) => {
@@ -107,13 +136,15 @@ const InterventionSettingsModal = ({ editingPossible, onClose }: Props) => {
     });
   };
 
-  const onSaveClick = () => {
-    saveChanges();
-    onClose();
-  };
-
   return (
     <FullWidthContainer>
+      <GlobalReplacementModal
+        sourceNarrator={originalIntervention.currentNarrator}
+        destinationNarrator={changedIntervention.currentNarrator}
+        visible={newNarrator !== null}
+        onClose={() => setNewNarrator(null)}
+        onChangeNarrator={onSaveNarrator}
+      />
       <Text mt={6}>
         {formatMessage(messages.interventionSettingsModalSubtitle)}
       </Text>
@@ -184,7 +215,7 @@ const InterventionSettingsModal = ({ editingPossible, onClose }: Props) => {
           width="auto"
           title={formatMessage(messages.applyChangesButton)}
           disabled={!hasInterventionChanged}
-          onClick={onSaveClick}
+          onClick={saveChanges}
         />
         <Button
           // @ts-ignore

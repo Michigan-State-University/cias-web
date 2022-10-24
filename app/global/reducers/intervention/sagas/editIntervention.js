@@ -14,18 +14,18 @@ import {
   EDIT_INTERVENTION_ERROR,
 } from '../constants';
 
-export function* editIntervention({
-  payload: { intervention, hasNarratorChanged },
-}) {
+export function* editIntervention({ payload: { intervention, options } }) {
   const requestURL = `v1/interventions/${intervention.id}`;
   const narratorChangeURL = `${requestURL}/change_narrator`;
 
   try {
-    if (hasNarratorChanged) {
+    if (options?.hasNarratorChanged) {
       yield call(axios.post, narratorChangeURL, {
-        narrator: { name: intervention.currentNarrator },
+        narrator: {
+          name: intervention.currentNarrator,
+          replaced_animations: options.replacementAnimations,
+        },
       });
-      return;
     }
 
     const {

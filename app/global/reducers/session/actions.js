@@ -20,8 +20,8 @@ export const getSessionError = (error) =>
 
 export const editSessionRequest = (payload, fields = [], sessionId) =>
   actionBuilder(EDIT_SESSION_REQUEST, { ...payload, sessionId }, fields);
-export const bulkEditSessionRequest = (session) =>
-  actionBuilder(BULK_EDIT_SESSION_REQUEST, { session });
+export const bulkEditSessionRequest = (session, options) =>
+  actionBuilder(BULK_EDIT_SESSION_REQUEST, { session, options });
 export const editSessionSuccess = (session) =>
   actionBuilder(EDIT_SESSION_SUCCESS, { session });
 export const editSessionError = (error) =>
