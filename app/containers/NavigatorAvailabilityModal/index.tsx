@@ -1,5 +1,8 @@
 import React, { useEffect } from 'react';
+import { useSelector } from 'react-redux';
 import { useIntl } from 'react-intl';
+
+import { makeSelectIsUserLoggedIn } from 'global/reducers/auth';
 
 import { useRoleManager } from 'models/User/RolesManager';
 
@@ -11,9 +14,11 @@ import NavigatorAvailabilityModalUI from './NavigatorAvailabilityModalUI';
 const NavigatorsAvailabilityModal = () => {
   const { formatMessage } = useIntl();
 
+  const isLoggedIn = useSelector(makeSelectIsUserLoggedIn());
+
   const { mustSetNavigatorAvailability } = useRoleManager();
 
-  const { openModal, Modal } = useModal({
+  const { openModal, closeModal, Modal } = useModal({
     type: ModalType.Modal,
     props: {
       visible: true,
@@ -36,6 +41,12 @@ const NavigatorsAvailabilityModal = () => {
       openModal(true);
     }
   }, [mustSetNavigatorAvailability]);
+
+  useEffect(() => {
+    if (!isLoggedIn) {
+      closeModal();
+    }
+  }, [isLoggedIn]);
 
   return <Modal />;
 };
