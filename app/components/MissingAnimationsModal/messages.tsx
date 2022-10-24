@@ -29,4 +29,16 @@ export default defineMessages({
     id: `${scope}.modalIconAlt`,
     defaultMessage: 'Question mark icon',
   },
+  speechAnimations: {
+    id: `${scope}.speechAnimations`,
+    defaultMessage: 'Speech animations',
+  },
+  bodyAnimation: {
+    id: `${scope}.bodyAnimation`,
+    defaultMessage: 'Body animations',
+  },
+  headAnimation: {
+    id: `${scope}.headAnimation`,
+    defaultMessage: 'Head animations',
+  },
 });

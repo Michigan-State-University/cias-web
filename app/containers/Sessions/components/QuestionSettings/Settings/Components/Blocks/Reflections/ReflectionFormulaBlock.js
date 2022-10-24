@@ -30,10 +30,10 @@ import {
   makeSelectSelectedQuestionType,
 } from 'global/reducers/questions';
 import { makeSelectPreviewData } from 'global/reducers/localState';
+import animationMessages from 'global/i18n/animationNames';
 import { characterToSpeechAnimationsMap } from 'utils/animations/animationsNames';
 
 import messages from '../../messages';
-import animationMessages from '../messages';
 import { updateBlockSettings, switchSpeechReflection } from '../../../actions';
 
 import { DashedBox } from './styled';

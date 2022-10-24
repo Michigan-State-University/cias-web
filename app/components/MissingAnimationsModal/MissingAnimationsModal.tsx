@@ -17,7 +17,7 @@ import Text from 'components/Text';
 
 import messages from './messages';
 import SingleAnimationRow from './SingleAnimationRow';
-import { MissingAnimationReplacement } from '../types';
+import { MissingAnimationReplacement } from './types';
 
 const MODAL_WIDTH = '480px';
 
@@ -107,7 +107,7 @@ export const MissingAnimationsModal = ({
               <SingleAnimationRow
                 animation={animation}
                 key={`${animation.from}-${index}`}
-                updateAnimation={updateNewAnimationState}
+                updateAnimationByIndex={updateNewAnimationState}
                 index={index}
               />
             ))}

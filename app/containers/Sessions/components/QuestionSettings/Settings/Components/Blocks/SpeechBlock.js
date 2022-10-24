@@ -32,7 +32,7 @@ import {
 
 import { feedbackQuestion } from 'models/Session/QuestionTypes';
 import { EFeedbackAction } from 'models/Narrator/FeedbackActions';
-import animationMessages from './messages';
+import animationMessages from 'global/i18n/animationNames';
 import { updateBlockSettings, switchSpeechReflection } from '../../actions';
 import messages from '../messages';
 import SpeechInput from './SpeechInput';

@@ -28,6 +28,7 @@ import {
   interventionReducer,
 } from 'global/reducers/intervention';
 import globalMessages from 'global/i18n/globalMessages';
+import { CharacterType } from 'models/Character';
 
 import H3 from 'components/H3';
 import { LI, UL } from 'components/List';
@@ -35,6 +36,7 @@ import { ConfirmationModal } from 'components/Modal';
 import BadgeInput from 'components/Input/BadgeInput';
 import CharacterSelector from 'components/CharacterSelector';
 
+import { GlobalReplacementModal } from 'components/MissingAnimationsModal';
 import Option from './Option';
 import messages from './messages';
 import PeedyVoiceSettings from './PeedyVoiceSettings';
@@ -58,6 +60,7 @@ const SessionSettings = ({
   useInjectSaga({ saga: bulkEditSession, key: 'bulkEditSession' });
 
   const [confirmationOption, setConfirmationOption] = useState('');
+  const [narrator, setNewNarrator] = useState(null);
   const dismissConfirmation = () => setConfirmationOption('');
   const isConfirmationBoxVisible = confirmationOption !== '';
   const isAllSettingsConfirmation = confirmationOption === 'all';
@@ -163,6 +166,16 @@ const SessionSettings = ({
         description={getConfirmationDescription()}
         content={getConfirmationContent()}
         confirmAction={onConfirm}
+      />
+
+      <GlobalReplacementModal
+        sourceNarrator={CharacterType.EMMI}
+        destinationNarrator={narrator}
+        visible={narrator !== null}
+        onClose={() => setNewNarrator(null)}
+        onChangeNarrator={(replacement) => {
+          console.log(replacement);
+        }}
       />
 
       <InputContainer>

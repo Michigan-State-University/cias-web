@@ -37,8 +37,12 @@ import { ConfirmationModal } from 'components/Modal';
 import InfoBox from 'components/Box/InfoBox';
 import Img from 'components/Img';
 import { LI, UL } from 'components/List';
+import {
+  MissingAnimationsModal,
+  MissingAnimationModalData,
+  MissingAnimationReplacement,
+} from 'components/MissingAnimationsModal/';
 
-import MissingAnimationsModal from './MissingAnimationsModal';
 import BlockTypeChooser from '../../BlockTypeChooser';
 import WrappedAccordion from '../../WrappedAcoordion';
 import messages from '../../messages';
@@ -48,10 +52,6 @@ import {
   updateNarratorSettings,
 } from '../../../actions';
 import { NarratorSetting } from '../NarratorSetting';
-import {
-  MissingAnimationModalData,
-  MissingAnimationReplacement,
-} from './types';
 import { getBlocksFittingDraggableContainer } from './utils';
 
 type NonReduxProps = {

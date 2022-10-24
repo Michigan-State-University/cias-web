@@ -34,8 +34,9 @@ import { makeSelectPreviewData } from 'global/reducers/localState';
 import { speechType, reflectionFormulaType } from 'models/Narrator/BlockTypes';
 import { EFeedbackAction } from 'models/Narrator/FeedbackActions';
 import { characterToSpeechAnimationsMap } from 'utils/animations/animationsNames';
+import animationMessages from 'global/i18n/animationNames';
+
 import messages from '../../messages';
-import animationMessages from '../messages';
 import { updateBlockSettings, switchSpeechReflection } from '../../../actions';
 
 import QuestionListDropdown from './QuestionListDropdown';

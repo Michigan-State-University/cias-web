@@ -9,19 +9,28 @@ import Text from 'components/Text';
 import Select from 'components/Select';
 import { SelectOption } from 'components/Select/types';
 
-import { MissingAnimationReplacement } from '../types';
-import animationMessages from '../../../Blocks/messages';
+import animationNames from 'global/i18n/animationNames';
+import { MissingAnimationReplacement } from './types';
 
 type Props = {
   animation: MissingAnimationReplacement;
-  updateAnimation: (
+  updateAnimationByName?: (
+    sourceAnimation: NarratorAnimation,
+    newOutcomeAnimation: NarratorAnimation,
+  ) => void;
+  updateAnimationByIndex?: (
     newOutcomeAnimation: NarratorAnimation,
     index: number,
   ) => void;
   index: number;
 };
 
-const SingleAnimationRow = ({ animation, updateAnimation, index }: Props) => {
+const SingleAnimationRow = ({
+  animation,
+  updateAnimationByName,
+  updateAnimationByIndex,
+  index,
+}: Props) => {
   const { formatMessage } = useIntl();
 
   const { selectOptions, selectedOption } = useMemo(() => {
@@ -29,20 +38,22 @@ const SingleAnimationRow = ({ animation, updateAnimation, index }: Props) => {
       animation.availableAnimations.map((singleAnimation) => ({
         value: singleAnimation,
         label: formatMessage(
-          animationMessages[singleAnimation as keyof typeof animationMessages],
+          animationNames[singleAnimation as keyof typeof animationNames],
         ),
       }));
     const option: SelectOption<NarratorAnimation> = {
       value: animation.to,
       label: formatMessage(
-        animationMessages[animation.to as keyof typeof animationMessages],
+        animationNames[animation.to as keyof typeof animationNames],
       ),
     };
     return { selectOptions: options, selectedOption: option };
   }, [animation]);
 
   const onSelectOptionChange = (option: SelectOption<NarratorAnimation>) => {
-    updateAnimation(option.value, index);
+    if (updateAnimationByName)
+      updateAnimationByName(animation.from, option.value);
+    if (updateAnimationByIndex) updateAnimationByIndex(option.value, index);
   };
 
   return (
@@ -50,9 +61,7 @@ const SingleAnimationRow = ({ animation, updateAnimation, index }: Props) => {
       <TD padding={8}>
         <Text fontWeight="bold">
           <FormattedMessage
-            {...animationMessages[
-              animation.from as keyof typeof animationMessages
-            ]}
+            {...animationNames[animation.from as keyof typeof animationNames]}
           />
         </Text>
       </TD>
@@ -62,6 +71,7 @@ const SingleAnimationRow = ({ animation, updateAnimation, index }: Props) => {
             options: selectOptions,
             value: selectedOption,
             onChange: onSelectOptionChange,
+            isDisabled: selectOptions.length === 1,
           }}
         />
       </TD>
