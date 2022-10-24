@@ -216,9 +216,7 @@ const useAudioHelper: TUseAudioHelper = (
   const handleAudioBlock: ReturnType<TUseAudioHelper>['handleAudioBlock'] =
     () => {
       if (currentData.currentAnimation === ESpeechPhase.START) {
-        const { anim } = animationCurrent;
-
-        anim.addEventListener('complete', updateAnimation);
+        animationCurrent?.anim.addEventListener('complete', updateAnimation);
         playAnimation();
       } else if (currentData.currentAnimation === ESpeechPhase.SPEECH) {
         switch (currentData.type) {
@@ -241,9 +239,7 @@ const useAudioHelper: TUseAudioHelper = (
             break;
         }
       } else if (currentData.currentAnimation === ESpeechPhase.END) {
-        const { anim } = animationCurrent;
-
-        anim.addEventListener('complete', nextBlock);
+        animationCurrent?.anim.addEventListener('complete', nextBlock);
         playAnimation();
       }
     };
@@ -296,15 +292,13 @@ const useAudioHelper: TUseAudioHelper = (
   };
 
   const nextBlock = (): void => {
-    const { anim } = animationCurrent;
-    anim.removeEventListener('complete', nextBlock);
+    animationCurrent?.anim.removeEventListener('complete', nextBlock);
 
     setTimeout(speechEndUpdate, animationTimeout);
   };
 
   const updateAnimation = (): void => {
-    const { anim } = animationCurrent;
-    anim.removeEventListener('complete', updateAnimation);
+    animationCurrent?.anim.removeEventListener('complete', updateAnimation);
 
     const { currentAnimation } = currentData;
     let nextAnimation = ESpeechPhase.START;
@@ -326,17 +320,18 @@ const useAudioHelper: TUseAudioHelper = (
 
   const playAnimation = (): void => {
     if (isAnimationEnabled) {
-      const { anim } = animationCurrent;
-
       if (
         currentData.currentAnimation === ESpeechPhase.END &&
         currentData.isEndReversed
       ) {
-        anim.goToAndStop(anim.totalFrames - 1, true);
-        anim.setDirection(-1);
+        animationCurrent?.anim.goToAndStop(
+          animationCurrent?.anim.totalFrames - 1,
+          true,
+        );
+        animationCurrent?.anim.setDirection(-1);
       }
 
-      anim.play();
+      animationCurrent?.anim.play();
     }
   };
 
@@ -420,8 +415,7 @@ const useAudioHelper: TUseAudioHelper = (
 
   const stopAnimation = () => {
     if (isAnimationEnabled) {
-      const { anim } = animationCurrent;
-      anim.stop();
+      animationCurrent?.anim.stop();
     }
   };
 
