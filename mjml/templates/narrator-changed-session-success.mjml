@@ -1,0 +1,14 @@
+<mjml>
+  <mj-head>
+    <app-header />
+  </mj-head>
+  <mj-body>
+    <app-layout
+      header="CIAS Narrator Change"
+      mainText="The narrator change in <span style='color: #c866ea;'>{SESSION_NAME}</span> went successfully.<br /><br />Click the button below to go back to the app."
+      buttonText="Go to the app"
+      buttonUrl="{BUTTON_URL}"
+    >
+    </app-layout>
+  </mj-body>
+</mjml>
