@@ -38,7 +38,11 @@ const ALLOWED_CAT_MH_SETTING_DISPLAY = [Roles.Admin, Roles.Researcher];
 
 const ALLOWED_TEAM_NAVIGATOR_DISPLAY = [Roles.Admin, Roles.TeamAdmin];
 
-const ALLOWED_LIVE_CHAT_NOTIFICATIONS_DISPLAY = [Roles.Navigator];
+const ALLOWED_NOTIFICATIONS_DISPLAY = [
+  Roles.Navigator,
+  Roles.Researcher,
+  Roles.Admin,
+];
 
 const ALLOWED_QUICK_EXIT_USE = [Roles.Participant, Roles.Guest];
 
@@ -89,9 +93,9 @@ export const useRoleManager = () => {
     userRoles,
     ALLOWED_TEAM_NAVIGATOR_DISPLAY,
   );
-  const canDisplayLiveChatNotifications = arraysOverlap(
+  const canDisplayNotifications = arraysOverlap(
     userRoles,
-    ALLOWED_LIVE_CHAT_NOTIFICATIONS_DISPLAY,
+    ALLOWED_NOTIFICATIONS_DISPLAY,
   );
 
   const canUserDisplayLeftSidebar = canDisplayLeftSidebar(userRoles);
@@ -111,7 +115,7 @@ export const useRoleManager = () => {
     canAssignOrganizationToIntervention,
     hasFullOrgAccess,
     canDisplayTeamNavigatorPanel,
-    canDisplayLiveChatNotifications,
+    canDisplayNotifications,
     userRoles,
     canUserDisplayLeftSidebar,
     canUserUseQuickExit,

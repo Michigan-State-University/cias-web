@@ -13,7 +13,7 @@ type Props = {
 };
 
 export const NewConversationNotificationLayout = ({
-  notification: { createdAt, isRead, data },
+  notification: { createdAt, data, id },
   timeFormatLocale,
 }: Props) => {
   const { message, conversationId } = data;
@@ -21,13 +21,14 @@ export const NewConversationNotificationLayout = ({
   return (
     <GhostLink to={`/live-chat?conversation_id=${conversationId}`}>
       <ConversationInfoBox
-        highlighted={!isRead}
-        unread={!isRead}
-        messageCreatedAt={createdAt}
+        id={id}
+        active
+        highlighted
+        time={createdAt}
+        timeFormatLocale={timeFormatLocale}
         messageContent={message}
         messageSentByCurrentUser={false}
         interlocutorData={data}
-        timeFormatLocale={timeFormatLocale}
       />
     </GhostLink>
   );

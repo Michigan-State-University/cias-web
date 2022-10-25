@@ -8,8 +8,6 @@ export const NarratorContainer = styled.div`
   position: absolute;
   top: 0;
   left: 0;
-  z-index: 1500;
-
   z-index: ${ZIndex.NARRATOR_CONTAINER};
   ${(props) =>
     props.canBeDragged

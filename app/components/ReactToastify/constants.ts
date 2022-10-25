@@ -5,4 +5,5 @@ export const CustomNotificationToastClassnames: Pick<
   'className' | 'progressClassName' | 'bodyClassName'
 > = {
   progressClassName: 'notification-progress-bar',
+  bodyClassName: 'notification-body',
 };

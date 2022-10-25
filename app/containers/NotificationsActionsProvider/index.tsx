@@ -1,21 +1,19 @@
-import React, { createContext, PropsWithChildren } from 'react';
+import React, { PropsWithChildren } from 'react';
 import { useInjectReducer, useInjectSaga } from 'redux-injectors';
 import { useSelector } from 'react-redux';
 
-import { useNotificationChannel } from 'utils/useNotificationChannel';
+import { NotificationEvent } from 'models/Notification';
+
+import {
+  NotificationsActionsContext,
+  useNotificationChannel,
+} from 'utils/useNotificationChannel';
 
 import {
   withNotificationsReducer,
   withAllNotificationsSagas,
   makeSelectNotifications,
 } from 'global/reducers/notifications';
-
-export type NotificationsActionsContextType = {
-  readConversationNotifications: (conversationId: string) => void;
-};
-
-export const NotificationsActionsContext =
-  createContext<Nullable<NotificationsActionsContextType>>(null);
 
 export const NotificationsActionsProvider = ({
   children,
@@ -27,8 +25,9 @@ export const NotificationsActionsProvider = ({
   const { readNotification } = useNotificationChannel();
 
   const readConversationNotifications = (conversationId: string) => {
-    notifications.forEach(({ id, data }) => {
-      if (data?.conversationId === conversationId) {
+    notifications.forEach(({ id, data, event }) => {
+      if (event !== NotificationEvent.NEW_CONVERSATION) return;
+      if (data.conversationId === conversationId) {
         readNotification({ notificationId: id });
       }
     });
@@ -36,7 +35,7 @@ export const NotificationsActionsProvider = ({
 
   return (
     <NotificationsActionsContext.Provider
-      value={{ readConversationNotifications }}
+      value={{ readConversationNotifications, readNotification }}
     >
       {children}
     </NotificationsActionsContext.Provider>

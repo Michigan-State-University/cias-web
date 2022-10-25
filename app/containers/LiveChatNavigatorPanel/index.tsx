@@ -15,8 +15,7 @@ import {
   SendMessageData,
 } from 'utils/useConversationChannel';
 import useQuery from 'utils/useQuery';
-
-import { NotificationsActionsContext } from 'containers/NotificationsActionsProvider';
+import { NotificationsActionsContext } from 'utils/useNotificationChannel';
 
 import { MessagesSectionBody } from './containers/MessagesSectionBody';
 import MessagesSectionHeader from './containers/MessagesSectionHeader';

@@ -62,4 +62,8 @@ export const ToastContainer = styled(ReactToastifyToastContainer)`
   .${CustomNotificationToastClassnames.progressClassName} {
     background: ${themeColors.primary};
   }
+
+  .${CustomNotificationToastClassnames.bodyClassName} {
+    min-width: 0;
+  }
 `;
