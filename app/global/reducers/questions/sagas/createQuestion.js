@@ -15,7 +15,6 @@ import isNullOrUndefined from 'utils/isNullOrUndefined';
 import { makeSelectSession } from 'global/reducers/session';
 import { instantiateBlockForType } from 'models/Session/utils';
 import { GroupType } from 'models/QuestionGroup';
-import { CharacterType } from 'models/Character';
 import { groupQuestionsSuccess } from 'global/reducers/questionGroups/actions';
 import { jsonApiToObject } from 'utils/jsonApiMapper';
 import objectKeysToSnakeCase from 'utils/objectToSnakeCase';
@@ -42,6 +41,7 @@ function* createQuestion({ payload: { question, id: sessionId } }) {
   const questions = yield select(makeSelectQuestions());
   const {
     settings: { narrator },
+    currentNarrator: sessionCharacter,
   } = yield select(makeSelectSession());
   const position = getNarratorPositionWhenQuestionIsAdded(
     questions,
@@ -58,7 +58,7 @@ function* createQuestion({ payload: { question, id: sessionId } }) {
     ...question,
     narrator: {
       blocks,
-      settings: { ...narrator, character: CharacterType.PEEDY },
+      settings: { ...narrator, character: sessionCharacter },
     },
   };
 
@@ -102,11 +102,11 @@ function* createQuestionGroup({ payload: { sessionId, groupType } }) {
 
   const {
     settings: { narrator: narratorSettings },
+    currentNarrator: sessionCharacter,
   } = yield select(makeSelectSession());
 
   const questions = prepareNewGroupQuestions(groupType, formatMessage, {
-    // TODO CIAS30-2732 Get default character from settings
-    character: CharacterType.PEEDY,
+    character: sessionCharacter,
     ...narratorSettings,
   });
 

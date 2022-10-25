@@ -38,7 +38,7 @@ const AnimationsTable = ({
   };
 
   return (
-    <Box height={160} overflow="scroll">
+    <Box height={200} overflow="scroll">
       <Table width="100%">
         <AnimationTableHead>
           <TR height={46}>
