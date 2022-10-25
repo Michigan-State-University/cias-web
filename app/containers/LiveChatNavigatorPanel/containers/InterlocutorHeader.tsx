@@ -43,19 +43,24 @@ export const InterlocutorHeader = () => {
         <ChatAvatar interlocutorAvatarData={otherInterlocutor} />
       </Column>
       <Column ml={16} flex={1} minWidth="0">
-        <Box display="flex" align="center">
-          <Text fontWeight="bold" fontSize={16}>
-            {formatInterlocutorName(otherInterlocutor)}
-          </Text>
+        <Box display="flex" align="center" textAlign="left">
+          <EllipsisText
+            fontSize={16}
+            fontWeight="bold"
+            color={colors.bluewood}
+            text={formatInterlocutorName(otherInterlocutor)}
+          />
           {isArchived && (
-            <Text
-              ml={16}
-              color={colors.vermilion}
-              as="span"
-              fontWeight="medium"
-            >
-              <FormattedMessage {...messages.archived} />
-            </Text>
+            <Box flexShrink={0}>
+              <Text
+                ml={16}
+                color={colors.vermilion}
+                as="span"
+                fontWeight="medium"
+              >
+                <FormattedMessage {...messages.archived} />
+              </Text>
+            </Box>
           )}
         </Box>
         {currentScreenTitle && (
