@@ -31,6 +31,7 @@ const RightChip: FunctionComponent<ComponentProps<typeof ColoredChip>> = styled(
 // @ts-ignore
 const MiddleChip: FunctionComponent<
   ComponentProps<typeof ColoredChip>
+  // @ts-ignore
 > = styled(ColoredChip)`
   border-radius: 0;
   border-right: 1px solid ${colors.botticelli};
