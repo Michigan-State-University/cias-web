@@ -3,7 +3,13 @@
     <app-header />
   </mj-head>
   <mj-body>
-    <app-layout header="{TEAM_NAME} Invitation" mainText="You've been invited to the {TEAM_NAME}." buttonText="Accept the Invitation" buttonUrl="{BUTTON_URL}" ignoreEmail="true">
+    <app-layout
+      header="{TEAM_NAME} Invitation"
+      mainText="You've been invited to the {TEAM_NAME}."
+      buttonText="Accept the Invitation"
+      buttonUrl="{BUTTON_URL}"
+      ignoreEmail="true"
+    >
     </app-layout>
-    <mj-body>
+  </mj-body>
 </mjml>

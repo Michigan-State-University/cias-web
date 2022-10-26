@@ -3,7 +3,13 @@
     <app-header />
   </mj-head>
   <mj-body>
-    <app-layout header="Your copy of {INTERVENTION_NAME} is ready" mainText="Your intervention has been copied successfully. Now you can use it in CIAS." buttonText="Open the e-intervention" buttonUrl=" {BUTTON_URL}" ignoreEmail="true">
+    <app-layout
+      header="Your copy of {INTERVENTION_NAME} is ready"
+      mainText="Your intervention has been copied successfully. Now you can use it in CIAS."
+      buttonText="Open the e-intervention"
+      buttonUrl=" {BUTTON_URL}"
+      ignoreEmail="true"
+    >
     </app-layout>
-    <mj-body>
+  </mj-body>
 </mjml>

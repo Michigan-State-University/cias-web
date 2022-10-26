@@ -3,7 +3,12 @@
     <app-header />
   </mj-head>
   <mj-body>
-    <app-layout header="An error has occurred during translation." mainText="Something goes wrong while translating your intervention. Please try again." buttonText="" buttonUrl="">
+    <app-layout
+      header="An error has occurred during translation."
+      mainText="Something went wrong while translating your intervention. Please try again."
+      buttonText=""
+      buttonUrl=""
+    >
     </app-layout>
-    <mj-body>
+  </mj-body>
 </mjml>

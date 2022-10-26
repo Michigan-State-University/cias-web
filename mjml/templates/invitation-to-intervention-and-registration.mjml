@@ -5,10 +5,12 @@
   <mj-body>
     <app-layout
       header="CIAS Invitation"
-      mainText="You have been invited to complete <span style='color: #c866ea;'>{INTERVENTION_NAME}</span>.<br /><br />Click the button below to access."
-      buttonText="Create an account and go to the intervention"
+      mainText="You have been invited to complete <span style='color: #c866ea;'>{INTERVENTION_NAME}</span>."
+      buttonText="Let's Get Started"
       buttonUrl="{BUTTON_URL}"
       ignoreEmail="true"
+      description="To access this intervention, you will <span style='font-weight: 700'>first need to create a CIAS account</span>, once you have finished
+      that process you will see the intervention. If you have questions about this process, please contact the research team associated with this intervention."
     >
     </app-layout>
   </mj-body>

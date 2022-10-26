@@ -3,7 +3,12 @@
     <app-header />
   </mj-head>
   <mj-body>
-    <app-layout header="An error has occurred during copying." mainText="Something goes wrong while copying your session/intervention. Please try again." buttonText="" buttonUrl="">
+    <app-layout
+      header="An error has occurred during copying."
+      mainText="Something went wrong while copying your session/intervention. Please try again."
+      buttonText=""
+      buttonUrl=""
+    >
     </app-layout>
-    <mj-body>
+  </mj-body>
 </mjml>
