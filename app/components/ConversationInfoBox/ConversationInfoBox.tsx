@@ -11,7 +11,6 @@ import { CustomDayjsLocale } from 'utils/dayjs';
 
 import Column from 'components/Column';
 import Text, { EllipsisText } from 'components/Text';
-import ChatAvatar from 'components/ChatAvatar';
 
 import { ConversationInfoBoxContainer } from './ConversationInfoBoxContainer';
 import { LabelRow } from './styled';
@@ -52,9 +51,6 @@ export const ConversationInfoBox = ({
 
   return (
     <ConversationInfoBoxContainer highlighted={highlighted} onClick={onClick}>
-      <Column flexShrink={0} width="auto">
-        <ChatAvatar interlocutorAvatarData={interlocutorData} />
-      </Column>
       <Column flex={1} gap={12} minWidth="0">
         <LabelRow justify="between" gap={8}>
           <EllipsisText
@@ -62,7 +58,7 @@ export const ConversationInfoBox = ({
             fontSize={14}
             color={colors.bluewood}
             textOpacity={textOpacity}
-            text={formatInterlocutorName(interlocutorData)}
+            text={formatInterlocutorName(interlocutorData, true)}
           />
           <Column flexShrink={0} width="auto">
             {!archived && (
@@ -91,7 +87,7 @@ export const ConversationInfoBox = ({
                 textOpacity={textOpacity}
                 fontWeight={unread ? 'bold' : 'regular'}
               >
-                {formatMessage(messages.you)}&nbsp;
+                {formatMessage(messages.me)}&nbsp;
               </Text>
             </Column>
           )}

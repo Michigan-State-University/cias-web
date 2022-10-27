@@ -114,6 +114,7 @@ export const MessagesSectionBody = ({
             messages={messages ?? []}
             interlocutors={conversation.liveChatInterlocutors}
             onReadMessage={handleRead}
+            isNavigatorPanel
           />
           <ChatMessageInput
             value={message}

@@ -2,7 +2,6 @@ import React from 'react';
 import { useSelector } from 'react-redux';
 import { FormattedMessage } from 'react-intl';
 
-import ChatAvatar from 'components/ChatAvatar';
 import Text, { EllipsisText } from 'components/Text';
 import Row from 'components/Row';
 import Column from 'components/Column';
@@ -39,16 +38,13 @@ export const InterlocutorHeader = () => {
       align="center"
       borderLeft={`1px solid ${themeColors.highlight}`}
     >
-      <Column flexShrink={0} width="auto">
-        <ChatAvatar interlocutorAvatarData={otherInterlocutor} />
-      </Column>
       <Column ml={16} flex={1} minWidth="0">
         <Box display="flex" align="center" textAlign="left">
           <EllipsisText
             fontSize={16}
             fontWeight="bold"
             color={colors.bluewood}
-            text={formatInterlocutorName(otherInterlocutor)}
+            text={formatInterlocutorName(otherInterlocutor, true)}
           />
           {isArchived && (
             <Box flexShrink={0}>
