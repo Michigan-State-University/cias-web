@@ -87,7 +87,7 @@ const useMoveHelper: TUseMoveHelper = (
       await Promise.all(
         characterToMoveAnimationsMap[character].map(
           async (animation: MoveAnimation) => {
-            const data = await importAnimation(character, 'standStill');
+            const data = await importAnimation(character, animation);
             moveAnimations.push({
               name: animation,
               animationData: data,
