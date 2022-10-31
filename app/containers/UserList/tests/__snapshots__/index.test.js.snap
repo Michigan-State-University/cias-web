@@ -728,6 +728,22 @@ exports[`<UserList /> Should render and match the snapshot - admin 1`] = `
   color: #0E0E0E;
 }
 
+.c28:nth-child(even) {
+  background: rgba(16,121,105,0.1);
+}
+
+.c28:nth-child(even) td:first-child,
+.c28:nth-child(even) th:first-child {
+  border-bottom-left-radius: 5px;
+  border-top-left-radius: 5px;
+}
+
+.c28:nth-child(even) td:last-child,
+.c28:nth-child(even) th:last-child {
+  border-bottom-right-radius: 5px;
+  border-top-right-radius: 5px;
+}
+
 .c28:hover {
   background: !important;
 }
@@ -735,6 +751,22 @@ exports[`<UserList /> Should render and match the snapshot - admin 1`] = `
 .c31 {
   cursor: pointer;
   color: #0E0E0E;
+}
+
+.c31:nth-child(even) {
+  background: #FFFFFF;
+}
+
+.c31:nth-child(even) td:first-child,
+.c31:nth-child(even) th:first-child {
+  border-bottom-left-radius: 5px;
+  border-top-left-radius: 5px;
+}
+
+.c31:nth-child(even) td:last-child,
+.c31:nth-child(even) th:last-child {
+  border-bottom-right-radius: 5px;
+  border-top-right-radius: 5px;
 }
 
 .c31:hover {
@@ -2048,6 +2080,22 @@ exports[`<UserList /> Should render and match the snapshot - researcher 1`] = `
   color: #0E0E0E;
 }
 
+.c27:nth-child(even) {
+  background: rgba(16,121,105,0.1);
+}
+
+.c27:nth-child(even) td:first-child,
+.c27:nth-child(even) th:first-child {
+  border-bottom-left-radius: 5px;
+  border-top-left-radius: 5px;
+}
+
+.c27:nth-child(even) td:last-child,
+.c27:nth-child(even) th:last-child {
+  border-bottom-right-radius: 5px;
+  border-top-right-radius: 5px;
+}
+
 .c27:hover {
   background: !important;
 }
@@ -2055,6 +2103,22 @@ exports[`<UserList /> Should render and match the snapshot - researcher 1`] = `
 .c30 {
   cursor: pointer;
   color: #0E0E0E;
+}
+
+.c30:nth-child(even) {
+  background: #FFFFFF;
+}
+
+.c30:nth-child(even) td:first-child,
+.c30:nth-child(even) th:first-child {
+  border-bottom-left-radius: 5px;
+  border-top-left-radius: 5px;
+}
+
+.c30:nth-child(even) td:last-child,
+.c30:nth-child(even) th:last-child {
+  border-bottom-right-radius: 5px;
+  border-top-right-radius: 5px;
 }
 
 .c30:hover {

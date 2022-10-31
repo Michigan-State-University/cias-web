@@ -57,21 +57,28 @@ const SingleAnimationRow = ({
   };
 
   return (
-    <StripedTR height={32} stripesPlacement="odd" color={colors.linkWater}>
-      <TD padding={8}>
+    <StripedTR
+      height={53}
+      stripesPlacement="odd"
+      color={colors.aliceBlueSaturated}
+      bg={colors.white}
+      mb={4}
+    >
+      <TD py={8} px={16}>
         <Text fontWeight="bold">
           <FormattedMessage
             {...animationNames[animation.from as keyof typeof animationNames]}
           />
         </Text>
       </TD>
-      <TD padding={8}>
+      <TD py={8} px={16}>
         <Select
           selectProps={{
             options: selectOptions,
             value: selectedOption,
             onChange: onSelectOptionChange,
             isDisabled: selectOptions.length === 1,
+            height: '37px',
           }}
         />
       </TD>

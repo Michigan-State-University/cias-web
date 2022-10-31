@@ -171,6 +171,7 @@ export const GlobalReplacementModal = ({
       label={label}
       bg={colors.white}
       labelOpenBgColor={colors.linkWaterDark}
+      labelPadding={8}
     >
       {children}
     </BoxCollapse>

@@ -58,6 +58,7 @@ const colors = {
   sonicSilver: '#6B707C',
   vermilion: '#D2371D',
   aliceBlue: '#F1F4F9',
+  aliceBlueSaturated: '#F1F7FF',
   lightBlue: '#F4F8FF',
   electricPurple: '#B727EA',
   purplePlum: '#AC43D1',
