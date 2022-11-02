@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { useIntl } from 'react-intl';
-import { useSelector } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
 
 import { useConversationChannel } from 'utils/useConversationChannel';
 
@@ -11,6 +11,7 @@ import {
   makeSelectOpenedConversationMessages,
   makeSelectOtherInterlocutor,
   makeSelectNavigatorUnavailable,
+  closeConversation,
 } from 'global/reducers/liveChat';
 
 import { themeColors } from 'theme';
@@ -41,6 +42,7 @@ const ConversationChatDialog = ({
 }: Props) => {
   const { createConversation, readMessage, sendMessage } = conversationChannel;
   const { formatMessage } = useIntl();
+  const dispatch = useDispatch();
 
   const [message, setMessage] = useState('');
 
@@ -51,7 +53,8 @@ const ConversationChatDialog = ({
   const otherInterlocutor = useSelector(makeSelectOtherInterlocutor());
   const isNavigatorOffline = useSelector(makeSelectNavigatorUnavailable());
 
-  const isChatUnavailable = conversation?.archived || isNavigatorOffline;
+  const isConversationArchived = conversation?.archived;
+  const isChatUnavailable = isConversationArchived || isNavigatorOffline;
 
   const handleSendMessage = (content: string) => {
     if (conversation && currentInterlocutorId) {
@@ -75,6 +78,8 @@ const ConversationChatDialog = ({
     handleSendMessage(trimmedMessage);
     setMessage('');
   };
+
+  const onReassignNavigator = () => dispatch(closeConversation());
 
   return (
     <ChatDialog
@@ -111,14 +116,14 @@ const ConversationChatDialog = ({
             <Text fontSize={12} fontWeight="medium" textAlign="center">
               {formatMessage(
                 i18nMessages[
-                  isNavigatorOffline
-                    ? 'navigatorOffline'
-                    : 'conversationArchived'
+                  isConversationArchived
+                    ? 'conversationArchived'
+                    : 'navigatorOffline'
                 ],
               )}
             </Text>
           </Column>
-          <Button light mb={24}>
+          <Button light mb={24} onClick={onReassignNavigator}>
             {formatMessage(i18nMessages.connectWithAnotherNavigator)}
           </Button>
         </>
