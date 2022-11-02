@@ -10,6 +10,7 @@ import {
   makeSelectOpenedConversation,
   makeSelectOpenedConversationMessages,
   makeSelectOtherInterlocutor,
+  makeSelectNavigatorUnavailable,
 } from 'global/reducers/liveChat';
 
 import { themeColors } from 'theme';
@@ -21,6 +22,7 @@ import Column from 'components/Column';
 import Divider from 'components/Divider';
 import Text from 'components/Text';
 import Spinner from 'components/Spinner';
+import Button from 'components/Button';
 
 import i18nMessages from '../messages';
 import ChatDialog from '../components/ChatDialog';
@@ -47,6 +49,9 @@ const ConversationChatDialog = ({
   const conversation = useSelector(makeSelectOpenedConversation());
   const currentInterlocutorId = useSelector(makeSelectCurrentInterlocutorId());
   const otherInterlocutor = useSelector(makeSelectOtherInterlocutor());
+  const isNavigatorOffline = useSelector(makeSelectNavigatorUnavailable());
+
+  const isChatUnavailable = conversation?.archived || isNavigatorOffline;
 
   const handleSendMessage = (content: string) => {
     if (conversation && currentInterlocutorId) {
@@ -95,19 +100,36 @@ const ConversationChatDialog = ({
         )}
         {creatingConversation && <Spinner color={themeColors.secondary} />}
       </Column>
-      {conversation?.archived && (
-        <Column py={24}>
-          <Text fontSize={12} fontWeight="medium" textAlign="center">
-            {formatMessage(i18nMessages.conversationArchived)}
-          </Text>
-        </Column>
+      {isChatUnavailable && (
+        <>
+          <Column
+            pt={24}
+            pb={16}
+            borderBottom={`1px solid ${themeColors.highlight}`}
+            mb={16}
+          >
+            <Text fontSize={12} fontWeight="medium" textAlign="center">
+              {formatMessage(
+                i18nMessages[
+                  isNavigatorOffline
+                    ? 'navigatorOffline'
+                    : 'conversationArchived'
+                ],
+              )}
+            </Text>
+          </Column>
+          <Button light mb={24}>
+            {formatMessage(i18nMessages.connectWithAnotherNavigator)}
+          </Button>
+        </>
       )}
-      <ChatMessageInput
-        value={message}
-        onChange={setMessage}
-        onSend={handleSend}
-        disabled={conversation?.archived}
-      />
+      {!isChatUnavailable && (
+        <ChatMessageInput
+          value={message}
+          onChange={setMessage}
+          onSend={handleSend}
+        />
+      )}
     </ChatDialog>
   );
 };

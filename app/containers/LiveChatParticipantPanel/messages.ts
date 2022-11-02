@@ -37,6 +37,10 @@ export default defineMessages({
     id: `${scope}.conversationArchived`,
     defaultMessage: '- Navigator ended this conversation -',
   },
+  navigatorOffline: {
+    id: `${scope}.navigatorOffline`,
+    defaultMessage: '- Navigator became offline -',
+  },
   navigatorsBusy: {
     id: `${scope}.navigatorsBusy`,
     defaultMessage: 'Sorry, but all our navigators are busy at the moment.',
@@ -94,5 +98,9 @@ export default defineMessages({
   tlfb: {
     id: `${scope}.tlfb`,
     defaultMessage: 'TLFB',
+  },
+  connectWithAnotherNavigator: {
+    id: `${scope}.connectWithAnotherNavigator`,
+    defaultMessage: 'Connect with another navigator',
   },
 });
