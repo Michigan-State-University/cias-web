@@ -64,7 +64,10 @@ const InterventionSettingsModal = ({ editingPossible, onClose }: Props) => {
   );
 
   const onSaveNarrator = (
-    replacementAnimations: { [key in NarratorAnimation]: NarratorAnimation },
+    replacementAnimations: Record<
+      string,
+      { [key in NarratorAnimation]: NarratorAnimation }
+    >,
   ) => {
     const changes = objectDifference(originalIntervention, changedIntervention);
     onClose();

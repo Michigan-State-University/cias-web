@@ -25,13 +25,17 @@ import BoxCollapse from 'components/BoxCollapse';
 import messages from './messages';
 import { MissingAnimationReplacement } from './types';
 import AnimationsTable from './AnimationsTable';
+import { getAnimationReplacement } from './utils';
 
 const MODAL_WIDTH = '480px';
 
 type Props = {
   onClose: () => void;
   onChangeNarrator: (
-    animationReplacement: Record<NarratorAnimation, NarratorAnimation>,
+    animationReplacement: Record<
+      string,
+      Record<NarratorAnimation, NarratorAnimation>
+    >,
   ) => void;
   visible: boolean;
   sourceNarrator: CharacterType;
@@ -114,7 +118,7 @@ export const GlobalReplacementModal = ({
     );
   };
 
-  const [headAnimationState, setHeadAnimationState] = useState<
+  const [headAnimationsState, setHeadAnimationsState] = useState<
     MissingAnimationReplacement[]
   >([]);
   const [bodyAnimationsState, setBodyAnimationState] = useState<
@@ -125,20 +129,24 @@ export const GlobalReplacementModal = ({
   >([]);
 
   const updateNarrator = () => {
-    const replacement = [
-      ...headAnimationState,
-      ...bodyAnimationsState,
-      ...speechAnimationsState,
-    ].reduce(
-      (accumulator, { from, to }) => ({ ...accumulator, [from]: to }),
-      {} as Record<NarratorAnimation, NarratorAnimation>,
+    const headAnimationReplacement =
+      getAnimationReplacement(headAnimationsState);
+    const bodyAnimationReplacement =
+      getAnimationReplacement(bodyAnimationsState);
+    const speechAnimationReplacement = getAnimationReplacement(
+      speechAnimationsState,
     );
-    onChangeNarrator(replacement);
+
+    onChangeNarrator({
+      HeadAnimation: headAnimationReplacement,
+      BodyAnimation: bodyAnimationReplacement,
+      SpeechAnimation: speechAnimationReplacement,
+    });
   };
 
   useEffect(() => {
     if (!sourceNarrator || !destinationNarrator) return;
-    setHeadAnimationState(
+    setHeadAnimationsState(
       getNarratorsHeadAnimations(sourceNarrator, destinationNarrator),
     );
     setBodyAnimationState(
@@ -197,12 +205,12 @@ export const GlobalReplacementModal = ({
     >
       <Box>
         <Divider mt={16} mb={32} color={colors.lightDivider} />
-        {headAnimationState.length !== 0 &&
+        {headAnimationsState.length !== 0 &&
           wrapWithBoxCollapse(
             <AnimationsTable
-              updater={setHeadAnimationState}
+              updater={setHeadAnimationsState}
               updateAnimations={updateNewAnimationState}
-              tableAnimations={headAnimationState}
+              tableAnimations={headAnimationsState}
             />,
             formatMessage(messages.headAnimation),
           )}
