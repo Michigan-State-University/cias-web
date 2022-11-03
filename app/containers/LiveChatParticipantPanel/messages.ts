@@ -66,9 +66,9 @@ export default defineMessages({
     id: `${scope}.downloadInstructions`,
     defaultMessage: 'Download Resources:',
   },
-  navigatorUnavailable: {
-    id: `${scope}.navigatorUnavailable`,
-    defaultMessage: 'All navigators are unavailable',
+  callOutTheNavigator: {
+    id: `${scope}.callOutTheNavigator`,
+    defaultMessage: 'Call out the navigator',
   },
   hello: {
     id: `${scope}.hello`,

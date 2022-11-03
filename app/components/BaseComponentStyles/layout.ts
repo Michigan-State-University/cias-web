@@ -25,6 +25,7 @@ export type LayoutProps = Pick<
   | 'visibility'
   | 'overflow'
   | 'zIndex'
+  | 'boxSizing'
 > & {
   hidden?: boolean;
 };
@@ -41,4 +42,5 @@ export const layout = (props: LayoutProps) => ({
   visibility: props.visibility || '',
   overflow: props.overflow || '',
   zIndex: props.zIndex || '',
+  boxSizing: props.boxSizing || '',
 });
