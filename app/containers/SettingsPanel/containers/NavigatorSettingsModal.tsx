@@ -125,13 +125,7 @@ const NavigatorSettingsModal = ({ interventionId }: Props) => {
     );
   }
 
-  const {
-    contactEmail,
-    isNavigatorNotificationOn,
-    noNavigatorAvailableMessage,
-    notifyBy,
-    phone,
-  } = navigatorSetup;
+  const { contactEmail, noNavigatorAvailableMessage, phone } = navigatorSetup;
 
   return (
     // @ts-ignore
@@ -174,10 +168,8 @@ const NavigatorSettingsModal = ({ interventionId }: Props) => {
         <NavigatorModalLayout
           leftContent={
             <NoNavigatorsForm
-              isNavigatorNotificationOn={isNavigatorNotificationOn}
               contactEmail={contactEmail}
               noNavigatorAvailableMessage={noNavigatorAvailableMessage}
-              notifyBy={notifyBy}
               phone={phone}
               updateNoNavigatorTabData={updateNoNavigatorTabData}
             />

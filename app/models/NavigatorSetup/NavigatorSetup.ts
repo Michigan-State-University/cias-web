@@ -3,11 +3,6 @@ import { AppFile } from 'models/File';
 
 import { NavigatorLink, ParticipantLink } from './Link';
 
-export enum NotifyByOptions {
-  EMAIL = 'email',
-  SMS = 'sms',
-}
-
 export enum FileFor {
   PARTICIPANTS = 'participants',
   NAVIGATORS = 'navigators',
@@ -17,8 +12,6 @@ export type NoNavigatorsAvailableData = {
   noNavigatorAvailableMessage: string;
   phone: Nullable<PhoneAttributes>;
   contactEmail: string;
-  isNavigatorNotificationOn: boolean;
-  notifyBy: NotifyByOptions;
   participantLinks: ParticipantLink[];
 };
 

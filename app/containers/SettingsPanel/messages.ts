@@ -167,14 +167,6 @@ export default defineMessages({
     id: `${scope}.notifyNavigator`,
     defaultMessage: `Notify navigator about new messages even then it won't be online`,
   },
-  notifyByEmail: {
-    id: `${scope}.notifyByEmail`,
-    defaultMessage: 'Notify by e-mail',
-  },
-  notifyBySms: {
-    id: `${scope}.notifyBySms`,
-    defaultMessage: 'Notify by SMS',
-  },
   hotlinePrefix: {
     id: `${scope}.hotlinePrefix`,
     defaultMessage: 'Hotline prefix',
