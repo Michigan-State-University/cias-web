@@ -33,6 +33,7 @@ import {
   fetchNavigatorHelpingMaterialsSuccess,
   fetchNavigatorHelpingMaterialsError,
   onCurrentScreenTitleChanged,
+  setCurrentNavigatorUnavailable,
 } from './actions';
 import { LiveChatAction, LiveChatState } from './types';
 
@@ -50,6 +51,7 @@ export const initialState: LiveChatState = {
   creatingConversation: false,
   archivingConversation: false,
   navigatorUnavailable: false,
+  currentNavigatorUnavailable: false,
   liveChatSetup: null,
   loaders: {
     activeConversations: false,
@@ -78,6 +80,7 @@ export const liveChatReducer = (
       }
       case getType(closeConversation): {
         draft.openedConversationId = null;
+        draft.currentNavigatorUnavailable = false;
         break;
       }
       case getType(fetchActiveConversationsRequest): {
@@ -207,6 +210,10 @@ export const liveChatReducer = (
       }
       case getType(setNavigatorUnavailable): {
         draft.navigatorUnavailable = payload.navigatorUnavailable;
+        break;
+      }
+      case getType(setCurrentNavigatorUnavailable): {
+        draft.currentNavigatorUnavailable = payload.currentNavigatorUnavailable;
         break;
       }
       case getType(onConversationArchivedReceive): {

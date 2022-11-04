@@ -40,6 +40,7 @@ import {
   FETCH_NAVIGATOR_HELPING_MATERIALS_ERROR,
   GENERATE_CONVERSATION_TRANSCRIPT_REQUEST,
   ON_CURRENT_SCREEN_TITLE_CHANGED,
+  SET_CURRENT_NAVIGATOR_UNAVAILABLE,
 } from './constants';
 
 export const openConversation = createAction(
@@ -137,6 +138,12 @@ export const setNavigatorUnavailable = createAction(
   SET_NAVIGATOR_UNAVAILABLE,
   (action) => (navigatorUnavailable: boolean) =>
     action({ navigatorUnavailable }),
+);
+
+export const setCurrentNavigatorUnavailable = createAction(
+  SET_CURRENT_NAVIGATOR_UNAVAILABLE,
+  (action) => (currentNavigatorUnavailable: boolean) =>
+    action({ currentNavigatorUnavailable }),
 );
 
 export const onConversationCreatedReceive = createAction(

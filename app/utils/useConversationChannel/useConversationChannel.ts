@@ -26,6 +26,7 @@ import {
   withLiveChatReducer,
   closeConversation,
   onCurrentScreenTitleChanged,
+  setCurrentNavigatorUnavailable,
 } from 'global/reducers/liveChat';
 import { makeSelectUserId } from 'global/reducers/auth';
 
@@ -128,6 +129,14 @@ export const useConversationChannel = (interventionId?: string) => {
     dispatch(onCurrentScreenTitleChanged(conversationId, currentScreenTitle));
   };
 
+  const onCurrentNavigatorAvailable = () => {
+    dispatch(setCurrentNavigatorUnavailable(false));
+  };
+
+  const onCurrentNavigatorUnavailable = () => {
+    dispatch(setCurrentNavigatorUnavailable(true));
+  };
+
   const messageListener: SocketMessageListener<ConversationChannelMessage> = ({
     data,
     topic,
@@ -163,6 +172,12 @@ export const useConversationChannel = (interventionId?: string) => {
         break;
       case ConversationChannelMessageTopic.CURRENT_SCREEN_TITLE_CHANGED:
         onChangedScreenTitle(data);
+        break;
+      case ConversationChannelMessageTopic.CURRENT_NAVIGATOR_AVAILABLE:
+        onCurrentNavigatorAvailable();
+        break;
+      case ConversationChannelMessageTopic.CURRENT_NAVIGATOR_UNAVAILABLE:
+        onCurrentNavigatorUnavailable();
         break;
       default:
         break;

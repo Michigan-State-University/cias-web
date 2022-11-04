@@ -40,6 +40,7 @@ export type LiveChatState = {
   creatingConversation: boolean;
   archivingConversation: boolean;
   navigatorUnavailable: boolean;
+  currentNavigatorUnavailable: boolean;
   liveChatSetup: Nullable<LiveChatSetup>;
   navigatorHelpingMaterialsStates: Record<
     Intervention['id'],

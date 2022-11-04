@@ -10,8 +10,9 @@ import {
   makeSelectOpenedConversation,
   makeSelectOpenedConversationMessages,
   makeSelectOtherInterlocutor,
-  makeSelectNavigatorUnavailable,
   closeConversation,
+  makeSelectCurrentNavigatorUnavailable,
+  makeSelectOpenedConversationId,
 } from 'global/reducers/liveChat';
 
 import { themeColors } from 'theme';
@@ -51,10 +52,17 @@ const ConversationChatDialog = ({
   const conversation = useSelector(makeSelectOpenedConversation());
   const currentInterlocutorId = useSelector(makeSelectCurrentInterlocutorId());
   const otherInterlocutor = useSelector(makeSelectOtherInterlocutor());
-  const isNavigatorOffline = useSelector(makeSelectNavigatorUnavailable());
+  const isCurrentNavigatorUnavailable = useSelector(
+    makeSelectCurrentNavigatorUnavailable(),
+  );
+  const openedConversationId = useSelector(makeSelectOpenedConversationId());
 
+  const isConversationOpened = Boolean(openedConversationId);
   const isConversationArchived = conversation?.archived;
-  const isChatUnavailable = isConversationArchived || isNavigatorOffline;
+
+  const isChatUnavailable =
+    isConversationOpened &&
+    (isConversationArchived || isCurrentNavigatorUnavailable);
 
   const handleSendMessage = (content: string) => {
     if (conversation && currentInterlocutorId) {

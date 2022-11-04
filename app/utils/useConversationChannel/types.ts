@@ -102,10 +102,16 @@ export type LiveChatSetupFetchedSocketMessage = SocketMessage<
 export type NavigatorAvailableSocketMessage =
   SocketMessage<ConversationChannelMessageTopic.NAVIGATOR_AVAILABLE>;
 
-export type CurrentScreenTitleChangedMessage = SocketMessage<
+export type CurrentScreenTitleChangedSocketMessage = SocketMessage<
   ConversationChannelMessageTopic.CURRENT_SCREEN_TITLE_CHANGED,
   ChangeScreenTitleData
 >;
+
+export type CurrentNavigatorUnavailableSocketMessage =
+  SocketMessage<ConversationChannelMessageTopic.CURRENT_NAVIGATOR_UNAVAILABLE>;
+
+export type CurrentNavigatorAvailableSocketMessage =
+  SocketMessage<ConversationChannelMessageTopic.CURRENT_NAVIGATOR_AVAILABLE>;
 
 // Create a union type with any new SocketMessage type
 export type ConversationChannelMessage =
@@ -118,7 +124,9 @@ export type ConversationChannelMessage =
   | NavigatorUnavailableErrorSocketErrorMessage
   | LiveChatSetupFetchedSocketMessage
   | NavigatorAvailableSocketMessage
-  | CurrentScreenTitleChangedMessage;
+  | CurrentScreenTitleChangedSocketMessage
+  | CurrentNavigatorUnavailableSocketMessage
+  | CurrentNavigatorAvailableSocketMessage;
 
 // SOCKET ACTIONS
 

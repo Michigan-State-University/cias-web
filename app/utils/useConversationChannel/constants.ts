@@ -11,6 +11,8 @@ export enum ConversationChannelMessageTopic {
   LIVE_CHAT_SETUP_FETCHED = 'live_chat_setup_fetched',
   NAVIGATOR_AVAILABLE = 'navigator_available',
   CURRENT_SCREEN_TITLE_CHANGED = 'current_screen_title_changed',
+  CURRENT_NAVIGATOR_AVAILABLE = 'current_navigator_available',
+  CURRENT_NAVIGATOR_UNAVAILABLE = 'current_navigator_unavailable',
 }
 
 export enum ConversationChannelActionName {
