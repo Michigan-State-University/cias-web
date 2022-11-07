@@ -12,7 +12,7 @@ import ModalInfoIcon from 'assets/svg/modalInfo.svg';
 import Box from 'components/Box';
 import H1 from 'components/H1';
 import ErrorAlert from 'components/ErrorAlert';
-import Button from 'components/Button';
+import Button, { ButtonProps } from 'components/Button';
 import Row from 'components/Row';
 import Column from 'components/Column';
 import Icon from 'components/Icon';
@@ -22,19 +22,22 @@ import messages from './messages';
 import Modal from './Modal';
 import { MODAL_TITLE_ID } from './constants';
 import { IconType } from './types';
+import { ConfirmationModalButtonsContainer } from './styled';
 
 export type Props = {
   visible: boolean;
   description: ReactNode;
   onClose: () => void;
   confirmAction: () => void;
+  closeOnConfirm?: boolean;
   loading: boolean;
   error?: string | object;
   content: ReactNode;
   confirmationButtonColor?: string;
   confirmationButtonText?: string;
+  confirmationButtonStyles?: Partial<ButtonProps>;
   cancelButtonText?: string;
-  cancelButtonStyles?: Record<string, unknown>;
+  cancelButtonStyles?: Partial<ButtonProps>;
   contentStyles?: Record<string, unknown>;
   contentContainerStyles?: Record<string, unknown>;
   icon?: IconType;
@@ -47,11 +50,13 @@ const ConfirmationModal = ({
   description = <FormattedMessage {...messages.defaultDescription} />,
   onClose,
   confirmAction,
+  closeOnConfirm = true,
   loading = false,
   error,
   content,
   confirmationButtonColor = 'warning',
   confirmationButtonText,
+  confirmationButtonStyles,
   cancelButtonText,
   cancelButtonStyles,
   contentStyles,
@@ -63,8 +68,8 @@ const ConfirmationModal = ({
 }: Props): JSX.Element => {
   const onConfirm = useCallback(() => {
     confirmAction();
-    onClose();
-  }, [confirmAction, onClose]);
+    if (closeOnConfirm) onClose();
+  }, [confirmAction, closeOnConfirm, onClose]);
 
   if (!visible) return <></>;
 
@@ -100,14 +105,13 @@ const ConfirmationModal = ({
             </Text>
           </Box>
         )}
-        <Row mt={25}>
+        <ConfirmationModalButtonsContainer>
           {/* @ts-ignore */}
           <Button
             inverted
             hoverable
             onClick={onClose}
             type="button"
-            mr={25}
             {...cancelButtonStyles}
           >
             {cancelButtonText ?? <FormattedMessage {...messages.cancel} />}
@@ -121,12 +125,13 @@ const ConfirmationModal = ({
             onClick={onConfirm}
             type="button"
             data-cy="confirmation-box-confirm-button"
+            {...confirmationButtonStyles}
           >
             {confirmationButtonText ?? (
               <FormattedMessage {...messages.confirmCanceling} />
             )}
           </Button>
-        </Row>
+        </ConfirmationModalButtonsContainer>
       </Column>
       {/* @ts-ignore */}
       {error && <ErrorAlert fullWidth errorText={error} />}

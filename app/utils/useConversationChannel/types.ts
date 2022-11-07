@@ -57,6 +57,18 @@ export type ChangeScreenTitleData = {
 
 export type LiveChatSetupFetchedData = ApiData<LiveChatSetup>;
 
+export type CallOutNavigatorData = {
+  interventionId: string;
+};
+
+export type NavigatorCalledOutData = {
+  unlockTime: string;
+};
+
+export type CallOutNavigatorErrorData = SocketErrorMessageData<{
+  unlockTime: string;
+}>;
+
 // SOCKET MESSAGES
 
 export type MessageSentSocketMessage = SocketMessage<
@@ -113,6 +125,17 @@ export type CurrentNavigatorUnavailableSocketMessage =
 export type CurrentNavigatorAvailableSocketMessage =
   SocketMessage<ConversationChannelMessageTopic.CURRENT_NAVIGATOR_AVAILABLE>;
 
+export type NavigatorCalledOutSocketMessage = SocketMessage<
+  ConversationChannelMessageTopic.NAVIGATOR_CALLED_OUT,
+  NavigatorCalledOutData
+>;
+
+export type CalOutUnavailableSocketErrorMessage = SocketErrorMessage<
+  ConversationChannelMessageTopic.CALL_OUT_UNAVAILABLE_ERROR,
+  CallOutNavigatorErrorData,
+  422
+>;
+
 // Create a union type with any new SocketMessage type
 export type ConversationChannelMessage =
   | MessageSentSocketMessage
@@ -126,7 +149,9 @@ export type ConversationChannelMessage =
   | NavigatorAvailableSocketMessage
   | CurrentScreenTitleChangedSocketMessage
   | CurrentNavigatorUnavailableSocketMessage
-  | CurrentNavigatorAvailableSocketMessage;
+  | CurrentNavigatorAvailableSocketMessage
+  | NavigatorCalledOutSocketMessage
+  | CalOutUnavailableSocketErrorMessage;
 
 // SOCKET ACTIONS
 
@@ -160,6 +185,11 @@ export type ChangeScreenTitleAction = SocketAction<
   ChangeScreenTitleData
 >;
 
+export type CallOutNavigatorAction = SocketAction<
+  ConversationChannelActionName.ON_CALL_OUT_NAVIGATOR,
+  CallOutNavigatorData
+>;
+
 // Create a union type with any new SocketAction type
 export type ConversationChannelAction =
   | SendMessageSocketAction
@@ -167,7 +197,8 @@ export type ConversationChannelAction =
   | CreateConversationSocketAction
   | ArchiveConversationSocketAction
   | FetchLiveChatSetupSocketAction
-  | ChangeScreenTitleAction;
+  | ChangeScreenTitleAction
+  | CallOutNavigatorAction;
 
 export type ConversationChannelConnectionParams = {
   intervention_id?: string;

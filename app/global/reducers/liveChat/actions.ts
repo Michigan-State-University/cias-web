@@ -41,6 +41,8 @@ import {
   GENERATE_CONVERSATION_TRANSCRIPT_REQUEST,
   ON_CURRENT_SCREEN_TITLE_CHANGED,
   SET_CURRENT_NAVIGATOR_UNAVAILABLE,
+  SET_CALLING_OUT_NAVIGATOR,
+  SET_WAITING_FOR_NAVIGATOR,
 } from './constants';
 
 export const openConversation = createAction(
@@ -210,4 +212,14 @@ export const onCurrentScreenTitleChanged = createAction(
   ON_CURRENT_SCREEN_TITLE_CHANGED,
   (action) => (conversationId: string, currentScreenTitle: string) =>
     action({ conversationId, currentScreenTitle }),
+);
+
+export const setCallingOutNavigator = createAction(
+  SET_CALLING_OUT_NAVIGATOR,
+  (action) => (callingOutNavigator: boolean) => action({ callingOutNavigator }),
+);
+
+export const setWaitingForNavigator = createAction(
+  SET_WAITING_FOR_NAVIGATOR,
+  (action) => (waitingForNavigator: boolean) => action({ waitingForNavigator }),
 );

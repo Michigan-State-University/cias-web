@@ -39,6 +39,8 @@ export type LiveChatState = {
   guestInterlocutorId: Nullable<string>;
   creatingConversation: boolean;
   archivingConversation: boolean;
+  callingOutNavigator: boolean;
+  waitingForNavigator: boolean;
   navigatorUnavailable: boolean;
   currentNavigatorUnavailable: boolean;
   liveChatSetup: Nullable<LiveChatSetup>;

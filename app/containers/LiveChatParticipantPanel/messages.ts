@@ -70,6 +70,15 @@ export default defineMessages({
     id: `${scope}.callOutTheNavigator`,
     defaultMessage: 'Call out the navigator',
   },
+  callOutTheNavigatorModalContent: {
+    id: `${scope}.callOutTheNavigatorModalContent`,
+    defaultMessage:
+      'Are you sure you really need help? We will send a notification to the navigator who should join the conversation within <primaryColorBold>15 minutes</primaryColorBold>. If not, then neither of the navigators was able to do so.',
+  },
+  yesIReallyNeedHelp: {
+    id: `${scope}.yesIReallyNeedHelp`,
+    defaultMessage: 'Yes, I really need help',
+  },
   hello: {
     id: `${scope}.hello`,
     defaultMessage: 'Hello!',

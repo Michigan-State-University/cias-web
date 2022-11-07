@@ -161,3 +161,15 @@ export const makeSelectOtherInterlocutor = () =>
       );
     },
   );
+
+export const makeSelectCallingOutNavigator = () =>
+  createSelector(
+    selectLiveChatState,
+    ({ callingOutNavigator }) => callingOutNavigator,
+  );
+
+export const makeSelectWaitingForNavigator = () =>
+  createSelector(
+    selectLiveChatState,
+    ({ waitingForNavigator }) => waitingForNavigator,
+  );

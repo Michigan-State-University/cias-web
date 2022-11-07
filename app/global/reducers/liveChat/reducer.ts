@@ -34,6 +34,8 @@ import {
   fetchNavigatorHelpingMaterialsError,
   onCurrentScreenTitleChanged,
   setCurrentNavigatorUnavailable,
+  setCallingOutNavigator,
+  setWaitingForNavigator,
 } from './actions';
 import { LiveChatAction, LiveChatState } from './types';
 
@@ -50,6 +52,8 @@ export const initialState: LiveChatState = {
   guestInterlocutorId: null,
   creatingConversation: false,
   archivingConversation: false,
+  callingOutNavigator: false,
+  waitingForNavigator: false,
   navigatorUnavailable: false,
   currentNavigatorUnavailable: false,
   liveChatSetup: null,
@@ -294,6 +298,15 @@ export const liveChatReducer = (
         const { conversationId, currentScreenTitle } = payload;
         const conversation = draft.activeConversations[conversationId];
         conversation.currentScreenTitle = currentScreenTitle;
+        break;
+      }
+      case getType(setCallingOutNavigator): {
+        draft.callingOutNavigator = payload.callingOutNavigator;
+        break;
+      }
+      case getType(setWaitingForNavigator): {
+        draft.waitingForNavigator = payload.waitingForNavigator;
+        break;
       }
     }
   });

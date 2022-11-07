@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { useIntl } from 'react-intl';
 import { useSelector, useDispatch } from 'react-redux';
 
-import { useConversationChannel } from 'utils/useConversationChannel';
+import { ConversationChannel } from 'utils/useConversationChannel';
 
 import {
   makeSelectCreatingConversation,
@@ -31,7 +31,7 @@ import ChatDialog from '../components/ChatDialog';
 import ConversationChatDialogHeader from '../components/ConversationChatDialogHeader';
 
 export type Props = {
-  conversationChannel: ReturnType<typeof useConversationChannel>;
+  conversationChannel: ConversationChannel;
   interventionId: string;
   onMinimizeDialog: () => void;
 };

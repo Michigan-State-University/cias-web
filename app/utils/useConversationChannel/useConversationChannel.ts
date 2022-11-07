@@ -1,6 +1,7 @@
 import { useDispatch, useSelector } from 'react-redux';
 import { useInjectReducer } from 'redux-injectors';
 import { toast } from 'react-toastify';
+import dayjs from 'dayjs';
 
 import {
   SocketErrorMessageData,
@@ -27,6 +28,8 @@ import {
   closeConversation,
   onCurrentScreenTitleChanged,
   setCurrentNavigatorUnavailable,
+  setCallingOutNavigator,
+  setWaitingForNavigator,
 } from 'global/reducers/liveChat';
 import { makeSelectUserId } from 'global/reducers/auth';
 
@@ -44,12 +47,16 @@ import {
   ConversationChannelConnectionParams,
   LiveChatSetupFetchedData,
   ChangeScreenTitleData,
+  NavigatorCalledOutData,
+  CallOutNavigatorErrorData,
 } from './types';
 import {
   CONVERSATION_CHANNEL_NAME,
   ConversationChannelActionName,
   ConversationChannelMessageTopic,
 } from './constants';
+
+export type ConversationChannel = ReturnType<typeof useConversationChannel>;
 
 export const useConversationChannel = (interventionId?: string) => {
   const dispatch = useDispatch();
@@ -137,6 +144,27 @@ export const useConversationChannel = (interventionId?: string) => {
     dispatch(setCurrentNavigatorUnavailable(true));
   };
 
+  const onNavigatorCalledOut = ({ unlockTime }: NavigatorCalledOutData) => {
+    dispatch(setCallingOutNavigator(false));
+    dispatch(setWaitingForNavigator(true));
+    // TODO https://htdevelopers.atlassian.net/browse/CIAS30-2960 remove toast
+    toast.info(
+      `Navigator called out. Next try available ${dayjs(unlockTime).fromNow()}`,
+    );
+  };
+
+  const onCallOutUnavailableError = ({
+    unlockTime,
+  }: CallOutNavigatorErrorData) => {
+    // TODO https://htdevelopers.atlassian.net/browse/CIAS30-2960 display BE error message only
+    toast.error(
+      `Unable to call out navigator. Next try available ${dayjs(
+        unlockTime,
+      ).fromNow()}`,
+    );
+    dispatch(setCallingOutNavigator(false));
+  };
+
   const messageListener: SocketMessageListener<ConversationChannelMessage> = ({
     data,
     topic,
@@ -178,6 +206,12 @@ export const useConversationChannel = (interventionId?: string) => {
         break;
       case ConversationChannelMessageTopic.CURRENT_NAVIGATOR_UNAVAILABLE:
         onCurrentNavigatorUnavailable();
+        break;
+      case ConversationChannelMessageTopic.NAVIGATOR_CALLED_OUT:
+        onNavigatorCalledOut(data);
+        break;
+      case ConversationChannelMessageTopic.CALL_OUT_UNAVAILABLE_ERROR:
+        onCallOutUnavailableError(data);
         break;
       default:
         break;
@@ -240,6 +274,17 @@ export const useConversationChannel = (interventionId?: string) => {
     });
   };
 
+  const callOutNavigator = () => {
+    if (interventionId) {
+      dispatch(setCallingOutNavigator(true));
+      dispatch(setWaitingForNavigator(false));
+      channel?.perform({
+        name: ConversationChannelActionName.ON_CALL_OUT_NAVIGATOR,
+        data: { interventionId },
+      });
+    }
+  };
+
   return {
     isConnected: channel?.state === 'connected',
     sendMessage,
@@ -248,5 +293,6 @@ export const useConversationChannel = (interventionId?: string) => {
     archiveConversation,
     fetchLiveChatSetup,
     changeScreenTitle,
+    callOutNavigator,
   };
 };
