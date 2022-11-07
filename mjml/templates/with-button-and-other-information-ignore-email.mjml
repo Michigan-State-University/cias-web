@@ -4,12 +4,12 @@
   </mj-head>
   <mj-body>
     <app-layout
-      header="CIAS Invitation"
-      mainText="{TEXT}"
-      buttonText="Complete registration"
+      header="{HEADER_TEXT}"
+      mainText="{MAIN_TEXT}"
+      buttonText="{BUTTON_TEXT}"
       buttonUrl="{BUTTON_URL}"
+      otherInformation="{OTHER_INFORMATION}"
       ignoreEmail="true"
-    >
-    </app-layout>
+    />
   </mj-body>
 </mjml>

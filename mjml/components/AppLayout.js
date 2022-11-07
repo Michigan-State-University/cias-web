@@ -109,13 +109,16 @@ export default class AppLayout extends BodyComponent {
             </mj-text>
           </mj-column>
         </mj-section>
+
         ${
           description &&
           `
             <mj-section padding="4px 0px 0px 0px">
               <mj-column>
                 <mj-text align="center" font-size="14px" line-height="24px">
+                  <! -- DESCRIPTION START -->
                   ${description}
+                  <! -- DESCRIPTION END -->
                 </mj-text>
               </mj-column>
             </mj-section>
@@ -125,14 +128,14 @@ export default class AppLayout extends BodyComponent {
           buttonUrl &&
           buttonText &&
           `<mj-section padding="32px 0px 0px 0px">
-          <mj-column>
-            <mj-button border="1px solid ${buttonColor}" border-radius="100px" background-color="${buttonColor}" color="${buttonTextColor}" font-size="16px" font-weight="700" href="${buttonUrl}">
-            <! -- BUTTON START -->
-            ${buttonText}
-            <! -- BUTTON END -->
-            </mj-button>
-          </mj-column>
-        </mj-section>`
+            <mj-column>
+              <mj-button border="1px solid ${buttonColor}" border-radius="100px" background-color="${buttonColor}" color="${buttonTextColor}" font-size="16px" font-weight="700" href="${buttonUrl}">
+              <! -- BUTTON START -->
+              ${buttonText}
+              <! -- BUTTON END -->
+              </mj-button>
+            </mj-column>
+          </mj-section>`
         }
         ${
           otherInformation &&
@@ -141,7 +144,9 @@ export default class AppLayout extends BodyComponent {
             <mj-column>
               <mj-divider border-width="1px" border-color="#E9F1FB" padding="12px 0 22px 0"/>
               <mj-text align="center" font-size="14px" line-height="24px" padding-left="32px" padding-right="32px">
+                <! -- OTHER INFORMATION START -->
                 ${otherInformation}
+                <! -- OTHER INFORMATION END -->
               </mj-text>
             </mj-column>
           </mj-section>
