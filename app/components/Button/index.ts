@@ -1,6 +1,6 @@
 import Button from './Button';
 
-export { ImageButton } from './ImageButton';
+export * from './ImageButton';
 export { default as TextButton } from './TextButton';
 export { Button };
 

@@ -1,28 +1,29 @@
 import React, { useEffect } from 'react';
 import { useIntl } from 'react-intl';
 import { useSelector } from 'react-redux';
+import dayjs from 'dayjs';
 
 import { colors, themeColors } from 'theme';
-import MegaphoneIcon from 'assets/svg/megaphone.svg';
 
 import {
   makeSelectCallingOutNavigator,
   makeSelectLiveChatSetup,
-  makeSelectWaitingForNavigator,
+  makeSelectCallOutNavigatorUnlockTime,
 } from 'global/reducers/liveChat';
 
 import { ConversationChannel } from 'utils/useConversationChannel';
 
 import H2 from 'components/H2';
 import Box from 'components/Box';
-import Text from 'components/Text';
 import Spinner from 'components/Spinner';
-import { ImageButton } from 'components/Button';
 import { ModalType, useModal } from 'components/Modal';
+import { Tooltip } from 'components/Tooltip';
+import Text from 'components/Text';
 
 import ChatDialog from '../components/ChatDialog';
 import ContactDetails from '../components/ContactDetails';
 import ParticipantUsefulLinks from '../components/ParticipantUsefulLinks';
+import CallOutNavigatorButton from '../components/CallOutNavigatorButton';
 import messages from '../messages';
 
 type NarratorUnavailableDialogProps = {
@@ -39,7 +40,9 @@ const NarratorUnavailableDialog = ({
 
   const liveChatSetup = useSelector(makeSelectLiveChatSetup());
   const callingOutNavigator = useSelector(makeSelectCallingOutNavigator());
-  const waitingForNavigator = useSelector(makeSelectWaitingForNavigator());
+  const callOutNavigatorUnlockTime = useSelector(
+    makeSelectCallOutNavigatorUnlockTime(),
+  );
 
   const { Modal, openModal, closeModal } = useModal({
     type: ModalType.ConfirmationModal,
@@ -65,13 +68,17 @@ const NarratorUnavailableDialog = ({
   });
 
   useEffect(() => {
-    if (waitingForNavigator) {
+    if (callOutNavigatorUnlockTime) {
       closeModal();
     }
-  }, [waitingForNavigator]);
+  }, [callOutNavigatorUnlockTime]);
 
   const { contactEmail, participantLinks, phone, noNavigatorAvailableMessage } =
     liveChatSetup ?? {};
+
+  const callOutNavigatorDisabled =
+    Boolean(callOutNavigatorUnlockTime) &&
+    dayjs().isBefore(callOutNavigatorUnlockTime);
 
   return (
     <>
@@ -79,19 +86,22 @@ const NarratorUnavailableDialog = ({
       <ChatDialog
         header={
           liveChatSetup && (
-            <ImageButton
-              onClick={openModal}
-              src={MegaphoneIcon}
-              title={formatMessage(messages.callOutTheNavigator)}
-              display="flex"
-              align="center"
-              gap={6}
-              padding={0}
+            <Tooltip
+              id="call-out-navigator-disabled-tooltip"
+              visible={callOutNavigatorDisabled}
+              content={
+                <Text fontSize={12} maxWidth={232} lineHeight="20px">
+                  {formatMessage(messages.youJustCalledTheNavigator, {
+                    timeLeft: dayjs(callOutNavigatorUnlockTime).fromNow(),
+                  })}
+                </Text>
+              }
             >
-              <Text color={themeColors.secondary}>
-                {formatMessage(messages.callOutTheNavigator)}
-              </Text>
-            </ImageButton>
+              <CallOutNavigatorButton
+                onClick={openModal}
+                disabled={callOutNavigatorDisabled}
+              />
+            </Tooltip>
           )
         }
         onMinimize={onMinimizeDialog}

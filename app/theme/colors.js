@@ -91,6 +91,7 @@ const colors = {
   fireIsland: '#DD533C',
   cadetBlueCrayola: '#B3BAC7',
   stormGrey: '#707688',
+  logan: '#9BA1B4',
 };
 
 const themeColors = {

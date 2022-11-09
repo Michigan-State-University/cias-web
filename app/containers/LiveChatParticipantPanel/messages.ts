@@ -112,4 +112,17 @@ export default defineMessages({
     id: `${scope}.connectWithAnotherNavigator`,
     defaultMessage: 'Connect with another navigator',
   },
+  waitingForNavigator: {
+    id: `${scope}.waitingForNavigator`,
+    defaultMessage: 'Waiting for navigator',
+  },
+  notificationSent: {
+    id: `${scope}.notificationSent`,
+    defaultMessage:
+      'The notification has been sent to the navigator. We are waiting for the response...',
+  },
+  youJustCalledTheNavigator: {
+    id: `${scope}.youJustCalledTheNavigator`,
+    defaultMessage: `You've just called the navigator and canceled it. You should use this feature <bold>very carefully</bold>, so let's try <secondaryColorBold>{timeLeft}</secondaryColorBold>.`,
+  },
 });

@@ -34,7 +34,7 @@ const ContactDetails = ({ contactEmail, phone }: Props) => {
 
   return (
     <>
-      <Text color={colors.bluewood} textOpacity={0.7} mb={24}>
+      <Text color={colors.bluewood} textOpacity={0.7} mb={24} lineHeight="22px">
         {contactDetailsText}
       </Text>
       {phone && (

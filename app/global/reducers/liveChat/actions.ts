@@ -42,6 +42,8 @@ import {
   ON_CURRENT_SCREEN_TITLE_CHANGED,
   SET_CURRENT_NAVIGATOR_UNAVAILABLE,
   SET_CALLING_OUT_NAVIGATOR,
+  SET_CALL_OUT_NAVIGATOR_UNLOCK_TIME,
+  SET_CANCELLING_CALL_OUT,
   SET_WAITING_FOR_NAVIGATOR,
 } from './constants';
 
@@ -219,7 +221,17 @@ export const setCallingOutNavigator = createAction(
   (action) => (callingOutNavigator: boolean) => action({ callingOutNavigator }),
 );
 
+export const setCallOutNavigatorUnlockTime = createAction(
+  SET_CALL_OUT_NAVIGATOR_UNLOCK_TIME,
+  (action) => (unlockTime: Nullable<string>) => action({ unlockTime }),
+);
+
 export const setWaitingForNavigator = createAction(
   SET_WAITING_FOR_NAVIGATOR,
   (action) => (waitingForNavigator: boolean) => action({ waitingForNavigator }),
+);
+
+export const setCancellingCallOut = createAction(
+  SET_CANCELLING_CALL_OUT,
+  (action) => (cancellingCallOut: boolean) => action({ cancellingCallOut }),
 );

@@ -40,7 +40,9 @@ export type LiveChatState = {
   creatingConversation: boolean;
   archivingConversation: boolean;
   callingOutNavigator: boolean;
+  cancellingCallOut: boolean;
   waitingForNavigator: boolean;
+  callOutNavigatorUnlockTime: Nullable<string>;
   navigatorUnavailable: boolean;
   currentNavigatorUnavailable: boolean;
   liveChatSetup: Nullable<LiveChatSetup>;

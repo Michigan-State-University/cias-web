@@ -2,6 +2,7 @@ import React, { useCallback, useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useInjectReducer, useInjectSaga } from 'redux-injectors';
 import { useIntl } from 'react-intl';
+import dayjs from 'dayjs';
 
 import { TLFB_QUESTION_TYPES } from 'models/Question';
 
@@ -14,6 +15,10 @@ import {
   makeSelectOpenedConversationId,
   makeSelectLiveChatLoader,
   makeSelectLiveChatSetup,
+  makeSelectWaitingForNavigator,
+  setWaitingForNavigator,
+  setCallOutNavigatorUnlockTime,
+  makeSelectCallOutNavigatorUnlockTime,
 } from 'global/reducers/liveChat';
 
 import { sessionReducer, getSessionSaga } from 'global/reducers/session';
@@ -24,12 +29,16 @@ import {
   makeSelectUserSession,
 } from 'containers/AnswerSessionPage/selectors';
 
+import Row from 'components/Row';
+import CountdownTextTimer from 'components/CountdownTextTimer';
+
 import ChatIcon from './components/ChatIcon';
 import ConversationChatDialog from './containers/ConversationChatDialog';
 import NarratorUnavailableDialog from './containers/NarratorUnavailableDialog';
 import NavigatorArrivedPopover from './components/NavigatorArrivedPopover';
 
 import messages from './messages';
+import CallOutNavigatorTimerDialog from './containers/CallOutNavigatorTimerDialog';
 
 export type Props = {
   interventionId: string;
@@ -60,6 +69,8 @@ export const LiveChatParticipantPanel = ({ interventionId }: Props) => {
   const currentQuestion = useSelector(makeSelectCurrentQuestion());
   const interventionStarted = useSelector(makeSelectInterventionStarted());
   const userSession = useSelector(makeSelectUserSession());
+  const waitingForNavigator = useSelector(makeSelectWaitingForNavigator());
+  const callOutUnlockTime = useSelector(makeSelectCallOutNavigatorUnlockTime());
 
   const sessionName = userSession?.sessionName;
 
@@ -145,6 +156,20 @@ export const LiveChatParticipantPanel = ({ interventionId }: Props) => {
 
   useEffect(showNavigatorArrivedPopover, [showNavigatorArrivedPopover]);
 
+  const allowCallOutOnUnlockTime = useCallback(() => {
+    if (!callOutUnlockTime) return;
+    const unlockMs = dayjs(callOutUnlockTime).diff();
+    const timeout = setTimeout(() => {
+      dispatch(setWaitingForNavigator(false));
+      dispatch(setCallOutNavigatorUnlockTime(null));
+    }, unlockMs);
+    return () => {
+      clearTimeout(timeout);
+    };
+  }, [callOutUnlockTime]);
+
+  useEffect(allowCallOutOnUnlockTime, [allowCallOutOnUnlockTime]);
+
   const sharedProps = {
     conversationChannel,
     interventionId,
@@ -158,15 +183,26 @@ export const LiveChatParticipantPanel = ({ interventionId }: Props) => {
       {!dialogMinimized && liveChatActive && (
         <ConversationChatDialog {...sharedProps} />
       )}
-      {!dialogMinimized && !liveChatActive && (
+      {!dialogMinimized && !liveChatActive && !waitingForNavigator && (
         <NarratorUnavailableDialog {...sharedProps} />
       )}
+      {!dialogMinimized && !liveChatActive && waitingForNavigator && (
+        <CallOutNavigatorTimerDialog {...sharedProps} />
+      )}
       {navigatorArrivedPopoverVisible && <NavigatorArrivedPopover />}
-      <ChatIcon
-        online={liveChatActive}
-        panelMinimized={dialogMinimized}
-        onClick={toggleDialog}
-      />
+      <Row align="center" gap={16}>
+        {dialogMinimized &&
+          !liveChatActive &&
+          waitingForNavigator &&
+          callOutUnlockTime && (
+            <CountdownTextTimer endTime={callOutUnlockTime} />
+          )}
+        <ChatIcon
+          online={liveChatActive}
+          panelMinimized={dialogMinimized}
+          onClick={toggleDialog}
+        />
+      </Row>
     </>
   );
 };

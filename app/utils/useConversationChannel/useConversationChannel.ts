@@ -1,7 +1,6 @@
 import { useDispatch, useSelector } from 'react-redux';
 import { useInjectReducer } from 'redux-injectors';
 import { toast } from 'react-toastify';
-import dayjs from 'dayjs';
 
 import {
   SocketErrorMessageData,
@@ -28,7 +27,9 @@ import {
   closeConversation,
   onCurrentScreenTitleChanged,
   setCurrentNavigatorUnavailable,
+  setCallOutNavigatorUnlockTime,
   setCallingOutNavigator,
+  setCancellingCallOut,
   setWaitingForNavigator,
 } from 'global/reducers/liveChat';
 import { makeSelectUserId } from 'global/reducers/auth';
@@ -147,22 +148,20 @@ export const useConversationChannel = (interventionId?: string) => {
   const onNavigatorCalledOut = ({ unlockTime }: NavigatorCalledOutData) => {
     dispatch(setCallingOutNavigator(false));
     dispatch(setWaitingForNavigator(true));
-    // TODO https://htdevelopers.atlassian.net/browse/CIAS30-2960 remove toast
-    toast.info(
-      `Navigator called out. Next try available ${dayjs(unlockTime).fromNow()}`,
-    );
+    dispatch(setCallOutNavigatorUnlockTime(unlockTime));
   };
 
   const onCallOutUnavailableError = ({
     unlockTime,
   }: CallOutNavigatorErrorData) => {
-    // TODO https://htdevelopers.atlassian.net/browse/CIAS30-2960 display BE error message only
-    toast.error(
-      `Unable to call out navigator. Next try available ${dayjs(
-        unlockTime,
-      ).fromNow()}`,
-    );
     dispatch(setCallingOutNavigator(false));
+    dispatch(setWaitingForNavigator(true));
+    dispatch(setCallOutNavigatorUnlockTime(unlockTime));
+  };
+
+  const onCallOutCancelled = () => {
+    dispatch(setCancellingCallOut(false));
+    dispatch(setWaitingForNavigator(false));
   };
 
   const messageListener: SocketMessageListener<ConversationChannelMessage> = ({
@@ -212,6 +211,9 @@ export const useConversationChannel = (interventionId?: string) => {
         break;
       case ConversationChannelMessageTopic.CALL_OUT_UNAVAILABLE_ERROR:
         onCallOutUnavailableError(data);
+        break;
+      case ConversationChannelMessageTopic.CALL_OUT_CANCELLED:
+        onCallOutCancelled();
         break;
       default:
         break;
@@ -277,9 +279,19 @@ export const useConversationChannel = (interventionId?: string) => {
   const callOutNavigator = () => {
     if (interventionId) {
       dispatch(setCallingOutNavigator(true));
-      dispatch(setWaitingForNavigator(false));
+      dispatch(setCallOutNavigatorUnlockTime(null));
       channel?.perform({
         name: ConversationChannelActionName.ON_CALL_OUT_NAVIGATOR,
+        data: { interventionId },
+      });
+    }
+  };
+
+  const cancelCallOut = () => {
+    if (interventionId) {
+      dispatch(setCancellingCallOut(true));
+      channel?.perform({
+        name: ConversationChannelActionName.ON_CANCEL_CALL_OUT,
         data: { interventionId },
       });
     }
@@ -294,5 +306,6 @@ export const useConversationChannel = (interventionId?: string) => {
     fetchLiveChatSetup,
     changeScreenTitle,
     callOutNavigator,
+    cancelCallOut,
   };
 };

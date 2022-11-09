@@ -35,6 +35,8 @@ import {
   onCurrentScreenTitleChanged,
   setCurrentNavigatorUnavailable,
   setCallingOutNavigator,
+  setCallOutNavigatorUnlockTime,
+  setCancellingCallOut,
   setWaitingForNavigator,
 } from './actions';
 import { LiveChatAction, LiveChatState } from './types';
@@ -54,6 +56,8 @@ export const initialState: LiveChatState = {
   archivingConversation: false,
   callingOutNavigator: false,
   waitingForNavigator: false,
+  cancellingCallOut: false,
+  callOutNavigatorUnlockTime: null,
   navigatorUnavailable: false,
   currentNavigatorUnavailable: false,
   liveChatSetup: null,
@@ -304,8 +308,16 @@ export const liveChatReducer = (
         draft.callingOutNavigator = payload.callingOutNavigator;
         break;
       }
+      case getType(setCallOutNavigatorUnlockTime): {
+        draft.callOutNavigatorUnlockTime = payload.unlockTime;
+        break;
+      }
       case getType(setWaitingForNavigator): {
         draft.waitingForNavigator = payload.waitingForNavigator;
+        break;
+      }
+      case getType(setCancellingCallOut): {
+        draft.cancellingCallOut = payload.cancellingCallOut;
         break;
       }
     }

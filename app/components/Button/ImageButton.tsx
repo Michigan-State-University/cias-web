@@ -4,12 +4,12 @@ import Icon from 'components/Icon';
 
 import { HoverTextButton } from './styled';
 
-type Props = PropsWithChildren<{
+export type ImageButtonProps = PropsWithChildren<{
   title: string;
   src: string;
   fill?: string;
   stroke?: string;
-  onClick: () => void;
+  onClick?: () => void;
   loading?: boolean;
   disabled?: boolean;
   iconProps?: object;
@@ -19,7 +19,7 @@ type Props = PropsWithChildren<{
 }> &
   Record<string, unknown>;
 
-const ImageButton = React.forwardRef<HTMLElement, Props>(
+const ImageButton = React.forwardRef<HTMLElement, ImageButtonProps>(
   (
     {
       title,
@@ -35,7 +35,7 @@ const ImageButton = React.forwardRef<HTMLElement, Props>(
       styles = {},
       children,
       ...props
-    }: Props,
+    }: ImageButtonProps,
     ref,
   ) => (
     <HoverTextButton

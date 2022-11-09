@@ -168,8 +168,20 @@ export const makeSelectCallingOutNavigator = () =>
     ({ callingOutNavigator }) => callingOutNavigator,
   );
 
+export const makeSelectCallOutNavigatorUnlockTime = () =>
+  createSelector(
+    selectLiveChatState,
+    ({ callOutNavigatorUnlockTime }) => callOutNavigatorUnlockTime,
+  );
+
 export const makeSelectWaitingForNavigator = () =>
   createSelector(
     selectLiveChatState,
     ({ waitingForNavigator }) => waitingForNavigator,
+  );
+
+export const makeSelectCancellingCallOut = () =>
+  createSelector(
+    selectLiveChatState,
+    ({ cancellingCallOut }) => cancellingCallOut,
   );
