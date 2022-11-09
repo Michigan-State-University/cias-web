@@ -5,25 +5,22 @@
  */
 
 import React, { useReducer, useEffect, useCallback, useMemo } from 'react';
-import { connect } from 'react-redux';
-import { compose } from 'redux';
-import { createStructuredSelector } from 'reselect';
+import { useDispatch, useSelector } from 'react-redux';
 import { FormattedMessage, useIntl } from 'react-intl';
-import { injectSaga } from 'redux-injectors';
+import { useInjectSaga } from 'redux-injectors';
 
 import AddIcon from 'assets/svg/addSign2.svg';
-import cog from 'assets/svg/gear-selected.svg';
+import cog from 'assets/svg/cog-primary.svg';
 
 import {
-  fetchInterventionRequest,
   makeSelectInterventionState,
-  interventionLogoSaga,
   addInterventionLogoRequest,
   deleteInterventionLogoRequest,
   updateInterventionLogoRequest,
   editInterventionRequest,
   addAttachmentRequest,
   deleteAttachmentRequest,
+  withInterventionLogoSaga,
 } from 'global/reducers/intervention';
 import {
   canChangeAccessSettings,
@@ -49,6 +46,7 @@ import OriginalTextHover from 'components/OriginalTextHover';
 import ApprovableInput from 'components/Input/ApprovableInput';
 import { selectQuillText } from 'components/Input/utils';
 import HoverableBox from 'components/Box/HoverableBox';
+import Text from 'components/Text';
 
 import Switch from 'components/Switch';
 import Img from 'components/Img';
@@ -62,7 +60,7 @@ import InterventionRadioPanel from './Components/InterventionRadioPanel';
 
 import { reducer, UPDATE } from './reducer';
 import { interventionTypesOption, shareOptions } from './utils';
-import { interventionSettingPageSaga } from './sagas';
+import { withInterventionSettingsPageSagas } from './sagas';
 import messages from './messages';
 import { StyledBox } from './styled';
 import { OptionType } from './types';
@@ -71,40 +69,10 @@ const NAVIGATOR_SETTINGS_MODAL_WIDTH = 918;
 
 interface Props {
   intervention: Intervention;
-  updateIntervention: (interventionData: Partial<Intervention>) => void;
-  addLogo: (interventionId: string, logoData: string, logoUrl?: string) => void;
-  deleteLogo: (interventionId: string) => void;
-  updateLogo: (interventionId: string, description: string) => void;
-  interventionState: {
-    loaders: {
-      fetchInterventionLoading: boolean;
-      enableAccessLoading: boolean;
-      fetchUserAccessLoading: boolean;
-      logoLoading: boolean;
-      addAttachmentsLoading: boolean;
-    };
-    errors: {
-      fetchInterventionError: string;
-      fetchUserAccessError: string;
-    };
-  };
-  addInterventionAttachments: (
-    interventionId: string,
-    attachments: File[],
-  ) => void;
-  deleteInterventionAttachment: (
-    interventionId: string,
-    fileId: string,
-  ) => void;
 }
 
-const SettingsPanel = ({
-  intervention,
-  updateIntervention,
-  addLogo,
-  deleteLogo,
-  updateLogo,
-  interventionState: {
+const SettingsPanel = ({ intervention }: Props) => {
+  const {
     loaders: {
       fetchInterventionLoading,
       enableAccessLoading,
@@ -113,11 +81,29 @@ const SettingsPanel = ({
       addAttachmentsLoading,
     },
     errors: { fetchInterventionError, fetchUserAccessError },
-  },
-  addInterventionAttachments,
-  deleteInterventionAttachment,
-}: Props) => {
+  } = useSelector<any, any>(makeSelectInterventionState());
+
+  const globalDispatch = useDispatch();
+
+  useInjectSaga(withInterventionSettingsPageSagas);
+  useInjectSaga(withInterventionLogoSaga);
   const { formatMessage } = useIntl();
+
+  const modalProps = useMemo(
+    () => ({
+      title: formatMessage(messages.useNavigatorSettings),
+      width: NAVIGATOR_SETTINGS_MODAL_WIDTH,
+      height: 722,
+      maxWidth: NAVIGATOR_SETTINGS_MODAL_WIDTH,
+      py: 32,
+      px: 32,
+      titleProps: {
+        fontSize: 24,
+        lineHeight: 1,
+      },
+    }),
+    [],
+  );
 
   const [state, dispatch] = useReducer(reducer, null);
   const { openModal: openNavigatorSettingModal, Modal: NavigatorSettingModal } =
@@ -126,18 +112,7 @@ const SettingsPanel = ({
       modalContentRenderer: () => (
         <NavigatorSettingsModal interventionId={intervention.id} />
       ),
-      props: {
-        title: formatMessage(messages.useNavigatorSettings),
-        width: NAVIGATOR_SETTINGS_MODAL_WIDTH,
-        height: 722,
-        maxWidth: NAVIGATOR_SETTINGS_MODAL_WIDTH,
-        py: 32,
-        px: 32,
-        titleProps: {
-          fontSize: 24,
-          lineHeight: 1,
-        },
-      },
+      props: modalProps,
     });
 
   const {
@@ -158,13 +133,17 @@ const SettingsPanel = ({
     type === InterventionType.FIXED || type === InterventionType.FLEXIBLE;
 
   const updateAccessSettings = (newSetting: InterventionSharedTo) =>
-    updateIntervention({ id: interventionId, sharedTo: newSetting });
+    globalDispatch(
+      editInterventionRequest({ id: interventionId, sharedTo: newSetting }),
+    );
 
   const updateAdditionalText = (text: string) =>
-    updateIntervention({ id: interventionId, additionalText: text });
+    globalDispatch(
+      editInterventionRequest({ id: interventionId, additionalText: text }),
+    );
 
   const deleteFile = (fileInfo: AppFile) =>
-    deleteInterventionAttachment(interventionId, fileInfo.id);
+    globalDispatch(deleteAttachmentRequest(interventionId, fileInfo.id));
 
   const updateType = (newType: InterventionType) => {
     if (
@@ -172,40 +151,54 @@ const SettingsPanel = ({
       newType !== InterventionType.DEFAULT &&
       sharedTo === InterventionSharedTo.ANYONE
     ) {
-      updateIntervention({
-        id: interventionId,
-        type: newType,
-        sharedTo: InterventionSharedTo.REGISTERED,
-      });
+      globalDispatch(
+        editInterventionRequest({
+          id: interventionId,
+          type: newType,
+          sharedTo: InterventionSharedTo.REGISTERED,
+        }),
+      );
     } else {
-      updateIntervention({ id: interventionId, type: newType });
+      globalDispatch(
+        editInterventionRequest({ id: interventionId, type: newType }),
+      );
     }
   };
 
   const updateNavigatorSetting = (isChatEnabled: boolean) => {
-    updateIntervention({ id: interventionId, liveChatEnabled: isChatEnabled });
+    if (isChatEnabled) {
+      openNavigatorSettingModal(true);
+    }
+    globalDispatch(
+      editInterventionRequest({
+        id: interventionId,
+        liveChatEnabled: isChatEnabled,
+      }),
+    );
   };
 
   const onAddLogo = useCallback(
     (logo) => {
-      addLogo(interventionId, logo.image);
+      globalDispatch(addInterventionLogoRequest(interventionId, logo.image));
     },
     [interventionId],
   );
 
   const onDeleteLogo = useCallback(() => {
-    deleteLogo(interventionId);
+    globalDispatch(deleteInterventionLogoRequest(interventionId));
   }, [interventionId]);
 
   const onUpdateLogoDescription = useCallback(
     (description) => {
-      updateLogo(interventionId, description);
+      globalDispatch(
+        updateInterventionLogoRequest(interventionId, description),
+      );
     },
     [interventionId],
   );
 
   const onFilesUpload = (attachments: File[]) => {
-    addInterventionAttachments(interventionId, attachments);
+    globalDispatch(addAttachmentRequest(interventionId, attachments));
   };
 
   useEffect(() => {
@@ -248,17 +241,23 @@ const SettingsPanel = ({
               disabled={!changingChatSettingsPossible}
             >
               <H2 mr={24}>
-                <FormattedMessage {...messages.useNavigator} />
+                <FormattedMessage {...messages.setupNavigator} />
               </H2>
             </Switch>
             {intervention?.liveChatEnabled && (
-              <Img
-                onClick={openNavigatorSettingModal}
-                ml={15}
-                src={cog}
-                alt="manage"
-                cursor="pointer"
-              />
+              <>
+                <Img
+                  onClick={openNavigatorSettingModal}
+                  ml={24}
+                  mr={8}
+                  src={cog}
+                  alt="manage"
+                  cursor="pointer"
+                />
+                <Text fontWeight="bold">
+                  <FormattedMessage {...messages.configureNavigatorSettings} />
+                </Text>
+              </>
             )}
           </Box>
           <InterventionRadioPanel
@@ -374,30 +373,4 @@ const SettingsPanel = ({
   );
 };
 
-const mapStateToProps = createStructuredSelector({
-  interventionState: makeSelectInterventionState(),
-});
-
-const mapDispatchToProps = {
-  fetchIntervention: fetchInterventionRequest,
-  updateIntervention: editInterventionRequest,
-  addLogo: addInterventionLogoRequest,
-  deleteLogo: deleteInterventionLogoRequest,
-  updateLogo: updateInterventionLogoRequest,
-  addInterventionAttachments: addAttachmentRequest,
-  deleteInterventionAttachment: deleteAttachmentRequest,
-};
-
-const withConnect = connect(mapStateToProps, mapDispatchToProps);
-
-export default compose(
-  withConnect,
-  injectSaga({
-    key: 'interventionSettingPage',
-    saga: interventionSettingPageSaga,
-  }),
-  injectSaga({
-    key: 'interventionLogo',
-    saga: interventionLogoSaga,
-  }),
-)(SettingsPanel);
+export default SettingsPanel;

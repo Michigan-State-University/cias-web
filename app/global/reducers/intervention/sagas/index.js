@@ -74,3 +74,8 @@ export default function* allInterventionSagas() {
     fetchInterventionInvitesSaga(),
   ]);
 }
+
+export const withInterventionLogoSaga = {
+  key: 'interventionLogo',
+  saga: interventionLogoSaga,
+};

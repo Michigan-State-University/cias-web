@@ -1,13 +1,10 @@
 import React, { useEffect, useMemo } from 'react';
 import { useIntl } from 'react-intl';
-import { injectReducer, injectSaga } from 'redux-injectors';
-import { compose } from 'redux';
+import { useInjectReducer, useInjectSaga } from 'redux-injectors';
 import { useDispatch, useSelector } from 'react-redux';
 import differenceBy from 'lodash/differenceBy';
 
 import {
-  allNavigatorSetupSagas,
-  navigatorSetupReducer,
   fetchNavigatorSetupRequest,
   makeSelectNavigatorSetupLoader,
   makeSelectNavigatorSetupError,
@@ -16,11 +13,12 @@ import {
   inviteNavigatorsByEmailRequest,
   removeNavigatorEmailInvitationRequest,
   removeInterventionNavigatorRequest,
-  navigatorSetupReducerKey,
   makeSelectPendingNavigatorInvitations,
   makeSelectInterventionNavigators,
   makeSelectTeamNavigators,
   addNavigatorFromTeamRequest,
+  withNavigatorSetupReducer,
+  withAllNavigatorSetupsSagas,
 } from 'global/reducers/navigatorSetup';
 import { makeSelectUser } from 'global/reducers/auth';
 
@@ -55,6 +53,9 @@ type Props = {
 const NavigatorSettingsModal = ({ interventionId }: Props) => {
   const { formatMessage } = useIntl();
   const dispatch = useDispatch();
+
+  useInjectReducer(withNavigatorSetupReducer);
+  useInjectSaga(withAllNavigatorSetupsSagas);
 
   const navigatorSetup = useSelector(makeSelectNavigatorSetup());
   const pendingNavigatorInvitations = useSelector(
@@ -200,11 +201,4 @@ const NavigatorSettingsModal = ({ interventionId }: Props) => {
   );
 };
 
-export default compose(
-  // @ts-ignore
-  injectReducer({
-    key: navigatorSetupReducerKey,
-    reducer: navigatorSetupReducer,
-  }),
-  injectSaga({ key: 'allNavigatorSetupSagas', saga: allNavigatorSetupSagas }),
-)(NavigatorSettingsModal) as React.ComponentType<Props>;
+export default NavigatorSettingsModal;

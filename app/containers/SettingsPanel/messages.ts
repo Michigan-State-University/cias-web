@@ -143,9 +143,9 @@ export default defineMessages({
     defaultMessage:
       'If you have any thoughts for participants, please type it here',
   },
-  useNavigator: {
-    id: `${scope}.useNavigator`,
-    defaultMessage: 'Use Navigator',
+  setupNavigator: {
+    id: `${scope}.setupNavigator`,
+    defaultMessage: 'Setup navigator',
   },
   useNavigatorSettings: {
     id: `${scope}.useNavigatorSettings`,
@@ -334,5 +334,9 @@ export default defineMessages({
     id: `${scope}.navigatorScriptUploadTooltipDescription`,
     defaultMessage:
       'Below you find a screenshot which represents correctly filled template',
+  },
+  configureNavigatorSettings: {
+    id: `${scope}.configureNavigatorSettings`,
+    defaultMessage: 'Configure navigator settings',
   },
 });

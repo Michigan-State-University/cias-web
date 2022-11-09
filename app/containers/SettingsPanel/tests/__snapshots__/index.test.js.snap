@@ -733,7 +733,7 @@ exports[`<SettingsPanel /> Should render and match the snapshot 1`] = `
                   <h2
                     class="c12"
                   >
-                    Use Navigator
+                    Setup navigator
                   </h2>
                 </div>
                 <div
