@@ -299,13 +299,29 @@ export function App({ user, fetchSelfDetails }) {
             activeTab: participantReportsTabId,
           }}
         />
-        <AppRoute exact path="/login" component={LoginPage} />
-        <AppRoute exact path="/register" component={RegisterPage} />
-        <AppRoute exact path="/reset-password" component={ResetPasswordPage} />
+        <AppRoute
+          exact
+          path="/login"
+          component={LoginPage}
+          unauthorizedUsersOnly
+        />
+        <AppRoute
+          exact
+          path="/register"
+          component={RegisterPage}
+          unauthorizedUsersOnly
+        />
+        <AppRoute
+          exact
+          path="/reset-password"
+          component={ResetPasswordPage}
+          unauthorizedUsersOnly
+        />
         <AppRoute
           exact
           path="/set-new-password"
           component={SetNewPasswordPage}
+          unauthorizedUsersOnly
         />
         <AppRoute exact path="/logout" component={Logout} />
         <AppRoute
