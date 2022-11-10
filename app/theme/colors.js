@@ -92,6 +92,7 @@ const colors = {
   fireIsland: '#DD533C',
   cadetBlueCrayola: '#B3BAC7',
   linkWaterDark: '#DEE7F6',
+  azureishWhite: '#D4DFF7',
 };
 
 const themeColors = {

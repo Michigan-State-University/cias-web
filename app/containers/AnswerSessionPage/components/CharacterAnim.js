@@ -2,7 +2,6 @@ import React, { useEffect, useReducer } from 'react';
 import PropTypes from 'prop-types';
 import isNumber from 'lodash/isNumber';
 import get from 'lodash/get';
-import Lottie from 'react-lottie';
 import { useDispatch } from 'react-redux';
 import Draggable from 'react-draggable';
 import { useIntl } from 'react-intl';
@@ -26,6 +25,8 @@ import {
   reflectionFormulaType,
 } from 'models/Narrator/BlockTypes';
 import { CHARACTER_CONFIGS } from 'models/Character';
+
+import AnimationPlayer from 'components/AnimationPlayer';
 
 import { setCurrentBlockIndex } from 'containers/AnswerSessionPage/actions';
 
@@ -326,23 +327,24 @@ const CharacterAnim = ({
   const displayNarrator = settings.animation && Boolean(blocks.length);
 
   const characterConfig = CHARACTER_CONFIGS[settings.character];
-  const { height: animationHeight, width: animationWidth } =
-    characterConfig.size;
 
   return (
     <NarratorContainer>
       {displayNarrator && (
         <Draggable disabled position={animationPos}>
-          <Lottie
-            ref={animationRef}
-            options={defaultOptions}
-            height={animationHeight}
-            width={animationWidth}
-            style={characterConfig.lottieStyles}
-            isClickToPauseDisabled
-            isStopped={isStopped}
-            ariaLabel={formatMessage(messages.narratorAlt)}
-          />
+          <div>
+            {/* AnimationPlayer must be wrapped with an additional div element
+            because Draggable uses ref to control it's child under the hood
+            which conflicts with animationRef passed to AnimationPlayer */}
+            <AnimationPlayer
+              ref={animationRef}
+              options={defaultOptions}
+              characterConfig={characterConfig}
+              isClickToPauseDisabled
+              isStopped={isStopped}
+              ariaLabel={formatMessage(messages.narratorAlt)}
+            />
+          </div>
         </Draggable>
       )}
     </NarratorContainer>

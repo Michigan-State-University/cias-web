@@ -1,6 +1,5 @@
 import React, { useReducer } from 'react';
 import Draggable from 'react-draggable';
-import Lottie from 'react-lottie';
 import PropTypes from 'prop-types';
 import get from 'lodash/get';
 import { compose } from 'redux';
@@ -31,6 +30,8 @@ import { makeSelectAudioInstance } from 'global/reducers/globalState';
 import { makeSelectInterventionStatus } from 'global/reducers/intervention';
 import { canEdit } from 'models/Status/statusPermissions';
 import { CHARACTER_CONFIGS } from 'models/Character';
+
+import AnimationPlayer from 'components/AnimationPlayer';
 
 import { elements } from 'theme';
 import messages from 'containers/AnswerSessionPage/messages';
@@ -279,12 +280,10 @@ const QuestionNarrator = ({
             $characterConfig={characterConfig}
           >
             <div id="lottie">
-              <Lottie
+              <AnimationPlayer
                 ref={animationRef}
                 options={defaultOptions}
-                height={characterHeight}
-                width={characterWidth}
-                style={characterConfig.lottieStyles}
+                characterConfig={characterConfig}
                 isClickToPauseDisabled
                 isStopped={
                   previewData.animation === 'standStill' ||

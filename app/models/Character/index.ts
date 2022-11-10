@@ -10,6 +10,11 @@ export type CharacterSize = {
   width: number;
 };
 
+export type CharacterBorder = {
+  width: number;
+  radius: number;
+};
+
 export enum ActiveIndicatorType {
   CIRCLE = 'circle',
   RECTANGLE = 'rectangle',
@@ -18,6 +23,7 @@ export enum ActiveIndicatorType {
 export type CharacterConfig = {
   name: CharacterType;
   size: CharacterSize;
+  border?: CharacterBorder;
   activeIndicatorType: ActiveIndicatorType;
   lottieStyles?: LottieProps['style'];
 };
@@ -40,9 +46,10 @@ export const CHARACTER_CONFIGS: Record<CharacterType, CharacterConfig> = {
       width: 168,
       height: 100.8,
     },
-    activeIndicatorType: ActiveIndicatorType.RECTANGLE,
-    lottieStyles: {
-      borderRadius: 8,
+    border: {
+      width: 2,
+      radius: 8,
     },
+    activeIndicatorType: ActiveIndicatorType.RECTANGLE,
   },
 };
