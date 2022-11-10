@@ -50,6 +50,7 @@ import {
   ChangeScreenTitleData,
   NavigatorCalledOutData,
   CallOutNavigatorErrorData,
+  CurrentNavigatorAvailableData,
 } from './types';
 import {
   CONVERSATION_CHANNEL_NAME,
@@ -137,12 +138,16 @@ export const useConversationChannel = (interventionId?: string) => {
     dispatch(onCurrentScreenTitleChanged(conversationId, currentScreenTitle));
   };
 
-  const onCurrentNavigatorAvailable = () => {
-    dispatch(setCurrentNavigatorUnavailable(false));
+  const onCurrentNavigatorAvailable = ({
+    conversationId,
+  }: CurrentNavigatorAvailableData) => {
+    dispatch(setCurrentNavigatorUnavailable(false, conversationId));
   };
 
-  const onCurrentNavigatorUnavailable = () => {
-    dispatch(setCurrentNavigatorUnavailable(true));
+  const onCurrentNavigatorUnavailable = ({
+    conversationId,
+  }: CurrentNavigatorAvailableData) => {
+    dispatch(setCurrentNavigatorUnavailable(true, conversationId));
   };
 
   const onNavigatorCalledOut = ({ unlockTime }: NavigatorCalledOutData) => {
@@ -201,10 +206,10 @@ export const useConversationChannel = (interventionId?: string) => {
         onChangedScreenTitle(data);
         break;
       case ConversationChannelMessageTopic.CURRENT_NAVIGATOR_AVAILABLE:
-        onCurrentNavigatorAvailable();
+        onCurrentNavigatorAvailable(data);
         break;
       case ConversationChannelMessageTopic.CURRENT_NAVIGATOR_UNAVAILABLE:
-        onCurrentNavigatorUnavailable();
+        onCurrentNavigatorUnavailable(data);
         break;
       case ConversationChannelMessageTopic.NAVIGATOR_CALLED_OUT:
         onNavigatorCalledOut(data);

@@ -221,7 +221,10 @@ export const liveChatReducer = (
         break;
       }
       case getType(setCurrentNavigatorUnavailable): {
-        draft.currentNavigatorUnavailable = payload.currentNavigatorUnavailable;
+        const { conversationId, currentNavigatorUnavailable } = payload;
+        if (state.openedConversationId === conversationId) {
+          draft.currentNavigatorUnavailable = currentNavigatorUnavailable;
+        }
         break;
       }
       case getType(onConversationArchivedReceive): {

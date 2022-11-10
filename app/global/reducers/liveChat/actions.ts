@@ -146,8 +146,8 @@ export const setNavigatorUnavailable = createAction(
 
 export const setCurrentNavigatorUnavailable = createAction(
   SET_CURRENT_NAVIGATOR_UNAVAILABLE,
-  (action) => (currentNavigatorUnavailable: boolean) =>
-    action({ currentNavigatorUnavailable }),
+  (action) => (currentNavigatorUnavailable: boolean, conversationId: string) =>
+    action({ currentNavigatorUnavailable, conversationId }),
 );
 
 export const onConversationCreatedReceive = createAction(

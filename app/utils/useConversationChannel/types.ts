@@ -77,6 +77,10 @@ export type CallOutCancelledData = {
   summoningUserId: string;
 };
 
+export type CurrentNavigatorAvailableData = {
+  conversationId: string;
+};
+
 // SOCKET MESSAGES
 
 export type MessageSentSocketMessage = SocketMessage<
@@ -127,11 +131,15 @@ export type CurrentScreenTitleChangedSocketMessage = SocketMessage<
   ChangeScreenTitleData
 >;
 
-export type CurrentNavigatorUnavailableSocketMessage =
-  SocketMessage<ConversationChannelMessageTopic.CURRENT_NAVIGATOR_UNAVAILABLE>;
+export type CurrentNavigatorUnavailableSocketMessage = SocketMessage<
+  ConversationChannelMessageTopic.CURRENT_NAVIGATOR_UNAVAILABLE,
+  CurrentNavigatorAvailableData
+>;
 
-export type CurrentNavigatorAvailableSocketMessage =
-  SocketMessage<ConversationChannelMessageTopic.CURRENT_NAVIGATOR_AVAILABLE>;
+export type CurrentNavigatorAvailableSocketMessage = SocketMessage<
+  ConversationChannelMessageTopic.CURRENT_NAVIGATOR_AVAILABLE,
+  CurrentNavigatorAvailableData
+>;
 
 export type NavigatorCalledOutSocketMessage = SocketMessage<
   ConversationChannelMessageTopic.NAVIGATOR_CALLED_OUT,
