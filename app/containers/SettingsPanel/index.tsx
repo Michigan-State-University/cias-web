@@ -170,14 +170,18 @@ const SettingsPanel = ({ intervention }: Props) => {
   };
 
   const updateNavigatorSetting = (isChatEnabled: boolean) => {
-    if (isChatEnabled) {
-      openNavigatorSettingModal(true);
-    }
     globalDispatch(
-      editInterventionRequest({
-        id: interventionId,
-        liveChatEnabled: isChatEnabled,
-      }),
+      editInterventionRequest(
+        {
+          id: interventionId,
+          liveChatEnabled: isChatEnabled,
+        },
+        {
+          ...(isChatEnabled && {
+            onSuccess: () => openNavigatorSettingModal(true),
+          }),
+        },
+      ),
     );
   };
 
