@@ -18,6 +18,7 @@ export interface UserSession {
   scheduledAt: Nullable<string>;
   liveChatEnabled: boolean;
   quickExitEnabled: boolean;
+  userInterventionId?: Nullable<string>;
 }
 
 export type UserSessionDTO = CamelToSnakeOmitId<UserSession>;

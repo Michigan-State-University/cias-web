@@ -39,6 +39,7 @@ import NavigatorArrivedPopover from './components/NavigatorArrivedPopover';
 
 import messages from './messages';
 import CallOutNavigatorTimerDialog from './containers/CallOutNavigatorTimerDialog';
+import { DASHBOARD_LOCATION_NAME } from './constants';
 
 export type Props = {
   interventionId: string;
@@ -72,7 +73,7 @@ export const LiveChatParticipantPanel = ({ interventionId }: Props) => {
   const waitingForNavigator = useSelector(makeSelectWaitingForNavigator());
   const callOutUnlockTime = useSelector(makeSelectCallOutNavigatorUnlockTime());
 
-  const sessionName = userSession?.sessionName;
+  const { sessionId, sessionName } = userSession ?? {};
 
   useInjectReducer({ key: 'session', reducer: sessionReducer });
   useInjectSaga({ key: 'getSession', saga: getSessionSaga });
@@ -83,10 +84,11 @@ export const LiveChatParticipantPanel = ({ interventionId }: Props) => {
   useEffect(() => {
     if (!isConnected || !conversationId) return;
 
-    if (!sessionName) {
+    if (!sessionId) {
       changeScreenTitle({
         conversationId,
         currentScreenTitle: formatMessage(messages.interventionPageTitle),
+        currentLocation: DASHBOARD_LOCATION_NAME,
       });
       return;
     }
@@ -112,18 +114,18 @@ export const LiveChatParticipantPanel = ({ interventionId }: Props) => {
         currentQuestionTitle ||
         formatMessage(messages.noTitle);
 
-    if (sessionName) {
-      changeScreenTitle({
-        conversationId,
-        currentScreenTitle: formatMessage(messages.currentScreenTitle, {
-          sessionName,
-          screenTitle,
-        }),
-      });
-    }
+    changeScreenTitle({
+      conversationId,
+      currentScreenTitle: formatMessage(messages.currentScreenTitle, {
+        sessionName,
+        screenTitle,
+      }),
+      currentLocation: sessionId,
+    });
   }, [
     currentQuestion,
     interventionStarted,
+    sessionId,
     sessionName,
     isConnected,
     conversationId,

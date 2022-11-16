@@ -53,6 +53,7 @@ export type FetchLiveChatSetupData = {
 export type ChangeScreenTitleData = {
   conversationId: string;
   currentScreenTitle: string;
+  currentLocation: string;
 };
 
 export type LiveChatSetupFetchedData = ApiData<LiveChatSetup>;
