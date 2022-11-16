@@ -57,6 +57,7 @@ import AccessGiver from './containers/AccessGiver';
 import NavigatorSettingsModal from './containers/NavigatorSettingsModal';
 import InterventionAccessDescription from './Components/InterventionAccessDescription';
 import InterventionRadioPanel from './Components/InterventionRadioPanel';
+import ConversationsTranscriptPanel from './containers/ConversationsTranscriptPanel';
 
 import { reducer, UPDATE } from './reducer';
 import { interventionTypesOption, shareOptions } from './utils';
@@ -68,7 +69,7 @@ import { OptionType } from './types';
 const NAVIGATOR_SETTINGS_MODAL_WIDTH = 918;
 
 interface Props {
-  intervention: Intervention;
+  intervention: Nullable<Intervention>;
 }
 
 const SettingsPanel = ({ intervention }: Props) => {
@@ -110,7 +111,7 @@ const SettingsPanel = ({ intervention }: Props) => {
     useModal({
       type: ModalType.Modal,
       modalContentRenderer: () => (
-        <NavigatorSettingsModal interventionId={intervention.id} />
+        <NavigatorSettingsModal interventionId={intervention!.id} />
       ),
       props: modalProps,
     });
@@ -124,6 +125,9 @@ const SettingsPanel = ({ intervention }: Props) => {
     files,
     additionalText,
     originalText,
+    liveChatEnabled,
+    conversationsPresent,
+    conversationsTranscript,
   } = intervention || {};
 
   const changingAccessSettingsPossible = canChangeAccessSettings(status);
@@ -228,15 +232,17 @@ const SettingsPanel = ({ intervention }: Props) => {
     // @ts-ignore
     return <ErrorAlert errorText={fetchInterventionError} />;
 
+  if (!intervention) return null;
+
   return (
     <Column>
       <NavigatorSettingModal />
       <StyledBox>
         <Column width="100%" padding={35}>
-          <Box display="flex" align="center" mb={48}>
+          <Box display="flex" align="center">
             <Switch
               onToggle={updateNavigatorSetting}
-              checked={!!intervention?.liveChatEnabled}
+              checked={!!liveChatEnabled}
               id="use-navigator-switch"
               disabled={!changingChatSettingsPossible}
             >
@@ -244,7 +250,7 @@ const SettingsPanel = ({ intervention }: Props) => {
                 <FormattedMessage {...messages.setupNavigator} />
               </H2>
             </Switch>
-            {intervention?.liveChatEnabled && (
+            {liveChatEnabled && (
               <>
                 <Img
                   onClick={openNavigatorSettingModal}
@@ -260,13 +266,18 @@ const SettingsPanel = ({ intervention }: Props) => {
               </>
             )}
           </Box>
+          {(liveChatEnabled || conversationsPresent) && (
+            <ConversationsTranscriptPanel
+              transcript={conversationsTranscript}
+            />
+          )}
           <InterventionRadioPanel
             radioPanelTitle={
               <FormattedMessage {...messages.interventionType} />
             }
             radioOptions={interventionTypesOption}
             disabled={!changingAccessSettingsPossible}
-            selectedValue={type}
+            selectedValue={type!}
             updateSetting={(value) => updateType(value as InterventionType)}
             nameTooltip={
               <>
@@ -289,13 +300,12 @@ const SettingsPanel = ({ intervention }: Props) => {
               </>
             }
           />
-          <Box mt={40} />
           <InterventionRadioPanel
             onOptionHover={dispatchUpdate}
             radioPanelTitle={<FormattedMessage {...messages.subheader} />}
             radioOptions={shareOptions}
             disabled={!changingAccessSettingsPossible}
-            selectedValue={sharedTo}
+            selectedValue={sharedTo!}
             updateSetting={(value) =>
               updateAccessSettings(value as InterventionSharedTo)
             }

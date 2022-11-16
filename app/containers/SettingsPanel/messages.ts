@@ -339,4 +339,21 @@ export default defineMessages({
     id: `${scope}.configureNavigatorSettings`,
     defaultMessage: 'Configure navigator settings',
   },
+  interventionConversationsTranscriptInfo: {
+    id: `${scope}.interventionConversationsTranscriptInfo`,
+    defaultMessage:
+      'You can also download all conversations within this intervention. To do that please generate a transcript before you can download it.',
+  },
+  generateTranscript: {
+    id: `${scope}.generateTranscript`,
+    defaultMessage: 'Generate transcript',
+  },
+  generateNewTranscript: {
+    id: `${scope}.generateNewTranscript`,
+    defaultMessage: 'Generate new transcript',
+  },
+  downloadTranscript: {
+    id: `${scope}.downloadTranscript`,
+    defaultMessage: 'Download transcript',
+  },
 });

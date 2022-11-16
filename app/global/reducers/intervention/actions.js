@@ -68,6 +68,9 @@ import {
   FETCH_INTERVENTION_INVITES_REQUEST,
   FETCH_INTERVENTION_INVITES_SUCCESS,
   FETCH_INTERVENTION_INVITES_ERROR,
+  GENERATE_CONVERSATIONS_TRANSCRIPT_REQUEST,
+  GENERATE_CONVERSATIONS_TRANSCRIPT_SUCCESS,
+  GENERATE_CONVERSATIONS_TRANSCRIPT_ERROR,
 } from './constants';
 
 export const fetchInterventionRequest = (id) =>
@@ -265,3 +268,10 @@ export const deleteAttachmentRequest = (interventionId, attachmentId) =>
   });
 export const deleteAttachmentSuccess = (intervention) =>
   actionBuilder(DELETE_INTERVENTION_ATTACHMENT_SUCCESS, { intervention });
+
+export const generateConversationsTranscriptRequest = () =>
+  actionBuilder(GENERATE_CONVERSATIONS_TRANSCRIPT_REQUEST, {});
+export const generateConversationsTranscriptSuccess = () =>
+  actionBuilder(GENERATE_CONVERSATIONS_TRANSCRIPT_SUCCESS, {});
+export const generateConversationsTranscriptError = (error) =>
+  actionBuilder(GENERATE_CONVERSATIONS_TRANSCRIPT_ERROR, { error });

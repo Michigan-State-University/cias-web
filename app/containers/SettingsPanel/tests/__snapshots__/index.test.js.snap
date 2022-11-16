@@ -25,7 +25,7 @@ exports[`<SettingsPanel /> Should render and match the snapshot 1`] = `
   padding: 35px;
 }
 
-.c43 {
+.c42 {
   display: -webkit-box;
   display: -webkit-flex;
   display: -ms-flexbox;
@@ -52,7 +52,7 @@ exports[`<SettingsPanel /> Should render and match the snapshot 1`] = `
   top: 0px;
 }
 
-.c45 {
+.c44 {
   display: -webkit-box;
   display: -webkit-flex;
   display: -ms-flexbox;
@@ -167,7 +167,7 @@ exports[`<SettingsPanel /> Should render and match the snapshot 1`] = `
   cursor: pointer;
 }
 
-.c37 {
+.c36 {
   display: -webkit-box;
   display: -webkit-flex;
   display: -ms-flexbox;
@@ -179,7 +179,7 @@ exports[`<SettingsPanel /> Should render and match the snapshot 1`] = `
   width: 100%;
 }
 
-.c46 {
+.c45 {
   display: -webkit-box;
   display: -webkit-flex;
   display: -ms-flexbox;
@@ -192,7 +192,7 @@ exports[`<SettingsPanel /> Should render and match the snapshot 1`] = `
   margin-bottom: 12px;
 }
 
-.c49 {
+.c48 {
   display: -webkit-box;
   display: -webkit-flex;
   display: -ms-flexbox;
@@ -217,7 +217,7 @@ exports[`<SettingsPanel /> Should render and match the snapshot 1`] = `
   color: #2F3850;
 }
 
-.c31 {
+.c30 {
   font-family: DM Sans;
   font-size: 13px;
   line-height: 130%;
@@ -226,7 +226,7 @@ exports[`<SettingsPanel /> Should render and match the snapshot 1`] = `
   color: #2F3850;
 }
 
-.c41 {
+.c40 {
   font-family: DM Sans;
   font-size: 13px;
   line-height: 130%;
@@ -234,14 +234,14 @@ exports[`<SettingsPanel /> Should render and match the snapshot 1`] = `
   color: #2F3850;
 }
 
-.c50 {
+.c49 {
   font-family: DM Sans;
   font-size: 13px;
   line-height: 130%;
   color: #2F3850;
 }
 
-.c33 {
+.c32 {
   font-family: DM Sans;
   font-size: 13px;
   line-height: 130%;
@@ -267,7 +267,6 @@ exports[`<SettingsPanel /> Should render and match the snapshot 1`] = `
   display: -webkit-flex;
   display: -ms-flexbox;
   display: flex;
-  margin-bottom: 48px;
   -webkit-align-content: center;
   -ms-flex-line-pack: center;
   align-content: center;
@@ -283,6 +282,7 @@ exports[`<SettingsPanel /> Should render and match the snapshot 1`] = `
   height: auto;
   display: block;
   border-radius: 5px;
+  margin-top: 48px;
   margin-bottom: 25px;
   color: unset;
 }
@@ -320,16 +320,7 @@ exports[`<SettingsPanel /> Should render and match the snapshot 1`] = `
   color: unset;
 }
 
-.c30 {
-  width: auto;
-  height: auto;
-  display: block;
-  border-radius: 5px;
-  margin-top: 40px;
-  color: unset;
-}
-
-.c34 {
+.c33 {
   width: auto;
   height: auto;
   display: block;
@@ -339,7 +330,7 @@ exports[`<SettingsPanel /> Should render and match the snapshot 1`] = `
   color: unset;
 }
 
-.c35 {
+.c34 {
   width: auto;
   height: auto;
   display: block;
@@ -359,7 +350,7 @@ exports[`<SettingsPanel /> Should render and match the snapshot 1`] = `
   color: unset;
 }
 
-.c36 {
+.c35 {
   width: auto;
   height: auto;
   display: block;
@@ -371,11 +362,11 @@ exports[`<SettingsPanel /> Should render and match the snapshot 1`] = `
   cursor: pointer;
 }
 
-.c36:hover {
+.c35:hover {
   background-color: #E9F1FB;
 }
 
-.c39 {
+.c38 {
   width: auto;
   height: auto;
   display: block;
@@ -386,7 +377,7 @@ exports[`<SettingsPanel /> Should render and match the snapshot 1`] = `
   color: unset;
 }
 
-.c44 {
+.c43 {
   width: auto;
   height: auto;
   display: block;
@@ -400,7 +391,7 @@ exports[`<SettingsPanel /> Should render and match the snapshot 1`] = `
   color: unset;
 }
 
-.c32 {
+.c31 {
   width: auto;
   height: auto;
   display: block;
@@ -416,7 +407,7 @@ exports[`<SettingsPanel /> Should render and match the snapshot 1`] = `
   color: unset;
 }
 
-.c47 {
+.c46 {
   margin: 0;
   font-family: DM Sans;
   font-size: 15px;
@@ -429,7 +420,7 @@ exports[`<SettingsPanel /> Should render and match the snapshot 1`] = `
   text-decoration: underline;
 }
 
-.c48 {
+.c47 {
   margin: 0;
   font-family: DM Sans;
   font-size: 15px;
@@ -454,7 +445,7 @@ exports[`<SettingsPanel /> Should render and match the snapshot 1`] = `
   color: #2F3850;
 }
 
-.c40 {
+.c39 {
   margin: 0;
   font-family: DM Sans;
   font-size: 18px;
@@ -463,7 +454,7 @@ exports[`<SettingsPanel /> Should render and match the snapshot 1`] = `
   color: #2F3850;
 }
 
-.c38 {
+.c37 {
   width: 100%;
   min-height: -webkit-max-content;
   min-height: -moz-max-content;
@@ -471,27 +462,27 @@ exports[`<SettingsPanel /> Should render and match the snapshot 1`] = `
   border: 1px solid transparent;
 }
 
-.c38 .ql-editor {
+.c37 .ql-editor {
   font-weight: 400;
   padding: 10px;
   overflow: visible;
 }
 
-.c38 .ql-editor.ql-blank::before {
+.c37 .ql-editor.ql-blank::before {
   left: 11px;
 }
 
-.c38 .ql-picker-label svg {
+.c37 .ql-picker-label svg {
   margin-bottom: 15px !important;
 }
 
-.c38 .ql-toolbar {
+.c37 .ql-toolbar {
   width: -webkit-max-content;
   width: -moz-max-content;
   width: max-content;
 }
 
-.c38 .ql-container {
+.c37 .ql-container {
   font-size: initial;
   font-family: DM Sans;
 }
@@ -579,7 +570,7 @@ exports[`<SettingsPanel /> Should render and match the snapshot 1`] = `
   margin-right: 5px;
 }
 
-.c42 {
+.c41 {
   border-radius: 5px;
   border: 1px dashed #2F3850;
   background-color: rgba(233,241,251,1);
@@ -886,9 +877,6 @@ exports[`<SettingsPanel /> Should render and match the snapshot 1`] = `
           </div>
         </div>
         <div
-          class="c30"
-        />
-        <div
           class="c16"
         >
           <div
@@ -928,7 +916,7 @@ exports[`<SettingsPanel /> Should render and match the snapshot 1`] = `
                   class="c1 c27"
                 >
                   <p
-                    class="c31"
+                    class="c30"
                     font-size="15"
                     font-weight="bold"
                   >
@@ -1015,19 +1003,19 @@ exports[`<SettingsPanel /> Should render and match the snapshot 1`] = `
           class="c0"
         >
           <div
-            class="c32"
+            class="c31"
             height="100%"
             width="100%"
           >
             <p
-              class="c31"
+              class="c30"
               font-size="15"
               font-weight="bold"
             >
               Anyone with the link
             </p>
             <p
-              class="c33"
+              class="c32"
               font-size="15"
             >
               <b>
@@ -1046,10 +1034,10 @@ exports[`<SettingsPanel /> Should render and match the snapshot 1`] = `
           </div>
         </div>
         <div
-          class="c34"
+          class="c33"
         >
           <div
-            class="c35"
+            class="c34"
             display="flex"
           >
             <h2
@@ -1062,17 +1050,17 @@ exports[`<SettingsPanel /> Should render and match the snapshot 1`] = `
           </div>
         </div>
         <div
-          class="c36"
+          class="c35"
         >
           <div
-            class="c37"
+            class="c36"
             width="100%"
           >
             <div
               class="c0"
             >
               <div
-                class="quill c38"
+                class="quill c37"
               >
                 <div
                   class="ql-container ql-bubble ql-disabled"
@@ -2464,34 +2452,34 @@ exports[`<SettingsPanel /> Should render and match the snapshot 1`] = `
       </div>
     </div>
     <div
-      class="c39 c2"
+      class="c38 c2"
     >
       <div
         class="c0"
       >
         <h2
-          class="c40"
+          class="c39"
         >
           Put logo
         </h2>
         <p
-          class="c41"
+          class="c40"
         >
           If no image is provided, no logo will be displayed.
         </p>
         <div
-          class="c42"
+          class="c41"
           style="position: relative; pointer-events: all;"
           width="100%"
         >
           <div
-            class="c43"
+            class="c42"
             display="flex"
             height="100%"
             width="100%"
           >
             <div
-              class="c44"
+              class="c43"
               disabled=""
               height="100%"
               opacity="0.5"
@@ -2499,7 +2487,7 @@ exports[`<SettingsPanel /> Should render and match the snapshot 1`] = `
             />
           </div>
           <div
-            class="c45"
+            class="c44"
             display="flex"
           >
             <input
@@ -2515,10 +2503,10 @@ exports[`<SettingsPanel /> Should render and match the snapshot 1`] = `
               src="IMAGE_MOCK"
             />
             <div
-              class="c46"
+              class="c45"
             >
               <h3
-                class="c47"
+                class="c46"
                 color="#B727EA"
                 cursor="pointer"
                 text-decoration="underline"
@@ -2526,16 +2514,16 @@ exports[`<SettingsPanel /> Should render and match the snapshot 1`] = `
                 Upload
               </h3>
               <h3
-                class="c48"
+                class="c47"
               >
                  or drop an image right here
               </h3>
             </div>
             <div
-              class="c49"
+              class="c48"
             >
               <p
-                class="c50"
+                class="c49"
               >
                 It works for JPG, PNG formats, max size 5MB
               </p>
