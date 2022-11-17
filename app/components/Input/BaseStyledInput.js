@@ -35,7 +35,7 @@ export const BaseStyledInput = ({
             )}px`
           : props.width
       }
-      px={undefined}
+      px={props.px ?? undefined}
       pl={0}
       pr={props.sufix && value ? sufixLenght : 0}
     />
@@ -57,6 +57,7 @@ BaseStyledInput.propTypes = {
   width: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
   transparent: PropTypes.bool,
   sufix: PropTypes.string,
+  px: PropTypes.number,
 };
 
 export default memo(BaseStyledInput);

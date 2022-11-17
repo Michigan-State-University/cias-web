@@ -22,15 +22,17 @@ const VisualAnalogueScaleQuestionLayout = ({
   endValue,
   answerValue,
   showNumber,
+  rangeStart,
+  rangeEnd,
 }) => {
   const [params, containerRef] = useContainerQuery(QUERY);
 
   const labels = {
-    0: {
+    [rangeStart]: {
       label: <>{startValue}</>,
       style: visualAnalogScaleLabelStyles,
     },
-    100: {
+    [rangeEnd]: {
       label: <>{endValue}</>,
       style: visualAnalogScaleLabelStyles,
     },
@@ -42,6 +44,8 @@ const VisualAnalogueScaleQuestionLayout = ({
         <Row>
           <Box ref={containerRef} width="100%" px={21} py={14}>
             <VisualAnalogueSlider
+              min={rangeStart}
+              max={rangeEnd}
               step={1}
               onChange={onChange}
               value={answerValue}
@@ -65,6 +69,8 @@ VisualAnalogueScaleQuestionLayout.propTypes = {
   endValue: PropTypes.oneOfType([PropTypes.number, PropTypes.string]),
   answerValue: PropTypes.number,
   showNumber: PropTypes.bool,
+  rangeStart: PropTypes.number,
+  rangeEnd: PropTypes.number,
 };
 
 VisualAnalogueScaleQuestionLayout.defaultProps = {
