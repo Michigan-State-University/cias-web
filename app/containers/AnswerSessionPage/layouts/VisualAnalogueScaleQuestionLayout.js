@@ -68,9 +68,9 @@ VisualAnalogueScaleQuestionLayout.propTypes = {
   startValue: PropTypes.oneOfType([PropTypes.number, PropTypes.string]),
   endValue: PropTypes.oneOfType([PropTypes.number, PropTypes.string]),
   answerValue: PropTypes.number,
-  showNumber: PropTypes.bool,
   rangeStart: PropTypes.number,
   rangeEnd: PropTypes.number,
+  showNumber: PropTypes.bool,
 };
 
 VisualAnalogueScaleQuestionLayout.defaultProps = {
