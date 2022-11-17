@@ -38,9 +38,10 @@ function* registerFromInvitation({ payload }) {
     const userStorageController = new UserStorageController(email);
     userStorageController.setVerificationCode(verificationCode);
 
+    yield put(registerFromInvitationSuccess());
+
     yield put(logIn(mappedUser));
     yield put(loginSuccess());
-    yield put(registerFromInvitationSuccess());
 
     yield call(
       toast.success,
