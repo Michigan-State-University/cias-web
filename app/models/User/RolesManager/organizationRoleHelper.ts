@@ -1,4 +1,6 @@
 import camelCase from 'lodash/camelCase';
+import isEmpty from 'lodash/isEmpty';
+import find from 'lodash/find';
 import { Roles } from './UserRoles';
 
 const RoleToEntityUrlMap = {
@@ -14,6 +16,13 @@ const RoleToInviteUrlMap = {
   [Roles.OrganizationAdmin]: 'invite_organization_admin',
   [Roles.HealthSystemAdmin]: 'invite_health_system_admin',
   [Roles.ClinicAdmin]: 'invite_health_clinic_admin',
+};
+
+export const getMainUserRole = (userRoles: Roles[]) => {
+  if (isEmpty(userRoles)) return undefined;
+  if (userRoles.length === 1 || !userRoles.includes(Roles.Researcher))
+    return userRoles[0];
+  return find(userRoles, (role) => role !== Roles.Researcher);
 };
 
 export const mapRoleToInviteEndpoint = (
