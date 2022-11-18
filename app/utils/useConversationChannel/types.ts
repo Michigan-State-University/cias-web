@@ -43,8 +43,12 @@ export type NavigatorUnavailableErrorData = SocketErrorMessageData;
 
 export type ConversationArchivedData = {
   conversationId: string;
+  archivedAt: string;
 };
-export type ArchiveConversationData = ConversationArchivedData;
+
+export type ArchiveConversationData = {
+  conversationId: string;
+};
 
 export type FetchLiveChatSetupData = {
   interventionId: string;

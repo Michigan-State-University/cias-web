@@ -1,6 +1,7 @@
 import React from 'react';
 import { useIntl } from 'react-intl';
 import { useDispatch, useSelector } from 'react-redux';
+import dayjs from 'dayjs';
 
 import ArchiveIcon from 'assets/svg/archive2.svg';
 import DownloadIcon from 'assets/svg/download-icon.svg';
@@ -67,6 +68,13 @@ const MessageSectionHeader = ({ onArchiveConversation }: Props) => {
     },
   });
 
+  const { archivedAt, transcript } = conversation ?? {};
+
+  const canGenerateTranscript =
+    !archivedAt ||
+    !transcript ||
+    dayjs(transcript.createdAt).isBefore(archivedAt);
+
   const generateTranscript = () => {
     if (conversation) {
       dispatch(generateConversationTranscriptRequest(conversation.id));
@@ -80,13 +88,13 @@ const MessageSectionHeader = ({ onArchiveConversation }: Props) => {
         {conversation && (
           <Row align="center" gap={24}>
             <FileDownload
-              url={getFileUrl(conversation.transcript?.url ?? '')}
-              disabled={!conversation.transcript}
+              url={getFileUrl(transcript?.url ?? '')}
+              disabled={!transcript}
               {...topFunctionButtonProps}
             >
               <TextButton
                 buttonProps={topFunctionButtonProps}
-                disabled={!conversation.transcript}
+                disabled={!transcript}
               >
                 <Icon
                   src={DownloadIcon}
@@ -98,7 +106,7 @@ const MessageSectionHeader = ({ onArchiveConversation }: Props) => {
             <TextButton
               buttonProps={topFunctionButtonProps}
               onClick={generateTranscript}
-              disabled={conversation.transcript && conversation.archived}
+              disabled={!canGenerateTranscript}
             >
               <Icon
                 alt={formatMessage(i18nMessages.generateTranscriptIconAlt)}
@@ -106,7 +114,7 @@ const MessageSectionHeader = ({ onArchiveConversation }: Props) => {
               />
               <Text>{formatMessage(i18nMessages.generateTranscript)}</Text>
             </TextButton>
-            {!conversation.archived && onArchiveConversation && (
+            {!archivedAt && onArchiveConversation && (
               <TextButton
                 loading={archivingConversation}
                 onClick={openArchiveConfirmationModal}

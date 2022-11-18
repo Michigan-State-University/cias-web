@@ -58,7 +58,7 @@ const ConversationChatDialog = ({
   const openedConversationId = useSelector(makeSelectOpenedConversationId());
 
   const isConversationOpened = Boolean(openedConversationId);
-  const isConversationArchived = conversation?.archived;
+  const isConversationArchived = !!conversation?.archivedAt;
 
   const isChatUnavailable =
     isConversationOpened &&

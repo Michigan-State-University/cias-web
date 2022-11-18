@@ -22,7 +22,7 @@ export const InterlocutorHeader = () => {
   if (!conversation) return null;
 
   const liveChatInterlocutors = conversation?.liveChatInterlocutors;
-  const isArchived = conversation?.archived;
+  const isArchived = !!conversation?.archivedAt;
 
   const otherInterlocutor =
     liveChatInterlocutors &&

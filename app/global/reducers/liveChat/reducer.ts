@@ -230,12 +230,12 @@ export const liveChatReducer = (
       }
       case getType(onConversationArchivedReceive): {
         // find conversation to archive
-        const { conversationId } = payload;
+        const { conversationId, archivedAt } = payload;
         const conversation = draft.activeConversations[conversationId];
         if (!conversation) break;
 
         // mark conversation as archive and move to archived conversations
-        conversation.archived = true;
+        conversation.archivedAt = archivedAt;
         draft.archivedConversations[conversationId] = conversation;
         delete draft.activeConversations[conversationId];
 

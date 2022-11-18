@@ -120,7 +120,7 @@ export const MessagesSectionBody = ({
             value={message}
             onChange={setMessage}
             onSend={handleSend}
-            disabled={conversation.archived || archivingConversation}
+            disabled={!!conversation.archivedAt || archivingConversation}
           />
         </MessagesSectionContainer>
       )}

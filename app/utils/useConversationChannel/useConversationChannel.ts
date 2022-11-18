@@ -113,8 +113,9 @@ export const useConversationChannel = (interventionId?: string) => {
 
   const onConversationArchived = ({
     conversationId,
+    archivedAt,
   }: ConversationArchivedData) => {
-    dispatch(onConversationArchivedReceive(conversationId));
+    dispatch(onConversationArchivedReceive(conversationId, archivedAt));
     dispatch(setArchivingConversation(false));
     // close conversation for navigator
     if (!interventionId) {

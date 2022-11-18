@@ -175,7 +175,8 @@ export const setArchivingConversation = createAction(
 
 export const onConversationArchivedReceive = createAction(
   ON_CONVERSATION_ARCHIVED_RECEIVE,
-  (action) => (conversationId: string) => action({ conversationId }),
+  (action) => (conversationId: string, archivedAt: string) =>
+    action({ conversationId, archivedAt }),
 );
 
 export const onLiveChatSetupFetchedReceive = createAction(
