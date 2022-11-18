@@ -11,7 +11,7 @@ export const scope = 'app.components.ConversationInfoBox';
 export default defineMessages({
   me: {
     id: `${scope}.me`,
-    defaultMessage: 'Me: ',
+    defaultMessage: 'Me: {messageContent}',
   },
   archived: {
     id: `${scope}.archived`,

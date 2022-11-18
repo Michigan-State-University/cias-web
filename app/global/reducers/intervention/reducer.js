@@ -82,6 +82,7 @@ import {
   GENERATE_CONVERSATIONS_TRANSCRIPT_REQUEST,
   GENERATE_CONVERSATIONS_TRANSCRIPT_SUCCESS,
   GENERATE_CONVERSATIONS_TRANSCRIPT_ERROR,
+  UPDATE_INTERVENTION_CONVERSATIONS_TRANSCRIPT,
 } from './constants';
 
 export const initialState = {
@@ -523,6 +524,13 @@ export const interventionReducer = (state = initialState, action) =>
       case GENERATE_CONVERSATIONS_TRANSCRIPT_ERROR:
         draft.loaders.generateConversationsTranscript = false;
         draft.errors.generateConversationsTranscript = action.payload.error;
+        break;
+
+      case UPDATE_INTERVENTION_CONVERSATIONS_TRANSCRIPT:
+        if (draft.intervention) {
+          draft.intervention.conversationsTranscript =
+            action.payload.transcript;
+        }
         break;
     }
   });

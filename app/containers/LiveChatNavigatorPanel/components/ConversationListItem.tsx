@@ -44,14 +44,15 @@ export const ConversationListItem = ({
 
   return (
     <ConversationInfoBox
-      highlighted={opened}
+      id={conversationId}
+      active={opened}
+      highlighted={markUnread}
       archived={archived}
-      unread={markUnread}
-      messageCreatedAt={createdAt}
+      time={createdAt}
+      timeFormatLocale={CustomDayjsLocale.EN_SHORT_RELATIVE_TIME}
       messageContent={content}
       messageSentByCurrentUser={lastMessageSentByCurrentUser}
       interlocutorData={otherInterlocutor}
-      timeFormatLocale={CustomDayjsLocale.EN_SHORT_RELATIVE_TIME}
       onClick={handleClick}
     />
   );

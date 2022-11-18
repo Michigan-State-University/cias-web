@@ -4,13 +4,14 @@ import isNil from 'lodash/isNil';
 
 import { colors } from 'theme';
 
+import { NotificationsActionsContext } from 'utils/useNotificationChannel';
+
 import Text from 'components/Text';
 import Divider from 'components/Divider';
 import Column from 'components/Column';
 import Button from 'components/Button';
 import { BoxRadio } from 'components/Radio';
 import { ModalProps } from 'components/Modal';
-import { NotificationsActionsContext } from 'containers/NotificationsActionsProvider';
 
 import messages from './messages';
 

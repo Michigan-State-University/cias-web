@@ -71,6 +71,7 @@ import {
   GENERATE_CONVERSATIONS_TRANSCRIPT_REQUEST,
   GENERATE_CONVERSATIONS_TRANSCRIPT_SUCCESS,
   GENERATE_CONVERSATIONS_TRANSCRIPT_ERROR,
+  UPDATE_INTERVENTION_CONVERSATIONS_TRANSCRIPT,
 } from './constants';
 
 export const fetchInterventionRequest = (id) =>
@@ -275,3 +276,6 @@ export const generateConversationsTranscriptSuccess = () =>
   actionBuilder(GENERATE_CONVERSATIONS_TRANSCRIPT_SUCCESS, {});
 export const generateConversationsTranscriptError = (error) =>
   actionBuilder(GENERATE_CONVERSATIONS_TRANSCRIPT_ERROR, { error });
+
+export const updateInterventionConversationsTranscript = (transcript) =>
+  actionBuilder(UPDATE_INTERVENTION_CONVERSATIONS_TRANSCRIPT, { transcript });

@@ -6,6 +6,7 @@ import {
   Message,
 } from 'models/LiveChat';
 import { ApiError } from 'models/Api';
+import { AppFile } from 'models/File';
 
 import {
   LiveChatSetup,
@@ -45,6 +46,7 @@ import {
   SET_CALL_OUT_NAVIGATOR_UNLOCK_TIME,
   SET_CANCELLING_CALL_OUT,
   SET_WAITING_FOR_NAVIGATOR,
+  UPDATE_CONVERSATION_TRANSCRIPT,
 } from './constants';
 
 export const openConversation = createAction(
@@ -234,4 +236,11 @@ export const setWaitingForNavigator = createAction(
 export const setCancellingCallOut = createAction(
   SET_CANCELLING_CALL_OUT,
   (action) => (cancellingCallOut: boolean) => action({ cancellingCallOut }),
+);
+
+export const updateConversationTranscript = createAction(
+  UPDATE_CONVERSATION_TRANSCRIPT,
+  (action) =>
+    (conversationId: string, archived: boolean, transcript: AppFile) =>
+      action({ conversationId, archived, transcript }),
 );

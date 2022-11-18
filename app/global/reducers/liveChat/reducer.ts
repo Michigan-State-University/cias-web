@@ -38,6 +38,7 @@ import {
   setCallOutNavigatorUnlockTime,
   setCancellingCallOut,
   setWaitingForNavigator,
+  updateConversationTranscript,
 } from './actions';
 import { LiveChatAction, LiveChatState } from './types';
 
@@ -322,6 +323,16 @@ export const liveChatReducer = (
       case getType(setCancellingCallOut): {
         draft.cancellingCallOut = payload.cancellingCallOut;
         break;
+      }
+      case getType(updateConversationTranscript): {
+        const { conversationId, archived, transcript } = payload;
+        const conversation = archived
+          ? draft.archivedConversations[conversationId]
+          : draft.activeConversations[conversationId];
+
+        if (conversation) {
+          conversation.transcript = transcript;
+        }
       }
     }
   });

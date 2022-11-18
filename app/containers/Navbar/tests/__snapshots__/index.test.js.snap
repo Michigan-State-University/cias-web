@@ -1,16 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`<Navbar /> Should render and match the snapshot with session path 1`] = `
-.c4 {
-  width: auto;
-  height: auto;
-  display: block;
-  border-radius: 5px;
-  cursor: pointer;
-  color: unset;
-  cursor: pointer;
-}
-
 .c3 {
   width: 30px;
   height: 30px;
@@ -34,6 +24,16 @@ exports[`<Navbar /> Should render and match the snapshot with session path 1`] =
   width: 30px;
   height: 30px;
   color: rgba(255,255,255,1);
+}
+
+.c4 {
+  width: auto;
+  height: auto;
+  display: block;
+  border-radius: 5px;
+  cursor: pointer;
+  color: unset;
+  cursor: pointer;
 }
 
 .c0 {
@@ -135,16 +135,6 @@ exports[`<Navbar /> Should render and match the snapshot with session path 1`] =
 `;
 
 exports[`<Navbar /> Should render and match the snapshot withou matching path 1`] = `
-.c4 {
-  width: auto;
-  height: auto;
-  display: block;
-  border-radius: 5px;
-  cursor: pointer;
-  color: unset;
-  cursor: pointer;
-}
-
 .c3 {
   width: 30px;
   height: 30px;
@@ -168,6 +158,16 @@ exports[`<Navbar /> Should render and match the snapshot withou matching path 1`
   width: 30px;
   height: 30px;
   color: rgba(255,255,255,1);
+}
+
+.c4 {
+  width: auto;
+  height: auto;
+  display: block;
+  border-radius: 5px;
+  cursor: pointer;
+  color: unset;
+  cursor: pointer;
 }
 
 .c0 {

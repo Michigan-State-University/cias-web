@@ -6,7 +6,7 @@ import { useRoleManager } from 'models/User/RolesManager';
 
 import { makeSelectNavigatorAvailability } from 'global/reducers/notifications';
 
-import { NotificationsActionsContext } from 'containers/NotificationsActionsProvider';
+import { NotificationsActionsContext } from 'utils/useNotificationChannel';
 import { LabelPosition, Switch } from 'components/Switch';
 import Divider, { Orientation } from 'components/Divider';
 import Row from 'components/Row';
