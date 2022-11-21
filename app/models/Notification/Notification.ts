@@ -1,5 +1,7 @@
 import { NotificationEvent } from './NotificationEvent';
 import {
+  ConversationTranscriptReadyNotificationData,
+  InterventionConversationsTranscriptReadyNotificationData,
   NewConversationNotificationData,
   NotificationData,
 } from './NotificationData';
@@ -22,5 +24,19 @@ export type NewConversationNotification = GenericNotification<
   NewConversationNotificationData
 >;
 
+export type ConversationTranscriptReadyNotification = GenericNotification<
+  NotificationEvent.CONVERSATION_TRANSCRIPT_READY,
+  ConversationTranscriptReadyNotificationData
+>;
+
+export type InterventionConversationsTranscriptReadyNotification =
+  GenericNotification<
+    NotificationEvent.INTERVENTION_CONVERSATIONS_TRANSCRIPT_READY,
+    InterventionConversationsTranscriptReadyNotificationData
+  >;
+
 // Union type
-export type Notification = NewConversationNotification;
+export type Notification =
+  | NewConversationNotification
+  | ConversationTranscriptReadyNotification
+  | InterventionConversationsTranscriptReadyNotification;

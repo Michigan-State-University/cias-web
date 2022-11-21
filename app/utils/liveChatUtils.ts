@@ -1,14 +1,23 @@
+import globalMessages from 'global/i18n/globalMessages';
 import { InterlocutorNameData } from 'models/LiveChat';
+import { Roles } from 'models/User/RolesManager';
+import { formatMessage } from './intlOutsideReact';
 
 export const formatInterlocutorName = (
   interlocutorNameData: Nullable<InterlocutorNameData>,
+  isNavigatorView?: boolean,
+  shortName?: string,
 ) => {
   if (!interlocutorNameData) return '?';
 
-  const { firstName, lastName, userId } = interlocutorNameData;
-  const formattedName = `${firstName ?? ''} ${lastName ?? ''}`.trim();
+  if (shortName && isNavigatorView) return shortName;
 
-  if (formattedName.length === 0) return `ID: ${userId}`;
-
-  return formattedName;
+  const { userId, firstName } = interlocutorNameData;
+  if (isNavigatorView) {
+    return `${formatMessage(
+      // @ts-ignore
+      globalMessages.roles[Roles.Participant],
+    )} ID: ${userId.substring(0, 8)}...`;
+  }
+  return firstName;
 };

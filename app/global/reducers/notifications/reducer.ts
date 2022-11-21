@@ -10,6 +10,7 @@ import {
   markNotificationReadLocally,
   onNewNotificationReceive,
   onUnreadNotificationsFetchedReceive,
+  setNavigatorAvailabilityLocally,
   setNotificationsListVisible,
 } from './actions';
 
@@ -18,6 +19,7 @@ export const notificationsReducerKey = 'notifications';
 export const initialState: NotificationsState = {
   notificationsListVisible: false,
   notifications: [],
+  navigatorAvailability: null,
 };
 
 /* eslint-disable default-case, no-param-reassign */
@@ -45,6 +47,11 @@ export const notificationsReducer: Reducer<
       case getType(markNotificationReadLocally): {
         const { notificationId } = payload;
         deleteItemById(draft.notifications, notificationId);
+        break;
+      }
+      case getType(setNavigatorAvailabilityLocally): {
+        const { online } = payload;
+        draft.navigatorAvailability = online;
         break;
       }
     }

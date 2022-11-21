@@ -7,6 +7,7 @@ import produce from 'immer';
 import { I_PHONE_8_PLUS_MODE } from 'utils/previewMode';
 
 import {
+  RESET_REDUCER,
   SUBMIT_ANSWER_ERROR,
   SUBMIT_ANSWER_REQUEST,
   SUBMIT_ANSWER_SUCCESS,
@@ -65,6 +66,10 @@ export const initialState = {
 const AnswerSessionPageReducer = (state = initialState, { payload, type }) =>
   produce(state, (draft) => {
     switch (type) {
+      case RESET_REDUCER:
+        Object.assign(draft, initialState);
+        break;
+
       case SELECT_ANSWER:
         draft.answers[payload.id] = payload;
         break;

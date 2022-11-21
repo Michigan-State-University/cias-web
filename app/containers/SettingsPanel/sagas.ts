@@ -7,6 +7,7 @@ import {
   addInterventionAttachmentsSaga,
   deleteInterventionAttachmentSaga,
 } from 'global/reducers/intervention';
+import { WithSaga } from 'global/reducers/types';
 
 function* interventionSettingPageSaga() {
   yield all([
@@ -23,5 +24,10 @@ function* accessGiverContainerSaga() {
     revokeUserAccessSaga(),
   ]);
 }
+
+export const withInterventionSettingsPageSagas: WithSaga = {
+  key: 'interventionSettingPage',
+  saga: interventionSettingPageSaga,
+};
 
 export { interventionSettingPageSaga, accessGiverContainerSaga };

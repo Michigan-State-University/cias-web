@@ -49,8 +49,9 @@ const AddedNavigatorPanel = ({
             key={id}
             minHeight={SINGLE_ITEM_HEIGHT}
             mt={index === 0 ? 0 : ITEM_MARGIN}
+            gap={16}
           >
-            <Row align="center">
+            <Row align="center" filled>
               <Box flexShrink={0}>
                 <UserAvatar
                   height={32}
@@ -60,7 +61,7 @@ const AddedNavigatorPanel = ({
                   lastName={lastName}
                 />
               </Box>
-              <Box ml={8}>
+              <Box ml={8} filled>
                 <Text fontWeight="bold">{`${firstName} ${lastName}`}</Text>
                 <EllipsisText text={email} lines={1} />
               </Box>

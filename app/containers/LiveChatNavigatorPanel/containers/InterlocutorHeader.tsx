@@ -2,7 +2,6 @@ import React from 'react';
 import { useSelector } from 'react-redux';
 import { FormattedMessage } from 'react-intl';
 
-import ChatAvatar from 'components/ChatAvatar';
 import Text, { EllipsisText } from 'components/Text';
 import Row from 'components/Row';
 import Column from 'components/Column';
@@ -23,7 +22,7 @@ export const InterlocutorHeader = () => {
   if (!conversation) return null;
 
   const liveChatInterlocutors = conversation?.liveChatInterlocutors;
-  const isArchived = conversation?.archived;
+  const isArchived = !!conversation?.archivedAt;
 
   const otherInterlocutor =
     liveChatInterlocutors &&
@@ -39,23 +38,25 @@ export const InterlocutorHeader = () => {
       align="center"
       borderLeft={`1px solid ${themeColors.highlight}`}
     >
-      <Column flexShrink={0} width="auto">
-        <ChatAvatar interlocutorAvatarData={otherInterlocutor} />
-      </Column>
       <Column ml={16} flex={1} minWidth="0">
-        <Box display="flex" align="center">
-          <Text fontWeight="bold" fontSize={16}>
-            {formatInterlocutorName(otherInterlocutor)}
-          </Text>
+        <Box display="flex" align="center" textAlign="left">
+          <EllipsisText
+            fontSize={16}
+            fontWeight="bold"
+            color={colors.bluewood}
+            text={formatInterlocutorName(otherInterlocutor, true)}
+          />
           {isArchived && (
-            <Text
-              ml={16}
-              color={colors.vermilion}
-              as="span"
-              fontWeight="medium"
-            >
-              <FormattedMessage {...messages.archived} />
-            </Text>
+            <Box flexShrink={0}>
+              <Text
+                ml={16}
+                color={colors.vermilion}
+                as="span"
+                fontWeight="medium"
+              >
+                <FormattedMessage {...messages.archived} />
+              </Text>
+            </Box>
           )}
         </Box>
         {currentScreenTitle && (

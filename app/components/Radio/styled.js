@@ -32,8 +32,8 @@ export const StyledLabel = styled.label`
 `;
 
 export const LabelContent = styled(Box)`
-  ${({ $labelPosition }) =>
+  ${({ $labelPosition, $labelOffset }) =>
     $labelPosition === LabelPosition.Left
-      ? `margin-right: 5px`
-      : `margin-left: 5px`};
+      ? `margin-right: ${$labelOffset ?? 5}px`
+      : `margin-left: ${$labelOffset ?? 5}px`};
 `;

@@ -22,4 +22,5 @@ export enum ZIndex {
   EDIT_SESSION_QUESTIONS_ROW = 2,
   QUICK_EXIT = 1001,
   CHAT_WIDGET = 11,
+  TOOLTIP = 9999,
 }

@@ -1,5 +1,7 @@
 import { all } from 'redux-saga/effects';
 
+import { WithSaga } from 'global/reducers/types';
+
 import fetchNavigatorSetup from './fetchNavigatorSetup';
 import updateNoNavigatorsTab from './updateNoNavigatorsTab';
 import addParticipantLink from './addParticipantLink';
@@ -41,3 +43,8 @@ export function* allNavigatorSetupSagas() {
     removeFilledScriptTemplate(),
   ]);
 }
+
+export const withAllNavigatorSetupsSagas: WithSaga = {
+  key: 'allNavigatorSetupSagas',
+  saga: allNavigatorSetupSagas,
+};

@@ -2,6 +2,7 @@ import produce from 'immer';
 import { getType } from 'typesafe-actions';
 
 import { deleteItemById, updateItemById } from 'utils/reduxUtils';
+import { WithReducer } from '../types';
 
 import {
   fetchNavigatorSetupError,
@@ -403,3 +404,8 @@ export const navigatorSetupReducer = (
       }
     }
   });
+
+export const withNavigatorSetupReducer: WithReducer = {
+  key: navigatorSetupReducerKey,
+  reducer: navigatorSetupReducer,
+};

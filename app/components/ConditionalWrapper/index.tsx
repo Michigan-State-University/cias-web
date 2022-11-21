@@ -1,23 +1,25 @@
 import {
   createElement,
-  FunctionComponent,
-  ComponentClass,
   ReactElement,
+  JSXElementConstructor,
+  ComponentProps,
 } from 'react';
 
-type Props = {
-  if?: boolean;
-  with: string | FunctionComponent<any> | ComponentClass<any, any>;
-  wrapperProps: object;
+type Component = keyof JSX.IntrinsicElements | JSXElementConstructor<any>;
+
+type Props<T extends Component> = {
+  if: Nullable<boolean>;
+  with: T;
+  wrapperProps: ComponentProps<T>;
   children: ReactElement;
 };
 
-const ConditionalWrapper = ({
+const ConditionalWrapper = <T extends Component>({
   if: condition,
   with: wrapper,
   wrapperProps,
   children,
-}: Props) =>
+}: Props<T>) =>
   condition ? createElement(wrapper, wrapperProps, [children]) : children;
 
 export default ConditionalWrapper;

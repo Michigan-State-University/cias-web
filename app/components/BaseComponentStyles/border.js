@@ -8,6 +8,8 @@ const border = (props) => ({
   border: props.border ?? '',
   borderRadius: props.borderRadius ?? '',
   borderColor: props.borderColor ?? '',
+  borderStyle: props.borderStyle ?? '',
+  borderWidth: props.borderWidth ?? '',
 });
 
 border.propTypes = {
@@ -18,6 +20,8 @@ border.propTypes = {
   border: PropTypes.string,
   borderRadius: PropTypes.string,
   borderColor: PropTypes.string,
+  borderStyle: PropTypes.string,
+  borderWidth: PropTypes.string,
 };
 
 export { border };

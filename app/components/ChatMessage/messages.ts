@@ -12,8 +12,8 @@ export default defineMessages({
     id: `${scope}.read`,
     defaultMessage: 'Read',
   },
-  you: {
-    id: `${scope}.you`,
-    defaultMessage: 'You',
+  me: {
+    id: `${scope}.me`,
+    defaultMessage: 'Me',
   },
 });
