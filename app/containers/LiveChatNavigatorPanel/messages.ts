@@ -29,9 +29,9 @@ export default defineMessages({
     id: `${scope}.startConversation`,
     defaultMessage: 'Start or open a conversation',
   },
-  you: {
-    id: `${scope}.you`,
-    defaultMessage: 'You: ',
+  me: {
+    id: `${scope}.me`,
+    defaultMessage: 'Me: ',
   },
   createConversation: {
     id: `${scope}.createConversation`,

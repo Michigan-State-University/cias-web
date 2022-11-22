@@ -1,6 +1,12 @@
 import styled from 'styled-components';
 import { fontSizes, fontFamily, lineHeights, colors } from 'theme';
-import { margin, text, layout, style } from '../BaseComponentStyles';
+import {
+  margin,
+  text,
+  layout,
+  style,
+  positioning,
+} from '../BaseComponentStyles';
 
 const Text = styled.p.attrs((props) => ({
   onClick: props.disabled ? null : props.onClick,
@@ -12,6 +18,7 @@ const Text = styled.p.attrs((props) => ({
   ${text};
   ${layout};
   ${style};
+  ${positioning};
   ${({ disabled }) =>
     disabled && { color: colors.grey, cursor: 'not-allowed' }};
 `;

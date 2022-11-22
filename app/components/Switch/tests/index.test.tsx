@@ -7,6 +7,7 @@ describe('<Switch />', () => {
   const defaultProps: ComponentProps<typeof Switch> = {
     checked: false,
     onToggle: jest.fn(),
+    id: 'test',
   };
 
   it('Expect to not log errors in console', () => {

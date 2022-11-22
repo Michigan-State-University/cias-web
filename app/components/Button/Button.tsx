@@ -6,7 +6,7 @@ import Spinner from 'components/Spinner';
 
 import { StyledButton } from './StyledButton';
 
-type Props = {
+export type Props = {
   title?: string;
   loading?: boolean;
   inverted?: boolean;

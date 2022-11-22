@@ -43,6 +43,7 @@ exports[`<Dropdown /> should render on bottom and match the snapshot 1`] = `
   background-color: rgba(255,255,255,1);
   border-radius: 10px;
   box-shadow: 0px 0px 50px rgba(0,0,0,0.08);
+  border-radius: 10px;
 }
 
 .c3 {

@@ -14,7 +14,7 @@ import {
   EDIT_INTERVENTION_ERROR,
 } from '../constants';
 
-export function* editIntervention({ payload: { intervention } }) {
+export function* editIntervention({ payload: { intervention, extraOptions } }) {
   const requestURL = `v1/interventions/${intervention.id}`;
 
   try {
@@ -27,6 +27,9 @@ export function* editIntervention({ payload: { intervention } }) {
     );
     const mappedData = defaultMapper(data);
     yield put(editInterventionSuccess({ ...intervention, ...mappedData }));
+    if (extraOptions?.onSuccess) {
+      extraOptions.onSuccess();
+    }
   } catch (error) {
     const errorFlag = getErrorFlag(error);
     yield call(

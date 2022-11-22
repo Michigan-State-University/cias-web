@@ -13,4 +13,8 @@ export default defineMessages({
     id: `${scope}.noMessages`,
     defaultMessage: 'No messages yet',
   },
+  participant: {
+    id: `${scope}.participant`,
+    defaultMessage: 'Participant',
+  },
 });

@@ -37,6 +37,10 @@ export default defineMessages({
     id: `${scope}.conversationArchived`,
     defaultMessage: '- Navigator ended this conversation -',
   },
+  navigatorOffline: {
+    id: `${scope}.navigatorOffline`,
+    defaultMessage: '- Navigator became offline -',
+  },
   navigatorsBusy: {
     id: `${scope}.navigatorsBusy`,
     defaultMessage: 'Sorry, but all our navigators are busy at the moment.',
@@ -62,9 +66,18 @@ export default defineMessages({
     id: `${scope}.downloadInstructions`,
     defaultMessage: 'Download Resources:',
   },
-  navigatorUnavailable: {
-    id: `${scope}.navigatorUnavailable`,
-    defaultMessage: 'All navigators are unavailable',
+  callOutTheNavigator: {
+    id: `${scope}.callOutTheNavigator`,
+    defaultMessage: 'Call out the navigator',
+  },
+  callOutTheNavigatorModalContent: {
+    id: `${scope}.callOutTheNavigatorModalContent`,
+    defaultMessage:
+      'Are you sure you really need help? We will send a notification to the navigator who should join the conversation within <primaryColorBold>15 minutes</primaryColorBold>. If not, then neither of the navigators was able to do so.',
+  },
+  yesIReallyNeedHelp: {
+    id: `${scope}.yesIReallyNeedHelp`,
+    defaultMessage: 'Yes, I really need help',
   },
   hello: {
     id: `${scope}.hello`,
@@ -94,5 +107,22 @@ export default defineMessages({
   tlfb: {
     id: `${scope}.tlfb`,
     defaultMessage: 'TLFB',
+  },
+  connectWithAnotherNavigator: {
+    id: `${scope}.connectWithAnotherNavigator`,
+    defaultMessage: 'Connect with another navigator',
+  },
+  waitingForNavigator: {
+    id: `${scope}.waitingForNavigator`,
+    defaultMessage: 'Waiting for navigator',
+  },
+  notificationSent: {
+    id: `${scope}.notificationSent`,
+    defaultMessage:
+      'The notification has been sent to the navigator. We are waiting for the response...',
+  },
+  youJustCalledTheNavigator: {
+    id: `${scope}.youJustCalledTheNavigator`,
+    defaultMessage: `You've just called the navigator and canceled it. You should use this feature <bold>very carefully</bold>, so let's try <secondaryColorBold>{timeLeft}</secondaryColorBold>.`,
   },
 });

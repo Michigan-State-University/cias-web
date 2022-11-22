@@ -382,4 +382,8 @@ export default defineMessages({
     id: `${scope}.no`,
     defaultMessage: 'No',
   },
+  cancel: {
+    id: `${scope}.cancel`,
+    defaultMessage: 'Cancel',
+  },
 });

@@ -1,7 +1,7 @@
 import styled from 'styled-components';
 import ReactTooltip from 'react-tooltip';
 
-import { boxShadows } from 'theme';
+import { boxShadows, ZIndex } from 'theme';
 
 export const StyledTooltip = styled(ReactTooltip).attrs({
   suppressClassNameWarning: true,
@@ -15,6 +15,7 @@ export const StyledTooltip = styled(ReactTooltip).attrs({
 
   &.__react_component_tooltip {
     border-radius: 6px;
+    z-index: ${ZIndex.TOOLTIP};
 
     div {
       font-size: 12px;

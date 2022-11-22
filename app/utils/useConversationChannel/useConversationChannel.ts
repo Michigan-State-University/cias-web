@@ -26,6 +26,11 @@ import {
   withLiveChatReducer,
   closeConversation,
   onCurrentScreenTitleChanged,
+  setCurrentNavigatorUnavailable,
+  setCallOutNavigatorUnlockTime,
+  setCallingOutNavigator,
+  setCancellingCallOut,
+  setWaitingForNavigator,
 } from 'global/reducers/liveChat';
 import { makeSelectUserId } from 'global/reducers/auth';
 
@@ -43,12 +48,17 @@ import {
   ConversationChannelConnectionParams,
   LiveChatSetupFetchedData,
   ChangeScreenTitleData,
+  NavigatorCalledOutData,
+  CallOutNavigatorErrorData,
+  CurrentNavigatorAvailableData,
 } from './types';
 import {
   CONVERSATION_CHANNEL_NAME,
   ConversationChannelActionName,
   ConversationChannelMessageTopic,
 } from './constants';
+
+export type ConversationChannel = ReturnType<typeof useConversationChannel>;
 
 export const useConversationChannel = (interventionId?: string) => {
   const dispatch = useDispatch();
@@ -103,8 +113,9 @@ export const useConversationChannel = (interventionId?: string) => {
 
   const onConversationArchived = ({
     conversationId,
+    archivedAt,
   }: ConversationArchivedData) => {
-    dispatch(onConversationArchivedReceive(conversationId));
+    dispatch(onConversationArchivedReceive(conversationId, archivedAt));
     dispatch(setArchivingConversation(false));
     // close conversation for navigator
     if (!interventionId) {
@@ -126,6 +137,37 @@ export const useConversationChannel = (interventionId?: string) => {
     currentScreenTitle,
   }: ChangeScreenTitleData) => {
     dispatch(onCurrentScreenTitleChanged(conversationId, currentScreenTitle));
+  };
+
+  const onCurrentNavigatorAvailable = ({
+    conversationId,
+  }: CurrentNavigatorAvailableData) => {
+    dispatch(setCurrentNavigatorUnavailable(false, conversationId));
+  };
+
+  const onCurrentNavigatorUnavailable = ({
+    conversationId,
+  }: CurrentNavigatorAvailableData) => {
+    dispatch(setCurrentNavigatorUnavailable(true, conversationId));
+  };
+
+  const onNavigatorCalledOut = ({ unlockTime }: NavigatorCalledOutData) => {
+    dispatch(setCallingOutNavigator(false));
+    dispatch(setWaitingForNavigator(true));
+    dispatch(setCallOutNavigatorUnlockTime(unlockTime));
+  };
+
+  const onCallOutUnavailableError = ({
+    unlockTime,
+  }: CallOutNavigatorErrorData) => {
+    dispatch(setCallingOutNavigator(false));
+    dispatch(setWaitingForNavigator(true));
+    dispatch(setCallOutNavigatorUnlockTime(unlockTime));
+  };
+
+  const onCallOutCancelled = () => {
+    dispatch(setCancellingCallOut(false));
+    dispatch(setWaitingForNavigator(false));
   };
 
   const messageListener: SocketMessageListener<ConversationChannelMessage> = ({
@@ -163,6 +205,21 @@ export const useConversationChannel = (interventionId?: string) => {
         break;
       case ConversationChannelMessageTopic.CURRENT_SCREEN_TITLE_CHANGED:
         onChangedScreenTitle(data);
+        break;
+      case ConversationChannelMessageTopic.CURRENT_NAVIGATOR_AVAILABLE:
+        onCurrentNavigatorAvailable(data);
+        break;
+      case ConversationChannelMessageTopic.CURRENT_NAVIGATOR_UNAVAILABLE:
+        onCurrentNavigatorUnavailable(data);
+        break;
+      case ConversationChannelMessageTopic.NAVIGATOR_CALLED_OUT:
+        onNavigatorCalledOut(data);
+        break;
+      case ConversationChannelMessageTopic.CALL_OUT_UNAVAILABLE_ERROR:
+        onCallOutUnavailableError(data);
+        break;
+      case ConversationChannelMessageTopic.CALL_OUT_CANCELLED:
+        onCallOutCancelled();
         break;
       default:
         break;
@@ -225,6 +282,27 @@ export const useConversationChannel = (interventionId?: string) => {
     });
   };
 
+  const callOutNavigator = () => {
+    if (interventionId) {
+      dispatch(setCallingOutNavigator(true));
+      dispatch(setCallOutNavigatorUnlockTime(null));
+      channel?.perform({
+        name: ConversationChannelActionName.ON_CALL_OUT_NAVIGATOR,
+        data: { interventionId },
+      });
+    }
+  };
+
+  const cancelCallOut = () => {
+    if (interventionId) {
+      dispatch(setCancellingCallOut(true));
+      channel?.perform({
+        name: ConversationChannelActionName.ON_CANCEL_CALL_OUT,
+        data: { interventionId },
+      });
+    }
+  };
+
   return {
     isConnected: channel?.state === 'connected',
     sendMessage,
@@ -233,5 +311,7 @@ export const useConversationChannel = (interventionId?: string) => {
     archiveConversation,
     fetchLiveChatSetup,
     changeScreenTitle,
+    callOutNavigator,
+    cancelCallOut,
   };
 };

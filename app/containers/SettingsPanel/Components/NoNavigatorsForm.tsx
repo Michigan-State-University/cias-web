@@ -12,16 +12,10 @@ import {
 } from 'utils/validators';
 import { useCallbackRef } from 'utils/useCallbackRef';
 
-import {
-  NoNavigatorsAvailableData,
-  NotifyByOptions,
-} from 'models/NavigatorSetup';
+import { NoNavigatorsAvailableData } from 'models/NavigatorSetup';
 import { PhoneAttributes } from 'models/Phone';
 
 import Box from 'components/Box';
-import Switch from 'components/Switch';
-import Radio from 'components/Radio';
-import Text from 'components/Text';
 import H2 from 'components/H2';
 import { FormikHookInput } from 'components/FormikInput';
 import PhoneNumberForm from 'components/AccountSettings/PhoneNumberForm';
@@ -48,11 +42,7 @@ type FormikValues = Pick<
 
 type Props = Pick<
   NoNavigatorsAvailableData,
-  | 'contactEmail'
-  | 'isNavigatorNotificationOn'
-  | 'noNavigatorAvailableMessage'
-  | 'notifyBy'
-  | 'phone'
+  'contactEmail' | 'noNavigatorAvailableMessage' | 'phone'
 > & {
   updateNoNavigatorTabData: (
     newData: Partial<NoNavigatorsAvailableData>,
@@ -61,9 +51,7 @@ type Props = Pick<
 
 const NoNavigatorsForm = ({
   contactEmail,
-  isNavigatorNotificationOn,
   noNavigatorAvailableMessage,
-  notifyBy,
   phone,
   updateNoNavigatorTabData,
 }: Props) => {
@@ -189,48 +177,6 @@ const NoNavigatorsForm = ({
         >
           {formatMessage(messages.saveChanges)}
         </Button>
-      </Box>
-      <Box display="flex" mt={48}>
-        <Switch
-          checked={isNavigatorNotificationOn}
-          onToggle={(newValue) =>
-            updateNoNavigatorTabData({ isNavigatorNotificationOn: newValue })
-          }
-          id="navigator-notification"
-        >
-          <H2 fontSize={16} lineHeight="26px" mr={24}>
-            {formatMessage(messages.notifyNavigator)}
-          </H2>
-        </Switch>
-      </Box>
-      <Box display="flex" mt={24}>
-        <Radio
-          id="notify_by_sms_radio"
-          onChange={() =>
-            updateNoNavigatorTabData({ notifyBy: NotifyByOptions.SMS })
-          }
-          checked={notifyBy === NotifyByOptions.SMS}
-        >
-          <Text
-            mr={32}
-            fontWeight={notifyBy === NotifyByOptions.SMS ? 'bold' : undefined}
-          >
-            {formatMessage(messages.notifyBySms)}
-          </Text>
-        </Radio>
-        <Radio
-          id="notify_by_email_radio"
-          onChange={() =>
-            updateNoNavigatorTabData({ notifyBy: NotifyByOptions.EMAIL })
-          }
-          checked={notifyBy === NotifyByOptions.EMAIL}
-        >
-          <Text
-            fontWeight={notifyBy === NotifyByOptions.EMAIL ? 'bold' : undefined}
-          >
-            {formatMessage(messages.notifyByEmail)}
-          </Text>
-        </Radio>
       </Box>
     </>
   );

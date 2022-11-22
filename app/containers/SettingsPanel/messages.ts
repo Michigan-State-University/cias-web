@@ -143,9 +143,9 @@ export default defineMessages({
     defaultMessage:
       'If you have any thoughts for participants, please type it here',
   },
-  useNavigator: {
-    id: `${scope}.useNavigator`,
-    defaultMessage: 'Use Navigator',
+  setupNavigator: {
+    id: `${scope}.setupNavigator`,
+    defaultMessage: 'Setup navigator',
   },
   useNavigatorSettings: {
     id: `${scope}.useNavigatorSettings`,
@@ -166,14 +166,6 @@ export default defineMessages({
   notifyNavigator: {
     id: `${scope}.notifyNavigator`,
     defaultMessage: `Notify navigator about new messages even then it won't be online`,
-  },
-  notifyByEmail: {
-    id: `${scope}.notifyByEmail`,
-    defaultMessage: 'Notify by e-mail',
-  },
-  notifyBySms: {
-    id: `${scope}.notifyBySms`,
-    defaultMessage: 'Notify by SMS',
   },
   hotlinePrefix: {
     id: `${scope}.hotlinePrefix`,
@@ -342,5 +334,26 @@ export default defineMessages({
     id: `${scope}.navigatorScriptUploadTooltipDescription`,
     defaultMessage:
       'Below you find a screenshot which represents correctly filled template',
+  },
+  configureNavigatorSettings: {
+    id: `${scope}.configureNavigatorSettings`,
+    defaultMessage: 'Configure navigator settings',
+  },
+  interventionConversationsTranscriptInfo: {
+    id: `${scope}.interventionConversationsTranscriptInfo`,
+    defaultMessage:
+      'You can also download all conversations within this intervention. To do that please generate a transcript before you can download it.',
+  },
+  generateTranscript: {
+    id: `${scope}.generateTranscript`,
+    defaultMessage: 'Generate transcript',
+  },
+  generateNewTranscript: {
+    id: `${scope}.generateNewTranscript`,
+    defaultMessage: 'Generate new transcript',
+  },
+  downloadTranscript: {
+    id: `${scope}.downloadTranscript`,
+    defaultMessage: 'Download transcript',
   },
 });
