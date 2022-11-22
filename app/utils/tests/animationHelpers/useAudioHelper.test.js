@@ -88,7 +88,7 @@ describe('useAudioHelper test', () => {
         animationData: {
           start: undefined,
           speech: await import(
-            `assets/animations/peedy/${speechAnimationsMapper.rest.animations.speech}.json`
+            `assets/animations/peedy/${speechAnimationsMapper.peedy.rest.animations.speech}.json`
           ),
           end: undefined,
         },

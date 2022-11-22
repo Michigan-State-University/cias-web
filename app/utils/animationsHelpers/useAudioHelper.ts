@@ -98,7 +98,8 @@ const useAudioHelper: TUseAudioHelper = (
     if (isAnimationEnabled && blocks.length) {
       await Promise.all(
         uniqAnimations.map(async ({ animation }) => {
-          const speechAnimation = speechAnimationsMapper[animation].animations;
+          const speechAnimation =
+            speechAnimationsMapper[character][animation].animations;
 
           const animationsData: ISpeechAnimationData = {
             [ESpeechPhase.START]:
@@ -127,7 +128,8 @@ const useAudioHelper: TUseAudioHelper = (
           animations.push({
             name: animation,
             animationData: animationsData,
-            isEndReversed: !!speechAnimationsMapper[animation].isEndReversed,
+            isEndReversed:
+              !!speechAnimationsMapper[character][animation].isEndReversed,
           });
         }),
       );

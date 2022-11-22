@@ -130,7 +130,7 @@ const characterToReverseHeadAnimationsMap: Record<
   [CharacterType.EMMI]: emmiReverseHeadAnimations,
 };
 
-const speechAnimationsMapper: Record<SpeechAnimation, TSpeechAnimation> = {
+const peedySpeechAnimationsMapper: Record<SpeechAnimation, TSpeechAnimation> = {
   [SpeechAnimation.REST]: {
     animations: { speech: SpeechAnimationFile.REST_SPEECH },
   },
@@ -230,11 +230,33 @@ const speechAnimationsMapper: Record<SpeechAnimation, TSpeechAnimation> = {
   },
 };
 
-const emmiSpeechAnimations = [SpeechAnimation.REST];
+const emmiSpeechAnimations = [SpeechAnimation.REST, SpeechAnimation.POINT_UP];
+
+const emmiSpeechAnimationsMapper: Record<string, TSpeechAnimation> = {
+  [SpeechAnimation.REST]: {
+    animations: { speech: SpeechAnimationFile.REST_SPEECH },
+  },
+  [SpeechAnimation.POINT_UP]: {
+    animations: {
+      start: SpeechAnimationFile.POINT_UP,
+      speech: SpeechAnimationFile.REST_SPEECH,
+    },
+  },
+};
+
+const speechAnimationsMapper: Record<
+  CharacterType,
+  Record<SpeechAnimation, TSpeechAnimation>
+> = {
+  [CharacterType.PEEDY]: peedySpeechAnimationsMapper,
+  [CharacterType.EMMI]: emmiSpeechAnimationsMapper,
+};
 
 const characterToSpeechAnimationsMap: Record<CharacterType, SpeechAnimation[]> =
   {
-    [CharacterType.PEEDY]: keys(speechAnimationsMapper) as SpeechAnimation[],
+    [CharacterType.PEEDY]: keys(
+      speechAnimationsMapper[CharacterType.PEEDY],
+    ) as SpeechAnimation[],
     [CharacterType.EMMI]: emmiSpeechAnimations,
   };
 

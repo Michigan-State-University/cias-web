@@ -4,6 +4,7 @@ import join from 'lodash/join';
 import { compose } from 'redux';
 import { connect } from 'react-redux';
 import { createStructuredSelector } from 'reselect';
+import values from 'lodash/values';
 
 import Box from 'components/Box';
 import Column from 'components/Column';
@@ -29,10 +30,7 @@ import {
   reflectionType,
 } from 'models/Narrator/BlockTypes';
 import { feedbackQuestion } from 'models/Session/QuestionTypes';
-import {
-  characterToEFeedbackActionMap,
-  EFeedbackAction,
-} from 'models/Narrator/FeedbackActions';
+import { EFeedbackAction } from 'models/Narrator/FeedbackActions';
 import animationMessages from 'global/i18n/animationNames';
 
 import { updateBlockSettings, switchSpeechReflection } from '../../actions';
@@ -71,14 +69,6 @@ const SpeechBlock = ({
     if (previewData.type !== speechType) setIsPlaying(false);
   }, [previewData]);
 
-  // Change block action when character changes and chosen action is unavailable
-  useEffect(() => {
-    const characterEFeedbackActions = characterToEFeedbackActionMap[character];
-    if (!characterEFeedbackActions.includes(block.action)) {
-      updateAction(blockIndex, EFeedbackAction.NO_ACTION, id);
-    }
-  }, [character]);
-
   const selectOptions = useMemo(() => {
     const animations = characterToSpeechAnimationsMap[character];
 
@@ -89,7 +79,7 @@ const SpeechBlock = ({
   }, [character]);
 
   const feedbackOptions = useMemo(() => {
-    const options = characterToEFeedbackActionMap[character].filter(
+    const options = values(EFeedbackAction).filter(
       (action) => action !== EFeedbackAction.SHOW_SPECTRUM,
     );
 
