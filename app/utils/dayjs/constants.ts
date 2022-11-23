@@ -44,3 +44,5 @@ export const CustomLocalesConfig: Record<
     },
   },
 };
+
+export const FILE_GENERATION_TIME_FORMAT = 'YYYY/MM/DD HH:mm';
