@@ -2,13 +2,16 @@ import React from 'react';
 import { useIntl } from 'react-intl';
 import { Col as GridCol, Row as GridRow } from 'react-grid-system';
 import { useDispatch, useSelector } from 'react-redux';
+import dayjs from 'dayjs';
 
 import { colors, borders } from 'theme';
 
 import { AppFile } from 'models/File';
 
 import { getFileUrl } from 'utils/getApiFileUrl';
+import { FILE_GENERATION_TIME_FORMAT } from 'utils/dayjs';
 
+import i18nGlobalMessages from 'global/i18n/globalMessages';
 import {
   generateConversationsTranscriptRequest,
   makeSelectInterventionLoader,
@@ -20,6 +23,7 @@ import Text from 'components/Text';
 import Button from 'components/Button';
 import FileDownload from 'components/FileDownload';
 import ErrorAlert from 'components/ErrorAlert';
+import { Tooltip } from 'components/Tooltip';
 
 import messages from '../messages';
 
@@ -72,9 +76,20 @@ export const ConversationsTranscriptPanel = ({ transcript }: Props) => {
         </GridCol>
         {transcript && (
           <GridCol xs={6}>
-            <FileDownload url={getFileUrl(transcript.url)}>
-              <Button title={formatMessage(messages.downloadTranscript)} />
-            </FileDownload>
+            <Tooltip
+              id={`intervention-conversations-transcript-generated-at-${
+                transcript?.createdAt ?? ''
+              }`}
+              text={`${formatMessage(i18nGlobalMessages.lastCsvDate)}${dayjs(
+                transcript?.createdAt,
+              ).format(FILE_GENERATION_TIME_FORMAT)}`}
+              visible={!!transcript}
+              stretchContent
+            >
+              <FileDownload url={getFileUrl(transcript.url)}>
+                <Button title={formatMessage(messages.downloadTranscript)} />
+              </FileDownload>
+            </Tooltip>
           </GridCol>
         )}
       </GridRow>

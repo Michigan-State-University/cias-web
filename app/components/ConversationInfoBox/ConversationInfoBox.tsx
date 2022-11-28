@@ -18,6 +18,7 @@ export type Props = {
   archived?: boolean;
   time: string;
   timeFormatLocale: CustomDayjsLocale;
+  timeFormatWithSuffix?: boolean;
   messageContent: string;
   messageSentByCurrentUser: boolean;
   interlocutorData: Nullable<InterlocutorNameData & InterlocutorAvatarData>;
@@ -25,27 +26,15 @@ export type Props = {
 };
 
 export const ConversationInfoBox = ({
-  id,
-  active,
-  highlighted,
-  archived,
-  time,
-  timeFormatLocale,
   messageContent,
   messageSentByCurrentUser,
   interlocutorData,
-  onClick,
+  ...props
 }: Props) => {
   const { formatMessage } = useIntl();
 
   return (
     <InfoBox
-      id={id}
-      active={active}
-      highlighted={highlighted}
-      archived={archived}
-      time={time}
-      timeFormatLocale={timeFormatLocale}
       icon={<ChatAvatar interlocutorAvatarData={interlocutorData} />}
       title={formatInterlocutorName(interlocutorData, true)}
       content={
@@ -53,7 +42,7 @@ export const ConversationInfoBox = ({
           ? formatMessage(messages.me, { messageContent })
           : messageContent
       }
-      onClick={onClick}
+      {...props}
     />
   );
 };

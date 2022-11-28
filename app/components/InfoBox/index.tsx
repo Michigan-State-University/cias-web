@@ -24,6 +24,7 @@ export type Props = {
   archived?: boolean; // "Archived" text displayed instead of time
   time: string;
   timeFormatLocale: CustomDayjsLocale;
+  timeFormatWithSuffix?: boolean; // include prefix or suffix in formatted time. Example suffixes are "in" and "ago"
   icon: ReactNode;
   title: string;
   content: string;
@@ -37,6 +38,7 @@ const InfoBox = ({
   archived,
   time,
   timeFormatLocale,
+  timeFormatWithSuffix,
   icon,
   title,
   content,
@@ -71,7 +73,9 @@ const InfoBox = ({
                 color={colors.bluewood}
                 textOpacity={textOpacity}
               >
-                {dayjs(time).locale(timeFormatLocale).fromNow(true)}
+                {dayjs(time)
+                  .locale(timeFormatLocale)
+                  .fromNow(!timeFormatWithSuffix)}
               </Text>
             )}
             {archived && (
