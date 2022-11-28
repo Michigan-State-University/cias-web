@@ -68,8 +68,4 @@ export default defineMessages({
     defaultMessage:
       "Are you sure you want to close the intervention? It will no longer be possible to gather Participant's data.",
   },
-  lastCsvDate: {
-    id: `${scope}.lastCsvDate`,
-    defaultMessage: 'CSV last generated at: ',
-  },
 });

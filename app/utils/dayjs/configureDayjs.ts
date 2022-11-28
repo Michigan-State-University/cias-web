@@ -9,11 +9,11 @@ import advancedFormat from 'dayjs/plugin/advancedFormat';
 
 import { DEFAULT_LOCALE } from 'i18n';
 
-import { CustomLocalesConfig } from './constants';
+import { CustomLocalesConfig, RELATIVE_TIME_OPTIONS } from './constants';
 
 export const configureDayjs = () => {
   // Load plugins
-  dayjs.extend(relativeTime);
+  dayjs.extend(relativeTime, RELATIVE_TIME_OPTIONS);
   dayjs.extend(utc);
   dayjs.extend(timezone);
   dayjs.extend(localeData);

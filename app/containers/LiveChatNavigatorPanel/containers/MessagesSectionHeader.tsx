@@ -9,7 +9,9 @@ import TranscriptIcon from 'assets/svg/transcript-icon.svg';
 
 import { ArchiveConversationData } from 'utils/useConversationChannel';
 import { getFileUrl } from 'utils/getApiFileUrl';
+import { FILE_GENERATION_TIME_FORMAT } from 'utils/dayjs';
 
+import i18nGlobalMessages from 'global/i18n/globalMessages';
 import {
   makeSelectArchivingConversation,
   makeSelectOpenedConversation,
@@ -22,6 +24,7 @@ import TextButton from 'components/Button/TextButton';
 import Row from 'components/Row';
 import FileDownload from 'components/FileDownload';
 import { ModalType, useModal } from 'components/Modal';
+import { Tooltip } from 'components/Tooltip';
 
 import i18nMessages from '../messages';
 import SectionHeader from '../components/SectionHeader';
@@ -87,22 +90,32 @@ const MessageSectionHeader = ({ onArchiveConversation }: Props) => {
       <SectionHeader title={formatMessage(i18nMessages.message)} px={24}>
         {conversation && (
           <Row align="center" gap={24}>
-            <FileDownload
-              url={getFileUrl(transcript?.url ?? '')}
-              disabled={!transcript}
-              {...topFunctionButtonProps}
+            <Tooltip
+              id={`conversation-transcript-generated-at-${
+                transcript?.createdAt ?? ''
+              }`}
+              text={`${formatMessage(i18nGlobalMessages.lastCsvDate)}${dayjs(
+                transcript?.createdAt,
+              ).format(FILE_GENERATION_TIME_FORMAT)}`}
+              visible={!!transcript}
             >
-              <TextButton
-                buttonProps={topFunctionButtonProps}
+              <FileDownload
+                url={getFileUrl(transcript?.url ?? '')}
                 disabled={!transcript}
+                {...topFunctionButtonProps}
               >
-                <Icon
-                  src={DownloadIcon}
-                  alt={formatMessage(i18nMessages.downloadTranscriptIconAlt)}
-                />
-                <Text>{formatMessage(i18nMessages.downloadTranscript)}</Text>
-              </TextButton>
-            </FileDownload>
+                <TextButton
+                  buttonProps={topFunctionButtonProps}
+                  disabled={!transcript}
+                >
+                  <Icon
+                    src={DownloadIcon}
+                    alt={formatMessage(i18nMessages.downloadTranscriptIconAlt)}
+                  />
+                  <Text>{formatMessage(i18nMessages.downloadTranscript)}</Text>
+                </TextButton>
+              </FileDownload>
+            </Tooltip>
             <TextButton
               buttonProps={topFunctionButtonProps}
               onClick={generateTranscript}

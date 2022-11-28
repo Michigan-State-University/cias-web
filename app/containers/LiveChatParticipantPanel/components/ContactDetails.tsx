@@ -34,7 +34,13 @@ const ContactDetails = ({ contactEmail, phone }: Props) => {
 
   return (
     <>
-      <Text color={colors.bluewood} textOpacity={0.7} mb={24} lineHeight="22px">
+      <Text
+        color={colors.bluewood}
+        textOpacity={0.7}
+        mt={16}
+        mb={24}
+        lineHeight="22px"
+      >
         {contactDetailsText}
       </Text>
       {phone && (
@@ -42,7 +48,11 @@ const ContactDetails = ({ contactEmail, phone }: Props) => {
           {/* @ts-ignore */}
           <Icon mr={8} src={greenPhone} alt="phone" />
           <LinkNoUnderline href={`tel:${phone.prefix}${phone.number}`}>
-            <Text fontSize="14px" color={themeColors.primary}>
+            <Text
+              fontSize="14px"
+              color={themeColors.primary}
+              fontWeight="medium"
+            >
               {`${phone.prefix}${phone.number}`}
             </Text>
           </LinkNoUnderline>
@@ -53,7 +63,11 @@ const ContactDetails = ({ contactEmail, phone }: Props) => {
           {/* @ts-ignore */}
           <Icon mr={8} src={greenEmail} alt="email" />
           <LinkNoUnderline target="_blank" href={`mailto:${contactEmail}`}>
-            <Text fontSize="14px" color={themeColors.primary}>
+            <Text
+              fontSize="14px"
+              color={themeColors.primary}
+              fontWeight="medium"
+            >
               {contactEmail}
             </Text>
           </LinkNoUnderline>
