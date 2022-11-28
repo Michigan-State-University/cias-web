@@ -16,7 +16,6 @@ import {
   makeSelectLiveChatLoader,
   makeSelectLiveChatSetup,
   makeSelectWaitingForNavigator,
-  setWaitingForNavigator,
   setCallOutNavigatorUnlockTime,
   makeSelectCallOutNavigatorUnlockTime,
 } from 'global/reducers/liveChat';
@@ -29,16 +28,13 @@ import {
   makeSelectUserSession,
 } from 'containers/AnswerSessionPage/selectors';
 
-import Row from 'components/Row';
-import CountdownTextTimer from 'components/CountdownTextTimer';
-
 import ChatIcon from './components/ChatIcon';
 import ConversationChatDialog from './containers/ConversationChatDialog';
 import NarratorUnavailableDialog from './containers/NarratorUnavailableDialog';
 import NavigatorArrivedPopover from './components/NavigatorArrivedPopover';
 
 import messages from './messages';
-import CallOutNavigatorTimerDialog from './containers/CallOutNavigatorTimerDialog';
+import WaitingForNavigatorDialog from './containers/WaitingForNavigatorDialog';
 import { DASHBOARD_LOCATION_NAME } from './constants';
 
 export type Props = {
@@ -162,7 +158,6 @@ export const LiveChatParticipantPanel = ({ interventionId }: Props) => {
     if (!callOutUnlockTime) return;
     const unlockMs = dayjs(callOutUnlockTime).diff();
     const timeout = setTimeout(() => {
-      dispatch(setWaitingForNavigator(false));
       dispatch(setCallOutNavigatorUnlockTime(null));
     }, unlockMs);
     return () => {
@@ -189,22 +184,14 @@ export const LiveChatParticipantPanel = ({ interventionId }: Props) => {
         <NarratorUnavailableDialog {...sharedProps} />
       )}
       {!dialogMinimized && !liveChatActive && waitingForNavigator && (
-        <CallOutNavigatorTimerDialog {...sharedProps} />
+        <WaitingForNavigatorDialog {...sharedProps} />
       )}
       {navigatorArrivedPopoverVisible && <NavigatorArrivedPopover />}
-      <Row align="center" gap={16}>
-        {dialogMinimized &&
-          !liveChatActive &&
-          waitingForNavigator &&
-          callOutUnlockTime && (
-            <CountdownTextTimer endTime={callOutUnlockTime} />
-          )}
-        <ChatIcon
-          online={liveChatActive}
-          panelMinimized={dialogMinimized}
-          onClick={toggleDialog}
-        />
-      </Row>
+      <ChatIcon
+        online={liveChatActive}
+        panelMinimized={dialogMinimized}
+        onClick={toggleDialog}
+      />
     </>
   );
 };

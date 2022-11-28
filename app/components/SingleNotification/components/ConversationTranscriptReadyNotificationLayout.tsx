@@ -13,7 +13,7 @@ type Props = NotificationLayoutProps<{
 
 export const ConversationTranscriptReadyNotificationLayout = ({
   notification,
-  timeFormatLocale,
+  ...props
 }: Props) => {
   const { formatMessage } = useIntl();
 
@@ -26,13 +26,13 @@ export const ConversationTranscriptReadyNotificationLayout = ({
   return (
     <SingleNotificationBaseLayout
       notification={notification}
-      timeFormatLocale={timeFormatLocale}
       title={formatMessage(messages.transcriptIsReady)}
       content={formatMessage(messages.conversationTranscriptReadyContent, {
         interventionName,
       })}
       linkTo={redirectLink}
       readOnClick
+      {...props}
     />
   );
 };

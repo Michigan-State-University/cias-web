@@ -2,8 +2,6 @@ import React from 'react';
 
 import { Notification, NotificationEvent } from 'models/Notification';
 
-import { CustomDayjsLocale } from 'utils/dayjs';
-
 import { NewConversationNotificationLayout } from './components';
 import { NotificationLayoutCommonProps } from './types';
 import { ConversationTranscriptReadyNotificationLayout } from './components/ConversationTranscriptReadyNotificationLayout';
@@ -11,15 +9,10 @@ import { InterventionConversationsTranscriptReadyNotificationLayout } from './co
 
 type Props = {
   notification: Notification;
-  timeFormatLocale: CustomDayjsLocale;
-};
+} & NotificationLayoutCommonProps;
 
-const SingleNotification = ({ notification, timeFormatLocale }: Props) => {
+const SingleNotification = ({ notification, ...commonProps }: Props) => {
   const { event } = notification;
-
-  const commonProps: NotificationLayoutCommonProps = {
-    timeFormatLocale,
-  };
 
   switch (event) {
     case NotificationEvent.NEW_CONVERSATION:

@@ -45,6 +45,14 @@ export default defineMessages({
     id: `${scope}.navigatorsBusy`,
     defaultMessage: 'Sorry, but all our navigators are busy at the moment.',
   },
+  callOutInstruction: {
+    id: `${scope}.callOutInstruction`,
+    defaultMessage: `Please click the "<textColorBold>Connect with Support</textColorBold>" button above to request a team member to message with.`,
+  },
+  call988or911: {
+    id: `${scope}.call988or911`,
+    defaultMessage: `If this an emergency please dial <phone>988</phone> for the suicide & crisis lifeline, or <phone>911</phone>.`,
+  },
   phoneEmailContact: {
     id: `${scope}.phoneEmailContact`,
     defaultMessage:
@@ -68,16 +76,7 @@ export default defineMessages({
   },
   callOutTheNavigator: {
     id: `${scope}.callOutTheNavigator`,
-    defaultMessage: 'Call out the navigator',
-  },
-  callOutTheNavigatorModalContent: {
-    id: `${scope}.callOutTheNavigatorModalContent`,
-    defaultMessage:
-      'Are you sure you really need help? We will send a notification to the navigator who should join the conversation within <primaryColorBold>15 minutes</primaryColorBold>. If not, then neither of the navigators was able to do so.',
-  },
-  yesIReallyNeedHelp: {
-    id: `${scope}.yesIReallyNeedHelp`,
-    defaultMessage: 'Yes, I really need help',
+    defaultMessage: 'Connect with Support',
   },
   hello: {
     id: `${scope}.hello`,
@@ -112,17 +111,32 @@ export default defineMessages({
     id: `${scope}.connectWithAnotherNavigator`,
     defaultMessage: 'Connect with another navigator',
   },
-  waitingForNavigator: {
-    id: `${scope}.waitingForNavigator`,
-    defaultMessage: 'Waiting for navigator',
-  },
-  notificationSent: {
-    id: `${scope}.notificationSent`,
-    defaultMessage:
-      'The notification has been sent to the navigator. We are waiting for the response...',
+  workingOnRequest: {
+    id: `${scope}.workingOnRequest`,
+    defaultMessage: `We're working on your request.\nThank you for your patience.`,
   },
   youJustCalledTheNavigator: {
     id: `${scope}.youJustCalledTheNavigator`,
     defaultMessage: `You've just called the navigator and canceled it. You should use this feature <bold>very carefully</bold>, so let's try <secondaryColorBold>{timeLeft}</secondaryColorBold>.`,
+  },
+  cancelRequest: {
+    id: `${scope}.cancelRequest`,
+    defaultMessage: `Cancel request`,
+  },
+  navigatorNotFound: {
+    id: `${scope}.navigatorNotFound`,
+    defaultMessage: `We haven't found anyone yet.\nDo you want to keep waiting?`,
+  },
+  call988: {
+    id: `${scope}.call988`,
+    defaultMessage: `Please remember that you can also call <phone>988</phone> to talk with a National Lifeline Counselor anytime.`,
+  },
+  endRequest: {
+    id: `${scope}.endRequest`,
+    defaultMessage: `End Request`,
+  },
+  iWillWait: {
+    id: `${scope}.iWillWait`,
+    defaultMessage: `I'll Wait`,
   },
 });
