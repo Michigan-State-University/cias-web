@@ -53,7 +53,7 @@ export const ChatMessage = ({
             margin="0 12px 4px 12px"
             lineHeight="12px"
           >
-            {isMine ? <FormattedMessage {...messages.you} /> : senderName}
+            {isMine ? <FormattedMessage {...messages.me} /> : senderName}
           </Text>
         </Box>
       )}

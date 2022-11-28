@@ -110,6 +110,12 @@ export const makeSelectNavigatorUnavailable = () =>
     ({ navigatorUnavailable }) => navigatorUnavailable,
   );
 
+export const makeSelectCurrentNavigatorUnavailable = () =>
+  createSelector(
+    selectLiveChatState,
+    ({ currentNavigatorUnavailable }) => currentNavigatorUnavailable,
+  );
+
 export const makeSelectLiveChatSetup = () =>
   createSelector(selectLiveChatState, ({ liveChatSetup }) => liveChatSetup);
 
@@ -154,4 +160,28 @@ export const makeSelectOtherInterlocutor = () =>
         )
       );
     },
+  );
+
+export const makeSelectCallingOutNavigator = () =>
+  createSelector(
+    selectLiveChatState,
+    ({ callingOutNavigator }) => callingOutNavigator,
+  );
+
+export const makeSelectCallOutNavigatorUnlockTime = () =>
+  createSelector(
+    selectLiveChatState,
+    ({ callOutNavigatorUnlockTime }) => callOutNavigatorUnlockTime,
+  );
+
+export const makeSelectWaitingForNavigator = () =>
+  createSelector(
+    selectLiveChatState,
+    ({ waitingForNavigator }) => waitingForNavigator,
+  );
+
+export const makeSelectCancellingCallOut = () =>
+  createSelector(
+    selectLiveChatState,
+    ({ cancellingCallOut }) => cancellingCallOut,
   );

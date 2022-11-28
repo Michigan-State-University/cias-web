@@ -79,7 +79,6 @@ const LoginForm = ({
             />
             <Button
               height={46}
-              borderRadius={5}
               mt={25}
               loading={isLoading}
               title={formatMessage(messages.loginButton)}

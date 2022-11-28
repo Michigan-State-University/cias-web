@@ -10,6 +10,7 @@ import { StyledEllipsisText, TruncatedMarkup } from './styled';
 
 type EllipsisTextType = {
   text: string;
+  id?: string;
   dataFor?: string;
   lines?: number;
   width?: number;
@@ -18,6 +19,7 @@ type EllipsisTextType = {
 
 const EllipsisText = ({
   text,
+  id,
   dataFor,
   lines = 1,
   width,
@@ -45,7 +47,7 @@ const EllipsisText = ({
             <span dangerouslySetInnerHTML={{ __html: purifiedHtmlText }} />
           ) : undefined
         }
-        id={plainText ?? ''}
+        id={id ?? plainText ?? ''}
         display="inline"
         width="100%"
       >

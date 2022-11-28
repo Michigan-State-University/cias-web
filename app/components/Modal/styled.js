@@ -3,6 +3,7 @@ import styled, { css } from 'styled-components';
 import { colors, mediaQuery, ZIndex } from 'theme';
 
 import Box from 'components/Box';
+import Row from 'components/Row';
 import { maxQueries, minQueries } from 'components/Container/mediaQuery';
 
 const mobilePopoverStyle = css`
@@ -137,4 +138,17 @@ export const StyledArrow = styled(Box)`
 
   ${({ $specialMobileView, $forceMobile }) =>
     $specialMobileView && $forceMobile && mobileArrowStyle}
+`;
+
+export const ConfirmationModalButtonsContainer = styled(Row)`
+  margin-top: 48px;
+  gap: 20px;
+  justify-content: center;
+  @media ${maxQueries.sm} {
+    margin-top: 32px;
+    flex-wrap: wrap;
+    button {
+      width: 100%;
+    }
+  }
 `;

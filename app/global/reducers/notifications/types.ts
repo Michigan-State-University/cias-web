@@ -9,4 +9,5 @@ export type NotificationsAction = ActionType<typeof actions>;
 export type NotificationsState = {
   notificationsListVisible: boolean;
   notifications: Notification[];
+  navigatorAvailability: Nullable<boolean>;
 };

@@ -16,16 +16,16 @@ exports[`<AppRoute /> Should render and match the snapshot 1`] = `
 .c5 {
   width: auto;
   height: auto;
+  width: 100%;
   max-height: 51px;
-  margin-right: 15px;
 }
 
 .c7 {
   width: auto;
   height: auto;
+  width: 100%;
   max-width: 200px;
   max-height: 100px;
-  margin-left: 10px;
 }
 
 .c2 {
@@ -98,6 +98,7 @@ exports[`<AppRoute /> Should render and match the snapshot 1`] = `
   align-items: center;
   z-index: 10;
   height: 70px;
+  gap: 16px;
 }
 
 .c1 .user-name-info {
@@ -116,6 +117,9 @@ exports[`<AppRoute /> Should render and match the snapshot 1`] = `
   -ms-flex-align: center;
   align-items: center;
   gap: 32px;
+  -webkit-flex-shrink: 0;
+  -ms-flex-negative: 0;
+  flex-shrink: 0;
 }
 
 .c9 {
@@ -129,6 +133,10 @@ exports[`<AppRoute /> Should render and match the snapshot 1`] = `
   -ms-flex-align: center;
   align-items: center;
   gap: 10px;
+}
+
+.c4 {
+  gap: 16px;
 }
 
 .c0 {
@@ -148,6 +156,12 @@ exports[`<AppRoute /> Should render and match the snapshot 1`] = `
   overflow: hidden;
 }
 
+@media (max-width:575px) {
+  .c1 {
+    gap: 0;
+  }
+}
+
 @media (max-width:767px) {
   .c1 .user-name-info {
     display: none;
@@ -162,6 +176,7 @@ exports[`<AppRoute /> Should render and match the snapshot 1`] = `
 
 @media (max-width:575px) {
   .c4 {
+    gap: 8px;
     -webkit-box-pack: start;
     -webkit-justify-content: start;
     -ms-flex-pack: start;
@@ -205,6 +220,7 @@ exports[`<AppRoute /> Should render and match the snapshot 1`] = `
                 alt="CIAS Application Logo"
                 class="c5"
                 src="IMAGE_MOCK"
+                width="100%"
               />
             </a>
             <div
@@ -214,6 +230,7 @@ exports[`<AppRoute /> Should render and match the snapshot 1`] = `
                 alt="Michigan State University Logo"
                 class="c7"
                 src="IMAGE_MOCK"
+                width="100%"
               />
             </div>
           </div>

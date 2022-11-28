@@ -6,7 +6,7 @@ export type DenormalizedConversation = {
   id: string;
   lastMessage: LastMessage;
   liveChatInterlocutors: Interlocutor[];
-  archived: boolean;
+  archivedAt: Nullable<string>;
   interventionId: string;
   interventionName: string;
   transcript: Nullable<AppFile>;
@@ -18,7 +18,7 @@ export type Conversation = {
   interventionId: string;
   lastMessage: LastMessage;
   liveChatInterlocutors: Record<Interlocutor['id'], Interlocutor>;
-  archived: boolean;
+  archivedAt: Nullable<string>;
   transcript: Nullable<AppFile>;
   currentScreenTitle: string;
 };

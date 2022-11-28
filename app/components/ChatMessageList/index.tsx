@@ -18,6 +18,7 @@ export type Props = {
   messages: Message[];
   interlocutors: Record<Interlocutor['id'], Interlocutor>;
   onReadMessage: (data: ReadMessageData) => void;
+  isNavigatorPanel?: boolean;
 };
 
 const ChatMessageList = ({
@@ -25,6 +26,7 @@ const ChatMessageList = ({
   messages,
   interlocutors,
   onReadMessage,
+  isNavigatorPanel,
 }: Props) => {
   const { formatMessage } = useIntl();
 
@@ -94,9 +96,13 @@ const ChatMessageList = ({
   const getSenderName = useCallback(
     (interlocutorId: string) => {
       const interlocutor = interlocutors[interlocutorId];
-      return formatInterlocutorName(interlocutor);
+      return formatInterlocutorName(
+        interlocutor,
+        isNavigatorPanel,
+        formatMessage(i18nMessages.participant),
+      );
     },
-    [interlocutors],
+    [interlocutors, isNavigatorPanel],
   );
 
   return (

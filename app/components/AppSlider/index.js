@@ -45,8 +45,6 @@ const AppSlider =
   React.forwardRef((props, ref) => (
     <Slider
       ref={ref}
-      min={props.min}
-      max={props.max}
       railStyle={{ backgroundColor: `rgba(${hexToRgb(colors.bluewood)}, 0.2)` }}
       trackStyle={{ backgroundColor: themeColors.secondary }}
       handleStyle={{
@@ -54,7 +52,11 @@ const AppSlider =
         boxShadow: 'none',
         borderWidth: '3px',
       }}
-      handle={(handleParams) => renderHandle(props, handleParams)}
+      handle={
+        props.hideHandle
+          ? () => {}
+          : (handleParams) => renderHandle(props, handleParams)
+      }
       {...props}
     />
   ));
@@ -64,11 +66,13 @@ AppSlider.propTypes = {
   min: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
   max: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
   customHandle: PropTypes.object,
+  hideHandle: PropTypes.bool,
 };
 
 AppSlider.defaultProps = {
   min: 0,
   max: 100,
+  hideHandle: false,
 };
 
 export default AppSlider;

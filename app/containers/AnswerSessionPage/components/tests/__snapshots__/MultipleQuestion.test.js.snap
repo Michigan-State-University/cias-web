@@ -74,6 +74,7 @@ exports[`<MultipleQuestion /> Should render and match the snapshot 1`] = `
 
 .c10 {
   margin-right: 5px;
+  border-radius: 5px;
 }
 
 .c5:disabled + label > .c9 {

@@ -14,7 +14,7 @@ import Row from 'components/Row';
 import Box from 'components/Box';
 
 interface FileDisplayProps {
-  fileInfo: Omit<AppFile, 'id'>;
+  fileInfo: Omit<AppFile, 'id' | 'createdAt'>;
   textProps?: object;
 }
 
