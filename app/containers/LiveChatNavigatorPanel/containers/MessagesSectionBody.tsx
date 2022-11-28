@@ -114,12 +114,13 @@ export const MessagesSectionBody = ({
             messages={messages ?? []}
             interlocutors={conversation.liveChatInterlocutors}
             onReadMessage={handleRead}
+            isNavigatorPanel
           />
           <ChatMessageInput
             value={message}
             onChange={setMessage}
             onSend={handleSend}
-            disabled={conversation.archived || archivingConversation}
+            disabled={!!conversation.archivedAt || archivingConversation}
           />
         </MessagesSectionContainer>
       )}

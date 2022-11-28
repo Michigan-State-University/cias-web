@@ -58,6 +58,7 @@ type Props = {
   userSessionNodesIds: string[];
   showWithBranchingOnly: boolean;
   onIsBranchingChange: (isBranching: boolean) => void;
+  onlyRenderVisibleElements: boolean;
 };
 
 const SessionMap = ({
@@ -73,6 +74,7 @@ const SessionMap = ({
   userSessionNodesIds,
   showWithBranchingOnly,
   onIsBranchingChange,
+  onlyRenderVisibleElements,
 }: Props): JSX.Element => {
   const [selectedNodesIds, setSelectedNodesIds] = useState<string[]>([]);
 
@@ -187,6 +189,7 @@ const SessionMap = ({
     scrollbarsThickness: SCROLLBAR_THICKNESS,
     scrollbarsMargin: SCROLLBAR_MARGIN,
     edgePriorities: EDGE_PRIORITIES,
+    onlyRenderVisibleElements,
   };
 
   return (

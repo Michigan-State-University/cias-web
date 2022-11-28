@@ -149,11 +149,13 @@ exports[`<Switch /> should match the snapshot 1`] = `
       class="c1 c2"
       data-cy="branching-intervention-toggle"
       data-testid="switch-input"
+      id="test"
       role="switch"
       type="checkbox"
     />
     <label
       class="c3 c4"
+      for="test"
     >
       <div
         class="c5"

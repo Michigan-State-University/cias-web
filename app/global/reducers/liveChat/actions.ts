@@ -6,6 +6,7 @@ import {
   Message,
 } from 'models/LiveChat';
 import { ApiError } from 'models/Api';
+import { AppFile } from 'models/File';
 
 import {
   LiveChatSetup,
@@ -40,6 +41,12 @@ import {
   FETCH_NAVIGATOR_HELPING_MATERIALS_ERROR,
   GENERATE_CONVERSATION_TRANSCRIPT_REQUEST,
   ON_CURRENT_SCREEN_TITLE_CHANGED,
+  SET_CURRENT_NAVIGATOR_UNAVAILABLE,
+  SET_CALLING_OUT_NAVIGATOR,
+  SET_CALL_OUT_NAVIGATOR_UNLOCK_TIME,
+  SET_CANCELLING_CALL_OUT,
+  SET_WAITING_FOR_NAVIGATOR,
+  UPDATE_CONVERSATION_TRANSCRIPT,
 } from './constants';
 
 export const openConversation = createAction(
@@ -139,6 +146,12 @@ export const setNavigatorUnavailable = createAction(
     action({ navigatorUnavailable }),
 );
 
+export const setCurrentNavigatorUnavailable = createAction(
+  SET_CURRENT_NAVIGATOR_UNAVAILABLE,
+  (action) => (currentNavigatorUnavailable: boolean, conversationId: string) =>
+    action({ currentNavigatorUnavailable, conversationId }),
+);
+
 export const onConversationCreatedReceive = createAction(
   ON_CONVERSATION_CREATED_RECEIVE,
   (action) =>
@@ -162,7 +175,8 @@ export const setArchivingConversation = createAction(
 
 export const onConversationArchivedReceive = createAction(
   ON_CONVERSATION_ARCHIVED_RECEIVE,
-  (action) => (conversationId: string) => action({ conversationId }),
+  (action) => (conversationId: string, archivedAt: string) =>
+    action({ conversationId, archivedAt }),
 );
 
 export const onLiveChatSetupFetchedReceive = createAction(
@@ -203,4 +217,31 @@ export const onCurrentScreenTitleChanged = createAction(
   ON_CURRENT_SCREEN_TITLE_CHANGED,
   (action) => (conversationId: string, currentScreenTitle: string) =>
     action({ conversationId, currentScreenTitle }),
+);
+
+export const setCallingOutNavigator = createAction(
+  SET_CALLING_OUT_NAVIGATOR,
+  (action) => (callingOutNavigator: boolean) => action({ callingOutNavigator }),
+);
+
+export const setCallOutNavigatorUnlockTime = createAction(
+  SET_CALL_OUT_NAVIGATOR_UNLOCK_TIME,
+  (action) => (unlockTime: Nullable<string>) => action({ unlockTime }),
+);
+
+export const setWaitingForNavigator = createAction(
+  SET_WAITING_FOR_NAVIGATOR,
+  (action) => (waitingForNavigator: boolean) => action({ waitingForNavigator }),
+);
+
+export const setCancellingCallOut = createAction(
+  SET_CANCELLING_CALL_OUT,
+  (action) => (cancellingCallOut: boolean) => action({ cancellingCallOut }),
+);
+
+export const updateConversationTranscript = createAction(
+  UPDATE_CONVERSATION_TRANSCRIPT,
+  (action) =>
+    (conversationId: string, archived: boolean, transcript: AppFile) =>
+      action({ conversationId, archived, transcript }),
 );

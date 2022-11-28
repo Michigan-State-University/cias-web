@@ -23,6 +23,7 @@ import { themeColors } from 'theme';
 import ParticipantFilesPanel from './ParticipantFilesPanel';
 
 import i18nMessages from '../messages';
+import { CHAT_DIALOG_HEADER_CONTENT_HEIGHT } from '../constants';
 import { ParticipantChatDialogContainer } from './styled';
 
 export type Props = PropsWithChildren<{
@@ -48,7 +49,14 @@ const ChatDialog = ({ header, children, onMinimize }: Props) => {
 
   return (
     <ParticipantChatDialogContainer>
-      <Row align="center" justify="between" gap={12} pb={16}>
+      <Row
+        align="center"
+        justify={header ? 'between' : 'end'}
+        gap={12}
+        pb={16}
+        boxSizing="content-box"
+        height={CHAT_DIALOG_HEADER_CONTENT_HEIGHT}
+      >
         {header}
         <Box display="flex" align="center">
           {!isEmpty(participantFiles) && (

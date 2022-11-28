@@ -2,32 +2,32 @@ import React from 'react';
 
 import { NewConversationNotification } from 'models/Notification';
 
-import { CustomDayjsLocale } from 'utils/dayjs';
-
 import GhostLink from 'components/GhostLink';
 import { ConversationInfoBox } from 'components/ConversationInfoBox';
 
-type Props = {
+import { NotificationLayoutProps } from '../types';
+
+type Props = NotificationLayoutProps<{
   notification: NewConversationNotification;
-  timeFormatLocale: CustomDayjsLocale;
-};
+}>;
 
 export const NewConversationNotificationLayout = ({
-  notification: { createdAt, isRead, data },
-  timeFormatLocale,
+  notification: { createdAt, data, id },
+  ...props
 }: Props) => {
   const { message, conversationId } = data;
 
   return (
     <GhostLink to={`/live-chat?conversation_id=${conversationId}`}>
       <ConversationInfoBox
-        highlighted={!isRead}
-        unread={!isRead}
-        messageCreatedAt={createdAt}
+        id={id}
+        active
+        highlighted
+        time={createdAt}
         messageContent={message}
         messageSentByCurrentUser={false}
         interlocutorData={data}
-        timeFormatLocale={timeFormatLocale}
+        {...props}
       />
     </GhostLink>
   );

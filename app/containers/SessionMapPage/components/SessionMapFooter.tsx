@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useIntl } from 'react-intl';
 
 import zoomInIcon from 'assets/svg/zoom-in.svg';
@@ -22,6 +22,8 @@ type Props = {
   zoomOut: () => void;
   zoomInDisabled: boolean;
   zoomOutDisabled: boolean;
+  beforeDownload: () => void;
+  afterDownload: () => void;
 };
 
 const SessionMapFooter = ({
@@ -30,12 +32,23 @@ const SessionMapFooter = ({
   zoomOut,
   zoomInDisabled,
   zoomOutDisabled,
+  beforeDownload,
+  afterDownload,
 }: Props): JSX.Element => {
   const { formatMessage } = useIntl();
   const { isGenerating, downloadAsync } = useDownloadSessionMap();
   const [withBackground, setWithBackground] = useState(false);
 
-  const handleDownload = () => downloadAsync(withBackground);
+  const handleDownload = () => {
+    beforeDownload();
+    downloadAsync(withBackground);
+  };
+
+  useEffect(() => {
+    if (!isGenerating) {
+      afterDownload();
+    }
+  }, [isGenerating]);
 
   return (
     <Row justify="between" align="end" pt={20}>

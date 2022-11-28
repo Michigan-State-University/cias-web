@@ -5,6 +5,10 @@ import dayjs from 'dayjs';
 
 import { useRoleManager } from 'models/User/RolesManager';
 
+import { FILE_GENERATION_TIME_FORMAT } from 'utils/dayjs';
+
+import globalMessages from 'global/i18n/globalMessages';
+
 import Tooltip from 'components/Tooltip';
 import FileDownload from 'components/FileDownload';
 
@@ -23,10 +27,10 @@ const CsvButtons = ({
     <FileDownload url={urlToDownload}>
       {({ isDownloading }) => (
         <Tooltip
-          id={csvGeneratedAt}
-          text={`${formatMessage(messages.lastCsvDate)}${dayjs(
+          id={`intervention-csv-generated-at-${csvGeneratedAt}`}
+          text={`${formatMessage(globalMessages.lastCsvDate)}${dayjs(
             csvGeneratedAt,
-          ).format('YYYY/MM/DD HH:mm')}`}
+          ).format(FILE_GENERATION_TIME_FORMAT)}`}
         >
           <ShareButton outlined loading={isDownloading}>
             <FormattedMessage {...messages.csvDownload} />

@@ -2,6 +2,7 @@ import React, { useCallback, useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useInjectReducer, useInjectSaga } from 'redux-injectors';
 import { useIntl } from 'react-intl';
+import dayjs from 'dayjs';
 
 import { TLFB_QUESTION_TYPES } from 'models/Question';
 
@@ -14,6 +15,9 @@ import {
   makeSelectOpenedConversationId,
   makeSelectLiveChatLoader,
   makeSelectLiveChatSetup,
+  makeSelectWaitingForNavigator,
+  setCallOutNavigatorUnlockTime,
+  makeSelectCallOutNavigatorUnlockTime,
 } from 'global/reducers/liveChat';
 
 import { sessionReducer, getSessionSaga } from 'global/reducers/session';
@@ -30,6 +34,8 @@ import NarratorUnavailableDialog from './containers/NarratorUnavailableDialog';
 import NavigatorArrivedPopover from './components/NavigatorArrivedPopover';
 
 import messages from './messages';
+import WaitingForNavigatorDialog from './containers/WaitingForNavigatorDialog';
+import { DASHBOARD_LOCATION_NAME } from './constants';
 
 export type Props = {
   interventionId: string;
@@ -60,8 +66,10 @@ export const LiveChatParticipantPanel = ({ interventionId }: Props) => {
   const currentQuestion = useSelector(makeSelectCurrentQuestion());
   const interventionStarted = useSelector(makeSelectInterventionStarted());
   const userSession = useSelector(makeSelectUserSession());
+  const waitingForNavigator = useSelector(makeSelectWaitingForNavigator());
+  const callOutUnlockTime = useSelector(makeSelectCallOutNavigatorUnlockTime());
 
-  const sessionName = userSession?.sessionName;
+  const { sessionId, sessionName } = userSession ?? {};
 
   useInjectReducer({ key: 'session', reducer: sessionReducer });
   useInjectSaga({ key: 'getSession', saga: getSessionSaga });
@@ -72,10 +80,11 @@ export const LiveChatParticipantPanel = ({ interventionId }: Props) => {
   useEffect(() => {
     if (!isConnected || !conversationId) return;
 
-    if (!sessionName) {
+    if (!sessionId) {
       changeScreenTitle({
         conversationId,
         currentScreenTitle: formatMessage(messages.interventionPageTitle),
+        currentLocation: DASHBOARD_LOCATION_NAME,
       });
       return;
     }
@@ -101,18 +110,18 @@ export const LiveChatParticipantPanel = ({ interventionId }: Props) => {
         currentQuestionTitle ||
         formatMessage(messages.noTitle);
 
-    if (sessionName) {
-      changeScreenTitle({
-        conversationId,
-        currentScreenTitle: formatMessage(messages.currentScreenTitle, {
-          sessionName,
-          screenTitle,
-        }),
-      });
-    }
+    changeScreenTitle({
+      conversationId,
+      currentScreenTitle: formatMessage(messages.currentScreenTitle, {
+        sessionName,
+        screenTitle,
+      }),
+      currentLocation: sessionId,
+    });
   }, [
     currentQuestion,
     interventionStarted,
+    sessionId,
     sessionName,
     isConnected,
     conversationId,
@@ -145,6 +154,19 @@ export const LiveChatParticipantPanel = ({ interventionId }: Props) => {
 
   useEffect(showNavigatorArrivedPopover, [showNavigatorArrivedPopover]);
 
+  const allowCallOutOnUnlockTime = useCallback(() => {
+    if (!callOutUnlockTime) return;
+    const unlockMs = dayjs(callOutUnlockTime).diff();
+    const timeout = setTimeout(() => {
+      dispatch(setCallOutNavigatorUnlockTime(null));
+    }, unlockMs);
+    return () => {
+      clearTimeout(timeout);
+    };
+  }, [callOutUnlockTime]);
+
+  useEffect(allowCallOutOnUnlockTime, [allowCallOutOnUnlockTime]);
+
   const sharedProps = {
     conversationChannel,
     interventionId,
@@ -158,8 +180,11 @@ export const LiveChatParticipantPanel = ({ interventionId }: Props) => {
       {!dialogMinimized && liveChatActive && (
         <ConversationChatDialog {...sharedProps} />
       )}
-      {!dialogMinimized && !liveChatActive && (
+      {!dialogMinimized && !liveChatActive && !waitingForNavigator && (
         <NarratorUnavailableDialog {...sharedProps} />
+      )}
+      {!dialogMinimized && !liveChatActive && waitingForNavigator && (
+        <WaitingForNavigatorDialog {...sharedProps} />
       )}
       {navigatorArrivedPopoverVisible && <NavigatorArrivedPopover />}
       <ChatIcon

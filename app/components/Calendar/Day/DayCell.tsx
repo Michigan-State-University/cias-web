@@ -6,8 +6,6 @@ import { Dayjs } from 'dayjs';
 
 import { DayData, EventData } from 'models/Tlfb';
 
-import { firstDayOfMonthFormatter } from 'utils/formatters';
-
 import { colors } from 'theme';
 import Box from 'components/Box';
 
@@ -43,7 +41,6 @@ const DayCellComponent = ({
   dayData,
 }: DayCellProps) => {
   const date = day.date();
-  const dayNo = date === 1 ? day.format(firstDayOfMonthFormatter) : date;
   const events: EventData[] = dayData?.events || [];
   const substancesConsumed = dayData?.answer?.body?.substancesConsumed;
 
@@ -70,7 +67,7 @@ const DayCellComponent = ({
           justify={!compact ? 'between' : 'center'}
           position="relative"
         >
-          <DayNo>{dayNo}</DayNo>
+          <DayNo>{date}</DayNo>
           {!isNil(substancesLabel) && (
             <>
               {compact && (

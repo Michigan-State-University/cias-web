@@ -12,7 +12,7 @@ type Props<T> = SpecificModalProps<T>;
 
 type SpecificModalProps<T> = ModalProps<T> | ConfirmationModalProps;
 
-type ModalProps<T = boolean> = {
+export type ModalProps<T = boolean> = {
   type: ModalType.Modal;
   props: Omit<ModalComponentProps, 'children'>;
   modalContentRenderer: (props: {
@@ -21,7 +21,7 @@ type ModalProps<T = boolean> = {
   }) => ReactNode;
 };
 
-type ConfirmationModalProps = {
+export type ConfirmationModalProps = {
   type: ModalType.ConfirmationModal;
   props: Omit<ConfirmationModalComponentProps, 'children'>;
 };

@@ -13,7 +13,7 @@ import { createStructuredSelector } from 'reselect';
 import { compose } from 'redux';
 import { toast } from 'react-toastify';
 import get from 'lodash/get';
-import { Redirect, useLocation } from 'react-router-dom';
+import { Redirect, useHistory, useLocation } from 'react-router-dom';
 import { useContainerQuery } from 'react-container-query';
 import { Hidden, Visible } from 'react-grid-system';
 import { useInjectSaga, useInjectReducer } from 'redux-injectors';
@@ -68,7 +68,7 @@ import Loader from 'components/Loader';
 import H2 from 'components/H2';
 import H3 from 'components/H3';
 import Icon from 'components/Icon';
-import { ConfirmationModal } from 'components/Modal';
+import { ConfirmationModal, ModalType, useModal } from 'components/Modal';
 import Img from 'components/Img';
 import QuickExit from 'components/QuickExit';
 
@@ -215,6 +215,7 @@ export function AnswerSessionPage({
   saveQuickExitEvent,
 }) {
   const { formatMessage } = useIntl();
+  const history = useHistory();
 
   useInjectReducer({ key: 'intervention', reducer: interventionReducer });
   useInjectSaga({ key: 'fetchIntervention', saga: fetchInterventionSaga });
@@ -277,6 +278,8 @@ export function AnswerSessionPage({
     return Boolean(finishedAt);
   }, [userSession]);
 
+  const isCatMhSession = userSessionType === UserSessionType.CAT_MH;
+
   const location = useLocation();
 
   const { sessionId, interventionId, index } = params;
@@ -302,6 +305,31 @@ export function AnswerSessionPage({
       }
     }
   }, [userSession]);
+
+  const { openModal, Modal } = useModal({
+    type: ModalType.ConfirmationModal,
+    props: {
+      icon: 'info',
+      visible: true,
+      confirmationButtonColor: themeColors.primary,
+      confirmationButtonText: formatMessage(messages.goBackToHomePage),
+      confirmationButtonStyles: { width: 'auto', px: 30 },
+      confirmAction: () => history.push('/'),
+      description: formatMessage(messages.catMhErrorModalTitle),
+      content: nextQuestionError?.error?.response?.data?.body ?? '',
+      hideCloseButton: true,
+      hideCancelButton: true,
+      maxWidth: 500,
+      contentContainerStyles: { px: 20, py: 20 },
+      disableClose: true,
+    },
+  });
+
+  useEffect(() => {
+    if (nextQuestionError && isCatMhSession) {
+      openModal();
+    }
+  }, [nextQuestionError]);
 
   if (questionError) {
     const queryParams = new URLSearchParams(location.search);
@@ -445,7 +473,7 @@ export function AnswerSessionPage({
     const canSkipNarrator = narratorSkippable || !isAnimationOngoing;
 
     const shouldRenderSkipQuestionButton =
-      userSessionType !== UserSessionType.CAT_MH &&
+      !isCatMhSession &&
       !isLastScreen &&
       !NOT_SKIPPABLE_QUESTIONS.includes(type);
 
@@ -619,6 +647,8 @@ export function AnswerSessionPage({
             hideCloseButton
             isMobile={isMobile}
           />
+
+          <Modal />
 
           <Box
             display="flex"

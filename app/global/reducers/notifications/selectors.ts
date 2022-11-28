@@ -19,3 +19,9 @@ export const makeSelectNotifications = () =>
     selectNotificationsState,
     ({ notifications }) => notifications,
   );
+
+export const makeSelectNavigatorAvailability = () =>
+  createSelector(
+    selectNotificationsState,
+    ({ navigatorAvailability }) => navigatorAvailability,
+  );

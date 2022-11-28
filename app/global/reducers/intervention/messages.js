@@ -96,6 +96,16 @@ export default defineMessages({
   },
   deleteAttachmentError: {
     id: `${scope}.deleteAttachmentError`,
-    defaultMessage: 'An error has occured while deleting your file',
+    defaultMessage: 'An error has occurred while deleting your file',
+  },
+  generateConversationTranscriptSuccess: {
+    id: `${scope}.generateConversationTranscriptSuccess`,
+    defaultMessage:
+      'CIAS is generating a transcript of all conversations within this intervention. We will send you an e-mail when this process has been finished.',
+  },
+  generateConversationTranscriptError: {
+    id: `${scope}.generateConversationTranscriptError`,
+    defaultMessage:
+      'An error has occurred while generating conversations transcript',
   },
 });

@@ -538,6 +538,7 @@ exports[`<UserList /> Should render and match the snapshot - admin 1`] = `
 
 .c21 {
   margin-right: 5px;
+  border-radius: 5px;
 }
 
 .c16:disabled + label > .c20 {
@@ -1870,6 +1871,7 @@ exports[`<UserList /> Should render and match the snapshot - researcher 1`] = `
 
 .c20 {
   margin-right: 5px;
+  border-radius: 5px;
 }
 
 .c15:disabled + label > .c19 {
