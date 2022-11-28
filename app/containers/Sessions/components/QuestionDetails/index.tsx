@@ -9,6 +9,9 @@ import { canEdit } from 'models/Status/statusPermissions';
 import { GroupType, QuestionGroup } from 'models/QuestionGroup';
 import { QuestionDTO, QuestionTypes } from 'models/Question';
 import { Intervention } from 'models/Intervention';
+import { CHARACTER_CONFIGS } from 'models/Character';
+
+import { CHARACTER_FIXED_POSITION_QUESTIONS } from 'utils/characterConstants';
 
 import { makeSelectIsNarratorTab } from 'global/reducers/localState';
 import {
@@ -103,6 +106,12 @@ const RenderQuestionDetails = ({
       : true;
   const showProceedButton = proceedButton && !isTlfbGroup && !isFinishScreen;
 
+  const isNarratorPositionFixed =
+    CHARACTER_FIXED_POSITION_QUESTIONS.includes(type);
+
+  const { character, animation } = settings;
+  const characterAdditionalSpace = CHARACTER_CONFIGS[character].size.height;
+
   return (
     <AnswerOuterContainer>
       <Column width="100%" display="flex" align="center">
@@ -156,7 +165,15 @@ const RenderQuestionDetails = ({
               settings={{ ...settings, title, subtitle }}
             />
           )}
-          <Row justify="center" width="100%">
+          <Row
+            justify="center"
+            width="100%"
+            pt={
+              animation && !isNarratorPositionFixed
+                ? characterAdditionalSpace
+                : 0
+            }
+          >
             {/* @ts-ignore */}
             <AppContainer disablePageTitle $width="100%">
               {!isNarratorTabOrEditNotPossible && (

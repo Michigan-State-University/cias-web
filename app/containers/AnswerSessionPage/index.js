@@ -237,6 +237,7 @@ export function AnswerSessionPage({
       proceed_button: proceedButton,
       narrator_skippable: narratorSkippable,
     } = {},
+    narrator: { settings: { character, animation } = {} } = {},
   } = currentQuestion ?? {};
 
   const [containerQueryParams, pageRef] = useContainerQuery(QUERY);
@@ -480,10 +481,20 @@ export function AnswerSessionPage({
       (isNullOrUndefined(proceedButton) || proceedButton) &&
       canSkipNarrator;
 
+    const characterAdditionalSpace = CHARACTER_CONFIGS[character].size.height;
+
     return (
       <Row justify="center" width="100%">
         <AppContainer $width="100%">
-          <Box lang={languageCode} width="100%">
+          <Box
+            lang={languageCode}
+            width="100%"
+            pt={
+              animation && !isNarratorPositionFixed
+                ? characterAdditionalSpace
+                : 0
+            }
+          >
             <CommonLayout currentQuestion={currentQuestion} />
 
             <Row>{renderQuestionByType(currentQuestion, sharedProps)}</Row>
@@ -730,6 +741,7 @@ export function AnswerSessionPage({
                     <Row
                       padding={!isDesktop || isMobile ? 30 : 0}
                       pb={isDesktop || (!isDesktop && logoUrl) ? 24 : 0}
+                      pt={isMobile && animation && !logoUrl ? 0 : undefined}
                       width="100%"
                     >
                       {!isDesktop && (
