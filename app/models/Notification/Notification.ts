@@ -4,6 +4,8 @@ import {
   InterventionConversationsTranscriptReadyNotificationData,
   NewConversationNotificationData,
   NotificationData,
+  SuccessfullyRestoredInterventionNotificationData,
+  UnsuccessfulImportNotificationData,
 } from './NotificationData';
 
 export type GenericNotification<
@@ -35,8 +37,20 @@ export type InterventionConversationsTranscriptReadyNotification =
     InterventionConversationsTranscriptReadyNotificationData
   >;
 
+export type SuccessfullyRestoredInterventionNotification = GenericNotification<
+  NotificationEvent.SUCCESSFULLY_RESTORED_INTERVENTION,
+  SuccessfullyRestoredInterventionNotificationData
+>;
+
+export type UnsuccessfulImportNotification = GenericNotification<
+  NotificationEvent.UNSUCCESSFUL_INTERVENTION_IMPORT,
+  UnsuccessfulImportNotificationData
+>;
+
 // Union type
 export type Notification =
   | NewConversationNotification
   | ConversationTranscriptReadyNotification
-  | InterventionConversationsTranscriptReadyNotification;
+  | InterventionConversationsTranscriptReadyNotification
+  | SuccessfullyRestoredInterventionNotification
+  | UnsuccessfulImportNotification;

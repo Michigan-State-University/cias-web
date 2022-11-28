@@ -2,10 +2,14 @@ import React from 'react';
 
 import { Notification, NotificationEvent } from 'models/Notification';
 
-import { NewConversationNotificationLayout } from './components';
+import {
+  NewConversationNotificationLayout,
+  ConversationTranscriptReadyNotificationLayout,
+  InterventionConversationsTranscriptReadyNotificationLayout,
+  SuccessfullyRestoredInterventionNotificationLayout,
+  UnsuccessfulImportNotificationLayout,
+} from './components';
 import { NotificationLayoutCommonProps } from './types';
-import { ConversationTranscriptReadyNotificationLayout } from './components/ConversationTranscriptReadyNotificationLayout';
-import { InterventionConversationsTranscriptReadyNotificationLayout } from './components/InterventionConversationsTranscriptReadyNotificationLayout';
 
 type Props = {
   notification: Notification;
@@ -32,6 +36,20 @@ const SingleNotification = ({ notification, ...commonProps }: Props) => {
     case NotificationEvent.INTERVENTION_CONVERSATIONS_TRANSCRIPT_READY:
       return (
         <InterventionConversationsTranscriptReadyNotificationLayout
+          notification={notification}
+          {...commonProps}
+        />
+      );
+    case NotificationEvent.SUCCESSFULLY_RESTORED_INTERVENTION:
+      return (
+        <SuccessfullyRestoredInterventionNotificationLayout
+          notification={notification}
+          {...commonProps}
+        />
+      );
+    case NotificationEvent.UNSUCCESSFUL_INTERVENTION_IMPORT:
+      return (
+        <UnsuccessfulImportNotificationLayout
           notification={notification}
           {...commonProps}
         />

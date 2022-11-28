@@ -180,4 +180,8 @@ export default defineMessages({
     id: `${scope}.inviteToIntervention`,
     defaultMessage: 'Invite Participants',
   },
+  exportIntervention: {
+    id: `${scope}.exportIntervention`,
+    defaultMessage: 'Export Intervention',
+  },
 });

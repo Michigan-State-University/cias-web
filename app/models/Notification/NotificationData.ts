@@ -22,8 +22,17 @@ export type InterventionConversationsTranscriptReadyNotificationData = {
   transcript: AppFile;
 };
 
+export type SuccessfullyRestoredInterventionNotificationData = {
+  interventionId: string;
+  interventionName: string;
+};
+
+export type UnsuccessfulImportNotificationData = {};
+
 // Union type
 export type NotificationData =
   | NewConversationNotificationData
   | ConversationTranscriptReadyNotificationData
-  | InterventionConversationsTranscriptReadyNotificationData;
+  | InterventionConversationsTranscriptReadyNotificationData
+  | SuccessfullyRestoredInterventionNotificationData
+  | UnsuccessfulImportNotificationData;

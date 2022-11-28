@@ -21,7 +21,9 @@ import H1 from 'components/H1';
 import TileRenderer from 'components/TileRenderer';
 import SearchInput from 'components/Input/SearchInput';
 import Box from 'components/Box';
-
+import Img from 'components/Img';
+import { ModalType, useModal } from 'components/Modal';
+import { TextButton } from 'components/Button';
 import { statusTypes } from 'models/Status/StatusTypes';
 
 import {
@@ -37,11 +39,14 @@ import {
 } from 'global/reducers/interventions';
 import { editUserRequest, makeSelectUser } from 'global/reducers/auth';
 import { FEEDBACK_FORM_URL } from 'global/constants';
+import importIcon from 'assets/svg/import-secondary.svg';
 
-import { colors, fontSizes } from 'theme';
+import { colors, fontSizes, themeColors } from 'theme';
+
 import StatusFilter from './StatusFilter';
 import messages from './messages';
 import { InitialRow, StyledLink, StyledNotification } from './styled';
+import ImportModalContent from './ImportModalContent';
 
 const INITIAL_FETCH_LIMIT = 15;
 
@@ -50,8 +55,8 @@ export function InterventionPage({
   interventionPageState: {
     interventions,
     interventionsSize,
-    fetchInterventionLoading,
-    fetchInterventionError,
+    loaders: { fetchInterventions: fetchInterventionsLoading },
+    errors: { fetchInterventions: fetchInterventionsError },
     shouldRefetch,
   },
   intl: { formatMessage },
@@ -91,6 +96,15 @@ export function InterventionPage({
     });
   };
 
+  const { openModal: openImportModal, Modal: ImportModal } = useModal({
+    type: ModalType.Modal,
+    modalContentRenderer: (props) => <ImportModalContent {...props} />,
+    props: {
+      title: formatMessage(messages.importIntervention),
+      width: 520,
+    },
+  });
+
   const handleChange = (value) => () => {
     if (filterStatus.includes(value))
       setFilterStatus(filterStatus.filter((el) => el !== value));
@@ -129,8 +143,8 @@ export function InterventionPage({
     />
   );
 
-  if (fetchInterventionError)
-    return <ErrorAlert errorText={fetchInterventionError} fullPage />;
+  if (fetchInterventionsError)
+    return <ErrorAlert errorText={fetchInterventionsError} fullPage />;
 
   return (
     <AppContainer
@@ -140,6 +154,7 @@ export function InterventionPage({
       overflow="clip"
       pt={54}
     >
+      <ImportModal />
       {!user.feedbackCompleted && FeedbackNotification}
 
       {teamName && (
@@ -153,10 +168,26 @@ export function InterventionPage({
         </InitialRow>
       )}
 
-      <InitialRow fluid>
+      <InitialRow fluid style={{ display: 'flex' }}>
         <H1>
           <FormattedMessage {...messages.myInterventions} />
         </H1>
+        <Box mx={24} width={2} height="100%" bg={colors.linkWater} />
+
+        <TextButton
+          buttonProps={{ display: 'flex', align: 'center' }}
+          onClick={openImportModal}
+        >
+          <Img
+            src={importIcon}
+            alt={formatMessage(messages.importIntervention)}
+            mr={8}
+            mb={2}
+          />
+          <Text color={themeColors.secondary} fontWeight="bold">
+            {formatMessage(messages.import)}
+          </Text>
+        </TextButton>
       </InitialRow>
 
       <InitialRow fluid>
@@ -211,7 +242,7 @@ export function InterventionPage({
           onCreateCall={createIntervention}
           createLoading={createInterventionLoading}
           onFetchInterventions={handleFetch}
-          isLoading={fetchInterventionLoading}
+          isLoading={fetchInterventionsLoading}
           filterData={filterData}
           infiniteLoader={{
             itemCount: interventionsSize,
