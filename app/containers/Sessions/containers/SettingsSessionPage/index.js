@@ -28,6 +28,7 @@ const SettingsInterventionPage = ({
     variable,
     settings: { narrator: narratorSettings } = {},
     googleTtsVoice,
+    multipleFill,
   },
   match: { params },
   getSession,
@@ -64,6 +65,7 @@ const SettingsInterventionPage = ({
             narratorSettings={narratorSettings}
             formatMessage={formatMessage}
             googleTtsVoice={googleTtsVoice}
+            multipleFill={multipleFill}
           />
         </StyledColumn>
       </Box>
@@ -84,6 +86,7 @@ SettingsInterventionPage.propTypes = {
       account_required: PropTypes.bool,
     }),
     googleTtsVoice: PropTypes.object,
+    multipleFill: PropTypes.object,
   }),
   match: PropTypes.object,
   getSession: PropTypes.func,

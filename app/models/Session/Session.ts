@@ -55,6 +55,7 @@ export interface Session {
   type: SessionTypes;
   emails?: InterventionInvite[];
   estimatedTime: number;
+  multipleFill: boolean;
 }
 
 export interface ClassicSession extends Session {
