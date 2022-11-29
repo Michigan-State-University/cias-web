@@ -40,6 +40,7 @@ const ParticipantInterventionTileRenderer = ({ data, index }: Props) => {
     id,
     intervention: { name: interventionName, type: interventionType },
     blocked,
+    containMultipleFillSession,
   } = userIntervention;
 
   const statusWithBlocked = blocked ? UserInterventionStatus.NO_ACCESS : status;
@@ -51,10 +52,10 @@ const ParticipantInterventionTileRenderer = ({ data, index }: Props) => {
       ? '0%'
       : `${Math.round((completedSessions / sessionsInIntervention) * 100)}%`;
 
-  const tileDisabled = [
-    UserInterventionStatus.COMPLETED,
-    UserInterventionStatus.NO_ACCESS,
-  ].includes(statusWithBlocked);
+  const tileDisabled =
+    statusWithBlocked === UserInterventionStatus.NO_ACCESS ||
+    (!containMultipleFillSession &&
+      statusWithBlocked === UserInterventionStatus.COMPLETED);
 
   return (
     <GhostLink disabled={tileDisabled} to={`/user_interventions/${id}`}>
