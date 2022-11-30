@@ -56,32 +56,16 @@ export default defineMessages({
     id: `${scope}.clearFiltersText`,
     defaultMessage: `Reset filters to default values`,
   },
-  import: {
-    id: `${scope}.import`,
-    defaultMessage: `Import intervention`,
-  },
   importIntervention: {
     id: `${scope}.importIntervention`,
-    defaultMessage: `Import intervention`,
+    defaultMessage: `Import Intervention`,
   },
   uploadIntervention: {
     id: `${scope}.uploadIntervention`,
     defaultMessage: `Upload Intervention JSON file to add it to CIAS`,
   },
-  dragAndDropInstructions: {
-    id: `${scope}.dragAndDropInstructions`,
+  uploadInterventionInstruction: {
+    id: `${scope}.uploadInterventionInstruction`,
     defaultMessage: `Drag & drop intervention file here to start uploading`,
-  },
-  dragAndDropError: {
-    id: `${scope}.dragAndDropError`,
-    defaultMessage: `Couldn't upload a file`,
-  },
-  or: {
-    id: `${scope}.or`,
-    defaultMessage: `OR`,
-  },
-  browseFiles: {
-    id: `${scope}.browseFiles`,
-    defaultMessage: `Browse files`,
   },
 });

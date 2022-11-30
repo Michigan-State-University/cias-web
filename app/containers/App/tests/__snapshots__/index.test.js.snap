@@ -1196,7 +1196,7 @@ exports[`<AnswerSessionPage /> Should render and match the snapshot 1`] = `
                 font-weight="bold"
               >
                 <img
-                  alt="Import intervention"
+                  alt="Import Intervention"
                   class="c48"
                   src="IMAGE_MOCK"
                 />
@@ -1205,7 +1205,7 @@ exports[`<AnswerSessionPage /> Should render and match the snapshot 1`] = `
                   color="#B727EA"
                   font-weight="bold"
                 >
-                  Import intervention
+                  Import Intervention
                 </p>
               </button>
               <span

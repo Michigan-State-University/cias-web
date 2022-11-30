@@ -185,7 +185,7 @@ export function InterventionPage({
             mb={2}
           />
           <Text color={themeColors.secondary} fontWeight="bold">
-            {formatMessage(messages.import)}
+            {formatMessage(messages.importIntervention)}
           </Text>
         </TextButton>
       </InitialRow>
