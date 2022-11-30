@@ -120,7 +120,7 @@ const useFeedbackHelper: TUseFeedbackHelper = (
                 targetValue,
               ) -
               characterOffset.x,
-            y: sliderRef.sliderRef.offsetTop + characterOffset.y,
+            y: sliderRef.sliderRef.offsetTop + characterOffset.y + MARK_MARGIN,
           };
         }
 
