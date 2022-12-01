@@ -56,15 +56,15 @@ export default defineMessages({
   phoneEmailContact: {
     id: `${scope}.phoneEmailContact`,
     defaultMessage:
-      'You can contact us directly by calling a hotline or sending us e-mail',
+      'You can contact us directly by calling our team or by sending us an e-mail',
   },
   phoneContact: {
     id: `${scope}.phoneContact`,
-    defaultMessage: 'You can contact us directly by calling a hotline',
+    defaultMessage: 'You can contact us directly by calling our team',
   },
   emailContact: {
     id: `${scope}.emailContact`,
-    defaultMessage: 'You can contact us directly by sending us e-mail',
+    defaultMessage: 'You can contact us directly by sending us an e-mail',
   },
   usefulLinks: {
     id: `${scope}.usefulLinks`,
