@@ -44,6 +44,7 @@ function FormikHookInput({
   return (
     <TransparentFormikInput
       error={error}
+      touched={touched}
       hasError={hasError}
       inputProps={inputProps}
       label={label}

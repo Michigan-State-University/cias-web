@@ -9,6 +9,7 @@ export type Link = {
   displayName: string;
   url: string;
   deleting?: boolean;
+  saving?: boolean;
 };
 
 export type LinkData = Pick<Link, 'displayName' | 'url'>;

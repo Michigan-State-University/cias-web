@@ -12,7 +12,7 @@ import {
   UPDATE_NAVIGATOR_LINK_REQUEST,
 } from '../constants';
 import {
-  addNavigatorLinkError,
+  updateNavigatorLinkError,
   updateNavigatorLinkRequest,
   updateNavigatorLinkSuccess,
 } from '../actions';
@@ -24,12 +24,12 @@ function* updateNavigatorLink({
   const url = `/v1/live_chat/intervention/${interventionId}/navigator_setups/links/${linkId}`;
   try {
     yield call(axios.patch, url, objectToSnakeCase({ link: linkData }));
-    yield put(updateNavigatorLinkSuccess());
+    yield put(updateNavigatorLinkSuccess(linkId));
   } catch (error) {
     yield call(toast.error, formatMessage(messages.updateError), {
       toastId: UPDATE_NAVIGATOR_LINK_ERROR,
     });
-    yield put(addNavigatorLinkError(error as ApiError));
+    yield put(updateNavigatorLinkError(linkId, error as ApiError));
   }
 }
 
