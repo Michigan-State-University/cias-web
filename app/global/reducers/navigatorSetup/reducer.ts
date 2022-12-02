@@ -53,6 +53,12 @@ import {
   removeFilledScriptTemplateRequest,
   removeFilledScriptTemplateSuccess,
   removeFilledScriptTemplateError,
+  updateParticipantLinkRequest,
+  updateParticipantLinkSuccess,
+  updateParticipantLinkError,
+  updateNavigatorLinkRequest,
+  updateNavigatorLinkSuccess,
+  updateNavigatorLinkError,
 } from './actions';
 import { NavigatorSetupState, NavigatorSetupAction } from './types';
 
@@ -162,6 +168,25 @@ export const navigatorSetupReducer = (
           );
         }
         break;
+      case getType(updateParticipantLinkRequest):
+        if (draft.navigatorSetup) {
+          updateItemById(
+            draft.navigatorSetup.participantLinks,
+            action.payload.linkId,
+            { saving: true },
+          );
+        }
+        break;
+      case getType(updateParticipantLinkSuccess):
+      case getType(updateParticipantLinkError):
+        if (draft.navigatorSetup) {
+          updateItemById(
+            draft.navigatorSetup.participantLinks,
+            action.payload.linkId,
+            { saving: false },
+          );
+        }
+        break;
       case getType(addNavigatorLinkRequest):
         draft.loaders.addingNavigatorLink = true;
         break;
@@ -198,6 +223,25 @@ export const navigatorSetupReducer = (
             draft.navigatorSetup.navigatorLinks,
             action.payload.linkId,
             { deleting: false },
+          );
+        }
+        break;
+      case getType(updateNavigatorLinkRequest):
+        if (draft.navigatorSetup) {
+          updateItemById(
+            draft.navigatorSetup.navigatorLinks,
+            action.payload.linkId,
+            { saving: true },
+          );
+        }
+        break;
+      case getType(updateNavigatorLinkSuccess):
+      case getType(updateNavigatorLinkError):
+        if (draft.navigatorSetup) {
+          updateItemById(
+            draft.navigatorSetup.navigatorLinks,
+            action.payload.linkId,
+            { saving: false },
           );
         }
         break;
