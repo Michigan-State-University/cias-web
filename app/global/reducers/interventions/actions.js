@@ -12,6 +12,7 @@ import {
   IMPORT_INTERVENTION_SUCCESS,
   IMPORT_INTERVENTION_ERROR,
   REFETCH_INTERVENTIONS,
+  RESET_IMPORT_INTERVENTION_ERROR,
 } from './constants';
 
 export const fetchInterventionsRequest = ({
@@ -47,6 +48,8 @@ export const importInterventionSuccess = () =>
   actionBuilder(IMPORT_INTERVENTION_SUCCESS, {});
 export const importInterventionError = (error) =>
   actionBuilder(IMPORT_INTERVENTION_ERROR, { error });
+export const resetImportModalError = (error) =>
+  actionBuilder(RESET_IMPORT_INTERVENTION_ERROR, { error });
 
 export const refetchInterventions = () =>
   actionBuilder(REFETCH_INTERVENTIONS, {});

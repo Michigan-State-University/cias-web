@@ -36,6 +36,7 @@ import {
   makeSelectInterventionsState,
   interventionsReducer,
   fetchInterventionsSaga,
+  resetImportModalError,
 } from 'global/reducers/interventions';
 import { editUserRequest, makeSelectUser } from 'global/reducers/auth';
 import { FEEDBACK_FORM_URL } from 'global/constants';
@@ -64,6 +65,7 @@ export function InterventionPage({
   createInterventionLoading,
   user,
   editUser,
+  nullifyImportModalError,
 }) {
   const { teamName } = user ?? {};
 
@@ -127,6 +129,11 @@ export function InterventionPage({
     editUser({ feedbackCompleted: true });
   };
 
+  const onImportIconClick = () => {
+    nullifyImportModalError();
+    openImportModal();
+  };
+
   const FeedbackNotification = (
     <StyledNotification
       title={formatMessage(messages.feedbackTitle)}
@@ -176,7 +183,7 @@ export function InterventionPage({
 
         <TextButton
           buttonProps={{ display: 'flex', align: 'center' }}
-          onClick={openImportModal}
+          onClick={onImportIconClick}
         >
           <Img
             src={importIcon}
@@ -262,6 +269,7 @@ InterventionPage.propTypes = {
   createInterventionLoading: PropTypes.bool,
   editUser: PropTypes.func,
   user: PropTypes.object,
+  nullifyImportModalError: PropTypes.func,
 };
 
 const mapStateToProps = createStructuredSelector({
@@ -276,6 +284,7 @@ const mapDispatchToProps = {
   fetchInterventionsRequest,
   createInterventionRequest,
   editUser: editUserRequest,
+  nullifyImportModalError: resetImportModalError,
 };
 
 const withConnect = connect(mapStateToProps, mapDispatchToProps);
