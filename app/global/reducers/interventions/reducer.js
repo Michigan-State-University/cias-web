@@ -20,6 +20,7 @@ import {
   IMPORT_INTERVENTION_REQUEST,
   IMPORT_INTERVENTION_SUCCESS,
   REFETCH_INTERVENTIONS,
+  RESET_IMPORT_INTERVENTION_STATE,
 } from './constants';
 
 export const initialState = {
@@ -147,6 +148,11 @@ export const interventionsReducer = (state = initialState, action) =>
       case IMPORT_INTERVENTION_ERROR: {
         draft.loaders.importIntervention = false;
         draft.errors.importIntervention = action.payload.error;
+        break;
+      }
+      case RESET_IMPORT_INTERVENTION_STATE: {
+        draft.loaders.importIntervention = false;
+        draft.errors.importIntervention = null;
         break;
       }
 
