@@ -6,6 +6,7 @@ import { makeSelectUserRoles } from 'global/reducers/auth';
 import {
   mapRoleToFetchEndpoint,
   mapRoleToDashboardViewJsonKey,
+  getMainUserRole,
 } from 'models/User/RolesManager/organizationRoleHelper';
 import { FETCH_DASHBOARD_VIEW_SELECT_OPTIONS_REQUEST } from '../constants';
 
@@ -18,7 +19,7 @@ export function* fetchDashboardViewSelectOptions({
   payload: { organizableId },
 }) {
   const userRoles = yield select(makeSelectUserRoles());
-  const mainRole = userRoles[0];
+  const mainRole = getMainUserRole(userRoles);
   const requestURL = mapRoleToFetchEndpoint(mainRole, organizableId);
   const roleJsonApiKey = mapRoleToDashboardViewJsonKey(mainRole);
 

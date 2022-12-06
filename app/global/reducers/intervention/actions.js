@@ -68,6 +68,10 @@ import {
   FETCH_INTERVENTION_INVITES_REQUEST,
   FETCH_INTERVENTION_INVITES_SUCCESS,
   FETCH_INTERVENTION_INVITES_ERROR,
+  GENERATE_CONVERSATIONS_TRANSCRIPT_REQUEST,
+  GENERATE_CONVERSATIONS_TRANSCRIPT_SUCCESS,
+  GENERATE_CONVERSATIONS_TRANSCRIPT_ERROR,
+  UPDATE_INTERVENTION_CONVERSATIONS_TRANSCRIPT,
 } from './constants';
 
 export const fetchInterventionRequest = (id) =>
@@ -91,8 +95,8 @@ export const createInterventionSuccess = (intervention) =>
 export const createInterventionError = (error) =>
   actionBuilder(CREATE_INTERVENTION_ERROR, { error });
 
-export const editInterventionRequest = (intervention) =>
-  actionBuilder(EDIT_INTERVENTION_REQUEST, { intervention });
+export const editInterventionRequest = (intervention, extraOptions) =>
+  actionBuilder(EDIT_INTERVENTION_REQUEST, { intervention, extraOptions });
 export const editInterventionSuccess = (intervention) =>
   actionBuilder(EDIT_INTERVENTION_SUCCESS, { intervention });
 export const editInterventionError = (error) =>
@@ -265,3 +269,13 @@ export const deleteAttachmentRequest = (interventionId, attachmentId) =>
   });
 export const deleteAttachmentSuccess = (intervention) =>
   actionBuilder(DELETE_INTERVENTION_ATTACHMENT_SUCCESS, { intervention });
+
+export const generateConversationsTranscriptRequest = () =>
+  actionBuilder(GENERATE_CONVERSATIONS_TRANSCRIPT_REQUEST, {});
+export const generateConversationsTranscriptSuccess = () =>
+  actionBuilder(GENERATE_CONVERSATIONS_TRANSCRIPT_SUCCESS, {});
+export const generateConversationsTranscriptError = (error) =>
+  actionBuilder(GENERATE_CONVERSATIONS_TRANSCRIPT_ERROR, { error });
+
+export const updateInterventionConversationsTranscript = (transcript) =>
+  actionBuilder(UPDATE_INTERVENTION_CONVERSATIONS_TRANSCRIPT, { transcript });

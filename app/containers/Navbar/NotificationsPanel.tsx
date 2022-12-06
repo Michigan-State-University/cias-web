@@ -36,7 +36,7 @@ const NotificationsPanel = () => {
   const { formatMessage } = useIntl();
   const dispatch = useDispatch();
 
-  const { canDisplayLiveChatNotifications } = useRoleManager();
+  const { canDisplayNotifications } = useRoleManager();
 
   const notificationsListVisible = useSelector(
     makeSelectNotificationsListVisible(),
@@ -47,8 +47,7 @@ const NotificationsPanel = () => {
     dispatch(setNotificationsListVisible(!notificationsListVisible));
   const closeNotifications = () => dispatch(setNotificationsListVisible(false));
 
-  // Remove or update this check when making other roles see notifications
-  if (!canDisplayLiveChatNotifications) {
+  if (!canDisplayNotifications) {
     return null;
   }
 
@@ -94,6 +93,7 @@ const NotificationsPanel = () => {
                   key={notification.id}
                   notification={notification}
                   timeFormatLocale={CustomDayjsLocale.EN_LONG_RELATIVE_TIME}
+                  timeFormatWithSuffix
                 />
               ))}
             </Box>

@@ -62,6 +62,7 @@ export const LinkBox = ({ link, updateLink, removeLink }: Props) => {
         </Text>
       }
       onEdit={() => setOpen((prev) => !prev)}
+      saving={link.saving}
       onDelete={removeLink}
       deleting={link.deleting}
       showArrow={false}

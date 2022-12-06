@@ -18,8 +18,9 @@ type Props = {
   children?: ReactNode;
   className?: string;
   disabled?: boolean;
-  id?: string;
+  id: string;
   labelPosition?: LabelPosition;
+  labelOffset?: number;
   onToggle: (value: boolean, event: ChangeEvent<HTMLInputElement>) => void;
 };
 
@@ -30,6 +31,7 @@ const Switch = ({
   disabled = false,
   id,
   labelPosition = LabelPosition.Left,
+  labelOffset,
   onToggle,
 }: Props): JSX.Element => {
   const handleOnChange = (event: ChangeEvent<HTMLInputElement>) => {
@@ -57,7 +59,12 @@ const Switch = ({
             <Slider />
           </SwitchWrapper>
 
-          <LabelContent $labelPosition={labelPosition}>{children}</LabelContent>
+          <LabelContent
+            $labelPosition={labelPosition}
+            $labelOffset={labelOffset}
+          >
+            {children}
+          </LabelContent>
         </SwitchLabelWrapper>
       </StyledLabel>
     </Row>

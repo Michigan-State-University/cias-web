@@ -57,6 +57,7 @@ const AvatarForm = ({
                 fontWeight: 'bold',
                 fontSize: 14,
               }}
+              accept="image/jpg, image/png, image/jpeg"
               height="fit-content"
               onUpload={handleUpload}
             >

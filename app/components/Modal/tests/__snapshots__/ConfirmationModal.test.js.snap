@@ -90,7 +90,6 @@ exports[`<ConfirmationModal /> Should render and match the snapshot 1`] = `
   -ms-flex-direction: row;
   flex-direction: row;
   height: auto;
-  margin-top: 25px;
 }
 
 .c9 {
@@ -106,7 +105,7 @@ exports[`<ConfirmationModal /> Should render and match the snapshot 1`] = `
   padding-left: 50px;
 }
 
-.c12 {
+.c13 {
   width: 100%;
   height: 40px;
   border-radius: 100px;
@@ -119,16 +118,15 @@ exports[`<ConfirmationModal /> Should render and match the snapshot 1`] = `
   border: 1px solid #107969;
   -webkit-transition: background-color 300ms ease,color 300ms ease,border 300ms ease;
   transition: background-color 300ms ease,color 300ms ease,border 300ms ease;
-  margin-right: 25px;
 }
 
-.c12:hover {
+.c13:hover {
   background-color: #107969;
   color: #FFFFFF;
   border: 1px solid transparent;
 }
 
-.c13 {
+.c14 {
   width: 100%;
   height: 40px;
   border-radius: 100px;
@@ -143,7 +141,7 @@ exports[`<ConfirmationModal /> Should render and match the snapshot 1`] = `
   transition: background-color 300ms ease,color 300ms ease,border 300ms ease;
 }
 
-.c13:hover {
+.c14:hover {
   background-color: #FFFFFF;
   color: #D2371D;
   border: 1px solid #D2371D;
@@ -209,6 +207,15 @@ exports[`<ConfirmationModal /> Should render and match the snapshot 1`] = `
   margin-right: 0;
 }
 
+.c12 {
+  margin-top: 48px;
+  gap: 20px;
+  -webkit-box-pack: center;
+  -webkit-justify-content: center;
+  -ms-flex-pack: center;
+  justify-content: center;
+}
+
 @media only screen and (min-width:768px) {
 
 }
@@ -231,6 +238,19 @@ exports[`<ConfirmationModal /> Should render and match the snapshot 1`] = `
     max-width: none;
     min-width: 0;
     width: calc(100% - 20px);
+  }
+}
+
+@media (max-width:575px) {
+  .c12 {
+    margin-top: 32px;
+    -webkit-flex-wrap: wrap;
+    -ms-flex-wrap: wrap;
+    flex-wrap: wrap;
+  }
+
+  .c12 button {
+    width: 100%;
   }
 }
 
@@ -311,10 +331,10 @@ exports[`<ConfirmationModal /> Should render and match the snapshot 1`] = `
                   Are you sure you want to perform this action?
                 </h1>
                 <div
-                  class="c11"
+                  class="c11 c12"
                 >
                   <button
-                    class="c12"
+                    class="c13"
                     color="primary"
                     radius="100px"
                     type="button"
@@ -322,7 +342,7 @@ exports[`<ConfirmationModal /> Should render and match the snapshot 1`] = `
                     Cancel
                   </button>
                   <button
-                    class="c13"
+                    class="c14"
                     color="warning"
                     data-cy="confirmation-box-confirm-button"
                     radius="100px"
@@ -434,16 +454,15 @@ exports[`<ConfirmationModal /> Should render error and match the snapshot 1`] = 
   -ms-flex-direction: row;
   flex-direction: row;
   height: auto;
-  margin-top: 25px;
 }
 
-.c15 {
+.c16 {
   width: auto;
   height: auto;
   margin-right: 15px;
 }
 
-.c16 {
+.c17 {
   font-family: DM Sans;
   font-size: 13px;
   line-height: 130%;
@@ -465,7 +484,7 @@ exports[`<ConfirmationModal /> Should render error and match the snapshot 1`] = 
   padding-left: 50px;
 }
 
-.c14 {
+.c15 {
   padding: 20px;
   width: 100%;
   max-width: 700px;
@@ -482,11 +501,11 @@ exports[`<ConfirmationModal /> Should render error and match the snapshot 1`] = 
   align-items: center;
 }
 
-.c14 p {
+.c15 p {
   color: #2F3850;
 }
 
-.c12 {
+.c13 {
   width: 100%;
   height: 40px;
   border-radius: 100px;
@@ -499,16 +518,15 @@ exports[`<ConfirmationModal /> Should render error and match the snapshot 1`] = 
   border: 1px solid #107969;
   -webkit-transition: background-color 300ms ease,color 300ms ease,border 300ms ease;
   transition: background-color 300ms ease,color 300ms ease,border 300ms ease;
-  margin-right: 25px;
 }
 
-.c12:hover {
+.c13:hover {
   background-color: #107969;
   color: #FFFFFF;
   border: 1px solid transparent;
 }
 
-.c13 {
+.c14 {
   width: 100%;
   height: 40px;
   border-radius: 100px;
@@ -523,7 +541,7 @@ exports[`<ConfirmationModal /> Should render error and match the snapshot 1`] = 
   transition: background-color 300ms ease,color 300ms ease,border 300ms ease;
 }
 
-.c13:hover {
+.c14:hover {
   background-color: #FFFFFF;
   color: #D2371D;
   border: 1px solid #D2371D;
@@ -589,6 +607,15 @@ exports[`<ConfirmationModal /> Should render error and match the snapshot 1`] = 
   margin-right: 0;
 }
 
+.c12 {
+  margin-top: 48px;
+  gap: 20px;
+  -webkit-box-pack: center;
+  -webkit-justify-content: center;
+  -ms-flex-pack: center;
+  justify-content: center;
+}
+
 @media only screen and (min-width:768px) {
 
 }
@@ -611,6 +638,19 @@ exports[`<ConfirmationModal /> Should render error and match the snapshot 1`] = 
     max-width: none;
     min-width: 0;
     width: calc(100% - 20px);
+  }
+}
+
+@media (max-width:575px) {
+  .c12 {
+    margin-top: 32px;
+    -webkit-flex-wrap: wrap;
+    -ms-flex-wrap: wrap;
+    flex-wrap: wrap;
+  }
+
+  .c12 button {
+    width: 100%;
   }
 }
 
@@ -691,10 +731,10 @@ exports[`<ConfirmationModal /> Should render error and match the snapshot 1`] = 
                   Are you sure you want to perform this action?
                 </h1>
                 <div
-                  class="c11"
+                  class="c11 c12"
                 >
                   <button
-                    class="c12"
+                    class="c13"
                     color="primary"
                     radius="100px"
                     type="button"
@@ -702,7 +742,7 @@ exports[`<ConfirmationModal /> Should render error and match the snapshot 1`] = 
                     Cancel
                   </button>
                   <button
-                    class="c13"
+                    class="c14"
                     color="warning"
                     data-cy="confirmation-box-confirm-button"
                     radius="100px"
@@ -713,15 +753,15 @@ exports[`<ConfirmationModal /> Should render error and match the snapshot 1`] = 
                 </div>
               </div>
               <div
-                class="c14"
+                class="c15"
               >
                 <img
                   alt="error"
-                  class="c15"
+                  class="c16"
                   src="IMAGE_MOCK"
                 />
                 <p
-                  class="c16"
+                  class="c17"
                   font-size="15"
                   font-weight="bold"
                 >

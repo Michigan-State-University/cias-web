@@ -7,6 +7,7 @@ import {
   style,
   padding,
   positioning,
+  border,
 } from '../BaseComponentStyles';
 
 const maxNumberOfColumns = 12;
@@ -52,6 +53,7 @@ const Column = styled.div`
   ${style};
   ${padding};
   ${positioning};
+  ${border};
 `;
 
 Column.propTypes = {

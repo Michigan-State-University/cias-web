@@ -220,4 +220,12 @@ export default defineMessages({
     id: `${scope}.monthSelectorModalButton`,
     defaultMessage: `I understand`,
   },
+  catMhErrorModalTitle: {
+    id: `${scope}.catMhErrorModalTitle`,
+    defaultMessage: `Oops! You can’t fill this session`,
+  },
+  goBackToHomePage: {
+    id: `${scope}.goBackToHomePage`,
+    defaultMessage: `Go back to home page`,
+  },
 });

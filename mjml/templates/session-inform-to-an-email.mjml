@@ -1,9 +1,0 @@
-<mjml>
-  <mj-head>
-    <app-header />
-  </mj-head>
-  <mj-body>
-    <app-layout header="Complete a new session" mainText="You have been invited to complete <span style='color: #c866ea;'>{SESSION_NAME}</span> session.<br /><br />Click the link below to start the session" buttonText="Start the session" buttonUrl="{BUTTON_URL}">
-    </app-layout>
-    <mj-body>
-</mjml>

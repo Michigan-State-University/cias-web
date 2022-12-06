@@ -6,6 +6,7 @@
 
 import { actionBuilder } from 'utils/actionBuilder';
 import {
+  RESET_REDUCER,
   SUBMIT_ANSWER_ERROR,
   SUBMIT_ANSWER_REQUEST,
   SUBMIT_ANSWER_SUCCESS,
@@ -30,6 +31,8 @@ import {
   SET_TRANSITIONAL_USER_SESSION_ID,
   SAVE_QUICK_EXIT_EVENT_REQUEST,
 } from './constants';
+
+export const resetReducer = () => actionBuilder(RESET_REDUCER, {});
 
 export const selectAnswer = (payload) => actionBuilder(SELECT_ANSWER, payload);
 

@@ -290,7 +290,7 @@ export function InterventionDetailsPage({
 
   useLayoutEffect(() => {
     fetchIntervention(interventionId);
-  }, []);
+  }, [interventionId]);
 
   useEffect(() => {
     if (

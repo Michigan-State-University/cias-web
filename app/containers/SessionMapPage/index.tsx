@@ -160,6 +160,9 @@ const SessionMapPage = (): JSX.Element => {
   const handleZoomIn = () => setZoom(Math.min(DEFAULT_MAX_ZOOM, zoom + 0.25));
   const handleZoomOut = () => setZoom(Math.max(minZoom, zoom - 0.25));
 
+  const [onlyRenderVisibleElements, setOnlyRenderVisibleElements] =
+    useState(true);
+
   useEffect(() => {
     dispatch(
       getSessionRequest({
@@ -274,6 +277,7 @@ const SessionMapPage = (): JSX.Element => {
                 userSessionNodesIds={userSessionNodesIds}
                 showWithBranchingOnly={showWithBranchingOnly}
                 onIsBranchingChange={setShowWithBranchingOnlyEnabled}
+                onlyRenderVisibleElements={onlyRenderVisibleElements}
               />
               <SessionMapFooter
                 afterPreview={Boolean(userSessionId)}
@@ -281,6 +285,8 @@ const SessionMapPage = (): JSX.Element => {
                 zoomOut={handleZoomOut}
                 zoomInDisabled={zoom === DEFAULT_MAX_ZOOM}
                 zoomOutDisabled={zoom === minZoom}
+                beforeDownload={() => setOnlyRenderVisibleElements(false)}
+                afterDownload={() => setOnlyRenderVisibleElements(true)}
               />
             </ReactFlowProvider>
           </>

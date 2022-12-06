@@ -28,6 +28,13 @@ export const useSocket = <
   TConnectionParams extends ChannelParamsMap = {},
 >(
   channelName: string,
+  // IMPORTANT NOTE: message listeners are attached to the socket at the time
+  // when subscription is created and are NOT updated during the life of a
+  // subscription. It means that message listeners will NOT see any changes that
+  // happens after subscription.
+  // Example: Redux state changes - if you use a state selector in message
+  // listener, it will have value from the moment of subscription creation even
+  // if the state changed in the meantime.
   messageListener: SocketMessageListener<TMessage>,
   { socketConnectionParams, suspend = false }: SocketOptions<TConnectionParams>,
 ) => {

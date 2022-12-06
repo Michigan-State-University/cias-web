@@ -1,9 +1,0 @@
-<mjml>
-  <mj-head>
-    <app-header />
-  </mj-head>
-  <mj-body>
-    <app-layout header="Your CSV file is ready to download" mainText="CSV file that you requested on {REQUESTED_AT} with data from <span style='color: #c866ea;'>{INTERVENTION_NAME}</span> intervention is ready to download in the e-intervention" buttonText="Open the e-intervention" buttonUrl="{BUTTON_URL}">
-    </app-layout>
-    <mj-body>
-</mjml>

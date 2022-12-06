@@ -12,9 +12,9 @@ import {
   UPDATE_PARTICIPANT_LINK_REQUEST,
 } from '../constants';
 import {
-  addParticipantLinkError,
   updateParticipantLinkSuccess,
   updateParticipantLinkRequest,
+  updateParticipantLinkError,
 } from '../actions';
 import messages from '../messages';
 
@@ -25,12 +25,12 @@ export function* updateParticipantLink({
   try {
     yield call(axios.patch, url, objectToSnakeCase({ link: linkData }));
 
-    yield put(updateParticipantLinkSuccess());
+    yield put(updateParticipantLinkSuccess(linkId));
   } catch (error) {
     yield call(toast.error, formatMessage(messages.updateError), {
       toastId: ADD_PARTICIPANT_LINK_ERROR,
     });
-    yield put(addParticipantLinkError(error as ApiError));
+    yield put(updateParticipantLinkError(linkId, error as ApiError));
   }
 }
 
