@@ -1,6 +1,7 @@
 import { useDispatch, useSelector } from 'react-redux';
 import { useInjectReducer } from 'redux-injectors';
 import { toast } from 'react-toastify';
+import dayjs from 'dayjs';
 
 import {
   SocketErrorMessageData,
@@ -48,8 +49,6 @@ import {
   ConversationChannelConnectionParams,
   LiveChatSetupFetchedData,
   ChangeScreenTitleData,
-  NavigatorCalledOutData,
-  CallOutNavigatorErrorData,
   CurrentNavigatorAvailableData,
 } from './types';
 import {
@@ -151,18 +150,16 @@ export const useConversationChannel = (interventionId?: string) => {
     dispatch(setCurrentNavigatorUnavailable(true, conversationId));
   };
 
-  const onNavigatorCalledOut = ({ unlockTime }: NavigatorCalledOutData) => {
+  const onNavigatorCalledOut = () => {
     dispatch(setCallingOutNavigator(false));
     dispatch(setWaitingForNavigator(true));
-    dispatch(setCallOutNavigatorUnlockTime(unlockTime));
+    dispatch(setCallOutNavigatorUnlockTime(dayjs().add(1, 'm').toISOString()));
   };
 
-  const onCallOutUnavailableError = ({
-    unlockTime,
-  }: CallOutNavigatorErrorData) => {
+  const onCallOutUnavailableError = () => {
     dispatch(setCallingOutNavigator(false));
     dispatch(setWaitingForNavigator(true));
-    dispatch(setCallOutNavigatorUnlockTime(unlockTime));
+    dispatch(setCallOutNavigatorUnlockTime(dayjs().add(1, 'm').toISOString()));
   };
 
   const onCallOutCancelled = () => {
@@ -213,10 +210,10 @@ export const useConversationChannel = (interventionId?: string) => {
         onCurrentNavigatorUnavailable(data);
         break;
       case ConversationChannelMessageTopic.NAVIGATOR_CALLED_OUT:
-        onNavigatorCalledOut(data);
+        onNavigatorCalledOut();
         break;
       case ConversationChannelMessageTopic.CALL_OUT_UNAVAILABLE_ERROR:
-        onCallOutUnavailableError(data);
+        onCallOutUnavailableError();
         break;
       case ConversationChannelMessageTopic.CALL_OUT_CANCELLED:
         onCallOutCancelled();
