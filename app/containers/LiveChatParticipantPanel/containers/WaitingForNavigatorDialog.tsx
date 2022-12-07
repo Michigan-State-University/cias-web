@@ -1,6 +1,6 @@
 import React from 'react';
 import { useIntl } from 'react-intl';
-import { useDispatch, useSelector } from 'react-redux';
+import { useSelector } from 'react-redux';
 
 import { colors } from 'theme';
 
@@ -11,7 +11,6 @@ import {
   makeSelectCallOutNavigatorUnlockTime,
   makeSelectCancellingCallOut,
   makeSelectLiveChatSetup,
-  setWaitingForNavigator,
 } from 'global/reducers/liveChat';
 
 import H2 from 'components/H2';
@@ -37,7 +36,6 @@ const WaitingForNavigatorDialog = ({
   onMinimizeDialog,
 }: WaitingForNavigatorDialogProps) => {
   const { formatMessage } = useIntl();
-  const dispatch = useDispatch();
 
   const { cancelCallOut, callOutNavigator } = conversationChannel;
 
@@ -50,10 +48,6 @@ const WaitingForNavigatorDialog = ({
     useSelector(makeSelectLiveChatSetup()) ?? {};
 
   const nextCallOutAvailable = !callOutNavigatorUnlockTime;
-
-  const stopWaiting = () => {
-    dispatch(setWaitingForNavigator(false));
-  };
 
   return (
     <>
@@ -105,7 +99,8 @@ const WaitingForNavigatorDialog = ({
           {nextCallOutAvailable && (
             <Row my={32} gap={8} width="100%">
               <Button
-                onClick={stopWaiting}
+                onClick={cancelCallOut}
+                loading={cancellingCallOut}
                 light
                 title={formatMessage(messages.endRequest)}
               />

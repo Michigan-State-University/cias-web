@@ -1,14 +1,13 @@
 import React from 'react';
 import { useIntl } from 'react-intl';
 import { useSelector } from 'react-redux';
-import dayjs from 'dayjs';
 
 import { colors, themeColors } from 'theme';
 
 import {
   makeSelectCallingOutNavigator,
   makeSelectLiveChatSetup,
-  makeSelectCallOutNavigatorUnlockTime,
+  makeSelectWaitingForNavigator,
 } from 'global/reducers/liveChat';
 
 import { ConversationChannel } from 'utils/useConversationChannel';
@@ -39,16 +38,10 @@ const NarratorUnavailableDialog = ({
 
   const liveChatSetup = useSelector(makeSelectLiveChatSetup());
   const callingOutNavigator = useSelector(makeSelectCallingOutNavigator());
-  const callOutNavigatorUnlockTime = useSelector(
-    makeSelectCallOutNavigatorUnlockTime(),
-  );
+  const isWaitingForNavigator = useSelector(makeSelectWaitingForNavigator());
 
   const { contactEmail, participantLinks, phone, noNavigatorAvailableMessage } =
     liveChatSetup ?? {};
-
-  const callOutNavigatorDisabled =
-    Boolean(callOutNavigatorUnlockTime) &&
-    dayjs().isBefore(callOutNavigatorUnlockTime);
 
   return (
     <>
@@ -58,8 +51,7 @@ const NarratorUnavailableDialog = ({
             <CallOutNavigatorButton
               onClick={callOutNavigator}
               loading={callingOutNavigator}
-              disabled={callOutNavigatorDisabled}
-              unlockTime={callOutNavigatorUnlockTime}
+              disabled={isWaitingForNavigator}
             />
           )
         }
