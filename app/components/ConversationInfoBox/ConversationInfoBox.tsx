@@ -7,7 +7,7 @@ import { formatInterlocutorName } from 'utils/liveChatUtils';
 import { CustomDayjsLocale } from 'utils/dayjs';
 
 import ChatAvatar from 'components/ChatAvatar';
-import SingleNotificationBaseLayout from 'components/SingleNotificationBaseLayout';
+import InfoBox from 'components/InfoBox';
 
 import messages from './messages';
 
@@ -18,6 +18,7 @@ export type Props = {
   archived?: boolean;
   time: string;
   timeFormatLocale: CustomDayjsLocale;
+  timeFormatWithSuffix?: boolean;
   messageContent: string;
   messageSentByCurrentUser: boolean;
   interlocutorData: Nullable<InterlocutorNameData & InterlocutorAvatarData>;
@@ -25,35 +26,23 @@ export type Props = {
 };
 
 export const ConversationInfoBox = ({
-  id,
-  active,
-  highlighted,
-  archived,
-  time,
-  timeFormatLocale,
   messageContent,
   messageSentByCurrentUser,
   interlocutorData,
-  onClick,
+  ...props
 }: Props) => {
   const { formatMessage } = useIntl();
 
   return (
-    <SingleNotificationBaseLayout
-      id={id}
-      active={active}
-      highlighted={highlighted}
-      archived={archived}
-      time={time}
-      timeFormatLocale={timeFormatLocale}
+    <InfoBox
       icon={<ChatAvatar interlocutorAvatarData={interlocutorData} />}
-      title={formatInterlocutorName(interlocutorData)}
+      title={formatInterlocutorName(interlocutorData, true)}
       content={
         messageSentByCurrentUser
-          ? formatMessage(messages.you, { messageContent })
+          ? formatMessage(messages.me, { messageContent })
           : messageContent
       }
-      onClick={onClick}
+      {...props}
     />
   );
 };

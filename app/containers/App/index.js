@@ -68,6 +68,7 @@ import InboxPage from 'containers/InboxPage/Loadable';
 import ArchivePage from 'containers/ArchivePage/Loadable';
 import UserInterventionPage from 'containers/UserInterventionPage/Loadable';
 import ChatWidget from 'containers/ChatWidget';
+import NavigatorAvailabilityModal from 'containers/NavigatorAvailabilityModal';
 
 import AppRoute from 'components/AppRoute';
 import IdleTimer from 'components/IdleTimer/Loadable';
@@ -299,13 +300,29 @@ export function App({ user, fetchSelfDetails }) {
             activeTab: participantReportsTabId,
           }}
         />
-        <AppRoute exact path="/login" component={LoginPage} />
-        <AppRoute exact path="/register" component={RegisterPage} />
-        <AppRoute exact path="/reset-password" component={ResetPasswordPage} />
+        <AppRoute
+          exact
+          path="/login"
+          component={LoginPage}
+          unauthorizedUsersOnly
+        />
+        <AppRoute
+          exact
+          path="/register"
+          component={RegisterPage}
+          unauthorizedUsersOnly
+        />
+        <AppRoute
+          exact
+          path="/reset-password"
+          component={ResetPasswordPage}
+          unauthorizedUsersOnly
+        />
         <AppRoute
           exact
           path="/set-new-password"
           component={SetNewPasswordPage}
+          unauthorizedUsersOnly
         />
         <AppRoute exact path="/logout" component={Logout} />
         <AppRoute
@@ -530,6 +547,7 @@ export function App({ user, fetchSelfDetails }) {
       </Switch>
       <GlobalStyle />
       {shouldDisplayChatWidget && <ChatWidget />}
+      <NavigatorAvailabilityModal />
     </RolesManagerContext.Provider>
   );
 }

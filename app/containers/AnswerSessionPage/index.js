@@ -99,6 +99,7 @@ import {
   toggleTextTranscriptAction,
   setTransitionalUserSessionId as setTransitionalUserSessionIdAction,
   saveQuickExitEventRequest,
+  resetReducer,
 } from './actions';
 import BranchingScreen from './components/BranchingScreen';
 import {
@@ -211,6 +212,7 @@ export function AnswerSessionPage({
   setTransitionalUserSessionId,
   setLiveChatEnabled,
   saveQuickExitEvent,
+  resetAnswerSessionPage,
 }) {
   const { formatMessage } = useIntl();
   const history = useHistory();
@@ -285,6 +287,7 @@ export function AnswerSessionPage({
 
   useEffect(() => {
     if (isPreview) fetchIntervention(interventionId);
+    resetAnswerSessionPage();
   }, [interventionId]);
 
   const previewPossible =
@@ -819,6 +822,7 @@ AnswerSessionPage.propTypes = {
   setTransitionalUserSessionId: PropTypes.func,
   setLiveChatEnabled: PropTypes.func,
   saveQuickExitEvent: PropTypes.func,
+  resetAnswerSessionPage: PropTypes.func,
 };
 
 const mapStateToProps = createStructuredSelector({
@@ -841,6 +845,7 @@ const mapDispatchToProps = {
   setTransitionalUserSessionId: setTransitionalUserSessionIdAction,
   setLiveChatEnabled: setChatEnabled,
   saveQuickExitEvent: saveQuickExitEventRequest,
+  resetAnswerSessionPage: resetReducer,
 };
 
 const withConnect = connect(mapStateToProps, mapDispatchToProps);

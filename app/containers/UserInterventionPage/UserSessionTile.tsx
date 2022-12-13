@@ -1,10 +1,12 @@
 import React, { useMemo } from 'react';
+import { useHistory } from 'react-router-dom';
 import { useIntl } from 'react-intl';
 import dayjs from 'dayjs';
 
 import Box from 'components/Box';
 import GhostLink from 'components/GhostLink';
 import Text, { EllipsisText } from 'components/Text';
+import Button from 'components/Button';
 
 import { Session } from 'models/Session/Session';
 import { UserSession } from 'models/UserSession/UserSession';
@@ -14,7 +16,7 @@ import {
   statusTypeToFontColorMap,
 } from 'models/UserSession/StatusTypes';
 import { InterventionType } from 'models/Intervention';
-import { colors } from 'theme';
+import { colors, themeColors } from 'theme';
 
 import globalMessages from 'global/i18n/globalMessages';
 import { SCHEDULE_OPTIONS } from 'global/reducers/intervention';
@@ -40,12 +42,15 @@ const UserSessionTile = ({
     schedule,
     schedulePayload,
     scheduleAt,
+    multipleFill,
   },
   interventionType,
   interventionId,
   userSession,
 }: Props) => {
   const { formatMessage } = useIntl();
+  const history = useHistory();
+  const sessionUrl = `/interventions/${interventionId}/sessions/${id}/fill`;
 
   const isFirstSession = position === 1;
 
@@ -80,10 +85,11 @@ const UserSessionTile = ({
     return colors.white;
   }, [userSessionStatus]);
 
-  const disabledTile = [
-    UserSessionStatus.NOT_AVAILABLE,
-    UserSessionStatus.COMPLETED,
-  ].includes(userSessionStatus);
+  const disabledTile =
+    !multipleFill &&
+    [UserSessionStatus.NOT_AVAILABLE, UserSessionStatus.COMPLETED].includes(
+      userSessionStatus,
+    );
 
   const renderBottomText = () => {
     if (userSessionStatus !== UserSessionStatus.NOT_AVAILABLE) {
@@ -127,11 +133,7 @@ const UserSessionTile = ({
   };
 
   return (
-    <GhostLink
-      disabled={disabledTile}
-      width="100%"
-      to={`/interventions/${interventionId}/sessions/${id}/fill`}
-    >
+    <GhostLink disabled={disabledTile} width="100%" to={sessionUrl}>
       <TileContainer bg={tileBackground}>
         <Box display="flex" justify="between" align="center">
           <Box
@@ -168,6 +170,35 @@ const UserSessionTile = ({
         >
           {renderBottomText()}
         </Box>
+        {multipleFill && userSessionStatus === UserSessionStatus.COMPLETED && (
+          <Box
+            display="flex"
+            justify="between"
+            align="center"
+            borderTop={`1px solid ${colors.lightGrey}`}
+            pt={15}
+            borderRadius={0}
+          >
+            {userSession?.filledOutCount && (
+              <Box>
+                <Text textOpacity={0.7} color={themeColors.text}>
+                  {formatMessage(messages.sessionFilledNTimes, {
+                    count: userSession.filledOutCount,
+                  })}
+                </Text>
+              </Box>
+            )}
+            <Box>
+              <Button
+                px={20}
+                height={33}
+                onClick={() => history.push(sessionUrl)}
+              >
+                {formatMessage(messages.fillAgain)}
+              </Button>
+            </Box>
+          </Box>
+        )}
       </TileContainer>
     </GhostLink>
   );

@@ -8,6 +8,11 @@ import {
   ARCHIVE_INTERVENTION_REQUEST,
   ARCHIVE_INTERVENTION_SUCCESS,
   ARCHIVE_INTERVENTION_ERROR,
+  IMPORT_INTERVENTION_REQUEST,
+  IMPORT_INTERVENTION_SUCCESS,
+  IMPORT_INTERVENTION_ERROR,
+  REFETCH_INTERVENTIONS,
+  RESET_IMPORT_INTERVENTION_STATE,
 } from './constants';
 
 export const fetchInterventionsRequest = ({
@@ -36,3 +41,15 @@ export const archiveInterventionSuccess = (interventionId) =>
   actionBuilder(ARCHIVE_INTERVENTION_SUCCESS, { interventionId });
 export const archiveInterventionFailure = (interventionId) =>
   actionBuilder(ARCHIVE_INTERVENTION_ERROR, { interventionId });
+
+export const importInterventionRequest = (file, extraOptions) =>
+  actionBuilder(IMPORT_INTERVENTION_REQUEST, { file, extraOptions });
+export const importInterventionSuccess = () =>
+  actionBuilder(IMPORT_INTERVENTION_SUCCESS, {});
+export const importInterventionError = (error) =>
+  actionBuilder(IMPORT_INTERVENTION_ERROR, { error });
+export const resetImportModalState = () =>
+  actionBuilder(RESET_IMPORT_INTERVENTION_STATE, {});
+
+export const refetchInterventions = () =>
+  actionBuilder(REFETCH_INTERVENTIONS, {});

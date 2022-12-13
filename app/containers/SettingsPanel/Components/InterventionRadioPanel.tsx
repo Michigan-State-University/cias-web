@@ -36,7 +36,7 @@ const InterventionRadioPanel = ({
     onOptionHover && onOptionHover(option);
 
   return (
-    <Box mb={25}>
+    <Box mb={25} mt={48}>
       <Box mb={25} display="flex" align="center">
         <H2>{radioPanelTitle}</H2>
         {nameTooltip && (

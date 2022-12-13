@@ -2,11 +2,13 @@ import { all } from 'redux-saga/effects';
 import fetchInterventionsSaga from './fetchInterventions';
 import copyInterventionSaga from './copyIntervention';
 import archiveInterventionSaga from './archiveIntervention';
+import importInterventionSaga from './importIntervention';
 
 export {
   fetchInterventionsSaga,
   copyInterventionSaga,
   archiveInterventionSaga,
+  importInterventionSaga,
 };
 
 export default function* allInterventionSagas() {
@@ -14,5 +16,6 @@ export default function* allInterventionSagas() {
     fetchInterventionsSaga(),
     copyInterventionSaga(),
     archiveInterventionSaga(),
+    importInterventionSaga(),
   ]);
 }

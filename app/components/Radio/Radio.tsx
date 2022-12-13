@@ -18,7 +18,7 @@ import RadioLabelWrapper from './RadioLabelWrapper';
 import { LabelContent, StyledIcon, StyledLabel, StyledRadio } from './styled';
 import { LabelPosition } from './constants';
 
-type Props = {
+export type Props = {
   checked: boolean;
   children?: ReactNode;
   className?: string;
@@ -29,6 +29,7 @@ type Props = {
     (value: boolean, event: ChangeEvent<HTMLInputElement>) => void
   >;
   stroke?: boolean | string;
+  labelOffset?: number;
 };
 
 const Radio = ({
@@ -40,6 +41,7 @@ const Radio = ({
   labelPosition = LabelPosition.Right,
   onChange,
   stroke,
+  labelOffset,
   ...restProps
 }: Props): JSX.Element => {
   const icon = checked ? radioChecked : radio;
@@ -71,7 +73,10 @@ const Radio = ({
             stroke={stroke || themeColors.secondary}
           />
           {children && (
-            <LabelContent $labelPosition={labelPosition}>
+            <LabelContent
+              $labelPosition={labelPosition}
+              $labelOffset={labelOffset}
+            >
               {children}
             </LabelContent>
           )}

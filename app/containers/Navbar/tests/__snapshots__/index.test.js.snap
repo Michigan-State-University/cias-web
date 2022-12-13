@@ -53,6 +53,7 @@ exports[`<Navbar /> Should render and match the snapshot with session path 1`] =
   align-items: center;
   z-index: 10;
   height: 70px;
+  gap: 16px;
 }
 
 .c0 .user-name-info {
@@ -71,6 +72,9 @@ exports[`<Navbar /> Should render and match the snapshot with session path 1`] =
   -ms-flex-align: center;
   align-items: center;
   gap: 32px;
+  -webkit-flex-shrink: 0;
+  -ms-flex-negative: 0;
+  flex-shrink: 0;
 }
 
 .c2 {
@@ -84,6 +88,12 @@ exports[`<Navbar /> Should render and match the snapshot with session path 1`] =
   -ms-flex-align: center;
   align-items: center;
   gap: 10px;
+}
+
+@media (max-width:575px) {
+  .c0 {
+    gap: 0;
+  }
 }
 
 @media (max-width:767px) {
@@ -177,6 +187,7 @@ exports[`<Navbar /> Should render and match the snapshot withou matching path 1`
   align-items: center;
   z-index: 10;
   height: 70px;
+  gap: 16px;
 }
 
 .c0 .user-name-info {
@@ -195,6 +206,9 @@ exports[`<Navbar /> Should render and match the snapshot withou matching path 1`
   -ms-flex-align: center;
   align-items: center;
   gap: 32px;
+  -webkit-flex-shrink: 0;
+  -ms-flex-negative: 0;
+  flex-shrink: 0;
 }
 
 .c2 {
@@ -208,6 +222,12 @@ exports[`<Navbar /> Should render and match the snapshot withou matching path 1`
   -ms-flex-align: center;
   align-items: center;
   gap: 10px;
+}
+
+@media (max-width:575px) {
+  .c0 {
+    gap: 0;
+  }
 }
 
 @media (max-width:767px) {

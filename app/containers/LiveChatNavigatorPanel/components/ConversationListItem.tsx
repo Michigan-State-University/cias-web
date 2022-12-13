@@ -28,7 +28,7 @@ export const ConversationListItem = ({
       content,
     },
     liveChatInterlocutors,
-    archived,
+    archivedAt,
   } = conversation;
 
   const handleClick = () => onClick(conversationId);
@@ -47,7 +47,7 @@ export const ConversationListItem = ({
       id={conversationId}
       active={opened}
       highlighted={markUnread}
-      archived={archived}
+      archived={!!archivedAt}
       time={createdAt}
       timeFormatLocale={CustomDayjsLocale.EN_SHORT_RELATIVE_TIME}
       messageContent={content}

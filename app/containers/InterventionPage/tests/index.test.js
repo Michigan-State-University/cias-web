@@ -28,8 +28,12 @@ describe('<InterventionPage />', () => {
     },
     interventions: {
       interventions: [],
-      fetchInterventionLoading: true,
-      fetchInterventionError: null,
+      loaders: {
+        fetchInterventions: true,
+      },
+      errors: {
+        fetchInterventions: null,
+      },
     },
   };
 
@@ -77,8 +81,12 @@ describe('<InterventionPage />', () => {
       ...initialState,
       interventions: {
         interventions: [],
-        fetchInterventionLoading: false,
-        fetchInterventionError: null,
+        loaders: {
+          fetchInterventions: false,
+        },
+        errors: {
+          fetchInterventions: null,
+        },
       },
     });
     const { container } = render(
@@ -105,8 +113,12 @@ describe('<InterventionPage />', () => {
             user: { id: 'test' },
           },
         ],
-        fetchInterventionLoading: false,
-        fetchInterventionError: null,
+        loaders: {
+          fetchInterventions: false,
+        },
+        errors: {
+          fetchInterventions: null,
+        },
       },
     });
     store.runSaga = () => {};

@@ -6,6 +6,8 @@
 
 import { QuestionTypes } from 'models/Question';
 
+export const RESET_REDUCER = 'app/AnswerSessionPage/RESET_REDUCER';
+
 export const SUBMIT_ANSWER_REQUEST =
   'app/AnswerSessionPage/SUBMIT_ANSWER_REQUEST';
 export const SUBMIT_ANSWER_SUCCESS =

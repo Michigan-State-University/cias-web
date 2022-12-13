@@ -18,6 +18,10 @@ export type ReadNotificationData = {
   notificationId: string;
 };
 
+export type SetNavigatorAvailabilityData = {
+  online: boolean;
+};
+
 // SOCKET MESSAGES
 
 export type UnreadNotificationsFetchedSocketMessage = SocketMessage<
@@ -42,4 +46,11 @@ export type ReadNotificationSocketAction = SocketAction<
   ReadNotificationData
 >;
 
-export type NotificationChannelAction = ReadNotificationSocketAction;
+export type SetNavigatorAvailabilityAction = SocketAction<
+  NotificationChannelActionName.ON_NAVIGATOR_AVAILABILITY_SET,
+  SetNavigatorAvailabilityData
+>;
+
+export type NotificationChannelAction =
+  | ReadNotificationSocketAction
+  | SetNavigatorAvailabilityAction;

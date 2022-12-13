@@ -46,4 +46,16 @@ export default defineMessages({
     defaultMessage:
       'This module will be available <secondaryColorBold>{schedulePayload} days</secondaryColorBold> after date provided in previous session in this intervention',
   },
+  sessionFilledNTimes: {
+    id: `${scope}.sessionFilledNTimes`,
+    defaultMessage:
+      'Session filled: <secondaryColorBold>{count} {count, plural, ' +
+      'one {time}' +
+      'other {times}' +
+      '}</secondaryColorBold>',
+  },
+  fillAgain: {
+    id: `${scope}.fillAgain`,
+    defaultMessage: 'Fill again',
+  },
 });

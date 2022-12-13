@@ -18,8 +18,8 @@ export const makeSelectPublishedInterventions = () =>
     interventionsState.interventions.filter(({ status }) => status === draft),
   );
 
-export const makeSelectInterventionsLoader = () =>
-  createSelector(
-    interventions,
-    (interventionsState) => interventionsState.fetchInterventionLoading,
-  );
+export const makeSelectInterventionsLoader = (name) =>
+  createSelector(interventions, ({ loaders }) => loaders[name]);
+
+export const makeSelectInterventionsError = (name) =>
+  createSelector(interventions, ({ errors }) => errors[name]);

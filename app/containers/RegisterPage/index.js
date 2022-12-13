@@ -4,7 +4,7 @@
  *
  */
 
-import React, { memo, useState } from 'react';
+import React, { memo, useEffect, useState, useMemo } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { Helmet } from 'react-helmet';
@@ -13,7 +13,7 @@ import { createStructuredSelector } from 'reselect';
 import { compose } from 'redux';
 import { Formik } from 'formik';
 import * as Yup from 'yup';
-import { Link } from 'react-router-dom';
+import { Link, useHistory } from 'react-router-dom';
 import dayjs from 'dayjs';
 import set from 'lodash/set';
 import lowerCase from 'lodash/lowerCase';
@@ -39,13 +39,14 @@ import ErrorAlert from 'components/ErrorAlert';
 import FormikCheckbox from 'components/FormikCheckbox';
 import Box from 'components/Box';
 
+import { isNil } from 'lodash';
 import makeSelectRegisterPage from './selectors';
 import reducer from './reducer';
 import allRegistrationsSaga from './sagas';
 import messages from './messages';
 import {
   registerParticipantRequest,
-  registerResearcherRequest,
+  registerFromInvitationRequest,
 } from './actions';
 import { TermsAndConditions } from './styled';
 
@@ -87,9 +88,9 @@ const initialValues = (email) => ({
 
 export function RegisterPage({
   registerParticipant,
-  registerResearcher,
+  registerFromInvitation,
   intl: { formatMessage },
-  registerPage: { loading, error },
+  registerPage: { loading, error, success },
   location,
 }) {
   const [showTermsModal, setShowTermsModal] = useState(false);
@@ -99,8 +100,12 @@ export function RegisterPage({
     email,
     invitation_token: invitationToken,
     role,
+    intervention_id: interventionId,
+    session_id: sessionId,
   } = queryString.parse(location.search, { decode: false });
   const isInvite = Boolean(invitationToken) && Boolean(email);
+
+  const history = useHistory();
 
   const termsAndConditionsText =
     role === Roles.Participant || !role
@@ -113,10 +118,40 @@ export function RegisterPage({
 
     if (isInvite) {
       set(values, 'invitationToken', invitationToken);
-      registerResearcher(values);
+      registerFromInvitation(values);
     } else registerParticipant(values);
     setSubmitting(false);
   };
+
+  const shouldRedirectToIntervention = useMemo(
+    () => !isNil(interventionId) && isNil(sessionId) && isNil(error),
+    [interventionId, sessionId, error],
+  );
+
+  const shouldRedirectToSession = useMemo(
+    () => !isNil(interventionId) && !isNil(sessionId) && isNil(error),
+    [interventionId, sessionId, error],
+  );
+
+  useEffect(() => {
+    const shouldRedirect = success && isInvite && !loading;
+
+    if (shouldRedirect) {
+      if (shouldRedirectToIntervention) {
+        history.replace(`/interventions/${interventionId}/invite`);
+        return;
+      }
+
+      if (shouldRedirectToSession) {
+        history.replace(
+          `/interventions/${interventionId}/sessions/${sessionId}/fill`,
+        );
+        return;
+      }
+
+      history.replace('/');
+    }
+  }, [success, loading, isInvite, interventionId, sessionId, error]);
 
   return (
     <>
@@ -253,7 +288,7 @@ export function RegisterPage({
 
 RegisterPage.propTypes = {
   registerParticipant: PropTypes.func,
-  registerResearcher: PropTypes.func,
+  registerFromInvitation: PropTypes.func,
   intl: PropTypes.object,
   registerPage: PropTypes.object,
   location: PropTypes.object,
@@ -265,7 +300,7 @@ const mapStateToProps = createStructuredSelector({
 
 const mapDispatchToProps = {
   registerParticipant: registerParticipantRequest,
-  registerResearcher: registerResearcherRequest,
+  registerFromInvitation: registerFromInvitationRequest,
 };
 
 const withConnect = connect(mapStateToProps, mapDispatchToProps);

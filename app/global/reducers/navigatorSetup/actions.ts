@@ -152,12 +152,12 @@ export const updateParticipantLinkRequest = createAction(
 
 export const updateParticipantLinkSuccess = createAction(
   UPDATE_PARTICIPANT_LINK_SUCCESS,
-  (action) => () => action(),
+  (action) => (linkId: string) => action({ linkId }),
 );
 
 export const updateParticipantLinkError = createAction(
   UPDATE_PARTICIPANT_LINK_ERROR,
-  (action) => (error: ApiError) => action({ error }),
+  (action) => (linkId: string, error: ApiError) => action({ linkId, error }),
 );
 
 export const addNavigatorLinkRequest = createAction(
@@ -200,12 +200,12 @@ export const updateNavigatorLinkRequest = createAction(
 
 export const updateNavigatorLinkSuccess = createAction(
   UPDATE_NAVIGATOR_LINK_SUCCESS,
-  (action) => () => action(),
+  (action) => (linkId: string) => action({ linkId }),
 );
 
 export const updateNavigatorLinkError = createAction(
   UPDATE_NAVIGATOR_LINK_ERROR,
-  (action) => (error: ApiError) => action({ error }),
+  (action) => (linkId: string, error: ApiError) => action({ linkId, error }),
 );
 
 export const inviteNavigatorsByEmailRequest = createAction(

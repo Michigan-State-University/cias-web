@@ -14,16 +14,16 @@ import {
   EDIT_INTERVENTION_ERROR,
 } from '../constants';
 
-export function* editIntervention({ payload: { intervention, options } }) {
+export function* editIntervention({ payload: { intervention, extraOptions } }) {
   const requestURL = `v1/interventions/${intervention.id}`;
   const narratorChangeURL = `${requestURL}/change_narrator`;
 
   try {
-    if (options?.hasNarratorChanged) {
+    if (extraOptions?.hasNarratorChanged) {
       yield call(axios.post, narratorChangeURL, {
         narrator: {
           name: intervention.currentNarrator,
-          replaced_animations: options.replacementAnimations,
+          replaced_animations: extraOptions.replacementAnimations,
         },
       });
     }
@@ -38,6 +38,9 @@ export function* editIntervention({ payload: { intervention, options } }) {
 
     const mappedData = defaultMapper(data);
     yield put(editInterventionSuccess({ ...intervention, ...mappedData }));
+    if (extraOptions?.onSuccess) {
+      extraOptions.onSuccess();
+    }
   } catch (error) {
     const errorFlag = getErrorFlag(error);
     yield call(

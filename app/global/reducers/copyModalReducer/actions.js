@@ -42,8 +42,8 @@ export const fetchInterventionsWithPaginationSuccess = (
     startIndex,
   });
 
-export const fetchSessionsRequest = (id) =>
-  actionBuilder(FETCH_SESSIONS_REQUEST, { id });
+export const fetchSessionsRequest = (id, withoutMultiple) =>
+  actionBuilder(FETCH_SESSIONS_REQUEST, { id, withoutMultiple });
 export const fetchSessionsSuccess = (sessions) =>
   actionBuilder(FETCH_SESSIONS_SUCCESS, { sessions });
 export const fetchSessionsError = (error) =>

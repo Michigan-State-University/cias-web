@@ -51,6 +51,7 @@ const SessionSettings = ({
   googleTtsVoice,
   currentNarrator,
   editSession,
+  multipleFill,
 }) => {
   useInjectReducer({ key: 'intervention', reducer: interventionReducer });
   useInjectReducer({ key: 'questions', reducer: questionsReducer });
@@ -189,7 +190,7 @@ const SessionSettings = ({
         />
       </InputContainer>
 
-      <InputContainer style={{ marginTop: 15 }}>
+      <InputContainer style={{ marginTop: 15, marginBottom: 15 }}>
         <H3 mb={5} fontWeight="regular">
           {formatMessage(messages.variableLabel)}
         </H3>
@@ -207,7 +208,18 @@ const SessionSettings = ({
         />
       </InputContainer>
 
-      <H3 mt={30} mb={20}>
+      <Option
+        disabled={!editingPossible}
+        label={formatMessage(messages.multipleFill)}
+        tooltipText={formatMessage(messages.multipleFillTooltip)}
+        withBorder
+        value={multipleFill}
+        action={(val) =>
+          editSession({ path: 'multiple_fill', value: val }, ['multiple_fill'])
+        }
+      />
+
+      <H3 mt={15} mb={20}>
         {formatMessage(messages.narratorSettings)}
       </H3>
 
@@ -277,6 +289,7 @@ SessionSettings.propTypes = {
   interventionStatus: PropTypes.string,
   currentNarrator: PropTypes.string,
   editSession: PropTypes.func,
+  multipleFill: PropTypes.bool,
 };
 
 export default compose(withConnect)(SessionSettings);

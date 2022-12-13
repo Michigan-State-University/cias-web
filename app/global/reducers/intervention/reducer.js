@@ -79,6 +79,13 @@ import {
   FETCH_INTERVENTION_INVITES_REQUEST,
   FETCH_INTERVENTION_INVITES_SUCCESS,
   FETCH_INTERVENTION_INVITES_ERROR,
+  GENERATE_CONVERSATIONS_TRANSCRIPT_REQUEST,
+  GENERATE_CONVERSATIONS_TRANSCRIPT_SUCCESS,
+  GENERATE_CONVERSATIONS_TRANSCRIPT_ERROR,
+  UPDATE_INTERVENTION_CONVERSATIONS_TRANSCRIPT,
+  EXPORT_INTERVENTION_REQUEST,
+  EXPORT_INTERVENTION_SUCCESS,
+  EXPORT_INTERVENTION_ERROR,
 } from './constants';
 
 export const initialState = {
@@ -111,6 +118,8 @@ export const initialState = {
     logoLoading: false,
     translateInterventionLoading: false,
     addAttachmentsLoading: false,
+    generateConversationsTranscript: false,
+    exportInterventionLoading: false,
   },
   errors: {
     fetchInterventionError: null,
@@ -121,6 +130,8 @@ export const initialState = {
     createSessionError: null,
     translateInterventionError: null,
     fetchInterventionInvites: null,
+    generateConversationsTranscript: null,
+    exportInterventionError: null,
   },
 };
 
@@ -345,27 +356,13 @@ export const interventionReducer = (state = initialState, action) =>
         break;
 
       case SEND_SESSION_INVITE_REQUEST: {
-        const {
-          emails: payloadEmails,
-          sessionId,
-          shouldNotUpdateStore,
-        } = action.payload;
+        const { sessionId } = action.payload;
 
         const sessionIndex = findSessionIndex(state.intervention, sessionId);
 
         if (sessionIndex !== -1) {
           draft.loaders.sendSessionLoading = true;
           draft.cache.intervention = state.intervention;
-          const mappedEmails = payloadEmails.map((email) => ({
-            email,
-          }));
-
-          if (!shouldNotUpdateStore) {
-            draft.intervention.sessions[sessionIndex].emails = [
-              ...state.intervention.sessions[sessionIndex].emails,
-              ...mappedEmails,
-            ];
-          }
         }
 
         break;
@@ -506,6 +503,37 @@ export const interventionReducer = (state = initialState, action) =>
         break;
       case DELETE_INTERVENTION_ATTACHMENT_SUCCESS:
         draft.intervention.files = action.payload.intervention.files;
+        break;
+
+      case GENERATE_CONVERSATIONS_TRANSCRIPT_REQUEST:
+        draft.loaders.generateConversationsTranscript = true;
+        draft.errors.generateConversationsTranscript = null;
+        break;
+      case GENERATE_CONVERSATIONS_TRANSCRIPT_SUCCESS:
+        draft.loaders.generateConversationsTranscript = false;
+        break;
+      case GENERATE_CONVERSATIONS_TRANSCRIPT_ERROR:
+        draft.loaders.generateConversationsTranscript = false;
+        draft.errors.generateConversationsTranscript = action.payload.error;
+        break;
+
+      case UPDATE_INTERVENTION_CONVERSATIONS_TRANSCRIPT:
+        if (draft.intervention) {
+          draft.intervention.conversationsTranscript =
+            action.payload.transcript;
+        }
+        break;
+      case EXPORT_INTERVENTION_REQUEST:
+        draft.loaders.exportInterventionLoading = true;
+        draft.errors.exportInterventionError = null;
+        break;
+      case EXPORT_INTERVENTION_SUCCESS:
+        draft.loaders.exportInterventionLoading = false;
+        draft.errors.exportInterventionError = null;
+        break;
+      case EXPORT_INTERVENTION_ERROR:
+        draft.loaders.exportInterventionLoading = false;
+        draft.errors.exportInterventionError = action.payload.error;
         break;
     }
   });

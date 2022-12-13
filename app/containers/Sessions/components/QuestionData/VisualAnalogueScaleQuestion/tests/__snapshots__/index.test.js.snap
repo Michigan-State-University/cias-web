@@ -1,45 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`<VisualAnalogueScaleQuestion /> Should render and match the snapshot 1`] = `
-.c6 {
-  display: -webkit-box;
-  display: -webkit-flex;
-  display: -ms-flexbox;
-  display: flex;
-  -webkit-box-pack: center;
-  -webkit-justify-content: center;
-  -ms-flex-pack: center;
-  justify-content: center;
-  -webkit-align-items: center;
-  -webkit-box-align: center;
-  -ms-flex-align: center;
-  align-items: center;
-  width: 50px;
-  height: 25px;
-  background-color: rgba(183,39,234,0.5);
-  border: none;
-  color: #FFFFFF;
-  border-radius: 3px;
-}
-
-.c5 {
-  position: absolute;
-  bottom: 50%;
-  left: 50%;
-  -webkit-transform: translateX(-50%) translateY(-50%);
-  -ms-transform: translateX(-50%) translateY(-50%);
-  transform: translateX(-50%) translateY(-50%);
-}
-
-.c7 {
-  font-family: DM Sans;
-  font-size: 13px;
-  line-height: 130%;
-  font-size: 15px;
-  color: rgba(255,255,255,1);
-  color: rgba(255,255,255,1);
-}
-
 .c1 {
   width: auto;
   height: auto;
@@ -67,18 +28,7 @@ exports[`<VisualAnalogueScaleQuestion /> Should render and match the snapshot 1`
   height: auto;
   display: block;
   border-radius: 5px;
-  display: -webkit-box;
-  display: -webkit-flex;
-  display: -ms-flexbox;
-  display: flex;
-  -webkit-align-content: center;
-  -ms-flex-line-pack: center;
-  align-content: center;
-  -webkit-align-items: center;
-  -webkit-box-align: center;
-  -ms-flex-align: center;
-  align-items: center;
-  gap: 5px;
+  margin-bottom: 64px;
   color: unset;
 }
 
@@ -116,7 +66,24 @@ exports[`<VisualAnalogueScaleQuestion /> Should render and match the snapshot 1`
   height: auto;
 }
 
-.c9 {
+.c5 {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-flex-direction: row;
+  -ms-flex-direction: row;
+  flex-direction: row;
+  height: auto;
+  -webkit-box-pack: justify;
+  -webkit-justify-content: space-between;
+  -ms-flex-pack: justify;
+  justify-content: space-between;
+  justify-items: space-between;
+  margin-bottom: 24px;
+}
+
+.c6 {
   padding: 12px;
   border-style: solid;
   border-width: 1px;
@@ -124,24 +91,39 @@ exports[`<VisualAnalogueScaleQuestion /> Should render and match the snapshot 1`
   border-radius: 5px;
   background-color: transparent;
   border-color: transparent;
-  width: 120px;
+  width: 48px;
   max-width: 200px;
-  padding-top: 9px;
-  padding-bottom: 9px;
   padding-right: 0;
   padding-left: 0;
-  color: #2F3850;
-  text-align: center;
+  color: rgba(183,39,234,1);
+  background-color: rgba(183,39,234,0.1);
+  color: rgba(183,39,234,1);
 }
 
-.c9:focus {
+.c6:focus {
   box-shadow: none;
   outline: none;
   border-color: #107969;
 }
 
-.c9:disabled {
+.c6:disabled {
   color: #ABBBD1;
+}
+
+.c7 {
+  padding: 5px 10px;
+  font-size: 13px;
+  font-weight: 600;
+  border-radius: 4px;
+  text-align: center;
+  background-color: rgba(183,39,234,0.1);
+  color: rgba(183,39,234,1);
+}
+
+.c7:focus {
+  box-shadow: none;
+  outline: none;
+  border: 1px solid transparent;
 }
 
 @media only screen and (min-width:768px) {
@@ -194,95 +176,47 @@ exports[`<VisualAnalogueScaleQuestion /> Should render and match the snapshot 1`
           width="100%"
         >
           <div
-            class="rc-slider rc-slider-with-marks rc-slider-disabled"
+            class="c5"
+          >
+            <input
+              class="c6 c7"
+              color="#B727EA"
+              type="text"
+              value=""
+              width="48px"
+            />
+            <input
+              class="c6 c7"
+              color="#B727EA"
+              type="text"
+              value=""
+              width="48px"
+            />
+          </div>
+          <div
+            class="c8"
           >
             <div
-              class="rc-slider-rail"
-              style="background-color: rgba(47, 56, 80, 0.2);"
-            />
-            <div
-              class="rc-slider-track"
-              style="background-color: rgb(183, 39, 234); left: 0%; width: 0%;"
-            />
-            <div
-              class="rc-slider-step"
-            >
-              <span
-                class="rc-slider-dot rc-slider-dot-active"
-                style="left: 0%;"
-              />
-              <span
-                class="rc-slider-dot"
-                style="left: 100%;"
-              />
-            </div>
-            <div
-              aria-disabled="true"
-              aria-labelledby="question-title question-subtitle"
-              aria-valuemax="100"
-              aria-valuemin="0"
-              aria-valuenow="0"
-              class="rc-slider-handle"
-              dragging="false"
-              index="0"
-              role="slider"
-              style="border-color: #b727ea; box-shadow: none; border-width: 3px; left: 0%; transform: translateX(-50%);"
+              class="rc-slider rc-slider-with-marks rc-slider-disabled"
             >
               <div
-                class="c5"
+                class="rc-slider-rail"
+                style="background-color: rgba(47, 56, 80, 0.2);"
+              />
+              <div
+                class="rc-slider-track"
+                style="background-color: rgb(183, 39, 234); left: 0%; width: 0%;"
+              />
+              <div
+                class="rc-slider-step"
               >
-                <div
-                  class="c6"
-                >
-                  <p
-                    class="c7"
-                    color="#FFFFFF"
-                    font-size="15px"
-                  >
-                    0
-                  </p>
-                </div>
+                <span
+                  class="rc-slider-dot"
+                />
               </div>
-            </div>
-            <div
-              class="rc-slider-mark"
-            >
-              <span
-                class="rc-slider-mark-text rc-slider-mark-text-active"
-                style="transform: translateX(-50%); left: 0%; font-size: 15px;"
-              >
-                <div
-                  class="c8"
-                  display="flex"
-                >
-                  <input
-                    aria-label="Start value"
-                    class="c9"
-                    placeholder="Start value"
-                    type="text"
-                    value="1"
-                    width="120"
-                  />
-                </div>
-              </span>
-              <span
-                class="rc-slider-mark-text"
-                style="transform: translateX(-50%); left: 100%; font-size: 15px;"
-              >
-                <div
-                  class="c8"
-                  display="flex"
-                >
-                  <input
-                    aria-label="End value"
-                    class="c9"
-                    placeholder="End value"
-                    type="text"
-                    value="100"
-                    width="120"
-                  />
-                </div>
-              </span>
+              <div
+                class="rc-slider-mark"
+              />
             </div>
           </div>
         </div>

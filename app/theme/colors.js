@@ -93,6 +93,8 @@ const colors = {
   cadetBlueCrayola: '#B3BAC7',
   linkWaterDark: '#DEE7F6',
   azureishWhite: '#D4DFF7',
+  stormGrey: '#707688',
+  logan: '#9BA1B4',
 };
 
 const themeColors = {

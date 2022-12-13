@@ -1,8 +1,8 @@
 import React, { useState } from 'react';
 import { useIntl } from 'react-intl';
-import { useSelector } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
 
-import { useConversationChannel } from 'utils/useConversationChannel';
+import { ConversationChannel } from 'utils/useConversationChannel';
 
 import {
   makeSelectCreatingConversation,
@@ -10,6 +10,9 @@ import {
   makeSelectOpenedConversation,
   makeSelectOpenedConversationMessages,
   makeSelectOtherInterlocutor,
+  closeConversation,
+  makeSelectCurrentNavigatorUnavailable,
+  makeSelectOpenedConversationId,
 } from 'global/reducers/liveChat';
 
 import { themeColors } from 'theme';
@@ -21,13 +24,14 @@ import Column from 'components/Column';
 import Divider from 'components/Divider';
 import Text from 'components/Text';
 import Spinner from 'components/Spinner';
+import Button from 'components/Button';
 
 import i18nMessages from '../messages';
 import ChatDialog from '../components/ChatDialog';
 import ConversationChatDialogHeader from '../components/ConversationChatDialogHeader';
 
 export type Props = {
-  conversationChannel: ReturnType<typeof useConversationChannel>;
+  conversationChannel: ConversationChannel;
   interventionId: string;
   onMinimizeDialog: () => void;
 };
@@ -39,6 +43,7 @@ const ConversationChatDialog = ({
 }: Props) => {
   const { createConversation, readMessage, sendMessage } = conversationChannel;
   const { formatMessage } = useIntl();
+  const dispatch = useDispatch();
 
   const [message, setMessage] = useState('');
 
@@ -47,6 +52,17 @@ const ConversationChatDialog = ({
   const conversation = useSelector(makeSelectOpenedConversation());
   const currentInterlocutorId = useSelector(makeSelectCurrentInterlocutorId());
   const otherInterlocutor = useSelector(makeSelectOtherInterlocutor());
+  const isCurrentNavigatorUnavailable = useSelector(
+    makeSelectCurrentNavigatorUnavailable(),
+  );
+  const openedConversationId = useSelector(makeSelectOpenedConversationId());
+
+  const isConversationOpened = Boolean(openedConversationId);
+  const isConversationArchived = !!conversation?.archivedAt;
+
+  const isChatUnavailable =
+    isConversationOpened &&
+    (isConversationArchived || isCurrentNavigatorUnavailable);
 
   const handleSendMessage = (content: string) => {
     if (conversation && currentInterlocutorId) {
@@ -70,6 +86,8 @@ const ConversationChatDialog = ({
     handleSendMessage(trimmedMessage);
     setMessage('');
   };
+
+  const onReassignNavigator = () => dispatch(closeConversation());
 
   return (
     <ChatDialog
@@ -95,19 +113,36 @@ const ConversationChatDialog = ({
         )}
         {creatingConversation && <Spinner color={themeColors.secondary} />}
       </Column>
-      {conversation?.archived && (
-        <Column py={24}>
-          <Text fontSize={12} fontWeight="medium" textAlign="center">
-            {formatMessage(i18nMessages.conversationArchived)}
-          </Text>
-        </Column>
+      {isChatUnavailable && (
+        <>
+          <Column
+            pt={24}
+            pb={16}
+            borderBottom={`1px solid ${themeColors.highlight}`}
+            mb={16}
+          >
+            <Text fontSize={12} fontWeight="medium" textAlign="center">
+              {formatMessage(
+                i18nMessages[
+                  isConversationArchived
+                    ? 'conversationArchived'
+                    : 'navigatorOffline'
+                ],
+              )}
+            </Text>
+          </Column>
+          <Button light mb={24} onClick={onReassignNavigator} flexShrink={0}>
+            {formatMessage(i18nMessages.connectWithAnotherNavigator)}
+          </Button>
+        </>
       )}
-      <ChatMessageInput
-        value={message}
-        onChange={setMessage}
-        onSend={handleSend}
-        disabled={conversation?.archived}
-      />
+      {!isChatUnavailable && (
+        <ChatMessageInput
+          value={message}
+          onChange={setMessage}
+          onSend={handleSend}
+        />
+      )}
     </ChatDialog>
   );
 };

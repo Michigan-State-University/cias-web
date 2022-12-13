@@ -1,9 +1,0 @@
-<mjml>
-  <mj-head>
-    <app-header />
-  </mj-head>
-  <mj-body>
-    <app-layout header="{REPORT_TEMPLATE_NAME} PDF Preview" mainText="Preview of the {REPORT_TEMPLATE_NAME} has been generated successfully and it's available as an attachment to this email." buttonText="" buttonUrl="" ignoreEmail="true">
-    </app-layout>
-    <mj-body>
-</mjml>

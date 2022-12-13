@@ -22,6 +22,7 @@ type BoxCollapseType = {
   children: ReactNode;
   label: ReactElement | string;
   onEdit?: () => void;
+  saving?: boolean;
   onDelete?: () => void;
   deleting?: boolean;
   disableAnimation?: boolean;
@@ -50,6 +51,7 @@ export const BoxCollapse = ({
   children,
   label,
   onEdit,
+  saving,
   onDelete,
   deleting,
   disableAnimation,
@@ -94,6 +96,8 @@ export const BoxCollapse = ({
       showHoverEffect={showHoverEffect}
       active={isOpened}
       iconProps={iconProps}
+      loading={saving}
+      buttonProps={saving ? { width: 28 } : undefined}
     />
   );
 

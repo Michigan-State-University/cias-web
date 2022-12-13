@@ -4,21 +4,23 @@ import { connect } from 'react-redux';
 import { createStructuredSelector } from 'reselect';
 import { injectIntl, IntlShape } from 'react-intl';
 
-import ApprovableInput from 'components/Input/ApprovableInput';
-import Box from 'components/Box';
-import HoverableBox from 'components/Box/HoverableBox';
-import Img from 'components/Img';
-import Row from 'components/Row';
-import bin from 'assets/svg/bin-red.svg';
 import { colors } from 'theme';
+import bin from 'assets/svg/bin-red.svg';
+
 import { makeSelectIsNarratorTab } from 'global/reducers/localState';
 import {
   makeSelectSelectedQuestion,
   editQuestionRequest,
 } from 'global/reducers/questions';
 
+import ApprovableInput from 'components/Input/ApprovableInput';
+import Box from 'components/Box';
+import HoverableBox from 'components/Box/HoverableBox';
+import Img from 'components/Img';
+import Row from 'components/Row';
+import Player from 'components/Player';
+
 import messages from './messages';
-import { PlayerWrapper, Player } from './styled';
 
 const isURLValid = (url) =>
   url.includes('youtube') || url.includes('vimeo') || url.includes('youtu.be');
@@ -53,11 +55,7 @@ const QuestionVideo = ({
 
   return (
     <Box width="100%">
-      {(isNarratorTab || disabled) && (
-        <PlayerWrapper>
-          <Player url={videoUrl} controls width="100%" height="100%" />
-        </PlayerWrapper>
-      )}
+      {(isNarratorTab || disabled) && <Player videoUrl={videoUrl} />}
       {!isNarratorTab && !disabled && (
         <HoverableBox
           width="100%"
@@ -68,9 +66,7 @@ const QuestionVideo = ({
           py={14}
         >
           <Row justify="between" align="center">
-            <PlayerWrapper>
-              <Player url={videoUrl} controls width="100%" height="100%" />
-            </PlayerWrapper>
+            <Player videoUrl={videoUrl} />
             <Box
               onClick={removeVideUrl}
               clickable

@@ -18,6 +18,11 @@ export const NavbarStyled = styled.div`
   z-index: ${ZIndex.NAVBAR};
   height: ${elements.navbarHeight}px;
 
+  gap: 16px;
+  @media ${maxQueries.sm} {
+    gap: 0;
+  }
+
   .user-name-info {
     white-space: nowrap;
     @media ${maxQueries.md} {
@@ -32,6 +37,7 @@ export const RightPanel = styled.div`
   display: flex;
   align-items: center;
   gap: 32px;
+  flex-shrink: 0;
 `;
 
 export const DropDownContent = styled.div`
@@ -51,6 +57,7 @@ export const DropDownContent = styled.div`
 
 export const StyledComment = styled(Comment)`
   color: ${colors.bluewood};
+
   &::after {
     display: block;
     content: attr(title);
@@ -64,17 +71,21 @@ export const StyledComment = styled(Comment)`
 export const StyledRow = styled(Row)`
   cursor: pointer;
   white-space: nowrap;
+
   &:not(:last-child) {
     margin-bottom: 20px;
   }
+
   a {
     color: black !important;
     text-decoration: none !important;
   }
+
   &:hover {
     ${StyledComment} {
       font-weight: bold;
     }
+
     a {
       color: black !important;
       text-decoration: none !important;

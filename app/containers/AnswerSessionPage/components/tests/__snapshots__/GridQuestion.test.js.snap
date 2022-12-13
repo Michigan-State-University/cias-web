@@ -159,8 +159,26 @@ exports[`<GridQuestion /> Should render and match the snapshot 1`] = `
 }
 
 .c18 {
-  width: 100%;
   margin-left: 5px;
+}
+
+.c19 {
+  font-family: DM Sans;
+  font-size: 13px;
+  line-height: 130%;
+  color: #2F3850;
+}
+
+.c20 {
+  -webkit-clip: rect(0 0 0 0);
+  clip: rect(0 0 0 0);
+  -webkit-clip-path: inset(100%);
+  clip-path: inset(100%);
+  height: 1px;
+  overflow: hidden;
+  position: absolute;
+  white-space: nowrap;
+  width: 1px;
 }
 
 .c3 {
@@ -205,25 +223,6 @@ exports[`<GridQuestion /> Should render and match the snapshot 1`] = `
 
 .c6 {
   width: 120px;
-}
-
-.c19 {
-  font-family: DM Sans;
-  font-size: 13px;
-  line-height: 130%;
-  color: #2F3850;
-}
-
-.c20 {
-  -webkit-clip: rect(0 0 0 0);
-  clip: rect(0 0 0 0);
-  -webkit-clip-path: inset(100%);
-  clip-path: inset(100%);
-  height: 1px;
-  overflow: hidden;
-  position: absolute;
-  white-space: nowrap;
-  width: 1px;
 }
 
 .c7 {

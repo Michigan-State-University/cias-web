@@ -12,6 +12,7 @@ import { FormattedMessage, injectIntl, IntlShape } from 'react-intl';
 import { Link } from 'react-router-dom';
 import { compose } from 'redux';
 
+import NavigatorAvailabilityPanel from 'containers/NavigatorAvailabilityPanel';
 import UserAvatar from 'components/UserAvatar';
 import Box from 'components/Box';
 import Row from 'components/Row';
@@ -65,6 +66,7 @@ export function Navbar({
         intl,
       })}
       <RightPanel>
+        <NavigatorAvailabilityPanel />
         <NotificationsPanel />
         <DropDownContainer onClick={() => !menuVisible && setMenuVisible(true)}>
           <div ref={dropdownRef}>

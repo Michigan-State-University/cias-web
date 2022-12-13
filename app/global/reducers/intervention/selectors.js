@@ -9,6 +9,12 @@ export const makeSelectInterventionState = () =>
 export const makeSelectIntervention = () =>
   createSelector(selectIntervention, (substate) => substate.intervention);
 
+export const makeSelectInterventionId = () =>
+  createSelector(
+    makeSelectIntervention(),
+    (intervention) => intervention?.id ?? null,
+  );
+
 export const makeSelectCacheIntervention = () =>
   createSelector(selectIntervention, (substate) => substate.cache.intervention);
 
