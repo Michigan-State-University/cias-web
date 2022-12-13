@@ -15,6 +15,14 @@ export default defineMessages({
     id: `${scope}.greet`,
     defaultMessage: 'Greet',
   },
+  otohLeftHand: {
+    id: `${scope}.otohLeftHand`,
+    defaultMessage: 'On the other hand (left)',
+  },
+  otohRightHand: {
+    id: `${scope}.otohRightHand`,
+    defaultMessage: 'On the other hand (right)',
+  },
   pointRight: {
     id: `${scope}.pointRight`,
     defaultMessage: 'Point right',

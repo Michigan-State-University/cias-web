@@ -46,6 +46,9 @@ const emmiAutoRestBodyAnimations = [
   BodyAutoRestAnimation.THINK,
   BodyAutoRestAnimation.UNCERTAIN,
   BodyAutoRestAnimation.WAVE,
+  BodyAutoRestAnimation.CONGRATULATE,
+  BodyAutoRestAnimation.PROCESS,
+  BodyAutoRestAnimation.SURPRISED,
 ];
 
 const characterToAutoRestBodyAnimationsMap: Record<
@@ -97,6 +100,11 @@ const emmiAutoRestHeadAnimations = [
   HeadAutoRestAnimation.DECLINE,
   HeadAutoRestAnimation.DECLINE_ANNOYED,
   HeadAutoRestAnimation.DECLINE_THOUGHTFUL,
+  HeadAutoRestAnimation.BROWS_UP,
+  HeadAutoRestAnimation.PLEASED,
+  HeadAutoRestAnimation.SAD,
+  HeadAutoRestAnimation.SUGGEST,
+  HeadAutoRestAnimation.WEAR_SUNGLASSES,
 ];
 const characterToAutoRestHeadAnimationsMap: Record<
   CharacterType,
@@ -130,7 +138,7 @@ const characterToReverseHeadAnimationsMap: Record<
   [CharacterType.EMMI]: emmiReverseHeadAnimations,
 };
 
-const peedySpeechAnimationsMapper: Record<SpeechAnimation, TSpeechAnimation> = {
+const peedySpeechAnimationsMapper: Record<string, TSpeechAnimation> = {
   [SpeechAnimation.REST]: {
     animations: { speech: SpeechAnimationFile.REST_SPEECH },
   },
@@ -230,8 +238,6 @@ const peedySpeechAnimationsMapper: Record<SpeechAnimation, TSpeechAnimation> = {
   },
 };
 
-const emmiSpeechAnimations = [SpeechAnimation.REST, SpeechAnimation.POINT_UP];
-
 const emmiSpeechAnimationsMapper: Record<string, TSpeechAnimation> = {
   [SpeechAnimation.REST]: {
     animations: { speech: SpeechAnimationFile.REST_SPEECH },
@@ -240,6 +246,34 @@ const emmiSpeechAnimationsMapper: Record<string, TSpeechAnimation> = {
     animations: {
       start: SpeechAnimationFile.POINT_UP,
       speech: SpeechAnimationFile.REST_SPEECH,
+    },
+  },
+  [SpeechAnimation.OTOH_LEFT_HAND]: {
+    animations: {
+      start: SpeechAnimationFile.OTOH_LEFT_HAND_START,
+      speech: SpeechAnimationFile.OTOH_LEFT_HAND_SPEECH,
+      end: SpeechAnimationFile.OTOH_LEFT_HAND_END,
+    },
+  },
+  [SpeechAnimation.OTOH_RIGHT_HAND]: {
+    animations: {
+      start: SpeechAnimationFile.OTOH_RIGHT_HAND_START,
+      speech: SpeechAnimationFile.OTOH_RIGHT_HAND_SPEECH,
+      end: SpeechAnimationFile.OTOH_RIGHT_HAND_END,
+    },
+  },
+  [SpeechAnimation.EXPLAIN]: {
+    animations: {
+      start: SpeechAnimationFile.EXPLAIN_START,
+      speech: SpeechAnimationFile.EXPLAIN_SPEECH,
+      end: SpeechAnimationFile.EXPLAIN_END,
+    },
+  },
+  [SpeechAnimation.ANNOUNCE]: {
+    animations: {
+      start: SpeechAnimationFile.ANNOUNCE_START,
+      speech: SpeechAnimationFile.ANNOUNCE_SPEECH,
+      end: SpeechAnimationFile.ANNOUNCE_END,
     },
   },
 };
@@ -257,7 +291,9 @@ const characterToSpeechAnimationsMap: Record<CharacterType, SpeechAnimation[]> =
     [CharacterType.PEEDY]: keys(
       speechAnimationsMapper[CharacterType.PEEDY],
     ) as SpeechAnimation[],
-    [CharacterType.EMMI]: emmiSpeechAnimations,
+    [CharacterType.EMMI]: keys(
+      speechAnimationsMapper[CharacterType.EMMI],
+    ) as SpeechAnimation[],
   };
 
 const moveAnimations = [MoveAnimation.MOVE_LEFT, MoveAnimation.MOVE_RIGHT];

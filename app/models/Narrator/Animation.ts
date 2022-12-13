@@ -23,6 +23,7 @@ export enum BodyAutoRestAnimation {
   THINK = 'think',
   UNCERTAIN = 'uncertain',
   WAVE = 'wave',
+  CONGRATULATE = 'congratulate',
 }
 export enum BodyReverseAnimation {
   UNCERTAIN = 'uncertain',
@@ -58,6 +59,10 @@ export enum HeadAutoRestAnimation {
   HEAR_BOTH_EARS = 'hearBothEars',
   YAWN = 'yawn',
   EAT_CRACKER = 'eatCracker',
+  BROWS_UP = 'browsUp',
+  SAD = 'sad',
+  SUGGEST = 'suggest',
+  WEAR_SUNGLASSES = 'wearSunglasses',
 }
 export enum HeadReverseAnimation {
   BROWS_UP = 'browsUp',
@@ -97,12 +102,16 @@ export enum SpeechAnimation {
   SEARCH = 'search',
   SUGGEST = 'suggest',
   THINK = 'think',
+  OTOH_LEFT_HAND = 'otohLeftHand',
+  OTOH_RIGHT_HAND = 'otohRightHand',
 }
 
 export enum SpeechAnimationFile {
   REST_SPEECH = 'restSpeech',
   EXPLAIN = 'explain',
   EXPLAIN_SPEECH = 'explainSpeech',
+  EXPLAIN_START = 'explainStart',
+  EXPLAIN_END = 'explainEnd',
   POINT_UP = 'pointUp',
   POINT_UP_SPEECH = 'pointUpSpeech',
   POINT_DOWN = 'pointDown',
@@ -127,6 +136,12 @@ export enum SpeechAnimationFile {
   SUGGEST_SPEECH = 'suggestSpeech',
   THINK = 'think',
   THINK_SPEECH = 'thinkSpeech',
+  OTOH_LEFT_HAND_START = 'otohLeftHandUp',
+  OTOH_LEFT_HAND_SPEECH = 'otohLeftHandSpeech',
+  OTOH_LEFT_HAND_END = 'otohLeftHandDown',
+  OTOH_RIGHT_HAND_START = 'otohRightHandUp',
+  OTOH_RIGHT_HAND_SPEECH = 'otohRightHandSpeech',
+  OTOH_RIGHT_HAND_END = 'otohRightHandDown',
 }
 
 export enum MoveAnimation {
