@@ -84,6 +84,10 @@ export default defineMessages({
     id: `${scope}.testVoice`,
     defaultMessage: 'Test voice!',
   },
+  defaultNarrator: {
+    id: `${scope}.defaultNarrator`,
+    defaultMessage: 'Default narrator',
+  },
   multipleFill: {
     id: `${scope}.multipleFill`,
     defaultMessage: 'Ability to fill the session multiple times',

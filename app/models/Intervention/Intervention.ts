@@ -1,3 +1,4 @@
+import { CharacterType } from 'models/Character';
 import { AppFile } from 'models/File';
 
 import { InterventionInvite } from './InterventionInvite';
@@ -67,6 +68,7 @@ export interface Intervention {
   files: AppFile[];
   liveChatEnabled?: boolean;
   quickExit: boolean;
+  currentNarrator: CharacterType;
   conversationsPresent: boolean;
   conversationsTranscript: Nullable<AppFile>;
 }

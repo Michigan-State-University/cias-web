@@ -10,10 +10,11 @@ import { Provider } from 'react-redux';
 import { IntlProvider } from 'react-intl';
 import { DEFAULT_LOCALE } from 'i18n';
 
-import { feedbackActions } from 'models/Narrator/FeedbackActions';
+import { EFeedbackAction } from 'models/Narrator/FeedbackActions';
 import { readQuestionBlockType } from 'models/Narrator/BlockTypes';
 import { createTestStore } from 'utils/testUtils/storeUtils';
 
+import { CharacterType } from 'models/Character';
 import CharacterAnim from '../CharacterAnim';
 
 describe('<CharacterAnim />', () => {
@@ -27,7 +28,7 @@ describe('<CharacterAnim />', () => {
   const defaultProps = {
     blocks: [
       {
-        action: feedbackActions.noAction,
+        action: EFeedbackAction.NO_ACTION,
         animation: 'rest',
         audio_urls: ['/example/1'],
         endPosition: {
@@ -39,7 +40,7 @@ describe('<CharacterAnim />', () => {
       },
     ],
     questionId: 'test',
-    settings: {},
+    settings: { character: CharacterType.PEEDY },
     animationContainer: { clientWidth: 0, clientHeight: 0 },
     previewMode: '',
     answers: {},

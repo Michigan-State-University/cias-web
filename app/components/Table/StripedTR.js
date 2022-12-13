@@ -1,14 +1,19 @@
 import styled from 'styled-components';
 import PropTypes from 'prop-types';
+
 import { borders, hexToRgb } from 'theme';
 import { colors } from 'theme/colors';
-import { TR } from './TR';
-import { TBody } from './TBody';
 
-const StripedTR = styled(TR)`
+import { TR } from './TR';
+import { margin } from '../BaseComponentStyles';
+
+const StripedTR = styled(TR).attrs((props) => ({
+  stripesPlacement: props.stripesPlacement || 'even',
+  textColor: props.textColor || colors.black,
+}))`
   cursor: ${({ cursor }) => cursor || 'default'};
 
-  ${TBody} &:nth-child(${(props) => props.stripesPlacement}) {
+  :nth-child(${(props) => props.stripesPlacement}) {
     background: ${(props) =>
       props.color ? props.color : `rgba(${hexToRgb(colors.jungleGreen)}, 0.1)`};
 
@@ -31,17 +36,14 @@ const StripedTR = styled(TR)`
   }
 
   color: ${(props) => props.textColor};
-  background-color: ${(props) => props.bg}; ;
+  background-color: ${(props) => props.bg};
+
+  ${margin};
 `;
 
 StripedTR.propTypes = {
   stripesPlacement: PropTypes.string,
   textColor: PropTypes.string,
-};
-
-StripedTR.defaultProps = {
-  stripesPlacement: 'even',
-  textColor: colors.black,
 };
 
 export { StripedTR };

@@ -49,6 +49,7 @@ import {
   EDIT_SESSION_SUCCESS,
   EDIT_SESSION_ERROR,
   BULK_EDIT_SESSION_REQUEST,
+  UPDATE_NARRATOR_SUCCESS,
 } from './constants';
 
 export const initialState = {
@@ -112,6 +113,7 @@ const saved = [
   UPDATE_QUESTION_IMAGE_SUCCESS,
   UPDATE_QUESTION_IMAGE_ERROR,
   CREATE_QUESTIONS_SUCCESS,
+  UPDATE_NARRATOR_SUCCESS,
 ];
 
 /* eslint-disable default-case, no-param-reassign */

@@ -73,7 +73,7 @@ const WrappedAccordion = ({
   groupIds,
   isTlfbGroup,
 }: Props) => {
-  const { voice, animation } = narrator.settings;
+  const { voice, animation, character } = narrator.settings;
 
   const { formatMessage } = useIntl();
 
@@ -183,6 +183,7 @@ const WrappedAccordion = ({
                 disabled,
                 !animation,
                 isTlfbGroup,
+                character,
               )}
             </div>
           ))}

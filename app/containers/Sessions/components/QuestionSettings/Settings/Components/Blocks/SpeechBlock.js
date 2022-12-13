@@ -1,7 +1,6 @@
 import React, { useEffect, useState, useMemo } from 'react';
 import PropTypes from 'prop-types';
 import join from 'lodash/join';
-import keys from 'lodash/keys';
 import { compose } from 'redux';
 import { connect } from 'react-redux';
 import { createStructuredSelector } from 'reselect';
@@ -18,7 +17,7 @@ import {
   makeSelectSelectedQuestionType,
   makeSelectNameQuestionExists,
 } from 'global/reducers/questions';
-import { speechAnimations } from 'utils/animations/animationsNames';
+import { characterToSpeechAnimationsMap } from 'utils/animations/animationsNames';
 import { splitAndKeep } from 'utils/splitAndKeep';
 import {
   makeSelectPreviewData,
@@ -30,10 +29,10 @@ import {
   readQuestionBlockType,
   reflectionType,
 } from 'models/Narrator/BlockTypes';
-
 import { feedbackQuestion } from 'models/Session/QuestionTypes';
-import { feedbackActions } from 'models/Narrator/FeedbackActions';
-import animationMessages from './messages';
+import { EFeedbackAction } from 'models/Narrator/FeedbackActions';
+import animationMessages from 'global/i18n/animationNames';
+
 import { updateBlockSettings, switchSpeechReflection } from '../../actions';
 import messages from '../messages';
 import SpeechInput from './SpeechInput';
@@ -55,6 +54,7 @@ const SpeechBlock = ({
   disabled,
   animationDisabled,
   nameQuestionExists,
+  character,
 }) => {
   const [isPlaying, setIsPlaying] = useState(false);
   const [text, setText] = useState(join(block.text, ''));
@@ -70,24 +70,24 @@ const SpeechBlock = ({
   }, [previewData]);
 
   const selectOptions = useMemo(() => {
-    const animations = keys(speechAnimations);
+    const animations = characterToSpeechAnimationsMap[character];
 
     return animations.map((animation) => ({
       value: animation,
       label: formatMessage(animationMessages[animation]),
     }));
-  }, [speechAnimations]);
+  }, [character]);
 
   const feedbackOptions = useMemo(() => {
-    const options = values(feedbackActions).filter(
-      (action) => action !== feedbackActions.showSpectrum,
+    const options = values(EFeedbackAction).filter(
+      (action) => action !== EFeedbackAction.SHOW_SPECTRUM,
     );
 
     return options.map((option) => ({
       value: option,
       label: formatMessage(messages[option]),
     }));
-  }, [feedbackActions]);
+  }, [EFeedbackAction, character]);
 
   const handleTextUpdate = (value) =>
     updateText(blockIndex, splitAndKeep(value, [',', '.', '?', '!']), id);
@@ -117,7 +117,7 @@ const SpeechBlock = ({
     (option) => option.value === block.action,
   );
 
-  const hasSpecialPositioning = block.action !== feedbackActions.noAction;
+  const hasSpecialPositioning = block.action !== EFeedbackAction.NO_ACTION;
   const isAnimationDisabled = disabled || animationDisabled;
 
   return (
@@ -219,6 +219,7 @@ SpeechBlock.propTypes = {
   disabled: PropTypes.bool,
   animationDisabled: PropTypes.bool,
   nameQuestionExists: PropTypes.bool,
+  character: PropTypes.string,
 };
 
 const mapStateToProps = createStructuredSelector({
@@ -241,7 +242,7 @@ const mapDispatchToProps = {
       index,
       {
         action,
-        animation: action === feedbackActions.noAction ? 'rest' : 'pointUp',
+        animation: action === EFeedbackAction.NO_ACTION ? 'rest' : 'pointUp',
       },
       id,
     ),

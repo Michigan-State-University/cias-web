@@ -16,6 +16,7 @@ import { reflectionType } from 'models/Narrator/BlockTypes';
 import { createQuestion } from 'utils/reducerCreators';
 import { formatMessage } from 'utils/intlOutsideReact';
 import { instantiateBlockForType } from 'models/Session/utils';
+import { CharacterType } from 'models/Character';
 
 import ReflectionBlock from '../ReflectionBlock';
 
@@ -52,6 +53,7 @@ describe('<ReflectionBlock />', () => {
     questions: [],
     currentQuestionType: singleQuestion.id,
     disabled: false,
+    character: CharacterType.PEEDY,
     ...mockFunctions,
   };
 

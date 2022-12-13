@@ -232,6 +232,22 @@ exports[`<TeamsList /> Should render and match the snapshot 1`] = `
   color: #0E0E0E;
 }
 
+.c10:nth-child(even) {
+  background: rgba(16,121,105,0.1);
+}
+
+.c10:nth-child(even) td:first-child,
+.c10:nth-child(even) th:first-child {
+  border-bottom-left-radius: 5px;
+  border-top-left-radius: 5px;
+}
+
+.c10:nth-child(even) td:last-child,
+.c10:nth-child(even) th:last-child {
+  border-bottom-right-radius: 5px;
+  border-top-right-radius: 5px;
+}
+
 .c10:hover {
   background: !important;
 }
@@ -239,6 +255,22 @@ exports[`<TeamsList /> Should render and match the snapshot 1`] = `
 .c13 {
   cursor: pointer;
   color: #0E0E0E;
+}
+
+.c13:nth-child(even) {
+  background: #FFFFFF;
+}
+
+.c13:nth-child(even) td:first-child,
+.c13:nth-child(even) th:first-child {
+  border-bottom-left-radius: 5px;
+  border-top-left-radius: 5px;
+}
+
+.c13:nth-child(even) td:last-child,
+.c13:nth-child(even) th:last-child {
+  border-bottom-right-radius: 5px;
+  border-top-right-radius: 5px;
 }
 
 .c13:hover {

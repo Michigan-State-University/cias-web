@@ -47,6 +47,7 @@ const NotificationsPanel = () => {
     dispatch(setNotificationsListVisible(!notificationsListVisible));
   const closeNotifications = () => dispatch(setNotificationsListVisible(false));
 
+  // Remove or update this check when making other roles see notifications
   if (!canDisplayNotifications) {
     return null;
   }

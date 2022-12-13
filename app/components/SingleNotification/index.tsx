@@ -8,6 +8,7 @@ import {
   InterventionConversationsTranscriptReadyNotificationLayout,
   SuccessfullyRestoredInterventionNotificationLayout,
   UnsuccessfulImportNotificationLayout,
+  NewNarratorWasSetNotificationLayout,
 } from './components';
 import { NotificationLayoutCommonProps } from './types';
 
@@ -50,6 +51,13 @@ const SingleNotification = ({ notification, ...commonProps }: Props) => {
     case NotificationEvent.UNSUCCESSFUL_INTERVENTION_IMPORT:
       return (
         <UnsuccessfulImportNotificationLayout
+          notification={notification}
+          {...commonProps}
+        />
+      );
+    case NotificationEvent.NEW_NARRATOR_WAS_SET:
+      return (
+        <NewNarratorWasSetNotificationLayout
           notification={notification}
           {...commonProps}
         />

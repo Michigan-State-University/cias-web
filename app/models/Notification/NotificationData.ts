@@ -1,3 +1,4 @@
+import { CharacterType } from 'models/Character';
 import { AppFile } from 'models/File';
 
 export type NewConversationNotificationData = {
@@ -7,6 +8,11 @@ export type NewConversationNotificationData = {
   firstName: string;
   lastName: string;
   message: string;
+};
+
+export type NewNarratorWasSetNotificationData = {
+  name: string;
+  newNarrator: CharacterType;
 };
 
 export type ConversationTranscriptReadyNotificationData = {
@@ -35,4 +41,5 @@ export type NotificationData =
   | ConversationTranscriptReadyNotificationData
   | InterventionConversationsTranscriptReadyNotificationData
   | SuccessfullyRestoredInterventionNotificationData
-  | UnsuccessfulImportNotificationData;
+  | UnsuccessfulImportNotificationData
+  | NewNarratorWasSetNotificationData;

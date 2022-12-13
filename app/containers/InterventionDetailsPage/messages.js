@@ -180,6 +180,10 @@ export default defineMessages({
     id: `${scope}.inviteToIntervention`,
     defaultMessage: 'Invite Participants',
   },
+  defaultNarrator: {
+    id: `${scope}.defaultNarrator`,
+    defaultMessage: 'Default narrator',
+  },
   exportIntervention: {
     id: `${scope}.exportIntervention`,
     defaultMessage: 'Export Intervention',

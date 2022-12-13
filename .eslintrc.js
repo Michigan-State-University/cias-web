@@ -74,6 +74,7 @@ const baseRules = {
   'react/no-danger': 0,
   'react/jsx-props-no-spreading': 0,
   'react/jsx-fragments': 1,
+  'react/react-in-jsx-scope': 0,
 };
 
 module.exports = {

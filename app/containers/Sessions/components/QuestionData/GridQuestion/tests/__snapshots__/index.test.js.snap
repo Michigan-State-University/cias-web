@@ -592,6 +592,22 @@ exports[`<GridQuestion /> Should render and match the snapshot 1`] = `
   background-color: #F8FBFF;
 }
 
+.c13:nth-child(even) {
+  background: #E2EEF1;
+}
+
+.c13:nth-child(even) td:first-child,
+.c13:nth-child(even) th:first-child {
+  border-bottom-left-radius: 5px;
+  border-top-left-radius: 5px;
+}
+
+.c13:nth-child(even) td:last-child,
+.c13:nth-child(even) th:last-child {
+  border-bottom-right-radius: 5px;
+  border-top-right-radius: 5px;
+}
+
 .c13:hover {
   background: !important;
 }

@@ -2,7 +2,6 @@ import React, { useEffect, useReducer } from 'react';
 import PropTypes from 'prop-types';
 import isNumber from 'lodash/isNumber';
 import get from 'lodash/get';
-import Lottie from 'react-lottie';
 import { useDispatch } from 'react-redux';
 import Draggable from 'react-draggable';
 import { useIntl } from 'react-intl';
@@ -14,6 +13,7 @@ import useMoveHelper from 'utils/animationsHelpers/useMoveHelper';
 import useAudioHelper from 'utils/animationsHelpers/useAudioHelper';
 import useAnimationHelper from 'utils/animationsHelpers/useAnimationHelper';
 import { useAsync } from 'utils/useAsync';
+
 import {
   bodyAnimationType,
   speechType,
@@ -24,6 +24,9 @@ import {
   feedbackBlockType,
   reflectionFormulaType,
 } from 'models/Narrator/BlockTypes';
+import { CHARACTER_CONFIGS } from 'models/Character';
+
+import AnimationPlayer from 'components/AnimationPlayer';
 
 import { setCurrentBlockIndex } from 'containers/AnswerSessionPage/actions';
 
@@ -47,17 +50,12 @@ const initialState = {
   currentBlockIndex: 0,
 };
 
-const lottieStyles = {
-  margin: 'none',
-};
-
 const CharacterAnim = ({
   blocks,
   questionId,
   settings,
   animationContainer,
   previewMode,
-  answers,
   changeIsAnimationOngoing,
   setFeedbackSettings,
   feedbackScreenSettings: { sliderRef },
@@ -139,6 +137,7 @@ const CharacterAnim = ({
     dispatchUpdate,
     changeBlock,
     state.currentData,
+    settings.character,
   );
 
   const { handlePauseBlock, getInitialPauseAnimation, changePauseBlock } =
@@ -149,7 +148,6 @@ const CharacterAnim = ({
       changeBlock,
       getIdleAnimation,
     );
-
   const {
     changeSpeech,
     getInitialSpeechAnimation,
@@ -165,7 +163,6 @@ const CharacterAnim = ({
     state.currentBlockIndex,
     animationRef.current,
     changeBlock,
-    answers,
     settings,
     audioInstance,
   );
@@ -185,11 +182,11 @@ const CharacterAnim = ({
     animationRef.current,
     loadedAnimations,
   );
-
   const { animationPos, moveAnimation, fetchMoveAnimations } = useMoveHelper(
     animationContainer,
     blocks,
     dispatchUpdate,
+    settings.character,
   );
 
   const getInitialData = () => {
@@ -329,20 +326,25 @@ const CharacterAnim = ({
 
   const displayNarrator = settings.animation && Boolean(blocks.length);
 
+  const characterConfig = CHARACTER_CONFIGS[settings.character];
+
   return (
     <NarratorContainer>
       {displayNarrator && (
         <Draggable disabled position={animationPos}>
-          <Lottie
-            ref={animationRef}
-            options={defaultOptions}
-            height={100}
-            width={100}
-            style={lottieStyles}
-            isClickToPauseDisabled
-            isStopped={isStopped}
-            ariaLabel={formatMessage(messages.narratorAlt)}
-          />
+          <div>
+            {/* AnimationPlayer must be wrapped with an additional div element
+            because Draggable uses ref to control it's child under the hood
+            which conflicts with animationRef passed to AnimationPlayer */}
+            <AnimationPlayer
+              ref={animationRef}
+              options={defaultOptions}
+              characterConfig={characterConfig}
+              isClickToPauseDisabled
+              isStopped={isStopped}
+              ariaLabel={formatMessage(messages.narratorAlt)}
+            />
+          </div>
         </Draggable>
       )}
     </NarratorContainer>
@@ -364,7 +366,6 @@ CharacterAnim.propTypes = {
     clientHeight: PropTypes.number,
   }),
   previewMode: PropTypes.string,
-  answers: PropTypes.object,
   changeIsAnimationOngoing: PropTypes.func,
   setFeedbackSettings: PropTypes.func,
   feedbackScreenSettings: PropTypes.object,

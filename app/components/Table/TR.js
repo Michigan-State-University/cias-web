@@ -1,7 +1,7 @@
 import styled from 'styled-components';
 
 const TR = styled.tr`
-  height: 47.5px;
+  height: ${(props) => (props.height ? `${props.height}px` : '47.5px')};
 `;
 
 export { TR };
