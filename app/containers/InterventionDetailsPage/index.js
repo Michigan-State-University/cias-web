@@ -28,6 +28,7 @@ import AddAppIcon from 'assets/svg/app-add.svg';
 import TranslateIcon from 'assets/svg/translate.svg';
 import DocumentIcon from 'assets/svg/document.svg';
 import QuestionMarkIcon from 'assets/svg/grey-question-mark.svg';
+import DownloadIcon from 'assets/svg/download-line.svg';
 
 import isNullOrUndefined from 'utils/isNullOrUndefined';
 import { reorder } from 'utils/reorder';
@@ -60,6 +61,8 @@ import {
   externalCopySessionRequest,
   makeSelectInterventionError,
   makeSelectInterventionLoader,
+  exportInterventionRequest,
+  exportInterventionSaga,
 } from 'global/reducers/intervention';
 import { interventionOptionsSaga } from 'global/sagas/interventionOptionsSaga';
 import {
@@ -126,6 +129,7 @@ export function InterventionDetailsPage({
   externalCopySession,
   user: { id: userId },
   editSession,
+  exportIntervention,
 }) {
   const { interventionId } = useParams();
   const { formatMessage } = useIntl();
@@ -235,6 +239,8 @@ export function InterventionDetailsPage({
     [isAccessRevoked],
   );
 
+  const handleExportIntervention = () => exportIntervention(id);
+
   const options = [
     {
       id: 'translate',
@@ -286,11 +292,18 @@ export function InterventionDetailsPage({
           },
         ]
       : []),
+    {
+      id: 'export',
+      label: formatMessage(messages.exportIntervention),
+      icon: DownloadIcon,
+      action: handleExportIntervention,
+      color: colors.bluewood,
+    },
   ];
 
   useLayoutEffect(() => {
     fetchIntervention(interventionId);
-  }, []);
+  }, [interventionId]);
 
   useEffect(() => {
     if (
@@ -623,6 +636,7 @@ InterventionDetailsPage.propTypes = {
   externalCopySession: PropTypes.func,
   editSession: PropTypes.func,
   user: PropTypes.object,
+  exportIntervention: PropTypes.func,
 };
 
 const mapStateToProps = createStructuredSelector({
@@ -651,6 +665,7 @@ const mapDispatchToProps = {
   deleteSession: deleteSessionRequest,
   externalCopySession: externalCopySessionRequest,
   editSession: editSessionRequest,
+  exportIntervention: exportInterventionRequest,
 };
 
 const withConnect = connect(mapStateToProps, mapDispatchToProps);
@@ -673,4 +688,5 @@ export default compose(
     key: 'interventionDetailsPageSagas',
     saga: interventionDetailsPageSagas,
   }),
+  injectSaga({ key: 'exportIntervention', saga: exportInterventionSaga }),
 )(InterventionDetailsPage);

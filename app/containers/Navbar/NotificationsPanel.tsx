@@ -94,6 +94,7 @@ const NotificationsPanel = () => {
                   key={notification.id}
                   notification={notification}
                   timeFormatLocale={CustomDayjsLocale.EN_LONG_RELATIVE_TIME}
+                  timeFormatWithSuffix
                 />
               ))}
             </Box>

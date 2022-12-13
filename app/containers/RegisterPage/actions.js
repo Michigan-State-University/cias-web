@@ -10,9 +10,9 @@ import {
   REGISTER_PARTICIPANT_REQUEST,
   REGISTER_PARTICIPANT_SUCCESS,
   REGISTER_PARTICIPANT_ERROR,
-  REGISTER_RESEARCHER_REQUEST,
-  REGISTER_RESEARCHER_SUCCESS,
-  REGISTER_RESEARCHER_ERROR,
+  REGISTER_FROM_INVITATION_REQUEST,
+  REGISTER_FROM_INVITATION_SUCCESS,
+  REGISTER_FROM_INVITATION_ERROR,
 } from './constants';
 
 export const registerParticipantRequest = (payload) =>
@@ -24,11 +24,11 @@ export const registerParticipantSuccess = () =>
 export const registerParticipantError = (error) =>
   actionBuilder(REGISTER_PARTICIPANT_ERROR, { error });
 
-export const registerResearcherRequest = (payload) =>
-  actionBuilder(REGISTER_RESEARCHER_REQUEST, payload);
+export const registerFromInvitationRequest = (payload) =>
+  actionBuilder(REGISTER_FROM_INVITATION_REQUEST, payload);
 
-export const registerResearcherSuccess = () =>
-  actionBuilder(REGISTER_RESEARCHER_SUCCESS, {});
+export const registerFromInvitationSuccess = () =>
+  actionBuilder(REGISTER_FROM_INVITATION_SUCCESS, {});
 
-export const registerResearcherError = (error) =>
-  actionBuilder(REGISTER_RESEARCHER_ERROR, { error });
+export const registerFromInvitationError = (error) =>
+  actionBuilder(REGISTER_FROM_INVITATION_ERROR, { error });

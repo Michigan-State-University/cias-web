@@ -2,19 +2,19 @@ import React from 'react';
 
 import { NewConversationNotification } from 'models/Notification';
 
-import { CustomDayjsLocale } from 'utils/dayjs';
-
 import GhostLink from 'components/GhostLink';
 import { ConversationInfoBox } from 'components/ConversationInfoBox';
 
-type Props = {
+import { NotificationLayoutProps } from '../types';
+
+type Props = NotificationLayoutProps<{
   notification: NewConversationNotification;
-  timeFormatLocale: CustomDayjsLocale;
-};
+}>;
 
 export const NewConversationNotificationLayout = ({
   notification: { createdAt, data, id },
   timeFormatLocale,
+  ...props
 }: Props) => {
   const { message, conversationId } = data;
 
@@ -29,6 +29,7 @@ export const NewConversationNotificationLayout = ({
         messageContent={message}
         messageSentByCurrentUser={false}
         interlocutorData={data}
+        {...props}
       />
     </GhostLink>
   );

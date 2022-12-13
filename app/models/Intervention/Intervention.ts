@@ -69,4 +69,6 @@ export interface Intervention {
   liveChatEnabled?: boolean;
   quickExit: boolean;
   currentNarrator: CharacterType;
+  conversationsPresent: boolean;
+  conversationsTranscript: Nullable<AppFile>;
 }

@@ -43,8 +43,12 @@ export type NavigatorUnavailableErrorData = SocketErrorMessageData;
 
 export type ConversationArchivedData = {
   conversationId: string;
+  archivedAt: string;
 };
-export type ArchiveConversationData = ConversationArchivedData;
+
+export type ArchiveConversationData = {
+  conversationId: string;
+};
 
 export type FetchLiveChatSetupData = {
   interventionId: string;
@@ -53,9 +57,34 @@ export type FetchLiveChatSetupData = {
 export type ChangeScreenTitleData = {
   conversationId: string;
   currentScreenTitle: string;
+  currentLocation: string;
 };
 
 export type LiveChatSetupFetchedData = ApiData<LiveChatSetup>;
+
+export type CallOutNavigatorData = {
+  interventionId: string;
+};
+
+export type NavigatorCalledOutData = {
+  unlockTime: string;
+};
+
+export type CallOutNavigatorErrorData = SocketErrorMessageData<{
+  unlockTime: string;
+}>;
+
+export type CancelCallOutData = {
+  interventionId: string;
+};
+
+export type CallOutCancelledData = {
+  summoningUserId: string;
+};
+
+export type CurrentNavigatorAvailableData = {
+  conversationId: string;
+};
 
 // SOCKET MESSAGES
 
@@ -102,9 +131,35 @@ export type LiveChatSetupFetchedSocketMessage = SocketMessage<
 export type NavigatorAvailableSocketMessage =
   SocketMessage<ConversationChannelMessageTopic.NAVIGATOR_AVAILABLE>;
 
-export type CurrentScreenTitleChangedMessage = SocketMessage<
+export type CurrentScreenTitleChangedSocketMessage = SocketMessage<
   ConversationChannelMessageTopic.CURRENT_SCREEN_TITLE_CHANGED,
   ChangeScreenTitleData
+>;
+
+export type CurrentNavigatorUnavailableSocketMessage = SocketMessage<
+  ConversationChannelMessageTopic.CURRENT_NAVIGATOR_UNAVAILABLE,
+  CurrentNavigatorAvailableData
+>;
+
+export type CurrentNavigatorAvailableSocketMessage = SocketMessage<
+  ConversationChannelMessageTopic.CURRENT_NAVIGATOR_AVAILABLE,
+  CurrentNavigatorAvailableData
+>;
+
+export type NavigatorCalledOutSocketMessage = SocketMessage<
+  ConversationChannelMessageTopic.NAVIGATOR_CALLED_OUT,
+  NavigatorCalledOutData
+>;
+
+export type CalOutUnavailableSocketErrorMessage = SocketErrorMessage<
+  ConversationChannelMessageTopic.CALL_OUT_UNAVAILABLE_ERROR,
+  CallOutNavigatorErrorData,
+  422
+>;
+
+export type CallOutCalledSocketMessage = SocketMessage<
+  ConversationChannelMessageTopic.CALL_OUT_CANCELLED,
+  CallOutCancelledData
 >;
 
 // Create a union type with any new SocketMessage type
@@ -118,7 +173,12 @@ export type ConversationChannelMessage =
   | NavigatorUnavailableErrorSocketErrorMessage
   | LiveChatSetupFetchedSocketMessage
   | NavigatorAvailableSocketMessage
-  | CurrentScreenTitleChangedMessage;
+  | CurrentScreenTitleChangedSocketMessage
+  | CurrentNavigatorUnavailableSocketMessage
+  | CurrentNavigatorAvailableSocketMessage
+  | NavigatorCalledOutSocketMessage
+  | CalOutUnavailableSocketErrorMessage
+  | CallOutCalledSocketMessage;
 
 // SOCKET ACTIONS
 
@@ -152,6 +212,16 @@ export type ChangeScreenTitleAction = SocketAction<
   ChangeScreenTitleData
 >;
 
+export type CallOutNavigatorAction = SocketAction<
+  ConversationChannelActionName.ON_CALL_OUT_NAVIGATOR,
+  CallOutNavigatorData
+>;
+
+export type CancelCallOutAction = SocketAction<
+  ConversationChannelActionName.ON_CANCEL_CALL_OUT,
+  CancelCallOutData
+>;
+
 // Create a union type with any new SocketAction type
 export type ConversationChannelAction =
   | SendMessageSocketAction
@@ -159,7 +229,9 @@ export type ConversationChannelAction =
   | CreateConversationSocketAction
   | ArchiveConversationSocketAction
   | FetchLiveChatSetupSocketAction
-  | ChangeScreenTitleAction;
+  | ChangeScreenTitleAction
+  | CallOutNavigatorAction
+  | CancelCallOutAction;
 
 export type ConversationChannelConnectionParams = {
   intervention_id?: string;

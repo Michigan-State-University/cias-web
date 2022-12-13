@@ -33,6 +33,7 @@ const SettingsInterventionPage = () => {
     settings: { narrator: narratorSettings } = {},
     googleTtsVoice,
     currentNarrator,
+    multipleFill,
   } = session;
   useInjectReducer({ key: 'session', reducer: sessionReducer });
   useInjectSaga({ key: 'getSession', saga: getSessionSaga });
@@ -68,6 +69,7 @@ const SettingsInterventionPage = () => {
             formatMessage={formatMessage}
             googleTtsVoice={googleTtsVoice}
             currentNarrator={currentNarrator}
+            multipleFill={multipleFill}
           />
         </StyledColumn>
       </Box>

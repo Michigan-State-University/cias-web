@@ -1,9 +1,0 @@
-<mjml>
-  <mj-head>
-    <app-header />
-  </mj-head>
-  <mj-body>
-    <app-layout header="Your translation of {INTERVENTION_NAME} is ready" mainText="You intervention has been translated successfully. Now you can use it in CIAS." buttonText="Open the e-intervention" buttonUrl="{BUTTON_URL}">
-    </app-layout>
-    <mj-body>
-</mjml>

@@ -184,4 +184,8 @@ export default defineMessages({
     id: `${scope}.defaultNarrator`,
     defaultMessage: 'Default narrator',
   },
+  exportIntervention: {
+    id: `${scope}.exportIntervention`,
+    defaultMessage: 'Export Intervention',
+  },
 });

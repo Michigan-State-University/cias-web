@@ -1,10 +1,10 @@
 import { all } from 'redux-saga/effects';
 
 import registerParticipant from './registerParticipant';
-import registerResearcher from './registerResearcher';
+import registerFromInvitation from './registerFromInvitation';
 
-export { registerParticipant, registerResearcher };
+export { registerParticipant, registerFromInvitation };
 
 export default function* allRegistrationsSaga() {
-  yield all([registerParticipant(), registerResearcher()]);
+  yield all([registerParticipant(), registerFromInvitation()]);
 }

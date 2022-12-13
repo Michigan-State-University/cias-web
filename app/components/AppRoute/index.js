@@ -33,6 +33,7 @@ class AppRoute extends Route {
         computedMatch,
         location,
         disableQuickExit,
+        unauthorizedUsersOnly,
       },
     } = this;
 
@@ -46,6 +47,15 @@ class AppRoute extends Route {
         {super.render()}
       </>
     );
+
+    if (user && unauthorizedUsersOnly) {
+      const queryParams = new URLSearchParams(location.search);
+      const redirectTo = queryParams.get(REDIRECT_QUERY_KEY);
+
+      queryParams.delete(REDIRECT_QUERY_KEY);
+
+      return <Redirect to={`${redirectTo ?? '/'}?${queryParams.toString()}`} />;
+    }
 
     if (!protectedRoute) {
       return render();

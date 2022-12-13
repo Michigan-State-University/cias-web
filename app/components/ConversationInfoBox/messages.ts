@@ -13,6 +13,10 @@ export default defineMessages({
     id: `${scope}.you`,
     defaultMessage: 'You: {messageContent}',
   },
+  me: {
+    id: `${scope}.me`,
+    defaultMessage: 'Me: {messageContent}',
+  },
   archived: {
     id: `${scope}.archived`,
     defaultMessage: 'Archived',

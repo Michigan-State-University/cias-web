@@ -2,19 +2,21 @@ import React from 'react';
 
 import { Notification, NotificationEvent } from 'models/Notification';
 
-import { CustomDayjsLocale } from 'utils/dayjs';
-
 import {
   NewConversationNotificationLayout,
+  ConversationTranscriptReadyNotificationLayout,
+  InterventionConversationsTranscriptReadyNotificationLayout,
+  SuccessfullyRestoredInterventionNotificationLayout,
+  UnsuccessfulImportNotificationLayout,
   NewNarratorWasSetNotificationLayout,
 } from './components';
+import { NotificationLayoutCommonProps } from './types';
 
 type Props = {
   notification: Notification;
-  timeFormatLocale: CustomDayjsLocale;
-};
+} & NotificationLayoutCommonProps;
 
-const SingleNotification = ({ notification, timeFormatLocale }: Props) => {
+const SingleNotification = ({ notification, ...commonProps }: Props) => {
   const { event } = notification;
 
   switch (event) {
@@ -22,14 +24,42 @@ const SingleNotification = ({ notification, timeFormatLocale }: Props) => {
       return (
         <NewConversationNotificationLayout
           notification={notification}
-          timeFormatLocale={timeFormatLocale}
+          {...commonProps}
+        />
+      );
+    case NotificationEvent.CONVERSATION_TRANSCRIPT_READY:
+      return (
+        <ConversationTranscriptReadyNotificationLayout
+          notification={notification}
+          {...commonProps}
+        />
+      );
+    case NotificationEvent.INTERVENTION_CONVERSATIONS_TRANSCRIPT_READY:
+      return (
+        <InterventionConversationsTranscriptReadyNotificationLayout
+          notification={notification}
+          {...commonProps}
+        />
+      );
+    case NotificationEvent.SUCCESSFULLY_RESTORED_INTERVENTION:
+      return (
+        <SuccessfullyRestoredInterventionNotificationLayout
+          notification={notification}
+          {...commonProps}
+        />
+      );
+    case NotificationEvent.UNSUCCESSFUL_INTERVENTION_IMPORT:
+      return (
+        <UnsuccessfulImportNotificationLayout
+          notification={notification}
+          {...commonProps}
         />
       );
     case NotificationEvent.NEW_NARRATOR_WAS_SET:
       return (
         <NewNarratorWasSetNotificationLayout
           notification={notification}
-          timeFormatLocale={timeFormatLocale}
+          {...commonProps}
         />
       );
     default:

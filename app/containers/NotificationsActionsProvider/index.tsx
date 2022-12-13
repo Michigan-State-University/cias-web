@@ -2,8 +2,6 @@ import React, { PropsWithChildren } from 'react';
 import { useInjectReducer, useInjectSaga } from 'redux-injectors';
 import { useSelector } from 'react-redux';
 
-import { NotificationEvent } from 'models/Notification';
-
 import {
   NotificationsActionsContext,
   useNotificationChannel,
@@ -22,11 +20,12 @@ export const NotificationsActionsProvider = ({
   useInjectSaga(withAllNotificationsSagas);
   const notifications = useSelector(makeSelectNotifications());
 
-  const { readNotification } = useNotificationChannel();
+  const { readNotification, setNavigatorAvailability } =
+    useNotificationChannel();
 
   const readConversationNotifications = (conversationId: string) => {
-    notifications.forEach(({ id, data, event }) => {
-      if (event !== NotificationEvent.NEW_CONVERSATION) return;
+    notifications.forEach(({ id, data }) => {
+      if (!('conversationId' in data)) return;
       if (data.conversationId === conversationId) {
         readNotification({ notificationId: id });
       }
@@ -35,7 +34,11 @@ export const NotificationsActionsProvider = ({
 
   return (
     <NotificationsActionsContext.Provider
-      value={{ readConversationNotifications, readNotification }}
+      value={{
+        readConversationNotifications,
+        readNotification,
+        setNavigatorAvailability,
+      }}
     >
       {children}
     </NotificationsActionsContext.Provider>

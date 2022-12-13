@@ -1,6 +1,7 @@
 import { useDispatch, useSelector } from 'react-redux';
 import { useInjectReducer } from 'redux-injectors';
 import { toast } from 'react-toastify';
+import dayjs from 'dayjs';
 
 import {
   SocketErrorMessageData,
@@ -26,6 +27,11 @@ import {
   withLiveChatReducer,
   closeConversation,
   onCurrentScreenTitleChanged,
+  setCurrentNavigatorUnavailable,
+  setCallOutNavigatorUnlockTime,
+  setCallingOutNavigator,
+  setCancellingCallOut,
+  setWaitingForNavigator,
 } from 'global/reducers/liveChat';
 import { makeSelectUserId } from 'global/reducers/auth';
 
@@ -43,12 +49,15 @@ import {
   ConversationChannelConnectionParams,
   LiveChatSetupFetchedData,
   ChangeScreenTitleData,
+  CurrentNavigatorAvailableData,
 } from './types';
 import {
   CONVERSATION_CHANNEL_NAME,
   ConversationChannelActionName,
   ConversationChannelMessageTopic,
 } from './constants';
+
+export type ConversationChannel = ReturnType<typeof useConversationChannel>;
 
 export const useConversationChannel = (interventionId?: string) => {
   const dispatch = useDispatch();
@@ -81,10 +90,12 @@ export const useConversationChannel = (interventionId?: string) => {
       liveChatInterlocutors[lastMessage.interlocutorId].userId ===
       currentUserId;
 
-    // if user is not logged in and receives conversation_created message it means that they created this conversation
+    // if user is not logged in and receives conversation_created message it means that this user created this conversation
     if (isGuest || isCreatedByCurrentUser) {
       dispatch(openConversation(id));
       dispatch(setCreatingConversation(false));
+      dispatch(setWaitingForNavigator(false));
+      dispatch(setCallOutNavigatorUnlockTime(null));
     }
 
     if (isGuest) {
@@ -103,8 +114,9 @@ export const useConversationChannel = (interventionId?: string) => {
 
   const onConversationArchived = ({
     conversationId,
+    archivedAt,
   }: ConversationArchivedData) => {
-    dispatch(onConversationArchivedReceive(conversationId));
+    dispatch(onConversationArchivedReceive(conversationId, archivedAt));
     dispatch(setArchivingConversation(false));
     // close conversation for navigator
     if (!interventionId) {
@@ -126,6 +138,35 @@ export const useConversationChannel = (interventionId?: string) => {
     currentScreenTitle,
   }: ChangeScreenTitleData) => {
     dispatch(onCurrentScreenTitleChanged(conversationId, currentScreenTitle));
+  };
+
+  const onCurrentNavigatorAvailable = ({
+    conversationId,
+  }: CurrentNavigatorAvailableData) => {
+    dispatch(setCurrentNavigatorUnavailable(false, conversationId));
+  };
+
+  const onCurrentNavigatorUnavailable = ({
+    conversationId,
+  }: CurrentNavigatorAvailableData) => {
+    dispatch(setCurrentNavigatorUnavailable(true, conversationId));
+  };
+
+  const onNavigatorCalledOut = () => {
+    dispatch(setCallingOutNavigator(false));
+    dispatch(setWaitingForNavigator(true));
+    dispatch(setCallOutNavigatorUnlockTime(dayjs().add(1, 'm').toISOString()));
+  };
+
+  const onCallOutUnavailableError = () => {
+    dispatch(setCallingOutNavigator(false));
+    dispatch(setWaitingForNavigator(true));
+    dispatch(setCallOutNavigatorUnlockTime(dayjs().add(1, 'm').toISOString()));
+  };
+
+  const onCallOutCancelled = () => {
+    dispatch(setCancellingCallOut(false));
+    dispatch(setWaitingForNavigator(false));
   };
 
   const messageListener: SocketMessageListener<ConversationChannelMessage> = ({
@@ -163,6 +204,21 @@ export const useConversationChannel = (interventionId?: string) => {
         break;
       case ConversationChannelMessageTopic.CURRENT_SCREEN_TITLE_CHANGED:
         onChangedScreenTitle(data);
+        break;
+      case ConversationChannelMessageTopic.CURRENT_NAVIGATOR_AVAILABLE:
+        onCurrentNavigatorAvailable(data);
+        break;
+      case ConversationChannelMessageTopic.CURRENT_NAVIGATOR_UNAVAILABLE:
+        onCurrentNavigatorUnavailable(data);
+        break;
+      case ConversationChannelMessageTopic.NAVIGATOR_CALLED_OUT:
+        onNavigatorCalledOut();
+        break;
+      case ConversationChannelMessageTopic.CALL_OUT_UNAVAILABLE_ERROR:
+        onCallOutUnavailableError();
+        break;
+      case ConversationChannelMessageTopic.CALL_OUT_CANCELLED:
+        onCallOutCancelled();
         break;
       default:
         break;
@@ -225,6 +281,27 @@ export const useConversationChannel = (interventionId?: string) => {
     });
   };
 
+  const callOutNavigator = () => {
+    if (interventionId) {
+      dispatch(setCallingOutNavigator(true));
+      dispatch(setCallOutNavigatorUnlockTime(null));
+      channel?.perform({
+        name: ConversationChannelActionName.ON_CALL_OUT_NAVIGATOR,
+        data: { interventionId },
+      });
+    }
+  };
+
+  const cancelCallOut = () => {
+    if (interventionId) {
+      dispatch(setCancellingCallOut(true));
+      channel?.perform({
+        name: ConversationChannelActionName.ON_CANCEL_CALL_OUT,
+        data: { interventionId },
+      });
+    }
+  };
+
   return {
     isConnected: channel?.state === 'connected',
     sendMessage,
@@ -233,5 +310,7 @@ export const useConversationChannel = (interventionId?: string) => {
     archiveConversation,
     fetchLiveChatSetup,
     changeScreenTitle,
+    callOutNavigator,
+    cancelCallOut,
   };
 };

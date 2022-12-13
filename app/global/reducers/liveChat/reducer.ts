@@ -33,6 +33,12 @@ import {
   fetchNavigatorHelpingMaterialsSuccess,
   fetchNavigatorHelpingMaterialsError,
   onCurrentScreenTitleChanged,
+  setCurrentNavigatorUnavailable,
+  setCallingOutNavigator,
+  setCallOutNavigatorUnlockTime,
+  setCancellingCallOut,
+  setWaitingForNavigator,
+  updateConversationTranscript,
 } from './actions';
 import { LiveChatAction, LiveChatState } from './types';
 
@@ -49,7 +55,12 @@ export const initialState: LiveChatState = {
   guestInterlocutorId: null,
   creatingConversation: false,
   archivingConversation: false,
+  callingOutNavigator: false,
+  waitingForNavigator: false,
+  cancellingCallOut: false,
+  callOutNavigatorUnlockTime: null,
   navigatorUnavailable: false,
+  currentNavigatorUnavailable: false,
   liveChatSetup: null,
   loaders: {
     activeConversations: false,
@@ -78,6 +89,7 @@ export const liveChatReducer = (
       }
       case getType(closeConversation): {
         draft.openedConversationId = null;
+        draft.currentNavigatorUnavailable = false;
         break;
       }
       case getType(fetchActiveConversationsRequest): {
@@ -209,14 +221,21 @@ export const liveChatReducer = (
         draft.navigatorUnavailable = payload.navigatorUnavailable;
         break;
       }
+      case getType(setCurrentNavigatorUnavailable): {
+        const { conversationId, currentNavigatorUnavailable } = payload;
+        if (state.openedConversationId === conversationId) {
+          draft.currentNavigatorUnavailable = currentNavigatorUnavailable;
+        }
+        break;
+      }
       case getType(onConversationArchivedReceive): {
         // find conversation to archive
-        const { conversationId } = payload;
+        const { conversationId, archivedAt } = payload;
         const conversation = draft.activeConversations[conversationId];
         if (!conversation) break;
 
         // mark conversation as archive and move to archived conversations
-        conversation.archived = true;
+        conversation.archivedAt = archivedAt;
         draft.archivedConversations[conversationId] = conversation;
         delete draft.activeConversations[conversationId];
 
@@ -287,6 +306,33 @@ export const liveChatReducer = (
         const { conversationId, currentScreenTitle } = payload;
         const conversation = draft.activeConversations[conversationId];
         conversation.currentScreenTitle = currentScreenTitle;
+        break;
+      }
+      case getType(setCallingOutNavigator): {
+        draft.callingOutNavigator = payload.callingOutNavigator;
+        break;
+      }
+      case getType(setCallOutNavigatorUnlockTime): {
+        draft.callOutNavigatorUnlockTime = payload.unlockTime;
+        break;
+      }
+      case getType(setWaitingForNavigator): {
+        draft.waitingForNavigator = payload.waitingForNavigator;
+        break;
+      }
+      case getType(setCancellingCallOut): {
+        draft.cancellingCallOut = payload.cancellingCallOut;
+        break;
+      }
+      case getType(updateConversationTranscript): {
+        const { conversationId, archived, transcript } = payload;
+        const conversation = archived
+          ? draft.archivedConversations[conversationId]
+          : draft.activeConversations[conversationId];
+
+        if (conversation) {
+          conversation.transcript = transcript;
+        }
       }
     }
   });

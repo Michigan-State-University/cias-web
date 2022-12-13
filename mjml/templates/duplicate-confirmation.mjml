@@ -1,9 +1,0 @@
-<mjml>
-  <mj-head>
-    <app-header />
-  </mj-head>
-  <mj-body>
-    <app-layout header="Your duplicate of {SESSION_NAME} is ready" mainText="Duplicate of <span style='color: #c866ea;'>{SESSION_NAME}</span> to <span style='color: #c866ea;'>{INTERVENTION_NAME}</span> that you requested is ready" buttonText="Open the e-intervention" buttonUrl="{BUTTON_URL}">
-    </app-layout>
-    <mj-body>
-</mjml>

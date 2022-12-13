@@ -18,6 +18,7 @@ type Props = {
   iconProps?: any;
   fill?: string;
   buttonProps?: object;
+  loading?: boolean;
 } & Record<string, unknown>;
 
 export const CollapseIcon = ({

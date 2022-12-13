@@ -267,8 +267,8 @@ exports[`<QuestionDetails /> should match the snapshot 1`] = `
   background-color: transparent;
   border-color: transparent;
   max-width: initial;
-  padding-right: 0;
-  padding-left: 0;
+  padding-right: 12px;
+  padding-left: 12px;
   font-size: 18px;
   font-weight: 700;
   color: #2F3850;

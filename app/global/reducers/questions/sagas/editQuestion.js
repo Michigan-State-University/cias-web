@@ -112,6 +112,9 @@ function* editQuestion({ payload }) {
 
     return yield put(editQuestionSuccess(responseQuestion));
   } catch (error) {
+    yield call(toast.error, error.response?.data?.message, {
+      toastId: EDIT_QUESTION_ERROR,
+    });
     return yield put(editQuestionError({ error, questionId: question.id }));
   }
 }

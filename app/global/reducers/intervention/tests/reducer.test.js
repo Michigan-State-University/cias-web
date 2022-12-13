@@ -436,10 +436,6 @@ describe('intervention reducer', () => {
 
     expectedState.loaders.sendSessionLoading = true;
     expectedState.cache.intervention = initState.intervention;
-    expectedState.intervention.sessions[index].emails =
-      payloadEmails.emails.map((email) => ({
-        email,
-      }));
 
     expect(interventionReducer(initState, action)).toEqual(expectedState);
   });
