@@ -174,7 +174,6 @@ exports[`<ParticipantReport /> Should render and match the snapshot 1`] = `
 }
 
 .c11 {
-  width: 100%;
   margin-left: 5px;
 }
 
