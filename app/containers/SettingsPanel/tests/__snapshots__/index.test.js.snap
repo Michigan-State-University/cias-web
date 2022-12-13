@@ -609,7 +609,6 @@ exports[`<SettingsPanel /> Should render and match the snapshot 1`] = `
 }
 
 .c27 {
-  width: 100%;
   margin-left: 5px;
 }
 
