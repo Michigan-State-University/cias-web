@@ -214,9 +214,7 @@ const SessionSettings = ({
         tooltipText={formatMessage(messages.multipleFillTooltip)}
         withBorder
         value={multipleFill}
-        action={(val) =>
-          editSession({ path: 'multiple_fill', value: val }, ['multiple_fill'])
-        }
+        action={(val) => editSession({ multipleFill: val })}
       />
 
       <H3 mt={15} mb={20}>
