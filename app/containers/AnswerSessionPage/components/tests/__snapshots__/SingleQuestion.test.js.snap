@@ -31,7 +31,7 @@ exports[`<SingleQuestion /> Should render and match the snapshot 1`] = `
   margin-bottom: 12px;
 }
 
-.c5 {
+.c4 {
   display: -webkit-box;
   display: -webkit-flex;
   display: -ms-flexbox;
@@ -50,7 +50,7 @@ exports[`<SingleQuestion /> Should render and match the snapshot 1`] = `
   height: 44;
 }
 
-.c6 {
+.c5 {
   display: -webkit-box;
   display: -webkit-flex;
   display: -ms-flexbox;
@@ -81,7 +81,7 @@ exports[`<SingleQuestion /> Should render and match the snapshot 1`] = `
   color: unset;
 }
 
-.c4 {
+.c3 {
   width: auto;
   height: auto;
   display: block;
@@ -98,20 +98,20 @@ exports[`<SingleQuestion /> Should render and match the snapshot 1`] = `
   cursor: pointer;
 }
 
-.c4:hover {
+.c3:hover {
   background-color: #E9F1FB;
 }
 
-.c8 {
+.c7 {
   display: none;
 }
 
-.c7:disabled + label > .c11 {
+.c6:disabled + label > .c10 {
   opacity: 0.5;
   cursor: not-allowed;
 }
 
-.c10 {
+.c9 {
   width: 100%;
   display: -webkit-box;
   display: -webkit-flex;
@@ -123,31 +123,17 @@ exports[`<SingleQuestion /> Should render and match the snapshot 1`] = `
   align-items: center;
 }
 
-.c10:hover {
+.c9:hover {
   cursor: pointer;
 }
 
-.c7:disabled + .c9 {
+.c6:disabled + .c8 {
   opacity: 0.5;
   cursor: not-allowed;
 }
 
-.c12 {
+.c11 {
   margin-left: 5px;
-}
-
-.c3 {
-  outline: none;
-  border: none;
-  background: transparent;
-  font-weight: bold;
-  font-size: 13px;
-  line-height: 17px;
-  padding: 2px;
-  cursor: not-allowed;
-  opacity: 0.7;
-  font-weight: 700;
-  color: #2F3850;
 }
 
 @media only screen and (min-width:768px) {
@@ -176,45 +162,33 @@ exports[`<SingleQuestion /> Should render and match the snapshot 1`] = `
       <div
         class="c2"
       >
-        <button
-          aria-label="Read text"
-          class="c3 "
-          disabled=""
-          font-weight="bold"
-          title="Read text"
-          type="button"
-        >
-          <img
-            src="IMAGE_MOCK"
-          />
-        </button>
         <div
-          class="c4"
+          class="c3"
           width="calc(100% + 21px)"
         >
           <div
-            class="c5"
+            class="c4"
             height="44"
           >
             <div
-              class="c6"
+              class="c5"
             >
               <input
-                class="c7 c8"
+                class="c6 c7"
                 data-cy="single-question-0-checkbox"
                 id="answer-1"
                 type="radio"
               />
               <label
-                class="c9 c10"
+                class="c8 c9"
                 for="answer-1"
               >
                 <img
-                  class="c11 "
+                  class="c10 "
                   src="IMAGE_MOCK"
                 />
                 <div
-                  class="c1 c12"
+                  class="c1 c11"
                 >
                   <span>
                     test
@@ -228,45 +202,33 @@ exports[`<SingleQuestion /> Should render and match the snapshot 1`] = `
       <div
         class="c2"
       >
-        <button
-          aria-label="Read text"
-          class="c3 "
-          disabled=""
-          font-weight="bold"
-          title="Read text"
-          type="button"
-        >
-          <img
-            src="IMAGE_MOCK"
-          />
-        </button>
         <div
-          class="c4"
+          class="c3"
           width="calc(100% + 21px)"
         >
           <div
-            class="c5"
+            class="c4"
             height="44"
           >
             <div
-              class="c6"
+              class="c5"
             >
               <input
-                class="c7 c8"
+                class="c6 c7"
                 data-cy="single-question-1-checkbox"
                 id="answer-2"
                 type="radio"
               />
               <label
-                class="c9 c10"
+                class="c8 c9"
                 for="answer-2"
               >
                 <img
-                  class="c11 "
+                  class="c10 "
                   src="IMAGE_MOCK"
                 />
                 <div
-                  class="c1 c12"
+                  class="c1 c11"
                 >
                   <span>
                     test
