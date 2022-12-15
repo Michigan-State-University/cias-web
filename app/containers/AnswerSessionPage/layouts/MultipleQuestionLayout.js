@@ -6,6 +6,8 @@ import Column from 'components/Column';
 import Row from 'components/Row';
 import Checkbox from 'components/Checkbox';
 import HoverableBox from 'components/Box/HoverableBox';
+import AudioTextPreview from 'components/AudioTextPreview';
+import { htmlToPlainText } from 'utils/htmlToPlainText';
 
 const margin = 21;
 
@@ -14,6 +16,7 @@ const MultipleQuestionLayout = ({
   questionId,
   check,
   selectedAnswersIndex,
+  isMobile,
 }) => (
   <Column>
     {data.map((questionAnswer, index) => {
@@ -23,9 +26,16 @@ const MultipleQuestionLayout = ({
       } = questionAnswer;
       const isChecked = selectedAnswersIndex.includes(index);
       const ariaInputId = `answer-${index + 1}`;
+      const key = `question-${questionId}-el-${index}`;
 
       return (
-        <Row key={`question-${questionId}-el-${index}`} mb={10}>
+        <Row key={key} mb={10}>
+          {!isMobile && (
+            <AudioTextPreview
+              text={htmlToPlainText(payload)}
+              previewKey={key}
+            />
+          )}
           <HoverableBox
             px={margin}
             py={14}
@@ -43,6 +53,12 @@ const MultipleQuestionLayout = ({
               </Checkbox>
             </Row>
           </HoverableBox>
+          {isMobile && (
+            <AudioTextPreview
+              text={htmlToPlainText(payload)}
+              previewKey={key}
+            />
+          )}
         </Row>
       );
     })}
@@ -54,6 +70,7 @@ MultipleQuestionLayout.propTypes = {
   questionId: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
   check: PropTypes.func,
   selectedAnswersIndex: PropTypes.array,
+  isMobile: PropTypes.bool,
 };
 
 export default MultipleQuestionLayout;

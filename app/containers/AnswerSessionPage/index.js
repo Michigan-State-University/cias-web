@@ -498,7 +498,10 @@ export function AnswerSessionPage({
                 : 0
             }
           >
-            <CommonLayout currentQuestion={currentQuestion} />
+            <CommonLayout
+              currentQuestion={currentQuestion}
+              isMobile={isMobile}
+            />
 
             <Row>{renderQuestionByType(currentQuestion, sharedProps)}</Row>
           </Box>
