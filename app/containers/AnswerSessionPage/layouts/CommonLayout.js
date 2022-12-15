@@ -17,7 +17,11 @@ import Player from 'components/Player';
 import { ImageWrapper, MarkupContainer } from './styled';
 import { QUESTION_SUBTITLE_ID, QUESTION_TITLE_ID } from '../constants';
 
-const CommonLayout = ({ currentQuestion, showOriginalText }) => {
+const CommonLayout = ({
+  currentQuestion,
+  showOriginalText,
+  shouldDisablePlayer,
+}) => {
   const { formatMessage } = useIntl();
   const {
     id,
@@ -83,7 +87,7 @@ const CommonLayout = ({ currentQuestion, showOriginalText }) => {
       )}
       {settingsVideo && videoUrl && (
         <Row mt={10}>
-          <Player videoUrl={videoUrl} mt={22} />
+          <Player videoUrl={videoUrl} mt={22} disabled={shouldDisablePlayer} />
         </Row>
       )}
       {settingsImage && imageUrl && (
@@ -120,6 +124,7 @@ CommonLayout.propTypes = {
     original_text: PropTypes.object,
   }),
   showOriginalText: PropTypes.bool,
+  shouldDisablePlayer: PropTypes.bool,
 };
 
 export default CommonLayout;
