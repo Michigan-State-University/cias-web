@@ -34,4 +34,8 @@ export const Container = styled(Box)`
     max-height: calc(100% - ${2 * CHAT_WIDGET_MARGIN_MOBILE}px);
     max-width: calc(100% - ${2 * CHAT_WIDGET_MARGIN_MOBILE}px);
     `}
+  pointer-events: none;
+  & > * {
+    pointer-events: auto;
+  }
 `;
