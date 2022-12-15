@@ -142,22 +142,22 @@ const WrappedAccordion = ({
       confirmAction: () => handleDelete(blockToDeleteIndex as number),
     },
   });
+
   return (
     <>
       <DeleteModal />
-
-      <Accordion
-        data-cy="narrator-blocks"
-        disabled={disabled}
-        opened={narratorBlockIndex}
-        setOpened={changeNarratorBlockIndex}
-        onHide={hideAccordion}
-        onOpen={openAccordion}
-        onReorder={handleReorder}
-        onDelete={openDeleteModal}
-      >
-        {narrator &&
-          map(narrator.blocks, (block, blockIndex) => (
+      {narrator && !!narrator.blocks.length && (
+        <Accordion
+          data-cy="narrator-blocks"
+          disabled={disabled}
+          opened={narratorBlockIndex}
+          setOpened={changeNarratorBlockIndex}
+          onHide={hideAccordion}
+          onOpen={openAccordion}
+          onReorder={handleReorder}
+          onDelete={openDeleteModal}
+        >
+          {map(narrator.blocks, (block, blockIndex) => (
             <div
               data-cy={`narrator-block-${blockIndex}`}
               key={`${id}-narrator-block-${blockIndex}`}
@@ -187,7 +187,8 @@ const WrappedAccordion = ({
               )}
             </div>
           ))}
-      </Accordion>
+        </Accordion>
+      )}
     </>
   );
 };
