@@ -24,7 +24,7 @@ exports[`<MultipleQuestion /> Should render and match the snapshot 1`] = `
   margin-bottom: 10px;
 }
 
-.c3 {
+.c4 {
   display: -webkit-box;
   display: -webkit-flex;
   display: -ms-flexbox;
@@ -45,7 +45,7 @@ exports[`<MultipleQuestion /> Should render and match the snapshot 1`] = `
   height: 44;
 }
 
-.c4 {
+.c5 {
   display: -webkit-box;
   display: -webkit-flex;
   display: -ms-flexbox;
@@ -68,21 +68,21 @@ exports[`<MultipleQuestion /> Should render and match the snapshot 1`] = `
   align-items: center;
 }
 
-.c6 {
+.c7 {
   display: none;
 }
 
-.c10 {
+.c11 {
   margin-right: 5px;
   border-radius: 5px;
 }
 
-.c5:disabled + label > .c9 {
+.c6:disabled + label > .c10 {
   opacity: 0.5;
   cursor: not-allowed;
 }
 
-.c8 {
+.c9 {
   display: -webkit-box;
   display: -webkit-flex;
   display: -ms-flexbox;
@@ -96,16 +96,16 @@ exports[`<MultipleQuestion /> Should render and match the snapshot 1`] = `
   width: max-content;
 }
 
-.c8:hover {
+.c9:hover {
   cursor: pointer;
 }
 
-.c5:disabled + .c7 {
+.c6:disabled + .c8 {
   opacity: 0.5;
   cursor: not-allowed;
 }
 
-.c2 {
+.c3 {
   width: auto;
   height: auto;
   display: block;
@@ -122,8 +122,22 @@ exports[`<MultipleQuestion /> Should render and match the snapshot 1`] = `
   cursor: pointer;
 }
 
-.c2:hover {
+.c3:hover {
   background-color: #E9F1FB;
+}
+
+.c2 {
+  outline: none;
+  border: none;
+  background: transparent;
+  font-weight: bold;
+  font-size: 13px;
+  line-height: 17px;
+  padding: 2px;
+  cursor: not-allowed;
+  opacity: 0.7;
+  font-weight: 700;
+  color: #2F3850;
 }
 
 @media only screen and (min-width:768px) {
@@ -149,28 +163,40 @@ exports[`<MultipleQuestion /> Should render and match the snapshot 1`] = `
     <div
       class="c1"
     >
+      <button
+        aria-label="Read text"
+        class="c2 "
+        disabled=""
+        font-weight="bold"
+        title="Read text"
+        type="button"
+      >
+        <img
+          src="IMAGE_MOCK"
+        />
+      </button>
       <div
-        class="c2"
+        class="c3"
         width="calc(100% + 21px)"
       >
         <div
-          class="c3"
+          class="c4"
           height="44"
         >
           <div
-            class="c4"
+            class="c5"
           >
             <input
-              class="c5 c6"
+              class="c6 c7"
               id="answer-1"
               type="checkbox"
             />
             <label
-              class="c7 c8"
+              class="c8 c9"
               for="answer-1"
             >
               <img
-                class="c9 c10"
+                class="c10 c11"
                 src="IMAGE_MOCK"
               />
               <span>
@@ -184,28 +210,40 @@ exports[`<MultipleQuestion /> Should render and match the snapshot 1`] = `
     <div
       class="c1"
     >
+      <button
+        aria-label="Read text"
+        class="c2 "
+        disabled=""
+        font-weight="bold"
+        title="Read text"
+        type="button"
+      >
+        <img
+          src="IMAGE_MOCK"
+        />
+      </button>
       <div
-        class="c2"
+        class="c3"
         width="calc(100% + 21px)"
       >
         <div
-          class="c3"
+          class="c4"
           height="44"
         >
           <div
-            class="c4"
+            class="c5"
           >
             <input
-              class="c5 c6"
+              class="c6 c7"
               id="answer-2"
               type="checkbox"
             />
             <label
-              class="c7 c8"
+              class="c8 c9"
               for="answer-2"
             >
               <img
-                class="c9 c10"
+                class="c10 c11"
                 src="IMAGE_MOCK"
               />
               <span>
