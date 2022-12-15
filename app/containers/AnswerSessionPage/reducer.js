@@ -60,6 +60,7 @@ export const initialState = {
   showTextTranscript: false,
   transitionalUserSessionId: null,
   previousUserSessionId: null,
+  showTextReadingControls: false,
 };
 
 /* eslint-disable default-case, no-param-reassign */

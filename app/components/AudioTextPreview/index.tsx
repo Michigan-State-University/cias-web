@@ -8,6 +8,7 @@ import { makeSelectAudioInstance } from 'global/reducers/globalState';
 import {
   makeSelectUserSession,
   makeSelectIsAnimationOngoing,
+  makeSelectShowTextReadingControls,
 } from 'containers/AnswerSessionPage/selectors';
 import {
   makeSelectAudioPreviewState,
@@ -38,6 +39,9 @@ const AudioTextPreview = ({ text, previewKey }: Props) => {
   const userSession = useSelector(makeSelectUserSession());
   const audioInstance = useSelector(makeSelectAudioInstance());
   const isAnimationOngoing = useSelector(makeSelectIsAnimationOngoing());
+  const showTextReadingControls = useSelector(
+    makeSelectShowTextReadingControls(),
+  );
   const { formatMessage } = useIntl();
   const isCurrentPreview = previewKey === statePreviewKey;
 
@@ -70,13 +74,16 @@ const AudioTextPreview = ({ text, previewKey }: Props) => {
       ),
     );
   };
+  if (isAnimationOngoing || !showTextReadingControls) {
+    return null;
+  }
   return (
     <ImageButton
       src={speaker}
       onClick={onAudioRequest}
       title={formatMessage(messages.readText)}
       loading={phoneticLoading && isCurrentPreview}
-      disabled={isAnimationOngoing || statePreviewKey !== null}
+      disabled={statePreviewKey !== null}
     />
   );
 };

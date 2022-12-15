@@ -70,6 +70,12 @@ const makeSelectIsAnimationOngoing = () =>
     (substate) => substate.isAnimationOngoing,
   );
 
+const makeSelectShowTextReadingControls = () =>
+  createSelector(
+    selectAnswerSessionPageDomain,
+    (substate) => substate.showTextReadingControls,
+  );
+
 export default makeSelectAnswerSessionPage;
 export {
   selectAnswerSessionPageDomain,
@@ -82,4 +88,5 @@ export {
   makeSelectPreviousUserSessionId,
   makeSelectInterventionStarted,
   makeSelectIsAnimationOngoing,
+  makeSelectShowTextReadingControls,
 };
