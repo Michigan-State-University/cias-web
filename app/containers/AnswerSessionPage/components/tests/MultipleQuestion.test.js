@@ -8,10 +8,10 @@ import React from 'react';
 import { render } from '@testing-library/react';
 import { IntlProvider } from 'react-intl';
 import { MemoryRouter } from 'react-router-dom';
+import { Provider } from 'react-redux';
 import { DEFAULT_LOCALE } from 'i18n';
 
 import { createTestStore } from 'utils/testUtils/storeUtils';
-import { Provider } from 'react-redux';
 import MultipleQuestion from '../MultipleQuestion';
 
 describe('<MultipleQuestion />', () => {
