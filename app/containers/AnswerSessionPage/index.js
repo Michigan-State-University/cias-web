@@ -501,6 +501,7 @@ export function AnswerSessionPage({
             <CommonLayout
               currentQuestion={currentQuestion}
               isMobile={isMobile}
+              shouldDisablePlayer={isAnimationOngoing}
             />
 
             <Row>{renderQuestionByType(currentQuestion, sharedProps)}</Row>

@@ -146,6 +146,7 @@ const NarratorTab = ({
   };
 
   const moveNarratorPreview = (blocks: NarratorBlock[]) => {
+    if (currentBlockIndex === -1) return;
     const { x, y } = blocks[currentBlockIndex].endPosition;
     setOffset(x, y);
   };

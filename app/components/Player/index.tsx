@@ -1,12 +1,18 @@
 import React from 'react';
 
-import { PlayerWrapper, PlayerWrapperProps, StyledReactPlayer } from './styled';
+import {
+  PlayerWrapper,
+  PlayerWrapperProps,
+  StyledReactPlayer,
+  Blocker,
+} from './styled';
 
 export type Props = {
   videoUrl: string;
+  disabled: boolean;
 } & PlayerWrapperProps;
 
-const Player = ({ videoUrl, ...props }: Props) => (
+const Player = ({ videoUrl, disabled = false, ...props }: Props) => (
   <PlayerWrapper {...props}>
     <StyledReactPlayer
       url={videoUrl}
@@ -15,6 +21,8 @@ const Player = ({ videoUrl, ...props }: Props) => (
       height="100%"
       playsinline
     />
+    {/* Blocks the player clicking when the player is disabled */}
+    {disabled && <Blocker />}
   </PlayerWrapper>
 );
 

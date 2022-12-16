@@ -19,7 +19,12 @@ import { htmlToPlainText } from 'utils/htmlToPlainText';
 import { ImageWrapper, MarkupContainer } from './styled';
 import { QUESTION_SUBTITLE_ID, QUESTION_TITLE_ID } from '../constants';
 
-const CommonLayout = ({ currentQuestion, showOriginalText, isMobile }) => {
+const CommonLayout = ({
+  currentQuestion,
+  showOriginalText,
+  shouldDisablePlayer,
+  isMobile,
+}) => {
   const { formatMessage } = useIntl();
   const {
     id,
@@ -109,7 +114,7 @@ const CommonLayout = ({ currentQuestion, showOriginalText, isMobile }) => {
       )}
       {settingsVideo && videoUrl && (
         <Row mt={10}>
-          <Player videoUrl={videoUrl} mt={22} />
+          <Player videoUrl={videoUrl} mt={22} disabled={shouldDisablePlayer} />
         </Row>
       )}
       {settingsImage && imageUrl && (
@@ -147,6 +152,7 @@ CommonLayout.propTypes = {
   }),
   showOriginalText: PropTypes.bool,
   isMobile: PropTypes.bool,
+  shouldDisablePlayer: PropTypes.bool,
 };
 
 export default CommonLayout;
