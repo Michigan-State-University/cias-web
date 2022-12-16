@@ -46,12 +46,6 @@ const makeSelectCurrentBlockIndex = () =>
     (substate) => substate.currentBlockIndex,
   );
 
-const makeSelectShowTextTranscript = () =>
-  createSelector(
-    selectAnswerSessionPageDomain,
-    (substate) => substate.showTextTranscript,
-  );
-
 const makeSelectPreviousUserSessionId = () =>
   createSelector(
     selectAnswerSessionPageDomain,
@@ -84,7 +78,6 @@ export {
   makeSelectUserSession,
   makeSelectCurrentQuestion,
   makeSelectCurrentBlockIndex,
-  makeSelectShowTextTranscript,
   makeSelectPreviousUserSessionId,
   makeSelectInterventionStarted,
   makeSelectIsAnimationOngoing,

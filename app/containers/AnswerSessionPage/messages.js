@@ -228,4 +228,48 @@ export default defineMessages({
     id: `${scope}.goBackToHomePage`,
     defaultMessage: `Go back to home page`,
   },
+  settings: {
+    id: `${scope}.settings`,
+    defaultMessage: `Settings`,
+  },
+  settingsIconAlt: {
+    id: `${scope}.settingsIconAlt`,
+    defaultMessage: `Settings icon`,
+  },
+  textReadingControls: {
+    id: `${scope}.textReadingControls`,
+    defaultMessage: `Text Reading Controls`,
+  },
+  speakerIconAlt: {
+    id: `${scope}.speakerIconAlt`,
+    defaultMessage: `Speaker Icon`,
+  },
+  textReadingControlsDescription: {
+    id: `${scope}.textReadingControlsDescription`,
+    defaultMessage: `Toggle on if you want the ability to click{icon}to hear any of the text read aloud.`,
+  },
+  cc: {
+    id: `${scope}.cc`,
+    defaultMessage: `Closed Captioning{icon}`,
+  },
+  ccIconAlt: {
+    id: `${scope}.ccIconAlt`,
+    defaultMessage: `Closed Captioning icon`,
+  },
+  ccDescription: {
+    id: `${scope}.ccDescription`,
+    defaultMessage: `Toggle on if you want to see a transcript of any audio.`,
+  },
+  featureUnavailable: {
+    id: `${scope}.featureUnavailable`,
+    defaultMessage: `In preview mode, you can not interact with this feature.`,
+  },
+  accessiBeIconAlt: {
+    id: `${scope}.accessiBeIconAlt`,
+    defaultMessage: `AccessiBe icon`,
+  },
+  liveChatIconAlt: {
+    id: `${scope}.liveChatIconAlt`,
+    defaultMessage: `Live chat icon`,
+  },
 });

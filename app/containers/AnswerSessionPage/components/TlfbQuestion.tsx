@@ -34,7 +34,7 @@ import {
 } from 'global/reducers/tlfb';
 
 import { colors } from 'theme';
-import { SharedProps } from './sharedProps';
+import { SharedProps } from '../types';
 import messages from '../messages';
 import TlfbCalendarLayout from '../layouts/TlfbCalendarLayout';
 import { getCalendarMetadata } from '../utils';

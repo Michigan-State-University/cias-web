@@ -65,8 +65,8 @@ export const CHANGE_USER_SESSION_ID =
 export const SET_CURRENT_BLOCK_INDEX =
   'app/AnswerSessionPage/SET_CURRENT_BLOCK_INDEX';
 
-export const TOGGLE_TEXT_TRANSCRIPT =
-  'app/AnswerSessionPage/TOGGLE_TEXT_TRANSCRIPT';
+export const SET_PARTICIPANT_SESSION_SETTINGS =
+  'app/AnswerSessionPage/SET_PARTICIPANT_SESSION_SETTINGS';
 
 export const SET_TRANSITIONAL_USER_SESSION_ID =
   'app/AnswerSessionPage/SET_TRANSITIONAL_USER_SESSION_ID';
