@@ -359,8 +359,8 @@ export function AnswerSessionPage({
   };
 
   const renderQuestionTranscript = (isRightSide) => {
-    const renderTranscriptComponent = ({ maxWidth, height }) => (
-      <Box mt={isRightSide ? 120 : 30} maxWidth={maxWidth} height={height}>
+    const renderTranscriptComponent = (styles) => (
+      <Box mt={isRightSide ? 0 : 30} {...styles}>
         <QuestionTranscript
           question={currentQuestion}
           language={languageCode}
@@ -372,7 +372,13 @@ export function AnswerSessionPage({
       if (isDesktop && !isFullSize)
         return (
           <Visible xxl>
-            {renderTranscriptComponent({ maxWidth: 300, height: 600 })}
+            {renderTranscriptComponent({
+              width: 300,
+              height: 600,
+              position: 'fixed',
+              right: 24,
+              top: 130 + (isPreview ? elements.navbarHeight : 0),
+            })}
           </Visible>
         );
 
