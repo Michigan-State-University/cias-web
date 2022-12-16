@@ -417,7 +417,7 @@ export function AnswerSessionPage({
 
     const isLoading =
       currentQuestion.loading || nextQuestionLoading || answer?.loading;
-    const skipQuestionButtonDisabled = required || isLoading;
+    const skipQuestionButtonDisabled = isLoading;
 
     const isAnswered = () =>
       answer &&
@@ -449,6 +449,7 @@ export function AnswerSessionPage({
     const canSkipNarrator = narratorSkippable || !isAnimationOngoing;
 
     const shouldRenderSkipQuestionButton =
+      !required &&
       !isCatMhSession &&
       !isLastScreen &&
       !NOT_SKIPPABLE_QUESTIONS.includes(type);

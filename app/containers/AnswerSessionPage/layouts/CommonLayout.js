@@ -45,49 +45,22 @@ const CommonLayout = ({
   return (
     <Box>
       {settingsTitle && title && (
-        <Row align="center" justify={isMobile ? 'between' : 'start'}>
+        <Row align="center" justify={isMobile ? 'between' : 'start'} pb={8}>
           {!isMobile && (
             <AudioTextPreview
               text={htmlToPlainText(title)}
               previewKey={`question-${id}-title`}
             />
           )}
-          <Box lineHeight="1.42" padding={26} pt={0} pb={8}>
+          <Box lineHeight="1.42" px={26} pt={0}>
             <OriginalTextHover
               id={`question-${id}-title`}
               text={originalText?.title}
               hidden={!showOriginalText}
             >
-              <MarkupContainer id={QUESTION_TITLE_ID}>
-                <Markup content={title} noWrap />
-              </MarkupContainer>
-            </OriginalTextHover>
-          </Box>
-          {isMobile && (
-            <AudioTextPreview
-              text={htmlToPlainText(title)}
-              previewKey={`question-${id}-title`}
-            />
-          )}
-        </Row>
-      )}
-      {settingsSubtitle && subtitle && (
-        <Row align="center" justify={isMobile ? 'between' : 'start'}>
-          {!isMobile && (
-            <AudioTextPreview
-              text={htmlToPlainText(subtitle)}
-              previewKey={`question-${id}-subtitle`}
-            />
-          )}
-          <Box lineHeight="1.42" padding={26} pt={0} pb={8}>
-            <OriginalTextHover
-              id={`question-${id}-subtitle`}
-              text={originalText?.subtitle}
-              hidden={!showOriginalText}
-            >
-              <Row align="start" justify="between">
-                <MarkupContainer id={QUESTION_SUBTITLE_ID}>
-                  <Markup content={subtitle} />
+              <Row align="center">
+                <MarkupContainer id={QUESTION_TITLE_ID}>
+                  <Markup content={title} noWrap />
                 </MarkupContainer>
                 {settingsRequired && (
                   <Tooltip
@@ -101,6 +74,35 @@ const CommonLayout = ({
                     <Text color={themeColors.warning}>*</Text>
                   </Tooltip>
                 )}
+              </Row>
+            </OriginalTextHover>
+          </Box>
+          {isMobile && (
+            <AudioTextPreview
+              text={htmlToPlainText(title)}
+              previewKey={`question-${id}-title`}
+            />
+          )}
+        </Row>
+      )}
+      {settingsSubtitle && subtitle && (
+        <Row align="center" justify={isMobile ? 'between' : 'start'} pb={8}>
+          {!isMobile && (
+            <AudioTextPreview
+              text={htmlToPlainText(subtitle)}
+              previewKey={`question-${id}-subtitle`}
+            />
+          )}
+          <Box lineHeight="1.42" px={26} pt={0}>
+            <OriginalTextHover
+              id={`question-${id}-subtitle`}
+              text={originalText?.subtitle}
+              hidden={!showOriginalText}
+            >
+              <Row align="start" justify="between">
+                <MarkupContainer id={QUESTION_SUBTITLE_ID}>
+                  <Markup content={subtitle} />
+                </MarkupContainer>
               </Row>
             </OriginalTextHover>
           </Box>

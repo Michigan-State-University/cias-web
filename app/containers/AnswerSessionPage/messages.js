@@ -26,10 +26,6 @@ export default defineMessages({
     id: `${scope}.skipQuestion`,
     defaultMessage: 'Skip question',
   },
-  skipQuestionDisabledTooltip: {
-    id: `${scope}.skipQuestionDisabledTooltip`,
-    defaultMessage: "This question is required, so you can't skip it.",
-  },
   skipQuestionModalHeader: {
     id: `${scope}.skipQuestionModalHeader`,
     defaultMessage: 'You did not answer',
