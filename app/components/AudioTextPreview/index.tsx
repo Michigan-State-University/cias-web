@@ -25,9 +25,10 @@ import messages from './messages';
 type Props = {
   text: string;
   previewKey: string;
+  iconSize?: number;
 };
 
-const AudioTextPreview = ({ text, previewKey }: Props) => {
+const AudioTextPreview = ({ text, previewKey, iconSize = 16 }: Props) => {
   useInjectReducer({ key: 'audioPreview', reducer: AudioPreviewReducer });
   useInjectSaga({ key: 'audioPreview', saga: allAudioPreviewSagas });
   const dispatch = useDispatch();
@@ -84,6 +85,9 @@ const AudioTextPreview = ({ text, previewKey }: Props) => {
       title={formatMessage(messages.readText)}
       loading={phoneticLoading && isCurrentPreview}
       disabled={statePreviewKey !== null}
+      padding={0}
+      spinnerProps={{ size: iconSize }}
+      iconProps={{ width: iconSize, height: iconSize }}
     />
   );
 };
