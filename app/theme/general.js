@@ -29,11 +29,12 @@ const elements = {
   chartTileHeight: 350,
   interventionsTileHeight: 150,
   interventionLogoSize: {
-    width: 200,
-    height: 100,
+    width: 100,
+    height: 50,
   },
   userInterventionTileHeight: 200,
   screenSettingsWidth: 400,
+  continueButtonWidth: 120,
 };
 
 const visualAnalogScaleLabelStyles = {

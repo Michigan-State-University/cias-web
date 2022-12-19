@@ -1,3 +1,4 @@
+import { CharacterType } from 'models/Character';
 import { AppFile } from 'models/File';
 
 export type NewConversationNotificationData = {
@@ -7,6 +8,11 @@ export type NewConversationNotificationData = {
   firstName: string;
   lastName: string;
   message: string;
+};
+
+export type NewNarratorWasSetNotificationData = {
+  name: string;
+  newNarrator: CharacterType;
 };
 
 export type ConversationTranscriptReadyNotificationData = {
@@ -22,8 +28,18 @@ export type InterventionConversationsTranscriptReadyNotificationData = {
   transcript: AppFile;
 };
 
+export type SuccessfullyRestoredInterventionNotificationData = {
+  interventionId: string;
+  interventionName: string;
+};
+
+export type UnsuccessfulImportNotificationData = {};
+
 // Union type
 export type NotificationData =
   | NewConversationNotificationData
   | ConversationTranscriptReadyNotificationData
-  | InterventionConversationsTranscriptReadyNotificationData;
+  | InterventionConversationsTranscriptReadyNotificationData
+  | SuccessfullyRestoredInterventionNotificationData
+  | UnsuccessfulImportNotificationData
+  | NewNarratorWasSetNotificationData;

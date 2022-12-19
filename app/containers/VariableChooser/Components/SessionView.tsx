@@ -30,7 +30,7 @@ const SessionView = ({ onClick }: Props) => {
 
   // actions
   const fetchSessions = (interventionId: string) =>
-    dispatch(fetchSessionsRequest(interventionId));
+    dispatch(fetchSessionsRequest(interventionId, true));
 
   // selectors
   const allSessions = useSelector<unknown, Session[]>(makeSelectSessions());

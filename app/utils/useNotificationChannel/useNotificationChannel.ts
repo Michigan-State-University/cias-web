@@ -15,6 +15,7 @@ import {
 } from 'global/reducers/notifications/actions';
 import { updateInterventionConversationsTranscript } from 'global/reducers/intervention';
 import { updateConversationTranscript } from 'global/reducers/liveChat';
+import { refetchInterventions } from 'global/reducers/interventions';
 
 import {
   NewNotificationData,
@@ -62,6 +63,10 @@ export const useNotificationChannel = () => {
         dispatch(
           updateConversationTranscript(conversationId, archived, transcript),
         );
+        break;
+      }
+      case NotificationEvent.SUCCESSFULLY_RESTORED_INTERVENTION: {
+        dispatch(refetchInterventions());
         break;
       }
       default:

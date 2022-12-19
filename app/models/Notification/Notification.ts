@@ -3,7 +3,10 @@ import {
   ConversationTranscriptReadyNotificationData,
   InterventionConversationsTranscriptReadyNotificationData,
   NewConversationNotificationData,
+  NewNarratorWasSetNotificationData,
   NotificationData,
+  SuccessfullyRestoredInterventionNotificationData,
+  UnsuccessfulImportNotificationData,
 } from './NotificationData';
 
 export type GenericNotification<
@@ -24,6 +27,11 @@ export type NewConversationNotification = GenericNotification<
   NewConversationNotificationData
 >;
 
+export type NewNarratorWasSetNotification = GenericNotification<
+  NotificationEvent.NEW_NARRATOR_WAS_SET,
+  NewNarratorWasSetNotificationData
+>;
+
 export type ConversationTranscriptReadyNotification = GenericNotification<
   NotificationEvent.CONVERSATION_TRANSCRIPT_READY,
   ConversationTranscriptReadyNotificationData
@@ -35,8 +43,21 @@ export type InterventionConversationsTranscriptReadyNotification =
     InterventionConversationsTranscriptReadyNotificationData
   >;
 
+export type SuccessfullyRestoredInterventionNotification = GenericNotification<
+  NotificationEvent.SUCCESSFULLY_RESTORED_INTERVENTION,
+  SuccessfullyRestoredInterventionNotificationData
+>;
+
+export type UnsuccessfulImportNotification = GenericNotification<
+  NotificationEvent.UNSUCCESSFUL_INTERVENTION_IMPORT,
+  UnsuccessfulImportNotificationData
+>;
+
 // Union type
 export type Notification =
   | NewConversationNotification
+  | NewNarratorWasSetNotification
   | ConversationTranscriptReadyNotification
-  | InterventionConversationsTranscriptReadyNotification;
+  | InterventionConversationsTranscriptReadyNotification
+  | SuccessfullyRestoredInterventionNotification
+  | UnsuccessfulImportNotification;

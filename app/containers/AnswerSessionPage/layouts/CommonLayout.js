@@ -12,11 +12,16 @@ import Img from 'components/Img';
 import Text from 'components/Text';
 import Tooltip from 'components/Tooltip';
 import OriginalTextHover from 'components/OriginalTextHover';
+import Player from 'components/Player';
 
-import { Player, PlayerWrapper, ImageWrapper, MarkupContainer } from './styled';
+import { ImageWrapper, MarkupContainer } from './styled';
 import { QUESTION_SUBTITLE_ID, QUESTION_TITLE_ID } from '../constants';
 
-const CommonLayout = ({ currentQuestion, showOriginalText }) => {
+const CommonLayout = ({
+  currentQuestion,
+  showOriginalText,
+  shouldDisablePlayer,
+}) => {
   const { formatMessage } = useIntl();
   const {
     id,
@@ -82,9 +87,7 @@ const CommonLayout = ({ currentQuestion, showOriginalText }) => {
       )}
       {settingsVideo && videoUrl && (
         <Row mt={10}>
-          <PlayerWrapper>
-            <Player url={videoUrl} controls width="100%" height="100%" />
-          </PlayerWrapper>
+          <Player videoUrl={videoUrl} mt={22} disabled={shouldDisablePlayer} />
         </Row>
       )}
       {settingsImage && imageUrl && (
@@ -121,6 +124,7 @@ CommonLayout.propTypes = {
     original_text: PropTypes.object,
   }),
   showOriginalText: PropTypes.bool,
+  shouldDisablePlayer: PropTypes.bool,
 };
 
 export default CommonLayout;

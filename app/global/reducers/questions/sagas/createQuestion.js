@@ -41,6 +41,7 @@ function* createQuestion({ payload: { question, id: sessionId } }) {
   const questions = yield select(makeSelectQuestions());
   const {
     settings: { narrator },
+    currentNarrator: sessionCharacter,
   } = yield select(makeSelectSession());
   const position = getNarratorPositionWhenQuestionIsAdded(
     questions,
@@ -53,7 +54,13 @@ function* createQuestion({ payload: { question, id: sessionId } }) {
       ? [instantiateBlockForType(feedbackBlockType, position, question)]
       : []),
   ];
-  const newQuestion = { ...question, narrator: { blocks, settings: narrator } };
+  const newQuestion = {
+    ...question,
+    narrator: {
+      blocks,
+      settings: { ...narrator, character: sessionCharacter },
+    },
+  };
 
   const selectedQuestionGroupType = groups.find(
     ({ id }) => id === selectedQuestion.question_group_id,
@@ -94,14 +101,14 @@ function* createQuestionGroup({ payload: { sessionId, groupType } }) {
   const groups = yield select(makeSelectQuestionGroups());
 
   const {
-    settings: { narrator },
+    settings: { narrator: narratorSettings },
+    currentNarrator: sessionCharacter,
   } = yield select(makeSelectSession());
 
-  const questions = prepareNewGroupQuestions(
-    groupType,
-    formatMessage,
-    narrator,
-  );
+  const questions = prepareNewGroupQuestions(groupType, formatMessage, {
+    character: sessionCharacter,
+    ...narratorSettings,
+  });
 
   yield call(
     createNewQuestionGroup,

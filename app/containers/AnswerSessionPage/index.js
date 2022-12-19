@@ -48,6 +48,7 @@ import { canPreview } from 'models/Status/statusPermissions';
 import { finishQuestion } from 'models/Session/QuestionTypes';
 import { UserSessionType } from 'models/UserSession/UserSession';
 import { QuestionTypes } from 'models/Question';
+import { CHARACTER_CONFIGS } from 'models/Character';
 
 import QuestionTranscript from 'containers/QuestionTranscript';
 import {
@@ -98,6 +99,7 @@ import {
   toggleTextTranscriptAction,
   setTransitionalUserSessionId as setTransitionalUserSessionIdAction,
   saveQuickExitEventRequest,
+  resetReducer,
 } from './actions';
 import BranchingScreen from './components/BranchingScreen';
 import {
@@ -112,7 +114,6 @@ const AnimationRefHelper = ({
   currentQuestion,
   currentQuestionId,
   previewMode,
-  answers,
   changeIsAnimationOngoing,
   setFeedbackSettings,
   feedbackScreenSettings,
@@ -140,7 +141,6 @@ const AnimationRefHelper = ({
           questionId={currentQuestionId}
           settings={settings}
           previewMode={previewMode}
-          answers={answers}
           changeIsAnimationOngoing={changeIsAnimationOngoing}
           setFeedbackSettings={setFeedbackSettings}
           feedbackScreenSettings={feedbackScreenSettings}
@@ -155,7 +155,6 @@ AnimationRefHelper.propTypes = {
   currentQuestion: PropTypes.any,
   currentQuestionId: PropTypes.any,
   previewMode: PropTypes.any,
-  answers: PropTypes.object,
   changeIsAnimationOngoing: PropTypes.func,
   setFeedbackSettings: PropTypes.func,
   feedbackScreenSettings: PropTypes.object,
@@ -213,6 +212,7 @@ export function AnswerSessionPage({
   setTransitionalUserSessionId,
   setLiveChatEnabled,
   saveQuickExitEvent,
+  resetAnswerSessionPage,
 }) {
   const { formatMessage } = useIntl();
   const history = useHistory();
@@ -239,6 +239,7 @@ export function AnswerSessionPage({
       proceed_button: proceedButton,
       narrator_skippable: narratorSkippable,
     } = {},
+    narrator: { settings: { character, animation } = {} } = {},
   } = currentQuestion ?? {};
 
   const [containerQueryParams, pageRef] = useContainerQuery(QUERY);
@@ -286,6 +287,7 @@ export function AnswerSessionPage({
 
   useEffect(() => {
     if (isPreview) fetchIntervention(interventionId);
+    resetAnswerSessionPage();
   }, [interventionId]);
 
   const previewPossible =
@@ -482,36 +484,61 @@ export function AnswerSessionPage({
       (isNullOrUndefined(proceedButton) || proceedButton) &&
       canSkipNarrator;
 
+    const characterAdditionalSpace = CHARACTER_CONFIGS[character].size.height;
+
     return (
       <Row justify="center" width="100%">
         <AppContainer $width="100%">
-          <Box lang={languageCode} width="100%">
-            <CommonLayout currentQuestion={currentQuestion} />
+          <Box
+            lang={languageCode}
+            width="100%"
+            pt={
+              animation && !isNarratorPositionFixed
+                ? characterAdditionalSpace
+                : 0
+            }
+          >
+            <CommonLayout
+              currentQuestion={currentQuestion}
+              shouldDisablePlayer={isAnimationOngoing}
+            />
 
             <Row>{renderQuestionByType(currentQuestion, sharedProps)}</Row>
           </Box>
 
           {isNarratorPositionFixed && (
-            <AnimationRefHelper
-              currentQuestion={currentQuestion}
-              currentQuestionId={currentQuestionId}
-              previewMode={previewMode}
-              answers={answers}
-              changeIsAnimationOngoing={changeIsAnimationOngoing}
-              setFeedbackSettings={setFeedbackSettings}
-              feedbackScreenSettings={feedbackScreenSettings}
-              audioInstance={audioInstance}
-            >
-              <ActionButtons
-                renderSkipQuestionButton={shouldRenderSkipQuestionButton}
-                skipQuestionButtonDisabled={skipQuestionButtonDisabled}
-                onSkipQuestionClick={() => setSkipQuestionModalVisible(true)}
-                renderContinueButton={shouldRenderContinueButton}
-                continueButtonDisabled={isButtonDisabled()}
-                continueButtonLoading={isLoading}
-                onContinueClick={onContinueButton}
-              />
-            </AnimationRefHelper>
+            <Row mt={isMobile ? 32 : 16}>
+              <AnimationRefHelper
+                currentQuestion={currentQuestion}
+                currentQuestionId={currentQuestionId}
+                previewMode={previewMode}
+                changeIsAnimationOngoing={changeIsAnimationOngoing}
+                setFeedbackSettings={setFeedbackSettings}
+                feedbackScreenSettings={feedbackScreenSettings}
+                audioInstance={audioInstance}
+              >
+                <ActionButtons
+                  renderSkipQuestionButton={shouldRenderSkipQuestionButton}
+                  skipQuestionButtonDisabled={skipQuestionButtonDisabled}
+                  onSkipQuestionClick={() => setSkipQuestionModalVisible(true)}
+                  renderContinueButton={shouldRenderContinueButton}
+                  continueButtonDisabled={isButtonDisabled()}
+                  continueButtonLoading={isLoading}
+                  onContinueClick={onContinueButton}
+                  containerStyle={{
+                    my: 0,
+                    height:
+                      CHARACTER_CONFIGS[
+                        currentQuestion.narrator.settings.character
+                      ]?.size?.height,
+                    align: isMobile ? 'end' : 'center',
+                  }}
+                  continueButtonStyle={{
+                    margin: 0,
+                  }}
+                />
+              </AnimationRefHelper>
+            </Row>
           )}
 
           {!isNarratorPositionFixed && (
@@ -720,6 +747,7 @@ export function AnswerSessionPage({
                     <Row
                       padding={!isDesktop || isMobile ? 30 : 0}
                       pb={isDesktop || (!isDesktop && logoUrl) ? 24 : 0}
+                      pt={isMobile && animation && !logoUrl ? 0 : undefined}
                       width="100%"
                     >
                       {!isDesktop && (
@@ -754,7 +782,6 @@ export function AnswerSessionPage({
                               currentQuestion={currentQuestion}
                               currentQuestionId={currentQuestionId}
                               previewMode={previewMode}
-                              answers={answers}
                               changeIsAnimationOngoing={
                                 changeIsAnimationOngoing
                               }
@@ -798,6 +825,7 @@ AnswerSessionPage.propTypes = {
   setTransitionalUserSessionId: PropTypes.func,
   setLiveChatEnabled: PropTypes.func,
   saveQuickExitEvent: PropTypes.func,
+  resetAnswerSessionPage: PropTypes.func,
 };
 
 const mapStateToProps = createStructuredSelector({
@@ -820,6 +848,7 @@ const mapDispatchToProps = {
   setTransitionalUserSessionId: setTransitionalUserSessionIdAction,
   setLiveChatEnabled: setChatEnabled,
   saveQuickExitEvent: saveQuickExitEventRequest,
+  resetAnswerSessionPage: resetReducer,
 };
 
 const withConnect = connect(mapStateToProps, mapDispatchToProps);

@@ -2,6 +2,11 @@ import { Answer } from 'models/Answer';
 import { QuestionDTO } from 'models/Question';
 import { ToastContent, ToastOptions } from 'react-toastify';
 
+export type AnswerSessionPageFeedbackScreenSettings = {
+  showSpectrum: boolean;
+  sliderRef: any; // No library type definitions for reference
+};
+
 export type SharedProps<
   T extends QuestionDTO = QuestionDTO,
   V extends null | Answer = null,
@@ -11,10 +16,7 @@ export type SharedProps<
   questionIndex: number;
   saveAnswer: () => void;
   showError: (content: ToastContent, options?: ToastOptions) => void;
-  feedbackScreenSettings: {
-    showSpectrum: boolean;
-    sliderRef: any;
-  };
+  feedbackScreenSettings: AnswerSessionPageFeedbackScreenSettings;
   setFeedbackSettings: (setting: string, value: boolean) => void;
   isAnimationOngoing: boolean;
   isDesktop: boolean;

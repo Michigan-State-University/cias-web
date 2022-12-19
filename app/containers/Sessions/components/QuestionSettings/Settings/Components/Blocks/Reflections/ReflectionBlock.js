@@ -4,7 +4,6 @@ import { createStructuredSelector } from 'reselect';
 import PropTypes from 'prop-types';
 import { compose } from 'redux';
 import { connect } from 'react-redux';
-import keys from 'lodash/keys';
 import values from 'lodash/values';
 
 import Column from 'components/Column';
@@ -33,10 +32,11 @@ import {
 import { makeSelectPreviewData } from 'global/reducers/localState';
 
 import { speechType, reflectionFormulaType } from 'models/Narrator/BlockTypes';
-import { feedbackActions } from 'models/Narrator/FeedbackActions';
-import { speechAnimations } from 'utils/animations/animationsNames';
+import { EFeedbackAction } from 'models/Narrator/FeedbackActions';
+import { characterToSpeechAnimationsMap } from 'utils/animations/animationsNames';
+import animationMessages from 'global/i18n/animationNames';
+
 import messages from '../../messages';
-import animationMessages from '../messages';
 import { updateBlockSettings, switchSpeechReflection } from '../../../actions';
 
 import QuestionListDropdown from './QuestionListDropdown';
@@ -106,30 +106,31 @@ const ReflectionBlock = ({
   updateAction,
   switchToReflectionFormula,
   disabled,
+  character,
 }) => {
   const [targetChooserOpen, setTargetChooserOpen] = useState(false);
 
   const selectedQuestion = findQuestionById(questions, block.question_id);
 
   const selectOptions = useMemo(() => {
-    const animations = keys(speechAnimations);
+    const animations = characterToSpeechAnimationsMap[character];
 
     return animations.map((animation) => ({
       value: animation,
       label: formatMessage(animationMessages[animation]),
     }));
-  }, [speechAnimations]);
+  }, [character]);
 
   const feedbackOptions = useMemo(() => {
-    const options = values(feedbackActions).filter(
-      (action) => action !== feedbackActions.showSpectrum,
+    const options = values(EFeedbackAction).filter(
+      (action) => action !== EFeedbackAction.SHOW_SPECTRUM,
     );
 
     return options.map((option) => ({
       value: option,
       label: formatMessage(messages[option]),
     }));
-  }, [feedbackActions]);
+  }, [EFeedbackAction]);
 
   const selectedOption = selectOptions.find(
     (option) => option.value === block.animation,
@@ -139,7 +140,7 @@ const ReflectionBlock = ({
     (option) => option.value === block.action,
   );
 
-  const hasSpecialPositioning = block.action !== feedbackActions.noAction;
+  const hasSpecialPositioning = block.action !== EFeedbackAction.NO_ACTION;
 
   return (
     <Column>
@@ -265,6 +266,7 @@ ReflectionBlock.propTypes = {
   updateAction: PropTypes.func,
   currentQuestionType: PropTypes.string,
   disabled: PropTypes.bool,
+  character: PropTypes.string,
 };
 
 const mapStateToProps = createStructuredSelector({
@@ -289,7 +291,7 @@ const mapDispatchToProps = {
       index,
       {
         action,
-        animation: action === feedbackActions.noAction ? 'rest' : 'pointUp',
+        animation: action === EFeedbackAction.NO_ACTION ? 'rest' : 'pointUp',
       },
       id,
     ),

@@ -47,6 +47,7 @@ describe('<QuestionDetails />', () => {
             settings: {
               voice: true,
               animation: true,
+              character: 'peedy',
             },
             blocks: [
               {

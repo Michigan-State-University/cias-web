@@ -20,6 +20,7 @@ describe('<AnswerSessionPage />', () => {
     fetchIntervention: jest.fn(),
     createUserSession: jest.fn(),
     nextQuestion: jest.fn(),
+    resetAnswerSessionPage: jest.fn(),
   };
 
   const defaultProps = {
@@ -27,6 +28,7 @@ describe('<AnswerSessionPage />', () => {
     fetchIntervention: mockedFunctions.fetchIntervention,
     createUserSession: mockedFunctions.createUserSession,
     nextQuestion: mockedFunctions.nextQuestion,
+    resetAnswerSessionPage: mockedFunctions.resetAnswerSessionPage,
     AnswerSessionPage: {
       sessionQuestions: [],
     },

@@ -131,7 +131,7 @@ const ConversationChatDialog = ({
               )}
             </Text>
           </Column>
-          <Button light mb={24} onClick={onReassignNavigator}>
+          <Button light mb={24} onClick={onReassignNavigator} flexShrink={0}>
             {formatMessage(i18nMessages.connectWithAnotherNavigator)}
           </Button>
         </>

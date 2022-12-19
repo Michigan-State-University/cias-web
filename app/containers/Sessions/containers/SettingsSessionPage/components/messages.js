@@ -84,4 +84,17 @@ export default defineMessages({
     id: `${scope}.testVoice`,
     defaultMessage: 'Test voice!',
   },
+  defaultNarrator: {
+    id: `${scope}.defaultNarrator`,
+    defaultMessage: 'Default narrator',
+  },
+  multipleFill: {
+    id: `${scope}.multipleFill`,
+    defaultMessage: 'Ability to fill the session multiple times',
+  },
+  multipleFillTooltip: {
+    id: `${scope}.multipleFillTooltip`,
+    defaultMessage:
+      'If the session is filling multiple times by the logged-in user, the scheduling and SMS will not change. You can not use variables from the multiple session in other sessions.',
+  },
 });

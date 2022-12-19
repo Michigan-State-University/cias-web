@@ -83,6 +83,9 @@ import {
   GENERATE_CONVERSATIONS_TRANSCRIPT_SUCCESS,
   GENERATE_CONVERSATIONS_TRANSCRIPT_ERROR,
   UPDATE_INTERVENTION_CONVERSATIONS_TRANSCRIPT,
+  EXPORT_INTERVENTION_REQUEST,
+  EXPORT_INTERVENTION_SUCCESS,
+  EXPORT_INTERVENTION_ERROR,
 } from './constants';
 
 export const initialState = {
@@ -116,6 +119,7 @@ export const initialState = {
     translateInterventionLoading: false,
     addAttachmentsLoading: false,
     generateConversationsTranscript: false,
+    exportInterventionLoading: false,
   },
   errors: {
     fetchInterventionError: null,
@@ -127,6 +131,7 @@ export const initialState = {
     translateInterventionError: null,
     fetchInterventionInvites: null,
     generateConversationsTranscript: null,
+    exportInterventionError: null,
   },
 };
 
@@ -517,6 +522,18 @@ export const interventionReducer = (state = initialState, action) =>
           draft.intervention.conversationsTranscript =
             action.payload.transcript;
         }
+        break;
+      case EXPORT_INTERVENTION_REQUEST:
+        draft.loaders.exportInterventionLoading = true;
+        draft.errors.exportInterventionError = null;
+        break;
+      case EXPORT_INTERVENTION_SUCCESS:
+        draft.loaders.exportInterventionLoading = false;
+        draft.errors.exportInterventionError = null;
+        break;
+      case EXPORT_INTERVENTION_ERROR:
+        draft.loaders.exportInterventionLoading = false;
+        draft.errors.exportInterventionError = action.payload.error;
         break;
     }
   });

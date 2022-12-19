@@ -72,6 +72,9 @@ import {
   GENERATE_CONVERSATIONS_TRANSCRIPT_SUCCESS,
   GENERATE_CONVERSATIONS_TRANSCRIPT_ERROR,
   UPDATE_INTERVENTION_CONVERSATIONS_TRANSCRIPT,
+  EXPORT_INTERVENTION_REQUEST,
+  EXPORT_INTERVENTION_SUCCESS,
+  EXPORT_INTERVENTION_ERROR,
 } from './constants';
 
 export const fetchInterventionRequest = (id) =>
@@ -96,7 +99,11 @@ export const createInterventionError = (error) =>
   actionBuilder(CREATE_INTERVENTION_ERROR, { error });
 
 export const editInterventionRequest = (intervention, extraOptions) =>
-  actionBuilder(EDIT_INTERVENTION_REQUEST, { intervention, extraOptions });
+  actionBuilder(EDIT_INTERVENTION_REQUEST, {
+    intervention,
+    extraOptions,
+  });
+
 export const editInterventionSuccess = (intervention) =>
   actionBuilder(EDIT_INTERVENTION_SUCCESS, { intervention });
 export const editInterventionError = (error) =>
@@ -279,3 +286,10 @@ export const generateConversationsTranscriptError = (error) =>
 
 export const updateInterventionConversationsTranscript = (transcript) =>
   actionBuilder(UPDATE_INTERVENTION_CONVERSATIONS_TRANSCRIPT, { transcript });
+
+export const exportInterventionRequest = (interventionId) =>
+  actionBuilder(EXPORT_INTERVENTION_REQUEST, { interventionId });
+export const exportInterventionSuccess = () =>
+  actionBuilder(EXPORT_INTERVENTION_SUCCESS);
+export const exportInterventionError = (error) =>
+  actionBuilder(EXPORT_INTERVENTION_ERROR, { error });

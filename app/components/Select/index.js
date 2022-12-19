@@ -22,7 +22,7 @@ const customStyles = ({ isMulti, bg, isDisabled, height }) => ({
     borderColor: `${themeColors.highlight}`,
     boxShadow: '0',
     height: height || (isMulti ? 'auto' : '45px'),
-    minHeight: '45px',
+    minHeight: !!height && parseInt(height, 10) < 45 ? height : '45px',
     width: '100%',
     background: `${bg || 'auto'}`,
     '&:hover': {

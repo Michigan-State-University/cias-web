@@ -97,4 +97,8 @@ export default defineMessages({
     id: `${scope}.catMhSettingsModalTitle`,
     defaultMessage: 'Access to CAT-MH™',
   },
+  exportIntervention: {
+    id: `${scope}.exportIntervention`,
+    defaultMessage: 'Export Intervention',
+  },
 });

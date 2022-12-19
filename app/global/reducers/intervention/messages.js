@@ -108,4 +108,13 @@ export default defineMessages({
     defaultMessage:
       'An error has occurred while generating conversations transcript',
   },
+  exportInterventionError: {
+    id: `${scope}.exportInterventionError`,
+    defaultMessage: 'An error has occured while exporting your intervention',
+  },
+  exportInterventionSuccess: {
+    id: `${scope}.exportInterventionSuccess`,
+    defaultMessage:
+      'CIAS is exporting your intervention. We will send you an e-mail when this process has been finished.',
+  },
 });
