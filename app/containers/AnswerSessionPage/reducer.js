@@ -26,7 +26,7 @@ import {
   CLEAR_ERROR,
   CHANGE_USER_SESSION_ID,
   SET_CURRENT_BLOCK_INDEX,
-  TOGGLE_TEXT_TRANSCRIPT,
+  SET_PARTICIPANT_SESSION_SETTINGS,
   SET_TRANSITIONAL_USER_SESSION_ID,
 } from './constants';
 
@@ -60,6 +60,7 @@ export const initialState = {
   showTextTranscript: false,
   transitionalUserSessionId: null,
   previousUserSessionId: null,
+  showTextReadingControls: false,
 };
 
 /* eslint-disable default-case, no-param-reassign */
@@ -166,8 +167,11 @@ const AnswerSessionPageReducer = (state = initialState, { payload, type }) =>
         draft.currentBlockIndex = payload.index;
         break;
 
-      case TOGGLE_TEXT_TRANSCRIPT:
-        draft.showTextTranscript = !state.showTextTranscript;
+      case SET_PARTICIPANT_SESSION_SETTINGS:
+        const { showTextTranscript, showTextReadingControls } =
+          payload.settings;
+        draft.showTextTranscript = showTextTranscript;
+        draft.showTextReadingControls = showTextReadingControls;
         break;
 
       case SET_TRANSITIONAL_USER_SESSION_ID: {

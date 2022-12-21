@@ -31,4 +31,5 @@ export const SVG = styled(({ fill, stroke, ...props }) => (
 
 export const SvgWrapper = styled.div`
   position: relative;
+  display: ${({ inline }) => (inline ? 'inline' : 'block')};
 `;

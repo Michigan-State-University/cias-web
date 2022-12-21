@@ -16,6 +16,7 @@ export type ImageButtonProps = PropsWithChildren<{
   showHoverEffect?: boolean;
   isActive?: boolean;
   styles?: object;
+  spinnerProps?: object;
 }> &
   Record<string, unknown>;
 
@@ -34,6 +35,7 @@ const ImageButton = React.forwardRef<HTMLElement, ImageButtonProps>(
       isActive = false,
       styles = {},
       children,
+      spinnerProps,
       ...props
     }: ImageButtonProps,
     ref,
@@ -56,6 +58,7 @@ const ImageButton = React.forwardRef<HTMLElement, ImageButtonProps>(
         'aria-label': title,
         ...props,
       }}
+      spinnerProps={spinnerProps}
       showHoverEffect={showHoverEffect}
       active={isActive}
       styles={styles}

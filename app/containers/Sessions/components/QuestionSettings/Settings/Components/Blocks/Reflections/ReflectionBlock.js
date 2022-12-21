@@ -179,7 +179,6 @@ const ReflectionBlock = ({
           id="reflection-toggle"
           disabled={disabled}
           checked
-          mr={15}
           onToggle={() => switchToSpeech(blockIndex, id)}
         >
           {formatMessage(messages.reflectionToggle)}
@@ -189,7 +188,6 @@ const ReflectionBlock = ({
         <FullWidthSwitch
           id="formula-toggle"
           disabled={disabled}
-          mr={15}
           onToggle={() => switchToReflectionFormula(blockIndex, id)}
         >
           {formatMessage(messages.formulaToggle)}

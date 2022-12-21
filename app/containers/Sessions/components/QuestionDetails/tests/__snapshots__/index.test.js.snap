@@ -253,6 +253,23 @@ exports[`<QuestionDetails /> should match the snapshot 1`] = `
   margin-top: 10px;
 }
 
+.c28 {
+  width: 100%;
+  height: 40px;
+  border-radius: 100px;
+  cursor: pointer;
+  border: none;
+  outline: none;
+  background-color: #107969;
+  color: #FFFFFF;
+  border: 1px solid transparent;
+  cursor: default;
+  background-color: #9AA1B6;
+  -webkit-transition: background-color 300ms ease,color 300ms ease,border 300ms ease;
+  transition: background-color 300ms ease,color 300ms ease,border 300ms ease;
+  width: 120px;
+}
+
 .c9 {
   max-width: 960px !important;
   width: 100%;
@@ -402,23 +419,6 @@ exports[`<QuestionDetails /> should match the snapshot 1`] = `
 .c19 .ql-container {
   font-size: initial;
   font-family: DM Sans;
-}
-
-.c28 {
-  width: 100%;
-  height: 40px;
-  border-radius: 100px;
-  cursor: pointer;
-  border: none;
-  outline: none;
-  background-color: #107969;
-  color: #FFFFFF;
-  border: 1px solid transparent;
-  cursor: default;
-  background-color: #9AA1B6;
-  -webkit-transition: background-color 300ms ease,color 300ms ease,border 300ms ease;
-  transition: background-color 300ms ease,color 300ms ease,border 300ms ease;
-  width: 120px;
 }
 
 .c23 {

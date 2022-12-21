@@ -159,7 +159,6 @@ const SpeechBlock = ({
             <FullWidthSwitch
               id="reflection-toggle"
               disabled={disabled}
-              mr={15}
               onToggle={() => switchToReflection(blockIndex, id)}
             >
               {formatMessage(messages.reflectionToggle)}

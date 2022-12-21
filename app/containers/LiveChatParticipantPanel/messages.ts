@@ -10,7 +10,7 @@ export const scope = 'app.containers.LiveChatParticipantPanel';
 export default defineMessages({
   iconAlt: {
     id: `${scope}.iconAlt`,
-    defaultMessage: 'Live chat active icon',
+    defaultMessage: 'Live chat icon',
   },
   openPanelTitle: {
     id: `${scope}.openPanelTitle`,
