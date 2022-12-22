@@ -31,7 +31,7 @@ const mockIntervention = (suffix = 1) => ({
 const mockSession = (suffix = 1) => ({
   id: `session-test-id-${suffix}`,
   name: `Intervention test title ${suffix}`,
-  intervention_id: mockIntervention().id,
+  interventionId: mockIntervention().id,
 });
 
 describe('<CopyChooser />', () => {

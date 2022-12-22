@@ -57,7 +57,7 @@ function SessionSchedule({
   session,
   updateDateVariable,
 }) {
-  const { intervention_id: interventionId } = session ?? {};
+  const { interventionId } = session ?? {};
 
   const scheduleOptions = {
     afterFill: {

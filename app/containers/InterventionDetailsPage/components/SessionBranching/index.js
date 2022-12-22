@@ -56,7 +56,7 @@ function SessionBranching({
   status,
   onChangeFormulaStatus,
   formulas,
-  session: { id, position, intervention_id: interventionId },
+  session: { id, position, interventionId },
   onFormulaUpdate,
   onAddCase,
   onRemoveCase,
