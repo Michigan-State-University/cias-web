@@ -23,7 +23,7 @@ const ArrowDropdown = ({
 }) => {
   const dropdown = useRef(null);
   const buttonRef = useRef(null);
-  useOutsideClick(dropdown, () => setOpen(false), isOpened);
+  useOutsideClick(dropdown, () => setOpen && setOpen(false), isOpened);
 
   return (
     <ArrowDropdownWrapper ref={dropdown} width={width}>

@@ -33,7 +33,6 @@ export {
   makeSelectVisibleGroupsSize,
   makeSelectNameQuestionExists,
   makeSelectFilteredQuestions,
-  makeSelectPreviousQuestions,
   makeSelectLastCreatedQuestionId,
   makeSelectThirdPartyReportQuestionExists,
   makeSelectPhoneQuestionExists,

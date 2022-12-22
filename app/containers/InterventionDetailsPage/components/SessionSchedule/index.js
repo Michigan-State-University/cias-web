@@ -125,11 +125,11 @@ function SessionSchedule({
             <Row mt={10} align="center">
               <VariableChooser
                 disabled={disabled}
-                interventionId={interventionId}
+                currentInterventionId={interventionId}
                 onClick={handleOnClickDateVariable}
                 placement="left"
                 questionTypeWhitelist={[dateQuestion.id]}
-                sessionId={sessionId}
+                currentSessionId={sessionId}
                 includeAllVariables
                 includeCurrentSession={false}
                 includeNonDigitVariables

@@ -78,15 +78,4 @@ describe('<ReflectionBlock />', () => {
     );
     expect(spy).not.toHaveBeenCalled();
   });
-
-  it('Should render and match the snapshot', () => {
-    const { container } = render(
-      <Provider store={store}>
-        <IntlProvider locale={DEFAULT_LOCALE}>
-          <ReflectionBlock {...defaultProps} />
-        </IntlProvider>
-      </Provider>,
-    );
-    expect(container).toMatchSnapshot();
-  });
 });

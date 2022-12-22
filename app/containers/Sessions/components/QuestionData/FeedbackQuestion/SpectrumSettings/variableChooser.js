@@ -47,8 +47,8 @@ const SpectrumVariableChooser = ({
           onClick={(value) =>
             onFormulaUpdate(`${spectrum.payload}${value}`, id)
           }
-          sessionId={sessionId}
-          interventionId={interventionId}
+          currentSessionId={sessionId}
+          currentInterventionId={interventionId}
           isMultiSession
         >
           <Text

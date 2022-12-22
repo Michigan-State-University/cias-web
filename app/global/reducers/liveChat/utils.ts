@@ -1,12 +1,12 @@
 import { DenormalizedConversation } from 'models/LiveChat';
-import { ApiData } from 'models/Api';
+import { ApiData, ApiDataCollection } from 'models/Api';
 
 import { jsonApiToArray, jsonApiToObject } from 'utils/jsonApiMapper';
 import { normalizeArrayToObject } from 'utils/normalizeArrayToObject';
 import { NewConversationData, ReducedConversationsData } from './types';
 
 export const mapFetchConversationsResponse = (
-  data: ApiData<DenormalizedConversation>,
+  data: ApiDataCollection<DenormalizedConversation>,
 ): ReducedConversationsData => {
   const denormalizedConversations: DenormalizedConversation[] = jsonApiToArray(
     data,

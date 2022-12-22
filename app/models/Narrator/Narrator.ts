@@ -48,6 +48,8 @@ export interface IBaseAudioBlock extends IBaseBlock, IAudioData {
 export interface IReflectionBlock extends IBaseAudioBlock {
   type: NarratorBlockTypes.REFLECTION;
   question_id: string;
+  session_id: Nullable<string>;
+  question_group_id: Nullable<string>;
   reflections: IReflection[];
   target_value: IReflection[];
 }

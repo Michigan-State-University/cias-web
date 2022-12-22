@@ -89,6 +89,10 @@ export default defineMessages({
     id: `${scope}.chooseQuestion`,
     defaultMessage: 'Choose Question',
   },
+  questionNotFound: {
+    id: `${scope}.questionNotFound`,
+    defaultMessage: 'Question not found. Choose a different one.',
+  },
   addReflection: {
     id: `${scope}.addReflection`,
     defaultMessage: 'Add Reflection',

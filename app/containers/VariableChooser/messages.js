@@ -17,6 +17,10 @@ export default defineMessages({
     id: `${scope}.noVariables`,
     defaultMessage: 'No Variables defined yet',
   },
+  noReflectableQuestions: {
+    id: `${scope}.noReflectableQuestions`,
+    defaultMessage: 'No Questions to choose',
+  },
   noSessions: {
     id: `${scope}.noSessions`,
     defaultMessage: 'No Sessions to choose',

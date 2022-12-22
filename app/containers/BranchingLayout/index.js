@@ -109,8 +109,8 @@ function BranchingLayout({
 
             <VariableChooser
               disabled={disabled}
-              sessionId={sessionId}
-              interventionId={interventionId}
+              currentSessionId={sessionId}
+              currentInterventionId={interventionId}
               onClick={(value) =>
                 onFormulaUpdate(`${formula.payload}${value}`, id, formulaIndex)
               }

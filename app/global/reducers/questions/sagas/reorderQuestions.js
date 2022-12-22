@@ -9,10 +9,8 @@ import {
   makeSelectQuestions,
   makeSelectSelectedQuestionId,
 } from 'global/reducers/questions/selectors';
-import {
-  cleanGroups,
-  makeSelectQuestionGroupsIds,
-} from 'global/reducers/questionGroups';
+import { cleanGroups } from 'global/reducers/questionGroups/actions';
+import { makeSelectQuestionGroupsIds } from 'global/reducers/questionGroups/selectors';
 import { getNarratorPositionWhenQuestionIsChanged } from 'utils/getNarratorPosition';
 import { setAnimationStopPosition } from 'global/reducers/localState';
 import messages from '../messages';

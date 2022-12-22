@@ -148,8 +148,8 @@ const ReflectionFormulaBlock = ({
           onClick={(value) =>
             onFormulaUpdate(`${block.payload}${value}`, id, blockIndex)
           }
-          sessionId={sessionId}
-          interventionId={interventionId}
+          currentSessionId={sessionId}
+          currentInterventionId={interventionId}
           selectedQuestion={selectedQuestion}
           includeCurrentQuestion={false}
           isMultiSession
