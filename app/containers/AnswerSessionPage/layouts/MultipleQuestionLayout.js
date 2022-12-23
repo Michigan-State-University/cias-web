@@ -2,12 +2,13 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { Markup } from 'interweave';
 
+import { htmlToPlainText } from 'utils/htmlToPlainText';
+
 import Column from 'components/Column';
 import Row from 'components/Row';
 import Checkbox from 'components/Checkbox';
 import HoverableBox from 'components/Box/HoverableBox';
 import AudioTextPreview from 'components/AudioTextPreview';
-import { htmlToPlainText } from 'utils/htmlToPlainText';
 
 const margin = 21;
 
@@ -36,22 +37,14 @@ const MultipleQuestionLayout = ({
               previewKey={key}
             />
           )}
-          <HoverableBox
-            px={margin}
-            py={14}
-            width={`calc(100% + ${margin}px)`}
-            clickable
-          >
-            <Row align="center" py={10} height="44">
-              <Checkbox
-                id={ariaInputId}
-                checked={isChecked}
-                mr={16}
-                onChange={() => check(value, name, index)}
-              >
-                <Markup content={payload} />
-              </Checkbox>
-            </Row>
+          <HoverableBox px={margin} py={14} filled clickable>
+            <Checkbox
+              id={ariaInputId}
+              checked={isChecked}
+              onChange={() => check(value, name, index)}
+            >
+              <Markup content={payload} />
+            </Checkbox>
           </HoverableBox>
           {isMobile && (
             <AudioTextPreview

@@ -2,11 +2,14 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { Markup } from 'interweave';
 
+import { htmlToPlainText } from 'utils/htmlToPlainText';
+
 import Column from 'components/Column';
 import Row from 'components/Row';
 import Radio from 'components/Radio';
 import HoverableBox from 'components/Box/HoverableBox';
 import Box from 'components/Box';
+import AudioTextPreview from 'components/AudioTextPreview';
 
 const margin = 21;
 
@@ -15,6 +18,7 @@ const ThirdPartyQuestionLayout = ({
   handleClick,
   questionId,
   selectedAnswerIndex,
+  isMobile,
 }) => (
   <Column>
     <Box>
@@ -26,26 +30,37 @@ const ThirdPartyQuestionLayout = ({
         } = questionAnswer;
         const isChecked = selectedAnswerIndex === index;
         const ariaInputId = `answer-${index + 1}`;
+        const key = `question-${questionId}-el-${index}`;
 
         return (
-          <Row key={`question-${questionId}-el-${index}`} mb={12}>
+          <Row key={key} mb={12} align="center">
+            {!isMobile && (
+              <AudioTextPreview
+                text={htmlToPlainText(payload)}
+                previewKey={key}
+              />
+            )}
             <HoverableBox
               px={margin}
               py={14}
-              width={`calc(100% + ${margin}px)`}
+              filled
               clickable
               onClick={() => handleClick(value, reportTemplateIds, index)}
             >
-              <Row align="center" height="44">
-                <Radio
-                  id={ariaInputId}
-                  data-cy={`single-question-${index}-checkbox`}
-                  checked={isChecked}
-                  mr={16}
-                />
+              <Radio
+                id={ariaInputId}
+                data-cy={`single-question-${index}-checkbox`}
+                checked={isChecked}
+              >
                 <Markup content={payload} />
-              </Row>
+              </Radio>
             </HoverableBox>
+            {isMobile && (
+              <AudioTextPreview
+                text={htmlToPlainText(payload)}
+                previewKey={key}
+              />
+            )}
           </Row>
         );
       })}
@@ -58,6 +73,7 @@ ThirdPartyQuestionLayout.propTypes = {
   handleClick: PropTypes.func,
   selectedAnswerIndex: PropTypes.number,
   questionId: PropTypes.string,
+  isMobile: PropTypes.bool,
 };
 
 export default ThirdPartyQuestionLayout;

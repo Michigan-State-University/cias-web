@@ -2,13 +2,14 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { Markup } from 'interweave';
 
+import { htmlToPlainText } from 'utils/htmlToPlainText';
+
 import Column from 'components/Column';
 import Row from 'components/Row';
 import Radio from 'components/Radio';
 import HoverableBox from 'components/Box/HoverableBox';
 import Box from 'components/Box';
 import AudioTextPreview from 'components/AudioTextPreview';
-import { htmlToPlainText } from 'utils/htmlToPlainText';
 
 const margin = 21;
 
@@ -38,21 +39,17 @@ const SingleQuestionLayout = ({
             <HoverableBox
               px={margin}
               py={14}
-              width={`calc(100% + ${margin}px)`}
+              filled
               clickable
               onClick={() => handleClick(value, index)}
             >
-              <Row align="center" height="44">
-                <Radio
-                  id={ariaInputId}
-                  data-cy={`single-question-${index}-checkbox`}
-                  checked={isChecked}
-                  onChange={undefined}
-                  mr={16}
-                >
-                  <Markup content={payload} />
-                </Radio>
-              </Row>
+              <Radio
+                id={ariaInputId}
+                data-cy={`single-question-${index}-checkbox`}
+                checked={isChecked}
+              >
+                <Markup content={payload} />
+              </Radio>
             </HoverableBox>
             {isMobile && (
               <AudioTextPreview

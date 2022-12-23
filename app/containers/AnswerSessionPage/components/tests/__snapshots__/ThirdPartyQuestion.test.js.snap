@@ -21,18 +21,6 @@ exports[`<ThirdPartyQuestion /> Should render and match the snapshot 1`] = `
   -ms-flex-direction: row;
   flex-direction: row;
   height: auto;
-  margin-bottom: 12px;
-}
-
-.c4 {
-  display: -webkit-box;
-  display: -webkit-flex;
-  display: -ms-flexbox;
-  display: flex;
-  -webkit-flex-direction: row;
-  -ms-flex-direction: row;
-  flex-direction: row;
-  height: 44px;
   -webkit-align-content: center;
   -ms-flex-line-pack: center;
   align-content: center;
@@ -40,10 +28,10 @@ exports[`<ThirdPartyQuestion /> Should render and match the snapshot 1`] = `
   -webkit-box-align: center;
   -ms-flex-align: center;
   align-items: center;
-  height: 44;
+  margin-bottom: 12px;
 }
 
-.c5 {
+.c4 {
   display: -webkit-box;
   display: -webkit-flex;
   display: -ms-flexbox;
@@ -79,7 +67,6 @@ exports[`<ThirdPartyQuestion /> Should render and match the snapshot 1`] = `
   height: auto;
   display: block;
   border-radius: 5px;
-  width: calc(100% + 21px);
   padding-top: 14px;
   padding-bottom: 14px;
   padding-right: 21px;
@@ -87,6 +74,10 @@ exports[`<ThirdPartyQuestion /> Should render and match the snapshot 1`] = `
   cursor: pointer;
   border-radius: 5px;
   border-radius: 5px;
+  -webkit-box-flex: 1;
+  -webkit-flex-grow: 1;
+  -ms-flex-positive: 1;
+  flex-grow: 1;
   color: unset;
   cursor: pointer;
 }
@@ -95,16 +86,16 @@ exports[`<ThirdPartyQuestion /> Should render and match the snapshot 1`] = `
   background-color: #E9F1FB;
 }
 
-.c7 {
+.c6 {
   display: none;
 }
 
-.c6:disabled + label > .c10 {
+.c5:disabled + label > .c9 {
   opacity: 0.5;
   cursor: not-allowed;
 }
 
-.c9 {
+.c8 {
   width: 100%;
   display: -webkit-box;
   display: -webkit-flex;
@@ -116,13 +107,17 @@ exports[`<ThirdPartyQuestion /> Should render and match the snapshot 1`] = `
   align-items: center;
 }
 
-.c9:hover {
+.c8:hover {
   cursor: pointer;
 }
 
-.c6:disabled + .c8 {
+.c5:disabled + .c7 {
   opacity: 0.5;
   cursor: not-allowed;
+}
+
+.c10 {
+  margin-left: 5px;
 }
 
 @media only screen and (min-width:768px) {
@@ -153,34 +148,32 @@ exports[`<ThirdPartyQuestion /> Should render and match the snapshot 1`] = `
       >
         <div
           class="c3"
-          width="calc(100% + 21px)"
         >
           <div
             class="c4"
-            height="44"
           >
-            <div
-              class="c5"
+            <input
+              class="c5 c6"
+              data-cy="single-question-0-checkbox"
+              id="answer-1"
+              type="radio"
+            />
+            <label
+              class="c7 c8"
+              for="answer-1"
             >
-              <input
-                class="c6 c7"
-                data-cy="single-question-0-checkbox"
-                id="answer-1"
-                type="radio"
+              <img
+                class="c9 "
+                src="IMAGE_MOCK"
               />
-              <label
-                class="c8 c9"
-                for="answer-1"
+              <div
+                class="c1 c10"
               >
-                <img
-                  class="c10 "
-                  src="IMAGE_MOCK"
-                />
-              </label>
-            </div>
-            <span>
-              test
-            </span>
+                <span>
+                  test
+                </span>
+              </div>
+            </label>
           </div>
         </div>
       </div>
@@ -189,34 +182,32 @@ exports[`<ThirdPartyQuestion /> Should render and match the snapshot 1`] = `
       >
         <div
           class="c3"
-          width="calc(100% + 21px)"
         >
           <div
             class="c4"
-            height="44"
           >
-            <div
-              class="c5"
+            <input
+              class="c5 c6"
+              data-cy="single-question-1-checkbox"
+              id="answer-2"
+              type="radio"
+            />
+            <label
+              class="c7 c8"
+              for="answer-2"
             >
-              <input
-                class="c6 c7"
-                data-cy="single-question-1-checkbox"
-                id="answer-2"
-                type="radio"
+              <img
+                class="c9 "
+                src="IMAGE_MOCK"
               />
-              <label
-                class="c8 c9"
-                for="answer-2"
+              <div
+                class="c1 c10"
               >
-                <img
-                  class="c10 "
-                  src="IMAGE_MOCK"
-                />
-              </label>
-            </div>
-            <span>
-              test
-            </span>
+                <span>
+                  test
+                </span>
+              </div>
+            </label>
           </div>
         </div>
       </div>

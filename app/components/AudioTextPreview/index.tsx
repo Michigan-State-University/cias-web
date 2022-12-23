@@ -4,12 +4,10 @@ import { useInjectReducer, useInjectSaga } from 'redux-injectors';
 import { useIntl } from 'react-intl';
 
 import speaker from 'assets/svg/speaker.svg';
+
+import { themeColors } from 'theme';
+
 import { makeSelectAudioInstance } from 'global/reducers/globalState';
-import {
-  makeSelectUserSession,
-  makeSelectIsAnimationOngoing,
-  makeSelectShowTextReadingControls,
-} from 'containers/AnswerSessionPage/selectors';
 import {
   makeSelectAudioPreviewState,
   phoneticPreviewRequest,
@@ -18,7 +16,14 @@ import {
   resetPhoneticPreview,
 } from 'global/reducers/audioPreview';
 
+import {
+  makeSelectUserSession,
+  makeSelectIsAnimationOngoing,
+  makeSelectShowTextReadingControls,
+} from 'containers/AnswerSessionPage/selectors';
+
 import { ImageButton } from 'components/Button';
+import Box from 'components/Box';
 
 import messages from './messages';
 
@@ -28,7 +33,7 @@ type Props = {
   iconSize?: number;
 };
 
-const AudioTextPreview = ({ text, previewKey, iconSize = 16 }: Props) => {
+const AudioTextPreview = ({ text, previewKey, iconSize = 18 }: Props) => {
   useInjectReducer({ key: 'audioPreview', reducer: AudioPreviewReducer });
   useInjectSaga({ key: 'audioPreview', saga: allAudioPreviewSagas });
   const dispatch = useDispatch();
@@ -44,7 +49,9 @@ const AudioTextPreview = ({ text, previewKey, iconSize = 16 }: Props) => {
     makeSelectShowTextReadingControls(),
   );
   const { formatMessage } = useIntl();
-  const isCurrentPreview = previewKey === statePreviewKey;
+
+  const isPlaying = !!statePreviewKey;
+  const isPlayingThisText = isPlaying && previewKey === statePreviewKey;
 
   const onSpeechReady = () => audioInstance.start();
   const onFinish = () => {
@@ -58,13 +65,13 @@ const AudioTextPreview = ({ text, previewKey, iconSize = 16 }: Props) => {
   }, []);
 
   useEffect(() => {
-    if (isCurrentPreview && phoneticUrl !== null) {
+    if (isPlayingThisText && phoneticUrl !== null) {
       audioInstance.onEnded(onFinish);
       audioInstance.onError(onFinish);
       audioInstance.onLoaded(onSpeechReady);
       audioInstance.setSrc(phoneticUrl);
     }
-  }, [phoneticUrl, isCurrentPreview]);
+  }, [phoneticUrl, isPlayingThisText]);
 
   const onAudioRequest = () => {
     dispatch(
@@ -75,16 +82,22 @@ const AudioTextPreview = ({ text, previewKey, iconSize = 16 }: Props) => {
       ),
     );
   };
-  if (isAnimationOngoing || !showTextReadingControls) {
+
+  if (!showTextReadingControls) {
     return null;
   }
+
+  if (isAnimationOngoing || (isPlaying && !isPlayingThisText)) {
+    return <Box width={iconSize} height={iconSize} flexShrink={0} />;
+  }
+
   return (
     <ImageButton
       src={speaker}
       onClick={onAudioRequest}
       title={formatMessage(messages.readText)}
-      loading={phoneticLoading && isCurrentPreview}
-      disabled={statePreviewKey !== null}
+      loading={phoneticLoading && isPlayingThisText}
+      fill={isPlayingThisText ? themeColors.text : undefined}
       padding={0}
       spinnerProps={{ size: iconSize }}
       iconProps={{ width: iconSize, height: iconSize }}

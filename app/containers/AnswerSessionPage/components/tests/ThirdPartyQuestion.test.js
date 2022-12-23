@@ -9,10 +9,15 @@ import { render } from '@testing-library/react';
 import { IntlProvider } from 'react-intl';
 import { MemoryRouter } from 'react-router-dom';
 import { DEFAULT_LOCALE } from 'i18n';
+import { Provider } from 'react-redux';
+
+import { createTestStore } from 'utils/testUtils/storeUtils';
 
 import ThirdPartyQuestion from '../ThirdPartyQuestion';
 
 describe('<ThirdPartyQuestion />', () => {
+  const store = createTestStore({});
+
   const mockedFunctions = {
     selectAnswer: jest.fn(),
   };
@@ -45,22 +50,26 @@ describe('<ThirdPartyQuestion />', () => {
   it('Expect to not log errors in console', () => {
     const spy = jest.spyOn(global.console, 'error');
     render(
-      <IntlProvider locale={DEFAULT_LOCALE}>
-        <MemoryRouter>
-          <ThirdPartyQuestion {...defaultProps} />
-        </MemoryRouter>
-      </IntlProvider>,
+      <Provider store={store}>
+        <IntlProvider locale={DEFAULT_LOCALE}>
+          <MemoryRouter>
+            <ThirdPartyQuestion {...defaultProps} />
+          </MemoryRouter>
+        </IntlProvider>
+      </Provider>,
     );
     expect(spy).not.toHaveBeenCalled();
   });
 
   it('Should render and match the snapshot', () => {
     const { container } = render(
-      <IntlProvider locale={DEFAULT_LOCALE}>
-        <MemoryRouter>
-          <ThirdPartyQuestion {...defaultProps} />
-        </MemoryRouter>
-      </IntlProvider>,
+      <Provider store={store}>
+        <IntlProvider locale={DEFAULT_LOCALE}>
+          <MemoryRouter>
+            <ThirdPartyQuestion {...defaultProps} />
+          </MemoryRouter>
+        </IntlProvider>
+      </Provider>,
     );
     expect(container).toMatchSnapshot();
   });
