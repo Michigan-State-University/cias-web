@@ -120,6 +120,10 @@ exports[`<SingleQuestion /> Should render and match the snapshot 1`] = `
   margin-left: 5px;
 }
 
+.c11 * {
+  line-height: 1.42 !important;
+}
+
 @media only screen and (min-width:768px) {
 
 }
@@ -169,9 +173,11 @@ exports[`<SingleQuestion /> Should render and match the snapshot 1`] = `
               <div
                 class="c1 c10"
               >
-                <span>
+                <div
+                  class="c11"
+                >
                   test
-                </span>
+                </div>
               </div>
             </label>
           </div>
@@ -203,9 +209,11 @@ exports[`<SingleQuestion /> Should render and match the snapshot 1`] = `
               <div
                 class="c1 c10"
               >
-                <span>
+                <div
+                  class="c11"
+                >
                   test
-                </span>
+                </div>
               </div>
             </label>
           </div>

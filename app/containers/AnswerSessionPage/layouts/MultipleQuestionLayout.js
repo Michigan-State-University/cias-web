@@ -10,6 +10,8 @@ import Checkbox from 'components/Checkbox';
 import HoverableBox from 'components/Box/HoverableBox';
 import AudioTextPreview from 'components/AudioTextPreview';
 
+import { MarkupContainer } from './styled';
+
 const margin = 21;
 
 const MultipleQuestionLayout = ({
@@ -43,7 +45,9 @@ const MultipleQuestionLayout = ({
               checked={isChecked}
               onChange={() => check(value, name, index)}
             >
-              <Markup content={payload} />
+              <MarkupContainer>
+                <Markup content={payload} noWrap />
+              </MarkupContainer>
             </Checkbox>
           </HoverableBox>
           {isMobile && (

@@ -11,6 +11,8 @@ import HoverableBox from 'components/Box/HoverableBox';
 import Box from 'components/Box';
 import AudioTextPreview from 'components/AudioTextPreview';
 
+import { MarkupContainer } from './styled';
+
 const margin = 21;
 
 const SingleQuestionLayout = ({
@@ -48,7 +50,9 @@ const SingleQuestionLayout = ({
                 data-cy={`single-question-${index}-checkbox`}
                 checked={isChecked}
               >
-                <Markup content={payload} />
+                <MarkupContainer>
+                  <Markup content={payload} noWrap />
+                </MarkupContainer>
               </Radio>
             </HoverableBox>
             {isMobile && (
