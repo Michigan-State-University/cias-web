@@ -25,6 +25,10 @@ export default defineMessages({
     id: `${scope}.createTeamFailure`,
     defaultMessage: 'Failed to create the team',
   },
+  editTeamFailure: {
+    id: `${scope}.editTeamFailure`,
+    defaultMessage: 'Failed to edit the team',
+  },
   inviteToTeamSuccess: {
     id: `${scope}.inviteToTeamSuccess`,
     defaultMessage:

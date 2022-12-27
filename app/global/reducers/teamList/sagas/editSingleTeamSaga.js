@@ -1,13 +1,17 @@
-import { takeLatest, put, select } from 'redux-saga/effects';
+import { takeLatest, put, select, call } from 'redux-saga/effects';
+import { toast } from 'react-toastify';
+import axios from 'axios';
 
 import { TeamBuilder } from 'models/Teams/TeamBuilder';
-import axios from 'axios';
 import { mapCurrentUser } from 'utils/mapResponseObjects';
 import objectToSnakeCase from 'utils/objectToSnakeCase';
+import { formatMessage } from 'utils/intlOutsideReact';
 import { objectDifference } from 'utils/objectDifference';
+
 import { EDIT_SINGLE_TEAM_REQUEST } from '../constants';
 import { editSingleTeamSuccess, editSingleTeamFailure } from '../actions';
 import { makeSelectSingleTeam } from '../selectors';
+import messages from './messages';
 
 function* editSingleTeam({ payload: { id, name, user: teamAdmin } }) {
   const requestUrl = `/v1/teams/${id}`;
@@ -42,6 +46,11 @@ function* editSingleTeam({ payload: { id, name, user: teamAdmin } }) {
       yield put(editSingleTeamSuccess(mappedData));
     } catch (error) {
       yield put(editSingleTeamFailure(error));
+      yield call(
+        toast.error,
+        error.response?.data?.message ||
+          formatMessage(messages.editTeamFailure),
+      );
     }
   } else yield put(editSingleTeamFailure());
 }
