@@ -1,6 +1,6 @@
 import { takeLatest, put, call } from 'redux-saga/effects';
 import axios from 'axios';
-import toast from 'react-toastify';
+import { toast } from 'react-toastify';
 
 import {
   PHONETIC_PREVIEW_REQUEST,
