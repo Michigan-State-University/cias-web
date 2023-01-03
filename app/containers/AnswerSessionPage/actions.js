@@ -27,7 +27,7 @@ import {
   CLEAR_ERROR,
   CHANGE_USER_SESSION_ID,
   SET_CURRENT_BLOCK_INDEX,
-  TOGGLE_TEXT_TRANSCRIPT,
+  SET_PARTICIPANT_SESSION_SETTINGS,
   SET_TRANSITIONAL_USER_SESSION_ID,
   SAVE_QUICK_EXIT_EVENT_REQUEST,
 } from './constants';
@@ -108,8 +108,8 @@ export const changeUserSessionId = (userSessionId) =>
 export const setCurrentBlockIndex = (index) =>
   actionBuilder(SET_CURRENT_BLOCK_INDEX, { index });
 
-export const toggleTextTranscriptAction = () =>
-  actionBuilder(TOGGLE_TEXT_TRANSCRIPT, {});
+export const setParticipantSessionSettings = (settings) =>
+  actionBuilder(SET_PARTICIPANT_SESSION_SETTINGS, { settings });
 
 export const setTransitionalUserSessionId = (userSessionId) =>
   actionBuilder(SET_TRANSITIONAL_USER_SESSION_ID, { userSessionId });

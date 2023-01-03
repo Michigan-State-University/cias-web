@@ -3,7 +3,7 @@ import pick from 'lodash/pick';
 import sortBy from 'lodash/sortBy';
 import flatMap from 'lodash/flatMap';
 
-import { Question } from 'models/Question';
+import { Question, QuestionDTO } from 'models/Question';
 import { EFeedbackAction } from 'models/Narrator/FeedbackActions';
 import {
   bodyAnimationType,
@@ -43,7 +43,7 @@ import {
 } from './QuestionTypes';
 
 /**
- * @param  {Array<Question>} questions
+ * @param  {Array<Question> | Array<QuestionDTO>} questions
  * @param  {string} questionId
  */
 export const findQuestionById = (questions, questionId) =>
@@ -272,7 +272,7 @@ export const instantiateBlockForType = (type, endPosition, question) => {
   };
 
   const character =
-    question?.narrator?.settins?.character ?? CharacterType.PEEDY; // no destructuring, because question can be null
+    question?.narrator?.settings?.character ?? CharacterType.PEEDY; // no destructuring, because question can be null
 
   switch (type) {
     case bodyAnimationType:
@@ -294,6 +294,8 @@ export const instantiateBlockForType = (type, endPosition, question) => {
     case reflectionType:
       return {
         action: EFeedbackAction.NO_ACTION,
+        session_id: null,
+        question_group_id: null,
         question_id: '',
         reflections: [],
         animation: 'rest',

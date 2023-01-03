@@ -1,7 +1,7 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`<AnswerSessionPage /> Should render and match the snapshot 1`] = `
-.c1 {
+.c2 {
   width: auto;
   height: auto;
   display: block;
@@ -27,7 +27,7 @@ exports[`<AnswerSessionPage /> Should render and match the snapshot 1`] = `
   color: unset;
 }
 
-.c5 {
+.c6 {
   width: auto;
   height: auto;
   display: block;
@@ -38,7 +38,7 @@ exports[`<AnswerSessionPage /> Should render and match the snapshot 1`] = `
   color: unset;
 }
 
-.c9 {
+.c10 {
   width: auto;
   height: auto;
   display: block;
@@ -60,9 +60,26 @@ exports[`<AnswerSessionPage /> Should render and match the snapshot 1`] = `
   flex-direction: column;
   width: 100%;
   height: 100%;
+  max-height: 100vh;
 }
 
-.c3 {
+.c1 {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-flex-direction: column;
+  -ms-flex-direction: column;
+  flex-direction: column;
+  width: 100%;
+  -webkit-box-flex: 1;
+  -webkit-flex-grow: 1;
+  -ms-flex-positive: 1;
+  flex-grow: 1;
+  overflow: auto;
+}
+
+.c4 {
   display: -webkit-box;
   display: -webkit-flex;
   display: -ms-flexbox;
@@ -80,7 +97,7 @@ exports[`<AnswerSessionPage /> Should render and match the snapshot 1`] = `
   position: relative;
 }
 
-.c10 {
+.c11 {
   margin: 0;
   font-family: DM Sans;
   font-size: 15px;
@@ -90,7 +107,7 @@ exports[`<AnswerSessionPage /> Should render and match the snapshot 1`] = `
   text-align: center;
 }
 
-.c4 {
+.c5 {
   display: -webkit-box;
   display: -webkit-flex;
   display: -ms-flexbox;
@@ -111,7 +128,7 @@ exports[`<AnswerSessionPage /> Should render and match the snapshot 1`] = `
   flex-direction: column;
 }
 
-.c6 {
+.c7 {
   margin: 0;
   font-family: DM Sans;
   font-size: 18px;
@@ -121,7 +138,7 @@ exports[`<AnswerSessionPage /> Should render and match the snapshot 1`] = `
   text-align: center;
 }
 
-.c7 {
+.c8 {
   width: 100%;
   height: 40px;
   border-radius: 100px;
@@ -136,11 +153,11 @@ exports[`<AnswerSessionPage /> Should render and match the snapshot 1`] = `
   transition: background-color 300ms ease,color 300ms ease,border 300ms ease;
 }
 
-.c8 {
+.c9 {
   width: 80%;
 }
 
-.c2 {
+.c3 {
   -webkit-align-items: center;
   -webkit-box-align: center;
   -ms-flex-align: center;
@@ -197,8 +214,24 @@ exports[`<AnswerSessionPage /> Should render and match the snapshot 1`] = `
 
 }
 
+@media only screen and (min-width:768px) {
+
+}
+
+@media only screen and (min-width:960px) {
+
+}
+
+@media only screen and (min-width:1170px) {
+
+}
+
+@media only screen and (min-width:1360px) {
+
+}
+
 @media only screen and (max-width:480px) {
-  .c8 {
+  .c9 {
     width: 80%;
   }
 }
@@ -210,47 +243,52 @@ exports[`<AnswerSessionPage /> Should render and match the snapshot 1`] = `
 >
   <div
     class="c1"
-    display="flex"
-    height="100%"
-    width="100%"
+    overflow="auto"
   >
     <div
       class="c2"
+      display="flex"
+      height="100%"
+      width="100%"
     >
       <div
         class="c3"
-        height="100%"
       >
         <div
           class="c4"
-          direction="column"
+          height="100%"
         >
           <div
             class="c5"
+            direction="column"
           >
-            <h2
+            <div
               class="c6"
             >
-              Let’s fill the session
-            </h2>
+              <h2
+                class="c7"
+              >
+                Let’s fill the session
+              </h2>
+            </div>
+            <button
+              class="c8 c9"
+              color="primary"
+              radius="100px"
+            >
+              Start session
+            </button>
           </div>
-          <button
-            class="c7 c8"
-            color="primary"
-            radius="100px"
-          >
-            Start session
-          </button>
-        </div>
-        <div
-          class="c9"
-        >
-          <h3
+          <div
             class="c10"
-            color="#D2371D"
           >
-            Please be aware that after clicking the button, audio may be played automatically and the content could change its position dynamically.
-          </h3>
+            <h3
+              class="c11"
+              color="#D2371D"
+            >
+              Please be aware that after clicking the button, audio may be played automatically and the content could change its position dynamically.
+            </h3>
+          </div>
         </div>
       </div>
     </div>

@@ -19,8 +19,6 @@ import { Hidden, Visible } from 'react-grid-system';
 import { useInjectSaga, useInjectReducer } from 'redux-injectors';
 import Color from 'color';
 
-import ccIcon from 'assets/svg/closed-captions.svg';
-
 import { colors, elements, themeColors } from 'theme';
 
 import AudioWrapper from 'utils/audioWrapper';
@@ -68,7 +66,6 @@ import Box from 'components/Box';
 import Loader from 'components/Loader';
 import H2 from 'components/H2';
 import H3 from 'components/H3';
-import Icon from 'components/Icon';
 import { ConfirmationModal, ModalType, useModal } from 'components/Modal';
 import Img from 'components/Img';
 import QuickExit from 'components/QuickExit';
@@ -96,7 +93,6 @@ import {
   createUserSessionRequest,
   nextQuestionRequest,
   clearError,
-  toggleTextTranscriptAction,
   setTransitionalUserSessionId as setTransitionalUserSessionIdAction,
   saveQuickExitEventRequest,
   resetReducer,
@@ -108,6 +104,7 @@ import {
   CONFIRMABLE_QUESTIONS,
 } from './constants';
 import { ActionButtons } from './components/ActionButtons';
+import AnswerSessionPageFooter from './components/AnswerSessionPageFooter';
 
 const AnimationRefHelper = ({
   children,
@@ -162,7 +159,6 @@ AnimationRefHelper.propTypes = {
 };
 
 const IS_DESKTOP = 'IS_DESKTOP';
-const IS_XXL = 'IS_XXL';
 const IS_MOBILE = 'IS_MOBILE';
 
 const QUERY = {
@@ -171,9 +167,6 @@ const QUERY = {
   },
   [IS_MOBILE]: {
     maxWidth: containerBreakpoints.sm,
-  },
-  [IS_XXL]: {
-    minWidth: containerBreakpoints.xxl,
   },
 };
 
@@ -200,6 +193,7 @@ export function AnswerSessionPage({
     nextQuestionError,
     currentQuestion,
     showTextTranscript,
+    showTextReadingControls,
     transitionalUserSessionId,
   },
   isPreview,
@@ -208,7 +202,6 @@ export function AnswerSessionPage({
   createUserSession,
   nextQuestion,
   clearErrors,
-  toggleTextTranscript,
   setTransitionalUserSessionId,
   setLiveChatEnabled,
   saveQuickExitEvent,
@@ -247,13 +240,13 @@ export function AnswerSessionPage({
   const checkIfDesktop = (containerQuery) =>
     isPreview ? previewMode === DESKTOP_MODE && containerQuery : containerQuery;
 
-  const { isDesktop, isMobile, transcriptIconFixedPosition } = useMemo(
+  const { isDesktop, isMobile, isMobilePreview } = useMemo(
     () => ({
       isDesktop: checkIfDesktop(containerQueryParams[IS_DESKTOP]),
-      transcriptIconFixedPosition: checkIfDesktop(containerQueryParams[IS_XXL]),
       isMobile: isPreview
         ? previewMode === I_PHONE_8_PLUS_MODE
         : containerQueryParams[IS_MOBILE],
+      isMobilePreview: isPreview && previewMode === I_PHONE_8_PLUS_MODE,
     }),
     [previewMode, containerQueryParams, isPreview],
   );
@@ -366,8 +359,8 @@ export function AnswerSessionPage({
   };
 
   const renderQuestionTranscript = (isRightSide) => {
-    const renderTranscriptComponent = ({ maxWidth, height }) => (
-      <Box mt={isRightSide ? 120 : 30} maxWidth={maxWidth} height={height}>
+    const renderTranscriptComponent = (styles) => (
+      <Box mt={isRightSide ? 0 : 30} {...styles}>
         <QuestionTranscript
           question={currentQuestion}
           language={languageCode}
@@ -379,7 +372,13 @@ export function AnswerSessionPage({
       if (isDesktop && !isFullSize)
         return (
           <Visible xxl>
-            {renderTranscriptComponent({ maxWidth: 300, height: 600 })}
+            {renderTranscriptComponent({
+              width: 300,
+              height: 600,
+              position: 'fixed',
+              right: 24,
+              top: 130 + (isPreview ? elements.navbarHeight : 0),
+            })}
           </Visible>
         );
 
@@ -404,31 +403,6 @@ export function AnswerSessionPage({
     return renderBottomSide();
   };
 
-  const renderTranscriptToggleIcon = () => {
-    const transcriptToggleIcon = (
-      <Icon
-        width={22}
-        src={ccIcon}
-        onClick={toggleTextTranscript}
-        fill={showTextTranscript ? themeColors.text : ''}
-      />
-    );
-
-    if (transcriptIconFixedPosition) {
-      return (
-        <Row position="fixed" right={30} bottom={30}>
-          {transcriptToggleIcon}
-        </Row>
-      );
-    }
-
-    return (
-      <Row pt={15} pb={15}>
-        {transcriptToggleIcon}
-      </Row>
-    );
-  };
-
   const renderQuestion = () => {
     const selectAnswerProp = (answerBody, selectedByUser = true) => {
       saveSelectedAnswer({
@@ -443,7 +417,7 @@ export function AnswerSessionPage({
 
     const isLoading =
       currentQuestion.loading || nextQuestionLoading || answer?.loading;
-    const skipQuestionButtonDisabled = required || isLoading;
+    const skipQuestionButtonDisabled = isLoading;
 
     const isAnswered = () =>
       answer &&
@@ -466,7 +440,7 @@ export function AnswerSessionPage({
       isDesktop,
       isMobile,
       previewMode,
-      isMobilePreview: isPreview && previewMode !== DESKTOP_MODE,
+      isMobilePreview,
       userSessionId: userSession?.id,
     };
 
@@ -475,6 +449,7 @@ export function AnswerSessionPage({
     const canSkipNarrator = narratorSkippable || !isAnimationOngoing;
 
     const shouldRenderSkipQuestionButton =
+      !required &&
       !isCatMhSession &&
       !isLastScreen &&
       !NOT_SKIPPABLE_QUESTIONS.includes(type);
@@ -500,6 +475,7 @@ export function AnswerSessionPage({
           >
             <CommonLayout
               currentQuestion={currentQuestion}
+              isMobile={isMobile}
               shouldDisablePlayer={isAnimationOngoing}
             />
 
@@ -554,7 +530,6 @@ export function AnswerSessionPage({
           )}
 
           {renderQuestionTranscript(false)}
-          {renderTranscriptToggleIcon()}
         </AppContainer>
       </Row>
     );
@@ -607,200 +582,245 @@ export function AnswerSessionPage({
     FULL_SIZE_QUESTIONS.includes(currentQuestion.type);
 
   return (
-    <Column height="100%" ref={pageRef} id={ANSWER_SESSION_PAGE_ID}>
+    <Column
+      height="100%"
+      ref={pageRef}
+      id={ANSWER_SESSION_PAGE_ID}
+      maxHeight="100vh"
+    >
       {quickExitEnabled && (
         <QuickExit
-          isMobilePreview={isPreview && previewMode === I_PHONE_8_PLUS_MODE}
+          isMobilePreview={isMobilePreview}
           beforeQuickExit={beforeQuickExit}
         />
       )}
 
-      {interventionStarted && !nextQuestionError && logoUrl && isDesktop && (
-        <Row justify="start" pl={24} pt={24}>
-          <Img
-            maxHeight={elements.interventionLogoSize.height}
-            maxWidth={elements.interventionLogoSize.width}
-            src={logoUrl}
-            aria-label={imageAlt}
-          />
-        </Row>
-      )}
+      <Column filled overflow="auto">
+        {interventionStarted && !nextQuestionError && logoUrl && isDesktop && (
+          <Row justify="start" pl={24} pt={24}>
+            <Img
+              maxHeight={elements.interventionLogoSize.height}
+              maxWidth={elements.interventionLogoSize.width}
+              src={logoUrl}
+              aria-label={imageAlt}
+            />
+          </Row>
+        )}
 
-      {showLoader && <Loader />}
-      {!showLoader && (
-        <>
-          <ConfirmationModal
-            visible={skipQuestionModalVisible}
-            onClose={() => setSkipQuestionModalVisible(false)}
-            description={formatMessage(messages.skipQuestionModalHeader)}
-            content={formatMessage(messages.skipQuestionModalMessage)}
-            confirmAction={() => saveAnswer(true)}
-            hideCloseButton
-            contentContainerStyles={{
-              mb: 20,
-            }}
-            isMobile={isMobile}
-          />
+        {showLoader && <Loader />}
+        {!showLoader && (
+          <>
+            <ConfirmationModal
+              visible={skipQuestionModalVisible}
+              onClose={() => setSkipQuestionModalVisible(false)}
+              description={formatMessage(messages.skipQuestionModalHeader)}
+              content={formatMessage(messages.skipQuestionModalMessage)}
+              confirmAction={() => saveAnswer(true)}
+              hideCloseButton
+              contentContainerStyles={{
+                mb: 20,
+              }}
+              isMobile={isMobile}
+            />
 
-          <ConfirmationModal
-            icon="info"
-            visible={confirmContinueQuestionModalVisible}
-            onClose={() => setConfirmContinueQuestionModalVisible(false)}
-            description={formatMessage(messages.confirmContinueModalHeader)}
-            content={formatMessage(
-              messages[
-                `confirmContinueModalMessage${QuestionTypes.TLFB_EVENTS}`
-              ],
-            )}
-            confirmAction={() => saveAnswer(false)}
-            confirmationButtonText={formatMessage(
-              messages.confirmContinueModalConfirmText,
-            )}
-            cancelButtonText={formatMessage(
-              messages.confirmContinueModalCancelText,
-            )}
-            confirmationButtonColor="primary"
-            cancelButtonStyles={{
-              color: Color(themeColors.primary).alpha(0.1).hexa(),
-              textColor: themeColors.primary,
-              hoverColor: colors.white,
-              hoverTextColor: themeColors.primary,
-              inverted: false,
-            }}
-            contentContainerStyles={{
-              mb: 20,
-              mt: 10,
-            }}
-            hideCloseButton
-            isMobile={isMobile}
-          />
-
-          <Modal />
-
-          <Box
-            display="flex"
-            align="center"
-            justify="center"
-            height="100%"
-            width="100%"
-          >
-            <Helmet>
-              <title>{formatMessage(messages.pageTitle, { isPreview })}</title>
-            </Helmet>
-
-            <AnswerOuterContainer
-              isFullSize={isFullSize}
-              previewMode={isPreview ? previewMode : DESKTOP_MODE}
-              interventionStarted={interventionStarted}
-            >
-              {interventionStarted && nextQuestionError && (
-                <Column align="center" mt={30}>
-                  <H2 textAlign="center" mb={30}>
-                    {formatMessage(messages.nextQuestionError)}
-                  </H2>
-                  <StyledButton
-                    loading={nextQuestionLoading}
-                    onClick={() => nextQuestion(userSessionId)}
-                    title={formatMessage(messages.refetchQuestion)}
-                    isDesktop={isDesktop}
-                  />
-                </Column>
+            <ConfirmationModal
+              icon="info"
+              visible={confirmContinueQuestionModalVisible}
+              onClose={() => setConfirmContinueQuestionModalVisible(false)}
+              description={formatMessage(messages.confirmContinueModalHeader)}
+              content={formatMessage(
+                messages[
+                  `confirmContinueModalMessage${QuestionTypes.TLFB_EVENTS}`
+                ],
               )}
-              {!interventionStarted && !nextQuestionError && (
-                <Column justify="center" height="100%" position="relative">
-                  <Row direction="column" align="center">
-                    <Box mx={32} maxWidth={600}>
-                      <H2 textAlign="center" mb={50}>
-                        {formatMessage(messages.fillHeader)}
-                      </H2>
-                    </Box>
+              confirmAction={() => saveAnswer(false)}
+              confirmationButtonText={formatMessage(
+                messages.confirmContinueModalConfirmText,
+              )}
+              cancelButtonText={formatMessage(
+                messages.confirmContinueModalCancelText,
+              )}
+              confirmationButtonColor="primary"
+              cancelButtonStyles={{
+                color: Color(themeColors.primary).alpha(0.1).hexa(),
+                textColor: themeColors.primary,
+                hoverColor: colors.white,
+                hoverTextColor: themeColors.primary,
+                inverted: false,
+              }}
+              contentContainerStyles={{
+                mb: 20,
+                mt: 10,
+              }}
+              hideCloseButton
+              isMobile={isMobile}
+            />
+
+            <Modal />
+
+            <Box
+              display="flex"
+              align="center"
+              justify="center"
+              height="100%"
+              width="100%"
+            >
+              <Helmet>
+                <title>
+                  {formatMessage(messages.pageTitle, { isPreview })}
+                </title>
+              </Helmet>
+
+              <AnswerOuterContainer
+                isFullSize={isFullSize}
+                previewMode={isPreview ? previewMode : DESKTOP_MODE}
+                interventionStarted={interventionStarted}
+              >
+                {interventionStarted && nextQuestionError && (
+                  <Column align="center" mt={30}>
+                    <H2 textAlign="center" mb={30}>
+                      {formatMessage(messages.nextQuestionError)}
+                    </H2>
                     <StyledButton
-                      loading={userSessionLoading || nextQuestionLoading}
-                      disabled={!previewPossible}
-                      onClick={startInterventionAsync}
-                      title={buttonText()}
+                      loading={nextQuestionLoading}
+                      onClick={() => nextQuestion(userSessionId)}
+                      title={formatMessage(messages.refetchQuestion)}
                       isDesktop={isDesktop}
                     />
-                  </Row>
-                  <Box
-                    position="absolute"
-                    bottom={
-                      userSession?.liveChatEnabled && !isDesktop ? 90 : 48
-                    }
-                    mx={24}
-                  >
-                    <H3 textAlign="center" color={themeColors.warning}>
-                      {formatMessage(messages.wcagWarning)}
-                    </H3>
-                  </Box>
-                </Column>
-              )}
-              {interventionStarted && !nextQuestionError && (
-                <Box
-                  id={ANSWER_SESSION_CONTAINER_ID}
-                  position="relative"
-                  height="100%"
-                  width="100%"
-                  borderRadius="0px"
-                >
-                  <Box width="100%">
-                    <Row
-                      padding={!isDesktop || isMobile ? 30 : 0}
-                      pb={isDesktop || (!isDesktop && logoUrl) ? 24 : 0}
-                      pt={isMobile && animation && !logoUrl ? 0 : undefined}
-                      width="100%"
-                    >
-                      {!isDesktop && (
-                        <Row>
-                          <Img
-                            maxHeight={elements.interventionLogoSize.height}
-                            maxWidth={elements.interventionLogoSize.width}
-                            src={logoUrl}
-                            aria-label={imageAlt}
-                          />
-                        </Row>
-                      )}
-                      {renderQuestionTranscript(true)}
-                    </Row>
-
-                    {transitionalUserSessionId && (
-                      <BranchingScreen
-                        resetTransitionalUserSessionId={
-                          resetTransitionalUserSessionId
-                        }
+                  </Column>
+                )}
+                {!interventionStarted && !nextQuestionError && (
+                  <Column justify="center" height="100%" position="relative">
+                    <Row direction="column" align="center">
+                      <Box mx={32} maxWidth={600}>
+                        <H2 textAlign="center" mb={50}>
+                          {formatMessage(messages.fillHeader)}
+                        </H2>
+                      </Box>
+                      <StyledButton
+                        loading={userSessionLoading || nextQuestionLoading}
+                        disabled={!previewPossible}
+                        onClick={startInterventionAsync}
+                        title={buttonText()}
+                        isDesktop={isDesktop}
                       />
-                    )}
-
-                    {!nextQuestionLoading &&
-                      currentQuestion &&
-                      interventionStarted &&
-                      !transitionalUserSessionId && (
-                        <ScreenWrapper isFullSize={isFullSize}>
-                          {isNarratorPositionFixed && renderPage()}
-                          {!isNarratorPositionFixed && (
-                            <AnimationRefHelper
-                              currentQuestion={currentQuestion}
-                              currentQuestionId={currentQuestionId}
-                              previewMode={previewMode}
-                              changeIsAnimationOngoing={
-                                changeIsAnimationOngoing
-                              }
-                              setFeedbackSettings={setFeedbackSettings}
-                              feedbackScreenSettings={feedbackScreenSettings}
-                              audioInstance={audioInstance}
-                            >
-                              {renderPage()}
-                            </AnimationRefHelper>
+                    </Row>
+                    <Box
+                      position="absolute"
+                      bottom={
+                        userSession?.liveChatEnabled && !isDesktop ? 90 : 48
+                      }
+                      mx={24}
+                    >
+                      <H3 textAlign="center" color={themeColors.warning}>
+                        {formatMessage(messages.wcagWarning)}
+                      </H3>
+                    </Box>
+                  </Column>
+                )}
+                {interventionStarted && !nextQuestionError && (
+                  <>
+                    <Box
+                      id={ANSWER_SESSION_CONTAINER_ID}
+                      position="relative"
+                      height="100%"
+                      maxHeight="100vh"
+                      width="100%"
+                      borderRadius="0px"
+                      display="flex"
+                      direction="column"
+                    >
+                      <Box
+                        width="100%"
+                        overflow={isMobilePreview ? 'auto' : undefined}
+                        filled
+                        display="flex"
+                        direction="column"
+                      >
+                        <Row
+                          padding={!isDesktop || isMobile ? 30 : 0}
+                          pb={isDesktop || (!isDesktop && logoUrl) ? 24 : 0}
+                          pt={isMobile && animation && !logoUrl ? 0 : undefined}
+                          width="100%"
+                        >
+                          {!isDesktop && (
+                            <Row>
+                              <Img
+                                maxHeight={elements.interventionLogoSize.height}
+                                maxWidth={elements.interventionLogoSize.width}
+                                src={logoUrl}
+                                aria-label={imageAlt}
+                              />
+                            </Row>
                           )}
-                        </ScreenWrapper>
+                          {renderQuestionTranscript(true)}
+                        </Row>
+
+                        {transitionalUserSessionId && (
+                          <BranchingScreen
+                            resetTransitionalUserSessionId={
+                              resetTransitionalUserSessionId
+                            }
+                          />
+                        )}
+
+                        {!nextQuestionLoading &&
+                          currentQuestion &&
+                          !transitionalUserSessionId && (
+                            <ScreenWrapper isFullSize={isFullSize}>
+                              {isNarratorPositionFixed && renderPage()}
+                              {!isNarratorPositionFixed && (
+                                <AnimationRefHelper
+                                  currentQuestion={currentQuestion}
+                                  currentQuestionId={currentQuestionId}
+                                  previewMode={previewMode}
+                                  changeIsAnimationOngoing={
+                                    changeIsAnimationOngoing
+                                  }
+                                  setFeedbackSettings={setFeedbackSettings}
+                                  feedbackScreenSettings={
+                                    feedbackScreenSettings
+                                  }
+                                  audioInstance={audioInstance}
+                                >
+                                  {renderPage()}
+                                </AnimationRefHelper>
+                              )}
+                            </ScreenWrapper>
+                          )}
+
+                        {answersError && (
+                          <ErrorAlert errorText={answersError} />
+                        )}
+                      </Box>
+                      {isMobilePreview && (
+                        <AnswerSessionPageFooter
+                          settings={{
+                            showTextTranscript,
+                            showTextReadingControls,
+                          }}
+                          isMobilePreview
+                          isPreview={isPreview}
+                        />
                       )}
-                  </Box>
-                  {answersError && <ErrorAlert errorText={answersError} />}
-                </Box>
-              )}
-            </AnswerOuterContainer>
-          </Box>
-        </>
+                    </Box>
+                  </>
+                )}
+              </AnswerOuterContainer>
+            </Box>
+          </>
+        )}
+      </Column>
+
+      {!isMobilePreview && interventionStarted && !nextQuestionError && (
+        <AnswerSessionPageFooter
+          settings={{
+            showTextTranscript,
+            showTextReadingControls,
+          }}
+          isMobilePreview={false}
+          isPreview={isPreview}
+        />
       )}
     </Column>
   );
@@ -821,7 +841,6 @@ AnswerSessionPage.propTypes = {
   createUserSession: PropTypes.func,
   nextQuestion: PropTypes.func,
   clearErrors: PropTypes.func,
-  toggleTextTranscript: PropTypes.func,
   setTransitionalUserSessionId: PropTypes.func,
   setLiveChatEnabled: PropTypes.func,
   saveQuickExitEvent: PropTypes.func,
@@ -844,7 +863,6 @@ const mapDispatchToProps = {
   createUserSession: createUserSessionRequest,
   nextQuestion: nextQuestionRequest,
   clearErrors: clearError,
-  toggleTextTranscript: toggleTextTranscriptAction,
   setTransitionalUserSessionId: setTransitionalUserSessionIdAction,
   setLiveChatEnabled: setChatEnabled,
   saveQuickExitEvent: saveQuickExitEventRequest,

@@ -3,7 +3,7 @@ import { put, call, takeLatest } from 'redux-saga/effects';
 
 import { jsonApiToArray } from 'utils/jsonApiMapper';
 import { Message } from 'models/LiveChat';
-import { ApiData, ApiError } from 'models/Api';
+import { ApiDataCollection, ApiError } from 'models/Api';
 
 import { FETCH_CONVERSATION_MESSAGES_REQUEST } from '../constants';
 import {
@@ -17,7 +17,7 @@ function* fetchChatMessages({
 }: ReturnType<typeof fetchConversationMessagesRequest>) {
   const url = `/v1/live_chat/conversations/${conversationId}/messages`;
   try {
-    const { data }: ApiData<Message> = yield call(axios.get, url);
+    const { data }: ApiDataCollection<Message> = yield call(axios.get, url);
     const messages: Message[] = jsonApiToArray(data, 'message');
     yield put(fetchConversationMessagesSuccess(conversationId, messages));
   } catch (error) {

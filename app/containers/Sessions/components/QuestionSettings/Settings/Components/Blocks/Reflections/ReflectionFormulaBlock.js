@@ -125,7 +125,6 @@ const ReflectionFormulaBlock = ({
           id="reflection-toggle"
           disabled={disabled}
           checked
-          mr={15}
           onToggle={() => switchToSpeech(blockIndex, id)}
         >
           {formatMessage(messages.reflectionToggle)}
@@ -136,7 +135,6 @@ const ReflectionFormulaBlock = ({
           id="formula-toggle"
           disabled={disabled}
           checked
-          mr={15}
           onToggle={() => switchToReflection(blockIndex, id)}
         >
           {formatMessage(messages.formulaToggle)}
@@ -150,8 +148,8 @@ const ReflectionFormulaBlock = ({
           onClick={(value) =>
             onFormulaUpdate(`${block.payload}${value}`, id, blockIndex)
           }
-          sessionId={sessionId}
-          interventionId={interventionId}
+          currentSessionId={sessionId}
+          currentInterventionId={interventionId}
           selectedQuestion={selectedQuestion}
           includeCurrentQuestion={false}
           isMultiSession

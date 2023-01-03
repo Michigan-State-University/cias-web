@@ -22,6 +22,7 @@ const elements = {
   navbarHeight: 70,
   sidebarWidth: 280,
   draggableContainerSize: 702,
+  answerSessionPageFooterHeight: 104,
   characterInitialPosition,
   grid: { firstColWidth: 300, colWidth: 80, leftPadding: 40 },
   treeRowHeight: 80,

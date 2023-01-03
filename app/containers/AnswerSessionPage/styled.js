@@ -1,8 +1,10 @@
 import styled, { css } from 'styled-components';
 
-import { Button } from 'components/Button';
-import { sizes, DESKTOP_MODE } from 'utils/previewMode';
 import { elements, colors, mediaQuery } from 'theme';
+import { sizes, DESKTOP_MODE } from 'utils/previewMode';
+
+import { Button } from 'components/Button';
+import { additionalBreakpoints } from 'components/Container/containerBreakpoints';
 
 export const StyledButton = styled(Button)`
   width: ${({ isDesktop }) => (isDesktop ? '40%' : '80%')};
@@ -29,10 +31,9 @@ export const ScreenWrapper = styled.div`
   display: flex;
   max-width: ${(props) =>
     props.isFullSize ? '100%' : `${elements.draggableContainerSize}px`};
-  min-height: ${elements.draggableContainerSize}px;
   position: relative;
   width: 100%;
-  height: 100%;
+  flex-grow: 1;
 `;
 
 const getStyles = (previewMode) => css`
@@ -54,4 +55,30 @@ export const AnswerOuterContainer = styled.div`
   max-width: ${(props) =>
     props.isFullSize ? '100%' : `${elements.draggableContainerSize}px`};
   ${(props) => props.previewMode && getStyles(props.previewMode)}
+`;
+
+export const FooterContainer = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-shrink: 0;
+  gap: 16px;
+  width: 100%;
+  height: ${elements.answerSessionPageFooterHeight}px;
+  padding-top: 16px;
+  padding-right: 24px;
+  ${({ isMobilePreview }) =>
+    isMobilePreview
+      ? css`
+          padding-bottom: 38px;
+          padding-left: 24px;
+        `
+      : css`
+          padding-bottom: 38px;
+          padding-left: 85px;
+          @media (min-width: ${additionalBreakpoints.desktopSm}px) {
+            padding-bottom: 24px;
+          }
+        `};
+}
 `;

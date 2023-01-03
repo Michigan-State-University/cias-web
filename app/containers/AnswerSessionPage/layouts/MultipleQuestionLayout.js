@@ -2,10 +2,15 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { Markup } from 'interweave';
 
+import { htmlToPlainText } from 'utils/htmlToPlainText';
+
 import Column from 'components/Column';
 import Row from 'components/Row';
 import Checkbox from 'components/Checkbox';
 import HoverableBox from 'components/Box/HoverableBox';
+import AudioTextPreview from 'components/AudioTextPreview';
+
+import { MarkupContainer } from './styled';
 
 const margin = 21;
 
@@ -14,6 +19,7 @@ const MultipleQuestionLayout = ({
   questionId,
   check,
   selectedAnswersIndex,
+  isMobile,
 }) => (
   <Column>
     {data.map((questionAnswer, index) => {
@@ -23,26 +29,33 @@ const MultipleQuestionLayout = ({
       } = questionAnswer;
       const isChecked = selectedAnswersIndex.includes(index);
       const ariaInputId = `answer-${index + 1}`;
+      const key = `question-${questionId}-el-${index}`;
 
       return (
-        <Row key={`question-${questionId}-el-${index}`} mb={10}>
-          <HoverableBox
-            px={margin}
-            py={14}
-            width={`calc(100% + ${margin}px)`}
-            clickable
-          >
-            <Row align="center" py={10} height="44">
-              <Checkbox
-                id={ariaInputId}
-                checked={isChecked}
-                mr={16}
-                onChange={() => check(value, name, index)}
-              >
-                <Markup content={payload} />
-              </Checkbox>
-            </Row>
+        <Row key={key} mb={10}>
+          {!isMobile && (
+            <AudioTextPreview
+              text={htmlToPlainText(payload)}
+              previewKey={key}
+            />
+          )}
+          <HoverableBox px={margin} py={14} filled clickable>
+            <Checkbox
+              id={ariaInputId}
+              checked={isChecked}
+              onChange={() => check(value, name, index)}
+            >
+              <MarkupContainer>
+                <Markup content={payload} noWrap />
+              </MarkupContainer>
+            </Checkbox>
           </HoverableBox>
+          {isMobile && (
+            <AudioTextPreview
+              text={htmlToPlainText(payload)}
+              previewKey={key}
+            />
+          )}
         </Row>
       );
     })}
@@ -54,6 +67,7 @@ MultipleQuestionLayout.propTypes = {
   questionId: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
   check: PropTypes.func,
   selectedAnswersIndex: PropTypes.array,
+  isMobile: PropTypes.bool,
 };
 
 export default MultipleQuestionLayout;

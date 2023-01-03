@@ -69,20 +69,21 @@ function SessionListItem({
 
   const [isHovered, setIsHovered] = useState(false);
   const [copyOpen, setCopyOpen] = useState(false);
+
   const {
     id,
     name,
-    intervention_id: interventionId,
+    interventionId,
     formulas,
     schedule,
-    schedule_at: scheduleAt,
-    schedule_payload: schedulePayload,
+    scheduleAt,
+    schedulePayload,
     settings,
-    report_templates_count: reportTemplatesCount,
-    days_after_date_variable_name: daysAfterDateVariableName,
+    reportTemplatesCount,
+    daysAfterDateVariableName,
     variable,
-    estimated_time: estimatedTime,
-    estimatedTime: updatedEstimatedTime,
+    estimatedTime,
+    updatedEstimatedTime,
   } = session || {};
 
   const options = [

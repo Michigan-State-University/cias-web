@@ -11,7 +11,7 @@ import {
 
 import { calculatePercentageValue } from 'utils/percentageCalculator';
 
-import { AnswerSessionPageFeedbackScreenSettings } from 'containers/AnswerSessionPage/components/sharedProps';
+import { AnswerSessionPageFeedbackScreenSettings } from 'containers/AnswerSessionPage/types';
 
 import { ILoadedAnimationData } from './types';
 

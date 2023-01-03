@@ -1,6 +1,7 @@
 import React, { ChangeEvent, memo, ReactNode } from 'react';
 
 import Row from 'components/Row';
+import { LayoutProps } from 'components/BaseComponentStyles';
 
 import SwitchLabelWrapper from './SwitchLabelWrapper';
 
@@ -22,7 +23,7 @@ type Props = {
   labelPosition?: LabelPosition;
   labelOffset?: number;
   onToggle: (value: boolean, event: ChangeEvent<HTMLInputElement>) => void;
-};
+} & LayoutProps;
 
 const Switch = ({
   checked = false,
@@ -33,6 +34,7 @@ const Switch = ({
   labelPosition = LabelPosition.Left,
   labelOffset,
   onToggle,
+  ...props
 }: Props): JSX.Element => {
   const handleOnChange = (event: ChangeEvent<HTMLInputElement>) => {
     const {
@@ -54,7 +56,7 @@ const Switch = ({
       />
 
       <StyledLabel htmlFor={id}>
-        <SwitchLabelWrapper labelPosition={labelPosition}>
+        <SwitchLabelWrapper labelPosition={labelPosition} {...props}>
           <SwitchWrapper>
             <Slider />
           </SwitchWrapper>

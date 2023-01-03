@@ -44,6 +44,7 @@ export const initialState = {
     teamsFetchError: null,
     singleTeamFetchError: null,
     teamCreateError: null,
+    singleTeamEditError: null,
   },
 };
 
@@ -129,6 +130,7 @@ const teamListReducer = (state = initialState, { type, payload }) =>
 
       case EDIT_SINGLE_TEAM_REQUEST:
         draft.loaders.singleTeamEditLoading = true;
+        draft.errors.singleTeamEditError = null;
         break;
 
       case EDIT_SINGLE_TEAM_SUCCESS:
@@ -140,6 +142,7 @@ const teamListReducer = (state = initialState, { type, payload }) =>
       case EDIT_SINGLE_TEAM_FAILURE:
         draft.singleTeam = state.cache.singleTeam;
         draft.loaders.singleTeamEditLoading = false;
+        draft.errors.singleTeamEditError = payload;
         break;
     }
   });

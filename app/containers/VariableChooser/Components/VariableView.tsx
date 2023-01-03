@@ -34,12 +34,12 @@ const VariableView = ({ onClick }: Props) => {
   const { formatMessage } = useIntl();
 
   const {
-    currentSessionId,
+    selectedSessionId,
     currentView,
     includeAllVariables,
     includeCurrentQuestion,
     includeNonDigitVariables,
-    initialSessionId,
+    currentSessionId,
     isMultiIntervention,
     isMultiSession,
     questionTypeWhitelist,
@@ -48,7 +48,7 @@ const VariableView = ({ onClick }: Props) => {
   } = useContext(VariableChooserContext);
 
   const url = useMemo(() => {
-    const baseUrl = `v1/sessions/${currentSessionId}/variables/`;
+    const baseUrl = `v1/sessions/${selectedSessionId}/variables/`;
     let suffix = '';
 
     if (!includeAllVariables) suffix = (selectedQuestion as QuestionDTO).id;
@@ -68,7 +68,7 @@ const VariableView = ({ onClick }: Props) => {
 
     return `${baseUrl}${suffix}?${urlParams.toString()}`;
   }, [
-    currentSessionId,
+    selectedSessionId,
     selectedQuestion,
     includeAllVariables,
     includeNonDigitVariables,
@@ -99,13 +99,13 @@ const VariableView = ({ onClick }: Props) => {
   const handleOnClick = useCallback(
     (variable) => {
       const variableToAdd =
-        currentSessionId === initialSessionId
+        selectedSessionId === currentSessionId
           ? variable
           : `${state.data?.session_variable}.${variable}`;
 
       onClick(variableToAdd);
     },
-    [currentSessionId, initialSessionId, state.data, onClick],
+    [selectedSessionId, currentSessionId, state.data, onClick],
   );
 
   if (state.isFetching) {

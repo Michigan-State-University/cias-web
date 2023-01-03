@@ -170,7 +170,7 @@ const VariantItem = ({
             </Text>
             <VariableChooser
               disabled={disabled}
-              interventionId={interventionId}
+              currentInterventionId={interventionId}
               onClick={handleAddVariable}
               placement="right"
               questionTypeWhitelist={[
@@ -181,7 +181,7 @@ const VariantItem = ({
                 currencyQuestion.id,
                 nameQuestion.id,
               ]}
-              sessionId={sessionId}
+              currentSessionId={sessionId}
               includeAllVariables
               includeCurrentSession
               includeNonDigitVariables

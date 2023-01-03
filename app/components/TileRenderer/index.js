@@ -8,14 +8,11 @@ import React, { memo, useEffect, useMemo, useRef } from 'react';
 import PropTypes from 'prop-types';
 import { useScreenClass } from 'react-grid-system';
 
-import useIsInViewport from 'utils/useIsInViewport';
-
 import { TilesContext } from 'components/TileRenderer/constants';
 import { VirtualGrid } from 'components/VirtualList';
 
 import GridTile from './GridTile';
 import NewButton from './Components/NewButton';
-import NewFloatButton from './Components/NewFloatButton';
 
 function TileRenderer({
   elements,
@@ -28,7 +25,6 @@ function TileRenderer({
   filterData,
 }) {
   const infiniteLoaderRef = useRef();
-  const [ref, isInViewport] = useIsInViewport();
   const screenClass = useScreenClass();
 
   useEffect(() => {
@@ -57,7 +53,6 @@ function TileRenderer({
     [columnCount, elements?.length],
   );
 
-  const displayFloatButton = elements?.length !== 0 && !isInViewport;
   return (
     <TilesContext.Provider
       value={{
@@ -66,7 +61,6 @@ function TileRenderer({
             onClick={onCreateCall}
             loading={createLoading}
             label={newLabel}
-            ref={ref}
           />
         ),
       }}
@@ -89,10 +83,6 @@ function TileRenderer({
       >
         {GridTile}
       </VirtualGrid>
-
-      {displayFloatButton && (
-        <NewFloatButton onClick={onCreateCall} loading={createLoading} />
-      )}
     </TilesContext.Provider>
   );
 }

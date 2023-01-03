@@ -27,6 +27,7 @@ export const StyledReactPlayer: FC<ComponentProps<typeof ReactPlayer>> = styled(
   left: 0;
 `;
 
+// @ts-ignore
 export const Blocker = styled.div`
   position: absolute;
   top: 0;

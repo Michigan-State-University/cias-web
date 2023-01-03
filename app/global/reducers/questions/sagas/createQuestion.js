@@ -9,7 +9,7 @@ import {
   feedbackBlockType,
 } from 'models/Narrator/BlockTypes';
 import { setAnimationStopPosition } from 'global/reducers/localState';
-import { makeSelectQuestionGroups } from 'global/reducers/questionGroups';
+import { makeSelectQuestionGroups } from 'global/reducers/questionGroups/selectors';
 import { getNarratorPositionWhenQuestionIsAdded } from 'utils/getNarratorPosition';
 import isNullOrUndefined from 'utils/isNullOrUndefined';
 import { makeSelectSession } from 'global/reducers/session';

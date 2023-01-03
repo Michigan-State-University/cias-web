@@ -95,6 +95,6 @@ export default defineMessages({
   multipleFillTooltip: {
     id: `${scope}.multipleFillTooltip`,
     defaultMessage:
-      'If the session is filling multiple times by the logged-in user, the scheduling and SMS will not change. You can not use variables from the multiple session in other sessions.',
+      'If the session is filled multiple times by the logged-in user, the scheduling and SMS will not change. You cannot use variables from the multiple fill session in other sessions.',
   },
 });

@@ -3,8 +3,9 @@ import { put, call, takeLatest } from 'redux-saga/effects';
 import orderBy from 'lodash/orderBy';
 
 import { defaultMapper } from 'utils/mapResponseObjects';
-
 import { jsonApiToObject } from 'utils/jsonApiMapper';
+import objectToCamelCase from 'utils/objectToCamelCase';
+
 import { FETCH_INTERVENTION_REQUEST } from '../constants';
 import { fetchInterventionSuccess, fetchInterventionError } from '../actions';
 
@@ -18,7 +19,8 @@ export function* fetchIntervention({ payload: { id } }) {
     } = yield call(axios.get, sessionRequestUrl);
     const intervention = jsonApiToObject(data, 'intervention');
     const mappedSessions = sessions.map(defaultMapper);
-    intervention.sessions = orderBy(mappedSessions, 'position');
+    const camelCaseSessions = objectToCamelCase(mappedSessions);
+    intervention.sessions = orderBy(camelCaseSessions, 'position');
     yield put(fetchInterventionSuccess(intervention));
   } catch (error) {
     yield put(fetchInterventionError(error));

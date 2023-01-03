@@ -26,3 +26,8 @@ export type SharedProps<
   question: T;
   userSessionId?: string;
 };
+
+export type ParticipantSessionSettings = {
+  showTextTranscript: boolean;
+  showTextReadingControls: boolean;
+};

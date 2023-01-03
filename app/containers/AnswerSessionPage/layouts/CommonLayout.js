@@ -14,6 +14,8 @@ import Tooltip from 'components/Tooltip';
 import OriginalTextHover from 'components/OriginalTextHover';
 import Player from 'components/Player';
 
+import AudioTextPreview from 'components/AudioTextPreview';
+import { htmlToPlainText } from 'utils/htmlToPlainText';
 import { ImageWrapper, MarkupContainer } from './styled';
 import { QUESTION_SUBTITLE_ID, QUESTION_TITLE_ID } from '../constants';
 
@@ -21,6 +23,7 @@ const CommonLayout = ({
   currentQuestion,
   showOriginalText,
   shouldDisablePlayer,
+  isMobile,
 }) => {
   const { formatMessage } = useIntl();
   const {
@@ -42,31 +45,22 @@ const CommonLayout = ({
   return (
     <Box>
       {settingsTitle && title && (
-        <Row>
-          <Box lineHeight="1.42" padding={26} pt={0} pb={8}>
+        <Row align="center" justify={isMobile ? 'between' : 'start'} pb={8}>
+          {!isMobile && (
+            <AudioTextPreview
+              text={htmlToPlainText(title)}
+              previewKey={`question-${id}-title`}
+            />
+          )}
+          <Box lineHeight="1.42" px={26} pt={0}>
             <OriginalTextHover
               id={`question-${id}-title`}
               text={originalText?.title}
               hidden={!showOriginalText}
             >
-              <MarkupContainer id={QUESTION_TITLE_ID}>
-                <Markup content={title} noWrap />
-              </MarkupContainer>
-            </OriginalTextHover>
-          </Box>
-        </Row>
-      )}
-      {settingsSubtitle && subtitle && (
-        <Row>
-          <Box lineHeight="1.42" padding={26} pt={0} pb={8}>
-            <OriginalTextHover
-              id={`question-${id}-subtitle`}
-              text={originalText?.subtitle}
-              hidden={!showOriginalText}
-            >
-              <Row align="start" justify="between">
-                <MarkupContainer id={QUESTION_SUBTITLE_ID}>
-                  <Markup content={subtitle} />
+              <Row align="center">
+                <MarkupContainer id={QUESTION_TITLE_ID}>
+                  <Markup content={title} noWrap />
                 </MarkupContainer>
                 {settingsRequired && (
                   <Tooltip
@@ -83,6 +77,41 @@ const CommonLayout = ({
               </Row>
             </OriginalTextHover>
           </Box>
+          {isMobile && (
+            <AudioTextPreview
+              text={htmlToPlainText(title)}
+              previewKey={`question-${id}-title`}
+            />
+          )}
+        </Row>
+      )}
+      {settingsSubtitle && subtitle && (
+        <Row align="center" justify={isMobile ? 'between' : 'start'} pb={8}>
+          {!isMobile && (
+            <AudioTextPreview
+              text={htmlToPlainText(subtitle)}
+              previewKey={`question-${id}-subtitle`}
+            />
+          )}
+          <Box lineHeight="1.42" px={26} pt={0}>
+            <OriginalTextHover
+              id={`question-${id}-subtitle`}
+              text={originalText?.subtitle}
+              hidden={!showOriginalText}
+            >
+              <Row align="start" justify="between">
+                <MarkupContainer id={QUESTION_SUBTITLE_ID}>
+                  <Markup content={subtitle} />
+                </MarkupContainer>
+              </Row>
+            </OriginalTextHover>
+          </Box>
+          {isMobile && (
+            <AudioTextPreview
+              text={htmlToPlainText(subtitle)}
+              previewKey={`question-${id}-subtitle`}
+            />
+          )}
         </Row>
       )}
       {settingsVideo && videoUrl && (
@@ -124,6 +153,7 @@ CommonLayout.propTypes = {
     original_text: PropTypes.object,
   }),
   showOriginalText: PropTypes.bool,
+  isMobile: PropTypes.bool,
   shouldDisablePlayer: PropTypes.bool,
 };
 
