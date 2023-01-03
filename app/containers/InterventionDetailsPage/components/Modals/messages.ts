@@ -60,4 +60,13 @@ export default defineMessages({
     id: `${scope}.saveButton`,
     defaultMessage: 'Save changes',
   },
+  interventionLinkHeader: {
+    id: `${scope}.interventionLinkHeader`,
+    defaultMessage: 'Intervention Link',
+  },
+  interventionLinkDescription: {
+    id: `${scope}.interventionLinkDescription`,
+    defaultMessage:
+      'This link direct user to the first session in this intervention',
+  },
 });

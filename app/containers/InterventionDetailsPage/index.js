@@ -106,7 +106,10 @@ import {
 import SelectResearchers from '../SelectResearchers';
 import messages from './messages';
 import { InterventionDetailsPageContext, nextStatus } from './utils';
-import { CAT_MH_TEST_COUNT_WARNING_THRESHOLD } from './constants';
+import {
+  CAT_MH_TEST_COUNT_WARNING_THRESHOLD,
+  INTERVENTION_SETTINGS_MODAL_WIDTH,
+} from './constants';
 
 export function InterventionDetailsPage({
   createSession,
@@ -479,6 +482,7 @@ export function InterventionDetailsPage({
           title={formatMessage(messages.interventionSettingsModalTitle)}
           onClose={() => setInterventionSettingsModalVisible(false)}
           visible={interventionSettingsModalVisible}
+          width={INTERVENTION_SETTINGS_MODAL_WIDTH}
         >
           <InterventionSettingsModal
             editingPossible={editingPossible}

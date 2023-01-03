@@ -10,7 +10,7 @@ import {
   editInterventionRequest,
   makeSelectIntervention,
 } from 'global/reducers/intervention';
-import { colors } from 'theme';
+import { colors, themeColors } from 'theme';
 import { Intervention } from 'models/Intervention';
 import { CharacterType } from 'models/Character';
 
@@ -25,17 +25,25 @@ import Divider from 'components/Divider';
 import H3 from 'components/H3';
 import { LabelPosition } from 'components/Switch';
 import Switch from 'components/Switch/Switch';
-import Button from 'components/Button';
+import Button, { ImageButton } from 'components/Button';
 import Row from 'components/Row';
 import CharacterSelector from 'components/CharacterSelector';
 import { GlobalReplacementModal } from 'components/MissingAnimationsModal';
 
 import { NarratorAnimation } from 'models/Narrator';
-import messages from '../../messages';
+
+import binNoBg from 'assets/svg/bin-no-bg.svg';
+import copy from 'assets/svg/copy2.svg';
+
+import Box from 'components/Box';
+import { InputWithPrefix } from 'components/Input/InputWithPrefix';
 import {
   INTERVENTION_LANGUAGE_LABEL_ID,
   INTERVENTION_QUICK_EXIT_LABEL_ID,
 } from './constants';
+
+import messages from '../../messages';
+import modalMessages from './messages';
 
 export type Props = {
   editingPossible: boolean;
@@ -139,6 +147,9 @@ const InterventionSettingsModal = ({ editingPossible, onClose }: Props) => {
     });
   };
 
+  const [val, setVal] = useState('');
+  // const interventionUrl = `${process.env.WEB_URL}/interventions/${id}/sessions/${session.id}/fill`;
+
   return (
     <FullWidthContainer>
       <GlobalReplacementModal
@@ -209,6 +220,45 @@ const InterventionSettingsModal = ({ editingPossible, onClose }: Props) => {
             onChange={handleNarratorChange}
             disabled={!editingPossible}
           />
+        </GCol>
+      </GRow>
+      <GRow mb={16} mt={40}>
+        <GCol>
+          <H3 mb={8}>{formatMessage(modalMessages.interventionLinkHeader)}</H3>
+          <Text textOpacity={0.7} color={themeColors.text}>
+            {formatMessage(modalMessages.interventionLinkDescription)}
+          </Text>
+          <Row mt={24} width="100%">
+            <Box width="100%" mr={24}>
+              <InputWithPrefix
+                width="100%"
+                onBlur={() => console.log('blur')}
+                value={val}
+                onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
+                  setVal(e.target.value)
+                }
+                placeholder="Placeholder"
+                prefix="https://www.msu.cias.app/int/"
+              />
+            </Box>
+            <ImageButton
+              src={copy}
+              onClick={() => console.log('copied!')}
+              title="Copy"
+              fill={colors.heather}
+              mr={16}
+              showHoverEffect
+              noHoverBackground
+            />
+            <ImageButton
+              src={binNoBg}
+              onClick={() => console.log('delete!')}
+              title="Delete"
+              fill={colors.heather}
+              showHoverEffect
+              noHoverBackground
+            />
+          </Row>
         </GCol>
       </GRow>
       <Row gap={16} mt={56}>
