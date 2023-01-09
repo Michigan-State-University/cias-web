@@ -69,4 +69,12 @@ export default defineMessages({
     defaultMessage:
       'This link direct user to the first session in this intervention',
   },
+  copyLink: {
+    id: `${scope}.copyLink`,
+    defaultMessage: 'Copy link',
+  },
+  removeLink: {
+    id: `${scope}.removeLink`,
+    defaultMessage: 'Remove custom link',
+  },
 });

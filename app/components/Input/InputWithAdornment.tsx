@@ -10,10 +10,14 @@ import Box from 'components/Box';
 import { INPUT_PADDING } from './constants';
 import Input from './index';
 import { Adornment } from './styled';
+import { AdornmentType } from './types';
 
-type Props = ComponentProps<typeof Input> & { adornment?: string };
+type Props = ComponentProps<typeof Input> & {
+  type: AdornmentType;
+  adornment?: string;
+};
 
-const Component = ({ adornment, ...props }: Props) => {
+const Component = ({ type, adornment, ...props }: Props) => {
   const [adornmentSize, setAdornmentSize] = useState(0);
   const adornmentRef = useCallback(
     (node: HTMLElement) => {
@@ -33,17 +37,22 @@ const Component = ({ adornment, ...props }: Props) => {
   }, [inputRef.current]);
 
   return (
-    <Box width="100%" display="flex" align="center">
+    <Box width="100%" display="flex" align="center" position="relative">
       <Input
         {...props}
         ref={inputRef}
         hideNumberArrows
         width="100%"
-        pr={adornmentSize + INPUT_PADDING || undefined}
+        pr={
+          type === AdornmentType.SUFFIX
+            ? adornmentSize + INPUT_PADDING
+            : undefined
+        }
+        pl={type === AdornmentType.PREFIX ? adornmentSize : undefined}
       />
       <Adornment
         ref={adornmentRef}
-        mr={INPUT_PADDING}
+        type={type}
         visible={!!adornmentSize}
         onClick={focusInput}
       >
@@ -54,3 +63,4 @@ const Component = ({ adornment, ...props }: Props) => {
 };
 
 export const InputWithAdornment = memo(Component);
+export { AdornmentType };

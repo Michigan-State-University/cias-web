@@ -3,16 +3,23 @@ import { useIntl } from 'react-intl';
 import { useDispatch, useSelector } from 'react-redux';
 import isEqual from 'lodash/isEqual';
 
+import BinIcon from 'assets/svg/bin-no-bg.svg';
+import CopyIcon from 'assets/svg/copy2.svg';
+
+import { colors, themeColors } from 'theme';
+
+import { Intervention } from 'models/Intervention';
+import { CharacterType } from 'models/Character';
+import { NarratorAnimation } from 'models/Narrator';
+
 import { jsonApiToArray } from 'utils/jsonApiMapper';
 import { languageSelectOptionFormatter } from 'utils/formatters';
 import { objectDifference } from 'utils/objectDifference';
+
 import {
   editInterventionRequest,
   makeSelectIntervention,
 } from 'global/reducers/intervention';
-import { colors, themeColors } from 'theme';
-import { Intervention } from 'models/Intervention';
-import { CharacterType } from 'models/Character';
 
 import {
   Col as GCol,
@@ -29,19 +36,15 @@ import Button, { ImageButton } from 'components/Button';
 import Row from 'components/Row';
 import CharacterSelector from 'components/CharacterSelector';
 import { GlobalReplacementModal } from 'components/MissingAnimationsModal';
+import {
+  InputWithAdornment,
+  AdornmentType,
+} from 'components/Input/InputWithAdornment';
 
-import { NarratorAnimation } from 'models/Narrator';
-
-import binNoBg from 'assets/svg/bin-no-bg.svg';
-import copy from 'assets/svg/copy2.svg';
-
-import Box from 'components/Box';
-import { InputWithPrefix } from 'components/Input/InputWithPrefix';
 import {
   INTERVENTION_LANGUAGE_LABEL_ID,
   INTERVENTION_QUICK_EXIT_LABEL_ID,
 } from './constants';
-
 import messages from '../../messages';
 import modalMessages from './messages';
 
@@ -148,7 +151,6 @@ const InterventionSettingsModal = ({ editingPossible, onClose }: Props) => {
   };
 
   const [val, setVal] = useState('');
-  // const interventionUrl = `${process.env.WEB_URL}/interventions/${id}/sessions/${session.id}/fill`;
 
   return (
     <FullWidthContainer>
@@ -222,43 +224,41 @@ const InterventionSettingsModal = ({ editingPossible, onClose }: Props) => {
           />
         </GCol>
       </GRow>
-      <GRow mb={16} mt={40}>
-        <GCol>
-          <H3 mb={8}>{formatMessage(modalMessages.interventionLinkHeader)}</H3>
-          <Text textOpacity={0.7} color={themeColors.text}>
-            {formatMessage(modalMessages.interventionLinkDescription)}
-          </Text>
-          <Row mt={24} width="100%">
-            <Box width="100%" mr={24}>
-              <InputWithPrefix
-                width="100%"
-                onBlur={() => console.log('blur')}
-                value={val}
-                onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
-                  setVal(e.target.value)
-                }
-                placeholder="Placeholder"
-                prefix="https://www.msu.cias.app/int/"
-              />
-            </Box>
-            <ImageButton
-              src={copy}
-              onClick={() => console.log('copied!')}
-              title="Copy"
-              fill={colors.heather}
-              mr={16}
-              showHoverEffect
-              noHoverBackground
-            />
-            <ImageButton
-              src={binNoBg}
-              onClick={() => console.log('delete!')}
-              title="Delete"
-              fill={colors.heather}
-              showHoverEffect
-              noHoverBackground
-            />
-          </Row>
+      <H3 mt={40}>{formatMessage(modalMessages.interventionLinkHeader)}</H3>
+      <Text mt={8} textOpacity={0.7} color={themeColors.text}>
+        {formatMessage(modalMessages.interventionLinkDescription)}
+      </Text>
+      <GRow mt={24} gutterWidth={16}>
+        <GCol xs={10}>
+          <InputWithAdornment
+            onBlur={() => console.log('blur')}
+            value={val}
+            onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
+              setVal(e.target.value)
+            }
+            type={AdornmentType.PREFIX}
+            adornment={`${process.env.WEB_URL}/int/`}
+          />
+        </GCol>
+        <GCol xs={1} justify="center">
+          <ImageButton
+            src={CopyIcon}
+            onClick={() => console.log('copied!')}
+            title={formatMessage(modalMessages.copyLink)}
+            fill={colors.heather}
+            showHoverEffect
+            noHoverBackground
+          />
+        </GCol>
+        <GCol xs={1} justify="center">
+          <ImageButton
+            src={BinIcon}
+            onClick={() => console.log('delete!')}
+            title={formatMessage(modalMessages.removeLink)}
+            fill={colors.heather}
+            showHoverEffect
+            noHoverBackground
+          />
         </GCol>
       </GRow>
       <Row gap={16} mt={56}>
