@@ -11,10 +11,14 @@ import { colors, themeColors } from 'theme';
 import { Intervention } from 'models/Intervention';
 import { CharacterType } from 'models/Character';
 import { NarratorAnimation } from 'models/Narrator';
+import { ShortLink } from 'models/ShortLink';
+import { ApiDataCollection } from 'models/Api';
+import { SimpleHealthClinic } from 'models/HealthClinic';
 
 import { jsonApiToArray } from 'utils/jsonApiMapper';
 import { languageSelectOptionFormatter } from 'utils/formatters';
 import { objectDifference } from 'utils/objectDifference';
+import useGet from 'utils/useGet';
 
 import {
   editInterventionRequest,
@@ -152,6 +156,20 @@ const InterventionSettingsModal = ({ editingPossible, onClose }: Props) => {
 
   const [val, setVal] = useState('');
 
+  // eslint-disable-next-line no-empty-pattern
+  const {} = useGet<
+    ApiDataCollection<ShortLink> & {
+      health_clinics: ApiDataCollection<SimpleHealthClinic>['data'];
+    },
+    { shortLinks: ShortLink[]; healthClinics: SimpleHealthClinic[] }
+  >(`/v1/interventions/${originalIntervention.id}/short_links`, (data) => ({
+    shortLinks: jsonApiToArray(data, 'shortLink'),
+    healthClinics: jsonApiToArray(
+      { data: data.health_clinics },
+      'simpleHealthClinic',
+    ),
+  }));
+
   return (
     <FullWidthContainer>
       <GlobalReplacementModal
@@ -282,5 +300,4 @@ const InterventionSettingsModal = ({ editingPossible, onClose }: Props) => {
     </FullWidthContainer>
   );
 };
-
 export default memo(InterventionSettingsModal);
