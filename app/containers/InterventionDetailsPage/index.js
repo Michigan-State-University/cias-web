@@ -28,7 +28,7 @@ import AddAppIcon from 'assets/svg/app-add.svg';
 import TranslateIcon from 'assets/svg/translate.svg';
 import DocumentIcon from 'assets/svg/document.svg';
 import QuestionMarkIcon from 'assets/svg/grey-question-mark.svg';
-import DownloadIcon from 'assets/svg/download-line.svg';
+// import DownloadIcon from 'assets/svg/download-line.svg';
 
 import isNullOrUndefined from 'utils/isNullOrUndefined';
 import { reorder } from 'utils/reorder';
@@ -129,7 +129,7 @@ export function InterventionDetailsPage({
   externalCopySession,
   user: { id: userId },
   editSession,
-  exportIntervention,
+  // exportIntervention,
 }) {
   const { interventionId } = useParams();
   const { formatMessage } = useIntl();
@@ -239,7 +239,7 @@ export function InterventionDetailsPage({
     [isAccessRevoked],
   );
 
-  const handleExportIntervention = () => exportIntervention(id);
+  // const handleExportIntervention = () => exportIntervention(id);
 
   const options = [
     {
@@ -292,13 +292,13 @@ export function InterventionDetailsPage({
           },
         ]
       : []),
-    {
-      id: 'export',
-      label: formatMessage(messages.exportIntervention),
-      icon: DownloadIcon,
-      action: handleExportIntervention,
-      color: colors.bluewood,
-    },
+    // {
+    //   id: 'export',
+    //   label: formatMessage(messages.exportIntervention),
+    //   icon: DownloadIcon,
+    //   action: handleExportIntervention,
+    //   color: colors.bluewood,
+    // },
   ];
 
   useLayoutEffect(() => {

@@ -19,7 +19,7 @@ import CopyIcon from 'assets/svg/copy.svg';
 import AddAppIcon from 'assets/svg/app-add.svg';
 import TranslateIcon from 'assets/svg/translate.svg';
 import DocumentIcon from 'assets/svg/document.svg';
-import DownloadIcon from 'assets/svg/download-line.svg';
+// import DownloadIcon from 'assets/svg/download-line.svg';
 
 import { colors } from 'theme';
 
@@ -79,7 +79,7 @@ const SingleTile = ({
   intl: { formatMessage },
   userId,
   isLoading,
-  exportIntervention,
+  // exportIntervention,
 }) => {
   const [
     shareWithResearchersModalVisible,
@@ -138,7 +138,7 @@ const SingleTile = ({
 
   const handleCsvRequest = () => sendCsv(id);
 
-  const handleExportIntervention = () => exportIntervention(id);
+  // const handleExportIntervention = () => exportIntervention(id);
 
   const canExportCSV = userId === user?.id;
 
@@ -204,13 +204,13 @@ const SingleTile = ({
           },
         ]
       : []),
-    {
-      id: 'export',
-      label: formatMessage(messages.exportIntervention),
-      icon: DownloadIcon,
-      action: handleExportIntervention,
-      color: colors.bluewood,
-    },
+    // {
+    //   id: 'export',
+    //   label: formatMessage(messages.exportIntervention),
+    //   icon: DownloadIcon,
+    //   action: handleExportIntervention,
+    //   color: colors.bluewood,
+    // },
   ];
 
   const preventDefault = (e) => {

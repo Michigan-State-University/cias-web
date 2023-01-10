@@ -179,10 +179,16 @@ export function InterventionPage({
         <H1>
           <FormattedMessage {...messages.myInterventions} />
         </H1>
-        <Box mx={24} width={2} height="100%" bg={colors.linkWater} />
+        <Box
+          mx={24}
+          width={2}
+          height="100%"
+          bg={colors.linkWater}
+          display="none"
+        />
 
         <TextButton
-          buttonProps={{ display: 'flex', align: 'center' }}
+          buttonProps={{ display: 'none', align: 'center' }}
           onClick={onImportIconClick}
         >
           <Img

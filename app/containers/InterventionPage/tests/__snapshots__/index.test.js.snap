@@ -42,6 +42,7 @@ exports[`<InterventionPage /> Should render and match the snapshot with interven
   border-radius: 5px;
   width: 2px;
   height: 100%;
+  display: none;
   margin-right: 24px;
   margin-left: 24px;
   background-color: rgba(233,241,251,1);
@@ -134,10 +135,7 @@ exports[`<InterventionPage /> Should render and match the snapshot with interven
   line-height: 17px;
   padding: 2px;
   cursor: pointer;
-  display: -webkit-box;
-  display: -webkit-flex;
-  display: -ms-flexbox;
-  display: flex;
+  display: none;
   font-weight: 700;
   color: #2F3850;
   -webkit-align-content: center;
@@ -472,12 +470,13 @@ exports[`<InterventionPage /> Should render and match the snapshot with interven
       </h1>
       <div
         class="c14"
+        display="none"
         height="100%"
         width="2"
       />
       <button
         class="c15"
-        display="flex"
+        display="none"
         font-weight="bold"
       >
         <img
@@ -681,6 +680,7 @@ exports[`<InterventionPage /> Should render and match the snapshot with loader 1
   border-radius: 5px;
   width: 2px;
   height: 100%;
+  display: none;
   margin-right: 24px;
   margin-left: 24px;
   background-color: rgba(233,241,251,1);
@@ -773,10 +773,7 @@ exports[`<InterventionPage /> Should render and match the snapshot with loader 1
   line-height: 17px;
   padding: 2px;
   cursor: pointer;
-  display: -webkit-box;
-  display: -webkit-flex;
-  display: -ms-flexbox;
-  display: flex;
+  display: none;
   font-weight: 700;
   color: #2F3850;
   -webkit-align-content: center;
@@ -1111,12 +1108,13 @@ exports[`<InterventionPage /> Should render and match the snapshot with loader 1
       </h1>
       <div
         class="c14"
+        display="none"
         height="100%"
         width="2"
       />
       <button
         class="c15"
-        display="flex"
+        display="none"
         font-weight="bold"
       >
         <img
@@ -1320,6 +1318,7 @@ exports[`<InterventionPage /> Should render and match the snapshot without inter
   border-radius: 5px;
   width: 2px;
   height: 100%;
+  display: none;
   margin-right: 24px;
   margin-left: 24px;
   background-color: rgba(233,241,251,1);
@@ -1412,10 +1411,7 @@ exports[`<InterventionPage /> Should render and match the snapshot without inter
   line-height: 17px;
   padding: 2px;
   cursor: pointer;
-  display: -webkit-box;
-  display: -webkit-flex;
-  display: -ms-flexbox;
-  display: flex;
+  display: none;
   font-weight: 700;
   color: #2F3850;
   -webkit-align-content: center;
@@ -1750,12 +1746,13 @@ exports[`<InterventionPage /> Should render and match the snapshot without inter
       </h1>
       <div
         class="c14"
+        display="none"
         height="100%"
         width="2"
       />
       <button
         class="c15"
-        display="flex"
+        display="none"
         font-weight="bold"
       >
         <img
