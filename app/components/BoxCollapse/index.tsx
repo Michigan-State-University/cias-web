@@ -43,6 +43,7 @@ type BoxCollapseType = {
   binMargin?: number;
   showHoverEffect?: boolean;
   iconProps?: object;
+  labelOpenBgColor?: string;
 } & Record<string, unknown>;
 
 export const BoxCollapse = ({
@@ -71,6 +72,7 @@ export const BoxCollapse = ({
   binMargin,
   showHoverEffect,
   iconProps,
+  labelOpenBgColor,
   ...styleProps
 }: BoxCollapseType) => {
   const [isOpened, setOpened] = useState(!!shouldBeOpenOnStart);
@@ -105,7 +107,7 @@ export const BoxCollapse = ({
         isOpened={isOpened}
         extraIcons={extraIcons}
         isBinInCollapse
-        color={labelBgColor}
+        color={isOpened && labelOpenBgColor ? labelOpenBgColor : labelBgColor}
         bgOpacity={labelBgOpacity}
         // @ts-ignore
         binImage={BinIcon}

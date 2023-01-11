@@ -45,7 +45,7 @@ text.propTypes = {
   ]),
   lineHeight: PropTypes.string,
   textAlign: PropTypes.oneOf(['left', 'right', 'center', 'justify']),
-  wordBreak: PropTypes.oneOf(['normal', 'break-all', 'keep-all']),
+  wordBreak: PropTypes.oneOf(['normal', 'break-all', 'keep-all', 'break-word']),
   decoration: PropTypes.string,
 };
 

@@ -6,6 +6,7 @@ import microsoftExcelIcon from 'assets/svg/file-icons/xls_file.svg';
 import defaultIcon from 'assets/svg/file-icons/other_file.svg';
 import csvIcon from 'assets/svg/file-icons/csv_file.svg';
 import txtIcon from 'assets/svg/file-icons/txt_file.svg';
+import jsonFile from 'assets/svg/file-icons/json_file.svg';
 
 interface IconMap {
   [key: string]: SVGElement;
@@ -20,6 +21,7 @@ const ExtensionIcons: IconMap = {
   pdf: pdfIcon,
   png: pngIcon,
   xls: microsoftExcelIcon,
+  json: jsonFile,
   default: defaultIcon,
 };
 

@@ -23,6 +23,7 @@ import sendInterventionInviteSaga from './sendInterventionInvite';
 import resendInterventionInviteSaga from './resendInterventionInvite';
 import fetchInterventionInvitesSaga from './fetchInterventionInvites';
 import generateConversationsTranscriptSaga from './generateConversationsTranscript';
+import exportInterventionSaga from './exportIntervention';
 
 export {
   createInterventionSaga,
@@ -49,6 +50,7 @@ export {
   deleteInterventionAttachmentSaga,
   fetchInterventionInvitesSaga,
   generateConversationsTranscriptSaga,
+  exportInterventionSaga,
 };
 
 export default function* allInterventionSagas() {
@@ -75,6 +77,7 @@ export default function* allInterventionSagas() {
     resendInterventionInviteSaga(),
     fetchInterventionInvitesSaga(),
     generateConversationsTranscriptSaga(),
+    exportInterventionSaga(),
   ]);
 }
 

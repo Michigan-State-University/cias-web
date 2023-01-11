@@ -9,6 +9,7 @@ const ThirdPartyQuestion = ({
   selectAnswer,
   saveAnswer,
   questionIndex,
+  isMobile,
 }) => {
   const [selectedAnswerIndex, setSelectedAnswerIndex] = useState(null);
   const {
@@ -42,6 +43,7 @@ const ThirdPartyQuestion = ({
       handleClick={handleClick}
       questionId={id}
       selectedAnswerIndex={selectedAnswerIndex}
+      isMobile={isMobile}
     />
   );
 };
@@ -52,6 +54,7 @@ ThirdPartyQuestion.propTypes = {
   selectAnswer: PropTypes.func,
   questionIndex: PropTypes.number,
   saveAnswer: PropTypes.func,
+  isMobile: PropTypes.bool,
 };
 
 export default ThirdPartyQuestion;

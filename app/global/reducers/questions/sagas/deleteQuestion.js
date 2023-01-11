@@ -4,7 +4,7 @@ import { toast } from 'react-toastify';
 
 import { formatMessage } from 'utils/intlOutsideReact';
 
-import { cleanGroups } from 'global/reducers/questionGroups';
+import { cleanGroups } from 'global/reducers/questionGroups/actions';
 import {
   DELETE_QUESTION_ERROR,
   DELETE_QUESTION_REQUEST,

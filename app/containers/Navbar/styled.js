@@ -42,6 +42,7 @@ export const RightPanel = styled.div`
 
 export const DropDownContent = styled.div`
   position: absolute;
+  right: 0;
   min-width: 150px;
   top: calc(100% + 5px);
   background-color: ${colors.white};
@@ -50,9 +51,6 @@ export const DropDownContent = styled.div`
   border-radius: 10px;
   box-shadow: 0px 0px 50px rgba(${hexToRgb(colors.black)}, 0.08);
   padding: 16px;
-  @media ${maxQueries.md} {
-    left: calc(100% - 150px);
-  }
 `;
 
 export const StyledComment = styled(Comment)`

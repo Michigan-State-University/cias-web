@@ -35,7 +35,7 @@ import H2 from 'components/H2';
 import { MONTH_SELECTOR_ID } from 'components/Calendar/constants';
 import { ANSWER_SESSION_CONTAINER_ID } from 'containers/App/constants';
 
-import { SharedProps } from './sharedProps';
+import { SharedProps } from '../types';
 import messages from '../messages';
 import TlfbCalendarLayout from '../layouts/TlfbCalendarLayout';
 import { getCalendarMetadata } from '../utils';

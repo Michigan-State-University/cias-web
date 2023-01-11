@@ -47,7 +47,7 @@ export const TeamDetails = ({
   teamList: {
     singleTeam: team,
     loaders: { singleTeamLoading, singleTeamEditLoading },
-    errors: { singleTeamFetchError },
+    errors: { singleTeamFetchError, singleTeamEditError },
   },
   fetchTeam,
   editTeam,
@@ -65,6 +65,7 @@ export const TeamDetails = ({
   const { teamAdmin, name } = team;
 
   const [teamName, setTeamName] = useState(name ?? '');
+
   const [selectedUser, setSelectedUser] = useState(teamAdmin);
   const [inviteModalVisible, setInviteModalVisible] = useState(false);
 
@@ -74,6 +75,12 @@ export const TeamDetails = ({
   useEffect(() => {
     fetchTeam(id);
   }, [id]);
+
+  useEffect(() => {
+    if (singleTeamEditError) {
+      setTeamName(name);
+    }
+  }, [singleTeamEditError]);
 
   useEffect(() => {
     if (name) setTeamName(name);

@@ -1,6 +1,8 @@
 import React, { memo } from 'react';
 import { useIntl } from 'react-intl';
 
+import { elements } from 'theme';
+
 import Row from 'components/Row';
 import { Button } from 'components/Button';
 
@@ -15,6 +17,9 @@ export type ActionButtonsProps = {
   continueButtonDisabled: boolean;
   continueButtonLoading: boolean;
   onContinueClick: () => void;
+  containerStyle?: Record<string, unknown>;
+  skipButtonStyle?: Record<string, unknown>;
+  continueButtonStyle?: Record<string, unknown>;
 };
 
 const Component = ({
@@ -25,15 +30,19 @@ const Component = ({
   continueButtonDisabled,
   continueButtonLoading,
   onContinueClick,
+  containerStyle,
+  skipButtonStyle,
+  continueButtonStyle,
 }: ActionButtonsProps) => {
   const { formatMessage } = useIntl();
 
   return (
-    <Row width="100%" my={20} justify="end" align="center">
+    <Row width="100%" my={20} justify="end" align="center" {...containerStyle}>
       {renderSkipQuestionButton && (
         <SkipQuestionButton
           onClick={onSkipQuestionClick}
           disabled={skipQuestionButtonDisabled}
+          {...skipButtonStyle}
         />
       )}
 
@@ -42,10 +51,11 @@ const Component = ({
           data-cy="continue-button"
           disabled={continueButtonDisabled}
           margin={20}
-          width="180px"
+          width={elements.continueButtonWidth}
           loading={continueButtonLoading}
           onClick={onContinueClick}
           title={formatMessage(messages.nextQuestion)}
+          {...continueButtonStyle}
         />
       )}
     </Row>

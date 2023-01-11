@@ -16,6 +16,11 @@ import {
   FETCH_INTERVENTIONS_ERROR,
   FETCH_INTERVENTIONS_REQUEST,
   FETCH_INTERVENTIONS_SUCCESS,
+  IMPORT_INTERVENTION_ERROR,
+  IMPORT_INTERVENTION_REQUEST,
+  IMPORT_INTERVENTION_SUCCESS,
+  REFETCH_INTERVENTIONS,
+  RESET_IMPORT_INTERVENTION_STATE,
 } from './constants';
 
 export const initialState = {
@@ -23,8 +28,14 @@ export const initialState = {
   shouldRefetch: false,
   interventionsSize: Number.MAX_SAFE_INTEGER,
   interventions: [],
-  fetchInterventionLoading: true,
-  fetchInterventionError: null,
+  loaders: {
+    fetchInterventions: true,
+    importIntervention: false,
+  },
+  errors: {
+    fetchInterventions: null,
+    importIntervention: null,
+  },
   cache: {
     archiveIntervention: null,
   },
@@ -38,9 +49,11 @@ export const interventionsReducer = (state = initialState, action) =>
         if (state.shouldRefetch) draft.interventions = [];
 
         draft.shouldRefetch = false;
-        if (isEmpty(state.interventions)) draft.fetchInterventionLoading = true;
-        draft.fetchInterventionError = null;
-        draft.fetchInterventionLoading = true;
+        if (isEmpty(state.interventions)) {
+          draft.loaders.fetchInterventions = true;
+        }
+        draft.errors.fetchInterventions = null;
+        draft.loaders.fetchInterventions = true;
 
         const {
           payload: { paginationData, filterData },
@@ -68,7 +81,7 @@ export const interventionsReducer = (state = initialState, action) =>
         break;
       }
       case FETCH_INTERVENTIONS_SUCCESS: {
-        draft.fetchInterventionLoading = false;
+        draft.loaders.fetchInterventions = false;
 
         const {
           payload: { interventions, paginationData, interventionsSize },
@@ -92,8 +105,8 @@ export const interventionsReducer = (state = initialState, action) =>
         break;
       }
       case FETCH_INTERVENTIONS_ERROR:
-        draft.fetchInterventionLoading = false;
-        draft.fetchInterventionError = action.payload.error;
+        draft.loaders.fetchInterventions = false;
+        draft.errors.fetchInterventions = action.payload.error;
         break;
       case CREATE_INTERVENTION_SUCCESS:
         draft.interventions.unshift(action.payload.intervention);
@@ -120,6 +133,30 @@ export const interventionsReducer = (state = initialState, action) =>
         break;
 
       case EDIT_INTERVENTION_SUCCESS:
+        draft.shouldRefetch = true;
+        break;
+
+      case IMPORT_INTERVENTION_REQUEST: {
+        draft.loaders.importIntervention = true;
+        draft.errors.importIntervention = null;
+        break;
+      }
+      case IMPORT_INTERVENTION_SUCCESS: {
+        draft.loaders.importIntervention = false;
+        break;
+      }
+      case IMPORT_INTERVENTION_ERROR: {
+        draft.loaders.importIntervention = false;
+        draft.errors.importIntervention = action.payload.error;
+        break;
+      }
+      case RESET_IMPORT_INTERVENTION_STATE: {
+        draft.loaders.importIntervention = false;
+        draft.errors.importIntervention = null;
+        break;
+      }
+
+      case REFETCH_INTERVENTIONS:
         draft.shouldRefetch = true;
         break;
     }

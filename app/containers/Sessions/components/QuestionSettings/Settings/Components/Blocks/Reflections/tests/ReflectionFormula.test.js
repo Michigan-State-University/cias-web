@@ -8,6 +8,7 @@ import React from 'react';
 import { Provider } from 'react-redux';
 
 import { reflectionType, bodyAnimationType } from 'models/Narrator/BlockTypes';
+import { CharacterType } from 'models/Character';
 import { instantiateBlockForType } from 'models/Session/utils';
 import { testRender } from 'utils/testUtils';
 import { formatMessage } from 'utils/intlOutsideReact';
@@ -50,6 +51,7 @@ describe('<ReflectionBlock />', () => {
     },
     block,
     disabled: false,
+    character: CharacterType.PEEDY,
     ...mockFunctions,
   };
 

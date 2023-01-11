@@ -1,7 +1,7 @@
 import axios, { AxiosResponse } from 'axios';
 import { put, call, takeLatest } from 'redux-saga/effects';
 
-import { ApiData, ApiError } from 'models/Api';
+import { ApiDataCollection, ApiError } from 'models/Api';
 import { DenormalizedConversation } from 'models/LiveChat';
 
 import { FETCH_ARCHIVED_CONVERSATIONS_REQUEST } from '../constants';
@@ -17,7 +17,7 @@ function* fetchArchivedConversations() {
     archived: true,
   };
   try {
-    const { data }: AxiosResponse<ApiData<DenormalizedConversation>> =
+    const { data }: AxiosResponse<ApiDataCollection<DenormalizedConversation>> =
       yield call(axios.get, url, { params });
     const { conversations, interventionConversations } =
       mapFetchConversationsResponse(data);

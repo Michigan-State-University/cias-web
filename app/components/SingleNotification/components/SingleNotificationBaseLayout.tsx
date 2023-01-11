@@ -18,12 +18,14 @@ type Props = NotificationLayoutProps<{
   content: string;
   linkTo?: string;
   readOnClick?: boolean;
+  icon?: React.ReactNode;
 }>;
 
 export const SingleNotificationBaseLayout = ({
   notification: { createdAt, id },
   linkTo,
   readOnClick,
+  icon = <Icon src={CheckCircle} />,
   ...props
 }: Props) => {
   const { readNotification } = useContext(NotificationsActionsContext) ?? {};
@@ -51,8 +53,8 @@ export const SingleNotificationBaseLayout = ({
         active
         highlighted
         time={createdAt}
-        icon={<Icon src={CheckCircle} />}
         onClick={handleClick}
+        icon={icon}
         {...props}
       />
     </ConditionalWrapper>

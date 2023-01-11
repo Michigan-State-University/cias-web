@@ -89,6 +89,7 @@ export const liveChatReducer = (
       }
       case getType(closeConversation): {
         draft.openedConversationId = null;
+        draft.guestInterlocutorId = null;
         draft.currentNavigatorUnavailable = false;
         break;
       }

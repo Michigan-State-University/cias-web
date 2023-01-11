@@ -12,6 +12,7 @@ import {
 } from 'global/reducers/intervention';
 import { colors } from 'theme';
 import { Intervention } from 'models/Intervention';
+import { CharacterType } from 'models/Character';
 
 import {
   Col as GCol,
@@ -26,7 +27,10 @@ import { LabelPosition } from 'components/Switch';
 import Switch from 'components/Switch/Switch';
 import Button from 'components/Button';
 import Row from 'components/Row';
+import CharacterSelector from 'components/CharacterSelector';
+import { GlobalReplacementModal } from 'components/MissingAnimationsModal';
 
+import { NarratorAnimation } from 'models/Narrator';
 import messages from '../../messages';
 import {
   INTERVENTION_LANGUAGE_LABEL_ID,
@@ -46,7 +50,9 @@ const InterventionSettingsModal = ({ editingPossible, onClose }: Props) => {
 
   const [changedIntervention, setChangedIntervention] =
     useState(originalIntervention);
-  const { id, languageCode, languageName, quickExit } = changedIntervention;
+  const [newNarrator, setNewNarrator] = useState(null);
+  const { id, languageCode, languageName, quickExit, currentNarrator } =
+    changedIntervention;
 
   useEffect(() => {
     setChangedIntervention(originalIntervention);
@@ -57,14 +63,47 @@ const InterventionSettingsModal = ({ editingPossible, onClose }: Props) => {
     [originalIntervention, changedIntervention],
   );
 
-  const saveChanges = useCallback(() => {
+  const onSaveNarrator = (
+    replacementAnimations: Record<
+      string,
+      { [key in NarratorAnimation]: NarratorAnimation }
+    >,
+  ) => {
     const changes = objectDifference(originalIntervention, changedIntervention);
+    onClose();
     dispatch(
-      editInterventionRequest({
-        ...changes,
-        id,
-      }),
+      editInterventionRequest(
+        {
+          ...changes,
+          id,
+        },
+        {
+          hasNarratorChanged: true,
+          replacementAnimations,
+        },
+      ),
     );
+  };
+
+  const saveChanges = useCallback(() => {
+    if (
+      changedIntervention.currentNarrator !==
+      originalIntervention.currentNarrator
+    ) {
+      setNewNarrator(changedIntervention.currentNarrator);
+    } else {
+      const changes = objectDifference(
+        originalIntervention,
+        changedIntervention,
+      );
+      onClose();
+      dispatch(
+        editInterventionRequest({
+          ...changes,
+          id,
+        }),
+      );
+    }
   }, [originalIntervention, changedIntervention]);
 
   const changeIntervention = (changes: Partial<Intervention>) => {
@@ -94,13 +133,21 @@ const InterventionSettingsModal = ({ editingPossible, onClose }: Props) => {
       quickExit: value,
     });
 
-  const onSaveClick = () => {
-    saveChanges();
-    onClose();
+  const handleNarratorChange = (value: CharacterType) => {
+    changeIntervention({
+      currentNarrator: value,
+    });
   };
 
   return (
     <FullWidthContainer>
+      <GlobalReplacementModal
+        sourceNarrator={originalIntervention.currentNarrator}
+        destinationNarrator={changedIntervention.currentNarrator}
+        visible={newNarrator !== null}
+        onClose={() => setNewNarrator(null)}
+        onChangeNarrator={onSaveNarrator}
+      />
       <Text mt={6}>
         {formatMessage(messages.interventionSettingsModalSubtitle)}
       </Text>
@@ -150,6 +197,20 @@ const InterventionSettingsModal = ({ editingPossible, onClose }: Props) => {
           </Switch>
         </GCol>
       </GRow>
+      <GRow mb={16} mt={40}>
+        <GCol>
+          <H3>{formatMessage(messages.defaultNarrator)}</H3>
+        </GCol>
+      </GRow>
+      <GRow mb={16}>
+        <GCol>
+          <CharacterSelector
+            value={currentNarrator}
+            onChange={handleNarratorChange}
+            disabled={!editingPossible}
+          />
+        </GCol>
+      </GRow>
       <Row gap={16} mt={56}>
         <Button
           // @ts-ignore
@@ -157,7 +218,7 @@ const InterventionSettingsModal = ({ editingPossible, onClose }: Props) => {
           width="auto"
           title={formatMessage(messages.applyChangesButton)}
           disabled={!hasInterventionChanged}
-          onClick={onSaveClick}
+          onClick={saveChanges}
         />
         <Button
           // @ts-ignore

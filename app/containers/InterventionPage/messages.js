@@ -56,4 +56,16 @@ export default defineMessages({
     id: `${scope}.clearFiltersText`,
     defaultMessage: `Reset filters to default values`,
   },
+  importIntervention: {
+    id: `${scope}.importIntervention`,
+    defaultMessage: `Import Intervention`,
+  },
+  uploadIntervention: {
+    id: `${scope}.uploadIntervention`,
+    defaultMessage: `Upload Intervention JSON file to add it to CIAS`,
+  },
+  uploadInterventionInstruction: {
+    id: `${scope}.uploadInterventionInstruction`,
+    defaultMessage: `Drag & drop intervention file here to start uploading`,
+  },
 });

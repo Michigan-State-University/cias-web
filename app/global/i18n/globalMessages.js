@@ -386,6 +386,10 @@ export default defineMessages({
     id: `${scope}.cancel`,
     defaultMessage: 'Cancel',
   },
+  save: {
+    id: `${scope}.save`,
+    defaultMessage: 'Save',
+  },
   lastCsvDate: {
     id: `${scope}.lastCsvDate`,
     defaultMessage: 'CSV last generated at: ',

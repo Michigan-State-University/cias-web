@@ -46,12 +46,6 @@ const makeSelectCurrentBlockIndex = () =>
     (substate) => substate.currentBlockIndex,
   );
 
-const makeSelectShowTextTranscript = () =>
-  createSelector(
-    selectAnswerSessionPageDomain,
-    (substate) => substate.showTextTranscript,
-  );
-
 const makeSelectPreviousUserSessionId = () =>
   createSelector(
     selectAnswerSessionPageDomain,
@@ -64,6 +58,18 @@ const makeSelectInterventionStarted = () =>
     (substate) => substate.interventionStarted,
   );
 
+const makeSelectIsAnimationOngoing = () =>
+  createSelector(
+    selectAnswerSessionPageDomain,
+    (substate) => substate.isAnimationOngoing,
+  );
+
+const makeSelectShowTextReadingControls = () =>
+  createSelector(
+    selectAnswerSessionPageDomain,
+    (substate) => substate.showTextReadingControls,
+  );
+
 export default makeSelectAnswerSessionPage;
 export {
   selectAnswerSessionPageDomain,
@@ -72,7 +78,8 @@ export {
   makeSelectUserSession,
   makeSelectCurrentQuestion,
   makeSelectCurrentBlockIndex,
-  makeSelectShowTextTranscript,
   makeSelectPreviousUserSessionId,
   makeSelectInterventionStarted,
+  makeSelectIsAnimationOngoing,
+  makeSelectShowTextReadingControls,
 };

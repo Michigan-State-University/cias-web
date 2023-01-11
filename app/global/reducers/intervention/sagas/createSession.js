@@ -2,9 +2,10 @@ import { put, call, takeLatest } from 'redux-saga/effects';
 import axios from 'axios';
 
 import { defaultMapper } from 'utils/mapResponseObjects';
+import objectToCamelCase from 'utils/objectToCamelCase';
 import { SessionTypes } from 'models/Session';
-import { CREATE_SESSION_REQUEST } from '../constants';
 
+import { CREATE_SESSION_REQUEST } from '../constants';
 import { createSessionSuccess, createSessionError } from '../actions';
 
 export function* createSession({ payload: { id, lastPosition, type } }) {
@@ -22,7 +23,7 @@ export function* createSession({ payload: { id, lastPosition, type } }) {
       },
     });
 
-    yield put(createSessionSuccess(defaultMapper(data)));
+    yield put(createSessionSuccess(defaultMapper(objectToCamelCase(data))));
   } catch (error) {
     yield put(createSessionError(error));
   }

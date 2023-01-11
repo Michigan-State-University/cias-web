@@ -1,4 +1,4 @@
-import { ApiData } from 'models/Api';
+import { ApiData, ApiDataCollection } from 'models/Api';
 import { Notification } from 'models/Notification';
 
 import { SocketAction, SocketMessage } from 'utils/useSocket';
@@ -10,7 +10,7 @@ import {
 
 // DATA TYPES
 
-export type UnreadNotificationsFetchedData = ApiData<Notification[]>;
+export type UnreadNotificationsFetchedData = ApiDataCollection<Notification>;
 
 export type NewNotificationData = ApiData<Notification>;
 

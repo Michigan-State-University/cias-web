@@ -3,6 +3,7 @@ declare type ArrayElement<A> = A extends readonly (infer T)[] ? T : never;
 declare type NormalizedData<TData> = {
   [key: string]: TData;
 };
+declare type ValueOf<T> = T[keyof T];
 
 // https://stackoverflow.com/a/66144780
 declare type KeysWithValuesOfType<T, V> = keyof {

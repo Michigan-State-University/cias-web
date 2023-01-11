@@ -58,6 +58,7 @@ const colors = {
   sonicSilver: '#6B707C',
   vermilion: '#D2371D',
   aliceBlue: '#F1F4F9',
+  aliceBlueSaturated: '#F1F7FF',
   lightBlue: '#F4F8FF',
   electricPurple: '#B727EA',
   purplePlum: '#AC43D1',
@@ -90,6 +91,8 @@ const colors = {
   cinnabar: '#DD533C',
   fireIsland: '#DD533C',
   cadetBlueCrayola: '#B3BAC7',
+  linkWaterDark: '#DEE7F6',
+  azureishWhite: '#D4DFF7',
   stormGrey: '#707688',
   logan: '#9BA1B4',
 };

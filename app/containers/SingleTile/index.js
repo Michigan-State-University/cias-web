@@ -19,6 +19,7 @@ import CopyIcon from 'assets/svg/copy.svg';
 import AddAppIcon from 'assets/svg/app-add.svg';
 import TranslateIcon from 'assets/svg/translate.svg';
 import DocumentIcon from 'assets/svg/document.svg';
+// import DownloadIcon from 'assets/svg/download-line.svg';
 
 import { colors } from 'theme';
 
@@ -26,6 +27,8 @@ import globalMessages from 'global/i18n/globalMessages';
 import { makeSelectUserId } from 'global/reducers/auth';
 import { interventionOptionsSaga } from 'global/sagas/interventionOptionsSaga';
 import {
+  exportInterventionRequest,
+  exportInterventionSaga,
   interventionReducer,
   sendInterventionCsvRequest,
 } from 'global/reducers/intervention';
@@ -76,6 +79,7 @@ const SingleTile = ({
   intl: { formatMessage },
   userId,
   isLoading,
+  // exportIntervention,
 }) => {
   const [
     shareWithResearchersModalVisible,
@@ -133,6 +137,8 @@ const SingleTile = ({
   } = tileData || {};
 
   const handleCsvRequest = () => sendCsv(id);
+
+  // const handleExportIntervention = () => exportIntervention(id);
 
   const canExportCSV = userId === user?.id;
 
@@ -198,6 +204,13 @@ const SingleTile = ({
           },
         ]
       : []),
+    // {
+    //   id: 'export',
+    //   label: formatMessage(messages.exportIntervention),
+    //   icon: DownloadIcon,
+    //   action: handleExportIntervention,
+    //   color: colors.bluewood,
+    // },
   ];
 
   const preventDefault = (e) => {
@@ -316,6 +329,7 @@ SingleTile.propTypes = {
   archiveIntervention: PropTypes.func,
   userId: PropTypes.string,
   isLoading: PropTypes.bool,
+  exportIntervention: PropTypes.func,
 };
 
 const mapStateToProps = createStructuredSelector({
@@ -326,6 +340,7 @@ const mapDispatchToProps = {
   copyIntervention: copyInterventionRequest,
   sendCsv: sendInterventionCsvRequest,
   archiveIntervention: archiveInterventionRequest,
+  exportIntervention: exportInterventionRequest,
 };
 
 const SingleTileWithIntl = injectIntl(SingleTile);
@@ -344,4 +359,5 @@ export default compose(
     saga: interventionDetailsPageSagas,
   }),
   injectReducer({ key: 'intervention', reducer: interventionReducer }),
+  injectSaga({ key: 'exportIntervention', saga: exportInterventionSaga }),
 )(SingleTileWithIntl);

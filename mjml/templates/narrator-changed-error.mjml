@@ -1,0 +1,14 @@
+<mjml>
+  <mj-head>
+    <app-header />
+  </mj-head>
+  <mj-body>
+    <app-layout
+      header="An error has occurred while changing CIAS narrator"
+      mainText="Something went wrong while changing narrator in your session/intervention. Please try again."
+      buttonText=""
+      buttonUrl=""
+    >
+    </app-layout>
+  </mj-body>
+</mjml>
