@@ -12,7 +12,7 @@ import Input from './index';
 import { Adornment } from './styled';
 import { AdornmentType } from './types';
 
-type Props = ComponentProps<typeof Input> & {
+export type Props = ComponentProps<typeof Input> & {
   type: AdornmentType;
   adornment?: string;
 };

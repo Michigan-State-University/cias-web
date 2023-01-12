@@ -1,7 +1,9 @@
 import React, { memo, useCallback, useEffect, useMemo, useState } from 'react';
-import { useIntl } from 'react-intl';
+import { IntlShape, useIntl } from 'react-intl';
 import { useDispatch, useSelector } from 'react-redux';
 import isEqual from 'lodash/isEqual';
+import * as Yup from 'yup';
+import { Form, Formik } from 'formik';
 
 import BinIcon from 'assets/svg/bin-no-bg.svg';
 import CopyIcon from 'assets/svg/copy2.svg';
@@ -19,6 +21,7 @@ import { jsonApiToArray } from 'utils/jsonApiMapper';
 import { languageSelectOptionFormatter } from 'utils/formatters';
 import { objectDifference } from 'utils/objectDifference';
 import useGet from 'utils/useGet';
+import { requiredValidationSchema } from 'utils/validators';
 
 import {
   editInterventionRequest,
@@ -36,14 +39,16 @@ import Divider from 'components/Divider';
 import H3 from 'components/H3';
 import { LabelPosition } from 'components/Switch';
 import Switch from 'components/Switch/Switch';
-import Button, { ImageButton } from 'components/Button';
+import Button, { ImageButton, TextButton } from 'components/Button';
 import Row from 'components/Row';
 import CharacterSelector from 'components/CharacterSelector';
 import { GlobalReplacementModal } from 'components/MissingAnimationsModal';
-import {
-  InputWithAdornment,
+import FormikInputWithAdornment, {
   AdornmentType,
-} from 'components/Input/InputWithAdornment';
+} from 'components/FormikInputWithAdornment';
+import Loader from 'components/Loader';
+import ErrorAlert from 'components/ErrorAlert';
+import CopyToClipboard from 'components/CopyToClipboard';
 
 import {
   INTERVENTION_LANGUAGE_LABEL_ID,
@@ -51,6 +56,17 @@ import {
 } from './constants';
 import messages from '../../messages';
 import modalMessages from './messages';
+
+// TODO remove line below
+// eslint-disable-next-line no-unused-vars,@typescript-eslint/no-unused-vars
+const linksSchema = (formatMessage: IntlShape['formatMessage']) =>
+  Yup.object().shape({
+    selected: Yup.boolean(),
+    name: Yup.string().when('selected', {
+      is: (selected) => selected,
+      then: requiredValidationSchema,
+    }),
+  });
 
 export type Props = {
   editingPossible: boolean;
@@ -154,21 +170,43 @@ const InterventionSettingsModal = ({ editingPossible, onClose }: Props) => {
     });
   };
 
-  const [val, setVal] = useState('');
+  // const [shortLink, setShortLink] = useState<Nullable<ShortLinkData>>(null);
 
-  // eslint-disable-next-line no-empty-pattern
-  const {} = useGet<
+  const {
+    error,
+    isFetching,
+    data: shortLinksData,
+  } = useGet<
     ApiDataCollection<ShortLink> & {
       health_clinics: ApiDataCollection<SimpleHealthClinic>['data'];
     },
     { shortLinks: ShortLink[]; healthClinics: SimpleHealthClinic[] }
-  >(`/v1/interventions/${originalIntervention.id}/short_links`, (data) => ({
+  >(`/v1/interventions/${id}/short_links`, (data) => ({
     shortLinks: jsonApiToArray(data, 'shortLink'),
     healthClinics: jsonApiToArray(
       { data: data.health_clinics },
       'simpleHealthClinic',
     ),
   }));
+
+  const initialValues = useMemo(() => {
+    const name = shortLinksData?.shortLinks?.[0]?.name;
+    return { selected: !!name, name: name ?? '' };
+  }, [shortLinksData]);
+
+  const placeholder = `${
+    process.env.WEB_URL
+  }/interventions/${id}/sessions/${'sessionId'}/fill`; // TODO add session id
+
+  const prefix = `${process.env.WEB_URL}/int/`;
+
+  if (isFetching) {
+    return <Loader type="inline" />;
+  }
+
+  if (error) {
+    return <ErrorAlert errorText={error} />;
+  }
 
   return (
     <FullWidthContainer>
@@ -246,57 +284,101 @@ const InterventionSettingsModal = ({ editingPossible, onClose }: Props) => {
       <Text mt={8} textOpacity={0.7} color={themeColors.text}>
         {formatMessage(modalMessages.interventionLinkDescription)}
       </Text>
-      <GRow mt={24} gutterWidth={16}>
-        <GCol xs={10}>
-          <InputWithAdornment
-            onBlur={() => console.log('blur')}
-            value={val}
-            onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
-              setVal(e.target.value)
-            }
-            type={AdornmentType.PREFIX}
-            adornment={`${process.env.WEB_URL}/int/`}
-          />
-        </GCol>
-        <GCol xs={1} justify="center">
-          <ImageButton
-            src={CopyIcon}
-            onClick={() => console.log('copied!')}
-            title={formatMessage(modalMessages.copyLink)}
-            fill={colors.heather}
-            showHoverEffect
-            noHoverBackground
-          />
-        </GCol>
-        <GCol xs={1} justify="center">
-          <ImageButton
-            src={BinIcon}
-            onClick={() => console.log('delete!')}
-            title={formatMessage(modalMessages.removeLink)}
-            fill={colors.heather}
-            showHoverEffect
-            noHoverBackground
-          />
-        </GCol>
-      </GRow>
-      <Row gap={16} mt={56}>
-        <Button
-          // @ts-ignore
-          px={30}
-          width="auto"
-          title={formatMessage(messages.applyChangesButton)}
-          disabled={!hasInterventionChanged}
-          onClick={saveChanges}
-        />
-        <Button
-          // @ts-ignore
-          px={30}
-          width="auto"
-          inverted
-          title={formatMessage(messages.cancelButton)}
-          onClick={onClose}
-        />
-      </Row>
+      <Formik
+        initialValues={initialValues}
+        enableReinitialize
+        onSubmit={saveChanges}
+        validationSchema={linksSchema(formatMessage)}
+      >
+        {({
+          isValid,
+          dirty,
+          setFieldValue,
+          setFieldTouched,
+          handleSubmit,
+          values: { selected, name },
+        }) => (
+          <Form>
+            <GRow mt={24} gutterWidth={16}>
+              <GCol xs={selected ? 10 : 8}>
+                <FormikInputWithAdornment
+                  formikKey="name"
+                  type={AdornmentType.PREFIX}
+                  adornment={selected ? prefix : ''}
+                  disabled={!selected}
+                  backgroundColor={
+                    !selected ? themeColors.highlight : undefined
+                  }
+                  opacity={!selected ? 1 : undefined}
+                  placeholder={selected ? '' : placeholder}
+                />
+              </GCol>
+              <GCol xs={1}>
+                <CopyToClipboard
+                  // @ts-ignore
+                  renderAsCustomComponent
+                  textToCopy={selected ? `${prefix}${name}` : placeholder}
+                >
+                  <ImageButton
+                    src={CopyIcon}
+                    title={formatMessage(modalMessages.copyLink)}
+                    fill={colors.heather}
+                    showHoverEffect
+                    noHoverBackground
+                    mt={8}
+                  />
+                </CopyToClipboard>
+              </GCol>
+              <GCol xs={selected ? 1 : 3}>
+                {!selected && (
+                  <TextButton
+                    onClick={() => setFieldValue('selected', true)}
+                    buttonProps={{
+                      color: themeColors.secondary,
+                      mt: 11,
+                    }}
+                  >
+                    {formatMessage(modalMessages.createLink)}
+                  </TextButton>
+                )}
+                {selected && (
+                  <ImageButton
+                    src={BinIcon}
+                    onClick={() => {
+                      setFieldValue('name', '', false);
+                      setFieldTouched('name', false, false);
+                      setFieldValue('selected', false);
+                    }}
+                    title={formatMessage(modalMessages.removeLink)}
+                    fill={colors.heather}
+                    showHoverEffect
+                    noHoverBackground
+                    mt={8}
+                  />
+                )}
+              </GCol>
+            </GRow>
+            <Row gap={16} mt={56}>
+              <Button
+                // @ts-ignore
+                px={30}
+                width="auto"
+                title={formatMessage(messages.applyChangesButton)}
+                disabled={!hasInterventionChanged && (!isValid || !dirty)}
+                onClick={handleSubmit}
+              />
+              <Button
+                // @ts-ignore
+                px={30}
+                width="auto"
+                inverted
+                title={formatMessage(messages.cancelButton)}
+                onClick={onClose}
+              />
+            </Row>
+          </Form>
+        )}
+      </Formik>
     </FullWidthContainer>
   );
 };

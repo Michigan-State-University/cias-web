@@ -73,6 +73,10 @@ export default defineMessages({
     id: `${scope}.copyLink`,
     defaultMessage: 'Copy link',
   },
+  createLink: {
+    id: `${scope}.createLink`,
+    defaultMessage: 'Create custom link',
+  },
   removeLink: {
     id: `${scope}.removeLink`,
     defaultMessage: 'Remove custom link',

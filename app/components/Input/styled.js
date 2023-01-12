@@ -148,11 +148,11 @@ export const Adornment = styled.div`
   ${({ type }) =>
     type === AdornmentType.SUFFIX
       ? css`
-          right: 0;
+          right: ${borders.borderWidth};
           padding-right: ${INPUT_PADDING}px;
         `
       : css`
-          left: 0;
+          left: ${borders.borderWidth};
           padding-left: ${INPUT_PADDING}px;
         `}
   max-width: 75%;

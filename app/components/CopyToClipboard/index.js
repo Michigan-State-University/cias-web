@@ -27,6 +27,7 @@ const CopyToClipboard = ({
   children,
   textProps,
   renderAsButton,
+  rednerAsCustomComponent,
   buttonDisabled,
   disabled,
   icon,
@@ -79,19 +80,23 @@ const CopyToClipboard = ({
         center
       >
         {renderCopyToClipboard(
-          <Row align="center">
-            {icon && (
-              <Icon
-                src={icon}
-                alt={iconAlt}
-                mr={10}
-                fill={textProps[disabled ? 'disabledColor' : 'color']}
-              />
-            )}
-            <Text disabled={disabled} {...textProps}>
-              {children}
-            </Text>
-          </Row>,
+          rednerAsCustomComponent ? (
+            children
+          ) : (
+            <Row align="center">
+              {icon && (
+                <Icon
+                  src={icon}
+                  alt={iconAlt}
+                  mr={10}
+                  fill={textProps[disabled ? 'disabledColor' : 'color']}
+                />
+              )}
+              <Text disabled={disabled} {...textProps}>
+                {children}
+              </Text>
+            </Row>
+          ),
         )}
       </Popup>
     </Box>
@@ -106,6 +111,7 @@ CopyToClipboard.propTypes = {
   buttonDisabled: PropTypes.bool,
   disabled: PropTypes.bool,
   renderAsButton: PropTypes.bool,
+  rednerAsCustomComponent: PropTypes.bool,
   icon: PropTypes.string,
   iconAlt: PropTypes.string,
 };
