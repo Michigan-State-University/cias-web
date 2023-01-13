@@ -21,11 +21,15 @@ import { jsonApiToArray } from 'utils/jsonApiMapper';
 import { languageSelectOptionFormatter } from 'utils/formatters';
 import { objectDifference } from 'utils/objectDifference';
 import useGet from 'utils/useGet';
-import { requiredValidationSchema } from 'utils/validators';
+import {
+  requiredValidationSchema,
+  unreservedURLCharactersSchema,
+} from 'utils/validators';
 
 import {
   editInterventionRequest,
   makeSelectIntervention,
+  makeSelectInterventionLoader,
 } from 'global/reducers/intervention';
 
 import {
@@ -64,7 +68,7 @@ const linksSchema = (formatMessage: IntlShape['formatMessage']) =>
     selected: Yup.boolean(),
     name: Yup.string().when('selected', {
       is: (selected) => selected,
-      then: requiredValidationSchema,
+      then: unreservedURLCharactersSchema.concat(requiredValidationSchema),
     }),
   });
 
@@ -78,6 +82,9 @@ const InterventionSettingsModal = ({ editingPossible, onClose }: Props) => {
 
   const dispatch = useDispatch();
   const originalIntervention = useSelector(makeSelectIntervention());
+  const savingChanges = useSelector(
+    makeSelectInterventionLoader('editIntervention'),
+  );
 
   const [changedIntervention, setChangedIntervention] =
     useState(originalIntervention);
@@ -101,7 +108,6 @@ const InterventionSettingsModal = ({ editingPossible, onClose }: Props) => {
     >,
   ) => {
     const changes = objectDifference(originalIntervention, changedIntervention);
-    onClose();
     dispatch(
       editInterventionRequest(
         {
@@ -111,6 +117,7 @@ const InterventionSettingsModal = ({ editingPossible, onClose }: Props) => {
         {
           hasNarratorChanged: true,
           replacementAnimations,
+          onSuccess: onClose,
         },
       ),
     );
@@ -127,12 +134,14 @@ const InterventionSettingsModal = ({ editingPossible, onClose }: Props) => {
         originalIntervention,
         changedIntervention,
       );
-      onClose();
       dispatch(
-        editInterventionRequest({
-          ...changes,
-          id,
-        }),
+        editInterventionRequest(
+          {
+            ...changes,
+            id,
+          },
+          { onSuccess: onClose },
+        ),
       );
     }
   }, [originalIntervention, changedIntervention]);
@@ -345,8 +354,8 @@ const InterventionSettingsModal = ({ editingPossible, onClose }: Props) => {
                   <ImageButton
                     src={BinIcon}
                     onClick={() => {
-                      setFieldValue('name', '', false);
                       setFieldTouched('name', false, false);
+                      setFieldValue('name', '', false);
                       setFieldValue('selected', false);
                     }}
                     title={formatMessage(modalMessages.removeLink)}
@@ -364,7 +373,8 @@ const InterventionSettingsModal = ({ editingPossible, onClose }: Props) => {
                 px={30}
                 width="auto"
                 title={formatMessage(messages.applyChangesButton)}
-                disabled={!hasInterventionChanged && (!isValid || !dirty)}
+                disabled={!isValid || (!hasInterventionChanged && !dirty)}
+                loading={savingChanges}
                 onClick={handleSubmit}
               />
               <Button
