@@ -1,5 +1,5 @@
 import React, { memo, useCallback, useEffect, useMemo, useState } from 'react';
-import { IntlShape, useIntl } from 'react-intl';
+import { useIntl } from 'react-intl';
 import { useDispatch, useSelector } from 'react-redux';
 import isEqual from 'lodash/isEqual';
 import * as Yup from 'yup';
@@ -61,22 +61,20 @@ import {
 import messages from '../../messages';
 import modalMessages from './messages';
 
-// TODO remove line below
-// eslint-disable-next-line no-unused-vars,@typescript-eslint/no-unused-vars
-const linksSchema = (formatMessage: IntlShape['formatMessage']) =>
-  Yup.object().shape({
-    selected: Yup.boolean(),
-    name: Yup.string().when('selected', {
-      is: (selected) => selected,
-      then: unreservedURLCharactersSchema.concat(requiredValidationSchema),
-    }),
-  });
+const linksSchema = Yup.object().shape({
+  selected: Yup.boolean(),
+  name: Yup.string().when('selected', {
+    is: (selected) => selected,
+    then: unreservedURLCharactersSchema.concat(requiredValidationSchema),
+  }),
+});
 
 export type Props = {
   editingPossible: boolean;
   onClose: () => void;
 };
 
+// TODO use proper copies depending on intervention type, do not display link form for organization, save links, validate duplicates, handle used links
 const InterventionSettingsModal = ({ editingPossible, onClose }: Props) => {
   const { formatMessage } = useIntl();
 
@@ -297,7 +295,7 @@ const InterventionSettingsModal = ({ editingPossible, onClose }: Props) => {
         initialValues={initialValues}
         enableReinitialize
         onSubmit={saveChanges}
-        validationSchema={linksSchema(formatMessage)}
+        validationSchema={linksSchema}
       >
         {({
           isValid,
