@@ -11,6 +11,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import isEqual from 'lodash/isEqual';
 import * as Yup from 'yup';
 import { Form, Formik, FormikProps } from 'formik';
+import size from 'lodash/size';
 
 import BinIcon from 'assets/svg/bin-no-bg.svg';
 import CopyIcon from 'assets/svg/copy2.svg';
@@ -37,7 +38,11 @@ import {
   editInterventionRequest,
   makeSelectIntervention,
   makeSelectInterventionLoader,
+  makeSelectInterventionError,
+  changeInterventionNarratorRequest,
+  editShortLinksRequest,
 } from 'global/reducers/intervention';
+import reducerMessages from 'global/reducers/intervention/messages';
 
 import {
   Col as GCol,
@@ -94,8 +99,28 @@ const InterventionSettingsModal = ({ editingPossible, onClose }: Props) => {
 
   const dispatch = useDispatch();
   const originalIntervention = useSelector(makeSelectIntervention());
-  const savingChanges = useSelector(
+  const editInterventionLoader = useSelector(
     makeSelectInterventionLoader('editIntervention'),
+  );
+  const changeInterventionNarratorLoader = useSelector(
+    makeSelectInterventionLoader('changeInterventionNarrator'),
+  );
+  const editShortLinksLoader = useSelector(
+    makeSelectInterventionLoader('editShortLinks'),
+  );
+  const savingChanges =
+    editInterventionLoader ||
+    changeInterventionNarratorLoader ||
+    editShortLinksLoader;
+
+  const editInterventionError = useSelector(
+    makeSelectInterventionError('editIntervention'),
+  );
+  const changeInterventionNarratorError = useSelector(
+    makeSelectInterventionError('changeInterventionNarrator'),
+  );
+  const editShortLinksError = useSelector(
+    makeSelectInterventionError('editShortLinks'),
   );
 
   const [changedIntervention, setChangedIntervention] =
@@ -122,28 +147,14 @@ const InterventionSettingsModal = ({ editingPossible, onClose }: Props) => {
 
   const formRef = useRef<FormikProps<FormValues>>(null);
 
-  const onSaveNarrator = (
-    replacementAnimations: Record<
-      string,
-      { [key in NarratorAnimation]: NarratorAnimation }
-    >,
-  ) => {
-    const changes = objectDifference(originalIntervention, changedIntervention);
-    dispatch(
-      editInterventionRequest(
-        {
-          ...changes,
-          id,
-        },
-        {
-          hasNarratorChanged: true,
-          replacementAnimations,
-          onSuccess: onClose,
-          ...mapShortLinks(formRef.current?.values, initialValues),
-        },
-      ),
-    );
-  };
+  useEffect(() => {
+    if (editShortLinksError && formRef.current) {
+      formRef.current.setFieldError(
+        'name',
+        formatMessage(modalMessages.linkTaken),
+      );
+    }
+  }, [editShortLinksError]);
 
   const changeIntervention = (changes: Partial<Intervention>) => {
     setChangedIntervention({
@@ -179,8 +190,8 @@ const InterventionSettingsModal = ({ editingPossible, onClose }: Props) => {
   };
 
   const {
-    error,
-    isFetching,
+    error: shortLinksFetchError,
+    isFetching: isFetchingShortLinks,
     data: shortLinksData,
   } = useGet<
     ApiDataCollection<ShortLink> & {
@@ -208,22 +219,28 @@ const InterventionSettingsModal = ({ editingPossible, onClose }: Props) => {
 
   const placeholder = `${
     process.env.WEB_URL
-  }/interventions/${id}/sessions/${'sessionId'}/fill`; // TODO add session id
+  }/interventions/${id}/sessions/${'sessionId'}/fill`; // TODO construct a correct url depending on a intervention type
 
   const prefix = `${process.env.WEB_URL}/int/`;
 
-  const saveChanges = useCallback(
-    (formValues: FormValues) => {
-      if (
-        changedIntervention.currentNarrator !==
-        originalIntervention.currentNarrator
-      ) {
-        setNewNarrator(changedIntervention.currentNarrator);
-      } else {
-        const changes = objectDifference(
-          originalIntervention,
-          changedIntervention,
-        );
+  const saveOtherSettingsAndLinks = useCallback(
+    (formValues: Nullable<FormValues>) => {
+      const { hasLinksChanged, shortLinks } = mapShortLinks(
+        formValues,
+        initialValues,
+      );
+
+      if (hasLinksChanged) {
+        dispatch(editShortLinksRequest(shortLinks));
+      }
+
+      const changes = objectDifference(
+        originalIntervention,
+        changedIntervention,
+      ) as Partial<Intervention>;
+      delete changes.currentNarrator;
+
+      if (size(changes)) {
         dispatch(
           editInterventionRequest(
             {
@@ -231,22 +248,52 @@ const InterventionSettingsModal = ({ editingPossible, onClose }: Props) => {
               id,
             },
             {
-              onSuccess: onClose,
-              ...mapShortLinks(formValues, initialValues),
+              successMessage: formatMessage(
+                reducerMessages.interventionSettingsSaved,
+              ),
             },
           ),
         );
       }
     },
-    [originalIntervention, changedIntervention, initialValues],
+    [initialValues, originalIntervention, changedIntervention],
   );
 
-  if (isFetching) {
+  const submitForm = useCallback(
+    (formValues: FormValues) => {
+      const narratorChanged =
+        changedIntervention.currentNarrator !==
+        originalIntervention.currentNarrator;
+      if (narratorChanged) {
+        setNewNarrator(changedIntervention.currentNarrator);
+      } else {
+        saveOtherSettingsAndLinks(formValues);
+      }
+    },
+    [originalIntervention, changedIntervention, saveOtherSettingsAndLinks],
+  );
+
+  const onSaveNarrator = (
+    replacementAnimations: Record<
+      string,
+      { [key in NarratorAnimation]: NarratorAnimation }
+    >,
+  ) => {
+    dispatch(
+      changeInterventionNarratorRequest(
+        changedIntervention.currentNarrator,
+        replacementAnimations,
+      ),
+    );
+    saveOtherSettingsAndLinks(formRef.current?.values);
+  };
+
+  if (isFetchingShortLinks) {
     return <Loader type="inline" />;
   }
 
-  if (error) {
-    return <ErrorAlert errorText={error} />;
+  if (shortLinksFetchError) {
+    return <ErrorAlert errorText={shortLinksFetchError} />;
   }
 
   return (
@@ -307,6 +354,15 @@ const InterventionSettingsModal = ({ editingPossible, onClose }: Props) => {
           </Switch>
         </GCol>
       </GRow>
+      {editInterventionError && (
+        <ErrorAlert
+          mt={16}
+          errorText={
+            editInterventionError?.response?.data?.message ??
+            editInterventionError
+          }
+        />
+      )}
       <GRow mb={16} mt={40}>
         <GCol>
           <H3>{formatMessage(messages.defaultNarrator)}</H3>
@@ -319,12 +375,21 @@ const InterventionSettingsModal = ({ editingPossible, onClose }: Props) => {
             onChange={handleNarratorChange}
             disabled={!editingPossible}
           />
+          {changeInterventionNarratorError && (
+            <ErrorAlert
+              mt={16}
+              errorText={
+                changeInterventionNarratorError?.response?.data?.message ??
+                changeInterventionNarratorError
+              }
+            />
+          )}
         </GCol>
       </GRow>
       <Formik
         initialValues={initialValues}
         enableReinitialize
-        onSubmit={saveChanges}
+        onSubmit={submitForm}
         validationSchema={validationSchema}
         innerRef={formRef}
       >

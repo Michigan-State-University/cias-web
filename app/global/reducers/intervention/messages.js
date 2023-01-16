@@ -117,4 +117,17 @@ export default defineMessages({
     defaultMessage:
       'CIAS is exporting your intervention. We will send you an e-mail when this process has been finished.',
   },
+  changeInterventionNarratorSuccess: {
+    id: `${scope}.changeInterventionNarratorSuccess`,
+    defaultMessage:
+      'CIAS is changing the default narrator of your intervention. We will send you an e-mail when this process has been finished.',
+  },
+  changeInterventionNarratorError: {
+    id: `${scope}.changeInterventionNarratorError`,
+    defaultMessage: "Couldn't change the intervention default narrator",
+  },
+  interventionSettingsSaved: {
+    id: `${scope}.interventionSettingsSaved`,
+    defaultMessage: 'Intervention settings have been saved',
+  },
 });

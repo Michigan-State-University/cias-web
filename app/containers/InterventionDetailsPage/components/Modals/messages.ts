@@ -81,4 +81,8 @@ export default defineMessages({
     id: `${scope}.removeLink`,
     defaultMessage: 'Remove custom link',
   },
+  linkTaken: {
+    id: `${scope}.linkTaken`,
+    defaultMessage: 'This intervention link is already taken',
+  },
 });

@@ -1,7 +1,6 @@
 import axios from 'axios';
-import { put, call, all, takeEvery } from 'redux-saga/effects';
+import { put, call, takeEvery } from 'redux-saga/effects';
 import { toast } from 'react-toastify';
-import size from 'lodash/size';
 
 import globalMessages from 'global/i18n/globalMessages';
 import { defaultMapper } from 'utils/mapResponseObjects';
@@ -13,54 +12,37 @@ import { editInterventionError, editInterventionSuccess } from '../actions';
 import {
   EDIT_INTERVENTION_REQUEST,
   EDIT_INTERVENTION_ERROR,
+  EDIT_INTERVENTION_SUCCESS,
 } from '../constants';
 
 export function* editIntervention({ payload: { intervention, extraOptions } }) {
-  const { id, ...interventionChanges } = intervention;
-  const changeInterventionURL = `v1/interventions/${id}`;
-  const requests = {};
-
-  if (size(interventionChanges)) {
-    /* eslint-disable-next-line redux-saga/yield-effects */
-    requests.changeIntervention = call(
-      axios.patch,
-      changeInterventionURL,
-      objectToSnakeCase({ intervention }),
-    );
-  }
-
-  if (extraOptions?.hasNarratorChanged) {
-    const narratorChangeURL = `${changeInterventionURL}/change_narrator`;
-    /* eslint-disable-next-line redux-saga/yield-effects */
-    requests.changeNarrator = call(axios.post, narratorChangeURL, {
-      narrator: {
-        name: intervention.currentNarrator,
-        replaced_animations: extraOptions.replacementAnimations,
-      },
-    });
-  }
-
-  if (extraOptions?.hasLinksChanged) {
-    const linksChangeURL = `${changeInterventionURL}/short_links`;
-    /* eslint-disable-next-line redux-saga/yield-effects */
-    requests.changeLinks = call(axios.post, linksChangeURL, {
-      short_links: extraOptions.shortLinks,
-    });
-  }
+  const requestURL = `v1/interventions/${intervention.id}`;
 
   try {
-    const { changeIntervention } = yield all(requests);
+    const {
+      data: { data },
+    } = yield call(
+      axios.patch,
+      requestURL,
+      objectToSnakeCase({ intervention }),
+    );
 
-    const mappedData = defaultMapper(changeIntervention?.data?.data ?? {});
+    const mappedData = defaultMapper(data);
     yield put(editInterventionSuccess({ ...intervention, ...mappedData }));
     if (extraOptions?.onSuccess) {
       extraOptions.onSuccess();
+    }
+    if (extraOptions?.successMessage) {
+      yield call(toast.success, extraOptions?.successMessage, {
+        toastId: EDIT_INTERVENTION_SUCCESS,
+      });
     }
   } catch (error) {
     const errorFlag = getErrorFlag(error);
     yield call(
       toast.error,
-      formatMessage(globalMessages[errorFlag || 'editInterventionError']),
+      error?.response?.data?.message ||
+        formatMessage(globalMessages[errorFlag || 'editInterventionError']),
       {
         toastId: EDIT_INTERVENTION_ERROR,
       },
