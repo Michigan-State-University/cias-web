@@ -88,7 +88,6 @@ export type Props = {
 };
 
 // TODO
-//  save links,
 //  handle used links
 const InterventionSettingsModal = ({ editingPossible, onClose }: Props) => {
   const { formatMessage } = useIntl();

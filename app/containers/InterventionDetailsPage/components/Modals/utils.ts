@@ -1,14 +1,15 @@
 import isEqual from 'lodash/isEqual';
 
+import { Organization } from 'models/Organization';
+
+import { SelectOption } from 'components/Select/types';
+
 import { FormValues } from './types';
 
 export const organizationSelectOptionFormatter = ({
   id: value,
   name: label,
-}: {
-  id: string;
-  name: string;
-}) => ({
+}: Organization): SelectOption<string> => ({
   value,
   label,
 });
@@ -23,11 +24,15 @@ export const mapShortLinks = (
     };
   }
 
-  const { name, selected } = formValues;
+  const hasLinksChanged = !isEqual(formValues, initialValues);
+  if (!hasLinksChanged) {
+    return {
+      hasLinksChanged: false,
+    };
+  }
 
-  const oldLinks = [{ name: initialValues.name }];
+  const { name, selected } = formValues;
   const newLinks = selected ? [{ name }] : [];
-  const hasLinksChanged = !isEqual(oldLinks, newLinks);
 
   return {
     hasLinksChanged,
