@@ -17,6 +17,7 @@ import {
 export function* editIntervention({ payload: { intervention, extraOptions } }) {
   const requestURL = `v1/interventions/${intervention.id}`;
   const narratorChangeURL = `${requestURL}/change_narrator`;
+  const linksChangeURL = `${requestURL}/short_links`;
 
   try {
     if (extraOptions?.hasNarratorChanged) {
@@ -25,6 +26,12 @@ export function* editIntervention({ payload: { intervention, extraOptions } }) {
           name: intervention.currentNarrator,
           replaced_animations: extraOptions.replacementAnimations,
         },
+      });
+    }
+
+    if (extraOptions?.hasLinksChanged) {
+      yield call(axios.post, linksChangeURL, {
+        short_links: extraOptions.shortLinks,
       });
     }
 
@@ -53,6 +60,7 @@ export function* editIntervention({ payload: { intervention, extraOptions } }) {
     yield put(editInterventionError(error));
   }
 }
+
 export default function* editInterventionSaga() {
   yield takeLatest(EDIT_INTERVENTION_REQUEST, editIntervention);
 }

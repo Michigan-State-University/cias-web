@@ -56,25 +56,36 @@ import CopyToClipboard from 'components/CopyToClipboard';
 
 import {
   INTERVENTION_LANGUAGE_LABEL_ID,
+  INTERVENTION_LINK_ID,
   INTERVENTION_QUICK_EXIT_LABEL_ID,
 } from './constants';
 import messages from '../../messages';
 import modalMessages from './messages';
 
-const linksSchema = Yup.object().shape({
-  selected: Yup.boolean(),
-  name: Yup.string().when('selected', {
-    is: (selected) => selected,
-    then: unreservedURLCharactersSchema.concat(requiredValidationSchema),
-  }),
-});
+type FormValues = {
+  selected?: boolean;
+  name?: string;
+};
+
+const createValidationSchema = (assignedToOrganization: boolean) => {
+  if (assignedToOrganization) return null;
+  return Yup.object().shape({
+    selected: Yup.boolean(),
+    name: Yup.string().when('selected', {
+      is: (selected) => selected,
+      then: unreservedURLCharactersSchema.concat(requiredValidationSchema),
+    }),
+  });
+};
 
 export type Props = {
   editingPossible: boolean;
   onClose: () => void;
 };
 
-// TODO use proper copies depending on intervention type, do not display link form for organization, save links, validate duplicates, handle used links
+// TODO
+//  save links,
+//  handle used links
 const InterventionSettingsModal = ({ editingPossible, onClose }: Props) => {
   const { formatMessage } = useIntl();
 
@@ -85,10 +96,17 @@ const InterventionSettingsModal = ({ editingPossible, onClose }: Props) => {
   );
 
   const [changedIntervention, setChangedIntervention] =
-    useState(originalIntervention);
-  const [newNarrator, setNewNarrator] = useState(null);
-  const { id, languageCode, languageName, quickExit, currentNarrator } =
-    changedIntervention;
+    useState<Intervention>(originalIntervention);
+  const [newNarrator, setNewNarrator] = useState<Nullable<CharacterType>>(null);
+  const {
+    id,
+    languageCode,
+    languageName,
+    quickExit,
+    currentNarrator,
+    type,
+    organizationId,
+  } = changedIntervention;
 
   useEffect(() => {
     setChangedIntervention(originalIntervention);
@@ -120,29 +138,6 @@ const InterventionSettingsModal = ({ editingPossible, onClose }: Props) => {
       ),
     );
   };
-
-  const saveChanges = useCallback(() => {
-    if (
-      changedIntervention.currentNarrator !==
-      originalIntervention.currentNarrator
-    ) {
-      setNewNarrator(changedIntervention.currentNarrator);
-    } else {
-      const changes = objectDifference(
-        originalIntervention,
-        changedIntervention,
-      );
-      dispatch(
-        editInterventionRequest(
-          {
-            ...changes,
-            id,
-          },
-          { onSuccess: onClose },
-        ),
-      );
-    }
-  }, [originalIntervention, changedIntervention]);
 
   const changeIntervention = (changes: Partial<Intervention>) => {
     setChangedIntervention({
@@ -196,16 +191,57 @@ const InterventionSettingsModal = ({ editingPossible, onClose }: Props) => {
     ),
   }));
 
-  const initialValues = useMemo(() => {
+  const initialValues: FormValues = useMemo(() => {
+    if (organizationId) return {};
     const name = shortLinksData?.shortLinks?.[0]?.name;
     return { selected: !!name, name: name ?? '' };
-  }, [shortLinksData]);
+  }, [organizationId, shortLinksData]);
+
+  const validationSchema = useMemo(
+    () => createValidationSchema(Boolean(organizationId)),
+    [organizationId],
+  );
 
   const placeholder = `${
     process.env.WEB_URL
   }/interventions/${id}/sessions/${'sessionId'}/fill`; // TODO add session id
 
   const prefix = `${process.env.WEB_URL}/int/`;
+
+  const saveChanges = useCallback(
+    ({ name, selected }: FormValues) => {
+      if (
+        changedIntervention.currentNarrator !==
+        originalIntervention.currentNarrator
+      ) {
+        setNewNarrator(changedIntervention.currentNarrator);
+      } else {
+        const changes = objectDifference(
+          originalIntervention,
+          changedIntervention,
+        );
+
+        const oldLinks = [{ name: initialValues.name }];
+        const newLinks = selected ? [{ name }] : [];
+        const hasLinksChanged = !isEqual(oldLinks, newLinks);
+
+        dispatch(
+          editInterventionRequest(
+            {
+              ...changes,
+              id,
+            },
+            {
+              onSuccess: onClose,
+              hasLinksChanged,
+              shortLinks: hasLinksChanged ? newLinks : undefined,
+            },
+          ),
+        );
+      }
+    },
+    [originalIntervention, changedIntervention, initialValues],
+  );
 
   if (isFetching) {
     return <Loader type="inline" />;
@@ -287,15 +323,11 @@ const InterventionSettingsModal = ({ editingPossible, onClose }: Props) => {
           />
         </GCol>
       </GRow>
-      <H3 mt={40}>{formatMessage(modalMessages.interventionLinkHeader)}</H3>
-      <Text mt={8} textOpacity={0.7} color={themeColors.text}>
-        {formatMessage(modalMessages.interventionLinkDescription)}
-      </Text>
       <Formik
         initialValues={initialValues}
         enableReinitialize
         onSubmit={saveChanges}
-        validationSchema={linksSchema}
+        validationSchema={validationSchema}
       >
         {({
           isValid,
@@ -306,65 +338,80 @@ const InterventionSettingsModal = ({ editingPossible, onClose }: Props) => {
           values: { selected, name },
         }) => (
           <Form>
-            <GRow mt={24} gutterWidth={16}>
-              <GCol xs={selected ? 10 : 8}>
-                <FormikInputWithAdornment
-                  formikKey="name"
-                  type={AdornmentType.PREFIX}
-                  adornment={selected ? prefix : ''}
-                  disabled={!selected}
-                  backgroundColor={
-                    !selected ? themeColors.highlight : undefined
-                  }
-                  opacity={!selected ? 1 : undefined}
-                  placeholder={selected ? '' : placeholder}
-                />
-              </GCol>
-              <GCol xs={1}>
-                <CopyToClipboard
-                  // @ts-ignore
-                  renderAsCustomComponent
-                  textToCopy={selected ? `${prefix}${name}` : placeholder}
-                >
-                  <ImageButton
-                    src={CopyIcon}
-                    title={formatMessage(modalMessages.copyLink)}
-                    fill={colors.heather}
-                    showHoverEffect
-                    noHoverBackground
-                    mt={8}
-                  />
-                </CopyToClipboard>
-              </GCol>
-              <GCol xs={selected ? 1 : 3}>
-                {!selected && (
-                  <TextButton
-                    onClick={() => setFieldValue('selected', true)}
-                    buttonProps={{
-                      color: themeColors.secondary,
-                      mt: 11,
-                    }}
-                  >
-                    {formatMessage(modalMessages.createLink)}
-                  </TextButton>
-                )}
-                {selected && (
-                  <ImageButton
-                    src={BinIcon}
-                    onClick={() => {
-                      setFieldTouched('name', false, false);
-                      setFieldValue('name', '', false);
-                      setFieldValue('selected', false);
-                    }}
-                    title={formatMessage(modalMessages.removeLink)}
-                    fill={colors.heather}
-                    showHoverEffect
-                    noHoverBackground
-                    mt={8}
-                  />
-                )}
-              </GCol>
-            </GRow>
+            {!organizationId && (
+              <>
+                <H3 mt={40}>
+                  <label htmlFor={INTERVENTION_LINK_ID}>
+                    {formatMessage(modalMessages.interventionLinkHeader)}
+                  </label>
+                </H3>
+                <Text mt={8} textOpacity={0.7} color={themeColors.text}>
+                  {formatMessage(modalMessages.interventionLinkDescription, {
+                    interventionType: type,
+                  })}
+                </Text>
+                <GRow mt={24} gutterWidth={16}>
+                  <GCol xs={selected ? 10 : 8}>
+                    <FormikInputWithAdornment
+                      id={INTERVENTION_LINK_ID}
+                      formikKey="name"
+                      type={AdornmentType.PREFIX}
+                      adornment={selected ? prefix : ''}
+                      disabled={!selected}
+                      backgroundColor={
+                        !selected ? themeColors.highlight : undefined
+                      }
+                      opacity={!selected ? 1 : undefined}
+                      placeholder={selected ? '' : placeholder}
+                    />
+                  </GCol>
+                  <GCol xs={1}>
+                    <CopyToClipboard
+                      // @ts-ignore
+                      renderAsCustomComponent
+                      textToCopy={selected ? `${prefix}${name}` : placeholder}
+                    >
+                      <ImageButton
+                        src={CopyIcon}
+                        title={formatMessage(modalMessages.copyLink)}
+                        fill={colors.heather}
+                        showHoverEffect
+                        noHoverBackground
+                        mt={8}
+                      />
+                    </CopyToClipboard>
+                  </GCol>
+                  <GCol xs={selected ? 1 : 3}>
+                    {!selected && (
+                      <TextButton
+                        onClick={() => setFieldValue('selected', true)}
+                        buttonProps={{
+                          color: themeColors.secondary,
+                          mt: 11,
+                        }}
+                      >
+                        {formatMessage(modalMessages.createLink)}
+                      </TextButton>
+                    )}
+                    {selected && (
+                      <ImageButton
+                        src={BinIcon}
+                        onClick={() => {
+                          setFieldTouched('name', false, false);
+                          setFieldValue('name', '', false);
+                          setFieldValue('selected', false);
+                        }}
+                        title={formatMessage(modalMessages.removeLink)}
+                        fill={colors.heather}
+                        showHoverEffect
+                        noHoverBackground
+                        mt={8}
+                      />
+                    )}
+                  </GCol>
+                </GRow>
+              </>
+            )}
             <Row gap={16} mt={56}>
               <Button
                 // @ts-ignore
@@ -374,6 +421,7 @@ const InterventionSettingsModal = ({ editingPossible, onClose }: Props) => {
                 disabled={!isValid || (!hasInterventionChanged && !dirty)}
                 loading={savingChanges}
                 onClick={handleSubmit}
+                type="submit"
               />
               <Button
                 // @ts-ignore

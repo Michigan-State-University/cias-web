@@ -2,7 +2,9 @@ import React from 'react';
 import { useField } from 'formik';
 import isNil from 'lodash/isNil';
 
-import FormikControlLayout from 'components/FormikControlLayout';
+import FormikControlLayout, {
+  Props as FormikControlLayoutProps,
+} from 'components/FormikControlLayout';
 import {
   InputWithAdornment,
   Props as InputWithAdornmentProps,
@@ -11,16 +13,29 @@ import {
 
 export type Props = {
   formikKey: string;
-} & InputWithAdornmentProps;
+} & InputWithAdornmentProps &
+  Pick<FormikControlLayoutProps, 'label' | 'labelProps' | 'required'>;
 
-const FormikInputWithAdornment = ({ formikKey, ...props }: Props) => {
+const FormikInputWithAdornment = ({
+  formikKey,
+  label,
+  labelProps,
+  required,
+  ...props
+}: Props) => {
   const [field, meta] = useField(formikKey);
   const { error, touched } = meta;
 
   const hasError = touched && !isNil(error);
 
   return (
-    <FormikControlLayout touched={touched} error={error}>
+    <FormikControlLayout
+      touched={touched}
+      error={error}
+      label={label}
+      labelProps={labelProps}
+      required={required}
+    >
       <InputWithAdornment {...field} {...props} hasError={hasError} />
     </FormikControlLayout>
   );

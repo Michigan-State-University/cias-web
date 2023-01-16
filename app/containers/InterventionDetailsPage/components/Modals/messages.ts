@@ -1,4 +1,5 @@
 import { defineMessages } from 'react-intl';
+import { InterventionType } from '../../../../models/Intervention';
 
 export const scope = 'app.components.InterventionModals';
 
@@ -66,8 +67,7 @@ export default defineMessages({
   },
   interventionLinkDescription: {
     id: `${scope}.interventionLinkDescription`,
-    defaultMessage:
-      'This link direct user to the first session in this intervention',
+    defaultMessage: `This link directs user to the {interventionType, select, ${InterventionType.DEFAULT} {first session in this intervention} other {module home screen}}`,
   },
   copyLink: {
     id: `${scope}.copyLink`,
