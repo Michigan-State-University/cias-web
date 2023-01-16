@@ -288,6 +288,23 @@ const InterventionSettingsModal = ({ editingPossible, onClose }: Props) => {
     saveOtherSettingsAndLinks(formRef.current?.values);
   };
 
+  useEffect(() => {
+    if (
+      !savingChanges &&
+      !editInterventionError &&
+      !changeInterventionNarratorError &&
+      !editShortLinksError &&
+      formRef?.current?.dirty
+    ) {
+      onClose();
+    }
+  }, [
+    savingChanges,
+    editInterventionError,
+    changeInterventionNarratorError,
+    editShortLinksError,
+  ]);
+
   if (isFetchingShortLinks) {
     return <Loader type="inline" />;
   }
