@@ -92,8 +92,7 @@ export type Props = {
   onClose: () => void;
 };
 
-// TODO
-//  handle used links
+// TODO connect other controls with formik
 const InterventionSettingsModal = ({ editingPossible, onClose }: Props) => {
   const { formatMessage } = useIntl();
 
