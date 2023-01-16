@@ -1,9 +1,16 @@
-import React, { memo, useCallback, useEffect, useMemo, useState } from 'react';
+import React, {
+  memo,
+  useCallback,
+  useEffect,
+  useMemo,
+  useRef,
+  useState,
+} from 'react';
 import { useIntl } from 'react-intl';
 import { useDispatch, useSelector } from 'react-redux';
 import isEqual from 'lodash/isEqual';
 import * as Yup from 'yup';
-import { Form, Formik } from 'formik';
+import { Form, Formik, FormikProps } from 'formik';
 
 import BinIcon from 'assets/svg/bin-no-bg.svg';
 import CopyIcon from 'assets/svg/copy2.svg';
@@ -61,11 +68,8 @@ import {
 } from './constants';
 import messages from '../../messages';
 import modalMessages from './messages';
-
-type FormValues = {
-  selected?: boolean;
-  name?: string;
-};
+import { FormValues } from './types';
+import { mapShortLinks } from './utils';
 
 const createValidationSchema = (assignedToOrganization: boolean) => {
   if (assignedToOrganization) return null;
@@ -117,6 +121,8 @@ const InterventionSettingsModal = ({ editingPossible, onClose }: Props) => {
     [originalIntervention, changedIntervention],
   );
 
+  const formRef = useRef<FormikProps<FormValues>>(null);
+
   const onSaveNarrator = (
     replacementAnimations: Record<
       string,
@@ -134,6 +140,7 @@ const InterventionSettingsModal = ({ editingPossible, onClose }: Props) => {
           hasNarratorChanged: true,
           replacementAnimations,
           onSuccess: onClose,
+          ...mapShortLinks(formRef.current?.values, initialValues),
         },
       ),
     );
@@ -172,8 +179,6 @@ const InterventionSettingsModal = ({ editingPossible, onClose }: Props) => {
     });
   };
 
-  // const [shortLink, setShortLink] = useState<Nullable<ShortLinkData>>(null);
-
   const {
     error,
     isFetching,
@@ -209,7 +214,7 @@ const InterventionSettingsModal = ({ editingPossible, onClose }: Props) => {
   const prefix = `${process.env.WEB_URL}/int/`;
 
   const saveChanges = useCallback(
-    ({ name, selected }: FormValues) => {
+    (formValues: FormValues) => {
       if (
         changedIntervention.currentNarrator !==
         originalIntervention.currentNarrator
@@ -220,11 +225,6 @@ const InterventionSettingsModal = ({ editingPossible, onClose }: Props) => {
           originalIntervention,
           changedIntervention,
         );
-
-        const oldLinks = [{ name: initialValues.name }];
-        const newLinks = selected ? [{ name }] : [];
-        const hasLinksChanged = !isEqual(oldLinks, newLinks);
-
         dispatch(
           editInterventionRequest(
             {
@@ -233,8 +233,7 @@ const InterventionSettingsModal = ({ editingPossible, onClose }: Props) => {
             },
             {
               onSuccess: onClose,
-              hasLinksChanged,
-              shortLinks: hasLinksChanged ? newLinks : undefined,
+              ...mapShortLinks(formValues, initialValues),
             },
           ),
         );
@@ -328,6 +327,7 @@ const InterventionSettingsModal = ({ editingPossible, onClose }: Props) => {
         enableReinitialize
         onSubmit={saveChanges}
         validationSchema={validationSchema}
+        innerRef={formRef}
       >
         {({
           isValid,
