@@ -23,6 +23,7 @@ type Props = {
   labelPosition?: LabelPosition;
   labelOffset?: number;
   onToggle: (value: boolean, event: ChangeEvent<HTMLInputElement>) => void;
+  onBlur?: HTMLInputElement['onblur'];
 } & LayoutProps;
 
 const Switch = ({
@@ -34,6 +35,7 @@ const Switch = ({
   labelPosition = LabelPosition.Left,
   labelOffset,
   onToggle,
+  onBlur,
   ...props
 }: Props): JSX.Element => {
   const handleOnChange = (event: ChangeEvent<HTMLInputElement>) => {
@@ -53,6 +55,7 @@ const Switch = ({
         disabled={disabled}
         checked={checked}
         onChange={handleOnChange}
+        onBlur={onBlur}
       />
 
       <StyledLabel htmlFor={id}>

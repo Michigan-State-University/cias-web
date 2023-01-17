@@ -1,10 +1,16 @@
-import isEqual from 'lodash/isEqual';
-
 import { Organization } from 'models/Organization';
+import { Intervention } from 'models/Intervention';
+
+import { jsonApiToArray } from 'utils/jsonApiMapper';
+import { LanguageSelectOption } from 'utils/formatters';
 
 import { SelectOption } from 'components/Select/types';
 
-import { FormValues } from './types';
+import {
+  InterventionSettingsFormValues,
+  GetShortLinksResponse,
+  ShortLinksData,
+} from './types';
 
 export const organizationSelectOptionFormatter = ({
   id: value,
@@ -14,28 +20,39 @@ export const organizationSelectOptionFormatter = ({
   label,
 });
 
-export const mapShortLinks = (
-  formValues: Nullable<FormValues>,
-  initialValues: FormValues,
-) => {
-  if (!formValues) {
-    return {
-      hasLinksChanged: false,
-    };
-  }
+export const getShortLinksDataParser = (
+  data: GetShortLinksResponse,
+): ShortLinksData => ({
+  shortLinks: jsonApiToArray(data, 'shortLink'),
+  healthClinics: jsonApiToArray(
+    { data: data.health_clinics },
+    'simpleHealthClinic',
+  ),
+});
 
-  const hasLinksChanged = !isEqual(formValues, initialValues);
-  if (!hasLinksChanged) {
-    return {
-      hasLinksChanged: false,
-    };
-  }
-
-  const { name, selected } = formValues;
-  const newLinks = selected ? [{ name }] : [];
-
-  return {
-    hasLinksChanged,
-    shortLinks: hasLinksChanged ? newLinks : undefined,
-  };
+export const mapShortLinksToFormValues = (
+  shortLinksData: Nullable<ShortLinksData>,
+): InterventionSettingsFormValues['links'] => {
+  const name = shortLinksData?.shortLinks?.[0]?.name;
+  return { selected: !!name, name: name ?? '' };
 };
+
+export const mapFormValuesToShortLinks = (
+  links: InterventionSettingsFormValues['links'],
+) => {
+  const { name, selected } = links;
+  return selected ? [{ name }] : [];
+};
+
+export const mapLanguageToInterventionChanges = ({
+  value,
+  label,
+  googleLanguageId,
+}: LanguageSelectOption): Pick<
+  Intervention,
+  'languageCode' | 'languageName' | 'googleLanguageId'
+> => ({
+  languageCode: value,
+  languageName: label,
+  googleLanguageId: +googleLanguageId,
+});
