@@ -1,5 +1,6 @@
 import { defineMessages } from 'react-intl';
-import { InterventionType } from '../../../../models/Intervention';
+
+import { InterventionType } from 'models/Intervention';
 
 export const scope = 'app.components.InterventionModals';
 
