@@ -1,8 +1,14 @@
+import * as Yup from 'yup';
+
 import { Organization } from 'models/Organization';
 import { Intervention } from 'models/Intervention';
 
 import { jsonApiToArray } from 'utils/jsonApiMapper';
 import { LanguageSelectOption } from 'utils/formatters';
+import {
+  requiredValidationSchema,
+  unreservedURLCharactersSchema,
+} from 'utils/validators';
 
 import { SelectOption } from 'components/Select/types';
 
@@ -19,6 +25,21 @@ export const organizationSelectOptionFormatter = ({
   value,
   label,
 });
+
+export const createInterventionSettingsFormValidationSchema = (
+  assignedToOrganization: boolean,
+) => {
+  if (assignedToOrganization) return null;
+  return Yup.object().shape({
+    links: Yup.object({
+      selected: Yup.boolean(),
+      name: Yup.string().when('selected', {
+        is: (selected) => selected,
+        then: unreservedURLCharactersSchema.concat(requiredValidationSchema),
+      }),
+    }),
+  });
+};
 
 export const getShortLinksDataParser = (
   data: GetShortLinksResponse,
@@ -41,7 +62,7 @@ export const mapFormValuesToShortLinks = (
   links: InterventionSettingsFormValues['links'],
 ) => {
   const { name, selected } = links;
-  return selected ? [{ name }] : [];
+  return selected && name ? [{ name }] : [];
 };
 
 export const mapLanguageToInterventionChanges = ({

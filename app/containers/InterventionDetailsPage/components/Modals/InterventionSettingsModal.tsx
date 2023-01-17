@@ -9,7 +9,6 @@ import React, {
 import { useIntl } from 'react-intl';
 import { useDispatch, useSelector } from 'react-redux';
 import isEqual from 'lodash/isEqual';
-import * as Yup from 'yup';
 import { Form, Formik, FormikProps } from 'formik';
 
 import BinIcon from 'assets/svg/bin-no-bg.svg';
@@ -30,10 +29,6 @@ import {
 } from 'utils/formatters';
 import { objectDifference } from 'utils/objectDifference';
 import useGet from 'utils/useGet';
-import {
-  requiredValidationSchema,
-  unreservedURLCharactersSchema,
-} from 'utils/validators';
 
 import {
   changeInterventionNarratorRequest,
@@ -80,24 +75,12 @@ import {
   ShortLinksData,
 } from './types';
 import {
+  createInterventionSettingsFormValidationSchema,
   getShortLinksDataParser,
   mapFormValuesToShortLinks,
   mapLanguageToInterventionChanges,
   mapShortLinksToFormValues,
 } from './utils';
-
-const createValidationSchema = (assignedToOrganization: boolean) => {
-  if (assignedToOrganization) return null;
-  return Yup.object().shape({
-    links: Yup.object({
-      selected: Yup.boolean(),
-      name: Yup.string().when('selected', {
-        is: (selected) => selected,
-        then: unreservedURLCharactersSchema.concat(requiredValidationSchema),
-      }),
-    }),
-  });
-};
 
 export type Props = {
   editingPossible: boolean;
@@ -184,7 +167,8 @@ const InterventionSettingsModal = ({ editingPossible, onClose }: Props) => {
   );
 
   const validationSchema = useMemo(
-    () => createValidationSchema(Boolean(organizationId)),
+    () =>
+      createInterventionSettingsFormValidationSchema(Boolean(organizationId)),
     [organizationId],
   );
 
