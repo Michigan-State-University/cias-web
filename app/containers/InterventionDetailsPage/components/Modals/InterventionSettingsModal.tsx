@@ -128,6 +128,8 @@ const InterventionSettingsModal = ({ editingPossible, onClose }: Props) => {
     sessions,
     sessionsSize,
     googleLanguageId,
+    quickExit: initialQuickExit,
+    currentNarrator: initialCurrentNarrator,
   } = originalIntervention;
 
   const formRef = useRef<FormikProps<InterventionSettingsFormValues>>(null);
@@ -164,12 +166,19 @@ const InterventionSettingsModal = ({ editingPossible, onClose }: Props) => {
           label: languageName,
           googleLanguageId: googleLanguageId.toString(),
         },
-        quickExit: originalIntervention.quickExit,
+        quickExit: initialQuickExit,
       },
-      currentNarrator: originalIntervention.currentNarrator,
+      currentNarrator: initialCurrentNarrator,
       links: mapShortLinksToFormValues(shortLinksData),
     }),
-    [organizationId, shortLinksData],
+    [
+      shortLinksData,
+      languageCode,
+      languageName,
+      googleLanguageId,
+      initialQuickExit,
+      initialCurrentNarrator,
+    ],
   );
 
   const validationSchema = useMemo(
@@ -288,7 +297,6 @@ const InterventionSettingsModal = ({ editingPossible, onClose }: Props) => {
     <FullWidthContainer>
       <Formik
         initialValues={initialValues}
-        enableReinitialize
         onSubmit={submitForm}
         validationSchema={validationSchema}
         innerRef={formRef}
