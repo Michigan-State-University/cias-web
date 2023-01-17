@@ -4,6 +4,9 @@ import { toast } from 'react-toastify';
 
 import { formatMessage } from 'utils/intlOutsideReact';
 
+import { ApiError } from 'models/Api';
+import { ShortLinkValidationError } from 'models/ShortLink';
+
 import {
   EDIT_INTERVENTION_SUCCESS,
   EDIT_SHORT_LINKS_REQUEST,
@@ -41,7 +44,9 @@ function* editShortLinks({
     );
     yield put(editShortLinksSuccess());
   } catch (error) {
-    yield put(editShortLinksError(error));
+    yield put(
+      editShortLinksError(error as ApiError | ShortLinkValidationError),
+    );
   }
 }
 

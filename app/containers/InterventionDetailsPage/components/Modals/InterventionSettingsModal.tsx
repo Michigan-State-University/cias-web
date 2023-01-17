@@ -19,8 +19,9 @@ import { colors, themeColors } from 'theme';
 import { Intervention, InterventionType } from 'models/Intervention';
 import { CharacterType } from 'models/Character';
 import { NarratorAnimation } from 'models/Narrator';
-import { ApiDataCollection } from 'models/Api';
+import { ApiDataCollection, ApiError } from 'models/Api';
 import { Language } from 'models/Language';
+import { ShortLinkValidationError } from 'models/ShortLink';
 
 import { jsonApiToArray } from 'utils/jsonApiMapper';
 import {
@@ -114,9 +115,8 @@ const InterventionSettingsModal = ({ editingPossible, onClose }: Props) => {
   const changeInterventionNarratorError = useSelector(
     makeSelectInterventionError('changeInterventionNarrator'),
   );
-  const editShortLinksError = useSelector(
-    makeSelectInterventionError('editShortLinks'),
-  );
+  const editShortLinksError: Nullable<ApiError & ShortLinkValidationError> =
+    useSelector(makeSelectInterventionError('editShortLinks'));
 
   const [newNarrator, setNewNarrator] = useState<Nullable<CharacterType>>(null);
   const {
@@ -133,7 +133,13 @@ const InterventionSettingsModal = ({ editingPossible, onClose }: Props) => {
   const formRef = useRef<FormikProps<InterventionSettingsFormValues>>(null);
 
   useEffect(() => {
-    if (editShortLinksError && formRef.current) {
+    if (!formRef.current) return;
+
+    const takenNames =
+      editShortLinksError?.response?.data?.details?.taken_names;
+    if (!takenNames?.length) return;
+
+    if (takenNames.includes(formRef.current.values.links.name)) {
       formRef.current.setFieldError(
         'links.name',
         formatMessage(modalMessages.linkTaken),
