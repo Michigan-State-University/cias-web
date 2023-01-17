@@ -438,75 +438,68 @@ const InterventionSettingsModal = ({ editingPossible, onClose }: Props) => {
                     interventionType: type,
                   })}
                 </Text>
-                {() => {
-                  const copyDisabled = !selected && !placeholder;
-                  return (
-                    <GRow mt={24} gutterWidth={16}>
-                      <GCol xs={selected ? 10 : 8}>
-                        <FormikInputWithAdornment
-                          id={INTERVENTION_LINK_ID}
-                          formikKey="name"
-                          type={AdornmentType.PREFIX}
-                          adornment={selected ? prefix : ''}
-                          disabled={!selected}
-                          backgroundColor={
-                            !selected ? themeColors.highlight : undefined
-                          }
-                          opacity={!selected ? 1 : undefined}
-                          placeholder={selected ? '' : placeholder}
-                        />
-                      </GCol>
-                      <GCol xs={1}>
-                        <CopyToClipboard
-                          // @ts-ignore
-                          renderAsCustomComponent
-                          textToCopy={
-                            selected ? `${prefix}${name}` : placeholder
-                          }
-                          disabled={copyDisabled}
-                        >
-                          <ImageButton
-                            src={CopyIcon}
-                            title={formatMessage(modalMessages.copyLink)}
-                            fill={colors.heather}
-                            showHoverEffect
-                            noHoverBackground
-                            mt={8}
-                            disabled={copyDisabled}
-                          />
-                        </CopyToClipboard>
-                      </GCol>
-                      <GCol xs={selected ? 1 : 3}>
-                        {!selected && (
-                          <TextButton
-                            onClick={() => setFieldValue('selected', true)}
-                            buttonProps={{
-                              color: themeColors.secondary,
-                              mt: 11,
-                            }}
-                          >
-                            {formatMessage(modalMessages.createLink)}
-                          </TextButton>
-                        )}
-                        {selected && (
-                          <ImageButton
-                            src={BinIcon}
-                            onClick={() => {
-                              setFieldTouched('name', false, false);
-                              setFieldValue('name', '', false);
-                              setFieldValue('selected', false);
-                            }}
-                            title={formatMessage(modalMessages.removeLink)}
-                            fill={colors.heather}
-                            showHoverEffect
-                            noHoverBackground
-                            mt={8}
-                          />
-                        )}
-                      </GCol>
-                    </GRow>
-                  );
-                }}
+                <GRow mt={24} gutterWidth={16}>
+                  <GCol xs={selected ? 10 : 8}>
+                    <FormikInputWithAdornment
+                      id={INTERVENTION_LINK_ID}
+                      formikKey="name"
+                      type={AdornmentType.PREFIX}
+                      adornment={selected ? prefix : ''}
+                      disabled={!selected}
+                      backgroundColor={
+                        !selected ? themeColors.highlight : undefined
+                      }
+                      opacity={!selected ? 1 : undefined}
+                      placeholder={selected ? '' : placeholder}
+                    />
+                  </GCol>
+                  <GCol xs={1}>
+                    <CopyToClipboard
+                      // @ts-ignore
+                      renderAsCustomComponent
+                      textToCopy={selected ? `${prefix}${name}` : placeholder}
+                      disabled={!selected && !placeholder}
+                    >
+                      <ImageButton
+                        src={CopyIcon}
+                        title={formatMessage(modalMessages.copyLink)}
+                        fill={colors.heather}
+                        showHoverEffect
+                        noHoverBackground
+                        mt={8}
+                        disabled={!selected && !placeholder}
+                      />
+                    </CopyToClipboard>
+                  </GCol>
+                  <GCol xs={selected ? 1 : 3}>
+                    {!selected && (
+                      <TextButton
+                        onClick={() => setFieldValue('selected', true)}
+                        buttonProps={{
+                          color: themeColors.secondary,
+                          mt: 11,
+                        }}
+                      >
+                        {formatMessage(modalMessages.createLink)}
+                      </TextButton>
+                    )}
+                    {selected && (
+                      <ImageButton
+                        src={BinIcon}
+                        onClick={() => {
+                          setFieldTouched('name', false, false);
+                          setFieldValue('name', '', false);
+                          setFieldValue('selected', false);
+                        }}
+                        title={formatMessage(modalMessages.removeLink)}
+                        fill={colors.heather}
+                        showHoverEffect
+                        noHoverBackground
+                        mt={8}
+                      />
+                    )}
+                  </GCol>
+                </GRow>
               </>
             )}
             <Row gap={16} mt={56}>
