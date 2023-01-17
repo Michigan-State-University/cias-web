@@ -13,7 +13,8 @@ import {
   makeSelectInterventionInvites,
 } from 'global/reducers/intervention';
 
-import { Intervention, InterventionInvite } from 'models/Intervention';
+import { Intervention } from 'models/Intervention';
+import { InterventionInvite } from 'models/InterventionInvite';
 
 import Box from 'components/Box';
 import H2 from 'components/H2';
