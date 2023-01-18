@@ -14,7 +14,8 @@ export type InterventionSettingsFormValues = {
   links: {
     selected?: boolean;
     name?: string;
-  };
+    healthClinicId?: Nullable<string>;
+  }[];
 };
 
 export type GetShortLinksResponse = ApiDataCollection<ShortLink> & {

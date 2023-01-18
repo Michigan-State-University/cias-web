@@ -2,6 +2,7 @@ import * as Yup from 'yup';
 
 import { Organization } from 'models/Organization';
 import { Intervention } from 'models/Intervention';
+import { ShortLinkData } from 'models/ShortLink';
 
 import { jsonApiToArray } from 'utils/jsonApiMapper';
 import { LanguageSelectOption } from 'utils/formatters';
@@ -26,20 +27,20 @@ export const organizationSelectOptionFormatter = ({
   label,
 });
 
-export const createInterventionSettingsFormValidationSchema = (
-  assignedToOrganization: boolean,
-) => {
-  if (assignedToOrganization) return null;
-  return Yup.object().shape({
-    links: Yup.object({
-      selected: Yup.boolean(),
-      name: Yup.string().when('selected', {
-        is: (selected) => selected,
-        then: unreservedURLCharactersSchema.concat(requiredValidationSchema),
+// TODO validate duplicates
+export const createInterventionSettingsFormValidationSchema = () =>
+  Yup.object().shape({
+    links: Yup.array().of(
+      Yup.object({
+        selected: Yup.boolean(),
+        name: Yup.string().when('selected', {
+          is: (selected) => selected,
+          then: unreservedURLCharactersSchema.concat(requiredValidationSchema),
+        }),
+        healthClinicId: Yup.string(),
       }),
-    }),
+    ),
   });
-};
 
 export const getShortLinksDataParser = (
   data: GetShortLinksResponse,
@@ -53,17 +54,37 @@ export const getShortLinksDataParser = (
 
 export const mapShortLinksToFormValues = (
   shortLinksData: Nullable<ShortLinksData>,
+  inOrganization: boolean,
 ): InterventionSettingsFormValues['links'] => {
-  const name = shortLinksData?.shortLinks?.[0]?.name;
-  return { selected: !!name, name: name ?? '' };
+  if (!inOrganization) {
+    const links = shortLinksData?.shortLinks?.map(({ name }) => ({
+      selected: !!name,
+      name: name ?? '',
+    }));
+    return links?.length ? links : [{ selected: false, name: '' }];
+  }
+
+  return (
+    shortLinksData?.healthClinics?.map(({ id }) => {
+      const { name } =
+        shortLinksData?.shortLinks?.find(
+          ({ healthClinicId }) => healthClinicId === id,
+        ) ?? {};
+      return {
+        selected: !!name,
+        name: name ?? '',
+        healthClinicId: id,
+      };
+    }) ?? []
+  );
 };
 
 export const mapFormValuesToShortLinks = (
   links: InterventionSettingsFormValues['links'],
-) => {
-  const { name, selected } = links;
-  return selected && name ? [{ name }] : [];
-};
+): ShortLinkData[] =>
+  links
+    .filter(({ selected, name }) => selected && name)
+    .map(({ name, healthClinicId }) => ({ name: name!, healthClinicId }));
 
 export const mapLanguageToInterventionChanges = ({
   value,

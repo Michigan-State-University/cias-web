@@ -47,7 +47,7 @@ import {
   Row as GRow,
 } from 'components/ReactGridSystem';
 import ApiSelect from 'components/Select/ApiSelect';
-import Text from 'components/Text';
+import Text, { EllipsisText } from 'components/Text';
 import Divider from 'components/Divider';
 import H3 from 'components/H3';
 import { LabelPosition } from 'components/Switch';
@@ -132,6 +132,8 @@ const InterventionSettingsModal = ({ editingPossible, onClose }: Props) => {
     currentNarrator: initialCurrentNarrator,
   } = originalIntervention;
 
+  const inOrganization = Boolean(organizationId);
+
   const formRef = useRef<FormikProps<InterventionSettingsFormValues>>(null);
 
   useEffect(() => {
@@ -141,12 +143,14 @@ const InterventionSettingsModal = ({ editingPossible, onClose }: Props) => {
       editShortLinksError?.response?.data?.details?.taken_names;
     if (!takenNames?.length) return;
 
-    if (takenNames.includes(formRef.current.values.links.name)) {
-      formRef.current.setFieldError(
-        'links.name',
-        formatMessage(modalMessages.linkTaken),
-      );
-    }
+    formRef.current.values.links.forEach(({ name }, index) => {
+      if (name && takenNames.includes(name)) {
+        formRef.current!.setFieldError(
+          `links.${index}.name`,
+          formatMessage(modalMessages.linkTaken),
+        );
+      }
+    });
   }, [editShortLinksError]);
 
   const {
@@ -157,6 +161,11 @@ const InterventionSettingsModal = ({ editingPossible, onClose }: Props) => {
     `/v1/interventions/${id}/short_links`,
     getShortLinksDataParser,
   );
+
+  // const normalizedSimpleHealthClinics = useMemo(
+  //   () => normalizeArrayToObject(shortLinksData?.healthClinics ?? [], 'id'),
+  //   [shortLinksData?.healthClinics],
+  // );
 
   const initialValues: InterventionSettingsFormValues = useMemo(
     () => ({
@@ -169,9 +178,10 @@ const InterventionSettingsModal = ({ editingPossible, onClose }: Props) => {
         quickExit: initialQuickExit,
       },
       currentNarrator: initialCurrentNarrator,
-      links: mapShortLinksToFormValues(shortLinksData),
+      links: mapShortLinksToFormValues(shortLinksData, inOrganization),
     }),
     [
+      inOrganization,
       shortLinksData,
       languageCode,
       languageName,
@@ -181,12 +191,13 @@ const InterventionSettingsModal = ({ editingPossible, onClose }: Props) => {
     ],
   );
 
+  // extract out of component
   const validationSchema = useMemo(
-    () =>
-      createInterventionSettingsFormValidationSchema(Boolean(organizationId)),
-    [organizationId],
+    () => createInterventionSettingsFormValidationSchema(),
+    [],
   );
 
+  // TODO add cid to links
   const placeholder = useMemo(() => {
     const base = `${process.env.WEB_URL}/interventions/${id}`;
     if (type === InterventionType.DEFAULT) {
@@ -308,7 +319,7 @@ const InterventionSettingsModal = ({ editingPossible, onClose }: Props) => {
           setFieldTouched,
           handleSubmit,
           values: {
-            links: { selected, name },
+            links,
             currentNarrator,
             interventionSettings: { language, quickExit },
           },
@@ -409,82 +420,188 @@ const InterventionSettingsModal = ({ editingPossible, onClose }: Props) => {
                 )}
               </GCol>
             </GRow>
-            {!organizationId && (
-              <>
-                <H3 mt={40}>
-                  <label htmlFor={INTERVENTION_LINK_ID}>
-                    {formatMessage(modalMessages.interventionLinkHeader)}
-                  </label>
-                </H3>
-                <Text mt={8} textOpacity={0.7} color={themeColors.text}>
-                  {formatMessage(modalMessages.interventionLinkDescription, {
-                    interventionType: type,
-                  })}
-                </Text>
-                <GRow mt={24} gutterWidth={16}>
-                  <GCol xs={selected ? 10 : 8}>
-                    <FormikInputWithAdornment
-                      id={INTERVENTION_LINK_ID}
-                      formikKey="links.name"
-                      type={AdornmentType.PREFIX}
-                      adornment={selected ? prefix : ''}
-                      disabled={!selected}
-                      backgroundColor={
-                        !selected ? themeColors.highlight : undefined
-                      }
-                      opacity={!selected ? 1 : undefined}
-                      placeholder={selected ? '' : placeholder}
+            <H3 mt={40}>
+              <label htmlFor={INTERVENTION_LINK_ID}>
+                {formatMessage(modalMessages.interventionLinkHeader)}
+              </label>
+            </H3>
+            <Text mt={8} textOpacity={0.7} color={themeColors.text}>
+              {formatMessage(modalMessages.interventionLinkDescription, {
+                interventionType: type,
+              })}
+            </Text>
+            {!inOrganization && (
+              // TODO extract component
+              <GRow mt={24} gutterWidth={16}>
+                <GCol xs={links[0].selected ? 10 : 8}>
+                  <FormikInputWithAdornment
+                    id={INTERVENTION_LINK_ID}
+                    formikKey="links.0.name"
+                    type={AdornmentType.PREFIX}
+                    adornment={links[0].selected ? prefix : ''}
+                    disabled={!links[0].selected}
+                    backgroundColor={
+                      !links[0].selected ? themeColors.highlight : undefined
+                    }
+                    opacity={!links[0].selected ? 1 : undefined}
+                    placeholder={links[0].selected ? '' : placeholder}
+                  />
+                </GCol>
+                <GCol xs={1}>
+                  <CopyToClipboard
+                    // @ts-ignore
+                    renderAsCustomComponent
+                    textToCopy={
+                      links[0].selected
+                        ? `${prefix}${links[0].name}`
+                        : placeholder
+                    }
+                    disabled={!links[0].selected && !placeholder}
+                  >
+                    <ImageButton
+                      src={CopyIcon}
+                      title={formatMessage(modalMessages.copyLink)}
+                      fill={colors.heather}
+                      showHoverEffect
+                      noHoverBackground
+                      mt={8}
+                      disabled={!links[0].selected && !placeholder}
                     />
-                  </GCol>
-                  <GCol xs={1}>
-                    <CopyToClipboard
-                      // @ts-ignore
-                      renderAsCustomComponent
-                      textToCopy={selected ? `${prefix}${name}` : placeholder}
-                      disabled={!selected && !placeholder}
+                  </CopyToClipboard>
+                </GCol>
+                <GCol xs={links[0].selected ? 1 : 3}>
+                  {!links[0].selected && (
+                    <TextButton
+                      onClick={() => setFieldValue(`links.0.selected`, true)}
+                      buttonProps={{
+                        color: themeColors.secondary,
+                        mt: 11,
+                      }}
                     >
-                      <ImageButton
-                        src={CopyIcon}
-                        title={formatMessage(modalMessages.copyLink)}
-                        fill={colors.heather}
-                        showHoverEffect
-                        noHoverBackground
-                        mt={8}
-                        disabled={!selected && !placeholder}
-                      />
-                    </CopyToClipboard>
-                  </GCol>
-                  <GCol xs={selected ? 1 : 3}>
-                    {!selected && (
-                      <TextButton
-                        onClick={() => setFieldValue('links.selected', true)}
-                        buttonProps={{
-                          color: themeColors.secondary,
-                          mt: 11,
-                        }}
-                      >
-                        {formatMessage(modalMessages.createLink)}
-                      </TextButton>
-                    )}
-                    {selected && (
-                      <ImageButton
-                        src={BinIcon}
-                        onClick={() => {
-                          setFieldTouched('links.name', false, false);
-                          setFieldValue('links.name', '', false);
-                          setFieldValue('links.selected', false);
-                        }}
-                        title={formatMessage(modalMessages.removeLink)}
-                        fill={colors.heather}
-                        showHoverEffect
-                        noHoverBackground
-                        mt={8}
-                      />
-                    )}
-                  </GCol>
-                </GRow>
-              </>
+                      {formatMessage(modalMessages.createLink)}
+                    </TextButton>
+                  )}
+                  {links[0].selected && (
+                    <ImageButton
+                      src={BinIcon}
+                      onClick={() => {
+                        setFieldTouched(`links.0.name`, false, false);
+                        setFieldValue(`links.0.name`, '', false);
+                        setFieldValue(`links.0.selected`, false);
+                      }}
+                      title={formatMessage(modalMessages.removeLink)}
+                      fill={colors.heather}
+                      showHoverEffect
+                      noHoverBackground
+                      mt={8}
+                    />
+                  )}
+                </GCol>
+              </GRow>
             )}
+            {inOrganization &&
+              shortLinksData?.healthClinics?.map(
+                ({ id: healthClinicId, name: healthClinicName }) => {
+                  const clinicLinkIndex = links.findIndex(
+                    (link) => link.healthClinicId === healthClinicId,
+                  );
+                  if (clinicLinkIndex === -1) return;
+                  const { selected, name } = links[clinicLinkIndex];
+                  let inputColumnXs = 10;
+                  if (inOrganization) inputColumnXs -= 2;
+                  if (!selected) inputColumnXs -= 2;
+                  return (
+                    // TODO extract component
+                    <GRow mt={24} gutterWidth={16} key={healthClinicId}>
+                      {inOrganization && (
+                        <GCol xs={2}>
+                          <Row height={43} align="center">
+                            <EllipsisText text={healthClinicName} />
+                          </Row>
+                        </GCol>
+                      )}
+                      <GCol xs={inputColumnXs}>
+                        <FormikInputWithAdornment
+                          id={INTERVENTION_LINK_ID}
+                          formikKey={`links.${clinicLinkIndex}.name`}
+                          type={AdornmentType.PREFIX}
+                          adornment={selected ? prefix : ''}
+                          disabled={!selected}
+                          backgroundColor={
+                            !selected ? themeColors.highlight : undefined
+                          }
+                          opacity={!selected ? 1 : undefined}
+                          placeholder={selected ? '' : placeholder}
+                        />
+                      </GCol>
+                      <GCol xs={1}>
+                        <CopyToClipboard
+                          // @ts-ignore
+                          renderAsCustomComponent
+                          textToCopy={
+                            selected ? `${prefix}${name}` : placeholder
+                          }
+                          disabled={!selected && !placeholder}
+                        >
+                          <ImageButton
+                            src={CopyIcon}
+                            title={formatMessage(modalMessages.copyLink)}
+                            fill={colors.heather}
+                            showHoverEffect
+                            noHoverBackground
+                            mt={8}
+                            disabled={!selected && !placeholder}
+                          />
+                        </CopyToClipboard>
+                      </GCol>
+                      <GCol xs={selected ? 1 : 3}>
+                        {!selected && (
+                          <TextButton
+                            onClick={() =>
+                              setFieldValue(
+                                `links.${clinicLinkIndex}.selected`,
+                                true,
+                              )
+                            }
+                            buttonProps={{
+                              color: themeColors.secondary,
+                              mt: 11,
+                            }}
+                          >
+                            {formatMessage(modalMessages.createLink)}
+                          </TextButton>
+                        )}
+                        {selected && (
+                          <ImageButton
+                            src={BinIcon}
+                            onClick={() => {
+                              setFieldTouched(
+                                `links.${clinicLinkIndex}.name`,
+                                false,
+                                false,
+                              );
+                              setFieldValue(
+                                `links.${clinicLinkIndex}.name`,
+                                '',
+                                false,
+                              );
+                              setFieldValue(
+                                `links.${clinicLinkIndex}.selected`,
+                                false,
+                              );
+                            }}
+                            title={formatMessage(modalMessages.removeLink)}
+                            fill={colors.heather}
+                            showHoverEffect
+                            noHoverBackground
+                            mt={8}
+                          />
+                        )}
+                      </GCol>
+                    </GRow>
+                  );
+                },
+              )}
             <Row gap={16} mt={56}>
               <Button
                 // @ts-ignore

@@ -3,6 +3,7 @@ import { select, takeEvery, call, put } from '@redux-saga/core/effects';
 import { toast } from 'react-toastify';
 
 import { formatMessage } from 'utils/intlOutsideReact';
+import objectToSnakeCase from 'utils/objectToSnakeCase';
 
 import { ApiError } from 'models/Api';
 import { ShortLinkValidationError } from 'models/ShortLink';
@@ -31,7 +32,7 @@ function* editShortLinks({
 
   try {
     yield call(axios.post, requestURL, {
-      short_links: shortLinks,
+      short_links: objectToSnakeCase(shortLinks),
     });
     yield call(
       toast.success,
