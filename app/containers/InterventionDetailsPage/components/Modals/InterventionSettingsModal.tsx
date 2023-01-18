@@ -16,7 +16,7 @@ import CopyIcon from 'assets/svg/copy2.svg';
 
 import { colors, themeColors } from 'theme';
 
-import { Intervention, InterventionType } from 'models/Intervention';
+import { Intervention } from 'models/Intervention';
 import { CharacterType } from 'models/Character';
 import { NarratorAnimation } from 'models/Narrator';
 import { ApiDataCollection, ApiError } from 'models/Api';
@@ -77,6 +77,7 @@ import {
 } from './types';
 import {
   createInterventionSettingsFormValidationSchema,
+  getPlaceholderBase,
   getShortLinksDataParser,
   mapFormValuesToShortLinks,
   mapLanguageToInterventionChanges,
@@ -197,16 +198,10 @@ const InterventionSettingsModal = ({ editingPossible, onClose }: Props) => {
     [],
   );
 
-  // TODO add cid to links
-  const placeholder = useMemo(() => {
-    const base = `${process.env.WEB_URL}/interventions/${id}`;
-    if (type === InterventionType.DEFAULT) {
-      const firstSessionId = sessions?.[0]?.id;
-      if (!firstSessionId) return '';
-      return `${base}/sessions/${sessions[0].id}/fill`;
-    }
-    return `${base}/invite`;
-  }, [type, sessionsSize, sessions]);
+  const placeholderBase = useMemo(
+    () => getPlaceholderBase(id, type, sessions?.[0]?.id),
+    [type, sessionsSize, sessions?.[0]?.id],
+  );
 
   const prefix = `${process.env.WEB_URL}/int/`;
 
@@ -444,7 +439,7 @@ const InterventionSettingsModal = ({ editingPossible, onClose }: Props) => {
                       !links[0].selected ? themeColors.highlight : undefined
                     }
                     opacity={!links[0].selected ? 1 : undefined}
-                    placeholder={links[0].selected ? '' : placeholder}
+                    placeholder={links[0].selected ? '' : placeholderBase}
                   />
                 </GCol>
                 <GCol xs={1}>
@@ -454,9 +449,9 @@ const InterventionSettingsModal = ({ editingPossible, onClose }: Props) => {
                     textToCopy={
                       links[0].selected
                         ? `${prefix}${links[0].name}`
-                        : placeholder
+                        : placeholderBase
                     }
-                    disabled={!links[0].selected && !placeholder}
+                    disabled={!links[0].selected && !placeholderBase}
                   >
                     <ImageButton
                       src={CopyIcon}
@@ -465,7 +460,7 @@ const InterventionSettingsModal = ({ editingPossible, onClose }: Props) => {
                       showHoverEffect
                       noHoverBackground
                       mt={8}
-                      disabled={!links[0].selected && !placeholder}
+                      disabled={!links[0].selected && !placeholderBase}
                     />
                   </CopyToClipboard>
                 </GCol>
@@ -506,17 +501,25 @@ const InterventionSettingsModal = ({ editingPossible, onClose }: Props) => {
                     (link) => link.healthClinicId === healthClinicId,
                   );
                   if (clinicLinkIndex === -1) return;
+
                   const { selected, name } = links[clinicLinkIndex];
+
                   let inputColumnXs = 10;
                   if (inOrganization) inputColumnXs -= 2;
                   if (!selected) inputColumnXs -= 2;
+
+                  const placeholderWithCid = `${placeholderBase}?cid=${healthClinicId}`;
+
                   return (
                     // TODO extract component
                     <GRow mt={24} gutterWidth={16} key={healthClinicId}>
                       {inOrganization && (
                         <GCol xs={2}>
                           <Row height={43} align="center">
-                            <EllipsisText text={healthClinicName} />
+                            <EllipsisText
+                              text={healthClinicName}
+                              fontWeight="bold"
+                            />
                           </Row>
                         </GCol>
                       )}
@@ -531,7 +534,7 @@ const InterventionSettingsModal = ({ editingPossible, onClose }: Props) => {
                             !selected ? themeColors.highlight : undefined
                           }
                           opacity={!selected ? 1 : undefined}
-                          placeholder={selected ? '' : placeholder}
+                          placeholder={selected ? '' : placeholderWithCid}
                         />
                       </GCol>
                       <GCol xs={1}>
@@ -539,9 +542,9 @@ const InterventionSettingsModal = ({ editingPossible, onClose }: Props) => {
                           // @ts-ignore
                           renderAsCustomComponent
                           textToCopy={
-                            selected ? `${prefix}${name}` : placeholder
+                            selected ? `${prefix}${name}` : placeholderWithCid
                           }
-                          disabled={!selected && !placeholder}
+                          disabled={!selected && !placeholderBase}
                         >
                           <ImageButton
                             src={CopyIcon}
@@ -550,7 +553,7 @@ const InterventionSettingsModal = ({ editingPossible, onClose }: Props) => {
                             showHoverEffect
                             noHoverBackground
                             mt={8}
-                            disabled={!selected && !placeholder}
+                            disabled={!selected && !placeholderBase}
                           />
                         </CopyToClipboard>
                       </GCol>

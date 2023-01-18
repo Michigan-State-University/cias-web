@@ -1,7 +1,7 @@
 import * as Yup from 'yup';
 
 import { Organization } from 'models/Organization';
-import { Intervention } from 'models/Intervention';
+import { Intervention, InterventionType } from 'models/Intervention';
 import { ShortLinkData } from 'models/ShortLink';
 
 import { jsonApiToArray } from 'utils/jsonApiMapper';
@@ -98,3 +98,19 @@ export const mapLanguageToInterventionChanges = ({
   languageName: label,
   googleLanguageId: +googleLanguageId,
 });
+
+export const getPlaceholderBase = (
+  interventionId: string,
+  interventionType: InterventionType,
+  firstSessionId: Nullable<string>,
+) => {
+  const base = `${process.env.WEB_URL}/interventions/${interventionId}`;
+
+  switch (interventionType) {
+    case InterventionType.DEFAULT:
+      if (!firstSessionId) return '';
+      return `${base}/sessions/${firstSessionId}/fill`;
+    default:
+      return `${base}/invite`;
+  }
+};
