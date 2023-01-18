@@ -40,6 +40,7 @@ import {
   makeSelectInterventionLoader,
 } from 'global/reducers/intervention';
 import reducerMessages from 'global/reducers/intervention/messages';
+import globalMessages from 'global/i18n/globalMessages';
 
 import {
   Col as GCol,
@@ -68,8 +69,7 @@ import {
   INTERVENTION_LINK_ID,
   INTERVENTION_QUICK_EXIT_LABEL_ID,
 } from './constants';
-import messages from '../../messages';
-import modalMessages from './messages';
+import messages from './messages';
 import {
   InterventionSettingsFormValues,
   GetShortLinksResponse,
@@ -148,7 +148,7 @@ const InterventionSettingsModal = ({ editingPossible, onClose }: Props) => {
       if (name && takenNames.includes(name)) {
         formRef.current!.setFieldError(
           `links.${index}.name`,
-          formatMessage(modalMessages.linkTaken),
+          formatMessage(messages.linkTaken),
         );
       }
     });
@@ -417,11 +417,11 @@ const InterventionSettingsModal = ({ editingPossible, onClose }: Props) => {
             </GRow>
             <H3 mt={40}>
               <label htmlFor={INTERVENTION_LINK_ID}>
-                {formatMessage(modalMessages.interventionLinkHeader)}
+                {formatMessage(messages.interventionLinkHeader)}
               </label>
             </H3>
             <Text mt={8} textOpacity={0.7} color={themeColors.text}>
-              {formatMessage(modalMessages.interventionLinkDescription, {
+              {formatMessage(messages.interventionLinkDescription, {
                 interventionType: type,
               })}
             </Text>
@@ -455,7 +455,7 @@ const InterventionSettingsModal = ({ editingPossible, onClose }: Props) => {
                   >
                     <ImageButton
                       src={CopyIcon}
-                      title={formatMessage(modalMessages.copyLink)}
+                      title={formatMessage(messages.copyLink)}
                       fill={colors.heather}
                       showHoverEffect
                       noHoverBackground
@@ -473,7 +473,7 @@ const InterventionSettingsModal = ({ editingPossible, onClose }: Props) => {
                         mt: 11,
                       }}
                     >
-                      {formatMessage(modalMessages.createLink)}
+                      {formatMessage(messages.createLink)}
                     </TextButton>
                   )}
                   {links[0].selected && (
@@ -484,7 +484,7 @@ const InterventionSettingsModal = ({ editingPossible, onClose }: Props) => {
                         setFieldValue(`links.0.name`, '', false);
                         setFieldValue(`links.0.selected`, false);
                       }}
-                      title={formatMessage(modalMessages.removeLink)}
+                      title={formatMessage(messages.removeLink)}
                       fill={colors.heather}
                       showHoverEffect
                       noHoverBackground
@@ -548,7 +548,7 @@ const InterventionSettingsModal = ({ editingPossible, onClose }: Props) => {
                         >
                           <ImageButton
                             src={CopyIcon}
-                            title={formatMessage(modalMessages.copyLink)}
+                            title={formatMessage(messages.copyLink)}
                             fill={colors.heather}
                             showHoverEffect
                             noHoverBackground
@@ -571,7 +571,7 @@ const InterventionSettingsModal = ({ editingPossible, onClose }: Props) => {
                               mt: 11,
                             }}
                           >
-                            {formatMessage(modalMessages.createLink)}
+                            {formatMessage(messages.createLink)}
                           </TextButton>
                         )}
                         {selected && (
@@ -593,7 +593,7 @@ const InterventionSettingsModal = ({ editingPossible, onClose }: Props) => {
                                 false,
                               );
                             }}
-                            title={formatMessage(modalMessages.removeLink)}
+                            title={formatMessage(messages.removeLink)}
                             fill={colors.heather}
                             showHoverEffect
                             noHoverBackground
@@ -621,7 +621,7 @@ const InterventionSettingsModal = ({ editingPossible, onClose }: Props) => {
                 px={30}
                 width="auto"
                 inverted
-                title={formatMessage(messages.cancelButton)}
+                title={formatMessage(globalMessages.cancel)}
                 onClick={onClose}
               />
             </Row>

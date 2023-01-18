@@ -9,6 +9,7 @@ import {
   makeSelectInterventionLoader,
 } from 'global/reducers/intervention';
 import { makeSelectOrganizations } from 'global/reducers/organizations';
+import globalMessages from 'global/i18n/globalMessages';
 
 import { Col, FullWidthContainer, Row } from 'components/ReactGridSystem';
 import ApiSelect from 'components/Select/ApiSelect';
@@ -16,7 +17,7 @@ import Text from 'components/Text';
 import Button from 'components/Button';
 
 import { organizationSelectOptionFormatter } from './utils';
-import messages from '../../messages';
+import messages from './messages';
 import { CHOOSE_ORGANIZATION_LABEL_ID } from './constants';
 
 const InterventionAssignOrganizationModal = ({
@@ -112,7 +113,7 @@ const InterventionAssignOrganizationModal = ({
             disabled={!canSave}
             loading={editInterventionLoader}
           >
-            {formatMessage(messages.saveButton)}
+            {formatMessage(globalMessages.save)}
           </Button>
         </Col>
       </Row>

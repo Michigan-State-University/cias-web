@@ -1,8 +1,6 @@
 import { defineMessages } from 'react-intl';
 
-import { InterventionType } from 'models/Intervention';
-
-export const scope = 'app.components.InterventionModals';
+export const scope = 'app.components.InterventionModals.CatMhAccessModal';
 
 export default defineMessages({
   modalHeader: {
@@ -57,33 +55,5 @@ export default defineMessages({
   numberPlaceholder: {
     id: `${scope}.numberPlaceholder`,
     defaultMessage: 'e.g. 123456789',
-  },
-  saveButton: {
-    id: `${scope}.saveButton`,
-    defaultMessage: 'Save changes',
-  },
-  interventionLinkHeader: {
-    id: `${scope}.interventionLinkHeader`,
-    defaultMessage: 'Intervention Link',
-  },
-  interventionLinkDescription: {
-    id: `${scope}.interventionLinkDescription`,
-    defaultMessage: `This link directs user to the {interventionType, select, ${InterventionType.DEFAULT} {first session in this intervention} other {module home screen}}`,
-  },
-  copyLink: {
-    id: `${scope}.copyLink`,
-    defaultMessage: 'Copy link',
-  },
-  createLink: {
-    id: `${scope}.createLink`,
-    defaultMessage: 'Create custom link',
-  },
-  removeLink: {
-    id: `${scope}.removeLink`,
-    defaultMessage: 'Remove custom link',
-  },
-  linkTaken: {
-    id: `${scope}.linkTaken`,
-    defaultMessage: 'This intervention link is already taken',
   },
 });

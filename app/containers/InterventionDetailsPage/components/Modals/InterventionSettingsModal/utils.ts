@@ -1,6 +1,5 @@
 import * as Yup from 'yup';
 
-import { Organization } from 'models/Organization';
 import { Intervention, InterventionType } from 'models/Intervention';
 import { ShortLinkData } from 'models/ShortLink';
 
@@ -11,21 +10,11 @@ import {
   unreservedURLCharactersSchema,
 } from 'utils/validators';
 
-import { SelectOption } from 'components/Select/types';
-
 import {
   InterventionSettingsFormValues,
   GetShortLinksResponse,
   ShortLinksData,
 } from './types';
-
-export const organizationSelectOptionFormatter = ({
-  id: value,
-  name: label,
-}: Organization): SelectOption<string> => ({
-  value,
-  label,
-});
 
 // TODO validate duplicates
 export const createInterventionSettingsFormValidationSchema = () =>
