@@ -4,3 +4,5 @@ export const INTERVENTION_LANGUAGE_LABEL_ID =
 export const INTERVENTION_QUICK_EXIT_LABEL_ID = 'switch-label-quick-exit';
 
 export const INTERVENTION_LINK_ID = 'intervention-custom-link';
+
+export const CUSTOM_LINK_PREFIX = `${process.env.WEB_URL}/int/`;

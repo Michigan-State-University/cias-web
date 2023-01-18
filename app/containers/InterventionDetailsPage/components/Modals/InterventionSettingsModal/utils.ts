@@ -17,19 +17,18 @@ import {
 } from './types';
 
 // TODO validate duplicates
-export const createInterventionSettingsFormValidationSchema = () =>
-  Yup.object().shape({
-    links: Yup.array().of(
-      Yup.object({
-        selected: Yup.boolean(),
-        name: Yup.string().when('selected', {
-          is: (selected) => selected,
-          then: unreservedURLCharactersSchema.concat(requiredValidationSchema),
-        }),
-        healthClinicId: Yup.string(),
+export const InterventionSettingsFormValidationSchema = Yup.object().shape({
+  links: Yup.array().of(
+    Yup.object({
+      selected: Yup.boolean(),
+      name: Yup.string().when('selected', {
+        is: (selected) => selected,
+        then: unreservedURLCharactersSchema.concat(requiredValidationSchema),
       }),
-    ),
-  });
+      healthClinicId: Yup.string(),
+    }),
+  ),
+});
 
 export const getShortLinksDataParser = (
   data: GetShortLinksResponse,

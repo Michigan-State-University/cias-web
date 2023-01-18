@@ -11,9 +11,6 @@ import { useDispatch, useSelector } from 'react-redux';
 import isEqual from 'lodash/isEqual';
 import { Form, Formik, FormikProps } from 'formik';
 
-import BinIcon from 'assets/svg/bin-no-bg.svg';
-import CopyIcon from 'assets/svg/copy2.svg';
-
 import { colors, themeColors } from 'theme';
 
 import { Intervention } from 'models/Intervention';
@@ -48,21 +45,17 @@ import {
   Row as GRow,
 } from 'components/ReactGridSystem';
 import ApiSelect from 'components/Select/ApiSelect';
-import Text, { EllipsisText } from 'components/Text';
+import Text from 'components/Text';
 import Divider from 'components/Divider';
 import H3 from 'components/H3';
 import { LabelPosition } from 'components/Switch';
 import Switch from 'components/Switch/Switch';
-import Button, { ImageButton, TextButton } from 'components/Button';
+import Button from 'components/Button';
 import Row from 'components/Row';
 import CharacterSelector from 'components/CharacterSelector';
 import { GlobalReplacementModal } from 'components/MissingAnimationsModal';
-import FormikInputWithAdornment, {
-  AdornmentType,
-} from 'components/FormikInputWithAdornment';
 import Loader from 'components/Loader';
 import ErrorAlert from 'components/ErrorAlert';
-import CopyToClipboard from 'components/CopyToClipboard';
 
 import {
   INTERVENTION_LANGUAGE_LABEL_ID,
@@ -76,13 +69,14 @@ import {
   ShortLinksData,
 } from './types';
 import {
-  createInterventionSettingsFormValidationSchema,
+  InterventionSettingsFormValidationSchema,
   getPlaceholderBase,
   getShortLinksDataParser,
   mapFormValuesToShortLinks,
   mapLanguageToInterventionChanges,
   mapShortLinksToFormValues,
 } from './utils';
+import ShortLinkItem from './ShortLinkItem';
 
 export type Props = {
   editingPossible: boolean;
@@ -163,11 +157,6 @@ const InterventionSettingsModal = ({ editingPossible, onClose }: Props) => {
     getShortLinksDataParser,
   );
 
-  // const normalizedSimpleHealthClinics = useMemo(
-  //   () => normalizeArrayToObject(shortLinksData?.healthClinics ?? [], 'id'),
-  //   [shortLinksData?.healthClinics],
-  // );
-
   const initialValues: InterventionSettingsFormValues = useMemo(
     () => ({
       interventionSettings: {
@@ -192,18 +181,10 @@ const InterventionSettingsModal = ({ editingPossible, onClose }: Props) => {
     ],
   );
 
-  // extract out of component
-  const validationSchema = useMemo(
-    () => createInterventionSettingsFormValidationSchema(),
-    [],
-  );
-
   const placeholderBase = useMemo(
     () => getPlaceholderBase(id, type, sessions?.[0]?.id),
     [type, sessionsSize, sessions?.[0]?.id],
   );
-
-  const prefix = `${process.env.WEB_URL}/int/`;
 
   const saveOtherSettingsAndLinks = useCallback(
     (formValues: Nullable<InterventionSettingsFormValues>) => {
@@ -304,7 +285,7 @@ const InterventionSettingsModal = ({ editingPossible, onClose }: Props) => {
       <Formik
         initialValues={initialValues}
         onSubmit={submitForm}
-        validationSchema={validationSchema}
+        validationSchema={InterventionSettingsFormValidationSchema}
         innerRef={formRef}
       >
         {({
@@ -314,7 +295,6 @@ const InterventionSettingsModal = ({ editingPossible, onClose }: Props) => {
           setFieldTouched,
           handleSubmit,
           values: {
-            links,
             currentNarrator,
             interventionSettings: { language, quickExit },
           },
@@ -426,185 +406,22 @@ const InterventionSettingsModal = ({ editingPossible, onClose }: Props) => {
               })}
             </Text>
             {!inOrganization && (
-              // TODO extract component
-              <GRow mt={24} gutterWidth={16}>
-                <GCol xs={links[0].selected ? 10 : 8}>
-                  <FormikInputWithAdornment
-                    id={INTERVENTION_LINK_ID}
-                    formikKey="links.0.name"
-                    type={AdornmentType.PREFIX}
-                    adornment={links[0].selected ? prefix : ''}
-                    disabled={!links[0].selected}
-                    backgroundColor={
-                      !links[0].selected ? themeColors.highlight : undefined
-                    }
-                    opacity={!links[0].selected ? 1 : undefined}
-                    placeholder={links[0].selected ? '' : placeholderBase}
-                  />
-                </GCol>
-                <GCol xs={1}>
-                  <CopyToClipboard
-                    // @ts-ignore
-                    renderAsCustomComponent
-                    textToCopy={
-                      links[0].selected
-                        ? `${prefix}${links[0].name}`
-                        : placeholderBase
-                    }
-                    disabled={!links[0].selected && !placeholderBase}
-                  >
-                    <ImageButton
-                      src={CopyIcon}
-                      title={formatMessage(messages.copyLink)}
-                      fill={colors.heather}
-                      showHoverEffect
-                      noHoverBackground
-                      mt={8}
-                      disabled={!links[0].selected && !placeholderBase}
-                    />
-                  </CopyToClipboard>
-                </GCol>
-                <GCol xs={links[0].selected ? 1 : 3}>
-                  {!links[0].selected && (
-                    <TextButton
-                      onClick={() => setFieldValue(`links.0.selected`, true)}
-                      buttonProps={{
-                        color: themeColors.secondary,
-                        mt: 11,
-                      }}
-                    >
-                      {formatMessage(messages.createLink)}
-                    </TextButton>
-                  )}
-                  {links[0].selected && (
-                    <ImageButton
-                      src={BinIcon}
-                      onClick={() => {
-                        setFieldTouched(`links.0.name`, false, false);
-                        setFieldValue(`links.0.name`, '', false);
-                        setFieldValue(`links.0.selected`, false);
-                      }}
-                      title={formatMessage(messages.removeLink)}
-                      fill={colors.heather}
-                      showHoverEffect
-                      noHoverBackground
-                      mt={8}
-                    />
-                  )}
-                </GCol>
-              </GRow>
+              <ShortLinkItem
+                nameFormikKey="links.0.name"
+                selectedFormikKey="links.0.selected"
+                placeholderBase={placeholderBase}
+              />
             )}
             {inOrganization &&
-              shortLinksData?.healthClinics?.map(
-                ({ id: healthClinicId, name: healthClinicName }) => {
-                  const clinicLinkIndex = links.findIndex(
-                    (link) => link.healthClinicId === healthClinicId,
-                  );
-                  if (clinicLinkIndex === -1) return;
-
-                  const { selected, name } = links[clinicLinkIndex];
-
-                  let inputColumnXs = 10;
-                  if (inOrganization) inputColumnXs -= 2;
-                  if (!selected) inputColumnXs -= 2;
-
-                  const placeholderWithCid = `${placeholderBase}?cid=${healthClinicId}`;
-
-                  return (
-                    // TODO extract component
-                    <GRow mt={24} gutterWidth={16} key={healthClinicId}>
-                      {inOrganization && (
-                        <GCol xs={2}>
-                          <Row height={43} align="center">
-                            <EllipsisText
-                              text={healthClinicName}
-                              fontWeight="bold"
-                            />
-                          </Row>
-                        </GCol>
-                      )}
-                      <GCol xs={inputColumnXs}>
-                        <FormikInputWithAdornment
-                          id={INTERVENTION_LINK_ID}
-                          formikKey={`links.${clinicLinkIndex}.name`}
-                          type={AdornmentType.PREFIX}
-                          adornment={selected ? prefix : ''}
-                          disabled={!selected}
-                          backgroundColor={
-                            !selected ? themeColors.highlight : undefined
-                          }
-                          opacity={!selected ? 1 : undefined}
-                          placeholder={selected ? '' : placeholderWithCid}
-                        />
-                      </GCol>
-                      <GCol xs={1}>
-                        <CopyToClipboard
-                          // @ts-ignore
-                          renderAsCustomComponent
-                          textToCopy={
-                            selected ? `${prefix}${name}` : placeholderWithCid
-                          }
-                          disabled={!selected && !placeholderBase}
-                        >
-                          <ImageButton
-                            src={CopyIcon}
-                            title={formatMessage(messages.copyLink)}
-                            fill={colors.heather}
-                            showHoverEffect
-                            noHoverBackground
-                            mt={8}
-                            disabled={!selected && !placeholderBase}
-                          />
-                        </CopyToClipboard>
-                      </GCol>
-                      <GCol xs={selected ? 1 : 3}>
-                        {!selected && (
-                          <TextButton
-                            onClick={() =>
-                              setFieldValue(
-                                `links.${clinicLinkIndex}.selected`,
-                                true,
-                              )
-                            }
-                            buttonProps={{
-                              color: themeColors.secondary,
-                              mt: 11,
-                            }}
-                          >
-                            {formatMessage(messages.createLink)}
-                          </TextButton>
-                        )}
-                        {selected && (
-                          <ImageButton
-                            src={BinIcon}
-                            onClick={() => {
-                              setFieldTouched(
-                                `links.${clinicLinkIndex}.name`,
-                                false,
-                                false,
-                              );
-                              setFieldValue(
-                                `links.${clinicLinkIndex}.name`,
-                                '',
-                                false,
-                              );
-                              setFieldValue(
-                                `links.${clinicLinkIndex}.selected`,
-                                false,
-                              );
-                            }}
-                            title={formatMessage(messages.removeLink)}
-                            fill={colors.heather}
-                            showHoverEffect
-                            noHoverBackground
-                            mt={8}
-                          />
-                        )}
-                      </GCol>
-                    </GRow>
-                  );
-                },
-              )}
+              shortLinksData?.healthClinics?.map((healthClinic, index) => (
+                <ShortLinkItem
+                  key={healthClinic.id}
+                  nameFormikKey={`links.${index}.name`}
+                  selectedFormikKey={`links.${index}.selected`}
+                  placeholderBase={placeholderBase}
+                  healthClinic={healthClinic}
+                />
+              ))}
             <Row gap={16} mt={56}>
               <Button
                 // @ts-ignore
