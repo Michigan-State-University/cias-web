@@ -28,7 +28,7 @@ export default defineMessages({
   },
   interventionLinkHeader: {
     id: `${scope}.interventionLinkHeader`,
-    defaultMessage: 'Intervention Link',
+    defaultMessage: 'Custom Intervention Link',
   },
   interventionLinkDescription: {
     id: `${scope}.interventionLinkDescription`,
