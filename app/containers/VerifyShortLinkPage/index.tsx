@@ -61,6 +61,7 @@ const VerifyShortLinkPage = () => {
         break;
       }
       default: {
+        redirectToNotFoundPage();
         return;
       }
     }
