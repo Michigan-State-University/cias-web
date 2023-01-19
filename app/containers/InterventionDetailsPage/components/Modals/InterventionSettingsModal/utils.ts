@@ -1,4 +1,7 @@
 import * as Yup from 'yup';
+import get from 'lodash/get';
+import countBy from 'lodash/countBy';
+import isNil from 'lodash/isNil';
 
 import { Intervention, InterventionType } from 'models/Intervention';
 import { ShortLinkData } from 'models/ShortLink';
@@ -9,6 +12,7 @@ import {
   requiredValidationSchema,
   unreservedURLCharactersSchema,
 } from 'utils/validators';
+import { formatMessage } from 'utils/intlOutsideReact';
 
 import {
   InterventionSettingsFormValues,
@@ -16,19 +20,56 @@ import {
   ShortLinksData,
 } from './types';
 
-// TODO validate duplicates
-export const InterventionSettingsFormValidationSchema = Yup.object().shape({
-  links: Yup.array().of(
-    Yup.object({
-      selected: Yup.boolean(),
-      name: Yup.string().when('selected', {
-        is: (selected) => selected,
-        then: unreservedURLCharactersSchema.concat(requiredValidationSchema),
-      }),
-      healthClinicId: Yup.string(),
-    }),
-  ),
-});
+import messages from './messages';
+
+// TODO refactor
+export const createInterventionSettingsFormValidationSchema = () => {
+  Yup.addMethod(Yup.array, 'unique', function (message, path) {
+    return (this as any).test('unique', message, function (list: unknown[]) {
+      const counts = countBy(list, path);
+      const errors: Yup.ValidationError[] = [];
+
+      list.forEach((item, index) => {
+        const value = get(item, path);
+        const count = counts[value];
+        if (!value) return;
+        if (!isNil(count) && count > 1) {
+          errors.push(
+            new Yup.ValidationError(
+              message,
+              value,
+              // @ts-ignore
+              `${this.path}.${index}.${path}`,
+            ),
+          );
+        }
+      });
+
+      console.log(errors);
+
+      // @ts-ignore
+      return errors.length ? new Yup.ValidationError(errors) : true;
+    });
+  });
+
+  return Yup.object().shape({
+    links: Yup.array()
+      .of(
+        Yup.object({
+          selected: Yup.boolean(),
+          name: Yup.string().when('selected', {
+            is: (selected) => selected,
+            then: unreservedURLCharactersSchema.concat(
+              requiredValidationSchema,
+            ),
+          }),
+          healthClinicId: Yup.string(),
+        }),
+      )
+      // @ts-ignore
+      .unique(formatMessage(messages.linkMustBeUnique), 'name'),
+  });
+};
 
 export const getShortLinksDataParser = (
   data: GetShortLinksResponse,
@@ -74,7 +115,7 @@ export const mapFormValuesToShortLinks = (
     .filter(({ selected, name }) => selected && name)
     .map(({ name, healthClinicId }) => ({ name: name!, healthClinicId }));
 
-export const mapLanguageToInterventionChanges = ({
+export const mapLanguageSelectOptionToInterventionChanges = ({
   value,
   label,
   googleLanguageId,

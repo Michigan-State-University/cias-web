@@ -56,10 +56,10 @@ import CharacterSelector from 'components/CharacterSelector';
 import { GlobalReplacementModal } from 'components/MissingAnimationsModal';
 import Loader from 'components/Loader';
 import ErrorAlert from 'components/ErrorAlert';
+import Column from 'components/Column';
 
 import {
   INTERVENTION_LANGUAGE_LABEL_ID,
-  INTERVENTION_LINK_ID,
   INTERVENTION_QUICK_EXIT_LABEL_ID,
 } from './constants';
 import messages from './messages';
@@ -69,11 +69,11 @@ import {
   ShortLinksData,
 } from './types';
 import {
-  InterventionSettingsFormValidationSchema,
+  createInterventionSettingsFormValidationSchema,
   getPlaceholderBase,
   getShortLinksDataParser,
   mapFormValuesToShortLinks,
-  mapLanguageToInterventionChanges,
+  mapLanguageSelectOptionToInterventionChanges,
   mapShortLinksToFormValues,
 } from './utils';
 import ShortLinkItem from './ShortLinkItem';
@@ -157,6 +157,10 @@ const InterventionSettingsModal = ({ editingPossible, onClose }: Props) => {
     getShortLinksDataParser,
   );
 
+  const { current: validationSchema } = useRef(
+    createInterventionSettingsFormValidationSchema(),
+  );
+
   const initialValues: InterventionSettingsFormValues = useMemo(
     () => ({
       interventionSettings: {
@@ -209,7 +213,9 @@ const InterventionSettingsModal = ({ editingPossible, onClose }: Props) => {
         dispatch(
           editInterventionRequest(
             {
-              ...(language ? mapLanguageToInterventionChanges(language) : {}),
+              ...(language
+                ? mapLanguageSelectOptionToInterventionChanges(language)
+                : {}),
               ...otherChanges,
               id,
             },
@@ -285,7 +291,7 @@ const InterventionSettingsModal = ({ editingPossible, onClose }: Props) => {
       <Formik
         initialValues={initialValues}
         onSubmit={submitForm}
-        validationSchema={InterventionSettingsFormValidationSchema}
+        validationSchema={validationSchema}
         innerRef={formRef}
       >
         {({
@@ -395,33 +401,31 @@ const InterventionSettingsModal = ({ editingPossible, onClose }: Props) => {
                 )}
               </GCol>
             </GRow>
-            <H3 mt={40}>
-              <label htmlFor={INTERVENTION_LINK_ID}>
-                {formatMessage(messages.interventionLinkHeader)}
-              </label>
-            </H3>
-            <Text mt={8} textOpacity={0.7} color={themeColors.text}>
+            <H3 mt={40}>{formatMessage(messages.interventionLinkHeader)}</H3>
+            <Text mt={8} textOpacity={0.7} color={themeColors.text} mb={24}>
               {formatMessage(messages.interventionLinkDescription, {
                 interventionType: type,
               })}
             </Text>
-            {!inOrganization && (
-              <ShortLinkItem
-                nameFormikKey="links.0.name"
-                selectedFormikKey="links.0.selected"
-                placeholderBase={placeholderBase}
-              />
-            )}
-            {inOrganization &&
-              shortLinksData?.healthClinics?.map((healthClinic, index) => (
+            <Column gap={24} maxHeight={224} overflow="auto">
+              {!inOrganization && (
                 <ShortLinkItem
-                  key={healthClinic.id}
-                  nameFormikKey={`links.${index}.name`}
-                  selectedFormikKey={`links.${index}.selected`}
+                  nameFormikKey="links.0.name"
+                  selectedFormikKey="links.0.selected"
                   placeholderBase={placeholderBase}
-                  healthClinic={healthClinic}
                 />
-              ))}
+              )}
+              {inOrganization &&
+                shortLinksData?.healthClinics?.map((healthClinic, index) => (
+                  <ShortLinkItem
+                    key={healthClinic.id}
+                    nameFormikKey={`links.${index}.name`}
+                    selectedFormikKey={`links.${index}.selected`}
+                    placeholderBase={placeholderBase}
+                    healthClinic={healthClinic}
+                  />
+                ))}
+            </Column>
             <Row gap={16} mt={56}>
               <Button
                 // @ts-ignore

@@ -16,30 +16,32 @@ export type Props = {
 } & InputWithAdornmentProps &
   Pick<FormikControlLayoutProps, 'label' | 'labelProps' | 'required'>;
 
-const FormikInputWithAdornment = ({
-  formikKey,
-  label,
-  labelProps,
-  required,
-  ...props
-}: Props) => {
-  const [field, meta] = useField(formikKey);
-  const { error, touched } = meta;
+const FormikInputWithAdornment = React.forwardRef<HTMLInputElement, Props>(
+  // eslint-disable-next-line react/prop-types
+  ({ formikKey, label, labelProps, required, ...props }, ref) => {
+    const [field, meta] = useField(formikKey);
+    const { error, touched } = meta;
 
-  const hasError = touched && !isNil(error);
+    const hasError = touched && !isNil(error);
 
-  return (
-    <FormikControlLayout
-      touched={touched}
-      error={error}
-      label={label}
-      labelProps={labelProps}
-      required={required}
-    >
-      <InputWithAdornment {...field} {...props} hasError={hasError} />
-    </FormikControlLayout>
-  );
-};
+    return (
+      <FormikControlLayout
+        touched={touched}
+        error={error}
+        label={label}
+        labelProps={labelProps}
+        required={required}
+      >
+        <InputWithAdornment
+          {...field}
+          {...props}
+          hasError={hasError}
+          ref={ref}
+        />
+      </FormikControlLayout>
+    );
+  },
+);
 
 export default FormikInputWithAdornment;
 export { AdornmentType };

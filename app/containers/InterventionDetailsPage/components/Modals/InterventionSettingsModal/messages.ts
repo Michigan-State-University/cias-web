@@ -54,4 +54,8 @@ export default defineMessages({
     id: `${scope}.linkTaken`,
     defaultMessage: 'This intervention link is already taken',
   },
+  linkMustBeUnique: {
+    id: `${scope}.linkMustBeUnique`,
+    defaultMessage: 'Each intervention link must be unique',
+  },
 });

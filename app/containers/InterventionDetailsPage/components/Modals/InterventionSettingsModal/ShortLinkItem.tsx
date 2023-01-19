@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useRef } from 'react';
 import { useIntl } from 'react-intl';
 import { useField } from 'formik';
 
@@ -9,6 +9,8 @@ import { colors, themeColors } from 'theme';
 
 import { SimpleHealthClinic } from 'models/HealthClinic';
 
+import useDidUpdateEffect from 'utils/useDidUpdateEffect';
+
 import { Col as GCol, Row as GRow } from 'components/ReactGridSystem';
 import { EllipsisText } from 'components/Text';
 import { ImageButton, TextButton } from 'components/Button';
@@ -18,7 +20,7 @@ import FormikInputWithAdornment, {
 } from 'components/FormikInputWithAdornment';
 import CopyToClipboard from 'components/CopyToClipboard';
 
-import { CUSTOM_LINK_PREFIX, INTERVENTION_LINK_ID } from './constants';
+import { CUSTOM_LINK_PREFIX } from './constants';
 import messages from './messages';
 
 export type Props = {
@@ -36,8 +38,10 @@ const ShortLinkItem = ({
 }: Props) => {
   const { formatMessage } = useIntl();
 
+  const inputRef = useRef<HTMLInputElement>(null);
+
   const [{ value: selected }, , { setValue: setSelectedValue }] =
-    useField(selectedFormikKey);
+    useField<boolean>(selectedFormikKey);
   const [
     { value: name },
     ,
@@ -52,8 +56,14 @@ const ShortLinkItem = ({
     ? `${placeholderBase}?cid=${healthClinic.id}`
     : placeholderBase;
 
+  useDidUpdateEffect(() => {
+    if (selected) {
+      inputRef.current?.focus();
+    }
+  }, [selected]);
+
   return (
-    <GRow mt={24} gutterWidth={16}>
+    <GRow gutterWidth={16}>
       {healthClinic && (
         <GCol xs={2}>
           <Row height={43} align="center">
@@ -63,7 +73,6 @@ const ShortLinkItem = ({
       )}
       <GCol xs={inputColumnXs}>
         <FormikInputWithAdornment
-          id={INTERVENTION_LINK_ID}
           formikKey={nameFormikKey}
           type={AdornmentType.PREFIX}
           adornment={selected ? CUSTOM_LINK_PREFIX : ''}
@@ -71,6 +80,7 @@ const ShortLinkItem = ({
           backgroundColor={selected ? undefined : themeColors.highlight}
           opacity={selected ? undefined : 1}
           placeholder={selected ? '' : placeholder}
+          ref={inputRef}
         />
       </GCol>
       <GCol xs={1}>
@@ -107,9 +117,12 @@ const ShortLinkItem = ({
           <ImageButton
             src={BinIcon}
             onClick={() => {
+              // TODO try toggle
+              setSelectedValue(false, true);
+              // setSelectedValue(false, false); for duplicates
               setNameTouched(false, false);
               setNameValue('', false);
-              setSelectedValue(false, true);
+              // setNameValue('', true); for duplicates
             }}
             title={formatMessage(messages.removeLink)}
             fill={colors.heather}
