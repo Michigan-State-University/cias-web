@@ -14,6 +14,8 @@ import {
 } from 'utils/validators';
 import { formatMessage } from 'utils/intlOutsideReact';
 
+import { WEB_HOST } from 'global/constants';
+
 import {
   InterventionSettingsFormValues,
   GetShortLinksResponse,
@@ -24,7 +26,9 @@ import messages from './messages';
 
 // TODO refactor
 export const createInterventionSettingsFormValidationSchema = () => {
+  // eslint-disable-next-line func-names
   Yup.addMethod(Yup.array, 'unique', function (message, path) {
+    // eslint-disable-next-line func-names
     return (this as any).test('unique', message, function (list: unknown[]) {
       const counts = countBy(list, path);
       const errors: Yup.ValidationError[] = [];
@@ -44,8 +48,6 @@ export const createInterventionSettingsFormValidationSchema = () => {
           );
         }
       });
-
-      console.log(errors);
 
       // @ts-ignore
       return errors.length ? new Yup.ValidationError(errors) : true;
@@ -133,7 +135,7 @@ export const getPlaceholderBase = (
   interventionType: InterventionType,
   firstSessionId: Nullable<string>,
 ) => {
-  const base = `${process.env.WEB_URL}/interventions/${interventionId}`;
+  const base = `${WEB_HOST}/interventions/${interventionId}`;
 
   switch (interventionType) {
     case InterventionType.DEFAULT:
