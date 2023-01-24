@@ -28,6 +28,7 @@ const FormikInputWithAdornment = React.forwardRef<HTMLInputElement, Props>(
       <FormikControlLayout
         touched={touched}
         error={error}
+        formikKey={formikKey}
         label={label}
         labelProps={labelProps}
         required={required}

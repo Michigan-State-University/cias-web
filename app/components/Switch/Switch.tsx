@@ -1,7 +1,7 @@
 import React, { ChangeEvent, memo, ReactNode } from 'react';
 
 import Row from 'components/Row';
-import { LayoutProps } from 'components/BaseComponentStyles';
+import { LayoutProps, MarginProps } from 'components/BaseComponentStyles';
 
 import SwitchLabelWrapper from './SwitchLabelWrapper';
 
@@ -14,17 +14,32 @@ import {
 } from './styled';
 import { LabelPosition } from './constants';
 
-type Props = {
-  checked: boolean;
+type NativeChangeHandlerProps = {
+  onToggle?: undefined;
+  onChange: React.ChangeEvent<HTMLInputElement>;
+  nativeChangeHandler: true;
+};
+
+type CustomChangeHandlerProps = {
+  onToggle: (value: boolean, event: ChangeEvent<HTMLInputElement>) => void;
+  onChange?: undefined;
+  nativeChangeHandler?: false;
+};
+
+type ChangeHandlerProps = NativeChangeHandlerProps | CustomChangeHandlerProps;
+
+export type Props = {
+  checked?: boolean;
   children?: ReactNode;
   className?: string;
   disabled?: boolean;
   id: string;
   labelPosition?: LabelPosition;
   labelOffset?: number;
-  onToggle: (value: boolean, event: ChangeEvent<HTMLInputElement>) => void;
   onBlur?: HTMLInputElement['onblur'];
-} & LayoutProps;
+} & ChangeHandlerProps &
+  LayoutProps &
+  MarginProps;
 
 const Switch = ({
   checked = false,
@@ -35,10 +50,14 @@ const Switch = ({
   labelPosition = LabelPosition.Left,
   labelOffset,
   onToggle,
+  onChange,
   onBlur,
+  nativeChangeHandler,
   ...props
 }: Props): JSX.Element => {
-  const handleOnChange = (event: ChangeEvent<HTMLInputElement>) => {
+  const handleOnChange: React.ChangeEventHandler<HTMLInputElement> = (
+    event,
+  ) => {
     const {
       target: { checked: newValue },
     } = event;
@@ -54,7 +73,7 @@ const Switch = ({
         data-testid="switch-input"
         disabled={disabled}
         checked={checked}
-        onChange={handleOnChange}
+        onChange={nativeChangeHandler ? onChange : handleOnChange}
         onBlur={onBlur}
       />
 

@@ -1,5 +1,4 @@
 import * as Yup from 'yup';
-import get from 'lodash/get';
 import countBy from 'lodash/countBy';
 import isNil from 'lodash/isNil';
 
@@ -27,31 +26,38 @@ import messages from './messages';
 // TODO refactor
 export const createInterventionSettingsFormValidationSchema = () => {
   // eslint-disable-next-line func-names
-  Yup.addMethod(Yup.array, 'unique', function (message, path) {
-    // eslint-disable-next-line func-names
-    return (this as any).test('unique', message, function (list: unknown[]) {
-      const counts = countBy(list, path);
-      const errors: Yup.ValidationError[] = [];
+  Yup.addMethod(Yup.array, 'uniqueLinks', function (message) {
+    return (this as any).test(
+      'uniqueLinks',
+      message,
+      // eslint-disable-next-line func-names
+      function (list: InterventionSettingsFormValues['links']) {
+        const counts = countBy(list, ({ selected, name }) =>
+          selected ? name : null,
+        );
+        const errors: Yup.ValidationError[] = [];
 
-      list.forEach((item, index) => {
-        const value = get(item, path);
-        const count = counts[value];
-        if (!value) return;
-        if (!isNil(count) && count > 1) {
-          errors.push(
-            new Yup.ValidationError(
-              message,
-              value,
-              // @ts-ignore
-              `${this.path}.${index}.${path}`,
-            ),
-          );
-        }
-      });
+        list.forEach((item, index) => {
+          const { selected, name } = item;
+          if (!selected || !name) return;
 
-      // @ts-ignore
-      return errors.length ? new Yup.ValidationError(errors) : true;
-    });
+          const count = counts[name];
+          if (!isNil(count) && count > 1) {
+            errors.push(
+              new Yup.ValidationError(
+                message,
+                name,
+                // @ts-ignore
+                `${this.path}.${index}.name`,
+              ),
+            );
+          }
+        });
+
+        // @ts-ignore
+        return errors.length ? new Yup.ValidationError(errors) : true;
+      },
+    );
   });
 
   return Yup.object().shape({
@@ -69,7 +75,7 @@ export const createInterventionSettingsFormValidationSchema = () => {
         }),
       )
       // @ts-ignore
-      .unique(formatMessage(messages.linkMustBeUnique), 'name'),
+      .uniqueLinks(formatMessage(messages.linkMustBeUnique)),
   });
 };
 
