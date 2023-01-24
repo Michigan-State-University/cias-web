@@ -90,6 +90,11 @@ import Spinner from 'components/Spinner';
 import AppContainer from 'components/Container';
 import Icon from 'components/Icon';
 import Tooltip from 'components/Tooltip';
+import {
+  useHenryFordBranchingInfoModal,
+  HenryFordBranchingInfoType,
+  InterventionHenryFordBranchingInfoAction,
+} from 'components/HenryFordBrachingInfoModal';
 
 import Header from './Header';
 import { DraggedTest } from './styled';
@@ -155,6 +160,7 @@ export function InterventionDetailsPage({
     createdCatMhSessionCount,
     licenseType,
     type,
+    hfhsAccess,
   } = intervention || {};
 
   const testsLeft = catMhPool - createdCatMhSessionCount;
@@ -229,6 +235,48 @@ export function InterventionDetailsPage({
     ),
   });
 
+  const {
+    Modal: HenryFordBranchingInfoModal,
+    openModal: openHenryFordBranchingInfoModal,
+  } = useHenryFordBranchingInfoModal(
+    HenryFordBranchingInfoType.INTERVENTION,
+    (action) => {
+      switch (action) {
+        case InterventionHenryFordBranchingInfoAction.SHARE_EXTERNALLY: {
+          openSendCopyModal();
+          break;
+        }
+        case InterventionHenryFordBranchingInfoAction.DUPLICATE_HERE: {
+          handleCopyIntervention();
+          break;
+        }
+        default: {
+          break;
+        }
+      }
+    },
+  );
+
+  const onShareExternally = () => {
+    if (hfhsAccess) {
+      openHenryFordBranchingInfoModal(
+        InterventionHenryFordBranchingInfoAction.SHARE_EXTERNALLY,
+      );
+    } else {
+      openSendCopyModal();
+    }
+  };
+
+  const onDuplicateHere = () => {
+    if (hfhsAccess) {
+      openHenryFordBranchingInfoModal(
+        InterventionHenryFordBranchingInfoAction.DUPLICATE_HERE,
+      );
+    } else {
+      handleCopyIntervention();
+    }
+  };
+
   const canCreateCatSession = useMemo(
     () => !isAccessRevoked,
     [isAccessRevoked],
@@ -243,17 +291,17 @@ export function InterventionDetailsPage({
       color: colors.bluewood,
     },
     {
-      id: 'share externally',
+      id: InterventionHenryFordBranchingInfoAction.SHARE_EXTERNALLY,
       label: formatMessage(messages.shareExternally),
       icon: FileShareIcon,
-      action: openSendCopyModal,
+      action: onShareExternally,
       color: colors.bluewood,
     },
     {
-      id: 'duplicate here',
+      id: InterventionHenryFordBranchingInfoAction.DUPLICATE_HERE,
       label: formatMessage(messages.duplicateHere),
       icon: CopyIcon,
-      action: handleCopyIntervention,
+      action: onDuplicateHere,
       color: colors.bluewood,
     },
     {
@@ -403,6 +451,7 @@ export function InterventionDetailsPage({
                         nextSessionName={nextSession ? nextSession.name : null}
                         status={status}
                         interventionType={type}
+                        hfhsAccess={hfhsAccess}
                       />
                     </Row>
                   );
@@ -436,6 +485,7 @@ export function InterventionDetailsPage({
         </Helmet>
         <ArchiveModal />
         <ThirdPartyToolsModal />
+        <HenryFordBranchingInfoModal />
         <ConfirmationModal
           visible={!isNullOrUndefined(deleteConfirmationSessionId)}
           onClose={() => setDeleteConfirmationSessionId(null)}

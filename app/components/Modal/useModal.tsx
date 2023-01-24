@@ -12,7 +12,7 @@ type Props<T> = SpecificModalProps<T>;
 
 type SpecificModalProps<T> = ModalProps<T> | ConfirmationModalProps;
 
-type ModalProps<T = boolean> = {
+export type ModalProps<T = boolean> = {
   type: ModalType.Modal;
   props: Omit<ModalComponentProps, 'children'>;
   modalContentRenderer: (props: {
@@ -21,9 +21,9 @@ type ModalProps<T = boolean> = {
   }) => ReactNode;
 };
 
-type ConfirmationModalProps = {
+export type ConfirmationModalProps<T = boolean> = {
   type: ModalType.ConfirmationModal;
-  props: Omit<ConfirmationModalComponentProps, 'children'>;
+  props: Omit<ConfirmationModalComponentProps<T>, 'children' | 'modalState'>;
 };
 
 export const useModal = <T,>({ type, props, ...restProps }: Props<T>) => {
@@ -35,7 +35,7 @@ export const useModal = <T,>({ type, props, ...restProps }: Props<T>) => {
   );
 
   const openModal = useCallback(
-    (state: T) => {
+    (state?: T) => {
       setModalState(state ?? true);
     },
     [setModalState],
@@ -60,8 +60,9 @@ export const useModal = <T,>({ type, props, ...restProps }: Props<T>) => {
       case ModalType.ConfirmationModal:
         return (
           <ConfirmationModal
-            {...(props as ConfirmationModalComponentProps)}
+            {...(props as ConfirmationModalComponentProps<T>)}
             {...sharedProps}
+            modalState={modalState}
           />
         );
       case ModalType.Modal:

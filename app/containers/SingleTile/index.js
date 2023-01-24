@@ -54,6 +54,12 @@ import Modal, { ModalType, useModal } from 'components/Modal';
 import Row from 'components/Row';
 import Badge from 'components/Badge';
 import Loader from 'components/Loader';
+import {
+  useHenryFordBranchingInfoModal,
+  HenryFordBranchingInfoType,
+  InterventionHenryFordBranchingInfoAction,
+} from 'components/HenryFordBrachingInfoModal';
+
 import TranslateInterventionModal from 'containers/TranslateInterventionModal';
 import interventionDetailsPageSagas from 'containers/InterventionDetailsPage/saga';
 
@@ -128,6 +134,7 @@ const SingleTile = ({
     createdAt,
     updatedAt,
     googleLanguageId,
+    hfhsAccess,
   } = tileData || {};
 
   const handleCsvRequest = () => sendCsv(id);
@@ -137,6 +144,48 @@ const SingleTile = ({
 
   const handleClone = () =>
     copyIntervention({ interventionId: id, withoutRedirect: true });
+
+  const {
+    Modal: HenryFordBranchingInfoModal,
+    openModal: openHenryFordBranchingInfoModal,
+  } = useHenryFordBranchingInfoModal(
+    HenryFordBranchingInfoType.INTERVENTION,
+    (action) => {
+      switch (action) {
+        case InterventionHenryFordBranchingInfoAction.SHARE_EXTERNALLY: {
+          openShareWithResearchersModal();
+          break;
+        }
+        case InterventionHenryFordBranchingInfoAction.DUPLICATE_HERE: {
+          handleClone();
+          break;
+        }
+        default: {
+          break;
+        }
+      }
+    },
+  );
+
+  const onShareExternally = () => {
+    if (hfhsAccess) {
+      openHenryFordBranchingInfoModal(
+        InterventionHenryFordBranchingInfoAction.SHARE_EXTERNALLY,
+      );
+    } else {
+      openShareWithResearchersModal();
+    }
+  };
+
+  const onDuplicateHere = () => {
+    if (hfhsAccess) {
+      openHenryFordBranchingInfoModal(
+        InterventionHenryFordBranchingInfoAction.DUPLICATE_HERE,
+      );
+    } else {
+      handleClone();
+    }
+  };
 
   const options = [
     {
@@ -157,9 +206,9 @@ const SingleTile = ({
       : []),
     {
       icon: FileShareIcon,
-      action: openShareWithResearchersModal,
+      action: onShareExternally,
       label: formatMessage(messages.shareExternally),
-      id: 'share externally',
+      id: InterventionHenryFordBranchingInfoAction.SHARE_EXTERNALLY,
     },
     ...((canArchive(status) && [
       {
@@ -171,10 +220,10 @@ const SingleTile = ({
     ]) ||
       []),
     {
-      id: 'duplicate',
+      id: InterventionHenryFordBranchingInfoAction.DUPLICATE_HERE,
       label: formatMessage(messages.duplicateHere),
       icon: CopyIcon,
-      action: handleClone,
+      action: onDuplicateHere,
     },
     ...(canAssignOrganizationToIntervention
       ? [
@@ -218,6 +267,7 @@ const SingleTile = ({
     <>
       <ThirdPartyToolsModal />
       <ArchiveModal />
+      <HenryFordBranchingInfoModal />
       <Modal
         title={formatMessage(messages.sendCopyModalTitle)}
         onClose={closeShareWithResearchersModal}

@@ -10,11 +10,15 @@ import { render } from '@testing-library/react';
 import { IntlProvider } from 'react-intl';
 import { MemoryRouter } from 'react-router-dom';
 import 'jest-styled-components';
-
 import { Provider } from 'react-redux';
-import { Roles } from 'models/User/UserRoles';
 import { DEFAULT_LOCALE } from 'i18n';
+
+import { Roles } from 'models/User/UserRoles';
+
 import { createTestStore } from 'utils/testUtils/storeUtils';
+
+import { intlProviderConfig } from 'containers/LanguageProvider';
+
 import SingleTile from '../index';
 
 const defaultProps = {
@@ -62,7 +66,7 @@ describe('<SingleTile />', () => {
     const spy = jest.spyOn(global.console, 'error');
     render(
       <Provider store={store}>
-        <IntlProvider locale={DEFAULT_LOCALE}>
+        <IntlProvider locale={DEFAULT_LOCALE} {...intlProviderConfig}>
           <MemoryRouter>
             <SingleTile {...defaultProps} />
           </MemoryRouter>

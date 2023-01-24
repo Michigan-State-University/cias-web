@@ -1,13 +1,13 @@
 import React, {
-  useEffect,
-  useState,
-  useRef,
-  useMemo,
-  useLayoutEffect,
   useCallback,
   useContext,
+  useEffect,
+  useLayoutEffect,
+  useMemo,
+  useRef,
+  useState,
 } from 'react';
-import { injectSaga, injectReducer } from 'redux-injectors';
+import { injectReducer, injectSaga } from 'redux-injectors';
 import {
   DragDropContext,
   DragStart,
@@ -60,31 +60,31 @@ import instantiateEmptyQuestion from 'utils/instantiateEmptyQuestion';
 import isNullOrUndefined from 'utils/isNullOrUndefined';
 
 import {
+  createQuestionGroupRequest,
   createQuestionRequest,
-  questionsReducer,
+  deleteQuestionsRequest,
   makeSelectQuestions,
   makeSelectSelectedQuestionId,
+  questionsReducer,
   reorderQuestionListRequest,
-  deleteQuestionsRequest,
   selectQuestion as selectQuestionAction,
-  createQuestionGroupRequest,
 } from 'global/reducers/questions';
 import {
-  reorderGroupListRequest,
-  reorderQuestionGroupsSaga,
+  changeGroupNameRequest,
   duplicateGroupsHereRequest,
   duplicateGroupsInternallyRequest,
-  groupQuestionsRequest,
-  shareGroupsExternallyRequest,
-  makeSelectQuestionGroups,
-  changeGroupNameRequest,
-  questionGroupsReducer,
   getQuestionGroupsRequest,
   getQuestionGroupsSaga,
+  groupQuestionsRequest,
+  makeSelectQuestionGroups,
+  questionGroupsReducer,
+  reorderGroupListRequest,
+  reorderQuestionGroupsSaga,
+  shareGroupsExternallyRequest,
 } from 'global/reducers/questionGroups';
 import {
-  copyModalReducer,
   allCopyModalSagas,
+  copyModalReducer,
 } from 'global/reducers/copyModalReducer';
 import { JumpToScreenLocationState } from 'global/types/locationState';
 
@@ -93,7 +93,7 @@ import { reorderScope } from 'models/Session/ReorderScope';
 import { ClassicSession, Session } from 'models/Session';
 
 import { QuestionDTO, QuestionTypes } from 'models/Question';
-import { QuestionGroup, GroupType } from 'models/QuestionGroup';
+import { GroupType, QuestionGroup } from 'models/QuestionGroup';
 import { questionType } from 'models/Session/QuestionTypes';
 import QuestionDetails from '../../components/QuestionDetails';
 import QuestionSettings from '../../components/QuestionSettings';
@@ -102,11 +102,11 @@ import QuestionTypeChooser from '../../components/QuestionTypeChooser';
 import messages from './messages';
 import { EditSessionPageContext, useLockEditSessionPageScroll } from './utils';
 import {
+  Grid,
   QuestionsRow,
   ShowListButton,
-  StyledQuestionTypeChooser,
   Spacer,
-  Grid,
+  StyledQuestionTypeChooser,
 } from './styled';
 import QuestionListGroup from '../QuestionListGroup';
 
@@ -194,7 +194,8 @@ const EditClassicSessionPage = ({
   const [manage, setManage] = useState(false);
   const [selectedSlides, setSelectedSlides] = useState<string[]>([]);
   const [showList, setShowList] = useState(false);
-  const [modalVisible, setModalVisible] = useState(false);
+  const [shareExternallyModalVisible, setShareExternallyModalVisible] =
+    useState(false);
   const [duplicateModalVisible, setDuplicateModalVisible] = useState(false);
   const [isDuringQuestionReorder, setIsDuringQuestionReorder] = useState(false);
   const openedGroups = useRef<string[]>([]);
@@ -292,7 +293,7 @@ const EditClassicSessionPage = ({
       label: <FormattedMessage {...messages.shareCopy} />,
       inactiveIcon: share,
       activeIcon: shareActive,
-      action: () => setModalVisible(true),
+      action: () => setShareExternallyModalVisible(true),
     },
     {
       label: <FormattedMessage {...messages.group} />,
@@ -480,12 +481,12 @@ const EditClassicSessionPage = ({
       </Helmet>
       {/* @ts-ignore */}
       <Modal
-        title={formatMessage(messages.modalTitle)}
-        onClose={() => setModalVisible(false)}
-        visible={modalVisible}
+        title={formatMessage(messages.shareExternallyModalTitle)}
+        onClose={() => setShareExternallyModalVisible(false)}
+        visible={shareExternallyModalVisible}
       >
         <SelectResearchers
-          onClose={() => setModalVisible(false)}
+          onClose={() => setShareExternallyModalVisible(false)}
           onResearchersSelected={sendSlidesToResearchers}
         />
       </Modal>

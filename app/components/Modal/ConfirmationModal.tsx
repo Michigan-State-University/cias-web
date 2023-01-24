@@ -26,11 +26,11 @@ import Modal from './Modal';
 import { MODAL_TITLE_ID } from './constants';
 import { IconType } from './types';
 
-export type Props = {
+export type Props<T> = {
   visible: boolean;
   description: ReactNode;
   onClose: () => void;
-  confirmAction: () => void;
+  confirmAction: (modalState: Nullable<T | boolean>) => void;
   loading: boolean;
   error?: string | object;
   content: ReactNode;
@@ -43,11 +43,13 @@ export type Props = {
   contentContainerStyles?: Record<string, unknown>;
   icon?: IconType;
   hideCloseButton: boolean;
+  hideCancelButton?: boolean;
   isMobile: boolean;
   titleStyles: object;
+  modalState: Nullable<T | boolean>;
 } & Record<string, unknown>;
 
-const ConfirmationModal = ({
+const ConfirmationModal = <T,>({
   visible = false,
   description = <FormattedMessage {...messages.defaultDescription} />,
   onClose,
@@ -64,14 +66,16 @@ const ConfirmationModal = ({
   contentContainerStyles,
   icon = 'error',
   hideCloseButton,
+  hideCancelButton,
   isMobile,
   titleStyles,
+  modalState,
   ...modalStyles
-}: Props): JSX.Element => {
+}: Props<T>): JSX.Element => {
   const onConfirm = useCallback(() => {
-    confirmAction();
+    confirmAction(modalState);
     onClose();
-  }, [confirmAction, onClose]);
+  }, [confirmAction, onClose, modalState]);
 
   if (!visible) return <></>;
 
@@ -118,18 +122,20 @@ const ConfirmationModal = ({
         )}
         <Row mt={25} justify="center">
           {/* @ts-ignore */}
-          <Button
-            light
-            hoverable
-            onClick={onClose}
-            type="button"
-            mr={25}
-            width="auto"
-            padding="0 30px"
-            {...cancelButtonStyles}
-          >
-            {cancelButtonText ?? <FormattedMessage {...messages.cancel} />}
-          </Button>
+          {!hideCancelButton && (
+            <Button
+              light
+              hoverable
+              onClick={onClose}
+              type="button"
+              mr={25}
+              width="auto"
+              padding="0 30px"
+              {...cancelButtonStyles}
+            >
+              {cancelButtonText ?? <FormattedMessage {...messages.cancel} />}
+            </Button>
+          )}
           {/* @ts-ignore */}
           <Button
             color={confirmationButtonColor}

@@ -25,6 +25,10 @@ import CopyModal from 'components/CopyModal';
 import Badge from 'components/Badge';
 import BadgeInput from 'components/Input/BadgeInput';
 import Input from 'components/Input/StyledInput';
+import {
+  useHenryFordBranchingInfoModal,
+  HenryFordBranchingInfoType,
+} from 'components/HenryFordBrachingInfoModal';
 
 import { SHARE_IDS } from 'containers/SettingsPanel/utils';
 
@@ -63,6 +67,7 @@ function SessionListItem({
   sharedTo,
   editSession,
   interventionType,
+  hfhsAccess,
 }) {
   const history = useHistory();
 
@@ -86,6 +91,21 @@ function SessionListItem({
     estimatedTime: updatedEstimatedTime,
   } = session || {};
 
+  const {
+    Modal: HenryFordBranchingInfoModal,
+    openModal: openHenryFordBranchingInfoModal,
+  } = useHenryFordBranchingInfoModal(HenryFordBranchingInfoType.SESSION, () =>
+    setCopyOpen(true),
+  );
+
+  const onDuplicateInternally = () => {
+    if (hfhsAccess) {
+      openHenryFordBranchingInfoModal();
+    } else {
+      setCopyOpen(true);
+    }
+  };
+
   const options = [
     {
       id: 'duplicate',
@@ -99,7 +119,7 @@ function SessionListItem({
       id: 'copy',
       label: formatMessage(messages.copy),
       icon: duplicateInternally,
-      action: () => setCopyOpen(true),
+      action: onDuplicateInternally,
       color: colors.bluewood,
     },
     {
@@ -180,6 +200,7 @@ function SessionListItem({
             aria-label={formatMessage(messages.wcagDescription, { name })}
           >
             <Row py={21} px={16} align="center" justify="between">
+              <HenryFordBranchingInfoModal />
               <CopyModal
                 visible={copyOpen}
                 onClose={closeCopyModal}
@@ -338,6 +359,7 @@ SessionListItem.propTypes = {
   sharedTo: PropTypes.string,
   editSession: PropTypes.func,
   interventionType: PropTypes.string,
+  hfhsAccess: PropTypes.bool,
 };
 
 export default injectIntl(SessionListItem);
