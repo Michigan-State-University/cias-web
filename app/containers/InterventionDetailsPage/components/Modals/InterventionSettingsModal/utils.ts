@@ -23,7 +23,6 @@ import {
 
 import messages from './messages';
 
-// TODO refactor
 export const createInterventionSettingsFormValidationSchema = () => {
   // eslint-disable-next-line func-names
   Yup.addMethod(Yup.array, 'uniqueLinks', function (message) {
@@ -33,7 +32,7 @@ export const createInterventionSettingsFormValidationSchema = () => {
       // eslint-disable-next-line func-names
       function (list: InterventionSettingsFormValues['links']) {
         const counts = countBy(list, ({ selected, name }) =>
-          selected ? name : null,
+          selected ? name : '',
         );
         const errors: Yup.ValidationError[] = [];
 
