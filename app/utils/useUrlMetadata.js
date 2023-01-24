@@ -15,7 +15,7 @@ export const useUrlMetadata = (url) => {
 
   useEffect(() => {
     if (url) {
-      setState({ ...state, isFetching: true });
+      setState({ ...state, error: null, isFetching: true });
 
       fetchUrlMetadata()
         .then(({ data }) => {
