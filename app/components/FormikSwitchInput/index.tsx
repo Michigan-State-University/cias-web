@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { memo } from 'react';
 import { useField } from 'formik';
 
 import FormikControlLayout from 'components/FormikControlLayout';
@@ -19,8 +19,8 @@ const FormikSwitchInput = ({ formikKey, children, ...props }: Props) => {
         nativeChangeHandler
         checked={value}
         id={field.name}
-        {...fieldProps}
         {...props}
+        {...fieldProps}
       >
         {children}
       </Switch>
@@ -28,4 +28,4 @@ const FormikSwitchInput = ({ formikKey, children, ...props }: Props) => {
   );
 };
 
-export default FormikSwitchInput;
+export default memo(FormikSwitchInput);

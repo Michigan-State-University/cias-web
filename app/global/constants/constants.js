@@ -3,4 +3,6 @@ export const FEEDBACK_FORM_URL =
 
 export const MAX_FILE_SIZE = 5242880;
 
-export const WEB_HOST = new URL(process.env.WEB_URL ?? '').host;
+export const WEB_HOST = process.env.WEB_URL
+  ? new URL(process.env.WEB_URL).host
+  : '';

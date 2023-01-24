@@ -1,4 +1,4 @@
-import React, { ChangeEvent, memo, ReactNode } from 'react';
+import React, { ChangeEvent, ChangeEventHandler, memo, ReactNode } from 'react';
 
 import Row from 'components/Row';
 import { LayoutProps, MarginProps } from 'components/BaseComponentStyles';
@@ -16,7 +16,7 @@ import { LabelPosition } from './constants';
 
 type NativeChangeHandlerProps = {
   onToggle?: undefined;
-  onChange: React.ChangeEvent<HTMLInputElement>;
+  onChange: ChangeEventHandler<HTMLInputElement>;
   nativeChangeHandler: true;
 };
 
@@ -55,9 +55,7 @@ const Switch = ({
   nativeChangeHandler,
   ...props
 }: Props): JSX.Element => {
-  const handleOnChange: React.ChangeEventHandler<HTMLInputElement> = (
-    event,
-  ) => {
+  const handleOnChange: ChangeEventHandler<HTMLInputElement> = (event) => {
     const {
       target: { checked: newValue },
     } = event;

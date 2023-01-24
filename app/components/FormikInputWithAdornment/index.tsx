@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { memo } from 'react';
 import { useField } from 'formik';
 import isNil from 'lodash/isNil';
 
@@ -44,5 +44,5 @@ const FormikInputWithAdornment = React.forwardRef<HTMLInputElement, Props>(
   },
 );
 
-export default FormikInputWithAdornment;
+export default memo(FormikInputWithAdornment);
 export { AdornmentType };

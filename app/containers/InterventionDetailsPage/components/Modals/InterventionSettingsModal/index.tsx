@@ -293,6 +293,7 @@ const InterventionSettingsModal = ({ editingPossible, onClose }: Props) => {
         onSubmit={submitForm}
         validationSchema={validationSchema}
         innerRef={formRef}
+        validateOnChange={false}
       >
         {({
           isValid,
