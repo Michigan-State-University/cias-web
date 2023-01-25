@@ -32,6 +32,8 @@ const CopyToClipboard = ({
   disabled,
   icon,
   iconAlt,
+  popupVerticalPosition,
+  popupHorizontalPosition,
   ...restProps
 }) => {
   const [copied, setCopied] = useState(false);
@@ -76,8 +78,8 @@ const CopyToClipboard = ({
         popupContent={formatMessage(messages.copied)}
         controlled
         visible={copied}
-        top
-        center
+        verticalPosition={popupVerticalPosition}
+        horizontalPosition={popupHorizontalPosition}
       >
         {renderCopyToClipboard(
           rednerAsCustomComponent ? (
@@ -114,6 +116,8 @@ CopyToClipboard.propTypes = {
   rednerAsCustomComponent: PropTypes.bool,
   icon: PropTypes.string,
   iconAlt: PropTypes.string,
+  popupVerticalPosition: PropTypes.oneOf(['top', 'center', 'bottom']),
+  popupHorizontalPosition: PropTypes.oneOf(['left', 'center', 'right']),
 };
 
 CopyToClipboard.defaultProps = {
@@ -121,6 +125,8 @@ CopyToClipboard.defaultProps = {
     color: themeColors.secondary,
     fontWeight: 'bold',
   },
+  popupVerticalPosition: 'top',
+  popupHorizontalPosition: 'center',
 };
 
 export default injectIntl(CopyToClipboard);

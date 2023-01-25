@@ -104,6 +104,8 @@ const ShortLinkItem = ({
         // @ts-ignore
         renderAsCustomComponent
         textToCopy={selected ? `${CUSTOM_LINK_PREFIX}${name}` : placeholder}
+        popupVerticalPosition="center"
+        popupHorizontalPosition="left"
       >
         <ImageButton
           src={CopyIcon}
