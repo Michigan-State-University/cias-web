@@ -131,7 +131,7 @@ const InterventionSettingsModal = ({ editingPossible, onClose }: Props) => {
 
   const formRef = useRef<FormikProps<InterventionSettingsFormValues>>(null);
 
-  useEffect(() => {
+  const markAlreadyUsedLinks = useCallback(() => {
     if (!formRef.current) return;
 
     const takenNames =
@@ -147,6 +147,10 @@ const InterventionSettingsModal = ({ editingPossible, onClose }: Props) => {
       }
     });
   }, [editShortLinksError]);
+
+  useEffect(() => {
+    markAlreadyUsedLinks();
+  }, [markAlreadyUsedLinks]);
 
   const {
     error: shortLinksFetchError,
@@ -261,6 +265,7 @@ const InterventionSettingsModal = ({ editingPossible, onClose }: Props) => {
     saveOtherSettingsAndLinks(formRef.current?.values);
   };
 
+  // Close modal when all changes are saved successfully
   useEffect(() => {
     if (
       !savingChanges &&
