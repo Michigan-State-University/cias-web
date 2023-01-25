@@ -107,18 +107,17 @@ const activeStyles = (noHoverBackground) => `
   }`;
 
 export const HoverTextButton = styled(TextButton)`
-  ${({ showHoverEffect, noHoverBackground, active }) =>
+  ${({ showHoverEffect, noHoverBackground, active, disabled }) =>
     showHoverEffect &&
+    !disabled &&
     `
     background-color: transparent;
     padding: 4px;
     border-radius: 8px;
 
-  
     &:hover {
-      ${activeStyles(noHoverBackground)}        
+      ${activeStyles(noHoverBackground)}
     }
-  
     ${active ? activeStyles : ''}
   `}
 
