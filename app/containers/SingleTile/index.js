@@ -45,6 +45,7 @@ import isNullOrUndefined from 'utils/isNullOrUndefined';
 import {
   CatMhAccessModal,
   InterventionAssignOrganizationModal,
+  INTERVENTION_ASSIGN_ORGANIZATION_MODAL_WIDTH,
 } from 'containers/InterventionDetailsPage/components/Modals';
 import SelectResearchers from 'containers/SelectResearchers';
 
@@ -254,6 +255,7 @@ const SingleTile = ({
         title={formatMessage(messages.assignOrganization)}
         onClose={closeAssignOrganizationModal}
         visible={assignOrganizationModalVisible}
+        width={INTERVENTION_ASSIGN_ORGANIZATION_MODAL_WIDTH}
       >
         <InterventionAssignOrganizationModal
           interventionId={id}

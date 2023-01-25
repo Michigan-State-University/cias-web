@@ -18,7 +18,10 @@ import Button from 'components/Button';
 
 import { organizationSelectOptionFormatter } from './utils';
 import messages from './messages';
-import { CHOOSE_ORGANIZATION_LABEL_ID } from './constants';
+import {
+  CHOOSE_ORGANIZATION_LABEL_ID,
+  INTERVENTION_ASSIGN_ORGANIZATION_MODAL_WIDTH,
+} from './constants';
 
 const InterventionAssignOrganizationModal = ({
   interventionId,
@@ -83,6 +86,8 @@ const InterventionAssignOrganizationModal = ({
 
   return (
     <FullWidthContainer>
+      <Text mt={8}>{formatMessage(messages.shortLinksInfo)}</Text>
+
       <Row align="center" mt={20}>
         <Col xs={4}>
           <Text fontWeight="bold" id={CHOOSE_ORGANIZATION_LABEL_ID}>
@@ -128,3 +133,4 @@ InterventionAssignOrganizationModal.propTypes = {
 };
 
 export default memo(InterventionAssignOrganizationModal);
+export { INTERVENTION_ASSIGN_ORGANIZATION_MODAL_WIDTH };

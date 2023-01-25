@@ -102,6 +102,7 @@ import {
   CatMhAccessModal,
   InterventionAssignOrganizationModal,
   InterventionSettingsModal,
+  INTERVENTION_ASSIGN_ORGANIZATION_MODAL_WIDTH,
 } from './components/Modals';
 import SelectResearchers from '../SelectResearchers';
 import messages from './messages';
@@ -507,10 +508,12 @@ export function InterventionDetailsPage({
           title={formatMessage(messages.assignOrganization)}
           onClose={closeAssignOrganizationModal}
           visible={assignOrganizationModalVisible}
+          width={INTERVENTION_ASSIGN_ORGANIZATION_MODAL_WIDTH}
         >
           <InterventionAssignOrganizationModal
             interventionId={id}
             organizationId={organizationId}
+            onClose={closeAssignOrganizationModal}
           />
         </Modal>
 
