@@ -1,4 +1,4 @@
-import React, { useRef } from 'react';
+import React, { useMemo, useRef } from 'react';
 import { useIntl } from 'react-intl';
 import { useField } from 'formik';
 import CopyIcon from 'assets/svg/copy2.svg';
@@ -55,10 +55,32 @@ const ShortLinkItem = ({
     }
   }, [selected]);
 
+  const { switchAriaLabel, inputAriaLabel } = useMemo(() => {
+    if (healthClinic) {
+      const { name: healthClinicName } = healthClinic;
+      return {
+        switchAriaLabel: formatMessage(messages.linkSwitchAriaLabelForClinic, {
+          healthClinicName,
+        }),
+        inputAriaLabel: formatMessage(messages.linkInputAriaLabel, {
+          healthClinicName,
+        }),
+      };
+    }
+    return {
+      switchAriaLabel: formatMessage(messages.linkSwitchAriaLabel),
+      inputAriaLabel: formatMessage(messages.linkInputAriaLabel),
+    };
+  }, [healthClinic]);
+
   return (
     <Row gap={16}>
       <Box>
-        <FormikSwitchInput formikKey={selectedFormikKey} mt={11} />
+        <FormikSwitchInput
+          ariaLabel={switchAriaLabel}
+          formikKey={selectedFormikKey}
+          mt={11}
+        />
       </Box>
       {healthClinic && (
         <Row height={43} align="center" flexShrink={0} width={75}>
@@ -75,6 +97,7 @@ const ShortLinkItem = ({
           opacity={selected ? undefined : 1}
           placeholder={selected ? '' : placeholder}
           ref={inputRef}
+          aria-label={inputAriaLabel}
         />
       </Box>
       <CopyToClipboard

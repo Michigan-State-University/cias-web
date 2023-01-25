@@ -58,4 +58,21 @@ export default defineMessages({
     id: `${scope}.linkMustBeUnique`,
     defaultMessage: 'Each intervention link must be unique',
   },
+  linkSwitchAriaLabel: {
+    id: `${scope}.linkSwitchAriaLabel`,
+    defaultMessage: 'Toggle custom intervention link usage',
+  },
+  linkSwitchAriaLabelForClinic: {
+    id: `${scope}.linkSwitchAriaLabelForClinic`,
+    defaultMessage:
+      'Toggle custom intervention link usage for {healthClinicName}',
+  },
+  linkInputAriaLabel: {
+    id: `${scope}.linkInputAriaLabel`,
+    defaultMessage: 'Custom intervention link',
+  },
+  linkInputAriaLabelForClinic: {
+    id: `${scope}.linkInputAriaLabelForClinic`,
+    defaultMessage: 'Custom intervention link for {healthClinicName}',
+  },
 });

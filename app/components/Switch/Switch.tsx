@@ -1,4 +1,10 @@
-import React, { ChangeEvent, ChangeEventHandler, memo, ReactNode } from 'react';
+import React, {
+  AriaAttributes,
+  ChangeEvent,
+  ChangeEventHandler,
+  memo,
+  ReactNode,
+} from 'react';
 
 import Row from 'components/Row';
 import { LayoutProps, MarginProps } from 'components/BaseComponentStyles';
@@ -37,6 +43,7 @@ export type Props = {
   labelPosition?: LabelPosition;
   labelOffset?: number;
   onBlur?: HTMLInputElement['onblur'];
+  ariaLabel?: AriaAttributes['aria-label'];
 } & ChangeHandlerProps &
   LayoutProps &
   MarginProps;
@@ -53,6 +60,7 @@ const Switch = ({
   onChange,
   onBlur,
   nativeChangeHandler,
+  ariaLabel,
   ...props
 }: Props): JSX.Element => {
   const handleOnChange: ChangeEventHandler<HTMLInputElement> = (event) => {
@@ -69,6 +77,7 @@ const Switch = ({
         id={id}
         data-cy="branching-intervention-toggle"
         data-testid="switch-input"
+        aria-label={ariaLabel}
         disabled={disabled}
         checked={checked}
         onChange={nativeChangeHandler ? onChange : handleOnChange}
