@@ -17,7 +17,7 @@ import { WEB_HOST } from 'global/constants';
 
 import {
   InterventionSettingsFormValues,
-  GetShortLinksResponse,
+  FetchShortLinksResponse,
   ShortLinksData,
 } from './types';
 
@@ -78,8 +78,8 @@ export const createInterventionSettingsFormValidationSchema = () => {
   });
 };
 
-export const getShortLinksDataParser = (
-  data: GetShortLinksResponse,
+export const fetchShortLinksDataParser = (
+  data: FetchShortLinksResponse,
 ): ShortLinksData => ({
   shortLinks: jsonApiToArray(data, 'shortLink'),
   healthClinics: jsonApiToArray(

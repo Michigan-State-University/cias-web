@@ -18,7 +18,7 @@ export type InterventionSettingsFormValues = {
   }[];
 };
 
-export type GetShortLinksResponse = ApiDataCollection<ShortLink> & {
+export type FetchShortLinksResponse = ApiDataCollection<ShortLink> & {
   health_clinics: ApiDataCollection<SimpleHealthClinic>['data'];
 };
 

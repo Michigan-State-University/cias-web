@@ -65,13 +65,13 @@ import {
 import messages from './messages';
 import {
   InterventionSettingsFormValues,
-  GetShortLinksResponse,
+  FetchShortLinksResponse,
   ShortLinksData,
 } from './types';
 import {
   createInterventionSettingsFormValidationSchema,
   getPlaceholderBase,
-  getShortLinksDataParser,
+  fetchShortLinksDataParser,
   mapFormValuesToShortLinks,
   mapLanguageSelectOptionToInterventionChanges,
   mapShortLinksToFormValues,
@@ -156,9 +156,9 @@ const InterventionSettingsModal = ({ editingPossible, onClose }: Props) => {
     error: shortLinksFetchError,
     isFetching: isFetchingShortLinks,
     data: shortLinksData,
-  } = useGet<GetShortLinksResponse, ShortLinksData>(
+  } = useGet<FetchShortLinksResponse, ShortLinksData>(
     `/v1/interventions/${id}/short_links`,
-    getShortLinksDataParser,
+    fetchShortLinksDataParser,
   );
 
   const { current: validationSchema } = useRef(
