@@ -52,7 +52,6 @@ const VerifyShortLinkPage = () => {
           return;
         }
         link = `/interventions/${interventionId}/sessions/${firstSessionId}/fill`;
-
         break;
       }
       case ShortLinkType.FLEXIBLE_ORDER:
