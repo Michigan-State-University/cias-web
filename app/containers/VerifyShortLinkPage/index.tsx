@@ -17,7 +17,7 @@ const VerifyShortLinkPage = () => {
   const { name } = useParams<{ name: string }>();
 
   const redirectToNotFoundPage = () => {
-    history.push('/not-found-page');
+    history.replace('/not-found-page');
   };
 
   if (!name) {
