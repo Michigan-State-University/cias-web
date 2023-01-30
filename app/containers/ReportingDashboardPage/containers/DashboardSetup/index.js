@@ -14,6 +14,8 @@ import {
   fetchOrganizationRequest,
   selectEntityAction,
   editOrganizationRequest,
+  makeSelectOrganizationLoader,
+  makeSelectOrganizationError,
 } from 'global/reducers/organizations';
 
 import { Container, Col, Row } from 'components/ReactGridSystem';
@@ -21,6 +23,7 @@ import Loader from 'components/Loader';
 import Comment from 'components/Text/Comment';
 import StyledInput from 'components/Input/StyledInput';
 import Icon from 'components/Icon';
+import ErrorAlert from 'components/ErrorAlert';
 
 import DashboardSections from './containers/DashboardSections';
 import OrganizationInterventionRow from './containers/OrganizationInterventionRow';
@@ -32,6 +35,8 @@ const DashboardSetup = ({
   fetchOrganization,
   selectEntity,
   editOrganization,
+  loading,
+  error,
 }) => {
   const { organizationId } = useParams();
   const { formatMessage } = useIntl();
@@ -46,45 +51,55 @@ const DashboardSetup = ({
     editOrganization({ id: organizationId, name });
   };
 
-  if (!organization) return <Loader fullSize />;
+  if (loading) return <Loader fullSize />;
+
+  if (error) {
+    return (
+      <Row justify="center" mt={30}>
+        <ErrorAlert errorText={error.response?.data?.message ?? error} />
+      </Row>
+    );
+  }
 
   return (
     <>
       <Helmet>
         <title>{formatMessage(messages.dashboardSetup)}</title>
       </Helmet>
-      <Container mx="55px !important">
-        <Row>
-          <Col mt={30}>
-            <Row align="center">
-              <StyledInput
-                placeholder="Enter organization name"
-                type="singleline"
-                value={organization.name}
-                onBlur={onBlur}
-                fontSize={32}
-                fontWeight="bold"
-                maxWidth="100%"
-                mr={8}
+      {organization && (
+        <Container mx="55px !important">
+          <Row>
+            <Col mt={30}>
+              <Row align="center">
+                <StyledInput
+                  placeholder="Enter organization name"
+                  type="singleline"
+                  value={organization.name}
+                  onBlur={onBlur}
+                  fontSize={32}
+                  fontWeight="bold"
+                  maxWidth="100%"
+                  mr={8}
+                />
+                <Icon src={EditIcon} />
+              </Row>
+              <Comment my={30}>
+                {formatMessage(messages.reportingInterventions)}
+              </Comment>
+              <OrganizationInterventionRow
+                formatMessage={formatMessage}
+                organizationId={organizationId}
               />
-              <Icon src={EditIcon} />
-            </Row>
-            <Comment my={30}>
-              {formatMessage(messages.reportingInterventions)}
-            </Comment>
-            <OrganizationInterventionRow
-              formatMessage={formatMessage}
-              organizationId={organizationId}
-            />
-          </Col>
-        </Row>
+            </Col>
+          </Row>
 
-        <Row>
-          <Col mt={40}>
-            <DashboardSections />
-          </Col>
-        </Row>
-      </Container>
+          <Row>
+            <Col mt={40}>
+              <DashboardSections />
+            </Col>
+          </Row>
+        </Container>
+      )}
     </>
   );
 };
@@ -94,11 +109,15 @@ DashboardSetup.propTypes = {
   fetchOrganization: PropTypes.func,
   selectEntity: PropTypes.func,
   editOrganization: PropTypes.func,
+  loading: PropTypes.bool,
+  error: PropTypes.object,
 };
 
 const mapStateToProps = () =>
   createStructuredSelector({
     organization: makeSelectOrganization(),
+    loading: makeSelectOrganizationLoader('fetchOrganization'),
+    error: makeSelectOrganizationError('fetchOrganization'),
   });
 
 const mapDispatchToProps = {
