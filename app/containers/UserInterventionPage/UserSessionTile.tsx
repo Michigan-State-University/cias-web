@@ -60,7 +60,7 @@ const UserSessionTile = ({
     dayjs().isBefore(dayjs(userSession.scheduledAt));
 
   const isNotAvailable =
-    interventionType !== InterventionType.FLEXIBLE &&
+    interventionType === InterventionType.FIXED &&
     isScheduledForFuture &&
     !isFirstSession &&
     !userSession?.finishedAt &&

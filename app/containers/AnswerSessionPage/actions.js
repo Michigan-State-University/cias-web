@@ -17,7 +17,6 @@ import {
   CHANGE_IS_ANIMATING,
   SET_FEEDBACK_SCREEN_SETTINGS,
   REDIRECT_TO_PREVIEW,
-  RESET_ANSWERS,
   CREATE_USER_SESSION_REQUEST,
   CREATE_USER_SESSION_SUCCESS,
   CREATE_USER_SESSION_FAILURE,
@@ -30,6 +29,12 @@ import {
   SET_PARTICIPANT_SESSION_SETTINGS,
   SET_TRANSITIONAL_USER_SESSION_ID,
   SAVE_QUICK_EXIT_EVENT_REQUEST,
+  FETCH_USER_SESSION_REQUEST,
+  FETCH_USER_SESSION_SUCCESS,
+  FETCH_USER_SESSION_ERROR,
+  FETCH_OR_CREATE_USER_SESSION_REQUEST,
+  FETCH_OR_CREATE_USER_SESSION_SUCCESS,
+  FETCH_OR_CREATE_USER_SESSION_ERROR,
 } from './constants';
 
 export const resetReducer = () => actionBuilder(RESET_REDUCER, {});
@@ -64,8 +69,6 @@ export const startSession = () => actionBuilder(START_SESSION, {});
 export const resetSession = (sessionId) =>
   actionBuilder(RESET_SESSION, { sessionId });
 
-export const resetAnswers = () => actionBuilder(RESET_ANSWERS, {});
-
 export const redirectToPreview = (interventionId, sessionId, questionId) =>
   actionBuilder(REDIRECT_TO_PREVIEW, {
     interventionId,
@@ -82,21 +85,31 @@ export const changeIsAnimating = (isAnimating) =>
 export const setFeedbackScreenSettings = (setting, value) =>
   actionBuilder(SET_FEEDBACK_SCREEN_SETTINGS, { setting, value });
 
+export const fetchUserSessionRequest = (sessionId) =>
+  actionBuilder(FETCH_USER_SESSION_REQUEST, { sessionId });
+export const fetchUserSessionSuccess = (userSession) =>
+  actionBuilder(FETCH_USER_SESSION_SUCCESS, { userSession });
+export const fetchUserSessionError = (error) =>
+  actionBuilder(FETCH_USER_SESSION_ERROR, { error });
+
 export const createUserSessionRequest = (sessionId) =>
   actionBuilder(CREATE_USER_SESSION_REQUEST, { sessionId });
-
 export const createUserSessionSuccess = (userSession) =>
   actionBuilder(CREATE_USER_SESSION_SUCCESS, { userSession });
-
 export const createUserSessionFailure = (error) =>
   actionBuilder(CREATE_USER_SESSION_FAILURE, { error });
 
+export const fetchOrCreateUserSessionRequest = (sessionId) =>
+  actionBuilder(FETCH_OR_CREATE_USER_SESSION_REQUEST, { sessionId });
+export const fetchOrCreateUserSessionSuccess = (userSession) =>
+  actionBuilder(FETCH_OR_CREATE_USER_SESSION_SUCCESS, { userSession });
+export const fetchOrCreateUserSessionError = (error) =>
+  actionBuilder(FETCH_OR_CREATE_USER_SESSION_ERROR, { error });
+
 export const nextQuestionRequest = (userSessionId, questionId) =>
   actionBuilder(NEXT_QUESTION_REQUEST, { userSessionId, questionId });
-
 export const nextQuestionSuccess = (question) =>
   actionBuilder(NEXT_QUESTION_SUCCESS, { question });
-
 export const nextQuestionFailure = (error) =>
   actionBuilder(NEXT_QUESTION_FAILURE, { error });
 
