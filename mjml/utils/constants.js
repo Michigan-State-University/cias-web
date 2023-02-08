@@ -5,4 +5,4 @@ export const TEXT = {
   NO_PWD_CHANGE: "Your password won't change until you access the link above and create a new one.",
 }
 
-export const LOGO_URL = 'https://www.cias.app/wp-content/uploads/2022/01/cias-logo.png'
+export const LOGO_URL = 'https://cias-public.s3.us-east-2.amazonaws.com/logo.png'
