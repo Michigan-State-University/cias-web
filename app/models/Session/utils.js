@@ -3,8 +3,8 @@ import pick from 'lodash/pick';
 import sortBy from 'lodash/sortBy';
 import flatMap from 'lodash/flatMap';
 
-import { Question } from 'models/Question';
-import { feedbackActions } from 'models/Narrator/FeedbackActions';
+import { Question, QuestionDTO } from 'models/Question';
+import { EFeedbackAction } from 'models/Narrator/FeedbackActions';
 import {
   bodyAnimationType,
   speechType,
@@ -18,10 +18,11 @@ import {
 
 import { DEFAULT_PAUSE_DURATION } from 'utils/constants';
 import {
-  bodyAnimations,
-  headAnimations,
+  getBodyAnimations,
+  getHeadAnimations,
 } from 'utils/animations/animationsNames';
 import { getFromQuestionTTS } from 'utils/tts';
+import { CharacterType } from 'models/Character';
 
 import { Session } from './Session';
 
@@ -43,7 +44,7 @@ import {
 } from './QuestionTypes';
 
 /**
- * @param  {Array<Question>} questions
+ * @param  {Array<Question> | Array<QuestionDTO>} questions
  * @param  {string} questionId
  */
 export const findQuestionById = (questions, questionId) =>
@@ -272,16 +273,20 @@ export const instantiateBlockForType = (type, endPosition, question) => {
     type,
     endPosition,
   };
+
+  const character =
+    question?.narrator?.settings?.character ?? CharacterType.PEEDY; // no destructuring, because question can be null
+
   switch (type) {
     case bodyAnimationType:
       return {
-        animation: bodyAnimations[0],
+        animation: getBodyAnimations(character)[0],
         ...sharedProperties,
       };
 
     case speechType:
       return {
-        action: feedbackActions.noAction,
+        action: EFeedbackAction.NO_ACTION,
         text: [],
         audio_urls: [],
         sha256: [],
@@ -291,7 +296,9 @@ export const instantiateBlockForType = (type, endPosition, question) => {
 
     case reflectionType:
       return {
-        action: feedbackActions.noAction,
+        action: EFeedbackAction.NO_ACTION,
+        session_id: null,
+        question_group_id: null,
         question_id: '',
         reflections: [],
         animation: 'rest',
@@ -300,7 +307,7 @@ export const instantiateBlockForType = (type, endPosition, question) => {
 
     case reflectionFormulaType:
       return {
-        action: feedbackActions.noAction,
+        action: EFeedbackAction.NO_ACTION,
         payload: '',
         reflections: [],
         animation: 'rest',
@@ -309,13 +316,13 @@ export const instantiateBlockForType = (type, endPosition, question) => {
 
     case headAnimationType:
       return {
-        animation: headAnimations[0],
+        animation: getHeadAnimations(character)[0],
         ...sharedProperties,
       };
 
     case readQuestionBlockType:
       return {
-        action: feedbackActions.noAction,
+        action: EFeedbackAction.NO_ACTION,
         animation: 'rest',
         text: getFromQuestionTTS(question),
         audio_urls: [],
@@ -332,7 +339,7 @@ export const instantiateBlockForType = (type, endPosition, question) => {
     case feedbackBlockType:
       return {
         animation: 'standStill',
-        action: feedbackActions.showSpectrum,
+        action: EFeedbackAction.SHOW_SPECTRUM,
         ...sharedProperties,
       };
     default:

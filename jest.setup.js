@@ -2,7 +2,7 @@
 import React from 'react';
 import 'mutationobserver-shim';
 import 'jest-styled-components';
-import configureDayjs from './app/configureDayjs';
+import { configureDayjs } from './app/utils/dayjs';
 
 configureDayjs();
 
@@ -11,6 +11,11 @@ jest.mock('./app/components/Icon', () => ({
   default: ({ src, alt, className }) => (
     <img src={src} alt={alt} className={className} />
   ),
+}));
+
+jest.mock('./app/translations/en.json', () => ({
+  message1: 'default message',
+  message2: 'default message 2',
 }));
 
 Object.defineProperty(document, 'getSelection', {

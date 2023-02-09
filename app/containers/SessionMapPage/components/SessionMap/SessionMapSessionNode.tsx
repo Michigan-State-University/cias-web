@@ -9,7 +9,7 @@ import { SessionNodeData } from '../../types';
 import { SESSION_MAP_COLORS } from '../../constants';
 import messages from '../../messages';
 
-import { SessionMapInteractiveNodeContainer } from './SessionMapInteractiveNodeContainer';
+import SessionMapInteractiveNodeContainer from './SessionMapInteractiveNodeContainer';
 
 const SessionMapSessionNode = ({
   id,

@@ -13,8 +13,8 @@ import {
   makeSelectInterventionInvites,
 } from 'global/reducers/intervention';
 
-import { InterventionDto } from 'models/Intervention/InterventionDto';
-import { InterventionInvite } from 'models/Intervention';
+import { Intervention } from 'models/Intervention';
+import { InterventionInvite } from 'models/InterventionInvite';
 
 import Box from 'components/Box';
 import H2 from 'components/H2';
@@ -33,7 +33,7 @@ const Component = ({ organizationId }: Props) => {
   const dispatch = useDispatch();
 
   // selectors
-  const intervention = useSelector<unknown, Nullable<InterventionDto>>(
+  const intervention = useSelector<unknown, Nullable<Intervention>>(
     makeSelectIntervention(),
   );
   const invites = useSelector<unknown, InterventionInvite[]>(

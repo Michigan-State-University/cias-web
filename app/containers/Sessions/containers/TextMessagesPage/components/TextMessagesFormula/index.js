@@ -54,8 +54,8 @@ const TextMessagesFormula = ({
             includeAllVariables
             disabled={disabled}
             onClick={(value) => handleFormulaUpdate(`${formula ?? ''}${value}`)}
-            sessionId={sessionId}
-            interventionId={interventionId}
+            currentSessionId={sessionId}
+            currentInterventionId={interventionId}
             isMultiSession
             includeCurrentSession
           >

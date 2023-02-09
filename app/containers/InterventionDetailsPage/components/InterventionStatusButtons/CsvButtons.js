@@ -1,13 +1,13 @@
-import React, { useMemo } from 'react';
+import React from 'react';
 import { FormattedMessage, injectIntl, IntlShape } from 'react-intl';
 import PropTypes from 'prop-types';
 import dayjs from 'dayjs';
-import { createStructuredSelector } from 'reselect';
-import { connect } from 'react-redux';
-import { compose } from 'redux';
 
-import { RolePermissions } from 'models/User/RolePermissions';
-import { makeSelectUserRoles } from 'global/reducers/auth';
+import { useRoleManager } from 'models/User/RolesManager';
+
+import { FILE_GENERATION_TIME_FORMAT } from 'utils/dayjs';
+
+import globalMessages from 'global/i18n/globalMessages';
 
 import Tooltip from 'components/Tooltip';
 import FileDownload from 'components/FileDownload';
@@ -21,21 +21,16 @@ const CsvButtons = ({
   urlToDownload,
   handleSendCsv,
   csvLink,
-  userRoles,
 }) => {
-  const rolePermissions = useMemo(
-    () => RolePermissions(userRoles),
-    [userRoles],
-  );
-
+  const { canDownloadInterventionCsv } = useRoleManager();
   const CsvDownload = () => (
     <FileDownload url={urlToDownload}>
       {({ isDownloading }) => (
         <Tooltip
-          id={csvGeneratedAt}
-          text={`${formatMessage(messages.lastCsvDate)}${dayjs(
+          id={`intervention-csv-generated-at-${csvGeneratedAt}`}
+          text={`${formatMessage(globalMessages.lastCsvDate)}${dayjs(
             csvGeneratedAt,
-          ).format('YYYY/MM/DD HH:mm')}`}
+          ).format(FILE_GENERATION_TIME_FORMAT)}`}
         >
           <ShareButton outlined loading={isDownloading}>
             <FormattedMessage {...messages.csvDownload} />
@@ -51,7 +46,7 @@ const CsvButtons = ({
     </ShareButton>
   );
 
-  if (!rolePermissions.canDownloadInterventionCsv) return <></>;
+  if (!canDownloadInterventionCsv) return <></>;
   return (
     <>
       {csvLink && <CsvDownload />}
@@ -66,13 +61,6 @@ CsvButtons.propTypes = {
   urlToDownload: PropTypes.string,
   handleSendCsv: PropTypes.func,
   csvLink: PropTypes.string,
-  userRoles: PropTypes.array,
 };
 
-const mapStateToProps = createStructuredSelector({
-  userRoles: makeSelectUserRoles(),
-});
-
-const withConnect = connect(mapStateToProps);
-
-export default compose(withConnect)(injectIntl(CsvButtons));
+export default injectIntl(CsvButtons);

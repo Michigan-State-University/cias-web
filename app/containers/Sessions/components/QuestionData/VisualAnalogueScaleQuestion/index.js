@@ -18,19 +18,21 @@ import VisualAnalogueScaleQuestionLayout from 'containers/AnswerSessionPage/layo
 import isNullOrUndefined from 'utils/isNullOrUndefined';
 import { StyledInput } from 'components/Input/StyledInput';
 import OriginalTextHover from 'components/OriginalTextHover';
-import { visualAnalogScaleLabelStyles } from 'theme';
+import { BadgeInput } from 'components/Input/BadgeInput';
+import { visualAnalogScaleLabelStyles, colors } from 'theme';
 import {
   makeSelectSelectedQuestion,
   updateQuestionData,
 } from 'global/reducers/questions';
 
 import { canEdit } from 'models/Status/statusPermissions';
+import { numericValidator } from 'utils/validators';
 import messages from './messages';
 import { UPDATE_DATA } from './constants';
 
 const VisualAnalogueScaleQuestion = ({
   selectedQuestion,
-  updateLabel,
+  updateProperty,
   isNarratorTab,
   interventionStatus,
   intl: { formatMessage },
@@ -45,13 +47,20 @@ const VisualAnalogueScaleQuestion = ({
       start_value: startValue,
       end_value: endValue,
       original_text: originalText,
+      range_start: rangeStart,
+      range_end: rangeEnd,
     },
   } = data[0];
 
   const editingPossible = canEdit(interventionStatus);
 
+  const calculateLabelWidth = (value) => {
+    const valueLength = value?.toString().length ?? 0;
+    return `${48 + (valueLength > 3 ? 8 * valueLength : 0)}px`;
+  };
+
   const labels = {
-    0: {
+    [rangeStart]: {
       label: (
         <OriginalTextHover
           id={`question-${id}-start`}
@@ -61,17 +70,22 @@ const VisualAnalogueScaleQuestion = ({
           <StyledInput
             disabled={!editingPossible}
             width={120}
+            px={5}
             py={9}
-            textAlign="center"
+            textAlign="left"
             placeholder={formatMessage(messages.startValue)}
             value={startValue}
-            onBlur={(value) => updateLabel(value, 'start_value')}
+            onBlur={(value) => updateProperty(value, 'start_value')}
           />
         </OriginalTextHover>
       ),
-      style: visualAnalogScaleLabelStyles,
+      style: {
+        ...visualAnalogScaleLabelStyles,
+        transform: 'none',
+        marginTop: '5px',
+      },
     },
-    100: {
+    [rangeEnd]: {
       label: (
         <OriginalTextHover
           id={`question-${id}-end`}
@@ -82,14 +96,19 @@ const VisualAnalogueScaleQuestion = ({
             disabled={!editingPossible}
             width={120}
             py={9}
-            textAlign="center"
+            px={5}
+            textAlign="right"
             placeholder={formatMessage(messages.endValue)}
             value={endValue}
-            onBlur={(value) => updateLabel(value, 'end_value')}
+            onBlur={(value) => updateProperty(value, 'end_value')}
           />
         </OriginalTextHover>
       ),
-      style: visualAnalogScaleLabelStyles,
+      style: {
+        ...visualAnalogScaleLabelStyles,
+        transform: 'translateX(-100%)',
+        marginTop: '5px',
+      },
     },
   };
 
@@ -99,18 +118,46 @@ const VisualAnalogueScaleQuestion = ({
         <Column>
           <Row>
             <Box width="100%">
-              {!isNarratorTab && (
-                <AppSlider
-                  marks={labels}
-                  disabled
-                  showValue={!isNullOrUndefined(showNumber) && showNumber}
-                  ariaLabelledByForHandle={`${QUESTION_TITLE_ID} ${QUESTION_SUBTITLE_ID}`}
+              <Row justify="between" mb={24} hidden={isNarratorTab}>
+                <BadgeInput
+                  color={colors.electricPurple}
+                  value={rangeStart}
+                  onBlur={(value) => updateProperty(value, 'range_start')}
+                  autoSize={false}
+                  width={calculateLabelWidth(rangeStart)}
+                  align="center"
+                  validator={numericValidator}
                 />
+                <BadgeInput
+                  color={colors.electricPurple}
+                  value={rangeEnd}
+                  onBlur={(value) => updateProperty(value, 'range_end')}
+                  autoSize={false}
+                  width={calculateLabelWidth(rangeEnd)}
+                  align="center"
+                  validator={numericValidator}
+                />
+              </Row>
+              {!isNarratorTab && (
+                <Box mb={64}>
+                  <AppSlider
+                    min={rangeStart}
+                    max={rangeEnd}
+                    marks={labels}
+                    disabled
+                    showValue={!isNullOrUndefined(showNumber) && showNumber}
+                    ariaLabelledByForHandle={`${QUESTION_TITLE_ID} ${QUESTION_SUBTITLE_ID}`}
+                    hideHandle
+                    value={rangeStart}
+                  />
+                </Box>
               )}
               {isNarratorTab && (
                 <VisualAnalogueScaleQuestionLayout
                   startValue={startValue}
                   endValue={endValue}
+                  rangeStart={rangeStart}
+                  rangeEnd={rangeEnd}
                   showNumber={!isNullOrUndefined(showNumber) && showNumber}
                 />
               )}
@@ -125,7 +172,7 @@ const VisualAnalogueScaleQuestion = ({
 VisualAnalogueScaleQuestion.propTypes = {
   selectedQuestion: PropTypes.object.isRequired,
   intl: PropTypes.object.isRequired,
-  updateLabel: PropTypes.func.isRequired,
+  updateProperty: PropTypes.func.isRequired,
   isNarratorTab: PropTypes.bool,
   interventionStatus: PropTypes.string,
 };
@@ -135,7 +182,7 @@ const mapStateToProps = createStructuredSelector({
 });
 
 const mapDispatchToProps = {
-  updateLabel: (value, label) =>
+  updateProperty: (value, label) =>
     updateQuestionData({ type: UPDATE_DATA, data: { value, label } }),
 };
 

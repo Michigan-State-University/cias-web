@@ -4,17 +4,17 @@ import {
   registerParticipantRequest,
   registerParticipantSuccess,
   registerParticipantError,
-  registerResearcherRequest,
-  registerResearcherSuccess,
-  registerResearcherError,
+  registerFromInvitationRequest,
+  registerFromInvitationSuccess,
+  registerFromInvitationError,
 } from '../actions';
 import {
   REGISTER_PARTICIPANT_REQUEST,
   REGISTER_PARTICIPANT_SUCCESS,
   REGISTER_PARTICIPANT_ERROR,
-  REGISTER_RESEARCHER_REQUEST,
-  REGISTER_RESEARCHER_SUCCESS,
-  REGISTER_RESEARCHER_ERROR,
+  REGISTER_FROM_INVITATION_REQUEST,
+  REGISTER_FROM_INVITATION_SUCCESS,
+  REGISTER_FROM_INVITATION_ERROR,
 } from '../constants';
 
 describe('RegisterPage actions', () => {
@@ -50,7 +50,7 @@ describe('RegisterPage actions', () => {
     };
     expect(registerParticipantError(error)).toEqual(expected);
   });
-  it('has a type of REGISTER_RESEARCHER_REQUEST', () => {
+  it('has a type of REGISTER_FROM_INVITATION_REQUEST', () => {
     const payload = {
       firstName: 'First',
       lastName: 'Last',
@@ -60,26 +60,26 @@ describe('RegisterPage actions', () => {
       invitationToken: 'ansiuu91ndmao12-kmcsa',
     };
     const expected = {
-      type: REGISTER_RESEARCHER_REQUEST,
+      type: REGISTER_FROM_INVITATION_REQUEST,
       payload,
     };
-    expect(registerResearcherRequest(payload)).toEqual(expected);
+    expect(registerFromInvitationRequest(payload)).toEqual(expected);
   });
-  it('has a type of REGISTER_RESEARCHER_SUCCESS', () => {
+  it('has a type of REGISTER_FROM_INVITATION_SUCCESS', () => {
     const payload = {};
     const expected = {
-      type: REGISTER_RESEARCHER_SUCCESS,
+      type: REGISTER_FROM_INVITATION_SUCCESS,
       payload,
     };
-    expect(registerResearcherSuccess()).toEqual(expected);
+    expect(registerFromInvitationSuccess()).toEqual(expected);
   });
-  it('has a type of REGISTER_RESEARCHER_ERROR', () => {
+  it('has a type of REGISTER_FROM_INVITATION_ERROR', () => {
     const error = 'Error!';
     const payload = { error };
     const expected = {
-      type: REGISTER_RESEARCHER_ERROR,
+      type: REGISTER_FROM_INVITATION_ERROR,
       payload,
     };
-    expect(registerResearcherError(error)).toEqual(expected);
+    expect(registerFromInvitationError(error)).toEqual(expected);
   });
 });

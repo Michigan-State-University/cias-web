@@ -21,3 +21,9 @@ export enum QuestionTypes {
   HENRY_FORD_QUESTION = 'Question::HenryFord',
   HENRY_FORD_INITIAL = 'Question::HenryFordInitial',
 }
+
+export const TLFB_QUESTION_TYPES = [
+  QuestionTypes.TLFB_CONFIG,
+  QuestionTypes.TLFB_EVENTS,
+  QuestionTypes.TLFB_QUESTION,
+];

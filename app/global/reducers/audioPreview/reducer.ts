@@ -11,12 +11,14 @@ type State = {
   phoneticText: Nullable<string>;
   phoneticUrl: Nullable<string>;
   phoneticLoading: boolean;
+  previewKey: Nullable<string>;
 };
 
 export const initialState = {
   phoneticText: null,
   phoneticUrl: null,
   phoneticLoading: false,
+  previewKey: null,
 };
 
 /* eslint-disable default-case, no-param-reassign */
@@ -32,6 +34,7 @@ const AudioPreviewReducer: Reducer<State> = (
         draft.phoneticText = payload;
         draft.phoneticLoading = true;
         draft.phoneticUrl = null;
+        draft.previewKey = payload.previewKey;
         break;
       case PHONETIC_PREVIEW_SUCCESS:
         draft.phoneticUrl = payload.url;

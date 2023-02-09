@@ -8,6 +8,7 @@ exports[`<QuestionTypeChooser /> should match the snapshot 1`] = `
   border-radius: 5px;
   width: 100%;
   position: relative;
+  color: unset;
 }
 
 .c2 {
@@ -42,6 +43,8 @@ exports[`<QuestionTypeChooser /> should match the snapshot 1`] = `
   -webkit-box-align: center;
   -ms-flex-align: center;
   align-items: center;
+  color: unset;
+  cursor: pointer;
 }
 
 .c2:hover {
@@ -127,6 +130,7 @@ exports[`<QuestionTypeChooser /> should match the snapshot while being open 1`] 
   border-radius: 5px;
   width: 100%;
   position: relative;
+  color: unset;
 }
 
 .c2 {
@@ -161,6 +165,8 @@ exports[`<QuestionTypeChooser /> should match the snapshot while being open 1`] 
   -webkit-box-align: center;
   -ms-flex-align: center;
   align-items: center;
+  color: unset;
+  cursor: pointer;
 }
 
 .c2:hover {
@@ -183,6 +189,7 @@ exports[`<QuestionTypeChooser /> should match the snapshot while being open 1`] 
   border-radius: 10px;
   top: initial;
   bottom: initial;
+  color: unset;
 }
 
 .c6 {
@@ -192,6 +199,7 @@ exports[`<QuestionTypeChooser /> should match the snapshot while being open 1`] 
   border-radius: 5px;
   padding: 16px;
   border-bottom: 1px solid #E9F1FB;
+  color: unset;
 }
 
 .c8 {
@@ -202,6 +210,7 @@ exports[`<QuestionTypeChooser /> should match the snapshot while being open 1`] 
   width: 100%;
   height: 100%;
   position: relative;
+  color: unset;
 }
 
 .c9 {
@@ -217,6 +226,7 @@ exports[`<QuestionTypeChooser /> should match the snapshot while being open 1`] 
   width: 100%;
   overflow: scroll;
   padding: 8px;
+  color: unset;
 }
 
 .c9::-webkit-scrollbar {
@@ -232,6 +242,8 @@ exports[`<QuestionTypeChooser /> should match the snapshot while being open 1`] 
   cursor: pointer;
   border-radius: 5px;
   border-radius: 5px;
+  color: unset;
+  cursor: pointer;
 }
 
 .c10:hover {

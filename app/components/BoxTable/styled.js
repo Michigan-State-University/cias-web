@@ -4,10 +4,11 @@ import { colors } from 'theme';
 
 const COLUMN_WIDTH = '100px';
 
-const getColumnTemplate = (columnsNo, hasEdit, hasDelete) => {
+const getColumnTemplate = (columnsNo, hasEdit, hasDelete, hasTranslation) => {
   const firstColumns =
     columnsNo > 1 ? `repeat(${columnsNo - 1}, ${COLUMN_WIDTH}) 1fr` : '1fr';
-  const editColumns = hasEdit || hasDelete ? '32px 32px' : '';
+  const editColumns =
+    hasEdit || hasDelete || hasTranslation ? '32px 32px 32px' : '';
 
   return css`
     grid-template-columns: ${firstColumns} ${editColumns};
@@ -23,8 +24,8 @@ export const Row = styled.div`
 
   display: grid;
   grid-template-rows: 1fr;
-  ${({ columnsNo, hasEdit, hasDelete }) =>
-    getColumnTemplate(columnsNo, hasEdit, hasDelete)};
+  ${({ columnsNo, hasEdit, hasDelete, hasTranslation }) =>
+    getColumnTemplate(columnsNo, hasEdit, hasDelete, hasTranslation)};
 `;
 
 export const Header = styled.div`

@@ -1,7 +1,7 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`<AnswerSessionPage /> Should render and match the snapshot 1`] = `
-.c1 {
+.c2 {
   width: auto;
   height: auto;
   display: block;
@@ -24,9 +24,10 @@ exports[`<AnswerSessionPage /> Should render and match the snapshot 1`] = `
   -webkit-box-align: center;
   -ms-flex-align: center;
   align-items: center;
+  color: unset;
 }
 
-.c3 {
+.c6 {
   width: auto;
   height: auto;
   display: block;
@@ -34,6 +35,19 @@ exports[`<AnswerSessionPage /> Should render and match the snapshot 1`] = `
   max-width: 600px;
   margin-right: 32px;
   margin-left: 32px;
+  color: unset;
+}
+
+.c10 {
+  width: auto;
+  height: auto;
+  display: block;
+  border-radius: 5px;
+  position: absolute;
+  margin-right: 24px;
+  margin-left: 24px;
+  bottom: 48px;
+  color: unset;
 }
 
 .c0 {
@@ -46,29 +60,75 @@ exports[`<AnswerSessionPage /> Should render and match the snapshot 1`] = `
   flex-direction: column;
   width: 100%;
   height: 100%;
+  max-height: 100vh;
 }
 
-.c6 {
+.c1 {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-flex-direction: column;
+  -ms-flex-direction: column;
+  flex-direction: column;
+  width: 100%;
+  -webkit-box-flex: 1;
+  -webkit-flex-grow: 1;
+  -ms-flex-positive: 1;
+  flex-grow: 1;
+  overflow: auto;
+}
+
+.c4 {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-flex-direction: column;
+  -ms-flex-direction: column;
+  flex-direction: column;
+  width: 100%;
+  -webkit-box-pack: center;
+  -webkit-justify-content: center;
+  -ms-flex-pack: center;
+  justify-content: center;
+  justify-items: center;
+  height: 100%;
+  position: relative;
+}
+
+.c11 {
   margin: 0;
   font-family: DM Sans;
   font-size: 15px;
   line-height: 150%;
-  margin-bottom: 50px;
   color: rgba(210,55,29,1);
   color: rgba(210,55,29,1);
   text-align: center;
 }
 
 .c5 {
-  font-family: DM Sans;
-  font-size: 13px;
-  line-height: 130%;
-  margin-bottom: 50px;
-  color: #2F3850;
-  text-align: center;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-flex-direction: row;
+  -ms-flex-direction: row;
+  flex-direction: row;
+  height: auto;
+  -webkit-align-content: center;
+  -ms-flex-line-pack: center;
+  align-content: center;
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  -webkit-flex-direction: column;
+  -ms-flex-direction: column;
+  flex-direction: column;
 }
 
-.c4 {
+.c7 {
   margin: 0;
   font-family: DM Sans;
   font-size: 18px;
@@ -78,7 +138,7 @@ exports[`<AnswerSessionPage /> Should render and match the snapshot 1`] = `
   text-align: center;
 }
 
-.c7 {
+.c8 {
   width: 100%;
   height: 40px;
   border-radius: 100px;
@@ -93,11 +153,11 @@ exports[`<AnswerSessionPage /> Should render and match the snapshot 1`] = `
   transition: background-color 300ms ease,color 300ms ease,border 300ms ease;
 }
 
-.c8 {
+.c9 {
   width: 80%;
 }
 
-.c2 {
+.c3 {
   -webkit-align-items: center;
   -webkit-box-align: center;
   -ms-flex-align: center;
@@ -138,8 +198,40 @@ exports[`<AnswerSessionPage /> Should render and match the snapshot 1`] = `
 
 }
 
+@media only screen and (min-width:768px) {
+
+}
+
+@media only screen and (min-width:960px) {
+
+}
+
+@media only screen and (min-width:1170px) {
+
+}
+
+@media only screen and (min-width:1360px) {
+
+}
+
+@media only screen and (min-width:768px) {
+
+}
+
+@media only screen and (min-width:960px) {
+
+}
+
+@media only screen and (min-width:1170px) {
+
+}
+
+@media only screen and (min-width:1360px) {
+
+}
+
 @media only screen and (max-width:480px) {
-  .c8 {
+  .c9 {
     width: 80%;
   }
 }
@@ -151,40 +243,54 @@ exports[`<AnswerSessionPage /> Should render and match the snapshot 1`] = `
 >
   <div
     class="c1"
-    display="flex"
-    height="100%"
-    width="100%"
+    overflow="auto"
   >
     <div
       class="c2"
+      display="flex"
+      height="100%"
+      width="100%"
     >
       <div
         class="c3"
       >
-        <h2
+        <div
           class="c4"
+          height="100%"
         >
-          Welcome!
-        </h2>
-        <p
-          class="c5"
-        >
-          Click the button below to start a new session.
-        </p>
-        <h3
-          class="c6"
-          color="#D2371D"
-        >
-          Please be aware that after clicking the button, audio may be played automatically and the content could change its position dynamically.
-        </h3>
+          <div
+            class="c5"
+            direction="column"
+          >
+            <div
+              class="c6"
+            >
+              <h2
+                class="c7"
+              >
+                Let’s fill the session
+              </h2>
+            </div>
+            <button
+              class="c8 c9"
+              color="primary"
+              radius="100px"
+            >
+              Start session
+            </button>
+          </div>
+          <div
+            class="c10"
+          >
+            <h3
+              class="c11"
+              color="#D2371D"
+            >
+              Please be aware that after clicking the button, audio may be played automatically and the content could change its position dynamically.
+            </h3>
+          </div>
+        </div>
       </div>
-      <button
-        class="c7 c8"
-        color="primary"
-        radius="100px"
-      >
-        Start Session
-      </button>
     </div>
   </div>
 </div>

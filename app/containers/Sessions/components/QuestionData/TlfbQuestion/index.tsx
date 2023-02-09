@@ -77,10 +77,12 @@ const TlfbQuestion = ({
             substances,
             substance_groups: substanceGroups,
           },
+          original_text: originalText,
         },
       ],
     },
   } = currentQuestion;
+
   return (
     <Box py={32} px={17} width="100%">
       <Row>
@@ -101,6 +103,7 @@ const TlfbQuestion = ({
           richText
           richTextBlurTransparentBorder={false}
           autoSize
+          originalTextHover={originalText?.question_title}
         />
       </Row>
 
@@ -118,6 +121,7 @@ const TlfbQuestion = ({
           richText
           richTextBlurTransparentBorder={false}
           autoSize
+          originalTextHover={originalText?.head_question}
         />
       </Row>
 
@@ -135,6 +139,7 @@ const TlfbQuestion = ({
           richText
           richTextBlurTransparentBorder={false}
           autoSize
+          originalTextHover={originalText?.substance_question}
         />
       </Row>
 
@@ -167,6 +172,7 @@ const TlfbQuestion = ({
 
       {substancesWithGroup && (
         <GroupedSubstances
+          originalText={originalText?.substance_groups}
           substanceGroups={substanceGroups}
           loading={isLoading}
           error={error ?? ''}
@@ -176,6 +182,7 @@ const TlfbQuestion = ({
 
       {!substancesWithGroup && (
         <UngroupedSubstances
+          originalText={originalText?.substances}
           substances={substances}
           loading={isLoading}
           error={error ?? ''}

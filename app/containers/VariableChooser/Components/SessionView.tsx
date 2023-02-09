@@ -30,7 +30,7 @@ const SessionView = ({ onClick }: Props) => {
 
   // actions
   const fetchSessions = (interventionId: string) =>
-    dispatch(fetchSessionsRequest(interventionId));
+    dispatch(fetchSessionsRequest(interventionId, true));
 
   // selectors
   const allSessions = useSelector<unknown, Session[]>(makeSelectSessions());
@@ -39,19 +39,21 @@ const SessionView = ({ onClick }: Props) => {
   );
 
   const {
-    currentInterventionId,
+    selectedInterventionId,
     currentView,
     includeAllSessions,
     includeCurrentSession,
-    initialSessionId,
+    currentSessionId,
     isMultiIntervention,
     setCurrentView,
     sessionTypesWhiteList,
   } = useContext(VariableChooserContext);
 
   useEffect(() => {
-    fetchSessions(currentInterventionId);
-  }, [currentInterventionId]);
+    if (selectedInterventionId) {
+      fetchSessions(selectedInterventionId);
+    }
+  }, [selectedInterventionId]);
 
   const sessions = useMemo(() => {
     const filteredSessions = allSessions?.filter(({ type }) =>
@@ -60,7 +62,7 @@ const SessionView = ({ onClick }: Props) => {
     if (includeAllSessions) return filteredSessions;
 
     const currentSession = allSessions?.find(
-      ({ id }) => id === initialSessionId,
+      ({ id }) => id === currentSessionId,
     ) as Session;
 
     return filteredSessions?.filter(({ position }) =>
@@ -75,8 +77,8 @@ const SessionView = ({ onClick }: Props) => {
     sessionTypesWhiteList,
   ]);
 
-  const isInitialSession = (sessionId: string) =>
-    sessionId === initialSessionId;
+  const isCurrentSession = (sessionId: string) =>
+    sessionId === currentSessionId;
 
   const toInterventionView = () => {
     if (!isMultiIntervention) return;
@@ -104,7 +106,7 @@ const SessionView = ({ onClick }: Props) => {
         <SessionRow
           key={`${id}-select-session-${index}`}
           id={id}
-          isInitialSession={isInitialSession(id)}
+          isCurrentSession={isCurrentSession(id)}
           isLast={index === sessions.length - 1}
           name={name}
           onClick={onClick}

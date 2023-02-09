@@ -54,8 +54,8 @@ export const createTeamSuccess = (team) =>
 export const createTeamFailure = (error) =>
   actionBuilder(CREATE_TEAM_FAILURE, error);
 
-export const inviteToTeamRequest = (email, teamId) =>
-  actionBuilder(INVITE_TO_TEAM_REQUEST, { email, teamId });
+export const inviteToTeamRequest = (email, teamId, roles) =>
+  actionBuilder(INVITE_TO_TEAM_REQUEST, { email, teamId, roles });
 export const inviteToTeamSuccess = () =>
   actionBuilder(INVITE_TO_TEAM_SUCCESS, {});
 export const inviteToTeamFailure = (error) =>

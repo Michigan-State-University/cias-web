@@ -120,41 +120,9 @@ export default defineMessages({
     id: `${scope}.interventionSettingsModalTitle`,
     defaultMessage: 'Intervention Settings',
   },
-  interventionSettingsModalSubtitle: {
-    id: `${scope}.interventionSettingsModalSubtitle`,
-    defaultMessage: 'Change the default settings for the entire intervention',
-  },
-  interventionSettingsLanguageLabel: {
-    id: `${scope}.interventionSettingsLanguageLabel`,
-    defaultMessage: 'Language',
-  },
-  interventionSettingsQuickExit: {
-    id: `${scope}.interventionSettingsQuickExit`,
-    defaultMessage: 'Quick Exit',
-  },
-  interventionSettingsQuickExitLabel: {
-    id: `${scope}.interventionSettingsQuickExitLabel`,
-    defaultMessage: 'Turn on Quick Exit',
-  },
   assignOrganization: {
     id: `${scope}.assignOrganization`,
     defaultMessage: 'Assign Organization',
-  },
-  assignOrganizationSelectLabel: {
-    id: `${scope}.assignOrganizationSelectLabel`,
-    defaultMessage: 'Choose Organization:',
-  },
-  applyChangesButton: {
-    id: `${scope}.applyChangesButton`,
-    defaultMessage: 'Apply global changes',
-  },
-  cancelButton: {
-    id: `${scope}.cancelButton`,
-    defaultMessage: 'Cancel',
-  },
-  saveButton: {
-    id: `${scope}.saveButton`,
-    defaultMessage: 'Save',
   },
   pageTitle: {
     id: `${scope}.pageTitle`,
@@ -179,5 +147,9 @@ export default defineMessages({
   inviteToIntervention: {
     id: `${scope}.inviteToIntervention`,
     defaultMessage: 'Invite Participants',
+  },
+  exportIntervention: {
+    id: `${scope}.exportIntervention`,
+    defaultMessage: 'Export Intervention',
   },
 });

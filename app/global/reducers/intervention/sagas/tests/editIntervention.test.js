@@ -1,6 +1,6 @@
 import axios from 'axios';
 import { toast } from 'react-toastify';
-import { takeLatest } from 'redux-saga/effects';
+import { takeEvery } from 'redux-saga/effects';
 import * as matchers from 'redux-saga-test-plan/matchers';
 import { throwError } from 'redux-saga-test-plan/providers';
 import { expectSaga } from 'redux-saga-test-plan';
@@ -64,7 +64,7 @@ describe('editIntervention saga', () => {
     const sagaFunction = editInterventionSaga();
     const takeLatestDescriptor = sagaFunction.next().value;
     expect(takeLatestDescriptor).toEqual(
-      takeLatest(EDIT_INTERVENTION_REQUEST, editIntervention),
+      takeEvery(EDIT_INTERVENTION_REQUEST, editIntervention),
     );
   });
 });

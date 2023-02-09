@@ -7,6 +7,7 @@ exports[`<TimezoneForm /> Should render and match the snapshot 1`] = `
   display: block;
   border-radius: 5px;
   cursor: pointer;
+  color: unset;
 }
 
 .c3 {
@@ -34,6 +35,7 @@ exports[`<TimezoneForm /> Should render and match the snapshot 1`] = `
   font-size: 13px;
   line-height: 130%;
   margin-bottom: 5px;
+  font-size: 12px;
   color: #2F3850;
   width: -webkit-fit-content;
   width: -moz-fit-content;
@@ -65,6 +67,7 @@ exports[`<TimezoneForm /> Should render and match the snapshot 1`] = `
     >
       <p
         class="c1"
+        font-size="12px"
         width="fit-content"
       >
         Time zone

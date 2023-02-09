@@ -9,7 +9,7 @@ import { toast } from 'react-toastify';
 import lowerCase from 'lodash/lowerCase';
 import upperFirst from 'lodash/upperFirst';
 
-import { Roles } from 'models/User/UserRoles';
+import { Roles } from 'models/User/RolesManager';
 
 import {
   makeSelectUser,
@@ -81,13 +81,13 @@ const UserDetailsComponent = ({
 
   const roleHeader = useMemo(() => {
     switch (role) {
-      case Roles.eInterventionAdmin:
+      case Roles.EInterventionAdmin:
         return formatMessage(messages.interventionAdminsHeader);
-      case Roles.organizationAdmin:
+      case Roles.OrganizationAdmin:
         return formatMessage(messages.organizationAdminsHeader);
-      case Roles.healthSystemAdmin:
+      case Roles.HealthSystemAdmin:
         return formatMessage(messages.healthSystemAdminsHeader);
-      case Roles.clinicAdmin:
+      case Roles.ClinicAdmin:
         return formatMessage(messages.clinicAdminsHeader);
       default:
         return '';
@@ -96,13 +96,13 @@ const UserDetailsComponent = ({
 
   const roleHelper = useMemo(() => {
     switch (role) {
-      case Roles.eInterventionAdmin:
+      case Roles.EInterventionAdmin:
         return formatMessage(messages.interventionAdminsHelper);
-      case Roles.organizationAdmin:
+      case Roles.OrganizationAdmin:
         return formatMessage(messages.organizationAdminsHelper);
-      case Roles.healthSystemAdmin:
+      case Roles.HealthSystemAdmin:
         return formatMessage(messages.healthSystemAdminsHelper);
-      case Roles.clinicAdmin:
+      case Roles.ClinicAdmin:
         return formatMessage(messages.clinicAdminsHelper);
       default:
         return '';

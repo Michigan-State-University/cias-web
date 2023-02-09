@@ -205,6 +205,7 @@ exports[`<ThirdPartyQuestion /> Should render and match the snapshot 1`] = `
   padding-left: 21px;
   border-radius: 5px;
   border-radius: 5px;
+  color: unset;
 }
 
 .c2:hover {
@@ -228,6 +229,7 @@ exports[`<ThirdPartyQuestion /> Should render and match the snapshot 1`] = `
   -ms-flex-align: center;
   align-items: center;
   gap: 15px;
+  color: unset;
 }
 
 .c8 {
@@ -236,6 +238,7 @@ exports[`<ThirdPartyQuestion /> Should render and match the snapshot 1`] = `
   display: block;
   border-radius: 5px;
   min-width: 110px;
+  color: unset;
 }
 
 .c16 {
@@ -250,6 +253,8 @@ exports[`<ThirdPartyQuestion /> Should render and match the snapshot 1`] = `
   cursor: pointer;
   border-radius: 5px;
   border-radius: 5px;
+  color: unset;
+  cursor: pointer;
 }
 
 .c16:hover {
@@ -261,6 +266,7 @@ exports[`<ThirdPartyQuestion /> Should render and match the snapshot 1`] = `
   height: auto;
   display: block;
   border-radius: 5px;
+  color: unset;
 }
 
 .c5 {

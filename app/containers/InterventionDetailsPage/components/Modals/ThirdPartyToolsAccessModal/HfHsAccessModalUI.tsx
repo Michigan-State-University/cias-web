@@ -2,6 +2,8 @@ import React, { memo } from 'react';
 import { Markup } from 'interweave';
 import { useIntl } from 'react-intl';
 
+import globalMessages from 'global/i18n/globalMessages';
+
 import Switch, { LabelPosition } from 'components/Switch';
 import Text from 'components/Text';
 import Button from 'components/Button';
@@ -12,7 +14,7 @@ import { Col, Row } from 'components/ReactGridSystem';
 import { HFHS_ACCESS_LABEL_ID } from './constants';
 import { ModalUIData } from './types';
 
-import messages from '../messages';
+import messages from './messages';
 
 interface Props {
   modalData: ModalUIData;
@@ -72,7 +74,7 @@ const Component = ({
             disabled={!canSave}
             mt={40}
           >
-            {formatMessage(messages.saveButton)}
+            {formatMessage(globalMessages.save)}
           </Button>
         </Col>
       </Row>

@@ -97,4 +97,8 @@ export default defineMessages({
     id: `${scope}.thirdPartyToolsAccessModalTitle`,
     defaultMessage: 'Access to 3rd party tools',
   },
+  exportIntervention: {
+    id: `${scope}.exportIntervention`,
+    defaultMessage: 'Export Intervention',
+  },
 });

@@ -2,8 +2,12 @@ import styled from 'styled-components';
 import { Link } from 'react-router-dom';
 
 import { margin, layout, padding, flex } from 'components/BaseComponentStyles';
-import { colors, themeColors } from 'theme';
 import Box from 'components/Box';
+
+import { colors, themeColors } from 'theme';
+import Color from 'color';
+
+import TextButton from './TextButton';
 
 const getTransparentStyles = (disabled) =>
   disabled
@@ -84,4 +88,38 @@ export const DashedBox = styled(Box)`
   font-weight: bold;
   border-radius: 4px;
   cursor: not-allowed;
+`;
+
+const activeStyles = (noHoverBackground) => `
+  ${
+    !noHoverBackground
+      ? `background-color: ${Color(themeColors.primary)
+          .alpha(0.2)
+          .rgb()
+          .string()};`
+      : ''
+  }
+
+  svg {
+    *[fill^='#'] {
+      fill: ${themeColors.primary};
+    }
+  }`;
+
+export const HoverTextButton = styled(TextButton)`
+  ${({ showHoverEffect, noHoverBackground, active, disabled }) =>
+    showHoverEffect &&
+    !disabled &&
+    `
+    background-color: transparent;
+    padding: 4px;
+    border-radius: 8px;
+
+    &:hover {
+      ${activeStyles(noHoverBackground)}
+    }
+    ${active ? activeStyles : ''}
+  `}
+
+  ${({ styles }) => styles};
 `;

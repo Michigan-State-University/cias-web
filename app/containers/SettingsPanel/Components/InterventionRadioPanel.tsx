@@ -9,12 +9,7 @@ import Radio from 'components/Radio';
 import H2 from 'components/H2';
 import Tooltip from 'components/Tooltip';
 import questionMark from 'assets/svg/grey-question-mark.svg';
-
-interface OptionType {
-  id: string;
-  label: string;
-  sublabel?: string;
-}
+import { OptionType } from '../types';
 
 interface Props {
   onOptionHover?: (option: Nullable<OptionType>) => void;
@@ -41,7 +36,7 @@ const InterventionRadioPanel = ({
     onOptionHover && onOptionHover(option);
 
   return (
-    <Box mb={25}>
+    <Box mb={25} mt={48}>
       <Box mb={25} display="flex" align="center">
         <H2>{radioPanelTitle}</H2>
         {nameTooltip && (

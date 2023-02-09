@@ -13,7 +13,7 @@ import { Provider } from 'react-redux';
 import { DEFAULT_LOCALE } from 'i18n';
 
 import { createTestStore } from 'utils/testUtils/storeUtils';
-import { Roles } from 'models/User/UserRoles';
+import { Roles } from 'models/User/RolesManager';
 import { initialState as authState } from 'global/reducers/auth';
 import { intlProviderConfig } from 'containers/LanguageProvider';
 import { UserDetails } from '../index';
@@ -24,7 +24,7 @@ describe('<UserDetails />', () => {
     auth: {
       ...authState,
       user: {
-        roles: [Roles.admin],
+        roles: [Roles.Admin],
       },
     },
     user: {

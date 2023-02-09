@@ -1,4 +1,4 @@
-import { InterventionStatus } from './InterventionDto';
+import { InterventionStatus } from './Intervention';
 
 export type InterventionStatusMetadata = {
   isEditable: boolean;

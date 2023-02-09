@@ -19,7 +19,10 @@ import {
   useFloating,
   autoUpdate,
   flip,
+  Placement,
+  Padding,
 } from '@floating-ui/react-dom';
+import { Options as OffsetOptions } from '@floating-ui/core/src/middleware/offset';
 import capitalize from 'lodash/capitalize';
 
 import useKeyPress from 'utils/useKeyPress';
@@ -52,10 +55,15 @@ export type Props = {
   specialMobileView?: boolean;
   forceMobile?: boolean;
   forceDim?: boolean;
+  hideArrow?: boolean;
   excludeRefDim?: boolean | Partial<CSSProperties>;
   width?: string;
   disableClose?: boolean;
+  defaultPlacement?: Placement;
+  offsetOptions?: OffsetOptions;
   modalStyle?: Partial<CSSProperties>;
+  contentPadding?: CSSProperties['padding'];
+  shiftPadding?: Padding;
 };
 
 const PopoverModal = ({
@@ -69,7 +77,12 @@ const PopoverModal = ({
   excludeRefDim = false,
   width,
   disableClose = false,
+  defaultPlacement = 'right',
+  offsetOptions = 8,
   modalStyle,
+  contentPadding,
+  hideArrow,
+  shiftPadding = 16,
 }: Props): JSX.Element => {
   const arrowRef = useRef<HTMLElement>();
   const portalRef = useRef<HTMLElement>(null);
@@ -85,11 +98,11 @@ const PopoverModal = ({
     placement,
     update,
   } = useFloating({
-    placement: 'right',
+    placement: defaultPlacement,
     middleware: [
-      offset(8),
+      offset(offsetOptions),
       shift({
-        padding: 16,
+        padding: shiftPadding,
       }),
       flip({
         fallbackPlacements: ['left', 'top', 'bottom'],
@@ -217,22 +230,25 @@ const PopoverModal = ({
           ...modalStyle,
         }}
       >
-        <StyledArrow
-          ref={arrowRef}
-          $specialMobileView={specialMobileView}
-          $forceMobile={forceMobile}
-          style={{
-            left: xArrow,
-            top: yArrow,
-            [arrowMainAxisPlacement]: -4.5,
-            [`border${capitalize(arrowMainAxisPlacement)}Width`]: 1,
-            [`border${capitalize(arrowCrossAxisPlacement)}Width`]: 1,
-            borderColor: modalStyle?.borderColor,
-          }}
-        />
+        {!hideArrow && (
+          <StyledArrow
+            ref={arrowRef}
+            $specialMobileView={specialMobileView}
+            $forceMobile={forceMobile}
+            style={{
+              left: xArrow,
+              top: yArrow,
+              [arrowMainAxisPlacement]: -4.5,
+              [`border${capitalize(arrowMainAxisPlacement)}Width`]: 1,
+              [`border${capitalize(arrowCrossAxisPlacement)}Width`]: 1,
+              borderColor: modalStyle?.borderColor,
+            }}
+          />
+        )}
         <StyledPopoverContent
           $specialMobileView={specialMobileView}
           $forceMobile={forceMobile}
+          padding={contentPadding}
         >
           {children}
         </StyledPopoverContent>

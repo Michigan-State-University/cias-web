@@ -5,6 +5,7 @@ const { getCommitHash, onHeroku, gitRevisionPlugin } = require('./utils');
 
 const path = require('path');
 const webpack = require('webpack');
+const CopyWebpackPlugin = require('copy-webpack-plugin');
 
 const { EnvironmentPlugin } = webpack;
 
@@ -158,6 +159,7 @@ module.exports = (options) => ({
       // add it in plugin because it is passed during build only, this makes it available during app start
       VERSION: process.env.VERSION,
     }),
+    new CopyWebpackPlugin({ patterns: [{ from: 'public' }] }),
   ]),
   resolve: {
     modules: ['node_modules', 'app'],

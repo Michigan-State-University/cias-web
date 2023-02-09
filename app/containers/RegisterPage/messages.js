@@ -13,9 +13,13 @@ export default defineMessages({
     id: `${scope}.header`,
     defaultMessage: 'Register participant account',
   },
+  subHeader: {
+    id: `${scope}.subHeader`,
+    defaultMessage: `Fields with an asterisk<warningColor>*</warningColor> are required`,
+  },
   register: {
     id: `${scope}.register`,
-    defaultMessage: 'Register',
+    defaultMessage: 'Create an account',
   },
   login: {
     id: `${scope}.login`,
@@ -99,10 +103,9 @@ export default defineMessages({
     defaultMessage:
       'Your account has been successfully created. Check your e-mail inbox to confirm your registration',
   },
-  createdResearcherAccount: {
-    id: `${scope}.createdResearcherAccount`,
-    defaultMessage:
-      'Your account has been successfully created. You can log in now.',
+  createdAccountFromInvitation: {
+    id: `${scope}.createdAccountFromInvitation`,
+    defaultMessage: 'Your account has been successfully created.',
   },
   pageTitle: {
     id: `${scope}.pageTitle`,

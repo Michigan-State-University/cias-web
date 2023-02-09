@@ -1,10 +1,20 @@
-import styled from 'styled-components';
+import styled, { css } from 'styled-components';
 import ReactQuill from 'react-quill';
 import Color from 'color';
 
-import { colors, borders, fontFamily, themeColors } from 'theme';
+import { colors, borders, fontFamily, themeColors, paddings } from 'theme';
 
-import { margin, layout, border, text, padding } from '../BaseComponentStyles';
+import Input from 'components/Input';
+import {
+  margin,
+  layout,
+  border,
+  text,
+  padding,
+} from 'components/BaseComponentStyles';
+
+import { INPUT_PADDING } from './constants';
+import { AdornmentType } from './types';
 
 export const QuillStyled = styled(ReactQuill)`
   width: 100%;
@@ -132,8 +142,6 @@ export const SearchInputStyled = styled.div`
   display: flex;
   align-items: center;
   position: relative;
-  display: flex;
-  align-items: center;
   ${layout}
 `;
 
@@ -148,9 +156,17 @@ export const Adornment = styled.div`
   color: ${Color(colors.bluewood).alpha(0.5).toString()};
   visibility: ${({ visible }) => (visible ? 'visible' : 'hidden')};
   cursor: text;
-  ${margin};
   position: absolute;
-  right: 0;
+  ${({ type }) =>
+    type === AdornmentType.SUFFIX
+      ? css`
+          right: ${borders.borderWidth};
+          padding-right: ${INPUT_PADDING}px;
+        `
+      : css`
+          left: ${borders.borderWidth};
+          padding-left: ${INPUT_PADDING}px;
+        `}
   max-width: 75%;
   overflow: hidden;
   white-space: nowrap;
@@ -179,4 +195,36 @@ export const Sufix = styled.div`
   span:last-of-type {
     white-space: pre;
   }
+`;
+
+const getChipsInputPadding = (isInputFilled, compact) => {
+  if (isInputFilled) {
+    if (compact) return `5px 0 0 0`;
+    return `8px 6px 3px 6px`;
+  }
+  if (compact) return '0';
+  return paddings.small;
+};
+
+export const StyledChipsInput = styled.div`
+  border-style: ${borders.borderStyle};
+  border-width: ${borders.borderWidth};
+  border-color: ${({ isFocused }) =>
+    isFocused ? themeColors.primary : themeColors.highlight};
+  border-radius: ${borders.borderRadius};
+  width: 100%;
+  background-color: ${colors.zirkon};
+  ${margin};
+  padding: ${({ isInputFilled, compact }) =>
+    getChipsInputPadding(isInputFilled, compact)};
+`;
+
+export const HiddenInput = styled(Input)`
+  height: ${({ isInputFilled }) => (isInputFilled ? '31px' : '100%')};
+  width: ${({ isInputFilled }) => (isInputFilled ? 'auto' : '100%')};
+  border: none;
+  outline: none;
+  background-color: ${colors.zirkon};
+  margin-left: ${({ isInputFilled }) => (isInputFilled ? '2px' : '0')};
+  flex: 1;
 `;

@@ -29,6 +29,7 @@ import {
   ADD_NEW_FORMULA,
   REMOVE_FORMULA,
   DUPLICATE_FORMULA,
+  UPDATE_ENTIRE_NARRATOR,
 } from './constants';
 import reflectionFormulaBlockReducer from './Components/Blocks/Reflections/reducer';
 
@@ -46,6 +47,13 @@ const questionSettingsReducer = (question, { type, data }, allQuestions) =>
       }
 
       // NARRATOR TAB
+
+      case UPDATE_ENTIRE_NARRATOR: {
+        const { newNarrator } = data;
+
+        draft.narrator = newNarrator;
+        break;
+      }
 
       case UPDATE_NARRATOR_SETTINGS: {
         const { property, value } = data;

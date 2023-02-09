@@ -27,6 +27,7 @@ export interface QuestionDataVariable {
 
 export interface QuestionPayloadData<TPayload extends QuestionPayload> {
   payload: TPayload;
+  original_text?: TPayload;
 }
 
 export interface SingleQuestionData extends QuestionPayloadData<string> {

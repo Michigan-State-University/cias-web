@@ -41,6 +41,7 @@ exports[`<QuestionDetails /> should match the snapshot 1`] = `
   -ms-flex-pack: center;
   justify-content: center;
   justify-items: center;
+  padding-top: 100px;
   width: 100%;
 }
 
@@ -120,6 +121,7 @@ exports[`<QuestionDetails /> should match the snapshot 1`] = `
   overflow: scroll;
   padding: 30px;
   background-color: rgba(248,251,255,1);
+  color: unset;
 }
 
 .c11 {
@@ -131,6 +133,7 @@ exports[`<QuestionDetails /> should match the snapshot 1`] = `
   width: 100%;
   max-width: 702px;
   margin-bottom: 10px;
+  color: unset;
 }
 
 .c11:hover {
@@ -154,6 +157,7 @@ exports[`<QuestionDetails /> should match the snapshot 1`] = `
   -ms-flex-align: center;
   align-items: center;
   gap: 15px;
+  color: unset;
 }
 
 .c14 {
@@ -161,6 +165,7 @@ exports[`<QuestionDetails /> should match the snapshot 1`] = `
   height: auto;
   display: block;
   border-radius: 5px;
+  color: unset;
 }
 
 .c18 {
@@ -170,6 +175,7 @@ exports[`<QuestionDetails /> should match the snapshot 1`] = `
   border-radius: 5px;
   padding: 16px;
   width: 100%;
+  color: unset;
 }
 
 .c18:hover {
@@ -187,6 +193,7 @@ exports[`<QuestionDetails /> should match the snapshot 1`] = `
   padding-right: 21px;
   padding-left: 21px;
   border: 1px solid #ABBBD1;
+  color: unset;
 }
 
 .c27 {
@@ -197,6 +204,7 @@ exports[`<QuestionDetails /> should match the snapshot 1`] = `
   margin-top: 20px;
   margin-bottom: 20px;
   margin-left: 26px;
+  color: unset;
 }
 
 .c2 {
@@ -245,75 +253,26 @@ exports[`<QuestionDetails /> should match the snapshot 1`] = `
   margin-top: 10px;
 }
 
+.c28 {
+  width: 100%;
+  height: 40px;
+  border-radius: 100px;
+  cursor: pointer;
+  border: none;
+  outline: none;
+  background-color: #107969;
+  color: #FFFFFF;
+  border: 1px solid transparent;
+  cursor: default;
+  background-color: #9AA1B6;
+  -webkit-transition: background-color 300ms ease,color 300ms ease,border 300ms ease;
+  transition: background-color 300ms ease,color 300ms ease,border 300ms ease;
+  width: 120px;
+}
+
 .c9 {
   max-width: 960px !important;
   width: 100%;
-}
-
-.c16 {
-  width: 100%;
-  min-height: -webkit-max-content;
-  min-height: -moz-max-content;
-  min-height: max-content;
-  border: 1px solid transparent;
-}
-
-.c16 .ql-editor {
-  font-weight: 400;
-  padding: 10px;
-  overflow: visible;
-}
-
-.c16 .ql-editor.ql-blank::before {
-  left: 11px;
-}
-
-.c16 .ql-picker-label svg {
-  margin-bottom: 15px !important;
-}
-
-.c16 .ql-toolbar {
-  width: -webkit-max-content;
-  width: -moz-max-content;
-  width: max-content;
-}
-
-.c16 .ql-container {
-  font-size: 16px;
-  font-family: DM Sans;
-}
-
-.c19 {
-  width: 100%;
-  min-height: -webkit-max-content;
-  min-height: -moz-max-content;
-  min-height: max-content;
-  border: 1px solid transparent;
-}
-
-.c19 .ql-editor {
-  font-weight: 400;
-  padding: 10px;
-  overflow: visible;
-}
-
-.c19 .ql-editor.ql-blank::before {
-  left: 11px;
-}
-
-.c19 .ql-picker-label svg {
-  margin-bottom: 15px !important;
-}
-
-.c19 .ql-toolbar {
-  width: -webkit-max-content;
-  width: -moz-max-content;
-  width: max-content;
-}
-
-.c19 .ql-container {
-  font-size: initial;
-  font-family: DM Sans;
 }
 
 .c4 {
@@ -325,8 +284,8 @@ exports[`<QuestionDetails /> should match the snapshot 1`] = `
   background-color: transparent;
   border-color: transparent;
   max-width: initial;
-  padding-right: 0;
-  padding-left: 0;
+  padding-right: 12px;
+  padding-left: 12px;
   font-size: 18px;
   font-weight: 700;
   color: #2F3850;
@@ -396,21 +355,70 @@ exports[`<QuestionDetails /> should match the snapshot 1`] = `
   color: #ABBBD1;
 }
 
-.c28 {
+.c16 {
   width: 100%;
-  height: 40px;
-  border-radius: 100px;
-  cursor: pointer;
-  border: none;
-  outline: none;
-  background-color: #107969;
-  color: #FFFFFF;
+  min-height: -webkit-max-content;
+  min-height: -moz-max-content;
+  min-height: max-content;
   border: 1px solid transparent;
-  cursor: default;
-  background-color: #9AA1B6;
-  -webkit-transition: background-color 300ms ease,color 300ms ease,border 300ms ease;
-  transition: background-color 300ms ease,color 300ms ease,border 300ms ease;
-  width: 180px;
+}
+
+.c16 .ql-editor {
+  font-weight: 400;
+  padding: 10px;
+  overflow: visible;
+}
+
+.c16 .ql-editor.ql-blank::before {
+  left: 11px;
+}
+
+.c16 .ql-picker-label svg {
+  margin-bottom: 15px !important;
+}
+
+.c16 .ql-toolbar {
+  width: -webkit-max-content;
+  width: -moz-max-content;
+  width: max-content;
+}
+
+.c16 .ql-container {
+  font-size: 16px;
+  font-family: DM Sans;
+}
+
+.c19 {
+  width: 100%;
+  min-height: -webkit-max-content;
+  min-height: -moz-max-content;
+  min-height: max-content;
+  border: 1px solid transparent;
+}
+
+.c19 .ql-editor {
+  font-weight: 400;
+  padding: 10px;
+  overflow: visible;
+}
+
+.c19 .ql-editor.ql-blank::before {
+  left: 11px;
+}
+
+.c19 .ql-picker-label svg {
+  margin-bottom: 15px !important;
+}
+
+.c19 .ql-toolbar {
+  width: -webkit-max-content;
+  width: -moz-max-content;
+  width: max-content;
+}
+
+.c19 .ql-container {
+  font-size: initial;
+  font-family: DM Sans;
 }
 
 .c23 {
@@ -3547,7 +3555,7 @@ exports[`<QuestionDetails /> should match the snapshot 1`] = `
                   color="primary"
                   disabled=""
                   radius="100px"
-                  width="180px"
+                  width="120"
                 >
                   Continue
                 </button>

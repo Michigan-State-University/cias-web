@@ -1,5 +1,6 @@
+import { CharacterType } from 'models/Character';
 import { Formula } from 'models/Formula';
-import { InterventionInvite } from 'models/Intervention';
+import { InterventionInvite } from 'models/InterventionInvite';
 
 import { SessionTargetType } from './SessionTargetType';
 
@@ -55,6 +56,8 @@ export interface Session {
   type: SessionTypes;
   emails?: InterventionInvite[];
   estimatedTime: number;
+  currentNarrator: CharacterType;
+  multipleFill: boolean;
 }
 
 export interface ClassicSession extends Session {

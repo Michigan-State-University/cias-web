@@ -31,6 +31,7 @@ exports[`<ConfirmationModal /> Should render and match the snapshot 1`] = `
   align-items: center;
   left: 0px;
   top: 0px;
+  color: unset;
 }
 
 .c1 {
@@ -48,6 +49,7 @@ exports[`<ConfirmationModal /> Should render and match the snapshot 1`] = `
   padding-right: 20px;
   padding-left: 20px;
   background-color: rgba(255,255,255,1);
+  color: unset;
 }
 
 .c8 {
@@ -59,6 +61,7 @@ exports[`<ConfirmationModal /> Should render and match the snapshot 1`] = `
   margin-top: 10px;
   border-radius: 0px;
   border-radius: 0px;
+  color: unset;
 }
 
 .c5 {
@@ -104,12 +107,6 @@ exports[`<ConfirmationModal /> Should render and match the snapshot 1`] = `
   -ms-flex-direction: row;
   flex-direction: row;
   height: auto;
-  -webkit-box-pack: center;
-  -webkit-justify-content: center;
-  -ms-flex-pack: center;
-  justify-content: center;
-  justify-items: center;
-  margin-top: 25px;
 }
 
 .c9 {
@@ -126,7 +123,7 @@ exports[`<ConfirmationModal /> Should render and match the snapshot 1`] = `
   padding-left: 20px;
 }
 
-.c13 {
+.c14 {
   width: 100%;
   height: 40px;
   border-radius: 100px;
@@ -134,23 +131,20 @@ exports[`<ConfirmationModal /> Should render and match the snapshot 1`] = `
   border: none;
   outline: none;
   font-weight: bold;
-  background-color: #1079691A;
-  color: #107969;
-  border: 1px solid transparent;
-  -webkit-transition: background-color 300ms ease,color 300ms ease,border 300ms ease;
-  transition: background-color 300ms ease,color 300ms ease,border 300ms ease;
-  margin-right: 25px;
-  width: auto;
-  padding: 0 30px;
-}
-
-.c13:hover {
   background-color: #FFFFFF;
   color: #107969;
   border: 1px solid #107969;
+  -webkit-transition: background-color 300ms ease,color 300ms ease,border 300ms ease;
+  transition: background-color 300ms ease,color 300ms ease,border 300ms ease;
 }
 
-.c14 {
+.c14:hover {
+  background-color: #107969;
+  color: #FFFFFF;
+  border: 1px solid transparent;
+}
+
+.c15 {
   width: 100%;
   height: 40px;
   border-radius: 100px;
@@ -163,11 +157,9 @@ exports[`<ConfirmationModal /> Should render and match the snapshot 1`] = `
   border: 1px solid transparent;
   -webkit-transition: background-color 300ms ease,color 300ms ease,border 300ms ease;
   transition: background-color 300ms ease,color 300ms ease,border 300ms ease;
-  width: auto;
-  padding: 0 30px;
 }
 
-.c14:hover {
+.c15:hover {
   background-color: #FFFFFF;
   color: #107969;
   border: 1px solid #107969;
@@ -181,6 +173,9 @@ exports[`<ConfirmationModal /> Should render and match the snapshot 1`] = `
   -webkit-flex-direction: column;
   -ms-flex-direction: column;
   flex-direction: column;
+  -webkit-align-content: flex-start;
+  -ms-flex-line-pack: start;
+  align-content: flex-start;
   -webkit-align-items: flex-start;
   -webkit-box-align: flex-start;
   -ms-flex-align: flex-start;
@@ -195,6 +190,9 @@ exports[`<ConfirmationModal /> Should render and match the snapshot 1`] = `
   -webkit-flex-direction: column;
   -ms-flex-direction: column;
   flex-direction: column;
+  -webkit-align-content: flex-end;
+  -ms-flex-line-pack: end;
+  align-content: flex-end;
   -webkit-align-items: flex-end;
   -webkit-box-align: flex-end;
   -ms-flex-align: flex-end;
@@ -233,6 +231,15 @@ exports[`<ConfirmationModal /> Should render and match the snapshot 1`] = `
   margin-right: 0;
 }
 
+.c13 {
+  margin-top: 48px;
+  gap: 20px;
+  -webkit-box-pack: center;
+  -webkit-justify-content: center;
+  -ms-flex-pack: center;
+  justify-content: center;
+}
+
 @media only screen and (min-width:768px) {
 
 }
@@ -255,6 +262,19 @@ exports[`<ConfirmationModal /> Should render and match the snapshot 1`] = `
     max-width: none;
     min-width: 0;
     width: calc(100% - 20px);
+  }
+}
+
+@media (max-width:575px) {
+  .c13 {
+    margin-top: 32px;
+    -webkit-flex-wrap: wrap;
+    -ms-flex-wrap: wrap;
+    flex-wrap: wrap;
+  }
+
+  .c13 button {
+    width: 100%;
   }
 }
 
@@ -281,7 +301,7 @@ exports[`<ConfirmationModal /> Should render and match the snapshot 1`] = `
           style="margin-left: -15px; margin-right: -15px; display: flex; flex-wrap: wrap; flex-grow: 0; flex-shrink: 0; align-items: center; justify-content: space-between;"
         >
           <div
-            align="flex-start"
+            align="start"
             class="c4"
             style="box-sizing: border-box; min-height: 1px; position: relative; padding-left: 15px; padding-right: 15px; width: 83.33333333333334%; flex-basis: 83.33333333333334%; flex-grow: 0; flex-shrink: 0; max-width: 83.33333333333334%; margin-left: 0%;"
           >
@@ -316,7 +336,7 @@ exports[`<ConfirmationModal /> Should render and match the snapshot 1`] = `
           style="margin-left: -15px; margin-right: -15px; display: flex; flex-wrap: wrap; flex-grow: 0; flex-shrink: 0; align-items: normal; justify-content: flex-start;"
         >
           <div
-            align="flex-start"
+            align="start"
             class="c4"
             style="box-sizing: border-box; min-height: 1px; position: relative; padding-left: 15px; padding-right: 15px; width: 100%; flex-basis: 100%; flex-grow: 0; flex-shrink: 0; max-width: 100%; margin-left: 0%;"
           >
@@ -342,24 +362,22 @@ exports[`<ConfirmationModal /> Should render and match the snapshot 1`] = `
                   Are you sure you want to perform this action?
                 </h1>
                 <div
-                  class="c12"
+                  class="c12 c13"
                 >
                   <button
-                    class="c13"
+                    class="c14"
                     color="primary"
                     radius="100px"
                     type="button"
-                    width="auto"
                   >
                     Cancel
                   </button>
                   <button
-                    class="c14"
+                    class="c15"
                     color="primary"
                     data-cy="confirmation-box-confirm-button"
                     radius="100px"
                     type="button"
-                    width="auto"
                   >
                     Confirm
                   </button>
@@ -408,6 +426,7 @@ exports[`<ConfirmationModal /> Should render error and match the snapshot 1`] = 
   align-items: center;
   left: 0px;
   top: 0px;
+  color: unset;
 }
 
 .c1 {
@@ -425,6 +444,7 @@ exports[`<ConfirmationModal /> Should render error and match the snapshot 1`] = 
   padding-right: 20px;
   padding-left: 20px;
   background-color: rgba(255,255,255,1);
+  color: unset;
 }
 
 .c8 {
@@ -436,6 +456,7 @@ exports[`<ConfirmationModal /> Should render error and match the snapshot 1`] = 
   margin-top: 10px;
   border-radius: 0px;
   border-radius: 0px;
+  color: unset;
 }
 
 .c5 {
@@ -481,21 +502,15 @@ exports[`<ConfirmationModal /> Should render error and match the snapshot 1`] = 
   -ms-flex-direction: row;
   flex-direction: row;
   height: auto;
-  -webkit-box-pack: center;
-  -webkit-justify-content: center;
-  -ms-flex-pack: center;
-  justify-content: center;
-  justify-items: center;
-  margin-top: 25px;
 }
 
-.c16 {
+.c17 {
   width: auto;
   height: auto;
   margin-right: 15px;
 }
 
-.c17 {
+.c18 {
   font-family: DM Sans;
   font-size: 13px;
   line-height: 130%;
@@ -518,7 +533,7 @@ exports[`<ConfirmationModal /> Should render error and match the snapshot 1`] = 
   padding-left: 20px;
 }
 
-.c15 {
+.c16 {
   padding: 20px;
   width: 100%;
   max-width: 700px;
@@ -535,7 +550,11 @@ exports[`<ConfirmationModal /> Should render error and match the snapshot 1`] = 
   align-items: center;
 }
 
-.c13 {
+.c16 p {
+  color: #2F3850;
+}
+
+.c14 {
   width: 100%;
   height: 40px;
   border-radius: 100px;
@@ -543,23 +562,20 @@ exports[`<ConfirmationModal /> Should render error and match the snapshot 1`] = 
   border: none;
   outline: none;
   font-weight: bold;
-  background-color: #1079691A;
-  color: #107969;
-  border: 1px solid transparent;
-  -webkit-transition: background-color 300ms ease,color 300ms ease,border 300ms ease;
-  transition: background-color 300ms ease,color 300ms ease,border 300ms ease;
-  margin-right: 25px;
-  width: auto;
-  padding: 0 30px;
-}
-
-.c13:hover {
   background-color: #FFFFFF;
   color: #107969;
   border: 1px solid #107969;
+  -webkit-transition: background-color 300ms ease,color 300ms ease,border 300ms ease;
+  transition: background-color 300ms ease,color 300ms ease,border 300ms ease;
 }
 
-.c14 {
+.c14:hover {
+  background-color: #107969;
+  color: #FFFFFF;
+  border: 1px solid transparent;
+}
+
+.c15 {
   width: 100%;
   height: 40px;
   border-radius: 100px;
@@ -572,11 +588,9 @@ exports[`<ConfirmationModal /> Should render error and match the snapshot 1`] = 
   border: 1px solid transparent;
   -webkit-transition: background-color 300ms ease,color 300ms ease,border 300ms ease;
   transition: background-color 300ms ease,color 300ms ease,border 300ms ease;
-  width: auto;
-  padding: 0 30px;
 }
 
-.c14:hover {
+.c15:hover {
   background-color: #FFFFFF;
   color: #107969;
   border: 1px solid #107969;
@@ -590,6 +604,9 @@ exports[`<ConfirmationModal /> Should render error and match the snapshot 1`] = 
   -webkit-flex-direction: column;
   -ms-flex-direction: column;
   flex-direction: column;
+  -webkit-align-content: flex-start;
+  -ms-flex-line-pack: start;
+  align-content: flex-start;
   -webkit-align-items: flex-start;
   -webkit-box-align: flex-start;
   -ms-flex-align: flex-start;
@@ -604,6 +621,9 @@ exports[`<ConfirmationModal /> Should render error and match the snapshot 1`] = 
   -webkit-flex-direction: column;
   -ms-flex-direction: column;
   flex-direction: column;
+  -webkit-align-content: flex-end;
+  -ms-flex-line-pack: end;
+  align-content: flex-end;
   -webkit-align-items: flex-end;
   -webkit-box-align: flex-end;
   -ms-flex-align: flex-end;
@@ -642,6 +662,15 @@ exports[`<ConfirmationModal /> Should render error and match the snapshot 1`] = 
   margin-right: 0;
 }
 
+.c13 {
+  margin-top: 48px;
+  gap: 20px;
+  -webkit-box-pack: center;
+  -webkit-justify-content: center;
+  -ms-flex-pack: center;
+  justify-content: center;
+}
+
 @media only screen and (min-width:768px) {
 
 }
@@ -664,6 +693,19 @@ exports[`<ConfirmationModal /> Should render error and match the snapshot 1`] = 
     max-width: none;
     min-width: 0;
     width: calc(100% - 20px);
+  }
+}
+
+@media (max-width:575px) {
+  .c13 {
+    margin-top: 32px;
+    -webkit-flex-wrap: wrap;
+    -ms-flex-wrap: wrap;
+    flex-wrap: wrap;
+  }
+
+  .c13 button {
+    width: 100%;
   }
 }
 
@@ -690,7 +732,7 @@ exports[`<ConfirmationModal /> Should render error and match the snapshot 1`] = 
           style="margin-left: -15px; margin-right: -15px; display: flex; flex-wrap: wrap; flex-grow: 0; flex-shrink: 0; align-items: center; justify-content: space-between;"
         >
           <div
-            align="flex-start"
+            align="start"
             class="c4"
             style="box-sizing: border-box; min-height: 1px; position: relative; padding-left: 15px; padding-right: 15px; width: 83.33333333333334%; flex-basis: 83.33333333333334%; flex-grow: 0; flex-shrink: 0; max-width: 83.33333333333334%; margin-left: 0%;"
           >
@@ -725,7 +767,7 @@ exports[`<ConfirmationModal /> Should render error and match the snapshot 1`] = 
           style="margin-left: -15px; margin-right: -15px; display: flex; flex-wrap: wrap; flex-grow: 0; flex-shrink: 0; align-items: normal; justify-content: flex-start;"
         >
           <div
-            align="flex-start"
+            align="start"
             class="c4"
             style="box-sizing: border-box; min-height: 1px; position: relative; padding-left: 15px; padding-right: 15px; width: 100%; flex-basis: 100%; flex-grow: 0; flex-shrink: 0; max-width: 100%; margin-left: 0%;"
           >
@@ -751,39 +793,37 @@ exports[`<ConfirmationModal /> Should render error and match the snapshot 1`] = 
                   Are you sure you want to perform this action?
                 </h1>
                 <div
-                  class="c12"
+                  class="c12 c13"
                 >
                   <button
-                    class="c13"
+                    class="c14"
                     color="primary"
                     radius="100px"
                     type="button"
-                    width="auto"
                   >
                     Cancel
                   </button>
                   <button
-                    class="c14"
+                    class="c15"
                     color="primary"
                     data-cy="confirmation-box-confirm-button"
                     radius="100px"
                     type="button"
-                    width="auto"
                   >
                     Confirm
                   </button>
                 </div>
               </div>
               <div
-                class="c15"
+                class="c16"
               >
                 <img
                   alt="error"
-                  class="c16"
+                  class="c17"
                   src="IMAGE_MOCK"
                 />
                 <p
-                  class="c17"
+                  class="c18"
                   font-size="15"
                   font-weight="bold"
                 >

@@ -19,6 +19,7 @@ import messages from './messages';
 
 type UngroupedSubstancesType = {
   substances: Substance[];
+  originalText?: Substance[];
   loading?: boolean;
   error?: string;
   disabled?: boolean;
@@ -29,6 +30,7 @@ export const UngroupedSubstances = ({
   loading,
   error,
   disabled = false,
+  originalText,
 }: UngroupedSubstancesType) => {
   const dispatch = useDispatch();
   const { formatMessage } = useIntl();
@@ -67,6 +69,8 @@ export const UngroupedSubstances = ({
     <>
       <BoxTable
         data={substances}
+        originalText={originalText}
+        columnKeys={['name', 'variable']}
         badgeKeys={['variable']}
         onRowDelete={onRemoveSubstance}
         onRowEdit={onEditSubstance}

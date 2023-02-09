@@ -28,6 +28,7 @@ import AddAppIcon from 'assets/svg/app-add.svg';
 import TranslateIcon from 'assets/svg/translate.svg';
 import PadlockIcon from 'assets/svg/padlock.svg';
 import QuestionMarkIcon from 'assets/svg/grey-question-mark.svg';
+import DownloadIcon from 'assets/svg/download-line.svg';
 
 import isNullOrUndefined from 'utils/isNullOrUndefined';
 import { reorder } from 'utils/reorder';
@@ -37,10 +38,9 @@ import {
   canEdit,
   canShareWithParticipants,
 } from 'models/Status/statusPermissions';
-import { Roles } from 'models/User/UserRoles';
+import { useRoleManager } from 'models/User/RolesManager';
 import { reorderScope } from 'models/Session/ReorderScope';
 import { archived } from 'models/Status/StatusTypes';
-import { RolePermissions } from 'models/User/RolePermissions';
 import { CatMhLicenseType } from 'models/Intervention';
 import { getQuestionGroupsSaga } from 'global/reducers/questionGroups/sagas';
 import { editSessionRequest, editSessionSaga } from 'global/reducers/session';
@@ -61,6 +61,8 @@ import {
   externalCopySessionRequest,
   makeSelectInterventionError,
   makeSelectInterventionLoader,
+  exportInterventionRequest,
+  exportInterventionSaga,
 } from 'global/reducers/intervention';
 import { interventionOptionsSaga } from 'global/sagas/interventionOptionsSaga';
 import {
@@ -105,11 +107,15 @@ import {
   InterventionAssignOrganizationModal,
   InterventionSettingsModal,
   useThirdPartyToolsAccessModal,
+  INTERVENTION_ASSIGN_ORGANIZATION_MODAL_WIDTH,
 } from './components/Modals';
 import SelectResearchers from '../SelectResearchers';
 import messages from './messages';
 import { InterventionDetailsPageContext, nextStatus } from './utils';
-import { CAT_MH_TEST_COUNT_WARNING_THRESHOLD } from './constants';
+import {
+  CAT_MH_TEST_COUNT_WARNING_THRESHOLD,
+  INTERVENTION_SETTINGS_MODAL_WIDTH,
+} from './constants';
 
 export function InterventionDetailsPage({
   createSession,
@@ -130,8 +136,9 @@ export function InterventionDetailsPage({
   fetchSessionEmails,
   deleteSession,
   externalCopySession,
-  user: { id: userId, roles },
+  user: { id: userId },
   editSession,
+  exportIntervention,
 }) {
   const { interventionId } = useParams();
   const { formatMessage } = useIntl();
@@ -139,10 +146,7 @@ export function InterventionDetailsPage({
   const [deleteConfirmationSessionId, setDeleteConfirmationSessionId] =
     useState(null);
 
-  const rolePermissions = useMemo(() => RolePermissions(roles), [roles]);
-  const { canAssignOrganizationToIntervention } = rolePermissions;
-
-  const isAdmin = roles.includes(Roles.admin);
+  const { isAdmin, canAssignOrganizationToIntervention } = useRoleManager();
 
   const {
     sessions,
@@ -282,6 +286,8 @@ export function InterventionDetailsPage({
     [isAccessRevoked],
   );
 
+  const handleExportIntervention = () => exportIntervention(id);
+
   const options = [
     {
       id: 'translate',
@@ -333,11 +339,18 @@ export function InterventionDetailsPage({
           },
         ]
       : []),
+    {
+      id: 'export',
+      label: formatMessage(messages.exportIntervention),
+      icon: DownloadIcon,
+      action: handleExportIntervention,
+      color: colors.bluewood,
+    },
   ];
 
   useLayoutEffect(() => {
     fetchIntervention(interventionId);
-  }, []);
+  }, [interventionId]);
 
   useEffect(() => {
     if (
@@ -476,7 +489,6 @@ export function InterventionDetailsPage({
         canShareWithParticipants: sharingPossible,
         canArchive: archivingPossible,
         canDeleteSession: deletionPossible,
-        rolePermissions,
       }}
     >
       <AppContainer>
@@ -516,6 +528,7 @@ export function InterventionDetailsPage({
           title={formatMessage(messages.interventionSettingsModalTitle)}
           onClose={() => setInterventionSettingsModalVisible(false)}
           visible={interventionSettingsModalVisible}
+          width={INTERVENTION_SETTINGS_MODAL_WIDTH}
         >
           <InterventionSettingsModal
             editingPossible={editingPossible}
@@ -540,10 +553,12 @@ export function InterventionDetailsPage({
           title={formatMessage(messages.assignOrganization)}
           onClose={closeAssignOrganizationModal}
           visible={assignOrganizationModalVisible}
+          width={INTERVENTION_ASSIGN_ORGANIZATION_MODAL_WIDTH}
         >
           <InterventionAssignOrganizationModal
             interventionId={id}
             organizationId={organizationId}
+            onClose={closeAssignOrganizationModal}
           />
         </Modal>
 
@@ -673,6 +688,7 @@ InterventionDetailsPage.propTypes = {
   externalCopySession: PropTypes.func,
   editSession: PropTypes.func,
   user: PropTypes.object,
+  exportIntervention: PropTypes.func,
 };
 
 const mapStateToProps = createStructuredSelector({
@@ -701,6 +717,7 @@ const mapDispatchToProps = {
   deleteSession: deleteSessionRequest,
   externalCopySession: externalCopySessionRequest,
   editSession: editSessionRequest,
+  exportIntervention: exportInterventionRequest,
 };
 
 const withConnect = connect(mapStateToProps, mapDispatchToProps);
@@ -723,4 +740,5 @@ export default compose(
     key: 'interventionDetailsPageSagas',
     saga: interventionDetailsPageSagas,
   }),
+  injectSaga({ key: 'exportIntervention', saga: exportInterventionSaga }),
 )(InterventionDetailsPage);

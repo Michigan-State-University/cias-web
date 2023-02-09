@@ -4,53 +4,26 @@
  *
  */
 
-import React from 'react';
-import * as PropTypes from 'prop-types';
+import React, { CSSProperties } from 'react';
+import { Props as SVGProperies } from 'react-inlinesvg';
+
+import { MarginProps, LayoutProps } from 'components/BaseComponentStyles';
 
 import * as Styled from './styled';
 
-type IconProps = {
-  src: string | SVGElement;
-  className?: string;
-  fill?: string;
-  stroke?: string;
+export type Props = {
+  src: SVGElement | string;
   alt?: string;
-  onClick?: () => {};
-};
+  inline?: boolean;
+} & Omit<SVGProperies, 'src'> &
+  CSSProperties &
+  MarginProps &
+  LayoutProps;
 
-const Icon = ({
-  src,
-  className,
-  fill,
-  stroke,
-  alt,
-  onClick,
-  ...restProps
-}: IconProps) => (
-  <Styled.SvgWrapper>
-    <Styled.SVG
-      src={src}
-      className={className}
-      fill={fill}
-      stroke={stroke}
-      alt={alt}
-      onClick={onClick}
-      {...restProps}
-    />
+const Icon = ({ src, alt = '', inline = false, ...restProps }: Props) => (
+  <Styled.SvgWrapper inline={inline}>
+    <Styled.SVG src={src} alt={alt} {...restProps} />
   </Styled.SvgWrapper>
 );
-
-Icon.propTypes = {
-  className: PropTypes.string,
-  fill: PropTypes.string,
-  stroke: PropTypes.string,
-  src: PropTypes.string,
-  alt: PropTypes.string,
-  onClick: PropTypes.func,
-};
-
-Icon.defaultProps = {
-  alt: '',
-};
 
 export default Icon;

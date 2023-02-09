@@ -10,6 +10,12 @@ interface State<T> {
 const defaultState = {
   data: null,
   error: null,
+  isFetching: false,
+};
+
+const fetchingState = {
+  data: null,
+  error: null,
   isFetching: true,
 };
 
@@ -21,7 +27,7 @@ const useGet = <DTO, U>(
 
   const fetchData = async () => {
     try {
-      setState(defaultState);
+      setState(fetchingState);
       const { data } = await axios.get<DTO>(url);
       setState({ data: dataParser(data), error: null, isFetching: false });
     } catch (error) {

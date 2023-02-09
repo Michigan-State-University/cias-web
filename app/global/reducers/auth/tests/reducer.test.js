@@ -156,13 +156,17 @@ describe('authReducer', () => {
   it('test ADD_AVATAR_REQUEST action', () => {
     const imageUrl = 'http://www.test.com/test.png';
     const actionRequest = actionBuilder(ADD_AVATAR_REQUEST, { imageUrl });
-    const initState = createState('user', createUser());
+    const user = createUser();
+    const initState = createState('user', user);
     const addAvatarState = createState('user', {
-      ...createUser(),
+      ...user,
       avatar: imageUrl,
     });
 
-    expect(authReducer(initState, actionRequest)).toEqual(addAvatarState);
+    expect(authReducer(initState, actionRequest)).toEqual({
+      ...addAvatarState,
+      cache: { phoneNumberPreview: null, user },
+    });
   });
 
   it('test ADD_AVATAR_SUCCESS action', () => {

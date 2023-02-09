@@ -15,9 +15,11 @@ import {
 import { bodyAnimations, headAnimations } from './animations';
 import { updateNarratorAnimation } from '../../actions';
 
-const getPossibleAnimations = (type, formatMessage) => {
-  if (type === headAnimationType) return headAnimations(formatMessage);
-  if (type === bodyAnimationType) return bodyAnimations(formatMessage);
+const getPossibleAnimations = (type, formatMessage, character) => {
+  if (type === headAnimationType)
+    return headAnimations(formatMessage, character);
+  if (type === bodyAnimationType)
+    return bodyAnimations(formatMessage, character);
   return [];
 };
 
@@ -29,6 +31,7 @@ const AnimationBlock = ({
   blockIndex,
   id,
   disabled,
+  character,
 }) => {
   const onChipsClick = (index, value) => () => {
     const animName = camelCase(value.toLowerCase());
@@ -40,7 +43,7 @@ const AnimationBlock = ({
 
   return (
     <>
-      {getPossibleAnimations(block.type, formatMessage).map(
+      {getPossibleAnimations(block.type, formatMessage, character).map(
         (anim, animIndex) => {
           const isActive = block.animation === camelCase(anim.toLowerCase());
           return (
@@ -76,6 +79,7 @@ AnimationBlock.propTypes = {
   updateAnimation: PropTypes.func,
   updateNarratorPreviewAnimation: PropTypes.func,
   disabled: PropTypes.bool,
+  character: PropTypes.string,
 };
 
 const mapDispatchToProps = {

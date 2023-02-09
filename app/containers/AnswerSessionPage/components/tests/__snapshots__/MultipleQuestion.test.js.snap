@@ -32,27 +32,6 @@ exports[`<MultipleQuestion /> Should render and match the snapshot 1`] = `
   -webkit-flex-direction: row;
   -ms-flex-direction: row;
   flex-direction: row;
-  height: 44px;
-  -webkit-align-content: center;
-  -ms-flex-line-pack: center;
-  align-content: center;
-  -webkit-align-items: center;
-  -webkit-box-align: center;
-  -ms-flex-align: center;
-  align-items: center;
-  padding-top: 10px;
-  padding-bottom: 10px;
-  height: 44;
-}
-
-.c4 {
-  display: -webkit-box;
-  display: -webkit-flex;
-  display: -ms-flexbox;
-  display: flex;
-  -webkit-flex-direction: row;
-  -ms-flex-direction: row;
-  flex-direction: row;
   height: auto;
   -webkit-box-pack: justify;
   -webkit-justify-content: space-between;
@@ -68,20 +47,21 @@ exports[`<MultipleQuestion /> Should render and match the snapshot 1`] = `
   align-items: center;
 }
 
-.c6 {
+.c5 {
   display: none;
 }
 
-.c10 {
+.c9 {
   margin-right: 5px;
+  border-radius: 5px;
 }
 
-.c5:disabled + label > .c9 {
+.c4:disabled + label > .c8 {
   opacity: 0.5;
   cursor: not-allowed;
 }
 
-.c8 {
+.c7 {
   display: -webkit-box;
   display: -webkit-flex;
   display: -ms-flexbox;
@@ -90,16 +70,14 @@ exports[`<MultipleQuestion /> Should render and match the snapshot 1`] = `
   -webkit-box-align: center;
   -ms-flex-align: center;
   align-items: center;
-  width: -webkit-max-content;
-  width: -moz-max-content;
-  width: max-content;
+  width: 100%;
 }
 
-.c8:hover {
+.c7:hover {
   cursor: pointer;
 }
 
-.c5:disabled + .c7 {
+.c4:disabled + .c6 {
   opacity: 0.5;
   cursor: not-allowed;
 }
@@ -109,7 +87,6 @@ exports[`<MultipleQuestion /> Should render and match the snapshot 1`] = `
   height: auto;
   display: block;
   border-radius: 5px;
-  width: calc(100% + 21px);
   padding-top: 14px;
   padding-bottom: 14px;
   padding-right: 21px;
@@ -117,10 +94,20 @@ exports[`<MultipleQuestion /> Should render and match the snapshot 1`] = `
   cursor: pointer;
   border-radius: 5px;
   border-radius: 5px;
+  -webkit-box-flex: 1;
+  -webkit-flex-grow: 1;
+  -ms-flex-positive: 1;
+  flex-grow: 1;
+  color: unset;
+  cursor: pointer;
 }
 
 .c2:hover {
   background-color: #E9F1FB;
+}
+
+.c10 * {
+  line-height: 1.42 !important;
 }
 
 @media only screen and (min-width:768px) {
@@ -148,33 +135,29 @@ exports[`<MultipleQuestion /> Should render and match the snapshot 1`] = `
     >
       <div
         class="c2"
-        width="calc(100% + 21px)"
       >
         <div
           class="c3"
-          height="44"
         >
-          <div
-            class="c4"
+          <input
+            class="c4 c5"
+            id="answer-1"
+            type="checkbox"
+          />
+          <label
+            class="c6 c7"
+            for="answer-1"
           >
-            <input
-              class="c5 c6"
-              id="answer-1"
-              type="checkbox"
+            <img
+              class="c8 c9"
+              src="IMAGE_MOCK"
             />
-            <label
-              class="c7 c8"
-              for="answer-1"
+            <div
+              class="c10"
             >
-              <img
-                class="c9 c10"
-                src="IMAGE_MOCK"
-              />
-              <div>
-                test
-              </div>
-            </label>
-          </div>
+              test
+            </div>
+          </label>
         </div>
       </div>
     </div>
@@ -183,33 +166,29 @@ exports[`<MultipleQuestion /> Should render and match the snapshot 1`] = `
     >
       <div
         class="c2"
-        width="calc(100% + 21px)"
       >
         <div
           class="c3"
-          height="44"
         >
-          <div
-            class="c4"
+          <input
+            class="c4 c5"
+            id="answer-2"
+            type="checkbox"
+          />
+          <label
+            class="c6 c7"
+            for="answer-2"
           >
-            <input
-              class="c5 c6"
-              id="answer-2"
-              type="checkbox"
+            <img
+              class="c8 c9"
+              src="IMAGE_MOCK"
             />
-            <label
-              class="c7 c8"
-              for="answer-2"
+            <div
+              class="c10"
             >
-              <img
-                class="c9 c10"
-                src="IMAGE_MOCK"
-              />
-              <div>
-                test
-              </div>
-            </label>
-          </div>
+              test
+            </div>
+          </label>
         </div>
       </div>
     </div>

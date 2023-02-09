@@ -2,8 +2,10 @@ import styled from 'styled-components';
 import { ToastContainer as ReactToastifyToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
-import { borders, colors } from 'theme';
+import { borders, colors, themeColors } from 'theme';
 import Color from 'color';
+
+import { CustomNotificationToastClassnames } from './constants';
 
 export const ToastContainer = styled(ReactToastifyToastContainer)`
   .Toastify__ {
@@ -55,5 +57,13 @@ export const ToastContainer = styled(ReactToastifyToastContainer)`
         background-color: ${Color(colors.red).alpha(0.7).rgb().string()};
       }
     }
+  }
+
+  .${CustomNotificationToastClassnames.progressClassName} {
+    background: ${themeColors.primary};
+  }
+
+  .${CustomNotificationToastClassnames.bodyClassName} {
+    min-width: 0;
   }
 `;

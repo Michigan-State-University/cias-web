@@ -14,7 +14,7 @@ import { Markup } from 'interweave';
 
 import Box from 'components/Box';
 import Button from 'components/Button';
-import ChipsInput from 'containers/ShareBox/Components/ChipsInput';
+import ChipsInput from 'components/Input/ChipsInput';
 import Column from 'components/Column';
 import CsvFileReader from 'components/CsvFileReader';
 import H2 from 'components/H2';

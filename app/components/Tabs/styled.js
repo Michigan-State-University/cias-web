@@ -23,16 +23,14 @@ export const LabelContainer = styled.div`
   div {
     ${style};
     cursor: pointer;
-    ${({ emphasizeActiveLink, isActive }) => `
-       ${
-         emphasizeActiveLink && isActive
-           ? `color: ${themeColors.secondary} !important;`
-           : ''
-       }
-      font-weight: ${
-        emphasizeActiveLink && isActive ? fontWeights.bold : fontWeights.regular
-      } !important; 
+    ${({ emphasizeActiveLink, isActive }) =>
+      emphasizeActiveLink &&
+      isActive &&
+      `
+      color: ${themeColors.text} !important;
+      font-weight: ${fontWeights.bold} !important;
     `}
+    ${({ labelStyle }) => labelStyle};
   }
 `;
 

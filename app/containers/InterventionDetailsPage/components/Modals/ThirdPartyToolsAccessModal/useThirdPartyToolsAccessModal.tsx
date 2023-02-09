@@ -2,9 +2,9 @@ import React from 'react';
 import { useIntl } from 'react-intl';
 
 import { ModalType, useModal } from 'components/Modal';
-import { InterventionDto } from 'models/Intervention';
+import { Intervention } from 'models/Intervention';
 
-import messages from '../messages';
+import messages from './messages';
 import { ThirdPartyToolsAccessModal } from './ThirdPartyToolsAccessModal';
 
 export const useThirdPartyToolsAccessModal = () => {
@@ -17,7 +17,7 @@ export const useThirdPartyToolsAccessModal = () => {
     type: ModalType.Modal,
     modalContentRenderer: (props: {
       closeModal: () => void;
-      modalState: Nullable<InterventionDto | boolean>;
+      modalState: Nullable<Intervention | boolean>;
       // @ts-ignore
     }) => <ThirdPartyToolsAccessModal {...props} />,
     props: {

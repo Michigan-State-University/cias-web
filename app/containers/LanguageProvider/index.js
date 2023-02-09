@@ -44,11 +44,29 @@ export const intlProviderConfig = {
         {chunks}
       </span>
     ),
+    primaryColorBold: (chunks) => (
+      <span style={{ color: themeColors.primary, fontWeight: 'bold' }}>
+        {chunks}
+      </span>
+    ),
+    textColorBold: (chunks) => (
+      <span style={{ color: themeColors.text, fontWeight: 'bold' }}>
+        {chunks}
+      </span>
+    ),
     primaryColor: (chunks) => (
       <span style={{ color: themeColors.primary }}>{chunks}</span>
     ),
     warningColor: (chunks) => (
       <span style={{ color: themeColors.warning }}>{chunks}</span>
+    ),
+    phone: (chunks) => (
+      <a
+        href={`tel:${chunks}`}
+        style={{ color: themeColors.primary, fontWeight: 500 }}
+      >
+        {chunks}
+      </a>
     ),
   },
   onError: (error) => {

@@ -33,6 +33,10 @@ exports[`<ErrorAlert /> Should render and match the snapshot 1`] = `
   align-items: center;
 }
 
+.c0 p {
+  color: #2F3850;
+}
+
 <div
   class="c0"
 >
@@ -82,6 +86,10 @@ exports[`<ErrorAlert /> Should render full page error and match the snapshot 1`]
   -webkit-box-align: center;
   -ms-flex-align: center;
   align-items: center;
+}
+
+.c0 p {
+  color: #2F3850;
 }
 
 <div

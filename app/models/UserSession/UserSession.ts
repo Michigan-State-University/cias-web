@@ -2,7 +2,7 @@ import { CamelToSnakeOmitId } from 'global/types/camelToSnake';
 
 export enum UserSessionType {
   CLASSIC = 'UserSession::Classic',
-  CAT = 'UserSession::Cat',
+  CAT_MH = 'UserSession::CatMh',
 }
 
 export interface UserSession {
@@ -16,7 +16,10 @@ export interface UserSession {
   sessionId: String;
   type: UserSessionType;
   scheduledAt: Nullable<string>;
+  liveChatEnabled: boolean;
   quickExitEnabled: boolean;
+  userInterventionId?: Nullable<string>;
+  filledOutCount: number;
 }
 
 export type UserSessionDTO = CamelToSnakeOmitId<UserSession>;

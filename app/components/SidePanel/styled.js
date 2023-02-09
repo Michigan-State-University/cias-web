@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 
-import { boxShadows, colors, elements } from 'theme';
+import { boxShadows, colors, elements, ZIndex } from 'theme';
 
 import { margin } from 'components/BaseComponentStyles';
 
@@ -15,7 +15,7 @@ export const StyledSidePanel = styled.div`
 export const SidePanelWrapper = styled.div`
   position: fixed;
   display: inline-flex;
-  z-index: 1;
+  z-index: ${ZIndex.SIDE_PANEL_WRAPPER};
   height: calc(100vh - ${elements.navbarHeight}px);
   top: ${elements.navbarHeight}px;
   right: ${({ $isVisible, width }) => ($isVisible ? 0 : `${-width}px`)};
@@ -26,6 +26,6 @@ export const HandleWrapper = styled.div`
   width: max-content;
   margin-right: 16px;
   margin-top: 16px;
-  z-index: 10;
+  z-index: ${ZIndex.SIDE_PANEL_HANDLE_WRAPPER};
   ${margin};
 `;

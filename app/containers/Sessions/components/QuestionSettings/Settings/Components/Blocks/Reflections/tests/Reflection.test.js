@@ -13,6 +13,7 @@ import { createTestStore } from 'utils/testUtils/storeUtils';
 import { createQuestion } from 'utils/reducerCreators';
 import { formatMessage } from 'utils/intlOutsideReact';
 import { testRender } from 'utils/testUtils';
+import { CharacterType } from 'models/Character';
 
 import { instantiateBlockForType } from 'models/Session/utils';
 import Reflection from '../Reflection';
@@ -51,6 +52,7 @@ describe('<Reflection />', () => {
     updateLoader: false,
     block,
     disabled: false,
+    character: CharacterType.PEEDY,
     ...mockFunctions,
   };
 

@@ -46,16 +46,28 @@ const makeSelectCurrentBlockIndex = () =>
     (substate) => substate.currentBlockIndex,
   );
 
-const makeSelectShowTextTranscript = () =>
-  createSelector(
-    selectAnswerSessionPageDomain,
-    (substate) => substate.showTextTranscript,
-  );
-
 const makeSelectPreviousUserSessionId = () =>
   createSelector(
     selectAnswerSessionPageDomain,
     (substate) => substate.previousUserSessionId,
+  );
+
+const makeSelectInterventionStarted = () =>
+  createSelector(
+    selectAnswerSessionPageDomain,
+    (substate) => substate.interventionStarted,
+  );
+
+const makeSelectIsAnimationOngoing = () =>
+  createSelector(
+    selectAnswerSessionPageDomain,
+    (substate) => substate.isAnimationOngoing,
+  );
+
+const makeSelectShowTextReadingControls = () =>
+  createSelector(
+    selectAnswerSessionPageDomain,
+    (substate) => substate.showTextReadingControls,
   );
 
 const makeSelectVerifyPatientDataState = () =>
@@ -75,7 +87,9 @@ export {
   makeSelectUserSession,
   makeSelectCurrentQuestion,
   makeSelectCurrentBlockIndex,
-  makeSelectShowTextTranscript,
   makeSelectPreviousUserSessionId,
+  makeSelectInterventionStarted,
+  makeSelectIsAnimationOngoing,
+  makeSelectShowTextReadingControls,
   makeSelectVerifyPatientDataState,
 };

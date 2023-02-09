@@ -13,7 +13,7 @@ import { MemoryRouter } from 'react-router-dom';
 
 import { createTestStore } from 'utils/testUtils/storeUtils';
 import { DEFAULT_LOCALE } from 'i18n';
-import { Roles } from 'models/User/UserRoles';
+import { Roles } from 'models/User/RolesManager';
 import InterventionPage from '../index';
 
 describe('<InterventionPage />', () => {
@@ -23,13 +23,17 @@ describe('<InterventionPage />', () => {
   const initialState = {
     auth: {
       user: {
-        roles: [Roles.admin],
+        roles: [Roles.Admin],
       },
     },
     interventions: {
       interventions: [],
-      fetchInterventionLoading: true,
-      fetchInterventionError: null,
+      loaders: {
+        fetchInterventions: true,
+      },
+      errors: {
+        fetchInterventions: null,
+      },
     },
   };
 
@@ -77,8 +81,12 @@ describe('<InterventionPage />', () => {
       ...initialState,
       interventions: {
         interventions: [],
-        fetchInterventionLoading: false,
-        fetchInterventionError: null,
+        loaders: {
+          fetchInterventions: false,
+        },
+        errors: {
+          fetchInterventions: null,
+        },
       },
     });
     const { container } = render(
@@ -105,8 +113,12 @@ describe('<InterventionPage />', () => {
             user: { id: 'test' },
           },
         ],
-        fetchInterventionLoading: false,
-        fetchInterventionError: null,
+        loaders: {
+          fetchInterventions: false,
+        },
+        errors: {
+          fetchInterventions: null,
+        },
       },
     });
     store.runSaga = () => {};

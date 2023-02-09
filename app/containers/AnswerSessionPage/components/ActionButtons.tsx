@@ -1,6 +1,8 @@
 import React, { memo } from 'react';
 import { useIntl } from 'react-intl';
 
+import { elements } from 'theme';
+
 import Row from 'components/Row';
 import { Button } from 'components/Button';
 
@@ -12,11 +14,13 @@ type SkipButtonProps =
       renderSkipQuestionButton: true;
       onSkipQuestionClick: () => void;
       skipQuestionButtonDisabled?: boolean;
+      skipButtonStyle?: Record<string, unknown>;
     }
   | {
       renderSkipQuestionButton?: false;
       onSkipQuestionClick?: undefined;
       skipQuestionButtonDisabled?: undefined;
+      skipButtonStyle?: undefined;
     };
 
 type ContinueButtonProps =
@@ -25,15 +29,23 @@ type ContinueButtonProps =
       onContinueClick: () => void;
       continueButtonDisabled?: boolean;
       continueButtonLoading?: boolean;
+      continueButtonStyle?: Record<string, unknown>;
     }
   | {
       renderContinueButton?: false;
       onContinueClick?: undefined;
       continueButtonDisabled?: undefined;
       continueButtonLoading?: undefined;
+      continueButtonStyle?: undefined;
     };
 
-export type ActionButtonsProps = SkipButtonProps & ContinueButtonProps;
+type CommonProps = {
+  containerStyle?: Record<string, unknown>;
+};
+
+export type ActionButtonsProps = SkipButtonProps &
+  ContinueButtonProps &
+  CommonProps;
 
 const Component = ({
   renderSkipQuestionButton,
@@ -43,6 +55,9 @@ const Component = ({
   continueButtonDisabled,
   continueButtonLoading,
   onContinueClick,
+  containerStyle,
+  skipButtonStyle,
+  continueButtonStyle,
 }: ActionButtonsProps) => {
   const { formatMessage } = useIntl();
 
@@ -52,11 +67,12 @@ const Component = ({
   const handleContinueButtonClick = () => onContinueClick && onContinueClick();
 
   return (
-    <Row width="100%" my={20} justify="end" align="center">
+    <Row width="100%" my={20} justify="end" align="center" {...containerStyle}>
       {renderSkipQuestionButton && (
         <SkipQuestionButton
           onClick={handleSkipButtonClick}
           disabled={skipQuestionButtonDisabled}
+          {...skipButtonStyle}
         />
       )}
 
@@ -65,10 +81,11 @@ const Component = ({
           data-cy="continue-button"
           disabled={continueButtonDisabled}
           margin={20}
-          width="180px"
+          width={elements.continueButtonWidth}
           loading={continueButtonLoading}
           onClick={handleContinueButtonClick}
           title={formatMessage(messages.nextQuestion)}
+          {...continueButtonStyle}
         />
       )}
     </Row>

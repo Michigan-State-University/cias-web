@@ -31,6 +31,7 @@ exports[`<VisualAnalogueScaleQuestion /> Should render and match the snapshot 1`
   display: block;
   border-radius: 5px;
   width: 100%;
+  color: unset;
 }
 
 .c3 {
@@ -43,6 +44,7 @@ exports[`<VisualAnalogueScaleQuestion /> Should render and match the snapshot 1`
   padding-bottom: 14px;
   padding-right: 21px;
   padding-left: 21px;
+  color: unset;
 }
 
 .c6 {
@@ -143,12 +145,7 @@ exports[`<VisualAnalogueScaleQuestion /> Should render and match the snapshot 1`
               class="rc-slider-step"
             >
               <span
-                class="rc-slider-dot rc-slider-dot-active"
-                style="left: 0%;"
-              />
-              <span
                 class="rc-slider-dot"
-                style="left: 100%;"
               />
             </div>
             <div
@@ -182,20 +179,7 @@ exports[`<VisualAnalogueScaleQuestion /> Should render and match the snapshot 1`
             </div>
             <div
               class="rc-slider-mark"
-            >
-              <span
-                class="rc-slider-mark-text rc-slider-mark-text-active"
-                style="transform: translateX(-50%); left: 0%; font-size: 15px;"
-              >
-                0
-              </span>
-              <span
-                class="rc-slider-mark-text"
-                style="transform: translateX(-50%); left: 100%; font-size: 15px;"
-              >
-                100
-              </span>
-            </div>
+            />
           </div>
         </div>
       </div>

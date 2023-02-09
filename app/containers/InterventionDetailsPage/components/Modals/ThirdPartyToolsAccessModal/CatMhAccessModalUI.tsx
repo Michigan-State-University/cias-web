@@ -6,6 +6,8 @@ import EditIcon from 'assets/svg/edit.svg';
 
 import { CatMhLicenseType } from 'models/Intervention';
 
+import globalMessages from 'global/i18n/globalMessages';
+
 import { Col, FullWidthContainer, Row } from 'components/ReactGridSystem';
 import Text from 'components/Text';
 import Radio from 'components/Radio';
@@ -13,7 +15,7 @@ import FlexRow from 'components/Row';
 import Switch, { LabelPosition } from 'components/Switch';
 import Button, { ImageButton } from 'components/Button';
 
-import messages from '../messages';
+import messages from './messages';
 import { SectionHeader, StyledFormikHookInput } from './styled';
 import {
   ACCESS_LABEL_ID,
@@ -259,7 +261,7 @@ const Component = ({
             disabled={isButtonDisabled}
             mt={40}
           >
-            {formatMessage(messages.saveButton)}
+            {formatMessage(globalMessages.save)}
           </Button>
         </Col>
       </Row>

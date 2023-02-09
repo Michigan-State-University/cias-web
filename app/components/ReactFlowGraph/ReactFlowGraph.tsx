@@ -99,7 +99,9 @@ const ReactFlowGraph = ({
     useState(0);
 
   useEffect(() => {
-    zoomTo(zoom);
+    if (zoom !== currentTransform.zoom) {
+      zoomTo(zoom);
+    }
   }, [zoom]);
 
   const maxNodeHeight = useMemo(

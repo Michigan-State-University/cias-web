@@ -16,7 +16,12 @@ const VisualAnalogueScaleQuestion = ({
     body: {
       data: [
         {
-          payload: { start_value: startValue, end_value: endValue },
+          payload: {
+            start_value: startValue,
+            end_value: endValue,
+            range_start: rangeStart,
+            range_end: rangeEnd,
+          },
         },
       ],
       variable: { name },
@@ -57,6 +62,8 @@ const VisualAnalogueScaleQuestion = ({
       endValue={endValue}
       answerValue={answerValue}
       showNumber={!isNullOrUndefined(showNumber) && showNumber}
+      rangeStart={rangeStart}
+      rangeEnd={rangeEnd}
     />
   );
 };
