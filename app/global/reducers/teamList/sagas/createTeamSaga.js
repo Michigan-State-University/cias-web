@@ -25,7 +25,11 @@ function* createTeam({ payload: { name, userId } }) {
     yield call(toast.success, formatMessage(messages.createTeamSuccess));
   } catch (error) {
     yield put(createTeamFailure());
-    yield call(toast.error, formatMessage(messages.createTeamFailure));
+    yield call(
+      toast.error,
+      error.response?.data?.message ||
+        formatMessage(messages.createTeamFailure),
+    );
   }
 }
 

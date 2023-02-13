@@ -1,21 +1,27 @@
-import React from 'react';
+import React, { PropsWithChildren } from 'react';
 
 import Icon from 'components/Icon';
 
-import TextButton from './TextButton';
+import { HoverTextButton } from './styled';
 
-type Props = {
+export type ImageButtonProps = PropsWithChildren<{
   title: string;
   src: string;
   fill?: string;
   stroke?: string;
-  onClick: () => void;
+  onClick?: () => void;
   loading?: boolean;
   disabled?: boolean;
-  iconProps: object;
-} & Record<string, unknown>;
+  iconProps?: object;
+  showHoverEffect?: boolean;
+  isActive?: boolean;
+  styles?: object;
+  spinnerProps?: object;
+  noHoverBackground?: boolean;
+}> &
+  Record<string, unknown>;
 
-const ImageButton = React.forwardRef<HTMLElement, Props>(
+const ImageButton = React.forwardRef<HTMLElement, ImageButtonProps>(
   (
     {
       title,
@@ -26,11 +32,17 @@ const ImageButton = React.forwardRef<HTMLElement, Props>(
       onClick,
       loading,
       iconProps,
+      showHoverEffect = false,
+      isActive = false,
+      styles = {},
+      children,
+      spinnerProps,
+      noHoverBackground,
       ...props
-    }: Props,
+    }: ImageButtonProps,
     ref,
   ) => (
-    <TextButton
+    <HoverTextButton
       // @ts-ignore
       ref={ref}
       disabled={disabled}
@@ -48,10 +60,16 @@ const ImageButton = React.forwardRef<HTMLElement, Props>(
         'aria-label': title,
         ...props,
       }}
+      spinnerProps={spinnerProps}
+      showHoverEffect={showHoverEffect}
+      noHoverBackground={noHoverBackground}
+      active={isActive}
+      styles={styles}
     >
       {/* @ts-ignore */}
       <Icon src={src} fill={fill} stroke={stroke} {...iconProps}></Icon>
-    </TextButton>
+      {children}
+    </HoverTextButton>
   ),
 );
 

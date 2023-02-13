@@ -41,13 +41,12 @@ const Option = ({
     innerProps.onClick(e);
   };
 
-  // eslint-disable-next-line no-param-reassign
-  innerProps = { ...innerProps, onClick };
+  const modifiedInnerProps = { ...innerProps, onClick };
 
   return (
     <OptionContainer
       ref={innerRef}
-      {...innerProps}
+      {...modifiedInnerProps}
       isFocused={isFocused}
       className="custom-option"
     >

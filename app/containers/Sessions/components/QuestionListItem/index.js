@@ -230,7 +230,7 @@ const QuestionListItem = ({
         cancelButtonStyles={{
           width: '158px',
         }}
-        confirmButtonStyles={{
+        confirmationButtonStyles={{
           width: '158px',
         }}
         titleStyles={{

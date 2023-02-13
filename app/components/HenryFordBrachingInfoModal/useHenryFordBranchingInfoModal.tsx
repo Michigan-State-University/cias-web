@@ -18,6 +18,10 @@ export const useHenryFordBranchingInfoModal = <T,>(
       description: formatMessage(messages.description),
       content: formatMessage(messages.content, { type }),
       confirmationButtonText: formatMessage(messages.okay),
+      confirmationButtonStyles: {
+        width: 'auto',
+        padding: '0 30px',
+      },
       icon: 'info',
       hideCloseButton: true,
       hideCancelButton: true,

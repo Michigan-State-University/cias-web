@@ -3,7 +3,13 @@ import PropTypes from 'prop-types';
 
 import SingleQuestionLayout from '../layouts/SingleQuestionLayout';
 
-const SingleQuestion = ({ question, answerBody, selectAnswer, saveAnswer }) => {
+const SingleQuestion = ({
+  question,
+  answerBody,
+  selectAnswer,
+  saveAnswer,
+  isMobile,
+}) => {
   const [selectedAnswerIndex, setSelectedAnswerIndex] = useState(null);
   const {
     body: {
@@ -39,6 +45,7 @@ const SingleQuestion = ({ question, answerBody, selectAnswer, saveAnswer }) => {
       handleClick={handleClick}
       questionId={id}
       selectedAnswerIndex={selectedAnswerIndex}
+      isMobile={isMobile}
     />
   );
 };
@@ -48,6 +55,7 @@ SingleQuestion.propTypes = {
   answerBody: PropTypes.any,
   selectAnswer: PropTypes.func,
   saveAnswer: PropTypes.func,
+  isMobile: PropTypes.bool,
 };
 
 export default SingleQuestion;

@@ -82,7 +82,6 @@ const ResetPasswordPage = ({
                 />
                 <Button
                   height={46}
-                  borderRadius={5}
                   mt={45}
                   loading={loading}
                   onClick={handleSubmit}

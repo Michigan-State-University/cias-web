@@ -4,7 +4,7 @@ import { IntlShape } from 'react-intl';
 
 import LocalStorageService from 'utils/localStorageService';
 import { previewRegex } from 'global/constants/regex';
-import { resetReducer } from 'global/reducers/auth/actions';
+import { resetReducer as resetAuthReducer } from 'global/reducers/auth/actions';
 import { InterventionSharedTo, InterventionType } from 'models/Intervention';
 import { FinishQuestionDTO } from 'models/Question';
 
@@ -15,12 +15,11 @@ import GhostLink from 'components/GhostLink';
 import { StyledLink } from './styled';
 import messages from './messages';
 import { makeSelectUserSession } from '../selectors';
+import { getSessionMapUserPreviewUrl, getNextSessionUrl } from '../utils';
 import {
-  getBackToModulesUrl,
-  getSessionMapUserPreviewUrl,
-  getNextSessionUrl,
-} from '../utils';
-import { createUserSessionRequest } from '../actions';
+  fetchOrCreateUserSessionRequest,
+  resetReducer as resetAnswerSessionPageReducer,
+} from '../actions';
 
 type Props = {
   formatMessage: IntlShape['formatMessage'];
@@ -28,11 +27,10 @@ type Props = {
 };
 
 const FinishScreenLayout = ({ formatMessage, question }: Props) => {
-  // If there is no state in LocalStorageService it means that that is anonymous user with anyone in the link
-  const isNotLoggedInUser = !LocalStorageService.getState();
+  const isGuestUser = !LocalStorageService.getState();
 
   useEffect(() => {
-    if (isNotLoggedInUser) {
+    if (isGuestUser) {
       LocalStorageService.clearHeaders();
     }
   }, []);
@@ -44,7 +42,7 @@ const FinishScreenLayout = ({ formatMessage, question }: Props) => {
     id: userSessionId,
     interventionType,
     sharedTo,
-    sessionId,
+    userInterventionId,
   } = userSession;
   // @ts-ignore
   const { next_session_id: nextSessionId } = question;
@@ -76,11 +74,18 @@ const FinishScreenLayout = ({ formatMessage, question }: Props) => {
   };
 
   const reloadPage = () => {
-    dispatch(resetReducer());
-    dispatch(createUserSessionRequest(sessionId));
+    dispatch(resetAuthReducer());
   };
 
-  if (isNotLoggedInUser) {
+  const clearUserSession = () => {
+    dispatch(resetAnswerSessionPageReducer());
+  };
+
+  const goToNextSession = () => {
+    dispatch(fetchOrCreateUserSessionRequest(nextSessionId));
+  };
+
+  if (isGuestUser) {
     return (
       <Row mt={50} justify="center" width="100%">
         <Button onClick={reloadPage} px={20} width="auto">
@@ -94,12 +99,14 @@ const FinishScreenLayout = ({ formatMessage, question }: Props) => {
   if (showModulesButtons)
     return (
       <Row mt={50} align="center" justify="end" width="100%" gap={15}>
-        <StyledLink to={getBackToModulesUrl()}>
-          <TextButton>{formatMessage(messages.goBackToModules)}</TextButton>
+        <StyledLink to={`/user_interventions/${userInterventionId}`}>
+          <TextButton onClick={clearUserSession}>
+            {formatMessage(messages.goBackToModules)}
+          </TextButton>
         </StyledLink>
         {nextSessionId && (
           <GhostLink to={nextSessionUrl}>
-            <Button px={20} width="100%">
+            <Button px={20} width="100%" onClick={goToNextSession}>
               {formatMessage(messages.goToNextModule)}
             </Button>
           </GhostLink>

@@ -13,6 +13,9 @@ import {
   sendInterventionInviteSaga,
   resendInterventionInviteSaga,
   fetchInterventionInvitesSaga,
+  generateConversationsTranscriptSaga,
+  changeInterventionNarratorSaga,
+  editShortLinksSaga,
 } from 'global/reducers/intervention/sagas';
 
 export default function* interventionDetailsPageSagas() {
@@ -30,5 +33,8 @@ export default function* interventionDetailsPageSagas() {
     resendInterventionInviteSaga(),
     externalCopySessionSaga(),
     fetchInterventionInvitesSaga(),
+    generateConversationsTranscriptSaga(),
+    changeInterventionNarratorSaga(),
+    editShortLinksSaga(),
   ]);
 }

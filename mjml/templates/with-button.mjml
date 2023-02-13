@@ -1,0 +1,13 @@
+<mjml>
+  <mj-head>
+    <app-header />
+  </mj-head>
+  <mj-body>
+    <app-layout
+      header="{HEADER_TEXT}"
+      mainText="{MAIN_TEXT}"
+      buttonText="{BUTTON_TEXT}"
+      buttonUrl="{BUTTON_URL}"
+    />
+  </mj-body>
+</mjml>

@@ -47,9 +47,11 @@ import { setAutoFreeze } from 'immer';
 import { translationMessages } from 'i18n';
 import { polyfillI18n } from 'i18nPolyfill';
 
+import { SocketProvider } from 'components/ActionCable';
+import { NotificationsActionsProvider } from 'containers/NotificationsActionsProvider';
+
 import 'utils/axios';
-import { ActionCableProvider } from 'components/ActionCable';
-import configureDayjs from './configureDayjs';
+import { configureDayjs } from './utils/dayjs';
 
 smoothscroll.polyfill();
 
@@ -167,12 +169,14 @@ const render = (messages: any) => {
       <LanguageProvider messages={messages}>
         <ConnectedRouter history={history}>
           <ScreenClassProvider>
-            <ActionCableProvider url={`${process.env.API_URL}/cable`}>
-              <Sentry.ErrorBoundary fallback={ErrorPage}>
-                <ToastContainer />
-                <App />
-              </Sentry.ErrorBoundary>
-            </ActionCableProvider>
+            <Sentry.ErrorBoundary fallback={ErrorPage}>
+              <SocketProvider>
+                <NotificationsActionsProvider>
+                  <ToastContainer />
+                  <App />
+                </NotificationsActionsProvider>
+              </SocketProvider>
+            </Sentry.ErrorBoundary>
           </ScreenClassProvider>
         </ConnectedRouter>
       </LanguageProvider>

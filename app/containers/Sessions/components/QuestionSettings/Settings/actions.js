@@ -22,12 +22,19 @@ import {
   ADD_NEW_FORMULA,
   REMOVE_FORMULA,
   DUPLICATE_FORMULA,
+  UPDATE_ENTIRE_NARRATOR,
 } from './constants';
 
 export const updateSettings = (property, value) =>
   updateQuestionSettings({
     type: UPDATE_QUESTION_SETTINGS,
     data: { property, value },
+  });
+
+export const updateEntireNarrator = (newNarrator) =>
+  updateQuestionSettings({
+    type: UPDATE_ENTIRE_NARRATOR,
+    data: { newNarrator },
   });
 
 export const updateNarratorSettings = (property, value) =>

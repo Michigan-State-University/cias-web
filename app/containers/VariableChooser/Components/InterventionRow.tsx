@@ -23,14 +23,14 @@ type Props = {
 
 const InterventionRow = ({ data, index }: Props) => {
   const { formatMessage } = useIntl();
-  const { initialInterventionId } = useContext(VariableChooserContext);
+  const { currentInterventionId } = useContext(VariableChooserContext);
   const { onClick } = useContext(InterventionViewContext);
 
   const { items } = data;
   const element = items?.[index];
   const { id, name } = element || {};
 
-  const isInitialIntervention = id === initialInterventionId;
+  const isCurrentIntervention = id === currentInterventionId;
   const isLast = index === items.length - 1;
   return (
     <Row
@@ -42,7 +42,7 @@ const InterventionRow = ({ data, index }: Props) => {
     >
       <Img
         src={
-          isInitialIntervention
+          isCurrentIntervention
             ? presentationProjectorSelected
             : presentationProjector
         }
@@ -52,11 +52,11 @@ const InterventionRow = ({ data, index }: Props) => {
         {/* @ts-ignore */}
         <EllipsisText
           text={name}
-          fontWeight={isInitialIntervention ? 'bold' : ''}
+          fontWeight={isCurrentIntervention ? 'bold' : ''}
           fontSize={13}
         />
       </Box>
-      {isInitialIntervention && (
+      {isCurrentIntervention && (
         <Badge bg={themeColors.secondary} color={colors.white}>
           {formatMessage(messages.selectedInterventionBadge)}
         </Badge>

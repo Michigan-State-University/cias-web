@@ -23,7 +23,6 @@ exports[`<Navbar /> Should render and match the snapshot with session path 1`] =
   cursor: pointer;
   width: 30px;
   height: 30px;
-  margin-right: 10px;
   color: rgba(255,255,255,1);
 }
 
@@ -32,6 +31,8 @@ exports[`<Navbar /> Should render and match the snapshot with session path 1`] =
   height: auto;
   display: block;
   border-radius: 5px;
+  cursor: pointer;
+  color: unset;
   cursor: pointer;
 }
 
@@ -52,6 +53,7 @@ exports[`<Navbar /> Should render and match the snapshot with session path 1`] =
   align-items: center;
   z-index: 10;
   height: 70px;
+  gap: 16px;
 }
 
 .c0 .user-name-info {
@@ -69,10 +71,29 @@ exports[`<Navbar /> Should render and match the snapshot with session path 1`] =
   -webkit-box-align: center;
   -ms-flex-align: center;
   align-items: center;
+  gap: 32px;
+  -webkit-flex-shrink: 0;
+  -ms-flex-negative: 0;
+  flex-shrink: 0;
 }
 
 .c2 {
   position: relative;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  gap: 10px;
+}
+
+@media (max-width:575px) {
+  .c0 {
+    gap: 0;
+  }
 }
 
 @media (max-width:767px) {
@@ -90,6 +111,7 @@ exports[`<Navbar /> Should render and match the snapshot with session path 1`] =
     <div
       class="c2"
     >
+      <div />
       <div
         class="c3"
         color="#FFFFFF"
@@ -101,13 +123,12 @@ exports[`<Navbar /> Should render and match the snapshot with session path 1`] =
           TT
         </div>
       </div>
-      <div />
-    </div>
-    <div
-      class="c4 user-name-info"
-      data-private="true"
-    >
-      test test
+      <div
+        class="c4 user-name-info"
+        data-private="true"
+      >
+        test test
+      </div>
     </div>
   </div>
 </div>
@@ -136,7 +157,6 @@ exports[`<Navbar /> Should render and match the snapshot withou matching path 1`
   cursor: pointer;
   width: 30px;
   height: 30px;
-  margin-right: 10px;
   color: rgba(255,255,255,1);
 }
 
@@ -145,6 +165,8 @@ exports[`<Navbar /> Should render and match the snapshot withou matching path 1`
   height: auto;
   display: block;
   border-radius: 5px;
+  cursor: pointer;
+  color: unset;
   cursor: pointer;
 }
 
@@ -165,6 +187,7 @@ exports[`<Navbar /> Should render and match the snapshot withou matching path 1`
   align-items: center;
   z-index: 10;
   height: 70px;
+  gap: 16px;
 }
 
 .c0 .user-name-info {
@@ -182,10 +205,29 @@ exports[`<Navbar /> Should render and match the snapshot withou matching path 1`
   -webkit-box-align: center;
   -ms-flex-align: center;
   align-items: center;
+  gap: 32px;
+  -webkit-flex-shrink: 0;
+  -ms-flex-negative: 0;
+  flex-shrink: 0;
 }
 
 .c2 {
   position: relative;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  gap: 10px;
+}
+
+@media (max-width:575px) {
+  .c0 {
+    gap: 0;
+  }
 }
 
 @media (max-width:767px) {
@@ -203,6 +245,7 @@ exports[`<Navbar /> Should render and match the snapshot withou matching path 1`
     <div
       class="c2"
     >
+      <div />
       <div
         class="c3"
         color="#FFFFFF"
@@ -214,13 +257,12 @@ exports[`<Navbar /> Should render and match the snapshot withou matching path 1`
           TT
         </div>
       </div>
-      <div />
-    </div>
-    <div
-      class="c4 user-name-info"
-      data-private="true"
-    >
-      test test
+      <div
+        class="c4 user-name-info"
+        data-private="true"
+      >
+        test test
+      </div>
     </div>
   </div>
 </div>

@@ -5,7 +5,7 @@ import { Provider } from 'react-redux';
 import { MemoryRouter } from 'react-router-dom';
 import { DEFAULT_LOCALE } from 'i18n';
 
-import { Roles } from 'models/User/UserRoles';
+import { Roles } from 'models/User/RolesManager';
 
 import { createTestStore } from 'utils/testUtils/storeUtils';
 
@@ -23,7 +23,7 @@ describe('<InterventionDetailsPage />', () => {
       },
     },
   };
-  const initialState = { auth: { user: { roles: [Roles.admin] } } };
+  const initialState = { auth: { user: { roles: [Roles.Admin] } } };
   const store = createTestStore(initialState);
 
   beforeAll(() => {

@@ -1,5 +1,6 @@
 import { defineMessages } from 'react-intl';
-import { feedbackActions } from 'models/Narrator/FeedbackActions';
+
+import { EFeedbackAction } from 'models/Narrator/FeedbackActions';
 
 export const scope = 'app.containers.DefaultSettings';
 
@@ -88,6 +89,10 @@ export default defineMessages({
     id: `${scope}.chooseQuestion`,
     defaultMessage: 'Choose Question',
   },
+  questionNotFound: {
+    id: `${scope}.questionNotFound`,
+    defaultMessage: 'Question not found. Choose a different one.',
+  },
   addReflection: {
     id: `${scope}.addReflection`,
     defaultMessage: 'Add Reflection',
@@ -109,24 +114,24 @@ export default defineMessages({
     id: `${scope}.characterMoveDisabled`,
     defaultMessage: `Narrator replacing is disabled for that intervention status.`,
   },
-  [feedbackActions.showSpectrum]: {
-    id: `${scope}.${feedbackActions.showSpectrum}`,
+  [EFeedbackAction.SHOW_SPECTRUM]: {
+    id: `${scope}.${EFeedbackAction.SHOW_SPECTRUM}`,
     defaultMessage: 'Show Spectrum',
   },
-  [feedbackActions.showUserValue]: {
-    id: `${scope}.${feedbackActions.showUserValue}`,
+  [EFeedbackAction.SHOW_USER_VALUE]: {
+    id: `${scope}.${EFeedbackAction.SHOW_USER_VALUE}`,
     defaultMessage: 'Show End-User Value',
   },
-  [feedbackActions.showLowerValue]: {
-    id: `${scope}.${feedbackActions.showLowerValue}`,
+  [EFeedbackAction.SHOW_LOWER_VALUE]: {
+    id: `${scope}.${EFeedbackAction.SHOW_LOWER_VALUE}`,
     defaultMessage: 'Show Lower Value',
   },
-  [feedbackActions.showHigherValue]: {
-    id: `${scope}.${feedbackActions.showHigherValue}`,
+  [EFeedbackAction.SHOW_HIGHER_VALUE]: {
+    id: `${scope}.${EFeedbackAction.SHOW_HIGHER_VALUE}`,
     defaultMessage: 'Show Higher Value',
   },
-  [feedbackActions.noAction]: {
-    id: `${scope}.${feedbackActions.noAction}`,
+  [EFeedbackAction.NO_ACTION]: {
+    id: `${scope}.${EFeedbackAction.NO_ACTION}`,
     defaultMessage: 'Manual positioning',
   },
   selectAction: {

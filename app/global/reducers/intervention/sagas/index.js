@@ -22,6 +22,10 @@ import deleteInterventionAttachmentSaga from './deleteAttachment';
 import sendInterventionInviteSaga from './sendInterventionInvite';
 import resendInterventionInviteSaga from './resendInterventionInvite';
 import fetchInterventionInvitesSaga from './fetchInterventionInvites';
+import generateConversationsTranscriptSaga from './generateConversationsTranscript';
+import exportInterventionSaga from './exportIntervention';
+import changeInterventionNarratorSaga from './changeInterventionNarrator';
+import editShortLinksSaga from './editShortLinks';
 
 export {
   createInterventionSaga,
@@ -47,6 +51,10 @@ export {
   resendInterventionInviteSaga,
   deleteInterventionAttachmentSaga,
   fetchInterventionInvitesSaga,
+  generateConversationsTranscriptSaga,
+  exportInterventionSaga,
+  changeInterventionNarratorSaga,
+  editShortLinksSaga,
 };
 
 export default function* allInterventionSagas() {
@@ -72,5 +80,14 @@ export default function* allInterventionSagas() {
     sendInterventionInviteSaga(),
     resendInterventionInviteSaga(),
     fetchInterventionInvitesSaga(),
+    generateConversationsTranscriptSaga(),
+    exportInterventionSaga(),
+    changeInterventionNarratorSaga(),
+    editShortLinksSaga(),
   ]);
 }
+
+export const withInterventionLogoSaga = {
+  key: 'interventionLogo',
+  saga: interventionLogoSaga,
+};

@@ -4,7 +4,7 @@ import { toast } from 'react-toastify';
 
 import { formatMessage } from 'utils/intlOutsideReact';
 import { makeSelectQuestions } from 'global/reducers/questions/selectors';
-import { cleanGroups } from 'global/reducers/questionGroups';
+import { cleanGroups } from 'global/reducers/questionGroups/actions';
 
 import messages from '../messages';
 import {

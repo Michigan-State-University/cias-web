@@ -1,9 +1,0 @@
-<mjml>
-  <mj-head>
-    <app-header />
-  </mj-head>
-  <mj-body>
-    <app-layout header="Your preview CSV file is generated successfully" mainText="CSV that you requested on {REQUESTED_AT} with preview data from <span style='color: #c866ea;'>{INTERVENTION_NAME}</span> is available as attachment to this email" buttonText="" buttonUrl="">
-    </app-layout>
-    <mj-body>
-</mjml>

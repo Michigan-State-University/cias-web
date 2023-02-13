@@ -1,4 +1,4 @@
-import React, { CSSProperties, useMemo, useRef } from 'react';
+import React, { CSSProperties, memo, useMemo, useRef } from 'react';
 
 import Text from 'components/Text';
 import Row from 'components/Row';
@@ -34,7 +34,7 @@ export type SessionMapInteractiveNodeContainerProps = {
   children: React.ReactNode;
 };
 
-export const SessionMapInteractiveNodeContainer = ({
+const SessionMapInteractiveNodeContainer = ({
   nodeType,
   nodeId,
   nodeData: { showDetailedInfo, selectableOnClick, selected, onSelectedChange },
@@ -140,3 +140,5 @@ export const SessionMapInteractiveNodeContainer = ({
     </Row>
   );
 };
+
+export default memo(SessionMapInteractiveNodeContainer);

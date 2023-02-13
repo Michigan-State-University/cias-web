@@ -19,13 +19,16 @@ import CopyIcon from 'assets/svg/copy.svg';
 import AddAppIcon from 'assets/svg/app-add.svg';
 import TranslateIcon from 'assets/svg/translate.svg';
 import PadlockIcon from 'assets/svg/padlock.svg';
+import DownloadIcon from 'assets/svg/download-line.svg';
 
 import { colors } from 'theme';
 
 import globalMessages from 'global/i18n/globalMessages';
-import { makeSelectUserId, makeSelectUserRoles } from 'global/reducers/auth';
+import { makeSelectUserId } from 'global/reducers/auth';
 import { interventionOptionsSaga } from 'global/sagas/interventionOptionsSaga';
 import {
+  exportInterventionRequest,
+  exportInterventionSaga,
   interventionReducer,
   sendInterventionCsvRequest,
 } from 'global/reducers/intervention';
@@ -35,13 +38,13 @@ import {
 } from 'global/reducers/interventions';
 
 import { canArchive, canEdit } from 'models/Status/statusPermissions';
-import { RolePermissions } from 'models/User/RolePermissions';
-import { Roles } from 'models/User/UserRoles';
+import { useRoleManager } from 'models/User/RolesManager';
 
 import isNullOrUndefined from 'utils/isNullOrUndefined';
 
 import {
   InterventionAssignOrganizationModal,
+  INTERVENTION_ASSIGN_ORGANIZATION_MODAL_WIDTH,
   useThirdPartyToolsAccessModal,
 } from 'containers/InterventionDetailsPage/components/Modals';
 import SelectResearchers from 'containers/SelectResearchers';
@@ -82,8 +85,8 @@ const SingleTile = ({
   archiveIntervention,
   intl: { formatMessage },
   userId,
-  userRoles,
   isLoading,
+  exportIntervention,
 }) => {
   const [
     shareWithResearchersModalVisible,
@@ -122,7 +125,7 @@ const SingleTile = ({
   const { openThirdPartyToolsAccessModal, ThirdPartyToolsModal } =
     useThirdPartyToolsAccessModal();
 
-  const isAdmin = userRoles.includes(Roles.admin);
+  const { isAdmin, canAssignOrganizationToIntervention } = useRoleManager();
 
   const {
     name,
@@ -139,8 +142,9 @@ const SingleTile = ({
 
   const handleCsvRequest = () => sendCsv(id);
 
+  const handleExportIntervention = () => exportIntervention(id);
+
   const canExportCSV = userId === user?.id;
-  const { canAssignOrganizationToIntervention } = RolePermissions(userRoles);
 
   const handleClone = () =>
     copyIntervention({ interventionId: id, withoutRedirect: true });
@@ -246,6 +250,13 @@ const SingleTile = ({
           },
         ]
       : []),
+    {
+      id: 'export',
+      label: formatMessage(messages.exportIntervention),
+      icon: DownloadIcon,
+      action: handleExportIntervention,
+      color: colors.bluewood,
+    },
   ];
 
   const preventDefault = (e) => {
@@ -290,6 +301,7 @@ const SingleTile = ({
         title={formatMessage(messages.assignOrganization)}
         onClose={closeAssignOrganizationModal}
         visible={assignOrganizationModalVisible}
+        width={INTERVENTION_ASSIGN_ORGANIZATION_MODAL_WIDTH}
       >
         <InterventionAssignOrganizationModal
           interventionId={id}
@@ -364,19 +376,19 @@ SingleTile.propTypes = {
   copyIntervention: PropTypes.func,
   archiveIntervention: PropTypes.func,
   userId: PropTypes.string,
-  userRoles: PropTypes.arrayOf(PropTypes.string),
   isLoading: PropTypes.bool,
+  exportIntervention: PropTypes.func,
 };
 
 const mapStateToProps = createStructuredSelector({
   userId: makeSelectUserId(),
-  userRoles: makeSelectUserRoles(),
 });
 
 const mapDispatchToProps = {
   copyIntervention: copyInterventionRequest,
   sendCsv: sendInterventionCsvRequest,
   archiveIntervention: archiveInterventionRequest,
+  exportIntervention: exportInterventionRequest,
 };
 
 const SingleTileWithIntl = injectIntl(SingleTile);
@@ -395,4 +407,5 @@ export default compose(
     saga: interventionDetailsPageSagas,
   }),
   injectReducer({ key: 'intervention', reducer: interventionReducer }),
+  injectSaga({ key: 'exportIntervention', saga: exportInterventionSaga }),
 )(SingleTileWithIntl);

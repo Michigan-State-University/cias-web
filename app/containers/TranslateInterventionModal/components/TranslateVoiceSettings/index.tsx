@@ -14,7 +14,7 @@ import {
 } from 'utils/formatters';
 
 import { Voice, VoiceDTO } from 'models/Voice';
-import { ApiData } from 'models/Api';
+import { ApiDataCollection } from 'models/Api';
 
 import { voiceDataParser } from 'global/parsers';
 
@@ -43,9 +43,11 @@ const TranslateVoiceSettings = ({
 }: Props): JSX.Element => {
   const { formatMessage } = useIntl();
 
-  const { data, isFetching, error } = useGet<ApiData<VoiceDTO>, Voice[]>(
-    `/v1/google/languages/${googleLanguageId}/voices`,
-    (fetchedData) => voiceDataParser(fetchedData),
+  const { data, isFetching, error } = useGet<
+    ApiDataCollection<VoiceDTO>,
+    Voice[]
+  >(`/v1/google/languages/${googleLanguageId}/voices`, (fetchedData) =>
+    voiceDataParser(fetchedData),
   );
 
   const voiceOptions = useMemo(

@@ -8,7 +8,10 @@ import { colors, elements } from 'theme';
 import { canEdit } from 'models/Status/statusPermissions';
 import { GroupType, QuestionGroup } from 'models/QuestionGroup';
 import { QuestionDTO, QuestionTypes } from 'models/Question';
-import { InterventionDto } from 'models/Intervention';
+import { Intervention } from 'models/Intervention';
+import { CHARACTER_CONFIGS } from 'models/Character';
+
+import { CHARACTER_FIXED_POSITION_QUESTIONS } from 'utils/characterConstants';
 
 import { makeSelectIsNarratorTab } from 'global/reducers/localState';
 import {
@@ -67,7 +70,7 @@ const RenderQuestionDetails = ({
   const selectedQuestion: Nullable<QuestionDTO> = useSelector(
     makeSelectSelectedQuestion(),
   );
-  const intervention: Nullable<InterventionDto> = useSelector(
+  const intervention: Nullable<Intervention> = useSelector(
     makeSelectIntervention(),
   );
 
@@ -102,6 +105,12 @@ const RenderQuestionDetails = ({
       ? selectedQuestion.settings.proceed_button
       : true;
   const showProceedButton = proceedButton && !isTlfbGroup && !isFinishScreen;
+
+  const isNarratorPositionFixed =
+    CHARACTER_FIXED_POSITION_QUESTIONS.includes(type);
+
+  const { character, animation } = settings;
+  const characterAdditionalSpace = CHARACTER_CONFIGS[character].size.height;
 
   return (
     <AnswerOuterContainer>
@@ -156,7 +165,15 @@ const RenderQuestionDetails = ({
               settings={{ ...settings, title, subtitle }}
             />
           )}
-          <Row justify="center" width="100%">
+          <Row
+            justify="center"
+            width="100%"
+            pt={
+              animation && !isNarratorPositionFixed
+                ? characterAdditionalSpace
+                : 0
+            }
+          >
             {/* @ts-ignore */}
             <AppContainer disablePageTitle $width="100%">
               {!isNarratorTabOrEditNotPossible && (
@@ -211,7 +228,7 @@ const RenderQuestionDetails = ({
               {showProceedButton && (
                 <Box my={20} ml={26}>
                   {/* @ts-ignore */}
-                  <Button width="180px" disabled>
+                  <Button width={elements.continueButtonWidth} disabled>
                     <FormattedMessage {...messages.nextQuestion} />
                   </Button>
                 </Box>

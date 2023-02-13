@@ -14,6 +14,7 @@ const BadgeInput = styled(StyledInput).attrs(({ color, bgColor }) => ({
   font-size: ${fontSizes.small};
   font-weight: 600;
   border-radius: 4px;
+  ${({ align }) => (align ? `text-align: ${align};` : '')}
   &:focus {
     box-shadow: none;
     outline: none;

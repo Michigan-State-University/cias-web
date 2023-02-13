@@ -8,9 +8,14 @@ export const csvEmailValidator = (target) => {
   return emailValidator(email);
 };
 
-export const emailFormValidationSchema = Yup.string()
-  .required(formatMessage(globalMessages.validators.required))
-  .email(formatMessage(globalMessages.validators.email));
+export const emailFormValidationSchema = Yup.string().email(
+  formatMessage(globalMessages.validators.email),
+);
+
+export const requiredEmailFormValidationSchema =
+  emailFormValidationSchema.required(
+    formatMessage(globalMessages.validators.required),
+  );
 
 export const emailValidator = (target) =>
-  emailFormValidationSchema.isValidSync(target);
+  requiredEmailFormValidationSchema.isValidSync(target);

@@ -10,7 +10,7 @@ import { makeSelectUser } from 'global/reducers/auth';
 
 import HenryFordInitialScreenLayout from '../layouts/HenryFordInitialScreenLayout';
 
-import { SharedProps } from './sharedProps';
+import { SharedProps } from '../types';
 import { verifyPatientDataRequest } from '../actions';
 import { makeSelectVerifyPatientDataState } from '../selectors';
 

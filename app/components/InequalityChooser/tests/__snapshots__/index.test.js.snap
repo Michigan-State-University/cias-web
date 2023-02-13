@@ -9,6 +9,7 @@ exports[`<InequalityChooser /> Should render and match the snapshot 1`] = `
   min-width: 60px;
   margin-left: 10px;
   cursor: pointer;
+  color: unset;
 }
 
 .c2 {
@@ -19,6 +20,7 @@ exports[`<InequalityChooser /> Should render and match the snapshot 1`] = `
   margin-right: 10px;
   margin-left: 10px;
   background-color: rgba(233,241,251,1);
+  color: unset;
 }
 
 .c1 {

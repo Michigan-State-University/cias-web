@@ -4,7 +4,6 @@ import { createStructuredSelector } from 'reselect';
 import PropTypes from 'prop-types';
 import { compose } from 'redux';
 import { connect } from 'react-redux';
-import keys from 'lodash/keys';
 import values from 'lodash/values';
 
 import { colors, themeColors } from 'theme';
@@ -22,7 +21,7 @@ import { StyledInput } from 'components/Input/StyledInput';
 
 import { feedbackQuestion } from 'models/Session/QuestionTypes';
 import { speechType, reflectionType } from 'models/Narrator/BlockTypes';
-import { feedbackActions } from 'models/Narrator/FeedbackActions';
+import { EFeedbackAction } from 'models/Narrator/FeedbackActions';
 
 import {
   makeSelectLoader,
@@ -31,10 +30,10 @@ import {
   makeSelectSelectedQuestionType,
 } from 'global/reducers/questions';
 import { makeSelectPreviewData } from 'global/reducers/localState';
-import { speechAnimations } from 'utils/animations/animationsNames';
+import animationMessages from 'global/i18n/animationNames';
+import { characterToSpeechAnimationsMap } from 'utils/animations/animationsNames';
 
 import messages from '../../messages';
-import animationMessages from '../messages';
 import { updateBlockSettings, switchSpeechReflection } from '../../../actions';
 
 import { DashedBox } from './styled';
@@ -55,28 +54,29 @@ const ReflectionFormulaBlock = ({
   onAddCase,
   disabled,
   selectedQuestion,
+  character,
 }) => {
   const { sessionId, interventionId } = useContext(EditSessionPageContext);
 
   const selectOptions = useMemo(() => {
-    const animations = keys(speechAnimations);
+    const animations = characterToSpeechAnimationsMap[character];
 
     return animations.map((animation) => ({
       value: animation,
       label: formatMessage(animationMessages[animation]),
     }));
-  }, [speechAnimations]);
+  }, [character]);
 
   const feedbackOptions = useMemo(() => {
-    const options = values(feedbackActions).filter(
-      (action) => action !== feedbackActions.showSpectrum,
+    const options = values(EFeedbackAction).filter(
+      (action) => action !== EFeedbackAction.SHOW_SPECTRUM,
     );
 
     return options.map((option) => ({
       value: option,
       label: formatMessage(messages[option]),
     }));
-  }, [feedbackActions]);
+  }, [EFeedbackAction]);
 
   const selectedOption = selectOptions.find(
     (option) => option.value === block.animation,
@@ -86,7 +86,7 @@ const ReflectionFormulaBlock = ({
     (option) => option.value === block.action,
   );
 
-  const hasSpecialPositioning = block.action !== feedbackActions.noAction;
+  const hasSpecialPositioning = block.action !== EFeedbackAction.NO_ACTION;
 
   return (
     <Column>
@@ -125,7 +125,6 @@ const ReflectionFormulaBlock = ({
           id="reflection-toggle"
           disabled={disabled}
           checked
-          mr={15}
           onToggle={() => switchToSpeech(blockIndex, id)}
         >
           {formatMessage(messages.reflectionToggle)}
@@ -136,7 +135,6 @@ const ReflectionFormulaBlock = ({
           id="formula-toggle"
           disabled={disabled}
           checked
-          mr={15}
           onToggle={() => switchToReflection(blockIndex, id)}
         >
           {formatMessage(messages.formulaToggle)}
@@ -150,8 +148,8 @@ const ReflectionFormulaBlock = ({
           onClick={(value) =>
             onFormulaUpdate(`${block.payload}${value}`, id, blockIndex)
           }
-          sessionId={sessionId}
-          interventionId={interventionId}
+          currentSessionId={sessionId}
+          currentInterventionId={interventionId}
           selectedQuestion={selectedQuestion}
           includeCurrentQuestion={false}
           isMultiSession
@@ -219,6 +217,7 @@ ReflectionFormulaBlock.propTypes = {
   onAddCase: PropTypes.func,
   disabled: PropTypes.bool,
   selectedQuestion: PropTypes.object,
+  character: PropTypes.string,
 };
 
 const mapStateToProps = createStructuredSelector({
@@ -241,7 +240,7 @@ const mapDispatchToProps = {
       index,
       {
         action,
-        animation: action === feedbackActions.noAction ? 'rest' : 'pointUp',
+        animation: action === EFeedbackAction.NO_ACTION ? 'rest' : 'pointUp',
       },
       id,
     ),

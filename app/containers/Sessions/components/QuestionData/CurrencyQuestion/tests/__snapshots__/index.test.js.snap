@@ -19,6 +19,7 @@ exports[`<CurrencyQuestion /> Should render and match the snapshot 1`] = `
   display: block;
   border-radius: 5px;
   width: 100%;
+  color: unset;
 }
 
 .c3 {
@@ -28,6 +29,7 @@ exports[`<CurrencyQuestion /> Should render and match the snapshot 1`] = `
   border-radius: 5px;
   width: 100%;
   cursor: not-allowed;
+  color: unset;
 }
 
 .c4 {

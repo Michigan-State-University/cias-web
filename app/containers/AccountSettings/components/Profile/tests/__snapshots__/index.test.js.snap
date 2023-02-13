@@ -292,6 +292,7 @@ exports[`<Profile /> Should render and match the snapshot 1`] = `
   margin-top: 20px;
   background-color: rgba(255,255,255,1);
   box-shadow: 0px 4px 20px #E3EEFB;
+  color: unset;
 }
 
 .c9 {
@@ -302,6 +303,7 @@ exports[`<Profile /> Should render and match the snapshot 1`] = `
   height: -webkit-fit-content;
   height: -moz-fit-content;
   height: fit-content;
+  color: unset;
 }
 
 .c23 {
@@ -309,6 +311,7 @@ exports[`<Profile /> Should render and match the snapshot 1`] = `
   height: auto;
   display: block;
   border-radius: 5px;
+  color: unset;
 }
 
 .c26 {
@@ -317,6 +320,7 @@ exports[`<Profile /> Should render and match the snapshot 1`] = `
   display: block;
   border-radius: 5px;
   cursor: pointer;
+  color: unset;
 }
 
 .c1 {
@@ -384,6 +388,7 @@ exports[`<Profile /> Should render and match the snapshot 1`] = `
   font-size: 13px;
   line-height: 130%;
   margin-bottom: 5px;
+  font-size: 12px;
   color: #2F3850;
   width: -webkit-fit-content;
   width: -moz-fit-content;
@@ -656,6 +661,7 @@ exports[`<Profile /> Should render and match the snapshot 1`] = `
                 height="fit-content"
               >
                 <input
+                  accept="image/jpg, image/png, image/jpeg"
                   autocomplete="off"
                   style="display: none;"
                   tabindex="-1"
@@ -699,6 +705,7 @@ exports[`<Profile /> Should render and match the snapshot 1`] = `
           >
             <p
               class="c18"
+              font-size="12px"
               width="fit-content"
             >
               First Name
@@ -728,6 +735,7 @@ exports[`<Profile /> Should render and match the snapshot 1`] = `
           >
             <p
               class="c18"
+              font-size="12px"
               width="fit-content"
             >
               Last name
@@ -766,6 +774,7 @@ exports[`<Profile /> Should render and match the snapshot 1`] = `
           >
             <p
               class="c18"
+              font-size="12px"
               width="fit-content"
             >
               Time zone
@@ -868,6 +877,7 @@ exports[`<Profile /> Should render and match the snapshot 1`] = `
             >
               <p
                 class="c18"
+                font-size="12px"
                 width="fit-content"
               >
                 Phone prefix
@@ -956,6 +966,7 @@ exports[`<Profile /> Should render and match the snapshot 1`] = `
             >
               <p
                 class="c18"
+                font-size="12px"
                 width="fit-content"
               >
                 Phone number

@@ -16,13 +16,13 @@ import messages from '../messages';
 
 interface Props {
   id: string;
-  isInitialSession: boolean;
+  isCurrentSession: boolean;
   isLast: boolean;
   name: string;
   onClick: (id: string) => void;
 }
 
-const SessionRow = ({ id, isInitialSession, isLast, name, onClick }: Props) => {
+const SessionRow = ({ id, isCurrentSession, isLast, name, onClick }: Props) => {
   const { formatMessage } = useIntl();
 
   return (
@@ -37,7 +37,7 @@ const SessionRow = ({ id, isInitialSession, isLast, name, onClick }: Props) => {
       <Col xs="content">
         <Img
           src={
-            isInitialSession
+            isCurrentSession
               ? presentationProjectorSelected
               : presentationProjector
           }
@@ -50,13 +50,13 @@ const SessionRow = ({ id, isInitialSession, isLast, name, onClick }: Props) => {
           {/* @ts-ignore */}
           <EllipsisText
             text={name}
-            fontWeight={isInitialSession ? 'bold' : ''}
+            fontWeight={isCurrentSession ? 'bold' : ''}
             fontSize={13}
           />
         </Box>
       </Col>
 
-      {isInitialSession && (
+      {isCurrentSession && (
         <Col xs="content">
           <Badge bg={themeColors.secondary} color={colors.white}>
             {formatMessage(messages.selectedInterventionBadge)}

@@ -1,6 +1,13 @@
-import React, { ChangeEvent, memo, ReactNode } from 'react';
+import React, {
+  AriaAttributes,
+  ChangeEvent,
+  ChangeEventHandler,
+  memo,
+  ReactNode,
+} from 'react';
 
 import Row from 'components/Row';
+import { LayoutProps, MarginProps } from 'components/BaseComponentStyles';
 
 import SwitchLabelWrapper from './SwitchLabelWrapper';
 
@@ -13,15 +20,33 @@ import {
 } from './styled';
 import { LabelPosition } from './constants';
 
-type Props = {
-  checked: boolean;
+type NativeChangeHandlerProps = {
+  onToggle?: undefined;
+  onChange: ChangeEventHandler<HTMLInputElement>;
+  nativeChangeHandler: true;
+};
+
+type CustomChangeHandlerProps = {
+  onToggle: (value: boolean, event: ChangeEvent<HTMLInputElement>) => void;
+  onChange?: undefined;
+  nativeChangeHandler?: false;
+};
+
+type ChangeHandlerProps = NativeChangeHandlerProps | CustomChangeHandlerProps;
+
+export type Props = {
+  checked?: boolean;
   children?: ReactNode;
   className?: string;
   disabled?: boolean;
-  id?: string;
+  id: string;
   labelPosition?: LabelPosition;
-  onToggle: (value: boolean, event: ChangeEvent<HTMLInputElement>) => void;
-};
+  labelOffset?: number;
+  onBlur?: HTMLInputElement['onblur'];
+  ariaLabel?: AriaAttributes['aria-label'];
+} & ChangeHandlerProps &
+  LayoutProps &
+  MarginProps;
 
 const Switch = ({
   checked = false,
@@ -30,9 +55,15 @@ const Switch = ({
   disabled = false,
   id,
   labelPosition = LabelPosition.Left,
+  labelOffset,
   onToggle,
+  onChange,
+  onBlur,
+  nativeChangeHandler,
+  ariaLabel,
+  ...props
 }: Props): JSX.Element => {
-  const handleOnChange = (event: ChangeEvent<HTMLInputElement>) => {
+  const handleOnChange: ChangeEventHandler<HTMLInputElement> = (event) => {
     const {
       target: { checked: newValue },
     } = event;
@@ -46,18 +77,25 @@ const Switch = ({
         id={id}
         data-cy="branching-intervention-toggle"
         data-testid="switch-input"
+        aria-label={ariaLabel}
         disabled={disabled}
         checked={checked}
-        onChange={handleOnChange}
+        onChange={nativeChangeHandler ? onChange : handleOnChange}
+        onBlur={onBlur}
       />
 
       <StyledLabel htmlFor={id}>
-        <SwitchLabelWrapper labelPosition={labelPosition}>
+        <SwitchLabelWrapper labelPosition={labelPosition} {...props}>
           <SwitchWrapper>
             <Slider />
           </SwitchWrapper>
 
-          <LabelContent $labelPosition={labelPosition}>{children}</LabelContent>
+          <LabelContent
+            $labelPosition={labelPosition}
+            $labelOffset={labelOffset}
+          >
+            {children}
+          </LabelContent>
         </SwitchLabelWrapper>
       </StyledLabel>
     </Row>

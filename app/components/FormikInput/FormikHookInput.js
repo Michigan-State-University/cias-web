@@ -45,8 +45,8 @@ function FormikHookInput({
   return (
     <TransparentFormikInput
       error={error}
-      hasError={hasError}
       touched={touched}
+      hasError={hasError}
       inputProps={inputProps}
       label={label}
       id={formikKey}
@@ -66,7 +66,7 @@ FormikHookInput.propTypes = {
   formikState: PropTypes.shape(FormikProps).isRequired,
   placeholder: PropTypes.string.isRequired,
   type: PropTypes.string,
-  label: PropTypes.string,
+  label: PropTypes.oneOfType([PropTypes.string, PropTypes.array]),
   inputProps: PropTypes.object,
   children: PropTypes.node,
   transparent: PropTypes.bool,

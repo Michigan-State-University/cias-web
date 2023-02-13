@@ -15,12 +15,11 @@ import {
   organizationsReducer,
 } from 'global/reducers/organizations';
 import { fetchDashboardViewSelectOptionsSaga } from 'global/reducers/organizations/sagas';
-import { Roles } from 'models/User/UserRoles';
+import { useRoleManager } from 'models/User/RolesManager';
 import { ReportingDashboardPageContext } from 'containers/ReportingDashboardPage/constants';
 
 import { Container, Row } from 'components/ReactGridSystem';
 import Select from 'components/Select';
-import { arraysOverlap } from 'utils/arrayUtils';
 
 import Button from 'components/Button';
 import { setChartFiltersRequest } from 'global/reducers/dashboardSections';
@@ -39,18 +38,10 @@ const DashboardView = ({
     DEFAULT_OPTION(formatMessage),
   );
   const { organizationId } = useParams();
-  const {
-    organizableId,
-    user: { roles },
-  } = useContext(ReportingDashboardPageContext);
+  const { organizableId } = useContext(ReportingDashboardPageContext);
 
-  const isHealthClinicAdmin = arraysOverlap(roles, [Roles.clinicAdmin]);
-  const isHealthSystemAdmin = arraysOverlap(roles, [Roles.healthSystemAdmin]);
-  const hasFullOrgAccess = arraysOverlap(roles, [
-    Roles.admin,
-    Roles.organizationAdmin,
-    Roles.eInterventionAdmin,
-  ]);
+  const { isHealthClinicAdmin, isHealthSystemAdmin, hasFullOrgAccess } =
+    useRoleManager();
 
   useEffect(() => {
     fetchSelectOptions(organizableId || organizationId);
@@ -83,7 +74,7 @@ const DashboardView = ({
       return selectOptions[0].organizationId;
     }
     if (hasFullOrgAccess) return organizableId || organizationId;
-  }, [roles, organizableId, selectOptions]);
+  }, [organizableId, selectOptions]);
 
   useEffect(() => {
     if (mappedSelectOptions) {

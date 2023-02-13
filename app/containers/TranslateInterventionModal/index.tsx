@@ -12,7 +12,7 @@ import { injectReducer, injectSaga } from 'redux-injectors';
 import { createStructuredSelector } from 'reselect';
 
 import { Language, LanguageDTO } from 'models/Language';
-import { ApiData } from 'models/Api';
+import { ApiDataCollection } from 'models/Api';
 
 import { fontSizes, themeColors } from 'theme';
 
@@ -69,9 +69,11 @@ const TranslateInterventionModal = ({
   const [voice, setVoice] = useState<Nullable<VoiceSelectOption>>(null);
   const [submitted, setSubmitted] = useState(false);
 
-  const { data, isFetching, error } = useGet<ApiData<LanguageDTO>, Language[]>(
-    '/v1/google/languages',
-    (fetchedData) => jsonApiToArray(fetchedData, 'supportedLanguage'),
+  const { data, isFetching, error } = useGet<
+    ApiDataCollection<LanguageDTO>,
+    Language[]
+  >('/v1/google/languages', (fetchedData) =>
+    jsonApiToArray(fetchedData, 'supportedLanguage'),
   );
 
   const languageOptions = useMemo(

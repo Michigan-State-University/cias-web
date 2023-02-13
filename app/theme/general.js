@@ -22,6 +22,7 @@ const elements = {
   navbarHeight: 70,
   sidebarWidth: 280,
   draggableContainerSize: 702,
+  answerSessionPageFooterHeight: 104,
   characterInitialPosition,
   grid: { firstColWidth: 300, colWidth: 80, leftPadding: 40 },
   treeRowHeight: 80,
@@ -29,11 +30,12 @@ const elements = {
   chartTileHeight: 350,
   interventionsTileHeight: 150,
   interventionLogoSize: {
-    width: 200,
-    height: 100,
+    width: 100,
+    height: 50,
   },
   userInterventionTileHeight: 200,
   screenSettingsWidth: 400,
+  continueButtonWidth: 120,
 };
 
 const visualAnalogScaleLabelStyles = {

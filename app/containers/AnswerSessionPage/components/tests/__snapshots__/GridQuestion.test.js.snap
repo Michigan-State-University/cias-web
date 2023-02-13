@@ -7,6 +7,7 @@ exports[`<GridQuestion /> Should render and match the snapshot 1`] = `
   display: block;
   border-radius: 5px;
   width: 100%;
+  color: unset;
 }
 
 .c1 {
@@ -17,6 +18,7 @@ exports[`<GridQuestion /> Should render and match the snapshot 1`] = `
   width: 100%;
   height: 100%;
   position: relative;
+  color: unset;
 }
 
 .c2 {
@@ -35,6 +37,7 @@ exports[`<GridQuestion /> Should render and match the snapshot 1`] = `
   padding-bottom: 14px;
   padding-right: 21px;
   margin-left: 40px;
+  color: unset;
 }
 
 .c2::-webkit-scrollbar {
@@ -46,6 +49,7 @@ exports[`<GridQuestion /> Should render and match the snapshot 1`] = `
   height: auto;
   display: block;
   border-radius: 5px;
+  color: unset;
 }
 
 .c8 {
@@ -158,6 +162,25 @@ exports[`<GridQuestion /> Should render and match the snapshot 1`] = `
   margin-left: 5px;
 }
 
+.c19 {
+  font-family: DM Sans;
+  font-size: 13px;
+  line-height: 130%;
+  color: #2F3850;
+}
+
+.c20 {
+  -webkit-clip: rect(0 0 0 0);
+  clip: rect(0 0 0 0);
+  -webkit-clip-path: inset(100%);
+  clip-path: inset(100%);
+  height: 1px;
+  overflow: hidden;
+  position: absolute;
+  white-space: nowrap;
+  width: 1px;
+}
+
 .c3 {
   font-size: 13px;
 }
@@ -178,31 +201,28 @@ exports[`<GridQuestion /> Should render and match the snapshot 1`] = `
   background-color: #F8FBFF;
 }
 
+.c5:nth-child(even) {
+  background: #E2EEF1;
+}
+
+.c5:nth-child(even) td:first-child,
+.c5:nth-child(even) th:first-child {
+  border-bottom-left-radius: 5px;
+  border-top-left-radius: 5px;
+}
+
+.c5:nth-child(even) td:last-child,
+.c5:nth-child(even) th:last-child {
+  border-bottom-right-radius: 5px;
+  border-top-right-radius: 5px;
+}
+
 .c5:hover {
   background: !important;
 }
 
 .c6 {
   width: 120px;
-}
-
-.c19 {
-  font-family: DM Sans;
-  font-size: 13px;
-  line-height: 130%;
-  color: #2F3850;
-}
-
-.c20 {
-  -webkit-clip: rect(0 0 0 0);
-  clip: rect(0 0 0 0);
-  -webkit-clip-path: inset(100%);
-  clip-path: inset(100%);
-  height: 1px;
-  overflow: hidden;
-  position: absolute;
-  white-space: nowrap;
-  width: 1px;
 }
 
 .c7 {

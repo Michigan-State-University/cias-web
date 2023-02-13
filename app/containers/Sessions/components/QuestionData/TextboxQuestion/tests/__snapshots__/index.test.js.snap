@@ -97,6 +97,7 @@ exports[`<TextboxQuestion /> Should render and match the snapshot 1`] = `
   padding-right: 21px;
   padding-left: 21px;
   border: 1px solid #ABBBD1;
+  color: unset;
 }
 
 @media only screen and (min-width:768px) {

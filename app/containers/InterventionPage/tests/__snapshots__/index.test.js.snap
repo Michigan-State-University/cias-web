@@ -32,9 +32,23 @@ exports[`<InterventionPage /> Should render and match the snapshot with interven
   border-radius: 10px;
   box-shadow: 0px 0px 50px rgba(0,0,0,0.08);
   border-radius: 10px;
+  color: unset;
 }
 
-.c22 {
+.c14 {
+  width: auto;
+  height: auto;
+  display: block;
+  border-radius: 5px;
+  width: 2px;
+  height: 100%;
+  margin-right: 24px;
+  margin-left: 24px;
+  background-color: rgba(233,241,251,1);
+  color: unset;
+}
+
+.c25 {
   width: auto;
   height: auto;
   display: block;
@@ -43,11 +57,19 @@ exports[`<InterventionPage /> Should render and match the snapshot with interven
   -webkit-flex-grow: 1;
   -ms-flex-positive: 1;
   flex-grow: 1;
+  color: unset;
 }
 
 .c6 {
   width: auto;
   height: auto;
+}
+
+.c16 {
+  width: auto;
+  height: auto;
+  margin-bottom: 2px;
+  margin-right: 8px;
 }
 
 .c4 {
@@ -58,6 +80,9 @@ exports[`<InterventionPage /> Should render and match the snapshot with interven
   -webkit-flex-direction: column;
   -ms-flex-direction: column;
   flex-direction: column;
+  -webkit-align-content: flex-start;
+  -ms-flex-line-pack: start;
+  align-content: flex-start;
   -webkit-align-items: flex-start;
   -webkit-box-align: flex-start;
   -ms-flex-align: flex-start;
@@ -72,6 +97,9 @@ exports[`<InterventionPage /> Should render and match the snapshot with interven
   -webkit-flex-direction: column;
   -ms-flex-direction: column;
   flex-direction: column;
+  -webkit-align-content: flex-end;
+  -ms-flex-line-pack: end;
+  align-content: flex-end;
   -webkit-align-items: flex-end;
   -webkit-box-align: flex-end;
   -ms-flex-align: flex-end;
@@ -103,25 +131,28 @@ exports[`<InterventionPage /> Should render and match the snapshot with interven
   color: #2F3850;
 }
 
-.c20 {
-  padding: 12px;
-  border-style: solid;
-  border-width: 1px;
-  border-color: #E9F1FB;
-  border-radius: 5px;
-  padding-right: 30px;
-  padding-left: 30px;
-  color: #2F3850;
-}
-
-.c20:focus {
-  box-shadow: none;
+.c15 {
   outline: none;
-  border-color: #107969;
-}
-
-.c20:disabled {
-  color: #ABBBD1;
+  border: none;
+  background: transparent;
+  font-weight: bold;
+  font-size: 13px;
+  line-height: 17px;
+  padding: 2px;
+  cursor: pointer;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  font-weight: 700;
+  color: #2F3850;
+  -webkit-align-content: center;
+  -ms-flex-line-pack: center;
+  align-content: center;
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
 }
 
 .c11 {
@@ -149,7 +180,28 @@ exports[`<InterventionPage /> Should render and match the snapshot with interven
   margin: 0px;
 }
 
-.c19 {
+.c23 {
+  padding: 12px;
+  border-style: solid;
+  border-width: 1px;
+  border-color: #E9F1FB;
+  border-radius: 5px;
+  padding-right: 30px;
+  padding-left: 30px;
+  color: #2F3850;
+}
+
+.c23:focus {
+  box-shadow: none;
+  outline: none;
+  border-color: #107969;
+}
+
+.c23:disabled {
+  color: #ABBBD1;
+}
+
+.c22 {
   display: -webkit-box;
   display: -webkit-flex;
   display: -ms-flexbox;
@@ -159,17 +211,9 @@ exports[`<InterventionPage /> Should render and match the snapshot with interven
   -ms-flex-align: center;
   align-items: center;
   position: relative;
-  display: -webkit-box;
-  display: -webkit-flex;
-  display: -ms-flexbox;
-  display: flex;
-  -webkit-align-items: center;
-  -webkit-box-align: center;
-  -ms-flex-align: center;
-  align-items: center;
 }
 
-.c21 {
+.c24 {
   position: absolute;
   left: 10px;
   top: 10px;
@@ -203,7 +247,7 @@ exports[`<InterventionPage /> Should render and match the snapshot with interven
   width: 100%;
 }
 
-.c14 {
+.c17 {
   border: none;
   width: -webkit-max-content;
   width: -moz-max-content;
@@ -224,16 +268,16 @@ exports[`<InterventionPage /> Should render and match the snapshot with interven
   transition: 0.3s;
 }
 
-.c14:hover {
+.c17:hover {
   cursor: pointer;
 }
 
-.c14:focus {
+.c17:focus {
   outline: none;
   outline-offset: 0px;
 }
 
-.c16 {
+.c19 {
   border: none;
   width: -webkit-max-content;
   width: -moz-max-content;
@@ -254,16 +298,16 @@ exports[`<InterventionPage /> Should render and match the snapshot with interven
   transition: 0.3s;
 }
 
-.c16:hover {
+.c19:hover {
   cursor: pointer;
 }
 
-.c16:focus {
+.c19:focus {
   outline: none;
   outline-offset: 0px;
 }
 
-.c17 {
+.c20 {
   border: none;
   width: -webkit-max-content;
   width: -moz-max-content;
@@ -284,16 +328,16 @@ exports[`<InterventionPage /> Should render and match the snapshot with interven
   transition: 0.3s;
 }
 
-.c17:hover {
+.c20:hover {
   cursor: pointer;
 }
 
-.c17:focus {
+.c20:focus {
   outline: none;
   outline-offset: 0px;
 }
 
-.c18 {
+.c21 {
   border: none;
   width: -webkit-max-content;
   width: -moz-max-content;
@@ -313,16 +357,16 @@ exports[`<InterventionPage /> Should render and match the snapshot with interven
   transition: 0.3s;
 }
 
-.c18:hover {
+.c21:hover {
   cursor: pointer;
 }
 
-.c18:focus {
+.c21:focus {
   outline: none;
   outline-offset: 0px;
 }
 
-.c15 {
+.c18 {
   color: #FFFFFF;
   white-space: pre;
 }
@@ -355,7 +399,7 @@ exports[`<InterventionPage /> Should render and match the snapshot with interven
         style="display: flex; flex-wrap: wrap; flex-grow: 0; flex-shrink: 0; align-items: normal; justify-content: flex-start; margin: 0px;"
       >
         <div
-          align="flex-start"
+          align="start"
           class="c4"
           style="box-sizing: border-box; min-height: 1px; position: relative; width: 100%; flex-basis: 0px; flex-grow: 1; flex-shrink: 0; max-width: 100%; margin-left: 0%; padding: 8px;"
         >
@@ -363,7 +407,7 @@ exports[`<InterventionPage /> Should render and match the snapshot with interven
             style="margin-left: -15px; margin-right: -15px; display: flex; flex-wrap: wrap; flex-grow: 0; flex-shrink: 0; align-items: center; justify-content: flex-start;"
           >
             <div
-              align="flex-start"
+              align="start"
               class="c4"
               style="box-sizing: border-box; min-height: 1px; position: relative; padding-left: 15px; padding-right: 15px; width: 25%; flex-basis: 25%; flex-grow: 0; flex-shrink: 0; max-width: 25%; margin-left: 0%;"
             >
@@ -379,7 +423,7 @@ exports[`<InterventionPage /> Should render and match the snapshot with interven
               </div>
             </div>
             <div
-              align="flex-start"
+              align="start"
               class="c4"
               style="box-sizing: border-box; min-height: 1px; position: relative; padding-left: 15px; padding-right: 15px; width: 75%; flex-basis: 75%; flex-grow: 0; flex-shrink: 0; max-width: 75%; margin-left: 0%;"
             >
@@ -425,13 +469,36 @@ exports[`<InterventionPage /> Should render and match the snapshot with interven
     </div>
     <div
       class="c12"
-      style="box-sizing: border-box; position: relative; margin-left: auto; margin-right: auto; padding-left: 15px; padding-right: 15px;"
+      style="box-sizing: border-box; position: relative; margin-left: auto; margin-right: auto; padding-left: 15px; padding-right: 15px; display: flex;"
     >
       <h1
         class="c13"
       >
         My Dashboard
       </h1>
+      <div
+        class="c14"
+        height="100%"
+        width="2"
+      />
+      <button
+        class="c15"
+        display="flex"
+        font-weight="bold"
+      >
+        <img
+          alt="Import Intervention"
+          class="c16"
+          src="IMAGE_MOCK"
+        />
+        <p
+          class="c8"
+          color="#B727EA"
+          font-weight="bold"
+        >
+          Import Intervention
+        </p>
+      </button>
       <span
         style="display: table; clear: both;"
       />
@@ -454,12 +521,12 @@ exports[`<InterventionPage /> Should render and match the snapshot with interven
               style="box-sizing: border-box; min-height: 1px; position: relative; padding-left: 15px; padding-right: 15px; width: auto; flex-basis: auto; flex-grow: 0; flex-shrink: 0; max-width: 100%; margin-left: 0%; margin-top: 5px; margin-bottom: 5px;"
             >
               <button
-                class="c14"
+                class="c17"
                 color="#107969"
                 value="draft"
               >
                 <p
-                  class="c15"
+                  class="c18"
                   color="#FFFFFF"
                 >
                   Draft
@@ -470,12 +537,12 @@ exports[`<InterventionPage /> Should render and match the snapshot with interven
               style="box-sizing: border-box; min-height: 1px; position: relative; padding-left: 15px; padding-right: 15px; width: auto; flex-basis: auto; flex-grow: 0; flex-shrink: 0; max-width: 100%; margin-left: 0%; margin-top: 5px; margin-bottom: 5px;"
             >
               <button
-                class="c16"
+                class="c19"
                 color="#8CBD00"
                 value="published"
               >
                 <p
-                  class="c15"
+                  class="c18"
                   color="#FFFFFF"
                 >
                   Published
@@ -486,12 +553,12 @@ exports[`<InterventionPage /> Should render and match the snapshot with interven
               style="box-sizing: border-box; min-height: 1px; position: relative; padding-left: 15px; padding-right: 15px; width: auto; flex-basis: auto; flex-grow: 0; flex-shrink: 0; max-width: 100%; margin-left: 0%; margin-top: 5px; margin-bottom: 5px;"
             >
               <button
-                class="c17"
+                class="c20"
                 color="#F0684A"
                 value="closed"
               >
                 <p
-                  class="c15"
+                  class="c18"
                   color="#FFFFFF"
                 >
                   Closed
@@ -502,12 +569,12 @@ exports[`<InterventionPage /> Should render and match the snapshot with interven
               style="box-sizing: border-box; min-height: 1px; position: relative; padding-left: 15px; padding-right: 15px; width: auto; flex-basis: auto; flex-grow: 0; flex-shrink: 0; max-width: 100%; margin-left: 0%; margin-top: 5px; margin-bottom: 5px;"
             >
               <button
-                class="c18"
+                class="c21"
                 color="#0E0E0E"
                 value="archived"
               >
                 <p
-                  class="c15"
+                  class="c18"
                   color="#FFFFFF"
                 >
                   Archived
@@ -526,17 +593,17 @@ exports[`<InterventionPage /> Should render and match the snapshot with interven
               style="box-sizing: border-box; min-height: 1px; position: relative; padding-left: 15px; padding-right: 15px; width: 100%; flex-basis: 0px; flex-grow: 1; flex-shrink: 0; max-width: 100%; margin-left: 0%;"
             >
               <div
-                class="c19"
+                class="c22"
               >
                 <input
                   aria-label="Filter Interventions by name"
-                  class="c20"
+                  class="c23"
                   placeholder="Filter by name"
                   type="text"
                 />
                 <img
                   alt="search"
-                  class="c21"
+                  class="c24"
                   src="IMAGE_MOCK"
                 />
                 
@@ -550,7 +617,7 @@ exports[`<InterventionPage /> Should render and match the snapshot with interven
       />
     </div>
     <div
-      class="c22"
+      class="c25"
     >
       <div
         class="virtual-grid-auto-sizer"
@@ -610,9 +677,23 @@ exports[`<InterventionPage /> Should render and match the snapshot with loader 1
   border-radius: 10px;
   box-shadow: 0px 0px 50px rgba(0,0,0,0.08);
   border-radius: 10px;
+  color: unset;
 }
 
-.c22 {
+.c14 {
+  width: auto;
+  height: auto;
+  display: block;
+  border-radius: 5px;
+  width: 2px;
+  height: 100%;
+  margin-right: 24px;
+  margin-left: 24px;
+  background-color: rgba(233,241,251,1);
+  color: unset;
+}
+
+.c25 {
   width: auto;
   height: auto;
   display: block;
@@ -621,11 +702,19 @@ exports[`<InterventionPage /> Should render and match the snapshot with loader 1
   -webkit-flex-grow: 1;
   -ms-flex-positive: 1;
   flex-grow: 1;
+  color: unset;
 }
 
 .c6 {
   width: auto;
   height: auto;
+}
+
+.c16 {
+  width: auto;
+  height: auto;
+  margin-bottom: 2px;
+  margin-right: 8px;
 }
 
 .c4 {
@@ -636,6 +725,9 @@ exports[`<InterventionPage /> Should render and match the snapshot with loader 1
   -webkit-flex-direction: column;
   -ms-flex-direction: column;
   flex-direction: column;
+  -webkit-align-content: flex-start;
+  -ms-flex-line-pack: start;
+  align-content: flex-start;
   -webkit-align-items: flex-start;
   -webkit-box-align: flex-start;
   -ms-flex-align: flex-start;
@@ -650,6 +742,9 @@ exports[`<InterventionPage /> Should render and match the snapshot with loader 1
   -webkit-flex-direction: column;
   -ms-flex-direction: column;
   flex-direction: column;
+  -webkit-align-content: flex-end;
+  -ms-flex-line-pack: end;
+  align-content: flex-end;
   -webkit-align-items: flex-end;
   -webkit-box-align: flex-end;
   -ms-flex-align: flex-end;
@@ -681,25 +776,28 @@ exports[`<InterventionPage /> Should render and match the snapshot with loader 1
   color: #2F3850;
 }
 
-.c20 {
-  padding: 12px;
-  border-style: solid;
-  border-width: 1px;
-  border-color: #E9F1FB;
-  border-radius: 5px;
-  padding-right: 30px;
-  padding-left: 30px;
-  color: #2F3850;
-}
-
-.c20:focus {
-  box-shadow: none;
+.c15 {
   outline: none;
-  border-color: #107969;
-}
-
-.c20:disabled {
-  color: #ABBBD1;
+  border: none;
+  background: transparent;
+  font-weight: bold;
+  font-size: 13px;
+  line-height: 17px;
+  padding: 2px;
+  cursor: pointer;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  font-weight: 700;
+  color: #2F3850;
+  -webkit-align-content: center;
+  -ms-flex-line-pack: center;
+  align-content: center;
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
 }
 
 .c11 {
@@ -727,7 +825,28 @@ exports[`<InterventionPage /> Should render and match the snapshot with loader 1
   margin: 0px;
 }
 
-.c19 {
+.c23 {
+  padding: 12px;
+  border-style: solid;
+  border-width: 1px;
+  border-color: #E9F1FB;
+  border-radius: 5px;
+  padding-right: 30px;
+  padding-left: 30px;
+  color: #2F3850;
+}
+
+.c23:focus {
+  box-shadow: none;
+  outline: none;
+  border-color: #107969;
+}
+
+.c23:disabled {
+  color: #ABBBD1;
+}
+
+.c22 {
   display: -webkit-box;
   display: -webkit-flex;
   display: -ms-flexbox;
@@ -737,17 +856,9 @@ exports[`<InterventionPage /> Should render and match the snapshot with loader 1
   -ms-flex-align: center;
   align-items: center;
   position: relative;
-  display: -webkit-box;
-  display: -webkit-flex;
-  display: -ms-flexbox;
-  display: flex;
-  -webkit-align-items: center;
-  -webkit-box-align: center;
-  -ms-flex-align: center;
-  align-items: center;
 }
 
-.c21 {
+.c24 {
   position: absolute;
   left: 10px;
   top: 10px;
@@ -781,7 +892,7 @@ exports[`<InterventionPage /> Should render and match the snapshot with loader 1
   width: 100%;
 }
 
-.c14 {
+.c17 {
   border: none;
   width: -webkit-max-content;
   width: -moz-max-content;
@@ -802,16 +913,16 @@ exports[`<InterventionPage /> Should render and match the snapshot with loader 1
   transition: 0.3s;
 }
 
-.c14:hover {
+.c17:hover {
   cursor: pointer;
 }
 
-.c14:focus {
+.c17:focus {
   outline: none;
   outline-offset: 0px;
 }
 
-.c16 {
+.c19 {
   border: none;
   width: -webkit-max-content;
   width: -moz-max-content;
@@ -832,16 +943,16 @@ exports[`<InterventionPage /> Should render and match the snapshot with loader 1
   transition: 0.3s;
 }
 
-.c16:hover {
+.c19:hover {
   cursor: pointer;
 }
 
-.c16:focus {
+.c19:focus {
   outline: none;
   outline-offset: 0px;
 }
 
-.c17 {
+.c20 {
   border: none;
   width: -webkit-max-content;
   width: -moz-max-content;
@@ -862,16 +973,16 @@ exports[`<InterventionPage /> Should render and match the snapshot with loader 1
   transition: 0.3s;
 }
 
-.c17:hover {
+.c20:hover {
   cursor: pointer;
 }
 
-.c17:focus {
+.c20:focus {
   outline: none;
   outline-offset: 0px;
 }
 
-.c18 {
+.c21 {
   border: none;
   width: -webkit-max-content;
   width: -moz-max-content;
@@ -891,16 +1002,16 @@ exports[`<InterventionPage /> Should render and match the snapshot with loader 1
   transition: 0.3s;
 }
 
-.c18:hover {
+.c21:hover {
   cursor: pointer;
 }
 
-.c18:focus {
+.c21:focus {
   outline: none;
   outline-offset: 0px;
 }
 
-.c15 {
+.c18 {
   color: #FFFFFF;
   white-space: pre;
 }
@@ -933,7 +1044,7 @@ exports[`<InterventionPage /> Should render and match the snapshot with loader 1
         style="display: flex; flex-wrap: wrap; flex-grow: 0; flex-shrink: 0; align-items: normal; justify-content: flex-start; margin: 0px;"
       >
         <div
-          align="flex-start"
+          align="start"
           class="c4"
           style="box-sizing: border-box; min-height: 1px; position: relative; width: 100%; flex-basis: 0px; flex-grow: 1; flex-shrink: 0; max-width: 100%; margin-left: 0%; padding: 8px;"
         >
@@ -941,7 +1052,7 @@ exports[`<InterventionPage /> Should render and match the snapshot with loader 1
             style="margin-left: -15px; margin-right: -15px; display: flex; flex-wrap: wrap; flex-grow: 0; flex-shrink: 0; align-items: center; justify-content: flex-start;"
           >
             <div
-              align="flex-start"
+              align="start"
               class="c4"
               style="box-sizing: border-box; min-height: 1px; position: relative; padding-left: 15px; padding-right: 15px; width: 25%; flex-basis: 25%; flex-grow: 0; flex-shrink: 0; max-width: 25%; margin-left: 0%;"
             >
@@ -957,7 +1068,7 @@ exports[`<InterventionPage /> Should render and match the snapshot with loader 1
               </div>
             </div>
             <div
-              align="flex-start"
+              align="start"
               class="c4"
               style="box-sizing: border-box; min-height: 1px; position: relative; padding-left: 15px; padding-right: 15px; width: 75%; flex-basis: 75%; flex-grow: 0; flex-shrink: 0; max-width: 75%; margin-left: 0%;"
             >
@@ -1003,13 +1114,36 @@ exports[`<InterventionPage /> Should render and match the snapshot with loader 1
     </div>
     <div
       class="c12"
-      style="box-sizing: border-box; position: relative; margin-left: auto; margin-right: auto; padding-left: 15px; padding-right: 15px;"
+      style="box-sizing: border-box; position: relative; margin-left: auto; margin-right: auto; padding-left: 15px; padding-right: 15px; display: flex;"
     >
       <h1
         class="c13"
       >
         My Dashboard
       </h1>
+      <div
+        class="c14"
+        height="100%"
+        width="2"
+      />
+      <button
+        class="c15"
+        display="flex"
+        font-weight="bold"
+      >
+        <img
+          alt="Import Intervention"
+          class="c16"
+          src="IMAGE_MOCK"
+        />
+        <p
+          class="c8"
+          color="#B727EA"
+          font-weight="bold"
+        >
+          Import Intervention
+        </p>
+      </button>
       <span
         style="display: table; clear: both;"
       />
@@ -1032,12 +1166,12 @@ exports[`<InterventionPage /> Should render and match the snapshot with loader 1
               style="box-sizing: border-box; min-height: 1px; position: relative; padding-left: 15px; padding-right: 15px; width: auto; flex-basis: auto; flex-grow: 0; flex-shrink: 0; max-width: 100%; margin-left: 0%; margin-top: 5px; margin-bottom: 5px;"
             >
               <button
-                class="c14"
+                class="c17"
                 color="#107969"
                 value="draft"
               >
                 <p
-                  class="c15"
+                  class="c18"
                   color="#FFFFFF"
                 >
                   Draft
@@ -1048,12 +1182,12 @@ exports[`<InterventionPage /> Should render and match the snapshot with loader 1
               style="box-sizing: border-box; min-height: 1px; position: relative; padding-left: 15px; padding-right: 15px; width: auto; flex-basis: auto; flex-grow: 0; flex-shrink: 0; max-width: 100%; margin-left: 0%; margin-top: 5px; margin-bottom: 5px;"
             >
               <button
-                class="c16"
+                class="c19"
                 color="#8CBD00"
                 value="published"
               >
                 <p
-                  class="c15"
+                  class="c18"
                   color="#FFFFFF"
                 >
                   Published
@@ -1064,12 +1198,12 @@ exports[`<InterventionPage /> Should render and match the snapshot with loader 1
               style="box-sizing: border-box; min-height: 1px; position: relative; padding-left: 15px; padding-right: 15px; width: auto; flex-basis: auto; flex-grow: 0; flex-shrink: 0; max-width: 100%; margin-left: 0%; margin-top: 5px; margin-bottom: 5px;"
             >
               <button
-                class="c17"
+                class="c20"
                 color="#F0684A"
                 value="closed"
               >
                 <p
-                  class="c15"
+                  class="c18"
                   color="#FFFFFF"
                 >
                   Closed
@@ -1080,12 +1214,12 @@ exports[`<InterventionPage /> Should render and match the snapshot with loader 1
               style="box-sizing: border-box; min-height: 1px; position: relative; padding-left: 15px; padding-right: 15px; width: auto; flex-basis: auto; flex-grow: 0; flex-shrink: 0; max-width: 100%; margin-left: 0%; margin-top: 5px; margin-bottom: 5px;"
             >
               <button
-                class="c18"
+                class="c21"
                 color="#0E0E0E"
                 value="archived"
               >
                 <p
-                  class="c15"
+                  class="c18"
                   color="#FFFFFF"
                 >
                   Archived
@@ -1104,17 +1238,17 @@ exports[`<InterventionPage /> Should render and match the snapshot with loader 1
               style="box-sizing: border-box; min-height: 1px; position: relative; padding-left: 15px; padding-right: 15px; width: 100%; flex-basis: 0px; flex-grow: 1; flex-shrink: 0; max-width: 100%; margin-left: 0%;"
             >
               <div
-                class="c19"
+                class="c22"
               >
                 <input
                   aria-label="Filter Interventions by name"
-                  class="c20"
+                  class="c23"
                   placeholder="Filter by name"
                   type="text"
                 />
                 <img
                   alt="search"
-                  class="c21"
+                  class="c24"
                   src="IMAGE_MOCK"
                 />
                 
@@ -1128,7 +1262,7 @@ exports[`<InterventionPage /> Should render and match the snapshot with loader 1
       />
     </div>
     <div
-      class="c22"
+      class="c25"
     >
       <div
         class="virtual-grid-auto-sizer"
@@ -1188,9 +1322,23 @@ exports[`<InterventionPage /> Should render and match the snapshot without inter
   border-radius: 10px;
   box-shadow: 0px 0px 50px rgba(0,0,0,0.08);
   border-radius: 10px;
+  color: unset;
 }
 
-.c22 {
+.c14 {
+  width: auto;
+  height: auto;
+  display: block;
+  border-radius: 5px;
+  width: 2px;
+  height: 100%;
+  margin-right: 24px;
+  margin-left: 24px;
+  background-color: rgba(233,241,251,1);
+  color: unset;
+}
+
+.c25 {
   width: auto;
   height: auto;
   display: block;
@@ -1199,11 +1347,19 @@ exports[`<InterventionPage /> Should render and match the snapshot without inter
   -webkit-flex-grow: 1;
   -ms-flex-positive: 1;
   flex-grow: 1;
+  color: unset;
 }
 
 .c6 {
   width: auto;
   height: auto;
+}
+
+.c16 {
+  width: auto;
+  height: auto;
+  margin-bottom: 2px;
+  margin-right: 8px;
 }
 
 .c4 {
@@ -1214,6 +1370,9 @@ exports[`<InterventionPage /> Should render and match the snapshot without inter
   -webkit-flex-direction: column;
   -ms-flex-direction: column;
   flex-direction: column;
+  -webkit-align-content: flex-start;
+  -ms-flex-line-pack: start;
+  align-content: flex-start;
   -webkit-align-items: flex-start;
   -webkit-box-align: flex-start;
   -ms-flex-align: flex-start;
@@ -1228,6 +1387,9 @@ exports[`<InterventionPage /> Should render and match the snapshot without inter
   -webkit-flex-direction: column;
   -ms-flex-direction: column;
   flex-direction: column;
+  -webkit-align-content: flex-end;
+  -ms-flex-line-pack: end;
+  align-content: flex-end;
   -webkit-align-items: flex-end;
   -webkit-box-align: flex-end;
   -ms-flex-align: flex-end;
@@ -1259,25 +1421,28 @@ exports[`<InterventionPage /> Should render and match the snapshot without inter
   color: #2F3850;
 }
 
-.c20 {
-  padding: 12px;
-  border-style: solid;
-  border-width: 1px;
-  border-color: #E9F1FB;
-  border-radius: 5px;
-  padding-right: 30px;
-  padding-left: 30px;
-  color: #2F3850;
-}
-
-.c20:focus {
-  box-shadow: none;
+.c15 {
   outline: none;
-  border-color: #107969;
-}
-
-.c20:disabled {
-  color: #ABBBD1;
+  border: none;
+  background: transparent;
+  font-weight: bold;
+  font-size: 13px;
+  line-height: 17px;
+  padding: 2px;
+  cursor: pointer;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  font-weight: 700;
+  color: #2F3850;
+  -webkit-align-content: center;
+  -ms-flex-line-pack: center;
+  align-content: center;
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
 }
 
 .c11 {
@@ -1305,7 +1470,28 @@ exports[`<InterventionPage /> Should render and match the snapshot without inter
   margin: 0px;
 }
 
-.c19 {
+.c23 {
+  padding: 12px;
+  border-style: solid;
+  border-width: 1px;
+  border-color: #E9F1FB;
+  border-radius: 5px;
+  padding-right: 30px;
+  padding-left: 30px;
+  color: #2F3850;
+}
+
+.c23:focus {
+  box-shadow: none;
+  outline: none;
+  border-color: #107969;
+}
+
+.c23:disabled {
+  color: #ABBBD1;
+}
+
+.c22 {
   display: -webkit-box;
   display: -webkit-flex;
   display: -ms-flexbox;
@@ -1315,17 +1501,9 @@ exports[`<InterventionPage /> Should render and match the snapshot without inter
   -ms-flex-align: center;
   align-items: center;
   position: relative;
-  display: -webkit-box;
-  display: -webkit-flex;
-  display: -ms-flexbox;
-  display: flex;
-  -webkit-align-items: center;
-  -webkit-box-align: center;
-  -ms-flex-align: center;
-  align-items: center;
 }
 
-.c21 {
+.c24 {
   position: absolute;
   left: 10px;
   top: 10px;
@@ -1359,7 +1537,7 @@ exports[`<InterventionPage /> Should render and match the snapshot without inter
   width: 100%;
 }
 
-.c14 {
+.c17 {
   border: none;
   width: -webkit-max-content;
   width: -moz-max-content;
@@ -1380,16 +1558,16 @@ exports[`<InterventionPage /> Should render and match the snapshot without inter
   transition: 0.3s;
 }
 
-.c14:hover {
+.c17:hover {
   cursor: pointer;
 }
 
-.c14:focus {
+.c17:focus {
   outline: none;
   outline-offset: 0px;
 }
 
-.c16 {
+.c19 {
   border: none;
   width: -webkit-max-content;
   width: -moz-max-content;
@@ -1410,16 +1588,16 @@ exports[`<InterventionPage /> Should render and match the snapshot without inter
   transition: 0.3s;
 }
 
-.c16:hover {
+.c19:hover {
   cursor: pointer;
 }
 
-.c16:focus {
+.c19:focus {
   outline: none;
   outline-offset: 0px;
 }
 
-.c17 {
+.c20 {
   border: none;
   width: -webkit-max-content;
   width: -moz-max-content;
@@ -1440,16 +1618,16 @@ exports[`<InterventionPage /> Should render and match the snapshot without inter
   transition: 0.3s;
 }
 
-.c17:hover {
+.c20:hover {
   cursor: pointer;
 }
 
-.c17:focus {
+.c20:focus {
   outline: none;
   outline-offset: 0px;
 }
 
-.c18 {
+.c21 {
   border: none;
   width: -webkit-max-content;
   width: -moz-max-content;
@@ -1469,16 +1647,16 @@ exports[`<InterventionPage /> Should render and match the snapshot without inter
   transition: 0.3s;
 }
 
-.c18:hover {
+.c21:hover {
   cursor: pointer;
 }
 
-.c18:focus {
+.c21:focus {
   outline: none;
   outline-offset: 0px;
 }
 
-.c15 {
+.c18 {
   color: #FFFFFF;
   white-space: pre;
 }
@@ -1511,7 +1689,7 @@ exports[`<InterventionPage /> Should render and match the snapshot without inter
         style="display: flex; flex-wrap: wrap; flex-grow: 0; flex-shrink: 0; align-items: normal; justify-content: flex-start; margin: 0px;"
       >
         <div
-          align="flex-start"
+          align="start"
           class="c4"
           style="box-sizing: border-box; min-height: 1px; position: relative; width: 100%; flex-basis: 0px; flex-grow: 1; flex-shrink: 0; max-width: 100%; margin-left: 0%; padding: 8px;"
         >
@@ -1519,7 +1697,7 @@ exports[`<InterventionPage /> Should render and match the snapshot without inter
             style="margin-left: -15px; margin-right: -15px; display: flex; flex-wrap: wrap; flex-grow: 0; flex-shrink: 0; align-items: center; justify-content: flex-start;"
           >
             <div
-              align="flex-start"
+              align="start"
               class="c4"
               style="box-sizing: border-box; min-height: 1px; position: relative; padding-left: 15px; padding-right: 15px; width: 25%; flex-basis: 25%; flex-grow: 0; flex-shrink: 0; max-width: 25%; margin-left: 0%;"
             >
@@ -1535,7 +1713,7 @@ exports[`<InterventionPage /> Should render and match the snapshot without inter
               </div>
             </div>
             <div
-              align="flex-start"
+              align="start"
               class="c4"
               style="box-sizing: border-box; min-height: 1px; position: relative; padding-left: 15px; padding-right: 15px; width: 75%; flex-basis: 75%; flex-grow: 0; flex-shrink: 0; max-width: 75%; margin-left: 0%;"
             >
@@ -1581,13 +1759,36 @@ exports[`<InterventionPage /> Should render and match the snapshot without inter
     </div>
     <div
       class="c12"
-      style="box-sizing: border-box; position: relative; margin-left: auto; margin-right: auto; padding-left: 15px; padding-right: 15px;"
+      style="box-sizing: border-box; position: relative; margin-left: auto; margin-right: auto; padding-left: 15px; padding-right: 15px; display: flex;"
     >
       <h1
         class="c13"
       >
         My Dashboard
       </h1>
+      <div
+        class="c14"
+        height="100%"
+        width="2"
+      />
+      <button
+        class="c15"
+        display="flex"
+        font-weight="bold"
+      >
+        <img
+          alt="Import Intervention"
+          class="c16"
+          src="IMAGE_MOCK"
+        />
+        <p
+          class="c8"
+          color="#B727EA"
+          font-weight="bold"
+        >
+          Import Intervention
+        </p>
+      </button>
       <span
         style="display: table; clear: both;"
       />
@@ -1610,12 +1811,12 @@ exports[`<InterventionPage /> Should render and match the snapshot without inter
               style="box-sizing: border-box; min-height: 1px; position: relative; padding-left: 15px; padding-right: 15px; width: auto; flex-basis: auto; flex-grow: 0; flex-shrink: 0; max-width: 100%; margin-left: 0%; margin-top: 5px; margin-bottom: 5px;"
             >
               <button
-                class="c14"
+                class="c17"
                 color="#107969"
                 value="draft"
               >
                 <p
-                  class="c15"
+                  class="c18"
                   color="#FFFFFF"
                 >
                   Draft
@@ -1626,12 +1827,12 @@ exports[`<InterventionPage /> Should render and match the snapshot without inter
               style="box-sizing: border-box; min-height: 1px; position: relative; padding-left: 15px; padding-right: 15px; width: auto; flex-basis: auto; flex-grow: 0; flex-shrink: 0; max-width: 100%; margin-left: 0%; margin-top: 5px; margin-bottom: 5px;"
             >
               <button
-                class="c16"
+                class="c19"
                 color="#8CBD00"
                 value="published"
               >
                 <p
-                  class="c15"
+                  class="c18"
                   color="#FFFFFF"
                 >
                   Published
@@ -1642,12 +1843,12 @@ exports[`<InterventionPage /> Should render and match the snapshot without inter
               style="box-sizing: border-box; min-height: 1px; position: relative; padding-left: 15px; padding-right: 15px; width: auto; flex-basis: auto; flex-grow: 0; flex-shrink: 0; max-width: 100%; margin-left: 0%; margin-top: 5px; margin-bottom: 5px;"
             >
               <button
-                class="c17"
+                class="c20"
                 color="#F0684A"
                 value="closed"
               >
                 <p
-                  class="c15"
+                  class="c18"
                   color="#FFFFFF"
                 >
                   Closed
@@ -1658,12 +1859,12 @@ exports[`<InterventionPage /> Should render and match the snapshot without inter
               style="box-sizing: border-box; min-height: 1px; position: relative; padding-left: 15px; padding-right: 15px; width: auto; flex-basis: auto; flex-grow: 0; flex-shrink: 0; max-width: 100%; margin-left: 0%; margin-top: 5px; margin-bottom: 5px;"
             >
               <button
-                class="c18"
+                class="c21"
                 color="#0E0E0E"
                 value="archived"
               >
                 <p
-                  class="c15"
+                  class="c18"
                   color="#FFFFFF"
                 >
                   Archived
@@ -1682,17 +1883,17 @@ exports[`<InterventionPage /> Should render and match the snapshot without inter
               style="box-sizing: border-box; min-height: 1px; position: relative; padding-left: 15px; padding-right: 15px; width: 100%; flex-basis: 0px; flex-grow: 1; flex-shrink: 0; max-width: 100%; margin-left: 0%;"
             >
               <div
-                class="c19"
+                class="c22"
               >
                 <input
                   aria-label="Filter Interventions by name"
-                  class="c20"
+                  class="c23"
                   placeholder="Filter by name"
                   type="text"
                 />
                 <img
                   alt="search"
-                  class="c21"
+                  class="c24"
                   src="IMAGE_MOCK"
                 />
                 
@@ -1706,7 +1907,7 @@ exports[`<InterventionPage /> Should render and match the snapshot without inter
       />
     </div>
     <div
-      class="c22"
+      class="c25"
     >
       <div
         class="virtual-grid-auto-sizer"

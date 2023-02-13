@@ -31,7 +31,7 @@ describe('<SessionListItem />', () => {
     session: {
       id: '1',
       name: 'Intervention',
-      intervention_id: '1',
+      interventionId: '1',
       settings: {
         formula: true,
       },
@@ -40,7 +40,7 @@ describe('<SessionListItem />', () => {
         payload: '',
       },
       schedule: '',
-      schedule_at: '',
+      scheduleAt: '',
     },
     index: 0,
     nextSessionName: 'test-2',

@@ -1,12 +1,23 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
+import questionMark from 'assets/svg/grey-question-mark.svg';
+
 import Row from 'components/Row';
 import Text from 'components/Text';
 import { FullWidthSwitch } from 'components/Switch';
 import { colors, borders } from 'theme';
+import Tooltip from 'components/Tooltip';
 
-const Option = ({ withBorder, fontWeight, label, value, action, disabled }) => {
+const Option = ({
+  withBorder,
+  fontWeight,
+  label,
+  value,
+  action,
+  disabled,
+  tooltipText,
+}) => {
   const handleToggle = (val) => {
     action(val);
   };
@@ -28,7 +39,17 @@ const Option = ({ withBorder, fontWeight, label, value, action, disabled }) => {
         checked={value}
         onToggle={handleToggle}
       >
-        <Text fontWeight={fontWeight}>{label}</Text>
+        <Row align="center">
+          <Text fontWeight={fontWeight}>{label}</Text>
+          {tooltipText && (
+            <Tooltip
+              id={`option-tooltip-${label}`}
+              ml={8}
+              icon={questionMark}
+              content={tooltipText}
+            />
+          )}
+        </Row>
       </FullWidthSwitch>
     </Row>
   );
@@ -41,6 +62,7 @@ Option.propTypes = {
   action: PropTypes.func,
   fontWeight: PropTypes.string,
   disabled: PropTypes.bool,
+  tooltipText: PropTypes.string,
 };
 
 export default Option;

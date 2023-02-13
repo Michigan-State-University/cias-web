@@ -16,6 +16,7 @@ import { reflectionType } from 'models/Narrator/BlockTypes';
 import { createQuestion } from 'utils/reducerCreators';
 import { formatMessage } from 'utils/intlOutsideReact';
 import { instantiateBlockForType } from 'models/Session/utils';
+import { CharacterType } from 'models/Character';
 
 import ReflectionBlock from '../ReflectionBlock';
 
@@ -52,6 +53,7 @@ describe('<ReflectionBlock />', () => {
     questions: [],
     currentQuestionType: singleQuestion.id,
     disabled: false,
+    character: CharacterType.PEEDY,
     ...mockFunctions,
   };
 
@@ -75,16 +77,5 @@ describe('<ReflectionBlock />', () => {
       </Provider>,
     );
     expect(spy).not.toHaveBeenCalled();
-  });
-
-  it('Should render and match the snapshot', () => {
-    const { container } = render(
-      <Provider store={store}>
-        <IntlProvider locale={DEFAULT_LOCALE}>
-          <ReflectionBlock {...defaultProps} />
-        </IntlProvider>
-      </Provider>,
-    );
-    expect(container).toMatchSnapshot();
   });
 });

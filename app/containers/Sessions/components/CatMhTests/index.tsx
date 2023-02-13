@@ -3,7 +3,7 @@ import React from 'react';
 import { themeColors } from 'theme';
 
 import { CatMhTest, CatMhTestDTO } from 'models/CatMh';
-import { ApiData } from 'models/Api';
+import { ApiDataCollection } from 'models/Api';
 
 import { jsonApiToArray } from 'utils/jsonApiMapper';
 import useGet from 'utils/useGet';
@@ -28,7 +28,7 @@ const CatMhTests = ({
   disabled,
 }: Props): JSX.Element => {
   const { data, error, isFetching } = useGet<
-    ApiData<CatMhTestDTO>,
+    ApiDataCollection<CatMhTestDTO>,
     CatMhTest[]
   >(url, (tests) => jsonApiToArray(tests, 'testType'));
 

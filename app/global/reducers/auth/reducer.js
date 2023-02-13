@@ -141,6 +141,7 @@ export const authReducer = (state = initialState, { type, payload }) =>
         break;
 
       case ADD_AVATAR_REQUEST:
+        draft.cache.user = state.user;
         draft.user.avatar = payload.imageUrl;
         break;
 

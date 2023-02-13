@@ -74,6 +74,8 @@ exports[`<TextMessagingPage /> Should render and match the snapshot 1`] = `
   -webkit-box-align: center;
   -ms-flex-align: center;
   align-items: center;
+  color: unset;
+  cursor: pointer;
 }
 
 .c4 {
@@ -106,6 +108,8 @@ exports[`<TextMessagingPage /> Should render and match the snapshot 1`] = `
   -webkit-box-align: center;
   -ms-flex-align: center;
   align-items: center;
+  color: unset;
+  cursor: pointer;
 }
 
 .c17 {
@@ -115,6 +119,7 @@ exports[`<TextMessagingPage /> Should render and match the snapshot 1`] = `
   border-radius: 5px;
   width: 100%;
   display: inline;
+  color: unset;
 }
 
 .c18 {
@@ -122,6 +127,7 @@ exports[`<TextMessagingPage /> Should render and match the snapshot 1`] = `
   height: auto;
   display: block;
   border-radius: 5px;
+  color: unset;
 }
 
 .c20 {
@@ -130,6 +136,7 @@ exports[`<TextMessagingPage /> Should render and match the snapshot 1`] = `
   display: block;
   border-radius: 5px;
   margin-top: 8px;
+  color: unset;
 }
 
 .c3 {
@@ -216,6 +223,9 @@ exports[`<TextMessagingPage /> Should render and match the snapshot 1`] = `
   -webkit-flex-direction: column;
   -ms-flex-direction: column;
   flex-direction: column;
+  -webkit-align-content: flex-start;
+  -ms-flex-line-pack: start;
+  align-content: flex-start;
   -webkit-align-items: flex-start;
   -webkit-box-align: flex-start;
   -ms-flex-align: flex-start;
@@ -411,7 +421,7 @@ exports[`<TextMessagingPage /> Should render and match the snapshot 1`] = `
         style="margin-left: -15px; margin-right: -15px; display: flex; flex-wrap: wrap; flex-grow: 0; flex-shrink: 0; align-items: center; justify-content: flex-start;"
       >
         <div
-          align="flex-start"
+          align="start"
           class="c1"
           style="box-sizing: border-box; min-height: 1px; position: relative; padding-left: 15px; padding-right: 15px; width: auto; flex-basis: auto; flex-grow: 0; flex-shrink: 0; max-width: 100%; margin-left: 0%; margin-bottom: 10px;"
         >
@@ -431,7 +441,7 @@ exports[`<TextMessagingPage /> Should render and match the snapshot 1`] = `
           </div>
         </div>
         <div
-          align="flex-start"
+          align="start"
           class="c1"
           style="box-sizing: border-box; min-height: 1px; position: relative; padding-left: 15px; padding-right: 15px; width: auto; flex-basis: auto; flex-grow: 0; flex-shrink: 0; max-width: 100%; margin-left: 0%; margin-bottom: 10px;"
         >

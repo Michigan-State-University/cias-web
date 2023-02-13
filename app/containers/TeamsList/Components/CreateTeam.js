@@ -7,7 +7,7 @@ import { createStructuredSelector } from 'reselect';
 
 import { colors } from 'theme';
 
-import { Roles } from 'models/User/UserRoles';
+import { Roles } from 'models/User/RolesManager';
 
 import { createTeamRequest } from 'global/reducers/teamList';
 import { makeSelectTeamListLoaders } from 'global/reducers/teamList/selectors';
@@ -83,7 +83,7 @@ const CreateTeam = ({
           <UserSelector
             selectedUserId={selectedUser}
             onSelect={onSelectUser}
-            rolesToInclude={[Roles.researcher, Roles.teamAdmin]}
+            rolesToInclude={[Roles.Researcher, Roles.TeamAdmin]}
             selectProps={{ 'aria-labelledby': CHOOSE_TEAM_ADMIN_LABEL_ID }}
           />
         </div>

@@ -6,6 +6,7 @@
 
 import React, { memo } from 'react';
 import PropTypes from 'prop-types';
+import { useIntl } from 'react-intl';
 
 import { colors, themeColors } from 'theme';
 
@@ -15,11 +16,14 @@ import Box from 'components/Box';
 import Row from 'components/Row';
 import Text from 'components/Text';
 import Loader from 'components/Loader';
+import ErrorAlert from 'components/ErrorAlert';
 
 import { ClampedText, Thumbnail, Url, ClampedTitle } from './styled';
+import messages from './messages';
 
-const UrlPreview = ({ link, handleClick }) => {
-  const { metadata, isFetching } = useUrlMetadata(link);
+const UrlPreview = ({ link, handleClick, showError }) => {
+  const { formatMessage } = useIntl();
+  const { metadata, isFetching, error } = useUrlMetadata(link);
 
   const redirectToLink = () => {
     if (handleClick) handleClick();
@@ -63,6 +67,14 @@ const UrlPreview = ({ link, handleClick }) => {
           </Row>
         </Box>
       )}
+      {showError && error && (
+        <ErrorAlert
+          errorText={formatMessage(
+            messages[error.response?.status ?? 'defaultErrorMessage'],
+          )}
+          mt={16}
+        />
+      )}
       {isFetching && (
         <Row>
           <Loader type="inline" />
@@ -75,6 +87,7 @@ const UrlPreview = ({ link, handleClick }) => {
 UrlPreview.propTypes = {
   link: PropTypes.string,
   handleClick: PropTypes.func,
+  showError: PropTypes.bool,
 };
 
 export default memo(UrlPreview);

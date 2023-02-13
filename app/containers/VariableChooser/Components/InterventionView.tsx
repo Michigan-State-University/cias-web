@@ -11,7 +11,7 @@ import {
   makeSelectInterventionCount,
 } from 'global/reducers/copyModalReducer';
 import { published } from 'models/Status/StatusTypes';
-import { InterventionDto } from 'models/Intervention/InterventionDto';
+import { Intervention } from 'models/Intervention';
 
 import NoContent from 'components/NoContent';
 import Box from 'components/Box';
@@ -49,7 +49,7 @@ const InterventionView = ({ onClick }: Props) => {
     );
 
   // selectors
-  const interventions = useSelector<unknown, InterventionDto[]>(
+  const interventions = useSelector<unknown, Intervention[]>(
     makeSelectInterventions(),
   );
   const { interventions: interventionsLoading } = useSelector(

@@ -18,7 +18,7 @@ type InputComponentType = {
   touched: boolean;
   inputProps?: React.HTMLProps<HTMLInputElement>;
   label?: string | ReactElement;
-  name: string;
+  name?: string;
   onBlur?: (e: React.FocusEvent<HTMLInputElement>) => void;
   onChange?: (e: React.ChangeEvent<HTMLInputElement>) => void;
   placeholder?: string;

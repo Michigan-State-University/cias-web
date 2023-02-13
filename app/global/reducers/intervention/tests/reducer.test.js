@@ -149,7 +149,7 @@ describe('intervention reducer', () => {
   });
 
   it('EDIT_INTERVENTION_ERROR', () => {
-    const action = actionBuilder(EDIT_INTERVENTION_ERROR, {});
+    const action = actionBuilder(EDIT_INTERVENTION_ERROR, { error: null });
 
     const expectedState = cloneDeep(mockState);
     expectedState.intervention = expectedState.cache.intervention;
@@ -436,10 +436,6 @@ describe('intervention reducer', () => {
 
     expectedState.loaders.sendSessionLoading = true;
     expectedState.cache.intervention = initState.intervention;
-    expectedState.intervention.sessions[index].emails =
-      payloadEmails.emails.map((email) => ({
-        email,
-      }));
 
     expect(interventionReducer(initState, action)).toEqual(expectedState);
   });

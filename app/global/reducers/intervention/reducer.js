@@ -79,6 +79,19 @@ import {
   FETCH_INTERVENTION_INVITES_REQUEST,
   FETCH_INTERVENTION_INVITES_SUCCESS,
   FETCH_INTERVENTION_INVITES_ERROR,
+  GENERATE_CONVERSATIONS_TRANSCRIPT_REQUEST,
+  GENERATE_CONVERSATIONS_TRANSCRIPT_SUCCESS,
+  GENERATE_CONVERSATIONS_TRANSCRIPT_ERROR,
+  UPDATE_INTERVENTION_CONVERSATIONS_TRANSCRIPT,
+  EXPORT_INTERVENTION_REQUEST,
+  EXPORT_INTERVENTION_SUCCESS,
+  EXPORT_INTERVENTION_ERROR,
+  CHANGE_INTERVENTION_NARRATOR_REQUEST,
+  CHANGE_INTERVENTION_NARRATOR_SUCCESS,
+  CHANGE_INTERVENTION_NARRATOR_ERROR,
+  EDIT_SHORT_LINKS_REQUEST,
+  EDIT_SHORT_LINKS_SUCCESS,
+  EDIT_SHORT_LINKS_ERROR,
 } from './constants';
 
 export const initialState = {
@@ -111,6 +124,10 @@ export const initialState = {
     logoLoading: false,
     translateInterventionLoading: false,
     addAttachmentsLoading: false,
+    generateConversationsTranscript: false,
+    exportInterventionLoading: false,
+    changeInterventionNarrator: false,
+    editShortLinks: false,
   },
   errors: {
     fetchInterventionError: null,
@@ -121,6 +138,11 @@ export const initialState = {
     createSessionError: null,
     translateInterventionError: null,
     fetchInterventionInvites: null,
+    generateConversationsTranscript: null,
+    exportInterventionError: null,
+    editIntervention: null,
+    changeInterventionNarrator: null,
+    editShortLinks: null,
   },
 };
 
@@ -161,6 +183,7 @@ export const interventionReducer = (state = initialState, action) =>
         break;
       case EDIT_INTERVENTION_REQUEST:
         draft.loaders.editIntervention = true;
+        draft.errors.editIntervention = null;
         draft.intervention = {
           ...state.intervention,
           ...action.payload.intervention,
@@ -173,6 +196,7 @@ export const interventionReducer = (state = initialState, action) =>
       }
       case EDIT_INTERVENTION_ERROR:
         draft.loaders.editIntervention = false;
+        draft.errors.editIntervention = action.payload.error;
         draft.intervention = cloneDeep(state.cache.intervention);
         break;
 
@@ -345,27 +369,13 @@ export const interventionReducer = (state = initialState, action) =>
         break;
 
       case SEND_SESSION_INVITE_REQUEST: {
-        const {
-          emails: payloadEmails,
-          sessionId,
-          shouldNotUpdateStore,
-        } = action.payload;
+        const { sessionId } = action.payload;
 
         const sessionIndex = findSessionIndex(state.intervention, sessionId);
 
         if (sessionIndex !== -1) {
           draft.loaders.sendSessionLoading = true;
           draft.cache.intervention = state.intervention;
-          const mappedEmails = payloadEmails.map((email) => ({
-            email,
-          }));
-
-          if (!shouldNotUpdateStore) {
-            draft.intervention.sessions[sessionIndex].emails = [
-              ...state.intervention.sessions[sessionIndex].emails,
-              ...mappedEmails,
-            ];
-          }
         }
 
         break;
@@ -507,6 +517,75 @@ export const interventionReducer = (state = initialState, action) =>
       case DELETE_INTERVENTION_ATTACHMENT_SUCCESS:
         draft.intervention.files = action.payload.intervention.files;
         break;
+
+      case GENERATE_CONVERSATIONS_TRANSCRIPT_REQUEST:
+        draft.loaders.generateConversationsTranscript = true;
+        draft.errors.generateConversationsTranscript = null;
+        break;
+      case GENERATE_CONVERSATIONS_TRANSCRIPT_SUCCESS:
+        draft.loaders.generateConversationsTranscript = false;
+        break;
+      case GENERATE_CONVERSATIONS_TRANSCRIPT_ERROR:
+        draft.loaders.generateConversationsTranscript = false;
+        draft.errors.generateConversationsTranscript = action.payload.error;
+        break;
+
+      case UPDATE_INTERVENTION_CONVERSATIONS_TRANSCRIPT:
+        if (draft.intervention) {
+          draft.intervention.conversationsTranscript =
+            action.payload.transcript;
+        }
+        break;
+      case EXPORT_INTERVENTION_REQUEST:
+        draft.loaders.exportInterventionLoading = true;
+        draft.errors.exportInterventionError = null;
+        break;
+      case EXPORT_INTERVENTION_SUCCESS:
+        draft.loaders.exportInterventionLoading = false;
+        draft.errors.exportInterventionError = null;
+        break;
+      case EXPORT_INTERVENTION_ERROR:
+        draft.loaders.exportInterventionLoading = false;
+        draft.errors.exportInterventionError = action.payload.error;
+        break;
+
+      case CHANGE_INTERVENTION_NARRATOR_REQUEST: {
+        draft.loaders.changeInterventionNarrator = true;
+        draft.errors.changeInterventionNarrator = null;
+        draft.intervention.currentNarrator = action.payload.name;
+        break;
+      }
+      case CHANGE_INTERVENTION_NARRATOR_SUCCESS: {
+        draft.loaders.changeInterventionNarrator = false;
+        draft.cache.intervention.currentNarrator =
+          state.intervention.currentNarrator;
+        break;
+      }
+      case CHANGE_INTERVENTION_NARRATOR_ERROR: {
+        draft.loaders.changeInterventionNarrator = false;
+        draft.errors.changeInterventionNarrator = action.payload.error;
+        draft.intervention.currentNarrator =
+          state.cache.intervention.currentNarrator;
+        break;
+      }
+
+      case EDIT_SHORT_LINKS_REQUEST: {
+        draft.loaders.editShortLinks = true;
+        draft.errors.editShortLinks = null;
+        draft.intervention.shortLinks = action.payload.shortLinks;
+        break;
+      }
+      case EDIT_SHORT_LINKS_SUCCESS: {
+        draft.loaders.editShortLinks = false;
+        draft.cache.intervention.shortLinks = state.intervention.shortLinks;
+        break;
+      }
+      case EDIT_SHORT_LINKS_ERROR: {
+        draft.loaders.editShortLinks = false;
+        draft.errors.editShortLinks = action.payload.error;
+        draft.intervention.shortLinks = state.cache.intervention.shortLinks;
+        break;
+      }
     }
   });
 

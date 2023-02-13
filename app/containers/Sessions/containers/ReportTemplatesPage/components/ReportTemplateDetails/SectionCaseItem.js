@@ -277,7 +277,7 @@ const SectionCaseItem = ({
             <Col style={{ padding: 0, height: 30 }} align="end">
               <VariableChooser
                 disabled={!canEdit}
-                interventionId={interventionId}
+                currentInterventionId={interventionId}
                 onClick={handleAddVariable}
                 placement="right"
                 questionTypeWhitelist={[
@@ -288,7 +288,7 @@ const SectionCaseItem = ({
                   currencyQuestion.id,
                   nameQuestion.id,
                 ]}
-                sessionId={sessionId}
+                currentSessionId={sessionId}
                 includeAllVariables
                 includeCurrentSession
                 includeNonDigitVariables

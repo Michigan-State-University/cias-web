@@ -9,10 +9,12 @@ import {
   border,
   flex,
   positioning,
+  text,
 } from '../BaseComponentStyles';
 
 const Box = styled.div.attrs(({ onClick, disabled }) => ({
   onClick: disabled ? null : onClick,
+  defaultColor: 'unset',
 }))`
   ${(props) => (props.lineHeight ? `line-height: ${props.lineHeight}` : '')};
   width: auto;
@@ -31,6 +33,7 @@ const Box = styled.div.attrs(({ onClick, disabled }) => ({
   ${border};
   ${flex};
   ${positioning};
+  ${text};
 `;
 
 Box.propTypes = {

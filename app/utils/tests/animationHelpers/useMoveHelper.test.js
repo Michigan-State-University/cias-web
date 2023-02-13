@@ -4,6 +4,8 @@
 
 import { renderHook, act } from '@testing-library/react-hooks';
 
+import { CharacterType } from 'models/Character';
+
 import useMoveHelper from 'utils/animationsHelpers/useMoveHelper';
 import { CHARACTER_POSITIONS } from 'utils/characterConstants';
 import { instantiateBlockForType } from 'models/Session/utils';
@@ -33,7 +35,12 @@ describe('useMoveHelper test', () => {
       clientHeight: elements.draggableContainerSize / 2,
     };
     const { result } = renderHook(() =>
-      useMoveHelper(animationContainer, blocks, dispatchUpdate),
+      useMoveHelper(
+        animationContainer,
+        blocks,
+        dispatchUpdate,
+        CharacterType.PEEDY,
+      ),
     );
 
     const {
@@ -57,7 +64,12 @@ describe('useMoveHelper test', () => {
       clientHeight: elements.draggableContainerSize * 2,
     };
     const { result } = renderHook(() =>
-      useMoveHelper(animationContainer, blocks, dispatchUpdate),
+      useMoveHelper(
+        animationContainer,
+        blocks,
+        dispatchUpdate,
+        CharacterType.PEEDY,
+      ),
     );
 
     const { animationPos } = result.current;
@@ -75,7 +87,12 @@ describe('useMoveHelper test', () => {
       instantiateBlockForType(speechType, endPosition),
     ];
     const { result } = renderHook(() =>
-      useMoveHelper(animationContainer, blocks, dispatchUpdate),
+      useMoveHelper(
+        animationContainer,
+        blocks,
+        dispatchUpdate,
+        CharacterType.PEEDY,
+      ),
     );
 
     let { animationPos } = result.current;

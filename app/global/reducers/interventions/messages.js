@@ -23,9 +23,18 @@ export default defineMessages({
   copySuccess: {
     id: `${scope}.copySuccess`,
     defaultMessage: `CIAS is copying your intervention. We will send an e-mail to {
-    userCount, plural,
-    one {researcher}
-    other {researchers}
+      userCount, plural,
+      one {researcher}
+      other {researchers}
     } when this process has been finished.`,
+  },
+  importSuccess: {
+    id: `${scope}.importSuccess`,
+    defaultMessage:
+      'CIAS is importing your intervention. We will send you an e-mail when this process has been finished.',
+  },
+  importError: {
+    id: `${scope}.importError`,
+    defaultMessage: 'There was a problem with intervention import',
   },
 });

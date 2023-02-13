@@ -17,6 +17,7 @@ exports[`<UserList /> Should render and match the snapshot - admin 1`] = `
   -ms-flex-pack: center;
   justify-content: center;
   justify-items: center;
+  color: unset;
 }
 
 .c1 {
@@ -28,6 +29,7 @@ exports[`<UserList /> Should render and match the snapshot - admin 1`] = `
   padding-right: 10%;
   padding-left: 10%;
   margin-top: 64px;
+  color: unset;
 }
 
 .c2 {
@@ -40,6 +42,7 @@ exports[`<UserList /> Should render and match the snapshot - admin 1`] = `
   display: -ms-flexbox;
   display: flex;
   margin-bottom: 30px;
+  color: unset;
 }
 
 .c5 {
@@ -72,6 +75,8 @@ exports[`<UserList /> Should render and match the snapshot - admin 1`] = `
   -webkit-box-align: center;
   -ms-flex-align: center;
   align-items: center;
+  color: unset;
+  cursor: pointer;
 }
 
 .c7 {
@@ -104,6 +109,8 @@ exports[`<UserList /> Should render and match the snapshot - admin 1`] = `
   -webkit-box-align: center;
   -ms-flex-align: center;
   align-items: center;
+  color: unset;
+  cursor: pointer;
 }
 
 .c8 {
@@ -136,6 +143,8 @@ exports[`<UserList /> Should render and match the snapshot - admin 1`] = `
   -webkit-box-align: center;
   -ms-flex-align: center;
   align-items: center;
+  color: unset;
+  cursor: pointer;
 }
 
 .c9 {
@@ -168,6 +177,8 @@ exports[`<UserList /> Should render and match the snapshot - admin 1`] = `
   -webkit-box-align: center;
   -ms-flex-align: center;
   align-items: center;
+  color: unset;
+  cursor: pointer;
 }
 
 .c10 {
@@ -200,6 +211,8 @@ exports[`<UserList /> Should render and match the snapshot - admin 1`] = `
   -webkit-box-align: center;
   -ms-flex-align: center;
   align-items: center;
+  color: unset;
+  cursor: pointer;
 }
 
 .c11 {
@@ -218,7 +231,7 @@ exports[`<UserList /> Should render and match the snapshot - admin 1`] = `
   padding-bottom: 5px;
   padding-right: 10px;
   padding-left: 10px;
-  background-color: rgba(179,2,255,1);
+  background-color: rgba(240,104,74,1);
   cursor: pointer;
   -webkit-box-pack: center;
   -webkit-justify-content: center;
@@ -232,6 +245,8 @@ exports[`<UserList /> Should render and match the snapshot - admin 1`] = `
   -webkit-box-align: center;
   -ms-flex-align: center;
   align-items: center;
+  color: unset;
+  cursor: pointer;
 }
 
 .c12 {
@@ -264,6 +279,8 @@ exports[`<UserList /> Should render and match the snapshot - admin 1`] = `
   -webkit-box-align: center;
   -ms-flex-align: center;
   align-items: center;
+  color: unset;
+  cursor: pointer;
 }
 
 .c13 {
@@ -296,6 +313,8 @@ exports[`<UserList /> Should render and match the snapshot - admin 1`] = `
   -webkit-box-align: center;
   -ms-flex-align: center;
   align-items: center;
+  color: unset;
+  cursor: pointer;
 }
 
 .c14 {
@@ -304,6 +323,7 @@ exports[`<UserList /> Should render and match the snapshot - admin 1`] = `
   display: block;
   border-radius: 5px;
   width: 25px;
+  color: unset;
 }
 
 .c34 {
@@ -311,7 +331,17 @@ exports[`<UserList /> Should render and match the snapshot - admin 1`] = `
   height: auto;
   display: block;
   border-radius: 5px;
-  margin-bottom: 0;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  padding-top: 8px;
+  padding-bottom: 8px;
+  -webkit-flex-wrap: wrap;
+  -ms-flex-wrap: wrap;
+  flex-wrap: wrap;
+  gap: 8px;
+  color: unset;
 }
 
 .c35 {
@@ -343,6 +373,7 @@ exports[`<UserList /> Should render and match the snapshot - admin 1`] = `
   -webkit-box-align: center;
   -ms-flex-align: center;
   align-items: center;
+  color: unset;
 }
 
 .c39 {
@@ -374,6 +405,7 @@ exports[`<UserList /> Should render and match the snapshot - admin 1`] = `
   -webkit-box-align: center;
   -ms-flex-align: center;
   align-items: center;
+  color: unset;
 }
 
 .c40 {
@@ -405,6 +437,7 @@ exports[`<UserList /> Should render and match the snapshot - admin 1`] = `
   -webkit-box-align: center;
   -ms-flex-align: center;
   align-items: center;
+  color: unset;
 }
 
 .c42 {
@@ -433,6 +466,7 @@ exports[`<UserList /> Should render and match the snapshot - admin 1`] = `
   -webkit-box-align: center;
   -ms-flex-align: center;
   align-items: center;
+  color: unset;
 }
 
 .c15 {
@@ -504,6 +538,7 @@ exports[`<UserList /> Should render and match the snapshot - admin 1`] = `
 
 .c21 {
   margin-right: 5px;
+  border-radius: 5px;
 }
 
 .c16:disabled + label > .c20 {
@@ -520,9 +555,7 @@ exports[`<UserList /> Should render and match the snapshot - admin 1`] = `
   -webkit-box-align: center;
   -ms-flex-align: center;
   align-items: center;
-  width: -webkit-max-content;
-  width: -moz-max-content;
-  width: max-content;
+  width: 100%;
 }
 
 .c19:hover {
@@ -637,14 +670,6 @@ exports[`<UserList /> Should render and match the snapshot - admin 1`] = `
   -ms-flex-align: center;
   align-items: center;
   position: relative;
-  display: -webkit-box;
-  display: -webkit-flex;
-  display: -ms-flexbox;
-  display: flex;
-  -webkit-align-items: center;
-  -webkit-box-align: center;
-  -ms-flex-align: center;
-  align-items: center;
 }
 
 .c24 {
@@ -701,6 +726,22 @@ exports[`<UserList /> Should render and match the snapshot - admin 1`] = `
   color: #0E0E0E;
 }
 
+.c28:nth-child(even) {
+  background: rgba(16,121,105,0.1);
+}
+
+.c28:nth-child(even) td:first-child,
+.c28:nth-child(even) th:first-child {
+  border-bottom-left-radius: 5px;
+  border-top-left-radius: 5px;
+}
+
+.c28:nth-child(even) td:last-child,
+.c28:nth-child(even) th:last-child {
+  border-bottom-right-radius: 5px;
+  border-top-right-radius: 5px;
+}
+
 .c28:hover {
   background: !important;
 }
@@ -708,6 +749,22 @@ exports[`<UserList /> Should render and match the snapshot - admin 1`] = `
 .c31 {
   cursor: pointer;
   color: #0E0E0E;
+}
+
+.c31:nth-child(even) {
+  background: #FFFFFF;
+}
+
+.c31:nth-child(even) td:first-child,
+.c31:nth-child(even) th:first-child {
+  border-bottom-left-radius: 5px;
+  border-top-left-radius: 5px;
+}
+
+.c31:nth-child(even) td:last-child,
+.c31:nth-child(even) th:last-child {
+  border-bottom-right-radius: 5px;
+  border-top-right-radius: 5px;
 }
 
 .c31:hover {
@@ -881,6 +938,24 @@ exports[`<UserList /> Should render and match the snapshot - admin 1`] = `
                 >
                   <div
                     class="c11"
+                    display="inline-flex"
+                    width="max-content"
+                  >
+                    <p
+                      class="c6"
+                      color="#FFFFFF"
+                      font-size="14"
+                      font-weight="bold"
+                    >
+                      Navigator
+                    </p>
+                  </div>
+                </div>
+                <div
+                  style="box-sizing: border-box; min-height: 1px; position: relative; padding-left: 15px; padding-right: 15px; width: auto; flex-basis: auto; flex-grow: 0; flex-shrink: 0; max-width: 100%; margin-left: 0%; margin-bottom: 10px;"
+                >
+                  <div
+                    class="c7"
                     display="inline-flex"
                     width="max-content"
                   >
@@ -1082,6 +1157,7 @@ exports[`<UserList /> Should render and match the snapshot - admin 1`] = `
                   >
                     <div
                       class="c34"
+                      display="flex"
                     >
                       <div
                         class="c35"
@@ -1145,6 +1221,7 @@ exports[`<UserList /> Should render and match the snapshot - admin 1`] = `
                   >
                     <div
                       class="c34"
+                      display="flex"
                     >
                       <div
                         class="c39"
@@ -1208,6 +1285,7 @@ exports[`<UserList /> Should render and match the snapshot - admin 1`] = `
                   >
                     <div
                       class="c34"
+                      display="flex"
                     >
                       <div
                         class="c40"
@@ -1302,6 +1380,7 @@ exports[`<UserList /> Should render and match the snapshot - researcher 1`] = `
   -ms-flex-pack: center;
   justify-content: center;
   justify-items: center;
+  color: unset;
 }
 
 .c1 {
@@ -1313,6 +1392,7 @@ exports[`<UserList /> Should render and match the snapshot - researcher 1`] = `
   padding-right: 10%;
   padding-left: 10%;
   margin-top: 64px;
+  color: unset;
 }
 
 .c2 {
@@ -1325,6 +1405,7 @@ exports[`<UserList /> Should render and match the snapshot - researcher 1`] = `
   display: -ms-flexbox;
   display: flex;
   margin-bottom: 30px;
+  color: unset;
 }
 
 .c4 {
@@ -1357,6 +1438,8 @@ exports[`<UserList /> Should render and match the snapshot - researcher 1`] = `
   -webkit-box-align: center;
   -ms-flex-align: center;
   align-items: center;
+  color: unset;
+  cursor: pointer;
 }
 
 .c6 {
@@ -1389,6 +1472,8 @@ exports[`<UserList /> Should render and match the snapshot - researcher 1`] = `
   -webkit-box-align: center;
   -ms-flex-align: center;
   align-items: center;
+  color: unset;
+  cursor: pointer;
 }
 
 .c7 {
@@ -1421,6 +1506,8 @@ exports[`<UserList /> Should render and match the snapshot - researcher 1`] = `
   -webkit-box-align: center;
   -ms-flex-align: center;
   align-items: center;
+  color: unset;
+  cursor: pointer;
 }
 
 .c8 {
@@ -1453,6 +1540,8 @@ exports[`<UserList /> Should render and match the snapshot - researcher 1`] = `
   -webkit-box-align: center;
   -ms-flex-align: center;
   align-items: center;
+  color: unset;
+  cursor: pointer;
 }
 
 .c9 {
@@ -1485,6 +1574,8 @@ exports[`<UserList /> Should render and match the snapshot - researcher 1`] = `
   -webkit-box-align: center;
   -ms-flex-align: center;
   align-items: center;
+  color: unset;
+  cursor: pointer;
 }
 
 .c10 {
@@ -1503,7 +1594,7 @@ exports[`<UserList /> Should render and match the snapshot - researcher 1`] = `
   padding-bottom: 5px;
   padding-right: 10px;
   padding-left: 10px;
-  background-color: rgba(179,2,255,1);
+  background-color: rgba(240,104,74,1);
   cursor: pointer;
   -webkit-box-pack: center;
   -webkit-justify-content: center;
@@ -1517,6 +1608,8 @@ exports[`<UserList /> Should render and match the snapshot - researcher 1`] = `
   -webkit-box-align: center;
   -ms-flex-align: center;
   align-items: center;
+  color: unset;
+  cursor: pointer;
 }
 
 .c11 {
@@ -1549,6 +1642,8 @@ exports[`<UserList /> Should render and match the snapshot - researcher 1`] = `
   -webkit-box-align: center;
   -ms-flex-align: center;
   align-items: center;
+  color: unset;
+  cursor: pointer;
 }
 
 .c12 {
@@ -1581,6 +1676,8 @@ exports[`<UserList /> Should render and match the snapshot - researcher 1`] = `
   -webkit-box-align: center;
   -ms-flex-align: center;
   align-items: center;
+  color: unset;
+  cursor: pointer;
 }
 
 .c13 {
@@ -1589,6 +1686,7 @@ exports[`<UserList /> Should render and match the snapshot - researcher 1`] = `
   display: block;
   border-radius: 5px;
   width: 25px;
+  color: unset;
 }
 
 .c33 {
@@ -1596,7 +1694,17 @@ exports[`<UserList /> Should render and match the snapshot - researcher 1`] = `
   height: auto;
   display: block;
   border-radius: 5px;
-  margin-bottom: 0;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  padding-top: 8px;
+  padding-bottom: 8px;
+  -webkit-flex-wrap: wrap;
+  -ms-flex-wrap: wrap;
+  flex-wrap: wrap;
+  gap: 8px;
+  color: unset;
 }
 
 .c34 {
@@ -1628,6 +1736,7 @@ exports[`<UserList /> Should render and match the snapshot - researcher 1`] = `
   -webkit-box-align: center;
   -ms-flex-align: center;
   align-items: center;
+  color: unset;
 }
 
 .c38 {
@@ -1659,6 +1768,7 @@ exports[`<UserList /> Should render and match the snapshot - researcher 1`] = `
   -webkit-box-align: center;
   -ms-flex-align: center;
   align-items: center;
+  color: unset;
 }
 
 .c39 {
@@ -1690,6 +1800,7 @@ exports[`<UserList /> Should render and match the snapshot - researcher 1`] = `
   -webkit-box-align: center;
   -ms-flex-align: center;
   align-items: center;
+  color: unset;
 }
 
 .c41 {
@@ -1718,6 +1829,7 @@ exports[`<UserList /> Should render and match the snapshot - researcher 1`] = `
   -webkit-box-align: center;
   -ms-flex-align: center;
   align-items: center;
+  color: unset;
 }
 
 .c14 {
@@ -1789,6 +1901,7 @@ exports[`<UserList /> Should render and match the snapshot - researcher 1`] = `
 
 .c20 {
   margin-right: 5px;
+  border-radius: 5px;
 }
 
 .c15:disabled + label > .c19 {
@@ -1805,9 +1918,7 @@ exports[`<UserList /> Should render and match the snapshot - researcher 1`] = `
   -webkit-box-align: center;
   -ms-flex-align: center;
   align-items: center;
-  width: -webkit-max-content;
-  width: -moz-max-content;
-  width: max-content;
+  width: 100%;
 }
 
 .c18:hover {
@@ -1922,14 +2033,6 @@ exports[`<UserList /> Should render and match the snapshot - researcher 1`] = `
   -ms-flex-align: center;
   align-items: center;
   position: relative;
-  display: -webkit-box;
-  display: -webkit-flex;
-  display: -ms-flexbox;
-  display: flex;
-  -webkit-align-items: center;
-  -webkit-box-align: center;
-  -ms-flex-align: center;
-  align-items: center;
 }
 
 .c23 {
@@ -1973,6 +2076,22 @@ exports[`<UserList /> Should render and match the snapshot - researcher 1`] = `
   color: #0E0E0E;
 }
 
+.c27:nth-child(even) {
+  background: rgba(16,121,105,0.1);
+}
+
+.c27:nth-child(even) td:first-child,
+.c27:nth-child(even) th:first-child {
+  border-bottom-left-radius: 5px;
+  border-top-left-radius: 5px;
+}
+
+.c27:nth-child(even) td:last-child,
+.c27:nth-child(even) th:last-child {
+  border-bottom-right-radius: 5px;
+  border-top-right-radius: 5px;
+}
+
 .c27:hover {
   background: !important;
 }
@@ -1980,6 +2099,22 @@ exports[`<UserList /> Should render and match the snapshot - researcher 1`] = `
 .c30 {
   cursor: pointer;
   color: #0E0E0E;
+}
+
+.c30:nth-child(even) {
+  background: #FFFFFF;
+}
+
+.c30:nth-child(even) td:first-child,
+.c30:nth-child(even) th:first-child {
+  border-bottom-left-radius: 5px;
+  border-top-left-radius: 5px;
+}
+
+.c30:nth-child(even) td:last-child,
+.c30:nth-child(even) th:last-child {
+  border-bottom-right-radius: 5px;
+  border-top-right-radius: 5px;
 }
 
 .c30:hover {
@@ -2146,6 +2281,24 @@ exports[`<UserList /> Should render and match the snapshot - researcher 1`] = `
                 >
                   <div
                     class="c10"
+                    display="inline-flex"
+                    width="max-content"
+                  >
+                    <p
+                      class="c5"
+                      color="#FFFFFF"
+                      font-size="14"
+                      font-weight="bold"
+                    >
+                      Navigator
+                    </p>
+                  </div>
+                </div>
+                <div
+                  style="box-sizing: border-box; min-height: 1px; position: relative; padding-left: 15px; padding-right: 15px; width: auto; flex-basis: auto; flex-grow: 0; flex-shrink: 0; max-width: 100%; margin-left: 0%; margin-bottom: 10px;"
+                >
+                  <div
+                    class="c6"
                     display="inline-flex"
                     width="max-content"
                   >
@@ -2347,6 +2500,7 @@ exports[`<UserList /> Should render and match the snapshot - researcher 1`] = `
                   >
                     <div
                       class="c33"
+                      display="flex"
                     >
                       <div
                         class="c34"
@@ -2410,6 +2564,7 @@ exports[`<UserList /> Should render and match the snapshot - researcher 1`] = `
                   >
                     <div
                       class="c33"
+                      display="flex"
                     >
                       <div
                         class="c38"
@@ -2473,6 +2628,7 @@ exports[`<UserList /> Should render and match the snapshot - researcher 1`] = `
                   >
                     <div
                       class="c33"
+                      display="flex"
                     >
                       <div
                         class="c39"

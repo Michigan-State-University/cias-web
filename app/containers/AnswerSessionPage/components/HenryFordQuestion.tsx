@@ -4,7 +4,7 @@ import { HenryFordQuestionAnswer } from 'models/Answer';
 import { HenryFordQuestionDTO } from 'models/Question';
 
 import SingleQuestionLayout from '../layouts/SingleQuestionLayout';
-import { SharedProps } from './sharedProps';
+import { SharedProps } from '../types';
 
 const HenryFordQuestion = ({
   question,

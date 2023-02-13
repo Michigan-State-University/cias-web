@@ -30,6 +30,7 @@ exports[`<Checkbox /> Should render checked and match the snapshot 1`] = `
 
 .c6 {
   margin-right: 5px;
+  border-radius: 5px;
 }
 
 .c1:disabled + label > .c5 {
@@ -46,9 +47,7 @@ exports[`<Checkbox /> Should render checked and match the snapshot 1`] = `
   -webkit-box-align: center;
   -ms-flex-align: center;
   align-items: center;
-  width: -webkit-max-content;
-  width: -moz-max-content;
-  width: max-content;
+  width: 100%;
 }
 
 .c4:hover {
@@ -113,6 +112,7 @@ exports[`<Checkbox /> Should render unchecked and match the snapshot 1`] = `
 
 .c6 {
   margin-right: 5px;
+  border-radius: 5px;
 }
 
 .c1:disabled + label > .c5 {
@@ -129,9 +129,7 @@ exports[`<Checkbox /> Should render unchecked and match the snapshot 1`] = `
   -webkit-box-align: center;
   -ms-flex-align: center;
   align-items: center;
-  width: -webkit-max-content;
-  width: -moz-max-content;
-  width: max-content;
+  width: 100%;
 }
 
 .c4:hover {

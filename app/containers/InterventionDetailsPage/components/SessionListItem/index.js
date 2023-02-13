@@ -30,8 +30,6 @@ import {
   HenryFordBranchingInfoType,
 } from 'components/HenryFordBrachingInfoModal';
 
-import { SHARE_IDS } from 'containers/SettingsPanel/utils';
-
 import { numericValidator, variableNameValidator } from 'utils/validators';
 import globalMessages from 'global/i18n/globalMessages';
 
@@ -42,7 +40,8 @@ import mail from 'assets/svg/pink-mail.svg';
 import mailDisabled from 'assets/svg/pink-mail-disabled.svg';
 import { colors, themeColors } from 'theme';
 
-import { InterventionType } from 'models/Intervention/InterventionDto';
+import { InterventionType, InterventionSharedTo } from 'models/Intervention';
+
 import SessionSchedule from '../SessionSchedule';
 import messages from './messages';
 import { ToggleableBox, StyledRow, SessionIndex } from './styled';
@@ -75,20 +74,21 @@ function SessionListItem({
 
   const [isHovered, setIsHovered] = useState(false);
   const [copyOpen, setCopyOpen] = useState(false);
+
   const {
     id,
     name,
-    intervention_id: interventionId,
+    interventionId,
     formulas,
     schedule,
-    schedule_at: scheduleAt,
-    schedule_payload: schedulePayload,
+    scheduleAt,
+    schedulePayload,
     settings,
-    report_templates_count: reportTemplatesCount,
-    days_after_date_variable_name: daysAfterDateVariableName,
+    reportTemplatesCount,
+    daysAfterDateVariableName,
     variable,
-    estimated_time: estimatedTime,
-    estimatedTime: updatedEstimatedTime,
+    estimatedTime,
+    updatedEstimatedTime,
   } = session || {};
 
   const {
@@ -172,7 +172,7 @@ function SessionListItem({
   };
 
   const isSchedulingPossible =
-    sharedTo !== SHARE_IDS.anyoneWithTheLink &&
+    sharedTo !== InterventionSharedTo.ANYONE &&
     interventionType !== InterventionType.FLEXIBLE &&
     index !== 0;
 

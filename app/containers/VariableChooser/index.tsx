@@ -1,13 +1,14 @@
 import React, {
+  CSSProperties,
   memo,
   useCallback,
+  useEffect,
   useLayoutEffect,
   useMemo,
   useRef,
   useState,
 } from 'react';
-import { compose } from 'redux';
-import { injectReducer, injectSaga } from 'redux-injectors';
+import { useInjectReducer, useInjectSaga } from 'redux-injectors';
 
 import {
   allCopyModalSagas,
@@ -16,8 +17,9 @@ import {
 
 import { SessionTypes } from 'models/Session';
 import { QuestionDTO, QuestionTypes } from 'models/Question';
+import { ReflectableQuestion } from 'models/ReflectableQuestion';
 
-import { colors, boxShadows } from 'theme';
+import { boxShadows, colors } from 'theme';
 
 import useOutsideClick from 'utils/useOutsideClick';
 
@@ -25,54 +27,92 @@ import Row from 'components/Row';
 import Box from 'components/Box';
 
 import VariableView from './Components/VariableView';
+import ReflectableQuestionView from './Components/ReflectableQuestionView';
 import SessionView from './Components/SessionView';
 import InterventionView from './Components/InterventionView';
 
 import { VariableChooserContext, VIEWS } from './constants';
 
-interface Props {
+export enum VariableChooserMode {
+  VARIABLE = 'variable',
+  REFLECTABLE_QUESTION = 'reflectable-question',
+}
+
+export type CommonProps = {
   children: JSX.Element;
+  currentInterventionId?: string;
+  currentSessionId?: string;
   disabled: boolean;
   includeAllSessions: boolean;
-  includeAllVariables: boolean;
-  includeCurrentQuestion: boolean;
-  includeCurrentSession: boolean;
-  includeNonDigitVariables: boolean;
-  interventionId: string;
+  includeCurrentQuestion?: boolean;
+  includeCurrentSession?: boolean;
+  initialInterventionId?: string;
+  initialSessionId?: string;
   isMultiIntervention: boolean;
   isMultiSession: boolean;
-  onClick: (variable: string) => void;
-  organizationId: string;
-  placement: 'left' | 'right';
-  questionTypeWhitelist: QuestionTypes[];
-  selectedQuestion: QuestionDTO;
-  sessionId: string;
-  topPosition: string;
-  sessionTypesWhiteList: SessionTypes[];
+  organizationId?: string;
+  placement?: 'left' | 'right';
+  topPosition?: string;
+  sessionTypesWhiteList?: SessionTypes[];
   setIsOpen: (isOpen: boolean) => void;
-}
+  dropdownWidth?: CSSProperties['width'];
+};
+
+export type VariableModeProps = {
+  mode?: undefined | VariableChooserMode.VARIABLE;
+  onClick: (variable: string) => void;
+  includeAllVariables: boolean;
+  includeNonDigitVariables: boolean;
+  questionTypeWhitelist?: QuestionTypes[];
+  selectedQuestion?: QuestionDTO | {};
+  currentSessionPreviousQuestions?: undefined;
+};
+
+export type ReflectableQuestionModeProps = {
+  mode: VariableChooserMode.REFLECTABLE_QUESTION;
+  onClick: (question: ReflectableQuestion) => void;
+  includeAllVariables?: undefined;
+  includeNonDigitVariables?: undefined;
+  questionTypeWhitelist?: undefined;
+  selectedQuestion?: undefined;
+  currentSessionPreviousQuestions: QuestionDTO[];
+};
+
+export type Props = CommonProps &
+  (VariableModeProps | ReflectableQuestionModeProps);
 
 const VariableChooser = ({
   children,
+  currentInterventionId,
+  currentSessionId,
   disabled,
   includeAllSessions,
   includeAllVariables,
-  includeCurrentQuestion,
-  includeCurrentSession,
+  includeCurrentQuestion = true,
+  includeCurrentSession = true,
   includeNonDigitVariables,
-  interventionId: initialInterventionId,
+  initialInterventionId,
+  initialSessionId,
   isMultiIntervention,
   isMultiSession,
   onClick,
-  organizationId,
-  placement,
+  organizationId = '',
+  placement = 'right',
   questionTypeWhitelist,
-  selectedQuestion,
-  sessionId: initialSessionId,
+  selectedQuestion = {},
   topPosition,
-  sessionTypesWhiteList,
+  sessionTypesWhiteList = [
+    SessionTypes.CAT_SESSION,
+    SessionTypes.CLASSIC_SESSION,
+  ],
   setIsOpen: propsSetOpen,
+  mode = VariableChooserMode.VARIABLE,
+  dropdownWidth = 'auto',
+  currentSessionPreviousQuestions,
 }: Props) => {
+  useInjectReducer({ key: 'copyModal', reducer: copyModalReducer });
+  useInjectSaga({ key: 'copyModal', saga: allCopyModalSagas });
+
   const variableChooser = useRef(null);
 
   const [isOpen, setIsOpen] = useState(false);
@@ -86,28 +126,45 @@ const VariableChooser = ({
 
     if (isMultiSession && !includeCurrentSession) return VIEWS.SESSION;
 
+    if (mode === VariableChooserMode.REFLECTABLE_QUESTION)
+      return VIEWS.REFLECTABLE_QUESTION;
+
     return VIEWS.VARIABLE;
   }, [isMultiIntervention, isMultiSession, includeCurrentSession]);
 
   const [currentView, setCurrentView] = useState(initialView);
   const toSessionView = () => setCurrentView(VIEWS.SESSION);
   const toVariableView = () => setCurrentView(VIEWS.VARIABLE);
+  const toReflectableQuestionView = () =>
+    setCurrentView(VIEWS.REFLECTABLE_QUESTION);
 
-  const [currentInterventionId, setCurrentInterventionId] = useState(
-    initialInterventionId,
+  const [selectedInterventionId, setSelectedInterventionId] = useState(
+    initialInterventionId ?? currentInterventionId,
   );
-  const resetCurrentInterventionId = () =>
-    currentInterventionId !== initialInterventionId &&
-    setCurrentInterventionId(initialInterventionId);
 
-  const [currentSessionId, setCurrentSessionId] = useState(initialSessionId);
-  const resetCurrentSessionId = () =>
-    currentSessionId !== initialSessionId &&
-    setCurrentSessionId(initialSessionId);
+  const resetSelectedInterventionId = () =>
+    selectedInterventionId !== initialInterventionId &&
+    setSelectedInterventionId(initialInterventionId ?? currentInterventionId);
+
+  useEffect(() => {
+    resetSelectedInterventionId();
+  }, [initialInterventionId]);
+
+  const [selectedSessionId, setSelectedSessionId] = useState(
+    initialSessionId ?? currentSessionId,
+  );
+
+  const resetSelectedSessionId = () =>
+    selectedSessionId !== initialSessionId &&
+    setSelectedSessionId(initialSessionId ?? currentSessionId);
+
+  useEffect(() => {
+    resetSelectedSessionId();
+  }, [initialSessionId]);
 
   const resetVariableChooser = () => {
-    resetCurrentSessionId();
-    resetCurrentInterventionId();
+    resetSelectedSessionId();
+    resetSelectedInterventionId();
     setCurrentView(initialView);
   };
 
@@ -116,7 +173,7 @@ const VariableChooser = ({
     if (propsSetOpen) propsSetOpen(isOpen);
   }, [isOpen]);
 
-  const handleOnVariableClick = useCallback(
+  const handleOnChoose = useCallback(
     (variable) => {
       onClick(variable);
       close();
@@ -125,12 +182,18 @@ const VariableChooser = ({
   );
 
   const handleOnSessionClick = useCallback((sessionId) => {
-    setCurrentSessionId(sessionId);
+    setSelectedSessionId(sessionId);
+
+    if (mode === VariableChooserMode.REFLECTABLE_QUESTION) {
+      toReflectableQuestionView();
+      return;
+    }
+
     toVariableView();
   }, []);
 
   const handleOnInterventionClick = useCallback((interventionId) => {
-    setCurrentInterventionId(interventionId);
+    setSelectedInterventionId(interventionId);
     toSessionView();
   }, []);
 
@@ -139,7 +202,10 @@ const VariableChooser = ({
 
     switch (currentView) {
       case VIEWS.VARIABLE:
-        return <VariableView onClick={handleOnVariableClick} />;
+        return <VariableView onClick={handleOnChoose} />;
+
+      case VIEWS.REFLECTABLE_QUESTION:
+        return <ReflectableQuestionView onClick={handleOnChoose} />;
 
       case VIEWS.SESSION:
         return <SessionView onClick={handleOnSessionClick} />;
@@ -154,7 +220,7 @@ const VariableChooser = ({
     currentView,
     handleOnInterventionClick,
     handleOnSessionClick,
-    handleOnVariableClick,
+    handleOnChoose,
     isOpen,
   ]);
 
@@ -169,24 +235,24 @@ const VariableChooser = ({
         borderRadius={10}
         shadow={boxShadows.black}
         position="absolute"
-        width="auto"
+        width={dropdownWidth}
         top={topPosition}
         {...(isOpen ? { zIndex: 1, [placement]: '0px' } : { display: 'none' })}
       >
         <Row>
-          <Box padding={8} filled>
+          <Box padding={8} filled maxWidth="100%">
             <VariableChooserContext.Provider
               value={{
-                currentInterventionId,
                 currentSessionId,
+                currentInterventionId,
+                selectedInterventionId,
+                selectedSessionId,
                 currentView,
                 includeAllSessions,
                 includeAllVariables,
                 includeCurrentQuestion,
                 includeCurrentSession,
                 includeNonDigitVariables,
-                initialInterventionId,
-                initialSessionId,
                 isMultiIntervention,
                 isMultiSession,
                 organizationId,
@@ -194,6 +260,7 @@ const VariableChooser = ({
                 selectedQuestion,
                 setCurrentView,
                 sessionTypesWhiteList,
+                currentSessionPreviousQuestions,
               }}
             >
               {displayContent()}
@@ -205,20 +272,4 @@ const VariableChooser = ({
   );
 };
 
-VariableChooser.defaultProps = {
-  includeCurrentQuestion: true,
-  includeCurrentSession: true,
-  placement: 'right',
-  sessionTypesWhiteList: [
-    SessionTypes.CAT_SESSION,
-    SessionTypes.CLASSIC_SESSION,
-  ],
-  selectedQuestion: {},
-} as Partial<Props>;
-
-const reduxInjectors = [
-  injectReducer({ key: 'copyModal', reducer: copyModalReducer }),
-  injectSaga({ key: 'copyModal', saga: allCopyModalSagas }),
-];
-
-export default compose(...reduxInjectors, memo)(VariableChooser);
+export default memo(VariableChooser);

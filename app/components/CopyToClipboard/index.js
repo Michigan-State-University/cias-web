@@ -13,7 +13,6 @@ import Row from 'components/Row';
 import Icon from 'components/Icon';
 import Box from 'components/Box';
 import Popup from 'components/Popup';
-import share from 'assets/svg/share.svg';
 import Text from 'components/Text';
 import { themeColors } from 'theme';
 
@@ -28,7 +27,13 @@ const CopyToClipboard = ({
   children,
   textProps,
   renderAsButton,
+  rednerAsCustomComponent,
   buttonDisabled,
+  disabled,
+  icon,
+  iconAlt,
+  popupVerticalPosition,
+  popupHorizontalPosition,
   ...restProps
 }) => {
   const [copied, setCopied] = useState(false);
@@ -45,7 +50,10 @@ const CopyToClipboard = ({
   };
 
   const renderCopyToClipboard = (content) => (
-    <ReactCopyToClipboard text={textToCopy} onCopy={onCopy}>
+    <ReactCopyToClipboard
+      text={textToCopy}
+      onCopy={buttonDisabled || disabled ? undefined : onCopy}
+    >
       {content}
     </ReactCopyToClipboard>
   );
@@ -65,19 +73,32 @@ const CopyToClipboard = ({
   }
 
   return (
-    <Box clickable {...restProps}>
+    <Box clickable disabled={disabled} {...restProps}>
       <Popup
         popupContent={formatMessage(messages.copied)}
         controlled
         visible={copied}
-        top
-        center
+        verticalPosition={popupVerticalPosition}
+        horizontalPosition={popupHorizontalPosition}
       >
         {renderCopyToClipboard(
-          <Row align="center">
-            <Icon src={share} mr={10} alt="share" fill={textProps.color} />
-            <Text {...textProps}>{children}</Text>
-          </Row>,
+          rednerAsCustomComponent ? (
+            children
+          ) : (
+            <Row align="center">
+              {icon && (
+                <Icon
+                  src={icon}
+                  alt={iconAlt}
+                  mr={10}
+                  fill={textProps[disabled ? 'disabledColor' : 'color']}
+                />
+              )}
+              <Text disabled={disabled} {...textProps}>
+                {children}
+              </Text>
+            </Row>
+          ),
         )}
       </Popup>
     </Box>
@@ -90,7 +111,13 @@ CopyToClipboard.propTypes = {
   children: PropTypes.node,
   textProps: PropTypes.object,
   buttonDisabled: PropTypes.bool,
+  disabled: PropTypes.bool,
   renderAsButton: PropTypes.bool,
+  rednerAsCustomComponent: PropTypes.bool,
+  icon: PropTypes.string,
+  iconAlt: PropTypes.string,
+  popupVerticalPosition: PropTypes.oneOf(['top', 'center', 'bottom']),
+  popupHorizontalPosition: PropTypes.oneOf(['left', 'center', 'right']),
 };
 
 CopyToClipboard.defaultProps = {
@@ -98,6 +125,8 @@ CopyToClipboard.defaultProps = {
     color: themeColors.secondary,
     fontWeight: 'bold',
   },
+  popupVerticalPosition: 'top',
+  popupHorizontalPosition: 'center',
 };
 
 export default injectIntl(CopyToClipboard);

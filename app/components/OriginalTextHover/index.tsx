@@ -19,10 +19,10 @@ import messages from './messages';
 import { OriginalText } from './styled';
 
 type Props = {
-  children: React.ReactNode;
+  children?: React.ReactNode;
   id: string;
   text: string;
-  hidden: boolean;
+  hidden?: boolean;
   iconProps?: Record<string, unknown>;
 };
 

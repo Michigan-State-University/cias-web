@@ -6,7 +6,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import Tabs from 'components/Tabs';
 import {
   CatMhLicenseType,
-  InterventionDto,
+  Intervention,
   InterventionStatus,
 } from 'models/Intervention';
 import {
@@ -16,7 +16,7 @@ import {
 
 import { colors } from 'theme';
 
-import messages from '../messages';
+import messages from './messages';
 import { CatMhAccessModalUI } from './CatMhAccessModalUI';
 import { HfHsAccessModalUI } from './HfHsAccessModalUI';
 import { ModalUIData } from './types';
@@ -26,7 +26,7 @@ import {
 } from './utils';
 
 export type Props = {
-  modalState: InterventionDto;
+  modalState: Intervention;
   closeModal: () => void;
 };
 
@@ -42,7 +42,7 @@ const Component = ({ modalState: intervention, closeModal }: Props) => {
   );
 
   // actions
-  const editIntervention = (newValue: Partial<InterventionDto>) =>
+  const editIntervention = (newValue: Partial<Intervention>) =>
     dispatch(editInterventionRequest({ id: intervention.id, ...newValue }));
 
   const initialData = useMemo(

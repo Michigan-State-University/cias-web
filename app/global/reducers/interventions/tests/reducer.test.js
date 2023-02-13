@@ -33,8 +33,8 @@ describe('interventions reducer', () => {
     const action = actionBuilder(FETCH_INTERVENTIONS_REQUEST, {});
 
     const expectedState = cloneDeep(mockState);
-    expectedState.fetchInterventionLoading = true;
-    expectedState.fetchInterventionError = null;
+    expectedState.loaders.fetchInterventions = true;
+    expectedState.errors.fetchInterventions = null;
 
     expect(interventionsReducer(mockState, action)).toEqual(expectedState);
   });
@@ -45,7 +45,7 @@ describe('interventions reducer', () => {
     const action = fetchInterventionsSuccess(interventions);
 
     const expectedState = cloneDeep(mockState);
-    expectedState.fetchInterventionLoading = false;
+    expectedState.loaders.fetchInterventions = false;
     expectedState.interventions = payloadInterventions.interventions;
 
     expect(interventionsReducer(mockState, action)).toEqual(expectedState);
@@ -57,8 +57,8 @@ describe('interventions reducer', () => {
     const action = actionBuilder(FETCH_INTERVENTIONS_ERROR, payloadError);
 
     const expectedState = cloneDeep(mockState);
-    expectedState.fetchInterventionLoading = false;
-    expectedState.fetchInterventionError = payloadError.error;
+    expectedState.loaders.fetchInterventions = false;
+    expectedState.errors.fetchInterventions = payloadError.error;
 
     expect(interventionsReducer(mockState, action)).toEqual(expectedState);
   });

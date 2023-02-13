@@ -35,7 +35,7 @@ import {
   henryFordInitialScreen,
 } from 'models/Session/QuestionTypes';
 import { GroupType } from 'models/QuestionGroup';
-import { Roles } from 'models/User/UserRoles';
+import { Roles } from 'models/User/RolesManager';
 import { archived, closed, draft, published } from 'models/Status/StatusTypes';
 import { UserInterventionStatus } from 'models/UserIntervention/StatusTypes';
 import { UserSessionStatus } from 'models/UserSession/StatusTypes';
@@ -46,44 +46,48 @@ export const scope = 'app.GlobalMessages';
 
 export default defineMessages({
   roles: {
-    [Roles.admin]: {
-      id: `${scope}.${Roles.admin}`,
+    [Roles.Admin]: {
+      id: `${scope}.${Roles.Admin}`,
       defaultMessage: 'Admin',
     },
-    [Roles.teamAdmin]: {
-      id: `${scope}.${Roles.teamAdmin}`,
+    [Roles.TeamAdmin]: {
+      id: `${scope}.${Roles.TeamAdmin}`,
       defaultMessage: 'Team Admin',
     },
-    [Roles.participant]: {
-      id: `${scope}.${Roles.participant}`,
+    [Roles.Participant]: {
+      id: `${scope}.${Roles.Participant}`,
       defaultMessage: 'Participant',
     },
-    [Roles.researcher]: {
-      id: `${scope}.${Roles.researcher}`,
+    [Roles.Researcher]: {
+      id: `${scope}.${Roles.Researcher}`,
       defaultMessage: 'Researcher',
     },
-    [Roles.guest]: {
-      id: `${scope}.${Roles.guest}`,
+    [Roles.Guest]: {
+      id: `${scope}.${Roles.Guest}`,
       defaultMessage: 'Guest',
     },
-    [Roles.thirdParty]: {
-      id: `${scope}.${Roles.thirdParty}`,
+    [Roles.ThirdParty]: {
+      id: `${scope}.${Roles.ThirdParty}`,
       defaultMessage: 'Third Party',
     },
-    [Roles.eInterventionAdmin]: {
-      id: `${scope}.${Roles.eInterventionAdmin}`,
+    [Roles.EInterventionAdmin]: {
+      id: `${scope}.${Roles.EInterventionAdmin}`,
       defaultMessage: 'E-Intervention Admin',
     },
-    [Roles.clinicAdmin]: {
-      id: `${scope}.${Roles.clinicAdmin}`,
+    [Roles.Navigator]: {
+      id: `${scope}.${Roles.Navigator}`,
+      defaultMessage: 'Navigator',
+    },
+    [Roles.ClinicAdmin]: {
+      id: `${scope}.${Roles.ClinicAdmin}`,
       defaultMessage: 'Clinic Admin',
     },
-    [Roles.healthSystemAdmin]: {
-      id: `${scope}.${Roles.healthSystemAdmin}`,
+    [Roles.HealthSystemAdmin]: {
+      id: `${scope}.${Roles.HealthSystemAdmin}`,
       defaultMessage: 'Health System Admin',
     },
-    [Roles.organizationAdmin]: {
-      id: `${scope}.${Roles.organizationAdmin}`,
+    [Roles.OrganizationAdmin]: {
+      id: `${scope}.${Roles.OrganizationAdmin}`,
       defaultMessage: 'Organization Admin',
     },
   },
@@ -342,6 +346,11 @@ export default defineMessages({
       id: `${scope}.numeric`,
       defaultMessage: 'Only numeric values are allowed',
     },
+    unreservedURLCharacters: {
+      id: `${scope}.unreservedURLCharacters`,
+      defaultMessage:
+        'This field contain only letters, numbers, hyphens [-], underscores [_], periods [.], and tildes [~]',
+    },
     zipCode: {
       id: `${scope}.zipCode`,
       defaultMessage: "ZIP Code's format is incorrect",
@@ -396,6 +405,18 @@ export default defineMessages({
   no: {
     id: `${scope}.no`,
     defaultMessage: 'No',
+  },
+  cancel: {
+    id: `${scope}.cancel`,
+    defaultMessage: 'Cancel',
+  },
+  save: {
+    id: `${scope}.save`,
+    defaultMessage: 'Save',
+  },
+  lastCsvDate: {
+    id: `${scope}.lastCsvDate`,
+    defaultMessage: 'CSV last generated at: ',
   },
   sex: {
     [Sex.AMBIGUOUS]: {

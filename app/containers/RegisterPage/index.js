@@ -4,7 +4,7 @@
  *
  */
 
-import React, { memo, useState } from 'react';
+import React, { memo, useEffect, useState, useMemo } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { Helmet } from 'react-helmet';
@@ -13,7 +13,7 @@ import { createStructuredSelector } from 'reselect';
 import { compose } from 'redux';
 import { Formik } from 'formik';
 import * as Yup from 'yup';
-import { Link } from 'react-router-dom';
+import { Link, useHistory } from 'react-router-dom';
 import dayjs from 'dayjs';
 import set from 'lodash/set';
 import lowerCase from 'lodash/lowerCase';
@@ -22,7 +22,7 @@ import { Markup } from 'interweave';
 import { useInjectSaga, useInjectReducer } from 'redux-injectors';
 
 import { themeColors } from 'theme';
-import { Roles } from 'models/User/UserRoles';
+import { Roles } from 'models/User/RolesManager';
 import { passwordRegex } from 'global/constants/regex';
 
 import withPublicLayout from 'containers/PublicLayout';
@@ -37,14 +37,16 @@ import Modal from 'components/Modal';
 import FormikInput from 'components/FormikInput';
 import ErrorAlert from 'components/ErrorAlert';
 import FormikCheckbox from 'components/FormikCheckbox';
+import Box from 'components/Box';
 
+import { isNil } from 'lodash';
 import makeSelectRegisterPage from './selectors';
 import reducer from './reducer';
 import allRegistrationsSaga from './sagas';
 import messages from './messages';
 import {
   registerParticipantRequest,
-  registerResearcherRequest,
+  registerFromInvitationRequest,
 } from './actions';
 import { TermsAndConditions } from './styled';
 
@@ -86,9 +88,9 @@ const initialValues = (email) => ({
 
 export function RegisterPage({
   registerParticipant,
-  registerResearcher,
+  registerFromInvitation,
   intl: { formatMessage },
-  registerPage: { loading, error },
+  registerPage: { loading, error, success },
   location,
 }) {
   const [showTermsModal, setShowTermsModal] = useState(false);
@@ -98,11 +100,15 @@ export function RegisterPage({
     email,
     invitation_token: invitationToken,
     role,
+    intervention_id: interventionId,
+    session_id: sessionId,
   } = queryString.parse(location.search, { decode: false });
   const isInvite = Boolean(invitationToken) && Boolean(email);
 
+  const history = useHistory();
+
   const termsAndConditionsText =
-    role === Roles.participant || !role
+    role === Roles.Participant || !role
       ? formatMessage(messages.termsAndConditionsParticipantText)
       : formatMessage(messages.termsAndConditionsOtherRolesText);
 
@@ -112,10 +118,40 @@ export function RegisterPage({
 
     if (isInvite) {
       set(values, 'invitationToken', invitationToken);
-      registerResearcher(values);
+      registerFromInvitation(values);
     } else registerParticipant(values);
     setSubmitting(false);
   };
+
+  const shouldRedirectToIntervention = useMemo(
+    () => !isNil(interventionId) && isNil(sessionId) && isNil(error),
+    [interventionId, sessionId, error],
+  );
+
+  const shouldRedirectToSession = useMemo(
+    () => !isNil(interventionId) && !isNil(sessionId) && isNil(error),
+    [interventionId, sessionId, error],
+  );
+
+  useEffect(() => {
+    const shouldRedirect = success && isInvite && !loading;
+
+    if (shouldRedirect) {
+      if (shouldRedirectToIntervention) {
+        history.replace(`/interventions/${interventionId}/invite`);
+        return;
+      }
+
+      if (shouldRedirectToSession) {
+        history.replace(
+          `/interventions/${interventionId}/sessions/${sessionId}/fill`,
+        );
+        return;
+      }
+
+      history.replace('/');
+    }
+  }, [success, loading, isInvite, interventionId, sessionId, error]);
 
   return (
     <>
@@ -134,12 +170,17 @@ export function RegisterPage({
       </Modal>
       <Fill justify="center" align="center">
         <Column sm={10} md={8} lg={6} align="start">
-          <H1 mb={40} fontSize={23}>
-            <FormattedMessage
-              {...messages[isInvite ? 'headerInvite' : 'header']}
-              values={{ role: lowerCase(role) }}
-            />
-          </H1>
+          <Box mb={40}>
+            <H1 mb={8} fontSize={23}>
+              <FormattedMessage
+                {...messages[isInvite ? 'headerInvite' : 'header']}
+                values={{ role: lowerCase(role) }}
+              />
+            </H1>
+            <Text fontSize="12px" lineHeight="12px">
+              <FormattedMessage {...messages.subHeader} />
+            </Text>
+          </Box>
           <Formik
             validationSchema={validationSchema(formatMessage)}
             initialValues={initialValues(email)}
@@ -153,6 +194,7 @@ export function RegisterPage({
                   width: '100%',
                 },
                 mb: 20,
+                required: true,
               };
               return (
                 <>
@@ -182,6 +224,7 @@ export function RegisterPage({
                       ...sharedProps.inputProps,
                       disabled: isInvite,
                     }}
+                    required
                     mb={20}
                   />
                   <FormikInput
@@ -198,25 +241,26 @@ export function RegisterPage({
                     type="password"
                     {...sharedProps}
                   />
-                  <FormikCheckbox formikKey="terms">
-                    {formatMessage(messages.accept)}
-                    <Text
-                      clickable
-                      ml={3}
-                      lineHeight="1.5em"
-                      fontWeight="bold"
-                      color={themeColors.secondary}
-                      onClick={() => {
-                        setShowTermsModal(true);
-                      }}
-                    >
-                      {formatMessage(messages.termsAndConditions)}
-                    </Text>
-                  </FormikCheckbox>
+                  <Row my={20}>
+                    <FormikCheckbox formikKey="terms">
+                      {formatMessage(messages.accept)}
+                      <Text
+                        clickable
+                        ml={3}
+                        lineHeight="1.5em"
+                        fontWeight="bold"
+                        color={themeColors.secondary}
+                        onClick={() => {
+                          setShowTermsModal(true);
+                        }}
+                      >
+                        {formatMessage(messages.termsAndConditions)}
+                      </Text>
+                    </FormikCheckbox>
+                  </Row>
                   <Button
                     type="submit"
                     height={46}
-                    borderRadius={5}
                     my={25}
                     loading={loading}
                     onClick={handleSubmit}
@@ -244,7 +288,7 @@ export function RegisterPage({
 
 RegisterPage.propTypes = {
   registerParticipant: PropTypes.func,
-  registerResearcher: PropTypes.func,
+  registerFromInvitation: PropTypes.func,
   intl: PropTypes.object,
   registerPage: PropTypes.object,
   location: PropTypes.object,
@@ -256,7 +300,7 @@ const mapStateToProps = createStructuredSelector({
 
 const mapDispatchToProps = {
   registerParticipant: registerParticipantRequest,
-  registerResearcher: registerResearcherRequest,
+  registerFromInvitation: registerFromInvitationRequest,
 };
 
 const withConnect = connect(mapStateToProps, mapDispatchToProps);

@@ -7,9 +7,10 @@ import webpage from 'assets/svg/webpage-mouseover.svg';
 import { htmlToPlainText } from 'utils/htmlToPlainText';
 
 import Row from 'components/Row';
-import Text from 'components/Text';
+import { EllipsisText } from 'components/Text';
 import Img from 'components/Img';
 import Badge from 'components/Badge';
+import Box from 'components/Box';
 
 interface Props {
   id: string;
@@ -30,23 +31,21 @@ const VariableRow = ({ id, subtitle, isLast, onClick, variable }: Props) => (
   >
     <Row align="center">
       <Img src={webpage} mr={15} />
-      <Text
-        textOverflow="ellipsis"
-        whiteSpace="pre"
-        overflow="hidden"
-        maxWidth={200}
-        mr={20}
-      >
-        {htmlToPlainText(subtitle)}
-      </Text>
+
+      <Box width={170} mr={20}>
+        <EllipsisText text={htmlToPlainText(subtitle)} />
+      </Box>
     </Row>
     <Badge
       data-cy="question-variable-chooser"
-      maxWidth={300}
+      width={100}
       color={colors.jungleGreen}
       bgWithOpacity
     >
-      {variable && variable.trim()}
+      <EllipsisText
+        color={colors.jungleGreen}
+        text={variable && variable.trim()}
+      />
     </Badge>
   </Row>
 );

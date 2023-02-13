@@ -12,6 +12,7 @@ exports[`<TextBoxQuestion /> Should render and match the snapshot 1`] = `
   padding-right: 21px;
   padding-left: 21px;
   background-color: rgba(233,241,251,1);
+  color: unset;
 }
 
 .c2 {

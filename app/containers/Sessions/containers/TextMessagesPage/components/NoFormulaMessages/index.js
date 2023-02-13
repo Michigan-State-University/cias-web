@@ -63,7 +63,7 @@ const NoFormulaMessage = ({
         </Text>
         <VariableChooser
           disabled={!editingPossible}
-          interventionId={interventionId}
+          currentInterventionId={interventionId}
           onClick={handleAddVariable}
           placement="right"
           questionTypeWhitelist={[
@@ -74,7 +74,7 @@ const NoFormulaMessage = ({
             currencyQuestion.id,
             nameQuestion.id,
           ]}
-          sessionId={sessionId}
+          currentSessionId={sessionId}
           includeAllVariables
           includeCurrentSession
           includeNonDigitVariables

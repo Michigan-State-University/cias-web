@@ -8,6 +8,7 @@ exports[`<CurrencySelect /> should match the snapshot 1`] = `
   border-radius: 5px;
   width: 100%;
   cursor: pointer;
+  color: unset;
 }
 
 .c1 {

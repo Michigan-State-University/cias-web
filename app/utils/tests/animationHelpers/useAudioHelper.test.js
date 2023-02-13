@@ -13,7 +13,7 @@ import {
   reflectionType,
   speechType,
 } from 'models/Narrator/BlockTypes';
-import { speechAnimations } from 'utils/animations/animationsNames';
+import { speechAnimationsMapper } from 'utils/animations/animationsNames';
 import AudioWrapper from 'utils/audioWrapper';
 
 describe('useAudioHelper test', () => {
@@ -23,7 +23,6 @@ describe('useAudioHelper test', () => {
   let currentData;
   let currentIndex;
   let changeBlock;
-  let answers;
   let settings;
   let audioInstance;
   let animationCurrent;
@@ -34,8 +33,7 @@ describe('useAudioHelper test', () => {
     currentData = {};
     currentIndex = 0;
     changeBlock = jest.fn();
-    answers = [];
-    settings = { voice: true, animation: true };
+    settings = { voice: true, animation: true, character: 'peedy' };
     audioInstance = new AudioWrapper();
     animationCurrent = {
       anim: {
@@ -53,7 +51,6 @@ describe('useAudioHelper test', () => {
         currentIndex,
         null,
         changeBlock,
-        answers,
         settings,
       ),
     );
@@ -77,7 +74,6 @@ describe('useAudioHelper test', () => {
         currentIndex,
         null,
         changeBlock,
-        answers,
         settings,
       ),
     );
@@ -90,11 +86,13 @@ describe('useAudioHelper test', () => {
       {
         name: 'rest',
         animationData: {
+          start: undefined,
           speech: await import(
-            `assets/animations/${speechAnimations.rest.animations.speech}.json`
+            `assets/animations/peedy/${speechAnimationsMapper.peedy.rest.animations.speech}.json`
           ),
+          end: undefined,
         },
-        isEndReversed: undefined,
+        isEndReversed: false,
       },
     ];
 
@@ -120,7 +118,6 @@ describe('useAudioHelper test', () => {
           currentIndex,
           animationCurrent,
           changeBlock,
-          answers,
           settings,
           audioInstance,
         ),
