@@ -606,6 +606,7 @@ export function AnswerSessionPage({
       ref={pageRef}
       id={ANSWER_SESSION_PAGE_ID}
       maxHeight="100vh"
+      background={isMobilePreview ? undefined : themeColors.sessionBackground}
     >
       {quickExitEnabled && (
         <QuickExit

@@ -1,6 +1,6 @@
 import styled, { css } from 'styled-components';
 
-import { elements, colors, mediaQuery } from 'theme';
+import { elements, colors, mediaQuery, themeColors } from 'theme';
 import { sizes, DESKTOP_MODE } from 'utils/previewMode';
 
 import { Button } from 'components/Button';
@@ -55,6 +55,7 @@ export const AnswerOuterContainer = styled.div`
   max-width: ${(props) =>
     props.isFullSize ? '100%' : `${elements.draggableContainerSize}px`};
   ${(props) => props.previewMode && getStyles(props.previewMode)}
+  background-color: ${themeColors.sessionBackground}
 `;
 
 export const FooterContainer = styled.div`
