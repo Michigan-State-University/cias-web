@@ -142,6 +142,7 @@ export const GlobalReplacementModal = ({
       BodyAnimation: bodyAnimationReplacement,
       SpeechAnimation: speechAnimationReplacement,
     });
+    onClose();
   };
 
   useEffect(() => {

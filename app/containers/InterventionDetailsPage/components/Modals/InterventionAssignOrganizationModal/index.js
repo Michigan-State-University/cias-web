@@ -9,6 +9,7 @@ import {
   makeSelectInterventionLoader,
 } from 'global/reducers/intervention';
 import { makeSelectOrganizations } from 'global/reducers/organizations';
+import globalMessages from 'global/i18n/globalMessages';
 
 import { Col, FullWidthContainer, Row } from 'components/ReactGridSystem';
 import ApiSelect from 'components/Select/ApiSelect';
@@ -16,8 +17,11 @@ import Text from 'components/Text';
 import Button from 'components/Button';
 
 import { organizationSelectOptionFormatter } from './utils';
-import messages from '../../messages';
-import { CHOOSE_ORGANIZATION_LABEL_ID } from './constants';
+import messages from './messages';
+import {
+  CHOOSE_ORGANIZATION_LABEL_ID,
+  INTERVENTION_ASSIGN_ORGANIZATION_MODAL_WIDTH,
+} from './constants';
 
 const InterventionAssignOrganizationModal = ({
   interventionId,
@@ -82,6 +86,8 @@ const InterventionAssignOrganizationModal = ({
 
   return (
     <FullWidthContainer>
+      <Text mt={8}>{formatMessage(messages.shortLinksInfo)}</Text>
+
       <Row align="center" mt={20}>
         <Col xs={4}>
           <Text fontWeight="bold" id={CHOOSE_ORGANIZATION_LABEL_ID}>
@@ -112,7 +118,7 @@ const InterventionAssignOrganizationModal = ({
             disabled={!canSave}
             loading={editInterventionLoader}
           >
-            {formatMessage(messages.saveButton)}
+            {formatMessage(globalMessages.save)}
           </Button>
         </Col>
       </Row>
@@ -127,3 +133,4 @@ InterventionAssignOrganizationModal.propTypes = {
 };
 
 export default memo(InterventionAssignOrganizationModal);
+export { INTERVENTION_ASSIGN_ORGANIZATION_MODAL_WIDTH };

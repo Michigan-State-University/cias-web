@@ -81,6 +81,9 @@ exports[`<InterventionPage /> Should render and match the snapshot with interven
   -webkit-flex-direction: column;
   -ms-flex-direction: column;
   flex-direction: column;
+  -webkit-align-content: flex-start;
+  -ms-flex-line-pack: start;
+  align-content: flex-start;
   -webkit-align-items: flex-start;
   -webkit-box-align: flex-start;
   -ms-flex-align: flex-start;
@@ -95,6 +98,9 @@ exports[`<InterventionPage /> Should render and match the snapshot with interven
   -webkit-flex-direction: column;
   -ms-flex-direction: column;
   flex-direction: column;
+  -webkit-align-content: flex-end;
+  -ms-flex-line-pack: end;
+  align-content: flex-end;
   -webkit-align-items: flex-end;
   -webkit-box-align: flex-end;
   -ms-flex-align: flex-end;
@@ -391,7 +397,7 @@ exports[`<InterventionPage /> Should render and match the snapshot with interven
         style="display: flex; flex-wrap: wrap; flex-grow: 0; flex-shrink: 0; align-items: normal; justify-content: flex-start; margin: 0px;"
       >
         <div
-          align="flex-start"
+          align="start"
           class="c4"
           style="box-sizing: border-box; min-height: 1px; position: relative; width: 100%; flex-basis: 0px; flex-grow: 1; flex-shrink: 0; max-width: 100%; margin-left: 0%; padding: 8px;"
         >
@@ -399,7 +405,7 @@ exports[`<InterventionPage /> Should render and match the snapshot with interven
             style="margin-left: -15px; margin-right: -15px; display: flex; flex-wrap: wrap; flex-grow: 0; flex-shrink: 0; align-items: center; justify-content: flex-start;"
           >
             <div
-              align="flex-start"
+              align="start"
               class="c4"
               style="box-sizing: border-box; min-height: 1px; position: relative; padding-left: 15px; padding-right: 15px; width: 25%; flex-basis: 25%; flex-grow: 0; flex-shrink: 0; max-width: 25%; margin-left: 0%;"
             >
@@ -415,7 +421,7 @@ exports[`<InterventionPage /> Should render and match the snapshot with interven
               </div>
             </div>
             <div
-              align="flex-start"
+              align="start"
               class="c4"
               style="box-sizing: border-box; min-height: 1px; position: relative; padding-left: 15px; padding-right: 15px; width: 75%; flex-basis: 75%; flex-grow: 0; flex-shrink: 0; max-width: 75%; margin-left: 0%;"
             >
@@ -719,6 +725,9 @@ exports[`<InterventionPage /> Should render and match the snapshot with loader 1
   -webkit-flex-direction: column;
   -ms-flex-direction: column;
   flex-direction: column;
+  -webkit-align-content: flex-start;
+  -ms-flex-line-pack: start;
+  align-content: flex-start;
   -webkit-align-items: flex-start;
   -webkit-box-align: flex-start;
   -ms-flex-align: flex-start;
@@ -733,6 +742,9 @@ exports[`<InterventionPage /> Should render and match the snapshot with loader 1
   -webkit-flex-direction: column;
   -ms-flex-direction: column;
   flex-direction: column;
+  -webkit-align-content: flex-end;
+  -ms-flex-line-pack: end;
+  align-content: flex-end;
   -webkit-align-items: flex-end;
   -webkit-box-align: flex-end;
   -ms-flex-align: flex-end;
@@ -1029,7 +1041,7 @@ exports[`<InterventionPage /> Should render and match the snapshot with loader 1
         style="display: flex; flex-wrap: wrap; flex-grow: 0; flex-shrink: 0; align-items: normal; justify-content: flex-start; margin: 0px;"
       >
         <div
-          align="flex-start"
+          align="start"
           class="c4"
           style="box-sizing: border-box; min-height: 1px; position: relative; width: 100%; flex-basis: 0px; flex-grow: 1; flex-shrink: 0; max-width: 100%; margin-left: 0%; padding: 8px;"
         >
@@ -1037,7 +1049,7 @@ exports[`<InterventionPage /> Should render and match the snapshot with loader 1
             style="margin-left: -15px; margin-right: -15px; display: flex; flex-wrap: wrap; flex-grow: 0; flex-shrink: 0; align-items: center; justify-content: flex-start;"
           >
             <div
-              align="flex-start"
+              align="start"
               class="c4"
               style="box-sizing: border-box; min-height: 1px; position: relative; padding-left: 15px; padding-right: 15px; width: 25%; flex-basis: 25%; flex-grow: 0; flex-shrink: 0; max-width: 25%; margin-left: 0%;"
             >
@@ -1053,7 +1065,7 @@ exports[`<InterventionPage /> Should render and match the snapshot with loader 1
               </div>
             </div>
             <div
-              align="flex-start"
+              align="start"
               class="c4"
               style="box-sizing: border-box; min-height: 1px; position: relative; padding-left: 15px; padding-right: 15px; width: 75%; flex-basis: 75%; flex-grow: 0; flex-shrink: 0; max-width: 75%; margin-left: 0%;"
             >
@@ -1357,6 +1369,9 @@ exports[`<InterventionPage /> Should render and match the snapshot without inter
   -webkit-flex-direction: column;
   -ms-flex-direction: column;
   flex-direction: column;
+  -webkit-align-content: flex-start;
+  -ms-flex-line-pack: start;
+  align-content: flex-start;
   -webkit-align-items: flex-start;
   -webkit-box-align: flex-start;
   -ms-flex-align: flex-start;
@@ -1371,6 +1386,9 @@ exports[`<InterventionPage /> Should render and match the snapshot without inter
   -webkit-flex-direction: column;
   -ms-flex-direction: column;
   flex-direction: column;
+  -webkit-align-content: flex-end;
+  -ms-flex-line-pack: end;
+  align-content: flex-end;
   -webkit-align-items: flex-end;
   -webkit-box-align: flex-end;
   -ms-flex-align: flex-end;
@@ -1667,7 +1685,7 @@ exports[`<InterventionPage /> Should render and match the snapshot without inter
         style="display: flex; flex-wrap: wrap; flex-grow: 0; flex-shrink: 0; align-items: normal; justify-content: flex-start; margin: 0px;"
       >
         <div
-          align="flex-start"
+          align="start"
           class="c4"
           style="box-sizing: border-box; min-height: 1px; position: relative; width: 100%; flex-basis: 0px; flex-grow: 1; flex-shrink: 0; max-width: 100%; margin-left: 0%; padding: 8px;"
         >
@@ -1675,7 +1693,7 @@ exports[`<InterventionPage /> Should render and match the snapshot without inter
             style="margin-left: -15px; margin-right: -15px; display: flex; flex-wrap: wrap; flex-grow: 0; flex-shrink: 0; align-items: center; justify-content: flex-start;"
           >
             <div
-              align="flex-start"
+              align="start"
               class="c4"
               style="box-sizing: border-box; min-height: 1px; position: relative; padding-left: 15px; padding-right: 15px; width: 25%; flex-basis: 25%; flex-grow: 0; flex-shrink: 0; max-width: 25%; margin-left: 0%;"
             >
@@ -1691,7 +1709,7 @@ exports[`<InterventionPage /> Should render and match the snapshot without inter
               </div>
             </div>
             <div
-              align="flex-start"
+              align="start"
               class="c4"
               style="box-sizing: border-box; min-height: 1px; position: relative; padding-left: 15px; padding-right: 15px; width: 75%; flex-basis: 75%; flex-grow: 0; flex-shrink: 0; max-width: 75%; margin-left: 0%;"
             >

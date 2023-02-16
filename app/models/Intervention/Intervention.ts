@@ -1,5 +1,6 @@
 import { CharacterType } from 'models/Character';
 import { AppFile } from 'models/File';
+import { Session } from 'models/Session';
 
 import { InterventionInvite } from './InterventionInvite';
 
@@ -71,4 +72,5 @@ export interface Intervention {
   currentNarrator: CharacterType;
   conversationsPresent: boolean;
   conversationsTranscript: Nullable<AppFile>;
+  sessions: Session[];
 }

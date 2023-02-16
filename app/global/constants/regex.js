@@ -32,3 +32,5 @@ export const currencyRegex = /^[0-9]+\.?[0-9]{0,2}$/;
 export const previewRegex =
   /(.*)\/interventions($|\/.*)\/sessions($|\/.*)\/preview($|\/.*)/;
 export const guestLogInRegex = /(.*)preview_session_users($|\/.*)/;
+
+export const unreservedURLCharactersRegex = /^[A-Za-z0-9-_.~]*$/;

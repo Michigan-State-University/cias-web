@@ -1,5 +1,5 @@
 import axios from 'axios';
-import { put, takeLatest, call } from 'redux-saga/effects';
+import { put, call, takeEvery } from 'redux-saga/effects';
 import { toast } from 'react-toastify';
 
 import globalMessages from 'global/i18n/globalMessages';
@@ -12,22 +12,13 @@ import { editInterventionError, editInterventionSuccess } from '../actions';
 import {
   EDIT_INTERVENTION_REQUEST,
   EDIT_INTERVENTION_ERROR,
+  EDIT_INTERVENTION_SUCCESS,
 } from '../constants';
 
 export function* editIntervention({ payload: { intervention, extraOptions } }) {
   const requestURL = `v1/interventions/${intervention.id}`;
-  const narratorChangeURL = `${requestURL}/change_narrator`;
 
   try {
-    if (extraOptions?.hasNarratorChanged) {
-      yield call(axios.post, narratorChangeURL, {
-        narrator: {
-          name: intervention.currentNarrator,
-          replaced_animations: extraOptions.replacementAnimations,
-        },
-      });
-    }
-
     const {
       data: { data },
     } = yield call(
@@ -41,11 +32,17 @@ export function* editIntervention({ payload: { intervention, extraOptions } }) {
     if (extraOptions?.onSuccess) {
       extraOptions.onSuccess();
     }
+    if (extraOptions?.successMessage) {
+      yield call(toast.success, extraOptions?.successMessage, {
+        toastId: EDIT_INTERVENTION_SUCCESS,
+      });
+    }
   } catch (error) {
     const errorFlag = getErrorFlag(error);
     yield call(
       toast.error,
-      formatMessage(globalMessages[errorFlag || 'editInterventionError']),
+      error?.response?.data?.message ||
+        formatMessage(globalMessages[errorFlag || 'editInterventionError']),
       {
         toastId: EDIT_INTERVENTION_ERROR,
       },
@@ -53,6 +50,7 @@ export function* editIntervention({ payload: { intervention, extraOptions } }) {
     yield put(editInterventionError(error));
   }
 }
+
 export default function* editInterventionSaga() {
-  yield takeLatest(EDIT_INTERVENTION_REQUEST, editIntervention);
+  yield takeEvery(EDIT_INTERVENTION_REQUEST, editIntervention);
 }

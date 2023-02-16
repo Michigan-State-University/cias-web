@@ -86,6 +86,12 @@ import {
   EXPORT_INTERVENTION_REQUEST,
   EXPORT_INTERVENTION_SUCCESS,
   EXPORT_INTERVENTION_ERROR,
+  CHANGE_INTERVENTION_NARRATOR_REQUEST,
+  CHANGE_INTERVENTION_NARRATOR_SUCCESS,
+  CHANGE_INTERVENTION_NARRATOR_ERROR,
+  EDIT_SHORT_LINKS_REQUEST,
+  EDIT_SHORT_LINKS_SUCCESS,
+  EDIT_SHORT_LINKS_ERROR,
 } from './constants';
 
 export const initialState = {
@@ -120,6 +126,8 @@ export const initialState = {
     addAttachmentsLoading: false,
     generateConversationsTranscript: false,
     exportInterventionLoading: false,
+    changeInterventionNarrator: false,
+    editShortLinks: false,
   },
   errors: {
     fetchInterventionError: null,
@@ -132,6 +140,9 @@ export const initialState = {
     fetchInterventionInvites: null,
     generateConversationsTranscript: null,
     exportInterventionError: null,
+    editIntervention: null,
+    changeInterventionNarrator: null,
+    editShortLinks: null,
   },
 };
 
@@ -172,6 +183,7 @@ export const interventionReducer = (state = initialState, action) =>
         break;
       case EDIT_INTERVENTION_REQUEST:
         draft.loaders.editIntervention = true;
+        draft.errors.editIntervention = null;
         draft.intervention = {
           ...state.intervention,
           ...action.payload.intervention,
@@ -184,6 +196,7 @@ export const interventionReducer = (state = initialState, action) =>
       }
       case EDIT_INTERVENTION_ERROR:
         draft.loaders.editIntervention = false;
+        draft.errors.editIntervention = action.payload.error;
         draft.intervention = cloneDeep(state.cache.intervention);
         break;
 
@@ -535,6 +548,44 @@ export const interventionReducer = (state = initialState, action) =>
         draft.loaders.exportInterventionLoading = false;
         draft.errors.exportInterventionError = action.payload.error;
         break;
+
+      case CHANGE_INTERVENTION_NARRATOR_REQUEST: {
+        draft.loaders.changeInterventionNarrator = true;
+        draft.errors.changeInterventionNarrator = null;
+        draft.intervention.currentNarrator = action.payload.name;
+        break;
+      }
+      case CHANGE_INTERVENTION_NARRATOR_SUCCESS: {
+        draft.loaders.changeInterventionNarrator = false;
+        draft.cache.intervention.currentNarrator =
+          state.intervention.currentNarrator;
+        break;
+      }
+      case CHANGE_INTERVENTION_NARRATOR_ERROR: {
+        draft.loaders.changeInterventionNarrator = false;
+        draft.errors.changeInterventionNarrator = action.payload.error;
+        draft.intervention.currentNarrator =
+          state.cache.intervention.currentNarrator;
+        break;
+      }
+
+      case EDIT_SHORT_LINKS_REQUEST: {
+        draft.loaders.editShortLinks = true;
+        draft.errors.editShortLinks = null;
+        draft.intervention.shortLinks = action.payload.shortLinks;
+        break;
+      }
+      case EDIT_SHORT_LINKS_SUCCESS: {
+        draft.loaders.editShortLinks = false;
+        draft.cache.intervention.shortLinks = state.intervention.shortLinks;
+        break;
+      }
+      case EDIT_SHORT_LINKS_ERROR: {
+        draft.loaders.editShortLinks = false;
+        draft.errors.editShortLinks = action.payload.error;
+        draft.intervention.shortLinks = state.cache.intervention.shortLinks;
+        break;
+      }
     }
   });
 
