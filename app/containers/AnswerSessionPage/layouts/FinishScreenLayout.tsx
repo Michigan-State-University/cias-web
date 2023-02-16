@@ -17,7 +17,7 @@ import messages from './messages';
 import { makeSelectUserSession } from '../selectors';
 import { getSessionMapUserPreviewUrl, getNextSessionUrl } from '../utils';
 import {
-  createUserSessionRequest,
+  fetchOrCreateUserSessionRequest,
   resetReducer as resetAnswerSessionPageReducer,
 } from '../actions';
 
@@ -27,11 +27,10 @@ type Props = {
 };
 
 const FinishScreenLayout = ({ formatMessage, question }: Props) => {
-  // If there is no state in LocalStorageService it means that that is anonymous user with anyone in the link
-  const isNotLoggedInUser = !LocalStorageService.getState();
+  const isGuestUser = !LocalStorageService.getState();
 
   useEffect(() => {
-    if (isNotLoggedInUser) {
+    if (isGuestUser) {
       LocalStorageService.clearHeaders();
     }
   }, []);
@@ -43,7 +42,6 @@ const FinishScreenLayout = ({ formatMessage, question }: Props) => {
     id: userSessionId,
     interventionType,
     sharedTo,
-    sessionId,
     userInterventionId,
   } = userSession;
   // @ts-ignore
@@ -77,14 +75,17 @@ const FinishScreenLayout = ({ formatMessage, question }: Props) => {
 
   const reloadPage = () => {
     dispatch(resetAuthReducer());
-    dispatch(createUserSessionRequest(sessionId));
   };
 
   const clearUserSession = () => {
     dispatch(resetAnswerSessionPageReducer());
   };
 
-  if (isNotLoggedInUser) {
+  const goToNextSession = () => {
+    dispatch(fetchOrCreateUserSessionRequest(nextSessionId));
+  };
+
+  if (isGuestUser) {
     return (
       <Row mt={50} justify="center" width="100%">
         <Button onClick={reloadPage} px={20} width="auto">
@@ -105,7 +106,7 @@ const FinishScreenLayout = ({ formatMessage, question }: Props) => {
         </StyledLink>
         {nextSessionId && (
           <GhostLink to={nextSessionUrl}>
-            <Button px={20} width="100%">
+            <Button px={20} width="100%" onClick={goToNextSession}>
               {formatMessage(messages.goToNextModule)}
             </Button>
           </GhostLink>

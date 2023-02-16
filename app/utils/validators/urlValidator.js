@@ -1,5 +1,10 @@
 import * as Yup from 'yup';
 
+import { formatMessage } from 'utils/intlOutsideReact';
+
+import { unreservedURLCharactersRegex } from 'global/constants';
+import globalMessages from 'global/i18n/globalMessages';
+
 const urlSchema = Yup.string().url();
 
 export const urlValidator = (target) => {
@@ -13,3 +18,9 @@ export const urlValidator = (target) => {
     return urlSchema.isValidSync(`http://${target}`);
   }
 };
+
+export const unreservedURLCharactersSchema = Yup.string().matches(
+  unreservedURLCharactersRegex,
+  /* @ts-ignore */
+  formatMessage(globalMessages.validators.unreservedURLCharacters),
+);

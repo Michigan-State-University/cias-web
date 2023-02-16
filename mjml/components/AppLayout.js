@@ -3,7 +3,7 @@ import { registerDependencies } from 'mjml-validator'
 import { BodyComponent } from 'mjml-core'
 import flow from 'lodash/flow'
 
-import { LOGO_URL, TEXT } from '../utils/constants'
+import { LOGO_URL_BUILD, LOGO_URL_WATCH, TEXT } from '../utils/constants'
 
 registerDependencies({
   // Tell the validator which tags are allowed as our component's children
@@ -15,6 +15,7 @@ export default class AppLayout extends BodyComponent {
   constructor(initialDatas = {}) {
     super(initialDatas)
     this.cssId = Math.floor(Math.random() * 9) + 1
+    this.logoSrc = process.env.TASK === 'watch' ? LOGO_URL_WATCH() : LOGO_URL_BUILD()
   }
 
   // Tells the validator which attributes are allowed for app-layout
@@ -87,7 +88,7 @@ export default class AppLayout extends BodyComponent {
         <mj-section full-width="full-width">
           <mj-column>
             <! -- LOGO START -->
-            <mj-image width="66px" max-width="100%" src="${LOGO_URL}" />
+            <mj-image width="66px" max-width="100%" alt="CIAS Logo" src="${this.logoSrc}" />
             <! -- LOGO END -->
           </mj-column>
         </mj-section>
@@ -111,8 +112,8 @@ export default class AppLayout extends BodyComponent {
         </mj-section>
 
         ${
-          description &&
-          `
+      description &&
+      `
             <mj-section padding="4px 0px 0px 0px">
               <mj-column>
                 <mj-text align="center" font-size="14px" line-height="24px">
@@ -123,11 +124,11 @@ export default class AppLayout extends BodyComponent {
               </mj-column>
             </mj-section>
           `
-        }
+    }
         ${
-          buttonUrl &&
-          buttonText &&
-          `<mj-section padding="32px 0px 0px 0px">
+      buttonUrl &&
+      buttonText &&
+      `<mj-section padding="32px 0px 0px 0px">
             <mj-column>
               <mj-button border="1px solid ${buttonColor}" border-radius="100px" background-color="${buttonColor}" color="${buttonTextColor}" font-size="16px" font-weight="700" href="${buttonUrl}">
               <! -- BUTTON START -->
@@ -136,10 +137,10 @@ export default class AppLayout extends BodyComponent {
               </mj-button>
             </mj-column>
           </mj-section>`
-        }
+    }
         ${
-          otherInformation &&
-          `
+      otherInformation &&
+      `
           <mj-section>
             <mj-column>
               <mj-divider border-width="1px" border-color="#E9F1FB" padding="12px 0 22px 0"/>
@@ -151,10 +152,10 @@ export default class AppLayout extends BodyComponent {
             </mj-column>
           </mj-section>
         `
-        }
+    }
         ${
-          hasFootNote &&
-          `<mj-section>
+      hasFootNote &&
+      `<mj-section>
             <mj-column>
               <mj-text align="center" font-size="12px" color="#6D7485" line-height="20px">
               <! -- FOOTNOTE START -->
@@ -163,7 +164,7 @@ export default class AppLayout extends BodyComponent {
               </mj-text>
             </mj-column>
           </mj-section>`
-        }
+    }
       </mj-wrapper>`)
   }
 }

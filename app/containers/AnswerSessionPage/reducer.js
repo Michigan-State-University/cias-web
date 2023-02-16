@@ -16,7 +16,6 @@ import {
   CHANGE_PREVIEW_MODE,
   CHANGE_IS_ANIMATING,
   SET_FEEDBACK_SCREEN_SETTINGS,
-  RESET_ANSWERS,
   CREATE_USER_SESSION_REQUEST,
   CREATE_USER_SESSION_SUCCESS,
   CREATE_USER_SESSION_FAILURE,
@@ -28,6 +27,12 @@ import {
   SET_CURRENT_BLOCK_INDEX,
   SET_PARTICIPANT_SESSION_SETTINGS,
   SET_TRANSITIONAL_USER_SESSION_ID,
+  FETCH_USER_SESSION_REQUEST,
+  FETCH_USER_SESSION_SUCCESS,
+  FETCH_USER_SESSION_ERROR,
+  FETCH_OR_CREATE_USER_SESSION_REQUEST,
+  FETCH_OR_CREATE_USER_SESSION_SUCCESS,
+  FETCH_OR_CREATE_USER_SESSION_ERROR,
 } from './constants';
 
 const getEmptyFeedbackScreenSettings = () => ({
@@ -36,7 +41,7 @@ const getEmptyFeedbackScreenSettings = () => ({
 });
 
 export const initialState = {
-  questionLoading: true,
+  questionLoading: false,
   questionError: '',
   sessionQuestions: [],
   questionIndex: 0,
@@ -52,8 +57,9 @@ export const initialState = {
   phoneticUrl: null,
   phoneticLoading: false,
   userSession: null,
-  userSessionLoading: true,
-  nextQuestionLoading: true,
+  userSessionLoading: false,
+  fetchUserSessionError: null,
+  nextQuestionLoading: false,
   nextQuestionError: null,
   currentQuestion: null,
   currentBlockIndex: -1,
@@ -110,11 +116,6 @@ const AnswerSessionPageReducer = (state = initialState, { payload, type }) =>
       case CHANGE_PREVIEW_MODE:
         draft.previewMode = payload.previewMode;
         break;
-      case RESET_ANSWERS:
-        draft.answers = initialState.answers;
-        draft.questionIndex = 0;
-        draft.interventionStarted = false;
-        break;
       case CHANGE_IS_ANIMATING:
         draft.isAnimationOngoing = payload.isAnimating;
         break;
@@ -122,18 +123,36 @@ const AnswerSessionPageReducer = (state = initialState, { payload, type }) =>
         draft.feedbackScreenSettings[payload.setting] = payload.value;
         break;
 
+      case FETCH_USER_SESSION_REQUEST:
+        draft.userSessionLoading = true;
+        draft.fetchUserSessionError = null;
+        break;
+
+      case FETCH_USER_SESSION_SUCCESS:
+        draft.userSessionLoading = false;
+        draft.userSession = payload.userSession;
+        break;
+
+      case FETCH_USER_SESSION_ERROR:
+        draft.userSessionLoading = false;
+        draft.fetchUserSessionError = payload.error;
+        break;
+
       case CREATE_USER_SESSION_REQUEST:
+      case FETCH_OR_CREATE_USER_SESSION_REQUEST:
         draft.userSessionLoading = true;
         draft.questionError = null;
         break;
 
       case CREATE_USER_SESSION_SUCCESS:
+      case FETCH_OR_CREATE_USER_SESSION_SUCCESS:
         draft.userSessionLoading = false;
         draft.userSession = payload.userSession;
         draft.questionError = null;
         break;
 
       case CREATE_USER_SESSION_FAILURE:
+      case FETCH_OR_CREATE_USER_SESSION_ERROR:
         draft.userSessionLoading = false;
         draft.questionError = payload;
         break;

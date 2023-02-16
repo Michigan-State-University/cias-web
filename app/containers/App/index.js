@@ -67,6 +67,7 @@ import SuperadminConsolePage from 'containers/SuperadminConsolePage/Loadable';
 import InboxPage from 'containers/InboxPage/Loadable';
 import ArchivePage from 'containers/ArchivePage/Loadable';
 import UserInterventionPage from 'containers/UserInterventionPage/Loadable';
+import VerifyShortLinkPage from 'containers/VerifyShortLinkPage/Loadable';
 import ChatWidget from 'containers/ChatWidget';
 import NavigatorAvailabilityModal from 'containers/NavigatorAvailabilityModal';
 
@@ -540,6 +541,7 @@ export function App({ user, fetchSelfDetails }) {
           component={ForbiddenPage}
           allowedRoles={AllRoles}
         />
+        <AppRoute exact path="/int/:name" component={VerifyShortLinkPage} />
         <AppRoute exact path="/not-found-page" component={NotFoundPage} />
         <AppRoute path="*">
           <Redirect to="/not-found-page" />
