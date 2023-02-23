@@ -75,6 +75,12 @@ import {
   EXPORT_INTERVENTION_REQUEST,
   EXPORT_INTERVENTION_SUCCESS,
   EXPORT_INTERVENTION_ERROR,
+  CHANGE_INTERVENTION_NARRATOR_REQUEST,
+  CHANGE_INTERVENTION_NARRATOR_SUCCESS,
+  CHANGE_INTERVENTION_NARRATOR_ERROR,
+  EDIT_SHORT_LINKS_REQUEST,
+  EDIT_SHORT_LINKS_ERROR,
+  EDIT_SHORT_LINKS_SUCCESS,
 } from './constants';
 
 export const fetchInterventionRequest = (id) =>
@@ -293,3 +299,22 @@ export const exportInterventionSuccess = () =>
   actionBuilder(EXPORT_INTERVENTION_SUCCESS);
 export const exportInterventionError = (error) =>
   actionBuilder(EXPORT_INTERVENTION_ERROR, { error });
+
+export const changeInterventionNarratorRequest = (name, replacedAnimations) =>
+  actionBuilder(CHANGE_INTERVENTION_NARRATOR_REQUEST, {
+    name,
+    replacedAnimations,
+  });
+export const changeInterventionNarratorSuccess = () =>
+  actionBuilder(CHANGE_INTERVENTION_NARRATOR_SUCCESS, {});
+export const changeInterventionNarratorError = (error) =>
+  actionBuilder(CHANGE_INTERVENTION_NARRATOR_ERROR, { error });
+
+export const editShortLinksRequest = (shortLinks) =>
+  actionBuilder(EDIT_SHORT_LINKS_REQUEST, {
+    shortLinks,
+  });
+export const editShortLinksSuccess = () =>
+  actionBuilder(EDIT_SHORT_LINKS_SUCCESS);
+export const editShortLinksError = (error) =>
+  actionBuilder(EDIT_SHORT_LINKS_ERROR, { error });

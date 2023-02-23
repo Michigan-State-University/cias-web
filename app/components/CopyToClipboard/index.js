@@ -27,10 +27,13 @@ const CopyToClipboard = ({
   children,
   textProps,
   renderAsButton,
+  rednerAsCustomComponent,
   buttonDisabled,
   disabled,
   icon,
   iconAlt,
+  popupVerticalPosition,
+  popupHorizontalPosition,
   ...restProps
 }) => {
   const [copied, setCopied] = useState(false);
@@ -75,23 +78,27 @@ const CopyToClipboard = ({
         popupContent={formatMessage(messages.copied)}
         controlled
         visible={copied}
-        top
-        center
+        verticalPosition={popupVerticalPosition}
+        horizontalPosition={popupHorizontalPosition}
       >
         {renderCopyToClipboard(
-          <Row align="center">
-            {icon && (
-              <Icon
-                src={icon}
-                alt={iconAlt}
-                mr={10}
-                fill={textProps[disabled ? 'disabledColor' : 'color']}
-              />
-            )}
-            <Text disabled={disabled} {...textProps}>
-              {children}
-            </Text>
-          </Row>,
+          rednerAsCustomComponent ? (
+            children
+          ) : (
+            <Row align="center">
+              {icon && (
+                <Icon
+                  src={icon}
+                  alt={iconAlt}
+                  mr={10}
+                  fill={textProps[disabled ? 'disabledColor' : 'color']}
+                />
+              )}
+              <Text disabled={disabled} {...textProps}>
+                {children}
+              </Text>
+            </Row>
+          ),
         )}
       </Popup>
     </Box>
@@ -106,8 +113,11 @@ CopyToClipboard.propTypes = {
   buttonDisabled: PropTypes.bool,
   disabled: PropTypes.bool,
   renderAsButton: PropTypes.bool,
+  rednerAsCustomComponent: PropTypes.bool,
   icon: PropTypes.string,
   iconAlt: PropTypes.string,
+  popupVerticalPosition: PropTypes.oneOf(['top', 'center', 'bottom']),
+  popupHorizontalPosition: PropTypes.oneOf(['left', 'center', 'right']),
 };
 
 CopyToClipboard.defaultProps = {
@@ -115,6 +125,8 @@ CopyToClipboard.defaultProps = {
     color: themeColors.secondary,
     fontWeight: 'bold',
   },
+  popupVerticalPosition: 'top',
+  popupHorizontalPosition: 'center',
 };
 
 export default injectIntl(CopyToClipboard);

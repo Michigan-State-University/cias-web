@@ -1,6 +1,6 @@
 import { CharacterType } from 'models/Character';
 import { Formula } from 'models/Formula';
-import { InterventionInvite } from 'models/Intervention';
+import { InterventionInvite } from 'models/InterventionInvite';
 
 import { SessionTargetType } from './SessionTargetType';
 

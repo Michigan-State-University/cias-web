@@ -24,19 +24,25 @@ import {
   CREATE_USER_SESSION_REQUEST,
   NEXT_QUESTION_REQUEST,
   SAVE_QUICK_EXIT_EVENT_REQUEST,
+  FETCH_USER_SESSION_REQUEST,
+  FETCH_OR_CREATE_USER_SESSION_REQUEST,
 } from './constants';
 import {
   submitAnswerSuccess,
   submitAnswerFailure,
-  resetAnswers,
   createUserSessionSuccess,
   createUserSessionFailure,
   nextQuestionSuccess,
   nextQuestionFailure,
   nextQuestionRequest,
-  createUserSessionRequest,
   changeUserSessionId,
   setTransitionalUserSessionId,
+  startSession,
+  fetchUserSessionSuccess,
+  fetchUserSessionError,
+  fetchOrCreateUserSessionSuccess,
+  fetchOrCreateUserSessionError,
+  resetReducer,
 } from './actions';
 import { makeSelectAnswers, makeSelectCurrentQuestion } from './selectors';
 import messages from './messages';
@@ -148,42 +154,87 @@ function* redirectToPreview({
   );
 }
 
+function* fetchUserSession({ payload: { sessionId } }) {
+  const {
+    query: { cid: healthClinicId },
+  } = yield select(makeSelectLocation());
+  const requestUrl = `/v1/user_sessions`;
+  const searchParams = new URLSearchParams();
+
+  searchParams.set('session_id', sessionId);
+  if (healthClinicId) {
+    searchParams.set('health_clinic_id', healthClinicId);
+  }
+
+  try {
+    const { data } = yield axios.get(`${requestUrl}?${searchParams}`);
+    const userSession = jsonApiToObject(data, 'userSession');
+    yield put(fetchUserSessionSuccess(userSession));
+  } catch (error) {
+    yield put(fetchUserSessionError(error));
+  }
+}
+
 function* createUserSession({ payload: { sessionId } }) {
-  const { query } = yield select(makeSelectLocation());
+  const {
+    query: { cid: healthClinicId },
+  } = yield select(makeSelectLocation());
   const requestUrl = `/v1/user_sessions`;
 
   try {
     const { data } = yield axios.post(
       requestUrl,
       objectToSnakeCase({
-        userSession: { sessionId, health_clinic_id: query.cid },
+        userSession: { sessionId, healthClinicId },
       }),
     );
+    const userSession = jsonApiToObject(data, 'userSession');
 
-    const mappedData = jsonApiToObject(data, 'userSession');
-
-    yield put(createUserSessionSuccess(mappedData));
+    yield put(createUserSessionSuccess(userSession));
     yield put(resetPhoneNumberPreview());
+    yield put(startSession());
   } catch (error) {
     yield put(createUserSessionFailure(error));
+  }
+}
+
+function* fetchOrCreateUserSession({ payload: { sessionId } }) {
+  const {
+    query: { cid: healthClinicId },
+  } = yield select(makeSelectLocation());
+  const requestUrl = `/v1/fetch_or_create_user_sessions`;
+
+  try {
+    const { data } = yield axios.post(
+      requestUrl,
+      objectToSnakeCase({
+        userSession: { sessionId, healthClinicId },
+      }),
+    );
+    const userSession = jsonApiToObject(data, 'userSession');
+
+    yield put(fetchOrCreateUserSessionSuccess(userSession));
+    yield put(resetPhoneNumberPreview());
+    yield put(startSession());
+  } catch (error) {
+    yield put(fetchOrCreateUserSessionError(error));
   }
 }
 
 function* resetSession({ payload: { sessionId } }) {
   yield call(LocalStorageService.clearGuestHeaders);
   yield call(logInGuest, { payload: { sessionId } });
-  yield put(resetAnswers());
+  yield put(resetReducer());
   yield call(resetPreviewUrl, sessionId);
 }
 
-function* resetPreviewUrl(sessionId) {
+function* resetPreviewUrl() {
   const location = yield select(makeSelectLocation());
   const regex = /^.*\/preview\//;
 
   const url = location.pathname.match(regex)?.pop();
 
   if (url) yield put(push(url.slice(0, url.length - 1)));
-  else yield put(createUserSessionRequest(sessionId));
 }
 
 function* saveQuickExitEvent({ payload: { userSessionId, isPreview } }) {
@@ -208,7 +259,12 @@ function* saveQuickExitEvent({ payload: { userSessionId, isPreview } }) {
 export default function* AnswerSessionPageSaga() {
   yield takeLatest(SUBMIT_ANSWER_REQUEST, submitAnswersAsync);
   yield takeLatest(RESET_SESSION, resetSession);
+  yield takeLatest(FETCH_USER_SESSION_REQUEST, fetchUserSession);
   yield takeLatest(CREATE_USER_SESSION_REQUEST, createUserSession);
+  yield takeLatest(
+    FETCH_OR_CREATE_USER_SESSION_REQUEST,
+    fetchOrCreateUserSession,
+  );
   yield takeLatest(NEXT_QUESTION_REQUEST, nextQuestion);
   yield takeLatest(SAVE_QUICK_EXIT_EVENT_REQUEST, saveQuickExitEvent);
 }

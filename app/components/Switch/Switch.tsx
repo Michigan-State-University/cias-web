@@ -1,7 +1,13 @@
-import React, { ChangeEvent, memo, ReactNode } from 'react';
+import React, {
+  AriaAttributes,
+  ChangeEvent,
+  ChangeEventHandler,
+  memo,
+  ReactNode,
+} from 'react';
 
 import Row from 'components/Row';
-import { LayoutProps } from 'components/BaseComponentStyles';
+import { LayoutProps, MarginProps } from 'components/BaseComponentStyles';
 
 import SwitchLabelWrapper from './SwitchLabelWrapper';
 
@@ -14,16 +20,33 @@ import {
 } from './styled';
 import { LabelPosition } from './constants';
 
-type Props = {
-  checked: boolean;
+type NativeChangeHandlerProps = {
+  onToggle?: undefined;
+  onChange: ChangeEventHandler<HTMLInputElement>;
+  nativeChangeHandler: true;
+};
+
+type CustomChangeHandlerProps = {
+  onToggle: (value: boolean, event: ChangeEvent<HTMLInputElement>) => void;
+  onChange?: undefined;
+  nativeChangeHandler?: false;
+};
+
+type ChangeHandlerProps = NativeChangeHandlerProps | CustomChangeHandlerProps;
+
+export type Props = {
+  checked?: boolean;
   children?: ReactNode;
   className?: string;
   disabled?: boolean;
   id: string;
   labelPosition?: LabelPosition;
   labelOffset?: number;
-  onToggle: (value: boolean, event: ChangeEvent<HTMLInputElement>) => void;
-} & LayoutProps;
+  onBlur?: HTMLInputElement['onblur'];
+  ariaLabel?: AriaAttributes['aria-label'];
+} & ChangeHandlerProps &
+  LayoutProps &
+  MarginProps;
 
 const Switch = ({
   checked = false,
@@ -34,9 +57,13 @@ const Switch = ({
   labelPosition = LabelPosition.Left,
   labelOffset,
   onToggle,
+  onChange,
+  onBlur,
+  nativeChangeHandler,
+  ariaLabel,
   ...props
 }: Props): JSX.Element => {
-  const handleOnChange = (event: ChangeEvent<HTMLInputElement>) => {
+  const handleOnChange: ChangeEventHandler<HTMLInputElement> = (event) => {
     const {
       target: { checked: newValue },
     } = event;
@@ -50,9 +77,11 @@ const Switch = ({
         id={id}
         data-cy="branching-intervention-toggle"
         data-testid="switch-input"
+        aria-label={ariaLabel}
         disabled={disabled}
         checked={checked}
-        onChange={handleOnChange}
+        onChange={nativeChangeHandler ? onChange : handleOnChange}
+        onBlur={onBlur}
       />
 
       <StyledLabel htmlFor={id}>

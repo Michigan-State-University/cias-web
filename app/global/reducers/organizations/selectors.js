@@ -29,6 +29,18 @@ export const makeSelectOrganizationsError = () =>
     (substate) => substate.errors.fetchOrganizations,
   );
 
+export const makeSelectOrganizationLoader = (name) =>
+  createSelector(
+    selectOrganizationsState,
+    (substate) => substate.organization.loaders[name],
+  );
+
+export const makeSelectOrganizationError = (name) =>
+  createSelector(
+    selectOrganizationsState,
+    (substate) => substate.organization.errors[name],
+  );
+
 export const makeSelectNewOrganizationLoader = () =>
   createSelector(
     selectOrganizationsState,

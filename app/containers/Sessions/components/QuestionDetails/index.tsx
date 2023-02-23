@@ -156,7 +156,6 @@ const RenderQuestionDetails = ({
         <AnswerInterventionContent
           ref={animationBoundaries}
           id="quill_boundaries"
-          transparentBackground={!isTlfbGroup}
         >
           {shouldShowNarrator && (
             <QuestionNarrator

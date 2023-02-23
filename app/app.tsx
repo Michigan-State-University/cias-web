@@ -158,7 +158,6 @@ if (process.env.LOGROCKET_ENV) {
 
 const MOUNT_NODE = document.getElementById('app') || document.body;
 
-// Join both configurations when merging dev to live-chat
 configureDayjs();
 
 const render = (messages: any) => {

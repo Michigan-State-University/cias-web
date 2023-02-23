@@ -7,6 +7,10 @@
 import React from 'react';
 import 'jest-styled-components';
 import { render, waitFor } from '@testing-library/react';
+import { IntlProvider } from 'react-intl';
+
+import { DEFAULT_LOCALE } from 'i18n';
+
 import { useUrlMetadata } from 'utils/useUrlMetadata';
 
 import UrlPreview from '../index';
@@ -34,7 +38,11 @@ describe('<UrlPreview />', () => {
   });
 
   it('Should render and match the snapshot', async () => {
-    const { container } = render(<UrlPreview {...props} />);
+    const { container } = render(
+      <IntlProvider locale={DEFAULT_LOCALE}>
+        <UrlPreview {...props} />
+      </IntlProvider>,
+    );
 
     expect(container).toMatchSnapshot();
     await waitFor(() => expect(useUrlMetadata).toHaveBeenCalledTimes(1));

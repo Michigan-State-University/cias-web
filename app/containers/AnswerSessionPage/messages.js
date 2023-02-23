@@ -143,7 +143,7 @@ export default defineMessages({
   },
   fillHeader: {
     id: `${scope}.fillHeader`,
-    defaultMessage: 'Let’s fill the session',
+    defaultMessage: 'Click below to start',
   },
   narratorAlt: {
     id: `${scope}.narratorAlt`,

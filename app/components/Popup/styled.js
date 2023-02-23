@@ -5,10 +5,30 @@ export const Container = styled.div`
   position: relative;
 `;
 
-const getVerticalPosition = (right, center) => {
-  if (right) return '0';
-  if (center) return '50%';
-  return '';
+const getHorizontalPosition = (horizontalPosition) => {
+  switch (horizontalPosition) {
+    case 'right':
+      return '0';
+    case 'center':
+      return '50%';
+    case 'left':
+      return '100%';
+    default:
+      break;
+  }
+};
+
+const getVerticalPosition = (verticalPosition) => {
+  switch (verticalPosition) {
+    case 'top':
+      return 'bottom: calc(100% + 5px)';
+    case 'center':
+      return 'top: 0';
+    case 'bottom':
+      return 'top: calc(100% + 5px)';
+    default:
+      break;
+  }
 };
 
 export const PopupElement = styled.div`
@@ -20,7 +40,7 @@ export const PopupElement = styled.div`
   font-size: 12px;
   white-space: nowrap;
   z-index: ${ZIndex.POPUP};
-  ${(props) =>
-    props.top ? 'bottom: calc(100% + 5px)' : 'top: calc(100% + 5px)'};
-  right: ${({ right, center }) => getVerticalPosition(right, center)};
+  ${({ verticalPosition }) => getVerticalPosition(verticalPosition)};
+  right: ${({ horizontalPosition }) =>
+    getHorizontalPosition(horizontalPosition)};
 `;

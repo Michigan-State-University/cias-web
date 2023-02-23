@@ -1,10 +1,10 @@
 // @ts-ignore
 import styled from 'styled-components';
 
-import { elements, colors, ZIndex } from 'theme';
+import { elements, colors, ZIndex, themeColors } from 'theme';
 
 export type AnswerInterventionContentProps = {
-  transparentBackground: boolean;
+  transparentBackground?: boolean;
 };
 
 // @ts-ignore
@@ -18,8 +18,7 @@ export const AnswerInterventionContent = styled.div<AnswerInterventionContentPro
   position: relative;
   width: 100%;
   z-index: ${ZIndex.ANSWER_INTERVENTION_CONTENT};
-  ${({ transparentBackground }: AnswerInterventionContentProps) =>
-    transparentBackground ? `` : `background-color: ${colors.white}`}
+  background-color: ${themeColors.sessionBackground};
 `;
 
 // @ts-ignore

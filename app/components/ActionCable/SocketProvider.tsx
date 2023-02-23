@@ -27,7 +27,7 @@ export const SocketProvider = ({ children }: Props) => {
 
   useEffect(() => {
     if (!cableUrl) {
-      cable?.close();
+      cable?.close('logged_out');
       setCable(null);
       return;
     }

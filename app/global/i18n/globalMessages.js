@@ -331,6 +331,11 @@ export default defineMessages({
       id: `${scope}.numeric`,
       defaultMessage: 'Only numeric values are allowed',
     },
+    unreservedURLCharacters: {
+      id: `${scope}.unreservedURLCharacters`,
+      defaultMessage:
+        'This field contain only letters, numbers, hyphens [-], underscores [_], periods [.], and tildes [~]',
+    },
   },
   questionRequired: {
     id: `${scope}.questionRequired`,

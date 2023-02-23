@@ -149,7 +149,7 @@ describe('intervention reducer', () => {
   });
 
   it('EDIT_INTERVENTION_ERROR', () => {
-    const action = actionBuilder(EDIT_INTERVENTION_ERROR, {});
+    const action = actionBuilder(EDIT_INTERVENTION_ERROR, { error: null });
 
     const expectedState = cloneDeep(mockState);
     expectedState.intervention = expectedState.cache.intervention;

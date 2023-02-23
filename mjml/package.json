@@ -4,9 +4,9 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "start": "gulp watch",
-    "build": "gulp build",
-    "build2": "gulp build2",
+    "start": "TASK='watch' gulp watch",
+    "build": "TASK='build' gulp build",
+    "build2": "TASK='build' gulp build2",
     "lint": "eslint components"
   },
   "author": "",
@@ -17,6 +17,7 @@
     "@babel/preset-env": "^7.10.4",
     "@babel/register": "^7.10.4",
     "babel-eslint": "^10.1.0",
+    "dotenv": "^16.0.3",
     "eslint": "^7.4.0",
     "eslint-config-airbnb-base": "^14.2.0",
     "eslint-plugin-import": "^2.22.0",

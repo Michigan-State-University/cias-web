@@ -24,6 +24,8 @@ import resendInterventionInviteSaga from './resendInterventionInvite';
 import fetchInterventionInvitesSaga from './fetchInterventionInvites';
 import generateConversationsTranscriptSaga from './generateConversationsTranscript';
 import exportInterventionSaga from './exportIntervention';
+import changeInterventionNarratorSaga from './changeInterventionNarrator';
+import editShortLinksSaga from './editShortLinks';
 
 export {
   createInterventionSaga,
@@ -51,6 +53,8 @@ export {
   fetchInterventionInvitesSaga,
   generateConversationsTranscriptSaga,
   exportInterventionSaga,
+  changeInterventionNarratorSaga,
+  editShortLinksSaga,
 };
 
 export default function* allInterventionSagas() {
@@ -78,6 +82,8 @@ export default function* allInterventionSagas() {
     fetchInterventionInvitesSaga(),
     generateConversationsTranscriptSaga(),
     exportInterventionSaga(),
+    changeInterventionNarratorSaga(),
+    editShortLinksSaga(),
   ]);
 }
 
