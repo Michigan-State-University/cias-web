@@ -107,6 +107,11 @@ const LocalStorageService = (() => {
     clearGuestHeaders();
   };
 
+  const isAuthenticated = () => {
+    const headers = getHeaders();
+    return Boolean(headers['Access-Token'] && headers.Client && headers.Uid);
+  };
+
   return {
     setToken,
     setUid,
@@ -125,6 +130,7 @@ const LocalStorageService = (() => {
     getItem,
     updateItem,
     clearUserData,
+    isAuthenticated,
   };
 })();
 

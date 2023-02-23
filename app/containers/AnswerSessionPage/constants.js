@@ -17,7 +17,6 @@ export const SELECT_ANSWER = 'app/AnswerSessionPage/SELECT_ANSWER';
 export const START_SESSION = 'app/AnswerSessionPage/START_SESSION';
 
 export const RESET_SESSION = 'app/AnswerSessionPage/RESET_SESSION';
-export const RESET_ANSWERS = 'app/AnswerSessionPage/RESET_ANSWERS';
 export const REDIRECT_TO_PREVIEW = 'app/AnswerSessionPage/REDIRECT_TO_PREVIEW';
 
 export const NUMBER_VALIDATION_ERROR =
@@ -40,21 +39,31 @@ export const NO_BRANCHING_TARGET = 'NoBranchingTarget';
 export const RANDOMIZATION_MISS_MATCH = 'RandomizationMissMatch';
 export const FORBIDDEN_CAT_MH_BRANCHING = 'ForbiddenBranchingToCatMhSession';
 
+export const FETCH_USER_SESSION_REQUEST =
+  'app/AnswerSessionPage/FETCH_USER_SESSION_REQUEST';
+export const FETCH_USER_SESSION_SUCCESS =
+  'app/AnswerSessionPage/FETCH_USER_SESSION_SUCCESS';
+export const FETCH_USER_SESSION_ERROR =
+  'app/AnswerSessionPage/FETCH_USER_SESSION_ERROR';
+
 export const CREATE_USER_SESSION_REQUEST =
   'app/AnswerSessionPage/CREATE_USER_SESSION_REQUEST';
-
 export const CREATE_USER_SESSION_SUCCESS =
   'app/AnswerSessionPage/CREATE_USER_SESSION_SUCCESS';
-
 export const CREATE_USER_SESSION_FAILURE =
   'app/AnswerSessionPage/CREATE_USER_SESSION_FAILURE';
 
+export const FETCH_OR_CREATE_USER_SESSION_REQUEST =
+  'app/AnswerSessionPage/FETCH_OR_CREATE_USER_SESSION_REQUEST';
+export const FETCH_OR_CREATE_USER_SESSION_SUCCESS =
+  'app/AnswerSessionPage/FETCH_OR_CREATE_USER_SESSION_SUCCESS';
+export const FETCH_OR_CREATE_USER_SESSION_ERROR =
+  'app/AnswerSessionPage/FETCH_OR_CREATE_USER_SESSION_ERROR';
+
 export const NEXT_QUESTION_REQUEST =
   'app/AnswerSessionPage/NEXT_QUESTION_REQUEST';
-
 export const NEXT_QUESTION_SUCCESS =
   'app/AnswerSessionPage/NEXT_QUESTION_SUCCESS';
-
 export const NEXT_QUESTION_FAILURE =
   'app/AnswerSessionPage/NEXT_QUESTION_FAILURE';
 

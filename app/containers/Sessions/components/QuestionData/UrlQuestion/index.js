@@ -78,7 +78,7 @@ const UrlQuestion = ({
           }
           stretchContent
         >
-          <UrlPreview link={payload} />
+          <UrlPreview link={payload} showError />
         </IconTooltip>
       )}
     </Column>

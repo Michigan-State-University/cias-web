@@ -6,6 +6,9 @@ import fs from 'fs'
 import path from 'path'
 import mjml2html from 'mjml'
 import { registerComponent } from 'mjml-core'
+import * as dotenv from 'dotenv'
+
+dotenv.config()
 
 const walkSync = (dir, filelist = []) => {
   let files = filelist
@@ -33,6 +36,8 @@ const compile = () =>
     .on('error', log)
     .pipe(gulp.dest('lib'))
     .on('end', () => {
+      const isWatching = process.env.TASK === 'watch';
+
       watchedComponents.forEach((compPath) => {
         const fullPath = path.join(process.cwd(), compPath.replace(/^components/, 'lib'))
         delete require.cache[fullPath]
@@ -53,6 +58,9 @@ const compile = () =>
             flag: 'w',
           })
           console.log(`${targetDir} written successfuly!`)
+          if (isWatching) {
+            console.log('\x1b[31m\x1b[43m%s\x1b[0m', 'Please, remember to use "npm build" to generate final templates!');
+          }
         })
       })
     })

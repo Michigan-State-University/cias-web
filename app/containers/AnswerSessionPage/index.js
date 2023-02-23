@@ -25,6 +25,8 @@ import AudioWrapper from 'utils/audioWrapper';
 import isNullOrUndefined from 'utils/isNullOrUndefined';
 import { DESKTOP_MODE, I_PHONE_8_PLUS_MODE } from 'utils/previewMode';
 import { CHARACTER_FIXED_POSITION_QUESTIONS } from 'utils/characterConstants';
+import LocalStorageService from 'utils/localStorageService';
+
 import { makeSelectAudioInstance } from 'global/reducers/globalState';
 import {
   fetchInterventionRequest,
@@ -36,6 +38,7 @@ import {
   editPhoneNumberQuestionSaga,
   REDIRECT_QUERY_KEY,
 } from 'global/reducers/auth';
+import { resetReducer as resetAuthReducer } from 'global/reducers/auth/actions';
 import logInGuestSaga from 'global/reducers/auth/sagas/logInGuest';
 import {
   ChatWidgetReducer,
@@ -96,6 +99,7 @@ import {
   setTransitionalUserSessionId as setTransitionalUserSessionIdAction,
   saveQuickExitEventRequest,
   resetReducer,
+  fetchUserSessionRequest,
 } from './actions';
 import BranchingScreen from './components/BranchingScreen';
 import {
@@ -199,6 +203,7 @@ export function AnswerSessionPage({
   isPreview,
   interventionStatus,
   fetchIntervention,
+  fetchUserSession,
   createUserSession,
   nextQuestion,
   clearErrors,
@@ -272,6 +277,9 @@ export function AnswerSessionPage({
     return Boolean(finishedAt);
   }, [userSession]);
 
+  const isAuthenticated = LocalStorageService.isAuthenticated();
+  const isGuestUser = isAuthenticated && !LocalStorageService.getState();
+
   const isCatMhSession = userSessionType === UserSessionType.CAT_MH;
 
   const location = useLocation();
@@ -284,13 +292,15 @@ export function AnswerSessionPage({
   }, [interventionId]);
 
   const previewPossible =
-    !(isPreview && !canPreview(interventionStatus)) && !isUserSessionFinished;
+    !(isPreview && !canPreview(interventionStatus)) &&
+    (!isUserSessionFinished || (isGuestUser && isUserSessionFinished));
 
   useEffect(() => {
-    createUserSession(sessionId);
-
+    if (isAuthenticated) {
+      fetchUserSession(sessionId);
+    }
     return clearErrors;
-  }, [sessionId]);
+  }, []);
 
   useEffect(() => {
     if (userSession) {
@@ -537,8 +547,15 @@ export function AnswerSessionPage({
 
   const startInterventionAsync = async () => {
     await audioInstance.prepareAutoPlay();
-
-    onStartSession();
+    if (userSession && !isUserSessionFinished) {
+      onStartSession();
+      return;
+    }
+    if (isUserSessionFinished && isGuestUser) {
+      // create new user session as a different guest user
+      LocalStorageService.clearHeaders();
+    }
+    createUserSession(sessionId);
   };
 
   const startButtonText = () => {
@@ -558,8 +575,10 @@ export function AnswerSessionPage({
   };
 
   const buttonText = () => {
-    if (isUserSessionFinished) return formatMessage(messages.sessionFinished);
-
+    if (isUserSessionFinished) {
+      if (isGuestUser) return startButtonText();
+      return formatMessage(messages.sessionFinished);
+    }
     if (isNewUserSession || Boolean(index)) return startButtonText();
 
     return continueButtonText();
@@ -587,6 +606,7 @@ export function AnswerSessionPage({
       ref={pageRef}
       id={ANSWER_SESSION_PAGE_ID}
       maxHeight="100vh"
+      background={isMobilePreview ? undefined : themeColors.sessionBackground}
     >
       {quickExitEnabled && (
         <QuickExit
@@ -838,6 +858,7 @@ AnswerSessionPage.propTypes = {
   isPreview: PropTypes.bool,
   interventionStatus: PropTypes.string,
   fetchIntervention: PropTypes.func,
+  fetchUserSession: PropTypes.func,
   createUserSession: PropTypes.func,
   nextQuestion: PropTypes.func,
   clearErrors: PropTypes.func,
@@ -845,6 +866,7 @@ AnswerSessionPage.propTypes = {
   setLiveChatEnabled: PropTypes.func,
   saveQuickExitEvent: PropTypes.func,
   resetAnswerSessionPage: PropTypes.func,
+  resetAllReducers: PropTypes.func,
 };
 
 const mapStateToProps = createStructuredSelector({
@@ -860,6 +882,7 @@ const mapDispatchToProps = {
   changeIsAnimationOngoing: changeIsAnimating,
   setFeedbackSettings: setFeedbackScreenSettings,
   fetchIntervention: fetchInterventionRequest,
+  fetchUserSession: fetchUserSessionRequest,
   createUserSession: createUserSessionRequest,
   nextQuestion: nextQuestionRequest,
   clearErrors: clearError,
@@ -867,6 +890,7 @@ const mapDispatchToProps = {
   setLiveChatEnabled: setChatEnabled,
   saveQuickExitEvent: saveQuickExitEventRequest,
   resetAnswerSessionPage: resetReducer,
+  resetAllReducers: resetAuthReducer,
 };
 
 const withConnect = connect(mapStateToProps, mapDispatchToProps);

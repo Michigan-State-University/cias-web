@@ -1,6 +1,6 @@
 import { defineMessages } from 'react-intl';
 
-export const scope = 'app.components.InterventionModals';
+export const scope = 'app.components.InterventionModals.CatMhAccessModal';
 
 export default defineMessages({
   modalHeader: {
@@ -55,9 +55,5 @@ export default defineMessages({
   numberPlaceholder: {
     id: `${scope}.numberPlaceholder`,
     defaultMessage: 'e.g. 123456789',
-  },
-  saveButton: {
-    id: `${scope}.saveButton`,
-    defaultMessage: 'Save changes',
   },
 });

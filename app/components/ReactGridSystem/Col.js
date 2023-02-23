@@ -2,35 +2,21 @@ import styled from 'styled-components';
 import PropTypes from 'prop-types';
 import { Col as GCol } from 'react-grid-system';
 
-import { margin, layout } from 'components/BaseComponentStyles';
-
-const mapFlexProperties = (property) => {
-  switch (property) {
-    case 'start':
-      return 'flex-start';
-    case 'end':
-      return 'flex-end';
-
-    default:
-      return property;
-  }
-};
+import { margin, layout, flex } from 'components/BaseComponentStyles';
 
 export const Col = styled(GCol)`
   display: flex;
   flex-direction: column;
-  align-items: ${({ align }) => mapFlexProperties(align ?? 'flex-start')};
   ${layout};
   ${margin};
+  ${flex};
 `;
 
 Col.propTypes = {
   align: PropTypes.oneOf([
     'stretch',
     'center',
-    'flex-start',
     'start',
-    'flex-end',
     'end',
     'baseline',
     'initial',
@@ -39,5 +25,5 @@ Col.propTypes = {
 };
 
 Col.defaultProps = {
-  align: 'flex-start',
+  align: 'start',
 };

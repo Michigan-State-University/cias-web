@@ -1,5 +1,5 @@
 type Data<DTO> = {
-  attributes: DTO;
+  attributes: Omit<DTO, 'id'>;
   id: string;
   type: string;
   relationships?: [];

@@ -38,6 +38,7 @@ const peedyAutoRestBodyAnimations = [
 
 const emmiAutoRestBodyAnimations = [
   BodyAutoRestAnimation.STAND_STILL,
+  BodyAutoRestAnimation.POINT_UP,
   BodyAutoRestAnimation.POINT_LEFT_UP,
   BodyAutoRestAnimation.POINT_RIGHT_UP,
   BodyAutoRestAnimation.REST_SHOULDER_RUBBING,
@@ -244,8 +245,9 @@ const emmiSpeechAnimationsMapper: Record<string, TSpeechAnimation> = {
   },
   [SpeechAnimation.POINT_UP]: {
     animations: {
-      start: SpeechAnimationFile.POINT_UP,
-      speech: SpeechAnimationFile.REST_SPEECH,
+      start: SpeechAnimationFile.POINT_UP_START,
+      speech: SpeechAnimationFile.POINT_UP_SPEECH,
+      end: SpeechAnimationFile.POINT_UP_END,
     },
   },
   [SpeechAnimation.OTOH_LEFT_HAND]: {

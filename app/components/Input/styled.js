@@ -1,12 +1,14 @@
-import styled from 'styled-components';
+import styled, { css } from 'styled-components';
 import ReactQuill from 'react-quill';
 import Color from 'color';
 
 import { colors, borders, fontFamily, themeColors, paddings } from 'theme';
 
 import Input from 'components/Input';
+import { margin, layout, border } from 'components/BaseComponentStyles';
 
-import { margin, layout, border } from '../BaseComponentStyles';
+import { INPUT_PADDING } from './constants';
+import { AdornmentType } from './types';
 
 export const QuillStyled = styled(ReactQuill)`
   width: 100%;
@@ -21,7 +23,6 @@ export const QuillStyled = styled(ReactQuill)`
           ...borders,
           borderColor: themeColors.highlight,
         }}
-
   ${({ focused, blurTransparentBorder }) =>
     focused && {
       border: `1px solid ${colors.jungleGreen}`,
@@ -31,7 +32,6 @@ export const QuillStyled = styled(ReactQuill)`
         zIndex: 1000,
       },
     }}
-
   .ql-editor {
     font-weight: 400;
     padding: 10px;
@@ -144,9 +144,17 @@ export const Adornment = styled.div`
   color: ${Color(colors.bluewood).alpha(0.5).toString()};
   visibility: ${({ visible }) => (visible ? 'visible' : 'hidden')};
   cursor: text;
-  ${margin};
   position: absolute;
-  right: 0;
+  ${({ type }) =>
+    type === AdornmentType.SUFFIX
+      ? css`
+          right: ${borders.borderWidth};
+          padding-right: ${INPUT_PADDING}px;
+        `
+      : css`
+          left: ${borders.borderWidth};
+          padding-left: ${INPUT_PADDING}px;
+        `}
   max-width: 75%;
   overflow: hidden;
   white-space: nowrap;

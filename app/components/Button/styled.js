@@ -90,8 +90,15 @@ export const DashedBox = styled(Box)`
   cursor: not-allowed;
 `;
 
-const activeStyles = `
-  background-color: ${Color(themeColors.primary).alpha(0.2).rgb().string()};
+const activeStyles = (noHoverBackground) => `
+  ${
+    !noHoverBackground
+      ? `background-color: ${Color(themeColors.primary)
+          .alpha(0.2)
+          .rgb()
+          .string()};`
+      : ''
+  }
 
   svg {
     *[fill^='#'] {
@@ -100,18 +107,17 @@ const activeStyles = `
   }`;
 
 export const HoverTextButton = styled(TextButton)`
-  ${({ showHoverEffect, active }) =>
+  ${({ showHoverEffect, noHoverBackground, active, disabled }) =>
     showHoverEffect &&
+    !disabled &&
     `
     background-color: transparent;
     padding: 4px;
     border-radius: 8px;
 
-  
     &:hover {
-      ${activeStyles}        
+      ${activeStyles(noHoverBackground)}
     }
-  
     ${active ? activeStyles : ''}
   `}
 

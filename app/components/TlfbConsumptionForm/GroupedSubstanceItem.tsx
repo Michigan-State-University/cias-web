@@ -6,14 +6,17 @@ import { colors } from 'theme';
 import { SubstanceConsumption } from 'models/Tlfb';
 import { Substance } from 'models/Question';
 
-import { floatValidator, floatCharValidator } from 'utils/validators';
+import { floatCharValidator, floatValidator } from 'utils/validators';
 
 import Text from 'components/Text';
 import Circle from 'components/Circle';
 import { Col, Container, Row } from 'components/ReactGridSystem';
 import Box from 'components/Box';
 
-import { InputWithAdornment } from 'components/Input/InputWithAdornment';
+import {
+  AdornmentType,
+  InputWithAdornment,
+} from 'components/Input/InputWithAdornment';
 
 import messages from './messages';
 import {
@@ -156,6 +159,7 @@ const Component = ({
           <InputWithAdornment
             value={consumption.amount ?? ''}
             keyboard="number"
+            type={AdornmentType.SUFFIX}
             adornment={selectedValue?.unit}
             onKeyPress={onAmountKeyPress}
             onPaste={onAmountPaste}
