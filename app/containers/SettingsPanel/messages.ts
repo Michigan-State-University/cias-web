@@ -155,9 +155,9 @@ export default defineMessages({
     id: `${scope}.navigators`,
     defaultMessage: 'Navigators',
   },
-  noNavigator: {
-    id: `${scope}.noNavigator`,
-    defaultMessage: 'No Navigator available',
+  contactInformation: {
+    id: `${scope}.contactInformation`,
+    defaultMessage: 'Contact information',
   },
   helpingMaterials: {
     id: `${scope}.helpingMaterials`,
@@ -167,13 +167,21 @@ export default defineMessages({
     id: `${scope}.notifyNavigator`,
     defaultMessage: `Notify navigator about new messages even then it won't be online`,
   },
-  hotlinePrefix: {
-    id: `${scope}.hotlinePrefix`,
-    defaultMessage: 'Hotline prefix',
+  contactHotlinePrefix: {
+    id: `${scope}.contactHotlinePrefix`,
+    defaultMessage: 'Contact hotline prefix',
   },
-  hotlinePhoneNumber: {
+  contactHotlinePhoneNumber: {
+    id: `${scope}.contactHotlinePhoneNumber`,
+    defaultMessage: 'Contact hotline phone number',
+  },
+  messageHotlinePrefix: {
+    id: `${scope}.hotlinePrefix`,
+    defaultMessage: 'Message hotline prefix',
+  },
+  messageHotlinePhoneNumber: {
     id: `${scope}.hotlinePhoneNumber`,
-    defaultMessage: 'Hotline phone number',
+    defaultMessage: 'Message hotline phone number',
   },
   saveChanges: {
     id: `${scope}.saveChanges`,
@@ -355,5 +363,13 @@ export default defineMessages({
   downloadTranscript: {
     id: `${scope}.downloadTranscript`,
     defaultMessage: 'Download transcript',
+  },
+  contactMessagePlaceholder: {
+    id: `${scope}.contactMessagePlaceholder`,
+    defaultMessage: 'Specify contact message',
+  },
+  contactMessageLabel: {
+    id: `${scope}.contactMessageLabel`,
+    defaultMessage: 'Contact information message',
   },
 });

@@ -11,7 +11,9 @@ export enum FileFor {
 export type NoNavigatorsAvailableData = {
   noNavigatorAvailableMessage: string;
   phone: Nullable<PhoneAttributes>;
+  messagePhone: Nullable<PhoneAttributes>;
   contactEmail: string;
+  contactMessage: string;
   participantLinks: ParticipantLink[];
 };
 
@@ -36,6 +38,7 @@ export type LiveChatSetup = Pick<
   | 'contactEmail'
   | 'participantLinks'
   | 'participantFiles'
+  | 'contactMessage'
 >;
 
 // Fetched by navigator
