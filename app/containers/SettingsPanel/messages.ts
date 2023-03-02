@@ -197,8 +197,7 @@ export default defineMessages({
   },
   messageLabel: {
     id: `${scope}.messageLabel`,
-    defaultMessage:
-      'Message to participant when no navigator is available<warningColor>*</warningColor>',
+    defaultMessage: 'Message to participant when no navigator is available',
   },
   messagePlaceholder: {
     id: `${scope}.messagePlaceholder`,

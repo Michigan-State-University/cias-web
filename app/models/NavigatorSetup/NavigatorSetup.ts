@@ -39,6 +39,7 @@ export type LiveChatSetup = Pick<
   | 'participantLinks'
   | 'participantFiles'
   | 'contactMessage'
+  | 'messagePhone'
 >;
 
 // Fetched by navigator

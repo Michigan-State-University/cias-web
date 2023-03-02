@@ -6,10 +6,7 @@ import { useSelector } from 'react-redux';
 import { formatIncompletePhoneNumber } from 'libphonenumber-js/max';
 
 import { makeSelectNavigatorSetupLoader } from 'global/reducers/navigatorSetup';
-import {
-  requiredValidationSchema,
-  emailFormValidationSchema,
-} from 'utils/validators';
+import { emailFormValidationSchema } from 'utils/validators';
 import { useCallbackRef } from 'utils/useCallbackRef';
 
 import { NoNavigatorsAvailableData } from 'models/NavigatorSetup';
@@ -25,7 +22,6 @@ import { PhoneNumberFormCalculatedValue } from 'components/AccountSettings/types
 import messages from '../messages';
 
 const validationSchema = Yup.object().shape({
-  noNavigatorAvailableMessage: requiredValidationSchema,
   contactEmail: emailFormValidationSchema.notRequired(),
 });
 
