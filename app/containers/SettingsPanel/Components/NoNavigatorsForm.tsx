@@ -6,10 +6,7 @@ import { useSelector } from 'react-redux';
 import { formatIncompletePhoneNumber } from 'libphonenumber-js/max';
 
 import { makeSelectNavigatorSetupLoader } from 'global/reducers/navigatorSetup';
-import {
-  requiredValidationSchema,
-  emailFormValidationSchema,
-} from 'utils/validators';
+import { emailFormValidationSchema } from 'utils/validators';
 import { useCallbackRef } from 'utils/useCallbackRef';
 
 import { NoNavigatorsAvailableData } from 'models/NavigatorSetup';
@@ -25,7 +22,6 @@ import { PhoneNumberFormCalculatedValue } from 'components/AccountSettings/types
 import messages from '../messages';
 
 const validationSchema = Yup.object().shape({
-  noNavigatorAvailableMessage: requiredValidationSchema,
   contactEmail: emailFormValidationSchema.notRequired(),
 });
 
@@ -37,12 +33,16 @@ const defaultPhone: NoNavigatorsAvailableData['phone'] = {
 
 type FormikValues = Pick<
   NoNavigatorsAvailableData,
-  'noNavigatorAvailableMessage' | 'contactEmail'
+  'noNavigatorAvailableMessage' | 'contactEmail' | 'contactMessage'
 >;
 
 type Props = Pick<
   NoNavigatorsAvailableData,
-  'contactEmail' | 'noNavigatorAvailableMessage' | 'phone'
+  | 'contactEmail'
+  | 'noNavigatorAvailableMessage'
+  | 'phone'
+  | 'contactMessage'
+  | 'messagePhone'
 > & {
   updateNoNavigatorTabData: (
     newData: Partial<NoNavigatorsAvailableData>,
@@ -54,6 +54,8 @@ const NoNavigatorsForm = ({
   noNavigatorAvailableMessage,
   phone,
   updateNoNavigatorTabData,
+  contactMessage,
+  messagePhone,
 }: Props) => {
   const { formatMessage } = useIntl();
   const isUpdating = useSelector(
@@ -78,16 +80,37 @@ const NoNavigatorsForm = ({
     phone ?? defaultPhone,
   );
 
-  const onPhoneNumberFormChange = ({
-    phoneAttributes,
-  }: PhoneNumberFormCalculatedValue) => {
-    setNewPhone(phoneAttributes);
-  };
+  const [messagePhoneDirty, setMessagePhoneDirty] = useState(false);
+  const [messagePhoneValid, setMessagePhoneValid] = useState(true);
+
+  const {
+    callbackRef: messagePhoneNumberFormCallbackRef,
+    ref: messagePhoneNumberFormRef,
+  } = useCallbackRef(
+    (
+      phoneNumberForm: Nullable<FormikProps<PhoneNumberFormCalculatedValue>>,
+    ) => {
+      setMessagePhoneDirty(!!phoneNumberForm?.isValid);
+      setMessagePhoneValid(!!phoneNumberForm?.dirty);
+      return null;
+    },
+  );
+
+  const [messageNewPhone, setMessageNewPhone] = useState<PhoneAttributes>(
+    messagePhone ?? defaultPhone,
+  );
+
+  const onPhoneNumberFormChange =
+    (callback: React.Dispatch<React.SetStateAction<PhoneAttributes>>) =>
+    ({ phoneAttributes }: PhoneNumberFormCalculatedValue) => {
+      callback(phoneAttributes);
+    };
 
   const onSaveChanges = () => {
     updateNoNavigatorTabData({
       ...formik.values,
       phone: newPhone?.number ? newPhone : null,
+      messagePhone: messageNewPhone?.number ? messageNewPhone : null,
     });
   };
 
@@ -96,11 +119,18 @@ const NoNavigatorsForm = ({
       values: {
         noNavigatorAvailableMessage,
         contactEmail,
+        contactMessage,
       },
     });
 
     const { number, iso: isoValue } = phone ?? defaultPhone;
+    const { number: messageNumber, iso: messagePhoneIsoValue } =
+      messagePhone ?? defaultPhone;
     const parsedNumber = formatIncompletePhoneNumber(number, isoValue);
+    const parsedMessageNumber = formatIncompletePhoneNumber(
+      messageNumber,
+      messagePhoneIsoValue,
+    );
 
     phoneNumberFormRef.current?.resetForm({
       values: {
@@ -110,7 +140,15 @@ const NoNavigatorsForm = ({
         },
       },
     });
-  }, [noNavigatorAvailableMessage, contactEmail, phone]);
+    messagePhoneNumberFormRef.current?.resetForm({
+      values: {
+        number: parsedMessageNumber ?? '',
+        iso: {
+          value: messagePhoneIsoValue,
+        },
+      },
+    });
+  }, [noNavigatorAvailableMessage, contactEmail, phone, messagePhone]);
 
   useEffect(() => {
     resetForms();
@@ -120,6 +158,7 @@ const NoNavigatorsForm = ({
     initialValues: {
       noNavigatorAvailableMessage,
       contactEmail,
+      contactMessage,
     },
     validationSchema,
     validateOnMount: false,
@@ -127,7 +166,10 @@ const NoNavigatorsForm = ({
   });
 
   const isSaveDisabled =
-    !formik.isValid || !phoneValid || (!formik.dirty && !phoneDirty);
+    !formik.isValid ||
+    !phoneValid ||
+    !messagePhoneValid ||
+    (!formik.dirty && !phoneDirty && !messagePhoneDirty);
 
   return (
     <>
@@ -135,12 +177,22 @@ const NoNavigatorsForm = ({
         <H2 fontSize={16} lineHeight="24px" mb={24}>
           {formatMessage(messages.textInformation)}
         </H2>
+        <Box mb={24}>
+          {/* @ts-ignore */}
+          <FormikHookInput
+            formikKey="noNavigatorAvailableMessage"
+            formikState={formik}
+            placeholder={formatMessage(messages.messagePlaceholder)}
+            label={formatMessage(messages.messageLabel)}
+            inputProps={{ width: '100%' }}
+          />
+        </Box>
         {/* @ts-ignore */}
         <FormikHookInput
-          formikKey="noNavigatorAvailableMessage"
+          formikKey="contactMessage"
           formikState={formik}
-          placeholder={formatMessage(messages.messagePlaceholder)}
-          label={formatMessage(messages.messageLabel)}
+          placeholder={formatMessage(messages.contactMessagePlaceholder)}
+          label={formatMessage(messages.contactMessageLabel)}
           inputProps={{ width: '100%' }}
         />
         <Box my={24}>
@@ -148,13 +200,27 @@ const NoNavigatorsForm = ({
             // @ts-ignore
             formatMessage={formatMessage}
             phone={phone ?? defaultPhone}
-            changePhoneNumber={onPhoneNumberFormChange}
+            changePhoneNumber={onPhoneNumberFormChange(setNewPhone)}
             confirmationDisabled
-            prefixLabelMessage={messages.hotlinePrefix}
-            phoneLabel={messages.hotlinePhoneNumber}
+            prefixLabelMessage={messages.contactHotlinePrefix}
+            phoneLabel={messages.contactHotlinePhoneNumber}
             required={false}
             allowPartial
             ref={phoneNumberFormCallbackRef}
+          />
+        </Box>
+        <Box my={24}>
+          <PhoneNumberForm
+            // @ts-ignore
+            formatMessage={formatMessage}
+            phone={messagePhone ?? defaultPhone}
+            changePhoneNumber={onPhoneNumberFormChange(setMessageNewPhone)}
+            confirmationDisabled
+            prefixLabelMessage={messages.messageHotlinePrefix}
+            phoneLabel={messages.messageHotlinePhoneNumber}
+            required={false}
+            allowPartial
+            ref={messagePhoneNumberFormCallbackRef}
           />
         </Box>
         {/* @ts-ignore */}
