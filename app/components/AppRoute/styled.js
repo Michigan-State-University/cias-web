@@ -30,4 +30,5 @@ export const UnprotectedMainAppContainer = styled.div`
 
 export const RowBelowNavbar = styled(Row)`
   overflow: hidden;
+  flex-wrap: nowrap;
 `;

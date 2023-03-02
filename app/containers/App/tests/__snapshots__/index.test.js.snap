@@ -664,6 +664,9 @@ exports[`<AnswerSessionPage /> Should render and match the snapshot 1`] = `
 
 .c14 {
   overflow: hidden;
+  -webkit-flex-wrap: nowrap;
+  -ms-flex-wrap: nowrap;
+  flex-wrap: nowrap;
 }
 
 .c44 {
