@@ -90,6 +90,11 @@ export const MarkupContainer = styled.div`
   * {
     line-height: 1.42 !important;
   }
+
+  h1,
+  h2 {
+    margin-block: 0;
+  }
 `;
 
 export const TlfbContainer = styled.div`

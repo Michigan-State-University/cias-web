@@ -110,6 +110,11 @@ exports[`<MultipleQuestion /> Should render and match the snapshot 1`] = `
   line-height: 1.42 !important;
 }
 
+.c10 h1,
+.c10 h2 {
+  margin-block: 0;
+}
+
 @media only screen and (min-width:768px) {
 
 }
