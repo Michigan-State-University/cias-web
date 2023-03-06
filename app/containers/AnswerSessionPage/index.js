@@ -237,7 +237,12 @@ export function AnswerSessionPage({
       proceed_button: proceedButton,
       narrator_skippable: narratorSkippable,
     } = {},
-    narrator: { settings: { character, animation } = {} } = {},
+    narrator: {
+      settings: {
+        character,
+        extra_space_for_narrator: extraSpaceForNarrator,
+      } = {},
+    } = {},
   } = currentQuestion ?? {};
 
   const [containerQueryParams, pageRef] = useContainerQuery(QUERY);
@@ -469,7 +474,7 @@ export function AnswerSessionPage({
       (isNullOrUndefined(proceedButton) || proceedButton) &&
       canSkipNarrator;
 
-    const characterAdditionalSpace = CHARACTER_CONFIGS[character].size.height;
+    const narratorExtraSpace = CHARACTER_CONFIGS[character].size.height;
 
     return (
       <Row justify="center" width="100%">
@@ -477,11 +482,7 @@ export function AnswerSessionPage({
           <Box
             lang={languageCode}
             width="100%"
-            pt={
-              animation && !isNarratorPositionFixed
-                ? characterAdditionalSpace
-                : 0
-            }
+            pt={extraSpaceForNarrator ? narratorExtraSpace : 0}
           >
             <CommonLayout
               currentQuestion={currentQuestion}
@@ -760,7 +761,11 @@ export function AnswerSessionPage({
                         <Row
                           padding={!isDesktop || isMobile ? 30 : 0}
                           pb={isDesktop || (!isDesktop && logoUrl) ? 24 : 0}
-                          pt={isMobile && animation && !logoUrl ? 0 : undefined}
+                          pt={
+                            isMobile && extraSpaceForNarrator && !logoUrl
+                              ? 0
+                              : undefined
+                          }
                           width="100%"
                         >
                           {!isDesktop && (

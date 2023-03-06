@@ -93,7 +93,8 @@ export const MarkupContainer = styled.div`
 
   h1,
   h2 {
-    margin-block: 0;
+    margin-block-start: 0;
+    margin-block-end: 0.42em;
   }
 `;
 
