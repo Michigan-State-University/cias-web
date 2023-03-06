@@ -1,4 +1,4 @@
-import { takeLatest, put, select, call } from 'redux-saga/effects';
+import { takeLatest, put, select, call, takeEvery } from 'redux-saga/effects';
 import axios from 'axios';
 import omit from 'lodash/omit';
 import map from 'lodash/map';
@@ -26,6 +26,7 @@ import {
   SAVE_QUICK_EXIT_EVENT_REQUEST,
   FETCH_USER_SESSION_REQUEST,
   FETCH_OR_CREATE_USER_SESSION_REQUEST,
+  FETCH_PREVIOUS_QUESTION_REQUEST,
 } from './constants';
 import {
   submitAnswerSuccess,
@@ -43,6 +44,8 @@ import {
   fetchOrCreateUserSessionSuccess,
   fetchOrCreateUserSessionError,
   resetReducer,
+  fetchPreviousQuestionSuccess,
+  fetchPreviousQuestionError,
 } from './actions';
 import { makeSelectAnswers, makeSelectCurrentQuestion } from './selectors';
 import messages from './messages';
@@ -255,6 +258,31 @@ function* saveQuickExitEvent({ payload: { userSessionId, isPreview } }) {
   });
 }
 
+function* fetchPreviousQuestion({
+  payload: { userSessionId, currentQuestionId },
+}) {
+  const requestUrl = `/v1/user_sessions/${userSessionId}/previous_question`;
+  const searchParams = new URLSearchParams();
+  searchParams.set('current_question_id', currentQuestionId);
+
+  try {
+    const {
+      data: { data, answer: answerData },
+    } = yield axios.get(`${requestUrl}?${searchParams}`);
+
+    if (!data) {
+      throw Error(formatMessage(messages.previousScreenNotFound));
+    }
+
+    const question = mapQuestionToStateObject(data);
+    const answer = jsonApiToObject({ data: answerData }, 'answer');
+    yield put(fetchPreviousQuestionSuccess(question, answer));
+  } catch (error) {
+    yield call(toast.error, error.response?.data?.message ?? error.toString());
+    yield put(fetchPreviousQuestionError(error));
+  }
+}
+
 // Individual exports for testing
 export default function* AnswerSessionPageSaga() {
   yield takeLatest(SUBMIT_ANSWER_REQUEST, submitAnswersAsync);
@@ -267,6 +295,7 @@ export default function* AnswerSessionPageSaga() {
   );
   yield takeLatest(NEXT_QUESTION_REQUEST, nextQuestion);
   yield takeLatest(SAVE_QUICK_EXIT_EVENT_REQUEST, saveQuickExitEvent);
+  yield takeEvery(FETCH_PREVIOUS_QUESTION_REQUEST, fetchPreviousQuestion);
 }
 
 export function* redirectToPreviewSaga() {

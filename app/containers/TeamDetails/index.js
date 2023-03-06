@@ -140,7 +140,7 @@ export const TeamDetails = ({
         />
       )}
       <StyledBox height="100%" width="100%">
-        <BackButton to="/teams">
+        <BackButton link to="/teams">
           <FormattedMessage {...messages.backButton} />
         </BackButton>
         <Row align="center">

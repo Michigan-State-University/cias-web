@@ -100,6 +100,7 @@ import {
   saveQuickExitEventRequest,
   resetReducer,
   fetchUserSessionRequest,
+  fetchPreviousQuestionRequest,
 } from './actions';
 import BranchingScreen from './components/BranchingScreen';
 import {
@@ -109,6 +110,7 @@ import {
 } from './constants';
 import { ActionButtons } from './components/ActionButtons';
 import AnswerSessionPageFooter from './components/AnswerSessionPageFooter';
+import ScreenBackButton from './components/ScreenBackButton';
 
 const AnimationRefHelper = ({
   children,
@@ -199,6 +201,7 @@ export function AnswerSessionPage({
     showTextTranscript,
     showTextReadingControls,
     transitionalUserSessionId,
+    fetchPreviousQuestionLoading,
   },
   isPreview,
   interventionStatus,
@@ -211,6 +214,7 @@ export function AnswerSessionPage({
   setLiveChatEnabled,
   saveQuickExitEvent,
   resetAnswerSessionPage,
+  fetchPreviousQuestion,
 }) {
   const { formatMessage } = useIntl();
   const history = useHistory();
@@ -243,6 +247,7 @@ export function AnswerSessionPage({
         extra_space_for_narrator: extraSpaceForNarrator,
       } = {},
     } = {},
+    first_question: isFirstScreen,
   } = currentQuestion ?? {};
 
   const [containerQueryParams, pageRef] = useContainerQuery(QUERY);
@@ -430,9 +435,9 @@ export function AnswerSessionPage({
     const { [currentQuestionId]: answer } = answers;
     const answerBody = answer?.answerBody ?? [];
 
-    const isLoading =
+    const continueButtonLoading =
       currentQuestion.loading || nextQuestionLoading || answer?.loading;
-    const skipQuestionButtonDisabled = isLoading;
+    const skipQuestionButtonDisabled = continueButtonLoading;
 
     const isAnswered = () =>
       answer &&
@@ -474,6 +479,27 @@ export function AnswerSessionPage({
       (isNullOrUndefined(proceedButton) || proceedButton) &&
       canSkipNarrator;
 
+    const backButtonDisabled =
+      continueButtonLoading || isCatMhSession || isFirstScreen || isLastScreen;
+
+    const backButtonDisabledMessage = () => {
+      if (isCatMhSession) {
+        return formatMessage(messages.backButtonDisabledCatMh);
+      }
+      if (isFirstScreen) {
+        return formatMessage(messages.backButtonDisabledFirstScreen);
+      }
+      if (isLastScreen) {
+        return formatMessage(messages.backButtonDisabledLastScreen);
+      }
+    };
+
+    const onBackButtonClick = () => {
+      if (userSessionId && currentQuestionId) {
+        fetchPreviousQuestion(userSessionId, currentQuestionId);
+      }
+    };
+
     const narratorExtraSpace = CHARACTER_CONFIGS[character].size.height;
 
     return (
@@ -494,7 +520,16 @@ export function AnswerSessionPage({
           </Box>
 
           {isNarratorPositionFixed && (
-            <Row mt={isMobile ? 32 : 16}>
+            <Row
+              mt={isMobile ? 32 : 16}
+              align={isMobile ? 'end' : 'center'}
+              gap={16}
+            >
+              <ScreenBackButton
+                onClick={onBackButtonClick}
+                disabled={backButtonDisabled}
+                disabledMessage={backButtonDisabledMessage()}
+              />
               <AnimationRefHelper
                 currentQuestion={currentQuestion}
                 currentQuestionId={currentQuestionId}
@@ -510,7 +545,7 @@ export function AnswerSessionPage({
                   onSkipQuestionClick={() => setSkipQuestionModalVisible(true)}
                   renderContinueButton={shouldRenderContinueButton}
                   continueButtonDisabled={isButtonDisabled()}
-                  continueButtonLoading={isLoading}
+                  continueButtonLoading={continueButtonLoading}
                   onContinueClick={onContinueButton}
                   containerStyle={{
                     my: 0,
@@ -529,15 +564,22 @@ export function AnswerSessionPage({
           )}
 
           {!isNarratorPositionFixed && (
-            <ActionButtons
-              renderSkipQuestionButton={shouldRenderSkipQuestionButton}
-              skipQuestionButtonDisabled={skipQuestionButtonDisabled}
-              onSkipQuestionClick={() => setSkipQuestionModalVisible(true)}
-              renderContinueButton={shouldRenderContinueButton}
-              continueButtonDisabled={isButtonDisabled()}
-              continueButtonLoading={isLoading}
-              onContinueClick={onContinueButton}
-            />
+            <Row align="center" gap={16}>
+              <ScreenBackButton
+                onClick={onBackButtonClick}
+                disabled={backButtonDisabled}
+                disabledMessage={backButtonDisabledMessage()}
+              />
+              <ActionButtons
+                renderSkipQuestionButton={shouldRenderSkipQuestionButton}
+                skipQuestionButtonDisabled={skipQuestionButtonDisabled}
+                onSkipQuestionClick={() => setSkipQuestionModalVisible(true)}
+                renderContinueButton={shouldRenderContinueButton}
+                continueButtonDisabled={isButtonDisabled()}
+                continueButtonLoading={continueButtonLoading}
+                onContinueClick={onContinueButton}
+              />
+            </Row>
           )}
 
           {renderQuestionTranscript(false)}
@@ -585,8 +627,6 @@ export function AnswerSessionPage({
     return continueButtonText();
   };
 
-  const renderPage = () => <>{renderQuestion()}</>;
-
   const resetTransitionalUserSessionId = () =>
     setTransitionalUserSessionId(null);
 
@@ -594,7 +634,9 @@ export function AnswerSessionPage({
     saveQuickExitEvent(userSessionId, isPreview);
   };
 
-  const showLoader = nextQuestionLoading && interventionStarted;
+  const showLoader =
+    (nextQuestionLoading || fetchPreviousQuestionLoading) &&
+    interventionStarted;
 
   const isFullSize =
     interventionStarted &&
@@ -793,7 +835,7 @@ export function AnswerSessionPage({
                           currentQuestion &&
                           !transitionalUserSessionId && (
                             <ScreenWrapper isFullSize={isFullSize}>
-                              {isNarratorPositionFixed && renderPage()}
+                              {isNarratorPositionFixed && renderQuestion()}
                               {!isNarratorPositionFixed && (
                                 <AnimationRefHelper
                                   currentQuestion={currentQuestion}
@@ -808,7 +850,7 @@ export function AnswerSessionPage({
                                   }
                                   audioInstance={audioInstance}
                                 >
-                                  {renderPage()}
+                                  {renderQuestion()}
                                 </AnimationRefHelper>
                               )}
                             </ScreenWrapper>
@@ -872,6 +914,7 @@ AnswerSessionPage.propTypes = {
   saveQuickExitEvent: PropTypes.func,
   resetAnswerSessionPage: PropTypes.func,
   resetAllReducers: PropTypes.func,
+  fetchPreviousQuestion: PropTypes.func,
 };
 
 const mapStateToProps = createStructuredSelector({
@@ -896,6 +939,7 @@ const mapDispatchToProps = {
   saveQuickExitEvent: saveQuickExitEventRequest,
   resetAnswerSessionPage: resetReducer,
   resetAllReducers: resetAuthReducer,
+  fetchPreviousQuestion: fetchPreviousQuestionRequest,
 };
 
 const withConnect = connect(mapStateToProps, mapDispatchToProps);

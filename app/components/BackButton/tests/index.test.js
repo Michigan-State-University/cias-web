@@ -14,6 +14,7 @@ import BackButton from '../index';
 const defaultProps = {
   to: '#',
   children: <span>Back button</span>,
+  link: true,
 };
 
 describe('<BackButton />', () => {

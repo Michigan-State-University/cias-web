@@ -35,6 +35,9 @@ import {
   FETCH_OR_CREATE_USER_SESSION_REQUEST,
   FETCH_OR_CREATE_USER_SESSION_SUCCESS,
   FETCH_OR_CREATE_USER_SESSION_ERROR,
+  FETCH_PREVIOUS_QUESTION_REQUEST,
+  FETCH_PREVIOUS_QUESTION_SUCCESS,
+  FETCH_PREVIOUS_QUESTION_ERROR,
 } from './constants';
 
 export const resetReducer = () => actionBuilder(RESET_REDUCER, {});
@@ -129,3 +132,16 @@ export const setTransitionalUserSessionId = (userSessionId) =>
 
 export const saveQuickExitEventRequest = (userSessionId, isPreview) =>
   actionBuilder(SAVE_QUICK_EXIT_EVENT_REQUEST, { userSessionId, isPreview });
+
+export const fetchPreviousQuestionRequest = (
+  userSessionId,
+  currentQuestionId,
+) =>
+  actionBuilder(FETCH_PREVIOUS_QUESTION_REQUEST, {
+    userSessionId,
+    currentQuestionId,
+  });
+export const fetchPreviousQuestionSuccess = (question, answer) =>
+  actionBuilder(FETCH_PREVIOUS_QUESTION_SUCCESS, { question, answer });
+export const fetchPreviousQuestionError = (error) =>
+  actionBuilder(FETCH_PREVIOUS_QUESTION_ERROR, { error });
