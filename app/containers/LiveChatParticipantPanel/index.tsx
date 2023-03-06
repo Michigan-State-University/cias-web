@@ -167,13 +167,14 @@ export const LiveChatParticipantPanel = ({ interventionId }: Props) => {
 
   useEffect(allowCallOutOnUnlockTime, [allowCallOutOnUnlockTime]);
 
+  const liveChatActive = Boolean(conversationId) || !navigatorUnavailable;
+
   const sharedProps = {
     conversationChannel,
     interventionId,
     onMinimizeDialog: minimizeDialog,
+    liveChatActive,
   };
-
-  const liveChatActive = Boolean(conversationId) || !navigatorUnavailable;
 
   return (
     <>

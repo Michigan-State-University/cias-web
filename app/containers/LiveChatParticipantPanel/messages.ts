@@ -139,4 +139,12 @@ export default defineMessages({
     id: `${scope}.iWillWait`,
     defaultMessage: `I'll Wait`,
   },
+  showContactDetails: {
+    id: `${scope}.showContactDetails`,
+    defaultMessage: 'Show contact details',
+  },
+  hideContactDetails: {
+    id: `${scope}.hideContactDetails`,
+    defaultMessage: 'Hide contact details',
+  },
 });

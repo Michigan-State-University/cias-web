@@ -16,10 +16,11 @@ import messages from '../messages';
 
 type Props = {
   phone: Nullable<PhoneAttributes>;
+  messagePhone: Nullable<PhoneAttributes>;
   contactEmail: Nullable<string>;
 };
 
-const ContactDetails = ({ contactEmail, phone }: Props) => {
+const ContactDetails = ({ contactEmail, phone, messagePhone }: Props) => {
   const { formatMessage } = useIntl();
 
   const contactDetailsText = useMemo(() => {
@@ -40,6 +41,7 @@ const ContactDetails = ({ contactEmail, phone }: Props) => {
         mt={16}
         mb={24}
         lineHeight="22px"
+        textAlign="center"
       >
         {contactDetailsText}
       </Text>
@@ -54,6 +56,23 @@ const ContactDetails = ({ contactEmail, phone }: Props) => {
               fontWeight="medium"
             >
               {`${phone.prefix}${phone.number}`}
+            </Text>
+          </LinkNoUnderline>
+        </Row>
+      )}
+      {messagePhone && (
+        <Row mb={8} align="center">
+          {/* @ts-ignore */}
+          <Icon mr={8} src={greenPhone} alt="phone" />
+          <LinkNoUnderline
+            href={`sms:${messagePhone.prefix}${messagePhone.number}`}
+          >
+            <Text
+              fontSize="14px"
+              color={themeColors.primary}
+              fontWeight="medium"
+            >
+              {`${messagePhone.prefix}${messagePhone.number}`}
             </Text>
           </LinkNoUnderline>
         </Row>
