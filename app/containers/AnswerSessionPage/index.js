@@ -188,7 +188,6 @@ export function AnswerSessionPage({
     questionError,
     answersError,
     answers,
-    questionIndex,
     interventionStarted,
     previewMode,
     isAnimationOngoing,
@@ -424,12 +423,8 @@ export function AnswerSessionPage({
   };
 
   const renderQuestion = () => {
-    const selectAnswerProp = (answerBody, selectedByUser = true) => {
-      saveSelectedAnswer({
-        id: currentQuestionId,
-        answerBody,
-        selectedByUser,
-      });
+    const selectAnswerProp = (answerBody) => {
+      saveSelectedAnswer(answerBody, currentQuestionId);
     };
 
     const { [currentQuestionId]: answer } = answers;
@@ -440,10 +435,7 @@ export function AnswerSessionPage({
     const skipQuestionButtonDisabled = continueButtonLoading;
 
     const isAnswered = () =>
-      answer &&
-      Array.isArray(answer.answerBody) &&
-      answer.answerBody.length &&
-      answer.selectedByUser;
+      answer && Array.isArray(answer.answerBody) && answer.answerBody.length;
 
     const isButtonDisabled = () => required && !isAnswered();
 
@@ -451,7 +443,6 @@ export function AnswerSessionPage({
       selectAnswer: selectAnswerProp,
       answerBody,
       formatMessage,
-      questionIndex,
       saveAnswer,
       showError: toast.error,
       feedbackScreenSettings,

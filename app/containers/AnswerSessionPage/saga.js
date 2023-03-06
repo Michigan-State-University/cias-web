@@ -1,7 +1,5 @@
 import { takeLatest, put, select, call, takeEvery } from 'redux-saga/effects';
 import axios from 'axios';
-import omit from 'lodash/omit';
-import map from 'lodash/map';
 import { toast } from 'react-toastify';
 import { push } from 'connected-react-router';
 import merge from 'lodash/merge';
@@ -51,11 +49,11 @@ import { makeSelectAnswers, makeSelectCurrentQuestion } from './selectors';
 import messages from './messages';
 
 function* submitAnswersAsync({
-  payload: { answerId, required, type: questionType, userSessionId, skipped },
+  payload: { questionId, required, type: questionType, userSessionId, skipped },
 }) {
   const answers = yield select(makeSelectAnswers());
-  const { answerBody } = answers[answerId];
-  let data = map(answerBody, (singleBody) => omit(singleBody, 'index')); // index is needed to remember the selected answers, but useless in request
+  let { answerBody: data } = answers[questionId];
+  data ??= [];
 
   try {
     if (data.length || !required) {
@@ -82,19 +80,19 @@ function* submitAnswersAsync({
         `/v1/user_sessions/${userSessionId}/answers`,
         objectToSnakeCase({
           answer: { type, body: { data } },
-          questionId: answerId,
+          questionId,
           skipped,
         }),
       );
 
-      yield put(submitAnswerSuccess(answerId));
+      yield put(submitAnswerSuccess(questionId));
 
       yield put(nextQuestionRequest(userSessionId));
     } else {
       throw new Error('Choose answer');
     }
   } catch (error) {
-    yield put(submitAnswerFailure(answerId, error?.toString()));
+    yield put(submitAnswerFailure(questionId, error?.toString()));
   }
 }
 
@@ -111,11 +109,12 @@ function* nextQuestion({ payload: { userSessionId, questionId } }) {
   try {
     const {
       data: {
-        data,
+        data: questionData,
         warning,
         next_user_session_id: newUserSessionId,
         // eslint-disable-next-line camelcase
         next_session_id,
+        answer: answerData,
       },
     } = yield axios.get(requestUrl);
 
@@ -134,14 +133,15 @@ function* nextQuestion({ payload: { userSessionId, questionId } }) {
       yield put(changeUserSessionId(newUserSessionId));
     }
 
-    yield put(
-      nextQuestionSuccess(
-        mapQuestionToStateObject(
-          // eslint-disable-next-line camelcase
-          merge(data, { attributes: { next_session_id } }),
-        ),
-      ),
+    const question = mapQuestionToStateObject(
+      // eslint-disable-next-line camelcase
+      merge(questionData, { attributes: { next_session_id } }),
     );
+    const answer = answerData
+      ? jsonApiToObject({ data: answerData }, 'answer')
+      : null;
+
+    yield put(nextQuestionSuccess(question, answer));
   } catch (error) {
     yield put(nextQuestionFailure(error));
   }
@@ -267,15 +267,18 @@ function* fetchPreviousQuestion({
 
   try {
     const {
-      data: { data, answer: answerData },
+      data: { data: questionData, answer: answerData },
     } = yield axios.get(`${requestUrl}?${searchParams}`);
 
-    if (!data) {
+    if (!questionData) {
       throw Error(formatMessage(messages.previousScreenNotFound));
     }
 
-    const question = mapQuestionToStateObject(data);
-    const answer = jsonApiToObject({ data: answerData }, 'answer');
+    const question = mapQuestionToStateObject(questionData);
+    const answer = answerData
+      ? jsonApiToObject({ data: answerData }, 'answer')
+      : null;
+
     yield put(fetchPreviousQuestionSuccess(question, answer));
   } catch (error) {
     yield call(toast.error, error.response?.data?.message ?? error.toString());

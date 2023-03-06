@@ -47,7 +47,6 @@ export const initialState = {
   questionLoading: false,
   questionError: '',
   sessionQuestions: [],
-  questionIndex: 0,
   answersLoading: false,
   answersError: '',
   answers: {},
@@ -84,16 +83,17 @@ const AnswerSessionPageReducer = (state = initialState, { payload, type }) =>
       }
 
       case SELECT_ANSWER: {
-        draft.answers[payload.id] = payload;
+        const { questionId, answerBody } = payload;
+        draft.answers[questionId] = { answerBody };
         break;
       }
 
       case SUBMIT_ANSWER_REQUEST: {
         draft.answersError = '';
-        const { skipped, answerId } = payload;
+        const { skipped, questionId } = payload;
 
-        draft.answers[answerId] = {
-          ...state.answers[answerId],
+        draft.answers[questionId] = {
+          ...state.answers[questionId],
           skipped,
           loading: true,
         };
@@ -101,18 +101,20 @@ const AnswerSessionPageReducer = (state = initialState, { payload, type }) =>
       }
 
       case SUBMIT_ANSWER_SUCCESS: {
+        const { questionId } = payload;
+
         draft.answersError = '';
-        draft.answers[payload.answerId].loading = false;
-        draft.answers[payload.answerId].questionId = state.questionIndex;
+        draft.answers[questionId].loading = false;
         break;
       }
       case SUBMIT_ANSWER_ERROR: {
-        draft.answersError = payload.error;
-        draft.answers[payload.answerId].loading = false;
-        draft.answers[payload.answerId].answerBody = state.answers[
-          payload.answerId
-        ].answerBody
-          ? state.answers[payload.answerId].answerBody
+        const { error, questionId } = payload;
+
+        draft.answersError = error;
+        draft.answers[questionId].loading = false;
+        draft.answers[questionId].answerBody = state.answers[questionId]
+          .answerBody
+          ? state.answers[questionId].answerBody
           : [];
         break;
       }
@@ -183,12 +185,18 @@ const AnswerSessionPageReducer = (state = initialState, { payload, type }) =>
       }
 
       case NEXT_QUESTION_SUCCESS: {
-        const { question } = payload;
+        const { question, answer } = payload;
 
         draft.nextQuestionError = null;
         draft.nextQuestionLoading = false;
         draft.currentQuestion = question;
-        // draft.answers[answer.id] = payload.answer; TODO http://localhost:4200/interventions/a548ea45-8396-4045-87fe-70c98ec39b42/sessions/5698e2ae-b82a-4074-b374-cb59b2b11bd2/fill save answer fetched together with question
+
+        if (answer) {
+          const { decryptedBody, questionId } = answer;
+          draft.answers[questionId] = {
+            answerBody: decryptedBody.data,
+          };
+        }
         break;
       }
 
@@ -234,12 +242,18 @@ const AnswerSessionPageReducer = (state = initialState, { payload, type }) =>
       }
 
       case FETCH_PREVIOUS_QUESTION_SUCCESS: {
-        const { question } = payload;
+        const { question, answer } = payload;
 
         draft.fetchPreviousQuestionError = null;
         draft.fetchPreviousQuestionLoading = false;
         draft.currentQuestion = question;
-        // draft.answers[answer.id] = payload.answer; TODO http://localhost:4200/interventions/a548ea45-8396-4045-87fe-70c98ec39b42/sessions/5698e2ae-b82a-4074-b374-cb59b2b11bd2/fill save answer fetched together with question
+
+        if (answer) {
+          const { decryptedBody, questionId } = answer;
+          draft.answers[questionId] = {
+            answerBody: decryptedBody.data,
+          };
+        }
         break;
       }
 
