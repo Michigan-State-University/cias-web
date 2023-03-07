@@ -21,7 +21,7 @@ import {
   makeSelectParticipantFiles,
 } from 'global/reducers/liveChat';
 
-import { colors, themeColors } from 'theme';
+import { themeColors } from 'theme';
 
 import ParticipantFilesPanel from './ParticipantFilesPanel';
 
@@ -33,16 +33,14 @@ import ContactDetails from './ContactDetails';
 export type Props = PropsWithChildren<{
   header: React.ReactNode;
   onMinimize: () => void;
-  isNavigatorPresent?: boolean;
+  showContactDetailsButton?: boolean;
 }>;
-
-const CHAT_DIALOG_PX = 2 * 16;
 
 const ChatDialog = ({
   header,
   children,
   onMinimize,
-  isNavigatorPresent,
+  showContactDetailsButton,
 }: Props) => {
   const { formatMessage } = useIntl();
 
@@ -84,7 +82,7 @@ const ChatDialog = ({
       >
         {header}
         <Box display="flex" align="center">
-          {isNavigatorPresent && (
+          {showContactDetailsButton && (
             <Tooltip
               id="show-or-hide-contact-details-tooltip"
               text={contactDetailsButtonTitle}
@@ -137,16 +135,7 @@ const ChatDialog = ({
             <ParticipantFilesPanel participantFiles={participantFiles} />
           )}
           {contactDetailsVisible && (
-            <BoxWithUnderShadow
-              position="absolute"
-              bg={colors.white}
-              width={`calc(100% - ${CHAT_DIALOG_PX}px)`}
-              mt={42}
-              py={16}
-              borderBottom={`1px solid ${colors.linkWater}`}
-              borderRadius={0}
-              zIndex={1}
-            >
+            <BoxWithUnderShadow>
               <Column align="center">
                 <ContactDetails
                   contactEmail={contactEmail}

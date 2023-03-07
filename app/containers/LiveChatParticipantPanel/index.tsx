@@ -173,7 +173,6 @@ export const LiveChatParticipantPanel = ({ interventionId }: Props) => {
     conversationChannel,
     interventionId,
     onMinimizeDialog: minimizeDialog,
-    liveChatActive,
   };
 
   return (

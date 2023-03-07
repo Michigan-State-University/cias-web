@@ -93,7 +93,7 @@ const ConversationChatDialog = ({
     <ChatDialog
       header={<ConversationChatDialogHeader interlocutor={otherInterlocutor} />}
       onMinimize={onMinimizeDialog}
-      isNavigatorPresent
+      showContactDetailsButton
     >
       <Row>
         <Divider />
