@@ -312,7 +312,13 @@ export function AnswerSessionPage({
   }, []);
 
   useEffect(() => {
-    if (userSession) {
+    if (isUserSessionFinished && isGuestUser && !interventionStarted) {
+      LocalStorageService.clearHeaders();
+    }
+  }, [isUserSessionFinished, isGuestUser, interventionStarted]);
+
+  useEffect(() => {
+    if (userSession && !isUserSessionFinished) {
       nextQuestion(userSessionId, index);
       if (userSession.liveChatEnabled && interventionId) {
         setLiveChatEnabled(interventionId);
