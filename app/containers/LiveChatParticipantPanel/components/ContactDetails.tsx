@@ -64,7 +64,7 @@ const ContactDetails = ({ contactEmail, phone, messagePhone }: Props) => {
       {messagePhone && (
         <Row mb={8} align="center">
           {/* @ts-ignore */}
-          <Icon mr={8} src={messagePhoneIcon} alt="phone" />
+          <Icon mr={8} src={messagePhoneIcon} alt="sms" />
           <LinkNoUnderline
             href={`sms:${messagePhone.prefix}${messagePhone.number}`}
           >
