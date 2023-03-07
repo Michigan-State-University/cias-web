@@ -1,4 +1,4 @@
-import React, { useEffect, useMemo } from 'react';
+import React, { useMemo } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { IntlShape } from 'react-intl';
 
@@ -28,12 +28,6 @@ type Props = {
 
 const FinishScreenLayout = ({ formatMessage, question }: Props) => {
   const isGuestUser = !LocalStorageService.getState();
-
-  useEffect(() => {
-    if (isGuestUser) {
-      LocalStorageService.clearHeaders();
-    }
-  }, []);
 
   const dispatch = useDispatch();
   const userSession = useSelector(makeSelectUserSession());
@@ -74,6 +68,7 @@ const FinishScreenLayout = ({ formatMessage, question }: Props) => {
   };
 
   const reloadPage = () => {
+    LocalStorageService.clearHeaders();
     dispatch(resetAuthReducer());
   };
 
