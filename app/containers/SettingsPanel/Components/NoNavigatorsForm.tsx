@@ -90,8 +90,8 @@ const NoNavigatorsForm = ({
     (
       phoneNumberForm: Nullable<FormikProps<PhoneNumberFormCalculatedValue>>,
     ) => {
-      setMessagePhoneDirty(!!phoneNumberForm?.isValid);
-      setMessagePhoneValid(!!phoneNumberForm?.dirty);
+      setMessagePhoneDirty(!!phoneNumberForm?.dirty);
+      setMessagePhoneValid(!!phoneNumberForm?.isValid);
       return null;
     },
   );
@@ -169,7 +169,7 @@ const NoNavigatorsForm = ({
     !formik.isValid ||
     !phoneValid ||
     !messagePhoneValid ||
-    (!formik.dirty && !phoneDirty && !messagePhoneDirty);
+    (!messagePhoneDirty && !formik.dirty && !phoneDirty);
 
   return (
     <>

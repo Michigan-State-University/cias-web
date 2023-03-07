@@ -6,6 +6,7 @@ import { colors, themeColors } from 'theme';
 
 import greenPhone from 'assets/svg/green-phone.svg';
 import greenEmail from 'assets/svg/green-email.svg';
+import messagePhoneIcon from 'assets/svg/message-phone.svg';
 
 import Text from 'components/Text';
 import Row from 'components/Row';
@@ -63,7 +64,7 @@ const ContactDetails = ({ contactEmail, phone, messagePhone }: Props) => {
       {messagePhone && (
         <Row mb={8} align="center">
           {/* @ts-ignore */}
-          <Icon mr={8} src={greenPhone} alt="phone" />
+          <Icon mr={8} src={messagePhoneIcon} alt="phone" />
           <LinkNoUnderline
             href={`sms:${messagePhone.prefix}${messagePhone.number}`}
           >
