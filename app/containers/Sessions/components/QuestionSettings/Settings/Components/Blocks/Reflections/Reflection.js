@@ -81,8 +81,11 @@ const Reflection = ({
   };
 
   const handleBlur = (value) => {
-    setIsSpeechUpdating(true);
-    handleTextUpdate(value);
+    const trimmedValue = value.trim();
+    if (text.trim() !== trimmedValue) {
+      setIsSpeechUpdating(true);
+      handleTextUpdate(trimmedValue);
+    }
     setHasFocus(false);
   };
 
