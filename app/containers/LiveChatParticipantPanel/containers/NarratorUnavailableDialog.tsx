@@ -40,8 +40,13 @@ const NarratorUnavailableDialog = ({
   const callingOutNavigator = useSelector(makeSelectCallingOutNavigator());
   const isWaitingForNavigator = useSelector(makeSelectWaitingForNavigator());
 
-  const { contactEmail, participantLinks, phone, noNavigatorAvailableMessage } =
-    liveChatSetup ?? {};
+  const {
+    contactEmail,
+    participantLinks,
+    phone,
+    noNavigatorAvailableMessage,
+    messagePhone,
+  } = liveChatSetup ?? {};
 
   return (
     <>
@@ -89,7 +94,11 @@ const NarratorUnavailableDialog = ({
                 {formatMessage(messages.call988or911)}
               </Text>
               <Box height="2px" bg={colors.linkWater} width="56px" mt={16} />
-              <ContactDetails phone={phone} contactEmail={contactEmail} />
+              <ContactDetails
+                phone={phone}
+                contactEmail={contactEmail}
+                messagePhone={messagePhone}
+              />
               <ParticipantUsefulLinks participantLinks={participantLinks} />
             </Column>
           </Box>

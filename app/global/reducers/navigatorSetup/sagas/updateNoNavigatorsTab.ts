@@ -22,12 +22,19 @@ export function* updateNoNavigatorsTab({
   payload: { interventionId, noNavigatorsData },
 }: ReturnType<typeof updateNoNavigatorTabRequest>) {
   const url = `/v1/live_chat/intervention/${interventionId}/navigator_setup`;
-
   try {
+    const { phone, messagePhone, ...rest } = noNavigatorsData;
     yield call(
       axios.patch,
       url,
-      objectToSnakeCase({ navigatorSetup: noNavigatorsData }),
+      objectToSnakeCase({
+        // @ts-ignore
+        navigatorSetup: {
+          phoneAttributes: phone,
+          messagePhoneAttributes: messagePhone,
+          ...rest,
+        },
+      }),
     );
     yield put(updateNoNavigatorsTabSuccess());
   } catch (error) {
