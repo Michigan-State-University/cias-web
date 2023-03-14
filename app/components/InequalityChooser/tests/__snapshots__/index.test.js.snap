@@ -85,7 +85,7 @@ exports[`<InequalityChooser /> Should render and match the snapshot 1`] = `
           <div
             class=" css-1uccc91-singleValue"
           >
-            =5
+            =
           </div>
           <div
             class="css-b8ldur-Input"

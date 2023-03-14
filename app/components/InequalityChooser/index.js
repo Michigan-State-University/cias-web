@@ -41,7 +41,7 @@ const InequalityChooser = ({
     const newInequalitySign = inequalityValue
       ? inequalityValue.slice(
           0,
-          inequalityValue?.length ?? 0 - newNumericValue.length,
+          (inequalityValue?.length ?? 0) - newNumericValue.length,
         )
       : '';
 
