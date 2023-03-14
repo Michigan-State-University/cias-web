@@ -29,7 +29,7 @@ import messages from '../../messages';
 import { removeFormulaCase, updateFormulaCase } from './actions';
 import SpeechInput from '../SpeechInput';
 
-const Reflection = ({
+const ReflectionFormula = ({
   formatMessage,
   reflection,
   blockIndex,
@@ -85,8 +85,11 @@ const Reflection = ({
   };
 
   const handleBlur = (value) => {
-    setIsSpeechUpdating(true);
-    handleTextUpdate(value);
+    const trimmedValue = value.trim();
+    if (text.trim() !== trimmedValue) {
+      setIsSpeechUpdating(true);
+      handleTextUpdate(trimmedValue);
+    }
     setHasFocus(false);
   };
 
@@ -139,7 +142,7 @@ const Reflection = ({
   );
 };
 
-Reflection.propTypes = {
+ReflectionFormula.propTypes = {
   formatMessage: PropTypes.func.isRequired,
   id: PropTypes.string,
   reflection: PropTypes.object,
@@ -179,4 +182,4 @@ const mapDispatchToProps = {
 
 const withConnect = connect(mapStateToProps, mapDispatchToProps);
 
-export default compose(withConnect)(Reflection);
+export default compose(withConnect)(ReflectionFormula);

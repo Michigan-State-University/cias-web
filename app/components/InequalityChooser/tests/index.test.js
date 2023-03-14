@@ -53,7 +53,7 @@ describe('<InequalityChooser />', () => {
     fireEvent.blur(numericInput);
     await waitFor(() =>
       expect(defaultProps.onSuccessfulChange).toHaveBeenCalledWith(
-        `=${newValue}`,
+        `=5${newValue}`,
       ),
     );
   });

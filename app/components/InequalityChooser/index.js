@@ -35,11 +35,15 @@ const InequalityChooser = ({
   });
 
   const { inequalitySign, numericValue } = useMemo(() => {
-    const newNumericValue = inequalityValue.replace(/\D/g, '');
-    const newInequalitySign = inequalityValue.slice(
-      0,
-      inequalityValue.length - newNumericValue.length,
-    );
+    const newNumericValue = inequalityValue
+      ? inequalityValue.replace(/\D/g, '')
+      : '';
+    const newInequalitySign = inequalityValue
+      ? inequalityValue.slice(
+          0,
+          inequalityValue?.length ?? 0 - newNumericValue.length,
+        )
+      : '';
 
     return {
       numericValue: newNumericValue,
