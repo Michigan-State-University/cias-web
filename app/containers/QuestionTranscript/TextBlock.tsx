@@ -1,11 +1,18 @@
 import React, { memo, useEffect, useRef } from 'react';
-import PropTypes from 'prop-types';
+
+import { LanguageDirection } from 'global/types/locale';
 
 import scrollByRef from 'utils/scrollByRef';
 
 import { StyledTextBlock } from './styled';
 
-const TextBlock = ({ text, isCurrent }) => {
+export type Props = {
+  text: string;
+  isCurrent: boolean;
+  dir: LanguageDirection;
+};
+
+const TextBlock = ({ text, isCurrent, dir }: Props) => {
   const textBlockRef = useRef();
 
   useEffect(() => {
@@ -13,15 +20,10 @@ const TextBlock = ({ text, isCurrent }) => {
   }, [isCurrent]);
 
   return (
-    <StyledTextBlock ref={textBlockRef} isCurrent={isCurrent}>
+    <StyledTextBlock ref={textBlockRef} isCurrent={isCurrent} dir={dir}>
       {text}
     </StyledTextBlock>
   );
-};
-
-TextBlock.propTypes = {
-  text: PropTypes.string,
-  isCurrent: PropTypes.bool,
 };
 
 export default memo(TextBlock);
