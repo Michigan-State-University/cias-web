@@ -44,8 +44,13 @@ const WaitingForNavigatorDialog = ({
   );
   const cancellingCallOut = useSelector(makeSelectCancellingCallOut());
   const callingOutNavigator = useSelector(makeSelectCallingOutNavigator());
-  const { phone, contactEmail, participantLinks, messagePhone } =
-    useSelector(makeSelectLiveChatSetup()) ?? {};
+  const {
+    phone,
+    contactEmail,
+    participantLinks,
+    messagePhone,
+    contactMessage,
+  } = useSelector(makeSelectLiveChatSetup()) ?? {};
 
   const nextCallOutAvailable = !callOutNavigatorUnlockTime;
 
@@ -116,6 +121,7 @@ const WaitingForNavigatorDialog = ({
               phone={phone}
               contactEmail={contactEmail}
               messagePhone={messagePhone}
+              contactMessage={contactMessage}
             />
             <ParticipantUsefulLinks participantLinks={participantLinks} />
           </Column>

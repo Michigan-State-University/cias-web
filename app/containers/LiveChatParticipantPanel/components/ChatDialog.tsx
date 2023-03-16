@@ -56,7 +56,8 @@ const ChatDialog = ({
 
   const liveChatSetup = useSelector(makeSelectLiveChatSetup());
 
-  const { contactEmail, phone, messagePhone } = liveChatSetup ?? {};
+  const { contactEmail, phone, messagePhone, contactMessage } =
+    liveChatSetup ?? {};
 
   const participantFilesButtonTitle = formatMessage(
     i18nMessages[
@@ -141,6 +142,7 @@ const ChatDialog = ({
                   contactEmail={contactEmail}
                   messagePhone={messagePhone}
                   phone={phone}
+                  contactMessage={contactMessage}
                 />
               </Column>
             </BoxWithUnderShadow>

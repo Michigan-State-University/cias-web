@@ -46,6 +46,7 @@ const NarratorUnavailableDialog = ({
     phone,
     noNavigatorAvailableMessage,
     messagePhone,
+    contactMessage,
   } = liveChatSetup ?? {};
 
   return (
@@ -98,6 +99,7 @@ const NarratorUnavailableDialog = ({
                 phone={phone}
                 contactEmail={contactEmail}
                 messagePhone={messagePhone}
+                contactMessage={contactMessage}
               />
               <ParticipantUsefulLinks participantLinks={participantLinks} />
             </Column>
