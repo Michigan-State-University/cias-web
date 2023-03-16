@@ -15,6 +15,7 @@ import { Provider } from 'react-redux';
 import { DEFAULT_LOCALE } from 'i18n';
 
 import { SessionSchedule as SessionScheduleEnum } from 'models/Session';
+import { InterventionSharedTo } from 'models/Intervention';
 
 import SessionSchedule from '../index';
 
@@ -28,6 +29,7 @@ describe('<SessionSchedule />', () => {
   const exactDateProps = {
     selectedScheduleOption: SessionScheduleEnum.EXACT_DATE,
     scheduleAt: new Date(2018, 11, 24, 10, 33, 30, 0),
+    sharedTo: InterventionSharedTo.REGISTERED,
   };
 
   it('Expect to not log errors in console', () => {

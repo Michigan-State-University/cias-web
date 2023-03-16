@@ -6,6 +6,8 @@
 
 import { defineMessages } from 'react-intl';
 
+import { SessionSchedule } from 'models/Session';
+
 export const scope = 'app.components.SessionSchedule';
 
 export default defineMessages({
@@ -17,32 +19,32 @@ export default defineMessages({
     id: `${scope}.send`,
     defaultMessage: 'Send ',
   },
-  daysAfter: {
-    id: `${scope}.daysAfter`,
+  [SessionSchedule.DAYS_AFTER]: {
+    id: `${scope}.${SessionSchedule.DAYS_AFTER}`,
     defaultMessage:
       'Send email invitation [X] days after previous session scheduled date',
   },
-  daysAfterFill: {
-    id: `${scope}.daysAfterFill`,
+  [SessionSchedule.DAYS_AFTER_FILL]: {
+    id: `${scope}.${[SessionSchedule.DAYS_AFTER_FILL]}`,
     defaultMessage:
       'Send email invitation [X] days after previous session completed date',
   },
-  daysAfterDate: {
-    id: `${scope}.daysAfterDate`,
+  [SessionSchedule.DAYS_AFTER_DATE]: {
+    id: `${scope}.${[SessionSchedule.DAYS_AFTER_DATE]}`,
     defaultMessage:
       'Send email invitation [X] days after a date provided by participant',
   },
-  exactDate: {
-    id: `${scope}.exactDate`,
+  [SessionSchedule.EXACT_DATE]: {
+    id: `${scope}.${[SessionSchedule.EXACT_DATE]}`,
     defaultMessage: 'Send email invitation on exact date',
   },
-  afterFill: {
-    id: `${scope}.afterFill`,
+  [SessionSchedule.AFTER_FILL]: {
+    id: `${scope}.${[SessionSchedule.AFTER_FILL]}`,
     defaultMessage:
       'Send email invitation immediately after previous session completion',
   },
-  immediately: {
-    id: `${scope}.immediately`,
+  [SessionSchedule.IMMEDIATELY]: {
+    id: `${scope}.${SessionSchedule.IMMEDIATELY}`,
     defaultMessage:
       'Start session immediately after previous session completion',
   },
