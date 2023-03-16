@@ -19,23 +19,32 @@ export default defineMessages({
   },
   daysAfter: {
     id: `${scope}.daysAfter`,
-    defaultMessage: 'Send [X] days after previous session scheduled date',
+    defaultMessage:
+      'Send email invitation [X] days after previous session scheduled date',
   },
   daysAfterFill: {
     id: `${scope}.daysAfterFill`,
-    defaultMessage: 'Send [X] days after previous session completed date',
+    defaultMessage:
+      'Send email invitation [X] days after previous session completed date',
   },
   daysAfterDate: {
     id: `${scope}.daysAfterDate`,
-    defaultMessage: 'Send [X] days after a date provided by participant',
+    defaultMessage:
+      'Send email invitation [X] days after a date provided by participant',
   },
   exactDate: {
     id: `${scope}.exactDate`,
-    defaultMessage: 'Send on exact date',
+    defaultMessage: 'Send email invitation on exact date',
   },
   afterFill: {
     id: `${scope}.afterFill`,
-    defaultMessage: 'Send immediately after previous session completion',
+    defaultMessage:
+      'Send email invitation immediately after previous session completion',
+  },
+  immediately: {
+    id: `${scope}.immediately`,
+    defaultMessage:
+      'Start session immediately after previous session completion',
   },
   daysAfterInfo: {
     id: `${scope}.daysAfterInfo`,

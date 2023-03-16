@@ -14,10 +14,12 @@ import values from 'lodash/values';
 import find from 'lodash/find';
 
 import { dateQuestion } from 'models/Session/QuestionTypes';
-import { SessionTypes } from 'models/Session';
+import {
+  SessionTypes,
+  SessionSchedule as SessionScheduleEnum,
+} from 'models/Session';
 
 import {
-  SCHEDULE_OPTIONS,
   changeSchedulingType,
   updateSchedulingDate,
   updateSchedulingPayload,
@@ -61,24 +63,28 @@ function SessionSchedule({
 
   const scheduleOptions = {
     afterFill: {
-      id: SCHEDULE_OPTIONS.afterFill,
+      id: SessionScheduleEnum.AFTER_FILL,
       label: formatMessage(messages.afterFill),
     },
     daysAfter: {
-      id: SCHEDULE_OPTIONS.daysAfter,
+      id: SessionScheduleEnum.DAYS_AFTER,
       label: formatMessage(messages.daysAfter),
     },
     daysAfterFill: {
-      id: SCHEDULE_OPTIONS.daysAfterFill,
+      id: SessionScheduleEnum.DAYS_AFTER_FILL,
       label: formatMessage(messages.daysAfterFill),
     },
     daysAfterDate: {
-      id: SCHEDULE_OPTIONS.daysAfterDate,
+      id: SessionScheduleEnum.DAYS_AFTER_DATE,
       label: formatMessage(messages.daysAfterDate),
     },
     exactDate: {
-      id: SCHEDULE_OPTIONS.exactDate,
+      id: SessionScheduleEnum.EXACT_DATE,
       label: formatMessage(messages.exactDate),
+    },
+    immediately: {
+      id: SessionScheduleEnum.IMMEDIATELY,
+      label: formatMessage(messages.immediately),
     },
   };
 
@@ -156,6 +162,7 @@ function SessionSchedule({
           />
         );
       case scheduleOptions.afterFill.id:
+      case scheduleOptions.immediately.id:
         return <></>;
       default:
         break;

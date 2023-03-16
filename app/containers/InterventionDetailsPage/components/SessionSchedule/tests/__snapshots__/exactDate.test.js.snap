@@ -260,7 +260,7 @@ exports[`<SessionSchedule /> Should render and match the snapshot 1`] = `
           color="#B727EA"
           font-weight="bold"
         >
-          Send on exact date
+          Send email invitation on exact date
         </p>
         <img
           alt="arrow"
