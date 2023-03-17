@@ -12,9 +12,9 @@ export const importAnimation = async (
 ) => import(`assets/animations/${character}/${animationName}.json`);
 
 export const getScaleFactor = (
-  clientWidth: number,
-  clientHeight: number,
+  animationContainer: Pick<HTMLElement, 'clientWidth' | 'clientHeight'>,
 ): ScaleFactor2D => {
+  const { clientWidth, clientHeight } = animationContainer;
   const containerWidthWithBorders = clientWidth + 2;
   const containerHeightWithBorders = clientHeight + 2;
   const scaleX = Math.min(
