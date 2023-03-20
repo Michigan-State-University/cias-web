@@ -202,8 +202,8 @@ const NoNavigatorsForm = ({
             phone={phone ?? defaultPhone}
             changePhoneNumber={onPhoneNumberFormChange(setNewPhone)}
             confirmationDisabled
-            prefixLabelMessage={messages.contactHotlinePrefix}
-            phoneLabel={messages.contactHotlinePhoneNumber}
+            prefixLabelMessage={messages.contactPrefix}
+            phoneLabel={messages.contactPhoneNumber}
             required={false}
             allowPartial
             ref={phoneNumberFormCallbackRef}
@@ -216,8 +216,8 @@ const NoNavigatorsForm = ({
             phone={messagePhone ?? defaultPhone}
             changePhoneNumber={onPhoneNumberFormChange(setMessageNewPhone)}
             confirmationDisabled
-            prefixLabelMessage={messages.messageHotlinePrefix}
-            phoneLabel={messages.messageHotlinePhoneNumber}
+            prefixLabelMessage={messages.messagePrefix}
+            phoneLabel={messages.messagePhoneNumber}
             required={false}
             allowPartial
             ref={messagePhoneNumberFormCallbackRef}

@@ -167,21 +167,21 @@ export default defineMessages({
     id: `${scope}.notifyNavigator`,
     defaultMessage: `Notify navigator about new messages even then it won't be online`,
   },
-  contactHotlinePrefix: {
-    id: `${scope}.contactHotlinePrefix`,
-    defaultMessage: 'Contact hotline prefix',
+  contactPrefix: {
+    id: `${scope}.contactPrefix`,
+    defaultMessage: 'Contact prefix',
   },
-  contactHotlinePhoneNumber: {
-    id: `${scope}.contactHotlinePhoneNumber`,
-    defaultMessage: 'Contact hotline phone number',
+  contactPhoneNumber: {
+    id: `${scope}.contactPhoneNumber`,
+    defaultMessage: 'Contact phone number',
   },
-  messageHotlinePrefix: {
-    id: `${scope}.hotlinePrefix`,
-    defaultMessage: 'Message hotline prefix',
+  messagePrefix: {
+    id: `${scope}.messagePrefix`,
+    defaultMessage: 'Message prefix',
   },
-  messageHotlinePhoneNumber: {
-    id: `${scope}.hotlinePhoneNumber`,
-    defaultMessage: 'Message hotline phone number',
+  messagePhoneNumber: {
+    id: `${scope}.messagePhoneNumber`,
+    defaultMessage: 'Message phone number',
   },
   saveChanges: {
     id: `${scope}.saveChanges`,
