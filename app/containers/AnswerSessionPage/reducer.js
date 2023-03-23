@@ -33,6 +33,9 @@ import {
   FETCH_OR_CREATE_USER_SESSION_REQUEST,
   FETCH_OR_CREATE_USER_SESSION_SUCCESS,
   FETCH_OR_CREATE_USER_SESSION_ERROR,
+  FETCH_PREVIOUS_QUESTION_REQUEST,
+  FETCH_PREVIOUS_QUESTION_SUCCESS,
+  FETCH_PREVIOUS_QUESTION_ERROR,
 } from './constants';
 
 const getEmptyFeedbackScreenSettings = () => ({
@@ -44,7 +47,6 @@ export const initialState = {
   questionLoading: false,
   questionError: '',
   sessionQuestions: [],
-  questionIndex: 0,
   answersLoading: false,
   answersError: '',
   answers: {},
@@ -67,134 +69,198 @@ export const initialState = {
   transitionalUserSessionId: null,
   previousUserSessionId: null,
   showTextReadingControls: false,
+  fetchPreviousQuestionLoading: false,
+  fetchPreviousQuestionError: null,
 };
 
 /* eslint-disable default-case, no-param-reassign */
 const AnswerSessionPageReducer = (state = initialState, { payload, type }) =>
   produce(state, (draft) => {
     switch (type) {
-      case RESET_REDUCER:
+      case RESET_REDUCER: {
         Object.assign(draft, initialState);
         break;
+      }
 
-      case SELECT_ANSWER:
-        draft.answers[payload.id] = payload;
+      case SELECT_ANSWER: {
+        const { questionId, answerBody } = payload;
+        draft.answers[questionId] = { answerBody };
         break;
+      }
 
       case SUBMIT_ANSWER_REQUEST: {
         draft.answersError = '';
-        const { skipped, answerId } = payload;
+        const { skipped, questionId } = payload;
 
-        draft.answers[answerId] = {
-          ...state.answers[answerId],
+        draft.answers[questionId] = {
+          ...state.answers[questionId],
           skipped,
           loading: true,
         };
         break;
       }
 
-      case SUBMIT_ANSWER_SUCCESS:
-        draft.answersError = '';
-        draft.answers[payload.answerId].loading = false;
-        draft.answers[payload.answerId].questionId = state.questionIndex;
-        break;
+      case SUBMIT_ANSWER_SUCCESS: {
+        const { questionId } = payload;
 
-      case SUBMIT_ANSWER_ERROR:
-        draft.answersError = payload.error;
-        draft.answers[payload.answerId].loading = false;
-        draft.answers[payload.answerId].answerBody = state.answers[
-          payload.answerId
-        ].answerBody
-          ? state.answers[payload.answerId].answerBody
+        draft.answersError = '';
+        draft.answers[questionId].loading = false;
+        break;
+      }
+      case SUBMIT_ANSWER_ERROR: {
+        const { error, questionId } = payload;
+
+        draft.answersError = error;
+        draft.answers[questionId].loading = false;
+        draft.answers[questionId].answerBody = state.answers[questionId]
+          .answerBody
+          ? state.answers[questionId].answerBody
           : [];
         break;
+      }
 
-      case START_SESSION:
+      case START_SESSION: {
         draft.interventionStarted = true;
         break;
+      }
 
-      case CHANGE_PREVIEW_MODE:
+      case CHANGE_PREVIEW_MODE: {
         draft.previewMode = payload.previewMode;
         break;
-      case CHANGE_IS_ANIMATING:
+      }
+
+      case CHANGE_IS_ANIMATING: {
         draft.isAnimationOngoing = payload.isAnimating;
         break;
-      case SET_FEEDBACK_SCREEN_SETTINGS:
+      }
+
+      case SET_FEEDBACK_SCREEN_SETTINGS: {
         draft.feedbackScreenSettings[payload.setting] = payload.value;
         break;
+      }
 
-      case FETCH_USER_SESSION_REQUEST:
+      case FETCH_USER_SESSION_REQUEST: {
         draft.userSessionLoading = true;
         draft.fetchUserSessionError = null;
         break;
+      }
 
-      case FETCH_USER_SESSION_SUCCESS:
+      case FETCH_USER_SESSION_SUCCESS: {
         draft.userSessionLoading = false;
         draft.userSession = payload.userSession;
         break;
+      }
 
-      case FETCH_USER_SESSION_ERROR:
+      case FETCH_USER_SESSION_ERROR: {
         draft.userSessionLoading = false;
         draft.fetchUserSessionError = payload.error;
         break;
+      }
 
       case CREATE_USER_SESSION_REQUEST:
-      case FETCH_OR_CREATE_USER_SESSION_REQUEST:
+      case FETCH_OR_CREATE_USER_SESSION_REQUEST: {
         draft.userSessionLoading = true;
         draft.questionError = null;
         break;
+      }
 
       case CREATE_USER_SESSION_SUCCESS:
-      case FETCH_OR_CREATE_USER_SESSION_SUCCESS:
+      case FETCH_OR_CREATE_USER_SESSION_SUCCESS: {
         draft.userSessionLoading = false;
         draft.userSession = payload.userSession;
         draft.questionError = null;
         break;
+      }
 
       case CREATE_USER_SESSION_FAILURE:
-      case FETCH_OR_CREATE_USER_SESSION_ERROR:
+      case FETCH_OR_CREATE_USER_SESSION_ERROR: {
         draft.userSessionLoading = false;
         draft.questionError = payload;
         break;
+      }
 
-      case NEXT_QUESTION_REQUEST:
+      case NEXT_QUESTION_REQUEST: {
         draft.nextQuestionLoading = true;
         break;
+      }
 
-      case NEXT_QUESTION_SUCCESS:
+      case NEXT_QUESTION_SUCCESS: {
+        const { question, answer } = payload;
+
         draft.nextQuestionError = null;
         draft.nextQuestionLoading = false;
-        draft.currentQuestion = payload.question;
-        break;
+        draft.currentQuestion = question;
 
-      case NEXT_QUESTION_FAILURE:
+        if (answer) {
+          const { decryptedBody, questionId } = answer;
+          draft.answers[questionId] = {
+            answerBody: decryptedBody.data,
+          };
+        }
+        break;
+      }
+
+      case NEXT_QUESTION_FAILURE: {
         draft.nextQuestionError = payload;
         draft.nextQuestionLoading = false;
         break;
+      }
 
-      case CLEAR_ERROR:
+      case CLEAR_ERROR: {
         draft.nextQuestionError = null;
         draft.questionError = null;
         break;
+      }
 
-      case CHANGE_USER_SESSION_ID:
+      case CHANGE_USER_SESSION_ID: {
         draft.previousUserSessionId = draft.userSession.id;
         draft.userSession.id = payload.userSessionId;
         break;
+      }
 
-      case SET_CURRENT_BLOCK_INDEX:
+      case SET_CURRENT_BLOCK_INDEX: {
         draft.currentBlockIndex = payload.index;
         break;
+      }
 
-      case SET_PARTICIPANT_SESSION_SETTINGS:
+      case SET_PARTICIPANT_SESSION_SETTINGS: {
         const { showTextTranscript, showTextReadingControls } =
           payload.settings;
         draft.showTextTranscript = showTextTranscript;
         draft.showTextReadingControls = showTextReadingControls;
         break;
+      }
 
       case SET_TRANSITIONAL_USER_SESSION_ID: {
         draft.transitionalUserSessionId = payload.userSessionId;
+        break;
+      }
+
+      case FETCH_PREVIOUS_QUESTION_REQUEST: {
+        draft.fetchPreviousQuestionLoading = true;
+        break;
+      }
+
+      case FETCH_PREVIOUS_QUESTION_SUCCESS: {
+        const { question, answer } = payload;
+
+        draft.fetchPreviousQuestionError = null;
+        draft.fetchPreviousQuestionLoading = false;
+        draft.currentQuestion = question;
+
+        if (answer) {
+          const { decryptedBody, questionId } = answer;
+          draft.answers[questionId] = {
+            answerBody: decryptedBody.data,
+          };
+        }
+        break;
+      }
+
+      case FETCH_PREVIOUS_QUESTION_ERROR: {
+        draft.fetchPreviousQuestionError = payload.error;
+        draft.fetchPreviousQuestionLoading = false;
+        break;
       }
     }
   });

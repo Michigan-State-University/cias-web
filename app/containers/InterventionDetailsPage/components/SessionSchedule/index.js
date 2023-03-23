@@ -4,20 +4,22 @@
  *
  */
 
-import React from 'react';
+import React, { useMemo } from 'react';
 import PropTypes from 'prop-types';
 import { injectIntl } from 'react-intl';
 import { connect } from 'react-redux';
 import { compose } from 'redux';
 import { createStructuredSelector } from 'reselect';
-import values from 'lodash/values';
 import find from 'lodash/find';
 
 import { dateQuestion } from 'models/Session/QuestionTypes';
-import { SessionTypes } from 'models/Session';
+import {
+  SessionTypes,
+  SessionSchedule as SessionScheduleEnum,
+} from 'models/Session';
+import { InterventionSharedTo } from 'models/Intervention';
 
 import {
-  SCHEDULE_OPTIONS,
   changeSchedulingType,
   updateSchedulingDate,
   updateSchedulingPayload,
@@ -42,6 +44,7 @@ import Badge from 'components/Badge';
 import ExactDateOption from './ExactDateOption';
 import DaysAfterOption from './DaysAfterOption';
 import messages from './messages';
+import { SESSION_SCHEDULE_OPTIONS } from './contants';
 
 function SessionSchedule({
   intl: { formatMessage },
@@ -56,31 +59,31 @@ function SessionSchedule({
   disabled,
   session,
   updateDateVariable,
+  sharedTo,
 }) {
   const { interventionId } = session ?? {};
 
-  const scheduleOptions = {
-    afterFill: {
-      id: SCHEDULE_OPTIONS.afterFill,
-      label: formatMessage(messages.afterFill),
-    },
-    daysAfter: {
-      id: SCHEDULE_OPTIONS.daysAfter,
-      label: formatMessage(messages.daysAfter),
-    },
-    daysAfterFill: {
-      id: SCHEDULE_OPTIONS.daysAfterFill,
-      label: formatMessage(messages.daysAfterFill),
-    },
-    daysAfterDate: {
-      id: SCHEDULE_OPTIONS.daysAfterDate,
-      label: formatMessage(messages.daysAfterDate),
-    },
-    exactDate: {
-      id: SCHEDULE_OPTIONS.exactDate,
-      label: formatMessage(messages.exactDate),
-    },
-  };
+  const scheduleOptions = useMemo(() => {
+    switch (sharedTo) {
+      case InterventionSharedTo.REGISTERED:
+      case InterventionSharedTo.INVITED:
+        return [
+          SESSION_SCHEDULE_OPTIONS[SessionScheduleEnum.AFTER_FILL],
+          SESSION_SCHEDULE_OPTIONS[SessionScheduleEnum.DAYS_AFTER],
+          SESSION_SCHEDULE_OPTIONS[SessionScheduleEnum.DAYS_AFTER_FILL],
+          SESSION_SCHEDULE_OPTIONS[SessionScheduleEnum.DAYS_AFTER_DATE],
+          SESSION_SCHEDULE_OPTIONS[SessionScheduleEnum.EXACT_DATE],
+          SESSION_SCHEDULE_OPTIONS[SessionScheduleEnum.IMMEDIATELY],
+        ];
+      case InterventionSharedTo.ANYONE:
+        return [
+          SESSION_SCHEDULE_OPTIONS[SessionScheduleEnum.AFTER_FILL],
+          SESSION_SCHEDULE_OPTIONS[SessionScheduleEnum.IMMEDIATELY],
+        ];
+      default:
+        return [];
+    }
+  }, [sharedTo]);
 
   const handleOnClickDateVariable = (value) =>
     updateDateVariable(value, sessionId);
@@ -90,7 +93,7 @@ function SessionSchedule({
 
   const renderOption = () => {
     switch (selectedScheduleOption) {
-      case scheduleOptions.daysAfter.id:
+      case SessionScheduleEnum.DAYS_AFTER:
         return (
           <DaysAfterOption
             id={sessionId}
@@ -100,7 +103,7 @@ function SessionSchedule({
             scheduleOption={selectedScheduleOption}
           />
         );
-      case scheduleOptions.daysAfterFill.id:
+      case SessionScheduleEnum.DAYS_AFTER_FILL:
         return (
           <DaysAfterOption
             id={sessionId}
@@ -110,7 +113,7 @@ function SessionSchedule({
             scheduleOption={selectedScheduleOption}
           />
         );
-      case scheduleOptions.daysAfterDate.id:
+      case SessionScheduleEnum.DAYS_AFTER_DATE:
         return (
           <Column>
             <Row align="center">
@@ -147,7 +150,7 @@ function SessionSchedule({
             </Row>
           </Column>
         );
-      case scheduleOptions.exactDate.id:
+      case SessionScheduleEnum.EXACT_DATE:
         return (
           <ExactDateOption
             disabled={disabled}
@@ -155,7 +158,8 @@ function SessionSchedule({
             setValue={handleChangeDate}
           />
         );
-      case scheduleOptions.afterFill.id:
+      case SessionScheduleEnum.AFTER_FILL:
+      case SessionScheduleEnum.IMMEDIATELY:
         return <></>;
       default:
         break;
@@ -169,7 +173,7 @@ function SessionSchedule({
       <Selector
         disabled={disabled}
         selectOptionPlaceholder={formatMessage(messages.default)}
-        options={values(scheduleOptions)}
+        options={scheduleOptions}
         activeOption={find(
           scheduleOptions,
           (elem) => elem.id === selectedScheduleOption,
@@ -202,6 +206,7 @@ SessionSchedule.propTypes = {
   disabled: PropTypes.bool,
   updateDateVariable: PropTypes.func,
   session: PropTypes.object,
+  sharedTo: PropTypes.string,
 };
 
 const mapStateToProps = createStructuredSelector({

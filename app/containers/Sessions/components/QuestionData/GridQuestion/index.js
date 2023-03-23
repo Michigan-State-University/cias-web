@@ -139,7 +139,7 @@ const GridQuestion = ({
         >
           <Table>
             <THead>
-              <StripedTR color={colors.catskillWhite} bg={colors.zirkon}>
+              <StripedTR color={colors.catskillWhite} bg={colors.white}>
                 <FirstTH
                   ref={firstColRef}
                   left={elements.grid.leftPadding}
@@ -191,17 +191,19 @@ const GridQuestion = ({
                             }
                           />
                         </Box>
-                        <Img
-                          alt={formatMessage(messages.reorderIconAlt, {
-                            index: columnIndex,
-                          })}
-                          src={ReorderIcon}
-                          disabled={false}
-                          cursor="grab"
-                          mb={10}
-                          mt={20}
-                          {...dragHandleProps}
-                        />
+                        {!isNarratorTabOrEditNotPossible && (
+                          <Img
+                            alt={formatMessage(messages.reorderIconAlt, {
+                              index: columnIndex,
+                            })}
+                            src={ReorderIcon}
+                            disabled={false}
+                            cursor="grab"
+                            mb={10}
+                            mt={20}
+                            {...dragHandleProps}
+                          />
+                        )}
                         <Row display="flex" hidden={isNarratorTab} mb={8}>
                           <BadgeInput
                             disabled={!editingPossible}
@@ -276,7 +278,7 @@ const GridQuestion = ({
                 itemTag={StripedTR}
                 itemProps={{
                   color: colors.catskillWhite,
-                  bg: colors.zirkon,
+                  bg: colors.white,
                 }}
                 overlayProps={{
                   overlayWrapperTag: 'table',
@@ -312,17 +314,19 @@ const GridQuestion = ({
                             <div ref={containerBottomRef} />
                           )}
                         </Box>
-                        <Img
-                          alt={formatMessage(messages.reorderIconAlt, {
-                            index: rowIndex,
-                          })}
-                          ml={20}
-                          mr={10}
-                          src={ReorderIcon}
-                          disabled={false}
-                          cursor="grab"
-                          {...dragHandleProps}
-                        />
+                        {!isNarratorTabOrEditNotPossible && (
+                          <Img
+                            alt={formatMessage(messages.reorderIconAlt, {
+                              index: rowIndex,
+                            })}
+                            ml={20}
+                            mr={10}
+                            src={ReorderIcon}
+                            disabled={false}
+                            cursor="grab"
+                            {...dragHandleProps}
+                          />
+                        )}
                         <Row align="center" justify="between" width="100%">
                           <Row display="flex" hidden={isNarratorTab} mr={8}>
                             <BadgeInput

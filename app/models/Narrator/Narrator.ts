@@ -1,7 +1,5 @@
 import { CamelToSnake } from 'global/types/camelToSnake';
 
-import { CharacterType } from 'models/Character';
-
 import {
   BodyAnimation,
   BodyAutoRestAnimation,
@@ -11,6 +9,7 @@ import {
 } from './Animation';
 import { EFeedbackAction } from './FeedbackActions';
 import { NarratorBlockTypes } from './NarratorBlockTypes';
+import { NarratorSettings } from './NarratorSettings';
 
 export interface Position {
   x: number;
@@ -103,12 +102,6 @@ export type NarratorBlock =
   | IHeadAnimationBlock
   | IPauseBlock
   | IFeedbackBlock;
-
-export interface NarratorSettings {
-  voice: boolean;
-  animation: boolean;
-  character: CharacterType;
-}
 
 export interface Narrator {
   blocks: NarratorBlock[];

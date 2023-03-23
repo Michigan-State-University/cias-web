@@ -13,13 +13,6 @@ export const StyledButton = styled(Button)`
   `}
 `;
 
-export const BackButton = styled.div`
-  font-weight: bold;
-  margin-bottom: 10px;
-  font-size: 0.7rem;
-  cursor: pointer;
-`;
-
 export const AnswerInterventionContent = styled.div`
   align-items: flex-start;
   display: flex;

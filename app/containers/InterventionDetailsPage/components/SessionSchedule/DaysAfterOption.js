@@ -2,9 +2,10 @@ import React, { useMemo } from 'react';
 import PropTypes from 'prop-types';
 import { injectIntl } from 'react-intl';
 
+import { SessionSchedule } from 'models/Session';
+
 import { numericValidator } from 'utils/validators';
 import isNullOrUndefined from 'utils/isNullOrUndefined';
-import { SCHEDULE_OPTIONS } from 'global/reducers/intervention';
 
 import ApprovableInput from 'components/Input/ApprovableInput';
 import Text from 'components/Text';
@@ -23,11 +24,11 @@ const DaysAfterOption = ({
 
   const textInfo = useMemo(() => {
     switch (scheduleOption) {
-      case SCHEDULE_OPTIONS.daysAfterFill:
+      case SessionSchedule.DAYS_AFTER_FILL:
         return formatMessage(messages.daysAfterFillInfo);
-      case SCHEDULE_OPTIONS.daysAfterDate:
+      case SessionSchedule.DAYS_AFTER_DATE:
         return formatMessage(messages.daysAfterDateInfo);
-      case SCHEDULE_OPTIONS.daysAfter:
+      case SessionSchedule.DAYS_AFTER:
       default:
         return formatMessage(messages.daysAfterInfo);
     }

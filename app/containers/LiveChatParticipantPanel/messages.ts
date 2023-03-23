@@ -53,19 +53,6 @@ export default defineMessages({
     id: `${scope}.call988or911`,
     defaultMessage: `If this an emergency please dial <phone>988</phone> for the suicide & crisis lifeline, or <phone>911</phone>.`,
   },
-  phoneEmailContact: {
-    id: `${scope}.phoneEmailContact`,
-    defaultMessage:
-      'You can contact us directly by calling our team or by sending us an e-mail',
-  },
-  phoneContact: {
-    id: `${scope}.phoneContact`,
-    defaultMessage: 'You can contact us directly by calling our team',
-  },
-  emailContact: {
-    id: `${scope}.emailContact`,
-    defaultMessage: 'You can contact us directly by sending us an e-mail',
-  },
   usefulLinks: {
     id: `${scope}.usefulLinks`,
     defaultMessage: 'Useful links',
@@ -138,5 +125,13 @@ export default defineMessages({
   iWillWait: {
     id: `${scope}.iWillWait`,
     defaultMessage: `I'll Wait`,
+  },
+  showContactDetails: {
+    id: `${scope}.showContactDetails`,
+    defaultMessage: 'Show contact details',
+  },
+  hideContactDetails: {
+    id: `${scope}.hideContactDetails`,
+    defaultMessage: 'Hide contact details',
   },
 });

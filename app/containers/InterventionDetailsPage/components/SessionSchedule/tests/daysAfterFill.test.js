@@ -8,12 +8,15 @@ import React from 'react';
 import { render } from '@testing-library/react';
 import { IntlProvider } from 'react-intl';
 import 'jest-styled-components';
-import { DEFAULT_LOCALE } from 'i18n';
-
 import configureStore from 'configureStore';
 import { browserHistory } from 'react-router-dom';
 import { Provider } from 'react-redux';
-import { SCHEDULE_OPTIONS } from 'global/reducers/intervention';
+
+import { DEFAULT_LOCALE } from 'i18n';
+
+import { SessionSchedule as SessionScheduleEnum } from 'models/Session';
+import { InterventionSharedTo } from 'models/Intervention';
+
 import SessionSchedule from '../index';
 
 describe('<SessionSchedule />', () => {
@@ -24,8 +27,9 @@ describe('<SessionSchedule />', () => {
   });
 
   const daysAfterFillProps = {
-    selectedScheduleOption: SCHEDULE_OPTIONS.daysAfterFill,
+    selectedScheduleOption: SessionScheduleEnum.DAYS_AFTER_FILL,
     schedulePayload: '1',
+    sharedTo: InterventionSharedTo.REGISTERED,
   };
 
   it('Expect to not log errors in console', () => {
