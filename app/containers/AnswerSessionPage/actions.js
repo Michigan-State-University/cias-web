@@ -35,14 +35,18 @@ import {
   FETCH_OR_CREATE_USER_SESSION_REQUEST,
   FETCH_OR_CREATE_USER_SESSION_SUCCESS,
   FETCH_OR_CREATE_USER_SESSION_ERROR,
+  FETCH_PREVIOUS_QUESTION_REQUEST,
+  FETCH_PREVIOUS_QUESTION_SUCCESS,
+  FETCH_PREVIOUS_QUESTION_ERROR,
 } from './constants';
 
 export const resetReducer = () => actionBuilder(RESET_REDUCER, {});
 
-export const selectAnswer = (payload) => actionBuilder(SELECT_ANSWER, payload);
+export const selectAnswer = (answerBody, questionId) =>
+  actionBuilder(SELECT_ANSWER, { answerBody, questionId });
 
 export const submitAnswer = (
-  answerId,
+  questionId,
   required,
   type,
   sessionId,
@@ -50,7 +54,7 @@ export const submitAnswer = (
   skipped,
 ) =>
   actionBuilder(SUBMIT_ANSWER_REQUEST, {
-    answerId,
+    questionId,
     required,
     type,
     sessionId,
@@ -58,11 +62,11 @@ export const submitAnswer = (
     skipped,
   });
 
-export const submitAnswerSuccess = (answerId) =>
-  actionBuilder(SUBMIT_ANSWER_SUCCESS, { answerId });
+export const submitAnswerSuccess = (questionId) =>
+  actionBuilder(SUBMIT_ANSWER_SUCCESS, { questionId });
 
-export const submitAnswerFailure = (answerId, error) =>
-  actionBuilder(SUBMIT_ANSWER_ERROR, { error, answerId });
+export const submitAnswerFailure = (questionId, error) =>
+  actionBuilder(SUBMIT_ANSWER_ERROR, { error, questionId });
 
 export const startSession = () => actionBuilder(START_SESSION, {});
 
@@ -108,8 +112,8 @@ export const fetchOrCreateUserSessionError = (error) =>
 
 export const nextQuestionRequest = (userSessionId, questionId) =>
   actionBuilder(NEXT_QUESTION_REQUEST, { userSessionId, questionId });
-export const nextQuestionSuccess = (question) =>
-  actionBuilder(NEXT_QUESTION_SUCCESS, { question });
+export const nextQuestionSuccess = (question, answer) =>
+  actionBuilder(NEXT_QUESTION_SUCCESS, { question, answer });
 export const nextQuestionFailure = (error) =>
   actionBuilder(NEXT_QUESTION_FAILURE, { error });
 
@@ -129,3 +133,16 @@ export const setTransitionalUserSessionId = (userSessionId) =>
 
 export const saveQuickExitEventRequest = (userSessionId, isPreview) =>
   actionBuilder(SAVE_QUICK_EXIT_EVENT_REQUEST, { userSessionId, isPreview });
+
+export const fetchPreviousQuestionRequest = (
+  userSessionId,
+  currentQuestionId,
+) =>
+  actionBuilder(FETCH_PREVIOUS_QUESTION_REQUEST, {
+    userSessionId,
+    currentQuestionId,
+  });
+export const fetchPreviousQuestionSuccess = (question, answer) =>
+  actionBuilder(FETCH_PREVIOUS_QUESTION_SUCCESS, { question, answer });
+export const fetchPreviousQuestionError = (error) =>
+  actionBuilder(FETCH_PREVIOUS_QUESTION_ERROR, { error });

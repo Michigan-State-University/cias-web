@@ -46,13 +46,13 @@ const Header = ({
   const renderBackButton = useMemo(() => {
     if (organizationId) {
       return (
-        <BackButton to={`/organization/${organizationId}/dashboard-setup`}>
+        <BackButton link to={`/organization/${organizationId}/dashboard-setup`}>
           <FormattedMessage {...messages.backToOrganization} />
         </BackButton>
       );
     }
     return (
-      <BackButton to="/">
+      <BackButton link to="/">
         <FormattedMessage {...messages.back} />
       </BackButton>
     );

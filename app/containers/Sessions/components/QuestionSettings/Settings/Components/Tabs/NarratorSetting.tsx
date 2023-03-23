@@ -2,6 +2,7 @@ import { memo } from 'react';
 import { useIntl } from 'react-intl';
 
 import { CharacterType } from 'models/Character';
+import { NarratorSettingsKey } from 'models/Narrator';
 
 import { FullWidthSwitch } from 'components/Switch';
 import H3 from 'components/H3';
@@ -10,8 +11,8 @@ import CharacterSelector from 'components/CharacterSelector';
 import messages from '../messages';
 
 type Props<T extends boolean | string> = {
-  setting: string;
-  value: T;
+  setting: NarratorSettingsKey;
+  value: T | undefined;
   disabled: boolean;
   onChange: (value: T) => void;
 };
@@ -25,7 +26,7 @@ const Component = <T extends boolean | string>({
   const { formatMessage } = useIntl();
   switch (typeof value) {
     case 'string': {
-      if (setting === 'character')
+      if (setting === NarratorSettingsKey.CHARACTER)
         return (
           <CharacterSelector
             value={value as CharacterType}

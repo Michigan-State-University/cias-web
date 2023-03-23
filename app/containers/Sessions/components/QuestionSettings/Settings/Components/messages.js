@@ -1,6 +1,7 @@
 import { defineMessages } from 'react-intl';
 
 import { EFeedbackAction } from 'models/Narrator/FeedbackActions';
+import { NarratorSettingsKey } from 'models/Narrator';
 
 export const scope = 'app.containers.DefaultSettings';
 
@@ -45,13 +46,17 @@ export default defineMessages({
     id: `${scope}.required`,
     defaultMessage: 'Required',
   },
-  animation: {
-    id: `${scope}.animation`,
+  [NarratorSettingsKey.ANIMATION]: {
+    id: `${scope}.${NarratorSettingsKey.ANIMATION}`,
     defaultMessage: 'Display Narrator',
   },
-  voice: {
-    id: `${scope}.voice`,
+  [NarratorSettingsKey.VOICE]: {
+    id: `${scope}.${NarratorSettingsKey.VOICE}`,
     defaultMessage: 'Voice',
+  },
+  [NarratorSettingsKey.EXTRA_SPACE_FOR_NARRATOR]: {
+    id: `${scope}.${NarratorSettingsKey.EXTRA_SPACE_FOR_NARRATOR}`,
+    defaultMessage: 'Extra space for Narrator',
   },
   selectQuestion: {
     id: `${scope}.selectQuestion`,

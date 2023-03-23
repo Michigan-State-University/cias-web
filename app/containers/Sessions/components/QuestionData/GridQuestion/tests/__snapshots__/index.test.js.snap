@@ -589,7 +589,7 @@ exports[`<GridQuestion /> Should render and match the snapshot 1`] = `
 .c13 {
   cursor: default;
   color: #0E0E0E;
-  background-color: #F8FBFF;
+  background-color: #FFFFFF;
 }
 
 .c13:nth-child(even) {

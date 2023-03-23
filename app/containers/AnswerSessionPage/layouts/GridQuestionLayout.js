@@ -76,7 +76,7 @@ const GridQuestionLayout = ({
       >
         <Table>
           <THead>
-            <StripedTR color={colors.catskillWhite} bg={colors.zirkon}>
+            <StripedTR color={colors.catskillWhite} bg={colors.white}>
               <FirstTH ref={firstColRef} scope="col" {...style[FIRST_TH]} />
               {columns.map((column, columnIndex) => (
                 <TH
@@ -96,7 +96,7 @@ const GridQuestionLayout = ({
               <StripedTR
                 key={`question-${questionId}-row-th-${rowIndex}`}
                 color={colors.catskillWhite}
-                bg={colors.zirkon}
+                bg={colors.white}
               >
                 <FirstTH scope="row" {...style[FIRST_TH]}>
                   <Column

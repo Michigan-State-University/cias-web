@@ -37,7 +37,6 @@ const QuestionTitle = ({
       maxWidth={elements.draggableContainerSize}
       hoverColor={colors.linkWater}
       clickable={false}
-      mb={10}
       padded
     >
       <Row>

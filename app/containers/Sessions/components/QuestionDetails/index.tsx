@@ -11,8 +11,6 @@ import { QuestionDTO, QuestionTypes } from 'models/Question';
 import { Intervention } from 'models/Intervention';
 import { CHARACTER_CONFIGS } from 'models/Character';
 
-import { CHARACTER_FIXED_POSITION_QUESTIONS } from 'utils/characterConstants';
-
 import { makeSelectIsNarratorTab } from 'global/reducers/localState';
 import {
   editQuestionSaga,
@@ -106,11 +104,9 @@ const RenderQuestionDetails = ({
       : true;
   const showProceedButton = proceedButton && !isTlfbGroup && !isFinishScreen;
 
-  const isNarratorPositionFixed =
-    CHARACTER_FIXED_POSITION_QUESTIONS.includes(type);
-
-  const { character, animation } = settings;
-  const characterAdditionalSpace = CHARACTER_CONFIGS[character].size.height;
+  const { character, extra_space_for_narrator: extraSpaceForNarrator } =
+    settings;
+  const narratorExtraSpace = CHARACTER_CONFIGS[character].size.height;
 
   return (
     <AnswerOuterContainer>
@@ -167,11 +163,7 @@ const RenderQuestionDetails = ({
           <Row
             justify="center"
             width="100%"
-            pt={
-              animation && !isNarratorPositionFixed
-                ? characterAdditionalSpace
-                : 0
-            }
+            pt={extraSpaceForNarrator ? narratorExtraSpace : 30}
           >
             {/* @ts-ignore */}
             <AppContainer disablePageTitle $width="100%">
@@ -183,7 +175,7 @@ const RenderQuestionDetails = ({
                     </Row>
                   )}
                   {subtitle && (
-                    <Row mt={10}>
+                    <Row>
                       <QuestionSubtitle />
                     </Row>
                   )}
