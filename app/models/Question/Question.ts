@@ -78,6 +78,7 @@ export interface GenericQuestion<
   originalText: QuestionOriginalText;
   imageUrl: Nullable<string>;
   imageAlt: Nullable<string>;
+  firstQuestion: boolean;
 }
 
 export type SingleQuestion = GenericQuestion<

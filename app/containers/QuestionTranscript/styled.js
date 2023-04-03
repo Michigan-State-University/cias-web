@@ -2,14 +2,23 @@ import styled from 'styled-components';
 
 import { colors, themeColors } from 'theme';
 
+import { LanguageDirection } from 'global/types/locale';
+
 import Box from 'components/Box';
 
 export const StyledTextBlock = styled(Box)`
-  padding-left: 10px;
   border-radius: 0;
-  border-left: ${({ isCurrent }) =>
-      isCurrent ? themeColors.secondary : 'transparent'}
-    solid 2px;
+
+  // Current text indicator
+  ${({ dir, isCurrent }) => `${
+    dir === LanguageDirection.LTR ? 'border-left' : 'border-right'
+  }:
+    ${isCurrent ? themeColors.secondary : 'transparent'}
+    solid 2px;`}
+
+  // Space between current text indicator and the text
+  ${({ dir }) =>
+    `${dir === LanguageDirection.LTR ? 'padding-left' : 'padding-right'}: 10px`}
 `;
 
 export const TranscriptBox = styled(Box)`

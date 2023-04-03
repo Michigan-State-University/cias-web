@@ -13,7 +13,7 @@ export type SharedProps<
     | null
     | GenericAnswer['decryptedBody']['data'] = GenericAnswer['decryptedBody']['data'],
 > = {
-  selectAnswer: (answer: V, selectedByUser?: boolean) => void;
+  selectAnswer: (answer: V) => void;
   answerBody: V;
   questionIndex: number;
   saveAnswer: (skipped?: boolean) => void;

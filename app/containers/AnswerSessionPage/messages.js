@@ -143,7 +143,7 @@ export default defineMessages({
   },
   fillHeader: {
     id: `${scope}.fillHeader`,
-    defaultMessage: 'Let’s fill the session',
+    defaultMessage: 'Click below to start',
   },
   narratorAlt: {
     id: `${scope}.narratorAlt`,
@@ -267,5 +267,28 @@ export default defineMessages({
   liveChatIconAlt: {
     id: `${scope}.liveChatIconAlt`,
     defaultMessage: `Live chat icon`,
+  },
+  backButton: {
+    id: `${scope}.backButton`,
+    defaultMessage: `Back`,
+  },
+  backButtonDisabledCatMh: {
+    id: `${scope}.backButtonDisabledCatMh`,
+    defaultMessage: 'Back navigation cannot be used in this session',
+  },
+  backButtonDisabledFirstScreen: {
+    id: `${scope}.backButtonDisabledFirstScreen`,
+    defaultMessage:
+      'Back navigation cannot be used on the first screen in a session',
+  },
+  backButtonDisabledLastScreen: {
+    id: `${scope}.backButtonDisabledLastScreen`,
+    defaultMessage:
+      'Back navigation cannot be used on the last screen in a session',
+  },
+  previousScreenNotFound: {
+    id: `${scope}.previousScreenNotFound`,
+    defaultMessage:
+      'Previous screen was not found. This is probably the first screen in the session.',
   },
 });

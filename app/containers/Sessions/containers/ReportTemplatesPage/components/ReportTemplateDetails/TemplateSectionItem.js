@@ -15,7 +15,11 @@ import { SectionContainer, SectionText, SectionTitle } from '../../styled';
 import { ReportTemplatesContext } from '../../utils';
 import messages from '../../messages';
 
-const TemplateSectionItem = ({ templateSection, dragHandleProps }) => {
+const TemplateSectionItem = ({
+  templateSection,
+  showDndHandle,
+  dragHandleProps,
+}) => {
   const { formatMessage } = useIntl();
   const dispatch = useDispatch();
 
@@ -45,16 +49,18 @@ const TemplateSectionItem = ({ templateSection, dragHandleProps }) => {
       fluid
     >
       <Row align="center">
-        <Col xs={1} {...dragHandleProps}>
-          <Img
-            alt={`${formatMessage(messages.reorderIconAlt)} ${
-              templateSection.position
-            }`}
-            ml={10}
-            src={ReorderIcon}
-            disabled={false}
-          />
-        </Col>
+        {showDndHandle && (
+          <Col xs={1} {...dragHandleProps}>
+            <Img
+              alt={`${formatMessage(messages.reorderIconAlt)} ${
+                templateSection.position
+              }`}
+              ml={10}
+              src={ReorderIcon}
+              disabled={false}
+            />
+          </Col>
+        )}
         <Col>
           {isEmpty ? (
             <Row>
@@ -104,6 +110,7 @@ const TemplateSectionItem = ({ templateSection, dragHandleProps }) => {
 
 TemplateSectionItem.propTypes = {
   templateSection: PropTypes.shape(TemplateSection),
+  showDndHandle: PropTypes.bool,
   dragHandleProps: PropTypes.object,
 };
 

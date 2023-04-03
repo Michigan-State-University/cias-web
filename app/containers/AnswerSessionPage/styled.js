@@ -1,6 +1,6 @@
 import styled, { css } from 'styled-components';
 
-import { elements, colors, mediaQuery } from 'theme';
+import { elements, colors, mediaQuery, themeColors } from 'theme';
 import { sizes, DESKTOP_MODE } from 'utils/previewMode';
 
 import { Button } from 'components/Button';
@@ -11,13 +11,6 @@ export const StyledButton = styled(Button)`
   ${mediaQuery.mobile`
     width: 80%;
   `}
-`;
-
-export const BackButton = styled.div`
-  font-weight: bold;
-  margin-bottom: 10px;
-  font-size: 0.7rem;
-  cursor: pointer;
 `;
 
 export const AnswerInterventionContent = styled.div`
@@ -55,6 +48,7 @@ export const AnswerOuterContainer = styled.div`
   max-width: ${(props) =>
     props.isFullSize ? '100%' : `${elements.draggableContainerSize}px`};
   ${(props) => props.previewMode && getStyles(props.previewMode)}
+  background-color: ${themeColors.sessionBackground}
 `;
 
 export const FooterContainer = styled.div`

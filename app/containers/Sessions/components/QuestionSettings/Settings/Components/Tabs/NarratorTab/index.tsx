@@ -1,6 +1,5 @@
 import React, { useState } from 'react';
 import { createStructuredSelector } from 'reselect';
-import map from 'lodash/map';
 import { FormattedMessage, useIntl } from 'react-intl';
 import { compose } from 'redux';
 import { connect } from 'react-redux';
@@ -13,15 +12,22 @@ import {
   getDefaultBlockAnimation,
 } from 'utils/animations/animationsNames';
 
-import { colors, borders, fontSizes, themeColors } from 'theme';
+import { borders, colors, fontSizes, themeColors } from 'theme';
 
-import { CharacterType, CHARACTER_CONFIGS } from 'models/Character';
-import { Narrator, NarratorBlock, NarratorBlockTypes } from 'models/Narrator';
+import { CHARACTER_CONFIGS, CharacterType } from 'models/Character';
+import {
+  CONFIRMED_OFF_SETTINGS,
+  Narrator,
+  NarratorBlock,
+  NarratorBlockTypes,
+  NarratorSettingsKey,
+  narratorSettingsToSortedEntries,
+} from 'models/Narrator';
 import { getRemovedBlockForSetting } from 'models/Narrator/BlockTypes';
 import { DISABLED_NARRATOR_SETTINGS_BY_QUESTION_TYPE } from 'models/Session/utils';
 import {
-  makeSelectCurrentNarratorBlockIndex,
   changeCurrentNarratorBlock,
+  makeSelectCurrentNarratorBlockIndex,
   setAnimationStopPosition,
 } from 'global/reducers/localState';
 import { makeSelectSelectedQuestionType } from 'global/reducers/questions';
@@ -38,9 +44,9 @@ import InfoBox from 'components/Box/InfoBox';
 import Img from 'components/Img';
 import { LI, UL } from 'components/List';
 import {
-  MissingAnimationsModal,
   MissingAnimationModalData,
   MissingAnimationReplacement,
+  MissingAnimationsModal,
 } from 'components/MissingAnimationsModal/';
 
 import BlockTypeChooser from '../../BlockTypeChooser';
@@ -194,46 +200,48 @@ const NarratorTab = ({
     }
   };
 
-  const toggleAction = (index: string) => (value: boolean | string) => {
-    if (index === 'character') {
-      const { newNarrator, missingAnimations } = getMissingAnimationsList(
-        value as CharacterType,
-      );
+  const toggleAction =
+    (settingKey: NarratorSettingsKey) => (value: boolean | string) => {
+      if (settingKey === NarratorSettingsKey.CHARACTER) {
+        const { newNarrator, missingAnimations } = getMissingAnimationsList(
+          value as CharacterType,
+        );
 
-      const oldCharacterSize =
-        CHARACTER_CONFIGS[narrator.settings.character].size;
-      const newCharacterSize = CHARACTER_CONFIGS[value as CharacterType].size;
+        const oldCharacterSize =
+          CHARACTER_CONFIGS[narrator.settings.character].size;
+        const newCharacterSize = CHARACTER_CONFIGS[value as CharacterType].size;
 
-      const hasNewCharacterDifferentSize = !isEqual(
-        oldCharacterSize,
-        newCharacterSize,
-      );
-
-      if (hasNewCharacterDifferentSize) {
-        newNarrator.blocks = getBlocksFittingDraggableContainer(
-          newNarrator.blocks,
+        const hasNewCharacterDifferentSize = !isEqual(
+          oldCharacterSize,
           newCharacterSize,
         );
-      }
 
-      if (missingAnimations.length > 0) {
-        setMissingAnimationModalState({
-          newNarrator,
-          missingAnimations,
-          newSize: hasNewCharacterDifferentSize,
-        });
-        return;
-      }
+        if (hasNewCharacterDifferentSize) {
+          newNarrator.blocks = getBlocksFittingDraggableContainer(
+            newNarrator.blocks,
+            newCharacterSize,
+          );
+        }
 
-      if (hasNewCharacterDifferentSize) {
-        updateNarrator(newNarrator);
-        moveNarratorPreview(newNarrator.blocks);
-        return;
+        if (missingAnimations.length > 0) {
+          setMissingAnimationModalState({
+            newNarrator,
+            missingAnimations,
+            newSize: hasNewCharacterDifferentSize,
+          });
+          return;
+        }
+
+        if (hasNewCharacterDifferentSize) {
+          updateNarrator(newNarrator);
+          moveNarratorPreview(newNarrator.blocks);
+          return;
+        }
       }
-    }
-    if (value) onNarratorToggle(`${index}`, value);
-    else setConfirmationOption(index);
-  };
+      if (value || !CONFIRMED_OFF_SETTINGS.includes(settingKey))
+        onNarratorToggle(`${settingKey}`, value);
+      else setConfirmationOption(settingKey);
+    };
 
   const readQuestionBlockTypePresent = Boolean(
     narrator.blocks.find(
@@ -245,10 +253,10 @@ const NarratorTab = ({
     narrator.blocks.find(({ type }) => type === NarratorBlockTypes.FEEDBACK),
   );
 
-  const last = lastKey(narrator.settings);
+  const lastSettingKey = lastKey(narrator.settings);
 
-  const getBorderBottom = (index: string) => {
-    if (index === last) return null;
+  const getBorderBottom = (settingKey: NarratorSettingsKey) => {
+    if (settingKey === lastSettingKey) return null;
     return `${borders.borderWidth} ${borders.borderStyle} ${colors.linkWater}`;
   };
 
@@ -312,29 +320,31 @@ const NarratorTab = ({
           </InfoBox>
         )}
         {narrator &&
-          map(narrator.settings, (val, index) => (
-            <Row
-              key={`${id}-settings-narrator-${index}`}
-              justify="between"
-              align="center"
-              pb={15}
-              mb={15}
-              borderBottom={getBorderBottom(index)}
-            >
-              <NarratorSetting
-                setting={index}
-                disabled={
-                  disabled ||
-                  // @ts-ignore
-                  DISABLED_NARRATOR_SETTINGS_BY_QUESTION_TYPE[index]?.includes(
-                    questionType,
-                  )
-                }
-                value={val}
-                onChange={toggleAction(index)}
-              />
-            </Row>
-          ))}
+          narratorSettingsToSortedEntries(narrator.settings).map(
+            ([settingKey, settingValue]) => (
+              <Row
+                key={`${id}-settings-narrator-${settingKey}`}
+                justify="between"
+                align="center"
+                pb={15}
+                mb={15}
+                borderBottom={getBorderBottom(settingKey)}
+              >
+                <NarratorSetting
+                  setting={settingKey}
+                  disabled={
+                    disabled ||
+                    // @ts-ignore
+                    DISABLED_NARRATOR_SETTINGS_BY_QUESTION_TYPE[
+                      settingKey
+                    ]?.includes(questionType)
+                  }
+                  value={settingValue}
+                  onChange={toggleAction(settingKey)}
+                />
+              </Row>
+            ),
+          )}
       </Box>
       {!isTlfbGroup && (
         <InfoBox mb={15}>

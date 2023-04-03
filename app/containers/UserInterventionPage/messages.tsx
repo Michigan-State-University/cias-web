@@ -1,5 +1,6 @@
-import { SCHEDULE_OPTIONS } from 'global/reducers/intervention';
 import { defineMessages } from 'react-intl';
+
+import { SessionSchedule } from 'models/Session';
 
 export const scope = 'app.containers.UserInterventionPage';
 
@@ -21,30 +22,35 @@ export default defineMessages({
     id: `${scope}.helpingMaterials`,
     defaultMessage: 'Additional resources for you:',
   },
-  [SCHEDULE_OPTIONS.afterFill]: {
-    id: `${scope}.${[SCHEDULE_OPTIONS.afterFill]}`,
+  [SessionSchedule.AFTER_FILL]: {
+    id: `${scope}.${[SessionSchedule.AFTER_FILL]}`,
     defaultMessage:
       'This module will be available when you finish previous module',
   },
-  [SCHEDULE_OPTIONS.exactDate]: {
-    id: `${scope}.${[SCHEDULE_OPTIONS.exactDate]}`,
+  [SessionSchedule.EXACT_DATE]: {
+    id: `${scope}.${[SessionSchedule.EXACT_DATE]}`,
     defaultMessage:
       'This module will be available on <secondaryColorBold>{scheduleAt}</secondaryColorBold> and when you finish previous module',
   },
-  [SCHEDULE_OPTIONS.daysAfterFill]: {
-    id: `${scope}.${[SCHEDULE_OPTIONS.daysAfterFill]}`,
+  [SessionSchedule.DAYS_AFTER_FILL]: {
+    id: `${scope}.${[SessionSchedule.DAYS_AFTER_FILL]}`,
     defaultMessage:
       'This module will be available <secondaryColorBold>{schedulePayload} days</secondaryColorBold> after filling in the previous module',
   },
-  [SCHEDULE_OPTIONS.daysAfter]: {
-    id: `${scope}.${[SCHEDULE_OPTIONS.daysAfter]}`,
+  [SessionSchedule.DAYS_AFTER]: {
+    id: `${scope}.${[SessionSchedule.DAYS_AFTER]}`,
     defaultMessage:
       'This module will be available when you finish previous module and <secondaryColorBold>{schedulePayload} day</secondaryColorBold> after previous session is available',
   },
-  [SCHEDULE_OPTIONS.daysAfterDate]: {
-    id: `${scope}.${[SCHEDULE_OPTIONS.daysAfterDate]}`,
+  [SessionSchedule.DAYS_AFTER_DATE]: {
+    id: `${scope}.${[SessionSchedule.DAYS_AFTER_DATE]}`,
     defaultMessage:
       'This module will be available <secondaryColorBold>{schedulePayload} days</secondaryColorBold> after date provided in previous session in this intervention',
+  },
+  [SessionSchedule.IMMEDIATELY]: {
+    id: `${scope}.${[SessionSchedule.IMMEDIATELY]}`,
+    defaultMessage:
+      'This module will start immediately when you finish previous module',
   },
   sessionFilledNTimes: {
     id: `${scope}.sessionFilledNTimes`,

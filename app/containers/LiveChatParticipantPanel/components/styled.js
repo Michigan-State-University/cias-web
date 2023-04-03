@@ -32,6 +32,14 @@ export const LinkPrimaryUnderline = styled.a`
 `;
 
 export const BoxWithUnderShadow = styled(Box)`
+  position: absolute;
+  background-color: ${colors.white};
+  width: calc(100% - 32px);
+  margin-top: 42px;
+  padding: 0 16;
+  border-bottom: 1px solid ${colors.linkWater};
+  border-radius: 0;
+  z-index: 1;
   &:after {
     content: '';
     position: absolute;
