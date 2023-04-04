@@ -25,7 +25,7 @@ export function* updateParticipantLink({
   try {
     yield call(axios.patch, url, objectToSnakeCase({ link: linkData }));
 
-    yield put(updateParticipantLinkSuccess(linkId));
+    yield put(updateParticipantLinkSuccess(linkId, linkData));
   } catch (error) {
     yield call(toast.error, formatMessage(messages.updateError), {
       toastId: ADD_PARTICIPANT_LINK_ERROR,

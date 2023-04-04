@@ -7,13 +7,9 @@ export default defineMessages({
     id: `${scope}.newNarratorWasSetTitle`,
     defaultMessage: 'Narrator Changed!',
   },
-  newNarratorWasSetContentBeforeName: {
-    id: `${scope}.newNarratorWasSetContentBeforeName`,
-    defaultMessage: '<b>The narrator in</b>',
-  },
-  newNarratorWasSetContentAfterName: {
-    id: `${scope}.newNarratorWasSetContentBeforeName`,
-    defaultMessage: '<b>has been changed properly.</b>',
+  newNarratorWasSetContent: {
+    id: `${scope}.newNarratorWasSetContent`,
+    defaultMessage: `The narrator in <secondaryColorBold>{interventionName}</secondaryColorBold> has been changed properly.`,
   },
   transcriptIsReady: {
     id: `${scope}.conversationTranscriptReadyTitle`,
