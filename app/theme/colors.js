@@ -109,6 +109,7 @@ const themeColors = {
   warning: colors.vermilion,
   comment: colors.sonicSilver,
   alert: colors.cinnabar,
+  sessionBackground: colors.white,
 };
 
 export { colors, themeColors };

@@ -40,7 +40,7 @@ import mail from 'assets/svg/pink-mail.svg';
 import mailDisabled from 'assets/svg/pink-mail-disabled.svg';
 import { colors, themeColors } from 'theme';
 
-import { InterventionType, InterventionSharedTo } from 'models/Intervention';
+import { InterventionType } from 'models/Intervention';
 
 import SessionSchedule from '../SessionSchedule';
 import messages from './messages';
@@ -172,9 +172,7 @@ function SessionListItem({
   };
 
   const isSchedulingPossible =
-    sharedTo !== InterventionSharedTo.ANYONE &&
-    interventionType !== InterventionType.FLEXIBLE &&
-    index !== 0;
+    interventionType !== InterventionType.FLEXIBLE && index !== 0;
 
   const isSessionBranchingPossible =
     interventionType === InterventionType.DEFAULT;
@@ -323,6 +321,7 @@ function SessionListItem({
                   schedulePayload={schedulePayload}
                   daysAfterDateVariableName={daysAfterDateVariableName}
                   session={session}
+                  sharedTo={sharedTo}
                 />
               </Row>
             )}

@@ -126,7 +126,13 @@ const NavigatorSettingsModal = ({ interventionId }: Props) => {
     );
   }
 
-  const { contactEmail, noNavigatorAvailableMessage, phone } = navigatorSetup;
+  const {
+    contactEmail,
+    noNavigatorAvailableMessage,
+    phone,
+    contactMessage,
+    messagePhone,
+  } = navigatorSetup;
 
   return (
     // @ts-ignore
@@ -165,7 +171,7 @@ const NavigatorSettingsModal = ({ interventionId }: Props) => {
         />
       </div>
       {/* @ts-ignore */}
-      <div label={formatMessage(messages.noNavigator)}>
+      <div label={formatMessage(messages.contactInformation)}>
         <NavigatorModalLayout
           leftContent={
             <NoNavigatorsForm
@@ -173,6 +179,8 @@ const NavigatorSettingsModal = ({ interventionId }: Props) => {
               noNavigatorAvailableMessage={noNavigatorAvailableMessage}
               phone={phone}
               updateNoNavigatorTabData={updateNoNavigatorTabData}
+              contactMessage={contactMessage}
+              messagePhone={messagePhone}
             />
           }
           rightContent={

@@ -5,4 +5,5 @@ export const TEXT = {
   NO_PWD_CHANGE: "Your password won't change until you access the link above and create a new one.",
 }
 
-export const LOGO_URL = 'https://cias-public.s3.us-east-2.amazonaws.com/logo.png'
+export const LOGO_URL_WATCH = () => `${process.env.API_URL}/logo.png`
+export const LOGO_URL_BUILD = () => "{LOGO_URL}"

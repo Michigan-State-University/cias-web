@@ -2,25 +2,28 @@ import { put, takeLatest, select, call } from 'redux-saga/effects';
 import axios from 'axios';
 import omit from 'lodash/omit';
 
-import { mapQuestionToStateObject } from 'utils/mapResponseObjects';
 import { feedbackQuestion } from 'models/Session/QuestionTypes';
 import {
   readQuestionBlockType,
   feedbackBlockType,
 } from 'models/Narrator/BlockTypes';
-import { setAnimationStopPosition } from 'global/reducers/localState';
-import { makeSelectQuestionGroups } from 'global/reducers/questionGroups/selectors';
-import { getNarratorPositionWhenQuestionIsAdded } from 'utils/getNarratorPosition';
-import isNullOrUndefined from 'utils/isNullOrUndefined';
-import { makeSelectSession } from 'global/reducers/session';
 import { instantiateBlockForType } from 'models/Session/utils';
 import { GroupType } from 'models/QuestionGroup';
-import { groupQuestionsSuccess } from 'global/reducers/questionGroups/actions';
+import { NarratorSettingsKey } from 'models/Narrator';
+
+import { getNarratorPositionWhenQuestionIsAdded } from 'utils/getNarratorPosition';
+import isNullOrUndefined from 'utils/isNullOrUndefined';
+import { mapQuestionToStateObject } from 'utils/mapResponseObjects';
 import { jsonApiToObject } from 'utils/jsonApiMapper';
 import objectKeysToSnakeCase from 'utils/objectToSnakeCase';
 import { formatMessage } from 'utils/intlOutsideReact';
 
+import { setAnimationStopPosition } from 'global/reducers/localState';
+import { makeSelectQuestionGroups } from 'global/reducers/questionGroups/selectors';
+import { groupQuestionsSuccess } from 'global/reducers/questionGroups/actions';
+import { makeSelectSession } from 'global/reducers/session';
 import globalMessages from 'global/i18n/globalMessages';
+
 import {
   CREATE_QUESTION_REQUEST,
   CREATE_QUESTION_GROUP_REQUEST,
@@ -58,7 +61,11 @@ function* createQuestion({ payload: { question, id: sessionId } }) {
     ...question,
     narrator: {
       blocks,
-      settings: { ...narrator, character: sessionCharacter },
+      settings: {
+        ...narrator,
+        [NarratorSettingsKey.EXTRA_SPACE_FOR_NARRATOR]: false,
+        character: sessionCharacter,
+      },
     },
   };
 

@@ -1,6 +1,5 @@
-import { useState, useEffect, useRef } from 'react';
+import { useState, useRef } from 'react';
 import isEqual from 'lodash/isEqual';
-import clamp from 'lodash/clamp';
 
 import { elements } from 'theme';
 
@@ -11,16 +10,18 @@ import { NarratorBlock, MoveAnimation } from 'models/Narrator';
 import { Point2D } from 'global/types/math';
 
 import { animationDuration } from './constants';
-import { importAnimation } from './utils';
+import { clampPosition, getScaleFactor, importAnimation } from './utils';
 import { ILoadedMoveData } from './types';
 
-const defaultCurrent = {
+const defaultContainer = {
   clientWidth: elements.draggableContainerSize,
   clientHeight: elements.draggableContainerSize,
 };
 
 type TUseMoveHelper = (
-  animationContainer: HTMLElement,
+  animationContainer: Nullable<
+    Pick<HTMLElement, 'clientWidth' | 'clientHeight'>
+  >,
   blocks: NarratorBlock[],
   dispatchUpdate: (state: { currentData: Nullable<ILoadedMoveData> }) => void,
   character: CharacterType,
@@ -36,15 +37,12 @@ const useMoveHelper: TUseMoveHelper = (
   dispatchUpdate,
   character,
 ) => {
-  const [scaleFactor, setScaleFactor] = useState({ x: 1, y: 1 });
-
   const loadedMoveAnimations = useRef<ILoadedMoveData[]>([]);
 
-  const clampPosition = (value: number) =>
-    clamp(value, 0, Number.MAX_SAFE_INTEGER);
-
-  const getScaledPosition = (scale: Point2D, position: Point2D): Point2D => {
-    const { clientWidth, clientHeight } = animationContainer || defaultCurrent;
+  const getScaledPosition = (position: Point2D): Point2D => {
+    const container = animationContainer || defaultContainer;
+    const scale = getScaleFactor(container);
+    const { clientWidth, clientHeight } = container;
     const { height, width } = CHARACTER_CONFIGS[character].size;
     return {
       x: clampPosition(Math.min(position.x * scale.x, clientWidth - width)),
@@ -52,34 +50,11 @@ const useMoveHelper: TUseMoveHelper = (
     };
   };
 
-  const getScaleFactor = () => {
-    const { clientWidth, clientHeight } = animationContainer || defaultCurrent;
-    const containerWidthWithBorders = clientWidth + 2;
-    const containerHeightWithBorders = clientHeight + 2;
-    const scaleX = Math.min(
-      1,
-      containerWidthWithBorders / elements.draggableContainerSize,
-    );
-    const scaleY = Math.min(
-      1,
-      containerHeightWithBorders / elements.draggableContainerSize,
-    );
-    return { x: scaleX, y: scaleY };
-  };
-
-  const getInitialAnimationPosition = (firstBlock: NarratorBlock) => {
+  const [animationPos, setAnimationPos] = useState<Point2D>(() => {
+    const firstBlock = blocks[0];
     if (!firstBlock) return elements.characterInitialPosition;
-    return getScaledPosition(getScaleFactor(), firstBlock.endPosition);
-  };
-
-  const [animationPos, setAnimationPos] = useState(
-    getInitialAnimationPosition(blocks[0]),
-  );
-
-  useEffect(() => {
-    const newScaleFactor = getScaleFactor();
-    setScaleFactor(newScaleFactor);
-  }, []);
+    return getScaledPosition(firstBlock.endPosition);
+  });
 
   const loadMoveAnimations = async () => {
     const moveAnimations: ILoadedMoveData[] = [];
@@ -103,29 +78,26 @@ const useMoveHelper: TUseMoveHelper = (
     loadedMoveAnimations.current = await loadMoveAnimations();
   };
 
-  const setPosition = (position: Point2D) =>
-    setAnimationPos(getScaledPosition(scaleFactor, position));
-
   const findMoveAnimation = (position: Point2D) => (anim: ILoadedMoveData) => {
     const direction =
-      getScaledPosition(scaleFactor, position).x > animationPos.x
-        ? 'Left'
-        : 'Right';
+      getScaledPosition(position).x > animationPos.x ? 'Left' : 'Right';
     return anim.name === `move${direction}`;
   };
 
-  const moveAnimation = async (nextBlock: NarratorBlock) => {
+  const moveAnimation = async (nextBlock: Nullable<NarratorBlock>) => {
     if (!nextBlock) return;
     const { endPosition } = nextBlock;
-    if (isEqual(getScaledPosition(scaleFactor, endPosition), animationPos))
+    const scaledPosition = getScaledPosition(endPosition);
+    if (isEqual(scaledPosition, animationPos)) {
       return;
+    }
     const moveAnim = loadedMoveAnimations.current.find(
       findMoveAnimation(endPosition),
     );
     dispatchUpdate({
       currentData: moveAnim,
     });
-    setPosition(endPosition);
+    setAnimationPos(scaledPosition);
     await new Promise((r) => setTimeout(r, animationDuration + 100));
   };
 

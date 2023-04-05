@@ -17,15 +17,16 @@ interface SessionSettings {
   };
 }
 
-enum ScheduleOptions {
+export enum SessionSchedule {
   AFTER_FILL = 'after_fill',
   DAYS_AFTER_FILL = 'days_after_fill',
   EXACT_DATE = 'exact_date',
   DAYS_AFTER = 'days_after',
   DAYS_AFTER_DATE = 'days_after_date',
+  IMMEDIATELY = 'immediately',
 }
 
-interface GoogleTTSVoice {
+export interface GoogleTTSVoice {
   id: number;
   googleTtsLanguageId: number;
   voiceLabel: string;
@@ -50,7 +51,7 @@ export interface Session {
   smsPlansCount: number;
   scheduleAt?: string;
   schedulePayload?: number;
-  schedule: ScheduleOptions;
+  schedule: SessionSchedule;
   formula: Formula<SessionTargetType>;
   reportTemplatesCount: number;
   type: SessionTypes;
