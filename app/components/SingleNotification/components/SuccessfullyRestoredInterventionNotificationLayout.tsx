@@ -13,7 +13,7 @@ type Props = NotificationLayoutProps<{
 
 export const SuccessfullyRestoredInterventionNotificationLayout = ({
   notification,
-  timeFormatLocale,
+  ...props
 }: Props) => {
   const { formatMessage } = useIntl();
 
@@ -22,13 +22,13 @@ export const SuccessfullyRestoredInterventionNotificationLayout = ({
   return (
     <SingleNotificationBaseLayout
       notification={notification}
-      timeFormatLocale={timeFormatLocale}
       title={formatMessage(messages.successfullyRestoredInterventionTitle)}
       content={formatMessage(messages.successfullyRestoredInterventionContent, {
         interventionName,
       })}
       linkTo={`/interventions/${interventionId}`}
       readOnClick
+      {...props}
     />
   );
 };
