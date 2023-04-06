@@ -16,18 +16,18 @@ type Props = NotificationLayoutProps<{
 
 export const UnsuccessfulImportNotificationLayout = ({
   notification,
-  timeFormatLocale,
+  ...props
 }: Props) => {
   const { formatMessage } = useIntl();
 
   return (
     <SingleNotificationBaseLayout
       notification={notification}
-      timeFormatLocale={timeFormatLocale}
       title={formatMessage(messages.importFailedNotificationTitle)}
       content={formatMessage(messages.importFailedNotificationContent)}
       icon={<Icon src={Cross} width={36} height={36} />}
       readOnClick
+      {...props}
     />
   );
 };

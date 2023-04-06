@@ -104,7 +104,7 @@ export const updateNoNavigatorTabRequest = createAction(
 
 export const updateNoNavigatorsTabSuccess = createAction(
   UPDATE_NO_NAVIGATOR_TAB_SUCCESS,
-  (action) => () => action(),
+  (action) => () => action({}),
 );
 
 export const updateNoNavigatorsTabError = createAction(
@@ -152,7 +152,8 @@ export const updateParticipantLinkRequest = createAction(
 
 export const updateParticipantLinkSuccess = createAction(
   UPDATE_PARTICIPANT_LINK_SUCCESS,
-  (action) => (linkId: string) => action({ linkId }),
+  (action) => (linkId: string, linkData: LinkData) =>
+    action({ linkId, linkData }),
 );
 
 export const updateParticipantLinkError = createAction(
@@ -200,7 +201,8 @@ export const updateNavigatorLinkRequest = createAction(
 
 export const updateNavigatorLinkSuccess = createAction(
   UPDATE_NAVIGATOR_LINK_SUCCESS,
-  (action) => (linkId: string) => action({ linkId }),
+  (action) => (linkId: string, linkData: LinkData) =>
+    action({ linkId, linkData }),
 );
 
 export const updateNavigatorLinkError = createAction(
