@@ -319,7 +319,8 @@ export function AnswerSessionPage({
 
   useEffect(() => {
     if (userSession && !isUserSessionFinished) {
-      nextQuestion(userSessionId, index);
+      const questionId = userSession.lastAnswerAt ? null : index;
+      nextQuestion(userSessionId, questionId);
       if (userSession.liveChatEnabled && interventionId) {
         setLiveChatEnabled(interventionId);
       }
