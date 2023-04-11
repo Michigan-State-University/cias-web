@@ -34,9 +34,8 @@ import LanguageProvider from 'containers/LanguageProvider';
 
 import isNullOrUndefined from 'utils/isNullOrUndefined';
 
-// Load the favicon and the .htaccess file
+// Load the .htaccess file
 /* eslint-disable import/no-unresolved, import/extensions */
-import '!./assets/images/logo-icon.png?file-loader';
 import './.htaccess?file-loader';
 /* eslint-enable import/no-unresolved, import/extensions */
 
