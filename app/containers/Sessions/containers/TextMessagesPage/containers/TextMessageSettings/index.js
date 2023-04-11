@@ -92,7 +92,7 @@ const TextMessageSettings = ({
       return (
         <>
           <TextMessagesFormula disabled={!editingPossible} formula={formula} />
-          <TextMessageVariants />
+          <TextMessageVariants textMessageId={id} />
         </>
       );
     return (

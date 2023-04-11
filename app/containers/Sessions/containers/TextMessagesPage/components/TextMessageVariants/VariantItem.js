@@ -40,12 +40,15 @@ import {
   changeContent,
   removeTextMessageVariantRequest,
   changeSelectedVariantId,
+  deleteTextMessageVariantImageRequest,
+  uploadTextMessageVariantImageRequest,
 } from 'global/reducers/textMessages';
 
 import { ModalType, useModal } from 'components/Modal';
 import settingsMessages from '../../containers/TextMessageSettings/messages';
 import { TextMessagesContext } from '../../utils';
 import messages from './messages';
+import { TextMessageImage } from '../TextMessageImage';
 
 const originalTextIconProps = {
   position: 'absolute',
@@ -56,16 +59,22 @@ const originalTextIconProps = {
 const VariantItem = ({
   open,
   index,
-  variant: { id, formulaMatch, content, originalText },
+  variant: { id, formulaMatch, content, originalText, imageUrl },
   changeFormulaMatchAction,
   changeContentAction,
   removeVariant,
   disabled,
   changeSelectedVariant,
   dragHandleProps,
+  textMessageId,
+  variantState,
+  uploadImage,
+  deleteImage,
 }) => {
-  const { sessionId, interventionId, formatMessage } =
+  const { sessionId, interventionId, formatMessage, editingPossible } =
     useContext(TextMessagesContext);
+
+  const { uploadImageLoading } = variantState;
 
   const toggleCollapsable = () => {
     if (open) changeSelectedVariant('');
@@ -100,6 +109,14 @@ const VariantItem = ({
       confirmAction: handleDeleteCase,
     },
   });
+
+  const handleAddImage = (file) => {
+    uploadImage(textMessageId, id, file);
+  };
+
+  const handleDeleteImage = () => {
+    deleteImage(textMessageId, id);
+  };
 
   return (
     <Collapse
@@ -216,6 +233,13 @@ const VariantItem = ({
               />
             </OriginalTextHover>
           </Box>
+          <TextMessageImage
+            imageUrl={imageUrl}
+            loading={uploadImageLoading}
+            onAdd={handleAddImage}
+            onDelete={handleDeleteImage}
+            editingPossible={editingPossible}
+          />
         </Row>
       </Container>
     </Collapse>
@@ -232,6 +256,10 @@ VariantItem.propTypes = {
   disabled: PropTypes.bool,
   changeSelectedVariant: PropTypes.func,
   dragHandleProps: PropTypes.object,
+  textMessageId: PropTypes.string,
+  variantState: PropTypes.object,
+  uploadImage: PropTypes.func,
+  deleteImage: PropTypes.func,
 };
 VariantItem.defaultProps = {
   open: false,
@@ -242,6 +270,8 @@ const mapDispatchToProps = {
   changeContentAction: changeContent,
   removeVariant: removeTextMessageVariantRequest,
   changeSelectedVariant: changeSelectedVariantId,
+  uploadImage: uploadTextMessageVariantImageRequest,
+  deleteImage: deleteTextMessageVariantImageRequest,
 };
 
 const withConnect = connect(null, mapDispatchToProps);

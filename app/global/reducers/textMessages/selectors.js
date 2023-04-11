@@ -67,6 +67,9 @@ export const makeSelectSelectedMessageState = () =>
 export const makeSelectSelectedVariantId = () =>
   createSelector(dashboard, (substate) => substate.selectedVariantId);
 
+export const makeSelectVariantsStates = () =>
+  createSelector(dashboard, ({ variantsStates }) => variantsStates);
+
 export const makeSelectPhones = () =>
   createSelector(dashboard, (substate) => {
     const textMessage = substate.textMessages.find(

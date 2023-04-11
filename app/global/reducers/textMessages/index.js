@@ -1,22 +1,4 @@
-export {
-  fetchTextMessagesRequest,
-  changeSelectedMessageId,
-  createTextMessageRequest,
-  fetchVariantsAndPhonesRequest,
-  createVariantRequest,
-  removeTextMessageRequest,
-  removeTextMessageVariantRequest,
-  changeSelectedVariantId,
-  cloneTextMessageRequest,
-  addPhoneRequest,
-  removePhoneRequest,
-  updatePhoneRequest,
-  setFiltersAction,
-  setTextMessagesCount,
-  reorderTextMessageVariantsRequest,
-  uploadTextMessageImageRequest,
-  deleteTextMessageImageRequest,
-} from './actions';
+export * from './actions';
 
 export {
   changeSchedulingType,

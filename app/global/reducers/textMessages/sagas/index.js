@@ -14,6 +14,8 @@ import { updatePhoneSaga } from './updatePhone';
 import reorderTextMessageVarians from './reorderTextMessageVariants';
 import uploadTextMessageImageSaga from './uploadTextMessageImage';
 import deleteTextMessageImageSaga from './deleteTextMessageImage';
+import uploadTextMessageVariantImageSaga from './uploadTextMessageVariantImage';
+import deleteTextMessageVariantImageSaga from './deleteTextMessageVariantImage';
 
 export function* allTextMessagesSagas() {
   yield all([
@@ -32,5 +34,7 @@ export function* allTextMessagesSagas() {
     reorderTextMessageVarians(),
     uploadTextMessageImageSaga(),
     deleteTextMessageImageSaga(),
+    uploadTextMessageVariantImageSaga(),
+    deleteTextMessageVariantImageSaga(),
   ]);
 }

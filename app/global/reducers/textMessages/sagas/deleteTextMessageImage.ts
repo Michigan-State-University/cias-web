@@ -8,10 +8,13 @@ import { DELETE_TEXT_MESSAGE_IMAGE_REQUEST } from '../constants';
 import messages from '../messages';
 import {
   deleteTextMessageImageError,
+  deleteTextMessageImageRequest,
   deleteTextMessageImageSuccess,
 } from '../actions';
 
-function* deleteTextMessageImage({ payload: { textMessageId } }) {
+function* deleteTextMessageImage({
+  payload: { textMessageId },
+}: ReturnType<typeof deleteTextMessageImageRequest>) {
   const requestUrl = `/v1/sms_plans/${textMessageId}/no_formula_image`;
 
   try {

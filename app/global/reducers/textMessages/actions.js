@@ -50,6 +50,12 @@ import {
   DELETE_TEXT_MESSAGE_IMAGE_REQUEST,
   DELETE_TEXT_MESSAGE_IMAGE_SUCCESS,
   DELETE_TEXT_MESSAGE_IMAGE_ERROR,
+  UPLOAD_TEXT_MESSAGE_VARIANT_IMAGE_REQUEST,
+  UPLOAD_TEXT_MESSAGE_VARIANT_IMAGE_SUCCESS,
+  UPLOAD_TEXT_MESSAGE_VARIANT_IMAGE_ERROR,
+  DELETE_TEXT_MESSAGE_VARIANT_IMAGE_REQUEST,
+  DELETE_TEXT_MESSAGE_VARIANT_IMAGE_SUCCESS,
+  DELETE_TEXT_MESSAGE_VARIANT_IMAGE_ERROR,
 } from './constants';
 
 export const fetchTextMessagesRequest = (sessionId) =>
@@ -131,6 +137,50 @@ export const updateTextMessageVariantSuccess = () =>
   actionBuilder(UPDATE_TEXT_MESSAGE_VARIANT_SUCCESS, {});
 export const updateTextMessageVariantError = (error) =>
   actionBuilder(UPDATE_TEXT_MESSAGE_VARIANT_ERROR, { error });
+
+export const uploadTextMessageVariantImageRequest = (
+  textMessageId,
+  variantId,
+  image,
+) =>
+  actionBuilder(UPLOAD_TEXT_MESSAGE_VARIANT_IMAGE_REQUEST, {
+    textMessageId,
+    variantId,
+    image,
+  });
+export const uploadTextMessageVariantImageSuccess = (
+  textMessageId,
+  variantId,
+  imageUrl,
+) =>
+  actionBuilder(UPLOAD_TEXT_MESSAGE_VARIANT_IMAGE_SUCCESS, {
+    textMessageId,
+    variantId,
+    imageUrl,
+  });
+export const uploadTextMessageVariantImageError = (
+  textMessageId,
+  variantId,
+  error,
+) =>
+  actionBuilder(UPLOAD_TEXT_MESSAGE_VARIANT_IMAGE_ERROR, {
+    textMessageId,
+    variantId,
+    error,
+  });
+
+export const deleteTextMessageVariantImageRequest = (
+  textMessageId,
+  variantId,
+) =>
+  actionBuilder(DELETE_TEXT_MESSAGE_VARIANT_IMAGE_REQUEST, {
+    textMessageId,
+    variantId,
+  });
+export const deleteTextMessageVariantImageSuccess = () =>
+  actionBuilder(DELETE_TEXT_MESSAGE_VARIANT_IMAGE_SUCCESS, {});
+export const deleteTextMessageVariantImageError = (error) =>
+  actionBuilder(DELETE_TEXT_MESSAGE_VARIANT_IMAGE_ERROR, { error });
 
 export const removeTextMessageVariantRequest = (variantId) =>
   actionBuilder(REMOVE_TEXT_MESSAGE_VARIANT_REQUEST, { variantId });

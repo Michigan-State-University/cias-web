@@ -29,11 +29,11 @@ import Column from 'components/Column';
 import { StyledInput } from 'components/Input/StyledInput';
 import Box from 'components/Box';
 import OriginalTextHover from 'components/OriginalTextHover';
-import ImageUpload from 'components/ImageUpload';
 
 import messages from './messages';
 import { TextMessagesContext } from '../../utils';
 import settingsMessages from '../../containers/TextMessageSettings/messages';
+import { TextMessageImage } from '../TextMessageImage';
 
 const originalTextIconProps = {
   position: 'absolute',
@@ -64,8 +64,8 @@ const NoFormulaMessage = ({
     );
   };
 
-  const handleAddImage = (image) => {
-    uploadImage(id, image.image);
+  const handleAddImage = (file) => {
+    uploadImage(id, file);
   };
 
   const handleDeleteImage = () => {
@@ -120,14 +120,12 @@ const NoFormulaMessage = ({
           />
         </OriginalTextHover>
       </Box>
-      <Text mb={10}>{formatMessage(messages.imageNoFormulaLabel)}</Text>
-      <ImageUpload
-        image={noFormulaImageUrl}
+      <TextMessageImage
+        imageUrl={noFormulaImageUrl}
         loading={uploadImageLoading}
-        onAddImage={handleAddImage}
-        onDeleteImage={handleDeleteImage}
-        disabled={!editingPossible}
-        acceptedFormats={['JPG', 'PNG', 'GIF']}
+        onAdd={handleAddImage}
+        onDelete={handleDeleteImage}
+        editingPossible={editingPossible}
       />
     </Column>
   );

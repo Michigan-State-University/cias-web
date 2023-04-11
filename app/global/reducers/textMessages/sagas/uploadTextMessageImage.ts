@@ -10,16 +10,17 @@ import messages from '../messages';
 import {
   uploadTextMessageImageSuccess,
   uploadTextMessageImageError,
+  uploadTextMessageImageRequest,
 } from '../actions';
 
 function* uploadTextMessageImage({
   payload: { textMessageId, noFormulaImage },
-}) {
+}: ReturnType<typeof uploadTextMessageImageRequest>) {
   const requestUrl = `/v1/sms_plans/${textMessageId}`;
 
   try {
     const formData = new FormData();
-    formData.append('sms_plan[image]', noFormulaImage);
+    formData.append('sms_plan[no_formula_image]', noFormulaImage);
 
     const { data } = yield axios.patch(requestUrl, formData, {
       headers: {
@@ -27,9 +28,9 @@ function* uploadTextMessageImage({
       },
     });
 
-    const mappedData = jsonApiToObject(data, 'sms_plan');
+    const { noFormulaImageUrl } = jsonApiToObject(data, 'smsPlan');
 
-    yield put(uploadTextMessageImageSuccess(textMessageId, mappedData));
+    yield put(uploadTextMessageImageSuccess(textMessageId, noFormulaImageUrl));
   } catch (error) {
     yield call(
       toast.error,

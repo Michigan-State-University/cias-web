@@ -60,6 +60,13 @@ import {
   DELETE_TEXT_MESSAGE_IMAGE_SUCCESS,
   DELETE_TEXT_MESSAGE_IMAGE_ERROR,
   TEXT_MESSAGE_DEFAULT_STATE,
+  UPLOAD_TEXT_MESSAGE_VARIANT_IMAGE_REQUEST,
+  TEXT_MESSAGE_VARIANT_DEFAULT_STATE,
+  UPLOAD_TEXT_MESSAGE_VARIANT_IMAGE_SUCCESS,
+  UPLOAD_TEXT_MESSAGE_VARIANT_IMAGE_ERROR,
+  DELETE_TEXT_MESSAGE_VARIANT_IMAGE_REQUEST,
+  DELETE_TEXT_MESSAGE_VARIANT_IMAGE_SUCCESS,
+  DELETE_TEXT_MESSAGE_VARIANT_IMAGE_ERROR,
 } from './constants';
 import textMessageSettingsReducer from './settings/reducer';
 import textMessageVariantReducer from './variants/reducer';
@@ -67,6 +74,7 @@ import textMessageVariantReducer from './variants/reducer';
 export const initialState = {
   textMessages: [],
   textMessagesStates: new Map(),
+  variantsStates: new Map(),
   selectedMessageId: null,
   selectedVariantId: null,
   textMessagesSize: 0,
@@ -363,6 +371,84 @@ export const textMessagesReducer = (state = initialState, action) =>
 
         assignDraftItems(draft.cache.textMessages, draft.textMessages);
         break;
+
+      case UPLOAD_TEXT_MESSAGE_VARIANT_IMAGE_REQUEST: {
+        const { variantId } = payload;
+        draft.loaders.updateVariantLoading = true;
+        const itemState =
+          draft.variantsStates.get(variantId) ??
+          TEXT_MESSAGE_VARIANT_DEFAULT_STATE;
+        draft.variantsStates.set(variantId, {
+          ...itemState,
+          uploadImageLoading: true,
+          uploadImageError: null,
+        });
+        break;
+      }
+
+      case UPLOAD_TEXT_MESSAGE_VARIANT_IMAGE_SUCCESS: {
+        const { textMessageId, variantId, imageUrl } = payload;
+        draft.loaders.updateVariantLoading = false;
+        const itemState = draft.variantsStates.get(variantId);
+        itemState.uploadImageLoading = false;
+        updateItemById(
+          draft.textMessages,
+          textMessageId,
+          (textMessageDraft) => {
+            updateItemById(
+              textMessageDraft.variants,
+              variantId,
+              (variantDraft) => {
+                variantDraft.imageUrl = imageUrl;
+                return variantDraft;
+              },
+            );
+            return textMessageDraft;
+          },
+        );
+        assignDraftItems(draft.textMessages, draft.cache.textMessages);
+        break;
+      }
+
+      case UPLOAD_TEXT_MESSAGE_VARIANT_IMAGE_ERROR: {
+        const { variantId, error } = payload;
+        draft.loaders.updateVariantLoading = false;
+        const itemState = draft.variantsStates.get(variantId);
+        itemState.uploadImageLoading = false;
+        itemState.uploadImageError = error;
+        break;
+      }
+
+      case DELETE_TEXT_MESSAGE_VARIANT_IMAGE_REQUEST: {
+        const { textMessageId, variantId } = payload;
+        draft.loaders.updateVariantLoading = true;
+        updateItemById(
+          draft.textMessages,
+          textMessageId,
+          (textMessageDraft) => {
+            updateItemById(draft.textMessages, variantId, (variantDraft) => {
+              variantDraft.imageUrl = null;
+              return variantDraft;
+            });
+            return textMessageDraft;
+          },
+        );
+        break;
+      }
+
+      case DELETE_TEXT_MESSAGE_VARIANT_IMAGE_SUCCESS: {
+        draft.loaders.updateVariantLoading = false;
+        assignDraftItems(draft.textMessages, draft.cache.textMessages);
+        break;
+      }
+
+      case DELETE_TEXT_MESSAGE_VARIANT_IMAGE_ERROR: {
+        const { error } = payload;
+        draft.loaders.updateVariantLoading = false;
+        draft.errors.updateVariantLoading = error;
+        assignDraftItems(draft.cache.textMessages, draft.textMessages);
+        break;
+      }
 
       case REMOVE_TEXT_MESSAGE_VARIANT_REQUEST:
         draft.loaders.removeVariantLoading = true;
