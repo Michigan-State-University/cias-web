@@ -14,11 +14,11 @@ import Text from 'components/Text';
 import FormikInput from 'components/FormikInput';
 import Button from 'components/Button';
 import ErrorAlert from 'components/ErrorAlert';
+import FormikForm from 'components/FormikForm';
 
 import messages from '../messages';
 
 import { generateVerificationCodeValidationSchema } from '../utils';
-import { StyledForm } from '../styled';
 
 const CodeVerification = ({ goBack, verifyCode, isLoading, error }) => {
   useInjectSaga({ key: 'verificationCode', saga: verifyCodeSaga });
@@ -68,7 +68,7 @@ const CodeVerification = ({ goBack, verifyCode, isLoading, error }) => {
                 !isValid || !verificationCode || isSubmitting;
 
               return (
-                <StyledForm>
+                <FormikForm>
                   <FormikInput
                     formikKey="verificationCode"
                     placeholder={formatMessage(
@@ -89,7 +89,7 @@ const CodeVerification = ({ goBack, verifyCode, isLoading, error }) => {
                     onClick={handleSubmit}
                     type="submit"
                   />
-                </StyledForm>
+                </FormikForm>
               );
             }}
           </Formik>
