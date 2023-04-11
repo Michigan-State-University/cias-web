@@ -74,7 +74,7 @@ const SpeechInput = ({
               color={themeColors.secondary}
               clickable
               onClick={handleAddVariable}
-              disabled={hasFocus || isSpeechUpdating}
+              disabled={isSpeechUpdating}
             >
               {formatMessage(messages.addNameVariable)}
             </Text>
