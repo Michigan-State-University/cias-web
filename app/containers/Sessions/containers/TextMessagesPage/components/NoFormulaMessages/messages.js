@@ -11,4 +11,8 @@ export default defineMessages({
     id: `${scope}.textMessagePlaceholder`,
     defaultMessage: 'Enter text here',
   },
+  imageNoFormulaLabel: {
+    id: `${scope}.imageNoFormulaLabel`,
+    defaultMessage: 'Image in the SMS is:',
+  },
 });

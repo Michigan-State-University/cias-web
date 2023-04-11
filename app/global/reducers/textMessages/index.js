@@ -14,6 +14,8 @@ export {
   setFiltersAction,
   setTextMessagesCount,
   reorderTextMessageVariantsRequest,
+  uploadTextMessageImageRequest,
+  deleteTextMessageImageRequest,
 } from './actions';
 
 export {
@@ -29,20 +31,7 @@ export {
 
 export { changeFormulaMatch, changeContent } from './variants/actions';
 export { textMessagesReducer } from './reducer';
-export {
-  makeSelectErrors,
-  makeSelectTextMessages,
-  makeSelectTextMessagesState,
-  makeSelectLoaders,
-  makeSelectSelectedMessageId,
-  makeSelectSelectedMessage,
-  makeSelectTextMessagesSize,
-  makeSelectAllLoaders,
-  makeSelectVariants,
-  makeSelectSelectedVariantId,
-  makeSelectPhones,
-  makeSelectFilters,
-} from './selectors';
+export * from './selectors';
 
 export { allTextMessagesSagas } from './sagas/index';
 export { INITIAL_FILTERS } from './constants';

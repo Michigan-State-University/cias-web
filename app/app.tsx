@@ -41,7 +41,7 @@ import './.htaccess?file-loader';
 /* eslint-enable import/no-unresolved, import/extensions */
 
 import { store } from 'configureStore';
-import { setAutoFreeze } from 'immer';
+import { enableMapSet, setAutoFreeze } from 'immer';
 
 // Import i18n messages
 import { translationMessages } from 'i18n';
@@ -163,6 +163,7 @@ configureDayjs();
 const render = (messages: any) => {
   // preserve old Immer behavior (compatibility after update)
   setAutoFreeze(false);
+  enableMapSet();
 
   ReactDOM.render(
     <Provider store={store}>

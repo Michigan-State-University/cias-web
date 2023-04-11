@@ -53,12 +53,20 @@ import {
   INITIAL_FILTERS,
   SET_FILTERS,
   SET_TEXT_MESSAGES_COUNT,
+  UPLOAD_TEXT_MESSAGE_IMAGE_REQUEST,
+  UPLOAD_TEXT_MESSAGE_IMAGE_SUCCESS,
+  UPLOAD_TEXT_MESSAGE_IMAGE_ERROR,
+  DELETE_TEXT_MESSAGE_IMAGE_REQUEST,
+  DELETE_TEXT_MESSAGE_IMAGE_SUCCESS,
+  DELETE_TEXT_MESSAGE_IMAGE_ERROR,
+  TEXT_MESSAGE_DEFAULT_STATE,
 } from './constants';
 import textMessageSettingsReducer from './settings/reducer';
 import textMessageVariantReducer from './variants/reducer';
 
 export const initialState = {
   textMessages: [],
+  textMessagesStates: new Map(),
   selectedMessageId: null,
   selectedVariantId: null,
   textMessagesSize: 0,
@@ -230,6 +238,74 @@ export const textMessagesReducer = (state = initialState, action) =>
 
         assignDraftItems(draft.cache.textMessages, draft.textMessages);
         break;
+
+      case UPLOAD_TEXT_MESSAGE_IMAGE_REQUEST: {
+        const { textMessageId } = payload;
+        draft.loaders.updateTextMessagesLoading = true;
+        const itemState =
+          draft.textMessagesStates.get(textMessageId) ??
+          TEXT_MESSAGE_DEFAULT_STATE;
+        draft.textMessagesStates.set(textMessageId, {
+          ...itemState,
+          uploadImageLoading: true,
+          uploadImageError: null,
+        });
+        break;
+      }
+
+      case UPLOAD_TEXT_MESSAGE_IMAGE_SUCCESS: {
+        const { textMessageId, noFormulaImageUrl } = payload;
+        draft.loaders.updateTextMessagesLoading = false;
+        const itemState = draft.textMessagesStates.get(textMessageId);
+        itemState.uploadImageLoading = false;
+        updateItemById(
+          draft.textMessages,
+          textMessageId,
+          (textMessageDraft) => {
+            textMessageDraft.noFormulaImageUrl = noFormulaImageUrl;
+            return textMessageDraft;
+          },
+        );
+        assignDraftItems(draft.textMessages, draft.cache.textMessages);
+        break;
+      }
+
+      case UPLOAD_TEXT_MESSAGE_IMAGE_ERROR: {
+        const { textMessageId, error } = payload;
+        draft.loaders.updateTextMessagesLoading = false;
+        const itemState = draft.textMessagesStates.get(textMessageId);
+        itemState.uploadImageLoading = false;
+        itemState.uploadImageError = error;
+        break;
+      }
+
+      case DELETE_TEXT_MESSAGE_IMAGE_REQUEST: {
+        const { textMessageId } = payload;
+        draft.loaders.updateTextMessagesLoading = true;
+        updateItemById(
+          draft.textMessages,
+          textMessageId,
+          (textMessageDraft) => {
+            textMessageDraft.noFormulaImageUrl = null;
+            return textMessageDraft;
+          },
+        );
+        break;
+      }
+
+      case DELETE_TEXT_MESSAGE_IMAGE_SUCCESS: {
+        draft.loaders.updateTextMessagesLoading = false;
+        assignDraftItems(draft.textMessages, draft.cache.textMessages);
+        break;
+      }
+
+      case DELETE_TEXT_MESSAGE_IMAGE_ERROR: {
+        const { error } = payload;
+        draft.loaders.updateTextMessagesLoading = false;
+        draft.errors.updateTextMessagesError = error;
+        assignDraftItems(draft.cache.textMessages, draft.textMessages);
+        break;
+      }
 
       case REMOVE_TEXT_MESSAGE_REQUEST:
         draft.loaders.removeTextMessagesLoading = true;

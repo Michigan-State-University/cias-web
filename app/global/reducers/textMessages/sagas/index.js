@@ -12,6 +12,8 @@ import { addPhoneSaga } from './addPhone';
 import { removePhoneSaga } from './removePhone';
 import { updatePhoneSaga } from './updatePhone';
 import reorderTextMessageVarians from './reorderTextMessageVariants';
+import uploadTextMessageImageSaga from './uploadTextMessageImage';
+import deleteTextMessageImageSaga from './deleteTextMessageImage';
 
 export function* allTextMessagesSagas() {
   yield all([
@@ -28,5 +30,7 @@ export function* allTextMessagesSagas() {
     removePhoneSaga(),
     updatePhoneSaga(),
     reorderTextMessageVarians(),
+    uploadTextMessageImageSaga(),
+    deleteTextMessageImageSaga(),
   ]);
 }

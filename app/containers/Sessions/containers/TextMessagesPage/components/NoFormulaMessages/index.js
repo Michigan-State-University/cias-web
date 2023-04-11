@@ -15,7 +15,11 @@ import {
   visualAnalogueScaleQuestion,
 } from 'models/Session/QuestionTypes';
 import { SessionTypes } from 'models/Session';
-import { changeNoFormulaText } from 'global/reducers/textMessages';
+import {
+  changeNoFormulaText,
+  uploadTextMessageImageRequest,
+  deleteTextMessageImageRequest,
+} from 'global/reducers/textMessages';
 
 import VariableChooser from 'containers/VariableChooser';
 
@@ -25,6 +29,7 @@ import Column from 'components/Column';
 import { StyledInput } from 'components/Input/StyledInput';
 import Box from 'components/Box';
 import OriginalTextHover from 'components/OriginalTextHover';
+import ImageUpload from 'components/ImageUpload';
 
 import messages from './messages';
 import { TextMessagesContext } from '../../utils';
@@ -39,8 +44,12 @@ const originalTextIconProps = {
 const NoFormulaMessage = ({
   id,
   noFormulaText,
+  noFormulaImageUrl,
   originalText,
   changeAction,
+  uploadImage,
+  deleteImage,
+  uploadImageLoading,
 }) => {
   const { sessionId, interventionId, formatMessage, editingPossible } =
     useContext(TextMessagesContext);
@@ -55,12 +64,18 @@ const NoFormulaMessage = ({
     );
   };
 
+  const handleAddImage = (image) => {
+    uploadImage(id, image.image);
+  };
+
+  const handleDeleteImage = () => {
+    deleteImage(id);
+  };
+
   return (
     <Column justify="center">
-      <NoMarginRow justify="between" width="100%">
-        <Text mr={13} fontSize={15} fontWeight="bold">
-          {formatMessage(messages.label)}
-        </Text>
+      <NoMarginRow justify="between" width="100%" gap={13}>
+        <Text>{formatMessage(messages.label)}</Text>
         <VariableChooser
           disabled={!editingPossible}
           currentInterventionId={interventionId}
@@ -105,6 +120,15 @@ const NoFormulaMessage = ({
           />
         </OriginalTextHover>
       </Box>
+      <Text mb={10}>{formatMessage(messages.imageNoFormulaLabel)}</Text>
+      <ImageUpload
+        image={noFormulaImageUrl}
+        loading={uploadImageLoading}
+        onAddImage={handleAddImage}
+        onDeleteImage={handleDeleteImage}
+        disabled={!editingPossible}
+        acceptedFormats={['JPG', 'PNG', 'GIF']}
+      />
     </Column>
   );
 };
@@ -112,12 +136,18 @@ const NoFormulaMessage = ({
 NoFormulaMessage.propTypes = {
   id: PropTypes.string,
   changeAction: PropTypes.func,
-  originalText: PropTypes.object,
+  uploadImage: PropTypes.func,
+  deleteImage: PropTypes.func,
   noFormulaText: PropTypes.string,
+  noFormulaImageUrl: PropTypes.string,
+  originalText: PropTypes.object,
+  uploadImageLoading: PropTypes.bool,
 };
 
 const mapDispatchToProps = {
   changeAction: changeNoFormulaText,
+  uploadImage: uploadTextMessageImageRequest,
+  deleteImage: deleteTextMessageImageRequest,
 };
 
 const withConnect = connect(null, mapDispatchToProps);

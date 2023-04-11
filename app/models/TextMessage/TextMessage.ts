@@ -31,4 +31,5 @@ export type TextMessage = {
   variants?: TextMessageVariant[];
   type: TextMessageType;
   phones?: Phone[];
+  noFormulaImageUrl: Nullable<string>;
 } & TextMessageIncludeOptions;

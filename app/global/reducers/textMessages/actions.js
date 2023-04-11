@@ -44,6 +44,12 @@ import {
   UPDATE_PHONE_ERROR,
   SET_FILTERS,
   SET_TEXT_MESSAGES_COUNT,
+  UPLOAD_TEXT_MESSAGE_IMAGE_REQUEST,
+  UPLOAD_TEXT_MESSAGE_IMAGE_SUCCESS,
+  UPLOAD_TEXT_MESSAGE_IMAGE_ERROR,
+  DELETE_TEXT_MESSAGE_IMAGE_REQUEST,
+  DELETE_TEXT_MESSAGE_IMAGE_SUCCESS,
+  DELETE_TEXT_MESSAGE_IMAGE_ERROR,
 } from './constants';
 
 export const fetchTextMessagesRequest = (sessionId) =>
@@ -81,6 +87,29 @@ export const updateTextMessageSettingsSuccess = () =>
   actionBuilder(UPDATE_TEXT_MESSAGE_SETTINGS_SUCCESS, {});
 export const updateTextMessageSettingsError = (error) =>
   actionBuilder(UPDATE_TEXT_MESSAGE_SETTINGS_ERROR, { error });
+
+export const uploadTextMessageImageRequest = (textMessageId, noFormulaImage) =>
+  actionBuilder(UPLOAD_TEXT_MESSAGE_IMAGE_REQUEST, {
+    textMessageId,
+    noFormulaImage,
+  });
+export const uploadTextMessageImageSuccess = (
+  textMessageId,
+  noFormulaImageUrl,
+) =>
+  actionBuilder(UPLOAD_TEXT_MESSAGE_IMAGE_SUCCESS, {
+    textMessageId,
+    noFormulaImageUrl,
+  });
+export const uploadTextMessageImageError = (textMessageId, error) =>
+  actionBuilder(UPLOAD_TEXT_MESSAGE_IMAGE_ERROR, { textMessageId, error });
+
+export const deleteTextMessageImageRequest = (textMessageId) =>
+  actionBuilder(DELETE_TEXT_MESSAGE_IMAGE_REQUEST, { textMessageId });
+export const deleteTextMessageImageSuccess = () =>
+  actionBuilder(DELETE_TEXT_MESSAGE_IMAGE_SUCCESS, {});
+export const deleteTextMessageImageError = (error) =>
+  actionBuilder(DELETE_TEXT_MESSAGE_IMAGE_ERROR, { error });
 
 export const removeTextMessageRequest = (textMessageId) =>
   actionBuilder(REMOVE_TEXT_MESSAGE_REQUEST, { textMessageId });

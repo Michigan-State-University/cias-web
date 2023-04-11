@@ -1,5 +1,6 @@
 import { createSelector } from 'reselect';
 import { initialState } from './reducer';
+import { TEXT_MESSAGE_DEFAULT_STATE } from './constants';
 
 const dashboard = (state) => state.textMessages || initialState;
 
@@ -54,6 +55,13 @@ export const makeSelectSelectedMessageId = () =>
 export const makeSelectSelectedMessage = () =>
   createSelector(dashboard, (substate) =>
     substate.textMessages.find(({ id }) => id === substate.selectedMessageId),
+  );
+
+export const makeSelectSelectedMessageState = () =>
+  createSelector(
+    dashboard,
+    ({ selectedMessageId, textMessagesStates }) =>
+      textMessagesStates.get(selectedMessageId) ?? TEXT_MESSAGE_DEFAULT_STATE,
   );
 
 export const makeSelectSelectedVariantId = () =>
