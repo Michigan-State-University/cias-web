@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useMemo, useState } from 'react';
 import PropTypes from 'prop-types';
 
 import { colors, themeColors } from 'theme';
@@ -11,13 +11,16 @@ import Loader from 'components/Loader';
 import Text from 'components/Text';
 import Column from 'components/Column';
 import { PlayStopButton } from 'components/ActionIcons';
+import OriginalTextHover from 'components/OriginalTextHover';
 
 import messages from './messages';
 
 const SpeechInput = ({
+  id,
   disabled,
   formatMessage,
   text,
+  originalText,
   handleBlur,
   setHasFocus,
   hasFocus,
@@ -45,51 +48,71 @@ const SpeechInput = ({
 
   const handleInput = (e) => setInputValue(e.target.value);
 
+  const originalTextJoined = useMemo(
+    () => (originalText ?? []).join(''),
+    [originalText],
+  );
+
   return (
-    <Column>
-      {nameQuestionExists && (
-        <Row mt={15} width="100%" align="center" justify="end">
-          <Text
-            fontWeight="bold"
-            color={themeColors.secondary}
-            clickable
-            onClick={handleAddVariable}
-            disabled={hasFocus || isSpeechUpdating}
+    <OriginalTextHover
+      id={id}
+      text={originalTextJoined}
+      align="end"
+      position="relative"
+      iconProps={{
+        position: 'absolute',
+        right: 54,
+        bottom: 12,
+      }}
+      width="100%"
+    >
+      <Column>
+        {nameQuestionExists && (
+          <Row mt={15} width="100%" align="center" justify="end">
+            <Text
+              fontWeight="bold"
+              color={themeColors.secondary}
+              clickable
+              onClick={handleAddVariable}
+              disabled={hasFocus || isSpeechUpdating}
+            >
+              {formatMessage(messages.addNameVariable)}
+            </Text>
+          </Row>
+        )}
+        <Box position="relative">
+          <Box mt={15} bg={colors.linkWater} width="100%">
+            <StyledInput
+              disabled={disabled}
+              type="multiline"
+              rows="10"
+              placeholder={formatMessage(messages.speechPlaceholder)}
+              value={text}
+              onBlur={handleBlur}
+              onFocus={() => setHasFocus(true)}
+              onInput={handleInput}
+            />
+          </Box>
+          <Box
+            position="absolute"
+            bottom={BUTTON_MARGIN}
+            right={BUTTON_MARGIN}
+            hidden={hasFocus}
           >
-            {formatMessage(messages.addNameVariable)}
-          </Text>
-        </Row>
-      )}
-      <Box position="relative">
-        <Box mt={15} bg={colors.linkWater} width="100%">
-          <StyledInput
-            disabled={disabled}
-            type="multiline"
-            rows="10"
-            placeholder={formatMessage(messages.speechPlaceholder)}
-            value={text}
-            onBlur={handleBlur}
-            onFocus={() => setHasFocus(true)}
-            onInput={handleInput}
-          />
+            {renderButton()}
+          </Box>
         </Box>
-        <Box
-          position="absolute"
-          bottom={BUTTON_MARGIN}
-          right={BUTTON_MARGIN}
-          hidden={hasFocus}
-        >
-          {renderButton()}
-        </Box>
-      </Box>
-    </Column>
+      </Column>
+    </OriginalTextHover>
   );
 };
 
 SpeechInput.propTypes = {
+  id: PropTypes.string,
   disabled: PropTypes.bool,
   formatMessage: PropTypes.func,
   text: PropTypes.string,
+  originalText: PropTypes.array,
   handleBlur: PropTypes.func,
   setHasFocus: PropTypes.func,
   hasFocus: PropTypes.bool,

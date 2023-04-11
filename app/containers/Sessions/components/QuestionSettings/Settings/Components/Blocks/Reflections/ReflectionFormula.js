@@ -6,12 +6,13 @@ import { compose } from 'redux';
 import { connect } from 'react-redux';
 import join from 'lodash/join';
 
+import binNoBg from 'assets/svg/bin-no-bg.svg';
+
 import Column from 'components/Column';
 import Img from 'components/Img';
 import Text from 'components/Text';
 import Row from 'components/Row';
 import InequalityChooser from 'components/InequalityChooser';
-import binNoBg from 'assets/svg/bin-no-bg.svg';
 
 import {
   makeSelectLoader,
@@ -126,6 +127,7 @@ const ReflectionFormula = ({
       </Row>
       <Row>
         <SpeechInput
+          id={`question-${id}-reflection-formula-case-${blockIndex}`}
           formatMessage={formatMessage}
           setHasFocus={setHasFocus}
           isSpeechUpdating={isSpeechUpdating}
@@ -134,6 +136,7 @@ const ReflectionFormula = ({
           handleButtonClick={handleButtonClick}
           handleBlur={handleBlur}
           text={text}
+          originalText={reflection.original_text}
           disabled={disabled}
           nameQuestionExists={nameQuestionExists}
         />
