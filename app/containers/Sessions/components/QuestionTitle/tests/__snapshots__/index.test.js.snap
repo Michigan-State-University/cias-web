@@ -76,7 +76,6 @@ exports[`<QuestionTitle /> Should render and match the snapshot 1`] = `
   padding: 16px;
   width: 100%;
   max-width: 702px;
-  margin-bottom: 10px;
   color: unset;
 }
 

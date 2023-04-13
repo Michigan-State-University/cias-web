@@ -154,6 +154,9 @@ exports[`<AppRoute /> Should render and match the snapshot 1`] = `
 
 .c12 {
   overflow: hidden;
+  -webkit-flex-wrap: nowrap !important;
+  -ms-flex-wrap: nowrap !important;
+  flex-wrap: nowrap !important;
 }
 
 @media (max-width:575px) {

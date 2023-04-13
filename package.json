@@ -161,6 +161,7 @@
     "regression": "^2.0.1",
     "reselect": "^4.0.0",
     "resize-observer-polyfill": "^1.5.1",
+    "rtl-detect": "^1.0.4",
     "sanitize.css": "8.0.0",
     "seamless-immutable": "^7.1.4",
     "smoothscroll-polyfill": "^0.4.4",

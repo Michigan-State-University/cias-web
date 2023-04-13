@@ -39,11 +39,28 @@ export interface VariableAnswerData<
   var: string;
 }
 
-export interface ThirdPartyReportAnswerData extends AnswerData<string> {
-  reportTemplateIds: string[];
+export interface IndexedVariableAnswerData<
+  T extends VariableAnswerValueType = VariableAnswerValueType,
+> extends VariableAnswerData<T> {
+  index?: number;
 }
 
-export type AnswerDataType = VariableAnswerData | ThirdPartyReportAnswerData;
+export interface ThirdPartyReportAnswerData extends AnswerData<string> {
+  reportTemplateIds: string[];
+  index?: number;
+}
+
+export interface GridAnswerData extends VariableAnswerData<string> {
+  index?: {
+    [key: string]: number;
+  };
+}
+
+export type AnswerDataType =
+  | VariableAnswerData
+  | IndexedVariableAnswerData
+  | ThirdPartyReportAnswerData
+  | GridAnswerData;
 
 // answer body
 
@@ -66,12 +83,12 @@ export interface GenericAnswer<
 
 export type SingleAnswer = GenericAnswer<
   AnswerType.SINGLE,
-  VariableAnswerData<string>
+  IndexedVariableAnswerData<string>
 >;
 
 export type MultiAnswer = GenericAnswer<
   AnswerType.MULTIPLE,
-  VariableAnswerData<string>
+  IndexedVariableAnswerData<string>
 >;
 
 export type FreeResponseAnswer = GenericAnswer<
@@ -99,10 +116,7 @@ export type NumberAnswer = GenericAnswer<
   VariableAnswerData<string | number>
 >;
 
-export type GridAnswer = GenericAnswer<
-  AnswerType.GRID,
-  VariableAnswerData<string>
->;
+export type GridAnswer = GenericAnswer<AnswerType.GRID, GridAnswerData>;
 
 export type SliderAnswer = GenericAnswer<
   AnswerType.SLIDER,
