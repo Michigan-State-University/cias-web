@@ -14,12 +14,12 @@ import { Adornment } from './styled';
 import { AdornmentType } from './types';
 
 export type Props = ComponentProps<typeof Input> & {
-  type: AdornmentType;
+  adornmentType: AdornmentType;
   adornment?: string;
 };
 
 const Component = React.forwardRef<HTMLInputElement, Props>(
-  ({ type, adornment, ...props }, ref) => {
+  ({ adornmentType, adornment, ...props }, ref) => {
     const [adornmentSize, setAdornmentSize] = useState(0);
     const adornmentRef = useCallback(
       (node: HTMLElement) => {
@@ -47,15 +47,17 @@ const Component = React.forwardRef<HTMLInputElement, Props>(
           hideNumberArrows
           width="100%"
           pr={
-            type === AdornmentType.SUFFIX
+            adornmentType === AdornmentType.SUFFIX
               ? adornmentSize + INPUT_PADDING
               : undefined
           }
-          pl={type === AdornmentType.PREFIX ? adornmentSize : undefined}
+          pl={
+            adornmentType === AdornmentType.PREFIX ? adornmentSize : undefined
+          }
         />
         <Adornment
           ref={adornmentRef}
-          type={type}
+          type={adornmentType}
           visible={!!adornmentSize}
           onClick={focusInput}
         >

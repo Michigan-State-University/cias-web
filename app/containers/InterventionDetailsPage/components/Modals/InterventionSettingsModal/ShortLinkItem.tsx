@@ -90,7 +90,7 @@ const ShortLinkItem = ({
       <Box filled>
         <FormikInputWithAdornment
           formikKey={nameFormikKey}
-          type={AdornmentType.PREFIX}
+          adornmentType={AdornmentType.PREFIX}
           adornment={selected ? CUSTOM_LINK_PREFIX : ''}
           disabled={!selected}
           backgroundColor={selected ? undefined : themeColors.highlight}

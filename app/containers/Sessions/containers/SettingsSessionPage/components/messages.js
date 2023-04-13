@@ -15,6 +15,27 @@ export default defineMessages({
     id: `${scope}.variableLabel`,
     defaultMessage: 'Variable',
   },
+  autofinishSettings: {
+    id: `${scope}.autofinishSettings`,
+    defaultMessage: 'Autofinish settings',
+  },
+  autofinishTooltip: {
+    id: `${scope}.autofinishTooltip`,
+    defaultMessage:
+      'The autofinish timer will be reset every time participant answers a question.',
+  },
+  autofinishEnabledLabel: {
+    id: `${scope}.autofinishEnabledLabel`,
+    defaultMessage: 'Finish session automatically',
+  },
+  autofinishDelayLabel: {
+    id: `${scope}.autofinishDelayLabel`,
+    defaultMessage: 'Autofinish delay',
+  },
+  hours: {
+    id: `${scope}.hours`,
+    defaultMessage: 'hours',
+  },
   narratorSettings: {
     id: `${scope}.narratorSettings`,
     defaultMessage: 'Narrator Settings',
