@@ -61,10 +61,7 @@ const Settings = ({
         controlledSetTabActive={handleChange}
         data-cy="settings-panel"
       >
-        <div
-          label={formatMessage(messages[settingsTabLabels.settings])}
-          hidden={isTlfbGroup}
-        >
+        <div label={formatMessage(messages[settingsTabLabels.settings])}>
           <SettingsTab
             formatMessage={formatMessage}
             disabled={!editingPossible}

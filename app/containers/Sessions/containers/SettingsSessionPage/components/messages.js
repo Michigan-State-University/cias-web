@@ -22,7 +22,7 @@ export default defineMessages({
   autofinishTooltip: {
     id: `${scope}.autofinishTooltip`,
     defaultMessage:
-      'The autofinish timer will be reset every time participant answers a question.',
+      'If you don’t mark any screen as "Fire report if get this far.", the autofinish timer will start at the begging of the session. The autofinish timer will be reset every time participant answers a question.',
   },
   autofinishEnabledLabel: {
     id: `${scope}.autofinishEnabledLabel`,

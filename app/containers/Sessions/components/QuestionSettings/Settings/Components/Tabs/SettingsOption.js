@@ -2,15 +2,20 @@ import React, { memo, useCallback } from 'react';
 import PropTypes from 'prop-types';
 import { useIntl } from 'react-intl';
 
+import questionMark from 'assets/svg/grey-question-mark.svg';
+
 import { borders, colors } from 'theme';
+
 import { numericValidator } from 'utils/validators';
 
 import { FullWidthSwitch } from 'components/Switch';
 import H3 from 'components/H3';
 import Row from 'components/Row';
+import Tooltip from 'components/Tooltip';
 
 import { Input } from '../styled';
 import messages from '../messages';
+import { getSettingOptionTooltipText } from './utils';
 
 const SettingsOption = ({ setting, index, onUpdate, disabled, isLast }) => {
   const { formatMessage } = useIntl();
@@ -24,6 +29,8 @@ const SettingsOption = ({ setting, index, onUpdate, disabled, isLast }) => {
     (value) => handleUpdate(+value),
     [handleUpdate],
   );
+
+  const tooltipText = getSettingOptionTooltipText(formatMessage, index);
 
   const renderSetting = () => {
     switch (setting?.constructor) {
@@ -52,7 +59,16 @@ const SettingsOption = ({ setting, index, onUpdate, disabled, isLast }) => {
             checked={setting}
             onToggle={handleUpdate}
           >
-            <H3>{formatMessage(messages[`${index}`])}</H3>
+            <Row align="center" gap={8}>
+              <H3>{formatMessage(messages[`${index}`])}</H3>
+              {tooltipText && (
+                <Tooltip
+                  id={`question-settings-option-tooltip-${index}`}
+                  icon={questionMark}
+                  content={tooltipText}
+                />
+              )}
+            </Row>
           </FullWidthSwitch>
         );
     }
