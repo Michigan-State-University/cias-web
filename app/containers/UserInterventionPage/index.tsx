@@ -169,7 +169,7 @@ const UserInterventionPage = () => {
           </Row>
         </>
       )}
-      <BackButton to="/">
+      <BackButton link to="/">
         {formatMessage(messages.backToInterventions)}
       </BackButton>
     </AppContainer>

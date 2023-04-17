@@ -11,7 +11,7 @@ export type SharedProps<
   T extends QuestionDTO = QuestionDTO,
   V extends null | Answer = null,
 > = {
-  selectAnswer: (answer: V, selectedByUser?: boolean) => void;
+  selectAnswer: (answer: V) => void;
   answer: V;
   questionIndex: number;
   saveAnswer: () => void;

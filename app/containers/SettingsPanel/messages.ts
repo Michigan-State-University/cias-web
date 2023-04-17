@@ -155,9 +155,9 @@ export default defineMessages({
     id: `${scope}.navigators`,
     defaultMessage: 'Navigators',
   },
-  noNavigator: {
-    id: `${scope}.noNavigator`,
-    defaultMessage: 'No Navigator available',
+  contactInformation: {
+    id: `${scope}.contactInformation`,
+    defaultMessage: 'Contact information',
   },
   helpingMaterials: {
     id: `${scope}.helpingMaterials`,
@@ -167,13 +167,21 @@ export default defineMessages({
     id: `${scope}.notifyNavigator`,
     defaultMessage: `Notify navigator about new messages even then it won't be online`,
   },
-  hotlinePrefix: {
-    id: `${scope}.hotlinePrefix`,
-    defaultMessage: 'Hotline prefix',
+  contactPrefix: {
+    id: `${scope}.contactPrefix`,
+    defaultMessage: 'Contact prefix',
   },
-  hotlinePhoneNumber: {
-    id: `${scope}.hotlinePhoneNumber`,
-    defaultMessage: 'Hotline phone number',
+  contactPhoneNumber: {
+    id: `${scope}.contactPhoneNumber`,
+    defaultMessage: 'Contact phone number',
+  },
+  messagePrefix: {
+    id: `${scope}.messagePrefix`,
+    defaultMessage: 'Message prefix',
+  },
+  messagePhoneNumber: {
+    id: `${scope}.messagePhoneNumber`,
+    defaultMessage: 'Message phone number',
   },
   saveChanges: {
     id: `${scope}.saveChanges`,
@@ -189,8 +197,7 @@ export default defineMessages({
   },
   messageLabel: {
     id: `${scope}.messageLabel`,
-    defaultMessage:
-      'Message to participant when no navigator is available<warningColor>*</warningColor>',
+    defaultMessage: 'Message to participant when no navigator is available',
   },
   messagePlaceholder: {
     id: `${scope}.messagePlaceholder`,
@@ -355,5 +362,13 @@ export default defineMessages({
   downloadTranscript: {
     id: `${scope}.downloadTranscript`,
     defaultMessage: 'Download transcript',
+  },
+  contactMessagePlaceholder: {
+    id: `${scope}.contactMessagePlaceholder`,
+    defaultMessage: 'Specify contact message',
+  },
+  contactMessageLabel: {
+    id: `${scope}.contactMessageLabel`,
+    defaultMessage: 'Contact information message',
   },
 });

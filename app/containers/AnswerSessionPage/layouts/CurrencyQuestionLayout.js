@@ -35,8 +35,8 @@ const CurrencyQuestionLayout = ({ onChange, answerBody, disabled }) => {
   const handleOnInput = (newValue) =>
     !disabled && onChange(`${currency} ${processAmount(newValue)}`);
 
-  const handleOnSelect = (newValue, selectedByUser = true) =>
-    !disabled && onChange(`${newValue} ${amount}`, selectedByUser);
+  const handleOnSelect = (newValue) =>
+    !disabled && onChange(`${newValue} ${amount}`);
 
   return (
     <Box width="100%">

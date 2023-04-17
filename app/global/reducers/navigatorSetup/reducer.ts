@@ -85,10 +85,10 @@ export const initialState: NavigatorSetupState = {
 /* eslint-disable default-case, no-param-reassign */
 export const navigatorSetupReducer = (
   state: NavigatorSetupState = initialState,
-  action: NavigatorSetupAction,
+  { type, payload }: NavigatorSetupAction,
 ) =>
   produce(state, (draft) => {
-    switch (action.type) {
+    switch (type) {
       case getType(fetchNavigatorSetupRequest):
         draft.loaders.fetchingNavigatorSetup = true;
         draft.navigatorSetup = null;
@@ -103,7 +103,7 @@ export const navigatorSetupReducer = (
           interventionNavigators,
           navigatorSetup,
           navigatorsInTeam,
-        } = action.payload;
+        } = payload;
         draft.navigatorSetup = navigatorSetup;
         draft.pendingNavigatorInvitations = pendingNavigatorInvitations;
         draft.interventionNavigators = interventionNavigators;
@@ -113,14 +113,14 @@ export const navigatorSetupReducer = (
       }
       case getType(fetchNavigatorSetupError):
         draft.loaders.fetchingNavigatorSetup = false;
-        draft.error = action.payload.error;
+        draft.error = payload.error;
         break;
 
       case getType(updateNoNavigatorTabRequest):
         if (state.navigatorSetup && draft.navigatorSetup) {
           draft.navigatorSetup = {
             ...draft.navigatorSetup,
-            ...action.payload.noNavigatorsData,
+            ...payload.noNavigatorsData,
           };
           draft.loaders.updatingNoNavigatorsData = true;
         }
@@ -135,7 +135,7 @@ export const navigatorSetupReducer = (
       case getType(addParticipantLinkSuccess):
         draft.loaders.addingParticipantLink = false;
         if (draft.navigatorSetup) {
-          const { navigatorSetup } = action.payload;
+          const { navigatorSetup } = payload;
           draft.navigatorSetup = navigatorSetup;
         }
         break;
@@ -146,24 +146,21 @@ export const navigatorSetupReducer = (
         if (draft.navigatorSetup) {
           updateItemById(
             draft.navigatorSetup.participantLinks,
-            action.payload.linkId,
+            payload.linkId,
             { deleting: true },
           );
         }
         break;
       case getType(removeParticipantLinkSuccess):
         if (draft.navigatorSetup) {
-          deleteItemById(
-            draft.navigatorSetup.participantLinks,
-            action.payload.linkId,
-          );
+          deleteItemById(draft.navigatorSetup.participantLinks, payload.linkId);
         }
         break;
       case getType(removeParticipantLinkError):
         if (draft.navigatorSetup) {
           updateItemById(
             draft.navigatorSetup.participantLinks,
-            action.payload.linkId,
+            payload.linkId,
             { deleting: false },
           );
         }
@@ -172,17 +169,26 @@ export const navigatorSetupReducer = (
         if (draft.navigatorSetup) {
           updateItemById(
             draft.navigatorSetup.participantLinks,
-            action.payload.linkId,
+            payload.linkId,
             { saving: true },
           );
         }
         break;
-      case getType(updateParticipantLinkSuccess):
+      case getType(updateParticipantLinkSuccess): {
+        const { linkId, linkData } = payload;
+        if (draft.navigatorSetup) {
+          updateItemById(draft.navigatorSetup.participantLinks, linkId, {
+            saving: false,
+            ...linkData,
+          });
+        }
+        break;
+      }
       case getType(updateParticipantLinkError):
         if (draft.navigatorSetup) {
           updateItemById(
             draft.navigatorSetup.participantLinks,
-            action.payload.linkId,
+            payload.linkId,
             { saving: false },
           );
         }
@@ -193,7 +199,7 @@ export const navigatorSetupReducer = (
       case getType(addNavigatorLinkSuccess):
         draft.loaders.addingNavigatorLink = false;
         if (draft.navigatorSetup) {
-          const { navigatorSetup } = action.payload;
+          const { navigatorSetup } = payload;
           draft.navigatorSetup = navigatorSetup;
         }
         break;
@@ -202,56 +208,52 @@ export const navigatorSetupReducer = (
         break;
       case getType(removeNavigatorLinkRequest):
         if (draft.navigatorSetup) {
-          updateItemById(
-            draft.navigatorSetup.navigatorLinks,
-            action.payload.linkId,
-            { deleting: true },
-          );
+          updateItemById(draft.navigatorSetup.navigatorLinks, payload.linkId, {
+            deleting: true,
+          });
         }
         break;
       case getType(removeNavigatorLinkSuccess):
         if (draft.navigatorSetup) {
-          deleteItemById(
-            draft.navigatorSetup.navigatorLinks,
-            action.payload.linkId,
-          );
+          deleteItemById(draft.navigatorSetup.navigatorLinks, payload.linkId);
         }
         break;
       case getType(removeNavigatorLinkError):
         if (draft.navigatorSetup) {
-          updateItemById(
-            draft.navigatorSetup.navigatorLinks,
-            action.payload.linkId,
-            { deleting: false },
-          );
+          updateItemById(draft.navigatorSetup.navigatorLinks, payload.linkId, {
+            deleting: false,
+          });
         }
         break;
       case getType(updateNavigatorLinkRequest):
         if (draft.navigatorSetup) {
-          updateItemById(
-            draft.navigatorSetup.navigatorLinks,
-            action.payload.linkId,
-            { saving: true },
-          );
+          updateItemById(draft.navigatorSetup.navigatorLinks, payload.linkId, {
+            saving: true,
+          });
         }
         break;
-      case getType(updateNavigatorLinkSuccess):
+      case getType(updateNavigatorLinkSuccess): {
+        const { linkId, linkData } = payload;
+        if (draft.navigatorSetup) {
+          updateItemById(draft.navigatorSetup.navigatorLinks, linkId, {
+            saving: false,
+            ...linkData,
+          });
+        }
+        break;
+      }
       case getType(updateNavigatorLinkError):
         if (draft.navigatorSetup) {
-          updateItemById(
-            draft.navigatorSetup.navigatorLinks,
-            action.payload.linkId,
-            { saving: false },
-          );
+          updateItemById(draft.navigatorSetup.navigatorLinks, payload.linkId, {
+            saving: false,
+          });
         }
         break;
       case getType(inviteNavigatorsByEmailRequest):
         draft.loaders.navigatorEmailInvitation = true;
         break;
       case getType(inviteNavigatorsByEmailSuccess): {
-        const {
-          payload: { pendingNavigatorInvitations },
-        } = action;
+        const { pendingNavigatorInvitations } = payload;
         draft.pendingNavigatorInvitations.push(...pendingNavigatorInvitations);
         draft.loaders.navigatorEmailInvitation = false;
         break;
@@ -262,22 +264,19 @@ export const navigatorSetupReducer = (
       case getType(removeNavigatorEmailInvitationRequest): {
         updateItemById(
           draft.pendingNavigatorInvitations,
-          action.payload.invitationId,
+          payload.invitationId,
           { inDeletion: true },
         );
         break;
       }
       case getType(removeNavigatorEmailInvitationSuccess): {
-        deleteItemById(
-          draft.pendingNavigatorInvitations,
-          action.payload.invitationId,
-        );
+        deleteItemById(draft.pendingNavigatorInvitations, payload.invitationId);
         break;
       }
       case getType(removeNavigatorEmailInvitationError): {
         updateItemById(
           draft.pendingNavigatorInvitations,
-          action.payload.invitationId,
+          payload.invitationId,
           { inDeletion: false },
         );
         break;
@@ -285,14 +284,14 @@ export const navigatorSetupReducer = (
       case getType(removeInterventionNavigatorSuccess): {
         deleteItemById(
           draft.interventionNavigators,
-          action.payload.interventionNavigatorId,
+          payload.interventionNavigatorId,
         );
         break;
       }
       case getType(removeInterventionNavigatorRequest): {
         updateItemById(
           draft.interventionNavigators,
-          action.payload.interventionNavigatorId,
+          payload.interventionNavigatorId,
           { inDeletion: true },
         );
         break;
@@ -300,7 +299,7 @@ export const navigatorSetupReducer = (
       case getType(removeInterventionNavigatorError): {
         updateItemById(
           draft.interventionNavigators,
-          action.payload.interventionNavigatorId,
+          payload.interventionNavigatorId,
           { inDeletion: false },
         );
         break;
@@ -311,7 +310,7 @@ export const navigatorSetupReducer = (
       }
       case getType(addParticipantFileSuccess): {
         draft.loaders.uploadingParticipantFile = false;
-        const { navigatorSetup } = action.payload;
+        const { navigatorSetup } = payload;
         draft.navigatorSetup = navigatorSetup;
         break;
       }
@@ -323,7 +322,7 @@ export const navigatorSetupReducer = (
         if (draft.navigatorSetup) {
           updateItemById(
             draft.navigatorSetup.participantFiles,
-            action.payload.fileId,
+            payload.fileId,
             { deleting: true },
           );
         }
@@ -331,10 +330,7 @@ export const navigatorSetupReducer = (
       }
       case getType(removeParticipantFileSuccess): {
         if (draft.navigatorSetup) {
-          deleteItemById(
-            draft.navigatorSetup.participantFiles,
-            action.payload.fileId,
-          );
+          deleteItemById(draft.navigatorSetup.participantFiles, payload.fileId);
         }
         break;
       }
@@ -342,7 +338,7 @@ export const navigatorSetupReducer = (
         if (draft.navigatorSetup) {
           updateItemById(
             draft.navigatorSetup.participantFiles,
-            action.payload.fileId,
+            payload.fileId,
             { deleting: false },
           );
         }
@@ -354,7 +350,7 @@ export const navigatorSetupReducer = (
       }
       case getType(addNavigatorFileSuccess): {
         draft.loaders.uploadingNavigatorFile = false;
-        const { navigatorSetup } = action.payload;
+        const { navigatorSetup } = payload;
         draft.navigatorSetup = navigatorSetup;
         break;
       }
@@ -364,42 +360,35 @@ export const navigatorSetupReducer = (
       }
       case getType(removeNavigatorFileRequest): {
         if (draft.navigatorSetup) {
-          updateItemById(
-            draft.navigatorSetup.navigatorFiles,
-            action.payload.fileId,
-            { deleting: true },
-          );
+          updateItemById(draft.navigatorSetup.navigatorFiles, payload.fileId, {
+            deleting: true,
+          });
         }
         break;
       }
       case getType(removeNavigatorFileSuccess): {
         if (draft.navigatorSetup) {
-          deleteItemById(
-            draft.navigatorSetup.navigatorFiles,
-            action.payload.fileId,
-          );
+          deleteItemById(draft.navigatorSetup.navigatorFiles, payload.fileId);
         }
         break;
       }
       case getType(removeNavigatorFileError): {
         if (draft.navigatorSetup) {
-          updateItemById(
-            draft.navigatorSetup.navigatorFiles,
-            action.payload.fileId,
-            { deleting: false },
-          );
+          updateItemById(draft.navigatorSetup.navigatorFiles, payload.fileId, {
+            deleting: false,
+          });
         }
         break;
       }
 
       case getType(addNavigatorFromTeamRequest): {
-        updateItemById(draft.teamNavigators, action.payload.user.id, {
+        updateItemById(draft.teamNavigators, payload.user.id, {
           inDeletion: true,
         });
         break;
       }
       case getType(addNavigatorFromTeamSuccess): {
-        const { user } = action.payload;
+        const { user } = payload;
         updateItemById(draft.teamNavigators, user.id, {
           inDeletion: false,
         });
@@ -407,7 +396,7 @@ export const navigatorSetupReducer = (
         break;
       }
       case getType(addNavigatorFromTeamError): {
-        updateItemById(draft.teamNavigators, action.payload.id, {
+        updateItemById(draft.teamNavigators, payload.id, {
           inDeletion: false,
         });
         break;
@@ -420,7 +409,7 @@ export const navigatorSetupReducer = (
       case getType(uploadFilledScriptTemplateSuccess): {
         draft.loaders.updatingFilledNavigatorScript = false;
         if (draft.navigatorSetup) {
-          const { navigatorSetup } = action.payload;
+          const { navigatorSetup } = payload;
           draft.navigatorSetup = navigatorSetup;
         }
         break;
@@ -437,7 +426,7 @@ export const navigatorSetupReducer = (
       case getType(removeFilledScriptTemplateSuccess): {
         draft.loaders.updatingFilledNavigatorScript = false;
         if (draft.navigatorSetup) {
-          const { navigatorSetup } = action.payload;
+          const { navigatorSetup } = payload;
           draft.navigatorSetup = navigatorSetup;
         }
         break;
@@ -451,5 +440,6 @@ export const navigatorSetupReducer = (
 
 export const withNavigatorSetupReducer: WithReducer = {
   key: navigatorSetupReducerKey,
+  // @ts-ignore
   reducer: navigatorSetupReducer,
 };

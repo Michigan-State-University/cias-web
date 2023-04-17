@@ -131,13 +131,15 @@ const VariantItem = ({
         </Row>
       }
       extraIcons={
-        <Img
-          mr={10}
-          src={ReorderIcon}
-          cursor="grab"
-          disabled={false}
-          {...dragHandleProps}
-        />
+        disabled ? null : (
+          <Img
+            mr={10}
+            src={ReorderIcon}
+            cursor="grab"
+            disabled={false}
+            {...dragHandleProps}
+          />
+        )
       }
     >
       <Container style={{ width: '100%' }}>

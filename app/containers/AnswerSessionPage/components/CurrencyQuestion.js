@@ -17,18 +17,15 @@ const CurrencyQuestion = ({
     },
   } = question;
 
-  const onChange = (value, selectedByUser = true) => {
+  const onChange = (value) => {
     if (isNullOrUndefined(value)) return;
 
-    selectAnswer(
-      [
-        {
-          var: name,
-          value,
-        },
-      ],
-      selectedByUser,
-    );
+    selectAnswer([
+      {
+        var: name,
+        value,
+      },
+    ]);
   };
 
   return (

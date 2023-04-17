@@ -51,7 +51,9 @@ function AccountSettings({
         <title>{formatMessage(messages.pageTitle)}</title>
       </Helmet>
       <StyledBox height="100%" width="100%">
-        <BackButton to={redirectUrl}>{buttonMessage}</BackButton>
+        <BackButton link to={redirectUrl}>
+          {buttonMessage}
+        </BackButton>
         <H1 mt={16} mb={24}>
           <FormattedMessage {...messages.header} />
         </H1>

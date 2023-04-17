@@ -195,7 +195,7 @@ exports[`<SessionSchedule /> Should render and match the snapshot 1`] = `
           color="#B727EA"
           font-weight="bold"
         >
-          Send [X] days after previous session scheduled date
+          Send email invitation [X] days after previous session scheduled date
         </p>
         <img
           alt="arrow"
