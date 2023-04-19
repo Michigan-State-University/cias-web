@@ -6,7 +6,6 @@ const { getCommitHash, onHeroku, gitRevisionPlugin } = require('./utils');
 const path = require('path');
 const webpack = require('webpack');
 const CopyWebpackPlugin = require('copy-webpack-plugin');
-const FaviconsWebpackPlugin = require('favicons-webpack-plugin');
 
 const { EnvironmentPlugin } = webpack;
 
@@ -161,14 +160,6 @@ module.exports = (options) => ({
       VERSION: process.env.VERSION,
     }),
     new CopyWebpackPlugin({ patterns: [{ from: 'public' }] }),
-    new FaviconsWebpackPlugin({
-      logo: 'app/assets/images/icon.svg',
-      favicons: {
-        appName: 'CIAS 3.0',
-        appDescription: 'CIAS 3.0 Web Application',
-        display: 'browser'
-      }
-    }),
   ]),
   resolve: {
     modules: ['node_modules', 'app'],
