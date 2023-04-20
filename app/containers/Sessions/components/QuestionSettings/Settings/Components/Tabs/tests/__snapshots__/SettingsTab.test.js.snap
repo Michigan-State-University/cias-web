@@ -93,7 +93,7 @@ exports[`<SettingsTab /> Should render and match the snapshot 1`] = `
   gap: 8px;
 }
 
-.c17 {
+.c15 {
   display: -webkit-box;
   display: -webkit-flex;
   display: -ms-flexbox;
@@ -127,23 +127,6 @@ exports[`<SettingsTab /> Should render and match the snapshot 1`] = `
 }
 
 .c12 {
-  width: auto;
-  height: auto;
-  display: block;
-  border-radius: 5px;
-  display: -webkit-box;
-  display: -webkit-flex;
-  display: -ms-flexbox;
-  display: flex;
-  color: unset;
-}
-
-.c13 {
-  width: auto;
-  height: auto;
-}
-
-.c14 {
   position: relative;
   display: inline-block;
   min-width: 40px;
@@ -178,7 +161,7 @@ exports[`<SettingsTab /> Should render and match the snapshot 1`] = `
   cursor: not-allowed;
 }
 
-.c16 {
+.c14 {
   position: absolute;
   top: 0;
   left: 0;
@@ -190,20 +173,20 @@ exports[`<SettingsTab /> Should render and match the snapshot 1`] = `
   border-radius: 21px;
 }
 
-.c3:checked + .c5 .c15 {
+.c3:checked + .c5 .c13 {
   background-color: #B727EA;
 }
 
-.c3:focus + .c5 .c15 {
+.c3:focus + .c5 .c13 {
   box-shadow: 0 0 1px #B727EA;
 }
 
-.c3:disabled + .c5 .c15 {
+.c3:disabled + .c5 .c13 {
   opacity: 0.5;
   cursor: not-allowed;
 }
 
-.c16:before {
+.c14:before {
   position: absolute;
   content: '';
   left: 4px;
@@ -216,7 +199,7 @@ exports[`<SettingsTab /> Should render and match the snapshot 1`] = `
   border-radius: 50%;
 }
 
-.c3:checked + .c5 .c15:before {
+.c3:checked + .c5 .c13:before {
   -webkit-transform: translateX(18px);
   -ms-transform: translateX(18px);
   transform: translateX(18px);
@@ -274,29 +257,13 @@ exports[`<SettingsTab /> Should render and match the snapshot 1`] = `
               >
                 Video
               </h3>
-              <div
-                class="c12"
-                display="flex"
-              >
-                <div
-                  class="c8"
-                  data-for="question-settings-option-tooltip-video"
-                  data-tip=""
-                >
-                  <img
-                    alt="?"
-                    class="c13"
-                    src="IMAGE_MOCK"
-                  />
-                </div>
-              </div>
             </div>
           </div>
           <div
-            class="c14"
+            class="c12"
           >
             <span
-              class="c15 c16"
+              class="c13 c14"
             />
           </div>
         </div>
@@ -338,29 +305,13 @@ exports[`<SettingsTab /> Should render and match the snapshot 1`] = `
               >
                 Image
               </h3>
-              <div
-                class="c12"
-                display="flex"
-              >
-                <div
-                  class="c8"
-                  data-for="question-settings-option-tooltip-image"
-                  data-tip=""
-                >
-                  <img
-                    alt="?"
-                    class="c13"
-                    src="IMAGE_MOCK"
-                  />
-                </div>
-              </div>
             </div>
           </div>
           <div
-            class="c14"
+            class="c12"
           >
             <span
-              class="c15 c16"
+              class="c13 c14"
             />
           </div>
         </div>
@@ -403,29 +354,13 @@ exports[`<SettingsTab /> Should render and match the snapshot 1`] = `
               >
                 Title
               </h3>
-              <div
-                class="c12"
-                display="flex"
-              >
-                <div
-                  class="c8"
-                  data-for="question-settings-option-tooltip-title"
-                  data-tip=""
-                >
-                  <img
-                    alt="?"
-                    class="c13"
-                    src="IMAGE_MOCK"
-                  />
-                </div>
-              </div>
             </div>
           </div>
           <div
-            class="c14"
+            class="c12"
           >
             <span
-              class="c15 c16"
+              class="c13 c14"
             />
           </div>
         </div>
@@ -468,29 +403,13 @@ exports[`<SettingsTab /> Should render and match the snapshot 1`] = `
               >
                 Main Text
               </h3>
-              <div
-                class="c12"
-                display="flex"
-              >
-                <div
-                  class="c8"
-                  data-for="question-settings-option-tooltip-subtitle"
-                  data-tip=""
-                >
-                  <img
-                    alt="?"
-                    class="c13"
-                    src="IMAGE_MOCK"
-                  />
-                </div>
-              </div>
             </div>
           </div>
           <div
-            class="c14"
+            class="c12"
           >
             <span
-              class="c15 c16"
+              class="c13 c14"
             />
           </div>
         </div>
@@ -532,29 +451,13 @@ exports[`<SettingsTab /> Should render and match the snapshot 1`] = `
               >
                 Skippable Narrator
               </h3>
-              <div
-                class="c12"
-                display="flex"
-              >
-                <div
-                  class="c8"
-                  data-for="question-settings-option-tooltip-narrator_skippable"
-                  data-tip=""
-                >
-                  <img
-                    alt="?"
-                    class="c13"
-                    src="IMAGE_MOCK"
-                  />
-                </div>
-              </div>
             </div>
           </div>
           <div
-            class="c14"
+            class="c12"
           >
             <span
-              class="c15 c16"
+              class="c13 c14"
             />
           </div>
         </div>
@@ -597,29 +500,13 @@ exports[`<SettingsTab /> Should render and match the snapshot 1`] = `
               >
                 Continue Button
               </h3>
-              <div
-                class="c12"
-                display="flex"
-              >
-                <div
-                  class="c8"
-                  data-for="question-settings-option-tooltip-proceed_button"
-                  data-tip=""
-                >
-                  <img
-                    alt="?"
-                    class="c13"
-                    src="IMAGE_MOCK"
-                  />
-                </div>
-              </div>
             </div>
           </div>
           <div
-            class="c14"
+            class="c12"
           >
             <span
-              class="c15 c16"
+              class="c13 c14"
             />
           </div>
         </div>
@@ -627,7 +514,7 @@ exports[`<SettingsTab /> Should render and match the snapshot 1`] = `
     </div>
   </div>
   <div
-    class="c17"
+    class="c15"
   >
     <div
       class="c1 c2"
@@ -662,29 +549,13 @@ exports[`<SettingsTab /> Should render and match the snapshot 1`] = `
               >
                 Required
               </h3>
-              <div
-                class="c12"
-                display="flex"
-              >
-                <div
-                  class="c8"
-                  data-for="question-settings-option-tooltip-required"
-                  data-tip=""
-                >
-                  <img
-                    alt="?"
-                    class="c13"
-                    src="IMAGE_MOCK"
-                  />
-                </div>
-              </div>
             </div>
           </div>
           <div
-            class="c14"
+            class="c12"
           >
             <span
-              class="c15 c16"
+              class="c13 c14"
             />
           </div>
         </div>

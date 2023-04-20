@@ -38,9 +38,7 @@ const SettingsOption = ({
     [handleUpdate],
   );
 
-  const tooltipText = () => (
-    <Markup content={getSettingOptionTooltipText(formatMessage, index)} />
-  );
+  const tooltipText = getSettingOptionTooltipText(formatMessage, index);
 
   const optionDisabled = () => {
     switch (index) {
@@ -84,7 +82,7 @@ const SettingsOption = ({
                 <Tooltip
                   id={`question-settings-option-tooltip-${index}`}
                   icon={questionMark}
-                  content={tooltipText()}
+                  content={<Markup content={tooltipText} />}
                 />
               )}
             </Row>
