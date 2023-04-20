@@ -1,6 +1,7 @@
 import React, { memo, useCallback } from 'react';
 import PropTypes from 'prop-types';
 import { useIntl } from 'react-intl';
+import { Markup } from 'interweave';
 
 import questionMark from 'assets/svg/grey-question-mark.svg';
 
@@ -17,7 +18,14 @@ import { Input } from '../styled';
 import messages from '../messages';
 import { getSettingOptionTooltipText } from './utils';
 
-const SettingsOption = ({ setting, index, onUpdate, disabled, isLast }) => {
+const SettingsOption = ({
+  setting,
+  index,
+  onUpdate,
+  disabled,
+  isLast,
+  session,
+}) => {
   const { formatMessage } = useIntl();
 
   const handleUpdate = useCallback(
@@ -30,7 +38,18 @@ const SettingsOption = ({ setting, index, onUpdate, disabled, isLast }) => {
     [handleUpdate],
   );
 
-  const tooltipText = getSettingOptionTooltipText(formatMessage, index);
+  const tooltipText = () => (
+    <Markup content={getSettingOptionTooltipText(formatMessage, index)} />
+  );
+
+  const optionDisabled = () => {
+    switch (index) {
+      case 'start_autofinish_timer':
+        return !session?.autofinishEnabled;
+      default:
+        return false;
+    }
+  };
 
   const renderSetting = () => {
     switch (setting?.constructor) {
@@ -55,7 +74,7 @@ const SettingsOption = ({ setting, index, onUpdate, disabled, isLast }) => {
         return (
           <FullWidthSwitch
             id={index}
-            disabled={disabled}
+            disabled={disabled || optionDisabled()}
             checked={setting}
             onToggle={handleUpdate}
           >
@@ -65,7 +84,7 @@ const SettingsOption = ({ setting, index, onUpdate, disabled, isLast }) => {
                 <Tooltip
                   id={`question-settings-option-tooltip-${index}`}
                   icon={questionMark}
-                  content={tooltipText}
+                  content={tooltipText()}
                 />
               )}
             </Row>
@@ -97,6 +116,7 @@ SettingsOption.propTypes = {
   index: PropTypes.string,
   disabled: PropTypes.bool,
   isLast: PropTypes.bool,
+  session: PropTypes.object,
 };
 
 export default memo(SettingsOption);
