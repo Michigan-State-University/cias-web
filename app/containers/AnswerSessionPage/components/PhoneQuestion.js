@@ -14,14 +14,14 @@ const PhoneQuestion = ({
       variable: { name },
     },
     settings: { required },
+    time_ranges: availableTimeRanges,
   } = question;
 
-  const onChange = (event) => {
-    const { prefix, number, iso, confirmed } = event ?? {};
+  const onChange = (value) => {
     selectAnswer([
       {
         var: name,
-        value: { prefix, number, confirmed, iso },
+        value: value ?? {},
       },
     ]);
   };
@@ -32,6 +32,7 @@ const PhoneQuestion = ({
       onChange={onChange}
       answerBody={answerBody?.[0]}
       required={required}
+      availableTimeRanges={availableTimeRanges}
     />
   );
 };

@@ -16,12 +16,14 @@ export type Props = {
   availableTimeRanges: TimeRange[];
   selectedTimeRanges?: TimeRange[];
   disabled?: boolean;
+  onChange?: (newTimeRanges: TimeRange[]) => void;
 };
 
 export const TimeRanges: React.FC<Props> = ({
   availableTimeRanges,
   selectedTimeRanges = [],
   disabled,
+  onChange,
 }: Props) => {
   const { formatMessage } = useIntl();
 
@@ -34,10 +36,12 @@ export const TimeRanges: React.FC<Props> = ({
         isEqual(timeRange, alteredTimeRange),
       );
     }
-    console.log(newSelectedTimeRanges);
+    if (onChange) {
+      onChange(newSelectedTimeRanges);
+    }
   };
 
-  const formatTime = (hour: string) =>
+  const formatTime = (hour: string | number) =>
     // @ts-ignore
     +hour === 12 ? formatMessage(messages.noon) : dayjs({ hour }).format('LT');
 

@@ -441,8 +441,22 @@ export function AnswerSessionPage({
       currentQuestion.loading || nextQuestionLoading || answer?.loading;
     const skipQuestionButtonDisabled = continueButtonLoading;
 
-    const isAnswered = () =>
-      answer && Array.isArray(answer.answerBody) && answer.answerBody.length;
+    const isAnswered = () => {
+      if (!answer) {
+        return false;
+      }
+
+      if (!Array.isArray(answerBody) || !answerBody.length) {
+        return false;
+      }
+
+      switch (type) {
+        case QuestionTypes.PHONE:
+          return answerBody[0]?.value?.confirmed;
+        default:
+          return true;
+      }
+    };
 
     const isButtonDisabled = () => required && !isAnswered();
 

@@ -155,129 +155,133 @@ exports[`<PhoneQuestion /> Should render and match the snapshot 1`] = `
     class="c0"
   >
     <div
-      class="c1"
-      data-private="true"
-      width="100%"
+      class="c0"
     >
       <div
-        class="c2"
-        width="230"
+        class="c1"
+        data-private="true"
+        width="100%"
       >
-        <label
-          for="iso"
-        >
-          <p
-            class="c3"
-            width="fit-content"
-          >
-            Phone prefix
-          </p>
-        </label>
         <div
-          class="c4"
-          data-testid="select"
+          class="c2"
+          width="230"
         >
-          <div
-            class=" css-2b097c-container"
+          <label
+            for="iso"
           >
-            <span
-              aria-atomic="false"
-              aria-live="polite"
-              aria-relevant="additions text"
-              class="css-1f43avz-a11yText-A11yText"
-            />
-            <div
-              class=" css-4iyz22-control"
+            <p
+              class="c3"
+              width="fit-content"
             >
+              Phone prefix
+            </p>
+          </label>
+          <div
+            class="c4"
+            data-testid="select"
+          >
+            <div
+              class=" css-2b097c-container"
+            >
+              <span
+                aria-atomic="false"
+                aria-live="polite"
+                aria-relevant="additions text"
+                class="css-1f43avz-a11yText-A11yText"
+              />
               <div
-                class=" css-g1d714-ValueContainer"
+                class=" css-4iyz22-control"
               >
                 <div
-                  class=" css-1uccc91-singleValue"
+                  class=" css-g1d714-ValueContainer"
                 >
                   <div
-                    class="c5"
+                    class=" css-1uccc91-singleValue"
+                  >
+                    <div
+                      class="c5"
+                    >
+                      <img
+                        alt="US"
+                        src="https://unpkg.com/react-flag-kit@0.3.1/assets/US.svg"
+                        style="height: 24px; width: 24px; display: inline-block;"
+                      />
+                      <p
+                        class="c6"
+                        font-size="18"
+                      >
+                        US +1
+                      </p>
+                    </div>
+                  </div>
+                  <div
+                    class="css-b8ldur-Input"
+                  >
+                    <div
+                      class=""
+                      style="display: inline-block;"
+                    >
+                      <input
+                        aria-autocomplete="list"
+                        autocapitalize="none"
+                        autocomplete="off"
+                        autocorrect="off"
+                        id="iso"
+                        spellcheck="false"
+                        style="box-sizing: content-box; width: 2px; border: 0px; opacity: 1; outline: 0; padding: 0px;"
+                        tabindex="0"
+                        type="text"
+                        value=""
+                      />
+                      <div
+                        style="position: absolute; top: 0px; left: 0px; visibility: hidden; height: 0px; overflow: scroll; white-space: pre; font-family: -webkit-small-control; letter-spacing: normal; text-transform: none;"
+                      />
+                    </div>
+                  </div>
+                </div>
+                <div
+                  class=" css-1hb7zxy-IndicatorsContainer"
+                >
+                  <div
+                    aria-hidden="true"
+                    class=" css-tlfecz-indicatorContainer"
                   >
                     <img
-                      alt="US"
-                      src="https://unpkg.com/react-flag-kit@0.3.1/assets/US.svg"
-                      style="height: 24px; width: 24px; display: inline-block;"
-                    />
-                    <p
-                      class="c6"
-                      font-size="18"
-                    >
-                      US +1
-                    </p>
-                  </div>
-                </div>
-                <div
-                  class="css-b8ldur-Input"
-                >
-                  <div
-                    class=""
-                    style="display: inline-block;"
-                  >
-                    <input
-                      aria-autocomplete="list"
-                      autocapitalize="none"
-                      autocomplete="off"
-                      autocorrect="off"
-                      id="iso"
-                      spellcheck="false"
-                      style="box-sizing: content-box; width: 2px; border: 0px; opacity: 1; outline: 0; padding: 0px;"
-                      tabindex="0"
-                      type="text"
-                      value=""
-                    />
-                    <div
-                      style="position: absolute; top: 0px; left: 0px; visibility: hidden; height: 0px; overflow: scroll; white-space: pre; font-family: -webkit-small-control; letter-spacing: normal; text-transform: none;"
+                      alt="arrow"
+                      class="c7"
+                      src="IMAGE_MOCK"
+                      transform=""
                     />
                   </div>
-                </div>
-              </div>
-              <div
-                class=" css-1hb7zxy-IndicatorsContainer"
-              >
-                <div
-                  aria-hidden="true"
-                  class=" css-tlfecz-indicatorContainer"
-                >
-                  <img
-                    alt="arrow"
-                    class="c7"
-                    src="IMAGE_MOCK"
-                    transform=""
-                  />
                 </div>
               </div>
             </div>
           </div>
         </div>
-      </div>
-      <div
-        class="c0"
-        value=""
-      >
-        <label
-          for="number"
-        >
-          <p
-            class="c3"
-            width="fit-content"
-          >
-            Phone number
-          </p>
-        </label>
-        <input
-          class="c8"
-          id="number"
-          name="number"
-          placeholder="Enter phone number"
-          type="tel"
+        <div
+          class="c0"
           value=""
-          width="100%"
-        />
+        >
+          <label
+            for="number"
+          >
+            <p
+              class="c3"
+              width="fit-content"
+            >
+              Phone number
+            </p>
+          </label>
+          <input
+            class="c8"
+            id="number"
+            name="number"
+            placeholder="Enter phone number"
+            type="tel"
+            value=""
+            width="100%"
+          />
+        </div>
       </div>
     </div>
   </div>

@@ -1,7 +1,7 @@
 import { TimeRangeLabel } from './TimeRangeLabel';
 
 export type TimeRange = {
-  from: string;
+  from: number;
   to: string;
   label: TimeRangeLabel;
 };
