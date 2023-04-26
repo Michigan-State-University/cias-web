@@ -451,8 +451,10 @@ export function AnswerSessionPage({
       }
 
       switch (type) {
-        case QuestionTypes.PHONE:
-          return answerBody[0]?.value?.confirmed;
+        case QuestionTypes.PHONE: {
+          const { confirmed, timezone } = answerBody[0]?.value ?? {};
+          return confirmed && timezone;
+        }
         default:
           return true;
       }

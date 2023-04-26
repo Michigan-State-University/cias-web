@@ -1,6 +1,6 @@
 /**
  *
- * Tests for AccountSettings
+ * Tests for TimezoneForm
  *
  */
 
@@ -10,12 +10,12 @@ import 'jest-styled-components';
 import { DEFAULT_LOCALE } from 'i18n';
 import { IntlProvider } from 'react-intl';
 
-import TimezoneForm from '../TimezoneForm';
+import { TimezoneForm } from '../TimezoneForm';
 
 describe('<TimezoneForm />', () => {
   const defaultProps = {
-    user: { timeZone: 'America/New_York' },
-    editUser: jest.fn(),
+    timeZone: 'America/New_York',
+    onChange: jest.fn(),
     formatMessage: jest.fn((msg) => msg.defaultMessage),
   };
 
@@ -63,9 +63,7 @@ describe('<TimezoneForm />', () => {
     fireEvent.click(option1);
 
     await waitFor(() => {
-      expect(defaultProps.editUser).toHaveBeenCalledWith({
-        timeZone: 'Africa/Harare',
-      });
+      expect(defaultProps.onChange).toHaveBeenCalledWith('Africa/Harare');
     });
   });
 });

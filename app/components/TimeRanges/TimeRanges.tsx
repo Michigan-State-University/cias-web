@@ -46,7 +46,7 @@ export const TimeRanges: React.FC<Props> = ({
     +hour === 12 ? formatMessage(messages.noon) : dayjs({ hour }).format('LT');
 
   return (
-    <Column mt={24} gap={16}>
+    <Column gap={16}>
       <Text>{formatMessage(messages.timeRangesTitle)}</Text>
       {availableTimeRanges.map((timeRange) => {
         const { from, to, label } = timeRange;

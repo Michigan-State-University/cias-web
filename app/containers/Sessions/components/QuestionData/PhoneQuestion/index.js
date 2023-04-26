@@ -7,34 +7,17 @@ import { injectIntl } from 'react-intl';
 
 import { makeSelectSelectedQuestion } from 'global/reducers/questions';
 
-import Column from 'components/Column';
-import PhoneNumberForm from 'components/AccountSettings/PhoneNumberForm';
-import Row from 'components/Row';
-import { TimeRanges } from 'components/TimeRanges';
+import { PhoneQuestionLayout } from 'components/PhoneQuestionLayout';
 
-const PhoneQuestion = ({ selectedQuestion, intl: { formatMessage } }) => {
-  const { time_ranges: timeRanges } = selectedQuestion;
+const PhoneQuestion = ({ selectedQuestion }) => {
+  const { time_ranges: availableTimeRanges } = selectedQuestion;
   return (
-    <>
-      <Column mt={10}>
-        <Row>
-          <PhoneNumberForm
-            disabled
-            formatMessage={formatMessage}
-            error={null}
-            loading={false}
-            changeErrorValue={null}
-          />
-        </Row>
-        {timeRanges && <TimeRanges availableTimeRanges={timeRanges} disabled />}
-      </Column>
-    </>
+    <PhoneQuestionLayout availableTimeRanges={availableTimeRanges} disabled />
   );
 };
 
 PhoneQuestion.propTypes = {
   selectedQuestion: PropTypes.object.isRequired,
-  intl: PropTypes.object.isRequired,
 };
 
 const mapStateToProps = createStructuredSelector({

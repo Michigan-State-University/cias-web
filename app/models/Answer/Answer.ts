@@ -20,6 +20,7 @@ export interface PhoneAnswerValue {
   number: string;
   prefix: string;
   timeRanges?: TimeRange[];
+  timezone?: string;
 }
 
 export type VariableAnswerValueType =

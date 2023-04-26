@@ -5,7 +5,7 @@ export const scope = 'app.components.TimeRanges';
 export default defineMessages({
   timeRangesTitle: {
     id: `${scope}.timeRangesTitle`,
-    defaultMessage: 'Choose preferred time for receiving text messages',
+    defaultMessage: 'Preferred time for receiving text messages',
   },
   noon: {
     id: `${scope}.noon`,
