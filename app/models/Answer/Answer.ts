@@ -1,3 +1,5 @@
+import { TimeRange } from 'models/TimeRange';
+
 import { AnswerType } from './AnswerType';
 
 // answer value
@@ -17,6 +19,7 @@ export interface PhoneAnswerValue {
   iso: string;
   number: string;
   prefix: string;
+  timeRanges?: TimeRange[];
 }
 
 export type VariableAnswerValueType =

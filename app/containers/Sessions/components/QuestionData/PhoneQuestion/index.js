@@ -5,64 +5,42 @@ import { connect } from 'react-redux';
 import { createStructuredSelector } from 'reselect';
 import { injectIntl } from 'react-intl';
 
-import {
-  makeSelectSelectedQuestion,
-  updateQuestionData,
-} from 'global/reducers/questions';
+import { makeSelectSelectedQuestion } from 'global/reducers/questions';
 
 import Column from 'components/Column';
 import PhoneNumberForm from 'components/AccountSettings/PhoneNumberForm';
 import Row from 'components/Row';
+import { TimeRanges } from 'components/TimeRanges';
 
-import { UPDATE_DATA } from './constants';
-
-const PhoneQuestion = ({
-  selectedQuestion,
-  updateAnswer,
-  intl: { formatMessage },
-}) => {
-  const { payload } = selectedQuestion.body.data[0];
-  const { variable } = selectedQuestion.body;
-  const { number, iso, prefix } = payload ?? {};
+const PhoneQuestion = ({ selectedQuestion, intl: { formatMessage } }) => {
+  const { time_ranges: timeRanges } = selectedQuestion;
   return (
-    <Column mt={10}>
-      <Row>
-        <PhoneNumberForm
-          disabled
-          formatMessage={formatMessage}
-          phone={{
-            number,
-            prefix,
-            iso,
-            confirmed: true,
-          }}
-          changePhoneNumber={(value) =>
-            updateAnswer({ variable, payload: value })
-          }
-          error={null}
-          loading={false}
-          changeErrorValue={null}
-        />
-      </Row>
-    </Column>
+    <>
+      <Column mt={10}>
+        <Row>
+          <PhoneNumberForm
+            disabled
+            formatMessage={formatMessage}
+            error={null}
+            loading={false}
+            changeErrorValue={null}
+          />
+        </Row>
+        {timeRanges && <TimeRanges availableTimeRanges={timeRanges} disabled />}
+      </Column>
+    </>
   );
 };
 
 PhoneQuestion.propTypes = {
   selectedQuestion: PropTypes.object.isRequired,
   intl: PropTypes.object.isRequired,
-  updateAnswer: PropTypes.func.isRequired,
 };
 
 const mapStateToProps = createStructuredSelector({
   selectedQuestion: makeSelectSelectedQuestion(),
 });
 
-const mapDispatchToProps = {
-  updateAnswer: (value) =>
-    updateQuestionData({ type: UPDATE_DATA, data: { ...value } }),
-};
-
-const withConnect = connect(mapStateToProps, mapDispatchToProps);
+const withConnect = connect(mapStateToProps);
 
 export default injectIntl(compose(withConnect)(PhoneQuestion));
