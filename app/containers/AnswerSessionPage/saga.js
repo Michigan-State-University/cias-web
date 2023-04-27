@@ -4,16 +4,25 @@ import { toast } from 'react-toastify';
 import { push } from 'connected-react-router';
 import merge from 'lodash/merge';
 
+import { AnswerType } from 'models/Answer';
+
 import { mapQuestionToStateObject } from 'utils/mapResponseObjects';
 import { formatMessage } from 'utils/intlOutsideReact';
 import isNullOrUndefined from 'utils/isNullOrUndefined';
 import { logInGuest } from 'global/reducers/auth/sagas/logInGuest';
 import LocalStorageService from 'utils/localStorageService';
 import objectToSnakeCase from 'utils/objectToSnakeCase';
-import { makeSelectLocation } from 'containers/App/selectors';
-import { resetPhoneNumberPreview } from 'global/reducers/auth/actions';
+import { getIsPreview } from 'utils/previewMode';
+
+import {
+  resetPhoneNumberPreview,
+  updateUsersTimezone,
+} from 'global/reducers/auth/actions';
+
 import { jsonApiToObject } from 'utils/jsonApiMapper';
 import objectToCamelKebabCase from 'utils/objectToCamelKebabCase';
+
+import { makeSelectLocation } from 'containers/App/selectors';
 
 import {
   SUBMIT_ANSWER_REQUEST,
@@ -85,6 +94,14 @@ function* submitAnswersAsync({
         }),
       );
 
+      if (type === AnswerType.PHONE) {
+        const isPreview = getIsPreview();
+        const timezone = data[0]?.value?.timezone;
+        if (!isPreview && timezone) {
+          yield put(updateUsersTimezone(timezone));
+        }
+      }
+
       yield put(submitAnswerSuccess(questionId));
 
       yield put(nextQuestionRequest(userSessionId));
@@ -124,8 +141,7 @@ function* nextQuestion({ payload: { userSessionId, questionId } }) {
         formatMessage(messages[warning] ?? messages.unknownWarning),
       );
     if (newUserSessionId) {
-      const location = yield select(makeSelectLocation());
-      const isPreview = /^.*\/preview/.test(location.pathname);
+      const isPreview = getIsPreview();
 
       if (isPreview) {
         yield put(setTransitionalUserSessionId(newUserSessionId));

@@ -36,7 +36,9 @@ import {
 } from 'global/reducers/intervention';
 import {
   editPhoneNumberQuestionSaga,
+  editUserSaga,
   REDIRECT_QUERY_KEY,
+  updateUsersTimezoneSaga,
 } from 'global/reducers/auth';
 import { resetReducer as resetAuthReducer } from 'global/reducers/auth/actions';
 import logInGuestSaga from 'global/reducers/auth/sagas/logInGuest';
@@ -221,6 +223,8 @@ export function AnswerSessionPage({
   useInjectReducer({ key: 'intervention', reducer: interventionReducer });
   useInjectSaga({ key: 'fetchIntervention', saga: fetchInterventionSaga });
   useInjectSaga({ key: 'logInGuest', saga: logInGuestSaga });
+  useInjectSaga({ key: 'updateUsersTimezone', saga: updateUsersTimezoneSaga });
+  useInjectSaga({ key: 'editUser', saga: editUserSaga });
   useInjectReducer({ key: 'AnswerSessionPage', reducer });
   useInjectSaga({ key: 'AnswerSessionPage', saga });
   useInjectSaga({ key: 'editPhoneNumber', saga: editPhoneNumberQuestionSaga });
@@ -379,9 +383,9 @@ export function AnswerSessionPage({
     CHARACTER_FIXED_POSITION_QUESTIONS.includes(type);
 
   const onContinueButton = () => {
-    if (CONFIRMABLE_QUESTIONS.includes(type))
+    if (CONFIRMABLE_QUESTIONS.includes(type)) {
       setConfirmContinueQuestionModalVisible(true);
-    else saveAnswer(false);
+    } else saveAnswer(false);
   };
 
   const renderQuestionTranscript = (isRightSide) => {

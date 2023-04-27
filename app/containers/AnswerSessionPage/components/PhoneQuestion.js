@@ -4,6 +4,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { useInjectSaga } from 'redux-injectors';
 
 import { clientTimeZone } from 'utils/timezones';
+import { getIsPreview } from 'utils/previewMode';
 
 import {
   changePhoneNumberSaga,
@@ -13,7 +14,6 @@ import {
   makeSelectPhoneNumberPreview,
   makeSelectUser,
 } from 'global/reducers/auth';
-import { previewRegex } from 'global/constants';
 
 import { PhoneQuestionLayout } from 'components/PhoneQuestionLayout';
 
@@ -42,12 +42,22 @@ const PhoneQuestion = ({
     time_ranges: availableTimeRanges,
   } = question;
 
-  const { timeRanges, timezone, ...phoneProps } = answerData?.[0]?.value ?? {};
+  const {
+    timeRanges,
+    timezone: answerTimezone,
+    ...phoneProps
+  } = answerData?.[0]?.value ?? {};
+
+  const isPreview = getIsPreview();
 
   const phone = {
     ...((isPreview ? phoneNumberPreview : user?.phone) ?? {}),
     ...phoneProps,
   };
+
+  const timezone = isPreview
+    ? answerTimezone
+    : answerTimezone || user?.timeZone;
 
   const saveAnswer = (changes) => {
     selectAnswer([
@@ -57,8 +67,6 @@ const PhoneQuestion = ({
       },
     ]);
   };
-
-  const isPreview = previewRegex.test(window.location.href);
 
   const handlePhoneNumberChange = (newPhone) => {
     dispatch(editPhoneNumberPreviewRequest(newPhone, isPreview));
