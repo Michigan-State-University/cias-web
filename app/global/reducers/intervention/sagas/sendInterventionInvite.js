@@ -8,6 +8,7 @@ import { jsonApiToArray } from 'utils/jsonApiMapper';
 import objectKeysToSnakeCase from 'utils/objectToSnakeCase';
 
 import {
+  fetchUsersWithAccessRequest,
   sendInterventionInviteError,
   sendInterventionInviteSuccess,
 } from '../actions';
@@ -48,6 +49,7 @@ export function* sendInterventionInvite({
     }
 
     yield put(sendInterventionInviteSuccess(invitations));
+    yield put(fetchUsersWithAccessRequest(interventionId));
     yield call(toast.info, formatMessage(messages.sendInviteSuccess), {
       toastId: SEND_INTERVENTION_INVITE_SUCCESS,
     });
