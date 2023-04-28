@@ -10,8 +10,6 @@ const VisualAnalogueScaleQuestion = ({
   answerBody,
   selectAnswer,
 }) => {
-  const { value } = answerBody.length ? answerBody[0] : { value: 0 };
-  const [answerValue, setAnswerValue] = useState(value);
   const {
     body: {
       data: [
@@ -29,6 +27,9 @@ const VisualAnalogueScaleQuestion = ({
     id,
     settings: { show_number: showNumber },
   } = question;
+
+  const { value } = answerBody.length ? answerBody[0] : { value: rangeStart };
+  const [answerValue, setAnswerValue] = useState(value);
 
   useEffect(() => {
     selectAnswer(
