@@ -87,25 +87,6 @@ const TextMessageSettings = ({
     },
   });
 
-  const messageSection = () => {
-    if (isUsedFormula)
-      return (
-        <>
-          <TextMessagesFormula disabled={!editingPossible} formula={formula} />
-          <TextMessageVariants textMessageId={id} />
-        </>
-      );
-    return (
-      <NoFormulaMessage
-        id={id}
-        noFormulaText={noFormulaText}
-        noFormulaImageUrl={noFormulaImageUrl}
-        uploadImageLoading={uploadImageLoading}
-        originalText={originalText}
-      />
-    );
-  };
-
   return (
     <StyledSmsSettings>
       <DeleteModal />
@@ -170,7 +151,21 @@ const TextMessageSettings = ({
 
       <SectionDivider />
       <FormulaSwitcher isUsedFormula={isUsedFormula} />
-      {messageSection()}
+      {isUsedFormula && (
+        <>
+          <TextMessagesFormula disabled={!editingPossible} formula={formula} />
+          <TextMessageVariants textMessageId={id} />
+        </>
+      )}
+      {!isUsedFormula && (
+        <NoFormulaMessage
+          id={id}
+          noFormulaText={noFormulaText}
+          noFormulaImageUrl={noFormulaImageUrl}
+          uploadImageLoading={uploadImageLoading}
+          originalText={originalText}
+        />
+      )}
 
       {type === TextMessageType.ALERT && (
         <>

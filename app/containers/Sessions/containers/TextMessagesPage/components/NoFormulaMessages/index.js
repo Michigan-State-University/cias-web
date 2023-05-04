@@ -1,4 +1,4 @@
-import React, { useContext } from 'react';
+import React, { useCallback, useContext } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { compose } from 'redux';
@@ -64,13 +64,16 @@ const NoFormulaMessage = ({
     );
   };
 
-  const handleAddImage = (file) => {
-    uploadImage(id, file);
-  };
+  const handleAddImage = useCallback(
+    (file) => {
+      uploadImage(id, file);
+    },
+    [id],
+  );
 
-  const handleDeleteImage = () => {
+  const handleDeleteImage = useCallback(() => {
     deleteImage(id);
-  };
+  }, [id]);
 
   return (
     <Column justify="center">

@@ -1,4 +1,4 @@
-import React, { useContext } from 'react';
+import React, { useCallback, useContext } from 'react';
 import PropTypes from 'prop-types';
 import { compose } from 'redux';
 import { connect } from 'react-redux';
@@ -110,13 +110,16 @@ const VariantItem = ({
     },
   });
 
-  const handleAddImage = (file) => {
-    uploadImage(textMessageId, id, file);
-  };
+  const handleAddImage = useCallback(
+    (file) => {
+      uploadImage(textMessageId, id, file);
+    },
+    [textMessageId, id],
+  );
 
-  const handleDeleteImage = () => {
+  const handleDeleteImage = useCallback(() => {
     deleteImage(textMessageId, id);
-  };
+  }, [textMessageId, id]);
 
   return (
     <Collapse

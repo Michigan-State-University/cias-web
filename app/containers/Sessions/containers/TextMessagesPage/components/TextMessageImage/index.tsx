@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useCallback } from 'react';
 import { useIntl } from 'react-intl';
 
 import Text from 'components/Text';
@@ -23,9 +23,12 @@ export const TextMessageImage: React.FC<Props> = ({
 }) => {
   const { formatMessage } = useIntl();
 
-  const handleAddImage = ({ image }: { image: File; imageUrl: string }) => {
-    onAdd(image);
-  };
+  const handleAddImage = useCallback(
+    ({ image }: { image: File; imageUrl: string }) => {
+      onAdd(image);
+    },
+    [onAdd],
+  );
 
   return (
     <>
