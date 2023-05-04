@@ -62,24 +62,12 @@ exports[`<SettingsSessionPage /> Should render and match the snapshot 1`] = `
   color: unset;
 }
 
-.c32 {
+.c37 {
   width: auto;
   height: auto;
   display: block;
   border-radius: 5px;
-  width: 100%;
-  position: relative;
-  display: -webkit-box;
-  display: -webkit-flex;
-  display: -ms-flexbox;
-  display: flex;
-  -webkit-align-content: center;
-  -ms-flex-line-pack: center;
-  align-content: center;
-  -webkit-align-items: center;
-  -webkit-box-align: center;
-  -ms-flex-align: center;
-  align-items: center;
+  opacity: 0.5;
   color: unset;
 }
 
@@ -103,7 +91,7 @@ exports[`<SettingsSessionPage /> Should render and match the snapshot 1`] = `
   color: #2F3850;
 }
 
-.c35 {
+.c39 {
   margin: 0;
   font-family: DM Sans;
   font-size: 15px;
@@ -113,7 +101,7 @@ exports[`<SettingsSessionPage /> Should render and match the snapshot 1`] = `
   color: #2F3850;
 }
 
-.c38 {
+.c42 {
   margin: 0;
   font-family: DM Sans;
   font-size: 15px;
@@ -232,7 +220,37 @@ exports[`<SettingsSessionPage /> Should render and match the snapshot 1`] = `
   gap: 8px;
 }
 
-.c36 {
+.c31 {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-flex-direction: row;
+  -ms-flex-direction: row;
+  flex-direction: row;
+  height: auto;
+}
+
+.c34 {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-flex-direction: row;
+  -ms-flex-direction: row;
+  flex-direction: row;
+  height: auto;
+  -webkit-align-content: center;
+  -ms-flex-line-pack: center;
+  align-content: center;
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  width: 100%;
+}
+
+.c40 {
   display: -webkit-box;
   display: -webkit-flex;
   display: -ms-flexbox;
@@ -263,6 +281,14 @@ exports[`<SettingsSessionPage /> Should render and match the snapshot 1`] = `
   height: auto;
 }
 
+.c38 {
+  width: auto;
+  height: auto;
+  -webkit-transition: -webkit-transform 0.2s;
+  -webkit-transition: transform 0.2s;
+  transition: transform 0.2s;
+}
+
 .c20 {
   font-family: DM Sans;
   font-size: 13px;
@@ -270,7 +296,7 @@ exports[`<SettingsSessionPage /> Should render and match the snapshot 1`] = `
   color: #2F3850;
 }
 
-.c31 {
+.c33 {
   font-family: DM Sans;
   font-size: 13px;
   line-height: 130%;
@@ -282,7 +308,7 @@ exports[`<SettingsSessionPage /> Should render and match the snapshot 1`] = `
   width: fit-content;
 }
 
-.c37 {
+.c41 {
   font-family: DM Sans;
   font-size: 13px;
   line-height: 130%;
@@ -290,7 +316,7 @@ exports[`<SettingsSessionPage /> Should render and match the snapshot 1`] = `
   color: #2F3850;
 }
 
-.c48 {
+.c52 {
   font-family: DM Sans;
   font-size: 13px;
   line-height: 130%;
@@ -321,7 +347,31 @@ exports[`<SettingsSessionPage /> Should render and match the snapshot 1`] = `
   width: 100%;
 }
 
-.c40 {
+.c32 {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-flex-direction: column;
+  -ms-flex-direction: column;
+  flex-direction: column;
+  width: 100%;
+  opacity: 0.5;
+}
+
+.c36 {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-flex-direction: column;
+  -ms-flex-direction: column;
+  flex-direction: column;
+  width: 100%;
+  margin-top: 20px;
+}
+
+.c44 {
   display: -webkit-box;
   display: -webkit-flex;
   display: -ms-flexbox;
@@ -338,7 +388,7 @@ exports[`<SettingsSessionPage /> Should render and match the snapshot 1`] = `
   align-items: flex-start;
 }
 
-.c39 {
+.c43 {
   max-width: 100% !important;
   width: 100%;
   margin: 0 !important;
@@ -400,47 +450,23 @@ exports[`<SettingsSessionPage /> Should render and match the snapshot 1`] = `
   color: #ABBBD1;
 }
 
-.c33 {
+.c35 {
   padding: 12px;
   border-style: solid;
   border-width: 1px;
   border-color: #E9F1FB;
   border-radius: 5px;
-  -moz-appearance: textfield;
-  width: 100%;
-  padding-right: 12px;
   color: #2F3850;
-  opacity: 0.5;
 }
 
-.c33:focus {
+.c35:focus {
   box-shadow: none;
   outline: none;
   border-color: #107969;
 }
 
-.c33::-webkit-outer-spin-button,
-.c33::-webkit-inner-spin-button {
-  -webkit-appearance: none;
-  margin: 0;
-}
-
-.c33:disabled {
+.c35:disabled {
   color: #ABBBD1;
-}
-
-.c34 {
-  text-align: center;
-  color: rgba(47,56,80,0.5);
-  visibility: hidden;
-  cursor: text;
-  position: absolute;
-  right: 1px;
-  padding-right: 12px;
-  max-width: 75%;
-  overflow: hidden;
-  white-space: nowrap;
-  text-overflow: ellipsis;
 }
 
 .c8 {
@@ -459,16 +485,16 @@ exports[`<SettingsSessionPage /> Should render and match the snapshot 1`] = `
   border: 1px solid transparent;
 }
 
-.c43 {
+.c47 {
   display: none;
 }
 
-.c42:disabled + label > .c46 {
+.c46:disabled + label > .c50 {
   opacity: 0.5;
   cursor: not-allowed;
 }
 
-.c45 {
+.c49 {
   width: 100%;
   display: -webkit-box;
   display: -webkit-flex;
@@ -480,20 +506,20 @@ exports[`<SettingsSessionPage /> Should render and match the snapshot 1`] = `
   align-items: center;
 }
 
-.c45:hover {
+.c49:hover {
   cursor: pointer;
 }
 
-.c42:disabled + .c44 {
+.c46:disabled + .c48 {
   opacity: 0.5;
   cursor: not-allowed;
 }
 
-.c47 {
+.c51 {
   margin-left: 5px;
 }
 
-.c41 {
+.c45 {
   width: 100%;
   padding: 16px;
   border: 1px solid #E9F1FB;
@@ -628,6 +654,38 @@ exports[`<SettingsSessionPage /> Should render and match the snapshot 1`] = `
   background-color: #FFFFFF;
   border-radius: 5px;
   box-shadow: 0px 4px 20px #E3EEFB;
+}
+
+@media only screen and (min-width:768px) {
+
+}
+
+@media only screen and (min-width:960px) {
+
+}
+
+@media only screen and (min-width:1170px) {
+
+}
+
+@media only screen and (min-width:1360px) {
+
+}
+
+@media only screen and (min-width:768px) {
+
+}
+
+@media only screen and (min-width:960px) {
+
+}
+
+@media only screen and (min-width:1170px) {
+
+}
+
+@media only screen and (min-width:1360px) {
+
 }
 
 @media only screen and (min-width:768px) {
@@ -854,49 +912,118 @@ exports[`<SettingsSessionPage /> Should render and match the snapshot 1`] = `
         orientation="0"
       />
       <div
-        class="c27"
+        class="c31"
       >
-        <label
-          for="autofinishDelay"
-        >
-          <p
-            class="c31"
-            font-size="13"
-            width="fit-content"
-          >
-            Autofinish delay
-          </p>
-        </label>
         <div
           class="c32"
-          display="flex"
-          width="100%"
+          disabled=""
         >
-          <input
-            class="c33"
-            disabled=""
-            id="autofinishDelay"
-            name="autofinishDelay"
-            type="text"
-            value=""
-            width="100%"
-          />
+          <label
+            for="autofinishDelay"
+          >
+            <p
+              class="c33"
+              font-size="13"
+              width="fit-content"
+            >
+              Autofinish delay
+            </p>
+          </label>
           <div
             class="c34"
-            type="SUFFIX"
+            width="100%"
           >
-            hours
+            <input
+              class="c35"
+              id="autofinishDelay"
+              name="autofinishDelay"
+              type="text"
+              value=""
+            />
+          </div>
+        </div>
+        <div
+          class="c36"
+        >
+          <div
+            class="c37"
+            data-testid="select"
+            disabled=""
+          >
+            <div
+              class=" css-14jk2my-container"
+            >
+              <span
+                aria-atomic="false"
+                aria-live="polite"
+                aria-relevant="additions text"
+                class="css-1f43avz-a11yText-A11yText"
+              />
+              <div
+                class=" css-vz7ypb-control"
+              >
+                <div
+                  class=" css-g1d714-ValueContainer"
+                >
+                  <div
+                    class=" css-107lb6w-singleValue"
+                  >
+                    minutes
+                  </div>
+                  <div
+                    class="css-1bwsx9e-Input"
+                  >
+                    <div
+                      class=""
+                      style="display: inline-block;"
+                    >
+                      <input
+                        aria-autocomplete="list"
+                        autocapitalize="none"
+                        autocomplete="off"
+                        autocorrect="off"
+                        disabled=""
+                        id="timeUnit"
+                        spellcheck="false"
+                        style="box-sizing: content-box; width: 2px; border: 0px; opacity: 1; outline: 0; padding: 0px;"
+                        tabindex="0"
+                        type="text"
+                        value=""
+                      />
+                      <div
+                        style="position: absolute; top: 0px; left: 0px; visibility: hidden; height: 0px; overflow: scroll; white-space: pre; font-family: -webkit-small-control; letter-spacing: normal; text-transform: none;"
+                      />
+                    </div>
+                  </div>
+                </div>
+                <div
+                  class=" css-1hb7zxy-IndicatorsContainer"
+                >
+                  <div
+                    aria-hidden="true"
+                    class=" css-tlfecz-indicatorContainer"
+                  >
+                    <img
+                      alt="arrow"
+                      class="c38"
+                      src="IMAGE_MOCK"
+                      transform=""
+                    />
+                  </div>
+                </div>
+              </div>
+            </div>
           </div>
         </div>
       </div>
     </div>
     <h3
-      class="c35"
+      class="c39"
     >
       Narrator Settings
     </h3>
     <div
-      class="c36"
+      class="c40"
     >
       <div
         class="c10 c11"
@@ -928,7 +1055,7 @@ exports[`<SettingsSessionPage /> Should render and match the snapshot 1`] = `
                 class="c19"
               >
                 <p
-                  class="c37"
+                  class="c41"
                   font-weight="bold"
                 >
                   Narrator Active
@@ -947,7 +1074,7 @@ exports[`<SettingsSessionPage /> Should render and match the snapshot 1`] = `
       </div>
     </div>
     <div
-      class="c36"
+      class="c40"
     >
       <div
         class="c10 c11"
@@ -1047,12 +1174,12 @@ exports[`<SettingsSessionPage /> Should render and match the snapshot 1`] = `
       </div>
     </div>
     <h3
-      class="c38"
+      class="c42"
     >
       Default narrator
     </h3>
     <div
-      class="c39"
+      class="c43"
       style="box-sizing: border-box; position: relative; margin-left: auto; margin-right: auto; padding-left: 15px; padding-right: 15px; max-width: 960px;"
     >
       <div
@@ -1061,28 +1188,28 @@ exports[`<SettingsSessionPage /> Should render and match the snapshot 1`] = `
       >
         <div
           align="start"
-          class="c40"
+          class="c44"
           style="box-sizing: border-box; min-height: 1px; position: relative; padding-left: 15px; padding-right: 15px; width: 100%; flex-basis: 0px; flex-grow: 1; flex-shrink: 0; max-width: 100%; margin-left: 0%;"
         >
           <div
-            class="c10 c41"
+            class="c10 c45"
           >
             <input
-              class="c42 c43"
+              class="c46 c47"
               disabled=""
               id="character-setting-peedy"
               type="radio"
             />
             <label
-              class="c44 c45"
+              class="c48 c49"
               for="character-setting-peedy"
             >
               <img
-                class="c46 "
+                class="c50 "
                 src="IMAGE_MOCK"
               />
               <div
-                class="c17 c47"
+                class="c17 c51"
               >
                 <div
                   class="c10"
@@ -1091,7 +1218,7 @@ exports[`<SettingsSessionPage /> Should render and match the snapshot 1`] = `
                     class="c17"
                   >
                     <p
-                      class="c48"
+                      class="c52"
                     >
                       Peedy
                     </p>
@@ -1110,28 +1237,28 @@ exports[`<SettingsSessionPage /> Should render and match the snapshot 1`] = `
         </div>
         <div
           align="start"
-          class="c40"
+          class="c44"
           style="box-sizing: border-box; min-height: 1px; position: relative; padding-left: 15px; padding-right: 15px; width: 100%; flex-basis: 0px; flex-grow: 1; flex-shrink: 0; max-width: 100%; margin-left: 0%;"
         >
           <div
-            class="c10 c41"
+            class="c10 c45"
           >
             <input
-              class="c42 c43"
+              class="c46 c47"
               disabled=""
               id="character-setting-emmi"
               type="radio"
             />
             <label
-              class="c44 c45"
+              class="c48 c49"
               for="character-setting-emmi"
             >
               <img
-                class="c46 "
+                class="c50 "
                 src="IMAGE_MOCK"
               />
               <div
-                class="c17 c47"
+                class="c17 c51"
               >
                 <div
                   class="c10"
@@ -1140,7 +1267,7 @@ exports[`<SettingsSessionPage /> Should render and match the snapshot 1`] = `
                     class="c17"
                   >
                     <p
-                      class="c48"
+                      class="c52"
                     >
                       Emmi
                     </p>

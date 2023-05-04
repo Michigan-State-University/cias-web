@@ -14,10 +14,12 @@ import {
 import { objectDifference } from 'utils/objectDifference';
 
 import H3 from 'components/H3';
-import FormikInputWithAdornment from 'components/FormikInputWithAdornment';
-import { AdornmentType } from 'components/Input/InputWithAdornment';
 import Divider, { Orientation } from 'components/Divider';
 
+import FormikInput from 'components/FormikInput';
+import FormikSelect from 'components/FormikSelect';
+import Row from 'components/Row';
+import { SelectOption } from 'components/Select/types';
 import messages from './messages';
 import { InputContainer } from './styled';
 import { SessionSettingsFormValues } from './types';
@@ -28,6 +30,15 @@ export type Props = {
   onSubmit: (changes: Partial<SessionSettingsFormValues>) => void;
 } & SessionSettingsFormValues;
 
+export enum AutofinishTimeUnit {
+  HOURS = 'h',
+  MINUTES = 'm',
+}
+
+type FormikValues = SessionSettingsFormValues & {
+  timeUnit: SelectOption<AutofinishTimeUnit>;
+};
+
 export const SessionSettingsForm: React.FC<Props> = ({
   disabled,
   autofinishEnabled,
@@ -36,9 +47,20 @@ export const SessionSettingsForm: React.FC<Props> = ({
 }) => {
   const { formatMessage } = useIntl();
 
-  const initialValues: SessionSettingsFormValues = {
+  const HOURS_OPTION = {
+    value: AutofinishTimeUnit.HOURS,
+    label: formatMessage(messages.hours),
+  };
+  const MINUTES_OPTION = {
+    value: AutofinishTimeUnit.MINUTES,
+    label: formatMessage(messages.minutes),
+  };
+
+  const initialValues: FormikValues = {
     autofinishEnabled,
-    autofinishDelay,
+    autofinishDelay:
+      autofinishDelay % 60 === 0 ? autofinishDelay / 60 : autofinishDelay,
+    timeUnit: autofinishDelay % 60 === 0 ? HOURS_OPTION : MINUTES_OPTION,
   };
 
   const validationSchema = Yup.object({
@@ -48,13 +70,16 @@ export const SessionSettingsForm: React.FC<Props> = ({
     }),
   });
 
-  const handleSubmit: FormikConfig<SessionSettingsFormValues>['onSubmit'] = (
-    values,
-  ) => {
-    const changes = objectDifference(initialValues, {
-      ...values,
-      autofinishDelay: +values.autofinishDelay,
-    });
+  const handleSubmit: FormikConfig<FormikValues>['onSubmit'] = (values) => {
+    const changes = objectDifference(
+      { autofinishEnabled, autofinishDelay },
+      {
+        autofinishEnabled: values.autofinishEnabled,
+        autofinishDelay:
+          +values.autofinishDelay *
+          (values.timeUnit.value === AutofinishTimeUnit.HOURS ? 60 : 1),
+      },
+    );
     if (!isEmpty(changes)) {
       onSubmit(changes);
     }
@@ -82,18 +107,23 @@ export const SessionSettingsForm: React.FC<Props> = ({
               my={15}
               color={colors.linkWater}
             />
-
-            <FormikInputWithAdornment
-              formikKey="autofinishDelay"
-              label={formatMessage(messages.autofinishDelayLabel)}
-              adornment={formatMessage(messages.hours)}
-              adornmentType={AdornmentType.SUFFIX}
-              disabled={disabled || !values.autofinishEnabled}
-              labelProps={{
-                fontSize: 13,
-              }}
-              onBlur={submitForm}
-            />
+            <Row>
+              <FormikInput
+                formikKey="autofinishDelay"
+                labelProps={{
+                  fontSize: 13,
+                }}
+                label={formatMessage(messages.autofinishDelayLabel)}
+                onBlur={submitForm}
+                disabled={disabled || !values.autofinishEnabled}
+              />
+              <FormikSelect
+                formikKey="timeUnit"
+                options={[HOURS_OPTION, MINUTES_OPTION]}
+                disabled={disabled || !values.autofinishEnabled}
+                columnStyleProps={{ mt: 20 }}
+              />
+            </Row>
           </InputContainer>
         )}
       </Formik>

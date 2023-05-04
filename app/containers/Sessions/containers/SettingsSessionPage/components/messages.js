@@ -36,6 +36,10 @@ export default defineMessages({
     id: `${scope}.hours`,
     defaultMessage: 'hours',
   },
+  minutes: {
+    id: `${scope}.minutes`,
+    defaultMessage: 'minutes',
+  },
   narratorSettings: {
     id: `${scope}.narratorSettings`,
     defaultMessage: 'Narrator Settings',
