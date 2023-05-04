@@ -426,10 +426,14 @@ export const textMessagesReducer = (state = initialState, action) =>
           draft.textMessages,
           textMessageId,
           (textMessageDraft) => {
-            updateItemById(draft.textMessages, variantId, (variantDraft) => {
-              variantDraft.imageUrl = null;
-              return variantDraft;
-            });
+            updateItemById(
+              textMessageDraft.variants,
+              variantId,
+              (variantDraft) => {
+                variantDraft.imageUrl = null;
+                return variantDraft;
+              },
+            );
             return textMessageDraft;
           },
         );
