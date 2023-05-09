@@ -44,12 +44,13 @@ const originalTextIconProps = {
 const NoFormulaMessage = ({
   id,
   noFormulaText,
-  noFormulaAttachmentUrl,
+  noFormulaAttachment,
   originalText,
   changeAction,
   uploadAttachment,
   deleteAttachment,
   uploadAttachmentLoading,
+  uploadAttachmentError,
 }) => {
   const { sessionId, interventionId, formatMessage, editingPossible } =
     useContext(TextMessagesContext);
@@ -124,8 +125,9 @@ const NoFormulaMessage = ({
         </OriginalTextHover>
       </Box>
       <TextMessageAttachment
-        attachmentUrl={noFormulaAttachmentUrl}
+        attachment={noFormulaAttachment}
         loading={uploadAttachmentLoading}
+        error={uploadAttachmentError}
         onAdd={handleAddAttachment}
         onDelete={handleDeleteAttachment}
         editingPossible={editingPossible}
@@ -140,9 +142,10 @@ NoFormulaMessage.propTypes = {
   uploadAttachment: PropTypes.func,
   deleteAttachment: PropTypes.func,
   noFormulaText: PropTypes.string,
-  noFormulaAttachmentUrl: PropTypes.string,
+  noFormulaAttachment: PropTypes.object,
   originalText: PropTypes.object,
   uploadAttachmentLoading: PropTypes.bool,
+  uploadAttachmentError: PropTypes.object,
 };
 
 const mapDispatchToProps = {

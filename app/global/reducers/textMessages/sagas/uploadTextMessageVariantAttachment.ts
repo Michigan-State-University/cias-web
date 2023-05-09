@@ -14,13 +14,13 @@ import {
 } from '../actions';
 
 function* uploadTextMessageVariantAttachment({
-  payload: { textMessageId, variantId, attachment },
+  payload: { textMessageId, variantId, attachmentFile },
 }: ReturnType<typeof uploadTextMessageVariantAttachmentRequest>) {
   const requestUrl = `/v1/sms_plans/${textMessageId}/variants/${variantId}`;
 
   try {
     const formData = new FormData();
-    formData.append('variant[attachment]', attachment);
+    formData.append('variant[attachment]', attachmentFile);
 
     const { data } = yield axios.patch(requestUrl, formData, {
       headers: {
@@ -28,13 +28,13 @@ function* uploadTextMessageVariantAttachment({
       },
     });
 
-    const { attachmentUrl } = jsonApiToObject(data, 'variant');
+    const { attachment } = jsonApiToObject(data, 'variant');
 
     yield put(
       uploadTextMessageVariantAttachmentSuccess(
         textMessageId,
         variantId,
-        attachmentUrl,
+        attachment,
       ),
     );
   } catch (error) {

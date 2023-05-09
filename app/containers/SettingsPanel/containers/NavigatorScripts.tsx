@@ -83,13 +83,12 @@ export const NavigatorScripts = ({ interventionId }: Props) => {
       <DownloadScriptTemplatePanel />
       <FilesPanel
         onUpload={uploadFilledScriptFile}
-        removeFile={removeFilledNavigatorScript}
-        uploadingFile={updatingFilledNavigatorScript}
+        onRemoveFile={removeFilledNavigatorScript}
+        loading={updatingFilledNavigatorScript}
         label={formatMessage(messages.filledTemplate)}
         acceptedFormats="text/csv"
         value={filledNavigatorScript}
-        multiple={false}
-        labelTooltipContent={labelTooltipContent}
+        tooltipContent={labelTooltipContent}
         error={
           validationError
             ? formatMessage(messages.failedCsvValidation)

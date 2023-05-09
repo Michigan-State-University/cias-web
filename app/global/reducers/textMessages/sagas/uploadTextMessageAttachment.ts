@@ -14,13 +14,13 @@ import {
 } from '../actions';
 
 function* uploadTextMessageAttachment({
-  payload: { textMessageId, noFormulaAttachment },
+  payload: { textMessageId, noFormulaAttachmentFile },
 }: ReturnType<typeof uploadTextMessageAttachmentRequest>) {
   const requestUrl = `/v1/sms_plans/${textMessageId}`;
 
   try {
     const formData = new FormData();
-    formData.append('sms_plan[no_formula_attachment]', noFormulaAttachment);
+    formData.append('sms_plan[no_formula_attachment]', noFormulaAttachmentFile);
 
     const { data } = yield axios.patch(requestUrl, formData, {
       headers: {
@@ -28,10 +28,10 @@ function* uploadTextMessageAttachment({
       },
     });
 
-    const { noFormulaAttachmentUrl } = jsonApiToObject(data, 'smsPlan');
+    const { noFormulaAttachment } = jsonApiToObject(data, 'smsPlan');
 
     yield put(
-      uploadTextMessageAttachmentSuccess(textMessageId, noFormulaAttachmentUrl),
+      uploadTextMessageAttachmentSuccess(textMessageId, noFormulaAttachment),
     );
   } catch (error) {
     yield call(

@@ -96,19 +96,19 @@ export const updateTextMessageSettingsError = (error) =>
 
 export const uploadTextMessageAttachmentRequest = (
   textMessageId,
-  noFormulaAttachment,
+  noFormulaAttachmentFile,
 ) =>
   actionBuilder(UPLOAD_TEXT_MESSAGE_ATTACHMENT_REQUEST, {
     textMessageId,
-    noFormulaAttachment,
+    noFormulaAttachmentFile,
   });
 export const uploadTextMessageAttachmentSuccess = (
   textMessageId,
-  noFormulaAttachmentUrl,
+  noFormulaAttachment,
 ) =>
   actionBuilder(UPLOAD_TEXT_MESSAGE_ATTACHMENT_SUCCESS, {
     textMessageId,
-    noFormulaAttachmentUrl,
+    noFormulaAttachment,
   });
 export const uploadTextMessageAttachmentError = (textMessageId, error) =>
   actionBuilder(UPLOAD_TEXT_MESSAGE_ATTACHMENT_ERROR, { textMessageId, error });
@@ -144,22 +144,22 @@ export const updateTextMessageVariantError = (error) =>
 export const uploadTextMessageVariantAttachmentRequest = (
   textMessageId,
   variantId,
-  attachment,
+  attachmentFile,
 ) =>
   actionBuilder(UPLOAD_TEXT_MESSAGE_VARIANT_ATTACHMENT_REQUEST, {
     textMessageId,
     variantId,
-    attachment,
+    attachmentFile,
   });
 export const uploadTextMessageVariantAttachmentSuccess = (
   textMessageId,
   variantId,
-  attachmentUrl,
+  attachment,
 ) =>
   actionBuilder(UPLOAD_TEXT_MESSAGE_VARIANT_ATTACHMENT_SUCCESS, {
     textMessageId,
     variantId,
-    attachmentUrl,
+    attachment,
   });
 export const uploadTextMessageVariantAttachmentError = (
   textMessageId,

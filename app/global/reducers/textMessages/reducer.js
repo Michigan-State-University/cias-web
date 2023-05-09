@@ -262,7 +262,7 @@ export const textMessagesReducer = (state = initialState, action) =>
       }
 
       case UPLOAD_TEXT_MESSAGE_ATTACHMENT_SUCCESS: {
-        const { textMessageId, noFormulaAttachmentUrl } = payload;
+        const { textMessageId, noFormulaAttachment } = payload;
         draft.loaders.updateTextMessagesLoading = false;
         const itemState = draft.textMessagesStates.get(textMessageId);
         itemState.uploadAttachmentLoading = false;
@@ -270,7 +270,7 @@ export const textMessagesReducer = (state = initialState, action) =>
           draft.textMessages,
           textMessageId,
           (textMessageDraft) => {
-            textMessageDraft.noFormulaAttachmentUrl = noFormulaAttachmentUrl;
+            textMessageDraft.noFormulaAttachment = noFormulaAttachment;
             return textMessageDraft;
           },
         );
@@ -294,7 +294,7 @@ export const textMessagesReducer = (state = initialState, action) =>
           draft.textMessages,
           textMessageId,
           (textMessageDraft) => {
-            textMessageDraft.noFormulaAttachmentUrl = null;
+            textMessageDraft.noFormulaAttachment = null;
             return textMessageDraft;
           },
         );
@@ -387,7 +387,7 @@ export const textMessagesReducer = (state = initialState, action) =>
       }
 
       case UPLOAD_TEXT_MESSAGE_VARIANT_ATTACHMENT_SUCCESS: {
-        const { textMessageId, variantId, attachmentUrl } = payload;
+        const { textMessageId, variantId, attachment } = payload;
         draft.loaders.updateVariantLoading = false;
         const itemState = draft.variantsStates.get(variantId);
         itemState.uploadAttachmentLoading = false;
@@ -399,7 +399,7 @@ export const textMessagesReducer = (state = initialState, action) =>
               textMessageDraft.variants,
               variantId,
               (variantDraft) => {
-                variantDraft.attachmentUrl = attachmentUrl;
+                variantDraft.attachment = attachment;
                 return variantDraft;
               },
             );
@@ -430,7 +430,7 @@ export const textMessagesReducer = (state = initialState, action) =>
               textMessageDraft.variants,
               variantId,
               (variantDraft) => {
-                variantDraft.attachmentUrl = null;
+                variantDraft.attachment = null;
                 return variantDraft;
               },
             );

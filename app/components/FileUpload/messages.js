@@ -1,5 +1,7 @@
 import { defineMessages } from 'react-intl';
 
+import { FileErrorCode } from './types';
+
 export const scope = 'app.components.FileUpload';
 
 export default defineMessages({
@@ -18,5 +20,9 @@ export default defineMessages({
   deleteFile: {
     id: `${scope}.deleteFile`,
     defaultMessage: 'Delete file',
+  },
+  [FileErrorCode.FILE_TOO_LARGE]: {
+    id: `${scope}.${FileErrorCode.FILE_TOO_LARGE}`,
+    defaultMessage: 'File cannot be larger than 5 MB',
   },
 });

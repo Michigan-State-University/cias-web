@@ -63,11 +63,11 @@ const TextMessageSettings = ({
       endAt,
       isUsedFormula,
       noFormulaText,
-      noFormulaAttachmentUrl,
+      noFormulaAttachment,
       originalText,
       type,
     },
-    selectedMessageState: { uploadAttachmentLoading },
+    selectedMessageState: { uploadAttachmentLoading, uploadAttachmentError },
   } = useContext(TextMessagesContext);
 
   useEffect(() => {
@@ -161,8 +161,9 @@ const TextMessageSettings = ({
         <NoFormulaMessage
           id={id}
           noFormulaText={noFormulaText}
-          noFormulaAttachmentUrl={noFormulaAttachmentUrl}
+          noFormulaAttachment={noFormulaAttachment}
           uploadAttachmentLoading={uploadAttachmentLoading}
+          uploadAttachmentError={uploadAttachmentError}
           originalText={originalText}
         />
       )}

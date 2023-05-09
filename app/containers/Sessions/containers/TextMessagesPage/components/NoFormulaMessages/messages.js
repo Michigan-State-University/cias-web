@@ -11,8 +11,12 @@ export default defineMessages({
     id: `${scope}.textMessagePlaceholder`,
     defaultMessage: 'Enter text here',
   },
-  attachmentNoFormulaLabel: {
-    id: `${scope}.attachmentNoFormulaLabel`,
+  attachmentLabel: {
+    id: `${scope}.attachmentLabel`,
     defaultMessage: 'Attachment in the SMS is:',
+  },
+  attachment: {
+    id: `${scope}.attachment`,
+    defaultMessage: 'Attachment',
   },
 });

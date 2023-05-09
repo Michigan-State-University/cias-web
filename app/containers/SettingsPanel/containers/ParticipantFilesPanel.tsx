@@ -36,9 +36,9 @@ const ParticipantFilesPanel = ({ interventionId }: Props) => {
   return (
     <FilesPanel
       title={formatMessage(messages.filesForParticipant)}
-      uploadingFile={uploadingParticipantFile}
+      loading={uploadingParticipantFile}
       onUpload={addFileForParticipant}
-      removeFile={removeFileForParticipant}
+      onRemoveFile={removeFileForParticipant}
       value={participantFiles ?? []}
       multiple
     />

@@ -59,7 +59,7 @@ const originalTextIconProps = {
 const VariantItem = ({
   open,
   index,
-  variant: { id, formulaMatch, content, originalText, attachmentUrl },
+  variant: { id, formulaMatch, content, originalText, attachment },
   changeFormulaMatchAction,
   changeContentAction,
   removeVariant,
@@ -237,7 +237,7 @@ const VariantItem = ({
             </OriginalTextHover>
           </Box>
           <TextMessageAttachment
-            attachmentUrl={attachmentUrl}
+            attachment={attachment}
             loading={uploadAttachmentLoading}
             onAdd={handleAddAttachment}
             onDelete={handleDeleteAttachment}

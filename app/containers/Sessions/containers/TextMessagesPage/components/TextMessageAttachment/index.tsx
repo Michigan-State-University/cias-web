@@ -1,45 +1,45 @@
-import React, { useCallback } from 'react';
+import React from 'react';
 import { useIntl } from 'react-intl';
+import { AxiosError } from 'axios';
 
-import Text from 'components/Text';
-import ImageUpload from 'components/ImageUpload';
+import { AppFile } from 'models/File';
+
+import { MMS_ACCEPTED_FILE_FORMATS } from 'global/constants';
+
+import FileUpload from 'components/FileUpload';
 
 import messages from '../NoFormulaMessages/messages';
 
 export type Props = {
-  attachmentUrl: Nullable<string>;
+  attachment: Nullable<AppFile>;
   loading: boolean;
   onAdd: (file: File) => void;
   onDelete: () => void;
   editingPossible: boolean;
+  error: Nullable<AxiosError>;
 };
 
 export const TextMessageAttachment: React.FC<Props> = ({
-  attachmentUrl,
+  attachment,
   loading,
   onAdd,
   onDelete,
   editingPossible,
+  error,
 }) => {
   const { formatMessage } = useIntl();
 
-  const handleAddAttachment = useCallback(
-    ({ image }: { image: File; imageUrl: string }) => {
-      onAdd(image);
-    },
-    [onAdd],
-  );
-
   return (
     <>
-      <Text mb={10}>{formatMessage(messages.attachmentNoFormulaLabel)}</Text>
-      <ImageUpload
-        image={attachmentUrl}
+      <FileUpload
+        acceptedFormats={MMS_ACCEPTED_FILE_FORMATS}
+        label={formatMessage(messages.attachmentLabel)}
         loading={loading}
-        onAddImage={handleAddAttachment}
-        onDeleteImage={onDelete}
+        value={attachment}
+        onUpload={onAdd}
+        onRemoveFile={onDelete}
+        error={error?.response?.data?.message}
         disabled={!editingPossible}
-        acceptedFormats={['JPG', 'PNG', 'GIF']}
       />
     </>
   );
