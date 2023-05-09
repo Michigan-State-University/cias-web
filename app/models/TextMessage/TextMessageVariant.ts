@@ -7,5 +7,5 @@ export interface TextMessageVariant {
   content: string;
   formulaMatch: string;
   originalText: string;
-  imageUrl: Nullable<string>;
+  attachmentUrl: Nullable<string>;
 }

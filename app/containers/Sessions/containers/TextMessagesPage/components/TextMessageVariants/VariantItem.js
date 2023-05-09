@@ -40,15 +40,15 @@ import {
   changeContent,
   removeTextMessageVariantRequest,
   changeSelectedVariantId,
-  deleteTextMessageVariantImageRequest,
-  uploadTextMessageVariantImageRequest,
+  deleteTextMessageVariantAttachmentRequest,
+  uploadTextMessageVariantAttachmentRequest,
 } from 'global/reducers/textMessages';
 
 import { ModalType, useModal } from 'components/Modal';
 import settingsMessages from '../../containers/TextMessageSettings/messages';
 import { TextMessagesContext } from '../../utils';
 import messages from './messages';
-import { TextMessageImage } from '../TextMessageImage';
+import { TextMessageAttachment } from '../TextMessageAttachment';
 
 const originalTextIconProps = {
   position: 'absolute',
@@ -59,7 +59,7 @@ const originalTextIconProps = {
 const VariantItem = ({
   open,
   index,
-  variant: { id, formulaMatch, content, originalText, imageUrl },
+  variant: { id, formulaMatch, content, originalText, attachmentUrl },
   changeFormulaMatchAction,
   changeContentAction,
   removeVariant,
@@ -68,13 +68,13 @@ const VariantItem = ({
   dragHandleProps,
   textMessageId,
   variantState,
-  uploadImage,
-  deleteImage,
+  uploadAttachment,
+  deleteAttachment,
 }) => {
   const { sessionId, interventionId, formatMessage, editingPossible } =
     useContext(TextMessagesContext);
 
-  const { uploadImageLoading } = variantState;
+  const { uploadAttachmentLoading } = variantState;
 
   const toggleCollapsable = () => {
     if (open) changeSelectedVariant('');
@@ -110,15 +110,15 @@ const VariantItem = ({
     },
   });
 
-  const handleAddImage = useCallback(
+  const handleAddAttachment = useCallback(
     (file) => {
-      uploadImage(textMessageId, id, file);
+      uploadAttachment(textMessageId, id, file);
     },
     [textMessageId, id],
   );
 
-  const handleDeleteImage = useCallback(() => {
-    deleteImage(textMessageId, id);
+  const handleDeleteAttachment = useCallback(() => {
+    deleteAttachment(textMessageId, id);
   }, [textMessageId, id]);
 
   return (
@@ -236,11 +236,11 @@ const VariantItem = ({
               />
             </OriginalTextHover>
           </Box>
-          <TextMessageImage
-            imageUrl={imageUrl}
-            loading={uploadImageLoading}
-            onAdd={handleAddImage}
-            onDelete={handleDeleteImage}
+          <TextMessageAttachment
+            attachmentUrl={attachmentUrl}
+            loading={uploadAttachmentLoading}
+            onAdd={handleAddAttachment}
+            onDelete={handleDeleteAttachment}
             editingPossible={editingPossible}
           />
         </Row>
@@ -261,8 +261,8 @@ VariantItem.propTypes = {
   dragHandleProps: PropTypes.object,
   textMessageId: PropTypes.string,
   variantState: PropTypes.object,
-  uploadImage: PropTypes.func,
-  deleteImage: PropTypes.func,
+  uploadAttachment: PropTypes.func,
+  deleteAttachment: PropTypes.func,
 };
 VariantItem.defaultProps = {
   open: false,
@@ -273,8 +273,8 @@ const mapDispatchToProps = {
   changeContentAction: changeContent,
   removeVariant: removeTextMessageVariantRequest,
   changeSelectedVariant: changeSelectedVariantId,
-  uploadImage: uploadTextMessageVariantImageRequest,
-  deleteImage: deleteTextMessageVariantImageRequest,
+  uploadAttachment: uploadTextMessageVariantAttachmentRequest,
+  deleteAttachment: deleteTextMessageVariantAttachmentRequest,
 };
 
 const withConnect = connect(null, mapDispatchToProps);

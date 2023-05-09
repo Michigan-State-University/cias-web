@@ -109,6 +109,6 @@ export class SectionCaseBuilder {
       title: this.title,
       content: this.content,
       reportTemplateSectionId: this.reportTemplateSectionId,
-      imageUrl: this.imageUrl,
+      attachmentUrl: this.imageUrl,
     });
 }

@@ -7,15 +7,15 @@ import ImageUpload from 'components/ImageUpload';
 import messages from '../NoFormulaMessages/messages';
 
 export type Props = {
-  imageUrl: Nullable<string>;
+  attachmentUrl: Nullable<string>;
   loading: boolean;
   onAdd: (file: File) => void;
   onDelete: () => void;
   editingPossible: boolean;
 };
 
-export const TextMessageImage: React.FC<Props> = ({
-  imageUrl,
+export const TextMessageAttachment: React.FC<Props> = ({
+  attachmentUrl,
   loading,
   onAdd,
   onDelete,
@@ -23,7 +23,7 @@ export const TextMessageImage: React.FC<Props> = ({
 }) => {
   const { formatMessage } = useIntl();
 
-  const handleAddImage = useCallback(
+  const handleAddAttachment = useCallback(
     ({ image }: { image: File; imageUrl: string }) => {
       onAdd(image);
     },
@@ -32,11 +32,11 @@ export const TextMessageImage: React.FC<Props> = ({
 
   return (
     <>
-      <Text mb={10}>{formatMessage(messages.imageNoFormulaLabel)}</Text>
+      <Text mb={10}>{formatMessage(messages.attachmentNoFormulaLabel)}</Text>
       <ImageUpload
-        image={imageUrl}
+        image={attachmentUrl}
         loading={loading}
-        onAddImage={handleAddImage}
+        onAddImage={handleAddAttachment}
         onDeleteImage={onDelete}
         disabled={!editingPossible}
         acceptedFormats={['JPG', 'PNG', 'GIF']}

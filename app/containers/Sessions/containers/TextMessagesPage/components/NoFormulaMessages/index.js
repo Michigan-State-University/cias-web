@@ -17,8 +17,8 @@ import {
 import { SessionTypes } from 'models/Session';
 import {
   changeNoFormulaText,
-  uploadTextMessageImageRequest,
-  deleteTextMessageImageRequest,
+  uploadTextMessageAttachmentRequest,
+  deleteTextMessageAttachmentRequest,
 } from 'global/reducers/textMessages';
 
 import VariableChooser from 'containers/VariableChooser';
@@ -33,7 +33,7 @@ import OriginalTextHover from 'components/OriginalTextHover';
 import messages from './messages';
 import { TextMessagesContext } from '../../utils';
 import settingsMessages from '../../containers/TextMessageSettings/messages';
-import { TextMessageImage } from '../TextMessageImage';
+import { TextMessageAttachment } from '../TextMessageAttachment';
 
 const originalTextIconProps = {
   position: 'absolute',
@@ -44,12 +44,12 @@ const originalTextIconProps = {
 const NoFormulaMessage = ({
   id,
   noFormulaText,
-  noFormulaImageUrl,
+  noFormulaAttachmentUrl,
   originalText,
   changeAction,
-  uploadImage,
-  deleteImage,
-  uploadImageLoading,
+  uploadAttachment,
+  deleteAttachment,
+  uploadAttachmentLoading,
 }) => {
   const { sessionId, interventionId, formatMessage, editingPossible } =
     useContext(TextMessagesContext);
@@ -64,15 +64,15 @@ const NoFormulaMessage = ({
     );
   };
 
-  const handleAddImage = useCallback(
+  const handleAddAttachment = useCallback(
     (file) => {
-      uploadImage(id, file);
+      uploadAttachment(id, file);
     },
     [id],
   );
 
-  const handleDeleteImage = useCallback(() => {
-    deleteImage(id);
+  const handleDeleteAttachment = useCallback(() => {
+    deleteAttachment(id);
   }, [id]);
 
   return (
@@ -123,11 +123,11 @@ const NoFormulaMessage = ({
           />
         </OriginalTextHover>
       </Box>
-      <TextMessageImage
-        imageUrl={noFormulaImageUrl}
-        loading={uploadImageLoading}
-        onAdd={handleAddImage}
-        onDelete={handleDeleteImage}
+      <TextMessageAttachment
+        attachmentUrl={noFormulaAttachmentUrl}
+        loading={uploadAttachmentLoading}
+        onAdd={handleAddAttachment}
+        onDelete={handleDeleteAttachment}
         editingPossible={editingPossible}
       />
     </Column>
@@ -137,18 +137,18 @@ const NoFormulaMessage = ({
 NoFormulaMessage.propTypes = {
   id: PropTypes.string,
   changeAction: PropTypes.func,
-  uploadImage: PropTypes.func,
-  deleteImage: PropTypes.func,
+  uploadAttachment: PropTypes.func,
+  deleteAttachment: PropTypes.func,
   noFormulaText: PropTypes.string,
-  noFormulaImageUrl: PropTypes.string,
+  noFormulaAttachmentUrl: PropTypes.string,
   originalText: PropTypes.object,
-  uploadImageLoading: PropTypes.bool,
+  uploadAttachmentLoading: PropTypes.bool,
 };
 
 const mapDispatchToProps = {
   changeAction: changeNoFormulaText,
-  uploadImage: uploadTextMessageImageRequest,
-  deleteImage: deleteTextMessageImageRequest,
+  uploadAttachment: uploadTextMessageAttachmentRequest,
+  deleteAttachment: deleteTextMessageAttachmentRequest,
 };
 
 const withConnect = connect(null, mapDispatchToProps);

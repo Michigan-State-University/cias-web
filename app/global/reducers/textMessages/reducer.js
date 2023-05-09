@@ -53,20 +53,20 @@ import {
   INITIAL_FILTERS,
   SET_FILTERS,
   SET_TEXT_MESSAGES_COUNT,
-  UPLOAD_TEXT_MESSAGE_IMAGE_REQUEST,
-  UPLOAD_TEXT_MESSAGE_IMAGE_SUCCESS,
-  UPLOAD_TEXT_MESSAGE_IMAGE_ERROR,
-  DELETE_TEXT_MESSAGE_IMAGE_REQUEST,
-  DELETE_TEXT_MESSAGE_IMAGE_SUCCESS,
-  DELETE_TEXT_MESSAGE_IMAGE_ERROR,
+  UPLOAD_TEXT_MESSAGE_ATTACHMENT_REQUEST,
+  UPLOAD_TEXT_MESSAGE_ATTACHMENT_SUCCESS,
+  UPLOAD_TEXT_MESSAGE_ATTACHMENT_ERROR,
+  DELETE_TEXT_MESSAGE_ATTACHMENT_REQUEST,
+  DELETE_TEXT_MESSAGE_ATTACHMENT_SUCCESS,
+  DELETE_TEXT_MESSAGE_ATTACHMENT_ERROR,
   TEXT_MESSAGE_DEFAULT_STATE,
-  UPLOAD_TEXT_MESSAGE_VARIANT_IMAGE_REQUEST,
+  UPLOAD_TEXT_MESSAGE_VARIANT_ATTACHMENT_REQUEST,
   TEXT_MESSAGE_VARIANT_DEFAULT_STATE,
-  UPLOAD_TEXT_MESSAGE_VARIANT_IMAGE_SUCCESS,
-  UPLOAD_TEXT_MESSAGE_VARIANT_IMAGE_ERROR,
-  DELETE_TEXT_MESSAGE_VARIANT_IMAGE_REQUEST,
-  DELETE_TEXT_MESSAGE_VARIANT_IMAGE_SUCCESS,
-  DELETE_TEXT_MESSAGE_VARIANT_IMAGE_ERROR,
+  UPLOAD_TEXT_MESSAGE_VARIANT_ATTACHMENT_SUCCESS,
+  UPLOAD_TEXT_MESSAGE_VARIANT_ATTACHMENT_ERROR,
+  DELETE_TEXT_MESSAGE_VARIANT_ATTACHMENT_REQUEST,
+  DELETE_TEXT_MESSAGE_VARIANT_ATTACHMENT_SUCCESS,
+  DELETE_TEXT_MESSAGE_VARIANT_ATTACHMENT_ERROR,
 } from './constants';
 import textMessageSettingsReducer from './settings/reducer';
 import textMessageVariantReducer from './variants/reducer';
@@ -247,7 +247,7 @@ export const textMessagesReducer = (state = initialState, action) =>
         assignDraftItems(draft.cache.textMessages, draft.textMessages);
         break;
 
-      case UPLOAD_TEXT_MESSAGE_IMAGE_REQUEST: {
+      case UPLOAD_TEXT_MESSAGE_ATTACHMENT_REQUEST: {
         const { textMessageId } = payload;
         draft.loaders.updateTextMessagesLoading = true;
         const itemState =
@@ -255,22 +255,22 @@ export const textMessagesReducer = (state = initialState, action) =>
           TEXT_MESSAGE_DEFAULT_STATE;
         draft.textMessagesStates.set(textMessageId, {
           ...itemState,
-          uploadImageLoading: true,
-          uploadImageError: null,
+          uploadAttachmentLoading: true,
+          uploadAttachmentError: null,
         });
         break;
       }
 
-      case UPLOAD_TEXT_MESSAGE_IMAGE_SUCCESS: {
-        const { textMessageId, noFormulaImageUrl } = payload;
+      case UPLOAD_TEXT_MESSAGE_ATTACHMENT_SUCCESS: {
+        const { textMessageId, noFormulaAttachmentUrl } = payload;
         draft.loaders.updateTextMessagesLoading = false;
         const itemState = draft.textMessagesStates.get(textMessageId);
-        itemState.uploadImageLoading = false;
+        itemState.uploadAttachmentLoading = false;
         updateItemById(
           draft.textMessages,
           textMessageId,
           (textMessageDraft) => {
-            textMessageDraft.noFormulaImageUrl = noFormulaImageUrl;
+            textMessageDraft.noFormulaAttachmentUrl = noFormulaAttachmentUrl;
             return textMessageDraft;
           },
         );
@@ -278,36 +278,36 @@ export const textMessagesReducer = (state = initialState, action) =>
         break;
       }
 
-      case UPLOAD_TEXT_MESSAGE_IMAGE_ERROR: {
+      case UPLOAD_TEXT_MESSAGE_ATTACHMENT_ERROR: {
         const { textMessageId, error } = payload;
         draft.loaders.updateTextMessagesLoading = false;
         const itemState = draft.textMessagesStates.get(textMessageId);
-        itemState.uploadImageLoading = false;
-        itemState.uploadImageError = error;
+        itemState.uploadAttachmentLoading = false;
+        itemState.uploadAttachmentError = error;
         break;
       }
 
-      case DELETE_TEXT_MESSAGE_IMAGE_REQUEST: {
+      case DELETE_TEXT_MESSAGE_ATTACHMENT_REQUEST: {
         const { textMessageId } = payload;
         draft.loaders.updateTextMessagesLoading = true;
         updateItemById(
           draft.textMessages,
           textMessageId,
           (textMessageDraft) => {
-            textMessageDraft.noFormulaImageUrl = null;
+            textMessageDraft.noFormulaAttachmentUrl = null;
             return textMessageDraft;
           },
         );
         break;
       }
 
-      case DELETE_TEXT_MESSAGE_IMAGE_SUCCESS: {
+      case DELETE_TEXT_MESSAGE_ATTACHMENT_SUCCESS: {
         draft.loaders.updateTextMessagesLoading = false;
         assignDraftItems(draft.textMessages, draft.cache.textMessages);
         break;
       }
 
-      case DELETE_TEXT_MESSAGE_IMAGE_ERROR: {
+      case DELETE_TEXT_MESSAGE_ATTACHMENT_ERROR: {
         const { error } = payload;
         draft.loaders.updateTextMessagesLoading = false;
         draft.errors.updateTextMessagesError = error;
@@ -372,7 +372,7 @@ export const textMessagesReducer = (state = initialState, action) =>
         assignDraftItems(draft.cache.textMessages, draft.textMessages);
         break;
 
-      case UPLOAD_TEXT_MESSAGE_VARIANT_IMAGE_REQUEST: {
+      case UPLOAD_TEXT_MESSAGE_VARIANT_ATTACHMENT_REQUEST: {
         const { variantId } = payload;
         draft.loaders.updateVariantLoading = true;
         const itemState =
@@ -380,17 +380,17 @@ export const textMessagesReducer = (state = initialState, action) =>
           TEXT_MESSAGE_VARIANT_DEFAULT_STATE;
         draft.variantsStates.set(variantId, {
           ...itemState,
-          uploadImageLoading: true,
-          uploadImageError: null,
+          uploadAttachmentLoading: true,
+          uploadAttachmentError: null,
         });
         break;
       }
 
-      case UPLOAD_TEXT_MESSAGE_VARIANT_IMAGE_SUCCESS: {
-        const { textMessageId, variantId, imageUrl } = payload;
+      case UPLOAD_TEXT_MESSAGE_VARIANT_ATTACHMENT_SUCCESS: {
+        const { textMessageId, variantId, attachmentUrl } = payload;
         draft.loaders.updateVariantLoading = false;
         const itemState = draft.variantsStates.get(variantId);
-        itemState.uploadImageLoading = false;
+        itemState.uploadAttachmentLoading = false;
         updateItemById(
           draft.textMessages,
           textMessageId,
@@ -399,7 +399,7 @@ export const textMessagesReducer = (state = initialState, action) =>
               textMessageDraft.variants,
               variantId,
               (variantDraft) => {
-                variantDraft.imageUrl = imageUrl;
+                variantDraft.attachmentUrl = attachmentUrl;
                 return variantDraft;
               },
             );
@@ -410,16 +410,16 @@ export const textMessagesReducer = (state = initialState, action) =>
         break;
       }
 
-      case UPLOAD_TEXT_MESSAGE_VARIANT_IMAGE_ERROR: {
+      case UPLOAD_TEXT_MESSAGE_VARIANT_ATTACHMENT_ERROR: {
         const { variantId, error } = payload;
         draft.loaders.updateVariantLoading = false;
         const itemState = draft.variantsStates.get(variantId);
-        itemState.uploadImageLoading = false;
-        itemState.uploadImageError = error;
+        itemState.uploadAttachmentLoading = false;
+        itemState.uploadAttachmentError = error;
         break;
       }
 
-      case DELETE_TEXT_MESSAGE_VARIANT_IMAGE_REQUEST: {
+      case DELETE_TEXT_MESSAGE_VARIANT_ATTACHMENT_REQUEST: {
         const { textMessageId, variantId } = payload;
         draft.loaders.updateVariantLoading = true;
         updateItemById(
@@ -430,7 +430,7 @@ export const textMessagesReducer = (state = initialState, action) =>
               textMessageDraft.variants,
               variantId,
               (variantDraft) => {
-                variantDraft.imageUrl = null;
+                variantDraft.attachmentUrl = null;
                 return variantDraft;
               },
             );
@@ -440,13 +440,13 @@ export const textMessagesReducer = (state = initialState, action) =>
         break;
       }
 
-      case DELETE_TEXT_MESSAGE_VARIANT_IMAGE_SUCCESS: {
+      case DELETE_TEXT_MESSAGE_VARIANT_ATTACHMENT_SUCCESS: {
         draft.loaders.updateVariantLoading = false;
         assignDraftItems(draft.textMessages, draft.cache.textMessages);
         break;
       }
 
-      case DELETE_TEXT_MESSAGE_VARIANT_IMAGE_ERROR: {
+      case DELETE_TEXT_MESSAGE_VARIANT_ATTACHMENT_ERROR: {
         const { error } = payload;
         draft.loaders.updateVariantLoading = false;
         draft.errors.updateVariantLoading = error;
