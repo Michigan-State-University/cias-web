@@ -282,12 +282,34 @@ exports[`<ReflectionFormulaBlock /> Should render and match the snapshot 1`] = `
   display: block;
   border-radius: 5px;
   width: 100%;
+  position: relative;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-align-content: flex-end;
+  -ms-flex-line-pack: end;
+  align-content: flex-end;
+  -webkit-align-items: flex-end;
+  -webkit-box-align: flex-end;
+  -ms-flex-align: flex-end;
+  align-items: flex-end;
+  gap: 15px;
+  color: unset;
+}
+
+.c38 {
+  width: auto;
+  height: auto;
+  display: block;
+  border-radius: 5px;
+  width: 100%;
   margin-top: 15px;
   background-color: rgba(233,241,251,1);
   color: unset;
 }
 
-.c38 {
+.c39 {
   width: auto;
   height: auto;
   display: block;
@@ -298,7 +320,7 @@ exports[`<ReflectionFormulaBlock /> Should render and match the snapshot 1`] = `
   color: unset;
 }
 
-.c40 {
+.c41 {
   width: auto;
   height: auto;
   display: block;
@@ -521,7 +543,7 @@ exports[`<ReflectionFormulaBlock /> Should render and match the snapshot 1`] = `
   color: #ABBBD1;
 }
 
-.c41 {
+.c42 {
   height: 40px;
   border: 1px dashed #B0BAC9;
   color: #B0BAC9;
@@ -542,7 +564,7 @@ exports[`<ReflectionFormulaBlock /> Should render and match the snapshot 1`] = `
   cursor: pointer;
 }
 
-.c41:hover {
+.c42:hover {
   background-color: #107969;
   color: #FFFFFF;
   border: none;
@@ -552,7 +574,7 @@ exports[`<ReflectionFormulaBlock /> Should render and match the snapshot 1`] = `
   width: 50px;
 }
 
-.c39 {
+.c40 {
   outline: none;
   border: none;
   background: transparent;
@@ -922,49 +944,56 @@ exports[`<ReflectionFormulaBlock /> Should render and match the snapshot 1`] = `
         class="c23"
       >
         <div
-          class="c0"
+          class="c37"
+          display="flex"
+          width="100%"
         >
           <div
-            class="c19"
+            class="c0"
           >
             <div
-              class="c37"
-              width="100%"
+              class="c19"
             >
-              <textarea
-                aria-label="Enter speech here..."
-                class="c26"
-                data-cy="text-area"
-                height="auto"
-                placeholder="Enter speech here..."
-                rows="10"
-                type="multiline"
+              <div
+                class="c38"
                 width="100%"
               >
-                1
-              </textarea>
-            </div>
-            <div
-              class="c38"
-            >
-              <button
-                aria-label="Play audio"
-                class="c39 "
-                font-weight="bold"
-                title="Play audio"
-                type="button"
+                <textarea
+                  aria-label="Enter speech here..."
+                  class="c26"
+                  data-cy="text-area"
+                  height="auto"
+                  placeholder="Enter speech here..."
+                  rows="10"
+                  type="multiline"
+                  width="100%"
+                >
+                  1
+                </textarea>
+              </div>
+              <div
+                class="c39"
               >
-                <img
-                  src="IMAGE_MOCK"
-                />
-              </button>
+                <button
+                  aria-label="Play audio"
+                  class="c40 "
+                  font-weight="bold"
+                  title="Play audio"
+                  type="button"
+                >
+                  <img
+                    src="IMAGE_MOCK"
+                  />
+                </button>
+              </div>
             </div>
           </div>
+          
         </div>
       </div>
     </div>
     <div
-      class="c40 c41"
+      class="c41 c42"
     >
       + Add another case
     </div>

@@ -1,5 +1,6 @@
-import React from 'react';
+import React, { useMemo } from 'react';
 import PropTypes from 'prop-types';
+import uniqBy from 'lodash/uniqBy';
 
 import Column from 'components/Column';
 import Img from 'components/Img';
@@ -41,9 +42,11 @@ const UserList = ({ users, buttons, buttonIsClose, userWithLoading }) => {
     );
   };
 
+  const uniqueUsers = useMemo(() => uniqBy(users, 'email'), [users]);
+
   return (
     <Column data-cy="user-list" data-private>
-      {users.map(({ email, id }, index) => (
+      {uniqueUsers.map(({ email, id }, index) => (
         <HoverableRow
           data-cy={`user-list-item-${index}`}
           key={`el-user-${email}`}

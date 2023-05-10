@@ -34,6 +34,8 @@ const SettingsInterventionPage = () => {
     googleTtsVoice,
     currentNarrator,
     multipleFill,
+    autofinishEnabled,
+    autofinishDelay,
   } = session;
   useInjectReducer({ key: 'session', reducer: sessionReducer });
   useInjectSaga({ key: 'getSession', saga: getSessionSaga });
@@ -70,6 +72,8 @@ const SettingsInterventionPage = () => {
             googleTtsVoice={googleTtsVoice}
             currentNarrator={currentNarrator}
             multipleFill={multipleFill}
+            autofinishEnabled={autofinishEnabled}
+            autofinishDelay={autofinishDelay}
           />
         </StyledColumn>
       </Box>

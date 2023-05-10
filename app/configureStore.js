@@ -22,7 +22,13 @@ export default function configureStore(initialState = {}, history) {
   if (process.env.NODE_ENV !== 'production' && typeof window === 'object') {
     /* eslint-disable no-underscore-dangle */
     if (window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__)
-      composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__({});
+      composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__({
+        serialize: {
+          options: {
+            map: true,
+          },
+        },
+      });
 
     // NOTE: Uncomment the code below to restore support for Redux Saga
     // Dev Tools once it supports redux-saga version 1.x.x

@@ -4,25 +4,17 @@ import { initialState } from './reducer';
 
 const selectSession = (state) => state.session || initialState;
 
-const makeSelectSession = () =>
+export const makeSelectSession = () =>
   createSelector(selectSession, (substate) => substate.session);
 
-const makeSelectCacheSession = () =>
+export const makeSelectCacheSession = () =>
   createSelector(selectSession, (substate) => substate.cache.session);
 
-const makeSelectSessionLoader = (name) =>
+export const makeSelectSessionLoader = (name) =>
   createSelector(selectSession, ({ loaders }) => loaders[name]);
 
-const makeSelectSessionEditLoader = () =>
+export const makeSelectSessionEditLoader = () =>
   createSelector(selectSession, (substate) => substate.sessionSaving);
 
-const makeSelectSessionError = (name) =>
+export const makeSelectSessionError = (name) =>
   createSelector(selectSession, ({ errors }) => errors[name]);
-
-export {
-  makeSelectSession,
-  makeSelectCacheSession,
-  makeSelectSessionLoader,
-  makeSelectSessionEditLoader,
-  makeSelectSessionError,
-};

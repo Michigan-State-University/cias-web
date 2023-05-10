@@ -63,9 +63,11 @@ const TextMessageSettings = ({
       endAt,
       isUsedFormula,
       noFormulaText,
+      noFormulaAttachment,
       originalText,
       type,
     },
+    selectedMessageState: { uploadAttachmentLoading, uploadAttachmentError },
   } = useContext(TextMessagesContext);
 
   useEffect(() => {
@@ -84,23 +86,6 @@ const TextMessageSettings = ({
       confirmAction: onDelete,
     },
   });
-
-  const messageSection = () => {
-    if (isUsedFormula)
-      return (
-        <>
-          <TextMessagesFormula disabled={!editingPossible} formula={formula} />
-          <TextMessageVariants />
-        </>
-      );
-    return (
-      <NoFormulaMessage
-        id={id}
-        noFormulaText={noFormulaText}
-        originalText={originalText}
-      />
-    );
-  };
 
   return (
     <StyledSmsSettings>
@@ -166,7 +151,22 @@ const TextMessageSettings = ({
 
       <SectionDivider />
       <FormulaSwitcher isUsedFormula={isUsedFormula} />
-      {messageSection()}
+      {isUsedFormula && (
+        <>
+          <TextMessagesFormula disabled={!editingPossible} formula={formula} />
+          <TextMessageVariants textMessageId={id} />
+        </>
+      )}
+      {!isUsedFormula && (
+        <NoFormulaMessage
+          id={id}
+          noFormulaText={noFormulaText}
+          noFormulaAttachment={noFormulaAttachment}
+          uploadAttachmentLoading={uploadAttachmentLoading}
+          uploadAttachmentError={uploadAttachmentError}
+          originalText={originalText}
+        />
+      )}
 
       {type === TextMessageType.ALERT && (
         <>

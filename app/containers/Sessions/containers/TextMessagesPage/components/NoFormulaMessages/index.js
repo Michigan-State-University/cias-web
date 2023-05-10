@@ -1,4 +1,4 @@
-import React, { useContext } from 'react';
+import React, { useCallback, useContext } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { compose } from 'redux';
@@ -15,7 +15,11 @@ import {
   visualAnalogueScaleQuestion,
 } from 'models/Session/QuestionTypes';
 import { SessionTypes } from 'models/Session';
-import { changeNoFormulaText } from 'global/reducers/textMessages';
+import {
+  changeNoFormulaText,
+  uploadTextMessageAttachmentRequest,
+  deleteTextMessageAttachmentRequest,
+} from 'global/reducers/textMessages';
 
 import VariableChooser from 'containers/VariableChooser';
 
@@ -29,6 +33,7 @@ import OriginalTextHover from 'components/OriginalTextHover';
 import messages from './messages';
 import { TextMessagesContext } from '../../utils';
 import settingsMessages from '../../containers/TextMessageSettings/messages';
+import { TextMessageAttachment } from '../TextMessageAttachment';
 
 const originalTextIconProps = {
   position: 'absolute',
@@ -39,8 +44,13 @@ const originalTextIconProps = {
 const NoFormulaMessage = ({
   id,
   noFormulaText,
+  noFormulaAttachment,
   originalText,
   changeAction,
+  uploadAttachment,
+  deleteAttachment,
+  uploadAttachmentLoading,
+  uploadAttachmentError,
 }) => {
   const { sessionId, interventionId, formatMessage, editingPossible } =
     useContext(TextMessagesContext);
@@ -55,12 +65,21 @@ const NoFormulaMessage = ({
     );
   };
 
+  const handleAddAttachment = useCallback(
+    (file) => {
+      uploadAttachment(id, file);
+    },
+    [id],
+  );
+
+  const handleDeleteAttachment = useCallback(() => {
+    deleteAttachment(id);
+  }, [id]);
+
   return (
     <Column justify="center">
-      <NoMarginRow justify="between" width="100%">
-        <Text mr={13} fontSize={15} fontWeight="bold">
-          {formatMessage(messages.label)}
-        </Text>
+      <NoMarginRow justify="between" width="100%" gap={13}>
+        <Text>{formatMessage(messages.label)}</Text>
         <VariableChooser
           disabled={!editingPossible}
           currentInterventionId={interventionId}
@@ -105,6 +124,14 @@ const NoFormulaMessage = ({
           />
         </OriginalTextHover>
       </Box>
+      <TextMessageAttachment
+        attachment={noFormulaAttachment}
+        loading={uploadAttachmentLoading}
+        error={uploadAttachmentError}
+        onAdd={handleAddAttachment}
+        onDelete={handleDeleteAttachment}
+        editingPossible={editingPossible}
+      />
     </Column>
   );
 };
@@ -112,12 +139,19 @@ const NoFormulaMessage = ({
 NoFormulaMessage.propTypes = {
   id: PropTypes.string,
   changeAction: PropTypes.func,
-  originalText: PropTypes.object,
+  uploadAttachment: PropTypes.func,
+  deleteAttachment: PropTypes.func,
   noFormulaText: PropTypes.string,
+  noFormulaAttachment: PropTypes.object,
+  originalText: PropTypes.object,
+  uploadAttachmentLoading: PropTypes.bool,
+  uploadAttachmentError: PropTypes.object,
 };
 
 const mapDispatchToProps = {
   changeAction: changeNoFormulaText,
+  uploadAttachment: uploadTextMessageAttachmentRequest,
+  deleteAttachment: deleteTextMessageAttachmentRequest,
 };
 
 const withConnect = connect(null, mapDispatchToProps);

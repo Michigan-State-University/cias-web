@@ -1,5 +1,6 @@
 import produce from 'immer';
 import sortBy from 'lodash/sortBy';
+import sortedIndexBy from 'lodash/sortedIndexBy';
 
 import { insertAt, removeAt } from 'utils/arrayUtils';
 import { GroupType } from 'models/QuestionGroup';
@@ -66,7 +67,9 @@ const questionGroupsReducer = (state = initialState, { type, payload }) =>
         break;
       }
       case GROUP_QUESTIONS_SUCCESS: {
-        draft.groups = [...state.groups, payload.group];
+        const { group } = payload;
+        const insertIndex = sortedIndexBy(state.groups, group, 'position');
+        insertAt(draft.groups, insertIndex, group);
         assignDraftItems(draft.groups, draft.cache.groups);
         break;
       }

@@ -9,13 +9,14 @@ import Button from 'components/Button';
 import Divider from 'components/Divider';
 import Row from 'components/Row';
 import ErrorAlert from 'components/ErrorAlert';
+import FormikForm from 'components/FormikForm';
 
 import {
   generateInitialValues,
   generateLoginFormValidationSchema,
 } from '../utils';
 import messages from '../messages';
-import { Or, StyledForm } from '../styled';
+import { Or } from '../styled';
 
 const LoginForm = ({
   formData: initialFormData,
@@ -53,7 +54,7 @@ const LoginForm = ({
         };
 
         return (
-          <StyledForm>
+          <FormikForm>
             <FormikInput
               formikKey="email"
               placeholder={formatMessage(messages.emailPlaceholder)}
@@ -98,7 +99,7 @@ const LoginForm = ({
               </LinkButton>
             </Row>
             {error && <ErrorAlert errorText={error} mt={20} />}
-          </StyledForm>
+          </FormikForm>
         );
       }}
     </Formik>

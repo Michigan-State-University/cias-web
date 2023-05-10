@@ -13,7 +13,7 @@ exports[`<ReflectionBlock /> Should render and match the snapshot 1`] = `
   margin-bottom: 16px;
 }
 
-.c12 {
+.c13 {
   display: -webkit-box;
   display: -webkit-flex;
   display: -ms-flexbox;
@@ -77,7 +77,29 @@ exports[`<ReflectionBlock /> Should render and match the snapshot 1`] = `
   color: unset;
 }
 
-.c13 {
+.c12 {
+  width: auto;
+  height: auto;
+  display: block;
+  border-radius: 5px;
+  width: 100%;
+  position: relative;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-align-content: flex-end;
+  -ms-flex-line-pack: end;
+  align-content: flex-end;
+  -webkit-align-items: flex-end;
+  -webkit-box-align: flex-end;
+  -ms-flex-align: flex-end;
+  align-items: flex-end;
+  gap: 15px;
+  color: unset;
+}
+
+.c14 {
   width: auto;
   height: auto;
   display: block;
@@ -86,7 +108,7 @@ exports[`<ReflectionBlock /> Should render and match the snapshot 1`] = `
   color: unset;
 }
 
-.c14 {
+.c15 {
   width: auto;
   height: auto;
   display: block;
@@ -97,7 +119,7 @@ exports[`<ReflectionBlock /> Should render and match the snapshot 1`] = `
   color: unset;
 }
 
-.c16 {
+.c17 {
   width: auto;
   height: auto;
   display: block;
@@ -161,7 +183,7 @@ exports[`<ReflectionBlock /> Should render and match the snapshot 1`] = `
   height: auto;
 }
 
-.c15 {
+.c16 {
   resize: none;
   padding: 12px;
   border: 1px solid #E9F1FB;
@@ -174,13 +196,13 @@ exports[`<ReflectionBlock /> Should render and match the snapshot 1`] = `
   border: 1px solid transparent;
 }
 
-.c15:focus {
+.c16:focus {
   box-shadow: none;
   outline: none;
   border: 1px solid #107969;
 }
 
-.c15:disabled {
+.c16:disabled {
   color: #ABBBD1;
 }
 
@@ -215,7 +237,7 @@ exports[`<ReflectionBlock /> Should render and match the snapshot 1`] = `
   width: 50px;
 }
 
-.c17 {
+.c18 {
   outline: none;
   border: none;
   background: transparent;
@@ -373,43 +395,50 @@ exports[`<ReflectionBlock /> Should render and match the snapshot 1`] = `
     >
       <div
         class="c12"
+        display="flex"
+        width="100%"
       >
         <div
           class="c13"
         >
           <div
             class="c14"
-            width="100%"
           >
-            <textarea
-              aria-label="Enter speech here..."
+            <div
               class="c15"
-              data-cy="text-area"
-              height="auto"
-              placeholder="Enter speech here..."
-              rows="10"
-              type="multiline"
               width="100%"
             >
-              1
-            </textarea>
-          </div>
-          <div
-            class="c16"
-          >
-            <button
-              aria-label="Play audio"
-              class="c17 "
-              font-weight="bold"
-              title="Play audio"
-              type="button"
+              <textarea
+                aria-label="Enter speech here..."
+                class="c16"
+                data-cy="text-area"
+                height="auto"
+                placeholder="Enter speech here..."
+                rows="10"
+                type="multiline"
+                width="100%"
+              >
+                1
+              </textarea>
+            </div>
+            <div
+              class="c17"
             >
-              <img
-                src="IMAGE_MOCK"
-              />
-            </button>
+              <button
+                aria-label="Play audio"
+                class="c18 "
+                font-weight="bold"
+                title="Play audio"
+                type="button"
+              >
+                <img
+                  src="IMAGE_MOCK"
+                />
+              </button>
+            </div>
           </div>
         </div>
+        
       </div>
     </div>
   </div>

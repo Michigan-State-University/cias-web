@@ -159,7 +159,7 @@ const Component = ({
           <InputWithAdornment
             value={consumption.amount ?? ''}
             keyboard="number"
-            type={AdornmentType.SUFFIX}
+            adornmentType={AdornmentType.SUFFIX}
             adornment={selectedValue?.unit}
             onKeyPress={onAmountKeyPress}
             onPaste={onAmountPaste}
