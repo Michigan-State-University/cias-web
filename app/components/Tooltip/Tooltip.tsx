@@ -10,7 +10,7 @@ import React, {
   useEffect,
   useRef,
   useState,
-  ReactElement,
+  ReactNode,
 } from 'react';
 import ReactTooltip from 'react-tooltip';
 
@@ -29,11 +29,11 @@ import { StyledTooltip } from './styled';
 
 type TooltipProps = {
   id: string;
-  children?: ReactElement;
+  children?: ReactNode;
   visible?: boolean;
   text?: string;
   icon?: any;
-  content?: ReactElement | string;
+  content?: ReactNode;
   place?: 'top' | 'right' | 'bottom' | 'left';
   stretchContent?: boolean;
   backgroundColor?: string;

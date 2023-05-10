@@ -67,3 +67,5 @@ export const VERIFICATION_CODE_COOKIE = 'verification_code';
 
 export const FETCH_SELF_DETAILS_REQUEST = 'app/auth/FETCH_SELF_DETAILS_REQUEST';
 export const FETCH_SELF_DETAILS_SUCCESS = 'app/auth/FETCH_SELF_DETAILS_SUCCESS';
+
+export const UPDATE_USERS_TIMEZONE = 'app/auth/UPDATE_USERS_TIMEZONE';

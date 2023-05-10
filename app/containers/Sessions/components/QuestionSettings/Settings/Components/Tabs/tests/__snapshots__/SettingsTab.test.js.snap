@@ -74,7 +74,26 @@ exports[`<SettingsTab /> Should render and match the snapshot 1`] = `
   width: 100%;
 }
 
-.c14 {
+.c10 {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-flex-direction: row;
+  -ms-flex-direction: row;
+  flex-direction: row;
+  height: auto;
+  -webkit-align-content: center;
+  -ms-flex-line-pack: center;
+  align-content: center;
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  gap: 8px;
+}
+
+.c15 {
   display: -webkit-box;
   display: -webkit-flex;
   display: -ms-flexbox;
@@ -107,7 +126,7 @@ exports[`<SettingsTab /> Should render and match the snapshot 1`] = `
   color: unset;
 }
 
-.c11 {
+.c12 {
   position: relative;
   display: inline-block;
   min-width: 40px;
@@ -142,7 +161,7 @@ exports[`<SettingsTab /> Should render and match the snapshot 1`] = `
   cursor: not-allowed;
 }
 
-.c13 {
+.c14 {
   position: absolute;
   top: 0;
   left: 0;
@@ -154,20 +173,20 @@ exports[`<SettingsTab /> Should render and match the snapshot 1`] = `
   border-radius: 21px;
 }
 
-.c3:checked + .c5 .c12 {
+.c3:checked + .c5 .c13 {
   background-color: #B727EA;
 }
 
-.c3:focus + .c5 .c12 {
+.c3:focus + .c5 .c13 {
   box-shadow: 0 0 1px #B727EA;
 }
 
-.c3:disabled + .c5 .c12 {
+.c3:disabled + .c5 .c13 {
   opacity: 0.5;
   cursor: not-allowed;
 }
 
-.c13:before {
+.c14:before {
   position: absolute;
   content: '';
   left: 4px;
@@ -180,7 +199,7 @@ exports[`<SettingsTab /> Should render and match the snapshot 1`] = `
   border-radius: 50%;
 }
 
-.c3:checked + .c5 .c12:before {
+.c3:checked + .c5 .c13:before {
   -webkit-transform: translateX(18px);
   -ms-transform: translateX(18px);
   transform: translateX(18px);
@@ -194,7 +213,7 @@ exports[`<SettingsTab /> Should render and match the snapshot 1`] = `
   width: 100% !important;
 }
 
-.c10 {
+.c11 {
   margin: 0;
   font-family: DM Sans;
   font-size: 15px;
@@ -230,17 +249,21 @@ exports[`<SettingsTab /> Should render and match the snapshot 1`] = `
           <div
             class="c8 c9"
           >
-            <h3
+            <div
               class="c10"
             >
-              Video
-            </h3>
+              <h3
+                class="c11"
+              >
+                Video
+              </h3>
+            </div>
           </div>
           <div
-            class="c11"
+            class="c12"
           >
             <span
-              class="c12 c13"
+              class="c13 c14"
             />
           </div>
         </div>
@@ -274,17 +297,21 @@ exports[`<SettingsTab /> Should render and match the snapshot 1`] = `
           <div
             class="c8 c9"
           >
-            <h3
+            <div
               class="c10"
             >
-              Image
-            </h3>
+              <h3
+                class="c11"
+              >
+                Image
+              </h3>
+            </div>
           </div>
           <div
-            class="c11"
+            class="c12"
           >
             <span
-              class="c12 c13"
+              class="c13 c14"
             />
           </div>
         </div>
@@ -319,17 +346,21 @@ exports[`<SettingsTab /> Should render and match the snapshot 1`] = `
           <div
             class="c8 c9"
           >
-            <h3
+            <div
               class="c10"
             >
-              Title
-            </h3>
+              <h3
+                class="c11"
+              >
+                Title
+              </h3>
+            </div>
           </div>
           <div
-            class="c11"
+            class="c12"
           >
             <span
-              class="c12 c13"
+              class="c13 c14"
             />
           </div>
         </div>
@@ -364,17 +395,21 @@ exports[`<SettingsTab /> Should render and match the snapshot 1`] = `
           <div
             class="c8 c9"
           >
-            <h3
+            <div
               class="c10"
             >
-              Main Text
-            </h3>
+              <h3
+                class="c11"
+              >
+                Main Text
+              </h3>
+            </div>
           </div>
           <div
-            class="c11"
+            class="c12"
           >
             <span
-              class="c12 c13"
+              class="c13 c14"
             />
           </div>
         </div>
@@ -408,17 +443,21 @@ exports[`<SettingsTab /> Should render and match the snapshot 1`] = `
           <div
             class="c8 c9"
           >
-            <h3
+            <div
               class="c10"
             >
-              Skippable Narrator
-            </h3>
+              <h3
+                class="c11"
+              >
+                Skippable Narrator
+              </h3>
+            </div>
           </div>
           <div
-            class="c11"
+            class="c12"
           >
             <span
-              class="c12 c13"
+              class="c13 c14"
             />
           </div>
         </div>
@@ -453,17 +492,21 @@ exports[`<SettingsTab /> Should render and match the snapshot 1`] = `
           <div
             class="c8 c9"
           >
-            <h3
+            <div
               class="c10"
             >
-              Continue Button
-            </h3>
+              <h3
+                class="c11"
+              >
+                Continue Button
+              </h3>
+            </div>
           </div>
           <div
-            class="c11"
+            class="c12"
           >
             <span
-              class="c12 c13"
+              class="c13 c14"
             />
           </div>
         </div>
@@ -471,7 +514,7 @@ exports[`<SettingsTab /> Should render and match the snapshot 1`] = `
     </div>
   </div>
   <div
-    class="c14"
+    class="c15"
   >
     <div
       class="c1 c2"
@@ -498,17 +541,21 @@ exports[`<SettingsTab /> Should render and match the snapshot 1`] = `
           <div
             class="c8 c9"
           >
-            <h3
+            <div
               class="c10"
             >
-              Required
-            </h3>
+              <h3
+                class="c11"
+              >
+                Required
+              </h3>
+            </div>
           </div>
           <div
-            class="c11"
+            class="c12"
           >
             <span
-              class="c12 c13"
+              class="c13 c14"
             />
           </div>
         </div>

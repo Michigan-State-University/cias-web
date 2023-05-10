@@ -90,7 +90,6 @@ const PillsSelect = ({
             top={30}
             left={0}
             padding={15}
-            transform="translateX(-50%)"
             shadow="0px 0px 50px rgb(0 0 0 / 30%)"
             zIndex={1}
             maxHeight={300}

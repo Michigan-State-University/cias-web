@@ -40,3 +40,6 @@ export const makeSelectUserId = () =>
 
 export const makeSelectIsUserLoggedIn = () =>
   createSelector(selectAuth, (authState) => Boolean(authState.user));
+
+export const makeSelectUserTimeZone = () =>
+  createSelector(selectAuth, (authState) => authState.user?.timeZone);

@@ -36,9 +36,9 @@ const NavigatorFilesPanel = ({ interventionId }: Props) => {
   return (
     <FilesPanel
       title={formatMessage(messages.filesForNavigator)}
-      uploadingFile={uploadingNavigatorFile}
+      loading={uploadingNavigatorFile}
       onUpload={addFileForNavigator}
-      removeFile={removeFileForNavigator}
+      onRemoveFile={removeFileForNavigator}
       value={navigatorFiles ?? []}
       multiple
     />

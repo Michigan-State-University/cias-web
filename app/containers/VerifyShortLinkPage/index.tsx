@@ -12,6 +12,8 @@ import objectToCamelCase from 'utils/objectToCamelCase';
 
 import Loader from 'components/Loader';
 
+import NotFoundPage from 'containers/NotFoundPage';
+
 const VerifyShortLinkPage = () => {
   const history = useHistory();
   const { name } = useParams<{ name: string }>();
@@ -33,10 +35,6 @@ const VerifyShortLinkPage = () => {
     url,
     ({ data }) => objectToCamelCase(data),
   );
-
-  if (error) {
-    redirectToNotFoundPage();
-  }
 
   useEffect(() => {
     if (!verifyShortLinkData) return;
@@ -71,6 +69,10 @@ const VerifyShortLinkPage = () => {
 
     history.push(link);
   }, [verifyShortLinkData]);
+
+  if (error) {
+    return <NotFoundPage />;
+  }
 
   return <>{isFetching && <Loader />}</>;
 };

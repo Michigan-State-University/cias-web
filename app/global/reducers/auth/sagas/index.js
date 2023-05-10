@@ -13,6 +13,7 @@ import editPhoneNumberQuestionSaga from './editPhoneNumberQuestion';
 import loginSaga from './logIn';
 import verifyCodeSaga from './verifyCode';
 import fetchSelfDetailsSaga from './fetchSelfDetails';
+import updateUsersTimezoneSaga from './updateUsersTimezone';
 
 export {
   logOutSaga,
@@ -29,6 +30,7 @@ export {
   loginSaga,
   verifyCodeSaga,
   fetchSelfDetailsSaga,
+  updateUsersTimezoneSaga,
 };
 
 export default function* allAuthSagas() {
@@ -46,5 +48,6 @@ export default function* allAuthSagas() {
     loginSaga(),
     verifyCodeSaga(),
     fetchSelfDetailsSaga(),
+    updateUsersTimezoneSaga(),
   ]);
 }

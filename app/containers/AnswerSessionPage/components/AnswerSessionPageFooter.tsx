@@ -2,7 +2,7 @@ import React from 'react';
 import { useIntl } from 'react-intl';
 
 import GearIcon from 'assets/svg/gear-2.svg';
-import AccessibeIcon from 'assets/svg/accessibe.svg';
+import AccessibilityIcon from 'assets/images/AccessibilityIcon.png';
 import ChatIconActive from 'assets/svg/chat-active.svg';
 
 import Icon from 'components/Icon';
@@ -12,6 +12,7 @@ import { ModalType, useModal } from 'components/Modal';
 import { Tooltip } from 'components/Tooltip';
 import Row from 'components/Row';
 
+import Img from 'components/Img';
 import { FooterContainer } from '../styled';
 import { ParticipantSessionSettings } from '../types';
 import messages from '../messages';
@@ -52,14 +53,13 @@ const AnswerSessionPageFooter = ({
         <Row gap={16} align="center">
           {isMobilePreview && (
             <Tooltip
-              id="accessibe-icon-mock-tooltip"
+              id="accessibility-icon-mock-tooltip"
               text={formatMessage(messages.featureUnavailable)}
             >
-              <Icon
-                src={AccessibeIcon}
+              <Img
+                src={AccessibilityIcon}
                 alt={formatMessage(messages.accessiBeIconAlt)}
-                // @ts-ignore
-                disabled
+                height={32}
               />
             </Tooltip>
           )}
@@ -79,7 +79,7 @@ const AnswerSessionPageFooter = ({
             id="live-chat-icon-mock-tooltip"
             text={formatMessage(messages.featureUnavailable)}
           >
-            <Icon
+            <Img
               src={ChatIconActive}
               alt={formatMessage(messages.liveChatIconAlt)}
               // @ts-ignore

@@ -42,6 +42,7 @@ import {
   RESET_REDUCER,
   FETCH_SELF_DETAILS_REQUEST,
   FETCH_SELF_DETAILS_SUCCESS,
+  UPDATE_USERS_TIMEZONE,
 } from './constants';
 
 export const logIn = (user) => actionBuilder(LOG_IN_USER, { user });
@@ -140,3 +141,6 @@ export const fetchSelfDetailsRequest = () =>
   actionBuilder(FETCH_SELF_DETAILS_REQUEST, {});
 export const fetchSelfDetailsSuccess = (user) =>
   actionBuilder(FETCH_SELF_DETAILS_SUCCESS, { user });
+
+export const updateUsersTimezone = (timezone) =>
+  actionBuilder(UPDATE_USERS_TIMEZONE, { timezone });

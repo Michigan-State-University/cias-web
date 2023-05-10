@@ -13,16 +13,22 @@ import { createStructuredSelector } from 'reselect';
 import { connect } from 'react-redux';
 import { compose } from 'redux';
 import { Col, Container, Row } from 'react-grid-system';
+import { useHistory, useLocation } from 'react-router-dom';
+
+import { themeColors } from 'theme';
 
 import { makeSelectUser } from 'global/reducers/auth';
 
 import Text from 'components/Text';
 import { StyledButton } from 'components/Button/StyledButton';
-import { themeColors } from 'theme';
+import StyledLink from 'components/StyledLink';
 
 import messages from './messages';
 
-const NotFoundPage = ({ location, intl: { formatMessage }, history, user }) => {
+const NotFoundPage = ({ intl: { formatMessage }, user }) => {
+  const location = useLocation();
+  const history = useHistory();
+
   const header = get(
     location,
     'state.header',
@@ -36,10 +42,6 @@ const NotFoundPage = ({ location, intl: { formatMessage }, history, user }) => {
   );
 
   const handleBack = () => history.goBack();
-
-  const handleGoToMainPage = () => history.push('/');
-
-  const handleGoToLogin = () => history.push(`/login${location.search ?? ''}`);
 
   return (
     <Container style={{ height: '100%' }}>
@@ -84,22 +86,22 @@ const NotFoundPage = ({ location, intl: { formatMessage }, history, user }) => {
                 </Col>
 
                 <Col width="content">
-                  <StyledButton
-                    mt={50}
-                    onClick={handleGoToMainPage}
-                    width={180}
-                  >
-                    <FormattedMessage {...messages.toMainPage} />
-                  </StyledButton>
+                  <StyledLink to="/">
+                    <StyledButton mt={50} width={180}>
+                      <FormattedMessage {...messages.toMainPage} />
+                    </StyledButton>
+                  </StyledLink>
                 </Col>
               </>
             )}
 
             {!user && (
               <Col width="content">
-                <StyledButton mt={50} onClick={handleGoToLogin} width={180}>
-                  <FormattedMessage {...messages.toLogin} />
-                </StyledButton>
+                <StyledLink to={`/login${location.search ?? ''}`}>
+                  <StyledButton mt={50} width={180}>
+                    <FormattedMessage {...messages.toLogin} />
+                  </StyledButton>
+                </StyledLink>
               </Col>
             )}
           </Row>
@@ -110,9 +112,7 @@ const NotFoundPage = ({ location, intl: { formatMessage }, history, user }) => {
 };
 
 NotFoundPage.propTypes = {
-  location: PropTypes.object,
   intl: PropTypes.shape(IntlShape),
-  history: PropTypes.object,
   user: PropTypes.object,
 };
 

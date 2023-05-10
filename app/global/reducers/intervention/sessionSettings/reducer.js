@@ -67,29 +67,29 @@ const sessionSettingsReducer = (session, { type, data }) =>
         const { value } = data;
 
         draft.schedule = value;
-        draft.schedule_at = '';
-        draft.schedule_payload = '';
+        draft.scheduleAt = '';
+        draft.schedulePayload = '';
         break;
       }
 
       case UPDATE_SCHEDULING_PAYLOAD: {
         const { value } = data;
 
-        draft.schedule_payload = parseInt(value, 10) || '';
+        draft.schedulePayload = parseInt(value, 10) || '';
         break;
       }
 
       case UPDATE_SCHEDULING_DATE: {
         const { value } = data;
 
-        draft.schedule_at = value;
+        draft.scheduleAt = value;
         break;
       }
 
       case UPDATE_DAYS_AFTER_DATE_VARIABLE: {
         const { value } = data;
 
-        draft.days_after_date_variable_name = value;
+        draft.daysAfterDateVariableName = value;
         break;
       }
 
