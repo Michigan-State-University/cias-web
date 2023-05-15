@@ -11,12 +11,70 @@ of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU General Publ
 You should have received a copy of the GNU General Public License along with CIAS 3.0. If not,
 see <https://www.gnu.org/licenses/gpl-3.0.html>.
 
+# [CIAS 3.0](https://www.cias.app/)
+
+### Digital Behavioral Health Interventions Made Easy
+
+CIAS stands for Computerized Intervention Authoring System. CIAS gives you the ability to create and manage
+multi-session interventions without writing a single line of code. With this robust platform, you can develop and
+deliver interventions, collect data, and collaborate with colleagues all in one place.
+
+### User-Friendly Features
+
+The CIAS platform has a variety of features to support a broad range of interventions and approaches, including:
+
+- Variety of **question types** to choose from
+- An **animated narrator** to act as a guide
+- Automatic **translation** into over 100 languages
+- **Tailored reports** for participants and clinicians
+- Custom **SMS messaging**
+- **Branching** and **Randomization**
+- **Scheduled** session sending
+- Custom **charts** for data visualisation
+- Timeline Followback Method Assessment (**TLFB**)
+- **Live chat** for participants
+- Integrations with 3rd party systems:
+  - **CAT-MH<sup>TM</sup>**
+  - **Henry Ford Hospital** by Epic on FIHR (incoming)
+
+For more information about CIAS 3.0 features please see https://www.cias.app/resources.
+
+### Full Version Available for Free*
+
+Our goal is for cost to never be a barrier. All features are available for non-commercial use by researchers at
+universities or non-profit research institutions
+
+*A small annual fee will be requested for funded projects.
+
+### For more information, or to request access please see https://www.cias.app/ or contact [CIAS@msu.edu](cias@msu.edu)
+
 # Install & Start
 
+[//]: # (TODO: replace github link below)
+
+#### <span style="color:red">This is a frontend package only. For CIAS to work, you need the backend package too.</span> You can find it on GitHub [here](https://github.com/HTD-Health/cias-api#readme). Follow the instructions there to set up the backend project first.
+
+#### Requirements:
+
+- [`Node.js` (v14 or later)](https://nodejs.org/en/download)*
+- compatible [`npm` version (v6 or later)](https://github.com/npm/cli)*
+
+*we suggest using node.js version management utility, for instance [nvm](https://github.com/nvm-sh/nvm)
+
+#### Steps to install & start the project:
+
+1. Clone or download the repository
+1. Go into the root directory of the project
 1. Copy the contents of `.env.example` to `.env` (create this file)
-1. Run `npm install` to install all required dependencies **\*(optional => run only the first time or when dependencies
-   change)**
-1. Run `npm start` to run the project. It will be available at `localhost:4200`
+1. (Optional) Adjust environmental variables in that exists in `.env`
+1. (Optional) Run `npm install` to install all required dependencies => run only the first time or when dependencies
+   change
+1. Run `npm start` to run the project. When you see a command "webpack built ..." the project is ready
+1. Open http://localhost:4200 (by default) in the internet browser
+1. If you have the backend project set up too, you can start using CIAS 3.0. If you seeded the database while setting up
+   the backend project, you can now log in to one of the accounts that has been automatically created. Please
+   see [README](https://github.com/HTD-Health/cias-api#readme) of the backend project for more information
+   [//]: # (TODO: replace github link above)
 
 # Cypress
 
@@ -27,7 +85,8 @@ see <https://www.gnu.org/licenses/gpl-3.0.html>.
 
 [COLOR NAME DETECTOR](https://www.color-blindness.com/color-name-hue/)
 
-To name colors, please do not use custom, made-up names and let's use some kind of color name detector. There are many
+To name colors in the source code, please do not use custom, made-up names and let's use some kind of color name
+detector. There are many
 detectors, so to have uniform results let's use that
 one: [COLOR NAME DETECTOR](https://www.color-blindness.com/color-name-hue/) as it shows not only the name, but also the
 group/hue of a color (useful when there are similar colors).
@@ -72,20 +131,16 @@ available [here](https://medium.com/mjml-making-responsive-email-easy/tutorial-c
 
 **Available Templates**
 
-1. no-button
-   <img width="1904" alt="Zrzut ekranu 2022-11-7 o 07 50 37" src="https://user-images.githubusercontent.com/52409023/200245127-5410b77f-00ef-4ccd-994c-f04bd2c84cd1.png">
-2. with-button
-   <img width="1904" alt="Zrzut ekranu 2022-11-7 o 07 50 30" src="https://user-images.githubusercontent.com/52409023/200245146-5e6acb04-9bff-44be-8265-6b598839c574.png">
-3. with-button-and-other-information-ignore-email
-   <img width="1904" alt="Zrzut ekranu 2022-11-7 o 07 50 24" src="https://user-images.githubusercontent.com/52409023/200245153-7cfbfe24-0d86-4fd4-aaf6-39dac55db376.png">
-4. with-button-ignore-email
-   <img width="1904" alt="Zrzut ekranu 2022-11-7 o 07 50 16" src="https://user-images.githubusercontent.com/52409023/200245157-78c0abbb-2577-4a3c-9fc2-4ca652730990.png">
-5. with-button-ignore-email-no-pwd
-   <img width="1904" alt="Zrzut ekranu 2022-11-7 o 07 50 10" src="https://user-images.githubusercontent.com/52409023/200245160-e3b6fca9-0e1d-4538-a02b-ae871b764aca.png">
-6. with-button-and-description-ignore-email
-   <img width="1904" alt="Zrzut ekranu 2022-11-7 o 07 50 03" src="https://user-images.githubusercontent.com/52409023/200245164-447c2ff6-c2fa-43f7-a492-22405983dd9b.png">
-7. no-button-ignore-email
-   <img width="1904" alt="Zrzut ekranu 2022-11-7 o 07 49 56" src="https://user-images.githubusercontent.com/52409023/200245166-ab4c017d-365d-4110-a804-697a535d27e7.png">
+1. no-button <br/>
+   <img style="border:1px dotted grey" alt="Email template without button" src="mjml/docs/no-button.png">
+1. with-button <br/>
+   <img style="border:1px dotted grey" alt="Email template with button" src="mjml/docs/with-button.png">
+1. with-button-and-other-information <br/>
+   <img style="border:1px dotted grey" alt="Email template with button and other information" src="mjml/docs/with-button-and-other-information.png">
+1. with-button-and-description <br/>
+   <img style="border:1px dotted grey" alt="Email template with button and description" src="mjml/docs/with-button-and-description.png">
+1. with-button-and-other-information-and-description <br/>
+   <img style="border:1px dotted grey" alt="Email template with button, other information, and description" src="mjml/docs/with-button-and-other-information-and-description.png">
 
 **Tags**
 For easier maintaining and searching for proper sections and variables, there are tags in `.html` files:
@@ -94,21 +149,22 @@ For easier maintaining and searching for proper sections and variables, there ar
 2. `HEADER START` and `HEADER END`
 3. `MAIN-TEXT START` and `MAIN-TEXT END`
 4. `BUTTON START` and `BUTTON END`
-5. `FOOTNOTE START` and `FOOTNOTE END`
+5. `FOOTER START` and `FOOTER END`
 6. `OTHER INFORMATION START` and `OTHER INFORMATION END`
 7. `DESCRIPTION START` and `DESCRIPTION END`
 
 **Variables:**
 
-- _`no-button`_: **`{HEADER_TEXT}`**, **`{MAIN_TEXT}`**
-- _`no-button-ignore-email`_: **`{HEADER_TEXT}`**, **`{MAIN_TEXT}`**
-- _`with-button-and-description-ignore-email`_: **`{HEADER_TEXT}`**, **`{MAIN_TEXT}`**, **`{DESCRIPTION}`**, *
-  *`{BUTTON_URL}`**, **`{BUTTON_TEXT}`**
-- _`with-button-and-other-information-ignore-email`_: **`{HEADER_TEXT}`**, **`{MAIN_TEXT}`**, **`{OTHER_INFORMATION}`**,
-  **`{BUTTON_URL}`**, **`{BUTTON_TEXT}`**
-- _`with-button-ignore-email-no-pwd`_: **`{HEADER_TEXT}`**, **`{MAIN_TEXT}`**, **`{BUTTON_URL}`**, **`{BUTTON_TEXT}`**
-- _`with-button-ignore-email`_: **`{HEADER_TEXT}`**, **`{MAIN_TEXT}`**, **`{BUTTON_URL}`**, **`{BUTTON_TEXT}`**
-- _`with-button`_: **`{HEADER_TEXT}`**, **`{MAIN_TEXT}`**, **`{BUTTON_URL}`**, **`{BUTTON_TEXT}`**
+- _`no-button`_: **`{HEADER_TEXT}`**, **`{MAIN_TEXT}`**, **`{FOOTER_TEXT}`**,
+- _`with-button`_: **`{HEADER_TEXT}`**, **`{MAIN_TEXT}`**, **`{BUTTON_TEXT}`**, **`{BUTTON_URL}`**, **`{FOOTER_TEXT}`**,
+- _`with-button-and-other-information`_: **`{HEADER_TEXT}`**, **`{MAIN_TEXT}`**, **`{BUTTON_TEXT}`**, **`{BUTTON_URL}`
+  **, **`{FOOTER_TEXT}`**, **`{DESCRIPTION}`**,
+- _`with-button-and-description`_: **`{HEADER_TEXT}`**, **`{MAIN_TEXT}`**, **`{BUTTON_TEXT}`**, **`{BUTTON_URL}`**, *
+  *`{FOOTER_TEXT}`**, **`{OTHER_INFORMATION}`**,
+- _`with-button-and-other-information-and-description`_: **`{HEADER_TEXT}`**, **`{MAIN_TEXT}`**, **`{BUTTON_TEXT}`**, *
+  *`{BUTTON_URL}`**, **`{FOOTER_TEXT}`**, **`{DESCRIPTION}`**, **`{OTHER_INFORMATION}`**,
+
+In all templates there is a common **`{LOGO_URL}`** variable.
 
 **Styling in email templates**
 

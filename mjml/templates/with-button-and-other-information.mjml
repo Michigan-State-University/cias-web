@@ -8,8 +8,8 @@
       mainText="{MAIN_TEXT}"
       buttonText="{BUTTON_TEXT}"
       buttonUrl="{BUTTON_URL}"
+      footerText="{FOOTER_TEXT}"
       otherInformation="{OTHER_INFORMATION}"
-      ignoreEmail="true"
     />
   </mj-body>
 </mjml>

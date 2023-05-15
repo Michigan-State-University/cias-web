@@ -2,12 +2,18 @@
   "name": "cias-3.0",
   "version": "0.9.10",
   "description": "CIAS 3.0 Web Application",
+  "homepage": "https://github.com/HTD-Health/cias-web",
+  "bugs": {
+    "url": "https://github.com/HTD-Health/cias-web/issues",
+    "email": "cias@msu.edu"
+  },
+  "license": "GPL-3.0-or-later",
   "engineStrict": true,
   "engines": {
     "npm": "6.x",
     "node": "14.x"
   },
-  "author": "HTD Health",
+  "author": "Michigan State University <cias@msu.edu> (https://www.cias.app/)",
   "scripts": {
     "postinstall": "patch-package",
     "analyze:clean": "rimraf stats.json",
