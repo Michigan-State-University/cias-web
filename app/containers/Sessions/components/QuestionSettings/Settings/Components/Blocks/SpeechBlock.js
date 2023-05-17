@@ -98,7 +98,7 @@ const SpeechBlock = ({
 
   const handleButtonClick = () => {
     if (isPlaying) updateNarratorPreviewAnimation('standStill');
-    else updateNarratorPreviewData(block);
+    else updateNarratorPreviewData({ ...block, position: blockIndex });
 
     setIsPlaying(!isPlaying);
   };
