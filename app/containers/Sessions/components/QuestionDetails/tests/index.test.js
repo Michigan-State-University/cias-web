@@ -6,6 +6,7 @@ import { IntlProvider } from 'react-intl';
 import { DEFAULT_LOCALE } from 'i18n';
 import { Provider } from 'react-redux';
 import { elements } from 'theme';
+import { MemoryRouter } from 'react-router-dom';
 
 import { draft } from 'models/Status/StatusTypes';
 import settingsTabLabels from 'utils/settingsTabsLabels';
@@ -92,7 +93,9 @@ describe('<QuestionDetails />', () => {
     const { container, getByText } = render(
       <Provider store={store}>
         <IntlProvider locale={DEFAULT_LOCALE}>
-          <QuestionDetails {...props} />
+          <MemoryRouter>
+            <QuestionDetails {...props} />
+          </MemoryRouter>
         </IntlProvider>
       </Provider>,
     );

@@ -8,6 +8,7 @@ import React from 'react';
 import { render } from '@testing-library/react';
 import { Provider } from 'react-redux';
 import { IntlProvider } from 'react-intl';
+import { MemoryRouter } from 'react-router-dom';
 import { DEFAULT_LOCALE } from 'i18n';
 
 import { EFeedbackAction } from 'models/Narrator/FeedbackActions';
@@ -54,7 +55,9 @@ describe('<CharacterAnim />', () => {
     render(
       <Provider store={store}>
         <IntlProvider locale={DEFAULT_LOCALE}>
-          <CharacterAnim {...defaultProps} />
+          <MemoryRouter>
+            <CharacterAnim {...defaultProps} />
+          </MemoryRouter>
         </IntlProvider>
       </Provider>,
     );
@@ -65,7 +68,9 @@ describe('<CharacterAnim />', () => {
     const { container } = render(
       <Provider store={store}>
         <IntlProvider locale={DEFAULT_LOCALE}>
-          <CharacterAnim {...defaultProps} />
+          <MemoryRouter>
+            <CharacterAnim {...defaultProps} />
+          </MemoryRouter>
         </IntlProvider>
       </Provider>,
     );
