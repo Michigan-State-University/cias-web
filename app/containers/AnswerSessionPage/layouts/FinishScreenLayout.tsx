@@ -3,7 +3,8 @@ import { useDispatch, useSelector } from 'react-redux';
 import { IntlShape } from 'react-intl';
 
 import LocalStorageService from 'utils/localStorageService';
-import { previewRegex } from 'global/constants/regex';
+import { getIsPreview } from 'utils/previewMode';
+
 import { resetReducer as resetAuthReducer } from 'global/reducers/auth/actions';
 import { InterventionSharedTo, InterventionType } from 'models/Intervention';
 import { FinishQuestionDTO } from 'models/Question';
@@ -55,7 +56,7 @@ const FinishScreenLayout = ({ formatMessage, question }: Props) => {
     [nextSessionId],
   );
 
-  const isPreview = previewRegex.test(window.location.pathname);
+  const isPreview = getIsPreview();
 
   const closeCurrentTab = () => {
     window.opener = null;

@@ -26,6 +26,7 @@ const style = (props) => ({
   borderRadius: props.borderRadius || '',
   boxShadow: props.shadow || '',
   transform: props.transform || '',
+  '-webkit-transform': props.transform || '',
   transition: props.transition || '',
   opacity:
     props.opacity ||

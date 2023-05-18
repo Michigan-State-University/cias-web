@@ -6,10 +6,12 @@ import { compose } from 'redux';
 import { connect } from 'react-redux';
 import { createStructuredSelector } from 'reselect';
 
+import { themeColors } from 'theme';
+
 import Box from 'components/Box';
 import Column from 'components/Column';
 import Text from 'components/Text';
-import { themeColors } from 'theme';
+
 import {
   makeSelectLoader,
   makeSelectNameQuestionExists,
@@ -94,6 +96,7 @@ const Reflection = ({
       <Box mt={15}>{reflection.payload}</Box>
       {inputVisible ? (
         <SpeechInput
+          id={`question-${id}-reflection-${blockIndex}`}
           formatMessage={formatMessage}
           setHasFocus={setHasFocus}
           isSpeechUpdating={isSpeechUpdating}
@@ -102,6 +105,7 @@ const Reflection = ({
           handleButtonClick={handleButtonClick}
           handleBlur={handleBlur}
           text={text}
+          originalText={reflection.original_text}
           disabled={disabled}
           nameQuestionExists={nameQuestionExists}
         />

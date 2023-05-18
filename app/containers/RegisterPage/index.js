@@ -38,6 +38,7 @@ import FormikInput from 'components/FormikInput';
 import ErrorAlert from 'components/ErrorAlert';
 import FormikCheckbox from 'components/FormikCheckbox';
 import Box from 'components/Box';
+import FormikForm from 'components/FormikForm';
 
 import { isNil } from 'lodash';
 import makeSelectRegisterPage from './selectors';
@@ -197,7 +198,7 @@ export function RegisterPage({
                 required: true,
               };
               return (
-                <>
+                <FormikForm>
                   <Row width="100%">
                     <FormikInput
                       formikKey="firstName"
@@ -275,7 +276,7 @@ export function RegisterPage({
                       </Link>
                     </Row>
                   )}
-                </>
+                </FormikForm>
               );
             }}
           </Formik>

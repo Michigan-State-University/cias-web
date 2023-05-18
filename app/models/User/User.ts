@@ -1,5 +1,5 @@
 import { CamelToSnakeOmitId } from 'global/types/camelToSnake';
-import { Roles } from './RolesManager/UserRoles';
+import { Roles } from './RolesManager';
 
 export interface User {
   active: boolean;
@@ -16,6 +16,7 @@ export interface User {
   teamId: Nullable<string>;
   teamName: Nullable<string>;
   quickExitEnabled: boolean;
+  timeZone: string;
 }
 
 export interface SimpleUser {

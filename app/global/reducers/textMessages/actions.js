@@ -44,6 +44,18 @@ import {
   UPDATE_PHONE_ERROR,
   SET_FILTERS,
   SET_TEXT_MESSAGES_COUNT,
+  UPLOAD_TEXT_MESSAGE_ATTACHMENT_REQUEST,
+  UPLOAD_TEXT_MESSAGE_ATTACHMENT_SUCCESS,
+  UPLOAD_TEXT_MESSAGE_ATTACHMENT_ERROR,
+  DELETE_TEXT_MESSAGE_ATTACHMENT_REQUEST,
+  DELETE_TEXT_MESSAGE_ATTACHMENT_SUCCESS,
+  DELETE_TEXT_MESSAGE_ATTACHMENT_ERROR,
+  UPLOAD_TEXT_MESSAGE_VARIANT_ATTACHMENT_REQUEST,
+  UPLOAD_TEXT_MESSAGE_VARIANT_ATTACHMENT_SUCCESS,
+  UPLOAD_TEXT_MESSAGE_VARIANT_ATTACHMENT_ERROR,
+  DELETE_TEXT_MESSAGE_VARIANT_ATTACHMENT_REQUEST,
+  DELETE_TEXT_MESSAGE_VARIANT_ATTACHMENT_SUCCESS,
+  DELETE_TEXT_MESSAGE_VARIANT_ATTACHMENT_ERROR,
 } from './constants';
 
 export const fetchTextMessagesRequest = (sessionId) =>
@@ -82,6 +94,32 @@ export const updateTextMessageSettingsSuccess = () =>
 export const updateTextMessageSettingsError = (error) =>
   actionBuilder(UPDATE_TEXT_MESSAGE_SETTINGS_ERROR, { error });
 
+export const uploadTextMessageAttachmentRequest = (
+  textMessageId,
+  noFormulaAttachmentFile,
+) =>
+  actionBuilder(UPLOAD_TEXT_MESSAGE_ATTACHMENT_REQUEST, {
+    textMessageId,
+    noFormulaAttachmentFile,
+  });
+export const uploadTextMessageAttachmentSuccess = (
+  textMessageId,
+  noFormulaAttachment,
+) =>
+  actionBuilder(UPLOAD_TEXT_MESSAGE_ATTACHMENT_SUCCESS, {
+    textMessageId,
+    noFormulaAttachment,
+  });
+export const uploadTextMessageAttachmentError = (textMessageId, error) =>
+  actionBuilder(UPLOAD_TEXT_MESSAGE_ATTACHMENT_ERROR, { textMessageId, error });
+
+export const deleteTextMessageAttachmentRequest = (textMessageId) =>
+  actionBuilder(DELETE_TEXT_MESSAGE_ATTACHMENT_REQUEST, { textMessageId });
+export const deleteTextMessageAttachmentSuccess = () =>
+  actionBuilder(DELETE_TEXT_MESSAGE_ATTACHMENT_SUCCESS, {});
+export const deleteTextMessageAttachmentError = (error) =>
+  actionBuilder(DELETE_TEXT_MESSAGE_ATTACHMENT_ERROR, { error });
+
 export const removeTextMessageRequest = (textMessageId) =>
   actionBuilder(REMOVE_TEXT_MESSAGE_REQUEST, { textMessageId });
 export const removeTextMessageSuccess = () =>
@@ -102,6 +140,50 @@ export const updateTextMessageVariantSuccess = () =>
   actionBuilder(UPDATE_TEXT_MESSAGE_VARIANT_SUCCESS, {});
 export const updateTextMessageVariantError = (error) =>
   actionBuilder(UPDATE_TEXT_MESSAGE_VARIANT_ERROR, { error });
+
+export const uploadTextMessageVariantAttachmentRequest = (
+  textMessageId,
+  variantId,
+  attachmentFile,
+) =>
+  actionBuilder(UPLOAD_TEXT_MESSAGE_VARIANT_ATTACHMENT_REQUEST, {
+    textMessageId,
+    variantId,
+    attachmentFile,
+  });
+export const uploadTextMessageVariantAttachmentSuccess = (
+  textMessageId,
+  variantId,
+  attachment,
+) =>
+  actionBuilder(UPLOAD_TEXT_MESSAGE_VARIANT_ATTACHMENT_SUCCESS, {
+    textMessageId,
+    variantId,
+    attachment,
+  });
+export const uploadTextMessageVariantAttachmentError = (
+  textMessageId,
+  variantId,
+  error,
+) =>
+  actionBuilder(UPLOAD_TEXT_MESSAGE_VARIANT_ATTACHMENT_ERROR, {
+    textMessageId,
+    variantId,
+    error,
+  });
+
+export const deleteTextMessageVariantAttachmentRequest = (
+  textMessageId,
+  variantId,
+) =>
+  actionBuilder(DELETE_TEXT_MESSAGE_VARIANT_ATTACHMENT_REQUEST, {
+    textMessageId,
+    variantId,
+  });
+export const deleteTextMessageVariantAttachmentSuccess = () =>
+  actionBuilder(DELETE_TEXT_MESSAGE_VARIANT_ATTACHMENT_SUCCESS, {});
+export const deleteTextMessageVariantAttachmentError = (error) =>
+  actionBuilder(DELETE_TEXT_MESSAGE_VARIANT_ATTACHMENT_ERROR, { error });
 
 export const removeTextMessageVariantRequest = (variantId) =>
   actionBuilder(REMOVE_TEXT_MESSAGE_VARIANT_REQUEST, { variantId });

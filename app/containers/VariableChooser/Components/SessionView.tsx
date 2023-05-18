@@ -80,11 +80,12 @@ const SessionView = ({ onClick }: Props) => {
   const isCurrentSession = (sessionId: string) =>
     sessionId === currentSessionId;
 
-  const toInterventionView = () => {
-    if (!isMultiIntervention) return;
-    if (currentView === VIEWS.INTERVENTION) return;
-    setCurrentView(VIEWS.INTERVENTION);
-  };
+  const toInterventionView = isMultiIntervention
+    ? () => {
+        if (currentView === VIEWS.INTERVENTION) return;
+        setCurrentView(VIEWS.INTERVENTION);
+      }
+    : undefined;
 
   if (sessionsLoading) {
     return <Spinner color={themeColors.secondary} />;

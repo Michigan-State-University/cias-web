@@ -31,13 +31,15 @@ export function* archiveIntervention({ payload: { interventionId } }) {
     yield put(archiveInterventionFailure(interventionId));
     yield call(
       toast.error,
-      formatMessage(globalMessages.archiveInterventionError),
+      error?.response?.data?.message ||
+        formatMessage(globalMessages.archiveInterventionError),
       {
         toastId: ARCHIVE_INTERVENTION_ERROR,
       },
     );
   }
 }
+
 export default function* archiveInterventionSaga() {
   yield takeLatest(ARCHIVE_INTERVENTION_REQUEST, archiveIntervention);
 }

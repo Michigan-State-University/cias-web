@@ -15,6 +15,31 @@ export default defineMessages({
     id: `${scope}.variableLabel`,
     defaultMessage: 'Variable',
   },
+  autofinishSettings: {
+    id: `${scope}.autofinishSettings`,
+    defaultMessage: 'Autofinish settings',
+  },
+  autofinishTooltip: {
+    id: `${scope}.autofinishTooltip`,
+    defaultMessage:
+      'If you don’t mark any screen as "Fire report if get this far.", the autofinish timer will start at the begging of the session. The autofinish timer will be reset every time participant answers a question.',
+  },
+  autofinishEnabledLabel: {
+    id: `${scope}.autofinishEnabledLabel`,
+    defaultMessage: 'Finish session automatically',
+  },
+  autofinishDelayLabel: {
+    id: `${scope}.autofinishDelayLabel`,
+    defaultMessage: 'Autofinish delay',
+  },
+  hours: {
+    id: `${scope}.hours`,
+    defaultMessage: 'hours',
+  },
+  minutes: {
+    id: `${scope}.minutes`,
+    defaultMessage: 'minutes',
+  },
   narratorSettings: {
     id: `${scope}.narratorSettings`,
     defaultMessage: 'Narrator Settings',

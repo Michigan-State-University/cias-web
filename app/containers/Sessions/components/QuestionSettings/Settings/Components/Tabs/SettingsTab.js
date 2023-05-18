@@ -2,11 +2,13 @@ import React, { memo } from 'react';
 import PropTypes from 'prop-types';
 import map from 'lodash/map';
 import { compose } from 'redux';
-import { connect } from 'react-redux';
+import { connect, useSelector } from 'react-redux';
 
 import { colors, borders } from 'theme';
 import lastKey from 'utils/getLastKey';
 import { feedbackQuestion } from 'models/Session/QuestionTypes';
+
+import { makeSelectSession } from 'global/reducers/session';
 
 import SpectrumSettings from 'containers/Sessions/components/QuestionData/FeedbackQuestion/SpectrumSettings';
 import Box from 'components/Box';
@@ -18,6 +20,8 @@ import { orderSettings } from './utils';
 const SettingsTab = ({ settings, type, onQuestionToggle, id, disabled }) => {
   const orderedSettings = orderSettings(settings);
   const last = lastKey(orderedSettings);
+
+  const session = useSelector(makeSelectSession());
 
   const renderQuestionSpecificSettings = (editingDisabled) => {
     let component;
@@ -53,6 +57,7 @@ const SettingsTab = ({ settings, type, onQuestionToggle, id, disabled }) => {
           setting={val}
           onUpdate={onQuestionToggle}
           isLast={index === last}
+          session={session}
         />
       ))}
       {renderQuestionSpecificSettings(disabled)}

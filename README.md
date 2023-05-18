@@ -1,3 +1,16 @@
+Copyright (C) 2023 Michigan State University
+
+This package is part of CIAS 3.0.
+
+CIAS 3.0 is free software: you can redistribute it and/or modify it under the terms of the GNU General Public License as
+published by the Free Software Foundation, either version 3 of the License, or (at your option) any later version.
+
+CIAS 3.0 is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY; without even the implied warranty
+of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU General Public License for more details.
+
+You should have received a copy of the GNU General Public License along with CIAS 3.0. If not,
+see <https://www.gnu.org/licenses/gpl-3.0.html>.
+
 # Install & Start
 
 1. Copy the contents of `.env.example` to `.env` (create this file)
@@ -89,15 +102,18 @@ For easier maintaining and searching for proper sections and variables, there ar
 
 - _`no-button`_: **`{HEADER_TEXT}`**, **`{MAIN_TEXT}`**
 - _`no-button-ignore-email`_: **`{HEADER_TEXT}`**, **`{MAIN_TEXT}`**
-- _`with-button-and-description-ignore-email`_: **`{HEADER_TEXT}`**, **`{MAIN_TEXT}`**, **`{DESCRIPTION}`**, **`{BUTTON_URL}`**, **`{BUTTON_TEXT}`**
-- _`with-button-and-other-information-ignore-email`_: **`{HEADER_TEXT}`**, **`{MAIN_TEXT}`**, **`{OTHER_INFORMATION}`**, **`{BUTTON_URL}`**, **`{BUTTON_TEXT}`**
+- _`with-button-and-description-ignore-email`_: **`{HEADER_TEXT}`**, **`{MAIN_TEXT}`**, **`{DESCRIPTION}`**, *
+  *`{BUTTON_URL}`**, **`{BUTTON_TEXT}`**
+- _`with-button-and-other-information-ignore-email`_: **`{HEADER_TEXT}`**, **`{MAIN_TEXT}`**, **`{OTHER_INFORMATION}`**,
+  **`{BUTTON_URL}`**, **`{BUTTON_TEXT}`**
 - _`with-button-ignore-email-no-pwd`_: **`{HEADER_TEXT}`**, **`{MAIN_TEXT}`**, **`{BUTTON_URL}`**, **`{BUTTON_TEXT}`**
 - _`with-button-ignore-email`_: **`{HEADER_TEXT}`**, **`{MAIN_TEXT}`**, **`{BUTTON_URL}`**, **`{BUTTON_TEXT}`**
 - _`with-button`_: **`{HEADER_TEXT}`**, **`{MAIN_TEXT}`**, **`{BUTTON_URL}`**, **`{BUTTON_TEXT}`**
 
 **Styling in email templates**
 
-You will need to add proper html tags with styles to style inline text within email variables. For example, MAIN_TEXT variable can be:
+You will need to add proper html tags with styles to style inline text within email variables. For example, MAIN_TEXT
+variable can be:
 
 ```
   You have been invited to <span style='color: #c866ea;'>Screening Test</span>.

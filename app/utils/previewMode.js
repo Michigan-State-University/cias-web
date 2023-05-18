@@ -1,3 +1,5 @@
+import { previewRegex } from 'global/constants';
+
 export const I_PHONE_8_PLUS_MODE = 'iPhone8Plus';
 export const DESKTOP_MODE = 'desktop';
 
@@ -11,3 +13,5 @@ export const sizes = {
     height: '736px',
   },
 };
+
+export const getIsPreview = () => previewRegex.test(window.location.href);

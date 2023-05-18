@@ -24,6 +24,7 @@ import {
   makeSelectFilters,
   INITIAL_FILTERS,
   setFiltersAction,
+  makeSelectSelectedMessageState,
 } from 'global/reducers/textMessages';
 import {
   makeSelectInterventionStatus,
@@ -55,6 +56,7 @@ const TextMessagingPage = ({
   selectedMessageId,
   changeSelectedId,
   selectedMessage,
+  selectedMessageState,
   status,
   fetchIntervention,
   fetchSession,
@@ -87,6 +89,7 @@ const TextMessagingPage = ({
         changeSelectedId,
         sessionId,
         selectedMessage,
+        selectedMessageState,
         editingPossible,
         interventionId,
       }}
@@ -95,7 +98,7 @@ const TextMessagingPage = ({
         <title>{formatMessage(messages.pageTitle)}</title>
       </Helmet>
 
-      <Row maxHeigh="100%" style={{ justifyContent: 'center' }}>
+      <Row maxHeight="100%" style={{ justifyContent: 'center' }}>
         <Col md={8}>
           <Filters
             initialFilters={INITIAL_FILTERS}
@@ -124,6 +127,7 @@ TextMessagingPage.propTypes = {
   changeSelectedId: PropTypes.func,
   match: PropTypes.object,
   selectedMessage: PropTypes.object,
+  selectedMessageState: PropTypes.object,
   status: PropTypes.string,
   fetchIntervention: PropTypes.func,
   fetchSession: PropTypes.func,
@@ -136,6 +140,7 @@ const mapStateToProps = createStructuredSelector({
   textMessages: makeSelectTextMessages(),
   selectedMessageId: makeSelectSelectedMessageId(),
   selectedMessage: makeSelectSelectedMessage(),
+  selectedMessageState: makeSelectSelectedMessageState(),
   loaders: makeSelectLoaders(),
   errors: makeSelectErrors(),
   status: makeSelectInterventionStatus(),

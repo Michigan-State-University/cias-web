@@ -96,7 +96,7 @@ exports[`<RegisterPage /> Should render and match the researcher 1`] = `
   align-items: center;
 }
 
-.c28 {
+.c29 {
   width: 100%;
   height: 40px;
   border-radius: 100px;
@@ -123,7 +123,7 @@ exports[`<RegisterPage /> Should render and match the researcher 1`] = `
   color: unset;
 }
 
-.c10 {
+.c11 {
   display: -webkit-box;
   display: -webkit-flex;
   display: -ms-flexbox;
@@ -135,7 +135,7 @@ exports[`<RegisterPage /> Should render and match the researcher 1`] = `
   width: 100%;
 }
 
-.c14 {
+.c15 {
   display: -webkit-box;
   display: -webkit-flex;
   display: -ms-flexbox;
@@ -154,7 +154,7 @@ exports[`<RegisterPage /> Should render and match the researcher 1`] = `
   width: 100%;
 }
 
-.c18 {
+.c19 {
   display: -webkit-box;
   display: -webkit-flex;
   display: -ms-flexbox;
@@ -167,7 +167,7 @@ exports[`<RegisterPage /> Should render and match the researcher 1`] = `
   margin-bottom: 20px;
 }
 
-.c20 {
+.c21 {
   display: -webkit-box;
   display: -webkit-flex;
   display: -ms-flexbox;
@@ -208,7 +208,7 @@ exports[`<RegisterPage /> Should render and match the researcher 1`] = `
   align-items: flex-start;
 }
 
-.c11 {
+.c12 {
   display: -webkit-box;
   display: -webkit-flex;
   display: -ms-flexbox;
@@ -221,7 +221,7 @@ exports[`<RegisterPage /> Should render and match the researcher 1`] = `
   margin-right: 20px;
 }
 
-.c16 {
+.c17 {
   display: -webkit-box;
   display: -webkit-flex;
   display: -ms-flexbox;
@@ -233,7 +233,7 @@ exports[`<RegisterPage /> Should render and match the researcher 1`] = `
   margin-bottom: 20px;
 }
 
-.c19 {
+.c20 {
   display: -webkit-box;
   display: -webkit-flex;
   display: -ms-flexbox;
@@ -263,7 +263,7 @@ exports[`<RegisterPage /> Should render and match the researcher 1`] = `
   line-height: 12px;
 }
 
-.c12 {
+.c13 {
   font-family: DM Sans;
   font-size: 13px;
   line-height: 130%;
@@ -275,7 +275,7 @@ exports[`<RegisterPage /> Should render and match the researcher 1`] = `
   width: fit-content;
 }
 
-.c13 {
+.c14 {
   font-family: DM Sans;
   font-size: 13px;
   line-height: 130%;
@@ -283,7 +283,7 @@ exports[`<RegisterPage /> Should render and match the researcher 1`] = `
   color: rgba(210,55,29,1);
 }
 
-.c27 {
+.c28 {
   font-family: DM Sans;
   font-size: 13px;
   line-height: 130%;
@@ -296,7 +296,7 @@ exports[`<RegisterPage /> Should render and match the researcher 1`] = `
   cursor: pointer;
 }
 
-.c15 {
+.c16 {
   padding: 12px;
   border-style: solid;
   border-width: 1px;
@@ -307,17 +307,17 @@ exports[`<RegisterPage /> Should render and match the researcher 1`] = `
   color: #2F3850;
 }
 
-.c15:focus {
+.c16:focus {
   box-shadow: none;
   outline: none;
   border-color: #107969;
 }
 
-.c15:disabled {
+.c16:disabled {
   color: #ABBBD1;
 }
 
-.c17 {
+.c18 {
   padding: 12px;
   border-style: solid;
   border-width: 1px;
@@ -329,31 +329,31 @@ exports[`<RegisterPage /> Should render and match the researcher 1`] = `
   opacity: 0.5;
 }
 
-.c17:focus {
+.c18:focus {
   box-shadow: none;
   outline: none;
   border-color: #107969;
 }
 
-.c17:disabled {
+.c18:disabled {
   color: #ABBBD1;
 }
 
-.c22 {
+.c23 {
   display: none;
 }
 
-.c26 {
+.c27 {
   margin-right: 5px;
   border-radius: 5px;
 }
 
-.c21:disabled + label > .c25 {
+.c22:disabled + label > .c26 {
   opacity: 0.5;
   cursor: not-allowed;
 }
 
-.c24 {
+.c25 {
   display: -webkit-box;
   display: -webkit-flex;
   display: -ms-flexbox;
@@ -365,13 +365,21 @@ exports[`<RegisterPage /> Should render and match the researcher 1`] = `
   width: 100%;
 }
 
-.c24:hover {
+.c25:hover {
   cursor: pointer;
 }
 
-.c21:disabled + .c23 {
+.c22:disabled + .c24 {
   opacity: 0.5;
   cursor: not-allowed;
+}
+
+.c10 {
+  width: 100%;
+  display: inherit;
+  -webkit-flex-direction: inherit;
+  -ms-flex-direction: inherit;
+  flex-direction: inherit;
 }
 
 @media only screen and (max-width:768px) {
@@ -529,235 +537,240 @@ exports[`<RegisterPage /> Should render and match the researcher 1`] = `
             Fields with an asterisk&lt;warningColor&gt;*&lt;/warningColor&gt; are required
           </p>
         </div>
-        <div
+        <form
+          action="#"
           class="c10"
-          width="100%"
         >
           <div
             class="c11"
-          >
-            <label
-              for="firstName"
-            >
-              <p
-                class="c12"
-                font-size="12px"
-                width="fit-content"
-              >
-                First Name
-                <span
-                  class="c13"
-                  color="#D2371D"
-                >
-                  *
-                </span>
-              </p>
-            </label>
-            <div
-              class="c14"
-              width="100%"
-            >
-              <input
-                class="c15"
-                height="46"
-                id="firstName"
-                name="firstName"
-                placeholder="Enter first name"
-                type="text"
-                value=""
-                width="100%"
-              />
-            </div>
-          </div>
-          <div
-            class="c16"
-          >
-            <label
-              for="lastName"
-            >
-              <p
-                class="c12"
-                font-size="12px"
-                width="fit-content"
-              >
-                Last name
-                <span
-                  class="c13"
-                  color="#D2371D"
-                >
-                  *
-                </span>
-              </p>
-            </label>
-            <div
-              class="c14"
-              width="100%"
-            >
-              <input
-                class="c15"
-                height="46"
-                id="lastName"
-                name="lastName"
-                placeholder="Enter last name"
-                type="text"
-                value=""
-                width="100%"
-              />
-            </div>
-          </div>
-        </div>
-        <div
-          class="c16"
-        >
-          <label
-            for="email"
-          >
-            <p
-              class="c12"
-              font-size="12px"
-              width="fit-content"
-            >
-              E-mail address
-              <span
-                class="c13"
-                color="#D2371D"
-              >
-                *
-              </span>
-            </p>
-          </label>
-          <div
-            class="c14"
             width="100%"
           >
-            <input
+            <div
+              class="c12"
+            >
+              <label
+                for="firstName"
+              >
+                <p
+                  class="c13"
+                  font-size="12px"
+                  width="fit-content"
+                >
+                  First Name
+                  <span
+                    class="c14"
+                    color="#D2371D"
+                  >
+                    *
+                  </span>
+                </p>
+              </label>
+              <div
+                class="c15"
+                width="100%"
+              >
+                <input
+                  class="c16"
+                  height="46"
+                  id="firstName"
+                  name="firstName"
+                  placeholder="Enter first name"
+                  type="text"
+                  value=""
+                  width="100%"
+                />
+              </div>
+            </div>
+            <div
               class="c17"
-              disabled=""
-              height="46"
-              id="email"
-              name="email"
-              placeholder="Enter e-mail address"
-              type="email"
-              value="test@gmail.com"
-              width="100%"
-            />
-          </div>
-        </div>
-        <div
-          class="c16"
-        >
-          <label
-            for="password"
-          >
-            <p
-              class="c12"
-              font-size="12px"
-              width="fit-content"
             >
-              Password
-              <span
-                class="c13"
-                color="#D2371D"
+              <label
+                for="lastName"
               >
-                *
-              </span>
-            </p>
-          </label>
-          <div
-            class="c14"
-            width="100%"
-          >
-            <input
-              class="c15"
-              height="46"
-              id="password"
-              name="password"
-              placeholder="Enter password"
-              type="password"
-              value=""
-              width="100%"
-            />
+                <p
+                  class="c13"
+                  font-size="12px"
+                  width="fit-content"
+                >
+                  Last name
+                  <span
+                    class="c14"
+                    color="#D2371D"
+                  >
+                    *
+                  </span>
+                </p>
+              </label>
+              <div
+                class="c15"
+                width="100%"
+              >
+                <input
+                  class="c16"
+                  height="46"
+                  id="lastName"
+                  name="lastName"
+                  placeholder="Enter last name"
+                  type="text"
+                  value=""
+                  width="100%"
+                />
+              </div>
+            </div>
           </div>
-        </div>
-        <div
-          class="c16"
-        >
-          <label
-            for="passwordConfirmation"
+          <div
+            class="c17"
           >
-            <p
-              class="c12"
-              font-size="12px"
-              width="fit-content"
+            <label
+              for="email"
             >
-              Password confirmation
-              <span
+              <p
                 class="c13"
-                color="#D2371D"
+                font-size="12px"
+                width="fit-content"
               >
-                *
-              </span>
-            </p>
-          </label>
-          <div
-            class="c14"
-            width="100%"
-          >
-            <input
+                E-mail address
+                <span
+                  class="c14"
+                  color="#D2371D"
+                >
+                  *
+                </span>
+              </p>
+            </label>
+            <div
               class="c15"
-              height="46"
-              id="passwordConfirmation"
-              name="passwordConfirmation"
-              placeholder="Retype your password"
-              type="password"
-              value=""
               width="100%"
-            />
+            >
+              <input
+                class="c18"
+                disabled=""
+                height="46"
+                id="email"
+                name="email"
+                placeholder="Enter e-mail address"
+                type="email"
+                value="test@gmail.com"
+                width="100%"
+              />
+            </div>
           </div>
-        </div>
-        <div
-          class="c18"
-        >
+          <div
+            class="c17"
+          >
+            <label
+              for="password"
+            >
+              <p
+                class="c13"
+                font-size="12px"
+                width="fit-content"
+              >
+                Password
+                <span
+                  class="c14"
+                  color="#D2371D"
+                >
+                  *
+                </span>
+              </p>
+            </label>
+            <div
+              class="c15"
+              width="100%"
+            >
+              <input
+                class="c16"
+                height="46"
+                id="password"
+                name="password"
+                placeholder="Enter password"
+                type="password"
+                value=""
+                width="100%"
+              />
+            </div>
+          </div>
+          <div
+            class="c17"
+          >
+            <label
+              for="passwordConfirmation"
+            >
+              <p
+                class="c13"
+                font-size="12px"
+                width="fit-content"
+              >
+                Password confirmation
+                <span
+                  class="c14"
+                  color="#D2371D"
+                >
+                  *
+                </span>
+              </p>
+            </label>
+            <div
+              class="c15"
+              width="100%"
+            >
+              <input
+                class="c16"
+                height="46"
+                id="passwordConfirmation"
+                name="passwordConfirmation"
+                placeholder="Retype your password"
+                type="password"
+                value=""
+                width="100%"
+              />
+            </div>
+          </div>
           <div
             class="c19"
           >
             <div
               class="c20"
             >
-              <input
-                class="c21 c22"
-                id="terms"
-                type="checkbox"
-              />
-              <label
-                class="c23 c24"
-                for="terms"
+              <div
+                class="c21"
               >
-                <img
-                  class="c25 c26"
-                  src="IMAGE_MOCK"
+                <input
+                  class="c22 c23"
+                  id="terms"
+                  type="checkbox"
                 />
-                Accept
-                <p
-                  class="c27"
-                  color="#B727EA"
-                  font-weight="bold"
+                <label
+                  class="c24 c25"
+                  for="terms"
                 >
-                  Terms and conditions & Privacy Policy
-                </p>
-              </label>
+                  <img
+                    class="c26 c27"
+                    src="IMAGE_MOCK"
+                  />
+                  Accept
+                  <p
+                    class="c28"
+                    color="#B727EA"
+                    font-weight="bold"
+                  >
+                    Terms and conditions & Privacy Policy
+                  </p>
+                </label>
+              </div>
             </div>
           </div>
-        </div>
-        <button
-          class="c28"
-          color="primary"
-          height="46"
-          radius="100px"
-          type="submit"
-        >
-          Create an account
-        </button>
+          <button
+            class="c29"
+            color="primary"
+            height="46"
+            radius="100px"
+            type="submit"
+          >
+            Create an account
+          </button>
+        </form>
       </div>
     </div>
   </div>
@@ -860,7 +873,7 @@ exports[`<RegisterPage /> Should render and match the snapshot for participant 1
   align-items: center;
 }
 
-.c27 {
+.c28 {
   width: 100%;
   height: 40px;
   border-radius: 100px;
@@ -887,7 +900,7 @@ exports[`<RegisterPage /> Should render and match the snapshot for participant 1
   color: unset;
 }
 
-.c10 {
+.c11 {
   display: -webkit-box;
   display: -webkit-flex;
   display: -ms-flexbox;
@@ -899,7 +912,7 @@ exports[`<RegisterPage /> Should render and match the snapshot for participant 1
   width: 100%;
 }
 
-.c14 {
+.c15 {
   display: -webkit-box;
   display: -webkit-flex;
   display: -ms-flexbox;
@@ -918,7 +931,7 @@ exports[`<RegisterPage /> Should render and match the snapshot for participant 1
   width: 100%;
 }
 
-.c17 {
+.c18 {
   display: -webkit-box;
   display: -webkit-flex;
   display: -ms-flexbox;
@@ -931,7 +944,7 @@ exports[`<RegisterPage /> Should render and match the snapshot for participant 1
   margin-bottom: 20px;
 }
 
-.c19 {
+.c20 {
   display: -webkit-box;
   display: -webkit-flex;
   display: -ms-flexbox;
@@ -954,7 +967,7 @@ exports[`<RegisterPage /> Should render and match the snapshot for participant 1
   align-items: center;
 }
 
-.c28 {
+.c29 {
   display: -webkit-box;
   display: -webkit-flex;
   display: -ms-flexbox;
@@ -971,7 +984,7 @@ exports[`<RegisterPage /> Should render and match the snapshot for participant 1
   width: 100%;
 }
 
-.c29 {
+.c30 {
   outline: none;
   border: none;
   background: transparent;
@@ -1001,7 +1014,7 @@ exports[`<RegisterPage /> Should render and match the snapshot for participant 1
   align-items: flex-start;
 }
 
-.c11 {
+.c12 {
   display: -webkit-box;
   display: -webkit-flex;
   display: -ms-flexbox;
@@ -1014,7 +1027,7 @@ exports[`<RegisterPage /> Should render and match the snapshot for participant 1
   margin-right: 20px;
 }
 
-.c16 {
+.c17 {
   display: -webkit-box;
   display: -webkit-flex;
   display: -ms-flexbox;
@@ -1026,7 +1039,7 @@ exports[`<RegisterPage /> Should render and match the snapshot for participant 1
   margin-bottom: 20px;
 }
 
-.c18 {
+.c19 {
   display: -webkit-box;
   display: -webkit-flex;
   display: -ms-flexbox;
@@ -1056,7 +1069,7 @@ exports[`<RegisterPage /> Should render and match the snapshot for participant 1
   line-height: 12px;
 }
 
-.c12 {
+.c13 {
   font-family: DM Sans;
   font-size: 13px;
   line-height: 130%;
@@ -1068,7 +1081,7 @@ exports[`<RegisterPage /> Should render and match the snapshot for participant 1
   width: fit-content;
 }
 
-.c13 {
+.c14 {
   font-family: DM Sans;
   font-size: 13px;
   line-height: 130%;
@@ -1076,7 +1089,7 @@ exports[`<RegisterPage /> Should render and match the snapshot for participant 1
   color: rgba(210,55,29,1);
 }
 
-.c26 {
+.c27 {
   font-family: DM Sans;
   font-size: 13px;
   line-height: 130%;
@@ -1089,7 +1102,7 @@ exports[`<RegisterPage /> Should render and match the snapshot for participant 1
   cursor: pointer;
 }
 
-.c15 {
+.c16 {
   padding: 12px;
   border-style: solid;
   border-width: 1px;
@@ -1100,31 +1113,31 @@ exports[`<RegisterPage /> Should render and match the snapshot for participant 1
   color: #2F3850;
 }
 
-.c15:focus {
+.c16:focus {
   box-shadow: none;
   outline: none;
   border-color: #107969;
 }
 
-.c15:disabled {
+.c16:disabled {
   color: #ABBBD1;
 }
 
-.c21 {
+.c22 {
   display: none;
 }
 
-.c25 {
+.c26 {
   margin-right: 5px;
   border-radius: 5px;
 }
 
-.c20:disabled + label > .c24 {
+.c21:disabled + label > .c25 {
   opacity: 0.5;
   cursor: not-allowed;
 }
 
-.c23 {
+.c24 {
   display: -webkit-box;
   display: -webkit-flex;
   display: -ms-flexbox;
@@ -1136,13 +1149,21 @@ exports[`<RegisterPage /> Should render and match the snapshot for participant 1
   width: 100%;
 }
 
-.c23:hover {
+.c24:hover {
   cursor: pointer;
 }
 
-.c20:disabled + .c22 {
+.c21:disabled + .c23 {
   opacity: 0.5;
   cursor: not-allowed;
+}
+
+.c10 {
+  width: 100%;
+  display: inherit;
+  -webkit-flex-direction: inherit;
+  -ms-flex-direction: inherit;
+  flex-direction: inherit;
 }
 
 @media only screen and (max-width:768px) {
@@ -1300,24 +1321,101 @@ exports[`<RegisterPage /> Should render and match the snapshot for participant 1
             Fields with an asterisk&lt;warningColor&gt;*&lt;/warningColor&gt; are required
           </p>
         </div>
-        <div
+        <form
+          action="#"
           class="c10"
-          width="100%"
         >
           <div
             class="c11"
+            width="100%"
+          >
+            <div
+              class="c12"
+            >
+              <label
+                for="firstName"
+              >
+                <p
+                  class="c13"
+                  font-size="12px"
+                  width="fit-content"
+                >
+                  First Name
+                  <span
+                    class="c14"
+                    color="#D2371D"
+                  >
+                    *
+                  </span>
+                </p>
+              </label>
+              <div
+                class="c15"
+                width="100%"
+              >
+                <input
+                  class="c16"
+                  height="46"
+                  id="firstName"
+                  name="firstName"
+                  placeholder="Enter first name"
+                  type="text"
+                  value=""
+                  width="100%"
+                />
+              </div>
+            </div>
+            <div
+              class="c17"
+            >
+              <label
+                for="lastName"
+              >
+                <p
+                  class="c13"
+                  font-size="12px"
+                  width="fit-content"
+                >
+                  Last name
+                  <span
+                    class="c14"
+                    color="#D2371D"
+                  >
+                    *
+                  </span>
+                </p>
+              </label>
+              <div
+                class="c15"
+                width="100%"
+              >
+                <input
+                  class="c16"
+                  height="46"
+                  id="lastName"
+                  name="lastName"
+                  placeholder="Enter last name"
+                  type="text"
+                  value=""
+                  width="100%"
+                />
+              </div>
+            </div>
+          </div>
+          <div
+            class="c17"
           >
             <label
-              for="firstName"
+              for="email"
             >
               <p
-                class="c12"
+                class="c13"
                 font-size="12px"
                 width="fit-content"
               >
-                First Name
+                E-mail address
                 <span
-                  class="c13"
+                  class="c14"
                   color="#D2371D"
                 >
                   *
@@ -1325,35 +1423,35 @@ exports[`<RegisterPage /> Should render and match the snapshot for participant 1
               </p>
             </label>
             <div
-              class="c14"
+              class="c15"
               width="100%"
             >
               <input
-                class="c15"
+                class="c16"
                 height="46"
-                id="firstName"
-                name="firstName"
-                placeholder="Enter first name"
-                type="text"
+                id="email"
+                name="email"
+                placeholder="Enter e-mail address"
+                type="email"
                 value=""
                 width="100%"
               />
             </div>
           </div>
           <div
-            class="c16"
+            class="c17"
           >
             <label
-              for="lastName"
+              for="password"
             >
               <p
-                class="c12"
+                class="c13"
                 font-size="12px"
                 width="fit-content"
               >
-                Last name
+                Password
                 <span
-                  class="c13"
+                  class="c14"
                   color="#D2371D"
                 >
                   *
@@ -1361,188 +1459,116 @@ exports[`<RegisterPage /> Should render and match the snapshot for participant 1
               </p>
             </label>
             <div
-              class="c14"
+              class="c15"
               width="100%"
             >
               <input
-                class="c15"
+                class="c16"
                 height="46"
-                id="lastName"
-                name="lastName"
-                placeholder="Enter last name"
-                type="text"
+                id="password"
+                name="password"
+                placeholder="Enter password"
+                type="password"
                 value=""
                 width="100%"
               />
             </div>
           </div>
-        </div>
-        <div
-          class="c16"
-        >
-          <label
-            for="email"
-          >
-            <p
-              class="c12"
-              font-size="12px"
-              width="fit-content"
-            >
-              E-mail address
-              <span
-                class="c13"
-                color="#D2371D"
-              >
-                *
-              </span>
-            </p>
-          </label>
           <div
-            class="c14"
-            width="100%"
+            class="c17"
           >
-            <input
-              class="c15"
-              height="46"
-              id="email"
-              name="email"
-              placeholder="Enter e-mail address"
-              type="email"
-              value=""
-              width="100%"
-            />
-          </div>
-        </div>
-        <div
-          class="c16"
-        >
-          <label
-            for="password"
-          >
-            <p
-              class="c12"
-              font-size="12px"
-              width="fit-content"
+            <label
+              for="passwordConfirmation"
             >
-              Password
-              <span
+              <p
                 class="c13"
-                color="#D2371D"
+                font-size="12px"
+                width="fit-content"
               >
-                *
-              </span>
-            </p>
-          </label>
-          <div
-            class="c14"
-            width="100%"
-          >
-            <input
+                Password confirmation
+                <span
+                  class="c14"
+                  color="#D2371D"
+                >
+                  *
+                </span>
+              </p>
+            </label>
+            <div
               class="c15"
-              height="46"
-              id="password"
-              name="password"
-              placeholder="Enter password"
-              type="password"
-              value=""
               width="100%"
-            />
-          </div>
-        </div>
-        <div
-          class="c16"
-        >
-          <label
-            for="passwordConfirmation"
-          >
-            <p
-              class="c12"
-              font-size="12px"
-              width="fit-content"
             >
-              Password confirmation
-              <span
-                class="c13"
-                color="#D2371D"
-              >
-                *
-              </span>
-            </p>
-          </label>
-          <div
-            class="c14"
-            width="100%"
-          >
-            <input
-              class="c15"
-              height="46"
-              id="passwordConfirmation"
-              name="passwordConfirmation"
-              placeholder="Retype your password"
-              type="password"
-              value=""
-              width="100%"
-            />
+              <input
+                class="c16"
+                height="46"
+                id="passwordConfirmation"
+                name="passwordConfirmation"
+                placeholder="Retype your password"
+                type="password"
+                value=""
+                width="100%"
+              />
+            </div>
           </div>
-        </div>
-        <div
-          class="c17"
-        >
           <div
             class="c18"
           >
             <div
               class="c19"
             >
-              <input
-                class="c20 c21"
-                id="terms"
-                type="checkbox"
-              />
-              <label
-                class="c22 c23"
-                for="terms"
+              <div
+                class="c20"
               >
-                <img
-                  class="c24 c25"
-                  src="IMAGE_MOCK"
+                <input
+                  class="c21 c22"
+                  id="terms"
+                  type="checkbox"
                 />
-                Accept
-                <p
-                  class="c26"
-                  color="#B727EA"
-                  font-weight="bold"
+                <label
+                  class="c23 c24"
+                  for="terms"
                 >
-                  Terms and conditions & Privacy Policy
-                </p>
-              </label>
+                  <img
+                    class="c25 c26"
+                    src="IMAGE_MOCK"
+                  />
+                  Accept
+                  <p
+                    class="c27"
+                    color="#B727EA"
+                    font-weight="bold"
+                  >
+                    Terms and conditions & Privacy Policy
+                  </p>
+                </label>
+              </div>
             </div>
           </div>
-        </div>
-        <button
-          class="c27"
-          color="primary"
-          height="46"
-          radius="100px"
-          type="submit"
-        >
-          Create an account
-        </button>
-        <div
-          class="c28"
-          width="100%"
-        >
-          <a
-            href="/login"
+          <button
+            class="c28"
+            color="primary"
+            height="46"
+            radius="100px"
+            type="submit"
           >
-            <button
-              class="c29"
-              color="#B727EA"
+            Create an account
+          </button>
+          <div
+            class="c29"
+            width="100%"
+          >
+            <a
+              href="/login"
             >
-              I already have an account
-            </button>
-          </a>
-        </div>
+              <button
+                class="c30"
+                color="#B727EA"
+              >
+                I already have an account
+              </button>
+            </a>
+          </div>
+        </form>
       </div>
     </div>
   </div>

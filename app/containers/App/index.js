@@ -68,6 +68,7 @@ import InboxPage from 'containers/InboxPage/Loadable';
 import ArchivePage from 'containers/ArchivePage/Loadable';
 import UserInterventionPage from 'containers/UserInterventionPage/Loadable';
 import VerifyShortLinkPage from 'containers/VerifyShortLinkPage/Loadable';
+import AccessibilityStatementPage from 'containers/AccessibiltyStatementPage/Loadable';
 import ChatWidget from 'containers/ChatWidget';
 import NavigatorAvailabilityModal from 'containers/NavigatorAvailabilityModal';
 
@@ -534,6 +535,11 @@ export function App({ user, fetchSelfDetails }) {
             navbarId: NAVIGATION.DEFAULT,
             activeTab: null,
           }}
+        />
+        <AppRoute
+          exact
+          path="/accessibility-statement"
+          component={AccessibilityStatementPage}
         />
         <AppRoute
           exact

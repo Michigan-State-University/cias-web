@@ -39,6 +39,7 @@ import BackButton from 'components/BackButton';
 import Img from 'components/Img';
 import { Row, Col } from 'components/ReactGridSystem';
 import { FileDisplayItem } from 'components/FileDisplayItem';
+import MarkupContainer from 'components/MarkupContainer';
 
 import messages from './messages';
 import UserSessionTile from './UserSessionTile';
@@ -142,7 +143,9 @@ const UserInterventionPage = () => {
       {additionalText && (
         <>
           <Divider width={100} my={24} />
-          <Markup content={additionalText} />
+          <MarkupContainer>
+            <Markup content={additionalText} />
+          </MarkupContainer>
         </>
       )}
       <Row mt={30}>
