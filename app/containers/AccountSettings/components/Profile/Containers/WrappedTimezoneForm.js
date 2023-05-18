@@ -8,32 +8,37 @@ import { createStructuredSelector } from 'reselect';
 import {
   editUserRequest,
   editUserSaga,
-  makeSelectUser,
+  makeSelectUserTimeZone,
 } from 'global/reducers/auth';
 import { useInjectSaga } from 'redux-injectors';
 
-import TimezoneForm from 'components/AccountSettings/TimezoneForm';
+import { TimezoneForm } from 'components/TimezoneForm';
 
-const WrappedTimezoneForm = ({ formatMessage, user, editUser }) => {
+const WrappedTimezoneForm = ({ formatMessage, userTimeZone, editUser }) => {
   useInjectSaga({ key: 'editUser', saga: editUserSaga });
+
+  const handleChange = (timeZone) => {
+    editUser({ timeZone });
+  };
 
   return (
     <TimezoneForm
       formatMessage={formatMessage}
-      user={user}
-      editUser={editUser}
+      timeZone={userTimeZone}
+      onChange={handleChange}
+      pr={10}
     />
   );
 };
 
 WrappedTimezoneForm.propTypes = {
   formatMessage: PropTypes.func,
-  user: PropTypes.object,
+  userTimeZone: PropTypes.string,
   editUser: PropTypes.func,
 };
 
 const mapStateToProps = createStructuredSelector({
-  user: makeSelectUser(),
+  userTimeZone: makeSelectUserTimeZone(),
 });
 
 const mapDispatchToProps = {

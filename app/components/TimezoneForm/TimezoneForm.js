@@ -3,16 +3,17 @@ import PropTypes from 'prop-types';
 import { Formik } from 'formik';
 import dayjs from 'dayjs';
 
-import FormikSelect from 'components/FormikSelect';
 import { TIMEZONES } from 'utils/timezones';
+
+import FormikSelect from 'components/FormikSelect';
 
 import messages from './messages';
 
 const timezoneLabel = (timeZone) =>
   `${timeZone} (UTC ${dayjs().tz(timeZone).format('Z')})`;
 
-const initialValues = (user) => {
-  const { timeZone } = user;
+const initialValues = (timeZone) => {
+  if (!timeZone) return { timeZone: null };
   return {
     timeZone: {
       value: timeZone,
@@ -21,10 +22,16 @@ const initialValues = (user) => {
   };
 };
 
-const TimezoneForm = ({ formatMessage, user, editUser }) => {
-  const onSubmit = ({ timeZone }, { setSubmitting }) => {
-    const { value } = timeZone || {};
-    if (value) editUser({ timeZone: value });
+export const TimezoneForm = ({
+  formatMessage,
+  timeZone,
+  onChange,
+  disabled,
+  ...props
+}) => {
+  const onSubmit = (values, { setSubmitting }) => {
+    const { value } = values.timeZone || {};
+    if (onChange && value) onChange(value);
     setSubmitting(false);
   };
 
@@ -38,15 +45,18 @@ const TimezoneForm = ({ formatMessage, user, editUser }) => {
   );
 
   return (
-    <Formik initialValues={initialValues(user)} onSubmit={onSubmit}>
+    <Formik
+      initialValues={initialValues(timeZone)}
+      onSubmit={onSubmit}
+      enableReinitialize
+    >
       {() => (
         <FormikSelect
-          columnStyleProps={{
-            pr: 10,
-          }}
+          columnStyleProps={props}
           formikKey="timeZone"
           label={formatMessage(messages.timeZoneLabel)}
           options={timezoneOptions}
+          disabled={disabled}
         />
       )}
     </Formik>
@@ -55,10 +65,7 @@ const TimezoneForm = ({ formatMessage, user, editUser }) => {
 
 TimezoneForm.propTypes = {
   formatMessage: PropTypes.func,
-  user: PropTypes.shape({
-    timeZone: PropTypes.string,
-  }),
-  editUser: PropTypes.func,
+  timeZone: PropTypes.string,
+  onChange: PropTypes.func,
+  disabled: PropTypes.bool,
 };
-
-export default TimezoneForm;

@@ -50,6 +50,27 @@ exports[`<SettingsSessionPage /> Should render and match the snapshot 1`] = `
   color: unset;
 }
 
+.c29 {
+  width: auto;
+  height: auto;
+  display: block;
+  border-radius: 5px;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  color: unset;
+}
+
+.c37 {
+  width: auto;
+  height: auto;
+  display: block;
+  border-radius: 5px;
+  opacity: 0.5;
+  color: unset;
+}
+
 .c4 {
   margin: 0;
   font-family: DM Sans;
@@ -70,7 +91,17 @@ exports[`<SettingsSessionPage /> Should render and match the snapshot 1`] = `
   color: #2F3850;
 }
 
-.c29 {
+.c39 {
+  margin: 0;
+  font-family: DM Sans;
+  font-size: 15px;
+  line-height: 150%;
+  margin-top: 45px;
+  margin-bottom: 20px;
+  color: #2F3850;
+}
+
+.c42 {
   margin: 0;
   font-family: DM Sans;
   font-size: 15px;
@@ -103,7 +134,6 @@ exports[`<SettingsSessionPage /> Should render and match the snapshot 1`] = `
   align-items: center;
   margin-bottom: 15px;
   padding-bottom: 15px;
-  border-bottom: 1px solid #E9F1FB;
 }
 
 .c10 {
@@ -180,6 +210,55 @@ exports[`<SettingsSessionPage /> Should render and match the snapshot 1`] = `
   -ms-flex-direction: row;
   flex-direction: row;
   height: auto;
+  -webkit-align-content: center;
+  -ms-flex-line-pack: center;
+  align-content: center;
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  gap: 8px;
+}
+
+.c31 {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-flex-direction: row;
+  -ms-flex-direction: row;
+  flex-direction: row;
+  height: auto;
+}
+
+.c34 {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-flex-direction: row;
+  -ms-flex-direction: row;
+  flex-direction: row;
+  height: auto;
+  -webkit-align-content: center;
+  -ms-flex-line-pack: center;
+  align-content: center;
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  width: 100%;
+}
+
+.c40 {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-flex-direction: row;
+  -ms-flex-direction: row;
+  flex-direction: row;
+  height: auto;
   -webkit-box-pack: justify;
   -webkit-justify-content: space-between;
   -ms-flex-pack: justify;
@@ -194,11 +273,20 @@ exports[`<SettingsSessionPage /> Should render and match the snapshot 1`] = `
   align-items: center;
   margin-bottom: 15px;
   padding-bottom: 15px;
+  border-bottom: 1px solid #E9F1FB;
 }
 
 .c22 {
   width: auto;
   height: auto;
+}
+
+.c38 {
+  width: auto;
+  height: auto;
+  -webkit-transition: -webkit-transform 0.2s;
+  -webkit-transition: transform 0.2s;
+  transition: transform 0.2s;
 }
 
 .c20 {
@@ -208,7 +296,19 @@ exports[`<SettingsSessionPage /> Should render and match the snapshot 1`] = `
   color: #2F3850;
 }
 
-.c27 {
+.c33 {
+  font-family: DM Sans;
+  font-size: 13px;
+  line-height: 130%;
+  margin-bottom: 5px;
+  font-size: 13px;
+  color: #2F3850;
+  width: -webkit-fit-content;
+  width: -moz-fit-content;
+  width: fit-content;
+}
+
+.c41 {
   font-family: DM Sans;
   font-size: 13px;
   line-height: 130%;
@@ -216,7 +316,7 @@ exports[`<SettingsSessionPage /> Should render and match the snapshot 1`] = `
   color: #2F3850;
 }
 
-.c39 {
+.c52 {
   font-family: DM Sans;
   font-size: 13px;
   line-height: 130%;
@@ -236,7 +336,42 @@ exports[`<SettingsSessionPage /> Should render and match the snapshot 1`] = `
   height: 100%;
 }
 
-.c31 {
+.c27 {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-flex-direction: column;
+  -ms-flex-direction: column;
+  flex-direction: column;
+  width: 100%;
+}
+
+.c32 {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-flex-direction: column;
+  -ms-flex-direction: column;
+  flex-direction: column;
+  width: 100%;
+  opacity: 0.5;
+}
+
+.c36 {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-flex-direction: column;
+  -ms-flex-direction: column;
+  flex-direction: column;
+  width: 100%;
+  margin-top: 20px;
+}
+
+.c44 {
   display: -webkit-box;
   display: -webkit-flex;
   display: -ms-flexbox;
@@ -253,7 +388,7 @@ exports[`<SettingsSessionPage /> Should render and match the snapshot 1`] = `
   align-items: flex-start;
 }
 
-.c30 {
+.c43 {
   max-width: 100% !important;
   width: 100%;
   margin: 0 !important;
@@ -270,8 +405,8 @@ exports[`<SettingsSessionPage /> Should render and match the snapshot 1`] = `
   border-color: transparent;
   width: 100%;
   max-width: 200px;
-  padding-right: 0;
-  padding-left: 0;
+  padding-right: 12px;
+  padding-left: 12px;
   color: #2F3850;
   opacity: 0.5;
 }
@@ -315,6 +450,25 @@ exports[`<SettingsSessionPage /> Should render and match the snapshot 1`] = `
   color: #ABBBD1;
 }
 
+.c35 {
+  padding: 12px;
+  border-style: solid;
+  border-width: 1px;
+  border-color: #E9F1FB;
+  border-radius: 5px;
+  color: #2F3850;
+}
+
+.c35:focus {
+  box-shadow: none;
+  outline: none;
+  border-color: #107969;
+}
+
+.c35:disabled {
+  color: #ABBBD1;
+}
+
 .c8 {
   padding: 5px 10px;
   font-size: 13px;
@@ -331,16 +485,16 @@ exports[`<SettingsSessionPage /> Should render and match the snapshot 1`] = `
   border: 1px solid transparent;
 }
 
-.c34 {
+.c47 {
   display: none;
 }
 
-.c33:disabled + label > .c37 {
+.c46:disabled + label > .c50 {
   opacity: 0.5;
   cursor: not-allowed;
 }
 
-.c36 {
+.c49 {
   width: 100%;
   display: -webkit-box;
   display: -webkit-flex;
@@ -352,24 +506,36 @@ exports[`<SettingsSessionPage /> Should render and match the snapshot 1`] = `
   align-items: center;
 }
 
-.c36:hover {
+.c49:hover {
   cursor: pointer;
 }
 
-.c33:disabled + .c35 {
+.c46:disabled + .c48 {
   opacity: 0.5;
   cursor: not-allowed;
 }
 
-.c38 {
+.c51 {
   margin-left: 5px;
 }
 
-.c32 {
+.c45 {
   width: 100%;
   padding: 16px;
   border: 1px solid #E9F1FB;
   border-radius: 5px;
+}
+
+.c30 {
+  -webkit-flex: 1;
+  -ms-flex: 1;
+  flex: 1;
+  border-top: 1px solid;
+  width: 100%;
+  height: 0;
+  border-color: #E9F1FB;
+  margin-top: 15px;
+  margin-bottom: 15px;
 }
 
 .c23 {
@@ -488,6 +654,54 @@ exports[`<SettingsSessionPage /> Should render and match the snapshot 1`] = `
   background-color: #FFFFFF;
   border-radius: 5px;
   box-shadow: 0px 4px 20px #E3EEFB;
+}
+
+@media only screen and (min-width:768px) {
+
+}
+
+@media only screen and (min-width:960px) {
+
+}
+
+@media only screen and (min-width:1170px) {
+
+}
+
+@media only screen and (min-width:1360px) {
+
+}
+
+@media only screen and (min-width:768px) {
+
+}
+
+@media only screen and (min-width:960px) {
+
+}
+
+@media only screen and (min-width:1170px) {
+
+}
+
+@media only screen and (min-width:1360px) {
+
+}
+
+@media only screen and (min-width:768px) {
+
+}
+
+@media only screen and (min-width:960px) {
+
+}
+
+@media only screen and (min-width:1170px) {
+
+}
+
+@media only screen and (min-width:1360px) {
+
 }
 
 @media only screen and (min-width:768px) {
@@ -625,10 +839,191 @@ exports[`<SettingsSessionPage /> Should render and match the snapshot 1`] = `
     <h3
       class="c26"
     >
+      Autofinish settings
+    </h3>
+    <div
+      class="c3"
+    >
+      <div
+        class="c27"
+      >
+        <div
+          class="c10"
+        >
+          <input
+            aria-checked="false"
+            aria-disabled="true"
+            class="c12 c13"
+            data-cy="branching-intervention-toggle"
+            data-testid="switch-input"
+            disabled=""
+            id="autofinishEnabled"
+            role="switch"
+            type="checkbox"
+          />
+          <label
+            class="c14 c15"
+            for="autofinishEnabled"
+          >
+            <div
+              class="c16"
+              name="autofinishEnabled"
+              width="100%"
+            >
+              <div
+                class="c17 c18"
+              >
+                <div
+                  class="c28"
+                >
+                  Finish session automatically
+                  <div
+                    class="c29"
+                    display="flex"
+                  >
+                    <div
+                      class="c17"
+                      data-for="autofinish-enabled-tooltip-info"
+                      data-tip=""
+                    >
+                      <img
+                        alt="?"
+                        class="c22"
+                        src="IMAGE_MOCK"
+                      />
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div
+                class="c23"
+              >
+                <span
+                  class="c24 c25"
+                />
+              </div>
+            </div>
+          </label>
+        </div>
+      </div>
+      <div
+        class="c30"
+        color="#E9F1FB"
+        orientation="0"
+      />
+      <div
+        class="c31"
+      >
+        <div
+          class="c32"
+          disabled=""
+        >
+          <label
+            for="autofinishDelay"
+          >
+            <p
+              class="c33"
+              font-size="13"
+              width="fit-content"
+            >
+              Autofinish delay
+            </p>
+          </label>
+          <div
+            class="c34"
+            width="100%"
+          >
+            <input
+              class="c35"
+              id="autofinishDelay"
+              name="autofinishDelay"
+              type="text"
+              value=""
+            />
+          </div>
+        </div>
+        <div
+          class="c36"
+        >
+          <div
+            class="c37"
+            data-testid="select"
+            disabled=""
+          >
+            <div
+              class=" css-14jk2my-container"
+            >
+              <span
+                aria-atomic="false"
+                aria-live="polite"
+                aria-relevant="additions text"
+                class="css-1f43avz-a11yText-A11yText"
+              />
+              <div
+                class=" css-vz7ypb-control"
+              >
+                <div
+                  class=" css-g1d714-ValueContainer"
+                >
+                  <div
+                    class=" css-107lb6w-singleValue"
+                  >
+                    minutes
+                  </div>
+                  <div
+                    class="css-1bwsx9e-Input"
+                  >
+                    <div
+                      class=""
+                      style="display: inline-block;"
+                    >
+                      <input
+                        aria-autocomplete="list"
+                        autocapitalize="none"
+                        autocomplete="off"
+                        autocorrect="off"
+                        disabled=""
+                        id="timeUnit"
+                        spellcheck="false"
+                        style="box-sizing: content-box; width: 2px; border: 0px; opacity: 1; outline: 0; padding: 0px;"
+                        tabindex="0"
+                        type="text"
+                        value=""
+                      />
+                      <div
+                        style="position: absolute; top: 0px; left: 0px; visibility: hidden; height: 0px; overflow: scroll; white-space: pre; font-family: -webkit-small-control; letter-spacing: normal; text-transform: none;"
+                      />
+                    </div>
+                  </div>
+                </div>
+                <div
+                  class=" css-1hb7zxy-IndicatorsContainer"
+                >
+                  <div
+                    aria-hidden="true"
+                    class=" css-tlfecz-indicatorContainer"
+                  >
+                    <img
+                      alt="arrow"
+                      class="c38"
+                      src="IMAGE_MOCK"
+                      transform=""
+                    />
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <h3
+      class="c39"
+    >
       Narrator Settings
     </h3>
     <div
-      class="c9"
+      class="c40"
     >
       <div
         class="c10 c11"
@@ -660,7 +1055,7 @@ exports[`<SettingsSessionPage /> Should render and match the snapshot 1`] = `
                 class="c19"
               >
                 <p
-                  class="c27"
+                  class="c41"
                   font-weight="bold"
                 >
                   Narrator Active
@@ -679,7 +1074,7 @@ exports[`<SettingsSessionPage /> Should render and match the snapshot 1`] = `
       </div>
     </div>
     <div
-      class="c9"
+      class="c40"
     >
       <div
         class="c10 c11"
@@ -729,7 +1124,7 @@ exports[`<SettingsSessionPage /> Should render and match the snapshot 1`] = `
       </div>
     </div>
     <div
-      class="c28"
+      class="c9"
     >
       <div
         class="c10 c11"
@@ -779,12 +1174,12 @@ exports[`<SettingsSessionPage /> Should render and match the snapshot 1`] = `
       </div>
     </div>
     <h3
-      class="c29"
+      class="c42"
     >
       Default narrator
     </h3>
     <div
-      class="c30"
+      class="c43"
       style="box-sizing: border-box; position: relative; margin-left: auto; margin-right: auto; padding-left: 15px; padding-right: 15px; max-width: 960px;"
     >
       <div
@@ -793,28 +1188,28 @@ exports[`<SettingsSessionPage /> Should render and match the snapshot 1`] = `
       >
         <div
           align="start"
-          class="c31"
+          class="c44"
           style="box-sizing: border-box; min-height: 1px; position: relative; padding-left: 15px; padding-right: 15px; width: 100%; flex-basis: 0px; flex-grow: 1; flex-shrink: 0; max-width: 100%; margin-left: 0%;"
         >
           <div
-            class="c10 c32"
+            class="c10 c45"
           >
             <input
-              class="c33 c34"
+              class="c46 c47"
               disabled=""
               id="character-setting-peedy"
               type="radio"
             />
             <label
-              class="c35 c36"
+              class="c48 c49"
               for="character-setting-peedy"
             >
               <img
-                class="c37 "
+                class="c50 "
                 src="IMAGE_MOCK"
               />
               <div
-                class="c17 c38"
+                class="c17 c51"
               >
                 <div
                   class="c10"
@@ -823,7 +1218,7 @@ exports[`<SettingsSessionPage /> Should render and match the snapshot 1`] = `
                     class="c17"
                   >
                     <p
-                      class="c39"
+                      class="c52"
                     >
                       Peedy
                     </p>
@@ -842,28 +1237,28 @@ exports[`<SettingsSessionPage /> Should render and match the snapshot 1`] = `
         </div>
         <div
           align="start"
-          class="c31"
+          class="c44"
           style="box-sizing: border-box; min-height: 1px; position: relative; padding-left: 15px; padding-right: 15px; width: 100%; flex-basis: 0px; flex-grow: 1; flex-shrink: 0; max-width: 100%; margin-left: 0%;"
         >
           <div
-            class="c10 c32"
+            class="c10 c45"
           >
             <input
-              class="c33 c34"
+              class="c46 c47"
               disabled=""
               id="character-setting-emmi"
               type="radio"
             />
             <label
-              class="c35 c36"
+              class="c48 c49"
               for="character-setting-emmi"
             >
               <img
-                class="c37 "
+                class="c50 "
                 src="IMAGE_MOCK"
               />
               <div
-                class="c17 c38"
+                class="c17 c51"
               >
                 <div
                   class="c10"
@@ -872,7 +1267,7 @@ exports[`<SettingsSessionPage /> Should render and match the snapshot 1`] = `
                     class="c17"
                   >
                     <p
-                      class="c39"
+                      class="c52"
                     >
                       Emmi
                     </p>

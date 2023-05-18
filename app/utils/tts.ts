@@ -10,9 +10,10 @@ export const generateTTSArray = (text: string) =>
   splitAndKeep(htmlToPlainText(text), DELIMITERS);
 
 export const getFromQuestionTTS = (question: QuestionDTO) => {
-  const { settings: { subtitle } = { subtitle: true } } = question;
-
   switch (question.type) {
+    case QuestionTypes.TLFB_CONFIG:
+      return [];
+
     case QuestionTypes.TLFB_EVENTS: {
       const {
         body: {
@@ -39,10 +40,12 @@ export const getFromQuestionTTS = (question: QuestionDTO) => {
       return generateTTSArray(headQuestion);
     }
 
-    default:
+    default: {
+      const { settings: { subtitle } = { subtitle: true } } = question;
       return question.subtitle && subtitle
         ? generateTTSArray(question.subtitle)
         : [];
+    }
   }
 };
 

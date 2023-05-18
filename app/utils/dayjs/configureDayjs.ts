@@ -6,6 +6,8 @@ import localeData from 'dayjs/plugin/localeData';
 import customParseFormat from 'dayjs/plugin/customParseFormat';
 import minMax from 'dayjs/plugin/minMax';
 import advancedFormat from 'dayjs/plugin/advancedFormat';
+import localizedFormat from 'dayjs/plugin/localizedFormat';
+import objectSupport from 'dayjs/plugin/objectSupport';
 
 import { DEFAULT_LOCALE } from 'i18n';
 
@@ -20,6 +22,8 @@ export const configureDayjs = () => {
   dayjs.extend(customParseFormat);
   dayjs.extend(minMax);
   dayjs.extend(advancedFormat);
+  dayjs.extend(localizedFormat);
+  dayjs.extend(objectSupport);
 
   // Create custom locales
   Object.entries(CustomLocalesConfig).forEach(([localeName, config]) => {

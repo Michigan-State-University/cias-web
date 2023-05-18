@@ -1,4 +1,4 @@
-import React, { useContext } from 'react';
+import React, { useCallback, useContext } from 'react';
 import PropTypes from 'prop-types';
 import { compose } from 'redux';
 import { connect } from 'react-redux';
@@ -40,12 +40,15 @@ import {
   changeContent,
   removeTextMessageVariantRequest,
   changeSelectedVariantId,
+  deleteTextMessageVariantAttachmentRequest,
+  uploadTextMessageVariantAttachmentRequest,
 } from 'global/reducers/textMessages';
 
 import { ModalType, useModal } from 'components/Modal';
 import settingsMessages from '../../containers/TextMessageSettings/messages';
 import { TextMessagesContext } from '../../utils';
 import messages from './messages';
+import { TextMessageAttachment } from '../TextMessageAttachment';
 
 const originalTextIconProps = {
   position: 'absolute',
@@ -56,16 +59,22 @@ const originalTextIconProps = {
 const VariantItem = ({
   open,
   index,
-  variant: { id, formulaMatch, content, originalText },
+  variant: { id, formulaMatch, content, originalText, attachment },
   changeFormulaMatchAction,
   changeContentAction,
   removeVariant,
   disabled,
   changeSelectedVariant,
   dragHandleProps,
+  textMessageId,
+  variantState,
+  uploadAttachment,
+  deleteAttachment,
 }) => {
-  const { sessionId, interventionId, formatMessage } =
+  const { sessionId, interventionId, formatMessage, editingPossible } =
     useContext(TextMessagesContext);
+
+  const { uploadAttachmentLoading } = variantState;
 
   const toggleCollapsable = () => {
     if (open) changeSelectedVariant('');
@@ -100,6 +109,17 @@ const VariantItem = ({
       confirmAction: handleDeleteCase,
     },
   });
+
+  const handleAddAttachment = useCallback(
+    (file) => {
+      uploadAttachment(textMessageId, id, file);
+    },
+    [textMessageId, id],
+  );
+
+  const handleDeleteAttachment = useCallback(() => {
+    deleteAttachment(textMessageId, id);
+  }, [textMessageId, id]);
 
   return (
     <Collapse
@@ -216,6 +236,13 @@ const VariantItem = ({
               />
             </OriginalTextHover>
           </Box>
+          <TextMessageAttachment
+            attachment={attachment}
+            loading={uploadAttachmentLoading}
+            onAdd={handleAddAttachment}
+            onDelete={handleDeleteAttachment}
+            editingPossible={editingPossible}
+          />
         </Row>
       </Container>
     </Collapse>
@@ -232,6 +259,10 @@ VariantItem.propTypes = {
   disabled: PropTypes.bool,
   changeSelectedVariant: PropTypes.func,
   dragHandleProps: PropTypes.object,
+  textMessageId: PropTypes.string,
+  variantState: PropTypes.object,
+  uploadAttachment: PropTypes.func,
+  deleteAttachment: PropTypes.func,
 };
 VariantItem.defaultProps = {
   open: false,
@@ -242,6 +273,8 @@ const mapDispatchToProps = {
   changeContentAction: changeContent,
   removeVariant: removeTextMessageVariantRequest,
   changeSelectedVariant: changeSelectedVariantId,
+  uploadAttachment: uploadTextMessageVariantAttachmentRequest,
+  deleteAttachment: deleteTextMessageVariantAttachmentRequest,
 };
 
 const withConnect = connect(null, mapDispatchToProps);

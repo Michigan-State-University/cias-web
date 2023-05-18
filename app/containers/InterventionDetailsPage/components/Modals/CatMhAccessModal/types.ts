@@ -6,5 +6,5 @@ export type ModalUIData = {
   isAccessRevoked: boolean;
   licenseType: CatMhLicenseType;
   testNumber: number;
-  currentTestNumber: number;
+  testsLeft: number;
 };

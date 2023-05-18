@@ -304,19 +304,19 @@ exports[`<LoginPage /> Should render and match the snapshot 1`] = `
   margin-left: 15px;
 }
 
-.c22 {
-  -webkit-align-self: flex-end;
-  -ms-flex-item-align: end;
-  align-self: flex-end;
-  line-height: 17px;
-}
-
 .c11 {
   width: 100%;
   display: inherit;
   -webkit-flex-direction: inherit;
   -ms-flex-direction: inherit;
   flex-direction: inherit;
+}
+
+.c22 {
+  -webkit-align-self: flex-end;
+  -ms-flex-item-align: end;
+  align-self: flex-end;
+  line-height: 17px;
 }
 
 @media only screen and (min-width:768px) {

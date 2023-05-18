@@ -24,7 +24,11 @@ export default defineMessages({
   },
   skipQuestion: {
     id: `${scope}.skipQuestion`,
-    defaultMessage: 'Skip question',
+    defaultMessage: 'Skip',
+  },
+  skipIconAlt: {
+    id: `${scope}.skipIconAlt`,
+    defaultMessage: 'Forward triangle icon',
   },
   skipQuestionModalHeader: {
     id: `${scope}.skipQuestionModalHeader`,

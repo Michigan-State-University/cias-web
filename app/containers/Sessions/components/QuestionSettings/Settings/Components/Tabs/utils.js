@@ -1,17 +1,32 @@
 import isNullOrUndefined from 'utils/isNullOrUndefined';
 
+import messages from '../messages';
+
 export const orderSettings = (settings) =>
   settings && {
-    video: settings.video,
-    image: settings.image,
-    title: settings.title,
-    subtitle: settings.subtitle,
-    narrator_skippable: settings.narrator_skippable,
+    ...(!isNullOrUndefined(settings.video) && {
+      video: settings.video,
+    }),
+    ...(!isNullOrUndefined(settings.image) && {
+      image: settings.image,
+    }),
+    ...(!isNullOrUndefined(settings.title) && {
+      title: settings.title,
+    }),
+    ...(!isNullOrUndefined(settings.subtitle) && {
+      subtitle: settings.subtitle,
+    }),
+    ...(!isNullOrUndefined(settings.narrator_skippable) && {
+      narrator_skippable: settings.narrator_skippable,
+    }),
     ...(!isNullOrUndefined(settings.proceed_button) && {
       proceed_button: settings.proceed_button,
     }),
     ...(!isNullOrUndefined(settings.required) && {
       required: settings.required,
+    }),
+    ...(!isNullOrUndefined(settings.start_autofinish_timer) && {
+      start_autofinish_timer: settings.start_autofinish_timer,
     }),
     ...(!isNullOrUndefined(settings.show_number) && {
       show_number: settings.show_number,
@@ -20,3 +35,13 @@ export const orderSettings = (settings) =>
       text_limit: settings.text_limit,
     }),
   };
+
+export const getSettingOptionTooltipText = (formatMessage, setting) => {
+  let tooltipText;
+  try {
+    tooltipText = formatMessage(messages[`${setting}_tooltip_text`]);
+  } catch (e) {
+    tooltipText = null;
+  }
+  return tooltipText;
+};
