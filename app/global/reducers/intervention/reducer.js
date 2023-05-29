@@ -10,7 +10,7 @@ import {
 } from 'global/reducers/session/constants';
 import { findIndexById } from 'utils/arrayUtils';
 
-import { updateItemById } from 'utils/reduxUtils';
+import { assignDraftItems, updateItemById } from 'utils/reduxUtils';
 import sessionSettingsReducer from './sessionSettings/reducer';
 import {
   FETCH_INTERVENTION_REQUEST,
@@ -92,14 +92,26 @@ import {
   EDIT_SHORT_LINKS_REQUEST,
   EDIT_SHORT_LINKS_SUCCESS,
   EDIT_SHORT_LINKS_ERROR,
+  FETCH_COLLABORATORS_SUCCESS,
+  FETCH_COLLABORATORS_REQUEST,
+  FETCH_COLLABORATORS_ERROR,
+  CHANGE_COLLABORATOR_SETTING_REQUEST,
+  CHANGE_COLLABORATOR_SETTING_SUCCESS,
+  CHANGE_COLLABORATOR_SETTING_ERROR,
+  REMOVE_COLLABORATOR_REQUEST,
+  REMOVE_COLLABORATOR_SUCCESS,
+  REMOVE_COLLABORATOR_ERROR,
+  ADD_COLLABORATORS_SUCCESS,
 } from './constants';
 
 export const initialState = {
   currentSessionIndex: 0,
   intervention: null,
   invites: [],
+  collaborators: [],
   cache: {
     intervention: null,
+    collaborators: [],
   },
   loaders: {
     fetchInterventionLoading: true,
@@ -128,6 +140,7 @@ export const initialState = {
     exportInterventionLoading: false,
     changeInterventionNarrator: false,
     editShortLinks: false,
+    collaborators: false,
   },
   errors: {
     fetchInterventionError: null,
@@ -357,11 +370,12 @@ export const interventionReducer = (state = initialState, action) =>
           draft.loaders.fetchSessionEmailsLoading = true;
         draft.errors.fetchSessionEmailsError = null;
         break;
-      case FETCH_SESSION_EMAILS_SUCCESS:
+      case FETCH_SESSION_EMAILS_SUCCESS: {
         const { index, emails } = action.payload;
         draft.intervention.sessions[index].emails = emails;
         draft.loaders.fetchSessionEmailsLoading = false;
         break;
+      }
 
       case FETCH_SESSION_EMAILS_ERROR:
         draft.loaders.fetchSessionEmailsLoading = false;
@@ -584,6 +598,53 @@ export const interventionReducer = (state = initialState, action) =>
         draft.loaders.editShortLinks = false;
         draft.errors.editShortLinks = action.payload.error;
         draft.intervention.shortLinks = state.cache.intervention.shortLinks;
+        break;
+      }
+      case FETCH_COLLABORATORS_REQUEST: {
+        draft.loaders.collaborators = true;
+        break;
+      }
+      case FETCH_COLLABORATORS_SUCCESS: {
+        draft.loaders.collaborators = false;
+        draft.collaborators = action.payload.collaborators;
+        break;
+      }
+      case FETCH_COLLABORATORS_ERROR: {
+        draft.loaders.collaborators = false;
+        break;
+      }
+      case CHANGE_COLLABORATOR_SETTING_REQUEST: {
+        const { index, setting, value } = action.payload;
+        assignDraftItems(draft.cache.collaborators, draft.collaborators);
+        draft.collaborators[index][setting] = value;
+        break;
+      }
+      case CHANGE_COLLABORATOR_SETTING_SUCCESS: {
+        draft.cache.collaborators = null;
+        break;
+      }
+      case CHANGE_COLLABORATOR_SETTING_ERROR: {
+        draft.collaborators = state.cache.collaborators;
+        draft.cache.collaborators = null;
+        break;
+      }
+      case REMOVE_COLLABORATOR_REQUEST: {
+        const { index } = action.payload;
+        assignDraftItems(draft.cache.collaborators, draft.collaborators);
+        draft.collaborators.splice(index, 1);
+        break;
+      }
+      case REMOVE_COLLABORATOR_SUCCESS: {
+        draft.cache.collaborators = null;
+        break;
+      }
+      case REMOVE_COLLABORATOR_ERROR: {
+        draft.collaborators = state.cache.collaborators;
+        draft.cache.collaborators = null;
+        break;
+      }
+      case ADD_COLLABORATORS_SUCCESS: {
+        draft.collaborators.push(...action.payload.collaborators);
         break;
       }
     }

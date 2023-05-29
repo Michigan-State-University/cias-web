@@ -16,6 +16,10 @@ import {
   generateConversationsTranscriptSaga,
   changeInterventionNarratorSaga,
   editShortLinksSaga,
+  addCollaboratorsSaga,
+  fetchCollaboratorsSaga,
+  changeCollaboratorSettingSaga,
+  removeCollaboratorSaga,
 } from 'global/reducers/intervention/sagas';
 
 export default function* interventionDetailsPageSagas() {
@@ -36,5 +40,20 @@ export default function* interventionDetailsPageSagas() {
     generateConversationsTranscriptSaga(),
     changeInterventionNarratorSaga(),
     editShortLinksSaga(),
+    removeCollaboratorSaga(),
   ]);
 }
+
+function* allCollaboratorsSaga() {
+  yield all([
+    addCollaboratorsSaga(),
+    fetchCollaboratorsSaga(),
+    changeCollaboratorSettingSaga(),
+    removeCollaboratorSaga(),
+  ]);
+}
+
+export const withAllCollaboratorsSaga = {
+  key: 'allCollaboratorsSaga',
+  saga: allCollaboratorsSaga,
+};

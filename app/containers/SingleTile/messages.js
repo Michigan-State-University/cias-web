@@ -101,4 +101,8 @@ export default defineMessages({
     id: `${scope}.exportIntervention`,
     defaultMessage: 'Export Intervention',
   },
+  collaborate: {
+    id: `${scope}.collaborate`,
+    defaultMessage: 'Collaborate',
+  },
 });

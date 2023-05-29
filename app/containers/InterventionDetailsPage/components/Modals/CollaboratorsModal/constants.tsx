@@ -1,0 +1,1 @@
+export const COLLABORATORS_MODAL_WIDTH = '600px';

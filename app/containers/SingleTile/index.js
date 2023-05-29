@@ -20,6 +20,7 @@ import AddAppIcon from 'assets/svg/app-add.svg';
 import TranslateIcon from 'assets/svg/translate.svg';
 import DocumentIcon from 'assets/svg/document.svg';
 import DownloadIcon from 'assets/svg/download-line.svg';
+import CollaborateIcon from 'assets/svg/collaborate-icon.svg';
 
 import { colors } from 'theme';
 
@@ -44,6 +45,8 @@ import isNullOrUndefined from 'utils/isNullOrUndefined';
 
 import {
   CatMhAccessModal,
+  CollaboratorsModal,
+  COLLABORATORS_MODAL_WIDTH,
   InterventionAssignOrganizationModal,
   INTERVENTION_ASSIGN_ORGANIZATION_MODAL_WIDTH,
 } from 'containers/InterventionDetailsPage/components/Modals';
@@ -91,6 +94,7 @@ const SingleTile = ({
     useState(false);
 
   const [translateModalVisible, setTranslateModalVisible] = useState(false);
+  const [collaborateModalVisible, setCollaborateModalVisible] = useState(false);
 
   const closeShareWithResearchersModal = () =>
     setShareWithResearchersModalVisible(false);
@@ -104,6 +108,8 @@ const SingleTile = ({
 
   const closeTranslateModal = () => setTranslateModalVisible(false);
   const openTranslateModal = () => setTranslateModalVisible(true);
+  const closeCollaborateModal = () => setCollaborateModalVisible(false);
+  const openCollaborateModal = () => setCollaborateModalVisible(true);
 
   const handleArchiveIntervention = () => archiveIntervention(id);
 
@@ -212,6 +218,12 @@ const SingleTile = ({
       action: handleExportIntervention,
       color: colors.bluewood,
     },
+    {
+      id: 'collaborate',
+      label: formatMessage(messages.collaborate),
+      icon: CollaborateIcon,
+      action: openCollaborateModal,
+    },
   ];
 
   const preventDefault = (e) => {
@@ -262,6 +274,15 @@ const SingleTile = ({
           organizationId={organizationId}
           onClose={closeAssignOrganizationModal}
         />
+      </Modal>
+
+      <Modal
+        title={formatMessage(messages.collaborate)}
+        onClose={closeCollaborateModal}
+        visible={collaborateModalVisible}
+        width={COLLABORATORS_MODAL_WIDTH}
+      >
+        <CollaboratorsModal interventionId={id} />
       </Modal>
 
       <StyledLink to={link}>

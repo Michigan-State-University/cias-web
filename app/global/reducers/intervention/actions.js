@@ -81,6 +81,18 @@ import {
   EDIT_SHORT_LINKS_REQUEST,
   EDIT_SHORT_LINKS_ERROR,
   EDIT_SHORT_LINKS_SUCCESS,
+  ADD_COLLABORATORS_REQUEST,
+  ADD_COLLABORATORS_ERROR,
+  ADD_COLLABORATORS_SUCCESS,
+  FETCH_COLLABORATORS_REQUEST,
+  FETCH_COLLABORATORS_ERROR,
+  FETCH_COLLABORATORS_SUCCESS,
+  CHANGE_COLLABORATOR_SETTING_REQUEST,
+  CHANGE_COLLABORATOR_SETTING_ERROR,
+  CHANGE_COLLABORATOR_SETTING_SUCCESS,
+  REMOVE_COLLABORATOR_REQUEST,
+  REMOVE_COLLABORATOR_ERROR,
+  REMOVE_COLLABORATOR_SUCCESS,
 } from './constants';
 
 export const fetchInterventionRequest = (id) =>
@@ -318,3 +330,55 @@ export const editShortLinksSuccess = () =>
   actionBuilder(EDIT_SHORT_LINKS_SUCCESS);
 export const editShortLinksError = (error) =>
   actionBuilder(EDIT_SHORT_LINKS_ERROR, { error });
+
+export const addCollaboratorsRequest = (emails, interventionId, id) =>
+  actionBuilder(ADD_COLLABORATORS_REQUEST, {
+    emails,
+    interventionId,
+    id,
+  });
+export const addCollaboratorsSuccess = (collaborators) =>
+  actionBuilder(ADD_COLLABORATORS_SUCCESS, { collaborators });
+export const addCollaboratorsError = (error) =>
+  actionBuilder(ADD_COLLABORATORS_ERROR, { error });
+
+export const fetchCollaboratorsRequest = (interventionId) =>
+  actionBuilder(FETCH_COLLABORATORS_REQUEST, { interventionId });
+export const fetchCollaboratorsSuccess = (collaborators) =>
+  actionBuilder(FETCH_COLLABORATORS_SUCCESS, { collaborators });
+export const fetchCollaboratorsError = (error) =>
+  actionBuilder(FETCH_COLLABORATORS_ERROR, { error });
+
+export const changeCollaboratorSettingRequest = (
+  setting,
+  value,
+  collaboratorId,
+  index,
+  interventionId,
+) =>
+  actionBuilder(CHANGE_COLLABORATOR_SETTING_REQUEST, {
+    setting,
+    value,
+    collaboratorId,
+    index,
+    interventionId,
+  });
+export const changeCollaboratorSettingSuccess = () =>
+  actionBuilder(CHANGE_COLLABORATOR_SETTING_SUCCESS);
+export const changeCollaboratorSettingError = () =>
+  actionBuilder(CHANGE_COLLABORATOR_SETTING_ERROR);
+
+export const removeCollaboratorRequest = (
+  collaboratorId,
+  index,
+  interventionId,
+) =>
+  actionBuilder(REMOVE_COLLABORATOR_REQUEST, {
+    collaboratorId,
+    index,
+    interventionId,
+  });
+export const removeCollaboratorSuccess = () =>
+  actionBuilder(REMOVE_COLLABORATOR_SUCCESS);
+export const removeCollaboratorError = () =>
+  actionBuilder(REMOVE_COLLABORATOR_ERROR);

@@ -23,6 +23,8 @@ import {
   FETCH_RESEARCHERS_REQUEST,
   FETCH_RESEARCHERS_SUCCESS,
   FETCH_RESEARCHERS_FAILURE,
+  MAKE_RESEARCHER_LOADING,
+  MAKE_RESEARCHER_NOT_LOADING,
 } from './constants';
 
 export const fetchUsers = (roles, name, page, includeInactive, teamId) =>
@@ -82,3 +84,8 @@ export const deleteUserFromTeamSuccess = () =>
   actionBuilder(DELETE_USER_FROM_TEAM_SUCCESS, {});
 export const deleteUserFromTeamFailure = (error) =>
   actionBuilder(DELETE_USER_FROM_TEAM_FAILURE, error);
+
+export const makeResearcherLoading = (id) =>
+  actionBuilder(MAKE_RESEARCHER_LOADING, { id });
+export const makeResearcherNotLoading = (id) =>
+  actionBuilder(MAKE_RESEARCHER_NOT_LOADING, { id });

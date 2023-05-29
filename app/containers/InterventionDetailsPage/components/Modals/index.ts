@@ -6,3 +6,8 @@ export {
 } from './InterventionAssignOrganizationModal';
 
 export { CatMhAccessModal } from './CatMhAccessModal';
+
+export {
+  default as CollaboratorsModal,
+  COLLABORATORS_MODAL_WIDTH,
+} from './CollaboratorsModal';

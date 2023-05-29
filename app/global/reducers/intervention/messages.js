@@ -130,4 +130,24 @@ export default defineMessages({
     id: `${scope}.interventionSettingsSaved`,
     defaultMessage: 'Intervention settings have been saved',
   },
+  addCollaboratorSuccess: {
+    id: `${scope}.addCollaboratorSuccess`,
+    defaultMessage: 'Collaborator has been invited',
+  },
+  addCollaboratorError: {
+    id: `${scope}.addCollaboratorError`,
+    defaultMessage: `Couldn't add collaborator`,
+  },
+  fetchCollaboratorsError: {
+    id: `${scope}.fetchCollaboratorsError`,
+    defaultMessage: `Couldn't fetch collaborator`,
+  },
+  changeCollaboratorSettingError: {
+    id: `${scope}.changeCollaboratorSettingError`,
+    defaultMessage: `Couldn't change collaborator setting`,
+  },
+  removeCollaboratorError: {
+    id: `${scope}.removeCollaboratorError`,
+    defaultMessage: `Couldn't remove collaborator`,
+  },
 });

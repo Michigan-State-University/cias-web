@@ -29,6 +29,7 @@ import TranslateIcon from 'assets/svg/translate.svg';
 import DocumentIcon from 'assets/svg/document.svg';
 import QuestionMarkIcon from 'assets/svg/grey-question-mark.svg';
 import DownloadIcon from 'assets/svg/download-line.svg';
+import CollaborateIcon from 'assets/svg/collaborate-icon.svg';
 
 import isNullOrUndefined from 'utils/isNullOrUndefined';
 import { reorder } from 'utils/reorder';
@@ -100,6 +101,8 @@ import SessionCreateButton from './components/SessionCreateButton/index';
 import SessionListItem from './components/SessionListItem';
 import {
   CatMhAccessModal,
+  CollaboratorsModal,
+  COLLABORATORS_MODAL_WIDTH,
   InterventionAssignOrganizationModal,
   InterventionSettingsModal,
   INTERVENTION_ASSIGN_ORGANIZATION_MODAL_WIDTH,
@@ -183,6 +186,7 @@ export function InterventionDetailsPage({
   ] = useState(false);
   const [assignOrganizationModalVisible, setAssignOrganizationModalVisible] =
     useState(false);
+  const [collaborateModalVisible, setCollaborateModalVisible] = useState(false);
 
   const closeSendCopyModal = () => setSendCopyModalVisible(false);
   const openSendCopyModal = () => setSendCopyModalVisible(true);
@@ -193,6 +197,8 @@ export function InterventionDetailsPage({
     setAssignOrganizationModalVisible(false);
   const openAssignOrganizationModal = () =>
     setAssignOrganizationModalVisible(true);
+  const closeCollaborateModal = () => setCollaborateModalVisible(false);
+  const openCollaborateModal = () => setCollaborateModalVisible(true);
   const handleCopyIntervention = () =>
     copyIntervention({ interventionId: id, withoutRedirect: true });
   const handleArchiveIntervention = () =>
@@ -302,6 +308,12 @@ export function InterventionDetailsPage({
       icon: DownloadIcon,
       action: handleExportIntervention,
       color: colors.bluewood,
+    },
+    {
+      id: 'collaborate',
+      label: formatMessage(messages.collaborate),
+      icon: CollaborateIcon,
+      action: openCollaborateModal,
     },
   ];
 
@@ -515,6 +527,15 @@ export function InterventionDetailsPage({
             organizationId={organizationId}
             onClose={closeAssignOrganizationModal}
           />
+        </Modal>
+
+        <Modal
+          title={formatMessage(messages.collaborate)}
+          onClose={closeCollaborateModal}
+          visible={collaborateModalVisible}
+          width={COLLABORATORS_MODAL_WIDTH}
+        >
+          <CollaboratorsModal interventionId={interventionId} />
         </Modal>
 
         <Header
