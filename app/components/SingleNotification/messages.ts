@@ -39,4 +39,12 @@ export default defineMessages({
     id: `${scope}.importFailedNotificationContent`,
     defaultMessage: 'There was an issue with importing intervention',
   },
+  newCollaboratorAddedTitle: {
+    id: `${scope}.newCollaboratorAddedTitle`,
+    defaultMessage: 'Invitation to collaborate',
+  },
+  newCollaboratorAddedContent: {
+    id: `${scope}.newCollaboratorAddedContent`,
+    defaultMessage: `You have been invited to collaborate on <secondaryColorBold>{interventionName}</secondaryColorBold>`,
+  },
 });

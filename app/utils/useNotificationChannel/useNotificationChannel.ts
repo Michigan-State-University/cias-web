@@ -65,7 +65,8 @@ export const useNotificationChannel = () => {
         );
         break;
       }
-      case NotificationEvent.SUCCESSFULLY_RESTORED_INTERVENTION: {
+      case NotificationEvent.SUCCESSFULLY_RESTORED_INTERVENTION:
+      case NotificationEvent.NEW_COLLABORATOR_ADDED: {
         dispatch(refetchInterventions());
         break;
       }

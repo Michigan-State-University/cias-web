@@ -35,6 +35,11 @@ export type SuccessfullyRestoredInterventionNotificationData = {
 
 export type UnsuccessfulImportNotificationData = {};
 
+export type NewCollaboratorAddedNotificationData = {
+  interventionName: string;
+  interventionId: string;
+};
+
 // Union type
 export type NotificationData =
   | NewConversationNotificationData
@@ -42,4 +47,5 @@ export type NotificationData =
   | InterventionConversationsTranscriptReadyNotificationData
   | SuccessfullyRestoredInterventionNotificationData
   | UnsuccessfulImportNotificationData
-  | NewNarratorWasSetNotificationData;
+  | NewNarratorWasSetNotificationData
+  | NewCollaboratorAddedNotificationData;

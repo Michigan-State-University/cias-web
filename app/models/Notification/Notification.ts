@@ -2,6 +2,7 @@ import { NotificationEvent } from './NotificationEvent';
 import {
   ConversationTranscriptReadyNotificationData,
   InterventionConversationsTranscriptReadyNotificationData,
+  NewCollaboratorAddedNotificationData,
   NewConversationNotificationData,
   NewNarratorWasSetNotificationData,
   NotificationData,
@@ -53,6 +54,11 @@ export type UnsuccessfulImportNotification = GenericNotification<
   UnsuccessfulImportNotificationData
 >;
 
+export type NewCollaboratorAddedNotification = GenericNotification<
+  NotificationEvent.NEW_COLLABORATOR_ADDED,
+  NewCollaboratorAddedNotificationData
+>;
+
 // Union type
 export type Notification =
   | NewConversationNotification
@@ -60,4 +66,5 @@ export type Notification =
   | ConversationTranscriptReadyNotification
   | InterventionConversationsTranscriptReadyNotification
   | SuccessfullyRestoredInterventionNotification
-  | UnsuccessfulImportNotification;
+  | UnsuccessfulImportNotification
+  | NewCollaboratorAddedNotification;

@@ -3,12 +3,13 @@ import React from 'react';
 import { Notification, NotificationEvent } from 'models/Notification';
 
 import {
-  NewConversationNotificationLayout,
   ConversationTranscriptReadyNotificationLayout,
   InterventionConversationsTranscriptReadyNotificationLayout,
+  NewConversationNotificationLayout,
+  NewNarratorWasSetNotificationLayout,
   SuccessfullyRestoredInterventionNotificationLayout,
   UnsuccessfulImportNotificationLayout,
-  NewNarratorWasSetNotificationLayout,
+  NewCollaboratorAddedNotificationLayout,
 } from './components';
 import { NotificationLayoutCommonProps } from './types';
 
@@ -58,6 +59,13 @@ const SingleNotification = ({ notification, ...commonProps }: Props) => {
     case NotificationEvent.NEW_NARRATOR_WAS_SET:
       return (
         <NewNarratorWasSetNotificationLayout
+          notification={notification}
+          {...commonProps}
+        />
+      );
+    case NotificationEvent.NEW_COLLABORATOR_ADDED:
+      return (
+        <NewCollaboratorAddedNotificationLayout
           notification={notification}
           {...commonProps}
         />
