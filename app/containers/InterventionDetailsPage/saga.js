@@ -40,7 +40,6 @@ export default function* interventionDetailsPageSagas() {
     generateConversationsTranscriptSaga(),
     changeInterventionNarratorSaga(),
     editShortLinksSaga(),
-    removeCollaboratorSaga(),
   ]);
 }
 

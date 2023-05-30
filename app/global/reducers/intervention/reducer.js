@@ -10,7 +10,11 @@ import {
 } from 'global/reducers/session/constants';
 import { findIndexById } from 'utils/arrayUtils';
 
-import { assignDraftItems, updateItemById } from 'utils/reduxUtils';
+import {
+  assignDraftItems,
+  deleteItemByIndex,
+  updateItemById,
+} from 'utils/reduxUtils';
 import sessionSettingsReducer from './sessionSettings/reducer';
 import {
   FETCH_INTERVENTION_REQUEST,
@@ -607,6 +611,7 @@ export const interventionReducer = (state = initialState, action) =>
       case FETCH_COLLABORATORS_SUCCESS: {
         draft.loaders.collaborators = false;
         draft.collaborators = action.payload.collaborators;
+        assignDraftItems(draft.collaborators, draft.cache.collaborators);
         break;
       }
       case FETCH_COLLABORATORS_ERROR: {
@@ -615,36 +620,33 @@ export const interventionReducer = (state = initialState, action) =>
       }
       case CHANGE_COLLABORATOR_SETTING_REQUEST: {
         const { index, setting, value } = action.payload;
-        assignDraftItems(draft.cache.collaborators, draft.collaborators);
         draft.collaborators[index][setting] = value;
         break;
       }
       case CHANGE_COLLABORATOR_SETTING_SUCCESS: {
-        draft.cache.collaborators = null;
+        assignDraftItems(draft.collaborators, draft.cache.collaborators);
         break;
       }
       case CHANGE_COLLABORATOR_SETTING_ERROR: {
-        draft.collaborators = state.cache.collaborators;
-        draft.cache.collaborators = null;
+        assignDraftItems(draft.cache.collaborators, draft.collaborators);
         break;
       }
       case REMOVE_COLLABORATOR_REQUEST: {
         const { index } = action.payload;
-        assignDraftItems(draft.cache.collaborators, draft.collaborators);
-        draft.collaborators.splice(index, 1);
+        deleteItemByIndex(draft.collaborators, index);
         break;
       }
       case REMOVE_COLLABORATOR_SUCCESS: {
-        draft.cache.collaborators = null;
+        assignDraftItems(draft.collaborators, draft.cache.collaborators);
         break;
       }
       case REMOVE_COLLABORATOR_ERROR: {
-        draft.collaborators = state.cache.collaborators;
-        draft.cache.collaborators = null;
+        assignDraftItems(draft.cache.collaborators, draft.collaborators);
         break;
       }
       case ADD_COLLABORATORS_SUCCESS: {
         draft.collaborators.push(...action.payload.collaborators);
+        assignDraftItems(draft.collaborators, draft.cache.collaborators);
         break;
       }
     }

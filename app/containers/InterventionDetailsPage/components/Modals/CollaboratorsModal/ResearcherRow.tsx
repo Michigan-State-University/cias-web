@@ -12,6 +12,7 @@ import InviteIcon from 'assets/svg/invite.svg';
 
 import { StripedTR, TD } from 'components/Table';
 import { ImageButton } from 'components/Button';
+import Row from 'components/Row';
 
 import messages from './messages';
 
@@ -41,13 +42,15 @@ const ResearcherRow = ({
       <TD padding={8}>{fullName}</TD>
       <TD padding={8}>{email}</TD>
       <TD pl={8}>
-        <ImageButton
-          src={InviteIcon}
-          onClick={inviteCollaborator}
-          title={formatMessage(messages.inviteResearcher)}
-          loading={loading}
-          spinnerProps={{ margin: 'initial', color: colors.black }}
-        />
+        <Row>
+          <ImageButton
+            src={InviteIcon}
+            onClick={inviteCollaborator}
+            title={formatMessage(messages.inviteResearcher)}
+            loading={loading}
+            spinnerProps={{ margin: 'initial', color: colors.black }}
+          />
+        </Row>
       </TD>
     </StripedTR>
   );
