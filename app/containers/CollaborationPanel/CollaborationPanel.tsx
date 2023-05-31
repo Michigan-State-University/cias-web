@@ -28,6 +28,7 @@ const Component: React.FC<Props> = () => {
       bg={colors.lightDivider}
       height={40}
       boxSizing="border-box"
+      flexShrink={0}
     >
       <Text fontSize={15} lineHeight={1.5}>
         {formatMessage(messages.currentMode)}
