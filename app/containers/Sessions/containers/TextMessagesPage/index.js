@@ -8,8 +8,7 @@ import { connect } from 'react-redux';
 import { useIntl } from 'react-intl';
 import { Helmet } from 'react-helmet';
 
-import Row from 'components/Row';
-import { Filters } from 'components/Filters';
+import { canEdit } from 'models/Status/statusPermissions';
 
 import {
   textMessagesReducer,
@@ -38,7 +37,8 @@ import {
   sessionReducer,
 } from 'global/reducers/session';
 
-import { canEdit } from 'models/Status/statusPermissions';
+import Row from 'components/Row';
+import { Filters } from 'components/Filters';
 
 import TextMessageTiles from './containers/TextMessageTitles';
 import TextMessageSettings from './containers/TextMessageSettings';

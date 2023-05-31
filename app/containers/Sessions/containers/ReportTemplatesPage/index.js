@@ -8,6 +8,9 @@ import { injectIntl, IntlShape } from 'react-intl';
 
 import { injectReducer, injectSaga } from 'redux-injectors';
 
+import { TemplateSection } from 'models/ReportTemplate/TemplateSection';
+import { canEditReportTemplate } from 'models/Status/statusPermissions';
+
 import {
   reportTemplatesReducer,
   reportTemplatesSaga,
@@ -31,9 +34,6 @@ import {
   getSessionSaga,
   sessionReducer,
 } from 'global/reducers/session';
-
-import { TemplateSection } from 'models/ReportTemplate/TemplateSection';
-import { canEditReportTemplate } from 'models/Status/statusPermissions';
 
 import Box from 'components/Box';
 
