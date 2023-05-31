@@ -79,6 +79,7 @@ import {
 import SettingsPanel from 'containers/SettingsPanel';
 import TranslateInterventionModal from 'containers/TranslateInterventionModal/index';
 import { ShareBox, ShareBoxType } from 'containers/ShareBox';
+import { CollaborationPanel } from 'containers/CollaborationPanel';
 
 import Modal, {
   ConfirmationModal,
@@ -459,6 +460,7 @@ export function InterventionDetailsPage({
         canDeleteSession: deletionPossible,
       }}
     >
+      <CollaborationPanel />
       <AppContainer>
         <Helmet>
           <title>{formatMessage(messages.pageTitle, { name })}</title>
