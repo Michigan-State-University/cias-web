@@ -98,8 +98,8 @@ const TextMessagingPage = ({
         <title>{formatMessage(messages.pageTitle)}</title>
       </Helmet>
 
-      <Row maxHeight="100%" style={{ justifyContent: 'center' }}>
-        <Col md={8}>
+      <Row maxHeight="100%" height="100%" style={{ justifyContent: 'center' }}>
+        <Col md={8} style={{ overflowY: 'auto' }}>
           <Filters
             initialFilters={INITIAL_FILTERS}
             filters={filters}
@@ -109,7 +109,7 @@ const TextMessagingPage = ({
           <TextMessageTiles />
         </Col>
         {selectedMessageId && selectedMessage && (
-          <Col>
+          <Col style={{ overflowY: 'auto' }}>
             <TextMessageSettings />
           </Col>
         )}
