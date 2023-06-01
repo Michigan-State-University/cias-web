@@ -60,8 +60,7 @@ const SettingsInterventionPage = () => {
         display="flex"
         justify="center"
         align="center"
-        pt={40}
-        pb={100}
+        py={40}
         bg={colors.zirkon}
       >
         <StyledColumn height="100%">
