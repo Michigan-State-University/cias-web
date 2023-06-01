@@ -172,8 +172,8 @@ exports[`<QuestionSettings /> Should render and match the snapshot 1`] = `
   border-width: 0;
   width: 30px;
   height: 30px;
-  position: fixed;
-  top: 85px;
+  position: absolute;
+  top: 15px;
   right: 22px;
 }
 
