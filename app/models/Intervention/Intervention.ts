@@ -73,4 +73,5 @@ export interface Intervention {
   conversationsPresent: boolean;
   conversationsTranscript: Nullable<AppFile>;
   sessions: Session[];
+  collaboratingUsersIds: string[];
 }

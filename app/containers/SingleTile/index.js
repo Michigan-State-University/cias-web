@@ -60,6 +60,7 @@ import Modal, { ModalType, useModal } from 'components/Modal';
 import Row from 'components/Row';
 import Badge from 'components/Badge';
 import Loader from 'components/Loader';
+
 import TranslateInterventionModal from 'containers/TranslateInterventionModal';
 import interventionDetailsPageSagas from 'containers/InterventionDetailsPage/saga';
 
@@ -72,6 +73,7 @@ import {
   StatusIndicator,
   TileInfo,
 } from './styled';
+import { CollaboratingIndicator } from './CollaboratingIndicator';
 
 const SingleTile = ({
   tileData,
@@ -141,6 +143,7 @@ const SingleTile = ({
     createdAt,
     updatedAt,
     googleLanguageId,
+    collaboratingUsersIds,
   } = tileData || {};
 
   const handleCsvRequest = () => sendCsv(id);
@@ -234,6 +237,8 @@ const SingleTile = ({
   const copyInterventionToResearchers = (users) =>
     copyIntervention({ interventionId: id, users });
 
+  const isCollaborating = collaboratingUsersIds?.includes(userId);
+
   if (isLoading)
     return (
       <TileContainer>
@@ -288,14 +293,17 @@ const SingleTile = ({
       <StyledLink to={link}>
         <TileContainer>
           <Heading>
-            <div>
+            <Row gap={12} align="center">
+              {isCollaborating && <CollaboratingIndicator />}
               {status && (
-                <>
-                  <FormattedMessage {...globalMessages.statuses[status]} />
+                <Row align="center" gap={5}>
+                  <Text lineHeight={1}>
+                    <FormattedMessage {...globalMessages.statuses[status]} />
+                  </Text>
                   <StatusIndicator status={status} />
-                </>
+                </Row>
               )}
-            </div>
+            </Row>
             {!participantView && (
               <div onClick={preventDefault}>
                 <Dropdown options={options} />
