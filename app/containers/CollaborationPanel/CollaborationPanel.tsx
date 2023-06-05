@@ -17,14 +17,17 @@ export type Props = {};
 const Component: React.FC<Props> = () => {
   const { formatMessage } = useIntl();
 
+  // TODO https://htdevelopers.atlassian.net/browse/CIAS30-3416 Create useInterventionChannel hook
+
   const isCollaborating = useSelector(makeSelectIsCollaboratingIntervention());
 
+  // TODO https://htdevelopers.atlassian.net/browse/CIAS30-3416 replace with redux
   const [editing, setEditing] = useState(false);
 
+  // TODO https://htdevelopers.atlassian.net/browse/CIAS30-3416 replace with channel action
   const handleToggle = (editingEnabled: boolean) => setEditing(editingEnabled);
 
-  // TODO negate condition
-  if (isCollaborating) return null;
+  if (!isCollaborating) return null;
 
   return (
     <Row
@@ -45,6 +48,8 @@ const Component: React.FC<Props> = () => {
       <Switch
         id="enable-intervention-editing"
         checked={editing}
+        // TODO https://htdevelopers.atlassian.net/browse/CIAS30-3416 replace above with below
+        // checked={(editing || startingEditing) && !stoppingEditing}
         onToggle={handleToggle}
         labelPosition={LabelPosition.Right}
         labelOffset={8}
@@ -53,6 +58,7 @@ const Component: React.FC<Props> = () => {
           {formatMessage(messages.enableEditing)}
         </Text>
       </Switch>
+      {/*  TODO Show loader here while starting or stopping editing */}
     </Row>
   );
 };
