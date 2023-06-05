@@ -1,16 +1,13 @@
+import { useRef } from 'react';
 import isEqual from 'lodash/isEqual';
-import { useEffect, useRef } from 'react';
 import cloneDeep from 'lodash/cloneDeep';
 
 const useDeepObjectMemo = <T>(obj: T) => {
-  const ref = useRef<T>();
-  ref.current = obj;
+  const ref = useRef<T>(cloneDeep(obj));
 
-  useEffect(() => {
-    if (!isEqual(obj, ref.current)) {
-      ref.current = cloneDeep(obj);
-    }
-  }, [obj]);
+  if (!isEqual(obj, ref.current)) {
+    ref.current = cloneDeep(obj);
+  }
 
   return ref.current;
 };
