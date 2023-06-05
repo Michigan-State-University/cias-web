@@ -1,10 +1,16 @@
-import React, { memo, useState } from 'react';
+import React, { memo, useContext } from 'react';
 import { useIntl } from 'react-intl';
 import { useSelector } from 'react-redux';
 
 import { colors, themeColors } from 'theme';
 
-import { makeSelectIsCollaboratingIntervention } from 'global/reducers/intervention';
+import {
+  makeSelectCollaborationLoading,
+  makeSelectIsCollaboratingIntervention,
+  makeSelectIsCurrentUserEditor,
+} from 'global/reducers/intervention';
+
+import { InterventionChannelContext } from 'utils/useInterventionChannel';
 
 import Row from 'components/Row';
 import Text from 'components/Text';
@@ -17,24 +23,21 @@ export type Props = {};
 const Component: React.FC<Props> = () => {
   const { formatMessage } = useIntl();
 
-  // TODO https://htdevelopers.atlassian.net/browse/CIAS30-3416 Create useInterventionChannel hook
+  const interventionChannel = useContext(InterventionChannelContext);
 
-  const isCollaborating = useSelector(makeSelectIsCollaboratingIntervention());
+  const hasCollaborators = useSelector(makeSelectIsCollaboratingIntervention());
+  const isLoading = useSelector(makeSelectCollaborationLoading());
+  const isCurrentUserEditor = useSelector(makeSelectIsCurrentUserEditor());
 
-  // TODO https://htdevelopers.atlassian.net/browse/CIAS30-3416 replace with redux
-  const [editing, setEditing] = useState(false);
-  const [loading, setLoading] = useState(false);
-
-  // TODO https://htdevelopers.atlassian.net/browse/CIAS30-3416 replace with channel action
   const handleToggle = (editingEnabled: boolean) => {
-    setLoading(true);
-    setTimeout(() => {
-      setEditing(editingEnabled);
-      setLoading(false);
-    }, 1000);
+    if (editingEnabled) {
+      interventionChannel?.startEditing();
+      return;
+    }
+    interventionChannel?.stopEditing();
   };
 
-  if (!isCollaborating) return null;
+  if (!hasCollaborators) return null;
 
   return (
     <Row
@@ -46,21 +49,19 @@ const Component: React.FC<Props> = () => {
       flexShrink={0}
       gap={16}
       borderBottom={`1px solid ${
-        editing ? themeColors.secondary : colors.lightDivider
+        isCurrentUserEditor ? themeColors.secondary : colors.lightDivider
       }`}
     >
       <Text fontSize={15} lineHeight={1.5}>
-        {formatMessage(messages.currentMode, { editing })}
+        {formatMessage(messages.currentMode, { editing: isCurrentUserEditor })}
       </Text>
       <Switch
         id="enable-intervention-editing"
-        checked={editing}
-        // TODO https://htdevelopers.atlassian.net/browse/CIAS30-3416 replace above with below
-        // checked={(editing || startingEditing) && !stoppingEditing}
+        checked={isCurrentUserEditor}
         onToggle={handleToggle}
         labelPosition={LabelPosition.Right}
         labelOffset={8}
-        loading={loading}
+        loading={isLoading}
       >
         <Text fontSize={15} lineHeight={1.5}>
           {formatMessage(messages.enableEditing)}

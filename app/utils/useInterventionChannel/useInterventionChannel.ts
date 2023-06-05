@@ -6,6 +6,12 @@ import { SocketMessageListener, useSocket } from 'utils/useSocket';
 import objectToCamelCase from 'utils/objectToCamelCase';
 
 import {
+  setCurrentEditor,
+  setStartingEditing,
+  setStoppingEditing,
+} from 'global/reducers/intervention';
+
+import {
   InterventionChannelMessage,
   EditingStartedData,
   InterventionChannelAction,
@@ -16,11 +22,6 @@ import {
   InterventionChannelActionName,
   InterventionChannelMessageTopic,
 } from './constants';
-import {
-  setCurrentEditor,
-  setStartingEditing,
-  setStoppingEditing,
-} from '../../global/reducers/intervention';
 
 export type InterventionChannel = ReturnType<typeof useInterventionChannel>;
 
