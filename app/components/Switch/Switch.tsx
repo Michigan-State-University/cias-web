@@ -8,6 +8,7 @@ import React, {
 
 import Row from 'components/Row';
 import { LayoutProps, MarginProps } from 'components/BaseComponentStyles';
+import Loader from 'components/Loader';
 
 import SwitchLabelWrapper from './SwitchLabelWrapper';
 
@@ -44,6 +45,7 @@ export type Props = {
   labelOffset?: number;
   onBlur?: HTMLInputElement['onblur'];
   ariaLabel?: AriaAttributes['aria-label'];
+  loading?: boolean;
 } & ChangeHandlerProps &
   LayoutProps &
   MarginProps;
@@ -61,6 +63,7 @@ const Switch = ({
   onBlur,
   nativeChangeHandler,
   ariaLabel,
+  loading,
   ...props
 }: Props): JSX.Element => {
   const handleOnChange: ChangeEventHandler<HTMLInputElement> = (event) => {
@@ -87,7 +90,8 @@ const Switch = ({
       <StyledLabel htmlFor={id}>
         <SwitchLabelWrapper labelPosition={labelPosition} {...props}>
           <SwitchWrapper>
-            <Slider />
+            {!loading && <Slider />}
+            {loading && <Loader type="inline" size={21} />}
           </SwitchWrapper>
 
           <LabelContent

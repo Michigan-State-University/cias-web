@@ -23,9 +23,16 @@ const Component: React.FC<Props> = () => {
 
   // TODO https://htdevelopers.atlassian.net/browse/CIAS30-3416 replace with redux
   const [editing, setEditing] = useState(false);
+  const [loading, setLoading] = useState(false);
 
   // TODO https://htdevelopers.atlassian.net/browse/CIAS30-3416 replace with channel action
-  const handleToggle = (editingEnabled: boolean) => setEditing(editingEnabled);
+  const handleToggle = (editingEnabled: boolean) => {
+    setLoading(true);
+    setTimeout(() => {
+      setEditing(editingEnabled);
+      setLoading(false);
+    }, 1000);
+  };
 
   if (!isCollaborating) return null;
 
@@ -53,12 +60,12 @@ const Component: React.FC<Props> = () => {
         onToggle={handleToggle}
         labelPosition={LabelPosition.Right}
         labelOffset={8}
+        loading={loading}
       >
         <Text fontSize={15} lineHeight={1.5}>
           {formatMessage(messages.enableEditing)}
         </Text>
       </Switch>
-      {/*  TODO Show loader here while starting or stopping editing */}
     </Row>
   );
 };
