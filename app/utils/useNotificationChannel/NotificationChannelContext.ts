@@ -1,13 +1,10 @@
 import { createContext } from 'react';
 
-import { useNotificationChannel } from './useNotificationChannel';
+import { NotificationChannel } from './useNotificationChannel';
 
 export type NotificationChannelContextType = {
   readConversationNotifications: (conversationId: string) => void;
-} & Pick<
-  ReturnType<typeof useNotificationChannel>,
-  'readNotification' | 'setNavigatorAvailability'
->;
+} & Pick<NotificationChannel, 'readNotification' | 'setNavigatorAvailability'>;
 
 export const NotificationChannelContext =
   createContext<Nullable<NotificationChannelContextType>>(null);
