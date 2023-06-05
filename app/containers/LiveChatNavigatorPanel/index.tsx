@@ -15,7 +15,7 @@ import {
   SendMessageData,
 } from 'utils/useConversationChannel';
 import useQuery from 'utils/useQuery';
-import { NotificationsActionsContext } from 'utils/useNotificationChannel';
+import { NotificationChannelContext } from 'utils/useNotificationChannel';
 
 import { MessagesSectionBody } from './containers/MessagesSectionBody';
 import MessagesSectionHeader from './containers/MessagesSectionHeader';
@@ -55,7 +55,7 @@ export const LiveChatNavigatorPanel = ({
   onArchiveConversation,
 }: Props) => {
   const { readConversationNotifications } =
-    useContext(NotificationsActionsContext) ?? {};
+    useContext(NotificationChannelContext) ?? {};
 
   const openedConversationId = useSelector(makeSelectOpenedConversationId());
 
