@@ -3,6 +3,7 @@ import { AppFile } from 'models/File';
 import { Session } from 'models/Session';
 
 import { InterventionInvite } from './InterventionInvite';
+import { Editor } from './Editor';
 
 export enum InterventionStatus {
   DRAFT = 'draft',
@@ -74,4 +75,5 @@ export interface Intervention {
   conversationsTranscript: Nullable<AppFile>;
   sessions: Session[];
   collaboratingUsersIds: string[];
+  currentEditor: Nullable<Editor>;
 }
