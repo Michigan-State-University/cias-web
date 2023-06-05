@@ -1,4 +1,7 @@
 import { createSelector } from 'reselect';
+
+import { makeSelectUserId } from 'global/reducers/auth';
+
 import { initialState } from './reducer';
 
 export const selectIntervention = (state) => state.intervention || initialState;
@@ -65,4 +68,17 @@ export const makeSelectInterventionCollaborators = () =>
 export const makeSelectIsCollaboratingIntervention = () =>
   createSelector(makeSelectIntervention(), (intervention) =>
     Boolean(intervention?.collaboratingUsersIds?.length),
+  );
+
+export const makeSelectCurrentEditor = () =>
+  createSelector(
+    makeSelectIntervention(),
+    (intervention) => intervention?.currentEditor ?? null,
+  );
+
+export const makeSelectIsCurrentUserEditor = () =>
+  createSelector(
+    makeSelectCurrentEditor(),
+    makeSelectUserId(),
+    (currentEditor, currentUserId) => currentEditor?.id === currentUserId,
   );

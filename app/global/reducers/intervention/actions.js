@@ -93,6 +93,9 @@ import {
   REMOVE_COLLABORATOR_REQUEST,
   REMOVE_COLLABORATOR_ERROR,
   REMOVE_COLLABORATOR_SUCCESS,
+  SET_CURRENT_EDITOR,
+  SET_STARTING_EDITING,
+  SET_STOPPING_EDITING,
 } from './constants';
 
 export const fetchInterventionRequest = (id) =>
@@ -382,3 +385,12 @@ export const removeCollaboratorSuccess = () =>
   actionBuilder(REMOVE_COLLABORATOR_SUCCESS);
 export const removeCollaboratorError = () =>
   actionBuilder(REMOVE_COLLABORATOR_ERROR);
+
+export const setCurrentEditor = (currentEditor) =>
+  actionBuilder(SET_CURRENT_EDITOR, { currentEditor });
+
+export const setStartingEditing = (startingEditing) =>
+  actionBuilder(SET_STARTING_EDITING, { startingEditing });
+
+export const setStoppingEditing = (stoppingEditing) =>
+  actionBuilder(SET_STOPPING_EDITING, { stoppingEditing });
