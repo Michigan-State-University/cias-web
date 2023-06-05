@@ -6,7 +6,7 @@ import { colors, themeColors } from 'theme';
 
 import {
   makeSelectCollaborationLoading,
-  makeSelectIsCollaboratingIntervention,
+  makeSelectHasCollaborators,
   makeSelectIsCurrentUserEditor,
 } from 'global/reducers/intervention';
 
@@ -25,9 +25,14 @@ const Component: React.FC<Props> = () => {
 
   const interventionChannel = useContext(InterventionChannelContext);
 
-  const hasCollaborators = useSelector(makeSelectIsCollaboratingIntervention());
+  const hasCollaborators = useSelector(makeSelectHasCollaborators());
   const isLoading = useSelector(makeSelectCollaborationLoading());
   const isCurrentUserEditor = useSelector(makeSelectIsCurrentUserEditor());
+
+  // TODO enable switch only if user has correct access
+  // TODO disable editing if switch is not on
+  // TODO display current editor if it isn't a current user
+  // TODO Hide participant data if user doesn't have correct access
 
   const handleToggle = (editingEnabled: boolean) => {
     if (editingEnabled) {
