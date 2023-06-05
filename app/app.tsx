@@ -48,6 +48,7 @@ import { polyfillI18n } from 'i18nPolyfill';
 
 import { SocketProvider } from 'components/ActionCable';
 import { NotificationChannelProvider } from 'containers/NotificationChannelProvider';
+import { InterventionChannelProvider } from 'containers/InterventionChannelProvider';
 
 import 'utils/axios';
 import { configureDayjs } from './utils/dayjs';
@@ -172,8 +173,10 @@ const render = (messages: any) => {
             <Sentry.ErrorBoundary fallback={ErrorPage}>
               <SocketProvider>
                 <NotificationChannelProvider>
-                  <ToastContainer />
-                  <App />
+                  <InterventionChannelProvider>
+                    <ToastContainer />
+                    <App />
+                  </InterventionChannelProvider>
                 </NotificationChannelProvider>
               </SocketProvider>
             </Sentry.ErrorBoundary>

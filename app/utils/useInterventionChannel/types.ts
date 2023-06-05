@@ -50,5 +50,5 @@ export type InterventionChannelAction =
   | StopEditingSocketAction;
 
 export type InterventionChannelConnectionParams = {
-  id: string;
+  id?: string;
 };

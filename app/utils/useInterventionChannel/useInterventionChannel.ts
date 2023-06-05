@@ -24,7 +24,7 @@ import {
 
 export type InterventionChannel = ReturnType<typeof useInterventionChannel>;
 
-export const useInterventionChannel = (id: string) => {
+export const useInterventionChannel = (interventionId?: string) => {
   const dispatch = useDispatch();
 
   const onEditingStarted = (data: EditingStartedData) => {
@@ -59,7 +59,8 @@ export const useInterventionChannel = (id: string) => {
     InterventionChannelAction,
     InterventionChannelConnectionParams
   >(INTERVENTION_CHANNEL_NAME, messageListener, {
-    socketConnectionParams: { id },
+    socketConnectionParams: { id: interventionId },
+    suspend: !interventionId,
   });
 
   const startEditing = () => {
