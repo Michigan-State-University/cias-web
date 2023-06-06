@@ -12,4 +12,9 @@ export default defineMessages({
     id: `${scope}.enableEditing`,
     defaultMessage: 'Enable Editing',
   },
+  editedByOtherUser: {
+    id: `${scope}.editedByOtherUser`,
+    defaultMessage:
+      'This intervention is now edited by {firstName} {lastName} ({email})',
+  },
 });

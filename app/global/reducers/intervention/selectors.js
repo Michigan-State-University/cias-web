@@ -89,3 +89,10 @@ export const makeSelectCollaborationLoading = () =>
     makeSelectInterventionLoader('stoppingEditing'),
     (startingEditing, stoppingEditing) => startingEditing || stoppingEditing,
   );
+
+export const makeSelectIsCurrentUserInterventionOwner = () =>
+  createSelector(
+    makeSelectIntervention(),
+    makeSelectUserId(),
+    (intervention, currentUserId) => intervention?.userId === currentUserId,
+  );
