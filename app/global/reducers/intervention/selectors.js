@@ -96,3 +96,9 @@ export const makeSelectIsCurrentUserInterventionOwner = () =>
     makeSelectUserId(),
     (intervention, currentUserId) => intervention?.userId === currentUserId,
   );
+
+export const makeSelectCurrentUserCollaboratorData = () =>
+  createSelector(
+    makeSelectIntervention(),
+    (intervention) => intervention?.currentUserCollaboratorData,
+  );

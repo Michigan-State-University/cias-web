@@ -5,12 +5,15 @@ import { useSelector } from 'react-redux';
 import { colors, themeColors } from 'theme';
 
 import { Editor } from 'models/Intervention';
+import { CollaboratorData } from 'models/Collaborator';
 
 import {
   makeSelectCollaborationLoading,
   makeSelectCurrentEditor,
+  makeSelectCurrentUserCollaboratorData,
   makeSelectHasCollaborators,
   makeSelectIsCurrentUserEditor,
+  makeSelectIsCurrentUserInterventionOwner,
 } from 'global/reducers/intervention';
 
 import { InterventionChannelContext } from 'utils/useInterventionChannel';
@@ -36,10 +39,17 @@ const Component: React.FC<Props> = () => {
   const currentEditor: Nullable<Editor> = useSelector(
     makeSelectCurrentEditor(),
   );
+  const isCurrentUserInterventionOwner: boolean = useSelector(
+    makeSelectIsCurrentUserInterventionOwner(),
+  );
+  const currentUserCollaboratorData: Nullable<CollaboratorData> = useSelector(
+    makeSelectCurrentUserCollaboratorData(),
+  );
 
   const editingByOtherUser = !!currentEditor && !isCurrentUserEditor;
+  const canEdit =
+    isCurrentUserInterventionOwner || currentUserCollaboratorData?.edit;
 
-  // TODO enable switch only if user has correct access
   // TODO disable editing if switch is not on
   // TODO Hide participant data if user doesn't have correct access
 
@@ -70,29 +80,33 @@ const Component: React.FC<Props> = () => {
       <Text fontSize={15} lineHeight={1.5} flexShrink={0}>
         {formatMessage(messages.currentMode, { editing: isCurrentUserEditor })}
       </Text>
-      <Row flexShrink={0} align="center">
-        <Switch
-          id="enable-intervention-editing"
-          checked={isCurrentUserEditor}
-          onToggle={handleToggle}
-          labelPosition={LabelPosition.Right}
-          labelOffset={8}
-          loading={isLoading}
-          disabled={editingByOtherUser}
-        >
-          <Text fontSize={15} lineHeight={1.5}>
-            {formatMessage(messages.enableEditing)}
-          </Text>
-        </Switch>
-      </Row>
-      {editingByOtherUser && (
-        <EllipsisText
-          text={formatMessage(messages.editedByOtherUser, {
-            ...currentEditor,
-          })}
-          fontSize={15}
-          lineHeight={1.5}
-        />
+      {canEdit && (
+        <>
+          <Row flexShrink={0} align="center">
+            <Switch
+              id="enable-intervention-editing"
+              checked={isCurrentUserEditor}
+              onToggle={handleToggle}
+              labelPosition={LabelPosition.Right}
+              labelOffset={8}
+              loading={isLoading}
+              disabled={editingByOtherUser}
+            >
+              <Text fontSize={15} lineHeight={1.5}>
+                {formatMessage(messages.enableEditing)}
+              </Text>
+            </Switch>
+          </Row>
+          {editingByOtherUser && (
+            <EllipsisText
+              text={formatMessage(messages.editedByOtherUser, {
+                ...currentEditor,
+              })}
+              fontSize={15}
+              lineHeight={1.5}
+            />
+          )}
+        </>
       )}
     </Row>
   );
