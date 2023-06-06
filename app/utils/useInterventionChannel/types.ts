@@ -10,7 +10,9 @@ import {
 // DATA TYPES
 
 export type StartEditingData = {};
-export type EditingStartedData = EditorDTO;
+export type EditingStartedData = {
+  current_editor: EditorDTO;
+};
 
 export type StopEditingData = {};
 export type EditingStoppedData = {};

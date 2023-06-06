@@ -28,8 +28,8 @@ export type InterventionChannel = ReturnType<typeof useInterventionChannel>;
 export const useInterventionChannel = (interventionId?: string) => {
   const dispatch = useDispatch();
 
-  const onEditingStarted = (data: EditingStartedData) => {
-    const currentEditor: Editor = objectToCamelCase(data);
+  const onEditingStarted = ({ current_editor }: EditingStartedData) => {
+    const currentEditor: Editor = objectToCamelCase(current_editor);
     dispatch(setCurrentEditor(currentEditor));
     dispatch(setStartingEditing(false));
   };
