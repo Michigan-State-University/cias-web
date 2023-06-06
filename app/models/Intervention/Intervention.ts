@@ -78,11 +78,5 @@ export interface Intervention {
   hasCollaborators: boolean;
   currentEditor: Nullable<Editor>;
   currentUserCollaboratorData: Nullable<CollaboratorData>;
-}
-
-export type InterventionListItem = Omit<
-  Intervention,
-  'hasCollaborators' | 'currentEditor' | 'currentUserCollaboratorData'
-> & {
   isCurrentUserCollaborator: boolean;
-};
+}
