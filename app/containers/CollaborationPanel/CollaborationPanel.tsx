@@ -52,6 +52,7 @@ const Component: React.FC<Props> = () => {
 
   // TODO disable editing if switch is not on
   // TODO Hide participant data if user doesn't have correct access
+  // TODO refresh intervention on editing stopped
 
   const handleToggle = (editingEnabled: boolean) => {
     if (editingEnabled) {
