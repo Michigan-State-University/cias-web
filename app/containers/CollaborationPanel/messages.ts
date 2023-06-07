@@ -14,7 +14,6 @@ export default defineMessages({
   },
   editedByOtherUser: {
     id: `${scope}.editedByOtherUser`,
-    defaultMessage:
-      'This intervention is now edited by {firstName} {lastName} ({email})',
+    defaultMessage: 'Now edited by {firstName} {lastName} ({email})',
   },
 });
