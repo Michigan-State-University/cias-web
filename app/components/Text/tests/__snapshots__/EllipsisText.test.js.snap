@@ -33,7 +33,6 @@ exports[`<EllipsisText /> should match the snapshot 1`] = `
 
 .c3 {
   position: relative;
-  width: 100%;
   color: #2F3850;
 }
 
@@ -107,7 +106,6 @@ exports[`<EllipsisText /> should match the snapshot 2`] = `
 
 .c3 {
   position: relative;
-  width: 100%;
   color: #2F3850;
 }
 

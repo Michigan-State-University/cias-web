@@ -21,6 +21,8 @@ import {
   addAttachmentRequest,
   deleteAttachmentRequest,
   withInterventionLogoSaga,
+  makeSelectEditingPossible,
+  makeSelectCanCurrentUserMakeChanges,
 } from 'global/reducers/intervention';
 import {
   canChangeAccessSettings,
@@ -83,6 +85,10 @@ const SettingsPanel = ({ intervention }: Props) => {
     },
     errors: { fetchInterventionError, fetchUserAccessError },
   } = useSelector<any, any>(makeSelectInterventionState());
+  const editingPossible = useSelector(makeSelectEditingPossible());
+  const canCurrentUserMakeChanges = useSelector(
+    makeSelectCanCurrentUserMakeChanges(),
+  );
 
   const globalDispatch = useDispatch();
 
@@ -111,7 +117,10 @@ const SettingsPanel = ({ intervention }: Props) => {
     useModal({
       type: ModalType.Modal,
       modalContentRenderer: () => (
-        <NavigatorSettingsModal interventionId={intervention!.id} />
+        <NavigatorSettingsModal
+          interventionId={intervention!.id}
+          editingPossible={editingPossible}
+        />
       ),
       props: modalProps,
     });
@@ -130,8 +139,9 @@ const SettingsPanel = ({ intervention }: Props) => {
     conversationsTranscript,
   } = intervention || {};
 
-  const changingAccessSettingsPossible = canChangeAccessSettings(status);
-  const changingChatSettingsPossible = canEnableChat(status);
+  const changingAccessSettingsPossible =
+    editingPossible && canChangeAccessSettings(status);
+  const changingChatSettingsPossible = editingPossible && canEnableChat(status);
 
   const isModuleIntervention =
     type === InterventionType.FIXED || type === InterventionType.FLEXIBLE;
@@ -323,6 +333,7 @@ const SettingsPanel = ({ intervention }: Props) => {
               enableAccessLoading={enableAccessLoading}
               fetchUserAccessLoading={fetchUserAccessLoading}
               fetchUserAccessError={fetchUserAccessError}
+              disabled={!canCurrentUserMakeChanges}
             />
           )}
           {type !== InterventionType.DEFAULT && (
@@ -356,7 +367,11 @@ const SettingsPanel = ({ intervention }: Props) => {
           )}
           {isModuleIntervention && (
             <>
-              <FileList files={files || []} handleDelete={deleteFile} />
+              <FileList
+                files={files || []}
+                handleDelete={deleteFile}
+                disabled={!editingPossible}
+              />
               <Divider mt={15} mr={15} />
               {/* @ts-ignore */}
               <UploadFileButton
@@ -367,6 +382,7 @@ const SettingsPanel = ({ intervention }: Props) => {
                 isLoading={addAttachmentsLoading}
                 width="fit-content"
                 mt={45}
+                disabled={!editingPossible}
               >
                 <FormattedMessage {...messages.addFilesButtonMessage} />
               </UploadFileButton>

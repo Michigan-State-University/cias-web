@@ -48,9 +48,10 @@ import NavigatorScripts from './NavigatorScripts';
 
 type Props = {
   interventionId: string;
+  editingPossible: boolean;
 };
 
-const NavigatorSettingsModal = ({ interventionId }: Props) => {
+const NavigatorSettingsModal = ({ interventionId, editingPossible }: Props) => {
   const { formatMessage } = useIntl();
   const dispatch = useDispatch();
 
@@ -153,15 +154,18 @@ const NavigatorSettingsModal = ({ interventionId }: Props) => {
                 inviteNavigatorsByEmail={inviteNavigatorsByEmail}
                 removeNavigatorEmailInvitation={removeNavigatorEmailInvitation}
                 invitationLoading={navigatorEmailInvitationLoading}
+                disabled={!editingPossible}
               />
               {(teamId ?? canDisplayTeamNavigatorPanel) && (
                 <TeamNavigatorsPanel
                   teamNavigators={availableTeamNavigators}
                   addNavigatorFromTeam={addNavigatorFromTeam}
+                  disabled={!editingPossible}
                 />
               )}
             </>
           }
+          // TODO continue work here
           rightContent={
             <AddedNavigatorPanel
               interventionNavigators={interventionNavigators}

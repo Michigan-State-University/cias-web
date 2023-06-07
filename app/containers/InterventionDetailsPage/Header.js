@@ -25,6 +25,7 @@ import messages from './messages';
 const Header = ({
   intl: { formatMessage },
   status,
+  canCurrentUserMakeChanges,
   editingPossible,
   name,
   editName,
@@ -130,6 +131,7 @@ const Header = ({
                 csvLink={csvLink}
                 csvGeneratedAt={csvGeneratedAt}
                 canAccessCsv={canAccessCsv}
+                canCurrentUserMakeChanges={canCurrentUserMakeChanges}
               />
             </Row>
             <InterventionOptions>
@@ -145,6 +147,7 @@ const Header = ({
 Header.propTypes = {
   intl: PropTypes.shape(IntlShape),
   status: PropTypes.string,
+  canCurrentUserMakeChanges: PropTypes.bool,
   editingPossible: PropTypes.bool,
   name: PropTypes.string,
   editName: PropTypes.func,

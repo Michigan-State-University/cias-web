@@ -98,6 +98,7 @@ exports[`<VisualAnalogueScaleQuestion /> Should render and match the snapshot 1`
   color: rgba(183,39,234,1);
   background-color: rgba(183,39,234,0.1);
   color: rgba(183,39,234,1);
+  opacity: 0.5;
 }
 
 .c6:focus {
@@ -118,6 +119,7 @@ exports[`<VisualAnalogueScaleQuestion /> Should render and match the snapshot 1`
   text-align: center;
   background-color: rgba(183,39,234,0.1);
   color: rgba(183,39,234,1);
+  opacity: 0.5;
 }
 
 .c7:focus {
@@ -181,6 +183,7 @@ exports[`<VisualAnalogueScaleQuestion /> Should render and match the snapshot 1`
             <input
               class="c6 c7"
               color="#B727EA"
+              disabled=""
               type="text"
               value=""
               width="48px"
@@ -188,6 +191,7 @@ exports[`<VisualAnalogueScaleQuestion /> Should render and match the snapshot 1`
             <input
               class="c6 c7"
               color="#B727EA"
+              disabled=""
               type="text"
               value=""
               width="48px"

@@ -6,7 +6,6 @@ import { defaults } from 'lodash';
 
 import { colors, elements } from 'theme';
 
-import { canEdit } from 'models/Status/statusPermissions';
 import { GroupType, QuestionGroup } from 'models/QuestionGroup';
 import { QuestionDTO, QuestionTypes } from 'models/Question';
 import { Intervention } from 'models/Intervention';
@@ -17,7 +16,10 @@ import {
   editQuestionSaga,
   makeSelectSelectedQuestion,
 } from 'global/reducers/questions';
-import { makeSelectIntervention } from 'global/reducers/intervention';
+import {
+  makeSelectEditingPossible,
+  makeSelectIntervention,
+} from 'global/reducers/intervention';
 import globalMessages from 'global/i18n/globalMessages';
 
 import CommonLayout from 'containers/AnswerSessionPage/layouts/CommonLayout';
@@ -72,6 +74,7 @@ const RenderQuestionDetails = ({
   const intervention: Nullable<Intervention> = useSelector(
     makeSelectIntervention(),
   );
+  const editingPossible = useSelector(makeSelectEditingPossible());
 
   const isNarratorTab: boolean = useSelector(makeSelectIsNarratorTab());
 
@@ -82,7 +85,6 @@ const RenderQuestionDetails = ({
 
   const { logoUrl, imageAlt, status } = intervention;
 
-  const editingPossible = canEdit(status);
   const isNarratorTabOrEditNotPossible = isNarratorTab || !editingPossible;
 
   const {

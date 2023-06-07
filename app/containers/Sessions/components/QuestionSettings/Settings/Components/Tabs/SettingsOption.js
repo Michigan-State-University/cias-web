@@ -64,6 +64,7 @@ const SettingsOption = ({
               validator={numericValidator}
               onBlur={handleStringToNumericUpdate}
               width={150}
+              disabled={disabled}
             />
           </>
         );

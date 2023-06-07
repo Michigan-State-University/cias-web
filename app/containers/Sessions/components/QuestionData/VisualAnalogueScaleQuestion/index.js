@@ -25,7 +25,6 @@ import {
   updateQuestionData,
 } from 'global/reducers/questions';
 
-import { canEdit } from 'models/Status/statusPermissions';
 import { numericValidator } from 'utils/validators';
 import messages from './messages';
 import { UPDATE_DATA } from './constants';
@@ -34,7 +33,7 @@ const VisualAnalogueScaleQuestion = ({
   selectedQuestion,
   updateProperty,
   isNarratorTab,
-  interventionStatus,
+  editingPossible,
   intl: { formatMessage },
 }) => {
   const {
@@ -51,8 +50,6 @@ const VisualAnalogueScaleQuestion = ({
       range_end: rangeEnd,
     },
   } = data[0];
-
-  const editingPossible = canEdit(interventionStatus);
 
   const calculateLabelWidth = (value) => {
     const valueLength = value?.toString().length ?? 0;
@@ -127,6 +124,7 @@ const VisualAnalogueScaleQuestion = ({
                   width={calculateLabelWidth(rangeStart)}
                   align="center"
                   validator={numericValidator}
+                  disabled={!editingPossible}
                 />
                 <BadgeInput
                   color={colors.electricPurple}
@@ -136,6 +134,7 @@ const VisualAnalogueScaleQuestion = ({
                   width={calculateLabelWidth(rangeEnd)}
                   align="center"
                   validator={numericValidator}
+                  disabled={!editingPossible}
                 />
               </Row>
               {!isNarratorTab && (
@@ -174,7 +173,7 @@ VisualAnalogueScaleQuestion.propTypes = {
   intl: PropTypes.object.isRequired,
   updateProperty: PropTypes.func.isRequired,
   isNarratorTab: PropTypes.bool,
-  interventionStatus: PropTypes.string,
+  editingPossible: PropTypes.bool,
 };
 
 const mapStateToProps = createStructuredSelector({

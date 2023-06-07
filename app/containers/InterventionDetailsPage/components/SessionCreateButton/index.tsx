@@ -21,11 +21,13 @@ import SessionTypeChooser from './SessionTypeChooser';
 type Props = {
   handleSessionCreation: (sessionType: string) => void;
   canCreateCatSession: boolean;
+  disabled: boolean;
 };
 
 const SessionCreateButton = ({
   handleSessionCreation,
   canCreateCatSession,
+  disabled,
 }: Props): JSX.Element => {
   const [modalVisible, setModalVisible] = useState(false);
   const { formatMessage } = useIntl();
@@ -59,6 +61,8 @@ const SessionCreateButton = ({
       <NewInterventionContainer
         data-cy="create-session-button"
         onClick={clickWrapper}
+        disabled={disabled}
+        clickable
       >
         <Row align="center">
           <Img src={addSign2} alt="add" mx={10} />
