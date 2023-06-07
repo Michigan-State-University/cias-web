@@ -6,7 +6,7 @@ jobs:
     name: Set-up test chunks
     runs-on: ubuntu-latest
     outputs:
-      test-chunks: ${{ steps.set-test-chunks..outputs.test-chunks }}
+      test-chunks: ${{ steps.set-test-chunks.outputs.test-chunks }}
       test-chunk-ids: ${{ steps.set-test-chunk-ids.outputs.test-chunk-ids }}
     steps:
       - name: Checkout code
