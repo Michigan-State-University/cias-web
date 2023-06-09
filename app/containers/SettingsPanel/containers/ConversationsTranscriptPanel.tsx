@@ -29,9 +29,13 @@ import messages from '../messages';
 
 export type Props = {
   transcript: Nullable<AppFile>;
+  canCurrentUserMakeChanges: boolean;
 };
 
-export const ConversationsTranscriptPanel = ({ transcript }: Props) => {
+export const ConversationsTranscriptPanel = ({
+  transcript,
+  canCurrentUserMakeChanges,
+}: Props) => {
   const { formatMessage } = useIntl();
   const dispatch = useDispatch();
 
@@ -72,6 +76,7 @@ export const ConversationsTranscriptPanel = ({ transcript }: Props) => {
                 transcript ? 'generateNewTranscript' : 'generateTranscript'
               ],
             )}
+            disabled={!canCurrentUserMakeChanges}
           />
         </GridCol>
         {transcript && (

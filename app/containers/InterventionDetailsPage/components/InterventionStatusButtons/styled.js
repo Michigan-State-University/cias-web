@@ -7,8 +7,9 @@ export const ShareButton = styled(Button)`
   width: 180px;
   margin: 5px;
 
-  ${({ outlined }) =>
+  ${({ outlined, disabled }) =>
     outlined &&
+    !disabled &&
     `
     background-color: transparent;
     border: ${themeColors.primary} solid 1px;
@@ -18,7 +19,6 @@ export const ShareButton = styled(Button)`
     color: white;
     }
   `}
-
   ${({ disabled, bg }) =>
     !disabled &&
     `

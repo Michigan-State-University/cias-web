@@ -180,7 +180,6 @@ export function InterventionDetailsPage({
     canCurrentUserMakeChanges && canShareWithParticipants(status);
   const archivingPossible = canCurrentUserMakeChanges && canArchive(status);
 
-  // TODO check collaborator access
   const canAccessCsv = interventionOwnerId === userId;
 
   const [sendCopyModalVisible, setSendCopyModalVisible] = useState(false);

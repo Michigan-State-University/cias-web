@@ -67,6 +67,7 @@ import { withInterventionSettingsPageSagas } from './sagas';
 import messages from './messages';
 import { StyledBox } from './styled';
 import { OptionType } from './types';
+import { TextButton } from '../../components/Button';
 
 const NAVIGATOR_SETTINGS_MODAL_WIDTH = 918;
 
@@ -265,24 +266,21 @@ const SettingsPanel = ({ intervention }: Props) => {
               </H2>
             </Switch>
             {liveChatEnabled && (
-              <>
-                <Img
-                  onClick={openNavigatorSettingModal}
-                  ml={24}
-                  mr={8}
-                  src={cog}
-                  alt="manage"
-                  cursor="pointer"
-                />
+              <TextButton
+                onClick={openNavigatorSettingModal}
+                buttonProps={{ display: 'flex', ml: 24, gap: 8 }}
+              >
+                <Img src={cog} alt="manage" />
                 <Text fontWeight="bold">
                   <FormattedMessage {...messages.configureNavigatorSettings} />
                 </Text>
-              </>
+              </TextButton>
             )}
           </Box>
           {(liveChatEnabled || conversationsPresent) && (
             <ConversationsTranscriptPanel
               transcript={conversationsTranscript}
+              canCurrentUserMakeChanges={canCurrentUserMakeChanges}
             />
           )}
           <InterventionRadioPanel

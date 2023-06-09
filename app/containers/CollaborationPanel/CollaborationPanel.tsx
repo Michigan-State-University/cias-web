@@ -50,9 +50,7 @@ const Component: React.FC<Props> = () => {
   const canEdit =
     isCurrentUserInterventionOwner || currentUserCollaboratorData?.edit;
 
-  // TODO disable editing if switch is not on
-  // TODO Hide participant data if user doesn't have correct access
-  // TODO refresh intervention on editing stopped
+  // TODO handle reporting intervention
 
   const handleToggle = (editingEnabled: boolean) => {
     if (editingEnabled) {
