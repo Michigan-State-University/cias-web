@@ -34,7 +34,6 @@ import {
   exportInterventionRequest,
   exportInterventionSaga,
   interventionReducer,
-  makeSelectCanCurrentUserMakeChanges,
   sendInterventionCsvRequest,
 } from 'global/reducers/intervention';
 import {
@@ -90,7 +89,6 @@ const SingleTile = ({
   userId,
   isLoading,
   exportIntervention,
-  canCurrentUserMakeChanges,
   userOrganizableId,
 }) => {
   const [
@@ -150,7 +148,11 @@ const SingleTile = ({
     updatedAt,
     googleLanguageId,
     isCurrentUserCollaborator,
+    hasCollaborators,
+    userId: interventionOwnerId,
   } = tileData || {};
+
+  const isCurrentUserInterventionOwner = interventionOwnerId === userId;
 
   const handleCsvRequest = () => sendCsv(id);
 
@@ -161,10 +163,12 @@ const SingleTile = ({
   const handleClone = () =>
     copyIntervention({ interventionId: id, withoutRedirect: true });
 
-  const archivingPossible = canCurrentUserMakeChanges && canArchive(status);
+  const archivingPossible = !hasCollaborators && canArchive(status);
 
   const showReportingBadge =
     organizationId && (isAdmin || organizationId === userOrganizableId);
+
+  const canEditCollaborators = isAdmin || isCurrentUserInterventionOwner;
 
   const options = [
     {
@@ -210,7 +214,7 @@ const SingleTile = ({
             action: openAssignOrganizationModal,
             label: formatMessage(messages.assignOrganization),
             id: 'assignOrganization',
-            disabled: !canEdit(status) || !canCurrentUserMakeChanges,
+            disabled: !canEdit(status) || hasCollaborators,
           },
         ]
       : []),
@@ -221,7 +225,7 @@ const SingleTile = ({
             action: () => openCatMhModal(tileData),
             label: formatMessage(messages.catMhSettingsModalTitle),
             id: 'catMhAccess',
-            disabled: !canCurrentUserMakeChanges,
+            disabled: hasCollaborators,
           },
         ]
       : []),
@@ -232,12 +236,16 @@ const SingleTile = ({
       action: handleExportIntervention,
       color: colors.bluewood,
     },
-    {
-      id: 'collaborate',
-      label: formatMessage(messages.collaborate),
-      icon: CollaborateIcon,
-      action: openCollaborateModal,
-    },
+    ...(canEditCollaborators
+      ? [
+          {
+            id: 'collaborate',
+            label: formatMessage(messages.collaborate),
+            icon: CollaborateIcon,
+            action: openCollaborateModal,
+          },
+        ]
+      : []),
   ];
 
   const preventDefault = (e) => {
@@ -372,11 +380,11 @@ SingleTile.propTypes = {
   exportIntervention: PropTypes.func,
   canCurrentUserMakeChanges: PropTypes.bool,
   userOrganizableId: PropTypes.string,
+  isCurrentUserInterventionOwner: PropTypes.bool,
 };
 
 const mapStateToProps = createStructuredSelector({
   userId: makeSelectUserId(),
-  canCurrentUserMakeChanges: makeSelectCanCurrentUserMakeChanges(),
   userOrganizableId: makeSelectUserOrganizableId(),
 });
 
