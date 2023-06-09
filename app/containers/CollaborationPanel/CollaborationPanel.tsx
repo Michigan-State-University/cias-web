@@ -6,6 +6,7 @@ import { colors, themeColors } from 'theme';
 
 import { Editor } from 'models/Intervention';
 import { CollaboratorData } from 'models/Collaborator';
+import { useRoleManager } from 'models/User/RolesManager';
 
 import {
   makeSelectCollaborationLoading,
@@ -46,9 +47,13 @@ const Component: React.FC<Props> = () => {
     makeSelectCurrentUserCollaboratorData(),
   );
 
+  const { isAdmin } = useRoleManager();
+
   const editingByOtherUser = !!currentEditor && !isCurrentUserEditor;
   const canEdit =
-    isCurrentUserInterventionOwner || currentUserCollaboratorData?.edit;
+    isCurrentUserInterventionOwner ||
+    currentUserCollaboratorData?.edit ||
+    isAdmin;
 
   // TODO handle reporting intervention
 
