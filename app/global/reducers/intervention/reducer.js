@@ -643,6 +643,9 @@ export const interventionReducer = (state = initialState, action) =>
       }
       case REMOVE_COLLABORATOR_SUCCESS: {
         assignDraftItems(draft.collaborators, draft.cache.collaborators);
+        if (!draft.collaborators?.length && draft.intervention) {
+          draft.intervention.hasCollaborators = false;
+        }
         break;
       }
       case REMOVE_COLLABORATOR_ERROR: {
@@ -652,6 +655,9 @@ export const interventionReducer = (state = initialState, action) =>
       case ADD_COLLABORATORS_SUCCESS: {
         draft.collaborators.push(...action.payload.collaborators);
         assignDraftItems(draft.collaborators, draft.cache.collaborators);
+        if (draft.intervention) {
+          draft.intervention.hasCollaborators = true;
+        }
         break;
       }
       case SET_CURRENT_EDITOR: {
