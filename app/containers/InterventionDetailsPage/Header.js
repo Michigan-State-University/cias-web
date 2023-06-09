@@ -5,6 +5,8 @@ import { FormattedMessage, IntlShape, injectIntl } from 'react-intl';
 
 import { themeColors } from 'theme';
 import { InterventionType } from 'models/Intervention';
+import { useRoleManager } from 'models/User/RolesManager';
+
 import globalMessages from 'global/i18n/globalMessages';
 
 import MailIcon from 'assets/svg/pink-mail.svg';
@@ -39,13 +41,15 @@ const Header = ({
   openInterventionInviteModal,
   interventionType,
   sharingPossible,
+  userOrganizableId,
 }) => {
   const screenClass = useScreenClass();
+  const { isAdmin } = useRoleManager();
 
   const isModuleIntervention = interventionType !== InterventionType.DEFAULT;
 
   const renderBackButton = useMemo(() => {
-    if (organizationId) {
+    if (organizationId && (isAdmin || organizationId === userOrganizableId)) {
       return (
         <BackButton link to={`/organization/${organizationId}/dashboard-setup`}>
           <FormattedMessage {...messages.backToOrganization} />
@@ -161,6 +165,7 @@ Header.propTypes = {
   openInterventionInviteModal: PropTypes.func,
   interventionType: PropTypes.string,
   sharingPossible: PropTypes.bool,
+  userOrganizableId: PropTypes.string,
 };
 
 export default injectIntl(Header);

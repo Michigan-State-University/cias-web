@@ -136,7 +136,7 @@ export function InterventionDetailsPage({
   fetchSessionEmails,
   deleteSession,
   externalCopySession,
-  user: { id: userId },
+  user: { id: userId, organizableId: userOrganizableId },
   editSession,
   exportIntervention,
   canCurrentUserMakeChanges,
@@ -571,6 +571,7 @@ export function InterventionDetailsPage({
               openInterventionInviteModal={openInterventionInviteModal}
               interventionType={type}
               sharingPossible={sharingPossible}
+              userOrganizableId={userOrganizableId}
             />
 
             <GRow>

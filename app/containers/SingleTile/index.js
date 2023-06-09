@@ -25,7 +25,10 @@ import ArchiveIcon from 'assets/svg/archive.svg';
 import { colors } from 'theme';
 
 import globalMessages from 'global/i18n/globalMessages';
-import { makeSelectUserId } from 'global/reducers/auth';
+import {
+  makeSelectUserId,
+  makeSelectUserOrganizableId,
+} from 'global/reducers/auth';
 import { interventionOptionsSaga } from 'global/sagas/interventionOptionsSaga';
 import {
   exportInterventionRequest,
@@ -88,6 +91,7 @@ const SingleTile = ({
   isLoading,
   exportIntervention,
   canCurrentUserMakeChanges,
+  userOrganizableId,
 }) => {
   const [
     shareWithResearchersModalVisible,
@@ -158,6 +162,9 @@ const SingleTile = ({
     copyIntervention({ interventionId: id, withoutRedirect: true });
 
   const archivingPossible = canCurrentUserMakeChanges && canArchive(status);
+
+  const showReportingBadge =
+    organizationId && (isAdmin || organizationId === userOrganizableId);
 
   const options = [
     {
@@ -340,7 +347,7 @@ const SingleTile = ({
               </TileInfo>
             </Tooltip>
 
-            {organizationId && (
+            {showReportingBadge && (
               <Badge bg={colors.orange}>
                 {formatMessage(messages.isFromOrganization)}
               </Badge>
@@ -364,11 +371,13 @@ SingleTile.propTypes = {
   isLoading: PropTypes.bool,
   exportIntervention: PropTypes.func,
   canCurrentUserMakeChanges: PropTypes.bool,
+  userOrganizableId: PropTypes.string,
 };
 
 const mapStateToProps = createStructuredSelector({
   userId: makeSelectUserId(),
   canCurrentUserMakeChanges: makeSelectCanCurrentUserMakeChanges(),
+  userOrganizableId: makeSelectUserOrganizableId(),
 });
 
 const mapDispatchToProps = {
