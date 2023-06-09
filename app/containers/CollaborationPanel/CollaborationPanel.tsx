@@ -55,8 +55,6 @@ const Component: React.FC<Props> = () => {
     currentUserCollaboratorData?.edit ||
     isAdmin;
 
-  // TODO handle reporting intervention
-
   const handleToggle = (editingEnabled: boolean) => {
     if (editingEnabled) {
       interventionChannel?.startEditing();

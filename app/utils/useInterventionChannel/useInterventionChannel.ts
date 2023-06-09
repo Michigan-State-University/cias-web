@@ -6,6 +6,7 @@ import { SocketMessageListener, useSocket } from 'utils/useSocket';
 import objectToCamelCase from 'utils/objectToCamelCase';
 
 import {
+  resetCollaborationState,
   setCurrentEditor,
   setStartingEditing,
   setStoppingEditing,
@@ -55,6 +56,10 @@ export const useInterventionChannel = (interventionId?: string) => {
     }
   };
 
+  const onUnsubscribe = () => {
+    dispatch(resetCollaborationState());
+  };
+
   const channel = useSocket<
     InterventionChannelMessage,
     InterventionChannelAction,
@@ -62,6 +67,7 @@ export const useInterventionChannel = (interventionId?: string) => {
   >(INTERVENTION_CHANNEL_NAME, messageListener, {
     socketConnectionParams: { id: interventionId },
     suspend: !interventionId,
+    onUnsubscribe,
   });
 
   const startEditing = () => {

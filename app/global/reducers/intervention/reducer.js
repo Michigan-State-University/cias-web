@@ -109,6 +109,7 @@ import {
   SET_CURRENT_EDITOR,
   SET_STARTING_EDITING,
   SET_STOPPING_EDITING,
+  RESET_COLLABORATION_STATE,
 } from './constants';
 
 export const initialState = {
@@ -675,6 +676,13 @@ export const interventionReducer = (state = initialState, action) =>
         const { stoppingEditing } = action.payload;
         draft.loaders.stoppingEditing = stoppingEditing;
         break;
+      }
+      case RESET_COLLABORATION_STATE: {
+        if (draft.intervention) {
+          draft.intervention.currentEditor = null;
+        }
+        draft.loaders.startingEditing = false;
+        draft.loaders.stoppingEditing = false;
       }
     }
   });
