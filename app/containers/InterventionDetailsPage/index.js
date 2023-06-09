@@ -296,7 +296,7 @@ export function InterventionDetailsPage({
             action: openAssignOrganizationModal,
             label: formatMessage(messages.assignOrganization),
             id: 'assignOrganization',
-            disabled: !canEdit(status),
+            disabled: !canEdit(status) || !canCurrentUserMakeChanges,
           },
         ]
       : []),
@@ -307,6 +307,7 @@ export function InterventionDetailsPage({
             action: () => openCatMhModal(intervention),
             label: formatMessage(messages.catMhSettingsModalTitle),
             id: 'catMhAccess',
+            disabled: !canCurrentUserMakeChanges,
           },
         ]
       : []),

@@ -12,7 +12,6 @@ import { injectReducer, injectSaga } from 'redux-injectors';
 import { connect } from 'react-redux';
 import { compose } from 'redux';
 
-import BinNoBgIcon from 'assets/svg/bin-no-bg.svg';
 import CsvIcon from 'assets/svg/csv-icon.svg';
 import FileShareIcon from 'assets/svg/file-share.svg';
 import CopyIcon from 'assets/svg/copy.svg';
@@ -21,6 +20,7 @@ import TranslateIcon from 'assets/svg/translate.svg';
 import DocumentIcon from 'assets/svg/document.svg';
 import DownloadIcon from 'assets/svg/download-line.svg';
 import CollaborateIcon from 'assets/svg/collaborate-icon.svg';
+import ArchiveIcon from 'assets/svg/archive.svg';
 
 import { colors } from 'theme';
 
@@ -31,6 +31,7 @@ import {
   exportInterventionRequest,
   exportInterventionSaga,
   interventionReducer,
+  makeSelectCanCurrentUserMakeChanges,
   sendInterventionCsvRequest,
 } from 'global/reducers/intervention';
 import {
@@ -86,6 +87,7 @@ const SingleTile = ({
   userId,
   isLoading,
   exportIntervention,
+  canCurrentUserMakeChanges,
 }) => {
   const [
     shareWithResearchersModalVisible,
@@ -155,6 +157,8 @@ const SingleTile = ({
   const handleClone = () =>
     copyIntervention({ interventionId: id, withoutRedirect: true });
 
+  const archivingPossible = canCurrentUserMakeChanges && canArchive(status);
+
   const options = [
     {
       icon: TranslateIcon,
@@ -178,20 +182,19 @@ const SingleTile = ({
       label: formatMessage(messages.shareExternally),
       id: 'share externally',
     },
-    ...((canArchive(status) && [
-      {
-        icon: BinNoBgIcon,
-        action: openArchiveModal,
-        label: formatMessage(messages.archive),
-        id: 'Archive e-session',
-      },
-    ]) ||
-      []),
     {
       id: 'duplicate',
       label: formatMessage(messages.duplicateHere),
       icon: CopyIcon,
       action: handleClone,
+    },
+    {
+      id: 'archive',
+      label: formatMessage(messages.archive),
+      icon: ArchiveIcon,
+      action: openArchiveModal,
+      color: colors.bluewood,
+      disabled: !archivingPossible,
     },
     ...(canAssignOrganizationToIntervention
       ? [
@@ -200,7 +203,7 @@ const SingleTile = ({
             action: openAssignOrganizationModal,
             label: formatMessage(messages.assignOrganization),
             id: 'assignOrganization',
-            disabled: !canEdit(status),
+            disabled: !canEdit(status) || !canCurrentUserMakeChanges,
           },
         ]
       : []),
@@ -211,6 +214,7 @@ const SingleTile = ({
             action: () => openCatMhModal(tileData),
             label: formatMessage(messages.catMhSettingsModalTitle),
             id: 'catMhAccess',
+            disabled: !canCurrentUserMakeChanges,
           },
         ]
       : []),
@@ -359,10 +363,12 @@ SingleTile.propTypes = {
   userId: PropTypes.string,
   isLoading: PropTypes.bool,
   exportIntervention: PropTypes.func,
+  canCurrentUserMakeChanges: PropTypes.bool,
 };
 
 const mapStateToProps = createStructuredSelector({
   userId: makeSelectUserId(),
+  canCurrentUserMakeChanges: makeSelectCanCurrentUserMakeChanges(),
 });
 
 const mapDispatchToProps = {
