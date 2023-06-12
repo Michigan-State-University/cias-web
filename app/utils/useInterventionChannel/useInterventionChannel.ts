@@ -1,8 +1,13 @@
 import { useDispatch } from 'react-redux';
+import { toast } from 'react-toastify';
 
 import { Editor } from 'models/Intervention';
 
-import { SocketMessageListener, useSocket } from 'utils/useSocket';
+import {
+  SocketErrorMessageData,
+  SocketMessageListener,
+  useSocket,
+} from 'utils/useSocket';
 import objectToCamelCase from 'utils/objectToCamelCase';
 
 import {
@@ -17,6 +22,7 @@ import {
   EditingStartedData,
   InterventionChannelAction,
   InterventionChannelConnectionParams,
+  UnexpectedErrorData,
 } from './types';
 import {
   INTERVENTION_CHANNEL_NAME,
@@ -29,6 +35,10 @@ export type InterventionChannel = ReturnType<typeof useInterventionChannel>;
 export const useInterventionChannel = (interventionId?: string) => {
   const dispatch = useDispatch();
 
+  const showErrorToast = ({ error }: SocketErrorMessageData) => {
+    toast.error(error);
+  };
+
   const onEditingStarted = ({ current_editor }: EditingStartedData) => {
     const currentEditor: Editor = objectToCamelCase(current_editor);
     dispatch(setCurrentEditor(currentEditor));
@@ -38,6 +48,12 @@ export const useInterventionChannel = (interventionId?: string) => {
   const onEditingStopped = () => {
     dispatch(setCurrentEditor(null));
     dispatch(setStoppingEditing(false));
+  };
+
+  const onUnexpectedError = (errorData: UnexpectedErrorData) => {
+    showErrorToast(errorData);
+    dispatch(setStoppingEditing(false));
+    dispatch(setStartingEditing(false));
   };
 
   const messageListener: SocketMessageListener<InterventionChannelMessage> = ({
@@ -50,6 +66,9 @@ export const useInterventionChannel = (interventionId?: string) => {
         break;
       case InterventionChannelMessageTopic.EDITING_STOPPED:
         onEditingStopped();
+        break;
+      case InterventionChannelMessageTopic.UNEXPECTED_ERROR:
+        onUnexpectedError(data);
         break;
       default:
         break;

@@ -1,6 +1,11 @@
 import { EditorDTO } from 'models/Intervention';
 
-import { SocketAction, SocketMessage } from 'utils/useSocket';
+import {
+  SocketAction,
+  SocketErrorMessage,
+  SocketErrorMessageData,
+  SocketMessage,
+} from 'utils/useSocket';
 
 import {
   InterventionChannelActionName,
@@ -16,6 +21,7 @@ export type EditingStartedData = {
 
 export type StopEditingData = {};
 export type EditingStoppedData = {};
+export type UnexpectedErrorData = SocketErrorMessageData;
 
 // SOCKET MESSAGES
 
@@ -29,10 +35,17 @@ export type EditingStoppedSocketMessage = SocketMessage<
   EditingStoppedData
 >;
 
+export type UnexpectedErrorSocketErrorMessage = SocketErrorMessage<
+  InterventionChannelMessageTopic.UNEXPECTED_ERROR,
+  UnexpectedErrorData,
+  400
+>;
+
 // Create a union type with any new SocketMessage type
 export type InterventionChannelMessage =
   | EditingStartedSocketMessage
-  | EditingStoppedSocketMessage;
+  | EditingStoppedSocketMessage
+  | UnexpectedErrorSocketErrorMessage;
 
 // SOCKET ACTIONS
 

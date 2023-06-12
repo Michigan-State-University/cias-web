@@ -5,7 +5,7 @@ export type SocketErrorMessageData<AdditionalErrorData extends object = {}> = {
 } & AdditionalErrorData;
 
 export type SocketMessageStatus = 200;
-export type SocketErrorMessageStatus = 422 | 404;
+export type SocketErrorMessageStatus = 422 | 404 | 400;
 
 // incoming message
 export type SocketMessage<
