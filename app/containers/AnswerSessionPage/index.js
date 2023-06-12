@@ -243,6 +243,8 @@ export function AnswerSessionPage({
       required,
       proceed_button: proceedButton,
       narrator_skippable: narratorSkippable,
+      min_length: minLength,
+      max_length: maxLength,
     } = {},
     narrator: {
       settings: {
@@ -458,6 +460,15 @@ export function AnswerSessionPage({
         case QuestionTypes.PHONE: {
           const { confirmed, timezone } = answerBody[0]?.value ?? {};
           return confirmed && timezone;
+        }
+        case QuestionTypes.NUMBER: {
+          const { value } = answerBody[0] ?? {};
+          const numberOfDigits = `${value}` === 'NaN' ? 0 : `${value}`.length;
+          if (minLength && maxLength)
+            return numberOfDigits <= maxLength && numberOfDigits >= minLength;
+          if (minLength) return numberOfDigits >= minLength;
+          if (maxLength) return numberOfDigits <= maxLength;
+          return true;
         }
         default:
           return true;

@@ -16,6 +16,7 @@ const NumberQuestion = ({
     body: {
       variable: { name },
     },
+    settings: { min_length: minLength, max_length: maxLength },
   } = question;
 
   const onChange = (event) => {
@@ -39,6 +40,8 @@ const NumberQuestion = ({
       onChange={onChange}
       answerBody={answerBody?.[0]}
       onValidation={onValidation}
+      minLength={minLength}
+      maxLength={maxLength}
     />
   );
 };

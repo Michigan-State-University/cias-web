@@ -28,13 +28,19 @@ const SettingsOption = ({
 }) => {
   const { formatMessage } = useIntl();
 
+  const isNullableNumericSettings =
+    index === 'min_length' || index === 'max_length';
+
   const handleUpdate = useCallback(
     (value) => onUpdate(`${index}`, value),
     [index],
   );
 
   const handleStringToNumericUpdate = useCallback(
-    (value) => handleUpdate(+value),
+    (value) => {
+      if (isNullableNumericSettings && value === '') handleUpdate(null);
+      else handleUpdate(+value);
+    },
     [handleUpdate],
   );
 
@@ -67,7 +73,7 @@ const SettingsOption = ({
   );
 
   const renderSetting = () => {
-    if (index === 'min_length' || index === 'max_length') return numericInput;
+    if (isNullableNumericSettings) return numericInput;
     switch (setting?.constructor) {
       case Number:
         return numericInput;
