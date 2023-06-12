@@ -175,7 +175,6 @@ function InterventionStatusButtons({
       csvLink={csvLink}
       csvGeneratedAt={csvGeneratedAt}
       urlToDownload={urlToDownload}
-      disabled={!canCurrentUserMakeChanges}
     />
   );
 

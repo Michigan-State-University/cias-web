@@ -23,6 +23,7 @@ import {
   withInterventionLogoSaga,
   makeSelectEditingPossible,
   makeSelectCanCurrentUserMakeChanges,
+  makeSelectCanCurrentUserAccessParticipantsData,
 } from 'global/reducers/intervention';
 import {
   canChangeAccessSettings,
@@ -89,6 +90,9 @@ const SettingsPanel = ({ intervention }: Props) => {
   const editingPossible = useSelector(makeSelectEditingPossible());
   const canCurrentUserMakeChanges = useSelector(
     makeSelectCanCurrentUserMakeChanges(),
+  );
+  const canAccessParticipantsData = useSelector(
+    makeSelectCanCurrentUserAccessParticipantsData(),
   );
 
   const globalDispatch = useDispatch();
@@ -241,6 +245,9 @@ const SettingsPanel = ({ intervention }: Props) => {
     });
   };
 
+  const showConversationsTranscriptPanel =
+    canAccessParticipantsData && (liveChatEnabled || conversationsPresent);
+
   // @ts-ignore
   if (fetchInterventionLoading) return <Loader />;
   if (fetchInterventionError)
@@ -277,10 +284,9 @@ const SettingsPanel = ({ intervention }: Props) => {
               </TextButton>
             )}
           </Box>
-          {(liveChatEnabled || conversationsPresent) && (
+          {showConversationsTranscriptPanel && (
             <ConversationsTranscriptPanel
               transcript={conversationsTranscript}
-              canCurrentUserMakeChanges={canCurrentUserMakeChanges}
             />
           )}
           <InterventionRadioPanel

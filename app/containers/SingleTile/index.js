@@ -150,6 +150,7 @@ const SingleTile = ({
     isCurrentUserCollaborator,
     hasCollaborators,
     userId: interventionOwnerId,
+    currentUserCollaboratorData,
   } = tileData || {};
 
   const isCurrentUserInterventionOwner = interventionOwnerId === userId;
@@ -158,7 +159,8 @@ const SingleTile = ({
 
   const handleExportIntervention = () => exportIntervention(id);
 
-  const canExportCSV = userId === user?.id;
+  const canExportCSV =
+    isCurrentUserInterventionOwner || currentUserCollaboratorData?.dataAccess;
 
   const handleClone = () =>
     copyIntervention({ interventionId: id, withoutRedirect: true });

@@ -21,7 +21,6 @@ const CsvButtons = ({
   urlToDownload,
   handleSendCsv,
   csvLink,
-  disabled,
 }) => {
   const { canDownloadInterventionCsv } = useRoleManager();
   const CsvDownload = () => (
@@ -42,7 +41,7 @@ const CsvButtons = ({
   );
 
   const CsvButton = () => (
-    <ShareButton outlined onClick={handleSendCsv} disabled={disabled}>
+    <ShareButton outlined onClick={handleSendCsv}>
       <FormattedMessage {...(csvLink ? messages.csvNew : messages.csv)} />
     </ShareButton>
   );
@@ -62,7 +61,6 @@ CsvButtons.propTypes = {
   urlToDownload: PropTypes.string,
   handleSendCsv: PropTypes.func,
   csvLink: PropTypes.string,
-  disabled: PropTypes.bool,
 };
 
 export default injectIntl(CsvButtons);

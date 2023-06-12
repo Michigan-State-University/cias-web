@@ -25,7 +25,6 @@ import {
   userListSaga,
   fetchResearchersRequest,
 } from 'global/reducers/userList';
-import { makeSelectUser } from 'global/reducers/auth';
 
 import Row from 'components/Row';
 import Loader from 'components/Loader';
@@ -48,7 +47,6 @@ const SelectResearchers = ({
   },
   fetchUsersRequest,
   onClose,
-  user: { id: currentUserId },
   onResearchersSelected,
   filterParams,
 }) => {
@@ -56,7 +54,7 @@ const SelectResearchers = ({
   const [selected, setSelected] = useState([]);
 
   const [finalUsers, filterValue, setFilterValue] = useFilter(
-    researchersSelector.filter(({ id }) => id !== currentUserId),
+    researchersSelector,
     'fullName',
     { initialDelay: 0 },
   );
@@ -176,7 +174,6 @@ const SelectResearchers = ({
 
 SelectResearchers.propTypes = {
   userList: PropTypes.object,
-  user: PropTypes.object,
   fetchUsersRequest: PropTypes.func.isRequired,
   onClose: PropTypes.func,
   onResearchersSelected: PropTypes.func,
@@ -185,7 +182,6 @@ SelectResearchers.propTypes = {
 
 const mapStateToProps = createStructuredSelector({
   userList: makeSelectUserList(),
-  user: makeSelectUser(),
 });
 
 const mapDispatchToProps = {
