@@ -17,6 +17,7 @@ export const apiUserResponse = (id = 0) => ({
       email_notification: true,
       sms_notification: true,
       feedback_completed: false,
+      organizable_id: null,
       quick_exit_enabled: false,
     },
   },
