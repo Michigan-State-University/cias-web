@@ -125,3 +125,11 @@ export const makeSelectEditingPossible = () =>
       return canCurrentUserMakeChanges;
     },
   );
+
+export const makeSelectCanCurrentUserAccessParticipantsData = () =>
+  createSelector(
+    makeSelectIsCurrentUserInterventionOwner(),
+    makeSelectCurrentUserCollaboratorData(),
+    (isCurrentUserInterventionOwner, currentUserCollaboratorData) =>
+      isCurrentUserInterventionOwner || currentUserCollaboratorData?.dataAccess,
+  );

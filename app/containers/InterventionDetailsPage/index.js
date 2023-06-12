@@ -65,6 +65,7 @@ import {
   makeSelectEditingPossible,
   makeSelectIsCurrentUserInterventionOwner,
   makeSelectCanCurrentUserMakeChanges,
+  makeSelectCanCurrentUserAccessParticipantsData,
 } from 'global/reducers/intervention';
 import { interventionOptionsSaga } from 'global/sagas/interventionOptionsSaga';
 import {
@@ -136,12 +137,13 @@ export function InterventionDetailsPage({
   fetchSessionEmails,
   deleteSession,
   externalCopySession,
-  user: { id: userId, organizableId: userOrganizableId },
+  user: { organizableId: userOrganizableId },
   editSession,
   exportIntervention,
   canCurrentUserMakeChanges,
   editingPossible,
   isCurrentUserInterventionOwner,
+  canAccessParticipantsData,
 }) {
   const { interventionId } = useParams();
   const { formatMessage } = useIntl();
@@ -160,7 +162,6 @@ export function InterventionDetailsPage({
     csvGeneratedAt,
     sharedTo,
     organizationId,
-    userId: interventionOwnerId,
     googleLanguageId,
     isAccessRevoked,
     catMhPool,
@@ -179,8 +180,6 @@ export function InterventionDetailsPage({
   const sharingPossible =
     canCurrentUserMakeChanges && canShareWithParticipants(status);
   const archivingPossible = canCurrentUserMakeChanges && canArchive(status);
-
-  const canAccessCsv = interventionOwnerId === userId;
 
   const [sendCopyModalVisible, setSendCopyModalVisible] = useState(false);
   const [translateModalVisible, setTranslateModalVisible] = useState(false);
@@ -567,7 +566,7 @@ export function InterventionDetailsPage({
               options={options}
               status={status}
               organizationId={organizationId}
-              canAccessCsv={canAccessCsv}
+              canAccessCsv={canAccessParticipantsData}
               openInterventionInviteModal={openInterventionInviteModal}
               interventionType={type}
               sharingPossible={sharingPossible}
@@ -694,6 +693,7 @@ InterventionDetailsPage.propTypes = {
   canCurrentUserMakeChanges: PropTypes.bool,
   editingPossible: PropTypes.bool,
   isCurrentUserInterventionOwner: PropTypes.bool,
+  canAccessParticipantsData: PropTypes.bool,
 };
 
 const mapStateToProps = createStructuredSelector({
@@ -709,6 +709,7 @@ const mapStateToProps = createStructuredSelector({
   canCurrentUserMakeChanges: makeSelectCanCurrentUserMakeChanges(),
   editingPossible: makeSelectEditingPossible(),
   isCurrentUserInterventionOwner: makeSelectIsCurrentUserInterventionOwner(),
+  canAccessParticipantsData: makeSelectCanCurrentUserAccessParticipantsData(),
 });
 
 const mapDispatchToProps = {

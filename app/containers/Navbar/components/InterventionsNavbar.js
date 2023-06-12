@@ -29,7 +29,6 @@ import {
 import { makeSelectReportsSize } from 'global/reducers/generatedReports';
 import { makeSelectQuestionGroupsLoader } from 'global/reducers/questionGroups';
 import { makeSelectReportTemplatesLoaders } from 'global/reducers/reportTemplates';
-import { makeSelectUserId } from 'global/reducers/auth';
 
 import { themeColors } from 'theme';
 import check from 'assets/svg/check-green.svg';
@@ -40,7 +39,10 @@ import {
   makeSelectAllLoaders,
 } from 'global/reducers/textMessages';
 import { redirectToPreview } from 'containers/AnswerSessionPage/actions';
-import { makeSelectInterventionStatus } from 'global/reducers/intervention';
+import {
+  makeSelectCanCurrentUserAccessParticipantsData,
+  makeSelectInterventionStatus,
+} from 'global/reducers/intervention';
 import { canEdit, canPreview } from 'models/Status/statusPermissions';
 import { SessionTypes } from 'models/Session';
 import messages from './messages';
@@ -71,7 +73,6 @@ const InterventionNavbar = ({
     reportTemplatesCount,
     smsPlansCount,
     generatedReportCount,
-    interventionOwnerId,
     type,
   },
   reportsLoaders: { updateReportTemplateLoading },
@@ -88,11 +89,9 @@ const InterventionNavbar = ({
   redirectToPreviewAction,
   textMessagesCount,
   generatedReportsCount,
-  userId,
+  canAccessParticipantsData,
 }) => {
   const { interventionId, sessionId } = params;
-
-  const canAccessGeneratedReports = interventionOwnerId === userId;
 
   const isClassicSession = type === SessionTypes.CLASSIC_SESSION;
 
@@ -208,7 +207,7 @@ const InterventionNavbar = ({
             }
           />
         )}
-        {canAccessGeneratedReports && isClassicSession && (
+        {canAccessParticipantsData && isClassicSession && (
           <div
             linkMatch={formatMessage(messages.generatedReports)}
             renderAsLink={
@@ -311,11 +310,11 @@ InterventionNavbar.propTypes = {
   questionGroupsEditing: PropTypes.bool,
   match: PropTypes.object,
   interventionStatus: PropTypes.string,
-  userId: PropTypes.string,
   reportsLoaders: PropTypes.object,
   redirectToPreviewAction: PropTypes.func,
   textMessagesCount: PropTypes.number,
   generatedReportsCount: PropTypes.number,
+  canAccessParticipantsData: PropTypes.bool,
 };
 
 const mapStateToProps = createStructuredSelector({
@@ -329,7 +328,7 @@ const mapStateToProps = createStructuredSelector({
   textMessagesCount: makeSelectTextMessagesSize(),
   textLoaders: makeSelectAllLoaders(),
   generatedReportsCount: makeSelectReportsSize(),
-  userId: makeSelectUserId(),
+  canAccessParticipantsData: makeSelectCanCurrentUserAccessParticipantsData(),
 });
 
 const mapDispatchToProps = {
