@@ -4,7 +4,6 @@
  *
  */
 import React, { useLayoutEffect, useState, useEffect, useMemo } from 'react';
-import { Helmet } from 'react-helmet';
 import PropTypes from 'prop-types';
 import { useIntl } from 'react-intl';
 import { connect } from 'react-redux';
@@ -79,6 +78,7 @@ import {
 import SettingsPanel from 'containers/SettingsPanel';
 import TranslateInterventionModal from 'containers/TranslateInterventionModal/index';
 import { ShareBox, ShareBoxType } from 'containers/ShareBox';
+import { CollaborationPanel } from 'containers/CollaborationPanel';
 
 import Modal, {
   ConfirmationModal,
@@ -459,186 +459,197 @@ export function InterventionDetailsPage({
         canDeleteSession: deletionPossible,
       }}
     >
-      <AppContainer>
-        <Helmet>
-          <title>{formatMessage(messages.pageTitle, { name })}</title>
-        </Helmet>
-        <ArchiveModal />
-        <CatMhModal />
-        <ConfirmationModal
-          visible={!isNullOrUndefined(deleteConfirmationSessionId)}
-          onClose={() => setDeleteConfirmationSessionId(null)}
-          description={formatMessage(messages.sessionDeleteHeader)}
-          content={formatMessage(messages.sessionDeleteMessage)}
-          confirmAction={() => handleDeleteSession(deleteConfirmationSessionId)}
-        />
-        <Modal
-          title={formatMessage(messages.sendCopyModalTitle)}
-          onClose={closeSendCopyModal}
-          visible={sendCopyModalVisible}
-        >
-          <SelectResearchers
-            onResearchersSelected={copyInterventionToResearchers}
-            onClose={closeSendCopyModal}
-          />
-        </Modal>
+      <Column height="100%">
+        <CollaborationPanel />
+        <Row overflowY="auto">
+          <AppContainer pageTitle={formatMessage(messages.pageTitle, { name })}>
+            <ArchiveModal />
+            <CatMhModal />
+            <ConfirmationModal
+              visible={!isNullOrUndefined(deleteConfirmationSessionId)}
+              onClose={() => setDeleteConfirmationSessionId(null)}
+              description={formatMessage(messages.sessionDeleteHeader)}
+              content={formatMessage(messages.sessionDeleteMessage)}
+              confirmAction={() =>
+                handleDeleteSession(deleteConfirmationSessionId)
+              }
+            />
+            <Modal
+              title={formatMessage(messages.sendCopyModalTitle)}
+              onClose={closeSendCopyModal}
+              visible={sendCopyModalVisible}
+            >
+              <SelectResearchers
+                onResearchersSelected={copyInterventionToResearchers}
+                onClose={closeSendCopyModal}
+              />
+            </Modal>
 
-        <Modal onClose={closeTranslateModal} visible={translateModalVisible}>
-          <TranslateInterventionModal
-            id={id}
-            googleLanguageId={googleLanguageId}
-            onTranslated={closeTranslateModal}
-          />
-        </Modal>
+            <Modal
+              onClose={closeTranslateModal}
+              visible={translateModalVisible}
+            >
+              <TranslateInterventionModal
+                id={id}
+                googleLanguageId={googleLanguageId}
+                onTranslated={closeTranslateModal}
+              />
+            </Modal>
 
-        <Modal
-          title={formatMessage(messages.interventionSettingsModalTitle)}
-          onClose={() => setInterventionSettingsModalVisible(false)}
-          visible={interventionSettingsModalVisible}
-          width={INTERVENTION_SETTINGS_MODAL_WIDTH}
-        >
-          <InterventionSettingsModal
-            editingPossible={editingPossible}
-            onClose={() => setInterventionSettingsModalVisible(false)}
-          />
-        </Modal>
+            <Modal
+              title={formatMessage(messages.interventionSettingsModalTitle)}
+              onClose={() => setInterventionSettingsModalVisible(false)}
+              visible={interventionSettingsModalVisible}
+              width={INTERVENTION_SETTINGS_MODAL_WIDTH}
+            >
+              <InterventionSettingsModal
+                editingPossible={editingPossible}
+                onClose={() => setInterventionSettingsModalVisible(false)}
+              />
+            </Modal>
 
-        <Modal
-          title={formatMessage(messages.participantShareModalTitle)}
-          onClose={() => setParticipantShareModalVisible(false)}
-          visible={participantShareModalVisible}
-        >
-          <ShareBox
-            type={ShareBoxType.SESSION}
-            organizationId={organizationId}
-          />
-        </Modal>
+            <Modal
+              title={formatMessage(messages.participantShareModalTitle)}
+              onClose={() => setParticipantShareModalVisible(false)}
+              visible={participantShareModalVisible}
+            >
+              <ShareBox
+                type={ShareBoxType.SESSION}
+                organizationId={organizationId}
+              />
+            </Modal>
 
-        <InterventionInviteModal />
+            <InterventionInviteModal />
 
-        <Modal
-          title={formatMessage(messages.assignOrganization)}
-          onClose={closeAssignOrganizationModal}
-          visible={assignOrganizationModalVisible}
-          width={INTERVENTION_ASSIGN_ORGANIZATION_MODAL_WIDTH}
-        >
-          <InterventionAssignOrganizationModal
-            interventionId={id}
-            organizationId={organizationId}
-            onClose={closeAssignOrganizationModal}
-          />
-        </Modal>
+            <Modal
+              title={formatMessage(messages.assignOrganization)}
+              onClose={closeAssignOrganizationModal}
+              visible={assignOrganizationModalVisible}
+              width={INTERVENTION_ASSIGN_ORGANIZATION_MODAL_WIDTH}
+            >
+              <InterventionAssignOrganizationModal
+                interventionId={id}
+                organizationId={organizationId}
+                onClose={closeAssignOrganizationModal}
+              />
+            </Modal>
 
-        <Modal
-          title={formatMessage(messages.collaborate)}
-          onClose={closeCollaborateModal}
-          visible={collaborateModalVisible}
-          width={COLLABORATORS_MODAL_WIDTH}
-        >
-          <CollaboratorsModal interventionId={interventionId} />
-        </Modal>
+            <Modal
+              title={formatMessage(messages.collaborate)}
+              onClose={closeCollaborateModal}
+              visible={collaborateModalVisible}
+              width={COLLABORATORS_MODAL_WIDTH}
+            >
+              <CollaboratorsModal interventionId={interventionId} />
+            </Modal>
 
-        <Header
-          name={name}
-          csvGeneratedAt={csvGeneratedAt}
-          csvLink={csvLink}
-          editingPossible={editingPossible}
-          editName={editName}
-          handleChangeStatus={handleChangeStatus}
-          handleSendCsv={handleSendCsv}
-          options={options}
-          status={status}
-          organizationId={organizationId}
-          canAccessCsv={canAccessCsv}
-          openInterventionInviteModal={openInterventionInviteModal}
-          interventionType={type}
-          sharingPossible={sharingPossible}
-        />
+            <Header
+              name={name}
+              csvGeneratedAt={csvGeneratedAt}
+              csvLink={csvLink}
+              editingPossible={editingPossible}
+              editName={editName}
+              handleChangeStatus={handleChangeStatus}
+              handleSendCsv={handleSendCsv}
+              options={options}
+              status={status}
+              organizationId={organizationId}
+              canAccessCsv={canAccessCsv}
+              openInterventionInviteModal={openInterventionInviteModal}
+              interventionType={type}
+              sharingPossible={sharingPossible}
+            />
 
-        <GRow>
-          <GCol>
-            <Row justify="between">
-              <Row align="center">
-                <Tooltip
-                  id="intervention-settings"
-                  text={formatMessage(messages.interventionSettingsIconTooltip)}
-                >
-                  <Icon
-                    src={GearIcon}
-                    fill={colors.grey}
-                    onClick={() => setInterventionSettingsModalVisible(true)}
-                    role="button"
-                    aria-label={formatMessage(
-                      messages.interventionSettingsIconTooltip,
-                    )}
-                    mr={10}
-                  />
-                </Tooltip>
-                <Markup
-                  content={formatMessage(messages.interventionSettings)}
-                />
-              </Row>
+            <GRow>
+              <GCol>
+                <Row justify="between">
+                  <Row align="center">
+                    <Tooltip
+                      id="intervention-settings"
+                      text={formatMessage(
+                        messages.interventionSettingsIconTooltip,
+                      )}
+                    >
+                      <Icon
+                        src={GearIcon}
+                        fill={colors.grey}
+                        onClick={() =>
+                          setInterventionSettingsModalVisible(true)
+                        }
+                        role="button"
+                        aria-label={formatMessage(
+                          messages.interventionSettingsIconTooltip,
+                        )}
+                        mr={10}
+                      />
+                    </Tooltip>
+                    <Markup
+                      content={formatMessage(messages.interventionSettings)}
+                    />
+                  </Row>
 
-              {!isAccessRevoked && (
-                <Row align="center">
-                  {formatMessage(messages.catMhCounter, {
-                    licenseType,
-                    current: testsLeft ?? 0,
-                    initial: catMhPool ?? 0,
-                    used: createdCatMhSessionCount,
-                    counter: (chunks) => (
-                      <span
-                        style={{
-                          color: hasSmallNumberOfCatMhSessionsRemaining
-                            ? themeColors.warning
-                            : themeColors.success,
-                        }}
-                      >
-                        {chunks}
-                      </span>
-                    ),
-                  })}
-                  <Tooltip
-                    id="intervention-type-tooltip"
-                    ml={8}
-                    icon={QuestionMarkIcon}
-                    content={formatMessage(messages.catMhCountInfo)}
-                  />
+                  {!isAccessRevoked && (
+                    <Row align="center">
+                      {formatMessage(messages.catMhCounter, {
+                        licenseType,
+                        current: testsLeft ?? 0,
+                        initial: catMhPool ?? 0,
+                        used: createdCatMhSessionCount,
+                        counter: (chunks) => (
+                          <span
+                            style={{
+                              color: hasSmallNumberOfCatMhSessionsRemaining
+                                ? themeColors.warning
+                                : themeColors.success,
+                            }}
+                          >
+                            {chunks}
+                          </span>
+                        ),
+                      })}
+                      <Tooltip
+                        id="intervention-type-tooltip"
+                        ml={8}
+                        icon={QuestionMarkIcon}
+                        content={formatMessage(messages.catMhCountInfo)}
+                      />
+                    </Row>
+                  )}
                 </Row>
-              )}
-            </Row>
-          </GCol>
+              </GCol>
 
-          <GCol xs={0} xl={6} />
-        </GRow>
+              <GCol xs={0} xl={6} />
+            </GRow>
 
-        <GRow>
-          <GCol xl={6}>
-            {renderList()}
-            {createSessionLoading && (
-              <Row my={18} align="center">
-                <Spinner color={themeColors.secondary} />
-              </Row>
-            )}
-            {editingPossible && (
-              <Row my={18} align="center">
-                <SessionCreateButton
-                  canCreateCatSession={canCreateCatSession}
-                  handleSessionCreation={createSessionCall}
-                />
-              </Row>
-            )}
-            {createSessionError && (
-              <ErrorAlert errorText={createSessionError} />
-            )}
-          </GCol>
-          <GCol xl={6}>
-            <Column position="sticky" top="100px" mt={18}>
-              <SettingsPanel intervention={intervention} />
-            </Column>
-          </GCol>
-        </GRow>
-      </AppContainer>
+            <GRow>
+              <GCol xl={6}>
+                {renderList()}
+                {createSessionLoading && (
+                  <Row my={18} align="center">
+                    <Spinner color={themeColors.secondary} />
+                  </Row>
+                )}
+                {editingPossible && (
+                  <Row my={18} align="center">
+                    <SessionCreateButton
+                      canCreateCatSession={canCreateCatSession}
+                      handleSessionCreation={createSessionCall}
+                    />
+                  </Row>
+                )}
+                {createSessionError && (
+                  <ErrorAlert errorText={createSessionError} />
+                )}
+              </GCol>
+              <GCol xl={6}>
+                <Column position="sticky" top="100px" mt={18}>
+                  <SettingsPanel intervention={intervention} />
+                </Column>
+              </GCol>
+            </GRow>
+          </AppContainer>
+        </Row>
+      </Column>
     </InterventionDetailsPageContext.Provider>
   );
 }

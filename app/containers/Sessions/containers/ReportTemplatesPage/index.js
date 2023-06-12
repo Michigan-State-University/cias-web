@@ -8,6 +8,9 @@ import { injectIntl, IntlShape } from 'react-intl';
 
 import { injectReducer, injectSaga } from 'redux-injectors';
 
+import { TemplateSection } from 'models/ReportTemplate/TemplateSection';
+import { canEditReportTemplate } from 'models/Status/statusPermissions';
+
 import {
   reportTemplatesReducer,
   reportTemplatesSaga,
@@ -32,10 +35,7 @@ import {
   sessionReducer,
 } from 'global/reducers/session';
 
-import { TemplateSection } from 'models/ReportTemplate/TemplateSection';
-import { canEditReportTemplate } from 'models/Status/statusPermissions';
-
-import Box from 'components/Box';
+import Column from 'components/Column';
 
 import ReportTemplatesList from './components/ReportTemplatesList';
 import ReportTemplateDetails from './components/ReportTemplateDetails';
@@ -83,7 +83,7 @@ const ReportTemplatesPage = ({
       <Helmet>
         <title>{formatMessage(messages.pageTitle)}</title>
       </Helmet>
-      <Box overflow="hidden">
+      <Column overflow="hidden" height="100%">
         <ReportTemplatesContext.Provider
           value={{
             reportTemplates,
@@ -101,7 +101,7 @@ const ReportTemplatesPage = ({
           <ReportTemplatesList />
           <ReportTemplateDetails />
         </ReportTemplatesContext.Provider>
-      </Box>
+      </Column>
     </>
   );
 };

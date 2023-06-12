@@ -61,3 +61,8 @@ export const makeSelectInterventionSharedTo = () =>
 
 export const makeSelectInterventionCollaborators = () =>
   createSelector(selectIntervention, (substate) => substate.collaborators);
+
+export const makeSelectIsCollaboratingIntervention = () =>
+  createSelector(makeSelectIntervention(), (intervention) =>
+    Boolean(intervention?.collaboratingUsersIds?.length),
+  );

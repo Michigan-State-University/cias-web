@@ -6,7 +6,7 @@
 
 import React, { memo, useState, useRef } from 'react';
 import PropTypes from 'prop-types';
-import { connect } from 'react-redux';
+import { connect, useDispatch } from 'react-redux';
 import { createStructuredSelector } from 'reselect';
 import { FormattedMessage, injectIntl, IntlShape } from 'react-intl';
 import { Link } from 'react-router-dom';
@@ -18,9 +18,13 @@ import Box from 'components/Box';
 import Row from 'components/Row';
 import Img from 'components/Img';
 
-import useOutsideClick from 'utils/useOutsideClick';
 import { NAVIGATION } from 'models/User/RolesManager/navbarNames';
+
+import useOutsideClick from 'utils/useOutsideClick';
+import useResizeObserver from 'utils/useResizeObserver';
+
 import { makeSelectUser } from 'global/reducers/auth';
+import { saveNavbarHeight } from 'global/reducers/globalState';
 
 import {
   NavbarStyled,
@@ -29,6 +33,7 @@ import {
   DropDownContent,
   StyledRow,
   StyledComment,
+  NavbarContainer,
 } from './styled';
 import messages from './messages';
 import { navbarElements } from './dropdownContent';
@@ -37,6 +42,7 @@ import NotificationsPanel from './NotificationsPanel';
 import PreviewNavbar from './components/PreviewNavbar';
 import DefaultNavbar from './components/DefaultNavbar';
 import InterventionsNavbar from './components/InterventionsNavbar';
+import { CollaborationPanel } from '../CollaborationPanel';
 
 const renderNavbar = (navbarProps) => {
   const { navbarId, ...restProps } = navbarProps || {};
@@ -54,57 +60,76 @@ export function Navbar({
   location,
   intl,
 }) {
+  const dispatch = useDispatch();
+
   const [menuVisible, setMenuVisible] = useState(false);
   const dropdownRef = useRef(null);
   useOutsideClick(dropdownRef, () => setMenuVisible(false), menuVisible);
+
+  const isSessionsNavbar = navbarProps.navbarId === NAVIGATION.SESSIONS;
+
+  const navbarRef = useRef();
+  useResizeObserver({
+    targetRef: navbarRef,
+    onResize: (_, height) => dispatch(saveNavbarHeight(height)),
+  });
+
   return (
-    <NavbarStyled>
-      {renderNavbar({
-        ...navbarProps,
-        match,
-        location,
-        intl,
-      })}
-      <RightPanel>
-        <NavigatorAvailabilityPanel />
-        <NotificationsPanel />
-        <DropDownContainer onClick={() => !menuVisible && setMenuVisible(true)}>
-          <div ref={dropdownRef}>
-            {menuVisible && (
-              <DropDownContent>
-                {navbarElements.map(({ url, messagesKey, icon }, index) => (
-                  <StyledRow key={index} onClick={() => setMenuVisible(false)}>
-                    <Link to={url}>
-                      <Row>
-                        <Img mr={13} src={icon} />
-                        <StyledComment>
-                          <FormattedMessage
-                            {...messages[messagesKey]}
-                            title={intl.formatMessage(messages[messagesKey])}
-                          />
-                        </StyledComment>
-                      </Row>
-                    </Link>
-                  </StyledRow>
-                ))}
-              </DropDownContent>
-            )}
-          </div>
-          <UserAvatar
-            width={30}
-            height={30}
-            avatar={avatar}
-            lastName={lastName}
-            firstName={firstName}
-          />
-          <Box
-            className="user-name-info"
-            clickable
-            data-private
-          >{`${firstName} ${lastName}`}</Box>
-        </DropDownContainer>
-      </RightPanel>
-    </NavbarStyled>
+    <NavbarContainer ref={navbarRef}>
+      <NavbarStyled>
+        {renderNavbar({
+          ...navbarProps,
+          match,
+          location,
+          intl,
+        })}
+        <RightPanel>
+          <NavigatorAvailabilityPanel />
+          <NotificationsPanel />
+          <DropDownContainer
+            onClick={() => !menuVisible && setMenuVisible(true)}
+          >
+            <div ref={dropdownRef}>
+              {menuVisible && (
+                <DropDownContent>
+                  {navbarElements.map(({ url, messagesKey, icon }, index) => (
+                    <StyledRow
+                      key={index}
+                      onClick={() => setMenuVisible(false)}
+                    >
+                      <Link to={url}>
+                        <Row>
+                          <Img mr={13} src={icon} />
+                          <StyledComment>
+                            <FormattedMessage
+                              {...messages[messagesKey]}
+                              title={intl.formatMessage(messages[messagesKey])}
+                            />
+                          </StyledComment>
+                        </Row>
+                      </Link>
+                    </StyledRow>
+                  ))}
+                </DropDownContent>
+              )}
+            </div>
+            <UserAvatar
+              width={30}
+              height={30}
+              avatar={avatar}
+              lastName={lastName}
+              firstName={firstName}
+            />
+            <Box
+              className="user-name-info"
+              clickable
+              data-private
+            >{`${firstName} ${lastName}`}</Box>
+          </DropDownContainer>
+        </RightPanel>
+      </NavbarStyled>
+      {isSessionsNavbar && <CollaborationPanel />}
+    </NavbarContainer>
   );
 }
 

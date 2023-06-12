@@ -11,9 +11,11 @@ import {
   canUseQuickExit,
 } from 'models/User/RolesManager';
 
-import { makeSelectUser, REDIRECT_QUERY_KEY } from 'global/reducers/auth';
 import { arraysOverlap } from 'utils/arrayUtils';
 import LocalStorageService from 'utils/localStorageService';
+
+import { makeSelectUser, REDIRECT_QUERY_KEY } from 'global/reducers/auth';
+import { makeSelectNavbarHeight } from 'global/reducers/globalState';
 
 import Sidebar from 'containers/Sidebar';
 import Navbar from 'containers/Navbar';
@@ -34,6 +36,7 @@ class AppRoute extends Route {
         location,
         disableQuickExit,
         unauthorizedUsersOnly,
+        navbarHeight,
       },
     } = this;
 
@@ -103,6 +106,7 @@ class AppRoute extends Route {
                 <MainAppContainer
                   id="main-app-container"
                   $isSidebarVisible={isSidebarVisible}
+                  $navbarHeight={navbarHeight}
                 >
                   {render()}
                 </MainAppContainer>
@@ -124,6 +128,7 @@ AppRoute.propTypes = {
   protectedRoute: PropTypes.bool,
   logOut: PropTypes.func,
   disableQuickExit: PropTypes.bool,
+  navbarHeight: PropTypes.number,
 };
 
 AppRoute.defaultProps = {
@@ -133,6 +138,7 @@ AppRoute.defaultProps = {
 
 const mapStateToProps = createStructuredSelector({
   user: makeSelectUser(),
+  navbarHeight: makeSelectNavbarHeight(),
 });
 
 const withConnect = connect(mapStateToProps);

@@ -62,7 +62,7 @@ const Header = ({
     <GCol>
       <GRow xl={12}>
         <GCol>
-          <Row justify="between" mt={64}>
+          <Row justify="between" mt={24}>
             {renderBackButton}
           </Row>
         </GCol>
