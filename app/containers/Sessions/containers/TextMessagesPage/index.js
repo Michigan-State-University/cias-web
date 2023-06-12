@@ -8,8 +8,6 @@ import { connect } from 'react-redux';
 import { useIntl } from 'react-intl';
 import { Helmet } from 'react-helmet';
 
-import { canEdit } from 'models/Status/statusPermissions';
-
 import {
   textMessagesReducer,
   allTextMessagesSagas,
@@ -26,10 +24,10 @@ import {
   makeSelectSelectedMessageState,
 } from 'global/reducers/textMessages';
 import {
-  makeSelectInterventionStatus,
   interventionReducer,
   fetchInterventionSaga,
   fetchInterventionRequest,
+  makeSelectEditingPossible,
 } from 'global/reducers/intervention';
 import {
   getSessionRequest,
@@ -57,11 +55,11 @@ const TextMessagingPage = ({
   changeSelectedId,
   selectedMessage,
   selectedMessageState,
-  status,
   fetchIntervention,
   fetchSession,
   filters,
   setFilters,
+  editingPossible,
 }) => {
   const { formatMessage } = useIntl();
 
@@ -77,7 +75,6 @@ const TextMessagingPage = ({
     fetchSession({ sessionId, interventionId });
   }, [interventionId, sessionId]);
 
-  const editingPossible = canEdit(status);
   return (
     <TextMessagesContext.Provider
       value={{
@@ -128,7 +125,7 @@ TextMessagingPage.propTypes = {
   match: PropTypes.object,
   selectedMessage: PropTypes.object,
   selectedMessageState: PropTypes.object,
-  status: PropTypes.string,
+  editingPossible: PropTypes.bool,
   fetchIntervention: PropTypes.func,
   fetchSession: PropTypes.func,
   setFilters: PropTypes.func,
@@ -143,7 +140,7 @@ const mapStateToProps = createStructuredSelector({
   selectedMessageState: makeSelectSelectedMessageState(),
   loaders: makeSelectLoaders(),
   errors: makeSelectErrors(),
-  status: makeSelectInterventionStatus(),
+  editingPossible: makeSelectEditingPossible(),
 });
 
 const mapDispatchToProps = {

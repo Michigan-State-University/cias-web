@@ -3,6 +3,7 @@ export const INTERVENTION_CHANNEL_NAME = 'InterventionChannel';
 export enum InterventionChannelMessageTopic {
   EDITING_STARTED = 'editing_started',
   EDITING_STOPPED = 'editing_stopped',
+  UNEXPECTED_ERROR = 'unexpected_error',
 }
 
 export enum InterventionChannelActionName {

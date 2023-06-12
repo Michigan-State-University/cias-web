@@ -1,5 +1,7 @@
 import { createSelector } from 'reselect';
 
+import { canEdit } from 'models/Status/statusPermissions';
+
 import { makeSelectUserId } from 'global/reducers/auth';
 
 import { initialState } from './reducer';
@@ -101,4 +103,25 @@ export const makeSelectCurrentUserCollaboratorData = () =>
   createSelector(
     makeSelectIntervention(),
     (intervention) => intervention?.currentUserCollaboratorData,
+  );
+
+export const makeSelectCanCurrentUserMakeChanges = () =>
+  createSelector(
+    makeSelectHasCollaborators(),
+    makeSelectIsCurrentUserEditor(),
+    (hasCollaborators, isCurrentUserEditor) => {
+      if (!hasCollaborators) return true;
+      return isCurrentUserEditor;
+    },
+  );
+
+export const makeSelectEditingPossible = () =>
+  createSelector(
+    makeSelectIntervention(),
+    makeSelectCanCurrentUserMakeChanges(),
+    (intervention, canCurrentUserMakeChanges) => {
+      if (!intervention) return false;
+      if (!canEdit(intervention.status)) return false;
+      return canCurrentUserMakeChanges;
+    },
   );

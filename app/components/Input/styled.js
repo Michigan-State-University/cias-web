@@ -32,6 +32,8 @@ export const QuillStyled = styled(ReactQuill)`
         zIndex: 1000,
       },
     }}
+  ${({ readOnly }) => (readOnly ? 'cursor: not-allowed' : '')};
+
   .ql-editor {
     font-weight: 400;
     padding: 10px;
@@ -54,6 +56,10 @@ export const QuillStyled = styled(ReactQuill)`
     font-size: ${({ defaultFontSize }) =>
       defaultFontSize ? `${defaultFontSize}px` : 'initial'};
     font-family: ${fontFamily};
+  }
+
+  .ql-container * {
+    ${({ readOnly }) => (readOnly ? 'cursor: not-allowed' : '')};
   }
 `;
 

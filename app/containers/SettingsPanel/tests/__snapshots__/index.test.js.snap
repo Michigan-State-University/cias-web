@@ -460,6 +460,7 @@ exports[`<SettingsPanel /> Should render and match the snapshot 1`] = `
   min-height: -moz-max-content;
   min-height: max-content;
   border: 1px solid transparent;
+  cursor: not-allowed;
 }
 
 .c37 .ql-editor {
@@ -485,6 +486,10 @@ exports[`<SettingsPanel /> Should render and match the snapshot 1`] = `
 .c37 .ql-container {
   font-size: initial;
   font-family: DM Sans;
+}
+
+.c37 .ql-container * {
+  cursor: not-allowed;
 }
 
 .c13 {

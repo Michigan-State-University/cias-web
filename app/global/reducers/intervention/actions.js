@@ -96,6 +96,7 @@ import {
   SET_CURRENT_EDITOR,
   SET_STARTING_EDITING,
   SET_STOPPING_EDITING,
+  RESET_COLLABORATION_STATE,
 } from './constants';
 
 export const fetchInterventionRequest = (id) =>
@@ -394,3 +395,6 @@ export const setStartingEditing = (startingEditing) =>
 
 export const setStoppingEditing = (stoppingEditing) =>
   actionBuilder(SET_STOPPING_EDITING, { stoppingEditing });
+
+export const resetCollaborationState = () =>
+  actionBuilder(RESET_COLLABORATION_STATE, {});

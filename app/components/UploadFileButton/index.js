@@ -28,6 +28,7 @@ const UploadFileButton = ({
   dropzoneProps,
   iconProps,
   isLoading,
+  disabled,
   ...restProps
 }) => {
   const { getRootProps, getInputProps, open, acceptedFiles } = useDropzone({
@@ -35,6 +36,7 @@ const UploadFileButton = ({
     noKeyboard: true,
     accept,
     noClick: true,
+    disabled,
     ...dropzoneProps,
   });
 
@@ -45,12 +47,17 @@ const UploadFileButton = ({
   }, [acceptedFiles]);
 
   return (
-    <Box {...getRootProps()} className={className} {...restProps}>
+    <Box
+      {...getRootProps()}
+      className={className}
+      disabled={disabled}
+      {...restProps}
+    >
       {isLoading && <Loader type="inline" />}
       {!isLoading && (
         <>
           <input {...getInputProps()} />
-          <Row align="center" onClick={open} clickable>
+          <Row align="center" onClick={open} clickable disabled={disabled}>
             {icon && <Img src={icon} alt="upload" mr={10} {...iconProps} />}
             <Text {...textProps}>{children}</Text>
           </Row>
@@ -70,6 +77,7 @@ UploadFileButton.propTypes = {
   dropzoneProps: PropTypes.object,
   iconProps: PropTypes.object,
   isLoading: PropTypes.bool,
+  disabled: PropTypes.bool,
 };
 
 UploadFileButton.defaultProps = {

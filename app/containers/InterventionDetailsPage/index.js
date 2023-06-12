@@ -34,7 +34,6 @@ import isNullOrUndefined from 'utils/isNullOrUndefined';
 import { reorder } from 'utils/reorder';
 import {
   canArchive,
-  canDeleteSession,
   canEdit,
   canShareWithParticipants,
 } from 'models/Status/statusPermissions';
@@ -63,6 +62,9 @@ import {
   makeSelectInterventionLoader,
   exportInterventionRequest,
   exportInterventionSaga,
+  makeSelectEditingPossible,
+  makeSelectIsCurrentUserInterventionOwner,
+  makeSelectCanCurrentUserMakeChanges,
 } from 'global/reducers/intervention';
 import { interventionOptionsSaga } from 'global/sagas/interventionOptionsSaga';
 import {
@@ -134,9 +136,12 @@ export function InterventionDetailsPage({
   fetchSessionEmails,
   deleteSession,
   externalCopySession,
-  user: { id: userId },
+  user: { id: userId, organizableId: userOrganizableId },
   editSession,
   exportIntervention,
+  canCurrentUserMakeChanges,
+  editingPossible,
+  isCurrentUserInterventionOwner,
 }) {
   const { interventionId } = useParams();
   const { formatMessage } = useIntl();
@@ -170,10 +175,11 @@ export function InterventionDetailsPage({
     (!catMhPool ||
       testsLeft / catMhPool <= CAT_MH_TEST_COUNT_WARNING_THRESHOLD);
 
-  const editingPossible = canEdit(status);
-  const sharingPossible = canShareWithParticipants(status);
-  const archivingPossible = canArchive(status);
-  const deletionPossible = canDeleteSession(status);
+  const showSessionCreateButton = canEdit(status);
+  const sharingPossible =
+    canCurrentUserMakeChanges && canShareWithParticipants(status);
+  const archivingPossible = canCurrentUserMakeChanges && canArchive(status);
+
   const canAccessCsv = interventionOwnerId === userId;
 
   const [sendCopyModalVisible, setSendCopyModalVisible] = useState(false);
@@ -249,6 +255,8 @@ export function InterventionDetailsPage({
     [isAccessRevoked],
   );
 
+  const canEditCollaborators = isAdmin || isCurrentUserInterventionOwner;
+
   const handleExportIntervention = () => exportIntervention(id);
 
   const options = [
@@ -288,7 +296,7 @@ export function InterventionDetailsPage({
             action: openAssignOrganizationModal,
             label: formatMessage(messages.assignOrganization),
             id: 'assignOrganization',
-            disabled: !canEdit(status),
+            disabled: !canEdit(status) || !canCurrentUserMakeChanges,
           },
         ]
       : []),
@@ -299,6 +307,7 @@ export function InterventionDetailsPage({
             action: () => openCatMhModal(intervention),
             label: formatMessage(messages.catMhSettingsModalTitle),
             id: 'catMhAccess',
+            disabled: !canCurrentUserMakeChanges,
           },
         ]
       : []),
@@ -309,12 +318,16 @@ export function InterventionDetailsPage({
       action: handleExportIntervention,
       color: colors.bluewood,
     },
-    {
-      id: 'collaborate',
-      label: formatMessage(messages.collaborate),
-      icon: CollaborateIcon,
-      action: openCollaborateModal,
-    },
+    ...(canEditCollaborators
+      ? [
+          {
+            id: 'collaborate',
+            label: formatMessage(messages.collaborate),
+            icon: CollaborateIcon,
+            action: openCollaborateModal,
+          },
+        ]
+      : []),
   ];
 
   useLayoutEffect(() => {
@@ -416,7 +429,7 @@ export function InterventionDetailsPage({
                       <SessionListItem
                         disabled={!editingPossible}
                         sharingPossible={sharingPossible}
-                        deletionPossible={deletionPossible}
+                        deletionPossible={editingPossible}
                         sharedTo={sharedTo}
                         session={session}
                         index={index}
@@ -456,7 +469,6 @@ export function InterventionDetailsPage({
         canEdit: editingPossible,
         canShareWithParticipants: sharingPossible,
         canArchive: archivingPossible,
-        canDeleteSession: deletionPossible,
       }}
     >
       <Column height="100%">
@@ -547,6 +559,7 @@ export function InterventionDetailsPage({
               name={name}
               csvGeneratedAt={csvGeneratedAt}
               csvLink={csvLink}
+              canCurrentUserMakeChanges={canCurrentUserMakeChanges}
               editingPossible={editingPossible}
               editName={editName}
               handleChangeStatus={handleChangeStatus}
@@ -558,6 +571,7 @@ export function InterventionDetailsPage({
               openInterventionInviteModal={openInterventionInviteModal}
               interventionType={type}
               sharingPossible={sharingPossible}
+              userOrganizableId={userOrganizableId}
             />
 
             <GRow>
@@ -629,11 +643,12 @@ export function InterventionDetailsPage({
                     <Spinner color={themeColors.secondary} />
                   </Row>
                 )}
-                {editingPossible && (
+                {showSessionCreateButton && (
                   <Row my={18} align="center">
                     <SessionCreateButton
                       canCreateCatSession={canCreateCatSession}
                       handleSessionCreation={createSessionCall}
+                      disabled={!editingPossible}
                     />
                   </Row>
                 )}
@@ -676,6 +691,9 @@ InterventionDetailsPage.propTypes = {
   editSession: PropTypes.func,
   user: PropTypes.object,
   exportIntervention: PropTypes.func,
+  canCurrentUserMakeChanges: PropTypes.bool,
+  editingPossible: PropTypes.bool,
+  isCurrentUserInterventionOwner: PropTypes.bool,
 };
 
 const mapStateToProps = createStructuredSelector({
@@ -688,6 +706,9 @@ const mapStateToProps = createStructuredSelector({
   createSessionError: makeSelectInterventionError('createSessionError'),
   sessionIndex: makeSelectCurrentSessionIndex(),
   user: makeSelectUser(),
+  canCurrentUserMakeChanges: makeSelectCanCurrentUserMakeChanges(),
+  editingPossible: makeSelectEditingPossible(),
+  isCurrentUserInterventionOwner: makeSelectIsCurrentUserInterventionOwner(),
 });
 
 const mapDispatchToProps = {

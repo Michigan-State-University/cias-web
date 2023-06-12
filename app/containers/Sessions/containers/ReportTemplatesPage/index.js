@@ -1,4 +1,4 @@
-import React, { useEffect, useMemo } from 'react';
+import React, { useEffect } from 'react';
 import PropTypes from 'prop-types';
 import { Helmet } from 'react-helmet';
 import { compose } from 'redux';
@@ -9,7 +9,6 @@ import { injectIntl, IntlShape } from 'react-intl';
 import { injectReducer, injectSaga } from 'redux-injectors';
 
 import { TemplateSection } from 'models/ReportTemplate/TemplateSection';
-import { canEditReportTemplate } from 'models/Status/statusPermissions';
 
 import {
   reportTemplatesReducer,
@@ -27,7 +26,7 @@ import {
 import {
   fetchInterventionSaga,
   interventionReducer,
-  makeSelectIntervention,
+  makeSelectEditingPossible,
 } from 'global/reducers/intervention';
 import {
   getSessionRequest,
@@ -57,11 +56,9 @@ const ReportTemplatesPage = ({
   fetchReportTemplates,
   getSession,
   intl: { formatMessage },
-  intervention,
   selectTemplate,
+  editingPossible,
 }) => {
-  const { status } = intervention ?? {};
-
   useEffect(() => {
     getSession({
       interventionId,
@@ -75,8 +72,6 @@ const ReportTemplatesPage = ({
   useEffect(() => {
     if (loaders.shouldRefetch) fetchReportTemplates(sessionId);
   }, [loaders.shouldRefetch]);
-
-  const canEdit = useMemo(() => canEditReportTemplate(status), [status]);
 
   return (
     <>
@@ -95,7 +90,7 @@ const ReportTemplatesPage = ({
             interventionId,
             selectedTemplateSectionId,
             selectedTemplateSection,
-            canEdit,
+            canEdit: editingPossible,
           }}
         >
           <ReportTemplatesList />
@@ -118,8 +113,8 @@ ReportTemplatesPage.propTypes = {
   singleReportTemplate: PropTypes.object,
   selectedTemplateSectionId: PropTypes.string,
   selectedTemplateSection: PropTypes.shape(TemplateSection),
-  intervention: PropTypes.shape({ status: PropTypes.string }),
   selectTemplate: PropTypes.func,
+  editingPossible: PropTypes.bool,
 };
 
 const mapStateToProps = createStructuredSelector({
@@ -130,7 +125,7 @@ const mapStateToProps = createStructuredSelector({
   singleReportTemplate: makeSelectSingleReportTemplate(),
   selectedTemplateSectionId: makeSelectSelectedSectionTemplateId(),
   selectedTemplateSection: makeSelectSelectedSectionTemplate(),
-  intervention: makeSelectIntervention(),
+  editingPossible: makeSelectEditingPossible(),
 });
 
 const mapDispatchToProps = {

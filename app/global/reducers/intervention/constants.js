@@ -211,3 +211,5 @@ export const REMOVE_COLLABORATOR_ERROR =
 export const SET_CURRENT_EDITOR = 'app/Dashboard/SET_CURRENT_EDITOR';
 export const SET_STARTING_EDITING = 'app/Dashboard/SET_STARTING_EDITING';
 export const SET_STOPPING_EDITING = 'app/Dashboard/SET_STOPPING_EDITING';
+export const RESET_COLLABORATION_STATE =
+  'app/Dashboard/RESET_COLLABORATION_STATE';
