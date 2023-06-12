@@ -1,9 +1,12 @@
+const BASE_INTERVENTION_ROUTE = '/interventions/:interventionId';
+const SPECIFIC_INTERVENTION_ROUTE = `${BASE_INTERVENTION_ROUTE}/sessions/:sessionId/`;
+
 export const INTERVENTION_CHANNEL_ROUTES = [
-  '/interventions/:interventionId',
-  '/interventions/:interventionId/sessions/:sessionId/edit',
-  '/interventions/:interventionId/sessions/:sessionId/settings',
-  '/interventions/:interventionId/sessions/:sessionId/report-templates',
-  '/interventions/:interventionId/sessions/:sessionId/generated-reports',
-  '/interventions/:interventionId/sessions/:sessionId/sms-messaging',
-  '/interventions/:interventionId/sessions/:sessionId/map',
+  BASE_INTERVENTION_ROUTE,
+  `${SPECIFIC_INTERVENTION_ROUTE}/edit`,
+  `${SPECIFIC_INTERVENTION_ROUTE}/settings`,
+  `${SPECIFIC_INTERVENTION_ROUTE}/report-templates`,
+  `${SPECIFIC_INTERVENTION_ROUTE}/sms-messaging`,
+  `${SPECIFIC_INTERVENTION_ROUTE}/generated-reports`,
+  `${SPECIFIC_INTERVENTION_ROUTE}/map`,
 ];
