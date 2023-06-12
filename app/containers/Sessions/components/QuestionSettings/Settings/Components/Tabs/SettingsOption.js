@@ -49,24 +49,28 @@ const SettingsOption = ({
     }
   };
 
+  const numericInput = (
+    <>
+      <H3>{formatMessage(messages[`${index}`])}</H3>
+
+      <Input
+        placeholder={formatMessage(messages.textLimitSettingsPlaceholder)}
+        type="singleline"
+        keyboard="tel"
+        value={setting === null ? '' : `${setting}`}
+        validator={numericValidator}
+        onBlur={handleStringToNumericUpdate}
+        width={150}
+        px={12}
+      />
+    </>
+  );
+
   const renderSetting = () => {
+    if (index === 'min_length' || index === 'max_length') return numericInput;
     switch (setting?.constructor) {
       case Number:
-        return (
-          <>
-            <H3>{formatMessage(messages[`${index}`])}</H3>
-
-            <Input
-              placeholder={formatMessage(messages.textLimitSettingsPlaceholder)}
-              type="singleline"
-              keyboard="tel"
-              value={`${setting}`}
-              validator={numericValidator}
-              onBlur={handleStringToNumericUpdate}
-              width={150}
-            />
-          </>
-        );
+        return numericInput;
       case Boolean:
       default:
         return (

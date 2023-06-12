@@ -34,6 +34,12 @@ export const orderSettings = (settings) =>
     ...(!isNullOrUndefined(settings.text_limit) && {
       text_limit: settings.text_limit,
     }),
+    ...('min_length' in settings && {
+      min_length: settings.min_length,
+    }),
+    ...('max_length' in settings && {
+      max_length: settings.max_length,
+    }),
   };
 
 export const getSettingOptionTooltipText = (formatMessage, setting) => {
