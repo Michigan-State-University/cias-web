@@ -143,7 +143,7 @@ const SingleTile = ({
     createdAt,
     updatedAt,
     googleLanguageId,
-    collaboratingUsersIds,
+    isCurrentUserCollaborator,
   } = tileData || {};
 
   const handleCsvRequest = () => sendCsv(id);
@@ -237,8 +237,6 @@ const SingleTile = ({
   const copyInterventionToResearchers = (users) =>
     copyIntervention({ interventionId: id, users });
 
-  const isCollaborating = collaboratingUsersIds?.includes(userId);
-
   if (isLoading)
     return (
       <TileContainer>
@@ -294,7 +292,7 @@ const SingleTile = ({
         <TileContainer>
           <Heading>
             <Row gap={12} align="center">
-              {isCollaborating && <CollaboratingIndicator />}
+              {isCurrentUserCollaborator && <CollaboratingIndicator />}
               {status && (
                 <Row align="center" gap={5}>
                   <Text lineHeight={1}>

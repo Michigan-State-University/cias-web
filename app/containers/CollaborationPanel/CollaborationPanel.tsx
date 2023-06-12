@@ -1,13 +1,25 @@
-import React, { memo, useState } from 'react';
+import React, { memo, useContext } from 'react';
 import { useIntl } from 'react-intl';
 import { useSelector } from 'react-redux';
 
 import { colors, themeColors } from 'theme';
 
-import { makeSelectIsCollaboratingIntervention } from 'global/reducers/intervention';
+import { Editor } from 'models/Intervention';
+import { CollaboratorData } from 'models/Collaborator';
+
+import {
+  makeSelectCollaborationLoading,
+  makeSelectCurrentEditor,
+  makeSelectCurrentUserCollaboratorData,
+  makeSelectHasCollaborators,
+  makeSelectIsCurrentUserEditor,
+  makeSelectIsCurrentUserInterventionOwner,
+} from 'global/reducers/intervention';
+
+import { InterventionChannelContext } from 'utils/useInterventionChannel';
 
 import Row from 'components/Row';
-import Text from 'components/Text';
+import Text, { EllipsisText } from 'components/Text';
 import { LabelPosition, Switch } from 'components/Switch';
 
 import messages from './messages';
@@ -17,24 +29,39 @@ export type Props = {};
 const Component: React.FC<Props> = () => {
   const { formatMessage } = useIntl();
 
-  // TODO https://htdevelopers.atlassian.net/browse/CIAS30-3416 Create useInterventionChannel hook
+  const interventionChannel = useContext(InterventionChannelContext);
 
-  const isCollaborating = useSelector(makeSelectIsCollaboratingIntervention());
+  const hasCollaborators: boolean = useSelector(makeSelectHasCollaborators());
+  const isLoading: boolean = useSelector(makeSelectCollaborationLoading());
+  const isCurrentUserEditor: boolean = useSelector(
+    makeSelectIsCurrentUserEditor(),
+  );
+  const currentEditor: Nullable<Editor> = useSelector(
+    makeSelectCurrentEditor(),
+  );
+  const isCurrentUserInterventionOwner: boolean = useSelector(
+    makeSelectIsCurrentUserInterventionOwner(),
+  );
+  const currentUserCollaboratorData: Nullable<CollaboratorData> = useSelector(
+    makeSelectCurrentUserCollaboratorData(),
+  );
 
-  // TODO https://htdevelopers.atlassian.net/browse/CIAS30-3416 replace with redux
-  const [editing, setEditing] = useState(false);
-  const [loading, setLoading] = useState(false);
+  const editingByOtherUser = !!currentEditor && !isCurrentUserEditor;
+  const canEdit =
+    isCurrentUserInterventionOwner || currentUserCollaboratorData?.edit;
 
-  // TODO https://htdevelopers.atlassian.net/browse/CIAS30-3416 replace with channel action
+  // TODO disable editing if switch is not on
+  // TODO Hide participant data if user doesn't have correct access
+
   const handleToggle = (editingEnabled: boolean) => {
-    setLoading(true);
-    setTimeout(() => {
-      setEditing(editingEnabled);
-      setLoading(false);
-    }, 1000);
+    if (editingEnabled) {
+      interventionChannel?.startEditing();
+      return;
+    }
+    interventionChannel?.stopEditing();
   };
 
-  if (!isCollaborating) return null;
+  if (!hasCollaborators) return null;
 
   return (
     <Row
@@ -46,26 +73,41 @@ const Component: React.FC<Props> = () => {
       flexShrink={0}
       gap={16}
       borderBottom={`1px solid ${
-        editing ? themeColors.secondary : colors.lightDivider
+        isCurrentUserEditor ? themeColors.secondary : colors.lightDivider
       }`}
+      px={48}
     >
-      <Text fontSize={15} lineHeight={1.5}>
-        {formatMessage(messages.currentMode, { editing })}
+      <Text fontSize={15} lineHeight={1.5} flexShrink={0}>
+        {formatMessage(messages.currentMode, { editing: isCurrentUserEditor })}
       </Text>
-      <Switch
-        id="enable-intervention-editing"
-        checked={editing}
-        // TODO https://htdevelopers.atlassian.net/browse/CIAS30-3416 replace above with below
-        // checked={(editing || startingEditing) && !stoppingEditing}
-        onToggle={handleToggle}
-        labelPosition={LabelPosition.Right}
-        labelOffset={8}
-        loading={loading}
-      >
-        <Text fontSize={15} lineHeight={1.5}>
-          {formatMessage(messages.enableEditing)}
-        </Text>
-      </Switch>
+      {canEdit && (
+        <>
+          <Row flexShrink={0} align="center">
+            <Switch
+              id="enable-intervention-editing"
+              checked={isCurrentUserEditor}
+              onToggle={handleToggle}
+              labelPosition={LabelPosition.Right}
+              labelOffset={8}
+              loading={isLoading}
+              disabled={editingByOtherUser}
+            >
+              <Text fontSize={15} lineHeight={1.5}>
+                {formatMessage(messages.enableEditing)}
+              </Text>
+            </Switch>
+          </Row>
+          {editingByOtherUser && (
+            <EllipsisText
+              text={formatMessage(messages.editedByOtherUser, {
+                ...currentEditor,
+              })}
+              fontSize={15}
+              lineHeight={1.5}
+            />
+          )}
+        </>
+      )}
     </Row>
   );
 };

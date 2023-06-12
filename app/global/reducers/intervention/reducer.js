@@ -106,6 +106,9 @@ import {
   REMOVE_COLLABORATOR_SUCCESS,
   REMOVE_COLLABORATOR_ERROR,
   ADD_COLLABORATORS_SUCCESS,
+  SET_CURRENT_EDITOR,
+  SET_STARTING_EDITING,
+  SET_STOPPING_EDITING,
 } from './constants';
 
 export const initialState = {
@@ -145,6 +148,8 @@ export const initialState = {
     changeInterventionNarrator: false,
     editShortLinks: false,
     collaborators: false,
+    startingEditing: false,
+    stoppingEditing: false,
   },
   errors: {
     fetchInterventionError: null,
@@ -638,6 +643,9 @@ export const interventionReducer = (state = initialState, action) =>
       }
       case REMOVE_COLLABORATOR_SUCCESS: {
         assignDraftItems(draft.collaborators, draft.cache.collaborators);
+        if (!draft.collaborators?.length && draft.intervention) {
+          draft.intervention.hasCollaborators = false;
+        }
         break;
       }
       case REMOVE_COLLABORATOR_ERROR: {
@@ -647,6 +655,25 @@ export const interventionReducer = (state = initialState, action) =>
       case ADD_COLLABORATORS_SUCCESS: {
         draft.collaborators.push(...action.payload.collaborators);
         assignDraftItems(draft.collaborators, draft.cache.collaborators);
+        if (draft.intervention) {
+          draft.intervention.hasCollaborators = true;
+        }
+        break;
+      }
+      case SET_CURRENT_EDITOR: {
+        if (!draft.intervention) return;
+        const { currentEditor } = action.payload;
+        draft.intervention.currentEditor = currentEditor;
+        break;
+      }
+      case SET_STARTING_EDITING: {
+        const { startingEditing } = action.payload;
+        draft.loaders.startingEditing = startingEditing;
+        break;
+      }
+      case SET_STOPPING_EDITING: {
+        const { stoppingEditing } = action.payload;
+        draft.loaders.stoppingEditing = stoppingEditing;
         break;
       }
     }

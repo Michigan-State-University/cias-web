@@ -6,10 +6,13 @@ type CollaboratorUser = {
   email: string;
 };
 
-export type Collaborator = {
-  dataAccess: boolean;
-  edit: boolean;
-  view: boolean;
-  user: CollaboratorUser;
+export type CollaboratorData = {
   id: string;
+  view: boolean;
+  edit: boolean;
+  dataAccess: boolean;
+};
+
+export type Collaborator = CollaboratorData & {
+  user: CollaboratorUser;
 };
