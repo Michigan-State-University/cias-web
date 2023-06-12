@@ -287,7 +287,6 @@ const SettingsPanel = ({ intervention }: Props) => {
           {showConversationsTranscriptPanel && (
             <ConversationsTranscriptPanel
               transcript={conversationsTranscript}
-              canCurrentUserMakeChanges={canCurrentUserMakeChanges}
             />
           )}
           <InterventionRadioPanel
