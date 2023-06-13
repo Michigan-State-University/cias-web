@@ -6,7 +6,6 @@ import dayjs from 'dayjs';
 
 import { colors, borders } from 'theme';
 
-import { getFileUrl } from 'utils/getApiFileUrl';
 import { FILE_GENERATION_TIME_FORMAT } from 'utils/dayjs';
 
 import i18nGlobalMessages from 'global/i18n/globalMessages';
@@ -89,9 +88,7 @@ export const ConversationsTranscriptPanel = ({
               stretchContent
             >
               <FileDownload
-                url={getFileUrl(
-                  `v1/interventions/${interventionId}/generated_conversations_transcript`,
-                )}
+                url={`/v1/interventions/${interventionId}/generated_conversations_transcript`}
                 fileName={filename}
               >
                 <Button title={formatMessage(messages.downloadTranscript)} />
