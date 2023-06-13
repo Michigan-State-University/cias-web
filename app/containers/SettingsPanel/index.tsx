@@ -247,7 +247,10 @@ const SettingsPanel = ({ intervention }: Props) => {
   };
 
   const showConversationsTranscriptPanel =
-    canAccessParticipantsData && (liveChatEnabled || conversationsPresent);
+    canAccessParticipantsData &&
+    (liveChatEnabled ||
+      conversationsPresent ||
+      conversationsTranscriptGeneratedAt);
 
   // @ts-ignore
   if (fetchInterventionLoading) return <Loader />;
