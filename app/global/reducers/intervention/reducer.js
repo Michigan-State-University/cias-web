@@ -555,10 +555,10 @@ export const interventionReducer = (state = initialState, action) =>
         break;
 
       case UPDATE_INTERVENTION_CONVERSATIONS_TRANSCRIPT:
-        const { transcript, createdAt } = action.payload;
+        const { name, createdAt } = action.payload.transcript;
         if (draft.intervention) {
           draft.intervention.conversationsTranscriptGeneratedAt = createdAt;
-          draft.intervention.conversationsTranscriptFilename = transcript.name;
+          draft.intervention.conversationsTranscriptFilename = name;
         }
         break;
       case EXPORT_INTERVENTION_REQUEST:

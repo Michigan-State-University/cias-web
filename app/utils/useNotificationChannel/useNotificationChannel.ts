@@ -53,14 +53,11 @@ export const useNotificationChannel = () => {
     );
     dispatch(onNewNotificationReceive(notification));
 
-    const { event, data, createdAt } = notification;
+    const { event, data } = notification;
 
     switch (event) {
       case NotificationEvent.INTERVENTION_CONVERSATIONS_TRANSCRIPT_READY: {
-        dispatch(
-          // TODO get generatedAt from notification data
-          updateInterventionConversationsTranscript(data.transcript, createdAt),
-        );
+        dispatch(updateInterventionConversationsTranscript(data.transcript));
         break;
       }
       case NotificationEvent.CONVERSATION_TRANSCRIPT_READY: {
