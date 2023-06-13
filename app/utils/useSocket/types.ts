@@ -5,7 +5,7 @@ export type SocketErrorMessageData<AdditionalErrorData extends object = {}> = {
 } & AdditionalErrorData;
 
 export type SocketMessageStatus = 200;
-export type SocketErrorMessageStatus = 422 | 404;
+export type SocketErrorMessageStatus = 422 | 404 | 400;
 
 // incoming message
 export type SocketMessage<
@@ -38,6 +38,7 @@ export type SocketAction<Action extends string, Data extends object> = {
 export type SocketOptions<TConnectionParams> = {
   suspend?: boolean;
   socketConnectionParams?: TConnectionParams;
+  onUnsubscribe?: () => void;
 };
 
 export type SocketMessageListener<T extends Message> = (message: T) => void;

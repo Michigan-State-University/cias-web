@@ -31,6 +31,8 @@ import {
   NotificationChannelMessageTopic,
 } from './constants';
 
+export type NotificationChannel = ReturnType<typeof useNotificationChannel>;
+
 export const useNotificationChannel = () => {
   const dispatch = useDispatch();
 

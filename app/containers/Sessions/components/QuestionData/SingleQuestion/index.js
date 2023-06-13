@@ -15,7 +15,6 @@ import {
 } from 'global/reducers/questions';
 import globalMessages from 'global/i18n/globalMessages';
 import { numericValidator } from 'utils/validators';
-import { canEdit } from 'models/Status/statusPermissions';
 import { themeColors, colors } from 'theme';
 
 import FlexibleWidthApprovableInput from 'components/Input/FlexibleWidthApprovableInput';
@@ -44,8 +43,8 @@ const SingleQuestion = ({
   removeAnswer,
   reorderAnswers,
   isNarratorTab,
-  interventionStatus,
   intl: { formatMessage },
+  editingPossible,
 }) => {
   const radioButtonRef = useRef(null);
 
@@ -61,7 +60,6 @@ const SingleQuestion = ({
 
   const { data } = selectedQuestion.body;
 
-  const editingPossible = canEdit(interventionStatus);
   const isNarratorTabOrEditNotPossible = isNarratorTab || !editingPossible;
 
   const handleMouseEnter = (index) => () => {
@@ -196,7 +194,7 @@ SingleQuestion.propTypes = {
   removeAnswer: PropTypes.func.isRequired,
   reorderAnswers: PropTypes.func.isRequired,
   isNarratorTab: PropTypes.bool,
-  interventionStatus: PropTypes.string,
+  editingPossible: PropTypes.bool,
 };
 
 const mapStateToProps = createStructuredSelector({

@@ -38,6 +38,7 @@ function InterventionStatusButtons({
   csvLink,
   csvGeneratedAt,
   canAccessCsv,
+  canCurrentUserMakeChanges,
 }) {
   const apiProtocol = useMemo(
     () => (process.env.API_URL ? getUrlProtocol(process.env.API_URL) : ''),
@@ -68,6 +69,7 @@ function InterventionStatusButtons({
       <ShareButton
         bg={statusTypeToColorMap[closed]}
         onClick={openCloseConfirmation}
+        disabled={!canCurrentUserMakeChanges}
       >
         <FormattedMessage {...messages.close} />
       </ShareButton>
@@ -160,6 +162,7 @@ function InterventionStatusButtons({
         data-cy="publish-session-button"
         onClick={openConfirmation}
         bg={statusTypeToColorMap[published]}
+        disabled={!canCurrentUserMakeChanges}
       >
         <FormattedMessage {...messages.publish} />
       </ShareButton>
@@ -205,6 +208,7 @@ InterventionStatusButtons.propTypes = {
   csvLink: PropTypes.string,
   csvGeneratedAt: PropTypes.string,
   canAccessCsv: PropTypes.bool,
+  canCurrentUserMakeChanges: PropTypes.bool,
 };
 
 export default injectIntl(InterventionStatusButtons);

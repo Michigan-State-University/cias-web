@@ -26,7 +26,7 @@ exports[`<ErrorPage /> should render and match the snapshot 1`] = `
   width: 100%;
   height: 40px;
   border-radius: 100px;
-  cursor: pointer;
+  cursor: pointer !important;
   border: none;
   outline: none;
   font-weight: bold;

@@ -418,6 +418,7 @@ const InterventionSettingsModal = ({ editingPossible, onClose }: Props) => {
                   nameFormikKey="links.0.name"
                   selectedFormikKey="links.0.selected"
                   placeholderBase={placeholderBase}
+                  disabled={!editingPossible}
                 />
               )}
               {inOrganization &&
@@ -428,6 +429,7 @@ const InterventionSettingsModal = ({ editingPossible, onClose }: Props) => {
                     selectedFormikKey={`links.${index}.selected`}
                     placeholderBase={placeholderBase}
                     healthClinic={healthClinic}
+                    disabled={!editingPossible}
                   />
                 ))}
             </Column>

@@ -6,9 +6,10 @@ export const ShareButton = styled(Button)`
   font-weight: bold;
   width: 180px;
   margin: 5px;
-  background-color: ${(props) => props.bg && `rgba(${hexToRgb(props.bg)}, 1)`};
-  ${({ outlined }) =>
+
+  ${({ outlined, disabled }) =>
     outlined &&
+    !disabled &&
     `
     background-color: transparent;
     border: ${themeColors.primary} solid 1px;
@@ -18,7 +19,11 @@ export const ShareButton = styled(Button)`
     color: white;
     }
   `}
-
+  ${({ disabled, bg }) =>
+    !disabled &&
+    `
+    background-color: ${bg && `rgba(${hexToRgb(bg)}, 1)`};
+  `}
   a {
     color: inherit;
     text-decoration: none;

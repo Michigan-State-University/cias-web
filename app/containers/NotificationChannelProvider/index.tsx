@@ -3,7 +3,7 @@ import { useInjectReducer, useInjectSaga } from 'redux-injectors';
 import { useSelector } from 'react-redux';
 
 import {
-  NotificationsActionsContext,
+  NotificationChannelContext,
   useNotificationChannel,
 } from 'utils/useNotificationChannel';
 
@@ -13,7 +13,7 @@ import {
   makeSelectNotifications,
 } from 'global/reducers/notifications';
 
-export const NotificationsActionsProvider = ({
+export const NotificationChannelProvider = ({
   children,
 }: PropsWithChildren<{}>) => {
   useInjectReducer(withNotificationsReducer);
@@ -33,7 +33,7 @@ export const NotificationsActionsProvider = ({
   };
 
   return (
-    <NotificationsActionsContext.Provider
+    <NotificationChannelContext.Provider
       value={{
         readConversationNotifications,
         readNotification,
@@ -41,6 +41,6 @@ export const NotificationsActionsProvider = ({
       }}
     >
       {children}
-    </NotificationsActionsContext.Provider>
+    </NotificationChannelContext.Provider>
   );
 };

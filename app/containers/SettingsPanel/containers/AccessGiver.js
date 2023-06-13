@@ -50,6 +50,7 @@ const AccessGiver = ({
   fetchUsersWithAccess,
   revokeUserAccess,
   fetchUserAccessError,
+  disabled,
 }) => {
   const [value, setValue] = useState([]);
   const [disableSubmit, setDisableSubmit] = useState(true);
@@ -98,7 +99,7 @@ const AccessGiver = ({
   const buttons = [
     {
       action: revokeAction,
-      disabled: removingParticipantsPossible,
+      disabled: removingParticipantsPossible || disabled,
       text: <FormattedMessage {...messages.remove} />,
     },
   ];
@@ -133,7 +134,7 @@ const AccessGiver = ({
         </Text>
         <Column mt={20}>
           <ChipsInput
-            disabled={!addingParticipantsPossible}
+            disabled={!addingParticipantsPossible || disabled}
             value={value}
             setValue={setValue}
             placeholder={formatMessage(messages.inputPlaceholder)}
@@ -142,7 +143,7 @@ const AccessGiver = ({
           <Row mt={25} align="center" justify="between">
             <Box>
               <CsvFileReader
-                disabled={!addingParticipantsPossible}
+                disabled={!addingParticipantsPossible || disabled}
                 onUpload={handleUploadCsv}
               >
                 <FormattedMessage {...messages.uploadText} />
@@ -151,7 +152,7 @@ const AccessGiver = ({
             </Box>
             <Button
               onClick={inviteParticipants}
-              disabled={disableSubmit && isEmpty(value)}
+              disabled={(disableSubmit && isEmpty(value)) || disabled}
               width={180}
               ml={20}
               hoverable
@@ -191,6 +192,7 @@ AccessGiver.propTypes = {
   enableAccessLoading: PropTypes.bool,
   fetchUserAccessLoading: PropTypes.bool,
   fetchUserAccessError: PropTypes.string,
+  disabled: PropTypes.bool,
 };
 
 const mapDispatchToProps = {

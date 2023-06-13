@@ -6,7 +6,6 @@ import { RootState } from 'global/reducers';
 import { makeSelectSelectedQuestion } from 'global/reducers/questions';
 
 import { TlfbConfigDTO } from 'models/Question';
-import { InterventionStatusMetadata } from 'models/Intervention';
 
 import { naturalNumberValidator } from 'utils/validators';
 
@@ -32,10 +31,10 @@ import DateRangeChooser from './DateRangeChooser';
 
 export type TlfbConfigProps = {
   isNarratorTab: boolean;
-  statusMetadata: InterventionStatusMetadata;
+  editingPossible: boolean;
 };
 
-const TlfbConfig = ({ statusMetadata: { isEditable } }: TlfbConfigProps) => {
+const TlfbConfig = ({ editingPossible }: TlfbConfigProps) => {
   const { formatMessage } = useIntl();
   const dispatch = useDispatch();
 
@@ -87,7 +86,7 @@ const TlfbConfig = ({ statusMetadata: { isEditable } }: TlfbConfigProps) => {
           id="tlfb-config-date-range"
           onChange={handleRadioChange(true)}
           checked={chooseDateRange === true}
-          disabled={!isEditable}
+          disabled={!editingPossible}
         >
           <Text mr={24}>{formatMessage(messages.dateRange)}</Text>
         </Radio>
@@ -95,7 +94,7 @@ const TlfbConfig = ({ statusMetadata: { isEditable } }: TlfbConfigProps) => {
           id="tlfb-config-number-of-days"
           onChange={handleRadioChange(false)}
           checked={chooseDateRange === false}
-          disabled={!isEditable}
+          disabled={!editingPossible}
         >
           <Text>{formatMessage(messages.numberOfDays)}</Text>
         </Radio>
@@ -112,13 +111,13 @@ const TlfbConfig = ({ statusMetadata: { isEditable } }: TlfbConfigProps) => {
           onCheck={handleDaysCountChange}
           height={48}
           transparent={false}
-          disabled={!isEditable}
+          disabled={!editingPossible}
         />
       )}
       {chooseDateRange && (
         <DateRangeChooser
           onDateRangeUpdate={handleRangeChange}
-          disabled={!isEditable}
+          disabled={!editingPossible}
           endDate={endDate}
           startDate={startDate}
         />
@@ -129,7 +128,7 @@ const TlfbConfig = ({ statusMetadata: { isEditable } }: TlfbConfigProps) => {
       </Row>
       <Checkbox
         checked={displayHelpingMaterials}
-        disabled={!isEditable}
+        disabled={!editingPossible}
         onChange={handleDisplayHelpingMaterialsChange}
         id="display-tlfb-helping-materials-checkbox"
       >

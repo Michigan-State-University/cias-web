@@ -87,6 +87,7 @@ import {
   allCopyModalSagas,
 } from 'global/reducers/copyModalReducer';
 import { JumpToScreenLocationState } from 'global/types/locationState';
+import { makeSelectNavbarHeight } from 'global/reducers/globalState';
 
 import GroupActionButton from 'containers/Sessions/components/GroupActionButton';
 import { reorderScope } from 'models/Session/ReorderScope';
@@ -166,6 +167,7 @@ type Props = {
   selectedQuestion: string;
   questions: QuestionDTO[];
   groups: QuestionGroup[];
+  navbarHeight: number;
   selectQuestion: (id: string) => void;
   createQuestionGroup: (sessionId: string, groupType: string) => void;
 } & NonReduxProps;
@@ -183,6 +185,7 @@ const EditClassicSessionPage = ({
   groupQuestions,
   shareGroupsExternally,
   groups,
+  navbarHeight,
   changeGroupName,
   getQuestionGroups,
   session: { id: sessionId, name: sessionName },
@@ -500,7 +503,7 @@ const EditClassicSessionPage = ({
         defaultView={VIEWS.SESSION}
       />
       <Row height="100%" filled>
-        <QuestionsRow sm={4} isVisible={showList}>
+        <QuestionsRow sm={4} isVisible={showList} $navbarHeight={navbarHeight}>
           <Box
             data-cy="questions-list"
             borderRight={`${borders.borderWidth} ${borders.borderStyle} ${colors.linkWater}`}
@@ -648,6 +651,7 @@ const mapStateToProps = createStructuredSelector({
   questions: makeSelectQuestions(),
   selectedQuestion: makeSelectSelectedQuestionId(),
   groups: makeSelectQuestionGroups(),
+  navbarHeight: makeSelectNavbarHeight(),
 });
 
 const mapDispatchToProps = {

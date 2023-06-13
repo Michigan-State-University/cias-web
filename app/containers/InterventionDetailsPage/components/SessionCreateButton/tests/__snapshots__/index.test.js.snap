@@ -1,7 +1,7 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`<SessionCreateButton /> Should render and match the snapshot 1`] = `
-.c1 {
+.c2 {
   display: -webkit-box;
   display: -webkit-flex;
   display: -ms-flexbox;
@@ -19,14 +19,14 @@ exports[`<SessionCreateButton /> Should render and match the snapshot 1`] = `
   align-items: center;
 }
 
-.c2 {
+.c3 {
   width: auto;
   height: auto;
   margin-right: 10px;
   margin-left: 10px;
 }
 
-.c3 {
+.c4 {
   margin: 0;
   font-family: DM Sans;
   font-size: 15px;
@@ -35,6 +35,16 @@ exports[`<SessionCreateButton /> Should render and match the snapshot 1`] = `
 }
 
 .c0 {
+  width: auto;
+  height: auto;
+  display: block;
+  border-radius: 5px;
+  cursor: pointer;
+  color: unset;
+  cursor: pointer;
+}
+
+.c1 {
   padding: 20px;
   width: 100%;
   border-radius: 5px;
@@ -42,7 +52,6 @@ exports[`<SessionCreateButton /> Should render and match the snapshot 1`] = `
   display: -webkit-flex;
   display: -ms-flexbox;
   display: flex;
-  cursor: pointer;
   -webkit-flex-direction: column;
   -ms-flex-direction: column;
   flex-direction: column;
@@ -59,19 +68,19 @@ exports[`<SessionCreateButton /> Should render and match the snapshot 1`] = `
 }
 
 <div
-  class="c0"
+  class="c0 c1"
   data-cy="create-session-button"
 >
   <div
-    class="c1"
+    class="c2"
   >
     <img
       alt="add"
-      class="c2"
+      class="c3"
       src="IMAGE_MOCK"
     />
     <h3
-      class="c3"
+      class="c4"
     >
       Create a new Session
     </h3>

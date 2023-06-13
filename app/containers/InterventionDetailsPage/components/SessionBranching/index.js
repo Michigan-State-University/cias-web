@@ -172,6 +172,7 @@ function SessionBranching({
                     px: 8,
                   }}
                   shouldBeOpenOnStart
+                  disabled={disabled}
                 >
                   <BranchingLayout
                     formulaIndex={index}
@@ -197,7 +198,12 @@ function SessionBranching({
                   />
                 </BoxCollapse>
               ))}
-            <HoverableBox px={21} py={14} onClick={() => onAddFormula(id)}>
+            <HoverableBox
+              px={21}
+              py={14}
+              onClick={() => onAddFormula(id)}
+              disabled={disabled}
+            >
               <Box>
                 <Row align="center">
                   <PlusCircle mr={12} />

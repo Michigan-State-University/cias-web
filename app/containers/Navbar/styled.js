@@ -6,16 +6,19 @@ import Comment from 'components/Comment';
 import { elements, colors, hexToRgb, ZIndex, mediaQuery } from 'theme';
 import { maxQueries } from 'components/Container/mediaQuery';
 
-export const NavbarStyled = styled.div`
+export const NavbarContainer = styled.div`
   position: fixed;
   width: 100%;
   top: 0;
+  z-index: ${ZIndex.NAVBAR};
+`;
+
+export const NavbarStyled = styled.div`
   background-color: white;
   padding: 20px;
   box-shadow: 0px 4px 10px rgba(227, 238, 251, 0.8);
   display: flex;
   align-items: center;
-  z-index: ${ZIndex.NAVBAR};
   height: ${elements.navbarHeight}px;
 
   gap: 16px;
