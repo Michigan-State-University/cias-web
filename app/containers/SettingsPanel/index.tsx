@@ -141,7 +141,8 @@ const SettingsPanel = ({ intervention }: Props) => {
     originalText,
     liveChatEnabled,
     conversationsPresent,
-    conversationsTranscript,
+    conversationsTranscriptGeneratedAt,
+    conversationsTranscriptFilename,
   } = intervention || {};
 
   const changingAccessSettingsPossible =
@@ -286,7 +287,9 @@ const SettingsPanel = ({ intervention }: Props) => {
           </Box>
           {showConversationsTranscriptPanel && (
             <ConversationsTranscriptPanel
-              transcript={conversationsTranscript}
+              generatedAt={conversationsTranscriptGeneratedAt}
+              filename={conversationsTranscriptFilename}
+              interventionId={interventionId!}
             />
           )}
           <InterventionRadioPanel

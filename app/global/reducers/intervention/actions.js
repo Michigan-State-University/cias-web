@@ -306,8 +306,14 @@ export const generateConversationsTranscriptSuccess = () =>
 export const generateConversationsTranscriptError = (error) =>
   actionBuilder(GENERATE_CONVERSATIONS_TRANSCRIPT_ERROR, { error });
 
-export const updateInterventionConversationsTranscript = (transcript) =>
-  actionBuilder(UPDATE_INTERVENTION_CONVERSATIONS_TRANSCRIPT, { transcript });
+export const updateInterventionConversationsTranscript = (
+  transcript,
+  createdAt,
+) =>
+  actionBuilder(UPDATE_INTERVENTION_CONVERSATIONS_TRANSCRIPT, {
+    transcript,
+    createdAt,
+  });
 
 export const exportInterventionRequest = (interventionId) =>
   actionBuilder(EXPORT_INTERVENTION_REQUEST, { interventionId });
