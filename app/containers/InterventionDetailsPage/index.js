@@ -473,7 +473,10 @@ export function InterventionDetailsPage({
       <Column height="100%">
         <CollaborationPanel />
         <Row overflowY="auto">
-          <AppContainer pageTitle={formatMessage(messages.pageTitle, { name })}>
+          <AppContainer
+            pageTitle={formatMessage(messages.pageTitle, { name })}
+            width="100%"
+          >
             <ArchiveModal />
             <CatMhModal />
             <ConfirmationModal
