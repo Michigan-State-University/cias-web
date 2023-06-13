@@ -2,7 +2,7 @@ import { createSelector } from 'reselect';
 
 import { canEdit } from 'models/Status/statusPermissions';
 
-import { makeSelectUserId } from 'global/reducers/auth';
+import { makeSelectIsAdmin, makeSelectUserId } from 'global/reducers/auth';
 
 import { initialState } from './reducer';
 
@@ -109,9 +109,16 @@ export const makeSelectCanCurrentUserMakeChanges = () =>
   createSelector(
     makeSelectHasCollaborators(),
     makeSelectIsCurrentUserEditor(),
-    (hasCollaborators, isCurrentUserEditor) => {
-      if (!hasCollaborators) return true;
-      return isCurrentUserEditor;
+    makeSelectIsCurrentUserInterventionOwner(),
+    makeSelectIsAdmin(),
+    (
+      hasCollaborators,
+      isCurrentUserEditor,
+      isAdmin,
+      isCurrentUserInterventionOwner,
+    ) => {
+      if (hasCollaborators) return isCurrentUserEditor;
+      return isAdmin || isCurrentUserInterventionOwner;
     },
   );
 

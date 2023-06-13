@@ -135,7 +135,10 @@ const SingleTile = ({
     },
   });
 
-  const { isAdmin, canAssignOrganizationToIntervention } = useRoleManager();
+  const {
+    isAdmin,
+    canAssignOrganizationToIntervention: showAssignOrganizationOption,
+  } = useRoleManager();
 
   const {
     name,
@@ -165,7 +168,15 @@ const SingleTile = ({
   const handleClone = () =>
     copyIntervention({ interventionId: id, withoutRedirect: true });
 
-  const archivingPossible = !hasCollaborators && canArchive(status);
+  // cannot make changes to intervention with collaborators because it would require
+  // turning on edit mode first but that's impossible from the intervention list view
+  const canCurrentUserMakeChanges =
+    !hasCollaborators && (isAdmin || isCurrentUserInterventionOwner);
+
+  const archivingPossible = canCurrentUserMakeChanges && canArchive(status);
+
+  const assigningOrganizationPossible =
+    canCurrentUserMakeChanges && canEdit(status);
 
   const showReportingBadge =
     organizationId && (isAdmin || organizationId === userOrganizableId);
@@ -209,14 +220,14 @@ const SingleTile = ({
       color: colors.bluewood,
       disabled: !archivingPossible,
     },
-    ...(canAssignOrganizationToIntervention
+    ...(showAssignOrganizationOption
       ? [
           {
             icon: AddAppIcon,
             action: openAssignOrganizationModal,
             label: formatMessage(messages.assignOrganization),
             id: 'assignOrganization',
-            disabled: !canEdit(status) || hasCollaborators,
+            disabled: !assigningOrganizationPossible,
           },
         ]
       : []),
@@ -380,7 +391,6 @@ SingleTile.propTypes = {
   userId: PropTypes.string,
   isLoading: PropTypes.bool,
   exportIntervention: PropTypes.func,
-  canCurrentUserMakeChanges: PropTypes.bool,
   userOrganizableId: PropTypes.string,
   isCurrentUserInterventionOwner: PropTypes.bool,
 };
