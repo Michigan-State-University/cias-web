@@ -21,6 +21,7 @@ type Props = {
   addLink: () => void;
   updateLink: (linkId: string, data: LinkData) => void;
   removeLink: (linkId: string) => void;
+  disabled: boolean;
 };
 
 export const LinksPanel = ({
@@ -31,6 +32,7 @@ export const LinksPanel = ({
   addLink,
   updateLink,
   removeLink,
+  disabled,
 }: Props) => (
   <>
     <Box display="flex" justify="between" align="end" mb={24}>
@@ -46,6 +48,7 @@ export const LinksPanel = ({
         }}
         onClick={addLink}
         loading={addingLink}
+        disabled={disabled}
       >
         <FormattedMessage {...messages.addNewLink} />
       </TextButton>
@@ -62,6 +65,7 @@ export const LinksPanel = ({
           removeLink={() => removeLink(link.id)}
           link={link}
           key={link.id}
+          disabled={disabled}
         />
       ))}
     </Column>

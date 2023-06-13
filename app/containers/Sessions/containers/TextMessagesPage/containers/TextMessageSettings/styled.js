@@ -9,10 +9,8 @@ export const StyledSmsSettings = styled.div`
   position: relative;
   background-color: ${colors.white};
   box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
-  height: calc(100vh - 70px);
   padding: ${padding};
-  overflow-y: scroll;
-  overflow-x: hidden;
+  min-height: 100%;
 `;
 
 export const SectionDivider = styled.div`

@@ -19,6 +19,7 @@ export type Props = {
   | 'label'
   | 'tooltipContent'
   | 'error'
+  | 'disabled'
 >;
 
 export const FilesPanel = ({ title, label, ...props }: Props) => {

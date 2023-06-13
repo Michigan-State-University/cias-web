@@ -286,6 +286,7 @@ function SessionListItem({
                   width={60}
                   validator={numericValidator}
                   placeholder="0"
+                  disabled={disabled}
                 />
                 <Text>{formatMessage(messages.min)}</Text>
               </Row>

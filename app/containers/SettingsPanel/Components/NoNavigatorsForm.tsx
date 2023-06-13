@@ -47,6 +47,7 @@ type Props = Pick<
   updateNoNavigatorTabData: (
     newData: Partial<NoNavigatorsAvailableData>,
   ) => void;
+  disabled: boolean;
 };
 
 const NoNavigatorsForm = ({
@@ -56,6 +57,7 @@ const NoNavigatorsForm = ({
   updateNoNavigatorTabData,
   contactMessage,
   messagePhone,
+  disabled,
 }: Props) => {
   const { formatMessage } = useIntl();
   const isUpdating = useSelector(
@@ -169,7 +171,8 @@ const NoNavigatorsForm = ({
     !formik.isValid ||
     !phoneValid ||
     !messagePhoneValid ||
-    (!messagePhoneDirty && !formik.dirty && !phoneDirty);
+    (!messagePhoneDirty && !formik.dirty && !phoneDirty) ||
+    disabled;
 
   return (
     <>
@@ -184,7 +187,7 @@ const NoNavigatorsForm = ({
             formikState={formik}
             placeholder={formatMessage(messages.messagePlaceholder)}
             label={formatMessage(messages.messageLabel)}
-            inputProps={{ width: '100%' }}
+            inputProps={{ width: '100%', disabled }}
           />
         </Box>
         {/* @ts-ignore */}
@@ -193,7 +196,7 @@ const NoNavigatorsForm = ({
           formikState={formik}
           placeholder={formatMessage(messages.contactMessagePlaceholder)}
           label={formatMessage(messages.contactMessageLabel)}
-          inputProps={{ width: '100%' }}
+          inputProps={{ width: '100%', disabled }}
         />
         <Box my={24}>
           <PhoneNumberForm
@@ -207,6 +210,7 @@ const NoNavigatorsForm = ({
             required={false}
             allowPartial
             ref={phoneNumberFormCallbackRef}
+            disabled={disabled}
           />
         </Box>
         <Box my={24}>
@@ -221,6 +225,7 @@ const NoNavigatorsForm = ({
             required={false}
             allowPartial
             ref={messagePhoneNumberFormCallbackRef}
+            disabled={disabled}
           />
         </Box>
         {/* @ts-ignore */}
@@ -229,7 +234,7 @@ const NoNavigatorsForm = ({
           formikState={formik}
           placeholder={formatMessage(messages.emailPlaceholder)}
           label={formatMessage(messages.emailLabel)}
-          inputProps={{ width: '100%' }}
+          inputProps={{ width: '100%', disabled }}
         />
         {/* @ts-ignore */}
         <Button

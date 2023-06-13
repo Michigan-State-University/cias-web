@@ -47,7 +47,8 @@ import { translationMessages } from 'i18n';
 import { polyfillI18n } from 'i18nPolyfill';
 
 import { SocketProvider } from 'components/ActionCable';
-import { NotificationsActionsProvider } from 'containers/NotificationsActionsProvider';
+import { NotificationChannelProvider } from 'containers/NotificationChannelProvider';
+import { InterventionChannelProvider } from 'containers/InterventionChannelProvider';
 
 import 'utils/axios';
 import { configureDayjs } from './utils/dayjs';
@@ -171,10 +172,12 @@ const render = (messages: any) => {
           <ScreenClassProvider>
             <Sentry.ErrorBoundary fallback={ErrorPage}>
               <SocketProvider>
-                <NotificationsActionsProvider>
-                  <ToastContainer />
-                  <App />
-                </NotificationsActionsProvider>
+                <NotificationChannelProvider>
+                  <InterventionChannelProvider>
+                    <ToastContainer />
+                    <App />
+                  </InterventionChannelProvider>
+                </NotificationChannelProvider>
               </SocketProvider>
             </Sentry.ErrorBoundary>
           </ScreenClassProvider>

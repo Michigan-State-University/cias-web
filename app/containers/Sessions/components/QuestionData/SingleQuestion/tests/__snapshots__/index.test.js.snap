@@ -56,7 +56,7 @@ exports[`<SingleQuestion /> Should render and match the snapshot 1`] = `
   -webkit-box-align: center;
   -ms-flex-align: center;
   align-items: center;
-  margin-bottom: 10px;
+  margin-bottom: 0;
 }
 
 .c5 {
@@ -71,7 +71,7 @@ exports[`<SingleQuestion /> Should render and match the snapshot 1`] = `
   width: 90%;
 }
 
-.c10 {
+.c9 {
   display: -webkit-box;
   display: -webkit-flex;
   display: -ms-flexbox;
@@ -83,7 +83,7 @@ exports[`<SingleQuestion /> Should render and match the snapshot 1`] = `
   width: 100%;
 }
 
-.c13 {
+.c12 {
   display: -webkit-box;
   display: -webkit-flex;
   display: -ms-flexbox;
@@ -101,7 +101,19 @@ exports[`<SingleQuestion /> Should render and match the snapshot 1`] = `
   align-items: center;
 }
 
-.c14 {
+.c15 {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-flex-direction: row;
+  -ms-flex-direction: row;
+  flex-direction: row;
+  height: auto;
+  display: none;
+}
+
+.c13 {
   padding: 12px;
   border-style: solid;
   border-width: 1px;
@@ -120,47 +132,53 @@ exports[`<SingleQuestion /> Should render and match the snapshot 1`] = `
   text-align: center;
   background-color: rgba(0,134,248,0.1);
   color: rgba(0,134,248,1);
+  opacity: 0.5;
 }
 
-.c14:focus {
+.c13:focus {
   box-shadow: none;
   outline: none;
   border-color: #107969;
 }
 
-.c14:disabled {
+.c13:disabled {
   color: #ABBBD1;
 }
 
-.c11 {
+.c10 {
   width: 100%;
   height: auto;
   border: 1px solid transparent;
+  cursor: not-allowed;
 }
 
-.c11 .ql-editor {
+.c10 .ql-editor {
   font-weight: 400;
   padding: 10px;
   overflow: visible;
 }
 
-.c11 .ql-editor.ql-blank::before {
+.c10 .ql-editor.ql-blank::before {
   left: 11px;
 }
 
-.c11 .ql-picker-label svg {
+.c10 .ql-picker-label svg {
   margin-bottom: 15px !important;
 }
 
-.c11 .ql-toolbar {
+.c10 .ql-toolbar {
   width: -webkit-max-content;
   width: -moz-max-content;
   width: max-content;
 }
 
-.c11 .ql-container {
+.c10 .ql-container {
   font-size: initial;
   font-family: DM Sans;
+}
+
+.c10 .ql-container * {
+  cursor: not-allowed;
 }
 
 .c19 {
@@ -187,11 +205,7 @@ exports[`<SingleQuestion /> Should render and match the snapshot 1`] = `
   color: unset;
 }
 
-.c2:hover {
-  background-color: #E9F1FB;
-}
-
-.c8 {
+.c7 {
   width: auto;
   height: auto;
   display: block;
@@ -211,7 +225,7 @@ exports[`<SingleQuestion /> Should render and match the snapshot 1`] = `
   color: unset;
 }
 
-.c9 {
+.c8 {
   width: auto;
   height: auto;
   display: block;
@@ -219,7 +233,7 @@ exports[`<SingleQuestion /> Should render and match the snapshot 1`] = `
   color: unset;
 }
 
-.c12 {
+.c11 {
   width: auto;
   height: auto;
   display: block;
@@ -251,15 +265,6 @@ exports[`<SingleQuestion /> Should render and match the snapshot 1`] = `
 }
 
 .c6 {
-  width: auto;
-  height: auto;
-  margin-right: 10px;
-  cursor: -webkit-grab;
-  cursor: -moz-grab;
-  cursor: grab;
-}
-
-.c7 {
   width: auto;
   height: auto;
   margin-right: 16px;
@@ -294,16 +299,17 @@ exports[`<SingleQuestion /> Should render and match the snapshot 1`] = `
   color: rgba(255,255,255,1);
 }
 
-.c15 {
+.c14 {
   padding: 5px 10px;
   font-size: 13px;
   font-weight: 600;
   border-radius: 4px;
   background-color: rgba(0,134,248,0.1);
   color: rgba(0,134,248,1);
+  opacity: 0.5;
 }
 
-.c15:focus {
+.c14:focus {
   box-shadow: none;
   outline: none;
   border: 1px solid transparent;
@@ -365,42 +371,32 @@ exports[`<SingleQuestion /> Should render and match the snapshot 1`] = `
               width="90%"
             >
               <img
-                alt="Reorder icon 0"
-                aria-describedby="DndDescribedBy-1"
-                aria-roledescription="sortable"
                 class="c6"
-                cursor="grab"
-                role="button"
-                src="IMAGE_MOCK"
-                tabindex="0"
-              />
-              <img
-                class="c7"
                 src="IMAGE_MOCK"
               />
               <div
-                class="c8"
+                class="c7"
                 display="flex"
               >
                 <div
-                  class="c9"
+                  class="c8"
                 >
                   <div
-                    class="c10"
+                    class="c9"
                     width="100%"
                   >
                     <div
                       class="c3"
                     >
                       <div
-                        class="quill c11"
+                        class="quill c10"
                       >
                         <div
-                          class="ql-container ql-bubble"
+                          class="ql-container ql-bubble ql-disabled"
                         >
                           <div
                             class="ql-editor"
-                            contenteditable="true"
+                            contenteditable="false"
                             data-gramm="false"
                             data-placeholder="Answer 1"
                           >
@@ -1788,24 +1784,25 @@ exports[`<SingleQuestion /> Should render and match the snapshot 1`] = `
               class="c1"
             >
               <div
-                class="c12"
+                class="c11"
                 hidden=""
               >
                 <img
-                  class="c7"
+                  class="c6"
                   src="IMAGE_MOCK"
                 />
               </div>
             </div>
           </div>
           <div
-            class="c13"
+            class="c12"
           >
             <input
               aria-label="Score"
-              class="c14 c15"
+              class="c13 c14"
               color="#0086F8"
               data-cy="score-0-input"
+              disabled=""
               placeholder="Score"
               type="tel"
               value="1"
@@ -1837,42 +1834,32 @@ exports[`<SingleQuestion /> Should render and match the snapshot 1`] = `
               width="90%"
             >
               <img
-                alt="Reorder icon 1"
-                aria-describedby="DndDescribedBy-1"
-                aria-roledescription="sortable"
                 class="c6"
-                cursor="grab"
-                role="button"
-                src="IMAGE_MOCK"
-                tabindex="0"
-              />
-              <img
-                class="c7"
                 src="IMAGE_MOCK"
               />
               <div
-                class="c8"
+                class="c7"
                 display="flex"
               >
                 <div
-                  class="c9"
+                  class="c8"
                 >
                   <div
-                    class="c10"
+                    class="c9"
                     width="100%"
                   >
                     <div
                       class="c3"
                     >
                       <div
-                        class="quill c11"
+                        class="quill c10"
                       >
                         <div
-                          class="ql-container ql-bubble"
+                          class="ql-container ql-bubble ql-disabled"
                         >
                           <div
                             class="ql-editor"
-                            contenteditable="true"
+                            contenteditable="false"
                             data-gramm="false"
                             data-placeholder="Answer 2"
                           >
@@ -3260,24 +3247,25 @@ exports[`<SingleQuestion /> Should render and match the snapshot 1`] = `
               class="c1"
             >
               <div
-                class="c12"
+                class="c11"
                 hidden=""
               >
                 <img
-                  class="c7"
+                  class="c6"
                   src="IMAGE_MOCK"
                 />
               </div>
             </div>
           </div>
           <div
-            class="c13"
+            class="c12"
           >
             <input
               aria-label="Score"
-              class="c14 c15"
+              class="c13 c14"
               color="#0086F8"
               data-cy="score-1-input"
+              disabled=""
               placeholder="Score"
               type="tel"
               value="2"
@@ -3289,16 +3277,17 @@ exports[`<SingleQuestion /> Should render and match the snapshot 1`] = `
     </div>
   </div>
   <div
-    class="c1"
+    class="c15"
+    hidden=""
   >
     <div
       class="c16"
     >
       <div
-        class="c9"
+        class="c8"
       >
         <div
-          class="c13"
+          class="c12"
         >
           <div
             class="c17"

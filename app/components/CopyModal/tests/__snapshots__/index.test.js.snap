@@ -65,7 +65,7 @@ exports[`<CopyModal /> Should render and match the snapshot 1`] = `
   width: 100%;
   height: 40px;
   border-radius: 100px;
-  cursor: pointer;
+  cursor: not-allowed !important;
   border: none;
   outline: none;
   background-color: #107969;
@@ -280,7 +280,6 @@ exports[`<CopyModal /> Should render and match the snapshot 1`] = `
 
 .c21 {
   position: relative;
-  width: 100%;
   font-size: 15px;
   font-weight: 700;
   color: rgba(183,39,234,1);

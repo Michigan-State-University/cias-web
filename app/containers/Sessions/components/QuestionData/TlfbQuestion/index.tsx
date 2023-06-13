@@ -13,7 +13,6 @@ import {
 } from 'global/reducers/questions';
 import { TlfbQuestionDTO } from 'models/Question';
 import globalMessages from 'global/i18n/globalMessages';
-import { InterventionStatusMetadata } from 'models/Intervention';
 
 import Box from 'components/Box';
 import Radio from 'components/Radio';
@@ -35,12 +34,10 @@ import UngroupedSubstances from './UngroupedSubstances';
 import GroupedSubstances from './GroupedSubstances';
 
 export type TlfbQuestionProps = {
-  statusMetadata: InterventionStatusMetadata;
+  editingPossible: boolean;
 };
 
-const TlfbQuestion = ({
-  statusMetadata: { isEditable },
-}: TlfbQuestionProps) => {
+const TlfbQuestion = ({ editingPossible }: TlfbQuestionProps) => {
   const { formatMessage } = useIntl();
   const dispatch = useDispatch();
   const currentQuestion = useSelector<RootState, TlfbQuestionDTO>(
@@ -99,7 +96,7 @@ const TlfbQuestion = ({
           onFocus={selectQuillText}
           id="question-title"
           transparent={false}
-          disabled={!isEditable}
+          disabled={!editingPossible}
           richText
           richTextBlurTransparentBorder={false}
           autoSize
@@ -117,7 +114,7 @@ const TlfbQuestion = ({
           onFocus={selectQuillText}
           id="head-question"
           transparent={false}
-          disabled={!isEditable}
+          disabled={!editingPossible}
           richText
           richTextBlurTransparentBorder={false}
           autoSize
@@ -135,7 +132,7 @@ const TlfbQuestion = ({
           onFocus={selectQuillText}
           id="substance-question"
           transparent={false}
-          disabled={!isEditable}
+          disabled={!editingPossible}
           richText
           richTextBlurTransparentBorder={false}
           autoSize
@@ -153,7 +150,7 @@ const TlfbQuestion = ({
             id="yes-subtances-with-groups-radio"
             checked={substancesWithGroup}
             onChange={onUpdateSubstancesWithGroupToggle(true)}
-            disabled={!isEditable}
+            disabled={!editingPossible}
           >
             <Text>{formatMessage(globalMessages.yes)}</Text>
           </Radio>
@@ -163,7 +160,7 @@ const TlfbQuestion = ({
             id="no-subtances-with-groups-radio"
             checked={!substancesWithGroup}
             onChange={onUpdateSubstancesWithGroupToggle(false)}
-            disabled={!isEditable}
+            disabled={!editingPossible}
           >
             <Text>{formatMessage(globalMessages.no)}</Text>
           </Radio>
@@ -176,7 +173,7 @@ const TlfbQuestion = ({
           substanceGroups={substanceGroups}
           loading={isLoading}
           error={error ?? ''}
-          disabled={!isEditable}
+          disabled={!editingPossible}
         />
       )}
 
@@ -186,7 +183,7 @@ const TlfbQuestion = ({
           substances={substances}
           loading={isLoading}
           error={error ?? ''}
-          disabled={!isEditable}
+          disabled={!editingPossible}
         />
       )}
     </Box>

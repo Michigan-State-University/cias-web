@@ -9,7 +9,8 @@ exports[`<TextMessagingPage /> Should render and match the snapshot 1`] = `
   -webkit-flex-direction: row;
   -ms-flex-direction: row;
   flex-direction: row;
-  height: auto;
+  height: 100%px;
+  height: 100%;
   max-height: 100%;
 }
 
@@ -204,7 +205,6 @@ exports[`<TextMessagingPage /> Should render and match the snapshot 1`] = `
 
 .c19 {
   position: relative;
-  width: 100%;
   font-size: 18px;
   font-weight: 700;
   color: #2F3850;
@@ -212,7 +212,6 @@ exports[`<TextMessagingPage /> Should render and match the snapshot 1`] = `
 
 .c21 {
   position: relative;
-  width: 100%;
   color: #2F3850;
 }
 
@@ -408,10 +407,11 @@ exports[`<TextMessagingPage /> Should render and match the snapshot 1`] = `
 
 <div
   class="c0"
+  height="100%"
   style="justify-content: center;"
 >
   <div
-    style="box-sizing: border-box; min-height: 1px; position: relative; padding-left: 0px; padding-right: 0px; width: 66.66666666666667%; flex-basis: 66.66666666666667%; flex-grow: 0; flex-shrink: 0; max-width: 66.66666666666667%; margin-left: 0%;"
+    style="box-sizing: border-box; min-height: 1px; position: relative; padding-left: 0px; padding-right: 0px; width: 66.66666666666667%; flex-basis: 66.66666666666667%; flex-grow: 0; flex-shrink: 0; max-width: 66.66666666666667%; margin-left: 0%; overflow-y: auto;"
   >
     <div
       class=""
