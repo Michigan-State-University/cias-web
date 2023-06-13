@@ -31,8 +31,8 @@ export const OpenButton = styled.button`
   border-width: 0;
   width: 30px;
   height: 30px;
-  position: fixed;
-  top: 85px;
+  position: absolute;
+  top: 15px;
   right: 22px;
 
   &:hover {

@@ -36,7 +36,11 @@ export const useSocket = <
   // listener, it will have value from the moment of subscription creation even
   // if the state changed in the meantime.
   messageListener: SocketMessageListener<TMessage>,
-  { socketConnectionParams, suspend = false }: SocketOptions<TConnectionParams>,
+  {
+    socketConnectionParams,
+    suspend = false,
+    onUnsubscribe,
+  }: SocketOptions<TConnectionParams>,
 ) => {
   type TChannel = Channel<TConnectionParams, TMessage>;
 
@@ -61,6 +65,9 @@ export const useSocket = <
       channel.disconnect();
       channel.close();
       setChannel(null);
+      if (onUnsubscribe) {
+        onUnsubscribe();
+      }
     }
   }, [channel]);
 

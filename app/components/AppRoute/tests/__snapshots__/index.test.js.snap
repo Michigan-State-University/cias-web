@@ -3,7 +3,7 @@
 exports[`<AppRoute /> Should redirect to login 1`] = `<div />`;
 
 exports[`<AppRoute /> Should render and match the snapshot 1`] = `
-.c11 {
+.c12 {
   width: auto;
   height: auto;
   display: block;
@@ -13,14 +13,14 @@ exports[`<AppRoute /> Should render and match the snapshot 1`] = `
   cursor: pointer;
 }
 
-.c5 {
+.c6 {
   width: auto;
   height: auto;
   width: 100%;
   max-height: 51px;
 }
 
-.c7 {
+.c8 {
   width: auto;
   height: auto;
   width: 100%;
@@ -28,7 +28,7 @@ exports[`<AppRoute /> Should render and match the snapshot 1`] = `
   max-height: 100px;
 }
 
-.c2 {
+.c3 {
   display: -webkit-box;
   display: -webkit-flex;
   display: -ms-flexbox;
@@ -45,7 +45,7 @@ exports[`<AppRoute /> Should render and match the snapshot 1`] = `
   width: 100%;
 }
 
-.c3 {
+.c4 {
   display: -webkit-box;
   display: -webkit-flex;
   display: -ms-flexbox;
@@ -56,7 +56,7 @@ exports[`<AppRoute /> Should render and match the snapshot 1`] = `
   height: auto;
 }
 
-.c10 {
+.c11 {
   width: 30px;
   height: 30px;
   font-size: 15px;
@@ -85,6 +85,10 @@ exports[`<AppRoute /> Should render and match the snapshot 1`] = `
   position: fixed;
   width: 100%;
   top: 0;
+  z-index: 10;
+}
+
+.c2 {
   background-color: white;
   padding: 20px;
   box-shadow: 0px 4px 10px rgba(227,238,251,0.8);
@@ -96,16 +100,15 @@ exports[`<AppRoute /> Should render and match the snapshot 1`] = `
   -webkit-box-align: center;
   -ms-flex-align: center;
   align-items: center;
-  z-index: 10;
   height: 70px;
   gap: 16px;
 }
 
-.c1 .user-name-info {
+.c2 .user-name-info {
   white-space: nowrap;
 }
 
-.c8 {
+.c9 {
   margin-left: auto;
   margin-right: 0;
   display: -webkit-box;
@@ -122,7 +125,7 @@ exports[`<AppRoute /> Should render and match the snapshot 1`] = `
   flex-shrink: 0;
 }
 
-.c9 {
+.c10 {
   position: relative;
   display: -webkit-box;
   display: -webkit-flex;
@@ -135,7 +138,7 @@ exports[`<AppRoute /> Should render and match the snapshot 1`] = `
   gap: 10px;
 }
 
-.c4 {
+.c5 {
   gap: 16px;
 }
 
@@ -144,7 +147,7 @@ exports[`<AppRoute /> Should render and match the snapshot 1`] = `
   margin: 0 !important;
 }
 
-.c13 {
+.c14 {
   position: relative;
   margin-top: 70px;
   height: calc(100vh - 70px) !important;
@@ -152,7 +155,7 @@ exports[`<AppRoute /> Should render and match the snapshot 1`] = `
   overflow: auto;
 }
 
-.c12 {
+.c13 {
   overflow: hidden;
   -webkit-flex-wrap: nowrap !important;
   -ms-flex-wrap: nowrap !important;
@@ -160,25 +163,25 @@ exports[`<AppRoute /> Should render and match the snapshot 1`] = `
 }
 
 @media (max-width:575px) {
-  .c1 {
+  .c2 {
     gap: 0;
   }
 }
 
 @media (max-width:767px) {
-  .c1 .user-name-info {
+  .c2 .user-name-info {
     display: none;
   }
 }
 
 @media only screen and (max-width:480px) {
-  .c6 {
+  .c7 {
     display: none;
   }
 }
 
 @media (max-width:575px) {
-  .c4 {
+  .c5 {
     gap: 8px;
     -webkit-box-pack: start;
     -webkit-justify-content: start;
@@ -186,14 +189,14 @@ exports[`<AppRoute /> Should render and match the snapshot 1`] = `
     justify-content: start;
   }
 
-  .c4 img {
+  .c5 img {
     width: 70%;
     margin: 0;
   }
 }
 
 @media only screen and (max-width:1280px) {
-  .c13 {
+  .c14 {
     width: 100vw;
   }
 }
@@ -211,70 +214,74 @@ exports[`<AppRoute /> Should render and match the snapshot 1`] = `
       >
         <div
           class="c2"
-          width="100%"
         >
           <div
-            class="c3 c4"
+            class="c3"
+            width="100%"
           >
-            <a
-              href="/"
-            >
-              <img
-                alt="CIAS Application Logo"
-                class="c5"
-                src="IMAGE_MOCK"
-                width="100%"
-              />
-            </a>
             <div
-              class="c6"
+              class="c4 c5"
             >
-              <img
-                alt="Michigan State University Logo"
+              <a
+                href="/"
+              >
+                <img
+                  alt="CIAS Application Logo"
+                  class="c6"
+                  src="IMAGE_MOCK"
+                  width="100%"
+                />
+              </a>
+              <div
                 class="c7"
-                src="IMAGE_MOCK"
-                width="100%"
-              />
+              >
+                <img
+                  alt="Michigan State University Logo"
+                  class="c8"
+                  src="IMAGE_MOCK"
+                  width="100%"
+                />
+              </div>
             </div>
           </div>
-        </div>
-        <div
-          class="c8"
-        >
           <div
             class="c9"
           >
-            <div />
             <div
               class="c10"
-              color="#FFFFFF"
-              data-private="true"
-              height="30"
-              width="30"
             >
-              <div>
-                JD
+              <div />
+              <div
+                class="c11"
+                color="#FFFFFF"
+                data-private="true"
+                height="30"
+                width="30"
+              >
+                <div>
+                  JD
+                </div>
               </div>
-            </div>
-            <div
-              class="c11 user-name-info"
-              data-private="true"
-            >
-              John Doe
+              <div
+                class="c12 user-name-info"
+                data-private="true"
+              >
+                John Doe
+              </div>
             </div>
           </div>
         </div>
       </div>
     </div>
     <div
-      class="c12"
+      class="c13"
       style="margin-left: 0px; margin-right: 0px; display: flex; flex-wrap: wrap; flex-grow: 0; flex-shrink: 0; align-items: normal; justify-content: flex-start;"
     >
       <div
         style="box-sizing: border-box; min-height: 1px; position: relative; padding-left: 0px; padding-right: 0px; width: 100%; flex-basis: 0px; flex-grow: 1; flex-shrink: 0; max-width: 100%; margin-left: 0%;"
       >
         <div
-          class="c13"
+          class="c14"
           id="main-app-container"
         />
       </div>

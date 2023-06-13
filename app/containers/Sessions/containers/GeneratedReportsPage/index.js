@@ -2,7 +2,6 @@ import React, { useEffect } from 'react';
 import PropTypes from 'prop-types';
 import { compose } from 'redux';
 import { injectIntl, IntlShape } from 'react-intl';
-import { Helmet } from 'react-helmet';
 import { injectReducer, injectSaga } from 'redux-injectors';
 import { connect } from 'react-redux';
 
@@ -18,6 +17,7 @@ import {
 } from 'global/reducers/intervention';
 
 import AppContainer from 'components/Container';
+
 import ReportsList from 'containers/Reports/containers/ReportsList';
 
 import messages from './messages';
@@ -44,16 +44,15 @@ const GeneratedReportsPage = ({
   }, [sessionId, interventionId]);
 
   return (
-    <AppContainer>
-      <Helmet>
-        <title>{formatMessage(messages.pageTitle)}</title>
-      </Helmet>
-      <ReportsList
-        match={match}
-        disableFilter={disableFilter}
-        sessionId={sessionId}
-      />
-    </AppContainer>
+    <>
+      <AppContainer pageTitle={formatMessage(messages.pageTitle)}>
+        <ReportsList
+          match={match}
+          disableFilter={disableFilter}
+          sessionId={sessionId}
+        />
+      </AppContainer>
+    </>
   );
 };
 

@@ -16,7 +16,7 @@ import 'jest-styled-components';
 
 import { createTestStore } from 'utils/testUtils/storeUtils';
 
-import { Roles } from 'models/User/RolesManager';
+import { NAVIGATION, Roles } from 'models/User/RolesManager';
 import Navbar from '../index';
 import { DEFAULT_LOCALE } from '../../../i18n';
 
@@ -47,7 +47,11 @@ describe('<Navbar />', () => {
       <Provider store={store}>
         <MemoryRouter>
           <IntlProvider locale={DEFAULT_LOCALE}>
-            <Navbar logOut={() => {}} path="/interventions" />
+            <Navbar
+              logOut={() => {}}
+              path="/interventions"
+              navbarProps={{ navbarId: NAVIGATION.DEFAULT }}
+            />
           </IntlProvider>
         </MemoryRouter>
       </Provider>,
@@ -62,7 +66,11 @@ describe('<Navbar />', () => {
       <Provider store={store}>
         <MemoryRouter>
           <IntlProvider locale={DEFAULT_LOCALE}>
-            <Navbar logOut={() => {}} path="/interventions" />
+            <Navbar
+              logOut={() => {}}
+              path="/interventions"
+              navbarProps={{ navbarId: NAVIGATION.DEFAULT }}
+            />
           </IntlProvider>
         </MemoryRouter>
       </Provider>,
@@ -76,7 +84,11 @@ describe('<Navbar />', () => {
       <Provider store={store}>
         <MemoryRouter>
           <IntlProvider locale={DEFAULT_LOCALE}>
-            <Navbar logOut={() => {}} path="" />
+            <Navbar
+              logOut={() => {}}
+              path=""
+              navbarProps={{ navbarId: NAVIGATION.DEFAULT }}
+            />
           </IntlProvider>
         </MemoryRouter>
       </Provider>,

@@ -43,3 +43,6 @@ export const makeSelectIsUserLoggedIn = () =>
 
 export const makeSelectUserTimeZone = () =>
   createSelector(selectAuth, (authState) => authState.user?.timeZone);
+
+export const makeSelectUserOrganizableId = () =>
+  createSelector(selectAuth, (authState) => authState.user?.organizableId);

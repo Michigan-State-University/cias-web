@@ -68,6 +68,7 @@ const SettingsOption = ({
         onBlur={handleStringToNumericUpdate}
         width={150}
         px={12}
+        disabled={disabled}
       />
     </>
   );
