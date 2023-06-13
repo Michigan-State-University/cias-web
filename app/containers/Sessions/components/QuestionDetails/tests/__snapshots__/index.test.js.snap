@@ -169,21 +169,31 @@ exports[`<QuestionDetails /> should match the snapshot 1`] = `
   background-color: #E9F1FB;
 }
 
+.c23 {
+  width: auto;
+  height: auto;
+  display: block;
+  border-radius: 5px;
+  padding: 16px;
+  color: unset;
+}
+
 .c24 {
   width: auto;
   height: auto;
   display: block;
   border-radius: 5px;
   width: 100%;
+  max-width: 150px;
   padding-top: 14px;
   padding-bottom: 14px;
   padding-right: 21px;
   padding-left: 21px;
-  border: 1px solid #ABBBD1;
+  background-color: rgba(233,241,251,1);
   color: unset;
 }
 
-.c26 {
+.c28 {
   width: auto;
   height: auto;
   display: block;
@@ -192,6 +202,23 @@ exports[`<QuestionDetails /> should match the snapshot 1`] = `
   margin-bottom: 20px;
   margin-left: 26px;
   color: unset;
+}
+
+.c26 {
+  font-family: DM Sans;
+  font-size: 13px;
+  line-height: 130%;
+  margin-top: 5px;
+  color: #2F3850;
+}
+
+.c27 {
+  margin: 0;
+  font-family: DM Sans;
+  font-size: 13px;
+  line-height: 130%;
+  color: #6B707C;
+  margin-top: 5px;
 }
 
 .c2 {
@@ -228,19 +255,7 @@ exports[`<QuestionDetails /> should match the snapshot 1`] = `
   width: 100%;
 }
 
-.c23 {
-  display: -webkit-box;
-  display: -webkit-flex;
-  display: -ms-flexbox;
-  display: flex;
-  -webkit-flex-direction: column;
-  -ms-flex-direction: column;
-  flex-direction: column;
-  width: 100%;
-  margin-top: 10px;
-}
-
-.c27 {
+.c29 {
   width: 100%;
   height: 40px;
   border-radius: 100px;
@@ -326,8 +341,8 @@ exports[`<QuestionDetails /> should match the snapshot 1`] = `
   border-radius: 5px;
   background-color: transparent;
   border-color: transparent;
-  margin-right: 9px;
-  height: 60px;
+  margin-right: 0;
+  height: 50px;
   color: #2F3850;
   opacity: 0.5;
 }
@@ -489,22 +504,6 @@ exports[`<QuestionDetails /> should match the snapshot 1`] = `
   -ms-flex-pack: start;
   justify-content: flex-start;
   width: 100%;
-}
-
-@media only screen and (min-width:768px) {
-
-}
-
-@media only screen and (min-width:960px) {
-
-}
-
-@media only screen and (min-width:1170px) {
-
-}
-
-@media only screen and (min-width:1360px) {
-
 }
 
 @media only screen and (min-width:768px) {
@@ -3507,39 +3506,48 @@ exports[`<QuestionDetails /> should match the snapshot 1`] = `
                   class="c23"
                 >
                   <div
-                    class="c24"
-                    width="100%"
+                    class="c15"
                   >
                     <div
-                      class="c12"
+                      class="c24"
+                      width="100%"
                     >
                       <div
-                        class="c10"
-                        width="100%"
+                        class="c12"
                       >
                         <div
-                          class="c15"
+                          class="c10"
+                          width="100%"
                         >
-                          <input
-                            aria-labelledby="question-title question-subtitle"
-                            class="c25"
-                            disabled=""
-                            height="60"
-                            placeholder="Respondent answer goes here..."
-                            type="tel"
-                            value=""
-                          />
+                          <div
+                            class="c15"
+                          >
+                            <input
+                              aria-labelledby="question-title question-subtitle"
+                              class="c25"
+                              disabled=""
+                              height="50"
+                              placeholder="ex: 1, 2, 100"
+                              type="tel"
+                              value=""
+                            />
+                          </div>
                         </div>
                       </div>
                     </div>
+                    <p
+                      class="c26 c27"
+                    >
+                      Number between  and  digits
+                    </p>
                   </div>
                 </div>
               </div>
               <div
-                class="c26"
+                class="c28"
               >
                 <button
-                  class="c27"
+                  class="c29"
                   color="primary"
                   disabled=""
                   radius="100px"
