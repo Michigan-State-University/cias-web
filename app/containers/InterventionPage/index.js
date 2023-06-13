@@ -107,22 +107,8 @@ export function InterventionPage({
     },
   });
 
-  const handleChange = (value) => () => {
-    if (filterStatus.includes(value))
-      setFilterStatus(filterStatus.filter((el) => el !== value));
-    else setFilterStatus([...filterStatus, value]);
-  };
-
-  const handleFilterStatus = (e) => {
-    e.preventDefault();
-    const {
-      currentTarget: { value },
-    } = e;
-    handleChange(value)();
-  };
-
-  const handleClearFilters = () => {
-    setFilterStatus(statusTypes);
+  const handleChange = (values) => {
+    setFilterStatus(values);
   };
 
   const handleFeedbackClick = () => {
@@ -207,10 +193,9 @@ export function InterventionPage({
           >
             <Row my={35} justify="start" align="center">
               <StatusFilter
-                onClick={handleFilterStatus}
+                onChange={handleChange}
                 formatMessage={formatMessage}
                 active={filterStatus}
-                onClear={handleClearFilters}
               />
             </Row>
           </Col>

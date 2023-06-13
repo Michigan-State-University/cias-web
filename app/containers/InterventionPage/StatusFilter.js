@@ -1,70 +1,47 @@
 import React, { useMemo } from 'react';
 import PropTypes from 'prop-types';
-import isEqual from 'lodash/isEqual';
 import { Col } from 'react-grid-system';
 
-import {
-  statusTypes,
-  statusTypeToColorMap,
-  statusTypeToFontColorMap,
-} from 'models/Status/StatusTypes';
 import globalMessages from 'global/i18n/globalMessages';
 
-import ActionIcon from 'components/ActionIcon';
+import Select from 'components/Select';
 
-import { FilterText, StatusLabel } from './styled';
-import messages from './messages';
-
-const StatusFilter = ({ formatMessage, onClick, active, onClear }) => {
-  const labels = useMemo(
-    () => Object.keys(globalMessages.statuses),
+const StatusFilter = ({ formatMessage, onChange, active }) => {
+  const options = useMemo(
+    () =>
+      Object.keys(globalMessages.statuses).map((status) => ({
+        value: status,
+        label: formatMessage(globalMessages.statuses[status]),
+      })),
     [globalMessages.statuses],
   );
 
-  const showIcon = active && !isEqual(statusTypes, [...active].sort());
+  const selectValue = active.map((status) => ({
+    value: status,
+    label: formatMessage(globalMessages.statuses[status]),
+  }));
+
+  const handleChange = (values) => onChange(values.map(({ value }) => value));
 
   return (
-    <>
-      {labels.map((status) => (
-        <Col
-          xs="content"
-          key={status}
-          style={{ marginTop: 5, marginBottom: 5 }}
-        >
-          <StatusLabel
-            value={status}
-            color={statusTypeToColorMap[status]}
-            onClick={onClick}
-            active={active.includes(status)}
-          >
-            <FilterText
-              color={statusTypeToFontColorMap[status]}
-              active={active.includes(status)}
-            >
-              {formatMessage(globalMessages.statuses[status])}
-            </FilterText>
-          </StatusLabel>
-        </Col>
-      ))}
-      {showIcon && (
-        <Col xs={1}>
-          <ActionIcon
-            height={15}
-            width={15}
-            onClick={onClear}
-            background="none"
-            ariaText={formatMessage(messages.clearFiltersText)}
-          />
-        </Col>
-      )}
-    </>
+    <Col>
+      <Select
+        width={400}
+        selectProps={{
+          isMulti: true,
+          options,
+          formatLabel: (label) => label,
+          value: selectValue,
+          onChange: handleChange,
+        }}
+      />
+    </Col>
   );
 };
 
 StatusFilter.propTypes = {
   formatMessage: PropTypes.func,
-  onClick: PropTypes.func,
-  onClear: PropTypes.func,
+  onChange: PropTypes.func,
   active: PropTypes.array,
 };
 export default StatusFilter;
