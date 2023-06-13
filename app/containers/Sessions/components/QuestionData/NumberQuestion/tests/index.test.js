@@ -45,6 +45,7 @@ describe('<NumberQuestion />', () => {
               },
             ],
           },
+          settings: {},
           position: 1,
           question_group_id: 'test',
         },
