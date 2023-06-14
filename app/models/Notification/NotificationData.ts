@@ -54,6 +54,9 @@ export type StartEditingInterventionNotificationData = {
   avatarUrl: string;
 };
 
+export type StopEditingInterventionNotificationData =
+  StartEditingInterventionNotificationData;
+
 // Union type
 export type NotificationData =
   | NewConversationNotificationData
@@ -64,4 +67,5 @@ export type NotificationData =
   | NewNarratorWasSetNotificationData
   | NewCollaboratorAddedNotificationData
   | CollaboratorRemovedNotificationData
-  | StartEditingInterventionNotificationData;
+  | StartEditingInterventionNotificationData
+  | StopEditingInterventionNotificationData;

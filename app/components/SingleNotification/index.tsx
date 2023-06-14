@@ -3,6 +3,7 @@ import React from 'react';
 import { Notification, NotificationEvent } from 'models/Notification';
 
 import {
+  CollaboratorRemovedNotificationLayout,
   ConversationTranscriptReadyNotificationLayout,
   InterventionConversationsTranscriptReadyNotificationLayout,
   NewCollaboratorAddedNotificationLayout,
@@ -11,9 +12,9 @@ import {
   StartEditingInterventionNotificationLayout,
   SuccessfullyRestoredInterventionNotificationLayout,
   UnsuccessfulImportNotificationLayout,
-  CollaboratorRemovedNotificationLayout,
 } from './components';
 import { NotificationLayoutCommonProps } from './types';
+import { StopEditingInterventionNotificationLayout } from './components/StopEditingInterventionNotificationLayout';
 
 type Props = {
   notification: Notification;
@@ -82,6 +83,13 @@ const SingleNotification = ({ notification, ...commonProps }: Props) => {
     case NotificationEvent.START_EDITING_INTERVENTION:
       return (
         <StartEditingInterventionNotificationLayout
+          notification={notification}
+          {...commonProps}
+        />
+      );
+    case NotificationEvent.STOP_EDITING_INTERVENTION:
+      return (
+        <StopEditingInterventionNotificationLayout
           notification={notification}
           {...commonProps}
         />

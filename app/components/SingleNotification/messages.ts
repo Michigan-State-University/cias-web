@@ -63,4 +63,12 @@ export default defineMessages({
     id: `${scope}.startEditingInterventionContent`,
     defaultMessage: `{firstName} {lastName} started editing <secondaryColorBold>{interventionName}</secondaryColorBold>`,
   },
+  stopEditingInterventionTitle: {
+    id: `${scope}.stopEditingInterventionTitle`,
+    defaultMessage: `Intervention edited`,
+  },
+  stopEditingInterventionContent: {
+    id: `${scope}.stopEditingInterventionContent`,
+    defaultMessage: `<secondaryColorBold>{interventionName}</secondaryColorBold> has been edited by {firstName} {lastName}. Refresh the page to see latest changes.`,
+  },
 });
