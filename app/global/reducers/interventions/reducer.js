@@ -156,9 +156,10 @@ export const interventionsReducer = (state = initialState, action) =>
         break;
       }
 
-      case REFETCH_INTERVENTIONS:
+      case REFETCH_INTERVENTIONS: {
         draft.shouldRefetch = true;
         break;
+      }
     }
   });
 

@@ -110,6 +110,7 @@ import {
   SET_STARTING_EDITING,
   SET_STOPPING_EDITING,
   RESET_COLLABORATION_STATE,
+  RESET_REDUCER,
 } from './constants';
 
 export const initialState = {
@@ -176,6 +177,9 @@ const findSessionIndex = (intervention, sessionId) =>
 export const interventionReducer = (state = initialState, action) =>
   produce(state, (draft) => {
     switch (action.type) {
+      case RESET_REDUCER: {
+        return initialState;
+      }
       case FETCH_INTERVENTION_REQUEST:
         if (state.intervention && action.payload.id === state.intervention.id)
           break;
@@ -684,6 +688,7 @@ export const interventionReducer = (state = initialState, action) =>
         }
         draft.loaders.startingEditing = false;
         draft.loaders.stoppingEditing = false;
+        break;
       }
     }
   });

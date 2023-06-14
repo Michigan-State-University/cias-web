@@ -7,4 +7,5 @@ export enum NotificationEvent {
   SUCCESSFULLY_RESTORED_INTERVENTION = 'successfully_restored_intervention',
   UNSUCCESSFUL_INTERVENTION_IMPORT = 'unsuccessful_intervention_import',
   NEW_COLLABORATOR_ADDED = 'new_collaborator_added',
+  COLLABORATOR_REMOVED = 'collaborator_removed',
 }

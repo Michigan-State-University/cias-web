@@ -1,5 +1,6 @@
 import { NotificationEvent } from './NotificationEvent';
 import {
+  CollaboratorRemovedNotificationData,
   ConversationTranscriptReadyNotificationData,
   InterventionConversationsTranscriptReadyNotificationData,
   NewCollaboratorAddedNotificationData,
@@ -59,6 +60,11 @@ export type NewCollaboratorAddedNotification = GenericNotification<
   NewCollaboratorAddedNotificationData
 >;
 
+export type CollaboratorRemovedNotification = GenericNotification<
+  NotificationEvent.COLLABORATOR_REMOVED,
+  CollaboratorRemovedNotificationData
+>;
+
 // Union type
 export type Notification =
   | NewConversationNotification
@@ -67,4 +73,5 @@ export type Notification =
   | InterventionConversationsTranscriptReadyNotification
   | SuccessfullyRestoredInterventionNotification
   | UnsuccessfulImportNotification
-  | NewCollaboratorAddedNotification;
+  | NewCollaboratorAddedNotification
+  | CollaboratorRemovedNotification;

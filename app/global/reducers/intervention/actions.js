@@ -97,6 +97,8 @@ import {
   SET_STARTING_EDITING,
   SET_STOPPING_EDITING,
   RESET_COLLABORATION_STATE,
+  ON_COLLABORATOR_REMOVED_RECEIVE,
+  RESET_REDUCER,
 } from './constants';
 
 export const fetchInterventionRequest = (id) =>
@@ -400,3 +402,10 @@ export const setStoppingEditing = (stoppingEditing) =>
 
 export const resetCollaborationState = () =>
   actionBuilder(RESET_COLLABORATION_STATE, {});
+
+export const onCollaboratorRemovedReceive = (interventionId) =>
+  actionBuilder(ON_COLLABORATOR_REMOVED_RECEIVE, {
+    interventionId,
+  });
+
+export const resetReducer = () => actionBuilder(RESET_REDUCER, {});

@@ -30,6 +30,9 @@ import addCollaboratorsSaga from './inviteCollaborator';
 import fetchCollaboratorsSaga from './fetchCollaborators';
 import changeCollaboratorSettingSaga from './changeCollaboratorSetting';
 import removeCollaboratorSaga from './removeCollaborator';
+import onCollaboratorRemovedReceiveSaga from './onCollaboratorRemovedReceive';
+
+export * from './onCollaboratorRemovedReceive';
 
 export {
   createInterventionSaga,
@@ -63,6 +66,7 @@ export {
   fetchCollaboratorsSaga,
   changeCollaboratorSettingSaga,
   removeCollaboratorSaga,
+  onCollaboratorRemovedReceiveSaga,
 };
 
 export default function* allInterventionSagas() {
@@ -96,6 +100,7 @@ export default function* allInterventionSagas() {
     fetchCollaboratorsSaga(),
     changeCollaboratorSettingSaga(),
     removeCollaboratorSaga(),
+    onCollaboratorRemovedReceiveSaga,
   ]);
 }
 
