@@ -55,4 +55,12 @@ export default defineMessages({
     id: `${scope}.collaboratorRemovedContent`,
     defaultMessage: `You have been removed from collaborators on <secondaryColorBold>{interventionName}</secondaryColorBold>`,
   },
+  startEditingInterventionTitle: {
+    id: `${scope}.startEditingInterventionTitle`,
+    defaultMessage: `Editing started`,
+  },
+  startEditingInterventionContent: {
+    id: `${scope}.startEditingInterventionContent`,
+    defaultMessage: `{firstName} {lastName} started editing <secondaryColorBold>{interventionName}</secondaryColorBold>`,
+  },
 });

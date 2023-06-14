@@ -8,4 +8,5 @@ export enum NotificationEvent {
   UNSUCCESSFUL_INTERVENTION_IMPORT = 'unsuccessful_intervention_import',
   NEW_COLLABORATOR_ADDED = 'new_collaborator_added',
   COLLABORATOR_REMOVED = 'collaborator_removed',
+  START_EDITING_INTERVENTION = 'start_editing_intervention',
 }

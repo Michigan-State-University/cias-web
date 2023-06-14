@@ -8,11 +8,12 @@ import {
   NewCollaboratorAddedNotificationLayout,
   NewConversationNotificationLayout,
   NewNarratorWasSetNotificationLayout,
+  StartEditingInterventionNotificationLayout,
   SuccessfullyRestoredInterventionNotificationLayout,
   UnsuccessfulImportNotificationLayout,
+  CollaboratorRemovedNotificationLayout,
 } from './components';
 import { NotificationLayoutCommonProps } from './types';
-import { CollaboratorRemovedNotificationLayout } from './components/CollaboratorRemovedNotificationLayout';
 
 type Props = {
   notification: Notification;
@@ -74,6 +75,13 @@ const SingleNotification = ({ notification, ...commonProps }: Props) => {
     case NotificationEvent.COLLABORATOR_REMOVED:
       return (
         <CollaboratorRemovedNotificationLayout
+          notification={notification}
+          {...commonProps}
+        />
+      );
+    case NotificationEvent.START_EDITING_INTERVENTION:
+      return (
+        <StartEditingInterventionNotificationLayout
           notification={notification}
           {...commonProps}
         />
