@@ -1,5 +1,7 @@
 import { createSelector } from 'reselect';
 
+import { Roles } from 'models/User/RolesManager';
+
 import { initialState } from './reducer';
 
 export const selectAuth = (state) => state.auth || initialState;
@@ -14,7 +16,7 @@ export const makeSelectPhoneNumberPreview = () =>
   createSelector(selectAuth, (authState) => authState.phoneNumberPreview);
 
 export const makeSelectUserRoles = () =>
-  createSelector(selectAuth, (authState) => authState.user.roles);
+  createSelector(selectAuth, (authState) => authState.user?.roles);
 
 export const makeSelectErrors = (error) =>
   createSelector(selectAuth, (authState) =>
@@ -46,3 +48,8 @@ export const makeSelectUserTimeZone = () =>
 
 export const makeSelectUserOrganizableId = () =>
   createSelector(selectAuth, (authState) => authState.user?.organizableId);
+
+export const makeSelectIsAdmin = () =>
+  createSelector(makeSelectUserRoles(), (roles) =>
+    roles?.includes(Roles.Admin),
+  );
