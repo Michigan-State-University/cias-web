@@ -3,7 +3,7 @@
  * InterventionStatusButtons
  *
  */
-import React, { useMemo, useState } from 'react';
+import React, { useState } from 'react';
 import { FormattedMessage, injectIntl } from 'react-intl';
 import PropTypes from 'prop-types';
 import get from 'lodash/get';
@@ -24,7 +24,6 @@ import {
   archived,
   statusTypeToColorMap,
 } from 'models/Status/StatusTypes';
-import getUrlProtocol from 'utils/getApiProtocol';
 
 import CsvButtons from './CsvButtons';
 import messages from './messages';
@@ -35,20 +34,12 @@ function InterventionStatusButtons({
   status,
   handleChangeStatus,
   handleSendCsv,
-  csvLink,
   csvGeneratedAt,
+  csvFilename,
+  interventionId,
   canAccessCsv,
   canCurrentUserMakeChanges,
 }) {
-  const apiProtocol = useMemo(
-    () => (process.env.API_URL ? getUrlProtocol(process.env.API_URL) : ''),
-    [process.env.API_URL],
-  );
-
-  const urlToDownload = /^((http:\/\/)|(https:\/\/)).*$/.test(csvLink)
-    ? csvLink
-    : `${apiProtocol}//${csvLink}`;
-
   const CloseButton = () => (
     <>
       <ConfirmationModal
@@ -172,9 +163,9 @@ function InterventionStatusButtons({
   const csvButtons = !canAccessCsv ? null : (
     <CsvButtons
       handleSendCsv={handleSendCsv}
-      csvLink={csvLink}
       csvGeneratedAt={csvGeneratedAt}
-      urlToDownload={urlToDownload}
+      csvFilename={csvFilename}
+      interventionId={interventionId}
     />
   );
 
@@ -205,7 +196,6 @@ InterventionStatusButtons.propTypes = {
   status: PropTypes.string,
   handleChangeStatus: PropTypes.func,
   handleSendCsv: PropTypes.func,
-  csvLink: PropTypes.string,
   csvGeneratedAt: PropTypes.string,
   canAccessCsv: PropTypes.bool,
   canCurrentUserMakeChanges: PropTypes.bool,

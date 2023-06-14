@@ -39,7 +39,7 @@ type UserWithAccess = {
 export interface Intervention {
   createdAt: string;
   csvGeneratedAt: Nullable<string>;
-  csvLink: Nullable<string>;
+  csvFilename: Nullable<string>;
   googleLanguageId: number;
   hasCatSessions: boolean;
   id: string;
@@ -73,7 +73,8 @@ export interface Intervention {
   quickExit: boolean;
   currentNarrator: CharacterType;
   conversationsPresent: boolean;
-  conversationsTranscript: Nullable<AppFile>;
+  conversationsTranscriptGeneratedAt: Nullable<string>;
+  conversationsTranscriptFilename: Nullable<string>;
   sessions: Session[];
   hasCollaborators: boolean;
   currentEditor: Nullable<Editor>;

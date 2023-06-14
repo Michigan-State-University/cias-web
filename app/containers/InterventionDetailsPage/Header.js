@@ -33,8 +33,9 @@ const Header = ({
   editName,
   handleChangeStatus,
   handleSendCsv,
-  csvLink,
   csvGeneratedAt,
+  csvFilename,
+  interventionId,
   options,
   organizationId,
   canAccessCsv,
@@ -132,8 +133,9 @@ const Header = ({
                 status={status}
                 handleChangeStatus={handleChangeStatus}
                 handleSendCsv={handleSendCsv}
-                csvLink={csvLink}
                 csvGeneratedAt={csvGeneratedAt}
+                csvFilename={csvFilename}
+                interventionId={interventionId}
                 canAccessCsv={canAccessCsv}
                 canCurrentUserMakeChanges={canCurrentUserMakeChanges}
               />
@@ -157,8 +159,9 @@ Header.propTypes = {
   editName: PropTypes.func,
   handleChangeStatus: PropTypes.func,
   handleSendCsv: PropTypes.func,
-  csvLink: PropTypes.string,
   csvGeneratedAt: PropTypes.string,
+  csvFilename: PropTypes.string,
+  interventionId: PropTypes.string,
   organizationId: PropTypes.string,
   options: PropTypes.array,
   canAccessCsv: PropTypes.bool,
