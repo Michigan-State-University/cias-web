@@ -20,14 +20,14 @@ import {
 import { InterventionChannelContext } from 'utils/useInterventionChannel';
 
 import Row from 'components/Row';
-import Text, { EllipsisText } from 'components/Text';
+import Text from 'components/Text';
 import { LabelPosition, Switch } from 'components/Switch';
 
 import messages from './messages';
 
 export type Props = {};
 
-const Component: React.FC<Props> = () => {
+const CollaborationPanelComponent: React.FC<Props> = () => {
   const { formatMessage } = useIntl();
 
   const interventionChannel = useContext(InterventionChannelContext);
@@ -83,35 +83,37 @@ const Component: React.FC<Props> = () => {
         {formatMessage(messages.currentMode, { editing: isCurrentUserEditor })}
       </Text>
       {canEdit && (
-        <>
-          <Row flexShrink={0} align="center">
-            <Switch
-              id="enable-intervention-editing"
-              checked={isCurrentUserEditor}
-              onToggle={handleToggle}
-              labelPosition={LabelPosition.Right}
-              labelOffset={8}
-              loading={isLoading}
-              disabled={editingByOtherUser}
-            >
-              <Text fontSize={15} lineHeight={1.5}>
-                {formatMessage(messages.enableEditing)}
-              </Text>
-            </Switch>
-          </Row>
-          {editingByOtherUser && (
-            <EllipsisText
-              text={formatMessage(messages.editedByOtherUser, {
-                ...currentEditor,
-              })}
-              fontSize={15}
-              lineHeight={1.5}
-            />
-          )}
-        </>
+        <Row flexShrink={0} align="center">
+          <Switch
+            id="enable-intervention-editing"
+            checked={isCurrentUserEditor}
+            onToggle={handleToggle}
+            labelPosition={LabelPosition.Right}
+            labelOffset={8}
+            loading={isLoading}
+            disabled={editingByOtherUser}
+          >
+            <Text fontSize={15} lineHeight={1.5}>
+              {formatMessage(messages.enableEditing)}
+            </Text>
+          </Switch>
+        </Row>
+      )}
+      {editingByOtherUser && (
+        <Text
+          fontSize={15}
+          lineHeight={1.5}
+          textOverflow="ellipsis"
+          overflow="hidden"
+          whiteSpace="nowrap"
+        >
+          {formatMessage(messages.editedByOtherUser, {
+            ...currentEditor,
+          })}
+        </Text>
       )}
     </Row>
   );
 };
 
-export const CollaborationPanel = memo(Component);
+export const CollaborationPanel = memo(CollaborationPanelComponent);
