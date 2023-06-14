@@ -53,3 +53,8 @@ export const makeSelectIsAdmin = () =>
   createSelector(makeSelectUserRoles(), (roles) =>
     roles?.includes(Roles.Admin),
   );
+
+export const makeSelectIsEInterventionAdmin = () =>
+  createSelector(makeSelectUserRoles(), (roles) =>
+    roles?.includes(Roles.EInterventionAdmin),
+  );

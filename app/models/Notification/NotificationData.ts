@@ -40,6 +40,11 @@ export type NewCollaboratorAddedNotificationData = {
   interventionId: string;
 };
 
+export type CollaboratorRemovedNotificationData = {
+  interventionName: string;
+  interventionId: string;
+};
+
 // Union type
 export type NotificationData =
   | NewConversationNotificationData
@@ -48,4 +53,5 @@ export type NotificationData =
   | SuccessfullyRestoredInterventionNotificationData
   | UnsuccessfulImportNotificationData
   | NewNarratorWasSetNotificationData
-  | NewCollaboratorAddedNotificationData;
+  | NewCollaboratorAddedNotificationData
+  | CollaboratorRemovedNotificationData;

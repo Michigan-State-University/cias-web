@@ -47,4 +47,12 @@ export default defineMessages({
     id: `${scope}.newCollaboratorAddedContent`,
     defaultMessage: `You have been invited to collaborate on <secondaryColorBold>{interventionName}</secondaryColorBold>`,
   },
+  collaboratorRemovedTitle: {
+    id: `${scope}.collaboratorRemovedTitle`,
+    defaultMessage: 'Removed from collaborators',
+  },
+  collaboratorRemovedContent: {
+    id: `${scope}.collaboratorRemovedContent`,
+    defaultMessage: `You have been removed from collaborators on <secondaryColorBold>{interventionName}</secondaryColorBold>`,
+  },
 });

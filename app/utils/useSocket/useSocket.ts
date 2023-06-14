@@ -90,7 +90,7 @@ export const useSocket = <
 
     return {
       perform,
-      state: channel.state,
+      isConnected: channel.state === 'connected',
     };
   }, [perform]);
 };
