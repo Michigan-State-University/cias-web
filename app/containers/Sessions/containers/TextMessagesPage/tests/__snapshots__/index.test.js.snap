@@ -205,6 +205,7 @@ exports[`<TextMessagingPage /> Should render and match the snapshot 1`] = `
 
 .c19 {
   position: relative;
+  width: 100%;
   font-size: 18px;
   font-weight: 700;
   color: #2F3850;
@@ -212,6 +213,7 @@ exports[`<TextMessagingPage /> Should render and match the snapshot 1`] = `
 
 .c21 {
   position: relative;
+  width: 100%;
   color: #2F3850;
 }
 
