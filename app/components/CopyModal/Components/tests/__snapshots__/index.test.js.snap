@@ -218,6 +218,7 @@ Object {
 
 .c12 {
   position: relative;
+  width: 100%;
   font-size: 15px;
   font-weight: 700;
   color: rgba(183,39,234,1);
@@ -634,6 +635,7 @@ Object {
 
 .c12 {
   position: relative;
+  width: 100%;
   font-size: 15px;
   font-weight: 700;
   color: rgba(183,39,234,1);

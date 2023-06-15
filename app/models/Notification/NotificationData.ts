@@ -45,6 +45,18 @@ export type CollaboratorRemovedNotificationData = {
   interventionId: string;
 };
 
+export type StartEditingInterventionNotificationData = {
+  interventionName: string;
+  interventionId: string;
+  userId: string;
+  firstName: string;
+  lastName: string;
+  avatarUrl: string;
+};
+
+export type StopEditingInterventionNotificationData =
+  StartEditingInterventionNotificationData;
+
 // Union type
 export type NotificationData =
   | NewConversationNotificationData
@@ -54,4 +66,6 @@ export type NotificationData =
   | UnsuccessfulImportNotificationData
   | NewNarratorWasSetNotificationData
   | NewCollaboratorAddedNotificationData
-  | CollaboratorRemovedNotificationData;
+  | CollaboratorRemovedNotificationData
+  | StartEditingInterventionNotificationData
+  | StopEditingInterventionNotificationData;

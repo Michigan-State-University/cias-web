@@ -5,3 +5,5 @@ export * from './InterventionConversationsTranscriptReadyNotificationLayout';
 export * from './SuccessfullyRestoredInterventionNotificationLayout';
 export * from './UnsuccessfulImportNotificationLayout';
 export * from './NewCollaboratorAddedNotificationLayout';
+export * from './CollaboratorRemovedNotificationLayout';
+export * from './StartEditingInterventionNotificationLayout';
