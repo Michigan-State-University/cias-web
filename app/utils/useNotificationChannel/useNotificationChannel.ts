@@ -16,8 +16,10 @@ import {
 } from 'global/reducers/notifications/actions';
 import {
   onCollaboratorRemovedReceive,
+  onStopEditingInterventionReceive,
   updateInterventionConversationsTranscript,
   withOnCollaboratorRemovedReceiveSaga,
+  withOnStopEditingInterventionReceiveSaga,
 } from 'global/reducers/intervention';
 import { updateConversationTranscript } from 'global/reducers/liveChat';
 import { refetchInterventions } from 'global/reducers/interventions';
@@ -42,6 +44,7 @@ export const useNotificationChannel = () => {
   const dispatch = useDispatch();
 
   useInjectSaga(withOnCollaboratorRemovedReceiveSaga);
+  useInjectSaga(withOnStopEditingInterventionReceiveSaga);
 
   const isLoggedIn = useSelector(makeSelectIsUserLoggedIn());
 
@@ -82,6 +85,11 @@ export const useNotificationChannel = () => {
       case NotificationEvent.COLLABORATOR_REMOVED: {
         dispatch(refetchInterventions());
         dispatch(onCollaboratorRemovedReceive(data.interventionId));
+        break;
+      }
+      case NotificationEvent.STOP_EDITING_INTERVENTION: {
+        dispatch(refetchInterventions());
+        dispatch(onStopEditingInterventionReceive(data.interventionId));
         break;
       }
       default:
