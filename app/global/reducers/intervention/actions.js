@@ -99,10 +99,11 @@ import {
   RESET_COLLABORATION_STATE,
   ON_COLLABORATOR_REMOVED_RECEIVE,
   RESET_REDUCER,
+  ON_STOP_EDITING_INTERVENTION_RECEIVE,
 } from './constants';
 
-export const fetchInterventionRequest = (id) =>
-  actionBuilder(FETCH_INTERVENTION_REQUEST, { id });
+export const fetchInterventionRequest = (id, showLoader = false) =>
+  actionBuilder(FETCH_INTERVENTION_REQUEST, { id, showLoader });
 export const fetchInterventionSuccess = (intervention) =>
   actionBuilder(FETCH_INTERVENTION_SUCCESS, { intervention });
 export const fetchInterventionError = (error) =>
@@ -405,6 +406,10 @@ export const resetCollaborationState = () =>
 
 export const onCollaboratorRemovedReceive = (interventionId) =>
   actionBuilder(ON_COLLABORATOR_REMOVED_RECEIVE, {
+    interventionId,
+  });
+export const onStopEditingInterventionReceive = (interventionId) =>
+  actionBuilder(ON_STOP_EDITING_INTERVENTION_RECEIVE, {
     interventionId,
   });
 

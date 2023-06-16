@@ -50,7 +50,7 @@ function* onCollaboratorRemovedReceiveWorker({
 
   if (canUserStillViewTheIntervention) {
     if (isViewingIntervention) {
-      yield put(fetchInterventionRequest(interventionId));
+      yield put(fetchInterventionRequest(interventionId, true));
     }
     return;
   }

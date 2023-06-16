@@ -181,8 +181,12 @@ export const interventionReducer = (state = initialState, action) =>
         return initialState;
       }
       case FETCH_INTERVENTION_REQUEST:
-        if (state.intervention && action.payload.id === state.intervention.id)
+        if (action.payload.showLoader) {
+          draft.loaders.fetchInterventionLoading = true;
+        }
+        if (state.intervention && action.payload.id === state.intervention.id) {
           break;
+        }
         draft.loaders.fetchInterventionLoading = true;
         draft.errors.fetchInterventionError = null;
         draft.intervention = null;
