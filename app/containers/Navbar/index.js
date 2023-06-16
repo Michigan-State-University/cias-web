@@ -66,7 +66,7 @@ export function Navbar({
   const dropdownRef = useRef(null);
   useOutsideClick(dropdownRef, () => setMenuVisible(false), menuVisible);
 
-  const isSessionsNavbar = navbarProps.navbarId === NAVIGATION.SESSIONS;
+  const isSessionsNavbar = navbarProps?.navbarId === NAVIGATION.SESSIONS;
 
   const navbarRef = useRef();
   useResizeObserver({
