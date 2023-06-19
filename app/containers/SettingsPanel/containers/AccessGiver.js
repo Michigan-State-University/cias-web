@@ -99,7 +99,7 @@ const AccessGiver = ({
   const buttons = [
     {
       action: revokeAction,
-      disabled: removingParticipantsPossible || disabled,
+      disabled: !removingParticipantsPossible || disabled,
       text: <FormattedMessage {...messages.remove} />,
     },
   ];
