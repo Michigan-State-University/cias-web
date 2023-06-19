@@ -34,6 +34,7 @@ import {
   makeSelectUser,
   fetchSelfDetailsSaga,
 } from 'global/reducers/auth';
+import { Path } from 'global/constants';
 
 import AnswerSessionPage from 'containers/AnswerSessionPage/Loadable';
 import EditSessionPage from 'containers/Sessions/containers/EditSessionPage/Loadable';
@@ -41,7 +42,7 @@ import InterventionDetailsPage from 'containers/InterventionDetailsPage/Loadable
 import LoginPage from 'containers/LoginPage/Loadable';
 import NotFoundPage from 'containers/NotFoundPage/Loadable';
 import RegisterPage from 'containers/RegisterPage/Loadable';
-import SettingsInterventionPage from 'containers/Sessions/containers/SettingsSessionPage';
+import SettingsSessionPage from 'containers/Sessions/containers/SettingsSessionPage';
 import ReportTemplatesPage from 'containers/Sessions/containers/ReportTemplatesPage';
 import AccountSettings from 'containers/AccountSettings/Loadable';
 import ResetPasswordPage from 'containers/ResetPasswordPage/Loadable';
@@ -198,7 +199,7 @@ export function App({ user, fetchSelfDetails }) {
       <Switch>
         <AppRoute
           exact
-          path="/"
+          path={Path.DASHBOARD}
           render={() => renderDashboardByRole()}
           protectedRoute
           allowedRoles={AllRoles}
@@ -213,7 +214,7 @@ export function App({ user, fetchSelfDetails }) {
         />
         <AppRoute
           exact
-          path="/live-chat"
+          path={Path.INBOX}
           component={InboxPage}
           protectedRoute
           allowedRoles={[Roles.Navigator]}
@@ -228,7 +229,7 @@ export function App({ user, fetchSelfDetails }) {
         />
         <AppRoute
           exact
-          path="/live-chat/archive"
+          path={Path.ARCHIVE}
           component={ArchivePage}
           protectedRoute
           allowedRoles={[Roles.Navigator]}
@@ -243,7 +244,7 @@ export function App({ user, fetchSelfDetails }) {
         />
         <AppRoute
           exact
-          path="/organization/:organizationId"
+          path={Path.MANAGE_ORGANIZATIONS}
           render={() => (
             <ReportingDashboardPage view={VIEW.MANAGE_ORGANIZATIONS} />
           )}
@@ -258,7 +259,7 @@ export function App({ user, fetchSelfDetails }) {
         />
         <AppRoute
           exact
-          path="/organization/:organizationId/dashboard-setup"
+          path={Path.DASHBOARD_SETUP}
           render={() => <ReportingDashboardPage view={VIEW.DASHBOARD_SETUP} />}
           protectedRoute
           allowedRoles={[Roles.Admin, Roles.EInterventionAdmin]}
@@ -271,7 +272,7 @@ export function App({ user, fetchSelfDetails }) {
         />
         <AppRoute
           exact
-          path="/organization/:organizationId/dashboard"
+          path={Path.DASHBOARD_VIEW}
           render={() => <ReportingDashboardPage view={VIEW.DASHBOARD_VIEW} />}
           protectedRoute
           allowedRoles={[
@@ -289,7 +290,7 @@ export function App({ user, fetchSelfDetails }) {
         />
         <AppRoute
           exact
-          path="/reports"
+          path={Path.PARTICIPANT_REPORTS}
           component={ParticipantReportsPage}
           protectedRoute
           allowedRoles={[Roles.Participant]}
@@ -304,32 +305,32 @@ export function App({ user, fetchSelfDetails }) {
         />
         <AppRoute
           exact
-          path="/login"
+          path={Path.LOGIN}
           component={LoginPage}
           unauthorizedUsersOnly
         />
         <AppRoute
           exact
-          path="/register"
+          path={Path.REGISTER}
           component={RegisterPage}
           unauthorizedUsersOnly
         />
         <AppRoute
           exact
-          path="/reset-password"
+          path={Path.RESET_PASSWORD}
           component={ResetPasswordPage}
           unauthorizedUsersOnly
         />
         <AppRoute
           exact
-          path="/set-new-password"
+          path={Path.SET_NEW_PASSWORD}
           component={SetNewPasswordPage}
           unauthorizedUsersOnly
         />
-        <AppRoute exact path="/logout" component={Logout} />
+        <AppRoute exact path={Path.LOGOUT} component={Logout} />
         <AppRoute
           exact
-          path="/interventions/:interventionId/sessions/:sessionId/edit"
+          path={Path.EDIT_SESSION}
           component={EditSessionPage}
           protectedRoute
           allowedRoles={[Roles.Admin, Roles.Researcher]}
@@ -339,7 +340,7 @@ export function App({ user, fetchSelfDetails }) {
         />
         <AppRoute
           exact
-          path="/interventions/:interventionId/sessions/:sessionId/fill"
+          path={Path.ANSWER_SESSION}
           component={AnswerSessionPage}
           allowedRoles={AllRoles}
           user
@@ -350,8 +351,8 @@ export function App({ user, fetchSelfDetails }) {
         />
         <AppRoute
           exact
-          path="/interventions/:interventionId/sessions/:sessionId/settings"
-          component={SettingsInterventionPage}
+          path={Path.SESSION_SETTINGS}
+          component={SettingsSessionPage}
           protectedRoute
           allowedRoles={[Roles.Admin, Roles.Researcher]}
           navbarProps={{
@@ -360,7 +361,7 @@ export function App({ user, fetchSelfDetails }) {
         />
         <AppRoute
           exact
-          path="/interventions/:interventionId/sessions/:sessionId/report-templates"
+          path={Path.REPORT_TEMPLATES}
           component={ReportTemplatesPage}
           protectedRoute
           allowedRoles={[Roles.Admin, Roles.Researcher]}
@@ -370,7 +371,7 @@ export function App({ user, fetchSelfDetails }) {
         />
         <AppRoute
           exact
-          path="/interventions/:interventionId/sessions/:sessionId/generated-reports"
+          path={Path.GENERATED_REPORTS}
           component={GeneratedReportsPage}
           protectedRoute
           allowedRoles={[Roles.Admin, Roles.Researcher]}
@@ -380,7 +381,7 @@ export function App({ user, fetchSelfDetails }) {
         />
         <AppRoute
           exact
-          path="/interventions/:interventionId/sessions/:sessionId/sms-messaging"
+          path={Path.TEXT_MESSAGES}
           component={TextMessagesPage}
           protectedRoute
           allowedRoles={[Roles.Admin, Roles.Researcher]}
@@ -390,7 +391,7 @@ export function App({ user, fetchSelfDetails }) {
         />
         <AppRoute
           exact
-          path="/interventions/:interventionId/sessions/:sessionId/map"
+          path={Path.SESSION_MAP}
           component={SessionMapPage}
           protectedRoute
           allowedRoles={[Roles.Admin, Roles.Researcher]}
@@ -400,21 +401,21 @@ export function App({ user, fetchSelfDetails }) {
         />
         <AppRoute
           exact
-          path="/user_interventions/:userInterventionId"
+          path={Path.USER_INTERVENTION}
           component={UserInterventionPage}
           protectedRoute
           allowedRoles={[Roles.Participant]}
         />
         <AppRoute
           exact
-          path="/interventions/:interventionId/invite"
+          path={Path.INTERVENTION_INVITE}
           component={UserInterventionInvitePage}
           protectedRoute
           allowedRoles={[Roles.Participant]}
         />
         <AppRoute
           exact
-          path="/users"
+          path={Path.USERS_LIST}
           component={renderUserListByRole}
           protectedRoute
           allowedRoles={[Roles.Admin, Roles.Researcher]}
@@ -429,7 +430,7 @@ export function App({ user, fetchSelfDetails }) {
         />
         <AppRoute
           exact
-          path="/teams"
+          path={Path.TEAMS_LIST}
           component={TeamsListPage}
           protectedRoute
           allowedRoles={[Roles.Admin, Roles.TeamAdmin]}
@@ -444,7 +445,7 @@ export function App({ user, fetchSelfDetails }) {
         />
         <AppRoute
           exact
-          path="/teams/:id"
+          path={Path.TEAM_DETAILS}
           component={TeamDetails}
           protectedRoute
           allowedRoles={[Roles.Admin, Roles.TeamAdmin]}
@@ -458,7 +459,7 @@ export function App({ user, fetchSelfDetails }) {
         <AppRoute
           exact
           key="previewFromStart"
-          path="/interventions/:interventionId/sessions/:sessionId/preview"
+          path={Path.PREVIEW_SESSION_FROM_CURRENT}
           component={({ match }) => (
             <AnswerSessionPage match={match} isPreview />
           )}
@@ -471,7 +472,7 @@ export function App({ user, fetchSelfDetails }) {
         />
         <AppRoute
           key="previewFromCurrent"
-          path="/interventions/:interventionId/sessions/:sessionId/preview/:index"
+          path={Path.PREVIEW_SESSION_FROM_INDEX}
           component={({ match }) => (
             <AnswerSessionPage match={match} isPreview />
           )}
@@ -484,7 +485,7 @@ export function App({ user, fetchSelfDetails }) {
         />
         <AppRoute
           exact
-          path="/interventions/:interventionId"
+          path={Path.INTERVENTION_DETAILS}
           component={InterventionDetailsPage}
           protectedRoute
           allowedRoles={[Roles.Admin, Roles.Researcher]}
@@ -497,7 +498,7 @@ export function App({ user, fetchSelfDetails }) {
         />
         <AppRoute
           exact
-          path="/profile"
+          path={Path.ACCOUNT_SETTINGS}
           component={AccountSettings}
           protectedRoute
           allowedRoles={AllRoles}
@@ -512,7 +513,7 @@ export function App({ user, fetchSelfDetails }) {
         />
         <AppRoute
           exact
-          path="/users/:id"
+          path={Path.USER_DETAILS}
           component={UserDetails}
           protectedRoute
           allowedRoles={[Roles.Admin, Roles.TeamAdmin]}
@@ -528,7 +529,7 @@ export function App({ user, fetchSelfDetails }) {
         <AppRoute
           exact
           protectedRoute
-          path="/admin-console"
+          path={Path.ADMIN_CONSOLE}
           component={SuperadminConsolePage}
           allowedRoles={[Roles.Admin]}
           navbarProps={{
@@ -538,19 +539,23 @@ export function App({ user, fetchSelfDetails }) {
         />
         <AppRoute
           exact
-          path="/accessibility-statement"
+          path={Path.ACCESSIBILITY_STATEMENT}
           component={AccessibilityStatementPage}
         />
         <AppRoute
           exact
-          path="/no-access"
+          path={Path.FORBIDDEN}
           component={ForbiddenPage}
           allowedRoles={AllRoles}
         />
-        <AppRoute exact path="/int/:name" component={VerifyShortLinkPage} />
-        <AppRoute exact path="/not-found-page" component={NotFoundPage} />
-        <AppRoute path="*">
-          <Redirect to="/not-found-page" />
+        <AppRoute
+          exact
+          path={Path.VERIFY_SHORT_LINK}
+          component={VerifyShortLinkPage}
+        />
+        <AppRoute exact path={Path.NOT_FOUND} component={NotFoundPage} />
+        <AppRoute path={Path.WILDCARD}>
+          <Redirect to={Path.NOT_FOUND} />
         </AppRoute>
       </Switch>
       <GlobalStyle />
