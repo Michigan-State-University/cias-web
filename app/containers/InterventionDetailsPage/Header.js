@@ -8,6 +8,7 @@ import { InterventionType } from 'models/Intervention';
 import { useRoleManager } from 'models/User/RolesManager';
 
 import globalMessages from 'global/i18n/globalMessages';
+import { RoutePath } from 'global/constants';
 
 import MailIcon from 'assets/svg/pink-mail.svg';
 
@@ -58,7 +59,7 @@ const Header = ({
       );
     }
     return (
-      <BackButton link to="/">
+      <BackButton link to={RoutePath.DASHBOARD}>
         <FormattedMessage {...messages.back} />
       </BackButton>
     );

@@ -18,6 +18,7 @@ import {
   makeSelectInterventionId,
   makeSelectInterventionOrganizationId,
 } from '../selectors';
+import { RoutePath } from '../../../constants';
 
 function* onCollaboratorRemovedReceiveWorker({
   payload: { interventionId },
@@ -54,7 +55,7 @@ function* onCollaboratorRemovedReceiveWorker({
   }
 
   if (isViewingIntervention) {
-    yield put(push('/'));
+    yield put(push(RoutePath.DASHBOARD));
   }
   yield put(resetReducer());
 }

@@ -18,6 +18,7 @@ import { useHistory, useLocation } from 'react-router-dom';
 import { themeColors } from 'theme';
 
 import { makeSelectUser } from 'global/reducers/auth';
+import { RoutePath } from 'global/constants';
 
 import Text from 'components/Text';
 import { StyledButton } from 'components/Button/StyledButton';
@@ -86,7 +87,7 @@ const NotFoundPage = ({ intl: { formatMessage }, user }) => {
                 </Col>
 
                 <Col width="content">
-                  <StyledLink to="/">
+                  <StyledLink to={RoutePath.DASHBOARD}>
                     <StyledButton mt={50} width={180}>
                       <FormattedMessage {...messages.toMainPage} />
                     </StyledButton>

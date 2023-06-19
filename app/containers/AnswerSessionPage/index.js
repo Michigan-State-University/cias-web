@@ -47,6 +47,8 @@ import {
   chatWidgetReducerKey,
   setChatEnabled,
 } from 'global/reducers/chatWidget';
+import { RoutePath } from 'global/constants';
+
 import { canPreview } from 'models/Status/statusPermissions';
 import { finishQuestion } from 'models/Session/QuestionTypes';
 import { UserSessionType } from 'models/UserSession/UserSession';
@@ -341,7 +343,7 @@ export function AnswerSessionPage({
       confirmationButtonColor: themeColors.primary,
       confirmationButtonText: formatMessage(messages.goBackToHomePage),
       confirmationButtonStyles: { width: 'auto', px: 30 },
-      confirmAction: () => history.push('/'),
+      confirmAction: () => history.push(RoutePath.DASHBOARD),
       description: formatMessage(messages.catMhErrorModalTitle),
       content: nextQuestionError?.error?.response?.data?.body ?? '',
       hideCloseButton: true,

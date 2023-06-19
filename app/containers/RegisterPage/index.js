@@ -22,8 +22,11 @@ import { Markup } from 'interweave';
 import { useInjectSaga, useInjectReducer } from 'redux-injectors';
 
 import { themeColors } from 'theme';
+
 import { Roles } from 'models/User/RolesManager';
+
 import { passwordRegex } from 'global/constants/regex';
+import { RoutePath } from 'global/constants';
 
 import withPublicLayout from 'containers/PublicLayout';
 import { Fill } from 'components/Fill';
@@ -150,7 +153,7 @@ export function RegisterPage({
         return;
       }
 
-      history.replace('/');
+      history.replace(RoutePath.DASHBOARD);
     }
   }, [success, loading, isInvite, interventionId, sessionId, error]);
 

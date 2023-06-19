@@ -2,8 +2,10 @@ import folder from 'assets/svg/folder.svg';
 import peopleHR from 'assets/svg/peopleHR.svg';
 import peopleHRCircle from 'assets/svg/peopleHRCircle.svg';
 import fileBarChart from 'assets/svg/file-bar-chart.svg';
-import { Roles } from './UserRoles';
 
+import { RoutePath } from 'global/constants';
+
+import { Roles } from './UserRoles';
 import { navbarNames } from './navbarNames';
 
 export type NavbarSubTab = {
@@ -35,7 +37,7 @@ const interventionsTab = (
   icon: SVGElement,
 ): NavbarTab => ({
   id: interventionsTabId,
-  path: '/',
+  path: RoutePath.DASHBOARD,
   message,
   icon,
 });
@@ -59,7 +61,7 @@ const participantInterventionsTab = (
   icon: SVGElement,
 ): NavbarTab => ({
   id: participantInterventionsTabId,
-  path: '/',
+  path: RoutePath.DASHBOARD,
   message,
   icon,
 });

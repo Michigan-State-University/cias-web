@@ -8,9 +8,11 @@ import { connect } from 'react-redux';
 import { createStructuredSelector } from 'reselect';
 import { useLocation } from 'react-router-dom';
 
+import { makeSelectUser } from 'global/reducers/auth';
+import { RoutePath } from 'global/constants';
+
 import BackButton from 'components/BackButton';
 import H1 from 'components/H1';
-import { makeSelectUser } from 'global/reducers/auth';
 
 import Profile from './components/Profile';
 import NotificationsSettings from './components/NotificationsSettings';
@@ -42,7 +44,7 @@ function AccountSettings({
 
     if (userId) return '/users';
 
-    return '/';
+    return RoutePath.DASHBOARD;
   }, [roles, userId]);
 
   return (

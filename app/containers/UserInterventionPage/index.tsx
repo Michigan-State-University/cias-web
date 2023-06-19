@@ -44,6 +44,7 @@ import MarkupContainer from 'components/MarkupContainer';
 import messages from './messages';
 import UserSessionTile from './UserSessionTile';
 import { parseUserIntervention } from './utils';
+import { RoutePath } from '../../global/constants';
 
 interface Params {
   userInterventionId: string;
@@ -172,7 +173,7 @@ const UserInterventionPage = () => {
           </Row>
         </>
       )}
-      <BackButton link to="/">
+      <BackButton link to={RoutePath.DASHBOARD}>
         {formatMessage(messages.backToInterventions)}
       </BackButton>
     </AppContainer>

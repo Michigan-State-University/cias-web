@@ -15,11 +15,14 @@ import { connect } from 'react-redux';
 import { compose } from 'redux';
 import { Container, Row, Col } from 'react-grid-system';
 
-import Text from 'components/Text';
-import { StyledButton } from 'components/Button/StyledButton';
 import { themeColors } from 'theme';
 
 import { makeSelectUser } from 'global/reducers/auth';
+import { RoutePath } from 'global/constants';
+
+import Text from 'components/Text';
+import { StyledButton } from 'components/Button/StyledButton';
+
 import messages from './messages';
 
 const ForbiddenPage = ({ intl: { formatMessage }, user }) => {
@@ -44,7 +47,7 @@ const ForbiddenPage = ({ intl: { formatMessage }, user }) => {
 
   const handleBack = () => history.goBack();
 
-  const handleGoToMainPage = () => history.push('/');
+  const handleGoToMainPage = () => history.push(RoutePath.DASHBOARD);
 
   const handleGoToLogin = () => history.push(`/login${location.search ?? ''}`);
 
