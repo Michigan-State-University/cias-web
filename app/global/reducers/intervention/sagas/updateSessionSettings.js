@@ -23,11 +23,11 @@ export function* updateSessionSettings({ fields } = {}) {
     session?.interventionId ?? session?.intervention_id
   }/sessions/${session.id}`;
 
-  const patchDifference = pickFields(session, fields);
+  const changes = pickFields(session, fields);
 
   try {
     yield call(axios.put, requestURL, {
-      session: objectToSnakeCase(patchDifference),
+      session: objectToSnakeCase(changes),
     });
     yield put(updateSessionSettingsSuccess());
   } catch (error) {
