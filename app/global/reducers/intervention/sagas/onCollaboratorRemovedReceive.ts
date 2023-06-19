@@ -44,9 +44,7 @@ function* onCollaboratorRemovedReceiveWorker({
       isEInterventionAdmin &&
       interventionOrganizationId === userOrganizableId);
 
-  const isViewingIntervention = matchResearchersInterventionPaths(
-    window.location.pathname,
-  );
+  const isViewingIntervention = matchResearchersInterventionPaths();
 
   if (canUserStillViewTheIntervention) {
     if (isViewingIntervention) {

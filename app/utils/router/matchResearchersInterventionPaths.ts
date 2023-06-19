@@ -3,7 +3,7 @@ import { matchPath, useLocation } from 'react-router';
 const INTERVENTION_PATH = '/interventions/:interventionId';
 const SESSION_PATH = `${INTERVENTION_PATH}/sessions/:sessionId`;
 
-export const RESEARCHERS_INTERVETION_PATHS = [
+export const RESEARCHERS_INTERVENTION_PATHS = [
   INTERVENTION_PATH,
   `${SESSION_PATH}/edit`,
   `${SESSION_PATH}/settings`,
@@ -13,9 +13,11 @@ export const RESEARCHERS_INTERVETION_PATHS = [
   `${SESSION_PATH}/map`,
 ];
 
-export const matchResearchersInterventionPaths = (pathname: string) =>
+export const matchResearchersInterventionPaths = (
+  pathname: string | undefined = window.location.pathname,
+) =>
   matchPath<{ interventionId?: string }>(pathname, {
-    path: RESEARCHERS_INTERVETION_PATHS,
+    path: RESEARCHERS_INTERVENTION_PATHS,
     exact: true,
   });
 

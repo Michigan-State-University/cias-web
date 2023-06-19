@@ -17,9 +17,7 @@ function* onStopEditingInterventionReceiveWorker({
   );
   if (interventionId !== currentInterventionId) return;
 
-  const isViewingIntervention = matchResearchersInterventionPaths(
-    window.location.pathname,
-  );
+  const isViewingIntervention = matchResearchersInterventionPaths();
 
   if (isViewingIntervention) {
     yield put(fetchInterventionRequest(interventionId, true));
