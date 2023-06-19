@@ -1,4 +1,4 @@
-export enum Path {
+export enum RoutePath {
   DASHBOARD = '/',
   INBOX = '/live-chat',
   ARCHIVE = '/live-chat/archive',
