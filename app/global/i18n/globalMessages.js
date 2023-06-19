@@ -250,6 +250,24 @@ export default defineMessages({
       defaultMessage: 'Archived',
     },
   },
+  sharingFilters: {
+    onlySharedByMe: {
+      id: `${scope}.onlySharedByMe`,
+      defaultMessage: `Only shared by me`,
+    },
+    onlySharedWithMe: {
+      id: `${scope}.onlySharedWithMe`,
+      defaultMessage: `Only shared with me`,
+    },
+    onlyNotSharedWithAnyone: {
+      id: `${scope}.onlyNotSharedWithAnyone`,
+      defaultMessage: `Only not shared with anyone`,
+    },
+  },
+  allInterventions: {
+    id: `${scope}.allInterventions`,
+    defaultMessage: `All interventions`,
+  },
   userInterventionStatus: {
     [UserInterventionStatus.READY_TO_START]: {
       id: `${scope}.${[UserInterventionStatus.READY_TO_START]}`,

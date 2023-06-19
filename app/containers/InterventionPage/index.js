@@ -48,6 +48,7 @@ import StatusFilter from './StatusFilter';
 import messages from './messages';
 import { InitialRow, StyledLink, StyledNotification } from './styled';
 import ImportModalContent from './ImportModalContent';
+import ShareFilter from './ShareFilter';
 
 const INITIAL_FETCH_LIMIT = 15;
 
@@ -71,10 +72,15 @@ export function InterventionPage({
 
   const [filterValue, setFilterValue] = useState('');
   const [filterStatus, setFilterStatus] = useState(statusTypes);
+  const [filterSharing, setFilterSharing] = useState('');
 
   const filterData = useMemo(
-    () => ({ statuses: filterStatus, name: filterValue }),
-    [filterValue, filterStatus],
+    () => ({
+      statuses: filterStatus,
+      name: filterValue,
+      [filterSharing]: true,
+    }),
+    [filterValue, filterStatus, filterSharing],
   );
 
   useEffect(() => {
@@ -192,6 +198,20 @@ export function InterventionPage({
             style={{ marginTop: 10, marginBottom: 10 }}
           >
             <Row my={35} justify="start" align="center">
+              <ShareFilter
+                onChange={setFilterSharing}
+                formatMessage={formatMessage}
+                active={filterSharing}
+              />
+            </Row>
+          </Col>
+          <Col
+            xs={12}
+            md={6}
+            xxl={4}
+            style={{ marginTop: 10, marginBottom: 10 }}
+          >
+            <Row my={35} justify="start" align="center">
               <StatusFilter
                 onChange={handleChange}
                 formatMessage={formatMessage}
@@ -202,7 +222,7 @@ export function InterventionPage({
           <Col
             xs={12}
             md={6}
-            xxl={8}
+            xxl={4}
             style={{ marginTop: 10, marginBottom: 10 }}
           >
             <Row align="center">
