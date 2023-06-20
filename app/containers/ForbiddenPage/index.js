@@ -49,7 +49,8 @@ const ForbiddenPage = ({ intl: { formatMessage }, user }) => {
 
   const handleGoToMainPage = () => history.push(RoutePath.DASHBOARD);
 
-  const handleGoToLogin = () => history.push(`/login${location.search ?? ''}`);
+  const handleGoToLogin = () =>
+    history.push(`${RoutePath.LOGIN}${location.search ?? ''}`);
 
   return (
     <Container style={{ height: '100%' }}>

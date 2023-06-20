@@ -40,13 +40,13 @@ export const UserDetails = ({
   userLoading,
   fetchUser,
   match: {
-    params: { id },
+    params: { userId },
   },
 }) => {
   const { formatMessage } = useIntl();
 
   useEffect(() => {
-    fetchUser(id);
+    fetchUser(userId);
   }, []);
 
   if (userLoading) {

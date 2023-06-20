@@ -4,6 +4,8 @@ import axios from 'axios';
 import { push } from 'connected-react-router';
 import { toast } from 'react-toastify';
 
+import { RoutePath } from 'global/constants';
+
 import { formatMessage } from 'utils/intlOutsideReact';
 import { requestErrorMessageHandler } from 'utils/errors/requestErrorMessageHandler';
 
@@ -24,10 +26,10 @@ function* registerParticipant({ payload }) {
   try {
     yield axios.post(requestURL, {
       ...objectToSnakeCase(payload),
-      confirm_success_url: `${process.env.WEB_URL}/login`,
+      confirm_success_url: `${process.env.WEB_URL}${RoutePath.LOGIN}`,
     });
     yield put(registerParticipantSuccess());
-    yield put(push('/login'));
+    yield put(push(RoutePath.LOGIN));
     yield call(LocalStorageService.clearUserData);
     yield call(toast.success, formatMessage(messages.createdAccount), {
       toastId: REGISTER_PARTICIPANT_SUCCESS,

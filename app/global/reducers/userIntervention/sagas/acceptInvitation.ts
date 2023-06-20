@@ -3,7 +3,10 @@ import { call, takeLatest, put } from 'redux-saga/effects';
 import { push } from 'connected-react-router';
 import { toast } from 'react-toastify';
 
+import { RoutePath } from 'global/constants';
+
 import { formatMessage } from 'utils/intlOutsideReact';
+import { parametrizeRoutePath } from 'utils/router';
 
 import { ACCEPT_INTERVENTION_INVITE } from '../constants';
 import { acceptInterventionInvite } from '../actions';
@@ -35,7 +38,13 @@ export function* acceptInvitation({
         },
       );
     } else {
-      yield put(push(`/user_interventions/${userInterventionId}`));
+      yield put(
+        push(
+          parametrizeRoutePath(RoutePath.USER_INTERVENTION, {
+            userInterventionId,
+          }),
+        ),
+      );
     }
   } catch (error) {
     yield put(push(`/`));

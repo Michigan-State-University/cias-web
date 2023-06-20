@@ -110,6 +110,8 @@ import {
   Grid,
 } from './styled';
 import QuestionListGroup from '../QuestionListGroup';
+import { parametrizeRoutePath } from '../../../../utils/router';
+import { RoutePath } from '../../../../global/constants';
 
 type NonReduxProps = {
   session: ClassicSession;
@@ -466,7 +468,11 @@ const EditClassicSessionPage = ({
   );
 
   const goToSessionMap = () => {
-    const url = `/interventions/${interventionId}/sessions/${sessionId}/map`;
+    if (!interventionId) return;
+    const url = parametrizeRoutePath(RoutePath.SESSION_MAP, {
+      interventionId,
+      sessionId,
+    });
     history.push(url, { selectedQuestionId: selectedQuestion });
   };
 

@@ -2,6 +2,8 @@ import React from 'react';
 
 import { NewConversationNotification } from 'models/Notification';
 
+import { RoutePath } from 'global/constants';
+
 import GhostLink from 'components/GhostLink';
 import { ConversationInfoBox } from 'components/ConversationInfoBox';
 
@@ -19,7 +21,7 @@ export const NewConversationNotificationLayout = ({
   const { message, conversationId } = data;
 
   return (
-    <GhostLink to={`/live-chat?conversation_id=${conversationId}`}>
+    <GhostLink to={`${RoutePath.INBOX}?conversation_id=${conversationId}`}>
       <ConversationInfoBox
         id={id}
         active

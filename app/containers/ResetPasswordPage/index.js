@@ -29,6 +29,7 @@ import { resetPasswordRequest } from './actions';
 import { makeSelectLoader, makeSelectError } from './selectors';
 import resetPasswordSaga from './saga';
 import { resetPasswordReducer } from './reducer';
+import { RoutePath } from '../../global/constants';
 
 const validationSchema = (formatMessage) =>
   Yup.object().shape({
@@ -89,7 +90,7 @@ const ResetPasswordPage = ({
                 >
                   <FormattedMessage {...messages.resetPassword} />
                 </Button>
-                <LinkButton to="/login" mt={25} alignSelf="center">
+                <LinkButton to={RoutePath.LOGIN} mt={25} alignSelf="center">
                   <FormattedMessage {...messages.return} />
                 </LinkButton>
                 {error && <ErrorAlert errorText={error} mt={25} />}

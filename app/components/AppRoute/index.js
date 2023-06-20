@@ -78,9 +78,11 @@ class AppRoute extends Route {
       );
 
       if (location.pathname === RoutePath.DASHBOARD)
-        return <Redirect to={`/login${location.search}`} />;
+        return <Redirect to={`${RoutePath.LOGIN}${location.search}`} />;
 
-      return <Redirect to={`/no-access?${queryParams.toString()}`} />;
+      return (
+        <Redirect to={`${RoutePath.FORBIDDEN}?${queryParams.toString()}`} />
+      );
     }
 
     if (user && arraysOverlap(allowedRoles, user.roles)) {
@@ -123,7 +125,7 @@ class AppRoute extends Route {
     }
 
     if (user && !arraysOverlap(allowedRoles, user.roles))
-      return <Redirect to="/no-access" />;
+      return <Redirect to={RoutePath.FORBIDDEN} />;
 
     return render();
   }

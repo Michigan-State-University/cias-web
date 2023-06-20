@@ -368,7 +368,7 @@ export function AnswerSessionPage({
       encodeURIComponent(location.pathname),
     );
 
-    return <Redirect to={`/no-access?${queryParams.toString()}`} />;
+    return <Redirect to={`${RoutePath.FORBIDDEN}?${queryParams.toString()}`} />;
   }
 
   const currentQuestionId = currentQuestion ? currentQuestion.id : null;

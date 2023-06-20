@@ -24,6 +24,7 @@ import Icon from 'components/Icon';
 import InterventionStatusButtons from './components/InterventionStatusButtons';
 import { StatusLabel, InterventionOptions } from './styled';
 import messages from './messages';
+import { parametrizeRoutePath } from '../../utils/router';
 
 const Header = ({
   intl: { formatMessage },
@@ -53,7 +54,12 @@ const Header = ({
   const renderBackButton = useMemo(() => {
     if (organizationId && (isAdmin || organizationId === userOrganizableId)) {
       return (
-        <BackButton link to={`/organization/${organizationId}/dashboard-setup`}>
+        <BackButton
+          link
+          to={parametrizeRoutePath(RoutePath.DASHBOARD_SETUP, {
+            organizationId,
+          })}
+        >
           <FormattedMessage {...messages.backToOrganization} />
         </BackButton>
       );

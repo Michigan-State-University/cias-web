@@ -40,9 +40,10 @@ function AccountSettings({
   }, [roles, userId]);
 
   const redirectUrl = useMemo(() => {
-    if (queryParams.has('teamId')) return `/teams/${queryParams.get('teamId')}`;
+    if (queryParams.has('teamId'))
+      return `${RoutePath.TEAMS_LIST}/${queryParams.get('teamId')}`;
 
-    if (userId) return '/users';
+    if (userId) return RoutePath.USERS_LIST;
 
     return RoutePath.DASHBOARD;
   }, [roles, userId]);

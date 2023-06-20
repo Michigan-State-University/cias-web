@@ -18,6 +18,8 @@ import { InterventionType } from 'models/Intervention';
 
 import { TileContainer } from './styled';
 import messages from './messages';
+import { parametrizeRoutePath } from '../../utils/router';
+import { RoutePath } from '../../global/constants';
 
 const COMPLETED_INTERVENTION_TEXT_OPACITY = 0.3;
 
@@ -58,7 +60,12 @@ const ParticipantInterventionTileRenderer = ({ data, index }: Props) => {
       statusWithBlocked === UserInterventionStatus.COMPLETED);
 
   return (
-    <GhostLink disabled={tileDisabled} to={`/user_interventions/${id}`}>
+    <GhostLink
+      disabled={tileDisabled}
+      to={parametrizeRoutePath(RoutePath.USER_INTERVENTION, {
+        userInterventionId: id,
+      })}
+    >
       <TileContainer bg={tileDisabled ? colors.mischka : colors.white}>
         <Box display="flex" justify="between" align="center">
           <Box px={12} py={8} bg={statusColor} borderRadius={5}>

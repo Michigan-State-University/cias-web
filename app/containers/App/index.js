@@ -108,13 +108,13 @@ export function App({ user, fetchSelfDetails }) {
 
   useEffect(() => {
     const isUserInterventionPage = matchPath(pathname, {
-      path: '/user_interventions/:userInterventionId',
+      path: RoutePath.USER_INTERVENTION,
       exact: true,
       strict: false,
     });
 
     const isUserAnswerSessionPage = matchPath(pathname, {
-      path: '/interventions/:interventionId/sessions/:sessionId/fill',
+      path: RoutePath.ANSWER_SESSION,
       exact: true,
       strict: false,
     });
@@ -161,7 +161,7 @@ export function App({ user, fetchSelfDetails }) {
       if (arraysOverlap(user.roles, [Roles.ClinicAdmin]))
         return <ClinicAdminRedirectPage />;
       if (arraysOverlap(user.roles, [Roles.Navigator]))
-        return <Redirect to={{ pathname: '/live-chat', search }} />;
+        return <Redirect to={{ pathname: RoutePath.INBOX, search }} />;
 
       return NotFoundPage;
     }

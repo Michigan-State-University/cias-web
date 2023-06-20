@@ -98,7 +98,7 @@ const NotFoundPage = ({ intl: { formatMessage }, user }) => {
 
             {!user && (
               <Col width="content">
-                <StyledLink to={`/login${location.search ?? ''}`}>
+                <StyledLink to={`${RoutePath.LOGIN}${location.search ?? ''}`}>
                   <StyledButton mt={50} width={180}>
                     <FormattedMessage {...messages.toLogin} />
                   </StyledButton>

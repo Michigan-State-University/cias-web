@@ -54,6 +54,7 @@ import {
   answersReducerKey,
 } from 'global/reducers/answers';
 import { JumpToScreenLocationState } from 'global/types/locationState';
+import { RoutePath } from 'global/constants';
 
 import { ReportTemplate } from 'models/ReportTemplate';
 import { QuestionGroup } from 'models/QuestionGroup';
@@ -61,6 +62,7 @@ import { QuestionDTO } from 'models/Question';
 
 import useQuery from 'utils/useQuery';
 import useLocationState from 'utils/useLocationState';
+import { parametrizeRoutePath } from 'utils/router';
 
 import Loader from 'components/Loader';
 import Column from 'components/Column';
@@ -182,7 +184,13 @@ const SessionMapPage = (): JSX.Element => {
 
   useEffect(() => {
     if (sessionError || questionGroupsError || reportTemplatesError) {
-      dispatch(push(`/interventions/${interventionId}`));
+      dispatch(
+        push(
+          parametrizeRoutePath(RoutePath.INTERVENTION_DETAILS, {
+            interventionId,
+          }),
+        ),
+      );
     }
   }, [sessionError, questionGroupsError, reportTemplatesError]);
 
@@ -222,7 +230,10 @@ const SessionMapPage = (): JSX.Element => {
     }, [userSessionNodesIds, showDetailsId, answers]);
 
   const goToScreenEdit = () => {
-    const url = `/interventions/${interventionId}/sessions/${sessionId}/edit`;
+    const url = parametrizeRoutePath(RoutePath.EDIT_SESSION, {
+      interventionId,
+      sessionId,
+    });
     history.push(url, { selectedQuestionId: showDetailsId });
   };
 

@@ -1,12 +1,11 @@
 /* eslint no-unused-expressions: 0 */ // --> OFF
 
 const { ADMIN_EMAIL, ADMIN_PASSWORD } = require('../../support/envVariables');
-
-const loginAddress = `/login`;
+const { RoutePath } = require('../../../app/global/constants');
 
 describe('Login test', () => {
   beforeEach(() => {
-    cy.visit(loginAddress);
+    cy.visit(RoutePath.LOGIN);
   });
 
   it('Should display correct errors', () => {

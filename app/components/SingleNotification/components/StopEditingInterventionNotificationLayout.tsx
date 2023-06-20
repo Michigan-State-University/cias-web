@@ -5,6 +5,10 @@ import EditCircle from 'assets/svg/edit-circle.svg';
 
 import { StopEditingInterventionNotification } from 'models/Notification';
 
+import { RoutePath } from 'global/constants';
+
+import { parametrizeRoutePath } from 'utils/router';
+
 import Icon from 'components/Icon';
 
 import messages from '../messages';
@@ -33,7 +37,9 @@ export const StopEditingInterventionNotificationLayout = ({
         lastName,
         interventionName,
       })}
-      linkTo={`/interventions/${interventionId}`}
+      linkTo={parametrizeRoutePath(RoutePath.INTERVENTION_DETAILS, {
+        interventionId,
+      })}
       readOnClick
       icon={<Icon src={EditCircle} />}
       {...props}

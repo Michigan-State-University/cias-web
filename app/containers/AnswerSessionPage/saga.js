@@ -56,6 +56,8 @@ import {
 } from './actions';
 import { makeSelectAnswers, makeSelectCurrentQuestion } from './selectors';
 import messages from './messages';
+import { parametrizeRoutePath } from '../../utils/router';
+import { RoutePath } from '../../global/constants';
 
 function* submitAnswersAsync({
   payload: { questionId, required, type: questionType, userSessionId, skipped },
@@ -169,7 +171,11 @@ function* redirectToPreview({
   yield call(logInGuest, { payload: { sessionId } });
   yield call(
     window.open,
-    `/interventions/${interventionId}/sessions/${sessionId}/preview/${questionId}`,
+    parametrizeRoutePath(RoutePath.PREVIEW_SESSION_FROM_INDEX, {
+      interventionId,
+      sessionId,
+      index: questionId,
+    }),
   );
 }
 

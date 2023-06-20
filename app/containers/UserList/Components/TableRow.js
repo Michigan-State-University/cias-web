@@ -13,6 +13,7 @@ import { ternary } from 'utils/ternary';
 
 import { RemoveFromTeamModalContext, TeamIdContext } from './utils';
 import messages from '../messages';
+import { RoutePath } from '../../../global/constants';
 
 const TableRow = ({
   user: { id, email, fullName, roles, active },
@@ -46,8 +47,8 @@ const TableRow = ({
 
   const handleRedirect = () =>
     teamId
-      ? history.push(`/users/${id}?teamId=${teamId}`)
-      : history.push(`/users/${id}`);
+      ? history.push(`${RoutePath.USERS_LIST}/${id}?teamId=${teamId}`)
+      : history.push(`${RoutePath.USERS_LIST}/${id}`);
 
   const text = active
     ? formatMessage(messages.deactivateAccount)
