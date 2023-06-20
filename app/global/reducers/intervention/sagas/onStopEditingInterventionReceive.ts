@@ -9,6 +9,7 @@ import {
   fetchSingleReportTemplateRequest,
   makeSelectSelectedReportId,
 } from 'global/reducers/reportTemplates';
+import { fetchTextMessagesRequest } from 'global/reducers/textMessages';
 
 import { ON_STOP_EDITING_INTERVENTION_RECEIVE } from '../constants';
 import {
@@ -16,7 +17,6 @@ import {
   onStopEditingInterventionReceive,
 } from '../actions';
 import { makeSelectInterventionId } from '../selectors';
-import { fetchTextMessagesRequest } from '../../textMessages';
 
 function* onStopEditingInterventionReceiveWorker({
   payload: { interventionId },
