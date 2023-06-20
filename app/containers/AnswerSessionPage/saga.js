@@ -6,18 +6,21 @@ import merge from 'lodash/merge';
 
 import { AnswerType } from 'models/Answer';
 
+import { RoutePath } from 'global/constants';
+
 import { mapQuestionToStateObject } from 'utils/mapResponseObjects';
 import { formatMessage } from 'utils/intlOutsideReact';
 import isNullOrUndefined from 'utils/isNullOrUndefined';
-import { logInGuest } from 'global/reducers/auth/sagas/logInGuest';
 import LocalStorageService from 'utils/localStorageService';
 import objectToSnakeCase from 'utils/objectToSnakeCase';
 import { getIsPreview } from 'utils/previewMode';
+import { parametrizeRoutePath } from 'utils/router';
 
 import {
   resetPhoneNumberPreview,
   updateUsersTimezone,
 } from 'global/reducers/auth/actions';
+import { logInGuest } from 'global/reducers/auth/sagas/logInGuest';
 
 import { jsonApiToObject } from 'utils/jsonApiMapper';
 import objectToCamelKebabCase from 'utils/objectToCamelKebabCase';
@@ -56,8 +59,6 @@ import {
 } from './actions';
 import { makeSelectAnswers, makeSelectCurrentQuestion } from './selectors';
 import messages from './messages';
-import { parametrizeRoutePath } from '../../utils/router';
-import { RoutePath } from '../../global/constants';
 
 function* submitAnswersAsync({
   payload: { questionId, required, type: questionType, userSessionId, skipped },

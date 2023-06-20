@@ -10,6 +10,8 @@ import { useRoleManager } from 'models/User/RolesManager';
 import globalMessages from 'global/i18n/globalMessages';
 import { RoutePath } from 'global/constants';
 
+import { parametrizeRoutePath } from 'utils/router';
+
 import MailIcon from 'assets/svg/pink-mail.svg';
 
 import Row from 'components/Row';
@@ -24,7 +26,6 @@ import Icon from 'components/Icon';
 import InterventionStatusButtons from './components/InterventionStatusButtons';
 import { StatusLabel, InterventionOptions } from './styled';
 import messages from './messages';
-import { parametrizeRoutePath } from '../../utils/router';
 
 const Header = ({
   intl: { formatMessage },

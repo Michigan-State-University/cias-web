@@ -2,6 +2,8 @@ import React, { useContext } from 'react';
 import PropTypes from 'prop-types';
 import trim from 'lodash/trim';
 
+import { RoutePath } from 'global/constants';
+
 import Box from 'components/Box';
 import Row from 'components/Row';
 import StyledTextButton from 'components/Button/StyledTextButton';
@@ -13,7 +15,6 @@ import { ternary } from 'utils/ternary';
 
 import { RemoveFromTeamModalContext, TeamIdContext } from './utils';
 import messages from '../messages';
-import { RoutePath } from '../../../global/constants';
 
 const TableRow = ({
   user: { id, email, fullName, roles, active },

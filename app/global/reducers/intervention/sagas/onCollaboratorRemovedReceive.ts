@@ -1,6 +1,8 @@
 import { select, takeEvery, put } from '@redux-saga/core/effects';
 import { push } from 'connected-react-router';
 
+import { RoutePath } from 'global/constants';
+
 import {
   makeSelectIsAdmin,
   makeSelectUserOrganizableId,
@@ -18,7 +20,6 @@ import {
   makeSelectInterventionId,
   makeSelectInterventionOrganizationId,
 } from '../selectors';
-import { RoutePath } from '../../../constants';
 
 function* onCollaboratorRemovedReceiveWorker({
   payload: { interventionId },

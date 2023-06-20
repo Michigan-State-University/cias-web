@@ -6,6 +6,10 @@ import { connect } from 'react-redux';
 import { compose } from 'redux';
 import { useInjectSaga } from 'redux-injectors';
 
+import { RoutePath } from 'global/constants';
+
+import { parametrizeRoutePath } from 'utils/router';
+
 import Row from 'components/Row';
 import Tabs from 'components/Tabs';
 import { StyledInput } from 'components/Input/StyledInput';
@@ -53,8 +57,6 @@ import {
   CheckBackground,
   StyledCircle,
 } from './styled';
-import { parametrizeRoutePath } from '../../../utils/router';
-import { RoutePath } from '../../../global/constants';
 
 const getActiveTab = (path, formatMessage) => {
   if (path.includes('/edit')) return formatMessage(messages.content);

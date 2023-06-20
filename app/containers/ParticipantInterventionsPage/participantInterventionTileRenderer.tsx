@@ -1,14 +1,9 @@
 import React from 'react';
 import { useIntl } from 'react-intl';
 
-import Box from 'components/Box';
-import Text, { EllipsisText } from 'components/Text';
-import GhostLink from 'components/GhostLink';
-import Tooltip from 'components/Tooltip';
 import questionMark from 'assets/svg/red-question-mark.svg';
-
-import globalMessages from 'global/i18n/globalMessages';
 import { colors, themeColors } from 'theme';
+
 import {
   statusTypeToColorMap,
   UserInterventionStatus,
@@ -16,10 +11,18 @@ import {
 import { UserIntervention } from 'models/UserIntervention/UserIntervention';
 import { InterventionType } from 'models/Intervention';
 
+import { RoutePath } from 'global/constants';
+import globalMessages from 'global/i18n/globalMessages';
+
+import { parametrizeRoutePath } from 'utils/router';
+
+import Box from 'components/Box';
+import Text, { EllipsisText } from 'components/Text';
+import GhostLink from 'components/GhostLink';
+import Tooltip from 'components/Tooltip';
+
 import { TileContainer } from './styled';
 import messages from './messages';
-import { parametrizeRoutePath } from '../../utils/router';
-import { RoutePath } from '../../global/constants';
 
 const COMPLETED_INTERVENTION_TEXT_OPACITY = 0.3;
 

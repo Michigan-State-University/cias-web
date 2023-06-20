@@ -14,6 +14,8 @@ import { Formik } from 'formik';
 import { createStructuredSelector } from 'reselect';
 import * as Yup from 'yup';
 
+import { RoutePath } from 'global/constants';
+
 import { Fill } from 'components/Fill';
 import Column from 'components/Column';
 import H1 from 'components/H1';
@@ -29,7 +31,6 @@ import { resetPasswordRequest } from './actions';
 import { makeSelectLoader, makeSelectError } from './selectors';
 import resetPasswordSaga from './saga';
 import { resetPasswordReducer } from './reducer';
-import { RoutePath } from '../../global/constants';
 
 const validationSchema = (formatMessage) =>
   Yup.object().shape({

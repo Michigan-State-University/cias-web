@@ -12,6 +12,7 @@ import {
   unreservedURLCharactersSchema,
 } from 'utils/validators';
 import { formatMessage } from 'utils/intlOutsideReact';
+import { parametrizeRoutePath } from 'utils/router';
 
 import { RoutePath, WEB_HOST } from 'global/constants';
 
@@ -22,7 +23,6 @@ import {
 } from './types';
 
 import messages from './messages';
-import { parametrizeRoutePath } from '../../../../../utils/router';
 
 export const createInterventionSettingsFormValidationSchema = () => {
   // eslint-disable-next-line func-names

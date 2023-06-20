@@ -7,6 +7,8 @@ import groupBy from 'lodash/groupBy';
 import { Markup } from 'interweave';
 import { useInjectReducer } from 'redux-injectors';
 
+import { RoutePath } from 'global/constants';
+
 import useGet from 'utils/useGet';
 
 import {
@@ -44,7 +46,6 @@ import MarkupContainer from 'components/MarkupContainer';
 import messages from './messages';
 import UserSessionTile from './UserSessionTile';
 import { parseUserIntervention } from './utils';
-import { RoutePath } from '../../global/constants';
 
 interface Params {
   userInterventionId: string;

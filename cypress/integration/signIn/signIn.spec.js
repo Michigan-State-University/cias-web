@@ -1,7 +1,7 @@
 /* eslint no-unused-expressions: 0 */ // --> OFF
+const { RoutePath } = require('global/constants');
 
 const { ADMIN_EMAIL, ADMIN_PASSWORD } = require('../../support/envVariables');
-const { RoutePath } = require('../../../app/global/constants');
 
 describe('Login test', () => {
   beforeEach(() => {
