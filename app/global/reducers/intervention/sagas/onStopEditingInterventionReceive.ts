@@ -2,6 +2,10 @@ import { select, takeEvery, put } from '@redux-saga/core/effects';
 
 import { matchResearchersInterventionPaths } from 'utils/router';
 
+import { RoutePath } from 'global/constants';
+import { getSessionRequest } from 'global/reducers/session';
+import { fetchReportTemplatesRequest } from 'global/reducers/reportTemplates';
+
 import { ON_STOP_EDITING_INTERVENTION_RECEIVE } from '../constants';
 import {
   fetchInterventionRequest,
@@ -17,10 +21,29 @@ function* onStopEditingInterventionReceiveWorker({
   );
   if (interventionId !== currentInterventionId) return;
 
-  const isViewingIntervention = matchResearchersInterventionPaths();
+  const match = matchResearchersInterventionPaths();
 
-  if (isViewingIntervention) {
-    yield put(fetchInterventionRequest(interventionId, true));
+  if (!match) return;
+
+  yield put(fetchInterventionRequest(interventionId, true));
+
+  switch (match.path) {
+    case RoutePath.EDIT_SESSION: {
+      const { sessionId } = match.params;
+      yield put(
+        getSessionRequest({
+          interventionId,
+          sessionId,
+        }),
+      );
+      yield put(fetchReportTemplatesRequest(sessionId, interventionId));
+      break;
+    }
+    case RoutePath.SESSION_SETTINGS: {
+      break;
+    }
+    default:
+      break;
   }
 }
 
