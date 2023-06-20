@@ -10,6 +10,7 @@ import {
   makeSelectSelectedReportId,
 } from 'global/reducers/reportTemplates';
 import { fetchTextMessagesRequest } from 'global/reducers/textMessages';
+import { getQuestionGroupsRequest } from 'global/reducers/questionGroups';
 
 import { ON_STOP_EDITING_INTERVENTION_RECEIVE } from '../constants';
 import {
@@ -79,6 +80,17 @@ function* onStopEditingInterventionReceiveWorker({
         }),
       );
       yield put(fetchTextMessagesRequest(sessionId));
+      break;
+    }
+    case RoutePath.SESSION_MAP: {
+      yield put(
+        getSessionRequest({
+          interventionId,
+          sessionId,
+        }),
+      );
+      yield put(fetchReportTemplatesRequest(sessionId, interventionId));
+      yield put(getQuestionGroupsRequest(sessionId));
       break;
     }
     default:
