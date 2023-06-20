@@ -26,10 +26,10 @@ function* onStopEditingInterventionReceiveWorker({
   if (!match) return;
 
   yield put(fetchInterventionRequest(interventionId, true));
+  const { sessionId } = match.params;
 
   switch (match.path) {
     case RoutePath.EDIT_SESSION: {
-      const { sessionId } = match.params;
       yield put(
         getSessionRequest({
           interventionId,
@@ -40,6 +40,12 @@ function* onStopEditingInterventionReceiveWorker({
       break;
     }
     case RoutePath.SESSION_SETTINGS: {
+      yield put(
+        getSessionRequest({
+          interventionId,
+          sessionId,
+        }),
+      );
       break;
     }
     default:
