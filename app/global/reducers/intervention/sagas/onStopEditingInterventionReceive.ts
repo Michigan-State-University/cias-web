@@ -16,6 +16,7 @@ import {
   onStopEditingInterventionReceive,
 } from '../actions';
 import { makeSelectInterventionId } from '../selectors';
+import { fetchTextMessagesRequest } from '../../textMessages';
 
 function* onStopEditingInterventionReceiveWorker({
   payload: { interventionId },
@@ -68,6 +69,16 @@ function* onStopEditingInterventionReceiveWorker({
           fetchSingleReportTemplateRequest(reportId, sessionId, interventionId),
         );
       }
+      break;
+    }
+    case RoutePath.TEXT_MESSAGES: {
+      yield put(
+        getSessionRequest({
+          interventionId,
+          sessionId,
+        }),
+      );
+      yield put(fetchTextMessagesRequest(sessionId));
       break;
     }
     default:
