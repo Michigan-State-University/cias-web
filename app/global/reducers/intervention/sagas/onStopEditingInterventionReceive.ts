@@ -4,7 +4,11 @@ import { matchResearchersInterventionPaths } from 'utils/router';
 
 import { RoutePath } from 'global/constants';
 import { getSessionRequest } from 'global/reducers/session';
-import { fetchReportTemplatesRequest } from 'global/reducers/reportTemplates';
+import {
+  fetchReportTemplatesRequest,
+  fetchSingleReportTemplateRequest,
+  makeSelectSelectedReportId,
+} from 'global/reducers/reportTemplates';
 
 import { ON_STOP_EDITING_INTERVENTION_RECEIVE } from '../constants';
 import {
@@ -46,6 +50,24 @@ function* onStopEditingInterventionReceiveWorker({
           sessionId,
         }),
       );
+      break;
+    }
+    case RoutePath.REPORT_TEMPLATES: {
+      yield put(
+        getSessionRequest({
+          interventionId,
+          sessionId,
+        }),
+      );
+      yield put(fetchReportTemplatesRequest(sessionId, interventionId, true));
+      const reportId: Nullable<string> = yield select(
+        makeSelectSelectedReportId(),
+      );
+      if (reportId) {
+        yield put(
+          fetchSingleReportTemplateRequest(reportId, sessionId, interventionId),
+        );
+      }
       break;
     }
     default:
