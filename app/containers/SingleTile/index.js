@@ -12,7 +12,6 @@ import { injectReducer, injectSaga } from 'redux-injectors';
 import { connect } from 'react-redux';
 import { compose } from 'redux';
 
-import BinNoBgIcon from 'assets/svg/bin-no-bg.svg';
 import CsvIcon from 'assets/svg/csv-icon.svg';
 import FileShareIcon from 'assets/svg/file-share.svg';
 import CopyIcon from 'assets/svg/copy.svg';
@@ -21,11 +20,15 @@ import TranslateIcon from 'assets/svg/translate.svg';
 import DocumentIcon from 'assets/svg/document.svg';
 import DownloadIcon from 'assets/svg/download-line.svg';
 import CollaborateIcon from 'assets/svg/collaborate-icon.svg';
+import ArchiveIcon from 'assets/svg/archive.svg';
 
 import { colors } from 'theme';
 
 import globalMessages from 'global/i18n/globalMessages';
-import { makeSelectUserId } from 'global/reducers/auth';
+import {
+  makeSelectUserId,
+  makeSelectUserOrganizableId,
+} from 'global/reducers/auth';
 import { interventionOptionsSaga } from 'global/sagas/interventionOptionsSaga';
 import {
   exportInterventionRequest,
@@ -86,6 +89,7 @@ const SingleTile = ({
   userId,
   isLoading,
   exportIntervention,
+  userOrganizableId,
 }) => {
   const [
     shareWithResearchersModalVisible,
@@ -131,7 +135,10 @@ const SingleTile = ({
     },
   });
 
-  const { isAdmin, canAssignOrganizationToIntervention } = useRoleManager();
+  const {
+    isAdmin,
+    canAssignOrganizationToIntervention: showAssignOrganizationOption,
+  } = useRoleManager();
 
   const {
     name,
@@ -143,17 +150,38 @@ const SingleTile = ({
     createdAt,
     updatedAt,
     googleLanguageId,
-    collaboratingUsersIds,
+    isCurrentUserCollaborator,
+    hasCollaborators,
+    userId: interventionOwnerId,
+    currentUserCollaboratorData,
   } = tileData || {};
+
+  const isCurrentUserInterventionOwner = interventionOwnerId === userId;
 
   const handleCsvRequest = () => sendCsv(id);
 
   const handleExportIntervention = () => exportIntervention(id);
 
-  const canExportCSV = userId === user?.id;
+  const canExportCSV =
+    isCurrentUserInterventionOwner || currentUserCollaboratorData?.dataAccess;
 
   const handleClone = () =>
     copyIntervention({ interventionId: id, withoutRedirect: true });
+
+  // cannot make changes to intervention with collaborators because it would require
+  // turning on edit mode first but that's impossible from the intervention list view
+  const canCurrentUserMakeChanges =
+    !hasCollaborators && (isAdmin || isCurrentUserInterventionOwner);
+
+  const archivingPossible = canCurrentUserMakeChanges && canArchive(status);
+
+  const assigningOrganizationPossible =
+    canCurrentUserMakeChanges && canEdit(status);
+
+  const showReportingBadge =
+    organizationId && (isAdmin || organizationId === userOrganizableId);
+
+  const canEditCollaborators = isAdmin || isCurrentUserInterventionOwner;
 
   const options = [
     {
@@ -178,29 +206,28 @@ const SingleTile = ({
       label: formatMessage(messages.shareExternally),
       id: 'share externally',
     },
-    ...((canArchive(status) && [
-      {
-        icon: BinNoBgIcon,
-        action: openArchiveModal,
-        label: formatMessage(messages.archive),
-        id: 'Archive e-session',
-      },
-    ]) ||
-      []),
     {
       id: 'duplicate',
       label: formatMessage(messages.duplicateHere),
       icon: CopyIcon,
       action: handleClone,
     },
-    ...(canAssignOrganizationToIntervention
+    {
+      id: 'archive',
+      label: formatMessage(messages.archive),
+      icon: ArchiveIcon,
+      action: openArchiveModal,
+      color: colors.bluewood,
+      disabled: !archivingPossible,
+    },
+    ...(showAssignOrganizationOption
       ? [
           {
             icon: AddAppIcon,
             action: openAssignOrganizationModal,
             label: formatMessage(messages.assignOrganization),
             id: 'assignOrganization',
-            disabled: !canEdit(status),
+            disabled: !assigningOrganizationPossible,
           },
         ]
       : []),
@@ -211,6 +238,7 @@ const SingleTile = ({
             action: () => openCatMhModal(tileData),
             label: formatMessage(messages.catMhSettingsModalTitle),
             id: 'catMhAccess',
+            disabled: hasCollaborators,
           },
         ]
       : []),
@@ -221,12 +249,16 @@ const SingleTile = ({
       action: handleExportIntervention,
       color: colors.bluewood,
     },
-    {
-      id: 'collaborate',
-      label: formatMessage(messages.collaborate),
-      icon: CollaborateIcon,
-      action: openCollaborateModal,
-    },
+    ...(canEditCollaborators
+      ? [
+          {
+            id: 'collaborate',
+            label: formatMessage(messages.collaborate),
+            icon: CollaborateIcon,
+            action: openCollaborateModal,
+          },
+        ]
+      : []),
   ];
 
   const preventDefault = (e) => {
@@ -236,8 +268,6 @@ const SingleTile = ({
 
   const copyInterventionToResearchers = (users) =>
     copyIntervention({ interventionId: id, users });
-
-  const isCollaborating = collaboratingUsersIds?.includes(userId);
 
   if (isLoading)
     return (
@@ -294,7 +324,7 @@ const SingleTile = ({
         <TileContainer>
           <Heading>
             <Row gap={12} align="center">
-              {isCollaborating && <CollaboratingIndicator />}
+              {isCurrentUserCollaborator && <CollaboratingIndicator />}
               {status && (
                 <Row align="center" gap={5}>
                   <Text lineHeight={1}>
@@ -338,7 +368,7 @@ const SingleTile = ({
               </TileInfo>
             </Tooltip>
 
-            {organizationId && (
+            {showReportingBadge && (
               <Badge bg={colors.orange}>
                 {formatMessage(messages.isFromOrganization)}
               </Badge>
@@ -361,10 +391,13 @@ SingleTile.propTypes = {
   userId: PropTypes.string,
   isLoading: PropTypes.bool,
   exportIntervention: PropTypes.func,
+  userOrganizableId: PropTypes.string,
+  isCurrentUserInterventionOwner: PropTypes.bool,
 };
 
 const mapStateToProps = createStructuredSelector({
   userId: makeSelectUserId(),
+  userOrganizableId: makeSelectUserOrganizableId(),
 });
 
 const mapDispatchToProps = {

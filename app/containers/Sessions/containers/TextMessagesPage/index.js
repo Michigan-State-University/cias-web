@@ -8,9 +8,6 @@ import { connect } from 'react-redux';
 import { useIntl } from 'react-intl';
 import { Helmet } from 'react-helmet';
 
-import Row from 'components/Row';
-import { Filters } from 'components/Filters';
-
 import {
   textMessagesReducer,
   allTextMessagesSagas,
@@ -27,10 +24,10 @@ import {
   makeSelectSelectedMessageState,
 } from 'global/reducers/textMessages';
 import {
-  makeSelectInterventionStatus,
   interventionReducer,
   fetchInterventionSaga,
   fetchInterventionRequest,
+  makeSelectEditingPossible,
 } from 'global/reducers/intervention';
 import {
   getSessionRequest,
@@ -38,7 +35,8 @@ import {
   sessionReducer,
 } from 'global/reducers/session';
 
-import { canEdit } from 'models/Status/statusPermissions';
+import Row from 'components/Row';
+import { Filters } from 'components/Filters';
 
 import TextMessageTiles from './containers/TextMessageTitles';
 import TextMessageSettings from './containers/TextMessageSettings';
@@ -57,11 +55,11 @@ const TextMessagingPage = ({
   changeSelectedId,
   selectedMessage,
   selectedMessageState,
-  status,
   fetchIntervention,
   fetchSession,
   filters,
   setFilters,
+  editingPossible,
 }) => {
   const { formatMessage } = useIntl();
 
@@ -77,7 +75,6 @@ const TextMessagingPage = ({
     fetchSession({ sessionId, interventionId });
   }, [interventionId, sessionId]);
 
-  const editingPossible = canEdit(status);
   return (
     <TextMessagesContext.Provider
       value={{
@@ -98,8 +95,8 @@ const TextMessagingPage = ({
         <title>{formatMessage(messages.pageTitle)}</title>
       </Helmet>
 
-      <Row maxHeight="100%" style={{ justifyContent: 'center' }}>
-        <Col md={8}>
+      <Row maxHeight="100%" height="100%" style={{ justifyContent: 'center' }}>
+        <Col md={8} style={{ overflowY: 'auto' }}>
           <Filters
             initialFilters={INITIAL_FILTERS}
             filters={filters}
@@ -109,7 +106,7 @@ const TextMessagingPage = ({
           <TextMessageTiles />
         </Col>
         {selectedMessageId && selectedMessage && (
-          <Col>
+          <Col style={{ overflowY: 'auto' }}>
             <TextMessageSettings />
           </Col>
         )}
@@ -128,7 +125,7 @@ TextMessagingPage.propTypes = {
   match: PropTypes.object,
   selectedMessage: PropTypes.object,
   selectedMessageState: PropTypes.object,
-  status: PropTypes.string,
+  editingPossible: PropTypes.bool,
   fetchIntervention: PropTypes.func,
   fetchSession: PropTypes.func,
   setFilters: PropTypes.func,
@@ -143,7 +140,7 @@ const mapStateToProps = createStructuredSelector({
   selectedMessageState: makeSelectSelectedMessageState(),
   loaders: makeSelectLoaders(),
   errors: makeSelectErrors(),
-  status: makeSelectInterventionStatus(),
+  editingPossible: makeSelectEditingPossible(),
 });
 
 const mapDispatchToProps = {

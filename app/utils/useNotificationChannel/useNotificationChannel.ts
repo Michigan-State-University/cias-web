@@ -1,5 +1,6 @@
 import { useDispatch, useSelector } from 'react-redux';
 import { toast } from 'react-toastify';
+import { useInjectSaga } from 'redux-injectors';
 
 import { Notification, NotificationEvent } from 'models/Notification';
 
@@ -13,7 +14,13 @@ import {
   onUnreadNotificationsFetchedReceive,
   setNavigatorAvailabilityLocally,
 } from 'global/reducers/notifications/actions';
-import { updateInterventionConversationsTranscript } from 'global/reducers/intervention';
+import {
+  onCollaboratorRemovedReceive,
+  onStopEditingInterventionReceive,
+  updateInterventionConversationsTranscript,
+  withOnCollaboratorRemovedReceiveSaga,
+  withOnStopEditingInterventionReceiveSaga,
+} from 'global/reducers/intervention';
 import { updateConversationTranscript } from 'global/reducers/liveChat';
 import { refetchInterventions } from 'global/reducers/interventions';
 
@@ -31,8 +38,13 @@ import {
   NotificationChannelMessageTopic,
 } from './constants';
 
+export type NotificationChannel = ReturnType<typeof useNotificationChannel>;
+
 export const useNotificationChannel = () => {
   const dispatch = useDispatch();
+
+  useInjectSaga(withOnCollaboratorRemovedReceiveSaga);
+  useInjectSaga(withOnStopEditingInterventionReceiveSaga);
 
   const isLoggedIn = useSelector(makeSelectIsUserLoggedIn());
 
@@ -68,6 +80,16 @@ export const useNotificationChannel = () => {
       case NotificationEvent.SUCCESSFULLY_RESTORED_INTERVENTION:
       case NotificationEvent.NEW_COLLABORATOR_ADDED: {
         dispatch(refetchInterventions());
+        break;
+      }
+      case NotificationEvent.COLLABORATOR_REMOVED: {
+        dispatch(refetchInterventions());
+        dispatch(onCollaboratorRemovedReceive(data.interventionId));
+        break;
+      }
+      case NotificationEvent.STOP_EDITING_INTERVENTION: {
+        dispatch(refetchInterventions());
+        dispatch(onStopEditingInterventionReceive(data.interventionId));
         break;
       }
       default:

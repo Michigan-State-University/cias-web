@@ -34,3 +34,6 @@ export const makeSelectFile = (file) =>
 
 export const makeSelectFileDownloadLoading = () =>
   createSelector(selectFileDownloadDomain, (substate) => substate.isLoading);
+
+export const makeSelectNavbarHeight = () =>
+  createSelector(selectGlobalStateDomain, ({ navbarHeight }) => navbarHeight);

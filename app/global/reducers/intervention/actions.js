@@ -93,10 +93,17 @@ import {
   REMOVE_COLLABORATOR_REQUEST,
   REMOVE_COLLABORATOR_ERROR,
   REMOVE_COLLABORATOR_SUCCESS,
+  SET_CURRENT_EDITOR,
+  SET_STARTING_EDITING,
+  SET_STOPPING_EDITING,
+  RESET_COLLABORATION_STATE,
+  ON_COLLABORATOR_REMOVED_RECEIVE,
+  RESET_REDUCER,
+  ON_STOP_EDITING_INTERVENTION_RECEIVE,
 } from './constants';
 
-export const fetchInterventionRequest = (id) =>
-  actionBuilder(FETCH_INTERVENTION_REQUEST, { id });
+export const fetchInterventionRequest = (id, showLoader = false) =>
+  actionBuilder(FETCH_INTERVENTION_REQUEST, { id, showLoader });
 export const fetchInterventionSuccess = (intervention) =>
   actionBuilder(FETCH_INTERVENTION_SUCCESS, { intervention });
 export const fetchInterventionError = (error) =>
@@ -303,7 +310,9 @@ export const generateConversationsTranscriptError = (error) =>
   actionBuilder(GENERATE_CONVERSATIONS_TRANSCRIPT_ERROR, { error });
 
 export const updateInterventionConversationsTranscript = (transcript) =>
-  actionBuilder(UPDATE_INTERVENTION_CONVERSATIONS_TRANSCRIPT, { transcript });
+  actionBuilder(UPDATE_INTERVENTION_CONVERSATIONS_TRANSCRIPT, {
+    transcript,
+  });
 
 export const exportInterventionRequest = (interventionId) =>
   actionBuilder(EXPORT_INTERVENTION_REQUEST, { interventionId });
@@ -382,3 +391,26 @@ export const removeCollaboratorSuccess = () =>
   actionBuilder(REMOVE_COLLABORATOR_SUCCESS);
 export const removeCollaboratorError = () =>
   actionBuilder(REMOVE_COLLABORATOR_ERROR);
+
+export const setCurrentEditor = (currentEditor) =>
+  actionBuilder(SET_CURRENT_EDITOR, { currentEditor });
+
+export const setStartingEditing = (startingEditing) =>
+  actionBuilder(SET_STARTING_EDITING, { startingEditing });
+
+export const setStoppingEditing = (stoppingEditing) =>
+  actionBuilder(SET_STOPPING_EDITING, { stoppingEditing });
+
+export const resetCollaborationState = () =>
+  actionBuilder(RESET_COLLABORATION_STATE, {});
+
+export const onCollaboratorRemovedReceive = (interventionId) =>
+  actionBuilder(ON_COLLABORATOR_REMOVED_RECEIVE, {
+    interventionId,
+  });
+export const onStopEditingInterventionReceive = (interventionId) =>
+  actionBuilder(ON_STOP_EDITING_INTERVENTION_RECEIVE, {
+    interventionId,
+  });
+
+export const resetReducer = () => actionBuilder(RESET_REDUCER, {});

@@ -1,8 +1,10 @@
 import { CharacterType } from 'models/Character';
 import { AppFile } from 'models/File';
 import { Session } from 'models/Session';
+import { CollaboratorData } from 'models/Collaborator';
 
 import { InterventionInvite } from './InterventionInvite';
+import { Editor } from './Editor';
 
 export enum InterventionStatus {
   DRAFT = 'draft',
@@ -37,7 +39,7 @@ type UserWithAccess = {
 export interface Intervention {
   createdAt: string;
   csvGeneratedAt: Nullable<string>;
-  csvLink: Nullable<string>;
+  csvFilename: Nullable<string>;
   googleLanguageId: number;
   hasCatSessions: boolean;
   id: string;
@@ -71,7 +73,11 @@ export interface Intervention {
   quickExit: boolean;
   currentNarrator: CharacterType;
   conversationsPresent: boolean;
-  conversationsTranscript: Nullable<AppFile>;
+  conversationsTranscriptGeneratedAt: Nullable<string>;
+  conversationsTranscriptFilename: Nullable<string>;
   sessions: Session[];
-  collaboratingUsersIds: string[];
+  hasCollaborators: boolean;
+  currentEditor: Nullable<Editor>;
+  currentUserCollaboratorData: Nullable<CollaboratorData>;
+  isCurrentUserCollaborator: boolean;
 }

@@ -104,7 +104,7 @@ const ReportTemplatesList = ({
   ]);
 
   return (
-    <Container style={{ padding: 0 }} fluid>
+    <Container style={{ padding: 0, width: '100%' }} fluid>
       <Row
         style={{
           backgroundColor: colors.white,

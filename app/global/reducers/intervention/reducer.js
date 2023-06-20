@@ -106,6 +106,11 @@ import {
   REMOVE_COLLABORATOR_SUCCESS,
   REMOVE_COLLABORATOR_ERROR,
   ADD_COLLABORATORS_SUCCESS,
+  SET_CURRENT_EDITOR,
+  SET_STARTING_EDITING,
+  SET_STOPPING_EDITING,
+  RESET_COLLABORATION_STATE,
+  RESET_REDUCER,
 } from './constants';
 
 export const initialState = {
@@ -145,6 +150,8 @@ export const initialState = {
     changeInterventionNarrator: false,
     editShortLinks: false,
     collaborators: false,
+    startingEditing: false,
+    stoppingEditing: false,
   },
   errors: {
     fetchInterventionError: null,
@@ -170,9 +177,16 @@ const findSessionIndex = (intervention, sessionId) =>
 export const interventionReducer = (state = initialState, action) =>
   produce(state, (draft) => {
     switch (action.type) {
+      case RESET_REDUCER: {
+        return initialState;
+      }
       case FETCH_INTERVENTION_REQUEST:
-        if (state.intervention && action.payload.id === state.intervention.id)
+        if (action.payload.showLoader) {
+          draft.loaders.fetchInterventionLoading = true;
+        }
+        if (state.intervention && action.payload.id === state.intervention.id) {
           break;
+        }
         draft.loaders.fetchInterventionLoading = true;
         draft.errors.fetchInterventionError = null;
         draft.intervention = null;
@@ -549,9 +563,10 @@ export const interventionReducer = (state = initialState, action) =>
         break;
 
       case UPDATE_INTERVENTION_CONVERSATIONS_TRANSCRIPT:
+        const { name, createdAt } = action.payload.transcript;
         if (draft.intervention) {
-          draft.intervention.conversationsTranscript =
-            action.payload.transcript;
+          draft.intervention.conversationsTranscriptGeneratedAt = createdAt;
+          draft.intervention.conversationsTranscriptFilename = name;
         }
         break;
       case EXPORT_INTERVENTION_REQUEST:
@@ -638,6 +653,9 @@ export const interventionReducer = (state = initialState, action) =>
       }
       case REMOVE_COLLABORATOR_SUCCESS: {
         assignDraftItems(draft.collaborators, draft.cache.collaborators);
+        if (!draft.collaborators?.length && draft.intervention) {
+          draft.intervention.hasCollaborators = false;
+        }
         break;
       }
       case REMOVE_COLLABORATOR_ERROR: {
@@ -647,6 +665,33 @@ export const interventionReducer = (state = initialState, action) =>
       case ADD_COLLABORATORS_SUCCESS: {
         draft.collaborators.push(...action.payload.collaborators);
         assignDraftItems(draft.collaborators, draft.cache.collaborators);
+        if (draft.intervention) {
+          draft.intervention.hasCollaborators = true;
+        }
+        break;
+      }
+      case SET_CURRENT_EDITOR: {
+        if (!draft.intervention) return;
+        const { currentEditor } = action.payload;
+        draft.intervention.currentEditor = currentEditor;
+        break;
+      }
+      case SET_STARTING_EDITING: {
+        const { startingEditing } = action.payload;
+        draft.loaders.startingEditing = startingEditing;
+        break;
+      }
+      case SET_STOPPING_EDITING: {
+        const { stoppingEditing } = action.payload;
+        draft.loaders.stoppingEditing = stoppingEditing;
+        break;
+      }
+      case RESET_COLLABORATION_STATE: {
+        if (draft.intervention) {
+          draft.intervention.currentEditor = null;
+        }
+        draft.loaders.startingEditing = false;
+        draft.loaders.stoppingEditing = false;
         break;
       }
     }

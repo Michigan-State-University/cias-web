@@ -27,6 +27,7 @@ export type Props = {
   selectedFormikKey: string;
   placeholderBase: string;
   healthClinic?: SimpleHealthClinic;
+  disabled: boolean;
 };
 
 const ShortLinkItem = ({
@@ -34,6 +35,7 @@ const ShortLinkItem = ({
   selectedFormikKey,
   placeholderBase,
   healthClinic,
+  disabled,
 }: Props) => {
   const { formatMessage } = useIntl();
 
@@ -80,6 +82,7 @@ const ShortLinkItem = ({
           ariaLabel={switchAriaLabel}
           formikKey={selectedFormikKey}
           mt={11}
+          disabled={disabled}
         />
       </Box>
       {healthClinic && (
@@ -92,7 +95,7 @@ const ShortLinkItem = ({
           formikKey={nameFormikKey}
           adornmentType={AdornmentType.PREFIX}
           adornment={selected ? CUSTOM_LINK_PREFIX : ''}
-          disabled={!selected}
+          disabled={!selected || disabled}
           backgroundColor={selected ? undefined : themeColors.highlight}
           opacity={selected ? undefined : 1}
           placeholder={selected ? '' : placeholder}

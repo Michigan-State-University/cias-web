@@ -7,6 +7,8 @@ import { useParams } from 'react-router-dom';
 
 import { colors } from 'theme';
 
+import { Session } from 'models/Session';
+
 import {
   getSessionRequest,
   sessionReducer,
@@ -16,7 +18,6 @@ import {
 
 import Box from 'components/Box';
 
-import { Session } from 'models/Session';
 import SessionSettings from './components/SessionSettings';
 import messages from './messages';
 import { StyledColumn } from './styled';
@@ -59,8 +60,7 @@ const SettingsInterventionPage = () => {
         display="flex"
         justify="center"
         align="center"
-        pt={40}
-        pb={100}
+        py={40}
         bg={colors.zirkon}
       >
         <StyledColumn height="100%">

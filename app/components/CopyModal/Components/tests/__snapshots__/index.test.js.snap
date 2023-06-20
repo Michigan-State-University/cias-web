@@ -67,7 +67,7 @@ Object {
   width: 100%;
   height: 40px;
   border-radius: 100px;
-  cursor: pointer;
+  cursor: not-allowed !important;
   border: none;
   outline: none;
   background-color: #107969;
@@ -484,7 +484,7 @@ Object {
   width: 100%;
   height: 40px;
   border-radius: 100px;
-  cursor: pointer;
+  cursor: not-allowed !important;
   border: none;
   outline: none;
   background-color: #107969;

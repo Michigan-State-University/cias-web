@@ -108,4 +108,16 @@ export default defineMessages({
     id: `${scope}.completeSession`,
     defaultMessage: 'Complete Session',
   },
+  numericQuestionDigitsBetween: {
+    id: `${scope}.numericQuestionDigitsBetween`,
+    defaultMessage: 'Number between {minLength} and {maxLength} digits',
+  },
+  numericQuestionDigitsMinimum: {
+    id: `${scope}.numericQuestionDigitsMinimum`,
+    defaultMessage: 'Minimum {minLength} digits',
+  },
+  numericQuestionDigitsMaximum: {
+    id: `${scope}.numericQuestionDigitsMaximum`,
+    defaultMessage: 'Maximum {maxLength} digits',
+  },
 });

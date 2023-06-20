@@ -148,6 +148,7 @@ const BranchingTab = ({
               px: 8,
             }}
             shouldBeOpenOnStart
+            disabled={disabled}
           >
             <BranchingLayout
               formulaIndex={index}

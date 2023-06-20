@@ -20,14 +20,13 @@ import {
   interventionReducer,
   fetchInterventionSaga,
   makeSelectInterventionStatus,
+  makeSelectEditingPossible,
 } from 'global/reducers/intervention';
 import {
   fetchInterventionsSaga,
   interventionsReducer,
   fetchInterventionsRequest,
 } from 'global/reducers/interventions';
-
-import { canEdit } from 'models/Status/statusPermissions';
 
 import {
   fetchReportTemplatesRequest,
@@ -61,6 +60,7 @@ interface Props extends RouteComponentProps<MatchParams> {
   fetchReportTemplates: (sessionId: string) => void;
   interventionStatus: string;
   session: ClassicSession | CatSession;
+  editingPossible: boolean;
 }
 
 const EditSessionPage = ({
@@ -71,10 +71,10 @@ const EditSessionPage = ({
   session,
   fetchInterventions,
   fetchReportTemplates,
+  editingPossible,
 }: Props): JSX.Element => {
   const { name: sessionName, type } = session;
   const { formatMessage } = useIntl();
-  const editingPossible = canEdit(interventionStatus);
 
   const [storeInitialized, setStoreInitialized] = useState(false);
 
@@ -125,6 +125,7 @@ const mapStateToProps = createStructuredSelector({
   getSessionLoader: makeSelectSessionLoader('getSession'),
   interventionStatus: makeSelectInterventionStatus(),
   session: makeSelectSession(),
+  editingPossible: makeSelectEditingPossible(),
 });
 
 const mapDispatchToProps = {

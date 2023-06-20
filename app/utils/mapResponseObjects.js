@@ -56,6 +56,7 @@ export const pickUserAttributes = (user) =>
     'emailNotification',
     'smsNotification',
     'feedbackCompleted',
+    'organizableId',
     'quickExitEnabled',
   ]);
 

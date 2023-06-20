@@ -1,7 +1,22 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`<Navbar /> Should render and match the snapshot with session path 1`] = `
-.c3 {
+.c5 {
+  width: auto;
+  height: auto;
+  width: 100%;
+  max-height: 51px;
+}
+
+.c7 {
+  width: auto;
+  height: auto;
+  width: 100%;
+  max-width: 200px;
+  max-height: 100px;
+}
+
+.c10 {
   width: 30px;
   height: 30px;
   font-size: 15px;
@@ -26,7 +41,7 @@ exports[`<Navbar /> Should render and match the snapshot with session path 1`] =
   color: rgba(255,255,255,1);
 }
 
-.c4 {
+.c11 {
   width: auto;
   height: auto;
   display: block;
@@ -36,10 +51,42 @@ exports[`<Navbar /> Should render and match the snapshot with session path 1`] =
   cursor: pointer;
 }
 
+.c2 {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-flex-direction: row;
+  -ms-flex-direction: row;
+  flex-direction: row;
+  height: auto;
+  -webkit-box-pack: start;
+  -webkit-justify-content: flex-start;
+  -ms-flex-pack: start;
+  justify-content: flex-start;
+  justify-items: flex-start;
+  width: 100%;
+}
+
+.c3 {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-flex-direction: row;
+  -ms-flex-direction: row;
+  flex-direction: row;
+  height: auto;
+}
+
 .c0 {
   position: fixed;
   width: 100%;
   top: 0;
+  z-index: 10;
+}
+
+.c1 {
   background-color: white;
   padding: 20px;
   box-shadow: 0px 4px 10px rgba(227,238,251,0.8);
@@ -51,16 +98,15 @@ exports[`<Navbar /> Should render and match the snapshot with session path 1`] =
   -webkit-box-align: center;
   -ms-flex-align: center;
   align-items: center;
-  z-index: 10;
   height: 70px;
   gap: 16px;
 }
 
-.c0 .user-name-info {
+.c1 .user-name-info {
   white-space: nowrap;
 }
 
-.c1 {
+.c8 {
   margin-left: auto;
   margin-right: 0;
   display: -webkit-box;
@@ -77,7 +123,7 @@ exports[`<Navbar /> Should render and match the snapshot with session path 1`] =
   flex-shrink: 0;
 }
 
-.c2 {
+.c9 {
   position: relative;
   display: -webkit-box;
   display: -webkit-flex;
@@ -90,15 +136,40 @@ exports[`<Navbar /> Should render and match the snapshot with session path 1`] =
   gap: 10px;
 }
 
+.c4 {
+  gap: 16px;
+}
+
 @media (max-width:575px) {
-  .c0 {
+  .c1 {
     gap: 0;
   }
 }
 
 @media (max-width:767px) {
-  .c0 .user-name-info {
+  .c1 .user-name-info {
     display: none;
+  }
+}
+
+@media only screen and (max-width:480px) {
+  .c6 {
+    display: none;
+  }
+}
+
+@media (max-width:575px) {
+  .c4 {
+    gap: 8px;
+    -webkit-box-pack: start;
+    -webkit-justify-content: start;
+    -ms-flex-pack: start;
+    justify-content: start;
+  }
+
+  .c4 img {
+    width: 70%;
+    margin: 0;
   }
 }
 
@@ -110,24 +181,57 @@ exports[`<Navbar /> Should render and match the snapshot with session path 1`] =
   >
     <div
       class="c2"
+      width="100%"
     >
-      <div />
       <div
-        class="c3"
-        color="#FFFFFF"
-        data-private="true"
-        height="30"
-        width="30"
+        class="c3 c4"
       >
-        <div>
-          TT
+        <a
+          href="/"
+        >
+          <img
+            alt="CIAS Application Logo"
+            class="c5"
+            src="IMAGE_MOCK"
+            width="100%"
+          />
+        </a>
+        <div
+          class="c6"
+        >
+          <img
+            alt="Michigan State University Logo"
+            class="c7"
+            src="IMAGE_MOCK"
+            width="100%"
+          />
         </div>
       </div>
+    </div>
+    <div
+      class="c8"
+    >
       <div
-        class="c4 user-name-info"
-        data-private="true"
+        class="c9"
       >
-        test test
+        <div />
+        <div
+          class="c10"
+          color="#FFFFFF"
+          data-private="true"
+          height="30"
+          width="30"
+        >
+          <div>
+            TT
+          </div>
+        </div>
+        <div
+          class="c11 user-name-info"
+          data-private="true"
+        >
+          test test
+        </div>
       </div>
     </div>
   </div>
@@ -135,7 +239,22 @@ exports[`<Navbar /> Should render and match the snapshot with session path 1`] =
 `;
 
 exports[`<Navbar /> Should render and match the snapshot withou matching path 1`] = `
-.c3 {
+.c5 {
+  width: auto;
+  height: auto;
+  width: 100%;
+  max-height: 51px;
+}
+
+.c7 {
+  width: auto;
+  height: auto;
+  width: 100%;
+  max-width: 200px;
+  max-height: 100px;
+}
+
+.c10 {
   width: 30px;
   height: 30px;
   font-size: 15px;
@@ -160,7 +279,7 @@ exports[`<Navbar /> Should render and match the snapshot withou matching path 1`
   color: rgba(255,255,255,1);
 }
 
-.c4 {
+.c11 {
   width: auto;
   height: auto;
   display: block;
@@ -170,10 +289,42 @@ exports[`<Navbar /> Should render and match the snapshot withou matching path 1`
   cursor: pointer;
 }
 
+.c2 {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-flex-direction: row;
+  -ms-flex-direction: row;
+  flex-direction: row;
+  height: auto;
+  -webkit-box-pack: start;
+  -webkit-justify-content: flex-start;
+  -ms-flex-pack: start;
+  justify-content: flex-start;
+  justify-items: flex-start;
+  width: 100%;
+}
+
+.c3 {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-flex-direction: row;
+  -ms-flex-direction: row;
+  flex-direction: row;
+  height: auto;
+}
+
 .c0 {
   position: fixed;
   width: 100%;
   top: 0;
+  z-index: 10;
+}
+
+.c1 {
   background-color: white;
   padding: 20px;
   box-shadow: 0px 4px 10px rgba(227,238,251,0.8);
@@ -185,16 +336,15 @@ exports[`<Navbar /> Should render and match the snapshot withou matching path 1`
   -webkit-box-align: center;
   -ms-flex-align: center;
   align-items: center;
-  z-index: 10;
   height: 70px;
   gap: 16px;
 }
 
-.c0 .user-name-info {
+.c1 .user-name-info {
   white-space: nowrap;
 }
 
-.c1 {
+.c8 {
   margin-left: auto;
   margin-right: 0;
   display: -webkit-box;
@@ -211,7 +361,7 @@ exports[`<Navbar /> Should render and match the snapshot withou matching path 1`
   flex-shrink: 0;
 }
 
-.c2 {
+.c9 {
   position: relative;
   display: -webkit-box;
   display: -webkit-flex;
@@ -224,15 +374,40 @@ exports[`<Navbar /> Should render and match the snapshot withou matching path 1`
   gap: 10px;
 }
 
+.c4 {
+  gap: 16px;
+}
+
 @media (max-width:575px) {
-  .c0 {
+  .c1 {
     gap: 0;
   }
 }
 
 @media (max-width:767px) {
-  .c0 .user-name-info {
+  .c1 .user-name-info {
     display: none;
+  }
+}
+
+@media only screen and (max-width:480px) {
+  .c6 {
+    display: none;
+  }
+}
+
+@media (max-width:575px) {
+  .c4 {
+    gap: 8px;
+    -webkit-box-pack: start;
+    -webkit-justify-content: start;
+    -ms-flex-pack: start;
+    justify-content: start;
+  }
+
+  .c4 img {
+    width: 70%;
+    margin: 0;
   }
 }
 
@@ -244,24 +419,57 @@ exports[`<Navbar /> Should render and match the snapshot withou matching path 1`
   >
     <div
       class="c2"
+      width="100%"
     >
-      <div />
       <div
-        class="c3"
-        color="#FFFFFF"
-        data-private="true"
-        height="30"
-        width="30"
+        class="c3 c4"
       >
-        <div>
-          TT
+        <a
+          href="/"
+        >
+          <img
+            alt="CIAS Application Logo"
+            class="c5"
+            src="IMAGE_MOCK"
+            width="100%"
+          />
+        </a>
+        <div
+          class="c6"
+        >
+          <img
+            alt="Michigan State University Logo"
+            class="c7"
+            src="IMAGE_MOCK"
+            width="100%"
+          />
         </div>
       </div>
+    </div>
+    <div
+      class="c8"
+    >
       <div
-        class="c4 user-name-info"
-        data-private="true"
+        class="c9"
       >
-        test test
+        <div />
+        <div
+          class="c10"
+          color="#FFFFFF"
+          data-private="true"
+          height="30"
+          width="30"
+        >
+          <div>
+            TT
+          </div>
+        </div>
+        <div
+          class="c11 user-name-info"
+          data-private="true"
+        >
+          test test
+        </div>
       </div>
     </div>
   </div>
