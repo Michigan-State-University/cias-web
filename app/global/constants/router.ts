@@ -33,5 +33,8 @@ export enum RoutePath {
   FORBIDDEN = '/no-access',
   VERIFY_SHORT_LINK = '/int/:name',
   NOT_FOUND = '/not-found-page',
-  WILDCARD = '*',
 }
+
+export const ALL_ROUTE_PATHS = Object.values(RoutePath);
+
+export const WILDCARD_PATH = '*';

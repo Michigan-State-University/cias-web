@@ -34,7 +34,7 @@ import {
   makeSelectUser,
   fetchSelfDetailsSaga,
 } from 'global/reducers/auth';
-import { RoutePath } from 'global/constants';
+import { RoutePath, WILDCARD_PATH } from 'global/constants';
 
 import AnswerSessionPage from 'containers/AnswerSessionPage/Loadable';
 import EditSessionPage from 'containers/Sessions/containers/EditSessionPage/Loadable';
@@ -554,7 +554,7 @@ export function App({ user, fetchSelfDetails }) {
           component={VerifyShortLinkPage}
         />
         <AppRoute exact path={RoutePath.NOT_FOUND} component={NotFoundPage} />
-        <AppRoute path={RoutePath.WILDCARD}>
+        <AppRoute path={WILDCARD_PATH}>
           <Redirect to={RoutePath.NOT_FOUND} />
         </AppRoute>
       </Switch>
