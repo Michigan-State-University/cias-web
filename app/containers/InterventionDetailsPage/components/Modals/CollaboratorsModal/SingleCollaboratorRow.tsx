@@ -12,7 +12,7 @@ import { Collaborator } from 'models/Collaborator';
 import Checkbox from 'components/Checkbox';
 import { StripedTR, TD } from 'components/Table';
 import Icon from 'components/Icon';
-import Text from 'components/Text';
+import Text, { EllipsisText } from 'components/Text';
 import Button, { ImageButton } from 'components/Button';
 import Box from 'components/Box';
 
@@ -59,20 +59,8 @@ const SingleCollaboratorRow = ({
   const removeCollaborator = () =>
     dispatch(removeCollaboratorRequest(id, index, interventionId));
 
-  const getDisplayName = () => {
-    if (fullName.trim()) return fullName;
-    return (
-      <Box display="flex" align="center">
-        <Tooltip
-          id={`${id}-pending`}
-          mr={8}
-          icon={warningCircle}
-          content={formatMessage(messages.tooltipDescription)}
-        />
-        {email}
-      </Box>
-    );
-  };
+  const trimmedFullName = fullName.trim();
+  const showWarning = !trimmedFullName;
 
   return (
     <StripedTR
@@ -82,7 +70,18 @@ const SingleCollaboratorRow = ({
       bg={colors.white}
       mb={4}
     >
-      <TD padding={8}>{getDisplayName()}</TD>
+      <TD padding={8}>
+        <Box display="flex" align="center">
+          <Tooltip
+            id={`${id}-pending`}
+            mr={8}
+            icon={showWarning ? warningCircle : null}
+            content={formatMessage(messages.tooltipDescription)}
+            visible={showWarning}
+          ></Tooltip>
+          <EllipsisText text={trimmedFullName || email} />
+        </Box>
+      </TD>
       {!preparingToDelete && (
         <>
           <TD padding={8}>

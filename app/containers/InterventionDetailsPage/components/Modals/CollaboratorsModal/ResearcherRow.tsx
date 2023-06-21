@@ -13,6 +13,7 @@ import InviteIcon from 'assets/svg/invite.svg';
 import { StripedTR, TD } from 'components/Table';
 import { ImageButton } from 'components/Button';
 import Row from 'components/Row';
+import { EllipsisText } from 'components/Text';
 
 import messages from './messages';
 
@@ -39,8 +40,12 @@ const ResearcherRow = ({
       bg={colors.white}
       mb={4}
     >
-      <TD padding={8}>{fullName}</TD>
-      <TD padding={8}>{email}</TD>
+      <TD padding={8}>
+        <EllipsisText text={fullName} />
+      </TD>
+      <TD padding={8}>
+        <EllipsisText text={email} />
+      </TD>
       <TD pl={8}>
         <Row>
           <ImageButton
