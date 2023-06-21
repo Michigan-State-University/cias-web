@@ -2,6 +2,8 @@ import { put, takeLatest, select, call } from 'redux-saga/effects';
 import axios from 'axios';
 
 import pickFields from 'utils/pickFields';
+import objectToSnakeCase from 'utils/objectToSnakeCase';
+
 import {
   updateSessionSettingsSuccess,
   updateSessionSettingsError,
@@ -21,10 +23,12 @@ export function* updateSessionSettings({ fields } = {}) {
     session?.interventionId ?? session?.intervention_id
   }/sessions/${session.id}`;
 
-  const patchDifference = pickFields(session, fields);
+  const changes = pickFields(session, fields);
 
   try {
-    yield call(axios.put, requestURL, { session: patchDifference });
+    yield call(axios.put, requestURL, {
+      session: objectToSnakeCase(changes),
+    });
     yield put(updateSessionSettingsSuccess());
   } catch (error) {
     yield put(updateSessionSettingsError());
