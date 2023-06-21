@@ -3,6 +3,8 @@ import PropTypes from 'prop-types';
 import { Formik } from 'formik';
 import { useIntl } from 'react-intl';
 
+import { RoutePath } from 'global/constants';
+
 import FormikInput from 'components/FormikInput';
 import LinkButton from 'components/Button/LinkButton';
 import Button from 'components/Button';
@@ -64,7 +66,7 @@ const LoginForm = ({
             />
             <LinkButton
               tabIndex={-1}
-              to="/reset-password"
+              to={RoutePath.RESET_PASSWORD}
               alignSelf="end"
               mb={-14}
               zIndex={1}
@@ -94,7 +96,7 @@ const LoginForm = ({
               <Divider ml={15} mt={40} />
             </Row>
             <Row width="100%" justify="center" mt={30}>
-              <LinkButton to="/register">
+              <LinkButton to={RoutePath.REGISTER}>
                 {formatMessage(messages.register)}
               </LinkButton>
             </Row>

@@ -22,8 +22,13 @@ import { Markup } from 'interweave';
 import { useInjectSaga, useInjectReducer } from 'redux-injectors';
 
 import { themeColors } from 'theme';
+
 import { Roles } from 'models/User/RolesManager';
+
 import { passwordRegex } from 'global/constants/regex';
+import { RoutePath } from 'global/constants';
+
+import { parametrizeRoutePath } from 'utils/router';
 
 import withPublicLayout from 'containers/PublicLayout';
 import { Fill } from 'components/Fill';
@@ -139,18 +144,25 @@ export function RegisterPage({
 
     if (shouldRedirect) {
       if (shouldRedirectToIntervention) {
-        history.replace(`/interventions/${interventionId}/invite`);
+        history.replace(
+          parametrizeRoutePath(RoutePath.INTERVENTION_INVITE, {
+            interventionId,
+          }),
+        );
         return;
       }
 
       if (shouldRedirectToSession) {
         history.replace(
-          `/interventions/${interventionId}/sessions/${sessionId}/fill`,
+          parametrizeRoutePath(RoutePath.ANSWER_SESSION, {
+            interventionId,
+            sessionId,
+          }),
         );
         return;
       }
 
-      history.replace('/');
+      history.replace(RoutePath.DASHBOARD);
     }
   }, [success, loading, isInvite, interventionId, sessionId, error]);
 
@@ -269,7 +281,7 @@ export function RegisterPage({
                   />
                   {!isInvite && (
                     <Row justify="center" width="100%">
-                      <Link to="/login">
+                      <Link to={RoutePath.LOGIN}>
                         <StyledTextButton color={themeColors.secondary}>
                           <FormattedMessage {...messages.login} />
                         </StyledTextButton>

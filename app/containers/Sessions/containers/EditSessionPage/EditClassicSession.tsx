@@ -26,6 +26,8 @@ import mapValues from 'lodash/mapValues';
 import flow from 'lodash/flow';
 import intersection from 'lodash/intersection';
 
+import { RoutePath } from 'global/constants';
+
 import SelectResearchers from 'containers/SelectResearchers';
 import Box from 'components/Box';
 import Column from 'components/Column';
@@ -56,6 +58,7 @@ import duplicateInternallyActive from 'assets/svg/duplicate-internally-active.sv
 
 import { borders, colors, themeColors } from 'theme';
 
+import { parametrizeRoutePath } from 'utils/router';
 import instantiateEmptyQuestion from 'utils/instantiateEmptyQuestion';
 import isNullOrUndefined from 'utils/isNullOrUndefined';
 
@@ -466,7 +469,11 @@ const EditClassicSessionPage = ({
   );
 
   const goToSessionMap = () => {
-    const url = `/interventions/${interventionId}/sessions/${sessionId}/map`;
+    if (!interventionId) return;
+    const url = parametrizeRoutePath(RoutePath.SESSION_MAP, {
+      interventionId,
+      sessionId,
+    });
     history.push(url, { selectedQuestionId: selectedQuestion });
   };
 

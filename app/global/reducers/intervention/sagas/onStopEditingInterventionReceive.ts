@@ -2,6 +2,16 @@ import { select, takeEvery, put } from '@redux-saga/core/effects';
 
 import { matchResearchersInterventionPaths } from 'utils/router';
 
+import { RoutePath } from 'global/constants';
+import { getSessionRequest } from 'global/reducers/session';
+import {
+  fetchReportTemplatesRequest,
+  fetchSingleReportTemplateRequest,
+  makeSelectSelectedReportId,
+} from 'global/reducers/reportTemplates';
+import { fetchTextMessagesRequest } from 'global/reducers/textMessages';
+import { getQuestionGroupsRequest } from 'global/reducers/questionGroups';
+
 import { ON_STOP_EDITING_INTERVENTION_RECEIVE } from '../constants';
 import {
   fetchInterventionRequest,
@@ -17,12 +27,74 @@ function* onStopEditingInterventionReceiveWorker({
   );
   if (interventionId !== currentInterventionId) return;
 
-  const isViewingIntervention = matchResearchersInterventionPaths(
-    window.location.pathname,
-  );
+  const match = matchResearchersInterventionPaths();
 
-  if (isViewingIntervention) {
-    yield put(fetchInterventionRequest(interventionId, true));
+  if (!match) return;
+
+  yield put(fetchInterventionRequest(interventionId, true));
+  const { sessionId } = match.params;
+
+  switch (match.path) {
+    case RoutePath.EDIT_SESSION: {
+      yield put(
+        getSessionRequest({
+          interventionId,
+          sessionId,
+        }),
+      );
+      yield put(fetchReportTemplatesRequest(sessionId, interventionId));
+      break;
+    }
+    case RoutePath.SESSION_SETTINGS: {
+      yield put(
+        getSessionRequest({
+          interventionId,
+          sessionId,
+        }),
+      );
+      break;
+    }
+    case RoutePath.REPORT_TEMPLATES: {
+      yield put(
+        getSessionRequest({
+          interventionId,
+          sessionId,
+        }),
+      );
+      yield put(fetchReportTemplatesRequest(sessionId, interventionId, true));
+      const reportId: Nullable<string> = yield select(
+        makeSelectSelectedReportId(),
+      );
+      if (reportId) {
+        yield put(
+          fetchSingleReportTemplateRequest(reportId, sessionId, interventionId),
+        );
+      }
+      break;
+    }
+    case RoutePath.TEXT_MESSAGES: {
+      yield put(
+        getSessionRequest({
+          interventionId,
+          sessionId,
+        }),
+      );
+      yield put(fetchTextMessagesRequest(sessionId));
+      break;
+    }
+    case RoutePath.SESSION_MAP: {
+      yield put(
+        getSessionRequest({
+          interventionId,
+          sessionId,
+        }),
+      );
+      yield put(fetchReportTemplatesRequest(sessionId, interventionId));
+      yield put(getQuestionGroupsRequest(sessionId));
+      break;
+    }
+    default:
+      break;
   }
 }
 

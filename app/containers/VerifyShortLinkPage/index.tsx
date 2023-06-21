@@ -7,8 +7,11 @@ import {
   VerifyShortLinkDataDTO,
 } from 'models/ShortLink';
 
+import { RoutePath } from 'global/constants';
+
 import useGet from 'utils/useGet';
 import objectToCamelCase from 'utils/objectToCamelCase';
+import { parametrizeRoutePath } from 'utils/router';
 
 import Loader from 'components/Loader';
 
@@ -19,7 +22,7 @@ const VerifyShortLinkPage = () => {
   const { name } = useParams<{ name: string }>();
 
   const redirectToNotFoundPage = () => {
-    history.replace('/not-found-page');
+    history.replace(RoutePath.NOT_FOUND);
   };
 
   if (!name) {
@@ -49,12 +52,17 @@ const VerifyShortLinkPage = () => {
           redirectToNotFoundPage();
           return;
         }
-        link = `/interventions/${interventionId}/sessions/${firstSessionId}/fill`;
+        link = parametrizeRoutePath(RoutePath.ANSWER_SESSION, {
+          interventionId,
+          sessionId: firstSessionId,
+        });
         break;
       }
       case ShortLinkType.FLEXIBLE_ORDER:
       case ShortLinkType.FIXED_ORDER: {
-        link = `/interventions/${interventionId}/invite`;
+        link = parametrizeRoutePath(RoutePath.INTERVENTION_INVITE, {
+          interventionId,
+        });
         break;
       }
       default: {

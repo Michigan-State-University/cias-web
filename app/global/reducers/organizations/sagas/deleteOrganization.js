@@ -3,7 +3,10 @@ import axios from 'axios';
 import { push } from 'connected-react-router';
 import { toast } from 'react-toastify';
 
+import { RoutePath } from 'global/constants';
+
 import { formatMessage } from 'utils/intlOutsideReact';
+import { parametrizeRoutePath } from 'utils/router';
 
 import {
   DELETE_ORGANIZATION_ERROR,
@@ -37,7 +40,13 @@ export function* deleteOrganization({ payload: { id } }) {
 
     // Go to the newest Organization if exists
     if (organizations.length)
-      yield put(push(`/organization/${organizations[0].id}`));
+      yield put(
+        push(
+          parametrizeRoutePath(RoutePath.MANAGE_ORGANIZATIONS, {
+            organizationId: organizations[0].id,
+          }),
+        ),
+      );
   } catch (error) {
     yield put(deleteOrganizationFailure(error));
 

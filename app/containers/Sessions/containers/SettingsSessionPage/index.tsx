@@ -22,7 +22,7 @@ import SessionSettings from './components/SessionSettings';
 import messages from './messages';
 import { StyledColumn } from './styled';
 
-const SettingsInterventionPage = () => {
+const SettingsSessionPage = () => {
   const dispatch = useDispatch();
   const session = useSelector<unknown, Session>(makeSelectSession());
   const { formatMessage } = useIntl();
@@ -81,4 +81,4 @@ const SettingsInterventionPage = () => {
   );
 };
 
-export default SettingsInterventionPage;
+export default SettingsSessionPage;

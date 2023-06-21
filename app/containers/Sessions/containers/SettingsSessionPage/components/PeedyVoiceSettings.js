@@ -52,6 +52,13 @@ const PeedyVoiceSettings = ({
     }
   }, []);
 
+  useEffect(() => {
+    setSelectedVoice({
+      value: googleVoiceId,
+      label: voiceLabel,
+    });
+  }, [googleVoiceId, voiceLabel]);
+
   const onVoicesChange = () => {
     if (selectedLanguage && selectedLanguage.value) {
       const languageVoices = ttsVoices[selectedLanguage.value];
@@ -89,7 +96,7 @@ const PeedyVoiceSettings = ({
       );
       setSelectLanguage(foundLanguage);
     }
-  }, [data]);
+  }, [data, googleTtsLanguageId]);
 
   const getLanguagesPanel = () => {
     if (loading) {
@@ -176,6 +183,7 @@ const PeedyVoiceSettings = ({
           width={200}
           mt={10}
           alignSelf="center"
+          disabled={!editingPossible}
         >
           {formatMessage(messages.saveVoiceSettings)}
         </Button>
