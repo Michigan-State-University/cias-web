@@ -38,6 +38,7 @@ import { archived, closed, draft, published } from 'models/Status/StatusTypes';
 import { UserInterventionStatus } from 'models/UserIntervention/StatusTypes';
 import { UserSessionStatus } from 'models/UserSession/StatusTypes';
 import { TextMessageType } from 'models/TextMessage';
+import { SharingFilter } from 'models/Intervention/SharingFilter';
 
 export const scope = 'app.GlobalMessages';
 
@@ -251,16 +252,16 @@ export default defineMessages({
     },
   },
   sharingFilters: {
-    onlySharedByMe: {
-      id: `${scope}.onlySharedByMe`,
+    [SharingFilter.ONLY_SHARED_BY_ME]: {
+      id: `${scope}.${SharingFilter.ONLY_SHARED_BY_ME}`,
       defaultMessage: `Only shared by me`,
     },
-    onlySharedWithMe: {
-      id: `${scope}.onlySharedWithMe`,
+    [SharingFilter.ONLY_SHARED_WITH_ME]: {
+      id: `${scope}.${SharingFilter.ONLY_SHARED_WITH_ME}`,
       defaultMessage: `Only shared with me`,
     },
-    onlyNotSharedWithAnyone: {
-      id: `${scope}.onlyNotSharedWithAnyone`,
+    [SharingFilter.ONLY_NOT_SHARED_WITH_ANYONE]: {
+      id: `${scope}.${SharingFilter.ONLY_NOT_SHARED_WITH_ANYONE}`,
       defaultMessage: `Only not shared with anyone`,
     },
   },

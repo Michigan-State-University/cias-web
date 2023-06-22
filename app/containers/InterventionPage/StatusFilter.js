@@ -5,6 +5,7 @@ import { Col } from 'react-grid-system';
 import globalMessages from 'global/i18n/globalMessages';
 
 import Select from 'components/Select';
+import messages from './messages';
 
 const StatusFilter = ({ formatMessage, onChange, active }) => {
   const options = useMemo(
@@ -26,13 +27,13 @@ const StatusFilter = ({ formatMessage, onChange, active }) => {
   return (
     <Col>
       <Select
-        width={400}
         selectProps={{
           isMulti: true,
           options,
           formatLabel: (label) => label,
           value: selectValue,
           onChange: handleChange,
+          placeholder: formatMessage(messages.statusFilterPlaceholder),
         }}
       />
     </Col>

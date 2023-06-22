@@ -78,7 +78,7 @@ export function InterventionPage({
     () => ({
       statuses: filterStatus,
       name: filterValue,
-      [filterSharing]: true,
+      ...(filterSharing && { [filterSharing]: true }),
     }),
     [filterValue, filterStatus, filterSharing],
   );
