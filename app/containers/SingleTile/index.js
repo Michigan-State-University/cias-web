@@ -317,7 +317,10 @@ const SingleTile = ({
         width={COLLABORATORS_MODAL_WIDTH}
         maxWidth={COLLABORATORS_MODAL_WIDTH}
       >
-        <CollaboratorsModal interventionId={id} />
+        <CollaboratorsModal
+          interventionId={id}
+          isCurrentUserInterventionOwner={isCurrentUserInterventionOwner}
+        />
       </Modal>
 
       <StyledLink to={link}>
