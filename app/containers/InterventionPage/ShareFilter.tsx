@@ -10,8 +10,8 @@ import { SharingFilter } from 'models/Intervention/SharingFilter';
 
 type Props = {
   formatMessage: IntlShape['formatMessage'];
-  onChange: (values: string) => void;
-  active: SharingFilter;
+  onChange: (values: string | null) => void;
+  active: SharingFilter | null;
 };
 
 const ShareFilter = ({ formatMessage, onChange, active }: Props) => {
@@ -35,7 +35,7 @@ const ShareFilter = ({ formatMessage, onChange, active }: Props) => {
       }
     : null;
 
-  const handleChange = (selectedValue: SelectOption<string>) =>
+  const handleChange = (selectedValue: SelectOption<SharingFilter | null>) =>
     onChange(selectedValue.value);
 
   return (
