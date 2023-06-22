@@ -10,12 +10,13 @@ import { addCollaboratorsRequest } from 'global/reducers/intervention';
 
 import InviteIcon from 'assets/svg/invite.svg';
 
-import { StripedTR, TD } from 'components/Table';
+import { StripedTR } from 'components/Table';
 import { ImageButton } from 'components/Button';
 import Row from 'components/Row';
 import { EllipsisText } from 'components/Text';
 
 import messages from './messages';
+import { StyledTD } from './styled';
 
 type Props = {
   researcher: User & { loading: boolean };
@@ -40,13 +41,13 @@ const ResearcherRow = ({
       bg={colors.white}
       mb={4}
     >
-      <TD padding={8}>
+      <StyledTD padding={8}>
         <EllipsisText text={fullName} />
-      </TD>
-      <TD padding={8}>
+      </StyledTD>
+      <StyledTD padding={8}>
         <EllipsisText text={email} />
-      </TD>
-      <TD pl={8}>
+      </StyledTD>
+      <StyledTD pl={8}>
         <Row>
           <ImageButton
             src={InviteIcon}
@@ -56,7 +57,7 @@ const ResearcherRow = ({
             spinnerProps={{ margin: 'initial', color: colors.black }}
           />
         </Row>
-      </TD>
+      </StyledTD>
     </StripedTR>
   );
 };

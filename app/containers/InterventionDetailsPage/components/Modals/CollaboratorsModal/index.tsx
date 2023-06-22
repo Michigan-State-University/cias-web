@@ -169,22 +169,22 @@ const CollaboratorsModal = ({ interventionId }: Props) => {
                     <FormattedMessage {...messages.name} />
                   </Text>
                 </TH>
-                <TH padding={8} width={30}>
+                <TH padding={8} width={25}>
                   <Text textAlign="left" fontWeight="bold">
                     <FormattedMessage {...messages.view} />
                   </Text>
                 </TH>
-                <TH padding={8} width={30}>
+                <TH padding={8} width={25}>
                   <Text textAlign="left" fontWeight="bold">
                     <FormattedMessage {...messages.edit} />
                   </Text>
                 </TH>
-                <TH padding={8} width={30}>
+                <TH padding={8} width={25}>
                   <Text textAlign="left" fontWeight="bold">
                     <FormattedMessage {...messages.dataAccess} />
                   </Text>
                 </TH>
-                <TH width={40}></TH>
+                <TH width={15}></TH>
               </TR>
             </THead>
             <TBody>
