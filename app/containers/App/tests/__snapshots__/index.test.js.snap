@@ -64,7 +64,6 @@ exports[`<AnswerSessionPage /> Should render and match the snapshot 1`] = `
   height: auto;
   display: block;
   border-radius: 5px;
-  width: 400px;
   color: unset;
 }
 
@@ -1140,7 +1139,6 @@ exports[`<AnswerSessionPage /> Should render and match the snapshot 1`] = `
                     >
                       <div
                         class="c50"
-                        width="400"
                       >
                         <div
                           class=" css-2b097c-container"
@@ -1220,7 +1218,6 @@ exports[`<AnswerSessionPage /> Should render and match the snapshot 1`] = `
                     >
                       <div
                         class="c50"
-                        width="400"
                       >
                         <div
                           class=" css-2b097c-container"
