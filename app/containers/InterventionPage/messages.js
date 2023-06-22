@@ -68,4 +68,8 @@ export default defineMessages({
     id: `${scope}.uploadInterventionInstruction`,
     defaultMessage: `Drag & drop intervention file here to start uploading`,
   },
+  statusFilterPlaceholder: {
+    id: `${scope}.statusFilterPlaceholder`,
+    defaultMessage: `Filter by status`,
+  },
 });

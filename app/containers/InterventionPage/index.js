@@ -48,6 +48,7 @@ import StatusFilter from './StatusFilter';
 import messages from './messages';
 import { InitialRow, StyledLink, StyledNotification } from './styled';
 import ImportModalContent from './ImportModalContent';
+import ShareFilter from './ShareFilter';
 
 const INITIAL_FETCH_LIMIT = 15;
 
@@ -71,10 +72,15 @@ export function InterventionPage({
 
   const [filterValue, setFilterValue] = useState('');
   const [filterStatus, setFilterStatus] = useState(statusTypes);
+  const [filterSharing, setFilterSharing] = useState('');
 
   const filterData = useMemo(
-    () => ({ statuses: filterStatus, name: filterValue }),
-    [filterValue, filterStatus],
+    () => ({
+      statuses: filterStatus,
+      name: filterValue,
+      ...(filterSharing && { [filterSharing]: true }),
+    }),
+    [filterValue, filterStatus, filterSharing],
   );
 
   useEffect(() => {
@@ -107,22 +113,8 @@ export function InterventionPage({
     },
   });
 
-  const handleChange = (value) => () => {
-    if (filterStatus.includes(value))
-      setFilterStatus(filterStatus.filter((el) => el !== value));
-    else setFilterStatus([...filterStatus, value]);
-  };
-
-  const handleFilterStatus = (e) => {
-    e.preventDefault();
-    const {
-      currentTarget: { value },
-    } = e;
-    handleChange(value)();
-  };
-
-  const handleClearFilters = () => {
-    setFilterStatus(statusTypes);
+  const handleChange = (values) => {
+    setFilterStatus(values);
   };
 
   const handleFeedbackClick = () => {
@@ -206,18 +198,31 @@ export function InterventionPage({
             style={{ marginTop: 10, marginBottom: 10 }}
           >
             <Row my={35} justify="start" align="center">
-              <StatusFilter
-                onClick={handleFilterStatus}
+              <ShareFilter
+                onChange={setFilterSharing}
                 formatMessage={formatMessage}
-                active={filterStatus}
-                onClear={handleClearFilters}
+                active={filterSharing}
               />
             </Row>
           </Col>
           <Col
             xs={12}
             md={6}
-            xxl={8}
+            xxl={4}
+            style={{ marginTop: 10, marginBottom: 10 }}
+          >
+            <Row my={35} justify="start" align="center">
+              <StatusFilter
+                onChange={handleChange}
+                formatMessage={formatMessage}
+                active={filterStatus}
+              />
+            </Row>
+          </Col>
+          <Col
+            xs={12}
+            md={6}
+            xxl={4}
             style={{ marginTop: 10, marginBottom: 10 }}
           >
             <Row align="center">
