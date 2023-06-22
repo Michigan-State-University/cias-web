@@ -316,6 +316,7 @@ const SingleTile = ({
         onClose={closeCollaborateModal}
         visible={collaborateModalVisible}
         width={COLLABORATORS_MODAL_WIDTH}
+        maxWidth={COLLABORATORS_MODAL_WIDTH}
       >
         <CollaboratorsModal interventionId={id} />
       </Modal>
