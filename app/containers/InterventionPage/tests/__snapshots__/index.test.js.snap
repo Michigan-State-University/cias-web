@@ -53,7 +53,6 @@ exports[`<InterventionPage /> Should render and match the snapshot with interven
   height: auto;
   display: block;
   border-radius: 5px;
-  width: 400px;
   color: unset;
 }
 
@@ -415,7 +414,6 @@ exports[`<InterventionPage /> Should render and match the snapshot with interven
             >
               <div
                 class="c17"
-                width="400"
               >
                 <div
                   class=" css-2b097c-container"
@@ -495,7 +493,6 @@ exports[`<InterventionPage /> Should render and match the snapshot with interven
             >
               <div
                 class="c17"
-                width="400"
               >
                 <div
                   class=" css-2b097c-container"
@@ -765,7 +762,6 @@ exports[`<InterventionPage /> Should render and match the snapshot with loader 1
   height: auto;
   display: block;
   border-radius: 5px;
-  width: 400px;
   color: unset;
 }
 
@@ -1127,7 +1123,6 @@ exports[`<InterventionPage /> Should render and match the snapshot with loader 1
             >
               <div
                 class="c17"
-                width="400"
               >
                 <div
                   class=" css-2b097c-container"
@@ -1207,7 +1202,6 @@ exports[`<InterventionPage /> Should render and match the snapshot with loader 1
             >
               <div
                 class="c17"
-                width="400"
               >
                 <div
                   class=" css-2b097c-container"
@@ -1477,7 +1471,6 @@ exports[`<InterventionPage /> Should render and match the snapshot without inter
   height: auto;
   display: block;
   border-radius: 5px;
-  width: 400px;
   color: unset;
 }
 
@@ -1839,7 +1832,6 @@ exports[`<InterventionPage /> Should render and match the snapshot without inter
             >
               <div
                 class="c17"
-                width="400"
               >
                 <div
                   class=" css-2b097c-container"
@@ -1919,7 +1911,6 @@ exports[`<InterventionPage /> Should render and match the snapshot without inter
             >
               <div
                 class="c17"
-                width="400"
               >
                 <div
                   class=" css-2b097c-container"
