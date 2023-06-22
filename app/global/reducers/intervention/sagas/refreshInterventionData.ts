@@ -1,4 +1,4 @@
-import { select, takeEvery, put } from '@redux-saga/core/effects';
+import { select, put, takeLatest } from '@redux-saga/core/effects';
 
 import { Intervention } from 'models/Intervention';
 
@@ -108,7 +108,7 @@ function* refreshInterventionDataWorker({
 }
 
 export default function* refreshInterventionDataSaga() {
-  yield takeEvery(REFRESH_INTERVENTION_DATA, refreshInterventionDataWorker);
+  yield takeLatest(REFRESH_INTERVENTION_DATA, refreshInterventionDataWorker);
 }
 
 export const withRefreshInterventionDataSaga = {

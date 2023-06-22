@@ -75,6 +75,9 @@ const CollaborationPanelComponent: React.FC<Props> = () => {
       props: {
         description: formatMessage(messages.forceEditModalDescription),
         content: formatMessage(messages.forceEditModalContent, {
+          firstName: '',
+          lastName: '',
+          email: '',
           ...currentEditor,
         }),
         confirmAction: () => interventionChannel?.forceStartEditing(),
