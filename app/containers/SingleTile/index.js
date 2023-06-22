@@ -33,6 +33,7 @@ import { interventionOptionsSaga } from 'global/sagas/interventionOptionsSaga';
 import {
   exportInterventionRequest,
   exportInterventionSaga,
+  fetchInterventionSaga,
   interventionReducer,
   sendInterventionCsvRequest,
 } from 'global/reducers/intervention';
@@ -424,6 +425,10 @@ export default compose(
   injectSaga({
     key: 'interventionDetailsPageSagas',
     saga: interventionDetailsPageSagas,
+  }),
+  injectSaga({
+    key: 'fetchIntervention',
+    saga: fetchInterventionSaga,
   }),
   injectReducer({ key: 'intervention', reducer: interventionReducer }),
   injectSaga({ key: 'exportIntervention', saga: exportInterventionSaga }),
