@@ -66,6 +66,7 @@ import {
   makeSelectIsCurrentUserInterventionOwner,
   makeSelectCanCurrentUserMakeChanges,
   makeSelectCanCurrentUserAccessParticipantsData,
+  fetchInterventionSaga,
 } from 'global/reducers/intervention';
 import { interventionOptionsSaga } from 'global/sagas/interventionOptionsSaga';
 import {
@@ -751,6 +752,7 @@ export default compose(
     saga: interventionOptionsSaga,
   }),
   injectSaga({ key: 'fetchInterventions', saga: fetchInterventionsSaga }),
+  injectSaga({ key: 'fetchIntervention', saga: fetchInterventionSaga }),
   injectSaga({ key: 'getQuestionGroupsSaga', saga: getQuestionGroupsSaga }),
   injectSaga({ key: 'editSession', saga: editSessionSaga }),
   injectSaga({

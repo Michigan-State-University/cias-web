@@ -22,6 +22,7 @@ import { InterventionChannelContext } from 'utils/useInterventionChannel';
 import Row from 'components/Row';
 import Text from 'components/Text';
 import { LabelPosition, Switch } from 'components/Switch';
+import { ModalType, useModal } from 'components/Modal';
 
 import messages from './messages';
 
@@ -56,6 +57,11 @@ const CollaborationPanelComponent: React.FC<Props> = () => {
     isAdmin;
 
   const handleToggle = (editingEnabled: boolean) => {
+    if (editingByOtherUser) {
+      openForceEditModal(null);
+      return;
+    }
+
     if (editingEnabled) {
       interventionChannel?.startEditing();
       return;
@@ -63,56 +69,76 @@ const CollaborationPanelComponent: React.FC<Props> = () => {
     interventionChannel?.stopEditing();
   };
 
+  const { openModal: openForceEditModal, Modal: ForceEditModal } =
+    useModal<null>({
+      type: ModalType.ConfirmationModal,
+      props: {
+        description: formatMessage(messages.forceEditModalDescription),
+        content: formatMessage(messages.forceEditModalContent, {
+          firstName: '',
+          lastName: '',
+          email: '',
+          ...currentEditor,
+        }),
+        confirmAction: () => interventionChannel?.forceStartEditing(),
+      },
+    });
+
   if (!hasCollaborators) return null;
 
   return (
-    <Row
-      justify="center"
-      align="center"
-      bg={colors.lightDivider}
-      height={40}
-      boxSizing="border-box"
-      flexShrink={0}
-      gap={16}
-      borderBottom={`1px solid ${
-        isCurrentUserEditor ? themeColors.secondary : colors.lightDivider
-      }`}
-      px={48}
-    >
-      <Text fontSize={15} lineHeight={1.5} flexShrink={0}>
-        {formatMessage(messages.currentMode, { editing: isCurrentUserEditor })}
-      </Text>
-      {canEdit && (
-        <Row flexShrink={0} align="center">
-          <Switch
-            id="enable-intervention-editing"
-            checked={isCurrentUserEditor}
-            onToggle={handleToggle}
-            labelPosition={LabelPosition.Right}
-            labelOffset={8}
-            loading={isLoading}
-            disabled={editingByOtherUser}
-          >
-            <Text fontSize={15} lineHeight={1.5}>
-              {formatMessage(messages.enableEditing)}
-            </Text>
-          </Switch>
-        </Row>
-      )}
-      {editingByOtherUser && (
-        <Text
-          fontSize={15}
-          lineHeight={1.5}
-          textOverflow="ellipsis"
-          overflow="hidden"
-          whiteSpace="nowrap"
-        >
-          {formatMessage(messages.editedByOtherUser, {
-            ...currentEditor,
+    <>
+      <Row
+        justify="center"
+        align="center"
+        bg={colors.lightDivider}
+        height={40}
+        boxSizing="border-box"
+        flexShrink={0}
+        gap={16}
+        borderBottom={`1px solid ${
+          isCurrentUserEditor ? themeColors.secondary : colors.lightDivider
+        }`}
+        px={48}
+      >
+        <Text fontSize={15} lineHeight={1.5} flexShrink={0}>
+          {formatMessage(messages.currentMode, {
+            editing: isCurrentUserEditor,
           })}
         </Text>
-      )}
-    </Row>
+        {canEdit && (
+          <Row flexShrink={0} align="center">
+            <Switch
+              id="enable-intervention-editing"
+              checked={isCurrentUserEditor}
+              onToggle={handleToggle}
+              labelPosition={LabelPosition.Right}
+              labelOffset={8}
+              loading={isLoading}
+              disabled={editingByOtherUser && !isCurrentUserInterventionOwner}
+            >
+              <Text fontSize={15} lineHeight={1.5}>
+                {formatMessage(messages.enableEditing)}
+              </Text>
+            </Switch>
+          </Row>
+        )}
+        {editingByOtherUser && (
+          <Text
+            fontSize={15}
+            lineHeight={1.5}
+            textOverflow="ellipsis"
+            overflow="hidden"
+            whiteSpace="nowrap"
+          >
+            {formatMessage(messages.editedByOtherUser, {
+              ...currentEditor,
+            })}
+          </Text>
+        )}
+      </Row>
+      <ForceEditModal />
+    </>
   );
 };
 

@@ -1,4 +1,6 @@
-import { select, takeEvery, put } from '@redux-saga/core/effects';
+import { select, put, takeLatest } from '@redux-saga/core/effects';
+
+import { Intervention } from 'models/Intervention';
 
 import { matchResearchersInterventionPaths } from 'utils/router';
 
@@ -12,24 +14,31 @@ import {
 import { fetchTextMessagesRequest } from 'global/reducers/textMessages';
 import { getQuestionGroupsRequest } from 'global/reducers/questionGroups';
 
-import { ON_STOP_EDITING_INTERVENTION_RECEIVE } from '../constants';
+import { REFRESH_INTERVENTION_DATA } from '../constants';
+import { fetchInterventionRequest, refreshInterventionData } from '../actions';
 import {
-  fetchInterventionRequest,
-  onStopEditingInterventionReceive,
-} from '../actions';
-import { makeSelectInterventionId } from '../selectors';
+  makeSelectIntervention,
+  makeSelectIsCurrentUserEditor,
+} from '../selectors';
 
-function* onStopEditingInterventionReceiveWorker({
-  payload: { interventionId },
-}: ReturnType<typeof onStopEditingInterventionReceive>) {
-  const currentInterventionId: Nullable<string> = yield select(
-    makeSelectInterventionId(),
+function* refreshInterventionDataWorker({
+  payload: { interventionId, forCurrentEditorToo },
+}: ReturnType<typeof refreshInterventionData>) {
+  const intervention: Nullable<Intervention> = yield select(
+    makeSelectIntervention(),
   );
-  if (interventionId !== currentInterventionId) return;
+
+  if (!intervention || interventionId !== intervention.id) return;
 
   const match = matchResearchersInterventionPaths();
-
   if (!match) return;
+
+  if (!forCurrentEditorToo) {
+    const isCurrentUserEditor: boolean = yield select(
+      makeSelectIsCurrentUserEditor(),
+    );
+    if (isCurrentUserEditor) return;
+  }
 
   yield put(fetchInterventionRequest(interventionId, true));
   const { sessionId } = match.params;
@@ -98,14 +107,11 @@ function* onStopEditingInterventionReceiveWorker({
   }
 }
 
-export default function* onStopEditingInterventionReceiveSaga() {
-  yield takeEvery(
-    ON_STOP_EDITING_INTERVENTION_RECEIVE,
-    onStopEditingInterventionReceiveWorker,
-  );
+export default function* refreshInterventionDataSaga() {
+  yield takeLatest(REFRESH_INTERVENTION_DATA, refreshInterventionDataWorker);
 }
 
-export const withOnStopEditingInterventionReceiveSaga = {
-  key: 'onStopEditingInterventionReceive',
-  saga: onStopEditingInterventionReceiveSaga,
+export const withRefreshInterventionDataSaga = {
+  key: 'refreshInterventionSaga',
+  saga: refreshInterventionDataSaga,
 };

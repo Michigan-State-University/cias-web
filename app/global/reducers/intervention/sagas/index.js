@@ -31,10 +31,10 @@ import fetchCollaboratorsSaga from './fetchCollaborators';
 import changeCollaboratorSettingSaga from './changeCollaboratorSetting';
 import removeCollaboratorSaga from './removeCollaborator';
 import onCollaboratorRemovedReceiveSaga from './onCollaboratorRemovedReceive';
-import onStopEditingInterventionReceiveSaga from './onStopEditingInterventionReceive';
+import refreshInterventionDataSaga from './refreshInterventionData';
 
 export * from './onCollaboratorRemovedReceive';
-export * from './onStopEditingInterventionReceive';
+export * from './refreshInterventionData';
 
 export {
   createInterventionSaga,
@@ -102,7 +102,7 @@ export default function* allInterventionSagas() {
     changeCollaboratorSettingSaga(),
     removeCollaboratorSaga(),
     onCollaboratorRemovedReceiveSaga(),
-    onStopEditingInterventionReceiveSaga(),
+    refreshInterventionDataSaga(),
   ]);
 }
 
