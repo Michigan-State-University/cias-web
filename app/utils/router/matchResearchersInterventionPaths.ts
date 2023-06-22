@@ -1,25 +1,30 @@
 import { matchPath, useLocation } from 'react-router';
 
-const INTERVENTION_PATH = '/interventions/:interventionId';
-const SESSION_PATH = `${INTERVENTION_PATH}/sessions/:sessionId`;
+import { RoutePath } from 'global/constants';
+import { match } from 'react-router-dom';
 
-export const RESEARCHERS_INTERVETION_PATHS = [
-  INTERVENTION_PATH,
-  `${SESSION_PATH}/edit`,
-  `${SESSION_PATH}/settings`,
-  `${SESSION_PATH}/report-templates`,
-  `${SESSION_PATH}/sms-messaging`,
-  `${SESSION_PATH}/generated-reports`,
-  `${SESSION_PATH}/map`,
+export const RESEARCHERS_INTERVENTION_PATHS: RoutePath[] = [
+  RoutePath.INTERVENTION_DETAILS,
+  RoutePath.EDIT_SESSION,
+  RoutePath.SESSION_SETTINGS,
+  RoutePath.REPORT_TEMPLATES,
+  RoutePath.TEXT_MESSAGES,
+  RoutePath.GENERATED_REPORTS,
+  RoutePath.SESSION_MAP,
 ];
 
-export const matchResearchersInterventionPaths = (pathname: string) =>
-  matchPath<{ interventionId?: string }>(pathname, {
-    path: RESEARCHERS_INTERVETION_PATHS,
+export type Params = { interventionId: string; sessionId?: string };
+
+export const matchResearchersInterventionPaths = (
+  pathname: string | undefined = window.location.pathname,
+): match<Params> | null =>
+  matchPath<Params>(pathname, {
+    path: RESEARCHERS_INTERVENTION_PATHS,
     exact: true,
   });
 
-export const useMatchResearchersInterventionPaths = () => {
-  const { pathname } = useLocation();
-  return matchResearchersInterventionPaths(pathname);
-};
+export const useMatchResearchersInterventionPaths =
+  (): match<Params> | null => {
+    const { pathname } = useLocation();
+    return matchResearchersInterventionPaths(pathname);
+  };

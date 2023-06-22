@@ -10,9 +10,9 @@ import {
 import { Collaborator } from 'models/Collaborator';
 
 import Checkbox from 'components/Checkbox';
-import { StripedTR, TD } from 'components/Table';
+import { StripedTR } from 'components/Table';
 import Icon from 'components/Icon';
-import Text from 'components/Text';
+import Text, { EllipsisText } from 'components/Text';
 import Button, { ImageButton } from 'components/Button';
 import Box from 'components/Box';
 
@@ -23,11 +23,13 @@ import warningCircle from 'assets/svg/warning-circle.svg';
 
 import Tooltip from 'components/Tooltip';
 import messages from './messages';
+import { StyledTD } from './styled';
 
 type Props = {
   collaborator: Collaborator;
   index: number;
   interventionId: string;
+  isCurrentUserInterventionOwner: boolean;
 };
 
 const SingleCollaboratorRow = ({
@@ -40,6 +42,7 @@ const SingleCollaboratorRow = ({
   },
   index,
   interventionId,
+  isCurrentUserInterventionOwner,
 }: Props) => {
   const [preparingToDelete, setPreparingToDelete] = useState(false);
   const { formatMessage } = useIntl();
@@ -59,20 +62,8 @@ const SingleCollaboratorRow = ({
   const removeCollaborator = () =>
     dispatch(removeCollaboratorRequest(id, index, interventionId));
 
-  const getDisplayName = () => {
-    if (fullName.trim()) return fullName;
-    return (
-      <Box display="flex" align="center">
-        <Tooltip
-          id={`${id}-pending`}
-          mr={8}
-          icon={warningCircle}
-          content={formatMessage(messages.tooltipDescription)}
-        />
-        {email}
-      </Box>
-    );
-  };
+  const trimmedFullName = fullName.trim();
+  const showWarning = !trimmedFullName;
 
   return (
     <StripedTR
@@ -82,32 +73,44 @@ const SingleCollaboratorRow = ({
       bg={colors.white}
       mb={4}
     >
-      <TD padding={8}>{getDisplayName()}</TD>
+      <StyledTD padding={8} maxWidth={0}>
+        <Box display="flex" align="center">
+          <Tooltip
+            id={`${id}-pending`}
+            mr={8}
+            icon={showWarning ? warningCircle : null}
+            content={formatMessage(messages.tooltipDescription)}
+            visible={showWarning}
+          ></Tooltip>
+          <EllipsisText text={trimmedFullName || email} />
+        </Box>
+      </StyledTD>
       {!preparingToDelete && (
         <>
-          <TD padding={8}>
+          <StyledTD padding={8}>
             <Checkbox
               checked={view}
               disabled
               id={`${id}-view-checkbox`}
               onChange={() => changeSetting('view', !view)}
             />
-          </TD>
-          <TD padding={8}>
+          </StyledTD>
+          <StyledTD padding={8}>
             <Checkbox
               checked={edit}
               id={`${id}-edit-checkbox`}
               onChange={() => changeSetting('edit', !edit)}
             />
-          </TD>
-          <TD padding={8}>
+          </StyledTD>
+          <StyledTD padding={8}>
             <Checkbox
               checked={dataAccess}
               id={`${id}-data-access-checkbox`}
               onChange={() => changeSetting('dataAccess', !dataAccess)}
+              disabled={!isCurrentUserInterventionOwner}
             />
-          </TD>
-          <TD pr={8}>
+          </StyledTD>
+          <StyledTD pr={8}>
             <Text textAlign="right">
               <ImageButton
                 src={RedBin}
@@ -115,11 +118,11 @@ const SingleCollaboratorRow = ({
                 title={formatMessage(messages.removeAccess)}
               />
             </Text>
-          </TD>
+          </StyledTD>
         </>
       )}
       {preparingToDelete && (
-        <TD colSpan="4">
+        <StyledTD colSpan="4">
           <Box px={8} display="flex" align="center" justify="between">
             <div>{formatMessage(messages.areYouSure)}</div>
             <Box display="flex" align="center">
@@ -142,7 +145,7 @@ const SingleCollaboratorRow = ({
               />
             </Box>
           </Box>
-        </TD>
+        </StyledTD>
       )}
     </StripedTR>
   );

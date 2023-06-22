@@ -1,6 +1,8 @@
 import { select, takeEvery, put } from '@redux-saga/core/effects';
 import { push } from 'connected-react-router';
 
+import { RoutePath } from 'global/constants';
+
 import {
   makeSelectIsAdmin,
   makeSelectUserOrganizableId,
@@ -44,9 +46,7 @@ function* onCollaboratorRemovedReceiveWorker({
       isEInterventionAdmin &&
       interventionOrganizationId === userOrganizableId);
 
-  const isViewingIntervention = matchResearchersInterventionPaths(
-    window.location.pathname,
-  );
+  const isViewingIntervention = matchResearchersInterventionPaths();
 
   if (canUserStillViewTheIntervention) {
     if (isViewingIntervention) {
@@ -56,7 +56,7 @@ function* onCollaboratorRemovedReceiveWorker({
   }
 
   if (isViewingIntervention) {
-    yield put(push('/'));
+    yield put(push(RoutePath.DASHBOARD));
   }
   yield put(resetReducer());
 }

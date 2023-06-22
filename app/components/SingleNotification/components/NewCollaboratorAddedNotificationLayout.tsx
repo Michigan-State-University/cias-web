@@ -5,6 +5,10 @@ import CollaborateCircle from 'assets/svg/collaborate-circle.svg';
 
 import { NewCollaboratorAddedNotification } from 'models/Notification';
 
+import { RoutePath } from 'global/constants';
+
+import { parametrizeRoutePath } from 'utils/router';
+
 import Icon from 'components/Icon';
 
 import messages from '../messages';
@@ -30,7 +34,9 @@ export const NewCollaboratorAddedNotificationLayout = ({
       content={formatMessage(messages.newCollaboratorAddedContent, {
         interventionName,
       })}
-      linkTo={`/interventions/${interventionId}`}
+      linkTo={parametrizeRoutePath(RoutePath.INTERVENTION_DETAILS, {
+        interventionId,
+      })}
       readOnClick
       icon={<Icon src={CollaborateCircle} />}
       {...props}

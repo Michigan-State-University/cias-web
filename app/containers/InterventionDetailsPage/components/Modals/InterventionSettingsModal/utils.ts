@@ -12,8 +12,9 @@ import {
   unreservedURLCharactersSchema,
 } from 'utils/validators';
 import { formatMessage } from 'utils/intlOutsideReact';
+import { parametrizeRoutePath } from 'utils/router';
 
-import { WEB_HOST } from 'global/constants';
+import { RoutePath, WEB_HOST } from 'global/constants';
 
 import {
   InterventionSettingsFormValues,
@@ -140,13 +141,16 @@ export const getPlaceholderBase = (
   interventionType: InterventionType,
   firstSessionId: Nullable<string>,
 ) => {
-  const base = `${WEB_HOST}/interventions/${interventionId}`;
-
   switch (interventionType) {
     case InterventionType.DEFAULT:
       if (!firstSessionId) return '';
-      return `${base}/sessions/${firstSessionId}/fill`;
+      return `${WEB_HOST}${parametrizeRoutePath(RoutePath.ANSWER_SESSION, {
+        interventionId,
+        sessionId: firstSessionId,
+      })}`;
     default:
-      return `${base}/invite`;
+      return `${WEB_HOST}${parametrizeRoutePath(RoutePath.INTERVENTION_INVITE, {
+        interventionId,
+      })}`;
   }
 };

@@ -10,6 +10,8 @@ import { MemoryRouter } from 'react-router-dom';
 
 import testIcon from 'assets/svg/addSign.svg';
 
+import { RoutePath } from 'global/constants';
+
 import { testRender } from 'utils/testUtils';
 
 import ActionIcon from '../index';
@@ -28,7 +30,7 @@ describe('<ActionIcon />', () => {
   it('Should render and match the snapshot as link', () => {
     const { container } = testRender(
       <MemoryRouter>
-        <ActionIcon to="/" />
+        <ActionIcon to={RoutePath.DASHBOARD} />
       </MemoryRouter>,
     );
     expect(container).toMatchSnapshot();

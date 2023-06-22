@@ -45,9 +45,13 @@ import ResearcherRow from './ResearcherRow';
 
 type Props = {
   interventionId: string;
+  isCurrentUserInterventionOwner: boolean;
 };
 
-const CollaboratorsModal = ({ interventionId }: Props) => {
+const CollaboratorsModal = ({
+  interventionId,
+  isCurrentUserInterventionOwner,
+}: Props) => {
   const { formatMessage } = useIntl();
   const dispatch = useDispatch();
   const collaborators: Collaborator[] = useSelector(
@@ -140,7 +144,7 @@ const CollaboratorsModal = ({ interventionId }: Props) => {
                       <FormattedMessage {...messages.email} />
                     </Text>
                   </TH>
-                  <TH padding={8} width={50}>
+                  <TH padding={8} width={40}>
                     <Text textAlign="left" fontWeight="bold">
                       <FormattedMessage {...messages.invite} />
                     </Text>
@@ -169,22 +173,22 @@ const CollaboratorsModal = ({ interventionId }: Props) => {
                     <FormattedMessage {...messages.name} />
                   </Text>
                 </TH>
-                <TH padding={8}>
+                <TH padding={8} width={25}>
                   <Text textAlign="left" fontWeight="bold">
                     <FormattedMessage {...messages.view} />
                   </Text>
                 </TH>
-                <TH padding={8}>
+                <TH padding={8} width={25}>
                   <Text textAlign="left" fontWeight="bold">
                     <FormattedMessage {...messages.edit} />
                   </Text>
                 </TH>
-                <TH padding={8}>
+                <TH padding={8} width={25}>
                   <Text textAlign="left" fontWeight="bold">
                     <FormattedMessage {...messages.dataAccess} />
                   </Text>
                 </TH>
-                <TH width={50}></TH>
+                <TH width={15}></TH>
               </TR>
             </THead>
             <TBody>
@@ -196,6 +200,9 @@ const CollaboratorsModal = ({ interventionId }: Props) => {
                     index={index}
                     collaborator={collaborator}
                     interventionId={interventionId}
+                    isCurrentUserInterventionOwner={
+                      isCurrentUserInterventionOwner
+                    }
                   />
                 ))}
             </TBody>

@@ -8,7 +8,7 @@ import { DEFAULT_LOCALE } from 'i18n';
 import { createTestStore } from 'utils/testUtils/storeUtils';
 import createModalForTests from 'utils/createModalForTests';
 import { intlProviderConfig } from 'containers/LanguageProvider';
-import SettingsInterventionPage from '../index';
+import SettingsSessionPage from '../index';
 
 describe('<SettingsSessionPage />', () => {
   beforeEach(() => {
@@ -51,7 +51,7 @@ describe('<SettingsSessionPage />', () => {
       <Provider store={store}>
         <MemoryRouter>
           <IntlProvider locale={DEFAULT_LOCALE} {...intlProviderConfig}>
-            <SettingsInterventionPage {...defaultProps} />
+            <SettingsSessionPage {...defaultProps} />
           </IntlProvider>
         </MemoryRouter>
       </Provider>,
@@ -66,7 +66,7 @@ describe('<SettingsSessionPage />', () => {
       <Provider store={store}>
         <MemoryRouter>
           <IntlProvider locale={DEFAULT_LOCALE}>
-            <SettingsInterventionPage {...defaultProps} />
+            <SettingsSessionPage {...defaultProps} />
           </IntlProvider>
         </MemoryRouter>
       </Provider>,

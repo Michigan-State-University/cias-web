@@ -2,6 +2,8 @@ import axios from 'axios';
 import { put, takeLatest, call } from 'redux-saga/effects';
 import { toast } from 'react-toastify';
 
+import { RoutePath } from 'global/constants';
+
 import { formatMessage } from 'utils/intlOutsideReact';
 
 import { resetPasswordError, resetPasswordSuccess } from './actions';
@@ -13,7 +15,7 @@ function* resetPassword({ payload: { email } }) {
   try {
     yield axios.post(requestURL, {
       email,
-      redirect_url: `${process.env.WEB_URL}/set-new-password`,
+      redirect_url: `${process.env.WEB_URL}${RoutePath.SET_NEW_PASSWORD}`,
     });
     yield call(toast.success, formatMessage(messages.linkSent), {
       toastId: RESET_PASSWORD_SUCCESS,

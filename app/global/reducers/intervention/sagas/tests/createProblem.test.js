@@ -6,14 +6,17 @@ import { throwError } from 'redux-saga-test-plan/providers';
 import { expectSaga } from 'redux-saga-test-plan';
 import { push } from 'connected-react-router';
 
-import { formatMessage } from 'utils/intlOutsideReact';
 import globalMessages from 'global/i18n/globalMessages';
+import { RoutePath } from 'global/constants';
+
+import { formatMessage } from 'utils/intlOutsideReact';
 import { apiInterventionResponse } from 'utils/apiResponseCreators';
+import { parametrizeRoutePath } from 'utils/router';
+import { jsonApiToObject } from 'utils/jsonApiMapper';
 
 import createInterventionSaga, {
   createIntervention,
 } from 'global/reducers/intervention/sagas/createIntervention';
-import { jsonApiToObject } from 'utils/jsonApiMapper';
 import { createInterventionSuccess } from '../../actions';
 import {
   CREATE_INTERVENTION_ERROR,
@@ -31,7 +34,13 @@ describe('createIntervention saga', () => {
           jsonApiToObject({ data: mockApiResponse.data }, 'intervention'),
         ),
       )
-      .put(push(`/interventions/${mockApiResponse.data.id}`))
+      .put(
+        push(
+          parametrizeRoutePath(RoutePath.INTERVENTION_DETAILS, {
+            interventionId: mockApiResponse.data.id,
+          }),
+        ),
+      )
       .run();
   });
   it('Check createIntervention error connection', () => {

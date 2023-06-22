@@ -16,6 +16,7 @@ import LocalStorageService from 'utils/localStorageService';
 
 import { makeSelectUser, REDIRECT_QUERY_KEY } from 'global/reducers/auth';
 import { makeSelectNavbarHeight } from 'global/reducers/globalState';
+import { RoutePath } from 'global/constants';
 
 import Sidebar from 'containers/Sidebar';
 import Navbar from 'containers/Navbar';
@@ -57,7 +58,11 @@ class AppRoute extends Route {
 
       queryParams.delete(REDIRECT_QUERY_KEY);
 
-      return <Redirect to={`${redirectTo ?? '/'}?${queryParams.toString()}`} />;
+      return (
+        <Redirect
+          to={`${redirectTo ?? RoutePath.DASHBOARD}?${queryParams.toString()}`}
+        />
+      );
     }
 
     if (!protectedRoute) {
@@ -72,10 +77,12 @@ class AppRoute extends Route {
         encodeURIComponent(location.pathname),
       );
 
-      if (location.pathname === '/')
-        return <Redirect to={`/login${location.search}`} />;
+      if (location.pathname === RoutePath.DASHBOARD)
+        return <Redirect to={`${RoutePath.LOGIN}${location.search}`} />;
 
-      return <Redirect to={`/no-access?${queryParams.toString()}`} />;
+      return (
+        <Redirect to={`${RoutePath.FORBIDDEN}?${queryParams.toString()}`} />
+      );
     }
 
     if (user && arraysOverlap(allowedRoles, user.roles)) {
@@ -118,7 +125,7 @@ class AppRoute extends Route {
     }
 
     if (user && !arraysOverlap(allowedRoles, user.roles))
-      return <Redirect to="/no-access" />;
+      return <Redirect to={RoutePath.FORBIDDEN} />;
 
     return render();
   }

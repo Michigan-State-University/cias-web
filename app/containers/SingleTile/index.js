@@ -150,7 +150,6 @@ const SingleTile = ({
     createdAt,
     updatedAt,
     googleLanguageId,
-    isCurrentUserCollaborator,
     hasCollaborators,
     userId: interventionOwnerId,
     currentUserCollaboratorData,
@@ -316,15 +315,19 @@ const SingleTile = ({
         onClose={closeCollaborateModal}
         visible={collaborateModalVisible}
         width={COLLABORATORS_MODAL_WIDTH}
+        maxWidth={COLLABORATORS_MODAL_WIDTH}
       >
-        <CollaboratorsModal interventionId={id} />
+        <CollaboratorsModal
+          interventionId={id}
+          isCurrentUserInterventionOwner={isCurrentUserInterventionOwner}
+        />
       </Modal>
 
       <StyledLink to={link}>
         <TileContainer>
           <Heading>
             <Row gap={12} align="center">
-              {isCurrentUserCollaborator && <CollaboratingIndicator />}
+              {hasCollaborators && <CollaboratingIndicator />}
               {status && (
                 <Row align="center" gap={5}>
                   <Text lineHeight={1}>
