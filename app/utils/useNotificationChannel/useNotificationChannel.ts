@@ -18,7 +18,6 @@ import {
   onCollaboratorRemovedReceive,
   updateInterventionConversationsTranscript,
   withOnCollaboratorRemovedReceiveSaga,
-  withRefreshInterventionDataSaga,
 } from 'global/reducers/intervention';
 import { updateConversationTranscript } from 'global/reducers/liveChat';
 import { refetchInterventions } from 'global/reducers/interventions';
@@ -43,7 +42,6 @@ export const useNotificationChannel = () => {
   const dispatch = useDispatch();
 
   useInjectSaga(withOnCollaboratorRemovedReceiveSaga);
-  useInjectSaga(withRefreshInterventionDataSaga);
 
   const isLoggedIn = useSelector(makeSelectIsUserLoggedIn());
 
