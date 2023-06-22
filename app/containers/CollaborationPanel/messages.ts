@@ -16,4 +16,13 @@ export default defineMessages({
     id: `${scope}.editedByOtherUser`,
     defaultMessage: 'Now edited by {firstName} {lastName} ({email})',
   },
+  forceEditModalDescription: {
+    id: `${scope}.forceEditModalDescription`,
+    defaultMessage: 'Are you sure you want to enable editing?',
+  },
+  forceEditModalContent: {
+    id: `${scope}.forceEditModalContent`,
+    defaultMessage:
+      'This intervention is being edited by {firstName} {lastName} ({email}) now. The user will be forced to finish editing.',
+  },
 });
