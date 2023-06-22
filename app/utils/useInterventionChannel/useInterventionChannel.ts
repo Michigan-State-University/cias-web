@@ -1,5 +1,6 @@
 import { useDispatch } from 'react-redux';
 import { toast } from 'react-toastify';
+import { useInjectSaga } from 'redux-injectors';
 
 import { Editor } from 'models/Intervention';
 
@@ -11,10 +12,12 @@ import {
 import objectToCamelCase from 'utils/objectToCamelCase';
 
 import {
+  refreshInterventionData,
   resetCollaborationState,
   setCurrentEditor,
   setStartingEditing,
   setStoppingEditing,
+  withRefreshInterventionDataSaga,
 } from 'global/reducers/intervention';
 
 import {
@@ -36,6 +39,8 @@ export type InterventionChannel = ReturnType<typeof useInterventionChannel>;
 export const useInterventionChannel = (interventionId?: string) => {
   const dispatch = useDispatch();
 
+  useInjectSaga(withRefreshInterventionDataSaga);
+
   const showErrorToast = ({ error }: SocketErrorMessageData) => {
     toast.error(error);
   };
@@ -47,6 +52,7 @@ export const useInterventionChannel = (interventionId?: string) => {
   };
 
   const onEditingStopped = () => {
+    dispatch(refreshInterventionData(interventionId!, false));
     dispatch(setCurrentEditor(null));
     dispatch(setStoppingEditing(false));
   };
@@ -57,6 +63,9 @@ export const useInterventionChannel = (interventionId?: string) => {
     const currentEditor: Editor = objectToCamelCase(current_editor);
     dispatch(setCurrentEditor(currentEditor));
     dispatch(setStartingEditing(false));
+    // refreshes intervention data for the user forcing editing too to get
+    // latest changes made by the user that was forced to stop editing
+    dispatch(refreshInterventionData(interventionId!, true));
   };
 
   const onUnexpectedError = (errorData: UnexpectedErrorData) => {
