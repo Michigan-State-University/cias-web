@@ -29,6 +29,7 @@ type Props = {
   collaborator: Collaborator;
   index: number;
   interventionId: string;
+  isCurrentUserInterventionOwner: boolean;
 };
 
 const SingleCollaboratorRow = ({
@@ -41,6 +42,7 @@ const SingleCollaboratorRow = ({
   },
   index,
   interventionId,
+  isCurrentUserInterventionOwner,
 }: Props) => {
   const [preparingToDelete, setPreparingToDelete] = useState(false);
   const { formatMessage } = useIntl();
@@ -105,6 +107,7 @@ const SingleCollaboratorRow = ({
               checked={dataAccess}
               id={`${id}-data-access-checkbox`}
               onChange={() => changeSetting('dataAccess', !dataAccess)}
+              disabled={!isCurrentUserInterventionOwner}
             />
           </StyledTD>
           <StyledTD pr={8}>

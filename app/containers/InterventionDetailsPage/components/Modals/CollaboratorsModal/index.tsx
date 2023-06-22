@@ -45,9 +45,13 @@ import ResearcherRow from './ResearcherRow';
 
 type Props = {
   interventionId: string;
+  isCurrentUserInterventionOwner: boolean;
 };
 
-const CollaboratorsModal = ({ interventionId }: Props) => {
+const CollaboratorsModal = ({
+  interventionId,
+  isCurrentUserInterventionOwner,
+}: Props) => {
   const { formatMessage } = useIntl();
   const dispatch = useDispatch();
   const collaborators: Collaborator[] = useSelector(
@@ -196,6 +200,9 @@ const CollaboratorsModal = ({ interventionId }: Props) => {
                     index={index}
                     collaborator={collaborator}
                     interventionId={interventionId}
+                    isCurrentUserInterventionOwner={
+                      isCurrentUserInterventionOwner
+                    }
                   />
                 ))}
             </TBody>
