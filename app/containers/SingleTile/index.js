@@ -150,7 +150,6 @@ const SingleTile = ({
     createdAt,
     updatedAt,
     googleLanguageId,
-    isCurrentUserCollaborator,
     hasCollaborators,
     userId: interventionOwnerId,
     currentUserCollaboratorData,
@@ -325,7 +324,7 @@ const SingleTile = ({
         <TileContainer>
           <Heading>
             <Row gap={12} align="center">
-              {isCurrentUserCollaborator && <CollaboratingIndicator />}
+              {hasCollaborators && <CollaboratingIndicator />}
               {status && (
                 <Row align="center" gap={5}>
                   <Text lineHeight={1}>
