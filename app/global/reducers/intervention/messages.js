@@ -150,4 +150,8 @@ export default defineMessages({
     id: `${scope}.removeCollaboratorError`,
     defaultMessage: `Couldn't remove collaborator`,
   },
+  fetchCurrentUserCollaboratorDataError: {
+    id: `${scope}.fetchCurrentUserCollaboratorDataError`,
+    defaultMessage: `Couldn't fetch collaborator permissions`,
+  },
 });

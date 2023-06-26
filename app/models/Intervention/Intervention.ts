@@ -1,7 +1,6 @@
 import { CharacterType } from 'models/Character';
 import { AppFile } from 'models/File';
 import { Session } from 'models/Session';
-import { CollaboratorData } from 'models/Collaborator';
 
 import { InterventionInvite } from './InterventionInvite';
 import { Editor } from './Editor';
@@ -40,8 +39,6 @@ export interface SimpleIntervention {
   createdAt: string;
   hasCollaborators: boolean;
   currentEditor: Nullable<Editor>;
-  currentUserCollaboratorData: Nullable<CollaboratorData>;
-  isCurrentUserCollaborator: boolean;
   id: string;
   googleLanguageId: number;
   name: string;

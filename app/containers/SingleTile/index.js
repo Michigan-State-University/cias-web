@@ -12,7 +12,6 @@ import { injectReducer, injectSaga } from 'redux-injectors';
 import { connect } from 'react-redux';
 import { compose } from 'redux';
 
-import CsvIcon from 'assets/svg/csv-icon.svg';
 import FileShareIcon from 'assets/svg/file-share.svg';
 import CopyIcon from 'assets/svg/copy.svg';
 import AddAppIcon from 'assets/svg/app-add.svg';
@@ -35,7 +34,6 @@ import {
   exportInterventionSaga,
   fetchInterventionSaga,
   interventionReducer,
-  sendInterventionCsvRequest,
 } from 'global/reducers/intervention';
 import {
   copyInterventionRequest,
@@ -83,7 +81,6 @@ const SingleTile = ({
   tileData,
   participantView,
   link,
-  sendCsv,
   copyIntervention,
   archiveIntervention,
   intl: { formatMessage },
@@ -153,17 +150,11 @@ const SingleTile = ({
     googleLanguageId,
     hasCollaborators,
     userId: interventionOwnerId,
-    currentUserCollaboratorData,
   } = tileData || {};
 
   const isCurrentUserInterventionOwner = interventionOwnerId === userId;
 
-  const handleCsvRequest = () => sendCsv(id);
-
   const handleExportIntervention = () => exportIntervention(id);
-
-  const canExportCSV =
-    isCurrentUserInterventionOwner || currentUserCollaboratorData?.dataAccess;
 
   const handleClone = () =>
     copyIntervention({ interventionId: id, withoutRedirect: true });
@@ -190,16 +181,6 @@ const SingleTile = ({
       label: formatMessage(messages.translate),
       id: 'translate',
     },
-    ...(canExportCSV
-      ? [
-          {
-            icon: CsvIcon,
-            action: handleCsvRequest,
-            label: formatMessage(messages.exportCSV),
-            id: 'Export CSV',
-          },
-        ]
-      : []),
     {
       icon: FileShareIcon,
       action: openShareWithResearchersModal,
@@ -389,7 +370,6 @@ SingleTile.propTypes = {
   intl: PropTypes.object,
   participantView: PropTypes.bool,
   link: PropTypes.string,
-  sendCsv: PropTypes.func,
   copyIntervention: PropTypes.func,
   archiveIntervention: PropTypes.func,
   userId: PropTypes.string,
@@ -406,7 +386,6 @@ const mapStateToProps = createStructuredSelector({
 
 const mapDispatchToProps = {
   copyIntervention: copyInterventionRequest,
-  sendCsv: sendInterventionCsvRequest,
   archiveIntervention: archiveInterventionRequest,
   exportIntervention: exportInterventionRequest,
 };

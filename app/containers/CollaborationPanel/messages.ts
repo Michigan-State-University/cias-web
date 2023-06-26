@@ -25,4 +25,8 @@ export default defineMessages({
     defaultMessage:
       'This intervention is being edited by {firstName} {lastName} ({email}) now. The user will be forced to finish editing.',
   },
+  loadingPermissions: {
+    id: `${scope}.loadingPermissions`,
+    defaultMessage: 'Loading permissions',
+  },
 });

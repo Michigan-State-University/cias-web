@@ -100,6 +100,9 @@ import {
   ON_COLLABORATOR_REMOVED_RECEIVE,
   RESET_REDUCER,
   REFRESH_INTERVENTION_DATA,
+  FETCH_CURRENT_USER_COLLABORATOR_DATA_REQUEST,
+  FETCH_CURRENT_USER_COLLABORATOR_DATA_SUCCESS,
+  FETCH_CURRENT_USER_COLLABORATOR_DATA_ERROR,
 } from './constants';
 
 export const fetchInterventionRequest = (id, showLoader = false) =>
@@ -391,6 +394,19 @@ export const removeCollaboratorSuccess = () =>
   actionBuilder(REMOVE_COLLABORATOR_SUCCESS);
 export const removeCollaboratorError = () =>
   actionBuilder(REMOVE_COLLABORATOR_ERROR);
+
+export const fetchCurrentUserCollaboratorDataRequest = (interventionId) =>
+  actionBuilder(FETCH_CURRENT_USER_COLLABORATOR_DATA_REQUEST, {
+    interventionId,
+  });
+export const fetchCurrentUserCollaboratorDataSuccess = (
+  currentUserCollaboratorData,
+) =>
+  actionBuilder(FETCH_CURRENT_USER_COLLABORATOR_DATA_SUCCESS, {
+    currentUserCollaboratorData,
+  });
+export const fetchCurrentUserCollaboratorDataError = () =>
+  actionBuilder(FETCH_CURRENT_USER_COLLABORATOR_DATA_ERROR, {});
 
 export const setCurrentEditor = (currentEditor) =>
   actionBuilder(SET_CURRENT_EDITOR, { currentEditor });

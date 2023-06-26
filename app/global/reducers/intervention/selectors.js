@@ -101,8 +101,8 @@ export const makeSelectIsCurrentUserInterventionOwner = () =>
 
 export const makeSelectCurrentUserCollaboratorData = () =>
   createSelector(
-    makeSelectIntervention(),
-    (intervention) => intervention?.currentUserCollaboratorData,
+    selectIntervention,
+    (substate) => substate.currentUserCollaboratorData,
   );
 
 export const makeSelectCanCurrentUserMakeChanges = () =>
