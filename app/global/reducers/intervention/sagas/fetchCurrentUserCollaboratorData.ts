@@ -18,7 +18,7 @@ import {
 import messages from '../messages';
 import { FETCH_CURRENT_USER_COLLABORATOR_DATA_REQUEST } from '../constants';
 
-export function* fetchCurrentUserCollaboratorData({
+function* fetchCurrentUserCollaboratorData({
   payload: { interventionId },
 }: ReturnType<typeof fetchCurrentUserCollaboratorDataRequest>) {
   const requestURL = `v1/interventions/${interventionId}/permission`;
