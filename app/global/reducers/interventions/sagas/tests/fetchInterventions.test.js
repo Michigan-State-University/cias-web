@@ -21,15 +21,21 @@ import messages from '../../messages';
 
 describe('fetchInterventions saga', () => {
   it('Check fetchInterventions generator success connection', () => {
-    const apiResponse = { data: [createIntervention()], interventions_size: 1 };
+    const apiResponse = {
+      data: [createIntervention(0, 'simple_intervention')],
+      interventions_size: 1,
+    };
 
     return expectSaga(fetchInterventions, { payload: {} })
       .provide([[matchers.call.fn(axios.get), { data: apiResponse }]])
       .put(
-        fetchInterventionsSuccess(jsonApiToArray(apiResponse, 'intervention'), {
-          paginationData: undefined,
-          interventionsSize: 1,
-        }),
+        fetchInterventionsSuccess(
+          jsonApiToArray(apiResponse, 'simpleIntervention'),
+          {
+            paginationData: undefined,
+            interventionsSize: 1,
+          },
+        ),
       )
       .run();
   });
