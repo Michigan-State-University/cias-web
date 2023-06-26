@@ -14,16 +14,27 @@ import {
 
 // DATA TYPES
 
-export type StartEditingData = {};
+export type UnexpectedErrorData = SocketErrorMessageData;
+
+export type OnEditingStartedData = {};
 export type EditingStartedData = {
   current_editor: EditorDTO;
 };
 
-export type StopEditingData = {};
+export type OnEditingStoppedData = {};
 export type EditingStoppedData = {};
-export type UnexpectedErrorData = SocketErrorMessageData;
+
+export type OnForceEditingStartedData = {};
+export type ForceEditingStartedData = {
+  current_editor: EditorDTO;
+};
 
 // SOCKET MESSAGES
+export type UnexpectedErrorSocketErrorMessage = SocketErrorMessage<
+  InterventionChannelMessageTopic.UNEXPECTED_ERROR,
+  UnexpectedErrorData,
+  400
+>;
 
 export type EditingStartedSocketMessage = SocketMessage<
   InterventionChannelMessageTopic.EDITING_STARTED,
@@ -35,34 +46,40 @@ export type EditingStoppedSocketMessage = SocketMessage<
   EditingStoppedData
 >;
 
-export type UnexpectedErrorSocketErrorMessage = SocketErrorMessage<
-  InterventionChannelMessageTopic.UNEXPECTED_ERROR,
-  UnexpectedErrorData,
-  400
+export type ForceEditingStartedMessage = SocketMessage<
+  InterventionChannelMessageTopic.FORCE_EDITING_STARTED,
+  ForceEditingStartedData
 >;
 
 // Create a union type with any new SocketMessage type
 export type InterventionChannelMessage =
   | EditingStartedSocketMessage
   | EditingStoppedSocketMessage
-  | UnexpectedErrorSocketErrorMessage;
+  | UnexpectedErrorSocketErrorMessage
+  | ForceEditingStartedMessage;
 
 // SOCKET ACTIONS
 
 export type StartEditingSocketAction = SocketAction<
   InterventionChannelActionName.ON_EDITING_STARTED,
-  {}
+  OnEditingStartedData
 >;
 
 export type StopEditingSocketAction = SocketAction<
   InterventionChannelActionName.ON_EDITING_STOPPED,
-  {}
+  OnEditingStoppedData
+>;
+
+export type ForceStartEditingSocketAction = SocketAction<
+  InterventionChannelActionName.ON_FORCE_EDITING_STARTED,
+  OnForceEditingStartedData
 >;
 
 // Create a union type with any new SocketAction type
 export type InterventionChannelAction =
   | StartEditingSocketAction
-  | StopEditingSocketAction;
+  | StopEditingSocketAction
+  | ForceStartEditingSocketAction;
 
 export type InterventionChannelConnectionParams = {
   id?: string;
