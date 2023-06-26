@@ -111,6 +111,9 @@ import {
   SET_STOPPING_EDITING,
   RESET_COLLABORATION_STATE,
   RESET_REDUCER,
+  FETCH_CURRENT_USER_COLLABORATOR_DATA_REQUEST,
+  FETCH_CURRENT_USER_COLLABORATOR_DATA_SUCCESS,
+  FETCH_CURRENT_USER_COLLABORATOR_DATA_ERROR,
 } from './constants';
 
 export const initialState = {
@@ -118,6 +121,7 @@ export const initialState = {
   intervention: null,
   invites: [],
   collaborators: [],
+  currentUserCollaboratorData: null,
   cache: {
     intervention: null,
     collaborators: [],
@@ -152,6 +156,7 @@ export const initialState = {
     collaborators: false,
     startingEditing: false,
     stoppingEditing: false,
+    fetchCurrentUserCollaboratorData: false,
   },
   errors: {
     fetchInterventionError: null,
@@ -670,6 +675,21 @@ export const interventionReducer = (state = initialState, action) =>
         }
         break;
       }
+      case FETCH_CURRENT_USER_COLLABORATOR_DATA_REQUEST: {
+        draft.currentUserCollaboratorData = null;
+        draft.loaders.fetchCurrentUserCollaboratorData = true;
+        break;
+      }
+      case FETCH_CURRENT_USER_COLLABORATOR_DATA_SUCCESS: {
+        const { currentUserCollaboratorData } = action.payload;
+        draft.currentUserCollaboratorData = currentUserCollaboratorData;
+        draft.loaders.fetchCurrentUserCollaboratorData = false;
+        break;
+      }
+      case FETCH_CURRENT_USER_COLLABORATOR_DATA_ERROR: {
+        draft.loaders.fetchCurrentUserCollaboratorData = false;
+        break;
+      }
       case SET_CURRENT_EDITOR: {
         if (!draft.intervention) return;
         const { currentEditor } = action.payload;
@@ -692,6 +712,7 @@ export const interventionReducer = (state = initialState, action) =>
         }
         draft.loaders.startingEditing = false;
         draft.loaders.stoppingEditing = false;
+        draft.currentUserCollaboratorData = null;
         break;
       }
     }

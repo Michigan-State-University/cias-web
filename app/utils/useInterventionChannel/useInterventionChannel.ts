@@ -138,5 +138,6 @@ export const useInterventionChannel = (interventionId?: string) => {
     startEditing,
     stopEditing,
     forceStartEditing,
+    interventionId,
   };
 };

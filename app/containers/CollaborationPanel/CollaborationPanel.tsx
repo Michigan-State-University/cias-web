@@ -1,6 +1,7 @@
-import React, { memo, useContext } from 'react';
+import React, { memo, useContext, useEffect } from 'react';
 import { useIntl } from 'react-intl';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
+import { useInjectSaga } from 'redux-injectors';
 
 import { colors, themeColors } from 'theme';
 
@@ -9,12 +10,15 @@ import { CollaboratorData } from 'models/Collaborator';
 import { useRoleManager } from 'models/User/RolesManager';
 
 import {
+  fetchCurrentUserCollaboratorDataRequest,
   makeSelectCollaborationLoading,
   makeSelectCurrentEditor,
   makeSelectCurrentUserCollaboratorData,
   makeSelectHasCollaborators,
+  makeSelectInterventionLoader,
   makeSelectIsCurrentUserEditor,
   makeSelectIsCurrentUserInterventionOwner,
+  withFetchCurrentUserCollaboratorDataSaga,
 } from 'global/reducers/intervention';
 
 import { InterventionChannelContext } from 'utils/useInterventionChannel';
@@ -23,6 +27,8 @@ import Row from 'components/Row';
 import Text from 'components/Text';
 import { LabelPosition, Switch } from 'components/Switch';
 import { ModalType, useModal } from 'components/Modal';
+import Loader from 'components/Loader';
+import Box from 'components/Box';
 
 import messages from './messages';
 
@@ -30,6 +36,9 @@ export type Props = {};
 
 const CollaborationPanelComponent: React.FC<Props> = () => {
   const { formatMessage } = useIntl();
+  const dispatch = useDispatch();
+
+  useInjectSaga(withFetchCurrentUserCollaboratorDataSaga);
 
   const interventionChannel = useContext(InterventionChannelContext);
 
@@ -47,6 +56,9 @@ const CollaborationPanelComponent: React.FC<Props> = () => {
   const currentUserCollaboratorData: Nullable<CollaboratorData> = useSelector(
     makeSelectCurrentUserCollaboratorData(),
   );
+  const fetchCurrentUserCollaboratorDataLoading = useSelector(
+    makeSelectInterventionLoader('fetchCurrentUserCollaboratorData'),
+  );
 
   const { isAdmin } = useRoleManager();
 
@@ -55,6 +67,7 @@ const CollaborationPanelComponent: React.FC<Props> = () => {
     isCurrentUserInterventionOwner ||
     currentUserCollaboratorData?.edit ||
     isAdmin;
+  const interventionId = interventionChannel?.interventionId;
 
   const handleToggle = (editingEnabled: boolean) => {
     if (editingByOtherUser) {
@@ -84,6 +97,22 @@ const CollaborationPanelComponent: React.FC<Props> = () => {
       },
     });
 
+  useEffect(() => {
+    if (
+      !currentUserCollaboratorData &&
+      interventionId &&
+      hasCollaborators &&
+      !isCurrentUserInterventionOwner
+    ) {
+      dispatch(fetchCurrentUserCollaboratorDataRequest(interventionId));
+    }
+  }, [
+    interventionId,
+    hasCollaborators,
+    isCurrentUserInterventionOwner,
+    currentUserCollaboratorData,
+  ]);
+
   if (!hasCollaborators) return null;
 
   return (
@@ -101,40 +130,64 @@ const CollaborationPanelComponent: React.FC<Props> = () => {
         }`}
         px={48}
       >
-        <Text fontSize={15} lineHeight={1.5} flexShrink={0}>
-          {formatMessage(messages.currentMode, {
-            editing: isCurrentUserEditor,
-          })}
-        </Text>
-        {canEdit && (
-          <Row flexShrink={0} align="center">
-            <Switch
-              id="enable-intervention-editing"
-              checked={isCurrentUserEditor}
-              onToggle={handleToggle}
-              labelPosition={LabelPosition.Right}
-              labelOffset={8}
-              loading={isLoading}
-              disabled={editingByOtherUser && !isCurrentUserInterventionOwner}
-            >
-              <Text fontSize={15} lineHeight={1.5}>
-                {formatMessage(messages.enableEditing)}
+        {fetchCurrentUserCollaboratorDataLoading && (
+          <>
+            <Box>
+              <Loader type="inline" size={40} />
+            </Box>
+            <Box>
+              <Text
+                fontSize={15}
+                lineHeight={1.5}
+                textOverflow="ellipsis"
+                overflow="hidden"
+                whiteSpace="nowrap"
+              >
+                {formatMessage(messages.loadingPermissions)}
               </Text>
-            </Switch>
-          </Row>
+            </Box>
+          </>
         )}
-        {editingByOtherUser && (
-          <Text
-            fontSize={15}
-            lineHeight={1.5}
-            textOverflow="ellipsis"
-            overflow="hidden"
-            whiteSpace="nowrap"
-          >
-            {formatMessage(messages.editedByOtherUser, {
-              ...currentEditor,
-            })}
-          </Text>
+        {!fetchCurrentUserCollaboratorDataLoading && (
+          <>
+            <Text fontSize={15} lineHeight={1.5} flexShrink={0}>
+              {formatMessage(messages.currentMode, {
+                editing: isCurrentUserEditor,
+              })}
+            </Text>
+            {canEdit && (
+              <Row flexShrink={0} align="center">
+                <Switch
+                  id="enable-intervention-editing"
+                  checked={isCurrentUserEditor}
+                  onToggle={handleToggle}
+                  labelPosition={LabelPosition.Right}
+                  labelOffset={8}
+                  loading={isLoading}
+                  disabled={
+                    editingByOtherUser && !isCurrentUserInterventionOwner
+                  }
+                >
+                  <Text fontSize={15} lineHeight={1.5}>
+                    {formatMessage(messages.enableEditing)}
+                  </Text>
+                </Switch>
+              </Row>
+            )}
+            {editingByOtherUser && (
+              <Text
+                fontSize={15}
+                lineHeight={1.5}
+                textOverflow="ellipsis"
+                overflow="hidden"
+                whiteSpace="nowrap"
+              >
+                {formatMessage(messages.editedByOtherUser, {
+                  ...currentEditor,
+                })}
+              </Text>
+            )}
+          </>
         )}
       </Row>
       <ForceEditModal />
