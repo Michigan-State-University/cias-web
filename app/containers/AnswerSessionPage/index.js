@@ -449,7 +449,16 @@ export function AnswerSessionPage({
       currentQuestion.loading || nextQuestionLoading || answer?.loading;
     const skipQuestionButtonDisabled = continueButtonLoading;
 
+    const isNumericQuestion = currentQuestion.type === QuestionTypes.NUMBER;
+
     const isAnswered = () => {
+      if (
+        !required &&
+        isNumericQuestion &&
+        (!answer || !Array.isArray(answerBody) || !answerBody.length)
+      )
+        return true;
+
       if (!answer) {
         return false;
       }
@@ -479,8 +488,7 @@ export function AnswerSessionPage({
     };
 
     const isButtonDisabled = () =>
-      (required || currentQuestion.type === QuestionTypes.NUMBER) &&
-      !isAnswered();
+      (required || isNumericQuestion) && !isAnswered();
 
     const sharedProps = {
       selectAnswer: selectAnswerProp,
