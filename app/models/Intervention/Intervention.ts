@@ -36,26 +36,33 @@ type UserWithAccess = {
   loading?: boolean;
 };
 
-export interface Intervention {
+export interface SimpleIntervention {
   createdAt: string;
+  hasCollaborators: boolean;
+  currentEditor: Nullable<Editor>;
+  currentUserCollaboratorData: Nullable<CollaboratorData>;
+  isCurrentUserCollaborator: boolean;
+  id: string;
+  googleLanguageId: number;
+  name: string;
+  organizationId: Nullable<string>;
+  sessionsSize: number;
+  updatedAt: string;
+  userId: string;
+  status: InterventionStatus;
+}
+
+export interface Intervention extends SimpleIntervention {
   csvGeneratedAt: Nullable<string>;
   csvFilename: Nullable<string>;
-  googleLanguageId: number;
   hasCatSessions: boolean;
-  id: string;
   imageAlt: Nullable<string>;
   languageCode: string;
   languageName: string;
   logoUrl: Nullable<string>;
-  name: string;
-  organizationId: Nullable<string>;
   publishedAt: Nullable<string>;
-  sessionsSize: number;
   sharedTo: InterventionSharedTo;
-  status: InterventionStatus;
-  updatedAt: string;
   user: { id: string; firstName: string; email: string; lastName: string };
-  userId: string;
   firstSessionLanguage?: string;
   catMhApplicationId: string;
   catMhOrganizationId: number;
@@ -76,8 +83,4 @@ export interface Intervention {
   conversationsTranscriptGeneratedAt: Nullable<string>;
   conversationsTranscriptFilename: Nullable<string>;
   sessions: Session[];
-  hasCollaborators: boolean;
-  currentEditor: Nullable<Editor>;
-  currentUserCollaboratorData: Nullable<CollaboratorData>;
-  isCurrentUserCollaborator: boolean;
 }
