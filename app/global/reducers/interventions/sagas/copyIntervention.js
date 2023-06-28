@@ -1,8 +1,10 @@
 import axios from 'axios';
-import { takeLatest, call } from 'redux-saga/effects';
+import { takeLatest, call, put } from 'redux-saga/effects';
 import { toast } from 'react-toastify';
 
 import { formatMessage } from 'utils/intlOutsideReact';
+
+import { setUsersItemsState, UserItemState } from 'global/reducers/userList';
 
 import messages from '../messages';
 import {
@@ -11,32 +13,44 @@ import {
   COPY_INTERVENTION_SUCCESS,
 } from '../constants';
 
-export function* copyIntervention({ payload: { interventionId, users } }) {
+export function* copyIntervention({
+  payload: { interventionId, emails, ids },
+}) {
   const requestURL = `v1/interventions/${interventionId}/clone`;
   let params;
-  if (users) params = { intervention: { user_ids: users } };
+  if (emails) params = { intervention: { emails } };
+
+  if (ids) {
+    yield put(setUsersItemsState(ids, UserItemState.LOADING));
+  }
   try {
     yield call(axios.post, requestURL, params);
 
-    const successMessage = users
+    const successMessage = emails
       ? messages.copySuccess
       : messages.duplicateSuccess;
 
-    yield call(
-      toast.info,
-      formatMessage(successMessage, {
-        userCount: users?.length,
-      }),
-      {
-        toastId: `${COPY_INTERVENTION_SUCCESS}_${Boolean(users)}`,
-      },
-    );
+    if (ids) {
+      yield put(setUsersItemsState(ids, UserItemState.SUCCESS));
+    } else {
+      yield call(
+        toast.info,
+        formatMessage(successMessage, {
+          userCount: emails?.length,
+        }),
+        {
+          toastId: `${COPY_INTERVENTION_SUCCESS}_${Boolean(emails)}`,
+        },
+      );
+    }
   } catch (error) {
-    const errorMessage = users ? messages.copyError : messages.duplicateError;
-
+    const errorMessage = emails ? messages.copyError : messages.duplicateError;
     yield call(toast.error, formatMessage(errorMessage), {
-      toastId: `${COPY_INTERVENTION_ERROR}_${Boolean(users)}`,
+      toastId: `${COPY_INTERVENTION_ERROR}_${Boolean(emails)}`,
     });
+    if (ids) {
+      yield put(setUsersItemsState(ids, UserItemState.IDLE));
+    }
   }
 }
 

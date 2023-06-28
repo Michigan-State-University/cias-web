@@ -128,9 +128,10 @@ type Props = {
     groupId: string,
   ) => void;
   shareGroupsExternally: (
-    researchers: string[],
+    emails: string[],
     questionIds: string[],
     sessionId: string,
+    ids?: string[],
   ) => void;
   groupQuestions: (questionIds: string[], sessionId: string) => void;
   deleteQuestions: (
@@ -428,8 +429,8 @@ const EditClassicSessionPage = ({
     <GroupActionButton active={active} {...action} key={index} />
   );
 
-  const sendSlidesToResearchers = (researchers: string[]) =>
-    shareGroupsExternally(researchers, selectedSlides, sessionId);
+  const sendSlidesToResearchers = (emails: string[], ids?: string[]) =>
+    shareGroupsExternally(emails, selectedSlides, sessionId, ids);
 
   const onDuplicateGroupsInternally = (target: Session) =>
     duplicateGroupsInternally(selectedSlides, target.id);
@@ -493,10 +494,13 @@ const EditClassicSessionPage = ({
         title={formatMessage(messages.modalTitle)}
         onClose={() => setModalVisible(false)}
         visible={modalVisible}
+        width={800}
+        maxWidth={800}
+        // todo create component
       >
         <SelectResearchers
-          onClose={() => setModalVisible(false)}
           onResearchersSelected={sendSlidesToResearchers}
+          actionName={formatMessage(messages.share)}
         />
       </Modal>
       <CopyModal

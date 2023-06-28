@@ -54,6 +54,10 @@ export default defineMessages({
     id: `${scope}.shareExternally`,
     defaultMessage: 'Share externally',
   },
+  share: {
+    id: `${scope}.share`,
+    defaultMessage: 'Share',
+  },
   duplicateHere: {
     id: `${scope}.duplicateHere`,
     defaultMessage: 'Duplicate here',

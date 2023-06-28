@@ -343,11 +343,11 @@ export const editShortLinksSuccess = () =>
 export const editShortLinksError = (error) =>
   actionBuilder(EDIT_SHORT_LINKS_ERROR, { error });
 
-export const addCollaboratorsRequest = (emails, interventionId, id) =>
+export const addCollaboratorsRequest = (emails, interventionId, ids) =>
   actionBuilder(ADD_COLLABORATORS_REQUEST, {
     emails,
     interventionId,
-    id,
+    ids,
   });
 export const addCollaboratorsSuccess = (collaborators) =>
   actionBuilder(ADD_COLLABORATORS_SUCCESS, { collaborators });

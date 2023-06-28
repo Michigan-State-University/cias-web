@@ -1,37 +1,33 @@
 import React from 'react';
-import { useDispatch } from 'react-redux';
 import { useIntl } from 'react-intl';
 
 import { colors, themeColors } from 'theme';
 
-import { User } from 'models/User';
-
-import { addCollaboratorsRequest } from 'global/reducers/intervention';
-
 import InviteIcon from 'assets/svg/invite.svg';
+import CheckGreenIcon from 'assets/svg/check-green.svg';
+
+import { UserItemState, UserWithState } from 'global/reducers/userList';
 
 import { StripedTR } from 'components/Table';
-import { ImageButton } from 'components/Button';
 import Row from 'components/Row';
 import { EllipsisText } from 'components/Text';
+import { ImageButton } from 'components/Button';
 
 import messages from './messages';
 import { StyledTD } from './styled';
 
 type Props = {
-  researcher: User & { loading: boolean };
-  interventionId: string;
+  researcher: UserWithState;
+  onSelected: () => void;
+  actionName: string;
 };
 
 const ResearcherRow = ({
-  researcher: { fullName, email, id, loading },
-  interventionId,
+  researcher: { fullName, email, state },
+  onSelected,
+  actionName,
 }: Props) => {
-  const dispatch = useDispatch();
   const { formatMessage } = useIntl();
-
-  const inviteCollaborator = () =>
-    dispatch(addCollaboratorsRequest([email], interventionId, id));
 
   const trimmedFullName = fullName.trim();
 
@@ -54,13 +50,23 @@ const ResearcherRow = ({
       </StyledTD>
       <StyledTD pl={8}>
         <Row>
-          <ImageButton
-            src={InviteIcon}
-            onClick={inviteCollaborator}
-            title={formatMessage(messages.inviteResearcher)}
-            loading={loading}
-            spinnerProps={{ margin: 'initial', color: colors.black }}
-          />
+          {(!state ||
+            state === UserItemState.IDLE ||
+            state === UserItemState.LOADING) && (
+            <ImageButton
+              src={InviteIcon}
+              onClick={onSelected}
+              title={actionName}
+              loading={state === UserItemState.LOADING}
+              spinnerProps={{ margin: 'initial', color: colors.black }}
+            />
+          )}
+          {state === UserItemState.SUCCESS && (
+            <ImageButton
+              src={CheckGreenIcon}
+              title={formatMessage(messages.success)}
+            />
+          )}
         </Row>
       </StyledTD>
     </StripedTR>

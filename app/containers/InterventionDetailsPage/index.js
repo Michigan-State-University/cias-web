@@ -205,8 +205,7 @@ export function InterventionDetailsPage({
     setAssignOrganizationModalVisible(true);
   const closeCollaborateModal = () => setCollaborateModalVisible(false);
   const openCollaborateModal = () => setCollaborateModalVisible(true);
-  const handleCopyIntervention = () =>
-    copyIntervention({ interventionId: id, withoutRedirect: true });
+  const handleCopyIntervention = () => copyIntervention({ interventionId: id });
   const handleArchiveIntervention = () =>
     editIntervention({
       status: archived,
@@ -384,8 +383,8 @@ export function InterventionDetailsPage({
     });
   };
 
-  const copyInterventionToResearchers = (users) =>
-    copyIntervention({ interventionId, users, withoutRedirect: true });
+  const copyInterventionToResearchers = (emails, ids) =>
+    copyIntervention({ interventionId, emails, ids });
 
   const onDragEnd = (result) => {
     const { source, destination } = result;
@@ -493,10 +492,12 @@ export function InterventionDetailsPage({
               title={formatMessage(messages.sendCopyModalTitle)}
               onClose={closeSendCopyModal}
               visible={sendCopyModalVisible}
+              maxWidth={800}
+              width={800}
             >
               <SelectResearchers
                 onResearchersSelected={copyInterventionToResearchers}
-                onClose={closeSendCopyModal}
+                actionName={formatMessage(messages.share)}
               />
             </Modal>
 

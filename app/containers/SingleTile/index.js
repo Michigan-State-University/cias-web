@@ -156,8 +156,7 @@ const SingleTile = ({
 
   const handleExportIntervention = () => exportIntervention(id);
 
-  const handleClone = () =>
-    copyIntervention({ interventionId: id, withoutRedirect: true });
+  const handleClone = () => copyIntervention({ interventionId: id });
 
   // cannot make changes to intervention with collaborators because it would require
   // turning on edit mode first but that's impossible from the intervention list view
@@ -247,8 +246,8 @@ const SingleTile = ({
     e.preventDefault();
   };
 
-  const copyInterventionToResearchers = (users) =>
-    copyIntervention({ interventionId: id, users });
+  const copyInterventionToResearchers = (emails, ids) =>
+    copyIntervention({ interventionId: id, emails, ids });
 
   if (isLoading)
     return (
@@ -265,10 +264,13 @@ const SingleTile = ({
         title={formatMessage(messages.sendCopyModalTitle)}
         onClose={closeShareWithResearchersModal}
         visible={shareWithResearchersModalVisible}
+        maxWidth={800}
+        width={800}
+        // TODO extract hook
       >
         <SelectResearchers
-          onClose={closeShareWithResearchersModal}
           onResearchersSelected={copyInterventionToResearchers}
+          actionName={formatMessage(messages.share)}
         />
       </Modal>
       <Modal onClose={closeTranslateModal} visible={translateModalVisible}>
