@@ -2,7 +2,7 @@ import React from 'react';
 import { useDispatch } from 'react-redux';
 import { useIntl } from 'react-intl';
 
-import { colors } from 'theme';
+import { colors, themeColors } from 'theme';
 
 import { User } from 'models/User';
 
@@ -33,6 +33,8 @@ const ResearcherRow = ({
   const inviteCollaborator = () =>
     dispatch(addCollaboratorsRequest([email], interventionId, id));
 
+  const trimmedFullName = fullName.trim();
+
   return (
     <StripedTR
       height={53}
@@ -42,7 +44,10 @@ const ResearcherRow = ({
       mb={4}
     >
       <StyledTD padding={8}>
-        <EllipsisText text={fullName} />
+        <EllipsisText
+          text={trimmedFullName || formatMessage(messages.waitingForActivation)}
+          color={!trimmedFullName && themeColors.warning}
+        />
       </StyledTD>
       <StyledTD padding={8}>
         <EllipsisText text={email} />

@@ -63,4 +63,8 @@ export default defineMessages({
     id: `${scope}.doNotRemoveAccess`,
     defaultMessage: 'Do not remove access',
   },
+  waitingForActivation: {
+    id: `${scope}.waitingForActivation`,
+    defaultMessage: 'Waiting for activation',
+  },
 });
