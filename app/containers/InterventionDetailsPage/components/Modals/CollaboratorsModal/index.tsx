@@ -40,7 +40,7 @@ import Spinner from 'components/Spinner';
 import Box from 'components/Box';
 import messages from './messages';
 import SingleCollaboratorRow from './SingleCollaboratorRow';
-import { COLLABORATORS_MODAL_WIDTH } from './constants';
+import { COLLABORATORS_MODAL_WIDTH, TABLE_MAX_HEIGHT } from './constants';
 import ResearcherRow from './ResearcherRow';
 
 type Props = {
@@ -131,7 +131,7 @@ const CollaboratorsModal = ({
             </Box>
           )}
           {!researchersSelectorLoading && (
-            <Box overflow="auto" maxHeight={400}>
+            <Box overflow="auto" maxHeight={TABLE_MAX_HEIGHT}>
               <Table width="100%">
                 <THead>
                   <TR height={46}>
@@ -167,48 +167,50 @@ const CollaboratorsModal = ({
         </div>
         {/* @ts-ignore */}
         <div label={formatMessage(messages.currentCollaborators)}>
-          <Table width="100%">
-            <THead>
-              <TR height={46}>
-                <TH padding={8}>
-                  <Text textAlign="left" fontWeight="bold">
-                    <FormattedMessage {...messages.name} />
-                  </Text>
-                </TH>
-                <TH padding={8} width={25}>
-                  <Text textAlign="left" fontWeight="bold">
-                    <FormattedMessage {...messages.view} />
-                  </Text>
-                </TH>
-                <TH padding={8} width={25}>
-                  <Text textAlign="left" fontWeight="bold">
-                    <FormattedMessage {...messages.edit} />
-                  </Text>
-                </TH>
-                <TH padding={8} width={25}>
-                  <Text textAlign="left" fontWeight="bold">
-                    <FormattedMessage {...messages.dataAccess} />
-                  </Text>
-                </TH>
-                <TH width={15}></TH>
-              </TR>
-            </THead>
-            <TBody>
-              {collaboratorsLoading && <Spinner />}
-              {!collaboratorsLoading &&
-                collaborators.map((collaborator, index) => (
-                  <SingleCollaboratorRow
-                    key={collaborator.id}
-                    index={index}
-                    collaborator={collaborator}
-                    interventionId={interventionId}
-                    isCurrentUserInterventionOwner={
-                      isCurrentUserInterventionOwner
-                    }
-                  />
-                ))}
-            </TBody>
-          </Table>
+          <Box overflow="auto" maxHeight={TABLE_MAX_HEIGHT}>
+            <Table width="100%">
+              <THead>
+                <TR height={46}>
+                  <TH padding={8}>
+                    <Text textAlign="left" fontWeight="bold">
+                      <FormattedMessage {...messages.name} />
+                    </Text>
+                  </TH>
+                  <TH padding={8} width={25}>
+                    <Text textAlign="left" fontWeight="bold">
+                      <FormattedMessage {...messages.view} />
+                    </Text>
+                  </TH>
+                  <TH padding={8} width={25}>
+                    <Text textAlign="left" fontWeight="bold">
+                      <FormattedMessage {...messages.edit} />
+                    </Text>
+                  </TH>
+                  <TH padding={8} width={25}>
+                    <Text textAlign="left" fontWeight="bold">
+                      <FormattedMessage {...messages.dataAccess} />
+                    </Text>
+                  </TH>
+                  <TH width={15}></TH>
+                </TR>
+              </THead>
+              <TBody>
+                {collaboratorsLoading && <Spinner />}
+                {!collaboratorsLoading &&
+                  collaborators.map((collaborator, index) => (
+                    <SingleCollaboratorRow
+                      key={collaborator.id}
+                      index={index}
+                      collaborator={collaborator}
+                      interventionId={interventionId}
+                      isCurrentUserInterventionOwner={
+                        isCurrentUserInterventionOwner
+                      }
+                    />
+                  ))}
+              </TBody>
+            </Table>
+          </Box>
         </div>
       </Tabs>
     </div>
