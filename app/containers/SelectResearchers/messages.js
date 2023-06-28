@@ -23,4 +23,8 @@ export default defineMessages({
     id: `${scope}.byEmail`,
     defaultMessage: 'by email',
   },
+  yourTeamMembers: {
+    id: `${scope}.yourTeamMembers`,
+    defaultMessage: 'Your team members',
+  },
 });

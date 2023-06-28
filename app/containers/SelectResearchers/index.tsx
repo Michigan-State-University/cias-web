@@ -17,7 +17,7 @@ import { useInjectReducer, useInjectSaga } from 'redux-injectors';
 
 import Search from 'assets/svg/search.svg';
 
-import { themeColors } from 'theme';
+import { colors, themeColors } from 'theme';
 
 import { ApiError } from 'models/Api';
 import { User } from 'models/User';
@@ -43,6 +43,7 @@ import {
   InputWithAdornment,
 } from 'components/Input/InputWithAdornment';
 import Spinner from 'components/Spinner';
+import Divider from 'components/Divider';
 
 import messages from './messages';
 import { TABLE_MAX_HEIGHT } from './constants';
@@ -124,6 +125,10 @@ const SelectResearchers: FC<Props> = ({
           {actionName}
         </Button>
       </Row>
+      <Row mt={16} mb={8}>
+        <Text fontSize={15}>{formatMessage(messages.yourTeamMembers)}</Text>
+      </Row>
+      <Divider color={colors.lightDivider} />
       {researchersSelectorLoading && (
         <Box mt={16}>
           <Spinner color={themeColors.secondary} />
