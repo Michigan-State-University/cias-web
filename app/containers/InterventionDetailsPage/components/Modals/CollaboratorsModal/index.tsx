@@ -131,36 +131,38 @@ const CollaboratorsModal = ({
             </Box>
           )}
           {!researchersSelectorLoading && (
-            <Table width="100%">
-              <THead>
-                <TR height={46}>
-                  <TH padding={8}>
-                    <Text textAlign="left" fontWeight="bold">
-                      <FormattedMessage {...messages.name} />
-                    </Text>
-                  </TH>
-                  <TH padding={8}>
-                    <Text textAlign="left" fontWeight="bold">
-                      <FormattedMessage {...messages.email} />
-                    </Text>
-                  </TH>
-                  <TH padding={8} width={40}>
-                    <Text textAlign="left" fontWeight="bold">
-                      <FormattedMessage {...messages.invite} />
-                    </Text>
-                  </TH>
-                </TR>
-              </THead>
-              <TBody>
-                {researchersNotCollaborators.map((researcher) => (
-                  <ResearcherRow
-                    key={researcher.id}
-                    researcher={researcher}
-                    interventionId={interventionId}
-                  />
-                ))}
-              </TBody>
-            </Table>
+            <Box overflow="auto" maxHeight={400}>
+              <Table width="100%">
+                <THead>
+                  <TR height={46}>
+                    <TH padding={8}>
+                      <Text textAlign="left" fontWeight="bold">
+                        <FormattedMessage {...messages.name} />
+                      </Text>
+                    </TH>
+                    <TH padding={8}>
+                      <Text textAlign="left" fontWeight="bold">
+                        <FormattedMessage {...messages.email} />
+                      </Text>
+                    </TH>
+                    <TH padding={8} width={40}>
+                      <Text textAlign="left" fontWeight="bold">
+                        <FormattedMessage {...messages.invite} />
+                      </Text>
+                    </TH>
+                  </TR>
+                </THead>
+                <TBody>
+                  {researchersNotCollaborators.map((researcher) => (
+                    <ResearcherRow
+                      key={researcher.id}
+                      researcher={researcher}
+                      interventionId={interventionId}
+                    />
+                  ))}
+                </TBody>
+              </Table>
+            </Box>
           )}
         </div>
         {/* @ts-ignore */}
