@@ -53,10 +53,6 @@ export default defineMessages({
     id: `${scope}.assignOrganization`,
     defaultMessage: 'Assign Organization',
   },
-  sendCopyModalTitle: {
-    id: `${scope}.sendCopyModalTitle`,
-    defaultMessage: 'Choose researchers to send',
-  },
   isFromOrganization: {
     id: `${scope}.isFromOrganization`,
     defaultMessage: 'Reporting',

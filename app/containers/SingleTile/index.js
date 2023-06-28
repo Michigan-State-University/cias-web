@@ -52,7 +52,6 @@ import {
   InterventionAssignOrganizationModal,
   INTERVENTION_ASSIGN_ORGANIZATION_MODAL_WIDTH,
 } from 'containers/InterventionDetailsPage/components/Modals';
-import SelectResearchers from 'containers/SelectResearchers';
 
 import EllipsisText from 'components/Text/EllipsisText';
 import Text from 'components/Text';
@@ -65,6 +64,7 @@ import Loader from 'components/Loader';
 
 import TranslateInterventionModal from 'containers/TranslateInterventionModal';
 import interventionDetailsPageSagas from 'containers/InterventionDetailsPage/saga';
+import { useShareExternallyModal } from 'containers/ShareExternallyModal';
 
 import InterventionDetails from './InterventionDetails';
 import messages from './messages';
@@ -89,21 +89,11 @@ const SingleTile = ({
   exportIntervention,
   userOrganizableId,
 }) => {
-  const [
-    shareWithResearchersModalVisible,
-    setShareWithResearchersModalVisible,
-  ] = useState(false);
-
   const [assignOrganizationModalVisible, setAssignOrganizationModalVisible] =
     useState(false);
 
   const [translateModalVisible, setTranslateModalVisible] = useState(false);
   const [collaborateModalVisible, setCollaborateModalVisible] = useState(false);
-
-  const closeShareWithResearchersModal = () =>
-    setShareWithResearchersModalVisible(false);
-  const openShareWithResearchersModal = () =>
-    setShareWithResearchersModalVisible(true);
 
   const closeAssignOrganizationModal = () =>
     setAssignOrganizationModalVisible(false);
@@ -132,6 +122,11 @@ const SingleTile = ({
       title: formatMessage(messages.catMhSettingsModalTitle),
     },
   });
+
+  const shareExternally = (emails, ids) =>
+    copyIntervention({ interventionId: id, emails, ids });
+  const { Modal: ShareExternallyModal, openModal: openShareExternallyModal } =
+    useShareExternallyModal(shareExternally);
 
   const {
     isAdmin,
@@ -182,7 +177,7 @@ const SingleTile = ({
     },
     {
       icon: FileShareIcon,
-      action: openShareWithResearchersModal,
+      action: openShareExternallyModal,
       label: formatMessage(messages.shareExternally),
       id: 'share externally',
     },
@@ -246,9 +241,6 @@ const SingleTile = ({
     e.preventDefault();
   };
 
-  const copyInterventionToResearchers = (emails, ids) =>
-    copyIntervention({ interventionId: id, emails, ids });
-
   if (isLoading)
     return (
       <TileContainer>
@@ -260,19 +252,7 @@ const SingleTile = ({
     <>
       <CatMhModal />
       <ArchiveModal />
-      <Modal
-        title={formatMessage(messages.sendCopyModalTitle)}
-        onClose={closeShareWithResearchersModal}
-        visible={shareWithResearchersModalVisible}
-        maxWidth={800}
-        width={800}
-        // TODO extract hook
-      >
-        <SelectResearchers
-          onResearchersSelected={copyInterventionToResearchers}
-          actionName={formatMessage(messages.share)}
-        />
-      </Modal>
+      <ShareExternallyModal />
       <Modal onClose={closeTranslateModal} visible={translateModalVisible}>
         <TranslateInterventionModal
           id={id}

@@ -26,9 +26,14 @@ import mapValues from 'lodash/mapValues';
 import flow from 'lodash/flow';
 import intersection from 'lodash/intersection';
 
+import { reorderScope } from 'models/Session/ReorderScope';
+import { ClassicSession, Session } from 'models/Session';
+import { QuestionDTO, QuestionTypes } from 'models/Question';
+import { QuestionGroup, GroupType } from 'models/QuestionGroup';
+import { questionType } from 'models/Session/QuestionTypes';
+
 import { RoutePath } from 'global/constants';
 
-import SelectResearchers from 'containers/SelectResearchers';
 import Box from 'components/Box';
 import Column from 'components/Column';
 import Loader from 'components/Loader';
@@ -37,11 +42,13 @@ import Row from 'components/Row';
 import Img from 'components/Img';
 import ActionIcon from 'components/ActionIcon';
 import Text from 'components/Text';
-import Modal from 'components/Modal';
 import TextButton from 'components/Button/TextButton';
 import H2 from 'components/H2';
 import CopyModal from 'components/CopyModal';
 import { VIEWS } from 'components/CopyModal/Components';
+
+import GroupActionButton from 'containers/Sessions/components/GroupActionButton';
+import { useShareExternallyModal } from 'containers/ShareExternallyModal';
 
 import menu from 'assets/svg/triangle-back-black.svg';
 import cog from 'assets/svg/gear-selected.svg';
@@ -92,13 +99,6 @@ import {
 import { JumpToScreenLocationState } from 'global/types/locationState';
 import { makeSelectNavbarHeight } from 'global/reducers/globalState';
 
-import GroupActionButton from 'containers/Sessions/components/GroupActionButton';
-import { reorderScope } from 'models/Session/ReorderScope';
-import { ClassicSession, Session } from 'models/Session';
-
-import { QuestionDTO, QuestionTypes } from 'models/Question';
-import { QuestionGroup, GroupType } from 'models/QuestionGroup';
-import { questionType } from 'models/Session/QuestionTypes';
 import QuestionDetails from '../../components/QuestionDetails';
 import QuestionSettings from '../../components/QuestionSettings';
 import QuestionTypeChooser from '../../components/QuestionTypeChooser';
@@ -201,7 +201,6 @@ const EditClassicSessionPage = ({
   const [manage, setManage] = useState(false);
   const [selectedSlides, setSelectedSlides] = useState<string[]>([]);
   const [showList, setShowList] = useState(false);
-  const [modalVisible, setModalVisible] = useState(false);
   const [duplicateModalVisible, setDuplicateModalVisible] = useState(false);
   const [isDuringQuestionReorder, setIsDuringQuestionReorder] = useState(false);
   const openedGroups = useRef<string[]>([]);
@@ -277,6 +276,11 @@ const EditClassicSessionPage = ({
     ({ id }) => currentQuestion && id === currentQuestion.question_group_id,
   )!;
 
+  const shareExternally = (emails: string[], ids?: string[]) =>
+    shareGroupsExternally(emails, selectedSlides, sessionId, ids);
+  const { Modal: ShareExternallyModal, openModal: openShareExternallyModal } =
+    useShareExternallyModal(shareExternally);
+
   const groupActions = [
     {
       label: <FormattedMessage {...messages.duplicateHere} />,
@@ -299,7 +303,7 @@ const EditClassicSessionPage = ({
       label: <FormattedMessage {...messages.shareCopy} />,
       inactiveIcon: share,
       activeIcon: shareActive,
-      action: () => setModalVisible(true),
+      action: openShareExternallyModal,
     },
     {
       label: <FormattedMessage {...messages.group} />,
@@ -429,9 +433,6 @@ const EditClassicSessionPage = ({
     <GroupActionButton active={active} {...action} key={index} />
   );
 
-  const sendSlidesToResearchers = (emails: string[], ids?: string[]) =>
-    shareGroupsExternally(emails, selectedSlides, sessionId, ids);
-
   const onDuplicateGroupsInternally = (target: Session) =>
     duplicateGroupsInternally(selectedSlides, target.id);
 
@@ -489,20 +490,7 @@ const EditClassicSessionPage = ({
           {formatMessage(messages.pageTitle, { name: sessionName })}
         </title>
       </Helmet>
-      {/* @ts-ignore */}
-      <Modal
-        title={formatMessage(messages.modalTitle)}
-        onClose={() => setModalVisible(false)}
-        visible={modalVisible}
-        width={800}
-        maxWidth={800}
-        // todo create component
-      >
-        <SelectResearchers
-          onResearchersSelected={sendSlidesToResearchers}
-          actionName={formatMessage(messages.share)}
-        />
-      </Modal>
+      <ShareExternallyModal />
       <CopyModal
         visible={duplicateModalVisible}
         onClose={() => setDuplicateModalVisible(false)}

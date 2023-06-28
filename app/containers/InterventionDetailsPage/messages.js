@@ -66,10 +66,6 @@ export default defineMessages({
     id: `${scope}.archive`,
     defaultMessage: 'Archive',
   },
-  sendCopyModalTitle: {
-    id: `${scope}.sendCopyModalTitle`,
-    defaultMessage: 'Choose researchers to send',
-  },
   participantShareModalTitle: {
     id: `${scope}.participantShareModalTitle`,
     defaultMessage: 'Send an email with the invitation',
