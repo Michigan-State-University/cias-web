@@ -30,11 +30,13 @@ import { COLLABORATORS_MODAL_WIDTH, TABLE_MAX_HEIGHT } from './constants';
 type Props = {
   interventionId: string;
   isCurrentUserInterventionOwner: boolean;
+  interventionOwnerId: string;
 };
 
 const CollaboratorsModal = ({
   interventionId,
   isCurrentUserInterventionOwner,
+  interventionOwnerId,
 }: Props) => {
   const { formatMessage } = useIntl();
   const dispatch = useDispatch();
@@ -54,9 +56,9 @@ const CollaboratorsModal = ({
     dispatch(fetchCollaboratorsRequest(interventionId));
   }, []);
 
-  const currentCollaboratorsIds = useMemo(
-    () => collaborators.map(({ user: { id } }) => id),
-    [collaborators],
+  const excludedUserIds = useMemo(
+    () => [...collaborators.map(({ user: { id } }) => id), interventionOwnerId],
+    [collaborators, interventionOwnerId],
   );
 
   const handleResearchersSelected = (emails: string[], ids?: string[]) =>
@@ -70,7 +72,7 @@ const CollaboratorsModal = ({
         <div label={formatMessage(messages.inviteUsers)}>
           <SelectResearchers
             onResearchersSelected={handleResearchersSelected}
-            excludedUserIds={currentCollaboratorsIds}
+            excludedUserIds={excludedUserIds}
             actionName={formatMessage(messages.invite)}
           />
         </div>

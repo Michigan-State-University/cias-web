@@ -169,6 +169,7 @@ export function InterventionDetailsPage({
     createdCatMhSessionCount,
     licenseType,
     type,
+    userId,
   } = intervention || {};
 
   const testsLeft = catMhPool - createdCatMhSessionCount;
@@ -547,6 +548,7 @@ export function InterventionDetailsPage({
               <CollaboratorsModal
                 interventionId={interventionId}
                 isCurrentUserInterventionOwner={isCurrentUserInterventionOwner}
+                interventionOwnerId={userId}
               />
             </Modal>
 
