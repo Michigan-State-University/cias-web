@@ -288,6 +288,7 @@ const SingleTile = ({
         <CollaboratorsModal
           interventionId={id}
           isCurrentUserInterventionOwner={isCurrentUserInterventionOwner}
+          interventionOwnerId={interventionOwnerId}
         />
       </Modal>
 
