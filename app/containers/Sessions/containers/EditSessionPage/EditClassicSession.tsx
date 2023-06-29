@@ -1,13 +1,13 @@
 import React, {
-  useEffect,
-  useState,
-  useRef,
-  useMemo,
-  useLayoutEffect,
   useCallback,
   useContext,
+  useEffect,
+  useLayoutEffect,
+  useMemo,
+  useRef,
+  useState,
 } from 'react';
-import { injectSaga, injectReducer } from 'redux-injectors';
+import { injectReducer, injectSaga } from 'redux-injectors';
 import {
   DragDropContext,
   DragStart,
@@ -29,7 +29,7 @@ import intersection from 'lodash/intersection';
 import { reorderScope } from 'models/Session/ReorderScope';
 import { ClassicSession, Session } from 'models/Session';
 import { QuestionDTO, QuestionTypes } from 'models/Question';
-import { QuestionGroup, GroupType } from 'models/QuestionGroup';
+import { GroupType, QuestionGroup } from 'models/QuestionGroup';
 import { questionType } from 'models/Session/QuestionTypes';
 
 import { RoutePath } from 'global/constants';
@@ -48,7 +48,10 @@ import CopyModal from 'components/CopyModal';
 import { VIEWS } from 'components/CopyModal/Components';
 
 import GroupActionButton from 'containers/Sessions/components/GroupActionButton';
-import { useShareExternallyModal } from 'containers/ShareExternallyModal';
+import {
+  ShareExternallyLevel,
+  useShareExternallyModal,
+} from 'containers/ShareExternallyModal';
 
 import menu from 'assets/svg/triangle-back-black.svg';
 import cog from 'assets/svg/gear-selected.svg';
@@ -70,31 +73,31 @@ import instantiateEmptyQuestion from 'utils/instantiateEmptyQuestion';
 import isNullOrUndefined from 'utils/isNullOrUndefined';
 
 import {
+  createQuestionGroupRequest,
   createQuestionRequest,
-  questionsReducer,
+  deleteQuestionsRequest,
   makeSelectQuestions,
   makeSelectSelectedQuestionId,
+  questionsReducer,
   reorderQuestionListRequest,
-  deleteQuestionsRequest,
   selectQuestion as selectQuestionAction,
-  createQuestionGroupRequest,
 } from 'global/reducers/questions';
 import {
-  reorderGroupListRequest,
-  reorderQuestionGroupsSaga,
+  changeGroupNameRequest,
   duplicateGroupsHereRequest,
   duplicateGroupsInternallyRequest,
-  groupQuestionsRequest,
-  shareGroupsExternallyRequest,
-  makeSelectQuestionGroups,
-  changeGroupNameRequest,
-  questionGroupsReducer,
   getQuestionGroupsRequest,
   getQuestionGroupsSaga,
+  groupQuestionsRequest,
+  makeSelectQuestionGroups,
+  questionGroupsReducer,
+  reorderGroupListRequest,
+  reorderQuestionGroupsSaga,
+  shareGroupsExternallyRequest,
 } from 'global/reducers/questionGroups';
 import {
-  copyModalReducer,
   allCopyModalSagas,
+  copyModalReducer,
 } from 'global/reducers/copyModalReducer';
 import { JumpToScreenLocationState } from 'global/types/locationState';
 import { makeSelectNavbarHeight } from 'global/reducers/globalState';
@@ -106,11 +109,11 @@ import QuestionTypeChooser from '../../components/QuestionTypeChooser';
 import messages from './messages';
 import { EditSessionPageContext, useLockEditSessionPageScroll } from './utils';
 import {
+  Grid,
   QuestionsRow,
   ShowListButton,
-  StyledQuestionTypeChooser,
   Spacer,
-  Grid,
+  StyledQuestionTypeChooser,
 } from './styled';
 import QuestionListGroup from '../QuestionListGroup';
 
@@ -279,7 +282,10 @@ const EditClassicSessionPage = ({
   const shareExternally = (emails: string[], ids?: string[]) =>
     shareGroupsExternally(emails, selectedSlides, sessionId, ids);
   const { Modal: ShareExternallyModal, openModal: openShareExternallyModal } =
-    useShareExternallyModal(shareExternally);
+    useShareExternallyModal(
+      shareExternally,
+      ShareExternallyLevel.QUESTION_GROUP,
+    );
 
   const groupActions = [
     {
