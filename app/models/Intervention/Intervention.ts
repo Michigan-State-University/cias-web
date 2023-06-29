@@ -47,6 +47,7 @@ export interface SimpleIntervention {
   updatedAt: string;
   userId: string;
   status: InterventionStatus;
+  user: { id: string; firstName: string; email: string; lastName: string };
 }
 
 export interface Intervention extends SimpleIntervention {
@@ -59,7 +60,6 @@ export interface Intervention extends SimpleIntervention {
   logoUrl: Nullable<string>;
   publishedAt: Nullable<string>;
   sharedTo: InterventionSharedTo;
-  user: { id: string; firstName: string; email: string; lastName: string };
   firstSessionLanguage?: string;
   catMhApplicationId: string;
   catMhOrganizationId: number;
