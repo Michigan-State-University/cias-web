@@ -86,7 +86,7 @@ const SelectResearchers: FC<Props> = ({
   );
 
   useLayoutEffect(() => {
-    dispatch(fetchResearchersRequest());
+    if (!researchersSelectorLoading) dispatch(fetchResearchersRequest());
   }, []);
 
   const [email, setEmail] = useState('');

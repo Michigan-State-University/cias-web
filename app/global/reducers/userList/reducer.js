@@ -46,7 +46,7 @@ export const initialState = {
   usersSelectorError: null,
   researchersSelectorError: null,
   usersSelectorLoading: true,
-  researchersSelectorLoading: true,
+  researchersSelectorLoading: false,
   usersError: null,
   usersLoading: true,
 };
