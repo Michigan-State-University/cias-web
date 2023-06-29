@@ -7,13 +7,13 @@ export default defineMessages({
     id: `${scope}.inviteUsers`,
     defaultMessage: 'Invite users',
   },
+  invite: {
+    id: `${scope}.invite`,
+    defaultMessage: 'Invite',
+  },
   currentCollaborators: {
     id: `${scope}.currentCollaborators`,
     defaultMessage: 'Current collaborators',
-  },
-  sendInvite: {
-    id: `${scope}.sendInvite`,
-    defaultMessage: 'Send invite',
   },
   name: {
     id: `${scope}.name`,
@@ -31,10 +31,6 @@ export default defineMessages({
     id: `${scope}.dataAccess`,
     defaultMessage: 'Data access',
   },
-  inviteByEmail: {
-    id: `${scope}.inviteByEmail`,
-    defaultMessage: 'Invite by email',
-  },
   areYouSure: {
     id: `${scope}.areYouSure`,
     defaultMessage: 'Are you sure?',
@@ -47,17 +43,9 @@ export default defineMessages({
     id: `${scope}.email`,
     defaultMessage: 'Email',
   },
-  invite: {
-    id: `${scope}.invite`,
-    defaultMessage: 'Invite',
-  },
   tooltipDescription: {
     id: `${scope}.tooltipDescription`,
     defaultMessage: 'Pending invitation',
-  },
-  inviteResearcher: {
-    id: `${scope}.inviteResearcher`,
-    defaultMessage: 'Invite researcher',
   },
   doNotRemoveAccess: {
     id: `${scope}.doNotRemoveAccess`,

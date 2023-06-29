@@ -83,6 +83,7 @@ import SettingsPanel from 'containers/SettingsPanel';
 import TranslateInterventionModal from 'containers/TranslateInterventionModal/index';
 import { ShareBox, ShareBoxType } from 'containers/ShareBox';
 import { CollaborationPanel } from 'containers/CollaborationPanel';
+import { useShareExternallyModal } from 'containers/ShareExternallyModal';
 
 import Modal, {
   ConfirmationModal,
@@ -111,7 +112,6 @@ import {
   InterventionSettingsModal,
   INTERVENTION_ASSIGN_ORGANIZATION_MODAL_WIDTH,
 } from './components/Modals';
-import SelectResearchers from '../SelectResearchers';
 import messages from './messages';
 import { InterventionDetailsPageContext, nextStatus } from './utils';
 import {
@@ -182,7 +182,6 @@ export function InterventionDetailsPage({
     canCurrentUserMakeChanges && canShareWithParticipants(status);
   const archivingPossible = canCurrentUserMakeChanges && canArchive(status);
 
-  const [sendCopyModalVisible, setSendCopyModalVisible] = useState(false);
   const [translateModalVisible, setTranslateModalVisible] = useState(false);
   const [participantShareModalVisible, setParticipantShareModalVisible] =
     useState(false);
@@ -194,9 +193,6 @@ export function InterventionDetailsPage({
     useState(false);
   const [collaborateModalVisible, setCollaborateModalVisible] = useState(false);
 
-  const closeSendCopyModal = () => setSendCopyModalVisible(false);
-  const openSendCopyModal = () => setSendCopyModalVisible(true);
-
   const closeTranslateModal = () => setTranslateModalVisible(false);
   const openTranslateModal = () => setTranslateModalVisible(true);
   const closeAssignOrganizationModal = () =>
@@ -205,8 +201,7 @@ export function InterventionDetailsPage({
     setAssignOrganizationModalVisible(true);
   const closeCollaborateModal = () => setCollaborateModalVisible(false);
   const openCollaborateModal = () => setCollaborateModalVisible(true);
-  const handleCopyIntervention = () =>
-    copyIntervention({ interventionId: id, withoutRedirect: true });
+  const handleCopyIntervention = () => copyIntervention({ interventionId: id });
   const handleArchiveIntervention = () =>
     editIntervention({
       status: archived,
@@ -250,6 +245,11 @@ export function InterventionDetailsPage({
     ),
   });
 
+  const shareExternally = (emails, ids) =>
+    copyIntervention({ interventionId, emails, ids });
+  const { Modal: ShareExternallyModal, openModal: openShareExternallyModal } =
+    useShareExternallyModal(shareExternally);
+
   const canCreateCatSession = useMemo(
     () => !isAccessRevoked,
     [isAccessRevoked],
@@ -271,7 +271,7 @@ export function InterventionDetailsPage({
       id: 'share externally',
       label: formatMessage(messages.shareExternally),
       icon: FileShareIcon,
-      action: openSendCopyModal,
+      action: openShareExternallyModal,
       color: colors.bluewood,
     },
     {
@@ -384,9 +384,6 @@ export function InterventionDetailsPage({
     });
   };
 
-  const copyInterventionToResearchers = (users) =>
-    copyIntervention({ interventionId, users, withoutRedirect: true });
-
   const onDragEnd = (result) => {
     const { source, destination } = result;
 
@@ -489,16 +486,7 @@ export function InterventionDetailsPage({
                 handleDeleteSession(deleteConfirmationSessionId)
               }
             />
-            <Modal
-              title={formatMessage(messages.sendCopyModalTitle)}
-              onClose={closeSendCopyModal}
-              visible={sendCopyModalVisible}
-            >
-              <SelectResearchers
-                onResearchersSelected={copyInterventionToResearchers}
-                onClose={closeSendCopyModal}
-              />
-            </Modal>
+            <ShareExternallyModal />
 
             <Modal
               onClose={closeTranslateModal}

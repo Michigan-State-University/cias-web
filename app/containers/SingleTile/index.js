@@ -52,7 +52,6 @@ import {
   InterventionAssignOrganizationModal,
   INTERVENTION_ASSIGN_ORGANIZATION_MODAL_WIDTH,
 } from 'containers/InterventionDetailsPage/components/Modals';
-import SelectResearchers from 'containers/SelectResearchers';
 
 import EllipsisText from 'components/Text/EllipsisText';
 import Text from 'components/Text';
@@ -65,6 +64,7 @@ import Loader from 'components/Loader';
 
 import TranslateInterventionModal from 'containers/TranslateInterventionModal';
 import interventionDetailsPageSagas from 'containers/InterventionDetailsPage/saga';
+import { useShareExternallyModal } from 'containers/ShareExternallyModal';
 
 import InterventionDetails from './InterventionDetails';
 import messages from './messages';
@@ -89,21 +89,11 @@ const SingleTile = ({
   exportIntervention,
   userOrganizableId,
 }) => {
-  const [
-    shareWithResearchersModalVisible,
-    setShareWithResearchersModalVisible,
-  ] = useState(false);
-
   const [assignOrganizationModalVisible, setAssignOrganizationModalVisible] =
     useState(false);
 
   const [translateModalVisible, setTranslateModalVisible] = useState(false);
   const [collaborateModalVisible, setCollaborateModalVisible] = useState(false);
-
-  const closeShareWithResearchersModal = () =>
-    setShareWithResearchersModalVisible(false);
-  const openShareWithResearchersModal = () =>
-    setShareWithResearchersModalVisible(true);
 
   const closeAssignOrganizationModal = () =>
     setAssignOrganizationModalVisible(false);
@@ -133,6 +123,11 @@ const SingleTile = ({
     },
   });
 
+  const shareExternally = (emails, ids) =>
+    copyIntervention({ interventionId: id, emails, ids });
+  const { Modal: ShareExternallyModal, openModal: openShareExternallyModal } =
+    useShareExternallyModal(shareExternally);
+
   const {
     isAdmin,
     canAssignOrganizationToIntervention: showAssignOrganizationOption,
@@ -156,8 +151,7 @@ const SingleTile = ({
 
   const handleExportIntervention = () => exportIntervention(id);
 
-  const handleClone = () =>
-    copyIntervention({ interventionId: id, withoutRedirect: true });
+  const handleClone = () => copyIntervention({ interventionId: id });
 
   // cannot make changes to intervention with collaborators because it would require
   // turning on edit mode first but that's impossible from the intervention list view
@@ -183,7 +177,7 @@ const SingleTile = ({
     },
     {
       icon: FileShareIcon,
-      action: openShareWithResearchersModal,
+      action: openShareExternallyModal,
       label: formatMessage(messages.shareExternally),
       id: 'share externally',
     },
@@ -247,9 +241,6 @@ const SingleTile = ({
     e.preventDefault();
   };
 
-  const copyInterventionToResearchers = (users) =>
-    copyIntervention({ interventionId: id, users });
-
   if (isLoading)
     return (
       <TileContainer>
@@ -261,16 +252,7 @@ const SingleTile = ({
     <>
       <CatMhModal />
       <ArchiveModal />
-      <Modal
-        title={formatMessage(messages.sendCopyModalTitle)}
-        onClose={closeShareWithResearchersModal}
-        visible={shareWithResearchersModalVisible}
-      >
-        <SelectResearchers
-          onClose={closeShareWithResearchersModal}
-          onResearchersSelected={copyInterventionToResearchers}
-        />
-      </Modal>
+      <ShareExternallyModal />
       <Modal onClose={closeTranslateModal} visible={translateModalVisible}>
         <TranslateInterventionModal
           id={id}

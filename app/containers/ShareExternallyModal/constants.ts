@@ -1,0 +1,1 @@
+export const SHARE_EXTERNALLY_MODAL_WIDTH = '800px';
