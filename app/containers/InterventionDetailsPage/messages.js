@@ -156,4 +156,9 @@ export default defineMessages({
     id: `${scope}.collaborate`,
     defaultMessage: 'Collaborate',
   },
+  collaborateDescription: {
+    id: `${scope}.collaborateDescription`,
+    defaultMessage:
+      'Use this feature to share your original intervention and indicate the desired access level for each collaborator.',
+  },
 });
