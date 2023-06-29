@@ -8,9 +8,11 @@ import SelectResearchers, {
 
 import messages from './messages';
 import { SHARE_EXTERNALLY_MODAL_WIDTH } from './constants';
+import { ShareExternallyLevel } from './types';
 
 export const useShareExternallyModal = (
   onResearchersSelected: SelectResearchersProps['onResearchersSelected'],
+  level: ShareExternallyLevel,
 ) => {
   const { formatMessage } = useIntl();
   return useModal({
@@ -23,6 +25,7 @@ export const useShareExternallyModal = (
     ),
     props: {
       title: formatMessage(messages.shareExternally),
+      description: formatMessage(messages[level]),
       width: SHARE_EXTERNALLY_MODAL_WIDTH,
       maxWidth: SHARE_EXTERNALLY_MODAL_WIDTH,
     },

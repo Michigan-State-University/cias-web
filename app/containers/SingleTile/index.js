@@ -64,7 +64,10 @@ import Loader from 'components/Loader';
 
 import TranslateInterventionModal from 'containers/TranslateInterventionModal';
 import interventionDetailsPageSagas from 'containers/InterventionDetailsPage/saga';
-import { useShareExternallyModal } from 'containers/ShareExternallyModal';
+import {
+  ShareExternallyLevel,
+  useShareExternallyModal,
+} from 'containers/ShareExternallyModal';
 
 import InterventionDetails from './InterventionDetails';
 import messages from './messages';
@@ -126,7 +129,7 @@ const SingleTile = ({
   const shareExternally = (emails, ids) =>
     copyIntervention({ interventionId: id, emails, ids });
   const { Modal: ShareExternallyModal, openModal: openShareExternallyModal } =
-    useShareExternallyModal(shareExternally);
+    useShareExternallyModal(shareExternally, ShareExternallyLevel.INTERVENTION);
 
   const {
     isAdmin,
@@ -276,6 +279,7 @@ const SingleTile = ({
 
       <Modal
         title={formatMessage(messages.collaborate)}
+        description={formatMessage(messages.collaborateDescription)}
         onClose={closeCollaborateModal}
         visible={collaborateModalVisible}
         width={COLLABORATORS_MODAL_WIDTH}

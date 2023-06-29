@@ -83,7 +83,10 @@ import SettingsPanel from 'containers/SettingsPanel';
 import TranslateInterventionModal from 'containers/TranslateInterventionModal/index';
 import { ShareBox, ShareBoxType } from 'containers/ShareBox';
 import { CollaborationPanel } from 'containers/CollaborationPanel';
-import { useShareExternallyModal } from 'containers/ShareExternallyModal';
+import {
+  ShareExternallyLevel,
+  useShareExternallyModal,
+} from 'containers/ShareExternallyModal';
 
 import Modal, {
   ConfirmationModal,
@@ -249,7 +252,7 @@ export function InterventionDetailsPage({
   const shareExternally = (emails, ids) =>
     copyIntervention({ interventionId, emails, ids });
   const { Modal: ShareExternallyModal, openModal: openShareExternallyModal } =
-    useShareExternallyModal(shareExternally);
+    useShareExternallyModal(shareExternally, ShareExternallyLevel.INTERVENTION);
 
   const canCreateCatSession = useMemo(
     () => !isAccessRevoked,
@@ -540,6 +543,7 @@ export function InterventionDetailsPage({
 
             <Modal
               title={formatMessage(messages.collaborate)}
+              description={formatMessage(messages.collaborateDescription)}
               onClose={closeCollaborateModal}
               visible={collaborateModalVisible}
               width={COLLABORATORS_MODAL_WIDTH}
