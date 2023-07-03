@@ -25,28 +25,31 @@ The CIAS platform has a variety of features to support a broad range of interven
 
 - Variety of **question types** to choose from
 - An **animated narrator** to act as a guide
+- The ability to speak out loud using high-quality text to speech
+- Optional quick exit feature for participant safety
 - Automatic **translation** into over 100 languages
 - **Tailored reports** for participants and clinicians
-- Custom **SMS messaging**
+- Custom and tailored **SMS messaging**
 - **Branching** and **Randomization**
+- Synchronous natural language reflections and summaries
 - **Scheduled** session sending
 - Custom **charts** for data visualisation
+- HIPAA and WCAG 2.0 compliant
 - Timeline Followback Method Assessment (**TLFB**)
-- **Live chat** for participants
+- Secure **Live chat** connecting participants with a peer, CHW, BHC, etc.
 - Integrations with 3rd party systems:
   - **CAT-MH<sup>TM</sup>**
-  - **Henry Ford Hospital** by Epic on FIHR (incoming)
+  - Epic on FIHR (forthcoming)
 
-For more information about CIAS 3.0 features please see https://www.cias.app/resources.
+For more information about CIAS 3.0 features please see https://www.cias.app.
 
 ## Full Version Available for Free*
 
-Our goal is for cost to never be a barrier. All features are available for non-commercial use by researchers at
-universities or non-profit research institutions
+Our goal is for cost to never be a barrier. This code is available to anyone at no cost. Further, Michigan State University currently provides an instance of CIAS 3.0 that is available at low or no cost for non-commercial use by researchers at universities or non-profit research institutions. Immediate access is always provided without charge and without paperwork, and CIAS remains free for unfunded projects. (edited) 
 
 *A small annual fee will be requested for funded projects.
 
-### For more information, or to request access please see https://www.cias.app/ or contact [CIAS@msu.edu](cias@msu.edu)
+### For more information, or to request access to the MSU instance of CIAS, please see https://www.cias.app/ or contact [CIAS@msu.edu](cias@msu.edu)
 
 ## Install & Start
 
