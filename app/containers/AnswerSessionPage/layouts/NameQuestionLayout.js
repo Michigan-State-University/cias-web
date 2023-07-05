@@ -24,6 +24,7 @@ const NameQuestionLayout = ({
   isDesktop,
   isAnimationOngoing,
   phoneticPreviewParams,
+  showNameHelp,
 }) => {
   const { name, phoneticName } =
     answerBody && answerBody.value ? answerBody.value : {};
@@ -45,8 +46,9 @@ const NameQuestionLayout = ({
         <GridCol sm={12} md={mdColSize}>
           <HelpIconTooltip
             id="name-quesiton-help"
-            tooltipContent={formatMessage(messages.nameHelp)}
-            hide={!disabled}
+            tooltipContent={
+              showNameHelp ? formatMessage(messages.nameHelp) : null
+            }
           >
             <Text id={NAME_QUESTION_NAME_ID}>
               {formatMessage(messages.enterName)}
@@ -101,6 +103,7 @@ NameQuestionLayout.propTypes = {
   isAnimationOngoing: PropTypes.bool,
   phoneticPreviewParams: PropTypes.object,
   isDesktop: PropTypes.bool,
+  showNameHelp: PropTypes.bool,
 };
 
 export default NameQuestionLayout;

@@ -87,7 +87,6 @@ const SettingsOption = ({
             <HelpIconTooltip
               id={`question-settings-option-tooltip-${index}`}
               tooltipContent={tooltipText}
-              hide={!tooltipText}
             >
               <H3>{formatMessage(messages[`${index}`])}</H3>
             </HelpIconTooltip>

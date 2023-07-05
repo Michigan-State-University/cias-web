@@ -122,7 +122,6 @@ export const FileUpload = ({
         <HelpIconTooltip
           id="file-upload-tooltip"
           tooltipContent={tooltipContent}
-          hide={!tooltipContent}
         >
           {label && (
             <Text fontSize={13} lineHeight={1}>

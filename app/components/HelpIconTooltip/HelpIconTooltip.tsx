@@ -8,19 +8,17 @@ import { Tooltip } from 'components/Tooltip';
 
 export type Props = {
   id: string;
-  hide?: boolean;
   tooltipContent: ReactNode;
 };
 
 export const HelpIconTooltip: FC<Props> = ({
   children,
   id,
-  hide,
   tooltipContent,
 }) => (
   <Row align="center" gap={8}>
     {children}
-    {!hide && tooltipContent && (
+    {tooltipContent && (
       <Tooltip
         id={id}
         content={
