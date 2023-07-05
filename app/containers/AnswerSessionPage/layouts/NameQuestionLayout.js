@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { Container, Row, Col } from 'react-grid-system';
+import { Container, Row as GridRow, Col as GridCol } from 'react-grid-system';
 
 import { themeColors } from 'theme';
 
@@ -8,6 +8,7 @@ import ApprovableInput from 'components/Input/ApprovableInput';
 import TextVoicePreviewInput from 'components/Input/TextVoicePreviewInput';
 import Box from 'components/Box';
 import Text from 'components/Text';
+import { HelpIconTooltip } from 'components/HelpIconTooltip';
 
 import messages from './messages';
 import {
@@ -40,11 +41,17 @@ const NameQuestionLayout = ({
 
   return (
     <Container fluid>
-      <Row>
-        <Col sm={12} md={mdColSize}>
-          <Text id={NAME_QUESTION_NAME_ID}>
-            {formatMessage(messages.enterName)}
-          </Text>
+      <GridRow>
+        <GridCol sm={12} md={mdColSize}>
+          <HelpIconTooltip
+            id="name-quesiton-help"
+            tooltipContent={formatMessage(messages.nameHelp)}
+            hide={!disabled}
+          >
+            <Text id={NAME_QUESTION_NAME_ID}>
+              {formatMessage(messages.enterName)}
+            </Text>
+          </HelpIconTooltip>
 
           <Box
             bg={themeColors.highlight}
@@ -64,8 +71,8 @@ const NameQuestionLayout = ({
               aria-labelledby={NAME_QUESTION_NAME_ID}
             />
           </Box>
-        </Col>
-        <Col sm={12} md={mdColSize}>
+        </GridCol>
+        <GridCol sm={12} md={mdColSize}>
           <Text id={NAME_QUESTION_SPELL_NAME_ID}>
             {formatMessage(messages.enterNamePhonetically)}
           </Text>
@@ -80,8 +87,8 @@ const NameQuestionLayout = ({
             disabled={disabled}
             aria-labelledby={NAME_QUESTION_SPELL_NAME_ID}
           />
-        </Col>
-      </Row>
+        </GridCol>
+      </GridRow>
     </Container>
   );
 };
