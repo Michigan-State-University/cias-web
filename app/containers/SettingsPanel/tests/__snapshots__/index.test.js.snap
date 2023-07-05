@@ -987,33 +987,33 @@ exports[`<SettingsPanel /> Should render and match the snapshot 1`] = `
                 <div
                   class="c1 c27"
                 >
-                  <p
-                    class="c28"
-                    font-size="15"
-                    font-weight="regular"
+                  <div
+                    class="c31"
                   >
-                    <div
-                      class="c31"
+                    <p
+                      class="c28"
+                      font-size="15"
+                      font-weight="regular"
                     >
                       Any registered participant
+                    </p>
+                    <div
+                      class="c32"
+                      display="flex"
+                    >
                       <div
-                        class="c32"
-                        display="flex"
+                        class="c1"
+                        data-for="registered"
+                        data-tip=""
                       >
-                        <div
-                          class="c1"
-                          data-for="any-registered-participant-cdh"
-                          data-tip=""
-                        >
-                          <img
-                            alt="?"
-                            class="c20"
-                            src="IMAGE_MOCK"
-                          />
-                        </div>
+                        <img
+                          alt="?"
+                          class="c20"
+                          src="IMAGE_MOCK"
+                        />
                       </div>
                     </div>
-                  </p>
+                  </div>
                 </div>
               </label>
             </div>
