@@ -53,9 +53,7 @@ Our goal is for cost to never be a barrier. This code is available to anyone at 
 
 ## Install & Start
 
-[//]: # (TODO CIAS30-1130 update the below link when cias is transferred to MSU's GitHub organization)
-
-#### <span style="color:red">This is a frontend package only. For CIAS to work, you need the backend package too.</span> You can find it on GitHub [here](https://github.com/HTD-Health/cias-api#readme). Follow the instructions there to set up the backend project first.
+#### <span style="color:red">This is a frontend package only. For CIAS to work, you need the backend package too.</span> You can find it on GitHub [here](https://github.com/Michigan-State-University/cias-api#readme). Follow the instructions there to set up the backend project first.
 
 ### Requirements:
 
@@ -76,9 +74,7 @@ Our goal is for cost to never be a barrier. This code is available to anyone at 
 1. Open http://localhost:4200 (by default) in the internet browser
 1. If you have the backend project set up too, you can start using CIAS 3.0. If you seeded the database while setting up
    the backend project, you can now log in to one of the accounts that has been automatically created. Please
-   see [documentation](https://github.com/HTD-Health/cias-api#readme) of the backend project for more information
-
-[//]: # (TODO CIAS30-1130 update the above link when cias is transferred to MSU's GitHub organization)
+   see [documentation](https://github.com/Michigan-State-University/cias-api#readme) of the backend project for more information
 
 ## Cypress
 

@@ -4,8 +4,7 @@ about: Create a report to help us improve
 
 ---
 
-[//]: # (TODO replace the link below)
-Before opening a new issue, please take a moment to review our [**community guidelines**](https://github.com/HTD-Health/cias-web/blob/master/CONTRIBUTING.md) to make the contribution process easy and effective for everyone involved.
+Before opening a new issue, please take a moment to review our [**community guidelines**](https://github.com/Michigan-State-University/cias-web/blob/dev/CONTRIBUTING.md) to make the contribution process easy and effective for everyone involved.
 
 ## Reproduction steps
 Preconditions of application (if needed).
