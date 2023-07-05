@@ -609,7 +609,6 @@ export function InterventionDetailsPage({
                       <HelpIconTooltip
                         id="intervention-type-tooltip"
                         tooltipContent={formatMessage(messages.catMhCountInfo)}
-                        useMarkup
                       >
                         {formatMessage(messages.catMhCounter, {
                           licenseType,

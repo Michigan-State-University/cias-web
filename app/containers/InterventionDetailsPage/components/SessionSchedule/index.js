@@ -174,7 +174,6 @@ function SessionSchedule({
       <HelpIconTooltip
         id="session-scheduling-cdh"
         tooltipContent={formatMessage(messages.sessionSchedulingHelp)}
-        useMarkup
       >
         <Selector
           disabled={disabled}
