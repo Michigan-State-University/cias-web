@@ -4,7 +4,7 @@
  *
  */
 
-import React, { memo, useEffect, useState, useMemo } from 'react';
+import React, { memo, useEffect, useMemo } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { Helmet } from 'react-helmet';
@@ -18,12 +18,9 @@ import dayjs from 'dayjs';
 import set from 'lodash/set';
 import lowerCase from 'lodash/lowerCase';
 import queryString from 'query-string';
-import { Markup } from 'interweave';
 import { useInjectSaga, useInjectReducer } from 'redux-injectors';
 
 import { themeColors } from 'theme';
-
-import { Roles } from 'models/User/RolesManager';
 
 import { passwordRegex } from 'global/constants/regex';
 import { RoutePath } from 'global/constants';
@@ -38,14 +35,13 @@ import Column from 'components/Column';
 import H1 from 'components/H1';
 import Row from 'components/Row';
 import Text from 'components/Text';
-import Modal from 'components/Modal';
 import FormikInput from 'components/FormikInput';
 import ErrorAlert from 'components/ErrorAlert';
-import FormikCheckbox from 'components/FormikCheckbox';
 import Box from 'components/Box';
 import FormikForm from 'components/FormikForm';
 
 import { isNil } from 'lodash';
+import TermsCheckbox from 'components/TermsCheckbox';
 import makeSelectRegisterPage from './selectors';
 import reducer from './reducer';
 import allRegistrationsSaga from './sagas';
@@ -54,7 +50,6 @@ import {
   registerParticipantRequest,
   registerFromInvitationRequest,
 } from './actions';
-import { TermsAndConditions } from './styled';
 
 const passwordLength = 8;
 
@@ -99,7 +94,6 @@ export function RegisterPage({
   registerPage: { loading, error, success },
   location,
 }) {
-  const [showTermsModal, setShowTermsModal] = useState(false);
   useInjectReducer({ key: 'registerPage', reducer });
   useInjectSaga({ key: 'allRegistrationsSaga', saga: allRegistrationsSaga });
   const {
@@ -112,11 +106,6 @@ export function RegisterPage({
   const isInvite = Boolean(invitationToken) && Boolean(email);
 
   const history = useHistory();
-
-  const termsAndConditionsText =
-    role === Roles.Participant || !role
-      ? formatMessage(messages.termsAndConditionsParticipantText)
-      : formatMessage(messages.termsAndConditionsOtherRolesText);
 
   const onSubmit = (values, { setSubmitting }) => {
     const currentTimeZone = dayjs.tz.guess();
@@ -171,16 +160,6 @@ export function RegisterPage({
       <Helmet>
         <title>{formatMessage(messages.pageTitle)}</title>
       </Helmet>
-      <Modal
-        visible={showTermsModal}
-        title={formatMessage(messages.termsAndConditions)}
-        onClose={() => setShowTermsModal(false)}
-        maxWidth="80%"
-      >
-        <TermsAndConditions>
-          <Markup content={termsAndConditionsText} noWrap />
-        </TermsAndConditions>
-      </Modal>
       <Fill justify="center" align="center">
         <Column sm={10} md={8} lg={6} align="start">
           <Box mb={40}>
@@ -254,23 +233,7 @@ export function RegisterPage({
                     type="password"
                     {...sharedProps}
                   />
-                  <Row my={20}>
-                    <FormikCheckbox formikKey="terms">
-                      {formatMessage(messages.accept)}
-                      <Text
-                        clickable
-                        ml={3}
-                        lineHeight="1.5em"
-                        fontWeight="bold"
-                        color={themeColors.secondary}
-                        onClick={() => {
-                          setShowTermsModal(true);
-                        }}
-                      >
-                        {formatMessage(messages.termsAndConditions)}
-                      </Text>
-                    </FormikCheckbox>
-                  </Row>
+                  <TermsCheckbox role={role} />
                   <Button
                     type="submit"
                     height={46}

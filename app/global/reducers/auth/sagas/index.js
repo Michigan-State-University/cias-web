@@ -14,6 +14,7 @@ import loginSaga from './logIn';
 import verifyCodeSaga from './verifyCode';
 import fetchSelfDetailsSaga from './fetchSelfDetails';
 import updateUsersTimezoneSaga from './updateUsersTimezone';
+import termsAcceptSaga from './acceptTerms';
 
 export {
   logOutSaga,
@@ -31,6 +32,7 @@ export {
   verifyCodeSaga,
   fetchSelfDetailsSaga,
   updateUsersTimezoneSaga,
+  termsAcceptSaga,
 };
 
 export default function* allAuthSagas() {
@@ -49,5 +51,6 @@ export default function* allAuthSagas() {
     verifyCodeSaga(),
     fetchSelfDetailsSaga(),
     updateUsersTimezoneSaga(),
+    termsAcceptSaga(),
   ]);
 }
