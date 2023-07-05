@@ -8,6 +8,9 @@ import Row from 'components/Row';
 import Radio from 'components/Radio';
 import H2 from 'components/H2';
 import Tooltip from 'components/Tooltip';
+import { HelpIconTooltip } from 'components/HelpIconTooltip';
+import ConditionalWrapper from 'components/ConditionalWrapper';
+
 import questionMark from 'assets/svg/grey-question-mark.svg';
 import { OptionType } from '../types';
 
@@ -76,9 +79,15 @@ const InterventionRadioPanel = ({
               mr={12}
               onChange={() => updateSetting(option.id)}
             >
-              <Text fontSize={15} fontWeight={isChecked ? 'bold' : 'regular'}>
-                {option.label}
-              </Text>
+              <ConditionalWrapper
+                if={!!option.help}
+                with={HelpIconTooltip}
+                wrapperProps={{ tooltipContent: option.help!, id: option.id }}
+              >
+                <Text fontSize={15} fontWeight={isChecked ? 'bold' : 'regular'}>
+                  {option.label}
+                </Text>
+              </ConditionalWrapper>
             </Radio>
           </Row>
         );
