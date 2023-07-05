@@ -14,18 +14,13 @@ import { injectReducer, injectSaga } from 'redux-injectors';
 import { Row, Col } from 'react-grid-system';
 import { Markup } from 'interweave';
 
-import Text from 'components/Text';
-import AppContainer from 'components/Container';
-import ErrorAlert from 'components/ErrorAlert';
-import H1 from 'components/H1';
-import TileRenderer from 'components/TileRenderer';
-import SearchInput from 'components/Input/SearchInput';
-import Box from 'components/Box';
-import Img from 'components/Img';
-import { ModalType, useModal } from 'components/Modal';
-import { TextButton } from 'components/Button';
+import importIcon from 'assets/svg/import-secondary.svg';
+
 import { statusTypes } from 'models/Status/StatusTypes';
 
+import { colors, fontSizes, themeColors } from 'theme';
+
+import { FEEDBACK_FORM_URL } from 'global/constants';
 import {
   createInterventionRequest,
   createInterventionSaga,
@@ -39,10 +34,18 @@ import {
   resetImportModalState,
 } from 'global/reducers/interventions';
 import { editUserRequest, makeSelectUser } from 'global/reducers/auth';
-import { FEEDBACK_FORM_URL } from 'global/constants';
-import importIcon from 'assets/svg/import-secondary.svg';
 
-import { colors, fontSizes, themeColors } from 'theme';
+import Text from 'components/Text';
+import AppContainer from 'components/Container';
+import ErrorAlert from 'components/ErrorAlert';
+import H1 from 'components/H1';
+import TileRenderer from 'components/TileRenderer';
+import SearchInput from 'components/Input/SearchInput';
+import Box from 'components/Box';
+import Img from 'components/Img';
+import { ModalType, useModal } from 'components/Modal';
+import { TextButton } from 'components/Button';
+import { HelpIconTooltip } from 'components/HelpIconTooltip';
 
 import StatusFilter from './StatusFilter';
 import messages from './messages';
@@ -168,9 +171,14 @@ export function InterventionPage({
       )}
 
       <InitialRow fluid style={{ display: 'flex' }}>
-        <H1>
-          <FormattedMessage {...messages.myInterventions} />
-        </H1>
+        <HelpIconTooltip
+          id="dashboard-cdh"
+          tooltipContent={formatMessage(messages.myInterventionsHelp)}
+        >
+          <H1>
+            <FormattedMessage {...messages.myInterventions} />
+          </H1>
+        </HelpIconTooltip>
         <Box mx={24} width={2} height="100%" bg={colors.linkWater} />
 
         <TextButton

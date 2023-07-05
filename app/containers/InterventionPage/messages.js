@@ -16,6 +16,11 @@ export default defineMessages({
     id: `${scope}.myInterventions`,
     defaultMessage: 'My Dashboard',
   },
+  myInterventionsHelp: {
+    id: `${scope}.myInterventionsHelp`,
+    defaultMessage:
+      'Learn more about how your dashboard functions <a href="https://www.cias.app/_files/ugd/afc5c9_81850ac9ecd842dc989c11f8f4fb0efa.pdf" target="_blank">here</a>. For more help resources, visit <a href="https://www.cias.app/resources" target="_blank">www.cias.app/resources</a>.',
+  },
   teamName: {
     id: `${scope}.teamName`,
     defaultMessage: '<b>Team</b>: {teamName}',
