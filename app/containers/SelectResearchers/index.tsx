@@ -15,8 +15,6 @@ import { FormattedMessage, useIntl } from 'react-intl';
 import { useDispatch, useSelector } from 'react-redux';
 import { useInjectReducer, useInjectSaga } from 'redux-injectors';
 
-import Search from 'assets/svg/search.svg';
-
 import { colors, themeColors } from 'theme';
 
 import { ApiError } from 'models/Api';
@@ -36,12 +34,8 @@ import Box from 'components/Box';
 import Text from 'components/Text';
 import { Table, TBody, TH, THead, TR } from 'components/Table';
 import ErrorAlert from 'components/ErrorAlert';
-import Icon from 'components/Icon';
 import Button from 'components/Button';
-import {
-  AdornmentType,
-  InputWithAdornment,
-} from 'components/Input/InputWithAdornment';
+import { Input } from 'components/Input';
 import Spinner from 'components/Spinner';
 import Divider from 'components/Divider';
 
@@ -111,15 +105,12 @@ const SelectResearchers: FC<Props> = ({
     );
   return (
     <Box>
-      <Row>
-        <InputWithAdornment
+      <Row gap={16}>
+        <Input
           value={email}
-          adornmentType={AdornmentType.PREFIX}
-          adornment={<Icon src={Search} />}
           onChange={onInputChange}
           placeholder={`${actionName} ${formatMessage(messages.byEmail)}`}
-          mr={16}
-          adornmentWidth={36}
+          width="100%"
         />
         <Button disabled={!sendEnabled} width={200} onClick={submit}>
           {actionName}
