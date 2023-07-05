@@ -1,5 +1,6 @@
 import React from 'react';
 import { useIntl } from 'react-intl';
+import { Markup } from 'interweave';
 
 import { useModal, ModalType } from 'components/Modal';
 import SelectResearchers, {
@@ -25,7 +26,7 @@ export const useShareExternallyModal = (
     ),
     props: {
       title: formatMessage(messages.shareExternally),
-      description: formatMessage(messages[level]),
+      description: <Markup noWrap content={formatMessage(messages[level])} />,
       width: SHARE_EXTERNALLY_MODAL_WIDTH,
       maxWidth: SHARE_EXTERNALLY_MODAL_WIDTH,
     },

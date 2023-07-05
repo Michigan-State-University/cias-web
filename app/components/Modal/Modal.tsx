@@ -37,7 +37,7 @@ export type Props = {
   disableClose?: boolean;
   zIndex?: number;
   disableScrollLock?: boolean;
-  description?: string;
+  description?: ReactNode;
   titleIcon?: ReactElement;
   titleIconWidth?: number;
 } & Record<string, unknown>;
