@@ -82,7 +82,11 @@ const InterventionRadioPanel = ({
               <ConditionalWrapper
                 if={!!option.help}
                 with={HelpIconTooltip}
-                wrapperProps={{ tooltipContent: option.help!, id: option.id }}
+                wrapperProps={{
+                  tooltipContent: option.help!,
+                  id: option.id,
+                  useMarkup: true,
+                }}
               >
                 <Text fontSize={15} fontWeight={isChecked ? 'bold' : 'regular'}>
                   {option.label}

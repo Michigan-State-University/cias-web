@@ -127,6 +127,7 @@ const ReportTemplateMainSettings = ({
                   <HelpIconTooltip
                     id="report-settings-cdh"
                     tooltipContent={formatMessage(messages.reportSettingsHelp)}
+                    useMarkup
                   >
                     <H1>{formatMessage(messages.settingsHeader)}</H1>
                   </HelpIconTooltip>

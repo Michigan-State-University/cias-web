@@ -174,6 +174,7 @@ export function InterventionPage({
         <HelpIconTooltip
           id="dashboard-cdh"
           tooltipContent={formatMessage(messages.myInterventionsHelp)}
+          useMarkup
         >
           <H1>
             <FormattedMessage {...messages.myInterventions} />

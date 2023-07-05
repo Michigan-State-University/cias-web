@@ -333,6 +333,7 @@ const InterventionSettingsModal = ({ editingPossible, onClose }: Props) => {
                 <HelpIconTooltip
                   id="quick-exit-cdh"
                   tooltipContent={formatMessage(messages.quickExitHelp)}
+                  useMarkup
                 >
                   <H3>
                     {formatMessage(messages.interventionSettingsQuickExit)}

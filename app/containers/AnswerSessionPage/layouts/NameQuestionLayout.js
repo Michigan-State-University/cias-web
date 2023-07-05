@@ -47,6 +47,7 @@ const NameQuestionLayout = ({
             id="name-quesiton-help"
             tooltipContent={formatMessage(messages.nameHelp)}
             hide={!disabled}
+            useMarkup
           >
             <Text id={NAME_QUESTION_NAME_ID}>
               {formatMessage(messages.enterName)}

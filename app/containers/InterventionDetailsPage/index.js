@@ -26,7 +26,6 @@ import GearIcon from 'assets/svg/gear-wo-background.svg';
 import AddAppIcon from 'assets/svg/app-add.svg';
 import TranslateIcon from 'assets/svg/translate.svg';
 import DocumentIcon from 'assets/svg/document.svg';
-import QuestionMarkIcon from 'assets/svg/grey-question-mark.svg';
 import DownloadIcon from 'assets/svg/download-line.svg';
 import CollaborateIcon from 'assets/svg/collaborate-icon.svg';
 
@@ -101,6 +100,7 @@ import Spinner from 'components/Spinner';
 import AppContainer from 'components/Container';
 import Icon from 'components/Icon';
 import Tooltip from 'components/Tooltip';
+import { HelpIconTooltip } from 'components/HelpIconTooltip';
 
 import Header from './Header';
 import { DraggedTest } from './styled';
@@ -606,29 +606,29 @@ export function InterventionDetailsPage({
 
                   {!isAccessRevoked && (
                     <Row align="center">
-                      {formatMessage(messages.catMhCounter, {
-                        licenseType,
-                        current: testsLeft ?? 0,
-                        initial: catMhPool ?? 0,
-                        used: createdCatMhSessionCount,
-                        counter: (chunks) => (
-                          <span
-                            style={{
-                              color: hasSmallNumberOfCatMhSessionsRemaining
-                                ? themeColors.warning
-                                : themeColors.success,
-                            }}
-                          >
-                            {chunks}
-                          </span>
-                        ),
-                      })}
-                      <Tooltip
+                      <HelpIconTooltip
                         id="intervention-type-tooltip"
-                        ml={8}
-                        icon={QuestionMarkIcon}
-                        content={formatMessage(messages.catMhCountInfo)}
-                      />
+                        tooltipContent={formatMessage(messages.catMhCountInfo)}
+                        useMarkup
+                      >
+                        {formatMessage(messages.catMhCounter, {
+                          licenseType,
+                          current: testsLeft ?? 0,
+                          initial: catMhPool ?? 0,
+                          used: createdCatMhSessionCount,
+                          counter: (chunks) => (
+                            <span
+                              style={{
+                                color: hasSmallNumberOfCatMhSessionsRemaining
+                                  ? themeColors.warning
+                                  : themeColors.success,
+                              }}
+                            >
+                              {chunks}
+                            </span>
+                          ),
+                        })}
+                      </HelpIconTooltip>
                     </Row>
                   )}
                 </Row>

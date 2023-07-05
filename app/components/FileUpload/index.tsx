@@ -10,14 +10,13 @@ import Text from 'components/Text';
 import Loader from 'components/Loader';
 import { ImageButton } from 'components/Button';
 import FileBox from 'components/FileBox';
-import Tooltip from 'components/Tooltip';
+import { HelpIconTooltip } from 'components/HelpIconTooltip';
 import Column from 'components/Column';
 
 import { AppFile } from 'models/File';
 import { MAX_FILE_SIZE } from 'global/constants';
 import { colors, borders, themeColors } from 'theme';
 import binNoBg from 'assets/svg/bin-no-bg.svg';
-import questionMark from 'assets/svg/grey-question-mark.svg';
 
 import messages from './messages';
 import { formatFileErrorMessage } from './utils';
@@ -120,20 +119,17 @@ export const FileUpload = ({
   return (
     <>
       <Box display="flex" align="center" mb={12}>
-        {label && (
-          <Text fontSize={13} lineHeight={1}>
-            {label}
-          </Text>
-        )}
-        {tooltipContent && (
-          <Tooltip
-            id="file-upload-tooltip"
-            ml={label && 8}
-            icon={questionMark}
-            content={tooltipContent}
-            place="right"
-          />
-        )}
+        <HelpIconTooltip
+          id="file-upload-tooltip"
+          tooltipContent={tooltipContent}
+          hide={!tooltipContent}
+        >
+          {label && (
+            <Text fontSize={13} lineHeight={1}>
+              {label}
+            </Text>
+          )}
+        </HelpIconTooltip>
       </Box>
       <Dropzone
         border={
