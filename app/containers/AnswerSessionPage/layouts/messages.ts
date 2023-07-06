@@ -148,6 +148,22 @@ export default defineMessages({
     id: `${scope}.zipCodePlaceholder`,
     defaultMessage: 'Enter your ZIP Code here',
   },
+  phoneNumberPrefix: {
+    id: `${scope}.phoneNumberPrefix`,
+    defaultMessage: 'Phone number prefix',
+  },
+  phoneNumber: {
+    id: `${scope}.phoneNumber`,
+    defaultMessage: 'Phone number',
+  },
+  phoneType: {
+    id: `${scope}.phoneType`,
+    defaultMessage: 'Phone type',
+  },
+  phoneTypePlaceholder: {
+    id: `${scope}.phoneTypePlaceholder`,
+    defaultMessage: 'Choose phone type',
+  },
   baseDataVerificationErrorMessage: {
     id: `${scope}.baseDataVerificationErrorMessage`,
     defaultMessage:

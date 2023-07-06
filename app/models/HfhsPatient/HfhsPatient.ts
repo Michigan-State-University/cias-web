@@ -1,4 +1,5 @@
 import { Sex } from './Sex';
+import { PhoneType } from './PhoneType';
 
 // Used when verifying patient on the HF initial screen
 export type HfhsPatientData = {
@@ -7,6 +8,8 @@ export type HfhsPatientData = {
   dob: string;
   sex: Sex;
   zipCode: string;
+  phoneNumber: string;
+  phoneType: PhoneType;
 };
 
 // Returned from BE

@@ -15,8 +15,14 @@ import { colors, themeColors } from 'theme';
 import globalMessages from 'global/i18n/globalMessages';
 import { zipCodeRegex } from 'global/constants';
 
-import { HfhsPatientData, HfhsPatientDetail, Sex } from 'models/HfhsPatient';
+import {
+  HfhsPatientData,
+  HfhsPatientDetail,
+  PhoneType,
+  Sex,
+} from 'models/HfhsPatient';
 import { ApiMessageError } from 'models/Api';
+import { PhoneAttributes } from 'models/Phone';
 
 import { requiredValidationSchema } from 'utils/validators';
 import { getUTCDateString } from 'utils/dateUtils';
@@ -27,9 +33,12 @@ import FormikInput from 'components/FormikInput';
 import FormikSelect from 'components/FormikSelect';
 import FormikDatePicker from 'components/FormikDatePicker';
 import Text from 'components/Text';
+import PhoneNumberForm from 'components/AccountSettings/PhoneNumberForm';
+import { PhoneNumberFormCalculatedValue } from 'components/AccountSettings/types';
 
 import { ActionButtons } from '../components/ActionButtons';
 import messages from './messages';
+import { formatPhoneNumberForHfhs } from '../utils';
 
 const inputStyles = {
   width: '100%',
@@ -43,6 +52,8 @@ export type PatientDataFormValues = Pick<
 > & {
   sexOption: Nullable<SelectOption<Sex>>;
   dobDate: Nullable<Date>;
+  phoneAttributes: Nullable<PhoneAttributes>;
+  phoneTypeOption: Nullable<SelectOption<PhoneType>>;
 };
 
 const schema = (formatMessage: IntlShape['formatMessage']) =>
@@ -66,6 +77,18 @@ const schema = (formatMessage: IntlShape['formatMessage']) =>
       // @ts-ignore
       formatMessage(globalMessages.validators.zipCode),
     ),
+    phoneAttributes: Yup.object()
+      .required(
+        // @ts-ignore
+        formatMessage(globalMessages.validators.required),
+      )
+      .nullable(),
+    phoneTypeOption: Yup.object()
+      .required(
+        // @ts-ignore
+        formatMessage(globalMessages.validators.required),
+      )
+      .nullable(),
   });
 
 enum PatientDataFormError {
@@ -78,6 +101,8 @@ const emptyInitialValues: PatientDataFormValues = {
   sexOption: null,
   dobDate: null,
   zipCode: '',
+  phoneAttributes: null,
+  phoneTypeOption: null,
 };
 
 export type Props = {
@@ -115,12 +140,28 @@ const HenryFordInitialScreenLayout = ({
     })),
   );
 
+  const phoneTypeSelectOptions: MutableRefObject<SelectOption<PhoneType>[]> =
+    useRef(
+      Object.values(PhoneType).map((phoneType) => ({
+        value: phoneType,
+        // @ts-ignore
+        label: formatMessage(globalMessages.phoneType[phoneType]),
+      })),
+    );
+
   const initialValues: PatientDataFormValues = useMemo(() => {
     if (!hfhsPatientDetail) return emptyInitialValues;
-    const { sex, dob, ...restValues } = hfhsPatientDetail;
+    const { sex, dob, phoneNumber, phoneType, ...restValues } =
+      hfhsPatientDetail;
+
     return {
       sexOption: sexSelectOptions.current.find(({ value }) => value === sex),
       dobDate: new Date(dob),
+      // TODO map hfhs phone to phone attributes
+      phoneAttributes: null,
+      phoneTypeOption: phoneTypeSelectOptions.current.find(
+        ({ value }) => value === phoneType,
+      ),
       ...restValues,
     };
   }, [hfhsPatientDetail]);
@@ -129,12 +170,20 @@ const HenryFordInitialScreenLayout = ({
     values,
   ) => {
     if (!onSubmitPatientData) return;
-    const { sexOption, dobDate, ...restValues } = values;
+    const {
+      sexOption,
+      dobDate,
+      phoneAttributes,
+      phoneTypeOption,
+      ...restValues
+    } = values;
 
     onSubmitPatientData({
       ...restValues,
       sex: sexOption!.value,
       dob: getUTCDateString(dobDate!),
+      phoneNumber: formatPhoneNumberForHfhs(phoneAttributes!),
+      phoneType: phoneTypeOption!.value,
     });
   };
 
@@ -151,11 +200,21 @@ const HenryFordInitialScreenLayout = ({
         sexOption: '',
         dobDate: '',
         zipCode: '',
+        phoneTypeOption: '',
+        phoneAttributes: '',
       });
       setFormError(PatientDataFormError.BASE_DATA_VERIFICATION);
       return () => setFormError(null);
     }
   }, [verifyingError]);
+
+  const onPhoneChange = ({
+    phoneAttributes,
+  }: PhoneNumberFormCalculatedValue) => {
+    if (formRef.current) {
+      formRef.current.setFieldValue('phoneAttributes', phoneAttributes);
+    }
+  };
 
   return (
     <Formik
@@ -164,7 +223,7 @@ const HenryFordInitialScreenLayout = ({
       onSubmit={onSubmit}
       innerRef={formRef}
     >
-      {({ handleSubmit, isValid }) => (
+      {({ handleSubmit, isValid, values: { phoneAttributes } }) => (
         <Form>
           <Box my={24} mx={26}>
             <Container fluid style={{ padding: 0 }}>
@@ -223,6 +282,38 @@ const HenryFordInitialScreenLayout = ({
                     placeholder={formatMessage(messages.zipCodePlaceholder)}
                     type="text"
                     inputProps={{ ...inputStyles, disabled }}
+                  />
+                </Col>
+                <Col xs={12}>
+                  <PhoneNumberForm
+                    // @ts-ignore
+                    formatMessage={formatMessage}
+                    phone={phoneAttributes}
+                    changePhoneNumber={onPhoneChange}
+                    confirmationDisabled
+                    prefixLabelMessage={messages.phoneNumberPrefix}
+                    phoneLabel={messages.phoneNumber}
+                    required={false}
+                    allowPartial
+                    // TODO handle errors
+                    // TODO style form
+                  />
+                </Col>
+                <Col {...columnClassMap}>
+                  <FormikSelect
+                    formikKey="phoneTypeOption"
+                    label={formatMessage(messages.phoneType)}
+                    options={phoneTypeSelectOptions.current}
+                    submitOnChange={false}
+                    inputProps={{
+                      ...inputStyles,
+                      isDisabled: disabled,
+                      placeholder: formatMessage(messages.phoneTypePlaceholder),
+                      placeholderOpacity: 0.54,
+                      placeholderColorActive: colors.bluewood,
+                      placeholderColorDisabled: colors.casper,
+                      valueColorDisabled: colors.casper,
+                    }}
                   />
                 </Col>
               </Row>
