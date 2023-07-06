@@ -233,7 +233,7 @@ export function RegisterPage({
                     type="password"
                     {...sharedProps}
                   />
-                  <TermsCheckbox role={role} />
+                  <TermsCheckbox formikKey="terms" role={role} />
                   <Button
                     type="submit"
                     height={46}

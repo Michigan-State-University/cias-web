@@ -13,10 +13,11 @@ import messages from './messages';
 import { TermsAndConditions } from './styled';
 
 type Props = {
+  formikKey: string;
   role?: Roles;
 };
 
-const TermsCheckbox = ({ role }: Props) => {
+const TermsCheckbox = ({ role, formikKey }: Props) => {
   const [showTermsModal, setShowTermsModal] = useState(false);
   const { formatMessage } = useIntl();
 
@@ -37,7 +38,7 @@ const TermsCheckbox = ({ role }: Props) => {
           <Markup content={termsAndConditionsText} noWrap />
         </TermsAndConditions>
       </Modal>
-      <FormikCheckbox formikKey="terms">
+      <FormikCheckbox formikKey={formikKey}>
         {formatMessage(messages.accept)}
         <Text
           clickable

@@ -4,7 +4,8 @@ import { useIntl } from 'react-intl';
 import { useDispatch } from 'react-redux';
 
 import { RoutePath } from 'global/constants';
-import { termsAcceptRequest, termsAcceptSaga } from 'global/reducers/auth';
+import { termsAcceptRequest } from 'global/reducers/auth';
+import { withTermsAcceptSaga } from 'global/reducers/auth/sagas/acceptTerms';
 
 import FormikInput from 'components/FormikInput';
 import LinkButton from 'components/Button/LinkButton';
@@ -38,7 +39,7 @@ const TermsNotAccepted = ({
   const { formatMessage } = useIntl();
   const dispatch = useDispatch();
 
-  useInjectSaga({ key: 'termsAcceptSaga', saga: termsAcceptSaga });
+  useInjectSaga(withTermsAcceptSaga);
   const validationSchema = useMemo(
     () => generateTermsValidationSchema(formatMessage),
     [],
@@ -65,13 +66,12 @@ const TermsNotAccepted = ({
 
         return (
           <FormikForm>
-            <Row width="100%">
+            <Row width="100%" gap={20}>
               <FormikInput
                 formikKey="firstName"
                 placeholder={formatMessage(messages.firstNameLabel)}
                 label={formatMessage(messages.firstNameLabel)}
                 type="text"
-                mr={20}
                 disabled={!!termsExtraFields?.firstName}
                 {...sharedProps}
               />
@@ -91,7 +91,7 @@ const TermsNotAccepted = ({
               disabled
               {...sharedProps}
             />
-            <TermsCheckbox />
+            <TermsCheckbox formikKey="terms" />
             <Button
               height={46}
               mt={25}

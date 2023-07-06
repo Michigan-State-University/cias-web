@@ -24,7 +24,7 @@ type InputComponentType = {
   placeholder?: string;
   type?: string;
   value?: string | number;
-  disabled: boolean;
+  disabled?: boolean;
 };
 
 function InputComponent({

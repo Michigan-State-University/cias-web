@@ -26,3 +26,8 @@ export function* termsAccept({ payload: { fields, onSuccess } }) {
 export default function* termsAcceptSaga() {
   yield takeLatest(TERMS_ACCEPT_REQUEST, termsAccept);
 }
+
+export const withTermsAcceptSaga = {
+  key: 'termsAcceptSaga',
+  saga: termsAcceptSaga,
+};
