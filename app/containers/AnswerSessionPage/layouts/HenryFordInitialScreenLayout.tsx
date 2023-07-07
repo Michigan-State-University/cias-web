@@ -166,7 +166,6 @@ const HenryFordInitialScreenLayout = ({
       sexOption: sexSelectOptions.current.find(({ value }) => value === sex),
       dobDate: new Date(dob),
       // TODO map hfhs phone to phone attributes
-      // TODO show errors in phone number form on continue click (mark touched)
       // TODO hide error in phone number form when other field changed after BE validation
       phoneAttributes: null,
       phoneTypeOption: phoneTypeSelectOptions.current.find(
@@ -367,7 +366,13 @@ const HenryFordInitialScreenLayout = ({
                     (messagePhoneDirty && !phoneAttributes?.number)
                   }
                   continueButtonLoading={verifying}
-                  onContinueClick={handleSubmit}
+                  onContinueClick={() => {
+                    phoneNumberFormRef?.current?.setTouched({
+                      number: true,
+                      iso: true,
+                    });
+                    handleSubmit();
+                  }}
                 />
               </Box>
             )}
