@@ -299,6 +299,12 @@ const HenryFordInitialScreenLayout = ({
                     phoneLabel={messages.phoneNumber}
                     required={false}
                     allowPartial
+                    prefixInputProps={{
+                      ...inputStyles,
+                      ...selectStyles,
+                      isDisabled: disabled,
+                    }}
+                    numberInputProps={{ ...inputStyles, disabled }}
                     // TODO handle errors
                     // TODO style form
                   />
