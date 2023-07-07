@@ -45,9 +45,10 @@ import {
 import { redirectToPreview } from 'containers/AnswerSessionPage/actions';
 import {
   makeSelectCanCurrentUserAccessParticipantsData,
+  makeSelectEditingPossible,
   makeSelectInterventionStatus,
 } from 'global/reducers/intervention';
-import { canEdit, canPreview } from 'models/Status/statusPermissions';
+import { canPreview } from 'models/Status/statusPermissions';
 import { SessionTypes } from 'models/Session';
 import messages from './messages';
 import {
@@ -94,6 +95,7 @@ const InterventionNavbar = ({
   textMessagesCount,
   generatedReportsCount,
   canAccessParticipantsData,
+  editingPossible,
 }) => {
   const { interventionId, sessionId } = params;
 
@@ -122,8 +124,6 @@ const InterventionNavbar = ({
 
   const previewDisabled =
     !questionsLength || !canPreview(interventionStatus) || !isClassicSession;
-
-  const editingPossible = canEdit(interventionStatus);
 
   const textMessagesCountValue = smsPlansCount ?? textMessagesCount ?? '0';
 
@@ -339,6 +339,7 @@ InterventionNavbar.propTypes = {
   textMessagesCount: PropTypes.number,
   generatedReportsCount: PropTypes.number,
   canAccessParticipantsData: PropTypes.bool,
+  editingPossible: PropTypes.bool,
 };
 
 const mapStateToProps = createStructuredSelector({
@@ -353,6 +354,7 @@ const mapStateToProps = createStructuredSelector({
   textLoaders: makeSelectAllLoaders(),
   generatedReportsCount: makeSelectReportsSize(),
   canAccessParticipantsData: makeSelectCanCurrentUserAccessParticipantsData(),
+  editingPossible: makeSelectEditingPossible(),
 });
 
 const mapDispatchToProps = {
