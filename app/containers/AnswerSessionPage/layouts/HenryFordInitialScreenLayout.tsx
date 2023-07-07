@@ -46,6 +46,13 @@ const inputStyles = {
   opacity: 1,
 };
 
+const selectStyles = {
+  placeholderOpacity: 0.54,
+  placeholderColorActive: colors.bluewood,
+  placeholderColorDisabled: colors.casper,
+  valueColorDisabled: colors.casper,
+};
+
 export type PatientDataFormValues = Pick<
   HfhsPatientData,
   'firstName' | 'lastName' | 'zipCode'
@@ -254,12 +261,9 @@ const HenryFordInitialScreenLayout = ({
                     submitOnChange={false}
                     inputProps={{
                       ...inputStyles,
+                      ...selectStyles,
                       isDisabled: disabled,
                       placeholder: formatMessage(messages.sexPlaceholder),
-                      placeholderOpacity: 0.54,
-                      placeholderColorActive: colors.bluewood,
-                      placeholderColorDisabled: colors.casper,
-                      valueColorDisabled: colors.casper,
                     }}
                   />
                 </Col>
@@ -307,12 +311,9 @@ const HenryFordInitialScreenLayout = ({
                     submitOnChange={false}
                     inputProps={{
                       ...inputStyles,
-                      isDisabled: disabled,
+                      ...selectStyles,
                       placeholder: formatMessage(messages.phoneTypePlaceholder),
-                      placeholderOpacity: 0.54,
-                      placeholderColorActive: colors.bluewood,
-                      placeholderColorDisabled: colors.casper,
-                      valueColorDisabled: colors.casper,
+                      isDisabled: disabled,
                     }}
                   />
                 </Col>
