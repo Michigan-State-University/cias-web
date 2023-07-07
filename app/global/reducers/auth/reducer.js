@@ -44,12 +44,18 @@ import {
   VERIFICATION_CODE_REQUEST,
   VERIFICATION_CODE_SUCCESS,
   VERIFICATION_CODE_ERROR,
+  TERMS_NOT_ACCEPTED,
+  TERMS_ACCEPT_REQUEST,
+  TERMS_ACCEPT_SUCCESS,
+  TERMS_ACCEPT_ERROR,
 } from './constants';
 
 export const initialState = {
   user: null,
   phoneNumberPreview: null,
   verificationCodeNeeded: false,
+  termsNotAccepted: false,
+  termsNotAcceptedExtraFields: null,
   verificationCodeSuccess: false,
   loginFormData: {
     email: '',
@@ -61,6 +67,7 @@ export const initialState = {
     changePasswordError: null,
     changeEmailError: null,
     changePhoneNumberError: null,
+    termsAcceptError: null,
   },
   loaders: {
     loginLoading: false,
@@ -70,10 +77,12 @@ export const initialState = {
     changePhoneNumberLoading: false,
     smsTokenLoading: false,
     confirmPhoneNumberLoading: false,
+    termsAcceptLoading: false,
   },
   cache: {
     user: null,
     phoneNumberPreview: null,
+    password: null,
   },
 };
 
@@ -249,6 +258,8 @@ export const authReducer = (state = initialState, { type, payload }) =>
         draft.verificationCodeSuccess = false;
         draft.errors.loginError = '';
         draft.loaders.loginLoading = true;
+        draft.termsNotAccepted = false;
+        draft.termsNotAcceptedExtraFields = null;
         break;
 
       case LOGIN_SUCCESS:
@@ -284,6 +295,28 @@ export const authReducer = (state = initialState, { type, payload }) =>
       case VERIFICATION_CODE_ERROR:
         draft.loaders.verificationCodeLoading = false;
         draft.errors.verificationCodeError = payload.error;
+        break;
+
+      case TERMS_NOT_ACCEPTED:
+        draft.termsNotAccepted = true;
+        draft.termsNotAcceptedExtraFields = payload.fields;
+        draft.cache.password = payload.password;
+        break;
+
+      case TERMS_ACCEPT_REQUEST:
+        draft.errors.termsAcceptError = null;
+        draft.loaders.termsAcceptLoading = true;
+        break;
+
+      case TERMS_ACCEPT_SUCCESS:
+        draft.loaders.termsAcceptLoading = false;
+        draft.cache.password = null;
+        break;
+
+      case TERMS_ACCEPT_ERROR:
+        draft.loaders.termsAcceptLoading = false;
+        draft.errors.termsAcceptError = payload.error;
+        draft.cache.password = null;
         break;
     }
   });

@@ -33,21 +33,30 @@ import {
   makeSelectVerificationNeeded,
   verificationCodeRequest,
   makeSelectVerificationSuccess,
+  makeSelectTermsNotAccepted,
+  makeSelectTermsExtraFields,
 } from 'global/reducers/auth';
 
 import LoginForm from './components/LoginForm';
 import CodeVerification from './components/CodeVerification';
+import TermsNotAccepted from './components/TermsNotAccepted';
 import messages from './messages';
-import { CODE_VERIFICATION_VIEW, LOGIN_FORM_VIEW } from './constants';
+import {
+  CODE_VERIFICATION_VIEW,
+  LOGIN_FORM_VIEW,
+  TERMS_NOT_ACCEPTED_VIEW,
+} from './constants';
 
 export const LoginPage = ({
   formData,
   onLogin,
-  errors: { loginError, verificationCodeError },
-  loaders: { loginLoading, verificationCodeLoading },
+  errors: { loginError, verificationCodeError, termsAcceptError },
+  loaders: { loginLoading, verificationCodeLoading, termsAcceptLoading },
   verificationNeeded,
   verificationSuccess,
   verifyCode,
+  termsNotAccepted,
+  termsExtraFields,
 }) => {
   useInjectSaga({ key: 'loginPage', saga: loginSaga });
   const { search } = useLocation();
@@ -56,10 +65,15 @@ export const LoginPage = ({
   const [currentView, setCurrentView] = useState(LOGIN_FORM_VIEW);
   const toLoginFormView = () => setCurrentView(LOGIN_FORM_VIEW);
   const toCodeVerificationView = () => setCurrentView(CODE_VERIFICATION_VIEW);
+  const toTermsNotAcceptedView = () => setCurrentView(TERMS_NOT_ACCEPTED_VIEW);
 
   useEffect(() => {
     if (verificationNeeded) toCodeVerificationView();
   }, [verificationNeeded]);
+
+  useEffect(() => {
+    if (termsNotAccepted) toTermsNotAcceptedView();
+  }, [termsNotAccepted]);
 
   useEffect(() => {
     if (verificationSuccess) {
@@ -97,6 +111,15 @@ export const LoginPage = ({
             verifyCode={verifyCode}
           />
         );
+      case TERMS_NOT_ACCEPTED_VIEW:
+        return (
+          <TermsNotAccepted
+            goBack={toLoginFormView}
+            error={termsAcceptError}
+            termsExtraFields={termsExtraFields}
+            loading={termsAcceptLoading}
+          />
+        );
       case LOGIN_FORM_VIEW:
       default:
         return (
@@ -114,6 +137,8 @@ export const LoginPage = ({
     verificationCodeLoading,
     loginError,
     verificationCodeError,
+    termsAcceptLoading,
+    termsAcceptError,
   ]);
 
   return (
@@ -144,8 +169,10 @@ LoginPage.propTypes = {
   errors: PropTypes.object,
   loaders: PropTypes.object,
   verificationNeeded: PropTypes.bool,
+  termsNotAccepted: PropTypes.bool,
   verificationSuccess: PropTypes.bool,
   verifyCode: PropTypes.func,
+  termsExtraFields: PropTypes.object,
 };
 
 const mapStateToProps = createStructuredSelector({
@@ -154,6 +181,8 @@ const mapStateToProps = createStructuredSelector({
   errors: makeSelectErrors(),
   verificationNeeded: makeSelectVerificationNeeded(),
   verificationSuccess: makeSelectVerificationSuccess(),
+  termsNotAccepted: makeSelectTermsNotAccepted(),
+  termsExtraFields: makeSelectTermsExtraFields(),
 });
 
 const mapDispatchToProps = {

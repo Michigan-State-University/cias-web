@@ -34,6 +34,15 @@ export const makeSelectLoginFormData = () =>
 export const makeSelectVerificationNeeded = () =>
   createSelector(selectAuth, (authState) => authState.verificationCodeNeeded);
 
+export const makeSelectTermsNotAccepted = () =>
+  createSelector(selectAuth, (authState) => authState.termsNotAccepted);
+
+export const makeSelectTermsExtraFields = () =>
+  createSelector(
+    selectAuth,
+    (authState) => authState.termsNotAcceptedExtraFields,
+  );
+
 export const makeSelectVerificationSuccess = () =>
   createSelector(selectAuth, (authState) => authState.verificationCodeSuccess);
 
@@ -58,3 +67,6 @@ export const makeSelectIsEInterventionAdmin = () =>
   createSelector(makeSelectUserRoles(), (roles) =>
     roles?.includes(Roles.EInterventionAdmin),
   );
+
+export const makeSelectCachePassword = () =>
+  createSelector(selectAuth, (authState) => authState.cache.password);
