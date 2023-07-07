@@ -26,6 +26,7 @@ import { PhoneAttributes } from 'models/Phone';
 
 import { requiredValidationSchema } from 'utils/validators';
 import { getUTCDateString } from 'utils/dateUtils';
+import { useCallbackRef } from 'utils/useCallbackRef';
 
 import Box from 'components/Box';
 import { SelectOption } from 'components/Select/types';
@@ -165,6 +166,8 @@ const HenryFordInitialScreenLayout = ({
       sexOption: sexSelectOptions.current.find(({ value }) => value === sex),
       dobDate: new Date(dob),
       // TODO map hfhs phone to phone attributes
+      // TODO show errors in phone number form on continue click (mark touched)
+      // TODO hide error in phone number form when other field changed after BE validation
       phoneAttributes: null,
       phoneTypeOption: phoneTypeSelectOptions.current.find(
         ({ value }) => value === phoneType,
@@ -210,6 +213,13 @@ const HenryFordInitialScreenLayout = ({
         phoneTypeOption: '',
         phoneAttributes: '',
       });
+
+      if (phoneNumberFormRef.current) {
+        phoneNumberFormRef.current.setErrors({
+          iso: '',
+          number: '',
+        });
+      }
       setFormError(PatientDataFormError.BASE_DATA_VERIFICATION);
       return () => setFormError(null);
     }
@@ -222,6 +232,20 @@ const HenryFordInitialScreenLayout = ({
       formRef.current.setFieldValue('phoneAttributes', phoneAttributes);
     }
   };
+
+  const [messagePhoneDirty, setMessagePhoneDirty] = useState(false);
+  const [messagePhoneValid, setMessagePhoneValid] = useState(true);
+
+  const { callbackRef: phoneNumberFormCallbackRef, ref: phoneNumberFormRef } =
+    useCallbackRef(
+      (
+        phoneNumberForm: Nullable<FormikProps<PhoneNumberFormCalculatedValue>>,
+      ) => {
+        setMessagePhoneDirty(!!phoneNumberForm?.dirty);
+        setMessagePhoneValid(!!phoneNumberForm?.isValid);
+        return null;
+      },
+    );
 
   return (
     <Formik
@@ -288,27 +312,6 @@ const HenryFordInitialScreenLayout = ({
                     inputProps={{ ...inputStyles, disabled }}
                   />
                 </Col>
-                <Col xs={12}>
-                  <PhoneNumberForm
-                    // @ts-ignore
-                    formatMessage={formatMessage}
-                    phone={phoneAttributes}
-                    changePhoneNumber={onPhoneChange}
-                    confirmationDisabled
-                    prefixLabelMessage={messages.phoneNumberPrefix}
-                    phoneLabel={messages.phoneNumber}
-                    required={false}
-                    allowPartial
-                    prefixInputProps={{
-                      ...inputStyles,
-                      ...selectStyles,
-                      isDisabled: disabled,
-                    }}
-                    numberInputProps={{ ...inputStyles, disabled }}
-                    // TODO handle errors
-                    // TODO style form
-                  />
-                </Col>
                 <Col {...columnClassMap}>
                   <FormikSelect
                     formikKey="phoneTypeOption"
@@ -321,6 +324,25 @@ const HenryFordInitialScreenLayout = ({
                       placeholder: formatMessage(messages.phoneTypePlaceholder),
                       isDisabled: disabled,
                     }}
+                  />
+                </Col>
+                <Col xs={12}>
+                  <PhoneNumberForm
+                    // @ts-ignore
+                    formatMessage={formatMessage}
+                    phone={phoneAttributes}
+                    changePhoneNumber={onPhoneChange}
+                    confirmationDisabled
+                    prefixLabelMessage={messages.phoneNumberPrefix}
+                    phoneLabel={messages.phoneNumber}
+                    required
+                    prefixInputProps={{
+                      ...inputStyles,
+                      ...selectStyles,
+                      isDisabled: disabled,
+                    }}
+                    numberInputProps={{ ...inputStyles, disabled }}
+                    ref={phoneNumberFormCallbackRef}
                   />
                 </Col>
               </Row>
@@ -339,7 +361,11 @@ const HenryFordInitialScreenLayout = ({
               <Box>
                 <ActionButtons
                   renderContinueButton
-                  continueButtonDisabled={!isValid}
+                  continueButtonDisabled={
+                    !isValid ||
+                    !messagePhoneValid ||
+                    (messagePhoneDirty && !phoneAttributes?.number)
+                  }
                   continueButtonLoading={verifying}
                   onContinueClick={handleSubmit}
                 />

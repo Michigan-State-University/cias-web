@@ -21,9 +21,11 @@ const phoneNumberSchema = (formatMessage, country, required, allowPartial) => {
     ? Yup.string().required(formatMessage(messages.phoneNumberRequired))
     : Yup.string();
 
-  const isoValue = required
-    ? Yup.string().required(formatMessage(messages.phoneNumberCodeRequired))
-    : Yup.string();
+  const iso = required
+    ? Yup.object()
+        .required(formatMessage(messages.phoneNumberCodeRequired))
+        .nullable()
+    : Yup.object();
 
   return Yup.object().shape({
     number: number.phoneNumber(
@@ -31,9 +33,7 @@ const phoneNumberSchema = (formatMessage, country, required, allowPartial) => {
       country,
       allowPartial,
     ),
-    iso: Yup.object().shape({
-      value: isoValue,
-    }),
+    iso,
   });
 };
 

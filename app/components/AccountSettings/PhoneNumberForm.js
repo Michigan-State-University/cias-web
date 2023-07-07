@@ -32,7 +32,7 @@ const initialValues = ({ number, iso }) => {
   }
   return {
     number: parsedNumber ?? '',
-    iso: { value: iso ?? '' },
+    iso: iso ?? null,
   };
 };
 
@@ -65,14 +65,14 @@ const PhoneNumberForm = React.forwardRef(
     const { number, iso, prefix, confirmed } = phone ?? {};
 
     const onSubmit = (
-      { number: submitNumber, iso: { value: isoValue } },
+      { number: submitNumber, iso: isoOption },
       { setSubmitting },
     ) => {
-      const prefixValue = `+${getCountryCallingCode(isoValue)}`;
-      const parsedNumber = parsePhoneNumber(submitNumber, isoValue);
+      const prefixValue = `+${getCountryCallingCode(isoOption?.value)}`;
+      const parsedNumber = parsePhoneNumber(submitNumber, isoOption?.value);
       const submitPayload = {
         number: parsedNumber?.nationalNumber ?? '',
-        iso: isoValue,
+        iso: isoOption?.value,
         prefix: prefixValue,
       };
       const hasPhoneNumberChanged = !isEqual(
@@ -132,12 +132,9 @@ const PhoneNumberForm = React.forwardRef(
         {error && <ErrorAlert mt={25} errorText={error} />}
         <Formik
           validate={(values) => {
-            const {
-              iso: { value: country },
-            } = values;
             const schema = phoneNumberSchema(
               formatMessage,
-              country,
+              values.iso?.value,
               required,
               allowPartial,
             );
@@ -155,12 +152,12 @@ const PhoneNumberForm = React.forwardRef(
           {({
             handleSubmit,
             isValid,
-            values: { number: numberValue, iso: isoValue },
+            values: { number: numberValue, iso: isoOption },
           }) => {
             const isButtonActive = !isValid;
 
-            const currentPhoneNumber = isoValue?.value
-              ? ` +${getCountryCallingCode(isoValue.value)} ${numberValue}`
+            const currentPhoneNumber = isoOption?.value
+              ? ` +${getCountryCallingCode(isoOption.value)} ${numberValue}`
               : '';
 
             return (
@@ -184,10 +181,10 @@ const PhoneNumberForm = React.forwardRef(
                       filterOption,
                       placeholder: formatMessage(messages.countryCode),
                       onMenuClose: () => inputNumberRef.current.focus(),
-                      value: isoValue.value
+                      value: isoOption?.value
                         ? {
-                            value: isoValue.value,
-                            label: getCodeLabel(isoValue.value),
+                            value: isoOption.value,
+                            label: getCodeLabel(isoOption.value),
                           }
                         : null,
                       disabled,
@@ -201,7 +198,7 @@ const PhoneNumberForm = React.forwardRef(
                     formikKey="number"
                     placeholder={formatMessage(messages.phoneNumber)}
                     type="tel"
-                    countryCode={isoValue.value}
+                    countryCode={isoOption?.value}
                     inputProps={{
                       ref: inputNumberRef,
                       width: '100%',
