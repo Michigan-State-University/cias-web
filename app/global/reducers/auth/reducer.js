@@ -82,6 +82,7 @@ export const initialState = {
   cache: {
     user: null,
     phoneNumberPreview: null,
+    password: null,
   },
 };
 
@@ -299,6 +300,7 @@ export const authReducer = (state = initialState, { type, payload }) =>
       case TERMS_NOT_ACCEPTED:
         draft.termsNotAccepted = true;
         draft.termsNotAcceptedExtraFields = payload.fields;
+        draft.cache.password = payload.password;
         break;
 
       case TERMS_ACCEPT_REQUEST:
@@ -308,11 +310,13 @@ export const authReducer = (state = initialState, { type, payload }) =>
 
       case TERMS_ACCEPT_SUCCESS:
         draft.loaders.termsAcceptLoading = false;
+        draft.cache.password = null;
         break;
 
       case TERMS_ACCEPT_ERROR:
         draft.loaders.termsAcceptLoading = false;
         draft.errors.termsAcceptError = payload.error;
+        draft.cache.password = null;
         break;
     }
   });

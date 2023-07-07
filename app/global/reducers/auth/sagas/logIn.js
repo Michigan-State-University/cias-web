@@ -70,7 +70,10 @@ function* login({ payload: { email, password } }) {
         yield put(verificationCodeNeeded());
       if (reason === ForbiddenReason.TERMS_NOT_ACCEPTED)
         yield put(
-          termsNotAccepted({ ...objectToCamelCase(extraFields), email }),
+          termsNotAccepted(
+            { ...objectToCamelCase(extraFields), email },
+            password,
+          ),
         );
     }
   }

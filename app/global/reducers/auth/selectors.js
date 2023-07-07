@@ -67,3 +67,6 @@ export const makeSelectIsEInterventionAdmin = () =>
   createSelector(makeSelectUserRoles(), (roles) =>
     roles?.includes(Roles.EInterventionAdmin),
   );
+
+export const makeSelectCachePassword = () =>
+  createSelector(selectAuth, (authState) => authState.cache.password);

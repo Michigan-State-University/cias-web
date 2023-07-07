@@ -132,8 +132,8 @@ export const loginError = (error) => actionBuilder(LOGIN_ERROR, { error });
 export const verificationCodeNeeded = () =>
   actionBuilder(VERIFICATION_CODE_NEEDED, {});
 
-export const termsNotAccepted = (fields) =>
-  actionBuilder(TERMS_NOT_ACCEPTED, { fields });
+export const termsNotAccepted = (fields, password) =>
+  actionBuilder(TERMS_NOT_ACCEPTED, { fields, password });
 
 export const verificationCodeRequest = (verificationCode) =>
   actionBuilder(VERIFICATION_CODE_REQUEST, { verificationCode });
