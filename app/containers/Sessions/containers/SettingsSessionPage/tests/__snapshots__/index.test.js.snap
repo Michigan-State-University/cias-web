@@ -49,7 +49,7 @@ exports[`<SettingsSessionPage /> Should render and match the snapshot 1`] = `
   color: unset;
 }
 
-.c35 {
+.c34 {
   width: auto;
   height: auto;
   display: block;
@@ -78,7 +78,7 @@ exports[`<SettingsSessionPage /> Should render and match the snapshot 1`] = `
   color: #2F3850;
 }
 
-.c37 {
+.c36 {
   margin: 0;
   font-family: DM Sans;
   font-size: 15px;
@@ -88,7 +88,7 @@ exports[`<SettingsSessionPage /> Should render and match the snapshot 1`] = `
   color: #2F3850;
 }
 
-.c40 {
+.c39 {
   margin: 0;
   font-family: DM Sans;
   font-size: 15px;
@@ -200,7 +200,7 @@ exports[`<SettingsSessionPage /> Should render and match the snapshot 1`] = `
   height: auto;
 }
 
-.c32 {
+.c31 {
   display: -webkit-box;
   display: -webkit-flex;
   display: -ms-flexbox;
@@ -219,7 +219,7 @@ exports[`<SettingsSessionPage /> Should render and match the snapshot 1`] = `
   width: 100%;
 }
 
-.c38 {
+.c37 {
   display: -webkit-box;
   display: -webkit-flex;
   display: -ms-flexbox;
@@ -250,7 +250,7 @@ exports[`<SettingsSessionPage /> Should render and match the snapshot 1`] = `
   height: auto;
 }
 
-.c36 {
+.c35 {
   width: auto;
   height: auto;
   -webkit-transition: -webkit-transform 0.2s;
@@ -265,7 +265,7 @@ exports[`<SettingsSessionPage /> Should render and match the snapshot 1`] = `
   color: #2F3850;
 }
 
-.c31 {
+.c30 {
   font-family: DM Sans;
   font-size: 13px;
   line-height: 130%;
@@ -277,7 +277,7 @@ exports[`<SettingsSessionPage /> Should render and match the snapshot 1`] = `
   width: fit-content;
 }
 
-.c39 {
+.c38 {
   font-family: DM Sans;
   font-size: 13px;
   line-height: 130%;
@@ -285,7 +285,7 @@ exports[`<SettingsSessionPage /> Should render and match the snapshot 1`] = `
   color: #2F3850;
 }
 
-.c50 {
+.c49 {
   font-family: DM Sans;
   font-size: 13px;
   line-height: 130%;
@@ -316,19 +316,7 @@ exports[`<SettingsSessionPage /> Should render and match the snapshot 1`] = `
   width: 100%;
 }
 
-.c30 {
-  display: -webkit-box;
-  display: -webkit-flex;
-  display: -ms-flexbox;
-  display: flex;
-  -webkit-flex-direction: column;
-  -ms-flex-direction: column;
-  flex-direction: column;
-  width: 100%;
-  opacity: 0.5;
-}
-
-.c34 {
+.c33 {
   display: -webkit-box;
   display: -webkit-flex;
   display: -ms-flexbox;
@@ -340,7 +328,7 @@ exports[`<SettingsSessionPage /> Should render and match the snapshot 1`] = `
   margin-top: 20px;
 }
 
-.c42 {
+.c41 {
   display: -webkit-box;
   display: -webkit-flex;
   display: -ms-flexbox;
@@ -357,7 +345,7 @@ exports[`<SettingsSessionPage /> Should render and match the snapshot 1`] = `
   align-items: flex-start;
 }
 
-.c41 {
+.c40 {
   max-width: 100% !important;
   width: 100%;
   margin: 0 !important;
@@ -419,22 +407,23 @@ exports[`<SettingsSessionPage /> Should render and match the snapshot 1`] = `
   color: #ABBBD1;
 }
 
-.c33 {
+.c32 {
   padding: 12px;
   border-style: solid;
   border-width: 1px;
   border-color: #E9F1FB;
   border-radius: 5px;
   color: #2F3850;
+  opacity: 0.5;
 }
 
-.c33:focus {
+.c32:focus {
   box-shadow: none;
   outline: none;
   border-color: #107969;
 }
 
-.c33:disabled {
+.c32:disabled {
   color: #ABBBD1;
 }
 
@@ -454,16 +443,16 @@ exports[`<SettingsSessionPage /> Should render and match the snapshot 1`] = `
   border: 1px solid transparent;
 }
 
-.c45 {
+.c44 {
   display: none;
 }
 
-.c44:disabled + label > .c48 {
+.c43:disabled + label > .c47 {
   opacity: 0.5;
   cursor: not-allowed;
 }
 
-.c47 {
+.c46 {
   width: 100%;
   display: -webkit-box;
   display: -webkit-flex;
@@ -475,20 +464,20 @@ exports[`<SettingsSessionPage /> Should render and match the snapshot 1`] = `
   align-items: center;
 }
 
-.c47:hover {
+.c46:hover {
   cursor: pointer;
 }
 
-.c44:disabled + .c46 {
+.c43:disabled + .c45 {
   opacity: 0.5;
   cursor: not-allowed;
 }
 
-.c49 {
+.c48 {
   margin-left: 5px;
 }
 
-.c43 {
+.c42 {
   width: 100%;
   padding: 16px;
   border: 1px solid #E9F1FB;
@@ -623,22 +612,6 @@ exports[`<SettingsSessionPage /> Should render and match the snapshot 1`] = `
   background-color: #FFFFFF;
   border-radius: 5px;
   box-shadow: 0px 4px 20px #E3EEFB;
-}
-
-@media only screen and (min-width:768px) {
-
-}
-
-@media only screen and (min-width:960px) {
-
-}
-
-@media only screen and (min-width:1170px) {
-
-}
-
-@media only screen and (min-width:1360px) {
-
 }
 
 @media only screen and (min-width:768px) {
@@ -884,14 +857,13 @@ exports[`<SettingsSessionPage /> Should render and match the snapshot 1`] = `
         class="c29"
       >
         <div
-          class="c30"
-          disabled=""
+          class="c27"
         >
           <label
             for="autofinishDelay"
           >
             <p
-              class="c31"
+              class="c30"
               font-size="13"
               width="fit-content"
             >
@@ -899,11 +871,12 @@ exports[`<SettingsSessionPage /> Should render and match the snapshot 1`] = `
             </p>
           </label>
           <div
-            class="c32"
+            class="c31"
             width="100%"
           >
             <input
-              class="c33"
+              class="c32"
+              disabled=""
               id="autofinishDelay"
               name="autofinishDelay"
               type="text"
@@ -912,10 +885,10 @@ exports[`<SettingsSessionPage /> Should render and match the snapshot 1`] = `
           </div>
         </div>
         <div
-          class="c34"
+          class="c33"
         >
           <div
-            class="c35"
+            class="c34"
             data-testid="select"
             disabled=""
           >
@@ -974,7 +947,7 @@ exports[`<SettingsSessionPage /> Should render and match the snapshot 1`] = `
                   >
                     <img
                       alt="arrow"
-                      class="c36"
+                      class="c35"
                       src="IMAGE_MOCK"
                       transform=""
                     />
@@ -987,12 +960,12 @@ exports[`<SettingsSessionPage /> Should render and match the snapshot 1`] = `
       </div>
     </div>
     <h3
-      class="c37"
+      class="c36"
     >
       Narrator Settings
     </h3>
     <div
-      class="c38"
+      class="c37"
     >
       <div
         class="c10 c11"
@@ -1024,7 +997,7 @@ exports[`<SettingsSessionPage /> Should render and match the snapshot 1`] = `
                 class="c19"
               >
                 <p
-                  class="c39"
+                  class="c38"
                   font-weight="bold"
                 >
                   Narrator Active
@@ -1043,7 +1016,7 @@ exports[`<SettingsSessionPage /> Should render and match the snapshot 1`] = `
       </div>
     </div>
     <div
-      class="c38"
+      class="c37"
     >
       <div
         class="c10 c11"
@@ -1143,12 +1116,12 @@ exports[`<SettingsSessionPage /> Should render and match the snapshot 1`] = `
       </div>
     </div>
     <h3
-      class="c40"
+      class="c39"
     >
       Default narrator
     </h3>
     <div
-      class="c41"
+      class="c40"
       style="box-sizing: border-box; position: relative; margin-left: auto; margin-right: auto; padding-left: 15px; padding-right: 15px; max-width: 960px;"
     >
       <div
@@ -1157,28 +1130,28 @@ exports[`<SettingsSessionPage /> Should render and match the snapshot 1`] = `
       >
         <div
           align="start"
-          class="c42"
+          class="c41"
           style="box-sizing: border-box; min-height: 1px; position: relative; padding-left: 15px; padding-right: 15px; width: 100%; flex-basis: 0px; flex-grow: 1; flex-shrink: 0; max-width: 100%; margin-left: 0%;"
         >
           <div
-            class="c10 c43"
+            class="c10 c42"
           >
             <input
-              class="c44 c45"
+              class="c43 c44"
               disabled=""
               id="character-setting-peedy"
               type="radio"
             />
             <label
-              class="c46 c47"
+              class="c45 c46"
               for="character-setting-peedy"
             >
               <img
-                class="c48 "
+                class="c47 "
                 src="IMAGE_MOCK"
               />
               <div
-                class="c17 c49"
+                class="c17 c48"
               >
                 <div
                   class="c10"
@@ -1187,7 +1160,7 @@ exports[`<SettingsSessionPage /> Should render and match the snapshot 1`] = `
                     class="c17"
                   >
                     <p
-                      class="c50"
+                      class="c49"
                     >
                       Peedy
                     </p>
@@ -1206,28 +1179,28 @@ exports[`<SettingsSessionPage /> Should render and match the snapshot 1`] = `
         </div>
         <div
           align="start"
-          class="c42"
+          class="c41"
           style="box-sizing: border-box; min-height: 1px; position: relative; padding-left: 15px; padding-right: 15px; width: 100%; flex-basis: 0px; flex-grow: 1; flex-shrink: 0; max-width: 100%; margin-left: 0%;"
         >
           <div
-            class="c10 c43"
+            class="c10 c42"
           >
             <input
-              class="c44 c45"
+              class="c43 c44"
               disabled=""
               id="character-setting-emmi"
               type="radio"
             />
             <label
-              class="c46 c47"
+              class="c45 c46"
               for="character-setting-emmi"
             >
               <img
-                class="c48 "
+                class="c47 "
                 src="IMAGE_MOCK"
               />
               <div
-                class="c17 c49"
+                class="c17 c48"
               >
                 <div
                   class="c10"
@@ -1236,7 +1209,7 @@ exports[`<SettingsSessionPage /> Should render and match the snapshot 1`] = `
                     class="c17"
                   >
                     <p
-                      class="c50"
+                      class="c49"
                     >
                       Emmi
                     </p>
