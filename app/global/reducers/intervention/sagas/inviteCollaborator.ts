@@ -2,9 +2,11 @@ import axios from 'axios';
 import { call, put, takeLatest } from '@redux-saga/core/effects';
 import { toast } from 'react-toastify';
 
-import { formatMessage } from 'utils/intlOutsideReact';
 import { Collaborator } from 'models/Collaborator';
+
+import { formatMessage } from 'utils/intlOutsideReact';
 import { jsonApiToArray } from 'utils/jsonApiMapper';
+import { formatApiErrorMessage } from 'utils/formatApiErrorMessage';
 
 import { setUsersItemsState, UserItemState } from 'global/reducers/userList';
 import {
@@ -34,7 +36,10 @@ export function* addCollaborators({
     }
   } catch (error) {
     yield put(addCollaboratorsError(error));
-    yield call(toast.error, formatMessage(messages.addCollaboratorError));
+    yield call(
+      toast.error,
+      formatApiErrorMessage(error, messages.addCollaboratorError),
+    );
     if (ids) {
       yield put(setUsersItemsState(ids, UserItemState.IDLE));
     }
