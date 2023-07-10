@@ -10,6 +10,7 @@ import { Col, Container, Row, ScreenClassMap } from 'react-grid-system';
 import { Form, Formik, FormikConfig, FormikProps } from 'formik';
 import * as Yup from 'yup';
 import { IntlShape } from 'react-intl/src/types';
+import { CountryCode } from 'libphonenumber-js/types';
 
 import { colors, themeColors } from 'theme';
 import globalMessages from 'global/i18n/globalMessages';
@@ -22,11 +23,9 @@ import {
   Sex,
 } from 'models/HfhsPatient';
 import { ApiMessageError } from 'models/Api';
-import { PhoneAttributes } from 'models/Phone';
 
 import { requiredValidationSchema } from 'utils/validators';
 import { getUTCDateString } from 'utils/dateUtils';
-import { useCallbackRef } from 'utils/useCallbackRef';
 
 import Box from 'components/Box';
 import { SelectOption } from 'components/Select/types';
@@ -34,12 +33,16 @@ import FormikInput from 'components/FormikInput';
 import FormikSelect from 'components/FormikSelect';
 import FormikDatePicker from 'components/FormikDatePicker';
 import Text from 'components/Text';
-import PhoneNumberForm from 'components/AccountSettings/PhoneNumberForm';
-import { PhoneNumberFormCalculatedValue } from 'components/AccountSettings/types';
+import {
+  FormikPhoneNumberInput,
+  phoneNumberSchema,
+} from 'components/FormikPhoneNumberInput';
+
+import { formatPhoneNumberForHfhs, parsePhoneNumberFromHfhs } from '../utils';
 
 import { ActionButtons } from '../components/ActionButtons';
 import messages from './messages';
-import { formatPhoneNumberForHfhs } from '../utils';
+import { DEFAULT_COUNTRY_CODE } from '../../../components/FormikPhoneNumberInput/constants';
 
 const inputStyles = {
   width: '100%',
@@ -60,44 +63,42 @@ export type PatientDataFormValues = Pick<
 > & {
   sexOption: Nullable<SelectOption<Sex>>;
   dobDate: Nullable<Date>;
-  phoneAttributes: Nullable<PhoneAttributes>;
   phoneTypeOption: Nullable<SelectOption<PhoneType>>;
+  iso: Nullable<SelectOption<CountryCode>>;
+  number: string;
 };
 
 const schema = (formatMessage: IntlShape['formatMessage']) =>
-  Yup.object().shape({
-    firstName: requiredValidationSchema,
-    lastName: requiredValidationSchema,
-    sexOption: Yup.object()
-      .required(
+  Yup.object()
+    .shape({
+      firstName: requiredValidationSchema,
+      lastName: requiredValidationSchema,
+      sexOption: Yup.object()
+        .required(
+          // @ts-ignore
+          formatMessage(globalMessages.validators.required),
+        )
+        .nullable(),
+      dobDate: Yup.date()
+        .required(
+          // @ts-ignore
+          formatMessage(globalMessages.validators.required),
+        )
+        .nullable(),
+      zipCode: requiredValidationSchema.matches(
+        zipCodeRegex,
         // @ts-ignore
-        formatMessage(globalMessages.validators.required),
-      )
-      .nullable(),
-    dobDate: Yup.date()
-      .required(
-        // @ts-ignore
-        formatMessage(globalMessages.validators.required),
-      )
-      .nullable(),
-    zipCode: requiredValidationSchema.matches(
-      zipCodeRegex,
-      // @ts-ignore
-      formatMessage(globalMessages.validators.zipCode),
-    ),
-    phoneAttributes: Yup.object()
-      .required(
-        // @ts-ignore
-        formatMessage(globalMessages.validators.required),
-      )
-      .nullable(),
-    phoneTypeOption: Yup.object()
-      .required(
-        // @ts-ignore
-        formatMessage(globalMessages.validators.required),
-      )
-      .nullable(),
-  });
+        formatMessage(globalMessages.validators.zipCode),
+      ),
+      phoneTypeOption: Yup.object()
+        .required(
+          // @ts-ignore
+          formatMessage(globalMessages.validators.required),
+        )
+        .nullable(),
+    })
+    // @ts-ignore
+    .concat(phoneNumberSchema(formatMessage, true, false));
 
 enum PatientDataFormError {
   BASE_DATA_VERIFICATION,
@@ -109,8 +110,12 @@ const emptyInitialValues: PatientDataFormValues = {
   sexOption: null,
   dobDate: null,
   zipCode: '',
-  phoneAttributes: null,
   phoneTypeOption: null,
+  iso: {
+    value: DEFAULT_COUNTRY_CODE,
+    label: '',
+  },
+  number: '',
 };
 
 export type Props = {
@@ -162,12 +167,16 @@ const HenryFordInitialScreenLayout = ({
     const { sex, dob, phoneNumber, phoneType, ...restValues } =
       hfhsPatientDetail;
 
+    const parsedPhone = parsePhoneNumberFromHfhs(phoneNumber);
+
     return {
       sexOption: sexSelectOptions.current.find(({ value }) => value === sex),
       dobDate: new Date(dob),
-      // TODO map hfhs phone to phone attributes
-      // TODO hide error in phone number form when other field changed after BE validation
-      phoneAttributes: null,
+      iso: {
+        value: parsedPhone?.country ?? DEFAULT_COUNTRY_CODE,
+        label: '',
+      },
+      number: parsedPhone?.formatNational() ?? '',
       phoneTypeOption: phoneTypeSelectOptions.current.find(
         ({ value }) => value === phoneType,
       ),
@@ -179,19 +188,14 @@ const HenryFordInitialScreenLayout = ({
     values,
   ) => {
     if (!onSubmitPatientData) return;
-    const {
-      sexOption,
-      dobDate,
-      phoneAttributes,
-      phoneTypeOption,
-      ...restValues
-    } = values;
+    const { sexOption, dobDate, phoneTypeOption, iso, number, ...restValues } =
+      values;
 
     onSubmitPatientData({
       ...restValues,
       sex: sexOption!.value,
       dob: getUTCDateString(dobDate!),
-      phoneNumber: formatPhoneNumberForHfhs(phoneAttributes!),
+      phoneNumber: formatPhoneNumberForHfhs({ iso: iso!.value, number }),
       phoneType: phoneTypeOption!.value,
     });
   };
@@ -210,41 +214,14 @@ const HenryFordInitialScreenLayout = ({
         dobDate: '',
         zipCode: '',
         phoneTypeOption: '',
-        phoneAttributes: '',
+        iso: '',
+        number: '',
       });
 
-      if (phoneNumberFormRef.current) {
-        phoneNumberFormRef.current.setErrors({
-          iso: '',
-          number: '',
-        });
-      }
       setFormError(PatientDataFormError.BASE_DATA_VERIFICATION);
       return () => setFormError(null);
     }
   }, [verifyingError]);
-
-  const onPhoneChange = ({
-    phoneAttributes,
-  }: PhoneNumberFormCalculatedValue) => {
-    if (formRef.current) {
-      formRef.current.setFieldValue('phoneAttributes', phoneAttributes);
-    }
-  };
-
-  const [messagePhoneDirty, setMessagePhoneDirty] = useState(false);
-  const [messagePhoneValid, setMessagePhoneValid] = useState(true);
-
-  const { callbackRef: phoneNumberFormCallbackRef, ref: phoneNumberFormRef } =
-    useCallbackRef(
-      (
-        phoneNumberForm: Nullable<FormikProps<PhoneNumberFormCalculatedValue>>,
-      ) => {
-        setMessagePhoneDirty(!!phoneNumberForm?.dirty);
-        setMessagePhoneValid(!!phoneNumberForm?.isValid);
-        return null;
-      },
-    );
 
   return (
     <Formik
@@ -253,7 +230,7 @@ const HenryFordInitialScreenLayout = ({
       onSubmit={onSubmit}
       innerRef={formRef}
     >
-      {({ handleSubmit, isValid, values: { phoneAttributes } }) => (
+      {({ handleSubmit, isValid }) => (
         <Form>
           <Box my={24} mx={26}>
             <Container fluid style={{ padding: 0 }}>
@@ -326,22 +303,17 @@ const HenryFordInitialScreenLayout = ({
                   />
                 </Col>
                 <Col xs={12}>
-                  <PhoneNumberForm
-                    // @ts-ignore
-                    formatMessage={formatMessage}
-                    phone={phoneAttributes}
-                    changePhoneNumber={onPhoneChange}
-                    confirmationDisabled
-                    prefixLabelMessage={messages.phoneNumberPrefix}
+                  <FormikPhoneNumberInput
+                    isoKey="iso"
+                    numberKey="number"
+                    prefixLabel={messages.phoneNumberPrefix}
                     phoneLabel={messages.phoneNumber}
-                    required
                     prefixInputProps={{
                       ...inputStyles,
                       ...selectStyles,
                       isDisabled: disabled,
                     }}
                     numberInputProps={{ ...inputStyles, disabled }}
-                    ref={phoneNumberFormCallbackRef}
                   />
                 </Col>
               </Row>
@@ -360,17 +332,13 @@ const HenryFordInitialScreenLayout = ({
               <Box>
                 <ActionButtons
                   renderContinueButton
-                  continueButtonDisabled={
-                    !isValid ||
-                    !messagePhoneValid ||
-                    (messagePhoneDirty && !phoneAttributes?.number)
-                  }
+                  continueButtonDisabled={!isValid}
                   continueButtonLoading={verifying}
                   onContinueClick={() => {
-                    phoneNumberFormRef?.current?.setTouched({
-                      number: true,
-                      iso: true,
-                    });
+                    // phoneNumberFormRef?.current?.setTouched({
+                    //   number: true,
+                    //   iso: true,
+                    // });
                     handleSubmit();
                   }}
                 />
@@ -382,5 +350,4 @@ const HenryFordInitialScreenLayout = ({
     </Formik>
   );
 };
-
 export default HenryFordInitialScreenLayout;

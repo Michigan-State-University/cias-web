@@ -32,7 +32,7 @@ const initialValues = ({ number, iso }) => {
   }
   return {
     number: parsedNumber ?? '',
-    iso: iso ?? null,
+    iso: { value: iso ?? '' },
   };
 };
 
@@ -51,8 +51,6 @@ const PhoneNumberForm = React.forwardRef(
       phoneLabel,
       onError,
       allowPartial,
-      prefixInputProps,
-      numberInputProps,
     },
     ref,
   ) => {
@@ -188,7 +186,6 @@ const PhoneNumberForm = React.forwardRef(
                           }
                         : null,
                       disabled,
-                      ...prefixInputProps,
                     }}
                     submitOnChange
                   />
@@ -204,7 +201,6 @@ const PhoneNumberForm = React.forwardRef(
                       width: '100%',
                       onBlur: handleSubmit,
                       disabled,
-                      ...numberInputProps,
                     }}
                     required={required}
                   />
@@ -245,8 +241,6 @@ PhoneNumberForm.propTypes = {
   phoneLabel: PropTypes.object,
   onError: PropTypes.func,
   allowPartial: PropTypes.bool,
-  prefixInputProps: PropTypes.object,
-  numberInputProps: PropTypes.object,
 };
 
 PhoneNumberForm.defaultProps = {

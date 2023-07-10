@@ -90,11 +90,19 @@ export const getCalendarMetadata = (
   };
 };
 
-export const formatPhoneNumberForHfhs = ({ number, iso }: PhoneAttributes) => {
+export const formatPhoneNumberForHfhs = ({
+  number,
+  iso,
+}: Pick<PhoneAttributes, 'number' | 'iso'>) => {
   const parsedPhone = parsePhoneNumberFromString(number, iso);
   if (!parsedPhone) return '';
   return parsedPhone
     .formatInternational()
     .replace(new RegExp(' ', 'g'), '-')
     .slice(1);
+};
+
+export const parsePhoneNumberFromHfhs = (number: string) => {
+  const phone = `+${number.replace(new RegExp('-', 'g'), ' ')}`;
+  return parsePhoneNumberFromString(phone);
 };
