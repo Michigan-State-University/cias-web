@@ -18,6 +18,11 @@ export default defineMessages({
     id: `${scope}.interventionSettingsQuickExit`,
     defaultMessage: 'Quick Exit',
   },
+  quickExitHelp: {
+    id: `${scope}.quickExitHelp`,
+    defaultMessage:
+      'This setting allows participants to quickly leave the intervention if their privacy is compromised. To learn more, click <a href="https://www.cias.app/_files/ugd/afc5c9_2656a8eb9ed6490d9d33c1d36a30405a.pdf" target="_blank">here</a>. For more resources, visit <a href="https://www.cias.app/resources" target="_blank">www.cias.app/resources</a>.',
+  },
   interventionSettingsQuickExitLabel: {
     id: `${scope}.interventionSettingsQuickExitLabel`,
     defaultMessage: 'Turn on Quick Exit',

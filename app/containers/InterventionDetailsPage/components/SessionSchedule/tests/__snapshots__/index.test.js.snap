@@ -1,7 +1,26 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`<SessionSchedule /> Should render and match the snapshot 1`] = `
-.c3 {
+.c2 {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-flex-direction: row;
+  -ms-flex-direction: row;
+  flex-direction: row;
+  height: auto;
+  -webkit-align-content: center;
+  -ms-flex-line-pack: center;
+  align-content: center;
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  gap: 8px;
+}
+
+.c4 {
   display: -webkit-box;
   display: -webkit-flex;
   display: -ms-flexbox;
@@ -19,7 +38,7 @@ exports[`<SessionSchedule /> Should render and match the snapshot 1`] = `
   align-items: center;
 }
 
-.c2 {
+.c3 {
   width: auto;
   height: auto;
   display: block;
@@ -28,7 +47,27 @@ exports[`<SessionSchedule /> Should render and match the snapshot 1`] = `
   color: unset;
 }
 
-.c5 {
+.c7 {
+  width: auto;
+  height: auto;
+  display: block;
+  border-radius: 5px;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  color: unset;
+}
+
+.c8 {
+  width: auto;
+  height: auto;
+  display: block;
+  border-radius: 5px;
+  color: unset;
+}
+
+.c6 {
   width: auto;
   height: auto;
   margin-left: 8px;
@@ -36,6 +75,11 @@ exports[`<SessionSchedule /> Should render and match the snapshot 1`] = `
   -webkit-transition: -webkit-transform 0.2s;
   -webkit-transition: transform 0.2s;
   transition: transform 0.2s;
+}
+
+.c9 {
+  width: auto;
+  height: auto;
 }
 
 .c0 {
@@ -59,7 +103,7 @@ exports[`<SessionSchedule /> Should render and match the snapshot 1`] = `
   color: rgba(47,56,80,0.6);
 }
 
-.c4 {
+.c5 {
   font-family: DM Sans;
   font-size: 13px;
   line-height: 130%;
@@ -102,21 +146,41 @@ exports[`<SessionSchedule /> Should render and match the snapshot 1`] = `
     >
       <div
         class="c3"
-        role="button"
       >
-        <p
+        <div
           class="c4"
-          color="#B727EA"
-          font-weight="bold"
+          role="button"
         >
-          Select option
-        </p>
-        <img
-          alt="arrow"
-          class="c5"
-          src="IMAGE_MOCK"
-          transform=""
-        />
+          <p
+            class="c5"
+            color="#B727EA"
+            font-weight="bold"
+          >
+            Select option
+          </p>
+          <img
+            alt="arrow"
+            class="c6"
+            src="IMAGE_MOCK"
+            transform=""
+          />
+        </div>
+      </div>
+      <div
+        class="c7"
+        display="flex"
+      >
+        <div
+          class="c8"
+          data-for="session-scheduling-cdh"
+          data-tip=""
+        >
+          <img
+            alt="?"
+            class="c9"
+            src="IMAGE_MOCK"
+          />
+        </div>
       </div>
     </div>
   </div>

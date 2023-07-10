@@ -37,6 +37,7 @@ type TooltipProps = {
   place?: 'top' | 'right' | 'bottom' | 'left';
   stretchContent?: boolean;
   backgroundColor?: string;
+  allowClicksOnContent?: boolean;
 } & Record<string, unknown>;
 
 /**
@@ -53,6 +54,7 @@ const Tooltip = ({
   place,
   stretchContent,
   backgroundColor,
+  allowClicksOnContent,
   ...restProps
 }: TooltipProps) => {
   const tooltipRef = useRef<HTMLDivElement>();
@@ -81,8 +83,9 @@ const Tooltip = ({
   }, [shouldShowTooltip]);
 
   const onTooltipClick = (event: MouseEvent) => {
-    const portal = document.getElementById(TOOLTIP_PORTAL_ID);
+    if (allowClicksOnContent) return;
 
+    const portal = document.getElementById(TOOLTIP_PORTAL_ID);
     if (portal?.contains(event.target as Node)) {
       event.preventDefault();
       event.stopPropagation();

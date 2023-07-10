@@ -27,6 +27,11 @@ export default defineMessages({
     id: `${scope}.enterName`,
     defaultMessage: 'Enter your name',
   },
+  nameHelp: {
+    id: `${scope}.nameHelp`,
+    defaultMessage:
+      'You can call the participant by their name throughout the session. Click <a href="https://www.cias.app/_files/ugd/afc5c9_fc039ef55e38488b82f319a7b5112761.pdf" target="_blank">here</a> to see a step-by-step guide. For more help resources, visit <a href="https://www.cias.app/resources" target="_blank">www.cias.app/resources</a>.',
+  },
   enterNamePhonetically: {
     id: `${scope}.enterNamePhonetically`,
     defaultMessage: 'Spell your name how it sounds',

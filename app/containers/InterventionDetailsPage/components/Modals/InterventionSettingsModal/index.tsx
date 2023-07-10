@@ -57,6 +57,7 @@ import { GlobalReplacementModal } from 'components/MissingAnimationsModal';
 import Loader from 'components/Loader';
 import ErrorAlert from 'components/ErrorAlert';
 import Column from 'components/Column';
+import { HelpIconTooltip } from 'components/HelpIconTooltip';
 
 import {
   INTERVENTION_LANGUAGE_LABEL_ID,
@@ -329,7 +330,14 @@ const InterventionSettingsModal = ({ editingPossible, onClose }: Props) => {
                 </H3>
               </GCol>
               <GCol>
-                <H3>{formatMessage(messages.interventionSettingsQuickExit)}</H3>
+                <HelpIconTooltip
+                  id="quick-exit-cdh"
+                  tooltipContent={formatMessage(messages.quickExitHelp)}
+                >
+                  <H3>
+                    {formatMessage(messages.interventionSettingsQuickExit)}
+                  </H3>
+                </HelpIconTooltip>
               </GCol>
             </GRow>
             <GRow align="center">

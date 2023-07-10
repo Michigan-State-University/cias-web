@@ -15,6 +15,11 @@ export default defineMessages({
     id: `${scope}.info`,
     defaultMessage: 'If this session is next in the sequence',
   },
+  sessionSchedulingHelp: {
+    id: `${scope}.sessionSchedulingHelp`,
+    defaultMessage:
+      'Schedule when each session of your intervention is sent to participants. Learn more <a href="https://www.cias.app/_files/ugd/afc5c9_44a2c4b39b5e431daf98acdb4d61aa36.pdf" target="_blank">here</a>. For more help resources, visit <a href="https://www.cias.app/resources" target="_blank">www.cias.app/resources</a>.',
+  },
   send: {
     id: `${scope}.send`,
     defaultMessage: 'Send ',

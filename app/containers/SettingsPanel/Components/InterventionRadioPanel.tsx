@@ -7,8 +7,9 @@ import Text from 'components/Text';
 import Row from 'components/Row';
 import Radio from 'components/Radio';
 import H2 from 'components/H2';
-import Tooltip from 'components/Tooltip';
-import questionMark from 'assets/svg/grey-question-mark.svg';
+import { HelpIconTooltip } from 'components/HelpIconTooltip';
+import ConditionalWrapper from 'components/ConditionalWrapper';
+
 import { OptionType } from '../types';
 
 interface Props {
@@ -38,16 +39,12 @@ const InterventionRadioPanel = ({
   return (
     <Box mb={25} mt={48}>
       <Box mb={25} display="flex" align="center">
-        <H2>{radioPanelTitle}</H2>
-        {nameTooltip && (
-          // @ts-ignore
-          <Tooltip
-            id="intervention-type-tooltip"
-            ml={8}
-            icon={questionMark}
-            content={nameTooltip}
-          />
-        )}
+        <HelpIconTooltip
+          id="intervention-type-tooltip"
+          tooltipContent={nameTooltip}
+        >
+          <H2>{radioPanelTitle}</H2>
+        </HelpIconTooltip>
       </Box>
       {radioOptions.map((option, index) => {
         const isChecked = option.id === selectedValue;
@@ -76,9 +73,18 @@ const InterventionRadioPanel = ({
               mr={12}
               onChange={() => updateSetting(option.id)}
             >
-              <Text fontSize={15} fontWeight={isChecked ? 'bold' : 'regular'}>
-                {option.label}
-              </Text>
+              <ConditionalWrapper
+                if={!!option.help}
+                with={HelpIconTooltip}
+                wrapperProps={{
+                  tooltipContent: option.help!,
+                  id: option.id,
+                }}
+              >
+                <Text fontSize={15} fontWeight={isChecked ? 'bold' : 'regular'}>
+                  {option.label}
+                </Text>
+              </ConditionalWrapper>
             </Radio>
           </Row>
         );

@@ -1,9 +1,6 @@
 import React, { memo, useCallback } from 'react';
 import PropTypes from 'prop-types';
 import { useIntl } from 'react-intl';
-import { Markup } from 'interweave';
-
-import questionMark from 'assets/svg/grey-question-mark.svg';
 
 import { borders, colors } from 'theme';
 
@@ -12,7 +9,7 @@ import { numericValidator } from 'utils/validators';
 import { FullWidthSwitch } from 'components/Switch';
 import H3 from 'components/H3';
 import Row from 'components/Row';
-import Tooltip from 'components/Tooltip';
+import { HelpIconTooltip } from 'components/HelpIconTooltip';
 
 import { Input } from '../styled';
 import messages from '../messages';
@@ -87,16 +84,12 @@ const SettingsOption = ({
             checked={setting}
             onToggle={handleUpdate}
           >
-            <Row align="center" gap={8}>
+            <HelpIconTooltip
+              id={`question-settings-option-tooltip-${index}`}
+              tooltipContent={tooltipText}
+            >
               <H3>{formatMessage(messages[`${index}`])}</H3>
-              {tooltipText && (
-                <Tooltip
-                  id={`question-settings-option-tooltip-${index}`}
-                  icon={questionMark}
-                  content={<Markup content={tooltipText} />}
-                />
-              )}
-            </Row>
+            </HelpIconTooltip>
           </FullWidthSwitch>
         );
     }
