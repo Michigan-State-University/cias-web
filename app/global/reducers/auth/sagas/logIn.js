@@ -4,9 +4,10 @@ import axios from 'axios';
 
 import LocalStorageService from 'utils/localStorageService';
 import { mapCurrentUser } from 'utils/mapResponseObjects';
-import { HttpStatusCodes } from 'utils/constants';
+import { ForbiddenReason, HttpStatusCodes } from 'utils/constants';
 import { requestErrorMessageHandler } from 'utils/errors/requestErrorMessageHandler';
 import { responseStatusEquals } from 'utils/axiosUtils';
+import objectToCamelCase from 'utils/objectToCamelCase';
 
 import { makeSelectLocation } from 'containers/App/selectors';
 import { UserStorageController } from '../UserStorageController';
@@ -14,6 +15,7 @@ import {
   logIn,
   loginError,
   loginSuccess,
+  termsNotAccepted,
   verificationCodeNeeded,
 } from '../actions';
 import { LOGIN_REQUEST, REDIRECT_QUERY_KEY } from '../constants';
@@ -56,8 +58,24 @@ function* login({ payload: { email, password } }) {
     yield delay(300);
     yield put(loginError(requestErrorMessageHandler(error)));
 
-    if (responseStatusEquals(error.response, HttpStatusCodes.FORBIDDEN))
-      yield put(verificationCodeNeeded());
+    if (responseStatusEquals(error.response, HttpStatusCodes.FORBIDDEN)) {
+      const {
+        response: {
+          data: {
+            details: { reason, require_fields: extraFields },
+          },
+        },
+      } = error;
+      if (reason === ForbiddenReason.TWO_FACTOR_NEEDED)
+        yield put(verificationCodeNeeded());
+      if (reason === ForbiddenReason.TERMS_NOT_ACCEPTED)
+        yield put(
+          termsNotAccepted(
+            { ...objectToCamelCase(extraFields), email },
+            password,
+          ),
+        );
+    }
   }
 }
 
