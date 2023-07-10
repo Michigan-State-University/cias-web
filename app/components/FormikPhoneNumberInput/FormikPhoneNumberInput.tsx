@@ -1,6 +1,6 @@
 import React, { useRef, useMemo, FC } from 'react';
 import union from 'lodash/union';
-import { useField } from 'formik';
+import { useField, useFormikContext } from 'formik';
 import { getCountryCallingCode } from 'libphonenumber-js';
 import { FlagIcon } from 'react-flag-kit';
 import { MessageDescriptor, useIntl } from 'react-intl';
@@ -28,6 +28,7 @@ export type Props = {
   phoneLabel?: MessageDescriptor;
   prefixInputProps?: object;
   numberInputProps?: object;
+  submitOnChange?: boolean;
 };
 
 export const FormikPhoneNumberInput: FC<Props> = ({
@@ -38,6 +39,7 @@ export const FormikPhoneNumberInput: FC<Props> = ({
   phoneLabel = messages.phoneNumberPrefixLabel,
   prefixInputProps,
   numberInputProps,
+  submitOnChange,
 }) => {
   const { formatMessage } = useIntl();
 
@@ -75,7 +77,14 @@ export const FormikPhoneNumberInput: FC<Props> = ({
     return filterData.toUpperCase().includes(value.toUpperCase());
   };
 
+  const { submitForm } = useFormikContext();
   const [{ value: iso }] = useField<Nullable<SelectOption<CountryCode>>>('iso');
+
+  const onNumberInputBlur = () => {
+    if (submitOnChange) {
+      submitForm();
+    }
+  };
 
   return (
     <Column>
@@ -97,6 +106,7 @@ export const FormikPhoneNumberInput: FC<Props> = ({
             disabled,
             ...prefixInputProps,
           }}
+          submitOnChange={submitOnChange}
         />
         <FormikNumberInput
           label={formatMessage(phoneLabel)}
@@ -108,6 +118,7 @@ export const FormikPhoneNumberInput: FC<Props> = ({
             ref: inputNumberRef,
             width: '100%',
             disabled,
+            onBlur: onNumberInputBlur,
             ...numberInputProps,
           }}
           required

@@ -36,13 +36,13 @@ import Text from 'components/Text';
 import {
   FormikPhoneNumberInput,
   phoneNumberSchema,
+  DEFAULT_COUNTRY_CODE,
 } from 'components/FormikPhoneNumberInput';
 
 import { formatPhoneNumberForHfhs, parsePhoneNumberFromHfhs } from '../utils';
 
 import { ActionButtons } from '../components/ActionButtons';
 import messages from './messages';
-import { DEFAULT_COUNTRY_CODE } from '../../../components/FormikPhoneNumberInput/constants';
 
 const inputStyles = {
   width: '100%',
