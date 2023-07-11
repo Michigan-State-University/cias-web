@@ -1,4 +1,4 @@
-import React, { useRef, useMemo, FC } from 'react';
+import React, { useRef, useMemo, FC, FocusEventHandler } from 'react';
 import union from 'lodash/union';
 import { useField, useFormikContext } from 'formik';
 import { getCountryCallingCode } from 'libphonenumber-js';
@@ -78,9 +78,12 @@ export const FormikPhoneNumberInput: FC<Props> = ({
   };
 
   const { submitForm } = useFormikContext();
-  const [{ value: iso }] = useField<Nullable<SelectOption<CountryCode>>>('iso');
+  const [{ value: iso }] =
+    useField<Nullable<SelectOption<CountryCode>>>(isoKey);
+  const [{ onBlur: onNumberBlur }] = useField<string>(numberKey);
 
-  const onNumberInputBlur = () => {
+  const onNumberInputBlur: FocusEventHandler<HTMLInputElement> = (event) => {
+    onNumberBlur(event);
     if (submitOnChange) {
       submitForm();
     }
