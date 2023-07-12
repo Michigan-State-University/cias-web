@@ -308,6 +308,7 @@ const HenryFordInitialScreenLayout = ({
                     numberKey="number"
                     prefixLabel={messages.phoneNumberPrefix}
                     phoneLabel={messages.phoneNumber}
+                    disabled={disabled}
                     prefixInputProps={{
                       ...inputStyles,
                       ...selectStyles,
@@ -334,13 +335,7 @@ const HenryFordInitialScreenLayout = ({
                   renderContinueButton
                   continueButtonDisabled={!isValid}
                   continueButtonLoading={verifying}
-                  onContinueClick={() => {
-                    // phoneNumberFormRef?.current?.setTouched({
-                    //   number: true,
-                    //   iso: true,
-                    // });
-                    handleSubmit();
-                  }}
+                  onContinueClick={handleSubmit}
                 />
               </Box>
             )}
