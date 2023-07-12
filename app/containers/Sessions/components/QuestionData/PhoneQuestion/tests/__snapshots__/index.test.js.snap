@@ -37,57 +37,6 @@ exports[`<PhoneQuestion /> Should render and match the snapshot 1`] = `
   padding-right: 10px;
 }
 
-.c8 {
-  padding: 12px;
-  border-style: solid;
-  border-width: 1px;
-  border-color: #E9F1FB;
-  border-radius: 5px;
-  width: 100%;
-  color: #2F3850;
-  opacity: 0.5;
-}
-
-.c8:focus {
-  box-shadow: none;
-  outline: none;
-  border-color: #107969;
-}
-
-.c8:disabled {
-  color: #ABBBD1;
-}
-
-.c5 {
-  font-family: DM Sans;
-  font-size: 13px;
-  line-height: 130%;
-  margin-bottom: 5px;
-  font-size: 12px;
-  color: #2F3850;
-  width: -webkit-fit-content;
-  width: -moz-fit-content;
-  width: fit-content;
-}
-
-.c6 {
-  width: auto;
-  height: auto;
-  display: block;
-  border-radius: 5px;
-  cursor: not-allowed;
-  opacity: 0.5;
-  color: unset;
-}
-
-.c7 {
-  width: auto;
-  height: auto;
-  -webkit-transition: -webkit-transform 0.2s;
-  -webkit-transition: transform 0.2s;
-  transition: transform 0.2s;
-}
-
 .c1 {
   display: -webkit-box;
   display: -webkit-flex;
@@ -116,6 +65,84 @@ exports[`<PhoneQuestion /> Should render and match the snapshot 1`] = `
   -ms-flex-align: flex-start;
   align-items: flex-start;
   width: 100%;
+}
+
+.c7 {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-flex-direction: row;
+  -ms-flex-direction: row;
+  flex-direction: row;
+  height: auto;
+  -webkit-align-content: center;
+  -ms-flex-line-pack: center;
+  align-content: center;
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+}
+
+.c9 {
+  width: auto;
+  height: auto;
+  -webkit-transition: -webkit-transform 0.2s;
+  -webkit-transition: transform 0.2s;
+  transition: transform 0.2s;
+}
+
+.c5 {
+  font-family: DM Sans;
+  font-size: 13px;
+  line-height: 130%;
+  margin-bottom: 5px;
+  font-size: 12px;
+  color: #2F3850;
+  width: -webkit-fit-content;
+  width: -moz-fit-content;
+  width: fit-content;
+}
+
+.c8 {
+  font-family: DM Sans;
+  font-size: 13px;
+  line-height: 130%;
+  margin-left: 10px;
+  font-size: 18px;
+  color: #2F3850;
+}
+
+.c6 {
+  width: auto;
+  height: auto;
+  display: block;
+  border-radius: 5px;
+  cursor: not-allowed;
+  opacity: 0.5;
+  color: unset;
+}
+
+.c10 {
+  padding: 12px;
+  border-style: solid;
+  border-width: 1px;
+  border-color: #E9F1FB;
+  border-radius: 5px;
+  width: 100%;
+  color: #2F3850;
+  opacity: 0.5;
+}
+
+.c10:focus {
+  box-shadow: none;
+  outline: none;
+  border-color: #107969;
+}
+
+.c10:disabled {
+  color: #ABBBD1;
 }
 
 @media only screen and (min-width:768px) {
@@ -181,116 +208,139 @@ exports[`<PhoneQuestion /> Should render and match the snapshot 1`] = `
         width="100%"
       >
         <div
-          class="c4"
-          width="230"
+          class="c2"
         >
-          <label
-            for="iso"
-          >
-            <p
-              class="c5"
-              font-size="12px"
-              width="fit-content"
-            >
-              Phone prefix
-            </p>
-          </label>
           <div
-            class="c6"
-            cursor="not-allowed"
-            data-testid="select"
-            disabled=""
+            class="c3"
+            data-private="true"
+            width="100%"
           >
             <div
-              class=" css-14jk2my-container"
+              class="c4"
+              width="230"
             >
-              <span
-                aria-atomic="false"
-                aria-live="polite"
-                aria-relevant="additions text"
-                class="css-1f43avz-a11yText-A11yText"
-              />
+              <label
+                for="iso"
+              >
+                <p
+                  class="c5"
+                  font-size="12px"
+                  width="fit-content"
+                >
+                  Phone prefix
+                </p>
+              </label>
               <div
-                class=" css-vz7ypb-control"
+                class="c6"
+                cursor="not-allowed"
+                data-testid="select"
+                disabled=""
               >
                 <div
-                  class=" css-g1d714-ValueContainer"
+                  class=" css-14jk2my-container"
                 >
+                  <span
+                    aria-atomic="false"
+                    aria-live="polite"
+                    aria-relevant="additions text"
+                    class="css-1f43avz-a11yText-A11yText"
+                  />
                   <div
-                    class=" css-1jyq7ds-placeholder"
-                  >
-                    Code
-                  </div>
-                  <div
-                    class="css-1bwsx9e-Input"
+                    class=" css-vz7ypb-control"
                   >
                     <div
-                      class=""
-                      style="display: inline-block;"
+                      class=" css-g1d714-ValueContainer"
                     >
-                      <input
-                        aria-autocomplete="list"
-                        autocapitalize="none"
-                        autocomplete="off"
-                        autocorrect="off"
-                        disabled=""
-                        id="iso"
-                        spellcheck="false"
-                        style="box-sizing: content-box; width: 2px; border: 0px; opacity: 1; outline: 0; padding: 0px;"
-                        tabindex="0"
-                        type="text"
-                        value=""
-                      />
                       <div
-                        style="position: absolute; top: 0px; left: 0px; visibility: hidden; height: 0px; overflow: scroll; white-space: pre; font-family: -webkit-small-control; letter-spacing: normal; text-transform: none;"
-                      />
+                        class=" css-107lb6w-singleValue"
+                      >
+                        <div
+                          class="c7"
+                        >
+                          <img
+                            alt="US"
+                            src="https://unpkg.com/react-flag-kit@0.3.1/assets/US.svg"
+                            style="height: 24px; width: 24px; display: inline-block;"
+                          />
+                          <p
+                            class="c8"
+                            font-size="18"
+                          >
+                            US +1
+                          </p>
+                        </div>
+                      </div>
+                      <div
+                        class="css-1bwsx9e-Input"
+                      >
+                        <div
+                          class=""
+                          style="display: inline-block;"
+                        >
+                          <input
+                            aria-autocomplete="list"
+                            autocapitalize="none"
+                            autocomplete="off"
+                            autocorrect="off"
+                            disabled=""
+                            id="iso"
+                            spellcheck="false"
+                            style="box-sizing: content-box; width: 2px; border: 0px; opacity: 1; outline: 0; padding: 0px;"
+                            tabindex="0"
+                            type="text"
+                            value=""
+                          />
+                          <div
+                            style="position: absolute; top: 0px; left: 0px; visibility: hidden; height: 0px; overflow: scroll; white-space: pre; font-family: -webkit-small-control; letter-spacing: normal; text-transform: none;"
+                          />
+                        </div>
+                      </div>
                     </div>
-                  </div>
-                </div>
-                <div
-                  class=" css-1hb7zxy-IndicatorsContainer"
-                >
-                  <div
-                    aria-hidden="true"
-                    class=" css-tlfecz-indicatorContainer"
-                  >
-                    <img
-                      alt="arrow"
-                      class="c7"
-                      src="IMAGE_MOCK"
-                      transform=""
-                    />
+                    <div
+                      class=" css-1hb7zxy-IndicatorsContainer"
+                    >
+                      <div
+                        aria-hidden="true"
+                        class=" css-tlfecz-indicatorContainer"
+                      >
+                        <img
+                          alt="arrow"
+                          class="c9"
+                          src="IMAGE_MOCK"
+                          transform=""
+                        />
+                      </div>
+                    </div>
                   </div>
                 </div>
               </div>
             </div>
-          </div>
-        </div>
-        <div
-          class="c2"
-          value=""
-        >
-          <label
-            for="number"
-          >
-            <p
-              class="c5"
-              font-size="12px"
-              width="fit-content"
+            <div
+              class="c2"
             >
-              Phone number
-            </p>
-          </label>
-          <input
-            class="c8"
-            disabled=""
-            id="number"
-            name="number"
-            placeholder="Enter phone number"
-            type="tel"
-            value=""
-            width="100%"
-          />
+              <label
+                for="number"
+              >
+                <p
+                  class="c5"
+                  font-size="12px"
+                  width="fit-content"
+                >
+                  Phone number
+                </p>
+              </label>
+              <input
+                class="c10"
+                disabled=""
+                id="number"
+                name="number"
+                placeholder="Enter phone number"
+                type="tel"
+                value=""
+                width="100%"
+              />
+            </div>
+          </div>
         </div>
       </div>
     </div>

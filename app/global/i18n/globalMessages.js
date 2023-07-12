@@ -40,7 +40,7 @@ import { archived, closed, draft, published } from 'models/Status/StatusTypes';
 import { UserInterventionStatus } from 'models/UserIntervention/StatusTypes';
 import { UserSessionStatus } from 'models/UserSession/StatusTypes';
 import { TextMessageType } from 'models/TextMessage';
-import { Sex } from 'models/HfhsPatient';
+import { PhoneType, Sex } from 'models/HfhsPatient';
 
 export const scope = 'app.GlobalMessages';
 
@@ -358,7 +358,7 @@ export default defineMessages({
   },
   questionRequired: {
     id: `${scope}.questionRequired`,
-    defaultMessage: `Required fields are marked with an asterisk<span style='color:${themeColors.warning};'>*</span>`,
+    defaultMessage: `Required fields are marked with an asterisk<span style="color:${themeColors.warning};">*</span>`,
   },
   dragHandle: {
     id: `${scope}.dragHandle`,
@@ -442,6 +442,20 @@ export default defineMessages({
     [Sex.UNKNOWN]: {
       id: `${scope}.${Sex.UNKNOWN}`,
       defaultMessage: 'Unknown',
+    },
+  },
+  phoneType: {
+    [PhoneType.HOME]: {
+      id: `${scope}.${PhoneType.HOME}`,
+      defaultMessage: 'Home',
+    },
+    [PhoneType.WORK]: {
+      id: `${scope}.${PhoneType.WORK}`,
+      defaultMessage: 'Work',
+    },
+    [PhoneType.MOBILE]: {
+      id: `${scope}.${PhoneType.MOBILE}`,
+      defaultMessage: 'Mobile',
     },
   },
 });

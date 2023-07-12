@@ -10,17 +10,16 @@ import { Col, Container, Row, ScreenClassMap } from 'react-grid-system';
 import { Form, Formik, FormikConfig, FormikProps } from 'formik';
 import * as Yup from 'yup';
 import { IntlShape } from 'react-intl/src/types';
+import { CountryCode } from 'libphonenumber-js/types';
 
 import { colors, themeColors } from 'theme';
 import globalMessages from 'global/i18n/globalMessages';
 import { zipCodeRegex } from 'global/constants';
-import questionMark from 'assets/svg/grey-question-mark.svg';
 
 import {
-  BaseHfhsPatientData,
   HfhsPatientData,
   HfhsPatientDetail,
-  MedicalNumberHfhsPatientData,
+  PhoneType,
   Sex,
 } from 'models/HfhsPatient';
 import { ApiMessageError } from 'models/Api';
@@ -28,14 +27,19 @@ import { ApiMessageError } from 'models/Api';
 import { requiredValidationSchema } from 'utils/validators';
 import { getUTCDateString } from 'utils/dateUtils';
 
-import Tooltip from 'components/Tooltip';
 import Box from 'components/Box';
 import { SelectOption } from 'components/Select/types';
 import FormikInput from 'components/FormikInput';
 import FormikSelect from 'components/FormikSelect';
 import FormikDatePicker from 'components/FormikDatePicker';
 import Text from 'components/Text';
-import Divider from 'components/Divider';
+import {
+  FormikPhoneNumberInput,
+  phoneNumberSchema,
+  DEFAULT_COUNTRY_CODE,
+} from 'components/FormikPhoneNumberInput';
+
+import { formatPhoneNumberForHfhs, parsePhoneNumberFromHfhs } from '../utils';
 
 import { ActionButtons } from '../components/ActionButtons';
 import messages from './messages';
@@ -46,56 +50,58 @@ const inputStyles = {
   opacity: 1,
 };
 
+const selectStyles = {
+  placeholderOpacity: 0.54,
+  placeholderColorActive: colors.bluewood,
+  placeholderColorDisabled: colors.casper,
+  valueColorDisabled: colors.casper,
+};
+
 export type PatientDataFormValues = Pick<
-  BaseHfhsPatientData,
+  HfhsPatientData,
   'firstName' | 'lastName' | 'zipCode'
-> &
-  MedicalNumberHfhsPatientData & {
-    sexOption: Nullable<SelectOption<Sex>>;
-    dobDate: Nullable<Date>;
-  };
+> & {
+  sexOption: Nullable<SelectOption<Sex>>;
+  dobDate: Nullable<Date>;
+  phoneTypeOption: Nullable<SelectOption<PhoneType>>;
+  iso: Nullable<SelectOption<CountryCode>>;
+  number: string;
+};
 
 const schema = (formatMessage: IntlShape['formatMessage']) =>
-  Yup.object().shape({
-    firstName: Yup.string().when('mrn', {
-      is: (mrn) => !mrn,
-      then: requiredValidationSchema,
-    }),
-    lastName: Yup.string().when('mrn', {
-      is: (mrn) => !mrn,
-      then: requiredValidationSchema,
-    }),
-    sexOption: Yup.object().when('mrn', {
-      is: (mrn) => !mrn,
-      then: Yup.object()
+  Yup.object()
+    .shape({
+      firstName: requiredValidationSchema,
+      lastName: requiredValidationSchema,
+      sexOption: Yup.object()
         .required(
           // @ts-ignore
           formatMessage(globalMessages.validators.required),
         )
         .nullable(),
-    }),
-    dobDate: Yup.date().when('mrn', {
-      is: (mrn) => !mrn,
-      then: Yup.date()
+      dobDate: Yup.date()
         .required(
           // @ts-ignore
           formatMessage(globalMessages.validators.required),
         )
         .nullable(),
-    }),
-    zipCode: Yup.string().when('mrn', {
-      is: (mrn) => !mrn,
-      then: requiredValidationSchema.matches(
+      zipCode: requiredValidationSchema.matches(
         zipCodeRegex,
         // @ts-ignore
         formatMessage(globalMessages.validators.zipCode),
       ),
-    }),
-  });
+      phoneTypeOption: Yup.object()
+        .required(
+          // @ts-ignore
+          formatMessage(globalMessages.validators.required),
+        )
+        .nullable(),
+    })
+    // @ts-ignore
+    .concat(phoneNumberSchema(formatMessage, true, false));
 
 enum PatientDataFormError {
   BASE_DATA_VERIFICATION,
-  MRN_VERIFICATION,
 }
 
 const emptyInitialValues: PatientDataFormValues = {
@@ -104,7 +110,12 @@ const emptyInitialValues: PatientDataFormValues = {
   sexOption: null,
   dobDate: null,
   zipCode: '',
-  mrn: '',
+  phoneTypeOption: null,
+  iso: {
+    value: DEFAULT_COUNTRY_CODE,
+    label: '',
+  },
+  number: '',
 };
 
 export type Props = {
@@ -126,7 +137,6 @@ const HenryFordInitialScreenLayout = ({
   verifying = false,
   verifyingError,
   hfhsPatientDetail,
-  previewMedicalNumberInput,
 }: Props) => {
   const { formatMessage } = useIntl();
 
@@ -143,13 +153,33 @@ const HenryFordInitialScreenLayout = ({
     })),
   );
 
+  const phoneTypeSelectOptions: MutableRefObject<SelectOption<PhoneType>[]> =
+    useRef(
+      Object.values(PhoneType).map((phoneType) => ({
+        value: phoneType,
+        // @ts-ignore
+        label: formatMessage(globalMessages.phoneType[phoneType]),
+      })),
+    );
+
   const initialValues: PatientDataFormValues = useMemo(() => {
     if (!hfhsPatientDetail) return emptyInitialValues;
-    const { sex, dob, ...restValues } = hfhsPatientDetail;
+    const { sex, dob, phoneNumber, phoneType, ...restValues } =
+      hfhsPatientDetail;
+
+    const parsedPhone = parsePhoneNumberFromHfhs(phoneNumber);
+
     return {
-      mrn: '',
       sexOption: sexSelectOptions.current.find(({ value }) => value === sex),
       dobDate: new Date(dob),
+      iso: {
+        value: parsedPhone?.country ?? DEFAULT_COUNTRY_CODE,
+        label: '',
+      },
+      number: parsedPhone?.formatNational() ?? '',
+      phoneTypeOption: phoneTypeSelectOptions.current.find(
+        ({ value }) => value === phoneType,
+      ),
       ...restValues,
     };
   }, [hfhsPatientDetail]);
@@ -158,19 +188,15 @@ const HenryFordInitialScreenLayout = ({
     values,
   ) => {
     if (!onSubmitPatientData) return;
-    const { sexOption, dobDate, mrn, ...restValues } = values;
-
-    if (!mrn) {
-      onSubmitPatientData({
-        ...restValues,
-        sex: sexOption!.value,
-        dob: getUTCDateString(dobDate!),
-      });
-      return;
-    }
+    const { sexOption, dobDate, phoneTypeOption, iso, number, ...restValues } =
+      values;
 
     onSubmitPatientData({
-      mrn,
+      ...restValues,
+      sex: sexOption!.value,
+      dob: getUTCDateString(dobDate!),
+      phoneNumber: formatPhoneNumberForHfhs({ iso: iso!.value, number }),
+      phoneType: phoneTypeOption!.value,
     });
   };
 
@@ -178,27 +204,21 @@ const HenryFordInitialScreenLayout = ({
 
   const [formError, setFormError] =
     useState<Nullable<PatientDataFormError>>(null);
-  const [showMedicalNumberInput, setShowMedicalNumberInput] = useState(false);
 
   useEffect(() => {
     if (verifyingError && formRef.current) {
-      if (formRef.current.values.mrn) {
-        formRef.current.setErrors({
-          mrn: '',
-        });
-        setFormError(PatientDataFormError.MRN_VERIFICATION);
-        return () => setFormError(null);
-      }
-
       formRef.current.setErrors({
         firstName: '',
         lastName: '',
         sexOption: '',
         dobDate: '',
         zipCode: '',
+        phoneTypeOption: '',
+        iso: '',
+        number: '',
       });
+
       setFormError(PatientDataFormError.BASE_DATA_VERIFICATION);
-      setShowMedicalNumberInput(true);
       return () => setFormError(null);
     }
   }, [verifyingError]);
@@ -210,169 +230,119 @@ const HenryFordInitialScreenLayout = ({
       onSubmit={onSubmit}
       innerRef={formRef}
     >
-      {({ handleSubmit, isValid, values: { mrn } }) => {
-        const baseDataControlsDisabled = disabled || Boolean(mrn);
-
-        return (
-          <Form>
-            <Box my={24} mx={26}>
-              <Container fluid style={{ padding: 0 }}>
-                <Row gutterWidth={24} style={{ rowGap: '24px' }}>
-                  <Col {...columnClassMap}>
-                    <FormikInput
-                      formikKey="firstName"
-                      label={formatMessage(messages.firstName)}
-                      placeholder={formatMessage(messages.firstNamePlaceholder)}
-                      type="text"
-                      inputProps={{
-                        ...inputStyles,
-                        disabled: baseDataControlsDisabled,
-                      }}
-                    />
-                  </Col>
-                  <Col {...columnClassMap}>
-                    <FormikInput
-                      formikKey="lastName"
-                      label={formatMessage(messages.lastName)}
-                      placeholder={formatMessage(messages.lastNamePlaceholder)}
-                      type="text"
-                      inputProps={{
-                        ...inputStyles,
-                        disabled: baseDataControlsDisabled,
-                      }}
-                    />
-                  </Col>
-                  <Col {...columnClassMap}>
-                    <FormikSelect
-                      formikKey="sexOption"
-                      label={formatMessage(messages.sex)}
-                      options={sexSelectOptions.current}
-                      submitOnChange={false}
-                      inputProps={{
-                        ...inputStyles,
-                        isDisabled: baseDataControlsDisabled,
-                        placeholder: formatMessage(messages.sexPlaceholder),
-                        placeholderOpacity: 0.54,
-                        placeholderColorActive: colors.bluewood,
-                        placeholderColorDisabled: colors.casper,
-                        valueColorDisabled: colors.casper,
-                      }}
-                    />
-                  </Col>
-                  <Col {...columnClassMap}>
-                    <FormikDatePicker
-                      formikKey="dobDate"
-                      label={formatMessage(messages.dateOfBirth)}
-                      placeholder={formatMessage(
-                        messages.dateOfBirthPlaceholder,
-                      )}
-                      disabled={baseDataControlsDisabled}
-                      inputProps={{
-                        ...inputStyles,
-                      }}
-                      datePickerProps={{
-                        maxDate: new Date(),
-                      }}
-                    />
-                  </Col>
-                  <Col {...columnClassMap}>
-                    <FormikInput
-                      formikKey="zipCode"
-                      label={formatMessage(messages.zipCode)}
-                      placeholder={formatMessage(messages.zipCodePlaceholder)}
-                      type="text"
-                      inputProps={{
-                        ...inputStyles,
-                        disabled: baseDataControlsDisabled,
-                      }}
-                    />
-                  </Col>
-                </Row>
-              </Container>
-              {formError === PatientDataFormError.BASE_DATA_VERIFICATION && (
-                <Text
-                  color={themeColors.warning}
-                  fontWeight="bold"
-                  lineHeight="23px"
-                  mt={32}
-                >
-                  {formatMessage(messages.baseDataVerificationErrorMessage)}
-                </Text>
-              )}
-              {formError === PatientDataFormError.MRN_VERIFICATION && (
-                <Divider mt={54.5} mb={22.5} />
-              )}
-              {(previewMedicalNumberInput || showMedicalNumberInput) && (
-                <Container fluid style={{ padding: '32px 0 0 0' }}>
-                  <Row gutterWidth={24} style={{ rowGap: '24px' }}>
-                    <Col {...columnClassMap}>
-                      <FormikInput
-                        formikKey="mrn"
-                        label={
-                          previewMedicalNumberInput ? (
-                            <Box display="flex" align="center">
-                              <Text>
-                                {formatMessage(messages.medicalNumber)}
-                              </Text>
-                              <Tooltip
-                                id="el-tooltip-mrn-researcher-info"
-                                icon={questionMark}
-                                text={formatMessage(
-                                  messages.medicalNumberResearcherInfo,
-                                )}
-                                place="top"
-                                ml={8}
-                                tooltipProps={{
-                                  width: '200px',
-                                }}
-                                iconProps={{
-                                  width: '16px',
-                                }}
-                              />
-                            </Box>
-                          ) : (
-                            formatMessage(messages.medicalNumber)
-                          )
-                        }
-                        placeholder={formatMessage(
-                          messages.medicalNumberPlaceholder,
-                        )}
-                        type="text"
-                        inputProps={{
-                          ...inputStyles,
-                          disabled,
-                        }}
-                      />
-                    </Col>
-                  </Row>
-                </Container>
-              )}
-              {formError === PatientDataFormError.MRN_VERIFICATION && (
-                <Text
-                  color={themeColors.warning}
-                  fontWeight="bold"
-                  lineHeight="23px"
-                  mt={32}
-                >
-                  {formatMessage(messages.mrnVerificationErrorMessage)}
-                </Text>
-              )}
-              {showContinueButton && (
-                <Box>
-                  <ActionButtons
-                    renderContinueButton
-                    continueButtonDisabled={!isValid}
-                    continueButtonLoading={verifying}
-                    onContinueClick={handleSubmit}
+      {({ handleSubmit, isValid }) => (
+        <Form>
+          <Box my={24} mx={26}>
+            <Container fluid style={{ padding: 0 }}>
+              <Row gutterWidth={24} style={{ rowGap: '24px' }}>
+                <Col {...columnClassMap}>
+                  <FormikInput
+                    formikKey="firstName"
+                    label={formatMessage(messages.firstName)}
+                    placeholder={formatMessage(messages.firstNamePlaceholder)}
+                    type="text"
+                    inputProps={{ ...inputStyles, disabled }}
                   />
-                </Box>
-              )}
-            </Box>
-          </Form>
-        );
-      }}
+                </Col>
+                <Col {...columnClassMap}>
+                  <FormikInput
+                    formikKey="lastName"
+                    label={formatMessage(messages.lastName)}
+                    placeholder={formatMessage(messages.lastNamePlaceholder)}
+                    type="text"
+                    inputProps={{ ...inputStyles, disabled }}
+                  />
+                </Col>
+                <Col {...columnClassMap}>
+                  <FormikSelect
+                    formikKey="sexOption"
+                    label={formatMessage(messages.sex)}
+                    options={sexSelectOptions.current}
+                    submitOnChange={false}
+                    inputProps={{
+                      ...inputStyles,
+                      ...selectStyles,
+                      isDisabled: disabled,
+                      placeholder: formatMessage(messages.sexPlaceholder),
+                    }}
+                  />
+                </Col>
+                <Col {...columnClassMap}>
+                  <FormikDatePicker
+                    formikKey="dobDate"
+                    label={formatMessage(messages.dateOfBirth)}
+                    placeholder={formatMessage(messages.dateOfBirthPlaceholder)}
+                    inputProps={inputStyles}
+                    disabled={disabled}
+                    datePickerProps={{
+                      maxDate: new Date(),
+                    }}
+                  />
+                </Col>
+                <Col {...columnClassMap}>
+                  <FormikInput
+                    formikKey="zipCode"
+                    label={formatMessage(messages.zipCode)}
+                    placeholder={formatMessage(messages.zipCodePlaceholder)}
+                    type="text"
+                    inputProps={{ ...inputStyles, disabled }}
+                  />
+                </Col>
+                <Col {...columnClassMap}>
+                  <FormikSelect
+                    formikKey="phoneTypeOption"
+                    label={formatMessage(messages.phoneType)}
+                    options={phoneTypeSelectOptions.current}
+                    submitOnChange={false}
+                    inputProps={{
+                      ...inputStyles,
+                      ...selectStyles,
+                      placeholder: formatMessage(messages.phoneTypePlaceholder),
+                      isDisabled: disabled,
+                    }}
+                  />
+                </Col>
+                <Col xs={12}>
+                  <FormikPhoneNumberInput
+                    isoKey="iso"
+                    numberKey="number"
+                    prefixLabel={messages.phoneNumberPrefix}
+                    phoneLabel={messages.phoneNumber}
+                    disabled={disabled}
+                    prefixInputProps={{
+                      ...inputStyles,
+                      ...selectStyles,
+                      isDisabled: disabled,
+                    }}
+                    numberInputProps={{ ...inputStyles, disabled }}
+                  />
+                </Col>
+              </Row>
+            </Container>
+            {formError === PatientDataFormError.BASE_DATA_VERIFICATION && (
+              <Text
+                color={themeColors.warning}
+                fontWeight="bold"
+                lineHeight="23px"
+                mt={32}
+              >
+                {formatMessage(messages.baseDataVerificationErrorMessage)}
+              </Text>
+            )}
+            {showContinueButton && (
+              <Box>
+                <ActionButtons
+                  renderContinueButton
+                  continueButtonDisabled={!isValid}
+                  continueButtonLoading={verifying}
+                  onContinueClick={handleSubmit}
+                />
+              </Box>
+            )}
+          </Box>
+        </Form>
+      )}
     </Formik>
   );
 };
-
 export default HenryFordInitialScreenLayout;
