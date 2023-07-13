@@ -5,12 +5,7 @@ import isNullOrUndefined from 'utils/isNullOrUndefined';
 
 import DateQuestionLayout from '../layouts/DateQuestionLayout';
 
-const DateQuestion = ({
-  question,
-  answerBody,
-  selectAnswer,
-  formatMessage,
-}) => {
+const DateQuestion = ({ question, answerBody, selectAnswer }) => {
   const {
     body: {
       variable: { name },
@@ -29,11 +24,7 @@ const DateQuestion = ({
   };
 
   return (
-    <DateQuestionLayout
-      formatMessage={formatMessage}
-      onChange={onChange}
-      answerBody={answerBody?.[0]}
-    />
+    <DateQuestionLayout onChange={onChange} answerBody={answerBody?.[0]} />
   );
 };
 
@@ -41,7 +32,6 @@ DateQuestion.propTypes = {
   question: PropTypes.object.isRequired,
   selectAnswer: PropTypes.func,
   answerBody: PropTypes.any,
-  formatMessage: PropTypes.func,
 };
 
 export default DateQuestion;

@@ -19,10 +19,6 @@ export default defineMessages({
     id: `${scope}.endUserValue`,
     defaultMessage: 'You',
   },
-  chooseDate: {
-    id: `${scope}.chooseDate`,
-    defaultMessage: 'Choose date',
-  },
   enterName: {
     id: `${scope}.enterName`,
     defaultMessage: 'Enter your name',

@@ -5,7 +5,7 @@ import Color from 'color';
 import { colors, borders, fontFamily, themeColors, paddings } from 'theme';
 
 import Input from 'components/Input';
-import { margin, layout, border } from 'components/BaseComponentStyles';
+import { margin, layout } from 'components/BaseComponentStyles';
 
 import { INPUT_PADDING } from './constants';
 import { AdornmentType } from './types';
@@ -61,26 +61,6 @@ export const QuillStyled = styled(ReactQuill)`
   .ql-container * {
     ${({ readOnly }) => (readOnly ? 'cursor: not-allowed' : '')};
   }
-`;
-
-export const StyledDateInput = styled.button`
-  background-color: ${({ bg }) => (bg ? `${bg}` : `${colors.zirkon}`)};
-  border-radius: ${borders.borderRadius};
-  border-style: ${borders.borderStyle};
-  border-width: ${borders.borderWidth};
-  border-color: ${colors.linkWater};
-
-  &:hover {
-    ${({ disabled }) => (disabled ? 'cursor: not-allowed' : 'cursor: pointer')};
-  }
-
-  &:focus {
-    outline: none;
-  }
-
-  ${margin};
-  ${layout};
-  ${border};
 `;
 
 export const DatePickerWrapper = styled.div`

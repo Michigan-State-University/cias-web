@@ -58,7 +58,26 @@ exports[`<SessionSchedule /> Should render and match the snapshot 1`] = `
   margin-bottom: 17px;
 }
 
-.c12 {
+.c11 {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-flex-direction: row;
+  -ms-flex-direction: row;
+  flex-direction: row;
+  height: auto;
+  -webkit-align-content: center;
+  -ms-flex-line-pack: center;
+  align-content: center;
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  gap: 10px;
+}
+
+.c13 {
   display: -webkit-box;
   display: -webkit-flex;
   display: -ms-flexbox;
@@ -164,22 +183,13 @@ exports[`<SessionSchedule /> Should render and match the snapshot 1`] = `
   cursor: pointer;
 }
 
-.c11 {
+.c12 {
   font-family: DM Sans;
   font-size: 13px;
   line-height: 130%;
   margin-left: 5px;
   font-size: 15px;
   color: #2F3850;
-}
-
-.c16 {
-  font-family: DM Sans;
-  font-size: 13px;
-  line-height: 130%;
-  font-size: 15px;
-  color: rgba(14,14,14,0.6);
-  color: rgba(14,14,14,0.6);
 }
 
 .c18 {
@@ -192,68 +202,75 @@ exports[`<SessionSchedule /> Should render and match the snapshot 1`] = `
   color: rgba(210,55,29,1);
 }
 
-.c15 {
-  background-color: #F8FBFF;
-  border-radius: 5px;
+.c16 {
+  padding: 12px;
   border-style: solid;
   border-width: 1px;
   border-color: #E9F1FB;
-  margin-right: 10px;
-  margin-left: 10px;
+  border-radius: 5px;
+  margin-right: 0;
+  margin-left: 0;
   width: 120px;
   height: 50px;
+  padding: 12px;
+  font-size: 15px;
+  color: rgba(47,56,80,1);
+  text-align: left;
+  color: rgba(47,56,80,1);
 }
 
-.c15:hover {
-  cursor: pointer;
-}
-
-.c15:focus {
+.c16:focus {
+  box-shadow: none;
   outline: none;
+  border-color: #107969;
 }
 
-.c14 .schedule-date-picker {
+.c16:disabled {
+  color: #ABBBD1;
+}
+
+.c15 .schedule-date-picker {
   font-family: DM Sans;
   background-color: #E9F1FB;
 }
 
-.c14 .schedule-date-picker .react-datepicker__header {
+.c15 .schedule-date-picker .react-datepicker__header {
   background-color: #F8FBFF;
 }
 
-.c14 .schedule-date-picker .react-datepicker__day {
+.c15 .schedule-date-picker .react-datepicker__day {
   color: #2F3850;
 }
 
-.c14 .schedule-date-picker .react-datepicker__day:hover {
+.c15 .schedule-date-picker .react-datepicker__day:hover {
   color: #FFFFFF;
   background-color: rgba(200,102,234,0.7);
 }
 
-.c14 .schedule-date-picker .react-datepicker__day--keyboard-selected {
+.c15 .schedule-date-picker .react-datepicker__day--keyboard-selected {
   background-color: #C866EA;
 }
 
-.c14 .schedule-date-picker .react-datepicker__day--in-range,
-.c14 .schedule-date-picker .react-datepicker__day--in-selecting-range {
+.c15 .schedule-date-picker .react-datepicker__day--in-range,
+.c15 .schedule-date-picker .react-datepicker__day--in-selecting-range {
   color: #2F3850;
   background-color: rgba(200,102,234,0.1);
 }
 
-.c13 .schedule-date-picker .react-datepicker__day--selected:not(.c13 .schedule-date-picker .react-datepicker__day--in-selecting-range),
-.c14 .schedule-date-picker .react-datepicker__day--range-start:not(.c14 .schedule-date-picker .react-datepicker__day--in-selecting-range),
-.c14 .schedule-date-picker .react-datepicker__day--range-end:not(.c14 .schedule-date-picker .react-datepicker__day--in-selecting-range),
-.c14 .schedule-date-picker .react-datepicker__day--selecting-range-start,
-.c14 .schedule-date-picker .react-datepicker__day--selecting-range-end {
+.c14 .schedule-date-picker .react-datepicker__day--selected:not(.c14 .schedule-date-picker .react-datepicker__day--in-selecting-range),
+.c15 .schedule-date-picker .react-datepicker__day--range-start:not(.c15 .schedule-date-picker .react-datepicker__day--in-selecting-range),
+.c15 .schedule-date-picker .react-datepicker__day--range-end:not(.c15 .schedule-date-picker .react-datepicker__day--in-selecting-range),
+.c15 .schedule-date-picker .react-datepicker__day--selecting-range-start,
+.c15 .schedule-date-picker .react-datepicker__day--selecting-range-end {
   color: #FFFFFF;
   background-color: #C866EA;
 }
 
-.c14 .schedule-date-picker .react-datepicker__year-option {
+.c15 .schedule-date-picker .react-datepicker__year-option {
   background-color: #E9F1FB;
 }
 
-.c14 .schedule-date-picker .react-datepicker__month-option {
+.c15 .schedule-date-picker .react-datepicker__month-option {
   background-color: #E9F1FB;
 }
 
@@ -333,10 +350,10 @@ exports[`<SessionSchedule /> Should render and match the snapshot 1`] = `
         class="c0"
       >
         <div
-          class="c4"
+          class="c11"
         >
           <p
-            class="c11"
+            class="c12"
             font-size="15"
           >
             Send 
@@ -346,14 +363,14 @@ exports[`<SessionSchedule /> Should render and match the snapshot 1`] = `
             class="c8"
           >
             <div
-              class="c12"
+              class="c13"
               width="100%"
             >
               <div
                 class="c0"
               >
                 <div
-                  class="c13 c14"
+                  class="c14 c15"
                 >
                   <div
                     class="react-datepicker-wrapper"
@@ -361,20 +378,17 @@ exports[`<SessionSchedule /> Should render and match the snapshot 1`] = `
                     <div
                       class="react-datepicker__input-container"
                     >
-                      <button
-                        class="c15"
-                        data-private="true"
+                      <input
+                        aria-label="MM-DD-YYYY"
+                        class="c16"
+                        color="#2F3850"
+                        font-size="15"
                         height="50"
+                        placeholder="MM-DD-YYYY"
+                        type="text"
+                        value="12-24-2018"
                         width="120"
-                      >
-                        <p
-                          class="c16"
-                          color="#0E0E0E"
-                          font-size="15"
-                        >
-                          12/24/2018
-                        </p>
-                      </button>
+                      />
                     </div>
                   </div>
                 </div>

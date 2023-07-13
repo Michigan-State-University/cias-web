@@ -6,6 +6,8 @@ import 'react-datepicker/dist/react-datepicker.css';
 import ReactQuill from 'react-quill';
 import isNumber from 'lodash/isNumber';
 
+import { colors } from 'theme';
+
 import useOutsideClick from 'utils/useOutsideClick';
 import { formatMessage } from 'utils/intlOutsideReact';
 
@@ -14,7 +16,6 @@ import Row from '../Row';
 import { Input } from './index';
 import { DatePickerWrapper, QuillStyled } from './styled';
 import { TextArea } from './TextArea';
-import DateInput from './DateInput';
 import messages from './messages';
 import './QuillSinglelineHandler';
 
@@ -216,20 +217,24 @@ const ApprovableInput = ({
             selected={value}
             onChange={(date) => onCheck(date)}
             onFocus={onFocus}
-            placeholderText={placeholder}
-            dateFormat="MM/dd/yyyy"
+            placeholderText={placeholder ?? 'MM-DD-YYYY'}
+            dateFormat="MM-dd-yyyy"
             selectsEnd={selectsEnd}
             selectsStart={selectsStart}
             startDate={startDate}
             endDate={endDate}
             customInput={
-              <DateInput
+              <Input
                 disabled={disabled}
+                mx={0}
+                padding={12}
+                textAlign="left"
+                color={disabled ? colors.casper : colors.bluewood}
                 fontSize={fontSize}
                 height={height}
                 width={width}
+                {...styles}
                 ref={ref}
-                inputStyles={styles}
               />
             }
             showMonthDropdown
