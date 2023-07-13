@@ -28,6 +28,29 @@ exports[`<ApprovableInput /> Should render and match the snapshot as date input 
   color: #ABBBD1;
 }
 
+.c1 {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-flex-direction: column;
+  -ms-flex-direction: column;
+  flex-direction: column;
+  width: 100%;
+}
+
+.c0 {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-flex-direction: row;
+  -ms-flex-direction: row;
+  flex-direction: row;
+  height: auto;
+  width: 100%;
+}
+
 .c3 .schedule-date-picker {
   font-family: DM Sans;
   background-color: #E9F1FB;
@@ -71,29 +94,6 @@ exports[`<ApprovableInput /> Should render and match the snapshot as date input 
 
 .c3 .schedule-date-picker .react-datepicker__month-option {
   background-color: #E9F1FB;
-}
-
-.c1 {
-  display: -webkit-box;
-  display: -webkit-flex;
-  display: -ms-flexbox;
-  display: flex;
-  -webkit-flex-direction: column;
-  -ms-flex-direction: column;
-  flex-direction: column;
-  width: 100%;
-}
-
-.c0 {
-  display: -webkit-box;
-  display: -webkit-flex;
-  display: -ms-flexbox;
-  display: flex;
-  -webkit-flex-direction: row;
-  -ms-flex-direction: row;
-  flex-direction: row;
-  height: auto;
-  width: 100%;
 }
 
 @media only screen and (min-width:768px) {
@@ -232,6 +232,29 @@ exports[`<ApprovableInput /> Should render and match the snapshot as multiline 1
 `;
 
 exports[`<ApprovableInput /> Should render and match the snapshot as richText 1`] = `
+.c1 {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-flex-direction: column;
+  -ms-flex-direction: column;
+  flex-direction: column;
+  width: 100%;
+}
+
+.c0 {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-flex-direction: row;
+  -ms-flex-direction: row;
+  flex-direction: row;
+  height: auto;
+  width: 100%;
+}
+
 .c2 {
   width: 100%;
   height: auto;
@@ -261,29 +284,6 @@ exports[`<ApprovableInput /> Should render and match the snapshot as richText 1`
 .c2 .ql-container {
   font-size: initial;
   font-family: DM Sans;
-}
-
-.c1 {
-  display: -webkit-box;
-  display: -webkit-flex;
-  display: -ms-flexbox;
-  display: flex;
-  -webkit-flex-direction: column;
-  -ms-flex-direction: column;
-  flex-direction: column;
-  width: 100%;
-}
-
-.c0 {
-  display: -webkit-box;
-  display: -webkit-flex;
-  display: -ms-flexbox;
-  display: flex;
-  -webkit-flex-direction: row;
-  -ms-flex-direction: row;
-  flex-direction: row;
-  height: auto;
-  width: 100%;
 }
 
 @media only screen and (min-width:768px) {
@@ -1843,54 +1843,6 @@ exports[`<BadgeInput /> Should render and match the snapshot 1`] = `
     value=""
     width="157px"
   />
-</div>
-`;
-
-exports[`<DateInput /> Should render and match the snapshot 1`] = `
-.c0 {
-  background-color: #F8FBFF;
-  border-radius: 5px;
-  border-style: solid;
-  border-width: 1px;
-  border-color: #E9F1FB;
-  margin-right: 10px;
-  margin-left: 10px;
-  width: 250px;
-  height: 50px;
-}
-
-.c0:hover {
-  cursor: pointer;
-}
-
-.c0:focus {
-  outline: none;
-}
-
-.c1 {
-  font-family: DM Sans;
-  font-size: 13px;
-  line-height: 130%;
-  font-size: 14px;
-  color: rgba(47,56,80,0.6);
-  color: rgba(47,56,80,0.6);
-}
-
-<div>
-  <button
-    class="c0"
-    data-private="true"
-    height="50"
-    width="250"
-  >
-    <p
-      class="c1"
-      color="#2F3850"
-      font-size="14"
-    >
-      Placeholder
-    </p>
-  </button>
 </div>
 `;
 
