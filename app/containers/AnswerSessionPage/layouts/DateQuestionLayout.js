@@ -8,13 +8,19 @@ import { themeColors } from 'theme';
 
 import messages from './messages';
 
-const DateQuestionLayout = ({ onChange, formatMessage, answerBody }) => {
+const DateQuestionLayout = ({
+  onChange,
+  formatMessage,
+  answerBody,
+  disabled,
+}) => {
   const value = answerBody && answerBody.value ? answerBody.value : '';
 
   return (
     <Box width="100%" padding={15}>
       <Row>
         <ApprovableInput
+          disabled={disabled}
           width={200}
           height={50}
           placeholder={formatMessage(messages.chooseDate)}
@@ -23,7 +29,7 @@ const DateQuestionLayout = ({ onChange, formatMessage, answerBody }) => {
           onCheck={onChange}
           fontSize={15}
           styles={{
-            border: `3px solid ${themeColors.primary}`,
+            border: !disabled && `3px solid ${themeColors.primary}`,
           }}
         />
       </Row>
@@ -35,6 +41,7 @@ DateQuestionLayout.propTypes = {
   onChange: PropTypes.func,
   formatMessage: PropTypes.func,
   answerBody: PropTypes.oneOfType([PropTypes.array, PropTypes.object]),
+  disabled: PropTypes.bool,
 };
 
 export default DateQuestionLayout;
