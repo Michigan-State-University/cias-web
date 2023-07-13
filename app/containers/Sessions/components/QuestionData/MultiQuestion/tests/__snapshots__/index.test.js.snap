@@ -235,15 +235,6 @@ exports[`<MultiQuestion /> Should render and match the snapshot 1`] = `
   cursor: not-allowed;
 }
 
-.c22 {
-  font-family: DM Sans;
-  font-size: 13px;
-  line-height: 130%;
-  font-weight: 700;
-  color: rgba(183,39,234,1);
-  color: rgba(183,39,234,1);
-}
-
 .c2 {
   width: auto;
   height: auto;
@@ -351,6 +342,15 @@ exports[`<MultiQuestion /> Should render and match the snapshot 1`] = `
   color: rgba(255,255,255,1);
   opacity: 1;
   color: rgba(255,255,255,1);
+}
+
+.c22 {
+  font-family: DM Sans;
+  font-size: 13px;
+  line-height: 130%;
+  font-weight: 700;
+  color: rgba(183,39,234,1);
+  color: rgba(183,39,234,1);
 }
 
 .c14 {

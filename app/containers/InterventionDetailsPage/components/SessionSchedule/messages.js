@@ -73,10 +73,6 @@ export default defineMessages({
     id: `${scope}.enterNumber`,
     defaultMessage: 'Enter number',
   },
-  chooseDate: {
-    id: `${scope}.chooseDate`,
-    defaultMessage: 'Choose date',
-  },
   default: {
     id: `${scope}.default`,
     defaultMessage: 'Select option',

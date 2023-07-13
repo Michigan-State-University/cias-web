@@ -1,5 +1,4 @@
 import React from 'react';
-import PropTypes from 'prop-types';
 import { compose } from 'redux';
 import { connect } from 'react-redux';
 import { createStructuredSelector } from 'reselect';
@@ -16,15 +15,11 @@ import {
 
 import { UPDATE_DATA } from './constants';
 
-const DateQuestion = ({ intl: { formatMessage } }) => (
+const DateQuestion = () => (
   <Column mt={10}>
-    <DateQuestionLayout formatMessage={formatMessage} disabled />
+    <DateQuestionLayout disabled />
   </Column>
 );
-
-DateQuestion.propTypes = {
-  intl: PropTypes.object.isRequired,
-};
 
 const mapStateToProps = createStructuredSelector({
   selectedQuestion: makeSelectSelectedQuestion(),
