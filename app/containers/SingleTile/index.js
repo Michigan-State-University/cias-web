@@ -12,25 +12,28 @@ import { injectReducer, injectSaga } from 'redux-injectors';
 import { connect } from 'react-redux';
 import { compose } from 'redux';
 
-import BinNoBgIcon from 'assets/svg/bin-no-bg.svg';
-import CsvIcon from 'assets/svg/csv-icon.svg';
 import FileShareIcon from 'assets/svg/file-share.svg';
 import CopyIcon from 'assets/svg/copy.svg';
 import AddAppIcon from 'assets/svg/app-add.svg';
 import TranslateIcon from 'assets/svg/translate.svg';
 import DocumentIcon from 'assets/svg/document.svg';
 // import DownloadIcon from 'assets/svg/download-line.svg';
+import CollaborateIcon from 'assets/svg/collaborate-icon.svg';
+import ArchiveIcon from 'assets/svg/archive.svg';
 
 import { colors } from 'theme';
 
 import globalMessages from 'global/i18n/globalMessages';
-import { makeSelectUserId } from 'global/reducers/auth';
+import {
+  makeSelectUserId,
+  makeSelectUserOrganizableId,
+} from 'global/reducers/auth';
 import { interventionOptionsSaga } from 'global/sagas/interventionOptionsSaga';
 import {
   exportInterventionRequest,
   exportInterventionSaga,
+  fetchInterventionSaga,
   interventionReducer,
-  sendInterventionCsvRequest,
 } from 'global/reducers/intervention';
 import {
   copyInterventionRequest,
@@ -44,10 +47,11 @@ import isNullOrUndefined from 'utils/isNullOrUndefined';
 
 import {
   CatMhAccessModal,
+  CollaboratorsModal,
+  COLLABORATORS_MODAL_WIDTH,
   InterventionAssignOrganizationModal,
   INTERVENTION_ASSIGN_ORGANIZATION_MODAL_WIDTH,
 } from 'containers/InterventionDetailsPage/components/Modals';
-import SelectResearchers from 'containers/SelectResearchers';
 
 import EllipsisText from 'components/Text/EllipsisText';
 import Text from 'components/Text';
@@ -57,8 +61,13 @@ import Modal, { ModalType, useModal } from 'components/Modal';
 import Row from 'components/Row';
 import Badge from 'components/Badge';
 import Loader from 'components/Loader';
+
 import TranslateInterventionModal from 'containers/TranslateInterventionModal';
 import interventionDetailsPageSagas from 'containers/InterventionDetailsPage/saga';
+import {
+  ShareExternallyLevel,
+  useShareExternallyModal,
+} from 'containers/ShareExternallyModal';
 
 import InterventionDetails from './InterventionDetails';
 import messages from './messages';
@@ -69,33 +78,25 @@ import {
   StatusIndicator,
   TileInfo,
 } from './styled';
+import { CollaboratingIndicator } from './CollaboratingIndicator';
 
 const SingleTile = ({
   tileData,
   participantView,
   link,
-  sendCsv,
   copyIntervention,
   archiveIntervention,
   intl: { formatMessage },
   userId,
   isLoading,
   // exportIntervention,
+  userOrganizableId,
 }) => {
-  const [
-    shareWithResearchersModalVisible,
-    setShareWithResearchersModalVisible,
-  ] = useState(false);
-
   const [assignOrganizationModalVisible, setAssignOrganizationModalVisible] =
     useState(false);
 
   const [translateModalVisible, setTranslateModalVisible] = useState(false);
-
-  const closeShareWithResearchersModal = () =>
-    setShareWithResearchersModalVisible(false);
-  const openShareWithResearchersModal = () =>
-    setShareWithResearchersModalVisible(true);
+  const [collaborateModalVisible, setCollaborateModalVisible] = useState(false);
 
   const closeAssignOrganizationModal = () =>
     setAssignOrganizationModalVisible(false);
@@ -104,6 +105,8 @@ const SingleTile = ({
 
   const closeTranslateModal = () => setTranslateModalVisible(false);
   const openTranslateModal = () => setTranslateModalVisible(true);
+  const closeCollaborateModal = () => setCollaborateModalVisible(false);
+  const openCollaborateModal = () => setCollaborateModalVisible(true);
 
   const handleArchiveIntervention = () => archiveIntervention(id);
 
@@ -123,7 +126,15 @@ const SingleTile = ({
     },
   });
 
-  const { isAdmin, canAssignOrganizationToIntervention } = useRoleManager();
+  const shareExternally = (emails, ids) =>
+    copyIntervention({ interventionId: id, emails, ids });
+  const { Modal: ShareExternallyModal, openModal: openShareExternallyModal } =
+    useShareExternallyModal(shareExternally, ShareExternallyLevel.INTERVENTION);
+
+  const {
+    isAdmin,
+    canAssignOrganizationToIntervention: showAssignOrganizationOption,
+  } = useRoleManager();
 
   const {
     name,
@@ -135,16 +146,30 @@ const SingleTile = ({
     createdAt,
     updatedAt,
     googleLanguageId,
+    hasCollaborators,
+    userId: interventionOwnerId,
   } = tileData || {};
 
-  const handleCsvRequest = () => sendCsv(id);
+  const isCurrentUserInterventionOwner = interventionOwnerId === userId;
 
   // const handleExportIntervention = () => exportIntervention(id);
 
-  const canExportCSV = userId === user?.id;
+  const handleClone = () => copyIntervention({ interventionId: id });
 
-  const handleClone = () =>
-    copyIntervention({ interventionId: id, withoutRedirect: true });
+  // cannot make changes to intervention with collaborators because it would require
+  // turning on edit mode first but that's impossible from the intervention list view
+  const canCurrentUserMakeChanges =
+    !hasCollaborators && (isAdmin || isCurrentUserInterventionOwner);
+
+  const archivingPossible = canCurrentUserMakeChanges && canArchive(status);
+
+  const assigningOrganizationPossible =
+    canCurrentUserMakeChanges && canEdit(status);
+
+  const showReportingBadge =
+    organizationId && (isAdmin || organizationId === userOrganizableId);
+
+  const canEditCollaborators = isAdmin || isCurrentUserInterventionOwner;
 
   const options = [
     {
@@ -153,45 +178,34 @@ const SingleTile = ({
       label: formatMessage(messages.translate),
       id: 'translate',
     },
-    ...(canExportCSV
-      ? [
-          {
-            icon: CsvIcon,
-            action: handleCsvRequest,
-            label: formatMessage(messages.exportCSV),
-            id: 'Export CSV',
-          },
-        ]
-      : []),
     {
       icon: FileShareIcon,
-      action: openShareWithResearchersModal,
+      action: openShareExternallyModal,
       label: formatMessage(messages.shareExternally),
       id: 'share externally',
     },
-    ...((canArchive(status) && [
-      {
-        icon: BinNoBgIcon,
-        action: openArchiveModal,
-        label: formatMessage(messages.archive),
-        id: 'Archive e-session',
-      },
-    ]) ||
-      []),
     {
       id: 'duplicate',
       label: formatMessage(messages.duplicateHere),
       icon: CopyIcon,
       action: handleClone,
     },
-    ...(canAssignOrganizationToIntervention
+    {
+      id: 'archive',
+      label: formatMessage(messages.archive),
+      icon: ArchiveIcon,
+      action: openArchiveModal,
+      color: colors.bluewood,
+      disabled: !archivingPossible,
+    },
+    ...(showAssignOrganizationOption
       ? [
           {
             icon: AddAppIcon,
             action: openAssignOrganizationModal,
             label: formatMessage(messages.assignOrganization),
             id: 'assignOrganization',
-            disabled: !canEdit(status),
+            disabled: !assigningOrganizationPossible,
           },
         ]
       : []),
@@ -202,6 +216,7 @@ const SingleTile = ({
             action: () => openCatMhModal(tileData),
             label: formatMessage(messages.catMhSettingsModalTitle),
             id: 'catMhAccess',
+            disabled: hasCollaborators,
           },
         ]
       : []),
@@ -212,15 +227,22 @@ const SingleTile = ({
     //   action: handleExportIntervention,
     //   color: colors.bluewood,
     // },
+    ...(canEditCollaborators
+      ? [
+          {
+            id: 'collaborate',
+            label: formatMessage(messages.collaborate),
+            icon: CollaborateIcon,
+            action: openCollaborateModal,
+          },
+        ]
+      : []),
   ];
 
   const preventDefault = (e) => {
     e.stopPropagation();
     e.preventDefault();
   };
-
-  const copyInterventionToResearchers = (users) =>
-    copyIntervention({ interventionId: id, users });
 
   if (isLoading)
     return (
@@ -233,16 +255,7 @@ const SingleTile = ({
     <>
       <CatMhModal />
       <ArchiveModal />
-      <Modal
-        title={formatMessage(messages.sendCopyModalTitle)}
-        onClose={closeShareWithResearchersModal}
-        visible={shareWithResearchersModalVisible}
-      >
-        <SelectResearchers
-          onClose={closeShareWithResearchersModal}
-          onResearchersSelected={copyInterventionToResearchers}
-        />
-      </Modal>
+      <ShareExternallyModal />
       <Modal onClose={closeTranslateModal} visible={translateModalVisible}>
         <TranslateInterventionModal
           id={id}
@@ -264,17 +277,35 @@ const SingleTile = ({
         />
       </Modal>
 
+      <Modal
+        title={formatMessage(messages.collaborate)}
+        description={formatMessage(messages.collaborateDescription)}
+        onClose={closeCollaborateModal}
+        visible={collaborateModalVisible}
+        width={COLLABORATORS_MODAL_WIDTH}
+        maxWidth={COLLABORATORS_MODAL_WIDTH}
+      >
+        <CollaboratorsModal
+          interventionId={id}
+          isCurrentUserInterventionOwner={isCurrentUserInterventionOwner}
+          interventionOwnerId={interventionOwnerId}
+        />
+      </Modal>
+
       <StyledLink to={link}>
         <TileContainer>
           <Heading>
-            <div>
+            <Row gap={12} align="center">
+              {hasCollaborators && <CollaboratingIndicator />}
               {status && (
-                <>
-                  <FormattedMessage {...globalMessages.statuses[status]} />
+                <Row align="center" gap={5}>
+                  <Text lineHeight={1}>
+                    <FormattedMessage {...globalMessages.statuses[status]} />
+                  </Text>
                   <StatusIndicator status={status} />
-                </>
+                </Row>
               )}
-            </div>
+            </Row>
             {!participantView && (
               <div onClick={preventDefault}>
                 <Dropdown options={options} />
@@ -309,7 +340,7 @@ const SingleTile = ({
               </TileInfo>
             </Tooltip>
 
-            {organizationId && (
+            {showReportingBadge && (
               <Badge bg={colors.orange}>
                 {formatMessage(messages.isFromOrganization)}
               </Badge>
@@ -326,21 +357,22 @@ SingleTile.propTypes = {
   intl: PropTypes.object,
   participantView: PropTypes.bool,
   link: PropTypes.string,
-  sendCsv: PropTypes.func,
   copyIntervention: PropTypes.func,
   archiveIntervention: PropTypes.func,
   userId: PropTypes.string,
   isLoading: PropTypes.bool,
   exportIntervention: PropTypes.func,
+  userOrganizableId: PropTypes.string,
+  isCurrentUserInterventionOwner: PropTypes.bool,
 };
 
 const mapStateToProps = createStructuredSelector({
   userId: makeSelectUserId(),
+  userOrganizableId: makeSelectUserOrganizableId(),
 });
 
 const mapDispatchToProps = {
   copyIntervention: copyInterventionRequest,
-  sendCsv: sendInterventionCsvRequest,
   archiveIntervention: archiveInterventionRequest,
   exportIntervention: exportInterventionRequest,
 };
@@ -359,6 +391,10 @@ export default compose(
   injectSaga({
     key: 'interventionDetailsPageSagas',
     saga: interventionDetailsPageSagas,
+  }),
+  injectSaga({
+    key: 'fetchIntervention',
+    saga: fetchInterventionSaga,
   }),
   injectReducer({ key: 'intervention', reducer: interventionReducer }),
   injectSaga({ key: 'exportIntervention', saga: exportInterventionSaga }),

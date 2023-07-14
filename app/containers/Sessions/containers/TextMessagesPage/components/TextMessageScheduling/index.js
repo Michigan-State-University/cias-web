@@ -160,7 +160,6 @@ const TextMessageScheduling = ({
               <Column justify="center" align="center" height="100%" pt={15}>
                 <ApprovableInput
                   type="date"
-                  placeholder={formatMessage(messages.date)}
                   validator={numericValidator}
                   height={50}
                   mr={0}

@@ -1,9 +1,8 @@
 /* eslint-disable no-use-before-define */
 import { registerDependencies } from 'mjml-validator'
 import { BodyComponent } from 'mjml-core'
-import flow from 'lodash/flow'
 
-import { LOGO_URL_BUILD, LOGO_URL_WATCH, TEXT } from '../utils/constants'
+import { LOGO_URL_BUILD, LOGO_URL_WATCH } from '../utils/constants'
 
 registerDependencies({
   // Tell the validator which tags are allowed as our component's children
@@ -24,24 +23,24 @@ export default class AppLayout extends BodyComponent {
     mainText: 'string',
     buttonText: 'string',
     buttonUrl: 'string',
-    ignoreEmail: 'boolean',
-    doNotReply: 'boolean',
-    noPwdChange: 'boolean',
+    footerText: 'string',
     buttonColor: 'color',
     buttonTextColor: 'color',
+    description: 'string',
+    otherInformation: 'string',
   }
 
   // Exactly what the name suggests. Fallback value for this.getAttribute('attribute-name').
   static defaultAttributes = {
-    header: 'Header text',
-    mainText: 'Main <span style="color:red;">text</span>!',
-    buttonText: 'Link',
+    header: '',
+    mainText: '',
+    buttonText: '',
     buttonUrl: '#',
-    ignoreEmail: false,
-    noPwdChange: false,
-    doNotReply: true,
+    footerText: '',
     buttonColor: '#107969',
     buttonTextColor: '#FFF',
+    description: '',
+    otherInformation: '',
   }
 
   render() {
@@ -49,35 +48,11 @@ export default class AppLayout extends BodyComponent {
     const mainText = this.getAttribute('mainText')
     const buttonText = this.getAttribute('buttonText')
     const buttonUrl = this.getAttribute('buttonUrl')
-    const ignoreEmail = this.getAttribute('ignoreEmail')
-    const noPwdChange = this.getAttribute('noPwdChange')
-    const doNotReply = this.getAttribute('doNotReply')
+    const footerText = this.getAttribute('footerText')
     const buttonColor = this.getAttribute('buttonColor')
     const buttonTextColor = this.getAttribute('buttonTextColor')
     const description = this.getAttribute('description')
     const otherInformation = this.getAttribute('otherInformation')
-
-    const textWithBreak = (text) => textBuilder(text, [textSpaceDecorator])
-
-    const textBuilder = (text, decorators) => (decorators ? flow(...decorators)(text) : text)
-
-    const textSpaceDecorator = (text) => `${text}<br/>`
-
-    const createFootNote = () => {
-      const textArray = []
-
-      if (ignoreEmail) textArray.push(textWithBreak(TEXT.IGNORE_EMAIL))
-
-      if (noPwdChange) textArray.push(textWithBreak(TEXT.NO_PWD_CHANGE))
-
-      if (doNotReply) textArray.push(textWithBreak(TEXT.DO_NOT_REPLY))
-
-      return textArray.join('')
-    }
-
-    const footNote = createFootNote()
-
-    const hasFootNote = !!(footNote && footNote.length)
 
     /*
       Components are supposed to return html. If we want to return mjml so as to
@@ -154,13 +129,13 @@ export default class AppLayout extends BodyComponent {
         `
     }
         ${
-      hasFootNote &&
+      footerText &&
       `<mj-section>
             <mj-column>
               <mj-text align="center" font-size="12px" color="#6D7485" line-height="20px">
-              <! -- FOOTNOTE START -->
-              ${footNote}
-              <! -- FOOTNOTE END -->
+              <! -- FOOTER START -->
+              ${footerText}
+              <! -- FOOTER END -->
               </mj-text>
             </mj-column>
           </mj-section>`

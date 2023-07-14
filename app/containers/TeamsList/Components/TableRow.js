@@ -1,6 +1,10 @@
 import React, { useContext } from 'react';
 import PropTypes from 'prop-types';
 
+import { RoutePath } from 'global/constants';
+
+import { parametrizeRoutePath } from 'utils/router';
+
 import Row from 'components/Row';
 import StyledTextButton from 'components/Button/StyledTextButton';
 import Text from 'components/Text';
@@ -28,7 +32,8 @@ const TableRow = ({
     });
   };
 
-  const handleRedirect = () => history.push(`/teams/${id}`);
+  const handleRedirect = () =>
+    history.push(parametrizeRoutePath(RoutePath.TEAM_DETAILS, { teamId: id }));
 
   const text = formatMessage(messages.deleteTeam);
 

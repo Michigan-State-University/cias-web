@@ -44,7 +44,6 @@ export const StatusIndicator = styled.span`
   border-radius: 50%;
   background: ${(props) => statusTypeToColorMap[props.status]};
   display: inline-block;
-  margin-left: 5px;
 `;
 
 export const TileInfo = styled.div`

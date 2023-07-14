@@ -24,11 +24,11 @@ const UserList = ({ users, buttons, buttonIsClose, userWithLoading }) => {
           <StyledTextButton
             data-cy={`user-list-action-button-${index}`}
             key={`${text.props.id}-${id}`}
-            disabled={!disabled}
+            disabled={disabled}
             onClick={() => action(id)}
             buttonProps={{
               ml: buttonMargin,
-              color: disabled ? themeColors.secondary : colors.grey,
+              color: disabled ? colors.grey : themeColors.secondary,
             }}
             loaderProps={{
               ml: buttonMargin,

@@ -97,4 +97,32 @@ export default defineMessages({
     id: `${scope}.codeVerificationButton`,
     defaultMessage: 'Verify',
   },
+  continue: {
+    id: `${scope}.continue`,
+    defaultMessage: 'Continue',
+  },
+  lastNameRequired: {
+    id: `${scope}.lastNameRequired`,
+    defaultMessage: 'Last name required',
+  },
+  firstNameRequired: {
+    id: `${scope}.firstNameRequired`,
+    defaultMessage: 'First name required',
+  },
+  termsRequired: {
+    id: `${scope}.termsRequired`,
+    defaultMessage: 'You need to accept terms and conditions',
+  },
+  lastNameLabel: {
+    id: `${scope}.lastName`,
+    defaultMessage: 'Last name',
+  },
+  firstNameLabel: {
+    id: `${scope}.firstNameLabel`,
+    defaultMessage: 'First name',
+  },
+  goBackToLoginPage: {
+    id: `${scope}.goBackToLoginPage`,
+    defaultMessage: 'Go back to login page',
+  },
 });

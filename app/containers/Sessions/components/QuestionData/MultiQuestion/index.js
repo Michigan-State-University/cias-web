@@ -14,7 +14,6 @@ import {
 } from 'global/reducers/questions';
 import globalMessages from 'global/i18n/globalMessages';
 import { numericValidator, variableNameValidator } from 'utils/validators';
-import { canEdit } from 'models/Status/statusPermissions';
 import { themeColors, colors } from 'theme';
 
 import FlexibleWidthApprovableInput from 'components/Input/FlexibleWidthApprovableInput';
@@ -43,7 +42,7 @@ const MultiQuestion = ({
   removeAnswer,
   reorderAnswers,
   isNarratorTab,
-  interventionStatus,
+  editingPossible,
   intl: { formatMessage },
 }) => {
   const checkboxButtonRef = useRef(null);
@@ -58,7 +57,6 @@ const MultiQuestion = ({
       );
   }, [checkboxButtonRef.current]);
 
-  const editingPossible = canEdit(interventionStatus);
   const isNarratorTabOrEditNotPossible = isNarratorTab || !editingPossible;
 
   const handleMouseEnter = (index) => () => {
@@ -217,7 +215,7 @@ MultiQuestion.propTypes = {
   removeAnswer: PropTypes.func.isRequired,
   reorderAnswers: PropTypes.func.isRequired,
   isNarratorTab: PropTypes.bool,
-  interventionStatus: PropTypes.string,
+  editingPossible: PropTypes.bool,
 };
 
 const mapStateToProps = createStructuredSelector({

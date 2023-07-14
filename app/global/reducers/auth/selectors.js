@@ -1,5 +1,7 @@
 import { createSelector } from 'reselect';
 
+import { Roles } from 'models/User/RolesManager';
+
 import { initialState } from './reducer';
 
 export const selectAuth = (state) => state.auth || initialState;
@@ -14,7 +16,7 @@ export const makeSelectPhoneNumberPreview = () =>
   createSelector(selectAuth, (authState) => authState.phoneNumberPreview);
 
 export const makeSelectUserRoles = () =>
-  createSelector(selectAuth, (authState) => authState.user.roles);
+  createSelector(selectAuth, (authState) => authState.user?.roles);
 
 export const makeSelectErrors = (error) =>
   createSelector(selectAuth, (authState) =>
@@ -32,6 +34,15 @@ export const makeSelectLoginFormData = () =>
 export const makeSelectVerificationNeeded = () =>
   createSelector(selectAuth, (authState) => authState.verificationCodeNeeded);
 
+export const makeSelectTermsNotAccepted = () =>
+  createSelector(selectAuth, (authState) => authState.termsNotAccepted);
+
+export const makeSelectTermsExtraFields = () =>
+  createSelector(
+    selectAuth,
+    (authState) => authState.termsNotAcceptedExtraFields,
+  );
+
 export const makeSelectVerificationSuccess = () =>
   createSelector(selectAuth, (authState) => authState.verificationCodeSuccess);
 
@@ -43,3 +54,19 @@ export const makeSelectIsUserLoggedIn = () =>
 
 export const makeSelectUserTimeZone = () =>
   createSelector(selectAuth, (authState) => authState.user?.timeZone);
+
+export const makeSelectUserOrganizableId = () =>
+  createSelector(selectAuth, (authState) => authState.user?.organizableId);
+
+export const makeSelectIsAdmin = () =>
+  createSelector(makeSelectUserRoles(), (roles) =>
+    roles?.includes(Roles.Admin),
+  );
+
+export const makeSelectIsEInterventionAdmin = () =>
+  createSelector(makeSelectUserRoles(), (roles) =>
+    roles?.includes(Roles.EInterventionAdmin),
+  );
+
+export const makeSelectCachePassword = () =>
+  createSelector(selectAuth, (authState) => authState.cache.password);

@@ -6,18 +6,21 @@ import merge from 'lodash/merge';
 
 import { AnswerType } from 'models/Answer';
 
+import { RoutePath } from 'global/constants';
+
 import { mapQuestionToStateObject } from 'utils/mapResponseObjects';
 import { formatMessage } from 'utils/intlOutsideReact';
 import isNullOrUndefined from 'utils/isNullOrUndefined';
-import { logInGuest } from 'global/reducers/auth/sagas/logInGuest';
 import LocalStorageService from 'utils/localStorageService';
 import objectToSnakeCase from 'utils/objectToSnakeCase';
 import { getIsPreview } from 'utils/previewMode';
+import { parametrizeRoutePath } from 'utils/router';
 
 import {
   resetPhoneNumberPreview,
   updateUsersTimezone,
 } from 'global/reducers/auth/actions';
+import { logInGuest } from 'global/reducers/auth/sagas/logInGuest';
 
 import { jsonApiToObject } from 'utils/jsonApiMapper';
 import objectToCamelKebabCase from 'utils/objectToCamelKebabCase';
@@ -169,7 +172,11 @@ function* redirectToPreview({
   yield call(logInGuest, { payload: { sessionId } });
   yield call(
     window.open,
-    `/interventions/${interventionId}/sessions/${sessionId}/preview/${questionId}`,
+    parametrizeRoutePath(RoutePath.PREVIEW_SESSION_FROM_INDEX, {
+      interventionId,
+      sessionId,
+      index: questionId,
+    }),
   );
 }
 

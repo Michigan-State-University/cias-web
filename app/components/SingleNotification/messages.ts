@@ -39,4 +39,36 @@ export default defineMessages({
     id: `${scope}.importFailedNotificationContent`,
     defaultMessage: 'There was an issue with importing intervention',
   },
+  newCollaboratorAddedTitle: {
+    id: `${scope}.newCollaboratorAddedTitle`,
+    defaultMessage: 'Invitation to collaborate',
+  },
+  newCollaboratorAddedContent: {
+    id: `${scope}.newCollaboratorAddedContent`,
+    defaultMessage: `You have been invited to collaborate on <secondaryColorBold>{interventionName}</secondaryColorBold>`,
+  },
+  collaboratorRemovedTitle: {
+    id: `${scope}.collaboratorRemovedTitle`,
+    defaultMessage: 'Removed from collaborators',
+  },
+  collaboratorRemovedContent: {
+    id: `${scope}.collaboratorRemovedContent`,
+    defaultMessage: `You have been removed from collaborators on <secondaryColorBold>{interventionName}</secondaryColorBold>`,
+  },
+  startEditingInterventionTitle: {
+    id: `${scope}.startEditingInterventionTitle`,
+    defaultMessage: `Editing started`,
+  },
+  startEditingInterventionContent: {
+    id: `${scope}.startEditingInterventionContent`,
+    defaultMessage: `{firstName} {lastName} started editing <secondaryColorBold>{interventionName}</secondaryColorBold>`,
+  },
+  stopEditingInterventionTitle: {
+    id: `${scope}.stopEditingInterventionTitle`,
+    defaultMessage: `Intervention edited`,
+  },
+  stopEditingInterventionContent: {
+    id: `${scope}.stopEditingInterventionContent`,
+    defaultMessage: `<secondaryColorBold>{interventionName}</secondaryColorBold> has been edited by {firstName} {lastName}. Refresh the page to see latest changes.`,
+  },
 });

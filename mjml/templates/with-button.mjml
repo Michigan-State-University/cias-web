@@ -8,6 +8,7 @@
       mainText="{MAIN_TEXT}"
       buttonText="{BUTTON_TEXT}"
       buttonUrl="{BUTTON_URL}"
+      footerText="{FOOTER_TEXT}"
     />
   </mj-body>
 </mjml>

@@ -4,6 +4,8 @@ import { toast } from 'react-toastify';
 
 import { formatMessage } from 'utils/intlOutsideReact';
 
+import { setUsersItemsState, UserItemState } from 'global/reducers/userList';
+
 import messages from '../messages';
 import {
   SHARE_GROUPS_EXTERNALLY_REQUEST,
@@ -17,9 +19,13 @@ import {
 import { mapQuestionIdsToDuplicateGroupStructure } from '../utils';
 
 function* shareQuestionsToResearchers({
-  payload: { questionIds, researcherIds, sessionId },
+  payload: { questionIds, emails, sessionId, ids },
 }) {
   const requestURL = `v1/question_groups/share_externally`;
+
+  if (ids) {
+    yield put(setUsersItemsState(ids, UserItemState.LOADING));
+  }
 
   try {
     const questionGroups = yield call(
@@ -29,18 +35,25 @@ function* shareQuestionsToResearchers({
 
     yield call(axios.post, requestURL, {
       question_groups: questionGroups,
-      user_ids: researcherIds,
+      emails,
       session_id: sessionId,
     });
     yield put(shareGroupsExternallySuccess());
-    yield call(toast.info, formatMessage(messages.shareSuccess), {
-      id: SHARE_GROUPS_EXTERNALLY_SUCCESS,
-    });
+    if (ids) {
+      yield put(setUsersItemsState(ids, UserItemState.SUCCESS));
+    } else {
+      yield call(toast.info, formatMessage(messages.shareSuccess), {
+        id: SHARE_GROUPS_EXTERNALLY_SUCCESS,
+      });
+    }
   } catch (error) {
     yield call(toast.error, formatMessage(messages.shareError), {
       id: SHARE_GROUPS_EXTERNALLY_ERROR,
     });
     yield put(shareGroupsExternallyError(error));
+    if (ids) {
+      yield put(setUsersItemsState(ids, UserItemState.IDLE));
+    }
   }
 }
 

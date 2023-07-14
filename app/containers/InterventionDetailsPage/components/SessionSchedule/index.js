@@ -40,6 +40,7 @@ import Column from 'components/Column';
 import Selector from 'components/Selector';
 import Row from 'components/Row';
 import Badge from 'components/Badge';
+import { HelpIconTooltip } from 'components/HelpIconTooltip';
 
 import ExactDateOption from './ExactDateOption';
 import DaysAfterOption from './DaysAfterOption';
@@ -170,17 +171,22 @@ function SessionSchedule({
       <Text mb={12} textOpacity={0.6} color={colors.bluewood} fontSize={13}>
         {formatMessage(messages.info)}
       </Text>
-      <Selector
-        disabled={disabled}
-        selectOptionPlaceholder={formatMessage(messages.default)}
-        options={scheduleOptions}
-        activeOption={find(
-          scheduleOptions,
-          (elem) => elem.id === selectedScheduleOption,
-        )}
-        rightPosition="315"
-        setOption={(id) => changeType(id, sessionId)}
-      />
+      <HelpIconTooltip
+        id="session-scheduling-cdh"
+        tooltipContent={formatMessage(messages.sessionSchedulingHelp)}
+      >
+        <Selector
+          disabled={disabled}
+          selectOptionPlaceholder={formatMessage(messages.default)}
+          options={scheduleOptions}
+          activeOption={find(
+            scheduleOptions,
+            (elem) => elem.id === selectedScheduleOption,
+          )}
+          rightPosition="315"
+          setOption={(id) => changeType(id, sessionId)}
+        />
+      </HelpIconTooltip>
       {selectedScheduleOption && (
         <Row mt={28} mb={17} align="center">
           {renderOption()}

@@ -1,13 +1,12 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-import questionMark from 'assets/svg/grey-question-mark.svg';
-
 import Row from 'components/Row';
 import Text from 'components/Text';
 import { FullWidthSwitch } from 'components/Switch';
+import { HelpIconTooltip } from 'components/HelpIconTooltip';
+
 import { colors, borders } from 'theme';
-import Tooltip from 'components/Tooltip';
 
 const Option = ({
   withBorder,
@@ -39,17 +38,12 @@ const Option = ({
         checked={value}
         onToggle={handleToggle}
       >
-        <Row align="center">
+        <HelpIconTooltip
+          id={`option-tooltip-${label}`}
+          tooltipContent={tooltipText}
+        >
           <Text fontWeight={fontWeight}>{label}</Text>
-          {tooltipText && (
-            <Tooltip
-              id={`option-tooltip-${label}`}
-              ml={8}
-              icon={questionMark}
-              content={tooltipText}
-            />
-          )}
-        </Row>
+        </HelpIconTooltip>
       </FullWidthSwitch>
     </Row>
   );
