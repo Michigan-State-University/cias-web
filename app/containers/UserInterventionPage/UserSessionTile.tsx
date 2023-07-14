@@ -3,6 +3,13 @@ import { useHistory } from 'react-router-dom';
 import { useIntl } from 'react-intl';
 import dayjs from 'dayjs';
 
+import { colors, themeColors } from 'theme';
+
+import globalMessages from 'global/i18n/globalMessages';
+import { RoutePath } from 'global/constants';
+
+import { parametrizeRoutePath } from 'utils/router';
+
 import Box from 'components/Box';
 import GhostLink from 'components/GhostLink';
 import Text, { EllipsisText } from 'components/Text';
@@ -16,9 +23,6 @@ import {
   statusTypeToFontColorMap,
 } from 'models/UserSession/StatusTypes';
 import { InterventionType } from 'models/Intervention';
-import { colors, themeColors } from 'theme';
-
-import globalMessages from 'global/i18n/globalMessages';
 
 import { TileContainer } from './styled';
 import messages from './messages';
@@ -49,7 +53,10 @@ const UserSessionTile = ({
 }: Props) => {
   const { formatMessage } = useIntl();
   const history = useHistory();
-  const sessionUrl = `/interventions/${interventionId}/sessions/${id}/fill`;
+  const sessionUrl = parametrizeRoutePath(RoutePath.ANSWER_SESSION, {
+    interventionId,
+    sessionId: id,
+  });
 
   const isFirstSession = position === 1;
 

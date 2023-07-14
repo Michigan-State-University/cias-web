@@ -44,14 +44,16 @@ export const groupQuestionsError = (error) =>
   actionBuilder(GROUP_QUESTIONS_ERROR, { error });
 
 export const shareGroupsExternallyRequest = (
-  researcherIds,
+  emails,
   questionIds,
   sessionId,
+  ids,
 ) =>
   actionBuilder(SHARE_GROUPS_EXTERNALLY_REQUEST, {
     questionIds,
-    researcherIds,
+    emails,
     sessionId,
+    ids,
   });
 export const shareGroupsExternallySuccess = () =>
   actionBuilder(SHARE_GROUPS_EXTERNALLY_SUCCESS, {});

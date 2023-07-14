@@ -3,9 +3,11 @@ import { put, takeLatest, call } from 'redux-saga/effects';
 import { push } from 'connected-react-router';
 import { toast } from 'react-toastify';
 
-import { formatMessage } from 'utils/intlOutsideReact';
+import { RoutePath } from 'global/constants';
 
+import { formatMessage } from 'utils/intlOutsideReact';
 import objectToCamelKebabCase from 'utils/objectToCamelKebabCase';
+
 import { setNewPasswordSuccess, setNewPasswordError } from './actions';
 import {
   SET_NEW_PASSWORD_REQUEST,
@@ -42,7 +44,7 @@ function* setNewPassword({
       toastId: SET_NEW_PASSWORD_SUCCESS,
     });
     yield put(setNewPasswordSuccess());
-    yield put(push('/'));
+    yield put(push(RoutePath.DASHBOARD));
   } catch (error) {
     yield put(setNewPasswordError(error?.toString()));
   }

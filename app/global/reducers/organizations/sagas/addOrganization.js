@@ -2,8 +2,12 @@ import { put, takeLatest, call, select } from 'redux-saga/effects';
 import axios from 'axios';
 import { push } from 'connected-react-router';
 
+import { RoutePath } from 'global/constants';
+
 import { jsonApiToObject } from 'utils/jsonApiMapper';
 import { calculateNextValue, CalculationStrategy } from 'utils/sequenceUtils';
+import { parametrizeRoutePath } from 'utils/router';
+
 import { CREATE_ORGANIZATION_REQUEST } from '../constants';
 import {
   createOrganizationFailure,
@@ -29,7 +33,13 @@ export function* createOrganization() {
     yield put(createOrganizationSuccess(organization));
 
     // Go to the newly created Organization
-    yield put(push(`/organization/${organization.id}`));
+    yield put(
+      push(
+        parametrizeRoutePath(RoutePath.MANAGE_ORGANIZATIONS, {
+          organizationId: organization.id,
+        }),
+      ),
+    );
   } catch (error) {
     yield put(createOrganizationFailure(error));
   }

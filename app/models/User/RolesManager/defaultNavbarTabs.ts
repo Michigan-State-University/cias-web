@@ -2,8 +2,10 @@ import folder from 'assets/svg/folder.svg';
 import peopleHR from 'assets/svg/peopleHR.svg';
 import peopleHRCircle from 'assets/svg/peopleHRCircle.svg';
 import fileBarChart from 'assets/svg/file-bar-chart.svg';
-import { Roles } from './UserRoles';
 
+import { RoutePath } from 'global/constants';
+
+import { Roles } from './UserRoles';
 import { navbarNames } from './navbarNames';
 
 export type NavbarSubTab = {
@@ -35,21 +37,21 @@ const interventionsTab = (
   icon: SVGElement,
 ): NavbarTab => ({
   id: interventionsTabId,
-  path: '/',
+  path: RoutePath.DASHBOARD,
   message,
   icon,
 });
 
 const accountsTab = (message: JSX.Element, icon: SVGElement): NavbarTab => ({
   id: accountsTabId,
-  path: '/users',
+  path: RoutePath.USERS_LIST,
   message,
   icon,
 });
 
 const teamsTab = (message: JSX.Element, icon: SVGElement): NavbarTab => ({
   id: teamsTabId,
-  path: '/teams',
+  path: RoutePath.TEAMS_LIST,
   message,
   icon,
 });
@@ -59,7 +61,7 @@ const participantInterventionsTab = (
   icon: SVGElement,
 ): NavbarTab => ({
   id: participantInterventionsTabId,
-  path: '/',
+  path: RoutePath.DASHBOARD,
   message,
   icon,
 });
@@ -69,7 +71,7 @@ const participantReportsTab = (
   icon: SVGElement,
 ): NavbarTab => ({
   id: participantReportsTabId,
-  path: '/reports',
+  path: RoutePath.PARTICIPANT_REPORTS,
   message,
   icon,
 });
@@ -79,18 +81,18 @@ const conversationsTab = (
   icon: SVGElement,
 ): NavbarTab => ({
   id: conversationsTabId,
-  path: '/live-chat',
+  path: RoutePath.INBOX,
   message,
   icon,
   subTabs: [
     {
       id: inboxSubTabId,
-      path: '/live-chat',
+      path: RoutePath.INBOX,
       message: navbarNames.inbox,
     },
     {
       id: archiveSubTabId,
-      path: '/live-chat/archive',
+      path: RoutePath.ARCHIVE,
       message: navbarNames.archive,
     },
   ],

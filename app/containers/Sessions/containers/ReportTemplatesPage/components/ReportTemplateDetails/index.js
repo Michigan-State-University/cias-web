@@ -11,7 +11,6 @@ import {
 } from 'global/reducers/reportTemplates';
 
 import Loader from 'components/Loader';
-import { elements } from 'theme';
 import ReportTemplatePreview from './ReportTemplatePreview';
 import TemplateSectionSettings from './TemplateSectionSettings';
 import ReportTemplateMainSettings from './ReportTemplateMainSettings';
@@ -51,22 +50,25 @@ const ReportTemplateDetails = ({
       style={{
         width: '100%',
         padding: 0,
+        flex: 1,
+        minHeight: 0,
       }}
       fluid
     >
-      <Row justify="between" nogutter>
+      <Row justify="between" nogutter style={{ height: '100%' }}>
         <Col
           xs={selectedTemplateSectionId ? 7 : 12}
           style={{
-            height: `calc(100vh - ${2 * elements.navbarHeight}px)`,
+            height: '100%',
             overflow: 'auto',
+            paddingBottom: 40,
           }}
         >
           <ReportTemplateMainSettings />
           <ReportTemplatePreview />
         </Col>
         {selectedTemplateSectionId && (
-          <Col xs={5}>
+          <Col xs={5} style={{ height: '100%', overflow: 'auto' }}>
             <TemplateSectionSettings />
           </Col>
         )}

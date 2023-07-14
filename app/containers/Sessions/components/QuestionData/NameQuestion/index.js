@@ -17,7 +17,12 @@ import { UPDATE_DATA } from './constants';
 
 const NameQuestion = ({ intl: { formatMessage } }) => (
   <Column mt={10}>
-    <NameQuestionLayout disabled formatMessage={formatMessage} isDesktop />
+    <NameQuestionLayout
+      disabled
+      formatMessage={formatMessage}
+      isDesktop
+      showNameHelp
+    />
   </Column>
 );
 

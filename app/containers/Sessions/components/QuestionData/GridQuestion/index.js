@@ -29,7 +29,6 @@ import {
   makeSelectSelectedQuestion,
   updateQuestionData,
 } from 'global/reducers/questions';
-import { canEdit } from 'models/Status/statusPermissions';
 import useResizeObserver from 'utils/useResizeObserver';
 
 import ReorderIcon from 'assets/svg/reorder-hand.svg';
@@ -59,9 +58,9 @@ const GridQuestion = ({
   deleteRow,
   deleteColumn,
   isNarratorTab,
-  interventionStatus,
   reorderRows,
   reorderColumns,
+  editingPossible,
   intl: { formatMessage },
 }) => {
   const {
@@ -71,7 +70,6 @@ const GridQuestion = ({
   const [hoveredRow, setHoveredRow] = useState(-1);
   const [hoveredColumn, setHoveredColumn] = useState(-1);
 
-  const editingPossible = canEdit(interventionStatus);
   const isNarratorTabOrEditNotPossible = isNarratorTab || !editingPossible;
 
   const containerRightRef = useRef(null);
@@ -434,7 +432,7 @@ GridQuestion.propTypes = {
   deleteRow: PropTypes.func.isRequired,
   deleteColumn: PropTypes.func.isRequired,
   isNarratorTab: PropTypes.bool,
-  interventionStatus: PropTypes.string,
+  editingPossible: PropTypes.bool,
   reorderRows: PropTypes.func,
   reorderColumns: PropTypes.func,
 };

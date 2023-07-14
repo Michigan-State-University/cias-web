@@ -13,7 +13,6 @@ import { colors } from 'theme';
 import { variableNameValidator } from 'utils/validators';
 import lastKey from 'utils/getLastKey';
 
-import { canEdit } from 'models/Status/statusPermissions';
 import { getRemovedBlockForSetting } from 'models/Narrator/BlockTypes';
 
 import {
@@ -27,6 +26,7 @@ import {
   fetchInterventionSaga,
   makeSelectInterventionStatus,
   interventionReducer,
+  makeSelectEditingPossible,
 } from 'global/reducers/intervention';
 import globalMessages from 'global/i18n/globalMessages';
 
@@ -49,13 +49,13 @@ const SessionSettings = ({
   narratorSettings,
   formatMessage,
   editSessionSettings,
-  interventionStatus,
   googleTtsVoice,
   currentNarrator,
   editSession,
   multipleFill,
   autofinishEnabled,
   autofinishDelay,
+  editingPossible,
 }) => {
   useInjectReducer({ key: 'intervention', reducer: interventionReducer });
   useInjectReducer({ key: 'questions', reducer: questionsReducer });
@@ -126,8 +126,6 @@ const SessionSettings = ({
     editSession({ currentNarrator: newNarrator }, { replacementAnimations });
     setNewNarrator(null);
   };
-
-  const editingPossible = canEdit(interventionStatus);
 
   const getConfirmationDescription = () => {
     if (!isConfirmationBoxVisible) return null;
@@ -276,6 +274,7 @@ const SessionSettings = ({
 
 const mapStateToProps = createStructuredSelector({
   interventionStatus: makeSelectInterventionStatus(),
+  editingPossible: makeSelectEditingPossible(),
 });
 
 const mapDispatchToProps = {
@@ -301,6 +300,7 @@ SessionSettings.propTypes = {
   multipleFill: PropTypes.bool,
   autofinishEnabled: PropTypes.bool,
   autofinishDelay: PropTypes.number,
+  editingPossible: PropTypes.bool,
 };
 
 export default compose(withConnect)(SessionSettings);

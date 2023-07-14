@@ -1,3 +1,5 @@
+import { RoutePath } from 'global/constants';
+
 import { ADMIN_EMAIL, ADMIN_PASSWORD } from '../../support/envVariables';
 import { questionTypes } from '../../fixtures/fixtures';
 import { CREATE_QUESTION, UPDATE_QUESTION } from '../../support/aliases';
@@ -12,7 +14,7 @@ describe('Create Intervention by Admin', () => {
     cy.login(Cypress.env(ADMIN_EMAIL), Cypress.env(ADMIN_PASSWORD));
   });
   it('Create Intervention by Admin tests', () => {
-    cy.visit('/');
+    cy.visit(RoutePath.DASHBOARD);
     // Create session and session
     cy.createIntervention();
     cy.createSessionsInIntervention(1);

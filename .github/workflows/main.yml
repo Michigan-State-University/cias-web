@@ -6,8 +6,8 @@ jobs:
     name: Set-up test chunks
     runs-on: ubuntu-latest
     outputs:
-      test-chunks: ${{ steps['set-test-chunks'].outputs['test-chunks'] }}
-      test-chunk-ids: ${{ steps['set-test-chunk-ids'].outputs['test-chunk-ids'] }}
+      test-chunks: ${{ steps.set-test-chunks.outputs.test-chunks }}
+      test-chunk-ids: ${{ steps.set-test-chunk-ids.outputs.test-chunk-ids }}
     steps:
       - name: Checkout code
         uses: actions/checkout@v2
@@ -34,13 +34,13 @@ jobs:
 
       - id: set-test-chunks
         name: Set Chunks
-        run: echo "::set-output name=test-chunks::$(npx jest --listTests --json | jq -cM '[to_entries | group_by(.key % ${{ secrets.TEST_BATCH_COUNT }}) | .[] | map(.value)]')"
+        run: echo "test-chunks=$(npx jest --listTests --json | jq -cM '[to_entries | group_by(.key % ${{ secrets.TEST_BATCH_COUNT }}) | .[] | map(.value)]')" >> $GITHUB_OUTPUT
 
       - id: set-test-chunk-ids
         name: Set Chunk IDs
-        run: echo "::set-output name=test-chunk-ids::$(echo $CHUNKS | jq -cM 'to_entries | map(.key)')"
+        run: echo "test-chunk-ids=$(echo $CHUNKS | jq -cM 'to_entries | map(.key)')" >> $GITHUB_OUTPUT
         env:
-          CHUNKS: ${{ steps['set-test-chunks'].outputs['test-chunks'] }}
+          CHUNKS: ${{ steps.set-test-chunks.outputs.test-chunks }}
 
   lint:
     name: Lint JS, TS and CSS
@@ -78,7 +78,7 @@ jobs:
     needs: chunk-setup
     strategy:
       matrix:
-        chunk: ${{ fromJson(needs['chunk-setup'].outputs['test-chunk-ids']) }}
+        chunk: ${{ fromJson(needs.chunk-setup.outputs.test-chunk-ids) }}
     steps:
       - name: Checkout code
         uses: actions/checkout@v2
@@ -106,4 +106,4 @@ jobs:
       - name: Run Tests
         run: echo $CHUNKS | jq '.[${{ matrix.chunk }}] | .[] | @text' | xargs npx cross-env NODE_ENV=test jest
         env:
-          CHUNKS: ${{ needs['chunk-setup'].outputs['test-chunks'] }}
+          CHUNKS: ${{ needs.chunk-setup.outputs.test-chunks }}

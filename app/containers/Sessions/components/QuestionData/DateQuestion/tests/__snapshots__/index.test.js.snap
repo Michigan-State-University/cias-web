@@ -48,23 +48,31 @@ exports[`<DateQuestion /> Should render and match the snapshot 1`] = `
 }
 
 .c7 {
-  background-color: #F8FBFF;
-  border-radius: 5px;
+  padding: 12px;
   border-style: solid;
   border-width: 1px;
   border-color: #E9F1FB;
+  border-radius: 5px;
   margin-right: 10px;
   margin-left: 10px;
   width: 200px;
   height: 50px;
-}
-
-.c7:hover {
-  cursor: not-allowed;
+  padding: 12px;
+  font-size: 15px;
+  color: rgba(171,187,209,1);
+  text-align: left;
+  color: rgba(171,187,209,1);
+  opacity: 0.5;
 }
 
 .c7:focus {
+  box-shadow: none;
   outline: none;
+  border-color: #107969;
+}
+
+.c7:disabled {
+  color: #ABBBD1;
 }
 
 .c6 .schedule-date-picker {
@@ -110,15 +118,6 @@ exports[`<DateQuestion /> Should render and match the snapshot 1`] = `
 
 .c6 .schedule-date-picker .react-datepicker__month-option {
   background-color: #E9F1FB;
-}
-
-.c8 {
-  font-family: DM Sans;
-  font-size: 13px;
-  line-height: 130%;
-  font-size: 15px;
-  color: rgba(47,56,80,0.6);
-  color: rgba(47,56,80,0.6);
 }
 
 .c1 {
@@ -189,21 +188,18 @@ exports[`<DateQuestion /> Should render and match the snapshot 1`] = `
               <div
                 class="react-datepicker__input-container"
               >
-                <button
+                <input
+                  aria-label="MM-DD-YYYY"
                   class="c7"
-                  data-private="true"
+                  color="#ABBBD1"
                   disabled=""
+                  font-size="15"
                   height="50"
+                  placeholder="MM-DD-YYYY"
+                  type="text"
+                  value=""
                   width="200"
-                >
-                  <p
-                    class="c8"
-                    color="#2F3850"
-                    font-size="15"
-                  >
-                    Choose date...
-                  </p>
-                </button>
+                />
               </div>
             </div>
           </div>

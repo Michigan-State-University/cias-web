@@ -1,4 +1,4 @@
-import React, { useRef } from 'react';
+import React from 'react';
 import { render, fireEvent, waitFor, screen } from '@testing-library/react';
 import 'jest-styled-components';
 import userEvent from '@testing-library/user-event';
@@ -7,17 +7,11 @@ import { testRender } from 'utils/testUtils';
 
 import { act } from '@testing-library/react-hooks';
 import Input from '../index';
-import DateInput from '../DateInput';
 import ApprovableInput from '../ApprovableInput';
 import BadgeInput from '../BadgeInput';
 import SearchInput from '../SearchInput';
 import StyledInput from '../StyledInput';
 import TextArea from '../TextArea';
-
-const DateComponent = (props) => {
-  const ref = useRef(null);
-  return <DateInput ref={ref} {...props} />;
-};
 
 describe('<Input />', () => {
   it('Expect to not log errors in console', () => {
@@ -31,26 +25,6 @@ describe('<Input />', () => {
   });
   it('Should render with error and match the snapshot', () => {
     const { container } = render(<Input hasError transparent />);
-    expect(container).toMatchSnapshot();
-  });
-});
-
-describe('<DateInput />', () => {
-  const defaultProps = {
-    value: '',
-    onClick: jest.fn(),
-    width: 250,
-    height: 50,
-    placeholder: 'Placeholder',
-    fontSize: 14,
-  };
-  it('Expect to not log errors in console', () => {
-    const spy = jest.spyOn(global.console, 'error');
-    render(<DateComponent {...defaultProps} />);
-    expect(spy).not.toHaveBeenCalled();
-  });
-  it('Should render and match the snapshot', () => {
-    const { container } = render(<DateComponent {...defaultProps} />);
     expect(container).toMatchSnapshot();
   });
 });

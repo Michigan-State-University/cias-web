@@ -6,9 +6,6 @@ import dayjs from 'dayjs';
 
 import { colors, borders } from 'theme';
 
-import { AppFile } from 'models/File';
-
-import { getFileUrl } from 'utils/getApiFileUrl';
 import { FILE_GENERATION_TIME_FORMAT } from 'utils/dayjs';
 
 import i18nGlobalMessages from 'global/i18n/globalMessages';
@@ -28,10 +25,16 @@ import { Tooltip } from 'components/Tooltip';
 import messages from '../messages';
 
 export type Props = {
-  transcript: Nullable<AppFile>;
+  generatedAt: Nullable<string>;
+  filename: Nullable<string>;
+  interventionId: string;
 };
 
-export const ConversationsTranscriptPanel = ({ transcript }: Props) => {
+export const ConversationsTranscriptPanel = ({
+  generatedAt,
+  filename,
+  interventionId,
+}: Props) => {
   const { formatMessage } = useIntl();
   const dispatch = useDispatch();
 
@@ -69,24 +72,25 @@ export const ConversationsTranscriptPanel = ({ transcript }: Props) => {
             hoverTextColor={colors.white}
             title={formatMessage(
               messages[
-                transcript ? 'generateNewTranscript' : 'generateTranscript'
+                generatedAt ? 'generateNewTranscript' : 'generateTranscript'
               ],
             )}
           />
         </GridCol>
-        {transcript && (
+        {generatedAt && (
           <GridCol xs={6}>
             <Tooltip
-              id={`intervention-conversations-transcript-generated-at-${
-                transcript?.createdAt ?? ''
-              }`}
+              id={`intervention-conversations-transcript-generated-at-${generatedAt}`}
               text={`${formatMessage(i18nGlobalMessages.lastCsvDate)}${dayjs(
-                transcript?.createdAt,
+                generatedAt,
               ).format(FILE_GENERATION_TIME_FORMAT)}`}
-              visible={!!transcript}
+              visible={!!generatedAt}
               stretchContent
             >
-              <FileDownload url={getFileUrl(transcript.url)}>
+              <FileDownload
+                url={`/v1/interventions/${interventionId}/generated_conversations_transcript`}
+                fileName={filename}
+              >
                 <Button title={formatMessage(messages.downloadTranscript)} />
               </FileDownload>
             </Tooltip>

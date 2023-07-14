@@ -2,13 +2,10 @@ import React from 'react';
 import { useIntl } from 'react-intl';
 import { useField, useFormikContext } from 'formik';
 
-import questionMark from 'assets/svg/grey-question-mark.svg';
-
 import useDidUpdateEffect from 'utils/useDidUpdateEffect';
 
-import Tooltip from 'components/Tooltip';
 import FormikSwitchInput from 'components/FormikSwitchInput';
-import Row from 'components/Row';
+import { HelpIconTooltip } from 'components/HelpIconTooltip';
 
 import messages from './messages';
 import { SessionSettingsFormValues } from './types';
@@ -42,14 +39,12 @@ export const AutofinishEnabledControl: React.FC<Props> = ({ disabled }) => {
 
   return (
     <FormikSwitchInput formikKey="autofinishEnabled" disabled={disabled}>
-      <Row gap={8} align="center">
+      <HelpIconTooltip
+        id="autofinish-enabled-tooltip-info"
+        tooltipContent={formatMessage(messages.autofinishTooltip)}
+      >
         {formatMessage(messages.autofinishEnabledLabel)}
-        <Tooltip
-          id="autofinish-enabled-tooltip-info"
-          icon={questionMark}
-          content={formatMessage(messages.autofinishTooltip)}
-        />
-      </Row>
+      </HelpIconTooltip>
     </FormikSwitchInput>
   );
 };

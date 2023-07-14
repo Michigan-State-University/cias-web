@@ -75,8 +75,9 @@ const Reflection = ({
       updateNarratorPreviewData({
         ...reflection,
         type: speechType,
-        position: block.position,
+        position: blockIndex,
         animation: block.animation,
+        currentReflectionIndex: reflectionIndex,
       });
 
     setIsPlaying(!isPlaying);

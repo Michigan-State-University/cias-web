@@ -11,9 +11,12 @@ import { Provider } from 'react-redux';
 import { MemoryRouter } from 'react-router-dom';
 import { DEFAULT_LOCALE } from 'i18n';
 
-import { createTestStore } from 'utils/testUtils/storeUtils';
 import { nameQuestion } from 'models/Session/QuestionTypes';
 import { draft } from 'models/Status/StatusTypes';
+
+import { createTestStore } from 'utils/testUtils/storeUtils';
+
+import { intlProviderConfig } from 'containers/LanguageProvider';
 
 import NameQuestion from '../index';
 
@@ -59,7 +62,7 @@ describe('<NameQuestion />', () => {
     const spy = jest.spyOn(global.console, 'error');
     render(
       <Provider store={store}>
-        <IntlProvider locale={DEFAULT_LOCALE}>
+        <IntlProvider locale={DEFAULT_LOCALE} {...intlProviderConfig}>
           <MemoryRouter>
             <NameQuestion {...defaultProps} />
           </MemoryRouter>
@@ -74,7 +77,7 @@ describe('<NameQuestion />', () => {
       container: { firstChild },
     } = render(
       <Provider store={store}>
-        <IntlProvider locale={DEFAULT_LOCALE}>
+        <IntlProvider locale={DEFAULT_LOCALE} {...intlProviderConfig}>
           <MemoryRouter>
             <NameQuestion {...defaultProps} />
           </MemoryRouter>

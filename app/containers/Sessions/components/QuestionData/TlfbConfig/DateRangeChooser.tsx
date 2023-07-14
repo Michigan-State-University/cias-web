@@ -43,7 +43,6 @@ const DateRangeChooser = ({
     onDateRangeUpdate(startDate, newEndDate);
   };
 
-  const inputStyles = { bg: 'white', textOpacity: 1 };
   return (
     <Box display="flex">
       <Box width={150} mr={12}>
@@ -54,12 +53,10 @@ const DateRangeChooser = ({
           disabled={disabled}
           width={150}
           height={50}
-          placeholder={formatMessage(messages.selectDate)}
           type="date"
           value={startDate}
           onCheck={updateStartDate}
           fontSize={15}
-          styles={inputStyles}
           selectsStart
           startDate={startDate}
           endDate={endDate}
@@ -73,13 +70,11 @@ const DateRangeChooser = ({
           disabled={disabled}
           width={150}
           height={50}
-          placeholder={formatMessage(messages.selectDate)}
           type="date"
           value={endDate}
           onCheck={updateEndDate}
           fontSize={15}
           minDate={startDate}
-          styles={inputStyles}
           selectsEnd
           startDate={startDate}
           endDate={endDate}

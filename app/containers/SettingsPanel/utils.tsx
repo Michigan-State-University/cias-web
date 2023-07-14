@@ -32,6 +32,7 @@ export const shareOptions: OptionType[] = [
         noWrap
       />
     ),
+    help: formatMessage(messages.anyoneWhoIsARegisteredParticipantHelp),
   },
   {
     id: InterventionSharedTo.INVITED,

@@ -16,14 +16,17 @@ import { AdornmentType } from './types';
 export type Props = ComponentProps<typeof Input> & {
   adornmentType: AdornmentType;
   adornment?: string;
+  adornmentWidth?: number;
 };
 
 const Component = React.forwardRef<HTMLInputElement, Props>(
-  ({ adornmentType, adornment, ...props }, ref) => {
+  ({ adornmentType, adornment, adornmentWidth, ...props }, ref) => {
     const [adornmentSize, setAdornmentSize] = useState(0);
     const adornmentRef = useCallback(
       (node: HTMLElement) => {
-        if (node) {
+        if (adornmentWidth) {
+          setAdornmentSize(adornmentWidth);
+        } else if (node) {
           setAdornmentSize(node.offsetWidth);
         } else {
           setAdornmentSize(0);

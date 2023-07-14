@@ -24,6 +24,9 @@
 // -- This will overwrite an existing command --
 // Cypress.Commands.overwrite("visit", (originalFn, url, options) => { ... })
 import forEach from 'lodash/forEach';
+
+import { RoutePath } from 'global/constants';
+
 import LocalStorageService from 'utils/localStorageService';
 import { mapCurrentUser } from 'utils/mapResponseObjects';
 import { headersConst } from 'utils/getHeaders';
@@ -74,7 +77,7 @@ Cypress.Commands.add('logout', () => {
 });
 
 Cypress.Commands.add('createIntervention', () => {
-  cy.visit('/');
+  cy.visit(RoutePath.DASHBOARD);
   cy.getBySel('create-intervention-button').click();
 });
 
