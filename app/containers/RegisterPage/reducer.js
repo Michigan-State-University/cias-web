@@ -11,6 +11,7 @@ import {
   REGISTER_FROM_INVITATION_REQUEST,
   REGISTER_FROM_INVITATION_SUCCESS,
   REGISTER_FROM_INVITATION_ERROR,
+  CLEAR_ERRORS,
 } from './constants';
 
 export const initialState = {
@@ -41,6 +42,8 @@ const registerPageReducer = (state = initialState, action) =>
         draft.loading = false;
         draft.success = false;
         break;
+      case CLEAR_ERRORS:
+        draft.error = null;
     }
   });
 

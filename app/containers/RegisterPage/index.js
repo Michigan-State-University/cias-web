@@ -49,6 +49,7 @@ import messages from './messages';
 import {
   registerParticipantRequest,
   registerFromInvitationRequest,
+  clearErrors as clearErrorsAction,
 } from './actions';
 
 const passwordLength = 8;
@@ -93,6 +94,7 @@ export function RegisterPage({
   intl: { formatMessage },
   registerPage: { loading, error, success },
   location,
+  clearErrors,
 }) {
   useInjectReducer({ key: 'registerPage', reducer });
   useInjectSaga({ key: 'allRegistrationsSaga', saga: allRegistrationsSaga });
@@ -244,7 +246,7 @@ export function RegisterPage({
                   />
                   {!isInvite && (
                     <Row justify="center" width="100%">
-                      <Link to={RoutePath.LOGIN}>
+                      <Link to={RoutePath.LOGIN} onClick={clearErrors}>
                         <StyledTextButton color={themeColors.secondary}>
                           <FormattedMessage {...messages.login} />
                         </StyledTextButton>
@@ -268,6 +270,7 @@ RegisterPage.propTypes = {
   intl: PropTypes.object,
   registerPage: PropTypes.object,
   location: PropTypes.object,
+  clearErrors: PropTypes.func,
 };
 
 const mapStateToProps = createStructuredSelector({
@@ -277,6 +280,7 @@ const mapStateToProps = createStructuredSelector({
 const mapDispatchToProps = {
   registerParticipant: registerParticipantRequest,
   registerFromInvitation: registerFromInvitationRequest,
+  clearErrors: clearErrorsAction,
 };
 
 const withConnect = connect(mapStateToProps, mapDispatchToProps);

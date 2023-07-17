@@ -27,7 +27,7 @@ export default defineMessages({
   },
   firstNameLabel: {
     id: `${scope}.firstNameLabel`,
-    defaultMessage: 'First Name',
+    defaultMessage: 'First name',
   },
   firstName: {
     id: `${scope}.firstName`,
@@ -96,7 +96,7 @@ export default defineMessages({
   },
   lastNameRequired: {
     id: `${scope}.lastNameRequired`,
-    defaultMessage: 'First name is required',
+    defaultMessage: 'Last name is required',
   },
   createdAccount: {
     id: `${scope}.createdAccount`,

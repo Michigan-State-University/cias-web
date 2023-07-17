@@ -543,7 +543,7 @@ exports[`<RegisterPage /> Should render and match the researcher 1`] = `
                   font-size="12px"
                   width="fit-content"
                 >
-                  First Name
+                  First name
                   <span
                     class="c14"
                     color="#D2371D"
@@ -1310,7 +1310,7 @@ exports[`<RegisterPage /> Should render and match the snapshot for participant 1
                   font-size="12px"
                   width="fit-content"
                 >
-                  First Name
+                  First name
                   <span
                     class="c14"
                     color="#D2371D"

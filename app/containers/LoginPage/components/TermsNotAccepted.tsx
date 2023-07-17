@@ -1,6 +1,6 @@
 import React, { useMemo } from 'react';
 import { Formik } from 'formik';
-import { useIntl } from 'react-intl';
+import { FormattedMessage, useIntl } from 'react-intl';
 import { useDispatch } from 'react-redux';
 
 import { RoutePath } from 'global/constants';
@@ -14,6 +14,7 @@ import Row from 'components/Row';
 import TermsCheckbox from 'components/TermsCheckbox';
 import ErrorAlert from 'components/ErrorAlert';
 import FormikForm from 'components/FormikForm';
+import Text from 'components/Text';
 
 import { useInjectSaga } from 'redux-injectors';
 import { generateTermsValidationSchema } from '../utils';
@@ -23,11 +24,11 @@ type Props = {
   goBack: () => void;
   error: string;
   loading: boolean;
-  termsExtraFields: {
+  termsExtraFields: Nullable<{
     email: string;
     firstName: Nullable<string>;
     lastName: Nullable<string>;
-  };
+  }>;
 };
 
 const TermsNotAccepted = ({
@@ -49,10 +50,19 @@ const TermsNotAccepted = ({
     dispatch(termsAcceptRequest(values, goBack));
   };
 
+  const initialValues = useMemo(() => {
+    const { firstName, lastName, ...rest } = termsExtraFields ?? {};
+    return {
+      firstName: firstName?.trim() ? firstName : '',
+      lastName: lastName?.trim() ? lastName : '',
+      ...rest,
+    };
+  }, [termsExtraFields]);
+
   return (
     <Formik
       validationSchema={validationSchema}
-      initialValues={termsExtraFields}
+      initialValues={initialValues}
       onSubmit={onSubmit}
     >
       {({ handleSubmit }) => {
@@ -66,13 +76,16 @@ const TermsNotAccepted = ({
 
         return (
           <FormikForm>
-            <Row width="100%" gap={20}>
+            <Text fontSize="12px" lineHeight="12px" mt={8}>
+              <FormattedMessage {...messages.subHeader} />
+            </Text>
+            <Row width="100%" gap={20} mt={40}>
               <FormikInput
                 formikKey="firstName"
                 placeholder={formatMessage(messages.firstNameLabel)}
                 label={formatMessage(messages.firstNameLabel)}
                 type="text"
-                disabled={!!termsExtraFields?.firstName}
+                disabled={!!termsExtraFields?.firstName?.trim()}
                 {...sharedProps}
               />
               <FormikInput
@@ -80,7 +93,7 @@ const TermsNotAccepted = ({
                 placeholder={formatMessage(messages.lastNameLabel)}
                 label={formatMessage(messages.lastNameLabel)}
                 type="text"
-                disabled={!!termsExtraFields?.lastName}
+                disabled={!!termsExtraFields?.lastName?.trim()}
                 {...sharedProps}
               />
             </Row>

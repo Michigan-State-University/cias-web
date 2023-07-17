@@ -6,7 +6,7 @@ import objectKeysToSnakeCase from 'utils/objectToSnakeCase';
 import { formatMessage } from 'utils/intlOutsideReact';
 
 import { TERMS_ACCEPT_REQUEST, TERMS_ACCEPT_SUCCESS } from '../constants';
-import { termsAcceptSuccess, termsAcceptError } from '../actions';
+import { termsAcceptSuccess, termsAcceptError, loginRequest } from '../actions';
 import messages from '../messages';
 import { makeSelectCachePassword } from '../selectors';
 
@@ -22,6 +22,7 @@ export function* termsAccept({ payload: { fields, onSuccess } }) {
     yield call(toast.success, formatMessage(messages.termsAcceptSuccess), {
       toastId: TERMS_ACCEPT_SUCCESS,
     });
+    yield put(loginRequest(fields.email, password));
     yield put(termsAcceptSuccess());
   } catch {
     yield put(termsAcceptError());
