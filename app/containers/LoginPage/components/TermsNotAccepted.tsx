@@ -50,10 +50,19 @@ const TermsNotAccepted = ({
     dispatch(termsAcceptRequest(values, goBack));
   };
 
+  const initialValues = useMemo(() => {
+    const { firstName, lastName, ...rest } = termsExtraFields;
+    return {
+      firstName: firstName ?? '',
+      lastName: lastName ?? '',
+      ...rest,
+    };
+  }, [termsExtraFields]);
+
   return (
     <Formik
       validationSchema={validationSchema}
-      initialValues={termsExtraFields}
+      initialValues={initialValues}
       onSubmit={onSubmit}
     >
       {({ handleSubmit }) => {
