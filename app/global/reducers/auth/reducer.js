@@ -317,7 +317,6 @@ export const authReducer = (state = initialState, { type, payload }) =>
       case TERMS_ACCEPT_ERROR:
         draft.loaders.termsAcceptLoading = false;
         draft.errors.termsAcceptError = payload.error;
-        draft.cache.password = null;
         break;
       case CLEAR_ERRORS:
         draft.errors.loginError = null;
