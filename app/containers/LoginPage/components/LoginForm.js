@@ -2,8 +2,10 @@ import React, { useMemo } from 'react';
 import PropTypes from 'prop-types';
 import { Formik } from 'formik';
 import { useIntl } from 'react-intl';
+import { useDispatch } from 'react-redux';
 
 import { RoutePath } from 'global/constants';
+import { clearErrors } from 'global/reducers/auth';
 
 import FormikInput from 'components/FormikInput';
 import LinkButton from 'components/Button/LinkButton';
@@ -27,6 +29,7 @@ const LoginForm = ({
   error,
 }) => {
   const { formatMessage } = useIntl();
+  const dispatch = useDispatch();
 
   const validationSchema = useMemo(
     () => generateLoginFormValidationSchema(formatMessage),
@@ -39,6 +42,8 @@ const LoginForm = ({
     onLogin(email.trim(), password);
     actions.setSubmitting(false);
   };
+
+  const onRedirect = () => dispatch(clearErrors());
 
   return (
     <Formik
@@ -56,7 +61,7 @@ const LoginForm = ({
         };
 
         return (
-          <FormikForm>
+          <FormikForm mt={40}>
             <FormikInput
               formikKey="email"
               placeholder={formatMessage(messages.emailPlaceholder)}
@@ -70,6 +75,7 @@ const LoginForm = ({
               alignSelf="end"
               mb={-14}
               zIndex={1}
+              onClick={onRedirect}
             >
               {formatMessage(messages.forgotPassword)}
             </LinkButton>
@@ -96,7 +102,7 @@ const LoginForm = ({
               <Divider ml={15} mt={40} />
             </Row>
             <Row width="100%" justify="center" mt={30}>
-              <LinkButton to={RoutePath.REGISTER}>
+              <LinkButton to={RoutePath.REGISTER} onClick={onRedirect}>
                 {formatMessage(messages.register)}
               </LinkButton>
             </Row>

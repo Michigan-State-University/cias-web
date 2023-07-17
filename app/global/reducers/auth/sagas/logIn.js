@@ -56,9 +56,9 @@ function* login({ payload: { email, password } }) {
     } else yield put(replace(`/`));
   } catch (error) {
     yield delay(300);
-    yield put(loginError(requestErrorMessageHandler(error)));
 
     if (responseStatusEquals(error.response, HttpStatusCodes.FORBIDDEN)) {
+      yield put(loginError(''));
       const {
         response: {
           data: {
@@ -75,6 +75,8 @@ function* login({ payload: { email, password } }) {
             password,
           ),
         );
+    } else {
+      yield put(loginError(requestErrorMessageHandler(error)));
     }
   }
 }

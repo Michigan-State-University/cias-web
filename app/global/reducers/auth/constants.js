@@ -75,3 +75,5 @@ export const TERMS_NOT_ACCEPTED = 'app/auth/TERMS_NOT_ACCEPTED';
 export const TERMS_ACCEPT_REQUEST = 'app/auth/TERMS_ACCEPT_REQUEST';
 export const TERMS_ACCEPT_SUCCESS = 'app/auth/TERMS_ACCEPT_SUCCESS';
 export const TERMS_ACCEPT_ERROR = 'app/auth/TERMS_ACCEPT_ERROR';
+
+export const CLEAR_ERRORS = 'app/auth/CLEAR_ERRORS';

@@ -1,6 +1,6 @@
 import React, { useMemo } from 'react';
 import { Formik } from 'formik';
-import { useIntl } from 'react-intl';
+import { FormattedMessage, useIntl } from 'react-intl';
 import { useDispatch } from 'react-redux';
 
 import { RoutePath } from 'global/constants';
@@ -14,6 +14,7 @@ import Row from 'components/Row';
 import TermsCheckbox from 'components/TermsCheckbox';
 import ErrorAlert from 'components/ErrorAlert';
 import FormikForm from 'components/FormikForm';
+import Text from 'components/Text';
 
 import { useInjectSaga } from 'redux-injectors';
 import { generateTermsValidationSchema } from '../utils';
@@ -66,7 +67,10 @@ const TermsNotAccepted = ({
 
         return (
           <FormikForm>
-            <Row width="100%" gap={20}>
+            <Text fontSize="12px" lineHeight="12px" mt={8}>
+              <FormattedMessage {...messages.subHeader} />
+            </Text>
+            <Row width="100%" gap={20} mt={40}>
               <FormikInput
                 formikKey="firstName"
                 placeholder={formatMessage(messages.firstNameLabel)}

@@ -48,6 +48,7 @@ import {
   TERMS_ACCEPT_REQUEST,
   TERMS_ACCEPT_SUCCESS,
   TERMS_ACCEPT_ERROR,
+  CLEAR_ERRORS,
 } from './constants';
 
 export const initialState = {
@@ -318,5 +319,12 @@ export const authReducer = (state = initialState, { type, payload }) =>
         draft.errors.termsAcceptError = payload.error;
         draft.cache.password = null;
         break;
+      case CLEAR_ERRORS:
+        draft.errors.loginError = null;
+        draft.errors.verificationCodeError = null;
+        draft.errors.termsAcceptError = null;
+        draft.verificationCodeNeeded = false;
+        draft.termsNotAccepted = false;
+        draft.termsNotAcceptedExtraFields = null;
     }
   });
