@@ -35,6 +35,7 @@ import {
   makeSelectVerificationSuccess,
   makeSelectTermsNotAccepted,
   makeSelectTermsExtraFields,
+  clearErrors as clearErrorsAction,
 } from 'global/reducers/auth';
 
 import LoginForm from './components/LoginForm';
@@ -57,27 +58,30 @@ export const LoginPage = ({
   verifyCode,
   termsNotAccepted,
   termsExtraFields,
+  clearErrors,
 }) => {
   useInjectSaga({ key: 'loginPage', saga: loginSaga });
   const { search } = useLocation();
   const { formatMessage } = useIntl();
 
   const [currentView, setCurrentView] = useState(LOGIN_FORM_VIEW);
-  const toLoginFormView = () => setCurrentView(LOGIN_FORM_VIEW);
-  const toCodeVerificationView = () => setCurrentView(CODE_VERIFICATION_VIEW);
-  const toTermsNotAcceptedView = () => setCurrentView(TERMS_NOT_ACCEPTED_VIEW);
+
+  const changeView = (view) => {
+    clearErrors();
+    setCurrentView(view);
+  };
 
   useEffect(() => {
-    if (verificationNeeded) toCodeVerificationView();
+    if (verificationNeeded) setCurrentView(CODE_VERIFICATION_VIEW);
   }, [verificationNeeded]);
 
   useEffect(() => {
-    if (termsNotAccepted) toTermsNotAcceptedView();
+    if (termsNotAccepted) setCurrentView(TERMS_NOT_ACCEPTED_VIEW);
   }, [termsNotAccepted]);
 
   useEffect(() => {
     if (verificationSuccess) {
-      toLoginFormView();
+      changeView(LOGIN_FORM_VIEW);
       onLogin(formData.email, formData.password);
     }
   }, [verificationSuccess]);
@@ -105,7 +109,7 @@ export const LoginPage = ({
       case CODE_VERIFICATION_VIEW:
         return (
           <CodeVerification
-            goBack={toLoginFormView}
+            goBack={() => changeView(LOGIN_FORM_VIEW)}
             isLoading={verificationCodeLoading}
             error={verificationCodeError}
             verifyCode={verifyCode}
@@ -114,7 +118,7 @@ export const LoginPage = ({
       case TERMS_NOT_ACCEPTED_VIEW:
         return (
           <TermsNotAccepted
-            goBack={toLoginFormView}
+            goBack={() => changeView(LOGIN_FORM_VIEW)}
             error={termsAcceptError}
             termsExtraFields={termsExtraFields}
             loading={termsAcceptLoading}
@@ -149,9 +153,7 @@ export const LoginPage = ({
       <PublicLayout withMsuLogo>
         <Fill justify="center" align="center">
           <Column sm={10} md={8} lg={6} align="start">
-            <H1 mb={40} fontSize={23}>
-              {formatMessage(messages.header)}
-            </H1>
+            <H1 fontSize={23}>{formatMessage(messages[currentView])}</H1>
             {render()}
           </Column>
         </Fill>
@@ -173,6 +175,7 @@ LoginPage.propTypes = {
   verificationSuccess: PropTypes.bool,
   verifyCode: PropTypes.func,
   termsExtraFields: PropTypes.object,
+  clearErrors: PropTypes.func,
 };
 
 const mapStateToProps = createStructuredSelector({
@@ -188,6 +191,7 @@ const mapStateToProps = createStructuredSelector({
 const mapDispatchToProps = {
   onLogin: loginRequest,
   verifyCode: verificationCodeRequest,
+  clearErrors: clearErrorsAction,
 };
 
 const withConnect = connect(mapStateToProps, mapDispatchToProps);

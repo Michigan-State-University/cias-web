@@ -13,6 +13,7 @@ import {
   REGISTER_FROM_INVITATION_REQUEST,
   REGISTER_FROM_INVITATION_SUCCESS,
   REGISTER_FROM_INVITATION_ERROR,
+  CLEAR_ERRORS,
 } from './constants';
 
 export const registerParticipantRequest = (payload) =>
@@ -32,3 +33,5 @@ export const registerFromInvitationSuccess = () =>
 
 export const registerFromInvitationError = (error) =>
   actionBuilder(REGISTER_FROM_INVITATION_ERROR, { error });
+
+export const clearErrors = () => actionBuilder(CLEAR_ERRORS, {});
