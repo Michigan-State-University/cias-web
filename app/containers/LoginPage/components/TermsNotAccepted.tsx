@@ -24,11 +24,11 @@ type Props = {
   goBack: () => void;
   error: string;
   loading: boolean;
-  termsExtraFields: {
+  termsExtraFields: Nullable<{
     email: string;
     firstName: Nullable<string>;
     lastName: Nullable<string>;
-  };
+  }>;
 };
 
 const TermsNotAccepted = ({
@@ -51,10 +51,10 @@ const TermsNotAccepted = ({
   };
 
   const initialValues = useMemo(() => {
-    const { firstName, lastName, ...rest } = termsExtraFields;
+    const { firstName, lastName, ...rest } = termsExtraFields ?? {};
     return {
-      firstName: firstName ?? '',
-      lastName: lastName ?? '',
+      firstName: firstName?.trim() ? firstName : '',
+      lastName: lastName?.trim() ? lastName : '',
       ...rest,
     };
   }, [termsExtraFields]);
@@ -85,7 +85,7 @@ const TermsNotAccepted = ({
                 placeholder={formatMessage(messages.firstNameLabel)}
                 label={formatMessage(messages.firstNameLabel)}
                 type="text"
-                disabled={!!termsExtraFields?.firstName}
+                disabled={!!termsExtraFields?.firstName?.trim()}
                 {...sharedProps}
               />
               <FormikInput
@@ -93,7 +93,7 @@ const TermsNotAccepted = ({
                 placeholder={formatMessage(messages.lastNameLabel)}
                 label={formatMessage(messages.lastNameLabel)}
                 type="text"
-                disabled={!!termsExtraFields?.lastName}
+                disabled={!!termsExtraFields?.lastName?.trim()}
                 {...sharedProps}
               />
             </Row>
