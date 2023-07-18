@@ -16,10 +16,6 @@ const ALLOWED_REMOVING_PARTICIPANTS_FROM_INTERVENTION = [draft, published];
 
 const ALLOWED_ENABLE_CHAT = [draft, published];
 
-const ALLOWED_SESSION_DELETE = [draft];
-
-const ALLOWED_REPORT_TEMPLATE_EDIT = [draft];
-
 const ALLOWED_INTERVENTION_TYPE_EDIT = [draft];
 
 export const canEdit = (interventionStatus) =>
@@ -42,12 +38,6 @@ export const canAddParticipantsToIntervention = (interventionStatus) =>
 
 export const canRemoveParticipantsFromIntervention = (interventionStatus) =>
   ALLOWED_REMOVING_PARTICIPANTS_FROM_INTERVENTION.includes(interventionStatus);
-
-export const canDeleteSession = (interventionStatus) =>
-  ALLOWED_SESSION_DELETE.includes(interventionStatus);
-
-export const canEditReportTemplate = (interventionStatus) =>
-  ALLOWED_REPORT_TEMPLATE_EDIT.includes(interventionStatus);
 
 export const canEditInterventionType = (interventionStatus) =>
   ALLOWED_INTERVENTION_TYPE_EDIT.includes(interventionStatus);

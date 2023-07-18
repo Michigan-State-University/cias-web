@@ -10,7 +10,7 @@ import React, {
   useEffect,
   useRef,
   useState,
-  ReactElement,
+  ReactNode,
   CSSProperties,
 } from 'react';
 import ReactTooltip from 'react-tooltip';
@@ -30,14 +30,15 @@ import { StyledTooltip } from './styled';
 
 type TooltipProps = {
   id: string;
-  children?: ReactElement;
+  children?: ReactNode;
   visible?: boolean;
   text?: string;
   icon?: any;
-  content?: ReactElement | string;
+  content?: ReactNode;
   place?: 'top' | 'right' | 'bottom' | 'left';
   stretchContent?: boolean;
   backgroundColor?: string;
+  allowClicksOnContent?: boolean;
   tooltipProps?: Partial<CSSProperties>;
   iconProps?: object;
 } & Record<string, unknown>;
@@ -56,6 +57,7 @@ const Tooltip = ({
   place,
   stretchContent,
   backgroundColor,
+  allowClicksOnContent,
   tooltipProps,
   iconProps,
   ...restProps
@@ -86,8 +88,9 @@ const Tooltip = ({
   }, [shouldShowTooltip]);
 
   const onTooltipClick = (event: MouseEvent) => {
-    const portal = document.getElementById(TOOLTIP_PORTAL_ID);
+    if (allowClicksOnContent) return;
 
+    const portal = document.getElementById(TOOLTIP_PORTAL_ID);
     if (portal?.contains(event.target as Node)) {
       event.preventDefault();
       event.stopPropagation();

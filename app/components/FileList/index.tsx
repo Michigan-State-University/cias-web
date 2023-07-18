@@ -4,7 +4,7 @@ import { FormattedMessage } from 'react-intl';
 import Box from 'components/Box';
 import H2 from 'components/H2';
 import H3 from 'components/H3';
-import Img from 'components/Img';
+import { ImageButton } from 'components/Button';
 import { FileDisplayItem } from 'components/FileDisplayItem';
 
 import trashBin from 'assets/svg/bin-no-bg.svg';
@@ -17,9 +17,10 @@ import { FileListItem, StyledFileList } from './styled';
 interface Props {
   files: AppFile[];
   handleDelete: (fileInfo: AppFile) => void;
+  disabled?: boolean;
 }
 
-const FileListComponent = ({ files, handleDelete }: Props) => (
+const FileListComponent = ({ files, handleDelete, disabled }: Props) => (
   <Box mt={40}>
     <H2>
       <FormattedMessage {...messages.listHeader} />
@@ -34,11 +35,11 @@ const FileListComponent = ({ files, handleDelete }: Props) => (
           {files.map((file) => (
             <FileListItem key={file.id}>
               <FileDisplayItem fileInfo={file} key={file.id} />
-              <Img
+              <ImageButton
                 src={trashBin}
                 onClick={() => handleDelete(file)}
-                cursor="pointer"
-                alt="delete icon"
+                title="delete file"
+                disabled={disabled}
               />
             </FileListItem>
           ))}

@@ -15,11 +15,33 @@ exports[`<Reflection /> Should render and match the snapshot 1`] = `
   height: auto;
   display: block;
   border-radius: 5px;
+  width: 100%;
   position: relative;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-align-content: flex-end;
+  -ms-flex-line-pack: end;
+  align-content: flex-end;
+  -webkit-align-items: flex-end;
+  -webkit-box-align: flex-end;
+  -ms-flex-align: flex-end;
+  align-items: flex-end;
+  gap: 15px;
   color: unset;
 }
 
 .c3 {
+  width: auto;
+  height: auto;
+  display: block;
+  border-radius: 5px;
+  position: relative;
+  color: unset;
+}
+
+.c4 {
   width: auto;
   height: auto;
   display: block;
@@ -30,7 +52,7 @@ exports[`<Reflection /> Should render and match the snapshot 1`] = `
   color: unset;
 }
 
-.c5 {
+.c6 {
   width: auto;
   height: auto;
   display: block;
@@ -52,7 +74,7 @@ exports[`<Reflection /> Should render and match the snapshot 1`] = `
   width: 100%;
 }
 
-.c4 {
+.c5 {
   resize: none;
   padding: 12px;
   border: 1px solid #E9F1FB;
@@ -65,17 +87,17 @@ exports[`<Reflection /> Should render and match the snapshot 1`] = `
   border: 1px solid transparent;
 }
 
-.c4:focus {
+.c5:focus {
   box-shadow: none;
   outline: none;
   border: 1px solid #107969;
 }
 
-.c4:disabled {
+.c5:disabled {
   color: #ABBBD1;
 }
 
-.c6 {
+.c7 {
   outline: none;
   border: none;
   background: transparent;
@@ -115,44 +137,51 @@ exports[`<Reflection /> Should render and match the snapshot 1`] = `
       1
     </div>
     <div
-      class="c0"
+      class="c2"
+      display="flex"
+      width="100%"
     >
       <div
-        class="c2"
+        class="c0"
       >
         <div
           class="c3"
-          width="100%"
         >
-          <textarea
-            aria-label="Enter speech here..."
+          <div
             class="c4"
-            data-cy="text-area"
-            height="auto"
-            placeholder="Enter speech here..."
-            rows="10"
-            type="multiline"
             width="100%"
           >
-            1
-          </textarea>
-        </div>
-        <div
-          class="c5"
-        >
-          <button
-            aria-label="Play audio"
-            class="c6 "
-            font-weight="bold"
-            title="Play audio"
-            type="button"
+            <textarea
+              aria-label="Enter speech here..."
+              class="c5"
+              data-cy="text-area"
+              height="auto"
+              placeholder="Enter speech here..."
+              rows="10"
+              type="multiline"
+              width="100%"
+            >
+              1
+            </textarea>
+          </div>
+          <div
+            class="c6"
           >
-            <img
-              src="IMAGE_MOCK"
-            />
-          </button>
+            <button
+              aria-label="Play audio"
+              class="c7 "
+              font-weight="bold"
+              title="Play audio"
+              type="button"
+            >
+              <img
+                src="IMAGE_MOCK"
+              />
+            </button>
+          </div>
         </div>
       </div>
+      
     </div>
   </div>
 </div>

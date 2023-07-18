@@ -55,8 +55,16 @@ import {
   REORDER_TEMPLATE_SECTIONS_ERROR,
 } from './constants';
 
-export const fetchReportTemplatesRequest = (sessionId, interventionId) =>
-  actionBuilder(FETCH_REPORT_TEMPLATES_REQUEST, { sessionId, interventionId });
+export const fetchReportTemplatesRequest = (
+  sessionId,
+  interventionId,
+  showLoader,
+) =>
+  actionBuilder(FETCH_REPORT_TEMPLATES_REQUEST, {
+    sessionId,
+    interventionId,
+    showLoader,
+  });
 export const fetchReportTemplatesSuccess = (reportTemplates) =>
   actionBuilder(FETCH_REPORT_TEMPLATES_SUCCESS, { reportTemplates });
 export const fetchReportTemplatesFailure = (error) =>

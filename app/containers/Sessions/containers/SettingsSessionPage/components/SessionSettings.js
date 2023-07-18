@@ -9,10 +9,10 @@ import { FormattedMessage } from 'react-intl';
 import { useInjectReducer, useInjectSaga } from 'redux-injectors';
 
 import { colors } from 'theme';
+
 import { variableNameValidator } from 'utils/validators';
 import lastKey from 'utils/getLastKey';
 
-import { canEdit } from 'models/Status/statusPermissions';
 import { getRemovedBlockForSetting } from 'models/Narrator/BlockTypes';
 
 import {
@@ -26,6 +26,7 @@ import {
   fetchInterventionSaga,
   makeSelectInterventionStatus,
   interventionReducer,
+  makeSelectEditingPossible,
 } from 'global/reducers/intervention';
 import globalMessages from 'global/i18n/globalMessages';
 
@@ -34,12 +35,13 @@ import { LI, UL } from 'components/List';
 import { ConfirmationModal } from 'components/Modal';
 import BadgeInput from 'components/Input/BadgeInput';
 import CharacterSelector from 'components/CharacterSelector';
-
 import { GlobalReplacementModal } from 'components/MissingAnimationsModal';
+
 import Option from './Option';
 import messages from './messages';
 import PeedyVoiceSettings from './PeedyVoiceSettings';
 import { Input, InputContainer } from './styled';
+import { SessionSettingsForm } from './SessionSettingsForm';
 
 const SessionSettings = ({
   name,
@@ -47,11 +49,13 @@ const SessionSettings = ({
   narratorSettings,
   formatMessage,
   editSessionSettings,
-  interventionStatus,
   googleTtsVoice,
   currentNarrator,
   editSession,
   multipleFill,
+  autofinishEnabled,
+  autofinishDelay,
+  editingPossible,
 }) => {
   useInjectReducer({ key: 'intervention', reducer: interventionReducer });
   useInjectReducer({ key: 'questions', reducer: questionsReducer });
@@ -123,8 +127,6 @@ const SessionSettings = ({
     setNewNarrator(null);
   };
 
-  const editingPossible = canEdit(interventionStatus);
-
   const getConfirmationDescription = () => {
     if (!isConfirmationBoxVisible) return null;
     if (isAllSettingsConfirmation)
@@ -187,6 +189,7 @@ const SessionSettings = ({
           placeholder={formatMessage(messages.placeholder)}
           value={name}
           onBlur={(val) => editSession({ name: val })}
+          px={12}
         />
       </InputContainer>
 
@@ -212,12 +215,18 @@ const SessionSettings = ({
         disabled={!editingPossible}
         label={formatMessage(messages.multipleFill)}
         tooltipText={formatMessage(messages.multipleFillTooltip)}
-        withBorder
         value={multipleFill}
         action={(val) => editSession({ multipleFill: val })}
       />
 
-      <H3 mt={15} mb={20}>
+      <SessionSettingsForm
+        disabled={!editingPossible}
+        autofinishEnabled={autofinishEnabled}
+        autofinishDelay={autofinishDelay}
+        onSubmit={editSession}
+      />
+
+      <H3 mt={45} mb={20}>
         {formatMessage(messages.narratorSettings)}
       </H3>
 
@@ -265,6 +274,7 @@ const SessionSettings = ({
 
 const mapStateToProps = createStructuredSelector({
   interventionStatus: makeSelectInterventionStatus(),
+  editingPossible: makeSelectEditingPossible(),
 });
 
 const mapDispatchToProps = {
@@ -288,6 +298,9 @@ SessionSettings.propTypes = {
   currentNarrator: PropTypes.string,
   editSession: PropTypes.func,
   multipleFill: PropTypes.bool,
+  autofinishEnabled: PropTypes.bool,
+  autofinishDelay: PropTypes.number,
+  editingPossible: PropTypes.bool,
 };
 
 export default compose(withConnect)(SessionSettings);

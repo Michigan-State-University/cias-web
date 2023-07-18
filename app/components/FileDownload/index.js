@@ -34,6 +34,7 @@ const FileDownload = ({
   }, [isFileDownloading]);
 
   const handleClick = () => {
+    if (!url) return;
     setIsDownloading(true);
     if (onDownloadStart) onDownloadStart();
     downloadFile(url, fileName);

@@ -77,13 +77,14 @@ exports[`<GridQuestion /> Should render and match the snapshot 1`] = `
   display: block;
   border-radius: 5px;
   height: 35px;
+  display: none;
   padding-right: 8px;
   padding-left: 8px;
   margin-bottom: 8px;
   color: unset;
 }
 
-.c22 {
+.c21 {
   width: auto;
   height: auto;
   display: block;
@@ -106,16 +107,17 @@ exports[`<GridQuestion /> Should render and match the snapshot 1`] = `
   color: unset;
 }
 
-.c25 {
+.c24 {
   width: auto;
   height: auto;
   display: block;
   border-radius: 5px;
   width: 60px;
+  display: none;
   color: unset;
 }
 
-.c31 {
+.c29 {
   width: auto;
   height: auto;
   display: block;
@@ -136,7 +138,7 @@ exports[`<GridQuestion /> Should render and match the snapshot 1`] = `
   color: unset;
 }
 
-.c35 {
+.c33 {
   width: auto;
   height: auto;
   display: block;
@@ -153,7 +155,7 @@ exports[`<GridQuestion /> Should render and match the snapshot 1`] = `
   cursor: pointer;
 }
 
-.c35:hover {
+.c33:hover {
   background-color: #E9F1FB;
 }
 
@@ -201,26 +203,6 @@ exports[`<GridQuestion /> Should render and match the snapshot 1`] = `
   cursor: pointer;
 }
 
-.c18 {
-  width: auto;
-  height: auto;
-  margin-top: 20px;
-  margin-bottom: 10px;
-  cursor: -webkit-grab;
-  cursor: -moz-grab;
-  cursor: grab;
-}
-
-.c26 {
-  width: auto;
-  height: auto;
-  margin-right: 10px;
-  margin-left: 20px;
-  cursor: -webkit-grab;
-  cursor: -moz-grab;
-  cursor: grab;
-}
-
 .c5 {
   border-radius: 50%;
   background-color: #B727EA;
@@ -259,10 +241,7 @@ exports[`<GridQuestion /> Should render and match the snapshot 1`] = `
   -ms-flex-pack: end;
   justify-content: flex-end;
   justify-items: flex-end;
-  display: -webkit-box;
-  display: -webkit-flex;
-  display: -ms-flexbox;
-  display: flex;
+  display: none;
 }
 
 .c4 {
@@ -283,7 +262,7 @@ exports[`<GridQuestion /> Should render and match the snapshot 1`] = `
   align-items: center;
 }
 
-.c19 {
+.c18 {
   display: -webkit-box;
   display: -webkit-flex;
   display: -ms-flexbox;
@@ -299,7 +278,7 @@ exports[`<GridQuestion /> Should render and match the snapshot 1`] = `
   display: flex;
 }
 
-.c24 {
+.c23 {
   display: -webkit-box;
   display: -webkit-flex;
   display: -ms-flexbox;
@@ -319,7 +298,7 @@ exports[`<GridQuestion /> Should render and match the snapshot 1`] = `
   height: 100%;
 }
 
-.c27 {
+.c25 {
   display: -webkit-box;
   display: -webkit-flex;
   display: -ms-flexbox;
@@ -343,7 +322,7 @@ exports[`<GridQuestion /> Should render and match the snapshot 1`] = `
   width: 100%;
 }
 
-.c28 {
+.c26 {
   display: -webkit-box;
   display: -webkit-flex;
   display: -ms-flexbox;
@@ -359,7 +338,7 @@ exports[`<GridQuestion /> Should render and match the snapshot 1`] = `
   display: flex;
 }
 
-.c33 {
+.c31 {
   display: -webkit-box;
   display: -webkit-flex;
   display: -ms-flexbox;
@@ -382,7 +361,7 @@ exports[`<GridQuestion /> Should render and match the snapshot 1`] = `
   align-items: center;
 }
 
-.c34 {
+.c32 {
   display: -webkit-box;
   display: -webkit-flex;
   display: -ms-flexbox;
@@ -396,9 +375,10 @@ exports[`<GridQuestion /> Should render and match the snapshot 1`] = `
   -ms-flex-pack: start;
   justify-content: flex-start;
   justify-items: flex-start;
+  display: none;
 }
 
-.c36 {
+.c34 {
   display: -webkit-box;
   display: -webkit-flex;
   display: -ms-flexbox;
@@ -429,7 +409,7 @@ exports[`<GridQuestion /> Should render and match the snapshot 1`] = `
   color: rgba(183,39,234,1);
 }
 
-.c32 {
+.c30 {
   resize: none;
   padding: 12px;
   border: 1px solid #E9F1FB;
@@ -438,22 +418,22 @@ exports[`<GridQuestion /> Should render and match the snapshot 1`] = `
   width: 300px;
   height: auto;
   max-width: initial;
-  cursor: pointer;
+  cursor: text;
   background-color: transparent;
   border: 1px solid transparent;
 }
 
-.c32:focus {
+.c30:focus {
   box-shadow: none;
   outline: none;
   border: 1px solid #107969;
 }
 
-.c32:disabled {
+.c30:disabled {
   color: #ABBBD1;
 }
 
-.c20 {
+.c19 {
   padding: 12px;
   border-style: solid;
   border-width: 1px;
@@ -471,19 +451,20 @@ exports[`<GridQuestion /> Should render and match the snapshot 1`] = `
   text-align: center;
   background-color: rgba(0,134,248,0.1);
   color: rgba(0,134,248,1);
+  opacity: 0.5;
 }
 
-.c20:focus {
+.c19:focus {
   box-shadow: none;
   outline: none;
   border-color: #107969;
 }
 
-.c20:disabled {
+.c19:disabled {
   color: #ABBBD1;
 }
 
-.c23 {
+.c22 {
   padding: 12px;
   border-style: solid;
   border-width: 1px;
@@ -499,20 +480,21 @@ exports[`<GridQuestion /> Should render and match the snapshot 1`] = `
   padding-left: 0;
   color: #2F3850;
   text-align: center;
-  cursor: pointer;
+  cursor: text;
+  opacity: 0.5;
 }
 
-.c23:focus {
+.c22:focus {
   box-shadow: none;
   outline: none;
   border-color: #107969;
 }
 
-.c23:disabled {
+.c22:disabled {
   color: #ABBBD1;
 }
 
-.c29 {
+.c27 {
   padding: 12px;
   border-style: solid;
   border-width: 1px;
@@ -530,43 +512,46 @@ exports[`<GridQuestion /> Should render and match the snapshot 1`] = `
   text-align: center;
   background-color: rgba(16,121,105,0.1);
   color: rgba(16,121,105,1);
+  opacity: 0.5;
 }
 
-.c29:focus {
+.c27:focus {
   box-shadow: none;
   outline: none;
   border-color: #107969;
 }
 
-.c29:disabled {
+.c27:disabled {
   color: #ABBBD1;
 }
 
-.c21 {
+.c20 {
   padding: 5px 10px;
   font-size: 13px;
   font-weight: 600;
   border-radius: 4px;
   background-color: rgba(0,134,248,0.1);
   color: rgba(0,134,248,1);
+  opacity: 0.5;
 }
 
-.c21:focus {
+.c20:focus {
   box-shadow: none;
   outline: none;
   border: 1px solid transparent;
 }
 
-.c30 {
+.c28 {
   padding: 5px 10px;
   font-size: 13px;
   font-weight: 600;
   border-radius: 4px;
   background-color: rgba(16,121,105,0.1);
   color: rgba(16,121,105,1);
+  opacity: 0.5;
 }
 
-.c30:focus {
+.c28:focus {
   box-shadow: none;
   outline: none;
   border: 1px solid transparent;
@@ -655,6 +640,7 @@ exports[`<GridQuestion /> Should render and match the snapshot 1`] = `
   <div
     class="c1"
     display="flex"
+    hidden=""
   >
     <div
       class="c2"
@@ -729,6 +715,7 @@ exports[`<GridQuestion /> Should render and match the snapshot 1`] = `
                     <div
                       class="c16"
                       height="35"
+                      hidden=""
                     >
                       <img
                         class="c17"
@@ -736,24 +723,15 @@ exports[`<GridQuestion /> Should render and match the snapshot 1`] = `
                         src="IMAGE_MOCK"
                       />
                     </div>
-                    <img
-                      alt="Reorder icon 0"
-                      aria-describedby="DndDescribedBy-2"
-                      aria-roledescription="sortable"
-                      class="c18"
-                      cursor="grab"
-                      role="button"
-                      src="IMAGE_MOCK"
-                      tabindex="0"
-                    />
                     <div
-                      class="c19"
+                      class="c18"
                       display="flex"
                     >
                       <input
                         aria-label="Score"
-                        class="c20 c21"
+                        class="c19 c20"
                         color="#0086F8"
+                        disabled=""
                         placeholder="Score"
                         type="tel"
                         value="1"
@@ -761,14 +739,15 @@ exports[`<GridQuestion /> Should render and match the snapshot 1`] = `
                       />
                     </div>
                     <div
-                      class="c22"
+                      class="c21"
                       direction="column"
                       display="flex"
                     >
                       <input
                         aria-label="Column 1..."
-                        class="c23"
-                        cursor="pointer"
+                        class="c22"
+                        cursor="text"
+                        disabled=""
                         placeholder="Column 1..."
                         type="text"
                         value="test-col-1"
@@ -792,6 +771,7 @@ exports[`<GridQuestion /> Should render and match the snapshot 1`] = `
                     <div
                       class="c16"
                       height="35"
+                      hidden=""
                     >
                       <img
                         class="c17"
@@ -799,24 +779,15 @@ exports[`<GridQuestion /> Should render and match the snapshot 1`] = `
                         src="IMAGE_MOCK"
                       />
                     </div>
-                    <img
-                      alt="Reorder icon 1"
-                      aria-describedby="DndDescribedBy-2"
-                      aria-roledescription="sortable"
-                      class="c18"
-                      cursor="grab"
-                      role="button"
-                      src="IMAGE_MOCK"
-                      tabindex="0"
-                    />
                     <div
-                      class="c19"
+                      class="c18"
                       display="flex"
                     >
                       <input
                         aria-label="Score"
-                        class="c20 c21"
+                        class="c19 c20"
                         color="#0086F8"
+                        disabled=""
                         placeholder="Score"
                         type="tel"
                         value="2"
@@ -824,14 +795,15 @@ exports[`<GridQuestion /> Should render and match the snapshot 1`] = `
                       />
                     </div>
                     <div
-                      class="c22"
+                      class="c21"
                       direction="column"
                       display="flex"
                     >
                       <input
                         aria-label="Column 2..."
-                        class="c23"
-                        cursor="pointer"
+                        class="c22"
+                        cursor="text"
+                        disabled=""
                         placeholder="Column 2..."
                         type="text"
                         value="test-col-2"
@@ -858,11 +830,12 @@ exports[`<GridQuestion /> Should render and match the snapshot 1`] = `
                 width="120px"
               >
                 <div
-                  class="c24"
+                  class="c23"
                   height="100%"
                 >
                   <div
-                    class="c25"
+                    class="c24"
+                    hidden=""
                     width="60"
                   >
                     <img
@@ -871,29 +844,20 @@ exports[`<GridQuestion /> Should render and match the snapshot 1`] = `
                       src="IMAGE_MOCK"
                     />
                   </div>
-                  <img
-                    alt="Reorder icon 0"
-                    aria-describedby="DndDescribedBy-3"
-                    aria-roledescription="sortable"
-                    class="c26"
-                    cursor="grab"
-                    role="button"
-                    src="IMAGE_MOCK"
-                    tabindex="0"
-                  />
                   <div
-                    class="c27"
+                    class="c25"
                     width="100%"
                   >
                     <div
-                      class="c28"
+                      class="c26"
                       display="flex"
                     >
                       <input
                         aria-label="Variable name..."
                         autocomplete="off"
-                        class="c29 c30"
+                        class="c27 c28"
                         color="#107969"
+                        disabled=""
                         name="notASearchField-Variable name..."
                         placeholder="Variable name..."
                         type="text"
@@ -902,15 +866,16 @@ exports[`<GridQuestion /> Should render and match the snapshot 1`] = `
                       />
                     </div>
                     <div
-                      class="c31"
+                      class="c29"
                       display="flex"
                       width="100%"
                     >
                       <textarea
                         aria-label="Row 1..."
-                        class="c32"
-                        cursor="pointer"
+                        class="c30"
+                        cursor="text"
                         data-cy="text-area"
+                        disabled=""
                         height="auto"
                         placeholder="Row 1..."
                         rows="2"
@@ -928,7 +893,7 @@ exports[`<GridQuestion /> Should render and match the snapshot 1`] = `
                 height="inherit"
               >
                 <div
-                  class="c33"
+                  class="c31"
                 >
                   <img
                     class="c6"
@@ -941,7 +906,7 @@ exports[`<GridQuestion /> Should render and match the snapshot 1`] = `
                 height="inherit"
               >
                 <div
-                  class="c33"
+                  class="c31"
                 >
                   <img
                     class="c6"
@@ -961,11 +926,12 @@ exports[`<GridQuestion /> Should render and match the snapshot 1`] = `
                 width="120px"
               >
                 <div
-                  class="c24"
+                  class="c23"
                   height="100%"
                 >
                   <div
-                    class="c25"
+                    class="c24"
+                    hidden=""
                     width="60"
                   >
                     <img
@@ -975,29 +941,20 @@ exports[`<GridQuestion /> Should render and match the snapshot 1`] = `
                     />
                     <div />
                   </div>
-                  <img
-                    alt="Reorder icon 1"
-                    aria-describedby="DndDescribedBy-3"
-                    aria-roledescription="sortable"
-                    class="c26"
-                    cursor="grab"
-                    role="button"
-                    src="IMAGE_MOCK"
-                    tabindex="0"
-                  />
                   <div
-                    class="c27"
+                    class="c25"
                     width="100%"
                   >
                     <div
-                      class="c28"
+                      class="c26"
                       display="flex"
                     >
                       <input
                         aria-label="Variable name..."
                         autocomplete="off"
-                        class="c29 c30"
+                        class="c27 c28"
                         color="#107969"
+                        disabled=""
                         name="notASearchField-Variable name..."
                         placeholder="Variable name..."
                         type="text"
@@ -1006,15 +963,16 @@ exports[`<GridQuestion /> Should render and match the snapshot 1`] = `
                       />
                     </div>
                     <div
-                      class="c31"
+                      class="c29"
                       display="flex"
                       width="100%"
                     >
                       <textarea
                         aria-label="Row 2..."
-                        class="c32"
-                        cursor="pointer"
+                        class="c30"
+                        cursor="text"
                         data-cy="text-area"
+                        disabled=""
                         height="auto"
                         placeholder="Row 2..."
                         rows="2"
@@ -1032,7 +990,7 @@ exports[`<GridQuestion /> Should render and match the snapshot 1`] = `
                 height="inherit"
               >
                 <div
-                  class="c33"
+                  class="c31"
                 >
                   <img
                     class="c6"
@@ -1045,7 +1003,7 @@ exports[`<GridQuestion /> Should render and match the snapshot 1`] = `
                 height="inherit"
               >
                 <div
-                  class="c33"
+                  class="c31"
                 >
                   <img
                     class="c6"
@@ -1060,16 +1018,17 @@ exports[`<GridQuestion /> Should render and match the snapshot 1`] = `
     </div>
   </div>
   <div
-    class="c34"
+    class="c32"
+    hidden=""
   >
     <div
-      class="c35"
+      class="c33"
     >
       <div
         class="c3"
       >
         <div
-          class="c36"
+          class="c34"
           display="flex"
         >
           <div

@@ -89,7 +89,6 @@ const colors = {
   beauBlue: '#CFDDEF',
   lightDivider: '#EAF1FA',
   cinnabar: '#DD533C',
-  fireIsland: '#DD533C',
   cadetBlueCrayola: '#B3BAC7',
   linkWaterDark: '#DEE7F6',
   azureishWhite: '#D4DFF7',

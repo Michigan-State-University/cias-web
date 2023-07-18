@@ -69,6 +69,20 @@ exports[`<TextboxQuestion /> Should render and match the snapshot 1`] = `
   color: #ABBBD1;
 }
 
+.c1 {
+  width: auto;
+  height: auto;
+  display: block;
+  border-radius: 5px;
+  width: 100%;
+  padding-top: 14px;
+  padding-bottom: 14px;
+  padding-right: 21px;
+  padding-left: 21px;
+  border: 1px solid #ABBBD1;
+  color: unset;
+}
+
 .c6 {
   font-family: DM Sans;
   font-size: 13px;
@@ -84,20 +98,6 @@ exports[`<TextboxQuestion /> Should render and match the snapshot 1`] = `
   line-height: 130%;
   color: #6B707C;
   margin-top: 5px;
-}
-
-.c1 {
-  width: auto;
-  height: auto;
-  display: block;
-  border-radius: 5px;
-  width: 100%;
-  padding-top: 14px;
-  padding-bottom: 14px;
-  padding-right: 21px;
-  padding-left: 21px;
-  border: 1px solid #ABBBD1;
-  color: unset;
 }
 
 @media only screen and (min-width:768px) {

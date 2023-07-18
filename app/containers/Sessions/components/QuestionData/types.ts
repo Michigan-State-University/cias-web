@@ -9,4 +9,5 @@ export type CommonQuestionProps = {
   interventionStatus: InterventionStatus;
   sharedTo: InterventionSharedTo;
   statusMetadata: InterventionStatusMetadata;
+  editingPossible: boolean;
 };

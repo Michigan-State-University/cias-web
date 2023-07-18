@@ -15,7 +15,9 @@ import { Container, Row, Col } from 'react-grid-system';
 import { Markup } from 'interweave';
 
 import { themeColors } from 'theme';
+
 import appStages from 'global/appStages';
+import { RoutePath } from 'global/constants';
 
 import Text from 'components/Text';
 import { Button } from 'components/Button';
@@ -44,7 +46,7 @@ const ErrorPage = ({ intl: { formatMessage }, error, resetError }) => {
 
   const handleGoToMainPage = () => {
     setIsNavigating(true);
-    history.push('/');
+    history.push(RoutePath.DASHBOARD);
     resetError();
   };
 

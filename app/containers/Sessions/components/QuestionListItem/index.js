@@ -19,7 +19,6 @@ import { colors, themeColors } from 'theme';
 import { getNarratorPositionWhenQuestionIsChanged } from 'utils/getNarratorPosition';
 import { hasObjectProperty } from 'utils/hasObjectProperty';
 import { htmlToPlainText } from 'utils/htmlToPlainText';
-import settingsTabLabels from 'utils/settingsTabsLabels';
 import {
   copyQuestionRequest,
   deleteQuestionRequest,
@@ -57,7 +56,6 @@ import getIndex from './utils';
 import {
   NON_DUPLICABLE_SCREENS,
   NON_MANAGEABLE_SCREENS,
-  ONLY_NARRATOR_TAB_SCREENS,
   VARIABLE_NON_EDITABLE_SCREENS,
 } from './constants';
 
@@ -194,12 +192,9 @@ const QuestionListItem = ({
     setDraggable(false);
     changeNarratorBlockIndex(-1);
 
-    const toggleNarratorTab = ONLY_NARRATOR_TAB_SCREENS.includes(type);
-
     toggleSettings({
       index,
       questionIndex: selectedQuestionIndex,
-      tab: toggleNarratorTab ? settingsTabLabels.narrator : undefined,
     });
   };
 

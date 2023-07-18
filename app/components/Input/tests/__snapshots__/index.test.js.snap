@@ -2,24 +2,53 @@
 
 exports[`<ApprovableInput /> Should render and match the snapshot as date input 1`] = `
 .c4 {
-  background-color: #F8FBFF;
-  border-radius: 5px;
+  padding: 12px;
   border-style: solid;
   border-width: 1px;
   border-color: #E9F1FB;
-  margin-right: 10px;
-  margin-left: 10px;
+  border-radius: 5px;
+  margin-right: 0;
+  margin-left: 0;
   width: 250px;
   height: 50px;
-  color: #2F3850;
-}
-
-.c4:hover {
-  cursor: pointer;
+  padding: 12px;
+  font-size: 14px;
+  color: rgba(47,56,80,1);
+  text-align: left;
+  color: rgba(47,56,80,1);
 }
 
 .c4:focus {
+  box-shadow: none;
   outline: none;
+  border-color: #107969;
+}
+
+.c4:disabled {
+  color: #ABBBD1;
+}
+
+.c1 {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-flex-direction: column;
+  -ms-flex-direction: column;
+  flex-direction: column;
+  width: 100%;
+}
+
+.c0 {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-flex-direction: row;
+  -ms-flex-direction: row;
+  flex-direction: row;
+  height: auto;
+  width: 100%;
 }
 
 .c3 .schedule-date-picker {
@@ -71,38 +100,6 @@ exports[`<ApprovableInput /> Should render and match the snapshot as date input 
   width: 100%;
 }
 
-.c5 {
-  font-family: DM Sans;
-  font-size: 13px;
-  line-height: 130%;
-  font-size: 14px;
-  color: rgba(47,56,80,0.6);
-  color: rgba(47,56,80,0.6);
-}
-
-.c1 {
-  display: -webkit-box;
-  display: -webkit-flex;
-  display: -ms-flexbox;
-  display: flex;
-  -webkit-flex-direction: column;
-  -ms-flex-direction: column;
-  flex-direction: column;
-  width: 100%;
-}
-
-.c0 {
-  display: -webkit-box;
-  display: -webkit-flex;
-  display: -ms-flexbox;
-  display: flex;
-  -webkit-flex-direction: row;
-  -ms-flex-direction: row;
-  flex-direction: row;
-  height: auto;
-  width: 100%;
-}
-
 @media only screen and (min-width:768px) {
 
 }
@@ -136,20 +133,17 @@ exports[`<ApprovableInput /> Should render and match the snapshot as date input 
           <div
             class="react-datepicker__input-container"
           >
-            <button
+            <input
+              aria-label="Placeholder"
               class="c4"
-              data-private="true"
+              color="#2F3850"
+              font-size="14"
               height="50"
+              placeholder="Placeholder"
+              type="text"
+              value=""
               width="250"
-            >
-              <p
-                class="c5"
-                color="#2F3850"
-                font-size="14"
-              >
-                Placeholder
-              </p>
-            </button>
+            />
           </div>
         </div>
       </div>
@@ -242,6 +236,29 @@ exports[`<ApprovableInput /> Should render and match the snapshot as multiline 1
 `;
 
 exports[`<ApprovableInput /> Should render and match the snapshot as richText 1`] = `
+.c1 {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-flex-direction: column;
+  -ms-flex-direction: column;
+  flex-direction: column;
+  width: 100%;
+}
+
+.c0 {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-flex-direction: row;
+  -ms-flex-direction: row;
+  flex-direction: row;
+  height: auto;
+  width: 100%;
+}
+
 .c2 {
   width: 100%;
   height: auto;
@@ -271,29 +288,6 @@ exports[`<ApprovableInput /> Should render and match the snapshot as richText 1`
 .c2 .ql-container {
   font-size: initial;
   font-family: DM Sans;
-}
-
-.c1 {
-  display: -webkit-box;
-  display: -webkit-flex;
-  display: -ms-flexbox;
-  display: flex;
-  -webkit-flex-direction: column;
-  -ms-flex-direction: column;
-  flex-direction: column;
-  width: 100%;
-}
-
-.c0 {
-  display: -webkit-box;
-  display: -webkit-flex;
-  display: -ms-flexbox;
-  display: flex;
-  -webkit-flex-direction: row;
-  -ms-flex-direction: row;
-  flex-direction: row;
-  height: auto;
-  width: 100%;
 }
 
 @media only screen and (min-width:768px) {
@@ -1853,55 +1847,6 @@ exports[`<BadgeInput /> Should render and match the snapshot 1`] = `
     value=""
     width="157px"
   />
-</div>
-`;
-
-exports[`<DateInput /> Should render and match the snapshot 1`] = `
-.c0 {
-  background-color: #F8FBFF;
-  border-radius: 5px;
-  border-style: solid;
-  border-width: 1px;
-  border-color: #E9F1FB;
-  margin-right: 10px;
-  margin-left: 10px;
-  width: 250px;
-  height: 50px;
-  color: #2F3850;
-}
-
-.c0:hover {
-  cursor: pointer;
-}
-
-.c0:focus {
-  outline: none;
-}
-
-.c1 {
-  font-family: DM Sans;
-  font-size: 13px;
-  line-height: 130%;
-  font-size: 14px;
-  color: rgba(47,56,80,0.6);
-  color: rgba(47,56,80,0.6);
-}
-
-<div>
-  <button
-    class="c0"
-    data-private="true"
-    height="50"
-    width="250"
-  >
-    <p
-      class="c1"
-      color="#2F3850"
-      font-size="14"
-    >
-      Placeholder
-    </p>
-  </button>
 </div>
 `;
 

@@ -6,6 +6,10 @@ import { connect } from 'react-redux';
 import { compose } from 'redux';
 import { useInjectSaga } from 'redux-injectors';
 
+import { RoutePath } from 'global/constants';
+
+import { parametrizeRoutePath } from 'utils/router';
+
 import Row from 'components/Row';
 import Tabs from 'components/Tabs';
 import { StyledInput } from 'components/Input/StyledInput';
@@ -29,7 +33,6 @@ import {
 import { makeSelectReportsSize } from 'global/reducers/generatedReports';
 import { makeSelectQuestionGroupsLoader } from 'global/reducers/questionGroups';
 import { makeSelectReportTemplatesLoaders } from 'global/reducers/reportTemplates';
-import { makeSelectUserId } from 'global/reducers/auth';
 
 import { themeColors } from 'theme';
 import check from 'assets/svg/check-green.svg';
@@ -40,8 +43,12 @@ import {
   makeSelectAllLoaders,
 } from 'global/reducers/textMessages';
 import { redirectToPreview } from 'containers/AnswerSessionPage/actions';
-import { makeSelectInterventionStatus } from 'global/reducers/intervention';
-import { canEdit, canPreview } from 'models/Status/statusPermissions';
+import {
+  makeSelectCanCurrentUserAccessParticipantsData,
+  makeSelectEditingPossible,
+  makeSelectInterventionStatus,
+} from 'global/reducers/intervention';
+import { canPreview } from 'models/Status/statusPermissions';
 import { SessionTypes } from 'models/Session';
 import messages from './messages';
 import {
@@ -71,7 +78,6 @@ const InterventionNavbar = ({
     reportTemplatesCount,
     smsPlansCount,
     generatedReportCount,
-    interventionOwnerId,
     type,
   },
   reportsLoaders: { updateReportTemplateLoading },
@@ -88,11 +94,10 @@ const InterventionNavbar = ({
   redirectToPreviewAction,
   textMessagesCount,
   generatedReportsCount,
-  userId,
+  canAccessParticipantsData,
+  editingPossible,
 }) => {
   const { interventionId, sessionId } = params;
-
-  const canAccessGeneratedReports = interventionOwnerId === userId;
 
   const isClassicSession = type === SessionTypes.CLASSIC_SESSION;
 
@@ -120,8 +125,6 @@ const InterventionNavbar = ({
   const previewDisabled =
     !questionsLength || !canPreview(interventionStatus) || !isClassicSession;
 
-  const editingPossible = canEdit(interventionStatus);
-
   const textMessagesCountValue = smsPlansCount ?? textMessagesCount ?? '0';
 
   const generatedReportsCountValue =
@@ -140,7 +143,9 @@ const InterventionNavbar = ({
     <Row align="center" justify="between" width="100%" mr={35}>
       <Row align="center">
         <ActionIcon
-          to={`/interventions/${interventionId}`}
+          to={parametrizeRoutePath(RoutePath.INTERVENTION_DETAILS, {
+            interventionId,
+          })}
           iconSrc={backButton}
           ariaText={formatMessage(messages.goBackToDetails)}
         />
@@ -172,7 +177,10 @@ const InterventionNavbar = ({
         <div
           renderAsLink={
             <StyledLink
-              to={`/interventions/${interventionId}/sessions/${sessionId}/edit`}
+              to={parametrizeRoutePath(RoutePath.EDIT_SESSION, {
+                interventionId,
+                sessionId,
+              })}
             >
               {formatMessage(messages.content)}
             </StyledLink>
@@ -181,7 +189,10 @@ const InterventionNavbar = ({
         <div
           renderAsLink={
             <StyledLink
-              to={`/interventions/${interventionId}/sessions/${sessionId}/settings`}
+              to={parametrizeRoutePath(RoutePath.SESSION_SETTINGS, {
+                interventionId,
+                sessionId,
+              })}
             >
               {formatMessage(messages.settings)}
             </StyledLink>
@@ -192,7 +203,10 @@ const InterventionNavbar = ({
             linkMatch={formatMessage(messages.reportTemplates)}
             renderAsLink={
               <StyledLink
-                to={`/interventions/${interventionId}/sessions/${sessionId}/report-templates`}
+                to={parametrizeRoutePath(RoutePath.REPORT_TEMPLATES, {
+                  interventionId,
+                  sessionId,
+                })}
               >
                 <Row style={{ lineHeight: 'normal' }} align="end">
                   {formatMessage(messages.reportTemplates)}
@@ -208,12 +222,15 @@ const InterventionNavbar = ({
             }
           />
         )}
-        {canAccessGeneratedReports && isClassicSession && (
+        {canAccessParticipantsData && isClassicSession && (
           <div
             linkMatch={formatMessage(messages.generatedReports)}
             renderAsLink={
               <StyledLink
-                to={`/interventions/${interventionId}/sessions/${sessionId}/generated-reports`}
+                to={parametrizeRoutePath(RoutePath.GENERATED_REPORTS, {
+                  interventionId,
+                  sessionId,
+                })}
               >
                 <Row align="end">
                   {formatMessage(messages.generatedReports)}
@@ -234,7 +251,10 @@ const InterventionNavbar = ({
             linkMatch={formatMessage(messages.smsMessaging)}
             renderAsLink={
               <StyledLink
-                to={`/interventions/${interventionId}/sessions/${sessionId}/sms-messaging`}
+                to={parametrizeRoutePath(RoutePath.TEXT_MESSAGES, {
+                  interventionId,
+                  sessionId,
+                })}
               >
                 <Row align="end">
                   {formatMessage(messages.smsMessaging)}
@@ -254,7 +274,10 @@ const InterventionNavbar = ({
           <div
             renderAsLink={
               <StyledLink
-                to={`/interventions/${interventionId}/sessions/${sessionId}/map`}
+                to={parametrizeRoutePath(RoutePath.SESSION_MAP, {
+                  interventionId,
+                  sessionId,
+                })}
               >
                 {formatMessage(messages.sessionMap)}
               </StyledLink>
@@ -311,11 +334,12 @@ InterventionNavbar.propTypes = {
   questionGroupsEditing: PropTypes.bool,
   match: PropTypes.object,
   interventionStatus: PropTypes.string,
-  userId: PropTypes.string,
   reportsLoaders: PropTypes.object,
   redirectToPreviewAction: PropTypes.func,
   textMessagesCount: PropTypes.number,
   generatedReportsCount: PropTypes.number,
+  canAccessParticipantsData: PropTypes.bool,
+  editingPossible: PropTypes.bool,
 };
 
 const mapStateToProps = createStructuredSelector({
@@ -329,7 +353,8 @@ const mapStateToProps = createStructuredSelector({
   textMessagesCount: makeSelectTextMessagesSize(),
   textLoaders: makeSelectAllLoaders(),
   generatedReportsCount: makeSelectReportsSize(),
-  userId: makeSelectUserId(),
+  canAccessParticipantsData: makeSelectCanCurrentUserAccessParticipantsData(),
+  editingPossible: makeSelectEditingPossible(),
 });
 
 const mapDispatchToProps = {

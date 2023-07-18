@@ -17,9 +17,10 @@ import messages from '../messages';
 
 export type Props = {
   interventionId: string;
+  disabled: boolean;
 };
 
-const ParticipantLinksPanel = ({ interventionId }: Props) => {
+const ParticipantLinksPanel = ({ interventionId, disabled }: Props) => {
   const { formatMessage } = useIntl();
   const dispatch = useDispatch();
 
@@ -51,6 +52,7 @@ const ParticipantLinksPanel = ({ interventionId }: Props) => {
       addLink={addNewParticipantLink}
       updateLink={updateParticipantLink}
       removeLink={removeParticipantLink}
+      disabled={disabled}
     />
   );
 };

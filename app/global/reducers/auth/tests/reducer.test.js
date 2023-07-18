@@ -74,7 +74,7 @@ describe('authReducer', () => {
 
     const afterEditSuccessUserState = {
       ...afterEditUserStateRequest,
-      cache: { user: editedUser, phoneNumberPreview: null },
+      cache: { user: editedUser, phoneNumberPreview: null, password: null },
     };
 
     expect(authReducer(afterEditUserStateRequest, actionSuccess)).toEqual(
@@ -165,7 +165,7 @@ describe('authReducer', () => {
 
     expect(authReducer(initState, actionRequest)).toEqual({
       ...addAvatarState,
-      cache: { phoneNumberPreview: null, user },
+      cache: { phoneNumberPreview: null, user, password: null },
     });
   });
 
@@ -179,7 +179,7 @@ describe('authReducer', () => {
     const initState = createState('user', { ...createUser() });
     const successState = {
       ...initState,
-      cache: { user: createUser(), phoneNumberPreview: null },
+      cache: { user: createUser(), phoneNumberPreview: null, password: null },
       user: userWithAvatar,
     };
 
@@ -220,7 +220,7 @@ describe('authReducer', () => {
 
     const deleteAvatarState = {
       ...initState,
-      cache: { user: createUser(), phoneNumberPreview: null },
+      cache: { user: createUser(), phoneNumberPreview: null, password: null },
     };
 
     expect(authReducer(initState, actionRequest)).toEqual(deleteAvatarState);

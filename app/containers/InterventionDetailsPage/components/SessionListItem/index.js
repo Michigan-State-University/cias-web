@@ -30,8 +30,11 @@ import {
   HenryFordBranchingInfoType,
 } from 'components/HenryFordBrachingInfoModal';
 
-import { numericValidator, variableNameValidator } from 'utils/validators';
 import globalMessages from 'global/i18n/globalMessages';
+import { RoutePath } from 'global/constants';
+
+import { numericValidator, variableNameValidator } from 'utils/validators';
+import { parametrizeRoutePath } from 'utils/router';
 
 import duplicateInternally from 'assets/svg/duplicate-internally.svg';
 import copy from 'assets/svg/copy.svg';
@@ -140,7 +143,10 @@ function SessionListItem({
   const goToReportTemplates = (event) => {
     event.preventDefault();
 
-    const url = `/interventions/${interventionId}/sessions/${id}/report-templates`;
+    const url = parametrizeRoutePath(RoutePath.REPORT_TEMPLATES, {
+      interventionId,
+      sessionId: id,
+    });
 
     history.push(url);
   };
@@ -212,7 +218,10 @@ function SessionListItem({
               <StyledRow align="center" justify="between" width="100%">
                 <StyledLink
                   data-cy={`enter-session-${index}`}
-                  to={`/interventions/${interventionId}/sessions/${id}/edit`}
+                  to={parametrizeRoutePath(RoutePath.EDIT_SESSION, {
+                    interventionId,
+                    sessionId: id,
+                  })}
                   onMouseEnter={() => setIsHovered(true)}
                   onMouseLeave={() => setIsHovered(false)}
                   width="100%"
@@ -307,6 +316,7 @@ function SessionListItem({
                   width={60}
                   validator={numericValidator}
                   placeholder="0"
+                  disabled={disabled}
                 />
                 <Text>{formatMessage(messages.min)}</Text>
               </Row>

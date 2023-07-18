@@ -86,18 +86,6 @@ export const StyledLink = styled(Link)`
   width: auto;
 `;
 
-export const MarkupContainer = styled.div`
-  * {
-    line-height: 1.42 !important;
-  }
-
-  h1,
-  h2 {
-    margin-block-start: 0;
-    margin-block-end: 0.42em;
-  }
-`;
-
 export const TlfbContainer = styled.div`
   display: flex;
   flex-direction: column;

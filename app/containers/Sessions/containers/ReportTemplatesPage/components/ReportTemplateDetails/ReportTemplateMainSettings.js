@@ -31,6 +31,7 @@ import ApprovableInput from 'components/Input/ApprovableInput';
 import Box from 'components/Box';
 import Img from 'components/Img';
 import { ModalType, useModal } from 'components/Modal';
+import { HelpIconTooltip } from 'components/HelpIconTooltip';
 import Tooltip from 'components/Tooltip';
 
 import { CardBox, Spacer } from '../../styled';
@@ -132,7 +133,12 @@ const ReportTemplateMainSettings = ({
             label={
               <Row align="center" justify="between" style={{ width: '100%' }}>
                 <Col>
-                  <H1>{formatMessage(messages.settingsHeader)}</H1>
+                  <HelpIconTooltip
+                    id="report-settings-cdh"
+                    tooltipContent={formatMessage(messages.reportSettingsHelp)}
+                  >
+                    <H1>{formatMessage(messages.settingsHeader)}</H1>
+                  </HelpIconTooltip>
                 </Col>
                 <Col align="end">
                   <TextButton

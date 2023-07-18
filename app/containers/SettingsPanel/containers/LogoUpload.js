@@ -48,6 +48,7 @@ const LogoUpload = ({
             onCheck={updateDescription}
             placeholder={formatMessage(messages.logoDescriptionPlaceholder)}
             rows="4"
+            disabled={!canEdit}
           />
         </Box>
       )}

@@ -3,10 +3,13 @@ import { put, takeLatest, call } from 'redux-saga/effects';
 import { push } from 'connected-react-router';
 import { toast } from 'react-toastify';
 
-import { formatMessage } from 'utils/intlOutsideReact';
 import globalMessages from 'global/i18n/globalMessages';
+import { RoutePath } from 'global/constants';
 
+import { formatMessage } from 'utils/intlOutsideReact';
+import { parametrizeRoutePath } from 'utils/router';
 import { jsonApiToObject } from 'utils/jsonApiMapper';
+
 import { createInterventionSuccess } from '../actions';
 import {
   CREATE_INTERVENTION_REQUEST,
@@ -24,7 +27,13 @@ export function* createIntervention() {
     const intervention = jsonApiToObject(data, 'intervention');
 
     yield put(createInterventionSuccess(intervention));
-    yield put(push(`/interventions/${intervention.id}`));
+    yield put(
+      push(
+        parametrizeRoutePath(RoutePath.INTERVENTION_DETAILS, {
+          interventionId: intervention.id,
+        }),
+      ),
+    );
   } catch (error) {
     yield call(
       toast.error,
@@ -35,6 +44,7 @@ export function* createIntervention() {
     );
   }
 }
+
 export default function* createInterventionSaga() {
   yield takeLatest(CREATE_INTERVENTION_REQUEST, createIntervention);
 }

@@ -14,6 +14,8 @@ import { Formik } from 'formik';
 import { createStructuredSelector } from 'reselect';
 import * as Yup from 'yup';
 
+import { RoutePath } from 'global/constants';
+
 import { Fill } from 'components/Fill';
 import Column from 'components/Column';
 import H1 from 'components/H1';
@@ -89,7 +91,7 @@ const ResetPasswordPage = ({
                 >
                   <FormattedMessage {...messages.resetPassword} />
                 </Button>
-                <LinkButton to="/login" mt={25} alignSelf="center">
+                <LinkButton to={RoutePath.LOGIN} mt={25} alignSelf="center">
                   <FormattedMessage {...messages.return} />
                 </LinkButton>
                 {error && <ErrorAlert errorText={error} mt={25} />}

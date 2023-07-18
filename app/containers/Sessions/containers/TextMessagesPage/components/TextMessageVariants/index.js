@@ -12,6 +12,7 @@ import {
   makeSelectVariants,
   makeSelectSelectedVariantId,
   reorderTextMessageVariantsRequest,
+  makeSelectVariantsStates,
 } from 'global/reducers/textMessages';
 import Loader from 'components/Loader';
 
@@ -22,7 +23,9 @@ import { TextMessagesContext } from '../../utils';
 const TextMessageVariants = ({
   createVariant,
   variants,
+  variantsStates,
   selectedVariantId,
+  textMessageId,
   reorderTextMessageVariants,
 }) => {
   const {
@@ -41,8 +44,10 @@ const TextMessageVariants = ({
     <>
       <Variants
         selectedVariantId={selectedVariantId}
+        textMessageId={textMessageId}
         disabled={!editingPossible}
         variants={variants}
+        variantsStates={variantsStates}
         onReorder={onReorderTextMessageVariants}
       />
       <Row style={{ marginTop: 20 }}>
@@ -64,12 +69,15 @@ TextMessageVariants.propTypes = {
   createVariant: PropTypes.func,
   variants: PropTypes.array,
   selectedVariantId: PropTypes.string,
+  variantsStates: PropTypes.instanceOf(Map),
   reorderTextMessageVariants: PropTypes.func,
+  textMessageId: PropTypes.string,
 };
 
 const mapStateToProps = createStructuredSelector({
   variants: makeSelectVariants(),
   selectedVariantId: makeSelectSelectedVariantId(),
+  variantsStates: makeSelectVariantsStates(),
 });
 
 const mapDispatchToProps = {

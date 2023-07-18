@@ -17,6 +17,17 @@ export const generateVerificationCodeValidationSchema = (formatMessage) =>
     ),
   });
 
+export const generateTermsValidationSchema = (formatMessage) =>
+  Yup.object().shape({
+    lastName: Yup.string()
+      .required(formatMessage(messages.lastNameRequired))
+      .trim(formatMessage(messages.lastNameRequired)),
+    firstName: Yup.string()
+      .required(formatMessage(messages.firstNameRequired))
+      .trim(formatMessage(messages.firstNameRequired)),
+    terms: Yup.bool().oneOf([true], formatMessage(messages.termsRequired)),
+  });
+
 export const generateInitialValues = (formData) => ({
   email: formData?.email ?? '',
   password: formData?.password ?? '',

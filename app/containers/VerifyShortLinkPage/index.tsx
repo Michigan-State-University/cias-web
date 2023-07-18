@@ -7,17 +7,22 @@ import {
   VerifyShortLinkDataDTO,
 } from 'models/ShortLink';
 
+import { RoutePath } from 'global/constants';
+
 import useGet from 'utils/useGet';
 import objectToCamelCase from 'utils/objectToCamelCase';
+import { parametrizeRoutePath } from 'utils/router';
 
 import Loader from 'components/Loader';
+
+import NotFoundPage from 'containers/NotFoundPage';
 
 const VerifyShortLinkPage = () => {
   const history = useHistory();
   const { name } = useParams<{ name: string }>();
 
   const redirectToNotFoundPage = () => {
-    history.replace('/not-found-page');
+    history.replace(RoutePath.NOT_FOUND);
   };
 
   if (!name) {
@@ -34,10 +39,6 @@ const VerifyShortLinkPage = () => {
     ({ data }) => objectToCamelCase(data),
   );
 
-  if (error) {
-    redirectToNotFoundPage();
-  }
-
   useEffect(() => {
     if (!verifyShortLinkData) return;
     const { type, interventionId, healthClinicId, firstSessionId } =
@@ -51,12 +52,17 @@ const VerifyShortLinkPage = () => {
           redirectToNotFoundPage();
           return;
         }
-        link = `/interventions/${interventionId}/sessions/${firstSessionId}/fill`;
+        link = parametrizeRoutePath(RoutePath.ANSWER_SESSION, {
+          interventionId,
+          sessionId: firstSessionId,
+        });
         break;
       }
       case ShortLinkType.FLEXIBLE_ORDER:
       case ShortLinkType.FIXED_ORDER: {
-        link = `/interventions/${interventionId}/invite`;
+        link = parametrizeRoutePath(RoutePath.INTERVENTION_INVITE, {
+          interventionId,
+        });
         break;
       }
       default: {
@@ -71,6 +77,10 @@ const VerifyShortLinkPage = () => {
 
     history.push(link);
   }, [verifyShortLinkData]);
+
+  if (error) {
+    return <NotFoundPage />;
+  }
 
   return <>{isFetching && <Loader />}</>;
 };

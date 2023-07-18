@@ -4,6 +4,10 @@ import { createStructuredSelector } from 'reselect';
 import { Redirect } from 'react-router';
 import { connect } from 'react-redux';
 
+import { RoutePath } from 'global/constants';
+
+import { parametrizeRoutePath } from 'utils/router';
+
 import ErrorAlert from 'components/ErrorAlert';
 import Spinner from 'components/Spinner';
 import { themeColors } from 'theme';
@@ -20,7 +24,13 @@ const ClinicAdminRedirectPage = ({ organizations, loading, error }) => {
   if (loading || organizations.length === 0) {
     return <Spinner color={themeColors.secondary} />;
   }
-  return <Redirect to={`/organization/${organizations[0].id}/dashboard`} />;
+  return (
+    <Redirect
+      to={parametrizeRoutePath(RoutePath.DASHBOARD_VIEW, {
+        organizationId: organizations[0].id,
+      })}
+    />
+  );
 };
 
 ClinicAdminRedirectPage.propTypes = {

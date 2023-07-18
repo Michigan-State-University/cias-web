@@ -28,6 +28,7 @@ export const intlProviderConfig = {
       </>
     ),
     bold: (chunks) => <b>{chunks}</b>,
+    medium: (chunks) => <span style={{ fontWeight: 500 }}>{chunks}</span>,
     span: (chunks) => `<span>${chunks}</span>`,
     p: (chunks) => `<p>${chunks}</p>`,
     b: (chunks) => `<b>${chunks}</b>`,

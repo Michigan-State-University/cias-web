@@ -3,7 +3,7 @@ import CheckCircle from 'assets/svg/check-circle.svg';
 
 import { Notification } from 'models/Notification';
 
-import { NotificationsActionsContext } from 'utils/useNotificationChannel';
+import { NotificationChannelContext } from 'utils/useNotificationChannel';
 
 import InfoBox, { Props as InfoBoxProps } from 'components/InfoBox';
 import Icon from 'components/Icon';
@@ -28,7 +28,7 @@ export const SingleNotificationBaseLayout = ({
   icon = <Icon src={CheckCircle} />,
   ...props
 }: Props) => {
-  const { readNotification } = useContext(NotificationsActionsContext) ?? {};
+  const { readNotification } = useContext(NotificationChannelContext) ?? {};
 
   const redirectOnClick = !!linkTo;
 

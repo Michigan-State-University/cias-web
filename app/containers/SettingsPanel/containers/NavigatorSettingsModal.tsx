@@ -48,9 +48,10 @@ import NavigatorScripts from './NavigatorScripts';
 
 type Props = {
   interventionId: string;
+  editingPossible: boolean;
 };
 
-const NavigatorSettingsModal = ({ interventionId }: Props) => {
+const NavigatorSettingsModal = ({ interventionId, editingPossible }: Props) => {
   const { formatMessage } = useIntl();
   const dispatch = useDispatch();
 
@@ -153,11 +154,13 @@ const NavigatorSettingsModal = ({ interventionId }: Props) => {
                 inviteNavigatorsByEmail={inviteNavigatorsByEmail}
                 removeNavigatorEmailInvitation={removeNavigatorEmailInvitation}
                 invitationLoading={navigatorEmailInvitationLoading}
+                disabled={!editingPossible}
               />
               {(teamId ?? canDisplayTeamNavigatorPanel) && (
                 <TeamNavigatorsPanel
                   teamNavigators={availableTeamNavigators}
                   addNavigatorFromTeam={addNavigatorFromTeam}
+                  disabled={!editingPossible}
                 />
               )}
             </>
@@ -166,6 +169,7 @@ const NavigatorSettingsModal = ({ interventionId }: Props) => {
             <AddedNavigatorPanel
               interventionNavigators={interventionNavigators}
               removeInterventionNavigator={removeInterventionNavigator}
+              disabled={!editingPossible}
             />
           }
         />
@@ -181,10 +185,14 @@ const NavigatorSettingsModal = ({ interventionId }: Props) => {
               updateNoNavigatorTabData={updateNoNavigatorTabData}
               contactMessage={contactMessage}
               messagePhone={messagePhone}
+              disabled={!editingPossible}
             />
           }
           rightContent={
-            <ParticipantLinksPanel interventionId={interventionId} />
+            <ParticipantLinksPanel
+              interventionId={interventionId}
+              disabled={!editingPossible}
+            />
           }
         />
       </div>
@@ -193,14 +201,26 @@ const NavigatorSettingsModal = ({ interventionId }: Props) => {
         <NavigatorModalLayout
           leftContent={
             <Column gap={32}>
-              <NavigatorScripts interventionId={interventionId} />
-              <NavigatorLinksPanel interventionId={interventionId} />
+              <NavigatorScripts
+                interventionId={interventionId}
+                disabled={!editingPossible}
+              />
+              <NavigatorLinksPanel
+                interventionId={interventionId}
+                disabled={!editingPossible}
+              />
             </Column>
           }
           rightContent={
             <Column gap={32}>
-              <NavigatorFilesPanel interventionId={interventionId} />
-              <ParticipantFilesPanel interventionId={interventionId} />
+              <NavigatorFilesPanel
+                interventionId={interventionId}
+                disabled={!editingPossible}
+              />
+              <ParticipantFilesPanel
+                interventionId={interventionId}
+                disabled={!editingPossible}
+              />
             </Column>
           }
         />

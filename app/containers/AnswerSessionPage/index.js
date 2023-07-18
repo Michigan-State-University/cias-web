@@ -36,7 +36,9 @@ import {
 } from 'global/reducers/intervention';
 import {
   editPhoneNumberQuestionSaga,
+  editUserSaga,
   REDIRECT_QUERY_KEY,
+  updateUsersTimezoneSaga,
 } from 'global/reducers/auth';
 import { resetReducer as resetAuthReducer } from 'global/reducers/auth/actions';
 import logInGuestSaga from 'global/reducers/auth/sagas/logInGuest';
@@ -45,6 +47,8 @@ import {
   chatWidgetReducerKey,
   setChatEnabled,
 } from 'global/reducers/chatWidget';
+import { RoutePath } from 'global/constants';
+
 import { canPreview } from 'models/Status/statusPermissions';
 import { finishQuestion } from 'models/Session/QuestionTypes';
 import { UserSessionType } from 'models/UserSession/UserSession';
@@ -222,6 +226,8 @@ export function AnswerSessionPage({
   useInjectReducer({ key: 'intervention', reducer: interventionReducer });
   useInjectSaga({ key: 'fetchIntervention', saga: fetchInterventionSaga });
   useInjectSaga({ key: 'logInGuest', saga: logInGuestSaga });
+  useInjectSaga({ key: 'updateUsersTimezone', saga: updateUsersTimezoneSaga });
+  useInjectSaga({ key: 'editUser', saga: editUserSaga });
   useInjectReducer({ key: 'AnswerSessionPage', reducer });
   useInjectSaga({ key: 'AnswerSessionPage', saga });
   useInjectSaga({ key: 'editPhoneNumber', saga: editPhoneNumberQuestionSaga });
@@ -240,6 +246,8 @@ export function AnswerSessionPage({
       required,
       proceed_button: proceedButton,
       narrator_skippable: narratorSkippable,
+      min_length: minLength,
+      max_length: maxLength,
     } = {},
     narrator: {
       settings: {
@@ -320,7 +328,8 @@ export function AnswerSessionPage({
 
   useEffect(() => {
     if (userSession && !isUserSessionFinished) {
-      nextQuestion(userSessionId, index);
+      const questionId = userSession.lastAnswerAt ? null : index;
+      nextQuestion(userSessionId, questionId);
       if (userSession.liveChatEnabled && interventionId) {
         setLiveChatEnabled(interventionId);
       }
@@ -335,7 +344,7 @@ export function AnswerSessionPage({
       confirmationButtonColor: themeColors.primary,
       confirmationButtonText: formatMessage(messages.goBackToHomePage),
       confirmationButtonStyles: { width: 'auto', px: 30 },
-      confirmAction: () => history.push('/'),
+      confirmAction: () => history.push(RoutePath.DASHBOARD),
       description: formatMessage(messages.catMhErrorModalTitle),
       content: nextQuestionError?.error?.response?.data?.body ?? '',
       hideCloseButton: true,
@@ -360,7 +369,7 @@ export function AnswerSessionPage({
       encodeURIComponent(location.pathname),
     );
 
-    return <Redirect to={`/no-access?${queryParams.toString()}`} />;
+    return <Redirect to={`${RoutePath.FORBIDDEN}?${queryParams.toString()}`} />;
   }
 
   const currentQuestionId = currentQuestion ? currentQuestion.id : null;
@@ -379,9 +388,9 @@ export function AnswerSessionPage({
     CHARACTER_FIXED_POSITION_QUESTIONS.includes(type);
 
   const onContinueButton = () => {
-    if (CONFIRMABLE_QUESTIONS.includes(type))
+    if (CONFIRMABLE_QUESTIONS.includes(type)) {
       setConfirmContinueQuestionModalVisible(true);
-    else saveAnswer(false);
+    } else saveAnswer(false);
   };
 
   const renderQuestionTranscript = (isRightSide) => {
@@ -441,10 +450,46 @@ export function AnswerSessionPage({
       currentQuestion.loading || nextQuestionLoading || answer?.loading;
     const skipQuestionButtonDisabled = continueButtonLoading;
 
-    const isAnswered = () =>
-      answer && Array.isArray(answer.answerBody) && answer.answerBody.length;
+    const isNumericQuestion = currentQuestion.type === QuestionTypes.NUMBER;
 
-    const isButtonDisabled = () => required && !isAnswered();
+    const isAnswered = () => {
+      if (
+        !required &&
+        isNumericQuestion &&
+        (!answer || !Array.isArray(answerBody) || !answerBody.length)
+      )
+        return true;
+
+      if (!answer) {
+        return false;
+      }
+
+      if (!Array.isArray(answerBody) || !answerBody.length) {
+        return false;
+      }
+
+      switch (type) {
+        case QuestionTypes.PHONE: {
+          const { confirmed, timezone } = answerBody[0]?.value ?? {};
+          return confirmed && timezone;
+        }
+        case QuestionTypes.NUMBER: {
+          const { value } = answerBody[0] ?? {};
+          const numberOfDigits = `${value}` === 'NaN' ? 0 : `${value}`.length;
+          if (!required && numberOfDigits === 0) return true;
+          if (minLength && maxLength)
+            return numberOfDigits <= maxLength && numberOfDigits >= minLength;
+          if (minLength) return numberOfDigits >= minLength;
+          if (maxLength) return numberOfDigits <= maxLength;
+          return true;
+        }
+        default:
+          return true;
+      }
+    };
+
+    const isButtonDisabled = () =>
+      (required || isNumericQuestion) && !isAnswered();
 
     const sharedProps = {
       selectAnswer: selectAnswerProp,

@@ -2,6 +2,10 @@ import React, { useMemo } from 'react';
 import PropTypes from 'prop-types';
 import { Formik } from 'formik';
 import { useIntl } from 'react-intl';
+import { useDispatch } from 'react-redux';
+
+import { RoutePath } from 'global/constants';
+import { clearErrors } from 'global/reducers/auth';
 
 import FormikInput from 'components/FormikInput';
 import LinkButton from 'components/Button/LinkButton';
@@ -9,13 +13,14 @@ import Button from 'components/Button';
 import Divider from 'components/Divider';
 import Row from 'components/Row';
 import ErrorAlert from 'components/ErrorAlert';
+import FormikForm from 'components/FormikForm';
 
 import {
   generateInitialValues,
   generateLoginFormValidationSchema,
 } from '../utils';
 import messages from '../messages';
-import { Or, StyledForm } from '../styled';
+import { Or } from '../styled';
 
 const LoginForm = ({
   formData: initialFormData,
@@ -24,6 +29,7 @@ const LoginForm = ({
   error,
 }) => {
   const { formatMessage } = useIntl();
+  const dispatch = useDispatch();
 
   const validationSchema = useMemo(
     () => generateLoginFormValidationSchema(formatMessage),
@@ -36,6 +42,8 @@ const LoginForm = ({
     onLogin(email.trim(), password);
     actions.setSubmitting(false);
   };
+
+  const onRedirect = () => dispatch(clearErrors());
 
   return (
     <Formik
@@ -53,7 +61,7 @@ const LoginForm = ({
         };
 
         return (
-          <StyledForm>
+          <FormikForm mt={40}>
             <FormikInput
               formikKey="email"
               placeholder={formatMessage(messages.emailPlaceholder)}
@@ -63,10 +71,11 @@ const LoginForm = ({
             />
             <LinkButton
               tabIndex={-1}
-              to="/reset-password"
+              to={RoutePath.RESET_PASSWORD}
               alignSelf="end"
               mb={-14}
               zIndex={1}
+              onClick={onRedirect}
             >
               {formatMessage(messages.forgotPassword)}
             </LinkButton>
@@ -93,12 +102,12 @@ const LoginForm = ({
               <Divider ml={15} mt={40} />
             </Row>
             <Row width="100%" justify="center" mt={30}>
-              <LinkButton to="/register">
+              <LinkButton to={RoutePath.REGISTER} onClick={onRedirect}>
                 {formatMessage(messages.register)}
               </LinkButton>
             </Row>
             {error && <ErrorAlert errorText={error} mt={20} />}
-          </StyledForm>
+          </FormikForm>
         );
       }}
     </Formik>

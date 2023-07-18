@@ -27,8 +27,10 @@ import {
   headAnimationType,
 } from 'models/Narrator/BlockTypes';
 import { makeSelectAudioInstance } from 'global/reducers/globalState';
-import { makeSelectInterventionStatus } from 'global/reducers/intervention';
-import { canEdit } from 'models/Status/statusPermissions';
+import {
+  makeSelectEditingPossible,
+  makeSelectInterventionStatus,
+} from 'global/reducers/intervention';
 import { CHARACTER_CONFIGS } from 'models/Character';
 
 import AnimationPlayer from 'components/AnimationPlayer';
@@ -50,7 +52,6 @@ const QuestionNarrator = ({
   savePosition,
   currentBlockIndex,
   audioInstance,
-  interventionStatus,
 }) => {
   const { formatMessage } = useIntl();
   const { width, height } = useResizeObserver({
@@ -64,6 +65,7 @@ const QuestionNarrator = ({
     });
 
   const draggable = useSelector(makeSelectDraggable());
+  const editingPossible = useSelector(makeSelectEditingPossible());
 
   const onBlockFinish = () => {
     clearAnimationBlock();
@@ -263,20 +265,20 @@ const QuestionNarrator = ({
     };
   };
 
-  const editingPossible = draggable && canEdit(interventionStatus);
+  const narratorActive = draggable && editingPossible;
 
   return (
-    <NarratorContainer canBeDragged={editingPossible} width={characterWidth}>
+    <NarratorContainer canBeDragged={narratorActive} width={characterWidth}>
       {settings.animation && (
         <Draggable
           onStop={(_, { x, y }) => handleSaveOffset(x, y)}
           position={getPosition()}
-          disabled={!editingPossible}
+          disabled={!narratorActive}
           bounds="parent"
           handle="#lottie"
         >
           <CharacterActiveIndicator
-            $active={editingPossible}
+            $active={narratorActive}
             $characterConfig={characterConfig}
           >
             <div id="lottie">
@@ -310,7 +312,6 @@ QuestionNarrator.propTypes = {
   savePosition: PropTypes.func,
   currentBlockIndex: PropTypes.number,
   audioInstance: PropTypes.object,
-  interventionStatus: PropTypes.string,
 };
 
 const mapStateToProps = createStructuredSelector({

@@ -65,7 +65,7 @@ const Component = ({
     isAccessRevoked,
     licenseType,
     testNumber,
-    currentTestNumber,
+    testsLeft,
   } = modalData;
 
   const initialFormikValues = useMemo(
@@ -108,7 +108,7 @@ const Component = ({
     onLicenseTypeChange(CatMhLicenseType.UNLIMITED);
 
   const handleTestNumberChange = (event: ChangeEvent<HTMLInputElement>) =>
-    onTestNumberChange(Number.parseInt(event.target.value, 10));
+    onTestNumberChange(Number.parseInt(event.target.value, 10) || 0);
 
   const handleAccessChange = () => onAccessChange(!isAccessRevoked);
 
@@ -244,7 +244,7 @@ const Component = ({
 
             <Col align="end">
               {formatMessage(messages.testNumberLeft, {
-                current: currentTestNumber,
+                left: testsLeft,
                 initial: testNumber,
               })}
             </Col>

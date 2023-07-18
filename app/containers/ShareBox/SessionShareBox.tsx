@@ -7,10 +7,12 @@ import {
   makeSelectInterventionLoader,
   makeSelectInterventionStatus,
 } from 'global/reducers/intervention';
+import { RoutePath } from 'global/constants';
 
 import { Session } from 'models/Session';
 
 import objectToCamelCase from 'utils/objectToCamelCase';
+import { parametrizeRoutePath } from 'utils/router';
 
 import Box from 'components/Box';
 import H2 from 'components/H2';
@@ -66,7 +68,13 @@ export const Component = ({ organizationId }: Props): JSX.Element => {
     emails: emails ?? [],
     exportFilename: name,
     interventionStatus,
-    inviteUrl: `${process.env.WEB_URL}/interventions/${interventionId}/sessions/${session.id}/fill`,
+    inviteUrl: `${process.env.WEB_URL}${parametrizeRoutePath(
+      RoutePath.ANSWER_SESSION,
+      {
+        interventionId,
+        sessionId: session.id,
+      },
+    )}`,
     resendInvite,
     sendInvite,
     emailLoading,

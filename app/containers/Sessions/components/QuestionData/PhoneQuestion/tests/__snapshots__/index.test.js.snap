@@ -1,54 +1,7 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`<PhoneQuestion /> Should render and match the snapshot 1`] = `
-.c0 {
-  display: -webkit-box;
-  display: -webkit-flex;
-  display: -ms-flexbox;
-  display: flex;
-  -webkit-flex-direction: column;
-  -ms-flex-direction: column;
-  flex-direction: column;
-  width: 100%;
-  margin-top: 10px;
-}
-
-.c2 {
-  display: -webkit-box;
-  display: -webkit-flex;
-  display: -ms-flexbox;
-  display: flex;
-  -webkit-flex-direction: column;
-  -ms-flex-direction: column;
-  flex-direction: column;
-  width: 100%;
-}
-
-.c4 {
-  display: -webkit-box;
-  display: -webkit-flex;
-  display: -ms-flexbox;
-  display: flex;
-  -webkit-flex-direction: column;
-  -ms-flex-direction: column;
-  flex-direction: column;
-  width: 100%;
-  width: 230px;
-  padding-right: 10px;
-}
-
 .c1 {
-  display: -webkit-box;
-  display: -webkit-flex;
-  display: -ms-flexbox;
-  display: flex;
-  -webkit-flex-direction: row;
-  -ms-flex-direction: row;
-  flex-direction: row;
-  height: auto;
-}
-
-.c3 {
   display: -webkit-box;
   display: -webkit-flex;
   display: -ms-flexbox;
@@ -67,7 +20,7 @@ exports[`<PhoneQuestion /> Should render and match the snapshot 1`] = `
   width: 100%;
 }
 
-.c7 {
+.c5 {
   display: -webkit-box;
   display: -webkit-flex;
   display: -ms-flexbox;
@@ -85,7 +38,7 @@ exports[`<PhoneQuestion /> Should render and match the snapshot 1`] = `
   align-items: center;
 }
 
-.c9 {
+.c7 {
   width: auto;
   height: auto;
   -webkit-transition: -webkit-transform 0.2s;
@@ -93,7 +46,7 @@ exports[`<PhoneQuestion /> Should render and match the snapshot 1`] = `
   transition: transform 0.2s;
 }
 
-.c5 {
+.c3 {
   font-family: DM Sans;
   font-size: 13px;
   line-height: 130%;
@@ -105,7 +58,7 @@ exports[`<PhoneQuestion /> Should render and match the snapshot 1`] = `
   width: fit-content;
 }
 
-.c8 {
+.c6 {
   font-family: DM Sans;
   font-size: 13px;
   line-height: 130%;
@@ -114,7 +67,7 @@ exports[`<PhoneQuestion /> Should render and match the snapshot 1`] = `
   color: #2F3850;
 }
 
-.c6 {
+.c4 {
   width: auto;
   height: auto;
   display: block;
@@ -124,7 +77,31 @@ exports[`<PhoneQuestion /> Should render and match the snapshot 1`] = `
   color: unset;
 }
 
-.c10 {
+.c0 {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-flex-direction: column;
+  -ms-flex-direction: column;
+  flex-direction: column;
+  width: 100%;
+}
+
+.c2 {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-flex-direction: column;
+  -ms-flex-direction: column;
+  flex-direction: column;
+  width: 100%;
+  width: 230px;
+  padding-right: 10px;
+}
+
+.c8 {
   padding: 12px;
   border-style: solid;
   border-width: 1px;
@@ -135,13 +112,13 @@ exports[`<PhoneQuestion /> Should render and match the snapshot 1`] = `
   opacity: 0.5;
 }
 
-.c10:focus {
+.c8:focus {
   box-shadow: none;
   outline: none;
   border-color: #107969;
 }
 
-.c10:disabled {
+.c8:disabled {
   color: #ABBBD1;
 }
 
@@ -177,173 +154,253 @@ exports[`<PhoneQuestion /> Should render and match the snapshot 1`] = `
 
 }
 
-@media only screen and (min-width:768px) {
-
-}
-
-@media only screen and (min-width:960px) {
-
-}
-
-@media only screen and (min-width:1170px) {
-
-}
-
-@media only screen and (min-width:1360px) {
-
-}
-
 <div
-  class="c0"
+  style="box-sizing: border-box; position: relative; margin-left: auto; margin-right: auto; padding-left: 15px; padding-right: 15px; margin-top: 24px; flex: 1;"
 >
   <div
-    class="c1"
+    style="margin-left: -15px; margin-right: -15px; display: flex; flex-wrap: wrap; flex-grow: 0; flex-shrink: 0; align-items: normal; justify-content: flex-start; row-gap: 24px;"
   >
     <div
-      class="c2"
+      style="box-sizing: border-box; min-height: 1px; position: relative; padding-left: 15px; padding-right: 15px; width: 100%; flex-basis: 100%; flex-grow: 0; flex-shrink: 0; max-width: 100%; margin-left: 0%;"
     >
       <div
-        class="c3"
-        data-private="true"
-        width="100%"
+        class="c0"
       >
         <div
-          class="c2"
+          class="c1"
+          data-private="true"
+          width="100%"
         >
           <div
-            class="c3"
-            data-private="true"
-            width="100%"
+            class="c0"
           >
             <div
-              class="c4"
-              width="230"
+              class="c1"
+              data-private="true"
+              width="100%"
             >
-              <label
-                for="iso"
-              >
-                <p
-                  class="c5"
-                  font-size="12px"
-                  width="fit-content"
-                >
-                  Phone prefix
-                </p>
-              </label>
               <div
-                class="c6"
-                cursor="not-allowed"
-                data-testid="select"
-                disabled=""
+                class="c2"
+                width="230"
               >
-                <div
-                  class=" css-14jk2my-container"
+                <label
+                  for="iso"
                 >
-                  <span
-                    aria-atomic="false"
-                    aria-live="polite"
-                    aria-relevant="additions text"
-                    class="css-1f43avz-a11yText-A11yText"
-                  />
-                  <div
-                    class=" css-vz7ypb-control"
+                  <p
+                    class="c3"
+                    font-size="12px"
+                    width="fit-content"
                   >
+                    Phone prefix
+                  </p>
+                </label>
+                <div
+                  class="c4"
+                  cursor="not-allowed"
+                  data-testid="select"
+                  disabled=""
+                >
+                  <div
+                    class=" css-14jk2my-container"
+                  >
+                    <span
+                      aria-atomic="false"
+                      aria-live="polite"
+                      aria-relevant="additions text"
+                      class="css-1f43avz-a11yText-A11yText"
+                    />
                     <div
-                      class=" css-g1d714-ValueContainer"
+                      class=" css-vz7ypb-control"
                     >
                       <div
-                        class=" css-107lb6w-singleValue"
+                        class=" css-g1d714-ValueContainer"
                       >
                         <div
-                          class="c7"
+                          class=" css-107lb6w-singleValue"
+                        >
+                          <div
+                            class="c5"
+                          >
+                            <img
+                              alt="US"
+                              src="https://unpkg.com/react-flag-kit@0.3.1/assets/US.svg"
+                              style="height: 24px; width: 24px; display: inline-block;"
+                            />
+                            <p
+                              class="c6"
+                              font-size="18"
+                            >
+                              US +1
+                            </p>
+                          </div>
+                        </div>
+                        <div
+                          class="css-1bwsx9e-Input"
+                        >
+                          <div
+                            class=""
+                            style="display: inline-block;"
+                          >
+                            <input
+                              aria-autocomplete="list"
+                              autocapitalize="none"
+                              autocomplete="off"
+                              autocorrect="off"
+                              disabled=""
+                              id="iso"
+                              spellcheck="false"
+                              style="box-sizing: content-box; width: 2px; border: 0px; opacity: 1; outline: 0; padding: 0px;"
+                              tabindex="0"
+                              type="text"
+                              value=""
+                            />
+                            <div
+                              style="position: absolute; top: 0px; left: 0px; visibility: hidden; height: 0px; overflow: scroll; white-space: pre; font-family: -webkit-small-control; letter-spacing: normal; text-transform: none;"
+                            />
+                          </div>
+                        </div>
+                      </div>
+                      <div
+                        class=" css-1hb7zxy-IndicatorsContainer"
+                      >
+                        <div
+                          aria-hidden="true"
+                          class=" css-tlfecz-indicatorContainer"
                         >
                           <img
-                            alt="US"
-                            src="https://unpkg.com/react-flag-kit@0.3.1/assets/US.svg"
-                            style="height: 24px; width: 24px; display: inline-block;"
-                          />
-                          <p
-                            class="c8"
-                            font-size="18"
-                          >
-                            US +1
-                          </p>
-                        </div>
-                      </div>
-                      <div
-                        class="css-1bwsx9e-Input"
-                      >
-                        <div
-                          class=""
-                          style="display: inline-block;"
-                        >
-                          <input
-                            aria-autocomplete="list"
-                            autocapitalize="none"
-                            autocomplete="off"
-                            autocorrect="off"
-                            disabled=""
-                            id="iso"
-                            spellcheck="false"
-                            style="box-sizing: content-box; width: 2px; border: 0px; opacity: 1; outline: 0; padding: 0px;"
-                            tabindex="0"
-                            type="text"
-                            value=""
-                          />
-                          <div
-                            style="position: absolute; top: 0px; left: 0px; visibility: hidden; height: 0px; overflow: scroll; white-space: pre; font-family: -webkit-small-control; letter-spacing: normal; text-transform: none;"
+                            alt="arrow"
+                            class="c7"
+                            src="IMAGE_MOCK"
+                            transform=""
                           />
                         </div>
-                      </div>
-                    </div>
-                    <div
-                      class=" css-1hb7zxy-IndicatorsContainer"
-                    >
-                      <div
-                        aria-hidden="true"
-                        class=" css-tlfecz-indicatorContainer"
-                      >
-                        <img
-                          alt="arrow"
-                          class="c9"
-                          src="IMAGE_MOCK"
-                          transform=""
-                        />
                       </div>
                     </div>
                   </div>
                 </div>
               </div>
-            </div>
-            <div
-              class="c2"
-            >
-              <label
-                for="number"
+              <div
+                class="c0"
               >
-                <p
-                  class="c5"
-                  font-size="12px"
-                  width="fit-content"
+                <label
+                  for="number"
                 >
-                  Phone number
-                </p>
-              </label>
-              <input
-                class="c10"
-                disabled=""
-                id="number"
-                name="number"
-                placeholder="Enter phone number"
-                type="tel"
-                value=""
-                width="100%"
-              />
+                  <p
+                    class="c3"
+                    font-size="12px"
+                    width="fit-content"
+                  >
+                    Phone number
+                  </p>
+                </label>
+                <input
+                  class="c8"
+                  disabled=""
+                  id="number"
+                  name="number"
+                  placeholder="Enter phone number"
+                  type="tel"
+                  value=""
+                  width="100%"
+                />
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div
+      style="box-sizing: border-box; min-height: 1px; position: relative; padding-left: 15px; padding-right: 15px; width: 58.333333333333336%; flex-basis: 58.333333333333336%; flex-grow: 0; flex-shrink: 0; max-width: 58.333333333333336%; margin-left: 0%;"
+    >
+      <div
+        class="c0"
+      >
+        <label
+          for="timeZone"
+        >
+          <p
+            class="c3"
+            font-size="12px"
+            width="fit-content"
+          >
+            Timezone
+          </p>
+        </label>
+        <div
+          class="c4"
+          cursor="not-allowed"
+          data-testid="select"
+          disabled=""
+        >
+          <div
+            class=" css-14jk2my-container"
+          >
+            <span
+              aria-atomic="false"
+              aria-live="polite"
+              aria-relevant="additions text"
+              class="css-1f43avz-a11yText-A11yText"
+            />
+            <div
+              class=" css-vz7ypb-control"
+            >
+              <div
+                class=" css-g1d714-ValueContainer"
+              >
+                <div
+                  class=" css-1jyq7ds-placeholder"
+                >
+                  Select...
+                </div>
+                <div
+                  class="css-1bwsx9e-Input"
+                >
+                  <div
+                    class=""
+                    style="display: inline-block;"
+                  >
+                    <input
+                      aria-autocomplete="list"
+                      autocapitalize="none"
+                      autocomplete="off"
+                      autocorrect="off"
+                      disabled=""
+                      id="timeZone"
+                      spellcheck="false"
+                      style="box-sizing: content-box; width: 2px; border: 0px; opacity: 1; outline: 0; padding: 0px;"
+                      tabindex="0"
+                      type="text"
+                      value=""
+                    />
+                    <div
+                      style="position: absolute; top: 0px; left: 0px; visibility: hidden; height: 0px; overflow: scroll; white-space: pre; font-family: -webkit-small-control; letter-spacing: normal; text-transform: none;"
+                    />
+                  </div>
+                </div>
+              </div>
+              <div
+                class=" css-1hb7zxy-IndicatorsContainer"
+              >
+                <div
+                  aria-hidden="true"
+                  class=" css-tlfecz-indicatorContainer"
+                >
+                  <img
+                    alt="arrow"
+                    class="c7"
+                    src="IMAGE_MOCK"
+                    transform=""
+                  />
+                </div>
+              </div>
             </div>
           </div>
         </div>
       </div>
     </div>
   </div>
+  <span
+    style="display: table; clear: both;"
+  />
 </div>
 `;

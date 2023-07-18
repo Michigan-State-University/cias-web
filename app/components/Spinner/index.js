@@ -16,6 +16,7 @@ Spinner.propTypes = {
   color: PropTypes.string,
   size: PropTypes.number,
   width: PropTypes.number,
+  margin: PropTypes.string,
 };
 
 Spinner.defaultProps = {

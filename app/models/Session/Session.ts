@@ -59,6 +59,8 @@ export interface Session {
   estimatedTime: number;
   currentNarrator: CharacterType;
   multipleFill: boolean;
+  autofinishEnabled: boolean;
+  autofinishDelay: number;
 }
 
 export interface ClassicSession extends Session {

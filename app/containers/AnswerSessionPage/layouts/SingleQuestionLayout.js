@@ -10,8 +10,7 @@ import Radio from 'components/Radio';
 import HoverableBox from 'components/Box/HoverableBox';
 import Box from 'components/Box';
 import AudioTextPreview from 'components/AudioTextPreview';
-
-import { MarkupContainer } from './styled';
+import MarkupContainer from 'components/MarkupContainer';
 
 const margin = 21;
 

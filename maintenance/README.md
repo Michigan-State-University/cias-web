@@ -7,7 +7,7 @@ It requires absolute paths to be used in files so remember to
 **use absolute paths** (like `/image.jpg`) **instead of relative paths**
 (like `image.jpg` or `./image.jpg`).
 
-For development, firstly install `live-server globally:
+For development, firstly install `live-server` globally, e.g.:
 
 ```npm install -g live-server```
 

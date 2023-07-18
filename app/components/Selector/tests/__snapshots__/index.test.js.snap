@@ -161,6 +161,7 @@ exports[`<Selector /> Should render disabled and match the snapshot 1`] = `
   -webkit-transform: rotate(180deg);
   -ms-transform: rotate(180deg);
   transform: rotate(180deg);
+  -webkit-transform: rotate(180deg);
   -webkit-transition: -webkit-transform 0.2s;
   -webkit-transition: transform 0.2s;
   transition: transform 0.2s;

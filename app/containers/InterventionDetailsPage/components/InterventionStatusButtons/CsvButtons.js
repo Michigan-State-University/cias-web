@@ -18,13 +18,16 @@ import { ShareButton } from './styled';
 const CsvButtons = ({
   intl: { formatMessage },
   csvGeneratedAt,
-  urlToDownload,
+  csvFilename,
+  interventionId,
   handleSendCsv,
-  csvLink,
 }) => {
   const { canDownloadInterventionCsv } = useRoleManager();
   const CsvDownload = () => (
-    <FileDownload url={urlToDownload}>
+    <FileDownload
+      url={`/v1/interventions/${interventionId}/csv_attachment`}
+      fileName={csvFilename}
+    >
       {({ isDownloading }) => (
         <Tooltip
           id={`intervention-csv-generated-at-${csvGeneratedAt}`}
@@ -42,14 +45,16 @@ const CsvButtons = ({
 
   const CsvButton = () => (
     <ShareButton outlined onClick={handleSendCsv}>
-      <FormattedMessage {...(csvLink ? messages.csvNew : messages.csv)} />
+      <FormattedMessage
+        {...(csvGeneratedAt ? messages.csvNew : messages.csv)}
+      />
     </ShareButton>
   );
 
   if (!canDownloadInterventionCsv) return <></>;
   return (
     <>
-      {csvLink && <CsvDownload />}
+      {csvGeneratedAt && <CsvDownload />}
       <CsvButton />
     </>
   );
@@ -58,9 +63,9 @@ const CsvButtons = ({
 CsvButtons.propTypes = {
   intl: PropTypes.shape(IntlShape),
   csvGeneratedAt: PropTypes.string,
-  urlToDownload: PropTypes.string,
+  csvFilename: PropTypes.string,
+  interventionId: PropTypes.string,
   handleSendCsv: PropTypes.func,
-  csvLink: PropTypes.string,
 };
 
 export default injectIntl(CsvButtons);

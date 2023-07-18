@@ -45,8 +45,8 @@ describe('intervention reducer', () => {
       formula: '',
     },
     schedule: '',
-    schedule_at: '',
-    schedule_payload: '',
+    scheduleAt: '',
+    schedulePayload: '',
   };
 
   const createSession = (path, value) => {
@@ -162,7 +162,7 @@ describe('intervention reducer', () => {
 
   it('UPDATE_SESSION_SETTINGS_REQUEST -> UPDATE_SCHEDULING_PAYLOAD', () => {
     const schedulePayload = 10;
-    const session = createSession('schedule_payload', schedulePayload);
+    const session = createSession('schedulePayload', schedulePayload);
     const updateState = mockState(session);
     set(updateState, 'loaders.editIntervention', true);
 
@@ -176,7 +176,7 @@ describe('intervention reducer', () => {
 
   it('UPDATE_SESSION_SETTINGS_REQUEST -> UPDATE_SCHEDULING_DATE', () => {
     const scheduleDate = new Date().toDateString();
-    const session = createSession('schedule_at', scheduleDate);
+    const session = createSession('scheduleAt', scheduleDate);
     const updateState = mockState(session);
     set(updateState, 'loaders.editIntervention', true);
 

@@ -1,7 +1,26 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`<SessionSchedule /> Should render and match the snapshot 1`] = `
-.c3 {
+.c2 {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-flex-direction: row;
+  -ms-flex-direction: row;
+  flex-direction: row;
+  height: auto;
+  -webkit-align-content: center;
+  -ms-flex-line-pack: center;
+  align-content: center;
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  gap: 8px;
+}
+
+.c4 {
   display: -webkit-box;
   display: -webkit-flex;
   display: -ms-flexbox;
@@ -19,7 +38,7 @@ exports[`<SessionSchedule /> Should render and match the snapshot 1`] = `
   align-items: center;
 }
 
-.c6 {
+.c10 {
   display: -webkit-box;
   display: -webkit-flex;
   display: -ms-flexbox;
@@ -39,7 +58,26 @@ exports[`<SessionSchedule /> Should render and match the snapshot 1`] = `
   margin-bottom: 17px;
 }
 
-.c9 {
+.c11 {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-flex-direction: row;
+  -ms-flex-direction: row;
+  flex-direction: row;
+  height: auto;
+  -webkit-align-content: center;
+  -ms-flex-line-pack: center;
+  align-content: center;
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  gap: 10px;
+}
+
+.c13 {
   display: -webkit-box;
   display: -webkit-flex;
   display: -ms-flexbox;
@@ -51,7 +89,7 @@ exports[`<SessionSchedule /> Should render and match the snapshot 1`] = `
   width: 100%;
 }
 
-.c14 {
+.c17 {
   display: -webkit-box;
   display: -webkit-flex;
   display: -ms-flexbox;
@@ -69,12 +107,24 @@ exports[`<SessionSchedule /> Should render and match the snapshot 1`] = `
   width: 100%;
 }
 
-.c2 {
+.c3 {
   width: auto;
   height: auto;
   display: block;
   border-radius: 5px;
   position: relative;
+  color: unset;
+}
+
+.c7 {
+  width: auto;
+  height: auto;
+  display: block;
+  border-radius: 5px;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
   color: unset;
 }
 
@@ -86,7 +136,7 @@ exports[`<SessionSchedule /> Should render and match the snapshot 1`] = `
   color: unset;
 }
 
-.c5 {
+.c6 {
   width: auto;
   height: auto;
   margin-left: 8px;
@@ -94,6 +144,11 @@ exports[`<SessionSchedule /> Should render and match the snapshot 1`] = `
   -webkit-transition: -webkit-transform 0.2s;
   -webkit-transition: transform 0.2s;
   transition: transform 0.2s;
+}
+
+.c9 {
+  width: auto;
+  height: auto;
 }
 
 .c0 {
@@ -117,7 +172,7 @@ exports[`<SessionSchedule /> Should render and match the snapshot 1`] = `
   color: rgba(47,56,80,0.6);
 }
 
-.c4 {
+.c5 {
   font-family: DM Sans;
   font-size: 13px;
   line-height: 130%;
@@ -128,7 +183,7 @@ exports[`<SessionSchedule /> Should render and match the snapshot 1`] = `
   cursor: pointer;
 }
 
-.c7 {
+.c12 {
   font-family: DM Sans;
   font-size: 13px;
   line-height: 130%;
@@ -137,16 +192,7 @@ exports[`<SessionSchedule /> Should render and match the snapshot 1`] = `
   color: #2F3850;
 }
 
-.c13 {
-  font-family: DM Sans;
-  font-size: 13px;
-  line-height: 130%;
-  font-size: 15px;
-  color: rgba(14,14,14,0.6);
-  color: rgba(14,14,14,0.6);
-}
-
-.c15 {
+.c18 {
   font-family: DM Sans;
   font-size: 13px;
   line-height: 130%;
@@ -156,73 +202,79 @@ exports[`<SessionSchedule /> Should render and match the snapshot 1`] = `
   color: rgba(210,55,29,1);
 }
 
-.c12 {
-  background-color: #F8FBFF;
-  border-radius: 5px;
+.c16 {
+  padding: 12px;
   border-style: solid;
   border-width: 1px;
   border-color: #E9F1FB;
-  margin-right: 10px;
-  margin-left: 10px;
+  border-radius: 5px;
+  margin-right: 0;
+  margin-left: 0;
   width: 120px;
   height: 50px;
-  color: #2F3850;
+  padding: 12px;
+  font-size: 15px;
+  color: rgba(47,56,80,1);
+  text-align: left;
+  color: rgba(47,56,80,1);
 }
 
-.c12:hover {
-  cursor: pointer;
-}
-
-.c12:focus {
+.c16:focus {
+  box-shadow: none;
   outline: none;
+  border-color: #107969;
 }
 
-.c11 .schedule-date-picker {
+.c16:disabled {
+  color: #ABBBD1;
+}
+
+.c15 .schedule-date-picker {
   font-family: DM Sans;
   background-color: #E9F1FB;
 }
 
-.c11 .schedule-date-picker .react-datepicker__header {
+.c15 .schedule-date-picker .react-datepicker__header {
   background-color: #F8FBFF;
 }
 
-.c11 .schedule-date-picker .react-datepicker__day {
+.c15 .schedule-date-picker .react-datepicker__day {
   color: #2F3850;
 }
 
-.c11 .schedule-date-picker .react-datepicker__day:hover {
+.c15 .schedule-date-picker .react-datepicker__day:hover {
   color: #FFFFFF;
   background-color: rgba(200,102,234,0.7);
 }
 
-.c11 .schedule-date-picker .react-datepicker__day--keyboard-selected {
+.c15 .schedule-date-picker .react-datepicker__day--keyboard-selected {
   background-color: #C866EA;
 }
 
-.c11 .schedule-date-picker .react-datepicker__day--in-range,
-.c11 .schedule-date-picker .react-datepicker__day--in-selecting-range {
+.c15 .schedule-date-picker .react-datepicker__day--in-range,
+.c15 .schedule-date-picker .react-datepicker__day--in-selecting-range {
   color: #2F3850;
   background-color: rgba(200,102,234,0.1);
 }
 
-.c10 .schedule-date-picker .react-datepicker__day--selected:not(.c10 .schedule-date-picker .react-datepicker__day--in-selecting-range),
-.c11 .schedule-date-picker .react-datepicker__day--range-start:not(.c11 .schedule-date-picker .react-datepicker__day--in-selecting-range),
-.c11 .schedule-date-picker .react-datepicker__day--range-end:not(.c11 .schedule-date-picker .react-datepicker__day--in-selecting-range),
-.c11 .schedule-date-picker .react-datepicker__day--selecting-range-start,
-.c11 .schedule-date-picker .react-datepicker__day--selecting-range-end {
+.c14 .schedule-date-picker .react-datepicker__day--selected:not(.c14 .schedule-date-picker .react-datepicker__day--in-selecting-range),
+.c15 .schedule-date-picker .react-datepicker__day--range-start:not(.c15 .schedule-date-picker .react-datepicker__day--in-selecting-range),
+.c15 .schedule-date-picker .react-datepicker__day--range-end:not(.c15 .schedule-date-picker .react-datepicker__day--in-selecting-range),
+.c15 .schedule-date-picker .react-datepicker__day--selecting-range-start,
+.c15 .schedule-date-picker .react-datepicker__day--selecting-range-end {
   color: #FFFFFF;
   background-color: #C866EA;
 }
 
-.c11 .schedule-date-picker .react-datepicker__year-option {
+.c15 .schedule-date-picker .react-datepicker__year-option {
   background-color: #E9F1FB;
 }
 
-.c11 .schedule-date-picker .react-datepicker__month-option {
+.c15 .schedule-date-picker .react-datepicker__month-option {
   background-color: #E9F1FB;
 }
 
-.c11 .react-datepicker-wrapper {
+.c15 .react-datepicker-wrapper {
   width: 100%;
 }
 
@@ -258,34 +310,54 @@ exports[`<SessionSchedule /> Should render and match the snapshot 1`] = `
     >
       <div
         class="c3"
-        role="button"
       >
-        <p
+        <div
           class="c4"
-          color="#B727EA"
-          font-weight="bold"
+          role="button"
         >
-          Send email invitation on exact date
-        </p>
-        <img
-          alt="arrow"
-          class="c5"
-          src="IMAGE_MOCK"
-          transform=""
-        />
+          <p
+            class="c5"
+            color="#B727EA"
+            font-weight="bold"
+          >
+            Send email invitation on exact date
+          </p>
+          <img
+            alt="arrow"
+            class="c6"
+            src="IMAGE_MOCK"
+            transform=""
+          />
+        </div>
+      </div>
+      <div
+        class="c7"
+        display="flex"
+      >
+        <div
+          class="c8"
+          data-for="session-scheduling-cdh"
+          data-tip=""
+        >
+          <img
+            alt="?"
+            class="c9"
+            src="IMAGE_MOCK"
+          />
+        </div>
       </div>
     </div>
     <div
-      class="c6"
+      class="c10"
     >
       <div
         class="c0"
       >
         <div
-          class="c3"
+          class="c11"
         >
           <p
-            class="c7"
+            class="c12"
             font-size="15"
           >
             Send 
@@ -295,14 +367,14 @@ exports[`<SessionSchedule /> Should render and match the snapshot 1`] = `
             class="c8"
           >
             <div
-              class="c9"
+              class="c13"
               width="100%"
             >
               <div
                 class="c0"
               >
                 <div
-                  class="c10 c11"
+                  class="c14 c15"
                 >
                   <div
                     class="react-datepicker-wrapper"
@@ -310,20 +382,17 @@ exports[`<SessionSchedule /> Should render and match the snapshot 1`] = `
                     <div
                       class="react-datepicker__input-container"
                     >
-                      <button
-                        class="c12"
-                        data-private="true"
+                      <input
+                        aria-label="MM-DD-YYYY"
+                        class="c16"
+                        color="#2F3850"
+                        font-size="15"
                         height="50"
+                        placeholder="MM-DD-YYYY"
+                        type="text"
+                        value="12-24-2018"
                         width="120"
-                      >
-                        <p
-                          class="c13"
-                          color="#0E0E0E"
-                          font-size="15"
-                        >
-                          12/24/2018
-                        </p>
-                      </button>
+                      />
                     </div>
                   </div>
                 </div>
@@ -332,11 +401,11 @@ exports[`<SessionSchedule /> Should render and match the snapshot 1`] = `
           </div>
         </div>
         <div
-          class="c14"
+          class="c17"
           width="100%"
         >
           <p
-            class="c15"
+            class="c18"
             color="#D2371D"
             font-size="12"
           >

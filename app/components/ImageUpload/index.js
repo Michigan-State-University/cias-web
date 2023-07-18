@@ -35,13 +35,16 @@ const ImageUpload = ({
   const { formatMessage } = useIntl();
   const [hovered, setHovered] = useState(false);
 
-  const handleDrop = useCallback((newFiles) => {
-    const img = head(newFiles);
-    onAddImage({
-      image: img,
-      imageUrl: window.URL.createObjectURL(img),
-    });
-  }, []);
+  const handleDrop = useCallback(
+    (newFiles) => {
+      const img = head(newFiles);
+      onAddImage({
+        image: img,
+        imageUrl: window.URL.createObjectURL(img),
+      });
+    },
+    [onAddImage],
+  );
 
   const handleReject = () => toast.error(formatMessage(messages.error));
 

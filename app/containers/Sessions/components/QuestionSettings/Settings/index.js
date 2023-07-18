@@ -16,11 +16,10 @@ import {
   makeSelectSelectedQuestion,
   makeSelectQuestions,
 } from 'global/reducers/questions';
-import { makeSelectInterventionStatus } from 'global/reducers/intervention';
+import { makeSelectEditingPossible } from 'global/reducers/intervention';
 import { makeSelectInterventionType } from 'global/reducers/intervention/selectors';
 import { makeSelectSelectedQuestionGroup } from 'global/reducers/questionGroups';
 
-import { canEdit } from 'models/Status/statusPermissions';
 import { InterventionType } from 'models/Intervention/Intervention';
 import { GroupType } from 'models/QuestionGroup';
 
@@ -42,16 +41,14 @@ const Settings = ({
   tab,
   changeTab,
   setDraggable,
-  interventionStatus,
   interventionType,
   questionGroup,
+  editingPossible,
 }) => {
   const handleChange = (newTab) => {
     changeTab({ tab: newTab });
     setDraggable(false);
   };
-
-  const editingPossible = canEdit(interventionStatus);
 
   const isTlfbGroup = questionGroup?.type === GroupType.TLFB;
 
@@ -118,18 +115,18 @@ Settings.propTypes = {
   tab: PropTypes.string,
   changeTab: PropTypes.func,
   setDraggable: PropTypes.func,
-  interventionStatus: PropTypes.string,
   interventionType: PropTypes.string,
   questionGroup: PropTypes.object,
+  editingPossible: PropTypes.bool,
 };
 
 const mapStateToProps = createStructuredSelector({
   selectedQuestion: makeSelectSelectedQuestion(),
   questions: makeSelectQuestions(),
   tab: makeSelectQuestionSettingsTab(),
-  interventionStatus: makeSelectInterventionStatus(),
   interventionType: makeSelectInterventionType(),
   questionGroup: makeSelectSelectedQuestionGroup(),
+  editingPossible: makeSelectEditingPossible(),
 });
 
 const mapDispatchToProps = {
