@@ -46,7 +46,6 @@ export const pickUserAttributes = (user) =>
     'feedbackCompleted',
     'organizableId',
     'quickExitEnabled',
-    'hfhsPatientDetail',
   ]);
 
 export const mapTeam = (team) => ({

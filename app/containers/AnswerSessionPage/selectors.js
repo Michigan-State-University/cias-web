@@ -79,6 +79,12 @@ const makeSelectVerifyPatientDataState = () =>
     }),
   );
 
+const makeSelectHfhsPatientDetail = () =>
+  createSelector(
+    selectAnswerSessionPageDomain,
+    ({ hfhsPatientDetail }) => hfhsPatientDetail,
+  );
+
 export default makeSelectAnswerSessionPage;
 export {
   selectAnswerSessionPageDomain,
@@ -92,4 +98,5 @@ export {
   makeSelectIsAnimationOngoing,
   makeSelectShowTextReadingControls,
   makeSelectVerifyPatientDataState,
+  makeSelectHfhsPatientDetail,
 };

@@ -39,6 +39,7 @@ import {
   VERIFY_PATIENT_DATA_REQUEST,
   VERIFY_PATIENT_DATA_SUCCESS,
   VERIFY_PATIENT_DATA_ERROR,
+  SET_HFHS_PATIENT_DETAIL,
 } from './constants';
 
 const getEmptyFeedbackScreenSettings = () => ({
@@ -76,6 +77,7 @@ export const initialState = {
   fetchPreviousQuestionError: null,
   verifyPatientDataLoading: false,
   verifyPatientDataError: null,
+  hfhsPatientDetail: null,
 };
 
 /* eslint-disable default-case, no-param-reassign */
@@ -280,6 +282,11 @@ const AnswerSessionPageReducer = (state = initialState, { payload, type }) =>
       case VERIFY_PATIENT_DATA_ERROR: {
         draft.verifyPatientDataLoading = false;
         draft.verifyPatientDataError = payload.error;
+        break;
+      }
+
+      case SET_HFHS_PATIENT_DETAIL: {
+        draft.hfhsPatientDetail = payload.hfhsPatientDetail;
         break;
       }
     }

@@ -41,6 +41,7 @@ import {
   VERIFY_PATIENT_DATA_REQUEST,
   VERIFY_PATIENT_DATA_SUCCESS,
   VERIFY_PATIENT_DATA_ERROR,
+  SET_HFHS_PATIENT_DETAIL,
 } from './constants';
 
 export const resetReducer = () => actionBuilder(RESET_REDUCER, {});
@@ -156,3 +157,6 @@ export const verifyPatientDataSuccess = () =>
   actionBuilder(VERIFY_PATIENT_DATA_SUCCESS, {});
 export const verifyPatientDataError = (error) =>
   actionBuilder(VERIFY_PATIENT_DATA_ERROR, { error });
+
+export const setHfhsPatientDetail = (hfhsPatientDetail) =>
+  actionBuilder(SET_HFHS_PATIENT_DETAIL, { hfhsPatientDetail });

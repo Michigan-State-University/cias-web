@@ -19,7 +19,6 @@ import { parametrizeRoutePath } from 'utils/router';
 import {
   resetPhoneNumberPreview,
   updateUsersTimezone,
-  saveHfhsPatientDetail,
 } from 'global/reducers/auth/actions';
 import { logInGuest } from 'global/reducers/auth/sagas/logInGuest';
 
@@ -61,6 +60,7 @@ import {
   verifyPatientDataError,
   verifyPatientDataSuccess,
   submitAnswer,
+  setHfhsPatientDetail,
 } from './actions';
 import {
   makeSelectAnswers,
@@ -68,6 +68,7 @@ import {
   makeSelectUserSession,
 } from './selectors';
 import messages from './messages';
+import objectToCamelCase from '../../utils/objectToCamelCase';
 
 function* submitAnswersAsync({
   payload: { questionId, required, type: questionType, userSessionId, skipped },
@@ -144,6 +145,7 @@ function* nextQuestion({ payload: { userSessionId, questionId } }) {
         // eslint-disable-next-line camelcase
         next_session_id,
         answer: answerData,
+        hfhs_patient_detail: hfhsPatientDetail,
       },
     } = yield axios.get(requestUrl);
 
@@ -152,6 +154,11 @@ function* nextQuestion({ payload: { userSessionId, questionId } }) {
         toast.warning,
         formatMessage(messages[warning] ?? messages.unknownWarning),
       );
+
+    if (hfhsPatientDetail) {
+      yield put(setHfhsPatientDetail(objectToCamelCase(hfhsPatientDetail)));
+    }
+
     if (newUserSessionId) {
       const isPreview = getIsPreview();
 
@@ -299,11 +306,19 @@ function* fetchPreviousQuestion({
 
   try {
     const {
-      data: { data: questionData, answer: answerData },
+      data: {
+        data: questionData,
+        answer: answerData,
+        hfhs_patient_detail: hfhsPatientDetail,
+      },
     } = yield axios.get(`${requestUrl}?${searchParams}`);
 
     if (!questionData) {
       throw Error(formatMessage(messages.previousScreenNotFound));
+    }
+
+    if (hfhsPatientDetail) {
+      yield put(setHfhsPatientDetail(objectToCamelCase(hfhsPatientDetail)));
     }
 
     const question = mapQuestionToStateObject(questionData);
@@ -328,7 +343,7 @@ function* verifyPatientData({ payload }) {
     const { data } = yield axios.post(requestUrl, objectToSnakeCase(payload));
 
     const hfhsPatientDetail = jsonApiToObject(data, 'hfhsPatientDetail');
-    yield put(saveHfhsPatientDetail(hfhsPatientDetail));
+    yield put(setHfhsPatientDetail(hfhsPatientDetail));
     yield put(verifyPatientDataSuccess());
 
     if (!question || !userSession) return;
