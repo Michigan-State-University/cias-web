@@ -1,5 +1,4 @@
 export {
-  fetchInterventionsRequest,
   fetchSessionsRequest,
   fetchQuestionGroupsRequest,
   changeViewAction,
