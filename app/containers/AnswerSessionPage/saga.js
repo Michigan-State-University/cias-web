@@ -15,6 +15,7 @@ import LocalStorageService from 'utils/localStorageService';
 import objectToSnakeCase from 'utils/objectToSnakeCase';
 import { getIsPreview } from 'utils/previewMode';
 import { parametrizeRoutePath } from 'utils/router';
+import objectToCamelCase from 'utils/objectToCamelCase';
 
 import {
   resetPhoneNumberPreview,
@@ -68,7 +69,6 @@ import {
   makeSelectUserSession,
 } from './selectors';
 import messages from './messages';
-import objectToCamelCase from '../../utils/objectToCamelCase';
 
 function* submitAnswersAsync({
   payload: { questionId, required, type: questionType, userSessionId, skipped },
