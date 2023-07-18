@@ -1,7 +1,5 @@
 import { CamelToSnakeOmitId } from 'global/types/camelToSnake';
 
-import { HfhsPatientDetail } from 'models/HfhsPatient';
-
 import { Roles } from './RolesManager';
 
 export interface User {
@@ -20,7 +18,6 @@ export interface User {
   teamName: Nullable<string>;
   quickExitEnabled: boolean;
   timeZone: string;
-  hfhsPatientDetail?: Nullable<HfhsPatientDetail>;
 }
 
 export interface SimpleUser {

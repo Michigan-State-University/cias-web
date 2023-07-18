@@ -49,7 +49,6 @@ import {
   TERMS_ACCEPT_SUCCESS,
   TERMS_ACCEPT_ERROR,
   CLEAR_ERRORS,
-  SAVE_HFHS_PATIENT_DETAIL,
 } from './constants';
 
 export const initialState = {
@@ -326,12 +325,6 @@ export const authReducer = (state = initialState, { type, payload }) =>
         draft.verificationCodeNeeded = false;
         draft.termsNotAccepted = false;
         draft.termsNotAcceptedExtraFields = null;
-        break;
-
-      case SAVE_HFHS_PATIENT_DETAIL:
-        if (draft.user) {
-          draft.user.hfhsPatientDetail = payload.hfhsPatientDetail;
-        }
         break;
     }
   });

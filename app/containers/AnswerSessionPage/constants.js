@@ -97,6 +97,9 @@ export const VERIFY_PATIENT_DATA_SUCCESS =
 export const VERIFY_PATIENT_DATA_ERROR =
   'app/AnswerSessionPage/VERIFY_PATIENT_DATA_ERROR';
 
+export const SET_HFHS_PATIENT_DETAIL =
+  'app/AnswerSessionPage/SET_HFHS_PATIENT_DETAIL';
+
 export const QUESTION_TITLE_ID = 'question-title';
 
 export const QUESTION_SUBTITLE_ID = 'question-subtitle';

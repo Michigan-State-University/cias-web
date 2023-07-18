@@ -48,7 +48,6 @@ import {
   TERMS_ACCEPT_SUCCESS,
   TERMS_ACCEPT_ERROR,
   CLEAR_ERRORS,
-  SAVE_HFHS_PATIENT_DETAIL,
 } from './constants';
 
 export const logIn = (user) => actionBuilder(LOG_IN_USER, { user });
@@ -161,6 +160,3 @@ export const termsAcceptError = (error) =>
   actionBuilder(TERMS_ACCEPT_ERROR, { error });
 
 export const clearErrors = () => actionBuilder(CLEAR_ERRORS, {});
-
-export const saveHfhsPatientDetail = (hfhsPatientDetail) =>
-  actionBuilder(SAVE_HFHS_PATIENT_DETAIL, { hfhsPatientDetail });

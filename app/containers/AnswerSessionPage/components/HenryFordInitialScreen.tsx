@@ -2,17 +2,18 @@ import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 
 import { HenryFordInitialScreenDTO } from 'models/Question';
-import { HfhsPatientData } from 'models/HfhsPatient';
-import { User } from 'models/User';
+import { HfhsPatientData, HfhsPatientDetail } from 'models/HfhsPatient';
 
 import { RootState } from 'global/reducers';
-import { makeSelectUser } from 'global/reducers/auth';
 
 import HenryFordInitialScreenLayout from '../layouts/HenryFordInitialScreenLayout';
 
 import { SharedProps } from '../types';
 import { verifyPatientDataRequest } from '../actions';
-import { makeSelectVerifyPatientDataState } from '../selectors';
+import {
+  makeSelectHfhsPatientDetail,
+  makeSelectVerifyPatientDataState,
+} from '../selectors';
 
 const HenryFordInitialScreen = ({
   isMobilePreview,
@@ -21,8 +22,9 @@ const HenryFordInitialScreen = ({
 }: SharedProps<HenryFordInitialScreenDTO>) => {
   const dispach = useDispatch();
 
-  const { hfhsPatientDetail } =
-    useSelector<RootState, Nullable<User>>(makeSelectUser()) ?? {};
+  const hfhsPatientDetail = useSelector<RootState, Nullable<HfhsPatientDetail>>(
+    makeSelectHfhsPatientDetail(),
+  );
   const { loading, error } = useSelector(makeSelectVerifyPatientDataState());
 
   const patientDetailProvided = Boolean(hfhsPatientDetail);
