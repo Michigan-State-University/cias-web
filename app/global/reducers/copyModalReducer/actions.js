@@ -8,19 +8,9 @@ import {
   FETCH_QUESTION_GROUPS_SUCCESS,
   FETCH_QUESTION_GROUPS_ERROR,
   CHANGE_VIEW,
-  FETCH_INTERVENTIONS_REQUEST,
-  FETCH_INTERVENTIONS_SUCCESS,
-  FETCH_INTERVENTIONS_ERROR,
   FETCH_INTERVENTIONS_WITH_PAGINATION,
   FETCH_INTERVENTIONS_WITH_PAGINATION_SUCCESS,
 } from './constants';
-
-export const fetchInterventionsRequest = (organizationId) =>
-  actionBuilder(FETCH_INTERVENTIONS_REQUEST, { organizationId });
-export const fetchInterventionsSuccess = (interventions) =>
-  actionBuilder(FETCH_INTERVENTIONS_SUCCESS, { interventions });
-export const fetchInterventionsError = (error) =>
-  actionBuilder(FETCH_INTERVENTIONS_ERROR, { error });
 
 export const fetchInterventionsWithPaginationRequest = (
   paginationData,
