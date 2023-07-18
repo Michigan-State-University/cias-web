@@ -23,7 +23,7 @@ export function* fetchInterventionsWithPagination({
     });
 
     const { interventions_size: interventionsSize } = data;
-    const interventions = jsonApiToArray(data, 'intervention');
+    const interventions = jsonApiToArray(data, 'simpleIntervention');
 
     yield put(
       fetchInterventionsWithPaginationSuccess(
