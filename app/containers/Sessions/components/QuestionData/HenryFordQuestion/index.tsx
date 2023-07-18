@@ -14,7 +14,6 @@ import {
 } from 'global/reducers/questions';
 import globalMessages from 'global/i18n/globalMessages';
 import { hfhValueValidator, numericValidator } from 'utils/validators';
-import { canEdit } from 'models/Status/statusPermissions';
 import { RootState } from 'global/reducers';
 import { HenryFordQuestionDTO } from 'models/Question';
 import { themeColors, colors } from 'theme';
@@ -42,7 +41,7 @@ const INPUT_PADDING = 15;
 
 type Props = CommonQuestionProps;
 
-const HenryFordQuestion = ({ isNarratorTab, interventionStatus }: Props) => {
+const HenryFordQuestion = ({ isNarratorTab, editingPossible }: Props) => {
   const { formatMessage } = useIntl();
 
   const selectedQuestion = useSelector<RootState, HenryFordQuestionDTO>(
@@ -79,7 +78,6 @@ const HenryFordQuestion = ({ isNarratorTab, interventionStatus }: Props) => {
 
   const { data } = selectedQuestion.body;
 
-  const editingPossible = canEdit(interventionStatus);
   const isNarratorTabOrEditNotPossible = isNarratorTab || !editingPossible;
 
   const handleMouseEnter = (index: number) => () => {
