@@ -35,7 +35,7 @@ const CodeVerification = ({ goBack, verifyCode, isLoading, error }) => {
   };
 
   return (
-    <Container width="100%" fluid>
+    <Container width="100%" fluid mt={40}>
       <Row>
         <Text
           mb={16}
