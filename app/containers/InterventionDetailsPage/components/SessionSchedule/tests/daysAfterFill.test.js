@@ -12,10 +12,12 @@ import configureStore from 'configureStore';
 import { browserHistory } from 'react-router-dom';
 import { Provider } from 'react-redux';
 
-import { DEFAULT_LOCALE } from 'i18n';
-
 import { SessionSchedule as SessionScheduleEnum } from 'models/Session';
 import { InterventionSharedTo } from 'models/Intervention';
+
+import { DEFAULT_LOCALE } from 'i18n';
+
+import { intlProviderConfig } from 'containers/LanguageProvider';
 
 import SessionSchedule from '../index';
 
@@ -35,7 +37,7 @@ describe('<SessionSchedule />', () => {
   it('Expect to not log errors in console', () => {
     const spy = jest.spyOn(global.console, 'error');
     render(
-      <IntlProvider locale={DEFAULT_LOCALE}>
+      <IntlProvider locale={DEFAULT_LOCALE} {...intlProviderConfig}>
         <Provider store={store}>
           <SessionSchedule {...daysAfterFillProps} />
         </Provider>
@@ -46,7 +48,7 @@ describe('<SessionSchedule />', () => {
 
   it('Should render and match the snapshot', () => {
     const { container } = render(
-      <IntlProvider locale={DEFAULT_LOCALE}>
+      <IntlProvider locale={DEFAULT_LOCALE} {...intlProviderConfig}>
         <Provider store={store}>
           <SessionSchedule {...daysAfterFillProps} />
         </Provider>

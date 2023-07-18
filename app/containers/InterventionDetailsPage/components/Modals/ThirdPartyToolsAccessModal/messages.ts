@@ -45,7 +45,7 @@ export default defineMessages({
   },
   testNumberLeft: {
     id: `${scope}.testsLeft`,
-    defaultMessage: `Tests left: <primaryColor>{current}/{initial}</primaryColor>`,
+    defaultMessage: `Tests left: <primaryColor>{left}/{initial}</primaryColor>`,
   },
   numberPlaceholder: {
     id: `${scope}.numberPlaceholder`,

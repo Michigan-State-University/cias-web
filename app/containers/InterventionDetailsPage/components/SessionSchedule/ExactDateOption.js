@@ -27,7 +27,7 @@ const ExactDateOption = ({
 
   return (
     <Column>
-      <Row align="center">
+      <Row align="center" gap={10}>
         <Text ml={5} fontSize={15}>
           {formatMessage(messages.send)}
           {formatMessage(messages.exactDateInfo)}
@@ -37,9 +37,8 @@ const ExactDateOption = ({
             disabled={disabled}
             width={120}
             height={50}
-            placeholder={formatMessage(messages.chooseDate)}
             type="date"
-            value={getUTCTime(new Date(value))}
+            value={getUTCTime(value ? new Date(value) : new Date())}
             onCheck={onChange}
             fontSize={15}
             minDate={new Date()}

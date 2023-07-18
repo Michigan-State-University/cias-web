@@ -3,10 +3,14 @@ import { useDispatch, useSelector } from 'react-redux';
 import { IntlShape } from 'react-intl';
 
 import LocalStorageService from 'utils/localStorageService';
-import { previewRegex } from 'global/constants/regex';
-import { resetReducer as resetAuthReducer } from 'global/reducers/auth/actions';
+import { getIsPreview } from 'utils/previewMode';
+import { parametrizeRoutePath } from 'utils/router';
+
 import { InterventionSharedTo, InterventionType } from 'models/Intervention';
 import { FinishQuestionDTO } from 'models/Question';
+
+import { resetReducer as resetAuthReducer } from 'global/reducers/auth/actions';
+import { RoutePath } from 'global/constants';
 
 import Button, { TextButton } from 'components/Button';
 import Row from 'components/Row';
@@ -55,7 +59,7 @@ const FinishScreenLayout = ({ formatMessage, question }: Props) => {
     [nextSessionId],
   );
 
-  const isPreview = previewRegex.test(window.location.pathname);
+  const isPreview = getIsPreview();
 
   const closeCurrentTab = () => {
     window.opener = null;
@@ -94,7 +98,11 @@ const FinishScreenLayout = ({ formatMessage, question }: Props) => {
   if (showModulesButtons)
     return (
       <Row mt={50} align="center" justify="end" width="100%" gap={15}>
-        <StyledLink to={`/user_interventions/${userInterventionId}`}>
+        <StyledLink
+          to={parametrizeRoutePath(RoutePath.USER_INTERVENTION, {
+            userInterventionId,
+          })}
+        >
           <TextButton onClick={clearUserSession}>
             {formatMessage(messages.goBackToModules)}
           </TextButton>
@@ -118,7 +126,7 @@ const FinishScreenLayout = ({ formatMessage, question }: Props) => {
           </Button>
         </StyledLink>
       )}
-      <StyledLink to={isPreview ? '#' : '/'}>
+      <StyledLink to={isPreview ? '#' : RoutePath.DASHBOARD}>
         <Button
           onClick={isPreview ? closeCurrentTab : undefined}
           px={20}

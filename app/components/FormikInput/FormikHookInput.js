@@ -20,6 +20,7 @@ function FormikHookInput({
   children,
   onBlur,
   onChange,
+  disabled,
   ...columnStyleProps
 }) {
   const field = formikState.getFieldProps(formikKey);
@@ -70,6 +71,7 @@ FormikHookInput.propTypes = {
   inputProps: PropTypes.object,
   children: PropTypes.node,
   transparent: PropTypes.bool,
+  disabled: PropTypes.bool,
   onBlur: PropTypes.func,
   onChange: PropTypes.func,
 };

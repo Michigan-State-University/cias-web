@@ -1,12 +1,12 @@
-import React, { ReactElement } from 'react';
+import React, { ReactNode } from 'react';
 
 import { colors } from 'theme';
 import Box from 'components/Box';
 import { FileDisplayItem } from 'components/FileDisplayItem';
 
 type Props = {
-  extraIcons?: ReactElement[];
-  name: string;
+  extraIcons?: ReactNode;
+  name?: string;
   url: string;
 } & Record<string, unknown>;
 

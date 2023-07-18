@@ -36,3 +36,8 @@ export const HttpStatusCodes = {
 export const KeyCodes = {
   ESC: 27,
 };
+
+export const ForbiddenReason = {
+  TERMS_NOT_ACCEPTED: 'TERMS_NOT_ACCEPTED',
+  TWO_FACTOR_NEEDED: '2FA_NEEDED',
+};

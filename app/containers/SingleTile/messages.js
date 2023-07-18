@@ -37,6 +37,10 @@ export default defineMessages({
     id: `${scope}.shareExternally`,
     defaultMessage: 'Share externally',
   },
+  share: {
+    id: `${scope}.share`,
+    defaultMessage: 'Share',
+  },
   archive: {
     id: `${scope}.archive`,
     defaultMessage: 'Archive',
@@ -48,10 +52,6 @@ export default defineMessages({
   assignOrganization: {
     id: `${scope}.assignOrganization`,
     defaultMessage: 'Assign Organization',
-  },
-  sendCopyModalTitle: {
-    id: `${scope}.sendCopyModalTitle`,
-    defaultMessage: 'Choose researchers to send',
   },
   isFromOrganization: {
     id: `${scope}.isFromOrganization`,
@@ -100,5 +100,14 @@ export default defineMessages({
   exportIntervention: {
     id: `${scope}.exportIntervention`,
     defaultMessage: 'Export Intervention',
+  },
+  collaborate: {
+    id: `${scope}.collaborate`,
+    defaultMessage: 'Collaborate',
+  },
+  collaborateDescription: {
+    id: `${scope}.collaborateDescription`,
+    defaultMessage:
+      'Use this feature to share your original intervention and indicate the desired access level for each collaborator.',
   },
 });

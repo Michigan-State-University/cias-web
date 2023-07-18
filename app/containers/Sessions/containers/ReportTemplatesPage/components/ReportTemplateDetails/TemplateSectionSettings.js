@@ -12,7 +12,7 @@ import {
 } from 'global/reducers/reportTemplates';
 import { SectionCaseBuilder } from 'models/ReportTemplate';
 
-import { elements, themeColors } from 'theme';
+import { themeColors } from 'theme';
 
 import DashedButton from 'components/Button/DashedButton';
 import { ModalType, useModal } from 'components/Modal';
@@ -85,10 +85,7 @@ const TemplateSectionSettings = ({
   if (!selectedTemplateSection) return <></>;
 
   return (
-    <CardBox
-      height={`calc(100vh - ${2 * elements.navbarHeight}px)`}
-      overflow="auto"
-    >
+    <CardBox minHeight="100%">
       <DeleteModal />
 
       <Container fluid>

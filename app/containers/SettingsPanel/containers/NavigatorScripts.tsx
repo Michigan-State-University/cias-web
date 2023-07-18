@@ -28,9 +28,10 @@ import messages from '../messages';
 
 type Props = {
   interventionId: string;
+  disabled: boolean;
 };
 
-export const NavigatorScripts = ({ interventionId }: Props) => {
+export const NavigatorScripts = ({ interventionId, disabled }: Props) => {
   const dispatch = useDispatch();
   const { formatMessage } = useIntl();
   const [validationError, setValidationError] = useState(false);
@@ -83,18 +84,18 @@ export const NavigatorScripts = ({ interventionId }: Props) => {
       <DownloadScriptTemplatePanel />
       <FilesPanel
         onUpload={uploadFilledScriptFile}
-        removeFile={removeFilledNavigatorScript}
-        uploadingFile={updatingFilledNavigatorScript}
+        onRemoveFile={removeFilledNavigatorScript}
+        loading={updatingFilledNavigatorScript}
         label={formatMessage(messages.filledTemplate)}
         acceptedFormats="text/csv"
         value={filledNavigatorScript}
-        multiple={false}
-        labelTooltipContent={labelTooltipContent}
+        tooltipContent={labelTooltipContent}
         error={
           validationError
             ? formatMessage(messages.failedCsvValidation)
             : undefined
         }
+        disabled={disabled}
       />
     </Column>
   );

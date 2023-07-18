@@ -1,26 +1,8 @@
-/*
- * SelectResearchersModal Messages
- *
- * This contains all the text for the SelectResearchersModal component.
- */
-
 import { defineMessages } from 'react-intl';
 
-export const scope = 'app.components.SelectResearchersModal';
+export const scope = 'app.components.SelectResearchers';
 
 export default defineMessages({
-  header: {
-    id: `${scope}.header`,
-    defaultMessage: 'This is the SelectResearchersModal component!',
-  },
-  find: {
-    id: `${scope}.find`,
-    defaultMessage: 'Find researcher',
-  },
-  send: {
-    id: `${scope}.send`,
-    defaultMessage: 'Send copies',
-  },
   name: {
     id: `${scope}.name`,
     defaultMessage: 'Name',
@@ -29,12 +11,20 @@ export default defineMessages({
     id: `${scope}.email`,
     defaultMessage: 'Email',
   },
-  checkbox: {
-    id: `${scope}.checkbox`,
-    defaultMessage: 'Selected',
-  },
   waitingForActivation: {
     id: `${scope}.waitingForActivation`,
     defaultMessage: 'Waiting for activation',
+  },
+  success: {
+    id: `${scope}.success`,
+    defaultMessage: 'Success',
+  },
+  byEmail: {
+    id: `${scope}.byEmail`,
+    defaultMessage: 'by email',
+  },
+  yourTeamMembers: {
+    id: `${scope}.yourTeamMembers`,
+    defaultMessage: 'Your team members',
   },
 });

@@ -14,9 +14,10 @@ import messages from '../messages';
 
 export type Props = {
   interventionId: string;
+  disabled: boolean;
 };
 
-const ParticipantFilesPanel = ({ interventionId }: Props) => {
+const ParticipantFilesPanel = ({ interventionId, disabled }: Props) => {
   const { formatMessage } = useIntl();
   const dispatch = useDispatch();
 
@@ -36,11 +37,12 @@ const ParticipantFilesPanel = ({ interventionId }: Props) => {
   return (
     <FilesPanel
       title={formatMessage(messages.filesForParticipant)}
-      uploadingFile={uploadingParticipantFile}
+      loading={uploadingParticipantFile}
       onUpload={addFileForParticipant}
-      removeFile={removeFileForParticipant}
+      onRemoveFile={removeFileForParticipant}
       value={participantFiles ?? []}
       multiple
+      disabled={disabled}
     />
   );
 };

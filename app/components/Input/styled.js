@@ -5,13 +5,7 @@ import Color from 'color';
 import { colors, borders, fontFamily, themeColors, paddings } from 'theme';
 
 import Input from 'components/Input';
-import {
-  margin,
-  layout,
-  border,
-  text,
-  padding,
-} from 'components/BaseComponentStyles';
+import { margin, layout } from 'components/BaseComponentStyles';
 
 import { INPUT_PADDING } from './constants';
 import { AdornmentType } from './types';
@@ -38,6 +32,8 @@ export const QuillStyled = styled(ReactQuill)`
         zIndex: 1000,
       },
     }}
+  ${({ readOnly }) => (readOnly ? 'cursor: not-allowed' : '')};
+
   .ql-editor {
     font-weight: 400;
     padding: 10px;
@@ -61,28 +57,10 @@ export const QuillStyled = styled(ReactQuill)`
       defaultFontSize ? `${defaultFontSize}px` : 'initial'};
     font-family: ${fontFamily};
   }
-`;
 
-export const StyledDateInput = styled.button`
-  background-color: ${({ bg }) => (bg ? `${bg}` : `${colors.zirkon}`)};
-  border-radius: ${borders.borderRadius};
-  border-style: ${borders.borderStyle};
-  border-width: ${borders.borderWidth};
-  border-color: ${colors.linkWater};
-
-  &:hover {
-    ${({ disabled }) => (disabled ? 'cursor: not-allowed' : 'cursor: pointer')};
+  .ql-container * {
+    ${({ readOnly }) => (readOnly ? 'cursor: not-allowed' : '')};
   }
-
-  &:focus {
-    outline: none;
-  }
-
-  ${margin};
-  ${padding};
-  ${layout};
-  ${border};
-  ${text};
 `;
 
 export const DatePickerWrapper = styled.div`

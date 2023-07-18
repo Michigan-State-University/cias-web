@@ -3,6 +3,7 @@ import { CamelToSnake } from 'global/types/camelToSnake';
 import { SessionTargetType } from 'models/Session';
 import { Formula } from 'models/Formula';
 import { Narrator } from 'models/Narrator';
+import { TimeRange } from 'models/TimeRange';
 
 import { QuestionTypes } from './QuestionTypes';
 import {
@@ -170,7 +171,9 @@ export type PhoneQuestion = GenericQuestion<
   QuestionTypes.PHONE,
   PhoneQuestionBody,
   PhoneQuestionSettings
->;
+> & {
+  timeRanges: TimeRange[];
+};
 export type PhoneQuestionDTO = CamelToSnake<PhoneQuestion>;
 
 export type DateQuestion = GenericQuestion<

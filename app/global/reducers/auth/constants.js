@@ -68,4 +68,14 @@ export const VERIFICATION_CODE_COOKIE = 'verification_code';
 export const FETCH_SELF_DETAILS_REQUEST = 'app/auth/FETCH_SELF_DETAILS_REQUEST';
 export const FETCH_SELF_DETAILS_SUCCESS = 'app/auth/FETCH_SELF_DETAILS_SUCCESS';
 
+export const UPDATE_USERS_TIMEZONE = 'app/auth/UPDATE_USERS_TIMEZONE';
+
+export const TERMS_NOT_ACCEPTED = 'app/auth/TERMS_NOT_ACCEPTED';
+
+export const TERMS_ACCEPT_REQUEST = 'app/auth/TERMS_ACCEPT_REQUEST';
+export const TERMS_ACCEPT_SUCCESS = 'app/auth/TERMS_ACCEPT_SUCCESS';
+export const TERMS_ACCEPT_ERROR = 'app/auth/TERMS_ACCEPT_ERROR';
+
+export const CLEAR_ERRORS = 'app/auth/CLEAR_ERRORS';
+
 export const SAVE_HFHS_PATIENT_DETAIL = 'app/auth/SAVE_HFHS_PATIENT_DETAIL';

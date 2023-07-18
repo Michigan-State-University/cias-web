@@ -225,12 +225,11 @@ const VariableChooser = ({
   ]);
 
   return (
-    <Box position="relative">
+    <Box position="relative" ref={variableChooser}>
       <Box onClick={toggle} disabled={disabled} clickable>
         {children}
       </Box>
       <Box
-        ref={variableChooser}
         bg={colors.white}
         borderRadius={10}
         shadow={boxShadows.black}

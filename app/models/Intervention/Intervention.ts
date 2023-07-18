@@ -3,6 +3,7 @@ import { AppFile } from 'models/File';
 import { Session } from 'models/Session';
 
 import { InterventionInvite } from './InterventionInvite';
+import { Editor } from './Editor';
 
 export enum InterventionStatus {
   DRAFT = 'draft',
@@ -34,26 +35,31 @@ type UserWithAccess = {
   loading?: boolean;
 };
 
-export interface Intervention {
+export interface SimpleIntervention {
   createdAt: string;
-  csvGeneratedAt: Nullable<string>;
-  csvLink: Nullable<string>;
-  googleLanguageId: number;
-  hasCatSessions: boolean;
+  hasCollaborators: boolean;
+  currentEditor: Nullable<Editor>;
   id: string;
+  googleLanguageId: number;
+  name: string;
+  organizationId: Nullable<string>;
+  sessionsSize: number;
+  updatedAt: string;
+  userId: string;
+  status: InterventionStatus;
+  user: { id: string; firstName: string; email: string; lastName: string };
+}
+
+export interface Intervention extends SimpleIntervention {
+  csvGeneratedAt: Nullable<string>;
+  csvFilename: Nullable<string>;
+  hasCatSessions: boolean;
   imageAlt: Nullable<string>;
   languageCode: string;
   languageName: string;
   logoUrl: Nullable<string>;
-  name: string;
-  organizationId: Nullable<string>;
   publishedAt: Nullable<string>;
-  sessionsSize: number;
   sharedTo: InterventionSharedTo;
-  status: InterventionStatus;
-  updatedAt: string;
-  user: { id: string; firstName: string; email: string; lastName: string };
-  userId: string;
   firstSessionLanguage?: string;
   catMhApplicationId: string;
   catMhOrganizationId: number;
@@ -71,7 +77,8 @@ export interface Intervention {
   quickExit: boolean;
   currentNarrator: CharacterType;
   conversationsPresent: boolean;
-  conversationsTranscript: Nullable<AppFile>;
+  conversationsTranscriptGeneratedAt: Nullable<string>;
+  conversationsTranscriptFilename: Nullable<string>;
   sessions: Session[];
   hfhsAccess: boolean;
 }

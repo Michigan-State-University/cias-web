@@ -120,6 +120,7 @@ const Pattern = ({
             color: themeColors.secondary,
           }}
           onClick={onAddTarget}
+          disabled={disabled}
         >
           {formatMessage(messages.addRandomization)}
         </TextButton>

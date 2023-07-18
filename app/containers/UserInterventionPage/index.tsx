@@ -7,6 +7,8 @@ import groupBy from 'lodash/groupBy';
 import { Markup } from 'interweave';
 import { useInjectReducer } from 'redux-injectors';
 
+import { RoutePath } from 'global/constants';
+
 import useGet from 'utils/useGet';
 
 import {
@@ -39,6 +41,7 @@ import BackButton from 'components/BackButton';
 import Img from 'components/Img';
 import { Row, Col } from 'components/ReactGridSystem';
 import { FileDisplayItem } from 'components/FileDisplayItem';
+import MarkupContainer from 'components/MarkupContainer';
 
 import messages from './messages';
 import UserSessionTile from './UserSessionTile';
@@ -142,7 +145,9 @@ const UserInterventionPage = () => {
       {additionalText && (
         <>
           <Divider width={100} my={24} />
-          <Markup content={additionalText} />
+          <MarkupContainer>
+            <Markup content={additionalText} />
+          </MarkupContainer>
         </>
       )}
       <Row mt={30}>
@@ -169,7 +174,7 @@ const UserInterventionPage = () => {
           </Row>
         </>
       )}
-      <BackButton link to="/">
+      <BackButton link to={RoutePath.DASHBOARD}>
         {formatMessage(messages.backToInterventions)}
       </BackButton>
     </AppContainer>

@@ -1,6 +1,7 @@
 import React, { memo } from 'react';
 import { useField } from 'formik';
 import isNil from 'lodash/isNil';
+import { FormikHandlers } from 'formik/dist/types';
 
 import FormikControlLayout, {
   Props as FormikControlLayoutProps,
@@ -13,16 +14,24 @@ import {
 
 export type Props = {
   formikKey: string;
+  onBlur?: FormikHandlers['handleBlur'];
 } & InputWithAdornmentProps &
   Pick<FormikControlLayoutProps, 'label' | 'labelProps' | 'required'>;
 
 const FormikInputWithAdornment = React.forwardRef<HTMLInputElement, Props>(
   // eslint-disable-next-line react/prop-types
-  ({ formikKey, label, labelProps, required, ...props }, ref) => {
+  ({ formikKey, label, labelProps, required, onBlur, ...props }, ref) => {
     const [field, meta] = useField(formikKey);
     const { error, touched } = meta;
 
     const hasError = touched && !isNil(error);
+
+    const handleBlur: React.FocusEventHandler<HTMLInputElement> = (...args) => {
+      field.onBlur(...args);
+      if (onBlur) {
+        onBlur(...args);
+      }
+    };
 
     return (
       <FormikControlLayout
@@ -38,6 +47,8 @@ const FormikInputWithAdornment = React.forwardRef<HTMLInputElement, Props>(
           {...props}
           hasError={hasError}
           ref={ref}
+          id={formikKey}
+          onBlur={handleBlur}
         />
       </FormikControlLayout>
     );

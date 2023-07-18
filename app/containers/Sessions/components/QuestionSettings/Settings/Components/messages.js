@@ -46,6 +46,23 @@ export default defineMessages({
     id: `${scope}.required`,
     defaultMessage: 'Required',
   },
+  start_autofinish_timer: {
+    id: `${scope}.start_autofinish_timer`,
+    defaultMessage: 'Fire report if get this far',
+  },
+  start_autofinish_timer_tooltip_text: {
+    id: `${scope}.start_autofinish_timer_tooltip_text`,
+    defaultMessage:
+      "Selecting this option means that if the participant gets at least as far as this screen and answers it, CIAS will send any summary reports or text messages after the patient finishes the session, even if they don't get to the very last screen. CIAS will also consider the session to be completed after the participant closes this session, as long as they got at least this far. This means that the participant won't be able to come back later to finish any screens that come after this one.<br><br>This option is available if autofinish is enabled in session General Settings only.",
+  },
+  min_length: {
+    id: `${scope}.min_length`,
+    defaultMessage: 'Minimal length',
+  },
+  max_length: {
+    id: `${scope}.max_length`,
+    defaultMessage: 'Maximum length',
+  },
   [NarratorSettingsKey.ANIMATION]: {
     id: `${scope}.${NarratorSettingsKey.ANIMATION}`,
     defaultMessage: 'Display Narrator',

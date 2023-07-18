@@ -13,7 +13,7 @@ exports[`<NameQuestion /> Should render and match the snapshot 1`] = `
   margin-top: 10px;
 }
 
-.c4 {
+.c8 {
   display: -webkit-box;
   display: -webkit-flex;
   display: -ms-flexbox;
@@ -24,7 +24,26 @@ exports[`<NameQuestion /> Should render and match the snapshot 1`] = `
   width: 100%;
 }
 
-.c3 {
+.c1 {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-flex-direction: row;
+  -ms-flex-direction: row;
+  flex-direction: row;
+  height: auto;
+  -webkit-align-content: center;
+  -ms-flex-line-pack: center;
+  align-content: center;
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  gap: 8px;
+}
+
+.c7 {
   display: -webkit-box;
   display: -webkit-flex;
   display: -ms-flexbox;
@@ -36,7 +55,7 @@ exports[`<NameQuestion /> Should render and match the snapshot 1`] = `
   width: 100%;
 }
 
-.c8 {
+.c12 {
   display: -webkit-box;
   display: -webkit-flex;
   display: -ms-flexbox;
@@ -59,7 +78,7 @@ exports[`<NameQuestion /> Should render and match the snapshot 1`] = `
   opacity: 0.5;
 }
 
-.c5 {
+.c9 {
   padding: 12px;
   border-style: solid;
   border-width: 1px;
@@ -75,17 +94,17 @@ exports[`<NameQuestion /> Should render and match the snapshot 1`] = `
   opacity: 0.5;
 }
 
-.c5:focus {
+.c9:focus {
   box-shadow: none;
   outline: none;
   border-color: #107969;
 }
 
-.c5:disabled {
+.c9:disabled {
   color: #ABBBD1;
 }
 
-.c7 {
+.c11 {
   padding: 12px;
   border-style: solid;
   border-width: 1px;
@@ -100,24 +119,24 @@ exports[`<NameQuestion /> Should render and match the snapshot 1`] = `
   opacity: 0.5;
 }
 
-.c7:focus {
+.c11:focus {
   box-shadow: none;
   outline: none;
   border-color: #107969;
 }
 
-.c7:disabled {
+.c11:disabled {
   color: #ABBBD1;
 }
 
-.c1 {
+.c2 {
   font-family: DM Sans;
   font-size: 13px;
   line-height: 130%;
   color: #2F3850;
 }
 
-.c10 {
+.c14 {
   font-family: DM Sans;
   font-size: 13px;
   line-height: 130%;
@@ -127,7 +146,27 @@ exports[`<NameQuestion /> Should render and match the snapshot 1`] = `
   color: rgba(183,39,234,1);
 }
 
-.c2 {
+.c3 {
+  width: auto;
+  height: auto;
+  display: block;
+  border-radius: 5px;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  color: unset;
+}
+
+.c4 {
+  width: auto;
+  height: auto;
+  display: block;
+  border-radius: 5px;
+  color: unset;
+}
+
+.c6 {
   width: auto;
   height: auto;
   display: block;
@@ -147,7 +186,7 @@ exports[`<NameQuestion /> Should render and match the snapshot 1`] = `
   color: unset;
 }
 
-.c6 {
+.c10 {
   width: auto;
   height: auto;
   display: block;
@@ -174,7 +213,12 @@ exports[`<NameQuestion /> Should render and match the snapshot 1`] = `
   color: unset;
 }
 
-.c9 {
+.c5 {
+  width: auto;
+  height: auto;
+}
+
+.c13 {
   outline: none;
   border: none;
   background: transparent;
@@ -233,25 +277,45 @@ exports[`<NameQuestion /> Should render and match the snapshot 1`] = `
       <div
         style="box-sizing: border-box; min-height: 1px; position: relative; padding-left: 15px; padding-right: 15px; width: 50%; flex-basis: 50%; flex-grow: 0; flex-shrink: 0; max-width: 50%; margin-left: 0%;"
       >
-        <p
-          class="c1"
-          id="name-question-name"
-        >
-          Enter your name
-        </p>
         <div
-          class="c2"
+          class="c1"
         >
+          <p
+            class="c2"
+            id="name-question-name"
+          >
+            Enter your name
+          </p>
           <div
             class="c3"
-            width="100%"
+            display="flex"
           >
             <div
               class="c4"
+              data-for="name-quesiton-help"
+              data-tip=""
+            >
+              <img
+                alt="?"
+                class="c5"
+                src="IMAGE_MOCK"
+              />
+            </div>
+          </div>
+        </div>
+        <div
+          class="c6"
+        >
+          <div
+            class="c7"
+            width="100%"
+          >
+            <div
+              class="c8"
             >
               <input
                 aria-labelledby="name-question-name"
-                class="c5"
+                class="c9"
                 disabled=""
                 height="100%"
                 placeholder="Enter your name"
@@ -267,21 +331,21 @@ exports[`<NameQuestion /> Should render and match the snapshot 1`] = `
         style="box-sizing: border-box; min-height: 1px; position: relative; padding-left: 15px; padding-right: 15px; width: 50%; flex-basis: 50%; flex-grow: 0; flex-shrink: 0; max-width: 50%; margin-left: 0%;"
       >
         <p
-          class="c1"
+          class="c2"
           id="name-question-spell-name"
         >
           Spell your name how it sounds
         </p>
         <div
-          class="c4"
+          class="c8"
         >
           <div
-            class="c6"
+            class="c10"
             width="100%"
           >
             <input
               aria-label="Spell your name how it sounds"
-              class="c7"
+              class="c11"
               disabled=""
               height="100%"
               placeholder="Spell your name how it sounds"
@@ -291,7 +355,7 @@ exports[`<NameQuestion /> Should render and match the snapshot 1`] = `
             />
           </div>
           <div
-            class="c8"
+            class="c12"
             disabled=""
             height="25"
             role="button"
@@ -299,7 +363,7 @@ exports[`<NameQuestion /> Should render and match the snapshot 1`] = `
           >
             <button
               aria-label="Play audio"
-              class="c9 "
+              class="c13 "
               disabled=""
               font-weight="bold"
               title="Play audio"
@@ -310,7 +374,7 @@ exports[`<NameQuestion /> Should render and match the snapshot 1`] = `
               />
             </button>
             <p
-              class="c10"
+              class="c14"
               color="#B727EA"
             >
               Try it out!

@@ -77,12 +77,13 @@ const PhoneNumberForm = React.forwardRef(
         submitPayload,
       );
 
-      if (hasPhoneNumberChanged)
+      if (changePhoneNumber && hasPhoneNumberChanged) {
         changePhoneNumber({
           phoneAttributes: {
             ...submitPayload,
           },
         });
+      }
       setSubmitting(false);
     };
 

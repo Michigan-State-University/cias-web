@@ -73,7 +73,7 @@ describe('<UserDetails />', () => {
       },
       match: {
         params: {
-          id: '1',
+          userId: '1',
         },
       },
       fetchUser: jest.fn(),

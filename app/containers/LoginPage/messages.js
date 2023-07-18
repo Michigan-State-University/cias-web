@@ -5,6 +5,11 @@
  */
 
 import { defineMessages } from 'react-intl';
+import {
+  TERMS_NOT_ACCEPTED_VIEW,
+  CODE_VERIFICATION_VIEW,
+  LOGIN_FORM_VIEW,
+} from './constants';
 
 export const scope = 'app.containers.LoginPage';
 
@@ -13,9 +18,21 @@ export default defineMessages({
     id: `${scope}.pageTitle`,
     defaultMessage: 'Login',
   },
-  header: {
-    id: `${scope}.header`,
+  [LOGIN_FORM_VIEW]: {
+    id: `${scope}.${LOGIN_FORM_VIEW}`,
     defaultMessage: 'Log into CIAS',
+  },
+  [CODE_VERIFICATION_VIEW]: {
+    id: `${scope}.${CODE_VERIFICATION_VIEW}`,
+    defaultMessage: 'Log into CIAS',
+  },
+  [TERMS_NOT_ACCEPTED_VIEW]: {
+    id: `${scope}.${TERMS_NOT_ACCEPTED_VIEW}`,
+    defaultMessage: 'Provide missing details',
+  },
+  subHeader: {
+    id: `${scope}.subHeader`,
+    defaultMessage: `Fields with an asterisk<warningColor>*</warningColor> are required`,
   },
   loginButton: {
     id: `${scope}.loginButton`,
@@ -96,5 +113,33 @@ export default defineMessages({
   codeVerificationButton: {
     id: `${scope}.codeVerificationButton`,
     defaultMessage: 'Verify',
+  },
+  continue: {
+    id: `${scope}.continue`,
+    defaultMessage: 'Continue',
+  },
+  lastNameRequired: {
+    id: `${scope}.lastNameRequired`,
+    defaultMessage: 'Last name required',
+  },
+  firstNameRequired: {
+    id: `${scope}.firstNameRequired`,
+    defaultMessage: 'First name required',
+  },
+  termsRequired: {
+    id: `${scope}.termsRequired`,
+    defaultMessage: 'You need to accept terms and conditions',
+  },
+  lastNameLabel: {
+    id: `${scope}.lastName`,
+    defaultMessage: 'Last name',
+  },
+  firstNameLabel: {
+    id: `${scope}.firstNameLabel`,
+    defaultMessage: 'First name',
+  },
+  goBackToLoginPage: {
+    id: `${scope}.goBackToLoginPage`,
+    defaultMessage: 'Go back to login page',
   },
 });

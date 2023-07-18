@@ -33,3 +33,9 @@ export const floatCharValidator = (target: string) =>
 
 export const naturalNumberValidator = (target: string) =>
   naturalNumberRegex.test(target) || target === '';
+
+export const naturalNumberValidationSchema = Yup.string().matches(
+  naturalNumberRegex,
+  /* @ts-ignore */
+  formatMessage(globalMessages.validators.naturalNumber),
+);

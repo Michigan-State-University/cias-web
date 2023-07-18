@@ -1,19 +1,7 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`<NumberQuestion /> Should render and match the snapshot 1`] = `
-.c0 {
-  display: -webkit-box;
-  display: -webkit-flex;
-  display: -ms-flexbox;
-  display: flex;
-  -webkit-flex-direction: column;
-  -ms-flex-direction: column;
-  flex-direction: column;
-  width: 100%;
-  margin-top: 10px;
-}
-
-.c4 {
+.c1 {
   display: -webkit-box;
   display: -webkit-flex;
   display: -ms-flexbox;
@@ -24,7 +12,7 @@ exports[`<NumberQuestion /> Should render and match the snapshot 1`] = `
   width: 100%;
 }
 
-.c2 {
+.c3 {
   display: -webkit-box;
   display: -webkit-flex;
   display: -ms-flexbox;
@@ -35,7 +23,7 @@ exports[`<NumberQuestion /> Should render and match the snapshot 1`] = `
   height: auto;
 }
 
-.c3 {
+.c4 {
   display: -webkit-box;
   display: -webkit-flex;
   display: -ms-flexbox;
@@ -55,8 +43,8 @@ exports[`<NumberQuestion /> Should render and match the snapshot 1`] = `
   border-radius: 5px;
   background-color: transparent;
   border-color: transparent;
-  margin-right: 9px;
-  height: 60px;
+  margin-right: 0;
+  height: 50px;
   color: #2F3850;
   opacity: 0.5;
 }
@@ -71,34 +59,45 @@ exports[`<NumberQuestion /> Should render and match the snapshot 1`] = `
   color: #ABBBD1;
 }
 
-.c1 {
+.c0 {
+  width: auto;
+  height: auto;
+  display: block;
+  border-radius: 5px;
+  padding: 16px;
+  color: unset;
+}
+
+.c2 {
   width: auto;
   height: auto;
   display: block;
   border-radius: 5px;
   width: 100%;
+  max-width: 150px;
   padding-top: 14px;
   padding-bottom: 14px;
   padding-right: 21px;
   padding-left: 21px;
-  border: 1px solid #ABBBD1;
+  background-color: rgba(233,241,251,1);
   color: unset;
 }
 
-@media only screen and (min-width:768px) {
-
+.c6 {
+  font-family: DM Sans;
+  font-size: 13px;
+  line-height: 130%;
+  margin-top: 5px;
+  color: #2F3850;
 }
 
-@media only screen and (min-width:960px) {
-
-}
-
-@media only screen and (min-width:1170px) {
-
-}
-
-@media only screen and (min-width:1360px) {
-
+.c7 {
+  margin: 0;
+  font-family: DM Sans;
+  font-size: 13px;
+  line-height: 130%;
+  color: #6B707C;
+  margin-top: 5px;
 }
 
 @media only screen and (min-width:768px) {
@@ -122,30 +121,39 @@ exports[`<NumberQuestion /> Should render and match the snapshot 1`] = `
 >
   <div
     class="c1"
-    width="100%"
   >
     <div
       class="c2"
+      width="100%"
     >
       <div
         class="c3"
-        width="100%"
       >
         <div
           class="c4"
+          width="100%"
         >
-          <input
-            aria-labelledby="question-title question-subtitle"
-            class="c5"
-            disabled=""
-            height="60"
-            placeholder="Respondent answer goes here..."
-            type="tel"
-            value=""
-          />
+          <div
+            class="c1"
+          >
+            <input
+              aria-labelledby="question-title question-subtitle"
+              class="c5"
+              disabled=""
+              height="50"
+              placeholder="ex: 1, 2, 100"
+              type="tel"
+              value=""
+            />
+          </div>
         </div>
       </div>
     </div>
+    <p
+      class="c6 c7"
+    >
+      Number between  and  digits
+    </p>
   </div>
 </div>
 `;

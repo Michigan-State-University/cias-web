@@ -6,6 +6,7 @@ import {
   layout,
   style,
   positioning,
+  flex,
 } from '../BaseComponentStyles';
 
 const Text = styled.p.attrs((props) => ({
@@ -21,6 +22,7 @@ const Text = styled.p.attrs((props) => ({
   ${positioning};
   ${({ disabled }) =>
     disabled && { color: colors.grey, cursor: 'not-allowed' }};
+  ${flex};
 `;
 
 export default Text;

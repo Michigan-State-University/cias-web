@@ -2,6 +2,11 @@ import { Intervention } from 'models/Intervention';
 
 import { ModalUIData } from './types';
 
+export const getTestsLeft = (
+  catMhPool: Nullable<number>,
+  createdCatMhSessionCount: Nullable<number>,
+) => Math.max(0, (catMhPool ?? 0) - (createdCatMhSessionCount ?? 0));
+
 export const mapInterventionToModalData = (
   intervention: Intervention,
 ): ModalUIData => {
@@ -17,7 +22,7 @@ export const mapInterventionToModalData = (
 
   return {
     testNumber: catMhPool ?? 0,
-    currentTestNumber: catMhPool - createdCatMhSessionCount ?? 0,
+    testsLeft: getTestsLeft(catMhPool, createdCatMhSessionCount),
     licenseType,
     applicationId: catMhApplicationId ?? '',
     organizationId: catMhOrganizationId ?? undefined,

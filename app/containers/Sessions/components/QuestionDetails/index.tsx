@@ -2,10 +2,10 @@ import React, { useRef } from 'react';
 import { FormattedMessage, useIntl } from 'react-intl';
 import { useSelector } from 'react-redux';
 import { useInjectSaga } from 'redux-injectors';
+import { defaults } from 'lodash';
 
 import { colors, elements } from 'theme';
 
-import { canEdit } from 'models/Status/statusPermissions';
 import { GroupType, QuestionGroup } from 'models/QuestionGroup';
 import { QuestionDTO, QuestionTypes } from 'models/Question';
 import { Intervention } from 'models/Intervention';
@@ -16,7 +16,10 @@ import {
   editQuestionSaga,
   makeSelectSelectedQuestion,
 } from 'global/reducers/questions';
-import { makeSelectIntervention } from 'global/reducers/intervention';
+import {
+  makeSelectEditingPossible,
+  makeSelectIntervention,
+} from 'global/reducers/intervention';
 import globalMessages from 'global/i18n/globalMessages';
 
 import CommonLayout from 'containers/AnswerSessionPage/layouts/CommonLayout';
@@ -71,6 +74,7 @@ const RenderQuestionDetails = ({
   const intervention: Nullable<Intervention> = useSelector(
     makeSelectIntervention(),
   );
+  const editingPossible = useSelector(makeSelectEditingPossible());
 
   const isNarratorTab: boolean = useSelector(makeSelectIsNarratorTab());
 
@@ -81,16 +85,25 @@ const RenderQuestionDetails = ({
 
   const { logoUrl, imageAlt, status } = intervention;
 
-  const editingPossible = canEdit(status);
   const isNarratorTabOrEditNotPossible = isNarratorTab || !editingPossible;
 
   const {
     id,
     body,
     type,
-    settings: { video, image, title, subtitle },
-    narrator: { settings, blocks },
+    settings: questionSettings,
+    narrator: { settings: narratorSettings, blocks },
   } = selectedQuestion;
+
+  const { video, image, title, subtitle } = defaults(
+    { ...questionSettings },
+    {
+      video: false,
+      image: false,
+      title: false,
+      subtitle: false,
+    },
+  );
 
   const isNameScreen = type === QuestionTypes.NAME;
   const isFinishScreen = type === QuestionTypes.FINISH;
@@ -99,13 +112,13 @@ const RenderQuestionDetails = ({
     !!blocks?.length && !HIDE_NARRATOR_QUESTIONS.includes(type);
 
   const proceedButton =
-    'proceed_button' in selectedQuestion.settings
-      ? selectedQuestion.settings.proceed_button
+    'proceed_button' in questionSettings
+      ? questionSettings.proceed_button
       : true;
   const showProceedButton = proceedButton && !isTlfbGroup && !isFinishScreen;
 
   const { character, extra_space_for_narrator: extraSpaceForNarrator } =
-    settings;
+    narratorSettings;
   const narratorExtraSpace = CHARACTER_CONFIGS[character].size.height;
 
   return (
@@ -157,7 +170,7 @@ const RenderQuestionDetails = ({
             <QuestionNarrator
               questionId={id}
               animationBoundaries={animationBoundaries}
-              settings={{ ...settings, title, subtitle }}
+              settings={{ ...narratorSettings, title, subtitle }}
             />
           )}
           <Row

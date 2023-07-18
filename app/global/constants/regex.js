@@ -34,6 +34,7 @@ export const zipCodeRegex = /^\d{5}(-\d{4})?$/;
 
 export const previewRegex =
   /(.*)\/interventions($|\/.*)\/sessions($|\/.*)\/preview($|\/.*)/;
+
 export const guestLogInRegex = /(.*)preview_session_users($|\/.*)/;
 
 export const unreservedURLCharactersRegex = /^[A-Za-z0-9-_.~]*$/;

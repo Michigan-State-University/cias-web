@@ -26,6 +26,7 @@ describe('<NumberQuestion />', () => {
       body: {
         variable: 'test',
       },
+      settings: {},
     },
     answerBody: [],
     ...mockedFunctions,

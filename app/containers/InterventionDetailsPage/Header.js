@@ -5,7 +5,12 @@ import { FormattedMessage, IntlShape, injectIntl } from 'react-intl';
 
 import { themeColors } from 'theme';
 import { InterventionType } from 'models/Intervention';
+import { useRoleManager } from 'models/User/RolesManager';
+
 import globalMessages from 'global/i18n/globalMessages';
+import { RoutePath } from 'global/constants';
+
+import { parametrizeRoutePath } from 'utils/router';
 
 import MailIcon from 'assets/svg/pink-mail.svg';
 
@@ -25,34 +30,43 @@ import messages from './messages';
 const Header = ({
   intl: { formatMessage },
   status,
+  canCurrentUserMakeChanges,
   editingPossible,
   name,
   editName,
   handleChangeStatus,
   handleSendCsv,
-  csvLink,
   csvGeneratedAt,
+  csvFilename,
+  interventionId,
   options,
   organizationId,
   canAccessCsv,
   openInterventionInviteModal,
   interventionType,
   sharingPossible,
+  userOrganizableId,
 }) => {
   const screenClass = useScreenClass();
+  const { isAdmin } = useRoleManager();
 
   const isModuleIntervention = interventionType !== InterventionType.DEFAULT;
 
   const renderBackButton = useMemo(() => {
-    if (organizationId) {
+    if (organizationId && (isAdmin || organizationId === userOrganizableId)) {
       return (
-        <BackButton link to={`/organization/${organizationId}/dashboard-setup`}>
+        <BackButton
+          link
+          to={parametrizeRoutePath(RoutePath.DASHBOARD_SETUP, {
+            organizationId,
+          })}
+        >
           <FormattedMessage {...messages.backToOrganization} />
         </BackButton>
       );
     }
     return (
-      <BackButton link to="/">
+      <BackButton link to={RoutePath.DASHBOARD}>
         <FormattedMessage {...messages.back} />
       </BackButton>
     );
@@ -62,7 +76,7 @@ const Header = ({
     <GCol>
       <GRow xl={12}>
         <GCol>
-          <Row justify="between" mt={64}>
+          <Row justify="between" mt={24}>
             {renderBackButton}
           </Row>
         </GCol>
@@ -127,9 +141,11 @@ const Header = ({
                 status={status}
                 handleChangeStatus={handleChangeStatus}
                 handleSendCsv={handleSendCsv}
-                csvLink={csvLink}
                 csvGeneratedAt={csvGeneratedAt}
+                csvFilename={csvFilename}
+                interventionId={interventionId}
                 canAccessCsv={canAccessCsv}
+                canCurrentUserMakeChanges={canCurrentUserMakeChanges}
               />
             </Row>
             <InterventionOptions>
@@ -145,19 +161,22 @@ const Header = ({
 Header.propTypes = {
   intl: PropTypes.shape(IntlShape),
   status: PropTypes.string,
+  canCurrentUserMakeChanges: PropTypes.bool,
   editingPossible: PropTypes.bool,
   name: PropTypes.string,
   editName: PropTypes.func,
   handleChangeStatus: PropTypes.func,
   handleSendCsv: PropTypes.func,
-  csvLink: PropTypes.string,
   csvGeneratedAt: PropTypes.string,
+  csvFilename: PropTypes.string,
+  interventionId: PropTypes.string,
   organizationId: PropTypes.string,
   options: PropTypes.array,
   canAccessCsv: PropTypes.bool,
   openInterventionInviteModal: PropTypes.func,
   interventionType: PropTypes.string,
   sharingPossible: PropTypes.bool,
+  userOrganizableId: PropTypes.string,
 };
 
 export default injectIntl(Header);

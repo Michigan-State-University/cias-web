@@ -7,6 +7,7 @@ import { formatMessage } from 'utils/intlOutsideReact';
 import { jsonApiToArray } from 'utils/jsonApiMapper';
 import {
   fetchSessionEmailsSuccess,
+  fetchUsersWithAccessRequest,
   sendSessionInviteError,
   sendSessionInviteSuccess,
 } from '../actions';
@@ -19,7 +20,11 @@ import messages from '../messages';
 import { makeSelectIntervention } from '../selectors';
 
 export function* sendSessionInvite({ payload: { emails, sessionId } }) {
-  const { sessions, organizationId } = yield select(makeSelectIntervention());
+  const {
+    sessions,
+    organizationId,
+    id: interventionId,
+  } = yield select(makeSelectIntervention());
   const sessionIndex = sessions.findIndex(
     (session) => session.id === sessionId,
   );
@@ -42,6 +47,7 @@ export function* sendSessionInvite({ payload: { emails, sessionId } }) {
     }
     yield put(sendSessionInviteSuccess());
     yield put(fetchSessionEmailsSuccess(invitations, sessionIndex));
+    yield put(fetchUsersWithAccessRequest(interventionId));
     yield call(toast.info, formatMessage(messages.sendInviteSuccess), {
       toastId: SEND_SESSION_INVITE_SUCCESS,
     });

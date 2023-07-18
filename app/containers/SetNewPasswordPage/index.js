@@ -16,6 +16,8 @@ import { compose } from 'redux';
 import { connect } from 'react-redux';
 import { createStructuredSelector } from 'reselect';
 
+import { RoutePath } from 'global/constants';
+
 import { Fill } from 'components/Fill';
 import Column from 'components/Column';
 import H1 from 'components/H1';
@@ -72,7 +74,7 @@ const SetNewPasswordPage = ({
   const queryObj = queryString.parse(location.search);
 
   if (shouldRedirectToLogin(queryObj)) {
-    return <Redirect to="/login" />;
+    return <Redirect to={RoutePath.LOGIN} />;
   }
 
   const onSubmit = ({ password, passwordConfirmation }, { setSubmitting }) => {

@@ -3,17 +3,30 @@ import PropTypes from 'prop-types';
 import { useIntl } from 'react-intl';
 
 import { borders, colors } from 'theme';
+
 import { numericValidator } from 'utils/validators';
 
 import { FullWidthSwitch } from 'components/Switch';
 import H3 from 'components/H3';
 import Row from 'components/Row';
+import { HelpIconTooltip } from 'components/HelpIconTooltip';
 
 import { Input } from '../styled';
 import messages from '../messages';
+import { getSettingOptionTooltipText } from './utils';
 
-const SettingsOption = ({ setting, index, onUpdate, disabled, isLast }) => {
+const SettingsOption = ({
+  setting,
+  index,
+  onUpdate,
+  disabled,
+  isLast,
+  session,
+}) => {
   const { formatMessage } = useIntl();
+
+  const isNullableNumericSettings =
+    index === 'min_length' || index === 'max_length';
 
   const handleUpdate = useCallback(
     (value) => onUpdate(`${index}`, value),
@@ -21,38 +34,62 @@ const SettingsOption = ({ setting, index, onUpdate, disabled, isLast }) => {
   );
 
   const handleStringToNumericUpdate = useCallback(
-    (value) => handleUpdate(+value),
+    (value) => {
+      if (isNullableNumericSettings && value === '') handleUpdate(null);
+      else handleUpdate(+value);
+    },
     [handleUpdate],
   );
 
+  const tooltipText = getSettingOptionTooltipText(formatMessage, index);
+
+  const optionDisabled = () => {
+    switch (index) {
+      case 'start_autofinish_timer':
+        return !session?.autofinishEnabled;
+      default:
+        return false;
+    }
+  };
+
+  const numericInput = (
+    <>
+      <H3>{formatMessage(messages[`${index}`])}</H3>
+
+      <Input
+        placeholder={formatMessage(messages.textLimitSettingsPlaceholder)}
+        type="singleline"
+        keyboard="tel"
+        value={setting === null ? '' : `${setting}`}
+        validator={numericValidator}
+        onBlur={handleStringToNumericUpdate}
+        width={150}
+        px={12}
+        disabled={disabled}
+      />
+    </>
+  );
+
   const renderSetting = () => {
+    if (isNullableNumericSettings) return numericInput;
     switch (setting?.constructor) {
       case Number:
-        return (
-          <>
-            <H3>{formatMessage(messages[`${index}`])}</H3>
-
-            <Input
-              placeholder={formatMessage(messages.textLimitSettingsPlaceholder)}
-              type="singleline"
-              keyboard="tel"
-              value={`${setting}`}
-              validator={numericValidator}
-              onBlur={handleStringToNumericUpdate}
-              width={150}
-            />
-          </>
-        );
+        return numericInput;
       case Boolean:
       default:
         return (
           <FullWidthSwitch
             id={index}
-            disabled={disabled}
+            disabled={disabled || optionDisabled()}
             checked={setting}
             onToggle={handleUpdate}
           >
-            <H3>{formatMessage(messages[`${index}`])}</H3>
+            <HelpIconTooltip
+              id={`question-settings-option-tooltip-${index}`}
+              tooltipContent={tooltipText}
+            >
+              <H3>{formatMessage(messages[`${index}`])}</H3>
+            </HelpIconTooltip>
           </FullWidthSwitch>
         );
     }
@@ -81,6 +118,7 @@ SettingsOption.propTypes = {
   index: PropTypes.string,
   disabled: PropTypes.bool,
   isLast: PropTypes.bool,
+  session: PropTypes.object,
 };
 
 export default memo(SettingsOption);

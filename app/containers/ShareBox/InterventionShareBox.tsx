@@ -3,6 +3,10 @@ import { useDispatch, useSelector } from 'react-redux';
 
 import { ApiError } from 'models/Api';
 
+import { RoutePath } from 'global/constants';
+
+import { parametrizeRoutePath } from 'utils/router';
+
 import {
   sendInterventionInviteRequest,
   resendInterventionInviteRequest,
@@ -72,7 +76,12 @@ const Component = ({ organizationId }: Props) => {
     emails: invites,
     exportFilename: name,
     interventionStatus: status,
-    inviteUrl: `${process.env.WEB_URL}/interventions/${id}/invite`,
+    inviteUrl: `${process.env.WEB_URL}${parametrizeRoutePath(
+      RoutePath.INTERVENTION_INVITE,
+      {
+        interventionId: id!,
+      },
+    )}`,
     resendInvite,
     sendInvite,
     emailLoading,
