@@ -177,27 +177,9 @@ export default defineMessages({
     id: `${scope}.phoneTypePlaceholder`,
     defaultMessage: 'Choose phone type',
   },
-  baseDataVerificationErrorMessage: {
-    id: `${scope}.baseDataVerificationErrorMessage`,
+  verifyErrorMessage: {
+    id: `${scope}.verifyErrorMessage`,
     defaultMessage:
-      'Oops, we couldn’t find your data in the Henry Ford database. Check if you provided the correct data or enter your medical number below.',
-  },
-  mrnVerificationErrorMessage: {
-    id: `${scope}.mrnVerificationErrorMessage`,
-    defaultMessage:
-      'We still couldn’t find your data in the Henry Ford database. Check if you provided the correct medical number or contact the administrator.',
-  },
-  medicalNumber: {
-    id: `${scope}.medicalNumber`,
-    defaultMessage: 'Medical number',
-  },
-  medicalNumberPlaceholder: {
-    id: `${scope}.medicalNumberPlaceholder`,
-    defaultMessage: 'Your medical number',
-  },
-  medicalNumberResearcherInfo: {
-    id: `${scope}.medicalNumberResearcherInfo`,
-    defaultMessage:
-      'Participant will be asked to provide their medical record number <bold>if the above data is incorrect.</bold>',
+      'Unknown error occurred. Try again or contact the administrator',
   },
 });
