@@ -4,6 +4,7 @@ import isEqual from 'lodash/isEqual';
 import { useDispatch, useSelector } from 'react-redux';
 
 import Tabs from 'components/Tabs';
+
 import {
   CatMhLicenseType,
   Intervention,
@@ -86,7 +87,13 @@ const Component = ({ modalState: intervention, closeModal }: Props) => {
   const onHfHsAccessChange = (hfhsAccess: boolean): void =>
     setModalData({ ...modalData, hfhsAccess });
 
-  const canSave = !isEqual(initialData, modalData);
+  const onLocationIdsChange = (locationIds: string[]): void => {
+    setModalData({ ...modalData, locationIds });
+  };
+
+  const canSave =
+    !isEqual(initialData, modalData) &&
+    (!modalData.hfhsAccess || Boolean(modalData.locationIds.length));
 
   return (
     // @ts-ignore
@@ -117,6 +124,7 @@ const Component = ({ modalState: intervention, closeModal }: Props) => {
         <HfHsAccessModalUI
           modalData={modalData}
           onAccessChange={onHfHsAccessChange}
+          onLocationIdsChange={onLocationIdsChange}
           onSave={onSave}
           canSave={canSave}
           isSaving={isEditing}

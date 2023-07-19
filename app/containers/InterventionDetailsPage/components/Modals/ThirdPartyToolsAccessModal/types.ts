@@ -8,4 +8,5 @@ export type ModalUIData = {
   testNumber: number;
   testsLeft: number;
   hfhsAccess: boolean;
+  locationIds: string[];
 };

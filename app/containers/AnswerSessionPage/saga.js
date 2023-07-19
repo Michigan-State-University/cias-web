@@ -338,17 +338,20 @@ function* verifyPatientData({ payload }) {
 
   const question = yield select(makeSelectCurrentQuestion());
   const userSession = yield select(makeSelectUserSession());
+  if (!question || !userSession) return;
+
+  const { id: userSessionId, sessionId } = userSession;
+  const { id: questionId, type, settings } = question;
 
   try {
-    const { data } = yield axios.post(requestUrl, objectToSnakeCase(payload));
+    const { data } = yield axios.post(requestUrl, {
+      ...objectToSnakeCase(payload),
+      session_id: sessionId,
+    });
 
     const hfhsPatientDetail = jsonApiToObject(data, 'hfhsPatientDetail');
     yield put(setHfhsPatientDetail(hfhsPatientDetail));
     yield put(verifyPatientDataSuccess());
-
-    if (!question || !userSession) return;
-    const { id: questionId, type, settings } = question;
-    const { id: userSessionId, sessionId } = userSession;
 
     yield put(
       submitAnswer(

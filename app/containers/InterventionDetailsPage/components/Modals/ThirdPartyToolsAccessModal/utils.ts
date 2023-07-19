@@ -1,4 +1,9 @@
-import { Intervention } from 'models/Intervention';
+import { Intervention, ClinicLocation } from 'models/Intervention';
+import { ApiDataCollection } from 'models/Api';
+
+import { jsonApiToArray } from 'utils/jsonApiMapper';
+
+import { SelectOption } from 'components/Select/types';
 
 import { ModalUIData } from './types';
 
@@ -18,6 +23,7 @@ export const mapInterventionToModalData = (
     isAccessRevoked,
     createdCatMhSessionCount,
     hfhsAccess,
+    clinicLocations,
   } = intervention;
 
   return {
@@ -28,12 +34,13 @@ export const mapInterventionToModalData = (
     organizationId: catMhOrganizationId ?? undefined,
     isAccessRevoked,
     hfhsAccess,
+    locationIds: clinicLocations.map(({ id }) => id),
   };
 };
 
 export const mapModalDataToIntervention = (
   modalData: ModalUIData,
-): Partial<Intervention> => {
+): Partial<Intervention> & { locationIds: string[] } => {
   const {
     testNumber,
     licenseType,
@@ -41,6 +48,7 @@ export const mapModalDataToIntervention = (
     organizationId,
     isAccessRevoked,
     hfhsAccess,
+    locationIds,
   } = modalData;
 
   return {
@@ -50,5 +58,18 @@ export const mapModalDataToIntervention = (
     catMhOrganizationId: organizationId,
     isAccessRevoked,
     hfhsAccess,
+    locationIds,
   };
 };
+
+export const clinicLocationsDataParser = (
+  data: ApiDataCollection<ClinicLocation>,
+): ClinicLocation[] => jsonApiToArray(data, 'clinicLocation');
+
+export const clinicLocationsOptionsFormatter = ({
+  id,
+  name,
+}: ClinicLocation): SelectOption<string> => ({
+  value: id,
+  label: name,
+});
