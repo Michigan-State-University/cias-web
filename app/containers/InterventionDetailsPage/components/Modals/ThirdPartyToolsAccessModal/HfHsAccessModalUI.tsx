@@ -1,8 +1,10 @@
-import React, { memo } from 'react';
+import React, { memo, useRef } from 'react';
 import { Markup } from 'interweave';
 import { useIntl } from 'react-intl';
 
 import globalMessages from 'global/i18n/globalMessages';
+
+import useDidUpdateEffect from 'utils/useDidUpdateEffect';
 
 import { LabelPosition } from 'components/Switch';
 import Text from 'components/Text';
@@ -32,6 +34,14 @@ const Component = ({ values, canSave, isSaving, onSave }: Props) => {
   const { formatMessage } = useIntl();
 
   const { hfhsAccess } = values;
+
+  const selectRef = useRef<HTMLSelectElement>(null);
+
+  useDidUpdateEffect(() => {
+    if (hfhsAccess && selectRef.current) {
+      selectRef.current.focus();
+    }
+  }, [hfhsAccess]);
 
   return (
     <FlexCol minHeight={537}>
@@ -69,6 +79,7 @@ const Component = ({ values, canSave, isSaving, onSave }: Props) => {
                   ),
                   isMulti: true,
                 }}
+                ref={selectRef}
               />
             </FlexRow>
           </>

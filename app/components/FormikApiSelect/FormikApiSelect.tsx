@@ -23,15 +23,18 @@ export type Props<ApiResponseData, ParsedDataItem, OptionValue> = {
   defaultFetchErrorMessage?: MessageDescriptor;
 } & Record<string, unknown>;
 
-export const FormikApiSelect = <ApiResponseData, ParsedDataItem, OptionValue>({
-  formikKey,
-  label,
-  columnStyleProps,
-  selectProps,
-  disabled,
-  submitOnChange,
-  ...props
-}: Props<ApiResponseData, ParsedDataItem, OptionValue>) => {
+const FormikApiSelectComponent = <ApiResponseData, ParsedDataItem, OptionValue>(
+  {
+    formikKey,
+    label,
+    columnStyleProps,
+    selectProps,
+    disabled,
+    submitOnChange,
+    ...props
+  }: Props<ApiResponseData, ParsedDataItem, OptionValue>,
+  ref: React.ForwardedRef<HTMLSelectElement>,
+) => {
   const { submitForm, validateForm } = useFormikContext();
   const [{ value, onChange, ...fieldProps }, meta, helpers] =
     useField(formikKey);
@@ -57,9 +60,8 @@ export const FormikApiSelect = <ApiResponseData, ParsedDataItem, OptionValue>({
       error={error}
       {...columnStyleProps}
     >
-      {/* @ts-ignore */}
       <ApiSelect
-        isOptionDisabled={disabled}
+        // @ts-ignore
         disabled={disabled}
         selectedValue={value}
         onSelectedValueChange={handleChange}
@@ -71,7 +73,10 @@ export const FormikApiSelect = <ApiResponseData, ParsedDataItem, OptionValue>({
           ...selectProps,
         }}
         {...props}
+        ref={ref}
       />
     </FormikControlLayout>
   );
 };
+
+export const FormikApiSelect = React.forwardRef(FormikApiSelectComponent);

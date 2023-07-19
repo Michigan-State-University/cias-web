@@ -85,7 +85,7 @@ const customComponents = (isMulti) => ({
     : { Option: (props) => <DefaultOption {...props} /> }),
 });
 
-const Select = ({ selectProps, ...restProps }) => (
+const Select = React.forwardRef(({ selectProps, ...restProps }, ref) => (
   <Box
     cursor={selectProps.isDisabled ? 'not-allowed' : 'pointer'}
     {...restProps}
@@ -97,10 +97,11 @@ const Select = ({ selectProps, ...restProps }) => (
       menuPlacement="auto"
       closeMenuOnSelect={!selectProps.isMulti}
       hideSelectedOptions={false}
+      ref={ref}
       {...selectProps}
     />
   </Box>
-);
+));
 
 Select.propTypes = {
   selectProps: PropTypes.object,
