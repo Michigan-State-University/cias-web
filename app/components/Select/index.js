@@ -11,6 +11,7 @@ import ReactSelect from 'react-select';
 import { themeColors } from 'theme';
 
 import Box from 'components/Box';
+import Loader from 'components/Loader';
 
 import { DefaultOption, DropdownIndicator, Option } from './components';
 
@@ -76,7 +77,7 @@ const customStyles = ({
 const customComponents = (isMulti) => ({
   IndicatorSeparator: () => null,
   DropdownIndicator: (props) => <DropdownIndicator {...props} />,
-  LoadingIndicator: () => null,
+  LoadingIndicator: () => <Loader type="inline" size={24} />,
   ...(isMulti
     ? {
         Option: (props) => <Option {...props} />,
@@ -94,6 +95,8 @@ const Select = ({ selectProps, ...restProps }) => (
       menuPortalTarget={document.body}
       styles={customStyles(selectProps)}
       menuPlacement="auto"
+      closeMenuOnSelect={!selectProps.isMulti}
+      hideSelectedOptions={false}
       {...selectProps}
     />
   </Box>

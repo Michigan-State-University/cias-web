@@ -2,6 +2,7 @@ import React, { memo, useEffect, useMemo, useState } from 'react';
 import { useIntl } from 'react-intl';
 import isEqual from 'lodash/isEqual';
 import { useDispatch, useSelector } from 'react-redux';
+import { Formik } from 'formik';
 
 import Tabs from 'components/Tabs';
 
@@ -20,11 +21,12 @@ import { colors } from 'theme';
 import messages from './messages';
 import { CatMhAccessModalUI } from './CatMhAccessModalUI';
 import { HfHsAccessModalUI } from './HfHsAccessModalUI';
-import { ModalUIData } from './types';
+import { ModalUIData, ThirdPartyToolsAccessFormValues } from './types';
 import {
   getTestsLeft,
   mapInterventionToModalData,
   mapModalDataToIntervention,
+  schema,
 } from './utils';
 
 export type Props = {
@@ -80,58 +82,65 @@ const Component = ({ modalState: intervention, closeModal }: Props) => {
     setModalData({ ...modalData, testNumber, testsLeft });
   };
 
-  const onSave = (): void => {
-    editIntervention(mapModalDataToIntervention(modalData));
+  const onSubmit = (values: ThirdPartyToolsAccessFormValues): void => {
+    editIntervention({ ...mapModalDataToIntervention(modalData), ...values });
   };
 
-  const onHfHsAccessChange = (hfhsAccess: boolean): void =>
-    setModalData({ ...modalData, hfhsAccess });
-
-  const onLocationIdsChange = (locationIds: string[]): void => {
-    setModalData({ ...modalData, locationIds });
-  };
-
-  const canSave =
-    !isEqual(initialData, modalData) &&
-    (!modalData.hfhsAccess || Boolean(modalData.locationIds.length));
+  const initialValues: ThirdPartyToolsAccessFormValues = useMemo(
+    () => ({
+      hfhsAccess: intervention.hfhsAccess,
+      locationIds: intervention.clinicLocations.map(({ id }) => id),
+    }),
+    [intervention],
+  );
 
   return (
-    // @ts-ignore
-    <Tabs
-      mt={24}
-      withBottomBorder
-      emphasizeActiveLink
-      labelStyle={{ color: colors.slateGray }}
-      containerProps={{ mb: 0, mt: 40 }}
+    <Formik
+      validationSchema={schema(formatMessage)}
+      initialValues={initialValues}
+      enableReinitialize
+      onSubmit={onSubmit}
     >
-      {/* @ts-ignore */}
-      <div label={formatMessage(messages.catMhLabel)}>
-        <CatMhAccessModalUI
-          modalData={modalData}
-          canSave={canSave}
-          isSaving={isEditing}
-          canEdit={!isEditing}
-          onSave={onSave}
-          onAccessChange={onAccessChange}
-          onLicenseInformationChange={onLicenseInformationChange}
-          onLicenseTypeChange={onLicenseTypeChange}
-          onTestNumberChange={onTestNumberChange}
-          isDraft={intervention.status === InterventionStatus.DRAFT}
-        />
-      </div>
-      {/* @ts-ignore */}
-      <div label={formatMessage(messages.henryFordLabel)}>
-        <HfHsAccessModalUI
-          modalData={modalData}
-          onAccessChange={onHfHsAccessChange}
-          onLocationIdsChange={onLocationIdsChange}
-          onSave={onSave}
-          canSave={canSave}
-          isSaving={isEditing}
-        />
-      </div>
-    </Tabs>
+      {({ isValid, dirty, values, handleSubmit }) => {
+        const canSave = (!isEqual(initialData, modalData) || dirty) && isValid;
+        return (
+          // @ts-ignore
+          <Tabs
+            mt={24}
+            withBottomBorder
+            emphasizeActiveLink
+            labelStyle={{ color: colors.slateGray }}
+            containerProps={{ mb: 0, mt: 40 }}
+          >
+            {/* @ts-ignore */}
+            <div label={formatMessage(messages.catMhLabel)}>
+              <CatMhAccessModalUI
+                modalData={modalData}
+                canSave={canSave}
+                isSaving={isEditing}
+                canEdit={!isEditing}
+                onSave={handleSubmit}
+                onAccessChange={onAccessChange}
+                onLicenseInformationChange={onLicenseInformationChange}
+                onLicenseTypeChange={onLicenseTypeChange}
+                onTestNumberChange={onTestNumberChange}
+                isDraft={intervention.status === InterventionStatus.DRAFT}
+              />
+            </div>
+            {/* @ts-ignore */}
+            <div label={formatMessage(messages.henryFordLabel)}>
+              <HfHsAccessModalUI
+                values={values}
+                onSave={handleSubmit}
+                canSave={canSave}
+                isSaving={isEditing}
+              />
+            </div>
+          </Tabs>
+        );
+      }}
+    </Formik>
   );
 };
-
 export const ThirdPartyToolsAccessModal = memo(Component);
+// TODO wyswietlic error z BE

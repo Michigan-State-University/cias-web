@@ -7,6 +7,9 @@ export type ModalUIData = {
   licenseType: CatMhLicenseType;
   testNumber: number;
   testsLeft: number;
+};
+
+export type ThirdPartyToolsAccessFormValues = {
   hfhsAccess: boolean;
   locationIds: string[];
 };

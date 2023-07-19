@@ -1,3 +1,6 @@
+import { IntlShape } from 'react-intl/src/types';
+import * as Yup from 'yup';
+
 import { Intervention, ClinicLocation } from 'models/Intervention';
 import { ApiDataCollection } from 'models/Api';
 
@@ -6,6 +9,7 @@ import { jsonApiToArray } from 'utils/jsonApiMapper';
 import { SelectOption } from 'components/Select/types';
 
 import { ModalUIData } from './types';
+import messages from './messages';
 
 export const getTestsLeft = (
   catMhPool: Nullable<number>,
@@ -22,8 +26,6 @@ export const mapInterventionToModalData = (
     catMhOrganizationId,
     isAccessRevoked,
     createdCatMhSessionCount,
-    hfhsAccess,
-    clinicLocations,
   } = intervention;
 
   return {
@@ -33,22 +35,18 @@ export const mapInterventionToModalData = (
     applicationId: catMhApplicationId ?? '',
     organizationId: catMhOrganizationId ?? undefined,
     isAccessRevoked,
-    hfhsAccess,
-    locationIds: clinicLocations.map(({ id }) => id),
   };
 };
 
 export const mapModalDataToIntervention = (
   modalData: ModalUIData,
-): Partial<Intervention> & { locationIds: string[] } => {
+): Partial<Intervention> => {
   const {
     testNumber,
     licenseType,
     applicationId,
     organizationId,
     isAccessRevoked,
-    hfhsAccess,
-    locationIds,
   } = modalData;
 
   return {
@@ -57,8 +55,6 @@ export const mapModalDataToIntervention = (
     catMhApplicationId: applicationId,
     catMhOrganizationId: organizationId,
     isAccessRevoked,
-    hfhsAccess,
-    locationIds,
   };
 };
 
@@ -73,3 +69,15 @@ export const clinicLocationsOptionsFormatter = ({
   value: id,
   label: name,
 });
+
+export const schema = (formatMessage: IntlShape['formatMessage']) =>
+  Yup.object().shape({
+    hfhsAccess: Yup.boolean(),
+    locationIds: Yup.array().when('hfhsAccess', {
+      is: (hfhsAccess) => hfhsAccess,
+      then: Yup.array().min(
+        1,
+        formatMessage(messages.selectClinicLocationsError),
+      ),
+    }),
+  });
