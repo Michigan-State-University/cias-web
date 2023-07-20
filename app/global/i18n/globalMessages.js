@@ -372,11 +372,16 @@ export default defineMessages({
     unreservedURLCharacters: {
       id: `${scope}.unreservedURLCharacters`,
       defaultMessage:
-        'This field contain only letters, numbers, hyphens [-], underscores [_], periods [.], and tildes [~]',
+        'This field can contain letters, numbers, hyphens [-], underscores [_], periods [.], and tildes [~] only',
     },
     zipCode: {
       id: `${scope}.zipCode`,
       defaultMessage: "ZIP Code's format is incorrect",
+    },
+    name: {
+      id: `${scope}.name`,
+      defaultMessage:
+        'This field can contain letters, hyphens [-], quotes [\'] ["] [`] and spaces [ ] only',
     },
   },
   questionRequired: {

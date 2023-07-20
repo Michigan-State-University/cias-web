@@ -38,3 +38,5 @@ export const previewRegex =
 export const guestLogInRegex = /(.*)preview_session_users($|\/.*)/;
 
 export const unreservedURLCharactersRegex = /^[A-Za-z0-9-_.~]*$/;
+
+export const nameRegex = /^[^±!@£$%^&*_+§¡€#¢¶•ªº«\\/<>?:;|=.,[\]{}()0-9]+?$/;

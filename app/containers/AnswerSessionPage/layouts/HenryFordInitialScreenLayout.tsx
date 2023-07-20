@@ -24,7 +24,10 @@ import {
 } from 'models/HfhsPatient';
 import { ApiMessageError } from 'models/Api';
 
-import { requiredValidationSchema } from 'utils/validators';
+import {
+  requiredValidationSchema,
+  nameValidationSchema,
+} from 'utils/validators';
 import { getUTCDateString } from 'utils/dateUtils';
 import { formatApiErrorMessage } from 'utils/formatApiErrorMessage';
 
@@ -34,6 +37,7 @@ import FormikInput from 'components/FormikInput';
 import FormikSelect from 'components/FormikSelect';
 import FormikDatePicker from 'components/FormikDatePicker';
 import Text from 'components/Text';
+
 import {
   FormikPhoneNumberInput,
   phoneNumberSchema,
@@ -41,7 +45,6 @@ import {
 } from 'components/FormikPhoneNumberInput';
 
 import { formatPhoneNumberForHfhs, parsePhoneNumberFromHfhs } from '../utils';
-
 import { ActionButtons } from '../components/ActionButtons';
 import messages from './messages';
 
@@ -72,8 +75,8 @@ export type PatientDataFormValues = Pick<
 const schema = (formatMessage: IntlShape['formatMessage']) =>
   Yup.object()
     .shape({
-      firstName: requiredValidationSchema,
-      lastName: requiredValidationSchema,
+      firstName: nameValidationSchema.concat(requiredValidationSchema),
+      lastName: nameValidationSchema.concat(requiredValidationSchema),
       sexOption: Yup.object()
         .required(
           // @ts-ignore
