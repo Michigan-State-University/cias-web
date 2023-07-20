@@ -143,4 +143,3 @@ const Component = ({ modalState: intervention, closeModal }: Props) => {
   );
 };
 export const ThirdPartyToolsAccessModal = memo(Component);
-// TODO wyswietlic error z BE
