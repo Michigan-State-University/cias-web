@@ -67,6 +67,7 @@ const PopularOptionsSelect = <OptionType extends SelectOption<string>>({
 
   return (
     <Select
+      // @ts-ignore
       selectProps={{
         ...selectProps,
         options: groupedOptions,

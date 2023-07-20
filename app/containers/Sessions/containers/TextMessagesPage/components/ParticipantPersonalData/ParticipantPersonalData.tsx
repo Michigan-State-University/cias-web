@@ -82,6 +82,7 @@ export const ParticipantPersonalData = ({ disabled }: Props): JSX.Element => {
       </Text>
       <Text mb={10}>{formatMessage(messages.chooseDataType)}</Text>
       <Select
+        // @ts-ignore
         disabled={disabled}
         selectProps={{
           options: selectOptions,
