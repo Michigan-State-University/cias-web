@@ -1,60 +1,89 @@
-import React, { memo } from 'react';
+import React, { memo, useRef } from 'react';
 import { Markup } from 'interweave';
 import { useIntl } from 'react-intl';
 
 import globalMessages from 'global/i18n/globalMessages';
 
-import Switch, { LabelPosition } from 'components/Switch';
+import useDidUpdateEffect from 'utils/useDidUpdateEffect';
+
+import { LabelPosition } from 'components/Switch';
 import Text from 'components/Text';
 import Button from 'components/Button';
 import FlexRow from 'components/Row';
 import FlexCol from 'components/Column';
 import { Col, Row } from 'components/ReactGridSystem';
+import { FormikApiSelect } from 'components/FormikApiSelect';
+import FormikSwitchInput from 'components/FormikSwitchInput';
 
-import { HFHS_ACCESS_LABEL_ID } from './constants';
-import { ModalUIData } from './types';
+import { ThirdPartyToolsAccessFormValues } from './types';
 
 import messages from './messages';
+import {
+  clinicLocationsDataParser,
+  clinicLocationsOptionsFormatter,
+} from './utils';
 
 interface Props {
-  modalData: ModalUIData;
+  values: ThirdPartyToolsAccessFormValues;
   canSave: boolean;
   isSaving: boolean;
-  onAccessChange: (hfhsAccess: boolean) => void;
   onSave: () => void;
 }
 
-const Component = ({
-  modalData,
-  canSave,
-  isSaving,
-  onAccessChange,
-  onSave,
-}: Props) => {
+const Component = ({ values, canSave, isSaving, onSave }: Props) => {
   const { formatMessage } = useIntl();
 
-  const { hfhsAccess } = modalData;
+  const { hfhsAccess } = values;
 
-  const handleAccessChange = () => onAccessChange(!hfhsAccess);
+  const selectRef = useRef<HTMLSelectElement>(null);
+
+  useDidUpdateEffect(() => {
+    if (hfhsAccess && selectRef.current) {
+      selectRef.current.focus();
+    }
+  }, [hfhsAccess]);
 
   return (
     <FlexCol minHeight={537}>
       <FlexRow flex={1} align="start" direction="column">
-        <FlexRow align="center">
+        <FlexRow align="center" width="100%">
           <Text mr={8} fontSize="15px">
             {formatMessage(messages.hfhsRevokeAccess)}
           </Text>
-          <Switch
-            id={HFHS_ACCESS_LABEL_ID}
-            onToggle={handleAccessChange}
+          <FormikSwitchInput
+            formikKey="hfhsAccess"
             labelPosition={LabelPosition.Right}
-            checked={hfhsAccess}
+            columnStyleProps={{
+              width: 'auto',
+            }}
           >
             <Text fontSize="15px" fontWeight={hfhsAccess ? 'bold' : 'normal'}>
               {formatMessage(messages.hfhsGiveAccess)}
             </Text>
-          </Switch>
+          </FormikSwitchInput>
         </FlexRow>
+        {hfhsAccess && (
+          <>
+            <FlexRow width="100%" mt={40}>
+              <FormikApiSelect
+                formikKey="locationIds"
+                label={formatMessage(messages.clinicLocations)}
+                url="/v1/henry_ford/clinic_locations"
+                dataParser={clinicLocationsDataParser}
+                optionsFormatter={clinicLocationsOptionsFormatter}
+                defaultFetchErrorMessage={messages.fetchClinicLocationsError}
+                width="100%"
+                selectProps={{
+                  placeholder: formatMessage(
+                    messages.clinicLocationsPlaceholder,
+                  ),
+                  isMulti: true,
+                }}
+                ref={selectRef}
+              />
+            </FlexRow>
+          </>
+        )}
         <FlexRow mt={56}>
           <Markup
             content={formatMessage(messages.hfhsAccessNote)}
@@ -73,6 +102,7 @@ const Component = ({
             loading={isSaving}
             disabled={!canSave}
             mt={40}
+            type="submit"
           >
             {formatMessage(globalMessages.save)}
           </Button>

@@ -220,10 +220,18 @@ export const interventionReducer = (state = initialState, action) =>
       case EDIT_INTERVENTION_REQUEST:
         draft.loaders.editIntervention = true;
         draft.errors.editIntervention = null;
+        const { locationIds, ...restChanges } = action.payload.intervention;
         draft.intervention = {
           ...state.intervention,
-          ...action.payload.intervention,
+          ...restChanges,
         };
+
+        if (locationIds) {
+          draft.intervention.clinicLocations = locationIds.map((id) => ({
+            id,
+          }));
+        }
+
         break;
       case EDIT_INTERVENTION_SUCCESS: {
         draft.loaders.editIntervention = false;

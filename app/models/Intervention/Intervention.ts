@@ -4,6 +4,7 @@ import { Session } from 'models/Session';
 
 import { InterventionInvite } from './InterventionInvite';
 import { Editor } from './Editor';
+import { InterventionClinicLocation } from './ClinicLocation';
 
 export enum InterventionStatus {
   DRAFT = 'draft',
@@ -81,6 +82,7 @@ export interface Intervention extends SimpleIntervention {
   conversationsTranscriptFilename: Nullable<string>;
   sessions: Session[];
   hfhsAccess: boolean;
+  clinicLocations: InterventionClinicLocation[];
 }
 
 export interface FileInfo {

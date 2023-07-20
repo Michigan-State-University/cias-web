@@ -26,6 +26,7 @@ import { ApiMessageError } from 'models/Api';
 
 import { requiredValidationSchema } from 'utils/validators';
 import { getUTCDateString } from 'utils/dateUtils';
+import { formatApiErrorMessage } from 'utils/formatApiErrorMessage';
 
 import Box from 'components/Box';
 import { SelectOption } from 'components/Select/types';
@@ -326,7 +327,10 @@ const HenryFordInitialScreenLayout = ({
                 lineHeight="23px"
                 mt={32}
               >
-                {formatMessage(messages.baseDataVerificationErrorMessage)}
+                {formatApiErrorMessage(
+                  verifyingError,
+                  messages.verifyErrorMessage,
+                )}
               </Text>
             )}
             {showContinueButton && (
