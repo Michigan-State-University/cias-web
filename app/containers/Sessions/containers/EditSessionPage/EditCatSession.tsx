@@ -188,6 +188,7 @@ const EditCatSession = ({
             formatMessage(messages.language),
             // @ts-ignore
             <ApiSelect
+              // @ts-ignore
               url="/v1/cat_mh/languages"
               dataParser={(data: any) => jsonApiToArray(data, 'language')}
               selectProps={{
@@ -203,8 +204,8 @@ const EditCatSession = ({
           )}
           {wrapWithLabel(
             formatMessage(messages.timeFrame),
-            // @ts-ignore
             <ApiSelect
+              // @ts-ignore
               url="/v1/cat_mh/time_frames"
               dataParser={(data: any) => jsonApiToArray(data, 'timeFrame')}
               selectProps={{
@@ -220,8 +221,8 @@ const EditCatSession = ({
           )}
           {wrapWithLabel(
             formatMessage(messages.population),
-            // @ts-ignore
             <ApiSelect
+              // @ts-ignore
               url="/v1/cat_mh/populations"
               dataParser={(data: any) => jsonApiToArray(data, 'population')}
               selectProps={{
@@ -237,8 +238,8 @@ const EditCatSession = ({
           )}
           {wrapWithLabel(
             formatMessage(messages.narratorVoiceType),
-            // @ts-ignore
             <ApiSelect
+              // @ts-ignore
               url={languagesUrl}
               dataParser={voiceDataParser}
               selectProps={{

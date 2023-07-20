@@ -84,6 +84,7 @@ const NarratorConflictModal = ({
           formatMessage(messages.language),
           // @ts-ignore
           <ApiSelect
+            // @ts-ignore
             url="/v1/cat_mh/languages"
             dataParser={(data: any) => jsonApiToArray(data, 'language')}
             selectProps={{
@@ -101,6 +102,7 @@ const NarratorConflictModal = ({
           formatMessage(messages.narratorVoiceType),
           // @ts-ignore
           <ApiSelect
+            // @ts-ignore
             url={languagesUrl}
             dataParser={voiceDataParser}
             selectProps={{
