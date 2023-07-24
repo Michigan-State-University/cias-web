@@ -269,15 +269,15 @@ export default defineMessages({
   sharingFilters: {
     [SharingFilter.ONLY_SHARED_BY_ME]: {
       id: `${scope}.${SharingFilter.ONLY_SHARED_BY_ME}`,
-      defaultMessage: `Only shared by me`,
+      defaultMessage: `Shared by me`,
     },
     [SharingFilter.ONLY_SHARED_WITH_ME]: {
       id: `${scope}.${SharingFilter.ONLY_SHARED_WITH_ME}`,
-      defaultMessage: `Only shared with me`,
+      defaultMessage: `Shared with me`,
     },
     [SharingFilter.ONLY_NOT_SHARED_WITH_ANYONE]: {
       id: `${scope}.${SharingFilter.ONLY_NOT_SHARED_WITH_ANYONE}`,
-      defaultMessage: `Only not shared with anyone`,
+      defaultMessage: `Mine only (not shared)`,
     },
   },
   allInterventions: {
