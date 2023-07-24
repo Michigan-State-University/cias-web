@@ -52,29 +52,31 @@ const SettingsOption = ({
     }
   };
 
-  const numericInput = (
-    <>
-      <H3>{formatMessage(messages[`${index}`])}</H3>
-
-      <Input
-        placeholder={formatMessage(messages.textLimitSettingsPlaceholder)}
-        type="singleline"
-        keyboard="tel"
-        value={setting === null ? '' : `${setting}`}
-        validator={numericValidator}
-        onBlur={handleStringToNumericUpdate}
-        width={150}
-        px={12}
-        disabled={disabled}
-      />
-    </>
+  const numericInput = useCallback(
+    () => (
+      <>
+        <H3>{formatMessage(messages[`${index}`])}</H3>
+        <Input
+          placeholder={formatMessage(messages[`${index}_placeholder`])}
+          type="singleline"
+          keyboard="tel"
+          value={setting === null ? '' : `${setting}`}
+          validator={numericValidator}
+          onBlur={handleStringToNumericUpdate}
+          width={150}
+          px={12}
+          disabled={disabled}
+        />
+      </>
+    ),
+    [index, setting, disabled, isNullableNumericSettings],
   );
 
   const renderSetting = () => {
-    if (isNullableNumericSettings) return numericInput;
+    if (isNullableNumericSettings) return numericInput();
     switch (setting?.constructor) {
       case Number:
-        return numericInput;
+        return numericInput();
       case Boolean:
       default:
         return (
