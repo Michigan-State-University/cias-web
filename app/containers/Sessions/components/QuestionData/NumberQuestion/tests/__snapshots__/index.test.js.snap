@@ -88,16 +88,9 @@ exports[`<NumberQuestion /> Should render and match the snapshot 1`] = `
   font-size: 13px;
   line-height: 130%;
   margin-top: 5px;
-  color: #2F3850;
-}
-
-.c7 {
-  margin: 0;
-  font-family: DM Sans;
   font-size: 13px;
-  line-height: 130%;
-  color: #6B707C;
-  margin-top: 5px;
+  color: rgba(107,112,124,1);
+  color: rgba(107,112,124,1);
 }
 
 @media only screen and (min-width:768px) {
@@ -150,7 +143,10 @@ exports[`<NumberQuestion /> Should render and match the snapshot 1`] = `
       </div>
     </div>
     <p
-      class="c6 c7"
+      class="c6"
+      color="#6B707C"
+      font-size="13px"
+      font-weight="normal"
     >
       Number between  and  digits
     </p>
