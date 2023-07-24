@@ -188,8 +188,7 @@ export function InterventionDetailsPage({
       testsLeft / catMhPool <= CAT_MH_TEST_COUNT_WARNING_THRESHOLD);
 
   const showSessionCreateButton = canEdit(status);
-  const sharingPossible =
-    canCurrentUserMakeChanges && canShareWithParticipants(status);
+  const sharingPossible = canShareWithParticipants(status);
   const archivingPossible = canCurrentUserMakeChanges && canArchive(status);
 
   const [translateModalVisible, setTranslateModalVisible] = useState(false);

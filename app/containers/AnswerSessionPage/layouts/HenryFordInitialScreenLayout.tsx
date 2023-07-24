@@ -275,7 +275,6 @@ const HenryFordInitialScreenLayout = ({
                   <FormikDatePicker
                     formikKey="dobDate"
                     label={formatMessage(messages.dateOfBirth)}
-                    placeholder={formatMessage(messages.dateOfBirthPlaceholder)}
                     inputProps={inputStyles}
                     disabled={disabled}
                     datePickerProps={{
