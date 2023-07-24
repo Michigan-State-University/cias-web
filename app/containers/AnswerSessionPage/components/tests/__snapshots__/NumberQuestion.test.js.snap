@@ -133,6 +133,7 @@ exports[`<NumberQuestion /> Should render and match the snapshot 1`] = `
       class="c5"
       color="#6B707C"
       font-size="13px"
+      font-weight="normal"
     >
       Number between  and  digits
     </p>
