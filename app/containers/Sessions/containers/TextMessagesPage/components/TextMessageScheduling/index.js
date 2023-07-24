@@ -172,7 +172,7 @@ const TextMessageScheduling = ({
                   fontSize={15}
                   padding={5}
                   textAlign="center"
-                  width={120}
+                  width={150}
                   minDate={new Date()}
                   disabled={disabled || disableDatePicker}
                 />
