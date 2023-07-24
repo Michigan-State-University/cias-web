@@ -38,6 +38,10 @@ export default defineMessages({
     id: `${scope}.text_limit`,
     defaultMessage: 'Text limit',
   },
+  text_limit_placeholder: {
+    id: `${scope}.text_limit_placeholder`,
+    defaultMessage: 'E.g. 250',
+  },
   proceed_button: {
     id: `${scope}.proceed_button`,
     defaultMessage: 'Continue Button',
@@ -59,9 +63,17 @@ export default defineMessages({
     id: `${scope}.min_length`,
     defaultMessage: 'Minimal length',
   },
+  min_length_placeholder: {
+    id: `${scope}.min_length_placeholder`,
+    defaultMessage: 'E.g. 1',
+  },
   max_length: {
     id: `${scope}.max_length`,
     defaultMessage: 'Maximum length',
+  },
+  max_length_placeholder: {
+    id: `${scope}.max_length_placeholder`,
+    defaultMessage: 'E.g. 250',
   },
   [NarratorSettingsKey.ANIMATION]: {
     id: `${scope}.${NarratorSettingsKey.ANIMATION}`,
@@ -201,10 +213,6 @@ export default defineMessages({
     id: `${scope}.blockRemovalConfirmationDescription`,
     defaultMessage:
       'Those block types will be removed in this question and their data will be wiped out',
-  },
-  textLimitSettingsPlaceholder: {
-    id: `${scope}.textLimitSettingsPlaceholder`,
-    defaultMessage: 'E.g. 250',
   },
   deleteBlockHeader: {
     id: `${scope}.deleteBlockHeader`,
