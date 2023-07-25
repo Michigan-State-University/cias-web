@@ -2,20 +2,10 @@ import styled from 'styled-components';
 
 import { colors } from 'theme';
 
-import Row from 'components/Row';
 import TextButton from 'components/Button/TextButton';
 
 export const StyledTextButton = styled(TextButton)`
-  display: none;
   margin-left: 20px;
-`;
-
-export const HoverableRow = styled(Row)`
-  &:hover {
-    ${StyledTextButton} {
-      display: block;
-    }
-  }
 `;
 
 export const SessionIndex = styled.div`

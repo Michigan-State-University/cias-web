@@ -50,7 +50,7 @@ const Component = ({
   const buttons = [
     {
       action: resendInvite,
-      disabled: sharingPossible,
+      disabled: !sharingPossible,
       text: <FormattedMessage {...messages.resend} />,
     },
   ];

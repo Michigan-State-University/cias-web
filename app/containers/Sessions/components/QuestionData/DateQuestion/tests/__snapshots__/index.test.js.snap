@@ -71,6 +71,10 @@ exports[`<DateQuestion /> Should render and match the snapshot 1`] = `
   border-color: #107969;
 }
 
+.c7::-webkit-calendar-picker-indicator {
+  display: none;
+}
+
 .c7:disabled {
   color: #ABBBD1;
 }
@@ -189,14 +193,12 @@ exports[`<DateQuestion /> Should render and match the snapshot 1`] = `
                 class="react-datepicker__input-container"
               >
                 <input
-                  aria-label="MM-DD-YYYY"
                   class="c7"
                   color="#ABBBD1"
                   disabled=""
                   font-size="15"
                   height="50"
-                  placeholder="MM-DD-YYYY"
-                  type="text"
+                  type="date"
                   value=""
                   width="200"
                 />

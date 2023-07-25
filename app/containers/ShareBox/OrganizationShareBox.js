@@ -89,7 +89,7 @@ const OrganizationShareBox = ({
   const buttons = [
     {
       action: handleResend,
-      disabled: sharingPossible,
+      disabled: !sharingPossible,
       text: <FormattedMessage {...messages.resend} />,
     },
   ];
