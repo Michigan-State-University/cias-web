@@ -80,6 +80,13 @@ const Input = styled.input.attrs((props) => {
       /* Firefox */
       -moz-appearance: textfield;
     `};
+  ${({ hideNativeDatepicker }) =>
+    hideNativeDatepicker &&
+    css`
+      &::-webkit-calendar-picker-indicator {
+        display: none;
+      }
+    `};
   ${margin};
   ${layout};
   ${padding};
@@ -94,7 +101,15 @@ const Input = styled.input.attrs((props) => {
 
 Input.propTypes = {
   transparent: PropTypes.bool,
-  keyboard: PropTypes.oneOf(['text', 'email', 'password', 'number', 'tel']),
+  keyboard: PropTypes.oneOf([
+    'text',
+    'email',
+    'password',
+    'number',
+    'number',
+    'tel',
+    'date',
+  ]),
 };
 
 Input.defaultProps = {

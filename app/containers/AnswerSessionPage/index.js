@@ -452,13 +452,6 @@ export function AnswerSessionPage({
     const isNumericQuestion = currentQuestion.type === QuestionTypes.NUMBER;
 
     const isAnswered = () => {
-      if (
-        !required &&
-        isNumericQuestion &&
-        (!answer || !Array.isArray(answerBody) || !answerBody.length)
-      )
-        return true;
-
       if (!answer) {
         return false;
       }
@@ -475,7 +468,6 @@ export function AnswerSessionPage({
         case QuestionTypes.NUMBER: {
           const { value } = answerBody[0] ?? {};
           const numberOfDigits = `${value}` === 'NaN' ? 0 : `${value}`.length;
-          if (!required && numberOfDigits === 0) return true;
           if (minLength && maxLength)
             return numberOfDigits <= maxLength && numberOfDigits >= minLength;
           if (minLength) return numberOfDigits >= minLength;
