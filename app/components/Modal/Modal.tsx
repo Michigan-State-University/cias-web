@@ -15,12 +15,17 @@ import { KeyCodes } from 'utils/constants';
 
 import { MODAL_PORTAL_ID } from 'containers/App/constants';
 
-import { Col, FullWidthContainer, Row } from 'components/ReactGridSystem';
+import {
+  Col as GridCol,
+  FullWidthContainer,
+  Row as GridRow,
+} from 'components/ReactGridSystem';
 import Box from 'components/Box';
 import H1 from 'components/H1';
 import ActionIcon from 'components/ActionIcon';
 import Portal from 'components/Portal';
 import Text from 'components/Text';
+import Row from 'components/Row';
 
 import messages from './messages';
 import { StyledBox } from './styled';
@@ -28,6 +33,7 @@ import { MODAL_DESCRIPTION_ID, MODAL_TITLE_ID } from './constants';
 
 export type Props = {
   title?: string;
+  titleExtraContent?: ReactNode;
   onClose?: () => void;
   children: ReactNode;
   visible: boolean;
@@ -44,6 +50,7 @@ export type Props = {
 
 const Modal = ({
   title,
+  titleExtraContent,
   onClose,
   children,
   visible,
@@ -127,23 +134,26 @@ const Modal = ({
           {...stylesProps}
         >
           <FullWidthContainer>
-            <Row align={titleIcon ? 'start' : 'center'} justify="between">
+            <GridRow align={titleIcon ? 'start' : 'center'} justify="between">
               {titleIcon && (
-                <Col xs={2} width={titleIconWidth}>
+                <GridCol xs={2} width={titleIconWidth}>
                   {titleIcon}
-                </Col>
+                </GridCol>
               )}
 
-              <Col xs={titleIcon ? 8 : 10}>
-                {title && (
-                  <H1 id={MODAL_TITLE_ID} {...titleProps}>
-                    {title}
-                  </H1>
-                )}
-              </Col>
+              <GridCol xs={titleIcon ? 8 : 10}>
+                <Row align="center" gap={8}>
+                  {title && (
+                    <H1 id={MODAL_TITLE_ID} {...titleProps}>
+                      {title}
+                    </H1>
+                  )}
+                  {titleExtraContent}
+                </Row>
+              </GridCol>
 
               {!hideCloseButton && (
-                <Col xs={2} align="end">
+                <GridCol xs={2} align="end">
                   {/** @ts-ignore */}
                   <ActionIcon
                     mr={0}
@@ -152,22 +162,22 @@ const Modal = ({
                     data-testid="close-modal-button"
                     ariaText={formatMessage(messages.closeButtonLabel)}
                   />
-                </Col>
+                </GridCol>
               )}
-            </Row>
+            </GridRow>
             {description && (
-              <Row align="start" justify="center">
-                {titleIcon && <Col xs={2} width={titleIconWidth} />}
-                <Col xs={titleIcon ? 10 : 12}>
+              <GridRow align="start" justify="center">
+                {titleIcon && <GridCol xs={2} width={titleIconWidth} />}
+                <GridCol xs={titleIcon ? 10 : 12}>
                   <Text mt={6} lineHeight="18px" fontSize="13px">
                     {description}
                   </Text>
-                </Col>
-              </Row>
+                </GridCol>
+              </GridRow>
             )}
 
-            <Row>
-              <Col xs={12}>
+            <GridRow>
+              <GridCol xs={12}>
                 <Box
                   width="100%"
                   borderRadius="0px"
@@ -176,8 +186,8 @@ const Modal = ({
                 >
                   {children}
                 </Box>
-              </Col>
-            </Row>
+              </GridCol>
+            </GridRow>
           </FullWidthContainer>
         </StyledBox>
       </Box>

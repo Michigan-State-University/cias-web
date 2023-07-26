@@ -283,9 +283,10 @@ export function AnswerSessionPage({
   } = userSession ?? {};
 
   const isNewUserSession = useMemo(() => {
-    const { lastAnswerAt } = userSession ?? {};
+    const { lastAnswerAt, started } = userSession ?? {};
 
-    return !lastAnswerAt;
+    // keeping lastAnswerAt check for existing user sessions
+    return !lastAnswerAt && !started;
   }, [userSession]);
 
   const isUserSessionFinished = useMemo(() => {
