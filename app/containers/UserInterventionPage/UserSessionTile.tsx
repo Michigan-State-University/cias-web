@@ -70,16 +70,18 @@ const UserSessionTile = ({
     isScheduledForFuture &&
     !isFirstSession &&
     !userSession?.finishedAt &&
-    !userSession?.lastAnswerAt;
+    !userSession?.lastAnswerAt && // keeping lastAnswerAt check for existing user sessions
+    !userSession?.started;
 
   const userSessionStatus = useMemo(() => {
     if (isNotAvailable) return UserSessionStatus.NOT_AVAILABLE;
     if (!userSession) return UserSessionStatus.READY_TO_START;
 
-    const { finishedAt, lastAnswerAt } = userSession;
+    const { finishedAt, lastAnswerAt, started } = userSession;
     if (finishedAt) return UserSessionStatus.COMPLETED;
 
-    if (lastAnswerAt) return UserSessionStatus.IN_PROGRESS;
+    // keeping lastAnswerAt check for existing user sessions
+    if (lastAnswerAt || started) return UserSessionStatus.IN_PROGRESS;
 
     return UserSessionStatus.READY_TO_START;
   }, [userSession, isNotAvailable]);
