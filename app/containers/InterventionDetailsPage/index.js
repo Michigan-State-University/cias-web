@@ -102,6 +102,8 @@ import Icon from 'components/Icon';
 import Tooltip from 'components/Tooltip';
 import { HelpIconTooltip } from 'components/HelpIconTooltip';
 
+import { useCollaboratorsModal } from 'containers/CollaboratorsModal';
+
 import Header from './Header';
 import { DraggedTest } from './styled';
 import interventionDetailsPageSagas from './saga';
@@ -109,8 +111,6 @@ import SessionCreateButton from './components/SessionCreateButton/index';
 import SessionListItem from './components/SessionListItem';
 import {
   CatMhAccessModal,
-  CollaboratorsModal,
-  COLLABORATORS_MODAL_WIDTH,
   InterventionAssignOrganizationModal,
   InterventionSettingsModal,
   INTERVENTION_ASSIGN_ORGANIZATION_MODAL_WIDTH,
@@ -194,7 +194,6 @@ export function InterventionDetailsPage({
   ] = useState(false);
   const [assignOrganizationModalVisible, setAssignOrganizationModalVisible] =
     useState(false);
-  const [collaborateModalVisible, setCollaborateModalVisible] = useState(false);
 
   const closeTranslateModal = () => setTranslateModalVisible(false);
   const openTranslateModal = () => setTranslateModalVisible(true);
@@ -202,8 +201,6 @@ export function InterventionDetailsPage({
     setAssignOrganizationModalVisible(false);
   const openAssignOrganizationModal = () =>
     setAssignOrganizationModalVisible(true);
-  const closeCollaborateModal = () => setCollaborateModalVisible(false);
-  const openCollaborateModal = () => setCollaborateModalVisible(true);
   const handleCopyIntervention = () => copyIntervention({ interventionId: id });
   const handleArchiveIntervention = () =>
     editIntervention({
@@ -252,6 +249,13 @@ export function InterventionDetailsPage({
     copyIntervention({ interventionId, emails, ids });
   const { Modal: ShareExternallyModal, openModal: openShareExternallyModal } =
     useShareExternallyModal(shareExternally, ShareExternallyLevel.INTERVENTION);
+
+  const { Modal: CollaboratorsModal, openModal: openCollaboratorsModal } =
+    useCollaboratorsModal(
+      interventionId,
+      isCurrentUserInterventionOwner,
+      userId,
+    );
 
   const canCreateCatSession = useMemo(
     () => !isAccessRevoked,
@@ -327,7 +331,7 @@ export function InterventionDetailsPage({
             id: 'collaborate',
             label: formatMessage(messages.collaborate),
             icon: CollaborateIcon,
-            action: openCollaborateModal,
+            action: openCollaboratorsModal,
           },
         ]
       : []),
@@ -540,20 +544,7 @@ export function InterventionDetailsPage({
               />
             </Modal>
 
-            <Modal
-              title={formatMessage(messages.collaborate)}
-              description={formatMessage(messages.collaborateDescription)}
-              onClose={closeCollaborateModal}
-              visible={collaborateModalVisible}
-              width={COLLABORATORS_MODAL_WIDTH}
-              maxWidth={COLLABORATORS_MODAL_WIDTH}
-            >
-              <CollaboratorsModal
-                interventionId={interventionId}
-                isCurrentUserInterventionOwner={isCurrentUserInterventionOwner}
-                interventionOwnerId={userId}
-              />
-            </Modal>
+            <CollaboratorsModal />
 
             <Header
               name={name}
