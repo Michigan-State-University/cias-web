@@ -5,9 +5,13 @@ import { Provider } from 'react-redux';
 import { MemoryRouter } from 'react-router-dom';
 import { DEFAULT_LOCALE } from 'i18n';
 
-import { interventionReducer } from 'global/reducers/intervention';
 import { Roles } from 'models/User/RolesManager';
+
+import { interventionReducer } from 'global/reducers/intervention';
+
 import { createTestStore } from 'utils/testUtils/storeUtils';
+
+import { intlProviderConfig } from 'containers/LanguageProvider';
 
 import InterventionDetailsPage from '../index';
 
@@ -32,7 +36,7 @@ describe('<InterventionDetailsPage />', () => {
     const spy = jest.spyOn(global.console, 'error');
     render(
       <Provider store={store}>
-        <IntlProvider locale={DEFAULT_LOCALE}>
+        <IntlProvider locale={DEFAULT_LOCALE} {...intlProviderConfig}>
           <MemoryRouter>
             <InterventionDetailsPage {...defaultProps} />
           </MemoryRouter>
@@ -44,7 +48,7 @@ describe('<InterventionDetailsPage />', () => {
 
   it('Should render loader and match the snapshot', () => {
     const { container } = render(
-      <IntlProvider locale={DEFAULT_LOCALE}>
+      <IntlProvider locale={DEFAULT_LOCALE} {...intlProviderConfig}>
         <Provider store={store}>
           <MemoryRouter>
             <InterventionDetailsPage {...defaultProps} />
