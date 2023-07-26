@@ -25,7 +25,7 @@ import SelectResearchers from 'containers/SelectResearchers';
 
 import messages from './messages';
 import SingleCollaboratorRow from './SingleCollaboratorRow';
-import { COLLABORATORS_MODAL_WIDTH, TABLE_MAX_HEIGHT } from './constants';
+import { TABLE_MAX_HEIGHT } from './constants';
 
 type Props = {
   interventionId: string;
@@ -33,7 +33,7 @@ type Props = {
   interventionOwnerId: string;
 };
 
-const CollaboratorsModal = ({
+export const CollaboratorsModal = ({
   interventionId,
   isCurrentUserInterventionOwner,
   interventionOwnerId,
@@ -127,7 +127,3 @@ const CollaboratorsModal = ({
     </div>
   );
 };
-
-export default CollaboratorsModal;
-
-export { COLLABORATORS_MODAL_WIDTH };
