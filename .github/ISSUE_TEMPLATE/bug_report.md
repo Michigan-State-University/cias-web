@@ -4,24 +4,21 @@ about: Create a report to help us improve
 
 ---
 
-Before opening a new issue, please take a moment to review our [**community guidelines**](https://github.com/react-boilerplate/react-boilerplate/blob/master/CONTRIBUTING.md) to make the contribution process easy and effective for everyone involved.
+Before opening a new issue, please take a moment to review our [**community guidelines**](https://github.com/Michigan-State-University/cias-web/blob/dev/CONTRIBUTING.md) to make the contribution process easy and effective for everyone involved.
 
-## Description
-A clear and concise description of what the bug is.
+## Reproduction steps
+Preconditions of application (if needed).
 
-## Steps to reproduce
-Steps to reproduce the behavior:
+Detailed user-level steps that will allow the developer to reproduce the bug.
 
-(Add link to a demo on https://jsfiddle.net or similar if possible)
+## Bug description/Actual result
+A short description of a bug
 
-**Expected behavior**
-A clear and concise description of what you expected to happen.
+## Attachments (optional/if needed):
+Might be:
+- Screenshots (high res if possible)
+- Screen recordings that show bug in the application or code
+- Link to a demo code on https://jsfiddle.net or similar if applies
 
-**Screenshots**
-If applicable, add screenshots to help explain your problem.
-
-## Versions
-
-- React-Boilerplate:
-- Node/NPM:
-- Browser:
+## Device/browser/configuration:
+Device and browser on which the error occurred or project configuration

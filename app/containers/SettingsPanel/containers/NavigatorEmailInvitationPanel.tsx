@@ -23,6 +23,7 @@ type Props = {
   inviteNavigatorsByEmail: (emails: string[]) => void;
   removeNavigatorEmailInvitation: (invitationId: string) => void;
   invitationLoading: boolean;
+  disabled: boolean;
 };
 
 const NavigatorEmailInvitationPanel = ({
@@ -30,6 +31,7 @@ const NavigatorEmailInvitationPanel = ({
   inviteNavigatorsByEmail,
   removeNavigatorEmailInvitation,
   invitationLoading,
+  disabled,
 }: Props) => {
   const { formatMessage } = useIntl();
   const [emails, setEmails] = useState<string[]>([]);
@@ -57,6 +59,7 @@ const NavigatorEmailInvitationPanel = ({
               : ''
           }
           onIsValid={setValid}
+          disabled={disabled}
         />
         {/* @ts-ignore */}
         <Button
@@ -64,7 +67,7 @@ const NavigatorEmailInvitationPanel = ({
           onClick={inviteNavigators}
           ml={12}
           width={90}
-          disabled={!valid}
+          disabled={!valid || disabled}
         >
           {formatMessage(messages.invite)}
         </Button>
@@ -98,6 +101,7 @@ const NavigatorEmailInvitationPanel = ({
                     onClick={() => removeNavigatorEmailInvitation(id)}
                     src={bin}
                     loading={inDeletion}
+                    disabled={disabled}
                   />
                 </Box>
               ),

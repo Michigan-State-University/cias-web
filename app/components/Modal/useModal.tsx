@@ -8,7 +8,7 @@ import ConfirmationModal, {
   Props as ConfirmationModalComponentProps,
 } from './ConfirmationModal';
 
-type Props<T> = SpecificModalProps<T>;
+type HookProps<T> = SpecificModalProps<T>;
 
 type SpecificModalProps<T> = ModalProps<T> | ConfirmationModalProps;
 
@@ -26,7 +26,8 @@ export type ConfirmationModalProps = {
   props: Omit<ConfirmationModalComponentProps, 'children'>;
 };
 
-export const useModal = <T,>({ type, props, ...restProps }: Props<T>) => {
+// MEMOIZE THE props OBJECT (HookProps['props']) BECAUSE OTHERWISE THERE WILL BE UNEXPECTED RERENDERS!
+export const useModal = <T,>({ type, props, ...restProps }: HookProps<T>) => {
   const [modalState, setModalState] = useState<T | boolean>();
 
   const isModalVisible = useMemo(
@@ -53,6 +54,9 @@ export const useModal = <T,>({ type, props, ...restProps }: Props<T>) => {
     [isModalVisible],
   );
 
+  // const memoizedProps = useDeepObjectMemo(props);
+  const memoizedProps = props;
+
   const renderModal = useCallback(() => {
     if (!isModalVisible) return <></>;
 
@@ -60,21 +64,21 @@ export const useModal = <T,>({ type, props, ...restProps }: Props<T>) => {
       case ModalType.ConfirmationModal:
         return (
           <ConfirmationModal
-            {...(props as ConfirmationModalComponentProps)}
+            {...(memoizedProps as ConfirmationModalComponentProps)}
             {...sharedProps}
           />
         );
       case ModalType.Modal:
         const { modalContentRenderer } = restProps as ModalProps<T>;
         return (
-          <Modal {...(props as ModalComponentProps)} {...sharedProps}>
+          <Modal {...(memoizedProps as ModalComponentProps)} {...sharedProps}>
             {modalContentRenderer({ closeModal, modalState })}
           </Modal>
         );
       default:
         return null;
     }
-  }, [isModalVisible, props]);
+  }, [isModalVisible, memoizedProps]);
 
   return { modalState, openModal, closeModal, Modal: renderModal };
 };

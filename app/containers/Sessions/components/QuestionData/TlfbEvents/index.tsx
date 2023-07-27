@@ -10,7 +10,6 @@ import {
   updateQuestionData,
 } from 'global/reducers/questions';
 import { TlfbEventsDTO } from 'models/Question';
-import { InterventionStatusMetadata } from 'models/Intervention';
 
 import Box from 'components/Box';
 import LabelledApprovableInput from 'components/Input/LabelledApprovableInput';
@@ -22,10 +21,10 @@ import { UPDATE_SCREEN_QUESTION, UPDATE_SCREEN_TITLE } from './constants';
 import messages from './messages';
 
 export type TlfbEventsProps = {
-  statusMetadata: InterventionStatusMetadata;
+  editingPossible: boolean;
 };
 
-const TlfbEvents = ({ statusMetadata: { isEditable } }: TlfbEventsProps) => {
+const TlfbEvents = ({ editingPossible }: TlfbEventsProps) => {
   const dispatch = useDispatch();
   const currentQuestion = useSelector<RootState, TlfbEventsDTO>(
     makeSelectSelectedQuestion(),
@@ -66,7 +65,7 @@ const TlfbEvents = ({ statusMetadata: { isEditable } }: TlfbEventsProps) => {
           onFocus={selectQuillText}
           id="events-screen-title"
           transparent={false}
-          disabled={!isEditable}
+          disabled={!editingPossible}
           richText
           richTextBlurTransparentBorder={false}
           autoSize
@@ -83,7 +82,7 @@ const TlfbEvents = ({ statusMetadata: { isEditable } }: TlfbEventsProps) => {
         onFocus={selectQuillText}
         id="events-screen-questions"
         transparent={false}
-        disabled={!isEditable}
+        disabled={!editingPossible}
         richText
         richTextBlurTransparentBorder={false}
         autoSize

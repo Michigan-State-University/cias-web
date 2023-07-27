@@ -38,3 +38,12 @@ export const arraysOverlap = (array, otherArray) => {
 
   return mutualValues.length > 0;
 };
+
+/**
+ * @param {Array<any>} array
+ * @param {string} id
+ */
+export const removeById = (array, id) => {
+  const index = findIndexById(array, id);
+  removeAt(array, index);
+};

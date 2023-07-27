@@ -47,6 +47,8 @@ import {
   chatWidgetReducerKey,
   setChatEnabled,
 } from 'global/reducers/chatWidget';
+import { RoutePath } from 'global/constants';
+
 import { canPreview } from 'models/Status/statusPermissions';
 import { finishQuestion } from 'models/Session/QuestionTypes';
 import { UserSessionType } from 'models/UserSession/UserSession';
@@ -243,6 +245,8 @@ export function AnswerSessionPage({
       required,
       proceed_button: proceedButton,
       narrator_skippable: narratorSkippable,
+      min_length: minLength,
+      max_length: maxLength,
     } = {},
     narrator: {
       settings: {
@@ -279,9 +283,10 @@ export function AnswerSessionPage({
   } = userSession ?? {};
 
   const isNewUserSession = useMemo(() => {
-    const { lastAnswerAt } = userSession ?? {};
+    const { lastAnswerAt, started } = userSession ?? {};
 
-    return !lastAnswerAt;
+    // keeping lastAnswerAt check for existing user sessions
+    return !lastAnswerAt && !started;
   }, [userSession]);
 
   const isUserSessionFinished = useMemo(() => {
@@ -339,7 +344,7 @@ export function AnswerSessionPage({
       confirmationButtonColor: themeColors.primary,
       confirmationButtonText: formatMessage(messages.goBackToHomePage),
       confirmationButtonStyles: { width: 'auto', px: 30 },
-      confirmAction: () => history.push('/'),
+      confirmAction: () => history.push(RoutePath.DASHBOARD),
       description: formatMessage(messages.catMhErrorModalTitle),
       content: nextQuestionError?.error?.response?.data?.body ?? '',
       hideCloseButton: true,
@@ -364,7 +369,7 @@ export function AnswerSessionPage({
       encodeURIComponent(location.pathname),
     );
 
-    return <Redirect to={`/no-access?${queryParams.toString()}`} />;
+    return <Redirect to={`${RoutePath.FORBIDDEN}?${queryParams.toString()}`} />;
   }
 
   const currentQuestionId = currentQuestion ? currentQuestion.id : null;
@@ -445,6 +450,8 @@ export function AnswerSessionPage({
       currentQuestion.loading || nextQuestionLoading || answer?.loading;
     const skipQuestionButtonDisabled = continueButtonLoading;
 
+    const isNumericQuestion = currentQuestion.type === QuestionTypes.NUMBER;
+
     const isAnswered = () => {
       if (!answer) {
         return false;
@@ -459,12 +466,22 @@ export function AnswerSessionPage({
           const { confirmed, timezone } = answerBody[0]?.value ?? {};
           return confirmed && timezone;
         }
+        case QuestionTypes.NUMBER: {
+          const { value } = answerBody[0] ?? {};
+          const numberOfDigits = `${value}` === 'NaN' ? 0 : `${value}`.length;
+          if (minLength && maxLength)
+            return numberOfDigits <= maxLength && numberOfDigits >= minLength;
+          if (minLength) return numberOfDigits >= minLength;
+          if (maxLength) return numberOfDigits <= maxLength;
+          return true;
+        }
         default:
           return true;
       }
     };
 
-    const isButtonDisabled = () => required && !isAnswered();
+    const isButtonDisabled = () =>
+      (required || isNumericQuestion) && !isAnswered();
 
     const sharedProps = {
       selectAnswer: selectAnswerProp,

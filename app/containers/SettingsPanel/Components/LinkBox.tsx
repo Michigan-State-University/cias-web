@@ -19,9 +19,10 @@ type Props = {
   link: Link;
   updateLink: (data: LinkData) => void;
   removeLink: () => void;
+  disabled: boolean;
 };
 
-export const LinkBox = ({ link, updateLink, removeLink }: Props) => {
+export const LinkBox = ({ link, updateLink, removeLink, disabled }: Props) => {
   const { formatMessage } = useIntl();
   const [open, setOpen] = useState(!(link.displayName && link.url));
 
@@ -74,6 +75,7 @@ export const LinkBox = ({ link, updateLink, removeLink }: Props) => {
       showHoverEffect
       shouldBeOpenOnStart
       iconProps={{ width: 16, height: 16 }}
+      disabled={disabled}
     >
       <Column px={8} gap={12}>
         {/* @ts-ignore */}
@@ -82,7 +84,7 @@ export const LinkBox = ({ link, updateLink, removeLink }: Props) => {
           formikState={formik}
           placeholder={formatMessage(messages.displayName)}
           label={formatMessage(messages.displayName)}
-          inputProps={{ width: '100%' }}
+          inputProps={{ width: '100%', disabled }}
           onBlur={submitForm}
         />
         {/* @ts-ignore */}
@@ -91,7 +93,7 @@ export const LinkBox = ({ link, updateLink, removeLink }: Props) => {
           formikState={formik}
           placeholder={formatMessage(messages.linkPlaceholder)}
           label={formatMessage(messages.link)}
-          inputProps={{ width: '100%' }}
+          inputProps={{ width: '100%', disabled }}
           onBlur={submitForm}
         />
       </Column>

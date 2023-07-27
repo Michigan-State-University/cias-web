@@ -1,13 +1,13 @@
 import React, {
-  useEffect,
-  useState,
-  useRef,
-  useMemo,
-  useLayoutEffect,
   useCallback,
   useContext,
+  useEffect,
+  useLayoutEffect,
+  useMemo,
+  useRef,
+  useState,
 } from 'react';
-import { injectSaga, injectReducer } from 'redux-injectors';
+import { injectReducer, injectSaga } from 'redux-injectors';
 import {
   DragDropContext,
   DragStart,
@@ -26,7 +26,14 @@ import mapValues from 'lodash/mapValues';
 import flow from 'lodash/flow';
 import intersection from 'lodash/intersection';
 
-import SelectResearchers from 'containers/SelectResearchers';
+import { reorderScope } from 'models/Session/ReorderScope';
+import { ClassicSession, Session } from 'models/Session';
+import { QuestionDTO, QuestionTypes } from 'models/Question';
+import { GroupType, QuestionGroup } from 'models/QuestionGroup';
+import { questionType } from 'models/Session/QuestionTypes';
+
+import { RoutePath } from 'global/constants';
+
 import Box from 'components/Box';
 import Column from 'components/Column';
 import Loader from 'components/Loader';
@@ -35,11 +42,16 @@ import Row from 'components/Row';
 import Img from 'components/Img';
 import ActionIcon from 'components/ActionIcon';
 import Text from 'components/Text';
-import Modal from 'components/Modal';
 import TextButton from 'components/Button/TextButton';
 import H2 from 'components/H2';
 import CopyModal from 'components/CopyModal';
 import { VIEWS } from 'components/CopyModal/Components';
+
+import GroupActionButton from 'containers/Sessions/components/GroupActionButton';
+import {
+  ShareExternallyLevel,
+  useShareExternallyModal,
+} from 'containers/ShareExternallyModal';
 
 import menu from 'assets/svg/triangle-back-black.svg';
 import cog from 'assets/svg/gear-selected.svg';
@@ -56,45 +68,40 @@ import duplicateInternallyActive from 'assets/svg/duplicate-internally-active.sv
 
 import { borders, colors, themeColors } from 'theme';
 
+import { parametrizeRoutePath } from 'utils/router';
 import instantiateEmptyQuestion from 'utils/instantiateEmptyQuestion';
 import isNullOrUndefined from 'utils/isNullOrUndefined';
 
 import {
+  createQuestionGroupRequest,
   createQuestionRequest,
-  questionsReducer,
+  deleteQuestionsRequest,
   makeSelectQuestions,
   makeSelectSelectedQuestionId,
+  questionsReducer,
   reorderQuestionListRequest,
-  deleteQuestionsRequest,
   selectQuestion as selectQuestionAction,
-  createQuestionGroupRequest,
 } from 'global/reducers/questions';
 import {
-  reorderGroupListRequest,
-  reorderQuestionGroupsSaga,
+  changeGroupNameRequest,
   duplicateGroupsHereRequest,
   duplicateGroupsInternallyRequest,
-  groupQuestionsRequest,
-  shareGroupsExternallyRequest,
-  makeSelectQuestionGroups,
-  changeGroupNameRequest,
-  questionGroupsReducer,
   getQuestionGroupsRequest,
   getQuestionGroupsSaga,
+  groupQuestionsRequest,
+  makeSelectQuestionGroups,
+  questionGroupsReducer,
+  reorderGroupListRequest,
+  reorderQuestionGroupsSaga,
+  shareGroupsExternallyRequest,
 } from 'global/reducers/questionGroups';
 import {
-  copyModalReducer,
   allCopyModalSagas,
+  copyModalReducer,
 } from 'global/reducers/copyModalReducer';
 import { JumpToScreenLocationState } from 'global/types/locationState';
+import { makeSelectNavbarHeight } from 'global/reducers/globalState';
 
-import GroupActionButton from 'containers/Sessions/components/GroupActionButton';
-import { reorderScope } from 'models/Session/ReorderScope';
-import { ClassicSession, Session } from 'models/Session';
-
-import { QuestionDTO, QuestionTypes } from 'models/Question';
-import { QuestionGroup, GroupType } from 'models/QuestionGroup';
-import { questionType } from 'models/Session/QuestionTypes';
 import QuestionDetails from '../../components/QuestionDetails';
 import QuestionSettings from '../../components/QuestionSettings';
 import QuestionTypeChooser from '../../components/QuestionTypeChooser';
@@ -102,11 +109,11 @@ import QuestionTypeChooser from '../../components/QuestionTypeChooser';
 import messages from './messages';
 import { EditSessionPageContext, useLockEditSessionPageScroll } from './utils';
 import {
+  Grid,
   QuestionsRow,
   ShowListButton,
-  StyledQuestionTypeChooser,
   Spacer,
-  Grid,
+  StyledQuestionTypeChooser,
 } from './styled';
 import QuestionListGroup from '../QuestionListGroup';
 
@@ -124,9 +131,10 @@ type Props = {
     groupId: string,
   ) => void;
   shareGroupsExternally: (
-    researchers: string[],
+    emails: string[],
     questionIds: string[],
     sessionId: string,
+    ids?: string[],
   ) => void;
   groupQuestions: (questionIds: string[], sessionId: string) => void;
   deleteQuestions: (
@@ -166,6 +174,7 @@ type Props = {
   selectedQuestion: string;
   questions: QuestionDTO[];
   groups: QuestionGroup[];
+  navbarHeight: number;
   selectQuestion: (id: string) => void;
   createQuestionGroup: (sessionId: string, groupType: string) => void;
 } & NonReduxProps;
@@ -183,6 +192,7 @@ const EditClassicSessionPage = ({
   groupQuestions,
   shareGroupsExternally,
   groups,
+  navbarHeight,
   changeGroupName,
   getQuestionGroups,
   session: { id: sessionId, name: sessionName },
@@ -194,7 +204,6 @@ const EditClassicSessionPage = ({
   const [manage, setManage] = useState(false);
   const [selectedSlides, setSelectedSlides] = useState<string[]>([]);
   const [showList, setShowList] = useState(false);
-  const [modalVisible, setModalVisible] = useState(false);
   const [duplicateModalVisible, setDuplicateModalVisible] = useState(false);
   const [isDuringQuestionReorder, setIsDuringQuestionReorder] = useState(false);
   const openedGroups = useRef<string[]>([]);
@@ -270,6 +279,14 @@ const EditClassicSessionPage = ({
     ({ id }) => currentQuestion && id === currentQuestion.question_group_id,
   )!;
 
+  const shareExternally = (emails: string[], ids?: string[]) =>
+    shareGroupsExternally(emails, selectedSlides, sessionId, ids);
+  const { Modal: ShareExternallyModal, openModal: openShareExternallyModal } =
+    useShareExternallyModal(
+      shareExternally,
+      ShareExternallyLevel.QUESTION_GROUP,
+    );
+
   const groupActions = [
     {
       label: <FormattedMessage {...messages.duplicateHere} />,
@@ -292,7 +309,7 @@ const EditClassicSessionPage = ({
       label: <FormattedMessage {...messages.shareCopy} />,
       inactiveIcon: share,
       activeIcon: shareActive,
-      action: () => setModalVisible(true),
+      action: openShareExternallyModal,
     },
     {
       label: <FormattedMessage {...messages.group} />,
@@ -422,9 +439,6 @@ const EditClassicSessionPage = ({
     <GroupActionButton active={active} {...action} key={index} />
   );
 
-  const sendSlidesToResearchers = (researchers: string[]) =>
-    shareGroupsExternally(researchers, selectedSlides, sessionId);
-
   const onDuplicateGroupsInternally = (target: Session) =>
     duplicateGroupsInternally(selectedSlides, target.id);
 
@@ -463,7 +477,11 @@ const EditClassicSessionPage = ({
   );
 
   const goToSessionMap = () => {
-    const url = `/interventions/${interventionId}/sessions/${sessionId}/map`;
+    if (!interventionId) return;
+    const url = parametrizeRoutePath(RoutePath.SESSION_MAP, {
+      interventionId,
+      sessionId,
+    });
     history.push(url, { selectedQuestionId: selectedQuestion });
   };
 
@@ -478,17 +496,7 @@ const EditClassicSessionPage = ({
           {formatMessage(messages.pageTitle, { name: sessionName })}
         </title>
       </Helmet>
-      {/* @ts-ignore */}
-      <Modal
-        title={formatMessage(messages.modalTitle)}
-        onClose={() => setModalVisible(false)}
-        visible={modalVisible}
-      >
-        <SelectResearchers
-          onClose={() => setModalVisible(false)}
-          onResearchersSelected={sendSlidesToResearchers}
-        />
-      </Modal>
+      <ShareExternallyModal />
       <CopyModal
         visible={duplicateModalVisible}
         onClose={() => setDuplicateModalVisible(false)}
@@ -500,7 +508,7 @@ const EditClassicSessionPage = ({
         defaultView={VIEWS.SESSION}
       />
       <Row height="100%" filled>
-        <QuestionsRow sm={4} isVisible={showList}>
+        <QuestionsRow sm={4} isVisible={showList} $navbarHeight={navbarHeight}>
           <Box
             data-cy="questions-list"
             borderRight={`${borders.borderWidth} ${borders.borderStyle} ${colors.linkWater}`}
@@ -648,6 +656,7 @@ const mapStateToProps = createStructuredSelector({
   questions: makeSelectQuestions(),
   selectedQuestion: makeSelectSelectedQuestionId(),
   groups: makeSelectQuestionGroups(),
+  navbarHeight: makeSelectNavbarHeight(),
 });
 
 const mapDispatchToProps = {

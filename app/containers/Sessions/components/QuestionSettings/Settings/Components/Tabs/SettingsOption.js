@@ -1,9 +1,6 @@
 import React, { memo, useCallback } from 'react';
 import PropTypes from 'prop-types';
 import { useIntl } from 'react-intl';
-import { Markup } from 'interweave';
-
-import questionMark from 'assets/svg/grey-question-mark.svg';
 
 import { borders, colors } from 'theme';
 
@@ -12,7 +9,7 @@ import { numericValidator } from 'utils/validators';
 import { FullWidthSwitch } from 'components/Switch';
 import H3 from 'components/H3';
 import Row from 'components/Row';
-import Tooltip from 'components/Tooltip';
+import { HelpIconTooltip } from 'components/HelpIconTooltip';
 
 import { Input } from '../styled';
 import messages from '../messages';
@@ -28,13 +25,19 @@ const SettingsOption = ({
 }) => {
   const { formatMessage } = useIntl();
 
+  const isNullableNumericSettings =
+    index === 'min_length' || index === 'max_length';
+
   const handleUpdate = useCallback(
     (value) => onUpdate(`${index}`, value),
     [index],
   );
 
   const handleStringToNumericUpdate = useCallback(
-    (value) => handleUpdate(+value),
+    (value) => {
+      if (isNullableNumericSettings && value === '') handleUpdate(null);
+      else handleUpdate(+value);
+    },
     [handleUpdate],
   );
 
@@ -49,24 +52,31 @@ const SettingsOption = ({
     }
   };
 
+  const numericInput = useCallback(
+    () => (
+      <>
+        <H3>{formatMessage(messages[`${index}`])}</H3>
+        <Input
+          placeholder={formatMessage(messages[`${index}_placeholder`])}
+          type="singleline"
+          keyboard="tel"
+          value={setting === null ? '' : `${setting}`}
+          validator={numericValidator}
+          onBlur={handleStringToNumericUpdate}
+          width={150}
+          px={12}
+          disabled={disabled}
+        />
+      </>
+    ),
+    [index, setting, disabled, isNullableNumericSettings],
+  );
+
   const renderSetting = () => {
+    if (isNullableNumericSettings) return numericInput();
     switch (setting?.constructor) {
       case Number:
-        return (
-          <>
-            <H3>{formatMessage(messages[`${index}`])}</H3>
-
-            <Input
-              placeholder={formatMessage(messages.textLimitSettingsPlaceholder)}
-              type="singleline"
-              keyboard="tel"
-              value={`${setting}`}
-              validator={numericValidator}
-              onBlur={handleStringToNumericUpdate}
-              width={150}
-            />
-          </>
-        );
+        return numericInput();
       case Boolean:
       default:
         return (
@@ -76,16 +86,12 @@ const SettingsOption = ({
             checked={setting}
             onToggle={handleUpdate}
           >
-            <Row align="center" gap={8}>
+            <HelpIconTooltip
+              id={`question-settings-option-tooltip-${index}`}
+              tooltipContent={tooltipText}
+            >
               <H3>{formatMessage(messages[`${index}`])}</H3>
-              {tooltipText && (
-                <Tooltip
-                  id={`question-settings-option-tooltip-${index}`}
-                  icon={questionMark}
-                  content={<Markup content={tooltipText} />}
-                />
-              )}
-            </Row>
+            </HelpIconTooltip>
           </FullWidthSwitch>
         );
     }

@@ -35,6 +35,28 @@ export type SuccessfullyRestoredInterventionNotificationData = {
 
 export type UnsuccessfulImportNotificationData = {};
 
+export type NewCollaboratorAddedNotificationData = {
+  interventionName: string;
+  interventionId: string;
+};
+
+export type CollaboratorRemovedNotificationData = {
+  interventionName: string;
+  interventionId: string;
+};
+
+export type StartEditingInterventionNotificationData = {
+  interventionName: string;
+  interventionId: string;
+  userId: string;
+  firstName: string;
+  lastName: string;
+  avatarUrl: string;
+};
+
+export type StopEditingInterventionNotificationData =
+  StartEditingInterventionNotificationData;
+
 // Union type
 export type NotificationData =
   | NewConversationNotificationData
@@ -42,4 +64,8 @@ export type NotificationData =
   | InterventionConversationsTranscriptReadyNotificationData
   | SuccessfullyRestoredInterventionNotificationData
   | UnsuccessfulImportNotificationData
-  | NewNarratorWasSetNotificationData;
+  | NewNarratorWasSetNotificationData
+  | NewCollaboratorAddedNotificationData
+  | CollaboratorRemovedNotificationData
+  | StartEditingInterventionNotificationData
+  | StopEditingInterventionNotificationData;

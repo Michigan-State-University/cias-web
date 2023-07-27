@@ -3,6 +3,8 @@ import { useIntl } from 'react-intl';
 
 import { ConversationTranscriptReadyNotification } from 'models/Notification';
 
+import { RoutePath } from 'global/constants';
+
 import messages from '../messages';
 import { NotificationLayoutProps } from '../types';
 import { SingleNotificationBaseLayout } from './SingleNotificationBaseLayout';
@@ -20,8 +22,8 @@ export const ConversationTranscriptReadyNotificationLayout = ({
   const { interventionName, conversationId, archived } = notification.data;
 
   const redirectLink = archived
-    ? `/live-chat/archive?conversation_id=${conversationId}`
-    : `/live-chat?conversation_id=${conversationId}`;
+    ? `${RoutePath.ARCHIVE}?conversation_id=${conversationId}`
+    : `${RoutePath.INBOX}?conversation_id=${conversationId}`;
 
   return (
     <SingleNotificationBaseLayout

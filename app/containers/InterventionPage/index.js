@@ -14,18 +14,13 @@ import { injectReducer, injectSaga } from 'redux-injectors';
 import { Row, Col } from 'react-grid-system';
 import { Markup } from 'interweave';
 
-import Text from 'components/Text';
-import AppContainer from 'components/Container';
-import ErrorAlert from 'components/ErrorAlert';
-import H1 from 'components/H1';
-import TileRenderer from 'components/TileRenderer';
-import SearchInput from 'components/Input/SearchInput';
-import Box from 'components/Box';
-import Img from 'components/Img';
-import { ModalType, useModal } from 'components/Modal';
-import { TextButton } from 'components/Button';
+import importIcon from 'assets/svg/import-secondary.svg';
+
 import { statusTypes } from 'models/Status/StatusTypes';
 
+import { colors, fontSizes, themeColors } from 'theme';
+
+import { FEEDBACK_FORM_URL } from 'global/constants';
 import {
   createInterventionRequest,
   createInterventionSaga,
@@ -39,15 +34,24 @@ import {
   resetImportModalState,
 } from 'global/reducers/interventions';
 import { editUserRequest, makeSelectUser } from 'global/reducers/auth';
-import { FEEDBACK_FORM_URL } from 'global/constants';
-import importIcon from 'assets/svg/import-secondary.svg';
 
-import { colors, fontSizes, themeColors } from 'theme';
+import Text from 'components/Text';
+import AppContainer from 'components/Container';
+import ErrorAlert from 'components/ErrorAlert';
+import H1 from 'components/H1';
+import TileRenderer from 'components/TileRenderer';
+import SearchInput from 'components/Input/SearchInput';
+import Box from 'components/Box';
+import Img from 'components/Img';
+import { ModalType, useModal } from 'components/Modal';
+import { TextButton } from 'components/Button';
+import { HelpIconTooltip } from 'components/HelpIconTooltip';
 
 import StatusFilter from './StatusFilter';
 import messages from './messages';
 import { InitialRow, StyledLink, StyledNotification } from './styled';
 import ImportModalContent from './ImportModalContent';
+import ShareFilter from './ShareFilter';
 
 const INITIAL_FETCH_LIMIT = 15;
 
@@ -71,10 +75,15 @@ export function InterventionPage({
 
   const [filterValue, setFilterValue] = useState('');
   const [filterStatus, setFilterStatus] = useState(statusTypes);
+  const [filterSharing, setFilterSharing] = useState('');
 
   const filterData = useMemo(
-    () => ({ statuses: filterStatus, name: filterValue }),
-    [filterValue, filterStatus],
+    () => ({
+      statuses: filterStatus,
+      name: filterValue,
+      ...(filterSharing && { [filterSharing]: true }),
+    }),
+    [filterValue, filterStatus, filterSharing],
   );
 
   useEffect(() => {
@@ -107,22 +116,8 @@ export function InterventionPage({
     },
   });
 
-  const handleChange = (value) => () => {
-    if (filterStatus.includes(value))
-      setFilterStatus(filterStatus.filter((el) => el !== value));
-    else setFilterStatus([...filterStatus, value]);
-  };
-
-  const handleFilterStatus = (e) => {
-    e.preventDefault();
-    const {
-      currentTarget: { value },
-    } = e;
-    handleChange(value)();
-  };
-
-  const handleClearFilters = () => {
-    setFilterStatus(statusTypes);
+  const handleChange = (values) => {
+    setFilterStatus(values);
   };
 
   const handleFeedbackClick = () => {
@@ -176,9 +171,14 @@ export function InterventionPage({
       )}
 
       <InitialRow fluid style={{ display: 'flex' }}>
-        <H1>
-          <FormattedMessage {...messages.myInterventions} />
-        </H1>
+        <HelpIconTooltip
+          id="dashboard-cdh"
+          tooltipContent={formatMessage(messages.myInterventionsHelp)}
+        >
+          <H1>
+            <FormattedMessage {...messages.myInterventions} />
+          </H1>
+        </HelpIconTooltip>
         <Box
           mx={24}
           width={2}
@@ -212,18 +212,31 @@ export function InterventionPage({
             style={{ marginTop: 10, marginBottom: 10 }}
           >
             <Row my={35} justify="start" align="center">
-              <StatusFilter
-                onClick={handleFilterStatus}
+              <ShareFilter
+                onChange={setFilterSharing}
                 formatMessage={formatMessage}
-                active={filterStatus}
-                onClear={handleClearFilters}
+                active={filterSharing}
               />
             </Row>
           </Col>
           <Col
             xs={12}
             md={6}
-            xxl={8}
+            xxl={4}
+            style={{ marginTop: 10, marginBottom: 10 }}
+          >
+            <Row my={35} justify="start" align="center">
+              <StatusFilter
+                onChange={handleChange}
+                formatMessage={formatMessage}
+                active={filterStatus}
+              />
+            </Row>
+          </Col>
+          <Col
+            xs={12}
+            md={6}
+            xxl={4}
             style={{ marginTop: 10, marginBottom: 10 }}
           >
             <Row align="center">

@@ -303,7 +303,7 @@ export const useConversationChannel = (interventionId?: string) => {
   };
 
   return {
-    isConnected: channel?.state === 'connected',
+    isConnected: !!channel?.isConnected,
     sendMessage,
     readMessage,
     createConversation,

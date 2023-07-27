@@ -1,7 +1,7 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`<SingleTile /> Should render and match the snapshot 1`] = `
-.c4 {
+.c7 {
   width: auto;
   height: auto;
   display: block;
@@ -26,7 +26,7 @@ exports[`<SingleTile /> Should render and match the snapshot 1`] = `
   color: unset;
 }
 
-.c8 {
+.c11 {
   width: auto;
   height: auto;
   display: block;
@@ -36,7 +36,7 @@ exports[`<SingleTile /> Should render and match the snapshot 1`] = `
   color: unset;
 }
 
-.c9 {
+.c12 {
   width: auto;
   height: auto;
   display: block;
@@ -44,7 +44,7 @@ exports[`<SingleTile /> Should render and match the snapshot 1`] = `
   color: unset;
 }
 
-.c12 {
+.c15 {
   width: auto;
   height: auto;
   display: block;
@@ -56,7 +56,45 @@ exports[`<SingleTile /> Should render and match the snapshot 1`] = `
   color: unset;
 }
 
-.c7 {
+.c3 {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-flex-direction: row;
+  -ms-flex-direction: row;
+  flex-direction: row;
+  height: auto;
+  -webkit-align-content: center;
+  -ms-flex-line-pack: center;
+  align-content: center;
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  gap: 12px;
+}
+
+.c4 {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-flex-direction: row;
+  -ms-flex-direction: row;
+  flex-direction: row;
+  height: auto;
+  -webkit-align-content: center;
+  -ms-flex-line-pack: center;
+  align-content: center;
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  gap: 5px;
+}
+
+.c10 {
   display: -webkit-box;
   display: -webkit-flex;
   display: -ms-flexbox;
@@ -68,7 +106,7 @@ exports[`<SingleTile /> Should render and match the snapshot 1`] = `
   width: 100%;
 }
 
-.c11 {
+.c14 {
   display: -webkit-box;
   display: -webkit-flex;
   display: -ms-flexbox;
@@ -84,12 +122,20 @@ exports[`<SingleTile /> Should render and match the snapshot 1`] = `
   justify-items: space-between;
 }
 
-.c6 {
+.c9 {
   width: auto;
   height: auto;
 }
 
-.c10 {
+.c5 {
+  font-family: DM Sans;
+  font-size: 13px;
+  line-height: 130%;
+  color: #2F3850;
+  line-height: 1;
+}
+
+.c13 {
   position: relative;
   width: 100%;
   font-size: 18px;
@@ -97,7 +143,7 @@ exports[`<SingleTile /> Should render and match the snapshot 1`] = `
   color: #2F3850;
 }
 
-.c5 {
+.c8 {
   display: -webkit-box;
   display: -webkit-flex;
   display: -ms-flexbox;
@@ -154,23 +200,22 @@ exports[`<SingleTile /> Should render and match the snapshot 1`] = `
   color: #2F3850;
 }
 
-.c3 {
+.c6 {
   width: 7px;
   height: 7px;
   border-radius: 50%;
   background: #107969;
   display: inline-block;
-  margin-left: 5px;
 }
 
-.c13 {
+.c16 {
   display: -webkit-box;
   display: -webkit-flex;
   display: -ms-flexbox;
   display: flex;
 }
 
-.c13 div {
+.c16 div {
   padding: 5px 10px;
   background: #e9f1fb;
   font-size: 12px;
@@ -189,23 +234,33 @@ exports[`<SingleTile /> Should render and match the snapshot 1`] = `
       <div
         class="c2"
       >
-        <div>
-          Draft
-          <span
-            class="c3"
-          />
+        <div
+          class="c3"
+        >
+          <div
+            class="c4"
+          >
+            <p
+              class="c5"
+            >
+              Draft
+            </p>
+            <span
+              class="c6"
+            />
+          </div>
         </div>
         <div>
           <div
-            class="c4"
+            class="c7"
             display="flex"
           >
             <div
-              class="c5"
+              class="c8"
             >
               <img
                 alt="dots"
-                class="c6"
+                class="c9"
                 src="IMAGE_MOCK"
               />
             </div>
@@ -213,22 +268,22 @@ exports[`<SingleTile /> Should render and match the snapshot 1`] = `
         </div>
       </div>
       <div
-        class="c7"
+        class="c10"
         width="100%"
       >
         <div
-          class="c8"
+          class="c11"
           display="inline"
           width="100%"
         >
           <div
-            class="c9"
+            class="c12"
             data-for="Name"
             data-tip=""
           >
             <div>
               <span
-                class="c10"
+                class="c13"
                 data-for="Name"
                 data-tip="Name"
                 font-size="18"
@@ -251,20 +306,20 @@ exports[`<SingleTile /> Should render and match the snapshot 1`] = `
         </div>
       </div>
       <div
-        class="c11"
+        class="c14"
       >
         <div
-          class="c12"
+          class="c15"
           display="flex"
         >
           <div
-            class="c9"
+            class="c12"
             data-for="test-id-tile-tooltip"
             data-tip=""
           >
             <div>
               <div
-                class="c13"
+                class="c16"
               />
             </div>
           </div>

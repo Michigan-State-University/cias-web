@@ -11,7 +11,6 @@ import {
   makeSelectSelectedQuestion,
   updateQuestionData,
 } from 'global/reducers/questions';
-import { canEdit } from 'models/Status/statusPermissions';
 
 import ApprovableInput from 'components/Input/ApprovableInput';
 import Box from 'components/Box';
@@ -31,7 +30,7 @@ const UrlQuestion = ({
   selectedQuestion,
   updateUrl,
   isNarratorTab,
-  interventionStatus,
+  editingPossible,
   intl: { formatMessage },
 }) => {
   const { payload } = selectedQuestion.body.data[0];
@@ -39,8 +38,6 @@ const UrlQuestion = ({
   const isPreviewValid = urlValidator(payload);
   const displayError = !isPreviewValid && payload;
   const displayPreview = isPreviewValid && payload;
-
-  const editingPossible = canEdit(interventionStatus);
 
   return (
     <Column mt={10}>
@@ -90,7 +87,7 @@ UrlQuestion.propTypes = {
   intl: PropTypes.object.isRequired,
   updateUrl: PropTypes.func.isRequired,
   isNarratorTab: PropTypes.bool,
-  interventionStatus: PropTypes.string,
+  editingPossible: PropTypes.bool,
 };
 
 const mapStateToProps = createStructuredSelector({

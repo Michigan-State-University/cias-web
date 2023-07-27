@@ -8,9 +8,11 @@ import { connect } from 'react-redux';
 import { createStructuredSelector } from 'reselect';
 import { useLocation } from 'react-router-dom';
 
+import { makeSelectUser } from 'global/reducers/auth';
+import { RoutePath } from 'global/constants';
+
 import BackButton from 'components/BackButton';
 import H1 from 'components/H1';
-import { makeSelectUser } from 'global/reducers/auth';
 
 import Profile from './components/Profile';
 import NotificationsSettings from './components/NotificationsSettings';
@@ -38,11 +40,12 @@ function AccountSettings({
   }, [roles, userId]);
 
   const redirectUrl = useMemo(() => {
-    if (queryParams.has('teamId')) return `/teams/${queryParams.get('teamId')}`;
+    if (queryParams.has('teamId'))
+      return `${RoutePath.TEAMS_LIST}/${queryParams.get('teamId')}`;
 
-    if (userId) return '/users';
+    if (userId) return RoutePath.USERS_LIST;
 
-    return '/';
+    return RoutePath.DASHBOARD;
   }, [roles, userId]);
 
   return (

@@ -21,10 +21,12 @@ const SINGLE_ITEM_MARGIN = 8;
 type Props = {
   teamNavigators: NavigatorModalUser[];
   addNavigatorFromTeam: (user: NavigatorModalUser) => void;
+  disabled: boolean;
 };
 const TeamNavigatorsPanel = ({
   teamNavigators,
   addNavigatorFromTeam,
+  disabled,
 }: Props) => {
   const { formatMessage } = useIntl();
 
@@ -76,6 +78,7 @@ const TeamNavigatorsPanel = ({
                   onClick={() => onAddNavigator(user)}
                   buttonProps={{ display: 'flex', align: 'center' }}
                   loading={inDeletion}
+                  disabled={disabled}
                 >
                   <Img width={24} height={24} src={addSign} mr={4} />
                   <Text color={themeColors.secondary} fontWeight="bold">

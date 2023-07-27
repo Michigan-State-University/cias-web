@@ -11,7 +11,10 @@ import { Provider } from 'react-redux';
 import { MemoryRouter } from 'react-router-dom';
 
 import { DEFAULT_LOCALE } from 'i18n';
+
 import { createTestStore } from 'utils/testUtils/storeUtils';
+
+import { intlProviderConfig } from 'containers/LanguageProvider';
 
 import SettingsPanel from '../index';
 
@@ -45,7 +48,7 @@ describe('<SettingsPanel />', () => {
     render(
       <Provider store={store}>
         <MemoryRouter>
-          <IntlProvider locale={DEFAULT_LOCALE}>
+          <IntlProvider locale={DEFAULT_LOCALE} {...intlProviderConfig}>
             <SettingsPanel {...defaultProps} />
           </IntlProvider>
         </MemoryRouter>
@@ -58,7 +61,7 @@ describe('<SettingsPanel />', () => {
     const { container } = render(
       <Provider store={store}>
         <MemoryRouter>
-          <IntlProvider locale={DEFAULT_LOCALE}>
+          <IntlProvider locale={DEFAULT_LOCALE} {...intlProviderConfig}>
             <SettingsPanel {...defaultProps} />
           </IntlProvider>
         </MemoryRouter>

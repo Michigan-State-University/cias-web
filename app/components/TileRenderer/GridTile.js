@@ -1,6 +1,10 @@
 import PropTypes from 'prop-types';
 import React, { memo, useContext } from 'react';
 
+import { RoutePath } from 'global/constants';
+
+import { parametrizeRoutePath } from 'utils/router';
+
 import SingleTile from 'containers/SingleTile';
 import { TilesContext } from 'components/TileRenderer/constants';
 
@@ -16,7 +20,9 @@ const GridTile = ({ data, index }) => {
   return (
     <SingleTile
       tileData={intervention}
-      link={`/interventions/${intervention.id}/`}
+      link={parametrizeRoutePath(RoutePath.INTERVENTION_DETAILS, {
+        interventionId: intervention.id,
+      })}
       isLoading={intervention?.isLoading}
     />
   );

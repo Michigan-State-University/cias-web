@@ -22,8 +22,7 @@ import {
 describe('copyIntervention saga', () => {
   const createPayload = (withParams) => ({
     interventionId: 'intervention-test',
-    users: withParams ? [createUser(), createUser(1)] : null,
-    withoutRedirect: false,
+    emails: withParams ? [createUser(), createUser(1)] : null,
   });
 
   it('Check copyIntervention generator success connection', () => {
@@ -35,7 +34,7 @@ describe('copyIntervention saga', () => {
       .call(
         toast.info,
         formatMessage(messages.copySuccess, {
-          userCount: payload.users.length,
+          userCount: payload.emails.length,
         }),
         {
           toastId: `${COPY_INTERVENTION_SUCCESS}_true`,

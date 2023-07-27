@@ -17,6 +17,9 @@ type EllipsisTextType = {
   isHtml?: boolean;
 } & Record<string, unknown>;
 
+// IF THE TEXT LENGTH IS NOT CALCULATED CORRECTLY AND IT
+// IS DISPLAYED IN A DIFFERENT NUMBER OF LINES THEN TRY
+// SETTING max-width: 0 TO THE PARENT OF THIS COMPONENT
 const EllipsisText = ({
   text,
   id,

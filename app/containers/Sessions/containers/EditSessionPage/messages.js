@@ -37,6 +37,10 @@ export default defineMessages({
     id: `${scope}.shareCopy`,
     defaultMessage: 'Share externally',
   },
+  share: {
+    id: `${scope}.share`,
+    defaultMessage: 'Share',
+  },
   delete: {
     id: `${scope}.delete`,
     defaultMessage: 'Delete',

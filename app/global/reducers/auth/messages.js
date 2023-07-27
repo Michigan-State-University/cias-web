@@ -51,4 +51,8 @@ export default defineMessages({
     id: `${scope}.codeVerification408Error`,
     defaultMessage: 'Provided code has timed out!',
   },
+  termsAcceptSuccess: {
+    id: `${scope}.termsAcceptSuccess`,
+    defaultMessage: 'Terms have been accepted',
+  },
 });

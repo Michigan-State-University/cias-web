@@ -68,12 +68,7 @@ export const changeSchedulingType = (value, sessionId) =>
       type: CHANGE_SCHEDULING_TYPE,
       data: { value, sessionId },
     },
-    [
-      'schedule',
-      'schedule_at',
-      'schedule_payload',
-      'days_after_date_variable_name',
-    ],
+    ['schedule', 'scheduleAt', 'schedulePayload', 'daysAfterDateVariableName'],
   );
 
 export const updateSchedulingPayload = (value, sessionId) =>
@@ -82,12 +77,7 @@ export const updateSchedulingPayload = (value, sessionId) =>
       type: UPDATE_SCHEDULING_PAYLOAD,
       data: { value, sessionId },
     },
-    [
-      'schedule',
-      'schedule_at',
-      'schedule_payload',
-      'days_after_date_variable_name',
-    ],
+    ['schedule', 'scheduleAt', 'schedulePayload', 'daysAfterDateVariableName'],
   );
 
 export const updateSchedulingDate = (value, sessionId) =>
@@ -96,12 +86,7 @@ export const updateSchedulingDate = (value, sessionId) =>
       type: UPDATE_SCHEDULING_DATE,
       data: { value, sessionId },
     },
-    [
-      'schedule',
-      'schedule_at',
-      'schedule_payload',
-      'days_after_date_variable_name',
-    ],
+    ['schedule', 'scheduleAt', 'schedulePayload', 'daysAfterDateVariableName'],
   );
 
 export const updateDaysAfterDateVariable = (value, sessionId) =>
@@ -110,12 +95,7 @@ export const updateDaysAfterDateVariable = (value, sessionId) =>
       type: UPDATE_DAYS_AFTER_DATE_VARIABLE,
       data: { value, sessionId },
     },
-    [
-      'schedule',
-      'schedule_at',
-      'schedule_payload',
-      'days_after_date_variable_name',
-    ],
+    ['schedule', 'scheduleAt', 'schedulePayload', 'daysAfterDateVariableName'],
   );
 
 export const addFormulaTarget = (sessionId, patternIndex, formulaIndex) =>

@@ -22,7 +22,7 @@ export function* fetchOrganizationInterventions({
     });
 
     const { interventions_size: interventionCount } = data;
-    const interventions = jsonApiToArray(data, 'intervention');
+    const interventions = jsonApiToArray(data, 'simpleIntervention');
 
     yield put(
       fetchOrganizationInterventionsSuccess(

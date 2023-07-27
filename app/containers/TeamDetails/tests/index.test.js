@@ -48,7 +48,7 @@ describe('<TeamDetails />', () => {
       teamList: initialState.teamList,
       match: {
         params: {
-          id: 'ta-1',
+          teamId: 'ta-1',
         },
       },
       fetchTeam: jest.fn(),
