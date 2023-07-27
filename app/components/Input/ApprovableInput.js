@@ -217,7 +217,8 @@ const ApprovableInput = ({
             selected={value}
             onChange={(date) => onCheck(date)}
             onFocus={onFocus}
-            dateFormat="yyyy-MM-dd"
+            placeholderText={placeholder ?? 'MM-DD-YYYY'}
+            dateFormat="MM-dd-yyyy"
             selectsEnd={selectsEnd}
             selectsStart={selectsStart}
             startDate={startDate}
@@ -234,8 +235,6 @@ const ApprovableInput = ({
                 width={width}
                 {...styles}
                 ref={ref}
-                keyboard="date"
-                hideNativeDatepicker
               />
             }
             showMonthDropdown

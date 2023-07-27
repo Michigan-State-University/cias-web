@@ -24,10 +24,6 @@ exports[`<ApprovableInput /> Should render and match the snapshot as date input 
   border-color: #107969;
 }
 
-.c4::-webkit-calendar-picker-indicator {
-  display: none;
-}
-
 .c4:disabled {
   color: #ABBBD1;
 }
@@ -134,11 +130,13 @@ exports[`<ApprovableInput /> Should render and match the snapshot as date input 
             class="react-datepicker__input-container"
           >
             <input
+              aria-label="Placeholder"
               class="c4"
               color="#2F3850"
               font-size="14"
               height="50"
-              type="date"
+              placeholder="Placeholder"
+              type="text"
               value=""
               width="250"
             />
