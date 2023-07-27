@@ -1,3 +1,5 @@
+import { RoutePath } from 'global/constants';
+
 import { UPDATE_QUESTION } from '../../support/aliases';
 import { ADMIN_EMAIL, ADMIN_PASSWORD } from '../../support/envVariables';
 
@@ -22,7 +24,7 @@ describe('Send emails', () => {
       'getSessionQuestionGroups',
     );
 
-    cy.visit('/');
+    cy.visit(RoutePath.DASHBOARD);
 
     // Create session and 2 sessions
     cy.getBySel('create-intervention-button').click();

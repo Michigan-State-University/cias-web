@@ -12,6 +12,10 @@ import { addPhoneSaga } from './addPhone';
 import { removePhoneSaga } from './removePhone';
 import { updatePhoneSaga } from './updatePhone';
 import reorderTextMessageVarians from './reorderTextMessageVariants';
+import uploadTextMessageAttachmentSaga from './uploadTextMessageAttachment';
+import deleteTextMessageAttachmentSaga from './deleteTextMessageAttachment';
+import uploadTextMessageVariantAttachmentSaga from './uploadTextMessageVariantAttachment';
+import deleteTextMessageVariantAttachmentSaga from './deleteTextMessageVariantAttachment';
 
 export function* allTextMessagesSagas() {
   yield all([
@@ -28,5 +32,9 @@ export function* allTextMessagesSagas() {
     removePhoneSaga(),
     updatePhoneSaga(),
     reorderTextMessageVarians(),
+    uploadTextMessageAttachmentSaga(),
+    deleteTextMessageAttachmentSaga(),
+    uploadTextMessageVariantAttachmentSaga(),
+    deleteTextMessageVariantAttachmentSaga(),
   ]);
 }

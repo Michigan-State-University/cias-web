@@ -36,7 +36,7 @@ export function ReportTile({
               {!downloaded && (
                 <StyledCircle
                   size={NOT_DOWNLOADED_REPORT_CIRCLE_SIZE}
-                  background={colors.fireIsland}
+                  background={colors.cinnabar}
                 />
               )}
             </Box>

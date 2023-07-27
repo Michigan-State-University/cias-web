@@ -6,7 +6,12 @@ import filter from 'lodash/filter';
 import * as Sentry from '@sentry/browser';
 import type { LottieRef } from 'react-lottie';
 import { Severity } from '@sentry/react';
+import axios from 'axios';
+import { useSelector } from 'react-redux';
+import { useParams } from 'react-router-dom';
 
+import { makeSelectCurrentQuestion } from 'containers/AnswerSessionPage/selectors';
+import { makeSelectSelectedQuestionId } from 'global/reducers/questions';
 import {
   IReadQuestionBlock,
   IReflection,
@@ -66,6 +71,11 @@ const useAudioHelper: TUseAudioHelper = (
   settings,
   audioInstance,
 ) => {
+  const fillingQuestion = useSelector(makeSelectCurrentQuestion());
+  const selectedQuestionId = useSelector(makeSelectSelectedQuestionId());
+  // @ts-ignore
+  const { sessionId } = useParams();
+
   const { animation: isAnimationEnabled, character } = settings;
   const loadedSpeechAnimations = useRef<ILoadedAudioData[]>([]);
 
@@ -270,6 +280,17 @@ const useAudioHelper: TUseAudioHelper = (
 
   const handleAudioError = (): void => {
     const text = getInvalidText(currentData);
+    axios.post(`/v1/regenerate_audio`, {
+      audio: {
+        question_id: selectedQuestionId || fillingQuestion.id,
+        session_id: sessionId,
+        // @ts-ignore
+        block_index: blocks[0].position || currentIndex,
+        audio_index: currentData.currentAudioIndex,
+        // @ts-ignore
+        reflection_index: currentData?.currentReflectionIndex,
+      },
+    });
     Sentry.captureMessage(
       `Issue with audio with text: ${text}`,
       Severity.Error,

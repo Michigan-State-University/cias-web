@@ -3,6 +3,10 @@ import { useIntl } from 'react-intl';
 
 import { SuccessfullyRestoredInterventionNotification } from 'models/Notification';
 
+import { RoutePath } from 'global/constants';
+
+import { parametrizeRoutePath } from 'utils/router';
+
 import messages from '../messages';
 import { NotificationLayoutProps } from '../types';
 import { SingleNotificationBaseLayout } from './SingleNotificationBaseLayout';
@@ -13,7 +17,7 @@ type Props = NotificationLayoutProps<{
 
 export const SuccessfullyRestoredInterventionNotificationLayout = ({
   notification,
-  timeFormatLocale,
+  ...props
 }: Props) => {
   const { formatMessage } = useIntl();
 
@@ -22,13 +26,15 @@ export const SuccessfullyRestoredInterventionNotificationLayout = ({
   return (
     <SingleNotificationBaseLayout
       notification={notification}
-      timeFormatLocale={timeFormatLocale}
       title={formatMessage(messages.successfullyRestoredInterventionTitle)}
       content={formatMessage(messages.successfullyRestoredInterventionContent, {
         interventionName,
       })}
-      linkTo={`/interventions/${interventionId}`}
+      linkTo={parametrizeRoutePath(RoutePath.INTERVENTION_DETAILS, {
+        interventionId,
+      })}
       readOnClick
+      {...props}
     />
   );
 };

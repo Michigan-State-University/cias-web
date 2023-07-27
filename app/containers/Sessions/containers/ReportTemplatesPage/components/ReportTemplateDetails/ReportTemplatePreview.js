@@ -110,6 +110,7 @@ const ReportTemplatePreview = () => {
                     <Col style={{ padding: 0 }}>
                       <TemplateSectionItem
                         templateSection={item}
+                        showDndHandle={canEdit}
                         dragHandleProps={dragHandleProps}
                       />
                     </Col>

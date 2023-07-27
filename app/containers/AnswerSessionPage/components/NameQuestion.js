@@ -23,12 +23,14 @@ const NameQuestion = ({
     settings: { required },
   } = question;
 
+  const [answer] = answerBody ?? [];
+
   /*
    * Initial set of answer value
    * Without it, it crashes when Question is not `required`
    */
   useEffect(() => {
-    if (!required)
+    if (!required && !answer)
       selectAnswer([
         {
           var: variableName,
@@ -57,7 +59,7 @@ const NameQuestion = ({
     <NameQuestionLayout
       formatMessage={formatMessage}
       onChange={onChange}
-      answerBody={answerBody?.[0]}
+      answerBody={answer}
       phoneticPreviewParams={{ user_session_id: id }}
       isAnimationOngoing={isAnimationOngoing}
       isDesktop={isDesktop}

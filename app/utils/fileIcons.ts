@@ -25,7 +25,8 @@ const ExtensionIcons: IconMap = {
   default: defaultIcon,
 };
 
-export const getIconForExtension = (fileName: string): SVGElement => {
+export const getIconForExtension = (fileName?: string): SVGElement => {
+  if (!fileName) return ExtensionIcons.default;
   const extension = fileName.split('.').pop()?.toLowerCase().trim();
   return extension && extension in ExtensionIcons
     ? ExtensionIcons[extension]

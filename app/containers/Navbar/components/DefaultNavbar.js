@@ -1,6 +1,8 @@
 import React, { useRef, useState } from 'react';
 import { Link } from 'react-router-dom';
 
+import { RoutePath } from 'global/constants';
+
 import { CIASLogo, MSULogo } from 'components/Logo';
 import Row from 'components/Row';
 
@@ -18,7 +20,7 @@ const DefaultNavbar = () => {
   return (
     <Row width="100%" justify="start">
       <StyledLogos>
-        <Link to="/">
+        <Link to={RoutePath.DASHBOARD}>
           <CIASLogo maxHeight={LOGO_MAX_HEIGHT} width="100%" />
         </Link>
         <MSULogoContainer>

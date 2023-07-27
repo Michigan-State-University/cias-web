@@ -13,6 +13,8 @@ import { Helmet } from 'react-helmet';
 import { FormattedMessage, injectIntl, IntlShape } from 'react-intl';
 import { useInjectReducer, useInjectSaga } from 'redux-injectors';
 
+import { RoutePath } from 'global/constants';
+
 import Spinner from 'components/Spinner';
 import { colors, themeColors } from 'theme';
 import ErrorAlert from 'components/ErrorAlert';
@@ -53,7 +55,7 @@ export const TeamDetails = ({
   editTeam,
   inviteToTeam,
   match: {
-    params: { id },
+    params: { teamId },
   },
   intl: { formatMessage },
 }) => {
@@ -73,8 +75,8 @@ export const TeamDetails = ({
   const closeInviteModal = () => setInviteModalVisible(false);
 
   useEffect(() => {
-    fetchTeam(id);
-  }, [id]);
+    fetchTeam(teamId);
+  }, [teamId]);
 
   useEffect(() => {
     if (singleTeamEditError) {
@@ -91,7 +93,7 @@ export const TeamDetails = ({
   }, [teamAdmin]);
 
   const handleOnSave = () => {
-    editTeam(id, teamName, selectedUser);
+    editTeam(teamId, teamName, selectedUser);
   };
 
   const handleChange = ({ target: { value } }) => {
@@ -103,7 +105,7 @@ export const TeamDetails = ({
   };
 
   const handleSendInvite = (email, roles) => {
-    inviteToTeam(email, id, roles);
+    inviteToTeam(email, teamId, roles);
     closeInviteModal();
   };
 
@@ -140,7 +142,7 @@ export const TeamDetails = ({
         />
       )}
       <StyledBox height="100%" width="100%">
-        <BackButton to="/teams">
+        <BackButton link to={RoutePath.TEAMS_LIST}>
           <FormattedMessage {...messages.backButton} />
         </BackButton>
         <Row align="center">
@@ -220,7 +222,7 @@ export const TeamDetails = ({
         <Row style={{ marginTop: 75 }}>
           <Col>
             <UserList
-              teamId={id}
+              teamId={teamId}
               filterableRoles={[
                 Roles.Participant,
                 Roles.Researcher,

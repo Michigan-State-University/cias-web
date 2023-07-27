@@ -1,21 +1,31 @@
-import { takeLatest, put, select, call } from 'redux-saga/effects';
+import { takeLatest, put, select, call, takeEvery } from 'redux-saga/effects';
 import axios from 'axios';
-import omit from 'lodash/omit';
-import map from 'lodash/map';
 import { toast } from 'react-toastify';
 import { push } from 'connected-react-router';
 import merge from 'lodash/merge';
 
+import { AnswerType } from 'models/Answer';
+
+import { RoutePath } from 'global/constants';
+
 import { mapQuestionToStateObject } from 'utils/mapResponseObjects';
 import { formatMessage } from 'utils/intlOutsideReact';
 import isNullOrUndefined from 'utils/isNullOrUndefined';
-import { logInGuest } from 'global/reducers/auth/sagas/logInGuest';
 import LocalStorageService from 'utils/localStorageService';
 import objectToSnakeCase from 'utils/objectToSnakeCase';
-import { makeSelectLocation } from 'containers/App/selectors';
-import { resetPhoneNumberPreview } from 'global/reducers/auth/actions';
+import { getIsPreview } from 'utils/previewMode';
+import { parametrizeRoutePath } from 'utils/router';
+
+import {
+  resetPhoneNumberPreview,
+  updateUsersTimezone,
+} from 'global/reducers/auth/actions';
+import { logInGuest } from 'global/reducers/auth/sagas/logInGuest';
+
 import { jsonApiToObject } from 'utils/jsonApiMapper';
 import objectToCamelKebabCase from 'utils/objectToCamelKebabCase';
+
+import { makeSelectLocation } from 'containers/App/selectors';
 
 import {
   SUBMIT_ANSWER_REQUEST,
@@ -26,6 +36,7 @@ import {
   SAVE_QUICK_EXIT_EVENT_REQUEST,
   FETCH_USER_SESSION_REQUEST,
   FETCH_OR_CREATE_USER_SESSION_REQUEST,
+  FETCH_PREVIOUS_QUESTION_REQUEST,
 } from './constants';
 import {
   submitAnswerSuccess,
@@ -43,16 +54,18 @@ import {
   fetchOrCreateUserSessionSuccess,
   fetchOrCreateUserSessionError,
   resetReducer,
+  fetchPreviousQuestionSuccess,
+  fetchPreviousQuestionError,
 } from './actions';
 import { makeSelectAnswers, makeSelectCurrentQuestion } from './selectors';
 import messages from './messages';
 
 function* submitAnswersAsync({
-  payload: { answerId, required, type: questionType, userSessionId, skipped },
+  payload: { questionId, required, type: questionType, userSessionId, skipped },
 }) {
   const answers = yield select(makeSelectAnswers());
-  const { answerBody } = answers[answerId];
-  let data = map(answerBody, (singleBody) => omit(singleBody, 'index')); // index is needed to remember the selected answers, but useless in request
+  let { answerBody: data } = answers[questionId];
+  data ??= [];
 
   try {
     if (data.length || !required) {
@@ -79,19 +92,27 @@ function* submitAnswersAsync({
         `/v1/user_sessions/${userSessionId}/answers`,
         objectToSnakeCase({
           answer: { type, body: { data } },
-          questionId: answerId,
+          questionId,
           skipped,
         }),
       );
 
-      yield put(submitAnswerSuccess(answerId));
+      if (type === AnswerType.PHONE) {
+        const isPreview = getIsPreview();
+        const timezone = data[0]?.value?.timezone;
+        if (!isPreview && timezone) {
+          yield put(updateUsersTimezone(timezone));
+        }
+      }
+
+      yield put(submitAnswerSuccess(questionId));
 
       yield put(nextQuestionRequest(userSessionId));
     } else {
       throw new Error('Choose answer');
     }
   } catch (error) {
-    yield put(submitAnswerFailure(answerId, error?.toString()));
+    yield put(submitAnswerFailure(questionId, error?.toString()));
   }
 }
 
@@ -108,11 +129,12 @@ function* nextQuestion({ payload: { userSessionId, questionId } }) {
   try {
     const {
       data: {
-        data,
+        data: questionData,
         warning,
         next_user_session_id: newUserSessionId,
         // eslint-disable-next-line camelcase
         next_session_id,
+        answer: answerData,
       },
     } = yield axios.get(requestUrl);
 
@@ -122,8 +144,7 @@ function* nextQuestion({ payload: { userSessionId, questionId } }) {
         formatMessage(messages[warning] ?? messages.unknownWarning),
       );
     if (newUserSessionId) {
-      const location = yield select(makeSelectLocation());
-      const isPreview = /^.*\/preview/.test(location.pathname);
+      const isPreview = getIsPreview();
 
       if (isPreview) {
         yield put(setTransitionalUserSessionId(newUserSessionId));
@@ -131,14 +152,15 @@ function* nextQuestion({ payload: { userSessionId, questionId } }) {
       yield put(changeUserSessionId(newUserSessionId));
     }
 
-    yield put(
-      nextQuestionSuccess(
-        mapQuestionToStateObject(
-          // eslint-disable-next-line camelcase
-          merge(data, { attributes: { next_session_id } }),
-        ),
-      ),
+    const question = mapQuestionToStateObject(
+      // eslint-disable-next-line camelcase
+      merge(questionData, { attributes: { next_session_id } }),
     );
+    const answer = answerData
+      ? jsonApiToObject({ data: answerData }, 'answer')
+      : null;
+
+    yield put(nextQuestionSuccess(question, answer));
   } catch (error) {
     yield put(nextQuestionFailure(error));
   }
@@ -150,7 +172,11 @@ function* redirectToPreview({
   yield call(logInGuest, { payload: { sessionId } });
   yield call(
     window.open,
-    `/interventions/${interventionId}/sessions/${sessionId}/preview/${questionId}`,
+    parametrizeRoutePath(RoutePath.PREVIEW_SESSION_FROM_INDEX, {
+      interventionId,
+      sessionId,
+      index: questionId,
+    }),
   );
 }
 
@@ -255,6 +281,34 @@ function* saveQuickExitEvent({ payload: { userSessionId, isPreview } }) {
   });
 }
 
+function* fetchPreviousQuestion({
+  payload: { userSessionId, currentQuestionId },
+}) {
+  const requestUrl = `/v1/user_sessions/${userSessionId}/previous_question`;
+  const searchParams = new URLSearchParams();
+  searchParams.set('current_question_id', currentQuestionId);
+
+  try {
+    const {
+      data: { data: questionData, answer: answerData },
+    } = yield axios.get(`${requestUrl}?${searchParams}`);
+
+    if (!questionData) {
+      throw Error(formatMessage(messages.previousScreenNotFound));
+    }
+
+    const question = mapQuestionToStateObject(questionData);
+    const answer = answerData
+      ? jsonApiToObject({ data: answerData }, 'answer')
+      : null;
+
+    yield put(fetchPreviousQuestionSuccess(question, answer));
+  } catch (error) {
+    yield call(toast.error, error.response?.data?.message ?? error.toString());
+    yield put(fetchPreviousQuestionError(error));
+  }
+}
+
 // Individual exports for testing
 export default function* AnswerSessionPageSaga() {
   yield takeLatest(SUBMIT_ANSWER_REQUEST, submitAnswersAsync);
@@ -267,6 +321,7 @@ export default function* AnswerSessionPageSaga() {
   );
   yield takeLatest(NEXT_QUESTION_REQUEST, nextQuestion);
   yield takeLatest(SAVE_QUICK_EXIT_EVENT_REQUEST, saveQuickExitEvent);
+  yield takeEvery(FETCH_PREVIOUS_QUESTION_REQUEST, fetchPreviousQuestion);
 }
 
 export function* redirectToPreviewSaga() {

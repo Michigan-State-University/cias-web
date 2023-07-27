@@ -1,6 +1,7 @@
 import { defineMessages } from 'react-intl';
 
 import { EFeedbackAction } from 'models/Narrator/FeedbackActions';
+import { NarratorSettingsKey } from 'models/Narrator';
 
 export const scope = 'app.containers.DefaultSettings';
 
@@ -37,6 +38,10 @@ export default defineMessages({
     id: `${scope}.text_limit`,
     defaultMessage: 'Text limit',
   },
+  text_limit_placeholder: {
+    id: `${scope}.text_limit_placeholder`,
+    defaultMessage: 'E.g. 250',
+  },
   proceed_button: {
     id: `${scope}.proceed_button`,
     defaultMessage: 'Continue Button',
@@ -45,13 +50,42 @@ export default defineMessages({
     id: `${scope}.required`,
     defaultMessage: 'Required',
   },
-  animation: {
-    id: `${scope}.animation`,
+  start_autofinish_timer: {
+    id: `${scope}.start_autofinish_timer`,
+    defaultMessage: 'Fire report if get this far',
+  },
+  start_autofinish_timer_tooltip_text: {
+    id: `${scope}.start_autofinish_timer_tooltip_text`,
+    defaultMessage:
+      "Selecting this option means that if the participant gets at least as far as this screen and answers it, CIAS will send any summary reports or text messages after the patient finishes the session, even if they don't get to the very last screen. CIAS will also consider the session to be completed after the participant closes this session, as long as they got at least this far. This means that the participant won't be able to come back later to finish any screens that come after this one.<br><br>This option is available if autofinish is enabled in session General Settings only.",
+  },
+  min_length: {
+    id: `${scope}.min_length`,
+    defaultMessage: 'Minimal length',
+  },
+  min_length_placeholder: {
+    id: `${scope}.min_length_placeholder`,
+    defaultMessage: 'E.g. 1',
+  },
+  max_length: {
+    id: `${scope}.max_length`,
+    defaultMessage: 'Maximum length',
+  },
+  max_length_placeholder: {
+    id: `${scope}.max_length_placeholder`,
+    defaultMessage: 'E.g. 250',
+  },
+  [NarratorSettingsKey.ANIMATION]: {
+    id: `${scope}.${NarratorSettingsKey.ANIMATION}`,
     defaultMessage: 'Display Narrator',
   },
-  voice: {
-    id: `${scope}.voice`,
+  [NarratorSettingsKey.VOICE]: {
+    id: `${scope}.${NarratorSettingsKey.VOICE}`,
     defaultMessage: 'Voice',
+  },
+  [NarratorSettingsKey.EXTRA_SPACE_FOR_NARRATOR]: {
+    id: `${scope}.${NarratorSettingsKey.EXTRA_SPACE_FOR_NARRATOR}`,
+    defaultMessage: 'Extra space for Narrator',
   },
   selectQuestion: {
     id: `${scope}.selectQuestion`,
@@ -179,10 +213,6 @@ export default defineMessages({
     id: `${scope}.blockRemovalConfirmationDescription`,
     defaultMessage:
       'Those block types will be removed in this question and their data will be wiped out',
-  },
-  textLimitSettingsPlaceholder: {
-    id: `${scope}.textLimitSettingsPlaceholder`,
-    defaultMessage: 'E.g. 250',
   },
   deleteBlockHeader: {
     id: `${scope}.deleteBlockHeader`,

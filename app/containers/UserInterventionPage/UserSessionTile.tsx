@@ -3,12 +3,19 @@ import { useHistory } from 'react-router-dom';
 import { useIntl } from 'react-intl';
 import dayjs from 'dayjs';
 
+import { colors, themeColors } from 'theme';
+
+import globalMessages from 'global/i18n/globalMessages';
+import { RoutePath } from 'global/constants';
+
+import { parametrizeRoutePath } from 'utils/router';
+
 import Box from 'components/Box';
 import GhostLink from 'components/GhostLink';
 import Text, { EllipsisText } from 'components/Text';
 import Button from 'components/Button';
 
-import { Session } from 'models/Session/Session';
+import { Session, SessionSchedule } from 'models/Session';
 import { UserSession } from 'models/UserSession/UserSession';
 import {
   UserSessionStatus,
@@ -16,10 +23,6 @@ import {
   statusTypeToFontColorMap,
 } from 'models/UserSession/StatusTypes';
 import { InterventionType } from 'models/Intervention';
-import { colors, themeColors } from 'theme';
-
-import globalMessages from 'global/i18n/globalMessages';
-import { SCHEDULE_OPTIONS } from 'global/reducers/intervention';
 
 import { TileContainer } from './styled';
 import messages from './messages';
@@ -50,7 +53,10 @@ const UserSessionTile = ({
 }: Props) => {
   const { formatMessage } = useIntl();
   const history = useHistory();
-  const sessionUrl = `/interventions/${interventionId}/sessions/${id}/fill`;
+  const sessionUrl = parametrizeRoutePath(RoutePath.ANSWER_SESSION, {
+    interventionId,
+    sessionId: id,
+  });
 
   const isFirstSession = position === 1;
 
@@ -60,20 +66,22 @@ const UserSessionTile = ({
     dayjs().isBefore(dayjs(userSession.scheduledAt));
 
   const isNotAvailable =
-    interventionType === InterventionType.FIXED &&
+    interventionType !== InterventionType.FLEXIBLE &&
     isScheduledForFuture &&
     !isFirstSession &&
     !userSession?.finishedAt &&
-    !userSession?.lastAnswerAt;
+    !userSession?.lastAnswerAt && // keeping lastAnswerAt check for existing user sessions
+    !userSession?.started;
 
   const userSessionStatus = useMemo(() => {
     if (isNotAvailable) return UserSessionStatus.NOT_AVAILABLE;
     if (!userSession) return UserSessionStatus.READY_TO_START;
 
-    const { finishedAt, lastAnswerAt } = userSession;
+    const { finishedAt, lastAnswerAt, started } = userSession;
     if (finishedAt) return UserSessionStatus.COMPLETED;
 
-    if (lastAnswerAt) return UserSessionStatus.IN_PROGRESS;
+    // keeping lastAnswerAt check for existing user sessions
+    if (lastAnswerAt || started) return UserSessionStatus.IN_PROGRESS;
 
     return UserSessionStatus.READY_TO_START;
   }, [userSession, isNotAvailable]);
@@ -112,7 +120,7 @@ const UserSessionTile = ({
     if (userSession && userSession.scheduledAt && isScheduledForFuture) {
       return (
         <Text>
-          {formatMessage(messages[SCHEDULE_OPTIONS.exactDate], {
+          {formatMessage(messages[SessionSchedule.EXACT_DATE], {
             scheduleAt: dayjs(userSession.scheduledAt).format(
               'MMMM D, YYYY h:mm A',
             ),

@@ -9,8 +9,7 @@ import Row from 'components/Row';
 import Checkbox from 'components/Checkbox';
 import HoverableBox from 'components/Box/HoverableBox';
 import AudioTextPreview from 'components/AudioTextPreview';
-
-import { MarkupContainer } from './styled';
+import MarkupContainer from 'components/MarkupContainer';
 
 const margin = 21;
 

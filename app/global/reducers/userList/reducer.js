@@ -11,6 +11,8 @@ import {
   EDIT_SINGLE_TEAM_SUCCESS,
   INVITE_TO_TEAM_SUCCESS,
 } from 'global/reducers/teamList/constants';
+
+import { updateItemById } from 'utils/reduxUtils';
 import {
   CHANGE_ACTIVATE_STATUS_REQUEST,
   FETCH_USERS,
@@ -28,6 +30,7 @@ import {
   FETCH_RESEARCHERS_REQUEST,
   FETCH_RESEARCHERS_SUCCESS,
   FETCH_RESEARCHERS_FAILURE,
+  SET_USERS_ITEMS_STATE,
 } from './constants';
 
 export const initialState = {
@@ -43,7 +46,7 @@ export const initialState = {
   usersSelectorError: null,
   researchersSelectorError: null,
   usersSelectorLoading: true,
-  researchersSelectorLoading: true,
+  researchersSelectorLoading: false,
   usersError: null,
   usersLoading: true,
 };
@@ -152,6 +155,13 @@ const userListReducer = (state = initialState, { type, payload }) =>
         draft.researchersSelectorError = payload;
         draft.researchersSelector = state.cache.researchersSelector;
         break;
+
+      case SET_USERS_ITEMS_STATE: {
+        const { ids, newState } = payload;
+        ids.forEach((id) =>
+          updateItemById(draft.researchersSelector, id, { state: newState }),
+        );
+      }
     }
   });
 

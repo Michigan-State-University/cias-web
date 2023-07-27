@@ -1,6 +1,8 @@
 import { put, takeEvery, call } from 'redux-saga/effects';
 import { push } from 'connected-react-router';
 
+import { RoutePath } from 'global/constants';
+
 import LocalStorageService from 'utils/localStorageService';
 
 import { LOG_OUT, REDIRECT_QUERY_KEY } from '../constants';
@@ -16,7 +18,9 @@ export function* logOut(
   if (redirectTo)
     queryParams.append(REDIRECT_QUERY_KEY, encodeURIComponent(redirectTo));
 
-  yield put(push(`/login${redirectTo ? `?${queryParams.toString()}` : ''}`));
+  yield put(
+    push(`${RoutePath.LOGIN}${redirectTo ? `?${queryParams.toString()}` : ''}`),
+  );
   yield put(resetReducer());
 }
 

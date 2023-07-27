@@ -7,6 +7,8 @@ import { useParams } from 'react-router-dom';
 
 import { colors } from 'theme';
 
+import { Session } from 'models/Session';
+
 import {
   getSessionRequest,
   sessionReducer,
@@ -16,12 +18,11 @@ import {
 
 import Box from 'components/Box';
 
-import { Session } from 'models/Session';
 import SessionSettings from './components/SessionSettings';
 import messages from './messages';
 import { StyledColumn } from './styled';
 
-const SettingsInterventionPage = () => {
+const SettingsSessionPage = () => {
   const dispatch = useDispatch();
   const session = useSelector<unknown, Session>(makeSelectSession());
   const { formatMessage } = useIntl();
@@ -34,6 +35,8 @@ const SettingsInterventionPage = () => {
     googleTtsVoice,
     currentNarrator,
     multipleFill,
+    autofinishEnabled,
+    autofinishDelay,
   } = session;
   useInjectReducer({ key: 'session', reducer: sessionReducer });
   useInjectSaga({ key: 'getSession', saga: getSessionSaga });
@@ -57,8 +60,7 @@ const SettingsInterventionPage = () => {
         display="flex"
         justify="center"
         align="center"
-        pt={40}
-        pb={100}
+        py={40}
         bg={colors.zirkon}
       >
         <StyledColumn height="100%">
@@ -70,6 +72,8 @@ const SettingsInterventionPage = () => {
             googleTtsVoice={googleTtsVoice}
             currentNarrator={currentNarrator}
             multipleFill={multipleFill}
+            autofinishEnabled={autofinishEnabled}
+            autofinishDelay={autofinishDelay}
           />
         </StyledColumn>
       </Box>
@@ -77,4 +81,4 @@ const SettingsInterventionPage = () => {
   );
 };
 
-export default SettingsInterventionPage;
+export default SettingsSessionPage;

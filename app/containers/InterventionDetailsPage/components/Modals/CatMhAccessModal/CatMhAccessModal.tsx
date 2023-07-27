@@ -15,6 +15,7 @@ import {
 import { CatMhAccessModalUI } from './CatMhAccessModalUI';
 import { ModalUIData } from './types';
 import {
+  getTestsLeft,
   mapInterventionToModalData,
   mapModalDataToIntervention,
 } from './utils';
@@ -63,7 +64,11 @@ const Component = ({ modalState: intervention, closeModal }: Props) => {
   };
 
   const onTestNumberChange = (testNumber: number): void => {
-    setModalData({ ...modalData, testNumber });
+    const testsLeft = getTestsLeft(
+      testNumber,
+      intervention.createdCatMhSessionCount,
+    );
+    setModalData({ ...modalData, testNumber, testsLeft });
   };
 
   const onSave = (): void => {

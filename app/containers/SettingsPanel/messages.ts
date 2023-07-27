@@ -25,6 +25,11 @@ export default defineMessages({
     id: `${scope}.anyoneWhoIsARegisteredParticipantLabel`,
     defaultMessage: 'Any registered participant',
   },
+  anyoneWhoIsARegisteredParticipantHelp: {
+    id: `${scope}.anyoneWhoIsARegisteredParticipantHelp`,
+    defaultMessage:
+      'Participants will need to create a CIAS account in order to access an intervention with this setting. Click <a href="https://www.cias.app/_files/ugd/afc5c9_c5c8d584dd4c4b3cae7e193a13fe51ee.pdf" target="_blank">here</a> for a step-by-step guide to participant onboarding. For more help resources, visit <a href="https://www.cias.app/resources" target="_blank">www.cias.app/resources</a>.',
+  },
   onlyInvitedRegisteredParticipantsLabel: {
     id: `${scope}.onlyInvitedRegisteredParticipantsLabel`,
     defaultMessage: 'Specific registered participants',
@@ -155,9 +160,9 @@ export default defineMessages({
     id: `${scope}.navigators`,
     defaultMessage: 'Navigators',
   },
-  noNavigator: {
-    id: `${scope}.noNavigator`,
-    defaultMessage: 'No Navigator available',
+  contactInformation: {
+    id: `${scope}.contactInformation`,
+    defaultMessage: 'Contact information',
   },
   helpingMaterials: {
     id: `${scope}.helpingMaterials`,
@@ -167,13 +172,21 @@ export default defineMessages({
     id: `${scope}.notifyNavigator`,
     defaultMessage: `Notify navigator about new messages even then it won't be online`,
   },
-  hotlinePrefix: {
-    id: `${scope}.hotlinePrefix`,
-    defaultMessage: 'Hotline prefix',
+  contactPrefix: {
+    id: `${scope}.contactPrefix`,
+    defaultMessage: 'Contact prefix',
   },
-  hotlinePhoneNumber: {
-    id: `${scope}.hotlinePhoneNumber`,
-    defaultMessage: 'Hotline phone number',
+  contactPhoneNumber: {
+    id: `${scope}.contactPhoneNumber`,
+    defaultMessage: 'Contact phone number',
+  },
+  messagePrefix: {
+    id: `${scope}.messagePrefix`,
+    defaultMessage: 'Message prefix',
+  },
+  messagePhoneNumber: {
+    id: `${scope}.messagePhoneNumber`,
+    defaultMessage: 'Message phone number',
   },
   saveChanges: {
     id: `${scope}.saveChanges`,
@@ -189,8 +202,7 @@ export default defineMessages({
   },
   messageLabel: {
     id: `${scope}.messageLabel`,
-    defaultMessage:
-      'Message to participant when no navigator is available<warningColor>*</warningColor>',
+    defaultMessage: 'Message to participant when no navigator is available',
   },
   messagePlaceholder: {
     id: `${scope}.messagePlaceholder`,
@@ -355,5 +367,13 @@ export default defineMessages({
   downloadTranscript: {
     id: `${scope}.downloadTranscript`,
     defaultMessage: 'Download transcript',
+  },
+  contactMessagePlaceholder: {
+    id: `${scope}.contactMessagePlaceholder`,
+    defaultMessage: 'Specify contact message',
+  },
+  contactMessageLabel: {
+    id: `${scope}.contactMessageLabel`,
+    defaultMessage: 'Contact information message',
   },
 });

@@ -14,74 +14,96 @@ export interface RequiredSetting {
   required: boolean;
 }
 
+export interface StartAutofinishTimerSetting {
+  startAutofinishTimer: boolean;
+}
+
 export interface SingleQuestionSettings
   extends QuestionBaseSettings,
     RequiredSetting,
-    ProceedButtonSetting {}
+    ProceedButtonSetting,
+    StartAutofinishTimerSetting {}
 
 export interface MultipleQuestionSettings
   extends QuestionBaseSettings,
-    RequiredSetting {}
+    RequiredSetting,
+    StartAutofinishTimerSetting {}
 
 export interface FreeResponseQuestionSettings
   extends QuestionBaseSettings,
-    RequiredSetting {
+    RequiredSetting,
+    StartAutofinishTimerSetting {
   textLimit: number;
 }
 
 export interface ThirdPartyQuestionSettings
   extends QuestionBaseSettings,
-    RequiredSetting {}
+    RequiredSetting,
+    StartAutofinishTimerSetting {}
 
 export interface NameQuestionSettings
   extends QuestionBaseSettings,
-    RequiredSetting {}
+    RequiredSetting,
+    StartAutofinishTimerSetting {}
 
 export interface NumberQuestionSettings
   extends QuestionBaseSettings,
-    RequiredSetting {}
+    RequiredSetting,
+    StartAutofinishTimerSetting {}
 
 export interface GridQuestionSettings
   extends QuestionBaseSettings,
     RequiredSetting,
-    ProceedButtonSetting {}
+    ProceedButtonSetting,
+    StartAutofinishTimerSetting {}
 
 export interface SliderQuestionSettings
   extends QuestionBaseSettings,
-    RequiredSetting {
+    RequiredSetting,
+    StartAutofinishTimerSetting {
   showNumber: boolean;
 }
 
-export interface InformationQuestionSettings extends QuestionBaseSettings {}
+export interface InformationQuestionSettings
+  extends QuestionBaseSettings,
+    StartAutofinishTimerSetting {}
 
-export interface ExternalLinkQuestionSettings extends QuestionBaseSettings {}
+export interface ExternalLinkQuestionSettings
+  extends QuestionBaseSettings,
+    StartAutofinishTimerSetting {}
 
-export interface FeedbackQuestionSettings extends QuestionBaseSettings {}
+export interface FeedbackQuestionSettings
+  extends QuestionBaseSettings,
+    StartAutofinishTimerSetting {}
 
 export interface FinishQuestionSettings extends QuestionBaseSettings {}
 
 export interface PhoneQuestionSettings
   extends QuestionBaseSettings,
-    RequiredSetting {}
+    RequiredSetting,
+    StartAutofinishTimerSetting {}
 
 export interface DateQuestionSettings
   extends QuestionBaseSettings,
-    RequiredSetting {}
+    RequiredSetting,
+    StartAutofinishTimerSetting {}
 
 export interface ParticipantReportQuestionSettings
   extends QuestionBaseSettings,
-    RequiredSetting {}
+    RequiredSetting,
+    StartAutofinishTimerSetting {}
 
 export interface CurrencyQuestionSettings
   extends QuestionBaseSettings,
-    RequiredSetting {}
+    RequiredSetting,
+    StartAutofinishTimerSetting {}
 
 // Designs do not predict any settings to be available for TLFB screens but this is what BE returns
-export interface TlfbConfigSettings extends QuestionBaseSettings {}
+export interface TlfbConfigSettings {}
 
-export interface TlfbEventsSettings extends QuestionBaseSettings {}
+export interface TlfbEventsSettings extends StartAutofinishTimerSetting {}
 
-export interface TlfbQuestionSettings extends QuestionBaseSettings {}
+export interface TlfbQuestionSettings extends StartAutofinishTimerSetting {}
 
 export type QuestionSettings =
   | SingleQuestionSettings

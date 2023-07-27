@@ -1,3 +1,5 @@
+import { AppFile } from 'models/File';
+
 export interface VariantOriginalText {
   content: string;
 }
@@ -7,4 +9,5 @@ export interface TextMessageVariant {
   content: string;
   formulaMatch: string;
   originalText: string;
+  attachment: Nullable<AppFile>;
 }

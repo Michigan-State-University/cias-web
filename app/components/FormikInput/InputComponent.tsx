@@ -24,6 +24,7 @@ type InputComponentType = {
   placeholder?: string;
   type?: string;
   value?: string | number;
+  disabled?: boolean;
 };
 
 function InputComponent({
@@ -40,6 +41,7 @@ function InputComponent({
   placeholder,
   type,
   value,
+  disabled,
   ...columnStyleProps
 }: InputComponentType) {
   return (
@@ -60,6 +62,7 @@ function InputComponent({
           onBlur={onBlur}
           hasError={hasError}
           keyboard={type}
+          disabled={disabled}
           {...inputProps}
         />
         {children}

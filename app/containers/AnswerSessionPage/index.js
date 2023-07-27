@@ -36,7 +36,9 @@ import {
 } from 'global/reducers/intervention';
 import {
   editPhoneNumberQuestionSaga,
+  editUserSaga,
   REDIRECT_QUERY_KEY,
+  updateUsersTimezoneSaga,
 } from 'global/reducers/auth';
 import { resetReducer as resetAuthReducer } from 'global/reducers/auth/actions';
 import logInGuestSaga from 'global/reducers/auth/sagas/logInGuest';
@@ -45,6 +47,8 @@ import {
   chatWidgetReducerKey,
   setChatEnabled,
 } from 'global/reducers/chatWidget';
+import { RoutePath } from 'global/constants';
+
 import { canPreview } from 'models/Status/statusPermissions';
 import { finishQuestion } from 'models/Session/QuestionTypes';
 import { UserSessionType } from 'models/UserSession/UserSession';
@@ -100,6 +104,7 @@ import {
   saveQuickExitEventRequest,
   resetReducer,
   fetchUserSessionRequest,
+  fetchPreviousQuestionRequest,
 } from './actions';
 import BranchingScreen from './components/BranchingScreen';
 import {
@@ -109,6 +114,7 @@ import {
 } from './constants';
 import { ActionButtons } from './components/ActionButtons';
 import AnswerSessionPageFooter from './components/AnswerSessionPageFooter';
+import ScreenBackButton from './components/ScreenBackButton';
 
 const AnimationRefHelper = ({
   children,
@@ -186,7 +192,6 @@ export function AnswerSessionPage({
     questionError,
     answersError,
     answers,
-    questionIndex,
     interventionStarted,
     previewMode,
     isAnimationOngoing,
@@ -199,6 +204,7 @@ export function AnswerSessionPage({
     showTextTranscript,
     showTextReadingControls,
     transitionalUserSessionId,
+    fetchPreviousQuestionLoading,
   },
   isPreview,
   interventionStatus,
@@ -211,6 +217,7 @@ export function AnswerSessionPage({
   setLiveChatEnabled,
   saveQuickExitEvent,
   resetAnswerSessionPage,
+  fetchPreviousQuestion,
 }) {
   const { formatMessage } = useIntl();
   const history = useHistory();
@@ -218,6 +225,8 @@ export function AnswerSessionPage({
   useInjectReducer({ key: 'intervention', reducer: interventionReducer });
   useInjectSaga({ key: 'fetchIntervention', saga: fetchInterventionSaga });
   useInjectSaga({ key: 'logInGuest', saga: logInGuestSaga });
+  useInjectSaga({ key: 'updateUsersTimezone', saga: updateUsersTimezoneSaga });
+  useInjectSaga({ key: 'editUser', saga: editUserSaga });
   useInjectReducer({ key: 'AnswerSessionPage', reducer });
   useInjectSaga({ key: 'AnswerSessionPage', saga });
   useInjectSaga({ key: 'editPhoneNumber', saga: editPhoneNumberQuestionSaga });
@@ -236,8 +245,16 @@ export function AnswerSessionPage({
       required,
       proceed_button: proceedButton,
       narrator_skippable: narratorSkippable,
+      min_length: minLength,
+      max_length: maxLength,
     } = {},
-    narrator: { settings: { character, animation } = {} } = {},
+    narrator: {
+      settings: {
+        character,
+        extra_space_for_narrator: extraSpaceForNarrator,
+      } = {},
+    } = {},
+    first_question: isFirstScreen,
   } = currentQuestion ?? {};
 
   const [containerQueryParams, pageRef] = useContainerQuery(QUERY);
@@ -266,9 +283,10 @@ export function AnswerSessionPage({
   } = userSession ?? {};
 
   const isNewUserSession = useMemo(() => {
-    const { lastAnswerAt } = userSession ?? {};
+    const { lastAnswerAt, started } = userSession ?? {};
 
-    return !lastAnswerAt;
+    // keeping lastAnswerAt check for existing user sessions
+    return !lastAnswerAt && !started;
   }, [userSession]);
 
   const isUserSessionFinished = useMemo(() => {
@@ -303,8 +321,15 @@ export function AnswerSessionPage({
   }, []);
 
   useEffect(() => {
-    if (userSession) {
-      nextQuestion(userSessionId, index);
+    if (isUserSessionFinished && isGuestUser && !interventionStarted) {
+      LocalStorageService.clearHeaders();
+    }
+  }, [isUserSessionFinished, isGuestUser, interventionStarted]);
+
+  useEffect(() => {
+    if (userSession && !isUserSessionFinished) {
+      const questionId = userSession.lastAnswerAt ? null : index;
+      nextQuestion(userSessionId, questionId);
       if (userSession.liveChatEnabled && interventionId) {
         setLiveChatEnabled(interventionId);
       }
@@ -319,7 +344,7 @@ export function AnswerSessionPage({
       confirmationButtonColor: themeColors.primary,
       confirmationButtonText: formatMessage(messages.goBackToHomePage),
       confirmationButtonStyles: { width: 'auto', px: 30 },
-      confirmAction: () => history.push('/'),
+      confirmAction: () => history.push(RoutePath.DASHBOARD),
       description: formatMessage(messages.catMhErrorModalTitle),
       content: nextQuestionError?.error?.response?.data?.body ?? '',
       hideCloseButton: true,
@@ -344,7 +369,7 @@ export function AnswerSessionPage({
       encodeURIComponent(location.pathname),
     );
 
-    return <Redirect to={`/no-access?${queryParams.toString()}`} />;
+    return <Redirect to={`${RoutePath.FORBIDDEN}?${queryParams.toString()}`} />;
   }
 
   const currentQuestionId = currentQuestion ? currentQuestion.id : null;
@@ -363,9 +388,9 @@ export function AnswerSessionPage({
     CHARACTER_FIXED_POSITION_QUESTIONS.includes(type);
 
   const onContinueButton = () => {
-    if (CONFIRMABLE_QUESTIONS.includes(type))
+    if (CONFIRMABLE_QUESTIONS.includes(type)) {
       setConfirmContinueQuestionModalVisible(true);
-    else saveAnswer(false);
+    } else saveAnswer(false);
   };
 
   const renderQuestionTranscript = (isRightSide) => {
@@ -414,34 +439,54 @@ export function AnswerSessionPage({
   };
 
   const renderQuestion = () => {
-    const selectAnswerProp = (answerBody, selectedByUser = true) => {
-      saveSelectedAnswer({
-        id: currentQuestionId,
-        answerBody,
-        selectedByUser,
-      });
+    const selectAnswerProp = (answerBody) => {
+      saveSelectedAnswer(answerBody, currentQuestionId);
     };
 
     const { [currentQuestionId]: answer } = answers;
     const answerBody = answer?.answerBody ?? [];
 
-    const isLoading =
+    const continueButtonLoading =
       currentQuestion.loading || nextQuestionLoading || answer?.loading;
-    const skipQuestionButtonDisabled = isLoading;
+    const skipQuestionButtonDisabled = continueButtonLoading;
 
-    const isAnswered = () =>
-      answer &&
-      Array.isArray(answer.answerBody) &&
-      answer.answerBody.length &&
-      answer.selectedByUser;
+    const isNumericQuestion = currentQuestion.type === QuestionTypes.NUMBER;
 
-    const isButtonDisabled = () => required && !isAnswered();
+    const isAnswered = () => {
+      if (!answer) {
+        return false;
+      }
+
+      if (!Array.isArray(answerBody) || !answerBody.length) {
+        return false;
+      }
+
+      switch (type) {
+        case QuestionTypes.PHONE: {
+          const { confirmed, timezone } = answerBody[0]?.value ?? {};
+          return confirmed && timezone;
+        }
+        case QuestionTypes.NUMBER: {
+          const { value } = answerBody[0] ?? {};
+          const numberOfDigits = `${value}` === 'NaN' ? 0 : `${value}`.length;
+          if (minLength && maxLength)
+            return numberOfDigits <= maxLength && numberOfDigits >= minLength;
+          if (minLength) return numberOfDigits >= minLength;
+          if (maxLength) return numberOfDigits <= maxLength;
+          return true;
+        }
+        default:
+          return true;
+      }
+    };
+
+    const isButtonDisabled = () =>
+      (required || isNumericQuestion) && !isAnswered();
 
     const sharedProps = {
       selectAnswer: selectAnswerProp,
       answerBody,
       formatMessage,
-      questionIndex,
       saveAnswer,
       showError: toast.error,
       feedbackScreenSettings,
@@ -469,7 +514,28 @@ export function AnswerSessionPage({
       (isNullOrUndefined(proceedButton) || proceedButton) &&
       canSkipNarrator;
 
-    const characterAdditionalSpace = CHARACTER_CONFIGS[character].size.height;
+    const backButtonDisabled =
+      continueButtonLoading || isCatMhSession || isFirstScreen || isLastScreen;
+
+    const backButtonDisabledMessage = () => {
+      if (isCatMhSession) {
+        return formatMessage(messages.backButtonDisabledCatMh);
+      }
+      if (isFirstScreen) {
+        return formatMessage(messages.backButtonDisabledFirstScreen);
+      }
+      if (isLastScreen) {
+        return formatMessage(messages.backButtonDisabledLastScreen);
+      }
+    };
+
+    const onBackButtonClick = () => {
+      if (userSessionId && currentQuestionId) {
+        fetchPreviousQuestion(userSessionId, currentQuestionId);
+      }
+    };
+
+    const narratorExtraSpace = CHARACTER_CONFIGS[character].size.height;
 
     return (
       <Row justify="center" width="100%">
@@ -477,11 +543,7 @@ export function AnswerSessionPage({
           <Box
             lang={languageCode}
             width="100%"
-            pt={
-              animation && !isNarratorPositionFixed
-                ? characterAdditionalSpace
-                : 0
-            }
+            pt={extraSpaceForNarrator ? narratorExtraSpace : 0}
           >
             <CommonLayout
               currentQuestion={currentQuestion}
@@ -493,7 +555,16 @@ export function AnswerSessionPage({
           </Box>
 
           {isNarratorPositionFixed && (
-            <Row mt={isMobile ? 32 : 16}>
+            <Row
+              mt={isMobile ? 32 : 16}
+              align={isMobile ? 'end' : 'center'}
+              gap={16}
+            >
+              <ScreenBackButton
+                onClick={onBackButtonClick}
+                disabled={backButtonDisabled}
+                disabledMessage={backButtonDisabledMessage()}
+              />
               <AnimationRefHelper
                 currentQuestion={currentQuestion}
                 currentQuestionId={currentQuestionId}
@@ -509,7 +580,7 @@ export function AnswerSessionPage({
                   onSkipQuestionClick={() => setSkipQuestionModalVisible(true)}
                   renderContinueButton={shouldRenderContinueButton}
                   continueButtonDisabled={isButtonDisabled()}
-                  continueButtonLoading={isLoading}
+                  continueButtonLoading={continueButtonLoading}
                   onContinueClick={onContinueButton}
                   containerStyle={{
                     my: 0,
@@ -528,15 +599,22 @@ export function AnswerSessionPage({
           )}
 
           {!isNarratorPositionFixed && (
-            <ActionButtons
-              renderSkipQuestionButton={shouldRenderSkipQuestionButton}
-              skipQuestionButtonDisabled={skipQuestionButtonDisabled}
-              onSkipQuestionClick={() => setSkipQuestionModalVisible(true)}
-              renderContinueButton={shouldRenderContinueButton}
-              continueButtonDisabled={isButtonDisabled()}
-              continueButtonLoading={isLoading}
-              onContinueClick={onContinueButton}
-            />
+            <Row align="center" gap={16}>
+              <ScreenBackButton
+                onClick={onBackButtonClick}
+                disabled={backButtonDisabled}
+                disabledMessage={backButtonDisabledMessage()}
+              />
+              <ActionButtons
+                renderSkipQuestionButton={shouldRenderSkipQuestionButton}
+                skipQuestionButtonDisabled={skipQuestionButtonDisabled}
+                onSkipQuestionClick={() => setSkipQuestionModalVisible(true)}
+                renderContinueButton={shouldRenderContinueButton}
+                continueButtonDisabled={isButtonDisabled()}
+                continueButtonLoading={continueButtonLoading}
+                onContinueClick={onContinueButton}
+              />
+            </Row>
           )}
 
           {renderQuestionTranscript(false)}
@@ -584,8 +662,6 @@ export function AnswerSessionPage({
     return continueButtonText();
   };
 
-  const renderPage = () => <>{renderQuestion()}</>;
-
   const resetTransitionalUserSessionId = () =>
     setTransitionalUserSessionId(null);
 
@@ -593,7 +669,9 @@ export function AnswerSessionPage({
     saveQuickExitEvent(userSessionId, isPreview);
   };
 
-  const showLoader = nextQuestionLoading && interventionStarted;
+  const showLoader =
+    (nextQuestionLoading || fetchPreviousQuestionLoading) &&
+    interventionStarted;
 
   const isFullSize =
     interventionStarted &&
@@ -760,7 +838,11 @@ export function AnswerSessionPage({
                         <Row
                           padding={!isDesktop || isMobile ? 30 : 0}
                           pb={isDesktop || (!isDesktop && logoUrl) ? 24 : 0}
-                          pt={isMobile && animation && !logoUrl ? 0 : undefined}
+                          pt={
+                            isMobile && extraSpaceForNarrator && !logoUrl
+                              ? 0
+                              : undefined
+                          }
                           width="100%"
                         >
                           {!isDesktop && (
@@ -788,7 +870,7 @@ export function AnswerSessionPage({
                           currentQuestion &&
                           !transitionalUserSessionId && (
                             <ScreenWrapper isFullSize={isFullSize}>
-                              {isNarratorPositionFixed && renderPage()}
+                              {isNarratorPositionFixed && renderQuestion()}
                               {!isNarratorPositionFixed && (
                                 <AnimationRefHelper
                                   currentQuestion={currentQuestion}
@@ -803,7 +885,7 @@ export function AnswerSessionPage({
                                   }
                                   audioInstance={audioInstance}
                                 >
-                                  {renderPage()}
+                                  {renderQuestion()}
                                 </AnimationRefHelper>
                               )}
                             </ScreenWrapper>
@@ -867,6 +949,7 @@ AnswerSessionPage.propTypes = {
   saveQuickExitEvent: PropTypes.func,
   resetAnswerSessionPage: PropTypes.func,
   resetAllReducers: PropTypes.func,
+  fetchPreviousQuestion: PropTypes.func,
 };
 
 const mapStateToProps = createStructuredSelector({
@@ -891,6 +974,7 @@ const mapDispatchToProps = {
   saveQuickExitEvent: saveQuickExitEventRequest,
   resetAnswerSessionPage: resetReducer,
   resetAllReducers: resetAuthReducer,
+  fetchPreviousQuestion: fetchPreviousQuestionRequest,
 };
 
 const withConnect = connect(mapStateToProps, mapDispatchToProps);

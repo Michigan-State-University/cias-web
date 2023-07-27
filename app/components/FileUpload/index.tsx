@@ -1,8 +1,7 @@
-import React, { useCallback, useState, useEffect } from 'react';
+import React, { useCallback, useState, useEffect, ReactNode } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { FormattedMessage, useIntl } from 'react-intl';
-import { useDropzone } from 'react-dropzone';
-import { toast } from 'react-toastify';
+import { DropzoneOptions, useDropzone } from 'react-dropzone';
 
 import Box from 'components/Box';
 import TextButton from 'components/Button/TextButton';
@@ -11,33 +10,35 @@ import Text from 'components/Text';
 import Loader from 'components/Loader';
 import { ImageButton } from 'components/Button';
 import FileBox from 'components/FileBox';
-import Tooltip from 'components/Tooltip';
+import { HelpIconTooltip } from 'components/HelpIconTooltip';
+import Column from 'components/Column';
 
 import { AppFile } from 'models/File';
 import { MAX_FILE_SIZE } from 'global/constants';
 import { colors, borders, themeColors } from 'theme';
 import binNoBg from 'assets/svg/bin-no-bg.svg';
-import questionMark from 'assets/svg/grey-question-mark.svg';
 
 import messages from './messages';
+import { formatFileErrorMessage } from './utils';
 
 type CommonProps = {
   acceptedFormats?: string | string[];
   loading?: boolean;
   label?: string;
-  tooltipContent?: JSX.Element;
+  tooltipContent?: ReactNode;
   error?: string;
+  disabled?: boolean;
 };
 
 type MultipleFilesProps = CommonProps & {
   multiple: true;
   value: AppFile[];
   onUpload: (files: File[]) => void;
-  onRemoveFile?: never;
+  onRemoveFile?: (id: string) => void;
 };
 
 type SingleFileProps = CommonProps & {
-  multiple: false;
+  multiple?: false;
   value: Nullable<AppFile>;
   onUpload: (file: File) => void;
   onRemoveFile?: () => void;
@@ -55,6 +56,7 @@ export const FileUpload = ({
   onRemoveFile,
   tooltipContent,
   error,
+  disabled,
 }: FileUploadProps) => {
   const { formatMessage } = useIntl();
 
@@ -69,23 +71,27 @@ export const FileUpload = ({
   const canUploadFile = !loading && (multiple || !value);
   const shouldDisplayFile = !loading && !multiple && value;
 
-  const deleteIcon = onRemoveFile ? (
-    <ImageButton
-      src={binNoBg}
-      onClick={(e: React.MouseEvent) => {
-        e.stopPropagation();
-        e.preventDefault();
-        onRemoveFile();
-      }}
-      title={formatMessage(messages.deleteFile)}
-      disabled={false}
-      iconProps={{
-        width: 16,
-        height: 16,
-      }}
-      showHoverEffect
-    />
-  ) : null;
+  const deleteIcon = (id: string, deleting?: boolean) => {
+    if (!onRemoveFile) return null;
+    if (deleting) return <Loader type="inline" size={18} />;
+    return (
+      <ImageButton
+        src={binNoBg}
+        onClick={(e: React.MouseEvent) => {
+          e.stopPropagation();
+          e.preventDefault();
+          onRemoveFile(id);
+        }}
+        title={formatMessage(messages.deleteFile)}
+        disabled={disabled}
+        iconProps={{
+          width: 16,
+          height: 16,
+        }}
+        showHoverEffect
+      />
+    );
+  };
 
   const handleDrop = useCallback(
     (newFiles: File[]) => {
@@ -95,8 +101,8 @@ export const FileUpload = ({
     [multiple, onUpload],
   );
 
-  const handleReject = (response: any) => {
-    toast.error(response?.errors?.message || formatMessage(messages.error));
+  const handleReject: DropzoneOptions['onDropRejected'] = (fileRejections) => {
+    setInputError(formatFileErrorMessage(formatMessage, fileRejections));
   };
 
   const { getRootProps, getInputProps, open, isDragActive } = useDropzone({
@@ -107,25 +113,22 @@ export const FileUpload = ({
     accept: acceptedFormats,
     noClick: true,
     maxSize: MAX_FILE_SIZE,
+    disabled,
   });
 
   return (
     <>
       <Box display="flex" align="center" mb={12}>
-        {label && (
-          <Text fontSize={13} lineHeight={1}>
-            {label}
-          </Text>
-        )}
-        {tooltipContent && (
-          <Tooltip
-            id="file-upload-tooltip"
-            ml={label && 8}
-            icon={questionMark}
-            content={tooltipContent}
-            place="right"
-          />
-        )}
+        <HelpIconTooltip
+          id="file-upload-tooltip"
+          tooltipContent={tooltipContent}
+        >
+          {label && (
+            <Text fontSize={13} lineHeight={1}>
+              {label}
+            </Text>
+          )}
+        </HelpIconTooltip>
       </Box>
       <Dropzone
         border={
@@ -152,6 +155,7 @@ export const FileUpload = ({
                   color: colors.jungleGreen,
                   textDecoration: 'underline',
                 }}
+                disabled={disabled}
               >
                 <FormattedMessage {...messages.upload} />
               </TextButton>
@@ -168,7 +172,7 @@ export const FileUpload = ({
               padding="8px 12px"
               width="100%"
               fontWeight="bold"
-              extraIcons={deleteIcon ? [deleteIcon] : []}
+              extraIcons={deleteIcon(value.id)}
             />
           )}
           <input {...getInputProps()} />
@@ -185,6 +189,28 @@ export const FileUpload = ({
           </motion.div>
         )}
       </AnimatePresence>
+      {multiple && (
+        <Column
+          width="calc(100% + 16px)"
+          maxHeight={110}
+          overflow="auto"
+          pr={16}
+          mt={16}
+          gap={8}
+        >
+          {/* @ts-ignore */}
+          {value.map(({ url, name, id, deleting }) => (
+            <FileBox
+              name={name}
+              url={url}
+              key={id}
+              extraIcons={deleteIcon(id, deleting)}
+              maxHeight={44}
+              minHeight={44}
+            />
+          ))}
+        </Column>
+      )}
     </>
   );
 };

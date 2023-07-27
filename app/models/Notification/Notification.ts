@@ -1,10 +1,14 @@
 import { NotificationEvent } from './NotificationEvent';
 import {
+  CollaboratorRemovedNotificationData,
   ConversationTranscriptReadyNotificationData,
   InterventionConversationsTranscriptReadyNotificationData,
+  NewCollaboratorAddedNotificationData,
   NewConversationNotificationData,
   NewNarratorWasSetNotificationData,
   NotificationData,
+  StartEditingInterventionNotificationData,
+  StopEditingInterventionNotificationData,
   SuccessfullyRestoredInterventionNotificationData,
   UnsuccessfulImportNotificationData,
 } from './NotificationData';
@@ -53,6 +57,26 @@ export type UnsuccessfulImportNotification = GenericNotification<
   UnsuccessfulImportNotificationData
 >;
 
+export type NewCollaboratorAddedNotification = GenericNotification<
+  NotificationEvent.NEW_COLLABORATOR_ADDED,
+  NewCollaboratorAddedNotificationData
+>;
+
+export type CollaboratorRemovedNotification = GenericNotification<
+  NotificationEvent.COLLABORATOR_REMOVED,
+  CollaboratorRemovedNotificationData
+>;
+
+export type StartEditingInterventionNotification = GenericNotification<
+  NotificationEvent.START_EDITING_INTERVENTION,
+  StartEditingInterventionNotificationData
+>;
+
+export type StopEditingInterventionNotification = GenericNotification<
+  NotificationEvent.STOP_EDITING_INTERVENTION,
+  StopEditingInterventionNotificationData
+>;
+
 // Union type
 export type Notification =
   | NewConversationNotification
@@ -60,4 +84,8 @@ export type Notification =
   | ConversationTranscriptReadyNotification
   | InterventionConversationsTranscriptReadyNotification
   | SuccessfullyRestoredInterventionNotification
-  | UnsuccessfulImportNotification;
+  | UnsuccessfulImportNotification
+  | NewCollaboratorAddedNotification
+  | CollaboratorRemovedNotification
+  | StartEditingInterventionNotification
+  | StopEditingInterventionNotification;

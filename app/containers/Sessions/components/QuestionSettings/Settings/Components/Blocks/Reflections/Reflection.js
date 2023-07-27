@@ -6,10 +6,12 @@ import { compose } from 'redux';
 import { connect } from 'react-redux';
 import { createStructuredSelector } from 'reselect';
 
+import { themeColors } from 'theme';
+
 import Box from 'components/Box';
 import Column from 'components/Column';
 import Text from 'components/Text';
-import { themeColors } from 'theme';
+
 import {
   makeSelectLoader,
   makeSelectNameQuestionExists,
@@ -73,16 +75,20 @@ const Reflection = ({
       updateNarratorPreviewData({
         ...reflection,
         type: speechType,
-        position: block.position,
+        position: blockIndex,
         animation: block.animation,
+        currentReflectionIndex: reflectionIndex,
       });
 
     setIsPlaying(!isPlaying);
   };
 
   const handleBlur = (value) => {
-    setIsSpeechUpdating(true);
-    handleTextUpdate(value);
+    const trimmedValue = value.trim();
+    if (text.trim() !== trimmedValue) {
+      setIsSpeechUpdating(true);
+      handleTextUpdate(trimmedValue);
+    }
     setHasFocus(false);
   };
 
@@ -91,6 +97,7 @@ const Reflection = ({
       <Box mt={15}>{reflection.payload}</Box>
       {inputVisible ? (
         <SpeechInput
+          id={`question-${id}-reflection-${blockIndex}`}
           formatMessage={formatMessage}
           setHasFocus={setHasFocus}
           isSpeechUpdating={isSpeechUpdating}
@@ -99,6 +106,7 @@ const Reflection = ({
           handleButtonClick={handleButtonClick}
           handleBlur={handleBlur}
           text={text}
+          originalText={reflection.original_text}
           disabled={disabled}
           nameQuestionExists={nameQuestionExists}
         />

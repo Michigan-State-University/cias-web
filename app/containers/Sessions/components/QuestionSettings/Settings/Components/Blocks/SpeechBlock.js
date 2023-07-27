@@ -11,7 +11,7 @@ import Column from 'components/Column';
 import Row from 'components/Row';
 import Select from 'components/Select';
 import { FullWidthSwitch } from 'components/Switch';
-import OriginalTextHover from 'components/OriginalTextHover';
+
 import {
   makeSelectLoader,
   makeSelectSelectedQuestionType,
@@ -98,14 +98,17 @@ const SpeechBlock = ({
 
   const handleButtonClick = () => {
     if (isPlaying) updateNarratorPreviewAnimation('standStill');
-    else updateNarratorPreviewData(block);
+    else updateNarratorPreviewData({ ...block, position: blockIndex });
 
     setIsPlaying(!isPlaying);
   };
 
   const handleBlur = (value) => {
-    setIsSpeechUpdating(true);
-    handleTextUpdate(value);
+    const trimmedValue = value.trim();
+    if (text.trim() !== trimmedValue) {
+      setIsSpeechUpdating(true);
+      handleTextUpdate(trimmedValue);
+    }
     setHasFocus(false);
   };
 
@@ -164,30 +167,20 @@ const SpeechBlock = ({
               {formatMessage(messages.reflectionToggle)}
             </FullWidthSwitch>
           </Row>
-          <OriginalTextHover
+          <SpeechInput
             id={`question-${id}-speech-block-${blockIndex}`}
-            text={block.original_text?.[0]}
-            align="end"
-            position="relative"
-            iconProps={{
-              position: 'absolute',
-              right: 54,
-              bottom: 12,
-            }}
-          >
-            <SpeechInput
-              formatMessage={formatMessage}
-              disabled={disabled}
-              text={text}
-              handleBlur={handleBlur}
-              handleButtonClick={handleButtonClick}
-              hasFocus={hasFocus}
-              isPlaying={isPlaying}
-              isSpeechUpdating={isSpeechUpdating}
-              setHasFocus={setHasFocus}
-              nameQuestionExists={nameQuestionExists}
-            />
-          </OriginalTextHover>
+            formatMessage={formatMessage}
+            setHasFocus={setHasFocus}
+            isSpeechUpdating={isSpeechUpdating}
+            isPlaying={isPlaying}
+            hasFocus={hasFocus}
+            handleButtonClick={handleButtonClick}
+            handleBlur={handleBlur}
+            text={text}
+            originalText={block.original_text}
+            disabled={disabled}
+            nameQuestionExists={nameQuestionExists}
+          />
         </>
       )}
     </Column>

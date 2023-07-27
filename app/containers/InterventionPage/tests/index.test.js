@@ -11,9 +11,14 @@ import { IntlProvider } from 'react-intl';
 import { Provider } from 'react-redux';
 import { MemoryRouter } from 'react-router-dom';
 
-import { createTestStore } from 'utils/testUtils/storeUtils';
-import { DEFAULT_LOCALE } from 'i18n';
 import { Roles } from 'models/User/RolesManager';
+
+import { createTestStore } from 'utils/testUtils/storeUtils';
+
+import { DEFAULT_LOCALE } from 'i18n';
+
+import { intlProviderConfig } from 'containers/LanguageProvider';
+
 import InterventionPage from '../index';
 
 describe('<InterventionPage />', () => {
@@ -53,7 +58,7 @@ describe('<InterventionPage />', () => {
     const spy = jest.spyOn(global.console, 'error');
     render(
       <Provider store={store}>
-        <IntlProvider locale={DEFAULT_LOCALE}>
+        <IntlProvider locale={DEFAULT_LOCALE} {...intlProviderConfig}>
           <MemoryRouter>
             <InterventionPage />
           </MemoryRouter>
@@ -66,7 +71,7 @@ describe('<InterventionPage />', () => {
   it('Should render and match the snapshot with loader', () => {
     const { container } = render(
       <Provider store={store}>
-        <IntlProvider locale={DEFAULT_LOCALE}>
+        <IntlProvider locale={DEFAULT_LOCALE} {...intlProviderConfig}>
           <MemoryRouter>
             <InterventionPage />
           </MemoryRouter>
@@ -91,7 +96,7 @@ describe('<InterventionPage />', () => {
     });
     const { container } = render(
       <Provider store={store}>
-        <IntlProvider locale={DEFAULT_LOCALE}>
+        <IntlProvider locale={DEFAULT_LOCALE} {...intlProviderConfig}>
           <MemoryRouter>
             <InterventionPage />
           </MemoryRouter>
@@ -126,7 +131,7 @@ describe('<InterventionPage />', () => {
     store.injectedSagas = {};
     const { container } = render(
       <Provider store={store}>
-        <IntlProvider locale={DEFAULT_LOCALE}>
+        <IntlProvider locale={DEFAULT_LOCALE} {...intlProviderConfig}>
           <MemoryRouter>
             <InterventionPage />
           </MemoryRouter>

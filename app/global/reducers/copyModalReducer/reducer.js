@@ -8,9 +8,6 @@ import {
   FETCH_QUESTION_GROUPS_SUCCESS,
   FETCH_QUESTION_GROUPS_ERROR,
   CHANGE_VIEW,
-  FETCH_INTERVENTIONS_REQUEST,
-  FETCH_INTERVENTIONS_SUCCESS,
-  FETCH_INTERVENTIONS_ERROR,
   FETCH_INTERVENTIONS_WITH_PAGINATION_SUCCESS,
   FETCH_INTERVENTIONS_WITH_PAGINATION,
 } from './constants';
@@ -41,22 +38,6 @@ export const initialState = {
 export const copyModalReducer = (state = initialState, action) =>
   produce(state, (draft) => {
     switch (action.type) {
-      case FETCH_INTERVENTIONS_REQUEST:
-        draft.loaders.interventions = true;
-        draft.fetchInterventionsError = null;
-        draft.interventions = null;
-        break;
-
-      case FETCH_INTERVENTIONS_SUCCESS:
-        draft.loaders.interventions = false;
-        draft.interventions = action.payload.interventions;
-        break;
-
-      case FETCH_INTERVENTIONS_ERROR:
-        draft.loaders.interventions = false;
-        draft.fetchInterventionsError = action.payload.error;
-        break;
-
       case FETCH_SESSIONS_REQUEST:
         draft.loaders.sessions = true;
         draft.fetchSessionError = null;

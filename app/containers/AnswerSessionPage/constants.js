@@ -83,6 +83,13 @@ export const SET_TRANSITIONAL_USER_SESSION_ID =
 export const SAVE_QUICK_EXIT_EVENT_REQUEST =
   'app/AnswerSessionPage/SAVE_QUICK_EXIT_EVENT_REQUEST';
 
+export const FETCH_PREVIOUS_QUESTION_REQUEST =
+  'app/AnswerSessionPage/FETCH_PREVIOUS_QUESTION_REQUEST';
+export const FETCH_PREVIOUS_QUESTION_SUCCESS =
+  'app/AnswerSessionPage/FETCH_PREVIOUS_QUESTION_SUCCESS';
+export const FETCH_PREVIOUS_QUESTION_ERROR =
+  'app/AnswerSessionPage/FETCH_PREVIOUS_QUESTION_ERROR';
+
 export const QUESTION_TITLE_ID = 'question-title';
 
 export const QUESTION_SUBTITLE_ID = 'question-subtitle';

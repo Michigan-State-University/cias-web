@@ -32,4 +32,12 @@ export default defineMessages({
     id: `${scope}.reorderVariantsError`,
     defaultMessage: "Couldn't reorder text message variants",
   },
+  uploadTextMessageAttachmentError: {
+    id: `${scope}.uploadTextMessageAttachmentError`,
+    defaultMessage: "Couldn't upload SMS message attachment",
+  },
+  deleteTextMessageAttachmentError: {
+    id: `${scope}.deleteTextMessageAttachmentError`,
+    defaultMessage: "Couldn't delete SMS message attachment",
+  },
 });

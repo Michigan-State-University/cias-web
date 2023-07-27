@@ -15,6 +15,7 @@ import map from 'lodash/map';
 import groupBy from 'lodash/groupBy';
 import reduce from 'lodash/reduce';
 import forEach from 'lodash/forEach';
+import uniqBy from 'lodash/uniqBy';
 
 import {
   makeSelectOrganization,
@@ -88,7 +89,7 @@ const OrganizationShareBox = ({
   const buttons = [
     {
       action: handleResend,
-      disabled: sharingPossible,
+      disabled: !sharingPossible,
       text: <FormattedMessage {...messages.resend} />,
     },
   ];
@@ -125,7 +126,7 @@ const OrganizationShareBox = ({
 
   const invitationsSize = useMemo(() => {
     if (!emails) return 0;
-    return reduce(emails, (acc, arr) => acc + arr.length, 0);
+    return reduce(emails, (acc, arr) => acc + uniqBy(arr, 'email').length, 0);
   }, [emails]);
 
   const exportExampleCsvButton = () => (

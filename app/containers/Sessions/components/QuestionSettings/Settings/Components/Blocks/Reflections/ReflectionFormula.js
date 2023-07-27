@@ -6,12 +6,13 @@ import { compose } from 'redux';
 import { connect } from 'react-redux';
 import join from 'lodash/join';
 
+import binNoBg from 'assets/svg/bin-no-bg.svg';
+
 import Column from 'components/Column';
 import Img from 'components/Img';
 import Text from 'components/Text';
 import Row from 'components/Row';
 import InequalityChooser from 'components/InequalityChooser';
-import binNoBg from 'assets/svg/bin-no-bg.svg';
 
 import {
   makeSelectLoader,
@@ -29,7 +30,7 @@ import messages from '../../messages';
 import { removeFormulaCase, updateFormulaCase } from './actions';
 import SpeechInput from '../SpeechInput';
 
-const Reflection = ({
+const ReflectionFormula = ({
   formatMessage,
   reflection,
   blockIndex,
@@ -77,16 +78,20 @@ const Reflection = ({
       updateNarratorPreviewData({
         ...reflection,
         type: speechType,
-        position: block.position,
+        position: blockIndex,
         animation: block.animation,
+        currentReflectionIndex: reflectionIndex,
       });
 
     setIsPlaying(!isPlaying);
   };
 
   const handleBlur = (value) => {
-    setIsSpeechUpdating(true);
-    handleTextUpdate(value);
+    const trimmedValue = value.trim();
+    if (text.trim() !== trimmedValue) {
+      setIsSpeechUpdating(true);
+      handleTextUpdate(trimmedValue);
+    }
     setHasFocus(false);
   };
 
@@ -123,6 +128,7 @@ const Reflection = ({
       </Row>
       <Row>
         <SpeechInput
+          id={`question-${id}-reflection-formula-case-${blockIndex}`}
           formatMessage={formatMessage}
           setHasFocus={setHasFocus}
           isSpeechUpdating={isSpeechUpdating}
@@ -131,6 +137,7 @@ const Reflection = ({
           handleButtonClick={handleButtonClick}
           handleBlur={handleBlur}
           text={text}
+          originalText={reflection.original_text}
           disabled={disabled}
           nameQuestionExists={nameQuestionExists}
         />
@@ -139,7 +146,7 @@ const Reflection = ({
   );
 };
 
-Reflection.propTypes = {
+ReflectionFormula.propTypes = {
   formatMessage: PropTypes.func.isRequired,
   id: PropTypes.string,
   reflection: PropTypes.object,
@@ -179,4 +186,4 @@ const mapDispatchToProps = {
 
 const withConnect = connect(mapStateToProps, mapDispatchToProps);
 
-export default compose(withConnect)(Reflection);
+export default compose(withConnect)(ReflectionFormula);

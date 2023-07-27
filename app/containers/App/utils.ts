@@ -1,4 +1,12 @@
+import { matchPath } from 'react-router';
+
+import { ALL_ROUTE_PATHS, RoutePath } from 'global/constants';
+
 import { OMIT_FETCH_SELF_DETAILS_PATHS } from './constants';
 
-export const shouldFetchSelfDetailsOnPath = (pathname: string) =>
-  !OMIT_FETCH_SELF_DETAILS_PATHS.some((path) => pathname.includes(path));
+export const shouldFetchSelfDetailsOnPath = (pathname: string) => {
+  const match = matchPath(pathname, { path: ALL_ROUTE_PATHS, exact: true });
+  return (
+    match && !OMIT_FETCH_SELF_DETAILS_PATHS.includes(match.path as RoutePath)
+  );
+};

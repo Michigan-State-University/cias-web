@@ -23,6 +23,7 @@ import {
   FETCH_RESEARCHERS_REQUEST,
   FETCH_RESEARCHERS_SUCCESS,
   FETCH_RESEARCHERS_FAILURE,
+  SET_USERS_ITEMS_STATE,
 } from './constants';
 
 export const fetchUsers = (roles, name, page, includeInactive, teamId) =>
@@ -82,3 +83,6 @@ export const deleteUserFromTeamSuccess = () =>
   actionBuilder(DELETE_USER_FROM_TEAM_SUCCESS, {});
 export const deleteUserFromTeamFailure = (error) =>
   actionBuilder(DELETE_USER_FROM_TEAM_FAILURE, error);
+
+export const setUsersItemsState = (ids, newState) =>
+  actionBuilder(SET_USERS_ITEMS_STATE, { ids, newState });

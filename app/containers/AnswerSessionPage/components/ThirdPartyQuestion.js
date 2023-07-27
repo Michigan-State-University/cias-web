@@ -7,14 +7,11 @@ const ThirdPartyQuestion = ({
   question,
   answerBody,
   selectAnswer,
-  saveAnswer,
-  questionIndex,
   isMobile,
 }) => {
   const [selectedAnswerIndex, setSelectedAnswerIndex] = useState(null);
   const {
     body: { data },
-    settings: { proceed_button: proceedButton },
     id,
   } = question;
 
@@ -31,10 +28,6 @@ const ThirdPartyQuestion = ({
       },
     ]);
     setSelectedAnswerIndex(index);
-
-    if (proceedButton) {
-      saveAnswer(questionIndex + 1);
-    }
   };
 
   return (
@@ -52,8 +45,6 @@ ThirdPartyQuestion.propTypes = {
   question: PropTypes.object.isRequired,
   answerBody: PropTypes.any,
   selectAnswer: PropTypes.func,
-  questionIndex: PropTypes.number,
-  saveAnswer: PropTypes.func,
   isMobile: PropTypes.bool,
 };
 

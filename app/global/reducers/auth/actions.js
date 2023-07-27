@@ -42,6 +42,12 @@ import {
   RESET_REDUCER,
   FETCH_SELF_DETAILS_REQUEST,
   FETCH_SELF_DETAILS_SUCCESS,
+  UPDATE_USERS_TIMEZONE,
+  TERMS_NOT_ACCEPTED,
+  TERMS_ACCEPT_REQUEST,
+  TERMS_ACCEPT_SUCCESS,
+  TERMS_ACCEPT_ERROR,
+  CLEAR_ERRORS,
 } from './constants';
 
 export const logIn = (user) => actionBuilder(LOG_IN_USER, { user });
@@ -127,6 +133,9 @@ export const loginError = (error) => actionBuilder(LOGIN_ERROR, { error });
 export const verificationCodeNeeded = () =>
   actionBuilder(VERIFICATION_CODE_NEEDED, {});
 
+export const termsNotAccepted = (fields, password) =>
+  actionBuilder(TERMS_NOT_ACCEPTED, { fields, password });
+
 export const verificationCodeRequest = (verificationCode) =>
   actionBuilder(VERIFICATION_CODE_REQUEST, { verificationCode });
 
@@ -140,3 +149,14 @@ export const fetchSelfDetailsRequest = () =>
   actionBuilder(FETCH_SELF_DETAILS_REQUEST, {});
 export const fetchSelfDetailsSuccess = (user) =>
   actionBuilder(FETCH_SELF_DETAILS_SUCCESS, { user });
+
+export const updateUsersTimezone = (timezone) =>
+  actionBuilder(UPDATE_USERS_TIMEZONE, { timezone });
+
+export const termsAcceptRequest = (fields, onSuccess) =>
+  actionBuilder(TERMS_ACCEPT_REQUEST, { fields, onSuccess });
+export const termsAcceptSuccess = () => actionBuilder(TERMS_ACCEPT_SUCCESS, {});
+export const termsAcceptError = (error) =>
+  actionBuilder(TERMS_ACCEPT_ERROR, { error });
+
+export const clearErrors = () => actionBuilder(CLEAR_ERRORS, {});

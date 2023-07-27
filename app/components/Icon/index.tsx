@@ -15,13 +15,20 @@ export type Props = {
   src: SVGElement | string;
   alt?: string;
   inline?: boolean;
+  wrapperProps?: LayoutProps;
 } & Omit<SVGProperies, 'src'> &
   CSSProperties &
   MarginProps &
   LayoutProps;
 
-const Icon = ({ src, alt = '', inline = false, ...restProps }: Props) => (
-  <Styled.SvgWrapper inline={inline}>
+const Icon = ({
+  src,
+  alt = '',
+  inline = false,
+  wrapperProps,
+  ...restProps
+}: Props) => (
+  <Styled.SvgWrapper inline={inline} {...wrapperProps}>
     <Styled.SVG src={src} alt={alt} {...restProps} />
   </Styled.SvgWrapper>
 );

@@ -10,8 +10,8 @@ export const PageContainer = styled(Container)`
 
 export const MainAppContainer = styled.div`
   position: relative;
-  margin-top: ${elements.navbarHeight}px;
-  height: calc(100vh - ${elements.navbarHeight}px) !important;
+  margin-top: ${({ $navbarHeight }) => $navbarHeight}px;
+  height: calc(100vh - ${({ $navbarHeight }) => $navbarHeight}px) !important;
   width: ${({ $isSidebarVisible }) =>
     `calc(100vw - ${$isSidebarVisible ? elements.sidebarWidth : 0}px)`};
   overflow: auto;
@@ -30,4 +30,5 @@ export const UnprotectedMainAppContainer = styled.div`
 
 export const RowBelowNavbar = styled(Row)`
   overflow: hidden;
+  flex-wrap: nowrap !important;
 `;

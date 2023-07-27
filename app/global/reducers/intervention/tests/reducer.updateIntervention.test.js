@@ -1,7 +1,10 @@
 import cloneDeep from 'lodash/cloneDeep';
 import set from 'lodash/set';
 
+import { SessionSchedule } from 'models/Session';
+
 import { actionBuilder } from 'utils/actionBuilder';
+
 import { UPDATE_SESSION_SETTINGS_REQUEST } from '../constants';
 import {
   UPDATE_FORMULA,
@@ -9,7 +12,6 @@ import {
   ADD_FORMULA_CASE,
   UPDATE_FORMULA_CASE,
   REMOVE_FORMULA_CASE,
-  SCHEDULE_OPTIONS,
   CHANGE_SCHEDULING_TYPE,
   UPDATE_SCHEDULING_PAYLOAD,
   UPDATE_SCHEDULING_DATE,
@@ -43,8 +45,8 @@ describe('intervention reducer', () => {
       formula: '',
     },
     schedule: '',
-    schedule_at: '',
-    schedule_payload: '',
+    scheduleAt: '',
+    schedulePayload: '',
   };
 
   const createSession = (path, value) => {
@@ -145,7 +147,7 @@ describe('intervention reducer', () => {
   });
 
   it('UPDATE_SESSION_SETTINGS_REQUEST -> CHANGE_SCHEDULING_TYPE', () => {
-    const scheduleType = SCHEDULE_OPTIONS.daysAfter;
+    const scheduleType = SessionSchedule.DAYS_AFTER;
     const session = createSession('schedule', scheduleType);
     const updateState = mockState(session);
     set(updateState, 'loaders.editIntervention', true);
@@ -160,7 +162,7 @@ describe('intervention reducer', () => {
 
   it('UPDATE_SESSION_SETTINGS_REQUEST -> UPDATE_SCHEDULING_PAYLOAD', () => {
     const schedulePayload = 10;
-    const session = createSession('schedule_payload', schedulePayload);
+    const session = createSession('schedulePayload', schedulePayload);
     const updateState = mockState(session);
     set(updateState, 'loaders.editIntervention', true);
 
@@ -174,7 +176,7 @@ describe('intervention reducer', () => {
 
   it('UPDATE_SESSION_SETTINGS_REQUEST -> UPDATE_SCHEDULING_DATE', () => {
     const scheduleDate = new Date().toDateString();
-    const session = createSession('schedule_at', scheduleDate);
+    const session = createSession('scheduleAt', scheduleDate);
     const updateState = mockState(session);
     set(updateState, 'loaders.editIntervention', true);
 

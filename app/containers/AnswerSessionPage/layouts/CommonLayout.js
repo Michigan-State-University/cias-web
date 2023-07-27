@@ -13,10 +13,11 @@ import Text from 'components/Text';
 import Tooltip from 'components/Tooltip';
 import OriginalTextHover from 'components/OriginalTextHover';
 import Player from 'components/Player';
+import MarkupContainer from 'components/MarkupContainer';
 
 import AudioTextPreview from 'components/AudioTextPreview';
 import { htmlToPlainText } from 'utils/htmlToPlainText';
-import { ImageWrapper, MarkupContainer } from './styled';
+import { ImageWrapper } from './styled';
 import { QUESTION_SUBTITLE_ID, QUESTION_TITLE_ID } from '../constants';
 
 const CommonLayout = ({

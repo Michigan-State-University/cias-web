@@ -6,6 +6,8 @@
 
 import { defineMessages } from 'react-intl';
 
+import { SessionSchedule } from 'models/Session';
+
 export const scope = 'app.components.SessionSchedule';
 
 export default defineMessages({
@@ -13,29 +15,43 @@ export default defineMessages({
     id: `${scope}.info`,
     defaultMessage: 'If this session is next in the sequence',
   },
+  sessionSchedulingHelp: {
+    id: `${scope}.sessionSchedulingHelp`,
+    defaultMessage:
+      'Schedule when each session of your intervention is sent to participants. Learn more <a href="https://www.cias.app/_files/ugd/afc5c9_44a2c4b39b5e431daf98acdb4d61aa36.pdf" target="_blank">here</a>. For more help resources, visit <a href="https://www.cias.app/resources" target="_blank">www.cias.app/resources</a>.',
+  },
   send: {
     id: `${scope}.send`,
     defaultMessage: 'Send ',
   },
-  daysAfter: {
-    id: `${scope}.daysAfter`,
-    defaultMessage: 'Send [X] days after previous session scheduled date',
+  [SessionSchedule.DAYS_AFTER]: {
+    id: `${scope}.${SessionSchedule.DAYS_AFTER}`,
+    defaultMessage:
+      'Send email invitation [X] days after previous session scheduled date',
   },
-  daysAfterFill: {
-    id: `${scope}.daysAfterFill`,
-    defaultMessage: 'Send [X] days after previous session completed date',
+  [SessionSchedule.DAYS_AFTER_FILL]: {
+    id: `${scope}.${[SessionSchedule.DAYS_AFTER_FILL]}`,
+    defaultMessage:
+      'Send email invitation [X] days after previous session completed date',
   },
-  daysAfterDate: {
-    id: `${scope}.daysAfterDate`,
-    defaultMessage: 'Send [X] days after a date provided by participant',
+  [SessionSchedule.DAYS_AFTER_DATE]: {
+    id: `${scope}.${[SessionSchedule.DAYS_AFTER_DATE]}`,
+    defaultMessage:
+      'Send email invitation [X] days after a date provided by participant',
   },
-  exactDate: {
-    id: `${scope}.exactDate`,
-    defaultMessage: 'Send on exact date',
+  [SessionSchedule.EXACT_DATE]: {
+    id: `${scope}.${[SessionSchedule.EXACT_DATE]}`,
+    defaultMessage: 'Send email invitation on exact date',
   },
-  afterFill: {
-    id: `${scope}.afterFill`,
-    defaultMessage: 'Send immediately after previous session completion',
+  [SessionSchedule.AFTER_FILL]: {
+    id: `${scope}.${[SessionSchedule.AFTER_FILL]}`,
+    defaultMessage:
+      'Send email invitation immediately after previous session completion',
+  },
+  [SessionSchedule.IMMEDIATELY]: {
+    id: `${scope}.${SessionSchedule.IMMEDIATELY}`,
+    defaultMessage:
+      'Start session immediately after previous session completion',
   },
   daysAfterInfo: {
     id: `${scope}.daysAfterInfo`,
@@ -56,10 +72,6 @@ export default defineMessages({
   enterNumber: {
     id: `${scope}.enterNumber`,
     defaultMessage: 'Enter number',
-  },
-  chooseDate: {
-    id: `${scope}.chooseDate`,
-    defaultMessage: 'Choose date',
   },
   default: {
     id: `${scope}.default`,

@@ -1,20 +1,25 @@
 import React from 'react';
 import { useIntl } from 'react-intl';
 
-import Box from 'components/Box';
-import Text, { EllipsisText } from 'components/Text';
-import GhostLink from 'components/GhostLink';
-import Tooltip from 'components/Tooltip';
 import questionMark from 'assets/svg/red-question-mark.svg';
-
-import globalMessages from 'global/i18n/globalMessages';
 import { colors, themeColors } from 'theme';
+
 import {
   statusTypeToColorMap,
   UserInterventionStatus,
 } from 'models/UserIntervention/StatusTypes';
 import { UserIntervention } from 'models/UserIntervention/UserIntervention';
 import { InterventionType } from 'models/Intervention';
+
+import { RoutePath } from 'global/constants';
+import globalMessages from 'global/i18n/globalMessages';
+
+import { parametrizeRoutePath } from 'utils/router';
+
+import Box from 'components/Box';
+import Text, { EllipsisText } from 'components/Text';
+import GhostLink from 'components/GhostLink';
+import Tooltip from 'components/Tooltip';
 
 import { TileContainer } from './styled';
 import messages from './messages';
@@ -58,7 +63,12 @@ const ParticipantInterventionTileRenderer = ({ data, index }: Props) => {
       statusWithBlocked === UserInterventionStatus.COMPLETED);
 
   return (
-    <GhostLink disabled={tileDisabled} to={`/user_interventions/${id}`}>
+    <GhostLink
+      disabled={tileDisabled}
+      to={parametrizeRoutePath(RoutePath.USER_INTERVENTION, {
+        userInterventionId: id,
+      })}
+    >
       <TileContainer bg={tileDisabled ? colors.mischka : colors.white}>
         <Box display="flex" justify="between" align="center">
           <Box px={12} py={8} bg={statusColor} borderRadius={5}>

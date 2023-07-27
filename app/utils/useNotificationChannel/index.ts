@@ -1,3 +1,3 @@
 export * from './useNotificationChannel';
 export * from './types';
-export * from './NotificationsActionsContext';
+export * from './NotificationChannelContext';

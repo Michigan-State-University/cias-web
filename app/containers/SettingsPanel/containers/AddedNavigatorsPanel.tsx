@@ -21,11 +21,13 @@ const ITEM_MARGIN = 8;
 type Props = {
   interventionNavigators: NavigatorModalUser[];
   removeInterventionNavigator: (interventionNavigatorId: string) => void;
+  disabled: boolean;
 };
 
 const AddedNavigatorPanel = ({
   interventionNavigators,
   removeInterventionNavigator,
+  disabled,
 }: Props) => {
   const { formatMessage } = useIntl();
 
@@ -70,6 +72,7 @@ const AddedNavigatorPanel = ({
               onClick={() => removeInterventionNavigator(id)}
               buttonProps={{ display: 'flex', align: 'center', minWidth: 85 }}
               loading={inDeletion}
+              disabled={disabled}
             >
               <Img width={24} height={24} src={minus} mr={4} />
               <Text color={colors.manatee} fontWeight="bold">
