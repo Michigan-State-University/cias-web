@@ -6,7 +6,11 @@ import { useSelector } from 'react-redux';
 import OrganizationIcon from 'assets/svg/organization-icon.svg';
 
 import { themeColors } from 'theme';
+
+import { RoutePath } from 'global/constants';
 import { makeSelectIntervention } from 'global/reducers/intervention';
+
+import { parametrizeRoutePath } from 'utils/router';
 
 import Text from 'components/Text';
 import Box from 'components/Box';
@@ -25,12 +29,21 @@ const OrganizationItem = ({
     useSelector(makeSelectIntervention()) ?? {};
 
   const redirect = () => {
-    const suffix = canAccessOrganizations ? `` : `/dashboard`;
-    history.push(`/organization/${id}${suffix}`);
+    const path = parametrizeRoutePath(
+      canAccessOrganizations
+        ? RoutePath.MANAGE_ORGANIZATIONS
+        : RoutePath.DASHBOARD_VIEW,
+      { organizationId: id },
+    );
+    history.push(path);
   };
 
   const isCurrentOrganizationPage = () =>
-    location.pathname.includes(`organization/${id}`);
+    location.pathname.includes(
+      parametrizeRoutePath(RoutePath.MANAGE_ORGANIZATIONS, {
+        organizationId: id,
+      }),
+    );
 
   const isCurrentOrganizationInterventionPage = () =>
     id === organizationId &&
@@ -42,15 +55,21 @@ const OrganizationItem = ({
   const buttons = [
     {
       text: 'Manage organizations',
-      path: `/organization/${id}`,
+      path: parametrizeRoutePath(RoutePath.MANAGE_ORGANIZATIONS, {
+        organizationId: id,
+      }),
     },
     {
       text: 'Dashboard setup',
-      path: `/organization/${id}/dashboard-setup`,
+      path: parametrizeRoutePath(RoutePath.DASHBOARD_SETUP, {
+        organizationId: id,
+      }),
     },
     {
       text: 'Dashboard view',
-      path: `/organization/${id}/dashboard`,
+      path: parametrizeRoutePath(RoutePath.DASHBOARD_VIEW, {
+        organizationId: id,
+      }),
     },
   ];
 

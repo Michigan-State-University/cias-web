@@ -9,7 +9,7 @@ export const QuestionsRow = styled(Row)`
   @media only screen and (max-width: 1400px) {
     position: fixed;
     z-index: ${ZIndex.EDIT_SESSION_QUESTIONS_ROW};
-    height: calc(100% - 70px);
+    height: calc(100% - ${({ $navbarHeight }) => $navbarHeight}px);
     left: -350px;
     ${({ isVisible }) => isVisible && 'left: 0;'}
   }

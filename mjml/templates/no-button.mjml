@@ -3,6 +3,10 @@
     <app-header />
   </mj-head>
   <mj-body>
-    <app-layout header="{HEADER_TEXT}" mainText="{MAIN_TEXT}" buttonText="" buttonUrl="" />
+    <app-layout
+      header="{HEADER_TEXT}"
+      mainText="{MAIN_TEXT}"
+      footerText="{FOOTER_TEXT}"
+    />
   </mj-body>
 </mjml>

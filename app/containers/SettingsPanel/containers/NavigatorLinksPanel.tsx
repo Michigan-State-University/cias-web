@@ -17,9 +17,10 @@ import messages from '../messages';
 
 export type Props = {
   interventionId: string;
+  disabled: boolean;
 };
 
-const NavigatorLinksPanel = ({ interventionId }: Props) => {
+const NavigatorLinksPanel = ({ interventionId, disabled }: Props) => {
   const { formatMessage } = useIntl();
   const dispatch = useDispatch();
 
@@ -51,6 +52,7 @@ const NavigatorLinksPanel = ({ interventionId }: Props) => {
       addLink={addNewNavigatorLink}
       updateLink={updateNavigatorLink}
       removeLink={removeNavigatorLink}
+      disabled={disabled}
     />
   );
 };

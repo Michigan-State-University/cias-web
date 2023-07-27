@@ -2,6 +2,8 @@ import React, { useContext } from 'react';
 import PropTypes from 'prop-types';
 import trim from 'lodash/trim';
 
+import { RoutePath } from 'global/constants';
+
 import Box from 'components/Box';
 import Row from 'components/Row';
 import StyledTextButton from 'components/Button/StyledTextButton';
@@ -46,8 +48,8 @@ const TableRow = ({
 
   const handleRedirect = () =>
     teamId
-      ? history.push(`/users/${id}?teamId=${teamId}`)
-      : history.push(`/users/${id}`);
+      ? history.push(`${RoutePath.USERS_LIST}/${id}?teamId=${teamId}`)
+      : history.push(`${RoutePath.USERS_LIST}/${id}`);
 
   const text = active
     ? formatMessage(messages.deactivateAccount)

@@ -7,6 +7,8 @@ import groupBy from 'lodash/groupBy';
 import { Markup } from 'interweave';
 import { useInjectReducer } from 'redux-injectors';
 
+import { RoutePath } from 'global/constants';
+
 import useGet from 'utils/useGet';
 
 import {
@@ -172,7 +174,7 @@ const UserInterventionPage = () => {
           </Row>
         </>
       )}
-      <BackButton link to="/">
+      <BackButton link to={RoutePath.DASHBOARD}>
         {formatMessage(messages.backToInterventions)}
       </BackButton>
     </AppContainer>

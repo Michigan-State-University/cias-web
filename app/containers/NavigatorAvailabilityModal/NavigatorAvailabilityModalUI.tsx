@@ -4,7 +4,7 @@ import isNil from 'lodash/isNil';
 
 import { colors } from 'theme';
 
-import { NotificationsActionsContext } from 'utils/useNotificationChannel';
+import { NotificationChannelContext } from 'utils/useNotificationChannel';
 
 import Text from 'components/Text';
 import Divider from 'components/Divider';
@@ -24,7 +24,7 @@ const NavigatorAvailabilityModalUI: ModalProps['modalContentRenderer'] = ({
   const [online, setOnline] = useState<Nullable<boolean>>(null);
 
   const { setNavigatorAvailability } =
-    useContext(NotificationsActionsContext) ?? {};
+    useContext(NotificationChannelContext) ?? {};
 
   const handleSave = () => {
     if (setNavigatorAvailability && !isNil(online)) {

@@ -19,13 +19,14 @@ export default defineMessages({
     id: `${scope}.endUserValue`,
     defaultMessage: 'You',
   },
-  chooseDate: {
-    id: `${scope}.chooseDate`,
-    defaultMessage: 'Choose date',
-  },
   enterName: {
     id: `${scope}.enterName`,
     defaultMessage: 'Enter your name',
+  },
+  nameHelp: {
+    id: `${scope}.nameHelp`,
+    defaultMessage:
+      'You can call the participant by their name throughout the session. Click <a href="https://www.cias.app/_files/ugd/afc5c9_fc039ef55e38488b82f319a7b5112761.pdf" target="_blank">here</a> to see a step-by-step guide. For more help resources, visit <a href="https://www.cias.app/resources" target="_blank">www.cias.app/resources</a>.',
   },
   enterNamePhonetically: {
     id: `${scope}.enterNamePhonetically`,
@@ -107,5 +108,17 @@ export default defineMessages({
   completeSession: {
     id: `${scope}.completeSession`,
     defaultMessage: 'Complete Session',
+  },
+  numericQuestionDigitsBetween: {
+    id: `${scope}.numericQuestionDigitsBetween`,
+    defaultMessage: 'Number between {minLength} and {maxLength} digits',
+  },
+  numericQuestionDigitsMinimum: {
+    id: `${scope}.numericQuestionDigitsMinimum`,
+    defaultMessage: 'Minimum {minLength} digits',
+  },
+  numericQuestionDigitsMaximum: {
+    id: `${scope}.numericQuestionDigitsMaximum`,
+    defaultMessage: 'Maximum {maxLength} digits',
   },
 });

@@ -1,6 +1,5 @@
 import { all } from 'redux-saga/effects';
 import {
-  fetchInterventionSaga,
   giveUserAccessSaga,
   fetchUsersWithAccessSaga,
   revokeUserAccessSaga,
@@ -11,7 +10,6 @@ import { WithSaga } from 'global/reducers/types';
 
 function* interventionSettingPageSaga() {
   yield all([
-    fetchInterventionSaga(),
     addInterventionAttachmentsSaga(),
     deleteInterventionAttachmentSaga(),
   ]);

@@ -57,10 +57,6 @@ export default defineMessages({
     id: `${scope}.finishBy`,
     defaultMessage: 'finish by ',
   },
-  date: {
-    id: `${scope}.date`,
-    defaultMessage: 'Date',
-  },
   provideDate: {
     id: `${scope}.provideDate`,
     defaultMessage: 'Provide completion date',

@@ -4,9 +4,11 @@ import 'jest-styled-components';
 import { Provider } from 'react-redux';
 import { MemoryRouter } from 'react-router-dom';
 import { IntlProvider } from 'react-intl';
+import { DEFAULT_LOCALE } from 'i18n';
 
 import { NAVIGATION, Roles, AllRoles } from 'models/User/RolesManager';
-import { DEFAULT_LOCALE } from 'i18n';
+
+import { RoutePath } from 'global/constants';
 
 import { createTestStore } from 'utils/testUtils/storeUtils';
 import history from 'utils/history';
@@ -89,7 +91,10 @@ describe('<AppRoute />', () => {
     const { container } = render(
       <Provider store={store}>
         <IntlProvider locale={DEFAULT_LOCALE}>
-          <MemoryRouter history={history} initialEntries={['/']}>
+          <MemoryRouter
+            history={history}
+            initialEntries={[RoutePath.DASHBOARD]}
+          >
             <AppRoute {...defaultProps} />
           </MemoryRouter>
         </IntlProvider>

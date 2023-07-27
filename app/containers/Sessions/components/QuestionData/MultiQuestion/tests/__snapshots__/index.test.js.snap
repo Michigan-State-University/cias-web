@@ -56,7 +56,7 @@ exports[`<MultiQuestion /> Should render and match the snapshot 1`] = `
   -webkit-box-align: center;
   -ms-flex-align: center;
   align-items: center;
-  margin-bottom: 10px;
+  margin-bottom: 0;
 }
 
 .c5 {
@@ -71,7 +71,7 @@ exports[`<MultiQuestion /> Should render and match the snapshot 1`] = `
   width: 90%;
 }
 
-.c10 {
+.c9 {
   display: -webkit-box;
   display: -webkit-flex;
   display: -ms-flexbox;
@@ -83,7 +83,7 @@ exports[`<MultiQuestion /> Should render and match the snapshot 1`] = `
   width: 100%;
 }
 
-.c13 {
+.c12 {
   display: -webkit-box;
   display: -webkit-flex;
   display: -ms-flexbox;
@@ -105,7 +105,7 @@ exports[`<MultiQuestion /> Should render and match the snapshot 1`] = `
   display: flex;
 }
 
-.c18 {
+.c17 {
   display: -webkit-box;
   display: -webkit-flex;
   display: -ms-flexbox;
@@ -114,13 +114,10 @@ exports[`<MultiQuestion /> Should render and match the snapshot 1`] = `
   -ms-flex-direction: row;
   flex-direction: row;
   height: auto;
-  display: -webkit-box;
-  display: -webkit-flex;
-  display: -ms-flexbox;
-  display: flex;
+  display: none;
 }
 
-.c20 {
+.c19 {
   display: -webkit-box;
   display: -webkit-flex;
   display: -ms-flexbox;
@@ -138,7 +135,7 @@ exports[`<MultiQuestion /> Should render and match the snapshot 1`] = `
   align-items: center;
 }
 
-.c16 {
+.c15 {
   padding: 12px;
   border-style: solid;
   border-width: 1px;
@@ -156,19 +153,20 @@ exports[`<MultiQuestion /> Should render and match the snapshot 1`] = `
   text-align: center;
   background-color: rgba(0,134,248,0.1);
   color: rgba(0,134,248,1);
+  opacity: 0.5;
 }
 
-.c16:focus {
+.c15:focus {
   box-shadow: none;
   outline: none;
   border-color: #107969;
 }
 
-.c16:disabled {
+.c15:disabled {
   color: #ABBBD1;
 }
 
-.c14 {
+.c13 {
   padding: 12px;
   border-style: solid;
   border-width: 1px;
@@ -188,56 +186,53 @@ exports[`<MultiQuestion /> Should render and match the snapshot 1`] = `
   text-align: center;
   background-color: rgba(16,121,105,0.1);
   color: rgba(16,121,105,1);
+  opacity: 0.5;
 }
 
-.c14:focus {
+.c13:focus {
   box-shadow: none;
   outline: none;
   border-color: #107969;
 }
 
-.c14:disabled {
+.c13:disabled {
   color: #ABBBD1;
 }
 
-.c11 {
+.c10 {
   width: 100%;
   height: auto;
   border: 1px solid transparent;
+  cursor: not-allowed;
 }
 
-.c11 .ql-editor {
+.c10 .ql-editor {
   font-weight: 400;
   padding: 10px;
   overflow: visible;
 }
 
-.c11 .ql-editor.ql-blank::before {
+.c10 .ql-editor.ql-blank::before {
   left: 11px;
 }
 
-.c11 .ql-picker-label svg {
+.c10 .ql-picker-label svg {
   margin-bottom: 15px !important;
 }
 
-.c11 .ql-toolbar {
+.c10 .ql-toolbar {
   width: -webkit-max-content;
   width: -moz-max-content;
   width: max-content;
 }
 
-.c11 .ql-container {
+.c10 .ql-container {
   font-size: initial;
   font-family: DM Sans;
 }
 
-.c23 {
-  font-family: DM Sans;
-  font-size: 13px;
-  line-height: 130%;
-  font-weight: 700;
-  color: rgba(183,39,234,1);
-  color: rgba(183,39,234,1);
+.c10 .ql-container * {
+  cursor: not-allowed;
 }
 
 .c2 {
@@ -255,11 +250,7 @@ exports[`<MultiQuestion /> Should render and match the snapshot 1`] = `
   color: unset;
 }
 
-.c2:hover {
-  background-color: #E9F1FB;
-}
-
-.c8 {
+.c7 {
   width: auto;
   height: auto;
   display: block;
@@ -279,7 +270,7 @@ exports[`<MultiQuestion /> Should render and match the snapshot 1`] = `
   color: unset;
 }
 
-.c9 {
+.c8 {
   width: auto;
   height: auto;
   display: block;
@@ -287,7 +278,7 @@ exports[`<MultiQuestion /> Should render and match the snapshot 1`] = `
   color: unset;
 }
 
-.c12 {
+.c11 {
   width: auto;
   height: auto;
   display: block;
@@ -298,7 +289,7 @@ exports[`<MultiQuestion /> Should render and match the snapshot 1`] = `
   cursor: pointer;
 }
 
-.c19 {
+.c18 {
   width: auto;
   height: auto;
   display: block;
@@ -314,31 +305,22 @@ exports[`<MultiQuestion /> Should render and match the snapshot 1`] = `
   cursor: pointer;
 }
 
-.c19:hover {
+.c18:hover {
   background-color: #E9F1FB;
 }
 
 .c6 {
   width: auto;
   height: auto;
-  margin-right: 10px;
-  cursor: -webkit-grab;
-  cursor: -moz-grab;
-  cursor: grab;
-}
-
-.c7 {
-  width: auto;
-  height: auto;
   margin-right: 16px;
 }
 
-.c22 {
+.c21 {
   width: auto;
   height: auto;
 }
 
-.c21 {
+.c20 {
   border-radius: 50%;
   background-color: #B727EA;
   display: -webkit-box;
@@ -362,31 +344,42 @@ exports[`<MultiQuestion /> Should render and match the snapshot 1`] = `
   color: rgba(255,255,255,1);
 }
 
-.c15 {
+.c22 {
+  font-family: DM Sans;
+  font-size: 13px;
+  line-height: 130%;
+  font-weight: 700;
+  color: rgba(183,39,234,1);
+  color: rgba(183,39,234,1);
+}
+
+.c14 {
   padding: 5px 10px;
   font-size: 13px;
   font-weight: 600;
   border-radius: 4px;
   background-color: rgba(16,121,105,0.1);
   color: rgba(16,121,105,1);
+  opacity: 0.5;
 }
 
-.c15:focus {
+.c14:focus {
   box-shadow: none;
   outline: none;
   border: 1px solid transparent;
 }
 
-.c17 {
+.c16 {
   padding: 5px 10px;
   font-size: 13px;
   font-weight: 600;
   border-radius: 4px;
   background-color: rgba(0,134,248,0.1);
   color: rgba(0,134,248,1);
+  opacity: 0.5;
 }
 
-.c17:focus {
+.c16:focus {
   box-shadow: none;
   outline: none;
   border: 1px solid transparent;
@@ -448,42 +441,32 @@ exports[`<MultiQuestion /> Should render and match the snapshot 1`] = `
               width="90%"
             >
               <img
-                alt="Reorder icon 0"
-                aria-describedby="DndDescribedBy-1"
-                aria-roledescription="sortable"
                 class="c6"
-                cursor="grab"
-                role="button"
-                src="IMAGE_MOCK"
-                tabindex="0"
-              />
-              <img
-                class="c7"
                 src="IMAGE_MOCK"
               />
               <div
-                class="c8"
+                class="c7"
                 display="flex"
               >
                 <div
-                  class="c9"
+                  class="c8"
                 >
                   <div
-                    class="c10"
+                    class="c9"
                     width="100%"
                   >
                     <div
                       class="c3"
                     >
                       <div
-                        class="quill c11"
+                        class="quill c10"
                       >
                         <div
-                          class="ql-container ql-bubble"
+                          class="ql-container ql-bubble ql-disabled"
                         >
                           <div
                             class="ql-editor"
-                            contenteditable="true"
+                            contenteditable="false"
                             data-gramm="false"
                             data-placeholder="Answer 1"
                           >
@@ -1871,25 +1854,26 @@ exports[`<MultiQuestion /> Should render and match the snapshot 1`] = `
               class="c1"
             >
               <div
-                class="c12"
+                class="c11"
                 hidden=""
               >
                 <img
-                  class="c7"
+                  class="c6"
                   src="IMAGE_MOCK"
                 />
               </div>
             </div>
           </div>
           <div
-            class="c13"
+            class="c12"
             display="flex"
           >
             <input
               aria-label="Variable name..."
               autocomplete="off"
-              class="c14 c15"
+              class="c13 c14"
               color="#107969"
+              disabled=""
               name="notASearchField-Variable name..."
               placeholder="Variable name..."
               type="text"
@@ -1898,8 +1882,9 @@ exports[`<MultiQuestion /> Should render and match the snapshot 1`] = `
             />
             <input
               aria-label="Score"
-              class="c16 c17"
+              class="c15 c16"
               color="#0086F8"
+              disabled=""
               placeholder="Score"
               type="tel"
               value="1"
@@ -1911,30 +1896,31 @@ exports[`<MultiQuestion /> Should render and match the snapshot 1`] = `
     </div>
   </div>
   <div
-    class="c18"
+    class="c17"
     display="flex"
+    hidden=""
   >
     <div
-      class="c19"
+      class="c18"
     >
       <div
-        class="c9"
+        class="c8"
       >
         <div
-          class="c20"
+          class="c19"
         >
           <div
-            class="c21"
+            class="c20"
             color="#FFFFFF"
             opacity="1"
           >
             <img
-              class="c22"
+              class="c21"
               src="IMAGE_MOCK"
             />
           </div>
           <p
-            class="c23"
+            class="c22"
             color="#B727EA"
             font-weight="bold"
           >

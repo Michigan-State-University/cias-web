@@ -64,7 +64,8 @@ export const StyledButton = styled.button`
   width: 100%;
   height: 40px;
   border-radius: ${(props) => props.radius};
-  cursor: pointer;
+  cursor: ${({ disabled }) =>
+    disabled ? 'not-allowed' : 'pointer'} !important;
   border: none;
   outline: none;
   ${({ disabled }) => !disabled && 'font-weight: bold;'}
@@ -72,9 +73,11 @@ export const StyledButton = styled.button`
     getStyles(inverted, light, outlined, color, textColor)}
   ${(props) => props.disabled && getDisabledStyles(props.inverted)};
   transition: background-color 300ms ease, color 300ms ease, border 300ms ease;
+
   &:hover {
     ${(props) => getHoverStyles(props)};
   }
+
   ${margin};
   ${border};
   ${layout};

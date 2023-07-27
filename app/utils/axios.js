@@ -12,6 +12,7 @@ import { previewRegex, guestLogInRegex } from 'global/constants/regex';
 import LocalStorageService from './localStorageService';
 import { HttpMethods, HttpStatusCodes } from './constants';
 import { responseMethodEquals, responseStatusEquals } from './axiosUtils';
+import { RoutePath } from '../global/constants';
 
 /**
  * by default it retries when error does not have a response (ex. status 5xx)
@@ -78,12 +79,12 @@ axios.interceptors.response.use(
         encodeURIComponent(window.location.pathname),
       );
 
-      dispatch(push(`/no-access?${queryParams.toString()}`));
+      dispatch(push(`${RoutePath.FORBIDDEN}?${queryParams.toString()}`));
     } else if (
       responseStatusEquals(response.status, HttpStatusCodes.NOT_FOUND) &&
       responseMethodEquals(response, HttpMethods.GET)
     )
-      dispatch(push('/not-found-page'));
+      dispatch(push(RoutePath.NOT_FOUND));
     else
       setHeaders(
         error.response,

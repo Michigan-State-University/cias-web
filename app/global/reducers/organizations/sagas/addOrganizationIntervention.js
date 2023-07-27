@@ -3,10 +3,13 @@ import { put, takeLatest, call } from 'redux-saga/effects';
 import { push } from 'connected-react-router';
 import { toast } from 'react-toastify';
 
-import { formatMessage } from 'utils/intlOutsideReact';
 import globalMessages from 'global/i18n/globalMessages';
+import { RoutePath } from 'global/constants';
 
+import { parametrizeRoutePath } from 'utils/router';
 import { jsonApiToObject } from 'utils/jsonApiMapper';
+import { formatMessage } from 'utils/intlOutsideReact';
+
 import { createOrganizationInterventionSuccess } from '../actions';
 import {
   CREATE_ORGANIZATION_INTERVENTION_REQUEST,
@@ -26,7 +29,13 @@ export function* createOrganizationIntervention({
     const intervention = jsonApiToObject(data, 'intervention');
 
     yield put(createOrganizationInterventionSuccess(intervention));
-    yield put(push(`/interventions/${intervention.id}`));
+    yield put(
+      push(
+        parametrizeRoutePath(RoutePath.INTERVENTION_DETAILS, {
+          interventionId: intervention.id,
+        }),
+      ),
+    );
   } catch (error) {
     yield call(
       toast.error,
@@ -37,6 +46,7 @@ export function* createOrganizationIntervention({
     );
   }
 }
+
 export default function* createInterventionSaga() {
   yield takeLatest(
     CREATE_ORGANIZATION_INTERVENTION_REQUEST,

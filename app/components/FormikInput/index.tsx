@@ -19,6 +19,7 @@ type FormikInputType = {
   inputProps?: React.HTMLProps<HTMLInputElement>;
   children?: ReactElement;
   validator?: (value: string) => boolean;
+  disabled?: boolean;
 } & Record<string, unknown>;
 
 function FormikInput({
@@ -29,6 +30,7 @@ function FormikInput({
   inputProps,
   children,
   validator,
+  disabled,
   ...columnStyleProps
 }: FormikInputType) {
   const [field, meta, helper] = useField(formikKey);
@@ -56,6 +58,7 @@ function FormikInput({
       placeholder={placeholder}
       type={type}
       value={value}
+      disabled={disabled}
       {...columnStyleProps}
     >
       {children}

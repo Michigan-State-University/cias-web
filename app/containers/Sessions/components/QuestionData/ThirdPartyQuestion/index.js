@@ -14,7 +14,6 @@ import {
   makeSelectSelectedQuestion,
   updateQuestionData,
 } from 'global/reducers/questions';
-import { canEdit } from 'models/Status/statusPermissions';
 import { emailValidator } from 'utils/validators';
 import { themeColors, colors } from 'theme';
 
@@ -42,7 +41,7 @@ const ThirdPartyQuestion = ({
   removeAnswer,
   reorderAnswers,
   isNarratorTab,
-  interventionStatus,
+  editingPossible,
   intl: { formatMessage },
 }) => {
   const [hovered, setHovered] = useState(-1);
@@ -52,7 +51,6 @@ const ThirdPartyQuestion = ({
     body: { data },
   } = selectedQuestion;
 
-  const editingPossible = canEdit(interventionStatus);
   const isNarratorTabOrEditNotPossible = isNarratorTab || !editingPossible;
 
   const handleMouseEnter = (index) => () => {
@@ -216,7 +214,7 @@ ThirdPartyQuestion.propTypes = {
   removeAnswer: PropTypes.func.isRequired,
   reorderAnswers: PropTypes.func.isRequired,
   isNarratorTab: PropTypes.bool,
-  interventionStatus: PropTypes.string,
+  editingPossible: PropTypes.bool,
 };
 
 const mapStateToProps = createStructuredSelector({

@@ -10,7 +10,11 @@ import {
 } from 'global/reducers/session/constants';
 import { findIndexById } from 'utils/arrayUtils';
 
-import { updateItemById } from 'utils/reduxUtils';
+import {
+  assignDraftItems,
+  deleteItemByIndex,
+  updateItemById,
+} from 'utils/reduxUtils';
 import sessionSettingsReducer from './sessionSettings/reducer';
 import {
   FETCH_INTERVENTION_REQUEST,
@@ -92,14 +96,35 @@ import {
   EDIT_SHORT_LINKS_REQUEST,
   EDIT_SHORT_LINKS_SUCCESS,
   EDIT_SHORT_LINKS_ERROR,
+  FETCH_COLLABORATORS_SUCCESS,
+  FETCH_COLLABORATORS_REQUEST,
+  FETCH_COLLABORATORS_ERROR,
+  CHANGE_COLLABORATOR_SETTING_REQUEST,
+  CHANGE_COLLABORATOR_SETTING_SUCCESS,
+  CHANGE_COLLABORATOR_SETTING_ERROR,
+  REMOVE_COLLABORATOR_REQUEST,
+  REMOVE_COLLABORATOR_SUCCESS,
+  REMOVE_COLLABORATOR_ERROR,
+  ADD_COLLABORATORS_SUCCESS,
+  SET_CURRENT_EDITOR,
+  SET_STARTING_EDITING,
+  SET_STOPPING_EDITING,
+  RESET_COLLABORATION_STATE,
+  RESET_REDUCER,
+  FETCH_CURRENT_USER_COLLABORATOR_DATA_REQUEST,
+  FETCH_CURRENT_USER_COLLABORATOR_DATA_SUCCESS,
+  FETCH_CURRENT_USER_COLLABORATOR_DATA_ERROR,
 } from './constants';
 
 export const initialState = {
   currentSessionIndex: 0,
   intervention: null,
   invites: [],
+  collaborators: [],
+  currentUserCollaboratorData: null,
   cache: {
     intervention: null,
+    collaborators: [],
   },
   loaders: {
     fetchInterventionLoading: true,
@@ -128,6 +153,10 @@ export const initialState = {
     exportInterventionLoading: false,
     changeInterventionNarrator: false,
     editShortLinks: false,
+    collaborators: false,
+    startingEditing: false,
+    stoppingEditing: false,
+    fetchCurrentUserCollaboratorData: false,
   },
   errors: {
     fetchInterventionError: null,
@@ -153,9 +182,16 @@ const findSessionIndex = (intervention, sessionId) =>
 export const interventionReducer = (state = initialState, action) =>
   produce(state, (draft) => {
     switch (action.type) {
+      case RESET_REDUCER: {
+        return initialState;
+      }
       case FETCH_INTERVENTION_REQUEST:
-        if (state.intervention && action.payload.id === state.intervention.id)
+        if (action.payload.showLoader) {
+          draft.loaders.fetchInterventionLoading = true;
+        }
+        if (state.intervention && action.payload.id === state.intervention.id) {
           break;
+        }
         draft.loaders.fetchInterventionLoading = true;
         draft.errors.fetchInterventionError = null;
         draft.intervention = null;
@@ -357,11 +393,12 @@ export const interventionReducer = (state = initialState, action) =>
           draft.loaders.fetchSessionEmailsLoading = true;
         draft.errors.fetchSessionEmailsError = null;
         break;
-      case FETCH_SESSION_EMAILS_SUCCESS:
+      case FETCH_SESSION_EMAILS_SUCCESS: {
         const { index, emails } = action.payload;
         draft.intervention.sessions[index].emails = emails;
         draft.loaders.fetchSessionEmailsLoading = false;
         break;
+      }
 
       case FETCH_SESSION_EMAILS_ERROR:
         draft.loaders.fetchSessionEmailsLoading = false;
@@ -531,9 +568,10 @@ export const interventionReducer = (state = initialState, action) =>
         break;
 
       case UPDATE_INTERVENTION_CONVERSATIONS_TRANSCRIPT:
+        const { name, createdAt } = action.payload.transcript;
         if (draft.intervention) {
-          draft.intervention.conversationsTranscript =
-            action.payload.transcript;
+          draft.intervention.conversationsTranscriptGeneratedAt = createdAt;
+          draft.intervention.conversationsTranscriptFilename = name;
         }
         break;
       case EXPORT_INTERVENTION_REQUEST:
@@ -584,6 +622,97 @@ export const interventionReducer = (state = initialState, action) =>
         draft.loaders.editShortLinks = false;
         draft.errors.editShortLinks = action.payload.error;
         draft.intervention.shortLinks = state.cache.intervention.shortLinks;
+        break;
+      }
+      case FETCH_COLLABORATORS_REQUEST: {
+        draft.loaders.collaborators = true;
+        break;
+      }
+      case FETCH_COLLABORATORS_SUCCESS: {
+        draft.loaders.collaborators = false;
+        draft.collaborators = action.payload.collaborators;
+        assignDraftItems(draft.collaborators, draft.cache.collaborators);
+        break;
+      }
+      case FETCH_COLLABORATORS_ERROR: {
+        draft.loaders.collaborators = false;
+        break;
+      }
+      case CHANGE_COLLABORATOR_SETTING_REQUEST: {
+        const { index, setting, value } = action.payload;
+        draft.collaborators[index][setting] = value;
+        break;
+      }
+      case CHANGE_COLLABORATOR_SETTING_SUCCESS: {
+        assignDraftItems(draft.collaborators, draft.cache.collaborators);
+        break;
+      }
+      case CHANGE_COLLABORATOR_SETTING_ERROR: {
+        assignDraftItems(draft.cache.collaborators, draft.collaborators);
+        break;
+      }
+      case REMOVE_COLLABORATOR_REQUEST: {
+        const { index } = action.payload;
+        deleteItemByIndex(draft.collaborators, index);
+        break;
+      }
+      case REMOVE_COLLABORATOR_SUCCESS: {
+        assignDraftItems(draft.collaborators, draft.cache.collaborators);
+        if (!draft.collaborators?.length && draft.intervention) {
+          draft.intervention.hasCollaborators = false;
+        }
+        break;
+      }
+      case REMOVE_COLLABORATOR_ERROR: {
+        assignDraftItems(draft.cache.collaborators, draft.collaborators);
+        break;
+      }
+      case ADD_COLLABORATORS_SUCCESS: {
+        draft.collaborators.push(...action.payload.collaborators);
+        assignDraftItems(draft.collaborators, draft.cache.collaborators);
+        if (draft.intervention) {
+          draft.intervention.hasCollaborators = true;
+        }
+        break;
+      }
+      case FETCH_CURRENT_USER_COLLABORATOR_DATA_REQUEST: {
+        draft.currentUserCollaboratorData = null;
+        draft.loaders.fetchCurrentUserCollaboratorData = true;
+        break;
+      }
+      case FETCH_CURRENT_USER_COLLABORATOR_DATA_SUCCESS: {
+        const { currentUserCollaboratorData } = action.payload;
+        draft.currentUserCollaboratorData = currentUserCollaboratorData;
+        draft.loaders.fetchCurrentUserCollaboratorData = false;
+        break;
+      }
+      case FETCH_CURRENT_USER_COLLABORATOR_DATA_ERROR: {
+        draft.loaders.fetchCurrentUserCollaboratorData = false;
+        break;
+      }
+      case SET_CURRENT_EDITOR: {
+        if (!draft.intervention) return;
+        const { currentEditor } = action.payload;
+        draft.intervention.currentEditor = currentEditor;
+        break;
+      }
+      case SET_STARTING_EDITING: {
+        const { startingEditing } = action.payload;
+        draft.loaders.startingEditing = startingEditing;
+        break;
+      }
+      case SET_STOPPING_EDITING: {
+        const { stoppingEditing } = action.payload;
+        draft.loaders.stoppingEditing = stoppingEditing;
+        break;
+      }
+      case RESET_COLLABORATION_STATE: {
+        if (draft.intervention) {
+          draft.intervention.currentEditor = null;
+        }
+        draft.loaders.startingEditing = false;
+        draft.loaders.stoppingEditing = false;
+        draft.currentUserCollaboratorData = null;
         break;
       }
     }

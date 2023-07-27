@@ -96,7 +96,7 @@ const reportTemplatesReducer = (state = initialState, { type, payload }) =>
   produce(state, (draft) => {
     switch (type) {
       case FETCH_REPORT_TEMPLATES_REQUEST:
-        if (isEmpty(state.reportTemplates))
+        if (isEmpty(state.reportTemplates) || payload.showLoader)
           draft.loaders.fetchReportTemplatesLoading = true;
         draft.errors.fetchReportTemplatesError = null;
         draft.loaders.shouldRefetch = false;

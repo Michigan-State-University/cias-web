@@ -6,12 +6,16 @@
  */
 import { LOCATION_CHANGE } from 'connected-react-router';
 import produce from 'immer';
+
+import { elements } from 'theme';
+
 import AudioWrapper from 'utils/audioWrapper';
 
 import {
   DOWNLOAD_FILE_ERROR,
   DOWNLOAD_FILE_REQUEST,
   DOWNLOAD_FILE_SUCCESS,
+  SAVE_NAVBAR_HEIGHT,
 } from './constants';
 
 import {
@@ -22,6 +26,7 @@ import {
 export const initialState = {
   audioInstance: new AudioWrapper(),
   fileDownload: fileDownloadReducerInitialState,
+  navbarHeight: elements.navbarHeight,
 };
 
 export const globalStateReducer = (state = initialState, { payload, type }) =>
@@ -39,6 +44,10 @@ export const globalStateReducer = (state = initialState, { payload, type }) =>
       case LOCATION_CHANGE:
         state.audioInstance.clean();
         state.audioInstance.stop();
+        break;
+
+      case SAVE_NAVBAR_HEIGHT:
+        draft.navbarHeight = payload.navbarHeight;
         break;
 
       default:

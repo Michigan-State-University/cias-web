@@ -3,6 +3,7 @@ import { useSelector } from 'react-redux';
 
 import { makeSelectIsNarratorTab } from 'global/reducers/localState';
 import {
+  makeSelectEditingPossible,
   makeSelectInterventionSharedTo,
   makeSelectInterventionStatus,
 } from 'global/reducers/intervention';
@@ -59,6 +60,7 @@ const QuestionData = () => {
   const isNarratorTab = useSelector(makeSelectIsNarratorTab());
   const interventionStatus = useSelector(makeSelectInterventionStatus());
   const sharedTo = useSelector(makeSelectInterventionSharedTo());
+  const editingPossible = useSelector(makeSelectEditingPossible());
 
   const commonProps = {
     isNarratorTab,
@@ -66,6 +68,7 @@ const QuestionData = () => {
     sharedTo,
     // @ts-ignore
     statusMetadata: STATUS_METADATA[interventionStatus],
+    editingPossible,
   };
 
   switch (selectedQuestionType) {

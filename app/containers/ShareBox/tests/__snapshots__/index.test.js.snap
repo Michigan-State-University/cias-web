@@ -303,7 +303,7 @@ exports[`<ShareBox /> Should render and match the snapshot 1`] = `
   width: 100%;
   height: 40px;
   border-radius: 100px;
-  cursor: pointer;
+  cursor: not-allowed !important;
   border: none;
   outline: none;
   background-color: #107969;
@@ -610,7 +610,7 @@ exports[`<ShareBox /> Should render and match the snapshot 1`] = `
         data-private="true"
       >
         <div
-          class="c27 "
+          class="c27"
           data-cy="user-list-item-0"
         >
           <div
