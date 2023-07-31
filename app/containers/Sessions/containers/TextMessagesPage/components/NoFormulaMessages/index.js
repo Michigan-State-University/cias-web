@@ -40,7 +40,7 @@ import { TextMessageAttachment } from '../TextMessageAttachment';
 const originalTextIconProps = {
   position: 'absolute',
   right: 21,
-  bottom: 12,
+  bottom: 2,
 };
 
 const NoFormulaMessage = ({
