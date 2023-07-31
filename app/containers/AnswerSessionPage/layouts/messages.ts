@@ -149,6 +149,10 @@ export default defineMessages({
     id: `${scope}.dateOfBirth`,
     defaultMessage: 'Date of Birth',
   },
+  dateOfBirthPlaceholder: {
+    id: `${scope}.dateOfBirthPlaceholder`,
+    defaultMessage: 'Select date',
+  },
   zipCode: {
     id: `${scope}.zipCode`,
     defaultMessage: 'ZIP Code',

@@ -9,8 +9,3 @@ export {
   ThirdPartyToolsAccessModal,
   useThirdPartyToolsAccessModal,
 } from './ThirdPartyToolsAccessModal';
-
-export {
-  default as CollaboratorsModal,
-  COLLABORATORS_MODAL_WIDTH,
-} from './CollaboratorsModal';

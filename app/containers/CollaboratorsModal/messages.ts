@@ -3,6 +3,20 @@ import { defineMessages } from 'react-intl';
 export const scope = 'app.components.InterventionModals.CollaboratorsModal';
 
 export default defineMessages({
+  collaborate: {
+    id: `${scope}.collaborate`,
+    defaultMessage: 'Collaborate',
+  },
+  collaborateDescription: {
+    id: `${scope}.collaborateDescription`,
+    defaultMessage:
+      'Use this feature to share your original intervention and indicate the desired access level for each collaborator.',
+  },
+  collaboratorsHelp: {
+    id: `${scope}.collaboratorsHelp`,
+    defaultMessage:
+      'Learn more about collaborate feature <a href="https://www.cias.app/_files/ugd/afc5c9_cf5b04b27ff6491e9fe55f073d1603d0.pdf" target="_blank">here</a>. For more help resources, visit <a href="https://www.cias.app/resources" target="_blank">www.cias.app/resources</a>.',
+  },
   inviteUsers: {
     id: `${scope}.inviteUsers`,
     defaultMessage: 'Invite users',

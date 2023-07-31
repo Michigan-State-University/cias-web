@@ -51,7 +51,8 @@ const FormikDatePicker = ({
           onChange={setValue}
           disabled={disabled}
           selected={field.value}
-          dateFormat="yyyy-MM-dd"
+          placeholderText={placeholder}
+          dateFormat="MM/dd/yyyy"
           customInput={
             <Input
               disabled={disabled}
@@ -60,8 +61,6 @@ const FormikDatePicker = ({
               textAlign="left"
               color={disabled ? colors.casper : colors.bluewood}
               hasError={hasError}
-              keyboard="date"
-              hideNativeDatepicker
               {...inputProps}
             />
           }

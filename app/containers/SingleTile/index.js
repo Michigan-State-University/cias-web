@@ -46,12 +46,11 @@ import { useRoleManager } from 'models/User/RolesManager';
 import isNullOrUndefined from 'utils/isNullOrUndefined';
 
 import {
-  CollaboratorsModal,
-  COLLABORATORS_MODAL_WIDTH,
   InterventionAssignOrganizationModal,
   INTERVENTION_ASSIGN_ORGANIZATION_MODAL_WIDTH,
   useThirdPartyToolsAccessModal,
 } from 'containers/InterventionDetailsPage/components/Modals';
+import { useCollaboratorsModal } from 'containers/CollaboratorsModal';
 
 import EllipsisText from 'components/Text/EllipsisText';
 import Text from 'components/Text';
@@ -97,11 +96,27 @@ const SingleTile = ({
   exportIntervention,
   userOrganizableId,
 }) => {
+  const {
+    name,
+    status,
+    sessionsSize,
+    id,
+    organizationId,
+    user,
+    createdAt,
+    updatedAt,
+    googleLanguageId,
+    hasCollaborators,
+    userId: interventionOwnerId,
+    hfhsAccess,
+  } = tileData || {};
+
+  const isCurrentUserInterventionOwner = interventionOwnerId === userId;
+
   const [assignOrganizationModalVisible, setAssignOrganizationModalVisible] =
     useState(false);
 
   const [translateModalVisible, setTranslateModalVisible] = useState(false);
-  const [collaborateModalVisible, setCollaborateModalVisible] = useState(false);
 
   const closeAssignOrganizationModal = () =>
     setAssignOrganizationModalVisible(false);
@@ -110,8 +125,6 @@ const SingleTile = ({
 
   const closeTranslateModal = () => setTranslateModalVisible(false);
   const openTranslateModal = () => setTranslateModalVisible(true);
-  const closeCollaborateModal = () => setCollaborateModalVisible(false);
-  const openCollaborateModal = () => setCollaborateModalVisible(true);
 
   const handleArchiveIntervention = () => archiveIntervention(id);
 
@@ -132,27 +145,17 @@ const SingleTile = ({
   const { Modal: ShareExternallyModal, openModal: openShareExternallyModal } =
     useShareExternallyModal(shareExternally, ShareExternallyLevel.INTERVENTION);
 
+  const { Modal: CollaboratorsModal, openModal: openCollaboratorsModal } =
+    useCollaboratorsModal(
+      id,
+      isCurrentUserInterventionOwner,
+      interventionOwnerId,
+    );
+
   const {
     isAdmin,
     canAssignOrganizationToIntervention: showAssignOrganizationOption,
   } = useRoleManager();
-
-  const {
-    name,
-    status,
-    sessionsSize,
-    id,
-    organizationId,
-    user,
-    createdAt,
-    updatedAt,
-    googleLanguageId,
-    hasCollaborators,
-    userId: interventionOwnerId,
-    hfhsAccess,
-  } = tileData || {};
-
-  const isCurrentUserInterventionOwner = interventionOwnerId === userId;
 
   const handleExportIntervention = () => exportIntervention(id);
 
@@ -277,7 +280,7 @@ const SingleTile = ({
             id: 'collaborate',
             label: formatMessage(messages.collaborate),
             icon: CollaborateIcon,
-            action: openCollaborateModal,
+            action: openCollaboratorsModal,
           },
         ]
       : []),
@@ -322,20 +325,7 @@ const SingleTile = ({
         />
       </Modal>
 
-      <Modal
-        title={formatMessage(messages.collaborate)}
-        description={formatMessage(messages.collaborateDescription)}
-        onClose={closeCollaborateModal}
-        visible={collaborateModalVisible}
-        width={COLLABORATORS_MODAL_WIDTH}
-        maxWidth={COLLABORATORS_MODAL_WIDTH}
-      >
-        <CollaboratorsModal
-          interventionId={id}
-          isCurrentUserInterventionOwner={isCurrentUserInterventionOwner}
-          interventionOwnerId={interventionOwnerId}
-        />
-      </Modal>
+      <CollaboratorsModal />
 
       <StyledLink to={link}>
         <TileContainer>

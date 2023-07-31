@@ -53,6 +53,6 @@ export default defineMessages({
   },
   termsAcceptSuccess: {
     id: `${scope}.termsAcceptSuccess`,
-    defaultMessage: 'Terms has been accepted',
+    defaultMessage: 'Terms have been accepted',
   },
 });
