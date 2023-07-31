@@ -225,10 +225,6 @@ exports[`<SessionSchedule /> Should render and match the snapshot 1`] = `
   border-color: #107969;
 }
 
-.c16::-webkit-calendar-picker-indicator {
-  display: none;
-}
-
 .c16:disabled {
   color: #ABBBD1;
 }
@@ -387,12 +383,14 @@ exports[`<SessionSchedule /> Should render and match the snapshot 1`] = `
                       class="react-datepicker__input-container"
                     >
                       <input
+                        aria-label="MM-DD-YYYY"
                         class="c16"
                         color="#2F3850"
                         font-size="15"
                         height="50"
-                        type="date"
-                        value="2018-12-24"
+                        placeholder="MM-DD-YYYY"
+                        type="text"
+                        value="12-24-2018"
                         width="120"
                       />
                     </div>

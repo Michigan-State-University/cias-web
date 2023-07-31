@@ -46,12 +46,11 @@ import { useRoleManager } from 'models/User/RolesManager';
 import isNullOrUndefined from 'utils/isNullOrUndefined';
 
 import {
-  CollaboratorsModal,
-  COLLABORATORS_MODAL_WIDTH,
   InterventionAssignOrganizationModal,
   INTERVENTION_ASSIGN_ORGANIZATION_MODAL_WIDTH,
   useThirdPartyToolsAccessModal,
 } from 'containers/InterventionDetailsPage/components/Modals';
+import { useCollaboratorsModal } from 'containers/CollaboratorsModal';
 
 import EllipsisText from 'components/Text/EllipsisText';
 import Text from 'components/Text';
@@ -86,22 +85,38 @@ import {
 import { CollaboratingIndicator } from './CollaboratingIndicator';
 
 const SingleTile = ({
-  tileData,
-  participantView,
-  link,
-  copyIntervention,
-  archiveIntervention,
-  intl: { formatMessage },
-  userId,
-  isLoading,
-  exportIntervention,
-  userOrganizableId,
-}) => {
+                      tileData,
+                      participantView,
+                      link,
+                      copyIntervention,
+                      archiveIntervention,
+                      intl: { formatMessage },
+                      userId,
+                      isLoading,
+                      exportIntervention,
+                      userOrganizableId,
+                    }) => {
+  const {
+    name,
+    status,
+    sessionsSize,
+    id,
+    organizationId,
+    user,
+    createdAt,
+    updatedAt,
+    googleLanguageId,
+    hasCollaborators,
+    userId: interventionOwnerId,
+    hfhsAccess,
+  } = tileData || {};
+
+  const isCurrentUserInterventionOwner = interventionOwnerId === userId;
+
   const [assignOrganizationModalVisible, setAssignOrganizationModalVisible] =
     useState(false);
 
   const [translateModalVisible, setTranslateModalVisible] = useState(false);
-  const [collaborateModalVisible, setCollaborateModalVisible] = useState(false);
 
   const closeAssignOrganizationModal = () =>
     setAssignOrganizationModalVisible(false);
@@ -110,8 +125,6 @@ const SingleTile = ({
 
   const closeTranslateModal = () => setTranslateModalVisible(false);
   const openTranslateModal = () => setTranslateModalVisible(true);
-  const closeCollaborateModal = () => setCollaborateModalVisible(false);
-  const openCollaborateModal = () => setCollaborateModalVisible(true);
 
   const handleArchiveIntervention = () => archiveIntervention(id);
 
@@ -132,27 +145,17 @@ const SingleTile = ({
   const { Modal: ShareExternallyModal, openModal: openShareExternallyModal } =
     useShareExternallyModal(shareExternally, ShareExternallyLevel.INTERVENTION);
 
+  const { Modal: CollaboratorsModal, openModal: openCollaboratorsModal } =
+    useCollaboratorsModal(
+      id,
+      isCurrentUserInterventionOwner,
+      interventionOwnerId,
+    );
+
   const {
     isAdmin,
     canAssignOrganizationToIntervention: showAssignOrganizationOption,
   } = useRoleManager();
-
-  const {
-    name,
-    status,
-    sessionsSize,
-    id,
-    organizationId,
-    user,
-    createdAt,
-    updatedAt,
-    googleLanguageId,
-    hasCollaborators,
-    userId: interventionOwnerId,
-    hfhsAccess,
-  } = tileData || {};
-
-  const isCurrentUserInterventionOwner = interventionOwnerId === userId;
 
   const handleExportIntervention = () => exportIntervention(id);
 
@@ -244,25 +247,25 @@ const SingleTile = ({
     },
     ...(showAssignOrganizationOption
       ? [
-          {
-            icon: AddAppIcon,
-            action: openAssignOrganizationModal,
-            label: formatMessage(messages.assignOrganization),
-            id: 'assignOrganization',
-            disabled: !assigningOrganizationPossible,
-          },
-        ]
+        {
+          icon: AddAppIcon,
+          action: openAssignOrganizationModal,
+          label: formatMessage(messages.assignOrganization),
+          id: 'assignOrganization',
+          disabled: !assigningOrganizationPossible,
+        },
+      ]
       : []),
     ...(isAdmin
       ? [
-          {
-            icon: PadlockIcon,
-            action: () => openThirdPartyToolsAccessModal(tileData),
-            label: formatMessage(messages.thirdPartyToolsAccessModalTitle),
-            id: 'thirdPartyToolsAccess',
-            disabled: hasCollaborators,
-          },
-        ]
+        {
+          icon: PadlockIcon,
+          action: () => openThirdPartyToolsAccessModal(tileData),
+          label: formatMessage(messages.thirdPartyToolsAccessModalTitle),
+          id: 'thirdPartyToolsAccess',
+          disabled: hasCollaborators,
+        },
+      ]
       : []),
     {
       id: 'export',
@@ -273,13 +276,13 @@ const SingleTile = ({
     },
     ...(canEditCollaborators
       ? [
-          {
-            id: 'collaborate',
-            label: formatMessage(messages.collaborate),
-            icon: CollaborateIcon,
-            action: openCollaborateModal,
-          },
-        ]
+        {
+          id: 'collaborate',
+          label: formatMessage(messages.collaborate),
+          icon: CollaborateIcon,
+          action: openCollaboratorsModal,
+        },
+      ]
       : []),
   ];
 
@@ -291,16 +294,16 @@ const SingleTile = ({
   if (isLoading)
     return (
       <TileContainer>
-        <Loader type="inline" />
+        <Loader type="inline"/>
       </TileContainer>
     );
 
   return (
     <>
-      <ThirdPartyToolsModal />
-      <ArchiveModal />
-      <HenryFordBranchingInfoModal />
-      <ShareExternallyModal />
+      <ThirdPartyToolsModal/>
+      <ArchiveModal/>
+      <HenryFordBranchingInfoModal/>
+      <ShareExternallyModal/>
       <Modal onClose={closeTranslateModal} visible={translateModalVisible}>
         <TranslateInterventionModal
           id={id}
@@ -322,43 +325,30 @@ const SingleTile = ({
         />
       </Modal>
 
-      <Modal
-        title={formatMessage(messages.collaborate)}
-        description={formatMessage(messages.collaborateDescription)}
-        onClose={closeCollaborateModal}
-        visible={collaborateModalVisible}
-        width={COLLABORATORS_MODAL_WIDTH}
-        maxWidth={COLLABORATORS_MODAL_WIDTH}
-      >
-        <CollaboratorsModal
-          interventionId={id}
-          isCurrentUserInterventionOwner={isCurrentUserInterventionOwner}
-          interventionOwnerId={interventionOwnerId}
-        />
-      </Modal>
+      <CollaboratorsModal/>
 
       <StyledLink to={link}>
         <TileContainer>
           <Heading>
             <Row gap={12} align="center">
-              {hasCollaborators && <CollaboratingIndicator />}
+              {hasCollaborators && <CollaboratingIndicator/>}
               {status && (
                 <Row align="center" gap={5}>
                   <Text lineHeight={1}>
                     <FormattedMessage {...globalMessages.statuses[status]} />
                   </Text>
-                  <StatusIndicator status={status} />
+                  <StatusIndicator status={status}/>
                 </Row>
               )}
             </Row>
             {!participantView && (
               <div onClick={preventDefault}>
-                <Dropdown options={options} />
+                <Dropdown options={options}/>
               </div>
             )}
           </Heading>
 
-          <EllipsisText text={name} fontSize={18} fontWeight="bold" />
+          <EllipsisText text={name} fontSize={18} fontWeight="bold"/>
 
           <Row justify="between">
             <Tooltip

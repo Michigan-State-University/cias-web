@@ -20,6 +20,7 @@ export interface UserSession {
   quickExitEnabled: boolean;
   userInterventionId?: Nullable<string>;
   filledOutCount: number;
+  started: boolean;
 }
 
 export type UserSessionDTO = CamelToSnakeOmitId<UserSession>;

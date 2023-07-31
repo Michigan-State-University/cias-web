@@ -1,8 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`<InterventionStatusButtons /> Should render and match the snapshot 1`] = `<div />`;
-
-exports[`<InterventionStatusButtons /> Should render and match the snapshot 2`] = `
+exports[`<InterventionStatusButtons /> Should render and match the snapshot 1`] = `
 .c0 {
   width: 100%;
   height: 40px;
@@ -44,7 +42,7 @@ exports[`<InterventionStatusButtons /> Should render and match the snapshot 2`] 
 </div>
 `;
 
-exports[`<InterventionStatusButtons /> Should render and match the snapshot 3`] = `
+exports[`<InterventionStatusButtons /> Should render and match the snapshot 2`] = `
 .c0 {
   width: 100%;
   height: 40px;
