@@ -1,16 +1,21 @@
 import React from 'react';
 import { useIntl } from 'react-intl';
 import { AxiosError } from 'axios';
+import bytes from 'bytes';
 
 import { AppFile } from 'models/File';
 
 import {
   MMS_ACCEPTED_FILE_FORMATS,
+  MMS_LARGE_IMAGE_FILE_FORMATS,
+  MMS_MAX_FILE_SIZE,
   MMS_MAX_LARGE_IMAGE_FILE_SIZE_MAP,
   MMS_MAX_NON_LARGE_IMAGE_FILE_FORMAT_SIZE,
 } from 'global/constants';
 
 import FileUpload from 'components/FileUpload';
+import Column from 'components/Column';
+import Text from 'components/Text';
 
 import messages from '../NoFormulaMessages/messages';
 
@@ -46,6 +51,25 @@ export const TextMessageAttachment: React.FC<Props> = ({
         disabled={!editingPossible}
         maxSize={MMS_MAX_NON_LARGE_IMAGE_FILE_FORMAT_SIZE}
         maxSizeMap={MMS_MAX_LARGE_IMAGE_FILE_SIZE_MAP}
+        tooltipContent={
+          <Column>
+            <Text>
+              {formatMessage(messages.maxImageFileSize)}
+              <ul>
+                {MMS_LARGE_IMAGE_FILE_FORMATS.map((format) => (
+                  <li>{format}</li>
+                ))}
+              </ul>
+              {formatMessage(messages.is, {
+                maxSize: bytes(MMS_MAX_FILE_SIZE),
+              })}
+              <br />
+              {formatMessage(messages.maxOtherFileSize, {
+                maxSize: bytes(MMS_MAX_NON_LARGE_IMAGE_FILE_FORMAT_SIZE),
+              })}
+            </Text>
+          </Column>
+        }
       />
     </>
   );

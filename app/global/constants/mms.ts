@@ -2,7 +2,6 @@ import { MAX_FILE_SIZE } from './file';
 
 export const MMS_LARGE_IMAGE_FILE_FORMATS = [
   'image/jpeg',
-  'image/jpg',
   'image/gif',
   'image/png',
 ];
