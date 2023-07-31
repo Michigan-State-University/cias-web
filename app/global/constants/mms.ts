@@ -59,6 +59,6 @@ export const MMS_MAX_FILE_SIZE = MAX_FILE_SIZE - MMS_MAX_TEXT_SIZE;
 // 600 kB
 export const MMS_MAX_NON_LARGE_IMAGE_FILE_FORMAT_SIZE = 614400;
 
-export const MMS_MAX_FILE_SIZE_MAP = new Map<string, number>(
+export const MMS_MAX_LARGE_IMAGE_FILE_SIZE_MAP = new Map<string, number>(
   MMS_LARGE_IMAGE_FILE_FORMATS.map((format) => [format, MMS_MAX_FILE_SIZE]),
 );
