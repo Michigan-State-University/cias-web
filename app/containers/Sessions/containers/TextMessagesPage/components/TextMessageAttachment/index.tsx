@@ -4,7 +4,11 @@ import { AxiosError } from 'axios';
 
 import { AppFile } from 'models/File';
 
-import { MMS_ACCEPTED_FILE_FORMATS } from 'global/constants';
+import {
+  MMS_ACCEPTED_FILE_FORMATS,
+  MMS_MAX_FILE_SIZE_MAP,
+  MMS_MAX_NON_LARGE_IMAGE_FILE_FORMAT_SIZE,
+} from 'global/constants';
 
 import FileUpload from 'components/FileUpload';
 
@@ -40,6 +44,8 @@ export const TextMessageAttachment: React.FC<Props> = ({
         onRemoveFile={onDelete}
         error={error?.response?.data?.message}
         disabled={!editingPossible}
+        maxSize={MMS_MAX_NON_LARGE_IMAGE_FILE_FORMAT_SIZE}
+        maxSizeMap={MMS_MAX_FILE_SIZE_MAP}
       />
     </>
   );

@@ -2,6 +2,7 @@ import React, { useCallback, useState, useEffect, ReactNode } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { FormattedMessage, useIntl } from 'react-intl';
 import { DropzoneOptions, useDropzone } from 'react-dropzone';
+import bytes from 'bytes';
 
 import Box from 'components/Box';
 import TextButton from 'components/Button/TextButton';
@@ -21,6 +22,8 @@ import binNoBg from 'assets/svg/bin-no-bg.svg';
 import messages from './messages';
 import { formatFileErrorMessage } from './utils';
 
+export type FileFormat = string;
+
 type CommonProps = {
   acceptedFormats?: string | string[];
   loading?: boolean;
@@ -28,6 +31,11 @@ type CommonProps = {
   tooltipContent?: ReactNode;
   error?: string;
   disabled?: boolean;
+  maxSize?: number;
+  // Will look up in maxSizeMap if there is a restriction for selected file type.
+  // If not found, will use maxSize or MAX_FILE_SIZE if not provided (by default)
+  // Please use all lowercase keys!
+  maxSizeMap?: Map<FileFormat, number>;
 };
 
 type MultipleFilesProps = CommonProps & {
@@ -57,6 +65,8 @@ export const FileUpload = ({
   tooltipContent,
   error,
   disabled,
+  maxSize = MAX_FILE_SIZE,
+  maxSizeMap,
 }: FileUploadProps) => {
   const { formatMessage } = useIntl();
 
@@ -93,12 +103,36 @@ export const FileUpload = ({
     );
   };
 
-  const handleDrop = useCallback(
-    (newFiles: File[]) => {
-      if (!multiple) onUpload(newFiles[0]);
-      else onUpload(newFiles);
+  const validateFileSize = (file: File) => {
+    const maxSizeByFormat = maxSizeMap?.get(file.type.toLowerCase()) ?? maxSize;
+    if (file.size > maxSizeByFormat) {
+      setInputError(
+        formatMessage(messages.fileTooLargeCustomValidation, {
+          maxSize: bytes(maxSizeByFormat),
+        }),
+      );
+      return false;
+    }
+    return true;
+  };
+
+  const handleDrop = useCallback<
+    NonNullable<DropzoneOptions['onDropAccepted']>
+  >(
+    (newFiles) => {
+      if (!multiple) {
+        const file = newFiles[0];
+        if (!file) return;
+
+        const isFileValid = validateFileSize(file);
+        if (isFileValid) onUpload(file);
+        return;
+      }
+
+      const validFiles = newFiles.filter((file) => validateFileSize(file));
+      onUpload(validFiles);
     },
-    [multiple, onUpload],
+    [multiple, onUpload, maxSize, maxSizeMap],
   );
 
   const handleReject: DropzoneOptions['onDropRejected'] = (fileRejections) => {
@@ -112,7 +146,6 @@ export const FileUpload = ({
     noKeyboard: true,
     accept: acceptedFormats,
     noClick: true,
-    maxSize: MAX_FILE_SIZE,
     disabled,
   });
 
