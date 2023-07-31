@@ -128,32 +128,32 @@ import {
 } from './constants';
 
 export function InterventionDetailsPage({
-                                          createSession,
-                                          editIntervention,
-                                          fetchIntervention,
-                                          intervention,
-                                          fetchInterventionLoading,
-                                          createSessionLoading,
-                                          fetchInterventionError,
-                                          createSessionError,
-                                          sessionIndex,
-                                          changeSessionIndex,
-                                          sendCsv,
-                                          copySession,
-                                          reorderSessions,
-                                          copyIntervention,
-                                          fetchQuestions,
-                                          fetchSessionEmails,
-                                          deleteSession,
-                                          externalCopySession,
-                                          user: { organizableId: userOrganizableId },
-                                          editSession,
-                                          exportIntervention,
-                                          canCurrentUserMakeChanges,
-                                          editingPossible,
-                                          isCurrentUserInterventionOwner,
-                                          canAccessParticipantsData,
-                                        }) {
+  createSession,
+  editIntervention,
+  fetchIntervention,
+  intervention,
+  fetchInterventionLoading,
+  createSessionLoading,
+  fetchInterventionError,
+  createSessionError,
+  sessionIndex,
+  changeSessionIndex,
+  sendCsv,
+  copySession,
+  reorderSessions,
+  copyIntervention,
+  fetchQuestions,
+  fetchSessionEmails,
+  deleteSession,
+  externalCopySession,
+  user: { organizableId: userOrganizableId },
+  editSession,
+  exportIntervention,
+  canCurrentUserMakeChanges,
+  editingPossible,
+  isCurrentUserInterventionOwner,
+  canAccessParticipantsData,
+}) {
   const { interventionId } = useParams();
   const { formatMessage } = useIntl();
 
@@ -341,25 +341,25 @@ export function InterventionDetailsPage({
     },
     ...(canAssignOrganizationToIntervention
       ? [
-        {
-          icon: AddAppIcon,
-          action: openAssignOrganizationModal,
-          label: formatMessage(messages.assignOrganization),
-          id: 'assignOrganization',
-          disabled: !canEdit(status) || !canCurrentUserMakeChanges,
-        },
-      ]
+          {
+            icon: AddAppIcon,
+            action: openAssignOrganizationModal,
+            label: formatMessage(messages.assignOrganization),
+            id: 'assignOrganization',
+            disabled: !canEdit(status) || !canCurrentUserMakeChanges,
+          },
+        ]
       : []),
     ...(isAdmin
       ? [
-        {
-          icon: PadlockIcon,
-          action: () => openThirdPartyToolsAccessModal(intervention),
-          label: formatMessage(messages.thirdPartyToolsAccessModalTitle),
-          id: 'thirdPartyToolsAccess',
-          disabled: !canCurrentUserMakeChanges,
-        },
-      ]
+          {
+            icon: PadlockIcon,
+            action: () => openThirdPartyToolsAccessModal(intervention),
+            label: formatMessage(messages.thirdPartyToolsAccessModalTitle),
+            id: 'thirdPartyToolsAccess',
+            disabled: !canCurrentUserMakeChanges,
+          },
+        ]
       : []),
     {
       id: 'export',
@@ -370,13 +370,13 @@ export function InterventionDetailsPage({
     },
     ...(canEditCollaborators
       ? [
-        {
-          id: 'collaborate',
-          label: formatMessage(messages.collaborate),
-          icon: CollaborateIcon,
-          action: openCollaboratorsModal,
-        },
-      ]
+          {
+            id: 'collaborate',
+            label: formatMessage(messages.collaborate),
+            icon: CollaborateIcon,
+            action: openCollaboratorsModal,
+          },
+        ]
       : []),
   ];
 
@@ -506,10 +506,10 @@ export function InterventionDetailsPage({
     </DraggedTest>
   );
 
-  if (fetchInterventionLoading) return <Loader/>;
+  if (fetchInterventionLoading) return <Loader />;
 
   if (fetchInterventionError)
-    return <ErrorAlert errorText={fetchInterventionError} fullPage/>;
+    return <ErrorAlert errorText={fetchInterventionError} fullPage />;
 
   return (
     <InterventionDetailsPageContext.Provider
@@ -520,15 +520,15 @@ export function InterventionDetailsPage({
       }}
     >
       <Column height="100%">
-        <CollaborationPanel/>
+        <CollaborationPanel />
         <Row overflowY="auto">
           <AppContainer
             pageTitle={formatMessage(messages.pageTitle, { name })}
             width="100%"
           >
-            <ArchiveModal/>
-            <ThirdPartyToolsModal/>
-            <HenryFordBranchingInfoModal/>
+            <ArchiveModal />
+            <ThirdPartyToolsModal />
+            <HenryFordBranchingInfoModal />
             <ConfirmationModal
               visible={!isNullOrUndefined(deleteConfirmationSessionId)}
               onClose={() => setDeleteConfirmationSessionId(null)}
@@ -538,7 +538,7 @@ export function InterventionDetailsPage({
                 handleDeleteSession(deleteConfirmationSessionId)
               }
             />
-            <ShareExternallyModal/>
+            <ShareExternallyModal />
 
             <Modal
               onClose={closeTranslateModal}
@@ -574,7 +574,7 @@ export function InterventionDetailsPage({
               />
             </Modal>
 
-            <InterventionInviteModal/>
+            <InterventionInviteModal />
 
             <Modal
               title={formatMessage(messages.assignOrganization)}
@@ -589,7 +589,7 @@ export function InterventionDetailsPage({
               />
             </Modal>
 
-            <CollaboratorsModal/>
+            <CollaboratorsModal />
 
             <Header
               name={name}
@@ -668,7 +668,7 @@ export function InterventionDetailsPage({
                 </Row>
               </GCol>
 
-              <GCol xs={0} xl={6}/>
+              <GCol xs={0} xl={6} />
             </GRow>
 
             <GRow>
@@ -676,7 +676,7 @@ export function InterventionDetailsPage({
                 {renderList()}
                 {createSessionLoading && (
                   <Row my={18} align="center">
-                    <Spinner color={themeColors.secondary}/>
+                    <Spinner color={themeColors.secondary} />
                   </Row>
                 )}
                 {showSessionCreateButton && (
@@ -689,12 +689,12 @@ export function InterventionDetailsPage({
                   </Row>
                 )}
                 {createSessionError && (
-                  <ErrorAlert errorText={createSessionError}/>
+                  <ErrorAlert errorText={createSessionError} />
                 )}
               </GCol>
               <GCol xl={6}>
                 <Column position="sticky" top="100px" mt={18}>
-                  <SettingsPanel intervention={intervention}/>
+                  <SettingsPanel intervention={intervention} />
                 </Column>
               </GCol>
             </GRow>
