@@ -15,6 +15,8 @@ import {
   visualAnalogueScaleQuestion,
 } from 'models/Session/QuestionTypes';
 import { SessionTypes } from 'models/Session';
+
+import { MAX_SMS_BODY_LENGTH } from 'global/constants';
 import {
   changeNoFormulaText,
   uploadTextMessageAttachmentRequest,
@@ -121,6 +123,7 @@ const NoFormulaMessage = ({
             placeholder={formatMessage(messages.textMessagePlaceholder)}
             value={noFormulaText || ''}
             onBlur={changeAction}
+            maxLength={MAX_SMS_BODY_LENGTH}
           />
         </OriginalTextHover>
       </Box>
