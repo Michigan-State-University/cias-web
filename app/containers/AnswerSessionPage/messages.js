@@ -295,4 +295,9 @@ export default defineMessages({
     defaultMessage:
       'Previous screen was not found. This is probably the first screen in the session.',
   },
+  verifyErrorMessage: {
+    id: `${scope}.verifyErrorMessage`,
+    defaultMessage:
+      'Unknown error occurred. Try again or contact the administrator',
+  },
 });

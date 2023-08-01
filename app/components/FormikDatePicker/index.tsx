@@ -51,8 +51,8 @@ const FormikDatePicker = ({
           onChange={setValue}
           disabled={disabled}
           selected={field.value}
-          placeholderText={placeholder}
-          dateFormat="MM/dd/yyyy"
+          placeholderText={placeholder ?? 'MM-DD-YYYY'}
+          dateFormat="MM-dd-yyyy"
           customInput={
             <Input
               disabled={disabled}
