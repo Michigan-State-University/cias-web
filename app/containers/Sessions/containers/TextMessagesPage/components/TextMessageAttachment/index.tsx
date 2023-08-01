@@ -1,7 +1,7 @@
 import React from 'react';
 import { useIntl } from 'react-intl';
 import { AxiosError } from 'axios';
-import bytes from 'bytes';
+import byteSize from 'byte-size';
 
 import { AppFile } from 'models/File';
 
@@ -61,11 +61,15 @@ export const TextMessageAttachment: React.FC<Props> = ({
                 ))}
               </ul>
               {formatMessage(messages.is, {
-                maxSize: bytes(MMS_MAX_FILE_SIZE),
+                maxSize: byteSize(MMS_MAX_FILE_SIZE, {
+                  precision: 2,
+                }).toString(),
               })}
               <br />
               {formatMessage(messages.maxOtherFileSize, {
-                maxSize: bytes(MMS_MAX_NON_LARGE_IMAGE_FILE_FORMAT_SIZE),
+                maxSize: byteSize(MMS_MAX_NON_LARGE_IMAGE_FILE_FORMAT_SIZE, {
+                  precision: 0,
+                }).toString(),
               })}
             </Text>
           </Column>

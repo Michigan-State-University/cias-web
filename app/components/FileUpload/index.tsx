@@ -2,7 +2,7 @@ import React, { useCallback, useState, useEffect, ReactNode } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { FormattedMessage, useIntl } from 'react-intl';
 import { DropzoneOptions, useDropzone } from 'react-dropzone';
-import bytes from 'bytes';
+import byteSize from 'byte-size';
 
 import Box from 'components/Box';
 import TextButton from 'components/Button/TextButton';
@@ -108,7 +108,7 @@ export const FileUpload = ({
     if (file.size > maxSizeByFormat) {
       setInputError(
         formatMessage(messages.fileTooLargeCustomValidation, {
-          maxSize: bytes(maxSizeByFormat),
+          maxSize: byteSize(maxSizeByFormat, { precision: 2 }).toString(),
         }),
       );
       return false;
