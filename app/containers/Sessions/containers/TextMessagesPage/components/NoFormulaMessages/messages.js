@@ -19,4 +19,16 @@ export default defineMessages({
     id: `${scope}.attachment`,
     defaultMessage: 'Attachment',
   },
+  maxImageFileSize: {
+    id: `${scope}.maxImageFileSize`,
+    defaultMessage: 'Max size of files of type:',
+  },
+  is: {
+    id: `${scope}.is`,
+    defaultMessage: 'is {maxSize}.',
+  },
+  maxOtherFileSize: {
+    id: `${scope}.maxOtherFileSize`,
+    defaultMessage: 'For other file types max size is {maxSize}.',
+  },
 });

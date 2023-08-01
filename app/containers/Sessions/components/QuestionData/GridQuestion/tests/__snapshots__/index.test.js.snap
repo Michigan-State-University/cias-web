@@ -138,7 +138,24 @@ exports[`<GridQuestion /> Should render and match the snapshot 1`] = `
   color: unset;
 }
 
-.c33 {
+.c30 {
+  width: auto;
+  height: auto;
+  display: block;
+  border-radius: 5px;
+  width: 300px;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  margin-right: 9px;
+  -webkit-flex-direction: column;
+  -ms-flex-direction: column;
+  flex-direction: column;
+  color: unset;
+}
+
+.c34 {
   width: auto;
   height: auto;
   display: block;
@@ -155,7 +172,7 @@ exports[`<GridQuestion /> Should render and match the snapshot 1`] = `
   cursor: pointer;
 }
 
-.c33:hover {
+.c34:hover {
   background-color: #E9F1FB;
 }
 
@@ -338,7 +355,7 @@ exports[`<GridQuestion /> Should render and match the snapshot 1`] = `
   display: flex;
 }
 
-.c31 {
+.c32 {
   display: -webkit-box;
   display: -webkit-flex;
   display: -ms-flexbox;
@@ -361,7 +378,7 @@ exports[`<GridQuestion /> Should render and match the snapshot 1`] = `
   align-items: center;
 }
 
-.c32 {
+.c33 {
   display: -webkit-box;
   display: -webkit-flex;
   display: -ms-flexbox;
@@ -378,7 +395,7 @@ exports[`<GridQuestion /> Should render and match the snapshot 1`] = `
   display: none;
 }
 
-.c34 {
+.c35 {
   display: -webkit-box;
   display: -webkit-flex;
   display: -ms-flexbox;
@@ -409,12 +426,11 @@ exports[`<GridQuestion /> Should render and match the snapshot 1`] = `
   color: rgba(183,39,234,1);
 }
 
-.c30 {
+.c31 {
   resize: none;
   padding: 12px;
   border: 1px solid #E9F1FB;
   border-radius: 5px;
-  margin-right: 9px;
   width: 300px;
   height: auto;
   max-width: initial;
@@ -423,13 +439,13 @@ exports[`<GridQuestion /> Should render and match the snapshot 1`] = `
   border: 1px solid transparent;
 }
 
-.c30:focus {
+.c31:focus {
   box-shadow: none;
   outline: none;
   border: 1px solid #107969;
 }
 
-.c30:disabled {
+.c31:disabled {
   color: #ABBBD1;
 }
 
@@ -870,20 +886,27 @@ exports[`<GridQuestion /> Should render and match the snapshot 1`] = `
                       display="flex"
                       width="100%"
                     >
-                      <textarea
-                        aria-label="Row 1..."
+                      <div
                         class="c30"
-                        cursor="text"
-                        data-cy="text-area"
-                        disabled=""
-                        height="auto"
-                        placeholder="Row 1..."
-                        rows="2"
-                        type="multiline"
+                        direction="column"
+                        display="flex"
                         width="300"
                       >
-                        test-row-1
-                      </textarea>
+                        <textarea
+                          aria-label="Row 1..."
+                          class="c31"
+                          cursor="text"
+                          data-cy="text-area"
+                          disabled=""
+                          height="auto"
+                          placeholder="Row 1..."
+                          rows="2"
+                          type="multiline"
+                          width="300"
+                        >
+                          test-row-1
+                        </textarea>
+                      </div>
                     </div>
                   </div>
                 </div>
@@ -893,7 +916,7 @@ exports[`<GridQuestion /> Should render and match the snapshot 1`] = `
                 height="inherit"
               >
                 <div
-                  class="c31"
+                  class="c32"
                 >
                   <img
                     class="c6"
@@ -906,7 +929,7 @@ exports[`<GridQuestion /> Should render and match the snapshot 1`] = `
                 height="inherit"
               >
                 <div
-                  class="c31"
+                  class="c32"
                 >
                   <img
                     class="c6"
@@ -967,20 +990,27 @@ exports[`<GridQuestion /> Should render and match the snapshot 1`] = `
                       display="flex"
                       width="100%"
                     >
-                      <textarea
-                        aria-label="Row 2..."
+                      <div
                         class="c30"
-                        cursor="text"
-                        data-cy="text-area"
-                        disabled=""
-                        height="auto"
-                        placeholder="Row 2..."
-                        rows="2"
-                        type="multiline"
+                        direction="column"
+                        display="flex"
                         width="300"
                       >
-                        test-row-2
-                      </textarea>
+                        <textarea
+                          aria-label="Row 2..."
+                          class="c31"
+                          cursor="text"
+                          data-cy="text-area"
+                          disabled=""
+                          height="auto"
+                          placeholder="Row 2..."
+                          rows="2"
+                          type="multiline"
+                          width="300"
+                        >
+                          test-row-2
+                        </textarea>
+                      </div>
                     </div>
                   </div>
                 </div>
@@ -990,7 +1020,7 @@ exports[`<GridQuestion /> Should render and match the snapshot 1`] = `
                 height="inherit"
               >
                 <div
-                  class="c31"
+                  class="c32"
                 >
                   <img
                     class="c6"
@@ -1003,7 +1033,7 @@ exports[`<GridQuestion /> Should render and match the snapshot 1`] = `
                 height="inherit"
               >
                 <div
-                  class="c31"
+                  class="c32"
                 >
                   <img
                     class="c6"
@@ -1018,17 +1048,17 @@ exports[`<GridQuestion /> Should render and match the snapshot 1`] = `
     </div>
   </div>
   <div
-    class="c32"
+    class="c33"
     hidden=""
   >
     <div
-      class="c33"
+      class="c34"
     >
       <div
         class="c3"
       >
         <div
-          class="c34"
+          class="c35"
           display="flex"
         >
           <div
