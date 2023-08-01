@@ -54,9 +54,6 @@ export const useModal = <T,>({ type, props, ...restProps }: HookProps<T>) => {
     [isModalVisible],
   );
 
-  // const memoizedProps = useDeepObjectMemo(props);
-  const memoizedProps = props;
-
   const renderModal = useCallback(() => {
     if (!isModalVisible) return <></>;
 
@@ -64,21 +61,21 @@ export const useModal = <T,>({ type, props, ...restProps }: HookProps<T>) => {
       case ModalType.ConfirmationModal:
         return (
           <ConfirmationModal
-            {...(memoizedProps as ConfirmationModalComponentProps)}
+            {...(props as ConfirmationModalComponentProps)}
             {...sharedProps}
           />
         );
       case ModalType.Modal:
         const { modalContentRenderer } = restProps as ModalProps<T>;
         return (
-          <Modal {...(memoizedProps as ModalComponentProps)} {...sharedProps}>
+          <Modal {...(props as ModalComponentProps)} {...sharedProps}>
             {modalContentRenderer({ closeModal, modalState })}
           </Modal>
         );
       default:
         return null;
     }
-  }, [isModalVisible, memoizedProps]);
+  }, [isModalVisible, props]);
 
   return { modalState, openModal, closeModal, Modal: renderModal };
 };
