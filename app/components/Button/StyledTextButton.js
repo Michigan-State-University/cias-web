@@ -1,5 +1,7 @@
 import styled from 'styled-components';
 
+import { hexToRgb } from 'theme';
+
 import {
   margin,
   layout,
@@ -23,6 +25,19 @@ const StyledTextButton = styled.button`
   ${text};
   ${padding};
   ${flex};
+  ${({ outlined, color, disabled }) =>
+    outlined &&
+    `
+    border: 1px dashed ${color};
+    border-radius: 5px;
+    padding: 6px 12px;
+    ${
+      !disabled &&
+      `&:hover { background-color:
+      rgba(${hexToRgb(color)}, 0.1);
+    }`
+    }
+    `};
 `;
 
 export default StyledTextButton;

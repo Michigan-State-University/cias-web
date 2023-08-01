@@ -24,6 +24,7 @@ const TextButton = ({
   loaderProps,
   spinnerProps,
   disabled,
+  outlined,
 }) => {
   const button = useRef(null);
   if (loading)
@@ -46,6 +47,7 @@ const TextButton = ({
       className={className}
       fontWeight="bold"
       onClick={onClick}
+      outlined={outlined}
       {...buttonProps}
     >
       {children}
@@ -62,6 +64,7 @@ TextButton.propTypes = {
   loaderProps: PropTypes.object,
   spinnerProps: PropTypes.object,
   disabled: PropTypes.bool,
+  outlined: PropTypes.bool,
 };
 
 export default TextButton;

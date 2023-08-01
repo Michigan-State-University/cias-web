@@ -33,6 +33,7 @@ import ReportChooser from './ReportChooser';
 import messages from './messages';
 import { ADD, UPDATE_ANSWER, REMOVE } from './constants';
 import { reorderAnswersAction } from './actions';
+import { RecipientsChooser } from './RecipientsChooser';
 
 const ThirdPartyQuestion = ({
   selectedQuestion,
@@ -157,6 +158,11 @@ const ThirdPartyQuestion = ({
                     </Row>
                   )}
                 </Row>
+                <RecipientsChooser
+                  hidden={isNarratorTab}
+                  disabled={!editingPossible}
+                  value={item.value}
+                />
                 <Row mb={10} ml={40} align="center" hidden={isNarratorTab}>
                   <BadgeInput
                     data-cy={`score-${index}-input`}

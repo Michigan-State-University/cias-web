@@ -40,4 +40,8 @@ export default defineMessages({
     id: `${scope}.reorderIconAlt`,
     defaultMessage: 'Reorder icon {index}',
   },
+  manageRecipients: {
+    id: `${scope}.manageRecipients`,
+    defaultMessage: 'Manage recipients',
+  },
 });
