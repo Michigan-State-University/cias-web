@@ -12,8 +12,6 @@ import * as Yup from 'yup';
 import { IntlShape } from 'react-intl/src/types';
 import { CountryCode } from 'libphonenumber-js/types';
 
-import questionMark from 'assets/svg/question-mark.svg';
-
 import { colors, themeColors } from 'theme';
 import globalMessages from 'global/i18n/globalMessages';
 import { zipCodeRegex } from 'global/constants';
@@ -38,8 +36,7 @@ import FormikInput from 'components/FormikInput';
 import FormikSelect from 'components/FormikSelect';
 import FormikDatePicker from 'components/FormikDatePicker';
 import Text from 'components/Text';
-import { Tooltip } from 'components/Tooltip';
-
+import { HelpIconTooltip } from 'components/HelpIconTooltip';
 import {
   FormikPhoneNumberInput,
   phoneNumberSchema,
@@ -353,28 +350,15 @@ const HenryFordInitialScreenLayout = ({
                     <FormikInput
                       formikKey="mrn"
                       label={
-                        previewMedicalNumberInput ? (
-                          <Box display="flex" align="center">
-                            <Text>{formatMessage(messages.medicalNumber)}</Text>
-                            <Tooltip
-                              id="el-tooltip-mrn-researcher-info"
-                              icon={questionMark}
-                              text={formatMessage(
-                                messages.medicalNumberResearcherInfo,
-                              )}
-                              place="top"
-                              ml={8}
-                              tooltipProps={{
-                                width: '200px',
-                              }}
-                              iconProps={{
-                                width: '16px',
-                              }}
-                            />
-                          </Box>
-                        ) : (
-                          formatMessage(messages.medicalNumber)
-                        )
+                        <HelpIconTooltip
+                          id="el-tooltip-mrn-researcher-info"
+                          tooltipContent={
+                            previewMedicalNumberInput &&
+                            formatMessage(messages.medicalNumberResearcherInfo)
+                          }
+                        >
+                          <Text>{formatMessage(messages.medicalNumber)}</Text>
+                        </HelpIconTooltip>
                       }
                       placeholder={formatMessage(
                         messages.medicalNumberPlaceholder,
