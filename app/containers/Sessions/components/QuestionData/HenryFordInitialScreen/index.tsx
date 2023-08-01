@@ -7,7 +7,7 @@ import { CommonQuestionProps } from '../types';
 type Props = CommonQuestionProps;
 
 const HenryFordInitialScreen: React.FC<Props> = () => (
-  <HenryFordInitialScreenLayout disabled />
+  <HenryFordInitialScreenLayout disabled previewMedicalNumberInput />
 );
 
 export default HenryFordInitialScreen;

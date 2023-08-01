@@ -10,9 +10,10 @@ export type HfhsPatientData = {
   zipCode: string;
   phoneNumber: string;
   phoneType: PhoneType;
+  mrn: string;
 };
 
 // Returned from BE
-export type HfhsPatientDetail = HfhsPatientData & {
+export type HfhsPatientDetail = Omit<HfhsPatientData, 'mrn'> & {
   patientId: string;
 };

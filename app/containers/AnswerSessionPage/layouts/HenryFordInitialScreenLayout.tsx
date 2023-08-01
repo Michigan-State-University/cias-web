@@ -12,6 +12,8 @@ import * as Yup from 'yup';
 import { IntlShape } from 'react-intl/src/types';
 import { CountryCode } from 'libphonenumber-js/types';
 
+import questionMark from 'assets/svg/question-mark.svg';
+
 import { colors, themeColors } from 'theme';
 import globalMessages from 'global/i18n/globalMessages';
 import { zipCodeRegex } from 'global/constants';
@@ -29,7 +31,6 @@ import {
   nameValidationSchema,
 } from 'utils/validators';
 import { getUTCDateString } from 'utils/dateUtils';
-import { formatApiErrorMessage } from 'utils/formatApiErrorMessage';
 
 import Box from 'components/Box';
 import { SelectOption } from 'components/Select/types';
@@ -37,6 +38,7 @@ import FormikInput from 'components/FormikInput';
 import FormikSelect from 'components/FormikSelect';
 import FormikDatePicker from 'components/FormikDatePicker';
 import Text from 'components/Text';
+import { Tooltip } from 'components/Tooltip';
 
 import {
   FormikPhoneNumberInput,
@@ -46,6 +48,7 @@ import {
 
 import { formatPhoneNumberForHfhs, parsePhoneNumberFromHfhs } from '../utils';
 import { ActionButtons } from '../components/ActionButtons';
+import { ApiErrorMessage } from '../components/ApiErrorMessage';
 import messages from './messages';
 
 const inputStyles = {
@@ -63,7 +66,7 @@ const selectStyles = {
 
 export type PatientDataFormValues = Pick<
   HfhsPatientData,
-  'firstName' | 'lastName' | 'zipCode'
+  'firstName' | 'lastName' | 'zipCode' | 'mrn'
 > & {
   sexOption: Nullable<SelectOption<Sex>>;
   dobDate: Nullable<Date>;
@@ -106,6 +109,7 @@ const schema = (formatMessage: IntlShape['formatMessage']) =>
 
 enum PatientDataFormError {
   BASE_DATA_VERIFICATION,
+  MRN_VERIFICATION,
 }
 
 const emptyInitialValues: PatientDataFormValues = {
@@ -120,6 +124,7 @@ const emptyInitialValues: PatientDataFormValues = {
     label: '',
   },
   number: '',
+  mrn: '',
 };
 
 export type Props = {
@@ -141,6 +146,7 @@ const HenryFordInitialScreenLayout = ({
   verifying = false,
   verifyingError,
   hfhsPatientDetail,
+  previewMedicalNumberInput,
 }: Props) => {
   const { formatMessage } = useIntl();
 
@@ -184,6 +190,7 @@ const HenryFordInitialScreenLayout = ({
       phoneTypeOption: phoneTypeSelectOptions.current.find(
         ({ value }) => value === phoneType,
       ),
+      mrn: '',
       ...restValues,
     };
   }, [hfhsPatientDetail]);
@@ -208,10 +215,11 @@ const HenryFordInitialScreenLayout = ({
 
   const [formError, setFormError] =
     useState<Nullable<PatientDataFormError>>(null);
+  const [showMedicalNumberInput, setShowMedicalNumberInput] = useState(false);
 
   useEffect(() => {
     if (verifyingError && formRef.current) {
-      formRef.current.setErrors({
+      const baseDataInputsErrors = {
         firstName: '',
         lastName: '',
         sexOption: '',
@@ -220,9 +228,21 @@ const HenryFordInitialScreenLayout = ({
         phoneTypeOption: '',
         iso: '',
         number: '',
-      });
+      };
+
+      if (formRef.current.values.mrn) {
+        formRef.current.setErrors({
+          ...baseDataInputsErrors,
+          mrn: '',
+        });
+        setFormError(PatientDataFormError.MRN_VERIFICATION);
+        return () => setFormError(null);
+      }
+
+      formRef.current.setErrors(baseDataInputsErrors);
 
       setFormError(PatientDataFormError.BASE_DATA_VERIFICATION);
+      setShowMedicalNumberInput(true);
       return () => setFormError(null);
     }
   }, [verifyingError]);
@@ -275,7 +295,6 @@ const HenryFordInitialScreenLayout = ({
                   <FormikDatePicker
                     formikKey="dobDate"
                     label={formatMessage(messages.dateOfBirth)}
-                    placeholder={formatMessage(messages.dateOfBirthPlaceholder)}
                     inputProps={inputStyles}
                     disabled={disabled}
                     datePickerProps={{
@@ -323,19 +342,57 @@ const HenryFordInitialScreenLayout = ({
                 </Col>
               </Row>
             </Container>
-            {formError === PatientDataFormError.BASE_DATA_VERIFICATION && (
-              <Text
-                color={themeColors.warning}
-                fontWeight="bold"
-                lineHeight="23px"
-                mt={32}
-              >
-                {formatApiErrorMessage(
-                  verifyingError,
-                  messages.verifyErrorMessage,
-                )}
-              </Text>
+            {verifyingError &&
+              formError === PatientDataFormError.BASE_DATA_VERIFICATION && (
+                <ApiErrorMessage error={verifyingError} />
+              )}
+            {(previewMedicalNumberInput || showMedicalNumberInput) && (
+              <Container fluid style={{ padding: '32px 0 0 0' }}>
+                <Row gutterWidth={24} style={{ rowGap: '24px' }}>
+                  <Col {...columnClassMap}>
+                    <FormikInput
+                      formikKey="mrn"
+                      label={
+                        previewMedicalNumberInput ? (
+                          <Box display="flex" align="center">
+                            <Text>{formatMessage(messages.medicalNumber)}</Text>
+                            <Tooltip
+                              id="el-tooltip-mrn-researcher-info"
+                              icon={questionMark}
+                              text={formatMessage(
+                                messages.medicalNumberResearcherInfo,
+                              )}
+                              place="top"
+                              ml={8}
+                              tooltipProps={{
+                                width: '200px',
+                              }}
+                              iconProps={{
+                                width: '16px',
+                              }}
+                            />
+                          </Box>
+                        ) : (
+                          formatMessage(messages.medicalNumber)
+                        )
+                      }
+                      placeholder={formatMessage(
+                        messages.medicalNumberPlaceholder,
+                      )}
+                      type="text"
+                      inputProps={{
+                        ...inputStyles,
+                        disabled,
+                      }}
+                    />
+                  </Col>
+                </Row>
+              </Container>
             )}
+            {verifyingError &&
+              formError === PatientDataFormError.MRN_VERIFICATION && (
+                <ApiErrorMessage error={verifyingError} />
+              )}
             {showContinueButton && (
               <Box>
                 <ActionButtons

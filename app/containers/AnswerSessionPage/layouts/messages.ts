@@ -149,10 +149,6 @@ export default defineMessages({
     id: `${scope}.dateOfBirth`,
     defaultMessage: 'Date of Birth',
   },
-  dateOfBirthPlaceholder: {
-    id: `${scope}.dateOfBirthPlaceholder`,
-    defaultMessage: 'Select date',
-  },
   zipCode: {
     id: `${scope}.zipCode`,
     defaultMessage: 'ZIP Code',
@@ -177,9 +173,17 @@ export default defineMessages({
     id: `${scope}.phoneTypePlaceholder`,
     defaultMessage: 'Choose phone type',
   },
-  verifyErrorMessage: {
-    id: `${scope}.verifyErrorMessage`,
+  medicalNumber: {
+    id: `${scope}.medicalNumber`,
+    defaultMessage: 'Medical number',
+  },
+  medicalNumberPlaceholder: {
+    id: `${scope}.medicalNumberPlaceholder`,
+    defaultMessage: 'Your medical number',
+  },
+  medicalNumberResearcherInfo: {
+    id: `${scope}.medicalNumberResearcherInfo`,
     defaultMessage:
-      'Unknown error occurred. Try again or contact the administrator',
+      'Participant will be asked to provide their medical record number <bold>if the above data is incorrect.</bold>',
   },
 });
