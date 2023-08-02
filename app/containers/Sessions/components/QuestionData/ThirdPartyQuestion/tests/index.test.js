@@ -43,6 +43,7 @@ describe('<ThirdPartyQuestion />', () => {
             data: [
               {
                 payload: '',
+                value: '',
               },
             ],
           },

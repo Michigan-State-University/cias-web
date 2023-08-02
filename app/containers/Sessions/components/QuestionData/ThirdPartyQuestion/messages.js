@@ -60,4 +60,16 @@ export default defineMessages({
     id: `${scope}.noFaxRecipients`,
     defaultMessage: 'No fax recipients',
   },
+  manageRecipientsModalDefaultTitle: {
+    id: `${scope}.manageRecipientsModalDefaultTitle`,
+    defaultMessage: 'Unlabelled answer',
+  },
+  manageRecipientsModalDescription: {
+    id: `${scope}.manageRecipientsModalDescription`,
+    defaultMessage: 'Determine where you want reports to be sent.',
+  },
+  deleteRecipient: {
+    id: `${scope}.deleteRecipient`,
+    defaultMessage: 'Delete recipient',
+  },
 });

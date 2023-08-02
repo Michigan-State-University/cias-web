@@ -71,7 +71,7 @@ const CollaborationPanelComponent: React.FC<Props> = () => {
 
   const handleToggle = (editingEnabled: boolean) => {
     if (editingByOtherUser) {
-      openForceEditModal(null);
+      openForceEditModal(true);
       return;
     }
 
@@ -82,20 +82,19 @@ const CollaborationPanelComponent: React.FC<Props> = () => {
     interventionChannel?.stopEditing();
   };
 
-  const { openModal: openForceEditModal, Modal: ForceEditModal } =
-    useModal<null>({
-      type: ModalType.ConfirmationModal,
-      props: {
-        description: formatMessage(messages.forceEditModalDescription),
-        content: formatMessage(messages.forceEditModalContent, {
-          firstName: '',
-          lastName: '',
-          email: '',
-          ...currentEditor,
-        }),
-        confirmAction: () => interventionChannel?.forceStartEditing(),
-      },
-    });
+  const { openModal: openForceEditModal, Modal: ForceEditModal } = useModal({
+    type: ModalType.ConfirmationModal,
+    props: {
+      description: formatMessage(messages.forceEditModalDescription),
+      content: formatMessage(messages.forceEditModalContent, {
+        firstName: '',
+        lastName: '',
+        email: '',
+        ...currentEditor,
+      }),
+      confirmAction: () => interventionChannel?.forceStartEditing(),
+    },
+  });
 
   useEffect(() => {
     if (

@@ -1,4 +1,4 @@
-import React, { useState, useCallback, ReactNode, useMemo } from 'react';
+import React, { useState, useCallback, useMemo, FC } from 'react';
 
 import isNullOrUndefined from 'utils/isNullOrUndefined';
 
@@ -8,17 +8,15 @@ import ConfirmationModal, {
   Props as ConfirmationModalComponentProps,
 } from './ConfirmationModal';
 
-type HookProps<T> = SpecificModalProps<T>;
-
-type SpecificModalProps<T> = ModalProps<T> | ConfirmationModalProps;
+export type ModalContentRenderer<T> = FC<{
+  closeModal: () => void;
+  modalState: Nullable<T>;
+}>;
 
 export type ModalProps<T = boolean> = {
   type: ModalType.Modal;
   props: Omit<ModalComponentProps, 'children'>;
-  modalContentRenderer: (props: {
-    closeModal: () => void;
-    modalState: Nullable<T | boolean>;
-  }) => ReactNode;
+  modalContentRenderer: ModalContentRenderer<T>;
 };
 
 export type ConfirmationModalProps = {
@@ -26,9 +24,17 @@ export type ConfirmationModalProps = {
   props: Omit<ConfirmationModalComponentProps, 'children'>;
 };
 
+export type HookProps<T> = ModalProps<T> | ConfirmationModalProps;
+
 // MEMOIZE THE props OBJECT (HookProps['props']) BECAUSE OTHERWISE THERE WILL BE UNEXPECTED RERENDERS!
-export const useModal = <T,>({ type, props, ...restProps }: HookProps<T>) => {
-  const [modalState, setModalState] = useState<T | boolean>();
+export const useModal = <
+  T extends object | string | number | boolean = boolean,
+>({
+  type,
+  props,
+  ...restProps
+}: HookProps<T>) => {
+  const [modalState, setModalState] = useState<T>();
 
   const isModalVisible = useMemo(
     () => !isNullOrUndefined(modalState),
