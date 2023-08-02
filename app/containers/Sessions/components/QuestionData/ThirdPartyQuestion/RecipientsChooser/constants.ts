@@ -1,0 +1,1 @@
+export const MANAGE_RECIPIENTS_MODAL_WIDTH = '532px';
