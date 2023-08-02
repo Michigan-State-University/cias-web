@@ -48,10 +48,10 @@ import NavigatorScripts from './NavigatorScripts';
 
 type Props = {
   interventionId: string;
-  editingPossible: boolean;
+  disabled: boolean;
 };
 
-const NavigatorSettingsModal = ({ interventionId, editingPossible }: Props) => {
+const NavigatorSettingsModal = ({ interventionId, disabled }: Props) => {
   const { formatMessage } = useIntl();
   const dispatch = useDispatch();
 
@@ -154,13 +154,13 @@ const NavigatorSettingsModal = ({ interventionId, editingPossible }: Props) => {
                 inviteNavigatorsByEmail={inviteNavigatorsByEmail}
                 removeNavigatorEmailInvitation={removeNavigatorEmailInvitation}
                 invitationLoading={navigatorEmailInvitationLoading}
-                disabled={!editingPossible}
+                disabled={disabled}
               />
               {(teamId ?? canDisplayTeamNavigatorPanel) && (
                 <TeamNavigatorsPanel
                   teamNavigators={availableTeamNavigators}
                   addNavigatorFromTeam={addNavigatorFromTeam}
-                  disabled={!editingPossible}
+                  disabled={disabled}
                 />
               )}
             </>
@@ -169,7 +169,7 @@ const NavigatorSettingsModal = ({ interventionId, editingPossible }: Props) => {
             <AddedNavigatorPanel
               interventionNavigators={interventionNavigators}
               removeInterventionNavigator={removeInterventionNavigator}
-              disabled={!editingPossible}
+              disabled={disabled}
             />
           }
         />
@@ -185,13 +185,13 @@ const NavigatorSettingsModal = ({ interventionId, editingPossible }: Props) => {
               updateNoNavigatorTabData={updateNoNavigatorTabData}
               contactMessage={contactMessage}
               messagePhone={messagePhone}
-              disabled={!editingPossible}
+              disabled={disabled}
             />
           }
           rightContent={
             <ParticipantLinksPanel
               interventionId={interventionId}
-              disabled={!editingPossible}
+              disabled={disabled}
             />
           }
         />
@@ -203,11 +203,11 @@ const NavigatorSettingsModal = ({ interventionId, editingPossible }: Props) => {
             <Column gap={32}>
               <NavigatorScripts
                 interventionId={interventionId}
-                disabled={!editingPossible}
+                disabled={disabled}
               />
               <NavigatorLinksPanel
                 interventionId={interventionId}
-                disabled={!editingPossible}
+                disabled={disabled}
               />
             </Column>
           }
@@ -215,11 +215,11 @@ const NavigatorSettingsModal = ({ interventionId, editingPossible }: Props) => {
             <Column gap={32}>
               <NavigatorFilesPanel
                 interventionId={interventionId}
-                disabled={!editingPossible}
+                disabled={disabled}
               />
               <ParticipantFilesPanel
                 interventionId={interventionId}
-                disabled={!editingPossible}
+                disabled={disabled}
               />
             </Column>
           }

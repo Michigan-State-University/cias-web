@@ -81,10 +81,15 @@ import ShortLinkItem from './ShortLinkItem';
 
 export type Props = {
   editingPossible: boolean;
+  canCurrentUserMakeChanges: boolean;
   onClose: () => void;
 };
 
-const InterventionSettingsModal = ({ editingPossible, onClose }: Props) => {
+const InterventionSettingsModal = ({
+  editingPossible,
+  canCurrentUserMakeChanges,
+  onClose,
+}: Props) => {
   const { formatMessage } = useIntl();
 
   const dispatch = useDispatch();
@@ -426,7 +431,7 @@ const InterventionSettingsModal = ({ editingPossible, onClose }: Props) => {
                   nameFormikKey="links.0.name"
                   selectedFormikKey="links.0.selected"
                   placeholderBase={placeholderBase}
-                  disabled={!editingPossible}
+                  disabled={!canCurrentUserMakeChanges}
                 />
               )}
               {inOrganization &&
@@ -437,7 +442,7 @@ const InterventionSettingsModal = ({ editingPossible, onClose }: Props) => {
                     selectedFormikKey={`links.${index}.selected`}
                     placeholderBase={placeholderBase}
                     healthClinic={healthClinic}
-                    disabled={!editingPossible}
+                    disabled={!canCurrentUserMakeChanges}
                   />
                 ))}
             </Column>
