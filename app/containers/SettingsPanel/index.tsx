@@ -118,17 +118,6 @@ const SettingsPanel = ({ intervention }: Props) => {
   );
 
   const [state, dispatch] = useReducer(reducer, null);
-  const { openModal: openNavigatorSettingModal, Modal: NavigatorSettingModal } =
-    useModal({
-      type: ModalType.Modal,
-      modalContentRenderer: () => (
-        <NavigatorSettingsModal
-          interventionId={intervention!.id}
-          editingPossible={editingPossible}
-        />
-      ),
-      props: modalProps,
-    });
 
   const {
     sharedTo,
@@ -147,7 +136,20 @@ const SettingsPanel = ({ intervention }: Props) => {
 
   const changingAccessSettingsPossible =
     editingPossible && canChangeAccessSettings(status);
-  const changingChatSettingsPossible = editingPossible && canEnableChat(status);
+  const changingChatSettingsPossible =
+    canCurrentUserMakeChanges && canEnableChat(status);
+
+  const { openModal: openNavigatorSettingModal, Modal: NavigatorSettingModal } =
+    useModal({
+      type: ModalType.Modal,
+      modalContentRenderer: () => (
+        <NavigatorSettingsModal
+          interventionId={intervention!.id}
+          disabled={!changingChatSettingsPossible}
+        />
+      ),
+      props: modalProps,
+    });
 
   const isModuleIntervention =
     type === InterventionType.FIXED || type === InterventionType.FLEXIBLE;
