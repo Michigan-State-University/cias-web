@@ -23,6 +23,12 @@ const Text = styled.p.attrs((props) => ({
   ${({ disabled }) =>
     disabled && { color: colors.grey, cursor: 'not-allowed' }};
   ${flex};
+  ${({ truncate }) =>
+    truncate && {
+      textOverflow: 'ellipsis',
+      whiteSpace: 'nowrap',
+      overflow: 'hidden',
+    }};
 `;
 
 export default Text;

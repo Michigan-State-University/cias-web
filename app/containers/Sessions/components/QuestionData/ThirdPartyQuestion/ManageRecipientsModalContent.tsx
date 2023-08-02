@@ -21,7 +21,7 @@ export const ManageRecipientsModalContent: ModalContentRenderer<Recipients> = ({
   const { formatMessage } = useIntl();
 
   if (!modalState) return null;
-  const { emails, faxes } = modalState;
+  const { emails } = modalState;
 
   return (
     // @ts-ignore
@@ -33,13 +33,13 @@ export const ManageRecipientsModalContent: ModalContentRenderer<Recipients> = ({
     >
       {/* @ts-ignore */}
       <div label={formatMessage(messages.emailRecipients)}>
-        <Table width="100%">
+        <Table width="100%" tableLayout="fixed">
           <TBody>
             {emails.map((email) => (
               <StripedTR height="auto">
                 <TD padding="12px 8px">
                   <Row justify="between" align="center" gap={8}>
-                    <Text fontSize={15} lineHeight={1.5}>
+                    <Text fontSize={15} lineHeight={1.5} truncate>
                       {email}
                     </Text>
                     <ImageButton
@@ -55,28 +55,7 @@ export const ManageRecipientsModalContent: ModalContentRenderer<Recipients> = ({
         </Table>
       </div>
       {/* @ts-ignore */}
-      <div label={formatMessage(messages.faxRecipients)}>
-        <Table width="100%">
-          <TBody>
-            {faxes.map((fax) => (
-              <StripedTR height="auto">
-                <TD padding="12px 8px">
-                  <Row justify="between" align="center" gap={8}>
-                    <Text fontSize={15} lineHeight={1.5}>
-                      {fax}
-                    </Text>
-                    <ImageButton
-                      src={RedBin}
-                      onClick={() => {}}
-                      title={formatMessage(messages.deleteRecipient)}
-                    />
-                  </Row>
-                </TD>
-              </StripedTR>
-            ))}
-          </TBody>
-        </Table>
-      </div>
+      <div label={formatMessage(messages.faxRecipients)}></div>
     </Tabs>
   );
 };

@@ -10,9 +10,11 @@ const Table = styled.table`
   td {
     font-weight: 400;
   }
+
   ${layout};
   ${margin};
   ${style};
+  ${({ tableLayout }) => tableLayout && `table-layout: ${tableLayout};`}
 `;
 
 export { Table };
