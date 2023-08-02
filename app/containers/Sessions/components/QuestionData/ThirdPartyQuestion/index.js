@@ -161,7 +161,7 @@ const ThirdPartyQuestion = ({
                 <RecipientsChooser
                   hidden={isNarratorTab}
                   disabled={!editingPossible}
-                  value={item.value}
+                  recipientsString={item.value}
                 />
                 <Row mb={10} ml={40} align="center" hidden={isNarratorTab}>
                   <BadgeInput

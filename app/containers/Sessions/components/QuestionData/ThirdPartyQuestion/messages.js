@@ -44,4 +44,20 @@ export default defineMessages({
     id: `${scope}.manageRecipients`,
     defaultMessage: 'Manage recipients',
   },
+  emailRecipients: {
+    id: `${scope}.emailRecipients`,
+    defaultMessage: 'E-mail recipients',
+  },
+  noEmailRecipients: {
+    id: `${scope}.noEmailRecipients`,
+    defaultMessage: 'No e-mail recipients',
+  },
+  faxRecipients: {
+    id: `${scope}.faxRecipients`,
+    defaultMessage: 'Fax recipients',
+  },
+  noFaxRecipients: {
+    id: `${scope}.noFaxRecipients`,
+    defaultMessage: 'No fax recipients',
+  },
 });
