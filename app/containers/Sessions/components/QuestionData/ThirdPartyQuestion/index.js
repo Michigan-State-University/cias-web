@@ -4,7 +4,6 @@ import { compose } from 'redux';
 import { connect } from 'react-redux';
 import { createStructuredSelector } from 'reselect';
 import { injectIntl } from 'react-intl';
-import { toast } from 'react-toastify';
 
 import ReorderIcon from 'assets/svg/reorder-hand.svg';
 import bin from 'assets/svg/bin-red.svg';
@@ -14,7 +13,6 @@ import {
   makeSelectSelectedQuestion,
   updateQuestionData,
 } from 'global/reducers/questions';
-import { emailValidator } from 'utils/validators';
 import { themeColors, colors } from 'theme';
 
 import FlexibleWidthApprovableInput from 'components/Input/FlexibleWidthApprovableInput';
@@ -61,14 +59,10 @@ const ThirdPartyQuestion = ({
   const handleMouseLeave = () => setHovered(-1);
 
   const handleChangeVariable = (index, value, currentValue) => {
-    const commaSeparatedEmails = currentValue.split(',');
-
-    if (currentValue === '' || commaSeparatedEmails.every(emailValidator)) {
-      updateAnswer(index, {
-        ...value,
-        value: currentValue,
-      });
-    } else toast.error(formatMessage(messages.emailError));
+    updateAnswer(index, {
+      ...value,
+      value: currentValue,
+    });
   };
   const handleChangeTitle = (newTitle, index, value) =>
     updateAnswer(index, { ...value, payload: newTitle });
