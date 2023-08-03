@@ -160,7 +160,7 @@ exports[`<Profile /> Should render and match the snapshot 1`] = `
   width: 100%;
 }
 
-.c29 {
+.c28 {
   display: -webkit-box;
   display: -webkit-flex;
   display: -ms-flexbox;
@@ -179,7 +179,25 @@ exports[`<Profile /> Should render and match the snapshot 1`] = `
   width: 100%;
 }
 
-.c32 {
+.c30 {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-flex-direction: row;
+  -ms-flex-direction: row;
+  flex-direction: row;
+  height: auto;
+  -webkit-align-content: center;
+  -ms-flex-line-pack: center;
+  align-content: center;
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+}
+
+.c34 {
   display: -webkit-box;
   display: -webkit-flex;
   display: -ms-flexbox;
@@ -240,7 +258,7 @@ exports[`<Profile /> Should render and match the snapshot 1`] = `
   padding-right: 10px;
 }
 
-.c28 {
+.c27 {
   display: -webkit-box;
   display: -webkit-flex;
   display: -ms-flexbox;
@@ -251,7 +269,7 @@ exports[`<Profile /> Should render and match the snapshot 1`] = `
   width: 100%;
 }
 
-.c30 {
+.c29 {
   display: -webkit-box;
   display: -webkit-flex;
   display: -ms-flexbox;
@@ -264,7 +282,7 @@ exports[`<Profile /> Should render and match the snapshot 1`] = `
   padding-right: 10px;
 }
 
-.c33 {
+.c35 {
   display: -webkit-box;
   display: -webkit-flex;
   display: -ms-flexbox;
@@ -344,7 +362,7 @@ exports[`<Profile /> Should render and match the snapshot 1`] = `
   color: #ABBBD1;
 }
 
-.c31 {
+.c33 {
   padding: 12px;
   border-style: solid;
   border-width: 1px;
@@ -354,13 +372,13 @@ exports[`<Profile /> Should render and match the snapshot 1`] = `
   color: #2F3850;
 }
 
-.c31:focus {
+.c33:focus {
   box-shadow: none;
   outline: none;
   border-color: #107969;
 }
 
-.c31:disabled {
+.c33:disabled {
   color: #ABBBD1;
 }
 
@@ -386,7 +404,16 @@ exports[`<Profile /> Should render and match the snapshot 1`] = `
   width: fit-content;
 }
 
-.c26 {
+.c31 {
+  font-family: DM Sans;
+  font-size: 13px;
+  line-height: 130%;
+  margin-left: 10px;
+  font-size: 18px;
+  color: #2F3850;
+}
+
+.c32 {
   font-family: DM Sans;
   font-size: 13px;
   line-height: 130%;
@@ -397,7 +424,7 @@ exports[`<Profile /> Should render and match the snapshot 1`] = `
   width: fit-content;
 }
 
-.c27 {
+.c26 {
   width: auto;
   height: auto;
   -webkit-transition: -webkit-transform 0.2s;
@@ -428,7 +455,7 @@ exports[`<Profile /> Should render and match the snapshot 1`] = `
   color: rgba(255,255,255,1);
 }
 
-.c34 {
+.c36 {
   outline: none;
   border: none;
   background: transparent;
@@ -457,7 +484,7 @@ exports[`<Profile /> Should render and match the snapshot 1`] = `
   margin-top: 50px;
 }
 
-.c35 {
+.c37 {
   margin-left: 25px;
   margin-top: 30px;
 }
@@ -613,7 +640,7 @@ exports[`<Profile /> Should render and match the snapshot 1`] = `
 }
 
 @media only screen and (max-width:768px) {
-  .c35 {
+  .c37 {
     margin-left: 0;
     margin-top: 25px;
   }
@@ -775,7 +802,8 @@ exports[`<Profile /> Should render and match the snapshot 1`] = `
             for="timeZone"
           >
             <p
-              class="c26"
+              class="c18"
+              font-size="12px"
               width="fit-content"
             >
               Timezone
@@ -839,13 +867,18 @@ exports[`<Profile /> Should render and match the snapshot 1`] = `
                   >
                     <img
                       alt="arrow"
-                      class="c27"
+                      class="c26"
                       src="IMAGE_MOCK"
                       transform=""
                     />
                   </div>
                 </div>
               </div>
+              <input
+                name="timeZone"
+                type="hidden"
+                value="America/New_York"
+              />
             </div>
           </div>
         </div>
@@ -856,132 +889,161 @@ exports[`<Profile /> Should render and match the snapshot 1`] = `
       width="100%"
     >
       <div
-        class="c28"
+        class="c27"
       >
         <div
-          class="c29"
+          class="c28"
           data-private="true"
           width="100%"
         >
           <div
-            class="c30"
-            width="230"
+            class="c27"
           >
-            <label
-              for="iso"
-            >
-              <p
-                class="c26"
-                width="fit-content"
-              >
-                Phone prefix
-              </p>
-            </label>
             <div
-              class="c23"
-              data-testid="select"
+              class="c28"
+              data-private="true"
+              width="100%"
             >
               <div
-                class=" css-2b097c-container"
+                class="c29"
+                width="230"
               >
-                <span
-                  aria-atomic="false"
-                  aria-live="polite"
-                  aria-relevant="additions text"
-                  class="css-1f43avz-a11yText-A11yText"
-                />
+                <label
+                  for="iso"
+                >
+                  <p
+                    class="c18"
+                    font-size="12px"
+                    width="fit-content"
+                  >
+                    Phone prefix
+                  </p>
+                </label>
                 <div
-                  class=" css-4iyz22-control"
+                  class="c23"
+                  data-testid="select"
                 >
                   <div
-                    class=" css-g1d714-ValueContainer"
+                    class=" css-2b097c-container"
                   >
+                    <span
+                      aria-atomic="false"
+                      aria-live="polite"
+                      aria-relevant="additions text"
+                      class="css-1f43avz-a11yText-A11yText"
+                    />
                     <div
-                      class=" css-q5ew0g-placeholder"
-                    >
-                      Code
-                    </div>
-                    <div
-                      class="css-b8ldur-Input"
+                      class=" css-4iyz22-control"
                     >
                       <div
-                        class=""
-                        style="display: inline-block;"
+                        class=" css-g1d714-ValueContainer"
                       >
-                        <input
-                          aria-autocomplete="list"
-                          autocapitalize="none"
-                          autocomplete="off"
-                          autocorrect="off"
-                          id="iso"
-                          spellcheck="false"
-                          style="box-sizing: content-box; width: 2px; border: 0px; opacity: 1; outline: 0; padding: 0px;"
-                          tabindex="0"
-                          type="text"
-                          value=""
-                        />
                         <div
-                          style="position: absolute; top: 0px; left: 0px; visibility: hidden; height: 0px; overflow: scroll; white-space: pre; font-family: -webkit-small-control; letter-spacing: normal; text-transform: none;"
-                        />
+                          class=" css-1uccc91-singleValue"
+                        >
+                          <div
+                            class="c30"
+                          >
+                            <img
+                              alt="US"
+                              src="https://unpkg.com/react-flag-kit@0.3.1/assets/US.svg"
+                              style="height: 24px; width: 24px; display: inline-block;"
+                            />
+                            <p
+                              class="c31"
+                              font-size="18"
+                            >
+                              US +1
+                            </p>
+                          </div>
+                        </div>
+                        <div
+                          class="css-b8ldur-Input"
+                        >
+                          <div
+                            class=""
+                            style="display: inline-block;"
+                          >
+                            <input
+                              aria-autocomplete="list"
+                              autocapitalize="none"
+                              autocomplete="off"
+                              autocorrect="off"
+                              id="iso"
+                              spellcheck="false"
+                              style="box-sizing: content-box; width: 2px; border: 0px; opacity: 1; outline: 0; padding: 0px;"
+                              tabindex="0"
+                              type="text"
+                              value=""
+                            />
+                            <div
+                              style="position: absolute; top: 0px; left: 0px; visibility: hidden; height: 0px; overflow: scroll; white-space: pre; font-family: -webkit-small-control; letter-spacing: normal; text-transform: none;"
+                            />
+                          </div>
+                        </div>
+                      </div>
+                      <div
+                        class=" css-1hb7zxy-IndicatorsContainer"
+                      >
+                        <div
+                          aria-hidden="true"
+                          class=" css-tlfecz-indicatorContainer"
+                        >
+                          <img
+                            alt="arrow"
+                            class="c26"
+                            src="IMAGE_MOCK"
+                            transform=""
+                          />
+                        </div>
                       </div>
                     </div>
-                  </div>
-                  <div
-                    class=" css-1hb7zxy-IndicatorsContainer"
-                  >
-                    <div
-                      aria-hidden="true"
-                      class=" css-tlfecz-indicatorContainer"
-                    >
-                      <img
-                        alt="arrow"
-                        class="c27"
-                        src="IMAGE_MOCK"
-                        transform=""
-                      />
-                    </div>
+                    <input
+                      name="iso"
+                      type="hidden"
+                      value="US"
+                    />
                   </div>
                 </div>
               </div>
-            </div>
-          </div>
-          <div
-            class="c28"
-            value=""
-          >
-            <label
-              for="number"
-            >
-              <p
-                class="c26"
-                width="fit-content"
+              <div
+                class="c27"
               >
-                Phone number
-              </p>
-            </label>
-            <input
-              class="c31"
-              id="number"
-              name="number"
-              placeholder="Enter phone number"
-              type="tel"
-              value=""
-              width="100%"
-            />
+                <label
+                  for="number"
+                >
+                  <p
+                    class="c32"
+                    width="fit-content"
+                  >
+                    Phone number
+                  </p>
+                </label>
+                <input
+                  class="c33"
+                  id="number"
+                  name="number"
+                  placeholder="Enter phone number"
+                  type="tel"
+                  value=""
+                  width="100%"
+                />
+              </div>
+            </div>
           </div>
         </div>
       </div>
     </div>
     <div
-      class="c32 c22"
+      class="c34 c22"
       width="100%"
     >
       <div
-        class="c33"
+        class="c35"
         width="33%"
       >
         <button
-          class="c34 c35"
+          class="c36 c37"
           color="#B727EA"
           font-size="14"
           font-weight="bold"
