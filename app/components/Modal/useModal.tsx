@@ -1,4 +1,4 @@
-import React, { useState, useCallback, useMemo, FC } from 'react';
+import React, { FC, useCallback, useMemo, useState } from 'react';
 
 import isNullOrUndefined from 'utils/isNullOrUndefined';
 
@@ -9,19 +9,21 @@ import ConfirmationModal, {
 } from './ConfirmationModal';
 
 export type ModalContentRenderer<T> = FC<{
-  closeModal: () => void;
+  closeModal: (state?: T) => void;
   modalState: Nullable<T>;
 }>;
 
 export type ModalProps<T = boolean> = {
   type: ModalType.Modal;
-  props: Omit<ModalComponentProps, 'children'>;
+  props: Omit<ModalComponentProps, 'children' | 'onClose'> & {
+    onClose?: (state?: T) => void;
+  };
   modalContentRenderer: ModalContentRenderer<T>;
 };
 
 export type ConfirmationModalProps = {
   type: ModalType.ConfirmationModal;
-  props: Omit<ConfirmationModalComponentProps, 'children'>;
+  props: Omit<ConfirmationModalComponentProps, 'children' | 'onClose'>;
 };
 
 export type HookProps<T> = ModalProps<T> | ConfirmationModalProps;
@@ -48,7 +50,10 @@ export const useModal = <
     [setModalState],
   );
 
-  const closeModal = useCallback(() => {
+  const closeModal = useCallback((state?: T) => {
+    if (type === ModalType.Modal && props.onClose) {
+      props.onClose(state);
+    }
     setModalState(undefined);
   }, []);
 

@@ -9,27 +9,29 @@ import Text from 'components/Text';
 import { ImageButton } from 'components/Button';
 
 import messages from './messages';
+import { RecipientsFormItem } from './types';
 
 export type Props = {
-  recipients: string[];
+  recipients: RecipientsFormItem[];
+  onRemove: (index: number) => void;
 };
 
-export const OldRecipientTable: FC<Props> = ({ recipients }) => {
+export const OldRecipientTable: FC<Props> = ({ recipients, onRemove }) => {
   const { formatMessage } = useIntl();
 
   return (
     <Table width="100%" tableLayout="fixed">
       <TBody>
-        {recipients.map((recipient) => (
-          <StripedTR height="auto">
+        {recipients.map((recipient, index) => (
+          <StripedTR height="auto" key={recipient.value}>
             <TD padding="12px 8px">
               <Row justify="between" align="center" gap={8}>
                 <Text fontSize={15} lineHeight={1.5} truncate>
-                  {recipient}
+                  {recipient.value}
                 </Text>
                 <ImageButton
                   src={RedBin}
-                  onClick={() => {}}
+                  onClick={() => onRemove(index)}
                   title={formatMessage(messages.deleteRecipient)}
                 />
               </Row>

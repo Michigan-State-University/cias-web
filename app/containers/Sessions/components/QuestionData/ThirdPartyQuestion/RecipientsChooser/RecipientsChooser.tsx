@@ -1,4 +1,4 @@
-import React, { FC, useMemo } from 'react';
+import React, { FC, useCallback, useMemo } from 'react';
 import { useIntl } from 'react-intl';
 
 import { themeColors } from 'theme';
@@ -11,7 +11,7 @@ import { TextButton } from 'components/Button';
 import { ModalProps, ModalType, useModal } from 'components/Modal';
 
 import messages from './messages';
-import { divideRecipients } from './utils';
+import { divideRecipients, joinRecipients } from './utils';
 import { RecipientList } from './RecipientList';
 import { MANAGE_RECIPIENTS_MODAL_WIDTH } from './constants';
 import { ManageRecipientsModalContent } from './ManageRecipientsModalContent';
@@ -22,6 +22,7 @@ export type Props = {
   disabled: boolean;
   recipients: string;
   modalTitle: string;
+  onChange: (value: string) => void;
 };
 
 export const RecipientsChooser: FC<Props> = ({
@@ -29,6 +30,7 @@ export const RecipientsChooser: FC<Props> = ({
   disabled,
   recipients,
   modalTitle,
+  onChange,
 }) => {
   const { formatMessage } = useIntl();
 
@@ -37,13 +39,24 @@ export const RecipientsChooser: FC<Props> = ({
     [recipients],
   );
 
-  const modalProps = useMemo<ModalProps['props']>(
+  const onClose = useCallback<
+    Required<ModalProps<Recipients>['props']>['onClose']
+  >(
+    (newRecipients) => {
+      if (!newRecipients) return;
+      onChange(joinRecipients(newRecipients));
+    },
+    [onChange],
+  );
+
+  const modalProps = useMemo<ModalProps<Recipients>['props']>(
     () => ({
       title:
         htmlToPlainText(modalTitle) ||
         formatMessage(messages.manageRecipientsModalDefaultTitle),
       description: formatMessage(messages.manageRecipientsModalDescription),
       width: MANAGE_RECIPIENTS_MODAL_WIDTH,
+      onClose,
     }),
     [modalTitle],
   );

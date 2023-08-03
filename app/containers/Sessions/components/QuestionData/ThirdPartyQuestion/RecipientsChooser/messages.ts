@@ -35,4 +35,8 @@ export default defineMessages({
     id: `${scope}.deleteRecipient`,
     defaultMessage: 'Delete recipient',
   },
+  recipientMustBeUnique: {
+    id: `${scope}.recipientMustBeUnique`,
+    defaultMessage: 'Each recipient must be unique',
+  },
 });

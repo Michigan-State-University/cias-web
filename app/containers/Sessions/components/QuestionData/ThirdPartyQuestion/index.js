@@ -157,6 +157,7 @@ const ThirdPartyQuestion = ({
                   disabled={!editingPossible}
                   recipients={item.value}
                   modalTitle={item.payload}
+                  onChange={(value) => handleChangeVariable(index, item, value)}
                 />
                 <Row mb={10} ml={40} align="center" hidden={isNarratorTab}>
                   <BadgeInput
