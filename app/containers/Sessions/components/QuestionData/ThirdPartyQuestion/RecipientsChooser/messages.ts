@@ -39,4 +39,20 @@ export default defineMessages({
     id: `${scope}.recipientMustBeUnique`,
     defaultMessage: 'Each recipient must be unique',
   },
+  addNewEmail: {
+    id: `${scope}.addNewEmail`,
+    defaultMessage: '+ Add new e-mail',
+  },
+  addNewFax: {
+    id: `${scope}.addNewFax`,
+    defaultMessage: '+ Add new fax number',
+  },
+  enterEmailAddress: {
+    id: `${scope}.enterEmailAddress`,
+    defaultMessage: 'Enter e-mail address',
+  },
+  enterFax: {
+    id: `${scope}.enterFax`,
+    defaultMessage: 'Enter fax number',
+  },
 });

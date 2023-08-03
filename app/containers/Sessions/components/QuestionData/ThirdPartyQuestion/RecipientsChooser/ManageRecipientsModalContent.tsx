@@ -2,17 +2,22 @@ import React, { useMemo, useRef } from 'react';
 import { useIntl } from 'react-intl';
 import { FieldArray, Form, Formik, FormikConfig } from 'formik';
 
+import RedBin from 'assets/svg/bin-red-no-bg.svg';
+
 import globalMessages from 'global/i18n/globalMessages';
 
 import Tabs from 'components/Tabs';
 import { ModalContentRenderer } from 'components/Modal';
 import Row from 'components/Row';
-import { Button } from 'components/Button';
+import { Button, ImageButton, TextButton } from 'components/Button';
+import FormikInput from 'components/FormikInput';
+import Column from 'components/Column';
 
 import messages from './messages';
 import { Recipients, RecipientsFormValues } from './types';
 import { OldRecipientTable } from './OldRecipientTable';
 import { createRecipientsFormSchema } from './utils';
+import { ADD_RECIPIENT_BUTTON_PROPS } from './constants';
 
 export const ManageRecipientsModalContent: ModalContentRenderer<Recipients> = ({
   modalState,
@@ -27,25 +32,31 @@ export const ManageRecipientsModalContent: ModalContentRenderer<Recipients> = ({
   const initialValues: RecipientsFormValues = useMemo(() => {
     if (!modalState)
       return {
-        emails: [],
-        faxes: [],
+        oldEmails: [],
+        newEmails: [],
+        oldFaxes: [],
+        newFaxes: [],
       };
 
     const { emails, faxes } = modalState;
 
     return {
-      emails: emails.map((email) => ({ value: email, old: true })),
-      faxes: faxes.map((fax) => ({ value: fax, old: true })),
+      oldEmails: emails,
+      newEmails: [],
+      oldFaxes: faxes,
+      newFaxes: [],
     };
   }, [modalState]);
 
   const onSubmit: FormikConfig<RecipientsFormValues>['onSubmit'] = ({
-    emails,
-    faxes,
+    oldEmails,
+    newEmails,
+    oldFaxes,
+    newFaxes,
   }) => {
     closeModal({
-      emails: emails.map(({ value }) => value),
-      faxes: faxes.map(({ value }) => value),
+      emails: [...oldEmails, ...newEmails],
+      faxes: [...oldFaxes, ...newFaxes],
     });
   };
 
@@ -55,7 +66,12 @@ export const ManageRecipientsModalContent: ModalContentRenderer<Recipients> = ({
       onSubmit={onSubmit}
       validationSchema={validationSchema}
     >
-      {({ values: { emails, faxes }, isValid, dirty, handleSubmit }) => (
+      {({
+        values: { oldEmails, newEmails, oldFaxes, newFaxes },
+        isValid,
+        dirty,
+        handleSubmit,
+      }) => (
         <Form>
           {/* @ts-ignore */}
           <Tabs
@@ -66,23 +82,93 @@ export const ManageRecipientsModalContent: ModalContentRenderer<Recipients> = ({
           >
             {/* @ts-ignore */}
             <div label={formatMessage(messages.emailRecipients)}>
-              <FieldArray name="emails">
+              <FieldArray name="oldEmails">
                 {({ remove }) => (
-                  <OldRecipientTable
-                    recipients={emails.filter(({ old }) => old)}
-                    onRemove={remove}
-                  />
+                  <OldRecipientTable recipients={oldEmails} onRemove={remove} />
+                )}
+              </FieldArray>
+              <FieldArray name="newEmails">
+                {({ push, remove }) => (
+                  <Column gap={8} mt={8}>
+                    {newEmails.map((_, index) => (
+                      <Row
+                        gap={8}
+                        pr={8}
+                        align="start"
+                        key={`newEmails.${index}`}
+                      >
+                        <FormikInput
+                          formikKey={`newEmails.${index}`}
+                          placeholder={formatMessage(
+                            messages.enterEmailAddress,
+                          )}
+                          flex={1}
+                          inputProps={{
+                            width: '100%',
+                          }}
+                        />
+                        <ImageButton
+                          src={RedBin}
+                          onClick={() => remove(index)}
+                          title={formatMessage(messages.deleteRecipient)}
+                          mt={8}
+                        />
+                      </Row>
+                    ))}
+                    <Row>
+                      <TextButton
+                        buttonProps={ADD_RECIPIENT_BUTTON_PROPS}
+                        onClick={() => push('')}
+                      >
+                        {formatMessage(messages.addNewEmail)}
+                      </TextButton>
+                    </Row>
+                  </Column>
                 )}
               </FieldArray>
             </div>
             {/* @ts-ignore */}
             <div label={formatMessage(messages.faxRecipients)}>
-              <FieldArray name="faxes">
+              <FieldArray name="oldFaxes">
                 {({ remove }) => (
-                  <OldRecipientTable
-                    recipients={faxes.filter(({ old }) => old)}
-                    onRemove={remove}
-                  />
+                  <OldRecipientTable recipients={oldFaxes} onRemove={remove} />
+                )}
+              </FieldArray>
+              <FieldArray name="newFaxes">
+                {({ push, remove }) => (
+                  <Column gap={8} mt={8}>
+                    {newFaxes.map((_, index) => (
+                      <Row
+                        gap={8}
+                        pr={8}
+                        align="start"
+                        key={`newFaxes.${index}`}
+                      >
+                        <FormikInput
+                          formikKey={`newFaxes.${index}`}
+                          placeholder={formatMessage(messages.enterFax)}
+                          flex={1}
+                          inputProps={{
+                            width: '100%',
+                          }}
+                        />
+                        <ImageButton
+                          src={RedBin}
+                          onClick={() => remove(index)}
+                          title={formatMessage(messages.deleteRecipient)}
+                          mt={8}
+                        />
+                      </Row>
+                    ))}
+                    <Row>
+                      <TextButton
+                        buttonProps={ADD_RECIPIENT_BUTTON_PROPS}
+                        onClick={() => push('')}
+                      >
+                        {formatMessage(messages.addNewFax)}
+                      </TextButton>
+                    </Row>
+                  </Column>
                 )}
               </FieldArray>
             </div>
@@ -103,7 +189,8 @@ export const ManageRecipientsModalContent: ModalContentRenderer<Recipients> = ({
               width="auto"
               inverted
               title={formatMessage(globalMessages.cancel)}
-              onClick={closeModal}
+              onClick={() => closeModal()}
+              type="button"
             />
           </Row>
         </Form>
