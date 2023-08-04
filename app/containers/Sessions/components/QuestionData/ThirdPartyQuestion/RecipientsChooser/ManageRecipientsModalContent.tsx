@@ -21,7 +21,7 @@ import {
 import messages from './messages';
 import { Recipients, RecipientsFormValues } from './types';
 import { OldRecipientTable } from './OldRecipientTable';
-import { createRecipientsFormSchema } from './utils';
+import { createRecipientsFormSchema, formatFax } from './utils';
 import {
   ADD_RECIPIENT_BUTTON_PROPS,
   API_PHONE_NUMBER_FORMAT,
@@ -149,7 +149,11 @@ export const ManageRecipientsModalContent: ModalContentRenderer<Recipients> = ({
             <div label={formatMessage(messages.faxRecipients)}>
               <FieldArray name="oldFaxes">
                 {({ remove }) => (
-                  <OldRecipientTable recipients={oldFaxes} onRemove={remove} />
+                  <OldRecipientTable
+                    recipients={oldFaxes}
+                    onRemove={remove}
+                    itemFormatter={formatFax}
+                  />
                 )}
               </FieldArray>
               <FieldArray name="newFaxes">

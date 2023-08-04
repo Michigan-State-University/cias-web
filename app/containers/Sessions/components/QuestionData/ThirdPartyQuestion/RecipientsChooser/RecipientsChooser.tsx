@@ -11,7 +11,7 @@ import { TextButton } from 'components/Button';
 import { ModalProps, ModalType, useModal } from 'components/Modal';
 
 import messages from './messages';
-import { divideRecipients, joinRecipients } from './utils';
+import { divideRecipients, formatFax, joinRecipients } from './utils';
 import { RecipientList } from './RecipientList';
 import { MANAGE_RECIPIENTS_MODAL_WIDTH } from './constants';
 import { ManageRecipientsModalContent } from './ManageRecipientsModalContent';
@@ -80,6 +80,7 @@ export const RecipientsChooser: FC<Props> = ({
           label={formatMessage(messages.faxRecipients)}
           noItemsLabel={formatMessage(messages.noFaxRecipients)}
           recipients={dividedRecipients.faxes}
+          itemFormatter={formatFax}
           mt={8}
         />
         <Row mt={12}>

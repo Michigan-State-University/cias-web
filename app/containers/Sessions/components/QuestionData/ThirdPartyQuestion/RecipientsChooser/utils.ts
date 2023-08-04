@@ -10,6 +10,7 @@ import {
   phoneNumberSchema,
 } from 'components/FormikPhoneNumberInput';
 
+import parsePhoneNumber from 'libphonenumber-js';
 import { NewFax, Recipients } from './types';
 import messages from './messages';
 import { API_PHONE_NUMBER_FORMAT } from './constants';
@@ -105,3 +106,6 @@ export const createRecipientsFormSchema = <T>(
       ),
   });
 };
+
+export const formatFax = (fax: string) =>
+  parsePhoneNumber(fax)?.formatInternational() ?? fax;

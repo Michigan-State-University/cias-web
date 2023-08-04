@@ -1,4 +1,4 @@
-import React, { FC } from 'react';
+import React from 'react';
 import { useIntl } from 'react-intl';
 
 import RedBin from 'assets/svg/bin-red-no-bg.svg';
@@ -10,12 +10,17 @@ import { ImageButton } from 'components/Button';
 
 import messages from './messages';
 
-export type Props = {
-  recipients: string[];
+export type Props<T> = {
+  recipients: T[];
+  itemFormatter?: (recipient: T) => string;
   onRemove: (index: number) => void;
 };
 
-export const OldRecipientTable: FC<Props> = ({ recipients, onRemove }) => {
+export const OldRecipientTable = <T,>({
+  recipients,
+  itemFormatter = (recipient) => `${recipient}`,
+  onRemove,
+}: Props<T>) => {
   const { formatMessage } = useIntl();
 
   return (
@@ -26,7 +31,7 @@ export const OldRecipientTable: FC<Props> = ({ recipients, onRemove }) => {
             <TD padding="12px 8px">
               <Row justify="between" align="center" gap={8}>
                 <Text fontSize={15} lineHeight={1.5} truncate>
-                  {recipient}
+                  {itemFormatter(recipient)}
                 </Text>
                 <ImageButton
                   src={RedBin}

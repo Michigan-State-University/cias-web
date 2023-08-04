@@ -1,4 +1,4 @@
-import React, { FC, ReactNode, useMemo } from 'react';
+import React, { ReactNode, useMemo } from 'react';
 
 import { isLast } from 'utils/arrayUtils';
 
@@ -6,18 +6,20 @@ import { MarginProps } from 'components/BaseComponentStyles';
 import Row from 'components/Row';
 import { EllipsisText } from 'components/Text';
 
-export type Props = {
+export type Props<T> = {
   label: ReactNode;
   noItemsLabel: ReactNode;
-  recipients: string[];
+  recipients: T[];
+  itemFormatter?: (recipient: T) => string;
 } & MarginProps;
 
-export const RecipientList: FC<Props> = ({
+export const RecipientList = <T,>({
   label,
   noItemsLabel,
   recipients,
+  itemFormatter = (recipient) => `${recipient}`,
   ...props
-}) => {
+}: Props<T>) => {
   const text = useMemo(() => {
     if (recipients.length)
       return (
@@ -26,7 +28,9 @@ export const RecipientList: FC<Props> = ({
           {` (${recipients.length}): `}
           {recipients.map(
             (recipient, index) =>
-              `${recipient}${isLast(recipients, index) ? '' : ', '}`,
+              `${itemFormatter(recipient)}${
+                isLast(recipients, index) ? '' : ', '
+              }`,
           )}
         </>
       );
