@@ -13,11 +13,19 @@ import { Button, ImageButton, TextButton } from 'components/Button';
 import FormikInput from 'components/FormikInput';
 import Column from 'components/Column';
 
+import {
+  DEFAULT_COUNTRY_CODE,
+  formatPhone,
+  FormikPhoneNumberInput,
+} from 'components/FormikPhoneNumberInput';
 import messages from './messages';
 import { Recipients, RecipientsFormValues } from './types';
 import { OldRecipientTable } from './OldRecipientTable';
 import { createRecipientsFormSchema } from './utils';
-import { ADD_RECIPIENT_BUTTON_PROPS } from './constants';
+import {
+  ADD_RECIPIENT_BUTTON_PROPS,
+  API_PHONE_NUMBER_FORMAT,
+} from './constants';
 
 export const ManageRecipientsModalContent: ModalContentRenderer<Recipients> = ({
   modalState,
@@ -54,9 +62,19 @@ export const ManageRecipientsModalContent: ModalContentRenderer<Recipients> = ({
     oldFaxes,
     newFaxes,
   }) => {
+    const formattedNewFaxes = newFaxes.reduce<string[]>(
+      (faxes, { iso, number }) => {
+        if (iso?.value && number) {
+          faxes.push(formatPhone(iso.value, number, API_PHONE_NUMBER_FORMAT));
+        }
+        return faxes;
+      },
+      [],
+    );
+
     closeModal({
       emails: [...oldEmails, ...newEmails],
-      faxes: [...oldFaxes, ...newFaxes],
+      faxes: [...oldFaxes, ...formattedNewFaxes],
     });
   };
 
@@ -144,13 +162,12 @@ export const ManageRecipientsModalContent: ModalContentRenderer<Recipients> = ({
                         align="start"
                         key={`newFaxes.${index}`}
                       >
-                        <FormikInput
-                          formikKey={`newFaxes.${index}`}
-                          placeholder={formatMessage(messages.enterFax)}
-                          flex={1}
-                          inputProps={{
-                            width: '100%',
-                          }}
+                        <FormikPhoneNumberInput
+                          isoKey={`newFaxes.${index}.iso`}
+                          numberKey={`newFaxes.${index}.number`}
+                          prefixLabel={null}
+                          phoneLabel={null}
+                          phonePlaceholder={messages.enterFax}
                         />
                         <ImageButton
                           src={RedBin}
@@ -163,7 +180,12 @@ export const ManageRecipientsModalContent: ModalContentRenderer<Recipients> = ({
                     <Row>
                       <TextButton
                         buttonProps={ADD_RECIPIENT_BUTTON_PROPS}
-                        onClick={() => push('')}
+                        onClick={() =>
+                          push({
+                            iso: { value: DEFAULT_COUNTRY_CODE, label: '' },
+                            number: '',
+                          })
+                        }
                       >
                         {formatMessage(messages.addNewFax)}
                       </TextButton>

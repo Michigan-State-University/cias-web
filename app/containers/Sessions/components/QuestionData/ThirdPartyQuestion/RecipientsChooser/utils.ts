@@ -5,6 +5,8 @@ import isNil from 'lodash/isNil';
 
 import { emailFormValidationSchema } from 'utils/validators';
 
+import { phoneNumberSchema } from 'components/FormikPhoneNumberInput';
+
 import { Recipients } from './types';
 import messages from './messages';
 
@@ -81,7 +83,7 @@ export const createRecipientsFormSchema = (
       ),
     oldFaxes: Yup.array().of(Yup.string()),
     newFaxes: Yup.array()
-      .of(Yup.string())
+      .of(phoneNumberSchema(formatMessage, false, true))
       // @ts-ignore
       .uniqueRecipients(
         formatMessage(messages.recipientMustBeUnique),
