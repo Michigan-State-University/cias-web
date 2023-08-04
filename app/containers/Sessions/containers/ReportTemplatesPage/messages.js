@@ -80,6 +80,14 @@ export default defineMessages({
     id: `${scope}.settingsNamePlaceholder`,
     defaultMessage: 'Enter report name',
   },
+  coverLetter: {
+    id: `${scope}.coverLetter`,
+    defaultMessage: 'Cover letter',
+  },
+  hasCoverLetterSwitchLabel: {
+    id: `${scope}.hasCoverLetterSwitchLabel`,
+    defaultMessage: 'Display cover letter for fax recipients',
+  },
   settingsDeleteReportTemplateButton: {
     id: `${scope}.settingsDeleteReportTemplateButton`,
     defaultMessage: 'Delete Report Template',

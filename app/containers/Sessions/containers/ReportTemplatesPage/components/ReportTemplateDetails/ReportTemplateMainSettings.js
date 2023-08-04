@@ -42,6 +42,7 @@ import { useSelectModal, SELECT_MODAL_WIDTH } from 'components/SelectModal';
 import CopyModal from 'components/CopyModal';
 import { VIEWS } from 'components/CopyModal/Components';
 import Tooltip from 'components/Tooltip';
+import { LabelPosition, Switch } from 'components/Switch';
 
 import { CardBox, Spacer } from '../../styled';
 import { ReportTemplatesContext } from '../../utils';
@@ -101,6 +102,13 @@ const ReportTemplateMainSettings = ({
 
   const onLogoDelete = () => {
     deleteReportTemplateLogo(sessionId, singleReportTemplate.id);
+  };
+
+  const onHasCoverLetterChange = (hasCoverLetter) => {
+    updateReportTemplate(sessionId, {
+      ...singleReportTemplate,
+      hasCoverLetter,
+    });
   };
 
   const onDelete = () => {
@@ -387,6 +395,28 @@ const ReportTemplateMainSettings = ({
                       onDeleteImage={onLogoDelete}
                       acceptedFormats={['JPG', 'PNG']}
                     />
+                  </Col>
+                </Row>
+
+                <Row style={{ marginBottom: 20 }}>
+                  <Col>
+                    <Spacer />
+                  </Col>
+                </Row>
+
+                <Row style={{ marginBottom: 10 }}>
+                  <Col>{formatMessage(messages.coverLetter)}</Col>
+                </Row>
+                <Row style={{ marginBottom: 20 }}>
+                  <Col>
+                    <Switch
+                      checked={singleReportTemplate.hasCoverLetter}
+                      id="has-cover-letter-switch"
+                      onToggle={onHasCoverLetterChange}
+                      labelPosition={LabelPosition.Right}
+                    >
+                      {formatMessage(messages.hasCoverLetterSwitchLabel)}
+                    </Switch>
                   </Col>
                 </Row>
 
