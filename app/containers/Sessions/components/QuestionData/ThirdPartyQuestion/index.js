@@ -13,7 +13,7 @@ import {
   makeSelectSelectedQuestion,
   updateQuestionData,
 } from 'global/reducers/questions';
-import { themeColors, colors } from 'theme';
+import { themeColors } from 'theme';
 
 import FlexibleWidthApprovableInput from 'components/Input/FlexibleWidthApprovableInput';
 import Box from 'components/Box';
@@ -23,7 +23,6 @@ import Img from 'components/Img';
 import PlusCircle from 'components/Circle/PlusCircle';
 import Row from 'components/Row';
 import Text from 'components/Text';
-import { BadgeInput } from 'components/Input/BadgeInput';
 import OriginalTextHover from 'components/OriginalTextHover';
 import { DndSortable } from 'components/DragAndDrop';
 
@@ -159,24 +158,6 @@ const ThirdPartyQuestion = ({
                   modalTitle={item.payload}
                   onChange={(value) => handleChangeVariable(index, item, value)}
                 />
-                <Row mb={10} ml={40} align="center" hidden={isNarratorTab}>
-                  <BadgeInput
-                    data-cy={`score-${index}-input`}
-                    disabled={!editingPossible}
-                    textAlign="center"
-                    placeholder={
-                      !isNarratorTab
-                        ? formatMessage(messages.emailPlaceholder)
-                        : ''
-                    }
-                    value={item.value}
-                    color={colors.azure}
-                    onBlur={(currentValue) =>
-                      handleChangeVariable(index, item, currentValue)
-                    }
-                    maxWidth="100%"
-                  />
-                </Row>
               </Column>
 
               <ReportChooser
