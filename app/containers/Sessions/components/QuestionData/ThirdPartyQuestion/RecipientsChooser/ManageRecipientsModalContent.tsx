@@ -25,6 +25,7 @@ import { createRecipientsFormSchema, formatFax } from './utils';
 import {
   ADD_RECIPIENT_BUTTON_PROPS,
   API_PHONE_NUMBER_FORMAT,
+  TAB_CONTENT_HEIGHT,
 } from './constants';
 
 export const ManageRecipientsModalContent: ModalContentRenderer<Recipients> = ({
@@ -100,103 +101,110 @@ export const ManageRecipientsModalContent: ModalContentRenderer<Recipients> = ({
           >
             {/* @ts-ignore */}
             <div label={formatMessage(messages.emailRecipients)}>
-              <FieldArray name="oldEmails">
-                {({ remove }) => (
-                  <OldRecipientTable recipients={oldEmails} onRemove={remove} />
-                )}
-              </FieldArray>
-              <FieldArray name="newEmails">
-                {({ push, remove }) => (
-                  <Column gap={8} mt={8}>
-                    {newEmails.map((_, index) => (
-                      <Row
-                        gap={8}
-                        pr={8}
-                        align="start"
-                        key={`newEmails.${index}`}
-                      >
-                        <FormikInput
-                          formikKey={`newEmails.${index}`}
-                          placeholder={formatMessage(
-                            messages.enterEmailAddress,
-                          )}
-                          flex={1}
-                          inputProps={{
-                            width: '100%',
-                          }}
-                        />
-                        <ImageButton
-                          src={RedBin}
-                          onClick={() => remove(index)}
-                          title={formatMessage(messages.deleteRecipient)}
-                          mt={8}
-                        />
+              <Column height={TAB_CONTENT_HEIGHT} overflowY="auto">
+                <FieldArray name="oldEmails">
+                  {({ remove }) => (
+                    <OldRecipientTable
+                      recipients={oldEmails}
+                      onRemove={remove}
+                    />
+                  )}
+                </FieldArray>
+                <FieldArray name="newEmails">
+                  {({ push, remove }) => (
+                    <Column gap={8} mt={8}>
+                      {newEmails.map((_, index) => (
+                        <Row
+                          gap={8}
+                          pr={8}
+                          align="start"
+                          key={`newEmails.${index}`}
+                        >
+                          <FormikInput
+                            formikKey={`newEmails.${index}`}
+                            placeholder={formatMessage(
+                              messages.enterEmailAddress,
+                            )}
+                            flex={1}
+                            inputProps={{
+                              width: '100%',
+                            }}
+                          />
+                          <ImageButton
+                            src={RedBin}
+                            onClick={() => remove(index)}
+                            title={formatMessage(messages.deleteRecipient)}
+                            mt={8}
+                          />
+                        </Row>
+                      ))}
+                      <Row>
+                        <TextButton
+                          buttonProps={ADD_RECIPIENT_BUTTON_PROPS}
+                          onClick={() => push('')}
+                        >
+                          {formatMessage(messages.addNewEmail)}
+                        </TextButton>
                       </Row>
-                    ))}
-                    <Row>
-                      <TextButton
-                        buttonProps={ADD_RECIPIENT_BUTTON_PROPS}
-                        onClick={() => push('')}
-                      >
-                        {formatMessage(messages.addNewEmail)}
-                      </TextButton>
-                    </Row>
-                  </Column>
-                )}
-              </FieldArray>
+                    </Column>
+                  )}
+                </FieldArray>
+              </Column>
             </div>
             {/* @ts-ignore */}
             <div label={formatMessage(messages.faxRecipients)}>
-              <FieldArray name="oldFaxes">
-                {({ remove }) => (
-                  <OldRecipientTable
-                    recipients={oldFaxes}
-                    onRemove={remove}
-                    itemFormatter={formatFax}
-                  />
-                )}
-              </FieldArray>
-              <FieldArray name="newFaxes">
-                {({ push, remove }) => (
-                  <Column gap={8} mt={8}>
-                    {newFaxes.map((_, index) => (
-                      <Row
-                        gap={8}
-                        pr={8}
-                        align="start"
-                        key={`newFaxes.${index}`}
-                      >
-                        <FormikPhoneNumberInput
-                          isoKey={`newFaxes.${index}.iso`}
-                          numberKey={`newFaxes.${index}.number`}
-                          prefixLabel={null}
-                          phoneLabel={null}
-                          phonePlaceholder={messages.enterFax}
-                        />
-                        <ImageButton
-                          src={RedBin}
-                          onClick={() => remove(index)}
-                          title={formatMessage(messages.deleteRecipient)}
-                          mt={8}
-                        />
+              <Column height={TAB_CONTENT_HEIGHT} overflowY="auto">
+                <FieldArray name="oldFaxes">
+                  {({ remove }) => (
+                    <OldRecipientTable
+                      recipients={oldFaxes}
+                      onRemove={remove}
+                      itemFormatter={formatFax}
+                    />
+                  )}
+                </FieldArray>
+                <FieldArray name="newFaxes">
+                  {({ push, remove }) => (
+                    <Column gap={8} mt={8}>
+                      {newFaxes.map((_, index) => (
+                        <Row
+                          gap={8}
+                          pr={8}
+                          align="start"
+                          key={`newFaxes.${index}`}
+                        >
+                          <FormikPhoneNumberInput
+                            isoKey={`newFaxes.${index}.iso`}
+                            numberKey={`newFaxes.${index}.number`}
+                            prefixLabel={null}
+                            phoneLabel={null}
+                            phonePlaceholder={messages.enterFax}
+                          />
+                          <ImageButton
+                            src={RedBin}
+                            onClick={() => remove(index)}
+                            title={formatMessage(messages.deleteRecipient)}
+                            mt={8}
+                          />
+                        </Row>
+                      ))}
+                      <Row>
+                        <TextButton
+                          buttonProps={ADD_RECIPIENT_BUTTON_PROPS}
+                          onClick={() =>
+                            push({
+                              iso: { value: DEFAULT_COUNTRY_CODE, label: '' },
+                              number: '',
+                            })
+                          }
+                        >
+                          {formatMessage(messages.addNewFax)}
+                        </TextButton>
                       </Row>
-                    ))}
-                    <Row>
-                      <TextButton
-                        buttonProps={ADD_RECIPIENT_BUTTON_PROPS}
-                        onClick={() =>
-                          push({
-                            iso: { value: DEFAULT_COUNTRY_CODE, label: '' },
-                            number: '',
-                          })
-                        }
-                      >
-                        {formatMessage(messages.addNewFax)}
-                      </TextButton>
-                    </Row>
-                  </Column>
-                )}
-              </FieldArray>
+                    </Column>
+                  )}
+                </FieldArray>
+              </Column>
             </div>
           </Tabs>
           <Row gap={12} mt={16}>
