@@ -5,10 +5,14 @@ import isNil from 'lodash/isNil';
 
 import { emailFormValidationSchema } from 'utils/validators';
 
-import { phoneNumberSchema } from 'components/FormikPhoneNumberInput';
+import {
+  formatPhone,
+  phoneNumberSchema,
+} from 'components/FormikPhoneNumberInput';
 
-import { Recipients } from './types';
+import { NewFax, Recipients } from './types';
 import messages from './messages';
+import { API_PHONE_NUMBER_FORMAT } from './constants';
 
 export const divideRecipients = (mixedRecipients: string): Recipients =>
   mixedRecipients.split(',').reduce<Recipients>(
@@ -31,25 +35,31 @@ export const joinRecipients = ({ emails, faxes }: Recipients): string =>
 
 export const UNIQUE_RECIPIENTS_METHOD = 'uniqueRecipients';
 
-export const createRecipientsFormSchema = (
+export const createRecipientsFormSchema = <T>(
   formatMessage: IntlShape['formatMessage'],
 ) => {
   Yup.addMethod(
     Yup.array,
     UNIQUE_RECIPIENTS_METHOD,
     // eslint-disable-next-line func-names
-    function (message, oldItemsKey) {
+    function (
+      message,
+      oldItemsKey,
+      itemFormatter: (item: T) => string,
+      errorPath: string = '',
+    ) {
       return (this as any).test(
         UNIQUE_RECIPIENTS_METHOD,
         message,
         // eslint-disable-next-line func-names
-        function (list: string[]) {
+        function (list: T[]) {
           // @ts-ignore
           const oldItems = this.parent[oldItemsKey] ?? [];
-          const counts = countBy([...list, ...oldItems]);
+          const formattedList = list.map((item) => itemFormatter(item));
+          const counts = countBy([...formattedList, ...oldItems]);
           const errors: Yup.ValidationError[] = [];
 
-          list.forEach((item, index) => {
+          formattedList.forEach((item, index) => {
             if (!item) return;
 
             const count = counts[item];
@@ -59,7 +69,7 @@ export const createRecipientsFormSchema = (
                   message,
                   item,
                   // @ts-ignore
-                  `${this.path}.${index}`,
+                  `${this.path}.${index}${errorPath}`,
                 ),
               );
             }
@@ -80,6 +90,7 @@ export const createRecipientsFormSchema = (
       .uniqueRecipients(
         formatMessage(messages.recipientMustBeUnique),
         'oldEmails',
+        (email: string) => email,
       ),
     oldFaxes: Yup.array().of(Yup.string()),
     newFaxes: Yup.array()
@@ -88,6 +99,9 @@ export const createRecipientsFormSchema = (
       .uniqueRecipients(
         formatMessage(messages.recipientMustBeUnique),
         'oldFaxes',
+        ({ iso, number }: NewFax) =>
+          formatPhone(iso.value, number ?? '', API_PHONE_NUMBER_FORMAT),
+        '.number',
       ),
   });
 };

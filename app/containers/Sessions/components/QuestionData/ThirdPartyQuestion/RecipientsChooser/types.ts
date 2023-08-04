@@ -5,7 +5,7 @@ import { SelectOption } from 'components/Select/types';
 export type Recipients = { emails: string[]; faxes: string[] };
 
 export type NewFax = {
-  iso: Nullable<SelectOption<CountryCode>>;
+  iso: SelectOption<CountryCode>;
   number: string;
 };
 
