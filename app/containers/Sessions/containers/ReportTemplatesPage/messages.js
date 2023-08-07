@@ -38,7 +38,7 @@ export default defineMessages({
   },
   settingsDownloadReportButton: {
     id: `${scope}.settingsDownloadReportButton`,
-    defaultMessage: 'Download test report',
+    defaultMessage: 'Download',
   },
   settingsReportFor: {
     id: `${scope}.settingsReportFor`,

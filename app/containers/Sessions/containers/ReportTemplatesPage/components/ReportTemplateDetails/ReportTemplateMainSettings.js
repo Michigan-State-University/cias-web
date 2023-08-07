@@ -121,37 +121,32 @@ const ReportTemplateMainSettings = ({
             onHideImg={arrowDown}
             onShowImg={arrowUp}
             imgWithBackground
+            toggleIconPosition="label"
             label={
-              <Row align="center" justify="between" style={{ width: '100%' }}>
-                <Col>
-                  <HelpIconTooltip
-                    id="report-settings-cdh"
-                    tooltipContent={formatMessage(messages.reportSettingsHelp)}
-                  >
-                    <H1>{formatMessage(messages.settingsHeader)}</H1>
-                  </HelpIconTooltip>
-                </Col>
-                <Col align="end">
-                  <TextButton
-                    onClick={onTestDownload}
-                    whiteSpace="nowrap"
-                    fontWeight="bold"
-                    fontSize={14}
-                    loading={generateTestReportLoading}
-                    buttonProps={{
-                      color: themeColors.secondary,
-                      fontWeight: 'bold',
-                      mr: 10,
-                    }}
-                    spinnerProps={{ size: 30, width: 2 }}
-                  >
-                    <Img src={download} mr={5} />
-                    <FormattedMessage
-                      {...messages.settingsDownloadReportButton}
-                    />
-                  </TextButton>
-                </Col>
-              </Row>
+              <HelpIconTooltip
+                id="report-settings-cdh"
+                tooltipContent={formatMessage(messages.reportSettingsHelp)}
+              >
+                <H1>{formatMessage(messages.settingsHeader)}</H1>
+              </HelpIconTooltip>
+            }
+            extraIcons={
+              <TextButton
+                onClick={onTestDownload}
+                whiteSpace="nowrap"
+                fontWeight="bold"
+                fontSize={14}
+                loading={generateTestReportLoading}
+                buttonProps={{
+                  color: themeColors.secondary,
+                  fontWeight: 'bold',
+                  mr: 10,
+                }}
+                spinnerProps={{ size: 30, width: 2 }}
+              >
+                <Img src={download} mr={5} />
+                <FormattedMessage {...messages.settingsDownloadReportButton} />
+              </TextButton>
             }
           >
             <CardBox>
