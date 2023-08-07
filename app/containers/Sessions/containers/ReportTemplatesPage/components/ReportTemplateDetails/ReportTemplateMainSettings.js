@@ -132,6 +132,14 @@ const ReportTemplateMainSettings = ({
       });
   };
 
+  const onCoverLetterSenderChange = (coverLetterSender) => {
+    if (coverLetterSender !== singleReportTemplate.coverLetterSender)
+      updateReportTemplate(sessionId, {
+        ...singleReportTemplate,
+        coverLetterSender,
+      });
+  };
+
   const onDelete = () => {
     deleteReportTemplate(sessionId, singleReportTemplate.id);
   };
@@ -473,28 +481,50 @@ const ReportTemplateMainSettings = ({
                         </Col>
                       ))}
                     </Row>
+
+                    <Row style={{ marginBottom: 10 }}>
+                      <Col>
+                        {formatMessage(messages.coverLetterDescription)}
+                      </Col>
+                    </Row>
+                    <Row style={{ marginBottom: 20 }}>
+                      <Col>
+                        <Box bg={colors.linkWater} width="100%">
+                          <ApprovableInput
+                            disabled={!canEdit}
+                            type="multiline"
+                            richText
+                            value={singleReportTemplate.coverLetterDescription}
+                            onCheck={onCoverLetterDescriptionChange}
+                            placeholder={formatMessage(
+                              globalMessages.enterTextHere,
+                            )}
+                          />
+                        </Box>
+                      </Col>
+                    </Row>
+
+                    <Row style={{ marginBottom: 10 }}>
+                      <Col>{formatMessage(messages.coverLetterSender)}</Col>
+                    </Row>
+                    <Row style={{ marginBottom: 20 }}>
+                      <Col>
+                        <Box bg={colors.linkWater} width="100%">
+                          <ApprovableInput
+                            disabled={!canEdit}
+                            mr={0}
+                            type="singleline"
+                            value={singleReportTemplate.coverLetterSender}
+                            onCheck={onCoverLetterSenderChange}
+                            placeholder={formatMessage(
+                              globalMessages.enterTextHere,
+                            )}
+                          />
+                        </Box>
+                      </Col>
+                    </Row>
                   </>
                 )}
-
-                <Row style={{ marginBottom: 10 }}>
-                  <Col>{formatMessage(messages.coverLetterDescription)}</Col>
-                </Row>
-                <Row style={{ marginBottom: 20 }}>
-                  <Col>
-                    <Box bg={colors.linkWater} width="100%">
-                      <ApprovableInput
-                        disabled={!canEdit}
-                        type="multiline"
-                        richText
-                        value={singleReportTemplate.coverLetterDescription}
-                        onCheck={onCoverLetterDescriptionChange}
-                        placeholder={formatMessage(
-                          globalMessages.enterTextHere,
-                        )}
-                      />
-                    </Box>
-                  </Col>
-                </Row>
 
                 <Row style={{ marginBottom: 20 }}>
                   <Col>
@@ -507,7 +537,7 @@ const ReportTemplateMainSettings = ({
                 </Row>
                 <Row style={{ marginBottom: 20 }}>
                   <Col>
-                    <Box bg={colors.linkWater}>
+                    <Box bg={colors.linkWater} width="100%">
                       <ApprovableInput
                         disabled={!canEdit}
                         mr={0}

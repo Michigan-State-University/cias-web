@@ -106,6 +106,10 @@ export default defineMessages({
     id: `${scope}.coverLetterDescription`,
     defaultMessage: 'Report description:',
   },
+  coverLetterSender: {
+    id: `${scope}.coverLetterSender`,
+    defaultMessage: 'Sender (could be person or project name):',
+  },
   hasCoverLetterSwitchLabel: {
     id: `${scope}.hasCoverLetterSwitchLabel`,
     defaultMessage: 'Display cover letter for fax recipients',
