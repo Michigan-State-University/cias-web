@@ -116,10 +116,19 @@ const ReportTemplateMainSettings = ({
   };
 
   const onCoverLetterLogoTypeChange = (coverLetterLogoType) => {
-    if (coverLetterLogoType !== singleReportTemplate.coverLetterLogoType)
+    if (coverLetterLogoType !== singleReportTemplate.coverLetterLogoType) {
       updateReportTemplate(sessionId, {
         ...singleReportTemplate,
         coverLetterLogoType,
+      });
+    }
+  };
+
+  const onCoverLetterDescriptionChange = (coverLetterDescription) => {
+    if (coverLetterDescription !== singleReportTemplate.coverLetterDescription)
+      updateReportTemplate(sessionId, {
+        ...singleReportTemplate,
+        coverLetterDescription,
       });
   };
 
@@ -466,6 +475,26 @@ const ReportTemplateMainSettings = ({
                     </Row>
                   </>
                 )}
+
+                <Row style={{ marginBottom: 10 }}>
+                  <Col>{formatMessage(messages.coverLetterDescription)}</Col>
+                </Row>
+                <Row style={{ marginBottom: 20 }}>
+                  <Col>
+                    <Box bg={colors.linkWater} width="100%">
+                      <ApprovableInput
+                        disabled={!canEdit}
+                        type="multiline"
+                        richText
+                        value={singleReportTemplate.coverLetterDescription}
+                        onCheck={onCoverLetterDescriptionChange}
+                        placeholder={formatMessage(
+                          globalMessages.enterTextHere,
+                        )}
+                      />
+                    </Box>
+                  </Col>
+                </Row>
 
                 <Row style={{ marginBottom: 20 }}>
                   <Col>

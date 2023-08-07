@@ -506,4 +506,8 @@ export default defineMessages({
     id: `${scope}.back`,
     defaultMessage: 'Back',
   },
+  enterTextHere: {
+    id: `${scope}.enterTextHere`,
+    defaultMessage: 'Enter text here',
+  },
 });

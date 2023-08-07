@@ -102,6 +102,10 @@ export default defineMessages({
     id: `${scope}.${CoverLetterLogoType.NO_LOGO}`,
     defaultMessage: 'Don’t show logo',
   },
+  coverLetterDescription: {
+    id: `${scope}.coverLetterDescription`,
+    defaultMessage: 'Report description:',
+  },
   hasCoverLetterSwitchLabel: {
     id: `${scope}.hasCoverLetterSwitchLabel`,
     defaultMessage: 'Display cover letter for fax recipients',
