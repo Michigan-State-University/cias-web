@@ -9,6 +9,8 @@ import { colors, themeColors } from 'theme';
 
 import globalMessages from 'global/i18n/globalMessages';
 
+import { CoverLetterLogoType } from 'models/ReportTemplate';
+
 import {
   deleteReportTemplateLogoRequest,
   deleteReportTemplateRequest,
@@ -105,10 +107,20 @@ const ReportTemplateMainSettings = ({
   };
 
   const onHasCoverLetterChange = (hasCoverLetter) => {
-    updateReportTemplate(sessionId, {
-      ...singleReportTemplate,
-      hasCoverLetter,
-    });
+    if (hasCoverLetter !== singleReportTemplate.hasCoverLetter) {
+      updateReportTemplate(sessionId, {
+        ...singleReportTemplate,
+        hasCoverLetter,
+      });
+    }
+  };
+
+  const onCoverLetterLogoTypeChange = (coverLetterLogoType) => {
+    if (coverLetterLogoType !== singleReportTemplate.coverLetterLogoType)
+      updateReportTemplate(sessionId, {
+        ...singleReportTemplate,
+        coverLetterLogoType,
+      });
   };
 
   const onDelete = () => {
@@ -419,6 +431,41 @@ const ReportTemplateMainSettings = ({
                     </Switch>
                   </Col>
                 </Row>
+
+                {singleReportTemplate.hasCoverLetter && (
+                  <>
+                    <Row style={{ marginBottom: 10 }}>
+                      <Col>{formatMessage(messages.coverLetterLogoType)}</Col>
+                    </Row>
+                    <Row style={{ marginBottom: 20 }}>
+                      {Object.values(CoverLetterLogoType).map((option) => (
+                        <Col key={option}>
+                          <Row
+                            align="center"
+                            style={{
+                              margin: 0,
+                              cursor: canEdit ? 'pointer' : 'initial',
+                            }}
+                          >
+                            <Radio
+                              id={`cover-letter-logo-type-${option}`}
+                              disabled={!canEdit}
+                              checked={
+                                singleReportTemplate.coverLetterLogoType ===
+                                option
+                              }
+                              onChange={() =>
+                                canEdit && onCoverLetterLogoTypeChange(option)
+                              }
+                            >
+                              <Text>{formatMessage(messages[option])}</Text>
+                            </Radio>
+                          </Row>
+                        </Col>
+                      ))}
+                    </Row>
+                  </>
+                )}
 
                 <Row style={{ marginBottom: 20 }}>
                   <Col>

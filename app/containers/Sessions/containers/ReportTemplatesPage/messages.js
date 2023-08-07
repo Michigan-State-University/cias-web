@@ -1,5 +1,7 @@
 import { defineMessages } from 'react-intl';
 
+import { CoverLetterLogoType } from 'models/ReportTemplate';
+
 export const scope = 'app.containers.ReportTemplatesPage';
 
 export default defineMessages({
@@ -83,6 +85,22 @@ export default defineMessages({
   coverLetter: {
     id: `${scope}.coverLetter`,
     defaultMessage: 'Cover letter',
+  },
+  coverLetterLogoType: {
+    id: `${scope}.coverLetterLogoType`,
+    defaultMessage: 'Logo on the cover letter',
+  },
+  [CoverLetterLogoType.REPORT_LOGO]: {
+    id: `${scope}.${CoverLetterLogoType.REPORT_LOGO}`,
+    defaultMessage: 'Use Report logo',
+  },
+  [CoverLetterLogoType.CUSTOM]: {
+    id: `${scope}.${CoverLetterLogoType.CUSTOM}`,
+    defaultMessage: 'Use custom logo',
+  },
+  [CoverLetterLogoType.NO_LOGO]: {
+    id: `${scope}.${CoverLetterLogoType.NO_LOGO}`,
+    defaultMessage: 'Don’t show logo',
   },
   hasCoverLetterSwitchLabel: {
     id: `${scope}.hasCoverLetterSwitchLabel`,
