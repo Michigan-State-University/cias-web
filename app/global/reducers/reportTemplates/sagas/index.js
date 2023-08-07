@@ -5,7 +5,9 @@ import addReportTemplate from './addReportTemplate';
 import fetchReportTemplates from './fetchReportTemplates';
 import updateReportTemplate from './updateReportTemplate';
 import deleteReportTemplate from './deleteReportTemplate';
+import uploadReportTemplateLogo from './uploadReportTemplateLogo';
 import deleteReportTemplateLogo from './deleteReportTemplateLogo';
+import uploadCoverLetterCustomLogo from './uploadCoverLetterCustomLogo';
 import deleteCoverLetterCustomLogo from './deleteCoverLetterCustomLogo';
 import fetchSingleReportTemplate from './fetchSingleReportTemplate';
 import addSectionCase from './addSectionCase';
@@ -26,7 +28,9 @@ export default function* reportTemplatesSaga() {
     addReportTemplate(),
     updateReportTemplate(),
     deleteReportTemplate(),
+    uploadReportTemplateLogo(),
     deleteReportTemplateLogo(),
+    uploadCoverLetterCustomLogo(),
     deleteCoverLetterCustomLogo(),
     fetchSingleReportTemplate(),
     addSectionCase(),

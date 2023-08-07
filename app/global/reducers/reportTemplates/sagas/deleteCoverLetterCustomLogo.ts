@@ -1,4 +1,4 @@
-import { takeLatest, put, call, delay } from 'redux-saga/effects';
+import { takeEvery, put, call } from 'redux-saga/effects';
 import axios from 'axios';
 
 import { toast } from 'react-toastify';
@@ -11,7 +11,6 @@ import {
 import { DELETE_COVER_LETTER_CUSTOM_LOGO_REQUEST } from '../constants';
 import messages from './messages';
 
-// Added delay to avoid request spamming
 function* deleteCoverLetterCustomLogo({
   payload: { sessionId, reportTemplateId },
 }: ReturnType<typeof deleteCoverLetterCustomLogoRequest>) {
@@ -19,10 +18,8 @@ function* deleteCoverLetterCustomLogo({
   try {
     yield axios.delete(requestUrl);
 
-    yield delay(1000);
     yield put(deleteCoverLetterCustomLogoSuccess());
   } catch (error) {
-    yield delay(1000);
     yield put(deleteCoverLetterCustomLogoFailure(error));
     yield call(
       toast.error,
@@ -32,7 +29,7 @@ function* deleteCoverLetterCustomLogo({
 }
 
 export default function* deleteCoverLetterCustomLogoSaga() {
-  yield takeLatest(
+  yield takeEvery(
     DELETE_COVER_LETTER_CUSTOM_LOGO_REQUEST,
     deleteCoverLetterCustomLogo,
   );

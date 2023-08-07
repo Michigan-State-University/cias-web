@@ -1,4 +1,4 @@
-import React, { useContext, useEffect, useMemo, useState } from 'react';
+import React, { useContext, useMemo, useState } from 'react';
 import PropTypes from 'prop-types';
 import { compose } from 'redux';
 import { connect, useSelector } from 'react-redux';
@@ -20,6 +20,8 @@ import {
   generateTestReportRequest,
   ReportFor,
   deleteCoverLetterCustomLogoRequest,
+  uploadReportTemplateLogoRequest,
+  uploadCoverLetterCustomLogoRequest,
 } from 'global/reducers/reportTemplates';
 import { makeSelectInterventionHfHsAccess } from 'global/reducers/intervention';
 
@@ -61,7 +63,9 @@ const ReportTemplateMainSettings = ({
   duplicateReportTemplate,
   updateReportTemplate,
   deleteReportTemplate,
+  uploadReportTemplateLogo,
   deleteReportTemplateLogo,
+  uploadCoverLetterCustomLogo,
   deleteCoverLetterCustomLogo,
   generateTestReport,
 }) => {
@@ -70,22 +74,17 @@ const ReportTemplateMainSettings = ({
     singleReportTemplate,
     loaders: {
       deleteReportTemplateLoading,
+      uploadReportTemplateLogoLoading,
       deleteReportTemplateLogoLoading,
       duplicateReportTemplateLoading,
-      updateReportTemplateLoading,
       generateTestReportLoading,
+      uploadCoverLetterCustomLogoLoading,
       deleteCoverLetterCustomLogoLoading,
     },
     canEdit,
   } = useContext(ReportTemplatesContext);
 
   const hfhsAccess = useSelector(makeSelectInterventionHfHsAccess());
-
-  useEffect(() => {
-    if (!updateReportTemplateLoading) setIsUploadingImage(false);
-  }, [updateReportTemplateLoading]);
-
-  const [isUploadingImage, setIsUploadingImage] = useState(false);
 
   const [openCollapsable, setOpenCollapsable] = useState(false);
   const toggleCollapsable = () => setOpenCollapsable(!openCollapsable);
@@ -101,8 +100,7 @@ const ReportTemplateMainSettings = ({
   };
 
   const onLogoChange = (logo) => {
-    setIsUploadingImage(true);
-    updateReportTemplate(sessionId, singleReportTemplate, logo.image, 'logo');
+    uploadReportTemplateLogo(sessionId, singleReportTemplate.id, logo.image);
   };
 
   const onLogoDelete = () => {
@@ -144,13 +142,7 @@ const ReportTemplateMainSettings = ({
   };
 
   const onCoverLetterCustomLogoChange = (logo) => {
-    setIsUploadingImage(true);
-    updateReportTemplate(
-      sessionId,
-      singleReportTemplate,
-      logo.image,
-      'cover_letter_custom_logo',
-    );
+    uploadCoverLetterCustomLogo(sessionId, singleReportTemplate.id, logo.image);
   };
 
   const onCoverLetterCustomLogoDelete = () => {
@@ -250,7 +242,6 @@ const ReportTemplateMainSettings = ({
     );
   };
 
-  const imageUploading = updateReportTemplateLoading && isUploadingImage;
   const isReportForHenryFord =
     singleReportTemplate.reportFor === ReportFor.henryFordHealth;
 
@@ -436,7 +427,8 @@ const ReportTemplateMainSettings = ({
                   <Col>
                     <ImageUpload
                       loading={
-                        deleteReportTemplateLogoLoading || imageUploading
+                        uploadReportTemplateLogoLoading ||
+                        deleteReportTemplateLogoLoading
                       }
                       disabled={!canEdit}
                       image={singleReportTemplate.logoUrl}
@@ -511,8 +503,8 @@ const ReportTemplateMainSettings = ({
                         <Col>
                           <ImageUpload
                             loading={
-                              deleteCoverLetterCustomLogoLoading ||
-                              imageUploading
+                              uploadCoverLetterCustomLogoLoading ||
+                              deleteCoverLetterCustomLogoLoading
                             }
                             disabled={!canEdit}
                             image={
@@ -636,7 +628,9 @@ const mapDispatchToProps = {
   duplicateReportTemplate: duplicateReportTemplateRequest,
   updateReportTemplate: updateReportTemplateRequest,
   deleteReportTemplate: deleteReportTemplateRequest,
+  uploadReportTemplateLogo: uploadReportTemplateLogoRequest,
   deleteReportTemplateLogo: deleteReportTemplateLogoRequest,
+  uploadCoverLetterCustomLogo: uploadCoverLetterCustomLogoRequest,
   deleteCoverLetterCustomLogo: deleteCoverLetterCustomLogoRequest,
   selectTemplate: selectReportTemplate,
   generateTestReport: generateTestReportRequest,
@@ -649,8 +643,10 @@ ReportTemplateMainSettings.propTypes = {
   duplicateReportTemplate: PropTypes.func,
   updateReportTemplate: PropTypes.func,
   deleteReportTemplate: PropTypes.func,
+  uploadReportTemplateLogo: PropTypes.func,
   deleteReportTemplateLogo: PropTypes.func,
   deleteCoverLetterCustomLogo: PropTypes.func,
+  uploadCoverLetterCustomLogo: PropTypes.func,
   generateTestReport: PropTypes.func,
   selectTemplate: PropTypes.func,
   selectedReport: PropTypes.object,

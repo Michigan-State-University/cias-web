@@ -82,7 +82,9 @@ const InterventionNavbar = ({
   },
   reportsLoaders: {
     updateReportTemplateLoading,
+    uploadReportTemplateLogoLoading,
     deleteReportTemplateLogoLoading,
+    uploadCoverLetterCustomLogoLoading,
     deleteCoverLetterCustomLogoLoading,
   },
   textLoaders,
@@ -138,7 +140,9 @@ const InterventionNavbar = ({
     questionGroupsEditing ||
     interventionEditing ||
     updateReportTemplateLoading ||
+    uploadReportTemplateLogoLoading ||
     deleteReportTemplateLogoLoading ||
+    uploadCoverLetterCustomLogoLoading ||
     deleteCoverLetterCustomLogoLoading ||
     textLoaders;
 
