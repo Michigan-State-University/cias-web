@@ -141,7 +141,12 @@ const ReportTemplateMainSettings = ({
                   {...REPORT_TEMPLATE_ACTION_BUTTONS_COMMON_PROPS}
                   onClick={onDuplicate}
                 >
-                  <Img src={copy} />
+                  <Img
+                    src={copy}
+                    title={formatMessage(
+                      messages.settingsDuplicateReportButtonTitle,
+                    )}
+                  />
                   <FormattedMessage
                     {...messages.settingsDuplicateReportButton}
                   />
@@ -151,7 +156,12 @@ const ReportTemplateMainSettings = ({
                   onClick={onTestDownload}
                   loading={generateTestReportLoading}
                 >
-                  <Img src={download} />
+                  <Img
+                    src={download}
+                    title={formatMessage(
+                      messages.settingsDownloadReportButtonTitle,
+                    )}
+                  />
                   <FormattedMessage
                     {...messages.settingsDownloadReportButton}
                   />

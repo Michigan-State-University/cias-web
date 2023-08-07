@@ -40,6 +40,14 @@ export default defineMessages({
     id: `${scope}.settingsDuplicateReportButton`,
     defaultMessage: 'Duplicate',
   },
+  settingsDuplicateReportButtonTitle: {
+    id: `${scope}.settingsDuplicateReportButton`,
+    defaultMessage: 'Duplicate report template',
+  },
+  settingsDownloadReportButtonTitle: {
+    id: `${scope}.settingsDownloadReportButtonTitle`,
+    defaultMessage: 'Download test report',
+  },
   settingsDownloadReportButton: {
     id: `${scope}.settingsDownloadReportButton`,
     defaultMessage: 'Download',
