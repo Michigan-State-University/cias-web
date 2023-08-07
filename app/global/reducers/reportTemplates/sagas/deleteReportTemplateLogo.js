@@ -11,8 +11,10 @@ import { DELETE_REPORT_TEMPLATE_LOGO_REQUEST } from '../constants';
 import messages from './messages';
 
 // Added delay to avoid request spamming
-function* deleteReportLogoTemplate({ payload: { sessionId, id } }) {
-  const requestUrl = `/v1/sessions/${sessionId}/report_templates/${id}/remove_logo`;
+function* deleteReportLogoTemplate({
+  payload: { sessionId, reportTemplateId },
+}) {
+  const requestUrl = `/v1/sessions/${sessionId}/report_templates/${reportTemplateId}/remove_logo`;
   try {
     yield axios.delete(requestUrl);
 

@@ -1,4 +1,4 @@
-import { takeLatest, put, call } from 'redux-saga/effects';
+import { takeEvery, put, call } from 'redux-saga/effects';
 import axios from 'axios';
 import { toast } from 'react-toastify';
 
@@ -14,12 +14,12 @@ import {
 import messages from './messages';
 
 function* updateReportTemplate({
-  payload: { sessionId, reportTemplate, imageData },
+  payload: { sessionId, reportTemplate, imageData, imagePropName },
 }) {
   const requestUrl = `/v1/sessions/${sessionId}/report_templates/${reportTemplate.id}`;
 
   try {
-    if (!imageData) {
+    if (!imageData || !imagePropName) {
       const { data } = yield axios.put(
         requestUrl,
         objectToSnakeCase({
@@ -31,7 +31,7 @@ function* updateReportTemplate({
       yield put(updateReportTemplateSuccess(mappedData));
     } else {
       const formData = new FormData();
-      formData.append('report_template[logo]', imageData);
+      formData.append(`report_template[${imagePropName}]`, imageData);
 
       const { data } = yield axios.put(requestUrl, formData, {
         headers: {
@@ -52,5 +52,5 @@ function* updateReportTemplate({
 }
 
 export default function* updateReportTemplateSaga() {
-  yield takeLatest(UPDATE_REPORT_TEMPLATE_REQUEST, updateReportTemplate);
+  yield takeEvery(UPDATE_REPORT_TEMPLATE_REQUEST, updateReportTemplate);
 }

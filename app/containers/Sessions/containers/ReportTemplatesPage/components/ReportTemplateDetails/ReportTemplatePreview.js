@@ -27,8 +27,8 @@ const ReportTemplatePreview = () => {
 
   const addSection = (section, reportId) =>
     dispatch(addTemplateSectionRequest(section, reportId));
-  const updateReportTemplate = (sessionId, reportTemplate, imageData) =>
-    dispatch(updateReportTemplateRequest(sessionId, reportTemplate, imageData));
+  const updateReportTemplate = (sessionId, reportTemplate) =>
+    dispatch(updateReportTemplateRequest(sessionId, reportTemplate));
   const reorderSections = (reportId, reorderedSections) =>
     dispatch(reorderTemplateSectionRequest(reportId, reorderedSections));
 

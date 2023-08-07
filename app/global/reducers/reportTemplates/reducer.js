@@ -67,6 +67,9 @@ import {
   DUPLICATE_REPORT_TEMPLATE_REQUEST,
   DUPLICATE_REPORT_TEMPLATE_SUCCESS,
   DUPLICATE_REPORT_TEMPLATE_FAILURE,
+  DELETE_COVER_LETTER_CUSTOM_LOGO_REQUEST,
+  DELETE_COVER_LETTER_CUSTOM_LOGO_SUCCESS,
+  DELETE_COVER_LETTER_CUSTOM_LOGO_FAILURE,
 } from './constants';
 
 export const initialState = {
@@ -86,6 +89,7 @@ export const initialState = {
     updateReportTemplateLoading: false,
     deleteReportTemplateLoading: false,
     deleteReportTemplateLogoLoading: false,
+    deleteCoverLetterCustomLogoLoading: false,
     generateTestReportLoading: false,
     reorderSectionsLoading: false,
     reorderCasesLoading: false,
@@ -98,6 +102,7 @@ export const initialState = {
     updateReportTemplateError: null,
     deleteReportTemplateError: null,
     deleteReportTemplateLogoError: null,
+    deleteCoverLetterCustomLogoError: null,
     generateTestReportError: null,
     reorderSectionsError: null,
   },
@@ -295,6 +300,35 @@ const reportTemplatesReducer = (state = initialState, { type, payload }) =>
       case DELETE_REPORT_TEMPLATE_LOGO_FAILURE: {
         draft.loaders.deleteReportTemplateLogoLoading = false;
         draft.errors.deleteReportTemplateLogoError = payload;
+
+        draft.singleReportTemplate = cloneDeep(
+          state.cache.singleReportTemplate,
+        );
+        break;
+      }
+
+      case DELETE_COVER_LETTER_CUSTOM_LOGO_REQUEST: {
+        draft.loaders.deleteCoverLetterCustomLogoLoading = true;
+        draft.errors.deleteCoverLetterCustomLogoError = null;
+
+        draft.singleReportTemplate.coverLetterCustomLogoUrl = null;
+        break;
+      }
+
+      case DELETE_COVER_LETTER_CUSTOM_LOGO_SUCCESS: {
+        draft.loaders.deleteCoverLetterCustomLogoLoading = false;
+        draft.errors.deleteCoverLetterCustomLogoError = null;
+
+        draft.cache.singleReportTemplate = cloneDeep(
+          state.singleReportTemplate,
+        );
+
+        break;
+      }
+
+      case DELETE_COVER_LETTER_CUSTOM_LOGO_FAILURE: {
+        draft.loaders.deleteCoverLetterCustomLogoLoading = false;
+        draft.errors.deleteCoverLetterCustomLogoError = payload;
 
         draft.singleReportTemplate = cloneDeep(
           state.cache.singleReportTemplate,

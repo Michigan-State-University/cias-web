@@ -19,6 +19,7 @@ import {
   updateReportTemplateRequest,
   generateTestReportRequest,
   ReportFor,
+  deleteCoverLetterCustomLogoRequest,
 } from 'global/reducers/reportTemplates';
 import { makeSelectInterventionHfHsAccess } from 'global/reducers/intervention';
 
@@ -61,6 +62,7 @@ const ReportTemplateMainSettings = ({
   updateReportTemplate,
   deleteReportTemplate,
   deleteReportTemplateLogo,
+  deleteCoverLetterCustomLogo,
   generateTestReport,
 }) => {
   const {
@@ -72,6 +74,7 @@ const ReportTemplateMainSettings = ({
       duplicateReportTemplateLoading,
       updateReportTemplateLoading,
       generateTestReportLoading,
+      deleteCoverLetterCustomLogoLoading,
     },
     canEdit,
   } = useContext(ReportTemplatesContext);
@@ -99,7 +102,7 @@ const ReportTemplateMainSettings = ({
 
   const onLogoChange = (logo) => {
     setIsUploadingImage(true);
-    updateReportTemplate(sessionId, singleReportTemplate, logo.image);
+    updateReportTemplate(sessionId, singleReportTemplate, logo.image, 'logo');
   };
 
   const onLogoDelete = () => {
@@ -138,6 +141,20 @@ const ReportTemplateMainSettings = ({
         ...singleReportTemplate,
         coverLetterSender,
       });
+  };
+
+  const onCoverLetterCustomLogoChange = (logo) => {
+    setIsUploadingImage(true);
+    updateReportTemplate(
+      sessionId,
+      singleReportTemplate,
+      logo.image,
+      'cover_letter_custom_logo',
+    );
+  };
+
+  const onCoverLetterCustomLogoDelete = () => {
+    deleteCoverLetterCustomLogo(sessionId, singleReportTemplate.id);
   };
 
   const onDelete = () => {
@@ -239,6 +256,9 @@ const ReportTemplateMainSettings = ({
 
   const hfhRadioButtonDisabled =
     !canEdit || (!hfhsAccess && isReportForHenryFord);
+
+  const showCoverLetterCustomLogoInput =
+    singleReportTemplate.coverLetterLogoType === CoverLetterLogoType.CUSTOM;
 
   return (
     <Container style={{ maxWidth: 600 }}>
@@ -454,7 +474,11 @@ const ReportTemplateMainSettings = ({
                     <Row style={{ marginBottom: 10 }}>
                       <Col>{formatMessage(messages.coverLetterLogoType)}</Col>
                     </Row>
-                    <Row style={{ marginBottom: 20 }}>
+                    <Row
+                      style={{
+                        marginBottom: showCoverLetterCustomLogoInput ? 10 : 20,
+                      }}
+                    >
                       {Object.values(CoverLetterLogoType).map((option) => (
                         <Col key={option}>
                           <Row
@@ -481,6 +505,26 @@ const ReportTemplateMainSettings = ({
                         </Col>
                       ))}
                     </Row>
+
+                    {showCoverLetterCustomLogoInput && (
+                      <Row style={{ marginBottom: 20 }}>
+                        <Col>
+                          <ImageUpload
+                            loading={
+                              deleteCoverLetterCustomLogoLoading ||
+                              imageUploading
+                            }
+                            disabled={!canEdit}
+                            image={
+                              singleReportTemplate.coverLetterCustomLogoUrl
+                            }
+                            onAddImage={onCoverLetterCustomLogoChange}
+                            onDeleteImage={onCoverLetterCustomLogoDelete}
+                            acceptedFormats={['JPG', 'PNG']}
+                          />
+                        </Col>
+                      </Row>
+                    )}
 
                     <Row style={{ marginBottom: 10 }}>
                       <Col>
@@ -593,6 +637,7 @@ const mapDispatchToProps = {
   updateReportTemplate: updateReportTemplateRequest,
   deleteReportTemplate: deleteReportTemplateRequest,
   deleteReportTemplateLogo: deleteReportTemplateLogoRequest,
+  deleteCoverLetterCustomLogo: deleteCoverLetterCustomLogoRequest,
   selectTemplate: selectReportTemplate,
   generateTestReport: generateTestReportRequest,
 };
@@ -605,6 +650,7 @@ ReportTemplateMainSettings.propTypes = {
   updateReportTemplate: PropTypes.func,
   deleteReportTemplate: PropTypes.func,
   deleteReportTemplateLogo: PropTypes.func,
+  deleteCoverLetterCustomLogo: PropTypes.func,
   generateTestReport: PropTypes.func,
   selectTemplate: PropTypes.func,
   selectedReport: PropTypes.object,
