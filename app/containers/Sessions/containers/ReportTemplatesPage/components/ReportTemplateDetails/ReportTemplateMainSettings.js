@@ -18,6 +18,7 @@ import {
 import arrowDown from 'assets/svg/arrow-down-black.svg';
 import arrowUp from 'assets/svg/arrow-up-black.svg';
 import download from 'assets/svg/download-2.svg';
+import copy from 'assets/svg/copy3.svg';
 
 import { Col } from 'components/ReactGridSystem';
 import TextButton from 'components/Button/TextButton';
@@ -29,12 +30,14 @@ import ImageUpload from 'components/ImageUpload';
 import ApprovableInput from 'components/Input/ApprovableInput';
 import Box from 'components/Box';
 import Img from 'components/Img';
+import FlexRow from 'components/Row';
 import { ModalType, useModal } from 'components/Modal';
 import { HelpIconTooltip } from 'components/HelpIconTooltip';
 
 import { CardBox, Spacer } from '../../styled';
 import { ReportTemplatesContext } from '../../utils';
 import messages from '../../messages';
+import { REPORT_TEMPLATE_ACTION_BUTTONS_COMMON_PROPS } from './constants';
 
 const ReportTemplateMainSettings = ({
   intl: { formatMessage },
@@ -94,6 +97,8 @@ const ReportTemplateMainSettings = ({
     generateTestReport(sessionId, singleReportTemplate.id);
   };
 
+  const onDuplicate = () => {};
+
   const { openModal: openDeleteModal, Modal: DeleteModal } = useModal({
     type: ModalType.ConfirmationModal,
     props: {
@@ -131,22 +136,27 @@ const ReportTemplateMainSettings = ({
               </HelpIconTooltip>
             }
             extraIcons={
-              <TextButton
-                onClick={onTestDownload}
-                whiteSpace="nowrap"
-                fontWeight="bold"
-                fontSize={14}
-                loading={generateTestReportLoading}
-                buttonProps={{
-                  color: themeColors.secondary,
-                  fontWeight: 'bold',
-                  mr: 10,
-                }}
-                spinnerProps={{ size: 30, width: 2 }}
-              >
-                <Img src={download} mr={5} />
-                <FormattedMessage {...messages.settingsDownloadReportButton} />
-              </TextButton>
+              <FlexRow gap={24}>
+                <TextButton
+                  {...REPORT_TEMPLATE_ACTION_BUTTONS_COMMON_PROPS}
+                  onClick={onDuplicate}
+                >
+                  <Img src={copy} />
+                  <FormattedMessage
+                    {...messages.settingsDuplicateReportButton}
+                  />
+                </TextButton>
+                <TextButton
+                  {...REPORT_TEMPLATE_ACTION_BUTTONS_COMMON_PROPS}
+                  onClick={onTestDownload}
+                  loading={generateTestReportLoading}
+                >
+                  <Img src={download} />
+                  <FormattedMessage
+                    {...messages.settingsDownloadReportButton}
+                  />
+                </TextButton>
+              </FlexRow>
             }
           >
             <CardBox>

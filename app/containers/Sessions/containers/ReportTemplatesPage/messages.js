@@ -36,6 +36,10 @@ export default defineMessages({
     id: `${scope}.sectionSettingsHeader`,
     defaultMessage: 'Section Settings',
   },
+  settingsDuplicateReportButton: {
+    id: `${scope}.settingsDuplicateReportButton`,
+    defaultMessage: 'Duplicate',
+  },
   settingsDownloadReportButton: {
     id: `${scope}.settingsDownloadReportButton`,
     defaultMessage: 'Download',
