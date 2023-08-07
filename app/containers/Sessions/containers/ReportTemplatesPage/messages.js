@@ -74,7 +74,7 @@ export default defineMessages({
   },
   settingsName: {
     id: `${scope}.settingsName`,
-    defaultMessage: 'Use Different Name in the Panel',
+    defaultMessage: 'Report display name',
   },
   settingsNamePlaceholder: {
     id: `${scope}.settingsNamePlaceholder`,
