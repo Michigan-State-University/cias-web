@@ -1,4 +1,4 @@
-import React, { useContext, useEffect, useState } from 'react';
+import React, { useContext, useEffect, useMemo, useState } from 'react';
 import PropTypes from 'prop-types';
 import { compose } from 'redux';
 import { connect } from 'react-redux';
@@ -97,8 +97,6 @@ const ReportTemplateMainSettings = ({
     generateTestReport(sessionId, singleReportTemplate.id);
   };
 
-  const onDuplicate = () => {};
-
   const { openModal: openDeleteModal, Modal: DeleteModal } = useModal({
     type: ModalType.ConfirmationModal,
     props: {
@@ -108,11 +106,32 @@ const ReportTemplateMainSettings = ({
     },
   });
 
+  const duplicateModalProps = useMemo(
+    () => ({
+      title: formatMessage(messages.duplicateModalTitle),
+    }),
+    [],
+  );
+
+  const { openModal: openDuplicateModal, Modal: DuplicateModal } = useModal({
+    type: ModalType.Modal,
+    props: duplicateModalProps,
+    modalContentRenderer: () => {},
+  });
+
+  const onDuplicate = (event) => {
+    event.preventDefault();
+    event.stopPropagation();
+
+    openDuplicateModal();
+  };
+
   const imageUploading = updateReportTemplateLoading && isUploadingImage;
 
   return (
     <Container style={{ maxWidth: 600 }}>
       <DeleteModal />
+      <DuplicateModal />
 
       <Row justify="between" align="center">
         <Col>

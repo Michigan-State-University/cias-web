@@ -184,4 +184,8 @@ export default defineMessages({
     defaultMessage:
       'Are you sure you want to delete this Case? It will not be possible to recover it later.',
   },
+  duplicateModalTitle: {
+    id: `${scope}.duplicateModalTitle`,
+    defaultMessage: 'Duplicate report template',
+  },
 });
