@@ -26,6 +26,7 @@ export interface ReportTemplateVariant {
   reportTemplateSectionId?: string;
   originalText?: ReportTemplateVariantOriginalText;
   imageUrl?: string;
+  position: number;
 }
 
 export interface ReportTemplateOriginalText {

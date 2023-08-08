@@ -9,6 +9,7 @@ import { FormattedMessage, injectIntl, IntlShape } from 'react-intl';
 import {
   addSectionCaseRequest,
   deleteTemplateSectionRequest,
+  reorderSectionCasesRequest,
 } from 'global/reducers/reportTemplates';
 import { SectionCaseBuilder } from 'models/ReportTemplate';
 
@@ -31,6 +32,7 @@ const TemplateSectionSettings = ({
   intl: { formatMessage },
   addCase,
   deleteSection,
+  reorderSectionCases,
 }) => {
   const {
     selectedReportId,
@@ -92,7 +94,7 @@ const TemplateSectionSettings = ({
       position: index,
     }));
 
-    console.log(reorderedVariants);
+    reorderSectionCases(selectedTemplateSectionId, reorderedVariants);
   };
 
   if (!selectedTemplateSection) return <></>;
@@ -169,6 +171,7 @@ const TemplateSectionSettings = ({
 const mapDispatchToProps = {
   addCase: addSectionCaseRequest,
   deleteSection: deleteTemplateSectionRequest,
+  reorderSectionCases: reorderSectionCasesRequest,
 };
 
 const withConnect = connect(null, mapDispatchToProps);
@@ -176,6 +179,7 @@ const withConnect = connect(null, mapDispatchToProps);
 TemplateSectionSettings.propTypes = {
   addCase: PropTypes.func,
   deleteSection: PropTypes.func,
+  reorderSectionCases: PropTypes.func,
   intl: PropTypes.shape(IntlShape),
 };
 

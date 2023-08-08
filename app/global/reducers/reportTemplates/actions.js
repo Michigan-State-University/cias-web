@@ -53,6 +53,9 @@ import {
   REORDER_TEMPLATE_SECTIONS_REQUEST,
   REORDER_TEMPLATE_SECTIONS_SUCCESS,
   REORDER_TEMPLATE_SECTIONS_ERROR,
+  REORDER_SECTION_CASES_REQUEST,
+  REORDER_SECTION_CASES_SUCCESS,
+  REORDER_SECTION_CASES_FAILURE,
 } from './constants';
 
 export const fetchReportTemplatesRequest = (
@@ -211,3 +214,13 @@ export const reorderTemplateSectionSuccess = () =>
   actionBuilder(REORDER_TEMPLATE_SECTIONS_SUCCESS, {});
 export const reorderTemplateSectionFailure = (error) =>
   actionBuilder(REORDER_TEMPLATE_SECTIONS_ERROR, error);
+
+export const reorderSectionCasesRequest = (sectionId, reorderedCases) =>
+  actionBuilder(REORDER_SECTION_CASES_REQUEST, {
+    sectionId,
+    reorderedCases,
+  });
+export const reorderSectionCasesSuccess = (sectionId) =>
+  actionBuilder(REORDER_SECTION_CASES_SUCCESS, { sectionId });
+export const reorderSectionCasesFailure = (sectionId) =>
+  actionBuilder(REORDER_SECTION_CASES_FAILURE, { sectionId });
