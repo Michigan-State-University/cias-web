@@ -66,6 +66,7 @@ const SectionCaseItem = ({
   deleteCase,
   openCollapsable,
   isOpened,
+  dragHandleProps,
 }) => {
   const { formatMessage } = useIntl();
 
@@ -205,7 +206,11 @@ const SectionCaseItem = ({
             </FlexRow>
           </FlexRow>
         }
-        extraIcons={canEdit && <Img mr={10} src={ReorderIcon} cursor="grab" />}
+        extraIcons={
+          canEdit && (
+            <Img mr={10} src={ReorderIcon} cursor="grab" {...dragHandleProps} />
+          )
+        }
       >
         <Container style={{ width: '100%' }} role="group" aria-label={title}>
           <Row justify="between" align="center" style={{ marginBottom: 20 }}>
@@ -376,6 +381,7 @@ SectionCaseItem.propTypes = {
   sectionCase: PropTypes.shape(SectionCase),
   openCollapsable: PropTypes.func,
   isOpened: PropTypes.bool,
+  dragHandleProps: PropTypes.object,
 };
 
 export default compose(withConnect, memo)(SectionCaseItem);
