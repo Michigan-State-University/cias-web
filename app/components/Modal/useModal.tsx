@@ -1,4 +1,4 @@
-import React, { useState, useCallback, ReactNode, useMemo } from 'react';
+import React, { FC, useCallback, useMemo, useState } from 'react';
 
 import isNullOrUndefined from 'utils/isNullOrUndefined';
 
@@ -8,27 +8,35 @@ import ConfirmationModal, {
   Props as ConfirmationModalComponentProps,
 } from './ConfirmationModal';
 
-type HookProps<T> = SpecificModalProps<T>;
-
-type SpecificModalProps<T> = ModalProps<T> | ConfirmationModalProps;
+export type ModalContentRenderer<T> = FC<{
+  closeModal: (state?: T) => void;
+  modalState: Nullable<T>;
+}>;
 
 export type ModalProps<T = boolean> = {
   type: ModalType.Modal;
-  props: Omit<ModalComponentProps, 'children'>;
-  modalContentRenderer: (props: {
-    closeModal: () => void;
-    modalState: Nullable<T | boolean>;
-  }) => ReactNode;
+  props: Omit<ModalComponentProps, 'children' | 'onClose'> & {
+    onClose?: (state?: T) => void;
+  };
+  modalContentRenderer: ModalContentRenderer<T>;
 };
 
 export type ConfirmationModalProps = {
   type: ModalType.ConfirmationModal;
-  props: Omit<ConfirmationModalComponentProps, 'children'>;
+  props: Omit<ConfirmationModalComponentProps, 'children' | 'onClose'>;
 };
 
+export type HookProps<T> = ModalProps<T> | ConfirmationModalProps;
+
 // MEMOIZE THE props OBJECT (HookProps['props']) BECAUSE OTHERWISE THERE WILL BE UNEXPECTED RERENDERS!
-export const useModal = <T,>({ type, props, ...restProps }: HookProps<T>) => {
-  const [modalState, setModalState] = useState<T | boolean>();
+export const useModal = <
+  T extends object | string | number | boolean = boolean,
+>({
+  type,
+  props,
+  ...restProps
+}: HookProps<T>) => {
+  const [modalState, setModalState] = useState<T>();
 
   const isModalVisible = useMemo(
     () => !isNullOrUndefined(modalState),
@@ -42,7 +50,10 @@ export const useModal = <T,>({ type, props, ...restProps }: HookProps<T>) => {
     [setModalState],
   );
 
-  const closeModal = useCallback(() => {
+  const closeModal = useCallback((state?: T) => {
+    if (type === ModalType.Modal && props.onClose) {
+      props.onClose(state);
+    }
     setModalState(undefined);
   }, []);
 
