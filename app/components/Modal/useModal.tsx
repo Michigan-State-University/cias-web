@@ -8,17 +8,17 @@ import ConfirmationModal, {
   Props as ConfirmationModalComponentProps,
 } from './ConfirmationModal';
 
-export type ModalContentRenderer<T> = FC<{
-  closeModal: (state?: T) => void;
-  modalState: Nullable<T>;
+export type ModalContentRenderer<ModalState, CloseData> = FC<{
+  closeModal: (data?: CloseData) => void;
+  modalState: Nullable<ModalState>;
 }>;
 
-export type ModalProps<T = boolean> = {
+export type ModalProps<ModalState = boolean, CloseData = null> = {
   type: ModalType.Modal;
   props: Omit<ModalComponentProps, 'children' | 'onClose'> & {
-    onClose?: (state?: T) => void;
+    onClose?: (data?: CloseData) => void;
   };
-  modalContentRenderer: ModalContentRenderer<T>;
+  modalContentRenderer: ModalContentRenderer<ModalState, CloseData>;
 };
 
 export type ConfirmationModalProps = {
@@ -26,17 +26,20 @@ export type ConfirmationModalProps = {
   props: Omit<ConfirmationModalComponentProps, 'children' | 'onClose'>;
 };
 
-export type HookProps<T> = ModalProps<T> | ConfirmationModalProps;
+export type HookProps<ModalState, CloseData> =
+  | ModalProps<ModalState, CloseData>
+  | ConfirmationModalProps;
 
 // MEMOIZE THE props OBJECT (HookProps['props']) BECAUSE OTHERWISE THERE WILL BE UNEXPECTED RERENDERS!
 export const useModal = <
-  T extends object | string | number | boolean = boolean,
+  ModalState extends object | string | number | boolean = boolean,
+  CloseData = null,
 >({
   type,
   props,
   ...restProps
-}: HookProps<T>) => {
-  const [modalState, setModalState] = useState<T>();
+}: HookProps<ModalState, CloseData>) => {
+  const [modalState, setModalState] = useState<ModalState>();
 
   const isModalVisible = useMemo(
     () => !isNullOrUndefined(modalState),
@@ -44,15 +47,15 @@ export const useModal = <
   );
 
   const openModal = useCallback(
-    (state: T) => {
+    (state: ModalState) => {
       setModalState(state ?? true);
     },
     [setModalState],
   );
 
-  const closeModal = useCallback((state?: T) => {
+  const closeModal = useCallback((data?: CloseData) => {
     if (type === ModalType.Modal && props.onClose) {
-      props.onClose(state);
+      props.onClose(data);
     }
     setModalState(undefined);
   }, []);
@@ -77,7 +80,10 @@ export const useModal = <
           />
         );
       case ModalType.Modal:
-        const { modalContentRenderer } = restProps as ModalProps<T>;
+        const { modalContentRenderer } = restProps as ModalProps<
+          ModalState,
+          CloseData
+        >;
         return (
           <Modal {...(props as ModalComponentProps)} {...sharedProps}>
             {modalContentRenderer({ closeModal, modalState })}
