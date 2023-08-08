@@ -13,7 +13,7 @@ export type ModalContentRenderer<ModalState, CloseData> = FC<{
   modalState: Nullable<ModalState>;
 }>;
 
-export type ModalProps<ModalState = boolean, CloseData = null> = {
+export type ModalProps<ModalState = boolean, CloseData = ModalState> = {
   type: ModalType.Modal;
   props: Omit<ModalComponentProps, 'children' | 'onClose'> & {
     onClose?: (data?: CloseData) => void;
@@ -33,7 +33,7 @@ export type HookProps<ModalState, CloseData> =
 // MEMOIZE THE props OBJECT (HookProps['props']) BECAUSE OTHERWISE THERE WILL BE UNEXPECTED RERENDERS!
 export const useModal = <
   ModalState extends object | string | number | boolean = boolean,
-  CloseData = null,
+  CloseData = ModalState,
 >({
   type,
   props,
