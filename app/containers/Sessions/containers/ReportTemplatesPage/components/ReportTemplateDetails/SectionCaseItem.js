@@ -6,6 +6,7 @@ import { Row, Container } from 'react-grid-system';
 import { useIntl } from 'react-intl';
 
 import binNoBg from 'assets/svg/bin-no-bg.svg';
+import ReorderIcon from 'assets/svg/reorder-hand.svg';
 
 import {
   deleteSectionCaseImageRequest,
@@ -33,6 +34,8 @@ import VariableChooser from 'containers/VariableChooser';
 
 import { Col } from 'components/ReactGridSystem';
 import Box from 'components/Box';
+import FlexRow from 'components/Row';
+import FlexColumn from 'components/Column';
 import { StyledInput } from 'components/Input/StyledInput';
 import Text from 'components/Text';
 import Img from 'components/Img';
@@ -168,12 +171,12 @@ const SectionCaseItem = ({
         onShowImg={arrowUp}
         imgWithBackground
         label={
-          <Row
+          <FlexRow
             align="center"
             justify="between"
             style={{ width: '100%', paddingRight: 10 }}
           >
-            <Col xs={6}>
+            <FlexColumn>
               <H2>{title}</H2>
               {sectionCase.formulaMatch && (
                 <Text color={colors.grey}>
@@ -182,30 +185,27 @@ const SectionCaseItem = ({
                   })}
                 </Text>
               )}
-            </Col>
-            <Col align="end" xs={6}>
-              <Row align="center" justify="end" nogutter>
-                <Col>
-                  <Radio
-                    id={`case-preview-toggle-${sectionCase.id}`}
-                    mr={10}
-                    disabled={!canEdit}
-                    onChange={handlePreviewChange}
-                    checked={sectionCase.preview}
-                  >
-                    <Text
-                      width="max-content"
-                      whiteSpace="pre"
-                      fontWeight={sectionCase.preview ? 'bold' : 'normal'}
-                    >
-                      {formatMessage(messages.previewCaseRadio)}
-                    </Text>
-                  </Radio>
-                </Col>
-              </Row>
-            </Col>
-          </Row>
+            </FlexColumn>
+            <FlexRow align="end">
+              <Radio
+                id={`case-preview-toggle-${sectionCase.id}`}
+                mr={10}
+                disabled={!canEdit}
+                onChange={handlePreviewChange}
+                checked={sectionCase.preview}
+              >
+                <Text
+                  width="max-content"
+                  whiteSpace="pre"
+                  fontWeight={sectionCase.preview ? 'bold' : 'normal'}
+                >
+                  {formatMessage(messages.previewCaseRadio)}
+                </Text>
+              </Radio>
+            </FlexRow>
+          </FlexRow>
         }
+        extraIcons={canEdit && <Img mr={10} src={ReorderIcon} cursor="grab" />}
       >
         <Container style={{ width: '100%' }} role="group" aria-label={title}>
           <Row justify="between" align="center" style={{ marginBottom: 20 }}>
