@@ -144,7 +144,7 @@ const ReportTemplateMainSettings = ({
     );
 
   const duplicateModalOptions = useRef(
-    createDuplicateModalOptions(formatMessage),
+    createDuplicateModalOptions(formatMessage, canEdit),
   );
 
   const onDuplicate = (event) => {

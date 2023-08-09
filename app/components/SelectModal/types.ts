@@ -3,4 +3,5 @@ export type SelectModalOption<Id extends string | number> = {
   icon: SVGElement;
   title: string;
   description: string;
+  disabled?: boolean;
 };

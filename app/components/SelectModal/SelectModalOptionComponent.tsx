@@ -14,12 +14,13 @@ export const SelectModalOptionComponent = <Id extends string | number>({
   icon,
   title,
   description,
+  disabled,
   onClick,
 }: Props<Id>) => {
   const handleClick = () => onClick(id);
 
   return (
-    <SelectModalButton onClick={handleClick}>
+    <SelectModalButton onClick={handleClick} disabled={disabled}>
       <Icon src={icon} title={title} height={ICON_SIZE} width={ICON_SIZE} />
       <Text mt={12} fontSize={15} fontWeight="bold" lineHeight={1.5}>
         {title}

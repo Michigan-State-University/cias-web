@@ -23,12 +23,14 @@ export const REPORT_TEMPLATE_ACTION_BUTTONS_COMMON_PROPS = {
 
 export const createDuplicateModalOptions = (
   formatMessage: IntlShape['formatMessage'],
+  canEdit: boolean,
 ): SelectModalOption<DuplicateReportTemplateOption>[] => [
   {
     id: DuplicateReportTemplateOption.DUPLICATE_HERE,
     icon: DuplicateHereIcon,
     title: formatMessage(messages.duplicateHereTitle),
     description: formatMessage(messages.duplicateHereDescription),
+    disabled: !canEdit,
   },
   {
     id: DuplicateReportTemplateOption.DUPLICATE_INTERNALLY,
