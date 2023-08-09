@@ -9,5 +9,7 @@ export const DuplicatedReportTemplateWarning = () => (
     background={colors.chardonnay}
     py={12}
     px={16}
-  ></Row>
+  >
+    TODO add content
+  </Row>
 );
