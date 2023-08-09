@@ -10,6 +10,7 @@ import {
   deleteReportTemplateLogoRequest,
   deleteReportTemplateRequest,
   selectReportTemplate,
+  duplicateReportTemplateRequest,
   updateReportTemplateRequest,
   ReportFor,
   generateTestReportRequest,
@@ -46,6 +47,7 @@ import { DuplicateReportTemplateOption } from './types';
 
 const ReportTemplateMainSettings = ({
   intl: { formatMessage },
+  duplicateReportTemplate,
   updateReportTemplate,
   deleteReportTemplate,
   deleteReportTemplateLogo,
@@ -57,6 +59,7 @@ const ReportTemplateMainSettings = ({
     loaders: {
       deleteReportTemplateLoading,
       deleteReportTemplateLogoLoading,
+      duplicateReportTemplateLoading,
       updateReportTemplateLoading,
       generateTestReportLoading,
     },
@@ -116,9 +119,12 @@ const ReportTemplateMainSettings = ({
 
     switch (key) {
       case DuplicateReportTemplateOption.DUPLICATE_HERE: {
+        duplicateReportTemplate(sessionId, singleReportTemplate.id);
         break;
       }
       case DuplicateReportTemplateOption.DUPLICATE_INTERNALLY: {
+        // open copy modal
+        // duplicateReportTemplate(sessionId, singleReportTemplate.id);
         break;
       }
       default: {
@@ -177,6 +183,7 @@ const ReportTemplateMainSettings = ({
                 <TextButton
                   {...REPORT_TEMPLATE_ACTION_BUTTONS_COMMON_PROPS}
                   onClick={onDuplicate}
+                  loading={duplicateReportTemplateLoading}
                 >
                   <Img
                     src={copy}
@@ -347,6 +354,7 @@ const ReportTemplateMainSettings = ({
 };
 
 const mapDispatchToProps = {
+  duplicateReportTemplate: duplicateReportTemplateRequest,
   updateReportTemplate: updateReportTemplateRequest,
   deleteReportTemplate: deleteReportTemplateRequest,
   deleteReportTemplateLogo: deleteReportTemplateLogoRequest,
@@ -358,6 +366,7 @@ const withConnect = connect(null, mapDispatchToProps);
 
 ReportTemplateMainSettings.propTypes = {
   intl: PropTypes.shape(IntlShape),
+  duplicateReportTemplate: PropTypes.func,
   updateReportTemplate: PropTypes.func,
   deleteReportTemplate: PropTypes.func,
   deleteReportTemplateLogo: PropTypes.func,
