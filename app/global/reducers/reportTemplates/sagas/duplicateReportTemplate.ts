@@ -8,6 +8,7 @@ import { jsonApiToObject } from 'utils/jsonApiMapper';
 
 import messages from './messages';
 import {
+  duplicateReportTemplateFailure,
   duplicateReportTemplateRequest,
   duplicateReportTemplateSuccess,
   selectReportTemplate,
@@ -41,7 +42,7 @@ function* duplicateReportTemplate({
       yield put(selectReportTemplate(reportTemplate.id));
     }
   } catch {
-    yield put(duplicateReportTemplateSuccess());
+    yield put(duplicateReportTemplateFailure());
     yield call(
       toast.error,
       formatMessage(messages.duplicateReportTemplateFailure),
