@@ -25,13 +25,13 @@ export const createDuplicateModalOptions = (
   formatMessage: IntlShape['formatMessage'],
 ): SelectModalOption<DuplicateReportTemplateOption>[] => [
   {
-    key: DuplicateReportTemplateOption.DUPLICATE_HERE,
+    id: DuplicateReportTemplateOption.DUPLICATE_HERE,
     icon: DuplicateHereIcon,
     title: formatMessage(messages.duplicateHereTitle),
     description: formatMessage(messages.duplicateHereDescription),
   },
   {
-    key: DuplicateReportTemplateOption.DUPLICATE_INTERNALLY,
+    id: DuplicateReportTemplateOption.DUPLICATE_INTERNALLY,
     icon: DuplicateInternallyIcon,
     title: formatMessage(messages.duplicateInternallyTitle),
     description: formatMessage(messages.duplicateInternallyDescription),

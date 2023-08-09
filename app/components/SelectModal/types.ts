@@ -1,5 +1,5 @@
-export type SelectModalOption<Key extends string | number> = {
-  key: Key;
+export type SelectModalOption<Id extends string | number> = {
+  id: Id;
   icon: SVGElement;
   title: string;
   description: string;

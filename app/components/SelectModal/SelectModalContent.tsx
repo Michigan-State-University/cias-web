@@ -4,16 +4,20 @@ import Column from 'components/Column';
 import { SelectModalOption } from './types';
 import { SelectModalOptionComponent } from './SelectModalOptionComponent';
 
-export const SelectModalContent = <Key extends string | number>({
+export const SelectModalContent = <Id extends string | number>({
   modalState,
   closeModal,
-}: ModalContentRendererProps<SelectModalOption<Key>[], Key>) => {
+}: ModalContentRendererProps<SelectModalOption<Id>[], Id>) => {
   if (!modalState) return null;
 
   return (
     <Column gap={16}>
       {modalState.map((option) => (
-        <SelectModalOptionComponent {...option} onClick={closeModal} />
+        <SelectModalOptionComponent
+          key={option.id}
+          {...option}
+          onClick={closeModal}
+        />
       ))}
     </Column>
   );

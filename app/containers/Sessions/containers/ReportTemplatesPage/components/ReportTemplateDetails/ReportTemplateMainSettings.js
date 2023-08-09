@@ -114,10 +114,10 @@ const ReportTemplateMainSettings = ({
     },
   });
 
-  const handleDuplicateModalClose = (key) => {
-    if (!key) return;
+  const handleDuplicateModalClose = (optionId) => {
+    if (!optionId) return;
 
-    switch (key) {
+    switch (optionId) {
       case DuplicateReportTemplateOption.DUPLICATE_HERE: {
         duplicateReportTemplate(sessionId, singleReportTemplate.id);
         break;
