@@ -41,7 +41,7 @@ const ChooserComponent = ({
 
   return (
     <Column data-testid={`${elementId}-select-target-session`} height="100%">
-      <Column mx={25} mb={15}>
+      <Column px={25} mb={15}>
         {backText && (
           <Row align="center" clickable onClick={() => backAction()}>
             <Icon src={arrowBack} />
@@ -54,14 +54,15 @@ const ChooserComponent = ({
           <Text fontWeight="bold" fontSize={15}>
             {currentPlaceTitle}
           </Text>
-          <Box ml={5} maxWidth={150}>
+          <Row ml={5} flex={1} align="center">
             <EllipsisText
               fontWeight="bold"
               color={themeColors.secondary}
               fontSize={15}
+              lineHeight={1.3}
               text={currentPlaceName}
             />
-          </Box>
+          </Row>
         </Row>
       </Column>
       <Box maxHeight={chooserPanelMaxHeight} overflow="scroll">
