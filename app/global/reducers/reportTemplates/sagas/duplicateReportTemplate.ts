@@ -1,10 +1,12 @@
-import { takeLatest, put, call } from 'redux-saga/effects';
+import { takeLatest, put, call, select } from 'redux-saga/effects';
 import axios from 'axios';
 import { toast } from 'react-toastify';
 
 import objectToSnakeCase from 'utils/objectToSnakeCase';
 import { formatMessage } from 'utils/intlOutsideReact';
 import { jsonApiToObject } from 'utils/jsonApiMapper';
+
+import { makeSelectCurrentSessionId } from 'global/reducers/session';
 
 import messages from './messages';
 import {
@@ -32,13 +34,20 @@ function* duplicateReportTemplate({
     const { data } = yield axios.post(requestUrl, requestData);
     const reportTemplate = jsonApiToObject(data, 'reportTemplate');
 
-    yield put(duplicateReportTemplateSuccess(reportTemplate));
+    const currentSessionId: Nullable<string> = yield select(
+      makeSelectCurrentSessionId(),
+    );
+    const isInCurrentSession = currentSessionId === reportTemplate.sessionId;
+
+    yield put(
+      duplicateReportTemplateSuccess(reportTemplate, isInCurrentSession),
+    );
     yield call(
       toast.success,
       formatMessage(messages.duplicateReportTemplateSuccess),
     );
 
-    if (!targetSessionId) {
+    if (isInCurrentSession) {
       yield put(selectReportTemplate(reportTemplate.id));
     }
   } catch {

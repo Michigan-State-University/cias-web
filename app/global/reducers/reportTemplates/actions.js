@@ -98,8 +98,14 @@ export const duplicateReportTemplateRequest = (
     reportTemplateId,
     targetSessionId,
   });
-export const duplicateReportTemplateSuccess = (reportTemplate) =>
-  actionBuilder(DUPLICATE_REPORT_TEMPLATE_SUCCESS, { reportTemplate });
+export const duplicateReportTemplateSuccess = (
+  reportTemplate,
+  addToReportTemplateList,
+) =>
+  actionBuilder(DUPLICATE_REPORT_TEMPLATE_SUCCESS, {
+    reportTemplate,
+    addToReportTemplateList,
+  });
 export const duplicateReportTemplateFailure = () =>
   actionBuilder(DUPLICATE_REPORT_TEMPLATE_FAILURE, {});
 

@@ -129,8 +129,11 @@ const reportTemplatesReducer = (state = initialState, { type, payload }) =>
 
       case DUPLICATE_REPORT_TEMPLATE_SUCCESS:
         draft.loaders.duplicateReportTemplateLoading = false;
-        const { reportTemplate } = payload;
-        draft.reportTemplates.push(reportTemplate);
+        const { reportTemplate, addToReportTemplateList } = payload;
+
+        if (addToReportTemplateList) {
+          draft.reportTemplates.push(reportTemplate);
+        }
         break;
 
       case DUPLICATE_REPORT_TEMPLATE_FAILURE:
