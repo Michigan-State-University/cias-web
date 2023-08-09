@@ -179,7 +179,7 @@ const ReportTemplateMainSettings = ({
               </HelpIconTooltip>
             }
             extraIcons={
-              <FlexRow gap={24}>
+              <FlexRow gap={24} align="center">
                 <TextButton
                   {...REPORT_TEMPLATE_ACTION_BUTTONS_COMMON_PROPS}
                   onClick={onDuplicate}
