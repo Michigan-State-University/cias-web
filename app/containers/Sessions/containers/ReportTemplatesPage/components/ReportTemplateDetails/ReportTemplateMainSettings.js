@@ -35,6 +35,8 @@ import FlexRow from 'components/Row';
 import { ModalType, useModal } from 'components/Modal';
 import { HelpIconTooltip } from 'components/HelpIconTooltip';
 import { useSelectModal } from 'components/SelectModal';
+import CopyModal from 'components/CopyModal';
+import { VIEWS } from 'components/CopyModal/Components';
 
 import { CardBox, Spacer } from '../../styled';
 import { ReportTemplatesContext } from '../../utils';
@@ -105,6 +107,9 @@ const ReportTemplateMainSettings = ({
     generateTestReport(sessionId, singleReportTemplate.id);
   };
 
+  const [duplicateInternallyModalVisible, setDuplicateInternallyModalVisible] =
+    useState(false);
+
   const { openModal: openDeleteModal, Modal: DeleteModal } = useModal({
     type: ModalType.ConfirmationModal,
     props: {
@@ -123,8 +128,7 @@ const ReportTemplateMainSettings = ({
         break;
       }
       case DuplicateReportTemplateOption.DUPLICATE_INTERNALLY: {
-        // open copy modal
-        // duplicateReportTemplate(sessionId, singleReportTemplate.id);
+        setDuplicateInternallyModalVisible(true);
         break;
       }
       default: {
@@ -150,12 +154,30 @@ const ReportTemplateMainSettings = ({
     openDuplicateModal(duplicateModalOptions.current);
   };
 
+  const handleDuplicateInternallySessionSelected = (targetSession) => {
+    duplicateReportTemplate(
+      sessionId,
+      singleReportTemplate.id,
+      targetSession.id,
+    );
+  };
+
   const imageUploading = updateReportTemplateLoading && isUploadingImage;
 
   return (
     <Container style={{ maxWidth: 600 }}>
       <DeleteModal />
       <DuplicateModal />
+      <CopyModal
+        visible={duplicateInternallyModalVisible}
+        onClose={() => setDuplicateInternallyModalVisible(false)}
+        copyAction={handleDuplicateInternallySessionSelected}
+        disableInterventionCopy
+        disableQuestionCopy
+        disableCurrentSessionCopy
+        pasteText={formatMessage(messages.duplicateToSelectedSession)}
+        defaultView={VIEWS.SESSION}
+      />
 
       <Row justify="between" align="center">
         <Col>

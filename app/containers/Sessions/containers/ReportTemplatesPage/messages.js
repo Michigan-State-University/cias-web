@@ -205,4 +205,8 @@ export default defineMessages({
     defaultMessage:
       'Choose a different session or intervention for report copy.',
   },
+  duplicateToSelectedSession: {
+    id: `${scope}.duplicateToSelectedSession`,
+    defaultMessage: 'Duplicate to selected session',
+  },
 });
