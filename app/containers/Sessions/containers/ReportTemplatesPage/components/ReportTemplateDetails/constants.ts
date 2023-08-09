@@ -7,6 +7,7 @@ import DuplicateInternallyIcon from 'assets/svg/duplicate-internally.svg';
 import { SelectModalOption } from 'components/SelectModal';
 
 import messages from '../../messages';
+import { DuplicateReportTemplateOption } from './types';
 
 export const REPORT_TEMPLATE_ACTION_BUTTONS_COMMON_PROPS = {
   fontWeight: 'bold',
@@ -22,15 +23,15 @@ export const REPORT_TEMPLATE_ACTION_BUTTONS_COMMON_PROPS = {
 
 export const createDuplicateModalOptions = (
   formatMessage: IntlShape['formatMessage'],
-): SelectModalOption[] => [
+): SelectModalOption<DuplicateReportTemplateOption>[] => [
   {
-    key: 'duplicateHere',
+    key: DuplicateReportTemplateOption.DUPLICATE_HERE,
     icon: DuplicateHereIcon,
     title: formatMessage(messages.duplicateHereTitle),
     description: formatMessage(messages.duplicateHereDescription),
   },
   {
-    key: 'duplicateInternally',
+    key: DuplicateReportTemplateOption.DUPLICATE_INTERNALLY,
     icon: DuplicateInternallyIcon,
     title: formatMessage(messages.duplicateInternallyTitle),
     description: formatMessage(messages.duplicateInternallyDescription),

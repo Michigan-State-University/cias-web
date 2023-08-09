@@ -6,17 +6,21 @@ import { SelectModalContent } from './SelectModalContent';
 import { SelectModalOption } from './types';
 import { SELECT_MODAL_WIDTH } from './constants';
 
-export const useSelectModal = (title: string) => {
-  const props: ModalProps<SelectModalOption[], string>['props'] = useMemo(
+export const useSelectModal = <Key extends string | number>(
+  title: string,
+  onClose: (key?: Key) => void,
+) => {
+  const props: ModalProps<SelectModalOption<Key>[], Key>['props'] = useMemo(
     () => ({
       title,
       width: SELECT_MODAL_WIDTH,
       maxWidth: SELECT_MODAL_WIDTH,
+      onClose,
     }),
-    [title],
+    [title, onClose],
   );
 
-  return useModal({
+  return useModal<SelectModalOption<Key>[], Key>({
     type: ModalType.Modal,
     props,
     modalContentRenderer: SelectModalContent,

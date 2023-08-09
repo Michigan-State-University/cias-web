@@ -42,6 +42,7 @@ import {
   createDuplicateModalOptions,
   REPORT_TEMPLATE_ACTION_BUTTONS_COMMON_PROPS,
 } from './constants';
+import { DuplicateReportTemplateOption } from './types';
 
 const ReportTemplateMainSettings = ({
   intl: { formatMessage },
@@ -110,8 +111,27 @@ const ReportTemplateMainSettings = ({
     },
   });
 
+  const handleDuplicateModalClose = (key) => {
+    if (!key) return;
+
+    switch (key) {
+      case DuplicateReportTemplateOption.DUPLICATE_HERE: {
+        break;
+      }
+      case DuplicateReportTemplateOption.DUPLICATE_INTERNALLY: {
+        break;
+      }
+      default: {
+        break;
+      }
+    }
+  };
+
   const { openModal: openDuplicateModal, Modal: DuplicateModal } =
-    useSelectModal(formatMessage(messages.duplicateModalTitle));
+    useSelectModal(
+      formatMessage(messages.duplicateModalTitle),
+      handleDuplicateModalClose,
+    );
 
   const duplicateModalOptions = useRef(
     createDuplicateModalOptions(formatMessage),

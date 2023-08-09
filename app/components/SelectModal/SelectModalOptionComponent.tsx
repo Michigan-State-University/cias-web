@@ -5,17 +5,17 @@ import { SelectModalOption } from './types';
 import { SelectModalButton } from './styled';
 import { ICON_SIZE } from './constants';
 
-export type Props = SelectModalOption & {
-  onClick: (key: string) => void;
+export type Props<Key extends string | number> = SelectModalOption<Key> & {
+  onClick: (key: Key) => void;
 };
 
-export const SelectModalOptionComponent = ({
+export const SelectModalOptionComponent = <Key extends string | number>({
   key,
   icon,
   title,
   description,
   onClick,
-}: Props) => {
+}: Props<Key>) => {
   const handleClick = () => onClick(key);
 
   return (

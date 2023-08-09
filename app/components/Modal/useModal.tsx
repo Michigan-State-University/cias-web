@@ -8,10 +8,14 @@ import ConfirmationModal, {
   Props as ConfirmationModalComponentProps,
 } from './ConfirmationModal';
 
-export type ModalContentRenderer<ModalState, CloseData> = FC<{
+export type ModalContentRendererProps<ModalState, CloseData> = {
   closeModal: (data?: CloseData) => void;
   modalState: Nullable<ModalState>;
-}>;
+};
+
+export type ModalContentRenderer<ModalState, CloseData> = FC<
+  ModalContentRendererProps<ModalState, CloseData>
+>;
 
 export type ModalProps<ModalState = boolean, CloseData = ModalState> = {
   type: ModalType.Modal;
