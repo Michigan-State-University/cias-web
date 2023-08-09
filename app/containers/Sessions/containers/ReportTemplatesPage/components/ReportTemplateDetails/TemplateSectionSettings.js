@@ -27,6 +27,7 @@ import SectionCaseItem from './SectionCaseItem';
 import { Spacer, CardBox } from '../../styled';
 import { ReportTemplatesContext } from '../../utils';
 import messages from '../../messages';
+import { DuplicatedReportTemplateWarning } from './DuplicatedReportTemplateWarning';
 
 const TemplateSectionSettings = ({
   intl: { formatMessage },
@@ -40,6 +41,7 @@ const TemplateSectionSettings = ({
     selectedTemplateSection,
     loaders: { updateReportTemplateLoading },
     canEdit,
+    singleReportTemplate,
   } = useContext(ReportTemplatesContext);
 
   const [currentlyOpenedCollapsable, setCurrentlyOpenedCollapsable] =
@@ -126,6 +128,9 @@ const TemplateSectionSettings = ({
             </TextButton>
           </Col>
         </Row>
+        {singleReportTemplate.isDuplicatedFromOtherSession && (
+          <DuplicatedReportTemplateWarning />
+        )}
         <Row>
           <Col>
             <SectionFormula formula={selectedTemplateSection.formula} />

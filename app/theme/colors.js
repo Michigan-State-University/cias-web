@@ -95,6 +95,7 @@ const colors = {
   azureishWhite: '#D4DFF7',
   stormGrey: '#707688',
   logan: '#9BA1B4',
+  chardonnay: '#FFC179',
 };
 
 const themeColors = {
