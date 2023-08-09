@@ -10,6 +10,7 @@ import messages from './messages';
 import {
   duplicateReportTemplateRequest,
   duplicateReportTemplateSuccess,
+  selectReportTemplate,
 } from '../actions';
 import { DUPLICATE_REPORT_TEMPLATE_REQUEST } from '../constants';
 
@@ -28,13 +29,17 @@ function* duplicateReportTemplate({
 
   try {
     const { data } = yield axios.post(requestUrl, requestData);
-    const mappedData = jsonApiToObject(data, 'reportTemplate');
+    const reportTemplate = jsonApiToObject(data, 'reportTemplate');
 
-    yield put(duplicateReportTemplateSuccess(mappedData));
+    yield put(duplicateReportTemplateSuccess(reportTemplate));
     yield call(
       toast.success,
       formatMessage(messages.duplicateReportTemplateSuccess),
     );
+
+    if (!targetSessionId) {
+      yield put(selectReportTemplate(reportTemplate.id));
+    }
   } catch {
     yield put(duplicateReportTemplateSuccess());
     yield call(
