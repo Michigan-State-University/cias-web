@@ -1,4 +1,4 @@
-import React, { useContext, useEffect, useMemo, useState } from 'react';
+import React, { useContext, useEffect, useRef, useState } from 'react';
 import PropTypes from 'prop-types';
 import { compose } from 'redux';
 import { connect } from 'react-redux';
@@ -33,11 +33,15 @@ import Img from 'components/Img';
 import FlexRow from 'components/Row';
 import { ModalType, useModal } from 'components/Modal';
 import { HelpIconTooltip } from 'components/HelpIconTooltip';
+import { useSelectModal } from 'components/SelectModal';
 
 import { CardBox, Spacer } from '../../styled';
 import { ReportTemplatesContext } from '../../utils';
 import messages from '../../messages';
-import { REPORT_TEMPLATE_ACTION_BUTTONS_COMMON_PROPS } from './constants';
+import {
+  createDuplicateModalOptions,
+  REPORT_TEMPLATE_ACTION_BUTTONS_COMMON_PROPS,
+} from './constants';
 
 const ReportTemplateMainSettings = ({
   intl: { formatMessage },
@@ -106,24 +110,18 @@ const ReportTemplateMainSettings = ({
     },
   });
 
-  const duplicateModalProps = useMemo(
-    () => ({
-      title: formatMessage(messages.duplicateModalTitle),
-    }),
-    [],
-  );
+  const { openModal: openDuplicateModal, Modal: DuplicateModal } =
+    useSelectModal(formatMessage(messages.duplicateModalTitle));
 
-  const { openModal: openDuplicateModal, Modal: DuplicateModal } = useModal({
-    type: ModalType.Modal,
-    props: duplicateModalProps,
-    modalContentRenderer: () => {},
-  });
+  const duplicateModalOptions = useRef(
+    createDuplicateModalOptions(formatMessage),
+  );
 
   const onDuplicate = (event) => {
     event.preventDefault();
     event.stopPropagation();
 
-    openDuplicateModal();
+    openDuplicateModal(duplicateModalOptions.current);
   };
 
   const imageUploading = updateReportTemplateLoading && isUploadingImage;

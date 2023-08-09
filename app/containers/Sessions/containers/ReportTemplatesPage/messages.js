@@ -188,4 +188,21 @@ export default defineMessages({
     id: `${scope}.duplicateModalTitle`,
     defaultMessage: 'Duplicate report template',
   },
+  duplicateHereTitle: {
+    id: `${scope}.duplicateHereTitle`,
+    defaultMessage: 'Duplicate here',
+  },
+  duplicateHereDescription: {
+    id: `${scope}.duplicateHereDescription`,
+    defaultMessage: 'Report copy will be created in your current session.',
+  },
+  duplicateInternallyTitle: {
+    id: `${scope}.duplicateInternallyTitle`,
+    defaultMessage: 'Duplicate internally',
+  },
+  duplicateInternallyDescription: {
+    id: `${scope}.duplicateInternallyDescription`,
+    defaultMessage:
+      'Choose a different session or intervention for report copy.',
+  },
 });

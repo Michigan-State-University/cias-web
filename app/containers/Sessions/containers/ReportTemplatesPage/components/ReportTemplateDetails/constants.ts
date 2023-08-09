@@ -1,4 +1,12 @@
 import { themeColors } from 'theme';
+import { IntlShape } from 'react-intl';
+
+import DuplicateHereIcon from 'assets/svg/copy.svg';
+import DuplicateInternallyIcon from 'assets/svg/duplicate-internally.svg';
+
+import { SelectModalOption } from 'components/SelectModal';
+
+import messages from '../../messages';
 
 export const REPORT_TEMPLATE_ACTION_BUTTONS_COMMON_PROPS = {
   fontWeight: 'bold',
@@ -11,3 +19,20 @@ export const REPORT_TEMPLATE_ACTION_BUTTONS_COMMON_PROPS = {
   },
   spinnerProps: { size: 30, width: 2 },
 };
+
+export const createDuplicateModalOptions = (
+  formatMessage: IntlShape['formatMessage'],
+): SelectModalOption[] => [
+  {
+    key: 'duplicateHere',
+    icon: DuplicateHereIcon,
+    title: formatMessage(messages.duplicateHereTitle),
+    description: formatMessage(messages.duplicateHereDescription),
+  },
+  {
+    key: 'duplicateInternally',
+    icon: DuplicateInternallyIcon,
+    title: formatMessage(messages.duplicateInternallyTitle),
+    description: formatMessage(messages.duplicateInternallyDescription),
+  },
+];
