@@ -4,10 +4,11 @@ import { IntlShape } from 'react-intl';
 import DuplicateHereIcon from 'assets/svg/copy.svg';
 import DuplicateInternallyIcon from 'assets/svg/duplicate-internally.svg';
 
-import { SelectModalOption } from 'components/SelectModal';
-
 import messages from '../../messages';
-import { DuplicateReportTemplateOption } from './types';
+import {
+  DuplicateReportTemplateOption,
+  DuplicateReportTemplateOptionId,
+} from './types';
 
 export const REPORT_TEMPLATE_ACTION_BUTTONS_COMMON_PROPS = {
   fontWeight: 'bold',
@@ -24,16 +25,16 @@ export const REPORT_TEMPLATE_ACTION_BUTTONS_COMMON_PROPS = {
 export const createDuplicateModalOptions = (
   formatMessage: IntlShape['formatMessage'],
   canEdit: boolean,
-): SelectModalOption<DuplicateReportTemplateOption>[] => [
+): DuplicateReportTemplateOption[] => [
   {
-    id: DuplicateReportTemplateOption.DUPLICATE_HERE,
+    id: DuplicateReportTemplateOptionId.DUPLICATE_HERE,
     icon: DuplicateHereIcon,
     title: formatMessage(messages.duplicateHereTitle),
     description: formatMessage(messages.duplicateHereDescription),
     disabled: !canEdit,
   },
   {
-    id: DuplicateReportTemplateOption.DUPLICATE_INTERNALLY,
+    id: DuplicateReportTemplateOptionId.DUPLICATE_INTERNALLY,
     icon: DuplicateInternallyIcon,
     title: formatMessage(messages.duplicateInternallyTitle),
     description: formatMessage(messages.duplicateInternallyDescription),

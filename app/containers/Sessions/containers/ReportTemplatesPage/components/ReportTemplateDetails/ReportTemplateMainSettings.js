@@ -45,7 +45,7 @@ import {
   createDuplicateModalOptions,
   REPORT_TEMPLATE_ACTION_BUTTONS_COMMON_PROPS,
 } from './constants';
-import { DuplicateReportTemplateOption } from './types';
+import { DuplicateReportTemplateOptionId } from './types';
 
 const ReportTemplateMainSettings = ({
   intl: { formatMessage },
@@ -123,11 +123,11 @@ const ReportTemplateMainSettings = ({
     if (!optionId) return;
 
     switch (optionId) {
-      case DuplicateReportTemplateOption.DUPLICATE_HERE: {
+      case DuplicateReportTemplateOptionId.DUPLICATE_HERE: {
         duplicateReportTemplate(sessionId, singleReportTemplate.id);
         break;
       }
-      case DuplicateReportTemplateOption.DUPLICATE_INTERNALLY: {
+      case DuplicateReportTemplateOptionId.DUPLICATE_INTERNALLY: {
         setDuplicateInternallyModalVisible(true);
         break;
       }
