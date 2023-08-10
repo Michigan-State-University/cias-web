@@ -86,6 +86,7 @@ import {
   ShareExternallyLevel,
   useShareExternallyModal,
 } from 'containers/ShareExternallyModal';
+import { useManageCollectedData } from 'containers/ManageCollectedData';
 
 import Modal, {
   ConfirmationModal,
@@ -266,6 +267,9 @@ export function InterventionDetailsPage({
 
   const handleExportIntervention = () => exportIntervention(id);
 
+  const { ManageCollectedDataOption, ManageCollectedDataModal } =
+    useManageCollectedData();
+
   const options = [
     {
       id: 'translate',
@@ -335,6 +339,7 @@ export function InterventionDetailsPage({
           },
         ]
       : []),
+    ManageCollectedDataOption,
   ];
 
   useLayoutEffect(() => {
@@ -546,6 +551,7 @@ export function InterventionDetailsPage({
             </Modal>
 
             <CollaboratorsModal />
+            <ManageCollectedDataModal />
 
             <Header
               name={name}
