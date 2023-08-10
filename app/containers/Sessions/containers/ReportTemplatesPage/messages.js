@@ -187,7 +187,7 @@ export default defineMessages({
   duplicatedReportTemplateWarning: {
     id: `${scope}.duplicatedReportTemplateWarning`,
     defaultMessage:
-      'This report was duplicated from another session.<br/>Make sure all variables are valid.',
+      'This report was duplicated from another session. Make sure all variables are valid.',
   },
   duplicateModalTitle: {
     id: `${scope}.duplicateModalTitle`,

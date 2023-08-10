@@ -422,9 +422,9 @@ export default defineMessages({
     id: `${scope}.lastCsvDate`,
     defaultMessage: 'CSV last generated at: ',
   },
-  close: {
-    id: `${scope}.close`,
-    defaultMessage: 'Close',
+  dontShowAgain: {
+    id: `${scope}.dontShowAgain`,
+    defaultMessage: `Don't show again`,
   },
   iUnderstand: {
     id: `${scope}.iUnderstand`,
