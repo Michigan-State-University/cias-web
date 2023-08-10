@@ -14,10 +14,10 @@ import { TextButton } from 'components/Button';
 import messages from '../../messages';
 
 export type Props = {
-  onClose: () => void;
+  onDismiss: () => void;
 };
 
-export const DuplicatedReportTemplateWarning: FC<Props> = ({ onClose }) => {
+export const DuplicatedReportTemplateWarning: FC<Props> = ({ onDismiss }) => {
   const { formatMessage } = useIntl();
 
   return (
@@ -38,7 +38,7 @@ export const DuplicatedReportTemplateWarning: FC<Props> = ({ onClose }) => {
         </Text>
       </Row>
       <Row flexShrink={0}>
-        <TextButton onClick={onClose}>
+        <TextButton onClick={onDismiss}>
           {formatMessage(globalMessages.dontShowAgain)}
         </TextButton>
       </Row>

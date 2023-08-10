@@ -45,4 +45,5 @@ export interface ReportTemplate {
   sections: ReportTemplateSection[];
   variants: ReportTemplateVariant[];
   isDuplicatedFromOtherSession: boolean;
+  duplicatedFromOtherSessionWarningDismissed: boolean;
 }
