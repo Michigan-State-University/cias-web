@@ -52,6 +52,11 @@ const TemplateSectionSettings = ({
     } else setCurrentlyOpenedCollapsable(variantId);
   };
 
+  const [warningDismissed, setWarningDismissed] = useState(false);
+  useEffect(() => {
+    setWarningDismissed(false);
+  }, [selectedReportId]);
+
   useEffect(() => {
     if (!updateReportTemplateLoading) {
       setIsAddingSection(false);
@@ -128,9 +133,12 @@ const TemplateSectionSettings = ({
             </TextButton>
           </Col>
         </Row>
-        {singleReportTemplate.isDuplicatedFromOtherSession && (
-          <DuplicatedReportTemplateWarning />
-        )}
+        {singleReportTemplate.isDuplicatedFromOtherSession &&
+          !warningDismissed && (
+            <DuplicatedReportTemplateWarning
+              onClose={() => setWarningDismissed(true)}
+            />
+          )}
         <Row>
           <Col>
             <SectionFormula formula={selectedTemplateSection.formula} />

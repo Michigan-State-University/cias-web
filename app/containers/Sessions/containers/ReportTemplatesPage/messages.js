@@ -184,6 +184,11 @@ export default defineMessages({
     defaultMessage:
       'Are you sure you want to delete this Case? It will not be possible to recover it later.',
   },
+  duplicatedReportTemplateWarning: {
+    id: `${scope}.duplicatedReportTemplateWarning`,
+    defaultMessage:
+      'This report was duplicated from another session.<br/>Make sure all variables are valid.',
+  },
   duplicateModalTitle: {
     id: `${scope}.duplicateModalTitle`,
     defaultMessage: 'Duplicate report template',

@@ -362,7 +362,7 @@ export default defineMessages({
   },
   questionRequired: {
     id: `${scope}.questionRequired`,
-    defaultMessage: `Required fields are marked with an asterisk<span style='color:${themeColors.warning};'>*</span>`,
+    defaultMessage: `Required fields are marked with an asterisk<span style="color:${themeColors.warning};">*</span>`,
   },
   dragHandle: {
     id: `${scope}.dragHandle`,
@@ -421,5 +421,9 @@ export default defineMessages({
   lastCsvDate: {
     id: `${scope}.lastCsvDate`,
     defaultMessage: 'CSV last generated at: ',
+  },
+  close: {
+    id: `${scope}.close`,
+    defaultMessage: 'Close',
   },
 });
