@@ -214,4 +214,13 @@ export default defineMessages({
     id: `${scope}.duplicateToSelectedSession`,
     defaultMessage: 'Duplicate to selected session',
   },
+  duplicateInternallyConfirmationTitle: {
+    id: `${scope}.duplicateInternallyConfirmationTitle`,
+    defaultMessage: 'Duplicate internally',
+  },
+  duplicateInternallyConfirmationContent: {
+    id: `${scope}.duplicateInternallyConfirmationContent`,
+    defaultMessage:
+      'You are duplicating this report template to another session. Make sure all variables are valid in the duplicated template.',
+  },
 });

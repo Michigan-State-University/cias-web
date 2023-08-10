@@ -1,4 +1,4 @@
-import React, { useContext, useEffect, useRef, useState } from 'react';
+import React, { useContext, useEffect, useMemo, useState } from 'react';
 import PropTypes from 'prop-types';
 import { compose } from 'redux';
 import { connect } from 'react-redux';
@@ -6,6 +6,9 @@ import { Row, Container } from 'react-grid-system';
 import { FormattedMessage, injectIntl, IntlShape } from 'react-intl';
 
 import { colors, themeColors } from 'theme';
+
+import globalMessages from 'global/i18n/globalMessages';
+
 import {
   deleteReportTemplateLogoRequest,
   deleteReportTemplateRequest,
@@ -34,7 +37,7 @@ import Img from 'components/Img';
 import FlexRow from 'components/Row';
 import { ModalType, useModal } from 'components/Modal';
 import { HelpIconTooltip } from 'components/HelpIconTooltip';
-import { useSelectModal } from 'components/SelectModal';
+import { useSelectModal, SELECT_MODAL_WIDTH } from 'components/SelectModal';
 import CopyModal from 'components/CopyModal';
 import { VIEWS } from 'components/CopyModal/Components';
 
@@ -119,6 +122,28 @@ const ReportTemplateMainSettings = ({
     },
   });
 
+  const duplicateInternallyConfirmationModalProps = useMemo(
+    () => ({
+      description: formatMessage(messages.duplicateInternallyConfirmationTitle),
+      content: formatMessage(messages.duplicateInternallyConfirmationContent),
+      confirmationButtonText: formatMessage(globalMessages.iUnderstand),
+      confirmationButtonColor: 'primary',
+      confirmAction: () => setDuplicateInternallyModalVisible(true),
+      hideCancelButton: true,
+      icon: 'info',
+      width: SELECT_MODAL_WIDTH,
+    }),
+    [setDuplicateInternallyModalVisible],
+  );
+
+  const {
+    openModal: openDuplicateInternallyConfirmationModal,
+    Modal: DuplicateInternallyConfirmationModal,
+  } = useModal({
+    type: ModalType.ConfirmationModal,
+    props: duplicateInternallyConfirmationModalProps,
+  });
+
   const handleDuplicateModalClose = (optionId) => {
     if (!optionId) return;
 
@@ -128,7 +153,7 @@ const ReportTemplateMainSettings = ({
         break;
       }
       case DuplicateReportTemplateOptionId.DUPLICATE_INTERNALLY: {
-        setDuplicateInternallyModalVisible(true);
+        openDuplicateInternallyConfirmationModal(true);
         break;
       }
       default: {
@@ -143,15 +168,16 @@ const ReportTemplateMainSettings = ({
       handleDuplicateModalClose,
     );
 
-  const duplicateModalOptions = useRef(
-    createDuplicateModalOptions(formatMessage, canEdit),
+  const duplicateModalOptions = useMemo(
+    () => createDuplicateModalOptions(formatMessage, canEdit),
+    [canEdit],
   );
 
   const onDuplicate = (event) => {
     event.preventDefault();
     event.stopPropagation();
 
-    openDuplicateModal(duplicateModalOptions.current);
+    openDuplicateModal(duplicateModalOptions);
   };
 
   const handleDuplicateInternallySessionSelected = (targetSession) => {
@@ -168,6 +194,7 @@ const ReportTemplateMainSettings = ({
     <Container style={{ maxWidth: 600 }}>
       <DeleteModal />
       <DuplicateModal />
+      <DuplicateInternallyConfirmationModal />
       <CopyModal
         visible={duplicateInternallyModalVisible}
         onClose={() => setDuplicateInternallyModalVisible(false)}

@@ -426,4 +426,8 @@ export default defineMessages({
     id: `${scope}.close`,
     defaultMessage: 'Close',
   },
+  iUnderstand: {
+    id: `${scope}.iUnderstand`,
+    defaultMessage: 'I understand',
+  },
 });
