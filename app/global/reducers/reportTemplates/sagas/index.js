@@ -1,5 +1,6 @@
 import { all } from 'redux-saga/effects';
 
+import duplicateReportTemplate from './duplicateReportTemplate';
 import addReportTemplate from './addReportTemplate';
 import fetchReportTemplates from './fetchReportTemplates';
 import updateReportTemplate from './updateReportTemplate';
@@ -19,6 +20,7 @@ import reorderTemplateSections from './reorderTemplateSections';
 export default function* reportTemplatesSaga() {
   yield all([
     fetchReportTemplates(),
+    duplicateReportTemplate(),
     addReportTemplate(),
     updateReportTemplate(),
     deleteReportTemplate(),

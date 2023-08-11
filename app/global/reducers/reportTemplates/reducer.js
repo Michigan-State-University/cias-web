@@ -57,6 +57,9 @@ import {
   REORDER_TEMPLATE_SECTIONS_REQUEST,
   REORDER_TEMPLATE_SECTIONS_SUCCESS,
   REORDER_TEMPLATE_SECTIONS_ERROR,
+  DUPLICATE_REPORT_TEMPLATE_REQUEST,
+  DUPLICATE_REPORT_TEMPLATE_SUCCESS,
+  DUPLICATE_REPORT_TEMPLATE_FAILURE,
 } from './constants';
 
 export const initialState = {
@@ -71,6 +74,7 @@ export const initialState = {
   loaders: {
     fetchReportTemplatesLoading: true,
     fetchSingleReportTemplateLoading: false,
+    duplicateReportTemplateLoading: false,
     addReportTemplateLoading: false,
     updateReportTemplateLoading: false,
     deleteReportTemplateLoading: false,
@@ -117,6 +121,23 @@ const reportTemplatesReducer = (state = initialState, { type, payload }) =>
         draft.errors.fetchReportTemplatesError = payload;
 
         draft.reportTemplates = cloneDeep(state.cache.reportTemplates);
+        break;
+
+      case DUPLICATE_REPORT_TEMPLATE_REQUEST:
+        draft.loaders.duplicateReportTemplateLoading = true;
+        break;
+
+      case DUPLICATE_REPORT_TEMPLATE_SUCCESS:
+        draft.loaders.duplicateReportTemplateLoading = false;
+        const { reportTemplate, addToReportTemplateList } = payload;
+
+        if (addToReportTemplateList) {
+          draft.reportTemplates.push(reportTemplate);
+        }
+        break;
+
+      case DUPLICATE_REPORT_TEMPLATE_FAILURE:
+        draft.loaders.duplicateReportTemplateLoading = false;
         break;
 
       case ADD_REPORT_TEMPLATE_REQUEST:
