@@ -56,6 +56,9 @@ import {
   REORDER_SECTION_CASES_REQUEST,
   REORDER_SECTION_CASES_SUCCESS,
   REORDER_SECTION_CASES_FAILURE,
+  DUPLICATE_REPORT_TEMPLATE_REQUEST,
+  DUPLICATE_REPORT_TEMPLATE_SUCCESS,
+  DUPLICATE_REPORT_TEMPLATE_FAILURE,
 } from './constants';
 
 export const fetchReportTemplatesRequest = (
@@ -87,6 +90,27 @@ export const fetchSingleReportTemplateSuccess = (reportTemplate) =>
   actionBuilder(FETCH_SINGLE_REPORT_TEMPLATE_SUCCESS, { reportTemplate });
 export const fetchSingleReportTemplateFailure = (error) =>
   actionBuilder(FETCH_SINGLE_REPORT_TEMPLATE_FAILURE, error);
+
+export const duplicateReportTemplateRequest = (
+  sessionId,
+  reportTemplateId,
+  targetSessionId,
+) =>
+  actionBuilder(DUPLICATE_REPORT_TEMPLATE_REQUEST, {
+    sessionId,
+    reportTemplateId,
+    targetSessionId,
+  });
+export const duplicateReportTemplateSuccess = (
+  reportTemplate,
+  addToReportTemplateList,
+) =>
+  actionBuilder(DUPLICATE_REPORT_TEMPLATE_SUCCESS, {
+    reportTemplate,
+    addToReportTemplateList,
+  });
+export const duplicateReportTemplateFailure = () =>
+  actionBuilder(DUPLICATE_REPORT_TEMPLATE_FAILURE, {});
 
 export const addReportTemplateRequest = (sessionId, reportTemplate) =>
   actionBuilder(ADD_REPORT_TEMPLATE_REQUEST, { reportTemplate, sessionId });

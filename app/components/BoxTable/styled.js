@@ -16,7 +16,7 @@ const getColumnTemplate = (columnsNo, hasEdit, hasDelete, hasTranslation) => {
 };
 
 export const Row = styled.div`
-  background-color: ${colors.aliceBlue};
+  background-color: ${colors.hawkesBlue};
   margin-bottom: 8px;
   padding: 15px 12px;
   align-items: center;

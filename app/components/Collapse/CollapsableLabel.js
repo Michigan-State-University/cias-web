@@ -42,6 +42,7 @@ const CollapseLabel = ({
   arrowColor,
   extraIcons,
   showHoverEffect,
+  toggleIconPosition,
 }) => {
   const { formatMessage } = useIntl();
   const currentImg = isOpened ? onShowImg : onHideImg;
@@ -101,11 +102,14 @@ const CollapseLabel = ({
           fontSize={dragHandleProps?.fontSize}
           lineHeight={dragHandleProps?.lineHeight}
         >
-          {label}
+          <Box display="flex" align="center" flex={1} gap={12}>
+            {label}
+            {toggleIconPosition === 'label' && displayedImage}
+          </Box>
           <Box display="flex" align="center">
             {extraIcons && extraIcons}
             {isBinInCollapse && onDelete && deleteIcon}
-            {displayedImage}
+            {toggleIconPosition === 'container' && displayedImage}
           </Box>
         </Row>
       </StyledCollapseLabel>
@@ -143,6 +147,7 @@ CollapseLabel.propTypes = {
   arrowColor: PropTypes.string,
   extraIcons: PropTypes.object,
   showHoverEffect: PropTypes.bool,
+  toggleIconPosition: PropTypes.oneOf(['label', 'container']),
 };
 
 CollapseLabel.defaultProps = {
