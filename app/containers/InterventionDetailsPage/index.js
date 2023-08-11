@@ -514,6 +514,7 @@ export function InterventionDetailsPage({
             >
               <InterventionSettingsModal
                 editingPossible={editingPossible}
+                canCurrentUserMakeChanges={canCurrentUserMakeChanges}
                 onClose={() => setInterventionSettingsModalVisible(false)}
               />
             </Modal>

@@ -57,8 +57,9 @@ const colors = {
   amaranth: '#D83450',
   sonicSilver: '#6B707C',
   vermilion: '#D2371D',
-  aliceBlue: '#F1F4F9',
+  aliceBlue: '#F9FBFF',
   aliceBlueSaturated: '#F1F7FF',
+  hawkesBlue: '#F1F4F9',
   lightBlue: '#F4F8FF',
   electricPurple: '#B727EA',
   purplePlum: '#AC43D1',
@@ -94,6 +95,7 @@ const colors = {
   azureishWhite: '#D4DFF7',
   stormGrey: '#707688',
   logan: '#9BA1B4',
+  chardonnay: '#FFC179',
 };
 
 const themeColors = {

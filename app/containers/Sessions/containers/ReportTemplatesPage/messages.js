@@ -36,9 +36,21 @@ export default defineMessages({
     id: `${scope}.sectionSettingsHeader`,
     defaultMessage: 'Section Settings',
   },
+  settingsDuplicateReportButton: {
+    id: `${scope}.settingsDuplicateReportButton`,
+    defaultMessage: 'Duplicate',
+  },
+  settingsDuplicateReportButtonTitle: {
+    id: `${scope}.settingsDuplicateReportButton`,
+    defaultMessage: 'Duplicate report template',
+  },
+  settingsDownloadReportButtonTitle: {
+    id: `${scope}.settingsDownloadReportButtonTitle`,
+    defaultMessage: 'Download test report',
+  },
   settingsDownloadReportButton: {
     id: `${scope}.settingsDownloadReportButton`,
-    defaultMessage: 'Download test report',
+    defaultMessage: 'Download',
   },
   settingsReportFor: {
     id: `${scope}.settingsReportFor`,
@@ -171,5 +183,44 @@ export default defineMessages({
     id: `${scope}.deleteSectionCaseMessage`,
     defaultMessage:
       'Are you sure you want to delete this Case? It will not be possible to recover it later.',
+  },
+  duplicatedReportTemplateWarning: {
+    id: `${scope}.duplicatedReportTemplateWarning`,
+    defaultMessage:
+      'This report was duplicated from another session. Make sure all variables are valid.',
+  },
+  duplicateModalTitle: {
+    id: `${scope}.duplicateModalTitle`,
+    defaultMessage: 'Duplicate report template',
+  },
+  duplicateHereTitle: {
+    id: `${scope}.duplicateHereTitle`,
+    defaultMessage: 'Duplicate here',
+  },
+  duplicateHereDescription: {
+    id: `${scope}.duplicateHereDescription`,
+    defaultMessage: 'Report copy will be created in your current session.',
+  },
+  duplicateInternallyTitle: {
+    id: `${scope}.duplicateInternallyTitle`,
+    defaultMessage: 'Duplicate internally',
+  },
+  duplicateInternallyDescription: {
+    id: `${scope}.duplicateInternallyDescription`,
+    defaultMessage:
+      'Choose a different session or intervention for report copy.',
+  },
+  duplicateToSelectedSession: {
+    id: `${scope}.duplicateToSelectedSession`,
+    defaultMessage: 'Duplicate to selected session',
+  },
+  duplicateInternallyConfirmationTitle: {
+    id: `${scope}.duplicateInternallyConfirmationTitle`,
+    defaultMessage: 'Duplicate internally',
+  },
+  duplicateInternallyConfirmationContent: {
+    id: `${scope}.duplicateInternallyConfirmationContent`,
+    defaultMessage:
+      'You are duplicating this report template to another session. Make sure all variables are valid in the duplicated template.',
   },
 });
