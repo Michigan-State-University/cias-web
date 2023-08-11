@@ -5,13 +5,18 @@ import BinIcon from 'assets/svg/bin-no-bg.svg';
 
 import { colors } from 'theme';
 
+import { InterventionStatus } from 'models/Intervention';
+import { canManageCollectedData } from 'models/Status/statusPermissions';
+
 import { useSelectModal } from 'components/SelectModal';
 
 import messages from './messages';
 import { createSelectModalOptions } from './utils';
 import { ManageCollectedDataOptionId } from './types';
 
-export const useManageCollectedData = () => {
+export const useManageCollectedData = (
+  interventionStatus: InterventionStatus,
+) => {
   const { formatMessage } = useIntl();
 
   const handleSelectModalClose = (optionId?: ManageCollectedDataOptionId) => {
@@ -52,8 +57,9 @@ export const useManageCollectedData = () => {
       icon: BinIcon,
       action: handleOpenSelectModal,
       color: colors.bluewood,
+      disabled: !canManageCollectedData(interventionStatus),
     }),
-    [handleOpenSelectModal],
+    [handleOpenSelectModal, interventionStatus],
   );
 
   return {

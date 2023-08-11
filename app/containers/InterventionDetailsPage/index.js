@@ -268,7 +268,7 @@ export function InterventionDetailsPage({
   const handleExportIntervention = () => exportIntervention(id);
 
   const { ManageCollectedDataOption, ManageCollectedDataModal } =
-    useManageCollectedData();
+    useManageCollectedData(status);
 
   const options = [
     {
@@ -339,7 +339,7 @@ export function InterventionDetailsPage({
           },
         ]
       : []),
-    ManageCollectedDataOption,
+    ...(isCurrentUserInterventionOwner ? [ManageCollectedDataOption] : []),
   ];
 
   useLayoutEffect(() => {
