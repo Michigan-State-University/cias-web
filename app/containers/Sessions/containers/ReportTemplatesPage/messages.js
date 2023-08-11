@@ -184,6 +184,11 @@ export default defineMessages({
     defaultMessage:
       'Are you sure you want to delete this Case? It will not be possible to recover it later.',
   },
+  duplicatedReportTemplateWarning: {
+    id: `${scope}.duplicatedReportTemplateWarning`,
+    defaultMessage:
+      'This report was duplicated from another session. Make sure all variables are valid.',
+  },
   duplicateModalTitle: {
     id: `${scope}.duplicateModalTitle`,
     defaultMessage: 'Duplicate report template',
@@ -208,5 +213,14 @@ export default defineMessages({
   duplicateToSelectedSession: {
     id: `${scope}.duplicateToSelectedSession`,
     defaultMessage: 'Duplicate to selected session',
+  },
+  duplicateInternallyConfirmationTitle: {
+    id: `${scope}.duplicateInternallyConfirmationTitle`,
+    defaultMessage: 'Duplicate internally',
+  },
+  duplicateInternallyConfirmationContent: {
+    id: `${scope}.duplicateInternallyConfirmationContent`,
+    defaultMessage:
+      'You are duplicating this report template to another session. Make sure all variables are valid in the duplicated template.',
   },
 });

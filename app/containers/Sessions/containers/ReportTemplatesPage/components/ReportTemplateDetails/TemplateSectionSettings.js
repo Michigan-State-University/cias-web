@@ -10,6 +10,7 @@ import {
   addSectionCaseRequest,
   deleteTemplateSectionRequest,
   reorderSectionCasesRequest,
+  updateReportTemplateRequest,
 } from 'global/reducers/reportTemplates';
 import { SectionCaseBuilder } from 'models/ReportTemplate';
 
@@ -27,9 +28,11 @@ import SectionCaseItem from './SectionCaseItem';
 import { Spacer, CardBox } from '../../styled';
 import { ReportTemplatesContext } from '../../utils';
 import messages from '../../messages';
+import { DuplicatedReportTemplateWarning } from './DuplicatedReportTemplateWarning';
 
 const TemplateSectionSettings = ({
   intl: { formatMessage },
+  updateReportTemplate,
   addCase,
   deleteSection,
   reorderSectionCases,
@@ -40,6 +43,8 @@ const TemplateSectionSettings = ({
     selectedTemplateSection,
     loaders: { updateReportTemplateLoading },
     canEdit,
+    sessionId,
+    singleReportTemplate,
   } = useContext(ReportTemplatesContext);
 
   const [currentlyOpenedCollapsable, setCurrentlyOpenedCollapsable] =
@@ -75,6 +80,13 @@ const TemplateSectionSettings = ({
   const onDelete = () => {
     setIsDeletingSection(true);
     deleteSection(selectedTemplateSectionId, selectedReportId);
+  };
+
+  const dismissWarning = () => {
+    updateReportTemplate(sessionId, {
+      ...singleReportTemplate,
+      duplicatedFromOtherSessionWarningDismissed: true,
+    });
   };
 
   const { openModal: openDeleteModal, Modal: DeleteModal } = useModal({
@@ -126,6 +138,10 @@ const TemplateSectionSettings = ({
             </TextButton>
           </Col>
         </Row>
+        {singleReportTemplate.isDuplicatedFromOtherSession &&
+          !singleReportTemplate.duplicatedFromOtherSessionWarningDismissed && (
+            <DuplicatedReportTemplateWarning onDismiss={dismissWarning} />
+          )}
         <Row>
           <Col>
             <SectionFormula formula={selectedTemplateSection.formula} />
@@ -169,6 +185,7 @@ const TemplateSectionSettings = ({
 };
 
 const mapDispatchToProps = {
+  updateReportTemplate: updateReportTemplateRequest,
   addCase: addSectionCaseRequest,
   deleteSection: deleteTemplateSectionRequest,
   reorderSectionCases: reorderSectionCasesRequest,
@@ -177,6 +194,7 @@ const mapDispatchToProps = {
 const withConnect = connect(null, mapDispatchToProps);
 
 TemplateSectionSettings.propTypes = {
+  updateReportTemplate: PropTypes.func,
   addCase: PropTypes.func,
   deleteSection: PropTypes.func,
   reorderSectionCases: PropTypes.func,

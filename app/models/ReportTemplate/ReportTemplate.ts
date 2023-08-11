@@ -44,4 +44,6 @@ export interface ReportTemplate {
   originalText: ReportTemplateOriginalText;
   sections: ReportTemplateSection[];
   variants: ReportTemplateVariant[];
+  isDuplicatedFromOtherSession: boolean;
+  duplicatedFromOtherSessionWarningDismissed: boolean;
 }
