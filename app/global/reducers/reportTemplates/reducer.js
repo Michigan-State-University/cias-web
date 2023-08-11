@@ -7,7 +7,11 @@ import cloneDeep from 'lodash/cloneDeep';
 import produce from 'immer';
 import isEmpty from 'lodash/isEmpty';
 
-import { assignDraftItems } from 'utils/reduxUtils';
+import {
+  assignDraftItems,
+  assignDraftItemsById,
+  updateItemById,
+} from 'utils/reduxUtils';
 import sectionReducer from 'global/reducers/reportTemplates/sectionReducer';
 import {
   FETCH_REPORT_TEMPLATES_REQUEST,
@@ -57,6 +61,9 @@ import {
   REORDER_TEMPLATE_SECTIONS_REQUEST,
   REORDER_TEMPLATE_SECTIONS_SUCCESS,
   REORDER_TEMPLATE_SECTIONS_ERROR,
+  REORDER_SECTION_CASES_REQUEST,
+  REORDER_SECTION_CASES_SUCCESS,
+  REORDER_SECTION_CASES_FAILURE,
   DUPLICATE_REPORT_TEMPLATE_REQUEST,
   DUPLICATE_REPORT_TEMPLATE_SUCCESS,
   DUPLICATE_REPORT_TEMPLATE_FAILURE,
@@ -81,6 +88,7 @@ export const initialState = {
     deleteReportTemplateLogoLoading: false,
     generateTestReportLoading: false,
     reorderSectionsLoading: false,
+    reorderCasesLoading: false,
     shouldRefetch: false,
   },
   errors: {
@@ -480,6 +488,46 @@ const reportTemplatesReducer = (state = initialState, { type, payload }) =>
           draft.singleReportTemplate.sections,
         );
         break;
+
+      case REORDER_SECTION_CASES_REQUEST: {
+        draft.loaders.reorderCasesLoading = true;
+        draft.loaders.updateReportTemplateLoading = true;
+
+        const { sectionId, reorderedCases } = payload;
+        updateItemById(
+          draft.singleReportTemplate.sections,
+          sectionId,
+          (section) => {
+            section.variants = reorderedCases;
+            return section;
+          },
+        );
+        break;
+      }
+      case REORDER_SECTION_CASES_SUCCESS: {
+        draft.loaders.reorderCasesLoading = false;
+        draft.loaders.updateReportTemplateLoading = false;
+
+        const { sectionId } = payload;
+        assignDraftItemsById(
+          draft.singleReportTemplate.sections,
+          draft.cache.singleReportTemplate.sections,
+          sectionId,
+        );
+        break;
+      }
+      case REORDER_SECTION_CASES_FAILURE: {
+        draft.loaders.reorderCasesLoading = false;
+        draft.loaders.updateReportTemplateLoading = false;
+
+        const { sectionId } = payload;
+        assignDraftItemsById(
+          draft.cache.singleReportTemplate.sections,
+          draft.singleReportTemplate.sections,
+          sectionId,
+        );
+        break;
+      }
     }
   });
 

@@ -9,6 +9,7 @@ import { FormattedMessage, injectIntl, IntlShape } from 'react-intl';
 import {
   addSectionCaseRequest,
   deleteTemplateSectionRequest,
+  reorderSectionCasesRequest,
 } from 'global/reducers/reportTemplates';
 import { SectionCaseBuilder } from 'models/ReportTemplate';
 
@@ -19,6 +20,7 @@ import { ModalType, useModal } from 'components/Modal';
 import { Col } from 'components/ReactGridSystem';
 import H2 from 'components/H2';
 import TextButton from 'components/Button/TextButton';
+import { DndSortable } from 'components/DragAndDrop';
 
 import SectionFormula from './SectionFormula';
 import SectionCaseItem from './SectionCaseItem';
@@ -30,6 +32,7 @@ const TemplateSectionSettings = ({
   intl: { formatMessage },
   addCase,
   deleteSection,
+  reorderSectionCases,
 }) => {
   const {
     selectedReportId,
@@ -40,10 +43,11 @@ const TemplateSectionSettings = ({
   } = useContext(ReportTemplatesContext);
 
   const [currentlyOpenedCollapsable, setCurrentlyOpenedCollapsable] =
-    useState(-1);
-  const handleOpenCollapsable = (index) => () => {
-    if (index === currentlyOpenedCollapsable) setCurrentlyOpenedCollapsable(-1);
-    else setCurrentlyOpenedCollapsable(index);
+    useState(null);
+  const handleOpenCollapsable = (variantId) => () => {
+    if (variantId === currentlyOpenedCollapsable) {
+      setCurrentlyOpenedCollapsable(null);
+    } else setCurrentlyOpenedCollapsable(variantId);
   };
 
   useEffect(() => {
@@ -82,6 +86,17 @@ const TemplateSectionSettings = ({
     },
   });
 
+  const onDragEnd = (_, items, hasChanged) => {
+    if (!hasChanged) return;
+
+    const reorderedVariants = items.map((variant, index) => ({
+      ...variant,
+      position: index,
+    }));
+
+    reorderSectionCases(selectedTemplateSectionId, reorderedVariants);
+  };
+
   if (!selectedTemplateSection) return <></>;
 
   return (
@@ -116,21 +131,27 @@ const TemplateSectionSettings = ({
             <SectionFormula formula={selectedTemplateSection.formula} />
           </Col>
         </Row>
-        {selectedTemplateSection.variants.map((variant, index) => (
-          <Row key={`section-case-${variant.id}`}>
-            <Col>
-              <Spacer />
-              <SectionCaseItem
-                openCollapsable={handleOpenCollapsable(index)}
-                isOpened={index === currentlyOpenedCollapsable}
-                title={formatMessage(messages.caseTitle, {
-                  index: index + 1,
-                })}
-                sectionCase={variant}
-              />
-            </Col>
-          </Row>
-        ))}
+        <DndSortable
+          items={selectedTemplateSection.variants}
+          onDragEnd={onDragEnd}
+        >
+          {({ item, dragHandleProps, index }) => (
+            <Row>
+              <Col>
+                <Spacer />
+                <SectionCaseItem
+                  openCollapsable={handleOpenCollapsable(item.id)}
+                  isOpened={item.id === currentlyOpenedCollapsable}
+                  title={formatMessage(messages.caseTitle, {
+                    index: index + 1,
+                  })}
+                  sectionCase={item}
+                  dragHandleProps={dragHandleProps}
+                />
+              </Col>
+            </Row>
+          )}
+        </DndSortable>
         <Row style={{ marginTop: 20 }}>
           <Col>
             <DashedButton
@@ -150,6 +171,7 @@ const TemplateSectionSettings = ({
 const mapDispatchToProps = {
   addCase: addSectionCaseRequest,
   deleteSection: deleteTemplateSectionRequest,
+  reorderSectionCases: reorderSectionCasesRequest,
 };
 
 const withConnect = connect(null, mapDispatchToProps);
@@ -157,6 +179,7 @@ const withConnect = connect(null, mapDispatchToProps);
 TemplateSectionSettings.propTypes = {
   addCase: PropTypes.func,
   deleteSection: PropTypes.func,
+  reorderSectionCases: PropTypes.func,
   intl: PropTypes.shape(IntlShape),
 };
 
