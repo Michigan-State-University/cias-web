@@ -27,7 +27,7 @@ export default defineMessages({
   clearDataConfirmationContent: {
     id: `${scope}.clearDataConfirmationContent`,
     defaultMessage:
-      'Do you want to clear all personal user data gathered in this intervention? (e.g. answers, emails, phone numbers, fax numbers, addresses, etc.)',
+      'Do you want to clear all personal user data gathered in this intervention? (e.g. answers, live chat conversations, etc.)',
   },
   clearDataConfirmationNote: {
     id: `${scope}.clearDataConfirmationNote`,
