@@ -430,4 +430,12 @@ export default defineMessages({
     id: `${scope}.iUnderstand`,
     defaultMessage: 'I understand',
   },
+  areYouSure: {
+    id: `${scope}.areYouSure`,
+    defaultMessage: 'Are you sure?',
+  },
+  back: {
+    id: `${scope}.back`,
+    defaultMessage: 'Back',
+  },
 });

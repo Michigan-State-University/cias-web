@@ -24,4 +24,17 @@ export default defineMessages({
     id: `${scope}.deleteReportsDescription`,
     defaultMessage: 'Remove all generated report files in this intervention',
   },
+  clearDataConfirmationContent: {
+    id: `${scope}.clearDataConfirmationContent`,
+    defaultMessage:
+      'Do you want to clear all personal user data gathered in this intervention? (e.g. answers, emails, phone numbers, fax numbers, addresses, etc.)',
+  },
+  clearDataConfirmationNote: {
+    id: `${scope}.clearDataConfirmationNote`,
+    defaultMessage: 'Please note: This action is irreversible. ',
+  },
+  clearDataConfirmationButtonTitle: {
+    id: `${scope}.clearDataConfirmationButtonTitle`,
+    defaultMessage: 'Delete user data',
+  },
 });

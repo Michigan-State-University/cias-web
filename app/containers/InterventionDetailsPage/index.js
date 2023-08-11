@@ -267,7 +267,7 @@ export function InterventionDetailsPage({
 
   const handleExportIntervention = () => exportIntervention(id);
 
-  const { ManageCollectedDataOption, ManageCollectedDataModal } =
+  const { ManageCollectedDataOption, ManageCollectedDataModals } =
     useManageCollectedData(status);
 
   const options = [
@@ -551,7 +551,7 @@ export function InterventionDetailsPage({
             </Modal>
 
             <CollaboratorsModal />
-            <ManageCollectedDataModal />
+            {ManageCollectedDataModals}
 
             <Header
               name={name}

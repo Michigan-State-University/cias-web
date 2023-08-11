@@ -355,7 +355,7 @@ exports[`<ConfirmationModal /> Should render and match the snapshot 1`] = `
               >
                 <h1
                   class="c11"
-                  id="modal-title"
+                  id="modal-description"
                 >
                   Are you sure you want to perform this action?
                 </h1>
@@ -784,7 +784,7 @@ exports[`<ConfirmationModal /> Should render error and match the snapshot 1`] = 
               >
                 <h1
                   class="c11"
-                  id="modal-title"
+                  id="modal-description"
                 >
                   Are you sure you want to perform this action?
                 </h1>

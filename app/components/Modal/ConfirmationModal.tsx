@@ -19,8 +19,8 @@ import Icon from 'components/Icon';
 import Text from 'components/Text';
 
 import messages from './messages';
-import Modal from './Modal';
-import { MODAL_TITLE_ID } from './constants';
+import Modal, { Props as ModalProps } from './Modal';
+import { MODAL_DESCRIPTION_ID } from './constants';
 import { IconType } from './types';
 import { ConfirmationModalButtonsContainer } from './styled';
 
@@ -44,7 +44,7 @@ export type Props = {
   hideCloseButton?: boolean;
   hideCancelButton?: boolean;
   isMobile: boolean;
-} & Record<string, unknown>;
+} & Omit<ModalProps, 'children'>;
 
 const ConfirmationModal = ({
   visible = false,
@@ -63,10 +63,9 @@ const ConfirmationModal = ({
   contentStyles,
   contentContainerStyles,
   icon,
-  hideCloseButton,
   hideCancelButton,
   isMobile,
-  ...modalStyles
+  ...modalProps
 }: Props): JSX.Element => {
   const onConfirm = useCallback(() => {
     confirmAction();
@@ -85,19 +84,14 @@ const ConfirmationModal = ({
   };
 
   return (
-    <Modal
-      visible={visible}
-      onClose={onClose}
-      {...modalStyles}
-      hideCloseButton={hideCloseButton}
-    >
+    <Modal visible={visible} onClose={onClose} {...modalProps}>
       <Column px={!isMobile && 50} pd={30} {...contentContainerStyles}>
         {icon && (
           <Row justify="center" mb={32}>
             <Icon src={getIcon()} />
           </Row>
         )}
-        <H1 textAlign="center" id={MODAL_TITLE_ID}>
+        <H1 textAlign="center" id={MODAL_DESCRIPTION_ID}>
           {description}
         </H1>
         {content && (

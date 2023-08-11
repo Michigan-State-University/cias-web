@@ -8,7 +8,12 @@ import { colors } from 'theme';
 import { InterventionStatus } from 'models/Intervention';
 import { canManageCollectedData } from 'models/Status/statusPermissions';
 
-import { useSelectModal } from 'components/SelectModal';
+import globalMessages from 'global/i18n/globalMessages';
+
+import { SELECT_MODAL_WIDTH, useSelectModal } from 'components/SelectModal';
+import { ConfirmationModalProps, ModalType, useModal } from 'components/Modal';
+import Column from 'components/Column';
+import Text from 'components/Text';
 
 import messages from './messages';
 import { createSelectModalOptions } from './utils';
@@ -24,6 +29,7 @@ export const useManageCollectedData = (
 
     switch (optionId) {
       case ManageCollectedDataOptionId.CLEAR_DATA: {
+        openClearDataConfirmationModal(true);
         break;
       }
       case ManageCollectedDataOptionId.DELETE_REPORTS: {
@@ -50,6 +56,52 @@ export const useManageCollectedData = (
     [openSelectModal, selectModalOptions],
   );
 
+  const clearPersonalData = () => {
+    closeClearDataConfirmationModal();
+  };
+
+  const clearDataConfirmationModalProps: ConfirmationModalProps['props'] =
+    useMemo(
+      () => ({
+        title: formatMessage(messages.clearDataTitle),
+        description: null,
+        content: (
+          <Column>
+            <Text fontSize={20} fontWeight="bold" lineHeight={1.3}>
+              {formatMessage(globalMessages.areYouSure)}
+            </Text>
+            <Text mt={16} fontSize={15} lineHeight={1.5}>
+              {formatMessage(messages.clearDataConfirmationContent)}
+            </Text>
+            <Text mt={32} fontSize={15} lineHeight={1.5} opacity={0.8}>
+              {formatMessage(messages.clearDataConfirmationNote)}
+            </Text>
+          </Column>
+        ),
+        contentStyles: { py: 55 },
+        confirmationButtonText: formatMessage(
+          messages.clearDataConfirmationButtonTitle,
+        ),
+        cancelButtonText: formatMessage(globalMessages.back),
+        confirmAction: clearPersonalData,
+        closeOnConfirm: false,
+        onClose: handleOpenSelectModal,
+        width: SELECT_MODAL_WIDTH,
+        isMobile: true,
+        hideCloseButton: true,
+      }),
+      [clearPersonalData, handleOpenSelectModal],
+    );
+
+  const {
+    openModal: openClearDataConfirmationModal,
+    Modal: ClearDataConfirmationModal,
+    closeModal: closeClearDataConfirmationModal,
+  } = useModal({
+    type: ModalType.ConfirmationModal,
+    props: clearDataConfirmationModalProps,
+  });
+
   const ManageCollectedDataOption = useMemo(
     () => ({
       id: 'manageCollectedData',
@@ -64,6 +116,9 @@ export const useManageCollectedData = (
 
   return {
     ManageCollectedDataOption,
-    ManageCollectedDataModal: SelectModal,
+    ManageCollectedDataModals: [
+      <SelectModal key="selectManageCollectedDataModal" />,
+      <ClearDataConfirmationModal key="clearDataConfirmationModal" />,
+    ],
   };
 };
