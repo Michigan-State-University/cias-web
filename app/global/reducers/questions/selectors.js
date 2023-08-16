@@ -8,6 +8,7 @@ import {
   phoneQuestion,
   thirdPartyQuestion,
   tlfbQuestion,
+  henryFordInitialScreen,
 } from 'models/Session/QuestionTypes';
 import { getEditVariables } from 'models/Session/utils';
 
@@ -111,6 +112,11 @@ export const makeSelectThirdPartyReportQuestionExists = () =>
 export const makeSelectPhoneQuestionExists = () =>
   createSelector(selectQuestions, (substate) =>
     substate.questions?.some((elem) => elem.type === phoneQuestion.id),
+  );
+
+export const makeSelectHenryFordInitialScreenExists = () =>
+  createSelector(selectQuestions, (substate) =>
+    substate.questions?.some((elem) => elem.type === henryFordInitialScreen.id),
   );
 
 export const makeSelectLastCreatedQuestionId = () =>

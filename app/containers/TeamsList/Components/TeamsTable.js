@@ -8,7 +8,7 @@ import { ConfirmationModal } from 'components/Modal';
 import H1 from 'components/H1';
 import Text from 'components/Text';
 import { TableLoading } from 'components/Table';
-import { boxShadows } from 'theme';
+import { boxShadows, fontSizes } from 'theme';
 
 import Team from 'models/Teams/Team';
 import messages from '../messages';
@@ -45,10 +45,15 @@ const TeamsTable = ({
 
   const modalContent = (
     <>
-      <Text textAlign="center" fontWeight="bold" data-private>
+      <Text
+        textAlign="center"
+        fontWeight="bold"
+        data-private
+        fontSize={fontSizes.medium}
+      >
         {pickedTeam.name}
       </Text>
-      <Text textAlign="center" data-private>
+      <Text textAlign="center" data-private fontSize={fontSizes.medium}>
         {pickedTeam.teamAdmin?.email}
       </Text>
     </>

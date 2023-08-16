@@ -50,6 +50,7 @@ const CopyModal = ({
         title={formatMessage(messages.selectPlace)}
         padding="25px 0"
         titleProps={{ mx: 25 }}
+        width={440}
       >
         <CopyChooser
           defaultView={defaultView}

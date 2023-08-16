@@ -34,7 +34,7 @@ describe('deleteAvatar saga', () => {
 
     return expectSaga(deleteOtherUserAvatar, { payload })
       .provide([[matchers.call.fn(axios.delete), { data: apiResponse }]])
-      .put(deleteOtherUserAvatarSuccess(mapCurrentUser(apiResponse.data)))
+      .put(deleteOtherUserAvatarSuccess(mapCurrentUser(apiResponse)))
       .run();
   });
   it('Check deleteAvatar error connection', () => {

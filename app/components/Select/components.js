@@ -18,6 +18,8 @@ const DropdownIndicator = (props) => {
 
 DropdownIndicator.propTypes = components.DropdownIndicator.propTypes;
 
+const defaultFormatLabel = (label) => label;
+
 const Option = ({
   innerProps,
   innerRef,
@@ -27,7 +29,7 @@ const Option = ({
   selectProps,
 }) => {
   const { label, additionalData } = data;
-  const { formatLabel } = selectProps;
+  const formatLabel = selectProps.formatLabel ?? defaultFormatLabel;
   const getLabel = () => {
     if (!additionalData) return formatLabel(label);
     return formatLabel(label, additionalData);

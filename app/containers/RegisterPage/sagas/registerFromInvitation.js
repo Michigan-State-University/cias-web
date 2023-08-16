@@ -26,9 +26,7 @@ function* registerFromInvitation({ payload }) {
 
   const { email, ...reqObj } = objectToSnakeCase(payload);
   try {
-    const {
-      data: { data, verification_code: verificationCode },
-    } = yield axios.patch(requestURL, {
+    const { data } = yield axios.patch(requestURL, {
       invitation: reqObj,
     });
 
@@ -36,7 +34,7 @@ function* registerFromInvitation({ payload }) {
     yield call(LocalStorageService.setState, { user: { ...mappedUser } });
 
     const userStorageController = new UserStorageController(email);
-    userStorageController.setVerificationCode(verificationCode);
+    userStorageController.setVerificationCode(data.verification_code);
 
     yield put(registerFromInvitationSuccess());
 

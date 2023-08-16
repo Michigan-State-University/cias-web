@@ -19,4 +19,6 @@ export interface ApiErrorResponse {
   traces: ApiErrorTraces;
 }
 
-export type ApiError = AxiosError<ApiErrorResponse>;
+export type ApiError<T = ApiErrorResponse> = AxiosError<T>;
+
+export type ApiMessageError = ApiError<{ message: string }>;

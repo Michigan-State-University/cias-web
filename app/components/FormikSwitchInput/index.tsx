@@ -6,15 +6,26 @@ import { Switch, Props as SwitchProps } from 'components/Switch';
 
 export type Props = {
   formikKey: string;
+  columnStyleProps?: Record<string, unknown>;
 } & Omit<SwitchProps, 'onToggle' | 'onChange' | 'nativeChangeHandler' | 'id'>;
 
-const FormikSwitchInput = ({ formikKey, children, ...props }: Props) => {
+const FormikSwitchInput = ({
+  formikKey,
+  children,
+  columnStyleProps,
+  ...props
+}: Props) => {
   const [field, meta] = useField(formikKey);
   const { error, touched } = meta;
   const { value, ...fieldProps } = field;
 
   return (
-    <FormikControlLayout touched={touched} error={error} formikKey={formikKey}>
+    <FormikControlLayout
+      touched={touched}
+      error={error}
+      formikKey={formikKey}
+      {...columnStyleProps}
+    >
       <Switch
         nativeChangeHandler
         checked={value}

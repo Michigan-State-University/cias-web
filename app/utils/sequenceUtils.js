@@ -12,7 +12,7 @@ export const CalculationStrategy = {
 /**
  * Generates value based on provided sequence
  * @param  {Array<number>} valuesSequence
- * @param  {CalculationStrategy} strategy
+ * @param  {CalculationStrategy}[strategy]
  * @returns {number}
  */
 export const calculateNextValue = (valuesSequence, strategy) => {

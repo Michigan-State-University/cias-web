@@ -152,7 +152,7 @@ const SessionSettings = ({
         <FormattedMessage {...messages.blockRemovalConfirmationDescription} />
         <UL>
           {getRemovedBlockForSetting(confirmationOption).map((blockType) => (
-            <LI key={blockType}>
+            <LI key={blockType} inside>
               <FormattedMessage {...globalMessages.blockTypes[blockType]} />
             </LI>
           ))}

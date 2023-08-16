@@ -325,5 +325,6 @@ export const authReducer = (state = initialState, { type, payload }) =>
         draft.verificationCodeNeeded = false;
         draft.termsNotAccepted = false;
         draft.termsNotAcceptedExtraFields = null;
+        break;
     }
   });

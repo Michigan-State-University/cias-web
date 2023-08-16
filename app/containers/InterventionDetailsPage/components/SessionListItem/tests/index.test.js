@@ -18,6 +18,8 @@ import configureStore from 'configureStore';
 
 import { withDroppable } from 'utils/testUtils/dndUtils';
 
+import { intlProviderConfig } from 'containers/LanguageProvider';
+
 import SessionListItem from '../index';
 
 describe('<SessionListItem />', () => {
@@ -56,7 +58,7 @@ describe('<SessionListItem />', () => {
   it('Expect to not log errors in console', () => {
     const spy = jest.spyOn(global.console, 'error');
     render(
-      <IntlProvider locale={DEFAULT_LOCALE}>
+      <IntlProvider locale={DEFAULT_LOCALE} {...intlProviderConfig}>
         <Provider store={store}>
           <MemoryRouter>
             {withDroppable(<SessionListItem {...props} />)}

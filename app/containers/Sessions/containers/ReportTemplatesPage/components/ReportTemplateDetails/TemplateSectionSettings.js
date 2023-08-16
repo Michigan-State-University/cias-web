@@ -9,6 +9,8 @@ import { FormattedMessage, injectIntl, IntlShape } from 'react-intl';
 import {
   addSectionCaseRequest,
   deleteTemplateSectionRequest,
+  reorderSectionCasesRequest,
+  updateReportTemplateRequest,
 } from 'global/reducers/reportTemplates';
 import { SectionCaseBuilder } from 'models/ReportTemplate';
 
@@ -19,17 +21,21 @@ import { ModalType, useModal } from 'components/Modal';
 import { Col } from 'components/ReactGridSystem';
 import H2 from 'components/H2';
 import TextButton from 'components/Button/TextButton';
+import { DndSortable } from 'components/DragAndDrop';
 
 import SectionFormula from './SectionFormula';
 import SectionCaseItem from './SectionCaseItem';
 import { Spacer, CardBox } from '../../styled';
 import { ReportTemplatesContext } from '../../utils';
 import messages from '../../messages';
+import { DuplicatedReportTemplateWarning } from './DuplicatedReportTemplateWarning';
 
 const TemplateSectionSettings = ({
   intl: { formatMessage },
+  updateReportTemplate,
   addCase,
   deleteSection,
+  reorderSectionCases,
 }) => {
   const {
     selectedReportId,
@@ -37,13 +43,16 @@ const TemplateSectionSettings = ({
     selectedTemplateSection,
     loaders: { updateReportTemplateLoading },
     canEdit,
+    sessionId,
+    singleReportTemplate,
   } = useContext(ReportTemplatesContext);
 
   const [currentlyOpenedCollapsable, setCurrentlyOpenedCollapsable] =
-    useState(-1);
-  const handleOpenCollapsable = (index) => () => {
-    if (index === currentlyOpenedCollapsable) setCurrentlyOpenedCollapsable(-1);
-    else setCurrentlyOpenedCollapsable(index);
+    useState(null);
+  const handleOpenCollapsable = (variantId) => () => {
+    if (variantId === currentlyOpenedCollapsable) {
+      setCurrentlyOpenedCollapsable(null);
+    } else setCurrentlyOpenedCollapsable(variantId);
   };
 
   useEffect(() => {
@@ -73,6 +82,13 @@ const TemplateSectionSettings = ({
     deleteSection(selectedTemplateSectionId, selectedReportId);
   };
 
+  const dismissWarning = () => {
+    updateReportTemplate(sessionId, {
+      ...singleReportTemplate,
+      duplicatedFromOtherSessionWarningDismissed: true,
+    });
+  };
+
   const { openModal: openDeleteModal, Modal: DeleteModal } = useModal({
     type: ModalType.ConfirmationModal,
     props: {
@@ -81,6 +97,17 @@ const TemplateSectionSettings = ({
       confirmAction: onDelete,
     },
   });
+
+  const onDragEnd = (_, items, hasChanged) => {
+    if (!hasChanged) return;
+
+    const reorderedVariants = items.map((variant, index) => ({
+      ...variant,
+      position: index,
+    }));
+
+    reorderSectionCases(selectedTemplateSectionId, reorderedVariants);
+  };
 
   if (!selectedTemplateSection) return <></>;
 
@@ -111,26 +138,36 @@ const TemplateSectionSettings = ({
             </TextButton>
           </Col>
         </Row>
+        {singleReportTemplate.isDuplicatedFromOtherSession &&
+          !singleReportTemplate.duplicatedFromOtherSessionWarningDismissed && (
+            <DuplicatedReportTemplateWarning onDismiss={dismissWarning} />
+          )}
         <Row>
           <Col>
             <SectionFormula formula={selectedTemplateSection.formula} />
           </Col>
         </Row>
-        {selectedTemplateSection.variants.map((variant, index) => (
-          <Row key={`section-case-${variant.id}`}>
-            <Col>
-              <Spacer />
-              <SectionCaseItem
-                openCollapsable={handleOpenCollapsable(index)}
-                isOpened={index === currentlyOpenedCollapsable}
-                title={formatMessage(messages.caseTitle, {
-                  index: index + 1,
-                })}
-                sectionCase={variant}
-              />
-            </Col>
-          </Row>
-        ))}
+        <DndSortable
+          items={selectedTemplateSection.variants}
+          onDragEnd={onDragEnd}
+        >
+          {({ item, dragHandleProps, index }) => (
+            <Row>
+              <Col>
+                <Spacer />
+                <SectionCaseItem
+                  openCollapsable={handleOpenCollapsable(item.id)}
+                  isOpened={item.id === currentlyOpenedCollapsable}
+                  title={formatMessage(messages.caseTitle, {
+                    index: index + 1,
+                  })}
+                  sectionCase={item}
+                  dragHandleProps={dragHandleProps}
+                />
+              </Col>
+            </Row>
+          )}
+        </DndSortable>
         <Row style={{ marginTop: 20 }}>
           <Col>
             <DashedButton
@@ -148,15 +185,19 @@ const TemplateSectionSettings = ({
 };
 
 const mapDispatchToProps = {
+  updateReportTemplate: updateReportTemplateRequest,
   addCase: addSectionCaseRequest,
   deleteSection: deleteTemplateSectionRequest,
+  reorderSectionCases: reorderSectionCasesRequest,
 };
 
 const withConnect = connect(null, mapDispatchToProps);
 
 TemplateSectionSettings.propTypes = {
+  updateReportTemplate: PropTypes.func,
   addCase: PropTypes.func,
   deleteSection: PropTypes.func,
+  reorderSectionCases: PropTypes.func,
   intl: PropTypes.shape(IntlShape),
 };
 

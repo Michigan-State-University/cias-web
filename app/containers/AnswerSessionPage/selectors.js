@@ -70,6 +70,21 @@ const makeSelectShowTextReadingControls = () =>
     (substate) => substate.showTextReadingControls,
   );
 
+const makeSelectVerifyPatientDataState = () =>
+  createSelector(
+    selectAnswerSessionPageDomain,
+    ({ verifyPatientDataLoading, verifyPatientDataError }) => ({
+      loading: verifyPatientDataLoading,
+      error: verifyPatientDataError,
+    }),
+  );
+
+const makeSelectHfhsPatientDetail = () =>
+  createSelector(
+    selectAnswerSessionPageDomain,
+    ({ hfhsPatientDetail }) => hfhsPatientDetail,
+  );
+
 export default makeSelectAnswerSessionPage;
 export {
   selectAnswerSessionPageDomain,
@@ -82,4 +97,6 @@ export {
   makeSelectInterventionStarted,
   makeSelectIsAnimationOngoing,
   makeSelectShowTextReadingControls,
+  makeSelectVerifyPatientDataState,
+  makeSelectHfhsPatientDetail,
 };

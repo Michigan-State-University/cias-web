@@ -28,6 +28,7 @@ const colors = {
   pistachio: '#8CBD00',
   burntSienna: '#F0684A',
   casper: '#ABBBD1',
+  surfieGreen: '#107969',
   selago: '#E3EEFB',
   electricViolet: '#B302FF',
   coral: '#FF7F50',
@@ -57,8 +58,9 @@ const colors = {
   amaranth: '#D83450',
   sonicSilver: '#6B707C',
   vermilion: '#D2371D',
-  aliceBlue: '#F1F4F9',
+  aliceBlue: '#F9FBFF',
   aliceBlueSaturated: '#F1F7FF',
+  hawkesBlue: '#F1F4F9',
   lightBlue: '#F4F8FF',
   electricPurple: '#B727EA',
   purplePlum: '#AC43D1',
@@ -86,7 +88,6 @@ const colors = {
   coolGrey: '#8B92A1',
   lightStealBlue: '#B3C1E1',
   beauBlue: '#CFDDEF',
-  slateGray: '#6D7485',
   lightDivider: '#EAF1FA',
   cinnabar: '#DD533C',
   cadetBlueCrayola: '#B3BAC7',
@@ -94,6 +95,10 @@ const colors = {
   azureishWhite: '#D4DFF7',
   stormGrey: '#707688',
   logan: '#9BA1B4',
+  chardonnay: '#FFC179',
+  slateGray: '#6D7485',
+  titanWhite: '#E9E5FF',
+  kleinBlue: '#5339F0',
 };
 
 const themeColors = {

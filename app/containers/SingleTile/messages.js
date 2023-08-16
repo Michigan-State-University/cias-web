@@ -93,9 +93,9 @@ export default defineMessages({
     id: `${scope}.catMhSettingsOption`,
     defaultMessage: 'CAT-MH™ Access',
   },
-  catMhSettingsModalTitle: {
-    id: `${scope}.catMhSettingsModalTitle`,
-    defaultMessage: 'Access to CAT-MH™',
+  thirdPartyToolsAccessModalTitle: {
+    id: `${scope}.thirdPartyToolsAccessModalTitle`,
+    defaultMessage: 'Access to 3rd party tools',
   },
   exportIntervention: {
     id: `${scope}.exportIntervention`,

@@ -134,7 +134,7 @@ const WrappedAccordion = ({
     openModal: openDeleteModal,
     Modal: DeleteModal,
     modalState: blockToDeleteIndex,
-  } = useModal({
+  } = useModal<number>({
     type: ModalType.ConfirmationModal,
     props: {
       description: formatMessage(messages.deleteBlockHeader),

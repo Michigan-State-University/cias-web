@@ -8,6 +8,7 @@ import React, { ReactNode, useCallback } from 'react';
 import { FormattedMessage } from 'react-intl';
 
 import ModalInfoIcon from 'assets/svg/modalInfo.svg';
+import ModalErrorIcon from 'assets/svg/error-square.svg';
 
 import Box from 'components/Box';
 import H1 from 'components/H1';
@@ -18,17 +19,19 @@ import Column from 'components/Column';
 import Icon from 'components/Icon';
 import Text from 'components/Text';
 
+import { fontSizes } from 'theme';
+
 import messages from './messages';
 import Modal from './Modal';
 import { MODAL_TITLE_ID } from './constants';
 import { IconType } from './types';
 import { ConfirmationModalButtonsContainer } from './styled';
 
-export type Props = {
+export type Props<T = boolean> = {
   visible: boolean;
   description: ReactNode;
   onClose: () => void;
-  confirmAction: () => void;
+  confirmAction: (modalState: Nullable<T | boolean>) => void;
   closeOnConfirm?: boolean;
   loading?: boolean;
   error?: string | object;
@@ -44,9 +47,11 @@ export type Props = {
   hideCloseButton?: boolean;
   hideCancelButton?: boolean;
   isMobile: boolean;
+  titleStyles: object;
+  modalState: Nullable<T | boolean>;
 } & Record<string, unknown>;
 
-const ConfirmationModal = ({
+const ConfirmationModal = <T,>({
   visible = false,
   description = <FormattedMessage {...messages.defaultDescription} />,
   onClose,
@@ -55,23 +60,25 @@ const ConfirmationModal = ({
   loading = false,
   error,
   content,
-  confirmationButtonColor = 'warning',
+  confirmationButtonColor = 'primary',
   confirmationButtonText,
   confirmationButtonStyles,
   cancelButtonText,
   cancelButtonStyles,
   contentStyles,
   contentContainerStyles,
-  icon,
+  icon = 'error',
   hideCloseButton,
   hideCancelButton,
   isMobile,
+  titleStyles,
+  modalState,
   ...modalStyles
-}: Props): JSX.Element => {
+}: Props<T>): JSX.Element => {
   const onConfirm = useCallback(() => {
-    confirmAction();
+    confirmAction(modalState);
     if (closeOnConfirm) onClose();
-  }, [confirmAction, closeOnConfirm, onClose]);
+  }, [confirmAction, closeOnConfirm, onClose, modalState]);
 
   if (!visible) return <></>;
 
@@ -79,6 +86,8 @@ const ConfirmationModal = ({
     switch (icon) {
       case 'info':
         return ModalInfoIcon;
+      case 'error':
+        return ModalErrorIcon;
       default:
         return '';
     }
@@ -90,19 +99,26 @@ const ConfirmationModal = ({
       onClose={onClose}
       {...modalStyles}
       hideCloseButton={hideCloseButton}
+      maxWidth={500}
+      pt={hideCloseButton ? 40 : 20}
+      pb={40}
     >
-      <Column px={!isMobile && 50} pd={30} {...contentContainerStyles}>
+      <Column px={!isMobile && 20} pd={30} mt={-10} {...contentContainerStyles}>
         {icon && (
           <Row justify="center" mb={32}>
             <Icon src={getIcon()} />
           </Row>
         )}
-        <H1 textAlign="center" id={MODAL_TITLE_ID}>
+        <H1 textAlign="center" id={MODAL_TITLE_ID} {...titleStyles}>
           {description}
         </H1>
         {content && (
-          <Box padded {...contentStyles}>
-            <Text textAlign="center" lineHeight="24px">
+          <Box py={16} {...contentStyles}>
+            <Text
+              textAlign="center"
+              lineHeight="24px"
+              fontSize={fontSizes.medium}
+            >
               {content}
             </Text>
           </Box>

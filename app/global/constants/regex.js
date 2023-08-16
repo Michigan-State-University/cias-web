@@ -1,5 +1,6 @@
 export const variableNameRegex = /^([a-zA-Z]|[0-9]+[a-zA-Z_]+)[a-zA-Z0-9_\b]*$/;
 export const variableNameInTextboxRegex = /^\.:.*:\.$/;
+export const hfhValueRegex = /^[^\s].*/;
 
 export const urlRegex = new RegExp(
   '^(https?:\\/\\/)?' + // protocol
@@ -29,9 +30,13 @@ export const naturalNumberRegex = /^[1-9][0-9]*$/;
 
 export const currencyRegex = /^[0-9]+\.?[0-9]{0,2}$/;
 
+export const zipCodeRegex = /^\d{5}(-\d{4})?$/;
+
 export const previewRegex =
   /(.*)\/interventions($|\/.*)\/sessions($|\/.*)\/preview($|\/.*)/;
 
 export const guestLogInRegex = /(.*)preview_session_users($|\/.*)/;
 
 export const unreservedURLCharactersRegex = /^[A-Za-z0-9-_.~]*$/;
+
+export const nameRegex = /^[^±!@£$%^&*_+§¡€#¢¶•ªº«\\/<>?:;|=.,[\]{}()0-9]+?$/;

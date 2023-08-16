@@ -9,18 +9,43 @@ import { Button } from 'components/Button';
 import messages from '../messages';
 import { SkipQuestionButton } from './SkipQuestionButton';
 
-export type ActionButtonsProps = {
-  renderSkipQuestionButton: boolean;
-  skipQuestionButtonDisabled: boolean;
-  onSkipQuestionClick: () => void;
-  renderContinueButton: boolean;
-  continueButtonDisabled: boolean;
-  continueButtonLoading: boolean;
-  onContinueClick: () => void;
+type SkipButtonProps =
+  | {
+      renderSkipQuestionButton: true;
+      onSkipQuestionClick: () => void;
+      skipQuestionButtonDisabled?: boolean;
+      skipButtonStyle?: Record<string, unknown>;
+    }
+  | {
+      renderSkipQuestionButton?: false;
+      onSkipQuestionClick?: undefined;
+      skipQuestionButtonDisabled?: undefined;
+      skipButtonStyle?: undefined;
+    };
+
+type ContinueButtonProps =
+  | {
+      renderContinueButton: true;
+      onContinueClick: () => void;
+      continueButtonDisabled?: boolean;
+      continueButtonLoading?: boolean;
+      continueButtonStyle?: Record<string, unknown>;
+    }
+  | {
+      renderContinueButton?: false;
+      onContinueClick?: undefined;
+      continueButtonDisabled?: undefined;
+      continueButtonLoading?: undefined;
+      continueButtonStyle?: undefined;
+    };
+
+type CommonProps = {
   containerStyle?: Record<string, unknown>;
-  skipButtonStyle?: Record<string, unknown>;
-  continueButtonStyle?: Record<string, unknown>;
 };
+
+export type ActionButtonsProps = SkipButtonProps &
+  ContinueButtonProps &
+  CommonProps;
 
 const Component = ({
   renderSkipQuestionButton,
@@ -36,11 +61,16 @@ const Component = ({
 }: ActionButtonsProps) => {
   const { formatMessage } = useIntl();
 
+  const handleSkipButtonClick = () =>
+    onSkipQuestionClick && onSkipQuestionClick();
+
+  const handleContinueButtonClick = () => onContinueClick && onContinueClick();
+
   return (
     <Row width="100%" my={20} justify="end" align="center" {...containerStyle}>
       {renderSkipQuestionButton && (
         <SkipQuestionButton
-          onClick={onSkipQuestionClick}
+          onClick={handleSkipButtonClick}
           disabled={skipQuestionButtonDisabled}
           {...skipButtonStyle}
         />
@@ -53,7 +83,7 @@ const Component = ({
           margin={20}
           width={elements.continueButtonWidth}
           loading={continueButtonLoading}
-          onClick={onContinueClick}
+          onClick={handleContinueButtonClick}
           title={formatMessage(messages.nextQuestion)}
           {...continueButtonStyle}
         />

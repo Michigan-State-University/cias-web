@@ -28,7 +28,7 @@ describe('changeEmail saga', () => {
   it('Check changeEmail generator success connection', () => {
     const apiResponse = apiUserResponse();
     apiResponse.data.email = payload.newEmail;
-    const successUser = mapCurrentUser(apiResponse.data);
+    const successUser = mapCurrentUser(apiResponse);
 
     return expectSaga(changeEmail, { payload })
       .withState(mockState)

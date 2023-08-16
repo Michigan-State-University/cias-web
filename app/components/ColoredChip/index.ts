@@ -1,5 +1,5 @@
 import { ColoredChip } from './ColoredChip';
-import { DoubleColoredChip } from './DoubleColoredChip';
+import { MultiColoredChip } from './MultiColoredChip';
 
-export { ColoredChip, DoubleColoredChip };
+export { ColoredChip, MultiColoredChip };
 export default ColoredChip;

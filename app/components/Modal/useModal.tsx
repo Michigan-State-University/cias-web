@@ -1,4 +1,4 @@
-import React, { useState, useCallback, ReactNode, useMemo } from 'react';
+import React, { FC, useCallback, useMemo, useState } from 'react';
 
 import isNullOrUndefined from 'utils/isNullOrUndefined';
 
@@ -8,27 +8,45 @@ import ConfirmationModal, {
   Props as ConfirmationModalComponentProps,
 } from './ConfirmationModal';
 
-type HookProps<T> = SpecificModalProps<T>;
+export type ModalContentRendererProps<ModalState, CloseData> = {
+  closeModal: (data?: CloseData) => void;
+  modalState: Nullable<ModalState>;
+};
 
-type SpecificModalProps<T> = ModalProps<T> | ConfirmationModalProps;
+export type ModalContentRenderer<ModalState, CloseData> = FC<
+  ModalContentRendererProps<ModalState, CloseData>
+>;
 
-export type ModalProps<T = boolean> = {
+export type ModalProps<ModalState = boolean, CloseData = ModalState> = {
   type: ModalType.Modal;
-  props: Omit<ModalComponentProps, 'children'>;
-  modalContentRenderer: (props: {
-    closeModal: () => void;
-    modalState: Nullable<T | boolean>;
-  }) => ReactNode;
+  props: Omit<ModalComponentProps, 'children' | 'onClose'> & {
+    onClose?: (data?: CloseData) => void;
+  };
+  modalContentRenderer: ModalContentRenderer<ModalState, CloseData>;
 };
 
-export type ConfirmationModalProps = {
+export type ConfirmationModalProps<ModalState = boolean> = {
   type: ModalType.ConfirmationModal;
-  props: Omit<ConfirmationModalComponentProps, 'children'>;
+  props: Omit<
+    ConfirmationModalComponentProps<ModalState>,
+    'children' | 'onClose' | 'modalState'
+  >;
 };
+
+export type HookProps<ModalState, CloseData> =
+  | ModalProps<ModalState, CloseData>
+  | ConfirmationModalProps;
 
 // MEMOIZE THE props OBJECT (HookProps['props']) BECAUSE OTHERWISE THERE WILL BE UNEXPECTED RERENDERS!
-export const useModal = <T,>({ type, props, ...restProps }: HookProps<T>) => {
-  const [modalState, setModalState] = useState<T | boolean>();
+export const useModal = <
+  ModalState extends object | string | number | boolean = boolean,
+  CloseData = ModalState,
+>({
+  type,
+  props,
+  ...restProps
+}: HookProps<ModalState, CloseData>) => {
+  const [modalState, setModalState] = useState<ModalState>();
 
   const isModalVisible = useMemo(
     () => !isNullOrUndefined(modalState),
@@ -36,13 +54,16 @@ export const useModal = <T,>({ type, props, ...restProps }: HookProps<T>) => {
   );
 
   const openModal = useCallback(
-    (state: T) => {
+    (state: ModalState) => {
       setModalState(state ?? true);
     },
     [setModalState],
   );
 
-  const closeModal = useCallback(() => {
+  const closeModal = useCallback((data?: CloseData) => {
+    if (type === ModalType.Modal && props.onClose) {
+      props.onClose(data);
+    }
     setModalState(undefined);
   }, []);
 
@@ -54,9 +75,6 @@ export const useModal = <T,>({ type, props, ...restProps }: HookProps<T>) => {
     [isModalVisible],
   );
 
-  // const memoizedProps = useDeepObjectMemo(props);
-  const memoizedProps = props;
-
   const renderModal = useCallback(() => {
     if (!isModalVisible) return <></>;
 
@@ -64,21 +82,25 @@ export const useModal = <T,>({ type, props, ...restProps }: HookProps<T>) => {
       case ModalType.ConfirmationModal:
         return (
           <ConfirmationModal
-            {...(memoizedProps as ConfirmationModalComponentProps)}
+            {...(props as ConfirmationModalComponentProps<ModalState>)}
             {...sharedProps}
+            modalState={modalState}
           />
         );
       case ModalType.Modal:
-        const { modalContentRenderer } = restProps as ModalProps<T>;
+        const { modalContentRenderer } = restProps as ModalProps<
+          ModalState,
+          CloseData
+        >;
         return (
-          <Modal {...(memoizedProps as ModalComponentProps)} {...sharedProps}>
+          <Modal {...(props as ModalComponentProps)} {...sharedProps}>
             {modalContentRenderer({ closeModal, modalState })}
           </Modal>
         );
       default:
         return null;
     }
-  }, [isModalVisible, memoizedProps]);
+  }, [isModalVisible, props]);
 
   return { modalState, openModal, closeModal, Modal: renderModal };
 };
