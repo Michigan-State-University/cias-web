@@ -6,13 +6,13 @@ import { Props as ConfirmationModalProps } from 'components/Modal/ConfirmationMo
 import messages from './messages';
 import { HenryFordBranchingInfoType } from './types';
 
-export const useHenryFordBranchingInfoModal = <T,>(
+export const useHenryFordBranchingInfoModal = (
   type: HenryFordBranchingInfoType,
-  confirmAction: ConfirmationModalProps<T>['confirmAction'],
+  confirmAction: ConfirmationModalProps['confirmAction'],
 ) => {
   const { formatMessage } = useIntl();
 
-  return useModal<T>({
+  return useModal({
     type: ModalType.ConfirmationModal,
     props: {
       description: formatMessage(messages.description),

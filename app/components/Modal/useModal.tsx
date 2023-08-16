@@ -25,10 +25,10 @@ export type ModalProps<ModalState = boolean, CloseData = ModalState> = {
   modalContentRenderer: ModalContentRenderer<ModalState, CloseData>;
 };
 
-export type ConfirmationModalProps<T = boolean> = {
+export type ConfirmationModalProps<ModalState = boolean> = {
   type: ModalType.ConfirmationModal;
   props: Omit<
-    ConfirmationModalComponentProps<T>,
+    ConfirmationModalComponentProps<ModalState>,
     'children' | 'onClose' | 'modalState'
   >;
 };
@@ -82,7 +82,7 @@ export const useModal = <
       case ModalType.ConfirmationModal:
         return (
           <ConfirmationModal
-            {...(props as ConfirmationModalComponentProps<T>)}
+            {...(props as ConfirmationModalComponentProps<ModalState>)}
             {...sharedProps}
             modalState={modalState}
           />

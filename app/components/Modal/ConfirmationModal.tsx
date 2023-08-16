@@ -27,7 +27,7 @@ import { MODAL_TITLE_ID } from './constants';
 import { IconType } from './types';
 import { ConfirmationModalButtonsContainer } from './styled';
 
-export type Props<T> = {
+export type Props<T = boolean> = {
   visible: boolean;
   description: ReactNode;
   onClose: () => void;
