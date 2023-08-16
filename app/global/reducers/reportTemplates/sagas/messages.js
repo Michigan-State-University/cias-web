@@ -9,6 +9,14 @@ import { defineMessages } from 'react-intl';
 export const scope = 'app.containers.ReportTemplates';
 
 export default defineMessages({
+  duplicateReportTemplateSuccess: {
+    id: `${scope}.duplicateReportTemplateSuccess`,
+    defaultMessage: 'Successfully duplicated the report template',
+  },
+  duplicateReportTemplateFailure: {
+    id: `${scope}.duplicateReportTemplateFailure`,
+    defaultMessage: 'Failed to duplicate the report template',
+  },
   addReportTemplateSuccess: {
     id: `${scope}.addReportTemplateSuccess`,
     defaultMessage: 'Successfully added the report template',

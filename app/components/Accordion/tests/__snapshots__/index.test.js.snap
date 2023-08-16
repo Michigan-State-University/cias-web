@@ -26,10 +26,33 @@ exports[`<Accordion /> Should render multiple elements and match the snapshot 1`
   -webkit-box-align: center;
   -ms-flex-align: center;
   align-items: center;
+  gap: 12px;
+  -webkit-flex: 1;
+  -ms-flex: 1;
+  flex: 1;
   color: unset;
 }
 
 .c5 {
+  width: auto;
+  height: auto;
+  display: block;
+  border-radius: 5px;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-align-content: center;
+  -ms-flex-line-pack: center;
+  align-content: center;
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  color: unset;
+}
+
+.c6 {
   width: auto;
   height: auto;
   display: block;
@@ -65,7 +88,7 @@ exports[`<Accordion /> Should render multiple elements and match the snapshot 1`
   transform: rotate(180deg);
 }
 
-.c7 .ReactCollapse--collapse {
+.c8 .ReactCollapse--collapse {
   -webkit-transition: height 480ms ease;
   transition: height 480ms ease;
 }
@@ -93,7 +116,7 @@ exports[`<Accordion /> Should render multiple elements and match the snapshot 1`
   align-items: center;
 }
 
-.c6 {
+.c7 {
   outline: none;
   border: none;
   background: transparent;
@@ -138,9 +161,14 @@ exports[`<Accordion /> Should render multiple elements and match the snapshot 1`
               <div
                 class="c2"
               >
-                Label0
                 <div
                   class="c4"
+                  display="flex"
+                >
+                  Label0
+                </div>
+                <div
+                  class="c5"
                   display="flex"
                 >
                   <img
@@ -151,11 +179,11 @@ exports[`<Accordion /> Should render multiple elements and match the snapshot 1`
               </div>
             </div>
             <div
-              class="c5"
+              class="c6"
             >
               <button
                 aria-label="Delete"
-                class="c6 "
+                class="c7 "
                 data-cy="accordion-element-delete-0"
                 data-testid="bin-Label0"
                 font-weight="bold"
@@ -169,7 +197,7 @@ exports[`<Accordion /> Should render multiple elements and match the snapshot 1`
             </div>
           </div>
           <div
-            class="c7"
+            class="c8"
           />
         </div>
       </div>
@@ -197,9 +225,14 @@ exports[`<Accordion /> Should render multiple elements and match the snapshot 1`
               <div
                 class="c2"
               >
-                Label1
                 <div
                   class="c4"
+                  display="flex"
+                >
+                  Label1
+                </div>
+                <div
+                  class="c5"
                   display="flex"
                 >
                   <img
@@ -210,11 +243,11 @@ exports[`<Accordion /> Should render multiple elements and match the snapshot 1`
               </div>
             </div>
             <div
-              class="c5"
+              class="c6"
             >
               <button
                 aria-label="Delete"
-                class="c6 "
+                class="c7 "
                 data-cy="accordion-element-delete-1"
                 data-testid="bin-Label1"
                 font-weight="bold"
@@ -228,7 +261,7 @@ exports[`<Accordion /> Should render multiple elements and match the snapshot 1`
             </div>
           </div>
           <div
-            class="c7"
+            class="c8"
           />
         </div>
       </div>
@@ -256,9 +289,14 @@ exports[`<Accordion /> Should render multiple elements and match the snapshot 1`
               <div
                 class="c2"
               >
-                Label2
                 <div
                   class="c4"
+                  display="flex"
+                >
+                  Label2
+                </div>
+                <div
+                  class="c5"
                   display="flex"
                 >
                   <img
@@ -269,11 +307,11 @@ exports[`<Accordion /> Should render multiple elements and match the snapshot 1`
               </div>
             </div>
             <div
-              class="c5"
+              class="c6"
             >
               <button
                 aria-label="Delete"
-                class="c6 "
+                class="c7 "
                 data-cy="accordion-element-delete-2"
                 data-testid="bin-Label2"
                 font-weight="bold"
@@ -287,7 +325,7 @@ exports[`<Accordion /> Should render multiple elements and match the snapshot 1`
             </div>
           </div>
           <div
-            class="c7"
+            class="c8"
           />
         </div>
       </div>
@@ -313,10 +351,33 @@ exports[`<Accordion /> Should render only one element and match the snapshot 1`]
   -webkit-box-align: center;
   -ms-flex-align: center;
   align-items: center;
+  gap: 12px;
+  -webkit-flex: 1;
+  -ms-flex: 1;
+  flex: 1;
   color: unset;
 }
 
 .c4 {
+  width: auto;
+  height: auto;
+  display: block;
+  border-radius: 5px;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-align-content: center;
+  -ms-flex-line-pack: center;
+  align-content: center;
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  color: unset;
+}
+
+.c5 {
   width: auto;
   height: auto;
   display: block;
@@ -352,7 +413,7 @@ exports[`<Accordion /> Should render only one element and match the snapshot 1`]
   transform: rotate(180deg);
 }
 
-.c6 .ReactCollapse--collapse {
+.c7 .ReactCollapse--collapse {
   -webkit-transition: height 480ms ease;
   transition: height 480ms ease;
 }
@@ -380,7 +441,7 @@ exports[`<Accordion /> Should render only one element and match the snapshot 1`]
   align-items: center;
 }
 
-.c5 {
+.c6 {
   outline: none;
   border: none;
   background: transparent;
@@ -410,9 +471,14 @@ exports[`<Accordion /> Should render only one element and match the snapshot 1`]
           <div
             class="c1"
           >
-            Label0
             <div
               class="c3"
+              display="flex"
+            >
+              Label0
+            </div>
+            <div
+              class="c4"
               display="flex"
             >
               <img
@@ -423,11 +489,11 @@ exports[`<Accordion /> Should render only one element and match the snapshot 1`]
           </div>
         </div>
         <div
-          class="c4"
+          class="c5"
         >
           <button
             aria-label="Delete"
-            class="c5 "
+            class="c6 "
             data-cy="accordion-element-delete-0"
             data-testid="bin-Label0"
             font-weight="bold"
@@ -441,7 +507,7 @@ exports[`<Accordion /> Should render only one element and match the snapshot 1`]
         </div>
       </div>
       <div
-        class="c6"
+        class="c7"
       />
     </div>
   </div>
@@ -474,10 +540,33 @@ exports[`<Accordion /> Should render with one element opened and match the snaps
   -webkit-box-align: center;
   -ms-flex-align: center;
   align-items: center;
+  gap: 12px;
+  -webkit-flex: 1;
+  -ms-flex: 1;
+  flex: 1;
   color: unset;
 }
 
 .c5 {
+  width: auto;
+  height: auto;
+  display: block;
+  border-radius: 5px;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-align-content: center;
+  -ms-flex-line-pack: center;
+  align-content: center;
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  color: unset;
+}
+
+.c6 {
   width: auto;
   height: auto;
   display: block;
@@ -513,7 +602,7 @@ exports[`<Accordion /> Should render with one element opened and match the snaps
   transform: rotate0deg);
 }
 
-.c8 {
+.c9 {
   border-radius: 5px;
   color: white;
   cursor: pointer;
@@ -526,7 +615,7 @@ exports[`<Accordion /> Should render with one element opened and match the snaps
   padding-left: 12px;
 }
 
-.c8 .animated-img {
+.c9 .animated-img {
   -webkit-transition: -webkit-transform 0.3s,height 4s;
   -webkit-transition: transform 0.3s,height 4s;
   transition: transform 0.3s,height 4s;
@@ -535,7 +624,7 @@ exports[`<Accordion /> Should render with one element opened and match the snaps
   transform: rotate(180deg);
 }
 
-.c7 .ReactCollapse--collapse {
+.c8 .ReactCollapse--collapse {
   -webkit-transition: height 480ms ease;
   transition: height 480ms ease;
 }
@@ -563,7 +652,7 @@ exports[`<Accordion /> Should render with one element opened and match the snaps
   align-items: center;
 }
 
-.c6 {
+.c7 {
   outline: none;
   border: none;
   background: transparent;
@@ -608,9 +697,14 @@ exports[`<Accordion /> Should render with one element opened and match the snaps
               <div
                 class="c2"
               >
-                Label0
                 <div
                   class="c4"
+                  display="flex"
+                >
+                  Label0
+                </div>
+                <div
+                  class="c5"
                   display="flex"
                 >
                   <img
@@ -621,11 +715,11 @@ exports[`<Accordion /> Should render with one element opened and match the snaps
               </div>
             </div>
             <div
-              class="c5"
+              class="c6"
             >
               <button
                 aria-label="Delete"
-                class="c6 "
+                class="c7 "
                 data-cy="accordion-element-delete-0"
                 data-testid="bin-Label0"
                 font-weight="bold"
@@ -639,7 +733,7 @@ exports[`<Accordion /> Should render with one element opened and match the snaps
             </div>
           </div>
           <div
-            class="c7"
+            class="c8"
           />
         </div>
       </div>
@@ -656,7 +750,7 @@ exports[`<Accordion /> Should render with one element opened and match the snaps
           >
             <div
               aria-describedby="rbd-hidden-text-2-hidden-text-10"
-              class="c8"
+              class="c9"
               data-rbd-drag-handle-context-id="2"
               data-rbd-drag-handle-draggable-id="accordion-1"
               draggable="false"
@@ -667,9 +761,14 @@ exports[`<Accordion /> Should render with one element opened and match the snaps
               <div
                 class="c2"
               >
-                Label1
                 <div
                   class="c4"
+                  display="flex"
+                >
+                  Label1
+                </div>
+                <div
+                  class="c5"
                   display="flex"
                 >
                   <img
@@ -680,11 +779,11 @@ exports[`<Accordion /> Should render with one element opened and match the snaps
               </div>
             </div>
             <div
-              class="c5"
+              class="c6"
             >
               <button
                 aria-label="Delete"
-                class="c6 "
+                class="c7 "
                 data-cy="accordion-element-delete-1"
                 data-testid="bin-Label1"
                 font-weight="bold"
@@ -698,7 +797,7 @@ exports[`<Accordion /> Should render with one element opened and match the snaps
             </div>
           </div>
           <div
-            class="c7"
+            class="c8"
           />
         </div>
       </div>
@@ -715,7 +814,7 @@ exports[`<Accordion /> Should render with one element opened and match the snaps
           >
             <div
               aria-describedby="rbd-hidden-text-2-hidden-text-10"
-              class="c8"
+              class="c9"
               data-rbd-drag-handle-context-id="2"
               data-rbd-drag-handle-draggable-id="accordion-2"
               draggable="false"
@@ -726,9 +825,14 @@ exports[`<Accordion /> Should render with one element opened and match the snaps
               <div
                 class="c2"
               >
-                Label2
                 <div
                   class="c4"
+                  display="flex"
+                >
+                  Label2
+                </div>
+                <div
+                  class="c5"
                   display="flex"
                 >
                   <img
@@ -739,11 +843,11 @@ exports[`<Accordion /> Should render with one element opened and match the snaps
               </div>
             </div>
             <div
-              class="c5"
+              class="c6"
             >
               <button
                 aria-label="Delete"
-                class="c6 "
+                class="c7 "
                 data-cy="accordion-element-delete-2"
                 data-testid="bin-Label2"
                 font-weight="bold"
@@ -757,7 +861,7 @@ exports[`<Accordion /> Should render with one element opened and match the snaps
             </div>
           </div>
           <div
-            class="c7"
+            class="c8"
           />
         </div>
       </div>

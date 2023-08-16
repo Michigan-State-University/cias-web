@@ -26,6 +26,7 @@ export interface ReportTemplateVariant {
   reportTemplateSectionId?: string;
   originalText?: ReportTemplateVariantOriginalText;
   imageUrl?: string;
+  position: number;
 }
 
 export interface ReportTemplateOriginalText {
@@ -43,4 +44,6 @@ export interface ReportTemplate {
   originalText: ReportTemplateOriginalText;
   sections: ReportTemplateSection[];
   variants: ReportTemplateVariant[];
+  isDuplicatedFromOtherSession: boolean;
+  duplicatedFromOtherSessionWarningDismissed: boolean;
 }

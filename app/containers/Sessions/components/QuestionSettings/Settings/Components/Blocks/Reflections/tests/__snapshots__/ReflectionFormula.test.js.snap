@@ -120,7 +120,24 @@ exports[`<ReflectionBlock /> Should render and match the snapshot 1`] = `
   color: unset;
 }
 
-.c17 {
+.c16 {
+  width: auto;
+  height: auto;
+  display: block;
+  border-radius: 5px;
+  width: 100%;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  margin-right: 9px;
+  -webkit-flex-direction: column;
+  -ms-flex-direction: column;
+  flex-direction: column;
+  color: unset;
+}
+
+.c18 {
   width: auto;
   height: auto;
   display: block;
@@ -184,26 +201,24 @@ exports[`<ReflectionBlock /> Should render and match the snapshot 1`] = `
   height: auto;
 }
 
-.c16 {
+.c17 {
   resize: none;
   padding: 12px;
   border: 1px solid #E9F1FB;
   border-radius: 5px;
-  margin-right: 9px;
-  width: 100%;
   height: auto;
   max-width: initial;
   background-color: transparent;
   border: 1px solid transparent;
 }
 
-.c16:focus {
+.c17:focus {
   box-shadow: none;
   outline: none;
   border: 1px solid #107969;
 }
 
-.c16:disabled {
+.c17:disabled {
   color: #ABBBD1;
 }
 
@@ -238,7 +253,7 @@ exports[`<ReflectionBlock /> Should render and match the snapshot 1`] = `
   width: 50px;
 }
 
-.c18 {
+.c19 {
   outline: none;
   border: none;
   background: transparent;
@@ -410,25 +425,31 @@ exports[`<ReflectionBlock /> Should render and match the snapshot 1`] = `
               class="c15"
               width="100%"
             >
-              <textarea
-                aria-label="Enter speech here..."
+              <div
                 class="c16"
-                data-cy="text-area"
-                height="auto"
-                placeholder="Enter speech here..."
-                rows="10"
-                type="multiline"
+                direction="column"
+                display="flex"
                 width="100%"
               >
-                1
-              </textarea>
+                <textarea
+                  aria-label="Enter speech here..."
+                  class="c17"
+                  data-cy="text-area"
+                  height="auto"
+                  placeholder="Enter speech here..."
+                  rows="10"
+                  type="multiline"
+                >
+                  1
+                </textarea>
+              </div>
             </div>
             <div
-              class="c17"
+              class="c18"
             >
               <button
                 aria-label="Play audio"
-                class="c18 "
+                class="c19 "
                 font-weight="bold"
                 title="Play audio"
                 type="button"

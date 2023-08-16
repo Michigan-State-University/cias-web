@@ -106,7 +106,24 @@ exports[`<BranchingLayout /> Should render and match the snapshot 1`] = `
   color: unset;
 }
 
-.c11 {
+.c10 {
+  width: auto;
+  height: auto;
+  display: block;
+  border-radius: 5px;
+  width: 100%;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  margin-right: 9px;
+  -webkit-flex-direction: column;
+  -ms-flex-direction: column;
+  flex-direction: column;
+  color: unset;
+}
+
+.c12 {
   width: auto;
   height: auto;
   display: block;
@@ -140,12 +157,11 @@ exports[`<BranchingLayout /> Should render and match the snapshot 1`] = `
   text-decoration: underline;
 }
 
-.c10 {
+.c11 {
   resize: none;
   padding: 12px;
   border: 1px solid #E9F1FB;
   border-radius: 5px;
-  margin-right: 9px;
   width: 100%;
   height: auto;
   max-width: initial;
@@ -153,17 +169,17 @@ exports[`<BranchingLayout /> Should render and match the snapshot 1`] = `
   border: 1px solid transparent;
 }
 
-.c10:focus {
+.c11:focus {
   box-shadow: none;
   outline: none;
   border: 1px solid #107969;
 }
 
-.c10:disabled {
+.c11:disabled {
   color: #ABBBD1;
 }
 
-.c12 {
+.c13 {
   height: 40px;
   background-color: #FFFFFF;
   border: 1px dashed #B0BAC9;
@@ -187,7 +203,7 @@ exports[`<BranchingLayout /> Should render and match the snapshot 1`] = `
   cursor: pointer;
 }
 
-.c12:hover {
+.c13:hover {
   background-color: #E9F1FB;
 }
 
@@ -251,19 +267,26 @@ exports[`<BranchingLayout /> Should render and match the snapshot 1`] = `
         class="c9"
         width="100%"
       >
-        <textarea
-          aria-label="Enter formula here... (You can use mathematical operators +, -, *, /)"
+        <div
           class="c10"
-          data-cy="text-area"
-          height="auto"
-          placeholder="Enter formula here... (You can use mathematical operators +, -, *, /)"
-          rows="5"
-          type="multiline"
+          direction="column"
+          display="flex"
           width="100%"
-        />
+        >
+          <textarea
+            aria-label="Enter formula here... (You can use mathematical operators +, -, *, /)"
+            class="c11"
+            data-cy="text-area"
+            height="auto"
+            placeholder="Enter formula here... (You can use mathematical operators +, -, *, /)"
+            rows="5"
+            type="multiline"
+            width="100%"
+          />
+        </div>
       </div>
       <div
-        class="c11 c12"
+        class="c12 c13"
       >
         + Add case
       </div>
