@@ -446,6 +446,14 @@ export default defineMessages({
     id: `${scope}.lastCsvDate`,
     defaultMessage: 'CSV last generated at: ',
   },
+  dontShowAgain: {
+    id: `${scope}.dontShowAgain`,
+    defaultMessage: `Don't show again`,
+  },
+  iUnderstand: {
+    id: `${scope}.iUnderstand`,
+    defaultMessage: 'I understand',
+  },
   sex: {
     [Sex.AMBIGUOUS]: {
       id: `${scope}.${Sex.AMBIGUOUS}`,

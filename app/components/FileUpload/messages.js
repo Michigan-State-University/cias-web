@@ -21,8 +21,12 @@ export default defineMessages({
     id: `${scope}.deleteFile`,
     defaultMessage: 'Delete file',
   },
-  [FileErrorCode.FILE_TOO_LARGE]: {
-    id: `${scope}.${FileErrorCode.FILE_TOO_LARGE}`,
-    defaultMessage: 'File cannot be larger than 5 MB',
+  fileTooLargeCustomValidation: {
+    id: `${scope}.fileTooLargeCustomValidation`,
+    defaultMessage: 'File cannot be larger than {maxSize}',
+  },
+  [FileErrorCode.PLACEHOLDER]: {
+    id: `${scope}.${FileErrorCode.PLACEHOLDER}`,
+    defaultMessage: '',
   },
 });

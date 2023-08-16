@@ -7,4 +7,8 @@ export default defineMessages({
     id: `${scope}.updateSectionCaseError`,
     defaultMessage: 'Cannot update report template section case',
   },
+  reorderSectionCasesError: {
+    id: `${scope}.reorderSectionCasesError`,
+    defaultMessage: 'Cannot reorder section cases',
+  },
 });
