@@ -16,9 +16,7 @@ export function* deleteAvatar() {
   const requestURL = `/v1/users/${user.id}/avatars`;
 
   try {
-    const {
-      data: { data },
-    } = yield call(axios.delete, requestURL);
+    const { data } = yield call(axios.delete, requestURL);
 
     const mappedUser = mapCurrentUser(data);
     yield call(LocalStorageService.updateState, { user: mappedUser });

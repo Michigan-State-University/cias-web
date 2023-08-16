@@ -2,8 +2,7 @@ import { takeLatest, put, select, call } from 'redux-saga/effects';
 import { toast } from 'react-toastify';
 import axios from 'axios';
 
-import { TeamBuilder } from 'models/Teams/TeamBuilder';
-import { mapCurrentUser } from 'utils/mapResponseObjects';
+import { jsonApiToObject } from 'utils/jsonApiMapper';
 import objectToSnakeCase from 'utils/objectToSnakeCase';
 import { formatMessage } from 'utils/intlOutsideReact';
 import { objectDifference } from 'utils/objectDifference';
@@ -26,22 +25,11 @@ function* editSingleTeam({ payload: { id, name, user: teamAdmin } }) {
     const patchDifference = objectDifference(oldTeam, newTeam);
 
     try {
-      const {
-        data: { data, included },
-      } = yield axios.patch(requestUrl, {
+      const { data } = yield axios.patch(requestUrl, {
         team: objectToSnakeCase(patchDifference),
       });
 
-      const mappedUsers = included.map((user) => mapCurrentUser(user));
-      const mappedData = new TeamBuilder()
-        .fromJson(data)
-        .withTeamAdmin(
-          mappedUsers.find(
-            ({ id: userId }) =>
-              userId === data.relationships?.team_admin?.data?.id,
-          ),
-        )
-        .build();
+      const mappedData = jsonApiToObject(data, 'team');
 
       yield put(editSingleTeamSuccess(mappedData));
     } catch (error) {

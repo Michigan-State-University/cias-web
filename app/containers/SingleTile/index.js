@@ -16,7 +16,7 @@ import FileShareIcon from 'assets/svg/file-share.svg';
 import CopyIcon from 'assets/svg/copy.svg';
 import AddAppIcon from 'assets/svg/app-add.svg';
 import TranslateIcon from 'assets/svg/translate.svg';
-import DocumentIcon from 'assets/svg/document.svg';
+import PadlockIcon from 'assets/svg/padlock.svg';
 import DownloadIcon from 'assets/svg/download-line.svg';
 import CollaborateIcon from 'assets/svg/collaborate-icon.svg';
 import ArchiveIcon from 'assets/svg/archive.svg';
@@ -46,9 +46,9 @@ import { useRoleManager } from 'models/User/RolesManager';
 import isNullOrUndefined from 'utils/isNullOrUndefined';
 
 import {
-  CatMhAccessModal,
   InterventionAssignOrganizationModal,
   INTERVENTION_ASSIGN_ORGANIZATION_MODAL_WIDTH,
+  useThirdPartyToolsAccessModal,
 } from 'containers/InterventionDetailsPage/components/Modals';
 import { useCollaboratorsModal } from 'containers/CollaboratorsModal';
 
@@ -60,6 +60,11 @@ import Modal, { ModalType, useModal } from 'components/Modal';
 import Row from 'components/Row';
 import Badge from 'components/Badge';
 import Loader from 'components/Loader';
+import {
+  useHenryFordBranchingInfoModal,
+  HenryFordBranchingInfoType,
+  InterventionHenryFordBranchingInfoAction,
+} from 'components/HenryFordBrachingInfoModal';
 
 import TranslateInterventionModal from 'containers/TranslateInterventionModal';
 import interventionDetailsPageSagas from 'containers/InterventionDetailsPage/saga';
@@ -103,6 +108,7 @@ const SingleTile = ({
     googleLanguageId,
     hasCollaborators,
     userId: interventionOwnerId,
+    hfhsAccess,
   } = tileData || {};
 
   const isCurrentUserInterventionOwner = interventionOwnerId === userId;
@@ -130,13 +136,9 @@ const SingleTile = ({
       confirmAction: handleArchiveIntervention,
     },
   });
-  const { openModal: openCatMhModal, Modal: CatMhModal } = useModal({
-    type: ModalType.Modal,
-    modalContentRenderer: (props) => <CatMhAccessModal {...props} />,
-    props: {
-      title: formatMessage(messages.catMhSettingsModalTitle),
-    },
-  });
+
+  const { openThirdPartyToolsAccessModal, ThirdPartyToolsModal } =
+    useThirdPartyToolsAccessModal();
 
   const shareExternally = (emails, ids) =>
     copyIntervention({ interventionId: id, emails, ids });
@@ -174,6 +176,48 @@ const SingleTile = ({
 
   const canEditCollaborators = isAdmin || isCurrentUserInterventionOwner;
 
+  const {
+    Modal: HenryFordBranchingInfoModal,
+    openModal: openHenryFordBranchingInfoModal,
+  } = useHenryFordBranchingInfoModal(
+    HenryFordBranchingInfoType.INTERVENTION,
+    (action) => {
+      switch (action) {
+        case InterventionHenryFordBranchingInfoAction.SHARE_EXTERNALLY: {
+          openShareExternallyModal();
+          break;
+        }
+        case InterventionHenryFordBranchingInfoAction.DUPLICATE_HERE: {
+          handleClone();
+          break;
+        }
+        default: {
+          break;
+        }
+      }
+    },
+  );
+
+  const onShareExternally = () => {
+    if (hfhsAccess) {
+      openHenryFordBranchingInfoModal(
+        InterventionHenryFordBranchingInfoAction.SHARE_EXTERNALLY,
+      );
+    } else {
+      openShareExternallyModal();
+    }
+  };
+
+  const onDuplicateHere = () => {
+    if (hfhsAccess) {
+      openHenryFordBranchingInfoModal(
+        InterventionHenryFordBranchingInfoAction.DUPLICATE_HERE,
+      );
+    } else {
+      handleClone();
+    }
+  };
+
   const options = [
     {
       icon: TranslateIcon,
@@ -183,15 +227,15 @@ const SingleTile = ({
     },
     {
       icon: FileShareIcon,
-      action: openShareExternallyModal,
+      action: onShareExternally,
       label: formatMessage(messages.shareExternally),
-      id: 'share externally',
+      id: InterventionHenryFordBranchingInfoAction.SHARE_EXTERNALLY,
     },
     {
-      id: 'duplicate',
+      id: InterventionHenryFordBranchingInfoAction.DUPLICATE_HERE,
       label: formatMessage(messages.duplicateHere),
       icon: CopyIcon,
-      action: handleClone,
+      action: onDuplicateHere,
     },
     {
       id: 'archive',
@@ -215,10 +259,10 @@ const SingleTile = ({
     ...(isAdmin
       ? [
           {
-            icon: DocumentIcon,
-            action: () => openCatMhModal(tileData),
-            label: formatMessage(messages.catMhSettingsModalTitle),
-            id: 'catMhAccess',
+            icon: PadlockIcon,
+            action: () => openThirdPartyToolsAccessModal(tileData),
+            label: formatMessage(messages.thirdPartyToolsAccessModalTitle),
+            id: 'thirdPartyToolsAccess',
             disabled: hasCollaborators,
           },
         ]
@@ -256,8 +300,9 @@ const SingleTile = ({
 
   return (
     <>
-      <CatMhModal />
+      <ThirdPartyToolsModal />
       <ArchiveModal />
+      <HenryFordBranchingInfoModal />
       <ShareExternallyModal />
       <Modal onClose={closeTranslateModal} visible={translateModalVisible}>
         <TranslateInterventionModal

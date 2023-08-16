@@ -1,4 +1,5 @@
 import React, { ComponentProps, FunctionComponent, ReactNode } from 'react';
+import isNil from 'lodash/isNil';
 
 // @ts-ignore
 import styled from 'styled-components';
@@ -8,7 +9,7 @@ import { colors } from 'theme';
 import { ColoredChip } from './ColoredChip';
 
 // @ts-ignore
-const DoubleColoredChipContainer: FunctionComponent = styled.div`
+const MultiColoredChipContainer: FunctionComponent = styled.div`
   display: flex;
 `;
 
@@ -27,21 +28,37 @@ const RightChip: FunctionComponent<ComponentProps<typeof ColoredChip>> = styled(
   border-radius: 0 4px 4px 0;
 `;
 
-type DoubleColoredChipProps = {
+// @ts-ignore
+const MiddleChip: FunctionComponent<
+  ComponentProps<typeof ColoredChip>
+  // @ts-ignore
+> = styled(ColoredChip)`
+  border-radius: 0;
+  border-right: 1px solid ${colors.botticelli};
+`;
+
+type MultiColoredChipProps = {
   leftChipColor: string;
   leftChipContent: ReactNode;
   rightChipColor: string;
   rightChipContent: ReactNode;
+  middleChipColor?: string;
+  middleChipContent?: ReactNode;
 };
 
-export const DoubleColoredChip = ({
+export const MultiColoredChip = ({
   leftChipColor,
   leftChipContent,
   rightChipColor,
   rightChipContent,
-}: DoubleColoredChipProps): JSX.Element => (
-  <DoubleColoredChipContainer>
+  middleChipColor,
+  middleChipContent,
+}: MultiColoredChipProps): JSX.Element => (
+  <MultiColoredChipContainer>
     <LeftChip color={leftChipColor}>{leftChipContent}</LeftChip>
+    {middleChipColor && !isNil(middleChipContent) && (
+      <MiddleChip color={middleChipColor}>{middleChipContent}</MiddleChip>
+    )}
     <RightChip color={rightChipColor}>{rightChipContent}</RightChip>
-  </DoubleColoredChipContainer>
+  </MultiColoredChipContainer>
 );

@@ -8,7 +8,7 @@ import Box from 'components/Box';
 type Props = {
   emptyWidth: number;
   value: string;
-};
+} & Record<string, any>;
 
 const FlexibleWidthApprovableInput = ({
   emptyWidth,

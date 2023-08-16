@@ -205,6 +205,7 @@ const ReflectionBlock = ({
           <Box mt={15}>{formatMessage(messages.selectActionPosition)}</Box>
           <Box mt={15}>
             <Select
+              // @ts-ignore
               selectProps={{
                 isDisabled: disabled,
                 options: feedbackOptions,
@@ -235,6 +236,7 @@ const ReflectionBlock = ({
           <Box mt={15}>{formatMessage(messages.speechAnimation)}</Box>
           <Box mt={15}>
             <Select
+              // @ts-ignore
               selectProps={{
                 isDisabled: disabled,
                 options: selectOptions,

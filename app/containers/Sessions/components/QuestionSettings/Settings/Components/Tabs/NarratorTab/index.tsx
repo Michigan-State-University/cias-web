@@ -285,7 +285,7 @@ const NarratorTab = ({
         <FormattedMessage {...messages.blockRemovalConfirmationDescription} />
         <UL>
           {getRemovedBlockForSetting(confirmationOption).map((blockType) => (
-            <LI key={blockType}>
+            <LI key={blockType} inside>
               {/* @ts-ignore */}
               <FormattedMessage {...globalMessages.blockTypes[blockType]} />
             </LI>

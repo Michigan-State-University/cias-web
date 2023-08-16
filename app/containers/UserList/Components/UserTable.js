@@ -8,7 +8,7 @@ import { ConfirmationModal } from 'components/Modal';
 import H1 from 'components/H1';
 import Text from 'components/Text';
 import { TableLoading } from 'components/Table';
-import { boxShadows } from 'theme';
+import { boxShadows, fontSizes } from 'theme';
 import { ternary } from 'utils/ternary';
 
 import { RemoveFromTeamModalContext } from 'containers/UserList/Components/utils';
@@ -63,10 +63,15 @@ const UserTable = ({
   );
   const modalContent = (
     <>
-      <Text textAlign="center" fontWeight="bold" data-private>
+      <Text
+        textAlign="center"
+        fontWeight="bold"
+        data-private
+        fontSize={fontSizes.medium}
+      >
         {pickedUser.fullName}
       </Text>
-      <Text textAlign="center" data-private>
+      <Text textAlign="center" data-private fontSize={fontSizes.medium}>
         {pickedUser.email}
       </Text>
     </>
@@ -74,10 +79,15 @@ const UserTable = ({
 
   const userToRemoveModalContent = (
     <>
-      <Text textAlign="center" fontWeight="bold" data-private>
+      <Text
+        textAlign="center"
+        fontWeight="bold"
+        data-private
+        fontSize={fontSizes.medium}
+      >
         {userToRemove.fullName}
       </Text>
-      <Text textAlign="center" data-private>
+      <Text textAlign="center" data-private fontSize={fontSizes.medium}>
         {userToRemove.email}
       </Text>
     </>

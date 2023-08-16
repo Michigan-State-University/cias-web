@@ -25,7 +25,7 @@ import ArchiveIcon from 'assets/svg/archive.svg';
 import GearIcon from 'assets/svg/gear-wo-background.svg';
 import AddAppIcon from 'assets/svg/app-add.svg';
 import TranslateIcon from 'assets/svg/translate.svg';
-import DocumentIcon from 'assets/svg/document.svg';
+import PadlockIcon from 'assets/svg/padlock.svg';
 import DownloadIcon from 'assets/svg/download-line.svg';
 import CollaborateIcon from 'assets/svg/collaborate-icon.svg';
 
@@ -101,6 +101,11 @@ import AppContainer from 'components/Container';
 import Icon from 'components/Icon';
 import Tooltip from 'components/Tooltip';
 import { HelpIconTooltip } from 'components/HelpIconTooltip';
+import {
+  useHenryFordBranchingInfoModal,
+  HenryFordBranchingInfoType,
+  InterventionHenryFordBranchingInfoAction,
+} from 'components/HenryFordBrachingInfoModal';
 
 import { useCollaboratorsModal } from 'containers/CollaboratorsModal';
 
@@ -110,9 +115,9 @@ import interventionDetailsPageSagas from './saga';
 import SessionCreateButton from './components/SessionCreateButton/index';
 import SessionListItem from './components/SessionListItem';
 import {
-  CatMhAccessModal,
   InterventionAssignOrganizationModal,
   InterventionSettingsModal,
+  useThirdPartyToolsAccessModal,
   INTERVENTION_ASSIGN_ORGANIZATION_MODAL_WIDTH,
 } from './components/Modals';
 import messages from './messages';
@@ -173,6 +178,7 @@ export function InterventionDetailsPage({
     licenseType,
     type,
     userId,
+    hfhsAccess,
   } = intervention || {};
 
   const testsLeft = catMhPool - createdCatMhSessionCount;
@@ -221,13 +227,8 @@ export function InterventionDetailsPage({
     },
   });
 
-  const { openModal: openCatMhModal, Modal: CatMhModal } = useModal({
-    type: ModalType.Modal,
-    modalContentRenderer: (props) => <CatMhAccessModal {...props} />,
-    props: {
-      title: formatMessage(messages.catMhSettingsModalTitle),
-    },
-  });
+  const { openThirdPartyToolsAccessModal, ThirdPartyToolsModal } =
+    useThirdPartyToolsAccessModal();
 
   const {
     openModal: openInterventionInviteModal,
@@ -257,6 +258,48 @@ export function InterventionDetailsPage({
       userId,
     );
 
+  const {
+    Modal: HenryFordBranchingInfoModal,
+    openModal: openHenryFordBranchingInfoModal,
+  } = useHenryFordBranchingInfoModal(
+    HenryFordBranchingInfoType.INTERVENTION,
+    (action) => {
+      switch (action) {
+        case InterventionHenryFordBranchingInfoAction.SHARE_EXTERNALLY: {
+          openShareExternallyModal();
+          break;
+        }
+        case InterventionHenryFordBranchingInfoAction.DUPLICATE_HERE: {
+          handleCopyIntervention();
+          break;
+        }
+        default: {
+          break;
+        }
+      }
+    },
+  );
+
+  const onShareExternally = () => {
+    if (hfhsAccess) {
+      openHenryFordBranchingInfoModal(
+        InterventionHenryFordBranchingInfoAction.SHARE_EXTERNALLY,
+      );
+    } else {
+      openShareExternallyModal();
+    }
+  };
+
+  const onDuplicateHere = () => {
+    if (hfhsAccess) {
+      openHenryFordBranchingInfoModal(
+        InterventionHenryFordBranchingInfoAction.DUPLICATE_HERE,
+      );
+    } else {
+      handleCopyIntervention();
+    }
+  };
+
   const canCreateCatSession = useMemo(
     () => !isAccessRevoked,
     [isAccessRevoked],
@@ -275,17 +318,17 @@ export function InterventionDetailsPage({
       color: colors.bluewood,
     },
     {
-      id: 'share externally',
+      id: InterventionHenryFordBranchingInfoAction.SHARE_EXTERNALLY,
       label: formatMessage(messages.shareExternally),
       icon: FileShareIcon,
-      action: openShareExternallyModal,
+      action: onShareExternally,
       color: colors.bluewood,
     },
     {
-      id: 'duplicate here',
+      id: InterventionHenryFordBranchingInfoAction.DUPLICATE_HERE,
       label: formatMessage(messages.duplicateHere),
       icon: CopyIcon,
-      action: handleCopyIntervention,
+      action: onDuplicateHere,
       color: colors.bluewood,
     },
     {
@@ -310,10 +353,10 @@ export function InterventionDetailsPage({
     ...(isAdmin
       ? [
           {
-            icon: DocumentIcon,
-            action: () => openCatMhModal(intervention),
-            label: formatMessage(messages.catMhSettingsModalTitle),
-            id: 'catMhAccess',
+            icon: PadlockIcon,
+            action: () => openThirdPartyToolsAccessModal(intervention),
+            label: formatMessage(messages.thirdPartyToolsAccessModalTitle),
+            id: 'thirdPartyToolsAccess',
             disabled: !canCurrentUserMakeChanges,
           },
         ]
@@ -450,6 +493,7 @@ export function InterventionDetailsPage({
                         nextSessionName={nextSession ? nextSession.name : null}
                         status={status}
                         interventionType={type}
+                        hfhsAccess={hfhsAccess}
                       />
                     </Row>
                   );
@@ -483,7 +527,8 @@ export function InterventionDetailsPage({
             width="100%"
           >
             <ArchiveModal />
-            <CatMhModal />
+            <ThirdPartyToolsModal />
+            <HenryFordBranchingInfoModal />
             <ConfirmationModal
               visible={!isNullOrUndefined(deleteConfirmationSessionId)}
               onClose={() => setDeleteConfirmationSessionId(null)}

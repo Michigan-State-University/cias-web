@@ -73,6 +73,7 @@ const SingleAnimationRow = ({
       </TD>
       <TD py={8} px={16}>
         <Select
+          // @ts-ignore
           selectProps={{
             options: selectOptions,
             value: selectedOption,

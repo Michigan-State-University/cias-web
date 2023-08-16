@@ -5,4 +5,7 @@ export {
   INTERVENTION_ASSIGN_ORGANIZATION_MODAL_WIDTH,
 } from './InterventionAssignOrganizationModal';
 
-export { CatMhAccessModal } from './CatMhAccessModal';
+export {
+  ThirdPartyToolsAccessModal,
+  useThirdPartyToolsAccessModal,
+} from './ThirdPartyToolsAccessModal';

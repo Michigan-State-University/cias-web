@@ -60,11 +60,17 @@ export interface GridAnswerData extends VariableAnswerData<string> {
   };
 }
 
+export interface HenryFordQuestionAnswerData
+  extends IndexedVariableAnswerData<string> {
+  hfhValue: string;
+}
+
 export type AnswerDataType =
   | VariableAnswerData
   | IndexedVariableAnswerData
   | ThirdPartyReportAnswerData
-  | GridAnswerData;
+  | GridAnswerData
+  | HenryFordQuestionAnswerData;
 
 // answer body
 
@@ -160,6 +166,12 @@ export type PhoneAnswer = GenericAnswer<
   VariableAnswerData<PhoneAnswerValue | ''>
 >;
 
+export type HenryFordQuestionAnswer = GenericAnswer<
+  AnswerType.HENRY_FORD,
+  // value is an empty string if question is skipped
+  HenryFordQuestionAnswerData
+>;
+
 export type Answer =
   | SingleAnswer
   | MultiAnswer
@@ -175,4 +187,5 @@ export type Answer =
   | FeedbackAnswer
   | ParticipantReportAnswer
   | ThirdPartyReportAnswer
-  | PhoneAnswer;
+  | PhoneAnswer
+  | HenryFordQuestionAnswer;

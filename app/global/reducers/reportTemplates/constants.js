@@ -118,6 +118,7 @@ export const SELECT_TEMPLATE_SECTION =
 export const ReportFor = {
   participant: 'participant',
   thirdParty: 'third_party',
+  henryFordHealth: 'henry_ford_health',
 };
 
 export const REORDER_TEMPLATE_SECTIONS_REQUEST =

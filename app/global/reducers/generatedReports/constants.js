@@ -15,8 +15,13 @@ export const MARK_REPORT_DOWNLOADED_ERROR =
 
 export const PARTICIPANTS = ReportFor.participant;
 export const THIRD_PARTY = ReportFor.thirdParty;
+export const HENRY_FORD_HEALTH = ReportFor.henryFordHealth;
 
-export const filterOptions = [PARTICIPANTS, THIRD_PARTY];
+export const filterOptions = (hfhsAccess) => [
+  PARTICIPANTS,
+  THIRD_PARTY,
+  ...(hfhsAccess ? [HENRY_FORD_HEALTH] : []),
+];
 
 export const SORT_BY_NEWEST = 'desc';
 export const SORT_BY_LATEST = 'asc';

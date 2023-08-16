@@ -36,6 +36,10 @@ import {
   FETCH_PREVIOUS_QUESTION_REQUEST,
   FETCH_PREVIOUS_QUESTION_SUCCESS,
   FETCH_PREVIOUS_QUESTION_ERROR,
+  VERIFY_PATIENT_DATA_REQUEST,
+  VERIFY_PATIENT_DATA_SUCCESS,
+  VERIFY_PATIENT_DATA_ERROR,
+  SET_HFHS_PATIENT_DETAIL,
 } from './constants';
 
 const getEmptyFeedbackScreenSettings = () => ({
@@ -71,6 +75,9 @@ export const initialState = {
   showTextReadingControls: false,
   fetchPreviousQuestionLoading: false,
   fetchPreviousQuestionError: null,
+  verifyPatientDataLoading: false,
+  verifyPatientDataError: null,
+  hfhsPatientDetail: null,
 };
 
 /* eslint-disable default-case, no-param-reassign */
@@ -260,6 +267,26 @@ const AnswerSessionPageReducer = (state = initialState, { payload, type }) =>
       case FETCH_PREVIOUS_QUESTION_ERROR: {
         draft.fetchPreviousQuestionError = payload.error;
         draft.fetchPreviousQuestionLoading = false;
+        break;
+      }
+
+      case VERIFY_PATIENT_DATA_REQUEST: {
+        draft.verifyPatientDataLoading = true;
+        break;
+      }
+      case VERIFY_PATIENT_DATA_SUCCESS: {
+        draft.verifyPatientDataLoading = false;
+        draft.verifyPatientDataError = null;
+        break;
+      }
+      case VERIFY_PATIENT_DATA_ERROR: {
+        draft.verifyPatientDataLoading = false;
+        draft.verifyPatientDataError = payload.error;
+        break;
+      }
+
+      case SET_HFHS_PATIENT_DETAIL: {
+        draft.hfhsPatientDetail = payload.hfhsPatientDetail;
         break;
       }
     }

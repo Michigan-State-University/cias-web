@@ -79,7 +79,16 @@ exports[`<AnswerSessionPage /> Should render and match the snapshot 1`] = `
   color: unset;
 }
 
-.c57 {
+.c53 {
+  width: auto;
+  height: auto;
+  display: block;
+  border-radius: 5px;
+  cursor: pointer;
+  color: unset;
+}
+
+.c58 {
   width: auto;
   height: auto;
   display: block;
@@ -173,7 +182,7 @@ exports[`<AnswerSessionPage /> Should render and match the snapshot 1`] = `
   margin-right: 8px;
 }
 
-.c53 {
+.c54 {
   width: auto;
   height: auto;
   -webkit-transition: -webkit-transform 0.2s;
@@ -455,7 +464,7 @@ exports[`<AnswerSessionPage /> Should render and match the snapshot 1`] = `
   margin: 0px;
 }
 
-.c55 {
+.c56 {
   padding: 12px;
   border-style: solid;
   border-width: 1px;
@@ -466,17 +475,17 @@ exports[`<AnswerSessionPage /> Should render and match the snapshot 1`] = `
   color: #2F3850;
 }
 
-.c55:focus {
+.c56:focus {
   box-shadow: none;
   outline: none;
   border-color: #107969;
 }
 
-.c55:disabled {
+.c56:disabled {
   color: #ABBBD1;
 }
 
-.c54 {
+.c55 {
   display: -webkit-box;
   display: -webkit-flex;
   display: -ms-flexbox;
@@ -488,7 +497,7 @@ exports[`<AnswerSessionPage /> Should render and match the snapshot 1`] = `
   position: relative;
 }
 
-.c56 {
+.c57 {
   position: absolute;
   left: 10px;
   top: 10px;
@@ -1189,7 +1198,8 @@ exports[`<AnswerSessionPage /> Should render and match the snapshot 1`] = `
                       style="box-sizing: border-box; min-height: 1px; position: relative; padding-left: 15px; padding-right: 15px; width: 100%; flex-basis: 0px; flex-grow: 1; flex-shrink: 0; max-width: 100%; margin-left: 0%;"
                     >
                       <div
-                        class="c49"
+                        class="c53"
+                        cursor="pointer"
                       >
                         <div
                           class=" css-2b097c-container"
@@ -1207,7 +1217,7 @@ exports[`<AnswerSessionPage /> Should render and match the snapshot 1`] = `
                               class=" css-g1d714-ValueContainer"
                             >
                               <div
-                                class=" css-q5ew0g-placeholder"
+                                class=" css-1jyq7ds-placeholder"
                               >
                                 All interventions
                               </div>
@@ -1245,7 +1255,7 @@ exports[`<AnswerSessionPage /> Should render and match the snapshot 1`] = `
                               >
                                 <img
                                   alt="arrow"
-                                  class="c53"
+                                  class="c54"
                                   src="IMAGE_MOCK"
                                   transform=""
                                 />
@@ -1268,7 +1278,8 @@ exports[`<AnswerSessionPage /> Should render and match the snapshot 1`] = `
                       style="box-sizing: border-box; min-height: 1px; position: relative; padding-left: 15px; padding-right: 15px; width: 100%; flex-basis: 0px; flex-grow: 1; flex-shrink: 0; max-width: 100%; margin-left: 0%;"
                     >
                       <div
-                        class="c49"
+                        class="c53"
+                        cursor="pointer"
                       >
                         <div
                           class=" css-2b097c-container"
@@ -1386,7 +1397,7 @@ exports[`<AnswerSessionPage /> Should render and match the snapshot 1`] = `
                               >
                                 <img
                                   alt="arrow"
-                                  class="c53"
+                                  class="c54"
                                   src="IMAGE_MOCK"
                                   transform=""
                                 />
@@ -1408,17 +1419,17 @@ exports[`<AnswerSessionPage /> Should render and match the snapshot 1`] = `
                       style="box-sizing: border-box; min-height: 1px; position: relative; padding-left: 15px; padding-right: 15px; width: 100%; flex-basis: 0px; flex-grow: 1; flex-shrink: 0; max-width: 100%; margin-left: 0%;"
                     >
                       <div
-                        class="c54"
+                        class="c55"
                       >
                         <input
                           aria-label="Filter Interventions by name"
-                          class="c55"
+                          class="c56"
                           placeholder="Filter by name"
                           type="text"
                         />
                         <img
                           alt="search"
-                          class="c56"
+                          class="c57"
                           src="IMAGE_MOCK"
                         />
                         
@@ -1432,7 +1443,7 @@ exports[`<AnswerSessionPage /> Should render and match the snapshot 1`] = `
               />
             </div>
             <div
-              class="c57"
+              class="c58"
             >
               <div
                 class="virtual-grid-auto-sizer"
