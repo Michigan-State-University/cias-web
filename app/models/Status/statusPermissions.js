@@ -18,7 +18,7 @@ const ALLOWED_ENABLE_CHAT = [draft, published];
 
 const ALLOWED_INTERVENTION_TYPE_EDIT = [draft];
 
-const ALLOWED_MANAGE_COLLECTED_DATA = [closed, archived];
+const ALLOWED_CLEAR_INTERVENTION_DATA = [closed, archived];
 
 export const canEdit = (interventionStatus) =>
   ALLOWED_EDIT.includes(interventionStatus);
@@ -47,5 +47,5 @@ export const canEditInterventionType = (interventionStatus) =>
 export const canEnableChat = (interventionStatus) =>
   ALLOWED_ENABLE_CHAT.includes(interventionStatus);
 
-export const canManageCollectedData = (interventionStatus) =>
-  ALLOWED_MANAGE_COLLECTED_DATA.includes(interventionStatus);
+export const canClearInterventionData = (interventionStatus) =>
+  ALLOWED_CLEAR_INTERVENTION_DATA.includes(interventionStatus);

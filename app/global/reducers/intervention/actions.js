@@ -103,6 +103,9 @@ import {
   FETCH_CURRENT_USER_COLLABORATOR_DATA_REQUEST,
   FETCH_CURRENT_USER_COLLABORATOR_DATA_SUCCESS,
   FETCH_CURRENT_USER_COLLABORATOR_DATA_ERROR,
+  CLEAR_INTERVENTION_DATA_REQUEST,
+  CLEAR_INTERVENTION_DATA_SUCCESS,
+  CLEAR_INTERVENTION_DATA_ERROR,
 } from './constants';
 
 export const fetchInterventionRequest = (id, showLoader = false) =>
@@ -431,3 +434,12 @@ export const refreshInterventionData = (interventionId, forCurrentEditorToo) =>
   });
 
 export const resetReducer = () => actionBuilder(RESET_REDUCER, {});
+
+export const clearInterventionDataRequest = (interventionId) =>
+  actionBuilder(CLEAR_INTERVENTION_DATA_REQUEST, {
+    interventionId,
+  });
+export const clearInterventionDataSuccess = () =>
+  actionBuilder(CLEAR_INTERVENTION_DATA_SUCCESS, {});
+export const clearInterventionDataError = () =>
+  actionBuilder(CLEAR_INTERVENTION_DATA_ERROR, {});

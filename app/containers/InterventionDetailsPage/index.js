@@ -86,7 +86,7 @@ import {
   ShareExternallyLevel,
   useShareExternallyModal,
 } from 'containers/ShareExternallyModal';
-import { useManageCollectedData } from 'containers/ManageCollectedData';
+import { useClearInterventionData } from 'containers/ClearInterventionData';
 
 import Modal, {
   ConfirmationModal,
@@ -267,8 +267,8 @@ export function InterventionDetailsPage({
 
   const handleExportIntervention = () => exportIntervention(id);
 
-  const { ManageCollectedDataOption, ManageCollectedDataModals } =
-    useManageCollectedData(status);
+  const { ClearInterventionDataOption, ClearInterventionDataModals } =
+    useClearInterventionData(status, id);
 
   const options = [
     {
@@ -339,7 +339,7 @@ export function InterventionDetailsPage({
           },
         ]
       : []),
-    ...(isCurrentUserInterventionOwner ? [ManageCollectedDataOption] : []),
+    ...(isCurrentUserInterventionOwner ? [ClearInterventionDataOption] : []),
   ];
 
   useLayoutEffect(() => {
@@ -551,7 +551,7 @@ export function InterventionDetailsPage({
             </Modal>
 
             <CollaboratorsModal />
-            {ManageCollectedDataModals}
+            {ClearInterventionDataModals}
 
             <Header
               name={name}
