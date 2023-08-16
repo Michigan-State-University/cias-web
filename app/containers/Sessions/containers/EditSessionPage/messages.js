@@ -57,8 +57,8 @@ export default defineMessages({
     id: `${scope}.duplicateInternallyModalTitle`,
     defaultMessage: 'Select a place to paste',
   },
-  modalTitle: {
-    id: `${scope}.modalTitle`,
+  shareExternallyModalTitle: {
+    id: `${scope}.shareExternallyModalTitle`,
     defaultMessage: 'Share externally',
   },
   duplicateGroup: {

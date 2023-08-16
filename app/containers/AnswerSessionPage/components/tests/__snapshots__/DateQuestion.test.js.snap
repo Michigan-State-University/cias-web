@@ -108,6 +108,10 @@ exports[`<DateQuestion /> Should render and match the snapshot 1`] = `
   background-color: #E9F1FB;
 }
 
+.c5 .react-datepicker-wrapper {
+  width: 100%;
+}
+
 .c0 {
   width: auto;
   height: auto;

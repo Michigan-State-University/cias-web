@@ -19,9 +19,7 @@ export function* deleteOtherUserAvatar({ payload: { userId } }) {
   const requestURL = `/v1/users/${userId}/avatars`;
 
   try {
-    const {
-      data: { data },
-    } = yield call(axios.delete, requestURL);
+    const { data } = yield call(axios.delete, requestURL);
 
     const mappedUser = mapCurrentUser(data);
     yield put(deleteOtherUserAvatarSuccess(mappedUser));

@@ -49,6 +49,15 @@ const VariablesAndScores = ({
             key={`session-map-question-details-variable-${index}`}
           />
         ));
+      case QuestionTypes.HENRY_FORD_QUESTION:
+        return question.body.data.map(({ value, hfh_value }, index) => (
+          <VariableAndScoreChip
+            variable={question.body.variable.name}
+            score={value}
+            key={`session-map-question-details-variable-${index}`}
+            hsValue={hfh_value || '-'}
+          />
+        ));
       case QuestionTypes.SLIDER:
         return question.body.data.map((_, index) => (
           <VariableAndScoreChip

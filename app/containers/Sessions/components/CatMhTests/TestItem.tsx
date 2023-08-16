@@ -12,7 +12,7 @@ import Text, { Comment } from 'components/Text';
 import Collapse from 'components/Collapse';
 import Row from 'components/Row';
 import Divider from 'components/Divider';
-import { DoubleColoredChip } from 'components/ColoredChip';
+import { MultiColoredChip } from 'components/ColoredChip';
 import Tooltip from 'components/Tooltip';
 import Circle from 'components/Circle';
 
@@ -78,7 +78,7 @@ const TestItem = ({
           {catMhTestAttributes.map(
             ({ id: attributeId, name: attributeName, range }) => (
               <Box padding={3} key={attributeId} display="inline-flex">
-                <DoubleColoredChip
+                <MultiColoredChip
                   leftChipColor={colors.jungleGreen}
                   leftChipContent={
                     <Box display="flex">

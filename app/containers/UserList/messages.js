@@ -47,7 +47,7 @@ export default defineMessages({
   },
   deactivateAccountConfirm: {
     id: `${scope}.deactivateAccountConfirm`,
-    defaultMessage: 'Are you sure you want to deactivate this account',
+    defaultMessage: 'Are you sure you want to deactivate this account?',
   },
   deleteFromTeamConfirm: {
     id: `${scope}.deleteFromTeamConfirm`,
@@ -56,7 +56,7 @@ export default defineMessages({
   },
   activateAccountConfirm: {
     id: `${scope}.activateAccountConfirm`,
-    defaultMessage: 'Are you sure you want to activate this account',
+    defaultMessage: 'Are you sure you want to activate this account?',
   },
   deactivateAccount: {
     id: `${scope}.deactivateAccount`,

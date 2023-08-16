@@ -105,6 +105,9 @@ export interface TlfbEventsSettings extends StartAutofinishTimerSetting {}
 
 export interface TlfbQuestionSettings extends StartAutofinishTimerSetting {}
 
+export interface HenryFordQuestionSettings extends SingleQuestionSettings {}
+export interface HenryFordInitialScreenSettings extends QuestionBaseSettings {}
+
 export type QuestionSettings =
   | SingleQuestionSettings
   | MultipleQuestionSettings
@@ -124,4 +127,6 @@ export type QuestionSettings =
   | CurrencyQuestionSettings
   | TlfbConfigSettings
   | TlfbEventsSettings
-  | TlfbQuestionSettings;
+  | TlfbQuestionSettings
+  | HenryFordQuestionSettings
+  | HenryFordInitialScreenSettings;

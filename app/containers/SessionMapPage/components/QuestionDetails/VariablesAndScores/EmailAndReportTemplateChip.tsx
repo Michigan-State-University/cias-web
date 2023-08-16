@@ -2,7 +2,7 @@ import React from 'react';
 
 import { colors } from 'theme';
 
-import { DoubleColoredChip } from 'components/ColoredChip';
+import { MultiColoredChip } from 'components/ColoredChip';
 
 type Props = {
   email: string;
@@ -13,7 +13,7 @@ const EmailAndReportTemplateChip = ({
   email,
   template,
 }: Props): JSX.Element => (
-  <DoubleColoredChip
+  <MultiColoredChip
     leftChipColor={colors.azure}
     leftChipContent={email || '-'}
     rightChipColor={colors.bluewood}

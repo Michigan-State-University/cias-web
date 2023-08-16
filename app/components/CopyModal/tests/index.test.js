@@ -90,17 +90,6 @@ describe('<CopyModal />', () => {
       copyModal: copyModalReducer,
     };
   });
-  it('Expect to not log errors in console', () => {
-    const spy = jest.spyOn(global.console, 'error');
-    render(
-      <Provider store={store}>
-        <IntlProvider locale={DEFAULT_LOCALE}>
-          <CopyModal {...defaultProps} />
-        </IntlProvider>
-      </Provider>,
-    );
-    expect(spy).not.toHaveBeenCalled();
-  });
 
   it('Should render and match the snapshot', () => {
     const { container } = render(

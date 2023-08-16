@@ -6,7 +6,7 @@ module.exports = {
     '^.+\\.[jt]sx?$': 'babel-jest',
   },
   transformIgnorePatterns: [
-    '/node_modules/(?!@anycable/web|@anycable/core|nanoevents).+\\.js$',
+    '/node_modules/(?!@anycable/web|@anycable/core|nanoevents|byte-size).+\\.js$',
   ],
   collectCoverageFrom: [
     'app/**/*.{js,jsx,ts,tsx}',

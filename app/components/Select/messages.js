@@ -17,4 +17,8 @@ export default defineMessages({
     id: `${scope}.other`,
     defaultMessage: 'Other',
   },
+  error: {
+    id: `${scope}.error`,
+    defaultMessage: 'Unknown error occurred when fetching select options',
+  },
 });

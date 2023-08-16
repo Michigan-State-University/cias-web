@@ -121,4 +121,69 @@ export default defineMessages({
     id: `${scope}.numericQuestionDigitsMaximum`,
     defaultMessage: 'Maximum {maxLength} digits',
   },
+  firstName: {
+    id: `${scope}.firstName`,
+    defaultMessage: 'First Name',
+  },
+  firstNamePlaceholder: {
+    id: `${scope}.firstNamePlaceholder`,
+    defaultMessage: 'Enter your first name here',
+  },
+  lastName: {
+    id: `${scope}.lastName`,
+    defaultMessage: 'Last Name',
+  },
+  lastNamePlaceholder: {
+    id: `${scope}.lastNamePlaceholder`,
+    defaultMessage: 'Enter your last name here',
+  },
+  sex: {
+    id: `${scope}.sex`,
+    defaultMessage: 'Sex',
+  },
+  sexPlaceholder: {
+    id: `${scope}.sexPlaceholder`,
+    defaultMessage: 'Choose your sex',
+  },
+  dateOfBirth: {
+    id: `${scope}.dateOfBirth`,
+    defaultMessage: 'Date of Birth',
+  },
+  zipCode: {
+    id: `${scope}.zipCode`,
+    defaultMessage: 'ZIP Code',
+  },
+  zipCodePlaceholder: {
+    id: `${scope}.zipCodePlaceholder`,
+    defaultMessage: 'Enter your ZIP Code here',
+  },
+  phoneNumberPrefix: {
+    id: `${scope}.phoneNumberPrefix`,
+    defaultMessage: 'Phone number prefix',
+  },
+  phoneNumber: {
+    id: `${scope}.phoneNumber`,
+    defaultMessage: 'Phone number',
+  },
+  phoneType: {
+    id: `${scope}.phoneType`,
+    defaultMessage: 'Phone type',
+  },
+  phoneTypePlaceholder: {
+    id: `${scope}.phoneTypePlaceholder`,
+    defaultMessage: 'Choose phone type',
+  },
+  medicalNumber: {
+    id: `${scope}.medicalNumber`,
+    defaultMessage: 'Medical number',
+  },
+  medicalNumberPlaceholder: {
+    id: `${scope}.medicalNumberPlaceholder`,
+    defaultMessage: 'Your medical number',
+  },
+  medicalNumberResearcherInfo: {
+    id: `${scope}.medicalNumberResearcherInfo`,
+    defaultMessage:
+      'Participant will be asked to provide their medical record number <bold>if the above data is incorrect.</bold>',
+  },
 });

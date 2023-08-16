@@ -23,6 +23,8 @@ import {
 } from 'models/Session/QuestionTypes';
 import { SessionTypes } from 'models/Session';
 
+import { MAX_SMS_BODY_LENGTH } from 'global/constants';
+
 import VariableChooser from 'containers/VariableChooser';
 
 import Box from 'components/Box';
@@ -233,6 +235,7 @@ const VariantItem = ({
                 value={content}
                 onBlur={handleContentChange}
                 disabled={disabled}
+                maxLength={MAX_SMS_BODY_LENGTH}
               />
             </OriginalTextHover>
           </Box>

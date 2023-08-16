@@ -27,6 +27,7 @@ exports[`<FormikCodeInput /> Should render and match the snapshot 1`] = `
   font-size: 13px;
   line-height: 130%;
   margin-bottom: 5px;
+  font-size: 12px;
   font-weight: 700;
   color: #2F3850;
   width: -webkit-fit-content;
@@ -115,13 +116,18 @@ exports[`<FormikCodeInput /> Should render and match the snapshot 1`] = `
   <div
     class="c0"
   >
-    <p
-      class="c1"
-      font-weight="bold"
-      width="fit-content"
+    <label
+      for="test"
     >
-      Label
-    </p>
+      <p
+        class="c1"
+        font-size="12px"
+        font-weight="bold"
+        width="fit-content"
+      >
+        Label
+      </p>
+    </label>
     <p
       class="c2"
       id="code-input-general"

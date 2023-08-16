@@ -1,4 +1,5 @@
 import { CamelToSnakeOmitId } from 'global/types/camelToSnake';
+
 import { Roles } from './RolesManager';
 
 export interface User {
