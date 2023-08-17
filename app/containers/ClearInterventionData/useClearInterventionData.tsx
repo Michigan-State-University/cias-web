@@ -67,6 +67,14 @@ export const useClearInterventionData = (
           sensitiveDataState === SensitiveDataState.COLLECTED
             ? 'warning'
             : 'primary',
+        confirmationButtonStyles: {
+          width: 'auto',
+          padding: '0 30px',
+        },
+        cancelButtonStyles: {
+          width: 'auto',
+          padding: '0 30px',
+        },
         hideCancelButton: sensitiveDataState !== SensitiveDataState.COLLECTED,
         confirmAction: clearInterventionData,
         loading: clearInterventionDataLoading,
