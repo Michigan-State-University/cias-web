@@ -78,6 +78,7 @@ import {
   TileInfo,
 } from './styled';
 import { CollaboratingIndicator } from './CollaboratingIndicator';
+import { useClearInterventionData } from '../ClearInterventionData';
 
 const SingleTile = ({
   tileData,
@@ -103,6 +104,8 @@ const SingleTile = ({
     googleLanguageId,
     hasCollaborators,
     userId: interventionOwnerId,
+    sensitiveDataState,
+    clearSensitiveDataScheduledAt,
   } = tileData || {};
 
   const isCurrentUserInterventionOwner = interventionOwnerId === userId;
@@ -174,6 +177,16 @@ const SingleTile = ({
 
   const canEditCollaborators = isAdmin || isCurrentUserInterventionOwner;
 
+  const { ClearInterventionDataOption, ClearInterventionDataModal } =
+    useClearInterventionData(
+      status,
+      id,
+      hasCollaborators,
+      false,
+      sensitiveDataState,
+      clearSensitiveDataScheduledAt,
+    );
+
   const options = [
     {
       icon: TranslateIcon,
@@ -240,6 +253,7 @@ const SingleTile = ({
           },
         ]
       : []),
+    ...(isCurrentUserInterventionOwner ? [ClearInterventionDataOption] : []),
   ];
 
   const preventDefault = (e) => {
@@ -281,6 +295,7 @@ const SingleTile = ({
       </Modal>
 
       <CollaboratorsModal />
+      <ClearInterventionDataModal />
 
       <StyledLink to={link}>
         <TileContainer>

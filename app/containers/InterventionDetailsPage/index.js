@@ -66,6 +66,7 @@ import {
   makeSelectCanCurrentUserMakeChanges,
   makeSelectCanCurrentUserAccessParticipantsData,
   fetchInterventionSaga,
+  makeSelectIsCurrentUserEditor,
 } from 'global/reducers/intervention';
 import { interventionOptionsSaga } from 'global/sagas/interventionOptionsSaga';
 import {
@@ -145,6 +146,7 @@ export function InterventionDetailsPage({
   user: { organizableId: userOrganizableId },
   editSession,
   exportIntervention,
+  isCurrentUserEditor,
   canCurrentUserMakeChanges,
   editingPossible,
   isCurrentUserInterventionOwner,
@@ -270,12 +272,12 @@ export function InterventionDetailsPage({
 
   const handleExportIntervention = () => exportIntervention(id);
 
-  const { ClearInterventionDataOption, ClearInterventionDataModals } =
+  const { ClearInterventionDataOption, ClearInterventionDataModal } =
     useClearInterventionData(
       status,
       id,
       hasCollaborators,
-      false,
+      isCurrentUserEditor,
       sensitiveDataState,
       clearSensitiveDataScheduledAt,
     );
@@ -561,7 +563,7 @@ export function InterventionDetailsPage({
             </Modal>
 
             <CollaboratorsModal />
-            {ClearInterventionDataModals}
+            <ClearInterventionDataModal />
 
             <Header
               name={name}
@@ -699,6 +701,7 @@ InterventionDetailsPage.propTypes = {
   editSession: PropTypes.func,
   user: PropTypes.object,
   exportIntervention: PropTypes.func,
+  isCurrentUserEditor: PropTypes.bool,
   canCurrentUserMakeChanges: PropTypes.bool,
   editingPossible: PropTypes.bool,
   isCurrentUserInterventionOwner: PropTypes.bool,
@@ -715,6 +718,7 @@ const mapStateToProps = createStructuredSelector({
   createSessionError: makeSelectInterventionError('createSessionError'),
   sessionIndex: makeSelectCurrentSessionIndex(),
   user: makeSelectUser(),
+  isCurrentUserEditor: makeSelectIsCurrentUserEditor(),
   canCurrentUserMakeChanges: makeSelectCanCurrentUserMakeChanges(),
   editingPossible: makeSelectEditingPossible(),
   isCurrentUserInterventionOwner: makeSelectIsCurrentUserInterventionOwner(),

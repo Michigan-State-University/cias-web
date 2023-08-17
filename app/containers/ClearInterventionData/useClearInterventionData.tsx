@@ -84,7 +84,7 @@ export const useClearInterventionData = (
 
   const {
     openModal: openClearDataConfirmationModal,
-    Modal: ClearDataConfirmationModal,
+    Modal: ClearInterventionDataModal,
   } = useModal({
     type: ModalType.ConfirmationModal,
     props: clearDataConfirmationModalProps,
@@ -112,8 +112,6 @@ export const useClearInterventionData = (
 
   return {
     ClearInterventionDataOption,
-    ClearInterventionDataModals: [
-      <ClearDataConfirmationModal key="clearIntervetionDataConfirmationModal" />,
-    ],
+    ClearInterventionDataModal,
   };
 };
