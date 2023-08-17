@@ -36,6 +36,7 @@ import refreshInterventionDataSaga from './refreshInterventionData';
 export * from './onCollaboratorRemovedReceive';
 export * from './refreshInterventionData';
 export * from './fetchCurrentUserCollaboratorData';
+export * from './clearInterventionData';
 
 export {
   createInterventionSaga,

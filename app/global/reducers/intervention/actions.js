@@ -439,7 +439,15 @@ export const clearInterventionDataRequest = (interventionId) =>
   actionBuilder(CLEAR_INTERVENTION_DATA_REQUEST, {
     interventionId,
   });
-export const clearInterventionDataSuccess = () =>
-  actionBuilder(CLEAR_INTERVENTION_DATA_SUCCESS, {});
+export const clearInterventionDataSuccess = (
+  interventionId,
+  sensitiveDataState,
+  clearSensitiveDataScheduledAt,
+) =>
+  actionBuilder(CLEAR_INTERVENTION_DATA_SUCCESS, {
+    interventionId,
+    sensitiveDataState,
+    clearSensitiveDataScheduledAt,
+  });
 export const clearInterventionDataError = () =>
   actionBuilder(CLEAR_INTERVENTION_DATA_ERROR, {});

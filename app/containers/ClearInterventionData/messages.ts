@@ -17,8 +17,29 @@ export default defineMessages({
     defaultMessage:
       'Please note: After performing this action users will be notified and the data will be removed in 5 days. Until then, users will be able to log in and download report files. This action is irreversible.',
   },
-  clearDataConfirmationButtonTitle: {
-    id: `${scope}.clearDataConfirmationButtonTitle`,
+  clearData: {
+    id: `${scope}.clearData`,
     defaultMessage: 'Clear data',
+  },
+  markedToRemoveTitle: {
+    id: `${scope}.markedToRemoveTitle`,
+    defaultMessage: 'Data delete in progress',
+  },
+  markedToRemoveContentFirst: {
+    id: `${scope}.markedToRemoveContentFirst`,
+    defaultMessage: 'Clearing process was triggered successfully.',
+  },
+  markedToRemoveContentSecond: {
+    id: `${scope}.markedToRemoveContentSecond`,
+    defaultMessage:
+      ' All sensitive data associated with this intervention will be deleted <primaryColorBold>{time}</primaryColorBold>.',
+  },
+  removedTitle: {
+    id: `${scope}.removedTitle`,
+    defaultMessage: 'Data deleted',
+  },
+  removedContent: {
+    id: `${scope}.removedContent`,
+    defaultMessage: 'Sensitive data has already been cleared.',
   },
 });

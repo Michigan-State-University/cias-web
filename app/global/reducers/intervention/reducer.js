@@ -114,6 +114,9 @@ import {
   FETCH_CURRENT_USER_COLLABORATOR_DATA_REQUEST,
   FETCH_CURRENT_USER_COLLABORATOR_DATA_SUCCESS,
   FETCH_CURRENT_USER_COLLABORATOR_DATA_ERROR,
+  CLEAR_INTERVENTION_DATA_REQUEST,
+  CLEAR_INTERVENTION_DATA_SUCCESS,
+  CLEAR_INTERVENTION_DATA_ERROR,
 } from './constants';
 
 export const initialState = {
@@ -157,6 +160,7 @@ export const initialState = {
     startingEditing: false,
     stoppingEditing: false,
     fetchCurrentUserCollaboratorData: false,
+    clearInterventionData: false,
   },
   errors: {
     fetchInterventionError: null,
@@ -713,6 +717,28 @@ export const interventionReducer = (state = initialState, action) =>
         draft.loaders.startingEditing = false;
         draft.loaders.stoppingEditing = false;
         draft.currentUserCollaboratorData = null;
+        break;
+      }
+      case CLEAR_INTERVENTION_DATA_REQUEST: {
+        draft.loaders.clearInterventionData = true;
+        break;
+      }
+      case CLEAR_INTERVENTION_DATA_SUCCESS: {
+        const {
+          interventionId,
+          sensitiveDataState,
+          clearSensitiveDataScheduledAt,
+        } = action.payload;
+        if (draft.intervention?.id === interventionId) {
+          draft.intervention.sensitiveDataState = sensitiveDataState;
+          draft.intervention.clearSensitiveDataScheduledAt =
+            clearSensitiveDataScheduledAt;
+        }
+        draft.loaders.clearInterventionData = false;
+        break;
+      }
+      case CLEAR_INTERVENTION_DATA_ERROR: {
+        draft.loaders.clearInterventionData = false;
         break;
       }
     }

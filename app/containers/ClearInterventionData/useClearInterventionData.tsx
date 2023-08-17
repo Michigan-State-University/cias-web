@@ -1,35 +1,50 @@
 import { useCallback, useMemo } from 'react';
 import { useIntl } from 'react-intl';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
+import { useInjectSaga } from 'redux-injectors';
 
 import BinIcon from 'assets/svg/bin-no-bg.svg';
 
 import { colors } from 'theme';
 
-import { InterventionStatus } from 'models/Intervention';
+import { InterventionStatus, SensitiveDataState } from 'models/Intervention';
 import { canClearInterventionData } from 'models/Status/statusPermissions';
 
 import globalMessages from 'global/i18n/globalMessages';
-import { clearInterventionDataRequest } from 'global/reducers/intervention';
+import {
+  clearInterventionDataRequest,
+  makeSelectInterventionLoader,
+  withClearInterventionDataSaga,
+} from 'global/reducers/intervention';
 
 import { ConfirmationModalProps, ModalType, useModal } from 'components/Modal';
-import Column from 'components/Column';
-import Text from 'components/Text';
 
 import messages from './messages';
 import { CLEAR_COLLECTED_DATA_MODAL_WIDTH } from './constants';
+import { ClearInterventionDataModalContent } from './ClearInterventionDataModalContent';
 
 export const useClearInterventionData = (
   interventionStatus: InterventionStatus,
   interventionId: string,
+  hasCollaborators: boolean,
+  isCurrentUserEditor: boolean,
+  sensitiveDataState: SensitiveDataState,
+  clearSensitiveDataScheduledAt: Nullable<string>,
 ) => {
   const { formatMessage } = useIntl();
-
   const dispatch = useDispatch();
 
-  const clearPersonalData = useCallback(() => {
-    dispatch(clearInterventionDataRequest(interventionId));
-  }, [interventionId]);
+  useInjectSaga(withClearInterventionDataSaga);
+
+  const clearInterventionDataLoading = useSelector(
+    makeSelectInterventionLoader('clearInterventionData'),
+  );
+
+  const clearInterventionData = useCallback(() => {
+    if (sensitiveDataState === SensitiveDataState.COLLECTED) {
+      dispatch(clearInterventionDataRequest(interventionId));
+    }
+  }, [interventionId, sensitiveDataState]);
 
   const clearDataConfirmationModalProps: ConfirmationModalProps['props'] =
     useMemo(
@@ -37,28 +52,34 @@ export const useClearInterventionData = (
         title: formatMessage(messages.clearCollectedData),
         description: null,
         content: (
-          <Column>
-            <Text fontSize={20} fontWeight="bold" lineHeight={1.3}>
-              {formatMessage(globalMessages.areYouSure)}
-            </Text>
-            <Text mt={16} fontSize={15} lineHeight={1.5}>
-              {formatMessage(messages.clearDataConfirmationContent)}
-            </Text>
-            <Text mt={32} fontSize={15} lineHeight={1.5} opacity={0.7}>
-              {formatMessage(messages.clearDataConfirmationNote)}
-            </Text>
-          </Column>
+          <ClearInterventionDataModalContent
+            sensitiveDataState={sensitiveDataState}
+            clearSensitiveDataScheduledAt={clearSensitiveDataScheduledAt}
+          />
         ),
         contentStyles: { mt: 48 },
         confirmationButtonText: formatMessage(
-          messages.clearDataConfirmationButtonTitle,
+          sensitiveDataState === SensitiveDataState.COLLECTED
+            ? messages.clearData
+            : globalMessages.iUnderstand,
         ),
-        confirmAction: clearPersonalData,
-        closeOnConfirm: false,
+        confirmationButtonColor:
+          sensitiveDataState === SensitiveDataState.COLLECTED
+            ? 'warning'
+            : 'primary',
+        hideCancelButton: sensitiveDataState !== SensitiveDataState.COLLECTED,
+        confirmAction: clearInterventionData,
+        loading: clearInterventionDataLoading,
+        closeOnConfirm: sensitiveDataState !== SensitiveDataState.COLLECTED,
         width: CLEAR_COLLECTED_DATA_MODAL_WIDTH,
         isMobile: true,
       }),
-      [clearPersonalData],
+      [
+        clearInterventionData,
+        clearInterventionDataLoading,
+        sensitiveDataState,
+        clearSensitiveDataScheduledAt,
+      ],
     );
 
   const {
@@ -76,9 +97,17 @@ export const useClearInterventionData = (
       icon: BinIcon,
       action: openClearDataConfirmationModal,
       color: colors.bluewood,
-      disabled: !canClearInterventionData(interventionStatus),
+      disabled:
+        !canClearInterventionData(interventionStatus) ||
+        (hasCollaborators && !isCurrentUserEditor),
     }),
-    [openClearDataConfirmationModal, interventionStatus],
+    [
+      openClearDataConfirmationModal,
+      sensitiveDataState,
+      interventionStatus,
+      hasCollaborators,
+      isCurrentUserEditor,
+    ],
   );
 
   return {

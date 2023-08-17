@@ -174,6 +174,9 @@ export function InterventionDetailsPage({
     licenseType,
     type,
     userId,
+    hasCollaborators,
+    sensitiveDataState,
+    clearSensitiveDataScheduledAt,
   } = intervention || {};
 
   const testsLeft = catMhPool - createdCatMhSessionCount;
@@ -268,7 +271,14 @@ export function InterventionDetailsPage({
   const handleExportIntervention = () => exportIntervention(id);
 
   const { ClearInterventionDataOption, ClearInterventionDataModals } =
-    useClearInterventionData(status, id);
+    useClearInterventionData(
+      status,
+      id,
+      hasCollaborators,
+      false,
+      sensitiveDataState,
+      clearSensitiveDataScheduledAt,
+    );
 
   const options = [
     {
