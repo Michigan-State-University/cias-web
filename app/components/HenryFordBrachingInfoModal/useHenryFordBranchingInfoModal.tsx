@@ -22,6 +22,7 @@ export const useHenryFordBranchingInfoModal = (
         width: 'auto',
         padding: '0 30px',
       },
+      confirmationButtonColor: 'primary',
       icon: 'info',
       hideCloseButton: true,
       hideCancelButton: true,

@@ -22,8 +22,8 @@ import Text from 'components/Text';
 import { fontSizes } from 'theme';
 
 import messages from './messages';
-import Modal from './Modal';
-import { MODAL_TITLE_ID } from './constants';
+import Modal, { Props as ModalProps } from './Modal';
+import { MODAL_DESCRIPTION_ID } from './constants';
 import { IconType } from './types';
 import { ConfirmationModalButtonsContainer } from './styled';
 
@@ -46,10 +46,10 @@ export type Props<T = boolean> = {
   icon?: IconType;
   hideCloseButton?: boolean;
   hideCancelButton?: boolean;
-  isMobile: boolean;
+  isMobile?: boolean;
   titleStyles: object;
-  modalState: Nullable<T | boolean>;
-} & Record<string, unknown>;
+  modalState?: Nullable<T | boolean>;
+} & Omit<ModalProps, 'children'>;
 
 const ConfirmationModal = <T,>({
   visible = false,
@@ -60,20 +60,20 @@ const ConfirmationModal = <T,>({
   loading = false,
   error,
   content,
-  confirmationButtonColor = 'primary',
+  confirmationButtonColor = 'warning',
   confirmationButtonText,
   confirmationButtonStyles,
   cancelButtonText,
   cancelButtonStyles,
   contentStyles,
   contentContainerStyles,
-  icon = 'error',
+  icon,
   hideCloseButton,
   hideCancelButton,
   isMobile,
   titleStyles,
   modalState,
-  ...modalStyles
+  ...modalProps
 }: Props<T>): JSX.Element => {
   const onConfirm = useCallback(() => {
     confirmAction(modalState);
@@ -97,19 +97,16 @@ const ConfirmationModal = <T,>({
     <Modal
       visible={visible}
       onClose={onClose}
-      {...modalStyles}
       hideCloseButton={hideCloseButton}
-      maxWidth={500}
-      pt={hideCloseButton ? 40 : 20}
-      pb={40}
+      {...modalProps}
     >
-      <Column px={!isMobile && 20} pd={30} mt={-10} {...contentContainerStyles}>
+      <Column px={!isMobile && 20} pd={30} {...contentContainerStyles}>
         {icon && (
           <Row justify="center" mb={32}>
             <Icon src={getIcon()} />
           </Row>
         )}
-        <H1 textAlign="center" id={MODAL_TITLE_ID} {...titleStyles}>
+        <H1 textAlign="center" id={MODAL_DESCRIPTION_ID} {...titleStyles}>
           {description}
         </H1>
         {content && (

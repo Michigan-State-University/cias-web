@@ -132,6 +132,10 @@ const ReportTemplateMainSettings = ({
       content: formatMessage(messages.duplicateInternallyConfirmationContent),
       confirmationButtonText: formatMessage(globalMessages.iUnderstand),
       confirmationButtonColor: 'primary',
+      confirmationButtonStyles: {
+        width: 'auto',
+        padding: '0 30px',
+      },
       confirmAction: () => setDuplicateInternallyModalVisible(true),
       hideCancelButton: true,
       icon: 'info',
