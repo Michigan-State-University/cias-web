@@ -1,9 +1,12 @@
 import dayjs from 'dayjs';
 import pickBy from 'lodash/pickBy';
 import isNil from 'lodash/isNil';
+import { parsePhoneNumberFromString } from 'libphonenumber-js';
 
 import { TlfbConfigBody } from 'models/Question';
 import { CalendarData } from 'models/Tlfb';
+import { PhoneAttributes } from 'models/Phone';
+
 import { CamelToSnake } from 'global/types/camelToSnake';
 import { fullDayToYearFormatter } from 'utils/formatters';
 
@@ -85,4 +88,21 @@ export const getCalendarMetadata = (
     isEveryAnswerFilled,
     isMultiMonth,
   };
+};
+
+export const formatPhoneNumberForHfhs = ({
+  number,
+  iso,
+}: Pick<PhoneAttributes, 'number' | 'iso'>) => {
+  const parsedPhone = parsePhoneNumberFromString(number, iso);
+  if (!parsedPhone) return '';
+  return parsedPhone
+    .formatInternational()
+    .replace(new RegExp(' ', 'g'), '-')
+    .slice(1);
+};
+
+export const parsePhoneNumberFromHfhs = (number: string) => {
+  const phone = `+${number.replace(new RegExp('-', 'g'), ' ')}`;
+  return parsePhoneNumberFromString(phone);
 };

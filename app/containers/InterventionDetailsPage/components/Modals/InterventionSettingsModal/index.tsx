@@ -349,6 +349,7 @@ const InterventionSettingsModal = ({
               <GCol>
                 {/*  @ts-ignore */}
                 <ApiSelect
+                  // @ts-ignore
                   url="/v1/google/languages"
                   dataParser={(data: ApiDataCollection<Language>) =>
                     jsonApiToArray(data, 'supportedLanguage')

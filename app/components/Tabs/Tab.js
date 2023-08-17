@@ -48,8 +48,8 @@ Tab.propTypes = {
   activeTab: PropTypes.oneOfType([PropTypes.string, PropTypes.object]),
   text: PropTypes.oneOfType([PropTypes.string, PropTypes.object]),
   renderAsLink: PropTypes.node,
-  linkMatch: PropTypes.string,
   emphasizeActiveLink: PropTypes.bool,
+  linkMatch: PropTypes.string,
   labelStyle: PropTypes.object,
 };
 

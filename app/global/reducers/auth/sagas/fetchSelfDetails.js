@@ -10,9 +10,7 @@ import { fetchSelfDetailsSuccess } from '../actions';
 export function* fetchSelfDetails() {
   const requestUrl = 'v1/me';
   try {
-    const {
-      data: { data },
-    } = yield call(axios.get, requestUrl);
+    const { data } = yield call(axios.get, requestUrl);
     const editedUser = mapCurrentUser(data);
     const pickedUser = pickUserAttributes(editedUser);
     yield call(LocalStorageService.updateState, { user: pickedUser });

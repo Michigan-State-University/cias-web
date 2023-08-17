@@ -8,3 +8,8 @@ export type ModalUIData = {
   testNumber: number;
   testsLeft: number;
 };
+
+export type ThirdPartyToolsAccessFormValues = {
+  hfhsAccess: boolean;
+  locationIds: string[];
+};

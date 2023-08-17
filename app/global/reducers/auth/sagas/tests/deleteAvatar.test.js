@@ -23,7 +23,7 @@ describe('deleteAvatar saga', () => {
   it('Check deleteAvatar generator success connection', () => {
     const apiResponse = apiUserResponse();
     apiResponse.data.avatar_url = null;
-    const successUser = mapCurrentUser(apiResponse.data);
+    const successUser = mapCurrentUser(apiResponse);
 
     return expectSaga(deleteAvatar)
       .withState(mockState)

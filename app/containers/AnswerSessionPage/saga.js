@@ -15,6 +15,7 @@ import LocalStorageService from 'utils/localStorageService';
 import objectToSnakeCase from 'utils/objectToSnakeCase';
 import { getIsPreview } from 'utils/previewMode';
 import { parametrizeRoutePath } from 'utils/router';
+import objectToCamelCase from 'utils/objectToCamelCase';
 
 import {
   resetPhoneNumberPreview,
@@ -37,6 +38,7 @@ import {
   FETCH_USER_SESSION_REQUEST,
   FETCH_OR_CREATE_USER_SESSION_REQUEST,
   FETCH_PREVIOUS_QUESTION_REQUEST,
+  VERIFY_PATIENT_DATA_REQUEST,
 } from './constants';
 import {
   submitAnswerSuccess,
@@ -56,8 +58,16 @@ import {
   resetReducer,
   fetchPreviousQuestionSuccess,
   fetchPreviousQuestionError,
+  verifyPatientDataError,
+  verifyPatientDataSuccess,
+  submitAnswer,
+  setHfhsPatientDetail,
 } from './actions';
-import { makeSelectAnswers, makeSelectCurrentQuestion } from './selectors';
+import {
+  makeSelectAnswers,
+  makeSelectCurrentQuestion,
+  makeSelectUserSession,
+} from './selectors';
 import messages from './messages';
 
 function* submitAnswersAsync({
@@ -135,6 +145,7 @@ function* nextQuestion({ payload: { userSessionId, questionId } }) {
         // eslint-disable-next-line camelcase
         next_session_id,
         answer: answerData,
+        hfhs_patient_detail: hfhsPatientDetail,
       },
     } = yield axios.get(requestUrl);
 
@@ -143,6 +154,11 @@ function* nextQuestion({ payload: { userSessionId, questionId } }) {
         toast.warning,
         formatMessage(messages[warning] ?? messages.unknownWarning),
       );
+
+    if (hfhsPatientDetail) {
+      yield put(setHfhsPatientDetail(objectToCamelCase(hfhsPatientDetail)));
+    }
+
     if (newUserSessionId) {
       const isPreview = getIsPreview();
 
@@ -290,11 +306,19 @@ function* fetchPreviousQuestion({
 
   try {
     const {
-      data: { data: questionData, answer: answerData },
+      data: {
+        data: questionData,
+        answer: answerData,
+        hfhs_patient_detail: hfhsPatientDetail,
+      },
     } = yield axios.get(`${requestUrl}?${searchParams}`);
 
     if (!questionData) {
       throw Error(formatMessage(messages.previousScreenNotFound));
+    }
+
+    if (hfhsPatientDetail) {
+      yield put(setHfhsPatientDetail(objectToCamelCase(hfhsPatientDetail)));
     }
 
     const question = mapQuestionToStateObject(questionData);
@@ -306,6 +330,41 @@ function* fetchPreviousQuestion({
   } catch (error) {
     yield call(toast.error, error.response?.data?.message ?? error.toString());
     yield put(fetchPreviousQuestionError(error));
+  }
+}
+
+function* verifyPatientData({ payload }) {
+  const requestUrl = '/v1/henry_ford/verify';
+
+  const question = yield select(makeSelectCurrentQuestion());
+  const userSession = yield select(makeSelectUserSession());
+  if (!question || !userSession) return;
+
+  const { id: userSessionId, sessionId } = userSession;
+  const { id: questionId, type, settings } = question;
+
+  try {
+    const { data } = yield axios.post(requestUrl, {
+      ...objectToSnakeCase(payload),
+      session_id: sessionId,
+    });
+
+    const hfhsPatientDetail = jsonApiToObject(data, 'hfhsPatientDetail');
+    yield put(setHfhsPatientDetail(hfhsPatientDetail));
+    yield put(verifyPatientDataSuccess());
+
+    yield put(
+      submitAnswer(
+        questionId,
+        settings?.required ?? false,
+        type,
+        sessionId,
+        userSessionId,
+        false,
+      ),
+    );
+  } catch (error) {
+    yield put(verifyPatientDataError(error));
   }
 }
 
@@ -322,6 +381,7 @@ export default function* AnswerSessionPageSaga() {
   yield takeLatest(NEXT_QUESTION_REQUEST, nextQuestion);
   yield takeLatest(SAVE_QUICK_EXIT_EVENT_REQUEST, saveQuickExitEvent);
   yield takeEvery(FETCH_PREVIOUS_QUESTION_REQUEST, fetchPreviousQuestion);
+  yield takeLatest(VERIFY_PATIENT_DATA_REQUEST, verifyPatientData);
 }
 
 export function* redirectToPreviewSaga() {

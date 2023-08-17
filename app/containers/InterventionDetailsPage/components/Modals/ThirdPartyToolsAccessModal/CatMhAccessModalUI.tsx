@@ -9,16 +9,14 @@ import { CatMhLicenseType } from 'models/Intervention';
 import globalMessages from 'global/i18n/globalMessages';
 
 import { Col, FullWidthContainer, Row } from 'components/ReactGridSystem';
-import Divider from 'components/Divider';
 import Text from 'components/Text';
 import Radio from 'components/Radio';
 import FlexRow from 'components/Row';
 import Switch, { LabelPosition } from 'components/Switch';
 import Button, { ImageButton } from 'components/Button';
-import { FormikHookInput } from 'components/FormikInput';
 
 import messages from './messages';
-import { SectionHeader } from './styled';
+import { SectionHeader, StyledFormikHookInput } from './styled';
 import {
   ACCESS_LABEL_ID,
   LICENSE_LIMITED_LABEL_ID,
@@ -118,15 +116,10 @@ const Component = ({
     <FullWidthContainer>
       <Row>
         <Col>
-          {formatMessage(messages.modalHeader)}
-          <Divider mt={16} mb={32} />
-        </Col>
-      </Row>
-
-      <Row>
-        <Col>
           <FlexRow align="center">
-            <Text mr={8}>{formatMessage(messages.revokeAccess)}</Text>
+            <Text mr={8} fontSize="15px">
+              {formatMessage(messages.revokeAccess)}
+            </Text>
             <Switch
               id={ACCESS_LABEL_ID}
               onToggle={handleAccessChange}
@@ -134,7 +127,9 @@ const Component = ({
               checked={!isAccessRevoked}
               disabled={!canEdit}
             >
-              <Text>{formatMessage(messages.giveAccess)}</Text>
+              <Text fontWeight={!isAccessRevoked && 'bold'} fontSize="15px">
+                {formatMessage(messages.giveAccess)}
+              </Text>
             </Switch>
           </FlexRow>
         </Col>
@@ -151,7 +146,7 @@ const Component = ({
       <Row>
         <Col>
           {/* @ts-ignore */}
-          <FormikHookInput
+          <StyledFormikHookInput
             formikKey={ORGANIZATION_ID_FORMIK_KEY}
             formikState={formik}
             placeholder={formatMessage(messages.numberPlaceholder)}
@@ -163,7 +158,7 @@ const Component = ({
 
         <Col>
           {/* @ts-ignore */}
-          <FormikHookInput
+          <StyledFormikHookInput
             formikKey={APPLICATION_ID_FORMIK_KEY}
             formikState={formik}
             placeholder={formatMessage(messages.numberPlaceholder)}
@@ -183,7 +178,7 @@ const Component = ({
       </Row>
 
       <Row>
-        <Col>
+        <Col xs={3}>
           <Radio
             id={LICENSE_LIMITED_LABEL_ID}
             onChange={onLimitedLicenseChange}
@@ -223,10 +218,10 @@ const Component = ({
             </Col>
           </Row>
           <Row>
-            <Col>
-              <FlexRow height="50px">
+            <Col xs={7}>
+              <FlexRow height="50px" width="100%">
                 {/* @ts-ignore */}
-                <FormikHookInput
+                <StyledFormikHookInput
                   formikKey={TEST_NUMBER_FORMIK_KEY}
                   formikState={formik}
                   placeholder={formatMessage(messages.numberPlaceholder)}

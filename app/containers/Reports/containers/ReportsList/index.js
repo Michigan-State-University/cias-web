@@ -36,6 +36,7 @@ import {
   generatedReportsReducerKey,
   generatedReportsSagasKey,
 } from 'global/reducers/generatedReports';
+import { makeSelectInterventionHfHsAccess } from 'global/reducers/intervention';
 
 import PaginationHandler from 'containers/UserList/Components/PaginationHelper';
 
@@ -62,6 +63,7 @@ const ReportsList = ({ sessionId, disableFilter }) => {
   const currentPage = useSelector(makeSelectCurrentPage());
   const currentSortOption = useSelector(makeSelectCurrentSortOption());
   const currentFilterOption = useSelector(makeSelectCurrentFilterOption());
+  const hfhsAccess = useSelector(makeSelectInterventionHfHsAccess());
 
   const sortOptions = useMemo(
     () =>
@@ -71,6 +73,8 @@ const ReportsList = ({ sessionId, disableFilter }) => {
       })),
     [],
   );
+
+  const filterOpts = useMemo(() => filterOptions(hfhsAccess), [hfhsAccess]);
 
   const [displayLoader, setDisplayLoader] = useState(false);
 
@@ -143,7 +147,7 @@ const ReportsList = ({ sessionId, disableFilter }) => {
         formatMessage={formatMessage}
         changeSort={handleChangeSort}
         changeFilter={handleChangeFilter}
-        filterOptions={filterOptions}
+        filterOptions={filterOpts}
         sortOptions={sortOptions}
         activeFilters={currentFilterOption}
         activeSort={currentSortOption}

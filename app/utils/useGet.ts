@@ -22,6 +22,7 @@ const fetchingState = {
 const useGet = <DTO, U>(
   url: string,
   dataParser: (data: DTO) => U,
+  suspend?: boolean,
 ): State<U> => {
   const [state, setState] = useState<State<U>>(defaultState);
 
@@ -36,10 +37,10 @@ const useGet = <DTO, U>(
   };
 
   useEffect(() => {
-    if (url) {
+    if (url && !suspend) {
       fetchData();
     }
-  }, [url]);
+  }, [url, suspend]);
 
   return state;
 };

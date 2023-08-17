@@ -96,6 +96,10 @@ exports[`<ApprovableInput /> Should render and match the snapshot as date input 
   background-color: #E9F1FB;
 }
 
+.c3 .react-datepicker-wrapper {
+  width: 100%;
+}
+
 @media only screen and (min-width:768px) {
 
 }

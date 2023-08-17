@@ -1,7 +1,7 @@
 import flatten from 'lodash/flatten';
 import { select } from 'redux-saga/effects';
 
-import { makeSelectQuestions } from '../questions';
+import { makeSelectQuestions } from 'global/reducers/questions/selectors';
 
 export const mapGroupsToQuestions = (groups) =>
   flatten(

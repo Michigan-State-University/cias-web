@@ -111,6 +111,7 @@ import {
   NOT_SKIPPABLE_QUESTIONS,
   FULL_SIZE_QUESTIONS,
   CONFIRMABLE_QUESTIONS,
+  NO_CONTINUE_BUTTON_QUESTIONS,
 } from './constants';
 import { ActionButtons } from './components/ActionButtons';
 import AnswerSessionPageFooter from './components/AnswerSessionPageFooter';
@@ -494,6 +495,7 @@ export function AnswerSessionPage({
       isAnimationOngoing,
       isDesktop,
       isMobile,
+      isPreview,
       previewMode,
       isMobilePreview,
       userSessionId: userSession?.id,
@@ -510,9 +512,9 @@ export function AnswerSessionPage({
       !NOT_SKIPPABLE_QUESTIONS.includes(type);
 
     const shouldRenderContinueButton =
-      !isLastScreen &&
       (isNullOrUndefined(proceedButton) || proceedButton) &&
-      canSkipNarrator;
+      canSkipNarrator &&
+      !NO_CONTINUE_BUTTON_QUESTIONS.includes(type);
 
     const backButtonDisabled =
       continueButtonLoading || isCatMhSession || isFirstScreen || isLastScreen;
