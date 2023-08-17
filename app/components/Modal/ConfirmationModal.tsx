@@ -46,9 +46,9 @@ export type Props<T = boolean> = {
   icon?: IconType;
   hideCloseButton?: boolean;
   hideCancelButton?: boolean;
-  isMobile: boolean;
+  isMobile?: boolean;
   titleStyles: object;
-  modalState: Nullable<T | boolean>;
+  modalState?: Nullable<T | boolean>;
 } & Omit<ModalProps, 'children'>;
 
 const ConfirmationModal = <T,>({
@@ -60,14 +60,14 @@ const ConfirmationModal = <T,>({
   loading = false,
   error,
   content,
-  confirmationButtonColor = 'primary',
+  confirmationButtonColor = 'warning',
   confirmationButtonText,
   confirmationButtonStyles,
   cancelButtonText,
   cancelButtonStyles,
   contentStyles,
   contentContainerStyles,
-  icon = 'error',
+  icon,
   hideCloseButton,
   hideCancelButton,
   isMobile,
@@ -98,12 +98,9 @@ const ConfirmationModal = <T,>({
       visible={visible}
       onClose={onClose}
       hideCloseButton={hideCloseButton}
-      maxWidth={500}
-      pt={hideCloseButton ? 40 : 20}
-      pb={40}
       {...modalProps}
     >
-      <Column px={!isMobile && 20} pd={30} mt={-10} {...contentContainerStyles}>
+      <Column px={!isMobile && 20} pd={30} {...contentContainerStyles}>
         {icon && (
           <Row justify="center" mb={32}>
             <Icon src={getIcon()} />
