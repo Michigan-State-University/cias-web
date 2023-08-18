@@ -12,10 +12,10 @@ import {
   StartEditingInterventionNotificationLayout,
   SuccessfullyRestoredInterventionNotificationLayout,
   UnsuccessfulImportNotificationLayout,
+  StopEditingInterventionNotificationLayout,
+  SensitiveDataRemovedNotificationLayout,
 } from './components';
 import { NotificationLayoutCommonProps } from './types';
-import { StopEditingInterventionNotificationLayout } from './components/StopEditingInterventionNotificationLayout';
-import { SensitiveDataRemovedNotificationLayout } from './components/SensitiveDataRemovedNotificationLayout';
 
 type Props = {
   notification: Notification;
