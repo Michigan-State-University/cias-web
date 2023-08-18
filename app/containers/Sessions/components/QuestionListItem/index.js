@@ -232,6 +232,8 @@ const QuestionListItem = ({
           fontSize: '22px',
         }}
         hideCloseButton
+        icon="error"
+        confirmationButtonColor="primary"
       />
       <ToggleableBox
         padding={15}
