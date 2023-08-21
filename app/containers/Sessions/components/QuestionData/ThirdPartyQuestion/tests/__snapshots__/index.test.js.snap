@@ -10,6 +10,18 @@ exports[`<ThirdPartyQuestion /> Should render and match the snapshot 1`] = `
   -ms-flex-direction: column;
   flex-direction: column;
   width: 100%;
+  margin-top: 10px;
+}
+
+.c3 {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-flex-direction: column;
+  -ms-flex-direction: column;
+  flex-direction: column;
+  width: 100%;
 }
 
 .c1 {
@@ -24,7 +36,7 @@ exports[`<ThirdPartyQuestion /> Should render and match the snapshot 1`] = `
   margin-bottom: 12px;
 }
 
-.c3 {
+.c4 {
   display: -webkit-box;
   display: -webkit-flex;
   display: -ms-flexbox;
@@ -48,7 +60,7 @@ exports[`<ThirdPartyQuestion /> Should render and match the snapshot 1`] = `
   margin-bottom: 0;
 }
 
-.c4 {
+.c5 {
   display: -webkit-box;
   display: -webkit-flex;
   display: -ms-flexbox;
@@ -60,7 +72,7 @@ exports[`<ThirdPartyQuestion /> Should render and match the snapshot 1`] = `
   width: 90%;
 }
 
-.c8 {
+.c9 {
   display: -webkit-box;
   display: -webkit-flex;
   display: -ms-flexbox;
@@ -72,7 +84,7 @@ exports[`<ThirdPartyQuestion /> Should render and match the snapshot 1`] = `
   width: 100%;
 }
 
-.c10 {
+.c11 {
   display: -webkit-box;
   display: -webkit-flex;
   display: -ms-flexbox;
@@ -88,20 +100,9 @@ exports[`<ThirdPartyQuestion /> Should render and match the snapshot 1`] = `
   -webkit-box-align: center;
   -ms-flex-align: center;
   align-items: center;
+  gap: 10px;
   margin-bottom: 10px;
   margin-left: 40px;
-}
-
-.c14 {
-  display: -webkit-box;
-  display: -webkit-flex;
-  display: -ms-flexbox;
-  display: flex;
-  -webkit-flex-direction: row;
-  -ms-flex-direction: row;
-  flex-direction: row;
-  height: auto;
-  display: none;
 }
 
 .c17 {
@@ -113,6 +114,18 @@ exports[`<ThirdPartyQuestion /> Should render and match the snapshot 1`] = `
   -ms-flex-direction: row;
   flex-direction: row;
   height: auto;
+  display: none;
+}
+
+.c20 {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-flex-direction: row;
+  -ms-flex-direction: row;
+  flex-direction: row;
+  height: auto;
   -webkit-align-content: center;
   -ms-flex-line-pack: center;
   align-content: center;
@@ -122,7 +135,38 @@ exports[`<ThirdPartyQuestion /> Should render and match the snapshot 1`] = `
   align-items: center;
 }
 
-.c11 {
+.c12 {
+  padding: 12px;
+  border-style: solid;
+  border-width: 1px;
+  border-color: #E9F1FB;
+  border-radius: 5px;
+  background-color: transparent;
+  border-color: transparent;
+  width: 85px;
+  max-width: 200px;
+  padding-top: 12px;
+  padding-bottom: 12px;
+  padding-right: 0;
+  padding-left: 0;
+  color: rgba(0,134,248,1);
+  text-align: center;
+  background-color: rgba(0,134,248,0.1);
+  color: rgba(0,134,248,1);
+  opacity: 0.5;
+}
+
+.c12:focus {
+  box-shadow: none;
+  outline: none;
+  border-color: #107969;
+}
+
+.c12:disabled {
+  color: #ABBBD1;
+}
+
+.c14 {
   padding: 12px;
   border-style: solid;
   border-width: 1px;
@@ -134,56 +178,56 @@ exports[`<ThirdPartyQuestion /> Should render and match the snapshot 1`] = `
   max-width: 100%;
   padding-right: 0;
   padding-left: 0;
-  color: rgba(0,134,248,1);
+  color: rgba(83,57,240,1);
   text-align: center;
-  background-color: rgba(0,134,248,0.1);
-  color: rgba(0,134,248,1);
+  background-color: rgba(83,57,240,0.1);
+  color: rgba(83,57,240,1);
   opacity: 0.5;
 }
 
-.c11:focus {
+.c14:focus {
   box-shadow: none;
   outline: none;
   border-color: #107969;
 }
 
-.c11:disabled {
+.c14:disabled {
   color: #ABBBD1;
 }
 
-.c9 {
+.c10 {
   width: 100%;
   height: auto;
   border: 1px solid transparent;
   cursor: not-allowed;
 }
 
-.c9 .ql-editor {
+.c10 .ql-editor {
   font-weight: 400;
   padding: 10px;
   overflow: visible;
 }
 
-.c9 .ql-editor.ql-blank::before {
+.c10 .ql-editor.ql-blank::before {
   left: 11px;
 }
 
-.c9 .ql-picker-label svg {
+.c10 .ql-picker-label svg {
   margin-bottom: 15px !important;
 }
 
-.c9 .ql-toolbar {
+.c10 .ql-toolbar {
   width: -webkit-max-content;
   width: -moz-max-content;
   width: max-content;
 }
 
-.c9 .ql-container {
+.c10 .ql-container {
   font-size: initial;
   font-family: DM Sans;
 }
 
-.c9 .ql-container * {
+.c10 .ql-container * {
   cursor: not-allowed;
 }
 
@@ -202,7 +246,7 @@ exports[`<ThirdPartyQuestion /> Should render and match the snapshot 1`] = `
   color: unset;
 }
 
-.c6 {
+.c7 {
   width: auto;
   height: auto;
   display: block;
@@ -222,7 +266,7 @@ exports[`<ThirdPartyQuestion /> Should render and match the snapshot 1`] = `
   color: unset;
 }
 
-.c7 {
+.c8 {
   width: auto;
   height: auto;
   display: block;
@@ -231,7 +275,7 @@ exports[`<ThirdPartyQuestion /> Should render and match the snapshot 1`] = `
   color: unset;
 }
 
-.c15 {
+.c18 {
   width: auto;
   height: auto;
   display: block;
@@ -247,11 +291,11 @@ exports[`<ThirdPartyQuestion /> Should render and match the snapshot 1`] = `
   cursor: pointer;
 }
 
-.c15:hover {
+.c18:hover {
   background-color: #E9F1FB;
 }
 
-.c16 {
+.c19 {
   width: auto;
   height: auto;
   display: block;
@@ -259,7 +303,7 @@ exports[`<ThirdPartyQuestion /> Should render and match the snapshot 1`] = `
   color: unset;
 }
 
-.c5 {
+.c6 {
   width: auto;
   height: auto;
   width: -webkit-max-content;
@@ -268,12 +312,12 @@ exports[`<ThirdPartyQuestion /> Should render and match the snapshot 1`] = `
   margin-right: 15px;
 }
 
-.c19 {
+.c22 {
   width: auto;
   height: auto;
 }
 
-.c18 {
+.c21 {
   border-radius: 50%;
   background-color: #B727EA;
   display: -webkit-box;
@@ -297,7 +341,7 @@ exports[`<ThirdPartyQuestion /> Should render and match the snapshot 1`] = `
   color: rgba(255,255,255,1);
 }
 
-.c20 {
+.c23 {
   font-family: DM Sans;
   font-size: 13px;
   line-height: 130%;
@@ -306,7 +350,7 @@ exports[`<ThirdPartyQuestion /> Should render and match the snapshot 1`] = `
   color: rgba(183,39,234,1);
 }
 
-.c12 {
+.c13 {
   padding: 5px 10px;
   font-size: 13px;
   font-weight: 600;
@@ -316,13 +360,29 @@ exports[`<ThirdPartyQuestion /> Should render and match the snapshot 1`] = `
   opacity: 0.5;
 }
 
-.c12:focus {
+.c13:focus {
   box-shadow: none;
   outline: none;
   border: 1px solid transparent;
 }
 
-.c13 {
+.c15 {
+  padding: 5px 10px;
+  font-size: 13px;
+  font-weight: 600;
+  border-radius: 4px;
+  background-color: rgba(83,57,240,0.1);
+  color: rgba(83,57,240,1);
+  opacity: 0.5;
+}
+
+.c15:focus {
+  box-shadow: none;
+  outline: none;
+  border: 1px solid transparent;
+}
+
+.c16 {
   display: -webkit-box;
   display: -webkit-flex;
   display: -ms-flexbox;
@@ -340,7 +400,7 @@ exports[`<ThirdPartyQuestion /> Should render and match the snapshot 1`] = `
   height: 30px;
 }
 
-.c13:after {
+.c16:after {
   content: ' ';
   display: block;
   width: 20px;
@@ -350,6 +410,22 @@ exports[`<ThirdPartyQuestion /> Should render and match the snapshot 1`] = `
   border-color: #B727EA transparent #B727EA transparent;
   -webkit-animation: hAjVGa 1.2s linear infinite;
   animation: hAjVGa 1.2s linear infinite;
+}
+
+@media only screen and (min-width:768px) {
+
+}
+
+@media only screen and (min-width:960px) {
+
+}
+
+@media only screen and (min-width:1170px) {
+
+}
+
+@media only screen and (min-width:1360px) {
+
 }
 
 @media only screen and (min-width:768px) {
@@ -382,36 +458,36 @@ exports[`<ThirdPartyQuestion /> Should render and match the snapshot 1`] = `
         width="100%"
       >
         <div
-          class="c0"
+          class="c3"
         >
           <div
-            class="c3"
+            class="c4"
           >
             <div
-              class="c4"
+              class="c5"
               width="90%"
             >
               <img
-                class="c5"
+                class="c6"
                 src="IMAGE_MOCK"
                 width="max-content"
               />
               <div
-                class="c6"
+                class="c7"
                 display="flex"
               >
                 <div
-                  class="c7"
+                  class="c8"
                 >
                   <div
-                    class="c8"
+                    class="c9"
                     width="100%"
                   >
                     <div
-                      class="c0"
+                      class="c3"
                     >
                       <div
-                        class="quill c9"
+                        class="quill c10"
                       >
                         <div
                           class="ql-container ql-bubble ql-disabled"
@@ -1804,13 +1880,24 @@ exports[`<ThirdPartyQuestion /> Should render and match the snapshot 1`] = `
             </div>
           </div>
           <div
-            class="c10"
+            class="c11"
           >
             <input
-              aria-label="Email(s)"
-              class="c11 c12"
+              aria-label="Score"
+              class="c12 c13"
               color="#0086F8"
               data-cy="score-0-input"
+              disabled=""
+              placeholder="Score"
+              type="tel"
+              value=""
+              width="85px"
+            />
+            <input
+              aria-label="Email(s)"
+              class="c14 c15"
+              color="#5339F0"
+              data-cy="emails-0-input"
               disabled=""
               placeholder="Email(s)"
               type="text"
@@ -1820,7 +1907,7 @@ exports[`<ThirdPartyQuestion /> Should render and match the snapshot 1`] = `
           </div>
         </div>
         <div
-          class="c13"
+          class="c16"
           color="#B727EA"
           size="30"
           width="6"
@@ -1829,31 +1916,31 @@ exports[`<ThirdPartyQuestion /> Should render and match the snapshot 1`] = `
     </div>
   </div>
   <div
-    class="c14"
+    class="c17"
     display="flex"
     hidden=""
   >
     <div
-      class="c15"
+      class="c18"
     >
       <div
-        class="c16"
+        class="c19"
       >
         <div
-          class="c17"
+          class="c20"
         >
           <div
-            class="c18"
+            class="c21"
             color="#FFFFFF"
             opacity="1"
           >
             <img
-              class="c19"
+              class="c22"
               src="IMAGE_MOCK"
             />
           </div>
           <p
-            class="c20"
+            class="c23"
             color="#B727EA"
             font-weight="bold"
           >
