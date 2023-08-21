@@ -51,6 +51,7 @@ export interface IndexedVariableAnswerData<
 
 export interface ThirdPartyReportAnswerData extends AnswerData<string> {
   reportTemplateIds: string[];
+  numericValue: string[];
   index?: number;
 }
 
