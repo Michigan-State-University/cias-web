@@ -87,7 +87,7 @@ const ThirdPartyQuestion = ({
   };
 
   return (
-    <Column>
+    <Column mt={10}>
       <DndSortable onDragEnd={onDragEnd} items={data} selector={null}>
         {({ item, index, dragHandleProps }) => (
           <Row mb={12}>
