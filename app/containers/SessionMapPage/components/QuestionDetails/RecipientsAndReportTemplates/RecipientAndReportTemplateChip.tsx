@@ -5,20 +5,20 @@ import { colors } from 'theme';
 import { MultiColoredChip } from 'components/ColoredChip';
 
 type Props = {
-  email: string;
+  recipient: string;
   template?: string;
 };
 
-const EmailAndReportTemplateChip = ({
-  email,
+const RecipientAndReportTemplateChip = ({
+  recipient,
   template,
 }: Props): JSX.Element => (
   <MultiColoredChip
-    leftChipColor={colors.azure}
-    leftChipContent={email || '-'}
+    leftChipColor={colors.kleinBlue}
+    leftChipContent={recipient || '-'}
     rightChipColor={colors.bluewood}
     rightChipContent={template || '-'}
   />
 );
 
-export default EmailAndReportTemplateChip;
+export default RecipientAndReportTemplateChip;
