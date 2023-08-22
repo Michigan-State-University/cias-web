@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useMemo, useState } from 'react';
 import { useIntl } from 'react-intl';
 import { AxiosError } from 'axios';
 import byteSize from 'byte-size';
@@ -18,6 +18,9 @@ import Column from 'components/Column';
 import Text from 'components/Text';
 
 import messages from '../NoFormulaMessages/messages';
+import { formatMimeFileFormat } from '../../../../../../utils/formatters';
+import { TextButton } from '../../../../../../components/Button';
+import { themeColors } from '../../../../../../theme';
 
 export type Props = {
   attachment: Nullable<AppFile>;
@@ -38,6 +41,18 @@ export const TextMessageAttachment: React.FC<Props> = ({
 }) => {
   const { formatMessage } = useIntl();
 
+  const [allFormatsVisible, setAllFormatsVisible] = useState(false);
+
+  const formattedLargeImageFileFormats = useMemo(
+    () => MMS_LARGE_IMAGE_FILE_FORMATS.map(formatMimeFileFormat),
+    [],
+  );
+
+  const formattedAcceptedFileFormats = useMemo(
+    () => MMS_ACCEPTED_FILE_FORMATS.map(formatMimeFileFormat),
+    [],
+  );
+
   return (
     <>
       <FileUpload
@@ -52,28 +67,43 @@ export const TextMessageAttachment: React.FC<Props> = ({
         maxSize={MMS_MAX_NON_LARGE_IMAGE_FILE_FORMAT_SIZE}
         maxSizeMap={MMS_MAX_LARGE_IMAGE_FILE_SIZE_MAP}
         tooltipContent={
-          <Column>
+          <Column align="start">
             <Text>
-              {formatMessage(messages.maxImageFileSize)}
-              <ul>
-                {MMS_LARGE_IMAGE_FILE_FORMATS.map((format) => (
-                  <li>{format}</li>
-                ))}
-              </ul>
-              {formatMessage(messages.is, {
+              {formatMessage(messages.maxLargeImageFileSize, {
+                formats: formattedLargeImageFileFormats.join(', '),
                 maxSize: byteSize(MMS_MAX_FILE_SIZE, {
                   precision: 2,
                 }).toString(),
               })}
-              <br />
+            </Text>
+            <Text mt={12}>
               {formatMessage(messages.maxOtherFileSize, {
                 maxSize: byteSize(MMS_MAX_NON_LARGE_IMAGE_FILE_FORMAT_SIZE, {
                   precision: 0,
                 }).toString(),
               })}
             </Text>
+            {!allFormatsVisible && (
+              <TextButton
+                buttonProps={{ py: 16, px: 0, color: themeColors.secondary }}
+                onClick={() => setAllFormatsVisible(true)}
+              >
+                {formatMessage(messages.viewAllSupportedFileFormats)}
+              </TextButton>
+            )}
+            {allFormatsVisible && (
+              <>
+                <Text mt={12}>
+                  {formatMessage(messages.allSupportedFormats)}
+                </Text>
+                <Text opacity={0.8}>
+                  {formattedAcceptedFileFormats.join(', ')}
+                </Text>
+              </>
+            )}
           </Column>
         }
+        onHideTooltip={() => setAllFormatsVisible(false)}
       />
     </>
   );
