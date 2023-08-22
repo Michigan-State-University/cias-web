@@ -16,7 +16,7 @@ import {
 function* clearInterventionData({
   payload: { interventionId },
 }: ReturnType<typeof clearInterventionDataRequest>) {
-  const requestURL = `v1/interventions/${interventionId}/user_data`;
+  const requestURL = `/v1/interventions/${interventionId}/user_data`;
 
   try {
     const { data } = yield call(axios.delete, requestURL);
