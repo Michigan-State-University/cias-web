@@ -46,4 +46,8 @@ export default defineMessages({
     id: `${scope}.generateTestReportFailure`,
     defaultMessage: 'Failed to generate Test Report.',
   },
+  updateReportTemplateFailure: {
+    id: `${scope}.updateReportTemplateFailure`,
+    defaultMessage: 'Failed to update the report template',
+  },
 });
