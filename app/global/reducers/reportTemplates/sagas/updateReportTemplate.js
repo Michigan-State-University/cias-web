@@ -1,14 +1,17 @@
-import { takeLatest, put } from 'redux-saga/effects';
+import { takeLatest, put, call } from 'redux-saga/effects';
 import axios from 'axios';
+import { toast } from 'react-toastify';
 
 import objectToSnakeCase from 'utils/objectToSnakeCase';
 import { jsonApiToObject } from 'utils/jsonApiMapper';
+import { formatApiErrorMessage } from 'utils/formatApiErrorMessage';
 
 import { UPDATE_REPORT_TEMPLATE_REQUEST } from '../constants';
 import {
   updateReportTemplateSuccess,
   updateReportTemplateFailure,
 } from '../actions';
+import messages from './messages';
 
 function* updateReportTemplate({
   payload: { sessionId, reportTemplate, imageData },
@@ -40,6 +43,10 @@ function* updateReportTemplate({
       yield put(updateReportTemplateSuccess(mappedData));
     }
   } catch (error) {
+    yield call(
+      toast.error,
+      formatApiErrorMessage(error, messages.updateReportTemplateFailure),
+    );
     yield put(updateReportTemplateFailure(error));
   }
 }
