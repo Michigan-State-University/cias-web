@@ -28,7 +28,7 @@ import Portal from 'components/Portal';
 
 import { StyledTooltip } from './styled';
 
-type TooltipProps = {
+export type TooltipProps = {
   id: string;
   children?: ReactNode;
   visible?: boolean;
@@ -41,6 +41,7 @@ type TooltipProps = {
   allowClicksOnContent?: boolean;
   tooltipProps?: Partial<CSSProperties>;
   iconProps?: object;
+  onHide?: () => void;
 } & Record<string, unknown>;
 
 /**
@@ -60,6 +61,7 @@ const Tooltip = ({
   allowClicksOnContent,
   tooltipProps,
   iconProps,
+  onHide,
   ...restProps
 }: TooltipProps) => {
   const tooltipRef = useRef<HTMLDivElement>();
@@ -71,7 +73,10 @@ const Tooltip = ({
 
   const showTooltip = () =>
     tooltipRef.current && ReactTooltip.show(tooltipRef.current);
-  const hideTooltip = () => ReactTooltip.hide(tooltipRef.current);
+  const hideTooltip = () => {
+    if (onHide) onHide();
+    ReactTooltip.hide(tooltipRef.current);
+  };
 
   const shouldShowTooltip = visible && isHovered;
 
