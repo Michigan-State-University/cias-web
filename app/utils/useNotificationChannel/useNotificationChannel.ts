@@ -16,6 +16,7 @@ import {
 } from 'global/reducers/notifications/actions';
 import {
   onCollaboratorRemovedReceive,
+  onSensitiveDataRemovedReceive,
   updateInterventionConversationsTranscript,
   withOnCollaboratorRemovedReceiveSaga,
 } from 'global/reducers/intervention';
@@ -80,8 +81,14 @@ export const useNotificationChannel = () => {
         break;
       }
       case NotificationEvent.COLLABORATOR_REMOVED: {
+        const { interventionId } = data;
         dispatch(refetchInterventions());
-        dispatch(onCollaboratorRemovedReceive(data.interventionId));
+        dispatch(onCollaboratorRemovedReceive(interventionId));
+        break;
+      }
+      case NotificationEvent.SENSITIVE_DATA_REMOVED: {
+        const { interventionId } = data;
+        dispatch(onSensitiveDataRemovedReceive(interventionId));
         break;
       }
       default:
