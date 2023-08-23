@@ -25,14 +25,21 @@ const VariablesAndScores = ({ question }: Props): JSX.Element => {
       case QuestionTypes.CURRENCY:
       case QuestionTypes.NUMBER:
       case QuestionTypes.EXTERNAL_LINK:
-      case QuestionTypes.PARTICIPANT_REPORT:
-      case QuestionTypes.PHONE:
         return (
           <VariableAndScoreChip
             variable={question.body.variable.name}
             variableOnly
           />
         );
+      case QuestionTypes.PARTICIPANT_REPORT:
+      case QuestionTypes.PHONE:
+        return ['1', '0'].map((value, index) => (
+          <VariableAndScoreChip
+            variable={question.body.variable.name}
+            score={value}
+            key={`session-map-question-details-variable-${index}`}
+          />
+        ));
       case QuestionTypes.SINGLE:
       case QuestionTypes.THIRD_PARTY:
         return question.body.data.map(({ value }, index) => (
