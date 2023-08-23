@@ -207,16 +207,7 @@ export const ManageRecipientsModalContent: ModalContentRenderer<Recipients> = ({
               </Column>
             </div>
           </Tabs>
-          <Row gap={12} mt={16}>
-            <Button
-              // @ts-ignore
-              px={30}
-              width="auto"
-              title={formatMessage(globalMessages.save)}
-              disabled={!isValid || !dirty}
-              onClick={handleSubmit}
-              type="submit"
-            />
+          <Row gap={12} mt={16} justify="end">
             <Button
               // @ts-ignore
               px={30}
@@ -225,6 +216,15 @@ export const ManageRecipientsModalContent: ModalContentRenderer<Recipients> = ({
               title={formatMessage(globalMessages.cancel)}
               onClick={() => closeModal()}
               type="button"
+            />
+            <Button
+              // @ts-ignore
+              px={30}
+              width="auto"
+              title={formatMessage(globalMessages.save)}
+              disabled={!isValid || !dirty}
+              onClick={handleSubmit}
+              type="submit"
             />
           </Row>
         </Form>
