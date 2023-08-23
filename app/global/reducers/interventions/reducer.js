@@ -8,6 +8,7 @@ import {
 } from 'global/reducers/intervention';
 
 import isNullOrUndefined from 'utils/isNullOrUndefined';
+import { updateItemById } from 'utils/reduxUtils';
 
 import {
   ARCHIVE_INTERVENTION_ERROR,
@@ -21,6 +22,7 @@ import {
   IMPORT_INTERVENTION_SUCCESS,
   REFETCH_INTERVENTIONS,
   RESET_IMPORT_INTERVENTION_STATE,
+  UPDATE_INTERVENTION_LIST_ITEM_BY_ID,
 } from './constants';
 
 export const initialState = {
@@ -158,6 +160,15 @@ export const interventionsReducer = (state = initialState, action) =>
 
       case REFETCH_INTERVENTIONS: {
         draft.shouldRefetch = true;
+        break;
+      }
+
+      case UPDATE_INTERVENTION_LIST_ITEM_BY_ID: {
+        const {
+          payload: { interventionId, changes },
+        } = action;
+
+        updateItemById(draft.interventions, interventionId, changes);
         break;
       }
     }

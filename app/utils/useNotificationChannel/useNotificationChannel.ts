@@ -21,7 +21,10 @@ import {
   withOnCollaboratorRemovedReceiveSaga,
 } from 'global/reducers/intervention';
 import { updateConversationTranscript } from 'global/reducers/liveChat';
-import { refetchInterventions } from 'global/reducers/interventions';
+import {
+  refetchInterventions,
+  updateInterventionListItemById,
+} from 'global/reducers/interventions';
 
 import {
   NewNotificationData,
@@ -36,6 +39,7 @@ import {
   NotificationChannelActionName,
   NotificationChannelMessageTopic,
 } from './constants';
+import { SensitiveDataState } from '../../models/Intervention';
 
 export type NotificationChannel = ReturnType<typeof useNotificationChannel>;
 
@@ -89,6 +93,11 @@ export const useNotificationChannel = () => {
       case NotificationEvent.SENSITIVE_DATA_REMOVED: {
         const { interventionId } = data;
         dispatch(onSensitiveDataRemovedReceive(interventionId));
+        dispatch(
+          updateInterventionListItemById(interventionId, {
+            sensitiveDataState: SensitiveDataState.REMOVED,
+          }),
+        );
         break;
       }
       default:
