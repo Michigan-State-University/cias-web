@@ -188,6 +188,7 @@ export const ClearInterventionDataModalContent: ModalContentRenderer<ClearInterv
                     ? 'warning'
                     : 'primary'
                 }
+                type="submit"
               >
                 {formatMessage(
                   sensitiveDataState === SensitiveDataState.COLLECTED
