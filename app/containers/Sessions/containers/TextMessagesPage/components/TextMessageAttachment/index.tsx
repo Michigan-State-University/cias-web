@@ -3,6 +3,8 @@ import { useIntl } from 'react-intl';
 import { AxiosError } from 'axios';
 import byteSize from 'byte-size';
 
+import { themeColors } from 'theme';
+
 import { AppFile } from 'models/File';
 
 import {
@@ -13,14 +15,14 @@ import {
   MMS_MAX_NON_LARGE_IMAGE_FILE_FORMAT_SIZE,
 } from 'global/constants';
 
+import { formatMimeFileFormat } from 'utils/formatters';
+
 import FileUpload from 'components/FileUpload';
 import Column from 'components/Column';
 import Text from 'components/Text';
+import { TextButton } from 'components/Button';
 
 import messages from '../NoFormulaMessages/messages';
-import { formatMimeFileFormat } from '../../../../../../utils/formatters';
-import { TextButton } from '../../../../../../components/Button';
-import { themeColors } from '../../../../../../theme';
 
 export type Props = {
   attachment: Nullable<AppFile>;
