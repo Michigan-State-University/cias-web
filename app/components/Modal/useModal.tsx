@@ -13,7 +13,7 @@ export type ModalContentRendererProps<ModalState, CloseData> = {
   modalState: Nullable<ModalState>;
 };
 
-export type ModalContentRenderer<ModalState, CloseData> = FC<
+export type ModalContentRenderer<ModalState, CloseData = ModalState> = FC<
   ModalContentRendererProps<ModalState, CloseData>
 >;
 

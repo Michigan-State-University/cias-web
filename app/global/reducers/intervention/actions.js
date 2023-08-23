@@ -435,9 +435,15 @@ export const refreshInterventionData = (interventionId, forCurrentEditorToo) =>
 
 export const resetReducer = () => actionBuilder(RESET_REDUCER, {});
 
-export const clearInterventionDataRequest = (interventionId) =>
+export const clearInterventionDataRequest = (
+  interventionId,
+  delay,
+  onSuccess,
+) =>
   actionBuilder(CLEAR_INTERVENTION_DATA_REQUEST, {
     interventionId,
+    delay,
+    onSuccess,
   });
 export const clearInterventionDataSuccess = (
   interventionId,
