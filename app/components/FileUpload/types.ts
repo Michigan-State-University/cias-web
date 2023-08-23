@@ -1,3 +1,3 @@
 export enum FileErrorCode {
-  PLACEHOLDER = 'Placeholder for future implementations',
+  FILE_INVALID_TYPE = 'file-invalid-type',
 }
