@@ -46,6 +46,7 @@ export interface ThirdPartyReportQuestionData
   extends QuestionPayloadData<string> {
   value: string;
   reportTemplateIds: string[];
+  numericValue: string;
   originalText?: string;
 }
 

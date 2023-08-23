@@ -33,8 +33,8 @@ export interface QuestionBodyWithoutVariable<
   data: TQuestionData[];
 }
 
-export interface QuestionBodyWithVariable<TQuestionData extends QuestionData> {
-  data: TQuestionData[];
+export interface QuestionBodyWithVariable<TQuestionData extends QuestionData>
+  extends QuestionBodyWithoutVariable<TQuestionData> {
   variable: QuestionBodyVariable;
 }
 
@@ -47,7 +47,7 @@ export type FreeResponseQuestionBody =
   QuestionBodyWithVariable<FreeResponseQuestionData>;
 
 export type ThirdPartyReportQuestionBody =
-  QuestionBodyWithoutVariable<ThirdPartyReportQuestionData>;
+  QuestionBodyWithVariable<ThirdPartyReportQuestionData>;
 
 export type NameQuestionBody = QuestionBodyWithVariable<NameQuestionData>;
 
