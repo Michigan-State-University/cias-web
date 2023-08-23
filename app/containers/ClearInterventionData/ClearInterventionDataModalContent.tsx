@@ -71,13 +71,16 @@ export const ClearInterventionDataModalContent: ModalContentRenderer<ClearInterv
             return;
           }
 
-          console.log(delay);
           dispatch(
             clearInterventionDataRequest(interventionId, delay, setState),
           );
         },
         [sensitiveDataState, interventionId, setState],
       );
+
+    const isClearanceScheduledForFuture =
+      clearSensitiveDataScheduledAt &&
+      dayjs(clearSensitiveDataScheduledAt).isAfter(dayjs());
 
     return (
       <Formik
@@ -139,7 +142,7 @@ export const ClearInterventionDataModalContent: ModalContentRenderer<ClearInterv
                   <Text fontSize={15} lineHeight={1.5}>
                     {formatMessage(messages.markedToRemoveContentFirst)}
                     <br />
-                    {clearSensitiveDataScheduledAt &&
+                    {isClearanceScheduledForFuture &&
                       formatMessage(messages.markedToRemoveContentSecond, {
                         time: dayjs(clearSensitiveDataScheduledAt)
                           .locale(CustomDayjsLocale.EN_LONG_RELATIVE_TIME)
