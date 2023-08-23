@@ -14,7 +14,8 @@ import {
   makeSelectSelectedQuestion,
   updateQuestionData,
 } from 'global/reducers/questions';
-import { emailValidator } from 'utils/validators';
+import globalMessages from 'global/i18n/globalMessages';
+import { emailValidator, numericValidator } from 'utils/validators';
 import { themeColors, colors } from 'theme';
 
 import FlexibleWidthApprovableInput from 'components/Input/FlexibleWidthApprovableInput';
@@ -87,7 +88,7 @@ const ThirdPartyQuestion = ({
   };
 
   return (
-    <Column>
+    <Column mt={10}>
       <DndSortable onDragEnd={onDragEnd} items={data} selector={null}>
         {({ item, index, dragHandleProps }) => (
           <Row mb={12}>
@@ -157,9 +158,34 @@ const ThirdPartyQuestion = ({
                     </Row>
                   )}
                 </Row>
-                <Row mb={10} ml={40} align="center" hidden={isNarratorTab}>
+                <Row
+                  mb={10}
+                  ml={40}
+                  align="center"
+                  hidden={isNarratorTab}
+                  gap={10}
+                >
                   <BadgeInput
                     data-cy={`score-${index}-input`}
+                    disabled={!editingPossible}
+                    px={0}
+                    py={12}
+                    textAlign="center"
+                    validator={numericValidator}
+                    keyboard="tel"
+                    placeholder={formatMessage(
+                      // @ts-ignore
+                      globalMessages.variables.variableScorePlaceholder,
+                    )}
+                    value={item.numeric_value}
+                    color={colors.azure}
+                    onBlur={(value) =>
+                      updateAnswer(index, { ...item, numeric_value: value })
+                    }
+                  />
+                  {/* TODO place score input above recipient list when merging https://htdevelopers.atlassian.net/browse/CIAS30-3498 */}
+                  <BadgeInput
+                    data-cy={`emails-${index}-input`}
                     disabled={!editingPossible}
                     textAlign="center"
                     placeholder={
@@ -168,7 +194,8 @@ const ThirdPartyQuestion = ({
                         : ''
                     }
                     value={item.value}
-                    color={colors.azure}
+                    color={colors.kleinBlue}
+                    bg={colors.titanWhite}
                     onBlur={(currentValue) =>
                       handleChangeVariable(index, item, currentValue)
                     }

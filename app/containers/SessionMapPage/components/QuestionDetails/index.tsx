@@ -3,11 +3,7 @@ import { useIntl } from 'react-intl';
 
 import { ReportTemplate } from 'models/ReportTemplate';
 import { QuestionGroup } from 'models/QuestionGroup';
-import {
-  QuestionTypes,
-  FeedbackQuestionDTO,
-  QuestionDTO,
-} from 'models/Question';
+import { QuestionTypes, QuestionDTO } from 'models/Question';
 import { Session } from 'models/Session';
 import { Answer } from 'models/Answer';
 
@@ -32,6 +28,7 @@ import {
   FeedbackFormulaAndCases,
 } from './FormulaAndCases';
 import UserAnswer from './UserAnswer';
+import { RecipientsAndReportTemplates } from './RecipientsAndReportTemplates';
 
 type Props = {
   shownQuestion: QuestionDTO;
@@ -90,15 +87,16 @@ const SessionMapQuestionDetails = ({
             </Column>
           </Row>
           {!QUESTIONS_WITHOUT_VARIABLES.includes(type) && (
-            <VariablesAndScores
+            <VariablesAndScores question={shownQuestion} />
+          )}
+          {type === QuestionTypes.THIRD_PARTY && (
+            <RecipientsAndReportTemplates
               question={shownQuestion}
               reportTemplates={reportTemplates}
             />
           )}
           {type === QuestionTypes.FEEDBACK && (
-            <FeedbackFormulaAndCases
-              question={shownQuestion as FeedbackQuestionDTO}
-            />
+            <FeedbackFormulaAndCases question={shownQuestion} />
           )}
           {type !== QuestionTypes.FINISH && (
             <BranchingFormulaAndCases

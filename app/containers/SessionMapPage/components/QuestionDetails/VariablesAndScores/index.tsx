@@ -1,28 +1,20 @@
 import React from 'react';
 import { useIntl } from 'react-intl';
 
-import { ReportTemplate } from 'models/ReportTemplate';
-
 import { QuestionDTO, QuestionTypes } from 'models/Question';
 
 import Comment from 'components/Text/Comment';
 import Column from 'components/Column';
 
 import messages from './messages';
-import { formatThirdPartyReportQuestionData } from './utils';
-import { ChipsContainer } from './styled';
+import { ChipsContainer } from '../styled';
 import VariableAndScoreChip from './VariableAndScoreChip';
-import EmailAndReportTemplateChip from './EmailAndReportTemplateChip';
 
 type Props = {
   question: QuestionDTO;
-  reportTemplates: ReportTemplate[];
 };
 
-const VariablesAndScores = ({
-  question,
-  reportTemplates,
-}: Props): JSX.Element => {
+const VariablesAndScores = ({ question }: Props): JSX.Element => {
   const { formatMessage } = useIntl();
 
   const renderChipsByQuestionType = (): JSX.Element[] | JSX.Element => {
@@ -49,6 +41,7 @@ const VariablesAndScores = ({
           />
         ));
       case QuestionTypes.SINGLE:
+      case QuestionTypes.THIRD_PARTY:
         return question.body.data.map(({ value }, index) => (
           <VariableAndScoreChip
             variable={question.body.variable.name}
@@ -98,30 +91,6 @@ const VariablesAndScores = ({
             ))}
           </Column>
         );
-      case QuestionTypes.THIRD_PARTY:
-        const formattedData = formatThirdPartyReportQuestionData(
-          question.body.data,
-        );
-        return Array.from(formattedData).flatMap(([email, templatesIds]) => {
-          if (templatesIds.size === 0) {
-            return (
-              <EmailAndReportTemplateChip
-                key={`session-map-emails-${email}`}
-                email={email}
-              />
-            );
-          }
-          return Array.from(templatesIds).map((templateId) => (
-            <EmailAndReportTemplateChip
-              key={`session-map-emails-${email}-${templateId}`}
-              email={email}
-              template={
-                reportTemplates.find(({ id }) => id === templateId)?.name ??
-                templateId
-              }
-            />
-          ));
-        });
       default:
         return <></>;
     }
