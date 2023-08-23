@@ -67,7 +67,15 @@ export const getQuestionDataByType = (
 
     case QuestionTypes.THIRD_PARTY:
       return {
-        data: [{ payload: '', value: '', report_template_ids: [] }],
+        data: [
+          {
+            payload: '',
+            value: '',
+            report_template_ids: [],
+            numeric_value: '',
+          },
+        ],
+        variable: { name: '' },
       };
 
     case QuestionTypes.TLFB_CONFIG:
