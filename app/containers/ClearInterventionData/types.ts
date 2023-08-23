@@ -5,3 +5,7 @@ export type ClearInterventionDataModalState = {
   initialSensitiveDataState: SensitiveDataState;
   initialClearSensitiveDataScheduledAt: Nullable<string>;
 };
+
+export type ClearInterventionDataFormValues = {
+  delay: string;
+};

@@ -28,6 +28,8 @@ export const floatCharRegex = /^(\.|\d)$/;
 
 export const naturalNumberRegex = /^[1-9][0-9]*$/;
 
+export const nonNegativeIntegerRegex = /^([1-9]\d*|0)$/;
+
 export const currencyRegex = /^[0-9]+\.?[0-9]{0,2}$/;
 
 export const zipCodeRegex = /^\d{5}(-\d{4})?$/;
