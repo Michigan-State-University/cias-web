@@ -41,11 +41,18 @@ const VariablesAndScores = ({ question }: Props): JSX.Element => {
           />
         ));
       case QuestionTypes.SINGLE:
-      case QuestionTypes.THIRD_PARTY:
         return question.body.data.map(({ value }, index) => (
           <VariableAndScoreChip
             variable={question.body.variable.name}
             score={value}
+            key={`session-map-question-details-variable-${index}`}
+          />
+        ));
+      case QuestionTypes.THIRD_PARTY:
+        return question.body.data.map(({ numeric_value }, index) => (
+          <VariableAndScoreChip
+            variable={question.body.variable.name}
+            score={numeric_value}
             key={`session-map-question-details-variable-${index}`}
           />
         ));
