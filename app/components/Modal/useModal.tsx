@@ -19,7 +19,7 @@ export type ModalContentRenderer<ModalState, CloseData> = FC<
 
 export type ModalProps<ModalState = boolean, CloseData = ModalState> = {
   type: ModalType.Modal;
-  props: Omit<ModalComponentProps, 'children' | 'onClose'> & {
+  props: Omit<ModalComponentProps, 'children' | 'onClose' | 'visible'> & {
     onClose?: (data?: CloseData) => void;
   };
   modalContentRenderer: ModalContentRenderer<ModalState, CloseData>;
@@ -29,7 +29,7 @@ export type ConfirmationModalProps<ModalState = boolean> = {
   type: ModalType.ConfirmationModal;
   props: Omit<
     ConfirmationModalComponentProps<ModalState>,
-    'children' | 'onClose' | 'modalState'
+    'children' | 'onClose' | 'modalState' | 'visible'
   >;
 };
 
@@ -61,8 +61,10 @@ export const useModal = <
   );
 
   const closeModal = useCallback((data?: CloseData) => {
-    if (type === ModalType.Modal && props.onClose) {
-      props.onClose(data);
+    if (props.onClose) {
+      if (type === ModalType.Modal) props.onClose(data);
+      // @ts-ignore
+      if (type === ModalType.ConfirmationModal) props.onClose();
     }
     setModalState(undefined);
   }, []);

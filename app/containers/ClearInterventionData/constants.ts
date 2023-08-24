@@ -1,0 +1,1 @@
+export const CLEAR_COLLECTED_DATA_MODAL_WIDTH = '422px';

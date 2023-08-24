@@ -494,4 +494,12 @@ export default defineMessages({
       defaultMessage: 'Mobile',
     },
   },
+  areYouSure: {
+    id: `${scope}.areYouSure`,
+    defaultMessage: 'Are you sure?',
+  },
+  back: {
+    id: `${scope}.back`,
+    defaultMessage: 'Back',
+  },
 });

@@ -66,6 +66,7 @@ import {
   makeSelectCanCurrentUserMakeChanges,
   makeSelectCanCurrentUserAccessParticipantsData,
   fetchInterventionSaga,
+  makeSelectIsCurrentUserEditor,
 } from 'global/reducers/intervention';
 import { interventionOptionsSaga } from 'global/sagas/interventionOptionsSaga';
 import {
@@ -86,6 +87,7 @@ import {
   ShareExternallyLevel,
   useShareExternallyModal,
 } from 'containers/ShareExternallyModal';
+import { useClearInterventionData } from 'containers/ClearInterventionData';
 
 import Modal, {
   ConfirmationModal,
@@ -149,6 +151,7 @@ export function InterventionDetailsPage({
   user: { organizableId: userOrganizableId },
   editSession,
   exportIntervention,
+  isCurrentUserEditor,
   canCurrentUserMakeChanges,
   editingPossible,
   isCurrentUserInterventionOwner,
@@ -179,6 +182,9 @@ export function InterventionDetailsPage({
     type,
     userId,
     hfhsAccess,
+    hasCollaborators,
+    sensitiveDataState,
+    clearSensitiveDataScheduledAt,
   } = intervention || {};
 
   const testsLeft = catMhPool - createdCatMhSessionCount;
@@ -309,6 +315,16 @@ export function InterventionDetailsPage({
 
   const handleExportIntervention = () => exportIntervention(id);
 
+  const { ClearInterventionDataOption, ClearInterventionDataModal } =
+    useClearInterventionData(
+      status,
+      id,
+      hasCollaborators,
+      isCurrentUserEditor,
+      sensitiveDataState,
+      clearSensitiveDataScheduledAt,
+    );
+
   const options = [
     {
       id: 'translate',
@@ -378,6 +394,7 @@ export function InterventionDetailsPage({
           },
         ]
       : []),
+    ...(isCurrentUserInterventionOwner ? [ClearInterventionDataOption] : []),
   ];
 
   useLayoutEffect(() => {
@@ -591,6 +608,7 @@ export function InterventionDetailsPage({
             </Modal>
 
             <CollaboratorsModal />
+            <ClearInterventionDataModal />
 
             <Header
               name={name}
@@ -728,6 +746,7 @@ InterventionDetailsPage.propTypes = {
   editSession: PropTypes.func,
   user: PropTypes.object,
   exportIntervention: PropTypes.func,
+  isCurrentUserEditor: PropTypes.bool,
   canCurrentUserMakeChanges: PropTypes.bool,
   editingPossible: PropTypes.bool,
   isCurrentUserInterventionOwner: PropTypes.bool,
@@ -744,6 +763,7 @@ const mapStateToProps = createStructuredSelector({
   createSessionError: makeSelectInterventionError('createSessionError'),
   sessionIndex: makeSelectCurrentSessionIndex(),
   user: makeSelectUser(),
+  isCurrentUserEditor: makeSelectIsCurrentUserEditor(),
   canCurrentUserMakeChanges: makeSelectCanCurrentUserMakeChanges(),
   editingPossible: makeSelectEditingPossible(),
   isCurrentUserInterventionOwner: makeSelectIsCurrentUserInterventionOwner(),

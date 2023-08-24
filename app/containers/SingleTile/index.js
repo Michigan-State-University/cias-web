@@ -83,6 +83,7 @@ import {
   TileInfo,
 } from './styled';
 import { CollaboratingIndicator } from './CollaboratingIndicator';
+import { useClearInterventionData } from '../ClearInterventionData';
 
 const SingleTile = ({
   tileData,
@@ -109,6 +110,8 @@ const SingleTile = ({
     hasCollaborators,
     userId: interventionOwnerId,
     hfhsAccess,
+    sensitiveDataState,
+    clearSensitiveDataScheduledAt,
   } = tileData || {};
 
   const isCurrentUserInterventionOwner = interventionOwnerId === userId;
@@ -218,6 +221,16 @@ const SingleTile = ({
     }
   };
 
+  const { ClearInterventionDataOption, ClearInterventionDataModal } =
+    useClearInterventionData(
+      status,
+      id,
+      hasCollaborators,
+      false,
+      sensitiveDataState,
+      clearSensitiveDataScheduledAt,
+    );
+
   const options = [
     {
       icon: TranslateIcon,
@@ -284,6 +297,7 @@ const SingleTile = ({
           },
         ]
       : []),
+    ...(isCurrentUserInterventionOwner ? [ClearInterventionDataOption] : []),
   ];
 
   const preventDefault = (e) => {
@@ -326,6 +340,7 @@ const SingleTile = ({
       </Modal>
 
       <CollaboratorsModal />
+      <ClearInterventionDataModal />
 
       <StyledLink to={link}>
         <TileContainer>

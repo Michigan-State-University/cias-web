@@ -12,6 +12,7 @@ export type Props<Id extends string | number> = SelectModalOption<Id> & {
 export const SelectModalOptionComponent = <Id extends string | number>({
   id,
   icon,
+  iconFill,
   title,
   description,
   disabled,
@@ -21,7 +22,13 @@ export const SelectModalOptionComponent = <Id extends string | number>({
 
   return (
     <SelectModalButton onClick={handleClick} disabled={disabled}>
-      <Icon src={icon} title={title} height={ICON_SIZE} width={ICON_SIZE} />
+      <Icon
+        src={icon}
+        title={title}
+        height={ICON_SIZE}
+        width={ICON_SIZE}
+        fill={iconFill}
+      />
       <Text mt={12} fontSize={15} fontWeight="bold" lineHeight={1.5}>
         {title}
       </Text>
