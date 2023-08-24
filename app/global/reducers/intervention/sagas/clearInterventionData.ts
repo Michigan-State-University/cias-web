@@ -1,5 +1,5 @@
 import axios from 'axios';
-import { call, put, takeLatest } from '@redux-saga/core/effects';
+import { call, put, takeEvery } from '@redux-saga/core/effects';
 import { toast } from 'react-toastify';
 
 import { formatApiErrorMessage } from 'utils/formatApiErrorMessage';
@@ -14,9 +14,9 @@ import {
 } from '../actions';
 
 function* clearInterventionData({
-  payload: { interventionId },
+  payload: { interventionId, delay, onSuccess },
 }: ReturnType<typeof clearInterventionDataRequest>) {
-  const requestURL = `/v1/interventions/${interventionId}/user_data`;
+  const requestURL = `/v1/interventions/${interventionId}/user_data?delay=${delay}`;
 
   try {
     const { data } = yield call(axios.delete, requestURL);
@@ -29,6 +29,7 @@ function* clearInterventionData({
         clearSensitiveDataScheduledAt,
       ),
     );
+    onSuccess({ sensitiveDataState, clearSensitiveDataScheduledAt });
   } catch (error) {
     yield put(clearInterventionDataError());
     yield call(
@@ -39,7 +40,7 @@ function* clearInterventionData({
 }
 
 export function* clearInterventionDataSaga() {
-  yield takeLatest(CLEAR_INTERVENTION_DATA_REQUEST, clearInterventionData);
+  yield takeEvery(CLEAR_INTERVENTION_DATA_REQUEST, clearInterventionData);
 }
 
 export const withClearInterventionDataSaga = {

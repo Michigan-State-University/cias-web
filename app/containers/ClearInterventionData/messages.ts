@@ -10,12 +10,12 @@ export default defineMessages({
   clearDataConfirmationContent: {
     id: `${scope}.clearDataConfirmationContent`,
     defaultMessage:
-      'Do you want to clear all collected data (both user responses and generated reports) in this intervention? ',
+      'Do you want to clear all collected data in this intervention (both user responses and generated reports)? ',
   },
   clearDataConfirmationNote: {
     id: `${scope}.clearDataConfirmationNote`,
     defaultMessage:
-      'Please note: After performing this action users will be notified and the data will be removed in 5 days. Until then, users will be able to log in and download report files. This action is irreversible.',
+      'Set above value to 0 if you want this action done immediately. You can also give users some time to download their reports before being deleted. This action is irreversible.',
   },
   clearData: {
     id: `${scope}.clearData`,
@@ -41,5 +41,13 @@ export default defineMessages({
   removedContent: {
     id: `${scope}.removedContent`,
     defaultMessage: 'Sensitive data has already been cleared.',
+  },
+  deleteDataIn: {
+    id: `${scope}.deleteDataIn`,
+    defaultMessage: 'Delete data in',
+  },
+  days: {
+    id: `${scope}.days`,
+    defaultMessage: 'days',
   },
 });

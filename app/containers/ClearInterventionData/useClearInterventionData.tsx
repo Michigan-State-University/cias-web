@@ -1,7 +1,5 @@
-import { useCallback, useMemo } from 'react';
+import { useMemo } from 'react';
 import { useIntl } from 'react-intl';
-import { useDispatch, useSelector } from 'react-redux';
-import { useInjectSaga } from 'redux-injectors';
 
 import BinIcon from 'assets/svg/bin-no-bg.svg';
 
@@ -10,18 +8,12 @@ import { colors } from 'theme';
 import { InterventionStatus, SensitiveDataState } from 'models/Intervention';
 import { canClearInterventionData } from 'models/Status/statusPermissions';
 
-import globalMessages from 'global/i18n/globalMessages';
-import {
-  clearInterventionDataRequest,
-  makeSelectInterventionLoader,
-  withClearInterventionDataSaga,
-} from 'global/reducers/intervention';
-
-import { ConfirmationModalProps, ModalType, useModal } from 'components/Modal';
+import { ModalProps, ModalType, useModal } from 'components/Modal';
 
 import messages from './messages';
 import { CLEAR_COLLECTED_DATA_MODAL_WIDTH } from './constants';
 import { ClearInterventionDataModalContent } from './ClearInterventionDataModalContent';
+import { ClearInterventionDataModalState } from './types';
 
 export const useClearInterventionData = (
   interventionStatus: InterventionStatus,
@@ -32,86 +24,43 @@ export const useClearInterventionData = (
   clearSensitiveDataScheduledAt: Nullable<string>,
 ) => {
   const { formatMessage } = useIntl();
-  const dispatch = useDispatch();
 
-  useInjectSaga(withClearInterventionDataSaga);
-
-  const clearInterventionDataLoading = useSelector(
-    makeSelectInterventionLoader('clearInterventionData'),
-  );
-
-  const clearInterventionData = useCallback(() => {
-    if (sensitiveDataState === SensitiveDataState.COLLECTED) {
-      dispatch(clearInterventionDataRequest(interventionId));
-    }
-  }, [interventionId, sensitiveDataState]);
-
-  const clearDataConfirmationModalProps: ConfirmationModalProps['props'] =
+  const clearDataModalProps: ModalProps<ClearInterventionDataModalState>['props'] =
     useMemo(
       () => ({
         title: formatMessage(messages.clearCollectedData),
-        description: null,
-        content: (
-          <ClearInterventionDataModalContent
-            sensitiveDataState={sensitiveDataState}
-            clearSensitiveDataScheduledAt={clearSensitiveDataScheduledAt}
-          />
-        ),
-        contentStyles: { mt: 48 },
-        confirmationButtonText: formatMessage(
-          sensitiveDataState === SensitiveDataState.COLLECTED
-            ? messages.clearData
-            : globalMessages.iUnderstand,
-        ),
-        confirmationButtonColor:
-          sensitiveDataState === SensitiveDataState.COLLECTED
-            ? 'warning'
-            : 'primary',
-        confirmationButtonStyles: {
-          width: 'auto',
-          padding: '0 30px',
-        },
-        cancelButtonStyles: {
-          width: 'auto',
-          padding: '0 30px',
-        },
-        hideCancelButton: sensitiveDataState !== SensitiveDataState.COLLECTED,
-        confirmAction: clearInterventionData,
-        loading: clearInterventionDataLoading,
-        closeOnConfirm: sensitiveDataState !== SensitiveDataState.COLLECTED,
         width: CLEAR_COLLECTED_DATA_MODAL_WIDTH,
-        isMobile: true,
       }),
-      [
-        clearInterventionData,
-        clearInterventionDataLoading,
-        sensitiveDataState,
-        clearSensitiveDataScheduledAt,
-      ],
+      [],
     );
 
-  const {
-    openModal: openClearDataConfirmationModal,
-    Modal: ClearInterventionDataModal,
-  } = useModal({
-    type: ModalType.ConfirmationModal,
-    props: clearDataConfirmationModalProps,
-  });
+  const { openModal: openClearDataModal, Modal: ClearInterventionDataModal } =
+    useModal<ClearInterventionDataModalState>({
+      type: ModalType.Modal,
+      props: clearDataModalProps,
+      modalContentRenderer: ClearInterventionDataModalContent,
+    });
 
   const ClearInterventionDataOption = useMemo(
     () => ({
       id: 'clearInterventionData',
       label: formatMessage(messages.clearCollectedData),
       icon: BinIcon,
-      action: openClearDataConfirmationModal,
+      action: () =>
+        openClearDataModal({
+          interventionId,
+          initialSensitiveDataState: sensitiveDataState,
+          initialClearSensitiveDataScheduledAt: clearSensitiveDataScheduledAt,
+        }),
       color: colors.bluewood,
       disabled:
         !canClearInterventionData(interventionStatus) ||
         (hasCollaborators && !isCurrentUserEditor),
     }),
     [
-      openClearDataConfirmationModal,
+      openClearDataModal,
       sensitiveDataState,
+      clearSensitiveDataScheduledAt,
       interventionStatus,
       hasCollaborators,
       isCurrentUserEditor,

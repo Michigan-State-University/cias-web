@@ -70,7 +70,6 @@ const Input = styled.input.attrs((props) => {
     hideNumberArrows &&
     css`
       /* Chrome, Safari, Edge, Opera */
-
       &::-webkit-outer-spin-button,
       &::-webkit-inner-spin-button {
         -webkit-appearance: none;

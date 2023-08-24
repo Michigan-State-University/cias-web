@@ -369,6 +369,10 @@ export default defineMessages({
       id: `${scope}.naturalNumber`,
       defaultMessage: 'Only natural number values are allowed',
     },
+    nonNegativeInteger: {
+      id: `${scope}.nonNegativeInteger`,
+      defaultMessage: 'Non-negative integer value is required',
+    },
     unreservedURLCharacters: {
       id: `${scope}.unreservedURLCharacters`,
       defaultMessage:
