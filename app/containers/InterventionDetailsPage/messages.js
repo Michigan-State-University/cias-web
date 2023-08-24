@@ -110,7 +110,7 @@ export default defineMessages({
   },
   interventionSettings: {
     id: `${scope}.interventionSettings`,
-    defaultMessage: '<b>Intervention Settings</b> (Language, Quick Exit)',
+    defaultMessage: 'Intervention Settings',
   },
   interventionSettingsIconTooltip: {
     id: `${scope}.interventionSettingsIconTooltip`,

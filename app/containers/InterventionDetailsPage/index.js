@@ -15,7 +15,6 @@ import orderBy from 'lodash/orderBy';
 import { Col as GCol, Row as GRow } from 'react-grid-system';
 import { useParams } from 'react-router-dom';
 import { injectSaga, injectReducer } from 'redux-injectors';
-import { Markup } from 'interweave';
 
 import { colors, themeColors } from 'theme';
 
@@ -100,8 +99,6 @@ import ErrorAlert from 'components/ErrorAlert';
 import Row from 'components/Row';
 import Spinner from 'components/Spinner';
 import AppContainer from 'components/Container';
-import Icon from 'components/Icon';
-import Tooltip from 'components/Tooltip';
 import { HelpIconTooltip } from 'components/HelpIconTooltip';
 import {
   useHenryFordBranchingInfoModal,
@@ -200,10 +197,16 @@ export function InterventionDetailsPage({
   const [translateModalVisible, setTranslateModalVisible] = useState(false);
   const [participantShareModalVisible, setParticipantShareModalVisible] =
     useState(false);
+
   const [
     interventionSettingsModalVisible,
     setInterventionSettingsModalVisible,
   ] = useState(false);
+  const openInterventionSettingsModal = () =>
+    setInterventionSettingsModalVisible(true);
+  const closeInterventionSettingsModal = () =>
+    setInterventionSettingsModalVisible(false);
+
   const [assignOrganizationModalVisible, setAssignOrganizationModalVisible] =
     useState(false);
 
@@ -326,6 +329,13 @@ export function InterventionDetailsPage({
     );
 
   const options = [
+    {
+      id: 'interventionSettings',
+      label: formatMessage(messages.interventionSettings),
+      icon: GearIcon,
+      action: openInterventionSettingsModal,
+      color: colors.bluewood,
+    },
     {
       id: 'translate',
       label: formatMessage(messages.translate),
@@ -570,14 +580,14 @@ export function InterventionDetailsPage({
 
             <Modal
               title={formatMessage(messages.interventionSettingsModalTitle)}
-              onClose={() => setInterventionSettingsModalVisible(false)}
+              onClose={closeInterventionSettingsModal}
               visible={interventionSettingsModalVisible}
               width={INTERVENTION_SETTINGS_MODAL_WIDTH}
             >
               <InterventionSettingsModal
                 editingPossible={editingPossible}
                 canCurrentUserMakeChanges={canCurrentUserMakeChanges}
-                onClose={() => setInterventionSettingsModalVisible(false)}
+                onClose={closeInterventionSettingsModal}
               />
             </Modal>
 
@@ -633,30 +643,7 @@ export function InterventionDetailsPage({
             <GRow>
               <GCol>
                 <Row justify="between">
-                  <Row align="center">
-                    <Tooltip
-                      id="intervention-settings"
-                      text={formatMessage(
-                        messages.interventionSettingsIconTooltip,
-                      )}
-                    >
-                      <Icon
-                        src={GearIcon}
-                        fill={colors.grey}
-                        onClick={() =>
-                          setInterventionSettingsModalVisible(true)
-                        }
-                        role="button"
-                        aria-label={formatMessage(
-                          messages.interventionSettingsIconTooltip,
-                        )}
-                        mr={10}
-                      />
-                    </Tooltip>
-                    <Markup
-                      content={formatMessage(messages.interventionSettings)}
-                    />
-                  </Row>
+                  <Row align="center"></Row>
 
                   {!isAccessRevoked && (
                     <Row align="center">
@@ -686,8 +673,6 @@ export function InterventionDetailsPage({
                   )}
                 </Row>
               </GCol>
-
-              <GCol xs={0} xl={6} />
             </GRow>
 
             <GRow>
