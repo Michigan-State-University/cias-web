@@ -134,7 +134,7 @@ export default defineMessages({
   },
   catMhCounter: {
     id: `${scope}.catMhCounter`,
-    defaultMessage: `<bold>CAT-MH™ License</bold>: {licenseType, select,
+    defaultMessage: `<bold>CAT-MH™ License</bold>: {catMhLicenseType, select,
         ${CatMhLicenseType.LIMITED} {Limited (<counter>{used}/{initial}</counter> <space></space> tests used)}
         ${CatMhLicenseType.UNLIMITED} {Unlimited (<counter>{used}</counter> <space></space> tests used)}
       }`,

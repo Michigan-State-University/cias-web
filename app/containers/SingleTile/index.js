@@ -65,6 +65,8 @@ import {
   HenryFordBranchingInfoType,
   InterventionHenryFordBranchingInfoAction,
 } from 'components/HenryFordBrachingInfoModal';
+import { DataClearedIndicator } from 'components/DataClearedIndicator';
+import { CollaboratingIndicator } from 'components/CollaboratingIndicator';
 
 import TranslateInterventionModal from 'containers/TranslateInterventionModal';
 import interventionDetailsPageSagas from 'containers/InterventionDetailsPage/saga';
@@ -82,10 +84,8 @@ import {
   StatusIndicator,
   TileInfo,
 } from './styled';
-import { CollaboratingIndicator } from './CollaboratingIndicator';
 import { useClearInterventionData } from '../ClearInterventionData';
 import { SensitiveDataState } from '../../models/Intervention';
-import { DataClearedIndicator } from './DataClearedIndicator';
 
 const SingleTile = ({
   tileData,
@@ -349,7 +349,7 @@ const SingleTile = ({
           <Heading>
             <Row gap={6} align="center">
               <Row gap={8} align="center">
-                {hasCollaborators && <CollaboratingIndicator />}
+                {hasCollaborators && <CollaboratingIndicator iconSize={14} />}
                 {status && (
                   <Row align="center" gap={5}>
                     <Text lineHeight={1}>
@@ -360,7 +360,7 @@ const SingleTile = ({
                 )}
               </Row>
               {sensitiveDataState === SensitiveDataState.REMOVED && (
-                <DataClearedIndicator />
+                <DataClearedIndicator opacity={0.7} />
               )}
             </Row>
             {!participantView && (

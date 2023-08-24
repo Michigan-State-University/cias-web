@@ -38,7 +38,6 @@ import {
 import { useRoleManager } from 'models/User/RolesManager';
 import { reorderScope } from 'models/Session/ReorderScope';
 import { archived } from 'models/Status/StatusTypes';
-import { CatMhLicenseType } from 'models/Intervention';
 import { getQuestionGroupsSaga } from 'global/reducers/questionGroups/sagas';
 import { editSessionRequest, editSessionSaga } from 'global/reducers/session';
 import { makeSelectUser } from 'global/reducers/auth';
@@ -99,7 +98,6 @@ import ErrorAlert from 'components/ErrorAlert';
 import Row from 'components/Row';
 import Spinner from 'components/Spinner';
 import AppContainer from 'components/Container';
-import { HelpIconTooltip } from 'components/HelpIconTooltip';
 import {
   useHenryFordBranchingInfoModal,
   HenryFordBranchingInfoType,
@@ -121,10 +119,7 @@ import {
 } from './components/Modals';
 import messages from './messages';
 import { InterventionDetailsPageContext, nextStatus } from './utils';
-import {
-  CAT_MH_TEST_COUNT_WARNING_THRESHOLD,
-  INTERVENTION_SETTINGS_MODAL_WIDTH,
-} from './constants';
+import { INTERVENTION_SETTINGS_MODAL_WIDTH } from './constants';
 
 export function InterventionDetailsPage({
   createSession,
@@ -183,12 +178,6 @@ export function InterventionDetailsPage({
     sensitiveDataState,
     clearSensitiveDataScheduledAt,
   } = intervention || {};
-
-  const testsLeft = catMhPool - createdCatMhSessionCount;
-  const hasSmallNumberOfCatMhSessionsRemaining =
-    licenseType !== CatMhLicenseType.UNLIMITED &&
-    (!catMhPool ||
-      testsLeft / catMhPool <= CAT_MH_TEST_COUNT_WARNING_THRESHOLD);
 
   const showSessionCreateButton = canEdit(status);
   const sharingPossible = canShareWithParticipants(status);
@@ -638,42 +627,13 @@ export function InterventionDetailsPage({
               interventionType={type}
               sharingPossible={sharingPossible}
               userOrganizableId={userOrganizableId}
+              hasCollaborators={hasCollaborators}
+              sensitiveDataState={sensitiveDataState}
+              catMhAccess={!isAccessRevoked}
+              catMhLicenseType={licenseType}
+              catMhPool={catMhPool}
+              createdCatMhSessionCount={createdCatMhSessionCount}
             />
-
-            <GRow>
-              <GCol>
-                <Row justify="between">
-                  <Row align="center"></Row>
-
-                  {!isAccessRevoked && (
-                    <Row align="center">
-                      <HelpIconTooltip
-                        id="intervention-type-tooltip"
-                        tooltipContent={formatMessage(messages.catMhCountInfo)}
-                      >
-                        {formatMessage(messages.catMhCounter, {
-                          licenseType,
-                          current: testsLeft ?? 0,
-                          initial: catMhPool ?? 0,
-                          used: createdCatMhSessionCount,
-                          counter: (chunks) => (
-                            <span
-                              style={{
-                                color: hasSmallNumberOfCatMhSessionsRemaining
-                                  ? themeColors.warning
-                                  : themeColors.success,
-                              }}
-                            >
-                              {chunks}
-                            </span>
-                          ),
-                        })}
-                      </HelpIconTooltip>
-                    </Row>
-                  )}
-                </Row>
-              </GCol>
-            </GRow>
 
             <GRow>
               <GCol xl={6}>
