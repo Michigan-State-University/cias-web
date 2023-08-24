@@ -105,4 +105,8 @@ export default defineMessages({
     id: `${scope}.collaborate`,
     defaultMessage: 'Collaborate',
   },
+  dataCleared: {
+    id: `${scope}.dataCleared`,
+    defaultMessage: 'Data cleared',
+  },
 });
