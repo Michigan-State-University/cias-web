@@ -65,6 +65,8 @@ import {
   HenryFordBranchingInfoType,
   InterventionHenryFordBranchingInfoAction,
 } from 'components/HenryFordBrachingInfoModal';
+import { DataClearedIndicator } from 'components/DataClearedIndicator';
+import { CollaboratingIndicator } from 'components/CollaboratingIndicator';
 
 import TranslateInterventionModal from 'containers/TranslateInterventionModal';
 import interventionDetailsPageSagas from 'containers/InterventionDetailsPage/saga';
@@ -82,8 +84,8 @@ import {
   StatusIndicator,
   TileInfo,
 } from './styled';
-import { CollaboratingIndicator } from './CollaboratingIndicator';
 import { useClearInterventionData } from '../ClearInterventionData';
+import { SensitiveDataState } from '../../models/Intervention';
 
 const SingleTile = ({
   tileData,
@@ -345,15 +347,20 @@ const SingleTile = ({
       <StyledLink to={link}>
         <TileContainer>
           <Heading>
-            <Row gap={12} align="center">
-              {hasCollaborators && <CollaboratingIndicator />}
-              {status && (
-                <Row align="center" gap={5}>
-                  <Text lineHeight={1}>
-                    <FormattedMessage {...globalMessages.statuses[status]} />
-                  </Text>
-                  <StatusIndicator status={status} />
-                </Row>
+            <Row gap={6} align="center">
+              <Row gap={8} align="center">
+                {hasCollaborators && <CollaboratingIndicator iconSize={14} />}
+                {status && (
+                  <Row align="center" gap={5}>
+                    <Text lineHeight={1}>
+                      <FormattedMessage {...globalMessages.statuses[status]} />
+                    </Text>
+                    <StatusIndicator status={status} />
+                  </Row>
+                )}
+              </Row>
+              {sensitiveDataState === SensitiveDataState.REMOVED && (
+                <DataClearedIndicator opacity={0.7} />
               )}
             </Row>
             {!participantView && (
