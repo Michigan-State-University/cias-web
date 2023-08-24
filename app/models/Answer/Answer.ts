@@ -49,10 +49,10 @@ export interface IndexedVariableAnswerData<
   index?: number;
 }
 
-export interface ThirdPartyReportAnswerData extends AnswerData<string> {
+export interface ThirdPartyReportAnswerData
+  extends IndexedVariableAnswerData<string> {
   reportTemplateIds: string[];
   numericValue: string[];
-  index?: number;
 }
 
 export interface GridAnswerData extends VariableAnswerData<string> {

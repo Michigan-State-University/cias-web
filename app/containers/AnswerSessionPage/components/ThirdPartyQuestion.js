@@ -11,7 +11,10 @@ const ThirdPartyQuestion = ({
 }) => {
   const [selectedAnswerIndex, setSelectedAnswerIndex] = useState(null);
   const {
-    body: { data },
+    body: {
+      data,
+      variable: { name },
+    },
     id,
   } = question;
 
@@ -19,11 +22,13 @@ const ThirdPartyQuestion = ({
     setSelectedAnswerIndex(answerBody.length ? answerBody[0].index : null);
   }, [id]);
 
-  const handleClick = (value, reportTemplateIds, index) => {
+  const handleClick = (value, reportTemplateIds, numericValue, index) => {
     selectAnswer([
       {
+        var: name,
         value,
         report_template_ids: reportTemplateIds,
+        numeric_value: numericValue,
         index,
       },
     ]);
