@@ -106,6 +106,7 @@ import {
   CLEAR_INTERVENTION_DATA_REQUEST,
   CLEAR_INTERVENTION_DATA_SUCCESS,
   CLEAR_INTERVENTION_DATA_ERROR,
+  ON_SENSITIVE_DATA_REMOVED_RECEIVED,
 } from './constants';
 
 export const fetchInterventionRequest = (id, showLoader = false) =>
@@ -457,3 +458,5 @@ export const clearInterventionDataSuccess = (
   });
 export const clearInterventionDataError = () =>
   actionBuilder(CLEAR_INTERVENTION_DATA_ERROR, {});
+export const onSensitiveDataRemovedReceive = (interventionId) =>
+  actionBuilder(ON_SENSITIVE_DATA_REMOVED_RECEIVED, { interventionId });

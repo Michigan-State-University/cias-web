@@ -10,4 +10,5 @@ export enum NotificationEvent {
   COLLABORATOR_REMOVED = 'collaborator_removed',
   START_EDITING_INTERVENTION = 'start_editing_intervention',
   STOP_EDITING_INTERVENTION = 'stop_editing_intervention',
+  SENSITIVE_DATA_REMOVED = 'sensitive_data_removed',
 }

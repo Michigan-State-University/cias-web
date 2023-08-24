@@ -5,6 +5,8 @@ import { toast } from 'react-toastify';
 import { formatApiErrorMessage } from 'utils/formatApiErrorMessage';
 import { jsonApiToObject } from 'utils/jsonApiMapper';
 
+import { updateInterventionListItemById } from 'global/reducers/interventions/actions';
+
 import messages from '../messages';
 import { CLEAR_INTERVENTION_DATA_REQUEST } from '../constants';
 import {
@@ -28,6 +30,12 @@ function* clearInterventionData({
         sensitiveDataState,
         clearSensitiveDataScheduledAt,
       ),
+    );
+    yield put(
+      updateInterventionListItemById(interventionId, {
+        sensitiveDataState,
+        clearSensitiveDataScheduledAt,
+      }),
     );
     onSuccess({ sensitiveDataState, clearSensitiveDataScheduledAt });
   } catch (error) {

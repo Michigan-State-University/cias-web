@@ -7,6 +7,7 @@ import {
   NewConversationNotificationData,
   NewNarratorWasSetNotificationData,
   NotificationData,
+  SensitiveDataRemovedNotificationData,
   StartEditingInterventionNotificationData,
   StopEditingInterventionNotificationData,
   SuccessfullyRestoredInterventionNotificationData,
@@ -77,6 +78,11 @@ export type StopEditingInterventionNotification = GenericNotification<
   StopEditingInterventionNotificationData
 >;
 
+export type SensitiveDataRemovedNotification = GenericNotification<
+  NotificationEvent.SENSITIVE_DATA_REMOVED,
+  SensitiveDataRemovedNotificationData
+>;
+
 // Union type
 export type Notification =
   | NewConversationNotification
@@ -88,4 +94,5 @@ export type Notification =
   | NewCollaboratorAddedNotification
   | CollaboratorRemovedNotification
   | StartEditingInterventionNotification
-  | StopEditingInterventionNotification;
+  | StopEditingInterventionNotification
+  | SensitiveDataRemovedNotification;

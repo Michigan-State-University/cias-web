@@ -3,6 +3,8 @@ import set from 'lodash/set';
 import get from 'lodash/get';
 import cloneDeep from 'lodash/cloneDeep';
 
+import { SensitiveDataState } from 'models/Intervention';
+
 import {
   EDIT_SESSION_ERROR,
   EDIT_SESSION_REQUEST,
@@ -117,6 +119,7 @@ import {
   CLEAR_INTERVENTION_DATA_REQUEST,
   CLEAR_INTERVENTION_DATA_SUCCESS,
   CLEAR_INTERVENTION_DATA_ERROR,
+  ON_SENSITIVE_DATA_REMOVED_RECEIVED,
 } from './constants';
 
 export const initialState = {
@@ -748,6 +751,12 @@ export const interventionReducer = (state = initialState, action) =>
       case CLEAR_INTERVENTION_DATA_ERROR: {
         draft.loaders.clearInterventionData = false;
         break;
+      }
+      case ON_SENSITIVE_DATA_REMOVED_RECEIVED: {
+        const { interventionId } = action.payload;
+        if (draft.intervention?.id === interventionId) {
+          draft.intervention.sensitiveDataState = SensitiveDataState.REMOVED;
+        }
       }
     }
   });
