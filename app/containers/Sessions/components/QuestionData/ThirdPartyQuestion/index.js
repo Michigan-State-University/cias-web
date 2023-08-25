@@ -192,14 +192,20 @@ const ThirdPartyQuestion = ({
                 </Column>
               </Column>
 
-              <ReportChooser
-                formatMessage={formatMessage}
-                value={item.report_template_ids}
-                onChange={(reportTemplateIds) =>
-                  handleChangeReportTemplateIds(reportTemplateIds, index, item)
-                }
-                disabled={!editingPossible}
-              />
+              {!isNarratorTab && (
+                <ReportChooser
+                  formatMessage={formatMessage}
+                  value={item.report_template_ids}
+                  onChange={(reportTemplateIds) =>
+                    handleChangeReportTemplateIds(
+                      reportTemplateIds,
+                      index,
+                      item,
+                    )
+                  }
+                  disabled={!editingPossible}
+                />
+              )}
             </HoverableBox>
           </Row>
         )}
