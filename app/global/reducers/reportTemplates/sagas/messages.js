@@ -37,6 +37,10 @@ export default defineMessages({
     id: `${scope}.deleteReportTemplateLogoFailure`,
     defaultMessage: 'Failed to delete the report template logo',
   },
+  deleteCoverLetterCustomLogoFailure: {
+    id: `${scope}.deleteCoverLetterCustomLogoFailure`,
+    defaultMessage: 'Failed to delete the cover letter custom logo',
+  },
   generateTestReportSuccess: {
     id: `${scope}.generateTestReportSuccess`,
     defaultMessage:

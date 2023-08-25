@@ -1,4 +1,4 @@
-import React, { useContext, useEffect, useMemo, useState } from 'react';
+import React, { useContext, useMemo, useState } from 'react';
 import PropTypes from 'prop-types';
 import { compose } from 'redux';
 import { connect, useSelector } from 'react-redux';
@@ -9,6 +9,8 @@ import { colors, themeColors } from 'theme';
 
 import globalMessages from 'global/i18n/globalMessages';
 
+import { CoverLetterLogoType } from 'models/ReportTemplate';
+
 import {
   deleteReportTemplateLogoRequest,
   deleteReportTemplateRequest,
@@ -17,6 +19,9 @@ import {
   updateReportTemplateRequest,
   generateTestReportRequest,
   ReportFor,
+  deleteCoverLetterCustomLogoRequest,
+  uploadReportTemplateLogoRequest,
+  uploadCoverLetterCustomLogoRequest,
 } from 'global/reducers/reportTemplates';
 import { makeSelectInterventionHfHsAccess } from 'global/reducers/intervention';
 
@@ -42,6 +47,7 @@ import { useSelectModal, SELECT_MODAL_WIDTH } from 'components/SelectModal';
 import CopyModal from 'components/CopyModal';
 import { VIEWS } from 'components/CopyModal/Components';
 import Tooltip from 'components/Tooltip';
+import { LabelPosition, Switch } from 'components/Switch';
 
 import { CardBox, Spacer } from '../../styled';
 import { ReportTemplatesContext } from '../../utils';
@@ -57,7 +63,10 @@ const ReportTemplateMainSettings = ({
   duplicateReportTemplate,
   updateReportTemplate,
   deleteReportTemplate,
+  uploadReportTemplateLogo,
   deleteReportTemplateLogo,
+  uploadCoverLetterCustomLogo,
+  deleteCoverLetterCustomLogo,
   generateTestReport,
 }) => {
   const {
@@ -65,21 +74,17 @@ const ReportTemplateMainSettings = ({
     singleReportTemplate,
     loaders: {
       deleteReportTemplateLoading,
+      uploadReportTemplateLogoLoading,
       deleteReportTemplateLogoLoading,
       duplicateReportTemplateLoading,
-      updateReportTemplateLoading,
       generateTestReportLoading,
+      uploadCoverLetterCustomLogoLoading,
+      deleteCoverLetterCustomLogoLoading,
     },
     canEdit,
   } = useContext(ReportTemplatesContext);
 
   const hfhsAccess = useSelector(makeSelectInterventionHfHsAccess());
-
-  useEffect(() => {
-    if (!updateReportTemplateLoading) setIsUploadingImage(false);
-  }, [updateReportTemplateLoading]);
-
-  const [isUploadingImage, setIsUploadingImage] = useState(false);
 
   const [openCollapsable, setOpenCollapsable] = useState(false);
   const toggleCollapsable = () => setOpenCollapsable(!openCollapsable);
@@ -95,12 +100,53 @@ const ReportTemplateMainSettings = ({
   };
 
   const onLogoChange = (logo) => {
-    setIsUploadingImage(true);
-    updateReportTemplate(sessionId, singleReportTemplate, logo.image);
+    uploadReportTemplateLogo(sessionId, singleReportTemplate.id, logo.image);
   };
 
   const onLogoDelete = () => {
     deleteReportTemplateLogo(sessionId, singleReportTemplate.id);
+  };
+
+  const onHasCoverLetterChange = (hasCoverLetter) => {
+    if (hasCoverLetter !== singleReportTemplate.hasCoverLetter) {
+      updateReportTemplate(sessionId, {
+        ...singleReportTemplate,
+        hasCoverLetter,
+      });
+    }
+  };
+
+  const onCoverLetterLogoTypeChange = (coverLetterLogoType) => {
+    if (coverLetterLogoType !== singleReportTemplate.coverLetterLogoType) {
+      updateReportTemplate(sessionId, {
+        ...singleReportTemplate,
+        coverLetterLogoType,
+      });
+    }
+  };
+
+  const onCoverLetterDescriptionChange = (coverLetterDescription) => {
+    if (coverLetterDescription !== singleReportTemplate.coverLetterDescription)
+      updateReportTemplate(sessionId, {
+        ...singleReportTemplate,
+        coverLetterDescription,
+      });
+  };
+
+  const onCoverLetterSenderChange = (coverLetterSender) => {
+    if (coverLetterSender !== singleReportTemplate.coverLetterSender)
+      updateReportTemplate(sessionId, {
+        ...singleReportTemplate,
+        coverLetterSender,
+      });
+  };
+
+  const onCoverLetterCustomLogoChange = (logo) => {
+    uploadCoverLetterCustomLogo(sessionId, singleReportTemplate.id, logo.image);
+  };
+
+  const onCoverLetterCustomLogoDelete = () => {
+    deleteCoverLetterCustomLogo(sessionId, singleReportTemplate.id);
   };
 
   const onDelete = () => {
@@ -196,12 +242,14 @@ const ReportTemplateMainSettings = ({
     );
   };
 
-  const imageUploading = updateReportTemplateLoading && isUploadingImage;
   const isReportForHenryFord =
     singleReportTemplate.reportFor === ReportFor.henryFordHealth;
 
   const hfhRadioButtonDisabled =
     !canEdit || (!hfhsAccess && isReportForHenryFord);
+
+  const showCoverLetterCustomLogoInput =
+    singleReportTemplate.coverLetterLogoType === CoverLetterLogoType.CUSTOM;
 
   return (
     <Container style={{ maxWidth: 600 }}>
@@ -379,7 +427,8 @@ const ReportTemplateMainSettings = ({
                   <Col>
                     <ImageUpload
                       loading={
-                        deleteReportTemplateLogoLoading || imageUploading
+                        uploadReportTemplateLogoLoading ||
+                        deleteReportTemplateLogoLoading
                       }
                       disabled={!canEdit}
                       image={singleReportTemplate.logoUrl}
@@ -397,11 +446,134 @@ const ReportTemplateMainSettings = ({
                 </Row>
 
                 <Row style={{ marginBottom: 10 }}>
+                  <Col>{formatMessage(messages.coverLetter)}</Col>
+                </Row>
+                <Row style={{ marginBottom: 20 }}>
+                  <Col>
+                    <Switch
+                      checked={singleReportTemplate.hasCoverLetter}
+                      id="has-cover-letter-switch"
+                      onToggle={onHasCoverLetterChange}
+                      labelPosition={LabelPosition.Right}
+                    >
+                      {formatMessage(messages.hasCoverLetterSwitchLabel)}
+                    </Switch>
+                  </Col>
+                </Row>
+
+                {singleReportTemplate.hasCoverLetter && (
+                  <>
+                    <Row style={{ marginBottom: 10 }}>
+                      <Col>{formatMessage(messages.coverLetterLogoType)}</Col>
+                    </Row>
+                    <Row
+                      style={{
+                        marginBottom: showCoverLetterCustomLogoInput ? 10 : 20,
+                      }}
+                    >
+                      {Object.values(CoverLetterLogoType).map((option) => (
+                        <Col key={option}>
+                          <Row
+                            align="center"
+                            style={{
+                              margin: 0,
+                              cursor: canEdit ? 'pointer' : 'initial',
+                            }}
+                          >
+                            <Radio
+                              id={`cover-letter-logo-type-${option}`}
+                              disabled={!canEdit}
+                              checked={
+                                singleReportTemplate.coverLetterLogoType ===
+                                option
+                              }
+                              onChange={() =>
+                                canEdit && onCoverLetterLogoTypeChange(option)
+                              }
+                            >
+                              <Text>{formatMessage(messages[option])}</Text>
+                            </Radio>
+                          </Row>
+                        </Col>
+                      ))}
+                    </Row>
+
+                    {showCoverLetterCustomLogoInput && (
+                      <Row style={{ marginBottom: 20 }}>
+                        <Col>
+                          <ImageUpload
+                            loading={
+                              uploadCoverLetterCustomLogoLoading ||
+                              deleteCoverLetterCustomLogoLoading
+                            }
+                            disabled={!canEdit}
+                            image={
+                              singleReportTemplate.coverLetterCustomLogoUrl
+                            }
+                            onAddImage={onCoverLetterCustomLogoChange}
+                            onDeleteImage={onCoverLetterCustomLogoDelete}
+                            acceptedFormats={['JPG', 'PNG']}
+                          />
+                        </Col>
+                      </Row>
+                    )}
+
+                    <Row style={{ marginBottom: 10 }}>
+                      <Col>
+                        {formatMessage(messages.coverLetterDescription)}
+                      </Col>
+                    </Row>
+                    <Row style={{ marginBottom: 20 }}>
+                      <Col>
+                        <Box bg={colors.linkWater} width="100%">
+                          <ApprovableInput
+                            disabled={!canEdit}
+                            type="multiline"
+                            richText
+                            value={singleReportTemplate.coverLetterDescription}
+                            onCheck={onCoverLetterDescriptionChange}
+                            placeholder={formatMessage(
+                              globalMessages.enterTextHere,
+                            )}
+                          />
+                        </Box>
+                      </Col>
+                    </Row>
+
+                    <Row style={{ marginBottom: 10 }}>
+                      <Col>{formatMessage(messages.coverLetterSender)}</Col>
+                    </Row>
+                    <Row style={{ marginBottom: 20 }}>
+                      <Col>
+                        <Box bg={colors.linkWater} width="100%">
+                          <ApprovableInput
+                            disabled={!canEdit}
+                            mr={0}
+                            type="singleline"
+                            value={singleReportTemplate.coverLetterSender}
+                            onCheck={onCoverLetterSenderChange}
+                            placeholder={formatMessage(
+                              globalMessages.enterTextHere,
+                            )}
+                          />
+                        </Box>
+                      </Col>
+                    </Row>
+                  </>
+                )}
+
+                <Row style={{ marginBottom: 20 }}>
+                  <Col>
+                    <Spacer />
+                  </Col>
+                </Row>
+
+                <Row style={{ marginBottom: 10 }}>
                   <Col>{formatMessage(messages.settingsName)}</Col>
                 </Row>
                 <Row style={{ marginBottom: 20 }}>
                   <Col>
-                    <Box bg={colors.linkWater}>
+                    <Box bg={colors.linkWater} width="100%">
                       <ApprovableInput
                         disabled={!canEdit}
                         mr={0}
@@ -456,7 +628,10 @@ const mapDispatchToProps = {
   duplicateReportTemplate: duplicateReportTemplateRequest,
   updateReportTemplate: updateReportTemplateRequest,
   deleteReportTemplate: deleteReportTemplateRequest,
+  uploadReportTemplateLogo: uploadReportTemplateLogoRequest,
   deleteReportTemplateLogo: deleteReportTemplateLogoRequest,
+  uploadCoverLetterCustomLogo: uploadCoverLetterCustomLogoRequest,
+  deleteCoverLetterCustomLogo: deleteCoverLetterCustomLogoRequest,
   selectTemplate: selectReportTemplate,
   generateTestReport: generateTestReportRequest,
 };
@@ -468,7 +643,10 @@ ReportTemplateMainSettings.propTypes = {
   duplicateReportTemplate: PropTypes.func,
   updateReportTemplate: PropTypes.func,
   deleteReportTemplate: PropTypes.func,
+  uploadReportTemplateLogo: PropTypes.func,
   deleteReportTemplateLogo: PropTypes.func,
+  deleteCoverLetterCustomLogo: PropTypes.func,
+  uploadCoverLetterCustomLogo: PropTypes.func,
   generateTestReport: PropTypes.func,
   selectTemplate: PropTypes.func,
   selectedReport: PropTypes.object,
