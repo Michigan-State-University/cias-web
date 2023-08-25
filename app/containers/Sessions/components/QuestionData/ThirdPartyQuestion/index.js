@@ -4,7 +4,6 @@ import { compose } from 'redux';
 import { connect } from 'react-redux';
 import { createStructuredSelector } from 'reselect';
 import { injectIntl } from 'react-intl';
-import { toast } from 'react-toastify';
 
 import ReorderIcon from 'assets/svg/reorder-hand.svg';
 import bin from 'assets/svg/bin-red.svg';
@@ -15,7 +14,7 @@ import {
   updateQuestionData,
 } from 'global/reducers/questions';
 import globalMessages from 'global/i18n/globalMessages';
-import { emailValidator, numericValidator } from 'utils/validators';
+import { numericValidator } from 'utils/validators';
 import { themeColors, colors } from 'theme';
 
 import FlexibleWidthApprovableInput from 'components/Input/FlexibleWidthApprovableInput';
@@ -26,14 +25,15 @@ import Img from 'components/Img';
 import PlusCircle from 'components/Circle/PlusCircle';
 import Row from 'components/Row';
 import Text from 'components/Text';
-import { BadgeInput } from 'components/Input/BadgeInput';
 import OriginalTextHover from 'components/OriginalTextHover';
+import BadgeInput from 'components/Input/BadgeInput';
 import { DndSortable } from 'components/DragAndDrop';
 
 import ReportChooser from './ReportChooser';
 import messages from './messages';
 import { ADD, UPDATE_ANSWER, REMOVE } from './constants';
 import { reorderAnswersAction } from './actions';
+import { RecipientsChooser } from './RecipientsChooser';
 
 const ThirdPartyQuestion = ({
   selectedQuestion,
@@ -61,14 +61,10 @@ const ThirdPartyQuestion = ({
   const handleMouseLeave = () => setHovered(-1);
 
   const handleChangeVariable = (index, value, currentValue) => {
-    const commaSeparatedEmails = currentValue.split(',');
-
-    if (currentValue === '' || commaSeparatedEmails.every(emailValidator)) {
-      updateAnswer(index, {
-        ...value,
-        value: currentValue,
-      });
-    } else toast.error(formatMessage(messages.emailError));
+    updateAnswer(index, {
+      ...value,
+      value: currentValue,
+    });
   };
   const handleChangeTitle = (newTitle, index, value) =>
     updateAnswer(index, { ...value, payload: newTitle });
@@ -158,12 +154,13 @@ const ThirdPartyQuestion = ({
                     </Row>
                   )}
                 </Row>
-                <Row
+                <Column
                   mb={10}
                   ml={40}
-                  align="center"
+                  align="left"
                   hidden={isNarratorTab}
                   gap={10}
+                  width="auto"
                 >
                   <BadgeInput
                     data-cy={`score-${index}-input`}
@@ -183,36 +180,32 @@ const ThirdPartyQuestion = ({
                       updateAnswer(index, { ...item, numeric_value: value })
                     }
                   />
-                  {/* TODO place score input above recipient list when merging https://htdevelopers.atlassian.net/browse/CIAS30-3498 */}
-                  <BadgeInput
-                    data-cy={`emails-${index}-input`}
+                  <RecipientsChooser
+                    hidden={isNarratorTab}
                     disabled={!editingPossible}
-                    textAlign="center"
-                    placeholder={
-                      !isNarratorTab
-                        ? formatMessage(messages.emailPlaceholder)
-                        : ''
+                    recipients={item.value}
+                    modalTitle={item.payload}
+                    onChange={(value) =>
+                      handleChangeVariable(index, item, value)
                     }
-                    value={item.value}
-                    color={colors.kleinBlue}
-                    bg={colors.titanWhite}
-                    onBlur={(currentValue) =>
-                      handleChangeVariable(index, item, currentValue)
-                    }
-                    maxWidth="100%"
                   />
-                </Row>
+                </Column>
               </Column>
 
-              <ReportChooser
-                formatMessage={formatMessage}
-                value={item.report_template_ids}
-                onChange={(reportTemplateIds) =>
-                  handleChangeReportTemplateIds(reportTemplateIds, index, item)
-                }
-                disabled={!editingPossible}
-                isNarratorTab={isNarratorTab}
-              />
+              {!isNarratorTab && (
+                <ReportChooser
+                  formatMessage={formatMessage}
+                  value={item.report_template_ids}
+                  onChange={(reportTemplateIds) =>
+                    handleChangeReportTemplateIds(
+                      reportTemplateIds,
+                      index,
+                      item,
+                    )
+                  }
+                  disabled={!editingPossible}
+                />
+              )}
             </HoverableBox>
           </Row>
         )}

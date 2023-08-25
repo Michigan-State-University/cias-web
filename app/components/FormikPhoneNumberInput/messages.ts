@@ -21,7 +21,7 @@ export default defineMessages({
   },
   phoneNumberRequired: {
     id: `${scope}.phoneNumberRequired`,
-    defaultMessage: 'Phone number is required',
+    defaultMessage: 'Number is required',
   },
   phoneNumberCodeRequired: {
     id: `${scope}.phoneNumberCodeRequired`,
@@ -29,6 +29,6 @@ export default defineMessages({
   },
   phoneNumberInvalid: {
     id: `${scope}.phoneNumberInvalid`,
-    defaultMessage: 'Phone number is invalid',
+    defaultMessage: 'Number is invalid',
   },
 });

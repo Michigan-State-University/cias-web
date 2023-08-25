@@ -24,8 +24,9 @@ export type Props = {
   isoKey: string;
   numberKey: string;
   disabled?: boolean;
-  prefixLabel?: MessageDescriptor;
-  phoneLabel?: MessageDescriptor;
+  prefixLabel?: MessageDescriptor | null;
+  phoneLabel?: MessageDescriptor | null;
+  phonePlaceholder?: MessageDescriptor | null;
   prefixInputProps?: object;
   numberInputProps?: object;
   submitOnChange?: boolean;
@@ -37,6 +38,7 @@ export const FormikPhoneNumberInput: FC<Props> = ({
   disabled,
   prefixLabel = messages.phoneNumberPrefixLabel,
   phoneLabel = messages.phoneNumberPrefixLabel,
+  phonePlaceholder = messages.phoneNumber,
   prefixInputProps,
   numberInputProps,
   submitOnChange,
@@ -98,7 +100,7 @@ export const FormikPhoneNumberInput: FC<Props> = ({
             width: 230,
           }}
           disabled={disabled}
-          label={formatMessage(prefixLabel)}
+          label={prefixLabel && formatMessage(prefixLabel)}
           formikKey={isoKey}
           options={prefixOptions}
           inputProps={{
@@ -112,9 +114,9 @@ export const FormikPhoneNumberInput: FC<Props> = ({
           submitOnChange={submitOnChange}
         />
         <FormikNumberInput
-          label={formatMessage(phoneLabel)}
+          label={phoneLabel && formatMessage(phoneLabel)}
           formikKey={numberKey}
-          placeholder={formatMessage(messages.phoneNumber)}
+          placeholder={phonePlaceholder && formatMessage(phonePlaceholder)}
           type="tel"
           countryCode={iso?.value}
           inputProps={{
