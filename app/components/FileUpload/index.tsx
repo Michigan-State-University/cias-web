@@ -10,6 +10,11 @@ import { FormattedMessage, useIntl } from 'react-intl';
 import { DropzoneOptions, useDropzone } from 'react-dropzone';
 import byteSize from 'byte-size';
 
+import {
+  formatMimeFileFormat,
+  formatMimeFileFormatList,
+} from 'utils/formatters';
+
 import Box from 'components/Box';
 import TextButton from 'components/Button/TextButton';
 import Dropzone from 'components/Dropzone';
@@ -30,7 +35,6 @@ import binNoBg from 'assets/svg/bin-no-bg.svg';
 
 import messages from './messages';
 import { formatFileErrorMessage } from './utils';
-import { formatMimeFileFormat } from '../../utils/formatters';
 
 export type FileFormat = string;
 
@@ -150,9 +154,9 @@ export const FileUpload = ({
   const formattedAcceptedFormats = useMemo(() => {
     if (!acceptedFormats) return '';
     if (Array.isArray(acceptedFormats)) {
-      return acceptedFormats.map(formatMimeFileFormat).join(', ');
+      return formatMimeFileFormatList(acceptedFormats);
     }
-    return formatMimeFileFormat(acceptedFormats);
+    return formatMimeFileFormat(acceptedFormats) ?? '';
   }, [acceptedFormats]);
 
   const handleReject: DropzoneOptions['onDropRejected'] = (fileRejections) => {
