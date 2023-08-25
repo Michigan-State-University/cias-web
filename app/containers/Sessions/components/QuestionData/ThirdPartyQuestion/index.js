@@ -160,6 +160,7 @@ const ThirdPartyQuestion = ({
                   align="left"
                   hidden={isNarratorTab}
                   gap={10}
+                  width="auto"
                 >
                   <BadgeInput
                     data-cy={`score-${index}-input`}
@@ -198,7 +199,6 @@ const ThirdPartyQuestion = ({
                   handleChangeReportTemplateIds(reportTemplateIds, index, item)
                 }
                 disabled={!editingPossible}
-                isNarratorTab={isNarratorTab}
               />
             </HoverableBox>
           </Row>

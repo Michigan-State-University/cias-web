@@ -18,7 +18,6 @@ import { ManageRecipientsModalContent } from './ManageRecipientsModalContent';
 import { Recipients } from './types';
 
 export type Props = {
-  hidden: boolean;
   disabled: boolean;
   recipients: string;
   modalTitle: string;
@@ -26,7 +25,6 @@ export type Props = {
 };
 
 export const RecipientsChooser: FC<Props> = ({
-  hidden,
   disabled,
   recipients,
   modalTitle,
@@ -70,7 +68,7 @@ export const RecipientsChooser: FC<Props> = ({
   return (
     <>
       <Modal />
-      <Column width="auto" hidden={hidden}>
+      <Column>
         <RecipientList
           label={formatMessage(messages.emailRecipients)}
           noItemsLabel={formatMessage(messages.noEmailRecipients)}
