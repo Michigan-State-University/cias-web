@@ -15,7 +15,7 @@ import {
   MMS_MAX_NON_LARGE_IMAGE_FILE_FORMAT_SIZE,
 } from 'global/constants';
 
-import { formatMimeFileFormat } from 'utils/formatters';
+import { formatMimeFileFormatList } from 'utils/formatters';
 
 import FileUpload from 'components/FileUpload';
 import Column from 'components/Column';
@@ -46,12 +46,12 @@ export const TextMessageAttachment: React.FC<Props> = ({
   const [allFormatsVisible, setAllFormatsVisible] = useState(false);
 
   const formattedLargeImageFileFormats = useMemo(
-    () => MMS_LARGE_IMAGE_FILE_FORMATS.map(formatMimeFileFormat),
+    () => formatMimeFileFormatList(MMS_LARGE_IMAGE_FILE_FORMATS),
     [],
   );
 
   const formattedAcceptedFileFormats = useMemo(
-    () => MMS_ACCEPTED_FILE_FORMATS.map(formatMimeFileFormat),
+    () => formatMimeFileFormatList(MMS_ACCEPTED_FILE_FORMATS),
     [],
   );
 
@@ -72,7 +72,7 @@ export const TextMessageAttachment: React.FC<Props> = ({
           <Column align="start">
             <Text>
               {formatMessage(messages.maxLargeImageFileSize, {
-                formats: formattedLargeImageFileFormats.join(', '),
+                formats: formattedLargeImageFileFormats,
                 maxSize: byteSize(MMS_MAX_FILE_SIZE, {
                   precision: 2,
                 }).toString(),
@@ -98,9 +98,7 @@ export const TextMessageAttachment: React.FC<Props> = ({
                 <Text mt={12}>
                   {formatMessage(messages.allSupportedFormats)}
                 </Text>
-                <Text opacity={0.8}>
-                  {formattedAcceptedFileFormats.join(', ')}
-                </Text>
+                <Text opacity={0.8}>{formattedAcceptedFileFormats}</Text>
               </>
             )}
           </Column>
