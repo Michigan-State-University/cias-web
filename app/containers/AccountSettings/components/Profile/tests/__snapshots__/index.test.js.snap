@@ -160,7 +160,7 @@ exports[`<Profile /> Should render and match the snapshot 1`] = `
   width: 100%;
 }
 
-.c28 {
+.c29 {
   display: -webkit-box;
   display: -webkit-flex;
   display: -ms-flexbox;
@@ -179,7 +179,7 @@ exports[`<Profile /> Should render and match the snapshot 1`] = `
   width: 100%;
 }
 
-.c30 {
+.c31 {
   display: -webkit-box;
   display: -webkit-flex;
   display: -ms-flexbox;
@@ -258,7 +258,7 @@ exports[`<Profile /> Should render and match the snapshot 1`] = `
   padding-right: 10px;
 }
 
-.c27 {
+.c28 {
   display: -webkit-box;
   display: -webkit-flex;
   display: -ms-flexbox;
@@ -269,7 +269,7 @@ exports[`<Profile /> Should render and match the snapshot 1`] = `
   width: 100%;
 }
 
-.c29 {
+.c30 {
   display: -webkit-box;
   display: -webkit-flex;
   display: -ms-flexbox;
@@ -329,6 +329,15 @@ exports[`<Profile /> Should render and match the snapshot 1`] = `
   height: auto;
   display: block;
   border-radius: 5px;
+  color: unset;
+}
+
+.c26 {
+  width: auto;
+  height: auto;
+  display: block;
+  border-radius: 5px;
+  cursor: pointer;
   color: unset;
 }
 
@@ -404,7 +413,7 @@ exports[`<Profile /> Should render and match the snapshot 1`] = `
   width: fit-content;
 }
 
-.c31 {
+.c32 {
   font-family: DM Sans;
   font-size: 13px;
   line-height: 130%;
@@ -413,18 +422,7 @@ exports[`<Profile /> Should render and match the snapshot 1`] = `
   color: #2F3850;
 }
 
-.c32 {
-  font-family: DM Sans;
-  font-size: 13px;
-  line-height: 130%;
-  margin-bottom: 5px;
-  color: #2F3850;
-  width: -webkit-fit-content;
-  width: -moz-fit-content;
-  width: fit-content;
-}
-
-.c26 {
+.c27 {
   width: auto;
   height: auto;
   -webkit-transition: -webkit-transform 0.2s;
@@ -810,7 +808,8 @@ exports[`<Profile /> Should render and match the snapshot 1`] = `
             </p>
           </label>
           <div
-            class="c23"
+            class="c26"
+            cursor="pointer"
             data-testid="select"
           >
             <div
@@ -867,7 +866,7 @@ exports[`<Profile /> Should render and match the snapshot 1`] = `
                   >
                     <img
                       alt="arrow"
-                      class="c26"
+                      class="c27"
                       src="IMAGE_MOCK"
                       transform=""
                     />
@@ -889,23 +888,23 @@ exports[`<Profile /> Should render and match the snapshot 1`] = `
       width="100%"
     >
       <div
-        class="c27"
+        class="c28"
       >
         <div
-          class="c28"
+          class="c29"
           data-private="true"
           width="100%"
         >
           <div
-            class="c27"
+            class="c28"
           >
             <div
-              class="c28"
+              class="c29"
               data-private="true"
               width="100%"
             >
               <div
-                class="c29"
+                class="c30"
                 width="230"
               >
                 <label
@@ -920,7 +919,8 @@ exports[`<Profile /> Should render and match the snapshot 1`] = `
                   </p>
                 </label>
                 <div
-                  class="c23"
+                  class="c26"
+                  cursor="pointer"
                   data-testid="select"
                 >
                   <div
@@ -942,7 +942,7 @@ exports[`<Profile /> Should render and match the snapshot 1`] = `
                           class=" css-1uccc91-singleValue"
                         >
                           <div
-                            class="c30"
+                            class="c31"
                           >
                             <img
                               alt="US"
@@ -950,7 +950,7 @@ exports[`<Profile /> Should render and match the snapshot 1`] = `
                               style="height: 24px; width: 24px; display: inline-block;"
                             />
                             <p
-                              class="c31"
+                              class="c32"
                               font-size="18"
                             >
                               US +1
@@ -991,7 +991,7 @@ exports[`<Profile /> Should render and match the snapshot 1`] = `
                         >
                           <img
                             alt="arrow"
-                            class="c26"
+                            class="c27"
                             src="IMAGE_MOCK"
                             transform=""
                           />
@@ -1007,13 +1007,14 @@ exports[`<Profile /> Should render and match the snapshot 1`] = `
                 </div>
               </div>
               <div
-                class="c27"
+                class="c28"
               >
                 <label
                   for="number"
                 >
                   <p
-                    class="c32"
+                    class="c18"
+                    font-size="12px"
                     width="fit-content"
                   >
                     Phone number

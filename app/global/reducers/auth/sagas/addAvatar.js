@@ -19,9 +19,7 @@ export function* addAvatar({ payload: { image, imageUrl } }) {
   formData.append('avatar[file]', image);
 
   try {
-    const {
-      data: { data },
-    } = yield call(axios.post, requestURL, formData, {
+    const { data } = yield call(axios.post, requestURL, formData, {
       headers: {
         'Content-Type': 'multipart/form-data',
       },

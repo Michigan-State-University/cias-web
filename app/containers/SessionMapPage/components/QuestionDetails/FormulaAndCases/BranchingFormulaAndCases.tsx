@@ -90,33 +90,35 @@ const BranchingFormulaAndCases = ({
       <Comment mt={30} mb={15} fontWeight="bold">
         {formatMessage(messages.branchingFormulaAndCases)}
       </Comment>
-      {formulas.map((formula: any) => (
-        <>
-          <Formula payload={formula.payload} />
-          <Row>
-            <Column width="auto">
-              {formula.patterns.map(({ match }: any, index: number) => (
-                <CaseMatch
-                  match={match}
-                  key={getCaseMatchElementId(index)}
-                  caseTargetElementId={getCaseTargetElementId(index)}
-                />
-              ))}
-            </Column>
-            <Column>
-              {formula.patterns.map(({ target }: any, index: number) => (
-                <Box
-                  key={getCaseTargetElementId(index)}
-                  id={getCaseTargetElementId(index)}
-                  mt={15}
-                >
-                  {renderSubtargets(target, index)}
-                </Box>
-              ))}
-            </Column>
-          </Row>
-        </>
-      ))}
+      <Column gap={15}>
+        {formulas.map((formula, formulaIndex) => (
+          <Column key={`${formula.payload}-${formulaIndex}`}>
+            <Formula payload={formula.payload} />
+            <Row>
+              <Column width="auto">
+                {formula.patterns.map(({ match }, index) => (
+                  <CaseMatch
+                    match={match}
+                    key={getCaseMatchElementId(index)}
+                    caseTargetElementId={getCaseTargetElementId(index)}
+                  />
+                ))}
+              </Column>
+              <Column>
+                {formula.patterns.map(({ target }, index) => (
+                  <Box
+                    key={getCaseTargetElementId(index)}
+                    id={getCaseTargetElementId(index)}
+                    mt={15}
+                  >
+                    {renderSubtargets(target, index)}
+                  </Box>
+                ))}
+              </Column>
+            </Row>
+          </Column>
+        ))}
+      </Column>
     </>
   );
 };

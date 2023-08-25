@@ -14,6 +14,7 @@ export type Props = PropsWithChildren<{
   error: Nullable<string>;
   labelProps?: Partial<ComponentProps<typeof Text>>;
   required?: boolean;
+  hideErrorMessages?: boolean;
 }> &
   Record<string, unknown>;
 
@@ -25,9 +26,10 @@ const FormikControlLayout = ({
   labelProps,
   children,
   required,
+  hideErrorMessages,
   ...columnStyleProps
 }: Props) => {
-  const showErrorMessage = touched && error;
+  const showErrorMessage = touched && error && !hideErrorMessages;
 
   return (
     <Column {...columnStyleProps}>
@@ -50,3 +52,4 @@ const FormikControlLayout = ({
 };
 
 export default FormikControlLayout;
+export { ErrorText };

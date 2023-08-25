@@ -7,6 +7,7 @@ import {
   floatValidatorRegex,
   naturalNumberRegex,
   floatCharRegex,
+  nonNegativeIntegerRegex,
 } from 'global/constants/regex';
 import globalMessages from 'global/i18n/globalMessages';
 
@@ -39,3 +40,13 @@ export const naturalNumberValidationSchema = Yup.string().matches(
   /* @ts-ignore */
   formatMessage(globalMessages.validators.naturalNumber),
 );
+
+export const nonNegativeIntegerValidationSchema = Yup.string()
+  .matches(
+    nonNegativeIntegerRegex,
+    // @ts-ignore
+    formatMessage(globalMessages.validators.nonNegativeInteger),
+  )
+  // @ts-ignore
+  .required(formatMessage(globalMessages.validators.nonNegativeInteger))
+  .trim();

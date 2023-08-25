@@ -21,7 +21,6 @@ export const StatusLabel = styled.div`
   border-radius: 5px;
   background: ${(props) => statusTypeToColorMap[props.status]};
   display: flex;
-  margin-left: 5px;
   min-width: 70px;
   justify-content: center;
   align-content: center;

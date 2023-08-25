@@ -70,7 +70,7 @@ export const RecipientsChooser: FC<Props> = ({
   return (
     <>
       <Modal />
-      <Column mb={10} ml={40} width="auto" hidden={hidden}>
+      <Column width="auto" hidden={hidden}>
         <RecipientList
           label={formatMessage(messages.emailRecipients)}
           noItemsLabel={formatMessage(messages.noEmailRecipients)}

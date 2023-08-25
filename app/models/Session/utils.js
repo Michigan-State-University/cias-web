@@ -32,14 +32,10 @@ import {
   informationQuestion,
   feedbackQuestion,
   finishQuestion,
-  currencyQuestion,
-  phoneQuestion,
-  dateQuestion,
-  thirdPartyQuestion,
-  nameQuestion,
   tlfbQuestion,
   tlfbConfig,
   tlfbEvents,
+  henryFordInitialScreen,
 } from './QuestionTypes';
 
 /**
@@ -112,75 +108,6 @@ export const getPreviousQuestions = (
  * @param  {Array<Question>} questions
  * @param  {{structure: 'flat' | 'group', include: Array<string>, noEmpty: boolean}} options
  */
-export const getBranchingVariables = (questions, options) => {
-  const defaultParams = {
-    structure: 'flat',
-    include: [],
-    noEmpty: true,
-  };
-  const { structure, include, noEmpty } = { ...defaultParams, ...options };
-  const variables = [];
-
-  questions.forEach((question) => {
-    let questionVariables;
-
-    switch (question.type) {
-      case multiQuestion.id:
-        questionVariables = getMultiVariables(question);
-        break;
-      case gridQuestion.id:
-        questionVariables = getGridVariables(question);
-        break;
-      case informationQuestion.id:
-      case thirdPartyQuestion.id:
-      case feedbackQuestion.id:
-      case finishQuestion.id:
-      case currencyQuestion.id:
-      case phoneQuestion.id:
-      case dateQuestion.id:
-      case nameQuestion.id:
-      case tlfbQuestion.id:
-      case tlfbConfig.id:
-      case tlfbEvents.id:
-        questionVariables = [];
-        break;
-      default:
-        questionVariables = [getDefaultVariable(question)];
-        break;
-    }
-
-    if (noEmpty)
-      questionVariables = questionVariables.filter((val) => val && val.trim());
-
-    switch (structure) {
-      case 'group':
-        variables.push({
-          variables: questionVariables,
-          ...pick(question, include),
-        });
-        break;
-      case 'flat':
-      default:
-        if (include && include.length) {
-          variables.push(
-            ...questionVariables.map((variable) => ({
-              ...pick(question, include),
-              variable,
-            })),
-          );
-        } else variables.push(...questionVariables);
-
-        break;
-    }
-  });
-
-  return variables;
-};
-
-/**
- * @param  {Array<Question>} questions
- * @param  {{structure: 'flat' | 'group', include: Array<string>, noEmpty: boolean}} options
- */
 export const getEditVariables = (questions, options) => {
   const defaultParams = {
     structure: 'flat',
@@ -201,11 +128,11 @@ export const getEditVariables = (questions, options) => {
         questionVariables = getGridVariables(question);
         break;
       case informationQuestion.id:
-      case thirdPartyQuestion.id:
       case feedbackQuestion.id:
       case finishQuestion.id:
       case tlfbConfig.id:
       case tlfbEvents.id:
+      case henryFordInitialScreen.id:
         questionVariables = [];
         break;
       case tlfbQuestion.id:
@@ -352,9 +279,9 @@ export const NOT_ANSWERABLE_QUESTIONS = [
 
 export const QUESTIONS_WITHOUT_VARIABLE = [
   ...NOT_ANSWERABLE_QUESTIONS,
-  thirdPartyQuestion.id,
   tlfbConfig.id,
   tlfbEvents.id,
+  henryFordInitialScreen.id,
 ];
 
 export const DISABLED_NARRATOR_SETTINGS_BY_QUESTION_TYPE = {

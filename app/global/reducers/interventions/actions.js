@@ -13,6 +13,7 @@ import {
   IMPORT_INTERVENTION_ERROR,
   REFETCH_INTERVENTIONS,
   RESET_IMPORT_INTERVENTION_STATE,
+  UPDATE_INTERVENTION_LIST_ITEM_BY_ID,
 } from './constants';
 
 export const fetchInterventionsRequest = ({
@@ -53,3 +54,9 @@ export const resetImportModalState = () =>
 
 export const refetchInterventions = () =>
   actionBuilder(REFETCH_INTERVENTIONS, {});
+
+export const updateInterventionListItemById = (interventionId, changes) =>
+  actionBuilder(UPDATE_INTERVENTION_LIST_ITEM_BY_ID, {
+    interventionId,
+    changes,
+  });

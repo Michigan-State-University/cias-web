@@ -8,6 +8,7 @@ import React, { ReactNode, useCallback } from 'react';
 import { FormattedMessage } from 'react-intl';
 
 import ModalInfoIcon from 'assets/svg/modalInfo.svg';
+import ModalErrorIcon from 'assets/svg/error-square.svg';
 
 import Box from 'components/Box';
 import H1 from 'components/H1';
@@ -18,17 +19,19 @@ import Column from 'components/Column';
 import Icon from 'components/Icon';
 import Text from 'components/Text';
 
+import { fontSizes } from 'theme';
+
 import messages from './messages';
-import Modal from './Modal';
-import { MODAL_TITLE_ID } from './constants';
+import Modal, { Props as ModalProps } from './Modal';
+import { MODAL_DESCRIPTION_ID } from './constants';
 import { IconType } from './types';
 import { ConfirmationModalButtonsContainer } from './styled';
 
-export type Props = {
+export type Props<T = boolean> = {
   visible: boolean;
   description: ReactNode;
   onClose: () => void;
-  confirmAction: () => void;
+  confirmAction: (modalState: Nullable<T | boolean>) => void;
   closeOnConfirm?: boolean;
   loading?: boolean;
   error?: string | object;
@@ -43,10 +46,12 @@ export type Props = {
   icon?: IconType;
   hideCloseButton?: boolean;
   hideCancelButton?: boolean;
-  isMobile: boolean;
-} & Record<string, unknown>;
+  isMobile?: boolean;
+  titleStyles: object;
+  modalState?: Nullable<T | boolean>;
+} & Omit<ModalProps, 'children'>;
 
-const ConfirmationModal = ({
+const ConfirmationModal = <T,>({
   visible = false,
   description = <FormattedMessage {...messages.defaultDescription} />,
   onClose,
@@ -66,12 +71,14 @@ const ConfirmationModal = ({
   hideCloseButton,
   hideCancelButton,
   isMobile,
-  ...modalStyles
-}: Props): JSX.Element => {
+  titleStyles,
+  modalState,
+  ...modalProps
+}: Props<T>): JSX.Element => {
   const onConfirm = useCallback(() => {
-    confirmAction();
+    confirmAction(modalState);
     if (closeOnConfirm) onClose();
-  }, [confirmAction, closeOnConfirm, onClose]);
+  }, [confirmAction, closeOnConfirm, onClose, modalState]);
 
   if (!visible) return <></>;
 
@@ -79,6 +86,8 @@ const ConfirmationModal = ({
     switch (icon) {
       case 'info':
         return ModalInfoIcon;
+      case 'error':
+        return ModalErrorIcon;
       default:
         return '';
     }
@@ -88,21 +97,25 @@ const ConfirmationModal = ({
     <Modal
       visible={visible}
       onClose={onClose}
-      {...modalStyles}
       hideCloseButton={hideCloseButton}
+      {...modalProps}
     >
-      <Column px={!isMobile && 50} pd={30} {...contentContainerStyles}>
+      <Column px={!isMobile && 20} pd={30} {...contentContainerStyles}>
         {icon && (
           <Row justify="center" mb={32}>
             <Icon src={getIcon()} />
           </Row>
         )}
-        <H1 textAlign="center" id={MODAL_TITLE_ID}>
+        <H1 textAlign="center" id={MODAL_DESCRIPTION_ID} {...titleStyles}>
           {description}
         </H1>
         {content && (
-          <Box padded {...contentStyles}>
-            <Text textAlign="center" lineHeight="24px">
+          <Box py={16} {...contentStyles}>
+            <Text
+              textAlign="center"
+              lineHeight="24px"
+              fontSize={fontSizes.medium}
+            >
               {content}
             </Text>
           </Box>

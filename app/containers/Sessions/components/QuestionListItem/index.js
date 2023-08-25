@@ -35,12 +35,14 @@ import {
   setQuestionSettings,
 } from 'global/reducers/localState';
 
-import StyledCircle from 'components/Circle/StyledCircle';
 import { QuestionTypes } from 'models/Session/QuestionTypes';
+import { QuestionTypes as QuestionTypesEnum } from 'models/Question';
+
+import StyledCircle from 'components/Circle/StyledCircle';
 import Box from 'components/Box';
 import Checkbox from 'components/Checkbox';
 import { ConfirmationModal } from 'components/Modal';
-import Text from 'components/Text';
+
 import scrollByRef from 'utils/scrollByRef';
 
 import copy from 'assets/svg/copy.svg';
@@ -87,6 +89,8 @@ const QuestionListItem = ({
   const [deleteOpen, setDeleteOpen] = useState(false);
   const { type, subtitle, id, body, question_group_id: groupId } = question;
   const isSelected = selectedQuestionIndex === id;
+
+  const isHFInitialScreen = type === QuestionTypesEnum.HENRY_FORD_INITIAL;
 
   const isManageableScreen = useMemo(
     () => !NON_MANAGEABLE_SCREENS.includes(type),
@@ -209,14 +213,27 @@ const QuestionListItem = ({
         visible={deleteOpen}
         onClose={() => setDeleteOpen(false)}
         description={formatMessage(messages.deleteModalTitle)}
-        content={
-          <Column align="center">
-            <Text color={themeColors.warning}>
-              {formatMessage(messages.deleteModalContent)}
-            </Text>
-          </Column>
-        }
+        content={formatMessage(
+          messages[
+            isHFInitialScreen
+              ? 'deleteHFInitialScreenModalContent'
+              : 'deleteModalContent'
+          ],
+        )}
         confirmAction={handleDelete}
+        confirmationButtonText={formatMessage(messages.confirmDeletingScreen)}
+        cancelButtonStyles={{
+          width: '158px',
+        }}
+        confirmationButtonStyles={{
+          width: '158px',
+        }}
+        titleStyles={{
+          fontSize: '22px',
+        }}
+        hideCloseButton
+        icon="error"
+        confirmationButtonColor="primary"
       />
       <ToggleableBox
         padding={15}

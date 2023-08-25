@@ -51,7 +51,7 @@ const SessionMapFooter = ({
   }, [isGenerating]);
 
   return (
-    <Row justify="between" align="end" pt={20}>
+    <Row justify="between" align="end" pt={20} pl={60}>
       {/* @ts-ignore */}
       {isGenerating && <Loader />}
 
@@ -61,13 +61,15 @@ const SessionMapFooter = ({
           {formatMessage(messages.downloadSessionMap)}
         </Button>
 
-        <Checkbox
-          id="with-background"
-          checked={withBackground}
-          onChange={setWithBackground}
-        >
-          {formatMessage(messages.withBackgroundCheckbox)}
-        </Checkbox>
+        <Row flexShrink={0}>
+          <Checkbox
+            id="with-background"
+            checked={withBackground}
+            onChange={setWithBackground}
+          >
+            {formatMessage(messages.withBackgroundCheckbox)}
+          </Checkbox>
+        </Row>
       </Row>
 
       <Row align="center">

@@ -16,7 +16,7 @@ import FileShareIcon from 'assets/svg/file-share.svg';
 import CopyIcon from 'assets/svg/copy.svg';
 import AddAppIcon from 'assets/svg/app-add.svg';
 import TranslateIcon from 'assets/svg/translate.svg';
-import DocumentIcon from 'assets/svg/document.svg';
+import PadlockIcon from 'assets/svg/padlock.svg';
 import DownloadIcon from 'assets/svg/download-line.svg';
 import CollaborateIcon from 'assets/svg/collaborate-icon.svg';
 import ArchiveIcon from 'assets/svg/archive.svg';
@@ -46,9 +46,9 @@ import { useRoleManager } from 'models/User/RolesManager';
 import isNullOrUndefined from 'utils/isNullOrUndefined';
 
 import {
-  CatMhAccessModal,
   InterventionAssignOrganizationModal,
   INTERVENTION_ASSIGN_ORGANIZATION_MODAL_WIDTH,
+  useThirdPartyToolsAccessModal,
 } from 'containers/InterventionDetailsPage/components/Modals';
 import { useCollaboratorsModal } from 'containers/CollaboratorsModal';
 
@@ -60,6 +60,13 @@ import Modal, { ModalType, useModal } from 'components/Modal';
 import Row from 'components/Row';
 import Badge from 'components/Badge';
 import Loader from 'components/Loader';
+import {
+  useHenryFordBranchingInfoModal,
+  HenryFordBranchingInfoType,
+  InterventionHenryFordBranchingInfoAction,
+} from 'components/HenryFordBrachingInfoModal';
+import { DataClearedIndicator } from 'components/DataClearedIndicator';
+import { CollaboratingIndicator } from 'components/CollaboratingIndicator';
 
 import TranslateInterventionModal from 'containers/TranslateInterventionModal';
 import interventionDetailsPageSagas from 'containers/InterventionDetailsPage/saga';
@@ -77,7 +84,8 @@ import {
   StatusIndicator,
   TileInfo,
 } from './styled';
-import { CollaboratingIndicator } from './CollaboratingIndicator';
+import { useClearInterventionData } from '../ClearInterventionData';
+import { SensitiveDataState } from '../../models/Intervention';
 
 const SingleTile = ({
   tileData,
@@ -103,6 +111,9 @@ const SingleTile = ({
     googleLanguageId,
     hasCollaborators,
     userId: interventionOwnerId,
+    hfhsAccess,
+    sensitiveDataState,
+    clearSensitiveDataScheduledAt,
   } = tileData || {};
 
   const isCurrentUserInterventionOwner = interventionOwnerId === userId;
@@ -130,13 +141,9 @@ const SingleTile = ({
       confirmAction: handleArchiveIntervention,
     },
   });
-  const { openModal: openCatMhModal, Modal: CatMhModal } = useModal({
-    type: ModalType.Modal,
-    modalContentRenderer: (props) => <CatMhAccessModal {...props} />,
-    props: {
-      title: formatMessage(messages.catMhSettingsModalTitle),
-    },
-  });
+
+  const { openThirdPartyToolsAccessModal, ThirdPartyToolsModal } =
+    useThirdPartyToolsAccessModal();
 
   const shareExternally = (emails, ids) =>
     copyIntervention({ interventionId: id, emails, ids });
@@ -174,6 +181,58 @@ const SingleTile = ({
 
   const canEditCollaborators = isAdmin || isCurrentUserInterventionOwner;
 
+  const {
+    Modal: HenryFordBranchingInfoModal,
+    openModal: openHenryFordBranchingInfoModal,
+  } = useHenryFordBranchingInfoModal(
+    HenryFordBranchingInfoType.INTERVENTION,
+    (action) => {
+      switch (action) {
+        case InterventionHenryFordBranchingInfoAction.SHARE_EXTERNALLY: {
+          openShareExternallyModal();
+          break;
+        }
+        case InterventionHenryFordBranchingInfoAction.DUPLICATE_HERE: {
+          handleClone();
+          break;
+        }
+        default: {
+          break;
+        }
+      }
+    },
+  );
+
+  const onShareExternally = () => {
+    if (hfhsAccess) {
+      openHenryFordBranchingInfoModal(
+        InterventionHenryFordBranchingInfoAction.SHARE_EXTERNALLY,
+      );
+    } else {
+      openShareExternallyModal();
+    }
+  };
+
+  const onDuplicateHere = () => {
+    if (hfhsAccess) {
+      openHenryFordBranchingInfoModal(
+        InterventionHenryFordBranchingInfoAction.DUPLICATE_HERE,
+      );
+    } else {
+      handleClone();
+    }
+  };
+
+  const { ClearInterventionDataOption, ClearInterventionDataModal } =
+    useClearInterventionData(
+      status,
+      id,
+      hasCollaborators,
+      false,
+      sensitiveDataState,
+      clearSensitiveDataScheduledAt,
+    );
+
   const options = [
     {
       icon: TranslateIcon,
@@ -183,15 +242,15 @@ const SingleTile = ({
     },
     {
       icon: FileShareIcon,
-      action: openShareExternallyModal,
+      action: onShareExternally,
       label: formatMessage(messages.shareExternally),
-      id: 'share externally',
+      id: InterventionHenryFordBranchingInfoAction.SHARE_EXTERNALLY,
     },
     {
-      id: 'duplicate',
+      id: InterventionHenryFordBranchingInfoAction.DUPLICATE_HERE,
       label: formatMessage(messages.duplicateHere),
       icon: CopyIcon,
-      action: handleClone,
+      action: onDuplicateHere,
     },
     {
       id: 'archive',
@@ -215,10 +274,10 @@ const SingleTile = ({
     ...(isAdmin
       ? [
           {
-            icon: DocumentIcon,
-            action: () => openCatMhModal(tileData),
-            label: formatMessage(messages.catMhSettingsModalTitle),
-            id: 'catMhAccess',
+            icon: PadlockIcon,
+            action: () => openThirdPartyToolsAccessModal(tileData),
+            label: formatMessage(messages.thirdPartyToolsAccessModalTitle),
+            id: 'thirdPartyToolsAccess',
             disabled: hasCollaborators,
           },
         ]
@@ -240,6 +299,7 @@ const SingleTile = ({
           },
         ]
       : []),
+    ...(isCurrentUserInterventionOwner ? [ClearInterventionDataOption] : []),
   ];
 
   const preventDefault = (e) => {
@@ -256,8 +316,9 @@ const SingleTile = ({
 
   return (
     <>
-      <CatMhModal />
+      <ThirdPartyToolsModal />
       <ArchiveModal />
+      <HenryFordBranchingInfoModal />
       <ShareExternallyModal />
       <Modal onClose={closeTranslateModal} visible={translateModalVisible}>
         <TranslateInterventionModal
@@ -281,19 +342,25 @@ const SingleTile = ({
       </Modal>
 
       <CollaboratorsModal />
+      <ClearInterventionDataModal />
 
       <StyledLink to={link}>
         <TileContainer>
           <Heading>
-            <Row gap={12} align="center">
-              {hasCollaborators && <CollaboratingIndicator />}
-              {status && (
-                <Row align="center" gap={5}>
-                  <Text lineHeight={1}>
-                    <FormattedMessage {...globalMessages.statuses[status]} />
-                  </Text>
-                  <StatusIndicator status={status} />
-                </Row>
+            <Row gap={6} align="center">
+              <Row gap={8} align="center">
+                {hasCollaborators && <CollaboratingIndicator iconSize={14} />}
+                {status && (
+                  <Row align="center" gap={5}>
+                    <Text lineHeight={1}>
+                      <FormattedMessage {...globalMessages.statuses[status]} />
+                    </Text>
+                    <StatusIndicator status={status} />
+                  </Row>
+                )}
+              </Row>
+              {sensitiveDataState === SensitiveDataState.REMOVED && (
+                <DataClearedIndicator opacity={0.7} />
               )}
             </Row>
             {!participantView && (

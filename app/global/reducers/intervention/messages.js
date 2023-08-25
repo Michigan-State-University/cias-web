@@ -154,4 +154,8 @@ export default defineMessages({
     id: `${scope}.fetchCurrentUserCollaboratorDataError`,
     defaultMessage: `Couldn't fetch collaborator permissions`,
   },
+  clearInterventionDataError: {
+    id: `${scope}.clearInterventionDataError`,
+    defaultMessage: `Couldn't clear intervention data`,
+  },
 });

@@ -1,4 +1,4 @@
-import { Answer } from 'models/Answer';
+import { GenericAnswer } from 'models/Answer';
 import { QuestionDTO } from 'models/Question';
 import { ToastContent, ToastOptions } from 'react-toastify';
 
@@ -9,12 +9,14 @@ export type AnswerSessionPageFeedbackScreenSettings = {
 
 export type SharedProps<
   T extends QuestionDTO = QuestionDTO,
-  V extends null | Answer = null,
+  V extends
+    | null
+    | GenericAnswer['decryptedBody']['data'] = GenericAnswer['decryptedBody']['data'],
 > = {
   selectAnswer: (answer: V) => void;
-  answer: V;
+  answerBody: V;
   questionIndex: number;
-  saveAnswer: () => void;
+  saveAnswer: (skipped?: boolean) => void;
   showError: (content: ToastContent, options?: ToastOptions) => void;
   feedbackScreenSettings: AnswerSessionPageFeedbackScreenSettings;
   setFeedbackSettings: (setting: string, value: boolean) => void;
@@ -22,6 +24,7 @@ export type SharedProps<
   isDesktop: boolean;
   isMobile: boolean;
   isMobilePreview: boolean;
+  isPreview?: boolean;
   previewMode: string;
   question: T;
   userSessionId?: string;

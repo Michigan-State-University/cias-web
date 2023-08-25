@@ -13,7 +13,9 @@ import {
   makeSelectSelectedQuestion,
   updateQuestionData,
 } from 'global/reducers/questions';
-import { themeColors } from 'theme';
+import globalMessages from 'global/i18n/globalMessages';
+import { numericValidator } from 'utils/validators';
+import { themeColors, colors } from 'theme';
 
 import FlexibleWidthApprovableInput from 'components/Input/FlexibleWidthApprovableInput';
 import Box from 'components/Box';
@@ -24,6 +26,7 @@ import PlusCircle from 'components/Circle/PlusCircle';
 import Row from 'components/Row';
 import Text from 'components/Text';
 import OriginalTextHover from 'components/OriginalTextHover';
+import BadgeInput from 'components/Input/BadgeInput';
 import { DndSortable } from 'components/DragAndDrop';
 
 import ReportChooser from './ReportChooser';
@@ -81,7 +84,7 @@ const ThirdPartyQuestion = ({
   };
 
   return (
-    <Column>
+    <Column mt={10}>
       <DndSortable onDragEnd={onDragEnd} items={data} selector={null}>
         {({ item, index, dragHandleProps }) => (
           <Row mb={12}>
@@ -151,13 +154,41 @@ const ThirdPartyQuestion = ({
                     </Row>
                   )}
                 </Row>
-                <RecipientsChooser
+                <Column
+                  mb={10}
+                  ml={40}
+                  align="left"
                   hidden={isNarratorTab}
-                  disabled={!editingPossible}
-                  recipients={item.value}
-                  modalTitle={item.payload}
-                  onChange={(value) => handleChangeVariable(index, item, value)}
-                />
+                  gap={10}
+                >
+                  <BadgeInput
+                    data-cy={`score-${index}-input`}
+                    disabled={!editingPossible}
+                    px={0}
+                    py={12}
+                    textAlign="center"
+                    validator={numericValidator}
+                    keyboard="tel"
+                    placeholder={formatMessage(
+                      // @ts-ignore
+                      globalMessages.variables.variableScorePlaceholder,
+                    )}
+                    value={item.numeric_value}
+                    color={colors.azure}
+                    onBlur={(value) =>
+                      updateAnswer(index, { ...item, numeric_value: value })
+                    }
+                  />
+                  <RecipientsChooser
+                    hidden={isNarratorTab}
+                    disabled={!editingPossible}
+                    recipients={item.value}
+                    modalTitle={item.payload}
+                    onChange={(value) =>
+                      handleChangeVariable(index, item, value)
+                    }
+                  />
+                </Column>
               </Column>
 
               <ReportChooser

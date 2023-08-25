@@ -41,6 +41,7 @@ const ShareFilter = ({ formatMessage, onChange, active }: Props) => {
   return (
     <Col>
       <Select
+        // @ts-ignore
         selectProps={{
           options,
           value: selectValue,

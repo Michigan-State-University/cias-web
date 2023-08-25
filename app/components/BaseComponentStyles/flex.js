@@ -42,7 +42,7 @@ flex.propTypes = {
     'evenly',
   ]),
   filled: PropTypes.bool,
-  flexDirection: PropTypes.oneOf(['row', 'column']),
+  direction: PropTypes.oneOf(['row', 'column']),
   flexWrap: PropTypes.oneOf(['wrap', 'nowrap', 'wrap-reverse']),
   alignSelf: PropTypes.oneOf(['start', 'end', 'center']),
   gap: PropTypes.number,

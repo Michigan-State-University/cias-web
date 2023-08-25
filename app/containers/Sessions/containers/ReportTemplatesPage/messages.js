@@ -64,6 +64,10 @@ export default defineMessages({
     id: `${scope}.settingsReportFor3rdParty`,
     defaultMessage: '3rd Party',
   },
+  settingsReportForHenryFordHealth: {
+    id: `${scope}.settingsReportForHenryFordHealth`,
+    defaultMessage: 'Henry Ford',
+  },
   settingsLogo: {
     id: `${scope}.settingsLogo`,
     defaultMessage: 'Put logo on the report',
@@ -222,5 +226,10 @@ export default defineMessages({
     id: `${scope}.duplicateInternallyConfirmationContent`,
     defaultMessage:
       'You are duplicating this report template to another session. Make sure all variables are valid in the duplicated template.',
+  },
+  hfhReportTypeTooltipContent: {
+    id: `${scope}.hfhReportTypeTooltipContent`,
+    defaultMessage:
+      "This report was set up for Henry Ford, but the owner of the intervention turned off HF access, so you have to change the report's destination because for now the report won't be sent to anyone. If the owner turns on the HF access then you will be able to send the report to HF again.",
   },
 });

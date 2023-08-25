@@ -71,4 +71,12 @@ export default defineMessages({
     id: `${scope}.stopEditingInterventionContent`,
     defaultMessage: `<secondaryColorBold>{interventionName}</secondaryColorBold> has been edited by {firstName} {lastName}. Refresh the page to see latest changes.`,
   },
+  sensitiveDataRemovedNotificationTitle: {
+    id: `${scope}.sensitiveDataRemovedNotificationTitle`,
+    defaultMessage: 'Intervention cleared',
+  },
+  sensitiveDataRemovedNotificationContent: {
+    id: `${scope}.sensitiveDataRemovedNotificationContent`,
+    defaultMessage: `All sensitive data associated with <secondaryColorBold>{interventionName}</secondaryColorBold> has been deleted`,
+  },
 });

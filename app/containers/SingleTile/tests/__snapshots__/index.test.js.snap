@@ -1,7 +1,105 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`<SingleTile /> Should render and match the snapshot 1`] = `
-.c7 {
+.c3 {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-flex-direction: row;
+  -ms-flex-direction: row;
+  flex-direction: row;
+  height: auto;
+  -webkit-align-content: center;
+  -ms-flex-line-pack: center;
+  align-content: center;
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  gap: 6px;
+}
+
+.c4 {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-flex-direction: row;
+  -ms-flex-direction: row;
+  flex-direction: row;
+  height: auto;
+  -webkit-align-content: center;
+  -ms-flex-line-pack: center;
+  align-content: center;
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  gap: 8px;
+}
+
+.c5 {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-flex-direction: row;
+  -ms-flex-direction: row;
+  flex-direction: row;
+  height: auto;
+  -webkit-align-content: center;
+  -ms-flex-line-pack: center;
+  align-content: center;
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  gap: 5px;
+}
+
+.c11 {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-flex-direction: row;
+  -ms-flex-direction: row;
+  flex-direction: row;
+  height: auto;
+  width: 100%;
+}
+
+.c15 {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-flex-direction: row;
+  -ms-flex-direction: row;
+  flex-direction: row;
+  height: auto;
+  -webkit-box-pack: justify;
+  -webkit-justify-content: space-between;
+  -ms-flex-pack: justify;
+  justify-content: space-between;
+  justify-items: space-between;
+}
+
+.c10 {
+  width: auto;
+  height: auto;
+}
+
+.c6 {
+  font-family: DM Sans;
+  font-size: 13px;
+  line-height: 130%;
+  color: #2F3850;
+  line-height: 1;
+}
+
+.c8 {
   width: auto;
   height: auto;
   display: block;
@@ -26,7 +124,7 @@ exports[`<SingleTile /> Should render and match the snapshot 1`] = `
   color: unset;
 }
 
-.c11 {
+.c12 {
   width: auto;
   height: auto;
   display: block;
@@ -36,7 +134,7 @@ exports[`<SingleTile /> Should render and match the snapshot 1`] = `
   color: unset;
 }
 
-.c12 {
+.c13 {
   width: auto;
   height: auto;
   display: block;
@@ -44,7 +142,7 @@ exports[`<SingleTile /> Should render and match the snapshot 1`] = `
   color: unset;
 }
 
-.c15 {
+.c16 {
   width: auto;
   height: auto;
   display: block;
@@ -54,88 +152,9 @@ exports[`<SingleTile /> Should render and match the snapshot 1`] = `
   display: -ms-flexbox;
   display: flex;
   color: unset;
-}
-
-.c3 {
-  display: -webkit-box;
-  display: -webkit-flex;
-  display: -ms-flexbox;
-  display: flex;
-  -webkit-flex-direction: row;
-  -ms-flex-direction: row;
-  flex-direction: row;
-  height: auto;
-  -webkit-align-content: center;
-  -ms-flex-line-pack: center;
-  align-content: center;
-  -webkit-align-items: center;
-  -webkit-box-align: center;
-  -ms-flex-align: center;
-  align-items: center;
-  gap: 12px;
-}
-
-.c4 {
-  display: -webkit-box;
-  display: -webkit-flex;
-  display: -ms-flexbox;
-  display: flex;
-  -webkit-flex-direction: row;
-  -ms-flex-direction: row;
-  flex-direction: row;
-  height: auto;
-  -webkit-align-content: center;
-  -ms-flex-line-pack: center;
-  align-content: center;
-  -webkit-align-items: center;
-  -webkit-box-align: center;
-  -ms-flex-align: center;
-  align-items: center;
-  gap: 5px;
-}
-
-.c10 {
-  display: -webkit-box;
-  display: -webkit-flex;
-  display: -ms-flexbox;
-  display: flex;
-  -webkit-flex-direction: row;
-  -ms-flex-direction: row;
-  flex-direction: row;
-  height: auto;
-  width: 100%;
 }
 
 .c14 {
-  display: -webkit-box;
-  display: -webkit-flex;
-  display: -ms-flexbox;
-  display: flex;
-  -webkit-flex-direction: row;
-  -ms-flex-direction: row;
-  flex-direction: row;
-  height: auto;
-  -webkit-box-pack: justify;
-  -webkit-justify-content: space-between;
-  -ms-flex-pack: justify;
-  justify-content: space-between;
-  justify-items: space-between;
-}
-
-.c9 {
-  width: auto;
-  height: auto;
-}
-
-.c5 {
-  font-family: DM Sans;
-  font-size: 13px;
-  line-height: 130%;
-  color: #2F3850;
-  line-height: 1;
-}
-
-.c13 {
   position: relative;
   width: 100%;
   font-size: 18px;
@@ -143,7 +162,7 @@ exports[`<SingleTile /> Should render and match the snapshot 1`] = `
   color: #2F3850;
 }
 
-.c8 {
+.c9 {
   display: -webkit-box;
   display: -webkit-flex;
   display: -ms-flexbox;
@@ -200,7 +219,7 @@ exports[`<SingleTile /> Should render and match the snapshot 1`] = `
   color: #2F3850;
 }
 
-.c6 {
+.c7 {
   width: 7px;
   height: 7px;
   border-radius: 50%;
@@ -208,14 +227,14 @@ exports[`<SingleTile /> Should render and match the snapshot 1`] = `
   display: inline-block;
 }
 
-.c16 {
+.c17 {
   display: -webkit-box;
   display: -webkit-flex;
   display: -ms-flexbox;
   display: flex;
 }
 
-.c16 div {
+.c17 div {
   padding: 5px 10px;
   background: #e9f1fb;
   font-size: 12px;
@@ -240,27 +259,31 @@ exports[`<SingleTile /> Should render and match the snapshot 1`] = `
           <div
             class="c4"
           >
-            <p
+            <div
               class="c5"
             >
-              Draft
-            </p>
-            <span
-              class="c6"
-            />
+              <p
+                class="c6"
+              >
+                Draft
+              </p>
+              <span
+                class="c7"
+              />
+            </div>
           </div>
         </div>
         <div>
           <div
-            class="c7"
+            class="c8"
             display="flex"
           >
             <div
-              class="c8"
+              class="c9"
             >
               <img
                 alt="dots"
-                class="c9"
+                class="c10"
                 src="IMAGE_MOCK"
               />
             </div>
@@ -268,22 +291,22 @@ exports[`<SingleTile /> Should render and match the snapshot 1`] = `
         </div>
       </div>
       <div
-        class="c10"
+        class="c11"
         width="100%"
       >
         <div
-          class="c11"
+          class="c12"
           display="inline"
           width="100%"
         >
           <div
-            class="c12"
+            class="c13"
             data-for="Name"
             data-tip=""
           >
             <div>
               <span
-                class="c13"
+                class="c14"
                 data-for="Name"
                 data-tip="Name"
                 font-size="18"
@@ -306,20 +329,20 @@ exports[`<SingleTile /> Should render and match the snapshot 1`] = `
         </div>
       </div>
       <div
-        class="c14"
+        class="c15"
       >
         <div
-          class="c15"
+          class="c16"
           display="flex"
         >
           <div
-            class="c12"
+            class="c13"
             data-for="test-id-tile-tooltip"
             data-tip=""
           >
             <div>
               <div
-                class="c16"
+                class="c17"
               />
             </div>
           </div>

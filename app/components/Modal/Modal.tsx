@@ -129,7 +129,8 @@ const Modal = ({
           maxWidth={700}
           bg={colors.white}
           px={20}
-          py={20}
+          pt={20}
+          pb={20}
           overflow="auto"
           {...stylesProps}
         >

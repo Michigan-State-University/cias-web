@@ -32,6 +32,12 @@ export const makeSelectInterventionStatus = () =>
 export const makeSelectInterventionType = () =>
   createSelector(selectIntervention, (substate) => substate.intervention?.type);
 
+export const makeSelectInterventionHfHsAccess = () =>
+  createSelector(
+    selectIntervention,
+    (substate) => substate.intervention?.hfhsAccess ?? false,
+  );
+
 export const makeSelectInterventionLoader = (name) =>
   createSelector(selectIntervention, ({ loaders }) => loaders[name]);
 
@@ -139,4 +145,10 @@ export const makeSelectCanCurrentUserAccessParticipantsData = () =>
     makeSelectCurrentUserCollaboratorData(),
     (isCurrentUserInterventionOwner, currentUserCollaboratorData) =>
       isCurrentUserInterventionOwner || currentUserCollaboratorData?.dataAccess,
+  );
+
+export const makeSelectInterventionHfhsAccess = () =>
+  createSelector(
+    selectIntervention,
+    (substate) => substate.intervention?.hfhsAccess,
   );

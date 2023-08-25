@@ -67,22 +67,12 @@ exports[`<PhoneQuestion /> Should render and match the snapshot 1`] = `
   color: #2F3850;
 }
 
-.c8 {
-  font-family: DM Sans;
-  font-size: 13px;
-  line-height: 130%;
-  margin-bottom: 5px;
-  color: #2F3850;
-  width: -webkit-fit-content;
-  width: -moz-fit-content;
-  width: fit-content;
-}
-
 .c4 {
   width: auto;
   height: auto;
   display: block;
   border-radius: 5px;
+  cursor: not-allowed;
   opacity: 0.5;
   color: unset;
 }
@@ -111,7 +101,7 @@ exports[`<PhoneQuestion /> Should render and match the snapshot 1`] = `
   padding-right: 10px;
 }
 
-.c9 {
+.c8 {
   padding: 12px;
   border-style: solid;
   border-width: 1px;
@@ -122,13 +112,13 @@ exports[`<PhoneQuestion /> Should render and match the snapshot 1`] = `
   opacity: 0.5;
 }
 
-.c9:focus {
+.c8:focus {
   box-shadow: none;
   outline: none;
   border-color: #107969;
 }
 
-.c9:disabled {
+.c8:disabled {
   color: #ABBBD1;
 }
 
@@ -206,6 +196,7 @@ exports[`<PhoneQuestion /> Should render and match the snapshot 1`] = `
                 </label>
                 <div
                   class="c4"
+                  cursor="not-allowed"
                   data-testid="select"
                   disabled=""
                 >
@@ -295,14 +286,15 @@ exports[`<PhoneQuestion /> Should render and match the snapshot 1`] = `
                   for="number"
                 >
                   <p
-                    class="c8"
+                    class="c3"
+                    font-size="12px"
                     width="fit-content"
                   >
                     Phone number
                   </p>
                 </label>
                 <input
-                  class="c9"
+                  class="c8"
                   disabled=""
                   id="number"
                   name="number"
@@ -336,6 +328,7 @@ exports[`<PhoneQuestion /> Should render and match the snapshot 1`] = `
         </label>
         <div
           class="c4"
+          cursor="not-allowed"
           data-testid="select"
           disabled=""
         >
@@ -355,7 +348,7 @@ exports[`<PhoneQuestion /> Should render and match the snapshot 1`] = `
                 class=" css-g1d714-ValueContainer"
               >
                 <div
-                  class=" css-q5ew0g-placeholder"
+                  class=" css-1jyq7ds-placeholder"
                 >
                   Select...
                 </div>

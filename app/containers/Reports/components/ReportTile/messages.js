@@ -22,4 +22,8 @@ export default defineMessages({
     id: `${scope}.${reportFor.thirdParty}`,
     defaultMessage: 'Third Party Report',
   },
+  [reportFor.henryFordHealth]: {
+    id: `${scope}.${reportFor.henryFordHealth}`,
+    defaultMessage: "Henry Ford Health's Report",
+  },
 });

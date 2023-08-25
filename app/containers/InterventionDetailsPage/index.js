@@ -15,7 +15,6 @@ import orderBy from 'lodash/orderBy';
 import { Col as GCol, Row as GRow } from 'react-grid-system';
 import { useParams } from 'react-router-dom';
 import { injectSaga, injectReducer } from 'redux-injectors';
-import { Markup } from 'interweave';
 
 import { colors, themeColors } from 'theme';
 
@@ -25,7 +24,7 @@ import ArchiveIcon from 'assets/svg/archive.svg';
 import GearIcon from 'assets/svg/gear-wo-background.svg';
 import AddAppIcon from 'assets/svg/app-add.svg';
 import TranslateIcon from 'assets/svg/translate.svg';
-import DocumentIcon from 'assets/svg/document.svg';
+import PadlockIcon from 'assets/svg/padlock.svg';
 import DownloadIcon from 'assets/svg/download-line.svg';
 import CollaborateIcon from 'assets/svg/collaborate-icon.svg';
 
@@ -39,7 +38,6 @@ import {
 import { useRoleManager } from 'models/User/RolesManager';
 import { reorderScope } from 'models/Session/ReorderScope';
 import { archived } from 'models/Status/StatusTypes';
-import { CatMhLicenseType } from 'models/Intervention';
 import { getQuestionGroupsSaga } from 'global/reducers/questionGroups/sagas';
 import { editSessionRequest, editSessionSaga } from 'global/reducers/session';
 import { makeSelectUser } from 'global/reducers/auth';
@@ -66,6 +64,7 @@ import {
   makeSelectCanCurrentUserMakeChanges,
   makeSelectCanCurrentUserAccessParticipantsData,
   fetchInterventionSaga,
+  makeSelectIsCurrentUserEditor,
 } from 'global/reducers/intervention';
 import { interventionOptionsSaga } from 'global/sagas/interventionOptionsSaga';
 import {
@@ -86,6 +85,7 @@ import {
   ShareExternallyLevel,
   useShareExternallyModal,
 } from 'containers/ShareExternallyModal';
+import { useClearInterventionData } from 'containers/ClearInterventionData';
 
 import Modal, {
   ConfirmationModal,
@@ -98,9 +98,11 @@ import ErrorAlert from 'components/ErrorAlert';
 import Row from 'components/Row';
 import Spinner from 'components/Spinner';
 import AppContainer from 'components/Container';
-import Icon from 'components/Icon';
-import Tooltip from 'components/Tooltip';
-import { HelpIconTooltip } from 'components/HelpIconTooltip';
+import {
+  useHenryFordBranchingInfoModal,
+  HenryFordBranchingInfoType,
+  InterventionHenryFordBranchingInfoAction,
+} from 'components/HenryFordBrachingInfoModal';
 
 import { useCollaboratorsModal } from 'containers/CollaboratorsModal';
 
@@ -110,17 +112,14 @@ import interventionDetailsPageSagas from './saga';
 import SessionCreateButton from './components/SessionCreateButton/index';
 import SessionListItem from './components/SessionListItem';
 import {
-  CatMhAccessModal,
   InterventionAssignOrganizationModal,
   InterventionSettingsModal,
+  useThirdPartyToolsAccessModal,
   INTERVENTION_ASSIGN_ORGANIZATION_MODAL_WIDTH,
 } from './components/Modals';
 import messages from './messages';
 import { InterventionDetailsPageContext, nextStatus } from './utils';
-import {
-  CAT_MH_TEST_COUNT_WARNING_THRESHOLD,
-  INTERVENTION_SETTINGS_MODAL_WIDTH,
-} from './constants';
+import { INTERVENTION_SETTINGS_MODAL_WIDTH } from './constants';
 
 export function InterventionDetailsPage({
   createSession,
@@ -144,6 +143,7 @@ export function InterventionDetailsPage({
   user: { organizableId: userOrganizableId },
   editSession,
   exportIntervention,
+  isCurrentUserEditor,
   canCurrentUserMakeChanges,
   editingPossible,
   isCurrentUserInterventionOwner,
@@ -173,13 +173,11 @@ export function InterventionDetailsPage({
     licenseType,
     type,
     userId,
+    hfhsAccess,
+    hasCollaborators,
+    sensitiveDataState,
+    clearSensitiveDataScheduledAt,
   } = intervention || {};
-
-  const testsLeft = catMhPool - createdCatMhSessionCount;
-  const hasSmallNumberOfCatMhSessionsRemaining =
-    licenseType !== CatMhLicenseType.UNLIMITED &&
-    (!catMhPool ||
-      testsLeft / catMhPool <= CAT_MH_TEST_COUNT_WARNING_THRESHOLD);
 
   const showSessionCreateButton = canEdit(status);
   const sharingPossible = canShareWithParticipants(status);
@@ -188,10 +186,16 @@ export function InterventionDetailsPage({
   const [translateModalVisible, setTranslateModalVisible] = useState(false);
   const [participantShareModalVisible, setParticipantShareModalVisible] =
     useState(false);
+
   const [
     interventionSettingsModalVisible,
     setInterventionSettingsModalVisible,
   ] = useState(false);
+  const openInterventionSettingsModal = () =>
+    setInterventionSettingsModalVisible(true);
+  const closeInterventionSettingsModal = () =>
+    setInterventionSettingsModalVisible(false);
+
   const [assignOrganizationModalVisible, setAssignOrganizationModalVisible] =
     useState(false);
 
@@ -221,13 +225,8 @@ export function InterventionDetailsPage({
     },
   });
 
-  const { openModal: openCatMhModal, Modal: CatMhModal } = useModal({
-    type: ModalType.Modal,
-    modalContentRenderer: (props) => <CatMhAccessModal {...props} />,
-    props: {
-      title: formatMessage(messages.catMhSettingsModalTitle),
-    },
-  });
+  const { openThirdPartyToolsAccessModal, ThirdPartyToolsModal } =
+    useThirdPartyToolsAccessModal();
 
   const {
     openModal: openInterventionInviteModal,
@@ -257,6 +256,48 @@ export function InterventionDetailsPage({
       userId,
     );
 
+  const {
+    Modal: HenryFordBranchingInfoModal,
+    openModal: openHenryFordBranchingInfoModal,
+  } = useHenryFordBranchingInfoModal(
+    HenryFordBranchingInfoType.INTERVENTION,
+    (action) => {
+      switch (action) {
+        case InterventionHenryFordBranchingInfoAction.SHARE_EXTERNALLY: {
+          openShareExternallyModal();
+          break;
+        }
+        case InterventionHenryFordBranchingInfoAction.DUPLICATE_HERE: {
+          handleCopyIntervention();
+          break;
+        }
+        default: {
+          break;
+        }
+      }
+    },
+  );
+
+  const onShareExternally = () => {
+    if (hfhsAccess) {
+      openHenryFordBranchingInfoModal(
+        InterventionHenryFordBranchingInfoAction.SHARE_EXTERNALLY,
+      );
+    } else {
+      openShareExternallyModal();
+    }
+  };
+
+  const onDuplicateHere = () => {
+    if (hfhsAccess) {
+      openHenryFordBranchingInfoModal(
+        InterventionHenryFordBranchingInfoAction.DUPLICATE_HERE,
+      );
+    } else {
+      handleCopyIntervention();
+    }
+  };
+
   const canCreateCatSession = useMemo(
     () => !isAccessRevoked,
     [isAccessRevoked],
@@ -266,7 +307,24 @@ export function InterventionDetailsPage({
 
   const handleExportIntervention = () => exportIntervention(id);
 
+  const { ClearInterventionDataOption, ClearInterventionDataModal } =
+    useClearInterventionData(
+      status,
+      id,
+      hasCollaborators,
+      isCurrentUserEditor,
+      sensitiveDataState,
+      clearSensitiveDataScheduledAt,
+    );
+
   const options = [
+    {
+      id: 'interventionSettings',
+      label: formatMessage(messages.interventionSettings),
+      icon: GearIcon,
+      action: openInterventionSettingsModal,
+      color: colors.bluewood,
+    },
     {
       id: 'translate',
       label: formatMessage(messages.translate),
@@ -275,17 +333,17 @@ export function InterventionDetailsPage({
       color: colors.bluewood,
     },
     {
-      id: 'share externally',
+      id: InterventionHenryFordBranchingInfoAction.SHARE_EXTERNALLY,
       label: formatMessage(messages.shareExternally),
       icon: FileShareIcon,
-      action: openShareExternallyModal,
+      action: onShareExternally,
       color: colors.bluewood,
     },
     {
-      id: 'duplicate here',
+      id: InterventionHenryFordBranchingInfoAction.DUPLICATE_HERE,
       label: formatMessage(messages.duplicateHere),
       icon: CopyIcon,
-      action: handleCopyIntervention,
+      action: onDuplicateHere,
       color: colors.bluewood,
     },
     {
@@ -310,10 +368,10 @@ export function InterventionDetailsPage({
     ...(isAdmin
       ? [
           {
-            icon: DocumentIcon,
-            action: () => openCatMhModal(intervention),
-            label: formatMessage(messages.catMhSettingsModalTitle),
-            id: 'catMhAccess',
+            icon: PadlockIcon,
+            action: () => openThirdPartyToolsAccessModal(intervention),
+            label: formatMessage(messages.thirdPartyToolsAccessModalTitle),
+            id: 'thirdPartyToolsAccess',
             disabled: !canCurrentUserMakeChanges,
           },
         ]
@@ -335,6 +393,7 @@ export function InterventionDetailsPage({
           },
         ]
       : []),
+    ...(isCurrentUserInterventionOwner ? [ClearInterventionDataOption] : []),
   ];
 
   useLayoutEffect(() => {
@@ -450,6 +509,7 @@ export function InterventionDetailsPage({
                         nextSessionName={nextSession ? nextSession.name : null}
                         status={status}
                         interventionType={type}
+                        hfhsAccess={hfhsAccess}
                       />
                     </Row>
                   );
@@ -483,7 +543,8 @@ export function InterventionDetailsPage({
             width="100%"
           >
             <ArchiveModal />
-            <CatMhModal />
+            <ThirdPartyToolsModal />
+            <HenryFordBranchingInfoModal />
             <ConfirmationModal
               visible={!isNullOrUndefined(deleteConfirmationSessionId)}
               onClose={() => setDeleteConfirmationSessionId(null)}
@@ -508,14 +569,14 @@ export function InterventionDetailsPage({
 
             <Modal
               title={formatMessage(messages.interventionSettingsModalTitle)}
-              onClose={() => setInterventionSettingsModalVisible(false)}
+              onClose={closeInterventionSettingsModal}
               visible={interventionSettingsModalVisible}
               width={INTERVENTION_SETTINGS_MODAL_WIDTH}
             >
               <InterventionSettingsModal
                 editingPossible={editingPossible}
                 canCurrentUserMakeChanges={canCurrentUserMakeChanges}
-                onClose={() => setInterventionSettingsModalVisible(false)}
+                onClose={closeInterventionSettingsModal}
               />
             </Modal>
 
@@ -546,6 +607,7 @@ export function InterventionDetailsPage({
             </Modal>
 
             <CollaboratorsModal />
+            <ClearInterventionDataModal />
 
             <Header
               name={name}
@@ -565,67 +627,13 @@ export function InterventionDetailsPage({
               interventionType={type}
               sharingPossible={sharingPossible}
               userOrganizableId={userOrganizableId}
+              hasCollaborators={hasCollaborators}
+              sensitiveDataState={sensitiveDataState}
+              catMhAccess={!isAccessRevoked}
+              catMhLicenseType={licenseType}
+              catMhPool={catMhPool}
+              createdCatMhSessionCount={createdCatMhSessionCount}
             />
-
-            <GRow>
-              <GCol>
-                <Row justify="between">
-                  <Row align="center">
-                    <Tooltip
-                      id="intervention-settings"
-                      text={formatMessage(
-                        messages.interventionSettingsIconTooltip,
-                      )}
-                    >
-                      <Icon
-                        src={GearIcon}
-                        fill={colors.grey}
-                        onClick={() =>
-                          setInterventionSettingsModalVisible(true)
-                        }
-                        role="button"
-                        aria-label={formatMessage(
-                          messages.interventionSettingsIconTooltip,
-                        )}
-                        mr={10}
-                      />
-                    </Tooltip>
-                    <Markup
-                      content={formatMessage(messages.interventionSettings)}
-                    />
-                  </Row>
-
-                  {!isAccessRevoked && (
-                    <Row align="center">
-                      <HelpIconTooltip
-                        id="intervention-type-tooltip"
-                        tooltipContent={formatMessage(messages.catMhCountInfo)}
-                      >
-                        {formatMessage(messages.catMhCounter, {
-                          licenseType,
-                          current: testsLeft ?? 0,
-                          initial: catMhPool ?? 0,
-                          used: createdCatMhSessionCount,
-                          counter: (chunks) => (
-                            <span
-                              style={{
-                                color: hasSmallNumberOfCatMhSessionsRemaining
-                                  ? themeColors.warning
-                                  : themeColors.success,
-                              }}
-                            >
-                              {chunks}
-                            </span>
-                          ),
-                        })}
-                      </HelpIconTooltip>
-                    </Row>
-                  )}
-                </Row>
-              </GCol>
-
-              <GCol xs={0} xl={6} />
-            </GRow>
 
             <GRow>
               <GCol xl={6}>
@@ -683,6 +691,7 @@ InterventionDetailsPage.propTypes = {
   editSession: PropTypes.func,
   user: PropTypes.object,
   exportIntervention: PropTypes.func,
+  isCurrentUserEditor: PropTypes.bool,
   canCurrentUserMakeChanges: PropTypes.bool,
   editingPossible: PropTypes.bool,
   isCurrentUserInterventionOwner: PropTypes.bool,
@@ -699,6 +708,7 @@ const mapStateToProps = createStructuredSelector({
   createSessionError: makeSelectInterventionError('createSessionError'),
   sessionIndex: makeSelectCurrentSessionIndex(),
   user: makeSelectUser(),
+  isCurrentUserEditor: makeSelectIsCurrentUserEditor(),
   canCurrentUserMakeChanges: makeSelectCanCurrentUserMakeChanges(),
   editingPossible: makeSelectEditingPossible(),
   isCurrentUserInterventionOwner: makeSelectIsCurrentUserInterventionOwner(),

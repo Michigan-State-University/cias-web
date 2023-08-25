@@ -2,7 +2,7 @@ import styled from 'styled-components';
 import { motion } from 'framer-motion';
 
 import { colors, fontWeights, themeColors } from 'theme';
-import { flex, layout, margin } from '../BaseComponentStyles';
+import { flex, layout, margin, style } from '../BaseComponentStyles';
 
 export const TabsContainer = styled.div`
   ${flex};
@@ -21,6 +21,7 @@ export const LabelContainer = styled.div`
   margin: 0 10px;
   padding-bottom: 7px;
   div {
+    ${style};
     cursor: pointer;
     ${({ emphasizeActiveLink, isActive }) =>
       emphasizeActiveLink &&

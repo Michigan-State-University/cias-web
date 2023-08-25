@@ -14,8 +14,8 @@ import { Input } from 'components/Input';
 import Text from 'components/Text';
 import Row from 'components/Row';
 import Column from 'components/Column';
+import FormikControlLayout from 'components/FormikControlLayout';
 
-import { ErrorText } from './styled';
 import messages from './messages';
 
 const KEY_BACKSPACE = 8;
@@ -28,7 +28,6 @@ function FormikCodeInput({ formikKey, label, codeLength }) {
   const [field, meta, helpers] = useField(formikKey);
   const { value, onBlur, name } = field;
   const { error, touched } = meta;
-  const hasError = touched && error;
   const { setValue, setTouched } = helpers;
 
   const [lastKey, setLastKey] = useState();
@@ -89,11 +88,14 @@ function FormikCodeInput({ formikKey, label, codeLength }) {
   };
 
   return (
-    <Column align="center">
-      <Text mb={5} fontWeight="bold" width="fit-content">
-        {label}
-      </Text>
-
+    <FormikControlLayout
+      label={label}
+      formikKey={formikKey}
+      touched={touched}
+      error={error}
+      align="center"
+      labelProps={{ fontWeight: 'bold' }}
+    >
       <Text mb={5} width="fit-content" id="code-input-general">
         {formatMessage(messages.codeInputLabel)}
       </Text>
@@ -123,9 +125,7 @@ function FormikCodeInput({ formikKey, label, codeLength }) {
           );
         })}
       </Row>
-
-      {hasError && <ErrorText>{error.toString()}</ErrorText>}
-    </Column>
+    </FormikControlLayout>
   );
 }
 
