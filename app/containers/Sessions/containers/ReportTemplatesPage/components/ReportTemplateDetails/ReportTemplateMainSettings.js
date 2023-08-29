@@ -439,126 +439,137 @@ const ReportTemplateMainSettings = ({
                   </Col>
                 </Row>
 
-                <Row style={{ marginBottom: 20 }}>
-                  <Col>
-                    <Spacer />
-                  </Col>
-                </Row>
-
-                <Row style={{ marginBottom: 10 }}>
-                  <Col>{formatMessage(messages.coverLetter)}</Col>
-                </Row>
-                <Row style={{ marginBottom: 20 }}>
-                  <Col>
-                    <Switch
-                      checked={singleReportTemplate.hasCoverLetter}
-                      id="has-cover-letter-switch"
-                      onToggle={onHasCoverLetterChange}
-                      labelPosition={LabelPosition.Right}
-                    >
-                      {formatMessage(messages.hasCoverLetterSwitchLabel)}
-                    </Switch>
-                  </Col>
-                </Row>
-
-                {singleReportTemplate.hasCoverLetter && (
+                {singleReportTemplate.reportFor === ReportFor.thirdParty && (
                   <>
-                    <Row style={{ marginBottom: 10 }}>
-                      <Col>{formatMessage(messages.coverLetterLogoType)}</Col>
+                    <Row style={{ marginBottom: 20 }}>
+                      <Col>
+                        <Spacer />
+                      </Col>
                     </Row>
-                    <Row
-                      style={{
-                        marginBottom: showCoverLetterCustomLogoInput ? 10 : 20,
-                      }}
-                    >
-                      {Object.values(CoverLetterLogoType).map((option) => (
-                        <Col key={option}>
-                          <Row
-                            align="center"
-                            style={{
-                              margin: 0,
-                              cursor: canEdit ? 'pointer' : 'initial',
-                            }}
-                          >
-                            <Radio
-                              id={`cover-letter-logo-type-${option}`}
-                              disabled={!canEdit}
-                              checked={
-                                singleReportTemplate.coverLetterLogoType ===
-                                option
-                              }
-                              onChange={() =>
-                                canEdit && onCoverLetterLogoTypeChange(option)
-                              }
-                            >
-                              <Text>{formatMessage(messages[option])}</Text>
-                            </Radio>
+
+                    <Row style={{ marginBottom: 10 }}>
+                      <Col>{formatMessage(messages.coverLetter)}</Col>
+                    </Row>
+                    <Row style={{ marginBottom: 20 }}>
+                      <Col>
+                        <Switch
+                          checked={singleReportTemplate.hasCoverLetter}
+                          id="has-cover-letter-switch"
+                          onToggle={onHasCoverLetterChange}
+                          labelPosition={LabelPosition.Right}
+                        >
+                          {formatMessage(messages.hasCoverLetterSwitchLabel)}
+                        </Switch>
+                      </Col>
+                    </Row>
+
+                    {singleReportTemplate.hasCoverLetter && (
+                      <>
+                        <Row style={{ marginBottom: 10 }}>
+                          <Col>
+                            {formatMessage(messages.coverLetterLogoType)}
+                          </Col>
+                        </Row>
+                        <Row
+                          style={{
+                            marginBottom: showCoverLetterCustomLogoInput
+                              ? 10
+                              : 20,
+                          }}
+                        >
+                          {Object.values(CoverLetterLogoType).map((option) => (
+                            <Col key={option}>
+                              <Row
+                                align="center"
+                                style={{
+                                  margin: 0,
+                                  cursor: canEdit ? 'pointer' : 'initial',
+                                }}
+                              >
+                                <Radio
+                                  id={`cover-letter-logo-type-${option}`}
+                                  disabled={!canEdit}
+                                  checked={
+                                    singleReportTemplate.coverLetterLogoType ===
+                                    option
+                                  }
+                                  onChange={() =>
+                                    canEdit &&
+                                    onCoverLetterLogoTypeChange(option)
+                                  }
+                                >
+                                  <Text>{formatMessage(messages[option])}</Text>
+                                </Radio>
+                              </Row>
+                            </Col>
+                          ))}
+                        </Row>
+
+                        {showCoverLetterCustomLogoInput && (
+                          <Row style={{ marginBottom: 20 }}>
+                            <Col>
+                              <ImageUpload
+                                loading={
+                                  uploadCoverLetterCustomLogoLoading ||
+                                  deleteCoverLetterCustomLogoLoading
+                                }
+                                disabled={!canEdit}
+                                image={
+                                  singleReportTemplate.coverLetterCustomLogoUrl
+                                }
+                                onAddImage={onCoverLetterCustomLogoChange}
+                                onDeleteImage={onCoverLetterCustomLogoDelete}
+                                acceptedFormats={['JPG', 'PNG']}
+                              />
+                            </Col>
                           </Row>
-                        </Col>
-                      ))}
-                    </Row>
+                        )}
 
-                    {showCoverLetterCustomLogoInput && (
-                      <Row style={{ marginBottom: 20 }}>
-                        <Col>
-                          <ImageUpload
-                            loading={
-                              uploadCoverLetterCustomLogoLoading ||
-                              deleteCoverLetterCustomLogoLoading
-                            }
-                            disabled={!canEdit}
-                            image={
-                              singleReportTemplate.coverLetterCustomLogoUrl
-                            }
-                            onAddImage={onCoverLetterCustomLogoChange}
-                            onDeleteImage={onCoverLetterCustomLogoDelete}
-                            acceptedFormats={['JPG', 'PNG']}
-                          />
-                        </Col>
-                      </Row>
+                        <Row style={{ marginBottom: 10 }}>
+                          <Col>
+                            {formatMessage(messages.coverLetterDescription)}
+                          </Col>
+                        </Row>
+                        <Row style={{ marginBottom: 20 }}>
+                          <Col>
+                            <Box bg={colors.linkWater} width="100%">
+                              <ApprovableInput
+                                disabled={!canEdit}
+                                type="multiline"
+                                richText
+                                value={
+                                  singleReportTemplate.coverLetterDescription
+                                }
+                                onCheck={onCoverLetterDescriptionChange}
+                                placeholder={formatMessage(
+                                  globalMessages.enterTextHere,
+                                )}
+                              />
+                            </Box>
+                          </Col>
+                        </Row>
+
+                        <Row style={{ marginBottom: 10 }}>
+                          <Col>{formatMessage(messages.coverLetterSender)}</Col>
+                        </Row>
+                        <Row style={{ marginBottom: 20 }}>
+                          <Col>
+                            <Box bg={colors.linkWater} width="100%">
+                              <ApprovableInput
+                                disabled={!canEdit}
+                                mr={0}
+                                type="singleline"
+                                value={singleReportTemplate.coverLetterSender}
+                                onCheck={onCoverLetterSenderChange}
+                                placeholder={formatMessage(
+                                  globalMessages.enterTextHere,
+                                )}
+                              />
+                            </Box>
+                          </Col>
+                        </Row>
+                      </>
                     )}
-
-                    <Row style={{ marginBottom: 10 }}>
-                      <Col>
-                        {formatMessage(messages.coverLetterDescription)}
-                      </Col>
-                    </Row>
-                    <Row style={{ marginBottom: 20 }}>
-                      <Col>
-                        <Box bg={colors.linkWater} width="100%">
-                          <ApprovableInput
-                            disabled={!canEdit}
-                            type="multiline"
-                            richText
-                            value={singleReportTemplate.coverLetterDescription}
-                            onCheck={onCoverLetterDescriptionChange}
-                            placeholder={formatMessage(
-                              globalMessages.enterTextHere,
-                            )}
-                          />
-                        </Box>
-                      </Col>
-                    </Row>
-
-                    <Row style={{ marginBottom: 10 }}>
-                      <Col>{formatMessage(messages.coverLetterSender)}</Col>
-                    </Row>
-                    <Row style={{ marginBottom: 20 }}>
-                      <Col>
-                        <Box bg={colors.linkWater} width="100%">
-                          <ApprovableInput
-                            disabled={!canEdit}
-                            mr={0}
-                            type="singleline"
-                            value={singleReportTemplate.coverLetterSender}
-                            onCheck={onCoverLetterSenderChange}
-                            placeholder={formatMessage(
-                              globalMessages.enterTextHere,
-                            )}
-                          />
-                        </Box>
-                      </Col>
-                    </Row>
                   </>
                 )}
 
