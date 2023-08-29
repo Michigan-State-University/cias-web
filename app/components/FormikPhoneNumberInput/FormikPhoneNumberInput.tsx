@@ -5,6 +5,8 @@ import { getCountryCallingCode } from 'libphonenumber-js';
 import { FlagIcon } from 'react-flag-kit';
 import { MessageDescriptor, useIntl } from 'react-intl';
 import { NamedProps } from 'react-select';
+import { CountryCode } from 'libphonenumber-js/types';
+import { FlagIconCode } from 'react-flag-kit/typings/FlagIcon';
 
 import FormikNumberInput from 'components/FormikNumberInput';
 import FormikSelect from 'components/FormikSelect';
@@ -15,8 +17,6 @@ import { SelectOption } from 'components/Select/types';
 
 import getCountriesCodes from 'utils/getCountriesCodes';
 
-import { CountryCode } from 'libphonenumber-js/types';
-import { FlagIconCode } from 'react-flag-kit/typings/FlagIcon';
 import messages from './messages';
 import { POPULAR_COUNTRY_CODES } from './constants';
 
@@ -30,6 +30,7 @@ export type Props = {
   prefixInputProps?: object;
   numberInputProps?: object;
   submitOnChange?: boolean;
+  isoOptions?: CountryCode[];
 };
 
 export const FormikPhoneNumberInput: FC<Props> = ({
@@ -42,6 +43,7 @@ export const FormikPhoneNumberInput: FC<Props> = ({
   prefixInputProps,
   numberInputProps,
   submitOnChange,
+  isoOptions,
 }) => {
   const { formatMessage } = useIntl();
 
@@ -63,12 +65,14 @@ export const FormikPhoneNumberInput: FC<Props> = ({
 
   const prefixOptions = useMemo(
     () =>
-      union(POPULAR_COUNTRY_CODES, getCountriesCodes()).map((country) => ({
-        value: country,
-        label: country,
-        filterData: `${country} +${getCountryCallingCode(country)}`,
-      })),
-    [],
+      (isoOptions ?? union(POPULAR_COUNTRY_CODES, getCountriesCodes())).map(
+        (country) => ({
+          value: country,
+          label: country,
+          filterData: `${country} +${getCountryCallingCode(country)}`,
+        }),
+      ),
+    [isoOptions],
   );
 
   const filterOption: NamedProps<SelectOption<CountryCode>>['filterOption'] = (
