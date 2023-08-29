@@ -109,4 +109,12 @@ export default defineMessages({
     id: `${scope}.dataCleared`,
     defaultMessage: 'Data cleared',
   },
+  starIconAlt: {
+    id: `${scope}.starIconAlt`,
+    defaultMessage: 'Star icon',
+  },
+  starIntervention: {
+    id: `${scope}.starIntervention`,
+    defaultMessage: 'Star intervention',
+  },
 });

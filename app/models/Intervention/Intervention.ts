@@ -57,6 +57,7 @@ export interface SimpleIntervention {
   user: { id: string; firstName: string; email: string; lastName: string };
   sensitiveDataState: SensitiveDataState;
   clearSensitiveDataScheduledAt: Nullable<string>;
+  starred: boolean;
 }
 
 export interface Intervention extends SimpleIntervention {

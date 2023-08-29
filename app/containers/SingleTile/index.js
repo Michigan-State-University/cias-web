@@ -42,6 +42,7 @@ import {
 
 import { canArchive, canEdit } from 'models/Status/statusPermissions';
 import { useRoleManager } from 'models/User/RolesManager';
+import { SensitiveDataState } from 'models/Intervention';
 
 import isNullOrUndefined from 'utils/isNullOrUndefined';
 
@@ -85,7 +86,7 @@ import {
   TileInfo,
 } from './styled';
 import { useClearInterventionData } from '../ClearInterventionData';
-import { SensitiveDataState } from '../../models/Intervention';
+import { StarButton } from './StarButton';
 
 const SingleTile = ({
   tileData,
@@ -114,6 +115,7 @@ const SingleTile = ({
     hfhsAccess,
     sensitiveDataState,
     clearSensitiveDataScheduledAt,
+    starred,
   } = tileData || {};
 
   const isCurrentUserInterventionOwner = interventionOwnerId === userId;
@@ -232,6 +234,10 @@ const SingleTile = ({
       sensitiveDataState,
       clearSensitiveDataScheduledAt,
     );
+
+  const onStarClick = (newStarred) => {
+    console.log(newStarred);
+  };
 
   const options = [
     {
@@ -373,32 +379,35 @@ const SingleTile = ({
           <EllipsisText text={name} fontSize={18} fontWeight="bold" />
 
           <Row justify="between">
-            <Tooltip
-              id={`${id}-tile-tooltip`}
-              content={
-                <InterventionDetails
-                  formatMessage={formatMessage}
-                  user={user}
-                  createdAt={createdAt}
-                  updatedAt={updatedAt}
-                />
-              }
-            >
-              <TileInfo>
-                {!isNullOrUndefined(sessionsSize) && (
-                  <div>
-                    <Text>
-                      {formatMessage(messages.sessions, {
-                        sessionCount: sessionsSize,
-                      })}
-                    </Text>
-                  </div>
-                )}
-              </TileInfo>
-            </Tooltip>
+            <Row gap={8} align="center">
+              <StarButton starred={starred} onClick={onStarClick} />
+              <Tooltip
+                id={`${id}-tile-tooltip`}
+                content={
+                  <InterventionDetails
+                    formatMessage={formatMessage}
+                    user={user}
+                    createdAt={createdAt}
+                    updatedAt={updatedAt}
+                  />
+                }
+              >
+                <TileInfo>
+                  {!isNullOrUndefined(sessionsSize) && (
+                    <div>
+                      <Text fontSize={12}>
+                        {formatMessage(messages.sessions, {
+                          sessionCount: sessionsSize,
+                        })}
+                      </Text>
+                    </div>
+                  )}
+                </TileInfo>
+              </Tooltip>
+            </Row>
 
             {showReportingBadge && (
-              <Badge bg={colors.orange}>
+              <Badge bg={colors.orange} fontSize={12}>
                 {formatMessage(messages.isFromOrganization)}
               </Badge>
             )}
