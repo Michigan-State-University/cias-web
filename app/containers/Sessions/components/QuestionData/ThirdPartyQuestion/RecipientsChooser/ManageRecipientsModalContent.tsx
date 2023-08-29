@@ -25,6 +25,7 @@ import { createRecipientsFormSchema, formatFax } from './utils';
 import {
   ADD_RECIPIENT_BUTTON_PROPS,
   API_PHONE_NUMBER_FORMAT,
+  FAX_RECIPIENTS_COUNTRY_CODES,
   TAB_CONTENT_HEIGHT,
 } from './constants';
 
@@ -179,6 +180,7 @@ export const ManageRecipientsModalContent: ModalContentRenderer<Recipients> = ({
                             prefixLabel={null}
                             phoneLabel={null}
                             phonePlaceholder={messages.enterFax}
+                            isoOptions={FAX_RECIPIENTS_COUNTRY_CODES}
                           />
                           <ImageButton
                             src={RedBin}
