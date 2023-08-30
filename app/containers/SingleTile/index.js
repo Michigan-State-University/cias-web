@@ -94,6 +94,7 @@ import { StarButton } from './StarButton';
 
 const SingleTile = ({
   tileData,
+  tileState,
   participantView,
   link,
   copyIntervention,
@@ -123,6 +124,8 @@ const SingleTile = ({
     clearSensitiveDataScheduledAt,
     starred,
   } = tileData || {};
+
+  const { starInterventionLoading, unstarInterventionLoading } = tileState;
 
   const isCurrentUserInterventionOwner = interventionOwnerId === userId;
 
@@ -390,7 +393,11 @@ const SingleTile = ({
 
           <Row justify="between">
             <Row gap={8} align="center">
-              <StarButton starred={starred} onClick={onStarClick} />
+              <StarButton
+                starred={starred}
+                onClick={onStarClick}
+                loading={starInterventionLoading || unstarInterventionLoading}
+              />
               <Tooltip
                 id={`${id}-tile-tooltip`}
                 content={
@@ -430,6 +437,7 @@ const SingleTile = ({
 
 SingleTile.propTypes = {
   tileData: PropTypes.object,
+  tileState: PropTypes.instanceOf(Map),
   intl: PropTypes.object,
   participantView: PropTypes.bool,
   link: PropTypes.string,

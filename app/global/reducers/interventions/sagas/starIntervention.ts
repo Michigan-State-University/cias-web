@@ -23,7 +23,7 @@ function* starIntervention({
     yield call(axios.post, url);
     yield put(starInterventionSuccess(interventionId));
   } catch (error) {
-    yield put(starInterventionError(error));
+    yield put(starInterventionError(interventionId));
     yield call(
       toast.error,
       formatApiErrorMessage(error, messages.starInterventionError),

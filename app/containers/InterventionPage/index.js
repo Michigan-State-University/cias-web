@@ -63,6 +63,7 @@ export function InterventionPage({
     loaders: { fetchInterventions: fetchInterventionsLoading },
     errors: { fetchInterventions: fetchInterventionsError },
     shouldRefetch,
+    interventionsStates,
   },
   intl: { formatMessage },
   createInterventionRequest: createIntervention,
@@ -258,6 +259,7 @@ export function InterventionPage({
         <TileRenderer
           containerKey="intervention"
           elements={interventions}
+          elementsStates={interventionsStates}
           newLabel={formatMessage(messages.createIntervention)}
           onCreateCall={createIntervention}
           createLoading={createInterventionLoading}

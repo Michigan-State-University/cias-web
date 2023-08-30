@@ -16,6 +16,7 @@ import NewButton from './Components/NewButton';
 
 function TileRenderer({
   elements,
+  elementsStates,
   onCreateCall,
   createLoading,
   newLabel,
@@ -71,6 +72,7 @@ function TileRenderer({
         rowCount={rowCount}
         rowHeight={160}
         items={elements}
+        itemsStates={elementsStates}
         infiniteLoader={
           infiniteLoader
             ? {
@@ -89,6 +91,7 @@ function TileRenderer({
 
 TileRenderer.propTypes = {
   elements: PropTypes.any,
+  elementsStates: PropTypes.instanceOf(Map),
   onCreateCall: PropTypes.func,
   createLoading: PropTypes.bool,
   newLabel: PropTypes.string,

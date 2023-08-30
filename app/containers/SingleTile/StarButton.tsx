@@ -14,9 +14,10 @@ const ICON_SIZE = 20;
 export type Props = {
   starred: boolean;
   onClick: (newChange: boolean) => void;
+  loading?: boolean;
 };
 
-export const StarButton: FC<Props> = ({ starred, onClick }) => {
+export const StarButton: FC<Props> = ({ starred, onClick, loading }) => {
   const { formatMessage } = useIntl();
 
   const handleClick: MouseEventHandler = (e) => {
@@ -34,6 +35,10 @@ export const StarButton: FC<Props> = ({ starred, onClick }) => {
           messages[starred ? 'unstarIntervention' : 'starIntervention'],
         ),
       }}
+      spinnerProps={{
+        size: ICON_SIZE,
+      }}
+      loading={loading}
     >
       <Icon
         src={starred ? StarFilledIcon : StarIcon}

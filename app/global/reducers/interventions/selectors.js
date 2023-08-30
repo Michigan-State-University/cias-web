@@ -23,3 +23,9 @@ export const makeSelectInterventionsLoader = (name) =>
 
 export const makeSelectInterventionsError = (name) =>
   createSelector(interventions, ({ errors }) => errors[name]);
+
+export const makeSelectInterventionsStates = () =>
+  createSelector(
+    interventions,
+    ({ interventionsStates }) => interventionsStates,
+  );

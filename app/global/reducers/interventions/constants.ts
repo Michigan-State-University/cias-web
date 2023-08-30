@@ -1,3 +1,10 @@
+import { InterventionListItemState } from './types';
+
+export const INTERVENTION_LIST_ITEM_DEFAULT_STATE: InterventionListItemState = {
+  starInterventionLoading: false,
+  unstarInterventionLoading: false,
+};
+
 export const FETCH_INTERVENTIONS_REQUEST =
   'app/Dashboard/FETCH_INTERVENTIONS_REQUEST';
 export const FETCH_INTERVENTIONS_SUCCESS =

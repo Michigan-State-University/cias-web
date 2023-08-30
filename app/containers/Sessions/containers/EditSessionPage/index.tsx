@@ -146,6 +146,7 @@ export default compose(
   // @ts-ignore
   injectReducer({ key: 'localState', reducer: localStateReducer }),
   injectReducer({ key: 'intervention', reducer: interventionReducer }),
+  // @ts-ignore
   injectReducer({ key: 'interventions', reducer: interventionsReducer }),
   // @ts-ignore
   injectReducer({ key: 'reportTemplates', reducer: reportTemplatesReducer }),
