@@ -123,8 +123,8 @@ export const sendInterventionCsvSuccess = (message) =>
 export const sendInterventionCsvError = (error) =>
   actionBuilder(SEND_INTERVENTION_CSV_ERROR, { error });
 
-export const createInterventionRequest = () =>
-  actionBuilder(CREATE_INTERVENTION_REQUEST, {});
+export const createInterventionRequest = (organizationId) =>
+  actionBuilder(CREATE_INTERVENTION_REQUEST, { organizationId });
 export const createInterventionSuccess = (intervention) =>
   actionBuilder(CREATE_INTERVENTION_SUCCESS, { intervention });
 export const createInterventionError = (error) =>

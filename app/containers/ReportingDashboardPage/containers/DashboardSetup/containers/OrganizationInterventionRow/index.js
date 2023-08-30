@@ -2,17 +2,22 @@ import React, { useEffect } from 'react';
 import PropTypes from 'prop-types';
 import { createStructuredSelector } from 'reselect';
 import { connect } from 'react-redux';
+import { useInjectSaga } from 'redux-injectors';
 
 import { elements, themeColors } from 'theme';
 import {
   fetchOrganizationInterventionsRequest,
   makeSelectOrganizationInterventions,
-  createOrganizationInterventionRequest,
   makeSelectOrganizationLoaders,
   makeSelectOrganizationErrors,
   makeSelectShouldRefetchInterventions,
   makeSelectOrganizationInterventionsCount,
 } from 'global/reducers/organizations';
+import {
+  createInterventionRequest,
+  makeSelectInterventionLoader,
+  withCreateInterventionSaga,
+} from 'global/reducers/intervention';
 
 import Spinner from 'components/Spinner';
 import ErrorAlert from 'components/ErrorAlert';
@@ -29,11 +34,9 @@ const OrganizationInterventionRow = ({
   organizationId,
   organizationInterventions,
   organizationInterventionsFetchRequest,
-  createOrganizationIntervention,
-  organizationLoaders: {
-    fetchOrganizationInterventions,
-    addOrganizationIntervention,
-  },
+  createIntervention,
+  organizationLoaders: { fetchOrganizationInterventions },
+  createInterventionLoading,
   organizationErrors: {
     fetchOrganizationInterventions: fetchOrganizationInterventionsError,
   },
@@ -41,6 +44,8 @@ const OrganizationInterventionRow = ({
   formatMessage,
   interventionsCount,
 }) => {
+  useInjectSaga(withCreateInterventionSaga);
+
   const fetchInterventions = (startIndex, endIndex) => {
     const realStartIndex = Math.max(startIndex - 1, 0);
     const realStopIndex = endIndex;
@@ -75,8 +80,8 @@ const OrganizationInterventionRow = ({
           containerKey="intervention"
           elements={organizationInterventions}
           newLabel={formatMessage(messages.addReportingIntervention)}
-          onCreateCall={() => createOrganizationIntervention(organizationId)}
-          createLoading={addOrganizationIntervention}
+          onCreateCall={() => createIntervention(organizationId)}
+          createLoading={createInterventionLoading}
           onFetchInterventions={fetchInterventions}
           isLoading={fetchOrganizationInterventions}
           infiniteLoader={{
@@ -93,9 +98,10 @@ OrganizationInterventionRow.propTypes = {
   organizationId: PropTypes.string,
   organizationInterventions: PropTypes.array,
   organizationInterventionsFetchRequest: PropTypes.func,
-  createOrganizationIntervention: PropTypes.func,
+  createIntervention: PropTypes.func,
   formatMessage: PropTypes.func,
   organizationLoaders: PropTypes.object,
+  createInterventionLoading: PropTypes.bool,
   organizationErrors: PropTypes.object,
   shouldRefetch: PropTypes.bool,
   interventionsCount: PropTypes.number,
@@ -108,6 +114,9 @@ OrganizationInterventionRow.defaultProps = {
 const mapStateToProps = createStructuredSelector({
   organizationInterventions: makeSelectOrganizationInterventions(),
   organizationLoaders: makeSelectOrganizationLoaders(),
+  createInterventionLoading: makeSelectInterventionLoader(
+    'createInterventionLoading',
+  ),
   organizationErrors: makeSelectOrganizationErrors(),
   shouldRefetch: makeSelectShouldRefetchInterventions(),
   interventionsCount: makeSelectOrganizationInterventionsCount(),
@@ -115,7 +124,7 @@ const mapStateToProps = createStructuredSelector({
 
 const mapDispatchToProps = {
   organizationInterventionsFetchRequest: fetchOrganizationInterventionsRequest,
-  createOrganizationIntervention: createOrganizationInterventionRequest,
+  createIntervention: createInterventionRequest,
 };
 
 export default connect(

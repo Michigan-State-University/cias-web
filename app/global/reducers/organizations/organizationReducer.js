@@ -13,9 +13,6 @@ import {
   FETCH_ORGANIZATION_INTERVENTIONS_REQUEST,
   FETCH_ORGANIZATION_INTERVENTIONS_SUCCESS,
   FETCH_ORGANIZATION_INTERVENTIONS_ERROR,
-  CREATE_ORGANIZATION_INTERVENTION_REQUEST,
-  CREATE_ORGANIZATION_INTERVENTION_SUCCESS,
-  CREATE_ORGANIZATION_INTERVENTION_ERROR,
   EDIT_ORGANIZATION_REQUEST,
   EDIT_ORGANIZATION_SUCCESS,
   EDIT_ORGANIZATION_ERROR,
@@ -79,7 +76,6 @@ export const initialState = {
     editClinic: false,
     deleteClinic: false,
     fetchOrganizationInterventions: false,
-    createOrganizationIntervention: false,
     fetchDashboardViewSelect: false,
   },
   errors: {
@@ -491,23 +487,7 @@ const organizationReducer = (state = initialState, action) =>
         draft.errors.fetchOrganizationInterventions = payload.error;
         break;
       }
-      case CREATE_ORGANIZATION_INTERVENTION_REQUEST: {
-        draft.loaders.addOrganizationIntervention = true;
-        break;
-      }
-      case CREATE_ORGANIZATION_INTERVENTION_SUCCESS: {
-        draft.organization.interventions = [
-          ...state.organization.interventions,
-          payload.intervention,
-        ];
-        draft.loaders.addOrganizationIntervention = false;
 
-        break;
-      }
-      case CREATE_ORGANIZATION_INTERVENTION_ERROR: {
-        draft.loaders.addOrganizationIntervention = false;
-        break;
-      }
       case SET_SHOULD_REFETCH_ACTION: {
         draft.shouldRefetch[payload.type ?? state.selectedEntity.type] = true;
         break;

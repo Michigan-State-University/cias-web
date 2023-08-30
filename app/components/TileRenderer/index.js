@@ -59,7 +59,7 @@ function TileRenderer({
       value={{
         NewInterventionButton: (
           <NewButton
-            onClick={onCreateCall}
+            onClick={() => onCreateCall()}
             loading={createLoading}
             label={newLabel}
           />

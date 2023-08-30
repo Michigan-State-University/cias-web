@@ -23,8 +23,8 @@ import { colors, fontSizes, themeColors } from 'theme';
 import { FEEDBACK_FORM_URL } from 'global/constants';
 import {
   createInterventionRequest,
-  createInterventionSaga,
   makeSelectInterventionLoader,
+  withCreateInterventionSaga,
 } from 'global/reducers/intervention';
 import {
   fetchInterventionsRequest,
@@ -309,6 +309,6 @@ export default compose(
   memo,
   injectIntl,
   injectSaga({ key: 'fetchInterventions', saga: fetchInterventionsSaga }),
-  injectSaga({ key: 'createIntervention', saga: createInterventionSaga }),
+  injectSaga(withCreateInterventionSaga),
   injectReducer({ key: 'interventions', reducer: interventionsReducer }),
 )(InterventionPage);
