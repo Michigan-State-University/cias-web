@@ -38,6 +38,10 @@ import {
 import {
   copyInterventionRequest,
   archiveInterventionRequest,
+  withStarInterventionSaga,
+  withUnstarInterventionSaga,
+  starInterventionRequest,
+  unstarInterventionRequest,
 } from 'global/reducers/interventions';
 
 import { canArchive, canEdit } from 'models/Status/statusPermissions';
@@ -99,6 +103,8 @@ const SingleTile = ({
   isLoading,
   exportIntervention,
   userOrganizableId,
+  starIntervention,
+  unstarIntervention,
 }) => {
   const {
     name,
@@ -236,7 +242,11 @@ const SingleTile = ({
     );
 
   const onStarClick = (newStarred) => {
-    console.log(newStarred);
+    if (newStarred) {
+      starIntervention(id);
+    } else {
+      unstarIntervention(id);
+    }
   };
 
   const options = [
@@ -428,6 +438,8 @@ SingleTile.propTypes = {
   userId: PropTypes.string,
   isLoading: PropTypes.bool,
   exportIntervention: PropTypes.func,
+  starIntervention: PropTypes.func,
+  unstarIntervention: PropTypes.func,
   userOrganizableId: PropTypes.string,
   isCurrentUserInterventionOwner: PropTypes.bool,
 };
@@ -441,6 +453,8 @@ const mapDispatchToProps = {
   copyIntervention: copyInterventionRequest,
   archiveIntervention: archiveInterventionRequest,
   exportIntervention: exportInterventionRequest,
+  starIntervention: starInterventionRequest,
+  unstarIntervention: unstarInterventionRequest,
 };
 
 const SingleTileWithIntl = injectIntl(SingleTile);
@@ -464,4 +478,6 @@ export default compose(
   }),
   injectReducer({ key: 'intervention', reducer: interventionReducer }),
   injectSaga({ key: 'exportIntervention', saga: exportInterventionSaga }),
+  injectSaga(withStarInterventionSaga),
+  injectSaga(withUnstarInterventionSaga),
 )(SingleTileWithIntl);

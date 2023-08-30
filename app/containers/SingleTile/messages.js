@@ -117,4 +117,8 @@ export default defineMessages({
     id: `${scope}.starIntervention`,
     defaultMessage: 'Star intervention',
   },
+  unstarIntervention: {
+    id: `${scope}.unstarIntervention`,
+    defaultMessage: 'Unstar intervention',
+  },
 });

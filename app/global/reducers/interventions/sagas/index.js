@@ -4,6 +4,9 @@ import copyInterventionSaga from './copyIntervention';
 import archiveInterventionSaga from './archiveIntervention';
 import importInterventionSaga from './importIntervention';
 
+export * from './starIntervention';
+export * from './unstarIntervention';
+
 export {
   fetchInterventionsSaga,
   copyInterventionSaga,
