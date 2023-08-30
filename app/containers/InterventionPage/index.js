@@ -29,9 +29,9 @@ import {
 import {
   fetchInterventionsRequest,
   makeSelectInterventionsState,
-  interventionsReducer,
-  fetchInterventionsSaga,
+  withFetchInterventionsSaga,
   resetImportModalState,
+  withInterventionsReducer,
 } from 'global/reducers/interventions';
 import { editUserRequest, makeSelectUser } from 'global/reducers/auth';
 
@@ -308,7 +308,7 @@ export default compose(
   withConnect,
   memo,
   injectIntl,
-  injectSaga({ key: 'fetchInterventions', saga: fetchInterventionsSaga }),
+  injectSaga(withFetchInterventionsSaga),
   injectSaga(withCreateInterventionSaga),
-  injectReducer({ key: 'interventions', reducer: interventionsReducer }),
+  injectReducer(withInterventionsReducer),
 )(InterventionPage);

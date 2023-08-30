@@ -25,8 +25,13 @@ import {
 export const fetchInterventionsRequest = ({
   paginationData,
   filterData,
+  organizationId,
 } = {}) =>
-  actionBuilder(FETCH_INTERVENTIONS_REQUEST, { paginationData, filterData });
+  actionBuilder(FETCH_INTERVENTIONS_REQUEST, {
+    paginationData,
+    filterData,
+    organizationId,
+  });
 export const fetchInterventionsSuccess = (
   interventions,
   { paginationData, interventionsSize } = {},

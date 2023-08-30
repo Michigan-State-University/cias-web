@@ -13,7 +13,6 @@ import fetchClinicSaga from './fetchClinic';
 import addClinicSaga from './addClinic';
 import editClinicSaga from './editClinic';
 import deleteClinicSaga from './deleteClinic';
-import fetchOrganizationInterventionsSaga from './fetchOrganizationInterventions';
 import fetchDashboardViewSelectOptionsSaga from './fetchDashboardViewSelectOptions';
 
 export {
@@ -29,7 +28,6 @@ export {
   addClinicSaga,
   editClinicSaga,
   deleteClinicSaga,
-  fetchOrganizationInterventionsSaga,
   fetchDashboardViewSelectOptionsSaga,
 };
 
@@ -49,7 +47,6 @@ export default function* allOrganizationsSagas() {
     addClinicSaga(),
     editClinicSaga(),
     deleteClinicSaga(),
-    fetchOrganizationInterventionsSaga(),
     fetchDashboardViewSelectOptionsSaga(),
   ]);
 }

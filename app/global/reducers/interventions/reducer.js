@@ -52,7 +52,7 @@ export const initialState = {
 };
 
 /* eslint-disable default-case, no-param-reassign */
-export const interventionsReducer = (state = initialState, { type, payload }) =>
+const interventionsReducer = (state = initialState, { type, payload }) =>
   produce(state, (draft) => {
     const updateInterventionListItemStateById = (interventionId, changes) => {
       updateListItemStateById(
@@ -231,3 +231,8 @@ export const interventionsReducer = (state = initialState, { type, payload }) =>
   });
 
 export default interventionsReducer;
+
+export const withInterventionsReducer = {
+  key: 'interventions',
+  reducer: interventionsReducer,
+};

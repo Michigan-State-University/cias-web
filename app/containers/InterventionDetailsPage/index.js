@@ -69,8 +69,8 @@ import {
 import { interventionOptionsSaga } from 'global/sagas/interventionOptionsSaga';
 import {
   copyInterventionRequest,
-  interventionsReducer,
-  fetchInterventionsSaga,
+  withFetchInterventionsSaga,
+  withInterventionsReducer,
 } from 'global/reducers/interventions';
 import {
   questionsReducer,
@@ -739,13 +739,13 @@ export default compose(
     key: 'intervention',
     reducer: interventionReducer,
   }),
-  injectReducer({ key: 'interventions', reducer: interventionsReducer }),
+  injectReducer(withInterventionsReducer),
   injectReducer({ key: 'questions', reducer: questionsReducer }),
   injectSaga({
     key: 'interventionOptionsSaga',
     saga: interventionOptionsSaga,
   }),
-  injectSaga({ key: 'fetchInterventions', saga: fetchInterventionsSaga }),
+  injectSaga(withFetchInterventionsSaga),
   injectSaga({ key: 'fetchIntervention', saga: fetchInterventionSaga }),
   injectSaga({ key: 'getQuestionGroupsSaga', saga: getQuestionGroupsSaga }),
   injectSaga({ key: 'editSession', saga: editSessionSaga }),

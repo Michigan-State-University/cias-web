@@ -16,7 +16,7 @@ import {
   CREATE_INTERVENTION_ERROR,
 } from '../constants';
 
-function* createIntervention({ payload: { organizationId } }) {
+export function* createIntervention({ payload: { organizationId } }) {
   const requestURL = `v1/interventions`;
 
   try {
@@ -49,7 +49,7 @@ function* createIntervention({ payload: { organizationId } }) {
   }
 }
 
-function* createInterventionSaga() {
+export default function* createInterventionSaga() {
   yield takeLatest(CREATE_INTERVENTION_REQUEST, createIntervention);
 }
 

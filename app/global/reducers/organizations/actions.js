@@ -4,9 +4,6 @@ import {
   FETCH_ORGANIZATIONS_REQUEST,
   FETCH_ORGANIZATIONS_SUCCESS,
   FETCH_ORGANIZATIONS_ERROR,
-  FETCH_ORGANIZATION_INTERVENTIONS_REQUEST,
-  FETCH_ORGANIZATION_INTERVENTIONS_SUCCESS,
-  FETCH_ORGANIZATION_INTERVENTIONS_ERROR,
   CREATE_ORGANIZATION_REQUEST,
   CREATE_ORGANIZATION_SUCCESS,
   CREATE_ORGANIZATION_ERROR,
@@ -60,27 +57,6 @@ export const fetchOrganizationsSuccess = (organizations) =>
   actionBuilder(FETCH_ORGANIZATIONS_SUCCESS, { organizations });
 export const fetchOrganizationsFailure = (error) =>
   actionBuilder(FETCH_ORGANIZATIONS_ERROR, { error });
-
-export const fetchOrganizationInterventionsRequest = (
-  organizationId,
-  paginationData,
-) =>
-  actionBuilder(FETCH_ORGANIZATION_INTERVENTIONS_REQUEST, {
-    organizationId,
-    paginationData,
-  });
-export const fetchOrganizationInterventionsSuccess = (
-  interventions,
-  interventionCount,
-  startIndex,
-) =>
-  actionBuilder(FETCH_ORGANIZATION_INTERVENTIONS_SUCCESS, {
-    interventions,
-    interventionCount,
-    startIndex,
-  });
-export const fetchOrganizationInterventionsFailure = (error) =>
-  actionBuilder(FETCH_ORGANIZATION_INTERVENTIONS_ERROR, { error });
 
 export const createOrganizationRequest = () =>
   actionBuilder(CREATE_ORGANIZATION_REQUEST, {});

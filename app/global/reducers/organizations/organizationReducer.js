@@ -10,9 +10,6 @@ import {
   FETCH_ORGANIZATION_REQUEST,
   FETCH_ORGANIZATION_SUCCESS,
   FETCH_ORGANIZATION_ERROR,
-  FETCH_ORGANIZATION_INTERVENTIONS_REQUEST,
-  FETCH_ORGANIZATION_INTERVENTIONS_SUCCESS,
-  FETCH_ORGANIZATION_INTERVENTIONS_ERROR,
   EDIT_ORGANIZATION_REQUEST,
   EDIT_ORGANIZATION_SUCCESS,
   EDIT_ORGANIZATION_ERROR,
@@ -75,7 +72,6 @@ export const initialState = {
     addClinic: false,
     editClinic: false,
     deleteClinic: false,
-    fetchOrganizationInterventions: false,
     fetchDashboardViewSelect: false,
   },
   errors: {
@@ -91,7 +87,6 @@ export const initialState = {
     addClinic: null,
     editClinic: null,
     deleteClinic: null,
-    fetchOrganizationInterventions: null,
     fetchDashboardViewSelect: null,
   },
   shouldRefetch: {
@@ -459,32 +454,6 @@ const organizationReducer = (state = initialState, action) =>
       case DELETE_CLINIC_ERROR: {
         draft.loaders.deleteClinic = false;
         draft.errors.deleteClinic = payload.error;
-        break;
-      }
-
-      case FETCH_ORGANIZATION_INTERVENTIONS_REQUEST: {
-        draft.loaders.fetchOrganizationInterventions = true;
-        draft.errors.fetchOrganizationInterventions = null;
-        break;
-      }
-      case FETCH_ORGANIZATION_INTERVENTIONS_SUCCESS: {
-        draft.organization.interventions =
-          payload.startIndex === 0
-            ? payload.interventions
-            : [
-                ...(state.organization.interventions || []),
-                ...payload.interventions,
-              ];
-
-        draft.organization.interventionCount = payload.interventionCount;
-        assignDraftItems(draft.organization, draft.cache.organization);
-        draft.loaders.fetchOrganizationInterventions = false;
-
-        break;
-      }
-      case FETCH_ORGANIZATION_INTERVENTIONS_ERROR: {
-        draft.loaders.fetchOrganizationInterventions = false;
-        draft.errors.fetchOrganizationInterventions = payload.error;
         break;
       }
 

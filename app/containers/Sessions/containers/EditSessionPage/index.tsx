@@ -23,9 +23,9 @@ import {
   makeSelectEditingPossible,
 } from 'global/reducers/intervention';
 import {
-  fetchInterventionsSaga,
-  interventionsReducer,
+  withFetchInterventionsSaga,
   fetchInterventionsRequest,
+  withInterventionsReducer,
 } from 'global/reducers/interventions';
 
 import {
@@ -147,12 +147,12 @@ export default compose(
   injectReducer({ key: 'localState', reducer: localStateReducer }),
   injectReducer({ key: 'intervention', reducer: interventionReducer }),
   // @ts-ignore
-  injectReducer({ key: 'interventions', reducer: interventionsReducer }),
+  injectReducer(withInterventionsReducer),
   // @ts-ignore
   injectReducer({ key: 'reportTemplates', reducer: reportTemplatesReducer }),
   injectSaga({ key: 'getSession', saga: getSessionSaga }),
   injectSaga({ key: 'fetchIntervention', saga: fetchInterventionSaga }),
-  injectSaga({ key: 'fetchInterventions', saga: fetchInterventionsSaga }),
+  injectSaga(withFetchInterventionsSaga),
   injectSaga({ key: 'reportTemplatesSaga', saga: reportTemplatesSaga }),
   withConnect,
   withSaga,

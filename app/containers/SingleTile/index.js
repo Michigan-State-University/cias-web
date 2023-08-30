@@ -125,7 +125,8 @@ const SingleTile = ({
     starred,
   } = tileData || {};
 
-  const { starInterventionLoading, unstarInterventionLoading } = tileState;
+  const { starInterventionLoading, unstarInterventionLoading } =
+    tileState ?? {};
 
   const isCurrentUserInterventionOwner = interventionOwnerId === userId;
 
