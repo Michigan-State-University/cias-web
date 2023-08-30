@@ -384,45 +384,45 @@ const SingleTile = ({
               )}
             </Row>
             {!participantView && (
-              <div onClick={preventDefault}>
-                <Dropdown options={options} />
-              </div>
+              <Row align="center">
+                <StarButton
+                  starred={starred}
+                  onClick={onStarClick}
+                  loading={starInterventionLoading || unstarInterventionLoading}
+                />
+                <div onClick={preventDefault}>
+                  <Dropdown options={options} />
+                </div>
+              </Row>
             )}
           </Heading>
 
           <EllipsisText text={name} fontSize={18} fontWeight="bold" />
 
           <Row justify="between">
-            <Row gap={8} align="center">
-              <StarButton
-                starred={starred}
-                onClick={onStarClick}
-                loading={starInterventionLoading || unstarInterventionLoading}
-              />
-              <Tooltip
-                id={`${id}-tile-tooltip`}
-                content={
-                  <InterventionDetails
-                    formatMessage={formatMessage}
-                    user={user}
-                    createdAt={createdAt}
-                    updatedAt={updatedAt}
-                  />
-                }
-              >
-                <TileInfo>
-                  {!isNullOrUndefined(sessionsSize) && (
-                    <div>
-                      <Text fontSize={12}>
-                        {formatMessage(messages.sessions, {
-                          sessionCount: sessionsSize,
-                        })}
-                      </Text>
-                    </div>
-                  )}
-                </TileInfo>
-              </Tooltip>
-            </Row>
+            <Tooltip
+              id={`${id}-tile-tooltip`}
+              content={
+                <InterventionDetails
+                  formatMessage={formatMessage}
+                  user={user}
+                  createdAt={createdAt}
+                  updatedAt={updatedAt}
+                />
+              }
+            >
+              <TileInfo>
+                {!isNullOrUndefined(sessionsSize) && (
+                  <div>
+                    <Text fontSize={12}>
+                      {formatMessage(messages.sessions, {
+                        sessionCount: sessionsSize,
+                      })}
+                    </Text>
+                  </div>
+                )}
+              </TileInfo>
+            </Tooltip>
 
             {showReportingBadge && (
               <Badge bg={colors.orange} fontSize={12}>

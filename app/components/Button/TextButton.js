@@ -15,6 +15,12 @@ const getWidth = (button) => {
   return DEFAULT_WIDTH;
 };
 
+const getHeight = (button) => {
+  const { current } = button;
+  if (current) return current.clientHeight;
+  return '100%';
+};
+
 const TextButton = ({
   className,
   children,
@@ -32,7 +38,7 @@ const TextButton = ({
       <Row
         className={className}
         width={getWidth(button)}
-        height="100%"
+        height={getHeight(button)}
         align="center"
         justify="center"
         {...loaderProps}

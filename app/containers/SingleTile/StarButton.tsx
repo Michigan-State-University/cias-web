@@ -10,6 +10,7 @@ import Icon from 'components/Icon';
 import messages from './messages';
 
 const ICON_SIZE = 20;
+const ICON_PADDING = 12;
 
 export type Props = {
   starred: boolean;
@@ -30,7 +31,7 @@ export const StarButton: FC<Props> = ({ starred, onClick, loading }) => {
     <TextButton
       onClick={handleClick}
       buttonProps={{
-        padding: 0,
+        padding: ICON_PADDING,
         title: formatMessage(
           messages[starred ? 'unstarIntervention' : 'starIntervention'],
         ),
