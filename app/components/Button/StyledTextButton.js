@@ -8,6 +8,8 @@ import {
   text,
   padding,
   flex,
+  style,
+  svg,
 } from 'components/BaseComponentStyles';
 
 const StyledTextButton = styled.button`
@@ -25,6 +27,8 @@ const StyledTextButton = styled.button`
   ${text};
   ${padding};
   ${flex};
+  ${style};
+  ${svg};
   ${({ outlined, color, disabled }) =>
     outlined &&
     `

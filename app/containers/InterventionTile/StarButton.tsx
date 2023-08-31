@@ -1,8 +1,9 @@
 import React, { FC, MouseEventHandler } from 'react';
 import { useIntl } from 'react-intl';
 
+import { colors } from 'theme';
+
 import StarIcon from 'assets/svg/star.svg';
-import StarFilledIcon from 'assets/svg/star-filled.svg';
 
 import TextButton from 'components/Button/TextButton';
 import Icon from 'components/Icon';
@@ -28,25 +29,32 @@ export const StarButton: FC<Props> = ({ starred, onClick, loading }) => {
   };
 
   return (
-    <TextButton
-      onClick={handleClick}
-      buttonProps={{
-        padding: ICON_PADDING,
-        title: formatMessage(
-          messages[starred ? 'unstarIntervention' : 'starIntervention'],
-        ),
-      }}
-      spinnerProps={{
-        size: ICON_SIZE,
-      }}
-      loading={loading}
-    >
-      <Icon
-        src={starred ? StarFilledIcon : StarIcon}
-        width={ICON_SIZE}
-        height={ICON_SIZE}
-        alt={formatMessage(messages.starIconAlt)}
-      />
-    </TextButton>
+    <>
+      <TextButton
+        onClick={handleClick}
+        buttonProps={{
+          padding: ICON_PADDING,
+          title: formatMessage(
+            messages[starred ? 'unstarIntervention' : 'starIntervention'],
+          ),
+          hoverColor: colors.aliceBlue,
+          stroke: starred ? colors.grandis : colors.manatee,
+          fill: starred ? colors.grandis : 'inherit',
+          hoverStroke: !starred && colors.bluewood,
+          borderRadius: 8,
+        }}
+        spinnerProps={{
+          size: ICON_SIZE,
+        }}
+        loading={loading}
+      >
+        <Icon
+          src={StarIcon}
+          width={ICON_SIZE}
+          height={ICON_SIZE}
+          alt={formatMessage(messages.starIconAlt)}
+        />
+      </TextButton>
+    </>
   );
 };

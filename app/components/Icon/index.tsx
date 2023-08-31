@@ -11,6 +11,7 @@ import {
   MarginProps,
   LayoutProps,
   TextProps,
+  SvgProps,
 } from 'components/BaseComponentStyles';
 
 import * as Styled from './styled';
@@ -23,7 +24,8 @@ export type Props = {
 } & Omit<SVGProperies, 'src'> &
   CSSProperties &
   MarginProps &
-  LayoutProps;
+  LayoutProps &
+  SvgProps;
 
 const Icon = ({
   src,
