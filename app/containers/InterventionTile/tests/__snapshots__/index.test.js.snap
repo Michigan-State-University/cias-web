@@ -205,7 +205,6 @@ exports[`<InterventionTile /> Should render and match the snapshot 1`] = `
   color: #2F3850;
   padding: 11px;
   border-radius: 8px;
-  border-width: 1px;
   border-radius: 8px;
   border-width: 1px;
   border: 1px solid transparent;
