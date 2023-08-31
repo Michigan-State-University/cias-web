@@ -72,6 +72,7 @@ import {
 } from 'components/HenryFordBrachingInfoModal';
 import { DataClearedIndicator } from 'components/DataClearedIndicator';
 import { CollaboratingIndicator } from 'components/CollaboratingIndicator';
+import { TileContainer } from 'components/TileContainer';
 
 import TranslateInterventionModal from 'containers/TranslateInterventionModal';
 import interventionDetailsPageSagas from 'containers/InterventionDetailsPage/saga';
@@ -82,13 +83,7 @@ import {
 
 import InterventionDetails from './InterventionDetails';
 import messages from './messages';
-import {
-  TileContainer,
-  StyledLink,
-  Heading,
-  StatusIndicator,
-  TileInfo,
-} from './styled';
+import { StyledLink, Heading, StatusIndicator, TileInfo } from './styled';
 import { useClearInterventionData } from '../ClearInterventionData';
 import { StarButton } from './StarButton';
 

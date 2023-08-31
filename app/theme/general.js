@@ -34,6 +34,7 @@ const elements = {
     height: 50,
   },
   userInterventionTileHeight: 200,
+  userSessionTileHeight: 200,
   screenSettingsWidth: 400,
   continueButtonWidth: 120,
 };
