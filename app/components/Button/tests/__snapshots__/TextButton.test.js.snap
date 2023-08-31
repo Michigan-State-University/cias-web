@@ -35,6 +35,7 @@ exports[`<Button /> Should render disabled button and match the snapshot 1`] = `
   opacity: 0.7;
   font-weight: 700;
   color: #2F3850;
+  opacity: 0.5;
 }
 
 <div>

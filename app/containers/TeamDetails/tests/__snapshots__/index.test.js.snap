@@ -123,6 +123,7 @@ exports[`<TeamDetails /> Should render and match the snapshot 1`] = `
   cursor: pointer;
   font-weight: 700;
   color: rgba(183,39,234,1);
+  color: rgba(183,39,234,1);
 }
 
 .c2 {

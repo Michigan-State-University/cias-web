@@ -964,6 +964,7 @@ exports[`<RegisterPage /> Should render and match the snapshot for participant 1
   padding: 2px;
   cursor: pointer;
   color: rgba(183,39,234,1);
+  color: rgba(183,39,234,1);
 }
 
 .c6 {

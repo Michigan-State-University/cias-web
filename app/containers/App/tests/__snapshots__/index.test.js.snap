@@ -892,7 +892,7 @@ exports[`<AnswerSessionPage /> Should render and match the snapshot 1`] = `
                 width="24"
               >
                 <img
-                  alt="cross"
+                  alt="Toggle notifications visibility"
                   src="IMAGE_MOCK"
                 />
               </button>
@@ -1117,7 +1117,6 @@ exports[`<AnswerSessionPage /> Should render and match the snapshot 1`] = `
                     title="Close"
                   >
                     <img
-                      alt="cross"
                       src="IMAGE_MOCK"
                     />
                   </button>

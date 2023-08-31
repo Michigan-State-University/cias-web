@@ -11,13 +11,13 @@ const DEFAULT_WIDTH = 100;
 
 const getWidth = (button) => {
   const { current } = button;
-  if (current) return current.clientWidth;
+  if (current) return current.offsetWidth;
   return DEFAULT_WIDTH;
 };
 
 const getHeight = (button) => {
   const { current } = button;
-  if (current) return current.clientHeight;
+  if (current) return current.offsetHeight;
   return '100%';
 };
 

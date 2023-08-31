@@ -11,7 +11,8 @@ import Icon from 'components/Icon';
 import messages from './messages';
 
 const ICON_SIZE = 20;
-const ICON_PADDING = 12;
+const ICON_PADDING = 11;
+const BORDER_WIDTH = 1;
 
 export type Props = {
   starred: boolean;
@@ -42,6 +43,8 @@ export const StarButton: FC<Props> = ({ starred, onClick, loading }) => {
           fill: starred ? colors.grandis : 'inherit',
           hoverStroke: !starred && colors.bluewood,
           borderRadius: 8,
+          borderWidth: BORDER_WIDTH,
+          showFocus: true,
         }}
         spinnerProps={{
           size: ICON_SIZE,

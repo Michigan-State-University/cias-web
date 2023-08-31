@@ -633,6 +633,7 @@ exports[`<ReflectionFormulaBlock /> Should render and match the snapshot 1`] = `
   font-weight: 700;
   color: #2F3850;
   cursor: pointer;
+  cursor: pointer;
 }
 
 @media only screen and (min-width:768px) {

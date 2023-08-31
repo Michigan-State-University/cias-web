@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 
-import { hexToRgb } from 'theme';
+import { hexToRgb, themeColors } from 'theme';
 
 import {
   margin,
@@ -10,6 +10,7 @@ import {
   flex,
   style,
   svg,
+  border,
 } from 'components/BaseComponentStyles';
 
 const StyledTextButton = styled.button`
@@ -29,6 +30,7 @@ const StyledTextButton = styled.button`
   ${flex};
   ${style};
   ${svg};
+  ${border};
   ${({ outlined, color, disabled }) =>
     outlined &&
     `
@@ -40,6 +42,15 @@ const StyledTextButton = styled.button`
       `&:hover { background-color:
       rgba(${hexToRgb(color)}, 0.1);
     }`
+    }
+    `};
+
+  ${({ showFocus, color, borderWidth }) =>
+    showFocus &&
+    `
+    border: ${borderWidth ?? 1}px solid transparent;
+    &:focus {
+      border: ${borderWidth ?? 1}px solid ${color ?? themeColors.secondary};
     }
     `};
 `;

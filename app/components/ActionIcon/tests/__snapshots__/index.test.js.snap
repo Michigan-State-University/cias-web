@@ -32,7 +32,6 @@ exports[`<ActionIcon /> Should render and match the snapshot as button 1`] = `
     title="Close"
   >
     <img
-      alt="cross"
       src="IMAGE_MOCK"
     />
   </button>
@@ -70,7 +69,6 @@ exports[`<ActionIcon /> Should render and match the snapshot as link 1`] = `
     title="Close"
   >
     <img
-      alt="cross"
       src="IMAGE_MOCK"
     />
   </a>
@@ -109,7 +107,6 @@ exports[`<ActionIcon /> Should render and match the snapshot with different icon
     title="Close"
   >
     <img
-      alt="cross"
       src="IMAGE_MOCK"
     />
   </button>
