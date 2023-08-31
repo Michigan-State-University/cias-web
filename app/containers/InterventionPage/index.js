@@ -23,15 +23,15 @@ import { colors, fontSizes, themeColors } from 'theme';
 import { FEEDBACK_FORM_URL } from 'global/constants';
 import {
   createInterventionRequest,
-  createInterventionSaga,
   makeSelectInterventionLoader,
+  withCreateInterventionSaga,
 } from 'global/reducers/intervention';
 import {
   fetchInterventionsRequest,
   makeSelectInterventionsState,
-  interventionsReducer,
-  fetchInterventionsSaga,
+  withFetchInterventionsSaga,
   resetImportModalState,
+  withInterventionsReducer,
 } from 'global/reducers/interventions';
 import { editUserRequest, makeSelectUser } from 'global/reducers/auth';
 
@@ -63,6 +63,7 @@ export function InterventionPage({
     loaders: { fetchInterventions: fetchInterventionsLoading },
     errors: { fetchInterventions: fetchInterventionsError },
     shouldRefetch,
+    interventionsStates,
   },
   intl: { formatMessage },
   createInterventionRequest: createIntervention,
@@ -258,6 +259,7 @@ export function InterventionPage({
         <TileRenderer
           containerKey="intervention"
           elements={interventions}
+          elementsStates={interventionsStates}
           newLabel={formatMessage(messages.createIntervention)}
           onCreateCall={createIntervention}
           createLoading={createInterventionLoading}
@@ -306,7 +308,7 @@ export default compose(
   withConnect,
   memo,
   injectIntl,
-  injectSaga({ key: 'fetchInterventions', saga: fetchInterventionsSaga }),
-  injectSaga({ key: 'createIntervention', saga: createInterventionSaga }),
-  injectReducer({ key: 'interventions', reducer: interventionsReducer }),
+  injectSaga(withFetchInterventionsSaga),
+  injectSaga(withCreateInterventionSaga),
+  injectReducer(withInterventionsReducer),
 )(InterventionPage);

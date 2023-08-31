@@ -1,7 +1,7 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`<SingleTile /> Should render and match the snapshot 1`] = `
-.c3 {
+exports[`<InterventionTile /> Should render and match the snapshot 1`] = `
+.c4 {
   display: -webkit-box;
   display: -webkit-flex;
   display: -ms-flexbox;
@@ -20,7 +20,7 @@ exports[`<SingleTile /> Should render and match the snapshot 1`] = `
   gap: 6px;
 }
 
-.c4 {
+.c5 {
   display: -webkit-box;
   display: -webkit-flex;
   display: -ms-flexbox;
@@ -39,7 +39,7 @@ exports[`<SingleTile /> Should render and match the snapshot 1`] = `
   gap: 8px;
 }
 
-.c5 {
+.c6 {
   display: -webkit-box;
   display: -webkit-flex;
   display: -ms-flexbox;
@@ -58,7 +58,25 @@ exports[`<SingleTile /> Should render and match the snapshot 1`] = `
   gap: 5px;
 }
 
-.c11 {
+.c9 {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-flex-direction: row;
+  -ms-flex-direction: row;
+  flex-direction: row;
+  height: auto;
+  -webkit-align-content: center;
+  -ms-flex-line-pack: center;
+  align-content: center;
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+}
+
+.c14 {
   display: -webkit-box;
   display: -webkit-flex;
   display: -ms-flexbox;
@@ -70,7 +88,7 @@ exports[`<SingleTile /> Should render and match the snapshot 1`] = `
   width: 100%;
 }
 
-.c15 {
+.c18 {
   display: -webkit-box;
   display: -webkit-flex;
   display: -ms-flexbox;
@@ -86,12 +104,12 @@ exports[`<SingleTile /> Should render and match the snapshot 1`] = `
   justify-items: space-between;
 }
 
-.c10 {
+.c13 {
   width: auto;
   height: auto;
 }
 
-.c6 {
+.c7 {
   font-family: DM Sans;
   font-size: 13px;
   line-height: 130%;
@@ -99,7 +117,7 @@ exports[`<SingleTile /> Should render and match the snapshot 1`] = `
   line-height: 1;
 }
 
-.c8 {
+.c11 {
   width: auto;
   height: auto;
   display: block;
@@ -124,7 +142,7 @@ exports[`<SingleTile /> Should render and match the snapshot 1`] = `
   color: unset;
 }
 
-.c12 {
+.c15 {
   width: auto;
   height: auto;
   display: block;
@@ -134,7 +152,7 @@ exports[`<SingleTile /> Should render and match the snapshot 1`] = `
   color: unset;
 }
 
-.c13 {
+.c16 {
   width: auto;
   height: auto;
   display: block;
@@ -142,7 +160,7 @@ exports[`<SingleTile /> Should render and match the snapshot 1`] = `
   color: unset;
 }
 
-.c16 {
+.c19 {
   width: auto;
   height: auto;
   display: block;
@@ -154,15 +172,65 @@ exports[`<SingleTile /> Should render and match the snapshot 1`] = `
   color: unset;
 }
 
-.c14 {
+.c2 {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-flex-direction: column;
+  -ms-flex-direction: column;
+  flex-direction: column;
+  width: 100%;
+}
+
+.c17 {
   position: relative;
   width: 100%;
   font-size: 18px;
   font-weight: 700;
   color: #2F3850;
+  line-height: 1.3;
 }
 
-.c9 {
+.c10 {
+  outline: none;
+  border: none;
+  background: transparent;
+  font-weight: bold;
+  font-size: 13px;
+  line-height: 17px;
+  padding: 2px;
+  cursor: pointer;
+  font-weight: 700;
+  color: #2F3850;
+  padding: 11px;
+  border-radius: 8px;
+  border-radius: 8px;
+  border-width: 1px;
+  border: 1px solid transparent;
+}
+
+.c10:hover {
+  background-color: #F9FBFF;
+}
+
+.c10 *[fill^='#'] {
+  fill: inherit;
+}
+
+.c10 *[stroke^='#'] {
+  stroke: #8C94A6;
+}
+
+.c10:hover *[stroke^='#'] {
+  stroke: #2F3850;
+}
+
+.c10:focus {
+  border: 1px solid #B727EA;
+}
+
+.c12 {
   display: -webkit-box;
   display: -webkit-flex;
   display: -ms-flexbox;
@@ -171,10 +239,10 @@ exports[`<SingleTile /> Should render and match the snapshot 1`] = `
 }
 
 .c1 {
-  padding: 15px;
-  height: 150px;
+  padding: 12px 16px 16px 16px;
+  height: 160px;
   box-shadow: 0px 4px 20px #E3EEFB;
-  border-radius: 5px;
+  border-radius: 8px;
   margin-bottom: 20px;
   display: -webkit-box;
   display: -webkit-flex;
@@ -191,6 +259,7 @@ exports[`<SingleTile /> Should render and match the snapshot 1`] = `
   -webkit-justify-content: space-between;
   -ms-flex-pack: justify;
   justify-content: space-between;
+  gap: 8px;
 }
 
 .c0 {
@@ -198,7 +267,7 @@ exports[`<SingleTile /> Should render and match the snapshot 1`] = `
   text-decoration: none;
 }
 
-.c2 {
+.c3 {
   font-size: 13px;
   display: -webkit-box;
   display: -webkit-flex;
@@ -215,11 +284,11 @@ exports[`<SingleTile /> Should render and match the snapshot 1`] = `
   text-transform: capitalize;
 }
 
-.c2 span {
+.c3 span {
   color: #2F3850;
 }
 
-.c7 {
+.c8 {
   width: 7px;
   height: 7px;
   border-radius: 50%;
@@ -227,19 +296,35 @@ exports[`<SingleTile /> Should render and match the snapshot 1`] = `
   display: inline-block;
 }
 
-.c17 {
+.c20 {
   display: -webkit-box;
   display: -webkit-flex;
   display: -ms-flexbox;
   display: flex;
 }
 
-.c17 div {
+.c20 > * {
   padding: 5px 10px;
   background: #e9f1fb;
   font-size: 12px;
   line-height: 16px;
   border-radius: 5px;
+}
+
+@media only screen and (min-width:768px) {
+
+}
+
+@media only screen and (min-width:960px) {
+
+}
+
+@media only screen and (min-width:1170px) {
+
+}
+
+@media only screen and (min-width:1360px) {
+
 }
 
 <div>
@@ -262,88 +347,113 @@ exports[`<SingleTile /> Should render and match the snapshot 1`] = `
             <div
               class="c5"
             >
-              <p
+              <div
                 class="c6"
               >
-                Draft
-              </p>
-              <span
-                class="c7"
-              />
+                <p
+                  class="c7"
+                >
+                  Draft
+                </p>
+                <span
+                  class="c8"
+                />
+              </div>
             </div>
           </div>
-        </div>
-        <div>
           <div
-            class="c8"
-            display="flex"
+            class="c9"
           >
-            <div
-              class="c9"
+            <button
+              class="c10"
+              fill="inherit"
+              font-weight="bold"
+              stroke="#8C94A6"
+              title="Star intervention"
             >
               <img
-                alt="dots"
-                class="c10"
+                alt="Star icon"
                 src="IMAGE_MOCK"
               />
+            </button>
+            <div>
+              <div
+                class="c11"
+                display="flex"
+              >
+                <div
+                  class="c12"
+                >
+                  <img
+                    alt="dots"
+                    class="c13"
+                    src="IMAGE_MOCK"
+                  />
+                </div>
+              </div>
             </div>
           </div>
         </div>
-      </div>
-      <div
-        class="c11"
-        width="100%"
-      >
         <div
-          class="c12"
-          display="inline"
+          class="c14"
           width="100%"
         >
           <div
-            class="c13"
-            data-for="Name"
-            data-tip=""
+            class="c15"
+            display="inline"
+            width="100%"
           >
-            <div>
-              <span
-                class="c14"
-                data-for="Name"
-                data-tip="Name"
-                font-size="18"
-                font-weight="bold"
-                theme="[object Object]"
-                width="0"
-              >
-                <span />
-                <span>
-                  Name
-                </span>
+            <div
+              class="c16"
+              data-for="Name"
+              data-tip=""
+            >
+              <div>
                 <span
-                  style="position: fixed; visibility: hidden; top: 0px; left: 0px;"
+                  class="c17"
+                  data-for="Name"
+                  data-tip="Name"
+                  font-size="18"
+                  font-weight="bold"
+                  lineheight="1.3"
+                  theme="[object Object]"
+                  width="0"
                 >
-                  …
+                  <span />
+                  <span>
+                    Name
+                  </span>
+                  <span
+                    style="position: fixed; visibility: hidden; top: 0px; left: 0px;"
+                  >
+                    …
+                  </span>
                 </span>
-              </span>
+              </div>
             </div>
           </div>
         </div>
       </div>
       <div
-        class="c15"
+        class="c18"
       >
         <div
-          class="c16"
+          class="c19"
           display="flex"
         >
           <div
-            class="c13"
+            class="c16"
             data-for="test-id-tile-tooltip"
             data-tip=""
           >
             <div>
               <div
-                class="c17"
-              />
+                class="c20"
+              >
+                <div
+                  class="c5"
+                />
+              </div>
             </div>
           </div>
         </div>

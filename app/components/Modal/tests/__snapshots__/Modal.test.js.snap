@@ -217,7 +217,7 @@ exports[`<Modal /> Should render and match the snapshot 1`] = `
               title="Close window"
             >
               <img
-                alt="cross"
+                alt="Close window"
                 src="IMAGE_MOCK"
               />
             </button>

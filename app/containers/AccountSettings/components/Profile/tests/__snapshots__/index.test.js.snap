@@ -466,6 +466,7 @@ exports[`<Profile /> Should render and match the snapshot 1`] = `
   font-weight: 700;
   color: rgba(183,39,234,1);
   white-space: nowrap;
+  color: rgba(183,39,234,1);
 }
 
 .c5 {

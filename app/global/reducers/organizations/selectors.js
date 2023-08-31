@@ -47,12 +47,6 @@ export const makeSelectNewOrganizationLoader = () =>
     (substate) => substate.loaders.createOrganization,
   );
 
-export const makeSelectShouldRefetchInterventions = () =>
-  createSelector(
-    selectOrganizationsState,
-    (substate) => substate.shouldRefetch,
-  );
-
 export const makeSelectOrganization = () =>
   createSelector(selectOrganizationState, (substate) => {
     const { organization, showDeletedEntities } = substate;
@@ -92,18 +86,6 @@ export const makeSelectHealthSystem = (id) =>
     substate.organization.healthSystems.find(
       ({ id: healthSystemId }) => id === healthSystemId,
     ),
-  );
-
-export const makeSelectOrganizationInterventions = () =>
-  createSelector(
-    selectOrganizationState,
-    (substate) => substate.organization.interventions,
-  );
-
-export const makeSelectOrganizationInterventionsCount = () =>
-  createSelector(
-    selectOrganizationState,
-    (substate) => substate.organization.interventionCount,
   );
 
 export const makeSelectDashboardViewOptions = () =>

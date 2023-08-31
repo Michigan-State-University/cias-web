@@ -15,7 +15,7 @@ export const removeAt = (array, index) => array.splice(index, 1);
 
 /**
  * @param {Array<any>} array
- * @param {string} id
+ * @param {string | number} id
  */
 export const findIndexById = (array, id) =>
   array.findIndex(({ id: itemId }) => id === itemId);

@@ -1,3 +1,10 @@
+import { InterventionListItemState } from './types';
+
+export const INTERVENTION_LIST_ITEM_DEFAULT_STATE: InterventionListItemState = {
+  starInterventionLoading: false,
+  unstarInterventionLoading: false,
+};
+
 export const FETCH_INTERVENTIONS_REQUEST =
   'app/Dashboard/FETCH_INTERVENTIONS_REQUEST';
 export const FETCH_INTERVENTIONS_SUCCESS =
@@ -31,3 +38,16 @@ export const REFETCH_INTERVENTIONS = 'app/Dashboard/REFETCH_INTERVENTIONS';
 
 export const UPDATE_INTERVENTION_LIST_ITEM_BY_ID =
   'app/Dashboard/UPDATE_INTERVENTION_LIST_ITEM_BY_ID';
+
+export const STAR_INTERVENTION_REQUEST =
+  'app/Dashboard/STAR_INTERVENTION_REQUEST';
+export const STAR_INTERVENTION_SUCCESS =
+  'app/Dashboard/STAR_INTERVENTION_SUCCESS';
+export const STAR_INTERVENTION_ERROR = 'app/Dashboard/STAR_INTERVENTION_ERROR';
+
+export const UNSTAR_INTERVENTION_REQUEST =
+  'app/Dashboard/UNSTAR_INTERVENTION_REQUEST';
+export const UNSTAR_INTERVENTION_SUCCESS =
+  'app/Dashboard/UNSTAR_INTERVENTION_SUCCESS';
+export const UNSTAR_INTERVENTION_ERROR =
+  'app/Dashboard/UNSTAR_INTERVENTION_ERROR';

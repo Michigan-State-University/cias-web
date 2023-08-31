@@ -1,4 +1,6 @@
+import { CSSProperties } from 'react';
 import PropTypes from 'prop-types';
+
 import { hexToRgb, themeColors } from 'theme';
 
 const propsToCssMapper = {
@@ -7,9 +9,9 @@ const propsToCssMapper = {
   bold: 700,
 };
 
-const text = (props) => ({
+const text = (props: TextProps) => ({
   fontSize: props.fontSize || '',
-  fontWeight: propsToCssMapper[props.fontWeight] || '',
+  fontWeight: (props.fontWeight && propsToCssMapper[props.fontWeight]) || '',
   fontStyle: props.fontStyle || '',
   color: props.color
     ? `rgba(${hexToRgb(props.color)}, ${props.textOpacity || 1})`
@@ -25,6 +27,25 @@ const text = (props) => ({
   textAlign: props.textAlign || '',
   wordBreak: props.wordBreak || '',
 });
+
+export type TextProps = Pick<
+  CSSProperties,
+  | 'fontSize'
+  | 'fontStyle'
+  | 'color'
+  | 'whiteSpace'
+  | 'textOverflow'
+  | 'textDecoration'
+  | 'lineHeight'
+  | 'textAlign'
+  | 'wordBreak'
+> & {
+  fontWeight?: keyof typeof propsToCssMapper;
+  textOpacity?: CSSProperties['opacity'];
+  defaultColor?: CSSProperties['color'];
+  clickable?: boolean;
+  hoverDecoration?: CSSProperties['textDecoration'];
+};
 
 text.propTypes = {
   defaultColor: PropTypes.string,
@@ -46,7 +67,6 @@ text.propTypes = {
   lineHeight: PropTypes.string,
   textAlign: PropTypes.oneOf(['left', 'right', 'center', 'justify']),
   wordBreak: PropTypes.oneOf(['normal', 'break-all', 'keep-all', 'break-word']),
-  decoration: PropTypes.string,
 };
 
 export { text };

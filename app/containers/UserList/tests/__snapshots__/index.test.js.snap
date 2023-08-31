@@ -689,6 +689,7 @@ exports[`<UserList /> Should render and match the snapshot - admin 1`] = `
   cursor: pointer;
   font-weight: 700;
   color: rgba(183,39,234,1);
+  color: rgba(183,39,234,1);
 }
 
 .c37 {

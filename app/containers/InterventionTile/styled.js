@@ -1,27 +1,8 @@
 import styled from 'styled-components';
 import { Link } from 'react-router-dom';
 
-import { colors, themeColors, boxShadows, elements } from 'theme';
+import { colors, themeColors } from 'theme';
 import { statusTypeToColorMap } from 'models/Status/StatusTypes';
-
-const sharedContainerStyles = `
-  padding: 15px;
-  height: ${elements.interventionsTileHeight}px;
-  box-shadow: ${boxShadows.selago};
-  border-radius: 5px;
-  margin-bottom: 20px;
-  display: flex;
-  cursor: pointer;
-  flex-direction: column;
-  color: ${themeColors.text};
-`;
-
-export const TileContainer = styled.div`
-  ${sharedContainerStyles};
-  background: ${colors.white};
-  color: ${colors.black};
-  justify-content: space-between;
-`;
 
 export const StyledLink = styled(Link)`
   text-decoration: none;
@@ -48,9 +29,9 @@ export const StatusIndicator = styled.span`
 
 export const TileInfo = styled.div`
   display: flex;
-  div {
+  & > * {
     padding: 5px 10px;
-    background: #e9f1fb;
+    background: ${({ dataCleared }) => (dataCleared ? '#EFEFEF' : '#e9f1fb')};
     font-size: 12px;
     line-height: 16px;
     border-radius: 5px;

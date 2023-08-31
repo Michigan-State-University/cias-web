@@ -1,6 +1,6 @@
 /**
  *
- * SingleTile
+ * InterventionTile
  *
  */
 
@@ -38,10 +38,15 @@ import {
 import {
   copyInterventionRequest,
   archiveInterventionRequest,
+  withStarInterventionSaga,
+  withUnstarInterventionSaga,
+  starInterventionRequest,
+  unstarInterventionRequest,
 } from 'global/reducers/interventions';
 
 import { canArchive, canEdit } from 'models/Status/statusPermissions';
 import { useRoleManager } from 'models/User/RolesManager';
+import { SensitiveDataState } from 'models/Intervention';
 
 import isNullOrUndefined from 'utils/isNullOrUndefined';
 
@@ -65,8 +70,10 @@ import {
   HenryFordBranchingInfoType,
   InterventionHenryFordBranchingInfoAction,
 } from 'components/HenryFordBrachingInfoModal';
-import { DataClearedIndicator } from 'components/DataClearedIndicator';
 import { CollaboratingIndicator } from 'components/CollaboratingIndicator';
+import { TileContainer } from 'components/TileContainer';
+import Column from 'components/Column';
+import { DataClearedIcon } from 'components/DataClearedIndicator';
 
 import TranslateInterventionModal from 'containers/TranslateInterventionModal';
 import interventionDetailsPageSagas from 'containers/InterventionDetailsPage/saga';
@@ -77,18 +84,13 @@ import {
 
 import InterventionDetails from './InterventionDetails';
 import messages from './messages';
-import {
-  TileContainer,
-  StyledLink,
-  Heading,
-  StatusIndicator,
-  TileInfo,
-} from './styled';
+import { StyledLink, Heading, StatusIndicator, TileInfo } from './styled';
 import { useClearInterventionData } from '../ClearInterventionData';
-import { SensitiveDataState } from '../../models/Intervention';
+import { StarButton } from './StarButton';
 
-const SingleTile = ({
+const InterventionTile = ({
   tileData,
+  tileState,
   participantView,
   link,
   copyIntervention,
@@ -98,6 +100,8 @@ const SingleTile = ({
   isLoading,
   exportIntervention,
   userOrganizableId,
+  starIntervention,
+  unstarIntervention,
 }) => {
   const {
     name,
@@ -114,7 +118,11 @@ const SingleTile = ({
     hfhsAccess,
     sensitiveDataState,
     clearSensitiveDataScheduledAt,
+    starred,
   } = tileData || {};
+
+  const { starInterventionLoading, unstarInterventionLoading } =
+    tileState ?? {};
 
   const isCurrentUserInterventionOwner = interventionOwnerId === userId;
 
@@ -233,6 +241,14 @@ const SingleTile = ({
       clearSensitiveDataScheduledAt,
     );
 
+  const onStarClick = (newStarred) => {
+    if (newStarred) {
+      starIntervention(id);
+    } else {
+      unstarIntervention(id);
+    }
+  };
+
   const options = [
     {
       icon: TranslateIcon,
@@ -307,6 +323,8 @@ const SingleTile = ({
     e.preventDefault();
   };
 
+  const dataCleared = sensitiveDataState === SensitiveDataState.REMOVED;
+
   if (isLoading)
     return (
       <TileContainer>
@@ -345,32 +363,48 @@ const SingleTile = ({
       <ClearInterventionDataModal />
 
       <StyledLink to={link}>
-        <TileContainer>
-          <Heading>
-            <Row gap={6} align="center">
-              <Row gap={8} align="center">
-                {hasCollaborators && <CollaboratingIndicator iconSize={14} />}
-                {status && (
-                  <Row align="center" gap={5}>
-                    <Text lineHeight={1}>
-                      <FormattedMessage {...globalMessages.statuses[status]} />
-                    </Text>
-                    <StatusIndicator status={status} />
-                  </Row>
-                )}
+        <TileContainer gap={8}>
+          <Column>
+            <Heading>
+              <Row gap={6} align="center">
+                <Row gap={8} align="center">
+                  {hasCollaborators && <CollaboratingIndicator iconSize={14} />}
+                  {status && (
+                    <Row align="center" gap={5}>
+                      <Text lineHeight={1}>
+                        <FormattedMessage
+                          {...globalMessages.statuses[status]}
+                        />
+                      </Text>
+                      <StatusIndicator status={status} />
+                    </Row>
+                  )}
+                </Row>
               </Row>
-              {sensitiveDataState === SensitiveDataState.REMOVED && (
-                <DataClearedIndicator opacity={0.7} />
+              {!participantView && (
+                <Row align="center">
+                  <StarButton
+                    starred={starred}
+                    onClick={onStarClick}
+                    loading={
+                      starInterventionLoading || unstarInterventionLoading
+                    }
+                  />
+                  <div onClick={preventDefault}>
+                    <Dropdown options={options} />
+                  </div>
+                </Row>
               )}
-            </Row>
-            {!participantView && (
-              <div onClick={preventDefault}>
-                <Dropdown options={options} />
-              </div>
-            )}
-          </Heading>
+            </Heading>
 
-          <EllipsisText text={name} fontSize={18} fontWeight="bold" />
+            <EllipsisText
+              text={name}
+              fontSize={18}
+              fontWeight="bold"
+              lineHeight={1.3}
+              lines={2}
+            />
+          </Column>
 
           <Row justify="between">
             <Tooltip
@@ -381,24 +415,26 @@ const SingleTile = ({
                   user={user}
                   createdAt={createdAt}
                   updatedAt={updatedAt}
+                  dataCleared={dataCleared}
                 />
               }
             >
-              <TileInfo>
-                {!isNullOrUndefined(sessionsSize) && (
-                  <div>
-                    <Text>
+              <TileInfo dataCleared={dataCleared}>
+                <Row align="center" gap={8}>
+                  {dataCleared && <DataClearedIcon />}
+                  {!isNullOrUndefined(sessionsSize) && (
+                    <Text fontSize={12}>
                       {formatMessage(messages.sessions, {
                         sessionCount: sessionsSize,
                       })}
                     </Text>
-                  </div>
-                )}
+                  )}
+                </Row>
               </TileInfo>
             </Tooltip>
 
             {showReportingBadge && (
-              <Badge bg={colors.orange}>
+              <Badge bg={colors.orange} fontSize={12}>
                 {formatMessage(messages.isFromOrganization)}
               </Badge>
             )}
@@ -409,8 +445,9 @@ const SingleTile = ({
   );
 };
 
-SingleTile.propTypes = {
+InterventionTile.propTypes = {
   tileData: PropTypes.object,
+  tileState: PropTypes.instanceOf(Map),
   intl: PropTypes.object,
   participantView: PropTypes.bool,
   link: PropTypes.string,
@@ -419,6 +456,8 @@ SingleTile.propTypes = {
   userId: PropTypes.string,
   isLoading: PropTypes.bool,
   exportIntervention: PropTypes.func,
+  starIntervention: PropTypes.func,
+  unstarIntervention: PropTypes.func,
   userOrganizableId: PropTypes.string,
   isCurrentUserInterventionOwner: PropTypes.bool,
 };
@@ -432,9 +471,11 @@ const mapDispatchToProps = {
   copyIntervention: copyInterventionRequest,
   archiveIntervention: archiveInterventionRequest,
   exportIntervention: exportInterventionRequest,
+  starIntervention: starInterventionRequest,
+  unstarIntervention: unstarInterventionRequest,
 };
 
-const SingleTileWithIntl = injectIntl(SingleTile);
+const InterventionTileWithIntl = injectIntl(InterventionTile);
 
 const withConnect = connect(mapStateToProps, mapDispatchToProps);
 
@@ -455,4 +496,6 @@ export default compose(
   }),
   injectReducer({ key: 'intervention', reducer: interventionReducer }),
   injectSaga({ key: 'exportIntervention', saga: exportInterventionSaga }),
-)(SingleTileWithIntl);
+  injectSaga(withStarInterventionSaga),
+  injectSaga(withUnstarInterventionSaga),
+)(InterventionTileWithIntl);
