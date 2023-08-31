@@ -510,4 +510,9 @@ export default defineMessages({
     id: `${scope}.enterTextHere`,
     defaultMessage: 'Enter text here',
   },
+  dataClearedInfo: {
+    id: `${scope}.dataClearedInfo`,
+    defaultMessage:
+      'All sensitive data associated with this intervention has been removed, this includes user answers and generated report files.',
+  },
 });

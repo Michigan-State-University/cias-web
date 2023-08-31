@@ -29,9 +29,9 @@ export const StatusIndicator = styled.span`
 
 export const TileInfo = styled.div`
   display: flex;
-  div {
+  & > * {
     padding: 5px 10px;
-    background: #e9f1fb;
+    background: ${({ dataCleared }) => (dataCleared ? '#EFEFEF' : '#e9f1fb')};
     font-size: 12px;
     line-height: 16px;
     border-radius: 5px;

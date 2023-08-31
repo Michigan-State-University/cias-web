@@ -70,10 +70,10 @@ import {
   HenryFordBranchingInfoType,
   InterventionHenryFordBranchingInfoAction,
 } from 'components/HenryFordBrachingInfoModal';
-import { DataClearedIndicator } from 'components/DataClearedIndicator';
 import { CollaboratingIndicator } from 'components/CollaboratingIndicator';
 import { TileContainer } from 'components/TileContainer';
 import Column from 'components/Column';
+import { DataClearedIcon } from 'components/DataClearedIndicator';
 
 import TranslateInterventionModal from 'containers/TranslateInterventionModal';
 import interventionDetailsPageSagas from 'containers/InterventionDetailsPage/saga';
@@ -323,6 +323,8 @@ const InterventionTile = ({
     e.preventDefault();
   };
 
+  const dataCleared = sensitiveDataState === SensitiveDataState.REMOVED;
+
   if (isLoading)
     return (
       <TileContainer>
@@ -378,9 +380,6 @@ const InterventionTile = ({
                     </Row>
                   )}
                 </Row>
-                {sensitiveDataState === SensitiveDataState.REMOVED && (
-                  <DataClearedIndicator opacity={0.7} />
-                )}
               </Row>
               {!participantView && (
                 <Row align="center">
@@ -416,19 +415,21 @@ const InterventionTile = ({
                   user={user}
                   createdAt={createdAt}
                   updatedAt={updatedAt}
+                  dataCleared={dataCleared}
                 />
               }
             >
-              <TileInfo>
-                {!isNullOrUndefined(sessionsSize) && (
-                  <div>
+              <TileInfo dataCleared={dataCleared}>
+                <Row align="center" gap={8}>
+                  {dataCleared && <DataClearedIcon />}
+                  {!isNullOrUndefined(sessionsSize) && (
                     <Text fontSize={12}>
                       {formatMessage(messages.sessions, {
                         sessionCount: sessionsSize,
                       })}
                     </Text>
-                  </div>
-                )}
+                  )}
+                </Row>
               </TileInfo>
             </Tooltip>
 

@@ -6,12 +6,14 @@ import { injectIntl } from 'react-intl';
 import Text from 'components/Text';
 
 import messages from './messages';
+import globalMessages from '../../global/i18n/globalMessages';
 
 const InterventionDetails = ({
   intl: { formatMessage },
   user,
   updatedAt,
   createdAt,
+  dataCleared,
 }) => {
   const { email, firstName, lastName } = user || {};
 
@@ -48,6 +50,12 @@ const InterventionDetails = ({
           <Text mb={5}>{dayjs(updatedAt).format('YYYY/MM/DD HH:mm Z')}</Text>
         </>
       )}
+
+      {dataCleared && (
+        <Text fontWeight="bold">
+          {formatMessage(globalMessages.dataClearedInfo)}
+        </Text>
+      )}
     </>
   );
 };
@@ -57,6 +65,7 @@ InterventionDetails.propTypes = {
   user: PropTypes.object,
   updatedAt: PropTypes.string,
   createdAt: PropTypes.string,
+  dataCleared: PropTypes.bool,
 };
 
 export default injectIntl(InterventionDetails);

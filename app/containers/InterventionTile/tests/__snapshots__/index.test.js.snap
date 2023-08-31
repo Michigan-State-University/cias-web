@@ -279,7 +279,7 @@ exports[`<InterventionTile /> Should render and match the snapshot 1`] = `
   display: flex;
 }
 
-.c20 div {
+.c20 > * {
   padding: 5px 10px;
   background: #e9f1fb;
   font-size: 12px;
@@ -423,7 +423,11 @@ exports[`<InterventionTile /> Should render and match the snapshot 1`] = `
             <div>
               <div
                 class="c20"
-              />
+              >
+                <div
+                  class="c5"
+                />
+              </div>
             </div>
           </div>
         </div>
