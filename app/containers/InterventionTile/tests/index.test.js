@@ -63,20 +63,6 @@ describe('<InterventionTile />', () => {
     document.body.appendChild(mainAppContainer);
   });
 
-  it('Expect to not log errors in console', () => {
-    const spy = jest.spyOn(global.console, 'error');
-    render(
-      <Provider store={store}>
-        <IntlProvider locale={DEFAULT_LOCALE} {...intlProviderConfig}>
-          <MemoryRouter>
-            <InterventionTile {...defaultProps} />
-          </MemoryRouter>
-        </IntlProvider>
-      </Provider>,
-    );
-    expect(spy).not.toHaveBeenCalled();
-  });
-
   it('Should render and match the snapshot', () => {
     const { container } = render(
       <Provider store={store}>

@@ -73,6 +73,7 @@ import {
 import { DataClearedIndicator } from 'components/DataClearedIndicator';
 import { CollaboratingIndicator } from 'components/CollaboratingIndicator';
 import { TileContainer } from 'components/TileContainer';
+import Column from 'components/Column';
 
 import TranslateInterventionModal from 'containers/TranslateInterventionModal';
 import interventionDetailsPageSagas from 'containers/InterventionDetailsPage/saga';
@@ -360,39 +361,51 @@ const InterventionTile = ({
       <ClearInterventionDataModal />
 
       <StyledLink to={link}>
-        <TileContainer>
-          <Heading>
-            <Row gap={6} align="center">
-              <Row gap={8} align="center">
-                {hasCollaborators && <CollaboratingIndicator iconSize={14} />}
-                {status && (
-                  <Row align="center" gap={5}>
-                    <Text lineHeight={1}>
-                      <FormattedMessage {...globalMessages.statuses[status]} />
-                    </Text>
-                    <StatusIndicator status={status} />
-                  </Row>
+        <TileContainer gap={8}>
+          <Column>
+            <Heading>
+              <Row gap={6} align="center">
+                <Row gap={8} align="center">
+                  {hasCollaborators && <CollaboratingIndicator iconSize={14} />}
+                  {status && (
+                    <Row align="center" gap={5}>
+                      <Text lineHeight={1}>
+                        <FormattedMessage
+                          {...globalMessages.statuses[status]}
+                        />
+                      </Text>
+                      <StatusIndicator status={status} />
+                    </Row>
+                  )}
+                </Row>
+                {sensitiveDataState === SensitiveDataState.REMOVED && (
+                  <DataClearedIndicator opacity={0.7} />
                 )}
               </Row>
-              {sensitiveDataState === SensitiveDataState.REMOVED && (
-                <DataClearedIndicator opacity={0.7} />
+              {!participantView && (
+                <Row align="center">
+                  <StarButton
+                    starred={starred}
+                    onClick={onStarClick}
+                    loading={
+                      starInterventionLoading || unstarInterventionLoading
+                    }
+                  />
+                  <div onClick={preventDefault}>
+                    <Dropdown options={options} />
+                  </div>
+                </Row>
               )}
-            </Row>
-            {!participantView && (
-              <Row align="center">
-                <StarButton
-                  starred={starred}
-                  onClick={onStarClick}
-                  loading={starInterventionLoading || unstarInterventionLoading}
-                />
-                <div onClick={preventDefault}>
-                  <Dropdown options={options} />
-                </div>
-              </Row>
-            )}
-          </Heading>
+            </Heading>
 
-          <EllipsisText text={name} fontSize={18} fontWeight="bold" />
+            <EllipsisText
+              text={name}
+              fontSize={18}
+              fontWeight="bold"
+              lineHeight={1.3}
+              lines={2}
+            />
+          </Column>
 
           <Row justify="between">
             <Tooltip

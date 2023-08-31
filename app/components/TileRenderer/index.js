@@ -8,7 +8,7 @@ import React, { memo, useEffect, useMemo, useRef } from 'react';
 import PropTypes from 'prop-types';
 import { useScreenClass } from 'react-grid-system';
 
-import { TilesContext } from 'components/TileRenderer/constants';
+import { ROW_HEIGHT, TilesContext } from 'components/TileRenderer/constants';
 import { VirtualGrid } from 'components/VirtualList';
 
 import GridTile from './GridTile';
@@ -70,7 +70,7 @@ function TileRenderer({
         ref={infiniteLoaderRef}
         columnCount={columnCount}
         rowCount={rowCount}
-        rowHeight={160}
+        rowHeight={ROW_HEIGHT}
         items={elements}
         itemsStates={elementsStates}
         infiniteLoader={
