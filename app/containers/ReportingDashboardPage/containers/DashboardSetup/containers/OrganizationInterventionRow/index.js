@@ -24,7 +24,7 @@ import Box from 'components/Box';
 
 import messages from '../../../../messages';
 
-const MAX_ROW_HEIGHT = elements.interventionsTileHeight + 10;
+const MAX_ROW_HEIGHT = elements.interventionTileHeight + 10;
 
 const BATCH_SIZE = 20;
 

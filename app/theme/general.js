@@ -28,7 +28,7 @@ const elements = {
   treeRowHeight: 80,
   chartTileWidth: 500,
   chartTileHeight: 350,
-  interventionsTileHeight: 150,
+  interventionTileHeight: 150,
   interventionLogoSize: {
     width: 100,
     height: 50,

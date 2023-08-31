@@ -3,13 +3,13 @@ import styled from 'styled-components';
 
 import { boxShadows, colors, elements, themeColors } from 'theme';
 
-import { style, layout } from 'components/BaseComponentStyles';
+import { style, layout, flex } from 'components/BaseComponentStyles';
 
 const sharedContainerStyles = `
-  padding: 15px;
-  height: ${elements.interventionsTileHeight}px;
+  padding: 12px 16px 16px 16px;
+  height: ${elements.interventionTileHeight}px;
   box-shadow: ${boxShadows.selago};
-  border-radius: 5px;
+  border-radius: 8px;
   margin-bottom: 20px;
   display: flex;
   cursor: pointer;
@@ -25,4 +25,5 @@ export const TileContainer = styled.div`
   justify-content: space-between;
   ${style}
   ${layout}
+  ${flex}
 `;
