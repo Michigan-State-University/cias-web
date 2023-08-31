@@ -1,6 +1,6 @@
 /**
  *
- * SingleTile
+ * InterventionTile
  *
  */
 
@@ -92,7 +92,7 @@ import {
 import { useClearInterventionData } from '../ClearInterventionData';
 import { StarButton } from './StarButton';
 
-const SingleTile = ({
+const InterventionTile = ({
   tileData,
   tileState,
   participantView,
@@ -436,7 +436,7 @@ const SingleTile = ({
   );
 };
 
-SingleTile.propTypes = {
+InterventionTile.propTypes = {
   tileData: PropTypes.object,
   tileState: PropTypes.instanceOf(Map),
   intl: PropTypes.object,
@@ -466,7 +466,7 @@ const mapDispatchToProps = {
   unstarIntervention: unstarInterventionRequest,
 };
 
-const SingleTileWithIntl = injectIntl(SingleTile);
+const InterventionTileWithIntl = injectIntl(InterventionTile);
 
 const withConnect = connect(mapStateToProps, mapDispatchToProps);
 
@@ -489,4 +489,4 @@ export default compose(
   injectSaga({ key: 'exportIntervention', saga: exportInterventionSaga }),
   injectSaga(withStarInterventionSaga),
   injectSaga(withUnstarInterventionSaga),
-)(SingleTileWithIntl);
+)(InterventionTileWithIntl);

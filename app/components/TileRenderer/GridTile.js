@@ -6,7 +6,7 @@ import { INTERVENTION_LIST_ITEM_DEFAULT_STATE } from 'global/reducers/interventi
 
 import { parametrizeRoutePath } from 'utils/router';
 
-import SingleTile from 'containers/SingleTile';
+import InterventionTile from 'containers/InterventionTile';
 import { TilesContext } from 'components/TileRenderer/constants';
 
 const GridTile = ({ data, index }) => {
@@ -21,7 +21,7 @@ const GridTile = ({ data, index }) => {
   if (!intervention) return null;
 
   return (
-    <SingleTile
+    <InterventionTile
       tileData={intervention}
       tileState={itemState}
       link={parametrizeRoutePath(RoutePath.INTERVENTION_DETAILS, {

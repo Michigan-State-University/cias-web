@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`<SingleTile /> Should render and match the snapshot 1`] = `
+exports[`<InterventionTile /> Should render and match the snapshot 1`] = `
 .c3 {
   display: -webkit-box;
   display: -webkit-flex;
@@ -58,7 +58,25 @@ exports[`<SingleTile /> Should render and match the snapshot 1`] = `
   gap: 5px;
 }
 
-.c11 {
+.c8 {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-flex-direction: row;
+  -ms-flex-direction: row;
+  flex-direction: row;
+  height: auto;
+  -webkit-align-content: center;
+  -ms-flex-line-pack: center;
+  align-content: center;
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+}
+
+.c13 {
   display: -webkit-box;
   display: -webkit-flex;
   display: -ms-flexbox;
@@ -70,7 +88,7 @@ exports[`<SingleTile /> Should render and match the snapshot 1`] = `
   width: 100%;
 }
 
-.c15 {
+.c17 {
   display: -webkit-box;
   display: -webkit-flex;
   display: -ms-flexbox;
@@ -86,7 +104,7 @@ exports[`<SingleTile /> Should render and match the snapshot 1`] = `
   justify-items: space-between;
 }
 
-.c10 {
+.c12 {
   width: auto;
   height: auto;
 }
@@ -99,7 +117,7 @@ exports[`<SingleTile /> Should render and match the snapshot 1`] = `
   line-height: 1;
 }
 
-.c8 {
+.c10 {
   width: auto;
   height: auto;
   display: block;
@@ -124,7 +142,7 @@ exports[`<SingleTile /> Should render and match the snapshot 1`] = `
   color: unset;
 }
 
-.c12 {
+.c14 {
   width: auto;
   height: auto;
   display: block;
@@ -134,7 +152,7 @@ exports[`<SingleTile /> Should render and match the snapshot 1`] = `
   color: unset;
 }
 
-.c13 {
+.c15 {
   width: auto;
   height: auto;
   display: block;
@@ -142,7 +160,7 @@ exports[`<SingleTile /> Should render and match the snapshot 1`] = `
   color: unset;
 }
 
-.c17 {
+.c18 {
   width: auto;
   height: auto;
   display: block;
@@ -154,7 +172,7 @@ exports[`<SingleTile /> Should render and match the snapshot 1`] = `
   color: unset;
 }
 
-.c14 {
+.c16 {
   position: relative;
   width: 100%;
   font-size: 18px;
@@ -162,7 +180,7 @@ exports[`<SingleTile /> Should render and match the snapshot 1`] = `
   color: #2F3850;
 }
 
-.c16 {
+.c9 {
   outline: none;
   border: none;
   background: transparent;
@@ -173,10 +191,10 @@ exports[`<SingleTile /> Should render and match the snapshot 1`] = `
   cursor: pointer;
   font-weight: 700;
   color: #2F3850;
-  padding: 0;
+  padding: 12px;
 }
 
-.c9 {
+.c11 {
   display: -webkit-box;
   display: -webkit-flex;
   display: -ms-flexbox;
@@ -241,14 +259,14 @@ exports[`<SingleTile /> Should render and match the snapshot 1`] = `
   display: inline-block;
 }
 
-.c18 {
+.c19 {
   display: -webkit-box;
   display: -webkit-flex;
   display: -ms-flexbox;
   display: flex;
 }
 
-.c18 div {
+.c19 div {
   padding: 5px 10px;
   background: #e9f1fb;
   font-size: 12px;
@@ -287,40 +305,54 @@ exports[`<SingleTile /> Should render and match the snapshot 1`] = `
             </div>
           </div>
         </div>
-        <div>
-          <div
-            class="c8"
-            display="flex"
+        <div
+          class="c8"
+        >
+          <button
+            class="c9"
+            font-weight="bold"
+            title="Star intervention"
           >
+            <img
+              alt="Star icon"
+              src="IMAGE_MOCK"
+            />
+          </button>
+          <div>
             <div
-              class="c9"
+              class="c10"
+              display="flex"
             >
-              <img
-                alt="dots"
-                class="c10"
-                src="IMAGE_MOCK"
-              />
+              <div
+                class="c11"
+              >
+                <img
+                  alt="dots"
+                  class="c12"
+                  src="IMAGE_MOCK"
+                />
+              </div>
             </div>
           </div>
         </div>
       </div>
       <div
-        class="c11"
+        class="c13"
         width="100%"
       >
         <div
-          class="c12"
+          class="c14"
           display="inline"
           width="100%"
         >
           <div
-            class="c13"
+            class="c15"
             data-for="Name"
             data-tip=""
           >
             <div>
               <span
-                class="c14"
+                class="c16"
                 data-for="Name"
                 data-tip="Name"
                 font-size="18"
@@ -343,35 +375,21 @@ exports[`<SingleTile /> Should render and match the snapshot 1`] = `
         </div>
       </div>
       <div
-        class="c15"
+        class="c17"
       >
         <div
-          class="c4"
+          class="c18"
+          display="flex"
         >
-          <button
-            class="c16"
-            font-weight="bold"
-            title="Star intervention"
-          >
-            <img
-              alt="Star icon"
-              src="IMAGE_MOCK"
-            />
-          </button>
           <div
-            class="c17"
-            display="flex"
+            class="c15"
+            data-for="test-id-tile-tooltip"
+            data-tip=""
           >
-            <div
-              class="c13"
-              data-for="test-id-tile-tooltip"
-              data-tip=""
-            >
-              <div>
-                <div
-                  class="c18"
-                />
-              </div>
+            <div>
+              <div
+                class="c19"
+              />
             </div>
           </div>
         </div>

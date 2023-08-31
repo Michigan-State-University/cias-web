@@ -1,6 +1,6 @@
 /**
  *
- * Tests for SingleInterventionPanel
+ * Tests for InterventionTile
  *
  */
 
@@ -20,7 +20,7 @@ import { createTestStore } from 'utils/testUtils/storeUtils';
 
 import { intlProviderConfig } from 'containers/LanguageProvider';
 
-import SingleTile from '../index';
+import InterventionTile from '../index';
 
 const defaultProps = {
   tileData: {
@@ -39,7 +39,7 @@ const defaultProps = {
   link: '#',
 };
 
-describe('<SingleTile />', () => {
+describe('<InterventionTile />', () => {
   let store;
   let modalContainer;
   let mainAppContainer;
@@ -69,7 +69,7 @@ describe('<SingleTile />', () => {
       <Provider store={store}>
         <IntlProvider locale={DEFAULT_LOCALE} {...intlProviderConfig}>
           <MemoryRouter>
-            <SingleTile {...defaultProps} />
+            <InterventionTile {...defaultProps} />
           </MemoryRouter>
         </IntlProvider>
       </Provider>,
@@ -82,7 +82,7 @@ describe('<SingleTile />', () => {
       <Provider store={store}>
         <IntlProvider locale={DEFAULT_LOCALE} {...intlProviderConfig}>
           <MemoryRouter>
-            <SingleTile {...defaultProps} />
+            <InterventionTile {...defaultProps} />
           </MemoryRouter>
         </IntlProvider>
       </Provider>,
