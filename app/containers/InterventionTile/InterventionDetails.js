@@ -3,10 +3,11 @@ import dayjs from 'dayjs';
 import PropTypes from 'prop-types';
 import { injectIntl } from 'react-intl';
 
+import globalMessages from 'global/i18n/globalMessages';
+
 import Text from 'components/Text';
 
 import messages from './messages';
-import globalMessages from '../../global/i18n/globalMessages';
 
 const InterventionDetails = ({
   intl: { formatMessage },
