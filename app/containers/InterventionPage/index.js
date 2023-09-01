@@ -52,6 +52,7 @@ import messages from './messages';
 import { InitialRow, StyledLink, StyledNotification } from './styled';
 import ImportModalContent from './ImportModalContent';
 import ShareFilter from './ShareFilter';
+import { SharedFilter } from './StarredFilter';
 
 const INITIAL_FETCH_LIMIT = 15;
 
@@ -77,14 +78,16 @@ export function InterventionPage({
   const [filterValue, setFilterValue] = useState('');
   const [filterStatus, setFilterStatus] = useState(statusTypes);
   const [filterSharing, setFilterSharing] = useState('');
+  const [filterStarred, setFilterStarred] = useState(false);
 
   const filterData = useMemo(
     () => ({
       statuses: filterStatus,
       name: filterValue,
       ...(filterSharing && { [filterSharing]: true }),
+      ...(filterStarred && { starred: true }),
     }),
-    [filterValue, filterStatus, filterSharing],
+    [filterValue, filterStatus, filterSharing, filterStarred],
   );
 
   useEffect(() => {
@@ -206,7 +209,7 @@ export function InterventionPage({
             xxl={4}
             style={{ marginTop: 10, marginBottom: 10 }}
           >
-            <Row my={35} justify="start" align="center">
+            <Row justify="start" align="center">
               <ShareFilter
                 onChange={setFilterSharing}
                 formatMessage={formatMessage}
@@ -220,7 +223,7 @@ export function InterventionPage({
             xxl={4}
             style={{ marginTop: 10, marginBottom: 10 }}
           >
-            <Row my={35} justify="start" align="center">
+            <Row justify="start" align="center">
               <StatusFilter
                 onChange={handleChange}
                 formatMessage={formatMessage}
@@ -229,9 +232,19 @@ export function InterventionPage({
             </Row>
           </Col>
           <Col
-            xs={12}
-            md={6}
-            xxl={4}
+            xs={6}
+            md={3}
+            xxl={2}
+            style={{ marginTop: 10, marginBottom: 10 }}
+          >
+            <Row justify="start" align="center" style={{ height: '100%' }}>
+              <SharedFilter value={filterStarred} onChange={setFilterStarred} />
+            </Row>
+          </Col>
+          <Col
+            xs={6}
+            md={3}
+            xxl={2}
             style={{ marginTop: 10, marginBottom: 10 }}
           >
             <Row align="center">

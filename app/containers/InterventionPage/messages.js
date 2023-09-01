@@ -77,4 +77,8 @@ export default defineMessages({
     id: `${scope}.statusFilterPlaceholder`,
     defaultMessage: `Filter by status`,
   },
+  starredFilterLabel: {
+    id: `${scope}.starredFilterLabel`,
+    defaultMessage: `Show only starred`,
+  },
 });
