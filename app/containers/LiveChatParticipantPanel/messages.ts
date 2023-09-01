@@ -45,10 +45,6 @@ export default defineMessages({
     id: `${scope}.navigatorsBusy`,
     defaultMessage: 'Sorry, but all our navigators are busy at the moment.',
   },
-  callOutInstruction: {
-    id: `${scope}.callOutInstruction`,
-    defaultMessage: `Please click the "<textColorBold>Connect with Support</textColorBold>" button above to request a team member to message with.`,
-  },
   call988or911: {
     id: `${scope}.call988or911`,
     defaultMessage: `If this an emergency please dial <phone>988</phone> for the suicide & crisis lifeline, or <phone>911</phone>.`,
