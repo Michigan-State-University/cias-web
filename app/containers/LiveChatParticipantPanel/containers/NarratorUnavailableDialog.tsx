@@ -47,13 +47,15 @@ const NarratorUnavailableDialog = ({
     noNavigatorAvailableMessage,
     messagePhone,
     contactMessage,
+    hasAssignedNavigators,
   } = liveChatSetup ?? {};
 
   return (
     <>
       <ChatDialog
         header={
-          liveChatSetup && (
+          liveChatSetup &&
+          hasAssignedNavigators && (
             <CallOutNavigatorButton
               onClick={callOutNavigator}
               loading={callingOutNavigator}
