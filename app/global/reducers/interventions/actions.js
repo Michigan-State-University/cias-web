@@ -20,6 +20,7 @@ import {
   UNSTAR_INTERVENTION_ERROR,
   UNSTAR_INTERVENTION_REQUEST,
   UNSTAR_INTERVENTION_SUCCESS,
+  CHANGE_MAIN_DASHBOARD_FILTER_DATA,
 } from './constants';
 
 export const fetchInterventionsRequest = ({
@@ -93,3 +94,6 @@ export const unstarInterventionSuccess = (interventionId) =>
   });
 export const unstarInterventionError = (interventionId) =>
   actionBuilder(UNSTAR_INTERVENTION_ERROR, { interventionId });
+
+export const changeMainDashboardFilterData = (filterDataChanges) =>
+  actionBuilder(CHANGE_MAIN_DASHBOARD_FILTER_DATA, { filterDataChanges });
