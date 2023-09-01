@@ -28,7 +28,7 @@ import {
 } from 'global/reducers/intervention';
 import {
   fetchInterventionsRequest,
-  makeSelectInterventionsState,
+  makeSelectInterventionsReducerState,
   withFetchInterventionsSaga,
   resetImportModalState,
   withInterventionsReducer,
@@ -58,7 +58,7 @@ const INITIAL_FETCH_LIMIT = 15;
 
 export function InterventionPage({
   fetchInterventionsRequest: fetchInterventions,
-  interventionPageState: {
+  interventionsReducerState: {
     interventions,
     interventionsSize,
     loaders: { fetchInterventions: fetchInterventionsLoading },
@@ -294,7 +294,7 @@ export function InterventionPage({
 InterventionPage.propTypes = {
   fetchInterventionsRequest: PropTypes.func.isRequired,
   createInterventionRequest: PropTypes.func,
-  interventionPageState: PropTypes.object,
+  interventionsReducerState: PropTypes.object,
   intl: PropTypes.object,
   createInterventionLoading: PropTypes.bool,
   editUser: PropTypes.func,
@@ -303,7 +303,7 @@ InterventionPage.propTypes = {
 };
 
 const mapStateToProps = createStructuredSelector({
-  interventionPageState: makeSelectInterventionsState(),
+  interventionsReducerState: makeSelectInterventionsReducerState(),
   createInterventionLoading: makeSelectInterventionLoader(
     'createInterventionLoading',
   ),

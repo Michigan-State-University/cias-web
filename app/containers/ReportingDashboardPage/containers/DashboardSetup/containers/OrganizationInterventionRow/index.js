@@ -13,7 +13,7 @@ import {
 import {
   withFetchInterventionsSaga,
   fetchInterventionsRequest,
-  makeSelectInterventionsState,
+  makeSelectInterventionsReducerState,
   withInterventionsReducer,
   refetchInterventions as refetchInterventionsAction,
 } from 'global/reducers/interventions';
@@ -35,7 +35,7 @@ const OrganizationInterventionRow = ({
   createIntervention,
   createInterventionLoading,
   formatMessage,
-  interventionsState: {
+  interventionsReducerState: {
     interventions,
     interventionsSize,
     loaders: { fetchInterventions: fetchInterventionsLoading },
@@ -106,14 +106,14 @@ OrganizationInterventionRow.propTypes = {
   createIntervention: PropTypes.func,
   createInterventionLoading: PropTypes.bool,
   formatMessage: PropTypes.func,
-  interventionsState: PropTypes.object,
+  interventionsReducerState: PropTypes.object,
 };
 
 const mapStateToProps = createStructuredSelector({
   createInterventionLoading: makeSelectInterventionLoader(
     'createInterventionLoading',
   ),
-  interventionsState: makeSelectInterventionsState(),
+  interventionsReducerState: makeSelectInterventionsReducerState(),
 });
 
 const mapDispatchToProps = {
