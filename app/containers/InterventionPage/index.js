@@ -232,7 +232,8 @@ export function InterventionPage({
             </Row>
           </Col>
           <Col
-            xs={6}
+            xs={12}
+            sm={6}
             md={3}
             xxl={2}
             style={{ marginTop: 10, marginBottom: 10 }}
@@ -242,7 +243,8 @@ export function InterventionPage({
             </Row>
           </Col>
           <Col
-            xs={6}
+            xs={12}
+            sm={6}
             md={3}
             xxl={2}
             style={{ marginTop: 10, marginBottom: 10 }}

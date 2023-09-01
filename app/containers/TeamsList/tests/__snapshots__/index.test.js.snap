@@ -177,8 +177,9 @@ exports[`<TeamsList /> Should render and match the snapshot 1`] = `
   border-width: 1px;
   border-color: #E9F1FB;
   border-radius: 5px;
-  padding-right: 30px;
-  padding-left: 30px;
+  width: 100%;
+  padding-right: 35px;
+  padding-left: 35px;
   color: #2F3850;
 }
 
@@ -358,7 +359,7 @@ exports[`<TeamsList /> Should render and match the snapshot 1`] = `
             style="margin-left: -15px; margin-right: -15px; display: flex; flex-wrap: wrap; flex-grow: 0; flex-shrink: 0; align-items: center; justify-content: flex-start;"
           >
             <div
-              style="box-sizing: border-box; min-height: 1px; position: relative; padding-left: 15px; padding-right: 15px; width: 100%; flex-basis: 100%; flex-grow: 0; flex-shrink: 0; max-width: 100%; margin-left: 0%; margin-bottom: 10px;"
+              style="box-sizing: border-box; min-height: 1px; position: relative; padding-left: 15px; padding-right: 15px; width: 33.333333333333336%; flex-basis: 33.333333333333336%; flex-grow: 0; flex-shrink: 0; max-width: 33.333333333333336%; margin-left: 0%; margin-bottom: 10px;"
             >
               <div
                 class="c4"
@@ -368,6 +369,7 @@ exports[`<TeamsList /> Should render and match the snapshot 1`] = `
                   class="c5"
                   placeholder="Filter users by name"
                   type="text"
+                  width="100%"
                 />
                 <img
                   alt="search"

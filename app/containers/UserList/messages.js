@@ -96,6 +96,10 @@ export default defineMessages({
   },
   searchPlaceholder: {
     id: `${scope}.searchPlaceholder`,
+    defaultMessage: 'Filter by name',
+  },
+  searchAriaLabel: {
+    id: `${scope}.searchAriaLabel`,
     defaultMessage: 'Filter users by name',
   },
   clearFiltersText: {
