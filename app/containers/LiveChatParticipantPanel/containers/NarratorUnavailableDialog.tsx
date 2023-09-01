@@ -86,14 +86,6 @@ const NarratorUnavailableDialog = ({
                 mt={16}
                 lineHeight="22px"
               >
-                {formatMessage(messages.callOutInstruction)}
-              </Text>
-              <Text
-                color={colors.bluewood}
-                textOpacity={0.7}
-                mt={16}
-                lineHeight="22px"
-              >
                 {formatMessage(messages.call988or911)}
               </Text>
               <Box height="2px" bg={colors.linkWater} width="56px" mt={16} />
