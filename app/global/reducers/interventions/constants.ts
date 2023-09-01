@@ -1,8 +1,17 @@
+import { INITIAL_STATUSES_FILTER_VALUE } from 'models/Status/StatusTypes';
+
 import { InterventionListItemState } from './types';
 
 export const INTERVENTION_LIST_ITEM_DEFAULT_STATE: InterventionListItemState = {
   starInterventionLoading: false,
   unstarInterventionLoading: false,
+};
+
+export const MAIN_DASHBOARD_FILTER_DATA_INITIAL_VALUE = {
+  name: '',
+  statuses: INITIAL_STATUSES_FILTER_VALUE,
+  sharing: null,
+  starred: false,
 };
 
 export const FETCH_INTERVENTIONS_REQUEST =
@@ -51,3 +60,6 @@ export const UNSTAR_INTERVENTION_SUCCESS =
   'app/Dashboard/UNSTAR_INTERVENTION_SUCCESS';
 export const UNSTAR_INTERVENTION_ERROR =
   'app/Dashboard/UNSTAR_INTERVENTION_ERROR';
+
+export const CHANGE_MAIN_DASHBOARD_FILTER_DATA =
+  'app/Dashboard/CHANGE_MAIN_DASHBOARD_FILTER_DATA';

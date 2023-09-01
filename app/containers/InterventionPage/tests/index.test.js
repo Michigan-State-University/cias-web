@@ -17,6 +17,8 @@ import { createTestStore } from 'utils/testUtils/storeUtils';
 
 import { DEFAULT_LOCALE } from 'i18n';
 
+import { MAIN_DASHBOARD_FILTER_DATA_INITIAL_VALUE } from 'global/reducers/interventions';
+
 import { intlProviderConfig } from 'containers/LanguageProvider';
 
 import InterventionPage from '../index';
@@ -33,6 +35,7 @@ describe('<InterventionPage />', () => {
     },
     interventions: {
       interventions: [],
+      mainDashboardFilterData: MAIN_DASHBOARD_FILTER_DATA_INITIAL_VALUE,
       loaders: {
         fetchInterventions: true,
       },
@@ -86,6 +89,7 @@ describe('<InterventionPage />', () => {
       ...initialState,
       interventions: {
         interventions: [],
+        mainDashboardFilterData: MAIN_DASHBOARD_FILTER_DATA_INITIAL_VALUE,
         loaders: {
           fetchInterventions: false,
         },
@@ -118,6 +122,7 @@ describe('<InterventionPage />', () => {
             user: { id: 'test' },
           },
         ],
+        mainDashboardFilterData: MAIN_DASHBOARD_FILTER_DATA_INITIAL_VALUE,
         loaders: {
           fetchInterventions: false,
         },

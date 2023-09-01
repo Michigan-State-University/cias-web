@@ -17,14 +17,26 @@ export function* fetchInterventionsWorker({
   const requestURL = `v1/interventions`;
 
   const { startIndex, endIndex } = paginationData ?? {};
+  const { sharing, starred, ...restFilters } = filterData ?? {};
+
+  const requestParams = {
+    startIndex,
+    endIndex,
+    organizationId,
+    ...restFilters,
+  };
+
+  if (sharing) {
+    requestParams[sharing] = true;
+  }
+
+  if (starred) {
+    requestParams.starred = true;
+  }
+
   try {
     const { data } = yield call(axios.get, requestURL, {
-      params: objectToSnakeCase({
-        startIndex,
-        endIndex,
-        organizationId,
-        ...filterData,
-      }),
+      params: objectToSnakeCase(requestParams),
     });
 
     const { interventions_size: interventionsSize } = data;

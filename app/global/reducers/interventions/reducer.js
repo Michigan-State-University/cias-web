@@ -14,6 +14,7 @@ import {
   ARCHIVE_INTERVENTION_ERROR,
   ARCHIVE_INTERVENTION_REQUEST,
   ARCHIVE_INTERVENTION_SUCCESS,
+  CHANGE_MAIN_DASHBOARD_FILTER_DATA,
   FETCH_INTERVENTIONS_ERROR,
   FETCH_INTERVENTIONS_REQUEST,
   FETCH_INTERVENTIONS_SUCCESS,
@@ -21,6 +22,7 @@ import {
   IMPORT_INTERVENTION_REQUEST,
   IMPORT_INTERVENTION_SUCCESS,
   INTERVENTION_LIST_ITEM_DEFAULT_STATE,
+  MAIN_DASHBOARD_FILTER_DATA_INITIAL_VALUE,
   REFETCH_INTERVENTIONS,
   RESET_IMPORT_INTERVENTION_STATE,
   STAR_INTERVENTION_ERROR,
@@ -33,11 +35,12 @@ import {
 } from './constants';
 
 export const initialState = {
-  filterData: undefined,
+  currentFilterData: undefined,
   shouldRefetch: false,
   interventionsSize: Number.MAX_SAFE_INTEGER,
   interventions: [],
   interventionsStates: {},
+  mainDashboardFilterData: MAIN_DASHBOARD_FILTER_DATA_INITIAL_VALUE,
   loaders: {
     fetchInterventions: true,
     importIntervention: false,
@@ -76,8 +79,8 @@ const interventionsReducer = (state = initialState, { type, payload }) =>
 
         const { paginationData, filterData } = payload;
 
-        if (state.filterData !== filterData) {
-          draft.filterData = filterData;
+        if (state.currentFilterData !== filterData) {
+          draft.currentFilterData = filterData;
           draft.interventions = [];
         }
 
@@ -225,6 +228,15 @@ const interventionsReducer = (state = initialState, { type, payload }) =>
         updateInterventionListItemStateById(interventionId, {
           unstarInterventionLoading: false,
         });
+        break;
+      }
+
+      case CHANGE_MAIN_DASHBOARD_FILTER_DATA: {
+        const { filterDataChanges } = payload;
+        draft.mainDashboardFilterData = {
+          ...draft.mainDashboardFilterData,
+          ...filterDataChanges,
+        };
         break;
       }
     }

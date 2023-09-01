@@ -4,7 +4,7 @@
  *
  */
 
-import React, { memo, useEffect, useMemo, useState } from 'react';
+import React, { memo, useEffect } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { FormattedMessage, injectIntl } from 'react-intl';
@@ -15,8 +15,6 @@ import { Row, Col } from 'react-grid-system';
 import { Markup } from 'interweave';
 
 import importIcon from 'assets/svg/import-secondary.svg';
-
-import { statusTypes } from 'models/Status/StatusTypes';
 
 import { colors, fontSizes, themeColors } from 'theme';
 
@@ -32,6 +30,7 @@ import {
   withFetchInterventionsSaga,
   resetImportModalState,
   withInterventionsReducer,
+  changeMainDashboardFilterData as changeMainDashboardFilterDataAction,
 } from 'global/reducers/interventions';
 import { editUserRequest, makeSelectUser } from 'global/reducers/auth';
 
@@ -65,6 +64,7 @@ export function InterventionPage({
     errors: { fetchInterventions: fetchInterventionsError },
     shouldRefetch,
     interventionsStates,
+    mainDashboardFilterData,
   },
   intl: { formatMessage },
   createInterventionRequest: createIntervention,
@@ -72,27 +72,31 @@ export function InterventionPage({
   user,
   editUser,
   resetModalState,
+  changeMainDashboardFilterData,
 }) {
   const { teamName } = user ?? {};
 
-  const [filterValue, setFilterValue] = useState('');
-  const [filterStatus, setFilterStatus] = useState(statusTypes);
-  const [filterSharing, setFilterSharing] = useState('');
-  const [filterStarred, setFilterStarred] = useState(false);
+  const { name, statuses, sharing, starred } = mainDashboardFilterData;
 
-  const filterData = useMemo(
-    () => ({
-      statuses: filterStatus,
-      name: filterValue,
-      ...(filterSharing && { [filterSharing]: true }),
-      ...(filterStarred && { starred: true }),
-    }),
-    [filterValue, filterStatus, filterSharing, filterStarred],
-  );
+  const handleSharingFilterChange = (value) => {
+    changeMainDashboardFilterData({ sharing: value });
+  };
+
+  const handleStatusesFilterChange = (value) => {
+    changeMainDashboardFilterData({ statuses: value });
+  };
+
+  const handleStarredFilterChange = (value) => {
+    changeMainDashboardFilterData({ starred: value });
+  };
+
+  const handleNameFilterChange = (event) => {
+    changeMainDashboardFilterData({ name: event.target.value.trim() });
+  };
 
   useEffect(() => {
     handleFetch(0, INITIAL_FETCH_LIMIT);
-  }, [filterData]);
+  }, [mainDashboardFilterData]);
 
   useEffect(() => {
     if (shouldRefetch) handleFetch(0, INITIAL_FETCH_LIMIT);
@@ -107,7 +111,7 @@ export function InterventionPage({
         startIndex: realStartIndex,
         endIndex: realStopIndex,
       },
-      filterData,
+      filterData: mainDashboardFilterData,
     });
   };
 
@@ -119,10 +123,6 @@ export function InterventionPage({
       width: 520,
     },
   });
-
-  const handleChange = (values) => {
-    setFilterStatus(values);
-  };
 
   const handleFeedbackClick = () => {
     editUser({ feedbackCompleted: true });
@@ -211,9 +211,9 @@ export function InterventionPage({
           >
             <Row justify="start" align="center">
               <ShareFilter
-                onChange={setFilterSharing}
+                onChange={handleSharingFilterChange}
                 formatMessage={formatMessage}
-                active={filterSharing}
+                active={sharing}
               />
             </Row>
           </Col>
@@ -225,9 +225,9 @@ export function InterventionPage({
           >
             <Row justify="start" align="center">
               <StatusFilter
-                onChange={handleChange}
+                onChange={handleStatusesFilterChange}
                 formatMessage={formatMessage}
-                active={filterStatus}
+                active={statuses}
               />
             </Row>
           </Col>
@@ -239,7 +239,10 @@ export function InterventionPage({
             style={{ marginTop: 10, marginBottom: 10 }}
           >
             <Row justify="start" align="center" style={{ height: '100%' }}>
-              <SharedFilter value={filterStarred} onChange={setFilterStarred} />
+              <SharedFilter
+                value={starred}
+                onChange={handleStarredFilterChange}
+              />
             </Row>
           </Col>
           <Col
@@ -252,8 +255,8 @@ export function InterventionPage({
             <Row align="center">
               <Col>
                 <SearchInput
-                  value={filterValue}
-                  onChange={(e) => setFilterValue(e.target.value)}
+                  value={name}
+                  onChange={handleNameFilterChange}
                   placeholder={formatMessage(messages.filter)}
                   aria-label={formatMessage(messages.searchInterventionsLabel)}
                   debounceTime={300}
@@ -280,7 +283,7 @@ export function InterventionPage({
           createLoading={createInterventionLoading}
           onFetchInterventions={handleFetch}
           isLoading={fetchInterventionsLoading}
-          filterData={filterData}
+          filterData={mainDashboardFilterData}
           infiniteLoader={{
             itemCount: interventionsSize,
             minimumBatchSize: 50,
@@ -300,6 +303,7 @@ InterventionPage.propTypes = {
   editUser: PropTypes.func,
   user: PropTypes.object,
   resetModalState: PropTypes.func,
+  changeMainDashboardFilterData: PropTypes.func,
 };
 
 const mapStateToProps = createStructuredSelector({
@@ -315,6 +319,7 @@ const mapDispatchToProps = {
   createInterventionRequest,
   editUser: editUserRequest,
   resetModalState: resetImportModalState,
+  changeMainDashboardFilterData: changeMainDashboardFilterDataAction,
 };
 
 const withConnect = connect(mapStateToProps, mapDispatchToProps);

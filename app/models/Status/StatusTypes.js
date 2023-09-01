@@ -5,7 +5,7 @@ export const published = 'published';
 export const closed = 'closed';
 export const archived = 'archived';
 
-export const statusTypes = [draft, published].sort();
+export const INITIAL_STATUSES_FILTER_VALUE = [draft, published].sort();
 
 export const statusTypeToColorMap = {
   [draft]: themeColors.primary,
