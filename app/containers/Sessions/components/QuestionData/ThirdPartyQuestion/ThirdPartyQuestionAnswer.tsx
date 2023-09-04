@@ -37,7 +37,10 @@ export type Props = {
   onMouseLeave: () => void;
   hoveredIndex: number;
   canDeleteAnswer: boolean;
-  onChange: (index: number, answer: ThirdPartyReportQuestionDataDTO) => void;
+  onChange: (
+    index: number,
+    changes: Partial<ThirdPartyReportQuestionDataDTO>,
+  ) => void;
   onRemove: (index: number) => void;
 };
 
@@ -62,24 +65,23 @@ export const ThirdPartyQuestionAnswer: FC<Props> = ({
     if (!isNarratorTabOrEditNotPossible) onMouseEnter(index);
   }, [index]);
 
-  const handleChangeTitle = (payload: string) =>
-    onChange(index, { ...answer, payload });
+  const handleChangeTitle = (payload: string) => onChange(index, { payload });
 
   const handleRemove = () => onRemove(index);
 
   const handleChangeScore = (numeric_value: string) => {
-    onChange(index, { ...answer, numeric_value });
+    onChange(index, { numeric_value });
   };
 
   const handleChangeRecipients = useCallback(
     (value: string) => {
-      onChange(index, { ...answer, value });
+      onChange(index, { value });
     },
-    [index, answer],
+    [index],
   );
 
   const handleChangeReportTemplateIds = (report_template_ids: string[]) => {
-    onChange(index, { ...answer, report_template_ids });
+    onChange(index, { report_template_ids });
   };
 
   return (

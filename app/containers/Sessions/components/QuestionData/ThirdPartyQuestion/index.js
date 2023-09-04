@@ -50,8 +50,8 @@ const ThirdPartyQuestion = ({
   const isNarratorTabOrEditNotPossible = isNarratorTab || !editingPossible;
 
   const handleChange = useCallback(
-    (index, answer) => {
-      updateAnswer(index, answer);
+    (index, changes) => {
+      updateAnswer(index, changes);
     },
     [updateAnswer],
   );
@@ -117,8 +117,8 @@ const mapStateToProps = createStructuredSelector({
 
 const mapDispatchToProps = {
   addAnswer: () => updateQuestionData({ type: ADD }),
-  updateAnswer: (index, value) =>
-    updateQuestionData({ type: UPDATE_ANSWER, data: { index, value } }),
+  updateAnswer: (index, changes) =>
+    updateQuestionData({ type: UPDATE_ANSWER, data: { index, changes } }),
   removeAnswer: (index) =>
     updateQuestionData({ type: REMOVE, data: { index } }),
   reorderAnswers: reorderAnswersAction,
