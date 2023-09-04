@@ -17,7 +17,7 @@ type Props = {
   endDate?: string;
 };
 
-const DateRangeChooser = ({
+export const DateRangeChooser = ({
   disabled,
   onDateRangeUpdate,
   startDate: startDateString,
@@ -83,5 +83,3 @@ const DateRangeChooser = ({
     </Box>
   );
 };
-
-export default DateRangeChooser;
