@@ -28,6 +28,7 @@ import PieChart from './PieChart';
 
 const ChartTileUI = ({
   chart: {
+    intervalType,
     chartType,
     description,
     formula: { defaultPattern, patterns },
@@ -70,6 +71,7 @@ const ChartTileUI = ({
         return (
           <BarChart
             chartType={chartType}
+            intervalType={intervalType}
             defaultPattern={defaultPattern}
             patterns={patterns}
             trendLine={trendLine}

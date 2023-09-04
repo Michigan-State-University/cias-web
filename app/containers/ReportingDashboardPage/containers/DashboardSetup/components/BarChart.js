@@ -26,6 +26,7 @@ import messages from '../messages';
 
 const BarChart = ({
   chartType,
+  intervalType,
   patterns,
   trendLine,
   realChartData,
@@ -35,11 +36,12 @@ const BarChart = ({
 }) => {
   const data = useMemo(() => {
     if (!realChartData && status !== ChartStatus.DRAFT) return null;
-    if (!realChartData) return generateBarChartPreviewData(chartType);
+    if (!realChartData)
+      return generateBarChartPreviewData(chartType, intervalType);
     if (realChartData) {
       return realChartData;
     }
-  }, [chartType, realChartData, status]);
+  }, [chartType, realChartData, status, intervalType]);
 
   const maxNumericValue = useMemo(() => {
     if (realChartData && chartType === ChartTypeDto.NUMERIC_BAR_CHART) {
@@ -171,6 +173,7 @@ const BarChart = ({
 
 BarChart.propTypes = {
   chartType: PropTypes.string,
+  intervalType: PropTypes.string,
   patterns: PropTypes.arrayOf(PropTypes.object),
   trendLine: PropTypes.bool,
   realChartData: PropTypes.any,
