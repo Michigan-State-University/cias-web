@@ -81,10 +81,6 @@ export default defineMessages({
     defaultMessage:
       'You can review the final chart layout and publish it to a wider audience.',
   },
-  chartSettingsStartCollectHelper: {
-    id: `${scope}.chartSettingsStartCollectHelper`,
-    defaultMessage: 'Start data collection',
-  },
   chartSettingsNameLabel: {
     id: `${scope}.chartSettingsNameLabel`,
     defaultMessage: '<b>Chart Name</b> (If empty, field will not be displayed)',
