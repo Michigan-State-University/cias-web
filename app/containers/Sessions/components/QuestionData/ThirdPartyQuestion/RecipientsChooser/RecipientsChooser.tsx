@@ -56,7 +56,7 @@ export const RecipientsChooser: FC<Props> = ({
       width: MANAGE_RECIPIENTS_MODAL_WIDTH,
       onClose,
     }),
-    [modalTitle],
+    [modalTitle, onClose],
   );
 
   const { openModal, Modal } = useModal<Recipients>({
