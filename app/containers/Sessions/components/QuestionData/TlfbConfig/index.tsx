@@ -120,6 +120,7 @@ const TlfbConfig = ({ editingPossible }: TlfbConfigProps) => {
           disabled={!editingPossible}
           endDate={endDate}
           startDate={startDate}
+          inputsStyles={{ width: 150 }}
         />
       )}
       <Row mt={32} mb={24} gap={16} align="center">

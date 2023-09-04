@@ -159,6 +159,23 @@ const ChartSettings = ({
     ]);
   }, [chart.chartType, chart.formula.patterns, onEditFormula]);
 
+  const onEditDateRange = useCallback(
+    (dateRangeStart, dateRangeEnd) =>
+      editChart({
+        id: chart.id,
+        dashboardSectionId: chart.dashboardSectionId,
+        dateRangeStart,
+        dateRangeEnd,
+      }),
+    [
+      chart.id,
+      chart.dashboardSectionId,
+      chart.dateRangeStart,
+      chart.dateRangeEnd,
+      editChart,
+    ],
+  );
+
   const onCopyChart = useCallback(() => {
     copyChart(chart.id);
   }, [chart.id]);
@@ -179,6 +196,7 @@ const ChartSettings = ({
           onEditFormulaPayload={onEditFormulaPayload}
           onEditName={onEditName}
           onEditStatus={onEditStatus}
+          onEditDateRange={onEditDateRange}
           onCopyChart={onCopyChart}
         />,
       );

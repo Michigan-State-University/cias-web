@@ -204,4 +204,12 @@ export default defineMessages({
     defaultMessage:
       'There was an issue with collecting your chart data. Please contact us at cias@msu.edu',
   },
+  startDateLabel: {
+    id: `${scope}.startDateLabel`,
+    defaultMessage: 'Date from (optional)',
+  },
+  endDateLabel: {
+    id: `${scope}.endDateLabel`,
+    defaultMessage: 'Date to (optional)',
+  },
 });

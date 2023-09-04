@@ -1,4 +1,4 @@
-import React, { useMemo } from 'react';
+import React, { ComponentProps, useMemo } from 'react';
 import { useIntl } from 'react-intl';
 
 import ApprovableInput from 'components/Input/ApprovableInput';
@@ -7,7 +7,7 @@ import Text from 'components/Text';
 
 import messages from './messages';
 
-type Props = {
+export type Props = {
   disabled: boolean;
   onDateRangeUpdate: (
     startDate: Nullable<Date>,
@@ -15,6 +15,10 @@ type Props = {
   ) => void;
   startDate?: string;
   endDate?: string;
+  startDateLabel?: string;
+  endDateLabel?: string;
+  labelsStyles?: Partial<ComponentProps<typeof Text>>;
+  inputsStyles?: Partial<ComponentProps<typeof ApprovableInput>['styles']>;
 };
 
 export const DateRangeChooser = ({
@@ -22,6 +26,10 @@ export const DateRangeChooser = ({
   onDateRangeUpdate,
   startDate: startDateString,
   endDate: endDateString,
+  startDateLabel,
+  endDateLabel,
+  labelsStyles,
+  inputsStyles,
 }: Props) => {
   const { formatMessage } = useIntl();
 
@@ -43,15 +51,16 @@ export const DateRangeChooser = ({
     onDateRangeUpdate(startDate, newEndDate);
   };
 
+  const { width, ...restInputStyles } = inputsStyles ?? {};
+
   return (
-    <Box display="flex">
-      <Box width={150} mr={12}>
-        <Text ml={10} mb={8}>
-          {formatMessage(messages.dateFrom)}
+    <Box display="flex" gap={12}>
+      <Box maxWidth={width} flex={1}>
+        <Text mb={8} {...labelsStyles}>
+          {startDateLabel ?? formatMessage(messages.dateFrom)}
         </Text>
         <ApprovableInput
           disabled={disabled}
-          width={150}
           height={50}
           type="date"
           value={startDate}
@@ -60,15 +69,16 @@ export const DateRangeChooser = ({
           selectsStart
           startDate={startDate}
           endDate={endDate}
+          width="100%"
+          styles={restInputStyles}
         />
       </Box>
-      <Box width={150}>
-        <Text ml={10} mb={8}>
-          {formatMessage(messages.dateTo)}
+      <Box maxWidth={width} flex={1}>
+        <Text mb={8} {...labelsStyles}>
+          {endDateLabel ?? formatMessage(messages.dateTo)}
         </Text>
         <ApprovableInput
           disabled={disabled}
-          width={150}
           height={50}
           type="date"
           value={endDate}
@@ -78,6 +88,8 @@ export const DateRangeChooser = ({
           selectsEnd
           startDate={startDate}
           endDate={endDate}
+          width="100%"
+          styles={restInputStyles}
         />
       </Box>
     </Box>

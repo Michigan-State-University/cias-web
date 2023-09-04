@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 
-import { boxShadows, colors, themeColors } from 'theme';
+import { boxShadows, colors, paddings, themeColors } from 'theme';
 
 import Box from 'components/Box';
 import { StyledInput } from 'components/Input/StyledInput';
@@ -16,7 +16,6 @@ export const HoverableBox = styled(Box)`
       borderWidth: '2px',
       borderColor: themeColors.secondary,
     }}
-
   &:hover {
     border-color: ${themeColors.secondary};
   }
@@ -34,9 +33,13 @@ export const Input = styled(StyledInput)`
   background-color: ${themeColors.highlight};
   outline: none;
   max-width: none;
+
   &:focus {
     border: none;
   }
+
+  padding-left: ${paddings.small};
+  padding-right: ${paddings.small};
 `;
 
 export const BarChartTooltip = styled.div`
