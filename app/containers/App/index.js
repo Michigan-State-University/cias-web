@@ -69,6 +69,7 @@ import InboxPage from 'containers/InboxPage/Loadable';
 import ArchivePage from 'containers/ArchivePage/Loadable';
 import UserInterventionPage from 'containers/UserInterventionPage/Loadable';
 import VerifyShortLinkPage from 'containers/VerifyShortLinkPage/Loadable';
+import VerifyUserKeyPage from 'containers/VerifyUserKeyPage/Loadable';
 import AccessibilityStatementPage from 'containers/AccessibiltyStatementPage/Loadable';
 import ChatWidget from 'containers/ChatWidget';
 import NavigatorAvailabilityModal from 'containers/NavigatorAvailabilityModal';
@@ -552,6 +553,11 @@ export function App({ user, fetchSelfDetails }) {
           exact
           path={RoutePath.VERIFY_SHORT_LINK}
           component={VerifyShortLinkPage}
+        />
+        <AppRoute
+          exact
+          path={RoutePath.VERIFY_USER_KEY}
+          component={VerifyUserKeyPage}
         />
         <AppRoute exact path={RoutePath.NOT_FOUND} component={NotFoundPage} />
         <AppRoute path={WILDCARD_PATH}>
