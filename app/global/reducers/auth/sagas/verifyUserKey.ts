@@ -1,17 +1,21 @@
-import { takeEvery, put, call } from '@redux-saga/core/effects';
-import axios from 'axios';
+import { put, takeEvery, call } from '@redux-saga/core/effects';
 import { replace } from 'connected-react-router';
+import axios from 'axios';
 
 import { ApiError } from 'models/Api';
 
 import objectToSnakeCase from 'utils/objectToSnakeCase';
 import { HttpStatusCodes } from 'utils/constants';
+import { parametrizeRoutePath } from 'utils/router';
+import objectToCamelCase from 'utils/objectToCamelCase';
 
 import { RoutePath } from 'global/constants';
 import { WithSaga } from 'global/reducers/types';
 
+import { AnswerSessionPageLocationState } from 'global/types/locationState';
 import { VERIFY_USER_KEY_REQUEST } from '../constants';
 import { verifyUserKeyRequest, verifyUserKeySuccess } from '../actions';
+import { VerifyUserKeyResponse } from '../types';
 
 function* verifyUserKeyWorker({
   payload: { userKey },
@@ -20,8 +24,36 @@ function* verifyUserKeyWorker({
   const requestBody = objectToSnakeCase({ userKey });
 
   try {
-    yield call(axios.post, requestUrl, requestBody);
+    const { data } = yield call(axios.post, requestUrl, requestBody);
+    const mappedData: VerifyUserKeyResponse = objectToCamelCase(data);
+
     yield put(verifyUserKeySuccess());
+
+    const {
+      interventionId,
+      sessionId,
+      // eslint-disable-next-line no-unused-vars,@typescript-eslint/no-unused-vars
+      healthClinicId, // TODO handle clinic id when we decide on https://htdevelopers.atlassian.net/browse/CIAS30-3661 and remove role disablement
+      multipleFillSessionAvailable,
+    } = mappedData;
+
+    if (sessionId) {
+      // redirect to answer session page
+      const redirectPath = parametrizeRoutePath(RoutePath.ANSWER_SESSION, {
+        interventionId,
+        sessionId,
+      });
+      const locationState: AnswerSessionPageLocationState = {
+        multipleFillSessionAvailable,
+      };
+      yield put(replace(redirectPath, locationState));
+    } else {
+      // redirect to the intervention modules list
+      const redirectPath = parametrizeRoutePath(RoutePath.USER_INTERVENTION, {
+        interventionId,
+      });
+      yield put(replace(redirectPath));
+    }
   } catch (error) {
     switch ((error as ApiError)?.response?.status) {
       case HttpStatusCodes.NOT_FOUND: {
