@@ -30,6 +30,7 @@ function* verifyUserKeyWorker({
     yield put(verifyUserKeySuccess());
 
     const {
+      userInterventionId,
       interventionId,
       sessionId,
       healthClinicId, // TODO handle clinic id when we decide on https://htdevelopers.atlassian.net/browse/CIAS30-3661 and remove role disablement
@@ -50,13 +51,14 @@ function* verifyUserKeyWorker({
 
       const locationState: AnswerSessionPageLocationState = {
         multipleFillSessionAvailable,
+        userInterventionId,
       };
 
       yield put(replace(`${redirectPath}?${queryParams}`, locationState));
     } else {
       // redirect to the intervention modules list
       const redirectPath = parametrizeRoutePath(RoutePath.USER_INTERVENTION, {
-        interventionId,
+        userInterventionId,
       });
 
       yield put(replace(redirectPath));

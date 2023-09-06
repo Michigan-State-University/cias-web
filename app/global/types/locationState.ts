@@ -4,4 +4,5 @@ export interface JumpToScreenLocationState {
 
 export interface AnswerSessionPageLocationState {
   multipleFillSessionAvailable?: boolean;
+  userInterventionId?: string;
 }
