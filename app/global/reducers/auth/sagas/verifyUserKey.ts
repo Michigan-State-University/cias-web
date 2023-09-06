@@ -11,7 +11,7 @@ import { RoutePath } from 'global/constants';
 import { WithSaga } from 'global/reducers/types';
 
 import { VERIFY_USER_KEY_REQUEST } from '../constants';
-import { verifyUserKeyRequest } from '../actions';
+import { verifyUserKeyRequest, verifyUserKeySuccess } from '../actions';
 
 function* verifyUserKeyWorker({
   payload: { userKey },
@@ -21,6 +21,7 @@ function* verifyUserKeyWorker({
 
   try {
     yield call(axios.post, requestUrl, requestBody);
+    yield put(verifyUserKeySuccess());
   } catch (error) {
     switch ((error as ApiError)?.response?.status) {
       case HttpStatusCodes.NOT_FOUND: {

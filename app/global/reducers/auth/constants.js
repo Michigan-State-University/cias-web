@@ -77,5 +77,6 @@ export const TERMS_ACCEPT_SUCCESS = 'app/auth/TERMS_ACCEPT_SUCCESS';
 export const TERMS_ACCEPT_ERROR = 'app/auth/TERMS_ACCEPT_ERROR';
 
 export const VERIFY_USER_KEY_REQUEST = 'app/auth/VERIFY_USER_KEY_REQUEST';
+export const VERIFY_USER_KEY_SUCCESS = 'app/auth/VERIFY_USER_KEY_SUCCESS';
 
 export const CLEAR_ERRORS = 'app/auth/CLEAR_ERRORS';
