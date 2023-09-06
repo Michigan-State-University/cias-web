@@ -32,7 +32,6 @@ function* verifyUserKeyWorker({
     const {
       interventionId,
       sessionId,
-      // eslint-disable-next-line no-unused-vars,@typescript-eslint/no-unused-vars
       healthClinicId, // TODO handle clinic id when we decide on https://htdevelopers.atlassian.net/browse/CIAS30-3661 and remove role disablement
       multipleFillSessionAvailable,
     } = mappedData;
@@ -43,15 +42,23 @@ function* verifyUserKeyWorker({
         interventionId,
         sessionId,
       });
+
+      const queryParams = new URLSearchParams();
+      if (healthClinicId) {
+        queryParams.append('cid', healthClinicId);
+      }
+
       const locationState: AnswerSessionPageLocationState = {
         multipleFillSessionAvailable,
       };
-      yield put(replace(redirectPath, locationState));
+
+      yield put(replace(`${redirectPath}?${queryParams}`, locationState));
     } else {
       // redirect to the intervention modules list
       const redirectPath = parametrizeRoutePath(RoutePath.USER_INTERVENTION, {
         interventionId,
       });
+
       yield put(replace(redirectPath));
     }
   } catch (error) {
