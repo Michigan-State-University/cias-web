@@ -101,6 +101,11 @@ const ChartSettings = ({
     onEdit,
   ]);
 
+  const onEditIntervalType = useCallback(onEdit('intervalType'), [
+    chart.intervalType,
+    onEdit,
+  ]);
+
   const onEditTrendLine = useCallback(onEdit('trendLine'), [
     chart.trendLine,
     onEdit,
@@ -185,6 +190,7 @@ const ChartSettings = ({
           changeStatusLoader={isChangingStatus}
           onDelete={onDelete}
           onEditChartType={onEditChartType}
+          onEditIntervalType={onEditIntervalType}
           onEditDescription={onEditDescription}
           onEditFormulaPattern={onEditFormulaPattern}
           onEditFormulaPayload={onEditFormulaPayload}
