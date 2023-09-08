@@ -55,14 +55,18 @@ class AppRoute extends Route {
     if (user && unauthorizedUsersOnly) {
       const queryParams = new URLSearchParams(location.search);
       const redirectTo = queryParams.get(REDIRECT_QUERY_KEY);
-
       queryParams.delete(REDIRECT_QUERY_KEY);
 
-      return (
-        <Redirect
-          to={`${redirectTo ?? RoutePath.DASHBOARD}?${queryParams.toString()}`}
-        />
-      );
+      let redirectPath = redirectTo ?? RoutePath.DASHBOARD;
+
+      if (queryParams.size) {
+        const hasRedirectPathParams = redirectPath.includes('?');
+        redirectPath += `${
+          hasRedirectPathParams ? '&' : '?'
+        }${queryParams.toString()}`;
+      }
+
+      return <Redirect to={redirectPath} />;
     }
 
     if (!protectedRoute) {
