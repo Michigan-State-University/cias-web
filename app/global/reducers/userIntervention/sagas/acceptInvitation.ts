@@ -26,7 +26,7 @@ export function* acceptInvitation({
       },
     } = yield call(axios.post, url, {
       intervention_id: interventionId,
-      clinic_id: clinicId,
+      health_clinic_id: clinicId,
     });
     if (blocked) {
       yield put(push(`/`));
