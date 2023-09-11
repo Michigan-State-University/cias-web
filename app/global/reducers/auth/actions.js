@@ -50,6 +50,7 @@ import {
   CLEAR_ERRORS,
   VERIFY_USER_KEY_REQUEST,
   VERIFY_USER_KEY_SUCCESS,
+  VERIFY_USER_KEY_ERROR,
 } from './constants';
 
 export const logIn = (user) => actionBuilder(LOG_IN_USER, { user });
@@ -165,5 +166,7 @@ export const verifyUserKeyRequest = (userKey) =>
   actionBuilder(VERIFY_USER_KEY_REQUEST, { userKey });
 export const verifyUserKeySuccess = () =>
   actionBuilder(VERIFY_USER_KEY_SUCCESS, {});
+export const verifyUserKeyError = (error) =>
+  actionBuilder(VERIFY_USER_KEY_ERROR, { error });
 
 export const clearErrors = () => actionBuilder(CLEAR_ERRORS, {});
