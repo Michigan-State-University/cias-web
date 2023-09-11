@@ -48,6 +48,8 @@ import {
   TERMS_ACCEPT_SUCCESS,
   TERMS_ACCEPT_ERROR,
   CLEAR_ERRORS,
+  VERIFY_USER_KEY_REQUEST,
+  VERIFY_USER_KEY_SUCCESS,
 } from './constants';
 
 export const logIn = (user) => actionBuilder(LOG_IN_USER, { user });
@@ -158,5 +160,10 @@ export const termsAcceptRequest = (fields, onSuccess) =>
 export const termsAcceptSuccess = () => actionBuilder(TERMS_ACCEPT_SUCCESS, {});
 export const termsAcceptError = (error) =>
   actionBuilder(TERMS_ACCEPT_ERROR, { error });
+
+export const verifyUserKeyRequest = (userKey) =>
+  actionBuilder(VERIFY_USER_KEY_REQUEST, { userKey });
+export const verifyUserKeySuccess = () =>
+  actionBuilder(VERIFY_USER_KEY_SUCCESS, {});
 
 export const clearErrors = () => actionBuilder(CLEAR_ERRORS, {});

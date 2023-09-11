@@ -49,10 +49,12 @@ import {
   TERMS_ACCEPT_SUCCESS,
   TERMS_ACCEPT_ERROR,
   CLEAR_ERRORS,
+  VERIFY_USER_KEY_SUCCESS,
 } from './constants';
 
 export const initialState = {
   user: null,
+  isPredefinedUser: false,
   phoneNumberPreview: null,
   verificationCodeNeeded: false,
   termsNotAccepted: false,
@@ -326,5 +328,10 @@ export const authReducer = (state = initialState, { type, payload }) =>
         draft.termsNotAccepted = false;
         draft.termsNotAcceptedExtraFields = null;
         break;
+
+      case VERIFY_USER_KEY_SUCCESS: {
+        draft.isPredefinedUser = true;
+        break;
+      }
     }
   });
