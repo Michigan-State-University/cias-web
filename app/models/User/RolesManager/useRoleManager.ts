@@ -44,7 +44,11 @@ const ALLOWED_NOTIFICATIONS_DISPLAY = [
   Roles.Admin,
 ];
 
-const ALLOWED_QUICK_EXIT_USE = [Roles.Participant, Roles.Guest];
+const ALLOWED_QUICK_EXIT_USE = [
+  Roles.Participant,
+  Roles.Guest,
+  Roles.PredefinedParticipant,
+];
 
 const REQUIRED_NAVIGATOR_AVAILABILITY_SET = [Roles.Admin, Roles.Researcher];
 

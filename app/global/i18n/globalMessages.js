@@ -91,6 +91,10 @@ export default defineMessages({
       id: `${scope}.${Roles.OrganizationAdmin}`,
       defaultMessage: 'Organization Admin',
     },
+    [Roles.PredefinedParticipant]: {
+      id: `${scope}.${Roles.PredefinedParticipant}`,
+      defaultMessage: 'Predefined Participant',
+    },
   },
   variables: {
     variableNamePlaceholder: {
