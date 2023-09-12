@@ -164,8 +164,8 @@ export const termsAcceptError = (error) =>
 
 export const verifyUserKeyRequest = (userKey) =>
   actionBuilder(VERIFY_USER_KEY_REQUEST, { userKey });
-export const verifyUserKeySuccess = () =>
-  actionBuilder(VERIFY_USER_KEY_SUCCESS, {});
+export const verifyUserKeySuccess = (user) =>
+  actionBuilder(VERIFY_USER_KEY_SUCCESS, { user });
 export const verifyUserKeyError = (error) =>
   actionBuilder(VERIFY_USER_KEY_ERROR, { error });
 
