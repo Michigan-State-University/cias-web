@@ -122,6 +122,9 @@ describe('axios response test', () => {
         statusText: 'UnprocessableEntity',
       },
       headers,
+      config: {
+        url: 'test',
+      },
     };
 
     await axios.interceptors.response.handlers[0]
