@@ -170,6 +170,8 @@ export function App({ user, fetchSelfDetails }) {
         return <ClinicAdminRedirectPage />;
       if (arraysOverlap(user.roles, [Roles.Navigator]))
         return <Redirect to={{ pathname: RoutePath.INBOX, search }} />;
+      if (arraysOverlap(user.roles, [Roles.PredefinedParticipant]))
+        return <Redirect to={{ pathname: RoutePath.LOGOUT }} />;
 
       return NotFoundPage;
     }
@@ -210,7 +212,10 @@ export function App({ user, fetchSelfDetails }) {
           path={RoutePath.DASHBOARD}
           render={() => renderDashboardByRole()}
           protectedRoute
-          allowedRoles={PasswordAuthenticatedRoles}
+          allowedRoles={[
+            ...PasswordAuthenticatedRoles,
+            Roles.PredefinedParticipant,
+          ]}
           navbarProps={{
             navbarId: NAVIGATION.DEFAULT,
             activeTab: interventionsTabId,
