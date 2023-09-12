@@ -542,7 +542,7 @@ const ReportTemplateMainSettings = ({
                                 }
                                 onCheck={onCoverLetterDescriptionChange}
                                 placeholder={formatMessage(
-                                  globalMessages.enterTextHere,
+                                  globalMessages.enterTextHereRichText,
                                 )}
                                 autoSize
                               />
