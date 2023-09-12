@@ -25,7 +25,7 @@ import {
   navbarMessages,
   NAVIGATION,
   navbarNames,
-  AllRoles,
+  PasswordAuthenticatedRoles,
 } from 'models/User/RolesManager';
 import RolesManagerContext from 'models/User/RolesManager/RolesManagerContext';
 import rootSaga from 'global/sagas/rootSaga';
@@ -91,7 +91,10 @@ import {
 import { arraysOverlap } from 'utils/arrayUtils';
 
 import { MODAL_PORTAL_ID, TOOLTIP_PORTAL_ID } from './constants';
-import { shouldFetchSelfDetailsOnPath } from './utils';
+import {
+  shouldFetchSelfDetailsOnPath,
+  shouldFetchSelfDetailsByUserRoles,
+} from './utils';
 
 export function App({ user, fetchSelfDetails }) {
   const { locale, formatMessage } = useIntl();
@@ -100,7 +103,11 @@ export function App({ user, fetchSelfDetails }) {
   useInjectSaga({ key: 'fetchSelfDetails', saga: fetchSelfDetailsSaga });
 
   useEffect(() => {
-    if (user && shouldFetchSelfDetailsOnPath(pathname)) {
+    if (
+      user &&
+      shouldFetchSelfDetailsOnPath(pathname) &&
+      shouldFetchSelfDetailsByUserRoles(user.roles)
+    ) {
       fetchSelfDetails();
     }
   }, []);
@@ -163,6 +170,8 @@ export function App({ user, fetchSelfDetails }) {
         return <ClinicAdminRedirectPage />;
       if (arraysOverlap(user.roles, [Roles.Navigator]))
         return <Redirect to={{ pathname: RoutePath.INBOX, search }} />;
+      if (arraysOverlap(user.roles, [Roles.PredefinedParticipant]))
+        return <Redirect to={{ pathname: RoutePath.LOGOUT }} />;
 
       return NotFoundPage;
     }
@@ -203,7 +212,10 @@ export function App({ user, fetchSelfDetails }) {
           path={RoutePath.DASHBOARD}
           render={() => renderDashboardByRole()}
           protectedRoute
-          allowedRoles={AllRoles}
+          allowedRoles={[
+            ...PasswordAuthenticatedRoles,
+            Roles.PredefinedParticipant,
+          ]}
           navbarProps={{
             navbarId: NAVIGATION.DEFAULT,
             activeTab: interventionsTabId,
@@ -343,7 +355,7 @@ export function App({ user, fetchSelfDetails }) {
           exact
           path={RoutePath.ANSWER_SESSION}
           component={AnswerSessionPage}
-          allowedRoles={AllRoles}
+          allowedRoles={PasswordAuthenticatedRoles}
           user
           navbarProps={{
             navbarId: NAVIGATION.DEFAULT,
@@ -405,7 +417,7 @@ export function App({ user, fetchSelfDetails }) {
           path={RoutePath.USER_INTERVENTION}
           component={UserInterventionPage}
           protectedRoute
-          allowedRoles={[Roles.Participant]}
+          allowedRoles={[Roles.Participant, Roles.PredefinedParticipant]}
         />
         <AppRoute
           exact
@@ -502,7 +514,7 @@ export function App({ user, fetchSelfDetails }) {
           path={RoutePath.ACCOUNT_SETTINGS}
           component={AccountSettings}
           protectedRoute
-          allowedRoles={AllRoles}
+          allowedRoles={PasswordAuthenticatedRoles}
           navbarProps={{
             navbarId: NAVIGATION.DEFAULT,
             activeTab: null,
@@ -547,7 +559,7 @@ export function App({ user, fetchSelfDetails }) {
           exact
           path={RoutePath.FORBIDDEN}
           component={ForbiddenPage}
-          allowedRoles={AllRoles}
+          allowedRoles={PasswordAuthenticatedRoles}
         />
         <AppRoute
           exact

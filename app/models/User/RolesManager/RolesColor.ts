@@ -7,6 +7,7 @@ export const RolesColors: Record<Roles, string> = {
   [Roles.Admin]: colors.buddhaGold,
   [Roles.TeamAdmin]: colors.navyBlue,
   [Roles.Guest]: colors.azure,
+  [Roles.PredefinedParticipant]: colors.jungleGreenLighter,
   [Roles.ThirdParty]: colors.olive,
   [Roles.EInterventionAdmin]: colors.jungleGreen,
   [Roles.OrganizationAdmin]: colors.azure,

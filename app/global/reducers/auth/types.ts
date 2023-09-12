@@ -1,7 +1,12 @@
+import { UserResponse } from 'models/User';
+
 export type VerifyUserKeyResponse = {
-  userInterventionId: string;
-  interventionId: string;
-  sessionId: Nullable<string>;
-  healthClinicId: Nullable<string>;
-  multipleFillSessionAvailable: boolean;
+  redirectData: {
+    userInterventionId: string;
+    interventionId: string;
+    sessionId: Nullable<string>;
+    healthClinicId: Nullable<string>;
+    multipleFillSessionAvailable: boolean;
+  };
+  user: UserResponse;
 };

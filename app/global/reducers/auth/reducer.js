@@ -50,11 +50,12 @@ import {
   TERMS_ACCEPT_ERROR,
   CLEAR_ERRORS,
   VERIFY_USER_KEY_SUCCESS,
+  VERIFY_USER_KEY_REQUEST,
+  VERIFY_USER_KEY_ERROR,
 } from './constants';
 
 export const initialState = {
   user: null,
-  isPredefinedUser: false,
   phoneNumberPreview: null,
   verificationCodeNeeded: false,
   termsNotAccepted: false,
@@ -71,6 +72,7 @@ export const initialState = {
     changeEmailError: null,
     changePhoneNumberError: null,
     termsAcceptError: null,
+    verifyUserKeyError: null,
   },
   loaders: {
     loginLoading: false,
@@ -329,8 +331,19 @@ export const authReducer = (state = initialState, { type, payload }) =>
         draft.termsNotAcceptedExtraFields = null;
         break;
 
+      case VERIFY_USER_KEY_REQUEST: {
+        draft.errors.verifyUserKeyError = null;
+        break;
+      }
       case VERIFY_USER_KEY_SUCCESS: {
-        draft.isPredefinedUser = true;
+        const { user } = payload;
+        draft.user = user;
+        draft.cache.user = user;
+        break;
+      }
+      case VERIFY_USER_KEY_ERROR: {
+        const { error } = payload;
+        draft.errors.verifyUserKeyError = error;
         break;
       }
     }
