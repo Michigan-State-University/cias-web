@@ -33,9 +33,9 @@ const mockData = (): VerifyUserKeyResponse => {
     user: {
       id: 'f53117a2-b7d8-4cd3-acfc-f842e985fe48',
       email: 'participant@interventionauthoring.org',
-      fullName: 'participant Heraclitus',
-      firstName: 'participant',
-      lastName: 'Heraclitus',
+      fullName: '',
+      firstName: '',
+      lastName: '',
       description: '',
       smsNotification: true,
       timeZone: 'America/New_York',

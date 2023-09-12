@@ -65,6 +65,9 @@ export const useRoleManager = () => {
   const isHealthClinicAdmin = userRoles.includes(Roles.ClinicAdmin);
   const isHealthSystemAdmin = userRoles.includes(Roles.HealthSystemAdmin);
   const isNavigator = userRoles.includes(Roles.Navigator);
+  const isPredefinedParticipant = userRoles.includes(
+    Roles.PredefinedParticipant,
+  );
 
   const hasFullOrgAccess = arraysOverlap(userRoles, ALLOWED_FULL_ORG_ACCESS);
 
@@ -131,5 +134,6 @@ export const useRoleManager = () => {
     canUserDisplayLeftSidebar,
     canUserUseQuickExit,
     mustSetNavigatorAvailability,
+    isPredefinedParticipant,
   };
 };

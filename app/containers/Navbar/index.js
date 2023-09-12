@@ -4,7 +4,7 @@
  *
  */
 
-import React, { memo, useState, useRef } from 'react';
+import React, { memo, useState, useRef, useMemo } from 'react';
 import PropTypes from 'prop-types';
 import { connect, useDispatch } from 'react-redux';
 import { createStructuredSelector } from 'reselect';
@@ -36,7 +36,7 @@ import {
   NavbarContainer,
 } from './styled';
 import messages from './messages';
-import { navbarElements } from './dropdownContent';
+import { getUserNavbarElements } from './dropdownContent';
 import NotificationsPanel from './NotificationsPanel';
 
 import PreviewNavbar from './components/PreviewNavbar';
@@ -54,7 +54,7 @@ const renderNavbar = (navbarProps) => {
 };
 
 export function Navbar({
-  user: { firstName, lastName, avatar },
+  user: { firstName, lastName, avatar, roles },
   navbarProps,
   match,
   location,
@@ -74,6 +74,11 @@ export function Navbar({
     onResize: (_, height) => dispatch(saveNavbarHeight(height)),
   });
 
+  const userNavbarElements = useMemo(
+    () => getUserNavbarElements(roles),
+    [roles],
+  );
+
   return (
     <NavbarContainer ref={navbarRef}>
       <NavbarStyled>
@@ -92,24 +97,28 @@ export function Navbar({
             <div ref={dropdownRef}>
               {menuVisible && (
                 <DropDownContent>
-                  {navbarElements.map(({ url, messagesKey, icon }, index) => (
-                    <StyledRow
-                      key={index}
-                      onClick={() => setMenuVisible(false)}
-                    >
-                      <Link to={url}>
-                        <Row>
-                          <Img mr={13} src={icon} />
-                          <StyledComment>
-                            <FormattedMessage
-                              {...messages[messagesKey]}
-                              title={intl.formatMessage(messages[messagesKey])}
-                            />
-                          </StyledComment>
-                        </Row>
-                      </Link>
-                    </StyledRow>
-                  ))}
+                  {userNavbarElements.map(
+                    ({ url, messagesKey, icon }, index) => (
+                      <StyledRow
+                        key={index}
+                        onClick={() => setMenuVisible(false)}
+                      >
+                        <Link to={url}>
+                          <Row>
+                            <Img mr={13} src={icon} />
+                            <StyledComment>
+                              <FormattedMessage
+                                {...messages[messagesKey]}
+                                title={intl.formatMessage(
+                                  messages[messagesKey],
+                                )}
+                              />
+                            </StyledComment>
+                          </Row>
+                        </Link>
+                      </StyledRow>
+                    ),
+                  )}
                 </DropDownContent>
               )}
             </div>

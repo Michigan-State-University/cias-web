@@ -19,6 +19,7 @@ import { Session } from 'models/Session/Session';
 import { UserSession } from 'models/UserSession/UserSession';
 import { InterventionType } from 'models/Intervention';
 import { AppFile } from 'models/File';
+import { useRoleManager } from 'models/User/RolesManager';
 
 import {
   ChatWidgetReducer,
@@ -53,6 +54,7 @@ interface Params {
 
 const UserInterventionPage = () => {
   const { userInterventionId } = useParams<Params>();
+  const { isPredefinedParticipant } = useRoleManager();
 
   const globalDispatch = useDispatch();
 
@@ -127,6 +129,8 @@ const UserInterventionPage = () => {
 
   const filesCount = files?.length || 0;
 
+  const showBackButton = !isPredefinedParticipant;
+
   return (
     // @ts-ignore
     <AppContainer mb={30}>
@@ -174,9 +178,11 @@ const UserInterventionPage = () => {
           </Row>
         </>
       )}
-      <BackButton link to={RoutePath.DASHBOARD}>
-        {formatMessage(messages.backToInterventions)}
-      </BackButton>
+      {showBackButton && (
+        <BackButton link to={RoutePath.DASHBOARD}>
+          {formatMessage(messages.backToInterventions)}
+        </BackButton>
+      )}
     </AppContainer>
   );
 };
