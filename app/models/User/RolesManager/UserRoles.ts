@@ -13,7 +13,7 @@ export enum Roles {
   PredefinedParticipant = 'predefined_participant',
 }
 
-export const AllRoles = [
+export const PasswordAuthenticatedRoles = [
   Roles.Admin,
   Roles.Researcher,
   Roles.Participant,
