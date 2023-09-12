@@ -1,4 +1,4 @@
-import { User } from 'models/User';
+import { UserResponse } from 'models/User';
 
 export type VerifyUserKeyResponse = {
   redirectData: {
@@ -8,5 +8,5 @@ export type VerifyUserKeyResponse = {
     healthClinicId: Nullable<string>;
     multipleFillSessionAvailable: boolean;
   };
-  user: User;
+  user: UserResponse;
 };

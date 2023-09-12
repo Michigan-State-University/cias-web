@@ -21,14 +21,18 @@ export interface User {
   quickExitEnabled: boolean;
   timeZone: string;
   description: string;
-  avatarUrl: Nullable<string>;
+  avatar: Nullable<string>;
   adminsTeamIds: string[];
   organizableId: Nullable<string>;
   healthClinicsIds: Nullable<string[]>;
 }
 
+export type UserResponse = Omit<User, 'avatar'> & {
+  avatarUrl: Nullable<string>;
+};
+
 export type SimpleUser = Pick<
-  User,
+  UserResponse,
   'avatarUrl' | 'firstName' | 'id' | 'lastName' | 'email'
 >;
 

@@ -1,12 +1,10 @@
-import { put, takeEvery, call } from '@redux-saga/core/effects';
+import { call, put, takeEvery } from '@redux-saga/core/effects';
 import { replace } from 'connected-react-router';
-import axios from 'axios';
 
 import { Roles } from 'models/User/RolesManager';
 
 import objectToSnakeCase from 'utils/objectToSnakeCase';
 import { parametrizeRoutePath } from 'utils/router';
-import objectToCamelCase from 'utils/objectToCamelCase';
 import { mapPlainUserData } from 'utils/mapResponseObjects';
 import LocalStorageService from 'utils/localStorageService';
 
@@ -25,25 +23,24 @@ import { VerifyUserKeyResponse } from '../types';
 const mockData = (): VerifyUserKeyResponse => {
   return {
     redirectData: {
-      userInterventionId: '029606df-ab1e-4f73-8a4c-79ad11f7b6ce',
-      interventionId: '029606df-ab1e-4f73-8a4c-79ad11f7b6ce',
+      userInterventionId: '9f3ba52d-2b8d-4ff8-9579-b4b02d5d59e9',
+      interventionId: 'e0c37422-551e-46c2-bcbd-b7301a234250',
       // sessionId: '513edd15-3f96-45de-90d6-ce7b25f79b20',
       sessionId: null,
       healthClinicId: null,
       multipleFillSessionAvailable: true,
     },
     user: {
-      id: '7b9ab9fc-7086-4e0b-825c-fca7aab4d0d6',
-      email: 'admin@interventionauthoring.org',
-      fullName: 'admin Aristotle',
-      firstName: 'admin',
-      lastName: 'Aristotle',
+      id: 'f53117a2-b7d8-4cd3-acfc-f842e985fe48',
+      email: 'participant@interventionauthoring.org',
+      fullName: 'participant Heraclitus',
+      firstName: 'participant',
+      lastName: 'Heraclitus',
       description: '',
       smsNotification: true,
       timeZone: 'America/New_York',
       active: true,
       roles: [Roles.PredefinedParticipant],
-      avatarUrl: null,
       phone: null,
       teamId: null,
       adminsTeamIds: [],
@@ -53,6 +50,7 @@ const mockData = (): VerifyUserKeyResponse => {
       quickExitEnabled: false,
       teamName: null,
       healthClinicsIds: null,
+      avatarUrl: null,
     },
   };
 };
