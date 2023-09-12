@@ -336,6 +336,9 @@ export const authReducer = (state = initialState, { type, payload }) =>
         break;
       }
       case VERIFY_USER_KEY_SUCCESS: {
+        const { user } = payload;
+        draft.user = user;
+        draft.cache.user = user;
         break;
       }
       case VERIFY_USER_KEY_ERROR: {

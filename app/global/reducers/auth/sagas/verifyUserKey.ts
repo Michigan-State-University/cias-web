@@ -7,6 +7,8 @@ import { Roles } from 'models/User/RolesManager';
 import objectToSnakeCase from 'utils/objectToSnakeCase';
 import { parametrizeRoutePath } from 'utils/router';
 import objectToCamelCase from 'utils/objectToCamelCase';
+import { mapCurrentUser } from 'utils/mapResponseObjects';
+import LocalStorageService from 'utils/localStorageService';
 
 import { RoutePath } from 'global/constants';
 import { WithSaga } from 'global/reducers/types';
@@ -66,7 +68,10 @@ function* verifyUserKeyWorker({
     // const { redirectData, user }: VerifyUserKeyResponse =
     //   objectToCamelCase(data);
     // TODO replace below mock with the above response data
-    const { redirectData } = mockData();
+    const { redirectData, user } = mockData();
+
+    const mappedUser = mapCurrentUser(user);
+    yield call(LocalStorageService.setState, { user: mappedUser });
 
     yield put(verifyUserKeySuccess());
 

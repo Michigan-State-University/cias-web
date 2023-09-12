@@ -405,7 +405,7 @@ export function App({ user, fetchSelfDetails }) {
           path={RoutePath.USER_INTERVENTION}
           component={UserInterventionPage}
           protectedRoute
-          allowedRoles={[Roles.Participant]}
+          allowedRoles={[Roles.Participant, Roles.PredefinedParticipant]}
         />
         <AppRoute
           exact
