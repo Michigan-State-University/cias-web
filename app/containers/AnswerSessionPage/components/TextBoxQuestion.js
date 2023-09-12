@@ -18,7 +18,7 @@ const TextBoxQuestion = ({
 
   const onChange = (event) => {
     const { value } = event.target;
-    if (!value) {
+    if (!value.trim()) {
       selectAnswer(null);
       return;
     }
