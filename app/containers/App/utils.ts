@@ -2,6 +2,8 @@ import { matchPath } from 'react-router';
 
 import { PasswordAuthenticatedRoles, Roles } from 'models/User/RolesManager';
 
+import { arraysOverlap } from 'utils/arrayUtils';
+
 import { ALL_ROUTE_PATHS, RoutePath } from 'global/constants';
 
 import { OMIT_FETCH_SELF_DETAILS_PATHS } from './constants';
@@ -14,4 +16,4 @@ export const shouldFetchSelfDetailsOnPath = (pathname: string) => {
 };
 
 export const shouldFetchSelfDetailsByUserRoles = (userRoles: Roles[]) =>
-  userRoles.some((role) => PasswordAuthenticatedRoles.includes(role));
+  arraysOverlap(userRoles, PasswordAuthenticatedRoles);
