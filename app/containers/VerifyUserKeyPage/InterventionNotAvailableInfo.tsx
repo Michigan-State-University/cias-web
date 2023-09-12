@@ -10,7 +10,7 @@ import Column from 'components/Column';
 
 import messages from './messages';
 
-export const StudyNotAvailableInfo = () => {
+export const InterventionNotAvailableInfo = () => {
   const { formatMessage } = useIntl();
 
   return (

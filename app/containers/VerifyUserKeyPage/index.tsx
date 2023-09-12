@@ -18,7 +18,7 @@ import Loader from 'components/Loader';
 
 import ForbiddenPage from 'containers/ForbiddenPage';
 
-import { StudyNotAvailableInfo } from './StudyNotAvailableInfo';
+import { InterventionNotAvailableInfo } from './InterventionNotAvailableInfo';
 
 const VerifyUserKeyPage = () => {
   const dispatch = useDispatch();
@@ -49,7 +49,7 @@ const VerifyUserKeyPage = () => {
         return <ForbiddenPage />;
       }
       case HttpStatusCodes.FORBIDDEN: {
-        return <StudyNotAvailableInfo />;
+        return <InterventionNotAvailableInfo />;
       }
       default: {
         redirectToNotFoundPage();
