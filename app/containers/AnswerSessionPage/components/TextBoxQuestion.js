@@ -17,10 +17,15 @@ const TextBoxQuestion = ({
   } = question;
 
   const onChange = (event) => {
+    const { value } = event.target;
+    if (!value) {
+      selectAnswer(null);
+      return;
+    }
     selectAnswer([
       {
         var: name,
-        value: event.target.value,
+        value,
       },
     ]);
   };
