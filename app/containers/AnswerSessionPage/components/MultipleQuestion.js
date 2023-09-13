@@ -28,7 +28,7 @@ const MultipleQuestion = ({ question, answerBody, selectAnswer, isMobile }) => {
         selectedAnswersIndex.filter((item) => item !== index),
       );
       selectAnswer(
-        answerBody.filter((item) => item.value !== selectedAnswer.value),
+        answerBody.filter((item) => item.var !== selectedAnswer.var),
       );
     } else {
       setSelectedAnswersIndex([...selectedAnswersIndex, index]);
