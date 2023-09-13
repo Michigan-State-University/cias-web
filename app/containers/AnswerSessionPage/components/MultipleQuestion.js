@@ -28,6 +28,8 @@ const MultipleQuestion = ({ question, answerBody, selectAnswer, isMobile }) => {
         selectedAnswersIndex.filter((item) => item !== index),
       );
       selectAnswer(
+        // if unchecked answer has empty variable name, it will uncheck all answers without variable name
+        // but these answers wouldn't be considered in formulas anyway (because they don't have any variable assigned)
         answerBody.filter((item) => item.var !== selectedAnswer.var),
       );
     } else {
