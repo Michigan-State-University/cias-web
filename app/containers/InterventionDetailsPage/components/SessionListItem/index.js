@@ -16,9 +16,7 @@ import Dropdown from 'components/Dropdown';
 import Divider from 'components/Divider';
 import StyledLink from 'components/StyledLink';
 import Text from 'components/Text';
-import Tooltip from 'components/Tooltip';
 import H2 from 'components/H2';
-import Img from 'components/Img';
 import Box from 'components/Box';
 import { VIEWS } from 'components/CopyModal/Components';
 import CopyModal from 'components/CopyModal';
@@ -39,8 +37,6 @@ import { parametrizeRoutePath } from 'utils/router';
 import duplicateInternally from 'assets/svg/duplicate-internally.svg';
 import copy from 'assets/svg/copy.svg';
 import bin from 'assets/svg/bin-no-bg.svg';
-import mail from 'assets/svg/pink-mail.svg';
-import mailDisabled from 'assets/svg/pink-mail-disabled.svg';
 import { colors, themeColors } from 'theme';
 
 import { InterventionType } from 'models/Intervention';
@@ -56,13 +52,10 @@ function SessionListItem({
   session,
   index,
   isSelected,
-  handleInviteParticipantsClick,
   intl: { formatMessage },
   nextSessionName,
   handleCopySession,
   disabled,
-  sharingPossible,
-  status,
   deletionPossible,
   handleDeleteSession,
   handleExternalCopySession,
@@ -72,8 +65,6 @@ function SessionListItem({
   hfhsAccess,
 }) {
   const history = useHistory();
-
-  const isModuleIntervention = interventionType !== InterventionType.DEFAULT;
 
   const [isHovered, setIsHovered] = useState(false);
   const [copyOpen, setCopyOpen] = useState(false);
@@ -203,7 +194,7 @@ function SessionListItem({
             role="group"
             aria-label={formatMessage(messages.wcagDescription, { name })}
           >
-            <Row py={21} px={16} align="center" justify="between">
+            <Row py={21} pl={16} pr={62} align="center" justify="between">
               <HenryFordBranchingInfoModal />
               <CopyModal
                 visible={copyOpen}
@@ -256,46 +247,9 @@ function SessionListItem({
                   </Column>
                 </StyledLink>
               </StyledRow>
-              <Row width="40%" xs={1} align="center" justify="around">
-                <Tooltip
-                  id={`tooltip-${id}`}
-                  visible={!sharingPossible}
-                  content={formatMessage(
-                    messages[`tooltip-${status}`] ?? messages.tooltip,
-                  )}
-                >
-                  {!isModuleIntervention && (
-                    <Row
-                      justify="end"
-                      disabled={!sharingPossible}
-                      onClick={handleInviteParticipantsClick}
-                      minWidth={110}
-                    >
-                      <Text
-                        fontSize={13}
-                        clickable
-                        disabled={!sharingPossible}
-                        textAlign="center"
-                        fontWeight="bold"
-                        color={themeColors.secondary}
-                        mr={5}
-                      >
-                        {formatMessage(messages.inviteLabel)}
-                      </Text>
-                      <Img
-                        clickable
-                        disabled={!sharingPossible}
-                        src={sharingPossible ? mail : mailDisabled}
-                        alt="emails"
-                        data-cy={`share-session-modal-open-button-${index}`}
-                      />
-                    </Row>
-                  )}
-                </Tooltip>
-                <Box mb={8}>
-                  <Dropdown options={options} clickable id={id} />
-                </Box>
-              </Row>
+              <Box mb={8}>
+                <Dropdown options={options} clickable id={id} />
+              </Box>
             </Row>
 
             <Row px={62} mb={20}>
@@ -355,16 +309,13 @@ SessionListItem.propTypes = {
   session: PropTypes.object.isRequired,
   index: PropTypes.number.isRequired,
   isSelected: PropTypes.bool,
-  handleInviteParticipantsClick: PropTypes.func,
   nextSessionName: PropTypes.string,
   intl: PropTypes.object,
   handleCopySession: PropTypes.func,
   disabled: PropTypes.bool,
-  sharingPossible: PropTypes.bool,
   deletionPossible: PropTypes.bool,
   handleDeleteSession: PropTypes.func,
   handleExternalCopySession: PropTypes.func,
-  status: PropTypes.string,
   sharedTo: PropTypes.string,
   editSession: PropTypes.func,
   interventionType: PropTypes.string,

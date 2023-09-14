@@ -51,8 +51,6 @@ import {
   copySessionRequest,
   createSessionRequest,
   makeSelectCurrentSessionIndex,
-  changeCurrentSession,
-  fetchSessionEmailsRequest,
   deleteSessionRequest,
   externalCopySessionRequest,
   makeSelectInterventionError,
@@ -131,13 +129,11 @@ export function InterventionDetailsPage({
   fetchInterventionError,
   createSessionError,
   sessionIndex,
-  changeSessionIndex,
   sendCsv,
   copySession,
   reorderSessions,
   copyIntervention,
   fetchQuestions,
-  fetchSessionEmails,
   deleteSession,
   externalCopySession,
   user: { organizableId: userOrganizableId },
@@ -476,14 +472,6 @@ export function InterventionDetailsPage({
             >
               {sortedSessions &&
                 sortedSessions.map((session, index) => {
-                  const handleInviteParticipantsClick = () => {
-                    fetchSessionEmails(index);
-                    if (index !== sessionIndex) {
-                      fetchQuestions(session.id);
-                      changeSessionIndex(index);
-                    }
-                    setParticipantShareModalVisible(true);
-                  };
                   const nextSession = sortedSessions.find(
                     ({ position }) => position > session.position,
                   );
@@ -491,15 +479,11 @@ export function InterventionDetailsPage({
                     <Row key={session.id}>
                       <SessionListItem
                         disabled={!editingPossible}
-                        sharingPossible={sharingPossible}
                         deletionPossible={editingPossible}
                         sharedTo={sharedTo}
                         session={session}
                         index={index}
                         isSelected={index === sessionIndex}
-                        handleInviteParticipantsClick={
-                          handleInviteParticipantsClick
-                        }
                         handleCopySession={handleCopySession}
                         handleExternalCopySession={handleExternalCopySession}
                         handleDeleteSession={(sessionId) =>
@@ -507,7 +491,6 @@ export function InterventionDetailsPage({
                         }
                         editSession={editSession}
                         nextSessionName={nextSession ? nextSession.name : null}
-                        status={status}
                         interventionType={type}
                         hfhsAccess={hfhsAccess}
                       />
@@ -679,13 +662,11 @@ InterventionDetailsPage.propTypes = {
   createSessionLoading: PropTypes.bool,
   editIntervention: PropTypes.func,
   sessionIndex: PropTypes.number,
-  changeSessionIndex: PropTypes.func,
   sendCsv: PropTypes.func,
   copySession: PropTypes.func,
   reorderSessions: PropTypes.func,
   copyIntervention: PropTypes.func,
   fetchQuestions: PropTypes.func,
-  fetchSessionEmails: PropTypes.func,
   deleteSession: PropTypes.func,
   externalCopySession: PropTypes.func,
   editSession: PropTypes.func,
@@ -720,8 +701,6 @@ const mapDispatchToProps = {
   fetchQuestions: getQuestionsRequest,
   fetchIntervention: fetchInterventionRequest,
   editIntervention: editInterventionRequest,
-  changeSessionIndex: changeCurrentSession,
-  fetchSessionEmails: fetchSessionEmailsRequest,
   sendCsv: sendInterventionCsvRequest,
   copySession: copySessionRequest,
   reorderSessions: reorderSessionList,

@@ -64,6 +64,8 @@ const Header = ({
   const screenClass = useScreenClass();
   const { isAdmin } = useRoleManager();
 
+  // TODO remove
+  // eslint-disable-next-line no-unused-vars
   const isModuleIntervention = interventionType !== InterventionType.DEFAULT;
 
   const testsLeft = catMhPool - createdCatMhSessionCount;
@@ -120,22 +122,20 @@ const Header = ({
               maxWidth="none"
               autoComplete="off"
             />
-            {isModuleIntervention && (
-              <TextButton
-                onClick={openInterventionInviteModal}
-                buttonProps={{
-                  color: themeColors.secondary,
-                  minWidth: 180,
-                  display: 'flex',
-                  alignItems: 'center',
-                  justifyContent: 'center',
-                }}
-                disabled={!sharingPossible}
-              >
-                {formatMessage(messages.inviteToIntervention)}
-                <Icon ml={5} src={MailIcon} />
-              </TextButton>
-            )}
+            <TextButton
+              onClick={openInterventionInviteModal}
+              buttonProps={{
+                color: themeColors.secondary,
+                minWidth: 180,
+                display: 'flex',
+                alignItems: 'center',
+                justifyContent: 'center',
+              }}
+              disabled={!sharingPossible}
+            >
+              {formatMessage(messages.inviteToIntervention)}
+              <Icon ml={5} src={MailIcon} />
+            </TextButton>
           </Row>
           <Row align="center" mt={8} gap={12}>
             <Box>
