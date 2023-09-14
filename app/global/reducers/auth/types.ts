@@ -1,12 +1,17 @@
 import { UserResponse } from 'models/User';
+import { Data } from 'models/Api';
 
-export type VerifyUserKeyResponse = {
-  redirectData: {
-    userInterventionId: string;
-    interventionId: string;
-    sessionId: Nullable<string>;
-    healthClinicId: Nullable<string>;
-    multipleFillSessionAvailable: boolean;
-  };
-  user: UserResponse;
+import { CamelToSnake } from 'global/types/camelToSnake';
+
+export type RedirectData = {
+  userInterventionId: string;
+  interventionId: string;
+  sessionId: Nullable<string>;
+  healthClinicId: Nullable<string>;
+  multipleFillSessionAvailable: boolean;
+};
+
+export type VerifyUserKeyResponseDTO = {
+  redirect_data: CamelToSnake<RedirectData>;
+  user: Data<CamelToSnake<UserResponse>>;
 };
