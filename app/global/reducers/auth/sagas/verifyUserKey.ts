@@ -4,9 +4,9 @@ import axios from 'axios';
 
 import objectToSnakeCase from 'utils/objectToSnakeCase';
 import { parametrizeRoutePath } from 'utils/router';
-import { mapPlainUserData } from 'utils/mapResponseObjects';
 import LocalStorageService from 'utils/localStorageService';
 import objectToCamelCase from 'utils/objectToCamelCase';
+import { jsonApiToObject } from 'utils/jsonApiMapper';
 
 import { RoutePath } from 'global/constants';
 import { WithSaga } from 'global/reducers/types';
@@ -18,20 +18,20 @@ import {
   verifyUserKeyRequest,
   verifyUserKeySuccess,
 } from '../actions';
-import { VerifyUserKeyResponse } from '../types';
+import { VerifyUserKeyResponseDTO } from '../types';
 
 function* verifyUserKeyWorker({
   payload: { userKey },
 }: ReturnType<typeof verifyUserKeyRequest>) {
-  const requestUrl = `v1/verify_user_key`;
-  const requestBody = objectToSnakeCase({ userKey });
+  const requestUrl = `/v1/predefined_participants/verify`;
+  const requestBody = objectToSnakeCase({ slug: userKey });
 
   try {
     const { data } = yield call(axios.post, requestUrl, requestBody);
-    const { redirectData, user }: VerifyUserKeyResponse =
-      objectToCamelCase(data);
+    const { redirect_data: redirectData, user }: VerifyUserKeyResponseDTO =
+      data;
 
-    const mappedUser = mapPlainUserData(user);
+    const mappedUser = jsonApiToObject({ data: user }, 'user');
     yield call(LocalStorageService.setState, { user: mappedUser });
     yield put(verifyUserKeySuccess(mappedUser));
 
@@ -41,7 +41,7 @@ function* verifyUserKeyWorker({
       sessionId,
       healthClinicId,
       multipleFillSessionAvailable,
-    } = redirectData;
+    } = objectToCamelCase(redirectData);
 
     if (sessionId) {
       // redirect to answer session page

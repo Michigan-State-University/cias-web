@@ -1,6 +1,5 @@
 import pick from 'lodash/pick';
 import { jsonApiToObject } from './jsonApiMapper';
-import objectToCamelCase from './objectToCamelCase';
 
 export const mapQuestionToStateObject = (question) => ({
   ...question.attributes,
@@ -24,14 +23,6 @@ export const mapAccessToStateObject = ({ user_id: id, email }) => ({
 // Used for mapping JSON API response to state object
 export const mapCurrentUser = (data) => {
   const mappedUser = jsonApiToObject(data, 'user');
-  mappedUser.avatar = mappedUser?.avatarUrl;
-  delete mappedUser.avatarUrl;
-  return mappedUser;
-};
-
-// Used for mapping plain JSON response to state object
-export const mapPlainUserData = (data) => {
-  const mappedUser = objectToCamelCase(data);
   mappedUser.avatar = mappedUser?.avatarUrl;
   delete mappedUser.avatarUrl;
   return mappedUser;

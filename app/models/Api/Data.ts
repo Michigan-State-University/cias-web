@@ -1,4 +1,4 @@
-type Data<DTO> = {
+export type Data<DTO> = {
   attributes: Omit<DTO, 'id'>;
   id: string;
   type: string;
