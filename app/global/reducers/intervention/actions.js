@@ -136,8 +136,8 @@ export const editInterventionRequest = (intervention, extraOptions) =>
     extraOptions,
   });
 
-export const editInterventionSuccess = (updatedSessions) =>
-  actionBuilder(EDIT_INTERVENTION_SUCCESS, { updatedSessions });
+export const editInterventionSuccess = (interventionId, updatedSessions) =>
+  actionBuilder(EDIT_INTERVENTION_SUCCESS, { interventionId, updatedSessions });
 export const editInterventionError = (error) =>
   actionBuilder(EDIT_INTERVENTION_ERROR, { error });
 

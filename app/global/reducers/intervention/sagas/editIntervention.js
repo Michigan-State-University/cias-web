@@ -43,7 +43,7 @@ export function* editIntervention({ payload: { intervention, extraOptions } }) {
       );
     }
 
-    yield put(editInterventionSuccess(updatedSessions));
+    yield put(editInterventionSuccess(intervention.id, updatedSessions));
 
     if (extraOptions?.onSuccess) {
       extraOptions.onSuccess();
