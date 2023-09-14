@@ -382,7 +382,7 @@ const ReportTemplateMainSettings = ({
                         cursor={canEdit ? 'pointer' : 'initial'}
                       >
                         <Radio
-                          id={`report-for-toggle-${ReportFor.henryFordsHospital}`}
+                          id={`report-for-toggle-${ReportFor.henryFordHealth}`}
                           mr={10}
                           disabled={hfhRadioButtonDisabled}
                           checked={isReportForHenryFord}
@@ -542,8 +542,9 @@ const ReportTemplateMainSettings = ({
                                 }
                                 onCheck={onCoverLetterDescriptionChange}
                                 placeholder={formatMessage(
-                                  globalMessages.enterTextHere,
+                                  globalMessages.enterTextHereRichText,
                                 )}
+                                autoSize
                               />
                             </Box>
                           </Col>

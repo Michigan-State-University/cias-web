@@ -16,7 +16,6 @@ import FileShareIcon from 'assets/svg/file-share.svg';
 import CopyIcon from 'assets/svg/copy.svg';
 import AddAppIcon from 'assets/svg/app-add.svg';
 import TranslateIcon from 'assets/svg/translate.svg';
-import PadlockIcon from 'assets/svg/padlock.svg';
 import DownloadIcon from 'assets/svg/download-line.svg';
 import CollaborateIcon from 'assets/svg/collaborate-icon.svg';
 import ArchiveIcon from 'assets/svg/archive.svg';
@@ -53,7 +52,6 @@ import isNullOrUndefined from 'utils/isNullOrUndefined';
 import {
   InterventionAssignOrganizationModal,
   INTERVENTION_ASSIGN_ORGANIZATION_MODAL_WIDTH,
-  useThirdPartyToolsAccessModal,
 } from 'containers/InterventionDetailsPage/components/Modals';
 import { useCollaboratorsModal } from 'containers/CollaboratorsModal';
 
@@ -149,9 +147,6 @@ const InterventionTile = ({
       confirmAction: handleArchiveIntervention,
     },
   });
-
-  const { openThirdPartyToolsAccessModal, ThirdPartyToolsModal } =
-    useThirdPartyToolsAccessModal();
 
   const shareExternally = (emails, ids) =>
     copyIntervention({ interventionId: id, emails, ids });
@@ -287,17 +282,6 @@ const InterventionTile = ({
           },
         ]
       : []),
-    ...(isAdmin
-      ? [
-          {
-            icon: PadlockIcon,
-            action: () => openThirdPartyToolsAccessModal(tileData),
-            label: formatMessage(messages.thirdPartyToolsAccessModalTitle),
-            id: 'thirdPartyToolsAccess',
-            disabled: hasCollaborators,
-          },
-        ]
-      : []),
     {
       id: 'export',
       label: formatMessage(messages.exportIntervention),
@@ -334,7 +318,6 @@ const InterventionTile = ({
 
   return (
     <>
-      <ThirdPartyToolsModal />
       <ArchiveModal />
       <HenryFordBranchingInfoModal />
       <ShareExternallyModal />

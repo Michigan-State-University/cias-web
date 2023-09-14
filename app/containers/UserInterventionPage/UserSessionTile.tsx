@@ -34,6 +34,7 @@ interface Props {
   interventionType: InterventionType;
   interventionId: string;
   userSession?: Nullable<UserSession>;
+  healthClinicId: Nullable<string>;
 }
 
 const UserSessionTile = ({
@@ -50,13 +51,20 @@ const UserSessionTile = ({
   interventionType,
   interventionId,
   userSession,
+  healthClinicId,
 }: Props) => {
   const { formatMessage } = useIntl();
   const history = useHistory();
-  const sessionUrl = parametrizeRoutePath(RoutePath.ANSWER_SESSION, {
-    interventionId,
-    sessionId: id,
-  });
+  const sessionUrl = useMemo(() => {
+    let path = parametrizeRoutePath(RoutePath.ANSWER_SESSION, {
+      interventionId,
+      sessionId: id,
+    });
+    if (healthClinicId) {
+      path += `?cid=${healthClinicId}`;
+    }
+    return path;
+  }, [interventionId, id, healthClinicId]);
 
   const isFirstSession = position === 1;
 

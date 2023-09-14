@@ -514,6 +514,10 @@ export default defineMessages({
     id: `${scope}.enterTextHere`,
     defaultMessage: 'Enter text here',
   },
+  enterTextHereRichText: {
+    id: `${scope}.enterTextHereRichText`,
+    defaultMessage: 'Enter text here (rich text)',
+  },
   dataClearedInfo: {
     id: `${scope}.dataClearedInfo`,
     defaultMessage:

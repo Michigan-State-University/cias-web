@@ -125,6 +125,7 @@ const UserInterventionPage = () => {
       id,
       files,
     },
+    healthClinicId,
   } = userIntervention;
 
   const filesCount = files?.length || 0;
@@ -162,6 +163,7 @@ const UserInterventionPage = () => {
               session={session}
               interventionId={id}
               userSession={groupedUserSessions[session.id]?.[0]}
+              healthClinicId={healthClinicId}
             />
           </Col>
         ))}
