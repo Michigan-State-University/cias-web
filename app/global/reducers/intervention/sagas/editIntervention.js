@@ -1,12 +1,13 @@
 import axios from 'axios';
 import { put, call, takeEvery } from 'redux-saga/effects';
 import { toast } from 'react-toastify';
+import orderBy from 'lodash/orderBy';
 
 import globalMessages from 'global/i18n/globalMessages';
-import { defaultMapper } from 'utils/mapResponseObjects';
 import { formatMessage } from 'utils/intlOutsideReact';
 import objectToSnakeCase from 'utils/objectToSnakeCase';
 import getErrorFlag from 'utils/getErrorFlag';
+import { jsonApiToArray } from 'utils/jsonApiMapper';
 
 import { editInterventionError, editInterventionSuccess } from '../actions';
 import {
@@ -15,20 +16,35 @@ import {
   EDIT_INTERVENTION_SUCCESS,
 } from '../constants';
 
+function* refetchInterventionSessions(interventionId) {
+  const refetchSessionsRequestUrl = `v1/interventions/${interventionId}/sessions`;
+  try {
+    const { data } = yield call(axios.get, refetchSessionsRequestUrl);
+    const mappedSessions = jsonApiToArray(data, 'session');
+    return orderBy(mappedSessions, 'position');
+  } catch (e) {
+    return null;
+  }
+}
+
 export function* editIntervention({ payload: { intervention, extraOptions } }) {
   const requestURL = `v1/interventions/${intervention.id}`;
 
   try {
-    const {
-      data: { data },
-    } = yield call(
-      axios.patch,
-      requestURL,
-      objectToSnakeCase({ intervention }),
-    );
+    yield call(axios.patch, requestURL, objectToSnakeCase({ intervention }));
 
-    const mappedData = defaultMapper(data);
-    yield put(editInterventionSuccess({ ...intervention, ...mappedData }));
+    let updatedSessions = null;
+
+    const isModifyingAccess = 'sharedTo' in intervention;
+    if (isModifyingAccess) {
+      updatedSessions = yield call(
+        refetchInterventionSessions,
+        intervention.id,
+      );
+    }
+
+    yield put(editInterventionSuccess(intervention.id, updatedSessions));
+
     if (extraOptions?.onSuccess) {
       extraOptions.onSuccess();
     }

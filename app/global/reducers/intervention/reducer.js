@@ -242,7 +242,11 @@ export const interventionReducer = (state = initialState, action) =>
         break;
       case EDIT_INTERVENTION_SUCCESS: {
         draft.loaders.editIntervention = false;
-        draft.cache.intervention = cloneDeep(state.intervention);
+        const { interventionId, updatedSessions } = action.payload;
+        if (updatedSessions && draft.intervention.id === interventionId) {
+          draft.intervention.sessions = updatedSessions;
+        }
+        draft.cache.intervention = cloneDeep(draft.intervention);
         break;
       }
       case EDIT_INTERVENTION_ERROR:
