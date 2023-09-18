@@ -30,11 +30,7 @@ import CollaborateIcon from 'assets/svg/collaborate-icon.svg';
 
 import isNullOrUndefined from 'utils/isNullOrUndefined';
 import { reorder } from 'utils/reorder';
-import {
-  canArchive,
-  canEdit,
-  canShareWithParticipants,
-} from 'models/Status/statusPermissions';
+import { canArchive, canEdit } from 'models/Status/statusPermissions';
 import { useRoleManager } from 'models/User/RolesManager';
 import { reorderScope } from 'models/Session/ReorderScope';
 import { archived } from 'models/Status/StatusTypes';
@@ -77,7 +73,6 @@ import {
 
 import SettingsPanel from 'containers/SettingsPanel';
 import TranslateInterventionModal from 'containers/TranslateInterventionModal/index';
-import { ShareBox, ShareBoxType } from 'containers/ShareBox';
 import { CollaborationPanel } from 'containers/CollaborationPanel';
 import {
   ShareExternallyLevel,
@@ -176,12 +171,9 @@ export function InterventionDetailsPage({
   } = intervention || {};
 
   const showSessionCreateButton = canEdit(status);
-  const sharingPossible = canShareWithParticipants(status);
   const archivingPossible = canCurrentUserMakeChanges && canArchive(status);
 
   const [translateModalVisible, setTranslateModalVisible] = useState(false);
-  const [participantShareModalVisible, setParticipantShareModalVisible] =
-    useState(false);
 
   const [
     interventionSettingsModalVisible,
@@ -223,22 +215,6 @@ export function InterventionDetailsPage({
 
   const { openThirdPartyToolsAccessModal, ThirdPartyToolsModal } =
     useThirdPartyToolsAccessModal();
-
-  const {
-    openModal: openInterventionInviteModal,
-    Modal: InterventionInviteModal,
-  } = useModal({
-    type: ModalType.Modal,
-    props: {
-      title: formatMessage(messages.participantShareModalTitle),
-    },
-    modalContentRenderer: () => (
-      <ShareBox
-        type={ShareBoxType.INTERVENTION}
-        organizationId={organizationId}
-      />
-    ),
-  });
 
   const shareExternally = (emails, ids) =>
     copyIntervention({ interventionId, emails, ids });
@@ -514,7 +490,6 @@ export function InterventionDetailsPage({
     <InterventionDetailsPageContext.Provider
       value={{
         canEdit: editingPossible,
-        canShareWithParticipants: sharingPossible,
         canArchive: archivingPossible,
       }}
     >
@@ -564,19 +539,6 @@ export function InterventionDetailsPage({
             </Modal>
 
             <Modal
-              title={formatMessage(messages.participantShareModalTitle)}
-              onClose={() => setParticipantShareModalVisible(false)}
-              visible={participantShareModalVisible}
-            >
-              <ShareBox
-                type={ShareBoxType.SESSION}
-                organizationId={organizationId}
-              />
-            </Modal>
-
-            <InterventionInviteModal />
-
-            <Modal
               title={formatMessage(messages.assignOrganization)}
               onClose={closeAssignOrganizationModal}
               visible={assignOrganizationModalVisible}
@@ -606,9 +568,7 @@ export function InterventionDetailsPage({
               status={status}
               organizationId={organizationId}
               canAccessCsv={canAccessParticipantsData}
-              openInterventionInviteModal={openInterventionInviteModal}
               interventionType={type}
-              sharingPossible={sharingPossible}
               userOrganizableId={userOrganizableId}
               hasCollaborators={hasCollaborators}
               sensitiveDataState={sensitiveDataState}

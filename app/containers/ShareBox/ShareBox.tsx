@@ -6,7 +6,7 @@ import { ShareBoxType } from './types';
 
 type Props = {
   type: ShareBoxType;
-  organizationId?: string;
+  organizationId: Nullable<string>;
 };
 
 const Component = ({ type, organizationId }: Props): JSX.Element => {

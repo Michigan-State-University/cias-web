@@ -29,7 +29,7 @@ import { EmailLoadingType, ShareBoxType } from './types';
 import OrganizationShareBox from './OrganizationShareBox';
 
 type Props = {
-  organizationId?: string;
+  organizationId: Nullable<string>;
 };
 
 const Component = ({ organizationId }: Props) => {

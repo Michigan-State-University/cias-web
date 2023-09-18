@@ -16,16 +16,12 @@ import { RoutePath } from 'global/constants';
 
 import { parametrizeRoutePath } from 'utils/router';
 
-import MailIcon from 'assets/svg/pink-mail.svg';
-
 import Row from 'components/Row';
 import BackButton from 'components/BackButton';
 import Box from 'components/Box';
 import Dropdown from 'components/Dropdown';
 import { StyledInput } from 'components/Input/StyledInput';
 import { selectInputText } from 'components/Input/utils';
-import { TextButton } from 'components/Button';
-import Icon from 'components/Icon';
 import { CollaboratingIndicator } from 'components/CollaboratingIndicator';
 import { DataClearedIndicator } from 'components/DataClearedIndicator';
 import { HelpIconTooltip } from 'components/HelpIconTooltip';
@@ -34,6 +30,7 @@ import InterventionStatusButtons from './components/InterventionStatusButtons';
 import { StatusLabel, InterventionOptions } from './styled';
 import messages from './messages';
 import { CAT_MH_TEST_COUNT_WARNING_THRESHOLD } from './constants';
+import { InviteParticipantsButton } from './containers/InviteParticipantsButton';
 
 const Header = ({
   status,
@@ -49,9 +46,7 @@ const Header = ({
   options,
   organizationId,
   canAccessCsv,
-  openInterventionInviteModal,
   interventionType,
-  sharingPossible,
   userOrganizableId,
   hasCollaborators,
   sensitiveDataState,
@@ -122,20 +117,10 @@ const Header = ({
               maxWidth="none"
               autoComplete="off"
             />
-            <TextButton
-              onClick={openInterventionInviteModal}
-              buttonProps={{
-                color: themeColors.secondary,
-                minWidth: 180,
-                display: 'flex',
-                alignItems: 'center',
-                justifyContent: 'center',
-              }}
-              disabled={!sharingPossible}
-            >
-              {formatMessage(messages.inviteToIntervention)}
-              <Icon ml={5} src={MailIcon} />
-            </TextButton>
+            <InviteParticipantsButton
+              organizationId={organizationId}
+              interventionStatus={status}
+            />
           </Row>
           <Row align="center" mt={8} gap={12}>
             <Box>
@@ -225,7 +210,6 @@ Header.propTypes = {
   organizationId: PropTypes.string,
   options: PropTypes.array,
   canAccessCsv: PropTypes.bool,
-  openInterventionInviteModal: PropTypes.func,
   interventionType: PropTypes.string,
   sharingPossible: PropTypes.bool,
   userOrganizableId: PropTypes.string,

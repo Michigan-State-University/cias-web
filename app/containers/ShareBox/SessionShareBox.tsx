@@ -25,7 +25,7 @@ import { EmailLoadingType, ShareBoxType } from './types';
 import { SessionIndex } from './styled';
 
 type Props = {
-  organizationId?: string;
+  organizationId: Nullable<string>;
 };
 
 export const Component = ({ organizationId }: Props): JSX.Element => {
