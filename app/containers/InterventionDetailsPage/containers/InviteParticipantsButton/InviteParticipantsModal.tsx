@@ -1,9 +1,9 @@
 import { FC } from 'react';
+import { useIntl } from 'react-intl';
 
 import Modal, { Props as ModalComponentProps } from 'components/Modal/Modal';
+import Column from 'components/Column';
 
-import { ShareBox, ShareBoxType } from 'containers/ShareBox';
-import { useIntl } from 'react-intl';
 import messages from './messages';
 import {
   INVITE_PARTICIPANTS_MODAL_HEIGHT,
@@ -14,11 +14,7 @@ export type Props = {
   organizationId: Nullable<string>;
 } & Pick<ModalComponentProps, 'visible' | 'onClose'>;
 
-export const InviteParticipantsModal: FC<Props> = ({
-  visible,
-  onClose,
-  organizationId,
-}) => {
+export const InviteParticipantsModal: FC<Props> = ({ visible, onClose }) => {
   const { formatMessage } = useIntl();
 
   return (
@@ -34,11 +30,12 @@ export const InviteParticipantsModal: FC<Props> = ({
       titleProps={{
         lineHeight: '36px',
       }}
+      stretchContent
+      contentContainerProps={{
+        mt: 20,
+      }}
     >
-      <ShareBox
-        type={ShareBoxType.INTERVENTION}
-        organizationId={organizationId}
-      />
+      <Column height="100%"></Column>
     </Modal>
   );
 };
