@@ -4,11 +4,7 @@ import { Row as GRow, Col as GCol, useScreenClass } from 'react-grid-system';
 import { FormattedMessage, IntlShape, useIntl } from 'react-intl';
 
 import { themeColors } from 'theme';
-import {
-  CatMhLicenseType,
-  InterventionType,
-  SensitiveDataState,
-} from 'models/Intervention';
+import { CatMhLicenseType, SensitiveDataState } from 'models/Intervention';
 import { useRoleManager } from 'models/User/RolesManager';
 
 import globalMessages from 'global/i18n/globalMessages';
@@ -58,10 +54,6 @@ const Header = ({
   const { formatMessage } = useIntl();
   const screenClass = useScreenClass();
   const { isAdmin } = useRoleManager();
-
-  // TODO remove
-  // eslint-disable-next-line no-unused-vars
-  const isModuleIntervention = interventionType !== InterventionType.DEFAULT;
 
   const testsLeft = catMhPool - createdCatMhSessionCount;
   const hasSmallNumberOfCatMhSessionsRemaining =
@@ -120,6 +112,7 @@ const Header = ({
             <InviteParticipantsButton
               organizationId={organizationId}
               interventionStatus={status}
+              interventionType={interventionType}
             />
           </Row>
           <Row align="center" mt={8} gap={12}>

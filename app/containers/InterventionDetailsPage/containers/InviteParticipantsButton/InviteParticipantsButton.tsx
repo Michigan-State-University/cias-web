@@ -5,7 +5,7 @@ import MailIcon from 'assets/svg/pink-mail.svg';
 
 import { themeColors } from 'theme';
 
-import { InterventionStatus } from 'models/Intervention';
+import { InterventionStatus, InterventionType } from 'models/Intervention';
 
 import { TextButton } from 'components/Button';
 import Icon from 'components/Icon';
@@ -16,9 +16,10 @@ import { InviteParticipantsModal } from './InviteParticipantsModal';
 export type Props = {
   organizationId: Nullable<string>;
   interventionStatus: InterventionStatus;
+  interventionType: InterventionType;
 };
 
-export const InviteParticipantsButton: FC<Props> = ({ organizationId }) => {
+export const InviteParticipantsButton: FC<Props> = ({ ...props }) => {
   const { formatMessage } = useIntl();
 
   const [modalVisible, setModalVisible] = useState(false);
@@ -28,20 +29,21 @@ export const InviteParticipantsButton: FC<Props> = ({ organizationId }) => {
       <InviteParticipantsModal
         visible={modalVisible}
         onClose={() => setModalVisible(false)}
-        organizationId={organizationId}
+        {...props}
       />
       <TextButton
         onClick={() => setModalVisible(true)}
         buttonProps={{
           color: themeColors.secondary,
-          minWidth: 180,
           display: 'flex',
           alignItems: 'center',
           justifyContent: 'center',
+          flexShrink: 0,
+          gap: 5,
         }}
       >
         {formatMessage(messages.inviteParticipantsButtonTitle)}
-        <Icon ml={5} src={MailIcon} />
+        <Icon src={MailIcon} />
       </TextButton>
     </>
   );
