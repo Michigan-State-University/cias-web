@@ -576,6 +576,7 @@ export function InterventionDetailsPage({
               catMhLicenseType={licenseType}
               catMhPool={catMhPool}
               createdCatMhSessionCount={createdCatMhSessionCount}
+              sessions={sortedSessions ?? []}
             />
 
             <GRow>

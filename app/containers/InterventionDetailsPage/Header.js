@@ -50,6 +50,7 @@ const Header = ({
   catMhLicenseType,
   catMhPool,
   createdCatMhSessionCount,
+  sessions,
 }) => {
   const { formatMessage } = useIntl();
   const screenClass = useScreenClass();
@@ -110,9 +111,11 @@ const Header = ({
               autoComplete="off"
             />
             <InviteParticipantsButton
+              interventionId={interventionId}
               organizationId={organizationId}
               interventionStatus={status}
               interventionType={interventionType}
+              sessions={sessions}
             />
           </Row>
           <Row align="center" mt={8} gap={12}>
@@ -212,6 +215,7 @@ Header.propTypes = {
   catMhLicenseType: PropTypes.string,
   catMhPool: PropTypes.number,
   createdCatMhSessionCount: PropTypes.number,
+  sessions: PropTypes.array,
 };
 
 export default Header;

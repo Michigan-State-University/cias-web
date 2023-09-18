@@ -1,21 +1,47 @@
-import { FC } from 'react';
+import { FC, useEffect, useState } from 'react';
 import { useIntl } from 'react-intl';
 
+import { InterventionStatus, InterventionType } from 'models/Intervention';
+import { Session } from 'models/Session';
+
 import Modal, { Props as ModalComponentProps } from 'components/Modal/Modal';
-import Column from 'components/Column';
 
 import messages from './messages';
 import {
   INVITE_PARTICIPANTS_MODAL_HEIGHT,
   INVITE_PARTICIPANTS_MODAL_WIDTH,
 } from './constants';
+import { InviteParticipantModalView } from './types';
+import { InviteParticipantsModalContent } from './InviteParticipantsModalContent';
 
 export type Props = {
+  interventionId: string;
   organizationId: Nullable<string>;
+  interventionStatus: InterventionStatus;
+  interventionType: InterventionType;
+  sessions: Session[];
 } & Pick<ModalComponentProps, 'visible' | 'onClose'>;
 
-export const InviteParticipantsModal: FC<Props> = ({ visible, onClose }) => {
+export const InviteParticipantsModal: FC<Props> = ({
+  visible,
+  onClose,
+  interventionId,
+  organizationId,
+  interventionType,
+  interventionStatus,
+  sessions,
+}) => {
   const { formatMessage } = useIntl();
+
+  const [currentView, setCurrentView] = useState<InviteParticipantModalView>(
+    InviteParticipantModalView.PARTICIPANT_LIST,
+  );
+
+  useEffect(() => {
+    if (!visible) {
+      setCurrentView(InviteParticipantModalView.PARTICIPANT_LIST);
+    }
+  }, [visible]);
 
   return (
     <Modal
@@ -33,9 +59,18 @@ export const InviteParticipantsModal: FC<Props> = ({ visible, onClose }) => {
       stretchContent
       contentContainerProps={{
         mt: 20,
+        display: 'flex',
+        direction: 'column',
       }}
     >
-      <Column height="100%"></Column>
+      <InviteParticipantsModalContent
+        currentView={currentView}
+        interventionId={interventionId}
+        organizationId={organizationId}
+        interventionType={interventionType}
+        interventionStatus={interventionStatus}
+        sessions={sessions}
+      />
     </Modal>
   );
 };

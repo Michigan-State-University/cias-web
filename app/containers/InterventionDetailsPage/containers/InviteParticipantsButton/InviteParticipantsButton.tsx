@@ -6,6 +6,7 @@ import MailIcon from 'assets/svg/pink-mail.svg';
 import { themeColors } from 'theme';
 
 import { InterventionStatus, InterventionType } from 'models/Intervention';
+import { Session } from 'models/Session';
 
 import { TextButton } from 'components/Button';
 import Icon from 'components/Icon';
@@ -14,9 +15,11 @@ import messages from './messages';
 import { InviteParticipantsModal } from './InviteParticipantsModal';
 
 export type Props = {
+  interventionId: string;
   organizationId: Nullable<string>;
   interventionStatus: InterventionStatus;
   interventionType: InterventionType;
+  sessions: Session[];
 };
 
 export const InviteParticipantsButton: FC<Props> = ({ ...props }) => {

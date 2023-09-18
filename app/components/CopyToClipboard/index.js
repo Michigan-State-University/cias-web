@@ -34,6 +34,7 @@ const CopyToClipboard = ({
   iconAlt,
   popupVerticalPosition,
   popupHorizontalPosition,
+  onClick,
   ...restProps
 }) => {
   const [copied, setCopied] = useState(false);
@@ -43,6 +44,8 @@ const CopyToClipboard = ({
   }, [textToCopy]);
 
   const onCopy = () => {
+    if (onClick) onClick();
+    if (buttonDisabled || disabled) return;
     setCopied(true);
     setTimeout(() => {
       setCopied(false);
@@ -50,10 +53,7 @@ const CopyToClipboard = ({
   };
 
   const renderCopyToClipboard = (content) => (
-    <ReactCopyToClipboard
-      text={textToCopy}
-      onCopy={buttonDisabled || disabled ? undefined : onCopy}
-    >
+    <ReactCopyToClipboard text={textToCopy} onCopy={onCopy}>
       {content}
     </ReactCopyToClipboard>
   );
@@ -118,6 +118,7 @@ CopyToClipboard.propTypes = {
   iconAlt: PropTypes.string,
   popupVerticalPosition: PropTypes.oneOf(['top', 'center', 'bottom']),
   popupHorizontalPosition: PropTypes.oneOf(['left', 'center', 'right']),
+  onClick: PropTypes.func,
 };
 
 CopyToClipboard.defaultProps = {
