@@ -12,7 +12,7 @@ import {
 
 import Loader from 'components/Loader';
 
-import { InviteParticipantModalView } from './types';
+import { InviteParticipantModalView, ParticipantInvitationType } from './types';
 import { ParticipantListView } from './ParticipantListView';
 
 export type Props = {
@@ -22,6 +22,7 @@ export type Props = {
   interventionType: InterventionType;
   sessions: Session[];
   currentView: InviteParticipantModalView;
+  setCurrentView: (view: InviteParticipantModalView) => void;
 };
 
 export const InviteParticipantsModalContent: FC<Props> = ({
@@ -30,6 +31,7 @@ export const InviteParticipantsModalContent: FC<Props> = ({
   interventionType,
   sessions,
   currentView,
+  setCurrentView,
 }) => {
   const dispatch = useDispatch();
 
@@ -43,6 +45,14 @@ export const InviteParticipantsModalContent: FC<Props> = ({
       dispatch(fetchOrganizationRequest(organizationId));
     }
   }, [organizationId]);
+
+  const handleInvite = (invitationType: ParticipantInvitationType) => {
+    if (invitationType === ParticipantInvitationType.EMAIL) {
+      setCurrentView(InviteParticipantModalView.INVITE_EMAIL_PARTICIPANTS);
+    } else if (invitationType === ParticipantInvitationType.PREDEFINED) {
+      setCurrentView(InviteParticipantModalView.INVITE_PREDEFINED_PARTICIPANT);
+    }
+  };
 
   const isModularIntervention = interventionType !== InterventionType.DEFAULT;
   const isReportingIntervention = !!organizationId;
@@ -59,6 +69,7 @@ export const InviteParticipantsModalContent: FC<Props> = ({
               interventionId={interventionId}
               sessions={sessions}
               healthSystems={organization?.healthSystems || []}
+              onInvite={handleInvite}
             />
           )}
         </>

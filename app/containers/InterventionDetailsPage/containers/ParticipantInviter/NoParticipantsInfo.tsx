@@ -10,7 +10,7 @@ import { InviteParticipantsButton } from './InviteParticipantsButton';
 
 export type Props = {
   invitationType: ParticipantInvitationType;
-  onInvite: () => void;
+  onInvite: (invitationType: ParticipantInvitationType) => void;
 };
 
 export const NoParticipantsInfo: FC<Props> = ({ invitationType, onInvite }) => {

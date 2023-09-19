@@ -65,6 +65,7 @@ export const InviteParticipantsModal: FC<Props> = ({
     >
       <InviteParticipantsModalContent
         currentView={currentView}
+        setCurrentView={setCurrentView}
         interventionId={interventionId}
         organizationId={organizationId}
         interventionType={interventionType}

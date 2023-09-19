@@ -17,6 +17,7 @@ export type Props = {
   interventionId: string;
   sessions: Session[];
   healthSystems: HealthSystem[];
+  onInvite: (invitationType: ParticipantInvitationType) => void;
 };
 
 export const ParticipantListView: FC<Props> = ({
@@ -25,10 +26,9 @@ export const ParticipantListView: FC<Props> = ({
   interventionId,
   sessions,
   healthSystems,
+  onInvite,
 }) => {
   const { formatMessage } = useIntl();
-
-  const handleInvite = () => {};
 
   return (
     <>
@@ -44,13 +44,16 @@ export const ParticipantListView: FC<Props> = ({
           mt: 24,
           mx: 0,
           mb: 0,
+          minHeight: '0px',
+          overflowY: 'auto',
         }}
+        minHeight="0px"
       >
         {/* @ts-ignore */}
         <div label={formatMessage(messages.emailParticipants)}>
           <NoParticipantsInfo
             invitationType={ParticipantInvitationType.EMAIL}
-            onInvite={handleInvite}
+            onInvite={onInvite}
           />
         </div>
         {/* @ts-ignore */}

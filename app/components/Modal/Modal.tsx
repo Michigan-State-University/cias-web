@@ -109,25 +109,34 @@ const Modal = ({
     };
   }, []);
 
-  const { fullWidthContainerProps, contentRowProps, contentProps } =
-    useMemo(() => {
-      if (stretchContent) {
-        return {
-          fullWidthContainerProps: {
-            height: '100%',
-            display: 'flex',
-            direction: 'column',
-          },
-          contentRowProps: {
-            flex: '1 !important',
-          },
-          contentProps: {
-            flex: '1',
-          },
-        };
-      }
-      return {};
-    }, [stretchContent]);
+  const {
+    fullWidthContainerProps,
+    contentRowProps,
+    contentProps,
+    contentColumnProps,
+  } = useMemo(() => {
+    if (stretchContent) {
+      return {
+        fullWidthContainerProps: {
+          height: '100%',
+          display: 'flex',
+          direction: 'column',
+        },
+        contentRowProps: {
+          flex: '1 !important',
+          minHeight: '0px',
+        },
+        contentColumnProps: {
+          maxHeight: '100%',
+        },
+        contentProps: {
+          flex: '1',
+          minHeight: '0px',
+        },
+      };
+    }
+    return {};
+  }, [stretchContent]);
 
   if (!visible) return <></>;
 
@@ -208,7 +217,7 @@ const Modal = ({
             )}
 
             <GridRow {...contentRowProps}>
-              <GridCol xs={12}>
+              <GridCol xs={12} {...contentColumnProps}>
                 <Box
                   width="100%"
                   borderRadius="0px"

@@ -8,14 +8,23 @@ import messages from './messages';
 
 export type Props = {
   invitationType: ParticipantInvitationType;
-  onInvite: () => void;
+  onInvite: (invitationType: ParticipantInvitationType) => void;
 };
 
-export const InviteParticipantsButton: FC<Props> = ({ invitationType }) => {
+export const InviteParticipantsButton: FC<Props> = ({
+  invitationType,
+  onInvite,
+}) => {
   const { formatMessage } = useIntl();
 
   return (
-    <Button width="auto" px={24} py={12}>
+    <Button
+      width="auto"
+      height="auto"
+      px={24}
+      py={12}
+      onClick={() => onInvite(invitationType)}
+    >
       {formatMessage(messages.inviteParticipantsButtonTitle, {
         invitationType,
       })}
