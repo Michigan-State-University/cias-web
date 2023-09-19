@@ -5,6 +5,7 @@ import { useIntl } from 'react-intl';
 import share from 'assets/svg/share.svg';
 
 import { Session } from 'models/Session';
+import { HealthSystem } from 'models/Organization';
 
 import Column from 'components/Column';
 import Divider from 'components/Divider';
@@ -22,8 +23,7 @@ export type Props = {
   isReportingIntervention: boolean;
   interventionId: string;
   sessions: Session[];
-  // TODO add types for organization
-  healthSystems: any[];
+  healthSystems: HealthSystem[];
 };
 
 export const CopyLinkForm: FC<Props> = ({
@@ -58,8 +58,6 @@ export const CopyLinkForm: FC<Props> = ({
   const clinicOptions: SelectOption<string>[] = useMemo(() => {
     const options: SelectOption<string>[] = [];
     healthSystems.forEach(({ name: healthSystemName, healthClinics }) => {
-      // TODO add types for healthClinics
-      // @ts-ignore
       healthClinics.forEach(({ name: healthClinicName, id, deleted }) => {
         if (!deleted) {
           options.push({

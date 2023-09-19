@@ -1,6 +1,7 @@
 import { FC } from 'react';
 
 import { Session } from 'models/Session';
+import { HealthSystem } from 'models/Organization';
 
 import Column from 'components/Column';
 
@@ -11,8 +12,7 @@ export type Props = {
   isReportingIntervention: boolean;
   interventionId: string;
   sessions: Session[];
-  // TODO add types for organization
-  healthSystems: any[];
+  healthSystems: HealthSystem[];
 };
 
 export const ParticipantListView: FC<Props> = ({
