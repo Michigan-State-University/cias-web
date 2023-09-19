@@ -1,13 +1,15 @@
 import { FC } from 'react';
+import { useIntl } from 'react-intl';
 
 import { Session } from 'models/Session';
 import { HealthSystem } from 'models/Organization';
 
-import Column from 'components/Column';
+import Tabs from 'components/Tabs';
 
 import { CopyLinkForm } from './CopyLinkForm';
 import { NoParticipantsInfo } from './NoParticipantsInfo';
 import { ParticipantInvitationType } from './types';
+import messages from './messages';
 
 export type Props = {
   isModularIntervention: boolean;
@@ -24,16 +26,36 @@ export const ParticipantListView: FC<Props> = ({
   sessions,
   healthSystems,
 }) => {
+  const { formatMessage } = useIntl();
+
   const handleInvite = () => {};
 
   return (
     <>
-      <Column flex={1}>
-        <NoParticipantsInfo
-          invitationType={ParticipantInvitationType.EMAIL}
-          onInvite={handleInvite}
-        />
-      </Column>
+      {/* @ts-ignore */}
+      <Tabs
+        flex={1}
+        display="flex"
+        direction="column"
+        containerProps={{
+          flex: 1,
+          display: 'flex',
+          direction: 'column',
+          mt: 24,
+          mx: 0,
+          mb: 0,
+        }}
+      >
+        {/* @ts-ignore */}
+        <div label={formatMessage(messages.emailParticipants)}>
+          <NoParticipantsInfo
+            invitationType={ParticipantInvitationType.EMAIL}
+            onInvite={handleInvite}
+          />
+        </div>
+        {/* @ts-ignore */}
+        <div label={formatMessage(messages.predefinedParticipants)}></div>
+      </Tabs>
       <CopyLinkForm
         isModularIntervention={isModularIntervention}
         isReportingIntervention={isReportingIntervention}
