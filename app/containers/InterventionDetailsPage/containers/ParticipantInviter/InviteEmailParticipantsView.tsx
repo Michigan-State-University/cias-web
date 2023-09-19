@@ -1,9 +1,12 @@
 import { FC } from 'react';
 import { useIntl } from 'react-intl';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 
 import globalMessages from 'global/i18n/globalMessages';
-import { sendInterventionInvitationsRequest } from 'global/reducers/intervention';
+import {
+  makeSelectInterventionLoader,
+  sendInterventionInvitationsRequest,
+} from 'global/reducers/intervention';
 
 import Column from 'components/Column';
 import Text from 'components/Text';
@@ -36,6 +39,10 @@ export const InviteEmailParticipantsView: FC<Props> = ({
   const { formatMessage } = useIntl();
   const dispatch = useDispatch();
 
+  const submitting = useSelector(
+    makeSelectInterventionLoader('sendInterventionInvitations'),
+  );
+
   const handleSubmit: InviteEmailParticipantsFormProps['onFormSubmit'] = (
     sessionId,
     healthClinicId,
@@ -66,7 +73,7 @@ export const InviteEmailParticipantsView: FC<Props> = ({
           sessionOptions={sessionOptions}
           healthClinicOptions={healthClinicOptions}
           onFormSubmit={handleSubmit}
-          submitting={false}
+          submitting={submitting}
         />
       </Column>
     </Column>

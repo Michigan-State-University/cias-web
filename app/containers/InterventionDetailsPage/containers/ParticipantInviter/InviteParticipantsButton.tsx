@@ -18,13 +18,7 @@ export const InviteParticipantsButton: FC<Props> = ({
   const { formatMessage } = useIntl();
 
   return (
-    <Button
-      width="auto"
-      height="auto"
-      px={24}
-      py={12}
-      onClick={() => onInvite(invitationType)}
-    >
+    <Button width="auto" px={24} onClick={() => onInvite(invitationType)}>
       {formatMessage(messages.inviteParticipantsButtonTitle, {
         invitationType,
       })}

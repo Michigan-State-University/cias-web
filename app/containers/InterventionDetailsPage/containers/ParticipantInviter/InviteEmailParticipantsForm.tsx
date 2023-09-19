@@ -101,9 +101,7 @@ export const InviteEmailParticipantsForm: FC<Props> = ({
             <Button
               disabled={!isValid || !dirty}
               width="auto"
-              height="auto"
               px={24}
-              py={12}
               type="submit"
               onClick={handleSubmit}
               loading={submitting}

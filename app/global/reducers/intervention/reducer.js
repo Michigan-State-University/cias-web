@@ -147,7 +147,7 @@ export const initialState = {
       email: null,
     },
     fetchInterventionInvites: false,
-    sendInterventionInvites: false,
+    sendInterventionInvitations: false,
     interventionEmailLoading: {
       id: null,
       email: null,
@@ -478,22 +478,18 @@ export const interventionReducer = (state = initialState, action) =>
       }
 
       case SEND_INTERVENTION_INVITATIONS_REQUEST: {
-        draft.loaders.sendInterventionInvites = true;
+        draft.loaders.sendInterventionInvitations = true;
         break;
       }
 
       case SEND_INTERVENTION_INVITATIONS_SUCCESS:
         const { invitations } = action.payload;
         draft.invites = invitations;
-        draft.loaders.sendInterventionInvites = false;
-        draft.loaders.interventionEmailLoading =
-          initialState.loaders.interventionEmailLoading;
+        draft.loaders.sendInterventionInvitations = false;
         break;
 
       case SEND_INTERVENTION_INVITATIONS_ERROR:
-        draft.loaders.sendInterventionInvites = false;
-        draft.loaders.interventionEmailLoading =
-          initialState.loaders.interventionEmailLoading;
+        draft.loaders.sendInterventionInvitations = false;
         break;
 
       case RESEND_INTERVENTION_INVITE_REQUEST:
