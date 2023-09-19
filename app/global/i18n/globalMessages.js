@@ -394,7 +394,7 @@ export default defineMessages({
   },
   questionRequired: {
     id: `${scope}.questionRequired`,
-    defaultMessage: `Required fields are marked with an asterisk<span style="color:${themeColors.warning};">*</span>`,
+    defaultMessage: `Required fields are marked with an asterisk<span style='color:${themeColors.warning};'>*</span>`,
   },
   dragHandle: {
     id: `${scope}.dragHandle`,
@@ -522,5 +522,9 @@ export default defineMessages({
     id: `${scope}.dataClearedInfo`,
     defaultMessage:
       'All sensitive data associated with this intervention has been removed, this includes user answers and generated report files.',
+  },
+  requiredFields: {
+    id: `${scope}.requiredFields`,
+    defaultMessage: `Fields with an asterisk<warningColor>*</warningColor> are required`,
   },
 });

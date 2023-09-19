@@ -74,9 +74,9 @@ import {
   TRANSLATE_INTERVENTION_REQUEST,
   TRANSLATE_INTERVENTION_SUCCESS,
   TRANSLATE_INTERVENTION_ERROR,
-  SEND_INTERVENTION_INVITE_SUCCESS,
-  SEND_INTERVENTION_INVITE_REQUEST,
-  SEND_INTERVENTION_INVITE_ERROR,
+  SEND_INTERVENTION_INVITATIONS_SUCCESS,
+  SEND_INTERVENTION_INVITATIONS_REQUEST,
+  SEND_INTERVENTION_INVITATIONS_ERROR,
   RESEND_INTERVENTION_INVITE_REQUEST,
   ADD_INTERVENTION_ATTACHMENTS_SUCCESS,
   DELETE_INTERVENTION_ATTACHMENT_SUCCESS,
@@ -477,20 +477,20 @@ export const interventionReducer = (state = initialState, action) =>
         break;
       }
 
-      case SEND_INTERVENTION_INVITE_REQUEST: {
+      case SEND_INTERVENTION_INVITATIONS_REQUEST: {
         draft.loaders.sendInterventionInvites = true;
         break;
       }
 
-      case SEND_INTERVENTION_INVITE_SUCCESS:
-        const { invites } = action.payload;
-        draft.invites = invites;
+      case SEND_INTERVENTION_INVITATIONS_SUCCESS:
+        const { invitations } = action.payload;
+        draft.invites = invitations;
         draft.loaders.sendInterventionInvites = false;
         draft.loaders.interventionEmailLoading =
           initialState.loaders.interventionEmailLoading;
         break;
 
-      case SEND_INTERVENTION_INVITE_ERROR:
+      case SEND_INTERVENTION_INVITATIONS_ERROR:
         draft.loaders.sendInterventionInvites = false;
         draft.loaders.interventionEmailLoading =
           initialState.loaders.interventionEmailLoading;

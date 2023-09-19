@@ -8,7 +8,7 @@ import { RoutePath } from 'global/constants';
 import { parametrizeRoutePath } from 'utils/router';
 
 import {
-  sendInterventionInviteRequest,
+  sendInterventionInvitationsRequest,
   resendInterventionInviteRequest,
   makeSelectInterventionLoader,
   makeSelectIntervention,
@@ -60,7 +60,7 @@ const Component = ({ organizationId }: Props) => {
 
   // actions
   const sendInvite = (emails: string[]): void => {
-    dispatch(sendInterventionInviteRequest(emails, id));
+    dispatch(sendInterventionInvitationsRequest(emails, id));
   };
   const resendInvite = (inviteId: string): void => {
     dispatch(resendInterventionInviteRequest(inviteId, id));

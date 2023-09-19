@@ -66,3 +66,31 @@ export const createInviteUrl = (
 
   return url;
 };
+
+export const createInviteEmailsParticipantsFormSchema = (
+  formatMessage: IntlShape['formatMessage'],
+  isModularIntervention: boolean,
+  isReportingIntervention: boolean,
+) =>
+  Yup.object().shape({
+    ...(isModularIntervention
+      ? {}
+      : {
+          sessionOption: Yup.object()
+            .required(
+              // @ts-ignore
+              formatMessage(globalMessages.validators.required),
+            )
+            .nullable(),
+        }),
+    ...(isReportingIntervention
+      ? {
+          healthClinicOption: Yup.object()
+            .required(
+              // @ts-ignore
+              formatMessage(globalMessages.validators.required),
+            )
+            .nullable(),
+        }
+      : {}),
+  });

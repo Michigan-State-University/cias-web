@@ -16,3 +16,9 @@ export type CopyLinkFormValues = {
   sessionOption: Nullable<SelectOption<string>>;
   healthClinicOption: Nullable<SelectOption<string>>;
 };
+
+export type InviteEmailParticipantsFormValues = {
+  sessionOption: Nullable<SelectOption<string>>;
+  healthClinicOption: Nullable<SelectOption<string>>;
+  emails: string[];
+};

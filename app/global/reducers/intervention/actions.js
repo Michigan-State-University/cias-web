@@ -60,9 +60,9 @@ import {
   ADD_INTERVENTION_ATTACHMENTS_SUCCESS,
   DELETE_INTERVENTION_ATTACHMENT_REQUEST,
   DELETE_INTERVENTION_ATTACHMENT_SUCCESS,
-  SEND_INTERVENTION_INVITE_REQUEST,
-  SEND_INTERVENTION_INVITE_SUCCESS,
-  SEND_INTERVENTION_INVITE_ERROR,
+  SEND_INTERVENTION_INVITATIONS_REQUEST,
+  SEND_INTERVENTION_INVITATIONS_SUCCESS,
+  SEND_INTERVENTION_INVITATIONS_ERROR,
   RESEND_INTERVENTION_INVITE_REQUEST,
   ADD_INTERVENTION_ATTACHMENTS_ERROR,
   FETCH_INTERVENTION_INVITES_REQUEST,
@@ -217,15 +217,24 @@ export const fetchInterventionInvitesSuccess = (invites) =>
 export const fetchInterventionInvitesError = (error) =>
   actionBuilder(FETCH_INTERVENTION_INVITES_ERROR, { error });
 
-export const sendInterventionInviteRequest = (emails, interventionId) =>
-  actionBuilder(SEND_INTERVENTION_INVITE_REQUEST, {
-    emails,
+export const sendInterventionInvitationsRequest = (
+  interventionId,
+  isModularIntervention,
+  sessionId,
+  healthClinicId,
+  emails,
+) =>
+  actionBuilder(SEND_INTERVENTION_INVITATIONS_REQUEST, {
     interventionId,
+    isModularIntervention,
+    sessionId,
+    healthClinicId,
+    emails,
   });
-export const sendInterventionInviteSuccess = (invites) =>
-  actionBuilder(SEND_INTERVENTION_INVITE_SUCCESS, { invites });
-export const sendInterventionInviteError = () =>
-  actionBuilder(SEND_INTERVENTION_INVITE_ERROR, {});
+export const sendInterventionInvitationsSuccess = (invitations) =>
+  actionBuilder(SEND_INTERVENTION_INVITATIONS_SUCCESS, { invitations });
+export const sendInterventionInvitationsError = () =>
+  actionBuilder(SEND_INTERVENTION_INVITATIONS_ERROR, {});
 
 export const resendInterventionInviteRequest = (id, interventionId) =>
   actionBuilder(RESEND_INTERVENTION_INVITE_REQUEST, { id, interventionId });

@@ -70,4 +70,8 @@ export default defineMessages({
     id: `${scope}.predefinedParticipants`,
     defaultMessage: `Predefined participants`,
   },
+  inviteEmailParticipantSubmitButtonTitle: {
+    id: `${scope}.inviteEmailParticipantSubmitButtonTitle`,
+    defaultMessage: `Send invitations`,
+  },
 });
