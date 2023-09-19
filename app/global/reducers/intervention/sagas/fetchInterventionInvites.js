@@ -3,7 +3,7 @@ import { put, call, takeLatest, select } from 'redux-saga/effects';
 import groupBy from 'lodash/groupBy';
 
 import { jsonApiToArray } from 'utils/jsonApiMapper';
-import { FETCH_INTERVENTION_INVITES_REQUEST } from '../constants';
+import { FETCH_INTERVENTION_INVITATIONS_REQUEST } from '../constants';
 import {
   fetchInterventionInvitesError,
   fetchInterventionInvitesSuccess,
@@ -27,7 +27,7 @@ function* fetchInterventionInvites({ payload: { interventionId } }) {
 
 export default function* fetchInterventionInvitesSaga() {
   yield takeLatest(
-    [FETCH_INTERVENTION_INVITES_REQUEST],
+    [FETCH_INTERVENTION_INVITATIONS_REQUEST],
     fetchInterventionInvites,
   );
 }

@@ -82,9 +82,9 @@ import {
   DELETE_INTERVENTION_ATTACHMENT_SUCCESS,
   ADD_INTERVENTION_ATTACHMENTS_REQUEST,
   ADD_INTERVENTION_ATTACHMENTS_ERROR,
-  FETCH_INTERVENTION_INVITES_REQUEST,
-  FETCH_INTERVENTION_INVITES_SUCCESS,
-  FETCH_INTERVENTION_INVITES_ERROR,
+  FETCH_INTERVENTION_INVITATIONS_REQUEST,
+  FETCH_INTERVENTION_INVITATIONS_SUCCESS,
+  FETCH_INTERVENTION_INVITATIONS_ERROR,
   GENERATE_CONVERSATIONS_TRANSCRIPT_REQUEST,
   GENERATE_CONVERSATIONS_TRANSCRIPT_SUCCESS,
   GENERATE_CONVERSATIONS_TRANSCRIPT_ERROR,
@@ -457,20 +457,20 @@ export const interventionReducer = (state = initialState, action) =>
         };
         break;
 
-      case FETCH_INTERVENTION_INVITES_REQUEST: {
+      case FETCH_INTERVENTION_INVITATIONS_REQUEST: {
         draft.errors.fetchInterventionInvites = null;
         draft.loaders.fetchInterventionInvites = true;
         break;
       }
 
-      case FETCH_INTERVENTION_INVITES_SUCCESS: {
+      case FETCH_INTERVENTION_INVITATIONS_SUCCESS: {
         const { invites } = action.payload;
         draft.invites = invites;
         draft.loaders.fetchInterventionInvites = false;
         break;
       }
 
-      case FETCH_INTERVENTION_INVITES_ERROR: {
+      case FETCH_INTERVENTION_INVITATIONS_ERROR: {
         const { error } = action.payload;
         draft.errors.fetchInterventionInvites = error;
         draft.loaders.fetchInterventionInvites = false;

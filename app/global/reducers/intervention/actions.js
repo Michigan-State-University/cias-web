@@ -65,9 +65,9 @@ import {
   SEND_INTERVENTION_INVITATIONS_ERROR,
   RESEND_INTERVENTION_INVITE_REQUEST,
   ADD_INTERVENTION_ATTACHMENTS_ERROR,
-  FETCH_INTERVENTION_INVITES_REQUEST,
-  FETCH_INTERVENTION_INVITES_SUCCESS,
-  FETCH_INTERVENTION_INVITES_ERROR,
+  FETCH_INTERVENTION_INVITATIONS_REQUEST,
+  FETCH_INTERVENTION_INVITATIONS_SUCCESS,
+  FETCH_INTERVENTION_INVITATIONS_ERROR,
   GENERATE_CONVERSATIONS_TRANSCRIPT_REQUEST,
   GENERATE_CONVERSATIONS_TRANSCRIPT_SUCCESS,
   GENERATE_CONVERSATIONS_TRANSCRIPT_ERROR,
@@ -209,13 +209,13 @@ export const resendSessionInviteRequest = (id, sessionId) =>
   actionBuilder(RESEND_SESSION_INVITE_REQUEST, { id, sessionId });
 
 export const fetchInterventionInvitesRequest = (interventionId) =>
-  actionBuilder(FETCH_INTERVENTION_INVITES_REQUEST, {
+  actionBuilder(FETCH_INTERVENTION_INVITATIONS_REQUEST, {
     interventionId,
   });
 export const fetchInterventionInvitesSuccess = (invites) =>
-  actionBuilder(FETCH_INTERVENTION_INVITES_SUCCESS, { invites });
+  actionBuilder(FETCH_INTERVENTION_INVITATIONS_SUCCESS, { invites });
 export const fetchInterventionInvitesError = (error) =>
-  actionBuilder(FETCH_INTERVENTION_INVITES_ERROR, { error });
+  actionBuilder(FETCH_INTERVENTION_INVITATIONS_ERROR, { error });
 
 export const sendInterventionInvitationsRequest = (
   interventionId,

@@ -6,9 +6,9 @@ import { SelectOption } from 'components/Select/types';
 import Tabs from 'components/Tabs';
 
 import { CopyLinkForm } from './CopyLinkForm';
-import { NoParticipantsInfo } from './NoParticipantsInfo';
 import { ParticipantInvitationType } from './types';
 import messages from './messages';
+import { EmailParticipantsTab } from './EmailParticipantsTab';
 
 export type Props = {
   isModularIntervention: boolean;
@@ -50,10 +50,7 @@ export const ParticipantListView: FC<Props> = ({
       >
         {/* @ts-ignore */}
         <div label={formatMessage(messages.emailParticipants)}>
-          <NoParticipantsInfo
-            invitationType={ParticipantInvitationType.EMAIL}
-            onInvite={onInvite}
-          />
+          <EmailParticipantsTab onInvite={onInvite} />
         </div>
         {/* @ts-ignore */}
         <div label={formatMessage(messages.predefinedParticipants)}></div>
