@@ -58,6 +58,10 @@ export default defineMessages({
     id: `${scope}.inviteParticipantsButtonTitle`,
     defaultMessage: `Invite {invitationType, select, ${ParticipantInvitationType.EMAIL} {e-mail} ${ParticipantInvitationType.PREDEFINED} {predefined} other {}} participants`,
   },
+  backButtonTitle: {
+    id: `${scope}.backButtonTitle`,
+    defaultMessage: `Back to {invitationType, select, ${ParticipantInvitationType.EMAIL} {e-mail} ${ParticipantInvitationType.PREDEFINED} {predefined} other {}} participants`,
+  },
   emailParticipants: {
     id: `${scope}.emailParticipants`,
     defaultMessage: `E-mail participants`,

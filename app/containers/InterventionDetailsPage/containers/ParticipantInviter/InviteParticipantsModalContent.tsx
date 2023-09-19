@@ -1,8 +1,9 @@
-import { FC, useEffect } from 'react';
+import { FC, useEffect, useMemo } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 
 import { InterventionStatus, InterventionType } from 'models/Intervention';
 import { Session } from 'models/Session';
+import { Organization } from 'models/Organization';
 
 import {
   fetchOrganizationRequest,
@@ -11,9 +12,11 @@ import {
 } from 'global/reducers/organizations';
 
 import Loader from 'components/Loader';
+import { SelectOption } from 'components/Select/types';
 
 import { InviteParticipantModalView, ParticipantInvitationType } from './types';
 import { ParticipantListView } from './ParticipantListView';
+import { InviteEmailParticipantsView } from './InviteEmailParticipantsView';
 
 export type Props = {
   interventionId: string;
@@ -35,7 +38,12 @@ export const InviteParticipantsModalContent: FC<Props> = ({
 }) => {
   const dispatch = useDispatch();
 
-  const organization = useSelector(makeSelectOrganization());
+  const isModularIntervention = interventionType !== InterventionType.DEFAULT;
+  const isReportingIntervention = !!organizationId;
+
+  const organization: Nullable<Organization> = useSelector(
+    makeSelectOrganization(),
+  );
   const organizationLoading = useSelector(
     makeSelectOrganizationLoader('fetchOrganization'),
   );
@@ -46,6 +54,28 @@ export const InviteParticipantsModalContent: FC<Props> = ({
     }
   }, [organizationId]);
 
+  const sessionOptions: SelectOption<string>[] = useMemo(() => {
+    if (isModularIntervention) return [];
+    return sessions.map(({ id, name }) => ({ value: id, label: name }));
+  }, [isModularIntervention, sessions]);
+
+  const healthClinicOptions: SelectOption<string>[] = useMemo(() => {
+    const options: SelectOption<string>[] = [];
+    organization?.healthSystems?.forEach(
+      ({ name: healthSystemName, healthClinics }) => {
+        healthClinics.forEach(({ name: healthClinicName, id, deleted }) => {
+          if (!deleted) {
+            options.push({
+              value: id,
+              label: `${healthClinicName} (${healthSystemName})`,
+            });
+          }
+        });
+      },
+    );
+    return options;
+  }, [organization]);
+
   const handleInvite = (invitationType: ParticipantInvitationType) => {
     if (invitationType === ParticipantInvitationType.EMAIL) {
       setCurrentView(InviteParticipantModalView.INVITE_EMAIL_PARTICIPANTS);
@@ -54,8 +84,14 @@ export const InviteParticipantsModalContent: FC<Props> = ({
     }
   };
 
-  const isModularIntervention = interventionType !== InterventionType.DEFAULT;
-  const isReportingIntervention = !!organizationId;
+  const handleBack = (invitationType: ParticipantInvitationType) => {
+    if (invitationType === ParticipantInvitationType.EMAIL) {
+      setCurrentView(InviteParticipantModalView.PARTICIPANT_LIST);
+    } else if (invitationType === ParticipantInvitationType.PREDEFINED) {
+      // TODO open predefined participants tab
+      setCurrentView(InviteParticipantModalView.PARTICIPANT_LIST);
+    }
+  };
 
   return (
     <>
@@ -67,9 +103,20 @@ export const InviteParticipantsModalContent: FC<Props> = ({
               isModularIntervention={isModularIntervention}
               isReportingIntervention={isReportingIntervention}
               interventionId={interventionId}
-              sessions={sessions}
-              healthSystems={organization?.healthSystems || []}
+              sessionOptions={sessionOptions}
+              healthClinicOptions={healthClinicOptions}
               onInvite={handleInvite}
+            />
+          )}
+          {currentView ===
+            InviteParticipantModalView.INVITE_EMAIL_PARTICIPANTS && (
+            <InviteEmailParticipantsView
+              isModularIntervention={isModularIntervention}
+              isReportingIntervention={isReportingIntervention}
+              interventionId={interventionId}
+              sessionOptions={sessionOptions}
+              healthClinicOptions={healthClinicOptions}
+              onBack={handleBack}
             />
           )}
         </>

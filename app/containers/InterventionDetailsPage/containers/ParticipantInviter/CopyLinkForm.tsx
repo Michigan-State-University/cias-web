@@ -4,9 +4,6 @@ import { useIntl } from 'react-intl';
 
 import share from 'assets/svg/share.svg';
 
-import { Session } from 'models/Session';
-import { HealthSystem } from 'models/Organization';
-
 import Column from 'components/Column';
 import Divider from 'components/Divider';
 import Row from 'components/Row';
@@ -22,16 +19,16 @@ export type Props = {
   isModularIntervention: boolean;
   isReportingIntervention: boolean;
   interventionId: string;
-  sessions: Session[];
-  healthSystems: HealthSystem[];
+  sessionOptions: SelectOption<string>[];
+  healthClinicOptions: SelectOption<string>[];
 };
 
 export const CopyLinkForm: FC<Props> = ({
   isModularIntervention,
   isReportingIntervention,
   interventionId,
-  sessions,
-  healthSystems,
+  sessionOptions,
+  healthClinicOptions,
 }) => {
   const { formatMessage } = useIntl();
 
@@ -49,26 +46,6 @@ export const CopyLinkForm: FC<Props> = ({
       ),
     [isModularIntervention, isReportingIntervention],
   );
-
-  const sessionSelectOptions: SelectOption<string>[] = useMemo(() => {
-    if (isModularIntervention) return [];
-    return sessions.map(({ id, name }) => ({ value: id, label: name }));
-  }, [isModularIntervention, sessions]);
-
-  const clinicOptions: SelectOption<string>[] = useMemo(() => {
-    const options: SelectOption<string>[] = [];
-    healthSystems.forEach(({ name: healthSystemName, healthClinics }) => {
-      healthClinics.forEach(({ name: healthClinicName, id, deleted }) => {
-        if (!deleted) {
-          options.push({
-            value: id,
-            label: `${healthClinicName} (${healthSystemName})`,
-          });
-        }
-      });
-    });
-    return options;
-  }, [healthSystems]);
 
   return (
     <Formik
@@ -90,7 +67,7 @@ export const CopyLinkForm: FC<Props> = ({
                       messages.sessionSelectPlaceholder,
                     ),
                   }}
-                  options={sessionSelectOptions}
+                  options={sessionOptions}
                 />
               )}
               {isReportingIntervention && (
@@ -102,7 +79,7 @@ export const CopyLinkForm: FC<Props> = ({
                       messages.clinicSelectPlaceholder,
                     ),
                   }}
-                  options={clinicOptions}
+                  options={healthClinicOptions}
                 />
               )}
             </Row>
