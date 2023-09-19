@@ -7,6 +7,11 @@ export enum InviteParticipantModalView {
   MANAGE_PREDEFINED_PARTICIPANT = 'MANAGE_PREDEFINED_PARTICIPANT',
 }
 
+export enum ParticipantInvitationType {
+  EMAIL = 'EMAIL',
+  PREDEFINED = 'PREDEFINED',
+}
+
 export type CopyLinkFormValues = {
   sessionOption: Nullable<SelectOption<string>>;
   healthClinicOption: Nullable<SelectOption<string>>;

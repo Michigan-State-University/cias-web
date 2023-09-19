@@ -22,7 +22,7 @@ export type Props = {
   sessions: Session[];
 };
 
-export const InviteParticipantsButton: FC<Props> = ({ ...props }) => {
+export const ParticipantsInviter: FC<Props> = ({ ...props }) => {
   const { formatMessage } = useIntl();
 
   const [modalVisible, setModalVisible] = useState(false);
@@ -45,7 +45,7 @@ export const InviteParticipantsButton: FC<Props> = ({ ...props }) => {
           gap: 5,
         }}
       >
-        {formatMessage(messages.inviteParticipantsButtonTitle)}
+        {formatMessage(messages.participantsInviterButtonTitle)}
         <Icon src={MailIcon} />
       </TextButton>
     </>

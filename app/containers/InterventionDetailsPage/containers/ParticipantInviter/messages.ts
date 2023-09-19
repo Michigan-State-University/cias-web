@@ -1,11 +1,12 @@
 import { defineMessages } from 'react-intl';
+import { ParticipantInvitationType } from './types';
 
 export const scope =
   'app.containers.InterventionDetailsPage.containers.InviteParticipantsButton';
 
 export default defineMessages({
-  inviteParticipantsButtonTitle: {
-    id: `${scope}.inviteParticipantsButtonTitle`,
+  participantsInviterButtonTitle: {
+    id: `${scope}.participantsInviterButtonTitle`,
     defaultMessage: 'Invite Participants',
   },
   inviteParticipantsModalTitle: {
@@ -36,5 +37,13 @@ export default defineMessages({
     id: `${scope}.copyLinkButtonTitle`,
     defaultMessage:
       'Copy URL link to this {isModularIntervention, select, true {intervention} false {session} other {}}',
+  },
+  noParticipantsInfo: {
+    id: `${scope}.noParticipantsInfo`,
+    defaultMessage: `There are no {invitationType, select, ${ParticipantInvitationType.EMAIL} {e-mail} ${ParticipantInvitationType.PREDEFINED} {predefined} other {}} participants yet`,
+  },
+  inviteParticipantsButtonTitle: {
+    id: `${scope}.inviteParticipantsButtonTitle`,
+    defaultMessage: `Invite {invitationType, select, ${ParticipantInvitationType.EMAIL} {e-mail} ${ParticipantInvitationType.PREDEFINED} {predefined} other {}} participants`,
   },
 });

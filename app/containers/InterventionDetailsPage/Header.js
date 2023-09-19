@@ -26,7 +26,7 @@ import InterventionStatusButtons from './components/InterventionStatusButtons';
 import { StatusLabel, InterventionOptions } from './styled';
 import messages from './messages';
 import { CAT_MH_TEST_COUNT_WARNING_THRESHOLD } from './constants';
-import { InviteParticipantsButton } from './containers/InviteParticipantsButton';
+import { ParticipantsInviter } from './containers/ParticipantInviter';
 
 const Header = ({
   status,
@@ -110,7 +110,7 @@ const Header = ({
               maxWidth="none"
               autoComplete="off"
             />
-            <InviteParticipantsButton
+            <ParticipantsInviter
               interventionId={interventionId}
               organizationId={organizationId}
               interventionStatus={status}
