@@ -47,7 +47,7 @@ export const InviteParticipantsModal: FC<Props> = ({
     <Modal
       visible={visible}
       onClose={onClose}
-      title={formatMessage(messages.inviteParticipantsModalTitle)}
+      title={formatMessage(messages[`viewTitle${currentView}`])}
       width={INVITE_PARTICIPANTS_MODAL_WIDTH}
       height={INVITE_PARTICIPANTS_MODAL_HEIGHT}
       pt={24}

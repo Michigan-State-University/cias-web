@@ -1,5 +1,5 @@
 import { defineMessages } from 'react-intl';
-import { ParticipantInvitationType } from './types';
+import { InviteParticipantModalView, ParticipantInvitationType } from './types';
 
 export const scope =
   'app.containers.InterventionDetailsPage.containers.InviteParticipantsButton';
@@ -9,9 +9,21 @@ export default defineMessages({
     id: `${scope}.participantsInviterButtonTitle`,
     defaultMessage: 'Invite Participants',
   },
-  inviteParticipantsModalTitle: {
-    id: `${scope}.inviteParticipantsModalTitle`,
+  [`viewTitle${InviteParticipantModalView.PARTICIPANT_LIST}`]: {
+    id: `${scope}.viewTitle${InviteParticipantModalView.PARTICIPANT_LIST}`,
     defaultMessage: 'Invite participants',
+  },
+  [`viewTitle${InviteParticipantModalView.INVITE_EMAIL_PARTICIPANTS}`]: {
+    id: `${scope}.viewTitle${InviteParticipantModalView.INVITE_EMAIL_PARTICIPANTS}`,
+    defaultMessage: 'Invite e-mail participants',
+  },
+  [`viewTitle${InviteParticipantModalView.INVITE_PREDEFINED_PARTICIPANT}`]: {
+    id: `${scope}.viewTitle${InviteParticipantModalView.INVITE_PREDEFINED_PARTICIPANT}`,
+    defaultMessage: 'Invite predefined participant',
+  },
+  [`viewTitle${InviteParticipantModalView.MANAGE_PREDEFINED_PARTICIPANT}`]: {
+    id: `${scope}.viewTitle${InviteParticipantModalView.MANAGE_PREDEFINED_PARTICIPANT}`,
+    defaultMessage: 'Manage participant',
   },
   sessionSelectLabel: {
     id: `${scope}.sessionSelectLabel`,
