@@ -1,6 +1,8 @@
 import { FC } from 'react';
 import { useIntl } from 'react-intl';
 
+import { themeColors } from 'theme';
+
 import Column from 'components/Column';
 import Text from 'components/Text';
 
@@ -11,9 +13,16 @@ import { InviteParticipantsButton } from './InviteParticipantsButton';
 export type Props = {
   invitationType: ParticipantInvitationType;
   onInvite: (invitationType: ParticipantInvitationType) => void;
+  invitingPossible: boolean;
+  invitingNotPossibleMessage?: string;
 };
 
-export const NoParticipantsInfo: FC<Props> = ({ invitationType, onInvite }) => {
+export const NoParticipantsInfo: FC<Props> = ({
+  invitationType,
+  onInvite,
+  invitingPossible,
+  invitingNotPossibleMessage,
+}) => {
   const { formatMessage } = useIntl();
 
   return (
@@ -24,7 +33,13 @@ export const NoParticipantsInfo: FC<Props> = ({ invitationType, onInvite }) => {
       <InviteParticipantsButton
         invitationType={invitationType}
         onInvite={onInvite}
+        disabled={!invitingPossible}
       />
+      {!invitingPossible && invitingNotPossibleMessage && (
+        <Text color={themeColors.text} textOpacity={0.7}>
+          {invitingNotPossibleMessage}
+        </Text>
+      )}
     </Column>
   );
 };

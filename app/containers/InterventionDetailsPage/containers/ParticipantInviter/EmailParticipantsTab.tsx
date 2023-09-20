@@ -1,7 +1,10 @@
 import { FC, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
+import { useIntl } from 'react-intl';
 
 import { OrganizableInvitation } from 'models/Organization';
+import { InterventionStatus } from 'models/Intervention';
+import { canInviteEmailParticipants } from 'models/Status/statusPermissions';
 
 import {
   fetchInterventionInvitationsRequest,
@@ -16,16 +19,20 @@ import Row from 'components/Row';
 import { NoParticipantsInfo } from './NoParticipantsInfo';
 import { ParticipantInvitationType } from './types';
 import { InviteParticipantsButton } from './InviteParticipantsButton';
+import messages from './messages';
 
 export type Props = {
   interventionId: string;
+  interventionStatus: InterventionStatus;
   onInvite: (invitationType: ParticipantInvitationType) => void;
 };
 
 export const EmailParticipantsTab: FC<Props> = ({
   interventionId,
+  interventionStatus,
   onInvite,
 }) => {
+  const { formatMessage } = useIntl();
   const dispatch = useDispatch();
 
   const invitations: Nullable<OrganizableInvitation[]> = useSelector(
@@ -41,6 +48,8 @@ export const EmailParticipantsTab: FC<Props> = ({
     }
   }, [interventionId, invitations]);
 
+  const invitingPossible = canInviteEmailParticipants(interventionStatus);
+
   if (invitationsLoading) return <Loader type="inline" />;
 
   if (!invitations?.length) {
@@ -48,6 +57,10 @@ export const EmailParticipantsTab: FC<Props> = ({
       <NoParticipantsInfo
         invitationType={ParticipantInvitationType.EMAIL}
         onInvite={onInvite}
+        invitingPossible={invitingPossible}
+        invitingNotPossibleMessage={formatMessage(
+          messages.invitingEmailsParticipantsNotPossibleMessage,
+        )}
       />
     );
   }
@@ -58,6 +71,7 @@ export const EmailParticipantsTab: FC<Props> = ({
         <InviteParticipantsButton
           invitationType={ParticipantInvitationType.EMAIL}
           onInvite={onInvite}
+          disabled={!invitingPossible}
         />
       </Row>
       {JSON.stringify(invitations, null, 2)}

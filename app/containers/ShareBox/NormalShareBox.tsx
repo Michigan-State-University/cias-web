@@ -5,7 +5,7 @@ import { FormattedMessage } from 'react-intl';
 import share from 'assets/svg/share.svg';
 
 import { colors } from 'theme';
-import { canShareWithParticipants } from 'models/Status/statusPermissions';
+import { canInviteEmailParticipants } from 'models/Status/statusPermissions';
 import { formatMessage } from 'utils/intlOutsideReact';
 
 import CopyToClipboard from 'components/CopyToClipboard';
@@ -45,7 +45,7 @@ const Component = ({
   shareBoxType,
   children,
 }: Props): JSX.Element => {
-  const sharingPossible = canShareWithParticipants(interventionStatus);
+  const sharingPossible = canInviteEmailParticipants(interventionStatus);
 
   const buttons = [
     {

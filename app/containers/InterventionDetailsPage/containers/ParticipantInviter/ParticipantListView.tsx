@@ -1,8 +1,9 @@
 import { FC } from 'react';
 import { useIntl } from 'react-intl';
 
-import { SelectOption } from 'components/Select/types';
+import { InterventionStatus } from 'models/Intervention';
 
+import { SelectOption } from 'components/Select/types';
 import Tabs from 'components/Tabs';
 
 import { CopyLinkForm } from './CopyLinkForm';
@@ -14,6 +15,7 @@ export type Props = {
   isModularIntervention: boolean;
   isReportingIntervention: boolean;
   interventionId: string;
+  interventionStatus: InterventionStatus;
   sessionOptions: SelectOption<string>[];
   healthClinicOptions: SelectOption<string>[];
   onInvite: (invitationType: ParticipantInvitationType) => void;
@@ -23,6 +25,7 @@ export const ParticipantListView: FC<Props> = ({
   isModularIntervention,
   isReportingIntervention,
   interventionId,
+  interventionStatus,
   sessionOptions,
   healthClinicOptions,
   onInvite,
@@ -52,6 +55,7 @@ export const ParticipantListView: FC<Props> = ({
         <div label={formatMessage(messages.emailParticipants)}>
           <EmailParticipantsTab
             interventionId={interventionId}
+            interventionStatus={interventionStatus}
             onInvite={onInvite}
           />
         </div>

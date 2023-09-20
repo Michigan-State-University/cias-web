@@ -74,4 +74,8 @@ export default defineMessages({
     id: `${scope}.inviteEmailParticipantSubmitButtonTitle`,
     defaultMessage: `Send invitations`,
   },
+  invitingEmailsParticipantsNotPossibleMessage: {
+    id: `${scope}.invitingEmailsParticipantsNotPossibleMessage`,
+    defaultMessage: `Email participants can be invited to published interventions only`,
+  },
 });

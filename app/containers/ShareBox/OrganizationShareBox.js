@@ -22,7 +22,7 @@ import {
   fetchOrganizationRequest,
 } from 'global/reducers/organizations';
 import { colors } from 'theme';
-import { canShareWithParticipants } from 'models/Status/statusPermissions';
+import { canInviteEmailParticipants } from 'models/Status/statusPermissions';
 
 import CopyToClipboard from 'components/CopyToClipboard';
 import CsvFileExport from 'components/CsvFileExport';
@@ -84,7 +84,7 @@ const OrganizationShareBox = ({
 
   const handleResend = (id) => resendInvite(id);
 
-  const sharingPossible = canShareWithParticipants(interventionStatus);
+  const sharingPossible = canInviteEmailParticipants(interventionStatus);
 
   const buttons = [
     {

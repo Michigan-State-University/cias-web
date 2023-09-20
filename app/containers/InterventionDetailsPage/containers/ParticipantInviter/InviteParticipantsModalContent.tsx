@@ -31,6 +31,7 @@ export type Props = {
 export const InviteParticipantsModalContent: FC<Props> = ({
   interventionId,
   organizationId,
+  interventionStatus,
   interventionType,
   sessions,
   currentView,
@@ -107,6 +108,7 @@ export const InviteParticipantsModalContent: FC<Props> = ({
               isModularIntervention={isModularIntervention}
               isReportingIntervention={isReportingIntervention}
               interventionId={interventionId}
+              interventionStatus={interventionStatus}
               sessionOptions={sessionOptions}
               healthClinicOptions={healthClinicOptions}
               onInvite={handleInvite}
