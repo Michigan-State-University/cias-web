@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 
 import dots from 'assets/svg/dots.svg';
 
-import { colors, boxShadows } from 'theme';
+import { colors, boxShadows, themeColors, ZIndex } from 'theme';
 import useOutsideClick from 'utils/useOutsideClick';
 
 import Img from 'components/Img';
@@ -11,10 +11,19 @@ import Box from 'components/Box';
 import Column from 'components/Column';
 import Row from 'components/Row';
 import Icon from 'components/Icon';
+import { TextButton } from 'components/Button';
 
 import { StyledComment, ImageContainer, StyledRow } from './styled';
 
-const Dropdown = ({ options, top, disabled, dropdownWidth, ...restProps }) => {
+const Dropdown = ({
+  options,
+  top,
+  disabled,
+  dropdownWidth,
+  trigger,
+  buttonTriggerTitle,
+  ...restProps
+}) => {
   const [open, setOpen] = useState(false);
 
   const dropdown = useRef(null);
@@ -33,6 +42,10 @@ const Dropdown = ({ options, top, disabled, dropdownWidth, ...restProps }) => {
     setOpen(false);
   };
 
+  const handleClick = () => {
+    if (!disabled) setOpen(!open);
+  };
+
   return (
     <Box
       ref={dropdown}
@@ -43,18 +56,28 @@ const Dropdown = ({ options, top, disabled, dropdownWidth, ...restProps }) => {
       disabled={disabled}
       {...restProps}
     >
-      <ImageContainer
-        onClick={() => {
-          if (!disabled) setOpen(!open);
-        }}
-      >
-        <Img src={dots} alt="dots" />
-      </ImageContainer>
+      {trigger === 'icon' && (
+        <ImageContainer onClick={handleClick}>
+          <Img src={dots} alt="dots" />
+        </ImageContainer>
+      )}
+      {trigger === 'button' && (
+        <TextButton
+          buttonProps={{
+            color: themeColors.secondary,
+          }}
+          disabled={disabled}
+          onClick={handleClick}
+        >
+          {buttonTriggerTitle}
+        </TextButton>
+      )}
+      {/* TODO use popover here to make options visible in scrollable content */}
       {open && (
         <Row
           position="absolute"
           right="0"
-          zIndex={999}
+          zIndex={ZIndex.DROPDOWN}
           width={dropdownWidth}
           {...getPosition()}
         >
@@ -97,6 +120,13 @@ Dropdown.propTypes = {
   top: PropTypes.bool,
   disabled: PropTypes.bool,
   dropdownWidth: PropTypes.number,
+  trigger: PropTypes.oneOf(['icon', 'button']),
+  buttonTriggerTitle: PropTypes.string,
+};
+
+Dropdown.defaultProps = {
+  trigger: 'icon',
 };
 
 export default Dropdown;
+export * from './types';

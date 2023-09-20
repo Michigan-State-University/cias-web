@@ -1,4 +1,4 @@
-import React, { FC } from 'react';
+import React, { FC, useMemo } from 'react';
 import { useIntl } from 'react-intl';
 
 import { InterventionInvitation } from 'models/Intervention';
@@ -12,6 +12,7 @@ import { TextButton } from 'components/Button';
 import Row from 'components/Row';
 import { Tooltip } from 'components/Tooltip';
 import { CircleCounter } from 'components/CircleCounter';
+import Dropdown, { DropdownOption } from 'components/Dropdown';
 
 import messages from './messages';
 import { SessionInvitationList } from './SessionInvitationList';
@@ -41,6 +42,20 @@ export const EmailParticipantsTableRow: FC<Props> = ({
       onResendInvitation(invitationId);
     }
   };
+
+  const resendOptions: DropdownOption[] = useMemo(() => {
+    if (isModularIntervention) return [];
+    return groupedInvitations.map(({ id, targetId }) => ({
+      id,
+      label: normalizedSessions[targetId]?.name,
+      action: () => onResendInvitation(id),
+    }));
+  }, [
+    isModularIntervention,
+    groupedInvitations,
+    normalizedSessions,
+    onResendInvitation,
+  ]);
 
   return (
     <StripedTR
@@ -75,15 +90,28 @@ export const EmailParticipantsTableRow: FC<Props> = ({
       )}
       <NoMaxWidthTD padding={8} width="30%">
         <Row justify="end">
-          <TextButton
-            buttonProps={{
-              color: themeColors.secondary,
-            }}
-            disabled={!invitingPossible}
-            onClick={handleResendInvitation}
-          >
-            {formatMessage(messages.resendInvitationButtonLabel)}
-          </TextButton>
+          {!isModularIntervention && (
+            // @ts-ignore
+            <Dropdown
+              disabled={!invitingPossible}
+              options={resendOptions}
+              trigger="button"
+              buttonTriggerTitle={formatMessage(
+                messages.resendInvitationButtonLabel,
+              )}
+            />
+          )}
+          {isModularIntervention && (
+            <TextButton
+              buttonProps={{
+                color: themeColors.secondary,
+              }}
+              disabled={!invitingPossible}
+              onClick={handleResendInvitation}
+            >
+              {formatMessage(messages.resendInvitationButtonLabel)}
+            </TextButton>
+          )}
         </Row>
       </NoMaxWidthTD>
     </StripedTR>
