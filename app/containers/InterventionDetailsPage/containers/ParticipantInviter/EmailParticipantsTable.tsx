@@ -15,12 +15,14 @@ export type Props = {
   invitations: InterventionInvitation[];
   isModularIntervention: boolean;
   normalizedSessions: Record<Session['id'], Session>;
+  invitingPossible: boolean;
 };
 
 export const EmailParticipantsTable: FC<Props> = ({
   invitations,
   isModularIntervention,
   normalizedSessions,
+  invitingPossible,
 }) => {
   const { formatMessage } = useIntl();
 
@@ -56,6 +58,7 @@ export const EmailParticipantsTable: FC<Props> = ({
             groupedInvitations={groupedInvitations}
             isModularIntervention={isModularIntervention}
             normalizedSessions={normalizedSessions}
+            invitingPossible={invitingPossible}
           />
         ))}
       </TBody>

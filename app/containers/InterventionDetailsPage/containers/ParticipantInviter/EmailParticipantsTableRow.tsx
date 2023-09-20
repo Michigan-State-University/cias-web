@@ -21,6 +21,7 @@ export type Props = {
   groupedInvitations: InterventionInvitation[];
   isModularIntervention: boolean;
   normalizedSessions: Record<Session['id'], Session>;
+  invitingPossible: boolean;
 };
 
 export const EmailParticipantsTableRow: FC<Props> = ({
@@ -28,6 +29,7 @@ export const EmailParticipantsTableRow: FC<Props> = ({
   groupedInvitations,
   isModularIntervention,
   normalizedSessions,
+  invitingPossible,
 }) => {
   const { formatMessage } = useIntl();
 
@@ -68,6 +70,7 @@ export const EmailParticipantsTableRow: FC<Props> = ({
             buttonProps={{
               color: themeColors.secondary,
             }}
+            disabled={!invitingPossible}
           >
             {formatMessage(messages.resendInvitationButtonLabel)}
           </TextButton>

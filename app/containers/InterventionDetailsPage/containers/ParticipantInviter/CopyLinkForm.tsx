@@ -57,32 +57,34 @@ export const CopyLinkForm: FC<Props> = ({
         <Form>
           <Column>
             <Divider />
-            <Row mt={16} gap={16}>
-              {!isModularIntervention && (
-                <FormikSelect
-                  formikKey="sessionOption"
-                  label={formatMessage(messages.sessionSelectLabel)}
-                  inputProps={{
-                    placeholder: formatMessage(
-                      messages.sessionSelectPlaceholder,
-                    ),
-                  }}
-                  options={sessionOptions}
-                />
-              )}
-              {isReportingIntervention && (
-                <FormikSelect
-                  formikKey="healthClinicOption"
-                  label={formatMessage(messages.clinicSelectLabel)}
-                  inputProps={{
-                    placeholder: formatMessage(
-                      messages.clinicSelectPlaceholder,
-                    ),
-                  }}
-                  options={healthClinicOptions}
-                />
-              )}
-            </Row>
+            {(!isModularIntervention || isReportingIntervention) && (
+              <Row mt={16} gap={16}>
+                {!isModularIntervention && (
+                  <FormikSelect
+                    formikKey="sessionOption"
+                    label={formatMessage(messages.sessionSelectLabel)}
+                    inputProps={{
+                      placeholder: formatMessage(
+                        messages.sessionSelectPlaceholder,
+                      ),
+                    }}
+                    options={sessionOptions}
+                  />
+                )}
+                {isReportingIntervention && (
+                  <FormikSelect
+                    formikKey="healthClinicOption"
+                    label={formatMessage(messages.clinicSelectLabel)}
+                    inputProps={{
+                      placeholder: formatMessage(
+                        messages.clinicSelectPlaceholder,
+                      ),
+                    }}
+                    options={healthClinicOptions}
+                  />
+                )}
+              </Row>
+            )}
             <CopyToClipboard
               // @ts-ignore
               textToCopy={createInviteUrl(

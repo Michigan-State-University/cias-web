@@ -2,11 +2,7 @@ import { FC, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useIntl } from 'react-intl';
 
-import {
-  InterventionInvitation,
-  InterventionStatus,
-} from 'models/Intervention';
-import { canInviteEmailParticipants } from 'models/Status/statusPermissions';
+import { InterventionInvitation } from 'models/Intervention';
 import { Session } from 'models/Session';
 
 import {
@@ -28,16 +24,16 @@ import messages from './messages';
 
 export type Props = {
   interventionId: string;
-  interventionStatus: InterventionStatus;
   isModularIntervention: boolean;
+  invitingPossible: boolean;
   normalizedSessions: Record<Session['id'], Session>;
   onInvite: (invitationType: ParticipantInvitationType) => void;
 };
 
 export const EmailParticipantsTab: FC<Props> = ({
   interventionId,
-  interventionStatus,
   isModularIntervention,
+  invitingPossible,
   normalizedSessions,
   onInvite,
 }) => {
@@ -56,8 +52,6 @@ export const EmailParticipantsTab: FC<Props> = ({
       dispatch(fetchInterventionInvitationsRequest(interventionId));
     }
   }, [interventionId, invitations]);
-
-  const invitingPossible = canInviteEmailParticipants(interventionStatus);
 
   if (invitationsLoading) return <Loader type="inline" />;
 
@@ -88,6 +82,7 @@ export const EmailParticipantsTab: FC<Props> = ({
           invitations={invitations}
           isModularIntervention={isModularIntervention}
           normalizedSessions={normalizedSessions}
+          invitingPossible={invitingPossible}
         />
       </Box>
     </Column>

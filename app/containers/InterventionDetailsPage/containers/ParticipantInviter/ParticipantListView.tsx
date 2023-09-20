@@ -3,6 +3,7 @@ import { useIntl } from 'react-intl';
 
 import { InterventionStatus } from 'models/Intervention';
 import { Session } from 'models/Session';
+import { canInviteEmailParticipants } from 'models/Status/statusPermissions';
 
 import { SelectOption } from 'components/Select/types';
 
@@ -35,6 +36,8 @@ export const ParticipantListView: FC<Props> = ({
 }) => {
   const { formatMessage } = useIntl();
 
+  const invitingPossible = canInviteEmailParticipants(interventionStatus);
+
   return (
     <>
       {/* @ts-ignore */}
@@ -58,8 +61,8 @@ export const ParticipantListView: FC<Props> = ({
         <div label={formatMessage(messages.emailParticipants)}>
           <EmailParticipantsTab
             interventionId={interventionId}
-            interventionStatus={interventionStatus}
             isModularIntervention={isModularIntervention}
+            invitingPossible={invitingPossible}
             normalizedSessions={normalizedSessions}
             onInvite={onInvite}
           />
