@@ -125,7 +125,7 @@ import {
 export const initialState = {
   currentSessionIndex: 0,
   intervention: null,
-  invitations: [],
+  invitations: null,
   collaborators: [],
   currentUserCollaboratorData: null,
   cache: {
@@ -202,7 +202,7 @@ export const interventionReducer = (state = initialState, action) =>
         draft.loaders.fetchInterventionLoading = true;
         draft.errors.fetchInterventionError = null;
         draft.intervention = null;
-        draft.invitations = [];
+        draft.invitations = null;
         break;
       case FETCH_INTERVENTION_SUCCESS:
         draft.loaders.fetchInterventionLoading = false;
@@ -222,7 +222,7 @@ export const interventionReducer = (state = initialState, action) =>
         break;
       case CREATE_INTERVENTION_SUCCESS:
         draft.loaders.createInterventionLoading = false;
-        draft.invitations = [];
+        draft.invitations = null;
         break;
       case CREATE_INTERVENTION_ERROR:
         break;

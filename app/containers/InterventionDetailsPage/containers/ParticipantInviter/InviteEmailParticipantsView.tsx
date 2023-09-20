@@ -55,6 +55,7 @@ export const InviteEmailParticipantsView: FC<Props> = ({
         sessionId,
         healthClinicId,
         emails,
+        () => onBack(ParticipantInvitationType.EMAIL),
       ),
     );
   };

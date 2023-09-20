@@ -1,6 +1,8 @@
 import { FC, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 
+import { OrganizableInvitation } from 'models/Organization';
+
 import {
   fetchInterventionInvitationsRequest,
   makeSelectInterventionInvitations,
@@ -26,18 +28,22 @@ export const EmailParticipantsTab: FC<Props> = ({
 }) => {
   const dispatch = useDispatch();
 
-  const invitations = useSelector(makeSelectInterventionInvitations());
+  const invitations: Nullable<OrganizableInvitation[]> = useSelector(
+    makeSelectInterventionInvitations(),
+  );
   const invitationsLoading = useSelector(
     makeSelectInterventionLoader('fetchInterventionInvitations'),
   );
 
   useEffect(() => {
-    dispatch(fetchInterventionInvitationsRequest(interventionId));
-  }, [interventionId]);
+    if (!invitations) {
+      dispatch(fetchInterventionInvitationsRequest(interventionId));
+    }
+  }, [interventionId, invitations]);
 
   if (invitationsLoading) return <Loader type="inline" />;
 
-  if (!invitations.length) {
+  if (!invitations?.length) {
     return (
       <NoParticipantsInfo
         invitationType={ParticipantInvitationType.EMAIL}

@@ -223,6 +223,7 @@ export const sendInterventionInvitationsRequest = (
   sessionId,
   healthClinicId,
   emails,
+  onSuccess,
 ) =>
   actionBuilder(SEND_INTERVENTION_INVITATIONS_REQUEST, {
     interventionId,
@@ -230,6 +231,7 @@ export const sendInterventionInvitationsRequest = (
     sessionId,
     healthClinicId,
     emails,
+    onSuccess,
   });
 export const sendInterventionInvitationsSuccess = (invitations) =>
   actionBuilder(SEND_INTERVENTION_INVITATIONS_SUCCESS, { invitations });

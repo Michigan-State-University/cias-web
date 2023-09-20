@@ -64,7 +64,7 @@ export const InviteEmailParticipantsForm: FC<Props> = ({
       validationSchema={validationSchema}
       onSubmit={onSubmit}
     >
-      {({ isValid, dirty, handleSubmit }) => (
+      {({ isValid, handleSubmit }) => (
         <Form
           style={{
             height: '100%',
@@ -99,7 +99,7 @@ export const InviteEmailParticipantsForm: FC<Props> = ({
           </Column>
           <Row justify="end">
             <Button
-              disabled={!isValid || !dirty}
+              disabled={!isValid}
               width="auto"
               px={24}
               type="submit"

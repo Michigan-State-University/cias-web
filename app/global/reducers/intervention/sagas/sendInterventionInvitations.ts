@@ -27,6 +27,7 @@ function* sendInterventionInvitations({
     sessionId,
     healthClinicId,
     emails,
+    onSuccess,
   },
 }: ReturnType<typeof sendInterventionInvitationsRequest>) {
   const requestURL = `v1/interventions/${interventionId}/invitations`;
@@ -54,6 +55,10 @@ function* sendInterventionInvitations({
     yield call(toast.info, formatMessage(messages.sendInviteSuccess), {
       toastId: SEND_INTERVENTION_INVITATIONS_SUCCESS,
     });
+
+    if (onSuccess) {
+      onSuccess();
+    }
   } catch (error) {
     yield put(sendInterventionInvitationsError());
     yield call(toast.error, formatMessage(messages.sendInviteError), {
