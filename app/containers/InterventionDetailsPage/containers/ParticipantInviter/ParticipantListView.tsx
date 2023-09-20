@@ -56,6 +56,7 @@ export const ParticipantListView: FC<Props> = ({
           <EmailParticipantsTab
             interventionId={interventionId}
             interventionStatus={interventionStatus}
+            isModularIntervention={isModularIntervention}
             onInvite={onInvite}
           />
         </div>

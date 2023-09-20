@@ -15,11 +15,15 @@ import { CircleCounter } from 'components/CircleCounter';
 import messages from './messages';
 
 export type Props = {
-  invitation: InterventionInvitation;
+  email: string;
+  groupedInvitations: InterventionInvitation[];
+  isModularIntervention: boolean;
 };
 
 export const EmailParticipantsTableRow: FC<Props> = ({
-  invitation: { email, id },
+  email,
+  groupedInvitations,
+  isModularIntervention,
 }) => {
   const { formatMessage } = useIntl();
 
@@ -33,17 +37,22 @@ export const EmailParticipantsTableRow: FC<Props> = ({
       <NoMaxWidthTD padding={8} width="50%">
         <EllipsisText text={email} fontSize={15} />
       </NoMaxWidthTD>
-      <NoMaxWidthTD padding={8} width="20%">
-        <Row align="center">
-          {/* TODO implement session counter */}
-          <Tooltip
-            id={`session-invitations-count-tooltip-${id}`}
-            content={formatMessage(messages.sessionInvitationsCountTitle)}
-          >
-            <CircleCounter count={1} size={24} bg={themeColors.secondary} />
-          </Tooltip>
-        </Row>
-      </NoMaxWidthTD>
+      {!isModularIntervention && (
+        <NoMaxWidthTD padding={8} width="20%">
+          <Row align="center">
+            <Tooltip
+              id={`session-invitations-count-tooltip-${email}`}
+              content={formatMessage(messages.sessionInvitationsCountTitle)}
+            >
+              <CircleCounter
+                count={groupedInvitations.length}
+                size={24}
+                bg={themeColors.secondary}
+              />
+            </Tooltip>
+          </Row>
+        </NoMaxWidthTD>
+      )}
       <NoMaxWidthTD padding={8} width="30%">
         <Row justify="end">
           <TextButton

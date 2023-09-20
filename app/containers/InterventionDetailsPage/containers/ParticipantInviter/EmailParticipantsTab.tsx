@@ -28,12 +28,14 @@ import messages from './messages';
 export type Props = {
   interventionId: string;
   interventionStatus: InterventionStatus;
+  isModularIntervention: boolean;
   onInvite: (invitationType: ParticipantInvitationType) => void;
 };
 
 export const EmailParticipantsTab: FC<Props> = ({
   interventionId,
   interventionStatus,
+  isModularIntervention,
   onInvite,
 }) => {
   const { formatMessage } = useIntl();
@@ -79,7 +81,10 @@ export const EmailParticipantsTab: FC<Props> = ({
         />
       </Row>
       <Box overflow="auto" maxHeight="100%">
-        <EmailParticipantsTable invitations={invitations} />
+        <EmailParticipantsTable
+          invitations={invitations}
+          isModularIntervention={isModularIntervention}
+        />
       </Box>
     </Column>
   );
