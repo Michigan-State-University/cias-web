@@ -86,4 +86,20 @@ export default defineMessages({
     id: `${scope}.emailsInputPlaceholder`,
     defaultMessage: `Enter participant e-mails (as many as needed)`,
   },
+  participantColumnHeader: {
+    id: `${scope}.participantColumnHeader`,
+    defaultMessage: `Participant`,
+  },
+  sessionsColumnHeader: {
+    id: `${scope}.sessionsColumnHeader`,
+    defaultMessage: `Sessions`,
+  },
+  resendInvitationButtonLabel: {
+    id: `${scope}.resendInvitationButtonLabel`,
+    defaultMessage: `Resend invitation`,
+  },
+  sessionInvitationsCountTitle: {
+    id: `${scope}.sessionInvitationsCountTitle`,
+    defaultMessage: `This participant has been invited to:`,
+  },
 });

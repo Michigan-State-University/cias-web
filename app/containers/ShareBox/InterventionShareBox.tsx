@@ -17,8 +17,7 @@ import {
   makeSelectInterventionInvitations,
 } from 'global/reducers/intervention';
 
-import { Intervention } from 'models/Intervention';
-import { InterventionInvite } from 'models/InterventionInvite';
+import { Intervention, InterventionInvitation } from 'models/Intervention';
 
 import Box from 'components/Box';
 import H2 from 'components/H2';
@@ -40,7 +39,7 @@ const Component = ({ organizationId }: Props) => {
   const intervention = useSelector<unknown, Nullable<Intervention>>(
     makeSelectIntervention(),
   );
-  const invites = useSelector<unknown, InterventionInvite[]>(
+  const invites = useSelector<unknown, InterventionInvitation[]>(
     makeSelectInterventionInvitations(),
   );
   const invitesLoading = useSelector<unknown, boolean>(

@@ -2,8 +2,10 @@ import { FC, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useIntl } from 'react-intl';
 
-import { OrganizableInvitation } from 'models/Organization';
-import { InterventionStatus } from 'models/Intervention';
+import {
+  InterventionInvitation,
+  InterventionStatus,
+} from 'models/Intervention';
 import { canInviteEmailParticipants } from 'models/Status/statusPermissions';
 
 import {
@@ -15,10 +17,12 @@ import {
 import Loader from 'components/Loader';
 import Column from 'components/Column';
 import Row from 'components/Row';
+import Box from 'components/Box';
 
 import { NoParticipantsInfo } from './NoParticipantsInfo';
 import { ParticipantInvitationType } from './types';
 import { InviteParticipantsButton } from './InviteParticipantsButton';
+import { EmailParticipantsTable } from './EmailParticipantsTable';
 import messages from './messages';
 
 export type Props = {
@@ -35,7 +39,7 @@ export const EmailParticipantsTab: FC<Props> = ({
   const { formatMessage } = useIntl();
   const dispatch = useDispatch();
 
-  const invitations: Nullable<OrganizableInvitation[]> = useSelector(
+  const invitations: Nullable<InterventionInvitation[]> = useSelector(
     makeSelectInterventionInvitations(),
   );
   const invitationsLoading = useSelector(
@@ -66,7 +70,7 @@ export const EmailParticipantsTab: FC<Props> = ({
   }
 
   return (
-    <Column>
+    <Column maxHeight="100%">
       <Row mb={16}>
         <InviteParticipantsButton
           invitationType={ParticipantInvitationType.EMAIL}
@@ -74,7 +78,9 @@ export const EmailParticipantsTab: FC<Props> = ({
           disabled={!invitingPossible}
         />
       </Row>
-      {JSON.stringify(invitations, null, 2)}
+      <Box overflow="auto" maxHeight="100%">
+        <EmailParticipantsTable invitations={invitations} />
+      </Box>
     </Column>
   );
 };

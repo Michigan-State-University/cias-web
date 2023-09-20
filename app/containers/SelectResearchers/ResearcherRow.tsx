@@ -8,13 +8,12 @@ import CheckGreenIcon from 'assets/svg/check-green.svg';
 
 import { UserItemState, UserWithState } from 'global/reducers/userList';
 
-import { StripedTR } from 'components/Table';
+import { StripedTR, NoMaxWidthTD } from 'components/Table';
 import Row from 'components/Row';
 import { EllipsisText } from 'components/Text';
 import { ImageButton } from 'components/Button';
 
 import messages from './messages';
-import { StyledTD } from './styled';
 
 type Props = {
   researcher: UserWithState;
@@ -37,18 +36,17 @@ const ResearcherRow = ({
       stripesPlacement="odd"
       color={colors.aliceBlueSaturated}
       bg={colors.white}
-      mb={4}
     >
-      <StyledTD padding={8}>
+      <NoMaxWidthTD padding={8}>
         <EllipsisText
           text={trimmedFullName || formatMessage(messages.waitingForActivation)}
           color={!trimmedFullName && themeColors.warning}
         />
-      </StyledTD>
-      <StyledTD padding={8}>
+      </NoMaxWidthTD>
+      <NoMaxWidthTD padding={8}>
         <EllipsisText text={email} />
-      </StyledTD>
-      <StyledTD pl={8}>
+      </NoMaxWidthTD>
+      <NoMaxWidthTD pl={8}>
         <Row>
           {(!state ||
             state === UserItemState.IDLE ||
@@ -68,7 +66,7 @@ const ResearcherRow = ({
             />
           )}
         </Row>
-      </StyledTD>
+      </NoMaxWidthTD>
     </StripedTR>
   );
 };
