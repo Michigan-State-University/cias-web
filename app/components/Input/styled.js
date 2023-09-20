@@ -4,7 +4,7 @@ import Color from 'color';
 
 import { colors, borders, fontFamily, themeColors, paddings } from 'theme';
 
-import Input from 'components/Input';
+import Input, { getBorderColor } from 'components/Input';
 import { margin, layout } from 'components/BaseComponentStyles';
 
 import { INPUT_PADDING } from './constants';
@@ -187,8 +187,11 @@ const getChipsInputPadding = (isInputFilled, compact) => {
 export const StyledChipsInput = styled.div`
   border-style: ${borders.borderStyle};
   border-width: ${borders.borderWidth};
-  border-color: ${({ isFocused }) =>
-    isFocused ? themeColors.primary : themeColors.highlight};
+  border-color: ${({ isFocused, hasError }) =>
+    getBorderColor(
+      hasError,
+      isFocused ? themeColors.primary : themeColors.highlight,
+    )};
   border-radius: ${borders.borderRadius};
   width: 100%;
   background-color: ${({ transparent }) =>

@@ -1,5 +1,6 @@
 import React, { FC } from 'react';
 import { useField } from 'formik';
+import isNil from 'lodash/isNil';
 
 import ChipsInput from 'components/Input/ChipsInput';
 import FormikControlLayout, {
@@ -25,7 +26,7 @@ export const FormikEmailsInput: FC<Props> = ({
   const { error, touched } = meta;
   const { setValue } = helpers;
 
-  // const hasError = touched && !isNil(error);
+  const hasError = touched && !isNil(error);
 
   return (
     <FormikControlLayout
@@ -41,6 +42,7 @@ export const FormikEmailsInput: FC<Props> = ({
         value={value}
         setValue={setValue}
         onBlur={onBlur}
+        hasError={hasError}
         placeholder={placeholder}
         transparent={transparent}
         compact

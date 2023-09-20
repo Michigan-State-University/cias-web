@@ -31,6 +31,7 @@ export type Props = {
   onBlur?: FocusEventHandler<HTMLInputElement>;
   name?: string;
   transparent?: boolean;
+  hasError?: boolean;
 };
 
 const ChipsInput = ({
@@ -43,6 +44,7 @@ const ChipsInput = ({
   onBlur,
   name,
   transparent,
+  hasError,
 }: Props) => {
   const hiddenInput = useRef<HTMLInputElement>(null);
   const chipsInput = useRef(null);
@@ -146,6 +148,7 @@ const ChipsInput = ({
       mt={-5}
       compact={compact}
       transparent={transparent}
+      hasError={hasError}
     >
       <Row flexWrap="wrap" width="100%">
         {map(value, (email, index) => (
