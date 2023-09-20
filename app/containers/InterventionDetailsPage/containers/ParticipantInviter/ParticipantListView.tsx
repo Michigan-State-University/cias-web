@@ -2,10 +2,11 @@ import { FC } from 'react';
 import { useIntl } from 'react-intl';
 
 import { InterventionStatus } from 'models/Intervention';
+import { Session } from 'models/Session';
 
 import { SelectOption } from 'components/Select/types';
-import Tabs from 'components/Tabs';
 
+import Tabs from 'components/Tabs';
 import { CopyLinkForm } from './CopyLinkForm';
 import { ParticipantInvitationType } from './types';
 import messages from './messages';
@@ -18,6 +19,7 @@ export type Props = {
   interventionStatus: InterventionStatus;
   sessionOptions: SelectOption<string>[];
   healthClinicOptions: SelectOption<string>[];
+  normalizedSessions: Record<Session['id'], Session>;
   onInvite: (invitationType: ParticipantInvitationType) => void;
 };
 
@@ -28,6 +30,7 @@ export const ParticipantListView: FC<Props> = ({
   interventionStatus,
   sessionOptions,
   healthClinicOptions,
+  normalizedSessions,
   onInvite,
 }) => {
   const { formatMessage } = useIntl();
@@ -57,6 +60,7 @@ export const ParticipantListView: FC<Props> = ({
             interventionId={interventionId}
             interventionStatus={interventionStatus}
             isModularIntervention={isModularIntervention}
+            normalizedSessions={normalizedSessions}
             onInvite={onInvite}
           />
         </div>

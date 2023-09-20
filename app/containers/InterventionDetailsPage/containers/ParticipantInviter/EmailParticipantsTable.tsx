@@ -2,6 +2,7 @@ import React, { FC, useMemo } from 'react';
 import { useIntl } from 'react-intl';
 
 import { InterventionInvitation } from 'models/Intervention';
+import { Session } from 'models/Session';
 
 import { Table, TBody, TH, THead, TR } from 'components/Table';
 import Text from 'components/Text';
@@ -13,11 +14,13 @@ import { EmailParticipantsTableRow } from './EmailParticipantsTableRow';
 export type Props = {
   invitations: InterventionInvitation[];
   isModularIntervention: boolean;
+  normalizedSessions: Record<Session['id'], Session>;
 };
 
 export const EmailParticipantsTable: FC<Props> = ({
   invitations,
   isModularIntervention,
+  normalizedSessions,
 }) => {
   const { formatMessage } = useIntl();
 
@@ -52,6 +55,7 @@ export const EmailParticipantsTable: FC<Props> = ({
             email={email}
             groupedInvitations={groupedInvitations}
             isModularIntervention={isModularIntervention}
+            normalizedSessions={normalizedSessions}
           />
         ))}
       </TBody>

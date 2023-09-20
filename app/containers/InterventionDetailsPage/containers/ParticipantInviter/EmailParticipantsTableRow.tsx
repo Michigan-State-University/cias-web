@@ -2,6 +2,7 @@ import React, { FC } from 'react';
 import { useIntl } from 'react-intl';
 
 import { InterventionInvitation } from 'models/Intervention';
+import { Session } from 'models/Session';
 
 import { colors, themeColors } from 'theme';
 
@@ -13,17 +14,20 @@ import { Tooltip } from 'components/Tooltip';
 import { CircleCounter } from 'components/CircleCounter';
 
 import messages from './messages';
+import { SessionInvitationList } from './SessionInvitationList';
 
 export type Props = {
   email: string;
   groupedInvitations: InterventionInvitation[];
   isModularIntervention: boolean;
+  normalizedSessions: Record<Session['id'], Session>;
 };
 
 export const EmailParticipantsTableRow: FC<Props> = ({
   email,
   groupedInvitations,
   isModularIntervention,
+  normalizedSessions,
 }) => {
   const { formatMessage } = useIntl();
 
@@ -42,7 +46,12 @@ export const EmailParticipantsTableRow: FC<Props> = ({
           <Row align="center">
             <Tooltip
               id={`session-invitations-count-tooltip-${email}`}
-              content={formatMessage(messages.sessionInvitationsCountTitle)}
+              content={
+                <SessionInvitationList
+                  groupedInvitations={groupedInvitations}
+                  normalizedSessions={normalizedSessions}
+                />
+              }
             >
               <CircleCounter
                 count={groupedInvitations.length}

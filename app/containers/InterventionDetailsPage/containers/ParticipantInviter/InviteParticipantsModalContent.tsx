@@ -5,6 +5,8 @@ import { InterventionStatus, InterventionType } from 'models/Intervention';
 import { Session } from 'models/Session';
 import { Organization } from 'models/Organization';
 
+import { normalizeArrayToObject } from 'utils/normalizeArrayToObject';
+
 import {
   fetchOrganizationRequest,
   makeSelectOrganization,
@@ -60,6 +62,11 @@ export const InviteParticipantsModalContent: FC<Props> = ({
     return sessions.map(({ id, name }) => ({ value: id, label: name }));
   }, [isModularIntervention, sessions]);
 
+  const normalizedSessions: Record<Session['id'], Session> = useMemo(() => {
+    if (isModularIntervention) return {};
+    return normalizeArrayToObject(sessions, 'id');
+  }, [isModularIntervention, sessions]);
+
   const healthClinicOptions: SelectOption<string>[] = useMemo(() => {
     const options: SelectOption<string>[] = [];
     organization?.healthSystems?.forEach(
@@ -111,6 +118,7 @@ export const InviteParticipantsModalContent: FC<Props> = ({
               interventionStatus={interventionStatus}
               sessionOptions={sessionOptions}
               healthClinicOptions={healthClinicOptions}
+              normalizedSessions={normalizedSessions}
               onInvite={handleInvite}
             />
           )}

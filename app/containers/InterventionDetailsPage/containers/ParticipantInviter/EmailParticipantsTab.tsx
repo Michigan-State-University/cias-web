@@ -7,6 +7,7 @@ import {
   InterventionStatus,
 } from 'models/Intervention';
 import { canInviteEmailParticipants } from 'models/Status/statusPermissions';
+import { Session } from 'models/Session';
 
 import {
   fetchInterventionInvitationsRequest,
@@ -29,6 +30,7 @@ export type Props = {
   interventionId: string;
   interventionStatus: InterventionStatus;
   isModularIntervention: boolean;
+  normalizedSessions: Record<Session['id'], Session>;
   onInvite: (invitationType: ParticipantInvitationType) => void;
 };
 
@@ -36,6 +38,7 @@ export const EmailParticipantsTab: FC<Props> = ({
   interventionId,
   interventionStatus,
   isModularIntervention,
+  normalizedSessions,
   onInvite,
 }) => {
   const { formatMessage } = useIntl();
@@ -84,6 +87,7 @@ export const EmailParticipantsTab: FC<Props> = ({
         <EmailParticipantsTable
           invitations={invitations}
           isModularIntervention={isModularIntervention}
+          normalizedSessions={normalizedSessions}
         />
       </Box>
     </Column>
