@@ -61,8 +61,8 @@ export const makeSelectInterventionOrganizationId = () =>
     ({ organizationId }) => organizationId,
   );
 
-export const makeSelectInterventionInvites = () =>
-  createSelector(selectIntervention, ({ invites }) => invites);
+export const makeSelectInterventionInvitations = () =>
+  createSelector(selectIntervention, ({ invitations }) => invitations);
 
 export const makeSelectInterventionSharedTo = () =>
   createSelector(

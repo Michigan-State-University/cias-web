@@ -50,7 +50,10 @@ export const ParticipantListView: FC<Props> = ({
       >
         {/* @ts-ignore */}
         <div label={formatMessage(messages.emailParticipants)}>
-          <EmailParticipantsTab onInvite={onInvite} />
+          <EmailParticipantsTab
+            interventionId={interventionId}
+            onInvite={onInvite}
+          />
         </div>
         {/* @ts-ignore */}
         <div label={formatMessage(messages.predefinedParticipants)}></div>

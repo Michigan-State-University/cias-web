@@ -93,10 +93,14 @@ export const InviteParticipantsModalContent: FC<Props> = ({
     }
   };
 
+  const showLoader =
+    organizationLoading ||
+    (isReportingIntervention && organizationId !== organization?.id);
+
   return (
     <>
-      {organizationLoading && <Loader type="inline" />}
-      {!organizationLoading && (
+      {showLoader && <Loader type="inline" />}
+      {!showLoader && (
         <>
           {currentView === InviteParticipantModalView.PARTICIPANT_LIST && (
             <ParticipantListView

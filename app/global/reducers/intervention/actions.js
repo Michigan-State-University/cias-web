@@ -208,13 +208,13 @@ export const sendSessionInviteError = () =>
 export const resendSessionInviteRequest = (id, sessionId) =>
   actionBuilder(RESEND_SESSION_INVITE_REQUEST, { id, sessionId });
 
-export const fetchInterventionInvitesRequest = (interventionId) =>
+export const fetchInterventionInvitationsRequest = (interventionId) =>
   actionBuilder(FETCH_INTERVENTION_INVITATIONS_REQUEST, {
     interventionId,
   });
-export const fetchInterventionInvitesSuccess = (invites) =>
-  actionBuilder(FETCH_INTERVENTION_INVITATIONS_SUCCESS, { invites });
-export const fetchInterventionInvitesError = (error) =>
+export const fetchInterventionInvitationsSuccess = (invitations) =>
+  actionBuilder(FETCH_INTERVENTION_INVITATIONS_SUCCESS, { invitations });
+export const fetchInterventionInvitationsError = (error) =>
   actionBuilder(FETCH_INTERVENTION_INVITATIONS_ERROR, { error });
 
 export const sendInterventionInvitationsRequest = (

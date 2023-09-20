@@ -12,9 +12,9 @@ import {
   resendInterventionInviteRequest,
   makeSelectInterventionLoader,
   makeSelectIntervention,
-  fetchInterventionInvitesRequest,
+  fetchInterventionInvitationsRequest,
   makeSelectInterventionError,
-  makeSelectInterventionInvites,
+  makeSelectInterventionInvitations,
 } from 'global/reducers/intervention';
 
 import { Intervention } from 'models/Intervention';
@@ -41,7 +41,7 @@ const Component = ({ organizationId }: Props) => {
     makeSelectIntervention(),
   );
   const invites = useSelector<unknown, InterventionInvite[]>(
-    makeSelectInterventionInvites(),
+    makeSelectInterventionInvitations(),
   );
   const invitesLoading = useSelector<unknown, boolean>(
     makeSelectInterventionLoader('fetchInterventionInvites'),
@@ -67,7 +67,7 @@ const Component = ({ organizationId }: Props) => {
   };
 
   useEffect(() => {
-    dispatch(fetchInterventionInvitesRequest(id));
+    dispatch(fetchInterventionInvitationsRequest(id));
   }, [id]);
 
   if (!intervention || invitesError) return null;

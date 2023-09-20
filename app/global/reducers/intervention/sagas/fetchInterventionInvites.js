@@ -1,33 +1,27 @@
 import axios from 'axios';
-import { put, call, takeLatest, select } from 'redux-saga/effects';
-import groupBy from 'lodash/groupBy';
+import { put, call, takeLatest } from 'redux-saga/effects';
 
 import { jsonApiToArray } from 'utils/jsonApiMapper';
 import { FETCH_INTERVENTION_INVITATIONS_REQUEST } from '../constants';
 import {
-  fetchInterventionInvitesError,
-  fetchInterventionInvitesSuccess,
+  fetchInterventionInvitationsError,
+  fetchInterventionInvitationsSuccess,
 } from '../actions';
-import { makeSelectInterventionOrganizationId } from '../selectors';
 
-function* fetchInterventionInvites({ payload: { interventionId } }) {
-  const organizationId = yield select(makeSelectInterventionOrganizationId());
+function* fetchInterventionInvitations({ payload: { interventionId } }) {
   const requestURL = `/v1/interventions/${interventionId}/invitations`;
   try {
     const { data } = yield call(axios.get, requestURL);
-    let invites = jsonApiToArray(data, 'invitation');
-    if (organizationId) {
-      invites = groupBy(invites, 'healthClinicId');
-    }
-    yield put(fetchInterventionInvitesSuccess(invites));
+    const invitations = jsonApiToArray(data, 'invitation');
+    yield put(fetchInterventionInvitationsSuccess(invitations));
   } catch (error) {
-    yield put(fetchInterventionInvitesError(error));
+    yield put(fetchInterventionInvitationsError(error));
   }
 }
 
 export default function* fetchInterventionInvitesSaga() {
   yield takeLatest(
     [FETCH_INTERVENTION_INVITATIONS_REQUEST],
-    fetchInterventionInvites,
+    fetchInterventionInvitations,
   );
 }

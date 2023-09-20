@@ -125,7 +125,7 @@ import {
 export const initialState = {
   currentSessionIndex: 0,
   intervention: null,
-  invites: [],
+  invitations: [],
   collaborators: [],
   currentUserCollaboratorData: null,
   cache: {
@@ -146,7 +146,7 @@ export const initialState = {
       id: null,
       email: null,
     },
-    fetchInterventionInvites: false,
+    fetchInterventionInvitations: false,
     sendInterventionInvitations: false,
     interventionEmailLoading: {
       id: null,
@@ -173,7 +173,7 @@ export const initialState = {
     fetchUserAccessError: null,
     createSessionError: null,
     translateInterventionError: null,
-    fetchInterventionInvites: null,
+    fetchInterventionInvitations: null,
     generateConversationsTranscript: null,
     exportInterventionError: null,
     editIntervention: null,
@@ -202,6 +202,7 @@ export const interventionReducer = (state = initialState, action) =>
         draft.loaders.fetchInterventionLoading = true;
         draft.errors.fetchInterventionError = null;
         draft.intervention = null;
+        draft.invitations = [];
         break;
       case FETCH_INTERVENTION_SUCCESS:
         draft.loaders.fetchInterventionLoading = false;
@@ -221,6 +222,7 @@ export const interventionReducer = (state = initialState, action) =>
         break;
       case CREATE_INTERVENTION_SUCCESS:
         draft.loaders.createInterventionLoading = false;
+        draft.invitations = [];
         break;
       case CREATE_INTERVENTION_ERROR:
         break;
@@ -458,22 +460,22 @@ export const interventionReducer = (state = initialState, action) =>
         break;
 
       case FETCH_INTERVENTION_INVITATIONS_REQUEST: {
-        draft.errors.fetchInterventionInvites = null;
-        draft.loaders.fetchInterventionInvites = true;
+        draft.errors.fetchInterventionInvitations = null;
+        draft.loaders.fetchInterventionInvitations = true;
         break;
       }
 
       case FETCH_INTERVENTION_INVITATIONS_SUCCESS: {
-        const { invites } = action.payload;
-        draft.invites = invites;
-        draft.loaders.fetchInterventionInvites = false;
+        const { invitations } = action.payload;
+        draft.invitations = invitations;
+        draft.loaders.fetchInterventionInvitations = false;
         break;
       }
 
       case FETCH_INTERVENTION_INVITATIONS_ERROR: {
         const { error } = action.payload;
-        draft.errors.fetchInterventionInvites = error;
-        draft.loaders.fetchInterventionInvites = false;
+        draft.errors.fetchInterventionInvitations = error;
+        draft.loaders.fetchInterventionInvitations = false;
         break;
       }
 
@@ -484,7 +486,7 @@ export const interventionReducer = (state = initialState, action) =>
 
       case SEND_INTERVENTION_INVITATIONS_SUCCESS:
         const { invitations } = action.payload;
-        draft.invites = invitations;
+        draft.invitations = invitations;
         draft.loaders.sendInterventionInvitations = false;
         break;
 
