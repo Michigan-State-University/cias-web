@@ -9,6 +9,7 @@ import {
   fetchInterventionInvitationsRequest,
   makeSelectInterventionInvitations,
   makeSelectInterventionLoader,
+  resendInterventionInvitationRequest,
 } from 'global/reducers/intervention';
 
 import Loader from 'components/Loader';
@@ -53,6 +54,10 @@ export const EmailParticipantsTab: FC<Props> = ({
     }
   }, [interventionId, invitations]);
 
+  const handleResendInvitation = (invitationId: string) => {
+    dispatch(resendInterventionInvitationRequest(invitationId, interventionId));
+  };
+
   if (invitationsLoading) return <Loader type="inline" />;
 
   if (!invitations?.length) {
@@ -83,6 +88,7 @@ export const EmailParticipantsTab: FC<Props> = ({
           isModularIntervention={isModularIntervention}
           normalizedSessions={normalizedSessions}
           invitingPossible={invitingPossible}
+          onResendInvitation={handleResendInvitation}
         />
       </Box>
     </Column>

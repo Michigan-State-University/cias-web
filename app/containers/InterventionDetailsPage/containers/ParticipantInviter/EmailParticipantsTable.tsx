@@ -16,6 +16,7 @@ export type Props = {
   isModularIntervention: boolean;
   normalizedSessions: Record<Session['id'], Session>;
   invitingPossible: boolean;
+  onResendInvitation: (invitationId: string) => void;
 };
 
 export const EmailParticipantsTable: FC<Props> = ({
@@ -23,6 +24,7 @@ export const EmailParticipantsTable: FC<Props> = ({
   isModularIntervention,
   normalizedSessions,
   invitingPossible,
+  onResendInvitation,
 }) => {
   const { formatMessage } = useIntl();
 
@@ -59,6 +61,7 @@ export const EmailParticipantsTable: FC<Props> = ({
             isModularIntervention={isModularIntervention}
             normalizedSessions={normalizedSessions}
             invitingPossible={invitingPossible}
+            onResendInvitation={onResendInvitation}
           />
         ))}
       </TBody>

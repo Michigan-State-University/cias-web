@@ -77,7 +77,7 @@ import {
   SEND_INTERVENTION_INVITATIONS_SUCCESS,
   SEND_INTERVENTION_INVITATIONS_REQUEST,
   SEND_INTERVENTION_INVITATIONS_ERROR,
-  RESEND_INTERVENTION_INVITE_REQUEST,
+  RESEND_INTERVENTION_INVITATION_REQUEST,
   ADD_INTERVENTION_ATTACHMENTS_SUCCESS,
   DELETE_INTERVENTION_ATTACHMENT_SUCCESS,
   ADD_INTERVENTION_ATTACHMENTS_REQUEST,
@@ -494,7 +494,7 @@ export const interventionReducer = (state = initialState, action) =>
         draft.loaders.sendInterventionInvitations = false;
         break;
 
-      case RESEND_INTERVENTION_INVITE_REQUEST:
+      case RESEND_INTERVENTION_INVITATION_REQUEST:
         draft.loaders.interventionEmailLoading = {
           ...action.payload,
         };

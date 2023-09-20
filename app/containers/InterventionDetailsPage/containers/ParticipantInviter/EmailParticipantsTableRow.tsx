@@ -22,6 +22,7 @@ export type Props = {
   isModularIntervention: boolean;
   normalizedSessions: Record<Session['id'], Session>;
   invitingPossible: boolean;
+  onResendInvitation: (invitationId: string) => void;
 };
 
 export const EmailParticipantsTableRow: FC<Props> = ({
@@ -30,8 +31,16 @@ export const EmailParticipantsTableRow: FC<Props> = ({
   isModularIntervention,
   normalizedSessions,
   invitingPossible,
+  onResendInvitation,
 }) => {
   const { formatMessage } = useIntl();
+
+  const handleResendInvitation = () => {
+    if (isModularIntervention) {
+      const invitationId = groupedInvitations[0].id;
+      onResendInvitation(invitationId);
+    }
+  };
 
   return (
     <StripedTR
@@ -71,6 +80,7 @@ export const EmailParticipantsTableRow: FC<Props> = ({
               color: themeColors.secondary,
             }}
             disabled={!invitingPossible}
+            onClick={handleResendInvitation}
           >
             {formatMessage(messages.resendInvitationButtonLabel)}
           </TextButton>

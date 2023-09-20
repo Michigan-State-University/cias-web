@@ -9,7 +9,7 @@ import { parametrizeRoutePath } from 'utils/router';
 
 import {
   sendInterventionInvitationsRequest,
-  resendInterventionInviteRequest,
+  resendInterventionInvitationRequest,
   makeSelectInterventionLoader,
   makeSelectIntervention,
   fetchInterventionInvitationsRequest,
@@ -62,7 +62,7 @@ const Component = ({ organizationId }: Props) => {
     dispatch(sendInterventionInvitationsRequest(emails, id));
   };
   const resendInvite = (inviteId: string): void => {
-    dispatch(resendInterventionInviteRequest(inviteId, id));
+    dispatch(resendInterventionInvitationRequest(inviteId, id));
   };
 
   useEffect(() => {

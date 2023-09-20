@@ -19,7 +19,7 @@ import translateInterventionSaga from './translateIntervention';
 import addInterventionAttachmentsSaga from './addAttachments';
 import deleteInterventionAttachmentSaga from './deleteAttachment';
 import sendInterventionInvitationsSaga from './sendInterventionInvitations';
-import resendInterventionInviteSaga from './resendInterventionInvite';
+import resendInterventionInvitationSaga from './resendInterventionInvitation';
 import fetchInterventionInvitesSaga from './fetchInterventionInvites';
 import generateConversationsTranscriptSaga from './generateConversationsTranscript';
 import exportInterventionSaga from './exportIntervention';
@@ -58,7 +58,7 @@ export {
   translateInterventionSaga,
   addInterventionAttachmentsSaga,
   sendInterventionInvitationsSaga,
-  resendInterventionInviteSaga,
+  resendInterventionInvitationSaga,
   deleteInterventionAttachmentSaga,
   fetchInterventionInvitesSaga,
   generateConversationsTranscriptSaga,
@@ -91,7 +91,7 @@ export default function* allInterventionSagas() {
     externalCopySessionSaga(),
     translateInterventionSaga(),
     sendInterventionInvitationsSaga(),
-    resendInterventionInviteSaga(),
+    resendInterventionInvitationSaga(),
     fetchInterventionInvitesSaga(),
     generateConversationsTranscriptSaga(),
     exportInterventionSaga(),

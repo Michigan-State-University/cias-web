@@ -63,7 +63,7 @@ import {
   SEND_INTERVENTION_INVITATIONS_REQUEST,
   SEND_INTERVENTION_INVITATIONS_SUCCESS,
   SEND_INTERVENTION_INVITATIONS_ERROR,
-  RESEND_INTERVENTION_INVITE_REQUEST,
+  RESEND_INTERVENTION_INVITATION_REQUEST,
   ADD_INTERVENTION_ATTACHMENTS_ERROR,
   FETCH_INTERVENTION_INVITATIONS_REQUEST,
   FETCH_INTERVENTION_INVITATIONS_SUCCESS,
@@ -238,8 +238,8 @@ export const sendInterventionInvitationsSuccess = (invitations) =>
 export const sendInterventionInvitationsError = () =>
   actionBuilder(SEND_INTERVENTION_INVITATIONS_ERROR, {});
 
-export const resendInterventionInviteRequest = (id, interventionId) =>
-  actionBuilder(RESEND_INTERVENTION_INVITE_REQUEST, { id, interventionId });
+export const resendInterventionInvitationRequest = (id, interventionId) =>
+  actionBuilder(RESEND_INTERVENTION_INVITATION_REQUEST, { id, interventionId });
 
 export const fetchSessionEmailsRequest = (index) =>
   actionBuilder(FETCH_SESSION_EMAILS_REQUEST, { index });
