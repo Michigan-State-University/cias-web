@@ -68,7 +68,7 @@ axios.interceptors.response.use(
     if (
       responseStatusEquals(response, HttpStatusCodes.UNAUTHORIZED) &&
       !requestUrl.endsWith('auth/sign_in') &&
-      !requestUrl.endsWith('verify_user_key')
+      !requestUrl.endsWith('predefined_participants/verify')
     ) {
       dispatch(logOut(window.location.pathname));
     } else if (
