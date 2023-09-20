@@ -78,4 +78,12 @@ export default defineMessages({
     id: `${scope}.invitingEmailsParticipantsNotPossibleMessage`,
     defaultMessage: `Email participants can be invited to published interventions only`,
   },
+  emailsInputLabel: {
+    id: `${scope}.emailsInputLabel`,
+    defaultMessage: `E-mail address`,
+  },
+  emailsInputPlaceholder: {
+    id: `${scope}.emailsInputPlaceholder`,
+    defaultMessage: `Enter participants e-mail (as many as needed)`,
+  },
 });

@@ -93,4 +93,9 @@ export const createInviteEmailsParticipantsFormSchema = (
             .nullable(),
         }
       : {}),
+    emails: Yup.array().min(
+      1,
+      // @ts-ignore
+      formatMessage(globalMessages.validators.required),
+    ),
   });

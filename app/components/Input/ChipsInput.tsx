@@ -1,4 +1,4 @@
-import React, { useState, useRef, useEffect } from 'react';
+import React, { useState, useRef, useEffect, FocusEventHandler } from 'react';
 import find from 'lodash/find';
 import map from 'lodash/map';
 import isEmpty from 'lodash/isEmpty';
@@ -21,13 +21,15 @@ const INVALID_EMAIL_ERROR =
 const DUPLICATED_EMAIL_ERROR =
   'app/components/Input/ChipsInput/DUPLICATED_EMAIL_ERROR';
 
-type Props = {
+export type Props = {
   value: string[];
   setValue: (newValues: string[]) => void;
   placeholder: string;
   disabled?: boolean;
-  onIsValid: (isValid: boolean) => void;
+  onIsValid?: (isValid: boolean) => void;
   compact?: boolean;
+  onBlur?: FocusEventHandler<HTMLInputElement>;
+  name: string;
 };
 
 const ChipsInput = ({
@@ -37,6 +39,8 @@ const ChipsInput = ({
   onIsValid,
   disabled = false,
   compact = false,
+  onBlur,
+  name,
 }: Props) => {
   const hiddenInput = useRef<HTMLInputElement>(null);
   const chipsInput = useRef(null);
@@ -60,6 +64,28 @@ const ChipsInput = ({
     handleChange({ key, keyCode })(event as any);
   };
 
+  const validateAndAddEmail = (inputEmailValue: string) => {
+    const newEmail = inputEmailValue.trim().replace(',', '');
+    if (!newEmail) return;
+    const isAlreadyExist = find(value, (email) => email === newEmail);
+    const isValid = emailValidator(newEmail);
+    if (isAlreadyExist) {
+      toast.error(formatMessage(messages.duplicatedEmail), {
+        toastId: DUPLICATED_EMAIL_ERROR,
+      });
+      return;
+    }
+    if (!isValid) {
+      toast.error(formatMessage(messages.invalidEmail), {
+        toastId: INVALID_EMAIL_ERROR,
+      });
+      return;
+    }
+    if (isEmpty(value)) setValue([newEmail]);
+    else setValue([...value, newEmail]);
+    setInputValue('');
+  };
+
   const handleChange =
     ({ key, keyCode }: { key?: string; keyCode?: number }) =>
     ({
@@ -78,24 +104,7 @@ const ChipsInput = ({
         lastChar === ' ' ||
         (key === 'Enter' && keyCode === 13)
       ) {
-        const newEmail = inputEmailValue.trim().replace(',', '');
-        const isAlreadyExist = find(value, (email) => email === newEmail);
-        const isValid = emailValidator(newEmail);
-        if (isAlreadyExist) {
-          toast.error(formatMessage(messages.duplicatedEmail), {
-            toastId: DUPLICATED_EMAIL_ERROR,
-          });
-          return;
-        }
-        if (!isValid) {
-          toast.error(formatMessage(messages.invalidEmail), {
-            toastId: INVALID_EMAIL_ERROR,
-          });
-          return;
-        }
-        if (isEmpty(value)) setValue([newEmail]);
-        else setValue([...value, newEmail]);
-        setInputValue('');
+        validateAndAddEmail(inputEmailValue);
       } else {
         setInputValue(inputEmailValue);
         const isValid = emailValidator(inputEmailValue);
@@ -106,16 +115,12 @@ const ChipsInput = ({
       }
     };
 
-  const handleBlur = ({ target }: React.FocusEvent<HTMLInputElement>) => {
-    const inputElement = target;
-    const { value: inputEmailValue } = inputElement;
-
-    const isValid = emailValidator(inputEmailValue);
-    if (isValid) {
-      if (isEmpty(value)) setValue([inputEmailValue]);
-      else setValue([...value, inputEmailValue]);
-      setInputValue('');
+  const handleBlur = (event: React.FocusEvent<HTMLInputElement>) => {
+    if (onBlur) {
+      onBlur(event);
     }
+    const { value: inputEmailValue } = event.target;
+    validateAndAddEmail(inputEmailValue);
   };
 
   const handleFocus = () => {
@@ -173,6 +178,7 @@ const ChipsInput = ({
           placeholder={placeholder}
           onBlur={handleBlur}
           isInputFilled={isInputFilled}
+          name={name}
         />
       </Row>
     </StyledChipsInput>

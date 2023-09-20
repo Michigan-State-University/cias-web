@@ -7,6 +7,7 @@ import { SelectOption } from 'components/Select/types';
 import FormikSelect from 'components/FormikSelect';
 import Row from 'components/Row';
 import { Button } from 'components/Button';
+import { FormikEmailsInput } from 'components/FormikEmailsInput';
 
 import messages from './messages';
 import { createInviteEmailsParticipantsFormSchema } from './utils';
@@ -51,11 +52,8 @@ export const InviteEmailParticipantsForm: FC<Props> = ({
   );
 
   const onSubmit: FormikConfig<InviteEmailParticipantsFormValues>['onSubmit'] =
-    ({ sessionOption, healthClinicOption }) => {
-      // TODO remove mock
-      onFormSubmit(sessionOption?.value, healthClinicOption?.value, [
-        'test@test.com',
-      ]);
+    ({ sessionOption, healthClinicOption, emails }) => {
+      onFormSubmit(sessionOption?.value, healthClinicOption?.value, emails);
     };
 
   return (
@@ -96,6 +94,11 @@ export const InviteEmailParticipantsForm: FC<Props> = ({
                 required
               />
             )}
+            <FormikEmailsInput
+              formikKey="emails"
+              label={formatMessage(messages.emailsInputLabel)}
+              placeholder={formatMessage(messages.emailsInputPlaceholder)}
+            />
           </Column>
           <Row justify="end">
             <Button
