@@ -10,14 +10,15 @@ export type Props = {
   formikKey: string;
   label: string;
   placeholder: string;
-  columnStyleProps?: Partial<FormikControlLayoutProps>;
-};
+  transparent?: boolean;
+} & Partial<FormikControlLayoutProps>;
 
 export const FormikEmailsInput: FC<Props> = ({
   formikKey,
   label,
   placeholder,
-  columnStyleProps,
+  transparent,
+  ...columnStyleProps
 }) => {
   const [field, meta, helpers] = useField(formikKey);
   const { value, onBlur } = field;
@@ -32,6 +33,7 @@ export const FormikEmailsInput: FC<Props> = ({
       label={label}
       touched={touched}
       error={error}
+      labelProps={{ mb: 10 }}
       {...columnStyleProps}
     >
       <ChipsInput
@@ -40,6 +42,8 @@ export const FormikEmailsInput: FC<Props> = ({
         setValue={setValue}
         onBlur={onBlur}
         placeholder={placeholder}
+        transparent={transparent}
+        compact
       />
     </FormikControlLayout>
   );

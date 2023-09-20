@@ -191,7 +191,8 @@ export const StyledChipsInput = styled.div`
     isFocused ? themeColors.primary : themeColors.highlight};
   border-radius: ${borders.borderRadius};
   width: 100%;
-  background-color: ${colors.zirkon};
+  background-color: ${({ transparent }) =>
+    transparent ? 'inherit' : colors.zirkon};
   ${margin};
   padding: ${({ isInputFilled, compact }) =>
     getChipsInputPadding(isInputFilled, compact)};
@@ -202,7 +203,8 @@ export const HiddenInput = styled(Input)`
   width: ${({ isInputFilled }) => (isInputFilled ? 'auto' : '100%')};
   border: none;
   outline: none;
-  background-color: ${colors.zirkon};
+  background-color: ${({ transparent }) =>
+    transparent ? 'inherit' : colors.zirkon};
   margin-left: ${({ isInputFilled }) => (isInputFilled ? '2px' : '0')};
   flex: 1;
 `;

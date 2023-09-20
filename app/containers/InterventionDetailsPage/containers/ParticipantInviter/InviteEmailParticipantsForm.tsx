@@ -98,6 +98,7 @@ export const InviteEmailParticipantsForm: FC<Props> = ({
               formikKey="emails"
               label={formatMessage(messages.emailsInputLabel)}
               placeholder={formatMessage(messages.emailsInputPlaceholder)}
+              transparent
             />
           </Column>
           <Row justify="end">

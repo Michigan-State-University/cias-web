@@ -29,7 +29,8 @@ export type Props = {
   onIsValid?: (isValid: boolean) => void;
   compact?: boolean;
   onBlur?: FocusEventHandler<HTMLInputElement>;
-  name: string;
+  name?: string;
+  transparent?: boolean;
 };
 
 const ChipsInput = ({
@@ -41,6 +42,7 @@ const ChipsInput = ({
   compact = false,
   onBlur,
   name,
+  transparent,
 }: Props) => {
   const hiddenInput = useRef<HTMLInputElement>(null);
   const chipsInput = useRef(null);
@@ -143,6 +145,7 @@ const ChipsInput = ({
       ref={chipsInput}
       mt={-5}
       compact={compact}
+      transparent={transparent}
     >
       <Row flexWrap="wrap" width="100%">
         {map(value, (email, index) => (
@@ -179,6 +182,7 @@ const ChipsInput = ({
           onBlur={handleBlur}
           isInputFilled={isInputFilled}
           name={name}
+          transparent={transparent}
         />
       </Row>
     </StyledChipsInput>

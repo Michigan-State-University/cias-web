@@ -84,6 +84,6 @@ export default defineMessages({
   },
   emailsInputPlaceholder: {
     id: `${scope}.emailsInputPlaceholder`,
-    defaultMessage: `Enter participants e-mail (as many as needed)`,
+    defaultMessage: `Enter participant e-mails (as many as needed)`,
   },
 });
