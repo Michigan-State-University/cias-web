@@ -457,6 +457,7 @@ const ReportTemplateMainSettings = ({
                           id="has-cover-letter-switch"
                           onToggle={onHasCoverLetterChange}
                           labelPosition={LabelPosition.Right}
+                          disabled={!canEdit}
                         >
                           {formatMessage(messages.hasCoverLetterSwitchLabel)}
                         </Switch>
