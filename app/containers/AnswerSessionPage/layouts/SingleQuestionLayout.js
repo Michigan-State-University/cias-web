@@ -42,7 +42,10 @@ const SingleQuestionLayout = ({
               py={14}
               filled
               clickable
-              onClick={() => handleClick(value, index, hfhValue)}
+              onClick={(event) => {
+                event.preventDefault();
+                handleClick(value, index, hfhValue);
+              }}
             >
               <Radio
                 id={ariaInputId}
