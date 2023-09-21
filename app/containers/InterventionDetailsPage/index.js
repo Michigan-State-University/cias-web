@@ -30,6 +30,8 @@ import CollaborateIcon from 'assets/svg/collaborate-icon.svg';
 
 import isNullOrUndefined from 'utils/isNullOrUndefined';
 import { reorder } from 'utils/reorder';
+import { isInterventionExportFeatureEnabled } from 'utils/env';
+
 import {
   canArchive,
   canEdit,
@@ -376,13 +378,17 @@ export function InterventionDetailsPage({
           },
         ]
       : []),
-    {
-      id: 'export',
-      label: formatMessage(messages.exportIntervention),
-      icon: DownloadIcon,
-      action: handleExportIntervention,
-      color: colors.bluewood,
-    },
+    ...(isInterventionExportFeatureEnabled
+      ? [
+          {
+            id: 'export',
+            label: formatMessage(messages.exportIntervention),
+            icon: DownloadIcon,
+            action: handleExportIntervention,
+            color: colors.bluewood,
+          },
+        ]
+      : []),
     ...(canEditCollaborators
       ? [
           {
