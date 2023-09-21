@@ -32,6 +32,7 @@ import SettingsTab from './Components/Tabs/SettingsTab';
 import messages from './messages';
 import {
   HIDE_BRANCHING_TAB_QUESTIONS,
+  HIDE_NARRATOR_TAB_QUESTIONS,
   HIDE_SETTINGS_TAB_QUESTIONS,
 } from '../constants';
 
@@ -53,6 +54,7 @@ const Settings = ({
   const isTlfbGroup = questionGroup?.type === GroupType.TLFB;
 
   const hideSettingsTab = HIDE_SETTINGS_TAB_QUESTIONS.includes(type);
+  const hideNarratorTab = HIDE_NARRATOR_TAB_QUESTIONS.includes(type);
   const hideBranchingTab = HIDE_BRANCHING_TAB_QUESTIONS.includes(type);
 
   return (
@@ -75,7 +77,10 @@ const Settings = ({
             id={id}
           />
         </div>
-        <div label={formatMessage(messages[settingsTabLabels.narrator])}>
+        <div
+          label={formatMessage(messages[settingsTabLabels.narrator])}
+          hidden={hideNarratorTab}
+        >
           <NarratorTab
             disabled={!editingPossible}
             narrator={narrator}

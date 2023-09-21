@@ -4,6 +4,8 @@ import isEqual from 'lodash/isEqual';
 import { useDispatch, useSelector } from 'react-redux';
 import { Formik } from 'formik';
 
+import { isHfhsIntegrationFeatureEnabled } from 'utils/env';
+
 import Tabs from 'components/Tabs';
 
 import {
@@ -127,8 +129,11 @@ const Component = ({ modalState: intervention, closeModal }: Props) => {
                 isDraft={intervention.status === InterventionStatus.DRAFT}
               />
             </div>
-            {/* @ts-ignore */}
-            <div label={formatMessage(messages.henryFordLabel)}>
+            <div
+              // @ts-ignore
+              label={formatMessage(messages.henryFordLabel)}
+              hidden={!isHfhsIntegrationFeatureEnabled}
+            >
               <HfHsAccessModalUI
                 values={values}
                 onSave={handleSubmit}
