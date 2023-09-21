@@ -186,7 +186,7 @@ export function InterventionPage({
         <Box mx={24} width={2} height="100%" bg={colors.linkWater} />
 
         <TextButton
-          buttonProps={{ align: 'center' }}
+          buttonProps={{ display: 'flex', align: 'center' }}
           onClick={onImportIconClick}
         >
           <Img
