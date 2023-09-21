@@ -49,7 +49,6 @@ const CsvFileReader = ({
       noClick
       style={styles}
       noProgressBar
-      config={{ newline: `\n` }}
     >
       {() => (
         <Row disabled={disabled} align="center" clickable onClick={handleOpen}>
