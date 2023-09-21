@@ -71,24 +71,11 @@ exports[`<AnswerSessionPage /> Should render and match the snapshot 1`] = `
   height: auto;
   display: block;
   border-radius: 5px;
-  width: 2px;
-  height: 100%;
-  margin-right: 24px;
-  margin-left: 24px;
-  background-color: rgba(233,241,251,1);
-  color: unset;
-}
-
-.c53 {
-  width: auto;
-  height: auto;
-  display: block;
-  border-radius: 5px;
   cursor: pointer;
   color: unset;
 }
 
-.c65 {
+.c62 {
   width: auto;
   height: auto;
   display: block;
@@ -155,7 +142,7 @@ exports[`<AnswerSessionPage /> Should render and match the snapshot 1`] = `
   gap: 8px;
 }
 
-.c55 {
+.c52 {
   display: -webkit-box;
   display: -webkit-flex;
   display: -ms-flexbox;
@@ -198,14 +185,7 @@ exports[`<AnswerSessionPage /> Should render and match the snapshot 1`] = `
   height: auto;
 }
 
-.c52 {
-  width: auto;
-  height: auto;
-  margin-bottom: 2px;
-  margin-right: 8px;
-}
-
-.c54 {
+.c51 {
   width: auto;
   height: auto;
   -webkit-transition: -webkit-transform 0.2s;
@@ -362,30 +342,6 @@ exports[`<AnswerSessionPage /> Should render and match the snapshot 1`] = `
   border: 1px solid transparent;
 }
 
-.c51 {
-  outline: none;
-  border: none;
-  background: transparent;
-  font-weight: bold;
-  font-size: 13px;
-  line-height: 17px;
-  padding: 2px;
-  cursor: pointer;
-  display: -webkit-box;
-  display: -webkit-flex;
-  display: -ms-flexbox;
-  display: flex;
-  font-weight: 700;
-  color: #2F3850;
-  -webkit-align-content: center;
-  -ms-flex-line-pack: center;
-  align-content: center;
-  -webkit-align-items: center;
-  -webkit-box-align: center;
-  -ms-flex-align: center;
-  align-items: center;
-}
-
 .c37 {
   display: -webkit-box;
   display: -webkit-flex;
@@ -487,7 +443,7 @@ exports[`<AnswerSessionPage /> Should render and match the snapshot 1`] = `
   margin: 0px;
 }
 
-.c63 {
+.c60 {
   padding: 12px;
   border-style: solid;
   border-width: 1px;
@@ -499,46 +455,14 @@ exports[`<AnswerSessionPage /> Should render and match the snapshot 1`] = `
   color: #2F3850;
 }
 
-.c63:focus {
+.c60:focus {
   box-shadow: none;
   outline: none;
   border-color: #107969;
 }
 
-.c63:disabled {
+.c60:disabled {
   color: #ABBBD1;
-}
-
-.c62 {
-  display: -webkit-box;
-  display: -webkit-flex;
-  display: -ms-flexbox;
-  display: flex;
-  -webkit-align-items: center;
-  -webkit-box-align: center;
-  -ms-flex-align: center;
-  align-items: center;
-  position: relative;
-}
-
-.c64 {
-  position: absolute;
-  left: 10px;
-  top: 10px;
-}
-
-.c57 {
-  display: none;
-}
-
-.c61 {
-  margin-right: 5px;
-  border-radius: 5px;
-}
-
-.c56:disabled + label > .c60 {
-  opacity: 0.5;
-  cursor: not-allowed;
 }
 
 .c59 {
@@ -550,14 +474,46 @@ exports[`<AnswerSessionPage /> Should render and match the snapshot 1`] = `
   -webkit-box-align: center;
   -ms-flex-align: center;
   align-items: center;
+  position: relative;
+}
+
+.c61 {
+  position: absolute;
+  left: 10px;
+  top: 10px;
+}
+
+.c54 {
+  display: none;
+}
+
+.c58 {
+  margin-right: 5px;
+  border-radius: 5px;
+}
+
+.c53:disabled + label > .c57 {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.c56 {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
   width: 100%;
 }
 
-.c59:hover {
+.c56:hover {
   cursor: pointer;
 }
 
-.c56:disabled + .c58 {
+.c53:disabled + .c55 {
   opacity: 0.5;
   cursor: not-allowed;
 }
@@ -1211,29 +1167,6 @@ exports[`<AnswerSessionPage /> Should render and match the snapshot 1`] = `
                   </div>
                 </div>
               </div>
-              <div
-                class="c50"
-                height="100%"
-                width="2"
-              />
-              <button
-                class="c51"
-                display="flex"
-                font-weight="bold"
-              >
-                <img
-                  alt="Import Intervention"
-                  class="c52"
-                  src="IMAGE_MOCK"
-                />
-                <p
-                  class="c41"
-                  color="#B727EA"
-                  font-weight="bold"
-                >
-                  Import Intervention
-                </p>
-              </button>
               <span
                 style="display: table; clear: both;"
               />
@@ -1255,7 +1188,7 @@ exports[`<AnswerSessionPage /> Should render and match the snapshot 1`] = `
                       style="box-sizing: border-box; min-height: 1px; position: relative; padding-left: 15px; padding-right: 15px; width: 100%; flex-basis: 0px; flex-grow: 1; flex-shrink: 0; max-width: 100%; margin-left: 0%;"
                     >
                       <div
-                        class="c53"
+                        class="c50"
                         cursor="pointer"
                       >
                         <div
@@ -1312,7 +1245,7 @@ exports[`<AnswerSessionPage /> Should render and match the snapshot 1`] = `
                               >
                                 <img
                                   alt="arrow"
-                                  class="c54"
+                                  class="c51"
                                   src="IMAGE_MOCK"
                                   transform=""
                                 />
@@ -1334,7 +1267,7 @@ exports[`<AnswerSessionPage /> Should render and match the snapshot 1`] = `
                       style="box-sizing: border-box; min-height: 1px; position: relative; padding-left: 15px; padding-right: 15px; width: 100%; flex-basis: 0px; flex-grow: 1; flex-shrink: 0; max-width: 100%; margin-left: 0%;"
                     >
                       <div
-                        class="c53"
+                        class="c50"
                         cursor="pointer"
                       >
                         <div
@@ -1453,7 +1386,7 @@ exports[`<AnswerSessionPage /> Should render and match the snapshot 1`] = `
                               >
                                 <img
                                   alt="arrow"
-                                  class="c54"
+                                  class="c51"
                                   src="IMAGE_MOCK"
                                   transform=""
                                 />
@@ -1477,19 +1410,19 @@ exports[`<AnswerSessionPage /> Should render and match the snapshot 1`] = `
                       style="box-sizing: border-box; min-height: 1px; position: relative; padding-left: 15px; padding-right: 15px; width: 100%; flex-basis: 0px; flex-grow: 1; flex-shrink: 0; max-width: 100%; margin-left: 0%;"
                     >
                       <div
-                        class="c55"
+                        class="c52"
                       >
                         <input
-                          class="c56 c57"
+                          class="c53 c54"
                           id="intervetions-starred-filter"
                           type="checkbox"
                         />
                         <label
-                          class="c58 c59"
+                          class="c55 c56"
                           for="intervetions-starred-filter"
                         >
                           <img
-                            class="c60 c61"
+                            class="c57 c58"
                             src="IMAGE_MOCK"
                           />
                           <p
@@ -1513,18 +1446,18 @@ exports[`<AnswerSessionPage /> Should render and match the snapshot 1`] = `
                       style="box-sizing: border-box; min-height: 1px; position: relative; padding-left: 15px; padding-right: 15px; width: 100%; flex-basis: 0px; flex-grow: 1; flex-shrink: 0; max-width: 100%; margin-left: 0%;"
                     >
                       <div
-                        class="c62"
+                        class="c59"
                       >
                         <input
                           aria-label="Filter Interventions by name"
-                          class="c63"
+                          class="c60"
                           placeholder="Filter by name"
                           type="text"
                           width="100%"
                         />
                         <img
                           alt="search"
-                          class="c64"
+                          class="c61"
                           src="IMAGE_MOCK"
                         />
                         
@@ -1538,7 +1471,7 @@ exports[`<AnswerSessionPage /> Should render and match the snapshot 1`] = `
               />
             </div>
             <div
-              class="c65"
+              class="c62"
             >
               <div
                 class="virtual-grid-auto-sizer"
