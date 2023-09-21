@@ -183,16 +183,10 @@ export function InterventionPage({
             <FormattedMessage {...messages.myInterventions} />
           </H1>
         </HelpIconTooltip>
-        <Box
-          mx={24}
-          width={2}
-          height="100%"
-          bg={colors.linkWater}
-          display="none"
-        />
+        <Box mx={24} width={2} height="100%" bg={colors.linkWater} />
 
         <TextButton
-          buttonProps={{ display: 'none', align: 'center' }}
+          buttonProps={{ align: 'center' }}
           onClick={onImportIconClick}
         >
           <Img

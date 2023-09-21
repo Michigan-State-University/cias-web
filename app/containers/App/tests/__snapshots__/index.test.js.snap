@@ -73,7 +73,6 @@ exports[`<AnswerSessionPage /> Should render and match the snapshot 1`] = `
   border-radius: 5px;
   width: 2px;
   height: 100%;
-  display: none;
   margin-right: 24px;
   margin-left: 24px;
   background-color: rgba(233,241,251,1);
@@ -372,7 +371,6 @@ exports[`<AnswerSessionPage /> Should render and match the snapshot 1`] = `
   line-height: 17px;
   padding: 2px;
   cursor: pointer;
-  display: none;
   font-weight: 700;
   color: #2F3850;
   -webkit-align-content: center;
@@ -1211,13 +1209,11 @@ exports[`<AnswerSessionPage /> Should render and match the snapshot 1`] = `
               </div>
               <div
                 class="c50"
-                display="none"
                 height="100%"
                 width="2"
               />
               <button
                 class="c51"
-                display="none"
                 font-weight="bold"
               >
                 <img
