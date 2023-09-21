@@ -13,10 +13,11 @@ import {
 
 import { arraysOverlap } from 'utils/arrayUtils';
 import LocalStorageService from 'utils/localStorageService';
+import { getRedirectPathFromQueryParams } from 'utils/router';
 
-import { makeSelectUser, REDIRECT_QUERY_KEY } from 'global/reducers/auth';
+import { makeSelectUser } from 'global/reducers/auth';
 import { makeSelectNavbarHeight } from 'global/reducers/globalState';
-import { RoutePath } from 'global/constants';
+import { RoutePath, REDIRECT_QUERY_KEY } from 'global/constants';
 
 import Sidebar from 'containers/Sidebar';
 import Navbar from 'containers/Navbar';
@@ -53,19 +54,7 @@ class AppRoute extends Route {
     );
 
     if (user && unauthorizedUsersOnly) {
-      const queryParams = new URLSearchParams(location.search);
-      const redirectTo = queryParams.get(REDIRECT_QUERY_KEY);
-      queryParams.delete(REDIRECT_QUERY_KEY);
-
-      let redirectPath = redirectTo ?? RoutePath.DASHBOARD;
-
-      if (queryParams.size) {
-        const hasRedirectPathParams = redirectPath.includes('?');
-        redirectPath += `${
-          hasRedirectPathParams ? '&' : '?'
-        }${queryParams.toString()}`;
-      }
-
+      const redirectPath = getRedirectPathFromQueryParams(location.search);
       return <Redirect to={redirectPath} />;
     }
 

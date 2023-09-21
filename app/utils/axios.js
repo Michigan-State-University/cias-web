@@ -6,13 +6,17 @@ import axiosRetry from 'axios-retry';
 import { store } from 'configureStore';
 import { headersConst } from 'utils/getHeaders';
 import objectToCamelKebabCase from 'utils/objectToCamelKebabCase';
-import { logOut, REDIRECT_QUERY_KEY } from 'global/reducers/auth';
-import { previewRegex, guestLogInRegex } from 'global/constants/regex';
+import { logOut } from 'global/reducers/auth';
+import {
+  previewRegex,
+  guestLogInRegex,
+  REDIRECT_QUERY_KEY,
+  RoutePath,
+} from 'global/constants';
 
 import LocalStorageService from './localStorageService';
 import { HttpMethods, HttpStatusCodes } from './constants';
 import { responseMethodEquals, responseStatusEquals } from './axiosUtils';
-import { RoutePath } from '../global/constants';
 
 /**
  * by default it retries when error does not have a response (ex. status 5xx)
