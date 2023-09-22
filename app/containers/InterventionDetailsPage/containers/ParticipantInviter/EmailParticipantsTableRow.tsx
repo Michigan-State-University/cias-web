@@ -100,6 +100,7 @@ export const EmailParticipantsTableRow: FC<Props> = ({
               buttonTriggerTitle={formatMessage(
                 messages.resendInvitationButtonLabel,
               )}
+              dropdownTitle={formatMessage(messages.dropdownTitle)}
             />
           )}
           {!showDropdown && (

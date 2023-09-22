@@ -8,6 +8,7 @@ import { colors, boxShadows, themeColors, ZIndex } from 'theme';
 import Img from 'components/Img';
 import Box from 'components/Box';
 import Column from 'components/Column';
+import Text from 'components/Text';
 import Icon from 'components/Icon';
 import { TextButton } from 'components/Button';
 import { PopoverModal } from 'components/Modal';
@@ -21,6 +22,7 @@ const Dropdown = ({
   dropdownWidth,
   trigger,
   buttonTriggerTitle,
+  dropdownTitle,
   ...restProps
 }) => {
   const [open, setOpen] = useState(false);
@@ -78,6 +80,11 @@ const Dropdown = ({
           zIndex={ZIndex.DROPDOWN}
         >
           <Column>
+            {dropdownTitle && (
+              <Text fontSize={15} fontWeight="bold" margin="16px 16px 8px 8px">
+                {dropdownTitle}
+              </Text>
+            )}
             {options.map((option) => (
               <StyledRow
                 disabled={option.disabled}
@@ -118,6 +125,7 @@ Dropdown.propTypes = {
   dropdownWidth: PropTypes.number,
   trigger: PropTypes.oneOf(['icon', 'button']),
   buttonTriggerTitle: PropTypes.string,
+  dropdownTitle: PropTypes.string,
 };
 
 Dropdown.defaultProps = {

@@ -102,4 +102,8 @@ export default defineMessages({
     id: `${scope}.sessionInvitationsCountTitle`,
     defaultMessage: `This participant has been invited to:`,
   },
+  dropdownTitle: {
+    id: `${scope}.dropdownTitle`,
+    defaultMessage: `Select session to resend invitation to:`,
+  },
 });
