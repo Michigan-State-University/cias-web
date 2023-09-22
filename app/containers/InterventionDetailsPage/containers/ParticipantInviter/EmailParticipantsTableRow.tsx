@@ -36,14 +36,12 @@ export const EmailParticipantsTableRow: FC<Props> = ({
 }) => {
   const { formatMessage } = useIntl();
 
-  const handleResendInvitation = () => {
-    if (isModularIntervention) {
-      const invitationId = groupedInvitations[0].id;
-      onResendInvitation(invitationId);
-    }
+  const handleResendInvitationsButtonClick = () => {
+    const invitationId = groupedInvitations[0].id;
+    onResendInvitation(invitationId);
   };
 
-  const resendOptions: DropdownOption[] = useMemo(() => {
+  const resendDropdownOptions: DropdownOption[] = useMemo(() => {
     if (isModularIntervention) return [];
     return groupedInvitations.map(({ id, targetId }) => ({
       id,
@@ -56,6 +54,8 @@ export const EmailParticipantsTableRow: FC<Props> = ({
     normalizedSessions,
     onResendInvitation,
   ]);
+
+  const showDropdown = resendDropdownOptions.length > 1;
 
   return (
     <StripedTR
@@ -90,25 +90,25 @@ export const EmailParticipantsTableRow: FC<Props> = ({
       )}
       <NoMaxWidthTD padding={8} width="30%">
         <Row justify="end">
-          {!isModularIntervention && (
+          {showDropdown && (
             // @ts-ignore
             <Dropdown
               id={`resend-invitation-options-${email}`}
               disabled={!invitingPossible}
-              options={resendOptions}
+              options={resendDropdownOptions}
               trigger="button"
               buttonTriggerTitle={formatMessage(
                 messages.resendInvitationButtonLabel,
               )}
             />
           )}
-          {isModularIntervention && (
+          {!showDropdown && (
             <TextButton
               buttonProps={{
                 color: themeColors.secondary,
               }}
               disabled={!invitingPossible}
-              onClick={handleResendInvitation}
+              onClick={handleResendInvitationsButtonClick}
             >
               {formatMessage(messages.resendInvitationButtonLabel)}
             </TextButton>
