@@ -104,6 +104,7 @@ export const EmailParticipantsTableRow: FC<Props> = ({
             />
           )}
           {!showDropdown && (
+            // TODO add loader
             <TextButton
               buttonProps={{
                 color: themeColors.secondary,

@@ -83,6 +83,7 @@ export const EmailParticipantsTab: FC<Props> = ({
         />
       </Row>
       <Box overflow="auto" maxHeight="100%">
+        {/* TODO group by clinic */}
         <EmailParticipantsTable
           invitations={invitations}
           isModularIntervention={isModularIntervention}
