@@ -54,6 +54,8 @@ export interface Session {
   formula: Formula<SessionTargetType>;
   reportTemplatesCount: number;
   type: SessionTypes;
+  // TODO remove this field
+  emails?: any[];
   estimatedTime: number;
   currentNarrator: CharacterType;
   multipleFill: boolean;
