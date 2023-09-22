@@ -1,23 +1,22 @@
-import React, { useState, useRef } from 'react';
+import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 
 import dots from 'assets/svg/dots.svg';
 
 import { colors, boxShadows, themeColors, ZIndex } from 'theme';
-import useOutsideClick from 'utils/useOutsideClick';
 
 import Img from 'components/Img';
 import Box from 'components/Box';
 import Column from 'components/Column';
-import Row from 'components/Row';
 import Icon from 'components/Icon';
 import { TextButton } from 'components/Button';
+import { PopoverModal } from 'components/Modal';
 
 import { StyledComment, ImageContainer, StyledRow } from './styled';
 
 const Dropdown = ({
+  id,
   options,
-  top,
   disabled,
   dropdownWidth,
   trigger,
@@ -25,17 +24,6 @@ const Dropdown = ({
   ...restProps
 }) => {
   const [open, setOpen] = useState(false);
-
-  const dropdown = useRef(null);
-  useOutsideClick(dropdown, () => setOpen(false), open);
-
-  const getPosition = () => {
-    if (top)
-      return {
-        bottom: '35px',
-      };
-    return { top: '35px' };
-  };
 
   const callAction = (action) => {
     action();
@@ -48,7 +36,6 @@ const Dropdown = ({
 
   return (
     <Box
-      ref={dropdown}
       display="flex"
       justify="end"
       align="start"
@@ -57,7 +44,7 @@ const Dropdown = ({
       {...restProps}
     >
       {trigger === 'icon' && (
-        <ImageContainer onClick={handleClick}>
+        <ImageContainer onClick={handleClick} id={id}>
           <Img src={dots} alt="dots" />
         </ImageContainer>
       )}
@@ -68,20 +55,29 @@ const Dropdown = ({
           }}
           disabled={disabled}
           onClick={handleClick}
+          id={id}
         >
           {buttonTriggerTitle}
         </TextButton>
       )}
-      {/* TODO use popover here to make options visible in scrollable content */}
       {open && (
-        <Row
-          position="absolute"
-          right="0"
+        <PopoverModal
+          referenceElement={id}
+          defaultPlacement="bottom"
+          onClose={() => setOpen(false)}
+          contentPadding="0px"
+          offsetOptions={16}
+          modalStyle={{
+            backgroundColor: colors.white,
+            borderColor: 'transparent',
+            borderRadius: 10,
+            boxShadow: boxShadows.black,
+            width: dropdownWidth,
+          }}
+          hideArrow
           zIndex={ZIndex.DROPDOWN}
-          width={dropdownWidth}
-          {...getPosition()}
         >
-          <Column bg={colors.white} shadow={boxShadows.black} borderRadius={10}>
+          <Column>
             {options.map((option) => (
               <StyledRow
                 disabled={option.disabled}
@@ -109,15 +105,15 @@ const Dropdown = ({
               </StyledRow>
             ))}
           </Column>
-        </Row>
+        </PopoverModal>
       )}
     </Box>
   );
 };
 
 Dropdown.propTypes = {
+  id: PropTypes.string,
   options: PropTypes.array,
-  top: PropTypes.bool,
   disabled: PropTypes.bool,
   dropdownWidth: PropTypes.number,
   trigger: PropTypes.oneOf(['icon', 'button']),

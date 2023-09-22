@@ -156,7 +156,11 @@ const Header = ({
               />
             </Row>
             <InterventionOptions>
-              <Dropdown options={options} clickable />
+              <Dropdown
+                id={`intervention-options-${interventionId}`}
+                options={options}
+                clickable
+              />
             </InterventionOptions>
           </Row>
           {catMhAccess && (

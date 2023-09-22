@@ -374,7 +374,10 @@ const InterventionTile = ({
                     }
                   />
                   <div onClick={preventDefault}>
-                    <Dropdown options={options} />
+                    <Dropdown
+                      id={`intervention-list-item-options-${id}`}
+                      options={options}
+                    />
                   </div>
                 </Row>
               )}

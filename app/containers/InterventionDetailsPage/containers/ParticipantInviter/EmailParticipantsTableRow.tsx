@@ -93,6 +93,7 @@ export const EmailParticipantsTableRow: FC<Props> = ({
           {!isModularIntervention && (
             // @ts-ignore
             <Dropdown
+              id={`resend-invitation-options-${email}`}
               disabled={!invitingPossible}
               options={resendOptions}
               trigger="button"

@@ -31,6 +31,7 @@ const TextButton = ({
   spinnerProps,
   disabled,
   outlined,
+  id,
 }) => {
   const button = useRef(null);
   if (loading)
@@ -42,6 +43,7 @@ const TextButton = ({
         align="center"
         justify="center"
         {...loaderProps}
+        id={id}
       >
         <Spinner color={themeColors.secondary} {...spinnerProps} />
       </Row>
@@ -54,6 +56,7 @@ const TextButton = ({
       fontWeight="bold"
       onClick={onClick}
       outlined={outlined}
+      id={id}
       {...buttonProps}
     >
       {children}
@@ -71,6 +74,7 @@ TextButton.propTypes = {
   spinnerProps: PropTypes.object,
   disabled: PropTypes.bool,
   outlined: PropTypes.bool,
+  id: PropTypes.string,
 };
 
 export default TextButton;

@@ -248,7 +248,11 @@ function SessionListItem({
                 </StyledLink>
               </StyledRow>
               <Box mb={8}>
-                <Dropdown options={options} clickable id={id} />
+                <Dropdown
+                  id={`session-list-item-options-${id}`}
+                  options={options}
+                  clickable
+                />
               </Box>
             </Row>
 
