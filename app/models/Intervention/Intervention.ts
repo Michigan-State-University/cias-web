@@ -30,6 +30,12 @@ export enum CatMhLicenseType {
   UNLIMITED = 'unlimited',
 }
 
+export enum SensitiveDataState {
+  COLLECTED = 'collected',
+  MARKED_TO_REMOVE = 'marked_to_remove',
+  REMOVED = 'removed',
+}
+
 type UserWithAccess = {
   id: string;
   email: string;
@@ -49,6 +55,9 @@ export interface SimpleIntervention {
   userId: string;
   status: InterventionStatus;
   user: { id: string; firstName: string; email: string; lastName: string };
+  sensitiveDataState: SensitiveDataState;
+  clearSensitiveDataScheduledAt: Nullable<string>;
+  starred: boolean;
 }
 
 export interface Intervention extends SimpleIntervention {

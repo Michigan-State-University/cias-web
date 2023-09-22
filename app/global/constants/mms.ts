@@ -8,10 +8,12 @@ export const MMS_LARGE_IMAGE_FILE_FORMATS = [
 
 export const MMS_ACCEPTED_FILE_FORMATS = [
   ...MMS_LARGE_IMAGE_FILE_FORMATS,
-  'audio/basic',
-  'audio/L24',
   'audio/mp4',
   'audio/mpeg',
+  'application/pdf',
+  'text/csv',
+  'audio/basic',
+  'audio/L24',
   'audio/ogg',
   'audio/vnd.rn-realaudio',
   'audio/vnd.wave',
@@ -42,7 +44,6 @@ export const MMS_ACCEPTED_FILE_FORMATS = [
   'text/richtext',
   'text/calendar',
   'text/directory',
-  'application/pdf',
   'application/vcard',
   'application/vnd.apple.pkpass',
 ];

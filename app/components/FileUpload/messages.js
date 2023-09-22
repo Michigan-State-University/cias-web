@@ -25,8 +25,9 @@ export default defineMessages({
     id: `${scope}.fileTooLargeCustomValidation`,
     defaultMessage: 'File cannot be larger than {maxSize}',
   },
-  [FileErrorCode.PLACEHOLDER]: {
-    id: `${scope}.${FileErrorCode.PLACEHOLDER}`,
-    defaultMessage: '',
+  [FileErrorCode.FILE_INVALID_TYPE]: {
+    id: `${scope}.${FileErrorCode.FILE_INVALID_TYPE}`,
+    defaultMessage:
+      'Unsupported file format. Supported file formats are: {formattedAcceptedFormats}',
   },
 });

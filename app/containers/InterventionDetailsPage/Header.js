@@ -1,10 +1,14 @@
 import React, { useMemo } from 'react';
 import PropTypes from 'prop-types';
 import { Row as GRow, Col as GCol, useScreenClass } from 'react-grid-system';
-import { FormattedMessage, IntlShape, injectIntl } from 'react-intl';
+import { FormattedMessage, IntlShape, useIntl } from 'react-intl';
 
 import { themeColors } from 'theme';
-import { InterventionType } from 'models/Intervention';
+import {
+  CatMhLicenseType,
+  InterventionType,
+  SensitiveDataState,
+} from 'models/Intervention';
 import { useRoleManager } from 'models/User/RolesManager';
 
 import globalMessages from 'global/i18n/globalMessages';
@@ -22,13 +26,16 @@ import { StyledInput } from 'components/Input/StyledInput';
 import { selectInputText } from 'components/Input/utils';
 import { TextButton } from 'components/Button';
 import Icon from 'components/Icon';
+import { CollaboratingIndicator } from 'components/CollaboratingIndicator';
+import { DataClearedIndicator } from 'components/DataClearedIndicator';
+import { HelpIconTooltip } from 'components/HelpIconTooltip';
 
 import InterventionStatusButtons from './components/InterventionStatusButtons';
 import { StatusLabel, InterventionOptions } from './styled';
 import messages from './messages';
+import { CAT_MH_TEST_COUNT_WARNING_THRESHOLD } from './constants';
 
 const Header = ({
-  intl: { formatMessage },
   status,
   canCurrentUserMakeChanges,
   editingPossible,
@@ -46,11 +53,24 @@ const Header = ({
   interventionType,
   sharingPossible,
   userOrganizableId,
+  hasCollaborators,
+  sensitiveDataState,
+  catMhAccess,
+  catMhLicenseType,
+  catMhPool,
+  createdCatMhSessionCount,
 }) => {
+  const { formatMessage } = useIntl();
   const screenClass = useScreenClass();
   const { isAdmin } = useRoleManager();
 
   const isModuleIntervention = interventionType !== InterventionType.DEFAULT;
+
+  const testsLeft = catMhPool - createdCatMhSessionCount;
+  const hasSmallNumberOfCatMhSessionsRemaining =
+    catMhLicenseType !== CatMhLicenseType.UNLIMITED &&
+    (!catMhPool ||
+      testsLeft / catMhPool <= CAT_MH_TEST_COUNT_WARNING_THRESHOLD);
 
   const renderBackButton = useMemo(() => {
     if (organizationId && (isAdmin || organizationId === userOrganizableId)) {
@@ -84,12 +104,8 @@ const Header = ({
 
       <GRow>
         <GCol xl={7} lg={12}>
-          <Row justify="end" align="center" mt={16}>
-            <Box mr={15}>
-              <StatusLabel status={status}>
-                {status && formatMessage(globalMessages.statuses[status])}
-              </StatusLabel>
-            </Box>
+          <Row justify="end" align="center" mt={16} gap={12}>
+            {hasCollaborators && <CollaboratingIndicator iconSize={20} />}
             <StyledInput
               disabled={!editingPossible}
               ml={-12}
@@ -119,6 +135,16 @@ const Header = ({
                 {formatMessage(messages.inviteToIntervention)}
                 <Icon ml={5} src={MailIcon} />
               </TextButton>
+            )}
+          </Row>
+          <Row align="center" mt={8} gap={12}>
+            <Box>
+              <StatusLabel status={status}>
+                {status && formatMessage(globalMessages.statuses[status])}
+              </StatusLabel>
+            </Box>
+            {sensitiveDataState === SensitiveDataState.REMOVED && (
+              <DataClearedIndicator opacity={1} showTooltip />
             )}
           </Row>
         </GCol>
@@ -152,6 +178,32 @@ const Header = ({
               <Dropdown options={options} clickable />
             </InterventionOptions>
           </Row>
+          {catMhAccess && (
+            <Row width="100%" justify="end" align="center" mt={8}>
+              <HelpIconTooltip
+                id="cat-mh-tests-limit-tooltip"
+                tooltipContent={formatMessage(messages.catMhCountInfo)}
+              >
+                {formatMessage(messages.catMhCounter, {
+                  catMhLicenseType,
+                  current: testsLeft ?? 0,
+                  initial: catMhPool ?? 0,
+                  used: createdCatMhSessionCount,
+                  counter: (chunks) => (
+                    <span
+                      style={{
+                        color: hasSmallNumberOfCatMhSessionsRemaining
+                          ? themeColors.warning
+                          : themeColors.success,
+                      }}
+                    >
+                      {chunks}
+                    </span>
+                  ),
+                })}
+              </HelpIconTooltip>
+            </Row>
+          )}
         </GCol>
       </GRow>
     </GCol>
@@ -177,6 +229,12 @@ Header.propTypes = {
   interventionType: PropTypes.string,
   sharingPossible: PropTypes.bool,
   userOrganizableId: PropTypes.string,
+  hasCollaborators: PropTypes.bool,
+  sensitiveDataState: PropTypes.string,
+  catMhAccess: PropTypes.bool,
+  catMhLicenseType: PropTypes.string,
+  catMhPool: PropTypes.number,
+  createdCatMhSessionCount: PropTypes.number,
 };
 
-export default injectIntl(Header);
+export default Header;

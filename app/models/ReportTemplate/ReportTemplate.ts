@@ -34,6 +34,12 @@ export interface ReportTemplateOriginalText {
   summary: string;
 }
 
+export enum CoverLetterLogoType {
+  REPORT_LOGO = 'report_logo',
+  CUSTOM = 'custom',
+  NO_LOGO = 'no_logo',
+}
+
 export interface ReportTemplate {
   id: string;
   name: string;
@@ -46,4 +52,9 @@ export interface ReportTemplate {
   variants: ReportTemplateVariant[];
   isDuplicatedFromOtherSession: boolean;
   duplicatedFromOtherSessionWarningDismissed: boolean;
+  hasCoverLetter: boolean;
+  coverLetterLogoType: CoverLetterLogoType;
+  coverLetterDescription: Nullable<string>;
+  coverLetterSender: Nullable<string>;
+  coverLetterCustomLogoUrl: Nullable<string>;
 }

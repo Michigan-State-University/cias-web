@@ -2,7 +2,7 @@ import React from 'react';
 import { useIntl } from 'react-intl';
 
 import questionMark from 'assets/svg/red-question-mark.svg';
-import { colors, themeColors } from 'theme';
+import { colors, elements, themeColors } from 'theme';
 
 import {
   statusTypeToColorMap,
@@ -20,8 +20,8 @@ import Box from 'components/Box';
 import Text, { EllipsisText } from 'components/Text';
 import GhostLink from 'components/GhostLink';
 import Tooltip from 'components/Tooltip';
+import { TileContainer } from 'components/TileContainer';
 
-import { TileContainer } from './styled';
 import messages from './messages';
 
 const COMPLETED_INTERVENTION_TEXT_OPACITY = 0.3;
@@ -69,7 +69,10 @@ const ParticipantInterventionTileRenderer = ({ data, index }: Props) => {
         userInterventionId: id,
       })}
     >
-      <TileContainer bg={tileDisabled ? colors.mischka : colors.white}>
+      <TileContainer
+        bg={tileDisabled ? colors.mischka : colors.white}
+        height={elements.userInterventionTileHeight}
+      >
         <Box display="flex" justify="between" align="center">
           <Box px={12} py={8} bg={statusColor} borderRadius={5}>
             <Text>

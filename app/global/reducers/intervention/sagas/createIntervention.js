@@ -16,13 +16,17 @@ import {
   CREATE_INTERVENTION_ERROR,
 } from '../constants';
 
-export function* createIntervention() {
+export function* createIntervention({ payload: { organizationId } }) {
   const requestURL = `v1/interventions`;
 
   try {
-    const { data } = yield call(axios.post, requestURL, {
+    const requestData = {
       name: 'New e-Intervention',
-    });
+    };
+    if (organizationId) {
+      requestData.organization_id = organizationId;
+    }
+    const { data } = yield call(axios.post, requestURL, requestData);
 
     const intervention = jsonApiToObject(data, 'intervention');
 
@@ -48,3 +52,8 @@ export function* createIntervention() {
 export default function* createInterventionSaga() {
   yield takeLatest(CREATE_INTERVENTION_REQUEST, createIntervention);
 }
+
+export const withCreateInterventionSaga = {
+  key: 'createIntervention',
+  saga: createInterventionSaga,
+};

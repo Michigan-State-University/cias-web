@@ -23,8 +23,6 @@ const SearchInput = ({
   const { formatMessage } = useIntl();
   const inputRef = useRef(null);
 
-  const { width } = inputProps;
-
   useEffect(() => {
     if (value !== inputRef.current.value) {
       inputRef.current.value = value;
@@ -37,17 +35,25 @@ const SearchInput = ({
   ]);
 
   return (
-    <SearchInputStyled width={width}>
-      <Input {...inputProps} ref={inputRef} onChange={handleChange} px={30} />
+    <SearchInputStyled>
+      <Input
+        {...inputProps}
+        width="100%"
+        ref={inputRef}
+        onChange={handleChange}
+        px={35}
+      />
       <SearchIcon src={search} alt="search" />
       {value && (
         <ActionIcon
           onClick={() => onChange({ target: { value: '' } })}
           height={15}
           width={15}
-          ml={10}
+          mx={0}
           background="none"
           ariaText={formatMessage(messages.clearButtonLabel)}
+          position="absolute"
+          right={12}
         />
       )}
     </SearchInputStyled>

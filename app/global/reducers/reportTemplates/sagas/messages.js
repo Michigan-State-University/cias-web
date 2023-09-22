@@ -37,6 +37,10 @@ export default defineMessages({
     id: `${scope}.deleteReportTemplateLogoFailure`,
     defaultMessage: 'Failed to delete the report template logo',
   },
+  deleteCoverLetterCustomLogoFailure: {
+    id: `${scope}.deleteCoverLetterCustomLogoFailure`,
+    defaultMessage: 'Failed to delete the cover letter custom logo',
+  },
   generateTestReportSuccess: {
     id: `${scope}.generateTestReportSuccess`,
     defaultMessage:
@@ -45,5 +49,9 @@ export default defineMessages({
   generateTestReportFailure: {
     id: `${scope}.generateTestReportFailure`,
     defaultMessage: 'Failed to generate Test Report.',
+  },
+  updateReportTemplateFailure: {
+    id: `${scope}.updateReportTemplateFailure`,
+    defaultMessage: 'Failed to update the report template',
   },
 });

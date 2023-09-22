@@ -3,6 +3,7 @@ import { IntlShape } from 'react-intl';
 import parsePhoneNumber, {
   getCountryCallingCode,
   isValidNumber,
+  NumberFormat,
 } from 'libphonenumber-js';
 import { CountryCode } from 'libphonenumber-js/types';
 
@@ -59,6 +60,12 @@ export const phoneNumberSchema = (
     number,
   });
 };
+
+export const formatPhone = (
+  country: CountryCode,
+  number: string,
+  format: NumberFormat,
+) => parsePhoneNumber(number, country)?.format(format) ?? '';
 
 export const parsePhoneAttributes = (
   number: string,

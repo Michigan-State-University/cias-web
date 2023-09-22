@@ -1,8 +1,19 @@
-import React, { useCallback, useState, useEffect, ReactNode } from 'react';
+import React, {
+  useCallback,
+  useState,
+  useEffect,
+  ReactNode,
+  useMemo,
+} from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { FormattedMessage, useIntl } from 'react-intl';
 import { DropzoneOptions, useDropzone } from 'react-dropzone';
 import byteSize from 'byte-size';
+
+import {
+  formatMimeFileFormat,
+  formatMimeFileFormatList,
+} from 'utils/formatters';
 
 import Box from 'components/Box';
 import TextButton from 'components/Button/TextButton';
@@ -11,7 +22,10 @@ import Text from 'components/Text';
 import Loader from 'components/Loader';
 import { ImageButton } from 'components/Button';
 import FileBox from 'components/FileBox';
-import { HelpIconTooltip } from 'components/HelpIconTooltip';
+import {
+  HelpIconTooltip,
+  Props as HelpIconTooltipProps,
+} from 'components/HelpIconTooltip';
 import Column from 'components/Column';
 
 import { AppFile } from 'models/File';
@@ -36,6 +50,7 @@ type CommonProps = {
   // If not found, will use maxSize or MAX_FILE_SIZE if not provided (by default)
   // Please use all lowercase keys!
   maxSizeMap?: Map<FileFormat, number>;
+  onHideTooltip?: HelpIconTooltipProps['onHide'];
 };
 
 type MultipleFilesProps = CommonProps & {
@@ -63,6 +78,7 @@ export const FileUpload = ({
   onUpload,
   onRemoveFile,
   tooltipContent,
+  onHideTooltip,
   error,
   disabled,
   maxSize = MAX_FILE_SIZE,
@@ -135,8 +151,22 @@ export const FileUpload = ({
     [multiple, onUpload, maxSize, maxSizeMap],
   );
 
+  const formattedAcceptedFormats = useMemo(() => {
+    if (!acceptedFormats) return '';
+    if (Array.isArray(acceptedFormats)) {
+      return formatMimeFileFormatList(acceptedFormats);
+    }
+    return formatMimeFileFormat(acceptedFormats) ?? '';
+  }, [acceptedFormats]);
+
   const handleReject: DropzoneOptions['onDropRejected'] = (fileRejections) => {
-    setInputError(formatFileErrorMessage(formatMessage, fileRejections));
+    setInputError(
+      formatFileErrorMessage(
+        formatMessage,
+        fileRejections,
+        formattedAcceptedFormats,
+      ),
+    );
   };
 
   const { getRootProps, getInputProps, open, isDragActive } = useDropzone({
@@ -155,6 +185,7 @@ export const FileUpload = ({
         <HelpIconTooltip
           id="file-upload-tooltip"
           tooltipContent={tooltipContent}
+          onHide={onHideTooltip}
         >
           {label && (
             <Text fontSize={13} lineHeight={1}>

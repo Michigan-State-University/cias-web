@@ -1,5 +1,7 @@
 import { defineMessages } from 'react-intl';
 
+import { CoverLetterLogoType } from 'models/ReportTemplate';
+
 export const scope = 'app.containers.ReportTemplatesPage';
 
 export default defineMessages({
@@ -74,11 +76,43 @@ export default defineMessages({
   },
   settingsName: {
     id: `${scope}.settingsName`,
-    defaultMessage: 'Use Different Name in the Panel',
+    defaultMessage: 'Report display name',
   },
   settingsNamePlaceholder: {
     id: `${scope}.settingsNamePlaceholder`,
     defaultMessage: 'Enter report name',
+  },
+  coverLetter: {
+    id: `${scope}.coverLetter`,
+    defaultMessage: 'Cover letter',
+  },
+  coverLetterLogoType: {
+    id: `${scope}.coverLetterLogoType`,
+    defaultMessage: 'Logo on the cover letter',
+  },
+  [CoverLetterLogoType.REPORT_LOGO]: {
+    id: `${scope}.${CoverLetterLogoType.REPORT_LOGO}`,
+    defaultMessage: 'Use Report logo',
+  },
+  [CoverLetterLogoType.CUSTOM]: {
+    id: `${scope}.${CoverLetterLogoType.CUSTOM}`,
+    defaultMessage: 'Use custom logo',
+  },
+  [CoverLetterLogoType.NO_LOGO]: {
+    id: `${scope}.${CoverLetterLogoType.NO_LOGO}`,
+    defaultMessage: 'Don’t show logo',
+  },
+  coverLetterDescription: {
+    id: `${scope}.coverLetterDescription`,
+    defaultMessage: 'Report description:',
+  },
+  coverLetterSender: {
+    id: `${scope}.coverLetterSender`,
+    defaultMessage: 'Sender (could be person or project name):',
+  },
+  hasCoverLetterSwitchLabel: {
+    id: `${scope}.hasCoverLetterSwitchLabel`,
+    defaultMessage: 'Display cover letter for fax recipients',
   },
   settingsDeleteReportTemplateButton: {
     id: `${scope}.settingsDeleteReportTemplateButton`,

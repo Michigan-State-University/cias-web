@@ -44,12 +44,17 @@ import Checkbox from 'components/Checkbox';
 import { ConfirmationModal } from 'components/Modal';
 
 import scrollByRef from 'utils/scrollByRef';
+import settingsTabLabels from 'utils/settingsTabsLabels';
 
 import copy from 'assets/svg/copy.svg';
 import bin from 'assets/svg/bin-no-bg.svg';
 import duplicateInternally from 'assets/svg/duplicate-internally.svg';
 
 import VariableInput from '../QuestionDetails/VariableInput';
+import {
+  HIDE_NARRATOR_TAB_QUESTIONS,
+  HIDE_SETTINGS_TAB_QUESTIONS,
+} from '../QuestionSettings/constants';
 import { ClampedTitle, ToggleableBox } from './styled';
 import messages from './messages';
 import getIndex from './utils';
@@ -192,8 +197,16 @@ const QuestionListItem = ({
     setDraggable(false);
     changeNarratorBlockIndex(-1);
 
+    let tab = settingsTabLabels.settings;
+    if (HIDE_SETTINGS_TAB_QUESTIONS.includes(type)) {
+      tab = settingsTabLabels.narrator;
+      if (HIDE_NARRATOR_TAB_QUESTIONS.includes(type)) {
+        tab = settingsTabLabels.branching;
+      }
+    }
+
     toggleSettings({
-      index,
+      tab,
       questionIndex: selectedQuestionIndex,
     });
   };

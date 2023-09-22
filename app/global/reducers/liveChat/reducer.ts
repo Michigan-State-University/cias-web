@@ -39,6 +39,7 @@ import {
   setCancellingCallOut,
   setWaitingForNavigator,
   updateConversationTranscript,
+  setHasAssignedNavigators,
 } from './actions';
 import { LiveChatAction, LiveChatState } from './types';
 
@@ -334,6 +335,14 @@ export const liveChatReducer = (
         if (conversation) {
           conversation.transcript = transcript;
         }
+        break;
+      }
+      case getType(setHasAssignedNavigators): {
+        const { hasAssignedNavigators } = payload;
+        if (draft.liveChatSetup) {
+          draft.liveChatSetup.hasAssignedNavigators = hasAssignedNavigators;
+        }
+        break;
       }
     }
   });

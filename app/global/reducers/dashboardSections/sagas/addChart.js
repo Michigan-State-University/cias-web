@@ -1,6 +1,8 @@
 import { put, takeLatest, call } from 'redux-saga/effects';
 import axios from 'axios';
 
+import { ChartIntervalType } from 'models/Chart';
+
 import { jsonApiToObject } from 'utils/jsonApiMapper';
 import objectToSnakeCase from 'utils/objectToSnakeCase';
 import { colors } from 'theme';
@@ -37,6 +39,7 @@ export function* addChart({
               color: colors.mauve,
             },
           },
+          intervalType: ChartIntervalType.MONTHLY,
         },
       }),
     );

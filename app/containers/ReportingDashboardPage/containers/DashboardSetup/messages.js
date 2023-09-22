@@ -5,6 +5,8 @@
  */
 import { defineMessages } from 'react-intl';
 
+import { ChartIntervalType } from 'models/Chart';
+
 import { ChartStatus, ChartTypeDto } from 'global/reducers/dashboardSections';
 
 import { themeColors } from 'theme';
@@ -74,16 +76,12 @@ export default defineMessages({
   },
   chartSettingsNotEditableInfo: {
     id: `${scope}.chartSettingsNotEditableInfo`,
-    defaultMessage: `Data are being collected. <span style="color: ${themeColors.warning};">From this moment you can not introduce any changes to the chart</span>.`,
+    defaultMessage: `Data are being collected. <span style='color: ${themeColors.warning};'>From this moment you can not introduce any changes to the chart</span>.`,
   },
   chartSettingsPublishInfo: {
     id: `${scope}.chartSettingsPublishInfo`,
     defaultMessage:
       'You can review the final chart layout and publish it to a wider audience.',
-  },
-  chartSettingsStartCollectHelper: {
-    id: `${scope}.chartSettingsStartCollectHelper`,
-    defaultMessage: 'Start data collection',
   },
   chartSettingsNameLabel: {
     id: `${scope}.chartSettingsNameLabel`,
@@ -109,6 +107,20 @@ export default defineMessages({
   chartSettingsAddVariable: {
     id: `${scope}.chartSettingsAddVariable`,
     defaultMessage: 'Add variable',
+  },
+  chartSettingsIntervalType: {
+    id: `${scope}.chartSettingsIntervalType`,
+    defaultMessage: '<b>Time Interval</b>',
+  },
+  intervalType: {
+    [ChartIntervalType.MONTHLY]: {
+      id: `${scope}.intervalType.${ChartIntervalType.MONTHLY}`,
+      defaultMessage: 'Monthly',
+    },
+    [ChartIntervalType.QUARTERLY]: {
+      id: `${scope}.intervalType.${ChartIntervalType.QUARTERLY}`,
+      defaultMessage: 'Quarterly',
+    },
   },
   chartSettingsChartValues: {
     id: `${scope}.chartSettingsChartValues`,
@@ -191,5 +203,13 @@ export default defineMessages({
     id: `${scope}.dashboardSectionsError`,
     defaultMessage:
       'There was an issue with collecting your chart data. Please contact us at cias@msu.edu',
+  },
+  startDateLabel: {
+    id: `${scope}.startDateLabel`,
+    defaultMessage: 'Date from (optional)',
+  },
+  endDateLabel: {
+    id: `${scope}.endDateLabel`,
+    defaultMessage: 'Date to (optional)',
   },
 });

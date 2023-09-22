@@ -4,10 +4,11 @@
  *
  */
 
-import React, { PropsWithChildren } from 'react';
+import React, { MouseEventHandler, PropsWithChildren } from 'react';
 import { useIntl } from 'react-intl';
 
 import Icon from 'components/Icon';
+import { LayoutProps, MarginProps } from 'components/BaseComponentStyles';
 
 import cross from 'assets/svg/cross.svg';
 
@@ -16,10 +17,12 @@ import messages from './messages';
 
 type Props = PropsWithChildren<{
   to?: string;
-  onClick?: () => void;
+  onClick?: MouseEventHandler;
   iconSrc: SVGElement;
   ariaText: string;
 }> &
+  LayoutProps &
+  MarginProps &
   Record<string, unknown>;
 
 const ActionIcon = ({
@@ -32,7 +35,7 @@ const ActionIcon = ({
 }: Props) => {
   const { formatMessage } = useIntl();
 
-  const icon = <Icon src={iconSrc} alt="cross" />;
+  const icon = <Icon src={iconSrc} alt={ariaText} />;
   if (to)
     return (
       <CrossLink

@@ -159,7 +159,7 @@ const Modal = ({
                   <ActionIcon
                     mr={0}
                     data-cy="modal-close-button"
-                    onClick={onClose}
+                    onClick={() => onClose && onClose()}
                     data-testid="close-modal-button"
                     ariaText={formatMessage(messages.closeButtonLabel)}
                   />

@@ -330,7 +330,7 @@ exports[`<ConfirmationModal /> Should render and match the snapshot 1`] = `
               title="Close window"
             >
               <img
-                alt="cross"
+                alt="Close window"
                 src="IMAGE_MOCK"
               />
             </button>
@@ -759,7 +759,7 @@ exports[`<ConfirmationModal /> Should render error and match the snapshot 1`] = 
               title="Close window"
             >
               <img
-                alt="cross"
+                alt="Close window"
                 src="IMAGE_MOCK"
               />
             </button>

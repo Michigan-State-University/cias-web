@@ -4,6 +4,7 @@ import { useIntl } from 'react-intl';
 
 import { Col, Row } from 'components/ReactGridSystem';
 import DashedButton from 'components/Button/DashedButton';
+import { DateRangeChooser } from 'components/DateRangeChooser';
 
 import ChartSettingsGeneralSection from './ChartSettingsGeneralSection';
 import ChartSettingsTopSection from './ChartSettingsTopSection';
@@ -13,6 +14,7 @@ import PieChartFormulaPattern from './PieChartFormulaPattern';
 import { FullWidthContainer } from '../../../styled';
 import messages from '../messages';
 import { ChartSettingsContext, DashboardSectionsContext } from '../constants';
+import { colors } from '../../../../../theme';
 
 const PieChartSettings = ({
   chart,
@@ -27,6 +29,7 @@ const PieChartSettings = ({
   onEditFormulaPayload,
   onEditName,
   onEditStatus,
+  onEditDateRange,
   onCopyChart,
 }) => {
   const { formatMessage } = useIntl();
@@ -35,11 +38,16 @@ const PieChartSettings = ({
     statusPermissions: { canBeEdited },
   } = useContext(ChartSettingsContext);
 
-  const { chartType, formula, id, status } = chart;
+  const { chartType, formula, id, status, dateRangeStart, dateRangeEnd } =
+    chart;
 
   const {
     loaders: { deleteChartLoader },
   } = useContext(DashboardSectionsContext);
+
+  const handleEditDateRange = (start, end) => {
+    onEditDateRange(start?.toISOString() ?? null, end?.toISOString() ?? null);
+  };
 
   return (
     <FullWidthContainer>
@@ -53,6 +61,21 @@ const PieChartSettings = ({
         hasFormula={formula.payload !== ''}
         onCopyChart={onCopyChart}
       />
+
+      <Row mt={36}>
+        <Col align="stretch">
+          <DateRangeChooser
+            disabled={!canBeEdited}
+            onDateRangeUpdate={handleEditDateRange}
+            startDate={dateRangeStart}
+            endDate={dateRangeEnd}
+            startDateLabel={formatMessage(messages.startDateLabel)}
+            endDateLabel={formatMessage(messages.endDateLabel)}
+            labelsStyles={{ fontWeight: 'bold', mb: 5 }}
+            inputsStyles={{ background: colors.linkWater }}
+          />
+        </Col>
+      </Row>
 
       <ChartSettingsGeneralSection
         chart={chart}
@@ -107,6 +130,7 @@ PieChartSettings.propTypes = {
   onEditFormulaPayload: PropTypes.func,
   onEditName: PropTypes.func,
   onEditStatus: PropTypes.func,
+  onEditDateRange: PropTypes.func,
   onCopyChart: PropTypes.func,
 };
 

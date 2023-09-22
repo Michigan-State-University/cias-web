@@ -7,7 +7,12 @@
 import React, { CSSProperties } from 'react';
 import { Props as SVGProperies } from 'react-inlinesvg';
 
-import { MarginProps, LayoutProps } from 'components/BaseComponentStyles';
+import {
+  MarginProps,
+  LayoutProps,
+  TextProps,
+  SvgProps,
+} from 'components/BaseComponentStyles';
 
 import * as Styled from './styled';
 
@@ -15,11 +20,12 @@ export type Props = {
   src: SVGElement | string;
   alt?: string;
   inline?: boolean;
-  wrapperProps?: LayoutProps;
+  wrapperProps?: LayoutProps & TextProps;
 } & Omit<SVGProperies, 'src'> &
   CSSProperties &
   MarginProps &
-  LayoutProps;
+  LayoutProps &
+  SvgProps;
 
 const Icon = ({
   src,

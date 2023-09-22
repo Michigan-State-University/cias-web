@@ -13,13 +13,26 @@ import {
   IMPORT_INTERVENTION_ERROR,
   REFETCH_INTERVENTIONS,
   RESET_IMPORT_INTERVENTION_STATE,
+  UPDATE_INTERVENTION_LIST_ITEM_BY_ID,
+  STAR_INTERVENTION_ERROR,
+  STAR_INTERVENTION_REQUEST,
+  STAR_INTERVENTION_SUCCESS,
+  UNSTAR_INTERVENTION_ERROR,
+  UNSTAR_INTERVENTION_REQUEST,
+  UNSTAR_INTERVENTION_SUCCESS,
+  CHANGE_MAIN_DASHBOARD_FILTER_DATA,
 } from './constants';
 
 export const fetchInterventionsRequest = ({
   paginationData,
   filterData,
+  organizationId,
 } = {}) =>
-  actionBuilder(FETCH_INTERVENTIONS_REQUEST, { paginationData, filterData });
+  actionBuilder(FETCH_INTERVENTIONS_REQUEST, {
+    paginationData,
+    filterData,
+    organizationId,
+  });
 export const fetchInterventionsSuccess = (
   interventions,
   { paginationData, interventionsSize } = {},
@@ -53,3 +66,34 @@ export const resetImportModalState = () =>
 
 export const refetchInterventions = () =>
   actionBuilder(REFETCH_INTERVENTIONS, {});
+
+export const updateInterventionListItemById = (interventionId, changes) =>
+  actionBuilder(UPDATE_INTERVENTION_LIST_ITEM_BY_ID, {
+    interventionId,
+    changes,
+  });
+
+export const starInterventionRequest = (interventionId) =>
+  actionBuilder(STAR_INTERVENTION_REQUEST, {
+    interventionId,
+  });
+export const starInterventionSuccess = (interventionId) =>
+  actionBuilder(STAR_INTERVENTION_SUCCESS, {
+    interventionId,
+  });
+export const starInterventionError = (interventionId) =>
+  actionBuilder(STAR_INTERVENTION_ERROR, { interventionId });
+
+export const unstarInterventionRequest = (interventionId) =>
+  actionBuilder(UNSTAR_INTERVENTION_REQUEST, {
+    interventionId,
+  });
+export const unstarInterventionSuccess = (interventionId) =>
+  actionBuilder(UNSTAR_INTERVENTION_SUCCESS, {
+    interventionId,
+  });
+export const unstarInterventionError = (interventionId) =>
+  actionBuilder(UNSTAR_INTERVENTION_ERROR, { interventionId });
+
+export const changeMainDashboardFilterData = (filterDataChanges) =>
+  actionBuilder(CHANGE_MAIN_DASHBOARD_FILTER_DATA, { filterDataChanges });

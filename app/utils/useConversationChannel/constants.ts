@@ -16,6 +16,8 @@ export enum ConversationChannelMessageTopic {
   NAVIGATOR_CALLED_OUT = 'navigators_called_out',
   CALL_OUT_UNAVAILABLE_ERROR = 'call_out_unavailable_error',
   CALL_OUT_CANCELLED = 'call_out_canceled',
+  INTERVENTION_HAS_NAVIGATORS = 'intervention_has_navigators',
+  INTERVENTION_HAS_NO_NAVIGATORS = 'intervention_has_no_navigators',
 }
 
 export enum ConversationChannelActionName {

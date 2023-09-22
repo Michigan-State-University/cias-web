@@ -59,6 +59,15 @@ import {
   DUPLICATE_REPORT_TEMPLATE_REQUEST,
   DUPLICATE_REPORT_TEMPLATE_SUCCESS,
   DUPLICATE_REPORT_TEMPLATE_FAILURE,
+  DELETE_COVER_LETTER_CUSTOM_LOGO_REQUEST,
+  DELETE_COVER_LETTER_CUSTOM_LOGO_SUCCESS,
+  DELETE_COVER_LETTER_CUSTOM_LOGO_FAILURE,
+  UPLOAD_REPORT_TEMPLATE_LOGO_REQUEST,
+  UPLOAD_REPORT_TEMPLATE_LOGO_SUCCESS,
+  UPLOAD_REPORT_TEMPLATE_LOGO_FAILURE,
+  UPLOAD_COVER_LETTER_CUSTOM_LOGO_REQUEST,
+  UPLOAD_COVER_LETTER_CUSTOM_LOGO_SUCCESS,
+  UPLOAD_COVER_LETTER_CUSTOM_LOGO_FAILURE,
 } from './constants';
 
 export const fetchReportTemplatesRequest = (
@@ -119,15 +128,10 @@ export const addReportTemplateSuccess = (reportTemplate) =>
 export const addReportTemplateFailure = (error) =>
   actionBuilder(ADD_REPORT_TEMPLATE_FAILURE, error);
 
-export const updateReportTemplateRequest = (
-  sessionId,
-  reportTemplate,
-  imageData,
-) =>
+export const updateReportTemplateRequest = (sessionId, reportTemplate) =>
   actionBuilder(UPDATE_REPORT_TEMPLATE_REQUEST, {
     reportTemplate,
     sessionId,
-    imageData,
   });
 export const updateReportTemplateSuccess = (reportTemplate) =>
   actionBuilder(UPDATE_REPORT_TEMPLATE_SUCCESS, { reportTemplate });
@@ -151,12 +155,58 @@ export const deleteReportTemplateSuccess = () =>
 export const deleteReportTemplateFailure = (error) =>
   actionBuilder(DELETE_REPORT_TEMPLATE_FAILURE, error);
 
-export const deleteReportTemplateLogoRequest = (sessionId, id) =>
-  actionBuilder(DELETE_REPORT_TEMPLATE_LOGO_REQUEST, { id, sessionId });
+export const uploadReportTemplateLogoRequest = (
+  sessionId,
+  reportTemplateId,
+  imageData,
+) =>
+  actionBuilder(UPLOAD_REPORT_TEMPLATE_LOGO_REQUEST, {
+    sessionId,
+    reportTemplateId,
+    imageData,
+  });
+export const uploadReportTemplateLogoSuccess = () =>
+  actionBuilder(UPLOAD_REPORT_TEMPLATE_LOGO_SUCCESS, {});
+export const uploadReportTemplateLogoFailure = (error) =>
+  actionBuilder(UPLOAD_REPORT_TEMPLATE_LOGO_FAILURE, error);
+
+export const deleteReportTemplateLogoRequest = (sessionId, reportTemplateId) =>
+  actionBuilder(DELETE_REPORT_TEMPLATE_LOGO_REQUEST, {
+    reportTemplateId,
+    sessionId,
+  });
 export const deleteReportTemplateLogoSuccess = () =>
   actionBuilder(DELETE_REPORT_TEMPLATE_LOGO_SUCCESS, {});
 export const deleteReportTemplateLogoFailure = (error) =>
   actionBuilder(DELETE_REPORT_TEMPLATE_LOGO_FAILURE, error);
+
+export const uploadCoverLetterCustomLogoRequest = (
+  sessionId,
+  reportTemplateId,
+  imageData,
+) =>
+  actionBuilder(UPLOAD_COVER_LETTER_CUSTOM_LOGO_REQUEST, {
+    sessionId,
+    reportTemplateId,
+    imageData,
+  });
+export const uploadCoverLetterCustomLogoSuccess = () =>
+  actionBuilder(UPLOAD_COVER_LETTER_CUSTOM_LOGO_SUCCESS, {});
+export const uploadCoverLetterCustomLogoFailure = (error) =>
+  actionBuilder(UPLOAD_COVER_LETTER_CUSTOM_LOGO_FAILURE, error);
+
+export const deleteCoverLetterCustomLogoRequest = (
+  sessionId,
+  reportTemplateId,
+) =>
+  actionBuilder(DELETE_COVER_LETTER_CUSTOM_LOGO_REQUEST, {
+    reportTemplateId,
+    sessionId,
+  });
+export const deleteCoverLetterCustomLogoSuccess = () =>
+  actionBuilder(DELETE_COVER_LETTER_CUSTOM_LOGO_SUCCESS, {});
+export const deleteCoverLetterCustomLogoFailure = (error) =>
+  actionBuilder(DELETE_COVER_LETTER_CUSTOM_LOGO_FAILURE, error);
 
 export const selectReportTemplate = (id) =>
   actionBuilder(SELECT_REPORT_TEMPLATE, { id });

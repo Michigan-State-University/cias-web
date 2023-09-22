@@ -369,6 +369,10 @@ export default defineMessages({
       id: `${scope}.naturalNumber`,
       defaultMessage: 'Only natural number values are allowed',
     },
+    nonNegativeInteger: {
+      id: `${scope}.nonNegativeInteger`,
+      defaultMessage: 'Non-negative integer value is required',
+    },
     unreservedURLCharacters: {
       id: `${scope}.unreservedURLCharacters`,
       defaultMessage:
@@ -493,5 +497,26 @@ export default defineMessages({
       id: `${scope}.${PhoneType.MOBILE}`,
       defaultMessage: 'Mobile',
     },
+  },
+  areYouSure: {
+    id: `${scope}.areYouSure`,
+    defaultMessage: 'Are you sure?',
+  },
+  back: {
+    id: `${scope}.back`,
+    defaultMessage: 'Back',
+  },
+  enterTextHere: {
+    id: `${scope}.enterTextHere`,
+    defaultMessage: 'Enter text here',
+  },
+  enterTextHereRichText: {
+    id: `${scope}.enterTextHereRichText`,
+    defaultMessage: 'Enter text here (rich text)',
+  },
+  dataClearedInfo: {
+    id: `${scope}.dataClearedInfo`,
+    defaultMessage:
+      'All sensitive data associated with this intervention has been removed, this includes user answers and generated report files.',
   },
 });

@@ -80,7 +80,13 @@ const InterventionNavbar = ({
     generatedReportCount,
     type,
   },
-  reportsLoaders: { updateReportTemplateLoading },
+  reportsLoaders: {
+    updateReportTemplateLoading,
+    uploadReportTemplateLogoLoading,
+    deleteReportTemplateLogoLoading,
+    uploadCoverLetterCustomLogoLoading,
+    deleteCoverLetterCustomLogoLoading,
+  },
   textLoaders,
   updateSessionName,
   intl: { formatMessage },
@@ -134,6 +140,10 @@ const InterventionNavbar = ({
     questionGroupsEditing ||
     interventionEditing ||
     updateReportTemplateLoading ||
+    uploadReportTemplateLogoLoading ||
+    deleteReportTemplateLogoLoading ||
+    uploadCoverLetterCustomLogoLoading ||
+    deleteCoverLetterCustomLogoLoading ||
     textLoaders;
 
   const handleRedirect = () =>

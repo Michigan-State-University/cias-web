@@ -8,6 +8,7 @@ import { ForbiddenReason, HttpStatusCodes } from 'utils/constants';
 import { requestErrorMessageHandler } from 'utils/errors/requestErrorMessageHandler';
 import { responseStatusEquals } from 'utils/axiosUtils';
 import objectToCamelCase from 'utils/objectToCamelCase';
+import { getRedirectPathFromQueryParams } from 'utils/router';
 
 import { makeSelectLocation } from 'containers/App/selectors';
 import { UserStorageController } from '../UserStorageController';
@@ -18,12 +19,11 @@ import {
   termsNotAccepted,
   verificationCodeNeeded,
 } from '../actions';
-import { LOGIN_REQUEST, REDIRECT_QUERY_KEY } from '../constants';
+import { LOGIN_REQUEST } from '../constants';
 
 function* login({ payload: { email, password } }) {
   const requestURL = `v1/auth/sign_in`;
   const location = yield select(makeSelectLocation());
-  const queryParams = new URLSearchParams(location.search);
   try {
     let config = {};
     const userStorageController = new UserStorageController(email);
@@ -47,11 +47,8 @@ function* login({ payload: { email, password } }) {
     yield put(logIn(mappedUser));
     yield put(loginSuccess());
 
-    if (queryParams.has(REDIRECT_QUERY_KEY)) {
-      yield put(
-        replace(decodeURIComponent(queryParams.get(REDIRECT_QUERY_KEY))),
-      );
-    } else yield put(replace(`/`));
+    const redirectPath = getRedirectPathFromQueryParams(location.search);
+    yield put(replace(redirectPath));
   } catch (error) {
     yield delay(300);
 

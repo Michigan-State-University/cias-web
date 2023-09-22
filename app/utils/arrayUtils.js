@@ -15,7 +15,7 @@ export const removeAt = (array, index) => array.splice(index, 1);
 
 /**
  * @param {Array<any>} array
- * @param {string} id
+ * @param {string | number} id
  */
 export const findIndexById = (array, id) =>
   array.findIndex(({ id: itemId }) => id === itemId);
@@ -47,3 +47,9 @@ export const removeById = (array, id) => {
   const index = findIndexById(array, id);
   removeAt(array, index);
 };
+
+/**
+ * @param {Array<any>} array
+ * @param {number} index
+ */
+export const isLast = (array, index) => index === array.length - 1;

@@ -129,7 +129,7 @@ describe('<InviteResearcher />', () => {
         </IntlProvider>
       </Provider>,
     );
-    const closeIcon = document.querySelector('img[alt="cross"]');
+    const closeIcon = document.querySelector('img[alt="Close window"]');
     fireEvent.click(closeIcon);
     expect(defaultProps.onClose).toHaveBeenCalled();
   });
