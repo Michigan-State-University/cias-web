@@ -71,7 +71,7 @@ const Dropdown = ({
             backgroundColor: colors.white,
             borderColor: 'transparent',
             borderRadius: 10,
-            boxShadow: boxShadows.black,
+            boxShadow: boxShadows.selago,
             width: dropdownWidth,
           }}
           hideArrow
