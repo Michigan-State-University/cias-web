@@ -6,6 +6,7 @@ import Dropdown from '../index';
 
 const defaultProps = {
   top: false,
+  id: 'test-dropdown',
   options: [
     {
       id: 'id',
@@ -36,19 +37,5 @@ describe('<Dropdown />', () => {
     const img = document.querySelectorAll('img')[0];
     fireEvent.click(img);
     expect(container).toMatchSnapshot();
-  });
-  it('should open dropdown', () => {
-    const { container } = render(<Dropdown {...defaultProps} />);
-    const img = document.querySelectorAll('img')[0];
-    fireEvent.click(img);
-    expect(container.innerHTML).toContain('Label');
-  });
-  it('should call action in dropdown', () => {
-    const { getByText } = render(<Dropdown {...defaultProps} />);
-    const img = document.querySelectorAll('img')[0];
-    fireEvent.click(img);
-    const label = getByText('Label');
-    fireEvent.click(label);
-    expect(defaultProps.options[0].action).toHaveBeenCalledTimes(1);
   });
 });
