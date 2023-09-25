@@ -1,9 +1,6 @@
 import { all } from 'redux-saga/effects';
 import copySessionSaga from 'global/reducers/intervention/sagas/copySession';
 import createSessionSaga from 'global/reducers/intervention/sagas/createSession';
-import fetchSessionEmailsSaga from 'global/reducers/intervention/sagas/fetchSessionEmails';
-import resendSessionInviteSaga from 'global/reducers/intervention/sagas/resendSessionInvite';
-import sendSessionInviteSaga from 'global/reducers/intervention/sagas/sendSessionInvite';
 import updateSessionSettingsSaga from 'global/reducers/intervention/sagas/updateSessionSettings';
 import sendInterventionCsvSaga from 'global/reducers/intervention/sagas/sendInterventionCsv';
 import editInterventionSaga from 'global/reducers/intervention/sagas/editIntervention';
@@ -49,9 +46,6 @@ export {
   fetchUsersWithAccessSaga,
   revokeUserAccessSaga,
   createSessionSaga,
-  sendSessionInviteSaga,
-  fetchSessionEmailsSaga,
-  resendSessionInviteSaga,
   deleteSessionSaga,
   externalCopySessionSaga,
   interventionLogoSaga,
@@ -83,10 +77,7 @@ export default function* allInterventionSagas() {
     fetchUsersWithAccessSaga(),
     revokeUserAccessSaga(),
     createSessionSaga(),
-    sendSessionInviteSaga(),
     fetchUsersWithAccessSaga(),
-    fetchSessionEmailsSaga(),
-    resendSessionInviteSaga(),
     deleteSessionSaga(),
     externalCopySessionSaga(),
     translateInterventionSaga(),

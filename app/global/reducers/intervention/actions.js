@@ -29,13 +29,6 @@ import {
   CREATE_SESSION_REQUEST,
   CREATE_SESSION_SUCCESS,
   CREATE_SESSION_ERROR,
-  SEND_SESSION_INVITE_REQUEST,
-  SEND_SESSION_INVITE_SUCCESS,
-  SEND_SESSION_INVITE_ERROR,
-  RESEND_SESSION_INVITE_REQUEST,
-  FETCH_SESSION_EMAILS_REQUEST,
-  FETCH_SESSION_EMAILS_SUCCESS,
-  FETCH_SESSION_EMAILS_ERROR,
   UPDATE_SESSION_SETTINGS_REQUEST,
   UPDATE_SESSION_SETTINGS_SUCCESS,
   UPDATE_SESSION_SETTINGS_ERROR,
@@ -192,24 +185,6 @@ export const createSessionSuccess = (session) =>
   actionBuilder(CREATE_SESSION_SUCCESS, { session });
 export const createSessionError = () => actionBuilder(CREATE_SESSION_ERROR, {});
 
-export const sendSessionInviteRequest = (
-  emails,
-  sessionId,
-  shouldNotUpdateStore,
-) =>
-  actionBuilder(SEND_SESSION_INVITE_REQUEST, {
-    emails,
-    sessionId,
-    shouldNotUpdateStore,
-  });
-export const sendSessionInviteSuccess = () =>
-  actionBuilder(SEND_SESSION_INVITE_SUCCESS, {});
-export const sendSessionInviteError = () =>
-  actionBuilder(SEND_SESSION_INVITE_ERROR, {});
-
-export const resendSessionInviteRequest = (id, sessionId) =>
-  actionBuilder(RESEND_SESSION_INVITE_REQUEST, { id, sessionId });
-
 export const fetchInterventionInvitationsRequest = (interventionId) =>
   actionBuilder(FETCH_INTERVENTION_INVITATIONS_REQUEST, {
     interventionId,
@@ -248,13 +223,6 @@ export const resendInterventionInvitationSuccess = (id) =>
   });
 export const resendInterventionInvitationError = (id) =>
   actionBuilder(RESEND_INTERVENTION_INVITATION_ERROR, { id });
-
-export const fetchSessionEmailsRequest = (index) =>
-  actionBuilder(FETCH_SESSION_EMAILS_REQUEST, { index });
-export const fetchSessionEmailsSuccess = (emails, index) =>
-  actionBuilder(FETCH_SESSION_EMAILS_SUCCESS, { emails, index });
-export const fetchSessionEmailsError = (error) =>
-  actionBuilder(FETCH_SESSION_EMAILS_ERROR, { error });
 
 export const deleteSessionRequest = (sessionId, interventionId) =>
   actionBuilder(DELETE_SESSION_REQUEST, { sessionId, interventionId });

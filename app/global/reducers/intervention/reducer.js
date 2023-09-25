@@ -51,13 +51,6 @@ import {
   CREATE_SESSION_REQUEST,
   CREATE_SESSION_ERROR,
   CREATE_SESSION_SUCCESS,
-  SEND_SESSION_INVITE_ERROR,
-  SEND_SESSION_INVITE_REQUEST,
-  SEND_SESSION_INVITE_SUCCESS,
-  RESEND_SESSION_INVITE_REQUEST,
-  FETCH_SESSION_EMAILS_REQUEST,
-  FETCH_SESSION_EMAILS_SUCCESS,
-  FETCH_SESSION_EMAILS_ERROR,
   DELETE_SESSION_REQUEST,
   DELETE_SESSION_SUCCESS,
   DELETE_SESSION_ERROR,
@@ -186,9 +179,6 @@ export const initialState = {
     editShortLinks: null,
   },
 };
-
-const findSessionIndex = (intervention, sessionId) =>
-  intervention.sessions.findIndex(({ id }) => id === sessionId);
 
 /* eslint-disable default-case, no-param-reassign */
 export const interventionReducer = (state = initialState, action) =>
@@ -423,56 +413,6 @@ export const interventionReducer = (state = initialState, action) =>
       case CREATE_SESSION_ERROR:
         draft.loaders.createSessionLoading = false;
         draft.errors.createSessionError = action.payload.error;
-        break;
-
-      case FETCH_SESSION_EMAILS_REQUEST:
-        if (!state.intervention.sessions[action.payload.index].emails)
-          draft.loaders.fetchSessionEmailsLoading = true;
-        draft.errors.fetchSessionEmailsError = null;
-        break;
-      case FETCH_SESSION_EMAILS_SUCCESS: {
-        const { index, emails } = action.payload;
-        draft.intervention.sessions[index].emails = emails;
-        draft.loaders.fetchSessionEmailsLoading = false;
-        break;
-      }
-
-      case FETCH_SESSION_EMAILS_ERROR:
-        draft.loaders.fetchSessionEmailsLoading = false;
-        draft.errors.fetchSessionEmailsError = action.payload.error;
-        break;
-
-      case SEND_SESSION_INVITE_REQUEST: {
-        const { sessionId } = action.payload;
-
-        const sessionIndex = findSessionIndex(state.intervention, sessionId);
-
-        if (sessionIndex !== -1) {
-          draft.loaders.sendSessionLoading = true;
-          draft.cache.intervention = state.intervention;
-        }
-
-        break;
-      }
-
-      case SEND_SESSION_INVITE_SUCCESS:
-        draft.loaders.sendSessionLoading = false;
-        draft.loaders.sessionEmailLoading =
-          initialState.loaders.sessionEmailLoading;
-        break;
-
-      case SEND_SESSION_INVITE_ERROR:
-        draft.loaders.sendSessionLoading = false;
-        draft.loaders.sessionEmailLoading =
-          initialState.loaders.sessionEmailLoading;
-        draft.intervention = state.cache.intervention;
-        break;
-
-      case RESEND_SESSION_INVITE_REQUEST:
-        draft.cache.intervention = state.intervention;
-        draft.loaders.sessionEmailLoading = {
-          ...action.payload,
-        };
         break;
 
       case FETCH_INTERVENTION_INVITATIONS_REQUEST: {
