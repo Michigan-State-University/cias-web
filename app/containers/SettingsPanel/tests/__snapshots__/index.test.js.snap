@@ -601,6 +601,11 @@ exports[`<SettingsPanel /> Should render and match the snapshot 1`] = `
   width: 100%;
 }
 
+.c2 {
+  box-shadow: 0px 4px 20px #E3EEFB;
+  background-color: #FFFFFF;
+}
+
 .c24 {
   display: none;
 }
@@ -633,11 +638,6 @@ exports[`<SettingsPanel /> Should render and match the snapshot 1`] = `
 
 .c28 {
   margin-left: 5px;
-}
-
-.c2 {
-  box-shadow: 0px 4px 20px #E3EEFB;
-  background-color: #FFFFFF;
 }
 
 @media only screen and (min-width:768px) {

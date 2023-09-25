@@ -4,7 +4,13 @@
  *
  */
 
-import React, { useRef, useEffect, ReactElement, ReactNode } from 'react';
+import React, {
+  useRef,
+  useEffect,
+  ReactElement,
+  ReactNode,
+  useMemo,
+} from 'react';
 import { useIntl } from 'react-intl';
 
 import { colors } from 'theme';
@@ -46,6 +52,8 @@ export type Props = {
   description?: ReactNode;
   titleIcon?: ReactElement;
   titleIconWidth?: number;
+  stretchContent?: boolean;
+  contentContainerProps?: Record<string, unknown>;
 } & Record<string, unknown>;
 
 const Modal = ({
@@ -63,6 +71,8 @@ const Modal = ({
   description,
   titleIcon,
   titleIconWidth,
+  stretchContent,
+  contentContainerProps,
   ...stylesProps
 }: Props): JSX.Element => {
   const { formatMessage } = useIntl();
@@ -99,6 +109,35 @@ const Modal = ({
     };
   }, []);
 
+  const {
+    fullWidthContainerProps,
+    contentRowProps,
+    contentProps,
+    contentColumnProps,
+  } = useMemo(() => {
+    if (stretchContent) {
+      return {
+        fullWidthContainerProps: {
+          height: '100%',
+          display: 'flex',
+          direction: 'column',
+        },
+        contentRowProps: {
+          flex: '1 !important',
+          minHeight: '0px',
+        },
+        contentColumnProps: {
+          maxHeight: '100%',
+        },
+        contentProps: {
+          flex: '1',
+          minHeight: '0px',
+        },
+      };
+    }
+    return {};
+  }, [stretchContent]);
+
   if (!visible) return <></>;
 
   return (
@@ -134,7 +173,7 @@ const Modal = ({
           overflow="auto"
           {...stylesProps}
         >
-          <FullWidthContainer>
+          <FullWidthContainer {...fullWidthContainerProps}>
             <GridRow align={titleIcon ? 'start' : 'center'} justify="between">
               {titleIcon && (
                 <GridCol xs={2} width={titleIconWidth}>
@@ -177,13 +216,15 @@ const Modal = ({
               </GridRow>
             )}
 
-            <GridRow>
-              <GridCol xs={12}>
+            <GridRow {...contentRowProps}>
+              <GridCol xs={12} {...contentColumnProps}>
                 <Box
                   width="100%"
                   borderRadius="0px"
                   mt={10}
                   id={MODAL_DESCRIPTION_ID}
+                  {...contentProps}
+                  {...contentContainerProps}
                 >
                   {children}
                 </Box>

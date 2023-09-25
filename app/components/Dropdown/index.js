@@ -1,41 +1,44 @@
-import React, { useState, useRef } from 'react';
+import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 
 import dots from 'assets/svg/dots.svg';
 
-import { colors, boxShadows } from 'theme';
-import useOutsideClick from 'utils/useOutsideClick';
+import { colors, boxShadows, themeColors, ZIndex } from 'theme';
 
 import Img from 'components/Img';
 import Box from 'components/Box';
 import Column from 'components/Column';
-import Row from 'components/Row';
+import Text from 'components/Text';
 import Icon from 'components/Icon';
+import { TextButton } from 'components/Button';
+import { PopoverModal } from 'components/Modal';
 
 import { StyledComment, ImageContainer, StyledRow } from './styled';
 
-const Dropdown = ({ options, top, disabled, dropdownWidth, ...restProps }) => {
+const Dropdown = ({
+  id,
+  options,
+  disabled,
+  dropdownWidth,
+  trigger,
+  buttonTriggerTitle,
+  dropdownTitle,
+  loading,
+  ...restProps
+}) => {
   const [open, setOpen] = useState(false);
-
-  const dropdown = useRef(null);
-  useOutsideClick(dropdown, () => setOpen(false), open);
-
-  const getPosition = () => {
-    if (top)
-      return {
-        bottom: '35px',
-      };
-    return { top: '35px' };
-  };
 
   const callAction = (action) => {
     action();
     setOpen(false);
   };
 
+  const handleClick = () => {
+    if (!disabled) setOpen(!open);
+  };
+
   return (
     <Box
-      ref={dropdown}
       display="flex"
       justify="end"
       align="start"
@@ -43,22 +46,47 @@ const Dropdown = ({ options, top, disabled, dropdownWidth, ...restProps }) => {
       disabled={disabled}
       {...restProps}
     >
-      <ImageContainer
-        onClick={() => {
-          if (!disabled) setOpen(!open);
-        }}
-      >
-        <Img src={dots} alt="dots" />
-      </ImageContainer>
-      {open && (
-        <Row
-          position="absolute"
-          right="0"
-          zIndex={999}
-          width={dropdownWidth}
-          {...getPosition()}
+      {trigger === 'icon' && (
+        <ImageContainer onClick={handleClick} id={id}>
+          <Img src={dots} alt="dots" />
+        </ImageContainer>
+      )}
+      {trigger === 'button' && (
+        <TextButton
+          buttonProps={{
+            color: themeColors.secondary,
+          }}
+          disabled={disabled}
+          onClick={handleClick}
+          id={id}
+          loading={loading}
         >
-          <Column bg={colors.white} shadow={boxShadows.black} borderRadius={10}>
+          {buttonTriggerTitle}
+        </TextButton>
+      )}
+      {open && (
+        <PopoverModal
+          referenceElement={id}
+          defaultPlacement="bottom"
+          onClose={() => setOpen(false)}
+          contentPadding="0px"
+          offsetOptions={16}
+          modalStyle={{
+            backgroundColor: colors.white,
+            borderColor: 'transparent',
+            borderRadius: 10,
+            boxShadow: boxShadows.selago,
+            width: dropdownWidth,
+          }}
+          hideArrow
+          zIndex={ZIndex.DROPDOWN}
+        >
+          <Column>
+            {dropdownTitle && (
+              <Text fontSize={15} fontWeight="bold" margin="16px 16px 8px 8px">
+                {dropdownTitle}
+              </Text>
+            )}
             {options.map((option) => (
               <StyledRow
                 disabled={option.disabled}
@@ -86,17 +114,26 @@ const Dropdown = ({ options, top, disabled, dropdownWidth, ...restProps }) => {
               </StyledRow>
             ))}
           </Column>
-        </Row>
+        </PopoverModal>
       )}
     </Box>
   );
 };
 
 Dropdown.propTypes = {
+  id: PropTypes.string,
   options: PropTypes.array,
-  top: PropTypes.bool,
   disabled: PropTypes.bool,
   dropdownWidth: PropTypes.number,
+  trigger: PropTypes.oneOf(['icon', 'button']),
+  buttonTriggerTitle: PropTypes.string,
+  dropdownTitle: PropTypes.string,
+  loading: PropTypes.bool,
+};
+
+Dropdown.defaultProps = {
+  trigger: 'icon',
 };
 
 export default Dropdown;
+export * from './types';

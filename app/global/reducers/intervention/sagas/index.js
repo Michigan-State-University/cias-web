@@ -1,9 +1,6 @@
 import { all } from 'redux-saga/effects';
 import copySessionSaga from 'global/reducers/intervention/sagas/copySession';
 import createSessionSaga from 'global/reducers/intervention/sagas/createSession';
-import fetchSessionEmailsSaga from 'global/reducers/intervention/sagas/fetchSessionEmails';
-import resendSessionInviteSaga from 'global/reducers/intervention/sagas/resendSessionInvite';
-import sendSessionInviteSaga from 'global/reducers/intervention/sagas/sendSessionInvite';
 import updateSessionSettingsSaga from 'global/reducers/intervention/sagas/updateSessionSettings';
 import sendInterventionCsvSaga from 'global/reducers/intervention/sagas/sendInterventionCsv';
 import editInterventionSaga from 'global/reducers/intervention/sagas/editIntervention';
@@ -18,9 +15,9 @@ import interventionLogoSaga from './interventionLogo';
 import translateInterventionSaga from './translateIntervention';
 import addInterventionAttachmentsSaga from './addAttachments';
 import deleteInterventionAttachmentSaga from './deleteAttachment';
-import sendInterventionInviteSaga from './sendInterventionInvite';
-import resendInterventionInviteSaga from './resendInterventionInvite';
-import fetchInterventionInvitesSaga from './fetchInterventionInvites';
+import sendInterventionInvitationsSaga from './sendInterventionInvitations';
+import resendInterventionInvitationSaga from './resendInterventionInvitation';
+import fetchInterventionInvitations from './fetchInterventionInvitations';
 import generateConversationsTranscriptSaga from './generateConversationsTranscript';
 import exportInterventionSaga from './exportIntervention';
 import changeInterventionNarratorSaga from './changeInterventionNarrator';
@@ -49,18 +46,15 @@ export {
   fetchUsersWithAccessSaga,
   revokeUserAccessSaga,
   createSessionSaga,
-  sendSessionInviteSaga,
-  fetchSessionEmailsSaga,
-  resendSessionInviteSaga,
   deleteSessionSaga,
   externalCopySessionSaga,
   interventionLogoSaga,
   translateInterventionSaga,
   addInterventionAttachmentsSaga,
-  sendInterventionInviteSaga,
-  resendInterventionInviteSaga,
+  sendInterventionInvitationsSaga,
+  resendInterventionInvitationSaga,
   deleteInterventionAttachmentSaga,
-  fetchInterventionInvitesSaga,
+  fetchInterventionInvitations,
   generateConversationsTranscriptSaga,
   exportInterventionSaga,
   changeInterventionNarratorSaga,
@@ -83,16 +77,13 @@ export default function* allInterventionSagas() {
     fetchUsersWithAccessSaga(),
     revokeUserAccessSaga(),
     createSessionSaga(),
-    sendSessionInviteSaga(),
     fetchUsersWithAccessSaga(),
-    fetchSessionEmailsSaga(),
-    resendSessionInviteSaga(),
     deleteSessionSaga(),
     externalCopySessionSaga(),
     translateInterventionSaga(),
-    sendInterventionInviteSaga(),
-    resendInterventionInviteSaga(),
-    fetchInterventionInvitesSaga(),
+    sendInterventionInvitationsSaga(),
+    resendInterventionInvitationSaga(),
+    fetchInterventionInvitations(),
     generateConversationsTranscriptSaga(),
     exportInterventionSaga(),
     changeInterventionNarratorSaga(),

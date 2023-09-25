@@ -21,6 +21,10 @@ export const StyledComment = styled(Comment)`
 
 export const StyledRow = styled(Row)`
   &:hover {
+    ${({ disabled }) => !disabled && 'cursor: pointer;'}
+  }
+
+  &:hover {
     ${StyledComment} {
       ${({ disabled }) => !disabled && 'font-weight: bold;'}
     }
