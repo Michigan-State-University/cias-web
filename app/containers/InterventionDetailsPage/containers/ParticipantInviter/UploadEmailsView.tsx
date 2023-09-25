@@ -15,8 +15,8 @@ import Text from 'components/Text';
 import { SelectOption } from 'components/Select/types';
 import { Alert } from 'components/Alert';
 import CsvFileExport from 'components/CsvFileExport';
-import Box from 'components/Box';
 import CsvFileReader from 'components/CsvFileReader';
+import Row from 'components/Row';
 
 import { BackButton } from './BackButton';
 import {
@@ -99,6 +99,7 @@ export const UploadEmailsView: FC<Props> = ({
       isReportingIntervention,
     );
     console.log(parsedData);
+    // TODO fill form with initial data
   };
 
   return (
@@ -114,21 +115,21 @@ export const UploadEmailsView: FC<Props> = ({
         mt={24}
       />
       <Text my={24}>{formatMessage(globalMessages.requiredFields)}</Text>
-      <CsvFileExport
-        filename={formatMessage(messages.exampleCsvFilename, {
-          name: interventionName,
-        })}
-        data={exampleCsvData}
-      >
-        {formatMessage(messages.exportExampleCsv)}
-      </CsvFileExport>
-      <Box mt={24}>
+      <Row align="center" gap={24}>
+        <CsvFileExport
+          filename={formatMessage(messages.exampleCsvFilename, {
+            name: interventionName,
+          })}
+          data={exampleCsvData}
+        >
+          {formatMessage(messages.exportExampleCsv)}
+        </CsvFileExport>
         {/* @ts-ignore */}
         <CsvFileReader onUpload={handleUpload}>
           {formatMessage(messages.csvUploadLabel)}
         </CsvFileReader>
-      </Box>
-      <Column flex={1}>
+      </Row>
+      <Column mt={24} flex={1}>
         <InviteEmailParticipantsForm
           isModularIntervention={isModularIntervention}
           isReportingIntervention={isReportingIntervention}
