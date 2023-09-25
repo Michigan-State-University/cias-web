@@ -1,4 +1,4 @@
-import React, { FC } from 'react';
+import React, { FC, useMemo } from 'react';
 import { useIntl } from 'react-intl';
 import { useDispatch, useSelector } from 'react-redux';
 
@@ -14,9 +14,10 @@ import Column from 'components/Column';
 import Text from 'components/Text';
 import { SelectOption } from 'components/Select/types';
 import { Alert } from 'components/Alert';
+import CsvFileExport from 'components/CsvFileExport';
 
 import { BackButton } from './BackButton';
-import { ParticipantInvitationType } from './types';
+import { EmailsCsvRow, ParticipantInvitationType } from './types';
 import {
   InviteEmailParticipantsForm,
   Props as InviteEmailParticipantsFormProps,
@@ -24,6 +25,7 @@ import {
 import messages from './messages';
 
 export type Props = {
+  interventionName: string;
   isModularIntervention: boolean;
   isReportingIntervention: boolean;
   interventionId: string;
@@ -34,6 +36,7 @@ export type Props = {
 
 export const UploadEmailsView: FC<Props> = ({
   onBack,
+  interventionName,
   isModularIntervention,
   isReportingIntervention,
   interventionId,
@@ -64,6 +67,21 @@ export const UploadEmailsView: FC<Props> = ({
     );
   };
 
+  const exampleCsvData: EmailsCsvRow[] = useMemo(() => {
+    if (isReportingIntervention) {
+      return healthClinicOptions.map(
+        ({ value: healthClinicId, label: healthClinicName }, index) => ({
+          email: `example${index + 1}@example.com`,
+          healthClinicId,
+          healthClinicName,
+        }),
+      );
+    }
+    return [...Array(5)].map((_, index) => ({
+      email: `example${index + 1}@example.com`,
+    }));
+  }, [isReportingIntervention, healthClinicOptions]);
+
   return (
     <Column flex={1}>
       <BackButton
@@ -77,6 +95,14 @@ export const UploadEmailsView: FC<Props> = ({
         mt={24}
       />
       <Text my={24}>{formatMessage(globalMessages.requiredFields)}</Text>
+      <CsvFileExport
+        filename={formatMessage(messages.exampleCsvFilename, {
+          name: interventionName,
+        })}
+        data={exampleCsvData}
+      >
+        {formatMessage(messages.exportExampleCsv)}
+      </CsvFileExport>
       <Column flex={1}>
         <InviteEmailParticipantsForm
           isModularIntervention={isModularIntervention}

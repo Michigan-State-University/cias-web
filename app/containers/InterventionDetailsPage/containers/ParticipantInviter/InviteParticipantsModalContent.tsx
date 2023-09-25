@@ -192,6 +192,7 @@ export const InviteParticipantsModalContent: FC<Props> = ({
           )}
           {currentView === InviteParticipantModalView.UPLOAD_EMAILS && (
             <UploadEmailsView
+              interventionName={interventionName}
               isModularIntervention={isModularIntervention}
               isReportingIntervention={isReportingIntervention}
               interventionId={interventionId}

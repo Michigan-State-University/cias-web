@@ -130,4 +130,12 @@ export default defineMessages({
     id: `${scope}.uploadEmailsInfo`,
     defaultMessage: `Upload CSV file with e-mail to upload multiple e-mails at once. To prepare correct format, use the file template.`,
   },
+  exampleCsvFilename: {
+    id: `${scope}.exampleCsvFilename`,
+    defaultMessage: 'example_csv_{name}',
+  },
+  exportExampleCsv: {
+    id: `${scope}.exportExampleCsv`,
+    defaultMessage: 'Download CSV template',
+  },
 });
