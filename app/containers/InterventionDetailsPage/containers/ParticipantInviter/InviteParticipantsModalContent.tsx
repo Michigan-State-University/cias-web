@@ -27,6 +27,7 @@ import { InviteEmailParticipantsView } from './InviteEmailParticipantsView';
 
 export type Props = {
   interventionId: string;
+  interventionName: string;
   organizationId: Nullable<string>;
   interventionStatus: InterventionStatus;
   interventionType: InterventionType;
@@ -37,6 +38,7 @@ export type Props = {
 
 export const InviteParticipantsModalContent: FC<Props> = ({
   interventionId,
+  interventionName,
   organizationId,
   interventionStatus,
   interventionType,
@@ -162,6 +164,7 @@ export const InviteParticipantsModalContent: FC<Props> = ({
               isModularIntervention={isModularIntervention}
               isReportingIntervention={isReportingIntervention}
               interventionId={interventionId}
+              interventionName={interventionName}
               interventionStatus={interventionStatus}
               sessionOptions={sessionOptions}
               healthClinicOptions={healthClinicOptions}

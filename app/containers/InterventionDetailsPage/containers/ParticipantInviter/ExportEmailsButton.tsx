@@ -1,12 +1,15 @@
-import React, { FC, useMemo } from 'react';
+import React, { FC, useCallback, useMemo } from 'react';
 import { useIntl } from 'react-intl';
 import groupBy from 'lodash/groupBy';
+import { unparse } from 'papaparse';
 
 import CsvIcon from 'assets/svg/csv-file.svg';
 
 import { themeColors } from 'theme';
 
 import { InterventionInvitation } from 'models/Intervention';
+
+import { FileDownloaderFactory } from 'utils/fileDownloader';
 
 import { TextButton } from 'components/Button';
 import Icon from 'components/Icon';
@@ -29,22 +32,42 @@ export type Props = {
   invitations: InterventionInvitation[];
   isModularIntervention: boolean;
   normalizedSessions: NormalizedSessions;
+  interventionName: string;
 };
 
 export const ExportEmailsButton: FC<Props> = ({
   invitations,
   isModularIntervention,
   normalizedSessions,
+  interventionName,
 }) => {
   const { formatMessage } = useIntl();
-
-  const handleExport = (targetId: string) => {
-    console.log(targetId);
-  };
 
   const invitationsGroupedByTarget = useMemo(
     () => Object.entries(groupBy(invitations, 'targetId')),
     [invitations],
+  );
+
+  const handleExport = useCallback(
+    (targetId: string) => {
+      const targetInvitations =
+        invitationsGroupedByTarget.find(([id]) => id === targetId)?.[1] ?? [];
+
+      const exportData = targetInvitations.map(({ email }) => ({ email }));
+
+      const fileContent = unparse(exportData);
+      const fileName = isModularIntervention
+        ? interventionName
+        : normalizedSessions[targetId]?.name;
+      const fileDownloader = FileDownloaderFactory.stringFileDownloader();
+      fileDownloader.download(fileContent, `${fileName}.csv`, 'text/csv');
+    },
+    [
+      invitationsGroupedByTarget,
+      isModularIntervention,
+      interventionName,
+      normalizedSessions,
+    ],
   );
 
   const exportDropdownOptions: DropdownOption[] = useMemo(() => {
@@ -54,7 +77,12 @@ export const ExportEmailsButton: FC<Props> = ({
       label: normalizedSessions[sessionId]?.name,
       action: () => handleExport(sessionId),
     }));
-  }, [isModularIntervention, invitationsGroupedByTarget, normalizedSessions]);
+  }, [
+    isModularIntervention,
+    invitationsGroupedByTarget,
+    normalizedSessions,
+    handleExport,
+  ]);
 
   const showDropdown = exportDropdownOptions.length > 1;
 

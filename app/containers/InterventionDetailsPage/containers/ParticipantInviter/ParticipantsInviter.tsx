@@ -16,6 +16,7 @@ import { InviteParticipantsModal } from './InviteParticipantsModal';
 
 export type Props = {
   interventionId: string;
+  interventionName: string;
   organizationId: Nullable<string>;
   interventionStatus: InterventionStatus;
   interventionType: InterventionType;

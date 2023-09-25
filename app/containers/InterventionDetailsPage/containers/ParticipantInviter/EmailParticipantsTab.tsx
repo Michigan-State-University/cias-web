@@ -33,6 +33,7 @@ import { ExportEmailsButton } from './ExportEmailsButton';
 
 export type Props = {
   interventionId: string;
+  interventionName: string;
   isModularIntervention: boolean;
   isReportingIntervention: boolean;
   invitingPossible: boolean;
@@ -43,6 +44,7 @@ export type Props = {
 
 export const EmailParticipantsTab: FC<Props> = ({
   interventionId,
+  interventionName,
   isModularIntervention,
   isReportingIntervention,
   invitingPossible,
@@ -107,6 +109,7 @@ export const EmailParticipantsTab: FC<Props> = ({
             invitations={invitations}
             isModularIntervention={isModularIntervention}
             normalizedSessions={normalizedSessions}
+            interventionName={interventionName}
           />
         </Row>
       </Row>

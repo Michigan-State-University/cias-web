@@ -20,6 +20,7 @@ export type Props = {
   isModularIntervention: boolean;
   isReportingIntervention: boolean;
   interventionId: string;
+  interventionName: string;
   interventionStatus: InterventionStatus;
   sessionOptions: SelectOption<string>[];
   healthClinicOptions: SelectOption<string>[];
@@ -32,6 +33,7 @@ export const ParticipantListView: FC<Props> = ({
   isModularIntervention,
   isReportingIntervention,
   interventionId,
+  interventionName,
   interventionStatus,
   sessionOptions,
   healthClinicOptions,
@@ -66,6 +68,7 @@ export const ParticipantListView: FC<Props> = ({
         <div label={formatMessage(messages.emailParticipants)}>
           <EmailParticipantsTab
             interventionId={interventionId}
+            interventionName={interventionName}
             isModularIntervention={isModularIntervention}
             isReportingIntervention={isReportingIntervention}
             invitingPossible={invitingPossible}
