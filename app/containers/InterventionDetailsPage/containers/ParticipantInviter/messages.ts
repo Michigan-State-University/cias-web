@@ -138,4 +138,8 @@ export default defineMessages({
     id: `${scope}.exportExampleCsv`,
     defaultMessage: 'Download CSV template',
   },
+  csvUploadLabel: {
+    id: `${scope}.csvUploadLabel`,
+    defaultMessage: 'Upload e-mails',
+  },
 });

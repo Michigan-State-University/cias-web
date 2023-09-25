@@ -32,6 +32,7 @@ export type NormalizedSessions = Record<Session['id'], Session>;
 export type HealthClinicInfo = {
   healthClinicName: string;
   healthSystemName: string;
+  deleted: boolean;
 };
 
 export type NormalizedHealthClinicsInfos = Record<
@@ -44,3 +45,7 @@ export type EmailsCsvRow = {
   healthClinicId?: string;
   healthClinicName?: string;
 };
+
+export type UploadedEmailsCsvData = {
+  data: string[];
+}[];

@@ -69,6 +69,7 @@ export const InviteEmailParticipantsForm: FC<Props> = ({
             display: 'flex',
             flexDirection: 'column',
             justifyContent: 'space-between',
+            gap: 24,
           }}
         >
           <Column gap={16}>

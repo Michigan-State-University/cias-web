@@ -136,7 +136,12 @@ export const EmailParticipantsTab: FC<Props> = ({
               <HealthClinicInvitationsCollapse
                 key={healthClinicId}
                 healthClinicId={healthClinicId}
-                {...normalizedHealthClinicsInfos[healthClinicId]}
+                healthClinicName={
+                  normalizedHealthClinicsInfos[healthClinicId]?.healthClinicName
+                }
+                healthSystemName={
+                  normalizedHealthClinicsInfos[healthClinicId]?.healthSystemName
+                }
                 invitations={groupedInvitations}
                 invitationsStates={invitationsStates}
                 isModularIntervention={isModularIntervention}

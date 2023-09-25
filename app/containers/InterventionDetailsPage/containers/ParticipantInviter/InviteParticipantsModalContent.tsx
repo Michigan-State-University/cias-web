@@ -110,22 +110,13 @@ export const InviteParticipantsModalContent: FC<Props> = ({
       if (!organization) return infos;
 
       organization.healthSystems.forEach(
-        ({
-          name: healthSystemName,
-          healthClinics,
-          deleted: healthSystemDeleted,
-        }) => {
-          if (healthSystemDeleted) return;
+        ({ name: healthSystemName, healthClinics }) => {
           healthClinics.forEach(
-            ({
-              name: healthClinicName,
-              id: healthClinicId,
-              deleted: healthClinicDeleted,
-            }) => {
-              if (healthClinicDeleted) return;
+            ({ name: healthClinicName, id: healthClinicId, deleted }) => {
               infos[healthClinicId] = {
                 healthClinicName,
                 healthSystemName,
+                deleted,
               };
             },
           );
@@ -198,6 +189,7 @@ export const InviteParticipantsModalContent: FC<Props> = ({
               interventionId={interventionId}
               sessionOptions={sessionOptions}
               healthClinicOptions={healthClinicOptions}
+              normalizedHealthClinicsInfos={normalizedHealthClinicsInfos}
               onBack={handleBack}
             />
           )}

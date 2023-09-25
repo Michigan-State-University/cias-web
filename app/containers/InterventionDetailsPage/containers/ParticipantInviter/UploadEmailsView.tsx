@@ -15,14 +15,22 @@ import Text from 'components/Text';
 import { SelectOption } from 'components/Select/types';
 import { Alert } from 'components/Alert';
 import CsvFileExport from 'components/CsvFileExport';
+import Box from 'components/Box';
+import CsvFileReader from 'components/CsvFileReader';
 
 import { BackButton } from './BackButton';
-import { EmailsCsvRow, ParticipantInvitationType } from './types';
+import {
+  EmailsCsvRow,
+  NormalizedHealthClinicsInfos,
+  ParticipantInvitationType,
+  UploadedEmailsCsvData,
+} from './types';
 import {
   InviteEmailParticipantsForm,
   Props as InviteEmailParticipantsFormProps,
 } from './InviteEmailParticipantsForm';
 import messages from './messages';
+import { parseCsvEmails } from './utils';
 
 export type Props = {
   interventionName: string;
@@ -31,6 +39,7 @@ export type Props = {
   interventionId: string;
   sessionOptions: SelectOption<string>[];
   healthClinicOptions: SelectOption<string>[];
+  normalizedHealthClinicsInfos: NormalizedHealthClinicsInfos;
   onBack: (invitationType: ParticipantInvitationType) => void;
 };
 
@@ -42,6 +51,7 @@ export const UploadEmailsView: FC<Props> = ({
   interventionId,
   sessionOptions,
   healthClinicOptions,
+  normalizedHealthClinicsInfos,
 }) => {
   const { formatMessage } = useIntl();
   const dispatch = useDispatch();
@@ -82,8 +92,17 @@ export const UploadEmailsView: FC<Props> = ({
     }));
   }, [isReportingIntervention, healthClinicOptions]);
 
+  const handleUpload = (data: UploadedEmailsCsvData) => {
+    const parsedData = parseCsvEmails(
+      data,
+      normalizedHealthClinicsInfos,
+      isReportingIntervention,
+    );
+    console.log(parsedData);
+  };
+
   return (
-    <Column flex={1}>
+    <Column flex={1} overflow="auto">
       <BackButton
         invitationType={ParticipantInvitationType.EMAIL}
         onBack={onBack}
@@ -103,6 +122,12 @@ export const UploadEmailsView: FC<Props> = ({
       >
         {formatMessage(messages.exportExampleCsv)}
       </CsvFileExport>
+      <Box mt={24}>
+        {/* @ts-ignore */}
+        <CsvFileReader onUpload={handleUpload}>
+          {formatMessage(messages.csvUploadLabel)}
+        </CsvFileReader>
+      </Box>
       <Column flex={1}>
         <InviteEmailParticipantsForm
           isModularIntervention={isModularIntervention}

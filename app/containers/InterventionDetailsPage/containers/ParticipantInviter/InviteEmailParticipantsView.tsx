@@ -61,7 +61,7 @@ export const InviteEmailParticipantsView: FC<Props> = ({
   };
 
   return (
-    <Column flex={1}>
+    <Column flex={1} overflow="auto">
       <BackButton
         invitationType={ParticipantInvitationType.EMAIL}
         onBack={onBack}
