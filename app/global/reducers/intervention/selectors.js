@@ -152,3 +152,6 @@ export const makeSelectInterventionHfhsAccess = () =>
     selectIntervention,
     (substate) => substate.intervention?.hfhsAccess,
   );
+
+export const makeSelectInvitationsStates = () =>
+  createSelector(selectIntervention, (substate) => substate.invitationsStates);

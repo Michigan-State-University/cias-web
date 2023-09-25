@@ -23,6 +23,7 @@ const Dropdown = ({
   trigger,
   buttonTriggerTitle,
   dropdownTitle,
+  loading,
   ...restProps
 }) => {
   const [open, setOpen] = useState(false);
@@ -58,6 +59,7 @@ const Dropdown = ({
           disabled={disabled}
           onClick={handleClick}
           id={id}
+          loading={loading}
         >
           {buttonTriggerTitle}
         </TextButton>
@@ -126,6 +128,7 @@ Dropdown.propTypes = {
   trigger: PropTypes.oneOf(['icon', 'button']),
   buttonTriggerTitle: PropTypes.string,
   dropdownTitle: PropTypes.string,
+  loading: PropTypes.bool,
 };
 
 Dropdown.defaultProps = {

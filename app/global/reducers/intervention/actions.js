@@ -107,6 +107,8 @@ import {
   CLEAR_INTERVENTION_DATA_SUCCESS,
   CLEAR_INTERVENTION_DATA_ERROR,
   ON_SENSITIVE_DATA_REMOVED_RECEIVED,
+  RESEND_INTERVENTION_INVITATION_SUCCESS,
+  RESEND_INTERVENTION_INVITATION_ERROR,
 } from './constants';
 
 export const fetchInterventionRequest = (id, showLoader = false) =>
@@ -240,6 +242,12 @@ export const sendInterventionInvitationsError = () =>
 
 export const resendInterventionInvitationRequest = (id, interventionId) =>
   actionBuilder(RESEND_INTERVENTION_INVITATION_REQUEST, { id, interventionId });
+export const resendInterventionInvitationSuccess = (id) =>
+  actionBuilder(RESEND_INTERVENTION_INVITATION_SUCCESS, {
+    id,
+  });
+export const resendInterventionInvitationError = (id) =>
+  actionBuilder(RESEND_INTERVENTION_INVITATION_ERROR, { id });
 
 export const fetchSessionEmailsRequest = (index) =>
   actionBuilder(FETCH_SESSION_EMAILS_REQUEST, { index });

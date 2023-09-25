@@ -7,8 +7,10 @@ import { Session } from 'models/Session';
 
 import {
   fetchInterventionInvitationsRequest,
+  InvitationListItemState,
   makeSelectInterventionInvitations,
   makeSelectInterventionLoader,
+  makeSelectInvitationsStates,
   resendInterventionInvitationRequest,
 } from 'global/reducers/intervention';
 
@@ -47,6 +49,10 @@ export const EmailParticipantsTab: FC<Props> = ({
   const invitationsLoading = useSelector(
     makeSelectInterventionLoader('fetchInterventionInvitations'),
   );
+  const invitationsStates: Record<
+    InterventionInvitation['id'],
+    InvitationListItemState
+  > = useSelector(makeSelectInvitationsStates());
 
   useEffect(() => {
     if (!invitations) {
@@ -86,6 +92,7 @@ export const EmailParticipantsTab: FC<Props> = ({
         {/* TODO group by clinic */}
         <EmailParticipantsTable
           invitations={invitations}
+          invitationsStates={invitationsStates}
           isModularIntervention={isModularIntervention}
           normalizedSessions={normalizedSessions}
           invitingPossible={invitingPossible}

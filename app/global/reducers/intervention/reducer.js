@@ -16,6 +16,7 @@ import {
   assignDraftItems,
   deleteItemByIndex,
   updateItemById,
+  updateListItemStateById,
 } from 'utils/reduxUtils';
 import sessionSettingsReducer from './sessionSettings/reducer';
 import {
@@ -120,12 +121,16 @@ import {
   CLEAR_INTERVENTION_DATA_SUCCESS,
   CLEAR_INTERVENTION_DATA_ERROR,
   ON_SENSITIVE_DATA_REMOVED_RECEIVED,
+  INVITATION_LIST_ITEM_DEFAULT_STATE,
+  RESEND_INTERVENTION_INVITATION_SUCCESS,
+  RESEND_INTERVENTION_INVITATION_ERROR,
 } from './constants';
 
 export const initialState = {
   currentSessionIndex: 0,
   intervention: null,
   invitations: null,
+  invitationsStates: {},
   collaborators: [],
   currentUserCollaboratorData: null,
   cache: {
@@ -188,6 +193,15 @@ const findSessionIndex = (intervention, sessionId) =>
 /* eslint-disable default-case, no-param-reassign */
 export const interventionReducer = (state = initialState, action) =>
   produce(state, (draft) => {
+    const updateInvitationListItemStateById = (invitationId, changes) => {
+      updateListItemStateById(
+        draft.invitationsStates,
+        invitationId,
+        changes,
+        INVITATION_LIST_ITEM_DEFAULT_STATE,
+      );
+    };
+
     switch (action.type) {
       case RESET_REDUCER: {
         return initialState;
@@ -203,6 +217,7 @@ export const interventionReducer = (state = initialState, action) =>
         draft.errors.fetchInterventionError = null;
         draft.intervention = null;
         draft.invitations = null;
+        draft.invitationsStates = {};
         break;
       case FETCH_INTERVENTION_SUCCESS:
         draft.loaders.fetchInterventionLoading = false;
@@ -223,6 +238,7 @@ export const interventionReducer = (state = initialState, action) =>
       case CREATE_INTERVENTION_SUCCESS:
         draft.loaders.createInterventionLoading = false;
         draft.invitations = null;
+        draft.invitationsStates = {};
         break;
       case CREATE_INTERVENTION_ERROR:
         break;
@@ -484,21 +500,41 @@ export const interventionReducer = (state = initialState, action) =>
         break;
       }
 
-      case SEND_INTERVENTION_INVITATIONS_SUCCESS:
+      case SEND_INTERVENTION_INVITATIONS_SUCCESS: {
         const { invitations } = action.payload;
         draft.invitations = invitations;
         draft.loaders.sendInterventionInvitations = false;
         break;
+      }
 
-      case SEND_INTERVENTION_INVITATIONS_ERROR:
+      case SEND_INTERVENTION_INVITATIONS_ERROR: {
         draft.loaders.sendInterventionInvitations = false;
         break;
+      }
 
-      case RESEND_INTERVENTION_INVITATION_REQUEST:
-        draft.loaders.interventionEmailLoading = {
-          ...action.payload,
-        };
+      case RESEND_INTERVENTION_INVITATION_REQUEST: {
+        const { id } = action.payload;
+        updateInvitationListItemStateById(id, {
+          resendLoading: true,
+        });
         break;
+      }
+
+      case RESEND_INTERVENTION_INVITATION_SUCCESS: {
+        const { id } = action.payload;
+        updateInvitationListItemStateById(id, {
+          resendLoading: false,
+        });
+        break;
+      }
+
+      case RESEND_INTERVENTION_INVITATION_ERROR: {
+        const { id } = action.payload;
+        updateInvitationListItemStateById(id, {
+          resendLoading: false,
+        });
+        break;
+      }
 
       case DELETE_SESSION_REQUEST:
         draft.intervention.sessions = state.intervention.sessions.filter(

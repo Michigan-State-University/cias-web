@@ -1,4 +1,4 @@
-import React, { FC, useMemo } from 'react';
+import React, { FC, memo, useMemo } from 'react';
 import { useIntl } from 'react-intl';
 
 import { InterventionInvitation } from 'models/Intervention';
@@ -24,15 +24,17 @@ export type Props = {
   normalizedSessions: Record<Session['id'], Session>;
   invitingPossible: boolean;
   onResendInvitation: (invitationId: string) => void;
+  resendLoading: boolean;
 };
 
-export const EmailParticipantsTableRow: FC<Props> = ({
+const EmailParticipantsTableRowComponent: FC<Props> = ({
   email,
   groupedInvitations,
   isModularIntervention,
   normalizedSessions,
   invitingPossible,
   onResendInvitation,
+  resendLoading,
 }) => {
   const { formatMessage } = useIntl();
 
@@ -101,15 +103,16 @@ export const EmailParticipantsTableRow: FC<Props> = ({
                 messages.resendInvitationButtonLabel,
               )}
               dropdownTitle={formatMessage(messages.dropdownTitle)}
+              loading={resendLoading}
             />
           )}
           {!showDropdown && (
-            // TODO add loader
             <TextButton
               buttonProps={{
                 color: themeColors.secondary,
               }}
               disabled={!invitingPossible}
+              loading={resendLoading}
               onClick={handleResendInvitationsButtonClick}
             >
               {formatMessage(messages.resendInvitationButtonLabel)}
@@ -120,3 +123,7 @@ export const EmailParticipantsTableRow: FC<Props> = ({
     </StripedTR>
   );
 };
+
+export const EmailParticipantsTableRow = memo(
+  EmailParticipantsTableRowComponent,
+);

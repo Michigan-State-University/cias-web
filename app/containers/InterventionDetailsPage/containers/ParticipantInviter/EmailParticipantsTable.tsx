@@ -1,18 +1,24 @@
 import React, { FC, useMemo } from 'react';
 import { useIntl } from 'react-intl';
+import groupBy from 'lodash/groupBy';
 
 import { InterventionInvitation } from 'models/Intervention';
 import { Session } from 'models/Session';
 
+import { InvitationListItemState } from 'global/reducers/intervention';
+
 import { Table, TBody, TH, THead, TR } from 'components/Table';
 import Text from 'components/Text';
 
-import groupBy from 'lodash/groupBy';
 import messages from './messages';
 import { EmailParticipantsTableRow } from './EmailParticipantsTableRow';
 
 export type Props = {
   invitations: InterventionInvitation[];
+  invitationsStates: Record<
+    InterventionInvitation['id'],
+    InvitationListItemState
+  >;
   isModularIntervention: boolean;
   normalizedSessions: Record<Session['id'], Session>;
   invitingPossible: boolean;
@@ -21,6 +27,7 @@ export type Props = {
 
 export const EmailParticipantsTable: FC<Props> = ({
   invitations,
+  invitationsStates,
   isModularIntervention,
   normalizedSessions,
   invitingPossible,
@@ -62,6 +69,9 @@ export const EmailParticipantsTable: FC<Props> = ({
             normalizedSessions={normalizedSessions}
             invitingPossible={invitingPossible}
             onResendInvitation={onResendInvitation}
+            resendLoading={groupedInvitations.some(
+              ({ id }) => invitationsStates[id]?.resendLoading,
+            )}
           />
         ))}
       </TBody>
