@@ -6,17 +6,24 @@ import arrowUp from 'assets/svg/arrow-up-black.svg';
 import { colors } from 'theme';
 
 import Collapse from 'components/Collapse';
-import { EllipsisText } from 'components/Text';
+import Text from 'components/Text';
 import Divider from 'components/Divider';
+import Row from 'components/Row';
 
 import {
   EmailParticipantsTable,
   Props as EmailParticipantsTableProps,
 } from './EmailParticipantsTable';
 
-export type Props = {} & EmailParticipantsTableProps;
+export type Props = {
+  healthClinicId: string;
+  healthClinicName: string;
+  healthSystemName: string;
+} & EmailParticipantsTableProps;
 
 export const HealthClinicInvitationsCollapse: FC<Props> = ({
+  healthClinicName,
+  healthSystemName,
   ...restProps
 }) => {
   const [opened, setOpened] = useState(false);
@@ -30,7 +37,16 @@ export const HealthClinicInvitationsCollapse: FC<Props> = ({
         py={21}
         px={8}
         height="auto"
-        label={<EllipsisText text="header" fontWeight="bold" />}
+        label={
+          <Row align="center">
+            <Row flexGrow={1} flexShrink={0}>
+              <Text fontWeight="bold">{healthClinicName}</Text>
+            </Row>
+            <Text opacity={0.7} fontWeight="bold" mx={8} truncate>
+              {healthSystemName}
+            </Text>
+          </Row>
+        }
         color={colors.white}
         onHideImg={arrowDown}
         onShowImg={arrowUp}
