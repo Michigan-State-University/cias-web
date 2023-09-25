@@ -30,6 +30,7 @@ import { EmailParticipantsTable } from './EmailParticipantsTable';
 import messages from './messages';
 import { HealthClinicInvitationsCollapse } from './HealthClinicInvitationsCollapse';
 import { ExportEmailsButton } from './ExportEmailsButton';
+import { UploadEmailsButton } from './UploadEmailsButton';
 
 export type Props = {
   interventionId: string;
@@ -40,6 +41,7 @@ export type Props = {
   normalizedSessions: NormalizedSessions;
   normalizedHealthClinicsInfos: NormalizedHealthClinicsInfos;
   onInvite: (invitationType: ParticipantInvitationType) => void;
+  onUploadEmails: () => void;
 };
 
 export const EmailParticipantsTab: FC<Props> = ({
@@ -51,6 +53,7 @@ export const EmailParticipantsTab: FC<Props> = ({
   normalizedSessions,
   normalizedHealthClinicsInfos,
   onInvite,
+  onUploadEmails,
 }) => {
   const { formatMessage } = useIntl();
   const dispatch = useDispatch();
@@ -92,6 +95,7 @@ export const EmailParticipantsTab: FC<Props> = ({
         invitingNotPossibleMessage={formatMessage(
           messages.invitingEmailsParticipantsNotPossibleMessage,
         )}
+        onUploadEmails={onUploadEmails}
       />
     );
   }
@@ -112,6 +116,7 @@ export const EmailParticipantsTab: FC<Props> = ({
             normalizedHealthClinicsInfos={normalizedHealthClinicsInfos}
             interventionName={interventionName}
           />
+          <UploadEmailsButton onClick={onUploadEmails} />
         </Row>
       </Row>
       <Box overflow="auto" maxHeight="100%">

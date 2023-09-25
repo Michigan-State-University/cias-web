@@ -5,8 +5,6 @@ import { unparse } from 'papaparse';
 
 import CsvIcon from 'assets/svg/csv-file.svg';
 
-import { themeColors } from 'theme';
-
 import { InterventionInvitation } from 'models/Intervention';
 
 import { FileDownloaderFactory } from 'utils/fileDownloader';
@@ -21,16 +19,7 @@ import {
   NormalizedHealthClinicsInfos,
   NormalizedSessions,
 } from './types';
-
-const TEXT_BUTTON_PROPS = {
-  color: themeColors.secondary,
-  display: 'flex',
-  alignItems: 'center',
-  justifyContent: 'center',
-  flexShrink: 0,
-  gap: 5,
-  px: 12,
-};
+import { CSV_BUTTON_PROPS } from './constants';
 
 export type Props = {
   invitations: InterventionInvitation[];
@@ -108,7 +97,7 @@ export const ExportEmailsButton: FC<Props> = ({
       {!showDropdown && (
         <TextButton
           onClick={() => handleExport(invitationsGroupedByTarget[0][0])}
-          buttonProps={TEXT_BUTTON_PROPS}
+          buttonProps={CSV_BUTTON_PROPS}
         >
           <Icon src={CsvIcon} />
           {formatMessage(messages.exportEmailsButtonTitle)}
@@ -126,7 +115,7 @@ export const ExportEmailsButton: FC<Props> = ({
               {formatMessage(messages.exportEmailsButtonTitle)}
             </>
           }
-          buttonTriggerProps={TEXT_BUTTON_PROPS}
+          buttonTriggerProps={CSV_BUTTON_PROPS}
           dropdownTitle={formatMessage(messages.exportDropdownTitle)}
         />
       )}

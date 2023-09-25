@@ -9,12 +9,14 @@ import Text from 'components/Text';
 import { ParticipantInvitationType } from './types';
 import messages from './messages';
 import { InviteParticipantsButton } from './InviteParticipantsButton';
+import { UploadEmailsButton } from './UploadEmailsButton';
 
 export type Props = {
   invitationType: ParticipantInvitationType;
   onInvite: (invitationType: ParticipantInvitationType) => void;
   invitingPossible: boolean;
   invitingNotPossibleMessage?: string;
+  onUploadEmails?: () => void;
 };
 
 export const NoParticipantsInfo: FC<Props> = ({
@@ -22,6 +24,7 @@ export const NoParticipantsInfo: FC<Props> = ({
   onInvite,
   invitingPossible,
   invitingNotPossibleMessage,
+  onUploadEmails,
 }) => {
   const { formatMessage } = useIntl();
 
@@ -39,6 +42,9 @@ export const NoParticipantsInfo: FC<Props> = ({
         <Text color={themeColors.text} textOpacity={0.7}>
           {invitingNotPossibleMessage}
         </Text>
+      )}
+      {invitingPossible && onUploadEmails && (
+        <UploadEmailsButton onClick={onUploadEmails} />
       )}
     </Column>
   );

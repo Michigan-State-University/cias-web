@@ -27,6 +27,7 @@ export type Props = {
   normalizedSessions: NormalizedSessions;
   normalizedHealthClinicsInfos: NormalizedHealthClinicsInfos;
   onInvite: (invitationType: ParticipantInvitationType) => void;
+  onUploadEmails: () => void;
 };
 
 export const ParticipantListView: FC<Props> = ({
@@ -40,6 +41,7 @@ export const ParticipantListView: FC<Props> = ({
   normalizedSessions,
   normalizedHealthClinicsInfos,
   onInvite,
+  onUploadEmails,
 }) => {
   const { formatMessage } = useIntl();
 
@@ -75,6 +77,7 @@ export const ParticipantListView: FC<Props> = ({
             normalizedSessions={normalizedSessions}
             normalizedHealthClinicsInfos={normalizedHealthClinicsInfos}
             onInvite={onInvite}
+            onUploadEmails={onUploadEmails}
           />
         </div>
         {/* @ts-ignore */}

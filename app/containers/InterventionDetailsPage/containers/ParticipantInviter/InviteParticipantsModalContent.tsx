@@ -24,6 +24,7 @@ import {
 } from './types';
 import { ParticipantListView } from './ParticipantListView';
 import { InviteEmailParticipantsView } from './InviteEmailParticipantsView';
+import { UploadEmailsView } from './UploadEmailsView';
 
 export type Props = {
   interventionId: string;
@@ -141,6 +142,10 @@ export const InviteParticipantsModalContent: FC<Props> = ({
     }
   };
 
+  const handleUploadEmails = () => {
+    setCurrentView(InviteParticipantModalView.UPLOAD_EMAILS);
+  };
+
   const handleBack = (invitationType: ParticipantInvitationType) => {
     if (invitationType === ParticipantInvitationType.EMAIL) {
       setCurrentView(InviteParticipantModalView.PARTICIPANT_LIST);
@@ -171,11 +176,22 @@ export const InviteParticipantsModalContent: FC<Props> = ({
               normalizedSessions={normalizedSessions}
               normalizedHealthClinicsInfos={normalizedHealthClinicsInfos}
               onInvite={handleInvite}
+              onUploadEmails={handleUploadEmails}
             />
           )}
           {currentView ===
             InviteParticipantModalView.INVITE_EMAIL_PARTICIPANTS && (
             <InviteEmailParticipantsView
+              isModularIntervention={isModularIntervention}
+              isReportingIntervention={isReportingIntervention}
+              interventionId={interventionId}
+              sessionOptions={sessionOptions}
+              healthClinicOptions={healthClinicOptions}
+              onBack={handleBack}
+            />
+          )}
+          {currentView === InviteParticipantModalView.UPLOAD_EMAILS && (
+            <UploadEmailsView
               isModularIntervention={isModularIntervention}
               isReportingIntervention={isReportingIntervention}
               interventionId={interventionId}

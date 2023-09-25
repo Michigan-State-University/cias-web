@@ -25,6 +25,10 @@ export default defineMessages({
     id: `${scope}.viewTitle${InviteParticipantModalView.MANAGE_PREDEFINED_PARTICIPANT}`,
     defaultMessage: 'Manage participant',
   },
+  [`viewTitle${InviteParticipantModalView.UPLOAD_EMAILS}`]: {
+    id: `${scope}.viewTitle${InviteParticipantModalView.UPLOAD_EMAILS}`,
+    defaultMessage: 'Bulk e-mail upload',
+  },
   sessionSelectLabel: {
     id: `${scope}.sessionSelectLabel`,
     defaultMessage: 'Session',
@@ -117,5 +121,13 @@ export default defineMessages({
   emailsCsvFileName: {
     id: `${scope}.emailsCsvFileName`,
     defaultMessage: 'participants_emails_{name}_invite',
+  },
+  uploadEmailsButtonTitle: {
+    id: `${scope}.uploadEmailsButtonTitle`,
+    defaultMessage: `Upload e-mails`,
+  },
+  uploadEmailsInfo: {
+    id: `${scope}.uploadEmailsInfo`,
+    defaultMessage: `Upload CSV file with e-mail to upload multiple e-mails at once. To prepare correct format, use the file template.`,
   },
 });
