@@ -3,7 +3,6 @@ import { useIntl } from 'react-intl';
 import groupBy from 'lodash/groupBy';
 
 import { InterventionInvitation } from 'models/Intervention';
-import { Session } from 'models/Session';
 
 import { InvitationListItemState } from 'global/reducers/intervention';
 
@@ -12,6 +11,7 @@ import Text from 'components/Text';
 
 import messages from './messages';
 import { EmailParticipantsTableRow } from './EmailParticipantsTableRow';
+import { NormalizedSessions } from './types';
 
 export type Props = {
   healthClinicId?: Nullable<string>;
@@ -21,7 +21,7 @@ export type Props = {
     InvitationListItemState
   >;
   isModularIntervention: boolean;
-  normalizedSessions: Record<Session['id'], Session>;
+  normalizedSessions: NormalizedSessions;
   invitingPossible: boolean;
   onResendInvitation: (invitationId: string) => void;
 };

@@ -3,7 +3,6 @@ import { useDispatch, useSelector } from 'react-redux';
 import { useIntl } from 'react-intl';
 
 import { InterventionInvitation } from 'models/Intervention';
-import { Session } from 'models/Session';
 
 import {
   fetchInterventionInvitationsRequest,
@@ -21,7 +20,11 @@ import Box from 'components/Box';
 
 import groupBy from 'lodash/groupBy';
 import { NoParticipantsInfo } from './NoParticipantsInfo';
-import { ParticipantInvitationType } from './types';
+import {
+  NormalizedHealthClinicsInfos,
+  NormalizedSessions,
+  ParticipantInvitationType,
+} from './types';
 import { InviteParticipantsButton } from './InviteParticipantsButton';
 import { EmailParticipantsTable } from './EmailParticipantsTable';
 import messages from './messages';
@@ -32,7 +35,8 @@ export type Props = {
   isModularIntervention: boolean;
   isReportingIntervention: boolean;
   invitingPossible: boolean;
-  normalizedSessions: Record<Session['id'], Session>;
+  normalizedSessions: NormalizedSessions;
+  normalizedHealthClinicsInfos: NormalizedHealthClinicsInfos;
   onInvite: (invitationType: ParticipantInvitationType) => void;
 };
 
@@ -42,6 +46,7 @@ export const EmailParticipantsTab: FC<Props> = ({
   isReportingIntervention,
   invitingPossible,
   normalizedSessions,
+  normalizedHealthClinicsInfos,
   onInvite,
 }) => {
   const { formatMessage } = useIntl();
@@ -114,8 +119,7 @@ export const EmailParticipantsTab: FC<Props> = ({
               <HealthClinicInvitationsCollapse
                 key={healthClinicId}
                 healthClinicId={healthClinicId}
-                healthClinicName={healthClinicId}
-                healthSystemName={healthClinicId}
+                {...normalizedHealthClinicsInfos[healthClinicId]}
                 invitations={groupedInvitations}
                 invitationsStates={invitationsStates}
                 isModularIntervention={isModularIntervention}

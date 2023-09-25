@@ -1,4 +1,7 @@
+import { Session } from 'models/Session';
+
 import { SelectOption } from 'components/Select/types';
+import { HealthClinic } from '../../../../models/Organization';
 
 export enum InviteParticipantModalView {
   PARTICIPANT_LIST = 'PARTICIPANT_LIST',
@@ -22,3 +25,15 @@ export type InviteEmailParticipantsFormValues = {
   healthClinicOption: Nullable<SelectOption<string>>;
   emails: string[];
 };
+
+export type NormalizedSessions = Record<Session['id'], Session>;
+
+export type HealthClinicInfo = {
+  healthClinicName: string;
+  healthSystemName: string;
+};
+
+export type NormalizedHealthClinicsInfos = Record<
+  HealthClinic['id'],
+  HealthClinicInfo
+>;

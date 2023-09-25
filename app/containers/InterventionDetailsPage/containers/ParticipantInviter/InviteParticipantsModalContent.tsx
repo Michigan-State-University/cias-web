@@ -16,7 +16,12 @@ import {
 import Loader from 'components/Loader';
 import { SelectOption } from 'components/Select/types';
 
-import { InviteParticipantModalView, ParticipantInvitationType } from './types';
+import {
+  InviteParticipantModalView,
+  NormalizedHealthClinicsInfos,
+  NormalizedSessions,
+  ParticipantInvitationType,
+} from './types';
 import { ParticipantListView } from './ParticipantListView';
 import { InviteEmailParticipantsView } from './InviteEmailParticipantsView';
 
@@ -62,27 +67,69 @@ export const InviteParticipantsModalContent: FC<Props> = ({
     return sessions.map(({ id, name }) => ({ value: id, label: name }));
   }, [isModularIntervention, sessions]);
 
-  const normalizedSessions: Record<Session['id'], Session> = useMemo(() => {
+  const normalizedSessions: NormalizedSessions = useMemo(() => {
     if (isModularIntervention) return {};
     return normalizeArrayToObject(sessions, 'id');
   }, [isModularIntervention, sessions]);
 
   const healthClinicOptions: SelectOption<string>[] = useMemo(() => {
     const options: SelectOption<string>[] = [];
-    organization?.healthSystems?.forEach(
-      ({ name: healthSystemName, healthClinics }) => {
-        healthClinics.forEach(({ name: healthClinicName, id, deleted }) => {
-          if (!deleted) {
+    if (!organization) return options;
+
+    organization.healthSystems.forEach(
+      ({
+        name: healthSystemName,
+        healthClinics,
+        deleted: healthSystemDeleted,
+      }) => {
+        if (healthSystemDeleted) return;
+        healthClinics.forEach(
+          ({
+            name: healthClinicName,
+            id: healthClinicId,
+            deleted: healthClinicDeleted,
+          }) => {
+            if (healthClinicDeleted) return;
             options.push({
-              value: id,
+              value: healthClinicId,
               label: `${healthClinicName} (${healthSystemName})`,
             });
-          }
-        });
+          },
+        );
       },
     );
     return options;
   }, [organization]);
+
+  const normalizedHealthClinicsInfos: NormalizedHealthClinicsInfos =
+    useMemo(() => {
+      const infos: NormalizedHealthClinicsInfos = {};
+      if (!organization) return infos;
+
+      organization.healthSystems.forEach(
+        ({
+          name: healthSystemName,
+          healthClinics,
+          deleted: healthSystemDeleted,
+        }) => {
+          if (healthSystemDeleted) return;
+          healthClinics.forEach(
+            ({
+              name: healthClinicName,
+              id: healthClinicId,
+              deleted: healthClinicDeleted,
+            }) => {
+              if (healthClinicDeleted) return;
+              infos[healthClinicId] = {
+                healthClinicName,
+                healthSystemName,
+              };
+            },
+          );
+        },
+      );
+      return infos;
+    }, [healthClinicOptions]);
 
   const handleInvite = (invitationType: ParticipantInvitationType) => {
     if (invitationType === ParticipantInvitationType.EMAIL) {
@@ -119,6 +166,7 @@ export const InviteParticipantsModalContent: FC<Props> = ({
               sessionOptions={sessionOptions}
               healthClinicOptions={healthClinicOptions}
               normalizedSessions={normalizedSessions}
+              normalizedHealthClinicsInfos={normalizedHealthClinicsInfos}
               onInvite={handleInvite}
             />
           )}

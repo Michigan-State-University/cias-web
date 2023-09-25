@@ -2,14 +2,17 @@ import { FC } from 'react';
 import { useIntl } from 'react-intl';
 
 import { InterventionStatus } from 'models/Intervention';
-import { Session } from 'models/Session';
 import { canInviteEmailParticipants } from 'models/Status/statusPermissions';
 
 import { SelectOption } from 'components/Select/types';
 
 import Tabs from 'components/Tabs';
 import { CopyLinkForm } from './CopyLinkForm';
-import { ParticipantInvitationType } from './types';
+import {
+  NormalizedHealthClinicsInfos,
+  NormalizedSessions,
+  ParticipantInvitationType,
+} from './types';
 import messages from './messages';
 import { EmailParticipantsTab } from './EmailParticipantsTab';
 
@@ -20,7 +23,8 @@ export type Props = {
   interventionStatus: InterventionStatus;
   sessionOptions: SelectOption<string>[];
   healthClinicOptions: SelectOption<string>[];
-  normalizedSessions: Record<Session['id'], Session>;
+  normalizedSessions: NormalizedSessions;
+  normalizedHealthClinicsInfos: NormalizedHealthClinicsInfos;
   onInvite: (invitationType: ParticipantInvitationType) => void;
 };
 
@@ -32,6 +36,7 @@ export const ParticipantListView: FC<Props> = ({
   sessionOptions,
   healthClinicOptions,
   normalizedSessions,
+  normalizedHealthClinicsInfos,
   onInvite,
 }) => {
   const { formatMessage } = useIntl();
@@ -65,6 +70,7 @@ export const ParticipantListView: FC<Props> = ({
             isReportingIntervention={isReportingIntervention}
             invitingPossible={invitingPossible}
             normalizedSessions={normalizedSessions}
+            normalizedHealthClinicsInfos={normalizedHealthClinicsInfos}
             onInvite={onInvite}
           />
         </div>

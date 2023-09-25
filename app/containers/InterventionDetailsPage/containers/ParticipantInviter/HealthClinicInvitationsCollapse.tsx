@@ -16,7 +16,6 @@ import {
 } from './EmailParticipantsTable';
 
 export type Props = {
-  healthClinicId: string;
   healthClinicName: string;
   healthSystemName: string;
 } & EmailParticipantsTableProps;
@@ -43,7 +42,7 @@ export const HealthClinicInvitationsCollapse: FC<Props> = ({
               <Text fontWeight="bold">{healthClinicName}</Text>
             </Row>
             <Text opacity={0.7} fontWeight="bold" mx={8} truncate>
-              {healthSystemName}
+              ({healthSystemName})
             </Text>
           </Row>
         }

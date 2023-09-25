@@ -2,7 +2,6 @@ import React, { FC, memo, useMemo } from 'react';
 import { useIntl } from 'react-intl';
 
 import { InterventionInvitation } from 'models/Intervention';
-import { Session } from 'models/Session';
 
 import { colors, themeColors } from 'theme';
 
@@ -16,13 +15,14 @@ import Dropdown, { DropdownOption } from 'components/Dropdown';
 
 import messages from './messages';
 import { SessionInvitationList } from './SessionInvitationList';
+import { NormalizedSessions } from './types';
 
 export type Props = {
   healthClinicId: Nullable<string>;
   email: string;
   groupedInvitations: InterventionInvitation[];
   isModularIntervention: boolean;
-  normalizedSessions: Record<Session['id'], Session>;
+  normalizedSessions: NormalizedSessions;
   invitingPossible: boolean;
   onResendInvitation: (invitationId: string) => void;
   resendLoading: boolean;

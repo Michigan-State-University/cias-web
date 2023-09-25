@@ -2,15 +2,15 @@ import { useIntl } from 'react-intl';
 import { FC } from 'react';
 
 import { InterventionInvitation } from 'models/Intervention';
-import { Session } from 'models/Session';
 
 import Text from 'components/Text';
 
 import messages from './messages';
+import { NormalizedSessions } from './types';
 
 export type Props = {
   groupedInvitations: InterventionInvitation[];
-  normalizedSessions: Record<Session['id'], Session>;
+  normalizedSessions: NormalizedSessions;
 };
 
 export const SessionInvitationList: FC<Props> = ({
