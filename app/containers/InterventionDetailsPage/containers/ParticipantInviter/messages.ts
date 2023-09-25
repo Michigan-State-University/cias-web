@@ -114,4 +114,8 @@ export default defineMessages({
     id: `${scope}.exportEmailsButtonTitle`,
     defaultMessage: `Export e-mails`,
   },
+  emailsCsvFileName: {
+    id: `${scope}.emailsCsvFileName`,
+    defaultMessage: 'participants_emails_{name}_invite',
+  },
 });

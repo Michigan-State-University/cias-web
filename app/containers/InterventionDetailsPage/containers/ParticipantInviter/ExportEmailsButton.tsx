@@ -71,9 +71,11 @@ export const ExportEmailsButton: FC<Props> = ({
       });
 
       const fileContent = unparse(exportData);
-      const fileName = isModularIntervention
-        ? interventionName
-        : normalizedSessions[targetId]?.name;
+      const fileName = formatMessage(messages.emailsCsvFileName, {
+        name: isModularIntervention
+          ? interventionName
+          : normalizedSessions[targetId]?.name,
+      });
       const fileDownloader = FileDownloaderFactory.stringFileDownloader();
       fileDownloader.download(fileContent, `${fileName}.csv`, 'text/csv');
     },
