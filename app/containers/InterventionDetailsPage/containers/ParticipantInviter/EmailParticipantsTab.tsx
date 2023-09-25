@@ -1,4 +1,4 @@
-import { FC, useEffect } from 'react';
+import { FC, useEffect, useMemo } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useIntl } from 'react-intl';
 
@@ -19,6 +19,7 @@ import Column from 'components/Column';
 import Row from 'components/Row';
 import Box from 'components/Box';
 
+import groupBy from 'lodash/groupBy';
 import { NoParticipantsInfo } from './NoParticipantsInfo';
 import { ParticipantInvitationType } from './types';
 import { InviteParticipantsButton } from './InviteParticipantsButton';
@@ -28,6 +29,7 @@ import messages from './messages';
 export type Props = {
   interventionId: string;
   isModularIntervention: boolean;
+  isReportingIntervention: boolean;
   invitingPossible: boolean;
   normalizedSessions: Record<Session['id'], Session>;
   onInvite: (invitationType: ParticipantInvitationType) => void;
@@ -36,6 +38,7 @@ export type Props = {
 export const EmailParticipantsTab: FC<Props> = ({
   interventionId,
   isModularIntervention,
+  isReportingIntervention,
   invitingPossible,
   normalizedSessions,
   onInvite,
@@ -64,6 +67,11 @@ export const EmailParticipantsTab: FC<Props> = ({
     dispatch(resendInterventionInvitationRequest(invitationId, interventionId));
   };
 
+  const invitationsGroupedByHealthClinic = useMemo(() => {
+    if (!isReportingIntervention) return [];
+    return Object.entries(groupBy(invitations, 'healthClinicId'));
+  }, [isReportingIntervention, invitations]);
+
   if (invitationsLoading) return <Loader type="inline" />;
 
   if (!invitations?.length) {
@@ -89,15 +97,33 @@ export const EmailParticipantsTab: FC<Props> = ({
         />
       </Row>
       <Box overflow="auto" maxHeight="100%">
-        {/* TODO group by clinic */}
-        <EmailParticipantsTable
-          invitations={invitations}
-          invitationsStates={invitationsStates}
-          isModularIntervention={isModularIntervention}
-          normalizedSessions={normalizedSessions}
-          invitingPossible={invitingPossible}
-          onResendInvitation={handleResendInvitation}
-        />
+        {!isReportingIntervention && (
+          <EmailParticipantsTable
+            invitations={invitations}
+            invitationsStates={invitationsStates}
+            isModularIntervention={isModularIntervention}
+            normalizedSessions={normalizedSessions}
+            invitingPossible={invitingPossible}
+            onResendInvitation={handleResendInvitation}
+          />
+        )}
+        {isReportingIntervention &&
+          invitationsGroupedByHealthClinic.map(
+            ([healthClinicId, groupedInvitations]) => (
+              <>
+                {healthClinicId}
+                <EmailParticipantsTable
+                  healthClinicId={healthClinicId}
+                  invitations={groupedInvitations}
+                  invitationsStates={invitationsStates}
+                  isModularIntervention={isModularIntervention}
+                  normalizedSessions={normalizedSessions}
+                  invitingPossible={invitingPossible}
+                  onResendInvitation={handleResendInvitation}
+                />
+              </>
+            ),
+          )}
       </Box>
     </Column>
   );

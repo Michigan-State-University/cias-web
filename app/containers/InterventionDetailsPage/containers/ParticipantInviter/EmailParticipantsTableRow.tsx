@@ -18,6 +18,7 @@ import messages from './messages';
 import { SessionInvitationList } from './SessionInvitationList';
 
 export type Props = {
+  healthClinicId: Nullable<string>;
   email: string;
   groupedInvitations: InterventionInvitation[];
   isModularIntervention: boolean;
@@ -28,6 +29,7 @@ export type Props = {
 };
 
 const EmailParticipantsTableRowComponent: FC<Props> = ({
+  healthClinicId,
   email,
   groupedInvitations,
   isModularIntervention,
@@ -73,7 +75,9 @@ const EmailParticipantsTableRowComponent: FC<Props> = ({
         <NoMaxWidthTD padding={8} width="20%">
           <Row align="center">
             <Tooltip
-              id={`session-invitations-count-tooltip-${email}`}
+              id={`session-invitations-count-tooltip-${email}-${
+                healthClinicId ?? ''
+              }`}
               content={
                 <SessionInvitationList
                   groupedInvitations={groupedInvitations}
@@ -95,7 +99,7 @@ const EmailParticipantsTableRowComponent: FC<Props> = ({
           {showDropdown && (
             // @ts-ignore
             <Dropdown
-              id={`resend-invitation-options-${email}`}
+              id={`resend-invitation-options-${email}-${healthClinicId ?? ''}`}
               disabled={!invitingPossible}
               options={resendDropdownOptions}
               trigger="button"

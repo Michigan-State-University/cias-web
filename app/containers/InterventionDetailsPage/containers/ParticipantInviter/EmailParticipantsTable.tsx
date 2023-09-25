@@ -14,6 +14,7 @@ import messages from './messages';
 import { EmailParticipantsTableRow } from './EmailParticipantsTableRow';
 
 export type Props = {
+  healthClinicId?: Nullable<string>;
   invitations: InterventionInvitation[];
   invitationsStates: Record<
     InterventionInvitation['id'],
@@ -26,6 +27,7 @@ export type Props = {
 };
 
 export const EmailParticipantsTable: FC<Props> = ({
+  healthClinicId,
   invitations,
   invitationsStates,
   isModularIntervention,
@@ -63,6 +65,7 @@ export const EmailParticipantsTable: FC<Props> = ({
         {invitationsGroupedByEmail.map(([email, groupedInvitations]) => (
           <EmailParticipantsTableRow
             key={email}
+            healthClinicId={healthClinicId}
             email={email}
             groupedInvitations={groupedInvitations}
             isModularIntervention={isModularIntervention}
