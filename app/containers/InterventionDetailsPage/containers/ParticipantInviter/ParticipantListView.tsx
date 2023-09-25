@@ -5,8 +5,8 @@ import { InterventionStatus } from 'models/Intervention';
 import { canInviteEmailParticipants } from 'models/Status/statusPermissions';
 
 import { SelectOption } from 'components/Select/types';
-
 import Tabs from 'components/Tabs';
+
 import { CopyLinkForm } from './CopyLinkForm';
 import {
   NormalizedHealthClinicsInfos,
