@@ -1,6 +1,7 @@
 import { FC, useEffect, useMemo } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useIntl } from 'react-intl';
+import groupBy from 'lodash/groupBy';
 
 import { InterventionInvitation } from 'models/Intervention';
 
@@ -18,7 +19,6 @@ import Column from 'components/Column';
 import Row from 'components/Row';
 import Box from 'components/Box';
 
-import groupBy from 'lodash/groupBy';
 import { NoParticipantsInfo } from './NoParticipantsInfo';
 import {
   NormalizedHealthClinicsInfos,
