@@ -29,6 +29,7 @@ import { InviteParticipantsButton } from './InviteParticipantsButton';
 import { EmailParticipantsTable } from './EmailParticipantsTable';
 import messages from './messages';
 import { HealthClinicInvitationsCollapse } from './HealthClinicInvitationsCollapse';
+import { ExportEmailsButton } from './ExportEmailsButton';
 
 export type Props = {
   interventionId: string;
@@ -95,12 +96,19 @@ export const EmailParticipantsTab: FC<Props> = ({
 
   return (
     <Column maxHeight="100%">
-      <Row mb={16}>
+      <Row mb={16} align="center" gap={12}>
         <InviteParticipantsButton
           invitationType={ParticipantInvitationType.EMAIL}
           onInvite={onInvite}
           disabled={!invitingPossible}
         />
+        <Row>
+          <ExportEmailsButton
+            invitations={invitations}
+            isModularIntervention={isModularIntervention}
+            normalizedSessions={normalizedSessions}
+          />
+        </Row>
       </Row>
       <Box overflow="auto" maxHeight="100%">
         {!isReportingIntervention && (

@@ -106,7 +106,7 @@ const EmailParticipantsTableRowComponent: FC<Props> = ({
               buttonTriggerTitle={formatMessage(
                 messages.resendInvitationButtonLabel,
               )}
-              dropdownTitle={formatMessage(messages.dropdownTitle)}
+              dropdownTitle={formatMessage(messages.resendDropdownTitle)}
               loading={resendLoading}
             />
           )}

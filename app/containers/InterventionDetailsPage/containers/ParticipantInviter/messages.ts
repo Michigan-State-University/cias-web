@@ -102,8 +102,16 @@ export default defineMessages({
     id: `${scope}.sessionInvitationsCountTitle`,
     defaultMessage: `This participant has been invited to:`,
   },
-  dropdownTitle: {
-    id: `${scope}.dropdownTitle`,
+  resendDropdownTitle: {
+    id: `${scope}.resendDropdownTitle`,
     defaultMessage: `Select session to resend invitation to:`,
+  },
+  exportDropdownTitle: {
+    id: `${scope}.exportDropdownTitle`,
+    defaultMessage: `Select session to export e-mail invitations from:`,
+  },
+  exportEmailsButtonTitle: {
+    id: `${scope}.exportEmailsButtonTitle`,
+    defaultMessage: `Export e-mails`,
   },
 });
