@@ -109,6 +109,7 @@ export const EmailParticipantsTab: FC<Props> = ({
             invitations={invitations}
             isModularIntervention={isModularIntervention}
             normalizedSessions={normalizedSessions}
+            normalizedHealthClinicsInfos={normalizedHealthClinicsInfos}
             interventionName={interventionName}
           />
         </Row>

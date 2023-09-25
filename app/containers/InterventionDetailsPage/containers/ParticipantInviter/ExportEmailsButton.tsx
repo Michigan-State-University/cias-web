@@ -16,7 +16,11 @@ import Icon from 'components/Icon';
 import Dropdown, { DropdownOption } from 'components/Dropdown';
 
 import messages from './messages';
-import { NormalizedSessions } from './types';
+import {
+  EmailsCsvRow,
+  NormalizedHealthClinicsInfos,
+  NormalizedSessions,
+} from './types';
 
 const TEXT_BUTTON_PROPS = {
   color: themeColors.secondary,
@@ -32,6 +36,7 @@ export type Props = {
   invitations: InterventionInvitation[];
   isModularIntervention: boolean;
   normalizedSessions: NormalizedSessions;
+  normalizedHealthClinicsInfos: NormalizedHealthClinicsInfos;
   interventionName: string;
 };
 
@@ -39,6 +44,7 @@ export const ExportEmailsButton: FC<Props> = ({
   invitations,
   isModularIntervention,
   normalizedSessions,
+  normalizedHealthClinicsInfos,
   interventionName,
 }) => {
   const { formatMessage } = useIntl();
@@ -53,7 +59,16 @@ export const ExportEmailsButton: FC<Props> = ({
       const targetInvitations =
         invitationsGroupedByTarget.find(([id]) => id === targetId)?.[1] ?? [];
 
-      const exportData = targetInvitations.map(({ email }) => ({ email }));
+      const exportData = targetInvitations.map(({ email, healthClinicId }) => {
+        const row: EmailsCsvRow = { email };
+        if (healthClinicId) {
+          const { healthClinicName } =
+            normalizedHealthClinicsInfos[healthClinicId];
+          row.healthClinicId = healthClinicId;
+          row.healthClinicName = healthClinicName;
+        }
+        return row;
+      });
 
       const fileContent = unparse(exportData);
       const fileName = isModularIntervention

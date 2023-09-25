@@ -37,3 +37,9 @@ export type NormalizedHealthClinicsInfos = Record<
   HealthClinic['id'],
   HealthClinicInfo
 >;
+
+export type EmailsCsvRow = {
+  email: string;
+  healthClinicId?: string;
+  healthClinicName?: string;
+};
