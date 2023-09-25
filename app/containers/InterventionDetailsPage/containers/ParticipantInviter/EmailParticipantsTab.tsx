@@ -25,6 +25,7 @@ import { ParticipantInvitationType } from './types';
 import { InviteParticipantsButton } from './InviteParticipantsButton';
 import { EmailParticipantsTable } from './EmailParticipantsTable';
 import messages from './messages';
+import { HealthClinicInvitationsCollapse } from './HealthClinicInvitationsCollapse';
 
 export type Props = {
   interventionId: string;
@@ -110,18 +111,16 @@ export const EmailParticipantsTab: FC<Props> = ({
         {isReportingIntervention &&
           invitationsGroupedByHealthClinic.map(
             ([healthClinicId, groupedInvitations]) => (
-              <>
-                {healthClinicId}
-                <EmailParticipantsTable
-                  healthClinicId={healthClinicId}
-                  invitations={groupedInvitations}
-                  invitationsStates={invitationsStates}
-                  isModularIntervention={isModularIntervention}
-                  normalizedSessions={normalizedSessions}
-                  invitingPossible={invitingPossible}
-                  onResendInvitation={handleResendInvitation}
-                />
-              </>
+              <HealthClinicInvitationsCollapse
+                key={healthClinicId}
+                healthClinicId={healthClinicId}
+                invitations={groupedInvitations}
+                invitationsStates={invitationsStates}
+                isModularIntervention={isModularIntervention}
+                normalizedSessions={normalizedSessions}
+                invitingPossible={invitingPossible}
+                onResendInvitation={handleResendInvitation}
+              />
             ),
           )}
       </Box>
