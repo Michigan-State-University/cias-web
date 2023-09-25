@@ -17,9 +17,6 @@ describe('Send emails', () => {
     cy.route('POST', '**/interventions/*/sessions').as('createSession');
     cy.route('GET', '**/sessions/*/invitations').as('getSessionInvitations');
     cy.route('POST', '**/sessions/*/invitations').as('addSessionInvitations');
-    cy.route('GET', '**/sessions/*/invitations/*/resend').as(
-      'resendSessionInvitation',
-    );
     cy.route('GET', '**/sessions/*/question_groups').as(
       'getSessionQuestionGroups',
     );
@@ -73,10 +70,6 @@ describe('Send emails', () => {
       .get('button[class*="StyledTextButton"]')
       .invoke('attr', 'style', 'display: block')
       .click({ multiple: true });
-    cy.wait(['@resendSessionInvitation', '@resendSessionInvitation']);
-    cy.get('@resendSessionInvitation.all').each((response) => {
-      expect(response).to.have.property('status', 200);
-    });
 
     // dismiss all toasts before closing a modal (it overlaps with a close button)
     cy.dismissAllToasts();

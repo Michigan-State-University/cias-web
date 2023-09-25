@@ -137,19 +137,10 @@ export const initialState = {
     editIntervention: false,
     changeAccessSettingLoading: false,
     fetchUserAccessLoading: false,
-    fetchSessionEmailsLoading: false,
     createSessionLoading: false,
     sendSessionLoading: false,
-    sessionEmailLoading: {
-      id: null,
-      email: null,
-    },
     fetchInterventionInvitations: false,
     sendInterventionInvitations: false,
-    interventionEmailLoading: {
-      id: null,
-      email: null,
-    },
     logoLoading: false,
     translateInterventionLoading: false,
     addAttachmentsLoading: false,
@@ -165,7 +156,6 @@ export const initialState = {
   },
   errors: {
     fetchInterventionError: null,
-    fetchSessionEmailsError: null,
     createInterventionError: null,
     changeAccessSettingError: null,
     fetchUserAccessError: null,
