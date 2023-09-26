@@ -21,11 +21,24 @@ export type CopyLinkFormValues = {
   healthClinicOption: Nullable<SelectOption<string>>;
 };
 
-export type InviteEmailParticipantsFormValues = {
+export type NonReportingInterventionFormValues = {
+  isReportingIntervention: false;
   sessionOption: Nullable<SelectOption<string>>;
-  healthClinicOption: Nullable<SelectOption<string>>;
   emails: string[];
 };
+
+export type ReportingInterventionFormValues = {
+  isReportingIntervention: true;
+  sessionOption: Nullable<SelectOption<string>>;
+  clinics: {
+    healthClinicOption: Nullable<SelectOption<string>>;
+    emails: string[];
+  }[];
+};
+
+export type InviteEmailParticipantsFormValues =
+  | NonReportingInterventionFormValues
+  | ReportingInterventionFormValues;
 
 export type NormalizedSessions = Record<Session['id'], Session>;
 

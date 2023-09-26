@@ -18,11 +18,7 @@ export type Props = {
   isReportingIntervention: boolean;
   sessionOptions: SelectOption<string>[];
   healthClinicOptions: SelectOption<string>[];
-  onFormSubmit: (
-    sessionId: Nullable<string>,
-    healthClinicId: Nullable<string>,
-    emails: string[],
-  ) => void;
+  onSubmit: FormikConfig<InviteEmailParticipantsFormValues>['onSubmit'];
   submitting: boolean;
   initialFormValues?: Nullable<InviteEmailParticipantsFormValues>;
 };
@@ -32,7 +28,7 @@ export const InviteEmailParticipantsForm: FC<Props> = ({
   isReportingIntervention,
   sessionOptions,
   healthClinicOptions,
-  onFormSubmit,
+  onSubmit,
   submitting,
   initialFormValues,
 }) => {
@@ -40,9 +36,16 @@ export const InviteEmailParticipantsForm: FC<Props> = ({
 
   const initialValues: InviteEmailParticipantsFormValues = useMemo(() => {
     if (initialFormValues) return initialFormValues;
+    if (isReportingIntervention) {
+      return {
+        isReportingIntervention: true,
+        sessionOption: null,
+        clinics: [{ healthClinicOption: null, emails: [] }],
+      };
+    }
     return {
+      isReportingIntervention: false,
       sessionOption: null,
-      healthClinicOption: null,
       emails: [],
     };
   }, [initialFormValues]);
@@ -56,11 +59,6 @@ export const InviteEmailParticipantsForm: FC<Props> = ({
       ),
     [isModularIntervention, isReportingIntervention],
   );
-
-  const onSubmit: FormikConfig<InviteEmailParticipantsFormValues>['onSubmit'] =
-    ({ sessionOption, healthClinicOption, emails }) => {
-      onFormSubmit(sessionOption?.value, healthClinicOption?.value, emails);
-    };
 
   return (
     <Formik

@@ -6,6 +6,7 @@ import globalMessages from 'global/i18n/globalMessages';
 import {
   makeSelectInterventionLoader,
   sendInterventionInvitationsRequest,
+  SendInvitationsPayload,
 } from 'global/reducers/intervention';
 
 import Column from 'components/Column';
@@ -18,6 +19,7 @@ import {
   InviteEmailParticipantsForm,
   Props as InviteEmailParticipantsFormProps,
 } from './InviteEmailParticipantsForm';
+import { prepareSendInvitationsPayload } from './utils';
 
 export type Props = {
   isModularIntervention: boolean;
@@ -43,19 +45,18 @@ export const InviteEmailParticipantsView: FC<Props> = ({
     makeSelectInterventionLoader('sendInterventionInvitations'),
   );
 
-  const handleSubmit: InviteEmailParticipantsFormProps['onFormSubmit'] = (
-    sessionId,
-    healthClinicId,
-    emails,
+  const handleSubmit: InviteEmailParticipantsFormProps['onSubmit'] = (
+    values,
   ) => {
+    const invitations: SendInvitationsPayload = prepareSendInvitationsPayload(
+      values,
+      isModularIntervention,
+      interventionId,
+    );
+
     dispatch(
-      sendInterventionInvitationsRequest(
-        interventionId,
-        isModularIntervention,
-        sessionId,
-        healthClinicId,
-        emails,
-        () => onBack(ParticipantInvitationType.EMAIL),
+      sendInterventionInvitationsRequest(interventionId, invitations, () =>
+        onBack(ParticipantInvitationType.EMAIL),
       ),
     );
   };
@@ -73,7 +74,7 @@ export const InviteEmailParticipantsView: FC<Props> = ({
           isReportingIntervention={isReportingIntervention}
           sessionOptions={sessionOptions}
           healthClinicOptions={healthClinicOptions}
-          onFormSubmit={handleSubmit}
+          onSubmit={handleSubmit}
           submitting={submitting}
         />
       </Column>

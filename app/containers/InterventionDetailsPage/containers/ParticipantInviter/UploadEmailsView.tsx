@@ -8,6 +8,7 @@ import globalMessages from 'global/i18n/globalMessages';
 import {
   makeSelectInterventionLoader,
   sendInterventionInvitationsRequest,
+  SendInvitationsPayload,
 } from 'global/reducers/intervention';
 
 import Column from 'components/Column';
@@ -31,7 +32,11 @@ import {
   Props as InviteEmailParticipantsFormProps,
 } from './InviteEmailParticipantsForm';
 import messages from './messages';
-import { parseEmailsCsv } from './utils';
+import {
+  parseEmailsCsv,
+  prepareInitialValues,
+  prepareSendInvitationsPayload,
+} from './utils';
 
 export type Props = {
   interventionName: string;
@@ -61,19 +66,18 @@ export const UploadEmailsView: FC<Props> = ({
     makeSelectInterventionLoader('sendInterventionInvitations'),
   );
 
-  const handleSubmit: InviteEmailParticipantsFormProps['onFormSubmit'] = (
-    sessionId,
-    healthClinicId,
-    emails,
+  const handleSubmit: InviteEmailParticipantsFormProps['onSubmit'] = (
+    values,
   ) => {
+    const invitations: SendInvitationsPayload = prepareSendInvitationsPayload(
+      values,
+      isModularIntervention,
+      interventionId,
+    );
+
     dispatch(
-      sendInterventionInvitationsRequest(
-        interventionId,
-        isModularIntervention,
-        sessionId,
-        healthClinicId,
-        emails,
-        () => onBack(ParticipantInvitationType.EMAIL),
+      sendInterventionInvitationsRequest(interventionId, invitations, () =>
+        onBack(ParticipantInvitationType.EMAIL),
       ),
     );
   };
@@ -103,14 +107,11 @@ export const UploadEmailsView: FC<Props> = ({
       isReportingIntervention,
     );
 
-    const newInitialFormValues: InviteEmailParticipantsFormValues =
-      parsedData.reduce<InviteEmailParticipantsFormValues>(
-        (values, item) => {
-          values.emails.push(item.email);
-          return values;
-        },
-        { sessionOption: null, healthClinicOption: null, emails: [] },
-      );
+    const newInitialFormValues = prepareInitialValues(
+      parsedData,
+      isReportingIntervention,
+      normalizedHealthClinicsInfos,
+    );
 
     setInitialFormValues(newInitialFormValues);
   };
@@ -151,7 +152,7 @@ export const UploadEmailsView: FC<Props> = ({
               isReportingIntervention={isReportingIntervention}
               sessionOptions={sessionOptions}
               healthClinicOptions={healthClinicOptions}
-              onFormSubmit={handleSubmit}
+              onSubmit={handleSubmit}
               submitting={submitting}
             />
           </Column>
