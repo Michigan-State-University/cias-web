@@ -24,6 +24,7 @@ export type Props = {
     emails: string[],
   ) => void;
   submitting: boolean;
+  initialFormValues?: Nullable<InviteEmailParticipantsFormValues>;
 };
 
 export const InviteEmailParticipantsForm: FC<Props> = ({
@@ -33,13 +34,18 @@ export const InviteEmailParticipantsForm: FC<Props> = ({
   healthClinicOptions,
   onFormSubmit,
   submitting,
+  initialFormValues,
 }) => {
   const { formatMessage } = useIntl();
 
-  const initialValues: InviteEmailParticipantsFormValues = useMemo(
-    () => ({ sessionOption: null, healthClinicOption: null, emails: [] }),
-    [],
-  );
+  const initialValues: InviteEmailParticipantsFormValues = useMemo(() => {
+    if (initialFormValues) return initialFormValues;
+    return {
+      sessionOption: null,
+      healthClinicOption: null,
+      emails: [],
+    };
+  }, [initialFormValues]);
 
   const validationSchema = useMemo(
     () =>
@@ -61,6 +67,7 @@ export const InviteEmailParticipantsForm: FC<Props> = ({
       initialValues={initialValues}
       validationSchema={validationSchema}
       onSubmit={onSubmit}
+      enableReinitialize
     >
       {({ isValid, handleSubmit }) => (
         <Form
@@ -100,6 +107,7 @@ export const InviteEmailParticipantsForm: FC<Props> = ({
               label={formatMessage(messages.emailsInputLabel)}
               placeholder={formatMessage(messages.emailsInputPlaceholder)}
               transparent
+              required
             />
           </Column>
           <Row justify="end">

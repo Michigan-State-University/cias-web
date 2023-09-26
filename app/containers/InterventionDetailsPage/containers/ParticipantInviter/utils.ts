@@ -6,7 +6,11 @@ import globalMessages from 'global/i18n/globalMessages';
 
 import { parametrizeRoutePath } from 'utils/router';
 import { csvEmailValidator } from 'utils/validators';
-import { NormalizedHealthClinicsInfos, UploadedEmailsCsvData } from './types';
+import {
+  NormalizedHealthClinicsInfos,
+  ParsedEmailsCsv,
+  UploadedEmailsCsvData,
+} from './types';
 
 export const createCopyLinkFormSchema = (
   formatMessage: IntlShape['formatMessage'],
@@ -102,11 +106,11 @@ export const createInviteEmailsParticipantsFormSchema = (
     ),
   });
 
-export const parseCsvEmails = (
+export const parseEmailsCsv = (
   data: UploadedEmailsCsvData,
   normalizedHealthClinicsInfos: NormalizedHealthClinicsInfos,
   isReportingIntervention: boolean,
-) =>
+): ParsedEmailsCsv =>
   data
     .map((columns) => {
       if (!columns || !columns.data) return null;
@@ -125,4 +129,4 @@ export const parseCsvEmails = (
 
       return { email, healthClinicId };
     })
-    .filter(Boolean);
+    .filter(Boolean) as ParsedEmailsCsv;

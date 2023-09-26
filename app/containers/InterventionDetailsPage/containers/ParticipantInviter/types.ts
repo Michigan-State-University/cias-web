@@ -49,3 +49,5 @@ export type EmailsCsvRow = {
 export type UploadedEmailsCsvData = {
   data: string[];
 }[];
+
+export type ParsedEmailsCsv = { email: string; healthClinicId?: string }[];

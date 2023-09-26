@@ -1,4 +1,4 @@
-import React, { FC, useMemo } from 'react';
+import React, { FC, useMemo, useState } from 'react';
 import { useIntl } from 'react-intl';
 import { useDispatch, useSelector } from 'react-redux';
 
@@ -21,6 +21,7 @@ import Row from 'components/Row';
 import { BackButton } from './BackButton';
 import {
   EmailsCsvRow,
+  InviteEmailParticipantsFormValues,
   NormalizedHealthClinicsInfos,
   ParticipantInvitationType,
   UploadedEmailsCsvData,
@@ -30,7 +31,7 @@ import {
   Props as InviteEmailParticipantsFormProps,
 } from './InviteEmailParticipantsForm';
 import messages from './messages';
-import { parseCsvEmails } from './utils';
+import { parseEmailsCsv } from './utils';
 
 export type Props = {
   interventionName: string;
@@ -92,14 +93,26 @@ export const UploadEmailsView: FC<Props> = ({
     }));
   }, [isReportingIntervention, healthClinicOptions]);
 
+  const [initialFormValues, setInitialFormValues] =
+    useState<Nullable<InviteEmailParticipantsFormValues>>(null);
+
   const handleUpload = (data: UploadedEmailsCsvData) => {
-    const parsedData = parseCsvEmails(
+    const parsedData = parseEmailsCsv(
       data,
       normalizedHealthClinicsInfos,
       isReportingIntervention,
     );
-    console.log(parsedData);
-    // TODO fill form with initial data
+
+    const newInitialFormValues: InviteEmailParticipantsFormValues =
+      parsedData.reduce<InviteEmailParticipantsFormValues>(
+        (values, item) => {
+          values.emails.push(item.email);
+          return values;
+        },
+        { sessionOption: null, healthClinicOption: null, emails: [] },
+      );
+
+    setInitialFormValues(newInitialFormValues);
   };
 
   return (
@@ -114,8 +127,7 @@ export const UploadEmailsView: FC<Props> = ({
         contentProps={{ maxWidth: 510 }}
         mt={24}
       />
-      <Text my={24}>{formatMessage(globalMessages.requiredFields)}</Text>
-      <Row align="center" gap={24}>
+      <Row align="center" mt={24} gap={24}>
         <CsvFileExport
           filename={formatMessage(messages.exampleCsvFilename, {
             name: interventionName,
@@ -129,16 +141,22 @@ export const UploadEmailsView: FC<Props> = ({
           {formatMessage(messages.csvUploadLabel)}
         </CsvFileReader>
       </Row>
-      <Column mt={24} flex={1}>
-        <InviteEmailParticipantsForm
-          isModularIntervention={isModularIntervention}
-          isReportingIntervention={isReportingIntervention}
-          sessionOptions={sessionOptions}
-          healthClinicOptions={healthClinicOptions}
-          onFormSubmit={handleSubmit}
-          submitting={submitting}
-        />
-      </Column>
+      {initialFormValues && (
+        <>
+          <Text mt={24}>{formatMessage(globalMessages.requiredFields)}</Text>
+          <Column mt={24} flex={1}>
+            <InviteEmailParticipantsForm
+              initialFormValues={initialFormValues}
+              isModularIntervention={isModularIntervention}
+              isReportingIntervention={isReportingIntervention}
+              sessionOptions={sessionOptions}
+              healthClinicOptions={healthClinicOptions}
+              onFormSubmit={handleSubmit}
+              submitting={submitting}
+            />
+          </Column>
+        </>
+      )}
     </Column>
   );
 };
