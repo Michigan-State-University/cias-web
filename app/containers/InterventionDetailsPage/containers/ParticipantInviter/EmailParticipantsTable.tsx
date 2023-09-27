@@ -54,7 +54,7 @@ export const EmailParticipantsTable: FC<Props> = ({
           {!isModularIntervention && (
             <TH padding={8}>
               <Text textAlign="left" fontWeight="bold">
-                {formatMessage(messages.sessionsColumnHeader)}
+                {formatMessage(messages.invitationsColumnHeader)}
               </Text>
             </TH>
           )}

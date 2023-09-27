@@ -83,13 +83,15 @@ export const ParticipantListView: FC<Props> = ({
         {/* @ts-ignore */}
         <div label={formatMessage(messages.predefinedParticipants)}></div>
       </Tabs>
-      <CopyLinkForm
-        isModularIntervention={isModularIntervention}
-        isReportingIntervention={isReportingIntervention}
-        interventionId={interventionId}
-        sessionOptions={sessionOptions}
-        healthClinicOptions={healthClinicOptions}
-      />
+      {invitingPossible && (
+        <CopyLinkForm
+          isModularIntervention={isModularIntervention}
+          isReportingIntervention={isReportingIntervention}
+          interventionId={interventionId}
+          sessionOptions={sessionOptions}
+          healthClinicOptions={healthClinicOptions}
+        />
+      )}
     </>
   );
 };

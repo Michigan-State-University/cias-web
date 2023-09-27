@@ -94,9 +94,9 @@ export default defineMessages({
     id: `${scope}.participantColumnHeader`,
     defaultMessage: `Participant`,
   },
-  sessionsColumnHeader: {
-    id: `${scope}.sessionsColumnHeader`,
-    defaultMessage: `Sessions`,
+  invitationsColumnHeader: {
+    id: `${scope}.invitationsColumnHeader`,
+    defaultMessage: `Invitations`,
   },
   resendInvitationButtonLabel: {
     id: `${scope}.resendInvitationButtonLabel`,
