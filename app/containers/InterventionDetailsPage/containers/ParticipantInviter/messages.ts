@@ -142,4 +142,16 @@ export default defineMessages({
     id: `${scope}.csvUploadLabel`,
     defaultMessage: 'Upload e-mails',
   },
+  addClinicButtonTitle: {
+    id: `${scope}.addClinicButtonTitle`,
+    defaultMessage: 'Add clinic',
+  },
+  removeClinicButtonTitle: {
+    id: `${scope}.removeClinicButtonTitle`,
+    defaultMessage: 'Remove clinic',
+  },
+  clinicMustBeUnique: {
+    id: `${scope}.clinicMustBeUnique`,
+    defaultMessage: 'Selected clinics must be unique',
+  },
 });
