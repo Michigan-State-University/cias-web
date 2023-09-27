@@ -25,6 +25,10 @@ export default defineMessages({
     id: `${scope}.viewTitle${InviteParticipantModalView.MANAGE_PREDEFINED_PARTICIPANT}`,
     defaultMessage: 'Manage participant',
   },
+  [`viewTitle${InviteParticipantModalView.UPLOAD_EMAILS}`]: {
+    id: `${scope}.viewTitle${InviteParticipantModalView.UPLOAD_EMAILS}`,
+    defaultMessage: 'Bulk e-mail upload',
+  },
   sessionSelectLabel: {
     id: `${scope}.sessionSelectLabel`,
     defaultMessage: 'Session',
@@ -90,9 +94,9 @@ export default defineMessages({
     id: `${scope}.participantColumnHeader`,
     defaultMessage: `Participant`,
   },
-  sessionsColumnHeader: {
-    id: `${scope}.sessionsColumnHeader`,
-    defaultMessage: `Sessions`,
+  invitationsColumnHeader: {
+    id: `${scope}.invitationsColumnHeader`,
+    defaultMessage: `Invitations`,
   },
   resendInvitationButtonLabel: {
     id: `${scope}.resendInvitationButtonLabel`,
@@ -102,8 +106,56 @@ export default defineMessages({
     id: `${scope}.sessionInvitationsCountTitle`,
     defaultMessage: `This participant has been invited to:`,
   },
-  dropdownTitle: {
-    id: `${scope}.dropdownTitle`,
+  resendDropdownTitle: {
+    id: `${scope}.resendDropdownTitle`,
     defaultMessage: `Select session to resend invitation to:`,
+  },
+  exportDropdownTitle: {
+    id: `${scope}.exportDropdownTitle`,
+    defaultMessage: `Select session to export e-mail invitations from:`,
+  },
+  exportEmailsButtonTitle: {
+    id: `${scope}.exportEmailsButtonTitle`,
+    defaultMessage: `Export e-mails`,
+  },
+  emailsCsvFileName: {
+    id: `${scope}.emailsCsvFileName`,
+    defaultMessage: 'participants_emails_{name}_invite',
+  },
+  uploadEmailsButtonTitle: {
+    id: `${scope}.uploadEmailsButtonTitle`,
+    defaultMessage: `Upload e-mails`,
+  },
+  uploadEmailsInfo: {
+    id: `${scope}.uploadEmailsInfo`,
+    defaultMessage: `Upload CSV file with e-mail to upload multiple e-mails at once. To prepare correct format, use the file template.`,
+  },
+  exampleCsvFilename: {
+    id: `${scope}.exampleCsvFilename`,
+    defaultMessage: 'example_csv_{name}',
+  },
+  exportExampleCsv: {
+    id: `${scope}.exportExampleCsv`,
+    defaultMessage: 'Download CSV template',
+  },
+  csvUploadLabel: {
+    id: `${scope}.csvUploadLabel`,
+    defaultMessage: 'Upload e-mails',
+  },
+  addClinicButtonTitle: {
+    id: `${scope}.addClinicButtonTitle`,
+    defaultMessage: 'Add clinic',
+  },
+  removeClinicButtonTitle: {
+    id: `${scope}.removeClinicButtonTitle`,
+    defaultMessage: 'Remove clinic',
+  },
+  clinicMustBeUnique: {
+    id: `${scope}.clinicMustBeUnique`,
+    defaultMessage: 'Selected clinics must be unique',
+  },
+  healthClinicCollapseDefaultLabel: {
+    id: `${scope}.healthClinicCollapseDefaultLabel`,
+    defaultMessage: 'No clinic selected',
   },
 });

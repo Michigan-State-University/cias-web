@@ -20,24 +20,28 @@ export type Props = {
   isModularIntervention: boolean;
   isReportingIntervention: boolean;
   interventionId: string;
+  interventionName: string;
   interventionStatus: InterventionStatus;
   sessionOptions: SelectOption<string>[];
   healthClinicOptions: SelectOption<string>[];
   normalizedSessions: NormalizedSessions;
   normalizedHealthClinicsInfos: NormalizedHealthClinicsInfos;
   onInvite: (invitationType: ParticipantInvitationType) => void;
+  onUploadEmails: () => void;
 };
 
 export const ParticipantListView: FC<Props> = ({
   isModularIntervention,
   isReportingIntervention,
   interventionId,
+  interventionName,
   interventionStatus,
   sessionOptions,
   healthClinicOptions,
   normalizedSessions,
   normalizedHealthClinicsInfos,
   onInvite,
+  onUploadEmails,
 }) => {
   const { formatMessage } = useIntl();
 
@@ -66,24 +70,28 @@ export const ParticipantListView: FC<Props> = ({
         <div label={formatMessage(messages.emailParticipants)}>
           <EmailParticipantsTab
             interventionId={interventionId}
+            interventionName={interventionName}
             isModularIntervention={isModularIntervention}
             isReportingIntervention={isReportingIntervention}
             invitingPossible={invitingPossible}
             normalizedSessions={normalizedSessions}
             normalizedHealthClinicsInfos={normalizedHealthClinicsInfos}
             onInvite={onInvite}
+            onUploadEmails={onUploadEmails}
           />
         </div>
         {/* @ts-ignore */}
         <div label={formatMessage(messages.predefinedParticipants)}></div>
       </Tabs>
-      <CopyLinkForm
-        isModularIntervention={isModularIntervention}
-        isReportingIntervention={isReportingIntervention}
-        interventionId={interventionId}
-        sessionOptions={sessionOptions}
-        healthClinicOptions={healthClinicOptions}
-      />
+      {invitingPossible && (
+        <CopyLinkForm
+          isModularIntervention={isModularIntervention}
+          isReportingIntervention={isReportingIntervention}
+          interventionId={interventionId}
+          sessionOptions={sessionOptions}
+          healthClinicOptions={healthClinicOptions}
+        />
+      )}
     </>
   );
 };

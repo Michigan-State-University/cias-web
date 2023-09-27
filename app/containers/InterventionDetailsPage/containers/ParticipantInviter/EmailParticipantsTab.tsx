@@ -28,26 +28,32 @@ import {
 import { InviteParticipantsButton } from './InviteParticipantsButton';
 import { EmailParticipantsTable } from './EmailParticipantsTable';
 import messages from './messages';
-import { HealthClinicInvitationsCollapse } from './HealthClinicInvitationsCollapse';
+import { HealthClinicCollapse } from './HealthClinicCollapse';
+import { ExportEmailsButton } from './ExportEmailsButton';
+import { UploadEmailsButton } from './UploadEmailsButton';
 
 export type Props = {
   interventionId: string;
+  interventionName: string;
   isModularIntervention: boolean;
   isReportingIntervention: boolean;
   invitingPossible: boolean;
   normalizedSessions: NormalizedSessions;
   normalizedHealthClinicsInfos: NormalizedHealthClinicsInfos;
   onInvite: (invitationType: ParticipantInvitationType) => void;
+  onUploadEmails: () => void;
 };
 
 export const EmailParticipantsTab: FC<Props> = ({
   interventionId,
+  interventionName,
   isModularIntervention,
   isReportingIntervention,
   invitingPossible,
   normalizedSessions,
   normalizedHealthClinicsInfos,
   onInvite,
+  onUploadEmails,
 }) => {
   const { formatMessage } = useIntl();
   const dispatch = useDispatch();
@@ -89,18 +95,29 @@ export const EmailParticipantsTab: FC<Props> = ({
         invitingNotPossibleMessage={formatMessage(
           messages.invitingEmailsParticipantsNotPossibleMessage,
         )}
+        onUploadEmails={onUploadEmails}
       />
     );
   }
 
   return (
     <Column maxHeight="100%">
-      <Row mb={16}>
+      <Row mb={16} align="center" gap={12}>
         <InviteParticipantsButton
           invitationType={ParticipantInvitationType.EMAIL}
           onInvite={onInvite}
           disabled={!invitingPossible}
         />
+        <Row>
+          <ExportEmailsButton
+            invitations={invitations}
+            isModularIntervention={isModularIntervention}
+            normalizedSessions={normalizedSessions}
+            normalizedHealthClinicsInfos={normalizedHealthClinicsInfos}
+            interventionName={interventionName}
+          />
+          <UploadEmailsButton onClick={onUploadEmails} />
+        </Row>
       </Row>
       <Box overflow="auto" maxHeight="100%">
         {!isReportingIntervention && (
@@ -116,17 +133,20 @@ export const EmailParticipantsTab: FC<Props> = ({
         {isReportingIntervention &&
           invitationsGroupedByHealthClinic.map(
             ([healthClinicId, groupedInvitations]) => (
-              <HealthClinicInvitationsCollapse
+              <HealthClinicCollapse
                 key={healthClinicId}
-                healthClinicId={healthClinicId}
-                {...normalizedHealthClinicsInfos[healthClinicId]}
-                invitations={groupedInvitations}
-                invitationsStates={invitationsStates}
-                isModularIntervention={isModularIntervention}
-                normalizedSessions={normalizedSessions}
-                invitingPossible={invitingPossible}
-                onResendInvitation={handleResendInvitation}
-              />
+                healthClinicInfo={normalizedHealthClinicsInfos[healthClinicId]}
+              >
+                <EmailParticipantsTable
+                  healthClinicId={healthClinicId}
+                  invitations={groupedInvitations}
+                  invitationsStates={invitationsStates}
+                  isModularIntervention={isModularIntervention}
+                  normalizedSessions={normalizedSessions}
+                  invitingPossible={invitingPossible}
+                  onResendInvitation={handleResendInvitation}
+                />
+              </HealthClinicCollapse>
             ),
           )}
       </Box>

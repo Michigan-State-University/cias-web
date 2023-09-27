@@ -8,6 +8,7 @@ export enum InviteParticipantModalView {
   INVITE_EMAIL_PARTICIPANTS = 'INVITE_EMAIL_PARTICIPANTS',
   INVITE_PREDEFINED_PARTICIPANT = 'INVITE_PREDEFINED_PARTICIPANT',
   MANAGE_PREDEFINED_PARTICIPANT = 'MANAGE_PREDEFINED_PARTICIPANT',
+  UPLOAD_EMAILS = 'UPLOAD_EMAILS',
 }
 
 export enum ParticipantInvitationType {
@@ -20,20 +21,46 @@ export type CopyLinkFormValues = {
   healthClinicOption: Nullable<SelectOption<string>>;
 };
 
-export type InviteEmailParticipantsFormValues = {
+export type NonReportingInterventionFormValues = {
+  isReportingIntervention: false;
   sessionOption: Nullable<SelectOption<string>>;
-  healthClinicOption: Nullable<SelectOption<string>>;
   emails: string[];
 };
+
+export type ReportingInterventionFormValues = {
+  isReportingIntervention: true;
+  sessionOption: Nullable<SelectOption<string>>;
+  clinics: {
+    healthClinicOption: Nullable<SelectOption<string>>;
+    emails: string[];
+  }[];
+};
+
+export type InviteEmailParticipantsFormValues =
+  | NonReportingInterventionFormValues
+  | ReportingInterventionFormValues;
 
 export type NormalizedSessions = Record<Session['id'], Session>;
 
 export type HealthClinicInfo = {
   healthClinicName: string;
   healthSystemName: string;
+  deleted: boolean;
 };
 
 export type NormalizedHealthClinicsInfos = Record<
   HealthClinic['id'],
   HealthClinicInfo
 >;
+
+export type EmailsCsvRow = {
+  email: string;
+  healthClinicId?: string;
+  healthClinicName?: string;
+};
+
+export type UploadedEmailsCsvData = {
+  data: string[];
+}[];
+
+export type ParsedEmailsCsv = { email: string; healthClinicId?: string }[];

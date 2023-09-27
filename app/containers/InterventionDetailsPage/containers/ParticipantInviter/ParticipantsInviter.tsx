@@ -3,8 +3,6 @@ import { useIntl } from 'react-intl';
 
 import MailIcon from 'assets/svg/pink-mail.svg';
 
-import { themeColors } from 'theme';
-
 import { InterventionStatus, InterventionType } from 'models/Intervention';
 import { Session } from 'models/Session';
 
@@ -13,9 +11,11 @@ import Icon from 'components/Icon';
 
 import messages from './messages';
 import { InviteParticipantsModal } from './InviteParticipantsModal';
+import { TEXT_BUTTON_PROPS } from './constants';
 
 export type Props = {
   interventionId: string;
+  interventionName: string;
   organizationId: Nullable<string>;
   interventionStatus: InterventionStatus;
   interventionType: InterventionType;
@@ -36,14 +36,7 @@ export const ParticipantsInviter: FC<Props> = ({ ...props }) => {
       />
       <TextButton
         onClick={() => setModalVisible(true)}
-        buttonProps={{
-          color: themeColors.secondary,
-          display: 'flex',
-          alignItems: 'center',
-          justifyContent: 'center',
-          flexShrink: 0,
-          gap: 5,
-        }}
+        buttonProps={TEXT_BUTTON_PROPS}
       >
         {formatMessage(messages.participantsInviterButtonTitle)}
         <Icon src={MailIcon} />

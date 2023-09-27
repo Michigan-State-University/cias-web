@@ -22,6 +22,7 @@ const Dropdown = ({
   dropdownWidth,
   trigger,
   buttonTriggerTitle,
+  buttonTriggerProps,
   dropdownTitle,
   loading,
   ...restProps
@@ -55,6 +56,7 @@ const Dropdown = ({
         <TextButton
           buttonProps={{
             color: themeColors.secondary,
+            ...buttonTriggerProps,
           }}
           disabled={disabled}
           onClick={handleClick}
@@ -127,6 +129,7 @@ Dropdown.propTypes = {
   dropdownWidth: PropTypes.number,
   trigger: PropTypes.oneOf(['icon', 'button']),
   buttonTriggerTitle: PropTypes.string,
+  buttonTriggerProps: PropTypes.object,
   dropdownTitle: PropTypes.string,
   loading: PropTypes.bool,
 };

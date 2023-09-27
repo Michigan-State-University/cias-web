@@ -3,13 +3,13 @@ import { useIntl } from 'react-intl';
 
 import TriangleBackIcon from 'assets/svg/triangle-back.svg';
 
-import { themeColors } from 'theme';
-
 import { TextButton } from 'components/Button';
 import Icon from 'components/Icon';
+import Row from 'components/Row';
 
 import { ParticipantInvitationType } from './types';
 import messages from './messages';
+import { TEXT_BUTTON_PROPS } from './constants';
 
 export type Props = {
   invitationType: ParticipantInvitationType;
@@ -20,19 +20,14 @@ export const BackButton: FC<Props> = ({ invitationType, onBack }) => {
   const { formatMessage } = useIntl();
 
   return (
-    <TextButton
-      onClick={() => onBack(invitationType)}
-      buttonProps={{
-        color: themeColors.secondary,
-        display: 'flex',
-        alignItems: 'center',
-        justifyContent: 'center',
-        flexShrink: 0,
-        gap: 8,
-      }}
-    >
-      <Icon src={TriangleBackIcon} />
-      {formatMessage(messages.backButtonTitle, { invitationType })}
-    </TextButton>
+    <Row>
+      <TextButton
+        onClick={() => onBack(invitationType)}
+        buttonProps={TEXT_BUTTON_PROPS}
+      >
+        <Icon src={TriangleBackIcon} />
+        {formatMessage(messages.backButtonTitle, { invitationType })}
+      </TextButton>
+    </Row>
   );
 };

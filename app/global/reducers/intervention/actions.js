@@ -196,18 +196,12 @@ export const fetchInterventionInvitationsError = (error) =>
 
 export const sendInterventionInvitationsRequest = (
   interventionId,
-  isModularIntervention,
-  sessionId,
-  healthClinicId,
-  emails,
+  invitations,
   onSuccess,
 ) =>
   actionBuilder(SEND_INTERVENTION_INVITATIONS_REQUEST, {
     interventionId,
-    isModularIntervention,
-    sessionId,
-    healthClinicId,
-    emails,
+    invitations,
     onSuccess,
   });
 export const sendInterventionInvitationsSuccess = (invitations) =>

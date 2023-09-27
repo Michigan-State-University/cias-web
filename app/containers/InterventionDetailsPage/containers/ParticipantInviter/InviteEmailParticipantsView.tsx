@@ -6,6 +6,7 @@ import globalMessages from 'global/i18n/globalMessages';
 import {
   makeSelectInterventionLoader,
   sendInterventionInvitationsRequest,
+  SendInvitationsPayload,
 } from 'global/reducers/intervention';
 
 import Column from 'components/Column';
@@ -13,11 +14,15 @@ import Text from 'components/Text';
 import { SelectOption } from 'components/Select/types';
 
 import { BackButton } from './BackButton';
-import { ParticipantInvitationType } from './types';
+import {
+  NormalizedHealthClinicsInfos,
+  ParticipantInvitationType,
+} from './types';
 import {
   InviteEmailParticipantsForm,
   Props as InviteEmailParticipantsFormProps,
 } from './InviteEmailParticipantsForm';
+import { prepareSendInvitationsPayload } from './utils';
 
 export type Props = {
   isModularIntervention: boolean;
@@ -26,6 +31,7 @@ export type Props = {
   sessionOptions: SelectOption<string>[];
   healthClinicOptions: SelectOption<string>[];
   onBack: (invitationType: ParticipantInvitationType) => void;
+  normalizedHealthClinicsInfos: NormalizedHealthClinicsInfos;
 };
 
 export const InviteEmailParticipantsView: FC<Props> = ({
@@ -35,6 +41,7 @@ export const InviteEmailParticipantsView: FC<Props> = ({
   interventionId,
   sessionOptions,
   healthClinicOptions,
+  normalizedHealthClinicsInfos,
 }) => {
   const { formatMessage } = useIntl();
   const dispatch = useDispatch();
@@ -43,25 +50,24 @@ export const InviteEmailParticipantsView: FC<Props> = ({
     makeSelectInterventionLoader('sendInterventionInvitations'),
   );
 
-  const handleSubmit: InviteEmailParticipantsFormProps['onFormSubmit'] = (
-    sessionId,
-    healthClinicId,
-    emails,
+  const handleSubmit: InviteEmailParticipantsFormProps['onSubmit'] = (
+    values,
   ) => {
+    const invitations: SendInvitationsPayload = prepareSendInvitationsPayload(
+      values,
+      isModularIntervention,
+      interventionId,
+    );
+
     dispatch(
-      sendInterventionInvitationsRequest(
-        interventionId,
-        isModularIntervention,
-        sessionId,
-        healthClinicId,
-        emails,
-        () => onBack(ParticipantInvitationType.EMAIL),
+      sendInterventionInvitationsRequest(interventionId, invitations, () =>
+        onBack(ParticipantInvitationType.EMAIL),
       ),
     );
   };
 
   return (
-    <Column flex={1}>
+    <Column flex={1} overflow="auto">
       <BackButton
         invitationType={ParticipantInvitationType.EMAIL}
         onBack={onBack}
@@ -73,8 +79,9 @@ export const InviteEmailParticipantsView: FC<Props> = ({
           isReportingIntervention={isReportingIntervention}
           sessionOptions={sessionOptions}
           healthClinicOptions={healthClinicOptions}
-          onFormSubmit={handleSubmit}
+          onSubmit={handleSubmit}
           submitting={submitting}
+          normalizedHealthClinicsInfos={normalizedHealthClinicsInfos}
         />
       </Column>
     </Column>

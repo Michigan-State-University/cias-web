@@ -16,6 +16,7 @@ import Dropdown, { DropdownOption } from 'components/Dropdown';
 import messages from './messages';
 import { SessionInvitationList } from './SessionInvitationList';
 import { NormalizedSessions } from './types';
+import { TEXT_BUTTON_PROPS } from './constants';
 
 export type Props = {
   healthClinicId: Nullable<string>;
@@ -106,15 +107,13 @@ const EmailParticipantsTableRowComponent: FC<Props> = ({
               buttonTriggerTitle={formatMessage(
                 messages.resendInvitationButtonLabel,
               )}
-              dropdownTitle={formatMessage(messages.dropdownTitle)}
+              dropdownTitle={formatMessage(messages.resendDropdownTitle)}
               loading={resendLoading}
             />
           )}
           {!showDropdown && (
             <TextButton
-              buttonProps={{
-                color: themeColors.secondary,
-              }}
+              buttonProps={TEXT_BUTTON_PROPS}
               disabled={!invitingPossible}
               loading={resendLoading}
               onClick={handleResendInvitationsButtonClick}

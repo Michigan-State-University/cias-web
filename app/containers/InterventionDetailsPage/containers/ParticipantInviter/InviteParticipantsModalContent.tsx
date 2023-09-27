@@ -24,9 +24,11 @@ import {
 } from './types';
 import { ParticipantListView } from './ParticipantListView';
 import { InviteEmailParticipantsView } from './InviteEmailParticipantsView';
+import { UploadEmailsView } from './UploadEmailsView';
 
 export type Props = {
   interventionId: string;
+  interventionName: string;
   organizationId: Nullable<string>;
   interventionStatus: InterventionStatus;
   interventionType: InterventionType;
@@ -37,6 +39,7 @@ export type Props = {
 
 export const InviteParticipantsModalContent: FC<Props> = ({
   interventionId,
+  interventionName,
   organizationId,
   interventionStatus,
   interventionType,
@@ -107,22 +110,13 @@ export const InviteParticipantsModalContent: FC<Props> = ({
       if (!organization) return infos;
 
       organization.healthSystems.forEach(
-        ({
-          name: healthSystemName,
-          healthClinics,
-          deleted: healthSystemDeleted,
-        }) => {
-          if (healthSystemDeleted) return;
+        ({ name: healthSystemName, healthClinics }) => {
           healthClinics.forEach(
-            ({
-              name: healthClinicName,
-              id: healthClinicId,
-              deleted: healthClinicDeleted,
-            }) => {
-              if (healthClinicDeleted) return;
+            ({ name: healthClinicName, id: healthClinicId, deleted }) => {
               infos[healthClinicId] = {
                 healthClinicName,
                 healthSystemName,
+                deleted,
               };
             },
           );
@@ -137,6 +131,10 @@ export const InviteParticipantsModalContent: FC<Props> = ({
     } else if (invitationType === ParticipantInvitationType.PREDEFINED) {
       setCurrentView(InviteParticipantModalView.INVITE_PREDEFINED_PARTICIPANT);
     }
+  };
+
+  const handleUploadEmails = () => {
+    setCurrentView(InviteParticipantModalView.UPLOAD_EMAILS);
   };
 
   const handleBack = (invitationType: ParticipantInvitationType) => {
@@ -162,12 +160,14 @@ export const InviteParticipantsModalContent: FC<Props> = ({
               isModularIntervention={isModularIntervention}
               isReportingIntervention={isReportingIntervention}
               interventionId={interventionId}
+              interventionName={interventionName}
               interventionStatus={interventionStatus}
               sessionOptions={sessionOptions}
               healthClinicOptions={healthClinicOptions}
               normalizedSessions={normalizedSessions}
               normalizedHealthClinicsInfos={normalizedHealthClinicsInfos}
               onInvite={handleInvite}
+              onUploadEmails={handleUploadEmails}
             />
           )}
           {currentView ===
@@ -178,6 +178,19 @@ export const InviteParticipantsModalContent: FC<Props> = ({
               interventionId={interventionId}
               sessionOptions={sessionOptions}
               healthClinicOptions={healthClinicOptions}
+              onBack={handleBack}
+              normalizedHealthClinicsInfos={normalizedHealthClinicsInfos}
+            />
+          )}
+          {currentView === InviteParticipantModalView.UPLOAD_EMAILS && (
+            <UploadEmailsView
+              interventionName={interventionName}
+              isModularIntervention={isModularIntervention}
+              isReportingIntervention={isReportingIntervention}
+              interventionId={interventionId}
+              sessionOptions={sessionOptions}
+              healthClinicOptions={healthClinicOptions}
+              normalizedHealthClinicsInfos={normalizedHealthClinicsInfos}
               onBack={handleBack}
             />
           )}

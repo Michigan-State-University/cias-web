@@ -112,6 +112,7 @@ const Header = ({
             />
             <ParticipantsInviter
               interventionId={interventionId}
+              interventionName={name}
               organizationId={organizationId}
               interventionStatus={status}
               interventionType={interventionType}

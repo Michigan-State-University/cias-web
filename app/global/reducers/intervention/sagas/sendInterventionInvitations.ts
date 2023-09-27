@@ -21,25 +21,11 @@ import {
 import messages from '../messages';
 
 function* sendInterventionInvitations({
-  payload: {
-    interventionId,
-    isModularIntervention,
-    sessionId,
-    healthClinicId,
-    emails,
-    onSuccess,
-  },
+  payload: { interventionId, invitations, onSuccess },
 }: ReturnType<typeof sendInterventionInvitationsRequest>) {
   const requestURL = `v1/interventions/${interventionId}/invitations`;
   const requestBody = {
-    invitations: [
-      {
-        emails,
-        healthClinicId,
-        targetType: isModularIntervention ? 'intervention' : 'session',
-        targetId: isModularIntervention ? interventionId : sessionId,
-      },
-    ],
+    invitations,
   };
 
   try {
@@ -49,8 +35,8 @@ function* sendInterventionInvitations({
       objectToSnakeCase(requestBody),
     );
 
-    const invitations = jsonApiToArray(data, 'invitation');
-    yield put(sendInterventionInvitationsSuccess(invitations));
+    const sentInvitations = jsonApiToArray(data, 'invitation');
+    yield put(sendInterventionInvitationsSuccess(sentInvitations));
     yield put(fetchUsersWithAccessRequest(interventionId));
     yield call(toast.info, formatMessage(messages.sendInviteSuccess), {
       toastId: SEND_INTERVENTION_INVITATIONS_SUCCESS,
