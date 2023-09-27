@@ -16,7 +16,10 @@ import 'jest-styled-components';
 import { DEFAULT_LOCALE } from 'i18n';
 
 import { Roles } from 'models/User/RolesManager';
-import { draft, statusTypes } from 'models/Status/StatusTypes';
+import {
+  draft,
+  INITIAL_STATUSES_FILTER_VALUE,
+} from 'models/Status/StatusTypes';
 
 import { createTestStore } from 'utils/testUtils/storeUtils';
 import InterventionStatusButtons from '../index';
@@ -59,7 +62,7 @@ describe('<InterventionStatusButtons />', () => {
   });
 
   it('Should render and match the snapshot', () => {
-    statusTypes.forEach((status) => {
+    INITIAL_STATUSES_FILTER_VALUE.forEach((status) => {
       const { container } = render(
         <Provider store={store}>
           <IntlProvider locale={DEFAULT_LOCALE}>

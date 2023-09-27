@@ -28,6 +28,7 @@ const ThirdPartyQuestionLayout = ({
           payload,
           value,
           report_template_ids: reportTemplateIds,
+          numeric_value: numericValue,
         } = questionAnswer;
         const isChecked = selectedAnswerIndex === index;
         const ariaInputId = `answer-${index + 1}`;
@@ -46,7 +47,9 @@ const ThirdPartyQuestionLayout = ({
               py={14}
               filled
               clickable
-              onClick={() => handleClick(value, reportTemplateIds, index)}
+              onClick={() =>
+                handleClick(value, reportTemplateIds, numericValue, index)
+              }
             >
               <Radio
                 id={ariaInputId}

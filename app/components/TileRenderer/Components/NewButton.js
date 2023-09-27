@@ -1,20 +1,26 @@
 import React, { forwardRef } from 'react';
 import PropTypes from 'prop-types';
 
-import Spinner from 'components/Spinner';
+import { colors, themeColors } from 'theme';
 
-import { NewElementContainer } from './styled';
+import Spinner from 'components/Spinner';
+import { TileContainer } from 'components/TileContainer';
+
 import AddLabel from './AddLabel';
 
 const NewButton = forwardRef(({ onClick, loading, label }, ref) => (
-  <NewElementContainer
+  <TileContainer
     data-cy="create-intervention-button"
     onClick={onClick}
     ref={ref}
+    bg={themeColors.secondary}
+    color={colors.white}
+    justify="center"
+    align="center"
   >
     {!loading && <AddLabel label={label} direction="column" mb={15} />}
     {loading && <Spinner />}
-  </NewElementContainer>
+  </TileContainer>
 ));
 
 NewButton.propTypes = {

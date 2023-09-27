@@ -8,7 +8,7 @@ import React, { memo, useEffect, useMemo, useRef } from 'react';
 import PropTypes from 'prop-types';
 import { useScreenClass } from 'react-grid-system';
 
-import { TilesContext } from 'components/TileRenderer/constants';
+import { ROW_HEIGHT, TilesContext } from 'components/TileRenderer/constants';
 import { VirtualGrid } from 'components/VirtualList';
 
 import GridTile from './GridTile';
@@ -16,6 +16,7 @@ import NewButton from './Components/NewButton';
 
 function TileRenderer({
   elements,
+  elementsStates,
   onCreateCall,
   createLoading,
   newLabel,
@@ -58,7 +59,7 @@ function TileRenderer({
       value={{
         NewInterventionButton: (
           <NewButton
-            onClick={onCreateCall}
+            onClick={() => onCreateCall()}
             loading={createLoading}
             label={newLabel}
           />
@@ -69,8 +70,9 @@ function TileRenderer({
         ref={infiniteLoaderRef}
         columnCount={columnCount}
         rowCount={rowCount}
-        rowHeight={160}
+        rowHeight={ROW_HEIGHT}
         items={elements}
+        itemsStates={elementsStates}
         infiniteLoader={
           infiniteLoader
             ? {
@@ -89,6 +91,7 @@ function TileRenderer({
 
 TileRenderer.propTypes = {
   elements: PropTypes.any,
+  elementsStates: PropTypes.instanceOf(Map),
   onCreateCall: PropTypes.func,
   createLoading: PropTypes.bool,
   newLabel: PropTypes.string,

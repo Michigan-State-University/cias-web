@@ -30,7 +30,9 @@ export type NavigatorSetup = {
   HelpingMaterialsData;
 
 // Fetched by participant
-export type LiveChatSetup = Pick<
+export type LiveChatSetup = {
+  hasAssignedNavigators: boolean;
+} & Pick<
   NavigatorSetup,
   | 'id'
   | 'noNavigatorAvailableMessage'

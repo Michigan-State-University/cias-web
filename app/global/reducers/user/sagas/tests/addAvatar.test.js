@@ -34,7 +34,7 @@ describe('addAvatar saga', () => {
 
     return expectSaga(addAvatar, { payload })
       .provide([[matchers.call.fn(axios.post), { data: apiResponse }]])
-      .put(addOtherUserAvatarSuccess(mapCurrentUser(apiResponse.data)))
+      .put(addOtherUserAvatarSuccess(mapCurrentUser(apiResponse)))
       .run();
   });
   it('Check addAvatar error connection', () => {

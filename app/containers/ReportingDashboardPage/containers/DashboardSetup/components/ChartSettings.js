@@ -101,6 +101,11 @@ const ChartSettings = ({
     onEdit,
   ]);
 
+  const onEditIntervalType = useCallback(onEdit('intervalType'), [
+    chart.intervalType,
+    onEdit,
+  ]);
+
   const onEditTrendLine = useCallback(onEdit('trendLine'), [
     chart.trendLine,
     onEdit,
@@ -154,6 +159,23 @@ const ChartSettings = ({
     ]);
   }, [chart.chartType, chart.formula.patterns, onEditFormula]);
 
+  const onEditDateRange = useCallback(
+    (dateRangeStart, dateRangeEnd) =>
+      editChart({
+        id: chart.id,
+        dashboardSectionId: chart.dashboardSectionId,
+        dateRangeStart,
+        dateRangeEnd,
+      }),
+    [
+      chart.id,
+      chart.dashboardSectionId,
+      chart.dateRangeStart,
+      chart.dateRangeEnd,
+      editChart,
+    ],
+  );
+
   const onCopyChart = useCallback(() => {
     copyChart(chart.id);
   }, [chart.id]);
@@ -174,6 +196,7 @@ const ChartSettings = ({
           onEditFormulaPayload={onEditFormulaPayload}
           onEditName={onEditName}
           onEditStatus={onEditStatus}
+          onEditDateRange={onEditDateRange}
           onCopyChart={onCopyChart}
         />,
       );
@@ -185,6 +208,7 @@ const ChartSettings = ({
           changeStatusLoader={isChangingStatus}
           onDelete={onDelete}
           onEditChartType={onEditChartType}
+          onEditIntervalType={onEditIntervalType}
           onEditDescription={onEditDescription}
           onEditFormulaPattern={onEditFormulaPattern}
           onEditFormulaPayload={onEditFormulaPayload}

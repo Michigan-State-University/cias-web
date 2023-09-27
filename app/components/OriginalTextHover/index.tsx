@@ -21,7 +21,7 @@ import { OriginalText } from './styled';
 type Props = {
   children?: React.ReactNode;
   id: string;
-  text: string;
+  text: string | undefined;
   hidden?: boolean;
   iconProps?: Record<string, unknown>;
 };

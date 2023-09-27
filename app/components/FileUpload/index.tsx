@@ -1,7 +1,19 @@
-import React, { useCallback, useState, useEffect, ReactNode } from 'react';
+import React, {
+  useCallback,
+  useState,
+  useEffect,
+  ReactNode,
+  useMemo,
+} from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { FormattedMessage, useIntl } from 'react-intl';
 import { DropzoneOptions, useDropzone } from 'react-dropzone';
+import byteSize from 'byte-size';
+
+import {
+  formatMimeFileFormat,
+  formatMimeFileFormatList,
+} from 'utils/formatters';
 
 import Box from 'components/Box';
 import TextButton from 'components/Button/TextButton';
@@ -10,7 +22,10 @@ import Text from 'components/Text';
 import Loader from 'components/Loader';
 import { ImageButton } from 'components/Button';
 import FileBox from 'components/FileBox';
-import { HelpIconTooltip } from 'components/HelpIconTooltip';
+import {
+  HelpIconTooltip,
+  Props as HelpIconTooltipProps,
+} from 'components/HelpIconTooltip';
 import Column from 'components/Column';
 
 import { AppFile } from 'models/File';
@@ -21,6 +36,8 @@ import binNoBg from 'assets/svg/bin-no-bg.svg';
 import messages from './messages';
 import { formatFileErrorMessage } from './utils';
 
+export type FileFormat = string;
+
 type CommonProps = {
   acceptedFormats?: string | string[];
   loading?: boolean;
@@ -28,6 +45,12 @@ type CommonProps = {
   tooltipContent?: ReactNode;
   error?: string;
   disabled?: boolean;
+  maxSize?: number;
+  // Will look up in maxSizeMap if there is a restriction for selected file type.
+  // If not found, will use maxSize or MAX_FILE_SIZE if not provided (by default)
+  // Please use all lowercase keys!
+  maxSizeMap?: Map<FileFormat, number>;
+  onHideTooltip?: HelpIconTooltipProps['onHide'];
 };
 
 type MultipleFilesProps = CommonProps & {
@@ -55,8 +78,11 @@ export const FileUpload = ({
   onUpload,
   onRemoveFile,
   tooltipContent,
+  onHideTooltip,
   error,
   disabled,
+  maxSize = MAX_FILE_SIZE,
+  maxSizeMap,
 }: FileUploadProps) => {
   const { formatMessage } = useIntl();
 
@@ -93,16 +119,54 @@ export const FileUpload = ({
     );
   };
 
-  const handleDrop = useCallback(
-    (newFiles: File[]) => {
-      if (!multiple) onUpload(newFiles[0]);
-      else onUpload(newFiles);
+  const validateFileSize = (file: File) => {
+    const maxSizeByFormat = maxSizeMap?.get(file.type.toLowerCase()) ?? maxSize;
+    if (file.size > maxSizeByFormat) {
+      setInputError(
+        formatMessage(messages.fileTooLargeCustomValidation, {
+          maxSize: byteSize(maxSizeByFormat, { precision: 2 }).toString(),
+        }),
+      );
+      return false;
+    }
+    return true;
+  };
+
+  const handleDrop = useCallback<
+    NonNullable<DropzoneOptions['onDropAccepted']>
+  >(
+    (newFiles) => {
+      if (!multiple) {
+        const file = newFiles[0];
+        if (!file) return;
+
+        const isFileValid = validateFileSize(file);
+        if (isFileValid) onUpload(file);
+        return;
+      }
+
+      const validFiles = newFiles.filter((file) => validateFileSize(file));
+      onUpload(validFiles);
     },
-    [multiple, onUpload],
+    [multiple, onUpload, maxSize, maxSizeMap],
   );
 
+  const formattedAcceptedFormats = useMemo(() => {
+    if (!acceptedFormats) return '';
+    if (Array.isArray(acceptedFormats)) {
+      return formatMimeFileFormatList(acceptedFormats);
+    }
+    return formatMimeFileFormat(acceptedFormats) ?? '';
+  }, [acceptedFormats]);
+
   const handleReject: DropzoneOptions['onDropRejected'] = (fileRejections) => {
-    setInputError(formatFileErrorMessage(formatMessage, fileRejections));
+    setInputError(
+      formatFileErrorMessage(
+        formatMessage,
+        fileRejections,
+        formattedAcceptedFormats,
+      ),
+    );
   };
 
   const { getRootProps, getInputProps, open, isDragActive } = useDropzone({
@@ -112,7 +176,6 @@ export const FileUpload = ({
     noKeyboard: true,
     accept: acceptedFormats,
     noClick: true,
-    maxSize: MAX_FILE_SIZE,
     disabled,
   });
 
@@ -122,6 +185,7 @@ export const FileUpload = ({
         <HelpIconTooltip
           id="file-upload-tooltip"
           tooltipContent={tooltipContent}
+          onHide={onHideTooltip}
         >
           {label && (
             <Text fontSize={13} lineHeight={1}>

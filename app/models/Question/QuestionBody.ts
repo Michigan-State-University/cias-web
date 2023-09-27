@@ -6,6 +6,8 @@ import {
   FinishQuestionData,
   FreeResponseQuestionData,
   GridQuestionData,
+  HenryFordQuestionData,
+  HenryFordInitialScreenData,
   InformationOnlyQuestionData,
   MultipleQuestionData,
   NameQuestionData,
@@ -31,8 +33,8 @@ export interface QuestionBodyWithoutVariable<
   data: TQuestionData[];
 }
 
-export interface QuestionBodyWithVariable<TQuestionData extends QuestionData> {
-  data: TQuestionData[];
+export interface QuestionBodyWithVariable<TQuestionData extends QuestionData>
+  extends QuestionBodyWithoutVariable<TQuestionData> {
   variable: QuestionBodyVariable;
 }
 
@@ -45,7 +47,7 @@ export type FreeResponseQuestionBody =
   QuestionBodyWithVariable<FreeResponseQuestionData>;
 
 export type ThirdPartyReportQuestionBody =
-  QuestionBodyWithoutVariable<ThirdPartyReportQuestionData>;
+  QuestionBodyWithVariable<ThirdPartyReportQuestionData>;
 
 export type NameQuestionBody = QuestionBodyWithVariable<NameQuestionData>;
 
@@ -89,6 +91,11 @@ export type TlfbQuestionBody = QuestionBodyWithoutVariable<TlfbQuestionData>;
 export type TlfbQuestionBodyWithConfig =
   QuestionBodyWithoutVariable<TlfbQuestionData> & { config: TlfbConfigBody };
 
+export type HenryFordQuestionBody =
+  QuestionBodyWithVariable<HenryFordQuestionData>;
+export type HenryFordInitialScreenBody =
+  QuestionBodyWithoutVariable<HenryFordInitialScreenData>;
+
 export type QuestionBody =
   | SingleQuestionBody
   | MultipleQuestionBody
@@ -110,4 +117,5 @@ export type QuestionBody =
   | TlfbEventsBody
   | TlfbQuestionBody
   | TlfbEventsBodyWithConfig
-  | TlfbQuestionBodyWithConfig;
+  | TlfbQuestionBodyWithConfig
+  | HenryFordQuestionBody;

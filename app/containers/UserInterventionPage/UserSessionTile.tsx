@@ -3,7 +3,7 @@ import { useHistory } from 'react-router-dom';
 import { useIntl } from 'react-intl';
 import dayjs from 'dayjs';
 
-import { colors, themeColors } from 'theme';
+import { colors, elements, themeColors } from 'theme';
 
 import globalMessages from 'global/i18n/globalMessages';
 import { RoutePath } from 'global/constants';
@@ -14,6 +14,7 @@ import Box from 'components/Box';
 import GhostLink from 'components/GhostLink';
 import Text, { EllipsisText } from 'components/Text';
 import Button from 'components/Button';
+import { TileContainer } from 'components/TileContainer';
 
 import { Session, SessionSchedule } from 'models/Session';
 import { UserSession } from 'models/UserSession/UserSession';
@@ -24,7 +25,6 @@ import {
 } from 'models/UserSession/StatusTypes';
 import { InterventionType } from 'models/Intervention';
 
-import { TileContainer } from './styled';
 import messages from './messages';
 
 const DISABLED_TILE_TEXT_OPACITY = 0.15;
@@ -34,6 +34,7 @@ interface Props {
   interventionType: InterventionType;
   interventionId: string;
   userSession?: Nullable<UserSession>;
+  healthClinicId: Nullable<string>;
 }
 
 const UserSessionTile = ({
@@ -50,13 +51,20 @@ const UserSessionTile = ({
   interventionType,
   interventionId,
   userSession,
+  healthClinicId,
 }: Props) => {
   const { formatMessage } = useIntl();
   const history = useHistory();
-  const sessionUrl = parametrizeRoutePath(RoutePath.ANSWER_SESSION, {
-    interventionId,
-    sessionId: id,
-  });
+  const sessionUrl = useMemo(() => {
+    let path = parametrizeRoutePath(RoutePath.ANSWER_SESSION, {
+      interventionId,
+      sessionId: id,
+    });
+    if (healthClinicId) {
+      path += `?cid=${healthClinicId}`;
+    }
+    return path;
+  }, [interventionId, id, healthClinicId]);
 
   const isFirstSession = position === 1;
 
@@ -142,7 +150,10 @@ const UserSessionTile = ({
 
   return (
     <GhostLink disabled={disabledTile} width="100%" to={sessionUrl}>
-      <TileContainer bg={tileBackground}>
+      <TileContainer
+        bg={tileBackground}
+        height={elements.userSessionTileHeight}
+      >
         <Box display="flex" justify="between" align="center">
           <Box
             px={12}

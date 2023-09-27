@@ -104,6 +104,7 @@ export function RegisterPage({
     role,
     intervention_id: interventionId,
     session_id: sessionId,
+    cid,
   } = queryString.parse(location.search, { decode: false });
   const isInvite = Boolean(invitationToken) && Boolean(email);
 
@@ -134,28 +135,32 @@ export function RegisterPage({
     const shouldRedirect = success && isInvite && !loading;
 
     if (shouldRedirect) {
+      let redirectPath;
+
       if (shouldRedirectToIntervention) {
-        history.replace(
-          parametrizeRoutePath(RoutePath.INTERVENTION_INVITE, {
-            interventionId,
-          }),
-        );
-        return;
+        redirectPath = parametrizeRoutePath(RoutePath.INTERVENTION_INVITE, {
+          interventionId,
+        });
       }
 
       if (shouldRedirectToSession) {
-        history.replace(
-          parametrizeRoutePath(RoutePath.ANSWER_SESSION, {
-            interventionId,
-            sessionId,
-          }),
-        );
-        return;
+        redirectPath = parametrizeRoutePath(RoutePath.ANSWER_SESSION, {
+          interventionId,
+          sessionId,
+        });
       }
 
-      history.replace(RoutePath.DASHBOARD);
+      if (!redirectPath) {
+        redirectPath = RoutePath.DASHBOARD;
+      }
+
+      if (cid) {
+        redirectPath += `?cid=${cid}`;
+      }
+
+      history.replace(redirectPath);
     }
-  }, [success, loading, isInvite, interventionId, sessionId, error]);
+  }, [success, loading, isInvite, interventionId, sessionId, cid, error]);
 
   return (
     <>

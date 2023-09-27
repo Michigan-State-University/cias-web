@@ -27,7 +27,7 @@ describe('createIntervention saga', () => {
   const mockApiResponse = apiInterventionResponse();
   it('Check createIntervention generator success connection', () => {
     const apiResponse = { data: { ...mockApiResponse } };
-    return expectSaga(createIntervention)
+    return expectSaga(createIntervention, { payload: {} })
       .provide([[matchers.call.fn(axios.post), apiResponse]])
       .put(
         createInterventionSuccess(
@@ -45,7 +45,7 @@ describe('createIntervention saga', () => {
   });
   it('Check createIntervention error connection', () => {
     const error = new Error('test');
-    return expectSaga(createIntervention)
+    return expectSaga(createIntervention, { payload: {} })
       .provide([[matchers.call.fn(axios.post), throwError(error)]])
       .call(
         toast.error,

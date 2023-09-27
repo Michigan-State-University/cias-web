@@ -1,0 +1,65 @@
+import { INITIAL_STATUSES_FILTER_VALUE } from 'models/Status/StatusTypes';
+
+import { InterventionListItemState } from './types';
+
+export const INTERVENTION_LIST_ITEM_DEFAULT_STATE: InterventionListItemState = {
+  starInterventionLoading: false,
+  unstarInterventionLoading: false,
+};
+
+export const MAIN_DASHBOARD_FILTER_DATA_INITIAL_VALUE = {
+  name: '',
+  statuses: INITIAL_STATUSES_FILTER_VALUE,
+  sharing: null,
+  starred: false,
+};
+
+export const FETCH_INTERVENTIONS_REQUEST =
+  'app/Dashboard/FETCH_INTERVENTIONS_REQUEST';
+export const FETCH_INTERVENTIONS_SUCCESS =
+  'app/Dashboard/FETCH_INTERVENTIONS_SUCCESS';
+export const FETCH_INTERVENTIONS_ERROR =
+  'app/Dashboard/FETCH_INTERVENTIONS_ERROR';
+
+export const COPY_INTERVENTION_REQUEST =
+  'app/Dashboard/COPY_INTERVENTION_REQUEST';
+export const COPY_INTERVENTION_SUCCESS =
+  'app/Dashboard/COPY_INTERVENTION_SUCCESS';
+export const COPY_INTERVENTION_ERROR = 'app/Dashboard/COPY_INTERVENTION_ERROR';
+
+export const ARCHIVE_INTERVENTION_REQUEST =
+  'app/Dashboard/ARCHIVE_INTERVENTION_REQUEST';
+export const ARCHIVE_INTERVENTION_SUCCESS =
+  'app/Dashboard/ARCHIVE_INTERVENTION_SUCCESS';
+export const ARCHIVE_INTERVENTION_ERROR =
+  'app/Dashboard/ARCHIVE_INTERVENTION_ERROR';
+
+export const IMPORT_INTERVENTION_REQUEST =
+  'app/Dashboard/IMPORT_INTERVENTION_REQUEST';
+export const IMPORT_INTERVENTION_SUCCESS =
+  'app/Dashboard/IMPORT_INTERVENTION_SUCCESS';
+export const IMPORT_INTERVENTION_ERROR =
+  'app/Dashboard/IMPORT_INTERVENTION_ERROR';
+export const RESET_IMPORT_INTERVENTION_STATE =
+  'app/Dashboard/RESET_IMPORT_INTERVENTION_STATE';
+
+export const REFETCH_INTERVENTIONS = 'app/Dashboard/REFETCH_INTERVENTIONS';
+
+export const UPDATE_INTERVENTION_LIST_ITEM_BY_ID =
+  'app/Dashboard/UPDATE_INTERVENTION_LIST_ITEM_BY_ID';
+
+export const STAR_INTERVENTION_REQUEST =
+  'app/Dashboard/STAR_INTERVENTION_REQUEST';
+export const STAR_INTERVENTION_SUCCESS =
+  'app/Dashboard/STAR_INTERVENTION_SUCCESS';
+export const STAR_INTERVENTION_ERROR = 'app/Dashboard/STAR_INTERVENTION_ERROR';
+
+export const UNSTAR_INTERVENTION_REQUEST =
+  'app/Dashboard/UNSTAR_INTERVENTION_REQUEST';
+export const UNSTAR_INTERVENTION_SUCCESS =
+  'app/Dashboard/UNSTAR_INTERVENTION_SUCCESS';
+export const UNSTAR_INTERVENTION_ERROR =
+  'app/Dashboard/UNSTAR_INTERVENTION_ERROR';
+
+export const CHANGE_MAIN_DASHBOARD_FILTER_DATA =
+  'app/Dashboard/CHANGE_MAIN_DASHBOARD_FILTER_DATA';

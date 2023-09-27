@@ -41,6 +41,7 @@ const Collapse = ({
   arrowColor,
   extraIcons,
   showHoverEffect,
+  toggleIconPosition,
 }) => (
   <StyledCollapseContainer data-cy={cypressId} {...containerProps}>
     <CollapseLabel
@@ -71,6 +72,7 @@ const Collapse = ({
       arrowColor={arrowColor}
       extraIcons={extraIcons}
       showHoverEffect={showHoverEffect}
+      toggleIconPosition={toggleIconPosition}
     />
     <CollapseContent
       child={children}
@@ -114,6 +116,7 @@ Collapse.propTypes = {
   arrowColor: PropTypes.string,
   extraIcons: PropTypes.node,
   showHoverEffect: PropTypes.bool,
+  toggleIconPosition: PropTypes.oneOf(['label', 'container']),
 };
 
 Collapse.defaultProps = {
@@ -126,6 +129,7 @@ Collapse.defaultProps = {
   py: 12,
   deleteActive: true,
   disableAnimation: false,
+  toggleIconPosition: 'container',
 };
 
 export default Collapse;

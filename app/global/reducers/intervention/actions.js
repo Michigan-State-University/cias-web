@@ -103,6 +103,10 @@ import {
   FETCH_CURRENT_USER_COLLABORATOR_DATA_REQUEST,
   FETCH_CURRENT_USER_COLLABORATOR_DATA_SUCCESS,
   FETCH_CURRENT_USER_COLLABORATOR_DATA_ERROR,
+  CLEAR_INTERVENTION_DATA_REQUEST,
+  CLEAR_INTERVENTION_DATA_SUCCESS,
+  CLEAR_INTERVENTION_DATA_ERROR,
+  ON_SENSITIVE_DATA_REMOVED_RECEIVED,
 } from './constants';
 
 export const fetchInterventionRequest = (id, showLoader = false) =>
@@ -119,8 +123,8 @@ export const sendInterventionCsvSuccess = (message) =>
 export const sendInterventionCsvError = (error) =>
   actionBuilder(SEND_INTERVENTION_CSV_ERROR, { error });
 
-export const createInterventionRequest = () =>
-  actionBuilder(CREATE_INTERVENTION_REQUEST, {});
+export const createInterventionRequest = (organizationId) =>
+  actionBuilder(CREATE_INTERVENTION_REQUEST, { organizationId });
 export const createInterventionSuccess = (intervention) =>
   actionBuilder(CREATE_INTERVENTION_SUCCESS, { intervention });
 export const createInterventionError = (error) =>
@@ -132,8 +136,8 @@ export const editInterventionRequest = (intervention, extraOptions) =>
     extraOptions,
   });
 
-export const editInterventionSuccess = (intervention) =>
-  actionBuilder(EDIT_INTERVENTION_SUCCESS, { intervention });
+export const editInterventionSuccess = (interventionId, updatedSessions) =>
+  actionBuilder(EDIT_INTERVENTION_SUCCESS, { interventionId, updatedSessions });
 export const editInterventionError = (error) =>
   actionBuilder(EDIT_INTERVENTION_ERROR, { error });
 
@@ -431,3 +435,28 @@ export const refreshInterventionData = (interventionId, forCurrentEditorToo) =>
   });
 
 export const resetReducer = () => actionBuilder(RESET_REDUCER, {});
+
+export const clearInterventionDataRequest = (
+  interventionId,
+  delay,
+  onSuccess,
+) =>
+  actionBuilder(CLEAR_INTERVENTION_DATA_REQUEST, {
+    interventionId,
+    delay,
+    onSuccess,
+  });
+export const clearInterventionDataSuccess = (
+  interventionId,
+  sensitiveDataState,
+  clearSensitiveDataScheduledAt,
+) =>
+  actionBuilder(CLEAR_INTERVENTION_DATA_SUCCESS, {
+    interventionId,
+    sensitiveDataState,
+    clearSensitiveDataScheduledAt,
+  });
+export const clearInterventionDataError = () =>
+  actionBuilder(CLEAR_INTERVENTION_DATA_ERROR, {});
+export const onSensitiveDataRemovedReceive = (interventionId) =>
+  actionBuilder(ON_SENSITIVE_DATA_REMOVED_RECEIVED, { interventionId });

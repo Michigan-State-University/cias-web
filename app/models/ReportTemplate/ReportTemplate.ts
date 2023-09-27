@@ -26,11 +26,18 @@ export interface ReportTemplateVariant {
   reportTemplateSectionId?: string;
   originalText?: ReportTemplateVariantOriginalText;
   imageUrl?: string;
+  position: number;
 }
 
 export interface ReportTemplateOriginalText {
   name: string;
   summary: string;
+}
+
+export enum CoverLetterLogoType {
+  REPORT_LOGO = 'report_logo',
+  CUSTOM = 'custom',
+  NO_LOGO = 'no_logo',
 }
 
 export interface ReportTemplate {
@@ -43,4 +50,11 @@ export interface ReportTemplate {
   originalText: ReportTemplateOriginalText;
   sections: ReportTemplateSection[];
   variants: ReportTemplateVariant[];
+  isDuplicatedFromOtherSession: boolean;
+  duplicatedFromOtherSessionWarningDismissed: boolean;
+  hasCoverLetter: boolean;
+  coverLetterLogoType: CoverLetterLogoType;
+  coverLetterDescription: Nullable<string>;
+  coverLetterSender: Nullable<string>;
+  coverLetterCustomLogoUrl: Nullable<string>;
 }

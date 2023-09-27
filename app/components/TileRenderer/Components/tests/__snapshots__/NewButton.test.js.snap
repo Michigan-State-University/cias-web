@@ -32,10 +32,11 @@ exports[`<NewButton /> Should render and match the loading snapshot 1`] = `
 }
 
 .c0 {
-  padding: 15px;
-  height: 150px;
+  padding: 12px 16px 16px 16px;
+  height: 160px;
   box-shadow: 0px 4px 20px #E3EEFB;
-  border-radius: 5px;
+  border-radius: 8px;
+  margin-bottom: 20px;
   display: -webkit-box;
   display: -webkit-flex;
   display: -ms-flexbox;
@@ -44,12 +45,23 @@ exports[`<NewButton /> Should render and match the loading snapshot 1`] = `
   -webkit-flex-direction: column;
   -ms-flex-direction: column;
   flex-direction: column;
-  background: #B727EA;
-  color: #FFFFFF;
+  color: #2F3850;
+  background: #FFFFFF;
+  color: #0E0E0E;
+  -webkit-box-pack: justify;
+  -webkit-justify-content: space-between;
+  -ms-flex-pack: justify;
+  justify-content: space-between;
+  background-color: rgba(183,39,234,1);
+  color: rgba(255,255,255,1);
   -webkit-box-pack: center;
   -webkit-justify-content: center;
   -ms-flex-pack: center;
   justify-content: center;
+  justify-items: center;
+  -webkit-align-content: center;
+  -ms-flex-line-pack: center;
+  align-content: center;
   -webkit-align-items: center;
   -webkit-box-align: center;
   -ms-flex-align: center;
@@ -58,6 +70,7 @@ exports[`<NewButton /> Should render and match the loading snapshot 1`] = `
 
 <div
   class="c0"
+  color="#FFFFFF"
   data-cy="create-intervention-button"
 >
   <div
@@ -71,10 +84,11 @@ exports[`<NewButton /> Should render and match the loading snapshot 1`] = `
 
 exports[`<NewButton /> Should render and match the snapshot 1`] = `
 .c0 {
-  padding: 15px;
-  height: 150px;
+  padding: 12px 16px 16px 16px;
+  height: 160px;
   box-shadow: 0px 4px 20px #E3EEFB;
-  border-radius: 5px;
+  border-radius: 8px;
+  margin-bottom: 20px;
   display: -webkit-box;
   display: -webkit-flex;
   display: -ms-flexbox;
@@ -83,12 +97,23 @@ exports[`<NewButton /> Should render and match the snapshot 1`] = `
   -webkit-flex-direction: column;
   -ms-flex-direction: column;
   flex-direction: column;
-  background: #B727EA;
-  color: #FFFFFF;
+  color: #2F3850;
+  background: #FFFFFF;
+  color: #0E0E0E;
+  -webkit-box-pack: justify;
+  -webkit-justify-content: space-between;
+  -ms-flex-pack: justify;
+  justify-content: space-between;
+  background-color: rgba(183,39,234,1);
+  color: rgba(255,255,255,1);
   -webkit-box-pack: center;
   -webkit-justify-content: center;
   -ms-flex-pack: center;
   justify-content: center;
+  justify-items: center;
+  -webkit-align-content: center;
+  -ms-flex-line-pack: center;
+  align-content: center;
   -webkit-align-items: center;
   -webkit-box-align: center;
   -ms-flex-align: center;
@@ -125,6 +150,7 @@ exports[`<NewButton /> Should render and match the snapshot 1`] = `
 
 <div
   class="c0"
+  color="#FFFFFF"
   data-cy="create-intervention-button"
 >
   <div

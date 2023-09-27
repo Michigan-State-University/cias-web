@@ -7,6 +7,9 @@ const selectSession = (state) => state.session || initialState;
 export const makeSelectSession = () =>
   createSelector(selectSession, (substate) => substate.session);
 
+export const makeSelectCurrentSessionId = () =>
+  createSelector(selectSession, (substate) => substate.session?.id);
+
 export const makeSelectCacheSession = () =>
   createSelector(selectSession, (substate) => substate.cache.session);
 

@@ -19,9 +19,10 @@ import {
 import { ReportsFilter } from '../index';
 
 describe('<ReportsFilter />', () => {
+  const filterOpts = filterOptions(false);
   const defaultProps = {
     formatMessage,
-    filterOptions,
+    filterOptions: filterOpts,
     activeFilters: [PARTICIPANTS],
     activeSort: SORT_BY_LATEST,
   };

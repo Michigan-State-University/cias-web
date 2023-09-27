@@ -67,6 +67,7 @@ const TranslateVoiceSettings = ({
           <FormattedMessage {...messages.voiceType} />
         </Text>
         <Select
+          // @ts-ignore
           mt={5}
           selectProps={{
             options: voiceOptions,

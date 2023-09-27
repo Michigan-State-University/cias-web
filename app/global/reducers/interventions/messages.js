@@ -37,4 +37,12 @@ export default defineMessages({
     id: `${scope}.importError`,
     defaultMessage: 'There was a problem with intervention import',
   },
+  starInterventionError: {
+    id: `${scope}.starInterventionError`,
+    defaultMessage: 'There was an error staring the intervention',
+  },
+  unstarInterventionError: {
+    id: `${scope}.unstarInterventionError`,
+    defaultMessage: 'There was an error unstaring the intervention',
+  },
 });

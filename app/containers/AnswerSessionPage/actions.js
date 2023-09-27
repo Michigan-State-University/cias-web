@@ -38,6 +38,10 @@ import {
   FETCH_PREVIOUS_QUESTION_REQUEST,
   FETCH_PREVIOUS_QUESTION_SUCCESS,
   FETCH_PREVIOUS_QUESTION_ERROR,
+  VERIFY_PATIENT_DATA_REQUEST,
+  VERIFY_PATIENT_DATA_SUCCESS,
+  VERIFY_PATIENT_DATA_ERROR,
+  SET_HFHS_PATIENT_DETAIL,
 } from './constants';
 
 export const resetReducer = () => actionBuilder(RESET_REDUCER, {});
@@ -146,3 +150,13 @@ export const fetchPreviousQuestionSuccess = (question, answer) =>
   actionBuilder(FETCH_PREVIOUS_QUESTION_SUCCESS, { question, answer });
 export const fetchPreviousQuestionError = (error) =>
   actionBuilder(FETCH_PREVIOUS_QUESTION_ERROR, { error });
+
+export const verifyPatientDataRequest = (hfhsPatientData) =>
+  actionBuilder(VERIFY_PATIENT_DATA_REQUEST, { hfhsPatientData });
+export const verifyPatientDataSuccess = () =>
+  actionBuilder(VERIFY_PATIENT_DATA_SUCCESS, {});
+export const verifyPatientDataError = (error) =>
+  actionBuilder(VERIFY_PATIENT_DATA_ERROR, { error });
+
+export const setHfhsPatientDetail = (hfhsPatientDetail) =>
+  actionBuilder(SET_HFHS_PATIENT_DETAIL, { hfhsPatientDetail });

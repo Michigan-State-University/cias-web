@@ -146,6 +146,9 @@ function UserList({
             </Col>
             <Col
               xs={12}
+              sm={6}
+              md={5}
+              lg={4}
               xl={3}
               style={
                 isBig
@@ -161,7 +164,7 @@ function UserList({
                 onChange={(e) => setFilterText(e.target.value)}
                 debounceTime={initialDelay}
                 placeholder={formatMessage(messages.searchPlaceholder)}
-                aria-label={formatMessage(messages.searchPlaceholder)}
+                aria-label={formatMessage(messages.searchAriaLabel)}
               />
             </Col>
           </Row>

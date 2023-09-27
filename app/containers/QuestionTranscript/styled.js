@@ -22,7 +22,7 @@ export const StyledTextBlock = styled(Box)`
 `;
 
 export const TranscriptBox = styled(Box)`
-  background-color: ${colors.aliceBlue};
+  background-color: ${colors.hawkesBlue};
   border: ${colors.linkWater} solid 1px;
   padding: 16px;
   height: 100%;

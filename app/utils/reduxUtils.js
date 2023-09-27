@@ -131,3 +131,16 @@ const assignSourceDiffToTargetArray = (assignFrom, assignTo) => {
     assignTo.push(...newItems);
   }
 };
+
+export const updateListItemStateById = (
+  states,
+  itemId,
+  changes,
+  defaultState,
+) => {
+  const itemState = states[itemId];
+  states[itemId] = {
+    ...(itemState ?? defaultState),
+    ...changes,
+  };
+};

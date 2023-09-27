@@ -21,8 +21,13 @@ export default defineMessages({
     id: `${scope}.deleteFile`,
     defaultMessage: 'Delete file',
   },
-  [FileErrorCode.FILE_TOO_LARGE]: {
-    id: `${scope}.${FileErrorCode.FILE_TOO_LARGE}`,
-    defaultMessage: 'File cannot be larger than 5 MB',
+  fileTooLargeCustomValidation: {
+    id: `${scope}.fileTooLargeCustomValidation`,
+    defaultMessage: 'File cannot be larger than {maxSize}',
+  },
+  [FileErrorCode.FILE_INVALID_TYPE]: {
+    id: `${scope}.${FileErrorCode.FILE_INVALID_TYPE}`,
+    defaultMessage:
+      'Unsupported file format. Supported file formats are: {formattedAcceptedFormats}',
   },
 });

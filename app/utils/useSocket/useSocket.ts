@@ -18,7 +18,7 @@ import {
 
 export const useSocket = <
   TMessage extends
-    | SocketMessage<string, object | undefined>
+    | SocketMessage<string, object | string | undefined>
     | SocketErrorMessage<
         string,
         SocketErrorMessageData,

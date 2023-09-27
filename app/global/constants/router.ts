@@ -1,3 +1,5 @@
+export const REDIRECT_QUERY_KEY = 'redirect_to';
+
 export enum RoutePath {
   DASHBOARD = '/',
   INBOX = '/live-chat',

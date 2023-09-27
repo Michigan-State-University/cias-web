@@ -21,4 +21,17 @@ export default defineMessages({
     id: `${scope}.createsGroup`,
     defaultMessage: 'Creates group',
   },
+  questionAvailableOncePerSession: {
+    id: `${scope}.questionAvailableOncePerSession`,
+    defaultMessage: 'This question is available only once per session',
+  },
+  noHfhsAccess: {
+    id: `${scope}.noHfhsAccess`,
+    defaultMessage: 'This question requires Henry Ford access',
+  },
+  hfhsInitialScreenRequired: {
+    id: `${scope}.hfhsInitialScreenRequired`,
+    defaultMessage:
+      'This question requires Henry Ford Initial Screen to be present in a session',
+  },
 });

@@ -67,7 +67,15 @@ export const getQuestionDataByType = (
 
     case QuestionTypes.THIRD_PARTY:
       return {
-        data: [{ payload: '', value: '', report_template_ids: [] }],
+        data: [
+          {
+            payload: '',
+            value: '',
+            report_template_ids: [],
+            numeric_value: '',
+          },
+        ],
+        variable: { name: '' },
       };
 
     case QuestionTypes.TLFB_CONFIG:
@@ -104,10 +112,21 @@ export const getQuestionDataByType = (
         data: [{ payload: { screen_title: '', screen_question: '' } }],
       };
 
+    case QuestionTypes.HENRY_FORD_INITIAL:
+      return {
+        data: [],
+      };
+
     default:
       return {
         variable: { name: '' },
         data: [{ payload: '' }],
+      };
+
+    case QuestionTypes.HENRY_FORD_QUESTION:
+      return {
+        variable: { name: '' },
+        data: [{ payload: '', value: '1', hfh_value: '' }],
       };
   }
 };

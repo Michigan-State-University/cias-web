@@ -1,3 +1,3 @@
 export enum FileErrorCode {
-  FILE_TOO_LARGE = 'file-too-large',
+  FILE_INVALID_TYPE = 'file-invalid-type',
 }

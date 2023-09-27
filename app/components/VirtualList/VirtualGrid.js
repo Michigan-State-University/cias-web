@@ -8,7 +8,15 @@ import InfiniteLoader from './InfiniteLoader';
 
 const VirtualGrid = forwardRef(
   (
-    { children, gutterWidth, gutterHeight, infiniteLoader, items, ...props },
+    {
+      children,
+      gutterWidth,
+      gutterHeight,
+      infiniteLoader,
+      items,
+      itemsStates,
+      ...props
+    },
     ref,
   ) => {
     const { columnCount } = props;
@@ -20,8 +28,8 @@ const VirtualGrid = forwardRef(
     };
 
     const itemData = useMemo(
-      () => ({ items, itemsSize: items.length }),
-      [items],
+      () => ({ items, itemsSize: items.length, itemsStates }),
+      [items, itemsStates],
     );
 
     const renderInfiniteLoader = (
@@ -101,6 +109,7 @@ VirtualGrid.propTypes = {
   gutterHeight: PropTypes.number,
   gutterWidth: PropTypes.number,
   items: PropTypes.arrayOf(PropTypes.object),
+  itemsStates: PropTypes.instanceOf(Map),
   infiniteLoader: PropTypes.object,
 };
 

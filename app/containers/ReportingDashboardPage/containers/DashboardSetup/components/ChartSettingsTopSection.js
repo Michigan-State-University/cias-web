@@ -19,8 +19,6 @@ import TextButton from 'components/Button/TextButton';
 import Icon from 'components/Icon';
 import Text from 'components/Text';
 import Button from 'components/Button';
-import Tooltip from 'components/Tooltip';
-import Circle from 'components/Circle';
 import InfoBox from 'components/Box/InfoBox';
 import { ModalType, useModal } from 'components/Modal';
 import Badge from 'components/Badge';
@@ -144,22 +142,6 @@ const ChartSettingsTopSection = ({
         </Col>
 
         <Col xs="content">{renderButtonOrStatusBadge()}</Col>
-
-        <Col xs="content">
-          <Tooltip
-            id="ChartSettings-Tooltip"
-            text={formatMessage(messages.chartSettingsStartCollectHelper)}
-          >
-            <Circle
-              bg={themeColors.secondary}
-              color={colors.white}
-              size="16px"
-              fontWeight="bold"
-              fontSize={11}
-              child="?"
-            />
-          </Tooltip>
-        </Col>
       </Row>
 
       <Row mr="0!important" mt={36} justify="end">

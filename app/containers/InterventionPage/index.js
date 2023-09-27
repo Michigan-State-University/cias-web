@@ -4,7 +4,7 @@
  *
  */
 
-import React, { memo, useEffect, useMemo, useState } from 'react';
+import React, { memo, useEffect } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { FormattedMessage, injectIntl } from 'react-intl';
@@ -16,22 +16,23 @@ import { Markup } from 'interweave';
 
 import importIcon from 'assets/svg/import-secondary.svg';
 
-import { statusTypes } from 'models/Status/StatusTypes';
-
 import { colors, fontSizes, themeColors } from 'theme';
+
+import { isInterventionExportFeatureEnabled } from 'utils/env';
 
 import { FEEDBACK_FORM_URL } from 'global/constants';
 import {
   createInterventionRequest,
-  createInterventionSaga,
   makeSelectInterventionLoader,
+  withCreateInterventionSaga,
 } from 'global/reducers/intervention';
 import {
   fetchInterventionsRequest,
-  makeSelectInterventionsState,
-  interventionsReducer,
-  fetchInterventionsSaga,
+  makeSelectInterventionsReducerState,
+  withFetchInterventionsSaga,
   resetImportModalState,
+  withInterventionsReducer,
+  changeMainDashboardFilterData as changeMainDashboardFilterDataAction,
 } from 'global/reducers/interventions';
 import { editUserRequest, makeSelectUser } from 'global/reducers/auth';
 
@@ -52,17 +53,20 @@ import messages from './messages';
 import { InitialRow, StyledLink, StyledNotification } from './styled';
 import ImportModalContent from './ImportModalContent';
 import ShareFilter from './ShareFilter';
+import { SharedFilter } from './StarredFilter';
 
 const INITIAL_FETCH_LIMIT = 15;
 
 export function InterventionPage({
   fetchInterventionsRequest: fetchInterventions,
-  interventionPageState: {
+  interventionsReducerState: {
     interventions,
     interventionsSize,
     loaders: { fetchInterventions: fetchInterventionsLoading },
     errors: { fetchInterventions: fetchInterventionsError },
     shouldRefetch,
+    interventionsStates,
+    mainDashboardFilterData,
   },
   intl: { formatMessage },
   createInterventionRequest: createIntervention,
@@ -70,25 +74,31 @@ export function InterventionPage({
   user,
   editUser,
   resetModalState,
+  changeMainDashboardFilterData,
 }) {
   const { teamName } = user ?? {};
 
-  const [filterValue, setFilterValue] = useState('');
-  const [filterStatus, setFilterStatus] = useState(statusTypes);
-  const [filterSharing, setFilterSharing] = useState('');
+  const { name, statuses, sharing, starred } = mainDashboardFilterData;
 
-  const filterData = useMemo(
-    () => ({
-      statuses: filterStatus,
-      name: filterValue,
-      ...(filterSharing && { [filterSharing]: true }),
-    }),
-    [filterValue, filterStatus, filterSharing],
-  );
+  const handleSharingFilterChange = (value) => {
+    changeMainDashboardFilterData({ sharing: value });
+  };
+
+  const handleStatusesFilterChange = (value) => {
+    changeMainDashboardFilterData({ statuses: value });
+  };
+
+  const handleStarredFilterChange = (value) => {
+    changeMainDashboardFilterData({ starred: value });
+  };
+
+  const handleNameFilterChange = (event) => {
+    changeMainDashboardFilterData({ name: event.target.value.trim() });
+  };
 
   useEffect(() => {
     handleFetch(0, INITIAL_FETCH_LIMIT);
-  }, [filterData]);
+  }, [mainDashboardFilterData]);
 
   useEffect(() => {
     if (shouldRefetch) handleFetch(0, INITIAL_FETCH_LIMIT);
@@ -103,7 +113,7 @@ export function InterventionPage({
         startIndex: realStartIndex,
         endIndex: realStopIndex,
       },
-      filterData,
+      filterData: mainDashboardFilterData,
     });
   };
 
@@ -115,10 +125,6 @@ export function InterventionPage({
       width: 520,
     },
   });
-
-  const handleChange = (values) => {
-    setFilterStatus(values);
-  };
 
   const handleFeedbackClick = () => {
     editUser({ feedbackCompleted: true });
@@ -179,28 +185,26 @@ export function InterventionPage({
             <FormattedMessage {...messages.myInterventions} />
           </H1>
         </HelpIconTooltip>
-        <Box
-          mx={24}
-          width={2}
-          height="100%"
-          bg={colors.linkWater}
-          display="none"
-        />
+        {isInterventionExportFeatureEnabled && (
+          <>
+            <Box mx={24} width={2} height="100%" bg={colors.linkWater} />
 
-        <TextButton
-          buttonProps={{ display: 'none', align: 'center' }}
-          onClick={onImportIconClick}
-        >
-          <Img
-            src={importIcon}
-            alt={formatMessage(messages.importIntervention)}
-            mr={8}
-            mb={2}
-          />
-          <Text color={themeColors.secondary} fontWeight="bold">
-            {formatMessage(messages.importIntervention)}
-          </Text>
-        </TextButton>
+            <TextButton
+              buttonProps={{ display: 'flex', align: 'center' }}
+              onClick={onImportIconClick}
+            >
+              <Img
+                src={importIcon}
+                alt={formatMessage(messages.importIntervention)}
+                mr={8}
+                mb={2}
+              />
+              <Text color={themeColors.secondary} fontWeight="bold">
+                {formatMessage(messages.importIntervention)}
+              </Text>
+            </TextButton>
+          </>
+        )}
       </InitialRow>
 
       <InitialRow fluid>
@@ -211,11 +215,11 @@ export function InterventionPage({
             xxl={4}
             style={{ marginTop: 10, marginBottom: 10 }}
           >
-            <Row my={35} justify="start" align="center">
+            <Row justify="start" align="center">
               <ShareFilter
-                onChange={setFilterSharing}
+                onChange={handleSharingFilterChange}
                 formatMessage={formatMessage}
-                active={filterSharing}
+                active={sharing}
               />
             </Row>
           </Col>
@@ -225,25 +229,40 @@ export function InterventionPage({
             xxl={4}
             style={{ marginTop: 10, marginBottom: 10 }}
           >
-            <Row my={35} justify="start" align="center">
+            <Row justify="start" align="center">
               <StatusFilter
-                onChange={handleChange}
+                onChange={handleStatusesFilterChange}
                 formatMessage={formatMessage}
-                active={filterStatus}
+                active={statuses}
               />
             </Row>
           </Col>
           <Col
             xs={12}
-            md={6}
-            xxl={4}
+            sm={6}
+            md={3}
+            xxl={2}
+            style={{ marginTop: 10, marginBottom: 10 }}
+          >
+            <Row justify="start" align="center" style={{ height: '100%' }}>
+              <SharedFilter
+                value={starred}
+                onChange={handleStarredFilterChange}
+              />
+            </Row>
+          </Col>
+          <Col
+            xs={12}
+            sm={6}
+            md={3}
+            xxl={2}
             style={{ marginTop: 10, marginBottom: 10 }}
           >
             <Row align="center">
               <Col>
                 <SearchInput
-                  value={filterValue}
-                  onChange={(e) => setFilterValue(e.target.value)}
+                  value={name}
+                  onChange={handleNameFilterChange}
                   placeholder={formatMessage(messages.filter)}
                   aria-label={formatMessage(messages.searchInterventionsLabel)}
                   debounceTime={300}
@@ -264,12 +283,13 @@ export function InterventionPage({
         <TileRenderer
           containerKey="intervention"
           elements={interventions}
+          elementsStates={interventionsStates}
           newLabel={formatMessage(messages.createIntervention)}
           onCreateCall={createIntervention}
           createLoading={createInterventionLoading}
           onFetchInterventions={handleFetch}
           isLoading={fetchInterventionsLoading}
-          filterData={filterData}
+          filterData={mainDashboardFilterData}
           infiniteLoader={{
             itemCount: interventionsSize,
             minimumBatchSize: 50,
@@ -283,16 +303,17 @@ export function InterventionPage({
 InterventionPage.propTypes = {
   fetchInterventionsRequest: PropTypes.func.isRequired,
   createInterventionRequest: PropTypes.func,
-  interventionPageState: PropTypes.object,
+  interventionsReducerState: PropTypes.object,
   intl: PropTypes.object,
   createInterventionLoading: PropTypes.bool,
   editUser: PropTypes.func,
   user: PropTypes.object,
   resetModalState: PropTypes.func,
+  changeMainDashboardFilterData: PropTypes.func,
 };
 
 const mapStateToProps = createStructuredSelector({
-  interventionPageState: makeSelectInterventionsState(),
+  interventionsReducerState: makeSelectInterventionsReducerState(),
   createInterventionLoading: makeSelectInterventionLoader(
     'createInterventionLoading',
   ),
@@ -304,6 +325,7 @@ const mapDispatchToProps = {
   createInterventionRequest,
   editUser: editUserRequest,
   resetModalState: resetImportModalState,
+  changeMainDashboardFilterData: changeMainDashboardFilterDataAction,
 };
 
 const withConnect = connect(mapStateToProps, mapDispatchToProps);
@@ -312,7 +334,7 @@ export default compose(
   withConnect,
   memo,
   injectIntl,
-  injectSaga({ key: 'fetchInterventions', saga: fetchInterventionsSaga }),
-  injectSaga({ key: 'createIntervention', saga: createInterventionSaga }),
-  injectReducer({ key: 'interventions', reducer: interventionsReducer }),
+  injectSaga(withFetchInterventionsSaga),
+  injectSaga(withCreateInterventionSaga),
+  injectReducer(withInterventionsReducer),
 )(InterventionPage);

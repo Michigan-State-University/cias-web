@@ -25,6 +25,7 @@ type InputComponentType = {
   type?: string;
   value?: string | number;
   disabled?: boolean;
+  hideErrorMessages?: boolean;
 };
 
 function InputComponent({
@@ -42,6 +43,7 @@ function InputComponent({
   type,
   value,
   disabled,
+  hideErrorMessages,
   ...columnStyleProps
 }: InputComponentType) {
   return (
@@ -50,6 +52,7 @@ function InputComponent({
       label={label}
       touched={touched}
       error={error}
+      hideErrorMessages={hideErrorMessages}
       {...columnStyleProps}
     >
       <Row width="100%" align="center">

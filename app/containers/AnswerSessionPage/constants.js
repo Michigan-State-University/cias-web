@@ -90,6 +90,16 @@ export const FETCH_PREVIOUS_QUESTION_SUCCESS =
 export const FETCH_PREVIOUS_QUESTION_ERROR =
   'app/AnswerSessionPage/FETCH_PREVIOUS_QUESTION_ERROR';
 
+export const VERIFY_PATIENT_DATA_REQUEST =
+  'app/AnswerSessionPage/VERIFY_PATIENT_DATA_REQUEST';
+export const VERIFY_PATIENT_DATA_SUCCESS =
+  'app/AnswerSessionPage/VERIFY_PATIENT_DATA_SUCCESS';
+export const VERIFY_PATIENT_DATA_ERROR =
+  'app/AnswerSessionPage/VERIFY_PATIENT_DATA_ERROR';
+
+export const SET_HFHS_PATIENT_DETAIL =
+  'app/AnswerSessionPage/SET_HFHS_PATIENT_DETAIL';
+
 export const QUESTION_TITLE_ID = 'question-title';
 
 export const QUESTION_SUBTITLE_ID = 'question-subtitle';
@@ -99,11 +109,13 @@ export const NAME_QUESTION_NAME_ID = 'name-question-name';
 export const NAME_QUESTION_SPELL_NAME_ID = 'name-question-spell-name';
 
 export const NOT_SKIPPABLE_QUESTIONS = [
+  QuestionTypes.FINISH,
   QuestionTypes.FEEDBACK,
   QuestionTypes.INFORMATION,
   QuestionTypes.EXTERNAL_LINK,
   QuestionTypes.TLFB_EVENTS,
   QuestionTypes.TLFB_QUESTION,
+  QuestionTypes.HENRY_FORD_INITIAL,
 ];
 
 export const FULL_SIZE_QUESTIONS = [
@@ -114,4 +126,9 @@ export const FULL_SIZE_QUESTIONS = [
 export const CONFIRMABLE_QUESTIONS = [
   QuestionTypes.TLFB_EVENTS,
   QuestionTypes.TLFB_QUESTION,
+];
+
+export const NO_CONTINUE_BUTTON_QUESTIONS = [
+  QuestionTypes.FINISH,
+  QuestionTypes.HENRY_FORD_INITIAL,
 ];

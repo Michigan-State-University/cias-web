@@ -84,7 +84,7 @@ function TeamsList({
       <div>
         <Container style={{ marginBottom: 40, padding: 0 }} fluid>
           <Row align="center">
-            <Col xs={12} xl={6} xxl={7} style={{ marginBottom: 10 }}>
+            <Col xs={12} sm={6} lg={4} xxl={3} style={{ marginBottom: 10 }}>
               <SearchInput
                 value={filterText}
                 onChange={(e) => setFilterText(e.target.value)}
