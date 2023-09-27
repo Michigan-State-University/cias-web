@@ -28,7 +28,7 @@ import {
 import { InviteParticipantsButton } from './InviteParticipantsButton';
 import { EmailParticipantsTable } from './EmailParticipantsTable';
 import messages from './messages';
-import { HealthClinicInvitationsCollapse } from './HealthClinicInvitationsCollapse';
+import { HealthClinicCollapse } from './HealthClinicCollapse';
 import { ExportEmailsButton } from './ExportEmailsButton';
 import { UploadEmailsButton } from './UploadEmailsButton';
 
@@ -133,22 +133,20 @@ export const EmailParticipantsTab: FC<Props> = ({
         {isReportingIntervention &&
           invitationsGroupedByHealthClinic.map(
             ([healthClinicId, groupedInvitations]) => (
-              <HealthClinicInvitationsCollapse
+              <HealthClinicCollapse
                 key={healthClinicId}
-                healthClinicId={healthClinicId}
-                healthClinicName={
-                  normalizedHealthClinicsInfos[healthClinicId]?.healthClinicName
-                }
-                healthSystemName={
-                  normalizedHealthClinicsInfos[healthClinicId]?.healthSystemName
-                }
-                invitations={groupedInvitations}
-                invitationsStates={invitationsStates}
-                isModularIntervention={isModularIntervention}
-                normalizedSessions={normalizedSessions}
-                invitingPossible={invitingPossible}
-                onResendInvitation={handleResendInvitation}
-              />
+                healthClinicInfo={normalizedHealthClinicsInfos[healthClinicId]}
+              >
+                <EmailParticipantsTable
+                  healthClinicId={healthClinicId}
+                  invitations={groupedInvitations}
+                  invitationsStates={invitationsStates}
+                  isModularIntervention={isModularIntervention}
+                  normalizedSessions={normalizedSessions}
+                  invitingPossible={invitingPossible}
+                  onResendInvitation={handleResendInvitation}
+                />
+              </HealthClinicCollapse>
             ),
           )}
       </Box>

@@ -14,7 +14,10 @@ import Text from 'components/Text';
 import { SelectOption } from 'components/Select/types';
 
 import { BackButton } from './BackButton';
-import { ParticipantInvitationType } from './types';
+import {
+  NormalizedHealthClinicsInfos,
+  ParticipantInvitationType,
+} from './types';
 import {
   InviteEmailParticipantsForm,
   Props as InviteEmailParticipantsFormProps,
@@ -28,6 +31,7 @@ export type Props = {
   sessionOptions: SelectOption<string>[];
   healthClinicOptions: SelectOption<string>[];
   onBack: (invitationType: ParticipantInvitationType) => void;
+  normalizedHealthClinicsInfos: NormalizedHealthClinicsInfos;
 };
 
 export const InviteEmailParticipantsView: FC<Props> = ({
@@ -37,6 +41,7 @@ export const InviteEmailParticipantsView: FC<Props> = ({
   interventionId,
   sessionOptions,
   healthClinicOptions,
+  normalizedHealthClinicsInfos,
 }) => {
   const { formatMessage } = useIntl();
   const dispatch = useDispatch();
@@ -76,6 +81,7 @@ export const InviteEmailParticipantsView: FC<Props> = ({
           healthClinicOptions={healthClinicOptions}
           onSubmit={handleSubmit}
           submitting={submitting}
+          normalizedHealthClinicsInfos={normalizedHealthClinicsInfos}
         />
       </Column>
     </Column>

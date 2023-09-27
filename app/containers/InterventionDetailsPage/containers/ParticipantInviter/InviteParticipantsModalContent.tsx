@@ -179,6 +179,7 @@ export const InviteParticipantsModalContent: FC<Props> = ({
               sessionOptions={sessionOptions}
               healthClinicOptions={healthClinicOptions}
               onBack={handleBack}
+              normalizedHealthClinicsInfos={normalizedHealthClinicsInfos}
             />
           )}
           {currentView === InviteParticipantModalView.UPLOAD_EMAILS && (

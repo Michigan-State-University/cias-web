@@ -154,6 +154,7 @@ export const UploadEmailsView: FC<Props> = ({
               healthClinicOptions={healthClinicOptions}
               onSubmit={handleSubmit}
               submitting={submitting}
+              normalizedHealthClinicsInfos={normalizedHealthClinicsInfos}
             />
           </Column>
         </>

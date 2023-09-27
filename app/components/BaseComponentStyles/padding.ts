@@ -1,6 +1,16 @@
+import { CSSProperties } from 'react';
 import PropTypes from 'prop-types';
 
-const padding = (props) => ({
+export type PaddingProps = Pick<CSSProperties, 'padding'> & {
+  pt?: CSSProperties['paddingTop'];
+  pb?: CSSProperties['paddingBottom'];
+  pr?: CSSProperties['paddingRight'];
+  pl?: CSSProperties['paddingLeft'];
+  px?: CSSProperties['paddingLeft'];
+  py?: CSSProperties['paddingTop'];
+};
+
+export const padding = (props: PaddingProps) => ({
   padding: props.padding ?? '',
   paddingTop: props.py ?? props.pt ?? '',
   paddingBottom: props.py ?? props.pb ?? '',
@@ -17,5 +27,3 @@ padding.propTypes = {
   px: PropTypes.number,
   py: PropTypes.number,
 };
-
-export { padding };

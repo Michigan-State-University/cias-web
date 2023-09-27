@@ -154,4 +154,8 @@ export default defineMessages({
     id: `${scope}.clinicMustBeUnique`,
     defaultMessage: 'Selected clinics must be unique',
   },
+  healthClinicCollapseDefaultLabel: {
+    id: `${scope}.healthClinicCollapseDefaultLabel`,
+    defaultMessage: 'No clinic selected',
+  },
 });
