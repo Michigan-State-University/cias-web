@@ -221,13 +221,17 @@ export const prepareInitialValues = (
     isReportingIntervention: true,
     sessionOption: null,
     clinics: emailsGroupedByHealthClinic.map(
-      ([healthClinicId, healthClinicItems]) => ({
-        healthClinicOption: {
-          value: healthClinicId,
-          label: normalizedHealthClinicsInfos[healthClinicId].healthClinicName,
-        },
-        emails: healthClinicItems.map(({ email }) => email),
-      }),
+      ([healthClinicId, healthClinicItems]) => {
+        const { healthClinicName, healthSystemName } =
+          normalizedHealthClinicsInfos[healthClinicId] ?? {};
+        return {
+          healthClinicOption: {
+            value: healthClinicId,
+            label: `${healthClinicName} (${healthSystemName})`,
+          },
+          emails: healthClinicItems.map(({ email }) => email),
+        };
+      },
     ),
   };
 
