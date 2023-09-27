@@ -211,7 +211,7 @@ export const getInterventionTypeDependedInitialValues = (
     : {
         isModularIntervention,
         sessionOption: null,
-        selectFirstSession: false,
+        selectFirstSession: true,
       };
 
 export const prepareInitialValues = (

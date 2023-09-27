@@ -4,7 +4,7 @@ import { useIntl } from 'react-intl';
 import arrowDown from 'assets/svg/arrow-down-black.svg';
 import arrowUp from 'assets/svg/arrow-up-black.svg';
 
-import { colors } from 'theme';
+import { colors, themeColors } from 'theme';
 
 import Collapse from 'components/Collapse';
 import Text from 'components/Text';
@@ -42,7 +42,10 @@ export const HealthClinicCollapse: FC<Props> = ({
         label={
           <Row align="center">
             <Row flexGrow={1} flexShrink={0}>
-              <Text fontWeight="bold">
+              <Text
+                fontWeight="bold"
+                color={themeColors[healthClinicName ? 'text' : 'warning']}
+              >
                 {healthClinicName ??
                   formatMessage(messages.healthClinicCollapseDefaultLabel)}
               </Text>

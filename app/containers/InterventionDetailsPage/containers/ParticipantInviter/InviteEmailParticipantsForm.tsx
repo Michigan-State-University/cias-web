@@ -24,6 +24,8 @@ import {
 } from './types';
 import { TEXT_BUTTON_PROPS } from './constants';
 import { HealthClinicCollapse } from './HealthClinicCollapse';
+import FormikSwitchInput from '../../../../components/FormikSwitchInput';
+import { LabelPosition } from '../../../../components/Switch';
 
 export type Props = {
   isModularIntervention: boolean;
@@ -99,6 +101,16 @@ export const InviteEmailParticipantsForm: FC<Props> = ({
           <Column>
             {!isModularIntervention && (
               <>
+                <Row mb={16}>
+                  <Row>
+                    <FormikSwitchInput
+                      formikKey="selectFirstSession"
+                      labelPosition={LabelPosition.Right}
+                    >
+                      {formatMessage(messages.selectFirstSession)}
+                    </FormikSwitchInput>
+                  </Row>
+                </Row>
                 <FormikSelect
                   formikKey="sessionOption"
                   label={formatMessage(messages.sessionSelectLabel)}

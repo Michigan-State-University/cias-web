@@ -158,4 +158,8 @@ export default defineMessages({
     id: `${scope}.healthClinicCollapseDefaultLabel`,
     defaultMessage: 'No clinic selected',
   },
+  selectFirstSession: {
+    id: `${scope}.selectFirstSession`,
+    defaultMessage: 'Invite to the default intervention starting point',
+  },
 });
