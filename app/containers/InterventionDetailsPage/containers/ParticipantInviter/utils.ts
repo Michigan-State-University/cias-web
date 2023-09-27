@@ -13,6 +13,9 @@ import {
 
 import { parametrizeRoutePath } from 'utils/router';
 import { csvEmailValidator } from 'utils/validators';
+
+import { SelectOption } from 'components/Select/types';
+
 import {
   InterventionTypeDependentFormValues,
   InviteEmailParticipantsFormValues,
@@ -203,6 +206,7 @@ export const parseEmailsCsv = (
 
 export const getInterventionTypeDependedInitialValues = (
   isModularIntervention: boolean,
+  firstSessionOption: Nullable<SelectOption<string>>,
 ): InterventionTypeDependentFormValues =>
   isModularIntervention
     ? {
@@ -210,7 +214,7 @@ export const getInterventionTypeDependedInitialValues = (
       }
     : {
         isModularIntervention,
-        sessionOption: null,
+        sessionOption: firstSessionOption ?? null,
         selectFirstSession: true,
       };
 
@@ -219,9 +223,13 @@ export const prepareInitialValues = (
   isReportingIntervention: boolean,
   isModularIntervention: boolean,
   normalizedHealthClinicsInfos: NormalizedHealthClinicsInfos,
+  firstSessionOption: Nullable<SelectOption<string>>,
 ): InviteEmailParticipantsFormValues => {
   const interventionDependentFormValues =
-    getInterventionTypeDependedInitialValues(isModularIntervention);
+    getInterventionTypeDependedInitialValues(
+      isModularIntervention,
+      firstSessionOption,
+    );
 
   if (!isReportingIntervention) {
     const emails = parsedData.map((item) => item.email);

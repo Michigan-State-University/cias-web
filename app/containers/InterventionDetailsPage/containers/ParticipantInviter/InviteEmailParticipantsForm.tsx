@@ -24,8 +24,7 @@ import {
 } from './types';
 import { TEXT_BUTTON_PROPS } from './constants';
 import { HealthClinicCollapse } from './HealthClinicCollapse';
-import FormikSwitchInput from '../../../../components/FormikSwitchInput';
-import { LabelPosition } from '../../../../components/Switch';
+import { SelectSessionControls } from './SelectSessionControls';
 
 export type Props = {
   isModularIntervention: boolean;
@@ -54,7 +53,10 @@ export const InviteEmailParticipantsForm: FC<Props> = ({
     if (initialFormValues) return initialFormValues;
 
     const interventionDependentFormValues =
-      getInterventionTypeDependedInitialValues(isModularIntervention);
+      getInterventionTypeDependedInitialValues(
+        isModularIntervention,
+        sessionOptions[0],
+      );
 
     if (isReportingIntervention) {
       return {
@@ -99,30 +101,14 @@ export const InviteEmailParticipantsForm: FC<Props> = ({
           }}
         >
           <Column>
-            {!isModularIntervention && (
+            {!values.isModularIntervention && (
               <>
-                <Row mb={16}>
-                  <Row>
-                    <FormikSwitchInput
-                      formikKey="selectFirstSession"
-                      labelPosition={LabelPosition.Right}
-                    >
-                      {formatMessage(messages.selectFirstSession)}
-                    </FormikSwitchInput>
-                  </Row>
-                </Row>
-                <FormikSelect
-                  formikKey="sessionOption"
-                  label={formatMessage(messages.sessionSelectLabel)}
-                  inputProps={{
-                    placeholder: formatMessage(
-                      messages.sessionSelectPlaceholder,
-                    ),
-                  }}
-                  options={sessionOptions}
-                  required
+                <SelectSessionControls
+                  selectFirstSessionFormikKey="selectFirstSession"
+                  sessionOptionFormikKey="sessionOption"
+                  sessionOptions={sessionOptions}
                 />
-                {isReportingIntervention && <Divider mt={16} />}
+                {values.isReportingIntervention && <Divider mt={16} />}
               </>
             )}
             {!values.isReportingIntervention && (

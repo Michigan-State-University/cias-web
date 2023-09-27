@@ -111,6 +111,7 @@ export const UploadEmailsView: FC<Props> = ({
       isReportingIntervention,
       isModularIntervention,
       normalizedHealthClinicsInfos,
+      sessionOptions[0],
     );
 
     setInitialFormValues(newInitialFormValues);
