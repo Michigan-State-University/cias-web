@@ -55,7 +55,6 @@ export const InviteEmailParticipantsView: FC<Props> = ({
   ) => {
     const invitations: SendInvitationsPayload = prepareSendInvitationsPayload(
       values,
-      isModularIntervention,
       interventionId,
     );
 

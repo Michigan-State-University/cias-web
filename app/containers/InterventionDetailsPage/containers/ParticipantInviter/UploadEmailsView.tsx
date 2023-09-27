@@ -71,7 +71,6 @@ export const UploadEmailsView: FC<Props> = ({
   ) => {
     const invitations: SendInvitationsPayload = prepareSendInvitationsPayload(
       values,
-      isModularIntervention,
       interventionId,
     );
 
@@ -110,6 +109,7 @@ export const UploadEmailsView: FC<Props> = ({
     const newInitialFormValues = prepareInitialValues(
       parsedData,
       isReportingIntervention,
+      isModularIntervention,
       normalizedHealthClinicsInfos,
     );
 

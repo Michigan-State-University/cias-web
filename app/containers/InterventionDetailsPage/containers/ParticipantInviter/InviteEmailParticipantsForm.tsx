@@ -14,7 +14,10 @@ import Divider from 'components/Divider';
 import Icon from 'components/Icon';
 
 import messages from './messages';
-import { createInviteEmailsParticipantsFormSchema } from './utils';
+import {
+  createInviteEmailsParticipantsFormSchema,
+  getInterventionTypeDependedInitialValues,
+} from './utils';
 import {
   InviteEmailParticipantsFormValues,
   NormalizedHealthClinicsInfos,
@@ -47,17 +50,22 @@ export const InviteEmailParticipantsForm: FC<Props> = ({
 
   const initialValues: InviteEmailParticipantsFormValues = useMemo(() => {
     if (initialFormValues) return initialFormValues;
+
+    const interventionDependentFormValues =
+      getInterventionTypeDependedInitialValues(isModularIntervention);
+
     if (isReportingIntervention) {
       return {
         isReportingIntervention: true,
-        sessionOption: null,
         clinics: [{ healthClinicOption: null, emails: [] }],
+        ...interventionDependentFormValues,
       };
     }
+
     return {
       isReportingIntervention: false,
-      sessionOption: null,
       emails: [],
+      ...interventionDependentFormValues,
     };
   }, [initialFormValues]);
 
