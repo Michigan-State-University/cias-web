@@ -32,6 +32,7 @@ import {
   setCallingOutNavigator,
   setCancellingCallOut,
   setWaitingForNavigator,
+  setHasAssignedNavigators,
 } from 'global/reducers/liveChat';
 import { makeSelectUserId } from 'global/reducers/auth';
 
@@ -169,6 +170,14 @@ export const useConversationChannel = (interventionId?: string) => {
     dispatch(setWaitingForNavigator(false));
   };
 
+  const onInterventionHasNavigators = () => {
+    dispatch(setHasAssignedNavigators(true));
+  };
+
+  const onInterventionHasNoNavigators = () => {
+    dispatch(setHasAssignedNavigators(false));
+  };
+
   const messageListener: SocketMessageListener<ConversationChannelMessage> = ({
     data,
     topic,
@@ -219,6 +228,12 @@ export const useConversationChannel = (interventionId?: string) => {
         break;
       case ConversationChannelMessageTopic.CALL_OUT_CANCELLED:
         onCallOutCancelled();
+        break;
+      case ConversationChannelMessageTopic.INTERVENTION_HAS_NAVIGATORS:
+        onInterventionHasNavigators();
+        break;
+      case ConversationChannelMessageTopic.INTERVENTION_HAS_NO_NAVIGATORS:
+        onInterventionHasNoNavigators();
         break;
       default:
         break;

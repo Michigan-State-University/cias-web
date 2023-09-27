@@ -54,6 +54,7 @@ exports[`<SettingsSessionPage /> Should render and match the snapshot 1`] = `
   height: auto;
   display: block;
   border-radius: 5px;
+  cursor: not-allowed;
   opacity: 0.5;
   color: unset;
 }
@@ -889,6 +890,7 @@ exports[`<SettingsSessionPage /> Should render and match the snapshot 1`] = `
         >
           <div
             class="c34"
+            cursor="not-allowed"
             data-testid="select"
             disabled=""
           >

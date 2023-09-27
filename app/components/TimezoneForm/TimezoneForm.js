@@ -57,6 +57,7 @@ export const TimezoneForm = ({
           label={formatMessage(messages.timeZoneLabel)}
           options={timezoneOptions}
           disabled={disabled}
+          submitOnChange
         />
       )}
     </Formik>

@@ -74,9 +74,9 @@ export default defineMessages({
     id: `${scope}.catMhSettingsOption`,
     defaultMessage: 'CAT-MH™ Access',
   },
-  catMhSettingsModalTitle: {
-    id: `${scope}.catMhSettingsModalTitle`,
-    defaultMessage: 'Access to CAT-MH™',
+  thirdPartyToolsAccessModalTitle: {
+    id: `${scope}.thirdPartyToolsAccessModalTitle`,
+    defaultMessage: 'Access to 3rd party tools',
   },
   anyone: {
     id: `${scope}.anyone`,
@@ -110,7 +110,7 @@ export default defineMessages({
   },
   interventionSettings: {
     id: `${scope}.interventionSettings`,
-    defaultMessage: '<b>Intervention Settings</b> (Language, Quick Exit)',
+    defaultMessage: 'Intervention Settings',
   },
   interventionSettingsIconTooltip: {
     id: `${scope}.interventionSettingsIconTooltip`,
@@ -134,7 +134,7 @@ export default defineMessages({
   },
   catMhCounter: {
     id: `${scope}.catMhCounter`,
-    defaultMessage: `<bold>CAT-MH™ License</bold>: {licenseType, select,
+    defaultMessage: `<bold>CAT-MH™ License</bold>: {catMhLicenseType, select,
         ${CatMhLicenseType.LIMITED} {Limited (<counter>{used}/{initial}</counter> <space></space> tests used)}
         ${CatMhLicenseType.UNLIMITED} {Unlimited (<counter>{used}</counter> <space></space> tests used)}
       }`,

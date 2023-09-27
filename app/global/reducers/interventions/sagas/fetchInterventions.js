@@ -11,15 +11,32 @@ import { FETCH_INTERVENTIONS_REQUEST } from '../constants';
 
 import messages from '../messages';
 
-export function* fetchInterventions({
-  payload: { paginationData, filterData },
+export function* fetchInterventionsWorker({
+  payload: { paginationData, filterData, organizationId },
 }) {
   const requestURL = `v1/interventions`;
 
   const { startIndex, endIndex } = paginationData ?? {};
+  const { sharing, starred, ...restFilters } = filterData ?? {};
+
+  const requestParams = {
+    startIndex,
+    endIndex,
+    organizationId,
+    ...restFilters,
+  };
+
+  if (sharing) {
+    requestParams[sharing] = true;
+  }
+
+  if (starred) {
+    requestParams.starred = true;
+  }
+
   try {
     const { data } = yield call(axios.get, requestURL, {
-      params: objectToSnakeCase({ startIndex, endIndex, ...filterData }),
+      params: objectToSnakeCase(requestParams),
     });
 
     const { interventions_size: interventionsSize } = data;
@@ -39,6 +56,12 @@ export function* fetchInterventions({
     );
   }
 }
-export default function* fetchInterventionsSaga() {
-  yield takeLatest(FETCH_INTERVENTIONS_REQUEST, fetchInterventions);
+
+export function* fetchInterventionsSaga() {
+  yield takeLatest(FETCH_INTERVENTIONS_REQUEST, fetchInterventionsWorker);
 }
+
+export const withFetchInterventionsSaga = {
+  key: 'fetchInterventions',
+  saga: fetchInterventionsSaga,
+};

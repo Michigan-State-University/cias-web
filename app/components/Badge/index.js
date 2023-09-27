@@ -1,7 +1,7 @@
 import styled from 'styled-components';
 import PropTypes from 'prop-types';
 import { colors, fontSizes } from 'theme';
-import { margin, style, layout } from '../BaseComponentStyles';
+import { margin, style, layout, text } from '../BaseComponentStyles';
 
 const Badge = styled.div.attrs(
   ({ bgWithOpacity, color }) =>
@@ -23,6 +23,7 @@ const Badge = styled.div.attrs(
   ${style};
   ${layout};
   ${margin};
+  ${text};
 `;
 
 Badge.propTypes = {

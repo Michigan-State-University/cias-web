@@ -1,4 +1,4 @@
-import { takeLatest, put, call, delay } from 'redux-saga/effects';
+import { takeEvery, put, call } from 'redux-saga/effects';
 import axios from 'axios';
 
 import { toast } from 'react-toastify';
@@ -10,16 +10,15 @@ import {
 import { DELETE_REPORT_TEMPLATE_LOGO_REQUEST } from '../constants';
 import messages from './messages';
 
-// Added delay to avoid request spamming
-function* deleteReportLogoTemplate({ payload: { sessionId, id } }) {
-  const requestUrl = `/v1/sessions/${sessionId}/report_templates/${id}/remove_logo`;
+function* deleteReportLogoTemplate({
+  payload: { sessionId, reportTemplateId },
+}) {
+  const requestUrl = `/v1/sessions/${sessionId}/report_templates/${reportTemplateId}/remove_logo`;
   try {
     yield axios.delete(requestUrl);
 
-    yield delay(1000);
     yield put(deleteReportTemplateLogoSuccess());
   } catch (error) {
-    yield delay(1000);
     yield put(deleteReportTemplateLogoFailure(error));
     yield call(
       toast.error,
@@ -29,7 +28,7 @@ function* deleteReportLogoTemplate({ payload: { sessionId, id } }) {
 }
 
 export default function* deleteReportTemplateLogoSaga() {
-  yield takeLatest(
+  yield takeEvery(
     DELETE_REPORT_TEMPLATE_LOGO_REQUEST,
     deleteReportLogoTemplate,
   );

@@ -645,8 +645,9 @@ exports[`<UserList /> Should render and match the snapshot - admin 1`] = `
   border-width: 1px;
   border-color: #E9F1FB;
   border-radius: 5px;
-  padding-right: 30px;
-  padding-left: 30px;
+  width: 100%;
+  padding-right: 35px;
+  padding-left: 35px;
   color: #2F3850;
 }
 
@@ -688,6 +689,7 @@ exports[`<UserList /> Should render and match the snapshot - admin 1`] = `
   padding: 2px;
   cursor: pointer;
   font-weight: 700;
+  color: rgba(183,39,234,1);
   color: rgba(183,39,234,1);
 }
 
@@ -1035,7 +1037,7 @@ exports[`<UserList /> Should render and match the snapshot - admin 1`] = `
               </div>
             </div>
             <div
-              style="box-sizing: border-box; min-height: 1px; position: relative; padding-left: 15px; padding-right: 15px; width: 100%; flex-basis: 100%; flex-grow: 0; flex-shrink: 0; max-width: 100%; margin-left: 0%; margin-top: 10px;"
+              style="box-sizing: border-box; min-height: 1px; position: relative; padding-left: 15px; padding-right: 15px; width: 33.333333333333336%; flex-basis: 33.333333333333336%; flex-grow: 0; flex-shrink: 0; max-width: 33.333333333333336%; margin-left: 0%; margin-top: 10px;"
             >
               <div
                 class="c22"
@@ -1043,8 +1045,9 @@ exports[`<UserList /> Should render and match the snapshot - admin 1`] = `
                 <input
                   aria-label="Filter users by name"
                   class="c23"
-                  placeholder="Filter users by name"
+                  placeholder="Filter by name"
                   type="text"
+                  width="100%"
                 />
                 <img
                   alt="search"
@@ -2008,8 +2011,9 @@ exports[`<UserList /> Should render and match the snapshot - researcher 1`] = `
   border-width: 1px;
   border-color: #E9F1FB;
   border-radius: 5px;
-  padding-right: 30px;
-  padding-left: 30px;
+  width: 100%;
+  padding-right: 35px;
+  padding-left: 35px;
   color: #2F3850;
 }
 
@@ -2378,7 +2382,7 @@ exports[`<UserList /> Should render and match the snapshot - researcher 1`] = `
               </div>
             </div>
             <div
-              style="box-sizing: border-box; min-height: 1px; position: relative; padding-left: 15px; padding-right: 15px; width: 100%; flex-basis: 100%; flex-grow: 0; flex-shrink: 0; max-width: 100%; margin-left: 0%; margin-top: 10px;"
+              style="box-sizing: border-box; min-height: 1px; position: relative; padding-left: 15px; padding-right: 15px; width: 33.333333333333336%; flex-basis: 33.333333333333336%; flex-grow: 0; flex-shrink: 0; max-width: 33.333333333333336%; margin-left: 0%; margin-top: 10px;"
             >
               <div
                 class="c21"
@@ -2386,8 +2390,9 @@ exports[`<UserList /> Should render and match the snapshot - researcher 1`] = `
                 <input
                   aria-label="Filter users by name"
                   class="c22"
-                  placeholder="Filter users by name"
+                  placeholder="Filter by name"
                   type="text"
+                  width="100%"
                 />
                 <img
                   alt="search"

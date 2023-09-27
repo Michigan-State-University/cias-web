@@ -8,26 +8,39 @@ import {
 } from 'global/reducers/intervention';
 
 import isNullOrUndefined from 'utils/isNullOrUndefined';
+import { updateItemById, updateListItemStateById } from 'utils/reduxUtils';
 
 import {
   ARCHIVE_INTERVENTION_ERROR,
   ARCHIVE_INTERVENTION_REQUEST,
   ARCHIVE_INTERVENTION_SUCCESS,
+  CHANGE_MAIN_DASHBOARD_FILTER_DATA,
   FETCH_INTERVENTIONS_ERROR,
   FETCH_INTERVENTIONS_REQUEST,
   FETCH_INTERVENTIONS_SUCCESS,
   IMPORT_INTERVENTION_ERROR,
   IMPORT_INTERVENTION_REQUEST,
   IMPORT_INTERVENTION_SUCCESS,
+  INTERVENTION_LIST_ITEM_DEFAULT_STATE,
+  MAIN_DASHBOARD_FILTER_DATA_INITIAL_VALUE,
   REFETCH_INTERVENTIONS,
   RESET_IMPORT_INTERVENTION_STATE,
+  STAR_INTERVENTION_ERROR,
+  STAR_INTERVENTION_REQUEST,
+  STAR_INTERVENTION_SUCCESS,
+  UNSTAR_INTERVENTION_ERROR,
+  UNSTAR_INTERVENTION_REQUEST,
+  UNSTAR_INTERVENTION_SUCCESS,
+  UPDATE_INTERVENTION_LIST_ITEM_BY_ID,
 } from './constants';
 
 export const initialState = {
-  filterData: undefined,
+  currentFilterData: undefined,
   shouldRefetch: false,
   interventionsSize: Number.MAX_SAFE_INTEGER,
   interventions: [],
+  interventionsStates: {},
+  mainDashboardFilterData: MAIN_DASHBOARD_FILTER_DATA_INITIAL_VALUE,
   loaders: {
     fetchInterventions: true,
     importIntervention: false,
@@ -42,9 +55,18 @@ export const initialState = {
 };
 
 /* eslint-disable default-case, no-param-reassign */
-export const interventionsReducer = (state = initialState, action) =>
+const interventionsReducer = (state = initialState, { type, payload }) =>
   produce(state, (draft) => {
-    switch (action.type) {
+    const updateInterventionListItemStateById = (interventionId, changes) => {
+      updateListItemStateById(
+        draft.interventionsStates,
+        interventionId,
+        changes,
+        INTERVENTION_LIST_ITEM_DEFAULT_STATE,
+      );
+    };
+
+    switch (type) {
       case FETCH_INTERVENTIONS_REQUEST: {
         if (state.shouldRefetch) draft.interventions = [];
 
@@ -55,12 +77,10 @@ export const interventionsReducer = (state = initialState, action) =>
         draft.errors.fetchInterventions = null;
         draft.loaders.fetchInterventions = true;
 
-        const {
-          payload: { paginationData, filterData },
-        } = action;
+        const { paginationData, filterData } = payload;
 
-        if (state.filterData !== filterData) {
-          draft.filterData = filterData;
+        if (state.currentFilterData !== filterData) {
+          draft.currentFilterData = filterData;
           draft.interventions = [];
         }
 
@@ -83,9 +103,7 @@ export const interventionsReducer = (state = initialState, action) =>
       case FETCH_INTERVENTIONS_SUCCESS: {
         draft.loaders.fetchInterventions = false;
 
-        const {
-          payload: { interventions, paginationData, interventionsSize },
-        } = action;
+        const { interventions, paginationData, interventionsSize } = payload;
 
         draft.interventionsSize = interventionsSize;
 
@@ -101,19 +119,19 @@ export const interventionsReducer = (state = initialState, action) =>
             endIndex - startIndex + 1,
             ...interventions,
           );
-        } else draft.interventions = action.payload.interventions;
+        } else draft.interventions = payload.interventions;
         break;
       }
       case FETCH_INTERVENTIONS_ERROR:
         draft.loaders.fetchInterventions = false;
-        draft.errors.fetchInterventions = action.payload.error;
+        draft.errors.fetchInterventions = payload.error;
         break;
       case CREATE_INTERVENTION_SUCCESS:
-        draft.interventions.unshift(action.payload.intervention);
+        draft.interventions.unshift(payload.intervention);
         break;
       case ARCHIVE_INTERVENTION_REQUEST:
         let interventionIndex = draft.interventions.findIndex(
-          ({ id }) => id === action.payload.interventionId,
+          ({ id }) => id === payload.interventionId,
         );
         draft.interventions[interventionIndex].status = archived;
         draft.cache.archiveIntervention =
@@ -125,7 +143,7 @@ export const interventionsReducer = (state = initialState, action) =>
         break;
       case ARCHIVE_INTERVENTION_ERROR:
         interventionIndex = draft.interventions.findIndex(
-          ({ id }) => id === action.payload.interventionId,
+          ({ id }) => id === payload.interventionId,
         );
         draft.interventions[interventionIndex] =
           state.cache.archiveIntervention;
@@ -147,7 +165,7 @@ export const interventionsReducer = (state = initialState, action) =>
       }
       case IMPORT_INTERVENTION_ERROR: {
         draft.loaders.importIntervention = false;
-        draft.errors.importIntervention = action.payload.error;
+        draft.errors.importIntervention = payload.error;
         break;
       }
       case RESET_IMPORT_INTERVENTION_STATE: {
@@ -160,7 +178,73 @@ export const interventionsReducer = (state = initialState, action) =>
         draft.shouldRefetch = true;
         break;
       }
+
+      case UPDATE_INTERVENTION_LIST_ITEM_BY_ID: {
+        const { interventionId, changes } = payload;
+        updateItemById(draft.interventions, interventionId, changes);
+        break;
+      }
+
+      case STAR_INTERVENTION_REQUEST: {
+        const { interventionId } = payload;
+        updateInterventionListItemStateById(interventionId, {
+          starInterventionLoading: true,
+        });
+        break;
+      }
+      case STAR_INTERVENTION_SUCCESS: {
+        const { interventionId } = payload;
+        updateInterventionListItemStateById(interventionId, {
+          starInterventionLoading: false,
+        });
+        updateItemById(draft.interventions, interventionId, { starred: true });
+        break;
+      }
+      case STAR_INTERVENTION_ERROR: {
+        const { interventionId } = payload;
+        updateInterventionListItemStateById(interventionId, {
+          starInterventionLoading: false,
+        });
+        break;
+      }
+
+      case UNSTAR_INTERVENTION_REQUEST: {
+        const { interventionId } = payload;
+        updateInterventionListItemStateById(interventionId, {
+          unstarInterventionLoading: true,
+        });
+        break;
+      }
+      case UNSTAR_INTERVENTION_SUCCESS: {
+        const { interventionId } = payload;
+        updateInterventionListItemStateById(interventionId, {
+          unstarInterventionLoading: false,
+        });
+        updateItemById(draft.interventions, interventionId, { starred: false });
+        break;
+      }
+      case UNSTAR_INTERVENTION_ERROR: {
+        const { interventionId } = payload;
+        updateInterventionListItemStateById(interventionId, {
+          unstarInterventionLoading: false,
+        });
+        break;
+      }
+
+      case CHANGE_MAIN_DASHBOARD_FILTER_DATA: {
+        const { filterDataChanges } = payload;
+        draft.mainDashboardFilterData = {
+          ...draft.mainDashboardFilterData,
+          ...filterDataChanges,
+        };
+        break;
+      }
     }
   });
 
 export default interventionsReducer;
+
+export const withInterventionsReducer = {
+  key: 'interventions',
+  reducer: interventionsReducer,
+};

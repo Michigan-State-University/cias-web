@@ -54,7 +54,6 @@ export const RESET_PHONE_NUMBER_PREVIEW = 'app/auth/RESET_PHONE_NUMBER_PREVIEW';
 export const LOGIN_REQUEST = 'app/auth/LOGIN_REQUEST';
 export const LOGIN_SUCCESS = 'app/auth/LOGIN_SUCCESS';
 export const LOGIN_ERROR = 'app/auth/LOGIN_ERROR';
-export const REDIRECT_QUERY_KEY = 'redirect_to';
 export const ACCOUNT_CONFIRMATION_SUCCESS =
   'app/auth/ACCOUNT_CONFIRMATION_SUCCESS';
 export const ACCOUNT_CONFIRMATION_ERROR = 'app/auth/ACCOUNT_CONFIRMATION_ERROR';

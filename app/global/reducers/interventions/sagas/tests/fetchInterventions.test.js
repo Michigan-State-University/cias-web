@@ -9,15 +9,16 @@ import { formatMessage } from 'utils/intlOutsideReact';
 import { createIntervention } from 'utils/reducerCreators';
 import { jsonApiToArray } from 'utils/jsonApiMapper';
 
-import fetchInterventionsSaga, {
-  fetchInterventions,
-} from 'global/reducers/interventions/sagas/fetchInterventions';
 import {
   fetchInterventionsSuccess,
   fetchInterventionsError,
 } from '../../actions';
 import { FETCH_INTERVENTIONS_REQUEST } from '../../constants';
 import messages from '../../messages';
+import {
+  fetchInterventionsSaga,
+  fetchInterventionsWorker,
+} from '../fetchInterventions';
 
 describe('fetchInterventions saga', () => {
   it('Check fetchInterventions generator success connection', () => {
@@ -26,7 +27,7 @@ describe('fetchInterventions saga', () => {
       interventions_size: 1,
     };
 
-    return expectSaga(fetchInterventions, { payload: {} })
+    return expectSaga(fetchInterventionsWorker, { payload: {} })
       .provide([[matchers.call.fn(axios.get), { data: apiResponse }]])
       .put(
         fetchInterventionsSuccess(
@@ -41,7 +42,7 @@ describe('fetchInterventions saga', () => {
   });
   it('Check fetchInterventions error connection', () => {
     const error = new Error('test');
-    return expectSaga(fetchInterventions, { payload: {} })
+    return expectSaga(fetchInterventionsWorker, { payload: {} })
       .provide([[matchers.call.fn(axios.get), throwError(error)]])
       .put(
         fetchInterventionsError(
@@ -55,7 +56,7 @@ describe('fetchInterventions saga', () => {
     const sagaFunction = fetchInterventionsSaga();
     const takeLatestDescriptor = sagaFunction.next().value;
     expect(takeLatestDescriptor).toEqual(
-      takeLatest(FETCH_INTERVENTIONS_REQUEST, fetchInterventions),
+      takeLatest(FETCH_INTERVENTIONS_REQUEST, fetchInterventionsWorker),
     );
   });
 });

@@ -5,7 +5,6 @@ import fetchSessionEmailsSaga from 'global/reducers/intervention/sagas/fetchSess
 import resendSessionInviteSaga from 'global/reducers/intervention/sagas/resendSessionInvite';
 import sendSessionInviteSaga from 'global/reducers/intervention/sagas/sendSessionInvite';
 import updateSessionSettingsSaga from 'global/reducers/intervention/sagas/updateSessionSettings';
-import createInterventionSaga from 'global/reducers/intervention/sagas/createIntervention';
 import sendInterventionCsvSaga from 'global/reducers/intervention/sagas/sendInterventionCsv';
 import editInterventionSaga from 'global/reducers/intervention/sagas/editIntervention';
 import fetchInterventionSaga from 'global/reducers/intervention/sagas/fetchIntervention';
@@ -36,9 +35,10 @@ import refreshInterventionDataSaga from './refreshInterventionData';
 export * from './onCollaboratorRemovedReceive';
 export * from './refreshInterventionData';
 export * from './fetchCurrentUserCollaboratorData';
+export * from './clearInterventionData';
+export * from './createIntervention';
 
 export {
-  createInterventionSaga,
   editInterventionSaga,
   fetchInterventionSaga,
   sendInterventionCsvSaga,
@@ -73,7 +73,6 @@ export {
 
 export default function* allInterventionSagas() {
   yield all([
-    createInterventionSaga(),
     editInterventionSaga(),
     fetchInterventionSaga(),
     sendInterventionCsvSaga(),

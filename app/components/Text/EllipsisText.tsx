@@ -1,4 +1,4 @@
-import React, { memo, useRef, useState } from 'react';
+import React, { memo, ReactNode, useRef, useState } from 'react';
 import { sanitize } from 'dompurify';
 
 import Tooltip from 'components/Tooltip';
@@ -8,14 +8,24 @@ import { htmlToPlainText } from 'utils/htmlToPlainText';
 
 import { StyledEllipsisText, TruncatedMarkup } from './styled';
 
-type EllipsisTextType = {
+export type HtmlProps = {
+  isHtml: true;
   text: string;
+};
+
+export type NonHtmlProps = {
+  isHtml?: false;
+  text: ReactNode;
+};
+
+export type CommonProps = {
   id?: string;
   dataFor?: string;
   lines?: number;
   width?: number;
-  isHtml?: boolean;
 } & Record<string, unknown>;
+
+export type Props = CommonProps & (HtmlProps | NonHtmlProps);
 
 // IF THE TEXT LENGTH IS NOT CALCULATED CORRECTLY AND IT
 // IS DISPLAYED IN A DIFFERENT NUMBER OF LINES THEN TRY
@@ -26,9 +36,9 @@ const EllipsisText = ({
   dataFor,
   lines = 1,
   width,
-  isHtml = false,
+  isHtml,
   ...props
-}: EllipsisTextType) => {
+}: Props) => {
   const ref = useRef(null);
 
   const [allowTooltip, setAllowTooltip] = useState(false);
@@ -38,7 +48,7 @@ const EllipsisText = ({
   };
 
   const plainText = isHtml ? htmlToPlainText(text) : text;
-  const purifiedHtmlText = sanitize(text);
+  const purifiedHtmlText = isHtml ? sanitize(text) : '';
 
   return (
     <Row width="100%">

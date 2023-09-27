@@ -47,13 +47,15 @@ const NarratorUnavailableDialog = ({
     noNavigatorAvailableMessage,
     messagePhone,
     contactMessage,
+    hasAssignedNavigators,
   } = liveChatSetup ?? {};
 
   return (
     <>
       <ChatDialog
         header={
-          liveChatSetup && (
+          liveChatSetup &&
+          hasAssignedNavigators && (
             <CallOutNavigatorButton
               onClick={callOutNavigator}
               loading={callingOutNavigator}
@@ -78,14 +80,6 @@ const NarratorUnavailableDialog = ({
           >
             <H2>{noNavigatorAvailableMessage}</H2>
             <Column px={32} align="center">
-              <Text
-                color={colors.bluewood}
-                textOpacity={0.7}
-                mt={16}
-                lineHeight="22px"
-              >
-                {formatMessage(messages.callOutInstruction)}
-              </Text>
               <Text
                 color={colors.bluewood}
                 textOpacity={0.7}

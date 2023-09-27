@@ -12,9 +12,10 @@ import {
   StartEditingInterventionNotificationLayout,
   SuccessfullyRestoredInterventionNotificationLayout,
   UnsuccessfulImportNotificationLayout,
+  StopEditingInterventionNotificationLayout,
+  SensitiveDataRemovedNotificationLayout,
 } from './components';
 import { NotificationLayoutCommonProps } from './types';
-import { StopEditingInterventionNotificationLayout } from './components/StopEditingInterventionNotificationLayout';
 
 type Props = {
   notification: Notification;
@@ -90,6 +91,13 @@ const SingleNotification = ({ notification, ...commonProps }: Props) => {
     case NotificationEvent.STOP_EDITING_INTERVENTION:
       return (
         <StopEditingInterventionNotificationLayout
+          notification={notification}
+          {...commonProps}
+        />
+      );
+    case NotificationEvent.SENSITIVE_DATA_REMOVED:
+      return (
+        <SensitiveDataRemovedNotificationLayout
           notification={notification}
           {...commonProps}
         />

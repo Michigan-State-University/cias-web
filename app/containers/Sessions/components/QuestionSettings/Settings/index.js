@@ -20,7 +20,6 @@ import { makeSelectEditingPossible } from 'global/reducers/intervention';
 import { makeSelectInterventionType } from 'global/reducers/intervention/selectors';
 import { makeSelectSelectedQuestionGroup } from 'global/reducers/questionGroups';
 
-import { finishQuestion } from 'models/Session/QuestionTypes';
 import { InterventionType } from 'models/Intervention/Intervention';
 import { GroupType } from 'models/QuestionGroup';
 
@@ -31,6 +30,11 @@ import BranchingTab from './Components/Tabs/BranchingTab';
 import NarratorTab from './Components/Tabs/NarratorTab';
 import SettingsTab from './Components/Tabs/SettingsTab';
 import messages from './messages';
+import {
+  HIDE_BRANCHING_TAB_QUESTIONS,
+  HIDE_NARRATOR_TAB_QUESTIONS,
+  HIDE_SETTINGS_TAB_QUESTIONS,
+} from '../constants';
 
 const Settings = ({
   selectedQuestion: { narrator, settings, id, formulas, type } = {},
@@ -47,8 +51,11 @@ const Settings = ({
     setDraggable(false);
   };
 
-  const isFinishScreen = type === finishQuestion.id;
   const isTlfbGroup = questionGroup?.type === GroupType.TLFB;
+
+  const hideSettingsTab = HIDE_SETTINGS_TAB_QUESTIONS.includes(type);
+  const hideNarratorTab = HIDE_NARRATOR_TAB_QUESTIONS.includes(type);
+  const hideBranchingTab = HIDE_BRANCHING_TAB_QUESTIONS.includes(type);
 
   return (
     <Column>
@@ -58,7 +65,10 @@ const Settings = ({
         controlledSetTabActive={handleChange}
         data-cy="settings-panel"
       >
-        <div label={formatMessage(messages[settingsTabLabels.settings])}>
+        <div
+          label={formatMessage(messages[settingsTabLabels.settings])}
+          hidden={hideSettingsTab}
+        >
           <SettingsTab
             formatMessage={formatMessage}
             disabled={!editingPossible}
@@ -67,7 +77,10 @@ const Settings = ({
             id={id}
           />
         </div>
-        <div label={formatMessage(messages[settingsTabLabels.narrator])}>
+        <div
+          label={formatMessage(messages[settingsTabLabels.narrator])}
+          hidden={hideNarratorTab}
+        >
           <NarratorTab
             disabled={!editingPossible}
             narrator={narrator}
@@ -78,7 +91,7 @@ const Settings = ({
         </div>
         <div
           label={formatMessage(messages[settingsTabLabels.branching])}
-          hidden={isFinishScreen || isTlfbGroup}
+          hidden={hideBranchingTab}
         >
           <BranchingTab
             formatMessage={formatMessage}

@@ -1,4 +1,4 @@
-import { draft, published, closed } from './StatusTypes';
+import { draft, published, closed, archived } from './StatusTypes';
 
 const ALLOWED_EDIT = [draft];
 
@@ -16,7 +16,7 @@ const ALLOWED_REMOVING_PARTICIPANTS_FROM_INTERVENTION = [draft, published];
 
 const ALLOWED_ENABLE_CHAT = [draft, published];
 
-const ALLOWED_INTERVENTION_TYPE_EDIT = [draft];
+const ALLOWED_CLEAR_INTERVENTION_DATA = [closed, archived];
 
 export const canEdit = (interventionStatus) =>
   ALLOWED_EDIT.includes(interventionStatus);
@@ -39,8 +39,8 @@ export const canAddParticipantsToIntervention = (interventionStatus) =>
 export const canRemoveParticipantsFromIntervention = (interventionStatus) =>
   ALLOWED_REMOVING_PARTICIPANTS_FROM_INTERVENTION.includes(interventionStatus);
 
-export const canEditInterventionType = (interventionStatus) =>
-  ALLOWED_INTERVENTION_TYPE_EDIT.includes(interventionStatus);
-
 export const canEnableChat = (interventionStatus) =>
   ALLOWED_ENABLE_CHAT.includes(interventionStatus);
+
+export const canClearInterventionData = (interventionStatus) =>
+  ALLOWED_CLEAR_INTERVENTION_DATA.includes(interventionStatus);

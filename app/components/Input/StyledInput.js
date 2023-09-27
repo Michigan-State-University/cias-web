@@ -1,7 +1,11 @@
 import React, { useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
 
+import { paddings } from 'theme';
+
 import Box from 'components/Box';
+import { InputValueLengthIndicator } from 'components/InputValueLengthCounter';
+import Row from 'components/Row';
 
 import { TextArea } from './TextArea';
 import { Sufix } from './styled';
@@ -82,23 +86,31 @@ const StyledInput = (props) => {
     );
 
   return (
-    <TextArea
-      {...props}
-      maxWidth="initial"
-      disabled={props.disabled}
-      width={props.width || '100%'}
-      height="60px"
-      {...(props.rows ? { rows: props.rows, height: 'auto' } : {})}
-      mr={9}
-      value={value}
-      onChange={(event) => onInputChange(event.target.value)}
-      onInput={props.onInput}
-      onFocus={handleFocus}
-      onBlur={handleBlur}
-      placeholder={props.placeholder}
-      transparent={props.transparent}
-      data-cy="text-area"
-    />
+    <Box display="flex" direction="column" mr={9} width={props.width || '100%'}>
+      <TextArea
+        {...props}
+        maxWidth="initial"
+        disabled={props.disabled}
+        height="60px"
+        {...(props.rows ? { rows: props.rows, height: 'auto' } : {})}
+        value={value}
+        onChange={(event) => onInputChange(event.target.value)}
+        onInput={props.onInput}
+        onFocus={handleFocus}
+        onBlur={handleBlur}
+        placeholder={props.placeholder}
+        transparent={props.transparent}
+        data-cy="text-area"
+      />
+      {props.maxLength && (
+        <Row mt={8} mx={paddings.small}>
+          <InputValueLengthIndicator
+            value={value}
+            maxLength={props.maxLength}
+          />
+        </Row>
+      )}
+    </Box>
   );
 };
 
@@ -123,6 +135,7 @@ StyledInput.propTypes = {
   forceBlur: PropTypes.bool,
   onInput: PropTypes.func,
   sufix: PropTypes.string,
+  maxLength: PropTypes.number,
 };
 
 StyledInput.defaultProps = {

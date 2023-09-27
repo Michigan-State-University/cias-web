@@ -28,7 +28,7 @@ describe('addAvatar saga', () => {
   it('Check addAvatar generator success connection', () => {
     const apiResponse = apiUserResponse();
     apiResponse.data.avatar_url = payload.imageUrl;
-    const successUser = mapCurrentUser(apiResponse.data);
+    const successUser = mapCurrentUser(apiResponse);
 
     return expectSaga(addAvatar, { payload })
       .withState(mockState)

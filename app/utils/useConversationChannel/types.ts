@@ -162,6 +162,16 @@ export type CallOutCalledSocketMessage = SocketMessage<
   CallOutCancelledData
 >;
 
+export type InterventionHasNavigatorsMessage = SocketMessage<
+  ConversationChannelMessageTopic.INTERVENTION_HAS_NAVIGATORS,
+  ''
+>;
+
+export type InterventionHasNoNavigatorsMessage = SocketMessage<
+  ConversationChannelMessageTopic.INTERVENTION_HAS_NO_NAVIGATORS,
+  ''
+>;
+
 // Create a union type with any new SocketMessage type
 export type ConversationChannelMessage =
   | MessageSentSocketMessage
@@ -178,7 +188,9 @@ export type ConversationChannelMessage =
   | CurrentNavigatorAvailableSocketMessage
   | NavigatorCalledOutSocketMessage
   | CalOutUnavailableSocketErrorMessage
-  | CallOutCalledSocketMessage;
+  | CallOutCalledSocketMessage
+  | InterventionHasNavigatorsMessage
+  | InterventionHasNoNavigatorsMessage;
 
 // SOCKET ACTIONS
 

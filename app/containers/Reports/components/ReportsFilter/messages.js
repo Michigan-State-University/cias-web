@@ -10,6 +10,7 @@ import {
   PARTICIPANTS,
   SORT_BY_NEWEST,
   SORT_BY_LATEST,
+  HENRY_FORD_HEALTH,
 } from 'global/reducers/generatedReports/constants';
 
 export const scope = 'app.containers.ReportsFilter';
@@ -26,6 +27,10 @@ export default defineMessages({
   [PARTICIPANTS]: {
     id: `${scope}.${PARTICIPANTS}`,
     defaultMessage: 'Participants',
+  },
+  [HENRY_FORD_HEALTH]: {
+    id: `${scope}.${HENRY_FORD_HEALTH}`,
+    defaultMessage: 'Henry Ford',
   },
   [SORT_BY_NEWEST]: {
     id: `${scope}.${SORT_BY_NEWEST}`,

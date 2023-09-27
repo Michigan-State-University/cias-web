@@ -9,9 +9,7 @@ import { fetchUserFailure, fetchUserSuccess } from '../actions';
 export function* fetchUser({ payload: { id } }) {
   const requestUrl = `/v1/users/${id}`;
   try {
-    const {
-      data: { data },
-    } = yield call(axios.get, requestUrl);
+    const { data } = yield call(axios.get, requestUrl);
     const user = mapCurrentUser(data);
     const pickedUser = pickUserAttributes(user);
     yield put(fetchUserSuccess(pickedUser));

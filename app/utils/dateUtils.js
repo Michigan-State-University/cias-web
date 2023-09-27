@@ -4,7 +4,7 @@ const MINUTES_IN_HOUR = 60;
 const HOURS_IN_DAY = 24;
 
 export const getUTCTime = (date) =>
-  date.getTime() +
+  date.getTime() -
   date.getTimezoneOffset() * SECONDS_IN_MINUTE * MILISECONDS_IN_SECOND;
 
 export const getDiffBetweenDatesInDays = (startDate, endDate) => {
@@ -17,3 +17,6 @@ export const getDiffBetweenDatesInDays = (startDate, endDate) => {
         HOURS_IN_DAY),
   );
 };
+
+export const getUTCDateString = (date) =>
+  new Date(getUTCTime(date)).toISOString().slice(0, 10);

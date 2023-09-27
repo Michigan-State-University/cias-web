@@ -1,8 +1,6 @@
 import React, { useMemo, useRef, useState } from 'react';
 import { useIntl } from 'react-intl';
-import { connect } from 'react-redux';
-import { createStructuredSelector } from 'reselect';
-import { compose } from 'redux';
+import { useSelector } from 'react-redux';
 
 import Box from 'components/Box';
 import Row from 'components/Row';
@@ -13,42 +11,51 @@ import {
   makeSelectNameQuestionExists,
   makeSelectParticipantReportQuestionExists,
   makeSelectPhoneQuestionExists,
+  makeSelectHenryFordInitialScreenExists,
 } from 'global/reducers/questions';
+import { makeSelectInterventionHfhsAccess } from 'global/reducers/intervention';
+
 import useOutsideClick from 'utils/useOutsideClick';
 import {
   AddableQuestionTypes,
   nameQuestion,
   participantReport,
   phoneQuestion,
+  henryFordInitialScreen,
+  henryFordQuestion,
 } from 'models/Session/QuestionTypes';
 import { AddableGroups } from 'models/QuestionGroup';
+import { Question } from 'models/Question';
 
 import { borders, boxShadows, colors, fontSizes } from 'theme';
 
 import { useDropdownPositionHelper } from 'utils/useDropdownPositionHelper';
 import { useChildSizeCalculator } from 'utils/useChildSizeCalculator';
+
 import DefaultButtonComponent from './DefaultButtonComponent';
 import messages from './messages';
 import NewItem from './NewItem';
+import { ConditionalAppearanceConfig } from './types';
 
-type NonReduxProps = {
+type Props = {
   onClick: (type: string) => void;
   ButtonComponent?: React.ReactNode;
 };
 
-type Props = {
-  nameQuestionExists: boolean;
-  participantReportExists: boolean;
-  phoneQuestionExists: boolean;
-} & NonReduxProps;
-
 const QuestionTypeChooser = ({
   onClick,
   ButtonComponent = DefaultButtonComponent,
-  nameQuestionExists,
-  participantReportExists,
-  phoneQuestionExists,
 }: Props) => {
+  const nameQuestionExists = useSelector(makeSelectNameQuestionExists());
+  const participantReportExists = useSelector(
+    makeSelectParticipantReportQuestionExists(),
+  );
+  const phoneQuestionExists = useSelector(makeSelectPhoneQuestionExists());
+  const henryFordInitialScreenExists = useSelector(
+    makeSelectHenryFordInitialScreenExists(),
+  );
+  const hasHfhsAccess = useSelector(makeSelectInterventionHfhsAccess());
+
   const buttonRef = useRef(null);
   const containerRef = useRef(null);
   const chooserBoxRef = useRef(null);
@@ -80,19 +87,40 @@ const QuestionTypeChooser = ({
 
   const isVisible = visible && height;
 
-  const filteredQuestions = useMemo(
-    () =>
-      AddableQuestionTypes.filter(
-        ({ id }) =>
-          !(nameQuestionExists && id === nameQuestion.id) &&
-          !(participantReportExists && id === participantReport.id) &&
-          !(phoneQuestionExists && id === phoneQuestion.id),
-      ),
+  const conditionalAppearanceConfigs: Record<
+    Question['id'],
+    ConditionalAppearanceConfig
+  > = useMemo(
+    () => ({
+      [nameQuestion.id]: {
+        disabled: nameQuestionExists,
+        disabledMessage: messages.questionAvailableOncePerSession,
+      },
+      [participantReport.id]: {
+        disabled: participantReportExists,
+        disabledMessage: messages.questionAvailableOncePerSession,
+      },
+      [phoneQuestion.id]: {
+        disabled: phoneQuestionExists,
+        disabledMessage: messages.questionAvailableOncePerSession,
+      },
+      [henryFordInitialScreen.id]: {
+        hidden: !hasHfhsAccess,
+        disabled: henryFordInitialScreenExists,
+        disabledMessage: messages.questionAvailableOncePerSession,
+      },
+      [henryFordQuestion.id]: {
+        hidden: !hasHfhsAccess,
+        disabled: !henryFordInitialScreenExists,
+        disabledMessage: messages.hfhsInitialScreenRequired,
+      },
+    }),
     [
-      AddableQuestionTypes,
       nameQuestionExists,
       participantReportExists,
       phoneQuestionExists,
+      henryFordInitialScreenExists,
+      hasHfhsAccess,
     ],
   );
 
@@ -132,13 +160,14 @@ const QuestionTypeChooser = ({
               ref={containerRef}
               horizontalFogVisible={false}
             >
-              {filteredQuestions.map(({ color, id }) => (
+              {AddableQuestionTypes.map(({ color, id }) => (
                 <NewItem
                   key={id}
                   color={color}
                   handleClick={() => handleClick(id)}
                   // @ts-ignore
                   title={formatMessage(globalMessages.questionTypes[id])}
+                  conditionalAppearanceConfig={conditionalAppearanceConfigs[id]}
                 />
               ))}
               {AddableGroups.map(({ color, id }) => (
@@ -159,14 +188,4 @@ const QuestionTypeChooser = ({
   );
 };
 
-const mapStateToProps = createStructuredSelector({
-  nameQuestionExists: makeSelectNameQuestionExists(),
-  participantReportExists: makeSelectParticipantReportQuestionExists(),
-  phoneQuestionExists: makeSelectPhoneQuestionExists(),
-});
-
-const withConnect = connect(mapStateToProps, null);
-
-export default compose(withConnect)(
-  QuestionTypeChooser,
-) as any as React.ComponentType<NonReduxProps>;
+export default QuestionTypeChooser;

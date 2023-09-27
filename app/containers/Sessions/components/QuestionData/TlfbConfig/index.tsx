@@ -19,6 +19,7 @@ import Radio from 'components/Radio';
 import Text from 'components/Text';
 import TlfbHelpingMaterials from 'components/TlfbHelpingMaterials';
 import Checkbox from 'components/Checkbox';
+import { DateRangeChooser } from 'components/DateRangeChooser';
 
 import messages from './messages';
 import {
@@ -27,7 +28,6 @@ import {
   updateDateRange,
   updateDisplayHelpingMaterials,
 } from './actions';
-import DateRangeChooser from './DateRangeChooser';
 
 export type TlfbConfigProps = {
   isNarratorTab: boolean;
@@ -120,6 +120,7 @@ const TlfbConfig = ({ editingPossible }: TlfbConfigProps) => {
           disabled={!editingPossible}
           endDate={endDate}
           startDate={startDate}
+          inputsStyles={{ width: 150 }}
         />
       )}
       <Row mt={32} mb={24} gap={16} align="center">

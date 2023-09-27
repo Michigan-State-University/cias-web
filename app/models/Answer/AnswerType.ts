@@ -14,4 +14,5 @@ export enum AnswerType {
   PARTICIPANT_REPORT = 'Answer::ParticipantReport',
   THIRD_PARTY = 'Answer::ThirdParty',
   PHONE = 'Answer::Phone',
+  HENRY_FORD = 'Answer::HenryFord',
 }

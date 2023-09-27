@@ -20,6 +20,7 @@ type FormikInputType = {
   children?: ReactElement;
   validator?: (value: string) => boolean;
   disabled?: boolean;
+  hideErrorMessages?: boolean;
 } & Record<string, unknown>;
 
 function FormikInput({
@@ -31,6 +32,7 @@ function FormikInput({
   children,
   validator,
   disabled,
+  hideErrorMessages,
   ...columnStyleProps
 }: FormikInputType) {
   const [field, meta, helper] = useField(formikKey);
@@ -59,6 +61,7 @@ function FormikInput({
       type={type}
       value={value}
       disabled={disabled}
+      hideErrorMessages={hideErrorMessages}
       {...columnStyleProps}
     >
       {children}

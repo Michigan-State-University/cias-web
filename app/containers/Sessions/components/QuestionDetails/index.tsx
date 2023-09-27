@@ -1,4 +1,4 @@
-import React, { useRef } from 'react';
+import React, { useMemo, useRef } from 'react';
 import { FormattedMessage, useIntl } from 'react-intl';
 import { useSelector } from 'react-redux';
 import { useInjectSaga } from 'redux-injectors';
@@ -33,6 +33,7 @@ import { selectInputText } from 'components/Input/utils';
 import { Button } from 'components/Button';
 import Img from 'components/Img';
 import Text from 'components/Text';
+import { HelpIconTooltip } from 'components/HelpIconTooltip';
 
 import QuestionData from '../QuestionData';
 import QuestionImage from '../QuestionImage';
@@ -44,6 +45,7 @@ import VariableInput from './VariableInput';
 import messages from './messages';
 import { AnswerInterventionContent, AnswerOuterContainer } from './styled';
 import { HIDE_NARRATOR_QUESTIONS } from './constants';
+import { variableTooltipContents } from './variableTooltipContents';
 
 export type QuestionDetailsProps = {
   changeGroupName: (name: string) => void;
@@ -80,6 +82,16 @@ const RenderQuestionDetails = ({
 
   useInjectSaga({ key: 'editQuestion', saga: editQuestionSaga });
   const animationBoundaries = useRef(null);
+
+  const variableTooltipContent = useMemo(() => {
+    if (!selectedQuestion?.type) return null;
+    try {
+      // @ts-ignore
+      return formatMessage(variableTooltipContents[selectedQuestion.type]);
+    } catch {
+      return null;
+    }
+  }, [selectedQuestion?.type]);
 
   if (!selectedQuestion || !intervention) return null;
 
@@ -194,13 +206,18 @@ const RenderQuestionDetails = ({
                   )}
                   {'variable' in body && (
                     <Row mt={10} ml={26}>
-                      <VariableInput
-                        disabled={isNameScreen}
-                        questionId={id}
-                        interventionStatus={status}
-                        isNarratorTab={isNarratorTab}
-                        variable={body.variable}
-                      />
+                      <HelpIconTooltip
+                        id="hardcoded-variable-score-info"
+                        tooltipContent={variableTooltipContent}
+                      >
+                        <VariableInput
+                          disabled={isNameScreen}
+                          questionId={id}
+                          interventionStatus={status}
+                          isNarratorTab={isNarratorTab}
+                          variable={body.variable}
+                        />
+                      </HelpIconTooltip>
                     </Row>
                   )}
                   {video && (

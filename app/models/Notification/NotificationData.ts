@@ -57,6 +57,11 @@ export type StartEditingInterventionNotificationData = {
 export type StopEditingInterventionNotificationData =
   StartEditingInterventionNotificationData;
 
+export type SensitiveDataRemovedNotificationData = {
+  interventionId: string;
+  interventionName: string;
+};
+
 // Union type
 export type NotificationData =
   | NewConversationNotificationData
@@ -68,4 +73,5 @@ export type NotificationData =
   | NewCollaboratorAddedNotificationData
   | CollaboratorRemovedNotificationData
   | StartEditingInterventionNotificationData
-  | StopEditingInterventionNotificationData;
+  | StopEditingInterventionNotificationData
+  | SensitiveDataRemovedNotificationData;

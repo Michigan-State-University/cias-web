@@ -31,6 +31,8 @@ import {
   tlfbConfig,
   tlfbEvents,
   tlfbQuestion,
+  henryFordQuestion,
+  henryFordInitialScreen,
 } from 'models/Session/QuestionTypes';
 import { GroupType } from 'models/QuestionGroup';
 import { Roles } from 'models/User/RolesManager';
@@ -39,6 +41,7 @@ import { UserInterventionStatus } from 'models/UserIntervention/StatusTypes';
 import { UserSessionStatus } from 'models/UserSession/StatusTypes';
 import { TextMessageType } from 'models/TextMessage';
 import { SharingFilter } from 'models/Intervention/SharingFilter';
+import { PhoneType, Sex } from 'models/HfhsPatient';
 
 export const scope = 'app.GlobalMessages';
 
@@ -113,6 +116,10 @@ export default defineMessages({
     emptyVariable: {
       id: `${scope}.emptyBadge`,
       defaultMessage: 'No assigned variable',
+    },
+    hfhValuePlaceholder: {
+      id: `${scope}.hfhValuePlaceholder`,
+      defaultMessage: 'Value to send to HFH',
     },
   },
   blockTypes: {
@@ -225,6 +232,14 @@ export default defineMessages({
     [tlfbQuestion.id]: {
       id: `${scope}.${tlfbQuestion.id}`,
       defaultMessage: 'TLFB Questions',
+    },
+    [henryFordQuestion.id]: {
+      id: `${scope}.${tlfbQuestion.id}`,
+      defaultMessage: 'Henry Ford Question',
+    },
+    [henryFordInitialScreen.id]: {
+      id: `${scope}.${henryFordInitialScreen.id}`,
+      defaultMessage: 'Henry Ford Initial Screen',
     },
   },
   questionGroupType: {
@@ -354,15 +369,28 @@ export default defineMessages({
       id: `${scope}.naturalNumber`,
       defaultMessage: 'Only natural number values are allowed',
     },
+    nonNegativeInteger: {
+      id: `${scope}.nonNegativeInteger`,
+      defaultMessage: 'Non-negative integer value is required',
+    },
     unreservedURLCharacters: {
       id: `${scope}.unreservedURLCharacters`,
       defaultMessage:
-        'This field contain only letters, numbers, hyphens [-], underscores [_], periods [.], and tildes [~]',
+        'This field can contain letters, numbers, hyphens [-], underscores [_], periods [.], and tildes [~] only',
+    },
+    zipCode: {
+      id: `${scope}.zipCode`,
+      defaultMessage: "ZIP Code's format is incorrect",
+    },
+    name: {
+      id: `${scope}.name`,
+      defaultMessage:
+        'This field can contain letters, hyphens [-], quotes [\'] ["] [`] and spaces [ ] only',
     },
   },
   questionRequired: {
     id: `${scope}.questionRequired`,
-    defaultMessage: `Required fields are marked with an asterisk<span style='color:${themeColors.warning};'>*</span>`,
+    defaultMessage: `Required fields are marked with an asterisk<span style="color:${themeColors.warning};">*</span>`,
   },
   dragHandle: {
     id: `${scope}.dragHandle`,
@@ -421,5 +449,74 @@ export default defineMessages({
   lastCsvDate: {
     id: `${scope}.lastCsvDate`,
     defaultMessage: 'CSV last generated at: ',
+  },
+  dontShowAgain: {
+    id: `${scope}.dontShowAgain`,
+    defaultMessage: `Don't show again`,
+  },
+  iUnderstand: {
+    id: `${scope}.iUnderstand`,
+    defaultMessage: 'I understand',
+  },
+  sex: {
+    [Sex.AMBIGUOUS]: {
+      id: `${scope}.${Sex.AMBIGUOUS}`,
+      defaultMessage: 'Ambiguous',
+    },
+    [Sex.MALE]: {
+      id: `${scope}.${Sex.MALE}`,
+      defaultMessage: 'Male',
+    },
+    [Sex.FEMALE]: {
+      id: `${scope}.${Sex.FEMALE}`,
+      defaultMessage: 'Female',
+    },
+    [Sex.NOT_APPLICABLE]: {
+      id: `${scope}.${Sex.NOT_APPLICABLE}`,
+      defaultMessage: 'Not applicable',
+    },
+    [Sex.OTHER]: {
+      id: `${scope}.${Sex.OTHER}`,
+      defaultMessage: 'Other',
+    },
+    [Sex.UNKNOWN]: {
+      id: `${scope}.${Sex.UNKNOWN}`,
+      defaultMessage: 'Unknown',
+    },
+  },
+  phoneType: {
+    [PhoneType.HOME]: {
+      id: `${scope}.${PhoneType.HOME}`,
+      defaultMessage: 'Home',
+    },
+    [PhoneType.WORK]: {
+      id: `${scope}.${PhoneType.WORK}`,
+      defaultMessage: 'Work',
+    },
+    [PhoneType.MOBILE]: {
+      id: `${scope}.${PhoneType.MOBILE}`,
+      defaultMessage: 'Mobile',
+    },
+  },
+  areYouSure: {
+    id: `${scope}.areYouSure`,
+    defaultMessage: 'Are you sure?',
+  },
+  back: {
+    id: `${scope}.back`,
+    defaultMessage: 'Back',
+  },
+  enterTextHere: {
+    id: `${scope}.enterTextHere`,
+    defaultMessage: 'Enter text here',
+  },
+  enterTextHereRichText: {
+    id: `${scope}.enterTextHereRichText`,
+    defaultMessage: 'Enter text here (rich text)',
+  },
+  dataClearedInfo: {
+    id: `${scope}.dataClearedInfo`,
+    defaultMessage:
+      'All sensitive data associated with this intervention has been removed, this includes user answers and generated report files.',
   },
 });

@@ -47,6 +47,7 @@ import {
   SET_CANCELLING_CALL_OUT,
   SET_WAITING_FOR_NAVIGATOR,
   UPDATE_CONVERSATION_TRANSCRIPT,
+  SET_HAS_ASSIGNED_NAVIGATORS,
 } from './constants';
 
 export const openConversation = createAction(
@@ -244,4 +245,10 @@ export const updateConversationTranscript = createAction(
   (action) =>
     (conversationId: string, archived: boolean, transcript: AppFile) =>
       action({ conversationId, archived, transcript }),
+);
+
+export const setHasAssignedNavigators = createAction(
+  SET_HAS_ASSIGNED_NAVIGATORS,
+  (action) => (hasAssignedNavigators: boolean) =>
+    action({ hasAssignedNavigators }),
 );

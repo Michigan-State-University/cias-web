@@ -129,7 +129,8 @@ const Modal = ({
           maxWidth={700}
           bg={colors.white}
           px={20}
-          py={20}
+          pt={20}
+          pb={20}
           overflow="auto"
           {...stylesProps}
         >
@@ -158,7 +159,7 @@ const Modal = ({
                   <ActionIcon
                     mr={0}
                     data-cy="modal-close-button"
-                    onClick={onClose}
+                    onClick={() => onClose && onClose()}
                     data-testid="close-modal-button"
                     ariaText={formatMessage(messages.closeButtonLabel)}
                   />

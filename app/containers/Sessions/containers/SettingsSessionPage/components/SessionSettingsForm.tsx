@@ -122,6 +122,7 @@ export const SessionSettingsForm: React.FC<Props> = ({
                 options={[HOURS_OPTION, MINUTES_OPTION]}
                 disabled={disabled || !values.autofinishEnabled}
                 columnStyleProps={{ mt: 20 }}
+                submitOnChange
               />
             </Row>
           </InputContainer>

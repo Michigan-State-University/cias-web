@@ -7,7 +7,11 @@ import cloneDeep from 'lodash/cloneDeep';
 import produce from 'immer';
 import isEmpty from 'lodash/isEmpty';
 
-import { assignDraftItems } from 'utils/reduxUtils';
+import {
+  assignDraftItems,
+  assignDraftItemsById,
+  updateItemById,
+} from 'utils/reduxUtils';
 import sectionReducer from 'global/reducers/reportTemplates/sectionReducer';
 import {
   FETCH_REPORT_TEMPLATES_REQUEST,
@@ -57,6 +61,21 @@ import {
   REORDER_TEMPLATE_SECTIONS_REQUEST,
   REORDER_TEMPLATE_SECTIONS_SUCCESS,
   REORDER_TEMPLATE_SECTIONS_ERROR,
+  REORDER_SECTION_CASES_REQUEST,
+  REORDER_SECTION_CASES_SUCCESS,
+  REORDER_SECTION_CASES_FAILURE,
+  DUPLICATE_REPORT_TEMPLATE_REQUEST,
+  DUPLICATE_REPORT_TEMPLATE_SUCCESS,
+  DUPLICATE_REPORT_TEMPLATE_FAILURE,
+  DELETE_COVER_LETTER_CUSTOM_LOGO_REQUEST,
+  DELETE_COVER_LETTER_CUSTOM_LOGO_SUCCESS,
+  DELETE_COVER_LETTER_CUSTOM_LOGO_FAILURE,
+  UPLOAD_REPORT_TEMPLATE_LOGO_FAILURE,
+  UPLOAD_REPORT_TEMPLATE_LOGO_SUCCESS,
+  UPLOAD_REPORT_TEMPLATE_LOGO_REQUEST,
+  UPLOAD_COVER_LETTER_CUSTOM_LOGO_REQUEST,
+  UPLOAD_COVER_LETTER_CUSTOM_LOGO_SUCCESS,
+  UPLOAD_COVER_LETTER_CUSTOM_LOGO_FAILURE,
 } from './constants';
 
 export const initialState = {
@@ -71,12 +90,17 @@ export const initialState = {
   loaders: {
     fetchReportTemplatesLoading: true,
     fetchSingleReportTemplateLoading: false,
+    duplicateReportTemplateLoading: false,
     addReportTemplateLoading: false,
     updateReportTemplateLoading: false,
     deleteReportTemplateLoading: false,
+    uploadReportTemplateLogoLoading: false,
     deleteReportTemplateLogoLoading: false,
+    uploadCoverLetterCustomLogoLoading: false,
+    deleteCoverLetterCustomLogoLoading: false,
     generateTestReportLoading: false,
     reorderSectionsLoading: false,
+    reorderCasesLoading: false,
     shouldRefetch: false,
   },
   errors: {
@@ -85,7 +109,10 @@ export const initialState = {
     addReportTemplateError: null,
     updateReportTemplateError: null,
     deleteReportTemplateError: null,
+    uploadReportTemplateLogoError: null,
     deleteReportTemplateLogoError: null,
+    uploadCoverLetterCustomLogoError: null,
+    deleteCoverLetterCustomLogoError: null,
     generateTestReportError: null,
     reorderSectionsError: null,
   },
@@ -117,6 +144,23 @@ const reportTemplatesReducer = (state = initialState, { type, payload }) =>
         draft.errors.fetchReportTemplatesError = payload;
 
         draft.reportTemplates = cloneDeep(state.cache.reportTemplates);
+        break;
+
+      case DUPLICATE_REPORT_TEMPLATE_REQUEST:
+        draft.loaders.duplicateReportTemplateLoading = true;
+        break;
+
+      case DUPLICATE_REPORT_TEMPLATE_SUCCESS:
+        draft.loaders.duplicateReportTemplateLoading = false;
+        const { reportTemplate, addToReportTemplateList } = payload;
+
+        if (addToReportTemplateList) {
+          draft.reportTemplates.push(reportTemplate);
+        }
+        break;
+
+      case DUPLICATE_REPORT_TEMPLATE_FAILURE:
+        draft.loaders.duplicateReportTemplateLoading = false;
         break;
 
       case ADD_REPORT_TEMPLATE_REQUEST:
@@ -244,6 +288,24 @@ const reportTemplatesReducer = (state = initialState, { type, payload }) =>
         break;
       }
 
+      case UPLOAD_REPORT_TEMPLATE_LOGO_REQUEST: {
+        draft.loaders.uploadReportTemplateLogoLoading = true;
+        draft.errors.uploadReportTemplateLogoError = null;
+        break;
+      }
+
+      case UPLOAD_REPORT_TEMPLATE_LOGO_SUCCESS: {
+        draft.loaders.uploadReportTemplateLogoLoading = false;
+        draft.errors.uploadReportTemplateLogoError = null;
+        break;
+      }
+
+      case UPLOAD_REPORT_TEMPLATE_LOGO_FAILURE: {
+        draft.loaders.uploadReportTemplateLogoLoading = false;
+        draft.errors.uploadReportTemplateLogoError = payload;
+        break;
+      }
+
       case DELETE_REPORT_TEMPLATE_LOGO_REQUEST: {
         draft.loaders.deleteReportTemplateLogoLoading = true;
         draft.errors.deleteReportTemplateLogoError = null;
@@ -266,6 +328,53 @@ const reportTemplatesReducer = (state = initialState, { type, payload }) =>
       case DELETE_REPORT_TEMPLATE_LOGO_FAILURE: {
         draft.loaders.deleteReportTemplateLogoLoading = false;
         draft.errors.deleteReportTemplateLogoError = payload;
+
+        draft.singleReportTemplate = cloneDeep(
+          state.cache.singleReportTemplate,
+        );
+        break;
+      }
+
+      case UPLOAD_COVER_LETTER_CUSTOM_LOGO_REQUEST: {
+        draft.loaders.uploadCoverLetterCustomLogoLoading = true;
+        draft.errors.uploadCoverLetterCustomLogoError = null;
+        break;
+      }
+
+      case UPLOAD_COVER_LETTER_CUSTOM_LOGO_SUCCESS: {
+        draft.loaders.uploadCoverLetterCustomLogoLoading = false;
+        draft.errors.uploadCoverLetterCustomLogoError = null;
+        break;
+      }
+
+      case UPLOAD_COVER_LETTER_CUSTOM_LOGO_FAILURE: {
+        draft.loaders.uploadCoverLetterCustomLogoLoading = false;
+        draft.errors.uploadCoverLetterCustomLogoError = payload;
+        break;
+      }
+
+      case DELETE_COVER_LETTER_CUSTOM_LOGO_REQUEST: {
+        draft.loaders.deleteCoverLetterCustomLogoLoading = true;
+        draft.errors.deleteCoverLetterCustomLogoError = null;
+
+        draft.singleReportTemplate.coverLetterCustomLogoUrl = null;
+        break;
+      }
+
+      case DELETE_COVER_LETTER_CUSTOM_LOGO_SUCCESS: {
+        draft.loaders.deleteCoverLetterCustomLogoLoading = false;
+        draft.errors.deleteCoverLetterCustomLogoError = null;
+
+        draft.cache.singleReportTemplate = cloneDeep(
+          state.singleReportTemplate,
+        );
+
+        break;
+      }
+
+      case DELETE_COVER_LETTER_CUSTOM_LOGO_FAILURE: {
+        draft.loaders.deleteCoverLetterCustomLogoLoading = false;
+        draft.errors.deleteCoverLetterCustomLogoError = payload;
 
         draft.singleReportTemplate = cloneDeep(
           state.cache.singleReportTemplate,
@@ -459,6 +568,46 @@ const reportTemplatesReducer = (state = initialState, { type, payload }) =>
           draft.singleReportTemplate.sections,
         );
         break;
+
+      case REORDER_SECTION_CASES_REQUEST: {
+        draft.loaders.reorderCasesLoading = true;
+        draft.loaders.updateReportTemplateLoading = true;
+
+        const { sectionId, reorderedCases } = payload;
+        updateItemById(
+          draft.singleReportTemplate.sections,
+          sectionId,
+          (section) => {
+            section.variants = reorderedCases;
+            return section;
+          },
+        );
+        break;
+      }
+      case REORDER_SECTION_CASES_SUCCESS: {
+        draft.loaders.reorderCasesLoading = false;
+        draft.loaders.updateReportTemplateLoading = false;
+
+        const { sectionId } = payload;
+        assignDraftItemsById(
+          draft.singleReportTemplate.sections,
+          draft.cache.singleReportTemplate.sections,
+          sectionId,
+        );
+        break;
+      }
+      case REORDER_SECTION_CASES_FAILURE: {
+        draft.loaders.reorderCasesLoading = false;
+        draft.loaders.updateReportTemplateLoading = false;
+
+        const { sectionId } = payload;
+        assignDraftItemsById(
+          draft.cache.singleReportTemplate.sections,
+          draft.singleReportTemplate.sections,
+          sectionId,
+        );
+        break;
+      }
     }
   });
 

@@ -28,12 +28,13 @@ const elements = {
   treeRowHeight: 80,
   chartTileWidth: 500,
   chartTileHeight: 350,
-  interventionsTileHeight: 150,
+  interventionTileHeight: 160,
   interventionLogoSize: {
     width: 100,
     height: 50,
   },
   userInterventionTileHeight: 200,
+  userSessionTileHeight: 200,
   screenSettingsWidth: 400,
   continueButtonWidth: 120,
 };

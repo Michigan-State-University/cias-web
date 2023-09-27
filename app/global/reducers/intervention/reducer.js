@@ -3,6 +3,8 @@ import set from 'lodash/set';
 import get from 'lodash/get';
 import cloneDeep from 'lodash/cloneDeep';
 
+import { SensitiveDataState } from 'models/Intervention';
+
 import {
   EDIT_SESSION_ERROR,
   EDIT_SESSION_REQUEST,
@@ -114,6 +116,10 @@ import {
   FETCH_CURRENT_USER_COLLABORATOR_DATA_REQUEST,
   FETCH_CURRENT_USER_COLLABORATOR_DATA_SUCCESS,
   FETCH_CURRENT_USER_COLLABORATOR_DATA_ERROR,
+  CLEAR_INTERVENTION_DATA_REQUEST,
+  CLEAR_INTERVENTION_DATA_SUCCESS,
+  CLEAR_INTERVENTION_DATA_ERROR,
+  ON_SENSITIVE_DATA_REMOVED_RECEIVED,
 } from './constants';
 
 export const initialState = {
@@ -157,6 +163,7 @@ export const initialState = {
     startingEditing: false,
     stoppingEditing: false,
     fetchCurrentUserCollaboratorData: false,
+    clearInterventionData: false,
   },
   errors: {
     fetchInterventionError: null,
@@ -220,14 +227,26 @@ export const interventionReducer = (state = initialState, action) =>
       case EDIT_INTERVENTION_REQUEST:
         draft.loaders.editIntervention = true;
         draft.errors.editIntervention = null;
+        const { locationIds, ...restChanges } = action.payload.intervention;
         draft.intervention = {
           ...state.intervention,
-          ...action.payload.intervention,
+          ...restChanges,
         };
+
+        if (locationIds) {
+          draft.intervention.clinicLocations = locationIds.map((id) => ({
+            id,
+          }));
+        }
+
         break;
       case EDIT_INTERVENTION_SUCCESS: {
         draft.loaders.editIntervention = false;
-        draft.cache.intervention = cloneDeep(state.intervention);
+        const { interventionId, updatedSessions } = action.payload;
+        if (updatedSessions && draft.intervention.id === interventionId) {
+          draft.intervention.sessions = updatedSessions;
+        }
+        draft.cache.intervention = cloneDeep(draft.intervention);
         break;
       }
       case EDIT_INTERVENTION_ERROR:
@@ -714,6 +733,34 @@ export const interventionReducer = (state = initialState, action) =>
         draft.loaders.stoppingEditing = false;
         draft.currentUserCollaboratorData = null;
         break;
+      }
+      case CLEAR_INTERVENTION_DATA_REQUEST: {
+        draft.loaders.clearInterventionData = true;
+        break;
+      }
+      case CLEAR_INTERVENTION_DATA_SUCCESS: {
+        const {
+          interventionId,
+          sensitiveDataState,
+          clearSensitiveDataScheduledAt,
+        } = action.payload;
+        if (draft.intervention?.id === interventionId) {
+          draft.intervention.sensitiveDataState = sensitiveDataState;
+          draft.intervention.clearSensitiveDataScheduledAt =
+            clearSensitiveDataScheduledAt;
+        }
+        draft.loaders.clearInterventionData = false;
+        break;
+      }
+      case CLEAR_INTERVENTION_DATA_ERROR: {
+        draft.loaders.clearInterventionData = false;
+        break;
+      }
+      case ON_SENSITIVE_DATA_REMOVED_RECEIVED: {
+        const { interventionId } = action.payload;
+        if (draft.intervention?.id === interventionId) {
+          draft.intervention.sensitiveDataState = SensitiveDataState.REMOVED;
+        }
       }
     }
   });

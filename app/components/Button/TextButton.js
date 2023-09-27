@@ -11,8 +11,14 @@ const DEFAULT_WIDTH = 100;
 
 const getWidth = (button) => {
   const { current } = button;
-  if (current) return current.clientWidth;
+  if (current) return current.offsetWidth;
   return DEFAULT_WIDTH;
+};
+
+const getHeight = (button) => {
+  const { current } = button;
+  if (current) return current.offsetHeight;
+  return '100%';
 };
 
 const TextButton = ({
@@ -24,6 +30,7 @@ const TextButton = ({
   loaderProps,
   spinnerProps,
   disabled,
+  outlined,
 }) => {
   const button = useRef(null);
   if (loading)
@@ -31,7 +38,7 @@ const TextButton = ({
       <Row
         className={className}
         width={getWidth(button)}
-        height="100%"
+        height={getHeight(button)}
         align="center"
         justify="center"
         {...loaderProps}
@@ -46,6 +53,7 @@ const TextButton = ({
       className={className}
       fontWeight="bold"
       onClick={onClick}
+      outlined={outlined}
       {...buttonProps}
     >
       {children}
@@ -62,6 +70,7 @@ TextButton.propTypes = {
   loaderProps: PropTypes.object,
   spinnerProps: PropTypes.object,
   disabled: PropTypes.bool,
+  outlined: PropTypes.bool,
 };
 
 export default TextButton;

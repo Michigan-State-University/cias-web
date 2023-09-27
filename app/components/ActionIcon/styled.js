@@ -1,7 +1,13 @@
 import styled, { css } from 'styled-components';
 import { Link } from 'react-router-dom';
 import { colors } from 'theme';
-import { margin, style, layout, positioning } from '../BaseComponentStyles';
+import {
+  margin,
+  style,
+  layout,
+  positioning,
+  svg,
+} from '../BaseComponentStyles';
 
 const COMMONS = css`
   height: 28px;
@@ -28,4 +34,5 @@ export const CrossButton = styled.button`
   ${layout};
   ${positioning};
   ${margin};
+  ${svg};
 `;

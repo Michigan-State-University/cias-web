@@ -12,6 +12,7 @@ import {
   MARK_REPORT_DOWNLOADED_SUCCESS,
   MARK_REPORT_DOWNLOADED_ERROR,
   MARK_REPORT_DOWNLOADED_REQUEST,
+  HENRY_FORD_HEALTH,
 } from './constants';
 
 export const initialState = {
@@ -19,7 +20,7 @@ export const initialState = {
   reportsSize: 0,
   reportsPage: 1,
   reportsSortOption: SORT_BY_LATEST,
-  reportsFilterOption: [PARTICIPANTS, THIRD_PARTY],
+  reportsFilterOption: [PARTICIPANTS, THIRD_PARTY, HENRY_FORD_HEALTH],
   loaders: {
     fetchReportsLoading: true,
     markReportDownloadedLoading: false,
