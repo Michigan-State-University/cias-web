@@ -4,9 +4,9 @@ import { useDispatch, useSelector } from 'react-redux';
 
 import globalMessages from 'global/i18n/globalMessages';
 import {
+  CreatePredefinedParticipantData,
+  createPredefinedParticipantRequest,
   makeSelectInterventionLoader,
-  sendInterventionInvitationsRequest,
-  SendInvitationsPayload,
 } from 'global/reducers/intervention';
 
 import { themeColors } from 'theme';
@@ -22,7 +22,7 @@ import {
   CreatePredefinedParticipantForm,
   Props as CreatePredefinedParticipantFormProps,
 } from './CreatePredefinedParticipantForm';
-import { prepareSendInvitationsPayload } from './utils';
+import { prepareCreatePredefinedParticipantData } from './utils';
 import messages from './messages';
 
 export type Props = {
@@ -35,7 +35,6 @@ export type Props = {
 
 export const CreatePredefinedParticipantView: FC<Props> = ({
   onBack,
-  isModularIntervention,
   isReportingIntervention,
   interventionId,
   healthClinicOptions,
@@ -44,20 +43,20 @@ export const CreatePredefinedParticipantView: FC<Props> = ({
   const dispatch = useDispatch();
 
   const submitting = useSelector(
-    makeSelectInterventionLoader('sendInterventionInvitations'),
+    makeSelectInterventionLoader('createPredefinedParticipant'),
   );
 
   const handleSubmit: CreatePredefinedParticipantFormProps['onSubmit'] = (
     values,
   ) => {
-    const invitations: SendInvitationsPayload = prepareSendInvitationsPayload(
-      values,
-      interventionId,
-    );
+    const predefinedParticipantData: CreatePredefinedParticipantData =
+      prepareCreatePredefinedParticipantData(values);
 
     dispatch(
-      sendInterventionInvitationsRequest(interventionId, invitations, () =>
-        onBack(ParticipantInvitationType.EMAIL),
+      createPredefinedParticipantRequest(
+        interventionId,
+        predefinedParticipantData,
+        () => onBack(ParticipantInvitationType.PREDEFINED),
       ),
     );
   };

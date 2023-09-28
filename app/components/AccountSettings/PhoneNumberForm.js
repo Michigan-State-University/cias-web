@@ -2,7 +2,7 @@ import React, { useEffect, useRef, useState } from 'react';
 import PropTypes from 'prop-types';
 import isEqual from 'lodash/isEqual';
 import { Formik } from 'formik';
-import parsePhoneNumber, { getCountryCallingCode } from 'libphonenumber-js';
+import { getCountryCallingCode } from 'libphonenumber-js';
 
 import ErrorAlert from 'components/ErrorAlert';
 import Row from 'components/Row';
@@ -10,6 +10,7 @@ import Column from 'components/Column';
 import {
   FormikPhoneNumberInput,
   getInitialValues,
+  getPhoneAttributes,
   phoneNumberSchema,
 } from 'components/FormikPhoneNumberInput';
 
@@ -47,13 +48,7 @@ const PhoneNumberForm = React.forwardRef(
       { number: submitNumber, iso: isoOption },
       { setSubmitting },
     ) => {
-      const prefixValue = `+${getCountryCallingCode(isoOption?.value)}`;
-      const parsedNumber = parsePhoneNumber(submitNumber, isoOption?.value);
-      const submitPayload = {
-        number: parsedNumber?.nationalNumber ?? '',
-        iso: isoOption?.value,
-        prefix: prefixValue,
-      };
+      const submitPayload = getPhoneAttributes(submitNumber, isoOption);
       const hasPhoneNumberChanged = !isEqual(
         {
           number,

@@ -7,8 +7,9 @@ import isNil from 'lodash/isNil';
 import { RoutePath } from 'global/constants';
 import globalMessages from 'global/i18n/globalMessages';
 import {
+  CreatePredefinedParticipantData,
   InterventionInvitationTargetType,
-  SendInvitationsPayload,
+  SendInterventionInvitationsData,
 } from 'global/reducers/intervention';
 
 import { parametrizeRoutePath } from 'utils/router';
@@ -17,11 +18,11 @@ import { csvEmailValidator, emailFormValidationSchema } from 'utils/validators';
 import { SelectOption } from 'components/Select/types';
 import {
   getInitialValues,
+  getPhoneAttributes,
   phoneNumberSchema,
 } from 'components/FormikPhoneNumberInput';
 
 import {
-  CreatePredefinedParticipantFormCommonValues,
   CreatePredefinedParticipantFormValues,
   InterventionTypeDependentInviteEmailParticipantsFormValues,
   InviteEmailParticipantsFormValues,
@@ -273,30 +274,15 @@ export const getInviteEmailParticipantsFormInitialValues = (
   };
 };
 
-export const getCreatePredefinedParticipantFormInitialValues = (
-  isReportingIntervention: boolean,
-): CreatePredefinedParticipantFormValues => {
-  const commonInitialValues: CreatePredefinedParticipantFormCommonValues = {
+export const getCreatePredefinedParticipantFormInitialValues =
+  (): CreatePredefinedParticipantFormValues => ({
+    healthClinicOption: null,
     firstName: '',
     lastName: '',
     email: '',
     externalId: '',
     ...getInitialValues(),
-  };
-
-  if (isReportingIntervention) {
-    return {
-      isReportingIntervention: true,
-      healthClinicOption: null,
-      ...commonInitialValues,
-    };
-  }
-
-  return {
-    isReportingIntervention: false,
-    ...commonInitialValues,
-  };
-};
+  });
 
 export const prepareUploadEmailsInitialValues = (
   parsedData: ParsedEmailsCsv,
@@ -356,7 +342,7 @@ export const prepareUploadEmailsInitialValues = (
 export const prepareSendInvitationsPayload = (
   formValues: InviteEmailParticipantsFormValues,
   interventionId: string,
-): SendInvitationsPayload => {
+): SendInterventionInvitationsData => {
   const targetId = formValues.isModularIntervention
     ? interventionId
     : formValues.sessionOption!.value;
@@ -380,4 +366,25 @@ export const prepareSendInvitationsPayload = (
     targetId,
     targetType,
   }));
+};
+
+export const prepareCreatePredefinedParticipantData = ({
+  healthClinicOption,
+  firstName,
+  lastName,
+  externalId,
+  email,
+  iso,
+  number,
+}: CreatePredefinedParticipantFormValues): CreatePredefinedParticipantData => {
+  const phoneAttributes =
+    number && iso ? getPhoneAttributes(number, iso) : null;
+  return {
+    firstName: firstName || null,
+    lastName: lastName || null,
+    healthClinicId: healthClinicOption?.value || null,
+    externalId: externalId || null,
+    email: email || null,
+    phoneAttributes,
+  };
 };

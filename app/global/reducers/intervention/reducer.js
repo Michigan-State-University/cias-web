@@ -117,12 +117,16 @@ import {
   INVITATION_LIST_ITEM_DEFAULT_STATE,
   RESEND_INTERVENTION_INVITATION_SUCCESS,
   RESEND_INTERVENTION_INVITATION_ERROR,
+  CREATE_PREDEFINED_PARTICIPANT_REQUEST,
+  CREATE_PREDEFINED_PARTICIPANT_SUCCESS,
+  CREATE_PREDEFINED_PARTICIPANT_ERROR,
 } from './constants';
 
 export const initialState = {
   currentSessionIndex: 0,
   intervention: null,
   invitations: null,
+  predefinedParticipants: null,
   invitationsStates: {},
   collaborators: [],
   currentUserCollaboratorData: null,
@@ -153,6 +157,7 @@ export const initialState = {
     stoppingEditing: false,
     fetchCurrentUserCollaboratorData: false,
     clearInterventionData: false,
+    createPredefinedParticipant: false,
   },
   errors: {
     fetchInterventionError: null,
@@ -198,6 +203,7 @@ export const interventionReducer = (state = initialState, action) =>
         draft.intervention = null;
         draft.invitations = null;
         draft.invitationsStates = {};
+        draft.predefinedParticipants = null;
         break;
       case FETCH_INTERVENTION_SUCCESS:
         draft.loaders.fetchInterventionLoading = false;
@@ -219,6 +225,7 @@ export const interventionReducer = (state = initialState, action) =>
         draft.loaders.createInterventionLoading = false;
         draft.invitations = null;
         draft.invitationsStates = {};
+        draft.predefinedParticipants = null;
         break;
       case CREATE_INTERVENTION_ERROR:
         break;
@@ -725,6 +732,26 @@ export const interventionReducer = (state = initialState, action) =>
         if (draft.intervention?.id === interventionId) {
           draft.intervention.sensitiveDataState = SensitiveDataState.REMOVED;
         }
+        break;
+      }
+
+      case CREATE_PREDEFINED_PARTICIPANT_REQUEST: {
+        draft.loaders.createPredefinedParticipant = true;
+        break;
+      }
+      case CREATE_PREDEFINED_PARTICIPANT_SUCCESS: {
+        const { predefinedParticipant } = action.payload;
+        if (draft.predefinedParticipants) {
+          draft.predefinedParticipants.push(predefinedParticipant);
+        } else {
+          draft.predefinedParticipants = [predefinedParticipant];
+        }
+        draft.loaders.createPredefinedParticipant = true;
+        break;
+      }
+      case CREATE_PREDEFINED_PARTICIPANT_ERROR: {
+        draft.loaders.createPredefinedParticipant = false;
+        break;
       }
     }
   });

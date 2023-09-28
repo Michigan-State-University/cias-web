@@ -8,6 +8,8 @@ import parsePhoneNumber, {
 } from 'libphonenumber-js';
 import { CountryCode } from 'libphonenumber-js/types';
 
+import { PhoneAttributes } from 'models/Phone';
+
 import { SelectOption } from 'components/Select/types';
 
 import messages from './messages';
@@ -93,5 +95,20 @@ export const getInitialValues = (
   return {
     number: parsedNumber ?? '',
     iso: { value: iso ?? DEFAULT_COUNTRY_CODE, label: '' },
+  };
+};
+
+export const getPhoneAttributes = (
+  number: Nullable<string>,
+  isoOption: Nullable<SelectOption<CountryCode>>,
+): PhoneAttributes => {
+  const prefixValue = isoOption
+    ? `+${getCountryCallingCode(isoOption?.value)}`
+    : '';
+  const parsedNumber = parsePhoneNumber(number ?? '', isoOption?.value);
+  return {
+    number: (parsedNumber?.nationalNumber as string) ?? '',
+    iso: isoOption?.value,
+    prefix: prefixValue,
   };
 };

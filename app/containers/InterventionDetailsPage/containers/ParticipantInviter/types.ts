@@ -57,16 +57,8 @@ export type InviteEmailParticipantsFormValues =
   InterventionTypeDependentInviteEmailParticipantsFormValues &
     ReportingDependentInviteEmailParticipantsFormValues;
 
-export type NonReportingInterventionCreatePredefinedParticipantFormValues = {
-  isReportingIntervention: false;
-};
-
-export type ReportingInterventionCreatePredefinedParticipantFormValues = {
-  isReportingIntervention: true;
+export type CreatePredefinedParticipantFormValues = {
   healthClinicOption: Nullable<SelectOption<string>>;
-};
-
-export type CreatePredefinedParticipantFormCommonValues = {
   firstName: string;
   lastName: string;
   email: string;
@@ -74,12 +66,6 @@ export type CreatePredefinedParticipantFormCommonValues = {
   iso: Nullable<SelectOption<CountryCode>>;
   number: string;
 };
-
-export type CreatePredefinedParticipantFormValues = (
-  | NonReportingInterventionCreatePredefinedParticipantFormValues
-  | ReportingInterventionCreatePredefinedParticipantFormValues
-) &
-  CreatePredefinedParticipantFormCommonValues;
 
 export type NormalizedSessions = Record<Session['id'], Session>;
 

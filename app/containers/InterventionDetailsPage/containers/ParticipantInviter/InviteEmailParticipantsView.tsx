@@ -6,7 +6,7 @@ import globalMessages from 'global/i18n/globalMessages';
 import {
   makeSelectInterventionLoader,
   sendInterventionInvitationsRequest,
-  SendInvitationsPayload,
+  SendInterventionInvitationsData,
 } from 'global/reducers/intervention';
 
 import Column from 'components/Column';
@@ -53,10 +53,8 @@ export const InviteEmailParticipantsView: FC<Props> = ({
   const handleSubmit: InviteEmailParticipantsFormProps['onSubmit'] = (
     values,
   ) => {
-    const invitations: SendInvitationsPayload = prepareSendInvitationsPayload(
-      values,
-      interventionId,
-    );
+    const invitations: SendInterventionInvitationsData =
+      prepareSendInvitationsPayload(values, interventionId);
 
     dispatch(
       sendInterventionInvitationsRequest(interventionId, invitations, () =>

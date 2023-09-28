@@ -158,4 +158,12 @@ export default defineMessages({
     id: `${scope}.clearInterventionDataError`,
     defaultMessage: `Couldn't clear intervention data`,
   },
+  createPredefinedParticipantSuccess: {
+    id: `${scope}.createPredefinedParticipantSuccess`,
+    defaultMessage: 'Predefined participant has been successfully created.',
+  },
+  createPredefinedParticipantError: {
+    id: `${scope}.createPredefinedParticipantError`,
+    defaultMessage: 'Unable to create predefined participant',
+  },
 });

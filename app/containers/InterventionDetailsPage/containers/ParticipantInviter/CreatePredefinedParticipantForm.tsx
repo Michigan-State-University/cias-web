@@ -39,9 +39,8 @@ export const CreatePredefinedParticipantForm: FC<Props> = ({
   const { formatMessage } = useIntl();
 
   const initialValues: CreatePredefinedParticipantFormValues = useMemo(
-    () =>
-      getCreatePredefinedParticipantFormInitialValues(isReportingIntervention),
-    [isReportingIntervention],
+    () => getCreatePredefinedParticipantFormInitialValues(),
+    [],
   );
 
   const validationSchema = useMemo(
@@ -60,7 +59,7 @@ export const CreatePredefinedParticipantForm: FC<Props> = ({
       onSubmit={onSubmit}
       enableReinitialize
     >
-      {({ isValid, handleSubmit, values }) => (
+      {({ isValid, handleSubmit }) => (
         <Form
           style={{
             height: '100%',
@@ -72,7 +71,7 @@ export const CreatePredefinedParticipantForm: FC<Props> = ({
         >
           <Column gap={16}>
             <>
-              {values.isReportingIntervention && (
+              {isReportingIntervention && (
                 <FormikSelect
                   formikKey="healthClinicOption"
                   label={formatMessage(messages.clinicSelectLabel)}

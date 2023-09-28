@@ -102,6 +102,9 @@ import {
   ON_SENSITIVE_DATA_REMOVED_RECEIVED,
   RESEND_INTERVENTION_INVITATION_SUCCESS,
   RESEND_INTERVENTION_INVITATION_ERROR,
+  CREATE_PREDEFINED_PARTICIPANT_REQUEST,
+  CREATE_PREDEFINED_PARTICIPANT_SUCCESS,
+  CREATE_PREDEFINED_PARTICIPANT_ERROR,
 } from './constants';
 
 export const fetchInterventionRequest = (id, showLoader = false) =>
@@ -441,3 +444,20 @@ export const clearInterventionDataError = () =>
   actionBuilder(CLEAR_INTERVENTION_DATA_ERROR, {});
 export const onSensitiveDataRemovedReceive = (interventionId) =>
   actionBuilder(ON_SENSITIVE_DATA_REMOVED_RECEIVED, { interventionId });
+
+export const createPredefinedParticipantRequest = (
+  interventionId,
+  predefinedParticipantData,
+  onSuccess,
+) =>
+  actionBuilder(CREATE_PREDEFINED_PARTICIPANT_REQUEST, {
+    interventionId,
+    predefinedParticipantData,
+    onSuccess,
+  });
+export const createPredefinedParticipantSuccess = (predefinedParticipant) =>
+  actionBuilder(CREATE_PREDEFINED_PARTICIPANT_SUCCESS, {
+    predefinedParticipant,
+  });
+export const createPredefinedParticipantError = () =>
+  actionBuilder(CREATE_PREDEFINED_PARTICIPANT_ERROR, {});
