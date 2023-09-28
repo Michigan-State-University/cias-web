@@ -128,6 +128,7 @@ const FinishScreenLayout = ({ formatMessage, question }: Props) => {
     }
     return RoutePath.DASHBOARD;
   };
+
   return (
     <Row mt={50} justify="center" width="100%" gap={15}>
       {isPreview && (
