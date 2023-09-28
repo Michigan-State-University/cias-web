@@ -6,6 +6,7 @@ import { toast } from 'react-toastify';
 import { formatMessage } from 'utils/intlOutsideReact';
 import { jsonApiToObject } from 'utils/jsonApiMapper';
 import objectToSnakeCase from 'utils/objectToSnakeCase';
+import { formatApiErrorMessage } from 'utils/formatApiErrorMessage';
 
 import {
   createPredefinedParticipantError,
@@ -54,7 +55,7 @@ function* createPredefinedParticipant({
     yield put(createPredefinedParticipantError());
     yield call(
       toast.error,
-      formatMessage(messages.createPredefinedParticipantError),
+      formatApiErrorMessage(error, messages.createPredefinedParticipantError),
       {
         toastId: CREATE_PREDEFINED_PARTICIPANT_ERROR,
       },

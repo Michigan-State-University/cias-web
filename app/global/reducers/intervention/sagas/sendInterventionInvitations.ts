@@ -6,6 +6,7 @@ import { toast } from 'react-toastify';
 import { formatMessage } from 'utils/intlOutsideReact';
 import { jsonApiToArray } from 'utils/jsonApiMapper';
 import objectToSnakeCase from 'utils/objectToSnakeCase';
+import { formatApiErrorMessage } from 'utils/formatApiErrorMessage';
 
 import {
   fetchUsersWithAccessRequest,
@@ -47,9 +48,13 @@ function* sendInterventionInvitations({
     }
   } catch (error) {
     yield put(sendInterventionInvitationsError());
-    yield call(toast.error, formatMessage(messages.sendInviteError), {
-      toastId: SEND_INTERVENTION_INVITATIONS_ERROR,
-    });
+    yield call(
+      toast.error,
+      formatApiErrorMessage(error, messages.sendInviteError),
+      {
+        toastId: SEND_INTERVENTION_INVITATIONS_ERROR,
+      },
+    );
   }
 }
 
