@@ -19,7 +19,7 @@ export default defineMessages({
   },
   [`viewTitle${InviteParticipantModalView.INVITE_PREDEFINED_PARTICIPANT}`]: {
     id: `${scope}.viewTitle${InviteParticipantModalView.INVITE_PREDEFINED_PARTICIPANT}`,
-    defaultMessage: 'Invite predefined participant',
+    defaultMessage: 'Create predefined participant',
   },
   [`viewTitle${InviteParticipantModalView.MANAGE_PREDEFINED_PARTICIPANT}`]: {
     id: `${scope}.viewTitle${InviteParticipantModalView.MANAGE_PREDEFINED_PARTICIPANT}`,
@@ -60,7 +60,7 @@ export default defineMessages({
   },
   inviteParticipantsButtonTitle: {
     id: `${scope}.inviteParticipantsButtonTitle`,
-    defaultMessage: `Invite {invitationType, select, ${ParticipantInvitationType.EMAIL} {e-mail} ${ParticipantInvitationType.PREDEFINED} {predefined} other {}} participants`,
+    defaultMessage: `{invitationType, select, ${ParticipantInvitationType.EMAIL} {Invite e-mail participants} ${ParticipantInvitationType.PREDEFINED} {Create predefined participant} other {}}`,
   },
   backButtonTitle: {
     id: `${scope}.backButtonTitle`,

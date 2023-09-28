@@ -15,6 +15,7 @@ import {
 } from './types';
 import messages from './messages';
 import { EmailParticipantsTab } from './EmailParticipantsTab';
+import { PredefinedParticipantsTab } from './PredefinedParticipantsTab';
 
 export type Props = {
   isModularIntervention: boolean;
@@ -81,7 +82,16 @@ export const ParticipantListView: FC<Props> = ({
           />
         </div>
         {/* @ts-ignore */}
-        <div label={formatMessage(messages.predefinedParticipants)}></div>
+        <div label={formatMessage(messages.predefinedParticipants)}>
+          <PredefinedParticipantsTab
+            interventionId={interventionId}
+            isModularIntervention={isModularIntervention}
+            isReportingIntervention={isReportingIntervention}
+            normalizedSessions={normalizedSessions}
+            normalizedHealthClinicsInfos={normalizedHealthClinicsInfos}
+            onInvite={onInvite}
+          />
+        </div>
       </Tabs>
       {invitingPossible && (
         <CopyLinkForm
