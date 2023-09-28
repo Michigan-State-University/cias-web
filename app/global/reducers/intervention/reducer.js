@@ -746,7 +746,7 @@ export const interventionReducer = (state = initialState, action) =>
         } else {
           draft.predefinedParticipants = [predefinedParticipant];
         }
-        draft.loaders.createPredefinedParticipant = true;
+        draft.loaders.createPredefinedParticipant = false;
         break;
       }
       case CREATE_PREDEFINED_PARTICIPANT_ERROR: {
