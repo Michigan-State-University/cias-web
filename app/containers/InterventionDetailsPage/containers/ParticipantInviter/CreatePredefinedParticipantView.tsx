@@ -56,6 +56,7 @@ export const CreatePredefinedParticipantView: FC<Props> = ({
       createPredefinedParticipantRequest(
         interventionId,
         predefinedParticipantData,
+        // TODO https://htdevelopers.atlassian.net/browse/CIAS30-3642 open manage participant page after creation
         () => onBack(ParticipantInvitationType.PREDEFINED),
       ),
     );
