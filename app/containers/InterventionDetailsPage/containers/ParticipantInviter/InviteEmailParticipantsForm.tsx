@@ -16,7 +16,7 @@ import Icon from 'components/Icon';
 import messages from './messages';
 import {
   createInviteEmailsParticipantsFormSchema,
-  getInterventionTypeDependedInitialValues,
+  getInviteEmailParticipantsFormInitialValues,
 } from './utils';
 import {
   InviteEmailParticipantsFormValues,
@@ -51,27 +51,17 @@ export const InviteEmailParticipantsForm: FC<Props> = ({
 
   const initialValues: InviteEmailParticipantsFormValues = useMemo(() => {
     if (initialFormValues) return initialFormValues;
-
-    const interventionDependentFormValues =
-      getInterventionTypeDependedInitialValues(
-        isModularIntervention,
-        sessionOptions[0],
-      );
-
-    if (isReportingIntervention) {
-      return {
-        isReportingIntervention: true,
-        clinics: [{ healthClinicOption: null, emails: [] }],
-        ...interventionDependentFormValues,
-      };
-    }
-
-    return {
-      isReportingIntervention: false,
-      emails: [],
-      ...interventionDependentFormValues,
-    };
-  }, [initialFormValues]);
+    return getInviteEmailParticipantsFormInitialValues(
+      isModularIntervention,
+      sessionOptions[0],
+      isReportingIntervention,
+    );
+  }, [
+    initialFormValues,
+    isModularIntervention,
+    sessionOptions,
+    isReportingIntervention,
+  ]);
 
   const validationSchema = useMemo(
     () =>

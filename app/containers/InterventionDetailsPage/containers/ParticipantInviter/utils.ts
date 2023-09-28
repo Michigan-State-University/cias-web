@@ -12,16 +12,22 @@ import {
 } from 'global/reducers/intervention';
 
 import { parametrizeRoutePath } from 'utils/router';
-import { csvEmailValidator } from 'utils/validators';
+import { csvEmailValidator, emailFormValidationSchema } from 'utils/validators';
 
 import { SelectOption } from 'components/Select/types';
+import {
+  getInitialValues,
+  phoneNumberSchema,
+} from 'components/FormikPhoneNumberInput';
 
 import {
-  InterventionTypeDependentFormValues,
+  CreatePredefinedParticipantFormCommonValues,
+  CreatePredefinedParticipantFormValues,
+  InterventionTypeDependentInviteEmailParticipantsFormValues,
   InviteEmailParticipantsFormValues,
   NormalizedHealthClinicsInfos,
   ParsedEmailsCsv,
-  ReportingInterventionFormValues,
+  ReportingInterventionInviteEmailParticipantsFormValues,
   UploadedEmailsCsvData,
 } from './types';
 import messages from './messages';
@@ -103,7 +109,9 @@ export const createInviteEmailsParticipantsFormSchema = (
         UNIQUE_CLINICS_METHOD,
         message,
         // eslint-disable-next-line func-names
-        function (list: ReportingInterventionFormValues['clinics']) {
+        function (
+          list: ReportingInterventionInviteEmailParticipantsFormValues['clinics'],
+        ) {
           const counts = countBy(
             list,
             (item) => item.healthClinicOption?.value,
@@ -179,6 +187,27 @@ export const createInviteEmailsParticipantsFormSchema = (
   });
 };
 
+export const createCreatePredefinedParticipantFormSchema = (
+  formatMessage: IntlShape['formatMessage'],
+  isReportingIntervention: boolean,
+) =>
+  Yup.object()
+    .shape({
+      ...(isReportingIntervention
+        ? {
+            healthClinicOption: Yup.object()
+              .required(
+                // @ts-ignore
+                formatMessage(globalMessages.validators.required),
+              )
+              .nullable(),
+          }
+        : {}),
+      email: emailFormValidationSchema,
+    })
+    // @ts-ignore
+    .concat(phoneNumberSchema(formatMessage, false, true));
+
 export const parseEmailsCsv = (
   data: UploadedEmailsCsvData,
   normalizedHealthClinicsInfos: NormalizedHealthClinicsInfos,
@@ -207,7 +236,7 @@ export const parseEmailsCsv = (
 export const getInterventionTypeDependedInitialValues = (
   isModularIntervention: boolean,
   firstSessionOption: Nullable<SelectOption<string>>,
-): InterventionTypeDependentFormValues =>
+): InterventionTypeDependentInviteEmailParticipantsFormValues =>
   isModularIntervention
     ? {
         isModularIntervention,
@@ -218,7 +247,58 @@ export const getInterventionTypeDependedInitialValues = (
         selectFirstSession: true,
       };
 
-export const prepareInitialValues = (
+export const getInviteEmailParticipantsFormInitialValues = (
+  isModularIntervention: boolean,
+  firstSessionOption: Nullable<SelectOption<string>>,
+  isReportingIntervention: boolean,
+): InviteEmailParticipantsFormValues => {
+  const interventionDependentFormValues =
+    getInterventionTypeDependedInitialValues(
+      isModularIntervention,
+      firstSessionOption,
+    );
+
+  if (isReportingIntervention) {
+    return {
+      isReportingIntervention: true,
+      clinics: [{ healthClinicOption: null, emails: [] }],
+      ...interventionDependentFormValues,
+    };
+  }
+
+  return {
+    isReportingIntervention: false,
+    emails: [],
+    ...interventionDependentFormValues,
+  };
+};
+
+export const getCreatePredefinedParticipantFormInitialValues = (
+  isReportingIntervention: boolean,
+): CreatePredefinedParticipantFormValues => {
+  const commonInitialValues: CreatePredefinedParticipantFormCommonValues = {
+    firstName: '',
+    lastName: '',
+    email: '',
+    externalId: '',
+    ...getInitialValues(),
+  };
+
+  if (isReportingIntervention) {
+    return {
+      isReportingIntervention: true,
+      healthClinicOption: null,
+      ...commonInitialValues,
+    };
+  }
+
+  return {
+    isReportingIntervention: false,
+    ...commonInitialValues,
+  };
+};
+
+export const prepareUploadEmailsInitialValues = (
   parsedData: ParsedEmailsCsv,
   isReportingIntervention: boolean,
   isModularIntervention: boolean,

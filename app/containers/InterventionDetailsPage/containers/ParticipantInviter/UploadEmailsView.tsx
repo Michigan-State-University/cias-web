@@ -34,7 +34,7 @@ import {
 import messages from './messages';
 import {
   parseEmailsCsv,
-  prepareInitialValues,
+  prepareUploadEmailsInitialValues,
   prepareSendInvitationsPayload,
 } from './utils';
 
@@ -106,7 +106,7 @@ export const UploadEmailsView: FC<Props> = ({
       isReportingIntervention,
     );
 
-    const newInitialFormValues = prepareInitialValues(
+    const newInitialFormValues = prepareUploadEmailsInitialValues(
       parsedData,
       isReportingIntervention,
       isModularIntervention,
@@ -145,8 +145,8 @@ export const UploadEmailsView: FC<Props> = ({
       </Row>
       {initialFormValues && (
         <>
-          <Text mt={24}>{formatMessage(globalMessages.requiredFields)}</Text>
-          <Column mt={24} flex={1}>
+          <Text my={24}>{formatMessage(globalMessages.requiredFields)}</Text>
+          <Column flex={1}>
             <InviteEmailParticipantsForm
               initialFormValues={initialFormValues}
               isModularIntervention={isModularIntervention}

@@ -27,6 +27,7 @@ import { ParticipantListView } from './ParticipantListView';
 import { InviteEmailParticipantsView } from './InviteEmailParticipantsView';
 import { UploadEmailsView } from './UploadEmailsView';
 import messages from './messages';
+import { CreatePredefinedParticipantView } from './CreatePredefinedParticipantView';
 
 export type Props = {
   interventionId: string;
@@ -147,9 +148,6 @@ export const InviteParticipantsModalContent: FC<Props> = ({
     if (invitationType === ParticipantInvitationType.EMAIL) {
       setCurrentView(InviteParticipantModalView.PARTICIPANT_LIST);
     } else if (invitationType === ParticipantInvitationType.PREDEFINED) {
-      setActiveParticipantListViewTab(
-        formatMessage(messages.predefinedParticipantsTab),
-      );
       setCurrentView(InviteParticipantModalView.PARTICIPANT_LIST);
     }
   };
@@ -190,6 +188,16 @@ export const InviteParticipantsModalContent: FC<Props> = ({
               healthClinicOptions={healthClinicOptions}
               onBack={handleBack}
               normalizedHealthClinicsInfos={normalizedHealthClinicsInfos}
+            />
+          )}
+          {currentView ===
+            InviteParticipantModalView.INVITE_PREDEFINED_PARTICIPANT && (
+            <CreatePredefinedParticipantView
+              isModularIntervention={isModularIntervention}
+              isReportingIntervention={isReportingIntervention}
+              interventionId={interventionId}
+              healthClinicOptions={healthClinicOptions}
+              onBack={handleBack}
             />
           )}
           {currentView === InviteParticipantModalView.UPLOAD_EMAILS && (

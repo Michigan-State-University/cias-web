@@ -64,7 +64,7 @@ export default defineMessages({
   },
   backButtonTitle: {
     id: `${scope}.backButtonTitle`,
-    defaultMessage: `Back to {invitationType, select, ${ParticipantInvitationType.EMAIL} {e-mail} ${ParticipantInvitationType.PREDEFINED} {predefined} other {}} participants`,
+    defaultMessage: `Back to {invitationType, select, ${ParticipantInvitationType.EMAIL} {e-mail} ${ParticipantInvitationType.PREDEFINED} {predefined} other {}} participants list`,
   },
   emailParticipantsTab: {
     id: `${scope}.emailParticipantsTab`,
@@ -77,6 +77,10 @@ export default defineMessages({
   inviteEmailParticipantSubmitButtonTitle: {
     id: `${scope}.inviteEmailParticipantSubmitButtonTitle`,
     defaultMessage: `Send invitations`,
+  },
+  createPredefinedParticipantSubmitButtonTitle: {
+    id: `${scope}.createPredefinedParticipantSubmitButtonTitle`,
+    defaultMessage: `Create participant`,
   },
   invitingEmailsParticipantsNotPossibleMessage: {
     id: `${scope}.invitingEmailsParticipantsNotPossibleMessage`,
@@ -161,5 +165,41 @@ export default defineMessages({
   selectFirstSession: {
     id: `${scope}.selectFirstSession`,
     defaultMessage: 'Invite to the default intervention starting point',
+  },
+  predefinedParticipantsInfo: {
+    id: `${scope}.predefinedParticipantsInfo`,
+    defaultMessage: `For security reasons, predefined participants won't see Participant Report screen, thus receive PDF reports.`,
+  },
+  firstNameInputLabel: {
+    id: `${scope}.firstNameInputLabel`,
+    defaultMessage: `First name`,
+  },
+  firstNameInputPlaceholder: {
+    id: `${scope}.firstNameInputPlaceholder`,
+    defaultMessage: `Enter participant first name`,
+  },
+  lastNameInputLabel: {
+    id: `${scope}.lastNameInputLabel`,
+    defaultMessage: `Last name`,
+  },
+  lastNameInputPlaceholder: {
+    id: `${scope}.lastNameInputPlaceholder`,
+    defaultMessage: `Enter participant last name`,
+  },
+  emailInputLabel: {
+    id: `${scope}.emailInputLabel`,
+    defaultMessage: `E-mail`,
+  },
+  emailInputPlaceholder: {
+    id: `${scope}.emailInputPlaceholder`,
+    defaultMessage: `Enter participant e-mail`,
+  },
+  externalIdInputLabel: {
+    id: `${scope}.externalIdInputLabel`,
+    defaultMessage: `Participant ID`,
+  },
+  externalIdInputPlaceholder: {
+    id: `${scope}.externalIdInputPlaceholder`,
+    defaultMessage: `Enter participant ID`,
   },
 });
