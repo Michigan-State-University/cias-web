@@ -41,7 +41,7 @@ function* createPredefinedParticipant({
     );
     yield put(createPredefinedParticipantSuccess(predefinedParticipant));
     yield call(
-      toast.info,
+      toast.success,
       formatMessage(messages.createPredefinedParticipantSuccess),
       {
         toastId: CREATE_PREDEFINED_PARTICIPANT_SUCCESS,
