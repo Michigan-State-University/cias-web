@@ -1,39 +1,17 @@
-import { FC, useEffect, useMemo } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
-import groupBy from 'lodash/groupBy';
+import { FC } from 'react';
 
-import Loader from 'components/Loader';
 import Column from 'components/Column';
 import Row from 'components/Row';
-import Box from 'components/Box';
 
 import { NoParticipantsInfo } from './NoParticipantsInfo';
-import {
-  NormalizedHealthClinicsInfos,
-  NormalizedSessions,
-  ParticipantInvitationType,
-} from './types';
+import { ParticipantInvitationType } from './types';
 import { InviteParticipantsButton } from './InviteParticipantsButton';
-import { EmailParticipantsTable } from './EmailParticipantsTable';
-import { HealthClinicCollapse } from './HealthClinicCollapse';
 
 export type Props = {
-  interventionId: string;
-  isModularIntervention: boolean;
-  isReportingIntervention: boolean;
-  normalizedSessions: NormalizedSessions;
-  normalizedHealthClinicsInfos: NormalizedHealthClinicsInfos;
   onInvite: (invitationType: ParticipantInvitationType) => void;
 };
 
-export const PredefinedParticipantsTab: FC<Props> = ({
-  interventionId,
-  isModularIntervention,
-  isReportingIntervention,
-  normalizedSessions,
-  normalizedHealthClinicsInfos,
-  onInvite,
-}) => {
+export const PredefinedParticipantsTab: FC<Props> = ({ onInvite }) => {
   const predefinedParticipants = [];
 
   if (!predefinedParticipants?.length) {
