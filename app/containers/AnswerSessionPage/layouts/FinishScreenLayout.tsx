@@ -126,6 +126,7 @@ const FinishScreenLayout = ({ formatMessage, question }: Props) => {
           </Button>
         </StyledLink>
       )}
+      {/* TODO https://htdevelopers.atlassian.net/browse/CIAS30-3705 redirect predefined user to USER_INTERVENTION page */}
       <StyledLink to={isPreview ? '#' : RoutePath.DASHBOARD}>
         <Button
           onClick={isPreview ? closeCurrentTab : undefined}

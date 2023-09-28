@@ -14,13 +14,17 @@ import Divider from 'components/Divider';
 import Icon from 'components/Icon';
 
 import messages from './messages';
-import { createInviteEmailsParticipantsFormSchema } from './utils';
+import {
+  createInviteEmailsParticipantsFormSchema,
+  getInterventionTypeDependedInitialValues,
+} from './utils';
 import {
   InviteEmailParticipantsFormValues,
   NormalizedHealthClinicsInfos,
 } from './types';
 import { TEXT_BUTTON_PROPS } from './constants';
 import { HealthClinicCollapse } from './HealthClinicCollapse';
+import { SelectSessionControls } from './SelectSessionControls';
 
 export type Props = {
   isModularIntervention: boolean;
@@ -47,17 +51,25 @@ export const InviteEmailParticipantsForm: FC<Props> = ({
 
   const initialValues: InviteEmailParticipantsFormValues = useMemo(() => {
     if (initialFormValues) return initialFormValues;
+
+    const interventionDependentFormValues =
+      getInterventionTypeDependedInitialValues(
+        isModularIntervention,
+        sessionOptions[0],
+      );
+
     if (isReportingIntervention) {
       return {
         isReportingIntervention: true,
-        sessionOption: null,
         clinics: [{ healthClinicOption: null, emails: [] }],
+        ...interventionDependentFormValues,
       };
     }
+
     return {
       isReportingIntervention: false,
-      sessionOption: null,
       emails: [],
+      ...interventionDependentFormValues,
     };
   }, [initialFormValues]);
 
@@ -89,21 +101,12 @@ export const InviteEmailParticipantsForm: FC<Props> = ({
           }}
         >
           <Column>
-            {!isModularIntervention && (
-              <>
-                <FormikSelect
-                  formikKey="sessionOption"
-                  label={formatMessage(messages.sessionSelectLabel)}
-                  inputProps={{
-                    placeholder: formatMessage(
-                      messages.sessionSelectPlaceholder,
-                    ),
-                  }}
-                  options={sessionOptions}
-                  required
-                />
-                {isReportingIntervention && <Divider mt={16} />}
-              </>
+            {!values.isModularIntervention && (
+              <SelectSessionControls
+                selectFirstSessionFormikKey="selectFirstSession"
+                sessionOptionFormikKey="sessionOption"
+                sessionOptions={sessionOptions}
+              />
             )}
             {!values.isReportingIntervention && (
               <FormikEmailsInput
@@ -116,73 +119,78 @@ export const InviteEmailParticipantsForm: FC<Props> = ({
               />
             )}
             {values.isReportingIntervention && (
-              <FieldArray name="clinics">
-                {({ push, remove }) => (
-                  <Column>
-                    {values.clinics.map((clinic, index) => (
-                      <>
-                        <HealthClinicCollapse
-                          healthClinicInfo={
-                            clinic.healthClinicOption
-                              ? normalizedHealthClinicsInfos[
-                                  clinic.healthClinicOption?.value
-                                ]
-                              : null
-                          }
-                          openedInitially
-                        >
-                          <Column gap={16} pb={16}>
-                            <FormikSelect
-                              formikKey={`clinics.${index}.healthClinicOption`}
-                              label={formatMessage(messages.clinicSelectLabel)}
-                              inputProps={{
-                                placeholder: formatMessage(
-                                  messages.clinicSelectPlaceholder,
-                                ),
-                                isClearable: true,
-                              }}
-                              options={healthClinicOptions}
-                              required
-                            />
-                            <FormikEmailsInput
-                              formikKey={`clinics.${index}.emails`}
-                              label={formatMessage(messages.emailsInputLabel)}
-                              placeholder={formatMessage(
-                                messages.emailsInputPlaceholder,
+              <>
+                <Divider mt={16} />
+                <FieldArray name="clinics">
+                  {({ push, remove }) => (
+                    <Column>
+                      {values.clinics.map((clinic, index) => (
+                        <>
+                          <HealthClinicCollapse
+                            healthClinicInfo={
+                              clinic.healthClinicOption
+                                ? normalizedHealthClinicsInfos[
+                                    clinic.healthClinicOption?.value
+                                  ]
+                                : null
+                            }
+                            openedInitially
+                          >
+                            <Column gap={16} pb={16}>
+                              <FormikSelect
+                                formikKey={`clinics.${index}.healthClinicOption`}
+                                label={formatMessage(
+                                  messages.clinicSelectLabel,
+                                )}
+                                inputProps={{
+                                  placeholder: formatMessage(
+                                    messages.clinicSelectPlaceholder,
+                                  ),
+                                  isClearable: true,
+                                }}
+                                options={healthClinicOptions}
+                                required
+                              />
+                              <FormikEmailsInput
+                                formikKey={`clinics.${index}.emails`}
+                                label={formatMessage(messages.emailsInputLabel)}
+                                placeholder={formatMessage(
+                                  messages.emailsInputPlaceholder,
+                                )}
+                                transparent
+                                required
+                              />
+                              {index !== 0 && (
+                                <Row>
+                                  <TextButton
+                                    onClick={() => remove(index)}
+                                    buttonProps={TEXT_BUTTON_PROPS}
+                                  >
+                                    {formatMessage(
+                                      messages.removeClinicButtonTitle,
+                                    )}
+                                  </TextButton>
+                                </Row>
                               )}
-                              transparent
-                              required
-                            />
-                            {index !== 0 && (
-                              <Row>
-                                <TextButton
-                                  onClick={() => remove(index)}
-                                  buttonProps={TEXT_BUTTON_PROPS}
-                                >
-                                  {formatMessage(
-                                    messages.removeClinicButtonTitle,
-                                  )}
-                                </TextButton>
-                              </Row>
-                            )}
-                          </Column>
-                        </HealthClinicCollapse>
-                      </>
-                    ))}
-                    <Row mt={16}>
-                      <TextButton
-                        onClick={() =>
-                          push({ healthClinicOption: null, emails: [] })
-                        }
-                        buttonProps={TEXT_BUTTON_PROPS}
-                      >
-                        <Icon src={AddSign} />
-                        {formatMessage(messages.addClinicButtonTitle)}
-                      </TextButton>
-                    </Row>
-                  </Column>
-                )}
-              </FieldArray>
+                            </Column>
+                          </HealthClinicCollapse>
+                        </>
+                      ))}
+                      <Row mt={16}>
+                        <TextButton
+                          onClick={() =>
+                            push({ healthClinicOption: null, emails: [] })
+                          }
+                          buttonProps={TEXT_BUTTON_PROPS}
+                        >
+                          <Icon src={AddSign} />
+                          {formatMessage(messages.addClinicButtonTitle)}
+                        </TextButton>
+                      </Row>
+                    </Column>
+                  )}
+                </FieldArray>
+              </>
             )}
           </Column>
           <Row justify="end">

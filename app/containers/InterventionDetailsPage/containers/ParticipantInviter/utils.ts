@@ -13,7 +13,11 @@ import {
 
 import { parametrizeRoutePath } from 'utils/router';
 import { csvEmailValidator } from 'utils/validators';
+
+import { SelectOption } from 'components/Select/types';
+
 import {
+  InterventionTypeDependentFormValues,
   InviteEmailParticipantsFormValues,
   NormalizedHealthClinicsInfos,
   ParsedEmailsCsv,
@@ -200,16 +204,39 @@ export const parseEmailsCsv = (
     })
     .filter(Boolean) as ParsedEmailsCsv;
 
+export const getInterventionTypeDependedInitialValues = (
+  isModularIntervention: boolean,
+  firstSessionOption: Nullable<SelectOption<string>>,
+): InterventionTypeDependentFormValues =>
+  isModularIntervention
+    ? {
+        isModularIntervention,
+      }
+    : {
+        isModularIntervention,
+        sessionOption: firstSessionOption ?? null,
+        selectFirstSession: true,
+      };
+
 export const prepareInitialValues = (
   parsedData: ParsedEmailsCsv,
   isReportingIntervention: boolean,
+  isModularIntervention: boolean,
   normalizedHealthClinicsInfos: NormalizedHealthClinicsInfos,
+  firstSessionOption: Nullable<SelectOption<string>>,
 ): InviteEmailParticipantsFormValues => {
+  const interventionDependentFormValues =
+    getInterventionTypeDependedInitialValues(
+      isModularIntervention,
+      firstSessionOption,
+    );
+
   if (!isReportingIntervention) {
+    const emails = parsedData.map((item) => item.email);
     return {
       isReportingIntervention: false,
-      sessionOption: null,
-      emails: parsedData.map((item) => item.email),
+      emails,
+      ...interventionDependentFormValues,
     };
   }
 
@@ -217,23 +244,24 @@ export const prepareInitialValues = (
     groupBy(parsedData, 'healthClinicId'),
   );
 
-  const reportingInterventionInitialValues: ReportingInterventionFormValues = {
-    isReportingIntervention: true,
-    sessionOption: null,
-    clinics: emailsGroupedByHealthClinic.map(
-      ([healthClinicId, healthClinicItems]) => {
-        const { healthClinicName, healthSystemName } =
-          normalizedHealthClinicsInfos[healthClinicId] ?? {};
-        return {
-          healthClinicOption: {
-            value: healthClinicId,
-            label: `${healthClinicName} (${healthSystemName})`,
-          },
-          emails: healthClinicItems.map(({ email }) => email),
-        };
-      },
-    ),
-  };
+  const reportingInterventionInitialValues: InviteEmailParticipantsFormValues =
+    {
+      ...interventionDependentFormValues,
+      isReportingIntervention: true,
+      clinics: emailsGroupedByHealthClinic.map(
+        ([healthClinicId, healthClinicItems]) => {
+          const { healthClinicName, healthSystemName } =
+            normalizedHealthClinicsInfos[healthClinicId] ?? {};
+          return {
+            healthClinicOption: {
+              value: healthClinicId,
+              label: `${healthClinicName} (${healthSystemName})`,
+            },
+            emails: healthClinicItems.map(({ email }) => email),
+          };
+        },
+      ),
+    };
 
   if (!reportingInterventionInitialValues.clinics.length) {
     reportingInterventionInitialValues.clinics.push({
@@ -247,13 +275,12 @@ export const prepareInitialValues = (
 
 export const prepareSendInvitationsPayload = (
   formValues: InviteEmailParticipantsFormValues,
-  isModularIntervention: boolean,
   interventionId: string,
 ): SendInvitationsPayload => {
-  const targetId = isModularIntervention
+  const targetId = formValues.isModularIntervention
     ? interventionId
     : formValues.sessionOption!.value;
-  const targetType = isModularIntervention
+  const targetType = formValues.isModularIntervention
     ? InterventionInvitationTargetType.INTERVENTION
     : InterventionInvitationTargetType.SESSION;
 
