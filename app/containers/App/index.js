@@ -26,6 +26,7 @@ import {
   NAVIGATION,
   navbarNames,
   PasswordAuthenticatedRoles,
+  AuthenticatedRoles,
 } from 'models/User/RolesManager';
 import RolesManagerContext from 'models/User/RolesManager/RolesManagerContext';
 import rootSaga from 'global/sagas/rootSaga';
@@ -150,7 +151,12 @@ export function App({ user, fetchSelfDetails }) {
     if (user) {
       if (arraysOverlap(user.roles, [Roles.Admin, Roles.Researcher]))
         return <InterventionPage />;
-      if (arraysOverlap(user.roles, [Roles.Participant]))
+      if (
+        arraysOverlap(user.roles, [
+          Roles.Participant,
+          Roles.PredefinedParticipant,
+        ])
+      )
         return <ParticipantInterventionsPage />;
       if (arraysOverlap(user.roles, [Roles.ThirdParty]))
         return <GeneratedReportsPage disableFilter />;
@@ -170,8 +176,6 @@ export function App({ user, fetchSelfDetails }) {
         return <ClinicAdminRedirectPage />;
       if (arraysOverlap(user.roles, [Roles.Navigator]))
         return <Redirect to={{ pathname: RoutePath.INBOX, search }} />;
-      if (arraysOverlap(user.roles, [Roles.PredefinedParticipant]))
-        return <Redirect to={{ pathname: RoutePath.LOGOUT }} />;
 
       return NotFoundPage;
     }
@@ -212,10 +216,7 @@ export function App({ user, fetchSelfDetails }) {
           path={RoutePath.DASHBOARD}
           render={() => renderDashboardByRole()}
           protectedRoute
-          allowedRoles={[
-            ...PasswordAuthenticatedRoles,
-            Roles.PredefinedParticipant,
-          ]}
+          allowedRoles={AuthenticatedRoles}
           navbarProps={{
             navbarId: NAVIGATION.DEFAULT,
             activeTab: interventionsTabId,
@@ -355,8 +356,6 @@ export function App({ user, fetchSelfDetails }) {
           exact
           path={RoutePath.ANSWER_SESSION}
           component={AnswerSessionPage}
-          allowedRoles={PasswordAuthenticatedRoles}
-          user
           navbarProps={{
             navbarId: NAVIGATION.DEFAULT,
             activeTab: interventionsTabId,
@@ -555,12 +554,7 @@ export function App({ user, fetchSelfDetails }) {
           path={RoutePath.ACCESSIBILITY_STATEMENT}
           component={AccessibilityStatementPage}
         />
-        <AppRoute
-          exact
-          path={RoutePath.FORBIDDEN}
-          component={ForbiddenPage}
-          allowedRoles={PasswordAuthenticatedRoles}
-        />
+        <AppRoute exact path={RoutePath.FORBIDDEN} component={ForbiddenPage} />
         <AppRoute
           exact
           path={RoutePath.VERIFY_SHORT_LINK}
