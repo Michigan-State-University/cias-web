@@ -57,7 +57,7 @@ export type InviteEmailParticipantsFormValues =
   InterventionTypeDependentInviteEmailParticipantsFormValues &
     ReportingDependentInviteEmailParticipantsFormValues;
 
-export type CreatePredefinedParticipantFormValues = {
+export type PredefinedParticipantFormValues = {
   healthClinicOption: Nullable<SelectOption<string>>;
   firstName: string;
   lastName: string;

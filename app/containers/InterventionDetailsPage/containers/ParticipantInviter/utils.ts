@@ -23,7 +23,7 @@ import {
 } from 'components/FormikPhoneNumberInput';
 
 import {
-  CreatePredefinedParticipantFormValues,
+  PredefinedParticipantFormValues,
   InterventionTypeDependentInviteEmailParticipantsFormValues,
   InviteEmailParticipantsFormValues,
   NormalizedHealthClinicsInfos,
@@ -188,7 +188,7 @@ export const createInviteEmailsParticipantsFormSchema = (
   });
 };
 
-export const createCreatePredefinedParticipantFormSchema = (
+export const createPredefinedParticipantFormSchema = (
   formatMessage: IntlShape['formatMessage'],
   isReportingIntervention: boolean,
 ) =>
@@ -274,8 +274,8 @@ export const getInviteEmailParticipantsFormInitialValues = (
   };
 };
 
-export const getCreatePredefinedParticipantFormInitialValues =
-  (): CreatePredefinedParticipantFormValues => ({
+export const getPredefinedParticipantFormInitialValues =
+  (): PredefinedParticipantFormValues => ({
     healthClinicOption: null,
     firstName: '',
     lastName: '',
@@ -376,7 +376,7 @@ export const prepareCreatePredefinedParticipantData = ({
   email,
   iso,
   number,
-}: CreatePredefinedParticipantFormValues): CreatePredefinedParticipantData => {
+}: PredefinedParticipantFormValues): CreatePredefinedParticipantData => {
   const phoneAttributes =
     number && iso ? getPhoneAttributes(number, iso) : null;
   return {

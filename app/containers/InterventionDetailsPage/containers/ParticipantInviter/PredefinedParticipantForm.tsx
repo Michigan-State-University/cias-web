@@ -12,10 +12,10 @@ import FormikInput from 'components/FormikInput';
 
 import messages from './messages';
 import {
-  createCreatePredefinedParticipantFormSchema,
-  getCreatePredefinedParticipantFormInitialValues,
+  createPredefinedParticipantFormSchema,
+  getPredefinedParticipantFormInitialValues,
 } from './utils';
-import { CreatePredefinedParticipantFormValues } from './types';
+import { PredefinedParticipantFormValues } from './types';
 
 const COMMON_INPUT_PROPS = {
   inputProps: {
@@ -26,11 +26,11 @@ const COMMON_INPUT_PROPS = {
 export type Props = {
   isReportingIntervention: boolean;
   healthClinicOptions: SelectOption<string>[];
-  onSubmit: FormikConfig<CreatePredefinedParticipantFormValues>['onSubmit'];
+  onSubmit: FormikConfig<PredefinedParticipantFormValues>['onSubmit'];
   submitting: boolean;
 };
 
-export const CreatePredefinedParticipantForm: FC<Props> = ({
+export const PredefinedParticipantForm: FC<Props> = ({
   isReportingIntervention,
   healthClinicOptions,
   onSubmit,
@@ -38,14 +38,14 @@ export const CreatePredefinedParticipantForm: FC<Props> = ({
 }) => {
   const { formatMessage } = useIntl();
 
-  const initialValues: CreatePredefinedParticipantFormValues = useMemo(
-    () => getCreatePredefinedParticipantFormInitialValues(),
+  const initialValues: PredefinedParticipantFormValues = useMemo(
+    () => getPredefinedParticipantFormInitialValues(),
     [],
   );
 
   const validationSchema = useMemo(
     () =>
-      createCreatePredefinedParticipantFormSchema(
+      createPredefinedParticipantFormSchema(
         formatMessage,
         isReportingIntervention,
       ),

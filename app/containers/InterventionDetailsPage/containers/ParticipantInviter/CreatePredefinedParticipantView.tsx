@@ -19,9 +19,9 @@ import { Alert } from 'components/Alert';
 import { BackButton } from './BackButton';
 import { ParticipantInvitationType } from './types';
 import {
-  CreatePredefinedParticipantForm,
-  Props as CreatePredefinedParticipantFormProps,
-} from './CreatePredefinedParticipantForm';
+  PredefinedParticipantForm,
+  Props as PredefinedParticipantFormProps,
+} from './PredefinedParticipantForm';
 import { prepareCreatePredefinedParticipantData } from './utils';
 import messages from './messages';
 
@@ -46,9 +46,7 @@ export const CreatePredefinedParticipantView: FC<Props> = ({
     makeSelectInterventionLoader('createPredefinedParticipant'),
   );
 
-  const handleSubmit: CreatePredefinedParticipantFormProps['onSubmit'] = (
-    values,
-  ) => {
+  const handleSubmit: PredefinedParticipantFormProps['onSubmit'] = (values) => {
     const predefinedParticipantData: CreatePredefinedParticipantData =
       prepareCreatePredefinedParticipantData(values);
 
@@ -76,7 +74,7 @@ export const CreatePredefinedParticipantView: FC<Props> = ({
       />
       <Text my={24}>{formatMessage(globalMessages.requiredFields)}</Text>
       <Column flex={1}>
-        <CreatePredefinedParticipantForm
+        <PredefinedParticipantForm
           isReportingIntervention={isReportingIntervention}
           healthClinicOptions={healthClinicOptions}
           onSubmit={handleSubmit}
