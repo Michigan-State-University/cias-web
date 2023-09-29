@@ -17,12 +17,15 @@ import Box from 'components/Box';
 
 import ErrorAlert from 'components/ErrorAlert';
 import { NoParticipantsInfo } from './NoParticipantsInfo';
-import { ParticipantInvitationType } from './types';
+import { NormalizedSessions, ParticipantInvitationType } from './types';
 import { InviteParticipantsButton } from './InviteParticipantsButton';
+import { PredefinedParticipantsTable } from './PredefinedParticipantsTable';
 
 export type Props = {
   interventionId: string;
   isReportingIntervention: boolean;
+  normalizedSessions: NormalizedSessions;
+  isModularIntervention: boolean;
   onInvite: (invitationType: ParticipantInvitationType) => void;
 };
 
@@ -74,8 +77,11 @@ export const PredefinedParticipantsTab: FC<Props> = ({
         />
       </Row>
       <Box overflow="auto" maxHeight="100%">
-        {!isReportingIntervention &&
-          JSON.stringify(predefinedParticipants, null, 2)}
+        {!isReportingIntervention && (
+          <PredefinedParticipantsTable
+            predefinedParticipants={predefinedParticipants}
+          />
+        )}
       </Box>
     </Column>
   );
