@@ -4,17 +4,20 @@
  *
  */
 
-import React, { memo, useCallback, useState } from 'react';
+import React, { memo, useCallback, useMemo, useState } from 'react';
 import PropTypes from 'prop-types';
 import { injectIntl, useIntl } from 'react-intl';
 import { compose } from 'redux';
+import uniqBy from 'lodash/uniqBy';
+import flatten from 'lodash/flatten';
 
 import { NAVIGATION } from 'models/User/RolesManager/navbarNames';
+import navigationTabs from 'models/User/RolesManager/defaultNavbarTabs';
+import { useRoleManager } from 'models/User/RolesManager';
+
 import { useIsTouchScreen } from 'utils/useIsTouchScreen';
 
 import menu from 'assets/svg/triangle-back-black.svg';
-
-import { useRoleManager } from 'models/User/RolesManager';
 
 import Comment from 'components/Text/Comment';
 import { RotateIcon } from 'components/Icon/RotateIcon';
@@ -37,18 +40,32 @@ export function Sidebar({ sidebarProps }) {
 
   const { activeTab, activeSubTab, sidebarId } = sidebarProps || {};
 
+  const sidebarTabs = useMemo(
+    () =>
+      uniqBy(
+        flatten(
+          userRoles?.reduce(
+            (tabs, userRole) => [...tabs, navigationTabs[userRole]],
+            [],
+          ) || [],
+        ),
+        'id',
+      ),
+    [userRoles],
+  );
+
   const renderSidebar = useCallback(() => {
     if (sidebarId === NAVIGATION.DEFAULT)
       return (
         <DefaultSidebar
           activeTab={activeTab}
           activeSubTab={activeSubTab}
-          userRoles={userRoles}
+          sidebarTabs={sidebarTabs}
         />
       );
 
     return null;
-  }, [sidebarId, activeTab, activeSubTab, userRoles]);
+  }, [sidebarId, activeTab, activeSubTab, sidebarTabs]);
 
   const [showSidebar, setShowSidebar] = useState(false);
   const isTouchScreen = useIsTouchScreen();
@@ -62,6 +79,8 @@ export function Sidebar({ sidebarProps }) {
         onMouseLeave: () => setShowSidebar(false),
         onClick: () => setShowSidebar(false),
       };
+
+  if (!canDisplayOrganizationSidebar && !sidebarTabs.length) return null;
 
   return (
     <SidebarStyled isVisible={showSidebar} {...sidebarInteractionProps}>
