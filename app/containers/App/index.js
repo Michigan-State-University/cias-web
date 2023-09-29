@@ -417,6 +417,9 @@ export function App({ user, fetchSelfDetails }) {
           component={UserInterventionPage}
           protectedRoute
           allowedRoles={[Roles.Participant, Roles.PredefinedParticipant]}
+          navbarProps={{
+            navbarId: NAVIGATION.DEFAULT,
+          }}
         />
         <AppRoute
           exact
