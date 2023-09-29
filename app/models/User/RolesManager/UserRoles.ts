@@ -25,3 +25,10 @@ export const PasswordAuthenticatedRoles = [
   Roles.ClinicAdmin,
   Roles.Navigator,
 ];
+
+export const AuthenticatedRoles = [
+  ...PasswordAuthenticatedRoles,
+  Roles.PredefinedParticipant,
+];
+
+export const AllRoles = Object.values(Roles);

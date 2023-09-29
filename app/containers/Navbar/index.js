@@ -8,7 +8,7 @@ import React, { memo, useState, useRef, useMemo } from 'react';
 import PropTypes from 'prop-types';
 import { connect, useDispatch } from 'react-redux';
 import { createStructuredSelector } from 'reselect';
-import { FormattedMessage, injectIntl, IntlShape } from 'react-intl';
+import { FormattedMessage, injectIntl, IntlShape, useIntl } from 'react-intl';
 import { Link } from 'react-router-dom';
 import { compose } from 'redux';
 
@@ -60,6 +60,7 @@ export function Navbar({
   location,
   intl,
 }) {
+  const { formatMessage } = useIntl();
   const dispatch = useDispatch();
 
   const [menuVisible, setMenuVisible] = useState(false);
@@ -78,6 +79,13 @@ export function Navbar({
     () => getUserNavbarElements(roles),
     [roles],
   );
+
+  const displayedName = useMemo(() => {
+    if (!firstName && !lastName) {
+      return formatMessage(messages.defaultDisplayedName);
+    }
+    return `${firstName} ${lastName}`;
+  }, [firstName, lastName]);
 
   return (
     <NavbarContainer ref={navbarRef}>
@@ -129,11 +137,9 @@ export function Navbar({
               lastName={lastName}
               firstName={firstName}
             />
-            <Box
-              className="user-name-info"
-              clickable
-              data-private
-            >{`${firstName} ${lastName}`}</Box>
+            <Box className="user-name-info" clickable data-private>
+              {displayedName}
+            </Box>
           </DropDownContainer>
         </RightPanel>
       </NavbarStyled>
