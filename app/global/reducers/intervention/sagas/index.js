@@ -28,6 +28,7 @@ import changeCollaboratorSettingSaga from './changeCollaboratorSetting';
 import removeCollaboratorSaga from './removeCollaborator';
 import onCollaboratorRemovedReceiveSaga from './onCollaboratorRemovedReceive';
 import refreshInterventionDataSaga from './refreshInterventionData';
+import createPredefinedParticipantSaga from './createPredefinedParticipant';
 
 export * from './onCollaboratorRemovedReceive';
 export * from './refreshInterventionData';
@@ -63,6 +64,7 @@ export {
   fetchCollaboratorsSaga,
   changeCollaboratorSettingSaga,
   removeCollaboratorSaga,
+  createPredefinedParticipantSaga,
 };
 
 export default function* allInterventionSagas() {
@@ -94,6 +96,7 @@ export default function* allInterventionSagas() {
     removeCollaboratorSaga(),
     onCollaboratorRemovedReceiveSaga(),
     refreshInterventionDataSaga(),
+    createPredefinedParticipantSaga,
   ]);
 }
 

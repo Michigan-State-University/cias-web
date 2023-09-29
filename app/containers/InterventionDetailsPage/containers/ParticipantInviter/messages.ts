@@ -19,7 +19,7 @@ export default defineMessages({
   },
   [`viewTitle${InviteParticipantModalView.INVITE_PREDEFINED_PARTICIPANT}`]: {
     id: `${scope}.viewTitle${InviteParticipantModalView.INVITE_PREDEFINED_PARTICIPANT}`,
-    defaultMessage: 'Invite predefined participant',
+    defaultMessage: 'Create predefined participant',
   },
   [`viewTitle${InviteParticipantModalView.MANAGE_PREDEFINED_PARTICIPANT}`]: {
     id: `${scope}.viewTitle${InviteParticipantModalView.MANAGE_PREDEFINED_PARTICIPANT}`,
@@ -60,23 +60,27 @@ export default defineMessages({
   },
   inviteParticipantsButtonTitle: {
     id: `${scope}.inviteParticipantsButtonTitle`,
-    defaultMessage: `Invite {invitationType, select, ${ParticipantInvitationType.EMAIL} {e-mail} ${ParticipantInvitationType.PREDEFINED} {predefined} other {}} participants`,
+    defaultMessage: `{invitationType, select, ${ParticipantInvitationType.EMAIL} {Invite e-mail participants} ${ParticipantInvitationType.PREDEFINED} {Create predefined participant} other {}}`,
   },
   backButtonTitle: {
     id: `${scope}.backButtonTitle`,
-    defaultMessage: `Back to {invitationType, select, ${ParticipantInvitationType.EMAIL} {e-mail} ${ParticipantInvitationType.PREDEFINED} {predefined} other {}} participants`,
+    defaultMessage: `Back to {invitationType, select, ${ParticipantInvitationType.EMAIL} {e-mail} ${ParticipantInvitationType.PREDEFINED} {predefined} other {}} participants list`,
   },
-  emailParticipants: {
-    id: `${scope}.emailParticipants`,
+  emailParticipantsTab: {
+    id: `${scope}.emailParticipantsTab`,
     defaultMessage: `E-mail participants`,
   },
-  predefinedParticipants: {
-    id: `${scope}.predefinedParticipants`,
+  predefinedParticipantsTab: {
+    id: `${scope}.predefinedParticipantsTab`,
     defaultMessage: `Predefined participants`,
   },
   inviteEmailParticipantSubmitButtonTitle: {
     id: `${scope}.inviteEmailParticipantSubmitButtonTitle`,
     defaultMessage: `Send invitations`,
+  },
+  createPredefinedParticipantSubmitButtonTitle: {
+    id: `${scope}.createPredefinedParticipantSubmitButtonTitle`,
+    defaultMessage: `Create participant`,
   },
   invitingEmailsParticipantsNotPossibleMessage: {
     id: `${scope}.invitingEmailsParticipantsNotPossibleMessage`,
@@ -161,5 +165,41 @@ export default defineMessages({
   selectFirstSession: {
     id: `${scope}.selectFirstSession`,
     defaultMessage: 'Invite to the default intervention starting point',
+  },
+  predefinedParticipantsInfo: {
+    id: `${scope}.predefinedParticipantsInfo`,
+    defaultMessage: `For security reasons, predefined participants won't see Participant Report screen, thus receive PDF reports.`,
+  },
+  firstNameInputLabel: {
+    id: `${scope}.firstNameInputLabel`,
+    defaultMessage: `First name`,
+  },
+  firstNameInputPlaceholder: {
+    id: `${scope}.firstNameInputPlaceholder`,
+    defaultMessage: `Enter participant first name`,
+  },
+  lastNameInputLabel: {
+    id: `${scope}.lastNameInputLabel`,
+    defaultMessage: `Last name`,
+  },
+  lastNameInputPlaceholder: {
+    id: `${scope}.lastNameInputPlaceholder`,
+    defaultMessage: `Enter participant last name`,
+  },
+  emailInputLabel: {
+    id: `${scope}.emailInputLabel`,
+    defaultMessage: `E-mail`,
+  },
+  emailInputPlaceholder: {
+    id: `${scope}.emailInputPlaceholder`,
+    defaultMessage: `Enter participant e-mail`,
+  },
+  externalIdInputLabel: {
+    id: `${scope}.externalIdInputLabel`,
+    defaultMessage: `Participant ID`,
+  },
+  externalIdInputPlaceholder: {
+    id: `${scope}.externalIdInputPlaceholder`,
+    defaultMessage: `Enter participant ID`,
   },
 });

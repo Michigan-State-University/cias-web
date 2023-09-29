@@ -8,7 +8,7 @@ import globalMessages from 'global/i18n/globalMessages';
 import {
   makeSelectInterventionLoader,
   sendInterventionInvitationsRequest,
-  SendInvitationsPayload,
+  SendInterventionInvitationsData,
 } from 'global/reducers/intervention';
 
 import Column from 'components/Column';
@@ -34,7 +34,7 @@ import {
 import messages from './messages';
 import {
   parseEmailsCsv,
-  prepareInitialValues,
+  prepareUploadEmailsInitialValues,
   prepareSendInvitationsPayload,
 } from './utils';
 
@@ -69,10 +69,8 @@ export const UploadEmailsView: FC<Props> = ({
   const handleSubmit: InviteEmailParticipantsFormProps['onSubmit'] = (
     values,
   ) => {
-    const invitations: SendInvitationsPayload = prepareSendInvitationsPayload(
-      values,
-      interventionId,
-    );
+    const invitations: SendInterventionInvitationsData =
+      prepareSendInvitationsPayload(values, interventionId);
 
     dispatch(
       sendInterventionInvitationsRequest(interventionId, invitations, () =>
@@ -106,7 +104,7 @@ export const UploadEmailsView: FC<Props> = ({
       isReportingIntervention,
     );
 
-    const newInitialFormValues = prepareInitialValues(
+    const newInitialFormValues = prepareUploadEmailsInitialValues(
       parsedData,
       isReportingIntervention,
       isModularIntervention,
@@ -145,8 +143,8 @@ export const UploadEmailsView: FC<Props> = ({
       </Row>
       {initialFormValues && (
         <>
-          <Text mt={24}>{formatMessage(globalMessages.requiredFields)}</Text>
-          <Column mt={24} flex={1}>
+          <Text my={24}>{formatMessage(globalMessages.requiredFields)}</Text>
+          <Column flex={1}>
             <InviteEmailParticipantsForm
               initialFormValues={initialFormValues}
               isModularIntervention={isModularIntervention}

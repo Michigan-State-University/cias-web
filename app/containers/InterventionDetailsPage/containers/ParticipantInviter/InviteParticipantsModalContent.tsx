@@ -1,5 +1,6 @@
-import { FC, useEffect, useMemo } from 'react';
+import { FC, useEffect, useMemo, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
+import { useIntl } from 'react-intl';
 
 import { InterventionStatus, InterventionType } from 'models/Intervention';
 import { Session } from 'models/Session';
@@ -25,6 +26,8 @@ import {
 import { ParticipantListView } from './ParticipantListView';
 import { InviteEmailParticipantsView } from './InviteEmailParticipantsView';
 import { UploadEmailsView } from './UploadEmailsView';
+import messages from './messages';
+import { CreatePredefinedParticipantView } from './CreatePredefinedParticipantView';
 
 export type Props = {
   interventionId: string;
@@ -47,7 +50,11 @@ export const InviteParticipantsModalContent: FC<Props> = ({
   currentView,
   setCurrentView,
 }) => {
+  const { formatMessage } = useIntl();
   const dispatch = useDispatch();
+
+  const [activeParticipantListViewTab, setActiveParticipantListViewTab] =
+    useState(formatMessage(messages.emailParticipantsTab));
 
   const isModularIntervention = interventionType !== InterventionType.DEFAULT;
   const isReportingIntervention = !!organizationId;
@@ -141,7 +148,6 @@ export const InviteParticipantsModalContent: FC<Props> = ({
     if (invitationType === ParticipantInvitationType.EMAIL) {
       setCurrentView(InviteParticipantModalView.PARTICIPANT_LIST);
     } else if (invitationType === ParticipantInvitationType.PREDEFINED) {
-      // TODO open predefined participants tab
       setCurrentView(InviteParticipantModalView.PARTICIPANT_LIST);
     }
   };
@@ -168,6 +174,8 @@ export const InviteParticipantsModalContent: FC<Props> = ({
               normalizedHealthClinicsInfos={normalizedHealthClinicsInfos}
               onInvite={handleInvite}
               onUploadEmails={handleUploadEmails}
+              activeTab={activeParticipantListViewTab}
+              setActiveTab={setActiveParticipantListViewTab}
             />
           )}
           {currentView ===
@@ -180,6 +188,16 @@ export const InviteParticipantsModalContent: FC<Props> = ({
               healthClinicOptions={healthClinicOptions}
               onBack={handleBack}
               normalizedHealthClinicsInfos={normalizedHealthClinicsInfos}
+            />
+          )}
+          {currentView ===
+            InviteParticipantModalView.INVITE_PREDEFINED_PARTICIPANT && (
+            <CreatePredefinedParticipantView
+              isModularIntervention={isModularIntervention}
+              isReportingIntervention={isReportingIntervention}
+              interventionId={interventionId}
+              healthClinicOptions={healthClinicOptions}
+              onBack={handleBack}
             />
           )}
           {currentView === InviteParticipantModalView.UPLOAD_EMAILS && (

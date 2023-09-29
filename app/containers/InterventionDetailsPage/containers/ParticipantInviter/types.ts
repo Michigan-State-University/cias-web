@@ -1,7 +1,8 @@
 import { Session } from 'models/Session';
+import { HealthClinic } from 'models/Organization';
 
 import { SelectOption } from 'components/Select/types';
-import { HealthClinic } from '../../../../models/Organization';
+import { CountryCode } from 'libphonenumber-js/types';
 
 export enum InviteParticipantModalView {
   PARTICIPANT_LIST = 'PARTICIPANT_LIST',
@@ -21,26 +22,26 @@ export type CopyLinkFormValues = {
   healthClinicOption: Nullable<SelectOption<string>>;
 };
 
-export type SequentialInterventionFormValues = {
+export type SequentialInterventionInviteEmailParticipantsFormValues = {
   isModularIntervention: false;
   selectFirstSession: boolean;
   sessionOption: Nullable<SelectOption<string>>;
 };
 
-export type ModularInterventionFormValues = {
+export type ModularInterventionInviteEmailParticipantsFormValues = {
   isModularIntervention: true;
 };
 
-export type InterventionTypeDependentFormValues =
-  | SequentialInterventionFormValues
-  | ModularInterventionFormValues;
+export type InterventionTypeDependentInviteEmailParticipantsFormValues =
+  | SequentialInterventionInviteEmailParticipantsFormValues
+  | ModularInterventionInviteEmailParticipantsFormValues;
 
-export type NonReportingInterventionFormValues = {
+export type NonReportingInterventionInviteEmailParticipantsFormValues = {
   isReportingIntervention: false;
   emails: string[];
 };
 
-export type ReportingInterventionFormValues = {
+export type ReportingInterventionInviteEmailParticipantsFormValues = {
   isReportingIntervention: true;
   clinics: {
     healthClinicOption: Nullable<SelectOption<string>>;
@@ -48,12 +49,23 @@ export type ReportingInterventionFormValues = {
   }[];
 };
 
-export type ReportingDependentFormValues =
-  | NonReportingInterventionFormValues
-  | ReportingInterventionFormValues;
+export type ReportingDependentInviteEmailParticipantsFormValues =
+  | NonReportingInterventionInviteEmailParticipantsFormValues
+  | ReportingInterventionInviteEmailParticipantsFormValues;
 
 export type InviteEmailParticipantsFormValues =
-  InterventionTypeDependentFormValues & ReportingDependentFormValues;
+  InterventionTypeDependentInviteEmailParticipantsFormValues &
+    ReportingDependentInviteEmailParticipantsFormValues;
+
+export type PredefinedParticipantFormValues = {
+  healthClinicOption: Nullable<SelectOption<string>>;
+  firstName: string;
+  lastName: string;
+  email: string;
+  externalId: string;
+  iso: Nullable<SelectOption<CountryCode>>;
+  number: string;
+};
 
 export type NormalizedSessions = Record<Session['id'], Session>;
 

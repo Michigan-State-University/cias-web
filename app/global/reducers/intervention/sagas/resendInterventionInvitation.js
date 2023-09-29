@@ -3,6 +3,8 @@ import { takeEvery, call, put } from 'redux-saga/effects';
 import { toast } from 'react-toastify';
 
 import { formatMessage } from 'utils/intlOutsideReact';
+import { formatApiErrorMessage } from 'utils/formatApiErrorMessage';
+
 import { RESEND_INTERVENTION_INVITATION_REQUEST } from '../constants';
 import messages from '../messages';
 import {
@@ -19,7 +21,10 @@ export function* resendInterventionInvitation({
     yield call(toast.info, formatMessage(messages.resendInviteSuccess));
     yield put(resendInterventionInvitationSuccess(id));
   } catch (error) {
-    yield call(toast.error, formatMessage(messages.resendInviteError));
+    yield call(
+      toast.error,
+      formatApiErrorMessage(error, messages.resendInviteError),
+    );
     yield put(resendInterventionInvitationError(id));
   }
 }

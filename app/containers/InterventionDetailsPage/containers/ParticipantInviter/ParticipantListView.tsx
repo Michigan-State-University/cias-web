@@ -15,6 +15,7 @@ import {
 } from './types';
 import messages from './messages';
 import { EmailParticipantsTab } from './EmailParticipantsTab';
+import { PredefinedParticipantsTab } from './PredefinedParticipantsTab';
 
 export type Props = {
   isModularIntervention: boolean;
@@ -28,6 +29,8 @@ export type Props = {
   normalizedHealthClinicsInfos: NormalizedHealthClinicsInfos;
   onInvite: (invitationType: ParticipantInvitationType) => void;
   onUploadEmails: () => void;
+  activeTab: string;
+  setActiveTab: (tab: string) => void;
 };
 
 export const ParticipantListView: FC<Props> = ({
@@ -42,6 +45,8 @@ export const ParticipantListView: FC<Props> = ({
   normalizedHealthClinicsInfos,
   onInvite,
   onUploadEmails,
+  activeTab,
+  setActiveTab,
 }) => {
   const { formatMessage } = useIntl();
 
@@ -51,6 +56,9 @@ export const ParticipantListView: FC<Props> = ({
     <>
       {/* @ts-ignore */}
       <Tabs
+        controlled
+        controlledTabActive={activeTab}
+        controlledSetTabActive={setActiveTab}
         flex={1}
         display="flex"
         direction="column"
@@ -67,7 +75,7 @@ export const ParticipantListView: FC<Props> = ({
         minHeight="0px"
       >
         {/* @ts-ignore */}
-        <div label={formatMessage(messages.emailParticipants)}>
+        <div label={formatMessage(messages.emailParticipantsTab)}>
           <EmailParticipantsTab
             interventionId={interventionId}
             interventionName={interventionName}
@@ -81,7 +89,9 @@ export const ParticipantListView: FC<Props> = ({
           />
         </div>
         {/* @ts-ignore */}
-        <div label={formatMessage(messages.predefinedParticipants)}></div>
+        <div label={formatMessage(messages.predefinedParticipantsTab)}>
+          <PredefinedParticipantsTab onInvite={onInvite} />
+        </div>
       </Tabs>
       {invitingPossible && (
         <CopyLinkForm
