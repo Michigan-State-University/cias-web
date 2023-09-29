@@ -13,7 +13,7 @@ import { FETCH_PREDEFINED_PARTICIPANTS_REQUEST } from '../constants';
 function* fetchPredefinedParticipants({
   payload: { interventionId },
 }: ReturnType<typeof fetchPredefinedParticipantsRequest>) {
-  const requestURL = `v1/interventions/${interventionId}/predefined_participantss`;
+  const requestURL = `v1/interventions/${interventionId}/predefined_participants`;
 
   try {
     const { data } = yield call(axios.get, requestURL);
