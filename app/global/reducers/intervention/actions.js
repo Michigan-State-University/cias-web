@@ -111,6 +111,12 @@ import {
   UPDATE_PREDEFINED_PARTICIPANT_REQUEST,
   UPDATE_PREDEFINED_PARTICIPANT_SUCCESS,
   UPDATE_PREDEFINED_PARTICIPANT_ERROR,
+  DEACTIVATE_PREDEFINED_PARTICIPANT_REQUEST,
+  DEACTIVATE_PREDEFINED_PARTICIPANT_SUCCESS,
+  DEACTIVATE_PREDEFINED_PARTICIPANT_ERROR,
+  ACTIVATE_PREDEFINED_PARTICIPANT_ERROR,
+  ACTIVATE_PREDEFINED_PARTICIPANT_SUCCESS,
+  ACTIVATE_PREDEFINED_PARTICIPANT_REQUEST,
 } from './constants';
 
 export const fetchInterventionRequest = (id, showLoader = false) =>
@@ -495,3 +501,33 @@ export const updatePredefinedParticipantSuccess = (predefinedParticipant) =>
   });
 export const updatePredefinedParticipantError = () =>
   actionBuilder(UPDATE_PREDEFINED_PARTICIPANT_ERROR, {});
+
+export const deactivatePredefinedParticipantRequest = (
+  interventionId,
+  participantId,
+) =>
+  actionBuilder(DEACTIVATE_PREDEFINED_PARTICIPANT_REQUEST, {
+    interventionId,
+    participantId,
+  });
+export const deactivatePredefinedParticipantSuccess = (predefinedParticipant) =>
+  actionBuilder(DEACTIVATE_PREDEFINED_PARTICIPANT_SUCCESS, {
+    predefinedParticipant,
+  });
+export const deactivatePredefinedParticipantError = () =>
+  actionBuilder(DEACTIVATE_PREDEFINED_PARTICIPANT_ERROR, {});
+
+export const activatePredefinedParticipantRequest = (
+  interventionId,
+  participantId,
+) =>
+  actionBuilder(ACTIVATE_PREDEFINED_PARTICIPANT_REQUEST, {
+    interventionId,
+    participantId,
+  });
+export const activatePredefinedParticipantSuccess = (predefinedParticipant) =>
+  actionBuilder(ACTIVATE_PREDEFINED_PARTICIPANT_SUCCESS, {
+    predefinedParticipant,
+  });
+export const activatePredefinedParticipantError = () =>
+  actionBuilder(ACTIVATE_PREDEFINED_PARTICIPANT_ERROR, {});

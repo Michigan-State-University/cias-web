@@ -7,6 +7,8 @@ import {
   makeSelectInterventionLoader,
   makeSelectPredefinedParticipantById,
   updatePredefinedParticipantRequest,
+  deactivatePredefinedParticipantRequest,
+  activatePredefinedParticipantRequest,
 } from 'global/reducers/intervention';
 
 import { PredefinedParticipant } from 'models/PredefinedParticipant';
@@ -71,14 +73,28 @@ export const ManagePredefinedParticipantView: FC<Props> = ({
     );
   };
 
+  const deactivating = useSelector(
+    makeSelectInterventionLoader('deactivatePredefinedParticipant'),
+  );
+  const handleDeactivate = () => {
+    dispatch(
+      deactivatePredefinedParticipantRequest(interventionId, participantId),
+    );
+  };
+
+  const activating = useSelector(
+    makeSelectInterventionLoader('activatePredefinedParticipant'),
+  );
+  const handleActivate = () => {
+    dispatch(
+      activatePredefinedParticipantRequest(interventionId, participantId),
+    );
+  };
+
   const url = useMemo(() => {
     if (!participant) return '';
     return getPredefinedParticipantUrl(participant.slug);
   }, []);
-
-  const handleDeactivate = () => {};
-
-  const handleActivate = () => {};
 
   return (
     <Column flex={1} overflow="auto" gap={24}>
@@ -105,7 +121,9 @@ export const ManagePredefinedParticipantView: FC<Props> = ({
               healthClinicOptions={healthClinicOptions}
               onSubmit={handleSubmit}
               submitting={submitting}
+              deactivating={deactivating}
               onDeactivate={handleDeactivate}
+              activating={activating}
               onActivate={handleActivate}
             />
           </Column>

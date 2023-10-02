@@ -126,6 +126,12 @@ import {
   UPDATE_PREDEFINED_PARTICIPANT_SUCCESS,
   UPDATE_PREDEFINED_PARTICIPANT_REQUEST,
   UPDATE_PREDEFINED_PARTICIPANT_ERROR,
+  DEACTIVATE_PREDEFINED_PARTICIPANT_REQUEST,
+  DEACTIVATE_PREDEFINED_PARTICIPANT_SUCCESS,
+  DEACTIVATE_PREDEFINED_PARTICIPANT_ERROR,
+  ACTIVATE_PREDEFINED_PARTICIPANT_REQUEST,
+  ACTIVATE_PREDEFINED_PARTICIPANT_SUCCESS,
+  ACTIVATE_PREDEFINED_PARTICIPANT_ERROR,
 } from './constants';
 
 export const initialState = {
@@ -166,6 +172,8 @@ export const initialState = {
     createPredefinedParticipant: false,
     fetchPredefinedParticipants: false,
     updatePredefinedParticipant: false,
+    deactivatePredefinedParticipant: false,
+    activatePredefinedParticipant: false,
   },
   errors: {
     fetchInterventionError: null,
@@ -799,6 +807,48 @@ export const interventionReducer = (state = initialState, action) =>
       }
       case UPDATE_PREDEFINED_PARTICIPANT_ERROR: {
         draft.loaders.updatePredefinedParticipant = false;
+        break;
+      }
+
+      case DEACTIVATE_PREDEFINED_PARTICIPANT_REQUEST: {
+        draft.loaders.deactivatePredefinedParticipant = true;
+        break;
+      }
+      case DEACTIVATE_PREDEFINED_PARTICIPANT_SUCCESS: {
+        const { predefinedParticipant } = action.payload;
+        if (draft.predefinedParticipants) {
+          updateItemById(
+            draft.predefinedParticipants,
+            predefinedParticipant.id,
+            predefinedParticipant,
+          );
+        }
+        draft.loaders.deactivatePredefinedParticipant = false;
+        break;
+      }
+      case DEACTIVATE_PREDEFINED_PARTICIPANT_ERROR: {
+        draft.loaders.deactivatePredefinedParticipant = false;
+        break;
+      }
+
+      case ACTIVATE_PREDEFINED_PARTICIPANT_REQUEST: {
+        draft.loaders.activatePredefinedParticipant = true;
+        break;
+      }
+      case ACTIVATE_PREDEFINED_PARTICIPANT_SUCCESS: {
+        const { predefinedParticipant } = action.payload;
+        if (draft.predefinedParticipants) {
+          updateItemById(
+            draft.predefinedParticipants,
+            predefinedParticipant.id,
+            predefinedParticipant,
+          );
+        }
+        draft.loaders.activatePredefinedParticipant = false;
+        break;
+      }
+      case ACTIVATE_PREDEFINED_PARTICIPANT_ERROR: {
+        draft.loaders.activatePredefinedParticipant = false;
         break;
       }
     }

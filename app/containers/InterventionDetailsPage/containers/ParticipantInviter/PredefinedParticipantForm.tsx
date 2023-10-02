@@ -38,14 +38,18 @@ export type UpdateModeProps = {
   mode: PredefinedParticipantFormMode.UPDATE;
   participant: PredefinedParticipant;
   onDeactivate: () => void;
+  deactivating: boolean;
   onActivate: () => void;
+  activating: boolean;
 };
 
 export type CreateModeProps = {
   mode: PredefinedParticipantFormMode.CREATE;
   participant?: undefined;
-  onDeactivate: undefined;
-  onActivate: undefined;
+  onDeactivate?: undefined;
+  deactivating?: undefined;
+  onActivate?: undefined;
+  activating?: undefined;
 };
 
 export type CommonProps = {
@@ -65,7 +69,9 @@ export const PredefinedParticipantForm: FC<Props> = ({
   submitting,
   participant,
   onDeactivate,
+  deactivating,
   onActivate,
+  activating,
 }) => {
   const { formatMessage } = useIntl();
 
@@ -168,13 +174,14 @@ export const PredefinedParticipantForm: FC<Props> = ({
           </Column>
           <Row justify="between" gap={16}>
             <Row>
-              {isUpdateMode && participant?.active && (
+              {disabled && isUpdateMode && participant?.active && (
                 <TextButton
                   buttonProps={{
                     ...TEXT_BUTTON_PROPS,
                     color: themeColors.alert,
                   }}
                   onClick={onDeactivate}
+                  loading={deactivating}
                 >
                   {formatMessage(
                     messages.deactivatePredefinedParticipantButtonTitle,
@@ -221,6 +228,7 @@ export const PredefinedParticipantForm: FC<Props> = ({
                       px={24}
                       type="button"
                       onClick={() => setDisabled(false)}
+                      disabled={deactivating}
                     >
                       {formatMessage(messages.editDetailsButtonTitle)}
                     </Button>
@@ -233,6 +241,7 @@ export const PredefinedParticipantForm: FC<Props> = ({
                   px={24}
                   type="button"
                   onClick={onActivate}
+                  loading={activating}
                   inverted
                 >
                   {formatMessage(
