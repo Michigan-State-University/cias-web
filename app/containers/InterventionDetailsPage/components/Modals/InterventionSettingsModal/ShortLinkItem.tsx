@@ -104,6 +104,7 @@ const ShortLinkItem = ({
         />
       </Box>
       <CopyToClipboard
+        // @ts-ignore
         renderAsCustomComponent
         textToCopy={selected ? `${CUSTOM_LINK_PREFIX}${name}` : placeholder}
         popupVerticalPosition="center"

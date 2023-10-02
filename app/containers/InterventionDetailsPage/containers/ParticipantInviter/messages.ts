@@ -56,7 +56,7 @@ export default defineMessages({
   },
   copyLinkIconAlt: {
     id: `${scope}.copyLinkIconAlt`,
-    defaultMessage: 'Copy UTL link icon',
+    defaultMessage: 'Copy URL link icon',
   },
   copyLinkButtonTitle: {
     id: `${scope}.copyLinkButtonTitle`,
@@ -234,5 +234,9 @@ export default defineMessages({
   editDetailsButtonTitle: {
     id: `${scope}.editDetailsButtonTitle`,
     defaultMessage: `Edit details`,
+  },
+  copyButtonTitle: {
+    id: `${scope}.copyButtonTitle`,
+    defaultMessage: `Copy predefined participant invitation URL`,
   },
 });
