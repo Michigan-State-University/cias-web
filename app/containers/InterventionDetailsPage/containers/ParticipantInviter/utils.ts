@@ -32,6 +32,7 @@ import {
   UploadedEmailsCsvData,
 } from './types';
 import messages from './messages';
+import { PredefinedParticipant } from '../../../../models/PredefinedParticipant';
 
 export const UNIQUE_CLINICS_METHOD = 'uniqueClinics';
 
@@ -274,15 +275,28 @@ export const getInviteEmailParticipantsFormInitialValues = (
   };
 };
 
-export const getPredefinedParticipantFormInitialValues =
-  (): PredefinedParticipantFormValues => ({
-    healthClinicOption: null,
-    firstName: '',
-    lastName: '',
-    email: '',
-    externalId: '',
-    ...getInitialValues(),
-  });
+export const getPredefinedParticipantFormInitialValues = (
+  healthClinicOptions: SelectOption<string>[],
+  participant: Nullable<PredefinedParticipant>,
+): PredefinedParticipantFormValues => {
+  const healthClinicOption = participant?.healthClinicId
+    ? healthClinicOptions.find(
+        ({ value }) => value === participant.healthClinicId,
+      )
+    : null;
+  const phoneAttributes = getInitialValues(
+    participant?.phone?.number,
+    participant?.phone?.iso,
+  );
+  return {
+    healthClinicOption,
+    ...phoneAttributes,
+    firstName: participant?.firstName ?? '',
+    lastName: participant?.lastName ?? '',
+    email: participant?.email ?? '',
+    externalId: participant?.externalId ?? '',
+  };
+};
 
 export const prepareUploadEmailsInitialValues = (
   parsedData: ParsedEmailsCsv,

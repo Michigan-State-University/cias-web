@@ -7,37 +7,32 @@ import {
   CreatePredefinedParticipantData,
   createPredefinedParticipantRequest,
   makeSelectInterventionLoader,
+  makeSelectPredefinedParticipantById,
 } from 'global/reducers/intervention';
-
-import { themeColors } from 'theme';
 
 import Column from 'components/Column';
 import Text from 'components/Text';
 import { SelectOption } from 'components/Select/types';
-import { Alert } from 'components/Alert';
 
 import { BackButton } from './BackButton';
-import {
-  InviteParticipantModalView,
-  InviteParticipantModalViewState,
-  ParticipantInvitationType,
-} from './types';
+import { ParticipantInvitationType } from './types';
 import {
   PredefinedParticipantForm,
   PredefinedParticipantFormMode,
   Props as PredefinedParticipantFormProps,
 } from './PredefinedParticipantForm';
 import { prepareCreatePredefinedParticipantData } from './utils';
-import messages from './messages';
 
 export type Props = {
+  participantId: string;
   isReportingIntervention: boolean;
   interventionId: string;
   healthClinicOptions: SelectOption<string>[];
-  onBack: (view?: InviteParticipantModalViewState) => void;
+  onBack: () => void;
 };
 
-export const CreatePredefinedParticipantView: FC<Props> = ({
+export const ManagePredefinedParticipantView: FC<Props> = ({
+  participantId,
   onBack,
   isReportingIntervention,
   interventionId,
@@ -45,6 +40,10 @@ export const CreatePredefinedParticipantView: FC<Props> = ({
 }) => {
   const { formatMessage } = useIntl();
   const dispatch = useDispatch();
+
+  const participant = useSelector(
+    makeSelectPredefinedParticipantById(participantId),
+  );
 
   const submitting = useSelector(
     makeSelectInterventionLoader('createPredefinedParticipant'),
@@ -58,11 +57,6 @@ export const CreatePredefinedParticipantView: FC<Props> = ({
       createPredefinedParticipantRequest(
         interventionId,
         predefinedParticipantData,
-        (participantId: string) =>
-          onBack({
-            view: InviteParticipantModalView.MANAGE_PREDEFINED_PARTICIPANT,
-            participantId,
-          }),
       ),
     );
   };
@@ -73,16 +67,11 @@ export const CreatePredefinedParticipantView: FC<Props> = ({
         invitationType={ParticipantInvitationType.PREDEFINED}
         onBack={onBack}
       />
-      <Alert
-        content={formatMessage(messages.predefinedParticipantsInfo)}
-        background={themeColors.highlight}
-        contentProps={{ maxWidth: 510 }}
-        mt={24}
-      />
       <Text my={24}>{formatMessage(globalMessages.requiredFields)}</Text>
       <Column flex={1}>
         <PredefinedParticipantForm
-          mode={PredefinedParticipantFormMode.CREATE}
+          mode={PredefinedParticipantFormMode.UPDATE}
+          participant={participant}
           isReportingIntervention={isReportingIntervention}
           healthClinicOptions={healthClinicOptions}
           onSubmit={handleSubmit}

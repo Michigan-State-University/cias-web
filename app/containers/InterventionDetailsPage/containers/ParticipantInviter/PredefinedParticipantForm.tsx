@@ -2,6 +2,8 @@ import React, { FC, useMemo } from 'react';
 import { Form, Formik, FormikConfig } from 'formik';
 import { useIntl } from 'react-intl';
 
+import { PredefinedParticipant } from 'models/PredefinedParticipant';
+
 import Column from 'components/Column';
 import { SelectOption } from 'components/Select/types';
 import FormikSelect from 'components/FormikSelect';
@@ -23,24 +25,46 @@ const COMMON_INPUT_PROPS = {
   },
 };
 
-export type Props = {
+export enum PredefinedParticipantFormMode {
+  CREATE = 'CREATE',
+  UPDATE = 'UPDATE',
+}
+
+export type UpdateModeProps = {
+  mode: PredefinedParticipantFormMode.UPDATE;
+  participant: PredefinedParticipant;
+};
+
+export type CreateModeProps = {
+  mode: PredefinedParticipantFormMode.CREATE;
+  participant?: undefined;
+};
+
+export type CommonProps = {
   isReportingIntervention: boolean;
   healthClinicOptions: SelectOption<string>[];
   onSubmit: FormikConfig<PredefinedParticipantFormValues>['onSubmit'];
   submitting: boolean;
 };
 
+export type Props = CommonProps & (CreateModeProps | UpdateModeProps);
+
 export const PredefinedParticipantForm: FC<Props> = ({
   isReportingIntervention,
   healthClinicOptions,
   onSubmit,
   submitting,
+  participant,
 }) => {
   const { formatMessage } = useIntl();
 
   const initialValues: PredefinedParticipantFormValues = useMemo(
-    () => getPredefinedParticipantFormInitialValues(),
-    [],
+    () =>
+      getPredefinedParticipantFormInitialValues(
+        healthClinicOptions,
+        participant,
+      ),
+    [healthClinicOptions, participant],
   );
 
   const validationSchema = useMemo(

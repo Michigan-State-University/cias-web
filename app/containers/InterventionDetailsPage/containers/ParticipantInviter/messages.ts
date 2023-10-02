@@ -29,6 +29,10 @@ export default defineMessages({
     id: `${scope}.viewTitle${InviteParticipantModalView.UPLOAD_EMAILS}`,
     defaultMessage: 'Bulk e-mail upload',
   },
+  [`viewTitle${InviteParticipantModalView.MANAGE_PREDEFINED_PARTICIPANT}`]: {
+    id: `${scope}.viewTitle${InviteParticipantModalView.MANAGE_PREDEFINED_PARTICIPANT}`,
+    defaultMessage: 'Manage participant',
+  },
   sessionSelectLabel: {
     id: `${scope}.sessionSelectLabel`,
     defaultMessage: 'Session',

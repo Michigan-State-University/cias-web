@@ -29,6 +29,7 @@ import { InviteEmailParticipantsView } from './InviteEmailParticipantsView';
 import { UploadEmailsView } from './UploadEmailsView';
 import messages from './messages';
 import { CreatePredefinedParticipantView } from './CreatePredefinedParticipantView';
+import { ManagePredefinedParticipantView } from './ManagePredefinedParticipantView';
 
 export type Props = {
   interventionId: string;
@@ -151,6 +152,13 @@ export const InviteParticipantsModalContent: FC<Props> = ({
     });
   };
 
+  const handleManage = (participantId: string) => {
+    setCurrentView({
+      view: InviteParticipantModalView.MANAGE_PREDEFINED_PARTICIPANT,
+      participantId,
+    });
+  };
+
   const handleBack = (view?: InviteParticipantModalViewState) => {
     setCurrentView(
       view ?? {
@@ -183,6 +191,7 @@ export const InviteParticipantsModalContent: FC<Props> = ({
               normalizedHealthClinicsInfos={normalizedHealthClinicsInfos}
               onInvite={handleInvite}
               onUploadEmails={handleUploadEmails}
+              onManage={handleManage}
               activeTab={activeParticipantListViewTab}
               setActiveTab={setActiveParticipantListViewTab}
             />
@@ -198,16 +207,6 @@ export const InviteParticipantsModalContent: FC<Props> = ({
               normalizedHealthClinicsInfos={normalizedHealthClinicsInfos}
             />
           )}
-          {view ===
-            InviteParticipantModalView.INVITE_PREDEFINED_PARTICIPANT && (
-            <CreatePredefinedParticipantView
-              isModularIntervention={isModularIntervention}
-              isReportingIntervention={isReportingIntervention}
-              interventionId={interventionId}
-              healthClinicOptions={healthClinicOptions}
-              onBack={handleBack}
-            />
-          )}
           {view === InviteParticipantModalView.UPLOAD_EMAILS && (
             <UploadEmailsView
               interventionName={interventionName}
@@ -217,6 +216,25 @@ export const InviteParticipantsModalContent: FC<Props> = ({
               sessionOptions={sessionOptions}
               healthClinicOptions={healthClinicOptions}
               normalizedHealthClinicsInfos={normalizedHealthClinicsInfos}
+              onBack={handleBack}
+            />
+          )}
+          {view ===
+            InviteParticipantModalView.INVITE_PREDEFINED_PARTICIPANT && (
+            <CreatePredefinedParticipantView
+              isReportingIntervention={isReportingIntervention}
+              interventionId={interventionId}
+              healthClinicOptions={healthClinicOptions}
+              onBack={handleBack}
+            />
+          )}
+          {view ===
+            InviteParticipantModalView.MANAGE_PREDEFINED_PARTICIPANT && (
+            <ManagePredefinedParticipantView
+              participantId={currentView.participantId}
+              isReportingIntervention={isReportingIntervention}
+              interventionId={interventionId}
+              healthClinicOptions={healthClinicOptions}
               onBack={handleBack}
             />
           )}

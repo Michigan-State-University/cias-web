@@ -161,3 +161,11 @@ export const makeSelectPredefinedParticipants = () =>
     selectIntervention,
     (substate) => substate.predefinedParticipants,
   );
+
+export const makeSelectPredefinedParticipantById = (id) =>
+  createSelector(
+    selectIntervention,
+    ({ predefinedParticipants }) =>
+      predefinedParticipants &&
+      predefinedParticipants.find((participant) => participant.id === id),
+  );
