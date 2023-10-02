@@ -27,7 +27,7 @@ const CopyToClipboard = ({
   children,
   textProps,
   renderAsButton,
-  rednerAsCustomComponent,
+  renderAsCustomComponent,
   buttonDisabled,
   disabled,
   icon,
@@ -82,7 +82,7 @@ const CopyToClipboard = ({
         horizontalPosition={popupHorizontalPosition}
       >
         {renderCopyToClipboard(
-          rednerAsCustomComponent ? (
+          renderAsCustomComponent ? (
             children
           ) : (
             <Row align="center">
@@ -113,7 +113,7 @@ CopyToClipboard.propTypes = {
   buttonDisabled: PropTypes.bool,
   disabled: PropTypes.bool,
   renderAsButton: PropTypes.bool,
-  rednerAsCustomComponent: PropTypes.bool,
+  renderAsCustomComponent: PropTypes.bool,
   icon: PropTypes.string,
   iconAlt: PropTypes.string,
   popupVerticalPosition: PropTypes.oneOf(['top', 'center', 'bottom']),
