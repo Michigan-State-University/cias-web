@@ -13,7 +13,11 @@ import {
 } from 'global/reducers/intervention';
 
 import { parametrizeRoutePath } from 'utils/router';
-import { csvEmailValidator, emailFormValidationSchema } from 'utils/validators';
+import {
+  csvEmailValidator,
+  emailFormValidationSchema,
+  requiredEmailFormValidationSchema,
+} from 'utils/validators';
 
 import { SelectOption } from 'components/Select/types';
 import {
@@ -192,6 +196,7 @@ export const createInviteEmailsParticipantsFormSchema = (
 export const createPredefinedParticipantFormSchema = (
   formatMessage: IntlShape['formatMessage'],
   isReportingIntervention: boolean,
+  isUpdateMode: boolean,
 ) =>
   Yup.object()
     .shape({
@@ -205,7 +210,9 @@ export const createPredefinedParticipantFormSchema = (
               .nullable(),
           }
         : {}),
-      email: emailFormValidationSchema,
+      email: isUpdateMode
+        ? requiredEmailFormValidationSchema
+        : emailFormValidationSchema,
     })
     // @ts-ignore
     .concat(phoneNumberSchema(formatMessage, false, true));

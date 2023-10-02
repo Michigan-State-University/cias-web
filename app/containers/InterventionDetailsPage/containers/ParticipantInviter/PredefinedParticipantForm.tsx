@@ -83,8 +83,9 @@ export const PredefinedParticipantForm: FC<Props> = ({
       createPredefinedParticipantFormSchema(
         formatMessage,
         isReportingIntervention,
+        isUpdateMode,
       ),
-    [isReportingIntervention],
+    [isReportingIntervention, isUpdateMode],
   );
 
   return (
