@@ -243,4 +243,12 @@ export default defineMessages({
     id: `${scope}.predefinedParticipantLinkLabel`,
     defaultMessage: `Invitation URL:`,
   },
+  deactivatePredefinedParticipantButtonTitle: {
+    id: `${scope}.deactivatePredefinedParticipantButtonTitle`,
+    defaultMessage: `Deactivate participant`,
+  },
+  activatePredefinedParticipantButtonTitle: {
+    id: `${scope}.activatePredefinedParticipantButtonTitle`,
+    defaultMessage: `Reactivate participant`,
+  },
 });

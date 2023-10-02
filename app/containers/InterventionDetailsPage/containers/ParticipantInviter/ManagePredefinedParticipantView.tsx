@@ -76,6 +76,10 @@ export const ManagePredefinedParticipantView: FC<Props> = ({
     return getPredefinedParticipantUrl(participant.slug);
   }, []);
 
+  const handleDeactivate = () => {};
+
+  const handleActivate = () => {};
+
   return (
     <Column flex={1} overflow="auto" gap={24}>
       <BackButton
@@ -101,6 +105,8 @@ export const ManagePredefinedParticipantView: FC<Props> = ({
               healthClinicOptions={healthClinicOptions}
               onSubmit={handleSubmit}
               submitting={submitting}
+              onDeactivate={handleDeactivate}
+              onActivate={handleActivate}
             />
           </Column>
         </>
