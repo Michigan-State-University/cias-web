@@ -30,6 +30,7 @@ import onCollaboratorRemovedReceiveSaga from './onCollaboratorRemovedReceive';
 import refreshInterventionDataSaga from './refreshInterventionData';
 import createPredefinedParticipantSaga from './createPredefinedParticipant';
 import fetchPredefinedParticipantsSaga from './fetchPredefinedParticipants';
+import updatePredefinedParticipantSaga from './updatePredefinedParticipant';
 
 export * from './onCollaboratorRemovedReceive';
 export * from './refreshInterventionData';
@@ -67,6 +68,7 @@ export {
   removeCollaboratorSaga,
   createPredefinedParticipantSaga,
   fetchPredefinedParticipantsSaga,
+  updatePredefinedParticipantSaga,
 };
 
 export default function* allInterventionSagas() {
@@ -100,6 +102,7 @@ export default function* allInterventionSagas() {
     refreshInterventionDataSaga(),
     createPredefinedParticipantSaga(),
     fetchPredefinedParticipantsSaga(),
+    updatePredefinedParticipantSaga(),
   ]);
 }
 

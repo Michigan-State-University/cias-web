@@ -1,4 +1,4 @@
-import React, { FC, useMemo, useState } from 'react';
+import React, { FC, useEffect, useMemo, useState } from 'react';
 import { Form, Formik, FormikConfig } from 'formik';
 import { useIntl } from 'react-intl';
 
@@ -19,18 +19,16 @@ import {
   createPredefinedParticipantFormSchema,
   getPredefinedParticipantFormInitialValues,
 } from './utils';
-import { PredefinedParticipantFormValues } from './types';
+import {
+  PredefinedParticipantFormMode,
+  PredefinedParticipantFormValues,
+} from './types';
 
 const COMMON_INPUT_PROPS = {
   inputProps: {
     width: '100%',
   },
 };
-
-export enum PredefinedParticipantFormMode {
-  CREATE = 'CREATE',
-  UPDATE = 'UPDATE',
-}
 
 export type UpdateModeProps = {
   mode: PredefinedParticipantFormMode.UPDATE;
@@ -64,6 +62,12 @@ export const PredefinedParticipantForm: FC<Props> = ({
   const isUpdateMode = mode === PredefinedParticipantFormMode.UPDATE;
 
   const [disabled, setDisabled] = useState(isUpdateMode);
+
+  useEffect(() => {
+    if (isUpdateMode) {
+      setDisabled(true);
+    }
+  }, [isUpdateMode, participant]);
 
   const initialValues: PredefinedParticipantFormValues = useMemo(
     () =>
@@ -163,6 +167,7 @@ export const PredefinedParticipantForm: FC<Props> = ({
                   setDisabled(true);
                 }}
                 inverted
+                disabled={submitting}
               >
                 {formatMessage(globalMessages.cancel)}
               </Button>
@@ -177,7 +182,8 @@ export const PredefinedParticipantForm: FC<Props> = ({
                 loading={submitting}
               >
                 {formatMessage(
-                  messages.createPredefinedParticipantSubmitButtonTitle,
+                  messages.predefinedParticipantFormSubmitButtonTitle,
+                  { mode },
                 )}
               </Button>
             )}

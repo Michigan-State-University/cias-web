@@ -7,7 +7,7 @@ import isNil from 'lodash/isNil';
 import { RoutePath } from 'global/constants';
 import globalMessages from 'global/i18n/globalMessages';
 import {
-  CreatePredefinedParticipantData,
+  PredefinedParticipantData,
   InterventionInvitationTargetType,
   SendInterventionInvitationsData,
 } from 'global/reducers/intervention';
@@ -382,7 +382,7 @@ export const prepareSendInvitationsPayload = (
   }));
 };
 
-export const prepareCreatePredefinedParticipantData = ({
+export const preparePredefinedParticipantData = ({
   healthClinicOption,
   firstName,
   lastName,
@@ -390,7 +390,7 @@ export const prepareCreatePredefinedParticipantData = ({
   email,
   iso,
   number,
-}: PredefinedParticipantFormValues): CreatePredefinedParticipantData => {
+}: PredefinedParticipantFormValues): PredefinedParticipantData => {
   const phoneAttributes =
     number && iso ? getPhoneAttributes(number, iso) : null;
   return {

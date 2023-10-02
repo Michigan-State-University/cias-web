@@ -4,10 +4,10 @@ import { useDispatch, useSelector } from 'react-redux';
 
 import globalMessages from 'global/i18n/globalMessages';
 import {
-  CreatePredefinedParticipantData,
-  createPredefinedParticipantRequest,
+  PredefinedParticipantData,
   makeSelectInterventionLoader,
   makeSelectPredefinedParticipantById,
+  updatePredefinedParticipantRequest,
 } from 'global/reducers/intervention';
 
 import Column from 'components/Column';
@@ -15,13 +15,15 @@ import Text from 'components/Text';
 import { SelectOption } from 'components/Select/types';
 
 import { BackButton } from './BackButton';
-import { ParticipantInvitationType } from './types';
+import {
+  ParticipantInvitationType,
+  PredefinedParticipantFormMode,
+} from './types';
 import {
   PredefinedParticipantForm,
-  PredefinedParticipantFormMode,
   Props as PredefinedParticipantFormProps,
 } from './PredefinedParticipantForm';
-import { prepareCreatePredefinedParticipantData } from './utils';
+import { preparePredefinedParticipantData } from './utils';
 
 export type Props = {
   participantId: string;
@@ -46,16 +48,17 @@ export const ManagePredefinedParticipantView: FC<Props> = ({
   );
 
   const submitting = useSelector(
-    makeSelectInterventionLoader('createPredefinedParticipant'),
+    makeSelectInterventionLoader('updatePredefinedParticipant'),
   );
 
   const handleSubmit: PredefinedParticipantFormProps['onSubmit'] = (values) => {
-    const predefinedParticipantData: CreatePredefinedParticipantData =
-      prepareCreatePredefinedParticipantData(values);
+    const predefinedParticipantData: PredefinedParticipantData =
+      preparePredefinedParticipantData(values);
 
     dispatch(
-      createPredefinedParticipantRequest(
+      updatePredefinedParticipantRequest(
         interventionId,
+        participantId,
         predefinedParticipantData,
       ),
     );

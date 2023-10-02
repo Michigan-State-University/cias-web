@@ -1,5 +1,10 @@
 import { defineMessages } from 'react-intl';
-import { InviteParticipantModalView, ParticipantInvitationType } from './types';
+
+import {
+  InviteParticipantModalView,
+  ParticipantInvitationType,
+  PredefinedParticipantFormMode,
+} from './types';
 
 export const scope =
   'app.containers.InterventionDetailsPage.containers.InviteParticipantsButton';
@@ -82,9 +87,9 @@ export default defineMessages({
     id: `${scope}.inviteEmailParticipantSubmitButtonTitle`,
     defaultMessage: `Send invitations`,
   },
-  createPredefinedParticipantSubmitButtonTitle: {
-    id: `${scope}.createPredefinedParticipantSubmitButtonTitle`,
-    defaultMessage: `Create participant`,
+  predefinedParticipantFormSubmitButtonTitle: {
+    id: `${scope}.predefinedParticipantFormSubmitButtonTitle`,
+    defaultMessage: `{mode, select, ${PredefinedParticipantFormMode.CREATE} {Create participant} ${PredefinedParticipantFormMode.UPDATE} {Save changes} other {}}`,
   },
   invitingEmailsParticipantsNotPossibleMessage: {
     id: `${scope}.invitingEmailsParticipantsNotPossibleMessage`,

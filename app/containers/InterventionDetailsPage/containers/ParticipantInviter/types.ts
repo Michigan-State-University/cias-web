@@ -103,3 +103,8 @@ export type UploadedEmailsCsvData = {
 }[];
 
 export type ParsedEmailsCsv = { email: string; healthClinicId?: string }[];
+
+export enum PredefinedParticipantFormMode {
+  CREATE = 'CREATE',
+  UPDATE = 'UPDATE',
+}

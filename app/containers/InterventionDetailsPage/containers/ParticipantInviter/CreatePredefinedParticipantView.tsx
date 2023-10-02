@@ -4,7 +4,7 @@ import { useDispatch, useSelector } from 'react-redux';
 
 import globalMessages from 'global/i18n/globalMessages';
 import {
-  CreatePredefinedParticipantData,
+  PredefinedParticipantData,
   createPredefinedParticipantRequest,
   makeSelectInterventionLoader,
 } from 'global/reducers/intervention';
@@ -21,13 +21,13 @@ import {
   InviteParticipantModalView,
   InviteParticipantModalViewState,
   ParticipantInvitationType,
+  PredefinedParticipantFormMode,
 } from './types';
 import {
   PredefinedParticipantForm,
-  PredefinedParticipantFormMode,
   Props as PredefinedParticipantFormProps,
 } from './PredefinedParticipantForm';
-import { prepareCreatePredefinedParticipantData } from './utils';
+import { preparePredefinedParticipantData } from './utils';
 import messages from './messages';
 
 export type Props = {
@@ -51,8 +51,8 @@ export const CreatePredefinedParticipantView: FC<Props> = ({
   );
 
   const handleSubmit: PredefinedParticipantFormProps['onSubmit'] = (values) => {
-    const predefinedParticipantData: CreatePredefinedParticipantData =
-      prepareCreatePredefinedParticipantData(values);
+    const predefinedParticipantData: PredefinedParticipantData =
+      preparePredefinedParticipantData(values);
 
     dispatch(
       createPredefinedParticipantRequest(

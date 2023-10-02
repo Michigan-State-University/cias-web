@@ -19,7 +19,7 @@ export type SendInterventionInvitationsDataItem = {
 export type SendInterventionInvitationsData =
   SendInterventionInvitationsDataItem[];
 
-export type CreatePredefinedParticipantData = {
+export type PredefinedParticipantData = {
   firstName: Nullable<string>;
   lastName: Nullable<string>;
   email: Nullable<string>;

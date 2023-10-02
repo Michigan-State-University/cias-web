@@ -123,6 +123,9 @@ import {
   FETCH_PREDEFINED_PARTICIPANTS_REQUEST,
   FETCH_PREDEFINED_PARTICIPANTS_SUCCESS,
   FETCH_PREDEFINED_PARTICIPANTS_ERROR,
+  UPDATE_PREDEFINED_PARTICIPANT_SUCCESS,
+  UPDATE_PREDEFINED_PARTICIPANT_REQUEST,
+  UPDATE_PREDEFINED_PARTICIPANT_ERROR,
 } from './constants';
 
 export const initialState = {
@@ -162,6 +165,7 @@ export const initialState = {
     clearInterventionData: false,
     createPredefinedParticipant: false,
     fetchPredefinedParticipants: false,
+    updatePredefinedParticipant: false,
   },
   errors: {
     fetchInterventionError: null,
@@ -774,6 +778,27 @@ export const interventionReducer = (state = initialState, action) =>
         const { error } = action.payload;
         draft.errors.fetchPredefinedParticipants = error;
         draft.loaders.fetchPredefinedParticipants = false;
+        break;
+      }
+
+      case UPDATE_PREDEFINED_PARTICIPANT_REQUEST: {
+        draft.loaders.updatePredefinedParticipant = true;
+        break;
+      }
+      case UPDATE_PREDEFINED_PARTICIPANT_SUCCESS: {
+        const { predefinedParticipant } = action.payload;
+        if (draft.predefinedParticipants) {
+          updateItemById(
+            draft.predefinedParticipants,
+            predefinedParticipant.id,
+            predefinedParticipant,
+          );
+        }
+        draft.loaders.updatePredefinedParticipant = false;
+        break;
+      }
+      case UPDATE_PREDEFINED_PARTICIPANT_ERROR: {
+        draft.loaders.updatePredefinedParticipant = false;
         break;
       }
     }
