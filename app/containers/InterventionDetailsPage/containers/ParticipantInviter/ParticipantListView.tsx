@@ -93,6 +93,7 @@ export const ParticipantListView: FC<Props> = ({
           <PredefinedParticipantsTab
             interventionId={interventionId}
             isReportingIntervention={isReportingIntervention}
+            normalizedHealthClinicsInfos={normalizedHealthClinicsInfos}
             onInvite={onInvite}
           />
         </div>

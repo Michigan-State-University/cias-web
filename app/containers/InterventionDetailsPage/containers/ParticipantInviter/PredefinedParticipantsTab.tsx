@@ -1,5 +1,6 @@
-import { FC, useEffect } from 'react';
+import { FC, useEffect, useMemo } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
+import groupBy from 'lodash/groupBy';
 
 import { PredefinedParticipant } from 'models/PredefinedParticipant';
 
@@ -17,21 +18,25 @@ import Box from 'components/Box';
 
 import ErrorAlert from 'components/ErrorAlert';
 import { NoParticipantsInfo } from './NoParticipantsInfo';
-import { NormalizedSessions, ParticipantInvitationType } from './types';
+import {
+  NormalizedHealthClinicsInfos,
+  ParticipantInvitationType,
+} from './types';
 import { InviteParticipantsButton } from './InviteParticipantsButton';
 import { PredefinedParticipantsTable } from './PredefinedParticipantsTable';
+import { HealthClinicCollapse } from './HealthClinicCollapse';
 
 export type Props = {
   interventionId: string;
   isReportingIntervention: boolean;
-  normalizedSessions: NormalizedSessions;
-  isModularIntervention: boolean;
+  normalizedHealthClinicsInfos: NormalizedHealthClinicsInfos;
   onInvite: (invitationType: ParticipantInvitationType) => void;
 };
 
 export const PredefinedParticipantsTab: FC<Props> = ({
   interventionId,
   isReportingIntervention,
+  normalizedHealthClinicsInfos,
   onInvite,
 }) => {
   const dispatch = useDispatch();
@@ -51,6 +56,11 @@ export const PredefinedParticipantsTab: FC<Props> = ({
       dispatch(fetchPredefinedParticipantsRequest(interventionId));
     }
   }, [interventionId, predefinedParticipants]);
+
+  const participantsGroupedByHealthClinic = useMemo(() => {
+    if (!isReportingIntervention) return [];
+    return Object.entries(groupBy(predefinedParticipants, 'healthClinicId'));
+  }, [isReportingIntervention, predefinedParticipants]);
 
   if (predefinedParticipantsLoading) return <Loader type="inline" />;
 
@@ -82,6 +92,19 @@ export const PredefinedParticipantsTab: FC<Props> = ({
             predefinedParticipants={predefinedParticipants}
           />
         )}
+        {isReportingIntervention &&
+          participantsGroupedByHealthClinic.map(
+            ([healthClinicId, groupedParticipants]) => (
+              <HealthClinicCollapse
+                key={healthClinicId}
+                healthClinicInfo={normalizedHealthClinicsInfos[healthClinicId]}
+              >
+                <PredefinedParticipantsTable
+                  predefinedParticipants={groupedParticipants}
+                />
+              </HealthClinicCollapse>
+            ),
+          )}
       </Box>
     </Column>
   );

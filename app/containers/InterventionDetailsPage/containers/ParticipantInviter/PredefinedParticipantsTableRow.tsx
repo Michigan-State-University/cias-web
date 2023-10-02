@@ -3,6 +3,8 @@ import { useIntl } from 'react-intl';
 
 import { PredefinedParticipant } from 'models/PredefinedParticipant';
 
+import { formatPhone } from 'utils/phone';
+
 import { colors } from 'theme';
 
 import { NoMaxWidthTD, StripedTR } from 'components/Table';
@@ -22,7 +24,7 @@ const PredefinedParticipantsTableRowComponent: FC<Props> = ({
 }) => {
   const { formatMessage } = useIntl();
 
-  const { fullName, email, externalId, active, invitationSentAt } =
+  const { fullName, externalId, active, invitationSentAt, phone } =
     predefinedParticipant;
 
   return (
@@ -34,7 +36,12 @@ const PredefinedParticipantsTableRowComponent: FC<Props> = ({
     >
       <NoMaxWidthTD padding={8} width="40%">
         <EllipsisText
-          text={fullName || email || externalId || ''}
+          text={
+            fullName?.trim() ||
+            (phone && formatPhone(phone)) ||
+            externalId ||
+            ''
+          }
           fontSize={15}
         />
       </NoMaxWidthTD>
