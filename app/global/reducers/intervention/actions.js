@@ -105,6 +105,9 @@ import {
   CREATE_PREDEFINED_PARTICIPANT_REQUEST,
   CREATE_PREDEFINED_PARTICIPANT_SUCCESS,
   CREATE_PREDEFINED_PARTICIPANT_ERROR,
+  FETCH_PREDEFINED_PARTICIPANTS_REQUEST,
+  FETCH_PREDEFINED_PARTICIPANTS_SUCCESS,
+  FETCH_PREDEFINED_PARTICIPANTS_ERROR,
 } from './constants';
 
 export const fetchInterventionRequest = (id, showLoader = false) =>
@@ -461,3 +464,14 @@ export const createPredefinedParticipantSuccess = (predefinedParticipant) =>
   });
 export const createPredefinedParticipantError = () =>
   actionBuilder(CREATE_PREDEFINED_PARTICIPANT_ERROR, {});
+
+export const fetchPredefinedParticipantsRequest = (interventionId) =>
+  actionBuilder(FETCH_PREDEFINED_PARTICIPANTS_REQUEST, {
+    interventionId,
+  });
+export const fetchPredefinedParticipantsSuccess = (predefinedParticipants) =>
+  actionBuilder(FETCH_PREDEFINED_PARTICIPANTS_SUCCESS, {
+    predefinedParticipants,
+  });
+export const fetchPredefinedParticipantsError = (error) =>
+  actionBuilder(FETCH_PREDEFINED_PARTICIPANTS_ERROR, { error });

@@ -202,4 +202,24 @@ export default defineMessages({
     id: `${scope}.externalIdInputPlaceholder`,
     defaultMessage: `Enter participant ID`,
   },
+  statusColumnHeader: {
+    id: `${scope}.statusColumnHeader`,
+    defaultMessage: `Status`,
+  },
+  smsInvitationColumnHeader: {
+    id: `${scope}.smsInvitationColumnHeader`,
+    defaultMessage: `SMS invitation`,
+  },
+  statusColumnValue: {
+    id: `${scope}.statusColumnValue`,
+    defaultMessage: `{active, select, true {Active} false {Deactivated} other {}}`,
+  },
+  smsInvitationColumnValue: {
+    id: `${scope}.smsInvitationColumnValue`,
+    defaultMessage: `{invitationSent, select, true {Sent} false {Not sent} other {}}`,
+  },
+  managePredefinedParticipantButtonLabel: {
+    id: `${scope}.managePredefinedParticipantButtonLabel`,
+    defaultMessage: `Manage`,
+  },
 });

@@ -12,4 +12,5 @@ export type PredefinedParticipant = {
   autoInvitation: boolean;
   invitationSentAt: Nullable<string>;
   healthClinicId: Nullable<string>;
+  active: boolean;
 };

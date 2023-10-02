@@ -8,6 +8,7 @@ import { InterventionInvitation } from 'models/Intervention';
 import {
   fetchInterventionInvitationsRequest,
   InvitationListItemState,
+  makeSelectInterventionError,
   makeSelectInterventionInvitations,
   makeSelectInterventionLoader,
   makeSelectInvitationsStates,
@@ -18,6 +19,7 @@ import Loader from 'components/Loader';
 import Column from 'components/Column';
 import Row from 'components/Row';
 import Box from 'components/Box';
+import ErrorAlert from 'components/ErrorAlert';
 
 import { NoParticipantsInfo } from './NoParticipantsInfo';
 import {
@@ -64,6 +66,9 @@ export const EmailParticipantsTab: FC<Props> = ({
   const invitationsLoading = useSelector(
     makeSelectInterventionLoader('fetchInterventionInvitations'),
   );
+  const invitationsError = useSelector(
+    makeSelectInterventionError('fetchInterventionInvitations'),
+  );
   const invitationsStates: Record<
     InterventionInvitation['id'],
     InvitationListItemState
@@ -85,6 +90,10 @@ export const EmailParticipantsTab: FC<Props> = ({
   }, [isReportingIntervention, invitations]);
 
   if (invitationsLoading) return <Loader type="inline" />;
+
+  if (invitationsError) {
+    return <ErrorAlert errorText={invitationsError} />;
+  }
 
   if (!invitations?.length) {
     return (

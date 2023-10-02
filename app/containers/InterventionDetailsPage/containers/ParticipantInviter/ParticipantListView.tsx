@@ -90,7 +90,12 @@ export const ParticipantListView: FC<Props> = ({
         </div>
         {/* @ts-ignore */}
         <div label={formatMessage(messages.predefinedParticipantsTab)}>
-          <PredefinedParticipantsTab onInvite={onInvite} />
+          <PredefinedParticipantsTab
+            interventionId={interventionId}
+            isReportingIntervention={isReportingIntervention}
+            normalizedHealthClinicsInfos={normalizedHealthClinicsInfos}
+            onInvite={onInvite}
+          />
         </div>
       </Tabs>
       {invitingPossible && (

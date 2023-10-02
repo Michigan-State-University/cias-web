@@ -120,6 +120,9 @@ import {
   CREATE_PREDEFINED_PARTICIPANT_REQUEST,
   CREATE_PREDEFINED_PARTICIPANT_SUCCESS,
   CREATE_PREDEFINED_PARTICIPANT_ERROR,
+  FETCH_PREDEFINED_PARTICIPANTS_REQUEST,
+  FETCH_PREDEFINED_PARTICIPANTS_SUCCESS,
+  FETCH_PREDEFINED_PARTICIPANTS_ERROR,
 } from './constants';
 
 export const initialState = {
@@ -158,6 +161,7 @@ export const initialState = {
     fetchCurrentUserCollaboratorData: false,
     clearInterventionData: false,
     createPredefinedParticipant: false,
+    fetchPredefinedParticipants: false,
   },
   errors: {
     fetchInterventionError: null,
@@ -172,6 +176,7 @@ export const initialState = {
     editIntervention: null,
     changeInterventionNarrator: null,
     editShortLinks: null,
+    fetchPredefinedParticipants: null,
   },
 };
 
@@ -751,6 +756,24 @@ export const interventionReducer = (state = initialState, action) =>
       }
       case CREATE_PREDEFINED_PARTICIPANT_ERROR: {
         draft.loaders.createPredefinedParticipant = false;
+        break;
+      }
+
+      case FETCH_PREDEFINED_PARTICIPANTS_REQUEST: {
+        draft.errors.fetchPredefinedParticipants = null;
+        draft.loaders.fetchPredefinedParticipants = true;
+        break;
+      }
+      case FETCH_PREDEFINED_PARTICIPANTS_SUCCESS: {
+        const { predefinedParticipants } = action.payload;
+        draft.predefinedParticipants = predefinedParticipants;
+        draft.loaders.fetchPredefinedParticipants = false;
+        break;
+      }
+      case FETCH_PREDEFINED_PARTICIPANTS_ERROR: {
+        const { error } = action.payload;
+        draft.errors.fetchPredefinedParticipants = error;
+        draft.loaders.fetchPredefinedParticipants = false;
         break;
       }
     }
