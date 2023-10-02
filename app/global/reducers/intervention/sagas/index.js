@@ -31,6 +31,8 @@ import refreshInterventionDataSaga from './refreshInterventionData';
 import createPredefinedParticipantSaga from './createPredefinedParticipant';
 import fetchPredefinedParticipantsSaga from './fetchPredefinedParticipants';
 import updatePredefinedParticipantSaga from './updatePredefinedParticipant';
+import deactivatePredefinedParticipantSaga from './deactivatePredefinedParticipant';
+import activatePredefinedParticipantSaga from './activatePredefinedParticipant';
 
 export * from './onCollaboratorRemovedReceive';
 export * from './refreshInterventionData';
@@ -69,6 +71,8 @@ export {
   createPredefinedParticipantSaga,
   fetchPredefinedParticipantsSaga,
   updatePredefinedParticipantSaga,
+  deactivatePredefinedParticipantSaga,
+  activatePredefinedParticipantSaga,
 };
 
 export default function* allInterventionSagas() {
@@ -103,6 +107,8 @@ export default function* allInterventionSagas() {
     createPredefinedParticipantSaga(),
     fetchPredefinedParticipantsSaga(),
     updatePredefinedParticipantSaga(),
+    deactivatePredefinedParticipantSaga(),
+    activatePredefinedParticipantSaga(),
   ]);
 }
 

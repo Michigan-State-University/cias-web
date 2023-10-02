@@ -4,13 +4,15 @@ import { useIntl } from 'react-intl';
 
 import { PredefinedParticipant } from 'models/PredefinedParticipant';
 
+import { themeColors } from 'theme';
+
 import globalMessages from 'global/i18n/globalMessages';
 
 import Column from 'components/Column';
 import { SelectOption } from 'components/Select/types';
 import FormikSelect from 'components/FormikSelect';
 import Row from 'components/Row';
-import { Button } from 'components/Button';
+import { Button, TextButton } from 'components/Button';
 import { FormikPhoneNumberInput } from 'components/FormikPhoneNumberInput';
 import FormikInput from 'components/FormikInput';
 import Text from 'components/Text';
@@ -24,6 +26,7 @@ import {
   PredefinedParticipantFormMode,
   PredefinedParticipantFormValues,
 } from './types';
+import { TEXT_BUTTON_PROPS } from './constants';
 
 const COMMON_INPUT_PROPS = {
   inputProps: {
@@ -34,11 +37,19 @@ const COMMON_INPUT_PROPS = {
 export type UpdateModeProps = {
   mode: PredefinedParticipantFormMode.UPDATE;
   participant: PredefinedParticipant;
+  onDeactivate: () => void;
+  deactivating: boolean;
+  onActivate: () => void;
+  activating: boolean;
 };
 
 export type CreateModeProps = {
   mode: PredefinedParticipantFormMode.CREATE;
   participant?: undefined;
+  onDeactivate?: undefined;
+  deactivating?: undefined;
+  onActivate?: undefined;
+  activating?: undefined;
 };
 
 export type CommonProps = {
@@ -57,6 +68,10 @@ export const PredefinedParticipantForm: FC<Props> = ({
   onSubmit,
   submitting,
   participant,
+  onDeactivate,
+  deactivating,
+  onActivate,
+  activating,
 }) => {
   const { formatMessage } = useIntl();
 
@@ -157,47 +172,84 @@ export const PredefinedParticipantForm: FC<Props> = ({
               disabled={disabled}
             />
           </Column>
-          <Row justify="end" gap={16}>
-            {!disabled && isUpdateMode && (
-              <Button
-                width="auto"
-                px={24}
-                type="reset"
-                onClick={() => {
-                  resetForm();
-                  setDisabled(true);
-                }}
-                inverted
-                disabled={submitting}
-              >
-                {formatMessage(globalMessages.cancel)}
-              </Button>
-            )}
-            {!disabled && (
-              <Button
-                disabled={!isValid || (isUpdateMode && !dirty)}
-                width="auto"
-                px={24}
-                type="submit"
-                onClick={handleSubmit}
-                loading={submitting}
-              >
-                {formatMessage(
-                  messages.predefinedParticipantFormSubmitButtonTitle,
-                  { mode },
-                )}
-              </Button>
-            )}
-            {disabled && (
-              <Button
-                width="auto"
-                px={24}
-                type="button"
-                onClick={() => setDisabled(false)}
-              >
-                {formatMessage(messages.editDetailsButtonTitle)}
-              </Button>
-            )}
+          <Row justify="between" gap={16}>
+            <Row>
+              {disabled && isUpdateMode && participant?.active && (
+                <TextButton
+                  buttonProps={{
+                    ...TEXT_BUTTON_PROPS,
+                    color: themeColors.alert,
+                  }}
+                  onClick={onDeactivate}
+                  loading={deactivating}
+                >
+                  {formatMessage(
+                    messages.deactivatePredefinedParticipantButtonTitle,
+                  )}
+                </TextButton>
+              )}
+            </Row>
+            <Row gap={16}>
+              {(!isUpdateMode || participant?.active) && (
+                <>
+                  {!disabled && isUpdateMode && (
+                    <Button
+                      width="auto"
+                      px={24}
+                      type="reset"
+                      onClick={() => {
+                        resetForm();
+                        setDisabled(true);
+                      }}
+                      inverted
+                      disabled={submitting}
+                    >
+                      {formatMessage(globalMessages.cancel)}
+                    </Button>
+                  )}
+                  {!disabled && (
+                    <Button
+                      disabled={!isValid || (isUpdateMode && !dirty)}
+                      width="auto"
+                      px={24}
+                      type="submit"
+                      onClick={handleSubmit}
+                      loading={submitting}
+                    >
+                      {formatMessage(
+                        messages.predefinedParticipantFormSubmitButtonTitle,
+                        { mode },
+                      )}
+                    </Button>
+                  )}
+                  {disabled && (
+                    <Button
+                      width="auto"
+                      px={24}
+                      type="button"
+                      onClick={() => setDisabled(false)}
+                      disabled={deactivating}
+                    >
+                      {formatMessage(messages.editDetailsButtonTitle)}
+                    </Button>
+                  )}
+                </>
+              )}
+              {isUpdateMode && participant && !participant.active && (
+                <Button
+                  width="auto"
+                  px={24}
+                  type="button"
+                  onClick={onActivate}
+                  loading={activating}
+                  inverted
+                >
+                  {formatMessage(
+                    messages.activatePredefinedParticipantButtonTitle,
+                  )}
+                </Button>
+              )}
+            </Row>
           </Row>
         </Form>
       )}
