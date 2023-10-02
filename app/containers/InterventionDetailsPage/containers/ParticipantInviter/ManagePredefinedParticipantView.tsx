@@ -2,7 +2,6 @@ import React, { FC, useMemo } from 'react';
 import { useIntl } from 'react-intl';
 import { useDispatch, useSelector } from 'react-redux';
 
-import globalMessages from 'global/i18n/globalMessages';
 import {
   PredefinedParticipantData,
   makeSelectInterventionLoader,
@@ -94,7 +93,6 @@ export const ManagePredefinedParticipantView: FC<Props> = ({
               <CopyPredefinedParticipantUrlButton url={url} />
             </Row>
           </Column>
-          <Text>{formatMessage(globalMessages.requiredFields)}</Text>
           <Column flex={1}>
             <PredefinedParticipantForm
               mode={PredefinedParticipantFormMode.UPDATE}

@@ -1,8 +1,6 @@
 import { FC } from 'react';
-import { useIntl } from 'react-intl';
 import { useDispatch, useSelector } from 'react-redux';
 
-import globalMessages from 'global/i18n/globalMessages';
 import {
   makeSelectInterventionLoader,
   sendInterventionInvitationsRequest,
@@ -10,7 +8,6 @@ import {
 } from 'global/reducers/intervention';
 
 import Column from 'components/Column';
-import Text from 'components/Text';
 import { SelectOption } from 'components/Select/types';
 
 import { BackButton } from './BackButton';
@@ -43,7 +40,6 @@ export const InviteEmailParticipantsView: FC<Props> = ({
   healthClinicOptions,
   normalizedHealthClinicsInfos,
 }) => {
-  const { formatMessage } = useIntl();
   const dispatch = useDispatch();
 
   const submitting = useSelector(
@@ -64,12 +60,11 @@ export const InviteEmailParticipantsView: FC<Props> = ({
   };
 
   return (
-    <Column flex={1} overflow="auto">
+    <Column flex={1} overflow="auto" gap={24}>
       <BackButton
         invitationType={ParticipantInvitationType.EMAIL}
         onBack={onBack}
       />
-      <Text my={24}>{formatMessage(globalMessages.requiredFields)}</Text>
       <Column flex={1}>
         <InviteEmailParticipantsForm
           isModularIntervention={isModularIntervention}
