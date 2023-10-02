@@ -4,6 +4,8 @@ import { useIntl } from 'react-intl';
 
 import AddSign from 'assets/svg/addSign2.svg';
 
+import globalMessages from 'global/i18n/globalMessages';
+
 import Column from 'components/Column';
 import { SelectOption } from 'components/Select/types';
 import FormikSelect from 'components/FormikSelect';
@@ -12,6 +14,7 @@ import { Button, TextButton } from 'components/Button';
 import { FormikEmailsInput } from 'components/FormikEmailsInput';
 import Divider from 'components/Divider';
 import Icon from 'components/Icon';
+import Text from 'components/Text';
 
 import messages from './messages';
 import {
@@ -91,6 +94,7 @@ export const InviteEmailParticipantsForm: FC<Props> = ({
           }}
         >
           <Column>
+            <Text mb={24}>{formatMessage(globalMessages.requiredFields)}</Text>
             {!values.isModularIntervention && (
               <SelectSessionControls
                 selectFirstSessionFormikKey="selectFirstSession"

@@ -4,7 +4,6 @@ import { useDispatch, useSelector } from 'react-redux';
 
 import { themeColors } from 'theme';
 
-import globalMessages from 'global/i18n/globalMessages';
 import {
   makeSelectInterventionLoader,
   sendInterventionInvitationsRequest,
@@ -12,7 +11,6 @@ import {
 } from 'global/reducers/intervention';
 
 import Column from 'components/Column';
-import Text from 'components/Text';
 import { SelectOption } from 'components/Select/types';
 import { Alert } from 'components/Alert';
 import CsvFileExport from 'components/CsvFileExport';
@@ -116,7 +114,7 @@ export const UploadEmailsView: FC<Props> = ({
   };
 
   return (
-    <Column flex={1} overflow="auto">
+    <Column flex={1} overflow="auto" gap={24}>
       <BackButton
         invitationType={ParticipantInvitationType.EMAIL}
         onBack={onBack}
@@ -125,9 +123,8 @@ export const UploadEmailsView: FC<Props> = ({
         content={formatMessage(messages.uploadEmailsInfo)}
         background={themeColors.highlight}
         contentProps={{ maxWidth: 510 }}
-        mt={24}
       />
-      <Row align="center" mt={24} gap={24}>
+      <Row align="center" gap={24}>
         <CsvFileExport
           filename={formatMessage(messages.exampleCsvFilename, {
             name: interventionName,
@@ -143,7 +140,6 @@ export const UploadEmailsView: FC<Props> = ({
       </Row>
       {initialFormValues && (
         <>
-          <Text my={24}>{formatMessage(globalMessages.requiredFields)}</Text>
           <Column flex={1}>
             <InviteEmailParticipantsForm
               initialFormValues={initialFormValues}

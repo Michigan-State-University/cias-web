@@ -4,7 +4,7 @@ import groupBy from 'lodash/groupBy';
 import countBy from 'lodash/countBy';
 import isNil from 'lodash/isNil';
 
-import { RoutePath } from 'global/constants';
+import { RoutePath, WEB_HOST } from 'global/constants';
 import globalMessages from 'global/i18n/globalMessages';
 import {
   PredefinedParticipantData,
@@ -409,3 +409,6 @@ export const preparePredefinedParticipantData = ({
     phoneAttributes,
   };
 };
+
+export const getPredefinedParticipantUrl = (slug: string): string =>
+  `${WEB_HOST}/usr/${slug}`;

@@ -1,8 +1,7 @@
-import React, { FC } from 'react';
+import React, { FC, useMemo } from 'react';
 import { useIntl } from 'react-intl';
 import { useDispatch, useSelector } from 'react-redux';
 
-import globalMessages from 'global/i18n/globalMessages';
 import {
   PredefinedParticipantData,
   makeSelectInterventionLoader,
@@ -10,9 +9,12 @@ import {
   updatePredefinedParticipantRequest,
 } from 'global/reducers/intervention';
 
+import { PredefinedParticipant } from 'models/PredefinedParticipant';
+
 import Column from 'components/Column';
 import Text from 'components/Text';
 import { SelectOption } from 'components/Select/types';
+import Row from 'components/Row';
 
 import { BackButton } from './BackButton';
 import {
@@ -23,7 +25,12 @@ import {
   PredefinedParticipantForm,
   Props as PredefinedParticipantFormProps,
 } from './PredefinedParticipantForm';
-import { preparePredefinedParticipantData } from './utils';
+import {
+  getPredefinedParticipantUrl,
+  preparePredefinedParticipantData,
+} from './utils';
+import messages from './messages';
+import { CopyPredefinedParticipantUrlButton } from './CopyPredefinedParticipantUrlButton';
 
 export type Props = {
   participantId: string;
@@ -43,7 +50,7 @@ export const ManagePredefinedParticipantView: FC<Props> = ({
   const { formatMessage } = useIntl();
   const dispatch = useDispatch();
 
-  const participant = useSelector(
+  const participant: Nullable<PredefinedParticipant> = useSelector(
     makeSelectPredefinedParticipantById(participantId),
   );
 
@@ -64,23 +71,40 @@ export const ManagePredefinedParticipantView: FC<Props> = ({
     );
   };
 
+  const url = useMemo(() => {
+    if (!participant) return '';
+    return getPredefinedParticipantUrl(participant.slug);
+  }, []);
+
   return (
-    <Column flex={1} overflow="auto">
+    <Column flex={1} overflow="auto" gap={24}>
       <BackButton
         invitationType={ParticipantInvitationType.PREDEFINED}
         onBack={onBack}
       />
-      <Text my={24}>{formatMessage(globalMessages.requiredFields)}</Text>
-      <Column flex={1}>
-        <PredefinedParticipantForm
-          mode={PredefinedParticipantFormMode.UPDATE}
-          participant={participant}
-          isReportingIntervention={isReportingIntervention}
-          healthClinicOptions={healthClinicOptions}
-          onSubmit={handleSubmit}
-          submitting={submitting}
-        />
-      </Column>
+      {participant && (
+        <>
+          <Column gap={8}>
+            <Text fontWeight="bold" lineHeight={1.2}>
+              {formatMessage(messages.predefinedParticipantLinkLabel)}
+            </Text>
+            <Row gap={8} align="center">
+              <Text lineHeight={1.2}>{url}</Text>
+              <CopyPredefinedParticipantUrlButton url={url} />
+            </Row>
+          </Column>
+          <Column flex={1}>
+            <PredefinedParticipantForm
+              mode={PredefinedParticipantFormMode.UPDATE}
+              participant={participant}
+              isReportingIntervention={isReportingIntervention}
+              healthClinicOptions={healthClinicOptions}
+              onSubmit={handleSubmit}
+              submitting={submitting}
+            />
+          </Column>
+        </>
+      )}
     </Column>
   );
 };

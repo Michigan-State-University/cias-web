@@ -2,7 +2,6 @@ import React, { FC } from 'react';
 import { useIntl } from 'react-intl';
 import { useDispatch, useSelector } from 'react-redux';
 
-import globalMessages from 'global/i18n/globalMessages';
 import {
   PredefinedParticipantData,
   createPredefinedParticipantRequest,
@@ -12,7 +11,6 @@ import {
 import { themeColors } from 'theme';
 
 import Column from 'components/Column';
-import Text from 'components/Text';
 import { SelectOption } from 'components/Select/types';
 import { Alert } from 'components/Alert';
 
@@ -68,7 +66,7 @@ export const CreatePredefinedParticipantView: FC<Props> = ({
   };
 
   return (
-    <Column flex={1} overflow="auto">
+    <Column flex={1} overflow="auto" gap={24}>
       <BackButton
         invitationType={ParticipantInvitationType.PREDEFINED}
         onBack={onBack}
@@ -77,9 +75,7 @@ export const CreatePredefinedParticipantView: FC<Props> = ({
         content={formatMessage(messages.predefinedParticipantsInfo)}
         background={themeColors.highlight}
         contentProps={{ maxWidth: 510 }}
-        mt={24}
       />
-      <Text my={24}>{formatMessage(globalMessages.requiredFields)}</Text>
       <Column flex={1}>
         <PredefinedParticipantForm
           mode={PredefinedParticipantFormMode.CREATE}

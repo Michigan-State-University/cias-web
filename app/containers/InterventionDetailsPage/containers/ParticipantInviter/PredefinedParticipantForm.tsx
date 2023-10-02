@@ -13,6 +13,7 @@ import Row from 'components/Row';
 import { Button } from 'components/Button';
 import { FormikPhoneNumberInput } from 'components/FormikPhoneNumberInput';
 import FormikInput from 'components/FormikInput';
+import Text from 'components/Text';
 
 import messages from './messages';
 import {
@@ -106,56 +107,55 @@ export const PredefinedParticipantForm: FC<Props> = ({
           }}
         >
           <Column gap={16}>
-            <>
-              {isReportingIntervention && (
-                <FormikSelect
-                  formikKey="healthClinicOption"
-                  label={formatMessage(messages.clinicSelectLabel)}
-                  inputProps={{
-                    placeholder: formatMessage(
-                      messages.clinicSelectPlaceholder,
-                    ),
-                    isClearable: true,
-                  }}
-                  options={healthClinicOptions}
-                  required
-                  disabled={disabled}
-                />
-              )}
-              <FormikInput
-                formikKey="firstName"
-                label={formatMessage(messages.firstNameInputLabel)}
-                placeholder={formatMessage(messages.firstNameInputPlaceholder)}
-                disabled={disabled}
-                {...COMMON_INPUT_PROPS}
-              />
-              <FormikInput
-                formikKey="lastName"
-                label={formatMessage(messages.lastNameInputLabel)}
-                placeholder={formatMessage(messages.lastNameInputPlaceholder)}
-                disabled={disabled}
-                {...COMMON_INPUT_PROPS}
-              />
-              <FormikInput
-                formikKey="email"
-                label={formatMessage(messages.emailInputLabel)}
-                placeholder={formatMessage(messages.emailInputPlaceholder)}
-                disabled={disabled}
-                {...COMMON_INPUT_PROPS}
-              />
-              <FormikInput
-                formikKey="externalId"
-                label={formatMessage(messages.externalIdInputLabel)}
-                placeholder={formatMessage(messages.externalIdInputPlaceholder)}
-                disabled={disabled}
-                {...COMMON_INPUT_PROPS}
-              />
-              <FormikPhoneNumberInput
-                isoKey="iso"
-                numberKey="number"
+            {!disabled && (
+              <Text mb={8}>{formatMessage(globalMessages.requiredFields)}</Text>
+            )}
+            {isReportingIntervention && (
+              <FormikSelect
+                formikKey="healthClinicOption"
+                label={formatMessage(messages.clinicSelectLabel)}
+                inputProps={{
+                  placeholder: formatMessage(messages.clinicSelectPlaceholder),
+                  isClearable: true,
+                }}
+                options={healthClinicOptions}
+                required={!disabled}
                 disabled={disabled}
               />
-            </>
+            )}
+            <FormikInput
+              formikKey="firstName"
+              label={formatMessage(messages.firstNameInputLabel)}
+              placeholder={formatMessage(messages.firstNameInputPlaceholder)}
+              disabled={disabled}
+              {...COMMON_INPUT_PROPS}
+            />
+            <FormikInput
+              formikKey="lastName"
+              label={formatMessage(messages.lastNameInputLabel)}
+              placeholder={formatMessage(messages.lastNameInputPlaceholder)}
+              disabled={disabled}
+              {...COMMON_INPUT_PROPS}
+            />
+            <FormikInput
+              formikKey="email"
+              label={formatMessage(messages.emailInputLabel)}
+              placeholder={formatMessage(messages.emailInputPlaceholder)}
+              disabled={disabled}
+              {...COMMON_INPUT_PROPS}
+            />
+            <FormikInput
+              formikKey="externalId"
+              label={formatMessage(messages.externalIdInputLabel)}
+              placeholder={formatMessage(messages.externalIdInputPlaceholder)}
+              disabled={disabled}
+              {...COMMON_INPUT_PROPS}
+            />
+            <FormikPhoneNumberInput
+              isoKey="iso"
+              numberKey="number"
+              disabled={disabled}
+            />
           </Column>
           <Row justify="end" gap={16}>
             {!disabled && isUpdateMode && (

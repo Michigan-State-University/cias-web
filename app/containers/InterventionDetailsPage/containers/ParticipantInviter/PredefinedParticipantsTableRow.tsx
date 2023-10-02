@@ -14,6 +14,8 @@ import Row from 'components/Row';
 
 import messages from './messages';
 import { TEXT_BUTTON_PROPS } from './constants';
+import { CopyPredefinedParticipantUrlButton } from './CopyPredefinedParticipantUrlButton';
+import { getPredefinedParticipantUrl } from './utils';
 
 export type Props = {
   predefinedParticipant: PredefinedParticipant;
@@ -26,7 +28,7 @@ const PredefinedParticipantsTableRowComponent: FC<Props> = ({
 }) => {
   const { formatMessage } = useIntl();
 
-  const { id, fullName, externalId, active, invitationSentAt, phone } =
+  const { id, fullName, externalId, active, invitationSentAt, phone, slug } =
     predefinedParticipant;
 
   return (
@@ -62,7 +64,10 @@ const PredefinedParticipantsTableRowComponent: FC<Props> = ({
         />
       </NoMaxWidthTD>
       <NoMaxWidthTD padding={8} width="20%">
-        <Row justify="end">
+        <Row justify="end" gap={16}>
+          <CopyPredefinedParticipantUrlButton
+            url={getPredefinedParticipantUrl(slug)}
+          />
           <TextButton
             buttonProps={TEXT_BUTTON_PROPS}
             onClick={() => onManage(id)}
