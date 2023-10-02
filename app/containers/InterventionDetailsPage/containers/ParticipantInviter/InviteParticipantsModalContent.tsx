@@ -19,6 +19,7 @@ import { SelectOption } from 'components/Select/types';
 
 import {
   InviteParticipantModalView,
+  InviteParticipantModalViewState,
   NormalizedHealthClinicsInfos,
   NormalizedSessions,
   ParticipantInvitationType,
@@ -36,8 +37,8 @@ export type Props = {
   interventionStatus: InterventionStatus;
   interventionType: InterventionType;
   sessions: Session[];
-  currentView: InviteParticipantModalView;
-  setCurrentView: (view: InviteParticipantModalView) => void;
+  currentView: InviteParticipantModalViewState;
+  setCurrentView: (view: InviteParticipantModalViewState) => void;
 };
 
 export const InviteParticipantsModalContent: FC<Props> = ({
@@ -134,34 +135,42 @@ export const InviteParticipantsModalContent: FC<Props> = ({
 
   const handleInvite = (invitationType: ParticipantInvitationType) => {
     if (invitationType === ParticipantInvitationType.EMAIL) {
-      setCurrentView(InviteParticipantModalView.INVITE_EMAIL_PARTICIPANTS);
+      setCurrentView({
+        view: InviteParticipantModalView.INVITE_EMAIL_PARTICIPANTS,
+      });
     } else if (invitationType === ParticipantInvitationType.PREDEFINED) {
-      setCurrentView(InviteParticipantModalView.INVITE_PREDEFINED_PARTICIPANT);
+      setCurrentView({
+        view: InviteParticipantModalView.INVITE_PREDEFINED_PARTICIPANT,
+      });
     }
   };
 
   const handleUploadEmails = () => {
-    setCurrentView(InviteParticipantModalView.UPLOAD_EMAILS);
+    setCurrentView({
+      view: InviteParticipantModalView.UPLOAD_EMAILS,
+    });
   };
 
-  const handleBack = (invitationType: ParticipantInvitationType) => {
-    if (invitationType === ParticipantInvitationType.EMAIL) {
-      setCurrentView(InviteParticipantModalView.PARTICIPANT_LIST);
-    } else if (invitationType === ParticipantInvitationType.PREDEFINED) {
-      setCurrentView(InviteParticipantModalView.PARTICIPANT_LIST);
-    }
+  const handleBack = (view?: InviteParticipantModalViewState) => {
+    setCurrentView(
+      view ?? {
+        view: InviteParticipantModalView.PARTICIPANT_LIST,
+      },
+    );
   };
 
   const showLoader =
     organizationLoading ||
     (isReportingIntervention && organizationId !== organization?.id);
 
+  const { view } = currentView;
+
   return (
     <>
       {showLoader && <Loader type="inline" />}
       {!showLoader && (
         <>
-          {currentView === InviteParticipantModalView.PARTICIPANT_LIST && (
+          {view === InviteParticipantModalView.PARTICIPANT_LIST && (
             <ParticipantListView
               isModularIntervention={isModularIntervention}
               isReportingIntervention={isReportingIntervention}
@@ -178,8 +187,7 @@ export const InviteParticipantsModalContent: FC<Props> = ({
               setActiveTab={setActiveParticipantListViewTab}
             />
           )}
-          {currentView ===
-            InviteParticipantModalView.INVITE_EMAIL_PARTICIPANTS && (
+          {view === InviteParticipantModalView.INVITE_EMAIL_PARTICIPANTS && (
             <InviteEmailParticipantsView
               isModularIntervention={isModularIntervention}
               isReportingIntervention={isReportingIntervention}
@@ -190,7 +198,7 @@ export const InviteParticipantsModalContent: FC<Props> = ({
               normalizedHealthClinicsInfos={normalizedHealthClinicsInfos}
             />
           )}
-          {currentView ===
+          {view ===
             InviteParticipantModalView.INVITE_PREDEFINED_PARTICIPANT && (
             <CreatePredefinedParticipantView
               isModularIntervention={isModularIntervention}
@@ -200,7 +208,7 @@ export const InviteParticipantsModalContent: FC<Props> = ({
               onBack={handleBack}
             />
           )}
-          {currentView === InviteParticipantModalView.UPLOAD_EMAILS && (
+          {view === InviteParticipantModalView.UPLOAD_EMAILS && (
             <UploadEmailsView
               interventionName={interventionName}
               isModularIntervention={isModularIntervention}

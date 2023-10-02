@@ -1,8 +1,8 @@
 import { Session } from 'models/Session';
 import { HealthClinic } from 'models/Organization';
+import { CountryCode } from 'libphonenumber-js/types';
 
 import { SelectOption } from 'components/Select/types';
-import { CountryCode } from 'libphonenumber-js/types';
 
 export enum InviteParticipantModalView {
   PARTICIPANT_LIST = 'PARTICIPANT_LIST',
@@ -11,6 +11,18 @@ export enum InviteParticipantModalView {
   MANAGE_PREDEFINED_PARTICIPANT = 'MANAGE_PREDEFINED_PARTICIPANT',
   UPLOAD_EMAILS = 'UPLOAD_EMAILS',
 }
+
+export type InviteParticipantModalViewState =
+  | {
+      view: InviteParticipantModalView.MANAGE_PREDEFINED_PARTICIPANT;
+      participantId: string;
+    }
+  | {
+      view: Exclude<
+        InviteParticipantModalView,
+        InviteParticipantModalView.MANAGE_PREDEFINED_PARTICIPANT
+      >;
+    };
 
 export enum ParticipantInvitationType {
   EMAIL = 'EMAIL',

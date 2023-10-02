@@ -11,7 +11,10 @@ import {
   INVITE_PARTICIPANTS_MODAL_HEIGHT,
   INVITE_PARTICIPANTS_MODAL_WIDTH,
 } from './constants';
-import { InviteParticipantModalView } from './types';
+import {
+  InviteParticipantModalView,
+  InviteParticipantModalViewState,
+} from './types';
 import { InviteParticipantsModalContent } from './InviteParticipantsModalContent';
 
 export type Props = {
@@ -35,13 +38,16 @@ export const InviteParticipantsModal: FC<Props> = ({
 }) => {
   const { formatMessage } = useIntl();
 
-  const [currentView, setCurrentView] = useState<InviteParticipantModalView>(
-    InviteParticipantModalView.PARTICIPANT_LIST,
-  );
+  const [currentView, setCurrentView] =
+    useState<InviteParticipantModalViewState>({
+      view: InviteParticipantModalView.PARTICIPANT_LIST,
+    });
 
   useEffect(() => {
     if (!visible) {
-      setCurrentView(InviteParticipantModalView.PARTICIPANT_LIST);
+      setCurrentView({
+        view: InviteParticipantModalView.PARTICIPANT_LIST,
+      });
     }
   }, [visible]);
 
