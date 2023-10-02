@@ -18,6 +18,7 @@ import {
   removeCollaboratorSaga,
   createPredefinedParticipantSaga,
   fetchPredefinedParticipantsSaga,
+  updatePredefinedParticipantSaga,
 } from 'global/reducers/intervention/sagas';
 
 export default function* interventionDetailsPageSagas() {
@@ -36,6 +37,7 @@ export default function* interventionDetailsPageSagas() {
     editShortLinksSaga(),
     createPredefinedParticipantSaga(),
     fetchPredefinedParticipantsSaga(),
+    updatePredefinedParticipantSaga(),
   ]);
 }
 

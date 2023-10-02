@@ -13,7 +13,7 @@ import { TEXT_BUTTON_PROPS } from './constants';
 
 export type Props = {
   invitationType: ParticipantInvitationType;
-  onBack: (invitationType: ParticipantInvitationType) => void;
+  onBack: () => void;
 };
 
 export const BackButton: FC<Props> = ({ invitationType, onBack }) => {
@@ -21,10 +21,7 @@ export const BackButton: FC<Props> = ({ invitationType, onBack }) => {
 
   return (
     <Row>
-      <TextButton
-        onClick={() => onBack(invitationType)}
-        buttonProps={TEXT_BUTTON_PROPS}
-      >
+      <TextButton onClick={() => onBack()} buttonProps={TEXT_BUTTON_PROPS}>
         <Icon src={TriangleBackIcon} />
         {formatMessage(messages.backButtonTitle, { invitationType })}
       </TextButton>

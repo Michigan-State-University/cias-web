@@ -7,13 +7,17 @@ import isNil from 'lodash/isNil';
 import { RoutePath } from 'global/constants';
 import globalMessages from 'global/i18n/globalMessages';
 import {
-  CreatePredefinedParticipantData,
+  PredefinedParticipantData,
   InterventionInvitationTargetType,
   SendInterventionInvitationsData,
 } from 'global/reducers/intervention';
 
 import { parametrizeRoutePath } from 'utils/router';
-import { csvEmailValidator, emailFormValidationSchema } from 'utils/validators';
+import {
+  csvEmailValidator,
+  emailFormValidationSchema,
+  requiredEmailFormValidationSchema,
+} from 'utils/validators';
 
 import { SelectOption } from 'components/Select/types';
 import {
@@ -32,6 +36,7 @@ import {
   UploadedEmailsCsvData,
 } from './types';
 import messages from './messages';
+import { PredefinedParticipant } from '../../../../models/PredefinedParticipant';
 
 export const UNIQUE_CLINICS_METHOD = 'uniqueClinics';
 
@@ -191,6 +196,7 @@ export const createInviteEmailsParticipantsFormSchema = (
 export const createPredefinedParticipantFormSchema = (
   formatMessage: IntlShape['formatMessage'],
   isReportingIntervention: boolean,
+  isUpdateMode: boolean,
 ) =>
   Yup.object()
     .shape({
@@ -204,7 +210,9 @@ export const createPredefinedParticipantFormSchema = (
               .nullable(),
           }
         : {}),
-      email: emailFormValidationSchema,
+      email: isUpdateMode
+        ? requiredEmailFormValidationSchema
+        : emailFormValidationSchema,
     })
     // @ts-ignore
     .concat(phoneNumberSchema(formatMessage, false, true));
@@ -274,15 +282,28 @@ export const getInviteEmailParticipantsFormInitialValues = (
   };
 };
 
-export const getPredefinedParticipantFormInitialValues =
-  (): PredefinedParticipantFormValues => ({
-    healthClinicOption: null,
-    firstName: '',
-    lastName: '',
-    email: '',
-    externalId: '',
-    ...getInitialValues(),
-  });
+export const getPredefinedParticipantFormInitialValues = (
+  healthClinicOptions: SelectOption<string>[],
+  participant: Nullable<PredefinedParticipant>,
+): PredefinedParticipantFormValues => {
+  const healthClinicOption = participant?.healthClinicId
+    ? healthClinicOptions.find(
+        ({ value }) => value === participant.healthClinicId,
+      )
+    : null;
+  const phoneAttributes = getInitialValues(
+    participant?.phone?.number,
+    participant?.phone?.iso,
+  );
+  return {
+    healthClinicOption,
+    ...phoneAttributes,
+    firstName: participant?.firstName ?? '',
+    lastName: participant?.lastName ?? '',
+    email: participant?.email ?? '',
+    externalId: participant?.externalId ?? '',
+  };
+};
 
 export const prepareUploadEmailsInitialValues = (
   parsedData: ParsedEmailsCsv,
@@ -368,7 +389,7 @@ export const prepareSendInvitationsPayload = (
   }));
 };
 
-export const prepareCreatePredefinedParticipantData = ({
+export const preparePredefinedParticipantData = ({
   healthClinicOption,
   firstName,
   lastName,
@@ -376,7 +397,7 @@ export const prepareCreatePredefinedParticipantData = ({
   email,
   iso,
   number,
-}: PredefinedParticipantFormValues): CreatePredefinedParticipantData => {
+}: PredefinedParticipantFormValues): PredefinedParticipantData => {
   const phoneAttributes =
     number && iso ? getPhoneAttributes(number, iso) : null;
   return {

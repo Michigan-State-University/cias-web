@@ -108,6 +108,9 @@ import {
   FETCH_PREDEFINED_PARTICIPANTS_REQUEST,
   FETCH_PREDEFINED_PARTICIPANTS_SUCCESS,
   FETCH_PREDEFINED_PARTICIPANTS_ERROR,
+  UPDATE_PREDEFINED_PARTICIPANT_REQUEST,
+  UPDATE_PREDEFINED_PARTICIPANT_SUCCESS,
+  UPDATE_PREDEFINED_PARTICIPANT_ERROR,
 } from './constants';
 
 export const fetchInterventionRequest = (id, showLoader = false) =>
@@ -475,3 +478,20 @@ export const fetchPredefinedParticipantsSuccess = (predefinedParticipants) =>
   });
 export const fetchPredefinedParticipantsError = (error) =>
   actionBuilder(FETCH_PREDEFINED_PARTICIPANTS_ERROR, { error });
+
+export const updatePredefinedParticipantRequest = (
+  interventionId,
+  participantId,
+  predefinedParticipantData,
+) =>
+  actionBuilder(UPDATE_PREDEFINED_PARTICIPANT_REQUEST, {
+    interventionId,
+    participantId,
+    predefinedParticipantData,
+  });
+export const updatePredefinedParticipantSuccess = (predefinedParticipant) =>
+  actionBuilder(UPDATE_PREDEFINED_PARTICIPANT_SUCCESS, {
+    predefinedParticipant,
+  });
+export const updatePredefinedParticipantError = () =>
+  actionBuilder(UPDATE_PREDEFINED_PARTICIPANT_ERROR, {});

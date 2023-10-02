@@ -49,7 +49,7 @@ function* createPredefinedParticipant({
     );
 
     if (onSuccess) {
-      onSuccess();
+      onSuccess(predefinedParticipant.id);
     }
   } catch (error) {
     yield put(createPredefinedParticipantError());

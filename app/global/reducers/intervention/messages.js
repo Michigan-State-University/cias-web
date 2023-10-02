@@ -160,10 +160,18 @@ export default defineMessages({
   },
   createPredefinedParticipantSuccess: {
     id: `${scope}.createPredefinedParticipantSuccess`,
-    defaultMessage: 'Predefined participant has been successfully created.',
+    defaultMessage: 'Participant has been successfully created.',
   },
   createPredefinedParticipantError: {
     id: `${scope}.createPredefinedParticipantError`,
     defaultMessage: 'Unable to create predefined participant',
+  },
+  updatePredefinedParticipantSuccess: {
+    id: `${scope}.updatePredefinedParticipantSuccess`,
+    defaultMessage: 'Participant has been successfully updated.',
+  },
+  updatePredefinedParticipantError: {
+    id: `${scope}.updatePredefinedParticipantError`,
+    defaultMessage: 'Unable to update predefined participant',
   },
 });

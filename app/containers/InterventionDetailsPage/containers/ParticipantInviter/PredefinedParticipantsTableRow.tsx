@@ -17,14 +17,16 @@ import { TEXT_BUTTON_PROPS } from './constants';
 
 export type Props = {
   predefinedParticipant: PredefinedParticipant;
+  onManage: (participantId: string) => void;
 };
 
 const PredefinedParticipantsTableRowComponent: FC<Props> = ({
   predefinedParticipant,
+  onManage,
 }) => {
   const { formatMessage } = useIntl();
 
-  const { fullName, externalId, active, invitationSentAt, phone } =
+  const { id, fullName, externalId, active, invitationSentAt, phone } =
     predefinedParticipant;
 
   return (
@@ -61,7 +63,10 @@ const PredefinedParticipantsTableRowComponent: FC<Props> = ({
       </NoMaxWidthTD>
       <NoMaxWidthTD padding={8} width="20%">
         <Row justify="end">
-          <TextButton buttonProps={TEXT_BUTTON_PROPS} onClick={() => {}}>
+          <TextButton
+            buttonProps={TEXT_BUTTON_PROPS}
+            onClick={() => onManage(id)}
+          >
             {formatMessage(messages.managePredefinedParticipantButtonLabel)}
           </TextButton>
         </Row>

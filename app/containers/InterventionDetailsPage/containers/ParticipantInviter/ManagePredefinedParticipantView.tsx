@@ -1,12 +1,13 @@
-import { FC } from 'react';
+import React, { FC } from 'react';
 import { useIntl } from 'react-intl';
 import { useDispatch, useSelector } from 'react-redux';
 
 import globalMessages from 'global/i18n/globalMessages';
 import {
+  PredefinedParticipantData,
   makeSelectInterventionLoader,
-  sendInterventionInvitationsRequest,
-  SendInterventionInvitationsData,
+  makeSelectPredefinedParticipantById,
+  updatePredefinedParticipantRequest,
 } from 'global/reducers/intervention';
 
 import Column from 'components/Column';
@@ -15,50 +16,50 @@ import { SelectOption } from 'components/Select/types';
 
 import { BackButton } from './BackButton';
 import {
-  NormalizedHealthClinicsInfos,
   ParticipantInvitationType,
+  PredefinedParticipantFormMode,
 } from './types';
 import {
-  InviteEmailParticipantsForm,
-  Props as InviteEmailParticipantsFormProps,
-} from './InviteEmailParticipantsForm';
-import { prepareSendInvitationsPayload } from './utils';
+  PredefinedParticipantForm,
+  Props as PredefinedParticipantFormProps,
+} from './PredefinedParticipantForm';
+import { preparePredefinedParticipantData } from './utils';
 
 export type Props = {
-  isModularIntervention: boolean;
+  participantId: string;
   isReportingIntervention: boolean;
   interventionId: string;
-  sessionOptions: SelectOption<string>[];
   healthClinicOptions: SelectOption<string>[];
   onBack: () => void;
-  normalizedHealthClinicsInfos: NormalizedHealthClinicsInfos;
 };
 
-export const InviteEmailParticipantsView: FC<Props> = ({
+export const ManagePredefinedParticipantView: FC<Props> = ({
+  participantId,
   onBack,
-  isModularIntervention,
   isReportingIntervention,
   interventionId,
-  sessionOptions,
   healthClinicOptions,
-  normalizedHealthClinicsInfos,
 }) => {
   const { formatMessage } = useIntl();
   const dispatch = useDispatch();
 
-  const submitting = useSelector(
-    makeSelectInterventionLoader('sendInterventionInvitations'),
+  const participant = useSelector(
+    makeSelectPredefinedParticipantById(participantId),
   );
 
-  const handleSubmit: InviteEmailParticipantsFormProps['onSubmit'] = (
-    values,
-  ) => {
-    const invitations: SendInterventionInvitationsData =
-      prepareSendInvitationsPayload(values, interventionId);
+  const submitting = useSelector(
+    makeSelectInterventionLoader('updatePredefinedParticipant'),
+  );
+
+  const handleSubmit: PredefinedParticipantFormProps['onSubmit'] = (values) => {
+    const predefinedParticipantData: PredefinedParticipantData =
+      preparePredefinedParticipantData(values);
 
     dispatch(
-      sendInterventionInvitationsRequest(interventionId, invitations, () =>
-        onBack(),
+      updatePredefinedParticipantRequest(
+        interventionId,
+        participantId,
+        predefinedParticipantData,
       ),
     );
   };
@@ -66,19 +67,18 @@ export const InviteEmailParticipantsView: FC<Props> = ({
   return (
     <Column flex={1} overflow="auto">
       <BackButton
-        invitationType={ParticipantInvitationType.EMAIL}
+        invitationType={ParticipantInvitationType.PREDEFINED}
         onBack={onBack}
       />
       <Text my={24}>{formatMessage(globalMessages.requiredFields)}</Text>
       <Column flex={1}>
-        <InviteEmailParticipantsForm
-          isModularIntervention={isModularIntervention}
+        <PredefinedParticipantForm
+          mode={PredefinedParticipantFormMode.UPDATE}
+          participant={participant}
           isReportingIntervention={isReportingIntervention}
-          sessionOptions={sessionOptions}
           healthClinicOptions={healthClinicOptions}
           onSubmit={handleSubmit}
           submitting={submitting}
-          normalizedHealthClinicsInfos={normalizedHealthClinicsInfos}
         />
       </Column>
     </Column>

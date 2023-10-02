@@ -31,6 +31,7 @@ export type Props = {
   isReportingIntervention: boolean;
   normalizedHealthClinicsInfos: NormalizedHealthClinicsInfos;
   onInvite: (invitationType: ParticipantInvitationType) => void;
+  onManage: (participantId: string) => void;
 };
 
 export const PredefinedParticipantsTab: FC<Props> = ({
@@ -38,6 +39,7 @@ export const PredefinedParticipantsTab: FC<Props> = ({
   isReportingIntervention,
   normalizedHealthClinicsInfos,
   onInvite,
+  onManage,
 }) => {
   const dispatch = useDispatch();
 
@@ -90,6 +92,7 @@ export const PredefinedParticipantsTab: FC<Props> = ({
         {!isReportingIntervention && (
           <PredefinedParticipantsTable
             predefinedParticipants={predefinedParticipants}
+            onManage={onManage}
           />
         )}
         {isReportingIntervention &&
@@ -101,6 +104,7 @@ export const PredefinedParticipantsTab: FC<Props> = ({
               >
                 <PredefinedParticipantsTable
                   predefinedParticipants={groupedParticipants}
+                  onManage={onManage}
                 />
               </HealthClinicCollapse>
             ),

@@ -1,5 +1,10 @@
 import { defineMessages } from 'react-intl';
-import { InviteParticipantModalView, ParticipantInvitationType } from './types';
+
+import {
+  InviteParticipantModalView,
+  ParticipantInvitationType,
+  PredefinedParticipantFormMode,
+} from './types';
 
 export const scope =
   'app.containers.InterventionDetailsPage.containers.InviteParticipantsButton';
@@ -28,6 +33,10 @@ export default defineMessages({
   [`viewTitle${InviteParticipantModalView.UPLOAD_EMAILS}`]: {
     id: `${scope}.viewTitle${InviteParticipantModalView.UPLOAD_EMAILS}`,
     defaultMessage: 'Bulk e-mail upload',
+  },
+  [`viewTitle${InviteParticipantModalView.MANAGE_PREDEFINED_PARTICIPANT}`]: {
+    id: `${scope}.viewTitle${InviteParticipantModalView.MANAGE_PREDEFINED_PARTICIPANT}`,
+    defaultMessage: 'Manage participant',
   },
   sessionSelectLabel: {
     id: `${scope}.sessionSelectLabel`,
@@ -78,9 +87,9 @@ export default defineMessages({
     id: `${scope}.inviteEmailParticipantSubmitButtonTitle`,
     defaultMessage: `Send invitations`,
   },
-  createPredefinedParticipantSubmitButtonTitle: {
-    id: `${scope}.createPredefinedParticipantSubmitButtonTitle`,
-    defaultMessage: `Create participant`,
+  predefinedParticipantFormSubmitButtonTitle: {
+    id: `${scope}.predefinedParticipantFormSubmitButtonTitle`,
+    defaultMessage: `{mode, select, ${PredefinedParticipantFormMode.CREATE} {Create participant} ${PredefinedParticipantFormMode.UPDATE} {Save changes} other {}}`,
   },
   invitingEmailsParticipantsNotPossibleMessage: {
     id: `${scope}.invitingEmailsParticipantsNotPossibleMessage`,
@@ -221,5 +230,9 @@ export default defineMessages({
   managePredefinedParticipantButtonLabel: {
     id: `${scope}.managePredefinedParticipantButtonLabel`,
     defaultMessage: `Manage`,
+  },
+  editDetailsButtonTitle: {
+    id: `${scope}.editDetailsButtonTitle`,
+    defaultMessage: `Edit details`,
   },
 });

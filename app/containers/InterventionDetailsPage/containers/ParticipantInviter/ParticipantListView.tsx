@@ -29,6 +29,7 @@ export type Props = {
   normalizedHealthClinicsInfos: NormalizedHealthClinicsInfos;
   onInvite: (invitationType: ParticipantInvitationType) => void;
   onUploadEmails: () => void;
+  onManage: (participantId: string) => void;
   activeTab: string;
   setActiveTab: (tab: string) => void;
 };
@@ -45,6 +46,7 @@ export const ParticipantListView: FC<Props> = ({
   normalizedHealthClinicsInfos,
   onInvite,
   onUploadEmails,
+  onManage,
   activeTab,
   setActiveTab,
 }) => {
@@ -95,6 +97,7 @@ export const ParticipantListView: FC<Props> = ({
             isReportingIntervention={isReportingIntervention}
             normalizedHealthClinicsInfos={normalizedHealthClinicsInfos}
             onInvite={onInvite}
+            onManage={onManage}
           />
         </div>
       </Tabs>

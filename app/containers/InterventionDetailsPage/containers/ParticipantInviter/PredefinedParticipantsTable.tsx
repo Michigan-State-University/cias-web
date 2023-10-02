@@ -11,10 +11,12 @@ import { PredefinedParticipantsTableRow } from './PredefinedParticipantsTableRow
 
 export type Props = {
   predefinedParticipants: PredefinedParticipant[];
+  onManage: (participantId: string) => void;
 };
 
 export const PredefinedParticipantsTable: FC<Props> = ({
   predefinedParticipants,
+  onManage,
 }) => {
   const { formatMessage } = useIntl();
 
@@ -45,6 +47,7 @@ export const PredefinedParticipantsTable: FC<Props> = ({
           <PredefinedParticipantsTableRow
             key={predefinedParticipant.id}
             predefinedParticipant={predefinedParticipant}
+            onManage={onManage}
           />
         ))}
       </TBody>

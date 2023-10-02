@@ -46,7 +46,7 @@ export type Props = {
   sessionOptions: SelectOption<string>[];
   healthClinicOptions: SelectOption<string>[];
   normalizedHealthClinicsInfos: NormalizedHealthClinicsInfos;
-  onBack: (invitationType: ParticipantInvitationType) => void;
+  onBack: () => void;
 };
 
 export const UploadEmailsView: FC<Props> = ({
@@ -74,7 +74,7 @@ export const UploadEmailsView: FC<Props> = ({
 
     dispatch(
       sendInterventionInvitationsRequest(interventionId, invitations, () =>
-        onBack(ParticipantInvitationType.EMAIL),
+        onBack(),
       ),
     );
   };

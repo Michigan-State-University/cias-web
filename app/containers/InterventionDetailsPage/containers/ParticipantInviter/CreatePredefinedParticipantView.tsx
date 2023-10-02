@@ -4,7 +4,7 @@ import { useDispatch, useSelector } from 'react-redux';
 
 import globalMessages from 'global/i18n/globalMessages';
 import {
-  CreatePredefinedParticipantData,
+  PredefinedParticipantData,
   createPredefinedParticipantRequest,
   makeSelectInterventionLoader,
 } from 'global/reducers/intervention';
@@ -17,20 +17,24 @@ import { SelectOption } from 'components/Select/types';
 import { Alert } from 'components/Alert';
 
 import { BackButton } from './BackButton';
-import { ParticipantInvitationType } from './types';
+import {
+  InviteParticipantModalView,
+  InviteParticipantModalViewState,
+  ParticipantInvitationType,
+  PredefinedParticipantFormMode,
+} from './types';
 import {
   PredefinedParticipantForm,
   Props as PredefinedParticipantFormProps,
 } from './PredefinedParticipantForm';
-import { prepareCreatePredefinedParticipantData } from './utils';
+import { preparePredefinedParticipantData } from './utils';
 import messages from './messages';
 
 export type Props = {
-  isModularIntervention: boolean;
   isReportingIntervention: boolean;
   interventionId: string;
   healthClinicOptions: SelectOption<string>[];
-  onBack: (invitationType: ParticipantInvitationType) => void;
+  onBack: (view?: InviteParticipantModalViewState) => void;
 };
 
 export const CreatePredefinedParticipantView: FC<Props> = ({
@@ -47,15 +51,18 @@ export const CreatePredefinedParticipantView: FC<Props> = ({
   );
 
   const handleSubmit: PredefinedParticipantFormProps['onSubmit'] = (values) => {
-    const predefinedParticipantData: CreatePredefinedParticipantData =
-      prepareCreatePredefinedParticipantData(values);
+    const predefinedParticipantData: PredefinedParticipantData =
+      preparePredefinedParticipantData(values);
 
     dispatch(
       createPredefinedParticipantRequest(
         interventionId,
         predefinedParticipantData,
-        // TODO https://htdevelopers.atlassian.net/browse/CIAS30-3642 open manage participant page after creation
-        () => onBack(ParticipantInvitationType.PREDEFINED),
+        (participantId: string) =>
+          onBack({
+            view: InviteParticipantModalView.MANAGE_PREDEFINED_PARTICIPANT,
+            participantId,
+          }),
       ),
     );
   };
@@ -75,6 +82,7 @@ export const CreatePredefinedParticipantView: FC<Props> = ({
       <Text my={24}>{formatMessage(globalMessages.requiredFields)}</Text>
       <Column flex={1}>
         <PredefinedParticipantForm
+          mode={PredefinedParticipantFormMode.CREATE}
           isReportingIntervention={isReportingIntervention}
           healthClinicOptions={healthClinicOptions}
           onSubmit={handleSubmit}
