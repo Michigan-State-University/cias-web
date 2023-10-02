@@ -17,7 +17,11 @@ import { SelectOption } from 'components/Select/types';
 import { Alert } from 'components/Alert';
 
 import { BackButton } from './BackButton';
-import { ParticipantInvitationType } from './types';
+import {
+  InviteParticipantModalView,
+  InviteParticipantModalViewState,
+  ParticipantInvitationType,
+} from './types';
 import {
   PredefinedParticipantForm,
   Props as PredefinedParticipantFormProps,
@@ -30,7 +34,7 @@ export type Props = {
   isReportingIntervention: boolean;
   interventionId: string;
   healthClinicOptions: SelectOption<string>[];
-  onBack: () => void;
+  onBack: (view?: InviteParticipantModalViewState) => void;
 };
 
 export const CreatePredefinedParticipantView: FC<Props> = ({
@@ -54,8 +58,11 @@ export const CreatePredefinedParticipantView: FC<Props> = ({
       createPredefinedParticipantRequest(
         interventionId,
         predefinedParticipantData,
-        // TODO https://htdevelopers.atlassian.net/browse/CIAS30-3642 open manage participant page after creation
-        () => onBack(),
+        (participantId: string) =>
+          onBack({
+            view: InviteParticipantModalView.MANAGE_PREDEFINED_PARTICIPANT,
+            participantId,
+          }),
       ),
     );
   };
