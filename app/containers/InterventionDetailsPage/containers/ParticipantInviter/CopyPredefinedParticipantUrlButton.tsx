@@ -14,7 +14,7 @@ export type Props = {
   url: string;
 };
 
-export const CopyPredefinedParticipantLinkButton: FC<Props> = ({ url }) => {
+export const CopyPredefinedParticipantUrlButton: FC<Props> = ({ url }) => {
   const { formatMessage } = useIntl();
 
   return (
@@ -27,7 +27,7 @@ export const CopyPredefinedParticipantLinkButton: FC<Props> = ({ url }) => {
     >
       <ImageButton
         src={ShareIcon}
-        title={formatMessage(messages.copyButtonTitle)}
+        title={formatMessage(messages.copyPredefinedParticipanyUrlButtonTitle)}
         fill={themeColors.text}
         showHoverEffect
         noHoverBackground

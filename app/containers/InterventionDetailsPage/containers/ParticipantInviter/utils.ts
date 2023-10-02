@@ -410,5 +410,5 @@ export const preparePredefinedParticipantData = ({
   };
 };
 
-export const getPredefinedParticipantLink = (slug: string): string =>
+export const getPredefinedParticipantUrl = (slug: string): string =>
   `${WEB_HOST}/usr/${slug}`;

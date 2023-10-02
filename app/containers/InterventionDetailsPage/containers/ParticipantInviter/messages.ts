@@ -235,8 +235,12 @@ export default defineMessages({
     id: `${scope}.editDetailsButtonTitle`,
     defaultMessage: `Edit details`,
   },
-  copyButtonTitle: {
-    id: `${scope}.copyButtonTitle`,
+  copyPredefinedParticipanyUrlButtonTitle: {
+    id: `${scope}.copyPredefinedParticipanyUrlButtonTitle`,
     defaultMessage: `Copy predefined participant invitation URL`,
+  },
+  predefinedParticipantLinkLabel: {
+    id: `${scope}.predefinedParticipantLinkLabel`,
+    defaultMessage: `Invitation URL:`,
   },
 });
