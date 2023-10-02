@@ -226,4 +226,8 @@ export default defineMessages({
     id: `${scope}.managePredefinedParticipantButtonLabel`,
     defaultMessage: `Manage`,
   },
+  editDetailsButtonTitle: {
+    id: `${scope}.editDetailsButtonTitle`,
+    defaultMessage: `Edit details`,
+  },
 });

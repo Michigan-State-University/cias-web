@@ -1,8 +1,10 @@
-import React, { FC, useMemo } from 'react';
+import React, { FC, useMemo, useState } from 'react';
 import { Form, Formik, FormikConfig } from 'formik';
 import { useIntl } from 'react-intl';
 
 import { PredefinedParticipant } from 'models/PredefinedParticipant';
+
+import globalMessages from 'global/i18n/globalMessages';
 
 import Column from 'components/Column';
 import { SelectOption } from 'components/Select/types';
@@ -50,6 +52,7 @@ export type CommonProps = {
 export type Props = CommonProps & (CreateModeProps | UpdateModeProps);
 
 export const PredefinedParticipantForm: FC<Props> = ({
+  mode,
   isReportingIntervention,
   healthClinicOptions,
   onSubmit,
@@ -57,6 +60,10 @@ export const PredefinedParticipantForm: FC<Props> = ({
   participant,
 }) => {
   const { formatMessage } = useIntl();
+
+  const isUpdateMode = mode === PredefinedParticipantFormMode.UPDATE;
+
+  const [disabled, setDisabled] = useState(isUpdateMode);
 
   const initialValues: PredefinedParticipantFormValues = useMemo(
     () =>
@@ -83,7 +90,7 @@ export const PredefinedParticipantForm: FC<Props> = ({
       onSubmit={onSubmit}
       enableReinitialize
     >
-      {({ isValid, handleSubmit }) => (
+      {({ isValid, dirty, handleSubmit, resetForm }) => (
         <Form
           style={{
             height: '100%',
@@ -107,48 +114,83 @@ export const PredefinedParticipantForm: FC<Props> = ({
                   }}
                   options={healthClinicOptions}
                   required
+                  disabled={disabled}
                 />
               )}
               <FormikInput
                 formikKey="firstName"
                 label={formatMessage(messages.firstNameInputLabel)}
                 placeholder={formatMessage(messages.firstNameInputPlaceholder)}
+                disabled={disabled}
                 {...COMMON_INPUT_PROPS}
               />
               <FormikInput
                 formikKey="lastName"
                 label={formatMessage(messages.lastNameInputLabel)}
                 placeholder={formatMessage(messages.lastNameInputPlaceholder)}
+                disabled={disabled}
                 {...COMMON_INPUT_PROPS}
               />
               <FormikInput
                 formikKey="email"
                 label={formatMessage(messages.emailInputLabel)}
                 placeholder={formatMessage(messages.emailInputPlaceholder)}
+                disabled={disabled}
                 {...COMMON_INPUT_PROPS}
               />
               <FormikInput
                 formikKey="externalId"
                 label={formatMessage(messages.externalIdInputLabel)}
                 placeholder={formatMessage(messages.externalIdInputPlaceholder)}
+                disabled={disabled}
                 {...COMMON_INPUT_PROPS}
               />
-              <FormikPhoneNumberInput isoKey="iso" numberKey="number" />
+              <FormikPhoneNumberInput
+                isoKey="iso"
+                numberKey="number"
+                disabled={disabled}
+              />
             </>
           </Column>
-          <Row justify="end">
-            <Button
-              disabled={!isValid}
-              width="auto"
-              px={24}
-              type="submit"
-              onClick={handleSubmit}
-              loading={submitting}
-            >
-              {formatMessage(
-                messages.createPredefinedParticipantSubmitButtonTitle,
-              )}
-            </Button>
+          <Row justify="end" gap={16}>
+            {!disabled && isUpdateMode && (
+              <Button
+                width="auto"
+                px={24}
+                type="reset"
+                onClick={() => {
+                  resetForm();
+                  setDisabled(true);
+                }}
+                inverted
+              >
+                {formatMessage(globalMessages.cancel)}
+              </Button>
+            )}
+            {!disabled && (
+              <Button
+                disabled={!isValid || (isUpdateMode && !dirty)}
+                width="auto"
+                px={24}
+                type="submit"
+                onClick={handleSubmit}
+                loading={submitting}
+              >
+                {formatMessage(
+                  messages.createPredefinedParticipantSubmitButtonTitle,
+                )}
+              </Button>
+            )}
+            {disabled && (
+              <Button
+                width="auto"
+                px={24}
+                type="button"
+                onClick={() => setDisabled(false)}
+              >
+                {formatMessage(messages.editDetailsButtonTitle)}
+              </Button>
+            )}
           </Row>
         </Form>
       )}
