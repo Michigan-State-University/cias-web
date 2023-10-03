@@ -60,24 +60,11 @@ exports[`<InterventionPage /> Should render and match the snapshot with interven
   height: auto;
   display: block;
   border-radius: 5px;
-  width: 2px;
-  height: 100%;
-  margin-right: 24px;
-  margin-left: 24px;
-  background-color: rgba(233,241,251,1);
-  color: unset;
-}
-
-.c20 {
-  width: auto;
-  height: auto;
-  display: block;
-  border-radius: 5px;
   cursor: pointer;
   color: unset;
 }
 
-.c32 {
+.c29 {
   width: auto;
   height: auto;
   display: block;
@@ -94,14 +81,7 @@ exports[`<InterventionPage /> Should render and match the snapshot with interven
   height: auto;
 }
 
-.c19 {
-  width: auto;
-  height: auto;
-  margin-bottom: 2px;
-  margin-right: 8px;
-}
-
-.c21 {
+.c18 {
   width: auto;
   height: auto;
   -webkit-transition: -webkit-transform 0.2s;
@@ -128,7 +108,7 @@ exports[`<InterventionPage /> Should render and match the snapshot with interven
   gap: 8px;
 }
 
-.c22 {
+.c19 {
   display: -webkit-box;
   display: -webkit-flex;
   display: -ms-flexbox;
@@ -210,21 +190,21 @@ exports[`<InterventionPage /> Should render and match the snapshot with interven
   color: #2F3850;
 }
 
-.c24 {
+.c21 {
   display: none;
 }
 
-.c28 {
+.c25 {
   margin-right: 5px;
   border-radius: 5px;
 }
 
-.c23:disabled + label > .c27 {
+.c20:disabled + label > .c24 {
   opacity: 0.5;
   cursor: not-allowed;
 }
 
-.c26 {
+.c23 {
   display: -webkit-box;
   display: -webkit-flex;
   display: -ms-flexbox;
@@ -236,37 +216,13 @@ exports[`<InterventionPage /> Should render and match the snapshot with interven
   width: 100%;
 }
 
-.c26:hover {
+.c23:hover {
   cursor: pointer;
 }
 
-.c23:disabled + .c25 {
+.c20:disabled + .c22 {
   opacity: 0.5;
   cursor: not-allowed;
-}
-
-.c18 {
-  outline: none;
-  border: none;
-  background: transparent;
-  font-weight: bold;
-  font-size: 13px;
-  line-height: 17px;
-  padding: 2px;
-  cursor: pointer;
-  display: -webkit-box;
-  display: -webkit-flex;
-  display: -ms-flexbox;
-  display: flex;
-  font-weight: 700;
-  color: #2F3850;
-  -webkit-align-content: center;
-  -ms-flex-line-pack: center;
-  align-content: center;
-  -webkit-align-items: center;
-  -webkit-box-align: center;
-  -ms-flex-align: center;
-  align-items: center;
 }
 
 .c11 {
@@ -294,7 +250,7 @@ exports[`<InterventionPage /> Should render and match the snapshot with interven
   margin: 0px;
 }
 
-.c30 {
+.c27 {
   padding: 12px;
   border-style: solid;
   border-width: 1px;
@@ -306,17 +262,17 @@ exports[`<InterventionPage /> Should render and match the snapshot with interven
   color: #2F3850;
 }
 
-.c30:focus {
+.c27:focus {
   box-shadow: none;
   outline: none;
   border-color: #107969;
 }
 
-.c30:disabled {
+.c27:disabled {
   color: #ABBBD1;
 }
 
-.c29 {
+.c26 {
   display: -webkit-box;
   display: -webkit-flex;
   display: -ms-flexbox;
@@ -328,7 +284,7 @@ exports[`<InterventionPage /> Should render and match the snapshot with interven
   position: relative;
 }
 
-.c31 {
+.c28 {
   position: absolute;
   left: 10px;
   top: 10px;
@@ -486,29 +442,6 @@ exports[`<InterventionPage /> Should render and match the snapshot with interven
           </div>
         </div>
       </div>
-      <div
-        class="c17"
-        height="100%"
-        width="2"
-      />
-      <button
-        class="c18"
-        display="flex"
-        font-weight="bold"
-      >
-        <img
-          alt="Import Intervention"
-          class="c19"
-          src="IMAGE_MOCK"
-        />
-        <p
-          class="c8"
-          color="#B727EA"
-          font-weight="bold"
-        >
-          Import Intervention
-        </p>
-      </button>
       <span
         style="display: table; clear: both;"
       />
@@ -530,7 +463,7 @@ exports[`<InterventionPage /> Should render and match the snapshot with interven
               style="box-sizing: border-box; min-height: 1px; position: relative; padding-left: 15px; padding-right: 15px; width: 100%; flex-basis: 0px; flex-grow: 1; flex-shrink: 0; max-width: 100%; margin-left: 0%;"
             >
               <div
-                class="c20"
+                class="c17"
                 cursor="pointer"
               >
                 <div
@@ -587,7 +520,7 @@ exports[`<InterventionPage /> Should render and match the snapshot with interven
                       >
                         <img
                           alt="arrow"
-                          class="c21"
+                          class="c18"
                           src="IMAGE_MOCK"
                           transform=""
                         />
@@ -609,7 +542,7 @@ exports[`<InterventionPage /> Should render and match the snapshot with interven
               style="box-sizing: border-box; min-height: 1px; position: relative; padding-left: 15px; padding-right: 15px; width: 100%; flex-basis: 0px; flex-grow: 1; flex-shrink: 0; max-width: 100%; margin-left: 0%;"
             >
               <div
-                class="c20"
+                class="c17"
                 cursor="pointer"
               >
                 <div
@@ -728,7 +661,7 @@ exports[`<InterventionPage /> Should render and match the snapshot with interven
                       >
                         <img
                           alt="arrow"
-                          class="c21"
+                          class="c18"
                           src="IMAGE_MOCK"
                           transform=""
                         />
@@ -752,19 +685,19 @@ exports[`<InterventionPage /> Should render and match the snapshot with interven
               style="box-sizing: border-box; min-height: 1px; position: relative; padding-left: 15px; padding-right: 15px; width: 100%; flex-basis: 0px; flex-grow: 1; flex-shrink: 0; max-width: 100%; margin-left: 0%;"
             >
               <div
-                class="c22"
+                class="c19"
               >
                 <input
-                  class="c23 c24"
+                  class="c20 c21"
                   id="intervetions-starred-filter"
                   type="checkbox"
                 />
                 <label
-                  class="c25 c26"
+                  class="c22 c23"
                   for="intervetions-starred-filter"
                 >
                   <img
-                    class="c27 c28"
+                    class="c24 c25"
                     src="IMAGE_MOCK"
                   />
                   <p
@@ -788,18 +721,18 @@ exports[`<InterventionPage /> Should render and match the snapshot with interven
               style="box-sizing: border-box; min-height: 1px; position: relative; padding-left: 15px; padding-right: 15px; width: 100%; flex-basis: 0px; flex-grow: 1; flex-shrink: 0; max-width: 100%; margin-left: 0%;"
             >
               <div
-                class="c29"
+                class="c26"
               >
                 <input
                   aria-label="Filter Interventions by name"
-                  class="c30"
+                  class="c27"
                   placeholder="Filter by name"
                   type="text"
                   width="100%"
                 />
                 <img
                   alt="search"
-                  class="c31"
+                  class="c28"
                   src="IMAGE_MOCK"
                 />
                 
@@ -813,7 +746,7 @@ exports[`<InterventionPage /> Should render and match the snapshot with interven
       />
     </div>
     <div
-      class="c32"
+      class="c29"
     >
       <div
         class="virtual-grid-auto-sizer"
@@ -901,24 +834,11 @@ exports[`<InterventionPage /> Should render and match the snapshot with loader 1
   height: auto;
   display: block;
   border-radius: 5px;
-  width: 2px;
-  height: 100%;
-  margin-right: 24px;
-  margin-left: 24px;
-  background-color: rgba(233,241,251,1);
-  color: unset;
-}
-
-.c20 {
-  width: auto;
-  height: auto;
-  display: block;
-  border-radius: 5px;
   cursor: pointer;
   color: unset;
 }
 
-.c32 {
+.c29 {
   width: auto;
   height: auto;
   display: block;
@@ -935,14 +855,7 @@ exports[`<InterventionPage /> Should render and match the snapshot with loader 1
   height: auto;
 }
 
-.c19 {
-  width: auto;
-  height: auto;
-  margin-bottom: 2px;
-  margin-right: 8px;
-}
-
-.c21 {
+.c18 {
   width: auto;
   height: auto;
   -webkit-transition: -webkit-transform 0.2s;
@@ -969,7 +882,7 @@ exports[`<InterventionPage /> Should render and match the snapshot with loader 1
   gap: 8px;
 }
 
-.c22 {
+.c19 {
   display: -webkit-box;
   display: -webkit-flex;
   display: -ms-flexbox;
@@ -1051,21 +964,21 @@ exports[`<InterventionPage /> Should render and match the snapshot with loader 1
   color: #2F3850;
 }
 
-.c24 {
+.c21 {
   display: none;
 }
 
-.c28 {
+.c25 {
   margin-right: 5px;
   border-radius: 5px;
 }
 
-.c23:disabled + label > .c27 {
+.c20:disabled + label > .c24 {
   opacity: 0.5;
   cursor: not-allowed;
 }
 
-.c26 {
+.c23 {
   display: -webkit-box;
   display: -webkit-flex;
   display: -ms-flexbox;
@@ -1077,37 +990,13 @@ exports[`<InterventionPage /> Should render and match the snapshot with loader 1
   width: 100%;
 }
 
-.c26:hover {
+.c23:hover {
   cursor: pointer;
 }
 
-.c23:disabled + .c25 {
+.c20:disabled + .c22 {
   opacity: 0.5;
   cursor: not-allowed;
-}
-
-.c18 {
-  outline: none;
-  border: none;
-  background: transparent;
-  font-weight: bold;
-  font-size: 13px;
-  line-height: 17px;
-  padding: 2px;
-  cursor: pointer;
-  display: -webkit-box;
-  display: -webkit-flex;
-  display: -ms-flexbox;
-  display: flex;
-  font-weight: 700;
-  color: #2F3850;
-  -webkit-align-content: center;
-  -ms-flex-line-pack: center;
-  align-content: center;
-  -webkit-align-items: center;
-  -webkit-box-align: center;
-  -ms-flex-align: center;
-  align-items: center;
 }
 
 .c11 {
@@ -1135,7 +1024,7 @@ exports[`<InterventionPage /> Should render and match the snapshot with loader 1
   margin: 0px;
 }
 
-.c30 {
+.c27 {
   padding: 12px;
   border-style: solid;
   border-width: 1px;
@@ -1147,17 +1036,17 @@ exports[`<InterventionPage /> Should render and match the snapshot with loader 1
   color: #2F3850;
 }
 
-.c30:focus {
+.c27:focus {
   box-shadow: none;
   outline: none;
   border-color: #107969;
 }
 
-.c30:disabled {
+.c27:disabled {
   color: #ABBBD1;
 }
 
-.c29 {
+.c26 {
   display: -webkit-box;
   display: -webkit-flex;
   display: -ms-flexbox;
@@ -1169,7 +1058,7 @@ exports[`<InterventionPage /> Should render and match the snapshot with loader 1
   position: relative;
 }
 
-.c31 {
+.c28 {
   position: absolute;
   left: 10px;
   top: 10px;
@@ -1327,29 +1216,6 @@ exports[`<InterventionPage /> Should render and match the snapshot with loader 1
           </div>
         </div>
       </div>
-      <div
-        class="c17"
-        height="100%"
-        width="2"
-      />
-      <button
-        class="c18"
-        display="flex"
-        font-weight="bold"
-      >
-        <img
-          alt="Import Intervention"
-          class="c19"
-          src="IMAGE_MOCK"
-        />
-        <p
-          class="c8"
-          color="#B727EA"
-          font-weight="bold"
-        >
-          Import Intervention
-        </p>
-      </button>
       <span
         style="display: table; clear: both;"
       />
@@ -1371,7 +1237,7 @@ exports[`<InterventionPage /> Should render and match the snapshot with loader 1
               style="box-sizing: border-box; min-height: 1px; position: relative; padding-left: 15px; padding-right: 15px; width: 100%; flex-basis: 0px; flex-grow: 1; flex-shrink: 0; max-width: 100%; margin-left: 0%;"
             >
               <div
-                class="c20"
+                class="c17"
                 cursor="pointer"
               >
                 <div
@@ -1428,7 +1294,7 @@ exports[`<InterventionPage /> Should render and match the snapshot with loader 1
                       >
                         <img
                           alt="arrow"
-                          class="c21"
+                          class="c18"
                           src="IMAGE_MOCK"
                           transform=""
                         />
@@ -1450,7 +1316,7 @@ exports[`<InterventionPage /> Should render and match the snapshot with loader 1
               style="box-sizing: border-box; min-height: 1px; position: relative; padding-left: 15px; padding-right: 15px; width: 100%; flex-basis: 0px; flex-grow: 1; flex-shrink: 0; max-width: 100%; margin-left: 0%;"
             >
               <div
-                class="c20"
+                class="c17"
                 cursor="pointer"
               >
                 <div
@@ -1569,7 +1435,7 @@ exports[`<InterventionPage /> Should render and match the snapshot with loader 1
                       >
                         <img
                           alt="arrow"
-                          class="c21"
+                          class="c18"
                           src="IMAGE_MOCK"
                           transform=""
                         />
@@ -1593,19 +1459,19 @@ exports[`<InterventionPage /> Should render and match the snapshot with loader 1
               style="box-sizing: border-box; min-height: 1px; position: relative; padding-left: 15px; padding-right: 15px; width: 100%; flex-basis: 0px; flex-grow: 1; flex-shrink: 0; max-width: 100%; margin-left: 0%;"
             >
               <div
-                class="c22"
+                class="c19"
               >
                 <input
-                  class="c23 c24"
+                  class="c20 c21"
                   id="intervetions-starred-filter"
                   type="checkbox"
                 />
                 <label
-                  class="c25 c26"
+                  class="c22 c23"
                   for="intervetions-starred-filter"
                 >
                   <img
-                    class="c27 c28"
+                    class="c24 c25"
                     src="IMAGE_MOCK"
                   />
                   <p
@@ -1629,18 +1495,18 @@ exports[`<InterventionPage /> Should render and match the snapshot with loader 1
               style="box-sizing: border-box; min-height: 1px; position: relative; padding-left: 15px; padding-right: 15px; width: 100%; flex-basis: 0px; flex-grow: 1; flex-shrink: 0; max-width: 100%; margin-left: 0%;"
             >
               <div
-                class="c29"
+                class="c26"
               >
                 <input
                   aria-label="Filter Interventions by name"
-                  class="c30"
+                  class="c27"
                   placeholder="Filter by name"
                   type="text"
                   width="100%"
                 />
                 <img
                   alt="search"
-                  class="c31"
+                  class="c28"
                   src="IMAGE_MOCK"
                 />
                 
@@ -1654,7 +1520,7 @@ exports[`<InterventionPage /> Should render and match the snapshot with loader 1
       />
     </div>
     <div
-      class="c32"
+      class="c29"
     >
       <div
         class="virtual-grid-auto-sizer"
@@ -1742,24 +1608,11 @@ exports[`<InterventionPage /> Should render and match the snapshot without inter
   height: auto;
   display: block;
   border-radius: 5px;
-  width: 2px;
-  height: 100%;
-  margin-right: 24px;
-  margin-left: 24px;
-  background-color: rgba(233,241,251,1);
-  color: unset;
-}
-
-.c20 {
-  width: auto;
-  height: auto;
-  display: block;
-  border-radius: 5px;
   cursor: pointer;
   color: unset;
 }
 
-.c32 {
+.c29 {
   width: auto;
   height: auto;
   display: block;
@@ -1776,14 +1629,7 @@ exports[`<InterventionPage /> Should render and match the snapshot without inter
   height: auto;
 }
 
-.c19 {
-  width: auto;
-  height: auto;
-  margin-bottom: 2px;
-  margin-right: 8px;
-}
-
-.c21 {
+.c18 {
   width: auto;
   height: auto;
   -webkit-transition: -webkit-transform 0.2s;
@@ -1810,7 +1656,7 @@ exports[`<InterventionPage /> Should render and match the snapshot without inter
   gap: 8px;
 }
 
-.c22 {
+.c19 {
   display: -webkit-box;
   display: -webkit-flex;
   display: -ms-flexbox;
@@ -1892,21 +1738,21 @@ exports[`<InterventionPage /> Should render and match the snapshot without inter
   color: #2F3850;
 }
 
-.c24 {
+.c21 {
   display: none;
 }
 
-.c28 {
+.c25 {
   margin-right: 5px;
   border-radius: 5px;
 }
 
-.c23:disabled + label > .c27 {
+.c20:disabled + label > .c24 {
   opacity: 0.5;
   cursor: not-allowed;
 }
 
-.c26 {
+.c23 {
   display: -webkit-box;
   display: -webkit-flex;
   display: -ms-flexbox;
@@ -1918,37 +1764,13 @@ exports[`<InterventionPage /> Should render and match the snapshot without inter
   width: 100%;
 }
 
-.c26:hover {
+.c23:hover {
   cursor: pointer;
 }
 
-.c23:disabled + .c25 {
+.c20:disabled + .c22 {
   opacity: 0.5;
   cursor: not-allowed;
-}
-
-.c18 {
-  outline: none;
-  border: none;
-  background: transparent;
-  font-weight: bold;
-  font-size: 13px;
-  line-height: 17px;
-  padding: 2px;
-  cursor: pointer;
-  display: -webkit-box;
-  display: -webkit-flex;
-  display: -ms-flexbox;
-  display: flex;
-  font-weight: 700;
-  color: #2F3850;
-  -webkit-align-content: center;
-  -ms-flex-line-pack: center;
-  align-content: center;
-  -webkit-align-items: center;
-  -webkit-box-align: center;
-  -ms-flex-align: center;
-  align-items: center;
 }
 
 .c11 {
@@ -1976,7 +1798,7 @@ exports[`<InterventionPage /> Should render and match the snapshot without inter
   margin: 0px;
 }
 
-.c30 {
+.c27 {
   padding: 12px;
   border-style: solid;
   border-width: 1px;
@@ -1988,17 +1810,17 @@ exports[`<InterventionPage /> Should render and match the snapshot without inter
   color: #2F3850;
 }
 
-.c30:focus {
+.c27:focus {
   box-shadow: none;
   outline: none;
   border-color: #107969;
 }
 
-.c30:disabled {
+.c27:disabled {
   color: #ABBBD1;
 }
 
-.c29 {
+.c26 {
   display: -webkit-box;
   display: -webkit-flex;
   display: -ms-flexbox;
@@ -2010,7 +1832,7 @@ exports[`<InterventionPage /> Should render and match the snapshot without inter
   position: relative;
 }
 
-.c31 {
+.c28 {
   position: absolute;
   left: 10px;
   top: 10px;
@@ -2168,29 +1990,6 @@ exports[`<InterventionPage /> Should render and match the snapshot without inter
           </div>
         </div>
       </div>
-      <div
-        class="c17"
-        height="100%"
-        width="2"
-      />
-      <button
-        class="c18"
-        display="flex"
-        font-weight="bold"
-      >
-        <img
-          alt="Import Intervention"
-          class="c19"
-          src="IMAGE_MOCK"
-        />
-        <p
-          class="c8"
-          color="#B727EA"
-          font-weight="bold"
-        >
-          Import Intervention
-        </p>
-      </button>
       <span
         style="display: table; clear: both;"
       />
@@ -2212,7 +2011,7 @@ exports[`<InterventionPage /> Should render and match the snapshot without inter
               style="box-sizing: border-box; min-height: 1px; position: relative; padding-left: 15px; padding-right: 15px; width: 100%; flex-basis: 0px; flex-grow: 1; flex-shrink: 0; max-width: 100%; margin-left: 0%;"
             >
               <div
-                class="c20"
+                class="c17"
                 cursor="pointer"
               >
                 <div
@@ -2269,7 +2068,7 @@ exports[`<InterventionPage /> Should render and match the snapshot without inter
                       >
                         <img
                           alt="arrow"
-                          class="c21"
+                          class="c18"
                           src="IMAGE_MOCK"
                           transform=""
                         />
@@ -2291,7 +2090,7 @@ exports[`<InterventionPage /> Should render and match the snapshot without inter
               style="box-sizing: border-box; min-height: 1px; position: relative; padding-left: 15px; padding-right: 15px; width: 100%; flex-basis: 0px; flex-grow: 1; flex-shrink: 0; max-width: 100%; margin-left: 0%;"
             >
               <div
-                class="c20"
+                class="c17"
                 cursor="pointer"
               >
                 <div
@@ -2410,7 +2209,7 @@ exports[`<InterventionPage /> Should render and match the snapshot without inter
                       >
                         <img
                           alt="arrow"
-                          class="c21"
+                          class="c18"
                           src="IMAGE_MOCK"
                           transform=""
                         />
@@ -2434,19 +2233,19 @@ exports[`<InterventionPage /> Should render and match the snapshot without inter
               style="box-sizing: border-box; min-height: 1px; position: relative; padding-left: 15px; padding-right: 15px; width: 100%; flex-basis: 0px; flex-grow: 1; flex-shrink: 0; max-width: 100%; margin-left: 0%;"
             >
               <div
-                class="c22"
+                class="c19"
               >
                 <input
-                  class="c23 c24"
+                  class="c20 c21"
                   id="intervetions-starred-filter"
                   type="checkbox"
                 />
                 <label
-                  class="c25 c26"
+                  class="c22 c23"
                   for="intervetions-starred-filter"
                 >
                   <img
-                    class="c27 c28"
+                    class="c24 c25"
                     src="IMAGE_MOCK"
                   />
                   <p
@@ -2470,18 +2269,18 @@ exports[`<InterventionPage /> Should render and match the snapshot without inter
               style="box-sizing: border-box; min-height: 1px; position: relative; padding-left: 15px; padding-right: 15px; width: 100%; flex-basis: 0px; flex-grow: 1; flex-shrink: 0; max-width: 100%; margin-left: 0%;"
             >
               <div
-                class="c29"
+                class="c26"
               >
                 <input
                   aria-label="Filter Interventions by name"
-                  class="c30"
+                  class="c27"
                   placeholder="Filter by name"
                   type="text"
                   width="100%"
                 />
                 <img
                   alt="search"
-                  class="c31"
+                  class="c28"
                   src="IMAGE_MOCK"
                 />
                 
@@ -2495,7 +2294,7 @@ exports[`<InterventionPage /> Should render and match the snapshot without inter
       />
     </div>
     <div
-      class="c32"
+      class="c29"
     >
       <div
         class="virtual-grid-auto-sizer"

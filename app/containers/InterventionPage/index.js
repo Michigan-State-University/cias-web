@@ -18,6 +18,8 @@ import importIcon from 'assets/svg/import-secondary.svg';
 
 import { colors, fontSizes, themeColors } from 'theme';
 
+import { isInterventionExportFeatureEnabled } from 'utils/env';
+
 import { FEEDBACK_FORM_URL } from 'global/constants';
 import {
   createInterventionRequest,
@@ -183,22 +185,26 @@ export function InterventionPage({
             <FormattedMessage {...messages.myInterventions} />
           </H1>
         </HelpIconTooltip>
-        <Box mx={24} width={2} height="100%" bg={colors.linkWater} />
+        {isInterventionExportFeatureEnabled && (
+          <>
+            <Box mx={24} width={2} height="100%" bg={colors.linkWater} />
 
-        <TextButton
-          buttonProps={{ display: 'flex', align: 'center' }}
-          onClick={onImportIconClick}
-        >
-          <Img
-            src={importIcon}
-            alt={formatMessage(messages.importIntervention)}
-            mr={8}
-            mb={2}
-          />
-          <Text color={themeColors.secondary} fontWeight="bold">
-            {formatMessage(messages.importIntervention)}
-          </Text>
-        </TextButton>
+            <TextButton
+              buttonProps={{ display: 'flex', align: 'center' }}
+              onClick={onImportIconClick}
+            >
+              <Img
+                src={importIcon}
+                alt={formatMessage(messages.importIntervention)}
+                mr={8}
+                mb={2}
+              />
+              <Text color={themeColors.secondary} fontWeight="bold">
+                {formatMessage(messages.importIntervention)}
+              </Text>
+            </TextButton>
+          </>
+        )}
       </InitialRow>
 
       <InitialRow fluid>

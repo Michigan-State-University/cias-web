@@ -48,6 +48,7 @@ import { useRoleManager } from 'models/User/RolesManager';
 import { SensitiveDataState } from 'models/Intervention';
 
 import isNullOrUndefined from 'utils/isNullOrUndefined';
+import { isInterventionExportFeatureEnabled } from 'utils/env';
 
 import {
   InterventionAssignOrganizationModal,
@@ -282,13 +283,17 @@ const InterventionTile = ({
           },
         ]
       : []),
-    {
-      id: 'export',
-      label: formatMessage(messages.exportIntervention),
-      icon: DownloadIcon,
-      action: handleExportIntervention,
-      color: colors.bluewood,
-    },
+    ...(isInterventionExportFeatureEnabled
+      ? [
+          {
+            id: 'export',
+            label: formatMessage(messages.exportIntervention),
+            icon: DownloadIcon,
+            action: handleExportIntervention,
+            color: colors.bluewood,
+          },
+        ]
+      : []),
     ...(canEditCollaborators
       ? [
           {
