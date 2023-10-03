@@ -36,7 +36,7 @@ const TextBoxQuestion = ({
       answerBody={answerBody?.[0]}
       onChange={onChange}
       textLimit={textLimit}
-      selectingAnswersDisabled={selectingAnswersDisabled}
+      disabled={selectingAnswersDisabled}
     />
   );
 };

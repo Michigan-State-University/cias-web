@@ -47,7 +47,7 @@ const SingleQuestion = ({
       questionId={id}
       selectedAnswerIndex={selectedAnswerIndex}
       isMobile={isMobile}
-      selectingAnswersDisabled={selectingAnswersDisabled}
+      disabled={selectingAnswersDisabled}
     />
   );
 };

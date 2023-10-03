@@ -50,7 +50,7 @@ const MultipleQuestion = ({
       check={check}
       selectedAnswersIndex={selectedAnswersIndex}
       isMobile={isMobile}
-      selectingAnswersDisabled={selectingAnswersDisabled}
+      disabled={selectingAnswersDisabled}
     />
   );
 };

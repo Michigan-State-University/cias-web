@@ -18,7 +18,7 @@ const TextBoxQuestionLayout = ({
   onChange,
   answerBody,
   textLimit,
-  selectingAnswersDisabled,
+  disabled,
 }) => {
   const value =
     answerBody && answerBody.value ? answerBody.value.toString() : '';
@@ -38,7 +38,7 @@ const TextBoxQuestionLayout = ({
             onChange={onChange}
             aria-labelledby={`${QUESTION_TITLE_ID} ${QUESTION_SUBTITLE_ID}`}
             {...(isTextLimited && { maxLength: `${textLimit}` })}
-            disabled={selectingAnswersDisabled}
+            disabled={disabled}
           />
         </Row>
       </Box>
@@ -60,7 +60,7 @@ TextBoxQuestionLayout.propTypes = {
   onChange: PropTypes.func,
   answerBody: PropTypes.oneOfType([PropTypes.array, PropTypes.object]),
   textLimit: PropTypes.number,
-  selectingAnswersDisabled: PropTypes.bool,
+  disabled: PropTypes.bool,
 };
 
 export default TextBoxQuestionLayout;

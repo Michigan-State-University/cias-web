@@ -19,7 +19,7 @@ const MultipleQuestionLayout = ({
   check,
   selectedAnswersIndex,
   isMobile,
-  selectingAnswersDisabled,
+  disabled,
 }) => (
   <Column>
     {data.map((questionAnswer, index) => {
@@ -44,13 +44,13 @@ const MultipleQuestionLayout = ({
             py={14}
             filled
             clickable
-            disabled={selectingAnswersDisabled}
+            disabled={disabled}
           >
             <Checkbox
               id={ariaInputId}
               checked={isChecked}
               onChange={() => check(value, name, index)}
-              disabled={selectingAnswersDisabled}
+              disabled={disabled}
             >
               <MarkupContainer>
                 <Markup content={payload} noWrap />
@@ -75,7 +75,7 @@ MultipleQuestionLayout.propTypes = {
   check: PropTypes.func,
   selectedAnswersIndex: PropTypes.array,
   isMobile: PropTypes.bool,
-  selectingAnswersDisabled: PropTypes.bool,
+  disabled: PropTypes.bool,
 };
 
 export default MultipleQuestionLayout;
