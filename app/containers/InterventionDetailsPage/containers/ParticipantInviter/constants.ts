@@ -1,6 +1,6 @@
 import { themeColors } from 'theme';
 
-export const INVITE_PARTICIPANTS_MODAL_HEIGHT = 840;
+export const INVITE_PARTICIPANTS_MODAL_HEIGHT = 900;
 export const INVITE_PARTICIPANTS_MODAL_WIDTH = 624;
 
 export const TEXT_BUTTON_PROPS = {

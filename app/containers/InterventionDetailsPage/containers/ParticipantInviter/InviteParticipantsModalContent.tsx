@@ -5,6 +5,7 @@ import { useIntl } from 'react-intl';
 import { InterventionStatus, InterventionType } from 'models/Intervention';
 import { Session } from 'models/Session';
 import { Organization } from 'models/Organization';
+import { canInviteParticipants } from 'models/Status/statusPermissions';
 
 import { normalizeArrayToObject } from 'utils/normalizeArrayToObject';
 
@@ -167,6 +168,8 @@ export const InviteParticipantsModalContent: FC<Props> = ({
     );
   };
 
+  const invitingPossible = canInviteParticipants(interventionStatus);
+
   const showLoader =
     organizationLoading ||
     (isReportingIntervention && organizationId !== organization?.id);
@@ -184,7 +187,7 @@ export const InviteParticipantsModalContent: FC<Props> = ({
               isReportingIntervention={isReportingIntervention}
               interventionId={interventionId}
               interventionName={interventionName}
-              interventionStatus={interventionStatus}
+              invitingPossible={invitingPossible}
               sessionOptions={sessionOptions}
               healthClinicOptions={healthClinicOptions}
               normalizedSessions={normalizedSessions}
@@ -236,6 +239,7 @@ export const InviteParticipantsModalContent: FC<Props> = ({
               interventionId={interventionId}
               healthClinicOptions={healthClinicOptions}
               onBack={handleBack}
+              invitingPossible={invitingPossible}
             />
           )}
         </>

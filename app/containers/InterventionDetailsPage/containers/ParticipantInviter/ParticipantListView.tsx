@@ -1,9 +1,6 @@
 import { FC } from 'react';
 import { useIntl } from 'react-intl';
 
-import { InterventionStatus } from 'models/Intervention';
-import { canInviteEmailParticipants } from 'models/Status/statusPermissions';
-
 import { SelectOption } from 'components/Select/types';
 import Tabs from 'components/Tabs';
 
@@ -22,7 +19,7 @@ export type Props = {
   isReportingIntervention: boolean;
   interventionId: string;
   interventionName: string;
-  interventionStatus: InterventionStatus;
+  invitingPossible: boolean;
   sessionOptions: SelectOption<string>[];
   healthClinicOptions: SelectOption<string>[];
   normalizedSessions: NormalizedSessions;
@@ -39,7 +36,7 @@ export const ParticipantListView: FC<Props> = ({
   isReportingIntervention,
   interventionId,
   interventionName,
-  interventionStatus,
+  invitingPossible,
   sessionOptions,
   healthClinicOptions,
   normalizedSessions,
@@ -51,8 +48,6 @@ export const ParticipantListView: FC<Props> = ({
   setActiveTab,
 }) => {
   const { formatMessage } = useIntl();
-
-  const invitingPossible = canInviteEmailParticipants(interventionStatus);
 
   return (
     <>

@@ -251,4 +251,20 @@ export default defineMessages({
     id: `${scope}.activatePredefinedParticipantButtonTitle`,
     defaultMessage: `Reactivate participant`,
   },
+  predefinedParticipantSmsInvitationLabel: {
+    id: `${scope}.predefinedParticipantSmsInvitationLabel`,
+    defaultMessage: `SMS invitation`,
+  },
+  predefinedParticipantSmsInvitationSent: {
+    id: `${scope}.predefinedParticipantSmsInvitationSent`,
+    defaultMessage: `Last SMS invitation was sent on {date}`,
+  },
+  predefinedParticipantSmsInvitationNotSent: {
+    id: `${scope}.predefinedParticipantSmsInvitationNotSent`,
+    defaultMessage: `This participant didn’t receive SMS invitation yet`,
+  },
+  predefinedParticipantSendSmsInvitationButtonTitle: {
+    id: `${scope}.predefinedParticipantSendSmsInvitationButtonTitle`,
+    defaultMessage: `Send SMS invitation`,
+  },
 });

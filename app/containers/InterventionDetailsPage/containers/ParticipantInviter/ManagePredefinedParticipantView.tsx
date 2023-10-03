@@ -1,6 +1,9 @@
 import React, { FC, useMemo } from 'react';
 import { useIntl } from 'react-intl';
 import { useDispatch, useSelector } from 'react-redux';
+import dayjs from 'dayjs';
+
+import { themeColors } from 'theme';
 
 import {
   PredefinedParticipantData,
@@ -9,6 +12,7 @@ import {
   updatePredefinedParticipantRequest,
   deactivatePredefinedParticipantRequest,
   activatePredefinedParticipantRequest,
+  sendPredefinedParticipantSmsInvitationRequest,
 } from 'global/reducers/intervention';
 
 import { PredefinedParticipant } from 'models/PredefinedParticipant';
@@ -17,6 +21,7 @@ import Column from 'components/Column';
 import Text from 'components/Text';
 import { SelectOption } from 'components/Select/types';
 import Row from 'components/Row';
+import { Button } from 'components/Button';
 
 import { BackButton } from './BackButton';
 import {
@@ -40,6 +45,7 @@ export type Props = {
   interventionId: string;
   healthClinicOptions: SelectOption<string>[];
   onBack: () => void;
+  invitingPossible: boolean;
 };
 
 export const ManagePredefinedParticipantView: FC<Props> = ({
@@ -48,6 +54,7 @@ export const ManagePredefinedParticipantView: FC<Props> = ({
   isReportingIntervention,
   interventionId,
   healthClinicOptions,
+  invitingPossible,
 }) => {
   const { formatMessage } = useIntl();
   const dispatch = useDispatch();
@@ -91,6 +98,18 @@ export const ManagePredefinedParticipantView: FC<Props> = ({
     );
   };
 
+  const sendingSmsInvitation = useSelector(
+    makeSelectInterventionLoader('sendPredefinedParticipantSmsInvitation'),
+  );
+  const handleSendSmsInvitation = () => {
+    dispatch(
+      sendPredefinedParticipantSmsInvitationRequest(
+        interventionId,
+        participantId,
+      ),
+    );
+  };
+
   const url = useMemo(() => {
     if (!participant) return '';
     return getPredefinedParticipantUrl(participant.slug);
@@ -111,6 +130,39 @@ export const ManagePredefinedParticipantView: FC<Props> = ({
             <Row gap={8} align="center">
               <Text lineHeight={1.2}>{url}</Text>
               <CopyPredefinedParticipantUrlButton url={url} />
+            </Row>
+          </Column>
+          <Column gap={8}>
+            <Text fontWeight="bold" lineHeight={1.2}>
+              {formatMessage(messages.predefinedParticipantSmsInvitationLabel)}
+            </Text>
+            <Text lineHeight={1.2} color={themeColors.text} textOpacity={0.7}>
+              {participant.invitationSentAt
+                ? formatMessage(
+                    messages.predefinedParticipantSmsInvitationSent,
+                    {
+                      date: dayjs(participant.invitationSentAt).format(
+                        'YYYY/MM/DD HH:mm Z',
+                      ),
+                    },
+                  )
+                : formatMessage(
+                    messages.predefinedParticipantSmsInvitationNotSent,
+                  )}
+            </Text>
+            <Row>
+              <Button
+                width="auto"
+                px={24}
+                inverted
+                onClick={handleSendSmsInvitation}
+                loading={sendingSmsInvitation}
+                disabled={!invitingPossible || !participant.phone}
+              >
+                {formatMessage(
+                  messages.predefinedParticipantSendSmsInvitationButtonTitle,
+                )}
+              </Button>
             </Row>
           </Column>
           <Column flex={1}>

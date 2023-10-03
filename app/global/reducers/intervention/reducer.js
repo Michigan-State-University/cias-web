@@ -132,6 +132,9 @@ import {
   ACTIVATE_PREDEFINED_PARTICIPANT_REQUEST,
   ACTIVATE_PREDEFINED_PARTICIPANT_SUCCESS,
   ACTIVATE_PREDEFINED_PARTICIPANT_ERROR,
+  SEND_PREDEFINED_PARTICIPANT_SMS_INVITATION_REQUEST,
+  SEND_PREDEFINED_PARTICIPANT_SMS_INVITATION_SUCCESS,
+  SEND_PREDEFINED_PARTICIPANT_SMS_INVITATION_ERROR,
 } from './constants';
 
 export const initialState = {
@@ -174,6 +177,7 @@ export const initialState = {
     updatePredefinedParticipant: false,
     deactivatePredefinedParticipant: false,
     activatePredefinedParticipant: false,
+    sendPredefinedParticipantSmsInvitation: false,
   },
   errors: {
     fetchInterventionError: null,
@@ -815,13 +819,11 @@ export const interventionReducer = (state = initialState, action) =>
         break;
       }
       case DEACTIVATE_PREDEFINED_PARTICIPANT_SUCCESS: {
-        const { predefinedParticipant } = action.payload;
+        const { participantId } = action.payload;
         if (draft.predefinedParticipants) {
-          updateItemById(
-            draft.predefinedParticipants,
-            predefinedParticipant.id,
-            predefinedParticipant,
-          );
+          updateItemById(draft.predefinedParticipants, participantId, {
+            active: false,
+          });
         }
         draft.loaders.deactivatePredefinedParticipant = false;
         break;
@@ -849,6 +851,25 @@ export const interventionReducer = (state = initialState, action) =>
       }
       case ACTIVATE_PREDEFINED_PARTICIPANT_ERROR: {
         draft.loaders.activatePredefinedParticipant = false;
+        break;
+      }
+
+      case SEND_PREDEFINED_PARTICIPANT_SMS_INVITATION_REQUEST: {
+        draft.loaders.sendPredefinedParticipantSmsInvitation = true;
+        break;
+      }
+      case SEND_PREDEFINED_PARTICIPANT_SMS_INVITATION_SUCCESS: {
+        const { participantId, invitationSentAt } = action.payload;
+        if (draft.predefinedParticipants) {
+          updateItemById(draft.predefinedParticipants, participantId, {
+            invitationSentAt,
+          });
+        }
+        draft.loaders.sendPredefinedParticipantSmsInvitation = false;
+        break;
+      }
+      case SEND_PREDEFINED_PARTICIPANT_SMS_INVITATION_ERROR: {
+        draft.loaders.sendPredefinedParticipantSmsInvitation = false;
         break;
       }
     }
