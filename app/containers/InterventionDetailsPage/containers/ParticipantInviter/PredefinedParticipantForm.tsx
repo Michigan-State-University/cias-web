@@ -157,6 +157,7 @@ export const PredefinedParticipantForm: FC<Props> = ({
               label={formatMessage(messages.emailInputLabel)}
               placeholder={formatMessage(messages.emailInputPlaceholder)}
               disabled={disabled}
+              required={!disabled && isUpdateMode}
               {...COMMON_INPUT_PROPS}
             />
             <FormikInput
