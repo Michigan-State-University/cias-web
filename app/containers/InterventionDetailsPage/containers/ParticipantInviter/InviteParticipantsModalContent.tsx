@@ -5,6 +5,7 @@ import { useIntl } from 'react-intl';
 import { InterventionStatus, InterventionType } from 'models/Intervention';
 import { Session } from 'models/Session';
 import { Organization } from 'models/Organization';
+import { canInviteParticipants } from 'models/Status/statusPermissions';
 
 import { normalizeArrayToObject } from 'utils/normalizeArrayToObject';
 
@@ -30,7 +31,6 @@ import { UploadEmailsView } from './UploadEmailsView';
 import messages from './messages';
 import { CreatePredefinedParticipantView } from './CreatePredefinedParticipantView';
 import { ManagePredefinedParticipantView } from './ManagePredefinedParticipantView';
-import { canInviteParticipants } from '../../../../models/Status/statusPermissions';
 
 export type Props = {
   interventionId: string;
