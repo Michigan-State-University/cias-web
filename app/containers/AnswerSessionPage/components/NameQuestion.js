@@ -15,6 +15,7 @@ const NameQuestion = ({
   isAnimationOngoing,
   isDesktop,
   userSession: { id },
+  selectingAnswersDisabled,
 }) => {
   const {
     body: {
@@ -63,6 +64,7 @@ const NameQuestion = ({
       phoneticPreviewParams={{ user_session_id: id }}
       isAnimationOngoing={isAnimationOngoing}
       isDesktop={isDesktop}
+      disabled={selectingAnswersDisabled}
     />
   );
 };
@@ -75,6 +77,7 @@ NameQuestion.propTypes = {
   userSession: PropTypes.object,
   isAnimationOngoing: PropTypes.bool,
   isDesktop: PropTypes.bool,
+  selectingAnswersDisabled: PropTypes.bool,
 };
 
 const mapStateToProps = createStructuredSelector({
