@@ -30,6 +30,7 @@ import { UploadEmailsView } from './UploadEmailsView';
 import messages from './messages';
 import { CreatePredefinedParticipantView } from './CreatePredefinedParticipantView';
 import { ManagePredefinedParticipantView } from './ManagePredefinedParticipantView';
+import { canInviteParticipants } from '../../../../models/Status/statusPermissions';
 
 export type Props = {
   interventionId: string;
@@ -167,6 +168,8 @@ export const InviteParticipantsModalContent: FC<Props> = ({
     );
   };
 
+  const invitingPossible = canInviteParticipants(interventionStatus);
+
   const showLoader =
     organizationLoading ||
     (isReportingIntervention && organizationId !== organization?.id);
@@ -184,7 +187,7 @@ export const InviteParticipantsModalContent: FC<Props> = ({
               isReportingIntervention={isReportingIntervention}
               interventionId={interventionId}
               interventionName={interventionName}
-              interventionStatus={interventionStatus}
+              invitingPossible={invitingPossible}
               sessionOptions={sessionOptions}
               healthClinicOptions={healthClinicOptions}
               normalizedSessions={normalizedSessions}
@@ -236,6 +239,7 @@ export const InviteParticipantsModalContent: FC<Props> = ({
               interventionId={interventionId}
               healthClinicOptions={healthClinicOptions}
               onBack={handleBack}
+              invitingPossible={invitingPossible}
             />
           )}
         </>

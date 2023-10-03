@@ -21,6 +21,7 @@ import {
   updatePredefinedParticipantSaga,
   deactivatePredefinedParticipantSaga,
   activatePredefinedParticipantSaga,
+  sendPredefinedParticipantSmsInvitationSaga,
 } from 'global/reducers/intervention/sagas';
 
 export default function* interventionDetailsPageSagas() {
@@ -42,6 +43,7 @@ export default function* interventionDetailsPageSagas() {
     updatePredefinedParticipantSaga(),
     deactivatePredefinedParticipantSaga(),
     activatePredefinedParticipantSaga(),
+    sendPredefinedParticipantSmsInvitationSaga(),
   ]);
 }
 

@@ -182,4 +182,12 @@ export default defineMessages({
     id: `${scope}.deactivatePredefinedParticipantError`,
     defaultMessage: 'Unable to update activate participant',
   },
+  sendPredefinedParticipantSmsInvitationSuccess: {
+    id: `${scope}.sendPredefinedParticipantSmsInvitationSuccess`,
+    defaultMessage: 'SMS invitation has been successfully sent.',
+  },
+  sendPredefinedParticipantSmsInvitationError: {
+    id: `${scope}.sendPredefinedParticipantSmsInvitationError`,
+    defaultMessage: 'Unable to send SMS invitation.',
+  },
 });
