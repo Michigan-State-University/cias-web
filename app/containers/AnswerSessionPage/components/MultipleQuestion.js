@@ -3,7 +3,13 @@ import PropTypes from 'prop-types';
 
 import MultipleQuestionLayout from '../layouts/MultipleQuestionLayout';
 
-const MultipleQuestion = ({ question, answerBody, selectAnswer, isMobile }) => {
+const MultipleQuestion = ({
+  question,
+  answerBody,
+  selectAnswer,
+  isMobile,
+  selectingAnswersDisabled,
+}) => {
   const [selectedAnswersIndex, setSelectedAnswersIndex] = useState([]);
 
   const {
@@ -44,6 +50,7 @@ const MultipleQuestion = ({ question, answerBody, selectAnswer, isMobile }) => {
       check={check}
       selectedAnswersIndex={selectedAnswersIndex}
       isMobile={isMobile}
+      selectingAnswersDisabled={selectingAnswersDisabled}
     />
   );
 };
@@ -53,6 +60,7 @@ MultipleQuestion.propTypes = {
   answerBody: PropTypes.any,
   selectAnswer: PropTypes.func,
   isMobile: PropTypes.bool,
+  selectingAnswersDisabled: PropTypes.bool,
 };
 
 export default MultipleQuestion;
