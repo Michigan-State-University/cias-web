@@ -8,7 +8,7 @@ const MultipleQuestion = ({
   answerBody,
   selectAnswer,
   isMobile,
-  selectingAnswersDisabled,
+  disabled,
 }) => {
   const [selectedAnswersIndex, setSelectedAnswersIndex] = useState([]);
 
@@ -50,7 +50,7 @@ const MultipleQuestion = ({
       check={check}
       selectedAnswersIndex={selectedAnswersIndex}
       isMobile={isMobile}
-      disabled={selectingAnswersDisabled}
+      disabled={disabled}
     />
   );
 };
@@ -60,7 +60,7 @@ MultipleQuestion.propTypes = {
   answerBody: PropTypes.any,
   selectAnswer: PropTypes.func,
   isMobile: PropTypes.bool,
-  selectingAnswersDisabled: PropTypes.bool,
+  disabled: PropTypes.bool,
 };
 
 export default MultipleQuestion;

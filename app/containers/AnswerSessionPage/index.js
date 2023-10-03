@@ -497,7 +497,7 @@ export function AnswerSessionPage({
       previewMode,
       isMobilePreview,
       userSessionId: userSession?.id,
-      selectingAnswersDisabled: continueButtonLoading,
+      disabled: continueButtonLoading,
     };
 
     const isLastScreen = currentQuestion.type === finishQuestion.id;

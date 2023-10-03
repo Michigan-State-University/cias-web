@@ -5,12 +5,7 @@ import isNullOrUndefined from 'utils/isNullOrUndefined';
 
 import DateQuestionLayout from '../layouts/DateQuestionLayout';
 
-const DateQuestion = ({
-  question,
-  answerBody,
-  selectAnswer,
-  selectingAnswersDisabled,
-}) => {
+const DateQuestion = ({ question, answerBody, selectAnswer, disabled }) => {
   const {
     body: {
       variable: { name },
@@ -32,7 +27,7 @@ const DateQuestion = ({
     <DateQuestionLayout
       onChange={onChange}
       answerBody={answerBody?.[0]}
-      disabled={selectingAnswersDisabled}
+      disabled={disabled}
     />
   );
 };
@@ -41,7 +36,7 @@ DateQuestion.propTypes = {
   question: PropTypes.object.isRequired,
   selectAnswer: PropTypes.func,
   answerBody: PropTypes.any,
-  selectingAnswersDisabled: PropTypes.bool,
+  disabled: PropTypes.bool,
 };
 
 export default DateQuestion;

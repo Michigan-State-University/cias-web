@@ -10,6 +10,7 @@ const CurrencyQuestion = ({
   answerBody,
   selectAnswer,
   formatMessage,
+  disabled,
 }) => {
   const {
     body: {
@@ -33,6 +34,7 @@ const CurrencyQuestion = ({
       formatMessage={formatMessage}
       onChange={onChange}
       answerBody={answerBody?.[0]}
+      disabled={disabled}
     />
   );
 };
@@ -42,6 +44,7 @@ CurrencyQuestion.propTypes = {
   selectAnswer: PropTypes.func,
   answerBody: PropTypes.any,
   formatMessage: PropTypes.func,
+  disabled: PropTypes.bool,
 };
 
 export default CurrencyQuestion;
