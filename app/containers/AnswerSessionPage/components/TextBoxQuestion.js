@@ -8,6 +8,7 @@ const TextBoxQuestion = ({
   answerBody,
   selectAnswer,
   formatMessage,
+  selectingAnswersDisabled,
 }) => {
   const {
     body: {
@@ -35,6 +36,7 @@ const TextBoxQuestion = ({
       answerBody={answerBody?.[0]}
       onChange={onChange}
       textLimit={textLimit}
+      selectingAnswersDisabled={selectingAnswersDisabled}
     />
   );
 };
@@ -44,6 +46,7 @@ TextBoxQuestion.propTypes = {
   selectAnswer: PropTypes.func,
   formatMessage: PropTypes.func,
   answerBody: PropTypes.any,
+  selectingAnswersDisabled: PropTypes.bool,
 };
 
 export default TextBoxQuestion;
