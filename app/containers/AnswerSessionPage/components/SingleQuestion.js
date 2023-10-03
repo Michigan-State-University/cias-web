@@ -9,6 +9,7 @@ const SingleQuestion = ({
   selectAnswer,
   saveAnswer,
   isMobile,
+  selectingAnswersDisabled,
 }) => {
   const [selectedAnswerIndex, setSelectedAnswerIndex] = useState(null);
   const {
@@ -46,6 +47,7 @@ const SingleQuestion = ({
       questionId={id}
       selectedAnswerIndex={selectedAnswerIndex}
       isMobile={isMobile}
+      selectingAnswersDisabled={selectingAnswersDisabled}
     />
   );
 };
@@ -56,6 +58,7 @@ SingleQuestion.propTypes = {
   selectAnswer: PropTypes.func,
   saveAnswer: PropTypes.func,
   isMobile: PropTypes.bool,
+  selectingAnswersDisabled: PropTypes.bool,
 };
 
 export default SingleQuestion;
