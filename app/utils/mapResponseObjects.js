@@ -20,6 +20,7 @@ export const mapAccessToStateObject = ({ user_id: id, email }) => ({
   email,
 });
 
+// Used for mapping JSON API response to state object
 export const mapCurrentUser = (data) => {
   const mappedUser = jsonApiToObject(data, 'user');
   mappedUser.avatar = mappedUser?.avatarUrl;

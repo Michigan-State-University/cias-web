@@ -4,11 +4,7 @@ import { Row as GRow, Col as GCol, useScreenClass } from 'react-grid-system';
 import { FormattedMessage, IntlShape, useIntl } from 'react-intl';
 
 import { themeColors } from 'theme';
-import {
-  CatMhLicenseType,
-  InterventionType,
-  SensitiveDataState,
-} from 'models/Intervention';
+import { CatMhLicenseType, SensitiveDataState } from 'models/Intervention';
 import { useRoleManager } from 'models/User/RolesManager';
 
 import globalMessages from 'global/i18n/globalMessages';
@@ -16,16 +12,12 @@ import { RoutePath } from 'global/constants';
 
 import { parametrizeRoutePath } from 'utils/router';
 
-import MailIcon from 'assets/svg/pink-mail.svg';
-
 import Row from 'components/Row';
 import BackButton from 'components/BackButton';
 import Box from 'components/Box';
 import Dropdown from 'components/Dropdown';
 import { StyledInput } from 'components/Input/StyledInput';
 import { selectInputText } from 'components/Input/utils';
-import { TextButton } from 'components/Button';
-import Icon from 'components/Icon';
 import { CollaboratingIndicator } from 'components/CollaboratingIndicator';
 import { DataClearedIndicator } from 'components/DataClearedIndicator';
 import { HelpIconTooltip } from 'components/HelpIconTooltip';
@@ -34,6 +26,7 @@ import InterventionStatusButtons from './components/InterventionStatusButtons';
 import { StatusLabel, InterventionOptions } from './styled';
 import messages from './messages';
 import { CAT_MH_TEST_COUNT_WARNING_THRESHOLD } from './constants';
+import { ParticipantsInviter } from './containers/ParticipantInviter';
 
 const Header = ({
   status,
@@ -49,9 +42,7 @@ const Header = ({
   options,
   organizationId,
   canAccessCsv,
-  openInterventionInviteModal,
   interventionType,
-  sharingPossible,
   userOrganizableId,
   hasCollaborators,
   sensitiveDataState,
@@ -59,12 +50,11 @@ const Header = ({
   catMhLicenseType,
   catMhPool,
   createdCatMhSessionCount,
+  sessions,
 }) => {
   const { formatMessage } = useIntl();
   const screenClass = useScreenClass();
   const { isAdmin } = useRoleManager();
-
-  const isModuleIntervention = interventionType !== InterventionType.DEFAULT;
 
   const testsLeft = catMhPool - createdCatMhSessionCount;
   const hasSmallNumberOfCatMhSessionsRemaining =
@@ -120,22 +110,14 @@ const Header = ({
               maxWidth="none"
               autoComplete="off"
             />
-            {isModuleIntervention && (
-              <TextButton
-                onClick={openInterventionInviteModal}
-                buttonProps={{
-                  color: themeColors.secondary,
-                  minWidth: 180,
-                  display: 'flex',
-                  alignItems: 'center',
-                  justifyContent: 'center',
-                }}
-                disabled={!sharingPossible}
-              >
-                {formatMessage(messages.inviteToIntervention)}
-                <Icon ml={5} src={MailIcon} />
-              </TextButton>
-            )}
+            <ParticipantsInviter
+              interventionId={interventionId}
+              interventionName={name}
+              organizationId={organizationId}
+              interventionStatus={status}
+              interventionType={interventionType}
+              sessions={sessions}
+            />
           </Row>
           <Row align="center" mt={8} gap={12}>
             <Box>
@@ -175,7 +157,11 @@ const Header = ({
               />
             </Row>
             <InterventionOptions>
-              <Dropdown options={options} clickable />
+              <Dropdown
+                id={`intervention-options-${interventionId}`}
+                options={options}
+                clickable
+              />
             </InterventionOptions>
           </Row>
           {catMhAccess && (
@@ -225,7 +211,6 @@ Header.propTypes = {
   organizationId: PropTypes.string,
   options: PropTypes.array,
   canAccessCsv: PropTypes.bool,
-  openInterventionInviteModal: PropTypes.func,
   interventionType: PropTypes.string,
   sharingPossible: PropTypes.bool,
   userOrganizableId: PropTypes.string,
@@ -235,6 +220,7 @@ Header.propTypes = {
   catMhLicenseType: PropTypes.string,
   catMhPool: PropTypes.number,
   createdCatMhSessionCount: PropTypes.number,
+  sessions: PropTypes.array,
 };
 
 export default Header;

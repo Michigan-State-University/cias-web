@@ -158,4 +158,36 @@ export default defineMessages({
     id: `${scope}.clearInterventionDataError`,
     defaultMessage: `Couldn't clear intervention data`,
   },
+  createPredefinedParticipantSuccess: {
+    id: `${scope}.createPredefinedParticipantSuccess`,
+    defaultMessage: 'Participant has been successfully created.',
+  },
+  createPredefinedParticipantError: {
+    id: `${scope}.createPredefinedParticipantError`,
+    defaultMessage: 'Unable to create predefined participant',
+  },
+  updatePredefinedParticipantSuccess: {
+    id: `${scope}.updatePredefinedParticipantSuccess`,
+    defaultMessage: 'Participant has been successfully updated.',
+  },
+  updatePredefinedParticipantError: {
+    id: `${scope}.updatePredefinedParticipantError`,
+    defaultMessage: 'Unable to update predefined participant',
+  },
+  deactivatePredefinedParticipantError: {
+    id: `${scope}.deactivatePredefinedParticipantError`,
+    defaultMessage: 'Unable to update deactivate participant',
+  },
+  activatePredefinedParticipantError: {
+    id: `${scope}.deactivatePredefinedParticipantError`,
+    defaultMessage: 'Unable to update activate participant',
+  },
+  sendPredefinedParticipantSmsInvitationSuccess: {
+    id: `${scope}.sendPredefinedParticipantSmsInvitationSuccess`,
+    defaultMessage: 'SMS invitation has been successfully sent.',
+  },
+  sendPredefinedParticipantSmsInvitationError: {
+    id: `${scope}.sendPredefinedParticipantSmsInvitationError`,
+    defaultMessage: 'Unable to send SMS invitation.',
+  },
 });

@@ -292,6 +292,7 @@ exports[`<QuestionListItem /> should match the snapshot 1`] = `
           >
             <div
               class="c13"
+              id="question-list-item-options-test-1"
             >
               <img
                 alt="dots"

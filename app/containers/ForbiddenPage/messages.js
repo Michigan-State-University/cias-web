@@ -24,7 +24,7 @@ export default defineMessages({
   },
   defaultErrorCode: {
     id: `${scope}.defaultErrorCode`,
-    defaultMessage: 'Logged in?',
+    defaultMessage: 'No access',
   },
   toMainPage: {
     id: `${scope}.toMainPage`,

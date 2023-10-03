@@ -383,6 +383,7 @@ exports[`<InterventionTile /> Should render and match the snapshot 1`] = `
               >
                 <div
                   class="c12"
+                  id="intervention-list-item-options-test-id"
                 >
                   <img
                     alt="dots"

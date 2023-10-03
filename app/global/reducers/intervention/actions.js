@@ -29,13 +29,6 @@ import {
   CREATE_SESSION_REQUEST,
   CREATE_SESSION_SUCCESS,
   CREATE_SESSION_ERROR,
-  SEND_SESSION_INVITE_REQUEST,
-  SEND_SESSION_INVITE_SUCCESS,
-  SEND_SESSION_INVITE_ERROR,
-  RESEND_SESSION_INVITE_REQUEST,
-  FETCH_SESSION_EMAILS_REQUEST,
-  FETCH_SESSION_EMAILS_SUCCESS,
-  FETCH_SESSION_EMAILS_ERROR,
   UPDATE_SESSION_SETTINGS_REQUEST,
   UPDATE_SESSION_SETTINGS_SUCCESS,
   UPDATE_SESSION_SETTINGS_ERROR,
@@ -60,14 +53,14 @@ import {
   ADD_INTERVENTION_ATTACHMENTS_SUCCESS,
   DELETE_INTERVENTION_ATTACHMENT_REQUEST,
   DELETE_INTERVENTION_ATTACHMENT_SUCCESS,
-  SEND_INTERVENTION_INVITE_REQUEST,
-  SEND_INTERVENTION_INVITE_SUCCESS,
-  SEND_INTERVENTION_INVITE_ERROR,
-  RESEND_INTERVENTION_INVITE_REQUEST,
+  SEND_INTERVENTION_INVITATIONS_REQUEST,
+  SEND_INTERVENTION_INVITATIONS_SUCCESS,
+  SEND_INTERVENTION_INVITATIONS_ERROR,
+  RESEND_INTERVENTION_INVITATION_REQUEST,
   ADD_INTERVENTION_ATTACHMENTS_ERROR,
-  FETCH_INTERVENTION_INVITES_REQUEST,
-  FETCH_INTERVENTION_INVITES_SUCCESS,
-  FETCH_INTERVENTION_INVITES_ERROR,
+  FETCH_INTERVENTION_INVITATIONS_REQUEST,
+  FETCH_INTERVENTION_INVITATIONS_SUCCESS,
+  FETCH_INTERVENTION_INVITATIONS_ERROR,
   GENERATE_CONVERSATIONS_TRANSCRIPT_REQUEST,
   GENERATE_CONVERSATIONS_TRANSCRIPT_SUCCESS,
   GENERATE_CONVERSATIONS_TRANSCRIPT_ERROR,
@@ -107,6 +100,26 @@ import {
   CLEAR_INTERVENTION_DATA_SUCCESS,
   CLEAR_INTERVENTION_DATA_ERROR,
   ON_SENSITIVE_DATA_REMOVED_RECEIVED,
+  RESEND_INTERVENTION_INVITATION_SUCCESS,
+  RESEND_INTERVENTION_INVITATION_ERROR,
+  CREATE_PREDEFINED_PARTICIPANT_REQUEST,
+  CREATE_PREDEFINED_PARTICIPANT_SUCCESS,
+  CREATE_PREDEFINED_PARTICIPANT_ERROR,
+  FETCH_PREDEFINED_PARTICIPANTS_REQUEST,
+  FETCH_PREDEFINED_PARTICIPANTS_SUCCESS,
+  FETCH_PREDEFINED_PARTICIPANTS_ERROR,
+  UPDATE_PREDEFINED_PARTICIPANT_REQUEST,
+  UPDATE_PREDEFINED_PARTICIPANT_SUCCESS,
+  UPDATE_PREDEFINED_PARTICIPANT_ERROR,
+  DEACTIVATE_PREDEFINED_PARTICIPANT_REQUEST,
+  DEACTIVATE_PREDEFINED_PARTICIPANT_SUCCESS,
+  DEACTIVATE_PREDEFINED_PARTICIPANT_ERROR,
+  ACTIVATE_PREDEFINED_PARTICIPANT_ERROR,
+  ACTIVATE_PREDEFINED_PARTICIPANT_SUCCESS,
+  ACTIVATE_PREDEFINED_PARTICIPANT_REQUEST,
+  SEND_PREDEFINED_PARTICIPANT_SMS_INVITATION_REQUEST,
+  SEND_PREDEFINED_PARTICIPANT_SMS_INVITATION_SUCCESS,
+  SEND_PREDEFINED_PARTICIPANT_SMS_INVITATION_ERROR,
 } from './constants';
 
 export const fetchInterventionRequest = (id, showLoader = false) =>
@@ -190,52 +203,38 @@ export const createSessionSuccess = (session) =>
   actionBuilder(CREATE_SESSION_SUCCESS, { session });
 export const createSessionError = () => actionBuilder(CREATE_SESSION_ERROR, {});
 
-export const sendSessionInviteRequest = (
-  emails,
-  sessionId,
-  shouldNotUpdateStore,
+export const fetchInterventionInvitationsRequest = (interventionId) =>
+  actionBuilder(FETCH_INTERVENTION_INVITATIONS_REQUEST, {
+    interventionId,
+  });
+export const fetchInterventionInvitationsSuccess = (invitations) =>
+  actionBuilder(FETCH_INTERVENTION_INVITATIONS_SUCCESS, { invitations });
+export const fetchInterventionInvitationsError = (error) =>
+  actionBuilder(FETCH_INTERVENTION_INVITATIONS_ERROR, { error });
+
+export const sendInterventionInvitationsRequest = (
+  interventionId,
+  invitations,
+  onSuccess,
 ) =>
-  actionBuilder(SEND_SESSION_INVITE_REQUEST, {
-    emails,
-    sessionId,
-    shouldNotUpdateStore,
-  });
-export const sendSessionInviteSuccess = () =>
-  actionBuilder(SEND_SESSION_INVITE_SUCCESS, {});
-export const sendSessionInviteError = () =>
-  actionBuilder(SEND_SESSION_INVITE_ERROR, {});
-
-export const resendSessionInviteRequest = (id, sessionId) =>
-  actionBuilder(RESEND_SESSION_INVITE_REQUEST, { id, sessionId });
-
-export const fetchInterventionInvitesRequest = (interventionId) =>
-  actionBuilder(FETCH_INTERVENTION_INVITES_REQUEST, {
+  actionBuilder(SEND_INTERVENTION_INVITATIONS_REQUEST, {
     interventionId,
+    invitations,
+    onSuccess,
   });
-export const fetchInterventionInvitesSuccess = (invites) =>
-  actionBuilder(FETCH_INTERVENTION_INVITES_SUCCESS, { invites });
-export const fetchInterventionInvitesError = (error) =>
-  actionBuilder(FETCH_INTERVENTION_INVITES_ERROR, { error });
+export const sendInterventionInvitationsSuccess = (invitations) =>
+  actionBuilder(SEND_INTERVENTION_INVITATIONS_SUCCESS, { invitations });
+export const sendInterventionInvitationsError = () =>
+  actionBuilder(SEND_INTERVENTION_INVITATIONS_ERROR, {});
 
-export const sendInterventionInviteRequest = (emails, interventionId) =>
-  actionBuilder(SEND_INTERVENTION_INVITE_REQUEST, {
-    emails,
-    interventionId,
+export const resendInterventionInvitationRequest = (id, interventionId) =>
+  actionBuilder(RESEND_INTERVENTION_INVITATION_REQUEST, { id, interventionId });
+export const resendInterventionInvitationSuccess = (id) =>
+  actionBuilder(RESEND_INTERVENTION_INVITATION_SUCCESS, {
+    id,
   });
-export const sendInterventionInviteSuccess = (invites) =>
-  actionBuilder(SEND_INTERVENTION_INVITE_SUCCESS, { invites });
-export const sendInterventionInviteError = () =>
-  actionBuilder(SEND_INTERVENTION_INVITE_ERROR, {});
-
-export const resendInterventionInviteRequest = (id, interventionId) =>
-  actionBuilder(RESEND_INTERVENTION_INVITE_REQUEST, { id, interventionId });
-
-export const fetchSessionEmailsRequest = (index) =>
-  actionBuilder(FETCH_SESSION_EMAILS_REQUEST, { index });
-export const fetchSessionEmailsSuccess = (emails, index) =>
-  actionBuilder(FETCH_SESSION_EMAILS_SUCCESS, { emails, index });
-export const fetchSessionEmailsError = (error) =>
-  actionBuilder(FETCH_SESSION_EMAILS_ERROR, { error });
+export const resendInterventionInvitationError = (id) =>
+  actionBuilder(RESEND_INTERVENTION_INVITATION_ERROR, { id });
 
 export const deleteSessionRequest = (sessionId, interventionId) =>
   actionBuilder(DELETE_SESSION_REQUEST, { sessionId, interventionId });
@@ -460,3 +459,97 @@ export const clearInterventionDataError = () =>
   actionBuilder(CLEAR_INTERVENTION_DATA_ERROR, {});
 export const onSensitiveDataRemovedReceive = (interventionId) =>
   actionBuilder(ON_SENSITIVE_DATA_REMOVED_RECEIVED, { interventionId });
+
+export const createPredefinedParticipantRequest = (
+  interventionId,
+  predefinedParticipantData,
+  onSuccess,
+) =>
+  actionBuilder(CREATE_PREDEFINED_PARTICIPANT_REQUEST, {
+    interventionId,
+    predefinedParticipantData,
+    onSuccess,
+  });
+export const createPredefinedParticipantSuccess = (predefinedParticipant) =>
+  actionBuilder(CREATE_PREDEFINED_PARTICIPANT_SUCCESS, {
+    predefinedParticipant,
+  });
+export const createPredefinedParticipantError = () =>
+  actionBuilder(CREATE_PREDEFINED_PARTICIPANT_ERROR, {});
+
+export const fetchPredefinedParticipantsRequest = (interventionId) =>
+  actionBuilder(FETCH_PREDEFINED_PARTICIPANTS_REQUEST, {
+    interventionId,
+  });
+export const fetchPredefinedParticipantsSuccess = (predefinedParticipants) =>
+  actionBuilder(FETCH_PREDEFINED_PARTICIPANTS_SUCCESS, {
+    predefinedParticipants,
+  });
+export const fetchPredefinedParticipantsError = (error) =>
+  actionBuilder(FETCH_PREDEFINED_PARTICIPANTS_ERROR, { error });
+
+export const updatePredefinedParticipantRequest = (
+  interventionId,
+  participantId,
+  predefinedParticipantData,
+) =>
+  actionBuilder(UPDATE_PREDEFINED_PARTICIPANT_REQUEST, {
+    interventionId,
+    participantId,
+    predefinedParticipantData,
+  });
+export const updatePredefinedParticipantSuccess = (predefinedParticipant) =>
+  actionBuilder(UPDATE_PREDEFINED_PARTICIPANT_SUCCESS, {
+    predefinedParticipant,
+  });
+export const updatePredefinedParticipantError = () =>
+  actionBuilder(UPDATE_PREDEFINED_PARTICIPANT_ERROR, {});
+
+export const deactivatePredefinedParticipantRequest = (
+  interventionId,
+  participantId,
+) =>
+  actionBuilder(DEACTIVATE_PREDEFINED_PARTICIPANT_REQUEST, {
+    interventionId,
+    participantId,
+  });
+export const deactivatePredefinedParticipantSuccess = (participantId) =>
+  actionBuilder(DEACTIVATE_PREDEFINED_PARTICIPANT_SUCCESS, {
+    participantId,
+  });
+export const deactivatePredefinedParticipantError = () =>
+  actionBuilder(DEACTIVATE_PREDEFINED_PARTICIPANT_ERROR, {});
+
+export const activatePredefinedParticipantRequest = (
+  interventionId,
+  participantId,
+) =>
+  actionBuilder(ACTIVATE_PREDEFINED_PARTICIPANT_REQUEST, {
+    interventionId,
+    participantId,
+  });
+export const activatePredefinedParticipantSuccess = (predefinedParticipant) =>
+  actionBuilder(ACTIVATE_PREDEFINED_PARTICIPANT_SUCCESS, {
+    predefinedParticipant,
+  });
+export const activatePredefinedParticipantError = () =>
+  actionBuilder(ACTIVATE_PREDEFINED_PARTICIPANT_ERROR, {});
+
+export const sendPredefinedParticipantSmsInvitationRequest = (
+  interventionId,
+  participantId,
+) =>
+  actionBuilder(SEND_PREDEFINED_PARTICIPANT_SMS_INVITATION_REQUEST, {
+    interventionId,
+    participantId,
+  });
+export const sendPredefinedParticipantSmsInvitationSuccess = (
+  participantId,
+  invitationSentAt,
+) =>
+  actionBuilder(SEND_PREDEFINED_PARTICIPANT_SMS_INVITATION_SUCCESS, {
+    participantId,
+    invitationSentAt,
+  });
+export const sendPredefinedParticipantSmsInvitationError = () =>
+  actionBuilder(SEND_PREDEFINED_PARTICIPANT_SMS_INVITATION_ERROR, {});

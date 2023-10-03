@@ -115,6 +115,7 @@ import {
 import { ActionButtons } from './components/ActionButtons';
 import AnswerSessionPageFooter from './components/AnswerSessionPageFooter';
 import ScreenBackButton from './components/ScreenBackButton';
+import { GoToDashboardButton } from './components/GoToDashboardButton';
 
 const AnimationRefHelper = ({
   children,
@@ -679,6 +680,11 @@ export function AnswerSessionPage({
     currentQuestion &&
     FULL_SIZE_QUESTIONS.includes(currentQuestion.type);
 
+  const { multipleFillSessionAvailable, userInterventionId } =
+    location.state ?? {};
+  const showGoToDashboardButton =
+    multipleFillSessionAvailable && userInterventionId;
+
   return (
     <Column
       height="100%"
@@ -803,6 +809,12 @@ export function AnswerSessionPage({
                         title={buttonText()}
                         isDesktop={isDesktop}
                       />
+                      {showGoToDashboardButton && (
+                        <GoToDashboardButton
+                          userInterventionId={userInterventionId}
+                          isDesktop={isDesktop}
+                        />
+                      )}
                     </Row>
                     <Box
                       position="absolute"

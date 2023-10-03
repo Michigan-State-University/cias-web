@@ -24,7 +24,7 @@ exports[`<SessionListItem /> Should render and match the snapshot 1`] = `
   align-items: center;
   padding-top: 21px;
   padding-bottom: 21px;
-  padding-right: 16px;
+  padding-right: 62px;
   padding-left: 16px;
 }
 
@@ -52,31 +52,7 @@ exports[`<SessionListItem /> Should render and match the snapshot 1`] = `
   width: 100%;
 }
 
-.c15 {
-  display: -webkit-box;
-  display: -webkit-flex;
-  display: -ms-flexbox;
-  display: flex;
-  -webkit-flex-direction: row;
-  -ms-flex-direction: row;
-  flex-direction: row;
-  height: auto;
-  -webkit-box-pack: space-around;
-  -webkit-justify-content: space-around;
-  -ms-flex-pack: space-around;
-  justify-content: space-around;
-  justify-items: space-around;
-  -webkit-align-content: center;
-  -ms-flex-line-pack: center;
-  align-content: center;
-  -webkit-align-items: center;
-  -webkit-box-align: center;
-  -ms-flex-align: center;
-  align-items: center;
-  width: 40%;
-}
-
-.c21 {
+.c19 {
   display: -webkit-box;
   display: -webkit-flex;
   display: -ms-flexbox;
@@ -90,7 +66,7 @@ exports[`<SessionListItem /> Should render and match the snapshot 1`] = `
   padding-left: 62px;
 }
 
-.c23 {
+.c21 {
   display: -webkit-box;
   display: -webkit-flex;
   display: -ms-flexbox;
@@ -128,7 +104,7 @@ exports[`<SessionListItem /> Should render and match the snapshot 1`] = `
   padding-left: 15px;
 }
 
-.c20 {
+.c18 {
   width: auto;
   height: auto;
 }
@@ -150,19 +126,7 @@ exports[`<SessionListItem /> Should render and match the snapshot 1`] = `
   color: unset;
 }
 
-.c16 {
-  width: auto;
-  height: auto;
-  display: block;
-  border-radius: 5px;
-  display: -webkit-box;
-  display: -webkit-flex;
-  display: -ms-flexbox;
-  display: flex;
-  color: unset;
-}
-
-.c17 {
+.c15 {
   width: auto;
   height: auto;
   display: block;
@@ -171,7 +135,7 @@ exports[`<SessionListItem /> Should render and match the snapshot 1`] = `
   color: unset;
 }
 
-.c18 {
+.c16 {
   width: auto;
   height: auto;
   display: block;
@@ -198,7 +162,14 @@ exports[`<SessionListItem /> Should render and match the snapshot 1`] = `
   cursor: pointer;
 }
 
-.c19 {
+.c22 {
+  font-family: DM Sans;
+  font-size: 13px;
+  line-height: 130%;
+  color: #2F3850;
+}
+
+.c17 {
   display: -webkit-box;
   display: -webkit-flex;
   display: -ms-flexbox;
@@ -206,7 +177,7 @@ exports[`<SessionListItem /> Should render and match the snapshot 1`] = `
   padding: 8px;
 }
 
-.c22 {
+.c20 {
   -webkit-flex: 1;
   -ms-flex: 1;
   flex: 1;
@@ -253,13 +224,6 @@ exports[`<SessionListItem /> Should render and match the snapshot 1`] = `
 
 .c6:hover .c10 {
   color: #B727EA !important;
-}
-
-.c24 {
-  font-family: DM Sans;
-  font-size: 13px;
-  line-height: 130%;
-  color: #2F3850;
 }
 
 .c14 {
@@ -310,7 +274,7 @@ exports[`<SessionListItem /> Should render and match the snapshot 1`] = `
   color: #ABBBD1;
 }
 
-.c25 {
+.c23 {
   padding: 12px;
   border-style: solid;
   border-width: 1px;
@@ -325,13 +289,13 @@ exports[`<SessionListItem /> Should render and match the snapshot 1`] = `
   color: #2F3850;
 }
 
-.c25:focus {
+.c23:focus {
   box-shadow: none;
   outline: none;
   border-color: #107969;
 }
 
-.c25:disabled {
+.c23:disabled {
   color: #ABBBD1;
 }
 
@@ -383,10 +347,6 @@ exports[`<SessionListItem /> Should render and match the snapshot 1`] = `
   position: relative;
   cursor: pointer;
   min-width: 30px;
-}
-
-.c5 {
-  width: 70%;
 }
 
 .c5:hover * .c7 {
@@ -479,66 +439,51 @@ exports[`<SessionListItem /> Should render and match the snapshot 1`] = `
         </div>
         <div
           class="c15"
-          width="40%"
         >
           <div
             class="c16"
             display="flex"
           >
             <div
-              class="c1"
-              data-for="tooltip-1"
-              data-tip=""
-            />
-          </div>
-          <div
-            class="c17"
-          >
-            <div
-              class="c18"
-              display="flex"
-              id="1"
+              class="c17"
+              id="session-list-item-options-1"
             >
-              <div
-                class="c19"
-              >
-                <img
-                  alt="dots"
-                  class="c20"
-                  src="IMAGE_MOCK"
-                />
-              </div>
+              <img
+                alt="dots"
+                class="c18"
+                src="IMAGE_MOCK"
+              />
             </div>
           </div>
         </div>
       </div>
       <div
-        class="c21"
+        class="c19"
       >
         <div
-          class="c22"
+          class="c20"
         />
       </div>
       <div
-        class="c23"
+        class="c21"
         display="flex"
       >
         <p
-          class="c24"
+          class="c22"
           id="estimate-time-label"
         >
           Estimate time to complete
         </p>
         <input
           aria-labelledby="estimate-time-label"
-          class="c25"
+          class="c23"
           placeholder="0"
           type="text"
           value=""
           width="60"
         />
         <p
-          class="c24"
+          class="c22"
         >
           min
         </p>

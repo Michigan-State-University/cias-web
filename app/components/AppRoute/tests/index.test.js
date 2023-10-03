@@ -6,7 +6,11 @@ import { MemoryRouter } from 'react-router-dom';
 import { IntlProvider } from 'react-intl';
 import { DEFAULT_LOCALE } from 'i18n';
 
-import { NAVIGATION, Roles, AllRoles } from 'models/User/RolesManager';
+import {
+  NAVIGATION,
+  Roles,
+  PasswordAuthenticatedRoles,
+} from 'models/User/RolesManager';
 
 import { RoutePath } from 'global/constants';
 
@@ -36,7 +40,7 @@ describe('<AppRoute />', () => {
     exact: true,
     path: '/component',
     protectedRoute: true,
-    allowedRoles: AllRoles,
+    allowedRoles: PasswordAuthenticatedRoles,
     component: Component,
     navbarProps: {
       navbarId: NAVIGATION.DEFAULT,

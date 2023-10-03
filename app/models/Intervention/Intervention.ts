@@ -2,7 +2,6 @@ import { CharacterType } from 'models/Character';
 import { AppFile } from 'models/File';
 import { Session } from 'models/Session';
 
-import { InterventionInvite } from './InterventionInvite';
 import { Editor } from './Editor';
 import { InterventionClinicLocation } from './ClinicLocation';
 
@@ -78,7 +77,6 @@ export interface Intervention extends SimpleIntervention {
   isAccessRevoked: boolean;
   licenseType: CatMhLicenseType;
   type: InterventionType;
-  emails?: InterventionInvite[];
   additionalText: Nullable<string>;
   originalText: Nullable<{ additionalText: string }>;
   usersWithAccess: Nullable<UserWithAccess[]>;

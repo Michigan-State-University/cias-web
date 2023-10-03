@@ -95,7 +95,7 @@ export const useDownloadSessionMap = (): DownloadSessionMap => {
   const generateAndTriggerDownloadAsync = async (map: HTMLElement) => {
     const image = await generateImage(map);
 
-    const fileDownloader = FileDownloaderFactory.stringFileDownloader();
+    const fileDownloader = FileDownloaderFactory.markupFileDownloader();
     fileDownloader.download(image, 'session-map.svg');
 
     setDownloadProgressState({

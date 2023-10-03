@@ -24,6 +24,7 @@ import { themeColors } from 'theme';
 
 import { passwordRegex } from 'global/constants/regex';
 import { RoutePath } from 'global/constants';
+import globalMessages from 'global/i18n/globalMessages';
 
 import { parametrizeRoutePath } from 'utils/router';
 
@@ -177,7 +178,7 @@ export function RegisterPage({
               />
             </H1>
             <Text fontSize="12px" lineHeight="12px">
-              <FormattedMessage {...messages.subHeader} />
+              <FormattedMessage {...globalMessages.requiredFields} />
             </Text>
           </Box>
           <Formik
