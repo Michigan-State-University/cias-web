@@ -513,9 +513,9 @@ export const deactivatePredefinedParticipantRequest = (
     interventionId,
     participantId,
   });
-export const deactivatePredefinedParticipantSuccess = (predefinedParticipant) =>
+export const deactivatePredefinedParticipantSuccess = (participantId) =>
   actionBuilder(DEACTIVATE_PREDEFINED_PARTICIPANT_SUCCESS, {
-    predefinedParticipant,
+    participantId,
   });
 export const deactivatePredefinedParticipantError = () =>
   actionBuilder(DEACTIVATE_PREDEFINED_PARTICIPANT_ERROR, {});

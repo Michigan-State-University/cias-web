@@ -819,13 +819,11 @@ export const interventionReducer = (state = initialState, action) =>
         break;
       }
       case DEACTIVATE_PREDEFINED_PARTICIPANT_SUCCESS: {
-        const { predefinedParticipant } = action.payload;
+        const { participantId } = action.payload;
         if (draft.predefinedParticipants) {
-          updateItemById(
-            draft.predefinedParticipants,
-            predefinedParticipant.id,
-            predefinedParticipant,
-          );
+          updateItemById(draft.predefinedParticipants, participantId, {
+            active: false,
+          });
         }
         draft.loaders.deactivatePredefinedParticipant = false;
         break;
