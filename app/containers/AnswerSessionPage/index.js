@@ -449,7 +449,6 @@ export function AnswerSessionPage({
 
     const continueButtonLoading =
       currentQuestion.loading || nextQuestionLoading || answer?.loading;
-    const skipQuestionButtonDisabled = continueButtonLoading;
 
     const isNumericQuestion = currentQuestion.type === QuestionTypes.NUMBER;
 
@@ -499,6 +498,8 @@ export function AnswerSessionPage({
       previewMode,
       isMobilePreview,
       userSessionId: userSession?.id,
+      disabled: continueButtonLoading,
+      continueButtonLoading,
     };
 
     const isLastScreen = currentQuestion.type === finishQuestion.id;
@@ -578,7 +579,7 @@ export function AnswerSessionPage({
               >
                 <ActionButtons
                   renderSkipQuestionButton={shouldRenderSkipQuestionButton}
-                  skipQuestionButtonDisabled={skipQuestionButtonDisabled}
+                  skipQuestionButtonDisabled={continueButtonLoading}
                   onSkipQuestionClick={() => setSkipQuestionModalVisible(true)}
                   renderContinueButton={shouldRenderContinueButton}
                   continueButtonDisabled={isButtonDisabled()}
@@ -609,7 +610,7 @@ export function AnswerSessionPage({
               />
               <ActionButtons
                 renderSkipQuestionButton={shouldRenderSkipQuestionButton}
-                skipQuestionButtonDisabled={skipQuestionButtonDisabled}
+                skipQuestionButtonDisabled={continueButtonLoading}
                 onSkipQuestionClick={() => setSkipQuestionModalVisible(true)}
                 renderContinueButton={shouldRenderContinueButton}
                 continueButtonDisabled={isButtonDisabled()}

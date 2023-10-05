@@ -21,6 +21,7 @@ export type TlfbConsumptionFormProps = {
   answerBody: Nullable<TlfbQuestionAnswerBody>;
   onChange: (newAnswerBody: TlfbQuestionAnswerBody) => void;
   mobile: boolean;
+  disabled?: boolean;
 };
 
 export const TlfbConsumptionForm = ({
@@ -31,6 +32,7 @@ export const TlfbConsumptionForm = ({
   answerBody,
   onChange,
   mobile,
+  disabled,
 }: TlfbConsumptionFormProps) => {
   const { formatMessage } = useIntl();
 
@@ -81,7 +83,7 @@ export const TlfbConsumptionForm = ({
         <Row mb={24} gap={32}>
           <Radio
             id="yes-option"
-            disabled={loading}
+            disabled={loading || disabled}
             onChange={handleSubstancesConsumedChange(true)}
             checked={substancesConsumed === true}
           >
@@ -89,7 +91,7 @@ export const TlfbConsumptionForm = ({
           </Radio>
           <Radio
             id="no-option"
-            disabled={loading}
+            disabled={loading || disabled}
             onChange={handleSubstancesConsumedChange(false)}
             checked={substancesConsumed === false}
           >
@@ -106,6 +108,7 @@ export const TlfbConsumptionForm = ({
               consumptions={consumptions ?? []}
               onChange={handleConsumptionsChange}
               loading={loading}
+              disabled={disabled}
             />
           )}
           {grouped && (
@@ -115,6 +118,7 @@ export const TlfbConsumptionForm = ({
               onChange={handleConsumptionsChange}
               loading={loading}
               mobile={mobile}
+              disabled={disabled}
             />
           )}
         </>

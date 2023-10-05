@@ -36,6 +36,7 @@ export type GroupedSubstanceItemProps = {
   onChange: (consumption: SubstanceConsumption) => void;
   loading: boolean;
   mobile: boolean;
+  disabled?: boolean;
 };
 
 const Component = ({
@@ -46,6 +47,7 @@ const Component = ({
   consumptions,
   onChange,
   mobile,
+  disabled,
 }: GroupedSubstanceItemProps) => {
   const { formatMessage } = useIntl();
 
@@ -166,6 +168,7 @@ const Component = ({
             onChange={onAmountChange}
             aria-labelledby={`${groupId} ${amountLabelId} ${indexId}`}
             onWheel={(e: any) => e.target.blur()}
+            disabled={disabled}
           />
         </Col>
       </Row>

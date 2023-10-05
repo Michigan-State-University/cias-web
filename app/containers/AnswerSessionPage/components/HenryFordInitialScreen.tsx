@@ -19,8 +19,10 @@ const HenryFordInitialScreen = ({
   isMobilePreview,
   isPreview,
   saveAnswer,
+  disabled,
+  continueButtonLoading,
 }: SharedProps<HenryFordInitialScreenDTO>) => {
-  const dispach = useDispatch();
+  const dispatch = useDispatch();
 
   const hfhsPatientDetail = useSelector<RootState, Nullable<HfhsPatientDetail>>(
     makeSelectHfhsPatientDetail(),
@@ -34,17 +36,17 @@ const HenryFordInitialScreen = ({
       saveAnswer(false);
       return;
     }
-    dispach(verifyPatientDataRequest(patientData));
+    dispatch(verifyPatientDataRequest(patientData));
   };
 
   return (
     <HenryFordInitialScreenLayout
       forceMobile={isMobilePreview}
       onSubmitPatientData={handleSubmitPatientData}
-      verifying={loading}
+      verifying={loading || continueButtonLoading}
       verifyingError={error}
       hfhsPatientDetail={hfhsPatientDetail}
-      disabled={patientDetailProvided}
+      disabled={patientDetailProvided || disabled}
       showContinueButton
     />
   );

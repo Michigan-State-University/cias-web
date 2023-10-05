@@ -19,6 +19,7 @@ const MultipleQuestionLayout = ({
   check,
   selectedAnswersIndex,
   isMobile,
+  disabled,
 }) => (
   <Column>
     {data.map((questionAnswer, index) => {
@@ -38,11 +39,18 @@ const MultipleQuestionLayout = ({
               previewKey={key}
             />
           )}
-          <HoverableBox px={margin} py={14} filled clickable>
+          <HoverableBox
+            px={margin}
+            py={14}
+            filled
+            clickable
+            disabled={disabled}
+          >
             <Checkbox
               id={ariaInputId}
               checked={isChecked}
               onChange={() => check(value, name, index)}
+              disabled={disabled}
             >
               <MarkupContainer>
                 <Markup content={payload} noWrap />
@@ -67,6 +75,7 @@ MultipleQuestionLayout.propTypes = {
   check: PropTypes.func,
   selectedAnswersIndex: PropTypes.array,
   isMobile: PropTypes.bool,
+  disabled: PropTypes.bool,
 };
 
 export default MultipleQuestionLayout;
