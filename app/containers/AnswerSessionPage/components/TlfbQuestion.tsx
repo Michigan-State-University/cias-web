@@ -47,6 +47,7 @@ const TlfbQuestion = ({
   isMobilePreview,
   userSessionId,
   selectAnswer,
+  disabled,
 }: SharedProps<TlfbQuestionWithConfig, any>) => {
   const dispatch = useDispatch();
   const { formatMessage } = useIntl();
@@ -275,13 +276,14 @@ const TlfbQuestion = ({
         answerBody={answerBody}
         onChange={setAnswerBody}
         mobile={isMobile}
+        disabled={disabled}
       />
       <Divider mb={25} />
       {/* @ts-ignore */}
       <Row display="flex" justify="between" align="center" gap={8}>
         <Button
           onClick={saveAnswer}
-          disabled={!canGoToNextDay}
+          disabled={!canGoToNextDay || disabled}
           loading={isAnswerLoading}
           width="auto"
           px={30}

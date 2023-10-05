@@ -22,6 +22,7 @@ const PhoneQuestion = ({
   answerBody: answerData,
   selectAnswer,
   isMobilePreview,
+  disabled,
 }) => {
   const dispatch = useDispatch();
 
@@ -108,6 +109,7 @@ const PhoneQuestion = ({
       onPhoneNumberChange={handlePhoneNumberChange}
       onTimezoneChange={handleTimezoneChange}
       onTimeRangesChange={handleTimeRangesChange}
+      disabled={disabled}
     />
   );
 };
@@ -117,6 +119,7 @@ PhoneQuestion.propTypes = {
   selectAnswer: PropTypes.func,
   answerBody: PropTypes.any,
   isMobilePreview: PropTypes.bool,
+  disabled: PropTypes.bool,
 };
 
 export default PhoneQuestion;

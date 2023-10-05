@@ -17,12 +17,14 @@ export type EventInputType = {
   eventName: string;
   onInputBlur: (value: string) => void;
   onDelete: () => void;
+  disabled?: boolean;
 };
 
 export const EventInput = ({
   onInputBlur,
   eventName = '',
   onDelete,
+  disabled,
 }: EventInputType) => {
   const [eventNameValue, setEventNameValue] = useState(eventName);
 
@@ -47,12 +49,14 @@ export const EventInput = ({
             setEventNameValue(e.target.value)
           }
           placeholder={formatMessage(messages.eventNamePlaceholder)}
+          disabled={disabled}
         />
         <ImageButton
           src={binNoBg}
           onClick={handleDelete}
           title={`${formatMessage(messages.delete)} ${eventName}`}
           fill={colors.coolGrey}
+          disabled={disabled}
         />
       </Row>
     </ContentContainer>
