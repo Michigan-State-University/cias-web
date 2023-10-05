@@ -16,6 +16,7 @@ import objectToSnakeCase from 'utils/objectToSnakeCase';
 import { getIsPreview } from 'utils/previewMode';
 import { parametrizeRoutePath } from 'utils/router';
 import objectToCamelCase from 'utils/objectToCamelCase';
+import { formatApiErrorMessage } from 'utils/formatApiErrorMessage';
 
 import {
   resetPhoneNumberPreview,
@@ -122,7 +123,12 @@ function* submitAnswersAsync({
       throw new Error('Choose answer');
     }
   } catch (error) {
-    yield put(submitAnswerFailure(questionId, error?.toString()));
+    yield put(
+      submitAnswerFailure(
+        questionId,
+        formatApiErrorMessage(error, messages.submitAnswerError),
+      ),
+    );
   }
 }
 

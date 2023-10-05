@@ -304,4 +304,8 @@ export default defineMessages({
     id: `${scope}.goToDashboard`,
     defaultMessage: 'Go to Dashboard',
   },
+  submitAnswerError: {
+    id: `${scope}.submitAnswerError`,
+    defaultMessage: "Couldn't submit the answer",
+  },
 });
