@@ -104,6 +104,8 @@ export const PredefinedParticipantForm: FC<Props> = ({
     [isReportingIntervention, isUpdateMode],
   );
 
+  const hasRequiredFields = isReportingIntervention || isUpdateMode;
+
   return (
     <Formik
       initialValues={initialValues}
@@ -122,7 +124,7 @@ export const PredefinedParticipantForm: FC<Props> = ({
           }}
         >
           <Column gap={16}>
-            {!disabled && (
+            {!disabled && hasRequiredFields && (
               <Text mb={8}>{formatMessage(globalMessages.requiredFields)}</Text>
             )}
             {isReportingIntervention && (
