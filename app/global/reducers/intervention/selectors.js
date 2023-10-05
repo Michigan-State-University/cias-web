@@ -61,8 +61,8 @@ export const makeSelectInterventionOrganizationId = () =>
     ({ organizationId }) => organizationId,
   );
 
-export const makeSelectInterventionInvites = () =>
-  createSelector(selectIntervention, ({ invites }) => invites);
+export const makeSelectInterventionInvitations = () =>
+  createSelector(selectIntervention, ({ invitations }) => invitations);
 
 export const makeSelectInterventionSharedTo = () =>
   createSelector(
@@ -151,4 +151,21 @@ export const makeSelectInterventionHfhsAccess = () =>
   createSelector(
     selectIntervention,
     (substate) => substate.intervention?.hfhsAccess,
+  );
+
+export const makeSelectInvitationsStates = () =>
+  createSelector(selectIntervention, (substate) => substate.invitationsStates);
+
+export const makeSelectPredefinedParticipants = () =>
+  createSelector(
+    selectIntervention,
+    (substate) => substate.predefinedParticipants,
+  );
+
+export const makeSelectPredefinedParticipantById = (id) =>
+  createSelector(
+    selectIntervention,
+    ({ predefinedParticipants }) =>
+      predefinedParticipants &&
+      predefinedParticipants.find((participant) => participant.id === id),
   );

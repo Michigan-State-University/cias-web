@@ -38,7 +38,7 @@ export const FormikPhoneNumberInput: FC<Props> = ({
   numberKey,
   disabled,
   prefixLabel = messages.phoneNumberPrefixLabel,
-  phoneLabel = messages.phoneNumberPrefixLabel,
+  phoneLabel = messages.phoneNumberLabel,
   phonePlaceholder = messages.phoneNumber,
   prefixInputProps,
   numberInputProps,

@@ -4,11 +4,11 @@
  *
  */
 
-import React, { memo, useState, useRef } from 'react';
+import React, { memo, useState, useRef, useMemo } from 'react';
 import PropTypes from 'prop-types';
 import { connect, useDispatch } from 'react-redux';
 import { createStructuredSelector } from 'reselect';
-import { FormattedMessage, injectIntl, IntlShape } from 'react-intl';
+import { FormattedMessage, injectIntl, IntlShape, useIntl } from 'react-intl';
 import { Link } from 'react-router-dom';
 import { compose } from 'redux';
 
@@ -36,7 +36,7 @@ import {
   NavbarContainer,
 } from './styled';
 import messages from './messages';
-import { navbarElements } from './dropdownContent';
+import { getUserNavbarElements } from './dropdownContent';
 import NotificationsPanel from './NotificationsPanel';
 
 import PreviewNavbar from './components/PreviewNavbar';
@@ -54,12 +54,13 @@ const renderNavbar = (navbarProps) => {
 };
 
 export function Navbar({
-  user: { firstName, lastName, avatar },
+  user: { firstName, lastName, avatar, roles },
   navbarProps,
   match,
   location,
   intl,
 }) {
+  const { formatMessage } = useIntl();
   const dispatch = useDispatch();
 
   const [menuVisible, setMenuVisible] = useState(false);
@@ -73,6 +74,18 @@ export function Navbar({
     targetRef: navbarRef,
     onResize: (_, height) => dispatch(saveNavbarHeight(height)),
   });
+
+  const userNavbarElements = useMemo(
+    () => getUserNavbarElements(roles),
+    [roles],
+  );
+
+  const displayedName = useMemo(() => {
+    if (!firstName && !lastName) {
+      return formatMessage(messages.defaultDisplayedName);
+    }
+    return `${firstName} ${lastName}`;
+  }, [firstName, lastName]);
 
   return (
     <NavbarContainer ref={navbarRef}>
@@ -92,24 +105,28 @@ export function Navbar({
             <div ref={dropdownRef}>
               {menuVisible && (
                 <DropDownContent>
-                  {navbarElements.map(({ url, messagesKey, icon }, index) => (
-                    <StyledRow
-                      key={index}
-                      onClick={() => setMenuVisible(false)}
-                    >
-                      <Link to={url}>
-                        <Row>
-                          <Img mr={13} src={icon} />
-                          <StyledComment>
-                            <FormattedMessage
-                              {...messages[messagesKey]}
-                              title={intl.formatMessage(messages[messagesKey])}
-                            />
-                          </StyledComment>
-                        </Row>
-                      </Link>
-                    </StyledRow>
-                  ))}
+                  {userNavbarElements.map(
+                    ({ url, messagesKey, icon }, index) => (
+                      <StyledRow
+                        key={index}
+                        onClick={() => setMenuVisible(false)}
+                      >
+                        <Link to={url}>
+                          <Row>
+                            <Img mr={13} src={icon} />
+                            <StyledComment>
+                              <FormattedMessage
+                                {...messages[messagesKey]}
+                                title={intl.formatMessage(
+                                  messages[messagesKey],
+                                )}
+                              />
+                            </StyledComment>
+                          </Row>
+                        </Link>
+                      </StyledRow>
+                    ),
+                  )}
                 </DropDownContent>
               )}
             </div>
@@ -120,11 +137,9 @@ export function Navbar({
               lastName={lastName}
               firstName={firstName}
             />
-            <Box
-              className="user-name-info"
-              clickable
-              data-private
-            >{`${firstName} ${lastName}`}</Box>
+            <Box className="user-name-info" clickable data-private>
+              {displayedName}
+            </Box>
           </DropDownContainer>
         </RightPanel>
       </NavbarStyled>

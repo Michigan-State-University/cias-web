@@ -8,6 +8,7 @@ import { parametrizeRoutePath } from 'utils/router';
 
 import { InterventionSharedTo, InterventionType } from 'models/Intervention';
 import { FinishQuestionDTO } from 'models/Question';
+import { useRoleManager } from 'models/User/RolesManager';
 
 import { resetReducer as resetAuthReducer } from 'global/reducers/auth/actions';
 import { RoutePath } from 'global/constants';
@@ -19,7 +20,7 @@ import GhostLink from 'components/GhostLink';
 import { StyledLink } from './styled';
 import messages from './messages';
 import { makeSelectUserSession } from '../selectors';
-import { getSessionMapUserPreviewUrl, getNextSessionUrl } from '../utils';
+import { getNextSessionUrl, getSessionMapUserPreviewUrl } from '../utils';
 import {
   fetchOrCreateUserSessionRequest,
   resetReducer as resetAnswerSessionPageReducer,
@@ -32,6 +33,7 @@ type Props = {
 
 const FinishScreenLayout = ({ formatMessage, question }: Props) => {
   const isGuestUser = !LocalStorageService.getState();
+  const { isPredefinedParticipant } = useRoleManager();
 
   const dispatch = useDispatch();
   const userSession = useSelector(makeSelectUserSession());
@@ -117,6 +119,16 @@ const FinishScreenLayout = ({ formatMessage, question }: Props) => {
       </Row>
     );
 
+  const getGoToDashboardButtonLink = () => {
+    if (isPreview) return '#';
+    if (isPredefinedParticipant) {
+      return parametrizeRoutePath(RoutePath.USER_INTERVENTION, {
+        userInterventionId,
+      });
+    }
+    return RoutePath.DASHBOARD;
+  };
+
   return (
     <Row mt={50} justify="center" width="100%" gap={15}>
       {isPreview && (
@@ -126,7 +138,7 @@ const FinishScreenLayout = ({ formatMessage, question }: Props) => {
           </Button>
         </StyledLink>
       )}
-      <StyledLink to={isPreview ? '#' : RoutePath.DASHBOARD}>
+      <StyledLink to={getGoToDashboardButtonLink()}>
         <Button
           onClick={isPreview ? closeCurrentTab : undefined}
           px={20}

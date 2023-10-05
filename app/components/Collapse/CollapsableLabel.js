@@ -102,7 +102,14 @@ const CollapseLabel = ({
           fontSize={dragHandleProps?.fontSize}
           lineHeight={dragHandleProps?.lineHeight}
         >
-          <Box display="flex" align="center" flex={1} gap={12}>
+          <Box
+            display="flex"
+            align="center"
+            flex={1}
+            gap={12}
+            minWidth="0"
+            overflowX="hidden"
+          >
             {label}
             {toggleIconPosition === 'label' && displayedImage}
           </Box>

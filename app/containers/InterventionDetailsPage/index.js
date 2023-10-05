@@ -32,11 +32,7 @@ import isNullOrUndefined from 'utils/isNullOrUndefined';
 import { reorder } from 'utils/reorder';
 import { isInterventionExportFeatureEnabled } from 'utils/env';
 
-import {
-  canArchive,
-  canEdit,
-  canShareWithParticipants,
-} from 'models/Status/statusPermissions';
+import { canArchive, canEdit } from 'models/Status/statusPermissions';
 import { useRoleManager } from 'models/User/RolesManager';
 import { reorderScope } from 'models/Session/ReorderScope';
 import { archived } from 'models/Status/StatusTypes';
@@ -53,8 +49,6 @@ import {
   copySessionRequest,
   createSessionRequest,
   makeSelectCurrentSessionIndex,
-  changeCurrentSession,
-  fetchSessionEmailsRequest,
   deleteSessionRequest,
   externalCopySessionRequest,
   makeSelectInterventionError,
@@ -81,7 +75,6 @@ import {
 
 import SettingsPanel from 'containers/SettingsPanel';
 import TranslateInterventionModal from 'containers/TranslateInterventionModal/index';
-import { ShareBox, ShareBoxType } from 'containers/ShareBox';
 import { CollaborationPanel } from 'containers/CollaborationPanel';
 import {
   ShareExternallyLevel,
@@ -133,13 +126,11 @@ export function InterventionDetailsPage({
   fetchInterventionError,
   createSessionError,
   sessionIndex,
-  changeSessionIndex,
   sendCsv,
   copySession,
   reorderSessions,
   copyIntervention,
   fetchQuestions,
-  fetchSessionEmails,
   deleteSession,
   externalCopySession,
   user: { organizableId: userOrganizableId },
@@ -182,12 +173,9 @@ export function InterventionDetailsPage({
   } = intervention || {};
 
   const showSessionCreateButton = canEdit(status);
-  const sharingPossible = canShareWithParticipants(status);
   const archivingPossible = canCurrentUserMakeChanges && canArchive(status);
 
   const [translateModalVisible, setTranslateModalVisible] = useState(false);
-  const [participantShareModalVisible, setParticipantShareModalVisible] =
-    useState(false);
 
   const [
     interventionSettingsModalVisible,
@@ -229,22 +217,6 @@ export function InterventionDetailsPage({
 
   const { openThirdPartyToolsAccessModal, ThirdPartyToolsModal } =
     useThirdPartyToolsAccessModal();
-
-  const {
-    openModal: openInterventionInviteModal,
-    Modal: InterventionInviteModal,
-  } = useModal({
-    type: ModalType.Modal,
-    props: {
-      title: formatMessage(messages.participantShareModalTitle),
-    },
-    modalContentRenderer: () => (
-      <ShareBox
-        type={ShareBoxType.INTERVENTION}
-        organizationId={organizationId}
-      />
-    ),
-  });
 
   const shareExternally = (emails, ids) =>
     copyIntervention({ interventionId, emails, ids });
@@ -482,14 +454,6 @@ export function InterventionDetailsPage({
             >
               {sortedSessions &&
                 sortedSessions.map((session, index) => {
-                  const handleInviteParticipantsClick = () => {
-                    fetchSessionEmails(index);
-                    if (index !== sessionIndex) {
-                      fetchQuestions(session.id);
-                      changeSessionIndex(index);
-                    }
-                    setParticipantShareModalVisible(true);
-                  };
                   const nextSession = sortedSessions.find(
                     ({ position }) => position > session.position,
                   );
@@ -497,15 +461,11 @@ export function InterventionDetailsPage({
                     <Row key={session.id}>
                       <SessionListItem
                         disabled={!editingPossible}
-                        sharingPossible={sharingPossible}
                         deletionPossible={editingPossible}
                         sharedTo={sharedTo}
                         session={session}
                         index={index}
                         isSelected={index === sessionIndex}
-                        handleInviteParticipantsClick={
-                          handleInviteParticipantsClick
-                        }
                         handleCopySession={handleCopySession}
                         handleExternalCopySession={handleExternalCopySession}
                         handleDeleteSession={(sessionId) =>
@@ -513,7 +473,6 @@ export function InterventionDetailsPage({
                         }
                         editSession={editSession}
                         nextSessionName={nextSession ? nextSession.name : null}
-                        status={status}
                         interventionType={type}
                         hfhsAccess={hfhsAccess}
                       />
@@ -537,7 +496,6 @@ export function InterventionDetailsPage({
     <InterventionDetailsPageContext.Provider
       value={{
         canEdit: editingPossible,
-        canShareWithParticipants: sharingPossible,
         canArchive: archivingPossible,
       }}
     >
@@ -587,19 +545,6 @@ export function InterventionDetailsPage({
             </Modal>
 
             <Modal
-              title={formatMessage(messages.participantShareModalTitle)}
-              onClose={() => setParticipantShareModalVisible(false)}
-              visible={participantShareModalVisible}
-            >
-              <ShareBox
-                type={ShareBoxType.SESSION}
-                organizationId={organizationId}
-              />
-            </Modal>
-
-            <InterventionInviteModal />
-
-            <Modal
               title={formatMessage(messages.assignOrganization)}
               onClose={closeAssignOrganizationModal}
               visible={assignOrganizationModalVisible}
@@ -629,9 +574,7 @@ export function InterventionDetailsPage({
               status={status}
               organizationId={organizationId}
               canAccessCsv={canAccessParticipantsData}
-              openInterventionInviteModal={openInterventionInviteModal}
               interventionType={type}
-              sharingPossible={sharingPossible}
               userOrganizableId={userOrganizableId}
               hasCollaborators={hasCollaborators}
               sensitiveDataState={sensitiveDataState}
@@ -639,6 +582,7 @@ export function InterventionDetailsPage({
               catMhLicenseType={licenseType}
               catMhPool={catMhPool}
               createdCatMhSessionCount={createdCatMhSessionCount}
+              sessions={sortedSessions ?? []}
             />
 
             <GRow>
@@ -685,13 +629,11 @@ InterventionDetailsPage.propTypes = {
   createSessionLoading: PropTypes.bool,
   editIntervention: PropTypes.func,
   sessionIndex: PropTypes.number,
-  changeSessionIndex: PropTypes.func,
   sendCsv: PropTypes.func,
   copySession: PropTypes.func,
   reorderSessions: PropTypes.func,
   copyIntervention: PropTypes.func,
   fetchQuestions: PropTypes.func,
-  fetchSessionEmails: PropTypes.func,
   deleteSession: PropTypes.func,
   externalCopySession: PropTypes.func,
   editSession: PropTypes.func,
@@ -726,8 +668,6 @@ const mapDispatchToProps = {
   fetchQuestions: getQuestionsRequest,
   fetchIntervention: fetchInterventionRequest,
   editIntervention: editInterventionRequest,
-  changeSessionIndex: changeCurrentSession,
-  fetchSessionEmails: fetchSessionEmailsRequest,
   sendCsv: sendInterventionCsvRequest,
   copySession: copySessionRequest,
   reorderSessions: reorderSessionList,

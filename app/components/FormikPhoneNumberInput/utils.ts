@@ -1,16 +1,19 @@
 import * as Yup from 'yup';
 import { IntlShape } from 'react-intl';
 import parsePhoneNumber, {
+  formatIncompletePhoneNumber,
   getCountryCallingCode,
   isValidNumber,
   NumberFormat,
 } from 'libphonenumber-js';
 import { CountryCode } from 'libphonenumber-js/types';
 
+import { PhoneAttributes } from 'models/Phone';
+
 import { SelectOption } from 'components/Select/types';
 
 import messages from './messages';
-import { SCHEMA_METHOD_NAME } from './constants';
+import { DEFAULT_COUNTRY_CODE, SCHEMA_METHOD_NAME } from './constants';
 
 function phoneNumberSchemaMethod(errorMessage: string, allowPartial: boolean) {
   // @ts-ignore
@@ -78,5 +81,34 @@ export const parsePhoneAttributes = (
     number: parsedNumber?.nationalNumber ?? '',
     iso: country,
     prefix,
+  };
+};
+
+export const getInitialValues = (
+  number?: Nullable<string>,
+  iso?: Nullable<CountryCode>,
+) => {
+  let parsedNumber = number;
+  if (number && iso) {
+    parsedNumber = formatIncompletePhoneNumber(number, iso);
+  }
+  return {
+    number: parsedNumber ?? '',
+    iso: { value: iso ?? DEFAULT_COUNTRY_CODE, label: '' },
+  };
+};
+
+export const getPhoneAttributes = (
+  number: Nullable<string>,
+  isoOption: Nullable<SelectOption<CountryCode>>,
+): PhoneAttributes => {
+  const prefixValue = isoOption
+    ? `+${getCountryCallingCode(isoOption?.value)}`
+    : '';
+  const parsedNumber = parsePhoneNumber(number ?? '', isoOption?.value);
+  return {
+    number: (parsedNumber?.nationalNumber as string) ?? '',
+    iso: isoOption?.value,
+    prefix: prefixValue,
   };
 };

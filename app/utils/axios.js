@@ -67,9 +67,12 @@ axios.interceptors.response.use(
 
     if (!response) return Promise.reject(error);
 
+    const requestUrl = response.config.url;
+
     if (
       responseStatusEquals(response, HttpStatusCodes.UNAUTHORIZED) &&
-      !response.config.url.endsWith('auth/sign_in')
+      !requestUrl.endsWith('auth/sign_in') &&
+      !requestUrl.endsWith('predefined_participants/verify')
     ) {
       dispatch(logOut(window.location.pathname));
     } else if (
@@ -95,7 +98,7 @@ axios.interceptors.response.use(
         isGuestRequest(
           window.location.pathname,
           response?.config?.method,
-          response?.config?.url,
+          requestUrl,
         ),
       );
 

@@ -25,6 +25,8 @@ import {
 import { Options as OffsetOptions } from '@floating-ui/core/src/middleware/offset';
 import capitalize from 'lodash/capitalize';
 
+import { ZIndex } from 'theme';
+
 import useKeyPress from 'utils/useKeyPress';
 import { KeyCodes } from 'utils/constants';
 import { GeometryHelper } from 'utils/mathUtils';
@@ -64,6 +66,7 @@ export type Props = {
   modalStyle?: Partial<CSSProperties>;
   contentPadding?: CSSProperties['padding'];
   shiftPadding?: Padding;
+  zIndex?: number;
 };
 
 const PopoverModal = ({
@@ -83,6 +86,7 @@ const PopoverModal = ({
   contentPadding,
   hideArrow,
   shiftPadding = 16,
+  zIndex = ZIndex.POPOVER_MODAL,
 }: Props): JSX.Element => {
   const arrowRef = useRef<HTMLElement>();
   const portalRef = useRef<HTMLElement>(null);
@@ -229,6 +233,7 @@ const PopoverModal = ({
           left: x ?? '',
           ...modalStyle,
         }}
+        zIndex={zIndex}
       >
         {!hideArrow && (
           <StyledArrow

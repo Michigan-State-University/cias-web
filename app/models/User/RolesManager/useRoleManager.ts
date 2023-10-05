@@ -44,7 +44,11 @@ const ALLOWED_NOTIFICATIONS_DISPLAY = [
   Roles.Admin,
 ];
 
-const ALLOWED_QUICK_EXIT_USE = [Roles.Participant, Roles.Guest];
+const ALLOWED_QUICK_EXIT_USE = [
+  Roles.Participant,
+  Roles.Guest,
+  Roles.PredefinedParticipant,
+];
 
 const REQUIRED_NAVIGATOR_AVAILABILITY_SET = [Roles.Admin, Roles.Researcher];
 
@@ -61,6 +65,9 @@ export const useRoleManager = () => {
   const isHealthClinicAdmin = userRoles.includes(Roles.ClinicAdmin);
   const isHealthSystemAdmin = userRoles.includes(Roles.HealthSystemAdmin);
   const isNavigator = userRoles.includes(Roles.Navigator);
+  const isPredefinedParticipant = userRoles.includes(
+    Roles.PredefinedParticipant,
+  );
 
   const hasFullOrgAccess = arraysOverlap(userRoles, ALLOWED_FULL_ORG_ACCESS);
 
@@ -127,5 +134,6 @@ export const useRoleManager = () => {
     canUserDisplayLeftSidebar,
     canUserUseQuickExit,
     mustSetNavigatorAvailability,
+    isPredefinedParticipant,
   };
 };

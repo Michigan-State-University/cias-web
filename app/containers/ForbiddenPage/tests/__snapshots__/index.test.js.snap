@@ -71,7 +71,7 @@ exports[`<ForbiddenPage /> should render and match the snapshot 1`] = `
             font-size="10vw"
             font-weight="bold"
           >
-            Logged in?
+            No access
           </p>
         </div>
       </div>

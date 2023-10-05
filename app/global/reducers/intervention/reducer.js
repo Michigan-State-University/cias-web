@@ -16,6 +16,7 @@ import {
   assignDraftItems,
   deleteItemByIndex,
   updateItemById,
+  updateListItemStateById,
 } from 'utils/reduxUtils';
 import sessionSettingsReducer from './sessionSettings/reducer';
 import {
@@ -50,13 +51,6 @@ import {
   CREATE_SESSION_REQUEST,
   CREATE_SESSION_ERROR,
   CREATE_SESSION_SUCCESS,
-  SEND_SESSION_INVITE_ERROR,
-  SEND_SESSION_INVITE_REQUEST,
-  SEND_SESSION_INVITE_SUCCESS,
-  RESEND_SESSION_INVITE_REQUEST,
-  FETCH_SESSION_EMAILS_REQUEST,
-  FETCH_SESSION_EMAILS_SUCCESS,
-  FETCH_SESSION_EMAILS_ERROR,
   DELETE_SESSION_REQUEST,
   DELETE_SESSION_SUCCESS,
   DELETE_SESSION_ERROR,
@@ -74,17 +68,17 @@ import {
   TRANSLATE_INTERVENTION_REQUEST,
   TRANSLATE_INTERVENTION_SUCCESS,
   TRANSLATE_INTERVENTION_ERROR,
-  SEND_INTERVENTION_INVITE_SUCCESS,
-  SEND_INTERVENTION_INVITE_REQUEST,
-  SEND_INTERVENTION_INVITE_ERROR,
-  RESEND_INTERVENTION_INVITE_REQUEST,
+  SEND_INTERVENTION_INVITATIONS_SUCCESS,
+  SEND_INTERVENTION_INVITATIONS_REQUEST,
+  SEND_INTERVENTION_INVITATIONS_ERROR,
+  RESEND_INTERVENTION_INVITATION_REQUEST,
   ADD_INTERVENTION_ATTACHMENTS_SUCCESS,
   DELETE_INTERVENTION_ATTACHMENT_SUCCESS,
   ADD_INTERVENTION_ATTACHMENTS_REQUEST,
   ADD_INTERVENTION_ATTACHMENTS_ERROR,
-  FETCH_INTERVENTION_INVITES_REQUEST,
-  FETCH_INTERVENTION_INVITES_SUCCESS,
-  FETCH_INTERVENTION_INVITES_ERROR,
+  FETCH_INTERVENTION_INVITATIONS_REQUEST,
+  FETCH_INTERVENTION_INVITATIONS_SUCCESS,
+  FETCH_INTERVENTION_INVITATIONS_ERROR,
   GENERATE_CONVERSATIONS_TRANSCRIPT_REQUEST,
   GENERATE_CONVERSATIONS_TRANSCRIPT_SUCCESS,
   GENERATE_CONVERSATIONS_TRANSCRIPT_ERROR,
@@ -120,12 +114,35 @@ import {
   CLEAR_INTERVENTION_DATA_SUCCESS,
   CLEAR_INTERVENTION_DATA_ERROR,
   ON_SENSITIVE_DATA_REMOVED_RECEIVED,
+  INVITATION_LIST_ITEM_DEFAULT_STATE,
+  RESEND_INTERVENTION_INVITATION_SUCCESS,
+  RESEND_INTERVENTION_INVITATION_ERROR,
+  CREATE_PREDEFINED_PARTICIPANT_REQUEST,
+  CREATE_PREDEFINED_PARTICIPANT_SUCCESS,
+  CREATE_PREDEFINED_PARTICIPANT_ERROR,
+  FETCH_PREDEFINED_PARTICIPANTS_REQUEST,
+  FETCH_PREDEFINED_PARTICIPANTS_SUCCESS,
+  FETCH_PREDEFINED_PARTICIPANTS_ERROR,
+  UPDATE_PREDEFINED_PARTICIPANT_SUCCESS,
+  UPDATE_PREDEFINED_PARTICIPANT_REQUEST,
+  UPDATE_PREDEFINED_PARTICIPANT_ERROR,
+  DEACTIVATE_PREDEFINED_PARTICIPANT_REQUEST,
+  DEACTIVATE_PREDEFINED_PARTICIPANT_SUCCESS,
+  DEACTIVATE_PREDEFINED_PARTICIPANT_ERROR,
+  ACTIVATE_PREDEFINED_PARTICIPANT_REQUEST,
+  ACTIVATE_PREDEFINED_PARTICIPANT_SUCCESS,
+  ACTIVATE_PREDEFINED_PARTICIPANT_ERROR,
+  SEND_PREDEFINED_PARTICIPANT_SMS_INVITATION_REQUEST,
+  SEND_PREDEFINED_PARTICIPANT_SMS_INVITATION_SUCCESS,
+  SEND_PREDEFINED_PARTICIPANT_SMS_INVITATION_ERROR,
 } from './constants';
 
 export const initialState = {
   currentSessionIndex: 0,
   intervention: null,
-  invites: [],
+  invitations: null,
+  predefinedParticipants: null,
+  invitationsStates: {},
   collaborators: [],
   currentUserCollaboratorData: null,
   cache: {
@@ -139,19 +156,10 @@ export const initialState = {
     editIntervention: false,
     changeAccessSettingLoading: false,
     fetchUserAccessLoading: false,
-    fetchSessionEmailsLoading: false,
     createSessionLoading: false,
     sendSessionLoading: false,
-    sessionEmailLoading: {
-      id: null,
-      email: null,
-    },
-    fetchInterventionInvites: false,
-    sendInterventionInvites: false,
-    interventionEmailLoading: {
-      id: null,
-      email: null,
-    },
+    fetchInterventionInvitations: false,
+    sendInterventionInvitations: false,
     logoLoading: false,
     translateInterventionLoading: false,
     addAttachmentsLoading: false,
@@ -164,30 +172,42 @@ export const initialState = {
     stoppingEditing: false,
     fetchCurrentUserCollaboratorData: false,
     clearInterventionData: false,
+    createPredefinedParticipant: false,
+    fetchPredefinedParticipants: false,
+    updatePredefinedParticipant: false,
+    deactivatePredefinedParticipant: false,
+    activatePredefinedParticipant: false,
+    sendPredefinedParticipantSmsInvitation: false,
   },
   errors: {
     fetchInterventionError: null,
-    fetchSessionEmailsError: null,
     createInterventionError: null,
     changeAccessSettingError: null,
     fetchUserAccessError: null,
     createSessionError: null,
     translateInterventionError: null,
-    fetchInterventionInvites: null,
+    fetchInterventionInvitations: null,
     generateConversationsTranscript: null,
     exportInterventionError: null,
     editIntervention: null,
     changeInterventionNarrator: null,
     editShortLinks: null,
+    fetchPredefinedParticipants: null,
   },
 };
-
-const findSessionIndex = (intervention, sessionId) =>
-  intervention.sessions.findIndex(({ id }) => id === sessionId);
 
 /* eslint-disable default-case, no-param-reassign */
 export const interventionReducer = (state = initialState, action) =>
   produce(state, (draft) => {
+    const updateInvitationListItemStateById = (invitationId, changes) => {
+      updateListItemStateById(
+        draft.invitationsStates,
+        invitationId,
+        changes,
+        INVITATION_LIST_ITEM_DEFAULT_STATE,
+      );
+    };
+
     switch (action.type) {
       case RESET_REDUCER: {
         return initialState;
@@ -202,6 +222,9 @@ export const interventionReducer = (state = initialState, action) =>
         draft.loaders.fetchInterventionLoading = true;
         draft.errors.fetchInterventionError = null;
         draft.intervention = null;
+        draft.invitations = null;
+        draft.invitationsStates = {};
+        draft.predefinedParticipants = null;
         break;
       case FETCH_INTERVENTION_SUCCESS:
         draft.loaders.fetchInterventionLoading = false;
@@ -221,6 +244,9 @@ export const interventionReducer = (state = initialState, action) =>
         break;
       case CREATE_INTERVENTION_SUCCESS:
         draft.loaders.createInterventionLoading = false;
+        draft.invitations = null;
+        draft.invitationsStates = {};
+        draft.predefinedParticipants = null;
         break;
       case CREATE_INTERVENTION_ERROR:
         break;
@@ -407,100 +433,66 @@ export const interventionReducer = (state = initialState, action) =>
         draft.errors.createSessionError = action.payload.error;
         break;
 
-      case FETCH_SESSION_EMAILS_REQUEST:
-        if (!state.intervention.sessions[action.payload.index].emails)
-          draft.loaders.fetchSessionEmailsLoading = true;
-        draft.errors.fetchSessionEmailsError = null;
-        break;
-      case FETCH_SESSION_EMAILS_SUCCESS: {
-        const { index, emails } = action.payload;
-        draft.intervention.sessions[index].emails = emails;
-        draft.loaders.fetchSessionEmailsLoading = false;
+      case FETCH_INTERVENTION_INVITATIONS_REQUEST: {
+        draft.errors.fetchInterventionInvitations = null;
+        draft.loaders.fetchInterventionInvitations = true;
         break;
       }
 
-      case FETCH_SESSION_EMAILS_ERROR:
-        draft.loaders.fetchSessionEmailsLoading = false;
-        draft.errors.fetchSessionEmailsError = action.payload.error;
-        break;
-
-      case SEND_SESSION_INVITE_REQUEST: {
-        const { sessionId } = action.payload;
-
-        const sessionIndex = findSessionIndex(state.intervention, sessionId);
-
-        if (sessionIndex !== -1) {
-          draft.loaders.sendSessionLoading = true;
-          draft.cache.intervention = state.intervention;
-        }
-
+      case FETCH_INTERVENTION_INVITATIONS_SUCCESS: {
+        const { invitations } = action.payload;
+        draft.invitations = invitations;
+        draft.loaders.fetchInterventionInvitations = false;
         break;
       }
 
-      case SEND_SESSION_INVITE_SUCCESS:
-        draft.loaders.sendSessionLoading = false;
-        draft.loaders.sessionEmailLoading =
-          initialState.loaders.sessionEmailLoading;
-        break;
-
-      case SEND_SESSION_INVITE_ERROR:
-        draft.loaders.sendSessionLoading = false;
-        draft.loaders.sessionEmailLoading =
-          initialState.loaders.sessionEmailLoading;
-        draft.intervention = state.cache.intervention;
-        break;
-
-      case RESEND_SESSION_INVITE_REQUEST:
-        draft.cache.intervention = state.intervention;
-        draft.loaders.sessionEmailLoading = {
-          ...action.payload,
-        };
-        break;
-
-      case FETCH_INTERVENTION_INVITES_REQUEST: {
-        draft.errors.fetchInterventionInvites = null;
-        draft.loaders.fetchInterventionInvites = true;
-        break;
-      }
-
-      case FETCH_INTERVENTION_INVITES_SUCCESS: {
-        const { invites } = action.payload;
-        draft.invites = invites;
-        draft.loaders.fetchInterventionInvites = false;
-        break;
-      }
-
-      case FETCH_INTERVENTION_INVITES_ERROR: {
+      case FETCH_INTERVENTION_INVITATIONS_ERROR: {
         const { error } = action.payload;
-        draft.errors.fetchInterventionInvites = error;
-        draft.loaders.fetchInterventionInvites = false;
+        draft.errors.fetchInterventionInvitations = error;
+        draft.loaders.fetchInterventionInvitations = false;
         break;
       }
 
-      case SEND_INTERVENTION_INVITE_REQUEST: {
-        draft.loaders.sendInterventionInvites = true;
+      case SEND_INTERVENTION_INVITATIONS_REQUEST: {
+        draft.loaders.sendInterventionInvitations = true;
         break;
       }
 
-      case SEND_INTERVENTION_INVITE_SUCCESS:
-        const { invites } = action.payload;
-        draft.invites = invites;
-        draft.loaders.sendInterventionInvites = false;
-        draft.loaders.interventionEmailLoading =
-          initialState.loaders.interventionEmailLoading;
+      case SEND_INTERVENTION_INVITATIONS_SUCCESS: {
+        const { invitations } = action.payload;
+        draft.invitations = invitations;
+        draft.loaders.sendInterventionInvitations = false;
         break;
+      }
 
-      case SEND_INTERVENTION_INVITE_ERROR:
-        draft.loaders.sendInterventionInvites = false;
-        draft.loaders.interventionEmailLoading =
-          initialState.loaders.interventionEmailLoading;
+      case SEND_INTERVENTION_INVITATIONS_ERROR: {
+        draft.loaders.sendInterventionInvitations = false;
         break;
+      }
 
-      case RESEND_INTERVENTION_INVITE_REQUEST:
-        draft.loaders.interventionEmailLoading = {
-          ...action.payload,
-        };
+      case RESEND_INTERVENTION_INVITATION_REQUEST: {
+        const { id } = action.payload;
+        updateInvitationListItemStateById(id, {
+          resendLoading: true,
+        });
         break;
+      }
+
+      case RESEND_INTERVENTION_INVITATION_SUCCESS: {
+        const { id } = action.payload;
+        updateInvitationListItemStateById(id, {
+          resendLoading: false,
+        });
+        break;
+      }
+
+      case RESEND_INTERVENTION_INVITATION_ERROR: {
+        const { id } = action.payload;
+        updateInvitationListItemStateById(id, {
+          resendLoading: false,
+        });
+        break;
+      }
 
       case DELETE_SESSION_REQUEST:
         draft.intervention.sessions = state.intervention.sessions.filter(
@@ -761,6 +753,124 @@ export const interventionReducer = (state = initialState, action) =>
         if (draft.intervention?.id === interventionId) {
           draft.intervention.sensitiveDataState = SensitiveDataState.REMOVED;
         }
+        break;
+      }
+
+      case CREATE_PREDEFINED_PARTICIPANT_REQUEST: {
+        draft.loaders.createPredefinedParticipant = true;
+        break;
+      }
+      case CREATE_PREDEFINED_PARTICIPANT_SUCCESS: {
+        const { predefinedParticipant } = action.payload;
+        if (draft.predefinedParticipants) {
+          draft.predefinedParticipants.push(predefinedParticipant);
+        } else {
+          draft.predefinedParticipants = [predefinedParticipant];
+        }
+        draft.loaders.createPredefinedParticipant = false;
+        break;
+      }
+      case CREATE_PREDEFINED_PARTICIPANT_ERROR: {
+        draft.loaders.createPredefinedParticipant = false;
+        break;
+      }
+
+      case FETCH_PREDEFINED_PARTICIPANTS_REQUEST: {
+        draft.errors.fetchPredefinedParticipants = null;
+        draft.loaders.fetchPredefinedParticipants = true;
+        break;
+      }
+      case FETCH_PREDEFINED_PARTICIPANTS_SUCCESS: {
+        const { predefinedParticipants } = action.payload;
+        draft.predefinedParticipants = predefinedParticipants;
+        draft.loaders.fetchPredefinedParticipants = false;
+        break;
+      }
+      case FETCH_PREDEFINED_PARTICIPANTS_ERROR: {
+        const { error } = action.payload;
+        draft.errors.fetchPredefinedParticipants = error;
+        draft.loaders.fetchPredefinedParticipants = false;
+        break;
+      }
+
+      case UPDATE_PREDEFINED_PARTICIPANT_REQUEST: {
+        draft.loaders.updatePredefinedParticipant = true;
+        break;
+      }
+      case UPDATE_PREDEFINED_PARTICIPANT_SUCCESS: {
+        const { predefinedParticipant } = action.payload;
+        if (draft.predefinedParticipants) {
+          updateItemById(
+            draft.predefinedParticipants,
+            predefinedParticipant.id,
+            predefinedParticipant,
+          );
+        }
+        draft.loaders.updatePredefinedParticipant = false;
+        break;
+      }
+      case UPDATE_PREDEFINED_PARTICIPANT_ERROR: {
+        draft.loaders.updatePredefinedParticipant = false;
+        break;
+      }
+
+      case DEACTIVATE_PREDEFINED_PARTICIPANT_REQUEST: {
+        draft.loaders.deactivatePredefinedParticipant = true;
+        break;
+      }
+      case DEACTIVATE_PREDEFINED_PARTICIPANT_SUCCESS: {
+        const { participantId } = action.payload;
+        if (draft.predefinedParticipants) {
+          updateItemById(draft.predefinedParticipants, participantId, {
+            active: false,
+          });
+        }
+        draft.loaders.deactivatePredefinedParticipant = false;
+        break;
+      }
+      case DEACTIVATE_PREDEFINED_PARTICIPANT_ERROR: {
+        draft.loaders.deactivatePredefinedParticipant = false;
+        break;
+      }
+
+      case ACTIVATE_PREDEFINED_PARTICIPANT_REQUEST: {
+        draft.loaders.activatePredefinedParticipant = true;
+        break;
+      }
+      case ACTIVATE_PREDEFINED_PARTICIPANT_SUCCESS: {
+        const { predefinedParticipant } = action.payload;
+        if (draft.predefinedParticipants) {
+          updateItemById(
+            draft.predefinedParticipants,
+            predefinedParticipant.id,
+            predefinedParticipant,
+          );
+        }
+        draft.loaders.activatePredefinedParticipant = false;
+        break;
+      }
+      case ACTIVATE_PREDEFINED_PARTICIPANT_ERROR: {
+        draft.loaders.activatePredefinedParticipant = false;
+        break;
+      }
+
+      case SEND_PREDEFINED_PARTICIPANT_SMS_INVITATION_REQUEST: {
+        draft.loaders.sendPredefinedParticipantSmsInvitation = true;
+        break;
+      }
+      case SEND_PREDEFINED_PARTICIPANT_SMS_INVITATION_SUCCESS: {
+        const { participantId, invitationSentAt } = action.payload;
+        if (draft.predefinedParticipants) {
+          updateItemById(draft.predefinedParticipants, participantId, {
+            invitationSentAt,
+          });
+        }
+        draft.loaders.sendPredefinedParticipantSmsInvitation = false;
+        break;
+      }
+      case SEND_PREDEFINED_PARTICIPANT_SMS_INVITATION_ERROR: {
+        draft.loaders.sendPredefinedParticipantSmsInvitation = false;
+        break;
       }
     }
   });
