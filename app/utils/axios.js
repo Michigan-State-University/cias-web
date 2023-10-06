@@ -16,7 +16,11 @@ import {
 
 import LocalStorageService from './localStorageService';
 import { HttpMethods, HttpStatusCodes } from './constants';
-import { responseMethodEquals, responseStatusEquals } from './axiosUtils';
+import {
+  getRequestUrlWithoutQueryParams,
+  responseMethodEquals,
+  responseStatusEquals,
+} from './axiosUtils';
 
 /**
  * by default it retries when error does not have a response (ex. status 5xx)
@@ -67,12 +71,16 @@ axios.interceptors.response.use(
 
     if (!response) return Promise.reject(error);
 
-    const requestUrl = response.config.url;
+    const requestUrl = getRequestUrlWithoutQueryParams(response.config.url);
 
     if (
       responseStatusEquals(response, HttpStatusCodes.UNAUTHORIZED) &&
       !requestUrl.endsWith('auth/sign_in') &&
-      !requestUrl.endsWith('predefined_participants/verify')
+      !requestUrl.endsWith('predefined_participants/verify') &&
+      !(
+        requestUrl.endsWith('user_sessions') &&
+        responseMethodEquals(response, HttpMethods.GET)
+      )
     ) {
       dispatch(logOut(window.location.pathname));
     } else if (
