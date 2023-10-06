@@ -84,7 +84,7 @@ export function Navbar({
     if (!firstName && !lastName) {
       return formatMessage(messages.defaultDisplayedName);
     }
-    return `${firstName} ${lastName}`;
+    return `${firstName ?? ''} ${lastName ?? ''}`;
   }, [firstName, lastName]);
 
   return (
