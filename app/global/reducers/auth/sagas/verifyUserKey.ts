@@ -1,6 +1,8 @@
-import { call, put, takeEvery } from '@redux-saga/core/effects';
+import { call, put, takeEvery, select } from '@redux-saga/core/effects';
 import { replace } from 'connected-react-router';
 import axios from 'axios';
+
+import { Roles } from 'models/User/RolesManager';
 
 import objectToSnakeCase from 'utils/objectToSnakeCase';
 import { parametrizeRoutePath } from 'utils/router';
@@ -10,8 +12,8 @@ import { jsonApiToObject } from 'utils/jsonApiMapper';
 
 import { RoutePath } from 'global/constants';
 import { WithSaga } from 'global/reducers/types';
-
 import { AnswerSessionPageLocationState } from 'global/types/locationState';
+
 import { VERIFY_USER_KEY_REQUEST } from '../constants';
 import {
   verifyUserKeyError,
@@ -19,12 +21,24 @@ import {
   verifyUserKeySuccess,
 } from '../actions';
 import { VerifyUserKeyResponseDTO } from '../types';
+import { makeSelectUserRoles } from '../selectors';
 
 function* verifyUserKeyWorker({
   payload: { userKey },
 }: ReturnType<typeof verifyUserKeyRequest>) {
   const requestUrl = `/v1/predefined_participants/verify`;
   const requestBody = objectToSnakeCase({ slug: userKey });
+
+  const currentUserRoles: Nullable<Roles[]> = yield select(
+    makeSelectUserRoles(),
+  );
+  // clear headers if user is a guest or predefined participant
+  const clearHeaders =
+    !currentUserRoles || currentUserRoles.includes(Roles.PredefinedParticipant);
+
+  if (clearHeaders) {
+    LocalStorageService.clearHeaders();
+  }
 
   try {
     const { data } = yield call(axios.post, requestUrl, requestBody);
