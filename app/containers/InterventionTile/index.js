@@ -22,7 +22,7 @@ import ArchiveIcon from 'assets/svg/archive.svg';
 
 import { colors } from 'theme';
 
-import globalMessages from 'global/i18n/globalMessages';
+import interventionStatusesMessages from 'global/i18n/interventionStatusesMessages';
 import {
   makeSelectUserId,
   makeSelectUserOrganizableId,
@@ -361,7 +361,7 @@ const InterventionTile = ({
                     <Row align="center" gap={5}>
                       <Text lineHeight={1}>
                         <FormattedMessage
-                          {...globalMessages.statuses[status]}
+                          {...interventionStatusesMessages[status]}
                         />
                       </Text>
                       <StatusIndicator status={status} />

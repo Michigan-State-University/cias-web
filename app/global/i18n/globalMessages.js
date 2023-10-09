@@ -6,7 +6,6 @@ import {
   tlfbEvents,
   tlfbQuestion,
 } from 'models/Session/QuestionTypes';
-import { archived, closed, draft, published } from 'models/Status/StatusTypes';
 import { UserInterventionStatus } from 'models/UserIntervention/StatusTypes';
 import { UserSessionStatus } from 'models/UserSession/StatusTypes';
 import { TextMessageType } from 'models/TextMessage';
@@ -43,24 +42,6 @@ export default defineMessages({
   hfhValuePlaceholder: {
     id: `${scope}.hfhValuePlaceholder`,
     defaultMessage: 'Value to send to HFH',
-  },
-  statuses: {
-    [draft]: {
-      id: `${scope}.${draft}`,
-      defaultMessage: 'Draft',
-    },
-    [published]: {
-      id: `${scope}.${published}`,
-      defaultMessage: 'Published',
-    },
-    [closed]: {
-      id: `${scope}.${closed}`,
-      defaultMessage: 'Closed',
-    },
-    [archived]: {
-      id: `${scope}.${archived}`,
-      defaultMessage: 'Archived',
-    },
   },
   sharingFilters: {
     [SharingFilter.ONLY_SHARED_BY_ME]: {

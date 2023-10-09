@@ -7,7 +7,7 @@ import { themeColors } from 'theme';
 import { CatMhLicenseType, SensitiveDataState } from 'models/Intervention';
 import { useRoleManager } from 'models/User/RolesManager';
 
-import globalMessages from 'global/i18n/globalMessages';
+import interventionStatusesMessages from 'global/i18n/interventionStatusesMessages';
 import { RoutePath } from 'global/constants';
 
 import { parametrizeRoutePath } from 'utils/router';
@@ -122,7 +122,7 @@ const Header = ({
           <Row align="center" mt={8} gap={12}>
             <Box>
               <StatusLabel status={status}>
-                {status && formatMessage(globalMessages.statuses[status])}
+                {status && formatMessage(interventionStatusesMessages[status])}
               </StatusLabel>
             </Box>
             {sensitiveDataState === SensitiveDataState.REMOVED && (

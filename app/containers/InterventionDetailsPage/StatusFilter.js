@@ -4,12 +4,14 @@ import PropTypes from 'prop-types';
 import Row from 'components/Row';
 
 import { statusTypeToColorMap } from 'models/Status/StatusTypes';
-import globalMessages from 'global/i18n/globalMessages';
+
+import interventionStatusesMessages from 'global/i18n/interventionStatusesMessages';
+
 import { StatusLabel } from './styled';
 
 const StatusFilter = ({ formatMessage, onClick, active }) => (
   <Row my={35} justify="between" width={250}>
-    {Object.keys(globalMessages.statuses).map((status) => (
+    {Object.keys(interventionStatusesMessages).map((status) => (
       <StatusLabel
         key={status}
         value={status}
@@ -17,7 +19,7 @@ const StatusFilter = ({ formatMessage, onClick, active }) => (
         onClick={onClick}
         active={active === status}
       >
-        <p>{formatMessage(globalMessages.statuses[status])}</p>
+        <p>{formatMessage(interventionStatusesMessages[status])}</p>
       </StatusLabel>
     ))}
   </Row>
