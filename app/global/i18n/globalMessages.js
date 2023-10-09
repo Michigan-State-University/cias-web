@@ -6,7 +6,6 @@ import {
   tlfbEvents,
   tlfbQuestion,
 } from 'models/Session/QuestionTypes';
-import { UserSessionStatus } from 'models/UserSession/StatusTypes';
 import { TextMessageType } from 'models/TextMessage';
 import { PhoneType, Sex } from 'models/HfhsPatient';
 
@@ -44,24 +43,6 @@ export default defineMessages({
   allInterventions: {
     id: `${scope}.allInterventions`,
     defaultMessage: `All interventions`,
-  },
-  userSessionStatus: {
-    [UserSessionStatus.READY_TO_START]: {
-      id: `${scope}.${[UserSessionStatus.READY_TO_START]}`,
-      defaultMessage: 'Ready to start',
-    },
-    [UserSessionStatus.IN_PROGRESS]: {
-      id: `${scope}.${[UserSessionStatus.IN_PROGRESS]}`,
-      defaultMessage: 'In progress',
-    },
-    [UserSessionStatus.COMPLETED]: {
-      id: `${scope}.${[UserSessionStatus.COMPLETED]}`,
-      defaultMessage: 'Completed',
-    },
-    [UserSessionStatus.NOT_AVAILABLE]: {
-      id: `${scope}.${[UserSessionStatus.NOT_AVAILABLE]}`,
-      defaultMessage: 'Not available',
-    },
   },
   createInterventionError: {
     id: `${scope}.createInterventionError`,

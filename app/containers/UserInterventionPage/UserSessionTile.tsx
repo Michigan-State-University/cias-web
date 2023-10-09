@@ -5,7 +5,7 @@ import dayjs from 'dayjs';
 
 import { colors, elements, themeColors } from 'theme';
 
-import globalMessages from 'global/i18n/globalMessages';
+import userSessionStatusesMessages from 'global/i18n/userSessionStatusesMessages';
 import { RoutePath } from 'global/constants';
 
 import { parametrizeRoutePath } from 'utils/router';
@@ -162,10 +162,7 @@ const UserSessionTile = ({
             borderRadius={5}
           >
             <Text color={statusTypeToFontColorMap[userSessionStatus]}>
-              {formatMessage(
-                // @ts-ignore
-                globalMessages.userSessionStatus[userSessionStatus],
-              )}
+              {formatMessage(userSessionStatusesMessages[userSessionStatus])}
             </Text>
           </Box>
         </Box>
