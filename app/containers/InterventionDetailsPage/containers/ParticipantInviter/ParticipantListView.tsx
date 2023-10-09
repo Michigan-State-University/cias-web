@@ -20,6 +20,7 @@ export type Props = {
   interventionId: string;
   interventionName: string;
   invitingPossible: boolean;
+  creatingPredefinedParticipantsPossible: boolean;
   sessionOptions: SelectOption<string>[];
   healthClinicOptions: SelectOption<string>[];
   normalizedSessions: NormalizedSessions;
@@ -37,6 +38,7 @@ export const ParticipantListView: FC<Props> = ({
   interventionId,
   interventionName,
   invitingPossible,
+  creatingPredefinedParticipantsPossible,
   sessionOptions,
   healthClinicOptions,
   normalizedSessions,
@@ -91,6 +93,9 @@ export const ParticipantListView: FC<Props> = ({
             interventionId={interventionId}
             isReportingIntervention={isReportingIntervention}
             normalizedHealthClinicsInfos={normalizedHealthClinicsInfos}
+            creatingPredefinedParticipantsPossible={
+              creatingPredefinedParticipantsPossible
+            }
             onInvite={onInvite}
             onManage={onManage}
           />
