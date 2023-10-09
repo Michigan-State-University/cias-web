@@ -2,27 +2,9 @@ import { defineMessages } from 'react-intl';
 
 import { themeColors } from 'theme';
 import {
-  feedbackQuestion,
-  finishQuestion,
-  gridQuestion,
-  informationQuestion,
-  multiQuestion,
-  numberQuestion,
-  singleQuestion,
-  textboxQuestion,
-  urlQuestion,
-  visualAnalogueScaleQuestion,
-  phoneQuestion,
-  dateQuestion,
-  nameQuestion,
-  currencyQuestion,
-  thirdPartyQuestion,
-  participantReport,
   tlfbConfig,
   tlfbEvents,
   tlfbQuestion,
-  henryFordQuestion,
-  henryFordInitialScreen,
 } from 'models/Session/QuestionTypes';
 import { GroupType } from 'models/QuestionGroup';
 import { archived, closed, draft, published } from 'models/Status/StatusTypes';
@@ -35,7 +17,6 @@ import { PhoneType, Sex } from 'models/HfhsPatient';
 export const scope = 'app.GlobalMessages';
 
 export default defineMessages({
-  // CANNOT BE NESTED AND MUST BE STATICALLY EVALUATE-ABLE - fix that
   variableNamePlaceholder: {
     id: `${scope}.variableNamePlaceholder`,
     defaultMessage: 'Variable name...',
@@ -63,92 +44,6 @@ export default defineMessages({
   hfhValuePlaceholder: {
     id: `${scope}.hfhValuePlaceholder`,
     defaultMessage: 'Value to send to HFH',
-  },
-  questionTypes: {
-    [singleQuestion.id]: {
-      id: `${scope}.${singleQuestion.id}`,
-      defaultMessage: 'Single answer',
-    },
-    [multiQuestion.id]: {
-      id: `${scope}.${multiQuestion.id}`,
-      defaultMessage: 'Multi answer',
-    },
-    [textboxQuestion.id]: {
-      id: `${scope}.${[textboxQuestion.id]}`,
-      defaultMessage: 'Free Response',
-    },
-    [phoneQuestion.id]: {
-      id: `${scope}.${phoneQuestion.id}`,
-      defaultMessage: 'Phone Text Messaging',
-    },
-    [nameQuestion.id]: {
-      id: `${scope}.${nameQuestion.id}`,
-      defaultMessage: 'Name',
-    },
-    [participantReport.id]: {
-      id: `${scope}.${participantReport.id}`,
-      defaultMessage: 'Participant Report',
-    },
-    [numberQuestion.id]: {
-      id: `${scope}.${numberQuestion.id}`,
-      defaultMessage: 'Number',
-    },
-    [gridQuestion.id]: {
-      id: `${scope}.${gridQuestion.id}`,
-      defaultMessage: 'Grid',
-    },
-    [visualAnalogueScaleQuestion.id]: {
-      id: `${scope}.${visualAnalogueScaleQuestion.id}`,
-      defaultMessage: 'Slider',
-    },
-    [informationQuestion.id]: {
-      id: `${scope}.${informationQuestion.id}`,
-      defaultMessage: 'Information Only',
-    },
-    [urlQuestion.id]: {
-      id: `${scope}.${urlQuestion.id}`,
-      defaultMessage: 'External Link',
-    },
-    [feedbackQuestion.id]: {
-      id: `${scope}.${feedbackQuestion.id}`,
-      defaultMessage: 'Feedback',
-    },
-    [finishQuestion.id]: {
-      id: `${scope}.${finishQuestion.id}`,
-      defaultMessage: 'Finish',
-    },
-    [dateQuestion.id]: {
-      id: `${scope}.${dateQuestion.id}`,
-      defaultMessage: 'Date',
-    },
-    [currencyQuestion.id]: {
-      id: `${scope}.${currencyQuestion.id}`,
-      defaultMessage: 'Currency',
-    },
-    [thirdPartyQuestion.id]: {
-      id: `${scope}.${thirdPartyQuestion.id}`,
-      defaultMessage: 'Third Party Report',
-    },
-    [tlfbConfig.id]: {
-      id: `${scope}.${tlfbConfig.id}`,
-      defaultMessage: 'TLFB Config',
-    },
-    [tlfbEvents.id]: {
-      id: `${scope}.${tlfbEvents.id}`,
-      defaultMessage: 'TLFB Events',
-    },
-    [tlfbQuestion.id]: {
-      id: `${scope}.${tlfbQuestion.id}`,
-      defaultMessage: 'TLFB Questions',
-    },
-    [henryFordQuestion.id]: {
-      id: `${scope}.${tlfbQuestion.id}`,
-      defaultMessage: 'Henry Ford Question',
-    },
-    [henryFordInitialScreen.id]: {
-      id: `${scope}.${henryFordInitialScreen.id}`,
-      defaultMessage: 'Henry Ford Initial Screen',
-    },
   },
   questionGroupType: {
     [GroupType.TLFB]: {

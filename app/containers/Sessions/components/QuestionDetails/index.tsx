@@ -20,7 +20,7 @@ import {
   makeSelectEditingPossible,
   makeSelectIntervention,
 } from 'global/reducers/intervention';
-import globalMessages from 'global/i18n/globalMessages';
+import questionTypesMessages from 'global/i18n/questionTypesMessages';
 
 import CommonLayout from 'containers/AnswerSessionPage/layouts/CommonLayout';
 
@@ -166,10 +166,7 @@ const RenderQuestionDetails = ({
             )}
             {isTlfbGroup && (
               <Text fontWeight="medium">
-                {
-                  // @ts-ignore
-                  formatMessage(globalMessages.questionTypes[type])
-                }
+                {formatMessage(questionTypesMessages[type])}
               </Text>
             )}
           </Row>

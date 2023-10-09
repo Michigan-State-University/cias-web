@@ -6,7 +6,9 @@ import Box from 'components/Box';
 import Row from 'components/Row';
 import Text from 'components/Text';
 import { ScrollFogBox } from 'components/Box/ScrollFog';
+
 import globalMessages from 'global/i18n/globalMessages';
+import questionTypesMessages from 'global/i18n/questionTypesMessages';
 import {
   makeSelectNameQuestionExists,
   makeSelectParticipantReportQuestionExists,
@@ -124,6 +126,7 @@ const QuestionTypeChooser = ({
     ],
   );
 
+  // @ts-ignore
   return (
     <Row data-cy="question-type-chooser">
       <Box position="relative" width="100%" ref={chooserBoxRef}>
@@ -165,8 +168,7 @@ const QuestionTypeChooser = ({
                   key={id}
                   color={color}
                   handleClick={() => handleClick(id)}
-                  // @ts-ignore
-                  title={formatMessage(globalMessages.questionTypes[id])}
+                  title={formatMessage(questionTypesMessages[id])}
                   conditionalAppearanceConfig={conditionalAppearanceConfigs[id]}
                 />
               ))}
