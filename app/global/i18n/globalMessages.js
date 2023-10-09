@@ -6,7 +6,6 @@ import {
   tlfbEvents,
   tlfbQuestion,
 } from 'models/Session/QuestionTypes';
-import { TextMessageType } from 'models/TextMessage';
 import { PhoneType, Sex } from 'models/HfhsPatient';
 
 export const scope = 'app.GlobalMessages';
@@ -76,12 +75,12 @@ export default defineMessages({
     id: `${scope}.CatMhWrongSettings`,
     defaultMessage: `CAT-MH™ license settings need to be properly set up. Please contact an Admin in that matter.`,
   },
-  [TextMessageType.NORMAL]: {
-    id: `${scope}.${TextMessageType.NORMAL}`,
+  'SmsPlan::Normal': {
+    id: `${scope}.'SmsPlan::Normal'`,
     defaultMessage: 'Normal',
   },
-  [TextMessageType.ALERT]: {
-    id: `${scope}.${TextMessageType.ALERT}`,
+  'SmsPlan::Alert': {
+    id: `${scope}.'SmsPlan::Alert'`,
     defaultMessage: 'Alert',
   },
   defaultTlfbGroupName: {
