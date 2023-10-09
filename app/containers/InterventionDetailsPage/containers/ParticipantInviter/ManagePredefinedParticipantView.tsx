@@ -157,7 +157,9 @@ export const ManagePredefinedParticipantView: FC<Props> = ({
                 inverted
                 onClick={handleSendSmsInvitation}
                 loading={sendingSmsInvitation}
-                disabled={!invitingPossible || !participant.phone}
+                disabled={
+                  !invitingPossible || !participant.phone || !participant.active
+                }
               >
                 {formatMessage(
                   messages.predefinedParticipantSendSmsInvitationButtonTitle,
