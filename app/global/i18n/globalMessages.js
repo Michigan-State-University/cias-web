@@ -35,7 +35,6 @@ import {
   henryFordInitialScreen,
 } from 'models/Session/QuestionTypes';
 import { GroupType } from 'models/QuestionGroup';
-import { Roles } from 'models/User/RolesManager';
 import { archived, closed, draft, published } from 'models/Status/StatusTypes';
 import { UserInterventionStatus } from 'models/UserIntervention/StatusTypes';
 import { UserSessionStatus } from 'models/UserSession/StatusTypes';
@@ -46,56 +45,7 @@ import { PhoneType, Sex } from 'models/HfhsPatient';
 export const scope = 'app.GlobalMessages';
 
 export default defineMessages({
-  roles: {
-    [Roles.Admin]: {
-      id: `${scope}.${Roles.Admin}`,
-      defaultMessage: 'Admin',
-    },
-    [Roles.TeamAdmin]: {
-      id: `${scope}.${Roles.TeamAdmin}`,
-      defaultMessage: 'Team Admin',
-    },
-    [Roles.Participant]: {
-      id: `${scope}.${Roles.Participant}`,
-      defaultMessage: 'Participant',
-    },
-    [Roles.Researcher]: {
-      id: `${scope}.${Roles.Researcher}`,
-      defaultMessage: 'Researcher',
-    },
-    [Roles.Guest]: {
-      id: `${scope}.${Roles.Guest}`,
-      defaultMessage: 'Guest',
-    },
-    [Roles.ThirdParty]: {
-      id: `${scope}.${Roles.ThirdParty}`,
-      defaultMessage: 'Third Party',
-    },
-    [Roles.EInterventionAdmin]: {
-      id: `${scope}.${Roles.EInterventionAdmin}`,
-      defaultMessage: 'E-Intervention Admin',
-    },
-    [Roles.Navigator]: {
-      id: `${scope}.${Roles.Navigator}`,
-      defaultMessage: 'Navigator',
-    },
-    [Roles.ClinicAdmin]: {
-      id: `${scope}.${Roles.ClinicAdmin}`,
-      defaultMessage: 'Clinic Admin',
-    },
-    [Roles.HealthSystemAdmin]: {
-      id: `${scope}.${Roles.HealthSystemAdmin}`,
-      defaultMessage: 'Health System Admin',
-    },
-    [Roles.OrganizationAdmin]: {
-      id: `${scope}.${Roles.OrganizationAdmin}`,
-      defaultMessage: 'Organization Admin',
-    },
-    [Roles.PredefinedParticipant]: {
-      id: `${scope}.${Roles.PredefinedParticipant}`,
-      defaultMessage: 'Predefined Participant',
-    },
-  },
+  // CANNOT BE NESTED AND MUST BE STATICALLY EVALUATE-ABLE - fix that
   variables: {
     variableNamePlaceholder: {
       id: `${scope}.variableNamePlaceholder`,
