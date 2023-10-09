@@ -9,7 +9,6 @@ import {
 import { UserInterventionStatus } from 'models/UserIntervention/StatusTypes';
 import { UserSessionStatus } from 'models/UserSession/StatusTypes';
 import { TextMessageType } from 'models/TextMessage';
-import { SharingFilter } from 'models/Intervention/SharingFilter';
 import { PhoneType, Sex } from 'models/HfhsPatient';
 
 export const scope = 'app.GlobalMessages';
@@ -42,20 +41,6 @@ export default defineMessages({
   hfhValuePlaceholder: {
     id: `${scope}.hfhValuePlaceholder`,
     defaultMessage: 'Value to send to HFH',
-  },
-  sharingFilters: {
-    [SharingFilter.ONLY_SHARED_BY_ME]: {
-      id: `${scope}.${SharingFilter.ONLY_SHARED_BY_ME}`,
-      defaultMessage: `Shared by me`,
-    },
-    [SharingFilter.ONLY_SHARED_WITH_ME]: {
-      id: `${scope}.${SharingFilter.ONLY_SHARED_WITH_ME}`,
-      defaultMessage: `Shared with me`,
-    },
-    [SharingFilter.ONLY_NOT_SHARED_WITH_ANYONE]: {
-      id: `${scope}.${SharingFilter.ONLY_NOT_SHARED_WITH_ANYONE}`,
-      defaultMessage: `Mine only (not shared)`,
-    },
   },
   allInterventions: {
     id: `${scope}.allInterventions`,

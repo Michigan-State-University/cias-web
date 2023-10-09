@@ -1,6 +1,6 @@
 import { defineMessages } from 'react-intl';
 
-export const scope = 'app.global.InterventionStatusesMessages';
+export const scope = 'app.global.InterventionStatuses';
 
 export default defineMessages({
   draft: {
