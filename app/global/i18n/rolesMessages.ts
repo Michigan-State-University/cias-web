@@ -1,7 +1,5 @@
 import { defineMessages } from 'react-intl';
 
-import { Roles } from 'models/User/RolesManager';
-
 export const scope = 'app.roles';
 
 export default defineMessages({
@@ -22,35 +20,35 @@ export default defineMessages({
     defaultMessage: 'Researcher',
   },
   guest: {
-    id: `${scope}.${Roles.Guest}`,
+    id: `${scope}.guest`,
     defaultMessage: 'Guest',
   },
-  [Roles.ThirdParty]: {
-    id: `${scope}.${Roles.ThirdParty}`,
+  third_party: {
+    id: `${scope}.third_party`,
     defaultMessage: 'Third Party',
   },
-  [Roles.EInterventionAdmin]: {
-    id: `${scope}.${Roles.EInterventionAdmin}`,
+  e_intervention_admin: {
+    id: `${scope}.e_intervention_admin`,
     defaultMessage: 'E-Intervention Admin',
   },
-  [Roles.Navigator]: {
-    id: `${scope}.${Roles.Navigator}`,
+  navigator: {
+    id: `${scope}.navigator`,
     defaultMessage: 'Navigator',
   },
-  [Roles.ClinicAdmin]: {
-    id: `${scope}.${Roles.ClinicAdmin}`,
+  health_clinic_admin: {
+    id: `${scope}.health_clinic_admin`,
     defaultMessage: 'Clinic Admin',
   },
-  [Roles.HealthSystemAdmin]: {
-    id: `${scope}.${Roles.HealthSystemAdmin}`,
+  health_system_admin: {
+    id: `${scope}.health_system_admin`,
     defaultMessage: 'Health System Admin',
   },
-  [Roles.OrganizationAdmin]: {
-    id: `${scope}.${Roles.OrganizationAdmin}`,
+  organization_admin: {
+    id: `${scope}.organization_admin`,
     defaultMessage: 'Organization Admin',
   },
-  [Roles.PredefinedParticipant]: {
-    id: `${scope}.${Roles.PredefinedParticipant}`,
+  predefined_participant: {
+    id: `${scope}.predefined_participant`,
     defaultMessage: 'Predefined Participant',
   },
 });

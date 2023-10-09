@@ -6,7 +6,7 @@ import xor from 'lodash/xor';
 
 import { emailValidator } from 'utils/validators/emailValidator';
 import { Roles } from 'models/User/RolesManager';
-import globalMessages from 'global/i18n/globalMessages';
+import rolesMessages from 'global/i18n/rolesMessages';
 import { colors, themeColors } from 'theme';
 
 import Button from 'components/Button';
@@ -155,8 +155,7 @@ const InviteResearcher = ({
                   onChange={toggleRole(role)}
                   id={`role-checkbox-${role}`}
                 >
-                  {/* @ts-ignore */}
-                  {formatMessage(globalMessages.roles[role])}
+                  {formatMessage(rolesMessages[role])}
                 </Checkbox>
               ))}
             </Box>
