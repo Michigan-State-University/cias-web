@@ -6,6 +6,8 @@ const ALLOWED_PREVIEW = [draft];
 
 const ALLOWED_INVITING_PARTICIPANTS = [published];
 
+const ALLOWED_CREATING_PREDEFINED_PARTICIPANTS = [draft, published];
+
 const ALLOWED_ARCHIVE = [draft, closed];
 
 const ALLOWED_CHANGING_ACCESS_SETTINGS = [draft];
@@ -26,6 +28,9 @@ export const canPreview = (interventionStatus) =>
 
 export const canInviteParticipants = (interventionStatus) =>
   ALLOWED_INVITING_PARTICIPANTS.includes(interventionStatus);
+
+export const canCreatePredefinedParticipants = (interventionStatus) =>
+  ALLOWED_CREATING_PREDEFINED_PARTICIPANTS.includes(interventionStatus);
 
 export const canArchive = (interventionStatus) =>
   ALLOWED_ARCHIVE.includes(interventionStatus);

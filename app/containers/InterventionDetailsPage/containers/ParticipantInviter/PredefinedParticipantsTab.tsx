@@ -1,6 +1,7 @@
 import { FC, useEffect, useMemo } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import groupBy from 'lodash/groupBy';
+import { useIntl } from 'react-intl';
 
 import { PredefinedParticipant } from 'models/PredefinedParticipant';
 
@@ -25,11 +26,13 @@ import {
 import { InviteParticipantsButton } from './InviteParticipantsButton';
 import { PredefinedParticipantsTable } from './PredefinedParticipantsTable';
 import { HealthClinicCollapse } from './HealthClinicCollapse';
+import messages from './messages';
 
 export type Props = {
   interventionId: string;
   isReportingIntervention: boolean;
   normalizedHealthClinicsInfos: NormalizedHealthClinicsInfos;
+  creatingPredefinedParticipantsPossible: boolean;
   onInvite: (invitationType: ParticipantInvitationType) => void;
   onManage: (participantId: string) => void;
 };
@@ -38,9 +41,11 @@ export const PredefinedParticipantsTab: FC<Props> = ({
   interventionId,
   isReportingIntervention,
   normalizedHealthClinicsInfos,
+  creatingPredefinedParticipantsPossible,
   onInvite,
   onManage,
 }) => {
+  const { formatMessage } = useIntl();
   const dispatch = useDispatch();
 
   const predefinedParticipants: Nullable<PredefinedParticipant[]> = useSelector(
@@ -75,7 +80,10 @@ export const PredefinedParticipantsTab: FC<Props> = ({
       <NoParticipantsInfo
         invitationType={ParticipantInvitationType.PREDEFINED}
         onInvite={onInvite}
-        invitingPossible
+        invitingPossible={creatingPredefinedParticipantsPossible}
+        invitingNotPossibleMessage={formatMessage(
+          messages.creatingPredefinedParticipantsNotPossibleMessage,
+        )}
       />
     );
   }
@@ -86,6 +94,7 @@ export const PredefinedParticipantsTab: FC<Props> = ({
         <InviteParticipantsButton
           invitationType={ParticipantInvitationType.PREDEFINED}
           onInvite={onInvite}
+          disabled={!creatingPredefinedParticipantsPossible}
         />
       </Row>
       <Box overflow="auto" maxHeight="100%">
