@@ -6,7 +6,6 @@ import {
   tlfbEvents,
   tlfbQuestion,
 } from 'models/Session/QuestionTypes';
-import { UserInterventionStatus } from 'models/UserIntervention/StatusTypes';
 import { UserSessionStatus } from 'models/UserSession/StatusTypes';
 import { TextMessageType } from 'models/TextMessage';
 import { PhoneType, Sex } from 'models/HfhsPatient';
@@ -45,28 +44,6 @@ export default defineMessages({
   allInterventions: {
     id: `${scope}.allInterventions`,
     defaultMessage: `All interventions`,
-  },
-  userInterventionStatus: {
-    [UserInterventionStatus.READY_TO_START]: {
-      id: `${scope}.${[UserInterventionStatus.READY_TO_START]}`,
-      defaultMessage: 'Ready to start',
-    },
-    [UserInterventionStatus.IN_PROGRESS]: {
-      id: `${scope}.${[UserInterventionStatus.IN_PROGRESS]}`,
-      defaultMessage: 'In progress',
-    },
-    [UserInterventionStatus.COMPLETED]: {
-      id: `${scope}.${[UserInterventionStatus.COMPLETED]}`,
-      defaultMessage: 'Completed',
-    },
-    [UserInterventionStatus.SCHEDULE_PENDING]: {
-      id: `${scope}.${[UserInterventionStatus.SCHEDULE_PENDING]}`,
-      defaultMessage: 'Schedule session pending',
-    },
-    [UserInterventionStatus.NO_ACCESS]: {
-      id: `${scope}.${[UserInterventionStatus.NO_ACCESS]}`,
-      defaultMessage: 'No access',
-    },
   },
   userSessionStatus: {
     [UserSessionStatus.READY_TO_START]: {
