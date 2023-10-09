@@ -14,7 +14,7 @@ import { CountryCode } from 'libphonenumber-js/types';
 
 import { colors, themeColors } from 'theme';
 
-import globalMessages from 'global/i18n/globalMessages';
+import phoneTypesMessages from 'global/i18n/phoneTypesMessages';
 import validatorsMessages from 'global/i18n/validatorsMessages';
 import { zipCodeRegex } from 'global/constants';
 import sexMessages from 'global/i18n/sexMessages';
@@ -156,8 +156,7 @@ const HenryFordInitialScreenLayout = ({
     useRef(
       Object.values(PhoneType).map((phoneType) => ({
         value: phoneType,
-        // @ts-ignore
-        label: formatMessage(globalMessages.phoneType[phoneType]),
+        label: formatMessage(phoneTypesMessages[phoneType]),
       })),
     );
 

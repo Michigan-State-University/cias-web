@@ -1,7 +1,6 @@
 import { defineMessages } from 'react-intl';
 
 import { themeColors } from 'theme';
-import { PhoneType } from 'models/HfhsPatient';
 
 export const scope = 'app.GlobalMessages';
 
@@ -109,20 +108,6 @@ export default defineMessages({
   iUnderstand: {
     id: `${scope}.iUnderstand`,
     defaultMessage: 'I understand',
-  },
-  phoneType: {
-    [PhoneType.HOME]: {
-      id: `${scope}.${PhoneType.HOME}`,
-      defaultMessage: 'Home',
-    },
-    [PhoneType.WORK]: {
-      id: `${scope}.${PhoneType.WORK}`,
-      defaultMessage: 'Work',
-    },
-    [PhoneType.MOBILE]: {
-      id: `${scope}.${PhoneType.MOBILE}`,
-      defaultMessage: 'Mobile',
-    },
   },
   areYouSure: {
     id: `${scope}.areYouSure`,
