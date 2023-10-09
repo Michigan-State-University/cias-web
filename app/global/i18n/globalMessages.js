@@ -1,11 +1,6 @@
 import { defineMessages } from 'react-intl';
 
 import { themeColors } from 'theme';
-import {
-  tlfbConfig,
-  tlfbEvents,
-  tlfbQuestion,
-} from 'models/Session/QuestionTypes';
 import { PhoneType, Sex } from 'models/HfhsPatient';
 
 export const scope = 'app.GlobalMessages';
@@ -86,20 +81,6 @@ export default defineMessages({
   defaultTlfbGroupName: {
     id: `${scope}.defaultTlfbGroupName`,
     defaultMessage: 'TLFB Group',
-  },
-  defaultTlfbTitles: {
-    [tlfbConfig.id]: {
-      id: `${scope}.${tlfbConfig.id}`,
-      defaultMessage: 'Config',
-    },
-    [tlfbEvents.id]: {
-      id: `${scope}.${tlfbEvents.id}`,
-      defaultMessage: 'Events',
-    },
-    [tlfbQuestion.id]: {
-      id: `${scope}.${tlfbQuestion.id}`,
-      defaultMessage: 'Questions',
-    },
   },
   yes: {
     id: `${scope}.yes`,
