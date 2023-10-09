@@ -32,7 +32,7 @@ export default defineMessages({
   },
   reportSettingsHelp: {
     id: `${scope}.reportSettingsHelp`,
-    defaultMessage: `You can send PDF's to participants and third parties. Click <a href="https://www.cias.app/_files/ugd/afc5c9_1991a91265054184819f8632193e65cc.pdf" target="_blank">here</a> to see a step-by-step guide. For more help resources, visit <a href="https://www.cias.app/resources" target="_blank">www.cias.app/resources</a>.`,
+    defaultMessage: `You can send PDF's to participants and third parties. Click <a href='https://www.cias.app/_files/ugd/afc5c9_1991a91265054184819f8632193e65cc.pdf' target='_blank'>here</a> to see a step-by-step guide. For more help resources, visit <a href='https://www.cias.app/resources' target='_blank'>www.cias.app/resources</a>.`,
   },
   sectionSettingsHeader: {
     id: `${scope}.sectionSettingsHeader`,
@@ -43,7 +43,7 @@ export default defineMessages({
     defaultMessage: 'Duplicate',
   },
   settingsDuplicateReportButtonTitle: {
-    id: `${scope}.settingsDuplicateReportButton`,
+    id: `${scope}.settingsDuplicateReportButtonTitle`,
     defaultMessage: 'Duplicate report template',
   },
   settingsDownloadReportButtonTitle: {
