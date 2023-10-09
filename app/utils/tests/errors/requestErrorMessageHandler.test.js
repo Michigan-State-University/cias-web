@@ -22,7 +22,7 @@ describe('requestErrorMessageHandler test', () => {
         data: 'SomeError',
       },
     };
-    const expected = formatMessage(globalMessages.errors.unknownRequestError);
+    const expected = formatMessage(globalMessages.unknownRequestError);
 
     expect(requestErrorMessageHandler(error)).toEqual(expected);
   });

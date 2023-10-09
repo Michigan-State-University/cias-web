@@ -32,7 +32,7 @@ import {
 } from 'global/reducers/localState';
 import { makeSelectSelectedQuestionType } from 'global/reducers/questions';
 import { makeSelectQuestionGroupsIds } from 'global/reducers/questionGroups';
-import globalMessages from 'global/i18n/globalMessages';
+import narratorSettingsMessages from 'global/i18n/narratorSettingsMessages';
 import blockTypesMessages from 'global/i18n/blockTypesMessages';
 
 import bulb from 'assets/svg/bulb.svg';
@@ -97,12 +97,13 @@ const NarratorTab = ({
   updateNarrator,
   setOffset,
 }: Props) => {
-  const [confirmationOption, setConfirmationOption] = useState('');
+  const [confirmationOption, setConfirmationOption] =
+    useState<NarratorSettingsKey | null>(null);
   const [missingAnimationModalState, setMissingAnimationModalState] =
     useState<Nullable<MissingAnimationModalData & { newSize: boolean }>>(null);
   const { formatMessage } = useIntl();
 
-  const dismissConfirmation = () => setConfirmationOption('');
+  const dismissConfirmation = () => setConfirmationOption(null);
 
   const onConfirm = () => {
     onNarratorToggle(`${confirmationOption}`, false);
@@ -262,7 +263,7 @@ const NarratorTab = ({
   };
 
   const isCharacterMovable = currentBlockIndex !== -1;
-  const isConfirmationBoxVisible = confirmationOption !== '';
+  const isConfirmationBoxVisible = confirmationOption != null;
 
   const getConfirmationDescription = () => {
     if (!isConfirmationBoxVisible) return null;
@@ -270,10 +271,7 @@ const NarratorTab = ({
       <FormattedMessage
         {...messages.blockRemovalConfirmation}
         values={{
-          setting: formatMessage(
-            // @ts-ignore
-            globalMessages.animationSettings[confirmationOption],
-          ),
+          setting: formatMessage(narratorSettingsMessages[confirmationOption]),
         }}
       />
     );

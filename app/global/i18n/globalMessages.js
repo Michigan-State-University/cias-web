@@ -56,21 +56,9 @@ export default defineMessages({
     id: `${scope}.archiveInterventionError`,
     defaultMessage: `Couldn't archive an intervention`,
   },
-  errors: {
-    unknownRequestError: {
-      id: `${scope}.errors.unknownRequestError`,
-      defaultMessage: `Some error occurred. Please try again or contact a support.`,
-    },
-  },
-  animationSettings: {
-    voice: {
-      id: `${scope}.voice`,
-      defaultMessage: 'Voice',
-    },
-    animation: {
-      id: `${scope}.animation`,
-      defaultMessage: 'Display Narrator',
-    },
+  unknownRequestError: {
+    id: `${scope}.errors.unknownRequestError`,
+    defaultMessage: `Some error occurred. Please try again or contact a support.`,
   },
   validators: {
     email: {
