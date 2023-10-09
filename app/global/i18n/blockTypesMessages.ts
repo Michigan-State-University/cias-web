@@ -1,8 +1,10 @@
 import { defineMessages } from 'react-intl';
 
+import { NarratorBlockTypes } from 'models/Narrator';
+
 export const scope = 'app.global.BlockTypes';
 
-export default defineMessages({
+export default defineMessages<NarratorBlockTypes>({
   BodyAnimation: {
     id: `${scope}.BodyAnimation`,
     defaultMessage: 'Body Animation',

@@ -1,8 +1,10 @@
 import { defineMessages } from 'react-intl';
 
+import { NarratorSettingsKey } from 'models/Narrator';
+
 export const scope = 'app.global.NarratorSettings';
 
-export default defineMessages({
+export default defineMessages<NarratorSettingsKey>({
   voice: {
     id: `${scope}.voice`,
     defaultMessage: 'Voice',

@@ -1,8 +1,10 @@
 import { defineMessages } from 'react-intl';
 
+import { Roles } from 'models/User/RolesManager';
+
 export const scope = 'app.global.Roles';
 
-export default defineMessages({
+export default defineMessages<Roles>({
   admin: {
     id: `${scope}.admin`,
     defaultMessage: 'Admin',

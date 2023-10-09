@@ -1,8 +1,10 @@
 import { defineMessages } from 'react-intl';
 
+import { Sex } from 'models/HfhsPatient';
+
 export const scope = 'app.global.Sex';
 
-export default defineMessages({
+export default defineMessages<Sex>({
   A: {
     id: `${scope}.A`,
     defaultMessage: 'Ambiguous',

@@ -1,8 +1,10 @@
 import { defineMessages } from 'react-intl';
 
+import { GroupType } from 'models/QuestionGroup';
+
 export const scope = 'app.global.QuestionGroupType';
 
-export default defineMessages({
+export default defineMessages<GroupType>({
   'QuestionGroup::Plain': {
     id: `${scope}.QuestionGroup::Plain`,
     defaultMessage: 'Plain',

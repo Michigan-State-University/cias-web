@@ -1,8 +1,10 @@
 import { defineMessages } from 'react-intl';
 
+import { SharingFilter } from 'models/Intervention/SharingFilter';
+
 export const scope = 'app.global.SharingFilters';
 
-export default defineMessages({
+export default defineMessages<SharingFilter>({
   onlySharedByMe: {
     id: `${scope}.onlySharedByMe`,
     defaultMessage: `Shared by me`,

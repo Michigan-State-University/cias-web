@@ -1,8 +1,10 @@
 import { defineMessages } from 'react-intl';
 
+import { UserInterventionStatus } from 'models/UserIntervention/StatusTypes';
+
 export const scope = 'app.global.UserInterventionStatuses';
 
-export default defineMessages({
+export default defineMessages<UserInterventionStatus>({
   ready_to_start: {
     id: `${scope}.ready_to_start`,
     defaultMessage: 'Ready to start',

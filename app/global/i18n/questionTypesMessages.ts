@@ -1,8 +1,10 @@
 import { defineMessages } from 'react-intl';
 
+import { QuestionTypes } from 'models/Question';
+
 export const scope = 'app.global.QuestionTypes';
 
-export default defineMessages({
+export default defineMessages<QuestionTypes>({
   'Question::Single': {
     id: `${scope}.Question::Single`,
     defaultMessage: 'Single answer',
