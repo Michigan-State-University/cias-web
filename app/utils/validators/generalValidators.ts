@@ -1,11 +1,8 @@
 import * as Yup from 'yup';
 
 import { formatMessage } from 'utils/intlOutsideReact';
-import globalMessages from 'global/i18n/globalMessages';
+import validatorsMessages from 'global/i18n/validatorsMessages';
 
 export const requiredValidationSchema = Yup.string()
-  .required(
-    /* @ts-ignore */
-    formatMessage(globalMessages.validators.required),
-  )
+  .required(formatMessage(validatorsMessages.required))
   .trim();

@@ -1,12 +1,11 @@
 import * as Yup from 'yup';
 
-import globalMessages from 'global/i18n/globalMessages';
+import validatorsMessages from 'global/i18n/validatorsMessages';
 import { nameRegex } from 'global/constants';
 
 import { formatMessage } from 'utils/intlOutsideReact';
 
 export const nameValidationSchema = Yup.string().matches(
   nameRegex,
-  // @ts-ignore
-  formatMessage(globalMessages.validators.name),
+  formatMessage(validatorsMessages.name),
 );

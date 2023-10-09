@@ -14,6 +14,7 @@ import { CountryCode } from 'libphonenumber-js/types';
 
 import { colors, themeColors } from 'theme';
 import globalMessages from 'global/i18n/globalMessages';
+import validatorsMessages from 'global/i18n/validatorsMessages';
 import { zipCodeRegex } from 'global/constants';
 
 import {
@@ -78,27 +79,17 @@ const schema = (formatMessage: IntlShape['formatMessage']) =>
       firstName: nameValidationSchema.concat(requiredValidationSchema),
       lastName: nameValidationSchema.concat(requiredValidationSchema),
       sexOption: Yup.object()
-        .required(
-          // @ts-ignore
-          formatMessage(globalMessages.validators.required),
-        )
+        .required(formatMessage(validatorsMessages.required))
         .nullable(),
       dobDate: Yup.date()
-        .required(
-          // @ts-ignore
-          formatMessage(globalMessages.validators.required),
-        )
+        .required(formatMessage(validatorsMessages.required))
         .nullable(),
       zipCode: requiredValidationSchema.matches(
         zipCodeRegex,
-        // @ts-ignore
-        formatMessage(globalMessages.validators.zipCode),
+        formatMessage(validatorsMessages.zipCode),
       ),
       phoneTypeOption: Yup.object()
-        .required(
-          // @ts-ignore
-          formatMessage(globalMessages.validators.required),
-        )
+        .required(formatMessage(validatorsMessages.required))
         .nullable(),
     })
     // @ts-ignore
