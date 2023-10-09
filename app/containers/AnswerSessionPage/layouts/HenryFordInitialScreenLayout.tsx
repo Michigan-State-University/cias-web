@@ -13,9 +13,11 @@ import { IntlShape } from 'react-intl/src/types';
 import { CountryCode } from 'libphonenumber-js/types';
 
 import { colors, themeColors } from 'theme';
+
 import globalMessages from 'global/i18n/globalMessages';
 import validatorsMessages from 'global/i18n/validatorsMessages';
 import { zipCodeRegex } from 'global/constants';
+import sexMessages from 'global/i18n/sexMessages';
 
 import {
   HfhsPatientData,
@@ -146,8 +148,7 @@ const HenryFordInitialScreenLayout = ({
   const sexSelectOptions: MutableRefObject<SelectOption<Sex>[]> = useRef(
     Object.values(Sex).map((sex) => ({
       value: sex,
-      // @ts-ignore
-      label: formatMessage(globalMessages.sex[sex]),
+      label: formatMessage(sexMessages[sex]),
     })),
   );
 

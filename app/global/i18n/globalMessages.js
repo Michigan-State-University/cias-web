@@ -1,7 +1,7 @@
 import { defineMessages } from 'react-intl';
 
 import { themeColors } from 'theme';
-import { PhoneType, Sex } from 'models/HfhsPatient';
+import { PhoneType } from 'models/HfhsPatient';
 
 export const scope = 'app.GlobalMessages';
 
@@ -109,32 +109,6 @@ export default defineMessages({
   iUnderstand: {
     id: `${scope}.iUnderstand`,
     defaultMessage: 'I understand',
-  },
-  sex: {
-    [Sex.AMBIGUOUS]: {
-      id: `${scope}.${Sex.AMBIGUOUS}`,
-      defaultMessage: 'Ambiguous',
-    },
-    [Sex.MALE]: {
-      id: `${scope}.${Sex.MALE}`,
-      defaultMessage: 'Male',
-    },
-    [Sex.FEMALE]: {
-      id: `${scope}.${Sex.FEMALE}`,
-      defaultMessage: 'Female',
-    },
-    [Sex.NOT_APPLICABLE]: {
-      id: `${scope}.${Sex.NOT_APPLICABLE}`,
-      defaultMessage: 'Not applicable',
-    },
-    [Sex.OTHER]: {
-      id: `${scope}.${Sex.OTHER}`,
-      defaultMessage: 'Other',
-    },
-    [Sex.UNKNOWN]: {
-      id: `${scope}.${Sex.UNKNOWN}`,
-      defaultMessage: 'Unknown',
-    },
   },
   phoneType: {
     [PhoneType.HOME]: {
