@@ -22,11 +22,11 @@ export default defineMessages({
     defaultMessage: 'Value:',
   },
   emptyValue: {
-    id: `${scope}.emptyBadge`,
+    id: `${scope}.emptyValue`,
     defaultMessage: 'No assigned value',
   },
   emptyVariable: {
-    id: `${scope}.emptyBadge`,
+    id: `${scope}.emptyVariable`,
     defaultMessage: 'No assigned variable',
   },
   hfhValuePlaceholder: {
