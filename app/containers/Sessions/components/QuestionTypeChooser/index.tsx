@@ -7,8 +7,8 @@ import Row from 'components/Row';
 import Text from 'components/Text';
 import { ScrollFogBox } from 'components/Box/ScrollFog';
 
-import globalMessages from 'global/i18n/globalMessages';
 import questionTypesMessages from 'global/i18n/questionTypesMessages';
+import questionGroupTypeMessages from 'global/i18n/questionGroupTypeMessages';
 import {
   makeSelectNameQuestionExists,
   makeSelectParticipantReportQuestionExists,
@@ -177,8 +177,7 @@ const QuestionTypeChooser = ({
                   key={id}
                   color={color}
                   handleClick={() => handleClick(id)}
-                  // @ts-ignore
-                  title={formatMessage(globalMessages.questionGroupType[id])}
+                  title={formatMessage(questionGroupTypeMessages[id])}
                   isGroup
                 />
               ))}

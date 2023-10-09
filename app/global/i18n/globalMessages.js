@@ -6,7 +6,6 @@ import {
   tlfbEvents,
   tlfbQuestion,
 } from 'models/Session/QuestionTypes';
-import { GroupType } from 'models/QuestionGroup';
 import { archived, closed, draft, published } from 'models/Status/StatusTypes';
 import { UserInterventionStatus } from 'models/UserIntervention/StatusTypes';
 import { UserSessionStatus } from 'models/UserSession/StatusTypes';
@@ -44,12 +43,6 @@ export default defineMessages({
   hfhValuePlaceholder: {
     id: `${scope}.hfhValuePlaceholder`,
     defaultMessage: 'Value to send to HFH',
-  },
-  questionGroupType: {
-    [GroupType.TLFB]: {
-      id: `${scope}.${GroupType.TLFB}`,
-      defaultMessage: 'Timeline Followback',
-    },
   },
   statuses: {
     [draft]: {
