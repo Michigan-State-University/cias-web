@@ -1,5 +1,6 @@
 import React, { FC, memo, useMemo } from 'react';
 import { useIntl } from 'react-intl';
+import uniqBy from 'lodash/uniqBy';
 
 import { InterventionInvitation } from 'models/Intervention';
 
@@ -41,24 +42,25 @@ const EmailParticipantsTableRowComponent: FC<Props> = ({
 }) => {
   const { formatMessage } = useIntl();
 
+  const uniqueInvitations = useMemo(
+    () => uniqBy(groupedInvitations, 'targetId'),
+    [groupedInvitations],
+  );
+
   const handleResendInvitationsButtonClick = () => {
-    const invitationId = groupedInvitations[0].id;
+    const invitationId = uniqueInvitations[0].id;
     onResendInvitation(invitationId);
   };
 
-  const resendDropdownOptions: DropdownOption[] = useMemo(() => {
-    if (isModularIntervention) return [];
-    return groupedInvitations.map(({ id, targetId }) => ({
-      id,
-      label: normalizedSessions[targetId]?.name,
-      action: () => onResendInvitation(id),
-    }));
-  }, [
-    isModularIntervention,
-    groupedInvitations,
-    normalizedSessions,
-    onResendInvitation,
-  ]);
+  const resendDropdownOptions: DropdownOption[] = useMemo(
+    () =>
+      uniqueInvitations.map(({ id, targetId }) => ({
+        id,
+        label: normalizedSessions[targetId]?.name,
+        action: () => onResendInvitation(id),
+      })),
+    [uniqueInvitations, normalizedSessions, onResendInvitation],
+  );
 
   const showDropdown = resendDropdownOptions.length > 1;
 
@@ -81,13 +83,13 @@ const EmailParticipantsTableRowComponent: FC<Props> = ({
               }`}
               content={
                 <SessionInvitationList
-                  groupedInvitations={groupedInvitations}
+                  groupedInvitations={uniqueInvitations}
                   normalizedSessions={normalizedSessions}
                 />
               }
             >
               <CircleCounter
-                count={groupedInvitations.length}
+                count={uniqueInvitations.length}
                 size={24}
                 bg={themeColors.secondary}
               />
