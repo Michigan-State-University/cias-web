@@ -37,17 +37,11 @@ const SingleAnimationRow = ({
     const options: SelectOption<NarratorAnimation>[] =
       animation.availableAnimations.map((singleAnimation) => ({
         value: singleAnimation,
-        label: formatMessage(
-          animationsMessages[
-            singleAnimation as keyof typeof animationsMessages
-          ],
-        ),
+        label: formatMessage(animationsMessages[singleAnimation]),
       }));
     const option: SelectOption<NarratorAnimation> = {
       value: animation.to,
-      label: formatMessage(
-        animationsMessages[animation.to as keyof typeof animationsMessages],
-      ),
+      label: formatMessage(animationsMessages[animation.to]),
     };
     return { selectOptions: options, selectedOption: option };
   }, [animation]);
@@ -68,11 +62,7 @@ const SingleAnimationRow = ({
     >
       <TD py={8} px={16}>
         <Text fontWeight="bold">
-          <FormattedMessage
-            {...animationsMessages[
-              animation.from as keyof typeof animationsMessages
-            ]}
-          />
+          <FormattedMessage {...animationsMessages[animation.from]} />
         </Text>
       </TD>
       <TD py={8} px={16}>

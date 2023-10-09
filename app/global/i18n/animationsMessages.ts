@@ -1,8 +1,10 @@
 import { defineMessages } from 'react-intl';
 
+import { NarratorAnimation } from 'models/Narrator';
+
 export const scope = 'app.global.Animations';
 
-export default defineMessages({
+export default defineMessages<NarratorAnimation>({
   uncertain: {
     id: `${scope}.uncertain`,
     defaultMessage: 'Uncertain',
@@ -234,5 +236,13 @@ export default defineMessages({
   glanceRight: {
     id: `${scope}.glanceRight`,
     defaultMessage: 'Glance right',
+  },
+  moveLeft: {
+    id: `${scope}.moveLeft`,
+    defaultMessage: 'Move left',
+  },
+  moveRight: {
+    id: `${scope}.moveRight`,
+    defaultMessage: 'Move right',
   },
 });
