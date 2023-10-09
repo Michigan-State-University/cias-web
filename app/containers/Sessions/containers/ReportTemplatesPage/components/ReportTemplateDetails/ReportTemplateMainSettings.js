@@ -52,6 +52,7 @@ import { LabelPosition, Switch } from 'components/Switch';
 import { CardBox, Spacer } from '../../styled';
 import { ReportTemplatesContext } from '../../utils';
 import messages from '../../messages';
+import coverLetterLogoTypesMessages from '../../coverLetterLogoTypesMessages';
 import {
   createDuplicateModalOptions,
   REPORT_TEMPLATE_ACTION_BUTTONS_COMMON_PROPS,
@@ -499,7 +500,11 @@ const ReportTemplateMainSettings = ({
                                     onCoverLetterLogoTypeChange(option)
                                   }
                                 >
-                                  <Text>{formatMessage(messages[option])}</Text>
+                                  <Text>
+                                    {formatMessage(
+                                      coverLetterLogoTypesMessages[option],
+                                    )}
+                                  </Text>
                                 </Radio>
                               </Row>
                             </Col>
