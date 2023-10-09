@@ -1,7 +1,5 @@
 import { defineMessages } from 'react-intl';
 
-import { themeColors } from 'theme';
-
 export const scope = 'app.GlobalMessages';
 
 export default defineMessages({
@@ -55,7 +53,7 @@ export default defineMessages({
   },
   questionRequired: {
     id: `${scope}.questionRequired`,
-    defaultMessage: `Required fields are marked with an asterisk<span style='color:${themeColors.warning};'>*</span>`,
+    defaultMessage: `Required fields are marked with an asterisk<span style='color:#D2371D;'>*</span>`,
   },
   dragHandle: {
     id: `${scope}.dragHandle`,
