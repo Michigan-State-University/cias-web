@@ -46,35 +46,33 @@ export const scope = 'app.GlobalMessages';
 
 export default defineMessages({
   // CANNOT BE NESTED AND MUST BE STATICALLY EVALUATE-ABLE - fix that
-  variables: {
-    variableNamePlaceholder: {
-      id: `${scope}.variableNamePlaceholder`,
-      defaultMessage: 'Variable name...',
-    },
-    variableScorePlaceholder: {
-      id: `${scope}.variableScorePlaceholder`,
-      defaultMessage: 'Score',
-    },
-    emailPlaceholder: {
-      id: `${scope}.emailPlaceholder`,
-      defaultMessage: 'Email',
-    },
-    value: {
-      id: `${scope}.value`,
-      defaultMessage: 'Value:',
-    },
-    emptyValue: {
-      id: `${scope}.emptyBadge`,
-      defaultMessage: 'No assigned value',
-    },
-    emptyVariable: {
-      id: `${scope}.emptyBadge`,
-      defaultMessage: 'No assigned variable',
-    },
-    hfhValuePlaceholder: {
-      id: `${scope}.hfhValuePlaceholder`,
-      defaultMessage: 'Value to send to HFH',
-    },
+  variableNamePlaceholder: {
+    id: `${scope}.variableNamePlaceholder`,
+    defaultMessage: 'Variable name...',
+  },
+  variableScorePlaceholder: {
+    id: `${scope}.variableScorePlaceholder`,
+    defaultMessage: 'Score',
+  },
+  emailPlaceholder: {
+    id: `${scope}.emailPlaceholder`,
+    defaultMessage: 'Email',
+  },
+  value: {
+    id: `${scope}.value`,
+    defaultMessage: 'Value:',
+  },
+  emptyValue: {
+    id: `${scope}.emptyBadge`,
+    defaultMessage: 'No assigned value',
+  },
+  emptyVariable: {
+    id: `${scope}.emptyBadge`,
+    defaultMessage: 'No assigned variable',
+  },
+  hfhValuePlaceholder: {
+    id: `${scope}.hfhValuePlaceholder`,
+    defaultMessage: 'Value to send to HFH',
   },
   blockTypes: {
     [bodyAnimationType]: {

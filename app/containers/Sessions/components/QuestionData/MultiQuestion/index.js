@@ -154,7 +154,7 @@ const MultiQuestion = ({
                     textAlign="center"
                     validator={variableNameValidator}
                     placeholder={formatMessage(
-                      globalMessages.variables.variableNamePlaceholder,
+                      globalMessages.variableNamePlaceholder,
                     )}
                     value={item.variable.name}
                     color={colors.jungleGreen}
@@ -174,7 +174,7 @@ const MultiQuestion = ({
                     validator={numericValidator}
                     keyboard="tel"
                     placeholder={formatMessage(
-                      globalMessages.variables.variableScorePlaceholder,
+                      globalMessages.variableScorePlaceholder,
                     )}
                     value={item.variable.value}
                     color={colors.azure}

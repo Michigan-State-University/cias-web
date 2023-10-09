@@ -201,9 +201,7 @@ const SessionSettings = ({
           disabled={!editingPossible}
           textAlign="center"
           validator={variableNameValidator}
-          placeholder={formatMessage(
-            globalMessages.variables.variableNamePlaceholder,
-          )}
+          placeholder={formatMessage(globalMessages.variableNamePlaceholder)}
           value={variable}
           color={colors.jungleGreen}
           onBlur={(val) => editSession({ variable: val })}

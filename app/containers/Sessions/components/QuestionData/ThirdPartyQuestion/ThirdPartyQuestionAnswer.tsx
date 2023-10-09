@@ -167,8 +167,7 @@ export const ThirdPartyQuestionAnswer: FC<Props> = ({
               validator={numericValidator}
               keyboard="tel"
               placeholder={formatMessage(
-                // @ts-ignore
-                globalMessages.variables.variableScorePlaceholder,
+                globalMessages.variableScorePlaceholder,
               )}
               value={answer.numeric_value}
               color={colors.azure}

@@ -176,8 +176,7 @@ const HenryFordQuestion = ({ isNarratorTab, editingPossible }: Props) => {
                       validator={numericValidator}
                       keyboard="tel"
                       placeholder={formatMessage(
-                        // @ts-ignore
-                        globalMessages.variables.variableScorePlaceholder,
+                        globalMessages.variableScorePlaceholder,
                       )}
                       value={item.value}
                       color={colors.azure}
@@ -201,8 +200,7 @@ const HenryFordQuestion = ({ isNarratorTab, editingPossible }: Props) => {
                         py={12}
                         textAlign="center"
                         placeholder={formatMessage(
-                          // @ts-ignore
-                          globalMessages.variables.hfhValuePlaceholder,
+                          globalMessages.hfhValuePlaceholder,
                         )}
                         value={item.hfh_value}
                         color={colors.kleinBlue}
