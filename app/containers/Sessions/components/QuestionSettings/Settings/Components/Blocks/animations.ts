@@ -1,4 +1,4 @@
-import animationNames from 'global/i18n/animationNames';
+import animationsMessages from 'global/i18n/animationsMessages';
 import { CharacterType } from 'models/Character';
 import { IntlShape, MessageDescriptor } from 'react-intl';
 import {
@@ -12,7 +12,9 @@ export const headAnimations = (
 ) =>
   getHeadAnimations(character).map((name) =>
     formatMessage(
-      animationNames[name as keyof typeof animationNames] as MessageDescriptor,
+      animationsMessages[
+        name as keyof typeof animationsMessages
+      ] as MessageDescriptor,
     ),
   );
 
@@ -21,5 +23,5 @@ export const bodyAnimations = (
   character: CharacterType,
 ) =>
   getBodyAnimations(character).map((name) =>
-    formatMessage(animationNames[name as keyof typeof animationNames]),
+    formatMessage(animationsMessages[name as keyof typeof animationsMessages]),
   );

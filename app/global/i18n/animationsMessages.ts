@@ -1,6 +1,6 @@
 import { defineMessages } from 'react-intl';
 
-export const scope = 'app.global.AnimationNames';
+export const scope = 'app.global.Animations';
 
 export default defineMessages({
   uncertain: {

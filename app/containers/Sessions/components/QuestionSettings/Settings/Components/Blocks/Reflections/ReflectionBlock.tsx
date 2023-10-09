@@ -19,7 +19,7 @@ import { htmlToPlainText } from 'utils/htmlToPlainText';
 import useGet from 'utils/useGet';
 import { getPreviousQuestions } from 'utils/questions';
 
-import animationMessages from 'global/i18n/animationNames';
+import animationsMessages from 'global/i18n/animationsMessages';
 import {
   makeSelectQuestions,
   makeSelectSelectedQuestion,
@@ -144,7 +144,7 @@ const ReflectionBlock = ({
 
     return animations.map((animation) => ({
       value: animation,
-      label: formatMessage(animationMessages[animation]),
+      label: formatMessage(animationsMessages[animation]),
     }));
   }, [character]);
 

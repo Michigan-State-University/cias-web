@@ -31,7 +31,7 @@ import {
 } from 'models/Narrator/BlockTypes';
 import { feedbackQuestion } from 'models/Session/QuestionTypes';
 import { EFeedbackAction } from 'models/Narrator/FeedbackActions';
-import animationMessages from 'global/i18n/animationNames';
+import animationsMessages from 'global/i18n/animationsMessages';
 
 import { updateBlockSettings, switchSpeechReflection } from '../../actions';
 import messages from '../messages';
@@ -74,7 +74,7 @@ const SpeechBlock = ({
 
     return animations.map((animation) => ({
       value: animation,
-      label: formatMessage(animationMessages[animation]),
+      label: formatMessage(animationsMessages[animation]),
     }));
   }, [character]);
 

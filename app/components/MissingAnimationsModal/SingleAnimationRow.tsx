@@ -3,7 +3,7 @@ import { FormattedMessage, useIntl } from 'react-intl';
 
 import { colors } from 'theme';
 import { NarratorAnimation } from 'models/Narrator';
-import animationNames from 'global/i18n/animationNames';
+import animationsMessages from 'global/i18n/animationsMessages';
 
 import { StripedTR, TD } from 'components/Table';
 import Text from 'components/Text';
@@ -38,13 +38,15 @@ const SingleAnimationRow = ({
       animation.availableAnimations.map((singleAnimation) => ({
         value: singleAnimation,
         label: formatMessage(
-          animationNames[singleAnimation as keyof typeof animationNames],
+          animationsMessages[
+            singleAnimation as keyof typeof animationsMessages
+          ],
         ),
       }));
     const option: SelectOption<NarratorAnimation> = {
       value: animation.to,
       label: formatMessage(
-        animationNames[animation.to as keyof typeof animationNames],
+        animationsMessages[animation.to as keyof typeof animationsMessages],
       ),
     };
     return { selectOptions: options, selectedOption: option };
@@ -67,7 +69,9 @@ const SingleAnimationRow = ({
       <TD py={8} px={16}>
         <Text fontWeight="bold">
           <FormattedMessage
-            {...animationNames[animation.from as keyof typeof animationNames]}
+            {...animationsMessages[
+              animation.from as keyof typeof animationsMessages
+            ]}
           />
         </Text>
       </TD>
