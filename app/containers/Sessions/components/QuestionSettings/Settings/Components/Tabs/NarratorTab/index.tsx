@@ -33,6 +33,7 @@ import {
 import { makeSelectSelectedQuestionType } from 'global/reducers/questions';
 import { makeSelectQuestionGroupsIds } from 'global/reducers/questionGroups';
 import globalMessages from 'global/i18n/globalMessages';
+import blockTypesMessages from 'global/i18n/blockTypesMessages';
 
 import bulb from 'assets/svg/bulb.svg';
 
@@ -287,7 +288,7 @@ const NarratorTab = ({
           {getRemovedBlockForSetting(confirmationOption).map((blockType) => (
             <LI key={blockType} inside>
               {/* @ts-ignore */}
-              <FormattedMessage {...globalMessages.blockTypes[blockType]} />
+              <FormattedMessage {...blockTypesMessages[blockType]} />
             </LI>
           ))}
         </UL>

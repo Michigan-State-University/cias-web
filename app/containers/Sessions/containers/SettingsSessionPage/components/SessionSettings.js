@@ -29,6 +29,7 @@ import {
   makeSelectEditingPossible,
 } from 'global/reducers/intervention';
 import globalMessages from 'global/i18n/globalMessages';
+import blockTypesMessages from 'global/i18n/blockTypesMessages';
 
 import H3 from 'components/H3';
 import { LI, UL } from 'components/List';
@@ -153,7 +154,7 @@ const SessionSettings = ({
         <UL>
           {getRemovedBlockForSetting(confirmationOption).map((blockType) => (
             <LI key={blockType} inside>
-              <FormattedMessage {...globalMessages.blockTypes[blockType]} />
+              <FormattedMessage {...blockTypesMessages[blockType]} />
             </LI>
           ))}
         </UL>

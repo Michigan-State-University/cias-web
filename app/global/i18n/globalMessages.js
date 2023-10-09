@@ -2,16 +2,6 @@ import { defineMessages } from 'react-intl';
 
 import { themeColors } from 'theme';
 import {
-  bodyAnimationType,
-  feedbackBlockType,
-  headAnimationType,
-  pauseType,
-  readQuestionBlockType,
-  reflectionFormulaType,
-  reflectionType,
-  speechType,
-} from 'models/Narrator/BlockTypes';
-import {
   feedbackQuestion,
   finishQuestion,
   gridQuestion,
@@ -73,40 +63,6 @@ export default defineMessages({
   hfhValuePlaceholder: {
     id: `${scope}.hfhValuePlaceholder`,
     defaultMessage: 'Value to send to HFH',
-  },
-  blockTypes: {
-    [bodyAnimationType]: {
-      id: `${scope}.${bodyAnimationType}`,
-      defaultMessage: 'Body Animation',
-    },
-    [speechType]: {
-      id: `${scope}.${speechType}`,
-      defaultMessage: 'Speech',
-    },
-    [reflectionType]: {
-      id: `${scope}.${reflectionType}`,
-      defaultMessage: 'Speech',
-    },
-    [reflectionFormulaType]: {
-      id: `${scope}.${reflectionFormulaType}`,
-      defaultMessage: 'Speech',
-    },
-    [headAnimationType]: {
-      id: `${scope}.${headAnimationType}`,
-      defaultMessage: 'Head Animation',
-    },
-    [readQuestionBlockType]: {
-      id: `${scope}.${readQuestionBlockType}`,
-      defaultMessage: 'Read question',
-    },
-    [pauseType]: {
-      id: `${scope}.${pauseType}`,
-      defaultMessage: 'Pause',
-    },
-    [feedbackBlockType]: {
-      id: `${scope}.${feedbackBlockType}`,
-      defaultMessage: 'Show Spectrum',
-    },
   },
   questionTypes: {
     [singleQuestion.id]: {
