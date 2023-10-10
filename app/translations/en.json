@@ -1454,6 +1454,7 @@
   "app.containers.TeamsList.createTeam": "+ Create team",
   "app.containers.TeamsList.createTeamButtonText": "Create team",
   "app.containers.TeamsList.createTeamNameInput": "e.g Team n.o. 1",
+  "app.containers.TeamsList.delete": "Delete",
   "app.containers.TeamsList.deleteTeam": "Delete team",
   "app.containers.TeamsList.deleteTeamConfirm": "Are you sure you want to delete this Team?",
   "app.containers.TeamsList.invalidEmail": "Invalid e-mail address",
