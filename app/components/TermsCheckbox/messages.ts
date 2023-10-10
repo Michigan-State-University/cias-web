@@ -467,7 +467,7 @@ export default defineMessages({
     </p>
 
     <h3>19. Contact Us</h3>
-    <p>Any question regarding the use of the Application, or comments about the services provided via the Application or its contents should be directed to {Insert support contact details}</p>
+    <p>Any question regarding the use of the Application, or comments about the services provided via the Application or its contents should be directed to <a href='mailto:cias@msu.edu'>cias@msu.edu</a>.</p>
 
     <h3>20. Modifications</h3>
     <p>
