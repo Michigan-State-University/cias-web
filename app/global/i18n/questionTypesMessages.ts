@@ -5,87 +5,87 @@ import { QuestionTypes } from 'models/Question';
 export const scope = 'app.global.QuestionTypes';
 
 export default defineMessages<QuestionTypes>({
-  'Question::Single': {
+  [QuestionTypes.SINGLE]: {
     id: `${scope}.Question::Single`,
     defaultMessage: 'Single answer',
   },
-  'Question::Multiple': {
+  [QuestionTypes.MULTIPLE]: {
     id: `${scope}.Question::Multiple`,
     defaultMessage: 'Multi answer',
   },
-  'Question::FreeResponse': {
+  [QuestionTypes.FREE_RESPONSE]: {
     id: `${scope}.Question::FreeResponse`,
     defaultMessage: 'Free Response',
   },
-  'Question::Phone': {
+  [QuestionTypes.PHONE]: {
     id: `${scope}.Question::Phone`,
     defaultMessage: 'Phone Text Messaging',
   },
-  'Question::Name': {
+  [QuestionTypes.NAME]: {
     id: `${scope}.Question::Name`,
     defaultMessage: 'Name',
   },
-  'Question::ParticipantReport': {
+  [QuestionTypes.PARTICIPANT_REPORT]: {
     id: `${scope}.Question::ParticipantReport`,
     defaultMessage: 'Participant Report',
   },
-  'Question::Number': {
+  [QuestionTypes.NUMBER]: {
     id: `${scope}.Question::Number`,
     defaultMessage: 'Number',
   },
-  'Question::Grid': {
+  [QuestionTypes.GRID]: {
     id: `${scope}.Question::Grid`,
     defaultMessage: 'Grid',
   },
-  'Question::Slider': {
+  [QuestionTypes.SLIDER]: {
     id: `${scope}.Question::Slider`,
     defaultMessage: 'Slider',
   },
-  'Question::Information': {
+  [QuestionTypes.INFORMATION]: {
     id: `${scope}.Question::Information`,
     defaultMessage: 'Information Only',
   },
-  'Question::ExternalLink': {
+  [QuestionTypes.EXTERNAL_LINK]: {
     id: `${scope}.Question::ExternalLink`,
     defaultMessage: 'External Link',
   },
-  'Question::Feedback': {
+  [QuestionTypes.FEEDBACK]: {
     id: `${scope}.Question::Feedback`,
     defaultMessage: 'Feedback',
   },
-  'Question::Finish': {
+  [QuestionTypes.FINISH]: {
     id: `${scope}.Question::Finish`,
     defaultMessage: 'Finish',
   },
-  'Question::Date': {
+  [QuestionTypes.DATE]: {
     id: `${scope}.Question::Date`,
     defaultMessage: 'Date',
   },
-  'Question::Currency': {
+  [QuestionTypes.CURRENCY]: {
     id: `${scope}.Question::Currency`,
     defaultMessage: 'Currency',
   },
-  'Question::ThirdParty': {
+  [QuestionTypes.THIRD_PARTY]: {
     id: `${scope}.Question::ThirdParty`,
     defaultMessage: 'Third Party Report',
   },
-  'Question::TlfbConfig': {
+  [QuestionTypes.TLFB_CONFIG]: {
     id: `${scope}.Question::TlfbConfig`,
     defaultMessage: 'TLFB Config',
   },
-  'Question::TlfbEvents': {
+  [QuestionTypes.TLFB_EVENTS]: {
     id: `${scope}.Question::TlfbEvents`,
     defaultMessage: 'TLFB Events',
   },
-  'Question::TlfbQuestion': {
+  [QuestionTypes.TLFB_QUESTION]: {
     id: `${scope}.Question::TlfbQuestion`,
     defaultMessage: 'TLFB Questions',
   },
-  'Question::HenryFord': {
+  [QuestionTypes.HENRY_FORD_QUESTION]: {
     id: `${scope}.Question::HenryFord`,
     defaultMessage: 'Henry Ford Question',
   },
-  'Question::HenryFordInitial': {
+  [QuestionTypes.HENRY_FORD_INITIAL]: {
     id: `${scope}.Question::HenryFordInitial`,
     defaultMessage: 'Henry Ford Initial Screen',
   },

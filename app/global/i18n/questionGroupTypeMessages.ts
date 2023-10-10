@@ -5,15 +5,15 @@ import { GroupType } from 'models/QuestionGroup';
 export const scope = 'app.global.QuestionGroupType';
 
 export default defineMessages<GroupType>({
-  'QuestionGroup::Plain': {
+  [GroupType.PLAIN]: {
     id: `${scope}.QuestionGroup::Plain`,
     defaultMessage: 'Plain',
   },
-  'QuestionGroup::Finish': {
+  [GroupType.FINISH]: {
     id: `${scope}.QuestionGroup::Finish`,
     defaultMessage: 'Finish',
   },
-  'QuestionGroup::Tlfb': {
+  [GroupType.TLFB]: {
     id: `${scope}.QuestionGroup::Tlfb`,
     defaultMessage: 'Timeline Followback',
   },

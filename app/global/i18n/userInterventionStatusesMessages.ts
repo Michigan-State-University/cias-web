@@ -5,23 +5,23 @@ import { UserInterventionStatus } from 'models/UserIntervention/StatusTypes';
 export const scope = 'app.global.UserInterventionStatuses';
 
 export default defineMessages<UserInterventionStatus>({
-  ready_to_start: {
+  [UserInterventionStatus.READY_TO_START]: {
     id: `${scope}.ready_to_start`,
     defaultMessage: 'Ready to start',
   },
-  in_progress: {
+  [UserInterventionStatus.IN_PROGRESS]: {
     id: `${scope}.in_progress`,
     defaultMessage: 'In progress',
   },
-  completed: {
+  [UserInterventionStatus.COMPLETED]: {
     id: `${scope}.completed`,
     defaultMessage: 'Completed',
   },
-  schedule_pending: {
+  [UserInterventionStatus.SCHEDULE_PENDING]: {
     id: `${scope}.schedule_pending`,
     defaultMessage: 'Schedule session pending',
   },
-  no_access: {
+  [UserInterventionStatus.NO_ACCESS]: {
     id: `${scope}.no_access`,
     defaultMessage: 'No access',
   },

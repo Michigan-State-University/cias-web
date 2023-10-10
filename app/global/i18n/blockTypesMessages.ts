@@ -5,35 +5,35 @@ import { NarratorBlockTypes } from 'models/Narrator';
 export const scope = 'app.global.BlockTypes';
 
 export default defineMessages<NarratorBlockTypes>({
-  BodyAnimation: {
+  [NarratorBlockTypes.BODY_ANIMATION]: {
     id: `${scope}.BodyAnimation`,
     defaultMessage: 'Body Animation',
   },
-  Speech: {
+  [NarratorBlockTypes.SPEECH]: {
     id: `${scope}.Speech`,
     defaultMessage: 'Speech',
   },
-  Reflection: {
+  [NarratorBlockTypes.REFLECTION]: {
     id: `${scope}.Reflection`,
     defaultMessage: 'Speech',
   },
-  ReflectionFormula: {
+  [NarratorBlockTypes.REFLECTION_FORMULA]: {
     id: `${scope}.ReflectionFormula`,
     defaultMessage: 'Speech',
   },
-  HeadAnimation: {
+  [NarratorBlockTypes.HEAD_ANIMATION]: {
     id: `${scope}.HeadAnimation`,
     defaultMessage: 'Head Animation',
   },
-  ReadQuestion: {
+  [NarratorBlockTypes.READ_QUESTION]: {
     id: `${scope}.ReadQuestion`,
     defaultMessage: 'Read question',
   },
-  Pause: {
+  [NarratorBlockTypes.PAUSE]: {
     id: `${scope}.Pause`,
     defaultMessage: 'Pause',
   },
-  Feedback: {
+  [NarratorBlockTypes.FEEDBACK]: {
     id: `${scope}.Feedback`,
     defaultMessage: 'Show Spectrum',
   },

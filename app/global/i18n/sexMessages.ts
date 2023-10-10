@@ -5,27 +5,27 @@ import { Sex } from 'models/HfhsPatient';
 export const scope = 'app.global.Sex';
 
 export default defineMessages<Sex>({
-  A: {
+  [Sex.AMBIGUOUS]: {
     id: `${scope}.A`,
     defaultMessage: 'Ambiguous',
   },
-  M: {
+  [Sex.MALE]: {
     id: `${scope}.M`,
     defaultMessage: 'Male',
   },
-  F: {
+  [Sex.FEMALE]: {
     id: `${scope}.F`,
     defaultMessage: 'Female',
   },
-  n: {
+  [Sex.NOT_APPLICABLE]: {
     id: `${scope}.n`,
     defaultMessage: 'Not applicable',
   },
-  O: {
+  [Sex.OTHER]: {
     id: `${scope}.O`,
     defaultMessage: 'Other',
   },
-  U: {
+  [Sex.UNKNOWN]: {
     id: `${scope}.U`,
     defaultMessage: 'Unknown',
   },

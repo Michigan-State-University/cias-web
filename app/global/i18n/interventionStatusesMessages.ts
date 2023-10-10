@@ -5,19 +5,19 @@ import { InterventionStatus } from 'models/Intervention';
 export const scope = 'app.global.InterventionStatuses';
 
 export default defineMessages<InterventionStatus>({
-  draft: {
+  [InterventionStatus.DRAFT]: {
     id: `${scope}.draft`,
     defaultMessage: 'Draft',
   },
-  published: {
+  [InterventionStatus.PUBLISHED]: {
     id: `${scope}.published`,
     defaultMessage: 'Published',
   },
-  closed: {
+  [InterventionStatus.CLOSED]: {
     id: `${scope}.closed`,
     defaultMessage: 'Closed',
   },
-  archived: {
+  [InterventionStatus.ARCHIVED]: {
     id: `${scope}.archived`,
     defaultMessage: 'Archived',
   },

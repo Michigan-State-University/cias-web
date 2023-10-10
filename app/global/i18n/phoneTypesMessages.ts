@@ -5,15 +5,15 @@ import { PhoneType } from 'models/HfhsPatient';
 export const scope = 'app.global.PhoneTypes';
 
 export default defineMessages<PhoneType>({
-  home: {
+  [PhoneType.HOME]: {
     id: `${scope}.home`,
     defaultMessage: 'Home',
   },
-  work: {
+  [PhoneType.WORK]: {
     id: `${scope}.work`,
     defaultMessage: 'Work',
   },
-  mobile: {
+  [PhoneType.MOBILE]: {
     id: `${scope}.mobile`,
     defaultMessage: 'Mobile',
   },

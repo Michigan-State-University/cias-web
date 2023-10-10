@@ -6,19 +6,19 @@ export const scope =
   'app.containers.TextMessageScheduling.TextMessageScheduleFrequencies';
 
 export default defineMessages<TextMessageScheduleFrequency>({
-  once: {
+  [TextMessageScheduleFrequency.ONCE]: {
     id: `${scope}.once`,
     defaultMessage: 'Once',
   },
-  once_a_day: {
+  [TextMessageScheduleFrequency.ONCE_DAY]: {
     id: `${scope}.once_a_day`,
     defaultMessage: 'Once a day',
   },
-  once_a_week: {
+  [TextMessageScheduleFrequency.ONCE_WEEK]: {
     id: `${scope}.once_a_week`,
     defaultMessage: 'Once a week',
   },
-  once_a_month: {
+  [TextMessageScheduleFrequency.ONCE_MONTH]: {
     id: `${scope}.once_a_month`,
     defaultMessage: 'Once a month',
   },

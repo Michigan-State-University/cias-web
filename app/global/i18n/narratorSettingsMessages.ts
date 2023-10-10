@@ -5,19 +5,19 @@ import { NarratorSettingsKey } from 'models/Narrator';
 export const scope = 'app.global.NarratorSettings';
 
 export default defineMessages<NarratorSettingsKey>({
-  voice: {
+  [NarratorSettingsKey.VOICE]: {
     id: `${scope}.voice`,
     defaultMessage: 'Voice',
   },
-  animation: {
+  [NarratorSettingsKey.ANIMATION]: {
     id: `${scope}.animation`,
     defaultMessage: 'Display Narrator',
   },
-  extra_space_for_narrator: {
+  [NarratorSettingsKey.EXTRA_SPACE_FOR_NARRATOR]: {
     id: `${scope}.extra_space_for_narrator`,
     defaultMessage: 'Extra Space for Narrator',
   },
-  character: {
+  [NarratorSettingsKey.CHARACTER]: {
     id: `${scope}.character`,
     defaultMessage: 'Character',
   },

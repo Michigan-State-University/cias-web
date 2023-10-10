@@ -5,243 +5,243 @@ import { NarratorAnimation } from 'models/Narrator';
 export const scope = 'app.global.Animations';
 
 export default defineMessages<NarratorAnimation>({
-  uncertain: {
+  [NarratorAnimation.UNCERTAIN]: {
     id: `${scope}.uncertain`,
     defaultMessage: 'Uncertain',
   },
-  wave: {
+  [NarratorAnimation.WAVE]: {
     id: `${scope}.wave`,
     defaultMessage: 'Wave',
   },
-  greet: {
+  [NarratorAnimation.GREET]: {
     id: `${scope}.greet`,
     defaultMessage: 'Greet',
   },
-  otohLeftHand: {
+  [NarratorAnimation.OTOH_LEFT_HAND]: {
     id: `${scope}.otohLeftHand`,
     defaultMessage: 'On the other hand (left)',
   },
-  otohRightHand: {
+  [NarratorAnimation.OTOH_RIGHT_HAND]: {
     id: `${scope}.otohRightHand`,
     defaultMessage: 'On the other hand (right)',
   },
-  pointRight: {
+  [NarratorAnimation.POINT_RIGHT]: {
     id: `${scope}.pointRight`,
     defaultMessage: 'Point right',
   },
-  pointLeft: {
+  [NarratorAnimation.POINT_LEFT]: {
     id: `${scope}.pointLeft`,
     defaultMessage: 'Point left',
   },
-  pointUp: {
+  [NarratorAnimation.POINT_UP]: {
     id: `${scope}.pointUp`,
     defaultMessage: 'Point up',
   },
-  pointDown: {
+  [NarratorAnimation.POINT_DOWN]: {
     id: `${scope}.pointDown`,
     defaultMessage: 'Point down',
   },
-  pointLeftUp: {
+  [NarratorAnimation.POINT_LEFT_UP]: {
     id: `${scope}.pointLeftUp`,
     defaultMessage: 'Point left up',
   },
-  pointRightUp: {
+  [NarratorAnimation.POINT_RIGHT_UP]: {
     id: `${scope}.pointRightUp`,
     defaultMessage: 'Point right up',
   },
-  explain: {
+  [NarratorAnimation.EXPLAIN]: {
     id: `${scope}.explain`,
     defaultMessage: 'Explain',
   },
-  rest: {
+  [NarratorAnimation.REST]: {
     id: `${scope}.rest`,
     defaultMessage: 'Rest',
   },
-  restShoulderRubbing: {
+  [NarratorAnimation.REST_SHOULDER_RUBBING]: {
     id: `${scope}.restShoulderRubbing`,
     defaultMessage: 'Rest shoulder rubbing',
   },
-  restStretching: {
+  [NarratorAnimation.REST_STRETCHING]: {
     id: `${scope}.restStretching`,
     defaultMessage: 'Rest stretching',
   },
-  restWeightShift: {
+  [NarratorAnimation.REST_WEIGHT_SHIFT]: {
     id: `${scope}.restWeightShift`,
     defaultMessage: 'Rest weight shift',
   },
-  read: {
+  [NarratorAnimation.READ]: {
     id: `${scope}.read`,
     defaultMessage: 'Read',
   },
-  reading: {
+  [NarratorAnimation.READING]: {
     id: `${scope}.reading`,
     defaultMessage: 'Reading',
   },
-  confused: {
+  [NarratorAnimation.CONFUSED]: {
     id: `${scope}.confused`,
     defaultMessage: 'Confused',
   },
-  doMagic: {
+  [NarratorAnimation.DO_MAGIC]: {
     id: `${scope}.doMagic`,
     defaultMessage: 'Do magic',
   },
-  getAttention: {
+  [NarratorAnimation.GET_ATTENTION]: {
     id: `${scope}.getAttention`,
     defaultMessage: 'Get attention',
   },
-  search: {
+  [NarratorAnimation.SEARCH]: {
     id: `${scope}.search`,
     defaultMessage: 'Search',
   },
-  suggest: {
+  [NarratorAnimation.SUGGEST]: {
     id: `${scope}.suggest`,
     defaultMessage: 'Suggest',
   },
-  surprised: {
+  [NarratorAnimation.SURPRISED]: {
     id: `${scope}.surprised`,
     defaultMessage: 'Surprised',
   },
-  congratulate: {
+  [NarratorAnimation.CONGRATULATE]: {
     id: `${scope}.congratulate`,
     defaultMessage: 'Congratulate',
   },
-  flyIn: {
+  [NarratorAnimation.FLY_IN]: {
     id: `${scope}.flyIn`,
     defaultMessage: 'Fly in',
   },
-  flyOut: {
+  [NarratorAnimation.FLY_OUT]: {
     id: `${scope}.flyOut`,
     defaultMessage: 'Fly out',
   },
-  standStill: {
+  [NarratorAnimation.STAND_STILL]: {
     id: `${scope}.standStill`,
     defaultMessage: 'Stand still',
   },
-  process: {
+  [NarratorAnimation.PROCESS]: {
     id: `${scope}.process`,
     defaultMessage: 'Process',
   },
-  listen: {
+  [NarratorAnimation.LISTEN]: {
     id: `${scope}.listen`,
     defaultMessage: 'Listen',
   },
-  think: {
+  [NarratorAnimation.THINK]: {
     id: `${scope}.think`,
     defaultMessage: 'Think',
   },
-  write: {
+  [NarratorAnimation.WRITE]: {
     id: `${scope}.write`,
     defaultMessage: 'Write',
   },
-  idle: {
+  [NarratorAnimation.IDLE]: {
     id: `${scope}.idle`,
     defaultMessage: 'Idle',
   },
-  turnPage: {
+  [NarratorAnimation.TURN_PAGE]: {
     id: `${scope}.turnPage`,
     defaultMessage: 'Turn page',
   },
-  openBook: {
+  [NarratorAnimation.OPEN_BOOK]: {
     id: `${scope}.openBook`,
     defaultMessage: 'Open book',
   },
-  closeBook: {
+  [NarratorAnimation.CLOSE_BOOK]: {
     id: `${scope}.closeBook`,
     defaultMessage: 'Close book',
   },
-  announce: {
+  [NarratorAnimation.ANNOUNCE]: {
     id: `${scope}.announce`,
     defaultMessage: 'Announce',
   },
-  blink: {
+  [NarratorAnimation.BLINK]: {
     id: `${scope}.blink`,
     defaultMessage: 'Blink',
   },
-  acknowledge: {
+  [NarratorAnimation.ACKNOWLEDGE]: {
     id: `${scope}.acknowledge`,
     defaultMessage: 'Acknowledge',
   },
-  acknowledgeThoughtful: {
+  [NarratorAnimation.ACKNOWLEDGE_THOUGHTFUL]: {
     id: `${scope}.acknowledgeThoughtful`,
     defaultMessage: 'Acknowledge thoughtful',
   },
-  browsUp: {
+  [NarratorAnimation.BROWS_UP]: {
     id: `${scope}.browsUp`,
     defaultMessage: 'Brows up',
   },
-  decline: {
+  [NarratorAnimation.DECLINE]: {
     id: `${scope}.decline`,
     defaultMessage: 'Decline',
   },
-  declineAnnoyed: {
+  [NarratorAnimation.DECLINE_ANNOYED]: {
     id: `${scope}.declineAnnoyed`,
     defaultMessage: 'Decline annoyed',
   },
-  declineThoughtful: {
+  [NarratorAnimation.DECLINE_THOUGHTFUL]: {
     id: `${scope}.declineThoughtful`,
     defaultMessage: 'Decline thoughtful',
   },
-  pleased: {
+  [NarratorAnimation.PLEASED]: {
     id: `${scope}.pleased`,
     defaultMessage: 'Pleased',
   },
-  sad: {
+  [NarratorAnimation.SAD]: {
     id: `${scope}.sad`,
     defaultMessage: 'Sad',
   },
-  hearLeftEar: {
+  [NarratorAnimation.HEAR_LEFT_EAR]: {
     id: `${scope}.hearLeftEar`,
     defaultMessage: 'Hear left ear',
   },
-  hearRightEar: {
+  [NarratorAnimation.HEAR_RIGHT_EAR]: {
     id: `${scope}.hearRightEar`,
     defaultMessage: 'Hear right ear',
   },
-  hearBothEars: {
+  [NarratorAnimation.HEAR_BOTH_EARS]: {
     id: `${scope}.hearBothEars`,
     defaultMessage: 'Hear both ears',
   },
-  yawn: {
+  [NarratorAnimation.YAWN]: {
     id: `${scope}.yawn`,
     defaultMessage: 'Yawn',
   },
-  eatCracker: {
+  [NarratorAnimation.EAT_CRACKER]: {
     id: `${scope}.eatCracker`,
     defaultMessage: 'Eat cracker',
   },
-  wearSunglasses: {
+  [NarratorAnimation.WEAR_SUNGLASSES]: {
     id: `${scope}.wearSunglasses`,
     defaultMessage: 'Wear sunglasses',
   },
-  lookDown: {
+  [NarratorAnimation.LOOK_DOWN]: {
     id: `${scope}.lookDown`,
     defaultMessage: 'Look down',
   },
-  lookDownAndBlink: {
+  [NarratorAnimation.LOOK_DOWN_AND_BLINK]: {
     id: `${scope}.lookDownAndBlink`,
     defaultMessage: 'Look down and blink',
   },
-  glanceUp: {
+  [NarratorAnimation.GLANCE_UP]: {
     id: `${scope}.glanceUp`,
     defaultMessage: 'Glance up',
   },
-  glanceDown: {
+  [NarratorAnimation.GLANCE_DOWN]: {
     id: `${scope}.glanceDown`,
     defaultMessage: 'Glance down',
   },
-  glanceLeft: {
+  [NarratorAnimation.GLANCE_LEFT]: {
     id: `${scope}.glanceLeft`,
     defaultMessage: 'Glance left',
   },
-  glanceRight: {
+  [NarratorAnimation.GLANCE_RIGHT]: {
     id: `${scope}.glanceRight`,
     defaultMessage: 'Glance right',
   },
-  moveLeft: {
+  [NarratorAnimation.MOVE_LEFT]: {
     id: `${scope}.moveLeft`,
     defaultMessage: 'Move left',
   },
-  moveRight: {
+  [NarratorAnimation.MOVE_RIGHT]: {
     id: `${scope}.moveRight`,
     defaultMessage: 'Move right',
   },

@@ -6,11 +6,11 @@ export const scope =
   'app.containers.TextMessageTitles.TextMessageScheduleOptions';
 
 export default defineMessages<TextMessageScheduleOption>({
-  after_session_end: {
+  [TextMessageScheduleOption.AFTER_FILL]: {
     id: `${scope}.after_session_end`,
     defaultMessage: 'Send after the session is completed',
   },
-  days_after_session_end: {
+  [TextMessageScheduleOption.DAYS_AFTER_FILL]: {
     id: `${scope}.days_after_session_end`,
     defaultMessage: 'Send {days} days after the session is completed',
   },
