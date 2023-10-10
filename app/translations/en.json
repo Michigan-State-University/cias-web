@@ -215,6 +215,8 @@
   "app.components.ParticipantPersonalData`.phoneNumber": "Phone number",
   "app.components.QuestionDetails.groupPlaceholder": "Group placeholder",
   "app.components.QuestionDetails.nextQuestion": "Continue",
+  "app.components.QuestionDetails.variableTooltipContents.Question::ParticipantReport": "Score of this variable will equal 1 if the participant answers Yes. Otherwise it will equal 0.",
+  "app.components.QuestionDetails.variableTooltipContents.Question::Phone": "Score of this variable will equal 1 if the participant provides and confirms a phone number. Otherwise it will equal 0.",
   "app.components.QuickExit.buttonOnboardingText": "If needed, you can leave this site quickly by <b>clicking the “X” in the top right corner</b> or by <b>double pressing Escape</b> on your keyboard. You will be redirected to a Google search page.",
   "app.components.QuickExit.buttonOnboardingTitle": "Leave this site safely",
   "app.components.QuickExit.exit": "Exit",
