@@ -13,6 +13,8 @@ import { DEFAULT_LOCALE } from 'i18n';
 
 import { CustomLocalesConfig, RELATIVE_TIME_OPTIONS } from './constants';
 
+require('dayjs/locale/ar');
+
 export const configureDayjs = () => {
   // Load plugins
   dayjs.extend(relativeTime, RELATIVE_TIME_OPTIONS);
