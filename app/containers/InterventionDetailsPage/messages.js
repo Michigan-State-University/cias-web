@@ -5,8 +5,6 @@
  */
 import { defineMessages } from 'react-intl';
 
-import { CatMhLicenseType } from 'models/Intervention';
-
 export const scope = 'app.containers.HomePage';
 
 export default defineMessages({
@@ -135,8 +133,8 @@ export default defineMessages({
   catMhCounter: {
     id: `${scope}.catMhCounter`,
     defaultMessage: `<bold>CAT-MH™ License</bold>: {catMhLicenseType, select,
-        ${CatMhLicenseType.LIMITED} {Limited (<counter>{used}/{initial}</counter> <space></space> tests used)}
-        ${CatMhLicenseType.UNLIMITED} {Unlimited (<counter>{used}</counter> <space></space> tests used)}
+        limited {Limited (<counter>{used}/{initial}</counter> <space></space> tests used)}
+        unlimited {Unlimited (<counter>{used}</counter> <space></space> tests used)}
       }`,
   },
   catMhCountInfo: {

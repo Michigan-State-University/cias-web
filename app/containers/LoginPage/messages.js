@@ -19,15 +19,15 @@ export default defineMessages({
     defaultMessage: 'Login',
   },
   [LOGIN_FORM_VIEW]: {
-    id: `${scope}.${LOGIN_FORM_VIEW}`,
+    id: `${scope}.LOGIN_FORM_VIEW`,
     defaultMessage: 'Log into CIAS',
   },
   [CODE_VERIFICATION_VIEW]: {
-    id: `${scope}.${CODE_VERIFICATION_VIEW}`,
+    id: `${scope}.CODE_VERIFICATION_VIEW`,
     defaultMessage: 'Log into CIAS',
   },
   [TERMS_NOT_ACCEPTED_VIEW]: {
-    id: `${scope}.${TERMS_NOT_ACCEPTED_VIEW}`,
+    id: `${scope}.TERMS_NOT_ACCEPTED_VIEW`,
     defaultMessage: 'Provide missing details',
   },
   subHeader: {
@@ -78,16 +78,14 @@ export default defineMessages({
     id: `${scope}.forgotPassword`,
     defaultMessage: 'Forgot your password?',
   },
-  accountConfirmation: {
-    success: {
-      id: `${scope}.accountConfirmationSuccess`,
-      defaultMessage: 'Account has been successfully confirmed.',
-    },
-    error: {
-      id: `${scope}.accountConfirmationError`,
-      defaultMessage:
-        'There was some error during email confirmation. Please contact a support.',
-    },
+  accountConfirmationSuccess: {
+    id: `${scope}.accountConfirmationSuccess`,
+    defaultMessage: 'Account has been successfully confirmed.',
+  },
+  accountConfirmationError: {
+    id: `${scope}.accountConfirmationError`,
+    defaultMessage:
+      'There was some error during email confirmation. Please contact a support.',
   },
   codeVerificationGoBack: {
     id: `${scope}.codeVerificationGoBack`,

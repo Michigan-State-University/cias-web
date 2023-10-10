@@ -1,11 +1,5 @@
 import { defineMessages } from 'react-intl';
 
-import {
-  InviteParticipantModalView,
-  ParticipantInvitationType,
-  PredefinedParticipantFormMode,
-} from './types';
-
 export const scope =
   'app.containers.InterventionDetailsPage.containers.InviteParticipantsButton';
 
@@ -13,30 +7,6 @@ export default defineMessages({
   participantsInviterButtonTitle: {
     id: `${scope}.participantsInviterButtonTitle`,
     defaultMessage: 'Invite Participants',
-  },
-  [`viewTitle${InviteParticipantModalView.PARTICIPANT_LIST}`]: {
-    id: `${scope}.viewTitle${InviteParticipantModalView.PARTICIPANT_LIST}`,
-    defaultMessage: 'Invite participants',
-  },
-  [`viewTitle${InviteParticipantModalView.INVITE_EMAIL_PARTICIPANTS}`]: {
-    id: `${scope}.viewTitle${InviteParticipantModalView.INVITE_EMAIL_PARTICIPANTS}`,
-    defaultMessage: 'Invite e-mail participants',
-  },
-  [`viewTitle${InviteParticipantModalView.INVITE_PREDEFINED_PARTICIPANT}`]: {
-    id: `${scope}.viewTitle${InviteParticipantModalView.INVITE_PREDEFINED_PARTICIPANT}`,
-    defaultMessage: 'Create predefined participant',
-  },
-  [`viewTitle${InviteParticipantModalView.MANAGE_PREDEFINED_PARTICIPANT}`]: {
-    id: `${scope}.viewTitle${InviteParticipantModalView.MANAGE_PREDEFINED_PARTICIPANT}`,
-    defaultMessage: 'Manage participant',
-  },
-  [`viewTitle${InviteParticipantModalView.UPLOAD_EMAILS}`]: {
-    id: `${scope}.viewTitle${InviteParticipantModalView.UPLOAD_EMAILS}`,
-    defaultMessage: 'Bulk e-mail upload',
-  },
-  [`viewTitle${InviteParticipantModalView.MANAGE_PREDEFINED_PARTICIPANT}`]: {
-    id: `${scope}.viewTitle${InviteParticipantModalView.MANAGE_PREDEFINED_PARTICIPANT}`,
-    defaultMessage: 'Manage participant',
   },
   sessionSelectLabel: {
     id: `${scope}.sessionSelectLabel`,
@@ -65,15 +35,15 @@ export default defineMessages({
   },
   noParticipantsInfo: {
     id: `${scope}.noParticipantsInfo`,
-    defaultMessage: `There are no {invitationType, select, ${ParticipantInvitationType.EMAIL} {e-mail} ${ParticipantInvitationType.PREDEFINED} {predefined} other {}} participants yet`,
+    defaultMessage: `There are no {invitationType, select, EMAIL {e-mail} PREDEFINED {predefined} other {}} participants yet`,
   },
   inviteParticipantsButtonTitle: {
     id: `${scope}.inviteParticipantsButtonTitle`,
-    defaultMessage: `{invitationType, select, ${ParticipantInvitationType.EMAIL} {Invite e-mail participants} ${ParticipantInvitationType.PREDEFINED} {Create predefined participant} other {}}`,
+    defaultMessage: `{invitationType, select, EMAIL {Invite e-mail participants} PREDEFINED {Create predefined participant} other {}}`,
   },
   backButtonTitle: {
     id: `${scope}.backButtonTitle`,
-    defaultMessage: `Back to {invitationType, select, ${ParticipantInvitationType.EMAIL} {e-mail} ${ParticipantInvitationType.PREDEFINED} {predefined} other {}} participants list`,
+    defaultMessage: `Back to {invitationType, select, EMAIL {e-mail} PREDEFINED {predefined} other {}} participants list`,
   },
   emailParticipantsTab: {
     id: `${scope}.emailParticipantsTab`,
@@ -89,7 +59,7 @@ export default defineMessages({
   },
   predefinedParticipantFormSubmitButtonTitle: {
     id: `${scope}.predefinedParticipantFormSubmitButtonTitle`,
-    defaultMessage: `{mode, select, ${PredefinedParticipantFormMode.CREATE} {Create participant} ${PredefinedParticipantFormMode.UPDATE} {Save changes} other {}}`,
+    defaultMessage: `{mode, select, CREATE {Create participant} UPDATE {Save changes} other {}}`,
   },
   invitingEmailsParticipantsNotPossibleMessage: {
     id: `${scope}.invitingEmailsParticipantsNotPossibleMessage`,

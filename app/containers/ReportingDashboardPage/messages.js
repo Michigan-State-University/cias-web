@@ -5,8 +5,6 @@
  */
 import { defineMessages } from 'react-intl';
 
-import { EntityType } from 'global/reducers/organizations';
-
 export const scope = 'app.components.ReportingDashboardPage';
 
 export default defineMessages({
@@ -103,9 +101,9 @@ export default defineMessages({
   addEntityButton: {
     id: `${scope}.addEntityButton`,
     defaultMessage: `+ Add {type, select,
-      ${EntityType.organization} {Organization}
-      ${EntityType.healthSystem} {Health System}
-      ${EntityType.clinic} {Clinic}
+      ORGANIZATION {Organization}
+      HEALTH_SYSTEM {Health System}
+      CLINIC {Clinic}
     }`,
   },
   healthSystemHeader: {

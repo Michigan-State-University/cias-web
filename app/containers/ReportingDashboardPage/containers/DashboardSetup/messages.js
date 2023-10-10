@@ -5,12 +5,6 @@
  */
 import { defineMessages } from 'react-intl';
 
-import { ChartIntervalType } from 'models/Chart';
-
-import { ChartStatus, ChartTypeDto } from 'global/reducers/dashboardSections';
-
-import { themeColors } from 'theme';
-
 export const scope = 'app.components.DashboardSetup';
 
 export default defineMessages({
@@ -57,9 +51,9 @@ export default defineMessages({
   chartSettingsHeader: {
     id: `${scope}.chartSettingsHeader`,
     defaultMessage: `{chartType, select,
-      ${ChartTypeDto.NUMERIC_BAR_CHART} {Bar Chart Settings}
-      ${ChartTypeDto.PERCENTAGE_BAR_CHART} {Bar Chart Settings}
-      ${ChartTypeDto.PIE_CHART} {Pie Chart Settings}
+      bar_chart {Bar Chart Settings}
+      percentage_bar_chart {Bar Chart Settings}
+      pie_chart {Pie Chart Settings}
     }`,
   },
   chartSettingsDelete: {
@@ -76,7 +70,7 @@ export default defineMessages({
   },
   chartSettingsNotEditableInfo: {
     id: `${scope}.chartSettingsNotEditableInfo`,
-    defaultMessage: `Data are being collected. <span style='color: ${themeColors.warning};'>From this moment you can not introduce any changes to the chart</span>.`,
+    defaultMessage: `Data are being collected. <span style='color: #D2371D;'>From this moment you can not introduce any changes to the chart</span>.`,
   },
   chartSettingsPublishInfo: {
     id: `${scope}.chartSettingsPublishInfo`,
@@ -112,16 +106,6 @@ export default defineMessages({
     id: `${scope}.chartSettingsIntervalType`,
     defaultMessage: '<b>Time Interval</b>',
   },
-  intervalType: {
-    [ChartIntervalType.MONTHLY]: {
-      id: `${scope}.intervalType.${ChartIntervalType.MONTHLY}`,
-      defaultMessage: 'Monthly',
-    },
-    [ChartIntervalType.QUARTERLY]: {
-      id: `${scope}.intervalType.${ChartIntervalType.QUARTERLY}`,
-      defaultMessage: 'Quarterly',
-    },
-  },
   chartSettingsChartValues: {
     id: `${scope}.chartSettingsChartValues`,
     defaultMessage: '<b>Chart Values</b>',
@@ -137,9 +121,9 @@ export default defineMessages({
   chartSettingsChartValuesDescription: {
     id: `${scope}.chartSettingsChartValuesDescription`,
     defaultMessage: `{chartType, select,
-      ${ChartTypeDto.NUMERIC_BAR_CHART} {The maximum Y-axis value will be the highest number of participants
+      bar_chart {The maximum Y-axis value will be the highest number of participants
                                       that match the criteria over the given time period}
-      ${ChartTypeDto.PERCENTAGE_BAR_CHART} {The maximum Y-axis value will be 100%}
+      percentage_bar_chart {The maximum Y-axis value will be 100%}
     }`,
   },
   chartSettingsTrendLineOption: {
@@ -181,9 +165,9 @@ export default defineMessages({
   chartStatus: {
     id: `${scope}.chartStatus`,
     defaultMessage: `{chartStatus, select,
-      ${ChartStatus.DRAFT} {Draft}
-      ${ChartStatus.DATA_COLLECTION} {Data Collection}
-      ${ChartStatus.PUBLISHED} {Published}
+      draft {Draft}
+      data_collection {Data Collection}
+      published {Published}
     }`,
   },
   noChartsData: {

@@ -44,6 +44,7 @@ const UserAnswer = ({ question, answer }: Props): JSX.Element => {
     if (QUESTIONS_WITHOUT_ANSWERS.includes(questionType)) {
       return (
         <Text color={themeColors.warning}>
+          {/* @ts-ignore */}
           {formatMessage(messages[questionType])}
         </Text>
       );

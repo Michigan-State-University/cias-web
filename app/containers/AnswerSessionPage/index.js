@@ -736,7 +736,7 @@ export function AnswerSessionPage({
               description={formatMessage(messages.confirmContinueModalHeader)}
               content={formatMessage(
                 messages[
-                  `confirmContinueModalMessage${QuestionTypes.TLFB_EVENTS}`
+                  `confirmContinueModalMessage.${QuestionTypes.TLFB_EVENTS}`
                 ],
               )}
               confirmAction={() => saveAnswer(false)}
