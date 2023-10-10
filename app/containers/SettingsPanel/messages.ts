@@ -51,7 +51,7 @@ export default defineMessages({
   accessGiverHeader: {
     id: `${scope}.accessGiverHeader`,
     defaultMessage:
-      'Enter emails to grant participants access to the intervention. ',
+      'Enter emails to grant participants access to the intervention.',
   },
   accessGiverHeaderNote: {
     id: `${scope}.accessGiverHeaderNote`,

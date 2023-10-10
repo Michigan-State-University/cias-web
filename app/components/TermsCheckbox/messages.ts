@@ -12,7 +12,7 @@ export default defineMessages({
     defaultMessage: `
     <h2>APPLICATION END-USER TERMS OF USE</h2>
     <p>
-        The following Terms of Use apply to the use of any program made using the Computerized Intervention Authoring System, version 3.0 (CIAS; “Application”) by User/you. By accepting these Terms of Use or using the Application, you agree
+        The following Terms of Use apply to the use of any program made using the Computerized Intervention Authoring System, version 3.0 (CIAS; "Application") by User/you. By accepting these Terms of Use or using the Application, you agree
         that you have received, read, understood, and agree to be bound by the terms and conditions contained herein, and subsequent amendments thereto, as well as the laws, rules, and regulations now existing or which may hereafter be enacted,
         issued or enforced.
     </p>
@@ -23,12 +23,12 @@ export default defineMessages({
 
     <h3>1. Intellectual Property Rights</h3>
     <p>
-        CIAS is owned by Michigan State University (MSU) and Wayne State University (WSU) (together the “Universities”). You may not modify, copy, reproduce, republish, upload, post, transmit, translate, sell, create derivative works, exploit,
+        CIAS is owned by Michigan State University (MSU) and Wayne State University (WSU) (together the "Universities"). You may not modify, copy, reproduce, republish, upload, post, transmit, translate, sell, create derivative works, exploit,
         or distribute in any manner or medium (including by email or other electronic means), the Application or any material from the Application unless explicitly authorized in these Terms of Use.
     </p>
     <p>
         You acknowledge that all rights, title and interest in and to the Application, together with its codes, derivative works, organization, structure, interfaces, any documentation, data, trade names, trademarks, trade secrets, proprietary
-        information or other related materials is, and at all times shall remain University’s’ sole and exclusive property. Except the right to use the Application, as expressly provided herein, these Terms of Use do not grant you any rights
+        information or other related materials is, and at all times shall remain University's' sole and exclusive property. Except the right to use the Application, as expressly provided herein, these Terms of Use do not grant you any rights
         to, or in, patents, copyrights, database rights, trade secrets, trade names, trademarks (whether registered or unregistered) or any other rights or licenses with respect to the Application.
     </p>
     <p>
@@ -64,7 +64,7 @@ export default defineMessages({
     <p>You shall not alter copy, modify or tamper with the Application as provided. You agree not to use the Application:</p>
     <ol>
         <li>in any manner that could damage, disable, overburden, or impair the Application or servers or networks connected to the Application,</li>
-        <li>in any manner that could interfere with any other party’s use and enjoyment of the Application or servers or networks connected to the Application.</li>
+        <li>in any manner that could interfere with any other party's use and enjoyment of the Application or servers or networks connected to the Application.</li>
         <li>
             to upload, post, transmit, share or otherwise make available any material that contains software viruses or any other malicious or tracking computer code, files or programs designed to track, interrupt, destroy or limit the
             functionality of any computer software or hardware or telecommunications equipment or any information that infringes the intellectual property rights of others;
@@ -194,7 +194,7 @@ export default defineMessages({
 
     <h3>The Personal Information We Collect</h3>
     <p>
-        CIAS does not collect any personally identifiable information (“PII”) about you unless you voluntarily provide it to us. This PII information may include your name, cell phone number, and email address, as well as information about you,
+        CIAS does not collect any personally identifiable information ("PII") about you unless you voluntarily provide it to us. This PII information may include your name, cell phone number, and email address, as well as information about you,
         your health, your feelings, your safety, and your health habits. Please note by using CIAS you are agreeing to the data practices described in this Policy.
     </p>
 
@@ -233,7 +233,7 @@ export default defineMessages({
     defaultMessage: `
     <h2>APPLICATION TERMS OF USE FOR CIAS</h2>
     <p>
-        The following Terms of Use apply to the use of the Michigan State University (“MSU”) instance of the Computerized Intervention Authoring System, version 3.0 (CIAS; “CIAS Application” or “Application”) by User/you. By accepting these
+        The following Terms of Use apply to the use of the Michigan State University ("MSU") instance of the Computerized Intervention Authoring System, version 3.0 (CIAS; "CIAS Application" or "Application") by User/you. By accepting these
         Terms of Use or using the CIAS Application, you agree that you have received, read, understood, and agree to be bound by the terms and conditions contained herein, and subsequent amendments thereto, as well as the laws, rules, and
         regulations now existing or which may hereafter be enacted, issued or enforced.
     </p>
@@ -244,7 +244,7 @@ export default defineMessages({
 
     <h3>1. Intellectual Property Rights</h3>
     <p>
-        The MSU CIAS Application and the CIAS 3.0 source code are owned by MSU, Wayne State University (“WSU”), and the University of Michigan (together the “Universities”). They have agreed to make the CIAS Application available for research
+        The MSU CIAS Application and the CIAS 3.0 source code are owned by MSU, Wayne State University ("WSU"), and the University of Michigan (together the "Universities"). They have agreed to make the CIAS Application available for research
         at little to no cost (see Section 8, below, for details). Further, Universities have agreed to make CIAS source code available under the GNU General Public License, Version 3 for research purposes
         (https://www.gnu.org/licenses/gpl-3.0.txt). If you would like a copy of the source code pursuant to the GNU General Public License, Version 3, it may be downloaded from GitHub (<a href='https://github.com/'>https://github.com/</a>).
     </p>
@@ -260,7 +260,7 @@ export default defineMessages({
     </p>
     <p>
         You acknowledge that all rights, title and interest in and to the Application, together with its codes, derivative works, organization, structure, interfaces, any documentation, data, trade names, trademarks, trade secrets, proprietary
-        information or other related materials is, and at all times shall remain Universities’ sole and exclusive property. Except with respect to the right to use the Application, as expressly provided herein, these Terms of Use do not grant
+        information or other related materials is, and at all times shall remain Universities' sole and exclusive property. Except with respect to the right to use the Application, as expressly provided herein, these Terms of Use do not grant
         you any rights to, or in, patents, copyrights, database rights, trade secrets, trade names, trademarks (whether registered or unregistered) or any other rights or licenses with respect to the Application.
     </p>
     <p>
@@ -328,7 +328,7 @@ export default defineMessages({
     </p>
     <ol>
         <li>in any manner that could damage, disable, overburden, or impair the Application or servers or networks connected to the Application,</li>
-        <li>in any manner that could interfere with any other party’s use and enjoyment of the Application or servers or networks connected to the Application.</li>
+        <li>in any manner that could interfere with any other party's use and enjoyment of the Application or servers or networks connected to the Application.</li>
         <li>
             to upload, post, transmit, share or otherwise make available any material that contains software viruses or any other malicious or tracking computer code, files or programs designed to track, interrupt, destroy or limit the
             functionality of any computer software or hardware or telecommunications equipment or any information that infringes the intellectual property rights of others;
@@ -364,7 +364,7 @@ export default defineMessages({
         participants or many text messages may be required to provide financial support over and above $3,000 per year, even if not part of a funded study. All fees paid to MSU will be handled under a service contract that MSU will initiate.
     </p>
     <p>
-        If asked, we can “white list” your intervention (that is, for your participants to see your own logo). However, we will only add a study or University logo that you provide to us, and only if it is sent with an acknowledgement that you
+        If asked, we can "white list" your intervention (that is, for your participants to see your own logo). However, we will only add a study or University logo that you provide to us, and only if it is sent with an acknowledgement that you
         have the right or privilege to use that image for your study.
     </p>
     <p>
@@ -372,7 +372,7 @@ export default defineMessages({
         permission from MSU, and may require financial support. Permission can be requested by emailing us at <a href='mailto:cias@msu.edu'>cias@msu.edu</a>.
     </p>
     <p>
-        CIAS is administered by MSU to facilitate research around the world. However, MSU’s ability to provide technical support to individual CIAS Users is extremely limited. If you are having trouble using CIAS, please consult the training
+        CIAS is administered by MSU to facilitate research around the world. However, MSU's ability to provide technical support to individual CIAS Users is extremely limited. If you are having trouble using CIAS, please consult the training
         and help materials that are available on our website at www.cias.app. If you are still having issues you may want to attend one of our onboarding and orientation sessions which are scheduled periodically. We will also provide a link for
         submission of technical support tickets, but our ability to respond to tickets depends on the volume of tickets we receive. If you require more technical support, we can provide a list of outside consultants with expertise in CIAS 3.0.
         These consultants, however, are not affiliated with MSU and may charge a fee for their services. MSU does not endorse or in any way warrant the work of any consultant recommend for technical support.
@@ -485,7 +485,7 @@ export default defineMessages({
 
     <h3>The Personal Information We Collect</h3>
     <p>
-        CIAS does not collect any personally identifiable information (“PII”) about you unless you voluntarily provide it to us. This PII information may include name, institution, email address, and other information collected when you first
+        CIAS does not collect any personally identifiable information ("PII") about you unless you voluntarily provide it to us. This PII information may include name, institution, email address, and other information collected when you first
         seek access to CIAS.
     </p>
 
@@ -510,7 +510,7 @@ export default defineMessages({
 
     <h3>Tracking User Behavior</h3>
     <p>
-        CIAS uses “cookies” and “web beacons” (also called “clear gifs” or “pixel tags”) to obtain certain types of information when your web browser accesses our Website. It is important to note that the cookies and web beacons that we use are
+        CIAS uses "cookies" and "web beacons" (also called "clear gifs" or "pixel tags") to obtain certain types of information when your web browser accesses our Website. It is important to note that the cookies and web beacons that we use are
         not tied to personal information. We use cookies and web beacons to collect anonymous, aggregated information to assist us in understanding how users use our Website. We do not use any of this information to identify visitors and we do
         not share it with third parties.
     </p>

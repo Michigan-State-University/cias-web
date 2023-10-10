@@ -125,8 +125,7 @@ export default defineMessages({
   },
   characterMovable: {
     id: `${scope}.characterMovable`,
-    defaultMessage: `Click and drag the Narrator to move it.<br/>Only the start and end positions will be recorded.
-`,
+    defaultMessage: `Click and drag the Narrator to move it.<br/>Only the start and end positions will be recorded.`,
   },
   characterMoveDisabled: {
     id: `${scope}.characterMoveDisabled`,

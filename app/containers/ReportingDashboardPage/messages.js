@@ -100,11 +100,7 @@ export default defineMessages({
   },
   addEntityButton: {
     id: `${scope}.addEntityButton`,
-    defaultMessage: `+ Add {type, select,
-      ORGANIZATION {Organization}
-      HEALTH_SYSTEM {Health System}
-      CLINIC {Clinic}
-    }`,
+    defaultMessage: `+ Add {type, select, ORGANIZATION {Organization} HEALTH_SYSTEM {Health System} CLINIC {Clinic}}`,
   },
   healthSystemHeader: {
     id: `${scope}.healthSystemHeader`,
@@ -216,9 +212,7 @@ export default defineMessages({
   },
   deleteEntityModalHeader: {
     id: `${scope}.deleteOrganizationModalHeader`,
-    defaultMessage: `{type} <b>{name}</b> will be permanently deleted.<br /><br />
-      This operation cannot be undone and you will not be able to do any changes.<br /><br />
-      You will still be able to access charts and their data for this {type} and filter by it.`,
+    defaultMessage: `{type} <b>{name}</b> will be permanently deleted.<br /><br />This operation cannot be undone and you will not be able to do any changes.<br /><br />You will still be able to access charts and their data for this {type} and filter by it.`,
   },
   showDeletedEntitiesToggle: {
     id: `${scope}.showDeletedEntitiesToggle`,

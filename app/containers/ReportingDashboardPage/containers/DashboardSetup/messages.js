@@ -50,11 +50,7 @@ export default defineMessages({
   },
   chartSettingsHeader: {
     id: `${scope}.chartSettingsHeader`,
-    defaultMessage: `{chartType, select,
-      bar_chart {Bar Chart Settings}
-      percentage_bar_chart {Bar Chart Settings}
-      pie_chart {Pie Chart Settings}
-    }`,
+    defaultMessage: `{chartType, select, bar_chart {Bar Chart Settings} percentage_bar_chart {Bar Chart Settings} pie_chart {Pie Chart Settings}}`,
   },
   chartSettingsDelete: {
     id: `${scope}.chartSettingsDelete`,
@@ -120,11 +116,7 @@ export default defineMessages({
   },
   chartSettingsChartValuesDescription: {
     id: `${scope}.chartSettingsChartValuesDescription`,
-    defaultMessage: `{chartType, select,
-      bar_chart {The maximum Y-axis value will be the highest number of participants
-                                      that match the criteria over the given time period}
-      percentage_bar_chart {The maximum Y-axis value will be 100%}
-    }`,
+    defaultMessage: `{chartType, select, bar_chart {The maximum Y-axis value will be the highest number of participants that match the criteria over the given time period} percentage_bar_chart {The maximum Y-axis value will be 100%}}`,
   },
   chartSettingsTrendLineOption: {
     id: `${scope}.chartSettingsTrendLineOption`,
@@ -164,11 +156,7 @@ export default defineMessages({
   },
   chartStatus: {
     id: `${scope}.chartStatus`,
-    defaultMessage: `{chartStatus, select,
-      draft {Draft}
-      data_collection {Data Collection}
-      published {Published}
-    }`,
+    defaultMessage: `{chartStatus, select, draft {Draft} data_collection {Data Collection} published {Published}}`,
   },
   noChartsData: {
     id: `${scope}.noChartsData`,

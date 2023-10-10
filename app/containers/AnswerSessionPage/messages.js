@@ -190,10 +190,7 @@ export default defineMessages({
   },
   pageTitle: {
     id: `${scope}.pageTitle`,
-    defaultMessage: `{isPreview, select,
-      true {Preview Session}
-      other {Answer Session}
-    }`,
+    defaultMessage: `{isPreview, select, true {Preview Session} other {Answer Session}}`,
   },
   exit: {
     id: `${scope}.exit`,
@@ -213,8 +210,7 @@ export default defineMessages({
   },
   monthSelectorModalText: {
     id: `${scope}.monthSelectorModalText`,
-    defaultMessage: `This study covers a period of more than one month. Using the arrows,
-    you can conveniently switch between them to complete all the months.`,
+    defaultMessage: `This study covers a period of more than one month. Using the arrows, you can conveniently switch between them to complete all the months.`,
   },
   monthSelectorModalButton: {
     id: `${scope}.monthSelectorModalButton`,
