@@ -44,6 +44,7 @@ import VariableChooser, {
 } from 'containers/VariableChooser';
 
 import messages from '../../messages';
+import feedbackActionsMessages from '../../feedbackActionsMessages';
 import { switchSpeechReflection, updateBlockSettings } from '../../../actions';
 import Reflection from './Reflection';
 import { setUpReflections } from './utils';
@@ -155,7 +156,7 @@ const ReflectionBlock = ({
 
     return options.map((option) => ({
       value: option,
-      label: formatMessage(messages[option]),
+      label: formatMessage(feedbackActionsMessages[option]),
     }));
   }, [EFeedbackAction]);
 

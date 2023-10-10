@@ -1,7 +1,5 @@
 import { defineMessages } from 'react-intl';
 
-import { EFeedbackAction } from 'models/Narrator/FeedbackActions';
-
 export const scope = 'app.containers.DefaultSettings';
 
 export default defineMessages({
@@ -127,32 +125,12 @@ export default defineMessages({
   },
   characterMovable: {
     id: `${scope}.characterMovable`,
-    defaultMessage: `Click and drag the Narrator to move it.<br>Only the start and end positions will be recorded.
+    defaultMessage: `Click and drag the Narrator to move it.<br/>Only the start and end positions will be recorded.
 `,
   },
   characterMoveDisabled: {
     id: `${scope}.characterMoveDisabled`,
     defaultMessage: `Narrator replacing is disabled for that intervention status.`,
-  },
-  [EFeedbackAction.SHOW_SPECTRUM]: {
-    id: `${scope}.${EFeedbackAction.SHOW_SPECTRUM}`,
-    defaultMessage: 'Show Spectrum',
-  },
-  [EFeedbackAction.SHOW_USER_VALUE]: {
-    id: `${scope}.${EFeedbackAction.SHOW_USER_VALUE}`,
-    defaultMessage: 'Show End-User Value',
-  },
-  [EFeedbackAction.SHOW_LOWER_VALUE]: {
-    id: `${scope}.${EFeedbackAction.SHOW_LOWER_VALUE}`,
-    defaultMessage: 'Show Lower Value',
-  },
-  [EFeedbackAction.SHOW_HIGHER_VALUE]: {
-    id: `${scope}.${EFeedbackAction.SHOW_HIGHER_VALUE}`,
-    defaultMessage: 'Show Higher Value',
-  },
-  [EFeedbackAction.NO_ACTION]: {
-    id: `${scope}.${EFeedbackAction.NO_ACTION}`,
-    defaultMessage: 'Manual positioning',
   },
   selectAction: {
     id: `${scope}.selectAction`,

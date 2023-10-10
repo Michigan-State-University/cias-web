@@ -35,6 +35,7 @@ import animationsMessages from 'global/i18n/animationsMessages';
 
 import { updateBlockSettings, switchSpeechReflection } from '../../actions';
 import messages from '../messages';
+import feedbackActionsMessages from '../feedbackActionsMessages';
 import SpeechInput from './SpeechInput';
 
 const SpeechBlock = ({
@@ -85,7 +86,7 @@ const SpeechBlock = ({
 
     return options.map((option) => ({
       value: option,
-      label: formatMessage(messages[option]),
+      label: formatMessage(feedbackActionsMessages[option]),
     }));
   }, [EFeedbackAction, character]);
 

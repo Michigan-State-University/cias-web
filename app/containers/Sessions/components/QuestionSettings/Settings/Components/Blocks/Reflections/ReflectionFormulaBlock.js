@@ -34,6 +34,7 @@ import animationsMessages from 'global/i18n/animationsMessages';
 import { characterToSpeechAnimationsMap } from 'utils/animations/animationsNames';
 
 import messages from '../../messages';
+import feedbackActionsMessages from '../../feedbackActionsMessages';
 import { updateBlockSettings, switchSpeechReflection } from '../../../actions';
 
 import { DashedBox } from './styled';
@@ -74,7 +75,7 @@ const ReflectionFormulaBlock = ({
 
     return options.map((option) => ({
       value: option,
-      label: formatMessage(messages[option]),
+      label: formatMessage(feedbackActionsMessages[option]),
     }));
   }, [EFeedbackAction]);
 
