@@ -107,3 +107,4 @@ const AppLanguageProvider = (props: Props) => {
 };
 
 export default AppLanguageProvider;
+export { makeSelectLocale };

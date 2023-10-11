@@ -169,3 +169,9 @@ export const makeSelectPredefinedParticipantById = (id) =>
       predefinedParticipants &&
       predefinedParticipants.find((participant) => participant.id === id),
   );
+
+export const makeSelectInterventionLanguageCode = () =>
+  createSelector(
+    selectIntervention,
+    (substate) => substate.intervention?.languageCode,
+  );

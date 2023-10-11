@@ -46,6 +46,7 @@ import messages from './messages';
 import { AnswerInterventionContent, AnswerOuterContainer } from './styled';
 import { HIDE_NARRATOR_QUESTIONS } from './constants';
 import { variableTooltipContents } from './variableTooltipContents';
+import QuestionDetailsLanguageProvider from './QuestionDetailsLanguageProvider';
 
 export type QuestionDetailsProps = {
   changeGroupName: (name: string) => void;
@@ -134,128 +135,130 @@ const RenderQuestionDetails = ({
   const narratorExtraSpace = CHARACTER_CONFIGS[character].size.height;
 
   return (
-    <AnswerOuterContainer>
-      <Column width="100%" display="flex" align="center">
-        {currentGroupScope && (
-          <Row
-            mb={10}
-            width="inherit"
-            maxWidth={elements.draggableContainerSize}
-            justify="between"
-            align="center"
-          >
-            <StyledInput
-              // @ts-ignore
-              px={12}
-              value={currentGroupScope.title}
-              fontSize={18}
-              fontWeight="bold"
-              placeholder={formatMessage(messages.groupPlaceholder)}
-              maxWidth="initial"
-              onFocus={selectInputText}
-              onBlur={(val) => changeGroupName(val)}
-              disabled={!editingPossible}
-            />
-            {!isTlfbGroup && logoUrl && (
-              <Img
-                maxHeight={elements.interventionLogoSize.height}
-                maxWidth={elements.interventionLogoSize.width}
-                src={logoUrl}
-                aria-label={imageAlt}
+    <QuestionDetailsLanguageProvider>
+      <AnswerOuterContainer>
+        <Column width="100%" display="flex" align="center">
+          {currentGroupScope && (
+            <Row
+              mb={10}
+              width="inherit"
+              maxWidth={elements.draggableContainerSize}
+              justify="between"
+              align="center"
+            >
+              <StyledInput
+                // @ts-ignore
+                px={12}
+                value={currentGroupScope.title}
+                fontSize={18}
+                fontWeight="bold"
+                placeholder={formatMessage(messages.groupPlaceholder)}
+                maxWidth="initial"
+                onFocus={selectInputText}
+                onBlur={(val) => changeGroupName(val)}
+                disabled={!editingPossible}
               />
-            )}
-            {isTlfbGroup && (
-              <Text fontWeight="medium">
-                {formatMessage(questionTypesMessages[type])}
-              </Text>
-            )}
-          </Row>
-        )}
-        <AnswerInterventionContent
-          ref={animationBoundaries}
-          id="quill_boundaries"
-        >
-          {shouldShowNarrator && (
-            <QuestionNarrator
-              questionId={id}
-              animationBoundaries={animationBoundaries}
-              settings={{ ...narratorSettings, title, subtitle }}
-            />
-          )}
-          <Row
-            justify="center"
-            width="100%"
-            pt={extraSpaceForNarrator ? narratorExtraSpace : 30}
-          >
-            {/* @ts-ignore */}
-            <AppContainer disablePageTitle $width="100%">
-              {!isNarratorTabOrEditNotPossible && (
-                <>
-                  {title && (
-                    <Row width="100%">
-                      <QuestionTitle />
-                    </Row>
-                  )}
-                  {subtitle && (
-                    <Row>
-                      <QuestionSubtitle />
-                    </Row>
-                  )}
-                  {'variable' in body && (
-                    <Row mt={10} ml={26}>
-                      <HelpIconTooltip
-                        id="hardcoded-variable-score-info"
-                        tooltipContent={variableTooltipContent}
-                      >
-                        <VariableInput
-                          disabled={isNameScreen}
-                          questionId={id}
-                          interventionStatus={status}
-                          isNarratorTab={isNarratorTab}
-                          variable={body.variable}
-                        />
-                      </HelpIconTooltip>
-                    </Row>
-                  )}
-                  {video && (
-                    <Row mt={10}>
-                      <QuestionVideo
-                        // @ts-ignore
-                        disabled={!editingPossible}
-                      />
-                    </Row>
-                  )}
-                  {image && (
-                    <Row mt={10}>
-                      <QuestionImage disabled={!editingPossible} />
-                    </Row>
-                  )}
-                </>
-              )}
-              {isNarratorTabOrEditNotPossible && (
-                <CommonLayout
-                  currentQuestion={selectedQuestion ?? {}}
-                  showOriginalText={!isNarratorTab}
+              {!isTlfbGroup && logoUrl && (
+                <Img
+                  maxHeight={elements.interventionLogoSize.height}
+                  maxWidth={elements.interventionLogoSize.width}
+                  src={logoUrl}
+                  aria-label={imageAlt}
                 />
               )}
-
-              <Row>
-                <QuestionData />
-              </Row>
-
-              {showProceedButton && (
-                <Box my={20} ml={26}>
-                  {/* @ts-ignore */}
-                  <Button width={elements.continueButtonWidth} disabled>
-                    <FormattedMessage {...messages.nextQuestion} />
-                  </Button>
-                </Box>
+              {isTlfbGroup && (
+                <Text fontWeight="medium">
+                  {formatMessage(questionTypesMessages[type])}
+                </Text>
               )}
-            </AppContainer>
-          </Row>
-        </AnswerInterventionContent>
-      </Column>
-    </AnswerOuterContainer>
+            </Row>
+          )}
+          <AnswerInterventionContent
+            ref={animationBoundaries}
+            id="quill_boundaries"
+          >
+            {shouldShowNarrator && (
+              <QuestionNarrator
+                questionId={id}
+                animationBoundaries={animationBoundaries}
+                settings={{ ...narratorSettings, title, subtitle }}
+              />
+            )}
+            <Row
+              justify="center"
+              width="100%"
+              pt={extraSpaceForNarrator ? narratorExtraSpace : 30}
+            >
+              {/* @ts-ignore */}
+              <AppContainer disablePageTitle $width="100%">
+                {!isNarratorTabOrEditNotPossible && (
+                  <>
+                    {title && (
+                      <Row width="100%">
+                        <QuestionTitle />
+                      </Row>
+                    )}
+                    {subtitle && (
+                      <Row>
+                        <QuestionSubtitle />
+                      </Row>
+                    )}
+                    {'variable' in body && (
+                      <Row mt={10} ml={26}>
+                        <HelpIconTooltip
+                          id="hardcoded-variable-score-info"
+                          tooltipContent={variableTooltipContent}
+                        >
+                          <VariableInput
+                            disabled={isNameScreen}
+                            questionId={id}
+                            interventionStatus={status}
+                            isNarratorTab={isNarratorTab}
+                            variable={body.variable}
+                          />
+                        </HelpIconTooltip>
+                      </Row>
+                    )}
+                    {video && (
+                      <Row mt={10}>
+                        <QuestionVideo
+                          // @ts-ignore
+                          disabled={!editingPossible}
+                        />
+                      </Row>
+                    )}
+                    {image && (
+                      <Row mt={10}>
+                        <QuestionImage disabled={!editingPossible} />
+                      </Row>
+                    )}
+                  </>
+                )}
+                {isNarratorTabOrEditNotPossible && (
+                  <CommonLayout
+                    currentQuestion={selectedQuestion ?? {}}
+                    showOriginalText={!isNarratorTab}
+                  />
+                )}
+
+                <Row>
+                  <QuestionData />
+                </Row>
+
+                {showProceedButton && (
+                  <Box my={20} ml={26}>
+                    {/* @ts-ignore */}
+                    <Button width={elements.continueButtonWidth} disabled>
+                      <FormattedMessage {...messages.nextQuestion} />
+                    </Button>
+                  </Box>
+                )}
+              </AppContainer>
+            </Row>
+          </AnswerInterventionContent>
+        </Column>
+      </AnswerOuterContainer>
+    </QuestionDetailsLanguageProvider>
   );
 };
 
