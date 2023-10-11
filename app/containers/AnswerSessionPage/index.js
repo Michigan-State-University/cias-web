@@ -721,6 +721,12 @@ export function AnswerSessionPage({
               onClose={() => setSkipQuestionModalVisible(false)}
               description={formatMessage(messages.skipQuestionModalHeader)}
               content={formatMessage(messages.skipQuestionModalMessage)}
+              cancelButtonText={formatMessage(
+                messages.skipQuestionModalCancelButtonText,
+              )}
+              confirmationButtonText={formatMessage(
+                messages.skipQuestionModalConfirmationButtonText,
+              )}
               confirmAction={() => saveAnswer(true)}
               hideCloseButton
               contentContainerStyles={{

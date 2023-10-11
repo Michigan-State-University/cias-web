@@ -91,6 +91,10 @@ export default defineMessages({
     id: `${scope}.cancel`,
     defaultMessage: 'Cancel',
   },
+  confirm: {
+    id: `${scope}.confirm`,
+    defaultMessage: 'Confirm',
+  },
   save: {
     id: `${scope}.save`,
     defaultMessage: 'Save',

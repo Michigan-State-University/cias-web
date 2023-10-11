@@ -38,6 +38,14 @@ export default defineMessages({
     id: `${scope}.skipQuestionModalMessage`,
     defaultMessage: 'Are you sure you want to leave this question empty?',
   },
+  skipQuestionModalCancelButtonText: {
+    id: `${scope}.skipQuestionModalCancelButtonText`,
+    defaultMessage: 'Cancel',
+  },
+  skipQuestionModalConfirmationButtonText: {
+    id: `${scope}.skipQuestionModalConfirmationButtonText`,
+    defaultMessage: 'Confirm',
+  },
   confirmContinueModalHeader: {
     id: `${scope}.confirmContinueModalHeader`,
     defaultMessage: 'Is that all?',
