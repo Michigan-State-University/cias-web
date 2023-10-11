@@ -5,7 +5,8 @@ import dayjs from 'dayjs';
 
 import { colors, elements, themeColors } from 'theme';
 
-import globalMessages from 'global/i18n/globalMessages';
+import userSessionStatusesMessages from 'global/i18n/userSessionStatusesMessages';
+import sessionSchedulesMessages from 'global/i18n/sessionSchedulesMessages';
 import { RoutePath } from 'global/constants';
 
 import { parametrizeRoutePath } from 'utils/router';
@@ -128,7 +129,7 @@ const UserSessionTile = ({
     if (userSession && userSession.scheduledAt && isScheduledForFuture) {
       return (
         <Text>
-          {formatMessage(messages[SessionSchedule.EXACT_DATE], {
+          {formatMessage(sessionSchedulesMessages[SessionSchedule.EXACT_DATE], {
             scheduleAt: dayjs(userSession.scheduledAt).format(
               'MMMM D, YYYY h:mm A',
             ),
@@ -140,7 +141,7 @@ const UserSessionTile = ({
 
     return (
       <Text>
-        {formatMessage(messages[schedule], {
+        {formatMessage(sessionSchedulesMessages[schedule], {
           scheduleAt: dayjs(scheduleAt).format('MMMM D, YYYY'),
           schedulePayload,
         })}
@@ -162,10 +163,7 @@ const UserSessionTile = ({
             borderRadius={5}
           >
             <Text color={statusTypeToFontColorMap[userSessionStatus]}>
-              {formatMessage(
-                // @ts-ignore
-                globalMessages.userSessionStatus[userSessionStatus],
-              )}
+              {formatMessage(userSessionStatusesMessages[userSessionStatus])}
             </Text>
           </Box>
         </Box>

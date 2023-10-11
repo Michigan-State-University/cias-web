@@ -211,7 +211,7 @@ const GridQuestion = ({
                             validator={numericValidator}
                             keyboard="tel"
                             placeholder={formatMessage(
-                              globalMessages.variables.variableScorePlaceholder,
+                              globalMessages.variableScorePlaceholder,
                             )}
                             value={column.variable.value}
                             color={colors.azure}
@@ -334,8 +334,7 @@ const GridQuestion = ({
                               textAlign="center"
                               validator={variableNameValidator}
                               placeholder={formatMessage(
-                                globalMessages.variables
-                                  .variableNamePlaceholder,
+                                globalMessages.variableNamePlaceholder,
                               )}
                               value={row.variable.name}
                               color={colors.jungleGreen}

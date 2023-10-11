@@ -38,7 +38,7 @@ export default defineMessages({
     defaultMessage: 'Your old password',
   },
   oldPasswordLabel: {
-    id: `${scope}.passwordLabel`,
+    id: `${scope}.oldPasswordLabel`,
     defaultMessage: 'Old password',
   },
   newPassword: {
@@ -46,15 +46,15 @@ export default defineMessages({
     defaultMessage: 'Your new password',
   },
   newPasswordLabel: {
-    id: `${scope}.passwordLabel`,
+    id: `${scope}.newPasswordLabel`,
     defaultMessage: 'New password',
   },
   newPasswordConfirmation: {
-    id: `${scope}.newPassword`,
+    id: `${scope}.newPasswordConfirmation`,
     defaultMessage: 'Confirm your new password',
   },
   newPasswordConfirmationLabel: {
-    id: `${scope}.passwordLabel`,
+    id: `${scope}.newPasswordConfirmationLabel`,
     defaultMessage: 'Confirmation',
   },
   confirmPasswordLabel: {

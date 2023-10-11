@@ -6,20 +6,26 @@
  * IntlProvider component and i18n messages (loaded from `app/translations`)
  */
 
-import React from 'react';
-import PropTypes from 'prop-types';
-import { connect } from 'react-redux';
-import { createSelector } from 'reselect';
+import React, { ReactNode } from 'react';
+import { useSelector } from 'react-redux';
 import { IntlProvider } from 'react-intl';
+import { IntlConfig } from '@formatjs/intl/src/types';
 
 import { themeColors } from 'theme';
+
+import { DEFAULT_LOCALE } from 'i18n';
 
 import { makeSelectLocale } from './selectors';
 
 // Those tags are handled by <Markup />
 const errorsToOmit = ['INVALID_TAG', 'UNCLOSED_TAG'];
 
-export const intlProviderConfig = {
+type AppIntlConfig = IntlConfig<React.ReactNode>;
+
+export const intlProviderConfig: Pick<
+  AppIntlConfig,
+  'defaultRichTextElements' | 'onError'
+> = {
   defaultRichTextElements: {
     space: (chunks) => (
       <>
@@ -79,33 +85,26 @@ export const intlProviderConfig = {
   },
 };
 
-export function LanguageProvider(props) {
+export type Props = {
+  messages: Record<string, AppIntlConfig['messages']>;
+  children: ReactNode;
+};
+
+const AppLanguageProvider = (props: Props) => {
+  const locale = useSelector(makeSelectLocale());
+
   return (
     <IntlProvider
-      locale={props.locale}
-      key={props.locale}
-      messages={props.messages[props.locale]}
+      locale={locale}
+      defaultLocale={DEFAULT_LOCALE}
+      key={locale}
+      messages={props.messages[locale]}
       {...intlProviderConfig}
     >
       {React.Children.only(props.children)}
     </IntlProvider>
   );
-}
-
-LanguageProvider.propTypes = {
-  locale: PropTypes.string,
-  messages: PropTypes.object,
-  children: PropTypes.element.isRequired,
 };
 
-const mapStateToProps = createSelector(makeSelectLocale(), (locale) => ({
-  locale,
-}));
-
-function mapDispatchToProps(dispatch) {
-  return {
-    dispatch,
-  };
-}
-
-export default connect(mapStateToProps, mapDispatchToProps)(LanguageProvider);
+export default AppLanguageProvider;
+export { makeSelectLocale };

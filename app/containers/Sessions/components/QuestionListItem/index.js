@@ -14,7 +14,7 @@ import Comment from 'components/Text/Comment';
 import Dropdown from 'components/Dropdown';
 import Row from 'components/Row';
 import CopyModal from 'components/CopyModal';
-import globalMessages from 'global/i18n/globalMessages';
+import questionTypesMessages from 'global/i18n/questionTypesMessages';
 import { colors, themeColors } from 'theme';
 import { getNarratorPositionWhenQuestionIsChanged } from 'utils/getNarratorPosition';
 import { hasObjectProperty } from 'utils/hasObjectProperty';
@@ -288,7 +288,7 @@ const QuestionListItem = ({
                   mr="5px"
                 />
                 <Comment fontWeight="bold">
-                  {formatMessage(globalMessages.questionTypes[type])}
+                  {formatMessage(questionTypesMessages[type])}
                 </Comment>
               </Box>
             </Row>

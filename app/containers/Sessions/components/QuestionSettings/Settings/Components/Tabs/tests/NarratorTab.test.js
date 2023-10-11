@@ -12,7 +12,7 @@ import { MemoryRouter } from 'react-router-dom';
 import { DEFAULT_LOCALE } from 'i18n';
 import ReactDOM from 'react-dom';
 
-import { intlProviderConfig } from 'containers/LanguageProvider';
+import { intlProviderConfig } from 'containers/AppLanguageProvider';
 import { createQuestion } from 'utils/reducerCreators';
 
 import { createTestStore } from 'utils/testUtils/storeUtils';

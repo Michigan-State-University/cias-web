@@ -721,6 +721,12 @@ export function AnswerSessionPage({
               onClose={() => setSkipQuestionModalVisible(false)}
               description={formatMessage(messages.skipQuestionModalHeader)}
               content={formatMessage(messages.skipQuestionModalMessage)}
+              cancelButtonText={formatMessage(
+                messages.skipQuestionModalCancelButtonText,
+              )}
+              confirmationButtonText={formatMessage(
+                messages.skipQuestionModalConfirmationButtonText,
+              )}
               confirmAction={() => saveAnswer(true)}
               hideCloseButton
               contentContainerStyles={{
@@ -736,7 +742,7 @@ export function AnswerSessionPage({
               description={formatMessage(messages.confirmContinueModalHeader)}
               content={formatMessage(
                 messages[
-                  `confirmContinueModalMessage${QuestionTypes.TLFB_EVENTS}`
+                  `confirmContinueModalMessage.${QuestionTypes.TLFB_EVENTS}`
                 ],
               )}
               confirmAction={() => saveAnswer(false)}

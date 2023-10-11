@@ -7,7 +7,7 @@ import { DEFAULT_LOCALE } from 'i18n';
 
 import { createTestStore } from 'utils/testUtils/storeUtils';
 import createModalForTests from 'utils/createModalForTests';
-import { intlProviderConfig } from 'containers/LanguageProvider';
+import { intlProviderConfig } from 'containers/AppLanguageProvider';
 import SettingsSessionPage from '../index';
 
 describe('<SettingsSessionPage />', () => {

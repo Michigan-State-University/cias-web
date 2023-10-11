@@ -13,8 +13,11 @@ import { IntlShape } from 'react-intl/src/types';
 import { CountryCode } from 'libphonenumber-js/types';
 
 import { colors, themeColors } from 'theme';
-import globalMessages from 'global/i18n/globalMessages';
+
+import phoneTypesMessages from 'global/i18n/phoneTypesMessages';
+import validatorsMessages from 'global/i18n/validatorsMessages';
 import { zipCodeRegex } from 'global/constants';
+import sexMessages from 'global/i18n/sexMessages';
 
 import {
   HfhsPatientData,
@@ -78,27 +81,17 @@ const schema = (formatMessage: IntlShape['formatMessage']) =>
       firstName: nameValidationSchema.concat(requiredValidationSchema),
       lastName: nameValidationSchema.concat(requiredValidationSchema),
       sexOption: Yup.object()
-        .required(
-          // @ts-ignore
-          formatMessage(globalMessages.validators.required),
-        )
+        .required(formatMessage(validatorsMessages.required))
         .nullable(),
       dobDate: Yup.date()
-        .required(
-          // @ts-ignore
-          formatMessage(globalMessages.validators.required),
-        )
+        .required(formatMessage(validatorsMessages.required))
         .nullable(),
       zipCode: requiredValidationSchema.matches(
         zipCodeRegex,
-        // @ts-ignore
-        formatMessage(globalMessages.validators.zipCode),
+        formatMessage(validatorsMessages.zipCode),
       ),
       phoneTypeOption: Yup.object()
-        .required(
-          // @ts-ignore
-          formatMessage(globalMessages.validators.required),
-        )
+        .required(formatMessage(validatorsMessages.required))
         .nullable(),
     })
     // @ts-ignore
@@ -155,8 +148,7 @@ const HenryFordInitialScreenLayout = ({
   const sexSelectOptions: MutableRefObject<SelectOption<Sex>[]> = useRef(
     Object.values(Sex).map((sex) => ({
       value: sex,
-      // @ts-ignore
-      label: formatMessage(globalMessages.sex[sex]),
+      label: formatMessage(sexMessages[sex]),
     })),
   );
 
@@ -164,8 +156,7 @@ const HenryFordInitialScreenLayout = ({
     useRef(
       Object.values(PhoneType).map((phoneType) => ({
         value: phoneType,
-        // @ts-ignore
-        label: formatMessage(globalMessages.phoneType[phoneType]),
+        label: formatMessage(phoneTypesMessages[phoneType]),
       })),
     );
 

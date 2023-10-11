@@ -14,23 +14,23 @@ export default defineMessages({
     id: `${scope}.yourAnswer`,
     defaultMessage: 'Your answer',
   },
-  [QuestionTypes.INFORMATION.valueOf()]: {
-    id: `${scope}.${QuestionTypes.INFORMATION}`,
+  [QuestionTypes.INFORMATION]: {
+    id: `${scope}.Question::Information`,
     defaultMessage:
       'This screen is only informational, so does not contain any answers',
   },
-  [QuestionTypes.EXTERNAL_LINK.valueOf()]: {
-    id: `${scope}.${QuestionTypes.EXTERNAL_LINK}`,
+  [QuestionTypes.EXTERNAL_LINK]: {
+    id: `${scope}.Question::ExternalLink`,
     defaultMessage:
       'This is an external link screen that does not contain any answers.',
   },
-  [QuestionTypes.FEEDBACK.valueOf()]: {
-    id: `${scope}.${QuestionTypes.FEEDBACK}`,
+  [QuestionTypes.FEEDBACK]: {
+    id: `${scope}.Question::Feedback`,
     defaultMessage:
       'This is a feedback screen that does not contain any answers.',
   },
-  [QuestionTypes.FINISH.valueOf()]: {
-    id: `${scope}.${QuestionTypes.FINISH}`,
+  [QuestionTypes.FINISH]: {
+    id: `${scope}.Question::Finish`,
     defaultMessage:
       'This is a finish screen that does not contain any answers.',
   },

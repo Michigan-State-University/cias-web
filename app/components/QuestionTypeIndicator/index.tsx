@@ -3,7 +3,7 @@ import { useIntl } from 'react-intl';
 
 import { QuestionTypes } from 'models/Session/QuestionTypes';
 import { QuestionTypes as QuestionTypesEnum } from 'models/Question';
-import globalMessages from 'global/i18n/globalMessages';
+import questionTypesMessages from 'global/i18n/questionTypesMessages';
 
 import { colors } from 'theme';
 import StyledCircle from 'components/Circle/StyledCircle';
@@ -42,10 +42,7 @@ const QuestionTypeIndicator = ({
         color={colors.manatee}
         whiteSpace="nowrap"
       >
-        {
-          // @ts-ignore
-          text ?? formatMessage(globalMessages.questionTypes[type])
-        }
+        {text ?? formatMessage(questionTypesMessages[type])}
       </Text>
     </Row>
   );

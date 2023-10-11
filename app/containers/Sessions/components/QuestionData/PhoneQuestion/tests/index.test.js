@@ -16,7 +16,7 @@ import { createTestStore } from 'utils/testUtils/storeUtils';
 import { numberQuestion } from 'models/Session/QuestionTypes';
 import { draft } from 'models/Status/StatusTypes';
 
-import { intlProviderConfig } from 'containers/LanguageProvider';
+import { intlProviderConfig } from 'containers/AppLanguageProvider';
 import PhoneQuestion from '../index';
 
 describe('<PhoneQuestion />', () => {

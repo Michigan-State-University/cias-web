@@ -3,6 +3,7 @@ import { Col } from 'react-grid-system';
 import { IntlShape } from 'react-intl';
 
 import globalMessages from 'global/i18n/globalMessages';
+import sharingFiltersMessages from 'global/i18n/sharingFiltersMessages';
 
 import Select from 'components/Select';
 import { SelectOption } from 'components/Select/types';
@@ -19,7 +20,7 @@ const ShareFilter = ({ formatMessage, onChange, active }: Props) => {
     const filterOptions = Object.values(SharingFilter).map((filter) => ({
       value: filter,
       // @ts-ignore
-      label: formatMessage(globalMessages.sharingFilters[filter]),
+      label: formatMessage(sharingFiltersMessages[filter]),
     }));
     return [
       { value: null, label: formatMessage(globalMessages.allInterventions) },
@@ -31,7 +32,7 @@ const ShareFilter = ({ formatMessage, onChange, active }: Props) => {
     ? {
         value: active,
         // @ts-ignore
-        label: formatMessage(globalMessages.sharingFilters[active]),
+        label: formatMessage(sharingFiltersMessages[active]),
       }
     : null;
 

@@ -12,7 +12,7 @@ import { MemoryRouter, browserHistory } from 'react-router-dom';
 import { Provider } from 'react-redux';
 import configureStore from 'configureStore';
 
-import { intlProviderConfig } from 'containers/LanguageProvider';
+import { intlProviderConfig } from 'containers/AppLanguageProvider';
 
 import { DEFAULT_LOCALE } from 'i18n';
 import RegisterPage from '../index';

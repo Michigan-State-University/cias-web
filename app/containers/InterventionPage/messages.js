@@ -18,8 +18,7 @@ export default defineMessages({
   },
   myInterventionsHelp: {
     id: `${scope}.myInterventionsHelp`,
-    defaultMessage:
-      'Learn more about how your dashboard functions <a href="https://www.cias.app/_files/ugd/afc5c9_e1c45d1820b04cdebb3b56280cdeb1b9.pdf" target="_blank">here</a>. For more help resources, visit <a href="https://www.cias.app/resources" target="_blank">www.cias.app/resources</a>.',
+    defaultMessage: `Learn more about how your dashboard functions <a href='https://www.cias.app/_files/ugd/afc5c9_e1c45d1820b04cdebb3b56280cdeb1b9.pdf' target='_blank'>here</a>. For more help resources, visit <a href='https://www.cias.app/resources' target='_blank'>www.cias.app/resources</a>.`,
   },
   teamName: {
     id: `${scope}.teamName`,

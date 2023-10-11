@@ -1,7 +1,7 @@
 import { createIntl, createIntlCache } from 'react-intl';
 
 import { DEFAULT_LOCALE, translationMessages } from 'i18n';
-import { intlProviderConfig } from 'containers/LanguageProvider';
+import { intlProviderConfig } from 'containers/AppLanguageProvider';
 
 const cache = createIntlCache();
 

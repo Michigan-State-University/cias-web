@@ -227,7 +227,7 @@ function SessionListItem({
                       textAlign="center"
                       validator={variableNameValidator}
                       placeholder={formatMessage(
-                        globalMessages.variables.variableNamePlaceholder,
+                        globalMessages.variableNamePlaceholder,
                       )}
                       value={variable}
                       color={colors.jungleGreen}

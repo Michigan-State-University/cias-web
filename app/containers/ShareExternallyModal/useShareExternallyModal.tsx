@@ -8,6 +8,7 @@ import SelectResearchers, {
 } from 'containers/SelectResearchers';
 
 import messages from './messages';
+import shareExternallyLevelsMessages from './shareExternallyLevelsMessages';
 import { SHARE_EXTERNALLY_MODAL_WIDTH } from './constants';
 import { ShareExternallyLevel } from './types';
 
@@ -26,7 +27,12 @@ export const useShareExternallyModal = (
     ),
     props: {
       title: formatMessage(messages.shareExternally),
-      description: <Markup noWrap content={formatMessage(messages[level])} />,
+      description: (
+        <Markup
+          noWrap
+          content={formatMessage(shareExternallyLevelsMessages[level])}
+        />
+      ),
       width: SHARE_EXTERNALLY_MODAL_WIDTH,
       maxWidth: SHARE_EXTERNALLY_MODAL_WIDTH,
     },

@@ -19,7 +19,7 @@ import { htmlToPlainText } from 'utils/htmlToPlainText';
 import useGet from 'utils/useGet';
 import { getPreviousQuestions } from 'utils/questions';
 
-import animationMessages from 'global/i18n/animationNames';
+import animationsMessages from 'global/i18n/animationsMessages';
 import {
   makeSelectQuestions,
   makeSelectSelectedQuestion,
@@ -44,6 +44,7 @@ import VariableChooser, {
 } from 'containers/VariableChooser';
 
 import messages from '../../messages';
+import feedbackActionsMessages from '../../feedbackActionsMessages';
 import { switchSpeechReflection, updateBlockSettings } from '../../../actions';
 import Reflection from './Reflection';
 import { setUpReflections } from './utils';
@@ -144,7 +145,7 @@ const ReflectionBlock = ({
 
     return animations.map((animation) => ({
       value: animation,
-      label: formatMessage(animationMessages[animation]),
+      label: formatMessage(animationsMessages[animation]),
     }));
   }, [character]);
 
@@ -155,7 +156,7 @@ const ReflectionBlock = ({
 
     return options.map((option) => ({
       value: option,
-      label: formatMessage(messages[option]),
+      label: formatMessage(feedbackActionsMessages[option]),
     }));
   }, [EFeedbackAction]);
 

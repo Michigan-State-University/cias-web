@@ -150,9 +150,7 @@ const SingleQuestion = ({
                     keyboard="tel"
                     placeholder={
                       !isNarratorTab
-                        ? formatMessage(
-                            globalMessages.variables.variableScorePlaceholder,
-                          )
+                        ? formatMessage(globalMessages.variableScorePlaceholder)
                         : ''
                     }
                     value={item.value}
