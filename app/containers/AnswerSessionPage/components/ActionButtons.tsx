@@ -67,11 +67,21 @@ const Component = ({
   const handleContinueButtonClick = () => onContinueClick && onContinueClick();
 
   return (
-    <Row width="100%" my={20} justify="end" align="center" {...containerStyle}>
+    <Row
+      width="100%"
+      my={20}
+      justify="end"
+      align="center"
+      // TODO detect dir
+      dir="rtl"
+      {...containerStyle}
+    >
       {renderSkipQuestionButton && (
         <SkipQuestionButton
           onClick={handleSkipButtonClick}
           disabled={skipQuestionButtonDisabled}
+          // TODO detect dir
+          dir="rtl"
           {...skipButtonStyle}
         />
       )}

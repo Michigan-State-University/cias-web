@@ -13,6 +13,7 @@ const Img = styled.img.attrs((props) => ({
   ${margin};
   ${style};
   ${positioning};
+  ${({ flipHorizontally }) => flipHorizontally && 'transform: scaleX(-1);'}
 `;
 
 Img.propTypes = {

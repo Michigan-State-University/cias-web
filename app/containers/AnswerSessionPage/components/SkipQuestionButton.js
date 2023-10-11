@@ -12,7 +12,7 @@ import Img from 'components/Img';
 
 import messages from '../messages';
 
-const Component = ({ onClick, disabled }) => {
+const Component = ({ onClick, disabled, dir }) => {
   const { formatMessage } = useIntl();
 
   return (
@@ -23,6 +23,7 @@ const Component = ({ onClick, disabled }) => {
         display: 'flex',
         align: 'center',
         gap: 8,
+        dir,
       }}
     >
       <Text color={themeColors.secondary} fontWeight="bold">
@@ -31,7 +32,7 @@ const Component = ({ onClick, disabled }) => {
       <Img
         src={triangleBack}
         alt={formatMessage(messages.skipIconAlt)}
-        transform="scaleX(-1)"
+        flipHorizontally={!dir || dir === 'ltr'}
       />
     </TextButton>
   );
@@ -40,6 +41,7 @@ const Component = ({ onClick, disabled }) => {
 Component.propTypes = {
   onClick: PropTypes.func.isRequired,
   disabled: PropTypes.bool,
+  dir: PropTypes.oneOf(['ltr', 'rtl']),
 };
 
 export const SkipQuestionButton = memo(Component);
