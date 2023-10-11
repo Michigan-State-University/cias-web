@@ -97,7 +97,7 @@ export default defineMessages({
     defaultMessage: 'Remaining characters: {remaining}',
   },
   goBackToModules: {
-    id: `${scope}.backToModules`,
+    id: `${scope}.goBackToModules`,
     defaultMessage: '← Back to modules view',
   },
   goToNextModule: {
