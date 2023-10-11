@@ -28,7 +28,7 @@ import { jsonApiToObject } from 'utils/jsonApiMapper';
 import objectToCamelKebabCase from 'utils/objectToCamelKebabCase';
 
 import { makeSelectLocation } from 'containers/App/selectors';
-import { changeLocale } from 'containers/LanguageProvider/actions';
+import { changeLocale } from 'containers/AppLanguageProvider/actions';
 
 import {
   SUBMIT_ANSWER_REQUEST,

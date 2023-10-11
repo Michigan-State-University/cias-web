@@ -11,7 +11,7 @@ import { interventionReducer } from 'global/reducers/intervention';
 
 import { createTestStore } from 'utils/testUtils/storeUtils';
 
-import { intlProviderConfig } from 'containers/LanguageProvider';
+import { intlProviderConfig } from 'containers/AppLanguageProvider';
 
 import InterventionDetailsPage from '../index';
 

@@ -15,7 +15,7 @@ import { DEFAULT_LOCALE } from 'i18n';
 import { createTestStore } from 'utils/testUtils/storeUtils';
 import { Roles } from 'models/User/RolesManager';
 import { initialState as authState } from 'global/reducers/auth';
-import { intlProviderConfig } from 'containers/LanguageProvider';
+import { intlProviderConfig } from 'containers/AppLanguageProvider';
 import { UserDetails } from '../index';
 
 describe('<UserDetails />', () => {

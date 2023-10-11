@@ -18,7 +18,7 @@ import { Roles } from 'models/User/RolesManager';
 
 import { createTestStore } from 'utils/testUtils/storeUtils';
 
-import { intlProviderConfig } from 'containers/LanguageProvider';
+import { intlProviderConfig } from 'containers/AppLanguageProvider';
 
 import InterventionTile from '../index';
 
