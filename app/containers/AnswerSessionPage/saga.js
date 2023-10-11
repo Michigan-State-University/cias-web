@@ -28,6 +28,7 @@ import { jsonApiToObject } from 'utils/jsonApiMapper';
 import objectToCamelKebabCase from 'utils/objectToCamelKebabCase';
 
 import { makeSelectLocation } from 'containers/App/selectors';
+import { changeLocale } from 'containers/LanguageProvider/actions';
 
 import {
   SUBMIT_ANSWER_REQUEST,
@@ -217,6 +218,8 @@ function* fetchUserSession({ payload: { sessionId } }) {
   try {
     const { data } = yield axios.get(`${requestUrl}?${searchParams}`);
     const userSession = jsonApiToObject(data, 'userSession');
+
+    yield put(changeLocale(userSession.languageCode));
     yield put(fetchUserSessionSuccess(userSession));
   } catch (error) {
     yield put(fetchUserSessionError(error));
@@ -238,6 +241,7 @@ function* createUserSession({ payload: { sessionId } }) {
     );
     const userSession = jsonApiToObject(data, 'userSession');
 
+    yield put(changeLocale(userSession.languageCode));
     yield put(createUserSessionSuccess(userSession));
     yield put(resetPhoneNumberPreview());
     yield put(startSession());
