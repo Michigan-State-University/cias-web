@@ -33,6 +33,7 @@ import {
   fetchInterventionSaga,
   makeSelectInterventionStatus,
   interventionReducer,
+  makeSelectInterventionFixedElementsDirection,
 } from 'global/reducers/intervention';
 import {
   editPhoneNumberQuestionSaga,
@@ -219,6 +220,7 @@ export function AnswerSessionPage({
   saveQuickExitEvent,
   resetAnswerSessionPage,
   fetchPreviousQuestion,
+  fixedElementsDirection,
 }) {
   const { formatMessage } = useIntl();
   const history = useHistory();
@@ -562,6 +564,7 @@ export function AnswerSessionPage({
               mt={isMobile ? 32 : 16}
               align={isMobile ? 'end' : 'center'}
               gap={16}
+              dir={fixedElementsDirection}
             >
               <ScreenBackButton
                 onClick={onBackButtonClick}
@@ -602,7 +605,7 @@ export function AnswerSessionPage({
           )}
 
           {!isNarratorPositionFixed && (
-            <Row align="center" gap={16}>
+            <Row align="center" gap={16} dir={fixedElementsDirection}>
               <ScreenBackButton
                 onClick={onBackButtonClick}
                 disabled={backButtonDisabled}
@@ -970,12 +973,14 @@ AnswerSessionPage.propTypes = {
   resetAnswerSessionPage: PropTypes.func,
   resetAllReducers: PropTypes.func,
   fetchPreviousQuestion: PropTypes.func,
+  fixedElementsDirection: PropTypes.bool,
 };
 
 const mapStateToProps = createStructuredSelector({
   AnswerSessionPage: makeSelectAnswerSessionPage(),
   audioInstance: makeSelectAudioInstance(),
   interventionStatus: makeSelectInterventionStatus(),
+  fixedElementsDirection: makeSelectInterventionFixedElementsDirection(),
 });
 
 const mapDispatchToProps = {

@@ -11,6 +11,7 @@ import { Form, Formik, FormikConfig, FormikProps } from 'formik';
 import * as Yup from 'yup';
 import { IntlShape } from 'react-intl/src/types';
 import { CountryCode } from 'libphonenumber-js/types';
+import { useSelector } from 'react-redux';
 
 import { colors, themeColors } from 'theme';
 
@@ -32,6 +33,8 @@ import {
   nameValidationSchema,
 } from 'utils/validators';
 import { getUTCDateString } from 'utils/dateUtils';
+
+import { makeSelectInterventionFixedElementsDirection } from 'global/reducers/intervention';
 
 import Box from 'components/Box';
 import { SelectOption } from 'components/Select/types';
@@ -139,6 +142,10 @@ const HenryFordInitialScreenLayout = ({
   previewMedicalNumberInput,
 }: Props) => {
   const { formatMessage } = useIntl();
+
+  const fixedElementsDirection = useSelector(
+    makeSelectInterventionFixedElementsDirection(),
+  );
 
   const columnClassMap: ScreenClassMap<number> = {
     xs: 12,
@@ -369,7 +376,7 @@ const HenryFordInitialScreenLayout = ({
                 <ApiErrorMessage error={verifyingError} />
               )}
             {showContinueButton && (
-              <Box>
+              <Box dir={fixedElementsDirection}>
                 <ActionButtons
                   renderContinueButton
                   continueButtonDisabled={!isValid}
