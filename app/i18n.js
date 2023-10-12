@@ -39,7 +39,11 @@ const translationMessages = {
   ar: formatTranslationMessages('ar', arTranslationMessages),
 };
 
+const isAppLanguageSupported = (languageCode) =>
+  appLocales.includes(languageCode);
+
 exports.appLocales = appLocales;
 exports.formatTranslationMessages = formatTranslationMessages;
 exports.translationMessages = translationMessages;
 exports.DEFAULT_LOCALE = DEFAULT_LOCALE;
+exports.isAppLanguageSupported = isAppLanguageSupported;

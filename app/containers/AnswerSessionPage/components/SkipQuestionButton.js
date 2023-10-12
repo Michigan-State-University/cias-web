@@ -1,10 +1,14 @@
 import React, { memo } from 'react';
 import { useIntl } from 'react-intl';
 import PropTypes from 'prop-types';
+import { useSelector } from 'react-redux';
 
 import TriangleForwardIcon from 'assets/svg/triangle-forward.svg';
 
 import { themeColors } from 'theme';
+
+import { makeSelectInterventionFixedElementsDirection } from 'global/reducers/intervention';
+import { LanguageDirection } from 'global/types/locale';
 
 import TextButton from 'components/Button/TextButton';
 import Text from 'components/Text';
@@ -12,8 +16,10 @@ import Img from 'components/Img';
 
 import messages from '../messages';
 
-const Component = ({ onClick, disabled, dir }) => {
+const Component = ({ onClick, disabled }) => {
   const { formatMessage } = useIntl();
+
+  const direction = useSelector(makeSelectInterventionFixedElementsDirection());
 
   return (
     <TextButton
@@ -23,7 +29,6 @@ const Component = ({ onClick, disabled, dir }) => {
         display: 'flex',
         align: 'center',
         gap: 8,
-        dir,
       }}
     >
       <Text color={themeColors.secondary} fontWeight="bold">
@@ -32,7 +37,7 @@ const Component = ({ onClick, disabled, dir }) => {
       <Img
         src={TriangleForwardIcon}
         alt={formatMessage(messages.skipIconAlt)}
-        flipHorizontally={!dir || dir === 'ltr'}
+        flipHorizontal={direction === LanguageDirection.RTL}
       />
     </TextButton>
   );
@@ -41,7 +46,6 @@ const Component = ({ onClick, disabled, dir }) => {
 Component.propTypes = {
   onClick: PropTypes.func.isRequired,
   disabled: PropTypes.bool,
-  dir: PropTypes.oneOf(['ltr', 'rtl']),
 };
 
 export const SkipQuestionButton = memo(Component);

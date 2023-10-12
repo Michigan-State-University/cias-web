@@ -73,7 +73,6 @@ const Component = ({
       justify="end"
       align="center"
       // TODO detect dir
-      dir="rtl"
       {...containerStyle}
     >
       {renderSkipQuestionButton && (
@@ -81,7 +80,6 @@ const Component = ({
           onClick={handleSkipButtonClick}
           disabled={skipQuestionButtonDisabled}
           // TODO detect dir
-          dir="rtl"
           {...skipButtonStyle}
         />
       )}
