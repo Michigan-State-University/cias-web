@@ -17,6 +17,7 @@ import Text from 'components/Text';
 import { TextButton } from 'components/Button';
 
 import { StyledLink } from './styled';
+import { BACK_BUTTON_GAP } from './constants';
 
 export type LinkProps = {
   link: true;
@@ -53,8 +54,7 @@ const BackButton: FC<Props> = ({
         <Img
           src={triangleBack}
           alt="traingle"
-          mr={8}
-          mb={2}
+          marginBlockEnd={2}
           flipHorizontal={direction === LanguageDirection.RTL}
         />
         <Text
@@ -85,6 +85,7 @@ const BackButton: FC<Props> = ({
         display: 'flex',
         align: 'center',
         dir: direction,
+        gap: BACK_BUTTON_GAP,
         ...props,
       }}
     >
