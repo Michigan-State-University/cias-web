@@ -2,7 +2,7 @@ import React, { memo } from 'react';
 import { useIntl } from 'react-intl';
 import PropTypes from 'prop-types';
 
-import triangleBack from 'assets/svg/triangle-back.svg';
+import TriangleForwardIcon from 'assets/svg/triangle-forward.svg';
 
 import { themeColors } from 'theme';
 
@@ -30,7 +30,7 @@ const Component = ({ onClick, disabled, dir }) => {
         {formatMessage(messages.skipQuestion)}
       </Text>
       <Img
-        src={triangleBack}
+        src={TriangleForwardIcon}
         alt={formatMessage(messages.skipIconAlt)}
         flipHorizontally={!dir || dir === 'ltr'}
       />
