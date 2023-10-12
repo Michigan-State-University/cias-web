@@ -7,6 +7,8 @@ import { canEdit } from 'models/Status/statusPermissions';
 
 import { makeSelectIsAdmin, makeSelectUserId } from 'global/reducers/auth';
 
+import { makeSelectUserSessionLanguageCode } from 'containers/AnswerSessionPage/selectors';
+
 import { initialState } from './reducer';
 
 export const selectIntervention = (state) => state.intervention || initialState;
@@ -176,7 +178,9 @@ export const makeSelectPredefinedParticipantById = (id) =>
 export const makeSelectInterventionLanguageCode = () =>
   createSelector(
     selectIntervention,
-    (substate) => substate.intervention?.languageCode,
+    makeSelectUserSessionLanguageCode(),
+    ({ intervention }, userSessionLanguageCode) =>
+      intervention?.languageCode ?? userSessionLanguageCode,
   );
 
 // e.g. back, skip and continue buttons
