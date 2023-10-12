@@ -11,6 +11,7 @@ import { FinishQuestionDTO } from 'models/Question';
 import { useRoleManager } from 'models/User/RolesManager';
 
 import { resetReducer as resetAuthReducer } from 'global/reducers/auth/actions';
+import { makeSelectInterventionFixedElementsDirection } from 'global/reducers/intervention';
 import { RoutePath } from 'global/constants';
 
 import Button, { TextButton } from 'components/Button';
@@ -37,6 +38,10 @@ const FinishScreenLayout = ({ formatMessage, question }: Props) => {
 
   const dispatch = useDispatch();
   const userSession = useSelector(makeSelectUserSession());
+
+  const fixedElementsDirection = useSelector(
+    makeSelectInterventionFixedElementsDirection(),
+  );
 
   const {
     id: userSessionId,
@@ -88,7 +93,7 @@ const FinishScreenLayout = ({ formatMessage, question }: Props) => {
 
   if (isGuestUser) {
     return (
-      <Row mt={50} justify="center" width="100%">
+      <Row mt={50} justify="center" width="100%" dir={fixedElementsDirection}>
         <Button onClick={reloadPage} px={20} width="auto">
           {formatMessage(messages.completeSession)}
         </Button>
@@ -99,7 +104,14 @@ const FinishScreenLayout = ({ formatMessage, question }: Props) => {
 
   if (showModulesButtons)
     return (
-      <Row mt={50} align="center" justify="end" width="100%" gap={15}>
+      <Row
+        mt={50}
+        align="center"
+        justify="end"
+        width="100%"
+        gap={15}
+        dir={fixedElementsDirection}
+      >
         <StyledLink
           to={parametrizeRoutePath(RoutePath.USER_INTERVENTION, {
             userInterventionId,
@@ -130,7 +142,13 @@ const FinishScreenLayout = ({ formatMessage, question }: Props) => {
   };
 
   return (
-    <Row mt={50} justify="center" width="100%" gap={15}>
+    <Row
+      mt={50}
+      justify="center"
+      width="100%"
+      gap={15}
+      dir={fixedElementsDirection}
+    >
       {isPreview && (
         <StyledLink to={sessionMapUrl}>
           <Button onClick={closeOpenerTab} px={20} inverted>
