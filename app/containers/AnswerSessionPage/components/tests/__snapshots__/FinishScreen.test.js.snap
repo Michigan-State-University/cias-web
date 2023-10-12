@@ -46,6 +46,7 @@ exports[`<FinishScreen /> Should render and match the snapshot 1`] = `
 <div>
   <div
     class="c0"
+    dir="ltr"
     width="100%"
   >
     <a
