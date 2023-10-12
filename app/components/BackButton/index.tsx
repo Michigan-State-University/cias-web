@@ -26,7 +26,7 @@ export type LinkProps = {
 };
 
 export type ButtonProps = {
-  link: false;
+  link?: false;
   to?: string;
   onClick: () => void;
   disabled?: boolean;
@@ -71,7 +71,7 @@ const BackButton: FC<Props> = ({
 
   if (link) {
     return (
-      <StyledLink to={to} {...props}>
+      <StyledLink to={to} dir={direction} {...props}>
         {renderContent()}
       </StyledLink>
     );
@@ -84,6 +84,7 @@ const BackButton: FC<Props> = ({
       buttonProps={{
         display: 'flex',
         align: 'center',
+        dir: direction,
         ...props,
       }}
     >

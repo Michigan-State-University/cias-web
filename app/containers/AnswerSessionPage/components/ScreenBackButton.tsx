@@ -31,12 +31,7 @@ const ScreenBackButton: FC<Props> = ({
         visible={disabled}
         text={disabledMessage}
       >
-        <BackButton
-          link={false}
-          disabled={disabled}
-          direction={direction}
-          {...props}
-        >
+        <BackButton disabled={disabled} direction={direction} {...props}>
           {formatMessage(messages.backButton)}
         </BackButton>
       </Tooltip>
