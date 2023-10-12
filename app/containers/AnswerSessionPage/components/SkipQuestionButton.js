@@ -29,6 +29,7 @@ const Component = ({ onClick, disabled }) => {
         display: 'flex',
         align: 'center',
         gap: 8,
+        dir: direction,
       }}
     >
       <Text color={themeColors.secondary} fontWeight="bold">
