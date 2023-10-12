@@ -34,7 +34,7 @@ import {
 } from 'utils/validators';
 import { getUTCDateString } from 'utils/dateUtils';
 
-import { makeSelectInterventionFixedElementsDirection } from 'global/reducers/intervention';
+import { makeSelectInterventionFixedElementsDirection } from 'global/reducers/globalState';
 
 import Box from 'components/Box';
 import { SelectOption } from 'components/Select/types';

@@ -27,13 +27,15 @@ import { DESKTOP_MODE, I_PHONE_8_PLUS_MODE } from 'utils/previewMode';
 import { CHARACTER_FIXED_POSITION_QUESTIONS } from 'utils/characterConstants';
 import LocalStorageService from 'utils/localStorageService';
 
-import { makeSelectAudioInstance } from 'global/reducers/globalState';
+import {
+  makeSelectAudioInstance,
+  makeSelectInterventionFixedElementsDirection,
+} from 'global/reducers/globalState';
 import {
   fetchInterventionRequest,
   fetchInterventionSaga,
   makeSelectInterventionStatus,
   interventionReducer,
-  makeSelectInterventionFixedElementsDirection,
 } from 'global/reducers/intervention';
 import {
   editPhoneNumberQuestionSaga,

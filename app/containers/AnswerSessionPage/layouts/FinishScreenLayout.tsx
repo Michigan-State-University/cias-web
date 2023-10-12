@@ -11,7 +11,7 @@ import { FinishQuestionDTO } from 'models/Question';
 import { useRoleManager } from 'models/User/RolesManager';
 
 import { resetReducer as resetAuthReducer } from 'global/reducers/auth/actions';
-import { makeSelectInterventionFixedElementsDirection } from 'global/reducers/intervention';
+import { makeSelectInterventionFixedElementsDirection } from 'global/reducers/globalState';
 import { RoutePath } from 'global/constants';
 
 import Button, { TextButton } from 'components/Button';

@@ -7,7 +7,7 @@ import TriangleForwardIcon from 'assets/svg/triangle-forward.svg';
 
 import { themeColors } from 'theme';
 
-import { makeSelectInterventionFixedElementsDirection } from 'global/reducers/intervention';
+import { makeSelectInterventionFixedElementsDirection } from 'global/reducers/globalState';
 import { LanguageDirection } from 'global/types/locale';
 
 import TextButton from 'components/Button/TextButton';

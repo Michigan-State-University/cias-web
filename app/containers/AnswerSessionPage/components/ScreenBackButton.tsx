@@ -2,7 +2,7 @@ import React, { FC, memo } from 'react';
 import { useIntl } from 'react-intl';
 import { useSelector } from 'react-redux';
 
-import { makeSelectInterventionFixedElementsDirection } from 'global/reducers/intervention';
+import { makeSelectInterventionFixedElementsDirection } from 'global/reducers/globalState';
 
 import BackButton, { Props as BackButtonProps } from 'components/BackButton';
 import Box from 'components/Box';

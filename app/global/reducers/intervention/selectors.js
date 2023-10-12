@@ -1,13 +1,7 @@
 import { createSelector } from 'reselect';
-import { getLangDir } from 'rtl-detect';
-
-import { DEFAULT_LOCALE, isAppLanguageSupported } from 'i18n';
-
 import { canEdit } from 'models/Status/statusPermissions';
 
 import { makeSelectIsAdmin, makeSelectUserId } from 'global/reducers/auth';
-
-import { makeSelectUserSessionLanguageCode } from 'containers/AnswerSessionPage/selectors';
 
 import { initialState } from './reducer';
 
@@ -178,23 +172,5 @@ export const makeSelectPredefinedParticipantById = (id) =>
 export const makeSelectInterventionLanguageCode = () =>
   createSelector(
     selectIntervention,
-    makeSelectUserSessionLanguageCode(),
-    ({ intervention }, userSessionLanguageCode) =>
-      intervention?.languageCode ?? userSessionLanguageCode,
-  );
-
-// e.g. back, skip and continue buttons
-export const makeSelectInterventionFixedElementsDirection = () =>
-  createSelector(makeSelectInterventionLanguageCode(), (languageCode) =>
-    getLangDir(
-      languageCode && isAppLanguageSupported(languageCode)
-        ? languageCode
-        : DEFAULT_LOCALE,
-    ),
-  );
-
-// e.g. question title and subtitle, answers' labels
-export const makeSelectInterventionDynamicElementsDirection = () =>
-  createSelector(makeSelectInterventionLanguageCode(), (languageCode) =>
-    getLangDir(languageCode ?? DEFAULT_LOCALE),
+    ({ intervention }) => intervention?.languageCode,
   );
