@@ -10,6 +10,8 @@ import triangleBack from 'assets/svg/triangle-back.svg';
 
 import { themeColors } from 'theme';
 
+import { LanguageDirection } from 'global/types/locale';
+
 import Img from 'components/Img';
 import Text from 'components/Text';
 import { TextButton } from 'components/Button';
@@ -31,7 +33,9 @@ export type ButtonProps = {
 };
 
 export type Props = (LinkProps | ButtonProps) &
-  Pick<HTMLAttributes<HTMLParagraphElement>, 'className'>;
+  Pick<HTMLAttributes<HTMLParagraphElement>, 'className'> & {
+    direction?: LanguageDirection;
+  };
 
 const BackButton: FC<Props> = ({
   className,
@@ -40,12 +44,19 @@ const BackButton: FC<Props> = ({
   to,
   onClick,
   disabled,
+  direction,
   ...props
 }) => {
   const renderContent = useCallback(
     () => (
       <>
-        <Img src={triangleBack} alt="traingle" mr={8} mb={2} />
+        <Img
+          src={triangleBack}
+          alt="traingle"
+          mr={8}
+          mb={2}
+          flipHorizontal={direction === LanguageDirection.RTL}
+        />
         <Text
           className={className}
           color={themeColors.secondary}

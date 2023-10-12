@@ -1,5 +1,8 @@
 import React, { FC, memo } from 'react';
 import { useIntl } from 'react-intl';
+import { useSelector } from 'react-redux';
+
+import { makeSelectInterventionFixedElementsDirection } from 'global/reducers/intervention';
 
 import BackButton, { Props as BackButtonProps } from 'components/BackButton';
 import Box from 'components/Box';
@@ -19,6 +22,8 @@ const ScreenBackButton: FC<Props> = ({
 }) => {
   const { formatMessage } = useIntl();
 
+  const direction = useSelector(makeSelectInterventionFixedElementsDirection());
+
   return (
     <Box flexShrink={0}>
       <Tooltip
@@ -26,7 +31,12 @@ const ScreenBackButton: FC<Props> = ({
         visible={disabled}
         text={disabledMessage}
       >
-        <BackButton link={false} disabled={disabled} {...props}>
+        <BackButton
+          link={false}
+          disabled={disabled}
+          direction={direction}
+          {...props}
+        >
           {formatMessage(messages.backButton)}
         </BackButton>
       </Tooltip>
