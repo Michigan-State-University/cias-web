@@ -16,7 +16,10 @@ export type Props = {
   onBack: () => void;
 };
 
-export const BackButton: FC<Props> = ({ invitationType, onBack }) => {
+export const InviteParticipantsModalBackButton: FC<Props> = ({
+  invitationType,
+  onBack,
+}) => {
   const { formatMessage } = useIntl();
 
   return (

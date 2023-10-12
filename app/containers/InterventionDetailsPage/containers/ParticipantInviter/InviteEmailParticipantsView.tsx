@@ -10,7 +10,7 @@ import {
 import Column from 'components/Column';
 import { SelectOption } from 'components/Select/types';
 
-import { BackButton } from './BackButton';
+import { InviteParticipantsModalBackButton } from './InviteParticipantsModalBackButton';
 import {
   NormalizedHealthClinicsInfos,
   ParticipantInvitationType,
@@ -61,7 +61,7 @@ export const InviteEmailParticipantsView: FC<Props> = ({
 
   return (
     <Column flex={1} overflow="auto" gap={24}>
-      <BackButton
+      <InviteParticipantsModalBackButton
         invitationType={ParticipantInvitationType.EMAIL}
         onBack={onBack}
       />
