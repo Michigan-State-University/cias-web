@@ -135,10 +135,15 @@ const RenderQuestionDetails = ({
 
   const isNameScreen = type === QuestionTypes.NAME;
   const isFinishScreen = type === QuestionTypes.FINISH;
+  const isHenryFordInitialScreen = type === QuestionTypes.HENRY_FORD_INITIAL;
   const isTlfbGroup = currentGroupScope?.type === GroupType.TLFB;
   const shouldShowNarrator =
     !!blocks?.length && !HIDE_NARRATOR_QUESTIONS.includes(type);
-  const renderContinueButton = proceedButton && !isTlfbGroup && !isFinishScreen;
+  const renderContinueButton =
+    proceedButton &&
+    !isTlfbGroup &&
+    !isFinishScreen &&
+    !isHenryFordInitialScreen;
 
   const { character, extra_space_for_narrator: extraSpaceForNarrator } =
     narratorSettings;

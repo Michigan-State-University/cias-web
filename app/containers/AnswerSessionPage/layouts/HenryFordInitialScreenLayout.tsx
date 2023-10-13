@@ -124,23 +124,23 @@ const emptyInitialValues: PatientDataFormValues = {
 export type Props = {
   forceMobile?: boolean;
   disabled?: boolean;
-  showContinueButton?: boolean;
   onSubmitPatientData?: (patientData: HfhsPatientData) => void;
   verifying?: boolean;
   verifyingError?: Nullable<ApiMessageError>;
   hfhsPatientDetail?: Nullable<HfhsPatientDetail>;
   previewMedicalNumberInput?: boolean;
+  continueButtonDisabled?: boolean;
 };
 
 const HenryFordInitialScreenLayout = ({
   forceMobile,
   disabled,
-  showContinueButton,
   onSubmitPatientData,
   verifying = false,
   verifyingError,
   hfhsPatientDetail,
   previewMedicalNumberInput,
+  continueButtonDisabled,
 }: Props) => {
   const { formatMessage } = useIntl();
 
@@ -376,19 +376,17 @@ const HenryFordInitialScreenLayout = ({
               formError === PatientDataFormError.MRN_VERIFICATION && (
                 <ApiErrorMessage error={verifyingError} />
               )}
-            {showContinueButton && (
-              <Box dir={fixedElementsDirection}>
-                <ActionButtons
-                  questionRequired
-                  questionType={QuestionTypes.HENRY_FORD_INITIAL}
-                  isCatMhSession={false}
-                  renderContinueButton
-                  continueButtonDisabled={!isValid}
-                  continueButtonLoading={verifying}
-                  onContinueClick={handleSubmit}
-                />
-              </Box>
-            )}
+            <Box dir={fixedElementsDirection}>
+              <ActionButtons
+                questionRequired
+                questionType={QuestionTypes.HENRY_FORD_INITIAL}
+                isCatMhSession={false}
+                renderContinueButton
+                continueButtonDisabled={!isValid || continueButtonDisabled}
+                continueButtonLoading={verifying}
+                onContinueClick={handleSubmit}
+              />
+            </Box>
           </Box>
         </Form>
       )}
