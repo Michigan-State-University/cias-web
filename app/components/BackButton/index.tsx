@@ -29,7 +29,7 @@ export type LinkProps = {
 export type ButtonProps = {
   link?: false;
   to?: string;
-  onClick: () => void;
+  onClick?: () => void;
   disabled?: boolean;
 };
 

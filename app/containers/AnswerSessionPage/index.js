@@ -110,7 +110,6 @@ import {
 } from './actions';
 import BranchingScreen from './components/BranchingScreen';
 import {
-  NOT_SKIPPABLE_QUESTIONS,
   FULL_SIZE_QUESTIONS,
   CONFIRMABLE_QUESTIONS,
   NO_CONTINUE_BUTTON_QUESTIONS,
@@ -510,12 +509,6 @@ export function AnswerSessionPage({
 
     const canSkipNarrator = narratorSkippable || !isAnimationOngoing;
 
-    const shouldRenderSkipQuestionButton =
-      !required &&
-      !isCatMhSession &&
-      !isLastScreen &&
-      !NOT_SKIPPABLE_QUESTIONS.includes(type);
-
     const shouldRenderContinueButton =
       (isNullOrUndefined(proceedButton) || proceedButton) &&
       canSkipNarrator &&
@@ -583,7 +576,9 @@ export function AnswerSessionPage({
                 audioInstance={audioInstance}
               >
                 <ActionButtons
-                  renderSkipQuestionButton={shouldRenderSkipQuestionButton}
+                  questionType={type}
+                  questionRequired={required}
+                  isCatMhSession={isCatMhSession}
                   skipQuestionButtonDisabled={continueButtonLoading}
                   onSkipQuestionClick={() => setSkipQuestionModalVisible(true)}
                   renderContinueButton={shouldRenderContinueButton}
@@ -614,7 +609,9 @@ export function AnswerSessionPage({
                 disabledMessage={backButtonDisabledMessage()}
               />
               <ActionButtons
-                renderSkipQuestionButton={shouldRenderSkipQuestionButton}
+                questionType={type}
+                questionRequired={required}
+                isCatMhSession={isCatMhSession}
                 skipQuestionButtonDisabled={continueButtonLoading}
                 onSkipQuestionClick={() => setSkipQuestionModalVisible(true)}
                 renderContinueButton={shouldRenderContinueButton}

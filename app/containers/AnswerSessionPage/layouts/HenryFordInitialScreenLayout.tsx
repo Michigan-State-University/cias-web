@@ -29,8 +29,8 @@ import {
 import { ApiMessageError } from 'models/Api';
 
 import {
-  requiredValidationSchema,
   nameValidationSchema,
+  requiredValidationSchema,
 } from 'utils/validators';
 import { getUTCDateString } from 'utils/dateUtils';
 
@@ -44,15 +44,16 @@ import FormikDatePicker from 'components/FormikDatePicker';
 import Text from 'components/Text';
 import { HelpIconTooltip } from 'components/HelpIconTooltip';
 import {
+  DEFAULT_COUNTRY_CODE,
   FormikPhoneNumberInput,
   phoneNumberSchema,
-  DEFAULT_COUNTRY_CODE,
 } from 'components/FormikPhoneNumberInput';
 
 import { formatPhoneNumberForHfhs, parsePhoneNumberFromHfhs } from '../utils';
 import { ActionButtons } from '../components/ActionButtons';
 import { ApiErrorMessage } from '../components/ApiErrorMessage';
 import messages from './messages';
+import { QuestionTypes } from '../../../models/Question';
 
 const inputStyles = {
   width: '100%',
@@ -378,6 +379,9 @@ const HenryFordInitialScreenLayout = ({
             {showContinueButton && (
               <Box dir={fixedElementsDirection}>
                 <ActionButtons
+                  questionRequired
+                  questionType={QuestionTypes.HENRY_FORD_INITIAL}
+                  isCatMhSession={false}
                   renderContinueButton
                   continueButtonDisabled={!isValid}
                   continueButtonLoading={verifying}
