@@ -57,7 +57,7 @@ Our goal is for cost to never be a barrier. This code is available to anyone at 
 
 ## Install & Start
 
-<span style="color:red">This is a frontend package only. For CIAS to work, you need the backend package too.</span> You can find it on GitHub [here](https://github.com/Michigan-State-University/cias-api#readme). Follow the instructions there to set up the backend project first.
+### <span style="color:red">This is a frontend package only. For CIAS to work, you need the backend package too.</span> You can find it on GitHub [here](https://github.com/Michigan-State-University/cias-api#readme). Follow the instructions there to set up the backend project first.
 
 ### Requirements:
 
