@@ -152,6 +152,7 @@ exports[`<TextboxQuestion /> Should render and match the snapshot 1`] = `
           <textarea
             aria-label="Respondent answer goes here..."
             class="c5"
+            dir="auto"
             disabled=""
             height="auto"
             placeholder="Respondent answer goes here..."

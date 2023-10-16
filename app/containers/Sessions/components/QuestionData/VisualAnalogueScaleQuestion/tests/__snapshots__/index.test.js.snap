@@ -183,6 +183,7 @@ exports[`<VisualAnalogueScaleQuestion /> Should render and match the snapshot 1`
             <input
               class="c6 c7"
               color="#B727EA"
+              dir="auto"
               disabled=""
               type="text"
               value=""
@@ -191,6 +192,7 @@ exports[`<VisualAnalogueScaleQuestion /> Should render and match the snapshot 1`
             <input
               class="c6 c7"
               color="#B727EA"
+              dir="auto"
               disabled=""
               type="text"
               value=""

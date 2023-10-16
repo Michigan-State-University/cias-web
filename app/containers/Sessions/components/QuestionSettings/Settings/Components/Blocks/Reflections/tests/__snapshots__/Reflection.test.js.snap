@@ -177,6 +177,7 @@ exports[`<Reflection /> Should render and match the snapshot 1`] = `
                 aria-label="Enter speech here..."
                 class="c6"
                 data-cy="text-area"
+                dir="auto"
                 height="auto"
                 placeholder="Enter speech here..."
                 rows="10"

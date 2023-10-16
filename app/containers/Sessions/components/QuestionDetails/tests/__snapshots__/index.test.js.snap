@@ -672,6 +672,7 @@ exports[`<QuestionDetails /> should match the snapshot 1`] = `
           <input
             aria-label="Group placeholder"
             class="c4"
+            dir="auto"
             font-size="18"
             font-weight="bold"
             placeholder="Group placeholder"
@@ -2162,6 +2163,115 @@ exports[`<QuestionDetails /> should match the snapshot 1`] = `
                                         />
                                       </select>
                                     </span>
+                                    <span
+                                      class="ql-formats"
+                                    >
+                                      <button
+                                        class="ql-align"
+                                        type="button"
+                                        value=""
+                                      >
+                                        <svg
+                                          viewBox="0 0 18 18"
+                                        >
+                                           
+                                          <line
+                                            class="ql-stroke"
+                                            x1="3"
+                                            x2="15"
+                                            y1="9"
+                                            y2="9"
+                                          />
+                                           
+                                          <line
+                                            class="ql-stroke"
+                                            x1="3"
+                                            x2="13"
+                                            y1="14"
+                                            y2="14"
+                                          />
+                                           
+                                          <line
+                                            class="ql-stroke"
+                                            x1="3"
+                                            x2="9"
+                                            y1="4"
+                                            y2="4"
+                                          />
+                                           
+                                        </svg>
+                                      </button>
+                                      <button
+                                        class="ql-align"
+                                        type="button"
+                                        value="center"
+                                      >
+                                        <svg
+                                          viewBox="0 0 18 18"
+                                        >
+                                           
+                                          <line
+                                            class="ql-stroke"
+                                            x1="15"
+                                            x2="3"
+                                            y1="9"
+                                            y2="9"
+                                          />
+                                           
+                                          <line
+                                            class="ql-stroke"
+                                            x1="14"
+                                            x2="4"
+                                            y1="14"
+                                            y2="14"
+                                          />
+                                           
+                                          <line
+                                            class="ql-stroke"
+                                            x1="12"
+                                            x2="6"
+                                            y1="4"
+                                            y2="4"
+                                          />
+                                           
+                                        </svg>
+                                      </button>
+                                      <button
+                                        class="ql-align"
+                                        type="button"
+                                        value="right"
+                                      >
+                                        <svg
+                                          viewBox="0 0 18 18"
+                                        >
+                                           
+                                          <line
+                                            class="ql-stroke"
+                                            x1="15"
+                                            x2="3"
+                                            y1="9"
+                                            y2="9"
+                                          />
+                                           
+                                          <line
+                                            class="ql-stroke"
+                                            x1="15"
+                                            x2="5"
+                                            y1="14"
+                                            y2="14"
+                                          />
+                                           
+                                          <line
+                                            class="ql-stroke"
+                                            x1="15"
+                                            x2="9"
+                                            y1="4"
+                                            y2="4"
+                                          />
+                                           
+                                        </svg>
+                                      </button>
+                                    </span>
                                   </div>
                                 </div>
                               </div>
@@ -3580,6 +3690,115 @@ exports[`<QuestionDetails /> should match the snapshot 1`] = `
                                         />
                                       </select>
                                     </span>
+                                    <span
+                                      class="ql-formats"
+                                    >
+                                      <button
+                                        class="ql-align"
+                                        type="button"
+                                        value=""
+                                      >
+                                        <svg
+                                          viewBox="0 0 18 18"
+                                        >
+                                           
+                                          <line
+                                            class="ql-stroke"
+                                            x1="3"
+                                            x2="15"
+                                            y1="9"
+                                            y2="9"
+                                          />
+                                           
+                                          <line
+                                            class="ql-stroke"
+                                            x1="3"
+                                            x2="13"
+                                            y1="14"
+                                            y2="14"
+                                          />
+                                           
+                                          <line
+                                            class="ql-stroke"
+                                            x1="3"
+                                            x2="9"
+                                            y1="4"
+                                            y2="4"
+                                          />
+                                           
+                                        </svg>
+                                      </button>
+                                      <button
+                                        class="ql-align"
+                                        type="button"
+                                        value="center"
+                                      >
+                                        <svg
+                                          viewBox="0 0 18 18"
+                                        >
+                                           
+                                          <line
+                                            class="ql-stroke"
+                                            x1="15"
+                                            x2="3"
+                                            y1="9"
+                                            y2="9"
+                                          />
+                                           
+                                          <line
+                                            class="ql-stroke"
+                                            x1="14"
+                                            x2="4"
+                                            y1="14"
+                                            y2="14"
+                                          />
+                                           
+                                          <line
+                                            class="ql-stroke"
+                                            x1="12"
+                                            x2="6"
+                                            y1="4"
+                                            y2="4"
+                                          />
+                                           
+                                        </svg>
+                                      </button>
+                                      <button
+                                        class="ql-align"
+                                        type="button"
+                                        value="right"
+                                      >
+                                        <svg
+                                          viewBox="0 0 18 18"
+                                        >
+                                           
+                                          <line
+                                            class="ql-stroke"
+                                            x1="15"
+                                            x2="3"
+                                            y1="9"
+                                            y2="9"
+                                          />
+                                           
+                                          <line
+                                            class="ql-stroke"
+                                            x1="15"
+                                            x2="5"
+                                            y1="14"
+                                            y2="14"
+                                          />
+                                           
+                                          <line
+                                            class="ql-stroke"
+                                            x1="15"
+                                            x2="9"
+                                            y1="4"
+                                            y2="4"
+                                          />
+                                           
+                                        </svg>
+                                      </button>
+                                    </span>
                                   </div>
                                 </div>
                               </div>
@@ -3606,6 +3825,7 @@ exports[`<QuestionDetails /> should match the snapshot 1`] = `
                       autocomplete="off"
                       class="c22 c23"
                       color="#107969"
+                      dir="auto"
                       name="notASearchField-Variable name..."
                       placeholder="Variable name..."
                       type="tel"
@@ -3641,6 +3861,7 @@ exports[`<QuestionDetails /> should match the snapshot 1`] = `
                             <input
                               aria-labelledby="question-title question-subtitle"
                               class="c26"
+                              dir="auto"
                               disabled=""
                               height="50"
                               placeholder="ex: 1, 2, 100"

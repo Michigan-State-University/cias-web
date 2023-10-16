@@ -1532,6 +1532,115 @@ exports[`<QuestionTitle /> Should render and match the snapshot 1`] = `
                           />
                         </select>
                       </span>
+                      <span
+                        class="ql-formats"
+                      >
+                        <button
+                          class="ql-align"
+                          type="button"
+                          value=""
+                        >
+                          <svg
+                            viewBox="0 0 18 18"
+                          >
+                             
+                            <line
+                              class="ql-stroke"
+                              x1="3"
+                              x2="15"
+                              y1="9"
+                              y2="9"
+                            />
+                             
+                            <line
+                              class="ql-stroke"
+                              x1="3"
+                              x2="13"
+                              y1="14"
+                              y2="14"
+                            />
+                             
+                            <line
+                              class="ql-stroke"
+                              x1="3"
+                              x2="9"
+                              y1="4"
+                              y2="4"
+                            />
+                             
+                          </svg>
+                        </button>
+                        <button
+                          class="ql-align"
+                          type="button"
+                          value="center"
+                        >
+                          <svg
+                            viewBox="0 0 18 18"
+                          >
+                             
+                            <line
+                              class="ql-stroke"
+                              x1="15"
+                              x2="3"
+                              y1="9"
+                              y2="9"
+                            />
+                             
+                            <line
+                              class="ql-stroke"
+                              x1="14"
+                              x2="4"
+                              y1="14"
+                              y2="14"
+                            />
+                             
+                            <line
+                              class="ql-stroke"
+                              x1="12"
+                              x2="6"
+                              y1="4"
+                              y2="4"
+                            />
+                             
+                          </svg>
+                        </button>
+                        <button
+                          class="ql-align"
+                          type="button"
+                          value="right"
+                        >
+                          <svg
+                            viewBox="0 0 18 18"
+                          >
+                             
+                            <line
+                              class="ql-stroke"
+                              x1="15"
+                              x2="3"
+                              y1="9"
+                              y2="9"
+                            />
+                             
+                            <line
+                              class="ql-stroke"
+                              x1="15"
+                              x2="5"
+                              y1="14"
+                              y2="14"
+                            />
+                             
+                            <line
+                              class="ql-stroke"
+                              x1="15"
+                              x2="9"
+                              y1="4"
+                              y2="4"
+                            />
+                             
+                          </svg>
+                        </button>
+                      </span>
                     </div>
                   </div>
                 </div>

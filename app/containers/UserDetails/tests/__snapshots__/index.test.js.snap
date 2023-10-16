@@ -796,6 +796,7 @@ exports[`<UserDetails /> Should render and match the snapshot 1`] = `
                 >
                   <input
                     class="c27"
+                    dir="auto"
                     height="46"
                     id="firstName"
                     name="firstName"
@@ -826,6 +827,7 @@ exports[`<UserDetails /> Should render and match the snapshot 1`] = `
                 >
                   <input
                     class="c27"
+                    dir="auto"
                     height="46"
                     id="lastName"
                     name="lastName"
@@ -978,6 +980,7 @@ exports[`<UserDetails /> Should render and match the snapshot 1`] = `
                       </label>
                       <input
                         class="c38"
+                        dir="auto"
                         disabled=""
                         id="number"
                         name="number"

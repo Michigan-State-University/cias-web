@@ -491,6 +491,7 @@ exports[`<LoginPage /> Should render and match the snapshot 1`] = `
             >
               <input
                 class="c15"
+                dir="auto"
                 height="46"
                 id="email"
                 name="email"
@@ -532,6 +533,7 @@ exports[`<LoginPage /> Should render and match the snapshot 1`] = `
             >
               <input
                 class="c15"
+                dir="auto"
                 height="46"
                 id="password"
                 name="password"

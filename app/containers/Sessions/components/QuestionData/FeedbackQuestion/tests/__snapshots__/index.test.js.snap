@@ -258,6 +258,7 @@ exports[`<FeedbackQuestion /> Should render and match the snapshot 1`] = `
                   <input
                     aria-label="Least"
                     class="c9"
+                    dir="auto"
                     placeholder="Least"
                     type="text"
                     value="0"
@@ -276,6 +277,7 @@ exports[`<FeedbackQuestion /> Should render and match the snapshot 1`] = `
                   <input
                     aria-label="Most"
                     class="c9"
+                    dir="auto"
                     placeholder="Most"
                     type="text"
                     value="100"

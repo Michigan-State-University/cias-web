@@ -1045,6 +1045,7 @@ exports[`<UserList /> Should render and match the snapshot - admin 1`] = `
                 <input
                   aria-label="Filter users by name"
                   class="c23"
+                  dir="auto"
                   placeholder="Filter by name"
                   type="text"
                   width="100%"
@@ -2390,6 +2391,7 @@ exports[`<UserList /> Should render and match the snapshot - researcher 1`] = `
                 <input
                   aria-label="Filter users by name"
                   class="c22"
+                  dir="auto"
                   placeholder="Filter by name"
                   type="text"
                   width="100%"

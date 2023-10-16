@@ -1451,6 +1451,7 @@ exports[`<AnswerSessionPage /> Should render and match the snapshot 1`] = `
                         <input
                           aria-label="Filter Interventions by name"
                           class="c60"
+                          dir="auto"
                           placeholder="Filter by name"
                           type="text"
                           width="100%"

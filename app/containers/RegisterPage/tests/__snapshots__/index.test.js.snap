@@ -558,6 +558,7 @@ exports[`<RegisterPage /> Should render and match the researcher 1`] = `
               >
                 <input
                   class="c16"
+                  dir="auto"
                   height="46"
                   id="firstName"
                   name="firstName"
@@ -594,6 +595,7 @@ exports[`<RegisterPage /> Should render and match the researcher 1`] = `
               >
                 <input
                   class="c16"
+                  dir="auto"
                   height="46"
                   id="lastName"
                   name="lastName"
@@ -631,6 +633,7 @@ exports[`<RegisterPage /> Should render and match the researcher 1`] = `
             >
               <input
                 class="c18"
+                dir="auto"
                 disabled=""
                 height="46"
                 id="email"
@@ -668,6 +671,7 @@ exports[`<RegisterPage /> Should render and match the researcher 1`] = `
             >
               <input
                 class="c16"
+                dir="auto"
                 height="46"
                 id="password"
                 name="password"
@@ -704,6 +708,7 @@ exports[`<RegisterPage /> Should render and match the researcher 1`] = `
             >
               <input
                 class="c16"
+                dir="auto"
                 height="46"
                 id="passwordConfirmation"
                 name="passwordConfirmation"
@@ -1326,6 +1331,7 @@ exports[`<RegisterPage /> Should render and match the snapshot for participant 1
               >
                 <input
                   class="c16"
+                  dir="auto"
                   height="46"
                   id="firstName"
                   name="firstName"
@@ -1362,6 +1368,7 @@ exports[`<RegisterPage /> Should render and match the snapshot for participant 1
               >
                 <input
                   class="c16"
+                  dir="auto"
                   height="46"
                   id="lastName"
                   name="lastName"
@@ -1399,6 +1406,7 @@ exports[`<RegisterPage /> Should render and match the snapshot for participant 1
             >
               <input
                 class="c16"
+                dir="auto"
                 height="46"
                 id="email"
                 name="email"
@@ -1435,6 +1443,7 @@ exports[`<RegisterPage /> Should render and match the snapshot for participant 1
             >
               <input
                 class="c16"
+                dir="auto"
                 height="46"
                 id="password"
                 name="password"
@@ -1471,6 +1480,7 @@ exports[`<RegisterPage /> Should render and match the snapshot for participant 1
             >
               <input
                 class="c16"
+                dir="auto"
                 height="46"
                 id="passwordConfirmation"
                 name="passwordConfirmation"
