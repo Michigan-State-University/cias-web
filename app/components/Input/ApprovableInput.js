@@ -28,6 +28,7 @@ const quillModules = {
       [{ script: 'sub' }, { script: 'super' }],
       [{ header: 1 }, { header: 2 }],
       [{ color: [] }, { background: [] }],
+      [{ align: '' }, { align: 'center' }, { align: 'right' }],
     ],
     handlers: {
       link(value) {
