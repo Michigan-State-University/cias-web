@@ -139,6 +139,7 @@ const RenderQuestionDetails = ({
   const isTlfbGroup = currentGroupScope?.type === GroupType.TLFB;
   const shouldShowNarrator =
     !!blocks?.length && !HIDE_NARRATOR_QUESTIONS.includes(type);
+  const renderBackButton = !isTlfbGroup;
   const renderContinueButton =
     proceedButton &&
     !isTlfbGroup &&
@@ -261,7 +262,7 @@ const RenderQuestionDetails = ({
                 </Row>
 
                 <Row align="center" gap={16} dir={fixedElementsDirection}>
-                  <ScreenBackButton disabled />
+                  {renderBackButton && <ScreenBackButton disabled />}
                   <ActionButtons
                     questionType={type}
                     questionRequired={required}
