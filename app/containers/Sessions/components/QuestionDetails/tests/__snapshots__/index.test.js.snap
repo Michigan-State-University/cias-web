@@ -115,6 +115,51 @@ exports[`<QuestionDetails /> should match the snapshot 1`] = `
   display: flex;
 }
 
+.c28 {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-flex-direction: row;
+  -ms-flex-direction: row;
+  flex-direction: row;
+  height: auto;
+  -webkit-align-content: center;
+  -ms-flex-line-pack: center;
+  align-content: center;
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  gap: 16px;
+}
+
+.c34 {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-flex-direction: row;
+  -ms-flex-direction: row;
+  flex-direction: row;
+  height: auto;
+  -webkit-box-pack: end;
+  -webkit-justify-content: flex-end;
+  -ms-flex-pack: end;
+  justify-content: flex-end;
+  justify-items: flex-end;
+  -webkit-align-content: center;
+  -ms-flex-line-pack: center;
+  align-content: center;
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  margin-top: 20px;
+  margin-bottom: 20px;
+  width: 100%;
+}
+
 .c0 {
   width: auto;
   height: auto;
@@ -212,15 +257,33 @@ exports[`<QuestionDetails /> should match the snapshot 1`] = `
   color: unset;
 }
 
-.c28 {
+.c29 {
   width: auto;
   height: auto;
   display: block;
   border-radius: 5px;
-  margin-top: 20px;
-  margin-bottom: 20px;
-  margin-left: 26px;
+  -webkit-flex-shrink: 0;
+  -ms-flex-negative: 0;
+  flex-shrink: 0;
   color: unset;
+}
+
+.c30 {
+  width: auto;
+  height: auto;
+  display: block;
+  border-radius: 5px;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  color: unset;
+}
+
+.c32 {
+  width: auto;
+  height: auto;
+  margin-block-end: 2px;
 }
 
 .c27 {
@@ -231,6 +294,15 @@ exports[`<QuestionDetails /> should match the snapshot 1`] = `
   font-size: 13px;
   color: rgba(107,112,124,1);
   color: rgba(107,112,124,1);
+}
+
+.c33 {
+  font-family: DM Sans;
+  font-size: 13px;
+  line-height: 130%;
+  font-weight: 700;
+  color: rgba(183,39,234,1);
+  color: rgba(183,39,234,1);
 }
 
 .c2 {
@@ -267,7 +339,7 @@ exports[`<QuestionDetails /> should match the snapshot 1`] = `
   width: 100%;
 }
 
-.c29 {
+.c35 {
   width: 100%;
   height: 40px;
   border-radius: 100px;
@@ -281,7 +353,35 @@ exports[`<QuestionDetails /> should match the snapshot 1`] = `
   background-color: #9AA1B6;
   -webkit-transition: background-color 300ms ease,color 300ms ease,border 300ms ease;
   transition: background-color 300ms ease,color 300ms ease,border 300ms ease;
+  margin: 20px;
   width: 120px;
+}
+
+.c31 {
+  outline: none;
+  border: none;
+  background: transparent;
+  font-weight: bold;
+  font-size: 13px;
+  line-height: 17px;
+  padding: 2px;
+  cursor: not-allowed;
+  opacity: 0.7;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  font-weight: 700;
+  color: #2F3850;
+  -webkit-align-content: center;
+  -ms-flex-line-pack: center;
+  align-content: center;
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  gap: 8px;
+  opacity: 0.5;
 }
 
 .c9 {
@@ -3564,16 +3664,60 @@ exports[`<QuestionDetails /> should match the snapshot 1`] = `
               </div>
               <div
                 class="c28"
+                dir="ltr"
               >
-                <button
+                <div
                   class="c29"
-                  color="primary"
-                  disabled=""
-                  radius="100px"
-                  width="120"
                 >
-                  Continue
-                </button>
+                  <div
+                    class="c30"
+                    display="flex"
+                  >
+                    <div
+                      class="c14"
+                      data-for="back-button-tooltip-id"
+                      data-tip=""
+                    >
+                      <div>
+                        <button
+                          class="c31"
+                          dir="ltr"
+                          disabled=""
+                          display="flex"
+                          font-weight="bold"
+                        >
+                          <img
+                            alt="traingle"
+                            class="c32"
+                            src="IMAGE_MOCK"
+                          />
+                          <p
+                            class="c33"
+                            color="#B727EA"
+                            font-weight="bold"
+                          >
+                            Back
+                          </p>
+                        </button>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div
+                  class="c34"
+                  width="100%"
+                >
+                  <button
+                    class="c35"
+                    color="primary"
+                    data-cy="continue-button"
+                    disabled=""
+                    radius="100px"
+                    width="120"
+                  >
+                    Continue
+                  </button>
+                </div>
               </div>
               <span
                 style="display: table; clear: both;"

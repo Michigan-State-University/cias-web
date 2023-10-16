@@ -1,6 +1,6 @@
 import produce from 'immer';
 
-import { DEFAULT_LOCALE } from 'i18n';
+import { DEFAULT_LOCALE, isAppLanguageSupported } from 'i18n';
 
 import { CHANGE_LOCALE } from './constants';
 
@@ -13,7 +13,8 @@ const appLanguageProviderReducer = (state = initialState, action) =>
   produce(state, (draft) => {
     switch (action.type) {
       case CHANGE_LOCALE:
-        draft.locale = action.locale;
+        const { locale } = action;
+        draft.locale = isAppLanguageSupported(locale) ? locale : DEFAULT_LOCALE;
         break;
     }
   });

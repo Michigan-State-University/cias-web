@@ -14,7 +14,7 @@ import Column from 'components/Column';
 import { SelectOption } from 'components/Select/types';
 import { Alert } from 'components/Alert';
 
-import { BackButton } from './BackButton';
+import { InviteParticipantsModalBackButton } from './InviteParticipantsModalBackButton';
 import {
   InviteParticipantModalView,
   InviteParticipantModalViewState,
@@ -67,7 +67,7 @@ export const CreatePredefinedParticipantView: FC<Props> = ({
 
   return (
     <Column flex={1} overflow="auto" gap={24}>
-      <BackButton
+      <InviteParticipantsModalBackButton
         invitationType={ParticipantInvitationType.PREDEFINED}
         onBack={onBack}
       />

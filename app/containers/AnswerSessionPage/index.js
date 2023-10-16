@@ -27,7 +27,10 @@ import { DESKTOP_MODE, I_PHONE_8_PLUS_MODE } from 'utils/previewMode';
 import { CHARACTER_FIXED_POSITION_QUESTIONS } from 'utils/characterConstants';
 import LocalStorageService from 'utils/localStorageService';
 
-import { makeSelectAudioInstance } from 'global/reducers/globalState';
+import {
+  makeSelectAudioInstance,
+  makeSelectInterventionFixedElementsDirection,
+} from 'global/reducers/globalState';
 import {
   fetchInterventionRequest,
   fetchInterventionSaga,
@@ -107,7 +110,6 @@ import {
 } from './actions';
 import BranchingScreen from './components/BranchingScreen';
 import {
-  NOT_SKIPPABLE_QUESTIONS,
   FULL_SIZE_QUESTIONS,
   CONFIRMABLE_QUESTIONS,
   NO_CONTINUE_BUTTON_QUESTIONS,
@@ -219,6 +221,7 @@ export function AnswerSessionPage({
   saveQuickExitEvent,
   resetAnswerSessionPage,
   fetchPreviousQuestion,
+  fixedElementsDirection,
 }) {
   const { formatMessage } = useIntl();
   const history = useHistory();
@@ -506,12 +509,6 @@ export function AnswerSessionPage({
 
     const canSkipNarrator = narratorSkippable || !isAnimationOngoing;
 
-    const shouldRenderSkipQuestionButton =
-      !required &&
-      !isCatMhSession &&
-      !isLastScreen &&
-      !NOT_SKIPPABLE_QUESTIONS.includes(type);
-
     const shouldRenderContinueButton =
       (isNullOrUndefined(proceedButton) || proceedButton) &&
       canSkipNarrator &&
@@ -562,6 +559,7 @@ export function AnswerSessionPage({
               mt={isMobile ? 32 : 16}
               align={isMobile ? 'end' : 'center'}
               gap={16}
+              dir={fixedElementsDirection}
             >
               <ScreenBackButton
                 onClick={onBackButtonClick}
@@ -578,7 +576,9 @@ export function AnswerSessionPage({
                 audioInstance={audioInstance}
               >
                 <ActionButtons
-                  renderSkipQuestionButton={shouldRenderSkipQuestionButton}
+                  questionType={type}
+                  questionRequired={required}
+                  isCatMhSession={isCatMhSession}
                   skipQuestionButtonDisabled={continueButtonLoading}
                   onSkipQuestionClick={() => setSkipQuestionModalVisible(true)}
                   renderContinueButton={shouldRenderContinueButton}
@@ -602,14 +602,16 @@ export function AnswerSessionPage({
           )}
 
           {!isNarratorPositionFixed && (
-            <Row align="center" gap={16}>
+            <Row align="center" gap={16} dir={fixedElementsDirection}>
               <ScreenBackButton
                 onClick={onBackButtonClick}
                 disabled={backButtonDisabled}
                 disabledMessage={backButtonDisabledMessage()}
               />
               <ActionButtons
-                renderSkipQuestionButton={shouldRenderSkipQuestionButton}
+                questionType={type}
+                questionRequired={required}
+                isCatMhSession={isCatMhSession}
                 skipQuestionButtonDisabled={continueButtonLoading}
                 onSkipQuestionClick={() => setSkipQuestionModalVisible(true)}
                 renderContinueButton={shouldRenderContinueButton}
@@ -970,12 +972,14 @@ AnswerSessionPage.propTypes = {
   resetAnswerSessionPage: PropTypes.func,
   resetAllReducers: PropTypes.func,
   fetchPreviousQuestion: PropTypes.func,
+  fixedElementsDirection: PropTypes.bool,
 };
 
 const mapStateToProps = createStructuredSelector({
   AnswerSessionPage: makeSelectAnswerSessionPage(),
   audioInstance: makeSelectAudioInstance(),
   interventionStatus: makeSelectInterventionStatus(),
+  fixedElementsDirection: makeSelectInterventionFixedElementsDirection(),
 });
 
 const mapDispatchToProps = {

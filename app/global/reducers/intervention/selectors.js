@@ -1,5 +1,4 @@
 import { createSelector } from 'reselect';
-
 import { canEdit } from 'models/Status/statusPermissions';
 
 import { makeSelectIsAdmin, makeSelectUserId } from 'global/reducers/auth';
@@ -173,5 +172,5 @@ export const makeSelectPredefinedParticipantById = (id) =>
 export const makeSelectInterventionLanguageCode = () =>
   createSelector(
     selectIntervention,
-    (substate) => substate.intervention?.languageCode,
+    ({ intervention }) => intervention?.languageCode,
   );
