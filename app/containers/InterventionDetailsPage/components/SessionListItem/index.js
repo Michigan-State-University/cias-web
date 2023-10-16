@@ -9,6 +9,7 @@ import PropTypes from 'prop-types';
 import { injectIntl } from 'react-intl';
 import { Draggable } from 'react-beautiful-dnd';
 import { useHistory } from 'react-router-dom';
+import { Markup } from 'interweave';
 
 import Row from 'components/Row';
 import Column from 'components/Column';
@@ -220,7 +221,13 @@ function SessionListItem({
                 >
                   <SessionIndex>{index + 1}</SessionIndex>
                   <Column px={15}>
-                    <H2>{name}</H2>
+                    <Markup
+                      attributes={{
+                        dir: 'auto',
+                      }}
+                      content={name}
+                      tagName={H2}
+                    />
                     <BadgeInput
                       mt={5}
                       disabled={disabled}

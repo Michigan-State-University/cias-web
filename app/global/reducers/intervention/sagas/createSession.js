@@ -11,7 +11,7 @@ import { createSessionSuccess, createSessionError } from '../actions';
 export function* createSession({ payload: { id, lastPosition, type } }) {
   const requestURL = `v1/interventions/${id}/sessions`;
   const sessionNamePrefix =
-    type === SessionTypes.CAT_SESSION ? '(CAT-MH™) ' : '';
+    type === SessionTypes.CAT_SESSION ? '<bdi>(CAT-MH™)</bdi> ' : '';
   try {
     const {
       data: { data },
