@@ -46,6 +46,7 @@ import SessionSchedule from '../SessionSchedule';
 import messages from './messages';
 import { ToggleableBox, StyledRow, SessionIndex } from './styled';
 import SessionBranching from '../SessionBranching';
+import { formatSessionName } from './utils';
 
 const WCAG_ARIA_LABEL_ID = 'estimate-time-label';
 
@@ -225,7 +226,7 @@ function SessionListItem({
                       attributes={{
                         dir: 'auto',
                       }}
-                      content={name}
+                      content={formatSessionName(name)}
                       tagName={H2}
                     />
                     <BadgeInput

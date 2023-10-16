@@ -414,6 +414,7 @@ exports[`<SessionListItem /> Should render and match the snapshot 1`] = `
             >
               <h2
                 class="c10 c11"
+                dir="auto"
               >
                 Intervention
               </h2>
