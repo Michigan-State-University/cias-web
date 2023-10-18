@@ -2,9 +2,11 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { Markup } from 'interweave';
 import { useIntl } from 'react-intl';
+import { useSelector } from 'react-redux';
 
 import { themeColors } from 'theme';
 import globalMessages from 'global/i18n/globalMessages';
+import { makeSelectInterventionDynamicElementsDirection } from 'global/reducers/globalState';
 
 import Row from 'components/Row';
 import Box from 'components/Box';
@@ -26,6 +28,7 @@ const CommonLayout = ({
   shouldDisablePlayer,
   isMobile,
 }) => {
+  const dir = useSelector(makeSelectInterventionDynamicElementsDirection());
   const { formatMessage } = useIntl();
   const {
     id,
@@ -44,7 +47,7 @@ const CommonLayout = ({
     original_text: originalText,
   } = currentQuestion;
   return (
-    <Box>
+    <Box dir={dir}>
       {settingsTitle && title && (
         <Row align="center" justify={isMobile ? 'between' : 'start'} pb={8}>
           {!isMobile && (

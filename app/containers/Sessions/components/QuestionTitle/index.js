@@ -16,6 +16,7 @@ import {
   makeSelectSelectedQuestion,
   editQuestionRequest,
 } from 'global/reducers/questions';
+import { makeSelectInterventionDynamicElementsDirection } from 'global/reducers/globalState';
 
 import messages from './messages';
 
@@ -23,6 +24,7 @@ const QuestionTitle = ({
   selectedQuestion: { id, title, original_text: originalText },
   intl: { formatMessage },
   updateTitle,
+  dir,
 }) => {
   const handleUpdate = (val) => updateTitle({ path: 'title', value: val });
 
@@ -37,12 +39,9 @@ const QuestionTitle = ({
       hoverColor={colors.linkWater}
       clickable={false}
       padded
+      dir={dir}
     >
-      <OriginalTextHover
-        id={`question-${id}-title`}
-        text={originalText?.title}
-        dir="auto"
-      >
+      <OriginalTextHover id={`question-${id}-title`} text={originalText?.title}>
         <FlexibleWidthApprovableInput
           defaultFontSize={16}
           placeholder={formatMessage(messages.placeholder)}
@@ -62,10 +61,12 @@ QuestionTitle.propTypes = {
   selectedQuestion: PropTypes.object,
   updateTitle: PropTypes.func,
   intl: PropTypes.object,
+  dir: PropTypes.string,
 };
 
 const mapStateToProps = createStructuredSelector({
   selectedQuestion: makeSelectSelectedQuestion(),
+  dir: makeSelectInterventionDynamicElementsDirection(),
 });
 
 const mapDispatchToProps = {
