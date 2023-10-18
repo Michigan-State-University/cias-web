@@ -29,6 +29,7 @@ import LocalStorageService from 'utils/localStorageService';
 
 import {
   makeSelectAudioInstance,
+  makeSelectInterventionDynamicElementsDirection,
   makeSelectInterventionFixedElementsDirection,
 } from 'global/reducers/globalState';
 import {
@@ -222,6 +223,7 @@ export function AnswerSessionPage({
   resetAnswerSessionPage,
   fetchPreviousQuestion,
   fixedElementsDirection,
+  dynamicElementsDirection,
 }) {
   const { formatMessage } = useIntl();
   const history = useHistory();
@@ -503,6 +505,7 @@ export function AnswerSessionPage({
       userSessionId: userSession?.id,
       disabled: continueButtonLoading,
       continueButtonLoading,
+      dynamicElementsDirection,
     };
 
     const isLastScreen = currentQuestion.type === finishQuestion.id;
@@ -972,7 +975,8 @@ AnswerSessionPage.propTypes = {
   resetAnswerSessionPage: PropTypes.func,
   resetAllReducers: PropTypes.func,
   fetchPreviousQuestion: PropTypes.func,
-  fixedElementsDirection: PropTypes.bool,
+  fixedElementsDirection: PropTypes.string,
+  dynamicElementsDirection: PropTypes.string,
 };
 
 const mapStateToProps = createStructuredSelector({
@@ -980,6 +984,7 @@ const mapStateToProps = createStructuredSelector({
   audioInstance: makeSelectAudioInstance(),
   interventionStatus: makeSelectInterventionStatus(),
   fixedElementsDirection: makeSelectInterventionFixedElementsDirection(),
+  dynamicElementsDirection: makeSelectInterventionDynamicElementsDirection(),
 });
 
 const mapDispatchToProps = {

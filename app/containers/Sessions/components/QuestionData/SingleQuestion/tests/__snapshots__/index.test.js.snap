@@ -258,7 +258,7 @@ exports[`<SingleQuestion /> Should render and match the snapshot 1`] = `
 .c6 {
   width: auto;
   height: auto;
-  margin-right: 16px;
+  margin-inline-end: 16px;
 }
 
 .c18 {
