@@ -27,13 +27,14 @@ const CopyToClipboard = ({
   children,
   textProps,
   renderAsButton,
-  rednerAsCustomComponent,
+  renderAsCustomComponent,
   buttonDisabled,
   disabled,
   icon,
   iconAlt,
   popupVerticalPosition,
   popupHorizontalPosition,
+  onClick,
   ...restProps
 }) => {
   const [copied, setCopied] = useState(false);
@@ -43,6 +44,8 @@ const CopyToClipboard = ({
   }, [textToCopy]);
 
   const onCopy = () => {
+    if (onClick) onClick();
+    if (buttonDisabled || disabled) return;
     setCopied(true);
     setTimeout(() => {
       setCopied(false);
@@ -50,10 +53,7 @@ const CopyToClipboard = ({
   };
 
   const renderCopyToClipboard = (content) => (
-    <ReactCopyToClipboard
-      text={textToCopy}
-      onCopy={buttonDisabled || disabled ? undefined : onCopy}
-    >
+    <ReactCopyToClipboard text={textToCopy} onCopy={onCopy}>
       {content}
     </ReactCopyToClipboard>
   );
@@ -82,7 +82,7 @@ const CopyToClipboard = ({
         horizontalPosition={popupHorizontalPosition}
       >
         {renderCopyToClipboard(
-          rednerAsCustomComponent ? (
+          renderAsCustomComponent ? (
             children
           ) : (
             <Row align="center">
@@ -113,11 +113,12 @@ CopyToClipboard.propTypes = {
   buttonDisabled: PropTypes.bool,
   disabled: PropTypes.bool,
   renderAsButton: PropTypes.bool,
-  rednerAsCustomComponent: PropTypes.bool,
+  renderAsCustomComponent: PropTypes.bool,
   icon: PropTypes.string,
   iconAlt: PropTypes.string,
   popupVerticalPosition: PropTypes.oneOf(['top', 'center', 'bottom']),
   popupHorizontalPosition: PropTypes.oneOf(['left', 'center', 'right']),
+  onClick: PropTypes.func,
 };
 
 CopyToClipboard.defaultProps = {

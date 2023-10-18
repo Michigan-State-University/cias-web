@@ -46,7 +46,7 @@ export const StyledBox = styled(Box)`
 export const StyledPopover = styled(Box)`
   background-color: ${colors.linkWater};
   border: 1px solid ${colors.periwinkleGray};
-  z-index: ${ZIndex.POPOVER_MODAL};
+  z-index: ${({ zIndex }) => zIndex};
 
   ${({ $specialMobileView }) =>
     $specialMobileView &&

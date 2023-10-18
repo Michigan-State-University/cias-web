@@ -300,4 +300,12 @@ export default defineMessages({
     defaultMessage:
       'Unknown error occurred. Try again or contact the administrator',
   },
+  goToDashboard: {
+    id: `${scope}.goToDashboard`,
+    defaultMessage: 'Go to Dashboard',
+  },
+  submitAnswerError: {
+    id: `${scope}.submitAnswerError`,
+    defaultMessage: "Couldn't submit the answer",
+  },
 });

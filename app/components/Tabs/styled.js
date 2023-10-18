@@ -13,6 +13,8 @@ export const TabsContainer = styled.div`
 export const ContentContainer = styled.div`
   margin: 25px 10px;
   ${margin};
+  ${layout};
+  ${flex};
 `;
 
 export const LabelContainer = styled.div`

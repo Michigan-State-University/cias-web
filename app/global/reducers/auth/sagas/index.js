@@ -16,6 +16,8 @@ import fetchSelfDetailsSaga from './fetchSelfDetails';
 import updateUsersTimezoneSaga from './updateUsersTimezone';
 import termsAcceptSaga from './acceptTerms';
 
+export * from './verifyUserKey';
+
 export {
   logOutSaga,
   editUserSaga,

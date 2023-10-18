@@ -16,3 +16,5 @@ export const responseMethodEquals = (response, method) =>
  */
 export const responseStatusEquals = (response, status) =>
   response && response.status === status;
+
+export const getRequestUrlWithoutQueryParams = (url) => url.split('?')[0];

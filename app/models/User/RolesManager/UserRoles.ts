@@ -10,9 +10,10 @@ export enum Roles {
   HealthSystemAdmin = 'health_system_admin',
   ClinicAdmin = 'health_clinic_admin',
   Navigator = 'navigator',
+  PredefinedParticipant = 'predefined_participant',
 }
 
-export const AllRoles = [
+export const PasswordAuthenticatedRoles = [
   Roles.Admin,
   Roles.Researcher,
   Roles.Participant,
@@ -24,3 +25,10 @@ export const AllRoles = [
   Roles.ClinicAdmin,
   Roles.Navigator,
 ];
+
+export const AuthenticatedRoles = [
+  ...PasswordAuthenticatedRoles,
+  Roles.PredefinedParticipant,
+];
+
+export const AllRoles = Object.values(Roles);

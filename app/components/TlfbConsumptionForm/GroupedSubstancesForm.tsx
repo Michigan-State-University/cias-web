@@ -21,6 +21,7 @@ export type GroupedSubstancesFormProps = {
   onChange: (newConsumptions: SubstanceConsumption[]) => void;
   loading: boolean;
   mobile: boolean;
+  disabled?: boolean;
 };
 
 const Component = ({
@@ -29,6 +30,7 @@ const Component = ({
   onChange,
   loading,
   mobile,
+  disabled,
 }: GroupedSubstancesFormProps) => {
   const consumptionsMap = normalizeGroupedConsumptions(
     substanceGroups,
@@ -81,6 +83,7 @@ const Component = ({
                 onChange={onConsumptionsChange(consumption.variable)}
                 loading={loading}
                 mobile={mobile}
+                disabled={disabled}
               />
             ))}
           </>

@@ -1,16 +1,29 @@
 import React, { ReactNode } from 'react';
 
+import downloadIcon from 'assets/svg/downloadCloud.svg';
+
 import { colors } from 'theme';
+
 import Box from 'components/Box';
 import { FileDisplayItem } from 'components/FileDisplayItem';
+import FileDownload from 'components/FileDownload';
+
+import { ImageButton } from 'components/Button';
 
 type Props = {
   extraIcons?: ReactNode;
   name?: string;
   url: string;
+  showDownloadIcon?: boolean;
 } & Record<string, unknown>;
 
-export const FileBox = ({ name, url, extraIcons, ...styles }: Props) => (
+export const FileBox = ({
+  name,
+  url,
+  extraIcons,
+  showDownloadIcon,
+  ...styles
+}: Props) => (
   <Box
     display="flex"
     justify="between"
@@ -28,7 +41,14 @@ export const FileBox = ({ name, url, extraIcons, ...styles }: Props) => (
         hoverDecoration: 'underline',
       }}
     />
-    <Box>{extraIcons}</Box>
+    <Box>
+      {extraIcons}
+      {showDownloadIcon && (
+        <FileDownload url={url} fileName={name}>
+          <ImageButton title={name} showHoverEffect src={downloadIcon} />
+        </FileDownload>
+      )}
+    </Box>
   </Box>
 );
 

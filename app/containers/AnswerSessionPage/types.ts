@@ -28,6 +28,8 @@ export type SharedProps<
   previewMode: string;
   question: T;
   userSessionId?: string;
+  disabled: boolean;
+  continueButtonLoading: boolean;
 };
 
 export type ParticipantSessionSettings = {

@@ -35,6 +35,7 @@ const GridQuestionLayout = ({
   check,
   selectedAnswersIndex,
   questionId,
+  disabled,
 }) => {
   const { formatMessage } = useIntl();
   const [params, containerRef] = useContainerQuery(QUERY);
@@ -138,6 +139,7 @@ const GridQuestionLayout = ({
                             rowIndex,
                             columnIndex,
                           )}
+                          disabled={disabled}
                         >
                           <HiddenText>
                             {formatMessage(messages.gridLabel, {
@@ -165,6 +167,7 @@ GridQuestionLayout.propTypes = {
   check: PropTypes.func,
   selectedAnswersIndex: PropTypes.object,
   questionId: PropTypes.string,
+  disabled: PropTypes.bool,
 };
 
 export default memo(GridQuestionLayout);

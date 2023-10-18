@@ -13,7 +13,7 @@ import {
 import { getAriaLabelProps } from './utils';
 import { INPUT_PADDING } from './constants';
 
-const getBorderColor = (hasError, currentColor) => {
+export const getBorderColor = (hasError, currentColor) => {
   if (hasError) return themeColors.warning;
   return currentColor;
 };

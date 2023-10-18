@@ -45,6 +45,7 @@ const TlfbEvents = ({
   isMobilePreview,
   isMobile,
   userSessionId,
+  disabled,
 }: SharedProps<TlfbEventsWithConfig>) => {
   const dispatch = useDispatch();
   const tlfbDaysData = useSelector(makeSelectTlfbDays());
@@ -168,6 +169,7 @@ const TlfbEvents = ({
                 onInputBlur={(value: string) => updateEventName(value, id)}
                 eventName={name}
                 key={`event-input-${id}`}
+                disabled={disabled}
               />
             ))}
           </Box>
@@ -183,6 +185,7 @@ const TlfbEvents = ({
             display="flex"
             align="center"
             mt={selectedDayEvents.length ? 24 : 0}
+            disabled={disabled}
           >
             <PlusCircle size="24px" />
             <Text ml={10} color={themeColors.secondary}>
@@ -193,7 +196,12 @@ const TlfbEvents = ({
             <>
               <Divider my={24} />
               {/* @ts-ignore */}
-              <Button onClick={closeModal} width="auto" px={32}>
+              <Button
+                onClick={closeModal}
+                width="auto"
+                px={32}
+                disabled={disabled}
+              >
                 <FormattedMessage {...messages.saveEvents} />
               </Button>
             </>

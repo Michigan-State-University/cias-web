@@ -2,17 +2,15 @@ import React, { useEffect, useRef, useState } from 'react';
 import PropTypes from 'prop-types';
 import isEqual from 'lodash/isEqual';
 import { Formik } from 'formik';
-import parsePhoneNumber, {
-  getCountryCallingCode,
-  formatIncompletePhoneNumber,
-} from 'libphonenumber-js';
+import { getCountryCallingCode } from 'libphonenumber-js';
 
 import ErrorAlert from 'components/ErrorAlert';
 import Row from 'components/Row';
 import Column from 'components/Column';
 import {
-  DEFAULT_COUNTRY_CODE,
   FormikPhoneNumberInput,
+  getInitialValues,
+  getPhoneAttributes,
   phoneNumberSchema,
 } from 'components/FormikPhoneNumberInput';
 
@@ -21,17 +19,6 @@ import isNullOrUndefined from 'utils/isNullOrUndefined';
 import { ConfirmButton } from './styled';
 import messages from './messages';
 import PhoneNumberCodeModal from './PhoneNumberCodeModal';
-
-const initialValues = ({ number, iso }) => {
-  let parsedNumber = number;
-  if (number && iso) {
-    parsedNumber = formatIncompletePhoneNumber(number, iso);
-  }
-  return {
-    number: parsedNumber ?? '',
-    iso: { value: iso ?? DEFAULT_COUNTRY_CODE, label: '' },
-  };
-};
 
 const PhoneNumberForm = React.forwardRef(
   (
@@ -61,13 +48,7 @@ const PhoneNumberForm = React.forwardRef(
       { number: submitNumber, iso: isoOption },
       { setSubmitting },
     ) => {
-      const prefixValue = `+${getCountryCallingCode(isoOption?.value)}`;
-      const parsedNumber = parsePhoneNumber(submitNumber, isoOption?.value);
-      const submitPayload = {
-        number: parsedNumber?.nationalNumber ?? '',
-        iso: isoOption?.value,
-        prefix: prefixValue,
-      };
+      const submitPayload = getPhoneAttributes(submitNumber, isoOption);
       const hasPhoneNumberChanged = !isEqual(
         {
           number,
@@ -106,7 +87,7 @@ const PhoneNumberForm = React.forwardRef(
             required,
             allowPartial,
           )}
-          initialValues={initialValues({ number, iso })}
+          initialValues={getInitialValues(number, iso)}
           onSubmit={onSubmit}
           innerRef={ref}
         >

@@ -115,6 +115,7 @@ import {
 import { ActionButtons } from './components/ActionButtons';
 import AnswerSessionPageFooter from './components/AnswerSessionPageFooter';
 import ScreenBackButton from './components/ScreenBackButton';
+import { GoToDashboardButton } from './components/GoToDashboardButton';
 
 const AnimationRefHelper = ({
   children,
@@ -448,7 +449,6 @@ export function AnswerSessionPage({
 
     const continueButtonLoading =
       currentQuestion.loading || nextQuestionLoading || answer?.loading;
-    const skipQuestionButtonDisabled = continueButtonLoading;
 
     const isNumericQuestion = currentQuestion.type === QuestionTypes.NUMBER;
 
@@ -498,6 +498,8 @@ export function AnswerSessionPage({
       previewMode,
       isMobilePreview,
       userSessionId: userSession?.id,
+      disabled: continueButtonLoading,
+      continueButtonLoading,
     };
 
     const isLastScreen = currentQuestion.type === finishQuestion.id;
@@ -577,7 +579,7 @@ export function AnswerSessionPage({
               >
                 <ActionButtons
                   renderSkipQuestionButton={shouldRenderSkipQuestionButton}
-                  skipQuestionButtonDisabled={skipQuestionButtonDisabled}
+                  skipQuestionButtonDisabled={continueButtonLoading}
                   onSkipQuestionClick={() => setSkipQuestionModalVisible(true)}
                   renderContinueButton={shouldRenderContinueButton}
                   continueButtonDisabled={isButtonDisabled()}
@@ -608,7 +610,7 @@ export function AnswerSessionPage({
               />
               <ActionButtons
                 renderSkipQuestionButton={shouldRenderSkipQuestionButton}
-                skipQuestionButtonDisabled={skipQuestionButtonDisabled}
+                skipQuestionButtonDisabled={continueButtonLoading}
                 onSkipQuestionClick={() => setSkipQuestionModalVisible(true)}
                 renderContinueButton={shouldRenderContinueButton}
                 continueButtonDisabled={isButtonDisabled()}
@@ -678,6 +680,11 @@ export function AnswerSessionPage({
     interventionStarted &&
     currentQuestion &&
     FULL_SIZE_QUESTIONS.includes(currentQuestion.type);
+
+  const { multipleFillSessionAvailable, userInterventionId } =
+    location.state ?? {};
+  const showGoToDashboardButton =
+    multipleFillSessionAvailable && userInterventionId;
 
   return (
     <Column
@@ -803,6 +810,12 @@ export function AnswerSessionPage({
                         title={buttonText()}
                         isDesktop={isDesktop}
                       />
+                      {showGoToDashboardButton && (
+                        <GoToDashboardButton
+                          userInterventionId={userInterventionId}
+                          isDesktop={isDesktop}
+                        />
+                      )}
                     </Row>
                     <Box
                       position="absolute"
