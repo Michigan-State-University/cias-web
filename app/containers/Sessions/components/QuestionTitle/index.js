@@ -8,7 +8,6 @@ import { injectIntl } from 'react-intl';
 import FlexibleWidthApprovableInput from 'components/Input/FlexibleWidthApprovableInput';
 import Box from 'components/Box';
 
-import Row from 'components/Row';
 import { selectQuillText } from 'components/Input/utils';
 import OriginalTextHover from 'components/OriginalTextHover';
 
@@ -39,23 +38,22 @@ const QuestionTitle = ({
       clickable={false}
       padded
     >
-      <Row>
-        <OriginalTextHover
-          id={`question-${id}-title`}
-          text={originalText?.title}
-        >
-          <FlexibleWidthApprovableInput
-            defaultFontSize={16}
-            placeholder={formatMessage(messages.placeholder)}
-            value={title}
-            onCheck={handleUpdate}
-            onFocus={onFocus}
-            autoSize
-            richText
-            emptyWidth={155}
-          />
-        </OriginalTextHover>
-      </Row>
+      <OriginalTextHover
+        id={`question-${id}-title`}
+        text={originalText?.title}
+        dir="auto"
+      >
+        <FlexibleWidthApprovableInput
+          defaultFontSize={16}
+          placeholder={formatMessage(messages.placeholder)}
+          value={title}
+          onCheck={handleUpdate}
+          onFocus={onFocus}
+          autoSize
+          richText
+          emptyWidth={155}
+        />
+      </OriginalTextHover>
     </Box>
   );
 };
