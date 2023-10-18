@@ -28,7 +28,9 @@ const CommonLayout = ({
   shouldDisablePlayer,
   isMobile,
 }) => {
-  const dir = useSelector(makeSelectInterventionDynamicElementsDirection());
+  const dynamicElementsDirection = useSelector(
+    makeSelectInterventionDynamicElementsDirection(),
+  );
   const { formatMessage } = useIntl();
   const {
     id,
@@ -47,7 +49,7 @@ const CommonLayout = ({
     original_text: originalText,
   } = currentQuestion;
   return (
-    <Box dir={dir}>
+    <Box dir={dynamicElementsDirection}>
       {settingsTitle && title && (
         <Row align="center" justify={isMobile ? 'between' : 'start'} pb={8}>
           {!isMobile && (

@@ -24,7 +24,7 @@ const QuestionTitle = ({
   selectedQuestion: { id, title, original_text: originalText },
   intl: { formatMessage },
   updateTitle,
-  dir,
+  dynamicElementsDirection,
 }) => {
   const handleUpdate = (val) => updateTitle({ path: 'title', value: val });
 
@@ -39,7 +39,7 @@ const QuestionTitle = ({
       hoverColor={colors.linkWater}
       clickable={false}
       padded
-      dir={dir}
+      dir={dynamicElementsDirection}
     >
       <OriginalTextHover id={`question-${id}-title`} text={originalText?.title}>
         <FlexibleWidthApprovableInput
@@ -61,12 +61,12 @@ QuestionTitle.propTypes = {
   selectedQuestion: PropTypes.object,
   updateTitle: PropTypes.func,
   intl: PropTypes.object,
-  dir: PropTypes.string,
+  dynamicElementsDirection: PropTypes.string,
 };
 
 const mapStateToProps = createStructuredSelector({
   selectedQuestion: makeSelectSelectedQuestion(),
-  dir: makeSelectInterventionDynamicElementsDirection(),
+  dynamicElementsDirection: makeSelectInterventionDynamicElementsDirection(),
 });
 
 const mapDispatchToProps = {
