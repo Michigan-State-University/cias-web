@@ -475,7 +475,7 @@ exports[`<SettingsSessionPage /> Should render and match the snapshot 1`] = `
 }
 
 .c48 {
-  margin-left: 5px;
+  margin-inline-start: 5px;
 }
 
 .c42 {
