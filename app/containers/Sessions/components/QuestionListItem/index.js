@@ -305,7 +305,11 @@ const QuestionListItem = ({
           </Column>
           {!manage && isManageableScreen && (
             <Column xs={1}>
-              <Dropdown options={options} dropdownWidth={180} />
+              <Dropdown
+                id={`question-list-item-options-${id}`}
+                options={options}
+                dropdownWidth={180}
+              />
             </Column>
           )}
         </Row>

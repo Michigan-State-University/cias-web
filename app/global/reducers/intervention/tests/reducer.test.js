@@ -33,13 +33,6 @@ import {
   CREATE_SESSION_REQUEST,
   CREATE_SESSION_SUCCESS,
   CREATE_SESSION_ERROR,
-  FETCH_SESSION_EMAILS_REQUEST,
-  FETCH_SESSION_EMAILS_SUCCESS,
-  FETCH_SESSION_EMAILS_ERROR,
-  SEND_SESSION_INVITE_REQUEST,
-  SEND_SESSION_INVITE_SUCCESS,
-  SEND_SESSION_INVITE_ERROR,
-  RESEND_SESSION_INVITE_REQUEST,
 } from '../constants';
 import { initialState, interventionReducer } from '../reducer';
 
@@ -375,104 +368,6 @@ describe('intervention reducer', () => {
     const expectedState = cloneDeep(mockState);
     expectedState.loaders.createSessionLoading = false;
     expectedState.errors.createSessionError = payloadError.error;
-
-    expect(interventionReducer(mockState, action)).toEqual(expectedState);
-  });
-
-  it('FETCH_SESSION_EMAILS_REQUEST', () => {
-    const payloadIndex = { index: 0 };
-    const action = actionBuilder(FETCH_SESSION_EMAILS_REQUEST, payloadIndex);
-
-    const expectedState = cloneDeep(mockState);
-    expectedState.loaders.fetchSessionEmailsLoading = true;
-
-    expect(interventionReducer(mockState, action)).toEqual(expectedState);
-  });
-
-  it('FETCH_SESSION_EMAILS_SUCCESS', () => {
-    const payloadEmails = {
-      index: 0,
-      emails: ['mail@mail.com', 'mail2@mail.com'],
-    };
-    const action = actionBuilder(FETCH_SESSION_EMAILS_SUCCESS, payloadEmails);
-
-    const expectedState = cloneDeep(mockState);
-    expectedState.loaders.fetchSessionEmailsLoading = false;
-    expectedState.intervention.sessions[payloadEmails.index].emails =
-      payloadEmails.emails;
-
-    expect(interventionReducer(mockState, action)).toEqual(expectedState);
-  });
-
-  it('FETCH_SESSION_EMAILS_ERROR', () => {
-    const payloadError = {
-      error: 'test-error',
-    };
-    const action = actionBuilder(FETCH_SESSION_EMAILS_ERROR, payloadError);
-
-    const expectedState = cloneDeep(mockState);
-    expectedState.loaders.fetchSessionEmailsLoading = false;
-    expectedState.errors.fetchSessionEmailsError = payloadError.error;
-
-    expect(interventionReducer(mockState, action)).toEqual(expectedState);
-  });
-
-  it('SEND_SESSION_INVITE_REQUEST', () => {
-    const index = 0;
-    const initState = cloneDeep(mockState);
-    initState.intervention.sessions[index].emails = [];
-
-    const payloadEmails = {
-      emails: [
-        ...initState.intervention.sessions[index].emails,
-        'test@test.com',
-      ],
-      sessionId: mockState.intervention.sessions[index].id,
-    };
-    const action = actionBuilder(SEND_SESSION_INVITE_REQUEST, payloadEmails);
-
-    const expectedState = cloneDeep(initState);
-    expectedState.currentSessionIndex = index;
-
-    expectedState.loaders.sendSessionLoading = true;
-    expectedState.cache.intervention = initState.intervention;
-
-    expect(interventionReducer(initState, action)).toEqual(expectedState);
-  });
-
-  it('SEND_SESSION_INVITE_SUCCESS', () => {
-    const action = actionBuilder(SEND_SESSION_INVITE_SUCCESS, {});
-
-    const expectedState = cloneDeep(mockState);
-    expectedState.loaders.sendSessionLoading = false;
-    expectedState.loaders.sessionEmailLoading =
-      mockState.loaders.sessionEmailLoading;
-
-    expect(interventionReducer(mockState, action)).toEqual(expectedState);
-  });
-
-  it('SEND_SESSION_INVITE_ERROR', () => {
-    const action = actionBuilder(SEND_SESSION_INVITE_ERROR, {});
-
-    const expectedState = cloneDeep(mockState);
-    expectedState.loaders.sendSessionLoading = false;
-    expectedState.loaders.sessionEmailLoading =
-      mockState.loaders.sessionEmailLoading;
-    expectedState.intervention = mockState.cache.intervention;
-
-    expect(interventionReducer(mockState, action)).toEqual(expectedState);
-  });
-
-  it('RESEND_SESSION_INVITE_REQUEST', () => {
-    const payloadEmail = { id: 'test-user', email: 'test-user@test.com' };
-
-    const action = actionBuilder(RESEND_SESSION_INVITE_REQUEST, payloadEmail);
-
-    const expectedState = cloneDeep(mockState);
-    expectedState.cache.intervention = mockState.intervention;
-    expectedState.loaders.sessionEmailLoading = {
-      ...payloadEmail,
-    };
 
     expect(interventionReducer(mockState, action)).toEqual(expectedState);
   });

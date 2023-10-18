@@ -1,6 +1,6 @@
 import { fetchUsers } from 'global/reducers/userList';
 import { FETCH_USERS, PER_PAGE } from 'global/reducers/userList/constants';
-import { AllRoles } from 'models/User/RolesManager';
+import { PasswordAuthenticatedRoles } from 'models/User/RolesManager';
 
 describe('UserList actions', () => {
   describe('Default Action', () => {
@@ -27,7 +27,9 @@ describe('UserList actions', () => {
         },
         type: FETCH_USERS,
       };
-      expect(fetchUsers(AllRoles, undefined, 1, true)).toEqual(expected);
+      expect(
+        fetchUsers(PasswordAuthenticatedRoles, undefined, 1, true),
+      ).toEqual(expected);
     });
   });
 });

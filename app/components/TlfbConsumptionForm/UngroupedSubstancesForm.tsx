@@ -21,6 +21,7 @@ export type UngroupedSubstancesFormProps = {
   consumptions: SubstanceConsumption[];
   onChange: (newConsumptions: SubstanceConsumption[]) => void;
   loading: boolean;
+  disabled?: boolean;
 };
 
 const Component = ({
@@ -28,6 +29,7 @@ const Component = ({
   consumptions,
   onChange,
   loading,
+  disabled,
 }: UngroupedSubstancesFormProps) => {
   const { formatMessage } = useIntl();
 
@@ -70,7 +72,7 @@ const Component = ({
           <Row gap={16}>
             <Radio
               id={`${variable}-yes-option`}
-              disabled={loading}
+              disabled={loading || disabled}
               onChange={handleConsumptionChange(variable, true)}
               checked={consumed === true}
             >
@@ -78,7 +80,7 @@ const Component = ({
             </Radio>
             <Radio
               id={`${variable}-no-option`}
-              disabled={loading}
+              disabled={loading || disabled}
               onChange={handleConsumptionChange(variable, false)}
               checked={consumed === false}
             >

@@ -119,6 +119,7 @@ const navigationTabs: Record<Roles, NavbarTab[]> = {
   ],
   [Roles.ThirdParty]: [],
   [Roles.Guest]: [],
+  [Roles.PredefinedParticipant]: [],
   [Roles.Navigator]: [conversationsTab(navbarNames.conversations, folder)],
 };
 

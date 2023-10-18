@@ -17,6 +17,7 @@ const ParticipantReportQuestion = ({
   selectAnswer,
   formatMessage,
   showError,
+  disabled,
 }) => {
   const {
     body: {
@@ -72,6 +73,7 @@ const ParticipantReportQuestion = ({
       onValidation={onEmailValidation}
       showEmailInput={isNullOrUndefined(loggedInUserEmail)}
       userEmail={loggedInUserEmail}
+      disabled={disabled}
     />
   );
 };
@@ -81,6 +83,7 @@ ParticipantReportQuestion.propTypes = {
   selectAnswer: PropTypes.func,
   formatMessage: PropTypes.func,
   showError: PropTypes.func,
+  disabled: PropTypes.bool,
 };
 
 export default ParticipantReportQuestion;

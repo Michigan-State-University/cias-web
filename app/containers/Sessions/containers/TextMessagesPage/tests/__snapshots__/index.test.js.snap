@@ -14,7 +14,7 @@ exports[`<TextMessagingPage /> Should render and match the snapshot 1`] = `
   max-height: 100%;
 }
 
-.c13 {
+.c14 {
   display: -webkit-box;
   display: -webkit-flex;
   display: -ms-flexbox;
@@ -34,7 +34,7 @@ exports[`<TextMessagingPage /> Should render and match the snapshot 1`] = `
   margin-bottom: 8px;
 }
 
-.c16 {
+.c17 {
   display: -webkit-box;
   display: -webkit-flex;
   display: -ms-flexbox;
@@ -46,7 +46,7 @@ exports[`<TextMessagingPage /> Should render and match the snapshot 1`] = `
   width: 100%;
 }
 
-.c2 {
+.c3 {
   width: auto;
   height: auto;
   display: block;
@@ -80,7 +80,7 @@ exports[`<TextMessagingPage /> Should render and match the snapshot 1`] = `
   cursor: pointer;
 }
 
-.c4 {
+.c5 {
   width: auto;
   height: auto;
   display: block;
@@ -114,7 +114,7 @@ exports[`<TextMessagingPage /> Should render and match the snapshot 1`] = `
   cursor: pointer;
 }
 
-.c17 {
+.c18 {
   width: auto;
   height: auto;
   display: block;
@@ -124,7 +124,7 @@ exports[`<TextMessagingPage /> Should render and match the snapshot 1`] = `
   color: unset;
 }
 
-.c18 {
+.c19 {
   width: auto;
   height: auto;
   display: block;
@@ -132,7 +132,7 @@ exports[`<TextMessagingPage /> Should render and match the snapshot 1`] = `
   color: unset;
 }
 
-.c20 {
+.c21 {
   width: auto;
   height: auto;
   display: block;
@@ -141,7 +141,7 @@ exports[`<TextMessagingPage /> Should render and match the snapshot 1`] = `
   color: unset;
 }
 
-.c3 {
+.c4 {
   font-family: DM Sans;
   font-size: 13px;
   line-height: 130%;
@@ -151,7 +151,7 @@ exports[`<TextMessagingPage /> Should render and match the snapshot 1`] = `
   color: rgba(255,255,255,1);
 }
 
-.c11 {
+.c12 {
   font-family: DM Sans;
   font-size: 13px;
   line-height: 130%;
@@ -162,7 +162,7 @@ exports[`<TextMessagingPage /> Should render and match the snapshot 1`] = `
   color: rgba(255,255,255,1);
 }
 
-.c15 {
+.c16 {
   font-family: DM Sans;
   font-size: 13px;
   line-height: 130%;
@@ -173,12 +173,12 @@ exports[`<TextMessagingPage /> Should render and match the snapshot 1`] = `
   color: rgba(107,112,124,1);
 }
 
-.c10 {
+.c11 {
   width: auto;
   height: auto;
 }
 
-.c9 {
+.c10 {
   display: -webkit-box;
   display: -webkit-flex;
   display: -ms-flexbox;
@@ -203,7 +203,7 @@ exports[`<TextMessagingPage /> Should render and match the snapshot 1`] = `
   opacity: 0.5;
 }
 
-.c19 {
+.c20 {
   position: relative;
   width: 100%;
   font-size: 18px;
@@ -211,13 +211,13 @@ exports[`<TextMessagingPage /> Should render and match the snapshot 1`] = `
   color: #2F3850;
 }
 
-.c21 {
+.c22 {
   position: relative;
   width: 100%;
   color: #2F3850;
 }
 
-.c1 {
+.c2 {
   display: -webkit-box;
   display: -webkit-flex;
   display: -ms-flexbox;
@@ -234,7 +234,17 @@ exports[`<TextMessagingPage /> Should render and match the snapshot 1`] = `
   align-items: flex-start;
 }
 
-.c7 {
+.c1 {
+  -webkit-align-content: center;
+  -ms-flex-line-pack: center;
+  align-content: center;
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+}
+
+.c8 {
   display: -webkit-box;
   display: -webkit-flex;
   display: -ms-flexbox;
@@ -252,7 +262,7 @@ exports[`<TextMessagingPage /> Should render and match the snapshot 1`] = `
   height: 100px;
 }
 
-.c7:after {
+.c8:after {
   content: ' ';
   display: block;
   width: 66.66666666666666px;
@@ -264,7 +274,7 @@ exports[`<TextMessagingPage /> Should render and match the snapshot 1`] = `
   animation: hAjVGa 1.2s linear infinite;
 }
 
-.c6 {
+.c7 {
   position: fixed;
   display: -webkit-box;
   display: -webkit-flex;
@@ -286,7 +296,7 @@ exports[`<TextMessagingPage /> Should render and match the snapshot 1`] = `
   background-color: rgba(255,255,255,0.5);
 }
 
-.c14 {
+.c15 {
   border-radius: 50%;
   background-color: #107969;
   display: -webkit-box;
@@ -309,7 +319,7 @@ exports[`<TextMessagingPage /> Should render and match the snapshot 1`] = `
   color: #2F3850;
 }
 
-.c22 {
+.c23 {
   border-radius: 50%;
   background-color: #107969;
   display: -webkit-box;
@@ -332,7 +342,7 @@ exports[`<TextMessagingPage /> Should render and match the snapshot 1`] = `
   color: #2F3850;
 }
 
-.c12 {
+.c13 {
   -webkit-flex: 0 0 28%;
   -ms-flex: 0 0 28%;
   flex: 0 0 28%;
@@ -351,12 +361,12 @@ exports[`<TextMessagingPage /> Should render and match the snapshot 1`] = `
   cursor: pointer;
 }
 
-.c12:hover {
+.c13:hover {
   border-width: 1px;
   border-color: #B727EA;
 }
 
-.c8 {
+.c9 {
   -webkit-flex: 0 0 28%;
   -ms-flex: 0 0 28%;
   flex: 0 0 28%;
@@ -368,7 +378,7 @@ exports[`<TextMessagingPage /> Should render and match the snapshot 1`] = `
   cursor: pointer;
 }
 
-.c23 {
+.c24 {
   -webkit-flex: 0 0 28%;
   -ms-flex: 0 0 28%;
   flex: 0 0 28%;
@@ -379,7 +389,7 @@ exports[`<TextMessagingPage /> Should render and match the snapshot 1`] = `
   margin: 20px;
 }
 
-.c5 {
+.c6 {
   margin-top: 10px;
   padding: 0 !important;
   -webkit-box-pack: center !important;
@@ -420,21 +430,21 @@ exports[`<TextMessagingPage /> Should render and match the snapshot 1`] = `
       style="box-sizing: border-box; position: relative; margin-left: 20px; margin-right: auto; padding-left: 15px; padding-right: 15px; margin-top: 40px;"
     >
       <div
-        class=""
+        class="c1"
         style="margin-left: -15px; margin-right: -15px; display: flex; flex-wrap: wrap; flex-grow: 0; flex-shrink: 0; align-items: center; justify-content: flex-start;"
       >
         <div
           align="start"
-          class="c1"
+          class="c2"
           style="box-sizing: border-box; min-height: 1px; position: relative; padding-left: 15px; padding-right: 15px; width: auto; flex-basis: auto; flex-grow: 0; flex-shrink: 0; max-width: 100%; margin-left: 0%; margin-bottom: 10px;"
         >
           <div
-            class="c2"
+            class="c3"
             display="inline-flex"
             width="max-content"
           >
             <p
-              class="c3"
+              class="c4"
               color="#FFFFFF"
               font-size="14"
               font-weight="bold"
@@ -445,16 +455,16 @@ exports[`<TextMessagingPage /> Should render and match the snapshot 1`] = `
         </div>
         <div
           align="start"
-          class="c1"
+          class="c2"
           style="box-sizing: border-box; min-height: 1px; position: relative; padding-left: 15px; padding-right: 15px; width: auto; flex-basis: auto; flex-grow: 0; flex-shrink: 0; max-width: 100%; margin-left: 0%; margin-bottom: 10px;"
         >
           <div
-            class="c4"
+            class="c5"
             display="inline-flex"
             width="max-content"
           >
             <p
-              class="c3"
+              class="c4"
               color="#FFFFFF"
               font-size="14"
               font-weight="bold"
@@ -469,7 +479,7 @@ exports[`<TextMessagingPage /> Should render and match the snapshot 1`] = `
       />
     </div>
     <div
-      class="c5"
+      class="c6"
       style="box-sizing: border-box; position: relative; margin-left: auto; margin-right: auto; padding-left: 15px; padding-right: 15px; max-width: 960px;"
     >
       <div
@@ -480,30 +490,30 @@ exports[`<TextMessagingPage /> Should render and match the snapshot 1`] = `
         xxl="4"
       >
         <div
-          class="c6"
+          class="c7"
           data-testid="fullscreen-loader"
         >
           <div
-            class="c7"
+            class="c8"
             color="#B727EA"
             size="100"
             width="6"
           />
         </div>
         <div
-          class="c8"
+          class="c9"
         >
           <div
-            class="c9"
+            class="c10"
             disabled=""
             height="100%"
           >
             <img
-              class="c10"
+              class="c11"
               src="IMAGE_MOCK"
             />
             <p
-              class="c11"
+              class="c12"
               color="#FFFFFF"
               font-size="15"
               font-weight="bold"
@@ -513,17 +523,17 @@ exports[`<TextMessagingPage /> Should render and match the snapshot 1`] = `
           </div>
         </div>
         <div
-          class="c12"
+          class="c13"
         >
           <div
-            class="c13"
+            class="c14"
           >
             <div
-              class="c14"
+              class="c15"
               opacity="1"
             />
             <p
-              class="c15"
+              class="c16"
               color="#6B707C"
               font-size="11px"
               font-weight="medium"
@@ -532,22 +542,22 @@ exports[`<TextMessagingPage /> Should render and match the snapshot 1`] = `
             </p>
           </div>
           <div
-            class="c16"
+            class="c17"
             width="100%"
           >
             <div
-              class="c17"
+              class="c18"
               display="inline"
               width="100%"
             >
               <div
-                class="c18"
+                class="c19"
                 data-for="Text message plan 1"
                 data-tip=""
               >
                 <div>
                   <span
-                    class="c19"
+                    class="c20"
                     data-for="text-message-plan-1"
                     data-tip="Text message plan 1"
                     font-size="18"
@@ -570,25 +580,25 @@ exports[`<TextMessagingPage /> Should render and match the snapshot 1`] = `
             </div>
           </div>
           <div
-            class="c20"
+            class="c21"
           >
             <div
-              class="c16"
+              class="c17"
               width="100%"
             >
               <div
-                class="c17"
+                class="c18"
                 display="inline"
                 width="100%"
               >
                 <div
-                  class="c18"
+                  class="c19"
                   data-for="Send 3 days after the session is completed"
                   data-tip=""
                 >
                   <div>
                     <span
-                      class="c21"
+                      class="c22"
                       data-for="text-message-plan-1"
                       data-tip="Send 3 days after the session is completed"
                       theme="[object Object]"
@@ -611,17 +621,17 @@ exports[`<TextMessagingPage /> Should render and match the snapshot 1`] = `
           </div>
         </div>
         <div
-          class="c12"
+          class="c13"
         >
           <div
-            class="c13"
+            class="c14"
           >
             <div
-              class="c22"
+              class="c23"
               opacity="1"
             />
             <p
-              class="c15"
+              class="c16"
               color="#6B707C"
               font-size="11px"
               font-weight="medium"
@@ -630,22 +640,22 @@ exports[`<TextMessagingPage /> Should render and match the snapshot 1`] = `
             </p>
           </div>
           <div
-            class="c16"
+            class="c17"
             width="100%"
           >
             <div
-              class="c17"
+              class="c18"
               display="inline"
               width="100%"
             >
               <div
-                class="c18"
+                class="c19"
                 data-for="Text message plan 2"
                 data-tip=""
               >
                 <div>
                   <span
-                    class="c19"
+                    class="c20"
                     data-for="text-message-plan-2"
                     data-tip="Text message plan 2"
                     font-size="18"
@@ -668,25 +678,25 @@ exports[`<TextMessagingPage /> Should render and match the snapshot 1`] = `
             </div>
           </div>
           <div
-            class="c20"
+            class="c21"
           >
             <div
-              class="c16"
+              class="c17"
               width="100%"
             >
               <div
-                class="c17"
+                class="c18"
                 display="inline"
                 width="100%"
               >
                 <div
-                  class="c18"
+                  class="c19"
                   data-for="Send an alert to the specified number."
                   data-tip=""
                 >
                   <div>
                     <span
-                      class="c21"
+                      class="c22"
                       data-for="text-message-plan-2"
                       data-tip="Send an alert to the specified number."
                       theme="[object Object]"
@@ -709,40 +719,40 @@ exports[`<TextMessagingPage /> Should render and match the snapshot 1`] = `
           </div>
         </div>
         <div
-          class="c23"
+          class="c24"
         />
         <div
-          class="c23"
+          class="c24"
         />
         <div
-          class="c23"
+          class="c24"
         />
         <div
-          class="c23"
+          class="c24"
         />
         <div
-          class="c23"
+          class="c24"
         />
         <div
-          class="c23"
+          class="c24"
         />
         <div
-          class="c23"
+          class="c24"
         />
         <div
-          class="c23"
+          class="c24"
         />
         <div
-          class="c23"
+          class="c24"
         />
         <div
-          class="c23"
+          class="c24"
         />
         <div
-          class="c23"
+          class="c24"
         />
         <div
-          class="c23"
+          class="c24"
         />
       </div>
       <span

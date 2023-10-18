@@ -11,6 +11,7 @@ const NumberQuestion = ({
   selectAnswer,
   formatMessage,
   showError,
+  disabled,
 }) => {
   const {
     body: {
@@ -42,6 +43,7 @@ const NumberQuestion = ({
       onValidation={onValidation}
       minLength={minLength}
       maxLength={maxLength}
+      disabled={disabled}
     />
   );
 };
@@ -52,6 +54,7 @@ NumberQuestion.propTypes = {
   answerBody: PropTypes.any,
   formatMessage: PropTypes.func,
   showError: PropTypes.func,
+  disabled: PropTypes.bool,
 };
 
 export default NumberQuestion;

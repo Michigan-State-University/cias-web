@@ -52,7 +52,7 @@ exports[`<ConfirmationModal /> Should render and match the snapshot 1`] = `
   color: unset;
 }
 
-.c9 {
+.c10 {
   width: auto;
   height: auto;
   display: block;
@@ -64,7 +64,7 @@ exports[`<ConfirmationModal /> Should render and match the snapshot 1`] = `
   color: unset;
 }
 
-.c6 {
+.c7 {
   margin: 0;
   font-family: DM Sans;
   font-size: 25px;
@@ -72,7 +72,7 @@ exports[`<ConfirmationModal /> Should render and match the snapshot 1`] = `
   color: #2F3850;
 }
 
-.c11 {
+.c12 {
   margin: 0;
   font-family: DM Sans;
   font-size: 25px;
@@ -81,7 +81,7 @@ exports[`<ConfirmationModal /> Should render and match the snapshot 1`] = `
   text-align: center;
 }
 
-.c5 {
+.c6 {
   display: -webkit-box;
   display: -webkit-flex;
   display: -ms-flexbox;
@@ -100,7 +100,7 @@ exports[`<ConfirmationModal /> Should render and match the snapshot 1`] = `
   gap: 8px;
 }
 
-.c12 {
+.c13 {
   display: -webkit-box;
   display: -webkit-flex;
   display: -ms-flexbox;
@@ -111,7 +111,7 @@ exports[`<ConfirmationModal /> Should render and match the snapshot 1`] = `
   height: auto;
 }
 
-.c10 {
+.c11 {
   display: -webkit-box;
   display: -webkit-flex;
   display: -ms-flexbox;
@@ -124,7 +124,7 @@ exports[`<ConfirmationModal /> Should render and match the snapshot 1`] = `
   padding-left: 20px;
 }
 
-.c14 {
+.c15 {
   width: 100%;
   height: 40px;
   border-radius: 100px;
@@ -139,13 +139,13 @@ exports[`<ConfirmationModal /> Should render and match the snapshot 1`] = `
   transition: background-color 300ms ease,color 300ms ease,border 300ms ease;
 }
 
-.c14:hover {
+.c15:hover {
   background-color: #107969;
   color: #FFFFFF;
   border: 1px solid transparent;
 }
 
-.c15 {
+.c16 {
   width: 100%;
   height: 40px;
   border-radius: 100px;
@@ -160,13 +160,13 @@ exports[`<ConfirmationModal /> Should render and match the snapshot 1`] = `
   transition: background-color 300ms ease,color 300ms ease,border 300ms ease;
 }
 
-.c15:hover {
+.c16:hover {
   background-color: #FFFFFF;
   color: #D2371D;
   border: 1px solid #D2371D;
 }
 
-.c4 {
+.c5 {
   display: -webkit-box;
   display: -webkit-flex;
   display: -ms-flexbox;
@@ -183,7 +183,7 @@ exports[`<ConfirmationModal /> Should render and match the snapshot 1`] = `
   align-items: flex-start;
 }
 
-.c7 {
+.c8 {
   display: -webkit-box;
   display: -webkit-flex;
   display: -ms-flexbox;
@@ -200,6 +200,21 @@ exports[`<ConfirmationModal /> Should render and match the snapshot 1`] = `
   align-items: flex-end;
 }
 
+.c4 {
+  -webkit-box-pack: justify;
+  -webkit-justify-content: space-between;
+  -ms-flex-pack: justify;
+  justify-content: space-between;
+  justify-items: space-between;
+  -webkit-align-content: center;
+  -ms-flex-line-pack: center;
+  align-content: center;
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+}
+
 .c3 {
   max-width: 100% !important;
   width: 100%;
@@ -207,7 +222,7 @@ exports[`<ConfirmationModal /> Should render and match the snapshot 1`] = `
   padding: 0 !important;
 }
 
-.c8 {
+.c9 {
   height: 28px;
   width: 28px;
   display: -webkit-box;
@@ -232,7 +247,7 @@ exports[`<ConfirmationModal /> Should render and match the snapshot 1`] = `
   margin-right: 0;
 }
 
-.c13 {
+.c14 {
   margin-top: 48px;
   gap: 20px;
   -webkit-box-pack: center;
@@ -267,14 +282,14 @@ exports[`<ConfirmationModal /> Should render and match the snapshot 1`] = `
 }
 
 @media (max-width:575px) {
-  .c13 {
+  .c14 {
     margin-top: 32px;
     -webkit-flex-wrap: wrap;
     -ms-flex-wrap: wrap;
     flex-wrap: wrap;
   }
 
-  .c13 button {
+  .c14 button {
     width: 100%;
   }
 }
@@ -298,19 +313,19 @@ exports[`<ConfirmationModal /> Should render and match the snapshot 1`] = `
         style="box-sizing: border-box; position: relative; margin-left: auto; margin-right: auto; padding-left: 15px; padding-right: 15px; max-width: 960px;"
       >
         <div
-          class=""
+          class="c4"
           style="margin-left: -15px; margin-right: -15px; display: flex; flex-wrap: wrap; flex-grow: 0; flex-shrink: 0; align-items: center; justify-content: space-between;"
         >
           <div
             align="start"
-            class="c4"
+            class="c5"
             style="box-sizing: border-box; min-height: 1px; position: relative; padding-left: 15px; padding-right: 15px; width: 83.33333333333334%; flex-basis: 83.33333333333334%; flex-grow: 0; flex-shrink: 0; max-width: 83.33333333333334%; margin-left: 0%;"
           >
             <div
-              class="c5"
+              class="c6"
             >
               <h1
-                class="c6"
+                class="c7"
                 id="modal-title"
               >
                 Test
@@ -319,12 +334,12 @@ exports[`<ConfirmationModal /> Should render and match the snapshot 1`] = `
           </div>
           <div
             align="end"
-            class="c7"
+            class="c8"
             style="box-sizing: border-box; min-height: 1px; position: relative; padding-left: 15px; padding-right: 15px; width: 16.666666666666668%; flex-basis: 16.666666666666668%; flex-grow: 0; flex-shrink: 0; max-width: 16.666666666666668%; margin-left: 0%;"
           >
             <button
               aria-label="Close window"
-              class="c8"
+              class="c9"
               data-cy="modal-close-button"
               data-testid="close-modal-button"
               title="Close window"
@@ -342,28 +357,28 @@ exports[`<ConfirmationModal /> Should render and match the snapshot 1`] = `
         >
           <div
             align="start"
-            class="c4"
+            class="c5"
             style="box-sizing: border-box; min-height: 1px; position: relative; padding-left: 15px; padding-right: 15px; width: 100%; flex-basis: 100%; flex-grow: 0; flex-shrink: 0; max-width: 100%; margin-left: 0%;"
           >
             <div
-              class="c9"
+              class="c10"
               id="modal-description"
               width="100%"
             >
               <div
-                class="c10"
+                class="c11"
               >
                 <h1
-                  class="c11"
+                  class="c12"
                   id="modal-description"
                 >
                   Are you sure you want to perform this action?
                 </h1>
                 <div
-                  class="c12 c13"
+                  class="c13 c14"
                 >
                   <button
-                    class="c14"
+                    class="c15"
                     color="primary"
                     radius="100px"
                     type="button"
@@ -371,7 +386,7 @@ exports[`<ConfirmationModal /> Should render and match the snapshot 1`] = `
                     Cancel
                   </button>
                   <button
-                    class="c15"
+                    class="c16"
                     color="warning"
                     data-cy="confirmation-box-confirm-button"
                     radius="100px"
@@ -445,7 +460,7 @@ exports[`<ConfirmationModal /> Should render error and match the snapshot 1`] = 
   color: unset;
 }
 
-.c9 {
+.c10 {
   width: auto;
   height: auto;
   display: block;
@@ -457,7 +472,7 @@ exports[`<ConfirmationModal /> Should render error and match the snapshot 1`] = 
   color: unset;
 }
 
-.c6 {
+.c7 {
   margin: 0;
   font-family: DM Sans;
   font-size: 25px;
@@ -465,7 +480,7 @@ exports[`<ConfirmationModal /> Should render error and match the snapshot 1`] = 
   color: #2F3850;
 }
 
-.c11 {
+.c12 {
   margin: 0;
   font-family: DM Sans;
   font-size: 25px;
@@ -474,7 +489,7 @@ exports[`<ConfirmationModal /> Should render error and match the snapshot 1`] = 
   text-align: center;
 }
 
-.c5 {
+.c6 {
   display: -webkit-box;
   display: -webkit-flex;
   display: -ms-flexbox;
@@ -493,7 +508,7 @@ exports[`<ConfirmationModal /> Should render error and match the snapshot 1`] = 
   gap: 8px;
 }
 
-.c12 {
+.c13 {
   display: -webkit-box;
   display: -webkit-flex;
   display: -ms-flexbox;
@@ -504,13 +519,13 @@ exports[`<ConfirmationModal /> Should render error and match the snapshot 1`] = 
   height: auto;
 }
 
-.c17 {
+.c18 {
   width: auto;
   height: auto;
   margin-right: 15px;
 }
 
-.c18 {
+.c19 {
   font-family: DM Sans;
   font-size: 13px;
   line-height: 130%;
@@ -519,7 +534,7 @@ exports[`<ConfirmationModal /> Should render error and match the snapshot 1`] = 
   color: #2F3850;
 }
 
-.c10 {
+.c11 {
   display: -webkit-box;
   display: -webkit-flex;
   display: -ms-flexbox;
@@ -532,7 +547,7 @@ exports[`<ConfirmationModal /> Should render error and match the snapshot 1`] = 
   padding-left: 20px;
 }
 
-.c16 {
+.c17 {
   padding: 20px;
   width: 100%;
   max-width: 700px;
@@ -549,11 +564,11 @@ exports[`<ConfirmationModal /> Should render error and match the snapshot 1`] = 
   align-items: center;
 }
 
-.c16 p {
+.c17 p {
   color: #2F3850;
 }
 
-.c14 {
+.c15 {
   width: 100%;
   height: 40px;
   border-radius: 100px;
@@ -568,13 +583,13 @@ exports[`<ConfirmationModal /> Should render error and match the snapshot 1`] = 
   transition: background-color 300ms ease,color 300ms ease,border 300ms ease;
 }
 
-.c14:hover {
+.c15:hover {
   background-color: #107969;
   color: #FFFFFF;
   border: 1px solid transparent;
 }
 
-.c15 {
+.c16 {
   width: 100%;
   height: 40px;
   border-radius: 100px;
@@ -589,13 +604,13 @@ exports[`<ConfirmationModal /> Should render error and match the snapshot 1`] = 
   transition: background-color 300ms ease,color 300ms ease,border 300ms ease;
 }
 
-.c15:hover {
+.c16:hover {
   background-color: #FFFFFF;
   color: #D2371D;
   border: 1px solid #D2371D;
 }
 
-.c4 {
+.c5 {
   display: -webkit-box;
   display: -webkit-flex;
   display: -ms-flexbox;
@@ -612,7 +627,7 @@ exports[`<ConfirmationModal /> Should render error and match the snapshot 1`] = 
   align-items: flex-start;
 }
 
-.c7 {
+.c8 {
   display: -webkit-box;
   display: -webkit-flex;
   display: -ms-flexbox;
@@ -629,6 +644,21 @@ exports[`<ConfirmationModal /> Should render error and match the snapshot 1`] = 
   align-items: flex-end;
 }
 
+.c4 {
+  -webkit-box-pack: justify;
+  -webkit-justify-content: space-between;
+  -ms-flex-pack: justify;
+  justify-content: space-between;
+  justify-items: space-between;
+  -webkit-align-content: center;
+  -ms-flex-line-pack: center;
+  align-content: center;
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+}
+
 .c3 {
   max-width: 100% !important;
   width: 100%;
@@ -636,7 +666,7 @@ exports[`<ConfirmationModal /> Should render error and match the snapshot 1`] = 
   padding: 0 !important;
 }
 
-.c8 {
+.c9 {
   height: 28px;
   width: 28px;
   display: -webkit-box;
@@ -661,7 +691,7 @@ exports[`<ConfirmationModal /> Should render error and match the snapshot 1`] = 
   margin-right: 0;
 }
 
-.c13 {
+.c14 {
   margin-top: 48px;
   gap: 20px;
   -webkit-box-pack: center;
@@ -696,14 +726,14 @@ exports[`<ConfirmationModal /> Should render error and match the snapshot 1`] = 
 }
 
 @media (max-width:575px) {
-  .c13 {
+  .c14 {
     margin-top: 32px;
     -webkit-flex-wrap: wrap;
     -ms-flex-wrap: wrap;
     flex-wrap: wrap;
   }
 
-  .c13 button {
+  .c14 button {
     width: 100%;
   }
 }
@@ -727,19 +757,19 @@ exports[`<ConfirmationModal /> Should render error and match the snapshot 1`] = 
         style="box-sizing: border-box; position: relative; margin-left: auto; margin-right: auto; padding-left: 15px; padding-right: 15px; max-width: 960px;"
       >
         <div
-          class=""
+          class="c4"
           style="margin-left: -15px; margin-right: -15px; display: flex; flex-wrap: wrap; flex-grow: 0; flex-shrink: 0; align-items: center; justify-content: space-between;"
         >
           <div
             align="start"
-            class="c4"
+            class="c5"
             style="box-sizing: border-box; min-height: 1px; position: relative; padding-left: 15px; padding-right: 15px; width: 83.33333333333334%; flex-basis: 83.33333333333334%; flex-grow: 0; flex-shrink: 0; max-width: 83.33333333333334%; margin-left: 0%;"
           >
             <div
-              class="c5"
+              class="c6"
             >
               <h1
-                class="c6"
+                class="c7"
                 id="modal-title"
               >
                 Test
@@ -748,12 +778,12 @@ exports[`<ConfirmationModal /> Should render error and match the snapshot 1`] = 
           </div>
           <div
             align="end"
-            class="c7"
+            class="c8"
             style="box-sizing: border-box; min-height: 1px; position: relative; padding-left: 15px; padding-right: 15px; width: 16.666666666666668%; flex-basis: 16.666666666666668%; flex-grow: 0; flex-shrink: 0; max-width: 16.666666666666668%; margin-left: 0%;"
           >
             <button
               aria-label="Close window"
-              class="c8"
+              class="c9"
               data-cy="modal-close-button"
               data-testid="close-modal-button"
               title="Close window"
@@ -771,28 +801,28 @@ exports[`<ConfirmationModal /> Should render error and match the snapshot 1`] = 
         >
           <div
             align="start"
-            class="c4"
+            class="c5"
             style="box-sizing: border-box; min-height: 1px; position: relative; padding-left: 15px; padding-right: 15px; width: 100%; flex-basis: 100%; flex-grow: 0; flex-shrink: 0; max-width: 100%; margin-left: 0%;"
           >
             <div
-              class="c9"
+              class="c10"
               id="modal-description"
               width="100%"
             >
               <div
-                class="c10"
+                class="c11"
               >
                 <h1
-                  class="c11"
+                  class="c12"
                   id="modal-description"
                 >
                   Are you sure you want to perform this action?
                 </h1>
                 <div
-                  class="c12 c13"
+                  class="c13 c14"
                 >
                   <button
-                    class="c14"
+                    class="c15"
                     color="primary"
                     radius="100px"
                     type="button"
@@ -800,7 +830,7 @@ exports[`<ConfirmationModal /> Should render error and match the snapshot 1`] = 
                     Cancel
                   </button>
                   <button
-                    class="c15"
+                    class="c16"
                     color="warning"
                     data-cy="confirmation-box-confirm-button"
                     radius="100px"
@@ -811,15 +841,15 @@ exports[`<ConfirmationModal /> Should render error and match the snapshot 1`] = 
                 </div>
               </div>
               <div
-                class="c16"
+                class="c17"
               >
                 <img
                   alt="error"
-                  class="c17"
+                  class="c18"
                   src="IMAGE_MOCK"
                 />
                 <p
-                  class="c18"
+                  class="c19"
                   font-size="15"
                   font-weight="bold"
                 >

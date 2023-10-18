@@ -13,6 +13,10 @@ see <https://www.gnu.org/licenses/gpl-3.0.html>.
 
 # [CIAS 3.0](https://www.cias.app/)
 
+CIAS 3.0 platform source code is divided into two separate repositories:
+- [Frontend package](https://github.com/Michigan-State-University/cias-web#readme) - <b>current</b>
+- [Backend package](https://github.com/Michigan-State-University/cias-api#readme)
+
 ## Digital Behavioral Health Interventions Made Easy
 
 CIAS stands for Computerized Intervention Authoring System. CIAS gives you the ability to create and manage

@@ -19,6 +19,7 @@ import { Roles } from 'models/User/RolesManager';
 import { createTestStore } from 'utils/testUtils/storeUtils';
 
 import Sidebar from '../index';
+import RolesManagerContext from '../../../models/User/RolesManager/RolesManagerContext';
 
 describe('<Sidebar />', () => {
   let store;
@@ -57,11 +58,15 @@ describe('<Sidebar />', () => {
       container: { firstChild },
     } = render(
       <Provider store={store}>
-        <MemoryRouter>
-          <IntlProvider locale={DEFAULT_LOCALE}>
-            <Sidebar logOut={() => {}} path="/interventions" />
-          </IntlProvider>
-        </MemoryRouter>
+        <RolesManagerContext.Provider
+          value={{ userRoles: initialState.auth.user.roles }}
+        >
+          <MemoryRouter>
+            <IntlProvider locale={DEFAULT_LOCALE}>
+              <Sidebar logOut={() => {}} path="/interventions" />
+            </IntlProvider>
+          </MemoryRouter>
+        </RolesManagerContext.Provider>
       </Provider>,
     );
     expect(firstChild).toMatchSnapshot();
@@ -71,11 +76,15 @@ describe('<Sidebar />', () => {
       container: { firstChild },
     } = render(
       <Provider store={store}>
-        <MemoryRouter>
-          <IntlProvider locale={DEFAULT_LOCALE}>
-            <Sidebar logOut={() => {}} path="" />
-          </IntlProvider>
-        </MemoryRouter>
+        <RolesManagerContext.Provider
+          value={{ userRoles: initialState.auth.user.roles }}
+        >
+          <MemoryRouter>
+            <IntlProvider locale={DEFAULT_LOCALE}>
+              <Sidebar logOut={() => {}} path="" />
+            </IntlProvider>
+          </MemoryRouter>
+        </RolesManagerContext.Provider>
       </Provider>,
     );
     expect(firstChild).toMatchSnapshot();
