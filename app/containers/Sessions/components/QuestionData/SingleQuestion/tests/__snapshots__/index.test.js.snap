@@ -10,7 +10,7 @@ exports[`<SingleQuestion /> Should render and match the snapshot 1`] = `
   -ms-flex-direction: column;
   flex-direction: column;
   width: 100%;
-  margin-top: 10px;
+  margin-block-start: 10px;
 }
 
 .c3 {
@@ -101,7 +101,7 @@ exports[`<SingleQuestion /> Should render and match the snapshot 1`] = `
   align-items: center;
 }
 
-.c15 {
+.c16 {
   display: -webkit-box;
   display: -webkit-flex;
   display: -ms-flexbox;
@@ -114,6 +114,18 @@ exports[`<SingleQuestion /> Should render and match the snapshot 1`] = `
 }
 
 .c13 {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-flex-direction: row;
+  -ms-flex-direction: row;
+  flex-direction: row;
+  height: auto;
+  margin-inline-start: 31px;
+}
+
+.c14 {
   padding: 12px;
   border-style: solid;
   border-width: 1px;
@@ -121,13 +133,16 @@ exports[`<SingleQuestion /> Should render and match the snapshot 1`] = `
   border-radius: 5px;
   background-color: transparent;
   border-color: transparent;
-  margin-left: 31px;
   width: 37px;
   max-width: 200px;
-  padding-top: 12px;
-  padding-bottom: 12px;
   padding-right: 0;
   padding-left: 0;
+  padding-block: 12px;
+  padding-block-start: 12px;
+  padding-block-end: 12px;
+  padding-inline: 0;
+  padding-inline-start: 0;
+  padding-inline-end: 0;
   color: rgba(0,134,248,1);
   text-align: center;
   background-color: rgba(0,134,248,0.1);
@@ -135,13 +150,13 @@ exports[`<SingleQuestion /> Should render and match the snapshot 1`] = `
   opacity: 0.5;
 }
 
-.c13:focus {
+.c14:focus {
   box-shadow: none;
   outline: none;
   border-color: #107969;
 }
 
-.c13:disabled {
+.c14:disabled {
   color: #ABBBD1;
 }
 
@@ -187,10 +202,12 @@ exports[`<SingleQuestion /> Should render and match the snapshot 1`] = `
   display: block;
   border-radius: 5px;
   width: 100%;
-  padding-top: 14px;
-  padding-bottom: 14px;
-  padding-right: 21px;
-  padding-left: 21px;
+  padding-block: 14px;
+  padding-block-start: 14px;
+  padding-block-end: 14px;
+  padding-inline: 21px;
+  padding-inline-start: 21px;
+  padding-inline-end: 21px;
   border-radius: 5px;
   border-radius: 5px;
   color: unset;
@@ -235,15 +252,17 @@ exports[`<SingleQuestion /> Should render and match the snapshot 1`] = `
   cursor: pointer;
 }
 
-.c16 {
+.c17 {
   width: auto;
   height: auto;
   display: block;
   border-radius: 5px;
-  padding-top: 14px;
-  padding-bottom: 14px;
-  padding-right: 21px;
-  padding-left: 21px;
+  padding-block: 14px;
+  padding-block-start: 14px;
+  padding-block-end: 14px;
+  padding-inline: 21px;
+  padding-inline-start: 21px;
+  padding-inline-end: 21px;
   cursor: pointer;
   border-radius: 5px;
   border-radius: 5px;
@@ -251,7 +270,7 @@ exports[`<SingleQuestion /> Should render and match the snapshot 1`] = `
   cursor: pointer;
 }
 
-.c16:hover {
+.c17:hover {
   background-color: #E9F1FB;
 }
 
@@ -261,12 +280,12 @@ exports[`<SingleQuestion /> Should render and match the snapshot 1`] = `
   margin-inline-end: 16px;
 }
 
-.c18 {
+.c19 {
   width: auto;
   height: auto;
 }
 
-.c17 {
+.c18 {
   border-radius: 50%;
   background-color: #B727EA;
   display: -webkit-box;
@@ -283,14 +302,14 @@ exports[`<SingleQuestion /> Should render and match the snapshot 1`] = `
   align-items: center;
   width: 32px;
   height: 32px;
-  margin-right: 12px;
+  margin-inline-end: 12px;
   background-color: rgba(183,39,234,1);
   color: rgba(255,255,255,1);
   opacity: 1;
   color: rgba(255,255,255,1);
 }
 
-.c19 {
+.c20 {
   font-family: DM Sans;
   font-size: 13px;
   line-height: 130%;
@@ -299,7 +318,7 @@ exports[`<SingleQuestion /> Should render and match the snapshot 1`] = `
   color: rgba(183,39,234,1);
 }
 
-.c14 {
+.c15 {
   padding: 5px 10px;
   font-size: 13px;
   font-weight: 600;
@@ -309,7 +328,7 @@ exports[`<SingleQuestion /> Should render and match the snapshot 1`] = `
   opacity: 0.5;
 }
 
-.c14:focus {
+.c15:focus {
   box-shadow: none;
   outline: none;
   border: 1px solid transparent;
@@ -1871,18 +1890,22 @@ exports[`<SingleQuestion /> Should render and match the snapshot 1`] = `
           <div
             class="c12"
           >
-            <input
-              aria-label="Score"
-              class="c13 c14"
-              color="#0086F8"
-              data-cy="score-0-input"
-              dir="auto"
-              disabled=""
-              placeholder="Score"
-              type="tel"
-              value="1"
-              width="37px"
-            />
+            <div
+              class="c13"
+            >
+              <input
+                aria-label="Score"
+                class="c14 c15"
+                color="#0086F8"
+                data-cy="score-0-input"
+                dir="auto"
+                disabled=""
+                placeholder="Score"
+                type="tel"
+                value="1"
+                width="37px"
+              />
+            </div>
           </div>
         </div>
       </div>
@@ -3409,29 +3432,33 @@ exports[`<SingleQuestion /> Should render and match the snapshot 1`] = `
           <div
             class="c12"
           >
-            <input
-              aria-label="Score"
-              class="c13 c14"
-              color="#0086F8"
-              data-cy="score-1-input"
-              dir="auto"
-              disabled=""
-              placeholder="Score"
-              type="tel"
-              value="2"
-              width="37px"
-            />
+            <div
+              class="c13"
+            >
+              <input
+                aria-label="Score"
+                class="c14 c15"
+                color="#0086F8"
+                data-cy="score-1-input"
+                dir="auto"
+                disabled=""
+                placeholder="Score"
+                type="tel"
+                value="2"
+                width="37px"
+              />
+            </div>
           </div>
         </div>
       </div>
     </div>
   </div>
   <div
-    class="c15"
+    class="c16"
     hidden=""
   >
     <div
-      class="c16"
+      class="c17"
     >
       <div
         class="c8"
@@ -3440,17 +3467,17 @@ exports[`<SingleQuestion /> Should render and match the snapshot 1`] = `
           class="c12"
         >
           <div
-            class="c17"
+            class="c18"
             color="#FFFFFF"
             opacity="1"
           >
             <img
-              class="c18"
+              class="c19"
               src="IMAGE_MOCK"
             />
           </div>
           <p
-            class="c19"
+            class="c20"
             color="#B727EA"
             font-weight="bold"
           >

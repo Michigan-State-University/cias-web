@@ -74,14 +74,14 @@ const SingleQuestion = ({
   };
 
   return (
-    <Column mt={10}>
+    <Column marginBlockStart={10}>
       <DndSortable onDragEnd={onDragEnd} items={data} selector={null}>
         {({ item, index, dragHandleProps }) => (
-          <Row>
+          <Row dir={dynamicElementsDirection}>
             <HoverableBox
               hoverColor={isNarratorTabOrEditNotPossible ? null : undefined}
-              px={21}
-              py={14}
+              paddingInline={21}
+              paddingBlock={14}
               width="100%"
               onMouseEnter={handleMouseEnter(index)}
               onMouseLeave={() => setHovered(-1)}
@@ -92,7 +92,6 @@ const SingleQuestion = ({
                   align="center"
                   justify="between"
                   marginBlockEnd={isNarratorTabOrEditNotPossible ? 0 : 10}
-                  dir={dynamicElementsDirection}
                 >
                   <Row width="90%">
                     {!isNarratorTabOrEditNotPossible && (
@@ -144,29 +143,32 @@ const SingleQuestion = ({
                   </Row>
                 </Row>
                 <Row align="center" hidden={isNarratorTab}>
-                  <BadgeInput
-                    data-cy={`score-${index}-input`}
-                    ml={`${leftMargin}px`}
-                    disabled={!editingPossible}
-                    px={0}
-                    py={12}
-                    textAlign="center"
-                    validator={numericValidator}
-                    keyboard="tel"
-                    placeholder={
-                      !isNarratorTab
-                        ? formatMessage(globalMessages.variableScorePlaceholder)
-                        : ''
-                    }
-                    value={item.value}
-                    color={colors.azure}
-                    onBlur={(val) =>
-                      updateAnswer(index, {
-                        ...item,
-                        value: val,
-                      })
-                    }
-                  />
+                  <Row marginInlineStart={`${leftMargin}px`}>
+                    <BadgeInput
+                      data-cy={`score-${index}-input`}
+                      disabled={!editingPossible}
+                      paddingInline={0}
+                      paddingBlock={12}
+                      textAlign="center"
+                      validator={numericValidator}
+                      keyboard="tel"
+                      placeholder={
+                        !isNarratorTab
+                          ? formatMessage(
+                              globalMessages.variableScorePlaceholder,
+                            )
+                          : ''
+                      }
+                      value={item.value}
+                      color={colors.azure}
+                      onBlur={(val) =>
+                        updateAnswer(index, {
+                          ...item,
+                          value: val,
+                        })
+                      }
+                    />
+                  </Row>
                 </Row>
               </Column>
             </HoverableBox>
@@ -174,10 +176,10 @@ const SingleQuestion = ({
         )}
       </DndSortable>
       <Row hidden={isNarratorTabOrEditNotPossible}>
-        <HoverableBox px={21} py={14} onClick={addAnswer}>
+        <HoverableBox paddingInline={21} paddingBlock={14} onClick={addAnswer}>
           <Box>
             <Row align="center">
-              <PlusCircle mr={12} />
+              <PlusCircle marginInlineEnd={12} />
               <Text fontWeight="bold" color={themeColors.secondary}>
                 {formatMessage(messages.addAnswer)}
               </Text>
