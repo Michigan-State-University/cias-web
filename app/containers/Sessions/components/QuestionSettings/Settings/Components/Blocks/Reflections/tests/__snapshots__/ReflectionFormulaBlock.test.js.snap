@@ -321,6 +321,9 @@ exports[`<ReflectionFormulaBlock /> Should render and match the snapshot 1`] = `
   -webkit-box-align: flex-end;
   -ms-flex-align: flex-end;
   align-items: flex-end;
+  -webkit-flex-direction: row;
+  -ms-flex-direction: row;
+  flex-direction: row;
   gap: 15px;
   color: unset;
 }
@@ -1004,6 +1007,7 @@ exports[`<ReflectionFormulaBlock /> Should render and match the snapshot 1`] = `
       >
         <div
           class="c39"
+          direction="row"
           display="flex"
           width="100%"
         >

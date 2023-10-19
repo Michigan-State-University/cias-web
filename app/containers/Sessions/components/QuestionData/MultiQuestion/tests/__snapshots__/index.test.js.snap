@@ -287,6 +287,9 @@ exports[`<MultiQuestion /> Should render and match the snapshot 1`] = `
   -webkit-box-align: center;
   -ms-flex-align: center;
   align-items: center;
+  -webkit-flex-direction: row;
+  -ms-flex-direction: row;
+  flex-direction: row;
   gap: 15px;
   color: unset;
 }
@@ -469,6 +472,7 @@ exports[`<MultiQuestion /> Should render and match the snapshot 1`] = `
               />
               <div
                 class="c7"
+                direction="row"
                 display="flex"
               >
                 <div
