@@ -44,6 +44,7 @@ const MultiQuestion = ({
   isNarratorTab,
   editingPossible,
   intl: { formatMessage },
+  dynamicElementsDirection,
 }) => {
   const checkboxButtonRef = useRef(null);
 
@@ -92,6 +93,7 @@ const MultiQuestion = ({
                   align="center"
                   justify="between"
                   mb={isNarratorTabOrEditNotPossible ? 0 : 10}
+                  dir={dynamicElementsDirection}
                 >
                   <Row width="90%">
                     {!isNarratorTabOrEditNotPossible && (
@@ -99,7 +101,7 @@ const MultiQuestion = ({
                         alt={formatMessage(messages.reorderIconAlt, {
                           index,
                         })}
-                        mr={10}
+                        marginInlineEnd={10}
                         src={ReorderIcon}
                         disabled={false}
                         cursor="grab"
@@ -110,7 +112,7 @@ const MultiQuestion = ({
                     <Img
                       ref={checkboxButtonRef}
                       src={checkbox}
-                      mr={CHECKBOX_MARGIN}
+                      marginInlineEnd={CHECKBOX_MARGIN}
                     />
                     <OriginalTextHover
                       id={`question-${selectedQuestion.id}-answer-${index}`}
@@ -118,7 +120,6 @@ const MultiQuestion = ({
                       hidden={isNarratorTab}
                     >
                       <FlexibleWidthApprovableInput
-                        mr={8}
                         fontSize={18}
                         type="singleline"
                         placeholder={formatMessage(messages.placeholder, {
@@ -140,7 +141,7 @@ const MultiQuestion = ({
                       hidden={hovered !== index}
                       clickable
                     >
-                      <Img src={bin} mr={16} />
+                      <Img src={bin} marginInlineEnd={16} />
                     </Box>
                   </Row>
                 </Row>
@@ -216,6 +217,7 @@ MultiQuestion.propTypes = {
   reorderAnswers: PropTypes.func.isRequired,
   isNarratorTab: PropTypes.bool,
   editingPossible: PropTypes.bool,
+  dynamicElementsDirection: PropTypes.string,
 };
 
 const mapStateToProps = createStructuredSelector({

@@ -20,8 +20,9 @@ const MultipleQuestionLayout = ({
   selectedAnswersIndex,
   isMobile,
   disabled,
+  dynamicElementsDirection,
 }) => (
-  <Column>
+  <Column dir={dynamicElementsDirection}>
     {data.map((questionAnswer, index) => {
       const {
         payload,
@@ -76,6 +77,7 @@ MultipleQuestionLayout.propTypes = {
   selectedAnswersIndex: PropTypes.array,
   isMobile: PropTypes.bool,
   disabled: PropTypes.bool,
+  dynamicElementsDirection: PropTypes.string,
 };
 
 export default MultipleQuestionLayout;
