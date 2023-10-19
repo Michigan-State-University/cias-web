@@ -58,6 +58,9 @@ exports[`<CurrencyQuestion /> Should render and match the snapshot 1`] = `
   max-width: 200px;
   padding-right: 0;
   padding-left: 0;
+  padding-inline: 8px;
+  padding-inline-start: 8px;
+  padding-inline-end: 8px;
   font-size: 15px;
   color: #2F3850;
   opacity: 0.5;
