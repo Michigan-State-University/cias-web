@@ -78,11 +78,11 @@ const MultiQuestion = ({
         selector={null}
       >
         {({ item, index, dragHandleProps }) => (
-          <Row>
+          <Row dir={dynamicElementsDirection}>
             <HoverableBox
               hoverColor={isNarratorTabOrEditNotPossible ? null : undefined}
-              px={21}
-              py={14}
+              paddingInline={21}
+              paddingBlock={14}
               width="100%"
               onMouseEnter={handleMouseEnter(index)}
               onMouseLeave={() => setHovered(-1)}
@@ -93,7 +93,6 @@ const MultiQuestion = ({
                   align="center"
                   justify="between"
                   marginBlockEnd={isNarratorTabOrEditNotPossible ? 0 : 10}
-                  dir={dynamicElementsDirection}
                 >
                   <Row width="90%">
                     {!isNarratorTabOrEditNotPossible && (
@@ -146,46 +145,46 @@ const MultiQuestion = ({
                   </Row>
                 </Row>
                 <Row align="center" display="flex" hidden={isNarratorTab}>
-                  <BadgeInput
-                    disabled={!editingPossible}
-                    px={0}
-                    py={12}
-                    ml={`${leftMargin}px`}
-                    mr={10}
-                    textAlign="center"
-                    validator={variableNameValidator}
-                    placeholder={formatMessage(
-                      globalMessages.variableNamePlaceholder,
-                    )}
-                    value={item.variable.name}
-                    color={colors.jungleGreen}
-                    onBlur={(val) =>
-                      updateAnswer(index, {
-                        ...item,
-                        variable: { ...item.variable, name: val },
-                      })
-                    }
-                    autoComplete="off"
-                  />
-                  <BadgeInput
-                    disabled={!editingPossible}
-                    px={0}
-                    py={12}
-                    textAlign="center"
-                    validator={numericValidator}
-                    keyboard="tel"
-                    placeholder={formatMessage(
-                      globalMessages.variableScorePlaceholder,
-                    )}
-                    value={item.variable.value}
-                    color={colors.azure}
-                    onBlur={(val) =>
-                      updateAnswer(index, {
-                        ...item,
-                        variable: { ...item.variable, value: val },
-                      })
-                    }
-                  />
+                  <Row marginInlineStart={`${leftMargin}px`} gap={10}>
+                    <BadgeInput
+                      disabled={!editingPossible}
+                      paddingInline={0}
+                      paddingBlock={12}
+                      textAlign="center"
+                      validator={variableNameValidator}
+                      placeholder={formatMessage(
+                        globalMessages.variableNamePlaceholder,
+                      )}
+                      value={item.variable.name}
+                      color={colors.jungleGreen}
+                      onBlur={(val) =>
+                        updateAnswer(index, {
+                          ...item,
+                          variable: { ...item.variable, name: val },
+                        })
+                      }
+                      autoComplete="off"
+                    />
+                    <BadgeInput
+                      disabled={!editingPossible}
+                      paddingInline={0}
+                      paddingBlock={12}
+                      textAlign="center"
+                      validator={numericValidator}
+                      keyboard="tel"
+                      placeholder={formatMessage(
+                        globalMessages.variableScorePlaceholder,
+                      )}
+                      value={item.variable.value}
+                      color={colors.azure}
+                      onBlur={(val) =>
+                        updateAnswer(index, {
+                          ...item,
+                          variable: { ...item.variable, value: val },
+                        })
+                      }
+                    />
+                  </Row>
                 </Row>
               </Column>
             </HoverableBox>
@@ -193,10 +192,10 @@ const MultiQuestion = ({
         )}
       </DndSortable>
       <Row display="flex" hidden={isNarratorTabOrEditNotPossible}>
-        <HoverableBox px={21} py={14} onClick={addAnswer}>
+        <HoverableBox paddingInline={21} paddingBlock={14} onClick={addAnswer}>
           <Box>
             <Row align="center">
-              <PlusCircle mr={12} />
+              <PlusCircle marginInlineEnd={12} />
               <Text fontWeight="bold" color={themeColors.secondary}>
                 {formatMessage(messages.addAnswer)}
               </Text>

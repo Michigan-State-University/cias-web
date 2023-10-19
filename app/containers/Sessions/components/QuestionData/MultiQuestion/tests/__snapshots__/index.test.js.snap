@@ -105,7 +105,7 @@ exports[`<MultiQuestion /> Should render and match the snapshot 1`] = `
   display: flex;
 }
 
-.c17 {
+.c18 {
   display: -webkit-box;
   display: -webkit-flex;
   display: -ms-flexbox;
@@ -117,7 +117,7 @@ exports[`<MultiQuestion /> Should render and match the snapshot 1`] = `
   display: none;
 }
 
-.c19 {
+.c20 {
   display: -webkit-box;
   display: -webkit-flex;
   display: -ms-flexbox;
@@ -135,7 +135,55 @@ exports[`<MultiQuestion /> Should render and match the snapshot 1`] = `
   align-items: center;
 }
 
-.c15 {
+.c13 {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-flex-direction: row;
+  -ms-flex-direction: row;
+  flex-direction: row;
+  height: auto;
+  gap: 10px;
+  margin-inline-start: 31px;
+}
+
+.c14 {
+  padding: 12px;
+  border-style: solid;
+  border-width: 1px;
+  border-color: #E9F1FB;
+  border-radius: 5px;
+  background-color: transparent;
+  border-color: transparent;
+  width: 73px;
+  max-width: 200px;
+  padding-right: 0;
+  padding-left: 0;
+  padding-block: 12px;
+  padding-block-start: 12px;
+  padding-block-end: 12px;
+  padding-inline: 0;
+  padding-inline-start: 0;
+  padding-inline-end: 0;
+  color: rgba(16,121,105,1);
+  text-align: center;
+  background-color: rgba(16,121,105,0.1);
+  color: rgba(16,121,105,1);
+  opacity: 0.5;
+}
+
+.c14:focus {
+  box-shadow: none;
+  outline: none;
+  border-color: #107969;
+}
+
+.c14:disabled {
+  color: #ABBBD1;
+}
+
+.c16 {
   padding: 12px;
   border-style: solid;
   border-width: 1px;
@@ -145,10 +193,14 @@ exports[`<MultiQuestion /> Should render and match the snapshot 1`] = `
   border-color: transparent;
   width: 37px;
   max-width: 200px;
-  padding-top: 12px;
-  padding-bottom: 12px;
   padding-right: 0;
   padding-left: 0;
+  padding-block: 12px;
+  padding-block-start: 12px;
+  padding-block-end: 12px;
+  padding-inline: 0;
+  padding-inline-start: 0;
+  padding-inline-end: 0;
   color: rgba(0,134,248,1);
   text-align: center;
   background-color: rgba(0,134,248,0.1);
@@ -156,46 +208,13 @@ exports[`<MultiQuestion /> Should render and match the snapshot 1`] = `
   opacity: 0.5;
 }
 
-.c15:focus {
+.c16:focus {
   box-shadow: none;
   outline: none;
   border-color: #107969;
 }
 
-.c15:disabled {
-  color: #ABBBD1;
-}
-
-.c13 {
-  padding: 12px;
-  border-style: solid;
-  border-width: 1px;
-  border-color: #E9F1FB;
-  border-radius: 5px;
-  background-color: transparent;
-  border-color: transparent;
-  margin-right: 10px;
-  margin-left: 31px;
-  width: 73px;
-  max-width: 200px;
-  padding-top: 12px;
-  padding-bottom: 12px;
-  padding-right: 0;
-  padding-left: 0;
-  color: rgba(16,121,105,1);
-  text-align: center;
-  background-color: rgba(16,121,105,0.1);
-  color: rgba(16,121,105,1);
-  opacity: 0.5;
-}
-
-.c13:focus {
-  box-shadow: none;
-  outline: none;
-  border-color: #107969;
-}
-
-.c13:disabled {
+.c16:disabled {
   color: #ABBBD1;
 }
 
@@ -241,10 +260,12 @@ exports[`<MultiQuestion /> Should render and match the snapshot 1`] = `
   display: block;
   border-radius: 5px;
   width: 100%;
-  padding-top: 14px;
-  padding-bottom: 14px;
-  padding-right: 21px;
-  padding-left: 21px;
+  padding-block: 14px;
+  padding-block-start: 14px;
+  padding-block-end: 14px;
+  padding-inline: 21px;
+  padding-inline-start: 21px;
+  padding-inline-end: 21px;
   border-radius: 5px;
   border-radius: 5px;
   color: unset;
@@ -289,15 +310,17 @@ exports[`<MultiQuestion /> Should render and match the snapshot 1`] = `
   cursor: pointer;
 }
 
-.c18 {
+.c19 {
   width: auto;
   height: auto;
   display: block;
   border-radius: 5px;
-  padding-top: 14px;
-  padding-bottom: 14px;
-  padding-right: 21px;
-  padding-left: 21px;
+  padding-block: 14px;
+  padding-block-start: 14px;
+  padding-block-end: 14px;
+  padding-inline: 21px;
+  padding-inline-start: 21px;
+  padding-inline-end: 21px;
   cursor: pointer;
   border-radius: 5px;
   border-radius: 5px;
@@ -305,7 +328,7 @@ exports[`<MultiQuestion /> Should render and match the snapshot 1`] = `
   cursor: pointer;
 }
 
-.c18:hover {
+.c19:hover {
   background-color: #E9F1FB;
 }
 
@@ -315,12 +338,12 @@ exports[`<MultiQuestion /> Should render and match the snapshot 1`] = `
   margin-inline-end: 16px;
 }
 
-.c21 {
+.c22 {
   width: auto;
   height: auto;
 }
 
-.c20 {
+.c21 {
   border-radius: 50%;
   background-color: #B727EA;
   display: -webkit-box;
@@ -337,14 +360,14 @@ exports[`<MultiQuestion /> Should render and match the snapshot 1`] = `
   align-items: center;
   width: 32px;
   height: 32px;
-  margin-right: 12px;
+  margin-inline-end: 12px;
   background-color: rgba(183,39,234,1);
   color: rgba(255,255,255,1);
   opacity: 1;
   color: rgba(255,255,255,1);
 }
 
-.c22 {
+.c23 {
   font-family: DM Sans;
   font-size: 13px;
   line-height: 130%;
@@ -353,7 +376,7 @@ exports[`<MultiQuestion /> Should render and match the snapshot 1`] = `
   color: rgba(183,39,234,1);
 }
 
-.c14 {
+.c15 {
   padding: 5px 10px;
   font-size: 13px;
   font-weight: 600;
@@ -363,13 +386,13 @@ exports[`<MultiQuestion /> Should render and match the snapshot 1`] = `
   opacity: 0.5;
 }
 
-.c14:focus {
+.c15:focus {
   box-shadow: none;
   outline: none;
   border: 1px solid transparent;
 }
 
-.c16 {
+.c17 {
   padding: 5px 10px;
   font-size: 13px;
   font-weight: 600;
@@ -379,7 +402,7 @@ exports[`<MultiQuestion /> Should render and match the snapshot 1`] = `
   opacity: 0.5;
 }
 
-.c16:focus {
+.c17:focus {
   box-shadow: none;
   outline: none;
   border: 1px solid transparent;
@@ -1942,61 +1965,65 @@ exports[`<MultiQuestion /> Should render and match the snapshot 1`] = `
             class="c12"
             display="flex"
           >
-            <input
-              aria-label="Variable name..."
-              autocomplete="off"
-              class="c13 c14"
-              color="#107969"
-              dir="auto"
-              disabled=""
-              name="notASearchField-Variable name..."
-              placeholder="Variable name..."
-              type="text"
-              value="test"
-              width="73px"
-            />
-            <input
-              aria-label="Score"
-              class="c15 c16"
-              color="#0086F8"
-              dir="auto"
-              disabled=""
-              placeholder="Score"
-              type="tel"
-              value="1"
-              width="37px"
-            />
+            <div
+              class="c13"
+            >
+              <input
+                aria-label="Variable name..."
+                autocomplete="off"
+                class="c14 c15"
+                color="#107969"
+                dir="auto"
+                disabled=""
+                name="notASearchField-Variable name..."
+                placeholder="Variable name..."
+                type="text"
+                value="test"
+                width="73px"
+              />
+              <input
+                aria-label="Score"
+                class="c16 c17"
+                color="#0086F8"
+                dir="auto"
+                disabled=""
+                placeholder="Score"
+                type="tel"
+                value="1"
+                width="37px"
+              />
+            </div>
           </div>
         </div>
       </div>
     </div>
   </div>
   <div
-    class="c17"
+    class="c18"
     display="flex"
     hidden=""
   >
     <div
-      class="c18"
+      class="c19"
     >
       <div
         class="c8"
       >
         <div
-          class="c19"
+          class="c20"
         >
           <div
-            class="c20"
+            class="c21"
             color="#FFFFFF"
             opacity="1"
           >
             <img
-              class="c21"
+              class="c22"
               src="IMAGE_MOCK"
             />
           </div>
           <p
-            class="c22"
+            class="c23"
             color="#B727EA"
             font-weight="bold"
           >
