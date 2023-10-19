@@ -537,7 +537,7 @@ exports[`<UserList /> Should render and match the snapshot - admin 1`] = `
 }
 
 .c21 {
-  margin-right: 5px;
+  margin-inline-end: 5px;
   border-radius: 5px;
 }
 
@@ -1904,7 +1904,7 @@ exports[`<UserList /> Should render and match the snapshot - researcher 1`] = `
 }
 
 .c20 {
-  margin-right: 5px;
+  margin-inline-end: 5px;
   border-radius: 5px;
 }
 

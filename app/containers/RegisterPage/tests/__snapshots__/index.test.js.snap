@@ -339,7 +339,7 @@ exports[`<RegisterPage /> Should render and match the researcher 1`] = `
 }
 
 .c26 {
-  margin-right: 5px;
+  margin-inline-end: 5px;
   border-radius: 5px;
 }
 
@@ -1112,7 +1112,7 @@ exports[`<RegisterPage /> Should render and match the snapshot for participant 1
 }
 
 .c25 {
-  margin-right: 5px;
+  margin-inline-end: 5px;
   border-radius: 5px;
 }
 

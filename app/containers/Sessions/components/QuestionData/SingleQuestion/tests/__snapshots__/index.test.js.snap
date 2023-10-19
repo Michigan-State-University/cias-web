@@ -56,7 +56,7 @@ exports[`<SingleQuestion /> Should render and match the snapshot 1`] = `
   -webkit-box-align: center;
   -ms-flex-align: center;
   align-items: center;
-  margin-bottom: 0;
+  margin-block-end: 0;
 }
 
 .c5 {

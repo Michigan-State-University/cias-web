@@ -488,7 +488,7 @@ exports[`<AnswerSessionPage /> Should render and match the snapshot 1`] = `
 }
 
 .c58 {
-  margin-right: 5px;
+  margin-inline-end: 5px;
   border-radius: 5px;
 }
 

@@ -195,7 +195,7 @@ exports[`<InterventionPage /> Should render and match the snapshot with interven
 }
 
 .c25 {
-  margin-right: 5px;
+  margin-inline-end: 5px;
   border-radius: 5px;
 }
 
@@ -970,7 +970,7 @@ exports[`<InterventionPage /> Should render and match the snapshot with loader 1
 }
 
 .c25 {
-  margin-right: 5px;
+  margin-inline-end: 5px;
   border-radius: 5px;
 }
 
@@ -1745,7 +1745,7 @@ exports[`<InterventionPage /> Should render and match the snapshot without inter
 }
 
 .c25 {
-  margin-right: 5px;
+  margin-inline-end: 5px;
   border-radius: 5px;
 }
 
