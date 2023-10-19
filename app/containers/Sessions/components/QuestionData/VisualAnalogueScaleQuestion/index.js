@@ -165,6 +165,7 @@ const VisualAnalogueScaleQuestion = ({
                   rangeStart={rangeStart}
                   rangeEnd={rangeEnd}
                   showNumber={!isNullOrUndefined(showNumber) && showNumber}
+                  dynamicElementsDirection={dynamicElementsDirection}
                 />
               )}
             </Box>
