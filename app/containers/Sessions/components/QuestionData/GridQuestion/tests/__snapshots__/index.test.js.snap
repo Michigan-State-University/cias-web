@@ -6,10 +6,12 @@ exports[`<GridQuestion /> Should render and match the snapshot 1`] = `
   height: auto;
   display: block;
   border-radius: 5px;
-  padding-top: 14px;
-  padding-bottom: 14px;
-  padding-right: 21px;
-  padding-left: 21px;
+  padding-block: 14px;
+  padding-block-start: 14px;
+  padding-block-end: 14px;
+  padding-inline: 21px;
+  padding-inline-start: 21px;
+  padding-inline-end: 21px;
   cursor: pointer;
   border-radius: 5px;
   border-radius: 5px;
@@ -61,9 +63,10 @@ exports[`<GridQuestion /> Should render and match the snapshot 1`] = `
   -ms-overflow-style: none;
   height: inherit;
   overflow: scroll;
-  padding-top: 14px;
-  padding-bottom: 14px;
-  padding-right: 21px;
+  padding-block: 14px;
+  padding-block-start: 14px;
+  padding-block-end: 14px;
+  padding-inline-end: 21px;
   color: unset;
 }
 
@@ -78,9 +81,10 @@ exports[`<GridQuestion /> Should render and match the snapshot 1`] = `
   border-radius: 5px;
   height: 35px;
   display: none;
-  padding-right: 8px;
-  padding-left: 8px;
-  margin-bottom: 8px;
+  padding-inline: 8px;
+  padding-inline-start: 8px;
+  padding-inline-end: 8px;
+  margin-block-end: 8px;
   color: unset;
 }
 
@@ -160,11 +164,13 @@ exports[`<GridQuestion /> Should render and match the snapshot 1`] = `
   height: auto;
   display: block;
   border-radius: 5px;
-  padding-top: 14px;
-  padding-bottom: 14px;
-  padding-right: 21px;
-  padding-left: 21px;
-  margin-top: 20px;
+  padding-block: 14px;
+  padding-block-start: 14px;
+  padding-block-end: 14px;
+  padding-inline: 21px;
+  padding-inline-start: 21px;
+  padding-inline-end: 21px;
+  margin-block-start: 20px;
   cursor: pointer;
   border-radius: 5px;
   border-radius: 5px;
@@ -237,7 +243,7 @@ exports[`<GridQuestion /> Should render and match the snapshot 1`] = `
   align-items: center;
   width: 32px;
   height: 32px;
-  margin-right: 12px;
+  margin-inline-end: 12px;
   background-color: rgba(183,39,234,1);
   color: rgba(255,255,255,1);
   opacity: 1;
@@ -288,7 +294,7 @@ exports[`<GridQuestion /> Should render and match the snapshot 1`] = `
   -ms-flex-direction: row;
   flex-direction: row;
   height: auto;
-  margin-bottom: 8px;
+  margin-block-end: 8px;
   display: -webkit-box;
   display: -webkit-flex;
   display: -ms-flexbox;
@@ -348,7 +354,7 @@ exports[`<GridQuestion /> Should render and match the snapshot 1`] = `
   -ms-flex-direction: row;
   flex-direction: row;
   height: auto;
-  margin-right: 8px;
+  margin-inline-end: 8px;
   display: -webkit-box;
   display: -webkit-flex;
   display: -ms-flexbox;
@@ -459,10 +465,14 @@ exports[`<GridQuestion /> Should render and match the snapshot 1`] = `
   border-color: transparent;
   width: 37px;
   max-width: 200px;
-  padding-top: 12px;
-  padding-bottom: 12px;
   padding-right: 0;
   padding-left: 0;
+  padding-block: 12px;
+  padding-block-start: 12px;
+  padding-block-end: 12px;
+  padding-inline: 0;
+  padding-inline-start: 0;
+  padding-inline-end: 0;
   color: rgba(0,134,248,1);
   text-align: center;
   background-color: rgba(0,134,248,0.1);
@@ -490,10 +500,14 @@ exports[`<GridQuestion /> Should render and match the snapshot 1`] = `
   border-color: transparent;
   width: 110px;
   max-width: 200px;
-  padding-top: 12px;
-  padding-bottom: 12px;
   padding-right: 0;
   padding-left: 0;
+  padding-block: 12px;
+  padding-block-start: 12px;
+  padding-block-end: 12px;
+  padding-inline: 0;
+  padding-inline-start: 0;
+  padding-inline-end: 0;
   color: #2F3850;
   text-align: center;
   cursor: text;
@@ -520,10 +534,14 @@ exports[`<GridQuestion /> Should render and match the snapshot 1`] = `
   border-color: transparent;
   width: 49px;
   max-width: 200px;
-  padding-top: 12px;
-  padding-bottom: 12px;
   padding-right: 0;
   padding-left: 0;
+  padding-block: 12px;
+  padding-block-start: 12px;
+  padding-block-end: 12px;
+  padding-inline: 0;
+  padding-inline-start: 0;
+  padding-inline-end: 0;
   color: rgba(16,121,105,1);
   text-align: center;
   background-color: rgba(16,121,105,0.1);

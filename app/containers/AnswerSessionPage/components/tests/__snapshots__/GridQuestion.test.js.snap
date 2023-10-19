@@ -33,10 +33,11 @@ exports[`<GridQuestion /> Should render and match the snapshot 1`] = `
   -ms-overflow-style: none;
   height: inherit;
   overflow: scroll;
-  padding-top: 14px;
-  padding-bottom: 14px;
-  padding-right: 21px;
-  margin-left: 40px;
+  padding-block: 14px;
+  padding-block-start: 14px;
+  padding-block-end: 14px;
+  padding-inline-end: 21px;
+  margin-inline-start: 40px;
   color: unset;
 }
 
@@ -293,7 +294,7 @@ exports[`<GridQuestion /> Should render and match the snapshot 1`] = `
               <th
                 class="c6 c7"
                 scope="col"
-                style="position: sticky; left: 0px;"
+                style="position: sticky; inset-inline-start: 0;"
                 width="120px"
               />
               <th
@@ -332,7 +333,7 @@ exports[`<GridQuestion /> Should render and match the snapshot 1`] = `
               <th
                 class="c6 c7"
                 scope="row"
-                style="position: sticky; left: 0px;"
+                style="position: sticky; inset-inline-start: 0;"
                 width="120px"
               >
                 <div
@@ -426,7 +427,7 @@ exports[`<GridQuestion /> Should render and match the snapshot 1`] = `
               <th
                 class="c6 c7"
                 scope="row"
-                style="position: sticky; left: 0px;"
+                style="position: sticky; inset-inline-start: 0;"
                 width="120px"
               >
                 <div
