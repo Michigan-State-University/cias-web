@@ -77,8 +77,8 @@ exports[`<QuestionDetails /> should match the snapshot 1`] = `
   -ms-flex-direction: row;
   flex-direction: row;
   height: auto;
-  margin-top: 10px;
-  margin-left: 26px;
+  margin-block-start: 10px;
+  margin-inline-start: 26px;
 }
 
 .c20 {
@@ -3736,6 +3736,7 @@ exports[`<QuestionDetails /> should match the snapshot 1`] = `
               </div>
               <div
                 class="c19"
+                dir="ltr"
               >
                 <div
                   class="c20"

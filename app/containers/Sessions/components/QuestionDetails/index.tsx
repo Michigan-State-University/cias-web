@@ -21,7 +21,10 @@ import {
   makeSelectIntervention,
 } from 'global/reducers/intervention';
 import questionTypesMessages from 'global/i18n/questionTypesMessages';
-import { makeSelectInterventionFixedElementsDirection } from 'global/reducers/globalState';
+import {
+  makeSelectInterventionDynamicElementsDirection,
+  makeSelectInterventionFixedElementsDirection,
+} from 'global/reducers/globalState';
 
 import CommonLayout from 'containers/AnswerSessionPage/layouts/CommonLayout';
 import ScreenBackButton from 'containers/AnswerSessionPage/components/ScreenBackButton';
@@ -85,6 +88,9 @@ const RenderQuestionDetails = ({
 
   const fixedElementsDirection = useSelector(
     makeSelectInterventionFixedElementsDirection(),
+  );
+  const dynamicElementsDirection = useSelector(
+    makeSelectInterventionDynamicElementsDirection(),
   );
 
   useInjectSaga({ key: 'editQuestion', saga: editQuestionSaga });
@@ -220,7 +226,11 @@ const RenderQuestionDetails = ({
                       </Row>
                     )}
                     {'variable' in body && (
-                      <Row mt={10} ml={26}>
+                      <Row
+                        dir={dynamicElementsDirection}
+                        marginBlockStart={10}
+                        marginInlineStart={26}
+                      >
                         <HelpIconTooltip
                           id="hardcoded-variable-score-info"
                           tooltipContent={variableTooltipContent}
