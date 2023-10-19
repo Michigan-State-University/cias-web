@@ -33,7 +33,7 @@ const MultipleQuestionLayout = ({
       const key = `question-${questionId}-el-${index}`;
 
       return (
-        <Row key={key} mb={10}>
+        <Row key={key} marginBlockEnd={10}>
           {!isMobile && (
             <AudioTextPreview
               text={htmlToPlainText(payload)}
@@ -41,8 +41,8 @@ const MultipleQuestionLayout = ({
             />
           )}
           <HoverableBox
-            px={margin}
-            py={14}
+            paddingInline={margin}
+            paddingBlock={14}
             filled
             clickable
             disabled={disabled}

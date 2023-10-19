@@ -32,7 +32,7 @@ const SingleQuestionLayout = ({
         const key = `question-${questionId}-el-${index}`;
 
         return (
-          <Row key={key} mb={12} align="center">
+          <Row key={key} marginBlockEnd={12} align="center">
             {!isMobile && (
               <AudioTextPreview
                 text={htmlToPlainText(payload)}
@@ -40,8 +40,8 @@ const SingleQuestionLayout = ({
               />
             )}
             <HoverableBox
-              px={margin}
-              py={14}
+              paddingInline={margin}
+              paddingBlock={14}
               filled
               clickable
               onClick={(event) => {

@@ -92,7 +92,7 @@ const MultiQuestion = ({
                 <Row
                   align="center"
                   justify="between"
-                  mb={isNarratorTabOrEditNotPossible ? 0 : 10}
+                  marginBlockEnd={isNarratorTabOrEditNotPossible ? 0 : 10}
                   dir={dynamicElementsDirection}
                 >
                   <Row width="90%">
