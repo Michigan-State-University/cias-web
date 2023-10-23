@@ -383,7 +383,6 @@ exports[`<InviteResearcher /> Should display invalid email error 1`] = `
           <div
             align="start"
             class="c5"
-            dir="auto"
             style="box-sizing: border-box; min-height: 1px; position: relative; padding-left: 15px; padding-right: 15px; width: 83.33333333333334%; flex-basis: 83.33333333333334%; flex-grow: 0; flex-shrink: 0; max-width: 83.33333333333334%; margin-left: 0%;"
           >
             <div
@@ -904,7 +903,6 @@ exports[`<InviteResearcher /> Should display server error 1`] = `
           <div
             align="start"
             class="c5"
-            dir="auto"
             style="box-sizing: border-box; min-height: 1px; position: relative; padding-left: 15px; padding-right: 15px; width: 83.33333333333334%; flex-basis: 83.33333333333334%; flex-grow: 0; flex-shrink: 0; max-width: 83.33333333333334%; margin-left: 0%;"
           >
             <div
@@ -1418,7 +1416,6 @@ exports[`<InviteResearcher /> Should render and match the snapshot 1`] = `
           <div
             align="start"
             class="c5"
-            dir="auto"
             style="box-sizing: border-box; min-height: 1px; position: relative; padding-left: 15px; padding-right: 15px; width: 83.33333333333334%; flex-basis: 83.33333333333334%; flex-grow: 0; flex-shrink: 0; max-width: 83.33333333333334%; margin-left: 0%;"
           >
             <div
