@@ -129,6 +129,7 @@ const AnimationRefHelper = ({
   setFeedbackSettings,
   feedbackScreenSettings,
   audioInstance,
+  dynamicElementsDirection,
 }) => {
   const animationParentRef = useRef();
   const [refState, setRefState] = useState(null);
@@ -156,6 +157,7 @@ const AnimationRefHelper = ({
           setFeedbackSettings={setFeedbackSettings}
           feedbackScreenSettings={feedbackScreenSettings}
           audioInstance={audioInstance}
+          dynamicElementsDirection={dynamicElementsDirection}
         />
       )}
     </AnswerInterventionContent>
@@ -170,6 +172,7 @@ AnimationRefHelper.propTypes = {
   setFeedbackSettings: PropTypes.func,
   feedbackScreenSettings: PropTypes.object,
   audioInstance: PropTypes.object,
+  dynamicElementsDirection: PropTypes.string,
 };
 
 const IS_DESKTOP = 'IS_DESKTOP';
@@ -577,6 +580,7 @@ export function AnswerSessionPage({
                 setFeedbackSettings={setFeedbackSettings}
                 feedbackScreenSettings={feedbackScreenSettings}
                 audioInstance={audioInstance}
+                dynamicElementsDirection={dynamicElementsDirection}
               >
                 <ActionButtons
                   questionType={type}
@@ -909,6 +913,9 @@ export function AnswerSessionPage({
                                     feedbackScreenSettings
                                   }
                                   audioInstance={audioInstance}
+                                  dynamicElementsDirection={
+                                    dynamicElementsDirection
+                                  }
                                 >
                                   {renderQuestion()}
                                 </AnimationRefHelper>

@@ -35,6 +35,7 @@ export type TUseFeedbackHelper = (
   sliderRef: AnswerSessionPageFeedbackScreenSettings['sliderRef'],
   animationRef: LottieRef,
   loadedAnimations: MutableRefObject<ILoadedAnimationData[]>,
+  isRtl: boolean,
 ) => {
   getInitialFeedbackData: () => IFeedbackBlock | undefined;
   changeFeedback: (nextBlock: NarratorBlock, nextIndex: number) => void;
@@ -54,6 +55,7 @@ const useFeedbackHelper: TUseFeedbackHelper = (
   sliderRef,
   animationRef,
   loadedAnimations,
+  isRtl,
 ) => {
   const getInitialFeedbackData: ReturnType<TUseFeedbackHelper>['getInitialFeedbackData'] =
     () => {
@@ -107,54 +109,66 @@ const useFeedbackHelper: TUseFeedbackHelper = (
 
   const calculatePosition: ReturnType<TUseFeedbackHelper>['calculatePosition'] =
     (action: EFeedbackAction, currentPosition: Position) => {
+      const { offsetTop, offsetLeft, clientWidth } = sliderRef.sliderRef;
+      const targetValue = sliderRef.props.value;
+
       switch (action) {
         case EFeedbackAction.SHOW_USER_VALUE: {
-          const targetValue = sliderRef.props.value;
           const characterOffset = getCharacterHandOffset();
 
+          const x = isRtl
+            ? offsetLeft +
+              clientWidth -
+              calculatePercentageValue(clientWidth, targetValue) -
+              characterOffset.x
+            : offsetLeft +
+              calculatePercentageValue(clientWidth, targetValue) -
+              characterOffset.x;
+          const y = offsetTop + characterOffset.y + MARK_MARGIN;
+
           return {
-            x:
-              sliderRef.sliderRef.offsetLeft +
-              calculatePercentageValue(
-                sliderRef.sliderRef.clientWidth,
-                targetValue,
-              ) -
-              characterOffset.x,
-            y: sliderRef.sliderRef.offsetTop + characterOffset.y + MARK_MARGIN,
+            x,
+            y,
           };
         }
 
         case EFeedbackAction.SHOW_HIGHER_VALUE: {
-          const targetValue = sliderRef.props.value;
           const characterOffset = getCharacterHandOffset();
           const spectrumPosition = targetValue + (100 - targetValue) / 2;
 
+          const x = isRtl
+            ? offsetLeft +
+              clientWidth -
+              calculatePercentageValue(clientWidth, spectrumPosition) -
+              characterOffset.x
+            : offsetLeft +
+              calculatePercentageValue(clientWidth, spectrumPosition) -
+              characterOffset.x;
+          const y = offsetTop + characterOffset.y + MARK_MARGIN;
+
           return {
-            x:
-              sliderRef.sliderRef.offsetLeft +
-              calculatePercentageValue(
-                sliderRef.sliderRef.clientWidth,
-                spectrumPosition,
-              ) -
-              characterOffset.x,
-            y: sliderRef.sliderRef.offsetTop + characterOffset.y + MARK_MARGIN,
+            x,
+            y,
           };
         }
 
         case EFeedbackAction.SHOW_LOWER_VALUE: {
-          const targetValue = sliderRef.props.value;
           const characterOffset = getCharacterHandOffset();
           const spectrumPosition = targetValue / 2;
 
+          const x = isRtl
+            ? offsetLeft +
+              clientWidth -
+              calculatePercentageValue(clientWidth, spectrumPosition) -
+              characterOffset.x
+            : offsetLeft +
+              calculatePercentageValue(clientWidth, spectrumPosition) -
+              characterOffset.x;
+          const y = offsetTop + characterOffset.y + MARK_MARGIN;
+
           return {
-            x:
-              sliderRef.sliderRef.offsetLeft +
-              calculatePercentageValue(
-                sliderRef.sliderRef.clientWidth,
-                spectrumPosition,
-              ) -
-              characterOffset.x,
-            y: sliderRef.sliderRef.offsetTop + characterOffset.y + MARK_MARGIN,
+            x,
+            y,
           };
         }
 
