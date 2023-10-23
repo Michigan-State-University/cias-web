@@ -153,6 +153,7 @@ const Component = ({
             height={42}
             align="center"
             padding={12}
+            dir="auto"
           >
             <Text>{selectedValue?.label}</Text>
           </Box>

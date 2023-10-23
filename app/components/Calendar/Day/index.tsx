@@ -167,11 +167,13 @@ export const Day = ({
               })}
             </Text>
           )}
-          <SubstancesUsageList
-            substanceUsages={substancesGroupUsages}
-            textColor={colors.white}
-            wrap
-          />
+          <Column dir="auto">
+            <SubstancesUsageList
+              substanceUsages={substancesGroupUsages}
+              textColor={colors.white}
+              wrap
+            />
+          </Column>
           {events.length > 0 && (
             <Text color={colors.white} fontSize={12} fontWeight="bold" my={4}>
               {formatMessage(messages.events)}

@@ -66,6 +66,7 @@ const DayCellComponent = ({
           display="flex"
           justify={!compact ? 'between' : 'center'}
           position="relative"
+          gap={5}
         >
           <DayNo>{date}</DayNo>
           {!isNil(substancesLabel) && (
@@ -76,7 +77,7 @@ const DayCellComponent = ({
                 </Box>
               )}
               {!compact && (
-                <Box ml={5} overflow="hidden">
+                <Box overflow="hidden" dir="auto">
                   {substancesLabel}
                 </Box>
               )}
