@@ -181,7 +181,7 @@ const Modal = ({
                 </GridCol>
               )}
 
-              <GridCol xs={titleIcon ? 8 : 10}>
+              <GridCol xs={titleIcon ? 8 : 10} dir="auto">
                 <Row align="center" gap={8}>
                   {title && (
                     <H1 id={MODAL_TITLE_ID} {...titleProps}>
