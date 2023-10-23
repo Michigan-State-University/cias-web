@@ -35,7 +35,7 @@ const TlfbHelpingMaterials = ({
         zIndex={1000}
         disableScrollLock
       >
-        <Divider my={16} />
+        <Divider marginBlock={16} />
         <Img
           maxWidth="100%"
           maxHeight="100%"
@@ -48,9 +48,14 @@ const TlfbHelpingMaterials = ({
         onClick={() => setModalVisible(true)}
         display="flex"
         align="center"
+        dir="auto"
       >
         {!mobile && !researcher && (
-          <Img mr={10} src={Document} alt={formatMessage(messages.document)} />
+          <Img
+            marginInlineEnd={10}
+            src={Document}
+            alt={formatMessage(messages.document)}
+          />
         )}
         <Text
           color={themeColors.primary}

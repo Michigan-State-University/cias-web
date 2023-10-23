@@ -84,13 +84,13 @@ const DayCellComponent = ({
           )}
         </Box>
         {!compact && (
-          <Box display="flex" align="center" width="100%">
+          <Box display="flex" align="center" width="100%" dir="auto" gap={12}>
             <EventList
               events={events.slice(0, 1)}
               textColor={colors.bluewood}
             />
             {numberOfEventsHidden > 0 && (
-              <StyledText color={colors.bluewood} ml={12}>
+              <StyledText color={colors.bluewood} dir="auto">
                 <FormattedMessage
                   values={{ count: numberOfEventsHidden }}
                   {...messages.moreToDisplay}

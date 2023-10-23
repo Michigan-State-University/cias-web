@@ -27,14 +27,19 @@ const EventList = ({ events, textColor, wrap }: EventListProps) => {
           key={id}
           display="flex"
           align="center"
-          mt={events.length > 1 ? 8 : 0}
+          marginBlockStart={events.length > 1 ? 8 : 0}
           textOverflow="ellipsis"
           overflow="hidden"
           whiteSpace="nowrap"
         >
           {/* @ts-ignore */}
           <Circle bg={colors.azureBlue} size="5px" doNotShrink />
-          <StyledText ml={4} color={textColor} wrap={wrap} ellipsis>
+          <StyledText
+            marginInlineStart={4}
+            color={textColor}
+            wrap={wrap}
+            ellipsis
+          >
             {name || formatMessage(messages.defaultEventName)}
           </StyledText>
         </Box>

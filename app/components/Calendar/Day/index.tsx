@@ -8,6 +8,7 @@ import { fullDayToYearFormatter } from 'utils/formatters';
 import Box from 'components/Box';
 import Tooltip from 'components/Tooltip';
 import Text from 'components/Text';
+import Column from 'components/Column';
 
 import { EventData } from 'models/Tlfb';
 import TlfbYesNoText from 'components/TlfbYesNoText';
@@ -176,7 +177,9 @@ export const Day = ({
               {formatMessage(messages.events)}
             </Text>
           )}
-          <EventList events={events} textColor={colors.white} wrap />
+          <Column dir="auto">
+            <EventList events={events} textColor={colors.white} wrap />
+          </Column>
         </Box>
       }
     >
