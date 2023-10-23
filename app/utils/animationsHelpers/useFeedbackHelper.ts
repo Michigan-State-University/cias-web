@@ -109,11 +109,10 @@ const useFeedbackHelper: TUseFeedbackHelper = (
 
   const calculatePosition: ReturnType<TUseFeedbackHelper>['calculatePosition'] =
     (action: EFeedbackAction, currentPosition: Position) => {
-      const { offsetTop, offsetLeft, clientWidth } = sliderRef.sliderRef;
-      const targetValue = sliderRef.props.value;
-
       switch (action) {
         case EFeedbackAction.SHOW_USER_VALUE: {
+          const { offsetTop, offsetLeft, clientWidth } = sliderRef.sliderRef;
+          const targetValue = sliderRef.props.value;
           const characterOffset = getCharacterHandOffset();
 
           const x = isRtl
@@ -133,6 +132,8 @@ const useFeedbackHelper: TUseFeedbackHelper = (
         }
 
         case EFeedbackAction.SHOW_HIGHER_VALUE: {
+          const { offsetTop, offsetLeft, clientWidth } = sliderRef.sliderRef;
+          const targetValue = sliderRef.props.value;
           const characterOffset = getCharacterHandOffset();
           const spectrumPosition = targetValue + (100 - targetValue) / 2;
 
@@ -153,6 +154,8 @@ const useFeedbackHelper: TUseFeedbackHelper = (
         }
 
         case EFeedbackAction.SHOW_LOWER_VALUE: {
+          const { offsetTop, offsetLeft, clientWidth } = sliderRef.sliderRef;
+          const targetValue = sliderRef.props.value;
           const characterOffset = getCharacterHandOffset();
           const spectrumPosition = targetValue / 2;
 
