@@ -12,6 +12,18 @@ const MarkupContainer = styled.div`
     margin-block-start: 0;
     margin-block-end: 0.42em;
   }
+
+  .ql-align-right {
+    text-align: right;
+  }
+
+  .ql-align-center {
+    text-align: center;
+  }
+
+  .ql-align-left {
+    text-align: left;
+  }
 `;
 
 export default MarkupContainer;

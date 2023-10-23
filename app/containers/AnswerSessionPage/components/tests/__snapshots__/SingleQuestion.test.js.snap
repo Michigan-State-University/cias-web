@@ -132,6 +132,18 @@ exports[`<SingleQuestion /> Should render and match the snapshot 1`] = `
   margin-block-end: 0.42em;
 }
 
+.c11 .ql-align-right {
+  text-align: right;
+}
+
+.c11 .ql-align-center {
+  text-align: center;
+}
+
+.c11 .ql-align-left {
+  text-align: left;
+}
+
 @media only screen and (min-width:768px) {
 
 }

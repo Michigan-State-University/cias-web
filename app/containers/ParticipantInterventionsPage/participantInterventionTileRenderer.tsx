@@ -111,6 +111,7 @@ const ParticipantInterventionTileRenderer = ({ data, index }: Props) => {
           text={interventionName}
           opacity={tileDisabled ? COMPLETED_INTERVENTION_TEXT_OPACITY : 1}
           dataFor={id}
+          dir="auto"
         />
         <Box
           visibility={
