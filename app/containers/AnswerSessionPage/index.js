@@ -29,6 +29,7 @@ import LocalStorageService from 'utils/localStorageService';
 
 import {
   makeSelectAudioInstance,
+  makeSelectInterventionDynamicElementsDirection,
   makeSelectInterventionFixedElementsDirection,
 } from 'global/reducers/globalState';
 import {
@@ -128,6 +129,7 @@ const AnimationRefHelper = ({
   setFeedbackSettings,
   feedbackScreenSettings,
   audioInstance,
+  dynamicElementsDirection,
 }) => {
   const animationParentRef = useRef();
   const [refState, setRefState] = useState(null);
@@ -155,6 +157,7 @@ const AnimationRefHelper = ({
           setFeedbackSettings={setFeedbackSettings}
           feedbackScreenSettings={feedbackScreenSettings}
           audioInstance={audioInstance}
+          dynamicElementsDirection={dynamicElementsDirection}
         />
       )}
     </AnswerInterventionContent>
@@ -169,6 +172,7 @@ AnimationRefHelper.propTypes = {
   setFeedbackSettings: PropTypes.func,
   feedbackScreenSettings: PropTypes.object,
   audioInstance: PropTypes.object,
+  dynamicElementsDirection: PropTypes.string,
 };
 
 const IS_DESKTOP = 'IS_DESKTOP';
@@ -222,6 +226,7 @@ export function AnswerSessionPage({
   resetAnswerSessionPage,
   fetchPreviousQuestion,
   fixedElementsDirection,
+  dynamicElementsDirection,
 }) {
   const { formatMessage } = useIntl();
   const history = useHistory();
@@ -503,6 +508,7 @@ export function AnswerSessionPage({
       userSessionId: userSession?.id,
       disabled: continueButtonLoading,
       continueButtonLoading,
+      dynamicElementsDirection,
     };
 
     const isLastScreen = currentQuestion.type === finishQuestion.id;
@@ -574,6 +580,7 @@ export function AnswerSessionPage({
                 setFeedbackSettings={setFeedbackSettings}
                 feedbackScreenSettings={feedbackScreenSettings}
                 audioInstance={audioInstance}
+                dynamicElementsDirection={dynamicElementsDirection}
               >
                 <ActionButtons
                   questionType={type}
@@ -906,6 +913,9 @@ export function AnswerSessionPage({
                                     feedbackScreenSettings
                                   }
                                   audioInstance={audioInstance}
+                                  dynamicElementsDirection={
+                                    dynamicElementsDirection
+                                  }
                                 >
                                   {renderQuestion()}
                                 </AnimationRefHelper>
@@ -972,7 +982,8 @@ AnswerSessionPage.propTypes = {
   resetAnswerSessionPage: PropTypes.func,
   resetAllReducers: PropTypes.func,
   fetchPreviousQuestion: PropTypes.func,
-  fixedElementsDirection: PropTypes.bool,
+  fixedElementsDirection: PropTypes.string,
+  dynamicElementsDirection: PropTypes.string,
 };
 
 const mapStateToProps = createStructuredSelector({
@@ -980,6 +991,7 @@ const mapStateToProps = createStructuredSelector({
   audioInstance: makeSelectAudioInstance(),
   interventionStatus: makeSelectInterventionStatus(),
   fixedElementsDirection: makeSelectInterventionFixedElementsDirection(),
+  dynamicElementsDirection: makeSelectInterventionDynamicElementsDirection(),
 });
 
 const mapDispatchToProps = {

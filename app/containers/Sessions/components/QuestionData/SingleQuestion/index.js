@@ -45,6 +45,7 @@ const SingleQuestion = ({
   isNarratorTab,
   intl: { formatMessage },
   editingPossible,
+  dynamicElementsDirection,
 }) => {
   const radioButtonRef = useRef(null);
 
@@ -73,14 +74,14 @@ const SingleQuestion = ({
   };
 
   return (
-    <Column mt={10}>
+    <Column marginBlockStart={10}>
       <DndSortable onDragEnd={onDragEnd} items={data} selector={null}>
         {({ item, index, dragHandleProps }) => (
-          <Row>
+          <Row dir={dynamicElementsDirection}>
             <HoverableBox
               hoverColor={isNarratorTabOrEditNotPossible ? null : undefined}
-              px={21}
-              py={14}
+              paddingInline={21}
+              paddingBlock={14}
               width="100%"
               onMouseEnter={handleMouseEnter(index)}
               onMouseLeave={() => setHovered(-1)}
@@ -90,7 +91,7 @@ const SingleQuestion = ({
                 <Row
                   align="center"
                   justify="between"
-                  mb={isNarratorTabOrEditNotPossible ? 0 : 10}
+                  marginBlockEnd={isNarratorTabOrEditNotPossible ? 0 : 10}
                 >
                   <Row width="90%">
                     {!isNarratorTabOrEditNotPossible && (
@@ -98,7 +99,7 @@ const SingleQuestion = ({
                         alt={formatMessage(messages.reorderIconAlt, {
                           index,
                         })}
-                        mr={10}
+                        marginInlineEnd={10}
                         src={ReorderIcon}
                         disabled={false}
                         cursor="grab"
@@ -106,13 +107,16 @@ const SingleQuestion = ({
                       />
                     )}
 
-                    <Img ref={radioButtonRef} src={radio} mr={RADIO_MARGIN} />
+                    <Img
+                      ref={radioButtonRef}
+                      src={radio}
+                      marginInlineEnd={RADIO_MARGIN}
+                    />
                     <OriginalTextHover
                       text={item?.original_text}
                       hidden={isNarratorTab}
                     >
                       <FlexibleWidthApprovableInput
-                        mr={8}
                         fontSize={18}
                         type="singleline"
                         placeholder={formatMessage(messages.placeholder, {
@@ -134,34 +138,37 @@ const SingleQuestion = ({
                       hidden={hovered !== index}
                       clickable
                     >
-                      <Img src={bin} mr={16} />
+                      <Img src={bin} marginInlineEnd={16} />
                     </Box>
                   </Row>
                 </Row>
                 <Row align="center" hidden={isNarratorTab}>
-                  <BadgeInput
-                    data-cy={`score-${index}-input`}
-                    ml={`${leftMargin}px`}
-                    disabled={!editingPossible}
-                    px={0}
-                    py={12}
-                    textAlign="center"
-                    validator={numericValidator}
-                    keyboard="tel"
-                    placeholder={
-                      !isNarratorTab
-                        ? formatMessage(globalMessages.variableScorePlaceholder)
-                        : ''
-                    }
-                    value={item.value}
-                    color={colors.azure}
-                    onBlur={(val) =>
-                      updateAnswer(index, {
-                        ...item,
-                        value: val,
-                      })
-                    }
-                  />
+                  <Row marginInlineStart={`${leftMargin}px`}>
+                    <BadgeInput
+                      data-cy={`score-${index}-input`}
+                      disabled={!editingPossible}
+                      paddingInline={0}
+                      paddingBlock={12}
+                      textAlign="center"
+                      validator={numericValidator}
+                      keyboard="tel"
+                      placeholder={
+                        !isNarratorTab
+                          ? formatMessage(
+                              globalMessages.variableScorePlaceholder,
+                            )
+                          : ''
+                      }
+                      value={item.value}
+                      color={colors.azure}
+                      onBlur={(val) =>
+                        updateAnswer(index, {
+                          ...item,
+                          value: val,
+                        })
+                      }
+                    />
+                  </Row>
                 </Row>
               </Column>
             </HoverableBox>
@@ -169,10 +176,10 @@ const SingleQuestion = ({
         )}
       </DndSortable>
       <Row hidden={isNarratorTabOrEditNotPossible}>
-        <HoverableBox px={21} py={14} onClick={addAnswer}>
+        <HoverableBox paddingInline={21} paddingBlock={14} onClick={addAnswer}>
           <Box>
             <Row align="center">
-              <PlusCircle mr={12} />
+              <PlusCircle marginInlineEnd={12} />
               <Text fontWeight="bold" color={themeColors.secondary}>
                 {formatMessage(messages.addAnswer)}
               </Text>
@@ -193,6 +200,7 @@ SingleQuestion.propTypes = {
   reorderAnswers: PropTypes.func.isRequired,
   isNarratorTab: PropTypes.bool,
   editingPossible: PropTypes.bool,
+  dynamicElementsDirection: PropTypes.string,
 };
 
 const mapStateToProps = createStructuredSelector({

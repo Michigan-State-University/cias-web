@@ -10,6 +10,7 @@ const SingleQuestion = ({
   saveAnswer,
   isMobile,
   disabled,
+  dynamicElementsDirection,
 }) => {
   const [selectedAnswerIndex, setSelectedAnswerIndex] = useState(null);
   const {
@@ -48,6 +49,7 @@ const SingleQuestion = ({
       selectedAnswerIndex={selectedAnswerIndex}
       isMobile={isMobile}
       disabled={disabled}
+      dynamicElementsDirection={dynamicElementsDirection}
     />
   );
 };
@@ -59,6 +61,7 @@ SingleQuestion.propTypes = {
   saveAnswer: PropTypes.func,
   isMobile: PropTypes.bool,
   disabled: PropTypes.bool,
+  dynamicElementsDirection: PropTypes.string,
 };
 
 export default SingleQuestion;

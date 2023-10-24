@@ -36,6 +36,7 @@ const Component = ({
       fontSize={12}
       fontWeight="bold"
       width={160}
+      dir="auto"
     />
   </>
 );

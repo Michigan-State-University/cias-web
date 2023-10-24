@@ -295,6 +295,7 @@ exports[`<PhoneQuestion /> Should render and match the snapshot 1`] = `
                 </label>
                 <input
                   class="c8"
+                  dir="auto"
                   disabled=""
                   id="number"
                   name="number"

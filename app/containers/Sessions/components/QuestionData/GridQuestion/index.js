@@ -61,6 +61,7 @@ const GridQuestion = ({
   reorderRows,
   reorderColumns,
   editingPossible,
+  dynamicElementsDirection,
   intl: { formatMessage },
 }) => {
   const {
@@ -113,10 +114,14 @@ const GridQuestion = ({
   return (
     <Column width="100%" maxWidth={elements.draggableContainerSize}>
       <Row justify="end" display="flex" hidden={isNarratorTabOrEditNotPossible}>
-        <HoverableBox px={21} py={14} onClick={handleAddColumn}>
+        <HoverableBox
+          paddingInline={21}
+          paddingBlock={14}
+          onClick={handleAddColumn}
+        >
           <Box>
             <Row align="center">
-              <PlusCircle mr={12} />
+              <PlusCircle marginInlineEnd={12} />
               <Text fontWeight="bold" color={themeColors.secondary}>
                 {formatMessage(messages.addColumn)}
               </Text>
@@ -125,12 +130,12 @@ const GridQuestion = ({
         </HoverableBox>
       </Row>
 
-      <Box width="100%">
+      <Box width="100%" dir={dynamicElementsDirection}>
         <ScrollFogBox
           overflow="scroll"
-          pr={21}
-          py={14}
-          ml={isNarratorTab && elements.grid.leftPadding}
+          paddingInlineEnd={21}
+          paddingBlock={14}
+          marginInlineStart={isNarratorTab && elements.grid.leftPadding}
           horizontalFogVisible={isNarratorTab}
           verticalFogVisible={false}
           leftMargin={firstColWidth + elements.grid.leftPadding}
@@ -174,8 +179,8 @@ const GridQuestion = ({
                         width={isNarratorTab ? elements.grid.colWidth : '100%'}
                       >
                         <Box
-                          px={8}
-                          mb={8}
+                          paddingInline={8}
+                          marginBlockEnd={8}
                           hidden={isNarratorTabOrEditNotPossible}
                           height={35}
                         >
@@ -197,16 +202,20 @@ const GridQuestion = ({
                             src={ReorderIcon}
                             disabled={false}
                             cursor="grab"
-                            mb={10}
-                            mt={20}
+                            marginBlockEnd={10}
+                            marginBlockStart={20}
                             {...dragHandleProps}
                           />
                         )}
-                        <Row display="flex" hidden={isNarratorTab} mb={8}>
+                        <Row
+                          display="flex"
+                          hidden={isNarratorTab}
+                          marginBlockEnd={8}
+                        >
                           <BadgeInput
                             disabled={!editingPossible}
-                            px={0}
-                            py={12}
+                            paddingInline={0}
+                            paddingBlock={12}
                             textAlign="center"
                             validator={numericValidator}
                             keyboard="tel"
@@ -247,8 +256,8 @@ const GridQuestion = ({
                                   : 'pointer'
                               }
                               width={110}
-                              px={0}
-                              py={12}
+                              paddingInline={0}
+                              paddingBlock={12}
                               textAlign="center"
                               placeholder={getPlaceholder(
                                 'columnPlaceholder',
@@ -317,8 +326,8 @@ const GridQuestion = ({
                             alt={formatMessage(messages.reorderIconAlt, {
                               index: rowIndex,
                             })}
-                            ml={20}
-                            mr={10}
+                            marginInlineStart={20}
+                            marginInlineEnd={10}
                             src={ReorderIcon}
                             disabled={false}
                             cursor="grab"
@@ -326,11 +335,15 @@ const GridQuestion = ({
                           />
                         )}
                         <Row align="center" justify="between" width="100%">
-                          <Row display="flex" hidden={isNarratorTab} mr={8}>
+                          <Row
+                            display="flex"
+                            hidden={isNarratorTab}
+                            marginInlineEnd={8}
+                          >
                             <BadgeInput
                               disabled={!editingPossible}
-                              px={0}
-                              py={12}
+                              paddingInline={0}
+                              paddingBlock={12}
                               textAlign="center"
                               validator={variableNameValidator}
                               placeholder={formatMessage(
@@ -370,8 +383,8 @@ const GridQuestion = ({
                                     : 'pointer'
                                 }
                                 width={elements.grid.firstColWidth}
-                                px={0}
-                                py={12}
+                                paddingInline={0}
+                                paddingBlock={12}
                                 textAlign="center"
                                 placeholder={getPlaceholder(
                                   'rowPlaceholder',
@@ -406,10 +419,15 @@ const GridQuestion = ({
       </Box>
 
       <Row justify="start" hidden={isNarratorTabOrEditNotPossible}>
-        <HoverableBox px={21} py={14} mt={20} onClick={handleAddRow}>
+        <HoverableBox
+          paddingInline={21}
+          paddingBlock={14}
+          marginBlockStart={20}
+          onClick={handleAddRow}
+        >
           <Box>
             <Row align="center" display="flex">
-              <PlusCircle mr={12} />
+              <PlusCircle marginInlineEnd={12} />
               <Text fontWeight="bold" color={themeColors.secondary}>
                 {formatMessage(messages.addRow)}
               </Text>
@@ -434,6 +452,7 @@ GridQuestion.propTypes = {
   editingPossible: PropTypes.bool,
   reorderRows: PropTypes.func,
   reorderColumns: PropTypes.func,
+  dynamicElementsDirection: PropTypes.string,
 };
 
 const mapStateToProps = createStructuredSelector({

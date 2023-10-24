@@ -414,6 +414,7 @@ exports[`<SessionListItem /> Should render and match the snapshot 1`] = `
             >
               <h2
                 class="c10 c11"
+                dir="auto"
               >
                 Intervention
               </h2>
@@ -422,6 +423,7 @@ exports[`<SessionListItem /> Should render and match the snapshot 1`] = `
                 autocomplete="off"
                 class="c12 c13"
                 color="#107969"
+                dir="auto"
                 name="notASearchField-Variable name..."
                 placeholder="Variable name..."
                 type="text"
@@ -477,6 +479,7 @@ exports[`<SessionListItem /> Should render and match the snapshot 1`] = `
         <input
           aria-labelledby="estimate-time-label"
           class="c23"
+          dir="auto"
           placeholder="0"
           type="text"
           value=""

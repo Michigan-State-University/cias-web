@@ -394,6 +394,7 @@ const InterventionTile = ({
               fontWeight="bold"
               lineHeight={1.3}
               lines={2}
+              dir="auto"
             />
           </Column>
 

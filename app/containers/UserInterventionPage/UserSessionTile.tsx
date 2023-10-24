@@ -175,6 +175,7 @@ const UserSessionTile = ({
           text={name}
           opacity={disabledTile ? DISABLED_TILE_TEXT_OPACITY : 1}
           dataFor={id}
+          dir="auto"
         />
 
         <Box

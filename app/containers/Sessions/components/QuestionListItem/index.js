@@ -274,7 +274,7 @@ const QuestionListItem = ({
             </Column>
           )}
           <Column xs={10}>
-            <Row>
+            <Row dir="auto">
               <ClampedTitle mb={6}>{htmlToPlainText(subtitle)}</ClampedTitle>
             </Row>
             <Row>
