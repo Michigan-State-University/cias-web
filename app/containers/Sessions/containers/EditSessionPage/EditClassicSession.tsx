@@ -71,6 +71,7 @@ import { borders, colors, themeColors } from 'theme';
 import { parametrizeRoutePath } from 'utils/router';
 import instantiateEmptyQuestion from 'utils/instantiateEmptyQuestion';
 import isNullOrUndefined from 'utils/isNullOrUndefined';
+import { formatInterventionLanguageMessage } from 'utils/intlOutsideReact';
 
 import {
   createQuestionGroupRequest,
@@ -362,9 +363,9 @@ const EditClassicSessionPage = ({
 
       createQuestion(
         instantiateEmptyQuestion(
-          formatMessage(messages.newQuestionTitle),
+          formatInterventionLanguageMessage(messages.newQuestionTitle),
           type,
-          formatMessage(newQuestionSubtitle),
+          formatInterventionLanguageMessage(newQuestionSubtitle),
         ) as QuestionDTO,
         params.sessionId,
       );

@@ -52,7 +52,7 @@ describe('<TeamDetails />', () => {
         },
       },
       fetchTeam: jest.fn(),
-      intl: intlOutsideReact,
+      intl: intlOutsideReact(),
     };
   });
 
