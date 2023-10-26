@@ -164,7 +164,7 @@ const Header = ({
               />
             </InterventionOptions>
           </Row>
-          {catMhAccess && (
+          {catMhAccess && catMhLicenseType && (
             <Row width="100%" justify="end" align="center" mt={8}>
               <HelpIconTooltip
                 id="cat-mh-tests-limit-tooltip"

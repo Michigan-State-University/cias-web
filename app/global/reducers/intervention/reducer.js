@@ -150,7 +150,7 @@ export const initialState = {
     collaborators: [],
   },
   loaders: {
-    fetchInterventionLoading: true,
+    fetchInterventionLoading: false,
     createInterventionLoading: false,
     sendCsvLoading: false,
     editIntervention: false,
