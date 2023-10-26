@@ -4,8 +4,9 @@ import { combineReducers } from 'redux';
 import history from 'utils/history';
 import appLanguageProviderReducer from 'containers/AppLanguageProvider/reducer';
 
-import { authReducer, RESET_REDUCER } from 'global/reducers/auth';
-import { globalStateReducer } from 'global/reducers/globalState';
+import { authReducer } from 'global/reducers/auth/reducer';
+import { RESET_REDUCER } from 'global/reducers/auth/constants';
+import { globalStateReducer } from 'global/reducers/globalState/reducer';
 
 /**
  * Merges the main reducer with the router state and dynamically injected reducers
