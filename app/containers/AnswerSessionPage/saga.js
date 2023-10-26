@@ -219,8 +219,8 @@ function* fetchUserSession({ payload: { sessionId } }) {
     const { data } = yield axios.get(`${requestUrl}?${searchParams}`);
     const userSession = jsonApiToObject(data, 'userSession');
 
-    yield put(changeLocale(userSession.languageCode));
     yield put(fetchUserSessionSuccess(userSession));
+    yield put(changeLocale(userSession.languageCode));
   } catch (error) {
     yield put(fetchUserSessionError(error));
   }
@@ -241,8 +241,8 @@ function* createUserSession({ payload: { sessionId } }) {
     );
     const userSession = jsonApiToObject(data, 'userSession');
 
-    yield put(changeLocale(userSession.languageCode));
     yield put(createUserSessionSuccess(userSession));
+    yield put(changeLocale(userSession.languageCode));
     yield put(resetPhoneNumberPreview());
     yield put(startSession());
   } catch (error) {

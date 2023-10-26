@@ -37,13 +37,14 @@ import {
   fetchInterventionSaga,
   makeSelectInterventionStatus,
   interventionReducer,
+  makeSelectInterventionId,
+  makeSelectInterventionLoader,
 } from 'global/reducers/intervention';
 import {
   editPhoneNumberQuestionSaga,
   editUserSaga,
   updateUsersTimezoneSaga,
 } from 'global/reducers/auth';
-import { resetReducer as resetAuthReducer } from 'global/reducers/auth/actions';
 import logInGuestSaga from 'global/reducers/auth/sagas/logInGuest';
 import {
   ChatWidgetReducer,
@@ -105,7 +106,6 @@ import {
   clearError,
   setTransitionalUserSessionId as setTransitionalUserSessionIdAction,
   saveQuickExitEventRequest,
-  resetReducer,
   fetchUserSessionRequest,
   fetchPreviousQuestionRequest,
 } from './actions';
@@ -215,6 +215,8 @@ export function AnswerSessionPage({
   },
   isPreview,
   interventionStatus,
+  fetchedInterventionId,
+  fetchInterventionLoading,
   fetchIntervention,
   fetchUserSession,
   createUserSession,
@@ -223,7 +225,6 @@ export function AnswerSessionPage({
   setTransitionalUserSessionId,
   setLiveChatEnabled,
   saveQuickExitEvent,
-  resetAnswerSessionPage,
   fetchPreviousQuestion,
   fixedElementsDirection,
   dynamicElementsDirection,
@@ -314,8 +315,13 @@ export function AnswerSessionPage({
   const { sessionId, interventionId, index } = params;
 
   useEffect(() => {
-    if (isPreview) fetchIntervention(interventionId);
-    resetAnswerSessionPage();
+    if (
+      isPreview &&
+      interventionId !== fetchedInterventionId &&
+      !fetchInterventionLoading
+    ) {
+      fetchIntervention(interventionId);
+    }
   }, [interventionId]);
 
   const previewPossible =
@@ -323,7 +329,7 @@ export function AnswerSessionPage({
     (!isUserSessionFinished || (isGuestUser && isUserSessionFinished));
 
   useEffect(() => {
-    if (isAuthenticated) {
+    if (isAuthenticated && !userSession) {
       fetchUserSession(sessionId);
     }
     return clearErrors;
@@ -336,12 +342,15 @@ export function AnswerSessionPage({
   }, [isUserSessionFinished, isGuestUser, interventionStarted]);
 
   useEffect(() => {
-    if (userSession && !isUserSessionFinished) {
+    if (!userSession || isUserSessionFinished) return;
+
+    if (!nextQuestionLoading) {
       const questionId = userSession.lastAnswerAt ? null : index;
       nextQuestion(userSessionId, questionId);
-      if (userSession.liveChatEnabled && interventionId) {
-        setLiveChatEnabled(interventionId);
-      }
+    }
+
+    if (userSession.liveChatEnabled && interventionId) {
+      setLiveChatEnabled(interventionId);
     }
   }, [userSession]);
 
@@ -971,6 +980,8 @@ AnswerSessionPage.propTypes = {
   audioInstance: PropTypes.shape(AudioWrapper),
   isPreview: PropTypes.bool,
   interventionStatus: PropTypes.string,
+  fetchedInterventionId: PropTypes.string,
+  fetchInterventionLoading: PropTypes.bool,
   fetchIntervention: PropTypes.func,
   fetchUserSession: PropTypes.func,
   createUserSession: PropTypes.func,
@@ -979,8 +990,6 @@ AnswerSessionPage.propTypes = {
   setTransitionalUserSessionId: PropTypes.func,
   setLiveChatEnabled: PropTypes.func,
   saveQuickExitEvent: PropTypes.func,
-  resetAnswerSessionPage: PropTypes.func,
-  resetAllReducers: PropTypes.func,
   fetchPreviousQuestion: PropTypes.func,
   fixedElementsDirection: PropTypes.string,
   dynamicElementsDirection: PropTypes.string,
@@ -990,6 +999,10 @@ const mapStateToProps = createStructuredSelector({
   AnswerSessionPage: makeSelectAnswerSessionPage(),
   audioInstance: makeSelectAudioInstance(),
   interventionStatus: makeSelectInterventionStatus(),
+  fetchedInterventionId: makeSelectInterventionId(),
+  fetchInterventionLoading: makeSelectInterventionLoader(
+    'fetchInterventionLoading',
+  ),
   fixedElementsDirection: makeSelectInterventionFixedElementsDirection(),
   dynamicElementsDirection: makeSelectInterventionDynamicElementsDirection(),
 });
@@ -1008,8 +1021,6 @@ const mapDispatchToProps = {
   setTransitionalUserSessionId: setTransitionalUserSessionIdAction,
   setLiveChatEnabled: setChatEnabled,
   saveQuickExitEvent: saveQuickExitEventRequest,
-  resetAnswerSessionPage: resetReducer,
-  resetAllReducers: resetAuthReducer,
   fetchPreviousQuestion: fetchPreviousQuestionRequest,
 };
 

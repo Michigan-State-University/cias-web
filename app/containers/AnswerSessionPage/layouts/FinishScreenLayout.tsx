@@ -1,4 +1,4 @@
-import React, { useMemo } from 'react';
+import React, { useEffect, useMemo } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { IntlShape } from 'react-intl';
 
@@ -90,6 +90,14 @@ const FinishScreenLayout = ({ formatMessage, question }: Props) => {
   const goToNextSession = () => {
     dispatch(fetchOrCreateUserSessionRequest(nextSessionId));
   };
+
+  useEffect(() => {
+    if (!isGuestUser && !isModuleIntervention && !isPreview) {
+      return clearUserSession;
+      // clear answer session page reducer on unmount for logged in or
+      // predefined users after filling a session in sequential intervention
+    }
+  }, []);
 
   if (isGuestUser) {
     return (
