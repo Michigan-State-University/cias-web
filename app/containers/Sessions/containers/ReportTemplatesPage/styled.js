@@ -51,7 +51,7 @@ export const SectionTitle = styled.div.attrs({ dir: 'auto' })`
   ${({ isSelected }) => isSelected && { color: themeColors.secondary }};
 `;
 
-export const SectionText = styled.p.attrs({ dir: 'auto' })`
+export const SectionText = styled.p`
   font-size: 15px;
   font-weight: 400;
   line-height: 23px;
