@@ -48,6 +48,7 @@ import CopyModal from 'components/CopyModal';
 import { VIEWS } from 'components/CopyModal/Components';
 import Tooltip from 'components/Tooltip';
 import { LabelPosition, Switch } from 'components/Switch';
+import OriginalTextHover from 'components/OriginalTextHover';
 
 import { CardBox, Spacer } from '../../styled';
 import { ReportTemplatesContext } from '../../utils';
@@ -538,21 +539,30 @@ const ReportTemplateMainSettings = ({
                         </Row>
                         <Row style={{ marginBottom: 20 }}>
                           <Col>
-                            <Box bg={colors.linkWater} width="100%">
-                              <ApprovableInput
-                                disabled={!canEdit}
-                                type="multiline"
-                                richText
-                                value={
-                                  singleReportTemplate.coverLetterDescription
-                                }
-                                onCheck={onCoverLetterDescriptionChange}
-                                placeholder={formatMessage(
-                                  globalMessages.enterTextHereRichText,
-                                )}
-                                autoSize
-                              />
-                            </Box>
+                            <OriginalTextHover
+                              id={`report-template-${singleReportTemplate.id}-cover-letter-description`}
+                              text={
+                                singleReportTemplate.originalText
+                                  .coverLetterDescription
+                              }
+                              width="100%"
+                            >
+                              <Box bg={colors.linkWater} width="100%">
+                                <ApprovableInput
+                                  disabled={!canEdit}
+                                  type="multiline"
+                                  richText
+                                  value={
+                                    singleReportTemplate.coverLetterDescription
+                                  }
+                                  onCheck={onCoverLetterDescriptionChange}
+                                  placeholder={formatMessage(
+                                    globalMessages.enterTextHereRichText,
+                                  )}
+                                  autoSize
+                                />
+                              </Box>
+                            </OriginalTextHover>
                           </Col>
                         </Row>
 
@@ -561,18 +571,27 @@ const ReportTemplateMainSettings = ({
                         </Row>
                         <Row style={{ marginBottom: 20 }}>
                           <Col>
-                            <Box bg={colors.linkWater} width="100%">
-                              <ApprovableInput
-                                disabled={!canEdit}
-                                mr={0}
-                                type="singleline"
-                                value={singleReportTemplate.coverLetterSender}
-                                onCheck={onCoverLetterSenderChange}
-                                placeholder={formatMessage(
-                                  globalMessages.enterTextHere,
-                                )}
-                              />
-                            </Box>
+                            <OriginalTextHover
+                              id={`report-template-${singleReportTemplate.id}-cover-letter-sender`}
+                              text={
+                                singleReportTemplate.originalText
+                                  .coverLetterSender
+                              }
+                              width="100%"
+                            >
+                              <Box bg={colors.linkWater} width="100%">
+                                <ApprovableInput
+                                  disabled={!canEdit}
+                                  mr={0}
+                                  type="singleline"
+                                  value={singleReportTemplate.coverLetterSender}
+                                  onCheck={onCoverLetterSenderChange}
+                                  placeholder={formatMessage(
+                                    globalMessages.enterTextHere,
+                                  )}
+                                />
+                              </Box>
+                            </OriginalTextHover>
                           </Col>
                         </Row>
                       </>
@@ -591,18 +610,24 @@ const ReportTemplateMainSettings = ({
                 </Row>
                 <Row style={{ marginBottom: 20 }}>
                   <Col>
-                    <Box bg={colors.linkWater} width="100%">
-                      <ApprovableInput
-                        disabled={!canEdit}
-                        mr={0}
-                        type="singleline"
-                        value={singleReportTemplate.name}
-                        onCheck={onNameChange}
-                        placeholder={formatMessage(
-                          messages.settingsNamePlaceholder,
-                        )}
-                      />
-                    </Box>
+                    <OriginalTextHover
+                      id={`report-template-${singleReportTemplate.id}-name`}
+                      text={singleReportTemplate.originalText.name}
+                      width="100%"
+                    >
+                      <Box bg={colors.linkWater} width="100%">
+                        <ApprovableInput
+                          disabled={!canEdit}
+                          mr={0}
+                          type="singleline"
+                          value={singleReportTemplate.name}
+                          onCheck={onNameChange}
+                          placeholder={formatMessage(
+                            messages.settingsNamePlaceholder,
+                          )}
+                        />
+                      </Box>
+                    </OriginalTextHover>
                   </Col>
                 </Row>
 
