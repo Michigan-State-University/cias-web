@@ -26,4 +26,9 @@ export const formatMessage = (...props) => {
   return intl(locale).formatMessage(...props);
 };
 
+export const formatInterventionLanguageMessage = (...props) => {
+  const locale = store.getState()?.intervention?.intervention?.languageCode;
+  return intl(locale).formatMessage(...props);
+};
+
 export default intl;

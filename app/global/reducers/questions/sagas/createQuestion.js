@@ -16,7 +16,10 @@ import isNullOrUndefined from 'utils/isNullOrUndefined';
 import { mapQuestionToStateObject } from 'utils/mapResponseObjects';
 import { jsonApiToObject } from 'utils/jsonApiMapper';
 import objectKeysToSnakeCase from 'utils/objectToSnakeCase';
-import { formatMessage } from 'utils/intlOutsideReact';
+import {
+  formatInterventionLanguageMessage,
+  formatMessage,
+} from 'utils/intlOutsideReact';
 
 import { setAnimationStopPosition } from 'global/reducers/localState';
 import { makeSelectQuestionGroups } from 'global/reducers/questionGroups/selectors';
@@ -112,10 +115,14 @@ function* createQuestionGroup({ payload: { sessionId, groupType } }) {
     currentNarrator: sessionCharacter,
   } = yield select(makeSelectSession());
 
-  const questions = prepareNewGroupQuestions(groupType, formatMessage, {
-    character: sessionCharacter,
-    ...narratorSettings,
-  });
+  const questions = prepareNewGroupQuestions(
+    groupType,
+    formatInterventionLanguageMessage,
+    {
+      character: sessionCharacter,
+      ...narratorSettings,
+    },
+  );
 
   yield call(
     createNewQuestionGroup,
