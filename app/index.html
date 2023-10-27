@@ -34,14 +34,14 @@
   <!-- A lot of magic happens in this file. HtmlWebpackPlugin automatically injects all assets (e.g. bundle.js, main.css) with the correct HTML tags, which is why they are missing in this file. Don't add any assets here! (Check out webpack.dev.babel.js and webpack.prod.babel.js if you want to know more) -->
 
 <!--  acc toolbar script -->
-<script src="https://cdn.jsdelivr.net/gh/HTD-Health/acc_toolbar@master/acctoolbar/acctoolbar.min.js"></script>
+<script src="https://cdn.jsdelivr.net/gh/HTD-Health/acc_toolbar@v1.0.0/acctoolbar/acctoolbar.min.js"></script>
 <script>
 // optional init
   window.onload = function() {
     window.micAccessTool = new MicAccessTool({
       reportLink: 'https://msu.co1.qualtrics.com/jfe/form/SV_6S9MV7pPpoqFwTY',
       link: `${window.location.origin}/accessibility-statement`,
-      
+
     });
   }
 </script>
