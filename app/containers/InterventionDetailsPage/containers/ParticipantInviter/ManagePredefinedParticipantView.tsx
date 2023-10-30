@@ -23,7 +23,7 @@ import { SelectOption } from 'components/Select/types';
 import Row from 'components/Row';
 import { Button } from 'components/Button';
 
-import { BackButton } from './BackButton';
+import { InviteParticipantsModalBackButton } from './InviteParticipantsModalBackButton';
 import {
   ParticipantInvitationType,
   PredefinedParticipantFormMode,
@@ -117,7 +117,7 @@ export const ManagePredefinedParticipantView: FC<Props> = ({
 
   return (
     <Column flex={1} overflow="auto" gap={24}>
-      <BackButton
+      <InviteParticipantsModalBackButton
         invitationType={ParticipantInvitationType.PREDEFINED}
         onBack={onBack}
       />

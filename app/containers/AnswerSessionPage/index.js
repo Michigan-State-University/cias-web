@@ -27,19 +27,24 @@ import { DESKTOP_MODE, I_PHONE_8_PLUS_MODE } from 'utils/previewMode';
 import { CHARACTER_FIXED_POSITION_QUESTIONS } from 'utils/characterConstants';
 import LocalStorageService from 'utils/localStorageService';
 
-import { makeSelectAudioInstance } from 'global/reducers/globalState';
+import {
+  makeSelectAudioInstance,
+  makeSelectInterventionDynamicElementsDirection,
+  makeSelectInterventionFixedElementsDirection,
+} from 'global/reducers/globalState';
 import {
   fetchInterventionRequest,
   fetchInterventionSaga,
   makeSelectInterventionStatus,
   interventionReducer,
+  makeSelectInterventionId,
+  makeSelectInterventionLoader,
 } from 'global/reducers/intervention';
 import {
   editPhoneNumberQuestionSaga,
   editUserSaga,
   updateUsersTimezoneSaga,
 } from 'global/reducers/auth';
-import { resetReducer as resetAuthReducer } from 'global/reducers/auth/actions';
 import logInGuestSaga from 'global/reducers/auth/sagas/logInGuest';
 import {
   ChatWidgetReducer,
@@ -101,13 +106,11 @@ import {
   clearError,
   setTransitionalUserSessionId as setTransitionalUserSessionIdAction,
   saveQuickExitEventRequest,
-  resetReducer,
   fetchUserSessionRequest,
   fetchPreviousQuestionRequest,
 } from './actions';
 import BranchingScreen from './components/BranchingScreen';
 import {
-  NOT_SKIPPABLE_QUESTIONS,
   FULL_SIZE_QUESTIONS,
   CONFIRMABLE_QUESTIONS,
   NO_CONTINUE_BUTTON_QUESTIONS,
@@ -126,6 +129,7 @@ const AnimationRefHelper = ({
   setFeedbackSettings,
   feedbackScreenSettings,
   audioInstance,
+  dynamicElementsDirection,
 }) => {
   const animationParentRef = useRef();
   const [refState, setRefState] = useState(null);
@@ -153,6 +157,7 @@ const AnimationRefHelper = ({
           setFeedbackSettings={setFeedbackSettings}
           feedbackScreenSettings={feedbackScreenSettings}
           audioInstance={audioInstance}
+          dynamicElementsDirection={dynamicElementsDirection}
         />
       )}
     </AnswerInterventionContent>
@@ -167,6 +172,7 @@ AnimationRefHelper.propTypes = {
   setFeedbackSettings: PropTypes.func,
   feedbackScreenSettings: PropTypes.object,
   audioInstance: PropTypes.object,
+  dynamicElementsDirection: PropTypes.string,
 };
 
 const IS_DESKTOP = 'IS_DESKTOP';
@@ -209,6 +215,8 @@ export function AnswerSessionPage({
   },
   isPreview,
   interventionStatus,
+  fetchedInterventionId,
+  fetchInterventionLoading,
   fetchIntervention,
   fetchUserSession,
   createUserSession,
@@ -217,8 +225,9 @@ export function AnswerSessionPage({
   setTransitionalUserSessionId,
   setLiveChatEnabled,
   saveQuickExitEvent,
-  resetAnswerSessionPage,
   fetchPreviousQuestion,
+  fixedElementsDirection,
+  dynamicElementsDirection,
 }) {
   const { formatMessage } = useIntl();
   const history = useHistory();
@@ -306,8 +315,13 @@ export function AnswerSessionPage({
   const { sessionId, interventionId, index } = params;
 
   useEffect(() => {
-    if (isPreview) fetchIntervention(interventionId);
-    resetAnswerSessionPage();
+    if (
+      isPreview &&
+      interventionId !== fetchedInterventionId &&
+      !fetchInterventionLoading
+    ) {
+      fetchIntervention(interventionId);
+    }
   }, [interventionId]);
 
   const previewPossible =
@@ -315,7 +329,7 @@ export function AnswerSessionPage({
     (!isUserSessionFinished || (isGuestUser && isUserSessionFinished));
 
   useEffect(() => {
-    if (isAuthenticated) {
+    if (isAuthenticated && !userSession) {
       fetchUserSession(sessionId);
     }
     return clearErrors;
@@ -328,12 +342,15 @@ export function AnswerSessionPage({
   }, [isUserSessionFinished, isGuestUser, interventionStarted]);
 
   useEffect(() => {
-    if (userSession && !isUserSessionFinished) {
+    if (!userSession || isUserSessionFinished) return;
+
+    if (!nextQuestionLoading) {
       const questionId = userSession.lastAnswerAt ? null : index;
       nextQuestion(userSessionId, questionId);
-      if (userSession.liveChatEnabled && interventionId) {
-        setLiveChatEnabled(interventionId);
-      }
+    }
+
+    if (userSession.liveChatEnabled && interventionId) {
+      setLiveChatEnabled(interventionId);
     }
   }, [userSession]);
 
@@ -500,17 +517,12 @@ export function AnswerSessionPage({
       userSessionId: userSession?.id,
       disabled: continueButtonLoading,
       continueButtonLoading,
+      dynamicElementsDirection,
     };
 
     const isLastScreen = currentQuestion.type === finishQuestion.id;
 
     const canSkipNarrator = narratorSkippable || !isAnimationOngoing;
-
-    const shouldRenderSkipQuestionButton =
-      !required &&
-      !isCatMhSession &&
-      !isLastScreen &&
-      !NOT_SKIPPABLE_QUESTIONS.includes(type);
 
     const shouldRenderContinueButton =
       (isNullOrUndefined(proceedButton) || proceedButton) &&
@@ -562,6 +574,7 @@ export function AnswerSessionPage({
               mt={isMobile ? 32 : 16}
               align={isMobile ? 'end' : 'center'}
               gap={16}
+              dir={fixedElementsDirection}
             >
               <ScreenBackButton
                 onClick={onBackButtonClick}
@@ -576,9 +589,12 @@ export function AnswerSessionPage({
                 setFeedbackSettings={setFeedbackSettings}
                 feedbackScreenSettings={feedbackScreenSettings}
                 audioInstance={audioInstance}
+                dynamicElementsDirection={dynamicElementsDirection}
               >
                 <ActionButtons
-                  renderSkipQuestionButton={shouldRenderSkipQuestionButton}
+                  questionType={type}
+                  questionRequired={required}
+                  isCatMhSession={isCatMhSession}
                   skipQuestionButtonDisabled={continueButtonLoading}
                   onSkipQuestionClick={() => setSkipQuestionModalVisible(true)}
                   renderContinueButton={shouldRenderContinueButton}
@@ -602,14 +618,16 @@ export function AnswerSessionPage({
           )}
 
           {!isNarratorPositionFixed && (
-            <Row align="center" gap={16}>
+            <Row align="center" gap={16} dir={fixedElementsDirection}>
               <ScreenBackButton
                 onClick={onBackButtonClick}
                 disabled={backButtonDisabled}
                 disabledMessage={backButtonDisabledMessage()}
               />
               <ActionButtons
-                renderSkipQuestionButton={shouldRenderSkipQuestionButton}
+                questionType={type}
+                questionRequired={required}
+                isCatMhSession={isCatMhSession}
                 skipQuestionButtonDisabled={continueButtonLoading}
                 onSkipQuestionClick={() => setSkipQuestionModalVisible(true)}
                 renderContinueButton={shouldRenderContinueButton}
@@ -721,6 +739,12 @@ export function AnswerSessionPage({
               onClose={() => setSkipQuestionModalVisible(false)}
               description={formatMessage(messages.skipQuestionModalHeader)}
               content={formatMessage(messages.skipQuestionModalMessage)}
+              cancelButtonText={formatMessage(
+                messages.skipQuestionModalCancelButtonText,
+              )}
+              confirmationButtonText={formatMessage(
+                messages.skipQuestionModalConfirmationButtonText,
+              )}
               confirmAction={() => saveAnswer(true)}
               hideCloseButton
               contentContainerStyles={{
@@ -736,7 +760,7 @@ export function AnswerSessionPage({
               description={formatMessage(messages.confirmContinueModalHeader)}
               content={formatMessage(
                 messages[
-                  `confirmContinueModalMessage${QuestionTypes.TLFB_EVENTS}`
+                  `confirmContinueModalMessage.${QuestionTypes.TLFB_EVENTS}`
                 ],
               )}
               confirmAction={() => saveAnswer(false)}
@@ -898,6 +922,9 @@ export function AnswerSessionPage({
                                     feedbackScreenSettings
                                   }
                                   audioInstance={audioInstance}
+                                  dynamicElementsDirection={
+                                    dynamicElementsDirection
+                                  }
                                 >
                                   {renderQuestion()}
                                 </AnimationRefHelper>
@@ -953,6 +980,8 @@ AnswerSessionPage.propTypes = {
   audioInstance: PropTypes.shape(AudioWrapper),
   isPreview: PropTypes.bool,
   interventionStatus: PropTypes.string,
+  fetchedInterventionId: PropTypes.string,
+  fetchInterventionLoading: PropTypes.bool,
   fetchIntervention: PropTypes.func,
   fetchUserSession: PropTypes.func,
   createUserSession: PropTypes.func,
@@ -961,15 +990,21 @@ AnswerSessionPage.propTypes = {
   setTransitionalUserSessionId: PropTypes.func,
   setLiveChatEnabled: PropTypes.func,
   saveQuickExitEvent: PropTypes.func,
-  resetAnswerSessionPage: PropTypes.func,
-  resetAllReducers: PropTypes.func,
   fetchPreviousQuestion: PropTypes.func,
+  fixedElementsDirection: PropTypes.string,
+  dynamicElementsDirection: PropTypes.string,
 };
 
 const mapStateToProps = createStructuredSelector({
   AnswerSessionPage: makeSelectAnswerSessionPage(),
   audioInstance: makeSelectAudioInstance(),
   interventionStatus: makeSelectInterventionStatus(),
+  fetchedInterventionId: makeSelectInterventionId(),
+  fetchInterventionLoading: makeSelectInterventionLoader(
+    'fetchInterventionLoading',
+  ),
+  fixedElementsDirection: makeSelectInterventionFixedElementsDirection(),
+  dynamicElementsDirection: makeSelectInterventionDynamicElementsDirection(),
 });
 
 const mapDispatchToProps = {
@@ -986,8 +1021,6 @@ const mapDispatchToProps = {
   setTransitionalUserSessionId: setTransitionalUserSessionIdAction,
   setLiveChatEnabled: setChatEnabled,
   saveQuickExitEvent: saveQuickExitEventRequest,
-  resetAnswerSessionPage: resetReducer,
-  resetAllReducers: resetAuthReducer,
   fetchPreviousQuestion: fetchPreviousQuestionRequest,
 };
 

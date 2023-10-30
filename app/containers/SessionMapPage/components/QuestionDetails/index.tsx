@@ -69,14 +69,19 @@ const SessionMapQuestionDetails = ({
         justify="between"
       >
         <div>
-          <Text color={colors.electricPurple} fontWeight="bold" mb={10}>
+          <Text
+            color={colors.electricPurple}
+            fontWeight="bold"
+            mb={10}
+            dir="auto"
+          >
             {questionGroup.title}
           </Text>
-          <Row gap={30}>
+          <Row gap={30} dir="auto">
             <Column filled>
               <H2>{htmlToPlainText(subtitle)}</H2>
             </Column>
-            <Column width="auto">
+            <Column width="auto" dir="auto">
               <QuestionTypeIndicator
                 type={type}
                 iconSize="9px"

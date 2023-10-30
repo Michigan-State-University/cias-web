@@ -47,7 +47,6 @@ const HenryFordInitialScreen = ({
       verifyingError={error}
       hfhsPatientDetail={hfhsPatientDetail}
       disabled={patientDetailProvided || disabled}
-      showContinueButton
     />
   );
 };

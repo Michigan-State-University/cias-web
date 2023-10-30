@@ -5,7 +5,7 @@ import { animationDuration } from 'utils/animationsHelpers/constants';
 export const NarratorContainer = styled.div`
   position: absolute;
   top: 0;
-  left: 0;
+  inset-inline-start: 0;
   height: 0;
   width: 0;
 

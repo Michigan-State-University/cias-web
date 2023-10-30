@@ -29,6 +29,7 @@ const FeedbackQuestionLayout = ({
   targetValue: { target: targetValue } = { target: 0 },
   showSpectrum,
   setFeedbackSettings,
+  dynamicElementsDirection,
 }) => {
   const { formatMessage } = useIntl();
   const [params, containerRef] = useContainerQuery(QUERY);
@@ -38,6 +39,8 @@ const FeedbackQuestionLayout = ({
   const higherValue = 100 - targetNumber;
   const lowerPosition = targetNumber / 2;
   const higherPosition = targetNumber + higherValue / 2;
+
+  const reverse = dynamicElementsDirection === 'rtl';
 
   const labels = {
     0: {
@@ -74,10 +77,15 @@ const FeedbackQuestionLayout = ({
   }, [sliderRef.current]);
 
   return (
-    <Column mt={10} mb={10}>
+    <Column marginBlock={10}>
       <Box width="100%">
         <Row>
-          <Box ref={containerRef} width="100%" px={21} py={14}>
+          <Box
+            ref={containerRef}
+            width="100%"
+            paddingInline={21}
+            paddingBlock={14}
+          >
             <FeedbackSlider
               ref={sliderRef}
               targetValue={targetNumber}
@@ -86,6 +94,7 @@ const FeedbackQuestionLayout = ({
               withSpectrum={showSpectrum}
               className={classnames(params)}
               ariaLabelledByForHandle={`${QUESTION_TITLE_ID} ${QUESTION_SUBTITLE_ID}`}
+              reverse={reverse}
             />
           </Box>
         </Row>
@@ -100,6 +109,7 @@ FeedbackQuestionLayout.propTypes = {
   targetValue: PropTypes.object,
   showSpectrum: PropTypes.bool,
   setFeedbackSettings: PropTypes.func,
+  dynamicElementsDirection: PropTypes.string,
 };
 
 FeedbackQuestionLayout.defaultProps = {

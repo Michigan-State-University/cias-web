@@ -15,15 +15,15 @@ export default defineMessages({
     defaultMessage: 'Download Report',
   },
   [reportFor.participant]: {
-    id: `${scope}.${reportFor.participant}`,
+    id: `${scope}.participant`,
     defaultMessage: 'Participant Report',
   },
   [reportFor.thirdParty]: {
-    id: `${scope}.${reportFor.thirdParty}`,
+    id: `${scope}.third_party`,
     defaultMessage: 'Third Party Report',
   },
   [reportFor.henryFordHealth]: {
-    id: `${scope}.${reportFor.henryFordHealth}`,
+    id: `${scope}.henry_ford_health`,
     defaultMessage: "Henry Ford Health's Report",
   },
 });

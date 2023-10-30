@@ -31,6 +31,7 @@ import {
   StyledCreateTile,
 } from './styled';
 import messages from './messages';
+import textMessageScheduleOptionsMessages from './textMessageScheduleOptionsMessages';
 
 const SmsTiles = ({ createTextMessage }) => {
   const {
@@ -78,7 +79,7 @@ const SmsTiles = ({ createTextMessage }) => {
     const messageDescription =
       type === TextMessageType.ALERT
         ? formatMessage(messages.alertMessageDescription)
-        : formatMessage(messages[schedule], {
+        : formatMessage(textMessageScheduleOptionsMessages[schedule], {
             days: schedulePayload ?? '_',
           });
 

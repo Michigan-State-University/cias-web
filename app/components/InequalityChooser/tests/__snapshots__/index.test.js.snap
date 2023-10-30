@@ -140,6 +140,7 @@ exports[`<InequalityChooser /> Should render and match the snapshot 1`] = `
       class="c3 c4"
       data-cy="case-value-input"
       data-testid="input"
+      dir="auto"
       placeholder="..."
       type="text"
       value="5"

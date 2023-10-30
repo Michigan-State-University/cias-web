@@ -9,6 +9,7 @@ const GridQuestion = ({
   selectAnswer,
   saveAnswer,
   disabled,
+  dynamicElementsDirection,
 }) => {
   const [selectedAnswersIndex, setSelectedAnswersIndex] = useState({});
   const [selectedAnswers, setSelectedAnswers] = useState({});
@@ -82,6 +83,7 @@ const GridQuestion = ({
       questionId={id}
       selectedAnswersIndex={selectedAnswersIndex}
       disabled={disabled}
+      dynamicElementsDirection={dynamicElementsDirection}
     />
   );
 };
@@ -92,6 +94,7 @@ GridQuestion.propTypes = {
   answerBody: PropTypes.any,
   saveAnswer: PropTypes.func,
   disabled: PropTypes.bool,
+  dynamicElementsDirection: PropTypes.string,
 };
 
 export default GridQuestion;

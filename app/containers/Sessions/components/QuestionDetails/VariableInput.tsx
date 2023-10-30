@@ -47,10 +47,7 @@ const VariableInput = ({
         textAlign="center"
         keyboard="tel"
         validator={variableNameValidator}
-        placeholder={formatMessage(
-          // @ts-ignore
-          globalMessages.variables.variableNamePlaceholder,
-        )}
+        placeholder={formatMessage(globalMessages.variableNamePlaceholder)}
         value={variable.name}
         color={colors.jungleGreen}
         onBlur={updateVariable}

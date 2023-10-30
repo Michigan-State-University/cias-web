@@ -2,6 +2,8 @@ import { GenericAnswer } from 'models/Answer';
 import { QuestionDTO } from 'models/Question';
 import { ToastContent, ToastOptions } from 'react-toastify';
 
+import { LanguageDirection } from 'global/types/locale';
+
 export type AnswerSessionPageFeedbackScreenSettings = {
   showSpectrum: boolean;
   sliderRef: any; // No library type definitions for reference
@@ -30,6 +32,7 @@ export type SharedProps<
   userSessionId?: string;
   disabled: boolean;
   continueButtonLoading: boolean;
+  dynamicElementsDirection: LanguageDirection;
 };
 
 export type ParticipantSessionSettings = {

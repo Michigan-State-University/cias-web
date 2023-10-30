@@ -5,6 +5,7 @@ import upperFirst from 'lodash/upperFirst';
 
 import Badge from 'components/Badge';
 import Box from 'components/Box';
+import FlexRow from 'components/Row';
 import { ImageButton } from 'components/Button';
 import { EllipsisText } from 'components/Text';
 import OriginalTextHover from 'components/OriginalTextHover';
@@ -51,7 +52,7 @@ export const BoxTable = <T,>({
         ${keys
           ?.map((key) =>
             !badgeKeys.includes(key)
-              ? `<p style="font-size:10px"><b>${upperFirst(
+              ? `<p style='font-size:10px'><b>${upperFirst(
                   key as string,
                 )}</b>: ${originalText[index][key]}</p>`
               : '',
@@ -89,7 +90,9 @@ export const BoxTable = <T,>({
                   </Badge>
                 )}
                 {!badgeKeys.includes(key) && (
-                  <EllipsisText text={`${row[key] ?? ''}`} />
+                  <FlexRow dir="auto">
+                    <EllipsisText text={`${row[key] ?? ''}`} />
+                  </FlexRow>
                 )}
               </Cell>
             ))}

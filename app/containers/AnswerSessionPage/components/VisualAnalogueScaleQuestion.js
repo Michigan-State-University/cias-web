@@ -10,6 +10,7 @@ const VisualAnalogueScaleQuestion = ({
   answerBody,
   selectAnswer,
   disabled,
+  dynamicElementsDirection,
 }) => {
   const {
     body: {
@@ -67,6 +68,7 @@ const VisualAnalogueScaleQuestion = ({
       showNumber={!isNullOrUndefined(showNumber) && showNumber}
       rangeStart={rangeStart}
       rangeEnd={rangeEnd}
+      dynamicElementsDirection={dynamicElementsDirection}
     />
   );
 };
@@ -76,6 +78,7 @@ VisualAnalogueScaleQuestion.propTypes = {
   selectAnswer: PropTypes.func,
   answerBody: PropTypes.any,
   disabled: PropTypes.bool,
+  dynamicElementsDirection: PropTypes.string,
 };
 
 export default VisualAnalogueScaleQuestion;

@@ -17,12 +17,14 @@ import Box from 'components/Box';
 
 import messages from './messages';
 import { OriginalText } from './styled';
+import { OriginalTextIconPosition } from './types';
 
 type Props = {
   children?: React.ReactNode;
   id: string;
   text: string | undefined;
   hidden?: boolean;
+  iconPosition?: OriginalTextIconPosition;
   iconProps?: Record<string, unknown>;
 };
 
@@ -32,6 +34,7 @@ const OriginalTextHover = ({
   text,
   hidden = false,
   iconProps,
+  iconPosition = OriginalTextIconPosition.END,
   ...restProps
 }: Props & Record<string, unknown>): JSX.Element => {
   const { formatMessage } = useIntl();
@@ -49,7 +52,15 @@ const OriginalTextHover = ({
   );
 
   return (
-    <Box gap={15} display="flex" align="center" {...restProps}>
+    <Box
+      gap={15}
+      display="flex"
+      direction={
+        iconPosition === OriginalTextIconPosition.END ? 'row' : 'row-reverse'
+      }
+      align="center"
+      {...restProps}
+    >
       {children}
       {!hidden && text && (
         // @ts-ignore
@@ -65,3 +76,4 @@ const OriginalTextHover = ({
 };
 
 export default memo(OriginalTextHover);
+export { OriginalTextIconPosition };

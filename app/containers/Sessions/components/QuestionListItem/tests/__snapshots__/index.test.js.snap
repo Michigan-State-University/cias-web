@@ -256,6 +256,7 @@ exports[`<QuestionListItem /> should match the snapshot 1`] = `
         >
           <div
             class="c4"
+            dir="auto"
           >
             <h3
               class="c5 c6"

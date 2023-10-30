@@ -41,7 +41,11 @@ const INPUT_PADDING = 15;
 
 type Props = CommonQuestionProps;
 
-const HenryFordQuestion = ({ isNarratorTab, editingPossible }: Props) => {
+const HenryFordQuestion = ({
+  isNarratorTab,
+  editingPossible,
+  dynamicElementsDirection,
+}: Props) => {
   const { formatMessage } = useIntl();
 
   const selectedQuestion = useSelector<RootState, HenryFordQuestionDTO>(
@@ -95,18 +99,18 @@ const HenryFordQuestion = ({ isNarratorTab, editingPossible }: Props) => {
   };
 
   return (
-    <Column mt={10}>
+    <Column marginBlockStart={10}>
       <DndSortable onDragEnd={onDragEnd} items={data} selector={null}>
         {({ item, index, dragHandleProps }) => {
           const onUpdateAnswer = (
             updateValue: Partial<HenryFordQuestionDTO['body']['data'][0]>,
           ) => updateAnswer(index, { ...item, ...updateValue });
           return (
-            <Row>
+            <Row dir={dynamicElementsDirection}>
               <HoverableBox
                 hoverColor={isNarratorTabOrEditNotPossible ? null : undefined}
-                px={21}
-                py={14}
+                paddingInline={21}
+                paddingBlock={14}
                 width="100%"
                 onMouseEnter={handleMouseEnter(index)}
                 onMouseLeave={() => setHoveredIndex(-1)}
@@ -116,7 +120,7 @@ const HenryFordQuestion = ({ isNarratorTab, editingPossible }: Props) => {
                   <Row
                     align="center"
                     justify="between"
-                    mb={isNarratorTabOrEditNotPossible ? 0 : 10}
+                    marginBlockEnd={isNarratorTabOrEditNotPossible ? 0 : 10}
                   >
                     <Row width="90%">
                       {!isNarratorTabOrEditNotPossible && (
@@ -124,7 +128,7 @@ const HenryFordQuestion = ({ isNarratorTab, editingPossible }: Props) => {
                           alt={formatMessage(messages.reorderIconAlt, {
                             index,
                           })}
-                          mr={10}
+                          marginInlineEnd={10}
                           src={ReorderIcon}
                           disabled={false}
                           cursor="grab"
@@ -132,14 +136,18 @@ const HenryFordQuestion = ({ isNarratorTab, editingPossible }: Props) => {
                         />
                       )}
 
-                      <Img ref={radioButtonRef} src={radio} mr={RADIO_MARGIN} />
+                      <Img
+                        ref={radioButtonRef}
+                        src={radio}
+                        marginInlineEnd={RADIO_MARGIN}
+                      />
                       <OriginalTextHover
                         text={item?.original_text || ''}
                         hidden={isNarratorTab}
                         id={`answer-${index}`}
                       >
                         <FlexibleWidthApprovableInput
-                          mr={8}
+                          marginInlineEnd={8}
                           fontSize={18}
                           type="singleline"
                           placeholder={formatMessage(messages.placeholder, {
@@ -161,23 +169,26 @@ const HenryFordQuestion = ({ isNarratorTab, editingPossible }: Props) => {
                         hidden={hoveredIndex !== index}
                         clickable
                       >
-                        <Img src={bin} mr={16} />
+                        <Img src={bin} marginInlineEnd={16} />
                       </Box>
                     </Row>
                   </Row>
-                  <Row align="center" hidden={isNarratorTab}>
+                  <Row
+                    align="center"
+                    hidden={isNarratorTab}
+                    gap={10}
+                    marginInlineStart={`${leftMargin}px`}
+                  >
                     <BadgeInput
                       data-cy={`score-${index}-input`}
-                      ml={`${leftMargin}px`}
                       disabled={!editingPossible}
-                      px={0}
-                      py={12}
+                      paddingInline={0}
+                      paddingBlock={12}
                       textAlign="center"
                       validator={numericValidator}
                       keyboard="tel"
                       placeholder={formatMessage(
-                        // @ts-ignore
-                        globalMessages.variables.variableScorePlaceholder,
+                        globalMessages.variableScorePlaceholder,
                       )}
                       value={item.value}
                       color={colors.azure}
@@ -193,16 +204,14 @@ const HenryFordQuestion = ({ isNarratorTab, editingPossible }: Props) => {
                       visible={!henryFordInitialScreenExists}
                     >
                       <BadgeInput
-                        ml={10}
                         disabled={
                           !editingPossible || !henryFordInitialScreenExists
                         }
-                        px={0}
-                        py={12}
+                        paddingInline={0}
+                        paddingBlock={12}
                         textAlign="center"
                         placeholder={formatMessage(
-                          // @ts-ignore
-                          globalMessages.variables.hfhValuePlaceholder,
+                          globalMessages.hfhValuePlaceholder,
                         )}
                         value={item.hfh_value}
                         color={colors.kleinBlue}
@@ -222,10 +231,10 @@ const HenryFordQuestion = ({ isNarratorTab, editingPossible }: Props) => {
         }}
       </DndSortable>
       <Row hidden={isNarratorTabOrEditNotPossible}>
-        <HoverableBox px={21} py={14} onClick={addAnswer}>
+        <HoverableBox paddingInline={21} paddingBlock={14} onClick={addAnswer}>
           <Box>
             <Row align="center">
-              <PlusCircle mr={12} />
+              <PlusCircle marginInlineEnd={12} />
               <Text fontWeight="bold" color={themeColors.secondary}>
                 {formatMessage(messages.addAnswer)}
               </Text>
