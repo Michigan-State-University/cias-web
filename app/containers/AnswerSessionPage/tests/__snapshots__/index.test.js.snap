@@ -46,7 +46,7 @@ exports[`<AnswerSessionPage /> Should render and match the snapshot 1`] = `
   position: absolute;
   margin-right: 24px;
   margin-left: 24px;
-  bottom: 48px;
+  bottom: 90px;
   color: unset;
 }
 

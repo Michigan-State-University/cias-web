@@ -843,9 +843,7 @@ export function AnswerSessionPage({
                     </Row>
                     <Box
                       position="absolute"
-                      bottom={
-                        userSession?.liveChatEnabled && !isDesktop ? 90 : 48
-                      }
+                      bottom={isDesktop ? 48 : 90}
                       mx={24}
                     >
                       <H3 textAlign="center" color={themeColors.warning}>
