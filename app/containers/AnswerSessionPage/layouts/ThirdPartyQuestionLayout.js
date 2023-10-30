@@ -21,8 +21,9 @@ const ThirdPartyQuestionLayout = ({
   selectedAnswerIndex,
   isMobile,
   disabled,
+  dynamicElementsDirection,
 }) => (
-  <Column>
+  <Column dir={dynamicElementsDirection}>
     <Box>
       {data.map((questionAnswer, index) => {
         const {
@@ -36,7 +37,7 @@ const ThirdPartyQuestionLayout = ({
         const key = `question-${questionId}-el-${index}`;
 
         return (
-          <Row key={key} mb={12} align="center">
+          <Row key={key} marginBlockEnd={12} align="center">
             {!isMobile && (
               <AudioTextPreview
                 text={htmlToPlainText(payload)}
@@ -44,8 +45,8 @@ const ThirdPartyQuestionLayout = ({
               />
             )}
             <HoverableBox
-              px={margin}
-              py={14}
+              paddingInline={margin}
+              paddingBlock={14}
               filled
               clickable
               disabled={disabled}
@@ -84,6 +85,7 @@ ThirdPartyQuestionLayout.propTypes = {
   questionId: PropTypes.string,
   isMobile: PropTypes.bool,
   disabled: PropTypes.bool,
+  dynamicElementsDirection: PropTypes.string,
 };
 
 export default ThirdPartyQuestionLayout;

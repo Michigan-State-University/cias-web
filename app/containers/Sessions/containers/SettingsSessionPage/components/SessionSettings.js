@@ -29,6 +29,8 @@ import {
   makeSelectEditingPossible,
 } from 'global/reducers/intervention';
 import globalMessages from 'global/i18n/globalMessages';
+import blockTypesMessages from 'global/i18n/blockTypesMessages';
+import narratorSettingsMessages from 'global/i18n/narratorSettingsMessages';
 
 import H3 from 'components/H3';
 import { LI, UL } from 'components/List';
@@ -137,9 +139,7 @@ const SessionSettings = ({
       <FormattedMessage
         {...messages.blockRemovalConfirmation}
         values={{
-          setting: formatMessage(
-            globalMessages.animationSettings[confirmationOption],
-          ),
+          setting: formatMessage(narratorSettingsMessages[confirmationOption]),
         }}
       />
     );
@@ -153,7 +153,7 @@ const SessionSettings = ({
         <UL>
           {getRemovedBlockForSetting(confirmationOption).map((blockType) => (
             <LI key={blockType} inside>
-              <FormattedMessage {...globalMessages.blockTypes[blockType]} />
+              <FormattedMessage {...blockTypesMessages[blockType]} />
             </LI>
           ))}
         </UL>
@@ -201,9 +201,7 @@ const SessionSettings = ({
           disabled={!editingPossible}
           textAlign="center"
           validator={variableNameValidator}
-          placeholder={formatMessage(
-            globalMessages.variables.variableNamePlaceholder,
-          )}
+          placeholder={formatMessage(globalMessages.variableNamePlaceholder)}
           value={variable}
           color={colors.jungleGreen}
           onBlur={(val) => editSession({ variable: val })}

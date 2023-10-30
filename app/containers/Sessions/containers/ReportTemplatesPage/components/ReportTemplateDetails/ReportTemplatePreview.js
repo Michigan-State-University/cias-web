@@ -15,6 +15,9 @@ import DashedButton from 'components/Button/DashedButton';
 import Img from 'components/Img';
 import { StyledInput } from 'components/Input/StyledInput';
 import { DndSortable } from 'components/DragAndDrop';
+import OriginalTextHover, {
+  OriginalTextIconPosition,
+} from 'components/OriginalTextHover';
 
 import TemplateSectionItem from './TemplateSectionItem';
 import { CardBox } from '../../styled';
@@ -85,20 +88,27 @@ const ReportTemplatePreview = () => {
               )}
               <Row style={{ marginBottom: 30 }}>
                 <Col>
-                  <StyledInput
-                    type="singleline"
-                    width="100%"
-                    placeholder={formatMessage(
-                      messages.reportHeaderPlaceholder,
-                    )}
-                    value={singleReportTemplate.summary ?? ''}
-                    onBlur={onSummaryChange}
-                    disabled={!canEdit}
-                    fontSize={32}
-                    maxWidth="none"
-                    fontWeight="bold"
-                    pl="0px"
-                  />
+                  <OriginalTextHover
+                    id={`report-template-${selectedReportId}-summary`}
+                    text={singleReportTemplate.originalText.summary}
+                    iconPosition={OriginalTextIconPosition.START}
+                    marginInlineStart={10}
+                  >
+                    <StyledInput
+                      type="singleline"
+                      width="100%"
+                      placeholder={formatMessage(
+                        messages.reportHeaderPlaceholder,
+                      )}
+                      value={singleReportTemplate.summary ?? ''}
+                      onBlur={onSummaryChange}
+                      disabled={!canEdit}
+                      fontSize={32}
+                      maxWidth="none"
+                      fontWeight="bold"
+                      pl="0px"
+                    />
+                  </OriginalTextHover>
                 </Col>
               </Row>
               <DndSortable

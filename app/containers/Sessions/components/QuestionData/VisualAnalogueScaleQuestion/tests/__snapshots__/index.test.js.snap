@@ -7,10 +7,12 @@ exports[`<VisualAnalogueScaleQuestion /> Should render and match the snapshot 1`
   display: block;
   border-radius: 5px;
   width: 100%;
-  padding-top: 30px;
-  padding-bottom: 30px;
-  padding-right: 21px;
-  padding-left: 21px;
+  padding-block: 30px;
+  padding-block-start: 30px;
+  padding-block-end: 30px;
+  padding-inline: 21px;
+  padding-inline-start: 21px;
+  padding-inline-end: 21px;
   color: unset;
 }
 
@@ -28,7 +30,7 @@ exports[`<VisualAnalogueScaleQuestion /> Should render and match the snapshot 1`
   height: auto;
   display: block;
   border-radius: 5px;
-  margin-bottom: 64px;
+  margin-block-end: 64px;
   color: unset;
 }
 
@@ -41,7 +43,7 @@ exports[`<VisualAnalogueScaleQuestion /> Should render and match the snapshot 1`
   -ms-flex-direction: column;
   flex-direction: column;
   width: 100%;
-  margin-top: 10px;
+  margin-block-start: 10px;
 }
 
 .c2 {
@@ -80,7 +82,7 @@ exports[`<VisualAnalogueScaleQuestion /> Should render and match the snapshot 1`
   -ms-flex-pack: justify;
   justify-content: space-between;
   justify-items: space-between;
-  margin-bottom: 24px;
+  margin-block-end: 24px;
 }
 
 .c6 {
@@ -183,6 +185,7 @@ exports[`<VisualAnalogueScaleQuestion /> Should render and match the snapshot 1`
             <input
               class="c6 c7"
               color="#B727EA"
+              dir="auto"
               disabled=""
               type="text"
               value=""
@@ -191,6 +194,7 @@ exports[`<VisualAnalogueScaleQuestion /> Should render and match the snapshot 1`
             <input
               class="c6 c7"
               color="#B727EA"
+              dir="auto"
               disabled=""
               type="text"
               value=""

@@ -62,7 +62,7 @@ const Component = ({
           id={generateGroupId(name)}
           key={`substance-group-${index}`}
           label={
-            <Text fontSize={16} fontWeight="bold">
+            <Text fontSize={16} fontWeight="bold" dir="auto" flex={1} mr={8}>
               {name}
             </Text>
           }

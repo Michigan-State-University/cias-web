@@ -29,7 +29,7 @@ exports[`<Checkbox /> Should render checked and match the snapshot 1`] = `
 }
 
 .c6 {
-  margin-right: 5px;
+  margin-inline-end: 5px;
   border-radius: 5px;
 }
 
@@ -111,7 +111,7 @@ exports[`<Checkbox /> Should render unchecked and match the snapshot 1`] = `
 }
 
 .c6 {
-  margin-right: 5px;
+  margin-inline-end: 5px;
   border-radius: 5px;
 }
 

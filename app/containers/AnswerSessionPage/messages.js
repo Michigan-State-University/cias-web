@@ -38,16 +38,24 @@ export default defineMessages({
     id: `${scope}.skipQuestionModalMessage`,
     defaultMessage: 'Are you sure you want to leave this question empty?',
   },
+  skipQuestionModalCancelButtonText: {
+    id: `${scope}.skipQuestionModalCancelButtonText`,
+    defaultMessage: 'Cancel',
+  },
+  skipQuestionModalConfirmationButtonText: {
+    id: `${scope}.skipQuestionModalConfirmationButtonText`,
+    defaultMessage: 'Confirm',
+  },
   confirmContinueModalHeader: {
     id: `${scope}.confirmContinueModalHeader`,
     defaultMessage: 'Is that all?',
   },
-  [`confirmContinueModalMessage${QuestionTypes.TLFB_EVENTS}`]: {
-    id: `${scope}.confirmContinueModalMessage${QuestionTypes.TLFB_EVENTS}`,
+  [`confirmContinueModalMessage.${QuestionTypes.TLFB_EVENTS}`]: {
+    id: `${scope}.confirmContinueModalMessage.Question::TlfbEvents`,
     defaultMessage: 'Are you sure you have marked all your events?',
   },
-  [`confirmContinueModalMessage${QuestionTypes.TLFB_QUESTION}`]: {
-    id: `${scope}.confirmContinueModalMessage${QuestionTypes.TLFB_QUESTION}`,
+  [`confirmContinueModalMessage.${QuestionTypes.TLFB_QUESTION}`]: {
+    id: `${scope}.confirmContinueModalMessage.Question::TlfbQuestion`,
     defaultMessage:
       'Are you sure you marked all the days you used these substances?',
   },
@@ -97,7 +105,7 @@ export default defineMessages({
     defaultMessage: 'Preview not possible',
   },
   noEntranceHeader: {
-    id: `${scope}.noEntranceText`,
+    id: `${scope}.noEntranceHeader`,
     defaultMessage: `You can't open this session!`,
   },
   noEntranceText: {
@@ -109,27 +117,27 @@ export default defineMessages({
     defaultMessage: `There was an unknown error that occurred during branching. Check if everything is set up correctly.`,
   },
   [ZERO_DIVISION_FORMULA_ERROR]: {
-    id: `${scope}.${ZERO_DIVISION_FORMULA_ERROR}`,
+    id: `${scope}.ZeroDivisionError`,
     defaultMessage: `Formula failed and you were transitioned to the next screen because there was division by 0.`,
   },
   [OTHER_FORMULA_ERROR]: {
-    id: `${scope}.${OTHER_FORMULA_ERROR}`,
+    id: `${scope}.OtherFormulaError`,
     defaultMessage: `Formula failed and you were transitioned to the next screen because of some mathematical error.`,
   },
   [REFLECTION_MISS_MATCH]: {
-    id: `${scope}.${REFLECTION_MISS_MATCH}`,
+    id: `${scope}.ReflectionMissMatch`,
     defaultMessage: `There was a reflection error, because variables or score are not set up properly.`,
   },
   [NO_BRANCHING_TARGET]: {
-    id: `${scope}.${NO_BRANCHING_TARGET}`,
+    id: `${scope}.NoBranchingTarget`,
     defaultMessage: `There was a branching error, because branching target is missing (deleted) or not set.`,
   },
   [RANDOMIZATION_MISS_MATCH]: {
-    id: `${scope}.${RANDOMIZATION_MISS_MATCH}`,
+    id: `${scope}.RandomizationMissMatch`,
     defaultMessage: `Randomization was setup incorrectly and you were transitioned to next screen`,
   },
   [FORBIDDEN_CAT_MH_BRANCHING]: {
-    id: `${scope}.${FORBIDDEN_CAT_MH_BRANCHING}`,
+    id: `${scope}.ForbiddenBranchingToCatMhSession`,
     defaultMessage: `There was a branching to CAT-MH™ session that is not available during preview. Participants will be branched correctly when filling out published intervention`,
   },
   emailValidationError: {
@@ -190,10 +198,7 @@ export default defineMessages({
   },
   pageTitle: {
     id: `${scope}.pageTitle`,
-    defaultMessage: `{isPreview, select,
-      true {Preview Session}
-      other {Answer Session}
-    }`,
+    defaultMessage: `{isPreview, select, true {Preview Session} other {Answer Session}}`,
   },
   exit: {
     id: `${scope}.exit`,
@@ -213,8 +218,7 @@ export default defineMessages({
   },
   monthSelectorModalText: {
     id: `${scope}.monthSelectorModalText`,
-    defaultMessage: `This study covers a period of more than one month. Using the arrows,
-    you can conveniently switch between them to complete all the months.`,
+    defaultMessage: `This study covers a period of more than one month. Using the arrows, you can conveniently switch between them to complete all the months.`,
   },
   monthSelectorModalButton: {
     id: `${scope}.monthSelectorModalButton`,

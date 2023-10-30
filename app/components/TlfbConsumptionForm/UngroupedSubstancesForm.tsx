@@ -65,11 +65,11 @@ const Component = ({
   return (
     <Column gap={8} mb={24}>
       {options.map(({ name, variable, consumed }) => (
-        <OptionContainer key={variable}>
+        <OptionContainer key={variable} dir="auto">
           <Text fontWeight="bold" fontSize={16}>
             {name}
           </Text>
-          <Row gap={16}>
+          <Row gap={16} dir="auto">
             <Radio
               id={`${variable}-yes-option`}
               disabled={loading || disabled}

@@ -12,6 +12,7 @@ export const Tab = styled.div`
   border-bottom-width: 2px;
   border-bottom-color: ${themeColors.secondary};
   border-bottom-style: ${({ isActive }) => (isActive ? 'solid' : 'none')};
+
   div {
     cursor: pointer;
   }
@@ -21,6 +22,7 @@ export const Tab = styled.div`
       isActive ? themeColors.text : colors.grey} !important;
     text-decoration: none;
   }
+
   a:visited,
   a:hover {
     color: ${themeColors.text};
@@ -41,7 +43,7 @@ export const ReportHeader = styled.div`
   letter-spacing: 0;
 `;
 
-export const SectionTitle = styled.div`
+export const SectionTitle = styled.div.attrs({ dir: 'auto' })`
   font-size: 13px;
   font-weight: 700;
   line-height: 17px;

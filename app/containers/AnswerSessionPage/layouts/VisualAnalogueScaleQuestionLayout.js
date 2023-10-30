@@ -24,6 +24,7 @@ const VisualAnalogueScaleQuestionLayout = ({
   showNumber,
   rangeStart,
   rangeEnd,
+  dynamicElementsDirection,
 }) => {
   const [params, containerRef] = useContainerQuery(QUERY);
 
@@ -54,6 +55,7 @@ const VisualAnalogueScaleQuestionLayout = ({
               showValue={showNumber}
               className={classnames(params)}
               ariaLabelledByForHandle={`${QUESTION_TITLE_ID} ${QUESTION_SUBTITLE_ID}`}
+              reverse={dynamicElementsDirection === 'rtl'}
             />
           </Box>
         </Row>
@@ -71,6 +73,7 @@ VisualAnalogueScaleQuestionLayout.propTypes = {
   rangeStart: PropTypes.number,
   rangeEnd: PropTypes.number,
   showNumber: PropTypes.bool,
+  dynamicElementsDirection: PropTypes.string,
 };
 
 VisualAnalogueScaleQuestionLayout.defaultProps = {

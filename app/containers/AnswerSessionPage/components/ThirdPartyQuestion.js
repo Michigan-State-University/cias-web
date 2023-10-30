@@ -9,6 +9,7 @@ const ThirdPartyQuestion = ({
   selectAnswer,
   isMobile,
   disabled,
+  dynamicElementsDirection,
 }) => {
   const [selectedAnswerIndex, setSelectedAnswerIndex] = useState(null);
   const {
@@ -44,6 +45,7 @@ const ThirdPartyQuestion = ({
       selectedAnswerIndex={selectedAnswerIndex}
       isMobile={isMobile}
       disabled={disabled}
+      dynamicElementsDirection={dynamicElementsDirection}
     />
   );
 };
@@ -54,6 +56,7 @@ ThirdPartyQuestion.propTypes = {
   selectAnswer: PropTypes.func,
   isMobile: PropTypes.bool,
   disabled: PropTypes.bool,
+  dynamicElementsDirection: PropTypes.string,
 };
 
 export default ThirdPartyQuestion;

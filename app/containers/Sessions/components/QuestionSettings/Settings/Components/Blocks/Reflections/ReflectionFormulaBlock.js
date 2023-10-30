@@ -30,10 +30,11 @@ import {
   makeSelectSelectedQuestionType,
 } from 'global/reducers/questions';
 import { makeSelectPreviewData } from 'global/reducers/localState';
-import animationMessages from 'global/i18n/animationNames';
+import animationsMessages from 'global/i18n/animationsMessages';
 import { characterToSpeechAnimationsMap } from 'utils/animations/animationsNames';
 
 import messages from '../../messages';
+import feedbackActionsMessages from '../../feedbackActionsMessages';
 import { updateBlockSettings, switchSpeechReflection } from '../../../actions';
 
 import { DashedBox } from './styled';
@@ -63,7 +64,7 @@ const ReflectionFormulaBlock = ({
 
     return animations.map((animation) => ({
       value: animation,
-      label: formatMessage(animationMessages[animation]),
+      label: formatMessage(animationsMessages[animation]),
     }));
   }, [character]);
 
@@ -74,7 +75,7 @@ const ReflectionFormulaBlock = ({
 
     return options.map((option) => ({
       value: option,
-      label: formatMessage(messages[option]),
+      label: formatMessage(feedbackActionsMessages[option]),
     }));
   }, [EFeedbackAction]);
 

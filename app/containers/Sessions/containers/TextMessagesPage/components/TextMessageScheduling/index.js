@@ -20,6 +20,9 @@ import { themeColors } from 'theme';
 
 import messages from './messages';
 import { StyledInputWrapper } from './styled';
+import textMessageScheduleOptionsMessages from './textMessageScheduleOptionsMessages';
+import textMessageScheduleFrequenciesMessages from './textMessageScheduleFrequenciesMessages';
+
 const TextMessageScheduling = ({
   id,
   selectedOption,
@@ -73,30 +76,54 @@ const TextMessageScheduling = ({
   const ALL_SCHEDULE_OPTIONS = {
     [TextMessageScheduleOption.AFTER_FILL]: {
       id: TextMessageScheduleOption.AFTER_FILL,
-      label: formatMessage(messages[TextMessageScheduleOption.AFTER_FILL]),
+      label: formatMessage(
+        textMessageScheduleOptionsMessages[
+          TextMessageScheduleOption.AFTER_FILL
+        ],
+      ),
     },
     [TextMessageScheduleOption.DAYS_AFTER_FILL]: {
       id: TextMessageScheduleOption.DAYS_AFTER_FILL,
-      label: formatMessage(messages[TextMessageScheduleOption.DAYS_AFTER_FILL]),
+      label: formatMessage(
+        textMessageScheduleOptionsMessages[
+          TextMessageScheduleOption.DAYS_AFTER_FILL
+        ],
+      ),
     },
   };
 
   const ALL_FREQUENCIES = {
     [TextMessageScheduleFrequency.ONCE]: {
       id: TextMessageScheduleFrequency.ONCE,
-      label: formatMessage(messages[TextMessageScheduleFrequency.ONCE]),
+      label: formatMessage(
+        textMessageScheduleFrequenciesMessages[
+          TextMessageScheduleFrequency.ONCE
+        ],
+      ),
     },
     [TextMessageScheduleFrequency.ONCE_DAY]: {
       id: TextMessageScheduleFrequency.ONCE_DAY,
-      label: formatMessage(messages[TextMessageScheduleFrequency.ONCE_DAY]),
+      label: formatMessage(
+        textMessageScheduleFrequenciesMessages[
+          TextMessageScheduleFrequency.ONCE_DAY
+        ],
+      ),
     },
     [TextMessageScheduleFrequency.ONCE_WEEK]: {
       id: TextMessageScheduleFrequency.ONCE_WEEK,
-      label: formatMessage(messages[TextMessageScheduleFrequency.ONCE_WEEK]),
+      label: formatMessage(
+        textMessageScheduleFrequenciesMessages[
+          TextMessageScheduleFrequency.ONCE_WEEK
+        ],
+      ),
     },
     [TextMessageScheduleFrequency.ONCE_MONTH]: {
       id: TextMessageScheduleFrequency.ONCE_MONTH,
-      label: formatMessage(messages[TextMessageScheduleFrequency.ONCE_MONTH]),
+      label: formatMessage(
+        textMessageScheduleFrequenciesMessages[
+          TextMessageScheduleFrequency.ONCE_MONTH
+        ],
+      ),
     },
   };
   return (

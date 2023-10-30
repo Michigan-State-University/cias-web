@@ -339,6 +339,7 @@ exports[`<SetNewPasswordPage /> Should render and match the snapshot 1`] = `
             >
               <input
                 class="c11"
+                dir="auto"
                 height="46"
                 id="password"
                 name="password"
@@ -369,6 +370,7 @@ exports[`<SetNewPasswordPage /> Should render and match the snapshot 1`] = `
             >
               <input
                 class="c11"
+                dir="auto"
                 height="46"
                 id="passwordConfirmation"
                 name="passwordConfirmation"

@@ -129,15 +129,17 @@ export const GroupedSubstances = ({
         <BoxCollapse
           key={`substance-group-${index}`}
           label={
-            <OriginalTextHover
-              id={`substance-group-${index}`}
-              hidden={!originalText?.[index]?.name}
-              text={originalText?.[index]?.name || ''}
-            >
-              <Text fontSize="16px" fontWeight="bold">
-                {group.name}
-              </Text>
-            </OriginalTextHover>
+            <Row align="center" flex={1} dir="auto" mr={8}>
+              <OriginalTextHover
+                id={`substance-group-${index}`}
+                hidden={!originalText?.[index]?.name}
+                text={originalText?.[index]?.name || ''}
+              >
+                <Text fontSize="16px" fontWeight="bold">
+                  {group.name}
+                </Text>
+              </OriginalTextHover>
+            </Row>
           }
           onEdit={onEditGroup(index)}
           onDelete={onRemoveGroup(index)}

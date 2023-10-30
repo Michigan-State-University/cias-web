@@ -17,10 +17,16 @@ export const TlfbTitle = ({
   displayHelpingMaterials,
 }: TlfbTitleProps) => (
   <div>
-    <Box mb={12}>
+    <Box mb={12} dir="auto">
       <Markup content={title} />
     </Box>
-    <Row display="flex" justify="between" mb={32} gap={16}>
+    <Row
+      display="flex"
+      justify="between"
+      marginBlockEnd={32}
+      gap={16}
+      dir="auto"
+    >
       <Markup content={subtitle} />
       {displayHelpingMaterials && <TlfbHelpingMaterials />}
     </Row>

@@ -61,6 +61,7 @@ const CurrencyQuestionLayout = ({ onChange, answerBody, disabled }) => {
 
           <StyledInput
             id="currencyAmountLabel"
+            paddingInline={8}
             disabled={disabled}
             width={200}
             placeholder={formatMessage(messages.amountPlaceholder)}

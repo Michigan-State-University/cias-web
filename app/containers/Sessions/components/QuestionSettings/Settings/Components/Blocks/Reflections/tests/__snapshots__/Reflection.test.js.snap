@@ -28,6 +28,9 @@ exports[`<Reflection /> Should render and match the snapshot 1`] = `
   -webkit-box-align: flex-end;
   -ms-flex-align: flex-end;
   align-items: flex-end;
+  -webkit-flex-direction: row;
+  -ms-flex-direction: row;
+  flex-direction: row;
   gap: 15px;
   color: unset;
 }
@@ -154,6 +157,7 @@ exports[`<Reflection /> Should render and match the snapshot 1`] = `
     </div>
     <div
       class="c2"
+      direction="row"
       display="flex"
       width="100%"
     >
@@ -177,6 +181,7 @@ exports[`<Reflection /> Should render and match the snapshot 1`] = `
                 aria-label="Enter speech here..."
                 class="c6"
                 data-cy="text-area"
+                dir="auto"
                 height="auto"
                 placeholder="Enter speech here..."
                 rows="10"

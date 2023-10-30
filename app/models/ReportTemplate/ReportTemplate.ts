@@ -32,6 +32,8 @@ export interface ReportTemplateVariant {
 export interface ReportTemplateOriginalText {
   name: string;
   summary: string;
+  coverLetterSender: string;
+  coverLetterDescription: string;
 }
 
 export enum CoverLetterLogoType {

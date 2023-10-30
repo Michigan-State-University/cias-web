@@ -6,7 +6,7 @@ import { Session } from 'models/Session';
 
 import Modal, { Props as ModalComponentProps } from 'components/Modal/Modal';
 
-import messages from './messages';
+import viewTitlesMessages from './viewTitlesMessages';
 import {
   INVITE_PARTICIPANTS_MODAL_HEIGHT,
   INVITE_PARTICIPANTS_MODAL_WIDTH,
@@ -55,7 +55,7 @@ export const InviteParticipantsModal: FC<Props> = ({
     <Modal
       visible={visible}
       onClose={onClose}
-      title={formatMessage(messages[`viewTitle${currentView.view}`])}
+      title={formatMessage(viewTitlesMessages[currentView.view])}
       width={INVITE_PARTICIPANTS_MODAL_WIDTH}
       height={INVITE_PARTICIPANTS_MODAL_HEIGHT}
       pt={24}

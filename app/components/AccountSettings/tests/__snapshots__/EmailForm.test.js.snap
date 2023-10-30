@@ -118,6 +118,7 @@ exports[`<EmailForm /> Should render and match the snapshot 1`] = `
       >
         <input
           class="c4"
+          dir="auto"
           height="46"
           id="email"
           name="email"
@@ -250,6 +251,7 @@ exports[`<EmailForm /> Should render error and match the snapshot 1`] = `
       >
         <input
           class="c4"
+          dir="auto"
           height="46"
           id="email"
           name="email"

@@ -22,11 +22,7 @@ export default defineMessages({
   },
   copySuccess: {
     id: `${scope}.copySuccess`,
-    defaultMessage: `CIAS is copying your intervention. We will send an e-mail to {
-      userCount, plural,
-      one {researcher}
-      other {researchers}
-    } when this process has been finished.`,
+    defaultMessage: `CIAS is copying your intervention. We will send an e-mail to {userCount, plural, one {researcher} other {researchers}} when this process has been finished.`,
   },
   importSuccess: {
     id: `${scope}.importSuccess`,

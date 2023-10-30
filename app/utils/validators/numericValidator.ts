@@ -9,15 +9,14 @@ import {
   floatCharRegex,
   nonNegativeIntegerRegex,
 } from 'global/constants/regex';
-import globalMessages from 'global/i18n/globalMessages';
+import validatorsMessages from 'global/i18n/validatorsMessages';
 
 export const numericValidator = (target: string) =>
   numericRegex.test(target) || target === '';
 
 export const numericValidationSchema = Yup.string().matches(
   numericRegex,
-  /* @ts-ignore */
-  formatMessage(globalMessages.validators.numeric),
+  formatMessage(validatorsMessages.numeric),
 );
 
 export const floatValidator = (target: string) =>
@@ -25,8 +24,7 @@ export const floatValidator = (target: string) =>
 
 export const floatValidationSchema = Yup.string().matches(
   floatRegex,
-  /* @ts-ignore */
-  formatMessage(globalMessages.validators.numeric),
+  formatMessage(validatorsMessages.numeric),
 );
 
 export const floatCharValidator = (target: string) =>
@@ -37,16 +35,13 @@ export const naturalNumberValidator = (target: string) =>
 
 export const naturalNumberValidationSchema = Yup.string().matches(
   naturalNumberRegex,
-  /* @ts-ignore */
-  formatMessage(globalMessages.validators.naturalNumber),
+  formatMessage(validatorsMessages.naturalNumber),
 );
 
 export const nonNegativeIntegerValidationSchema = Yup.string()
   .matches(
     nonNegativeIntegerRegex,
-    // @ts-ignore
-    formatMessage(globalMessages.validators.nonNegativeInteger),
+    formatMessage(validatorsMessages.nonNegativeInteger),
   )
-  // @ts-ignore
-  .required(formatMessage(globalMessages.validators.nonNegativeInteger))
+  .required(formatMessage(validatorsMessages.nonNegativeInteger))
   .trim();

@@ -10,8 +10,9 @@ exports[`<FeedbackQuestion /> Should render and match the snapshot 1`] = `
   -ms-flex-direction: column;
   flex-direction: column;
   width: 100%;
-  margin-top: 10px;
-  margin-bottom: 10px;
+  margin-block: 10px;
+  margin-block-start: 10px;
+  margin-block-end: 10px;
 }
 
 .c2 {
@@ -40,10 +41,12 @@ exports[`<FeedbackQuestion /> Should render and match the snapshot 1`] = `
   display: block;
   border-radius: 5px;
   width: 100%;
-  padding-top: 14px;
-  padding-bottom: 14px;
-  padding-right: 21px;
-  padding-left: 21px;
+  padding-block: 14px;
+  padding-block-start: 14px;
+  padding-block-end: 14px;
+  padding-inline: 21px;
+  padding-inline-start: 21px;
+  padding-inline-end: 21px;
   color: unset;
 }
 
