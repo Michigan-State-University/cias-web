@@ -50,4 +50,13 @@ export default defineMessages({
     id: `${scope}.days`,
     defaultMessage: 'days',
   },
+  clearDataConfirmationTitle: {
+    id: `${scope}.clearDataConfirmationTitle`,
+    defaultMessage: 'Are you sure?',
+  },
+  clearDataConfirmationDescription: {
+    id: `${scope}.clearDataConfirmationDescription`,
+    defaultMessage:
+      'All collected data in this intervention will be cleared. This action is irreversible.',
+  },
 });
