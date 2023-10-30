@@ -5,7 +5,6 @@ import { sizes, DESKTOP_MODE } from 'utils/previewMode';
 
 import { Button } from 'components/Button';
 import GhostLink from 'components/GhostLink';
-import { additionalBreakpoints } from 'components/Container/containerBreakpoints';
 
 export const StyledButton = styled(Button)`
   width: ${({ isDesktop }) => (isDesktop ? '40%' : '80%')};
@@ -68,19 +67,15 @@ export const FooterContainer = styled.div`
   width: 100%;
   height: ${elements.answerSessionPageFooterHeight}px;
   padding-top: 16px;
-  padding-right: 24px;
+  padding-right: 8px;
+  padding-bottom: 8px;
   ${({ isMobilePreview }) =>
     isMobilePreview
       ? css`
-          padding-bottom: 38px;
-          padding-left: 24px;
+          padding-left: 14px;
         `
       : css`
-          padding-bottom: 38px;
-          padding-left: 85px;
-          @media (min-width: ${additionalBreakpoints.desktopSm}px) {
-            padding-bottom: 24px;
-          }
+          padding-left: 90px;
         `};
 }
 `;
