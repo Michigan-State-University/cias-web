@@ -32,4 +32,8 @@ export default defineMessages({
     id: `${scope}.provideDate`,
     defaultMessage: 'Provide completion date',
   },
+  stopFeatureInfo: {
+    id: `${scope}.stopFeatureInfo`,
+    defaultMessage: `Participants can stop all scheduled messages by responding "STOP" or resume with "START". Click <a href='https://support.twilio.com/hc/en-us/articles/223183068-Twilio-international-phone-number-availability-and-their-capabilities#sms_enabled' target='_blank'>here</a> to see supported countries.`,
+  },
 });
