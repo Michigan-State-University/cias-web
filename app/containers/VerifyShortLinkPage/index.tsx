@@ -1,88 +1,64 @@
 import React, { useEffect } from 'react';
 import { useHistory, useParams } from 'react-router';
-
-import {
-  ShortLinkType,
-  VerifyShortLinkData,
-  VerifyShortLinkDataDTO,
-} from 'models/ShortLink';
+import { useDispatch, useSelector } from 'react-redux';
+import { useInjectSaga } from 'redux-injectors';
 
 import { RoutePath } from 'global/constants';
+import { withVerifyShortLinkSaga } from 'global/reducers/auth/sagas';
+import { makeSelectErrors, verifyShortLinkRequest } from 'global/reducers/auth';
 
-import useGet from 'utils/useGet';
-import objectToCamelCase from 'utils/objectToCamelCase';
-import { parametrizeRoutePath } from 'utils/router';
+import { HttpStatusCodes } from 'utils/constants';
 
 import Loader from 'components/Loader';
+import { InterventionNotAvailableInfo } from 'components/InterventionNotAvailableInfo';
 
 import NotFoundPage from 'containers/NotFoundPage';
 
+import ForbiddenPage from '../ForbiddenPage';
+import { VerifyShortLinkError } from './types';
+
 const VerifyShortLinkPage = () => {
+  const dispatch = useDispatch();
   const history = useHistory();
-  const { name } = useParams<{ name: string }>();
+  useInjectSaga(withVerifyShortLinkSaga);
 
-  const redirectToNotFoundPage = () => {
-    history.replace(RoutePath.NOT_FOUND);
-  };
+  const { slug } = useParams<{ slug: string }>();
 
-  if (!name) {
-    redirectToNotFoundPage();
-  }
-
-  const url = `/v1/verify_short_link?name=${name}`;
-  const {
-    error,
-    data: verifyShortLinkData,
-    isFetching,
-  } = useGet<{ data: VerifyShortLinkDataDTO }, VerifyShortLinkData>(
-    url,
-    ({ data }) => objectToCamelCase(data),
+  const verifyError: Nullable<VerifyShortLinkError> = useSelector(
+    makeSelectErrors('verifyShortLinkError'),
   );
 
   useEffect(() => {
-    if (!verifyShortLinkData) return;
-    const { type, interventionId, healthClinicId, firstSessionId } =
-      verifyShortLinkData;
+    if (slug) {
+      dispatch(verifyShortLinkRequest(slug));
+    } else {
+      history.replace(RoutePath.NOT_FOUND);
+    }
+  }, [slug]);
 
-    let link = '';
-
-    switch (type) {
-      case ShortLinkType.SEQUENTIAL: {
-        if (!firstSessionId) {
-          redirectToNotFoundPage();
-          return;
-        }
-        link = parametrizeRoutePath(RoutePath.ANSWER_SESSION, {
-          interventionId,
-          sessionId: firstSessionId,
-        });
+  if (verifyError) {
+    switch (verifyError?.response?.status) {
+      case HttpStatusCodes.FORBIDDEN: {
+        return <ForbiddenPage />;
+      }
+      case HttpStatusCodes.UNAUTHORIZED: {
         break;
       }
-      case ShortLinkType.FLEXIBLE_ORDER:
-      case ShortLinkType.FIXED_ORDER: {
-        link = parametrizeRoutePath(RoutePath.INTERVENTION_INVITE, {
-          interventionId,
-        });
-        break;
+      case HttpStatusCodes.BAD_REQUEST: {
+        return (
+          <InterventionNotAvailableInfo
+            reason={verifyError.response?.data?.details?.reason}
+          />
+        );
       }
+      case HttpStatusCodes.NOT_FOUND:
       default: {
-        redirectToNotFoundPage();
-        return;
+        return <NotFoundPage />;
       }
     }
-
-    if (healthClinicId) {
-      link += `?cid=${healthClinicId}`;
-    }
-
-    history.push(link);
-  }, [verifyShortLinkData]);
-
-  if (error) {
-    return <NotFoundPage />;
   }
 
-  return <>{isFetching && <Loader />}</>;
+  return <Loader />;
 };
 
 export default VerifyShortLinkPage;

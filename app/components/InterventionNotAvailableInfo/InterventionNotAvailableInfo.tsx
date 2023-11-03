@@ -9,8 +9,16 @@ import GhostLink from 'components/GhostLink';
 import Column from 'components/Column';
 
 import messages from './messages';
+import { InterventionNotAvailableReason } from './types';
+import interventionNotAvailableReasonsMessages from './interventionNotAvailableReasonsMessages';
 
-export const InterventionNotAvailableInfo = () => {
+export type Props = {
+  reason?: InterventionNotAvailableReason;
+};
+
+export const InterventionNotAvailableInfo = ({
+  reason = InterventionNotAvailableReason.INTERVENTION_DRAFT,
+}: Props) => {
   const { formatMessage } = useIntl();
 
   return (
@@ -20,7 +28,7 @@ export const InterventionNotAvailableInfo = () => {
       </Text>
 
       <Text mt={10} fontSize={18} textAlign="center">
-        {formatMessage(messages.studyNotAvailableDescription)}
+        {formatMessage(interventionNotAvailableReasonsMessages[reason])}
       </Text>
 
       <GhostLink to={RoutePath.DASHBOARD}>
