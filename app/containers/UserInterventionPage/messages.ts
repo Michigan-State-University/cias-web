@@ -3,10 +3,6 @@ import { defineMessages } from 'react-intl';
 export const scope = 'app.containers.UserInterventionPage';
 
 export default defineMessages({
-  chooseIntervention: {
-    id: `${scope}.chooseIntervention`,
-    defaultMessage: 'Choose the session that you would like to fill in',
-  },
   backToInterventions: {
     id: `${scope}.backToInterventions`,
     defaultMessage: 'Back to my interventions',

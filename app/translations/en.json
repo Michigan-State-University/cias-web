@@ -1641,7 +1641,6 @@
   "app.containers.UserDetails.canCreateCatMhSession": "Can create CAT-MH™ sessions",
   "app.containers.UserDetails.pageTitle": "User Details",
   "app.containers.UserInterventionPage.backToInterventions": "Back to my interventions",
-  "app.containers.UserInterventionPage.chooseIntervention": "Choose the session that you would like to fill in",
   "app.containers.UserInterventionPage.estimatedTime": "Estimated time to complete <secondaryColorBold>{time} min</secondaryColorBold>",
   "app.containers.UserInterventionPage.fillAgain": "Fill again",
   "app.containers.UserInterventionPage.helpingMaterials": "Additional resources for you:",

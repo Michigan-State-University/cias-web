@@ -34,7 +34,6 @@ import ErrorAlert from 'components/ErrorAlert';
 import AppContainer from 'components/Container';
 import H2 from 'components/H2';
 import H3 from 'components/H3';
-import Text from 'components/Text';
 import Divider from 'components/Divider';
 import BackButton from 'components/BackButton';
 import Img from 'components/Img';
@@ -142,7 +141,6 @@ const UserInterventionPage = () => {
             <Img maxHeight={100} maxWidth={200} src={logoUrl} alt={imageAlt} />
           )}
         </FlexRow>
-        <Text> {formatMessage(messages.chooseIntervention)} </Text>
       </Column>
       {additionalText && (
         <>
