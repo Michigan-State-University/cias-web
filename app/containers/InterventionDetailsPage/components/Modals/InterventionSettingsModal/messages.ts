@@ -32,10 +32,6 @@ export default defineMessages({
     id: `${scope}.interventionLinkHeader`,
     defaultMessage: 'Custom Intervention Link',
   },
-  interventionLinkDescription: {
-    id: `${scope}.interventionLinkDescription`,
-    defaultMessage: `This link directs user to the {interventionType, select, Intervention {first session in this intervention} other {module home screen}}`,
-  },
   defaultNarrator: {
     id: `${scope}.defaultNarrator`,
     defaultMessage: 'Default narrator',
