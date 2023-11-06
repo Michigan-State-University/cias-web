@@ -52,6 +52,9 @@ import {
   VERIFY_USER_KEY_SUCCESS,
   VERIFY_USER_KEY_REQUEST,
   VERIFY_USER_KEY_ERROR,
+  VERIFY_SHORT_LINK_REQUEST,
+  VERIFY_SHORT_LINK_SUCCESS,
+  VERIFY_SHORT_LINK_ERROR,
 } from './constants';
 
 export const initialState = {
@@ -73,6 +76,7 @@ export const initialState = {
     changePhoneNumberError: null,
     termsAcceptError: null,
     verifyUserKeyError: null,
+    verifyShortLinkError: null,
   },
   loaders: {
     loginLoading: false,
@@ -330,6 +334,19 @@ export const authReducer = (state = initialState, { type, payload }) =>
         draft.termsNotAccepted = false;
         draft.termsNotAcceptedExtraFields = null;
         break;
+
+      case VERIFY_SHORT_LINK_REQUEST: {
+        draft.errors.verifyShortLinkError = null;
+        break;
+      }
+      case VERIFY_SHORT_LINK_SUCCESS: {
+        break;
+      }
+      case VERIFY_SHORT_LINK_ERROR: {
+        const { error } = payload;
+        draft.errors.verifyShortLinkError = error;
+        break;
+      }
 
       case VERIFY_USER_KEY_REQUEST: {
         draft.errors.verifyUserKeyError = null;

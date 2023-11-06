@@ -17,6 +17,7 @@ import updateUsersTimezoneSaga from './updateUsersTimezone';
 import termsAcceptSaga from './acceptTerms';
 
 export * from './verifyUserKey';
+export * from './verifyShortLink';
 
 export {
   logOutSaga,
