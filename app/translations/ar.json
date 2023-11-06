@@ -1635,7 +1635,6 @@
   "app.containers.UserDetails.canCreateCatMhSession": "",
   "app.containers.UserDetails.pageTitle": "",
   "app.containers.UserInterventionPage.backToInterventions": "",
-  "app.containers.UserInterventionPage.chooseIntervention": "",
   "app.containers.UserInterventionPage.estimatedTime": "",
   "app.containers.UserInterventionPage.fillAgain": "",
   "app.containers.UserInterventionPage.helpingMaterials": "",
