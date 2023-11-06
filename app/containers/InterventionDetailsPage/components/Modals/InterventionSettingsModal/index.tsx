@@ -78,6 +78,7 @@ import {
   mapShortLinksToFormValues,
 } from './utils';
 import ShortLinkItem from './ShortLinkItem';
+import shortLinkmessages from './shortLinkDescriptionMessages';
 
 export type Props = {
   editingPossible: boolean;
@@ -422,9 +423,7 @@ const InterventionSettingsModal = ({
             </GRow>
             <H3 mt={40}>{formatMessage(messages.interventionLinkHeader)}</H3>
             <Text mt={8} textOpacity={0.7} color={themeColors.text} mb={24}>
-              {formatMessage(messages.interventionLinkDescription, {
-                interventionType: type,
-              })}
+              {formatMessage(shortLinkmessages[type])}
             </Text>
             <Column gap={24} maxHeight={224} overflow="auto">
               {!inOrganization && (
