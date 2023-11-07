@@ -821,7 +821,7 @@ exports[`<SettingsSessionPage /> Should render and match the snapshot 1`] = `
                 <div
                   class="c19"
                 >
-                  Finish session automatically
+                  Set Autofinish timer
                   <div
                     class="c21"
                     display="flex"
