@@ -19,14 +19,17 @@ export default defineMessages({
     id: `${scope}.autofinishSettings`,
     defaultMessage: 'Autofinish settings',
   },
-  autofinishTooltip: {
-    id: `${scope}.autofinishTooltip`,
-    defaultMessage:
-      'If you don’t mark any screen as "Fire report if get this far.", the autofinish timer will start at the begging of the session. The autofinish timer will be reset every time participant answers a question.',
+  autofinishTooltipOne: {
+    id: `${scope}.autofinishTooltipOne`,
+    defaultMessage: `Autofinish lets researchers determine when a session will be marked as complete for participants after a period of inactivity. If a participant becomes inactive past the autofinish time determined by the researcher, the intervention will be marked as complete, whether or not the participant reaches the end of the session. The autofinish timer will reset every time the participant answers a question. By default, autofinish is turned off, meaning the session will only be marked as complete when the participant reaches the end of the session. Using the autofinish feature is beneficial if you want to ensure participants receive any reports or text messages associated with completion of the session, and if you want to ensure the next session of the intervention becomes available within the pre-determined about of time.`,
+  },
+  autofinishTooltipTwo: {
+    id: `${scope}.autofinishTooltipTwo`,
+    defaultMessage: `<bold>Note: Autofinish needs to be turned on for the “Send reports/SMS after this screen” toggle to become available on a screen level. That toggle allows you to tell CIAS to begin the autofinish countdown only after a certain screen is reached.</bold>`,
   },
   autofinishEnabledLabel: {
     id: `${scope}.autofinishEnabledLabel`,
-    defaultMessage: 'Finish session automatically',
+    defaultMessage: 'Set Autofinish timer',
   },
   autofinishDelayLabel: {
     id: `${scope}.autofinishDelayLabel`,
