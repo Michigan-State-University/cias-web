@@ -17,22 +17,24 @@ import { ShareButton } from './styled';
 
 const CsvButtons = ({
   intl: { formatMessage },
-  csvGeneratedAt,
-  csvFilename,
+  csv,
   interventionId,
   handleSendCsv,
 }) => {
   const { canDownloadInterventionCsv } = useRoleManager();
+
+  const { filename, generatedAt } = csv ?? {};
+
   const CsvDownload = () => (
     <FileDownload
       url={`/v1/interventions/${interventionId}/csv_attachment`}
-      fileName={csvFilename}
+      fileName={filename}
     >
       {({ isDownloading }) => (
         <Tooltip
-          id={`intervention-csv-generated-at-${csvGeneratedAt}`}
+          id={`intervention-csv-generated-at-${generatedAt}`}
           text={`${formatMessage(globalMessages.lastCsvDate)}${dayjs(
-            csvGeneratedAt,
+            generatedAt,
           ).format(FILE_GENERATION_TIME_FORMAT)}`}
         >
           <ShareButton outlined loading={isDownloading}>
@@ -45,16 +47,14 @@ const CsvButtons = ({
 
   const CsvButton = () => (
     <ShareButton outlined onClick={handleSendCsv}>
-      <FormattedMessage
-        {...(csvGeneratedAt ? messages.csvNew : messages.csv)}
-      />
+      <FormattedMessage {...(generatedAt ? messages.csvNew : messages.csv)} />
     </ShareButton>
   );
 
   if (!canDownloadInterventionCsv) return <></>;
   return (
     <>
-      {csvGeneratedAt && <CsvDownload />}
+      {generatedAt && <CsvDownload />}
       <CsvButton />
     </>
   );
@@ -62,8 +62,7 @@ const CsvButtons = ({
 
 CsvButtons.propTypes = {
   intl: PropTypes.shape(IntlShape),
-  csvGeneratedAt: PropTypes.string,
-  csvFilename: PropTypes.string,
+  csv: PropTypes.object,
   interventionId: PropTypes.string,
   handleSendCsv: PropTypes.func,
 };

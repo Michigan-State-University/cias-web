@@ -64,9 +64,13 @@ export type InterventionLogo = {
   alt: Nullable<string>;
 };
 
+export type InterventionCsvReport = {
+  filename: string;
+  generatedAt: string;
+};
+
 export interface Intervention extends SimpleIntervention {
-  csvGeneratedAt: Nullable<string>;
-  csvFilename: Nullable<string>;
+  csv: Nullable<InterventionCsvReport>;
   hasCatSessions: boolean;
   languageCode: string;
   languageName: string;
