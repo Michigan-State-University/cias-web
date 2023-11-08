@@ -18,7 +18,6 @@ import AddAppIcon from 'assets/svg/app-add.svg';
 import TranslateIcon from 'assets/svg/translate.svg';
 import DownloadIcon from 'assets/svg/download-line.svg';
 import CollaborateIcon from 'assets/svg/collaborate-icon.svg';
-import ArchiveIcon from 'assets/svg/archive.svg';
 
 import { colors } from 'theme';
 
@@ -36,14 +35,13 @@ import {
 } from 'global/reducers/intervention';
 import {
   copyInterventionRequest,
-  archiveInterventionRequest,
   withStarInterventionSaga,
   withUnstarInterventionSaga,
   starInterventionRequest,
   unstarInterventionRequest,
 } from 'global/reducers/interventions';
 
-import { canArchive, canEdit } from 'models/Status/statusPermissions';
+import { canEdit } from 'models/Status/statusPermissions';
 import { useRoleManager } from 'models/User/RolesManager';
 import { SensitiveDataState } from 'models/Intervention';
 
@@ -60,7 +58,7 @@ import EllipsisText from 'components/Text/EllipsisText';
 import Text from 'components/Text';
 import Tooltip from 'components/Tooltip';
 import Dropdown from 'components/Dropdown';
-import Modal, { ModalType, useModal } from 'components/Modal';
+import Modal from 'components/Modal';
 import Row from 'components/Row';
 import Badge from 'components/Badge';
 import Loader from 'components/Loader';
@@ -93,7 +91,6 @@ const InterventionTile = ({
   participantView,
   link,
   copyIntervention,
-  archiveIntervention,
   intl: { formatMessage },
   userId,
   isLoading,
@@ -138,17 +135,6 @@ const InterventionTile = ({
   const closeTranslateModal = () => setTranslateModalVisible(false);
   const openTranslateModal = () => setTranslateModalVisible(true);
 
-  const handleArchiveIntervention = () => archiveIntervention(id);
-
-  const { openModal: openArchiveModal, Modal: ArchiveModal } = useModal({
-    type: ModalType.ConfirmationModal,
-    props: {
-      description: formatMessage(messages.interventionArchiveHeader),
-      content: formatMessage(messages.interventionArchiveMessage),
-      confirmAction: handleArchiveIntervention,
-    },
-  });
-
   const shareExternally = (emails, ids) =>
     copyIntervention({ interventionId: id, emails, ids });
   const { Modal: ShareExternallyModal, openModal: openShareExternallyModal } =
@@ -174,8 +160,6 @@ const InterventionTile = ({
   // turning on edit mode first but that's impossible from the intervention list view
   const canCurrentUserMakeChanges =
     !hasCollaborators && (isAdmin || isCurrentUserInterventionOwner);
-
-  const archivingPossible = canCurrentUserMakeChanges && canArchive(status);
 
   const assigningOrganizationPossible =
     canCurrentUserMakeChanges && canEdit(status);
@@ -264,14 +248,6 @@ const InterventionTile = ({
       icon: CopyIcon,
       action: onDuplicateHere,
     },
-    {
-      id: 'archive',
-      label: formatMessage(messages.archive),
-      icon: ArchiveIcon,
-      action: openArchiveModal,
-      color: colors.bluewood,
-      disabled: !archivingPossible,
-    },
     ...(showAssignOrganizationOption
       ? [
           {
@@ -323,7 +299,6 @@ const InterventionTile = ({
 
   return (
     <>
-      <ArchiveModal />
       <HenryFordBranchingInfoModal />
       <ShareExternallyModal />
       <Modal onClose={closeTranslateModal} visible={translateModalVisible}>
@@ -444,7 +419,6 @@ InterventionTile.propTypes = {
   participantView: PropTypes.bool,
   link: PropTypes.string,
   copyIntervention: PropTypes.func,
-  archiveIntervention: PropTypes.func,
   userId: PropTypes.string,
   isLoading: PropTypes.bool,
   exportIntervention: PropTypes.func,
@@ -461,7 +435,6 @@ const mapStateToProps = createStructuredSelector({
 
 const mapDispatchToProps = {
   copyIntervention: copyInterventionRequest,
-  archiveIntervention: archiveInterventionRequest,
   exportIntervention: exportInterventionRequest,
   starIntervention: starInterventionRequest,
   unstarIntervention: unstarInterventionRequest,

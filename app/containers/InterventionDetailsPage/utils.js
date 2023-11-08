@@ -10,5 +10,4 @@ export const nextStatus = {
 
 export const InterventionDetailsPageContext = createContext({
   canEdit: false,
-  canArchive: false,
 });

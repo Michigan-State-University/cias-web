@@ -108,7 +108,7 @@ export const ExportEmailsButton: FC<Props> = ({
         <Dropdown
           id="export-invitations-emails-options"
           options={exportDropdownOptions}
-          trigger="button"
+          trigger="text-button"
           buttonTriggerTitle={
             <>
               <Icon src={CsvIcon} />

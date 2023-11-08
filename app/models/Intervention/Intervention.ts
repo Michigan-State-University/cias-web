@@ -8,6 +8,7 @@ import { InterventionClinicLocation } from './ClinicLocation';
 export enum InterventionStatus {
   DRAFT = 'draft',
   PUBLISHED = 'published',
+  PAUSED = 'paused',
   CLOSED = 'closed',
   ARCHIVED = 'archived',
 }

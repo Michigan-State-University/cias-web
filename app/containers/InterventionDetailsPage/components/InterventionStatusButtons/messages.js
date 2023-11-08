@@ -11,11 +11,23 @@ export const scope = 'app.components.InterventionStatusButtons';
 export default defineMessages({
   publish: {
     id: `${scope}.publish`,
-    defaultMessage: 'Publish Intervention',
+    defaultMessage: 'Publish',
+  },
+  pause: {
+    id: `${scope}.pause`,
+    defaultMessage: 'Temporarily pause',
+  },
+  reactivate: {
+    id: `${scope}.reactivate`,
+    defaultMessage: 'Reactivate',
   },
   close: {
     id: `${scope}.close`,
-    defaultMessage: 'Close Intervention',
+    defaultMessage: 'Close',
+  },
+  archive: {
+    id: `${scope}.archive`,
+    defaultMessage: 'Archive',
   },
   csv: {
     id: `${scope}.csv`,
@@ -67,5 +79,17 @@ export default defineMessages({
     id: `${scope}.closeConfirmationMessage`,
     defaultMessage:
       "Are you sure you want to close the intervention? It will no longer be possible to gather Participant's data.",
+  },
+  interventionStatusButtonTitle: {
+    id: `${scope}.interventionStatusButtonTitle`,
+    defaultMessage: 'Intervention status',
+  },
+  interventionArchiveHeader: {
+    id: `${scope}.interventionArchiveHeader`,
+    defaultMessage: 'Archive Intervention',
+  },
+  interventionArchiveMessage: {
+    id: `${scope}.interventionArchiveMessage`,
+    defaultMessage: 'Are you sure you want to archive this Intervention?',
   },
 });

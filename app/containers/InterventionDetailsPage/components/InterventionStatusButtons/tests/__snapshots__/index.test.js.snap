@@ -2,6 +2,32 @@
 
 exports[`<InterventionStatusButtons /> Should render and match the snapshot 1`] = `
 .c0 {
+  width: auto;
+  height: auto;
+  display: block;
+  border-radius: 5px;
+  position: relative;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  opacity: 0.5;
+  -webkit-box-pack: end;
+  -webkit-justify-content: flex-end;
+  -ms-flex-pack: end;
+  justify-content: flex-end;
+  justify-items: flex-end;
+  -webkit-align-content: flex-start;
+  -ms-flex-line-pack: start;
+  align-content: flex-start;
+  -webkit-align-items: flex-start;
+  -webkit-box-align: flex-start;
+  -ms-flex-align: flex-start;
+  align-items: flex-start;
+  color: unset;
+}
+
+.c1 {
   width: 100%;
   height: 40px;
   border-radius: 100px;
@@ -15,35 +41,73 @@ exports[`<InterventionStatusButtons /> Should render and match the snapshot 1`] 
   background-color: #9AA1B6;
   -webkit-transition: background-color 300ms ease,color 300ms ease,border 300ms ease;
   transition: background-color 300ms ease,color 300ms ease,border 300ms ease;
-}
-
-.c1 {
-  font-weight: bold;
-  width: 180px;
-  margin: 5px;
-}
-
-.c1 a {
-  color: inherit;
-  -webkit-text-decoration: none;
-  text-decoration: none;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  padding-right: 24px;
+  padding-left: 24px;
+  -webkit-align-content: center;
+  -ms-flex-line-pack: center;
+  align-content: center;
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  gap: 8px;
 }
 
 <div>
-  <button
-    class="c0 c1"
-    color="primary"
-    data-cy="publish-session-button"
+  <div
+    class="c0"
     disabled=""
-    radius="100px"
+    display="flex"
   >
-    Publish Intervention
-  </button>
+    <button
+      class="c1"
+      color="primary"
+      disabled=""
+      display="flex"
+      id="intervention-status-dropdown"
+      radius="100px"
+    >
+      Intervention status
+      <img
+        src="IMAGE_MOCK"
+      />
+    </button>
+  </div>
 </div>
 `;
 
 exports[`<InterventionStatusButtons /> Should render and match the snapshot 2`] = `
 .c0 {
+  width: auto;
+  height: auto;
+  display: block;
+  border-radius: 5px;
+  position: relative;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  opacity: 0.5;
+  -webkit-box-pack: end;
+  -webkit-justify-content: flex-end;
+  -ms-flex-pack: end;
+  justify-content: flex-end;
+  justify-items: flex-end;
+  -webkit-align-content: flex-start;
+  -ms-flex-line-pack: start;
+  align-content: flex-start;
+  -webkit-align-items: flex-start;
+  -webkit-box-align: flex-start;
+  -ms-flex-align: flex-start;
+  align-items: flex-start;
+  color: unset;
+}
+
+.c1 {
   width: 100%;
   height: 40px;
   border-radius: 100px;
@@ -57,28 +121,41 @@ exports[`<InterventionStatusButtons /> Should render and match the snapshot 2`] 
   background-color: #9AA1B6;
   -webkit-transition: background-color 300ms ease,color 300ms ease,border 300ms ease;
   transition: background-color 300ms ease,color 300ms ease,border 300ms ease;
-}
-
-.c1 {
-  font-weight: bold;
-  width: 180px;
-  margin: 5px;
-}
-
-.c1 a {
-  color: inherit;
-  -webkit-text-decoration: none;
-  text-decoration: none;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  padding-right: 24px;
+  padding-left: 24px;
+  -webkit-align-content: center;
+  -ms-flex-line-pack: center;
+  align-content: center;
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  gap: 8px;
 }
 
 <div>
-  <button
-    class="c0 c1"
-    color="primary"
+  <div
+    class="c0"
     disabled=""
-    radius="100px"
+    display="flex"
   >
-    Close Intervention
-  </button>
+    <button
+      class="c1"
+      color="primary"
+      disabled=""
+      display="flex"
+      id="intervention-status-dropdown"
+      radius="100px"
+    >
+      Intervention status
+      <img
+        src="IMAGE_MOCK"
+      />
+    </button>
+  </div>
 </div>
 `;
