@@ -64,13 +64,13 @@ export type InterventionLogo = {
   alt: Nullable<string>;
 };
 
-export type InterventionCsvReport = {
+export type InterventionGeneratedFile = {
   filename: string;
   generatedAt: string;
 };
 
 export interface Intervention extends SimpleIntervention {
-  csv: Nullable<InterventionCsvReport>;
+  csv: Nullable<InterventionGeneratedFile>;
   hasCatSessions: boolean;
   languageCode: string;
   languageName: string;
@@ -93,8 +93,7 @@ export interface Intervention extends SimpleIntervention {
   quickExit: boolean;
   currentNarrator: CharacterType;
   conversationsPresent: boolean;
-  conversationsTranscriptGeneratedAt: Nullable<string>;
-  conversationsTranscriptFilename: Nullable<string>;
+  conversationsTranscript: Nullable<InterventionGeneratedFile>;
   sessions: Session[];
   hfhsAccess: boolean;
   clinicLocations: InterventionClinicLocation[];
