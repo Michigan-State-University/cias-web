@@ -132,6 +132,7 @@ const SettingsPanel = ({ intervention }: Props) => {
     conversationsPresent,
     conversationsTranscriptGeneratedAt,
     conversationsTranscriptFilename,
+    logo,
   } = intervention || {};
 
   const changingAccessSettingsPossible =
@@ -204,8 +205,8 @@ const SettingsPanel = ({ intervention }: Props) => {
   };
 
   const onAddLogo = useCallback(
-    (logo) => {
-      globalDispatch(addInterventionLogoRequest(interventionId, logo.image));
+    ({ image }) => {
+      globalDispatch(addInterventionLogoRequest(interventionId, image));
     },
     [interventionId],
   );
@@ -404,7 +405,7 @@ const SettingsPanel = ({ intervention }: Props) => {
       </StyledBox>
       <StyledBox my={30} padding={35}>
         <LogoUpload
-          intervention={intervention}
+          logo={logo}
           logoLoading={logoLoading}
           addImage={onAddLogo}
           deleteImage={onDeleteLogo}

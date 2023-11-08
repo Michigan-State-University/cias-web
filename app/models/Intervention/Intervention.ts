@@ -59,14 +59,18 @@ export interface SimpleIntervention {
   starred: boolean;
 }
 
+export type InterventionLogo = {
+  url: string;
+  alt: Nullable<string>;
+};
+
 export interface Intervention extends SimpleIntervention {
   csvGeneratedAt: Nullable<string>;
   csvFilename: Nullable<string>;
   hasCatSessions: boolean;
-  imageAlt: Nullable<string>;
   languageCode: string;
   languageName: string;
-  logoUrl: Nullable<string>;
+  logo: Nullable<InterventionLogo>;
   publishedAt: Nullable<string>;
   sharedTo: InterventionSharedTo;
   firstSessionLanguage?: string;
