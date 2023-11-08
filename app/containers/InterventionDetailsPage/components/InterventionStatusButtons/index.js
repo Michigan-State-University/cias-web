@@ -57,6 +57,11 @@ function InterventionStatusButtons({
 
   const handleArchiveIntervention = () =>
     handleChangeStatus(InterventionStatus.ARCHIVED);
+  const handlePauseIntervention = () =>
+    // TODO show confirmation modal
+    handleChangeStatus(InterventionStatus.PAUSED);
+  const handleReactivateIntervention = () =>
+    handleChangeStatus(InterventionStatus.PUBLISHED);
 
   const closeConfirmationDesc = () => (
     <>
@@ -136,16 +141,14 @@ function InterventionStatusButtons({
       status !== InterventionStatus.PAUSED && {
         id: 'pause',
         label: formatMessage(messages.pause),
-        // TODO implement pausing
-        action: () => {},
+        action: handlePauseIntervention,
         disabled: status !== InterventionStatus.PUBLISHED,
         icon: PauseIcon,
       },
       status === InterventionStatus.PAUSED && {
         id: 'reactivate',
         label: formatMessage(messages.reactivate),
-        // TODO implement reactivating
-        action: () => {},
+        action: handleReactivateIntervention,
         icon: ReactivateIcon,
       },
       {
@@ -202,6 +205,9 @@ function InterventionStatusButtons({
           buttonTriggerTitle={formatMessage(
             messages.interventionStatusButtonTitle,
           )}
+          buttonTriggerProps={{
+            margin: 5,
+          }}
           options={dropdownOptions}
           disabled={!canCurrentUserMakeChanges}
         />
