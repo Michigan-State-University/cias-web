@@ -69,6 +69,11 @@ export type InterventionGeneratedFile = {
   generatedAt: string;
 };
 
+export type InterventionExportFile = {
+  url: string;
+  generatedAt: string;
+};
+
 export interface Intervention extends SimpleIntervention {
   csv: Nullable<InterventionGeneratedFile>;
   hasCatSessions: boolean;
@@ -97,6 +102,7 @@ export interface Intervention extends SimpleIntervention {
   sessions: Session[];
   hfhsAccess: boolean;
   clinicLocations: InterventionClinicLocation[];
+  exportedData: Nullable<InterventionExportFile>;
 }
 
 export interface FileInfo {
