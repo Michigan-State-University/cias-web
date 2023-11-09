@@ -22,7 +22,7 @@ import Divider from 'components/Divider';
 import Row from 'components/Row';
 import Text from 'components/Text';
 import Dropdown from 'components/Dropdown';
-import { Alert } from 'components/Alert';
+import { Alert, AlertType } from 'components/Alert';
 
 import { InterventionStatus } from 'models/Intervention';
 
@@ -59,7 +59,6 @@ function InterventionStatusButtons({
   const handleArchiveIntervention = () =>
     handleChangeStatus(InterventionStatus.ARCHIVED);
   const handlePauseIntervention = () =>
-    // TODO show confirmation modal
     handleChangeStatus(InterventionStatus.PAUSED);
   const handleReactivateIntervention = () =>
     handleChangeStatus(InterventionStatus.PUBLISHED);
@@ -133,7 +132,7 @@ function InterventionStatusButtons({
           </Text>
           <Alert
             content={formatMessage(messages.pauseModalAlertContent)}
-            background={themeColors.highlight}
+            type={AlertType.INFO}
             wrap={false}
           />
         </Column>
