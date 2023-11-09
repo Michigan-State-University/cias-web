@@ -22,6 +22,7 @@ import Divider from 'components/Divider';
 import Row from 'components/Row';
 import Text from 'components/Text';
 import Dropdown from 'components/Dropdown';
+import { Alert } from 'components/Alert';
 
 import { InterventionStatus } from 'models/Intervention';
 
@@ -121,6 +122,53 @@ function InterventionStatusButtons({
     },
   });
 
+  const { openModal: openPauseModal, Modal: PauseModal } = useModal({
+    type: ModalType.ConfirmationModal,
+    props: {
+      description: formatMessage(messages.pauseModalTitle),
+      content: (
+        <Column gap={40} justify="evenly">
+          <Text fontSize={15} lineHeight={1.35}>
+            {formatMessage(messages.pauseModalContent)}
+          </Text>
+          <Alert
+            content={formatMessage(messages.pauseModalAlertContent)}
+            background={themeColors.highlight}
+            wrap={false}
+          />
+        </Column>
+      ),
+      confirmAction: handlePauseIntervention,
+      confirmationButtonText: formatMessage(messages.pauseModalTitle),
+      confirmationButtonColor: themeColors.primary,
+      confirmationButtonStyles: {
+        px: 24,
+      },
+      maxWidth: 422,
+    },
+  });
+
+  const { openModal: openReactivateModal, Modal: ReactivateModal } = useModal({
+    type: ModalType.ConfirmationModal,
+    props: {
+      description: formatMessage(messages.reactivateModalTitle),
+      content: (
+        <Column gap={40} justify="evenly">
+          <Text fontSize={15} lineHeight={1.35}>
+            {formatMessage(messages.reactivateModalContent)}
+          </Text>
+        </Column>
+      ),
+      confirmAction: handleReactivateIntervention,
+      confirmationButtonText: formatMessage(messages.reactivateModalTitle),
+      confirmationButtonColor: themeColors.primary,
+      confirmationButtonStyles: {
+        px: 24,
+      },
+      maxWidth: 478,
+    },
+  });
+
   const dropdownOptions = useMemo(() => {
     if (status === InterventionStatus.ARCHIVED) return [];
 
@@ -141,14 +189,14 @@ function InterventionStatusButtons({
       status !== InterventionStatus.PAUSED && {
         id: 'pause',
         label: formatMessage(messages.pause),
-        action: handlePauseIntervention,
+        action: openPauseModal,
         disabled: status !== InterventionStatus.PUBLISHED,
         icon: PauseIcon,
       },
       status === InterventionStatus.PAUSED && {
         id: 'reactivate',
         label: formatMessage(messages.reactivate),
-        action: handleReactivateIntervention,
+        action: openReactivateModal,
         icon: ReactivateIcon,
       },
       {
@@ -198,6 +246,8 @@ function InterventionStatusButtons({
         }}
       />
       <ArchiveModal />
+      <PauseModal />
+      <ReactivateModal />
       {showStatusDropdown && (
         <Dropdown
           id="intervention-status-dropdown"

@@ -24,6 +24,7 @@ export type Props = {
   >;
   onDismiss?: () => void;
   background: CSSProperties['background'];
+  wrap?: boolean;
 } & Partial<MarginProps & LayoutProps & PositioningProps>;
 
 export const Alert: FC<Props> = ({
@@ -31,6 +32,7 @@ export const Alert: FC<Props> = ({
   contentProps,
   onDismiss,
   background,
+  wrap = true,
   ...props
 }) => {
   const { formatMessage } = useIntl();
@@ -42,13 +44,13 @@ export const Alert: FC<Props> = ({
       px={16}
       gap={16}
       justify="between"
-      flexWrap="wrap"
+      flexWrap={wrap ? 'wrap' : 'nowrap'}
       background={background}
       {...props}
     >
-      <Row gap={12} align="center" flexWrap="wrap">
+      <Row gap={12} align="center" flexWrap={wrap ? 'wrap' : 'nowrap'}>
         <Icon src={WarningIcon} stroke={themeColors.text} />
-        <Text fontSize={15} lineHeight={1.3} {...contentProps}>
+        <Text fontSize={15} lineHeight={1.3} textAlign="left" {...contentProps}>
           {content}
         </Text>
       </Row>

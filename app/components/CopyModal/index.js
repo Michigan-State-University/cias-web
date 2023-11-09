@@ -10,9 +10,10 @@ import { injectIntl, IntlShape } from 'react-intl';
 import { compose } from 'redux';
 import { injectSaga, injectReducer } from 'redux-injectors';
 
+import { InterventionStatus } from 'models/Intervention';
+
 import CopyChooser, { VIEWS } from 'components/CopyModal/Components';
 
-import { draft } from 'models/Status/StatusTypes';
 import {
   copyModalReducer,
   allCopyModalSagas,
@@ -93,7 +94,7 @@ CopyModal.defaultProps = {
   disableCurrentSessionCopy: false,
   disableCurrentInterventionCopy: false,
   defaultView: VIEWS.QUESTION_GROUP,
-  interventionStatusFilter: [draft],
+  interventionStatusFilter: [InterventionStatus.DRAFT],
 };
 
 export default compose(

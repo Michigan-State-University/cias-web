@@ -5,6 +5,7 @@ import { InterventionStatus } from 'models/Intervention';
 export const INITIAL_STATUSES_FILTER_VALUE = [
   InterventionStatus.DRAFT,
   InterventionStatus.PUBLISHED,
+  InterventionStatus.PAUSED,
 ].sort();
 
 export const statusTypeToColorMap = {

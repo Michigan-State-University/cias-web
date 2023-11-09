@@ -92,4 +92,26 @@ export default defineMessages({
     id: `${scope}.interventionArchiveMessage`,
     defaultMessage: 'Are you sure you want to archive this Intervention?',
   },
+  pauseModalTitle: {
+    id: `${scope}.pauseModalTitle`,
+    defaultMessage: 'Pause intervention',
+  },
+  pauseModalContent: {
+    id: `${scope}.pauseModalContent`,
+    defaultMessage:
+      'Do you want to pause the intervention? This will temporarily block participant access until the intervention is reactivated.',
+  },
+  pauseModalAlertContent: {
+    id: `${scope}.pauseModalAlertContent`,
+    defaultMessage: 'Paused interventions can be reactivated anytime.',
+  },
+  reactivateModalTitle: {
+    id: `${scope}.reactivateModalTitle`,
+    defaultMessage: 'Reactivate intervention',
+  },
+  reactivateModalContent: {
+    id: `${scope}.reactivateModalContent`,
+    defaultMessage:
+      'Do you want to reactivate this intervention? This will allow participants to access the intervention.',
+  },
 });
