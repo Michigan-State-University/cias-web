@@ -35,12 +35,9 @@ const Header = ({
   name,
   editName,
   handleChangeStatus,
-  handleSendCsv,
-  csv,
   interventionId,
   options,
   organizationId,
-  canAccessCsv,
   interventionType,
   userOrganizableId,
   hasCollaborators,
@@ -147,10 +144,6 @@ const Header = ({
               <InterventionStatusButtons
                 status={status}
                 handleChangeStatus={handleChangeStatus}
-                handleSendCsv={handleSendCsv}
-                csv={csv}
-                interventionId={interventionId}
-                canAccessCsv={canAccessCsv}
                 canCurrentUserMakeChanges={canCurrentUserMakeChanges}
               />
             </Row>
@@ -202,12 +195,9 @@ Header.propTypes = {
   name: PropTypes.string,
   editName: PropTypes.func,
   handleChangeStatus: PropTypes.func,
-  handleSendCsv: PropTypes.func,
-  csv: PropTypes.object,
   interventionId: PropTypes.string,
   organizationId: PropTypes.string,
   options: PropTypes.array,
-  canAccessCsv: PropTypes.bool,
   interventionType: PropTypes.string,
   sharingPossible: PropTypes.bool,
   userOrganizableId: PropTypes.string,

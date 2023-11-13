@@ -132,6 +132,8 @@ const Modal = ({
         contentProps: {
           flex: '1',
           minHeight: '0px',
+          display: 'flex',
+          direction: 'column',
         },
       };
     }

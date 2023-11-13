@@ -129,8 +129,8 @@ export const fetchInterventionSuccess = (intervention) =>
 export const fetchInterventionError = (error) =>
   actionBuilder(FETCH_INTERVENTION_ERROR, { error });
 
-export const sendInterventionCsvRequest = (id) =>
-  actionBuilder(SEND_INTERVENTION_CSV_REQUEST, { id });
+export const sendInterventionCsvRequest = (id, onSuccess) =>
+  actionBuilder(SEND_INTERVENTION_CSV_REQUEST, { id, onSuccess });
 export const sendInterventionCsvSuccess = (message) =>
   actionBuilder(SEND_INTERVENTION_CSV_SUCCESS, { message });
 export const sendInterventionCsvError = (error) =>

@@ -12,7 +12,7 @@ import {
 } from '../actions';
 import messages from '../messages';
 
-export function* sendInterventionCsv({ payload: { id } }) {
+export function* sendInterventionCsv({ payload: { id, onSuccess } }) {
   const requestURL = `v1/interventions/${id}/answers.csv`;
   try {
     const {
@@ -20,6 +20,7 @@ export function* sendInterventionCsv({ payload: { id } }) {
     } = yield call(axios.get, requestURL);
     yield put(sendInterventionCsvSuccess(message));
     yield call(toast.info, message);
+    onSuccess();
   } catch (error) {
     yield put(sendInterventionCsvError(error));
     yield call(

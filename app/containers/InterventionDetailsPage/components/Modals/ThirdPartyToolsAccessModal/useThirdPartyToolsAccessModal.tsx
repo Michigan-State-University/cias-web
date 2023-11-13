@@ -13,12 +13,11 @@ export const useThirdPartyToolsAccessModal = () => {
   const {
     openModal: openThirdPartyToolsAccessModal,
     Modal: ThirdPartyToolsModal,
-  } = useModal({
+  } = useModal<Intervention>({
     type: ModalType.Modal,
     modalContentRenderer: (props: {
       closeModal: () => void;
-      modalState: Nullable<Intervention | boolean>;
-      // @ts-ignore
+      modalState: Intervention;
     }) => <ThirdPartyToolsAccessModal {...props} />,
     props: {
       title: formatMessage(messages.thirdPartyToolsAccessModalTitle),

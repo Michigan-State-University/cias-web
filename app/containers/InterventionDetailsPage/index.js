@@ -27,6 +27,7 @@ import TranslateIcon from 'assets/svg/translate.svg';
 import PadlockIcon from 'assets/svg/padlock.svg';
 import DownloadIcon from 'assets/svg/download-line.svg';
 import CollaborateIcon from 'assets/svg/collaborate-icon.svg';
+import CsvIcon from 'assets/svg/csv-icon.svg';
 
 import isNullOrUndefined from 'utils/isNullOrUndefined';
 import { reorder } from 'utils/reorder';
@@ -98,6 +99,7 @@ import {
   HenryFordBranchingInfoType,
   InterventionHenryFordBranchingInfoAction,
 } from 'components/HenryFordBrachingInfoModal';
+import { useExportModal } from 'components/ExportModal';
 
 import { useCollaboratorsModal } from 'containers/CollaboratorsModal';
 
@@ -251,6 +253,18 @@ export function InterventionDetailsPage({
     },
   );
 
+  const { Modal: ExportCsvModal, openModal: openExportCsvModal } =
+    useExportModal({
+      title: formatMessage(messages.exportCsvModalTitle),
+      description: formatMessage(messages.exportCsvModalDescription),
+      file: csv && {
+        ...csv,
+        url: `${process.env.API_URL}/v1/interventions/${interventionId}/csv_attachment`,
+      },
+      onExport: (onSuccess) => sendCsv(id, onSuccess),
+      exportLoaderSelector: makeSelectInterventionLoader('sendCsvLoading'),
+    });
+
   const onShareExternally = () => {
     if (hfhsAccess) {
       openHenryFordBranchingInfoModal(
@@ -298,6 +312,17 @@ export function InterventionDetailsPage({
       action: openInterventionSettingsModal,
       color: colors.bluewood,
     },
+    ...(canAccessParticipantsData
+      ? [
+          {
+            id: 'exportCsv',
+            label: formatMessage(messages.exportCsvModalTitle),
+            icon: CsvIcon,
+            action: openExportCsvModal,
+            color: colors.bluewood,
+          },
+        ]
+      : []),
     {
       id: 'translate',
       label: formatMessage(messages.translate),
@@ -405,8 +430,6 @@ export function InterventionDetailsPage({
       status: get(nextStatus, status, ''),
       id: interventionId,
     });
-
-  const handleSendCsv = () => sendCsv(id);
 
   const createSessionCall = (sessionType) =>
     createSession(interventionId, sessions.length, sessionType);
@@ -518,6 +541,7 @@ export function InterventionDetailsPage({
               }
             />
             <ShareExternallyModal />
+            <ExportCsvModal />
 
             <Modal
               onClose={closeTranslateModal}
@@ -561,17 +585,14 @@ export function InterventionDetailsPage({
 
             <Header
               name={name}
-              csv={csv}
               interventionId={interventionId}
               canCurrentUserMakeChanges={canCurrentUserMakeChanges}
               editingPossible={editingPossible}
               editName={editName}
               handleChangeStatus={handleChangeStatus}
-              handleSendCsv={handleSendCsv}
               options={options}
               status={status}
               organizationId={organizationId}
-              canAccessCsv={canAccessParticipantsData}
               interventionType={type}
               userOrganizableId={userOrganizableId}
               hasCollaborators={hasCollaborators}
@@ -628,6 +649,7 @@ InterventionDetailsPage.propTypes = {
   editIntervention: PropTypes.func,
   sessionIndex: PropTypes.number,
   sendCsv: PropTypes.func,
+  sendCsvLoading: PropTypes.bool,
   copySession: PropTypes.func,
   reorderSessions: PropTypes.func,
   copyIntervention: PropTypes.func,

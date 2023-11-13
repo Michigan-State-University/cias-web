@@ -151,4 +151,13 @@ export default defineMessages({
     id: `${scope}.collaborate`,
     defaultMessage: 'Collaborate',
   },
+  exportCsvModalTitle: {
+    id: `${scope}.exportCsvModalTitle`,
+    defaultMessage: 'Export answers CSV',
+  },
+  exportCsvModalDescription: {
+    id: `${scope}.exportCsvModalDescription`,
+    defaultMessage:
+      'Depending on intervention size, exporting answers to a CSV file might take some time. Once the file is ready, you will receive an e-mail notification. The generated file will be available for download below.',
+  },
 });
