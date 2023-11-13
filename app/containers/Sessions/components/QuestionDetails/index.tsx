@@ -108,7 +108,7 @@ const RenderQuestionDetails = ({
 
   if (!selectedQuestion || !intervention) return null;
 
-  const { logoUrl, imageAlt, status } = intervention;
+  const { logo, status } = intervention;
 
   const isNarratorTabOrEditNotPossible = isNarratorTab || !editingPossible;
 
@@ -180,12 +180,12 @@ const RenderQuestionDetails = ({
                 onBlur={(val) => changeGroupName(val)}
                 disabled={!editingPossible}
               />
-              {!isTlfbGroup && logoUrl && (
+              {!isTlfbGroup && logo?.url && (
                 <Img
                   maxHeight={elements.interventionLogoSize.height}
                   maxWidth={elements.interventionLogoSize.width}
-                  src={logoUrl}
-                  aria-label={imageAlt}
+                  src={logo.url}
+                  aria-label={logo.alt}
                 />
               )}
               {isTlfbGroup && (

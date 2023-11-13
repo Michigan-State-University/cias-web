@@ -59,14 +59,27 @@ export interface SimpleIntervention {
   starred: boolean;
 }
 
+export type InterventionLogo = {
+  url: string;
+  alt: Nullable<string>;
+};
+
+export type InterventionGeneratedFile = {
+  filename: string;
+  generatedAt: string;
+};
+
+export type InterventionExportFile = {
+  url: string;
+  generatedAt: string;
+};
+
 export interface Intervention extends SimpleIntervention {
-  csvGeneratedAt: Nullable<string>;
-  csvFilename: Nullable<string>;
+  csv: Nullable<InterventionGeneratedFile>;
   hasCatSessions: boolean;
-  imageAlt: Nullable<string>;
   languageCode: string;
   languageName: string;
-  logoUrl: Nullable<string>;
+  logo: Nullable<InterventionLogo>;
   publishedAt: Nullable<string>;
   sharedTo: InterventionSharedTo;
   firstSessionLanguage?: string;
@@ -85,11 +98,11 @@ export interface Intervention extends SimpleIntervention {
   quickExit: boolean;
   currentNarrator: CharacterType;
   conversationsPresent: boolean;
-  conversationsTranscriptGeneratedAt: Nullable<string>;
-  conversationsTranscriptFilename: Nullable<string>;
+  conversationsTranscript: Nullable<InterventionGeneratedFile>;
   sessions: Session[];
   hfhsAccess: boolean;
   clinicLocations: InterventionClinicLocation[];
+  exportedData: Nullable<InterventionExportFile>;
 }
 
 export interface FileInfo {

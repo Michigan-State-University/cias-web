@@ -34,8 +34,7 @@ function InterventionStatusButtons({
   status,
   handleChangeStatus,
   handleSendCsv,
-  csvGeneratedAt,
-  csvFilename,
+  csv,
   interventionId,
   canAccessCsv,
   canCurrentUserMakeChanges,
@@ -163,8 +162,7 @@ function InterventionStatusButtons({
   const csvButtons = !canAccessCsv ? null : (
     <CsvButtons
       handleSendCsv={handleSendCsv}
-      csvGeneratedAt={csvGeneratedAt}
-      csvFilename={csvFilename}
+      csv={csv}
       interventionId={interventionId}
     />
   );
@@ -196,7 +194,7 @@ InterventionStatusButtons.propTypes = {
   status: PropTypes.string,
   handleChangeStatus: PropTypes.func,
   handleSendCsv: PropTypes.func,
-  csvGeneratedAt: PropTypes.string,
+  csv: PropTypes.object,
   canAccessCsv: PropTypes.bool,
   canCurrentUserMakeChanges: PropTypes.bool,
 };

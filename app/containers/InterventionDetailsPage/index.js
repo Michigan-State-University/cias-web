@@ -155,8 +155,7 @@ export function InterventionDetailsPage({
     name,
     id,
     status,
-    csvGeneratedAt,
-    csvFilename,
+    csv,
     sharedTo,
     organizationId,
     googleLanguageId,
@@ -562,8 +561,7 @@ export function InterventionDetailsPage({
 
             <Header
               name={name}
-              csvGeneratedAt={csvGeneratedAt}
-              csvFilename={csvFilename}
+              csv={csv}
               interventionId={interventionId}
               canCurrentUserMakeChanges={canCurrentUserMakeChanges}
               editingPossible={editingPossible}

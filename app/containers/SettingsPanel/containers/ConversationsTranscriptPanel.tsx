@@ -8,6 +8,8 @@ import { colors, borders } from 'theme';
 
 import { FILE_GENERATION_TIME_FORMAT } from 'utils/dayjs';
 
+import { InterventionGeneratedFile } from 'models/Intervention';
+
 import i18nGlobalMessages from 'global/i18n/globalMessages';
 import {
   generateConversationsTranscriptRequest,
@@ -25,14 +27,12 @@ import { Tooltip } from 'components/Tooltip';
 import messages from '../messages';
 
 export type Props = {
-  generatedAt: Nullable<string>;
-  filename: Nullable<string>;
+  conversationsTranscript: Nullable<InterventionGeneratedFile>;
   interventionId: string;
 };
 
 export const ConversationsTranscriptPanel = ({
-  generatedAt,
-  filename,
+  conversationsTranscript,
   interventionId,
 }: Props) => {
   const { formatMessage } = useIntl();
@@ -48,6 +48,8 @@ export const ConversationsTranscriptPanel = ({
   const generateTranscript = () => {
     dispatch(generateConversationsTranscriptRequest());
   };
+
+  const { filename, generatedAt } = conversationsTranscript ?? {};
 
   return (
     <Column
@@ -72,12 +74,14 @@ export const ConversationsTranscriptPanel = ({
             hoverTextColor={colors.white}
             title={formatMessage(
               messages[
-                generatedAt ? 'generateNewTranscript' : 'generateTranscript'
+                conversationsTranscript
+                  ? 'generateNewTranscript'
+                  : 'generateTranscript'
               ],
             )}
           />
         </GridCol>
-        {generatedAt && (
+        {conversationsTranscript && (
           <GridCol xs={6}>
             <Tooltip
               id={`intervention-conversations-transcript-generated-at-${generatedAt}`}

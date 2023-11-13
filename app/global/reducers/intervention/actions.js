@@ -254,8 +254,8 @@ export const addInterventionLogoRequest = (interventionId, logoData, logoUrl) =>
     logoData,
     logoUrl,
   });
-export const addInterventionLogoSuccess = (logoUrl) =>
-  actionBuilder(ADD_INTERVENTION_LOGO_SUCCESS, { logoUrl });
+export const addInterventionLogoSuccess = (logo) =>
+  actionBuilder(ADD_INTERVENTION_LOGO_SUCCESS, { logo });
 export const addInterventionLogoError = (error) =>
   actionBuilder(ADD_INTERVENTION_LOGO_ERROR, { error });
 
