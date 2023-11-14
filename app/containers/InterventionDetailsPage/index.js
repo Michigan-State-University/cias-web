@@ -25,7 +25,6 @@ import GearIcon from 'assets/svg/gear-wo-background.svg';
 import AddAppIcon from 'assets/svg/app-add.svg';
 import TranslateIcon from 'assets/svg/translate.svg';
 import PadlockIcon from 'assets/svg/padlock.svg';
-import DownloadIcon from 'assets/svg/download-line.svg';
 import CollaborateIcon from 'assets/svg/collaborate-icon.svg';
 
 import isNullOrUndefined from 'utils/isNullOrUndefined';
@@ -53,8 +52,6 @@ import {
   externalCopySessionRequest,
   makeSelectInterventionError,
   makeSelectInterventionLoader,
-  exportInterventionRequest,
-  exportInterventionSaga,
   makeSelectEditingPossible,
   makeSelectIsCurrentUserInterventionOwner,
   makeSelectCanCurrentUserMakeChanges,
@@ -116,6 +113,7 @@ import {
 import messages from './messages';
 import { InterventionDetailsPageContext, nextStatus } from './utils';
 import { INTERVENTION_SETTINGS_MODAL_WIDTH } from './constants';
+import { useExportInterventionModal } from '../ExportInterventionModal';
 
 export function InterventionDetailsPage({
   createSession,
@@ -136,7 +134,6 @@ export function InterventionDetailsPage({
   externalCopySession,
   user: { organizableId: userOrganizableId },
   editSession,
-  exportIntervention,
   isCurrentUserEditor,
   canCurrentUserMakeChanges,
   editingPossible,
@@ -170,6 +167,7 @@ export function InterventionDetailsPage({
     hasCollaborators,
     sensitiveDataState,
     clearSensitiveDataScheduledAt,
+    exportedData,
   } = intervention || {};
 
   const showSessionCreateButton = canEdit(status);
@@ -297,7 +295,8 @@ export function InterventionDetailsPage({
 
   const canEditCollaborators = isAdmin || isCurrentUserInterventionOwner;
 
-  const handleExportIntervention = () => exportIntervention(id);
+  const { ExportInterventionModalOption, ExportInterventionModal } =
+    useExportInterventionModal(id, exportedData);
 
   const { ClearInterventionDataOption, ClearInterventionDataModal } =
     useClearInterventionData(
@@ -369,15 +368,7 @@ export function InterventionDetailsPage({
         ]
       : []),
     ...(isInterventionExportFeatureEnabled
-      ? [
-          {
-            id: 'export',
-            label: formatMessage(messages.exportIntervention),
-            icon: DownloadIcon,
-            action: handleExportIntervention,
-            color: colors.bluewood,
-          },
-        ]
+      ? [ExportInterventionModalOption]
       : []),
     ...(canEditCollaborators
       ? [
@@ -536,6 +527,7 @@ export function InterventionDetailsPage({
             />
             <ShareExternallyModal />
             <ExportCsvModal />
+            <ExportInterventionModal />
 
             <Modal
               onClose={closeTranslateModal}
@@ -654,7 +646,6 @@ InterventionDetailsPage.propTypes = {
   externalCopySession: PropTypes.func,
   editSession: PropTypes.func,
   user: PropTypes.object,
-  exportIntervention: PropTypes.func,
   isCurrentUserEditor: PropTypes.bool,
   canCurrentUserMakeChanges: PropTypes.bool,
   editingPossible: PropTypes.bool,
@@ -691,7 +682,6 @@ const mapDispatchToProps = {
   deleteSession: deleteSessionRequest,
   externalCopySession: externalCopySessionRequest,
   editSession: editSessionRequest,
-  exportIntervention: exportInterventionRequest,
 };
 
 const withConnect = connect(mapStateToProps, mapDispatchToProps);
@@ -715,5 +705,4 @@ export default compose(
     key: 'interventionDetailsPageSagas',
     saga: interventionDetailsPageSagas,
   }),
-  injectSaga({ key: 'exportIntervention', saga: exportInterventionSaga }),
 )(InterventionDetailsPage);

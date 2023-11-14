@@ -5,7 +5,7 @@ export const scope = 'app.components.ExportModal';
 export default defineMessages({
   fileBoxLabel: {
     id: `${scope}.fileBoxLabel`,
-    defaultMessage: 'Your last export file:',
+    defaultMessage: 'Your generated file:',
   },
   fileGeneratedAt: {
     id: `${scope}.fileGeneratedAt`,
