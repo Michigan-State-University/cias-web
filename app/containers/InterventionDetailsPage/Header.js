@@ -22,6 +22,7 @@ import { CollaboratingIndicator } from 'components/CollaboratingIndicator';
 import { DataClearedIndicator } from 'components/DataClearedIndicator';
 import { HelpIconTooltip } from 'components/HelpIconTooltip';
 import { Button } from 'components/Button';
+import Column from 'components/Column';
 
 import InterventionStatusButtons from './components/InterventionStatusButtons';
 import { StatusLabel, InterventionOptions } from './styled';
@@ -81,6 +82,21 @@ const Header = ({
     );
   }, [organizationId]);
 
+  const isWrappedLayout = !['xl', 'xxl'].includes(screenClass);
+
+  const interventionStatus = (
+    <Row align="center" gap={12}>
+      <Box>
+        <StatusLabel status={status}>
+          {status && formatMessage(interventionStatusesMessages[status])}
+        </StatusLabel>
+      </Box>
+      {sensitiveDataState === SensitiveDataState.REMOVED && (
+        <DataClearedIndicator opacity={1} showTooltip />
+      )}
+    </Row>
+  );
+
   return (
     <GCol>
       <GRow xl={12}>
@@ -91,9 +107,14 @@ const Header = ({
         </GCol>
       </GRow>
 
-      <GRow>
-        <GCol xl={7} lg={12}>
-          <Row justify="end" align="center" mt={16} gap={12}>
+      <Row
+        columnGap={16}
+        rowGap={8}
+        direction={isWrappedLayout ? 'column' : 'row'}
+        marginBlockStart={16}
+      >
+        <Column flex={1} gap={8}>
+          <Row justify="end" align="center" gap={12}>
             {hasCollaborators && <CollaboratingIndicator iconSize={20} />}
             <StyledInput
               disabled={!editingPossible}
@@ -118,32 +139,19 @@ const Header = ({
               sessions={sessions}
             />
           </Row>
-          <Row align="center" mt={8} gap={12}>
-            <Box>
-              <StatusLabel status={status}>
-                {status && formatMessage(interventionStatusesMessages[status])}
-              </StatusLabel>
-            </Box>
-            {sensitiveDataState === SensitiveDataState.REMOVED && (
-              <DataClearedIndicator opacity={1} showTooltip />
-            )}
-          </Row>
-        </GCol>
+          {!isWrappedLayout && interventionStatus}
+        </Column>
 
-        <GCol>
-          <Row
-            mt={18}
-            align="center"
-            width="100%"
-            justify={['sm', 'xs'].includes(screenClass) ? 'between' : 'end'}
-          >
-            <Row
-              width={['sm', 'xs'].includes(screenClass) ? '200px' : '100%'}
-              align="center"
-              justify="end"
-              mr={20}
-              flexWrap="wrap"
-            >
+        <Row
+          justify="between"
+          align="start"
+          rowGap={8}
+          columnGap={16}
+          flexWrap="wrap"
+        >
+          {isWrappedLayout && interventionStatus}
+          <Column width="auto" gap={8} flex={isWrappedLayout && 1}>
+            <Row align="center" justify="end" width="100%" gap={16}>
               {canAccessParticipantsData && (
                 <Button px={32} onClick={openExportCsvModal} width="auto">
                   {formatMessage(messages.exportCsvModalTitle)}
@@ -154,43 +162,43 @@ const Header = ({
                 handleChangeStatus={handleChangeStatus}
                 canCurrentUserMakeChanges={canCurrentUserMakeChanges}
               />
+              <InterventionOptions>
+                <Dropdown
+                  id={`intervention-options-${interventionId}`}
+                  options={options}
+                  clickable
+                />
+              </InterventionOptions>
             </Row>
-            <InterventionOptions>
-              <Dropdown
-                id={`intervention-options-${interventionId}`}
-                options={options}
-                clickable
-              />
-            </InterventionOptions>
-          </Row>
-          {catMhAccess && catMhLicenseType && (
-            <Row width="100%" justify="end" align="center" mt={8}>
-              <HelpIconTooltip
-                id="cat-mh-tests-limit-tooltip"
-                tooltipContent={formatMessage(messages.catMhCountInfo)}
-              >
-                {formatMessage(messages.catMhCounter, {
-                  catMhLicenseType,
-                  current: testsLeft ?? 0,
-                  initial: catMhPool ?? 0,
-                  used: createdCatMhSessionCount,
-                  counter: (chunks) => (
-                    <span
-                      style={{
-                        color: hasSmallNumberOfCatMhSessionsRemaining
-                          ? themeColors.warning
-                          : themeColors.success,
-                      }}
-                    >
-                      {chunks}
-                    </span>
-                  ),
-                })}
-              </HelpIconTooltip>
-            </Row>
-          )}
-        </GCol>
-      </GRow>
+            {catMhAccess && catMhLicenseType && (
+              <Row width="100%" justify="end" align="center" overflow="visible">
+                <HelpIconTooltip
+                  id="cat-mh-tests-limit-tooltip"
+                  tooltipContent={formatMessage(messages.catMhCountInfo)}
+                >
+                  {formatMessage(messages.catMhCounter, {
+                    catMhLicenseType,
+                    current: testsLeft ?? 0,
+                    initial: catMhPool ?? 0,
+                    used: createdCatMhSessionCount,
+                    counter: (chunks) => (
+                      <span
+                        style={{
+                          color: hasSmallNumberOfCatMhSessionsRemaining
+                            ? themeColors.warning
+                            : themeColors.success,
+                        }}
+                      >
+                        {chunks}
+                      </span>
+                    ),
+                  })}
+                </HelpIconTooltip>
+              </Row>
+            )}
+          </Column>
+        </Row>
+      </Row>
     </GCol>
   );
 };
