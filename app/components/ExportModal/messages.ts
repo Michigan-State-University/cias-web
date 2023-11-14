@@ -19,4 +19,17 @@ export default defineMessages({
     id: `${scope}.downloadFileButtonLabel`,
     defaultMessage: 'Download file',
   },
+  exportConfirmationDescription: {
+    id: `${scope}.exportConfirmationDescription`,
+    defaultMessage:
+      'Your file is currently being generated.<br />We will notify you by e-mail when it’s ready.',
+  },
+  exportConfirmationButtonTitle: {
+    id: `${scope}.exportConfirmationButtonTitle`,
+    defaultMessage: 'Understood',
+  },
+  spinnerIconAlt: {
+    id: `${scope}.spinnerIconAlt`,
+    defaultMessage: 'Spinner',
+  },
 });

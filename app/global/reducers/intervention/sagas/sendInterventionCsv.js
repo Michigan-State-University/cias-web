@@ -19,7 +19,6 @@ export function* sendInterventionCsv({ payload: { id, onSuccess } }) {
       data: { message },
     } = yield call(axios.get, requestURL);
     yield put(sendInterventionCsvSuccess(message));
-    yield call(toast.info, message);
     onSuccess();
   } catch (error) {
     yield put(sendInterventionCsvError(error));
