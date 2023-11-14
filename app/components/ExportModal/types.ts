@@ -9,6 +9,8 @@ export type ExportModalFile = {
 export type ExportModalState = {
   title: string;
   description: string;
+  fileGeneratedDescription: string;
+  generateButtonTitle: string;
   file: Nullable<ExportModalFile>;
   onExport: (onSuccess: () => void) => void;
   exportLoaderSelector: Parameters<typeof useSelector>[0];

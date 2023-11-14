@@ -256,6 +256,12 @@ export function InterventionDetailsPage({
     useExportModal({
       title: formatMessage(messages.exportCsvModalTitle),
       description: formatMessage(messages.exportCsvModalDescription),
+      fileGeneratedDescription: formatMessage(
+        messages.exportCsvModalFileGeneratedDescription,
+      ),
+      generateButtonTitle: formatMessage(
+        messages.exportCsvModalGenerateButtonTitle,
+      ),
       file: csv && {
         ...csv,
         url: `${process.env.API_URL}/v1/interventions/${interventionId}/csv_attachment`,

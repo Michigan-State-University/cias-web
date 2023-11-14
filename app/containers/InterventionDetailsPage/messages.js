@@ -158,6 +158,15 @@ export default defineMessages({
   exportCsvModalDescription: {
     id: `${scope}.exportCsvModalDescription`,
     defaultMessage:
-      'Depending on intervention size, exporting answers to a CSV file might take some time. Once the file is ready, you will receive an e-mail notification. The generated file will be available for download below.',
+      'Use this button to export answers from intervention session to single CSV file. Depending on intervention size, this action may take a while. We will notify you via e-mail once this action is finished.',
+  },
+  exportCsvModalFileGeneratedDescription: {
+    id: `${scope}.exportCsvModalFileGeneratedDescription`,
+    defaultMessage:
+      'Download already generated CSV file or use update button to generate new one.',
+  },
+  exportCsvModalGenerateButtonTitle: {
+    id: `${scope}.exportCsvModalGenerateButtonTitle`,
+    defaultMessage: 'Generate CSV file with answers',
   },
 });

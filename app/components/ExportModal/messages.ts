@@ -11,4 +11,12 @@ export default defineMessages({
     id: `${scope}.fileGeneratedAt`,
     defaultMessage: 'File generated at {date}',
   },
+  updateFileButtonLabel: {
+    id: `${scope}.updateFileButtonLabel`,
+    defaultMessage: 'Update file with new data',
+  },
+  downloadFileButtonLabel: {
+    id: `${scope}.downloadFileButtonLabel`,
+    defaultMessage: 'Download file',
+  },
 });

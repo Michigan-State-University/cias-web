@@ -5,18 +5,12 @@ import { ModalProps, ModalType, useModal } from 'components/Modal';
 import { ExportModalContent } from './ExportModalContent';
 import { ExportModalState } from './types';
 
-export const useExportModal = ({
-  title,
-  description,
-  file,
-  onExport,
-  exportLoaderSelector,
-}: ExportModalState) => {
+export const useExportModal = ({ title, ...state }: ExportModalState) => {
   const props: ModalProps<ExportModalState>['props'] = useMemo(
     () => ({
       title,
-      width: 450,
-      height: 526,
+      width: 500,
+      height: 522,
       stretchContent: true,
     }),
     [title],
@@ -29,8 +23,7 @@ export const useExportModal = ({
   });
 
   return {
-    openModal: () =>
-      openModal({ title, description, file, onExport, exportLoaderSelector }),
+    openModal: () => openModal({ title, ...state }),
     ...rest,
   };
 };
