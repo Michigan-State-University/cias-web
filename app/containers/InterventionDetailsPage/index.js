@@ -27,7 +27,6 @@ import TranslateIcon from 'assets/svg/translate.svg';
 import PadlockIcon from 'assets/svg/padlock.svg';
 import DownloadIcon from 'assets/svg/download-line.svg';
 import CollaborateIcon from 'assets/svg/collaborate-icon.svg';
-import CsvIcon from 'assets/svg/csv-icon.svg';
 
 import isNullOrUndefined from 'utils/isNullOrUndefined';
 import { reorder } from 'utils/reorder';
@@ -312,17 +311,6 @@ export function InterventionDetailsPage({
       action: openInterventionSettingsModal,
       color: colors.bluewood,
     },
-    ...(canAccessParticipantsData
-      ? [
-          {
-            id: 'exportCsv',
-            label: formatMessage(messages.exportCsvModalTitle),
-            icon: CsvIcon,
-            action: openExportCsvModal,
-            color: colors.bluewood,
-          },
-        ]
-      : []),
     {
       id: 'translate',
       label: formatMessage(messages.translate),
@@ -602,6 +590,8 @@ export function InterventionDetailsPage({
               catMhPool={catMhPool}
               createdCatMhSessionCount={createdCatMhSessionCount}
               sessions={sortedSessions ?? []}
+              openExportCsvModal={openExportCsvModal}
+              canAccessParticipantsData={canAccessParticipantsData}
             />
 
             <GRow>

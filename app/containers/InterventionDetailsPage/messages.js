@@ -153,7 +153,7 @@ export default defineMessages({
   },
   exportCsvModalTitle: {
     id: `${scope}.exportCsvModalTitle`,
-    defaultMessage: 'Export answers CSV',
+    defaultMessage: 'Export answers',
   },
   exportCsvModalDescription: {
     id: `${scope}.exportCsvModalDescription`,

@@ -21,6 +21,7 @@ import { selectInputText } from 'components/Input/utils';
 import { CollaboratingIndicator } from 'components/CollaboratingIndicator';
 import { DataClearedIndicator } from 'components/DataClearedIndicator';
 import { HelpIconTooltip } from 'components/HelpIconTooltip';
+import { Button } from 'components/Button';
 
 import InterventionStatusButtons from './components/InterventionStatusButtons';
 import { StatusLabel, InterventionOptions } from './styled';
@@ -47,6 +48,8 @@ const Header = ({
   catMhPool,
   createdCatMhSessionCount,
   sessions,
+  openExportCsvModal,
+  canAccessParticipantsData,
 }) => {
   const { formatMessage } = useIntl();
   const screenClass = useScreenClass();
@@ -141,6 +144,11 @@ const Header = ({
               mr={20}
               flexWrap="wrap"
             >
+              {canAccessParticipantsData && (
+                <Button px={32} onClick={openExportCsvModal} width="auto">
+                  {formatMessage(messages.exportCsvModalTitle)}
+                </Button>
+              )}
               <InterventionStatusButtons
                 status={status}
                 handleChangeStatus={handleChangeStatus}
@@ -208,6 +216,8 @@ Header.propTypes = {
   catMhPool: PropTypes.number,
   createdCatMhSessionCount: PropTypes.number,
   sessions: PropTypes.array,
+  openExportCsvModal: PropTypes.func,
+  canAccessParticipantsData: PropTypes.bool,
 };
 
 export default Header;
