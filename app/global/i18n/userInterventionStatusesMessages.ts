@@ -25,4 +25,8 @@ export default defineMessages<UserInterventionStatus>({
     id: `${scope}.no_access`,
     defaultMessage: 'No access',
   },
+  [UserInterventionStatus.PAUSED]: {
+    id: `${scope}.paused`,
+    defaultMessage: 'Paused',
+  },
 });

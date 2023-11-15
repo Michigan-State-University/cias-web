@@ -11,6 +11,7 @@ import { parametrizeRoutePath } from 'utils/router';
 import { ACCEPT_INTERVENTION_INVITE } from '../constants';
 import { acceptInterventionInvite } from '../actions';
 import messages from '../messages';
+import { formatApiErrorMessage } from '../../../../utils/formatApiErrorMessage';
 
 export function* acceptInvitation({
   payload: { interventionId, clinicId },
@@ -48,9 +49,13 @@ export function* acceptInvitation({
     }
   } catch (error) {
     yield put(push(`/`));
-    yield call(toast.error, formatMessage(messages.acceptInvitation), {
-      toastId: ACCEPT_INTERVENTION_INVITE,
-    });
+    yield call(
+      toast.error,
+      formatApiErrorMessage(error, messages.acceptInvitation),
+      {
+        toastId: ACCEPT_INTERVENTION_INVITE,
+      },
+    );
   }
 }
 
