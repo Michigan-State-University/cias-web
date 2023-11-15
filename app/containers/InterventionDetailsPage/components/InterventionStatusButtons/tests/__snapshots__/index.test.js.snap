@@ -20,7 +20,6 @@ exports[`<InterventionStatusButtons /> Should render and match the snapshot 1`] 
 .c1 {
   font-weight: bold;
   width: 180px;
-  margin: 5px;
 }
 
 .c1 a {
@@ -62,7 +61,6 @@ exports[`<InterventionStatusButtons /> Should render and match the snapshot 2`] 
 .c1 {
   font-weight: bold;
   width: 180px;
-  margin: 5px;
 }
 
 .c1 a {

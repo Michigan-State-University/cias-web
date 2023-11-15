@@ -143,12 +143,26 @@ export default defineMessages({
     id: `${scope}.inviteToIntervention`,
     defaultMessage: 'Invite Participants',
   },
-  exportIntervention: {
-    id: `${scope}.exportIntervention`,
-    defaultMessage: 'Export Intervention',
-  },
   collaborate: {
     id: `${scope}.collaborate`,
     defaultMessage: 'Collaborate',
+  },
+  exportCsvModalTitle: {
+    id: `${scope}.exportCsvModalTitle`,
+    defaultMessage: 'Export answers',
+  },
+  exportCsvModalDescription: {
+    id: `${scope}.exportCsvModalDescription`,
+    defaultMessage:
+      'Use this button to export answers from the intervention to single CSV file. Depending on intervention size, this action may take a while. We will notify you via e-mail once this action is finished.',
+  },
+  exportCsvModalFileGeneratedDescription: {
+    id: `${scope}.exportCsvModalFileGeneratedDescription`,
+    defaultMessage:
+      'Download already generated CSV file or use update button to generate new one.',
+  },
+  exportCsvModalGenerateButtonTitle: {
+    id: `${scope}.exportCsvModalGenerateButtonTitle`,
+    defaultMessage: 'Generate CSV file with answers',
   },
 });

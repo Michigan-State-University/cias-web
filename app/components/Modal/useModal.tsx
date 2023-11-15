@@ -8,14 +8,18 @@ import ConfirmationModal, {
   Props as ConfirmationModalComponentProps,
 } from './ConfirmationModal';
 
-export type ModalContentRendererProps<ModalState, CloseData = ModalState> = {
+export type ModalContentRendererProps<
+  ModalState = boolean,
+  CloseData = ModalState,
+> = {
   closeModal: (data?: CloseData) => void;
-  modalState: Nullable<ModalState>;
+  modalState: ModalState;
 };
 
-export type ModalContentRenderer<ModalState, CloseData = ModalState> = FC<
-  ModalContentRendererProps<ModalState, CloseData>
->;
+export type ModalContentRenderer<
+  ModalState = boolean,
+  CloseData = ModalState,
+> = FC<ModalContentRendererProps<ModalState, CloseData>>;
 
 export type ModalProps<ModalState = boolean, CloseData = ModalState> = {
   type: ModalType.Modal;
@@ -96,7 +100,10 @@ export const useModal = <
         >;
         return (
           <Modal {...(props as ModalComponentProps)} {...sharedProps}>
-            {modalContentRenderer({ closeModal, modalState })}
+            {modalContentRenderer({
+              closeModal,
+              modalState: modalState as ModalState,
+            })}
           </Modal>
         );
       default:

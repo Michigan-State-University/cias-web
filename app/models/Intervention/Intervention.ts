@@ -41,6 +41,12 @@ type UserWithAccess = {
   loading?: boolean;
 };
 
+export type InterventionExportFile = {
+  url: string;
+  filename: string;
+  generatedAt: string;
+};
+
 export interface SimpleIntervention {
   createdAt: string;
   hasCollaborators: boolean;
@@ -57,6 +63,7 @@ export interface SimpleIntervention {
   sensitiveDataState: SensitiveDataState;
   clearSensitiveDataScheduledAt: Nullable<string>;
   starred: boolean;
+  exportedData: Nullable<InterventionExportFile>;
 }
 
 export type InterventionLogo = {
@@ -66,11 +73,6 @@ export type InterventionLogo = {
 
 export type InterventionGeneratedFile = {
   filename: string;
-  generatedAt: string;
-};
-
-export type InterventionExportFile = {
-  url: string;
   generatedAt: string;
 };
 
@@ -102,7 +104,6 @@ export interface Intervention extends SimpleIntervention {
   sessions: Session[];
   hfhsAccess: boolean;
   clinicLocations: InterventionClinicLocation[];
-  exportedData: Nullable<InterventionExportFile>;
 }
 
 export interface FileInfo {
