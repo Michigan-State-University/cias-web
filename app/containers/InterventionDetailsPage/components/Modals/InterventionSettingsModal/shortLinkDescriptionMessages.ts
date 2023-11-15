@@ -8,14 +8,14 @@ export const scope =
 export default defineMessages<InterventionType>({
   [InterventionType.DEFAULT]: {
     id: `${scope}.Intervention`,
-    defaultMessage: `This link directs user to the first session in this intervention`,
+    defaultMessage: `This link directs a participant to the next session they are eligible for`,
   },
   [InterventionType.FIXED]: {
     id: `${scope}.Intervention::FixedOrder`,
-    defaultMessage: `This link directs user to the first session in this intervention`,
+    defaultMessage: `This link directs a participant to the next session they are eligible for`,
   },
   [InterventionType.FLEXIBLE]: {
     id: `${scope}.Intervention::FlexibleOrder`,
-    defaultMessage: `This link directs user to the module home screen`,
+    defaultMessage: `This link directs a participant to the modules home screen`,
   },
 });
