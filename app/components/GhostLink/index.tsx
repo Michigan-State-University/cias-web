@@ -1,7 +1,7 @@
 import React, { CSSProperties, PropsWithChildren } from 'react';
 import { LinkProps } from 'react-router-dom';
 
-import { EmptyAnchor } from './styled';
+import { DisabledLink, EmptyAnchor } from './styled';
 
 type Props = PropsWithChildren<{
   width?: CSSProperties['width'];
@@ -10,13 +10,12 @@ type Props = PropsWithChildren<{
   Partial<Pick<LinkProps, 'to' | 'href' | 'target'>>;
 
 const GhostLink = ({ disabled, children, ...props }: Props) => {
-  const preventDefault = (e: any) => {
-    if (disabled) {
-      e.preventDefault();
-    }
-  };
+  if (disabled) {
+    return <DisabledLink {...props}>{children}</DisabledLink>;
+  }
+
   return (
-    <EmptyAnchor onClick={preventDefault} disabled={disabled} {...props}>
+    <EmptyAnchor disabled={disabled} {...props}>
       {children}
     </EmptyAnchor>
   );
