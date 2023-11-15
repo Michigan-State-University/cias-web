@@ -23,7 +23,6 @@ import GearIcon from 'assets/svg/gear-wo-background.svg';
 import AddAppIcon from 'assets/svg/app-add.svg';
 import TranslateIcon from 'assets/svg/translate.svg';
 import PadlockIcon from 'assets/svg/padlock.svg';
-import DownloadIcon from 'assets/svg/download-line.svg';
 import CollaborateIcon from 'assets/svg/collaborate-icon.svg';
 
 import isNullOrUndefined from 'utils/isNullOrUndefined';
@@ -50,8 +49,6 @@ import {
   externalCopySessionRequest,
   makeSelectInterventionError,
   makeSelectInterventionLoader,
-  exportInterventionRequest,
-  exportInterventionSaga,
   makeSelectEditingPossible,
   makeSelectIsCurrentUserInterventionOwner,
   makeSelectCanCurrentUserMakeChanges,
@@ -91,6 +88,7 @@ import {
   HenryFordBranchingInfoType,
   InterventionHenryFordBranchingInfoAction,
 } from 'components/HenryFordBrachingInfoModal';
+import { useExportModal } from 'components/ExportModal';
 
 import { useCollaboratorsModal } from 'containers/CollaboratorsModal';
 
@@ -108,6 +106,7 @@ import {
 import messages from './messages';
 import { InterventionDetailsPageContext } from './utils';
 import { INTERVENTION_SETTINGS_MODAL_WIDTH } from './constants';
+import { useExportInterventionModal } from '../ExportInterventionModal';
 
 export function InterventionDetailsPage({
   createSession,
@@ -128,7 +127,6 @@ export function InterventionDetailsPage({
   externalCopySession,
   user: { organizableId: userOrganizableId },
   editSession,
-  exportIntervention,
   isCurrentUserEditor,
   canCurrentUserMakeChanges,
   editingPossible,
@@ -148,8 +146,7 @@ export function InterventionDetailsPage({
     name,
     id,
     status,
-    csvGeneratedAt,
-    csvFilename,
+    csv,
     sharedTo,
     organizationId,
     googleLanguageId,
@@ -163,6 +160,7 @@ export function InterventionDetailsPage({
     hasCollaborators,
     sensitiveDataState,
     clearSensitiveDataScheduledAt,
+    exportedData,
   } = intervention || {};
 
   const showSessionCreateButton = canEdit(status);
@@ -230,6 +228,24 @@ export function InterventionDetailsPage({
     },
   );
 
+  const { Modal: ExportCsvModal, openModal: openExportCsvModal } =
+    useExportModal({
+      title: formatMessage(messages.exportCsvModalTitle),
+      description: formatMessage(messages.exportCsvModalDescription),
+      fileGeneratedDescription: formatMessage(
+        messages.exportCsvModalFileGeneratedDescription,
+      ),
+      generateButtonTitle: formatMessage(
+        messages.exportCsvModalGenerateButtonTitle,
+      ),
+      file: csv && {
+        ...csv,
+        url: `${process.env.API_URL}/v1/interventions/${interventionId}/csv_attachment`,
+      },
+      onExport: (onSuccess) => sendCsv(id, onSuccess),
+      exportLoaderSelector: makeSelectInterventionLoader('sendCsvLoading'),
+    });
+
   const onShareExternally = () => {
     if (hfhsAccess) {
       openHenryFordBranchingInfoModal(
@@ -257,7 +273,8 @@ export function InterventionDetailsPage({
 
   const canEditCollaborators = isAdmin || isCurrentUserInterventionOwner;
 
-  const handleExportIntervention = () => exportIntervention(id);
+  const { ExportInterventionModalOption, ExportInterventionModal } =
+    useExportInterventionModal(id, exportedData);
 
   const { ClearInterventionDataOption, ClearInterventionDataModal } =
     useClearInterventionData(
@@ -321,15 +338,7 @@ export function InterventionDetailsPage({
         ]
       : []),
     ...(isInterventionExportFeatureEnabled
-      ? [
-          {
-            id: 'export',
-            label: formatMessage(messages.exportIntervention),
-            icon: DownloadIcon,
-            action: handleExportIntervention,
-            color: colors.bluewood,
-          },
-        ]
+      ? [ExportInterventionModalOption]
       : []),
     ...(canEditCollaborators
       ? [
@@ -376,8 +385,6 @@ export function InterventionDetailsPage({
       status: newStatus,
       id: interventionId,
     });
-
-  const handleSendCsv = () => sendCsv(id);
 
   const createSessionCall = (sessionType) =>
     createSession(interventionId, sessions.length, sessionType);
@@ -487,6 +494,8 @@ export function InterventionDetailsPage({
               }
             />
             <ShareExternallyModal />
+            <ExportCsvModal />
+            <ExportInterventionModal />
 
             <Modal
               onClose={closeTranslateModal}
@@ -530,18 +539,14 @@ export function InterventionDetailsPage({
 
             <Header
               name={name}
-              csvGeneratedAt={csvGeneratedAt}
-              csvFilename={csvFilename}
               interventionId={interventionId}
               canCurrentUserMakeChanges={canCurrentUserMakeChanges}
               editingPossible={editingPossible}
               editName={editName}
               handleChangeStatus={handleChangeStatus}
-              handleSendCsv={handleSendCsv}
               options={options}
               status={status}
               organizationId={organizationId}
-              canAccessCsv={canAccessParticipantsData}
               interventionType={type}
               userOrganizableId={userOrganizableId}
               hasCollaborators={hasCollaborators}
@@ -551,6 +556,8 @@ export function InterventionDetailsPage({
               catMhPool={catMhPool}
               createdCatMhSessionCount={createdCatMhSessionCount}
               sessions={sortedSessions ?? []}
+              openExportCsvModal={openExportCsvModal}
+              canAccessParticipantsData={canAccessParticipantsData}
             />
 
             <GRow>
@@ -598,6 +605,7 @@ InterventionDetailsPage.propTypes = {
   editIntervention: PropTypes.func,
   sessionIndex: PropTypes.number,
   sendCsv: PropTypes.func,
+  sendCsvLoading: PropTypes.bool,
   copySession: PropTypes.func,
   reorderSessions: PropTypes.func,
   copyIntervention: PropTypes.func,
@@ -606,7 +614,6 @@ InterventionDetailsPage.propTypes = {
   externalCopySession: PropTypes.func,
   editSession: PropTypes.func,
   user: PropTypes.object,
-  exportIntervention: PropTypes.func,
   isCurrentUserEditor: PropTypes.bool,
   canCurrentUserMakeChanges: PropTypes.bool,
   editingPossible: PropTypes.bool,
@@ -643,7 +650,6 @@ const mapDispatchToProps = {
   deleteSession: deleteSessionRequest,
   externalCopySession: externalCopySessionRequest,
   editSession: editSessionRequest,
-  exportIntervention: exportInterventionRequest,
 };
 
 const withConnect = connect(mapStateToProps, mapDispatchToProps);
@@ -667,5 +673,4 @@ export default compose(
     key: 'interventionDetailsPageSagas',
     saga: interventionDetailsPageSagas,
   }),
-  injectSaga({ key: 'exportIntervention', saga: exportInterventionSaga }),
 )(InterventionDetailsPage);

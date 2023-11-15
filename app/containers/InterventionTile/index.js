@@ -16,7 +16,6 @@ import FileShareIcon from 'assets/svg/file-share.svg';
 import CopyIcon from 'assets/svg/copy.svg';
 import AddAppIcon from 'assets/svg/app-add.svg';
 import TranslateIcon from 'assets/svg/translate.svg';
-import DownloadIcon from 'assets/svg/download-line.svg';
 import CollaborateIcon from 'assets/svg/collaborate-icon.svg';
 
 import { colors } from 'theme';
@@ -28,8 +27,6 @@ import {
 } from 'global/reducers/auth';
 import { interventionOptionsSaga } from 'global/sagas/interventionOptionsSaga';
 import {
-  exportInterventionRequest,
-  exportInterventionSaga,
   fetchInterventionSaga,
   interventionReducer,
 } from 'global/reducers/intervention';
@@ -84,6 +81,7 @@ import messages from './messages';
 import { StyledLink, Heading, StatusIndicator, TileInfo } from './styled';
 import { useClearInterventionData } from '../ClearInterventionData';
 import { StarButton } from './StarButton';
+import { useExportInterventionModal } from '../ExportInterventionModal';
 
 const InterventionTile = ({
   tileData,
@@ -94,7 +92,6 @@ const InterventionTile = ({
   intl: { formatMessage },
   userId,
   isLoading,
-  exportIntervention,
   userOrganizableId,
   starIntervention,
   unstarIntervention,
@@ -115,6 +112,7 @@ const InterventionTile = ({
     sensitiveDataState,
     clearSensitiveDataScheduledAt,
     starred,
+    exportedData,
   } = tileData || {};
 
   const { starInterventionLoading, unstarInterventionLoading } =
@@ -147,12 +145,13 @@ const InterventionTile = ({
       interventionOwnerId,
     );
 
+  const { ExportInterventionModalOption, ExportInterventionModal } =
+    useExportInterventionModal(id, exportedData);
+
   const {
     isAdmin,
     canAssignOrganizationToIntervention: showAssignOrganizationOption,
   } = useRoleManager();
-
-  const handleExportIntervention = () => exportIntervention(id);
 
   const handleClone = () => copyIntervention({ interventionId: id });
 
@@ -260,15 +259,7 @@ const InterventionTile = ({
         ]
       : []),
     ...(isInterventionExportFeatureEnabled
-      ? [
-          {
-            id: 'export',
-            label: formatMessage(messages.exportIntervention),
-            icon: DownloadIcon,
-            action: handleExportIntervention,
-            color: colors.bluewood,
-          },
-        ]
+      ? [ExportInterventionModalOption]
       : []),
     ...(canEditCollaborators
       ? [
@@ -324,6 +315,7 @@ const InterventionTile = ({
 
       <CollaboratorsModal />
       <ClearInterventionDataModal />
+      <ExportInterventionModal />
 
       <StyledLink to={link}>
         <TileContainer gap={8}>
@@ -421,7 +413,6 @@ InterventionTile.propTypes = {
   copyIntervention: PropTypes.func,
   userId: PropTypes.string,
   isLoading: PropTypes.bool,
-  exportIntervention: PropTypes.func,
   starIntervention: PropTypes.func,
   unstarIntervention: PropTypes.func,
   userOrganizableId: PropTypes.string,
@@ -435,7 +426,6 @@ const mapStateToProps = createStructuredSelector({
 
 const mapDispatchToProps = {
   copyIntervention: copyInterventionRequest,
-  exportIntervention: exportInterventionRequest,
   starIntervention: starInterventionRequest,
   unstarIntervention: unstarInterventionRequest,
 };
@@ -460,7 +450,6 @@ export default compose(
     saga: fetchInterventionSaga,
   }),
   injectReducer({ key: 'intervention', reducer: interventionReducer }),
-  injectSaga({ key: 'exportIntervention', saga: exportInterventionSaga }),
   injectSaga(withStarInterventionSaga),
   injectSaga(withUnstarInterventionSaga),
 )(InterventionTileWithIntl);

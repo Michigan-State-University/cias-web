@@ -67,8 +67,6 @@ export const InviteParticipantsModal: FC<Props> = ({
       stretchContent
       contentContainerProps={{
         mt: 20,
-        display: 'flex',
-        direction: 'column',
       }}
     >
       <InviteParticipantsModalContent

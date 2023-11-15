@@ -26,18 +26,12 @@ import { Alert, AlertType } from 'components/Alert';
 
 import { InterventionStatus } from 'models/Intervention';
 
-import CsvButtons from './CsvButtons';
 import messages from './messages';
 
 function InterventionStatusButtons({
   intl: { formatMessage },
   status,
   handleChangeStatus,
-  handleSendCsv,
-  csvGeneratedAt,
-  csvFilename,
-  interventionId,
-  canAccessCsv,
   canCurrentUserMakeChanges,
 }) {
   const [closeConfirmationOpen, setCloseConfirmationOpen] = useState(false);
@@ -261,14 +255,6 @@ function InterventionStatusButtons({
           disabled={!canCurrentUserMakeChanges}
         />
       )}
-      {canAccessCsv && (
-        <CsvButtons
-          handleSendCsv={handleSendCsv}
-          csvGeneratedAt={csvGeneratedAt}
-          csvFilename={csvFilename}
-          interventionId={interventionId}
-        />
-      )}
     </>
   );
 }
@@ -277,10 +263,6 @@ InterventionStatusButtons.propTypes = {
   intl: PropTypes.object,
   status: PropTypes.string,
   handleChangeStatus: PropTypes.func,
-  handleSendCsv: PropTypes.func,
-  csvGeneratedAt: PropTypes.string,
-  csvFilename: PropTypes.string,
-  canAccessCsv: PropTypes.bool,
   canCurrentUserMakeChanges: PropTypes.bool,
   interventionId: PropTypes.string,
 };
