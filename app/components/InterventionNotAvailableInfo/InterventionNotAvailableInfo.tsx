@@ -13,12 +13,10 @@ import { InterventionNotAvailableReason } from './types';
 import interventionNotAvailableReasonsMessages from './interventionNotAvailableReasonsMessages';
 
 export type Props = {
-  reason?: InterventionNotAvailableReason;
+  reason?: Nullable<InterventionNotAvailableReason>;
 };
 
-export const InterventionNotAvailableInfo = ({
-  reason = InterventionNotAvailableReason.INTERVENTION_DRAFT,
-}: Props) => {
+export const InterventionNotAvailableInfo = ({ reason }: Props) => {
   const { formatMessage } = useIntl();
 
   return (
@@ -28,7 +26,8 @@ export const InterventionNotAvailableInfo = ({
       </Text>
 
       <Text mt={10} fontSize={18} textAlign="center">
-        {formatMessage(interventionNotAvailableReasonsMessages[reason])}
+        {reason &&
+          formatMessage(interventionNotAvailableReasonsMessages[reason])}
       </Text>
 
       <GhostLink to={RoutePath.DASHBOARD}>

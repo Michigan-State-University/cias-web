@@ -36,6 +36,7 @@ export enum RoutePath {
   VERIFY_SHORT_LINK = '/int/:slug',
   VERIFY_USER_KEY = '/usr/:userKey',
   NOT_FOUND = '/not-found-page',
+  INTERVENTION_NOT_AVAILABLE = '/not-available',
 }
 
 export const ALL_ROUTE_PATHS = Object.values(RoutePath);

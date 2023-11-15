@@ -15,7 +15,10 @@ import {
 } from 'global/reducers/auth';
 
 import Loader from 'components/Loader';
-import { InterventionNotAvailableInfo } from 'components/InterventionNotAvailableInfo';
+import {
+  InterventionNotAvailableInfo,
+  InterventionNotAvailableReason,
+} from 'components/InterventionNotAvailableInfo';
 
 import ForbiddenPage from 'containers/ForbiddenPage';
 import NotFoundPage from 'containers/NotFoundPage';
@@ -45,7 +48,11 @@ const VerifyUserKeyPage = () => {
         return <ForbiddenPage />;
       }
       case HttpStatusCodes.FORBIDDEN: {
-        return <InterventionNotAvailableInfo />;
+        return (
+          <InterventionNotAvailableInfo
+            reason={InterventionNotAvailableReason.INTERVENTION_DRAFT}
+          />
+        );
       }
       default: {
         return <NotFoundPage />;

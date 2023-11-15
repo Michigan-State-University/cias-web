@@ -1,17 +1,19 @@
 import axios from 'axios';
 import { call, takeLatest, put } from 'redux-saga/effects';
-import { push } from 'connected-react-router';
+import { push, replace } from 'connected-react-router';
 import { toast } from 'react-toastify';
 
 import { RoutePath } from 'global/constants';
 
 import { formatMessage } from 'utils/intlOutsideReact';
 import { parametrizeRoutePath } from 'utils/router';
+import { formatApiErrorMessage } from 'utils/formatApiErrorMessage';
+
+import { getInterventionNotAvailablePagePathFromApiError } from 'components/InterventionNotAvailableInfo';
 
 import { ACCEPT_INTERVENTION_INVITE } from '../constants';
 import { acceptInterventionInvite } from '../actions';
 import messages from '../messages';
-import { formatApiErrorMessage } from '../../../../utils/formatApiErrorMessage';
 
 export function* acceptInvitation({
   payload: { interventionId, clinicId },
@@ -48,6 +50,13 @@ export function* acceptInvitation({
       );
     }
   } catch (error) {
+    const redirectPath = getInterventionNotAvailablePagePathFromApiError(error);
+
+    if (redirectPath) {
+      yield put(replace(redirectPath));
+      return;
+    }
+
     yield put(push(`/`));
     yield call(
       toast.error,
