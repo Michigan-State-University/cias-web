@@ -3,7 +3,7 @@ import { useHistory, useParams } from 'react-router';
 import { useDispatch, useSelector } from 'react-redux';
 import { useInjectSaga } from 'redux-injectors';
 
-import { ApiError } from 'models/Api';
+import { ApiMessageError } from 'models/Api';
 
 import { HttpStatusCodes } from 'utils/constants';
 
@@ -30,7 +30,7 @@ const VerifyUserKeyPage = () => {
 
   const { userKey } = useParams<{ userKey: string }>();
 
-  const verifyError: Nullable<ApiError> = useSelector(
+  const verifyError: Nullable<ApiMessageError> = useSelector(
     makeSelectErrors('verifyUserKeyError'),
   );
 
@@ -51,6 +51,13 @@ const VerifyUserKeyPage = () => {
         return (
           <InterventionNotAvailableInfo
             reason={InterventionNotAvailableReason.INTERVENTION_DRAFT}
+          />
+        );
+      }
+      case HttpStatusCodes.BAD_REQUEST: {
+        return (
+          <InterventionNotAvailableInfo
+            reason={verifyError.response?.data?.details?.reason}
           />
         );
       }

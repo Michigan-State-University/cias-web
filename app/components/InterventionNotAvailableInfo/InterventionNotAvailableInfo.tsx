@@ -11,13 +11,16 @@ import Column from 'components/Column';
 import messages from './messages';
 import { InterventionNotAvailableReason } from './types';
 import interventionNotAvailableReasonsMessages from './interventionNotAvailableReasonsMessages';
+import { isValidInterventionNotAvailableReason } from './utils';
 
 export type Props = {
-  reason?: Nullable<InterventionNotAvailableReason>;
+  reason?: Nullable<string>;
 };
 
 export const InterventionNotAvailableInfo = ({ reason }: Props) => {
   const { formatMessage } = useIntl();
+
+  const isValidReason = isValidInterventionNotAvailableReason(reason);
 
   return (
     <Column height="100%" justify="center" align="center">
@@ -26,8 +29,12 @@ export const InterventionNotAvailableInfo = ({ reason }: Props) => {
       </Text>
 
       <Text mt={10} fontSize={18} textAlign="center">
-        {reason &&
-          formatMessage(interventionNotAvailableReasonsMessages[reason])}
+        {isValidReason &&
+          formatMessage(
+            interventionNotAvailableReasonsMessages[
+              reason as InterventionNotAvailableReason
+            ],
+          )}
       </Text>
 
       <GhostLink to={RoutePath.DASHBOARD}>

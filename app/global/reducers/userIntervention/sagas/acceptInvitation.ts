@@ -51,7 +51,6 @@ export function* acceptInvitation({
     }
   } catch (error) {
     const redirectPath = getInterventionNotAvailablePagePathFromApiError(error);
-
     if (redirectPath) {
       yield put(replace(redirectPath));
       return;
