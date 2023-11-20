@@ -2,7 +2,8 @@ import { memo, useCallback } from 'react';
 
 import { CharacterType } from 'models/Character';
 
-import { Col, FullWidthContainer, Row } from 'components/ReactGridSystem';
+import Column from 'components/Column';
+import Row from 'components/Row';
 
 import { CharacterRadio } from './CharacterRadio';
 
@@ -21,27 +22,25 @@ const Component = ({ value, disabled, onChange }: Props) => {
   );
 
   return (
-    <FullWidthContainer>
-      <Row style={{ rowGap: '16px' }}>
-        <Col>
-          <CharacterRadio
-            character={CharacterType.PEEDY}
-            onChange={setCharacter(CharacterType.PEEDY)}
-            checked={value === CharacterType.PEEDY}
-            disabled={disabled}
-          />
-        </Col>
+    <Row gap={16} width="100%">
+      <Column flex={1}>
+        <CharacterRadio
+          character={CharacterType.PEEDY}
+          onChange={setCharacter(CharacterType.PEEDY)}
+          checked={value === CharacterType.PEEDY}
+          disabled={disabled}
+        />
+      </Column>
 
-        <Col>
-          <CharacterRadio
-            character={CharacterType.EMMI}
-            onChange={setCharacter(CharacterType.EMMI)}
-            checked={value === CharacterType.EMMI}
-            disabled={disabled}
-          />
-        </Col>
-      </Row>
-    </FullWidthContainer>
+      <Column flex={1}>
+        <CharacterRadio
+          character={CharacterType.EMMI}
+          onChange={setCharacter(CharacterType.EMMI)}
+          checked={value === CharacterType.EMMI}
+          disabled={disabled}
+        />
+      </Column>
+    </Row>
   );
 };
 

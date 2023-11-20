@@ -107,7 +107,7 @@ export const SessionSettingsForm: React.FC<Props> = ({
               my={15}
               color={colors.linkWater}
             />
-            <Row>
+            <Row gap={16}>
               <FormikInput
                 formikKey="autofinishDelay"
                 labelProps={{
@@ -116,6 +116,9 @@ export const SessionSettingsForm: React.FC<Props> = ({
                 label={formatMessage(messages.autofinishDelayLabel)}
                 onBlur={submitForm}
                 disabled={disabled || !values.autofinishEnabled}
+                inputProps={{
+                  width: '100%',
+                }}
               />
               <FormikSelect
                 formikKey="timeUnit"
