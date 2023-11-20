@@ -20,6 +20,7 @@ function FormikSelect({
   inputProps,
   disabled,
   submitOnChange,
+  required,
 }) {
   const { submitForm, validateForm } = useFormikContext();
   const [field, meta, helpers] = useField(formikKey);
@@ -43,6 +44,7 @@ function FormikSelect({
       label={label}
       touched={touched}
       error={error}
+      required={required}
       {...columnStyleProps}
     >
       <Select
@@ -71,6 +73,7 @@ FormikSelect.propTypes = {
   columnStyleProps: PropTypes.object,
   disabled: PropTypes.bool,
   submitOnChange: PropTypes.bool,
+  required: PropTypes.bool,
 };
 
 export default memo(FormikSelect);

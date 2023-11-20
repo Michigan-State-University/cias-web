@@ -8,7 +8,11 @@ import React, { memo } from 'react';
 import { compose } from 'redux';
 import PropTypes from 'prop-types';
 
-import { Roles, RolesColors, AllRoles } from 'models/User/RolesManager';
+import {
+  Roles,
+  RolesColors,
+  PasswordAuthenticatedRoles,
+} from 'models/User/RolesManager';
 import Box from 'components/Box';
 import Text from 'components/Text';
 import { colors } from 'theme';
@@ -34,7 +38,8 @@ const UserRoleTile = ({ role, disabled, onClick, intl: { formatMessage } }) => (
 );
 
 UserRoleTile.propTypes = {
-  role: PropTypes.oneOf([...AllRoles, Roles.Guest]).isRequired,
+  role: PropTypes.oneOf([...PasswordAuthenticatedRoles, Roles.Guest])
+    .isRequired,
   disabled: PropTypes.bool,
   onClick: PropTypes.func,
   intl: PropTypes.shape(IntlShape),

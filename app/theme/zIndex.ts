@@ -24,4 +24,5 @@ export enum ZIndex {
   CHAT_WIDGET = 11,
   TOOLTIP = 9999,
   ANIMATION_BORDER = 1,
+  DROPDOWN = 999,
 }

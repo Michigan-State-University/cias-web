@@ -3,7 +3,13 @@ import PropTypes from 'prop-types';
 
 import GridQuestionLayout from '../layouts/GridQuestionLayout';
 
-const GridQuestion = ({ question, answerBody, selectAnswer, saveAnswer }) => {
+const GridQuestion = ({
+  question,
+  answerBody,
+  selectAnswer,
+  saveAnswer,
+  disabled,
+}) => {
   const [selectedAnswersIndex, setSelectedAnswersIndex] = useState({});
   const [selectedAnswers, setSelectedAnswers] = useState({});
   const [updated, setUpdated] = useState(false);
@@ -75,6 +81,7 @@ const GridQuestion = ({ question, answerBody, selectAnswer, saveAnswer }) => {
       check={check}
       questionId={id}
       selectedAnswersIndex={selectedAnswersIndex}
+      disabled={disabled}
     />
   );
 };
@@ -84,6 +91,7 @@ GridQuestion.propTypes = {
   selectAnswer: PropTypes.func,
   answerBody: PropTypes.any,
   saveAnswer: PropTypes.func,
+  disabled: PropTypes.bool,
 };
 
 export default GridQuestion;

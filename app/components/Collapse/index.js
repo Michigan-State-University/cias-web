@@ -84,7 +84,7 @@ const Collapse = ({
 );
 
 Collapse.propTypes = {
-  children: PropTypes.node,
+  children: PropTypes.any,
   label: PropTypes.any,
   onToggle: PropTypes.func,
   isOpened: PropTypes.bool,
@@ -96,8 +96,8 @@ Collapse.propTypes = {
   imgWithBackground: PropTypes.bool,
   height: PropTypes.string,
   width: PropTypes.string,
-  py: PropTypes.number,
-  px: PropTypes.number,
+  py: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
+  px: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
   bgOpacity: PropTypes.number,
   color: PropTypes.string,
   deleteActive: PropTypes.bool,

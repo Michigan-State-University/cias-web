@@ -52,7 +52,7 @@ exports[`<Modal /> Should render and match the snapshot 1`] = `
   color: unset;
 }
 
-.c9 {
+.c10 {
   width: auto;
   height: auto;
   display: block;
@@ -64,7 +64,7 @@ exports[`<Modal /> Should render and match the snapshot 1`] = `
   color: unset;
 }
 
-.c6 {
+.c7 {
   margin: 0;
   font-family: DM Sans;
   font-size: 25px;
@@ -72,7 +72,7 @@ exports[`<Modal /> Should render and match the snapshot 1`] = `
   color: #2F3850;
 }
 
-.c5 {
+.c6 {
   display: -webkit-box;
   display: -webkit-flex;
   display: -ms-flexbox;
@@ -91,7 +91,7 @@ exports[`<Modal /> Should render and match the snapshot 1`] = `
   gap: 8px;
 }
 
-.c4 {
+.c5 {
   display: -webkit-box;
   display: -webkit-flex;
   display: -ms-flexbox;
@@ -108,7 +108,7 @@ exports[`<Modal /> Should render and match the snapshot 1`] = `
   align-items: flex-start;
 }
 
-.c7 {
+.c8 {
   display: -webkit-box;
   display: -webkit-flex;
   display: -ms-flexbox;
@@ -125,6 +125,21 @@ exports[`<Modal /> Should render and match the snapshot 1`] = `
   align-items: flex-end;
 }
 
+.c4 {
+  -webkit-box-pack: justify;
+  -webkit-justify-content: space-between;
+  -ms-flex-pack: justify;
+  justify-content: space-between;
+  justify-items: space-between;
+  -webkit-align-content: center;
+  -ms-flex-line-pack: center;
+  align-content: center;
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+}
+
 .c3 {
   max-width: 100% !important;
   width: 100%;
@@ -132,7 +147,7 @@ exports[`<Modal /> Should render and match the snapshot 1`] = `
   padding: 0 !important;
 }
 
-.c8 {
+.c9 {
   height: 28px;
   width: 28px;
   display: -webkit-box;
@@ -185,19 +200,19 @@ exports[`<Modal /> Should render and match the snapshot 1`] = `
         style="box-sizing: border-box; position: relative; margin-left: auto; margin-right: auto; padding-left: 15px; padding-right: 15px; max-width: 960px;"
       >
         <div
-          class=""
+          class="c4"
           style="margin-left: -15px; margin-right: -15px; display: flex; flex-wrap: wrap; flex-grow: 0; flex-shrink: 0; align-items: center; justify-content: space-between;"
         >
           <div
             align="start"
-            class="c4"
+            class="c5"
             style="box-sizing: border-box; min-height: 1px; position: relative; padding-left: 15px; padding-right: 15px; width: 83.33333333333334%; flex-basis: 83.33333333333334%; flex-grow: 0; flex-shrink: 0; max-width: 83.33333333333334%; margin-left: 0%;"
           >
             <div
-              class="c5"
+              class="c6"
             >
               <h1
-                class="c6"
+                class="c7"
                 id="modal-title"
               >
                 Test
@@ -206,12 +221,12 @@ exports[`<Modal /> Should render and match the snapshot 1`] = `
           </div>
           <div
             align="end"
-            class="c7"
+            class="c8"
             style="box-sizing: border-box; min-height: 1px; position: relative; padding-left: 15px; padding-right: 15px; width: 16.666666666666668%; flex-basis: 16.666666666666668%; flex-grow: 0; flex-shrink: 0; max-width: 16.666666666666668%; margin-left: 0%;"
           >
             <button
               aria-label="Close window"
-              class="c8"
+              class="c9"
               data-cy="modal-close-button"
               data-testid="close-modal-button"
               title="Close window"
@@ -229,11 +244,11 @@ exports[`<Modal /> Should render and match the snapshot 1`] = `
         >
           <div
             align="start"
-            class="c4"
+            class="c5"
             style="box-sizing: border-box; min-height: 1px; position: relative; padding-left: 15px; padding-right: 15px; width: 100%; flex-basis: 100%; flex-grow: 0; flex-shrink: 0; max-width: 100%; margin-left: 0%;"
           >
             <div
-              class="c9"
+              class="c10"
               id="modal-description"
               width="100%"
             />

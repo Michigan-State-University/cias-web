@@ -20,6 +20,7 @@ const SingleQuestionLayout = ({
   questionId,
   selectedAnswerIndex,
   isMobile,
+  disabled,
 }) => (
   <Column>
     <Box>
@@ -46,6 +47,7 @@ const SingleQuestionLayout = ({
                 event.preventDefault();
                 handleClick(value, index, hfhValue);
               }}
+              disabled={disabled}
             >
               <Radio
                 id={ariaInputId}
@@ -76,6 +78,7 @@ SingleQuestionLayout.propTypes = {
   selectedAnswerIndex: PropTypes.number,
   questionId: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
   isMobile: PropTypes.bool,
+  disabled: PropTypes.bool,
 };
 
 export default SingleQuestionLayout;

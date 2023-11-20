@@ -26,7 +26,7 @@ import {
 } from 'global/reducers/userList';
 
 import Select from 'components/Select';
-import { AllRoles } from 'models/User/RolesManager';
+import { PasswordAuthenticatedRoles } from 'models/User/RolesManager';
 import messages from './messages';
 
 const UserSelector = ({
@@ -115,7 +115,7 @@ UserSelector.propTypes = {
 };
 
 UserSelector.defaultProps = {
-  rolesToInclude: AllRoles,
+  rolesToInclude: PasswordAuthenticatedRoles,
 };
 
 const mapStateToProps = createStructuredSelector({

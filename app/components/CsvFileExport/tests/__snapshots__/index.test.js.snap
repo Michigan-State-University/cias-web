@@ -28,6 +28,13 @@ exports[`<CsvFileReader /> Should render and match the snapshot 1`] = `
   color: rgba(183,39,234,1);
 }
 
+.c0 {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+}
+
 .c0 .button {
   border: 0;
   padding: 0;

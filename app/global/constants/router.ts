@@ -34,6 +34,7 @@ export enum RoutePath {
   ACCESSIBILITY_STATEMENT = '/accessibility-statement',
   FORBIDDEN = '/no-access',
   VERIFY_SHORT_LINK = '/int/:name',
+  VERIFY_USER_KEY = '/usr/:userKey',
   NOT_FOUND = '/not-found-page',
 }
 

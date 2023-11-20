@@ -9,6 +9,7 @@ const VisualAnalogueScaleQuestion = ({
   question,
   answerBody,
   selectAnswer,
+  disabled,
 }) => {
   const {
     body: {
@@ -44,9 +45,10 @@ const VisualAnalogueScaleQuestion = ({
     setAnswerValue(value);
   }, [id]);
 
-  const onChange = (num) => setAnswerValue(num);
+  const onChange = (num) => !disabled && setAnswerValue(num);
 
   const onAfterChange = () => {
+    if (disabled) return;
     selectAnswer([
       {
         var: name,
@@ -73,6 +75,7 @@ VisualAnalogueScaleQuestion.propTypes = {
   question: PropTypes.object.isRequired,
   selectAnswer: PropTypes.func,
   answerBody: PropTypes.any,
+  disabled: PropTypes.bool,
 };
 
 export default VisualAnalogueScaleQuestion;
