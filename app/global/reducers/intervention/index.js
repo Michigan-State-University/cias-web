@@ -9,3 +9,4 @@ export { interventionReducer } from './reducer';
 export * from './selectors';
 export * from './sagas';
 export * from './sessionSettings/actions';
+export * from './types';

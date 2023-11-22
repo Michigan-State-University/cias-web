@@ -20,6 +20,7 @@ const ThirdPartyQuestionLayout = ({
   questionId,
   selectedAnswerIndex,
   isMobile,
+  disabled,
 }) => (
   <Column>
     <Box>
@@ -47,6 +48,7 @@ const ThirdPartyQuestionLayout = ({
               py={14}
               filled
               clickable
+              disabled={disabled}
               onClick={() =>
                 handleClick(value, reportTemplateIds, numericValue, index)
               }
@@ -55,6 +57,7 @@ const ThirdPartyQuestionLayout = ({
                 id={ariaInputId}
                 data-cy={`single-question-${index}-checkbox`}
                 checked={isChecked}
+                disabled={disabled}
               >
                 <MarkupContainer>
                   <Markup content={payload} noWrap />
@@ -80,6 +83,7 @@ ThirdPartyQuestionLayout.propTypes = {
   selectedAnswerIndex: PropTypes.number,
   questionId: PropTypes.string,
   isMobile: PropTypes.bool,
+  disabled: PropTypes.bool,
 };
 
 export default ThirdPartyQuestionLayout;

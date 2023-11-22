@@ -31,7 +31,6 @@ export const SessionIndex = styled.div`
 `;
 
 export const StyledRow = styled(Row)`
-  width: 70%;
   &:hover * {
     ${SessionIndex} {
       color: white;

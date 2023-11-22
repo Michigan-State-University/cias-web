@@ -4,7 +4,9 @@ const ALLOWED_EDIT = [draft];
 
 const ALLOWED_PREVIEW = [draft];
 
-const ALLOWED_SHARING_WITH_PARTICIPANTS = [published];
+const ALLOWED_INVITING_PARTICIPANTS = [published];
+
+const ALLOWED_CREATING_PREDEFINED_PARTICIPANTS = [draft, published];
 
 const ALLOWED_ARCHIVE = [draft, closed];
 
@@ -24,8 +26,11 @@ export const canEdit = (interventionStatus) =>
 export const canPreview = (interventionStatus) =>
   ALLOWED_PREVIEW.includes(interventionStatus);
 
-export const canShareWithParticipants = (interventionStatus) =>
-  ALLOWED_SHARING_WITH_PARTICIPANTS.includes(interventionStatus);
+export const canInviteParticipants = (interventionStatus) =>
+  ALLOWED_INVITING_PARTICIPANTS.includes(interventionStatus);
+
+export const canCreatePredefinedParticipants = (interventionStatus) =>
+  ALLOWED_CREATING_PREDEFINED_PARTICIPANTS.includes(interventionStatus);
 
 export const canArchive = (interventionStatus) =>
   ALLOWED_ARCHIVE.includes(interventionStatus);

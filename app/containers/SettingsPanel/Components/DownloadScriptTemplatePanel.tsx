@@ -3,11 +3,7 @@ import { FormattedMessage } from 'react-intl';
 
 import Box from 'components/Box';
 import Text from 'components/Text';
-import { ImageButton } from 'components/Button';
-import FileDownload from 'components/FileDownload';
 import FileBox from 'components/FileBox';
-
-import downloadIcon from 'assets/svg/downloadCloud.svg';
 
 import messages from '../messages';
 
@@ -20,15 +16,7 @@ export const DownloadScriptTemplatePanel = () => {
       <Text mb={12}>
         <FormattedMessage {...messages.downloadTemplate} />
       </Text>
-      <FileBox
-        name={fileName}
-        url={templateUrl}
-        extraIcons={[
-          <FileDownload url={templateUrl} key={fileName}>
-            <ImageButton showHoverEffect src={downloadIcon} />
-          </FileDownload>,
-        ]}
-      />
+      <FileBox name={fileName} url={templateUrl} showDownloadIcon />
     </Box>
   );
 };

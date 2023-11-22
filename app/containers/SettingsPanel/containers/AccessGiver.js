@@ -19,7 +19,6 @@ import Column from 'components/Column';
 import CsvFileReader from 'components/CsvFileReader';
 import H2 from 'components/H2';
 import Row from 'components/Row';
-import UserList from 'containers/ShareBox/Components/UserList';
 import Spinner from 'components/Spinner';
 import ErrorAlert from 'components/ErrorAlert';
 
@@ -39,6 +38,7 @@ import {
 import Text from 'components/Text';
 import { accessGiverContainerSaga } from '../sagas';
 import messages from '../messages';
+import UserList from '../Components/UserList';
 
 const AccessGiver = ({
   intl: { formatMessage },

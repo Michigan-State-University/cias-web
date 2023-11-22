@@ -25,7 +25,8 @@ import {
   navbarMessages,
   NAVIGATION,
   navbarNames,
-  AllRoles,
+  PasswordAuthenticatedRoles,
+  AuthenticatedRoles,
 } from 'models/User/RolesManager';
 import RolesManagerContext from 'models/User/RolesManager/RolesManagerContext';
 import rootSaga from 'global/sagas/rootSaga';
@@ -69,6 +70,7 @@ import InboxPage from 'containers/InboxPage/Loadable';
 import ArchivePage from 'containers/ArchivePage/Loadable';
 import UserInterventionPage from 'containers/UserInterventionPage/Loadable';
 import VerifyShortLinkPage from 'containers/VerifyShortLinkPage/Loadable';
+import VerifyUserKeyPage from 'containers/VerifyUserKeyPage/Loadable';
 import AccessibilityStatementPage from 'containers/AccessibiltyStatementPage/Loadable';
 import ChatWidget from 'containers/ChatWidget';
 import NavigatorAvailabilityModal from 'containers/NavigatorAvailabilityModal';
@@ -90,7 +92,10 @@ import {
 import { arraysOverlap } from 'utils/arrayUtils';
 
 import { MODAL_PORTAL_ID, TOOLTIP_PORTAL_ID } from './constants';
-import { shouldFetchSelfDetailsOnPath } from './utils';
+import {
+  shouldFetchSelfDetailsOnPath,
+  shouldFetchSelfDetailsByUserRoles,
+} from './utils';
 
 export function App({ user, fetchSelfDetails }) {
   const { locale, formatMessage } = useIntl();
@@ -99,7 +104,11 @@ export function App({ user, fetchSelfDetails }) {
   useInjectSaga({ key: 'fetchSelfDetails', saga: fetchSelfDetailsSaga });
 
   useEffect(() => {
-    if (user && shouldFetchSelfDetailsOnPath(pathname)) {
+    if (
+      user &&
+      shouldFetchSelfDetailsOnPath(pathname) &&
+      shouldFetchSelfDetailsByUserRoles(user.roles)
+    ) {
       fetchSelfDetails();
     }
   }, []);
@@ -142,7 +151,12 @@ export function App({ user, fetchSelfDetails }) {
     if (user) {
       if (arraysOverlap(user.roles, [Roles.Admin, Roles.Researcher]))
         return <InterventionPage />;
-      if (arraysOverlap(user.roles, [Roles.Participant]))
+      if (
+        arraysOverlap(user.roles, [
+          Roles.Participant,
+          Roles.PredefinedParticipant,
+        ])
+      )
         return <ParticipantInterventionsPage />;
       if (arraysOverlap(user.roles, [Roles.ThirdParty]))
         return <GeneratedReportsPage disableFilter />;
@@ -202,7 +216,7 @@ export function App({ user, fetchSelfDetails }) {
           path={RoutePath.DASHBOARD}
           render={() => renderDashboardByRole()}
           protectedRoute
-          allowedRoles={AllRoles}
+          allowedRoles={AuthenticatedRoles}
           navbarProps={{
             navbarId: NAVIGATION.DEFAULT,
             activeTab: interventionsTabId,
@@ -342,8 +356,6 @@ export function App({ user, fetchSelfDetails }) {
           exact
           path={RoutePath.ANSWER_SESSION}
           component={AnswerSessionPage}
-          allowedRoles={AllRoles}
-          user
           navbarProps={{
             navbarId: NAVIGATION.DEFAULT,
             activeTab: interventionsTabId,
@@ -404,7 +416,10 @@ export function App({ user, fetchSelfDetails }) {
           path={RoutePath.USER_INTERVENTION}
           component={UserInterventionPage}
           protectedRoute
-          allowedRoles={[Roles.Participant]}
+          allowedRoles={[Roles.Participant, Roles.PredefinedParticipant]}
+          navbarProps={{
+            navbarId: NAVIGATION.DEFAULT,
+          }}
         />
         <AppRoute
           exact
@@ -501,7 +516,7 @@ export function App({ user, fetchSelfDetails }) {
           path={RoutePath.ACCOUNT_SETTINGS}
           component={AccountSettings}
           protectedRoute
-          allowedRoles={AllRoles}
+          allowedRoles={PasswordAuthenticatedRoles}
           navbarProps={{
             navbarId: NAVIGATION.DEFAULT,
             activeTab: null,
@@ -542,16 +557,16 @@ export function App({ user, fetchSelfDetails }) {
           path={RoutePath.ACCESSIBILITY_STATEMENT}
           component={AccessibilityStatementPage}
         />
-        <AppRoute
-          exact
-          path={RoutePath.FORBIDDEN}
-          component={ForbiddenPage}
-          allowedRoles={AllRoles}
-        />
+        <AppRoute exact path={RoutePath.FORBIDDEN} component={ForbiddenPage} />
         <AppRoute
           exact
           path={RoutePath.VERIFY_SHORT_LINK}
           component={VerifyShortLinkPage}
+        />
+        <AppRoute
+          exact
+          path={RoutePath.VERIFY_USER_KEY}
+          component={VerifyUserKeyPage}
         />
         <AppRoute exact path={RoutePath.NOT_FOUND} component={NotFoundPage} />
         <AppRoute path={WILDCARD_PATH}>

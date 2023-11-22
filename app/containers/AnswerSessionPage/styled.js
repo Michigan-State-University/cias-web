@@ -4,9 +4,17 @@ import { elements, colors, mediaQuery, themeColors } from 'theme';
 import { sizes, DESKTOP_MODE } from 'utils/previewMode';
 
 import { Button } from 'components/Button';
+import GhostLink from 'components/GhostLink';
 import { additionalBreakpoints } from 'components/Container/containerBreakpoints';
 
 export const StyledButton = styled(Button)`
+  width: ${({ isDesktop }) => (isDesktop ? '40%' : '80%')};
+  ${mediaQuery.mobile`
+    width: 80%;
+  `}
+`;
+
+export const StyledGhostLink = styled(GhostLink)`
   width: ${({ isDesktop }) => (isDesktop ? '40%' : '80%')};
   ${mediaQuery.mobile`
     width: 80%;

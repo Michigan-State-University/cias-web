@@ -36,4 +36,8 @@ export default defineMessages({
     id: `${scope}.noUnreadNotifications`,
     defaultMessage: "You don't have any unread notifications.",
   },
+  defaultDisplayedName: {
+    id: `${scope}.defaultDisplayedName`,
+    defaultMessage: 'My account',
+  },
 });
