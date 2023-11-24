@@ -56,6 +56,11 @@ export const ExportedFilePanel = ({ file, onExport, loading }: Props) => {
           })}
         </Text>
         <Row marginBlockStart={40} gap={12} justify="center">
+          <FileDownload url={url} fileName={filename}>
+            <Button width="auto" px={32}>
+              {formatMessage(messages.downloadFileButtonLabel)}
+            </Button>
+          </FileDownload>
           <Button
             width="auto"
             inverted
@@ -65,11 +70,6 @@ export const ExportedFilePanel = ({ file, onExport, loading }: Props) => {
           >
             {formatMessage(messages.updateFileButtonLabel)}
           </Button>
-          <FileDownload url={url} fileName={filename}>
-            <Button width="auto" px={32}>
-              {formatMessage(messages.downloadFileButtonLabel)}
-            </Button>
-          </FileDownload>
         </Row>
       </Column>
     </>
