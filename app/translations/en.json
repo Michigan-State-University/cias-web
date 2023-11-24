@@ -175,7 +175,7 @@
   "app.components.ExportModal.fileBoxLabel": "Your generated file:",
   "app.components.ExportModal.fileGeneratedAt": "File generated at {date}",
   "app.components.ExportModal.spinnerIconAlt": "Spinner",
-  "app.components.ExportModal.updateFileButtonLabel": "Update file with new data",
+  "app.components.ExportModal.updateFileButtonLabel": "Generate new file",
   "app.components.FileDisplayItem.file": "File",
   "app.components.FileInput.browseFiles": "Browse files",
   "app.components.FileInput.dragAndDropError": "Couldn't upload a file",

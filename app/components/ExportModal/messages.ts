@@ -13,7 +13,7 @@ export default defineMessages({
   },
   updateFileButtonLabel: {
     id: `${scope}.updateFileButtonLabel`,
-    defaultMessage: 'Update file with new data',
+    defaultMessage: 'Generate new file',
   },
   downloadFileButtonLabel: {
     id: `${scope}.downloadFileButtonLabel`,
