@@ -59,6 +59,8 @@ export interface Session {
   multipleFill: boolean;
   autofinishEnabled: boolean;
   autofinishDelay: number;
+  autocloseEnabled: boolean;
+  autocloseAt: Nullable<string>;
 }
 
 export interface ClassicSession extends Session {

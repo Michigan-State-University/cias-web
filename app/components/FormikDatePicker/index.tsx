@@ -1,9 +1,11 @@
 import React, { PropsWithChildren } from 'react';
-import { useField } from 'formik';
+import { useField, useFormikContext } from 'formik';
 import DatePicker, { ReactDatePickerProps } from 'react-datepicker';
 import isNil from 'lodash/isNil';
 
 import { colors } from 'theme';
+
+import useDidUpdateEffect from 'utils/useDidUpdateEffect';
 
 import { DatePickerWrapper } from 'components/Input/styled';
 import Input from 'components/Input';
@@ -17,6 +19,7 @@ export type Props = PropsWithChildren<{
   disabled?: boolean;
   datePickerProps?: Partial<ReactDatePickerProps>;
   inputProps?: React.HTMLProps<HTMLButtonElement> & Record<string, unknown>;
+  submitOnChange?: boolean;
 }> &
   Record<string, unknown>;
 
@@ -28,13 +31,22 @@ const FormikDatePicker = ({
   children,
   datePickerProps,
   inputProps,
+  submitOnChange,
   ...columnStyleProps
 }: Props) => {
+  const { submitForm } = useFormikContext();
+
   const [field, meta, helpers] = useField(formikKey);
   const { error, touched } = meta;
   const { setValue } = helpers;
 
   const hasError = touched && !isNil(error);
+
+  useDidUpdateEffect(() => {
+    if (submitOnChange) {
+      submitForm();
+    }
+  }, [field.value]);
 
   return (
     <FormikControlLayout

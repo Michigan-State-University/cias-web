@@ -27,10 +27,12 @@ import {
   Sex,
 } from 'models/HfhsPatient';
 import { ApiMessageError } from 'models/Api';
+import { QuestionTypes } from 'models/Question';
 
 import {
   nameValidationSchema,
   requiredValidationSchema,
+  requiredDateValidationSchema,
 } from 'utils/validators';
 import { getUTCDateString } from 'utils/dateUtils';
 
@@ -53,7 +55,6 @@ import { formatPhoneNumberForHfhs, parsePhoneNumberFromHfhs } from '../utils';
 import { ActionButtons } from '../components/ActionButtons';
 import { ApiErrorMessage } from '../components/ApiErrorMessage';
 import messages from './messages';
-import { QuestionTypes } from '../../../models/Question';
 
 const inputStyles = {
   width: '100%',
@@ -87,9 +88,7 @@ const schema = (formatMessage: IntlShape['formatMessage']) =>
       sexOption: Yup.object()
         .required(formatMessage(validatorsMessages.required))
         .nullable(),
-      dobDate: Yup.date()
-        .required(formatMessage(validatorsMessages.required))
-        .nullable(),
+      dobDate: requiredDateValidationSchema,
       zipCode: requiredValidationSchema.matches(
         zipCodeRegex,
         formatMessage(validatorsMessages.zipCode),

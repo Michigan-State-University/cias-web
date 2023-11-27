@@ -62,6 +62,8 @@ const SessionSettings = ({
   multipleFill,
   autofinishEnabled,
   autofinishDelay,
+  autocloseEnabled,
+  autocloseAt,
   editingPossible,
 }) => {
   useInjectReducer({ key: 'intervention', reducer: interventionReducer });
@@ -232,6 +234,8 @@ const SessionSettings = ({
                 disabled={!editingPossible}
                 autofinishEnabled={autofinishEnabled}
                 autofinishDelay={autofinishDelay}
+                autocloseEnabled={autocloseEnabled}
+                autocloseAt={autocloseAt}
                 onSubmit={editSession}
               />
             </Column>
@@ -317,6 +321,8 @@ SessionSettings.propTypes = {
   multipleFill: PropTypes.bool,
   autofinishEnabled: PropTypes.bool,
   autofinishDelay: PropTypes.number,
+  autocloseEnabled: PropTypes.bool,
+  autocloseAt: PropTypes.string,
   editingPossible: PropTypes.bool,
 };
 

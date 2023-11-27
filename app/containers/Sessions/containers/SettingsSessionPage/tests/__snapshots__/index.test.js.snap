@@ -51,16 +51,6 @@ exports[`<SettingsSessionPage /> Should render and match the snapshot 1`] = `
   color: unset;
 }
 
-.c35 {
-  width: auto;
-  height: auto;
-  display: block;
-  border-radius: 5px;
-  cursor: not-allowed;
-  opacity: 0.5;
-  color: unset;
-}
-
 .c6 {
   margin: 0;
   font-family: DM Sans;
@@ -81,7 +71,7 @@ exports[`<SettingsSessionPage /> Should render and match the snapshot 1`] = `
   color: #2F3850;
 }
 
-.c37 {
+.c30 {
   margin: 0;
   font-family: DM Sans;
   font-size: 15px;
@@ -90,7 +80,7 @@ exports[`<SettingsSessionPage /> Should render and match the snapshot 1`] = `
   color: #2F3850;
 }
 
-.c40 {
+.c33 {
   margin: 0;
   font-family: DM Sans;
   font-size: 15px;
@@ -191,7 +181,7 @@ exports[`<SettingsSessionPage /> Should render and match the snapshot 1`] = `
   gap: 8px;
 }
 
-.c30 {
+.c29 {
   display: -webkit-box;
   display: -webkit-flex;
   display: -ms-flexbox;
@@ -200,18 +190,11 @@ exports[`<SettingsSessionPage /> Should render and match the snapshot 1`] = `
   -ms-flex-direction: row;
   flex-direction: row;
   height: auto;
-  gap: 16px;
-}
-
-.c32 {
-  display: -webkit-box;
-  display: -webkit-flex;
-  display: -ms-flexbox;
-  display: flex;
-  -webkit-flex-direction: row;
-  -ms-flex-direction: row;
-  flex-direction: row;
-  height: auto;
+  -webkit-box-pack: justify;
+  -webkit-justify-content: space-between;
+  -ms-flex-pack: justify;
+  justify-content: space-between;
+  justify-items: space-between;
   -webkit-align-content: center;
   -ms-flex-line-pack: center;
   align-content: center;
@@ -219,10 +202,11 @@ exports[`<SettingsSessionPage /> Should render and match the snapshot 1`] = `
   -webkit-box-align: center;
   -ms-flex-align: center;
   align-items: center;
+  margin-top: 32px;
   width: 100%;
 }
 
-.c38 {
+.c31 {
   display: -webkit-box;
   display: -webkit-flex;
   display: -ms-flexbox;
@@ -248,7 +232,7 @@ exports[`<SettingsSessionPage /> Should render and match the snapshot 1`] = `
   border-bottom: 1px solid #E9F1FB;
 }
 
-.c41 {
+.c34 {
   display: -webkit-box;
   display: -webkit-flex;
   display: -ms-flexbox;
@@ -259,7 +243,7 @@ exports[`<SettingsSessionPage /> Should render and match the snapshot 1`] = `
   height: auto;
 }
 
-.c42 {
+.c35 {
   display: -webkit-box;
   display: -webkit-flex;
   display: -ms-flexbox;
@@ -277,14 +261,6 @@ exports[`<SettingsSessionPage /> Should render and match the snapshot 1`] = `
   height: auto;
 }
 
-.c36 {
-  width: auto;
-  height: auto;
-  -webkit-transition: -webkit-transform 0.2s;
-  -webkit-transition: transform 0.2s;
-  transition: transform 0.2s;
-}
-
 .c22 {
   font-family: DM Sans;
   font-size: 13px;
@@ -292,19 +268,7 @@ exports[`<SettingsSessionPage /> Should render and match the snapshot 1`] = `
   color: #2F3850;
 }
 
-.c31 {
-  font-family: DM Sans;
-  font-size: 13px;
-  line-height: 130%;
-  margin-bottom: 5px;
-  font-size: 13px;
-  color: #2F3850;
-  width: -webkit-fit-content;
-  width: -moz-fit-content;
-  width: fit-content;
-}
-
-.c39 {
+.c32 {
   font-family: DM Sans;
   font-size: 13px;
   line-height: 130%;
@@ -312,7 +276,7 @@ exports[`<SettingsSessionPage /> Should render and match the snapshot 1`] = `
   color: #2F3850;
 }
 
-.c51 {
+.c44 {
   font-family: DM Sans;
   font-size: 13px;
   line-height: 130%;
@@ -331,19 +295,7 @@ exports[`<SettingsSessionPage /> Should render and match the snapshot 1`] = `
   width: 100%;
 }
 
-.c34 {
-  display: -webkit-box;
-  display: -webkit-flex;
-  display: -ms-flexbox;
-  display: flex;
-  -webkit-flex-direction: column;
-  -ms-flex-direction: column;
-  flex-direction: column;
-  width: 100%;
-  margin-top: 20px;
-}
-
-.c43 {
+.c36 {
   display: -webkit-box;
   display: -webkit-flex;
   display: -ms-flexbox;
@@ -429,27 +381,6 @@ exports[`<SettingsSessionPage /> Should render and match the snapshot 1`] = `
   color: #ABBBD1;
 }
 
-.c33 {
-  padding: 12px;
-  border-style: solid;
-  border-width: 1px;
-  border-color: #E9F1FB;
-  border-radius: 5px;
-  width: 100%;
-  color: #2F3850;
-  opacity: 0.5;
-}
-
-.c33:focus {
-  box-shadow: none;
-  outline: none;
-  border-color: #107969;
-}
-
-.c33:disabled {
-  color: #ABBBD1;
-}
-
 .c10 {
   padding: 5px 10px;
   font-size: 13px;
@@ -466,16 +397,16 @@ exports[`<SettingsSessionPage /> Should render and match the snapshot 1`] = `
   border: 1px solid transparent;
 }
 
-.c46 {
+.c39 {
   display: none;
 }
 
-.c45:disabled + label > .c49 {
+.c38:disabled + label > .c42 {
   opacity: 0.5;
   cursor: not-allowed;
 }
 
-.c48 {
+.c41 {
   width: 100%;
   display: -webkit-box;
   display: -webkit-flex;
@@ -487,36 +418,24 @@ exports[`<SettingsSessionPage /> Should render and match the snapshot 1`] = `
   align-items: center;
 }
 
-.c48:hover {
+.c41:hover {
   cursor: pointer;
 }
 
-.c45:disabled + .c47 {
+.c38:disabled + .c40 {
   opacity: 0.5;
   cursor: not-allowed;
 }
 
-.c50 {
+.c43 {
   margin-inline-start: 5px;
 }
 
-.c44 {
+.c37 {
   width: 100%;
   padding: 16px;
   border: 1px solid #E9F1FB;
   border-radius: 5px;
-}
-
-.c29 {
-  -webkit-flex: 1;
-  -ms-flex: 1;
-  flex: 1;
-  border-top: 1px solid;
-  width: 100%;
-  height: 0;
-  border-color: #E9F1FB;
-  margin-top: 15px;
-  margin-bottom: 15px;
 }
 
 .c25 {
@@ -638,22 +557,6 @@ exports[`<SettingsSessionPage /> Should render and match the snapshot 1`] = `
 
 .c3 {
   padding-block: 25px;
-}
-
-@media only screen and (min-width:768px) {
-
-}
-
-@media only screen and (min-width:960px) {
-
-}
-
-@media only screen and (min-width:1170px) {
-
-}
-
-@media only screen and (min-width:1360px) {
-
 }
 
 @media only screen and (min-width:768px) {
@@ -827,177 +730,134 @@ exports[`<SettingsSessionPage /> Should render and match the snapshot 1`] = `
             class="c5"
           >
             <div
-              class="c4"
-            >
-              <div
-                class="c12"
-              >
-                <input
-                  aria-checked="false"
-                  aria-disabled="true"
-                  class="c14 c15"
-                  data-cy="branching-intervention-toggle"
-                  data-testid="switch-input"
-                  disabled=""
-                  id="autofinishEnabled"
-                  role="switch"
-                  type="checkbox"
-                />
-                <label
-                  class="c16 c17"
-                  for="autofinishEnabled"
-                >
-                  <div
-                    class="c18"
-                    name="autofinishEnabled"
-                    width="100%"
-                  >
-                    <div
-                      class="c19 c20"
-                    >
-                      <div
-                        class="c21"
-                      >
-                        Set Autofinish timer
-                        <div
-                          class="c23"
-                          display="flex"
-                        >
-                          <div
-                            class="c19"
-                            data-for="autofinish-enabled-tooltip-info"
-                            data-tip=""
-                          >
-                            <img
-                              alt="?"
-                              class="c24"
-                              src="IMAGE_MOCK"
-                            />
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                    <div
-                      class="c25"
-                    >
-                      <span
-                        class="c26 c27"
-                      />
-                    </div>
-                  </div>
-                </label>
-              </div>
-            </div>
-            <div
-              class="c29"
-              color="#E9F1FB"
-              orientation="0"
-            />
-            <div
-              class="c30"
+              class="c5"
             >
               <div
                 class="c4"
               >
-                <label
-                  for="autofinishDelay"
-                >
-                  <p
-                    class="c31"
-                    font-size="13"
-                    width="fit-content"
-                  >
-                    Autofinish delay
-                  </p>
-                </label>
                 <div
-                  class="c32"
-                  width="100%"
+                  class="c12"
                 >
                   <input
-                    class="c33"
-                    dir="auto"
+                    aria-checked="false"
+                    aria-disabled="true"
+                    class="c14 c15"
+                    data-cy="branching-intervention-toggle"
+                    data-testid="switch-input"
                     disabled=""
-                    id="autofinishDelay"
-                    name="autofinishDelay"
-                    type="text"
-                    value=""
-                    width="100%"
+                    id="autofinishEnabled"
+                    role="switch"
+                    type="checkbox"
                   />
-                </div>
-              </div>
-              <div
-                class="c34"
-              >
-                <div
-                  class="c35"
-                  cursor="not-allowed"
-                  data-testid="select"
-                  disabled=""
-                >
-                  <div
-                    class=" css-14jk2my-container"
+                  <label
+                    class="c16 c17"
+                    for="autofinishEnabled"
                   >
-                    <span
-                      aria-atomic="false"
-                      aria-live="polite"
-                      aria-relevant="additions text"
-                      class="css-1f43avz-a11yText-A11yText"
-                    />
                     <div
-                      class=" css-vz7ypb-control"
+                      class="c18"
+                      name="autofinishEnabled"
+                      width="100%"
                     >
                       <div
-                        class=" css-g1d714-ValueContainer"
+                        class="c19 c20"
                       >
                         <div
-                          class=" css-107lb6w-singleValue"
+                          class="c21"
                         >
-                          minutes
-                        </div>
-                        <div
-                          class="css-1bwsx9e-Input"
-                        >
+                          Set Autofinish timer
                           <div
-                            class=""
-                            style="display: inline-block;"
+                            class="c23"
+                            display="flex"
                           >
-                            <input
-                              aria-autocomplete="list"
-                              autocapitalize="none"
-                              autocomplete="off"
-                              autocorrect="off"
-                              disabled=""
-                              id="timeUnit"
-                              spellcheck="false"
-                              style="box-sizing: content-box; width: 2px; border: 0px; opacity: 1; outline: 0; padding: 0px;"
-                              tabindex="0"
-                              type="text"
-                              value=""
-                            />
                             <div
-                              style="position: absolute; top: 0px; left: 0px; visibility: hidden; height: 0px; overflow: scroll; white-space: pre; font-family: -webkit-small-control; letter-spacing: normal; text-transform: none;"
-                            />
+                              class="c19"
+                              data-for="autofinish-enabled-tooltip-info"
+                              data-tip=""
+                            >
+                              <img
+                                alt="?"
+                                class="c24"
+                                src="IMAGE_MOCK"
+                              />
+                            </div>
                           </div>
                         </div>
                       </div>
                       <div
-                        class=" css-1hb7zxy-IndicatorsContainer"
+                        class="c25"
                       >
-                        <div
-                          aria-hidden="true"
-                          class=" css-tlfecz-indicatorContainer"
-                        >
-                          <img
-                            alt="arrow"
-                            class="c36"
-                            src="IMAGE_MOCK"
-                            transform=""
-                          />
-                        </div>
+                        <span
+                          class="c26 c27"
+                        />
                       </div>
                     </div>
-                  </div>
+                  </label>
+                </div>
+              </div>
+            </div>
+            <div
+              class="c5"
+            >
+              <div
+                class="c4"
+              >
+                <div
+                  class="c12"
+                >
+                  <input
+                    aria-checked="false"
+                    aria-disabled="true"
+                    class="c14 c15"
+                    data-cy="branching-intervention-toggle"
+                    data-testid="switch-input"
+                    disabled=""
+                    id="autocloseEnabled"
+                    role="switch"
+                    type="checkbox"
+                  />
+                  <label
+                    class="c16 c17"
+                    for="autocloseEnabled"
+                  >
+                    <div
+                      class="c29"
+                      name="autocloseEnabled"
+                      width="100%"
+                    >
+                      <div
+                        class="c19 c20"
+                      >
+                        <div
+                          class="c21"
+                        >
+                          Set session close date
+                          <div
+                            class="c23"
+                            display="flex"
+                          >
+                            <div
+                              class="c19"
+                              data-for="autoclose-enabled-tooltip-info"
+                              data-tip=""
+                            >
+                              <img
+                                alt="?"
+                                class="c24"
+                                src="IMAGE_MOCK"
+                              />
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                      <div
+                        class="c25"
+                      >
+                        <span
+                          class="c26 c27"
+                        />
+                      </div>
+                    </div>
+                  </label>
                 </div>
               </div>
             </div>
@@ -1013,12 +873,12 @@ exports[`<SettingsSessionPage /> Should render and match the snapshot 1`] = `
           class="c4"
         >
           <h3
-            class="c37"
+            class="c30"
           >
             Narrator Settings
           </h3>
           <div
-            class="c38"
+            class="c31"
           >
             <div
               class="c12 c13"
@@ -1050,7 +910,7 @@ exports[`<SettingsSessionPage /> Should render and match the snapshot 1`] = `
                       class="c21"
                     >
                       <p
-                        class="c39"
+                        class="c32"
                         font-weight="bold"
                       >
                         Narrator Active
@@ -1069,7 +929,7 @@ exports[`<SettingsSessionPage /> Should render and match the snapshot 1`] = `
             </div>
           </div>
           <div
-            class="c38"
+            class="c31"
           >
             <div
               class="c12 c13"
@@ -1169,39 +1029,39 @@ exports[`<SettingsSessionPage /> Should render and match the snapshot 1`] = `
             </div>
           </div>
           <h3
-            class="c40"
+            class="c33"
           >
             Default narrator
           </h3>
           <div
-            class="c41"
+            class="c34"
           >
             <div
-              class="c42"
+              class="c35"
               width="100%"
             >
               <div
-                class="c43"
+                class="c36"
               >
                 <div
-                  class="c12 c44"
+                  class="c12 c37"
                 >
                   <input
-                    class="c45 c46"
+                    class="c38 c39"
                     disabled=""
                     id="character-setting-peedy"
                     type="radio"
                   />
                   <label
-                    class="c47 c48"
+                    class="c40 c41"
                     for="character-setting-peedy"
                   >
                     <img
-                      class="c49 "
+                      class="c42 "
                       src="IMAGE_MOCK"
                     />
                     <div
-                      class="c19 c50"
+                      class="c19 c43"
                     >
                       <div
                         class="c12"
@@ -1210,7 +1070,7 @@ exports[`<SettingsSessionPage /> Should render and match the snapshot 1`] = `
                           class="c19"
                         >
                           <p
-                            class="c51"
+                            class="c44"
                           >
                             Peedy
                           </p>
@@ -1228,27 +1088,27 @@ exports[`<SettingsSessionPage /> Should render and match the snapshot 1`] = `
                 </div>
               </div>
               <div
-                class="c43"
+                class="c36"
               >
                 <div
-                  class="c12 c44"
+                  class="c12 c37"
                 >
                   <input
-                    class="c45 c46"
+                    class="c38 c39"
                     disabled=""
                     id="character-setting-emmi"
                     type="radio"
                   />
                   <label
-                    class="c47 c48"
+                    class="c40 c41"
                     for="character-setting-emmi"
                   >
                     <img
-                      class="c49 "
+                      class="c42 "
                       src="IMAGE_MOCK"
                     />
                     <div
-                      class="c19 c50"
+                      class="c19 c43"
                     >
                       <div
                         class="c12"
@@ -1257,7 +1117,7 @@ exports[`<SettingsSessionPage /> Should render and match the snapshot 1`] = `
                           class="c19"
                         >
                           <p
-                            class="c51"
+                            class="c44"
                           >
                             Emmi
                           </p>

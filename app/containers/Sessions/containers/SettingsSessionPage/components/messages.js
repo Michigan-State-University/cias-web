@@ -35,6 +35,18 @@ export default defineMessages({
     id: `${scope}.autofinishDelayLabel`,
     defaultMessage: 'Autofinish delay',
   },
+  autocloseEnabledLabel: {
+    id: `${scope}.autocloseEnabledLabel`,
+    defaultMessage: 'Set session close date',
+  },
+  autocloseTooltip: {
+    id: `${scope}.autocloseTooltip`,
+    defaultMessage: `Select a time to automatically close the session. This will prevent participants from accessing the session after the selected time.`,
+  },
+  autocloseAtLabel: {
+    id: `${scope}.autocloseAtLabel`,
+    defaultMessage: 'Session close date',
+  },
   hours: {
     id: `${scope}.hours`,
     defaultMessage: 'hours',

@@ -5,3 +5,4 @@ export * from './emailValidator';
 export * from './currencyValidator';
 export * from './generalValidators';
 export * from './stringValidators';
+export * from './dateValidators';

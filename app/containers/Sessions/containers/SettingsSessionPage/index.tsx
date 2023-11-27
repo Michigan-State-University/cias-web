@@ -36,6 +36,8 @@ const SettingsSessionPage = () => {
     multipleFill,
     autofinishEnabled,
     autofinishDelay,
+    autocloseEnabled,
+    autocloseAt,
   } = session;
   useInjectReducer({ key: 'session', reducer: sessionReducer });
   useInjectSaga({ key: 'getSession', saga: getSessionSaga });
@@ -73,6 +75,8 @@ const SettingsSessionPage = () => {
           multipleFill={multipleFill}
           autofinishEnabled={autofinishEnabled}
           autofinishDelay={autofinishDelay}
+          autocloseEnabled={autocloseEnabled}
+          autocloseAt={autocloseAt}
         />
       </Box>
     </>

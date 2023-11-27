@@ -1,78 +1,27 @@
 import React from 'react';
-import { Formik } from 'formik';
-import { FormikConfig } from 'formik/dist/types';
-import * as Yup from 'yup';
-import isEmpty from 'lodash/isEmpty';
 import { useIntl } from 'react-intl';
-
-import {
-  naturalNumberValidationSchema,
-  requiredValidationSchema,
-} from 'utils/validators';
-import { objectDifference } from 'utils/objectDifference';
 
 import H3 from 'components/H3';
 
-import { SelectOption } from 'components/Select/types';
 import messages from './messages';
-import { InputContainer } from './styled';
-import { AutofinishTimeUnit, SessionSettingsFormValues } from './types';
-import { AutofinishControls } from './AutofinishControls';
+import { SessionSettingsSubmitFormValues } from './types';
+import { AutofinishForm } from './AutofinishForm';
+import { AutocloseForm } from './AutocloseForm';
 
 export type Props = {
   disabled: boolean;
-  onSubmit: (changes: Partial<SessionSettingsFormValues>) => void;
-} & SessionSettingsFormValues;
-
-type FormikValues = SessionSettingsFormValues & {
-  timeUnit: SelectOption<AutofinishTimeUnit>;
-};
+  onSubmit: (changes: Partial<SessionSettingsSubmitFormValues>) => void;
+} & SessionSettingsSubmitFormValues;
 
 export const SessionSettingsForm: React.FC<Props> = ({
   disabled,
   autofinishEnabled,
   autofinishDelay,
+  autocloseEnabled,
+  autocloseAt,
   onSubmit,
 }) => {
   const { formatMessage } = useIntl();
-
-  const HOURS_OPTION = {
-    value: AutofinishTimeUnit.HOURS,
-    label: formatMessage(messages.hours),
-  };
-  const MINUTES_OPTION = {
-    value: AutofinishTimeUnit.MINUTES,
-    label: formatMessage(messages.minutes),
-  };
-
-  const initialValues: FormikValues = {
-    autofinishEnabled,
-    autofinishDelay:
-      autofinishDelay % 60 === 0 ? autofinishDelay / 60 : autofinishDelay,
-    timeUnit: autofinishDelay % 60 === 0 ? HOURS_OPTION : MINUTES_OPTION,
-  };
-
-  const validationSchema = Yup.object({
-    autofinishDelay: Yup.string().when('autofinishEnabled', {
-      is: (value) => !!value,
-      then: naturalNumberValidationSchema.concat(requiredValidationSchema),
-    }),
-  });
-
-  const handleSubmit: FormikConfig<FormikValues>['onSubmit'] = (values) => {
-    const changes = objectDifference(
-      { autofinishEnabled, autofinishDelay },
-      {
-        autofinishEnabled: values.autofinishEnabled,
-        autofinishDelay:
-          +values.autofinishDelay *
-          (values.timeUnit.value === AutofinishTimeUnit.HOURS ? 60 : 1),
-      },
-    );
-    if (!isEmpty(changes)) {
-      onSubmit(changes);
-    }
-  };
 
   return (
     <>
@@ -80,24 +29,18 @@ export const SessionSettingsForm: React.FC<Props> = ({
         {formatMessage(messages.autofinishSettings)}
       </H3>
 
-      <Formik
-        enableReinitialize
-        validateOnBlur={false}
-        initialValues={initialValues}
-        validationSchema={validationSchema}
-        onSubmit={handleSubmit}
-      >
-        {({ submitForm, values }) => (
-          <InputContainer>
-            <AutofinishControls
-              disabled={disabled}
-              values={values}
-              submitForm={submitForm}
-              timeUnitOptions={[HOURS_OPTION, MINUTES_OPTION]}
-            />
-          </InputContainer>
-        )}
-      </Formik>
+      <AutofinishForm
+        disabled={disabled}
+        autofinishEnabled={autofinishEnabled}
+        autofinishDelay={autofinishDelay}
+        onSubmit={onSubmit}
+      />
+      <AutocloseForm
+        disabled={disabled}
+        autocloseEnabled={autocloseEnabled}
+        autocloseAt={autocloseAt}
+        onSubmit={onSubmit}
+      />
     </>
   );
 };
