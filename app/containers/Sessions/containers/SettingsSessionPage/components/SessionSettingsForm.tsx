@@ -5,8 +5,6 @@ import * as Yup from 'yup';
 import isEmpty from 'lodash/isEmpty';
 import { useIntl } from 'react-intl';
 
-import { colors } from 'theme';
-
 import {
   naturalNumberValidationSchema,
   requiredValidationSchema,
@@ -14,26 +12,17 @@ import {
 import { objectDifference } from 'utils/objectDifference';
 
 import H3 from 'components/H3';
-import Divider, { Orientation } from 'components/Divider';
 
-import FormikInput from 'components/FormikInput';
-import FormikSelect from 'components/FormikSelect';
-import Row from 'components/Row';
 import { SelectOption } from 'components/Select/types';
 import messages from './messages';
 import { InputContainer } from './styled';
-import { SessionSettingsFormValues } from './types';
-import { AutofinishEnabledControl } from './AutofinishEnabledControl';
+import { AutofinishTimeUnit, SessionSettingsFormValues } from './types';
+import { AutofinishControls } from './AutofinishControls';
 
 export type Props = {
   disabled: boolean;
   onSubmit: (changes: Partial<SessionSettingsFormValues>) => void;
 } & SessionSettingsFormValues;
-
-export enum AutofinishTimeUnit {
-  HOURS = 'h',
-  MINUTES = 'm',
-}
 
 type FormikValues = SessionSettingsFormValues & {
   timeUnit: SelectOption<AutofinishTimeUnit>;
@@ -100,34 +89,12 @@ export const SessionSettingsForm: React.FC<Props> = ({
       >
         {({ submitForm, values }) => (
           <InputContainer>
-            <AutofinishEnabledControl disabled={disabled} />
-
-            <Divider
-              orientation={Orientation.HORIZONTAL}
-              my={15}
-              color={colors.linkWater}
+            <AutofinishControls
+              disabled={disabled}
+              values={values}
+              submitForm={submitForm}
+              timeUnitOptions={[HOURS_OPTION, MINUTES_OPTION]}
             />
-            <Row gap={16}>
-              <FormikInput
-                formikKey="autofinishDelay"
-                labelProps={{
-                  fontSize: 13,
-                }}
-                label={formatMessage(messages.autofinishDelayLabel)}
-                onBlur={submitForm}
-                disabled={disabled || !values.autofinishEnabled}
-                inputProps={{
-                  width: '100%',
-                }}
-              />
-              <FormikSelect
-                formikKey="timeUnit"
-                options={[HOURS_OPTION, MINUTES_OPTION]}
-                disabled={disabled || !values.autofinishEnabled}
-                columnStyleProps={{ mt: 20 }}
-                submitOnChange
-              />
-            </Row>
           </InputContainer>
         )}
       </Formik>

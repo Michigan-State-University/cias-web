@@ -4,3 +4,8 @@ export type SessionSettingsFormValues = Pick<
   Session,
   'autofinishEnabled' | 'autofinishDelay'
 >;
+
+export enum AutofinishTimeUnit {
+  HOURS = 'h',
+  MINUTES = 'm',
+}
