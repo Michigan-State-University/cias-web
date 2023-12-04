@@ -2,7 +2,7 @@ import React, { useMemo } from 'react';
 import PropTypes from 'prop-types';
 import { Col } from 'react-grid-system';
 
-import globalMessages from 'global/i18n/globalMessages';
+import interventionStatusesMessages from 'global/i18n/interventionStatusesMessages';
 
 import Select from 'components/Select';
 import messages from './messages';
@@ -10,16 +10,16 @@ import messages from './messages';
 const StatusFilter = ({ formatMessage, onChange, active }) => {
   const options = useMemo(
     () =>
-      Object.keys(globalMessages.statuses).map((status) => ({
+      Object.keys(interventionStatusesMessages).map((status) => ({
         value: status,
-        label: formatMessage(globalMessages.statuses[status]),
+        label: formatMessage(interventionStatusesMessages[status]),
       })),
-    [globalMessages.statuses],
+    [interventionStatusesMessages],
   );
 
   const selectValue = active.map((status) => ({
     value: status,
-    label: formatMessage(globalMessages.statuses[status]),
+    label: formatMessage(interventionStatusesMessages[status]),
   }));
 
   const handleChange = (values) => onChange(values.map(({ value }) => value));

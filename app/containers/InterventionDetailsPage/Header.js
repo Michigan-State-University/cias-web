@@ -7,7 +7,7 @@ import { themeColors } from 'theme';
 import { CatMhLicenseType, SensitiveDataState } from 'models/Intervention';
 import { useRoleManager } from 'models/User/RolesManager';
 
-import globalMessages from 'global/i18n/globalMessages';
+import interventionStatusesMessages from 'global/i18n/interventionStatusesMessages';
 import { RoutePath } from 'global/constants';
 
 import { parametrizeRoutePath } from 'utils/router';
@@ -21,6 +21,8 @@ import { selectInputText } from 'components/Input/utils';
 import { CollaboratingIndicator } from 'components/CollaboratingIndicator';
 import { DataClearedIndicator } from 'components/DataClearedIndicator';
 import { HelpIconTooltip } from 'components/HelpIconTooltip';
+import { Button } from 'components/Button';
+import Column from 'components/Column';
 
 import InterventionStatusButtons from './components/InterventionStatusButtons';
 import { StatusLabel, InterventionOptions } from './styled';
@@ -35,13 +37,9 @@ const Header = ({
   name,
   editName,
   handleChangeStatus,
-  handleSendCsv,
-  csvGeneratedAt,
-  csvFilename,
   interventionId,
   options,
   organizationId,
-  canAccessCsv,
   interventionType,
   userOrganizableId,
   hasCollaborators,
@@ -51,6 +49,8 @@ const Header = ({
   catMhPool,
   createdCatMhSessionCount,
   sessions,
+  openExportCsvModal,
+  canAccessParticipantsData,
 }) => {
   const { formatMessage } = useIntl();
   const screenClass = useScreenClass();
@@ -82,6 +82,21 @@ const Header = ({
     );
   }, [organizationId]);
 
+  const isWrappedLayout = !['xl', 'xxl'].includes(screenClass);
+
+  const interventionStatus = (
+    <Row align="center" gap={12}>
+      <Box>
+        <StatusLabel status={status}>
+          {status && formatMessage(interventionStatusesMessages[status])}
+        </StatusLabel>
+      </Box>
+      {sensitiveDataState === SensitiveDataState.REMOVED && (
+        <DataClearedIndicator opacity={1} showTooltip />
+      )}
+    </Row>
+  );
+
   return (
     <GCol>
       <GRow xl={12}>
@@ -92,9 +107,14 @@ const Header = ({
         </GCol>
       </GRow>
 
-      <GRow>
-        <GCol xl={7} lg={12}>
-          <Row justify="end" align="center" mt={16} gap={12}>
+      <Row
+        columnGap={16}
+        rowGap={8}
+        direction={isWrappedLayout ? 'column' : 'row'}
+        marginBlockStart={16}
+      >
+        <Column flex={1} gap={8}>
+          <Row justify="end" align="center" gap={12}>
             {hasCollaborators && <CollaboratingIndicator iconSize={20} />}
             <StyledInput
               disabled={!editingPossible}
@@ -119,79 +139,71 @@ const Header = ({
               sessions={sessions}
             />
           </Row>
-          <Row align="center" mt={8} gap={12}>
-            <Box>
-              <StatusLabel status={status}>
-                {status && formatMessage(globalMessages.statuses[status])}
-              </StatusLabel>
-            </Box>
-            {sensitiveDataState === SensitiveDataState.REMOVED && (
-              <DataClearedIndicator opacity={1} showTooltip />
-            )}
-          </Row>
-        </GCol>
+          {!isWrappedLayout && interventionStatus}
+        </Column>
 
-        <GCol>
-          <Row
-            mt={18}
-            align="center"
-            width="100%"
-            justify={['sm', 'xs'].includes(screenClass) ? 'between' : 'end'}
-          >
-            <Row
-              width={['sm', 'xs'].includes(screenClass) ? '200px' : '100%'}
-              align="center"
-              justify="end"
-              mr={20}
-              flexWrap="wrap"
-            >
+        <Row
+          justify="between"
+          align="start"
+          rowGap={8}
+          columnGap={16}
+          flexWrap="wrap"
+        >
+          {isWrappedLayout && interventionStatus}
+          <Column width="auto" gap={8} flex={isWrappedLayout && 1}>
+            <Row align="center" justify="end" width="100%" gap={16}>
+              {canAccessParticipantsData && (
+                <Button
+                  px={32}
+                  onClick={openExportCsvModal}
+                  width="auto"
+                  inverted
+                >
+                  {formatMessage(messages.exportCsvModalTitle)}
+                </Button>
+              )}
               <InterventionStatusButtons
                 status={status}
                 handleChangeStatus={handleChangeStatus}
-                handleSendCsv={handleSendCsv}
-                csvGeneratedAt={csvGeneratedAt}
-                csvFilename={csvFilename}
-                interventionId={interventionId}
-                canAccessCsv={canAccessCsv}
                 canCurrentUserMakeChanges={canCurrentUserMakeChanges}
               />
+              <InterventionOptions>
+                <Dropdown
+                  id={`intervention-options-${interventionId}`}
+                  options={options}
+                  clickable
+                />
+              </InterventionOptions>
             </Row>
-            <InterventionOptions>
-              <Dropdown
-                id={`intervention-options-${interventionId}`}
-                options={options}
-                clickable
-              />
-            </InterventionOptions>
-          </Row>
-          {catMhAccess && (
-            <Row width="100%" justify="end" align="center" mt={8}>
-              <HelpIconTooltip
-                id="cat-mh-tests-limit-tooltip"
-                tooltipContent={formatMessage(messages.catMhCountInfo)}
-              >
-                {formatMessage(messages.catMhCounter, {
-                  catMhLicenseType,
-                  current: testsLeft ?? 0,
-                  initial: catMhPool ?? 0,
-                  used: createdCatMhSessionCount,
-                  counter: (chunks) => (
-                    <span
-                      style={{
-                        color: hasSmallNumberOfCatMhSessionsRemaining
-                          ? themeColors.warning
-                          : themeColors.success,
-                      }}
-                    >
-                      {chunks}
-                    </span>
-                  ),
-                })}
-              </HelpIconTooltip>
-            </Row>
-          )}
-        </GCol>
-      </GRow>
+            {catMhAccess && catMhLicenseType && (
+              <Row width="100%" justify="end" align="center" overflow="visible">
+                <HelpIconTooltip
+                  id="cat-mh-tests-limit-tooltip"
+                  tooltipContent={formatMessage(messages.catMhCountInfo)}
+                >
+                  {formatMessage(messages.catMhCounter, {
+                    catMhLicenseType,
+                    current: testsLeft ?? 0,
+                    initial: catMhPool ?? 0,
+                    used: createdCatMhSessionCount,
+                    counter: (chunks) => (
+                      <span
+                        style={{
+                          color: hasSmallNumberOfCatMhSessionsRemaining
+                            ? themeColors.warning
+                            : themeColors.success,
+                        }}
+                      >
+                        {chunks}
+                      </span>
+                    ),
+                  })}
+                </HelpIconTooltip>
+              </Row>
+            )}
+          </Column>
+        </Row>
+      </Row>
     </GCol>
   );
 };
@@ -204,13 +216,9 @@ Header.propTypes = {
   name: PropTypes.string,
   editName: PropTypes.func,
   handleChangeStatus: PropTypes.func,
-  handleSendCsv: PropTypes.func,
-  csvGeneratedAt: PropTypes.string,
-  csvFilename: PropTypes.string,
   interventionId: PropTypes.string,
   organizationId: PropTypes.string,
   options: PropTypes.array,
-  canAccessCsv: PropTypes.bool,
   interventionType: PropTypes.string,
   sharingPossible: PropTypes.bool,
   userOrganizableId: PropTypes.string,
@@ -221,6 +229,8 @@ Header.propTypes = {
   catMhPool: PropTypes.number,
   createdCatMhSessionCount: PropTypes.number,
   sessions: PropTypes.array,
+  openExportCsvModal: PropTypes.func,
+  canAccessParticipantsData: PropTypes.bool,
 };
 
 export default Header;

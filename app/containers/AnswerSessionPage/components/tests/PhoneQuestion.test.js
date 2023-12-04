@@ -15,7 +15,7 @@ import { DEFAULT_LOCALE } from 'i18n';
 import { formatMessage } from 'utils/intlOutsideReact';
 import { createTestStore } from 'utils/testUtils/storeUtils';
 
-import { intlProviderConfig } from 'containers/LanguageProvider';
+import { intlProviderConfig } from 'containers/AppLanguageProvider';
 
 import PhoneQuestion from '../PhoneQuestion';
 

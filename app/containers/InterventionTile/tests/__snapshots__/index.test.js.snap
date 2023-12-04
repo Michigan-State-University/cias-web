@@ -397,6 +397,7 @@ exports[`<InterventionTile /> Should render and match the snapshot 1`] = `
         </div>
         <div
           class="c14"
+          dir="auto"
           width="100%"
         >
           <div

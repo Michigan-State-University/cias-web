@@ -6,6 +6,8 @@ import bin from 'assets/svg/bin-red.svg';
 import radio from 'assets/svg/radio-button.svg';
 
 import globalMessages from 'global/i18n/globalMessages';
+import { LanguageDirection } from 'global/types/locale';
+
 import { numericValidator } from 'utils/validators';
 import { colors } from 'theme';
 
@@ -42,6 +44,7 @@ export type Props = {
     changes: Partial<ThirdPartyReportQuestionDataDTO>,
   ) => void;
   onRemove: (index: number) => void;
+  dynamicElementsDirection: LanguageDirection;
 };
 
 export const ThirdPartyQuestionAnswer: FC<Props> = ({
@@ -58,6 +61,7 @@ export const ThirdPartyQuestionAnswer: FC<Props> = ({
   canDeleteAnswer,
   onChange,
   onRemove,
+  dynamicElementsDirection,
 }) => {
   const { formatMessage } = useIntl();
 
@@ -99,7 +103,8 @@ export const ThirdPartyQuestionAnswer: FC<Props> = ({
           <Row
             align="center"
             justify="between"
-            mb={isNarratorTabOrEditNotPossible ? 0 : 10}
+            marginBlockEnd={isNarratorTabOrEditNotPossible ? 0 : 10}
+            dir={dynamicElementsDirection}
           >
             <Row width="90%">
               {!isNarratorTabOrEditNotPossible && (
@@ -107,14 +112,14 @@ export const ThirdPartyQuestionAnswer: FC<Props> = ({
                   alt={formatMessage(messages.reorderIconAlt, {
                     index,
                   })}
-                  mr={10}
+                  marginInlineEnd={10}
                   src={ReorderIcon}
                   disabled={false}
                   cursor="grab"
                   {...dragHandleProps}
                 />
               )}
-              <Img width="max-content" src={radio} mr={15} />
+              <Img width="max-content" src={radio} marginInlineEnd={15} />
               <OriginalTextHover
                 id={`question-${questionId}-answer-${index}`}
                 text={answer.original_text}
@@ -145,7 +150,7 @@ export const ThirdPartyQuestionAnswer: FC<Props> = ({
                   hidden={hoveredIndex !== index}
                   clickable
                 >
-                  <Img src={bin} mr={16} />
+                  <Img src={bin} marginInlineEnd={16} />
                 </Box>
               </Row>
             )}
@@ -167,8 +172,7 @@ export const ThirdPartyQuestionAnswer: FC<Props> = ({
               validator={numericValidator}
               keyboard="tel"
               placeholder={formatMessage(
-                // @ts-ignore
-                globalMessages.variables.variableScorePlaceholder,
+                globalMessages.variableScorePlaceholder,
               )}
               value={answer.numeric_value}
               color={colors.azure}

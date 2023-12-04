@@ -1,7 +1,5 @@
 import { defineMessages } from 'react-intl';
 
-import { InterventionType } from 'models/Intervention';
-
 export const scope =
   'app.components.InterventionModals.InterventionSettingsModal';
 
@@ -20,8 +18,7 @@ export default defineMessages({
   },
   quickExitHelp: {
     id: `${scope}.quickExitHelp`,
-    defaultMessage:
-      'This setting allows participants to quickly leave the intervention if their privacy is compromised. To learn more, click <a href="https://www.cias.app/_files/ugd/afc5c9_2656a8eb9ed6490d9d33c1d36a30405a.pdf" target="_blank">here</a>. For more resources, visit <a href="https://www.cias.app/resources" target="_blank">www.cias.app/resources</a>.',
+    defaultMessage: `This setting allows participants to quickly leave the intervention if their privacy is compromised. To learn more, click <a href='https://www.cias.app/_files/ugd/afc5c9_2656a8eb9ed6490d9d33c1d36a30405a.pdf' target='_blank'>here</a>. For more resources, visit <a href='https://www.cias.app/resources' target='_blank'>www.cias.app/resources</a>.`,
   },
   interventionSettingsQuickExitLabel: {
     id: `${scope}.interventionSettingsQuickExitLabel`,
@@ -34,10 +31,6 @@ export default defineMessages({
   interventionLinkHeader: {
     id: `${scope}.interventionLinkHeader`,
     defaultMessage: 'Custom Intervention Link',
-  },
-  interventionLinkDescription: {
-    id: `${scope}.interventionLinkDescription`,
-    defaultMessage: `This link directs user to the {interventionType, select, ${InterventionType.DEFAULT} {first session in this intervention} other {module home screen}}`,
   },
   defaultNarrator: {
     id: `${scope}.defaultNarrator`,

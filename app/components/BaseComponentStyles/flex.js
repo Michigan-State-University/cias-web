@@ -20,6 +20,8 @@ const flex = (props) => ({
   flexWrap: props.flexWrap || '',
   alignSelf: propsToCssMapper[props.alignSelf] || '',
   gap: props.gap || '',
+  rowGap: props.rowGap || '',
+  columnGap: props.columnGap || '',
   flex: props.flex || '',
   flexShrink: props.flexShrink ?? '',
 });
@@ -42,10 +44,17 @@ flex.propTypes = {
     'evenly',
   ]),
   filled: PropTypes.bool,
-  direction: PropTypes.oneOf(['row', 'column']),
+  direction: PropTypes.oneOf([
+    'row',
+    'column',
+    'row-reverse',
+    'column-reverse',
+  ]),
   flexWrap: PropTypes.oneOf(['wrap', 'nowrap', 'wrap-reverse']),
   alignSelf: PropTypes.oneOf(['start', 'end', 'center']),
   gap: PropTypes.number,
+  rowGap: PropTypes.number,
+  columnGap: PropTypes.number,
   flex: PropTypes.number,
   flexShrink: PropTypes.number,
 };

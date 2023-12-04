@@ -17,7 +17,9 @@ import Row from 'components/Row';
 import VisualAnalogueScaleQuestionLayout from 'containers/AnswerSessionPage/layouts/VisualAnalogueScaleQuestionLayout';
 import isNullOrUndefined from 'utils/isNullOrUndefined';
 import { StyledInput } from 'components/Input/StyledInput';
-import OriginalTextHover from 'components/OriginalTextHover';
+import OriginalTextHover, {
+  OriginalTextIconPosition,
+} from 'components/OriginalTextHover';
 import { BadgeInput } from 'components/Input/BadgeInput';
 import { visualAnalogScaleLabelStyles, colors } from 'theme';
 import {
@@ -34,6 +36,7 @@ const VisualAnalogueScaleQuestion = ({
   updateProperty,
   isNarratorTab,
   editingPossible,
+  dynamicElementsDirection,
   intl: { formatMessage },
 }) => {
   const {
@@ -56,6 +59,8 @@ const VisualAnalogueScaleQuestion = ({
     return `${48 + (valueLength > 3 ? 8 * valueLength : 0)}px`;
   };
 
+  const reverse = dynamicElementsDirection === 'rtl';
+
   const labels = {
     [rangeStart]: {
       label: (
@@ -67,9 +72,9 @@ const VisualAnalogueScaleQuestion = ({
           <StyledInput
             disabled={!editingPossible}
             width={120}
-            px={5}
-            py={9}
-            textAlign="left"
+            paddingInline={5}
+            paddingBlock={9}
+            textAlign={reverse ? 'right' : 'left'}
             placeholder={formatMessage(messages.startValue)}
             value={startValue}
             onBlur={(value) => updateProperty(value, 'start_value')}
@@ -79,7 +84,7 @@ const VisualAnalogueScaleQuestion = ({
       style: {
         ...visualAnalogScaleLabelStyles,
         transform: 'none',
-        marginTop: '5px',
+        marginBlockStart: '5px',
       },
     },
     [rangeEnd]: {
@@ -88,13 +93,14 @@ const VisualAnalogueScaleQuestion = ({
           id={`question-${id}-end`}
           text={originalText?.end_value}
           gap={5}
+          iconPosition={OriginalTextIconPosition.START}
         >
           <StyledInput
             disabled={!editingPossible}
             width={120}
-            py={9}
-            px={5}
-            textAlign="right"
+            paddingInline={5}
+            paddingBlock={9}
+            textAlign={reverse ? 'left' : 'right'}
             placeholder={formatMessage(messages.endValue)}
             value={endValue}
             onBlur={(value) => updateProperty(value, 'end_value')}
@@ -103,19 +109,19 @@ const VisualAnalogueScaleQuestion = ({
       ),
       style: {
         ...visualAnalogScaleLabelStyles,
-        transform: 'translateX(-100%)',
-        marginTop: '5px',
+        transform: `translateX(${reverse ? '' : '-'}100%)`,
+        marginBlockStart: '5px',
       },
     },
   };
 
   return (
-    <Column mt={10}>
-      <Box width="100%" px={21} py={30}>
+    <Column marginBlockStart={10} dir={dynamicElementsDirection}>
+      <Box width="100%" paddingInline={21} paddingBlock={30}>
         <Column>
           <Row>
             <Box width="100%">
-              <Row justify="between" mb={24} hidden={isNarratorTab}>
+              <Row justify="between" marginBlockEnd={24} hidden={isNarratorTab}>
                 <BadgeInput
                   color={colors.electricPurple}
                   value={rangeStart}
@@ -138,7 +144,7 @@ const VisualAnalogueScaleQuestion = ({
                 />
               </Row>
               {!isNarratorTab && (
-                <Box mb={64}>
+                <Box marginBlockEnd={64}>
                   <AppSlider
                     min={rangeStart}
                     max={rangeEnd}
@@ -148,6 +154,7 @@ const VisualAnalogueScaleQuestion = ({
                     ariaLabelledByForHandle={`${QUESTION_TITLE_ID} ${QUESTION_SUBTITLE_ID}`}
                     hideHandle
                     value={rangeStart}
+                    reverse={reverse}
                   />
                 </Box>
               )}
@@ -158,6 +165,7 @@ const VisualAnalogueScaleQuestion = ({
                   rangeStart={rangeStart}
                   rangeEnd={rangeEnd}
                   showNumber={!isNullOrUndefined(showNumber) && showNumber}
+                  dynamicElementsDirection={dynamicElementsDirection}
                 />
               )}
             </Box>
@@ -174,6 +182,7 @@ VisualAnalogueScaleQuestion.propTypes = {
   updateProperty: PropTypes.func.isRequired,
   isNarratorTab: PropTypes.bool,
   editingPossible: PropTypes.bool,
+  dynamicElementsDirection: PropTypes.string,
 };
 
 const mapStateToProps = createStructuredSelector({

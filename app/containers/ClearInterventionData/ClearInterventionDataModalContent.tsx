@@ -26,6 +26,7 @@ import { ModalContentRenderer } from 'components/Modal';
 import { ErrorText } from 'components/FormikControlLayout';
 import Column from 'components/Column';
 import FormikInput from 'components/FormikInput';
+import H2 from 'components/H2';
 
 import messages from './messages';
 import {
@@ -52,6 +53,7 @@ export const ClearInterventionDataModalContent: ModalContentRenderer<ClearInterv
       initialClearSensitiveDataScheduledAt,
       interventionId,
     } = modalState ?? {};
+    const [showConfirmAction, setShowConfirmAction] = useState(false);
 
     const [{ sensitiveDataState, clearSensitiveDataScheduledAt }, setState] =
       useState({
@@ -71,11 +73,16 @@ export const ClearInterventionDataModalContent: ModalContentRenderer<ClearInterv
             return;
           }
 
+          if (!showConfirmAction) {
+            setShowConfirmAction(true);
+            return;
+          }
+
           dispatch(
             clearInterventionDataRequest(interventionId, delay, setState),
           );
         },
-        [sensitiveDataState, interventionId, setState],
+        [sensitiveDataState, interventionId, setState, showConfirmAction],
       );
 
     const isClearanceScheduledForFuture =
@@ -100,38 +107,54 @@ export const ClearInterventionDataModalContent: ModalContentRenderer<ClearInterv
             >
               {sensitiveDataState === SensitiveDataState.COLLECTED && (
                 <>
-                  <Text fontSize={15} lineHeight={1.5}>
-                    {formatMessage(messages.clearDataConfirmationContent)}
-                  </Text>
-                  <Column>
-                    <Row align="center" justify="center" gap={12}>
-                      <label htmlFor={DELAY_INPUT_ID}>
-                        <Text fontSize={15} lineHeight={1.5}>
-                          {formatMessage(messages.deleteDataIn)}
-                        </Text>
-                      </label>
-                      <FormikInput
-                        formikKey="delay"
-                        hideErrorMessages
-                        id={DELAY_INPUT_ID}
-                        width={70}
-                        inputProps={{
-                          width: 70,
-                          // @ts-ignore
-                          keyboard: 'number',
-                          background: colors.lightDivider,
-                          min: 0,
-                        }}
-                      />
+                  {!showConfirmAction && (
+                    <>
                       <Text fontSize={15} lineHeight={1.5}>
-                        {formatMessage(messages.days)}
+                        {formatMessage(messages.clearDataConfirmationContent)}
                       </Text>
-                    </Row>
-                    {!isValid && <ErrorText>{errors.delay}</ErrorText>}
-                  </Column>
-                  <Text fontSize={15} lineHeight={1.5} opacity={0.7}>
-                    {formatMessage(messages.clearDataConfirmationNote)}
-                  </Text>
+                      <Column>
+                        <Row align="center" justify="center" gap={12}>
+                          <label htmlFor={DELAY_INPUT_ID}>
+                            <Text fontSize={15} lineHeight={1.5}>
+                              {formatMessage(messages.deleteDataIn)}
+                            </Text>
+                          </label>
+                          <FormikInput
+                            formikKey="delay"
+                            hideErrorMessages
+                            id={DELAY_INPUT_ID}
+                            width={70}
+                            inputProps={{
+                              width: 70,
+                              // @ts-ignore
+                              keyboard: 'number',
+                              background: colors.lightDivider,
+                              min: 0,
+                            }}
+                          />
+                          <Text fontSize={15} lineHeight={1.5}>
+                            {formatMessage(messages.days)}
+                          </Text>
+                        </Row>
+                        {!isValid && <ErrorText>{errors.delay}</ErrorText>}
+                      </Column>
+                      <Text fontSize={15} lineHeight={1.5} opacity={0.7}>
+                        {formatMessage(messages.clearDataConfirmationNote)}
+                      </Text>
+                    </>
+                  )}
+                  {showConfirmAction && (
+                    <>
+                      <H2>
+                        {formatMessage(messages.clearDataConfirmationTitle)}
+                      </H2>
+                      <Text fontSize={15} lineHeight={1.5}>
+                        {formatMessage(
+                          messages.clearDataConfirmationDescription,
+                        )}
+                      </Text>
+                    </>
+                  )}
                 </>
               )}
               {sensitiveDataState === SensitiveDataState.MARKED_TO_REMOVE && (

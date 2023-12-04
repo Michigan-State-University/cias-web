@@ -12,6 +12,7 @@ const HenryFordQuestion = ({
   selectAnswer,
   saveAnswer,
   disabled,
+  dynamicElementsDirection,
 }: SharedProps<
   HenryFordQuestionDTO,
   HenryFordQuestionAnswer['decryptedBody']['data']
@@ -54,6 +55,7 @@ const HenryFordQuestion = ({
       questionId={id}
       selectedAnswerIndex={selectedAnswerIndex}
       disabled={disabled}
+      dynamicElementsDirection={dynamicElementsDirection}
     />
   );
 };

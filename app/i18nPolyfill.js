@@ -20,6 +20,7 @@ const polyfillIntl = async () => {
 
     // ! Add every used language
     await import('intl/locale-data/jsonp/en.js');
+    await import('intl/locale-data/jsonp/ar.js');
   }
 };
 
@@ -39,6 +40,7 @@ const polyfillListFormat = async () => {
   if (Intl.ListFormat.polyfilled) {
     // ! Add every used language
     await import('@formatjs/intl-listformat/locale-data/en');
+    await import('@formatjs/intl-listformat/locale-data/ar');
   }
 };
 
@@ -49,6 +51,7 @@ const polyfillDisplayNames = async () => {
   if (Intl.DisplayNames.polyfilled) {
     // ! Add every used language
     await import('@formatjs/intl-displaynames/locale-data/en');
+    await import('@formatjs/intl-displaynames/locale-data/ar');
   }
 };
 
@@ -59,6 +62,7 @@ const polyfillPluralRules = async () => {
   if (Intl.PluralRules.polyfilled) {
     // ! Add every used language
     await import('@formatjs/intl-pluralrules/locale-data/en');
+    await import('@formatjs/intl-pluralrules/locale-data/ar');
   }
 };
 
@@ -69,6 +73,7 @@ const polyfillNumberFormat = async () => {
   if (Intl.NumberFormat.polyfilled) {
     // ! Add every used language
     await import('@formatjs/intl-numberformat/locale-data/en');
+    await import('@formatjs/intl-numberformat/locale-data/ar');
   }
 };
 
@@ -79,6 +84,7 @@ const polyfillRelativeTimeFormat = async () => {
   if (Intl.RelativeTimeFormat.polyfilled) {
     // ! Add every used language
     await import('@formatjs/intl-relativetimeformat/locale-data/en');
+    await import('@formatjs/intl-relativetimeformat/locale-data/ar');
   }
 };
 
@@ -92,6 +98,7 @@ const polyfillDateTimeFormat = async () => {
 
     // ! Add every used language
     dataPolyfills.push(import('@formatjs/intl-datetimeformat/locale-data/en'));
+    dataPolyfills.push(import('@formatjs/intl-datetimeformat/locale-data/ar'));
 
     await Promise.all(dataPolyfills);
   }

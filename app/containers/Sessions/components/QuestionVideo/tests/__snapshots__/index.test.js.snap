@@ -228,6 +228,7 @@ exports[`<QuestionVideo /> should match the snapshot without video 1`] = `
         <input
           aria-label="Use videos from YouTube or Vimeo. Paste link here."
           class="c4"
+          dir="auto"
           height="auto"
           placeholder="Use videos from YouTube or Vimeo. Paste link here."
           type="text"

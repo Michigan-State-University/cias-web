@@ -7,17 +7,20 @@
 import React, { memo } from 'react';
 import { compose } from 'redux';
 import PropTypes from 'prop-types';
+import { injectIntl, IntlShape } from 'react-intl';
+
+import { colors } from 'theme';
 
 import {
   Roles,
   RolesColors,
   PasswordAuthenticatedRoles,
 } from 'models/User/RolesManager';
+
+import rolesMessages from 'global/i18n/rolesMessages';
+
 import Box from 'components/Box';
 import Text from 'components/Text';
-import { colors } from 'theme';
-import { injectIntl, IntlShape } from 'react-intl';
-import globalMessages from 'global/i18n/globalMessages';
 
 const UserRoleTile = ({ role, disabled, onClick, intl: { formatMessage } }) => (
   <Box
@@ -32,7 +35,7 @@ const UserRoleTile = ({ role, disabled, onClick, intl: { formatMessage } }) => (
     onClick={onClick}
   >
     <Text fontWeight="bold" fontSize={14} color={colors.white}>
-      {formatMessage(globalMessages.roles[role])}
+      {formatMessage(rolesMessages[role])}
     </Text>
   </Box>
 );

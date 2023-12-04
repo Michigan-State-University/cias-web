@@ -23,7 +23,7 @@ import {
   makeSelectCurrentNarratorBlockIndex,
 } from 'global/reducers/localState';
 import { makeSelectQuestionGroupsIds } from 'global/reducers/questionGroups';
-import globalMessages from 'global/i18n/globalMessages';
+import blockTypesMessages from 'global/i18n/blockTypesMessages';
 import { Narrator, NarratorBlockTypes, Position } from 'models/Narrator';
 import { Question } from 'models/Question';
 
@@ -165,8 +165,7 @@ const WrappedAccordion = ({
               // @ts-ignore
               deleteActive={block.type !== NarratorBlockTypes.FEEDBACK}
               label={`${blockIndex + 1}. ${formatMessage(
-                // @ts-ignore
-                globalMessages.blockTypes[block.type],
+                blockTypesMessages[block.type],
               )}`}
             >
               {!isTlfbGroup && (

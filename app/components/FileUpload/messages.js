@@ -26,7 +26,7 @@ export default defineMessages({
     defaultMessage: 'File cannot be larger than {maxSize}',
   },
   [FileErrorCode.FILE_INVALID_TYPE]: {
-    id: `${scope}.${FileErrorCode.FILE_INVALID_TYPE}`,
+    id: `${scope}.file-invalid-type`,
     defaultMessage:
       'Unsupported file format. Supported file formats are: {formattedAcceptedFormats}',
   },

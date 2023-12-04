@@ -17,39 +17,38 @@ export default defineMessages({
   },
   sessionSchedulingHelp: {
     id: `${scope}.sessionSchedulingHelp`,
-    defaultMessage:
-      'Schedule when each session of your intervention is sent to participants. Learn more <a href="https://www.cias.app/_files/ugd/afc5c9_44a2c4b39b5e431daf98acdb4d61aa36.pdf" target="_blank">here</a>. For more help resources, visit <a href="https://www.cias.app/resources" target="_blank">www.cias.app/resources</a>.',
+    defaultMessage: `Schedule when each session of your intervention is sent to participants. Learn more <a href='https://www.cias.app/_files/ugd/afc5c9_44a2c4b39b5e431daf98acdb4d61aa36.pdf' target='_blank'>here</a>. For more help resources, visit <a href='https://www.cias.app/resources' target='_blank'>www.cias.app/resources</a>.`,
   },
   send: {
     id: `${scope}.send`,
     defaultMessage: 'Send ',
   },
   [SessionSchedule.DAYS_AFTER]: {
-    id: `${scope}.${SessionSchedule.DAYS_AFTER}`,
+    id: `${scope}.days_after`,
     defaultMessage:
       'Send email invitation [X] days after previous session scheduled date',
   },
   [SessionSchedule.DAYS_AFTER_FILL]: {
-    id: `${scope}.${[SessionSchedule.DAYS_AFTER_FILL]}`,
+    id: `${scope}.days_after_fill`,
     defaultMessage:
       'Send email invitation [X] days after previous session completed date',
   },
   [SessionSchedule.DAYS_AFTER_DATE]: {
-    id: `${scope}.${[SessionSchedule.DAYS_AFTER_DATE]}`,
+    id: `${scope}.days_after_date`,
     defaultMessage:
       'Send email invitation [X] days after a date provided by participant',
   },
   [SessionSchedule.EXACT_DATE]: {
-    id: `${scope}.${[SessionSchedule.EXACT_DATE]}`,
+    id: `${scope}.exact_date`,
     defaultMessage: 'Send email invitation on exact date',
   },
   [SessionSchedule.AFTER_FILL]: {
-    id: `${scope}.${[SessionSchedule.AFTER_FILL]}`,
+    id: `${scope}.after_fill`,
     defaultMessage:
       'Send email invitation immediately after previous session completion',
   },
   [SessionSchedule.IMMEDIATELY]: {
-    id: `${scope}.${SessionSchedule.IMMEDIATELY}`,
+    id: `${scope}.immediately`,
     defaultMessage:
       'Start session immediately after previous session completion',
   },

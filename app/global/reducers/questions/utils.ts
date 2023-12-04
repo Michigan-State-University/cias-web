@@ -8,11 +8,13 @@ import { GroupType, QuestionGroupDTO } from 'models/QuestionGroup';
 import { QuestionDTO, QuestionTypes } from 'models/Question';
 import { NarratorDTO } from 'models/Narrator';
 import { instantiateBlockForType } from 'models/Session/utils';
+
 import findOrderedQuestionsByGroupId from 'utils/findOrderedQuestionsByGroupId';
 import instantiateEmptyQuestion from 'utils/instantiateEmptyQuestion';
 import { CHARACTER_FIXED_POSITION } from 'utils/characterConstants';
-import globalMessages from 'global/i18n/globalMessages';
 import { assignDraftItemsById, updateItemById } from 'utils/reduxUtils';
+
+import defaultTlfbTitlesMessages from './defaultTlfbTitlesMessages';
 
 export const mapQuestionDataForType = (question: QuestionDTO) => {
   switch (question.type) {
@@ -162,28 +164,16 @@ export const prepareNewGroupQuestions = (
   if (groupType === GroupType.TLFB) {
     const tlfbConfig = {
       ...instantiateEmptyQuestion(
-        formatMessage(
-          // @ts-ignore
-          globalMessages.defaultTlfbTitles[QuestionTypes.TLFB_CONFIG],
-        ),
+        formatMessage(defaultTlfbTitlesMessages[QuestionTypes.TLFB_CONFIG]),
         QuestionTypes.TLFB_CONFIG,
-        formatMessage(
-          // @ts-ignore
-          globalMessages.defaultTlfbTitles[QuestionTypes.TLFB_CONFIG],
-        ),
+        formatMessage(defaultTlfbTitlesMessages[QuestionTypes.TLFB_CONFIG]),
       ),
       narrator: { blocks: [], settings },
     };
     const tlfbEvents = instantiateEmptyQuestion(
-      formatMessage(
-        // @ts-ignore
-        globalMessages.defaultTlfbTitles[QuestionTypes.TLFB_EVENTS],
-      ),
+      formatMessage(defaultTlfbTitlesMessages[QuestionTypes.TLFB_EVENTS]),
       QuestionTypes.TLFB_EVENTS,
-      formatMessage(
-        // @ts-ignore
-        globalMessages.defaultTlfbTitles[QuestionTypes.TLFB_EVENTS],
-      ),
+      formatMessage(defaultTlfbTitlesMessages[QuestionTypes.TLFB_EVENTS]),
     );
     tlfbEvents.narrator = {
       blocks: [
@@ -197,15 +187,9 @@ export const prepareNewGroupQuestions = (
       settings,
     };
     const tlfbQuestion = instantiateEmptyQuestion(
-      formatMessage(
-        // @ts-ignore
-        globalMessages.defaultTlfbTitles[QuestionTypes.TLFB_QUESTION],
-      ),
+      formatMessage(defaultTlfbTitlesMessages[QuestionTypes.TLFB_QUESTION]),
       QuestionTypes.TLFB_QUESTION,
-      formatMessage(
-        // @ts-ignore
-        globalMessages.defaultTlfbTitles[QuestionTypes.TLFB_QUESTION],
-      ),
+      formatMessage(defaultTlfbTitlesMessages[QuestionTypes.TLFB_QUESTION]),
     );
     tlfbQuestion.narrator = {
       blocks: [

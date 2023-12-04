@@ -1,7 +1,5 @@
 import { defineMessages } from 'react-intl';
 
-import { participantReport } from 'models/Session/QuestionTypes';
-
 export const scope = 'app.containers.EditSessionPage';
 
 export default defineMessages({
@@ -65,16 +63,6 @@ export default defineMessages({
     id: `${scope}.duplicateGroup`,
     defaultMessage: 'Duplicate questions to session',
   },
-  errors: {
-    duplicateVariable: {
-      id: `${scope}.duplicateVariable`,
-      defaultMessage: 'This variable name is already in use!',
-    },
-    copyError: {
-      id: `${scope}.copyError`,
-      defaultMessage: 'Cannot copy the screen!',
-    },
-  },
   pageTitle: {
     id: `${scope}.pageTitle`,
     defaultMessage: 'Session: {name}',
@@ -131,12 +119,5 @@ export default defineMessages({
   creationDate: {
     id: `${scope}.creationDate`,
     defaultMessage: 'Creation date:',
-  },
-  defaultQuestionSubtitles: {
-    [participantReport.id]: {
-      id: `${scope}.defaultQuestionSubtitles.${participantReport.id}`,
-      defaultMessage:
-        '<p>Would you like to receive a report generated from your responses?</p>',
-    },
   },
 });

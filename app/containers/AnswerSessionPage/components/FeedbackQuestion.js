@@ -8,6 +8,7 @@ const FeedbackQuestion = ({
   selectAnswer,
   feedbackScreenSettings: { showSpectrum },
   setFeedbackSettings,
+  dynamicElementsDirection,
 }) => {
   const {
     body: {
@@ -35,6 +36,7 @@ const FeedbackQuestion = ({
       targetValue={targetValue ?? { target: 0 }}
       showSpectrum={showSpectrum}
       setFeedbackSettings={setFeedbackSettings}
+      dynamicElementsDirection={dynamicElementsDirection}
     />
   );
 };
@@ -44,6 +46,7 @@ FeedbackQuestion.propTypes = {
   selectAnswer: PropTypes.func,
   feedbackScreenSettings: PropTypes.object,
   setFeedbackSettings: PropTypes.func,
+  dynamicElementsDirection: PropTypes.string,
 };
 
 export default FeedbackQuestion;

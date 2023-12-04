@@ -29,8 +29,8 @@ import 'sanitize.css/sanitize.css';
 import App from 'containers/App';
 import ErrorPage from 'containers/ErrorPage/Loadable';
 
-// Import Language Provider
-import LanguageProvider from 'containers/LanguageProvider';
+// Import Global App Language Provider
+import AppLanguageProvider from 'containers/AppLanguageProvider';
 
 import isNullOrUndefined from 'utils/isNullOrUndefined';
 
@@ -167,7 +167,7 @@ const render = (messages: any) => {
 
   ReactDOM.render(
     <Provider store={store}>
-      <LanguageProvider messages={messages}>
+      <AppLanguageProvider messages={messages}>
         <ConnectedRouter history={history}>
           <ScreenClassProvider>
             <Sentry.ErrorBoundary fallback={ErrorPage}>
@@ -182,7 +182,7 @@ const render = (messages: any) => {
             </Sentry.ErrorBoundary>
           </ScreenClassProvider>
         </ConnectedRouter>
-      </LanguageProvider>
+      </AppLanguageProvider>
     </Provider>,
     MOUNT_NODE,
   );

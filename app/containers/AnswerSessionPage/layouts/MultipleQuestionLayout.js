@@ -20,8 +20,9 @@ const MultipleQuestionLayout = ({
   selectedAnswersIndex,
   isMobile,
   disabled,
+  dynamicElementsDirection,
 }) => (
-  <Column>
+  <Column dir={dynamicElementsDirection}>
     {data.map((questionAnswer, index) => {
       const {
         payload,
@@ -32,7 +33,7 @@ const MultipleQuestionLayout = ({
       const key = `question-${questionId}-el-${index}`;
 
       return (
-        <Row key={key} mb={10}>
+        <Row key={key} marginBlockEnd={10}>
           {!isMobile && (
             <AudioTextPreview
               text={htmlToPlainText(payload)}
@@ -40,8 +41,8 @@ const MultipleQuestionLayout = ({
             />
           )}
           <HoverableBox
-            px={margin}
-            py={14}
+            paddingInline={margin}
+            paddingBlock={14}
             filled
             clickable
             disabled={disabled}
@@ -76,6 +77,7 @@ MultipleQuestionLayout.propTypes = {
   selectedAnswersIndex: PropTypes.array,
   isMobile: PropTypes.bool,
   disabled: PropTypes.bool,
+  dynamicElementsDirection: PropTypes.string,
 };
 
 export default MultipleQuestionLayout;

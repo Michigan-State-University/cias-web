@@ -4,8 +4,10 @@ import groupBy from 'lodash/groupBy';
 import countBy from 'lodash/countBy';
 import isNil from 'lodash/isNil';
 
+import { PredefinedParticipant } from 'models/PredefinedParticipant';
+
 import { RoutePath, WEB_HOST } from 'global/constants';
-import globalMessages from 'global/i18n/globalMessages';
+import validatorsMessages from 'global/i18n/validatorsMessages';
 import {
   PredefinedParticipantData,
   InterventionInvitationTargetType,
@@ -36,7 +38,6 @@ import {
   UploadedEmailsCsvData,
 } from './types';
 import messages from './messages';
-import { PredefinedParticipant } from '../../../../models/PredefinedParticipant';
 
 export const UNIQUE_CLINICS_METHOD = 'uniqueClinics';
 
@@ -50,19 +51,13 @@ export const createCopyLinkFormSchema = (
       ? {}
       : {
           sessionOption: Yup.object()
-            .required(
-              // @ts-ignore
-              formatMessage(globalMessages.validators.required),
-            )
+            .required(formatMessage(validatorsMessages.required))
             .nullable(),
         }),
     ...(isReportingIntervention
       ? {
           healthClinicOption: Yup.object()
-            .required(
-              // @ts-ignore
-              formatMessage(globalMessages.validators.required),
-            )
+            .required(formatMessage(validatorsMessages.required))
             .nullable(),
         }
       : {}),
@@ -152,10 +147,7 @@ export const createInviteEmailsParticipantsFormSchema = (
     ...(!isModularIntervention
       ? {
           sessionOption: Yup.object()
-            .required(
-              // @ts-ignore
-              formatMessage(globalMessages.validators.required),
-            )
+            .required(formatMessage(validatorsMessages.required))
             .nullable(),
         }
       : {}),
@@ -165,15 +157,11 @@ export const createInviteEmailsParticipantsFormSchema = (
             .of(
               Yup.object({
                 healthClinicOption: Yup.object()
-                  .required(
-                    // @ts-ignore
-                    formatMessage(globalMessages.validators.required),
-                  )
+                  .required(formatMessage(validatorsMessages.required))
                   .nullable(),
                 emails: Yup.array().min(
                   1,
-                  // @ts-ignore
-                  formatMessage(globalMessages.validators.required),
+                  formatMessage(validatorsMessages.required),
                 ),
               }),
             )
@@ -185,8 +173,7 @@ export const createInviteEmailsParticipantsFormSchema = (
       ? {
           emails: Yup.array().min(
             1,
-            // @ts-ignore
-            formatMessage(globalMessages.validators.required),
+            formatMessage(validatorsMessages.required),
           ),
         }
       : {}),
@@ -203,10 +190,7 @@ export const createPredefinedParticipantFormSchema = (
       ...(isReportingIntervention
         ? {
             healthClinicOption: Yup.object()
-              .required(
-                // @ts-ignore
-                formatMessage(globalMessages.validators.required),
-              )
+              .required(formatMessage(validatorsMessages.required))
               .nullable(),
           }
         : {}),

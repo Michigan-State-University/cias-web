@@ -321,6 +321,9 @@ exports[`<ReflectionFormulaBlock /> Should render and match the snapshot 1`] = `
   -webkit-box-align: flex-end;
   -ms-flex-align: flex-end;
   align-items: flex-end;
+  -webkit-flex-direction: row;
+  -ms-flex-direction: row;
+  flex-direction: row;
   gap: 15px;
   color: unset;
 }
@@ -882,6 +885,7 @@ exports[`<ReflectionFormulaBlock /> Should render and match the snapshot 1`] = `
           aria-label="Enter formula here... (You can use mathematical operators +, -, *, /)"
           class="c28"
           data-cy="text-area"
+          dir="auto"
           height="auto"
           placeholder="Enter formula here... (You can use mathematical operators +, -, *, /)"
           rows="5"
@@ -981,6 +985,7 @@ exports[`<ReflectionFormulaBlock /> Should render and match the snapshot 1`] = `
               class="c35 c36"
               data-cy="case-value-input"
               data-testid="input"
+              dir="auto"
               placeholder="..."
               type="text"
               value=""
@@ -1002,6 +1007,7 @@ exports[`<ReflectionFormulaBlock /> Should render and match the snapshot 1`] = `
       >
         <div
           class="c39"
+          direction="row"
           display="flex"
           width="100%"
         >
@@ -1025,6 +1031,7 @@ exports[`<ReflectionFormulaBlock /> Should render and match the snapshot 1`] = `
                     aria-label="Enter speech here..."
                     class="c41"
                     data-cy="text-area"
+                    dir="auto"
                     height="auto"
                     placeholder="Enter speech here..."
                     rows="10"

@@ -38,6 +38,7 @@ const FeedbackSlider = React.forwardRef(
       withSpectrum,
       className,
       ariaLabelledByForHandle,
+      reverse,
     },
     sliderRef,
   ) => (
@@ -50,6 +51,7 @@ const FeedbackSlider = React.forwardRef(
       className={className}
       ariaLabelledByForHandle={ariaLabelledByForHandle}
       disabled
+      reverse={reverse}
     />
   ),
 );
@@ -61,6 +63,7 @@ FeedbackSlider.propTypes = {
   formatMessage: PropTypes.func,
   withSpectrum: PropTypes.bool,
   className: PropTypes.string,
+  reverse: PropTypes.bool,
 };
 
 export default FeedbackSlider;
