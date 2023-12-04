@@ -1,6 +1,8 @@
+import { QuestionTypes } from 'models/Question';
+
 class QuestionType {
   /**
-   * @param  {string} id
+   * @param  {QuestionTypes} id
    * @param  {string} name
    * @param  {string} color
    * @param  {string} reservedVariable

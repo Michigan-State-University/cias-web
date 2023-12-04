@@ -129,8 +129,8 @@ export const fetchInterventionSuccess = (intervention) =>
 export const fetchInterventionError = (error) =>
   actionBuilder(FETCH_INTERVENTION_ERROR, { error });
 
-export const sendInterventionCsvRequest = (id) =>
-  actionBuilder(SEND_INTERVENTION_CSV_REQUEST, { id });
+export const sendInterventionCsvRequest = (id, onSuccess) =>
+  actionBuilder(SEND_INTERVENTION_CSV_REQUEST, { id, onSuccess });
 export const sendInterventionCsvSuccess = (message) =>
   actionBuilder(SEND_INTERVENTION_CSV_SUCCESS, { message });
 export const sendInterventionCsvError = (error) =>
@@ -254,8 +254,8 @@ export const addInterventionLogoRequest = (interventionId, logoData, logoUrl) =>
     logoData,
     logoUrl,
   });
-export const addInterventionLogoSuccess = (logoUrl) =>
-  actionBuilder(ADD_INTERVENTION_LOGO_SUCCESS, { logoUrl });
+export const addInterventionLogoSuccess = (logo) =>
+  actionBuilder(ADD_INTERVENTION_LOGO_SUCCESS, { logo });
 export const addInterventionLogoError = (error) =>
   actionBuilder(ADD_INTERVENTION_LOGO_ERROR, { error });
 
@@ -320,10 +320,10 @@ export const updateInterventionConversationsTranscript = (transcript) =>
     transcript,
   });
 
-export const exportInterventionRequest = (interventionId) =>
-  actionBuilder(EXPORT_INTERVENTION_REQUEST, { interventionId });
+export const exportInterventionRequest = (interventionId, onSuccess) =>
+  actionBuilder(EXPORT_INTERVENTION_REQUEST, { interventionId, onSuccess });
 export const exportInterventionSuccess = () =>
-  actionBuilder(EXPORT_INTERVENTION_SUCCESS);
+  actionBuilder(EXPORT_INTERVENTION_SUCCESS, {});
 export const exportInterventionError = (error) =>
   actionBuilder(EXPORT_INTERVENTION_ERROR, { error });
 

@@ -20,6 +20,7 @@ import BarChartFormulaPattern from './BarChartFormulaPattern';
 
 import { FullWidthContainer } from '../../../styled';
 import messages from '../messages';
+import chartIntervalTypesMessages from '../chartIntervalTypesMessages';
 import { ChartSettingsContext, DashboardSectionsContext } from '../constants';
 
 const BarChartSettings = ({
@@ -89,7 +90,9 @@ const BarChartSettings = ({
                   checked={intervalType === option}
                   onChange={() => onEditIntervalType(option)}
                 >
-                  <Text>{formatMessage(messages.intervalType[option])}</Text>
+                  <Text>
+                    {formatMessage(chartIntervalTypesMessages[option])}
+                  </Text>
                 </Radio>
               ))}
             </FlexRow>

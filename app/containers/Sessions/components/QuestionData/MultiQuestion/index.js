@@ -44,6 +44,7 @@ const MultiQuestion = ({
   isNarratorTab,
   editingPossible,
   intl: { formatMessage },
+  dynamicElementsDirection,
 }) => {
   const checkboxButtonRef = useRef(null);
 
@@ -77,11 +78,11 @@ const MultiQuestion = ({
         selector={null}
       >
         {({ item, index, dragHandleProps }) => (
-          <Row>
+          <Row dir={dynamicElementsDirection}>
             <HoverableBox
               hoverColor={isNarratorTabOrEditNotPossible ? null : undefined}
-              px={21}
-              py={14}
+              paddingInline={21}
+              paddingBlock={14}
               width="100%"
               onMouseEnter={handleMouseEnter(index)}
               onMouseLeave={() => setHovered(-1)}
@@ -91,7 +92,7 @@ const MultiQuestion = ({
                 <Row
                   align="center"
                   justify="between"
-                  mb={isNarratorTabOrEditNotPossible ? 0 : 10}
+                  marginBlockEnd={isNarratorTabOrEditNotPossible ? 0 : 10}
                 >
                   <Row width="90%">
                     {!isNarratorTabOrEditNotPossible && (
@@ -99,7 +100,7 @@ const MultiQuestion = ({
                         alt={formatMessage(messages.reorderIconAlt, {
                           index,
                         })}
-                        mr={10}
+                        marginInlineEnd={10}
                         src={ReorderIcon}
                         disabled={false}
                         cursor="grab"
@@ -110,7 +111,7 @@ const MultiQuestion = ({
                     <Img
                       ref={checkboxButtonRef}
                       src={checkbox}
-                      mr={CHECKBOX_MARGIN}
+                      marginInlineEnd={CHECKBOX_MARGIN}
                     />
                     <OriginalTextHover
                       id={`question-${selectedQuestion.id}-answer-${index}`}
@@ -118,7 +119,6 @@ const MultiQuestion = ({
                       hidden={isNarratorTab}
                     >
                       <FlexibleWidthApprovableInput
-                        mr={8}
                         fontSize={18}
                         type="singleline"
                         placeholder={formatMessage(messages.placeholder, {
@@ -140,51 +140,51 @@ const MultiQuestion = ({
                       hidden={hovered !== index}
                       clickable
                     >
-                      <Img src={bin} mr={16} />
+                      <Img src={bin} marginInlineEnd={16} />
                     </Box>
                   </Row>
                 </Row>
                 <Row align="center" display="flex" hidden={isNarratorTab}>
-                  <BadgeInput
-                    disabled={!editingPossible}
-                    px={0}
-                    py={12}
-                    ml={`${leftMargin}px`}
-                    mr={10}
-                    textAlign="center"
-                    validator={variableNameValidator}
-                    placeholder={formatMessage(
-                      globalMessages.variables.variableNamePlaceholder,
-                    )}
-                    value={item.variable.name}
-                    color={colors.jungleGreen}
-                    onBlur={(val) =>
-                      updateAnswer(index, {
-                        ...item,
-                        variable: { ...item.variable, name: val },
-                      })
-                    }
-                    autoComplete="off"
-                  />
-                  <BadgeInput
-                    disabled={!editingPossible}
-                    px={0}
-                    py={12}
-                    textAlign="center"
-                    validator={numericValidator}
-                    keyboard="tel"
-                    placeholder={formatMessage(
-                      globalMessages.variables.variableScorePlaceholder,
-                    )}
-                    value={item.variable.value}
-                    color={colors.azure}
-                    onBlur={(val) =>
-                      updateAnswer(index, {
-                        ...item,
-                        variable: { ...item.variable, value: val },
-                      })
-                    }
-                  />
+                  <Row marginInlineStart={`${leftMargin}px`} gap={10}>
+                    <BadgeInput
+                      disabled={!editingPossible}
+                      paddingInline={0}
+                      paddingBlock={12}
+                      textAlign="center"
+                      validator={variableNameValidator}
+                      placeholder={formatMessage(
+                        globalMessages.variableNamePlaceholder,
+                      )}
+                      value={item.variable.name}
+                      color={colors.jungleGreen}
+                      onBlur={(val) =>
+                        updateAnswer(index, {
+                          ...item,
+                          variable: { ...item.variable, name: val },
+                        })
+                      }
+                      autoComplete="off"
+                    />
+                    <BadgeInput
+                      disabled={!editingPossible}
+                      paddingInline={0}
+                      paddingBlock={12}
+                      textAlign="center"
+                      validator={numericValidator}
+                      keyboard="tel"
+                      placeholder={formatMessage(
+                        globalMessages.variableScorePlaceholder,
+                      )}
+                      value={item.variable.value}
+                      color={colors.azure}
+                      onBlur={(val) =>
+                        updateAnswer(index, {
+                          ...item,
+                          variable: { ...item.variable, value: val },
+                        })
+                      }
+                    />
+                  </Row>
                 </Row>
               </Column>
             </HoverableBox>
@@ -192,10 +192,10 @@ const MultiQuestion = ({
         )}
       </DndSortable>
       <Row display="flex" hidden={isNarratorTabOrEditNotPossible}>
-        <HoverableBox px={21} py={14} onClick={addAnswer}>
+        <HoverableBox paddingInline={21} paddingBlock={14} onClick={addAnswer}>
           <Box>
             <Row align="center">
-              <PlusCircle mr={12} />
+              <PlusCircle marginInlineEnd={12} />
               <Text fontWeight="bold" color={themeColors.secondary}>
                 {formatMessage(messages.addAnswer)}
               </Text>
@@ -216,6 +216,7 @@ MultiQuestion.propTypes = {
   reorderAnswers: PropTypes.func.isRequired,
   isNarratorTab: PropTypes.bool,
   editingPossible: PropTypes.bool,
+  dynamicElementsDirection: PropTypes.string,
 };
 
 const mapStateToProps = createStructuredSelector({

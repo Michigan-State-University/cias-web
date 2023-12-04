@@ -1,10 +1,7 @@
 import React, { FC } from 'react';
 import { useIntl } from 'react-intl';
 
-import TriangleBackIcon from 'assets/svg/triangle-back.svg';
-
-import { TextButton } from 'components/Button';
-import Icon from 'components/Icon';
+import BackButton from 'components/BackButton';
 import Row from 'components/Row';
 
 import { ParticipantInvitationType } from './types';
@@ -16,15 +13,17 @@ export type Props = {
   onBack: () => void;
 };
 
-export const BackButton: FC<Props> = ({ invitationType, onBack }) => {
+export const InviteParticipantsModalBackButton: FC<Props> = ({
+  invitationType,
+  onBack,
+}) => {
   const { formatMessage } = useIntl();
 
   return (
     <Row>
-      <TextButton onClick={() => onBack()} buttonProps={TEXT_BUTTON_PROPS}>
-        <Icon src={TriangleBackIcon} />
+      <BackButton onClick={() => onBack()} {...TEXT_BUTTON_PROPS}>
         {formatMessage(messages.backButtonTitle, { invitationType })}
-      </TextButton>
+      </BackButton>
     </Row>
   );
 };

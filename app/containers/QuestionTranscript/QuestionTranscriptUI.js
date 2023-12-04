@@ -1,7 +1,6 @@
-import React, { memo, useMemo } from 'react';
+import React, { memo } from 'react';
 import PropTypes from 'prop-types';
 import { useIntl } from 'react-intl';
-import { getLangDir } from 'rtl-detect';
 
 import Box from 'components/Box';
 import { ScrollFogBox } from 'components/Box/ScrollFog';
@@ -16,19 +15,17 @@ import TextBlock from './TextBlock';
 const QuestionTranscriptUI = ({ texts, currentBlockIndex, language }) => {
   const { formatMessage } = useIntl();
 
-  const langDir = useMemo(() => getLangDir(language), [language]);
-
   return (
     <Column height="100%">
       <H3 mb={16}>{formatMessage(messages.header)}</H3>
-      <TranscriptBox lang={language} dir={langDir}>
+      <TranscriptBox lang={language} dir="auto">
         <ScrollFogBox overflow="scroll" borderRadius="0px">
           {texts.map(({ text, realIndex }, index) => (
             <Box key={`Block-Transcript-${index}`}>
               <TextBlock
                 text={text}
                 isCurrent={realIndex === currentBlockIndex}
-                dir={langDir}
+                dir="auto"
               />
               <br />
             </Box>

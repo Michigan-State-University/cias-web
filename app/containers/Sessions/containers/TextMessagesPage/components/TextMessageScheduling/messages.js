@@ -5,22 +5,9 @@
  */
 import { defineMessages } from 'react-intl';
 
-import {
-  TextMessageScheduleOption,
-  TextMessageScheduleFrequency,
-} from 'models/TextMessage';
-
 export const scope = 'app.containers.TextMessageScheduling';
 
 export default defineMessages({
-  [TextMessageScheduleOption.DAYS_AFTER_FILL]: {
-    id: `${scope}.${TextMessageScheduleOption.DAYS_AFTER_FILL}`,
-    defaultMessage: 'Send [X] days after session completed date',
-  },
-  [TextMessageScheduleOption.AFTER_FILL]: {
-    id: `${scope}.${TextMessageScheduleOption.AFTER_FILL}`,
-    defaultMessage: 'Send immediately after session completion',
-  },
   send: {
     id: `${scope}.send`,
     defaultMessage: 'Send',
@@ -37,22 +24,6 @@ export default defineMessages({
     id: `${scope}.sendDays`,
     defaultMessage: 'days after the session is completed',
   },
-  [TextMessageScheduleFrequency.ONCE]: {
-    id: `${scope}.${TextMessageScheduleFrequency.ONCE}`,
-    defaultMessage: 'Once',
-  },
-  [TextMessageScheduleFrequency.ONCE_DAY]: {
-    id: `${scope}.${TextMessageScheduleFrequency.ONCE_DAY}`,
-    defaultMessage: 'Once a day',
-  },
-  [TextMessageScheduleFrequency.ONCE_WEEK]: {
-    id: `${scope}.${TextMessageScheduleFrequency.ONCE_WEEK}`,
-    defaultMessage: 'Once a week',
-  },
-  [TextMessageScheduleFrequency.ONCE_MONTH]: {
-    id: `${scope}.${TextMessageScheduleFrequency.ONCE_MONTH}`,
-    defaultMessage: 'Once a month',
-  },
   finishBy: {
     id: `${scope}.finishBy`,
     defaultMessage: 'finish by ',
@@ -60,5 +31,9 @@ export default defineMessages({
   provideDate: {
     id: `${scope}.provideDate`,
     defaultMessage: 'Provide completion date',
+  },
+  stopFeatureInfo: {
+    id: `${scope}.stopFeatureInfo`,
+    defaultMessage: `Participants can stop all scheduled messages by responding "STOP" or resume with "START". Click <a href='https://support.twilio.com/hc/en-us/articles/223183068-Twilio-international-phone-number-availability-and-their-capabilities#sms_enabled' target='_blank'>here</a> to see supported countries.`,
   },
 });

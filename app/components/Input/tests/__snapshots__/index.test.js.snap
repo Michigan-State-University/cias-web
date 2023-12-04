@@ -137,6 +137,7 @@ exports[`<ApprovableInput /> Should render and match the snapshot as date input 
               aria-label="Placeholder"
               class="c4"
               color="#2F3850"
+              dir="auto"
               font-size="14"
               height="50"
               placeholder="Placeholder"
@@ -225,6 +226,7 @@ exports[`<ApprovableInput /> Should render and match the snapshot as multiline 1
       <textarea
         aria-label="Placeholder"
         class="c2"
+        dir="auto"
         height="auto"
         placeholder="Placeholder"
         rows="1"
@@ -1697,6 +1699,80 @@ exports[`<ApprovableInput /> Should render and match the snapshot as richText 1`
                   />
                 </select>
               </span>
+              <span
+                class="ql-formats"
+              >
+                <button
+                  class="ql-align"
+                  type="button"
+                  value=""
+                >
+                  <svg
+                    viewBox="0 0 18 18"
+                  >
+                     
+                    <line
+                      class="ql-stroke"
+                      x1="3"
+                      x2="15"
+                      y1="9"
+                      y2="9"
+                    />
+                     
+                    <line
+                      class="ql-stroke"
+                      x1="3"
+                      x2="13"
+                      y1="14"
+                      y2="14"
+                    />
+                     
+                    <line
+                      class="ql-stroke"
+                      x1="3"
+                      x2="9"
+                      y1="4"
+                      y2="4"
+                    />
+                     
+                  </svg>
+                </button>
+                <button
+                  class="ql-align"
+                  type="button"
+                  value="right"
+                >
+                  <svg
+                    viewBox="0 0 18 18"
+                  >
+                     
+                    <line
+                      class="ql-stroke"
+                      x1="15"
+                      x2="3"
+                      y1="9"
+                      y2="9"
+                    />
+                     
+                    <line
+                      class="ql-stroke"
+                      x1="15"
+                      x2="5"
+                      y1="14"
+                      y2="14"
+                    />
+                     
+                    <line
+                      class="ql-stroke"
+                      x1="15"
+                      x2="9"
+                      y1="4"
+                      y2="4"
+                    />
+                     
+                  </svg>
+                </button>
+              </span>
             </div>
           </div>
         </div>
@@ -1783,6 +1859,7 @@ exports[`<ApprovableInput /> Should render and match the snapshot as singleline 
       <input
         aria-label="Placeholder"
         class="c2"
+        dir="auto"
         font-size="14"
         height="50"
         placeholder="Placeholder"
@@ -1842,6 +1919,7 @@ exports[`<BadgeInput /> Should render and match the snapshot 1`] = `
     aria-label="Placeholder"
     class="c0 c1"
     color="black"
+    dir="auto"
     placeholder="Placeholder"
     type="text"
     value=""
@@ -1873,6 +1951,7 @@ exports[`<Input /> Should render and match the snapshot 1`] = `
 <div>
   <input
     class="c0"
+    dir="auto"
     type="text"
   />
 </div>
@@ -1902,6 +1981,7 @@ exports[`<Input /> Should render with error and match the snapshot 1`] = `
 <div>
   <input
     class="c0"
+    dir="auto"
     type="text"
   />
 </div>
@@ -1954,6 +2034,7 @@ exports[`<SearchInput /> Should render and match the snapshot 1`] = `
   >
     <input
       class="c1"
+      dir="auto"
       type="text"
       width="100%"
     />
@@ -1998,6 +2079,7 @@ exports[`<StyledInput /> Should render and match the snapshot as singleline 1`] 
   <input
     aria-label="Placeholder"
     class="c0"
+    dir="auto"
     placeholder="Placeholder"
     type="text"
     value=""
@@ -2057,6 +2139,7 @@ exports[`<StyledInput /> Should render and match the snapshot as textarea 1`] = 
       aria-label="Placeholder"
       class="c1"
       data-cy="text-area"
+      dir="auto"
       height="60px"
       placeholder="Placeholder"
       type="multiline"
@@ -2087,6 +2170,7 @@ exports[`<TextArea /> Should render and match the snapshot 1`] = `
 <div>
   <textarea
     class="c0"
+    dir="auto"
   />
 </div>
 `;

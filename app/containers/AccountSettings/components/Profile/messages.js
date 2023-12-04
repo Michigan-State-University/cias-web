@@ -6,7 +6,7 @@
 
 import { defineMessages } from 'react-intl';
 
-export const scope = 'app.containers.AccountSettings';
+export const scope = 'app.containers.AccountSettings.components.Profile';
 
 export default defineMessages({
   changePassword: {

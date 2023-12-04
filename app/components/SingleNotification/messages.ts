@@ -20,7 +20,7 @@ export default defineMessages({
     defaultMessage: `Transcript of a conversation in <secondaryColorBold>{interventionName}</secondaryColorBold> is ready`,
   },
   interventionConversationsTranscriptReadyContent: {
-    id: `${scope}.conversationTranscriptReadyContent`,
+    id: `${scope}.interventionConversationsTranscriptReadyContent`,
     defaultMessage: `Transcript of all conversations in <secondaryColorBold>{interventionName}</secondaryColorBold> is ready`,
   },
   successfullyRestoredInterventionTitle: {

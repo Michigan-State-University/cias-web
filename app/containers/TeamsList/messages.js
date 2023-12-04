@@ -39,7 +39,7 @@ export default defineMessages({
   },
   delete: {
     id: `${scope}.delete`,
-    defaultMessage: ' ',
+    defaultMessage: 'Delete',
   },
   deleteTeamConfirm: {
     id: `${scope}.deleteTeamConfirm`,

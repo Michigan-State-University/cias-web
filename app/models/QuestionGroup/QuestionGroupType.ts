@@ -1,11 +1,13 @@
+import { GroupType } from './QuestionGroup';
+
 class QuestionGroupType {
-  id: string;
+  id: GroupType;
 
   name: string;
 
   color: string;
 
-  constructor(id: string, name: string, color: string) {
+  constructor(id: GroupType, name: string, color: string) {
     this.id = id;
     this.name = name;
     this.color = color;

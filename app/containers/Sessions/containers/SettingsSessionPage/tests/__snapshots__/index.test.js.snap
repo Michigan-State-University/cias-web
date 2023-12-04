@@ -475,7 +475,7 @@ exports[`<SettingsSessionPage /> Should render and match the snapshot 1`] = `
 }
 
 .c48 {
-  margin-left: 5px;
+  margin-inline-start: 5px;
 }
 
 .c42 {
@@ -684,6 +684,7 @@ exports[`<SettingsSessionPage /> Should render and match the snapshot 1`] = `
       <input
         aria-label="e-Session Name"
         class="c5 c6"
+        dir="auto"
         disabled=""
         placeholder="e-Session Name"
         type="text"
@@ -706,6 +707,7 @@ exports[`<SettingsSessionPage /> Should render and match the snapshot 1`] = `
         autocomplete="off"
         class="c7 c8"
         color="#107969"
+        dir="auto"
         disabled=""
         name="notASearchField-Variable name..."
         placeholder="Variable name..."
@@ -819,7 +821,7 @@ exports[`<SettingsSessionPage /> Should render and match the snapshot 1`] = `
                 <div
                   class="c19"
                 >
-                  Finish session automatically
+                  Set Autofinish timer
                   <div
                     class="c21"
                     display="flex"
@@ -877,6 +879,7 @@ exports[`<SettingsSessionPage /> Should render and match the snapshot 1`] = `
           >
             <input
               class="c32"
+              dir="auto"
               disabled=""
               id="autofinishDelay"
               name="autofinishDelay"

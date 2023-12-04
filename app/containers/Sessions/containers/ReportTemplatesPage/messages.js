@@ -1,7 +1,5 @@
 import { defineMessages } from 'react-intl';
 
-import { CoverLetterLogoType } from 'models/ReportTemplate';
-
 export const scope = 'app.containers.ReportTemplatesPage';
 
 export default defineMessages({
@@ -32,7 +30,7 @@ export default defineMessages({
   },
   reportSettingsHelp: {
     id: `${scope}.reportSettingsHelp`,
-    defaultMessage: `You can send PDF's to participants and third parties. Click <a href="https://www.cias.app/_files/ugd/afc5c9_1991a91265054184819f8632193e65cc.pdf" target="_blank">here</a> to see a step-by-step guide. For more help resources, visit <a href="https://www.cias.app/resources" target="_blank">www.cias.app/resources</a>.`,
+    defaultMessage: `You can send PDF's to participants and third parties. Click <a href='https://www.cias.app/_files/ugd/afc5c9_1991a91265054184819f8632193e65cc.pdf' target='_blank'>here</a> to see a step-by-step guide. For more help resources, visit <a href='https://www.cias.app/resources' target='_blank'>www.cias.app/resources</a>.`,
   },
   sectionSettingsHeader: {
     id: `${scope}.sectionSettingsHeader`,
@@ -43,7 +41,7 @@ export default defineMessages({
     defaultMessage: 'Duplicate',
   },
   settingsDuplicateReportButtonTitle: {
-    id: `${scope}.settingsDuplicateReportButton`,
+    id: `${scope}.settingsDuplicateReportButtonTitle`,
     defaultMessage: 'Duplicate report template',
   },
   settingsDownloadReportButtonTitle: {
@@ -89,18 +87,6 @@ export default defineMessages({
   coverLetterLogoType: {
     id: `${scope}.coverLetterLogoType`,
     defaultMessage: 'Logo on the cover letter',
-  },
-  [CoverLetterLogoType.REPORT_LOGO]: {
-    id: `${scope}.${CoverLetterLogoType.REPORT_LOGO}`,
-    defaultMessage: 'Use Report logo',
-  },
-  [CoverLetterLogoType.CUSTOM]: {
-    id: `${scope}.${CoverLetterLogoType.CUSTOM}`,
-    defaultMessage: 'Use custom logo',
-  },
-  [CoverLetterLogoType.NO_LOGO]: {
-    id: `${scope}.${CoverLetterLogoType.NO_LOGO}`,
-    defaultMessage: 'Don’t show logo',
   },
   coverLetterDescription: {
     id: `${scope}.coverLetterDescription`,

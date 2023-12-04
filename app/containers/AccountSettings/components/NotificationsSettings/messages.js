@@ -6,7 +6,8 @@
 
 import { defineMessages } from 'react-intl';
 
-export const scope = 'app.containers.AccountSettings';
+export const scope =
+  'app.containers.AccountSettings.components.NotificationsSettings';
 
 export default defineMessages({
   header: {

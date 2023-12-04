@@ -19,7 +19,7 @@ import { DEFAULT_LOCALE } from 'i18n';
 
 import { MAIN_DASHBOARD_FILTER_DATA_INITIAL_VALUE } from 'global/reducers/interventions';
 
-import { intlProviderConfig } from 'containers/LanguageProvider';
+import { intlProviderConfig } from 'containers/AppLanguageProvider';
 
 import InterventionPage from '../index';
 

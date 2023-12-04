@@ -12,21 +12,18 @@ import {
 import messages from '../messages';
 import {
   EXPORT_INTERVENTION_REQUEST,
-  EXPORT_INTERVENTION_SUCCESS,
   EXPORT_INTERVENTION_ERROR,
 } from '../constants';
 
-export function* exportIntervention({
-  payload: { interventionId },
+function* exportIntervention({
+  payload: { interventionId, onSuccess },
 }: ReturnType<typeof exportInterventionRequest>) {
   const url = `v1/interventions/${interventionId}/export`;
 
   try {
     yield call(axios.post, url);
     yield put(exportInterventionSuccess());
-    yield call(toast.info, formatMessage(messages.exportInterventionSuccess), {
-      toastId: EXPORT_INTERVENTION_SUCCESS,
-    });
+    onSuccess();
   } catch (error) {
     yield put(exportInterventionError(error));
     yield call(toast.error, formatMessage(messages.exportInterventionError), {
@@ -35,6 +32,11 @@ export function* exportIntervention({
   }
 }
 
-export default function* exportInterventionSaga() {
+function* exportInterventionSaga() {
   yield takeEvery(EXPORT_INTERVENTION_REQUEST, exportIntervention);
 }
+
+export const withExportInterventionSaga = {
+  key: 'exportInterventionSaga',
+  saga: exportInterventionSaga,
+};

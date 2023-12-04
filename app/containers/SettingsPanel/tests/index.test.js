@@ -14,7 +14,7 @@ import { DEFAULT_LOCALE } from 'i18n';
 
 import { createTestStore } from 'utils/testUtils/storeUtils';
 
-import { intlProviderConfig } from 'containers/LanguageProvider';
+import { intlProviderConfig } from 'containers/AppLanguageProvider';
 
 import SettingsPanel from '../index';
 

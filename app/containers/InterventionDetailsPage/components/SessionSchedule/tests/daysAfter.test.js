@@ -17,7 +17,7 @@ import { InterventionSharedTo } from 'models/Intervention';
 
 import { DEFAULT_LOCALE } from 'i18n';
 
-import { intlProviderConfig } from 'containers/LanguageProvider';
+import { intlProviderConfig } from 'containers/AppLanguageProvider';
 
 import SessionSchedule from '../index';
 

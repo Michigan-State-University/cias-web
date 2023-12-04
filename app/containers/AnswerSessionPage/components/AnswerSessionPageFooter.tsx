@@ -59,7 +59,7 @@ const AnswerSessionPageFooter = ({
               <Img
                 src={AccessibilityIcon}
                 alt={formatMessage(messages.accessiBeIconAlt)}
-                height={32}
+                height={60}
               />
             </Tooltip>
           )}

@@ -23,6 +23,7 @@ export type CommonProps = {
   dataFor?: string;
   lines?: number;
   width?: number;
+  dir?: string;
 } & Record<string, unknown>;
 
 export type Props = CommonProps & (HtmlProps | NonHtmlProps);
@@ -37,6 +38,7 @@ const EllipsisText = ({
   lines = 1,
   width,
   isHtml,
+  dir,
   ...props
 }: Props) => {
   const ref = useRef(null);
@@ -51,7 +53,7 @@ const EllipsisText = ({
   const purifiedHtmlText = isHtml ? sanitize(text) : '';
 
   return (
-    <Row width="100%">
+    <Row width="100%" dir={dir}>
       <Tooltip
         visible={allowTooltip}
         text={!isHtml ? plainText : undefined}

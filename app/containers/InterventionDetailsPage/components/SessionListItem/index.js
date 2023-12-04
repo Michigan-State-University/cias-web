@@ -9,6 +9,7 @@ import PropTypes from 'prop-types';
 import { injectIntl } from 'react-intl';
 import { Draggable } from 'react-beautiful-dnd';
 import { useHistory } from 'react-router-dom';
+import { Markup } from 'interweave';
 
 import Row from 'components/Row';
 import Column from 'components/Column';
@@ -45,6 +46,7 @@ import SessionSchedule from '../SessionSchedule';
 import messages from './messages';
 import { ToggleableBox, StyledRow, SessionIndex } from './styled';
 import SessionBranching from '../SessionBranching';
+import { formatSessionName } from './utils';
 
 const WCAG_ARIA_LABEL_ID = 'estimate-time-label';
 
@@ -220,14 +222,20 @@ function SessionListItem({
                 >
                   <SessionIndex>{index + 1}</SessionIndex>
                   <Column px={15}>
-                    <H2>{name}</H2>
+                    <Markup
+                      attributes={{
+                        dir: 'auto',
+                      }}
+                      content={formatSessionName(name)}
+                      tagName={H2}
+                    />
                     <BadgeInput
                       mt={5}
                       disabled={disabled}
                       textAlign="center"
                       validator={variableNameValidator}
                       placeholder={formatMessage(
-                        globalMessages.variables.variableNamePlaceholder,
+                        globalMessages.variableNamePlaceholder,
                       )}
                       value={variable}
                       color={colors.jungleGreen}

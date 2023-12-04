@@ -85,6 +85,12 @@ const makeSelectHfhsPatientDetail = () =>
     ({ hfhsPatientDetail }) => hfhsPatientDetail,
   );
 
+const makeSelectUserSessionLanguageCode = () =>
+  createSelector(
+    selectAnswerSessionPageDomain,
+    (substate) => substate.userSession?.languageCode,
+  );
+
 export default makeSelectAnswerSessionPage;
 export {
   selectAnswerSessionPageDomain,
@@ -99,4 +105,5 @@ export {
   makeSelectShowTextReadingControls,
   makeSelectVerifyPatientDataState,
   makeSelectHfhsPatientDetail,
+  makeSelectUserSessionLanguageCode,
 };

@@ -130,8 +130,8 @@ const SettingsPanel = ({ intervention }: Props) => {
     originalText,
     liveChatEnabled,
     conversationsPresent,
-    conversationsTranscriptGeneratedAt,
-    conversationsTranscriptFilename,
+    conversationsTranscript,
+    logo,
   } = intervention || {};
 
   const changingAccessSettingsPossible =
@@ -204,8 +204,8 @@ const SettingsPanel = ({ intervention }: Props) => {
   };
 
   const onAddLogo = useCallback(
-    (logo) => {
-      globalDispatch(addInterventionLogoRequest(interventionId, logo.image));
+    ({ image }) => {
+      globalDispatch(addInterventionLogoRequest(interventionId, image));
     },
     [interventionId],
   );
@@ -250,9 +250,7 @@ const SettingsPanel = ({ intervention }: Props) => {
 
   const showConversationsTranscriptPanel =
     canAccessParticipantsData &&
-    (liveChatEnabled ||
-      conversationsPresent ||
-      conversationsTranscriptGeneratedAt);
+    (liveChatEnabled || conversationsPresent || conversationsTranscript);
 
   // @ts-ignore
   if (fetchInterventionLoading) return <Loader />;
@@ -292,8 +290,7 @@ const SettingsPanel = ({ intervention }: Props) => {
           </Box>
           {showConversationsTranscriptPanel && (
             <ConversationsTranscriptPanel
-              generatedAt={conversationsTranscriptGeneratedAt}
-              filename={conversationsTranscriptFilename}
+              conversationsTranscript={conversationsTranscript}
               interventionId={interventionId!}
             />
           )}
@@ -404,7 +401,7 @@ const SettingsPanel = ({ intervention }: Props) => {
       </StyledBox>
       <StyledBox my={30} padding={35}>
         <LogoUpload
-          intervention={intervention}
+          logo={logo}
           logoLoading={logoLoading}
           addImage={onAddLogo}
           deleteImage={onDeleteLogo}

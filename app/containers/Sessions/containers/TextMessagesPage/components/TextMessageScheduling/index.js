@@ -2,24 +2,28 @@ import React, { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
 import values from 'lodash/values';
 import { Col as GCol, Row as GRow } from 'react-grid-system';
+import { Markup } from 'interweave';
+
 import dayjs from 'dayjs';
 
 import {
   TextMessageScheduleFrequency,
   TextMessageScheduleOption,
 } from 'models/TextMessage';
-
 import Selector from 'components/Selector';
 import Column from 'components/Column';
 import Row from 'components/Row';
 import Text from 'components/Text';
+
 import ApprovableInput from 'components/Input/ApprovableInput';
-
 import { numericValidator } from 'utils/validators';
-import { themeColors } from 'theme';
 
+import { themeColors } from 'theme';
 import messages from './messages';
 import { StyledInputWrapper } from './styled';
+import textMessageScheduleOptionsMessages from './textMessageScheduleOptionsMessages';
+import textMessageScheduleFrequenciesMessages from './textMessageScheduleFrequenciesMessages';
+
 const TextMessageScheduling = ({
   id,
   selectedOption,
@@ -73,35 +77,66 @@ const TextMessageScheduling = ({
   const ALL_SCHEDULE_OPTIONS = {
     [TextMessageScheduleOption.AFTER_FILL]: {
       id: TextMessageScheduleOption.AFTER_FILL,
-      label: formatMessage(messages[TextMessageScheduleOption.AFTER_FILL]),
+      label: formatMessage(
+        textMessageScheduleOptionsMessages[
+          TextMessageScheduleOption.AFTER_FILL
+        ],
+      ),
     },
     [TextMessageScheduleOption.DAYS_AFTER_FILL]: {
       id: TextMessageScheduleOption.DAYS_AFTER_FILL,
-      label: formatMessage(messages[TextMessageScheduleOption.DAYS_AFTER_FILL]),
+      label: formatMessage(
+        textMessageScheduleOptionsMessages[
+          TextMessageScheduleOption.DAYS_AFTER_FILL
+        ],
+      ),
     },
   };
 
   const ALL_FREQUENCIES = {
     [TextMessageScheduleFrequency.ONCE]: {
       id: TextMessageScheduleFrequency.ONCE,
-      label: formatMessage(messages[TextMessageScheduleFrequency.ONCE]),
+      label: formatMessage(
+        textMessageScheduleFrequenciesMessages[
+          TextMessageScheduleFrequency.ONCE
+        ],
+      ),
     },
     [TextMessageScheduleFrequency.ONCE_DAY]: {
       id: TextMessageScheduleFrequency.ONCE_DAY,
-      label: formatMessage(messages[TextMessageScheduleFrequency.ONCE_DAY]),
+      label: formatMessage(
+        textMessageScheduleFrequenciesMessages[
+          TextMessageScheduleFrequency.ONCE_DAY
+        ],
+      ),
     },
     [TextMessageScheduleFrequency.ONCE_WEEK]: {
       id: TextMessageScheduleFrequency.ONCE_WEEK,
-      label: formatMessage(messages[TextMessageScheduleFrequency.ONCE_WEEK]),
+      label: formatMessage(
+        textMessageScheduleFrequenciesMessages[
+          TextMessageScheduleFrequency.ONCE_WEEK
+        ],
+      ),
     },
     [TextMessageScheduleFrequency.ONCE_MONTH]: {
       id: TextMessageScheduleFrequency.ONCE_MONTH,
-      label: formatMessage(messages[TextMessageScheduleFrequency.ONCE_MONTH]),
+      label: formatMessage(
+        textMessageScheduleFrequenciesMessages[
+          TextMessageScheduleFrequency.ONCE_MONTH
+        ],
+      ),
     },
   };
   return (
     <Column>
-      <Row mt={32}>
+      <Row>
+        <Markup
+          content={formatMessage(messages.stopFeatureInfo)}
+          attributes={{ opacity: 0.7 }}
+          tagName={Text}
+        />
+      </Row>
+      <Row mt={24}>
         <Selector
           options={values(ALL_SCHEDULE_OPTIONS)}
           rightPosition="315"
