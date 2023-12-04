@@ -29,16 +29,16 @@ export const SessionSettingsForm: React.FC<Props> = ({
         {formatMessage(messages.autofinishSettings)}
       </H3>
 
-      <AutofinishForm
-        disabled={disabled}
-        autofinishEnabled={autofinishEnabled}
-        autofinishDelay={autofinishDelay}
-        onSubmit={onSubmit}
-      />
       <AutocloseForm
         disabled={disabled}
         autocloseEnabled={autocloseEnabled}
         autocloseAt={autocloseAt}
+        onSubmit={onSubmit}
+      />
+      <AutofinishForm
+        disabled={disabled}
+        autofinishEnabled={autofinishEnabled}
+        autofinishDelay={autofinishDelay}
         onSubmit={onSubmit}
       />
     </>

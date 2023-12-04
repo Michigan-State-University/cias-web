@@ -83,7 +83,6 @@ export const AutocloseForm: React.FC<Props> = ({
                 );
               }
             }}
-            mt={32}
           >
             <HelpIconTooltip
               id="autoclose-enabled-tooltip-info"
@@ -105,6 +104,7 @@ export const AutocloseForm: React.FC<Props> = ({
                 inputProps={{
                   width: '100%',
                 }}
+                selectTime
               />
             </Row>
           )}

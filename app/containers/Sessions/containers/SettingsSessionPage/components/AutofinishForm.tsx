@@ -106,6 +106,7 @@ export const AutofinishForm: React.FC<Props> = ({
                 );
               }
             }}
+            mt={32}
           >
             <HelpIconTooltip
               id="autofinish-enabled-tooltip-info"

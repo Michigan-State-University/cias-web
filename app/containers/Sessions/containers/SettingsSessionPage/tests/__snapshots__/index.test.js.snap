@@ -730,135 +730,131 @@ exports[`<SettingsSessionPage /> Should render and match the snapshot 1`] = `
             class="c5"
           >
             <div
-              class="c5"
+              class="c4"
             >
               <div
-                class="c4"
+                class="c12"
               >
-                <div
-                  class="c12"
+                <input
+                  aria-checked="false"
+                  aria-disabled="true"
+                  class="c14 c15"
+                  data-cy="branching-intervention-toggle"
+                  data-testid="switch-input"
+                  disabled=""
+                  id="autocloseEnabled"
+                  role="switch"
+                  type="checkbox"
+                />
+                <label
+                  class="c16 c17"
+                  for="autocloseEnabled"
                 >
-                  <input
-                    aria-checked="false"
-                    aria-disabled="true"
-                    class="c14 c15"
-                    data-cy="branching-intervention-toggle"
-                    data-testid="switch-input"
-                    disabled=""
-                    id="autofinishEnabled"
-                    role="switch"
-                    type="checkbox"
-                  />
-                  <label
-                    class="c16 c17"
-                    for="autofinishEnabled"
+                  <div
+                    class="c18"
+                    name="autocloseEnabled"
+                    width="100%"
                   >
                     <div
-                      class="c18"
-                      name="autofinishEnabled"
-                      width="100%"
+                      class="c19 c20"
                     >
                       <div
-                        class="c19 c20"
+                        class="c21"
                       >
+                        Set session close date
                         <div
-                          class="c21"
+                          class="c23"
+                          display="flex"
                         >
-                          Set Autofinish timer
                           <div
-                            class="c23"
-                            display="flex"
+                            class="c19"
+                            data-for="autoclose-enabled-tooltip-info"
+                            data-tip=""
                           >
-                            <div
-                              class="c19"
-                              data-for="autofinish-enabled-tooltip-info"
-                              data-tip=""
-                            >
-                              <img
-                                alt="?"
-                                class="c24"
-                                src="IMAGE_MOCK"
-                              />
-                            </div>
+                            <img
+                              alt="?"
+                              class="c24"
+                              src="IMAGE_MOCK"
+                            />
                           </div>
                         </div>
                       </div>
-                      <div
-                        class="c25"
-                      >
-                        <span
-                          class="c26 c27"
-                        />
-                      </div>
                     </div>
-                  </label>
-                </div>
+                    <div
+                      class="c25"
+                    >
+                      <span
+                        class="c26 c27"
+                      />
+                    </div>
+                  </div>
+                </label>
               </div>
             </div>
+          </div>
+          <div
+            class="c5"
+          >
             <div
-              class="c5"
+              class="c4"
             >
               <div
-                class="c4"
+                class="c12"
               >
-                <div
-                  class="c12"
+                <input
+                  aria-checked="false"
+                  aria-disabled="true"
+                  class="c14 c15"
+                  data-cy="branching-intervention-toggle"
+                  data-testid="switch-input"
+                  disabled=""
+                  id="autofinishEnabled"
+                  role="switch"
+                  type="checkbox"
+                />
+                <label
+                  class="c16 c17"
+                  for="autofinishEnabled"
                 >
-                  <input
-                    aria-checked="false"
-                    aria-disabled="true"
-                    class="c14 c15"
-                    data-cy="branching-intervention-toggle"
-                    data-testid="switch-input"
-                    disabled=""
-                    id="autocloseEnabled"
-                    role="switch"
-                    type="checkbox"
-                  />
-                  <label
-                    class="c16 c17"
-                    for="autocloseEnabled"
+                  <div
+                    class="c29"
+                    name="autofinishEnabled"
+                    width="100%"
                   >
                     <div
-                      class="c29"
-                      name="autocloseEnabled"
-                      width="100%"
+                      class="c19 c20"
                     >
                       <div
-                        class="c19 c20"
+                        class="c21"
                       >
+                        Set Autofinish timer
                         <div
-                          class="c21"
+                          class="c23"
+                          display="flex"
                         >
-                          Set session close date
                           <div
-                            class="c23"
-                            display="flex"
+                            class="c19"
+                            data-for="autofinish-enabled-tooltip-info"
+                            data-tip=""
                           >
-                            <div
-                              class="c19"
-                              data-for="autoclose-enabled-tooltip-info"
-                              data-tip=""
-                            >
-                              <img
-                                alt="?"
-                                class="c24"
-                                src="IMAGE_MOCK"
-                              />
-                            </div>
+                            <img
+                              alt="?"
+                              class="c24"
+                              src="IMAGE_MOCK"
+                            />
                           </div>
                         </div>
                       </div>
-                      <div
-                        class="c25"
-                      >
-                        <span
-                          class="c26 c27"
-                        />
-                      </div>
                     </div>
-                  </label>
-                </div>
+                    <div
+                      class="c25"
+                    >
+                      <span
+                        class="c26 c27"
+                      />
+                    </div>
+                  </div>
+                </label>
               </div>
             </div>
           </div>

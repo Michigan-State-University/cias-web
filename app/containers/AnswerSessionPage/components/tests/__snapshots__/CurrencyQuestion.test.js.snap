@@ -108,6 +108,15 @@ exports[`<CurrencyQuestion /> Should render and match the snapshot 1`] = `
   background-color: #E9F1FB;
 }
 
+.c5 .schedule-date-picker .react-datepicker__time-list-item:hover {
+  color: #FFFFFF;
+  background-color: rgba(200,102,234,0.7) !important;
+}
+
+.c5 .schedule-date-picker .react-datepicker__time-list-item--selected {
+  background-color: #C866EA !important;
+}
+
 .c5 .react-datepicker-wrapper {
   width: 100%;
 }
