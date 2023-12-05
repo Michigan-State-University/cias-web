@@ -154,6 +154,7 @@ const UserSessionTile = ({
       <TileContainer
         bg={tileBackground}
         height={elements.userSessionTileHeight}
+        disabled={disabledTile}
       >
         <Box display="flex" justify="between" align="center">
           <Box

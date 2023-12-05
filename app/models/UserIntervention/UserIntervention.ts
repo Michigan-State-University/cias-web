@@ -1,5 +1,5 @@
 import { CamelToSnakeOmitId } from 'global/types/camelToSnake';
-import { InterventionType } from 'models/Intervention';
+import { InterventionStatus, InterventionType } from 'models/Intervention';
 import { AppFile } from 'models/File';
 import { Session } from 'models/Session/Session';
 import { UserSession } from 'models/UserSession/UserSession';
@@ -18,6 +18,7 @@ export interface UserIntervention {
     id: string;
     files: AppFile[];
     liveChatEnabled: boolean;
+    status: InterventionStatus;
   };
   lastAnswerDate: Nullable<string>;
   sessionsInIntervention: number;

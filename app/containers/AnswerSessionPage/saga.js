@@ -1,7 +1,7 @@
 import { takeLatest, put, select, call, takeEvery } from 'redux-saga/effects';
 import axios from 'axios';
 import { toast } from 'react-toastify';
-import { push } from 'connected-react-router';
+import { push, replace } from 'connected-react-router';
 import merge from 'lodash/merge';
 
 import { AnswerType } from 'models/Answer';
@@ -71,6 +71,7 @@ import {
   makeSelectUserSession,
 } from './selectors';
 import messages from './messages';
+import { getInterventionNotAvailablePagePathFromApiError } from '../../components/InterventionNotAvailableInfo';
 
 function* submitAnswersAsync({
   payload: { questionId, required, type: questionType, userSessionId, skipped },
@@ -222,6 +223,11 @@ function* fetchUserSession({ payload: { sessionId } }) {
     yield put(fetchUserSessionSuccess(userSession));
     yield put(changeLocale(userSession.languageCode));
   } catch (error) {
+    const redirectPath = getInterventionNotAvailablePagePathFromApiError(error);
+    if (redirectPath) {
+      yield put(replace(redirectPath));
+    }
+
     yield put(fetchUserSessionError(error));
   }
 }
@@ -246,6 +252,10 @@ function* createUserSession({ payload: { sessionId } }) {
     yield put(resetPhoneNumberPreview());
     yield put(startSession());
   } catch (error) {
+    const redirectPath = getInterventionNotAvailablePagePathFromApiError(error);
+    if (redirectPath) {
+      yield put(replace(redirectPath));
+    }
     yield put(createUserSessionFailure(error));
   }
 }
@@ -269,6 +279,10 @@ function* fetchOrCreateUserSession({ payload: { sessionId } }) {
     yield put(resetPhoneNumberPreview());
     yield put(startSession());
   } catch (error) {
+    const redirectPath = getInterventionNotAvailablePagePathFromApiError(error);
+    if (redirectPath) {
+      yield put(replace(redirectPath));
+    }
     yield put(fetchOrCreateUserSessionError(error));
   }
 }
