@@ -2,8 +2,6 @@ import React, { FC, useMemo, useState } from 'react';
 import { useIntl } from 'react-intl';
 import { useDispatch, useSelector } from 'react-redux';
 
-import { themeColors } from 'theme';
-
 import {
   makeSelectInterventionLoader,
   sendInterventionInvitationsRequest,
@@ -12,7 +10,7 @@ import {
 
 import Column from 'components/Column';
 import { SelectOption } from 'components/Select/types';
-import { Alert } from 'components/Alert';
+import { Alert, AlertType } from 'components/Alert';
 import CsvFileExport from 'components/CsvFileExport';
 import CsvFileReader from 'components/CsvFileReader';
 import Row from 'components/Row';
@@ -121,7 +119,7 @@ export const UploadEmailsView: FC<Props> = ({
       />
       <Alert
         content={formatMessage(messages.uploadEmailsInfo)}
-        background={themeColors.highlight}
+        type={AlertType.INFO}
         contentProps={{ maxWidth: 510 }}
       />
       <Row align="center" gap={24}>

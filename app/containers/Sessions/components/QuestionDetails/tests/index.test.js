@@ -8,7 +8,8 @@ import { Provider } from 'react-redux';
 import { elements } from 'theme';
 import { MemoryRouter } from 'react-router-dom';
 
-import { draft } from 'models/Status/StatusTypes';
+import { InterventionStatus } from 'models/Intervention';
+
 import settingsTabLabels from 'utils/settingsTabsLabels';
 import { formatMessage } from 'utils/testUtils/formatMessage';
 import { createTestStore } from 'utils/testUtils/storeUtils';
@@ -22,7 +23,7 @@ describe('<QuestionDetails />', () => {
   const initialState = {
     intervention: {
       intervention: {
-        status: draft,
+        status: InterventionStatus.DRAFT,
       },
     },
     questions: {

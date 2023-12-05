@@ -5,13 +5,13 @@ import { Provider } from 'react-redux';
 import { IntlProvider } from 'react-intl';
 import { DEFAULT_LOCALE } from 'i18n';
 
+import { InterventionStatus } from 'models/Intervention';
+
 import { sessionReducer } from 'global/reducers/session';
 import { localStateReducer } from 'global/reducers/localState';
 import { interventionsReducer } from 'global/reducers/interventions';
 import { interventionReducer } from 'global/reducers/intervention';
 import { copyModalReducer } from 'global/reducers/copyModalReducer';
-
-import { draft } from 'models/Status/StatusTypes';
 
 import { createTestStore } from 'utils/testUtils/storeUtils';
 import CopyChooser from '../index';
@@ -25,7 +25,7 @@ const mockSingleGroup = (suffix = 1) => ({
 const mockIntervention = (suffix = 1) => ({
   id: `intervention-test-id-${suffix}`,
   name: `Intervention test title ${suffix}`,
-  status: draft,
+  status: InterventionStatus.DRAFT,
 });
 
 const mockSession = (suffix = 1) => ({

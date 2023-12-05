@@ -248,7 +248,6 @@ exports[`<InterventionTile /> Should render and match the snapshot 1`] = `
   display: -webkit-flex;
   display: -ms-flexbox;
   display: flex;
-  cursor: pointer;
   -webkit-flex-direction: column;
   -ms-flex-direction: column;
   flex-direction: column;
@@ -259,7 +258,9 @@ exports[`<InterventionTile /> Should render and match the snapshot 1`] = `
   -webkit-justify-content: space-between;
   -ms-flex-pack: justify;
   justify-content: space-between;
+  cursor: pointer;
   gap: 8px;
+  opacity: 1;
 }
 
 .c0 {

@@ -1,4 +1,4 @@
-import React, { CSSProperties, FC } from 'react';
+import React, { FC } from 'react';
 import { useIntl } from 'react-intl';
 import { themeColors } from 'theme';
 
@@ -17,20 +17,25 @@ import {
   TextProps,
 } from 'components/BaseComponentStyles';
 
+import { AlertType } from './types';
+import { getBackgroundColorByType } from './utils';
+
 export type Props = {
   content: string;
   contentProps?: Partial<
     TextProps & MarginProps & LayoutProps & PositioningProps
   >;
   onDismiss?: () => void;
-  background: CSSProperties['background'];
+  type: AlertType;
+  wrap?: boolean;
 } & Partial<MarginProps & LayoutProps & PositioningProps>;
 
 export const Alert: FC<Props> = ({
   content,
   contentProps,
   onDismiss,
-  background,
+  type,
+  wrap = true,
   ...props
 }) => {
   const { formatMessage } = useIntl();
@@ -42,13 +47,13 @@ export const Alert: FC<Props> = ({
       px={16}
       gap={16}
       justify="between"
-      flexWrap="wrap"
-      background={background}
+      flexWrap={wrap ? 'wrap' : 'nowrap'}
+      background={getBackgroundColorByType(type)}
       {...props}
     >
-      <Row gap={12} align="center" flexWrap="wrap">
+      <Row gap={12} align="center" flexWrap={wrap ? 'wrap' : 'nowrap'}>
         <Icon src={WarningIcon} stroke={themeColors.text} />
-        <Text fontSize={15} lineHeight={1.3} {...contentProps}>
+        <Text fontSize={15} lineHeight={1.3} textAlign="left" {...contentProps}>
           {content}
         </Text>
       </Row>

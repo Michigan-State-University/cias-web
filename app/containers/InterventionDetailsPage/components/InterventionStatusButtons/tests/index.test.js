@@ -16,10 +16,8 @@ import 'jest-styled-components';
 import { DEFAULT_LOCALE } from 'i18n';
 
 import { Roles } from 'models/User/RolesManager';
-import {
-  draft,
-  INITIAL_STATUSES_FILTER_VALUE,
-} from 'models/Status/StatusTypes';
+import { INITIAL_STATUSES_FILTER_VALUE } from 'models/Status/StatusTypes';
+import { InterventionStatus } from 'models/Intervention';
 
 import { createTestStore } from 'utils/testUtils/storeUtils';
 import InterventionStatusButtons from '../index';
@@ -54,7 +52,10 @@ describe('<InterventionStatusButtons />', () => {
     render(
       <Provider store={store}>
         <IntlProvider locale={DEFAULT_LOCALE}>
-          <InterventionStatusButtons status={draft} {...defaultProps} />
+          <InterventionStatusButtons
+            status={InterventionStatus.DRAFT}
+            {...defaultProps}
+          />
         </IntlProvider>
       </Provider>,
     );

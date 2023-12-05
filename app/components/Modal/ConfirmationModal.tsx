@@ -47,7 +47,7 @@ export type Props<T = boolean> = {
   hideCloseButton?: boolean;
   hideCancelButton?: boolean;
   isMobile?: boolean;
-  titleStyles: object;
+  titleStyles?: object;
   modalState?: Nullable<T | boolean>;
 } & Omit<ModalProps, 'children'>;
 
