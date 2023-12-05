@@ -45,7 +45,7 @@ export default defineMessages({
   },
   autocloseAtLabel: {
     id: `${scope}.autocloseAtLabel`,
-    defaultMessage: 'Session close date',
+    defaultMessage: 'Session close date at {timezone}',
   },
   hours: {
     id: `${scope}.hours`,

@@ -7,11 +7,13 @@ import isEmpty from 'lodash/isEmpty';
 
 import { requiredDateValidationSchema } from 'utils/validators';
 import { objectDifference } from 'utils/objectDifference';
+import { guestClientTimeZone } from 'utils/timezones';
 
 import FormikSwitchInput from 'components/FormikSwitchInput';
 import { HelpIconTooltip } from 'components/HelpIconTooltip';
-import Row from 'components/Row';
+import Column from 'components/Column';
 import FormikDatePicker from 'components/FormikDatePicker';
+import { getTimezoneLabel } from 'components/FormikTimezoneSelect';
 
 import messages from './messages';
 import { InputContainer } from './styled';
@@ -92,10 +94,12 @@ export const AutocloseForm: React.FC<Props> = ({
             </HelpIconTooltip>
           </FormikSwitchInput>
           {values.autocloseEnabled && (
-            <Row gap={16} mt={16}>
+            <Column gap={16} mt={16}>
               <FormikDatePicker
                 formikKey="autocloseAtDate"
-                label={formatMessage(messages.autocloseAtLabel)}
+                label={formatMessage(messages.autocloseAtLabel, {
+                  timezone: getTimezoneLabel(guestClientTimeZone()),
+                })}
                 disabled={disabled}
                 datePickerProps={{
                   minDate: new Date(),
@@ -106,7 +110,7 @@ export const AutocloseForm: React.FC<Props> = ({
                 }}
                 selectTime
               />
-            </Row>
+            </Column>
           )}
         </InputContainer>
       )}

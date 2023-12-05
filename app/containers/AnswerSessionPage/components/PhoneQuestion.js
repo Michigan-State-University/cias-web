@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import { useDispatch, useSelector } from 'react-redux';
 import { useInjectSaga } from 'redux-injectors';
 
-import { clientTimeZone } from 'utils/timezones';
+import { guestClientTimeZone } from 'utils/timezones';
 import { getIsPreview } from 'utils/previewMode';
 
 import {
@@ -92,7 +92,7 @@ const PhoneQuestion = ({
 
   useEffect(() => {
     if (!timezone) {
-      saveAnswer({ timezone: clientTimeZone });
+      saveAnswer({ timezone: guestClientTimeZone() });
     }
   }, [timezone]);
 

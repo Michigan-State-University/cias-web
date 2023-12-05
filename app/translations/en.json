@@ -1424,7 +1424,7 @@
   "app.containers.Settings.settings": "Settings",
   "app.containers.SettingsSessionPage.Components.accountRequired": "CIAS Account Required",
   "app.containers.SettingsSessionPage.Components.animation": "Display Narrator",
-  "app.containers.SettingsSessionPage.Components.autocloseAtLabel": "Session close date",
+  "app.containers.SettingsSessionPage.Components.autocloseAtLabel": "Session close date at {timezone}",
   "app.containers.SettingsSessionPage.Components.autocloseEnabledLabel": "Set session close date",
   "app.containers.SettingsSessionPage.Components.autocloseTooltip": "Select a time to automatically close the session. This will prevent participants from accessing the session after the selected time.",
   "app.containers.SettingsSessionPage.Components.autofinishDelayLabel": "Autofinish delay",
