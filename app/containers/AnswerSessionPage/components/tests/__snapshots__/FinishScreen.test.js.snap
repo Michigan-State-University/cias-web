@@ -51,7 +51,7 @@ exports[`<FinishScreen /> Should render and match the snapshot 1`] = `
   >
     <a
       class="c1"
-      href="/"
+      href="/user_interventions/undefined"
     >
       <button
         class="c2"

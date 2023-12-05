@@ -153,7 +153,12 @@ const Header = ({
           <Column width="auto" gap={8} flex={isWrappedLayout && 1}>
             <Row align="center" justify="end" width="100%" gap={16}>
               {canAccessParticipantsData && (
-                <Button px={32} onClick={openExportCsvModal} width="auto">
+                <Button
+                  px={32}
+                  onClick={openExportCsvModal}
+                  width="auto"
+                  inverted
+                >
                   {formatMessage(messages.exportCsvModalTitle)}
                 </Button>
               )}

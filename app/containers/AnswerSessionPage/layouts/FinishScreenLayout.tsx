@@ -8,7 +8,6 @@ import { parametrizeRoutePath } from 'utils/router';
 
 import { InterventionSharedTo, InterventionType } from 'models/Intervention';
 import { FinishQuestionDTO } from 'models/Question';
-import { useRoleManager } from 'models/User/RolesManager';
 
 import { resetReducer as resetAuthReducer } from 'global/reducers/auth/actions';
 import { makeSelectInterventionFixedElementsDirection } from 'global/reducers/globalState';
@@ -34,7 +33,6 @@ type Props = {
 
 const FinishScreenLayout = ({ formatMessage, question }: Props) => {
   const isGuestUser = !LocalStorageService.getState();
-  const { isPredefinedParticipant } = useRoleManager();
 
   const dispatch = useDispatch();
   const userSession = useSelector(makeSelectUserSession());
@@ -141,12 +139,9 @@ const FinishScreenLayout = ({ formatMessage, question }: Props) => {
 
   const getGoToDashboardButtonLink = () => {
     if (isPreview) return '#';
-    if (isPredefinedParticipant) {
-      return parametrizeRoutePath(RoutePath.USER_INTERVENTION, {
-        userInterventionId,
-      });
-    }
-    return RoutePath.DASHBOARD;
+    return parametrizeRoutePath(RoutePath.USER_INTERVENTION, {
+      userInterventionId,
+    });
   };
 
   return (
