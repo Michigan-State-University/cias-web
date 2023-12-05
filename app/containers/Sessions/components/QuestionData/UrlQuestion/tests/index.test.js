@@ -6,8 +6,10 @@ import { IntlProvider } from 'react-intl';
 import { DEFAULT_LOCALE } from 'i18n';
 import { Provider } from 'react-redux';
 import { MemoryRouter } from 'react-router-dom';
-import { draft } from 'models/Status/StatusTypes';
+
 import { urlQuestion } from 'models/Session/QuestionTypes';
+import { InterventionStatus } from 'models/Intervention';
+
 import { createTestStore } from 'utils/testUtils/storeUtils';
 
 import UrlQuestion from '../index';
@@ -18,7 +20,7 @@ const mockedFunctions = {
 
 const defaultProps = {
   isNarratorTab: false,
-  interventionStatus: draft,
+  interventionStatus: InterventionStatus.DRAFT,
   ...mockedFunctions,
 };
 const initialState = {

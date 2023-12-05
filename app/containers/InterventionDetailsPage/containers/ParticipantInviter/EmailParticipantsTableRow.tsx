@@ -105,7 +105,7 @@ const EmailParticipantsTableRowComponent: FC<Props> = ({
               id={`resend-invitation-options-${email}-${healthClinicId ?? ''}`}
               disabled={!invitingPossible}
               options={resendDropdownOptions}
-              trigger="button"
+              trigger="text-button"
               buttonTriggerTitle={formatMessage(
                 messages.resendInvitationButtonLabel,
               )}

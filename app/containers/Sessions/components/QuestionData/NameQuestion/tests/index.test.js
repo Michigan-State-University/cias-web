@@ -12,7 +12,7 @@ import { MemoryRouter } from 'react-router-dom';
 import { DEFAULT_LOCALE } from 'i18n';
 
 import { nameQuestion } from 'models/Session/QuestionTypes';
-import { draft } from 'models/Status/StatusTypes';
+import { InterventionStatus } from 'models/Intervention';
 
 import { createTestStore } from 'utils/testUtils/storeUtils';
 
@@ -27,7 +27,7 @@ describe('<NameQuestion />', () => {
 
   const defaultProps = {
     isNarratorTab: false,
-    interventionStatus: draft,
+    interventionStatus: InterventionStatus.DRAFT,
     ...mockedFunctions,
   };
   const initialState = {
