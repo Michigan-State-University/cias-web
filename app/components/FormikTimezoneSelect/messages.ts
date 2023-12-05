@@ -1,6 +1,6 @@
 import { defineMessages } from 'react-intl';
 
-export const scope = 'app.containers.TimezoneForm';
+export const scope = 'app.components.FormikTimezoneSelect';
 
 export default defineMessages({
   timeZoneLabel: {
