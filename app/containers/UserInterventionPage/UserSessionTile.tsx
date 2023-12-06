@@ -36,6 +36,7 @@ interface Props {
   interventionId: string;
   userSession?: Nullable<UserSession>;
   healthClinicId: Nullable<string>;
+  containMultipleFillSession: boolean;
 }
 
 const UserSessionTile = ({
@@ -55,6 +56,7 @@ const UserSessionTile = ({
   interventionId,
   userSession,
   healthClinicId,
+  containMultipleFillSession,
 }: Props) => {
   const { formatMessage } = useIntl();
   const history = useHistory();
@@ -174,8 +176,13 @@ const UserSessionTile = ({
     <GhostLink disabled={disabledTile} width="100%" to={sessionUrl}>
       <TileContainer
         bg={tileBackground}
-        height={elements.userSessionTileHeight}
+        height={
+          containMultipleFillSession
+            ? elements.userSessionWithMultipleFillTileHeight
+            : elements.userSessionWithoutMultipleFillTileHeight
+        }
         disabled={disabledTile}
+        gap={12}
       >
         <Box display="flex" justify="between" align="center">
           <Box
@@ -194,16 +201,18 @@ const UserSessionTile = ({
             </Text>
           </Box>
         </Box>
-        <EllipsisText
-          fontSize="18px"
-          lineHeight="130%"
-          fontWeight="bold"
-          lines={2}
-          text={name}
-          opacity={disabledTile ? DISABLED_TILE_TEXT_OPACITY : 1}
-          dataFor={id}
-          dir="auto"
-        />
+        <Box flex={1}>
+          <EllipsisText
+            fontSize="18px"
+            lineHeight="130%"
+            fontWeight="bold"
+            lines={2}
+            text={name}
+            opacity={disabledTile ? DISABLED_TILE_TEXT_OPACITY : 1}
+            dataFor={id}
+            dir="auto"
+          />
+        </Box>
 
         <Box
           display="flex"

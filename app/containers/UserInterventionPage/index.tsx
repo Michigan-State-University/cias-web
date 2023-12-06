@@ -130,6 +130,7 @@ const UserInterventionPage = () => {
       status,
     },
     healthClinicId,
+    containMultipleFillSession,
   } = userIntervention;
 
   if (status === InterventionStatus.PAUSED) {
@@ -163,10 +164,11 @@ const UserInterventionPage = () => {
           </MarkupContainer>
         </>
       )}
-      <Row mt={30}>
+      <Row mt={30} gutterWidth={10}>
         {filteredSessions.map((session) => (
           <Col xl={3} md={6} xs={12} key={session.id}>
             <UserSessionTile
+              containMultipleFillSession={containMultipleFillSession}
               interventionType={type}
               session={session}
               interventionId={id}

@@ -15,7 +15,7 @@ export const TileContainer = styled.div`
   height: ${elements.interventionTileHeight}px;
   box-shadow: ${boxShadows.selago};
   border-radius: 8px;
-  margin-bottom: 20px;
+  margin-bottom: 10px;
   display: flex;
   flex-direction: column;
   color: ${themeColors.text};

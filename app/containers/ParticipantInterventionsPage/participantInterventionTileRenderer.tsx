@@ -88,6 +88,7 @@ const ParticipantInterventionTileRenderer = ({ data, index }: Props) => {
         bg={tileDisabled ? colors.mischka : colors.white}
         height={elements.userInterventionTileHeight}
         disabled={tileDisabled}
+        gap={12}
       >
         <Box display="flex" justify="between" align="center">
           <Row gap={8} align="center">
@@ -132,16 +133,18 @@ const ParticipantInterventionTileRenderer = ({ data, index }: Props) => {
           )}
         </Box>
 
-        <EllipsisText
-          fontSize="18px"
-          lineHeight="130%"
-          fontWeight="bold"
-          lines={2}
-          text={interventionName}
-          opacity={tileDisabled ? COMPLETED_INTERVENTION_TEXT_OPACITY : 1}
-          dataFor={id}
-          dir="auto"
-        />
+        <Box flex={1}>
+          <EllipsisText
+            fontSize="18px"
+            lineHeight="130%"
+            fontWeight="bold"
+            lines={2}
+            text={interventionName}
+            opacity={tileDisabled ? COMPLETED_INTERVENTION_TEXT_OPACITY : 1}
+            dataFor={id}
+            dir="auto"
+          />
+        </Box>
         <Box
           visibility={
             interventionType === InterventionType.DEFAULT || blocked
