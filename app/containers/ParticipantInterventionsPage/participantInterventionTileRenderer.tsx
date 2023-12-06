@@ -91,8 +91,13 @@ const ParticipantInterventionTileRenderer = ({ data, index }: Props) => {
       >
         <Box display="flex" justify="between" align="center">
           <Row gap={8} align="center">
-            <Box px={12} py={8} bg={statusColor} borderRadius={5}>
-              <Text color={statusFontColor}>
+            <Box px={8} py={4} bg={statusColor} borderRadius={5}>
+              <Text
+                color={statusFontColor}
+                fontWeight="bold"
+                fontSize={12}
+                lineHeight={1.33}
+              >
                 {formatMessage(
                   userInterventionStatusesMessages[extendedStatus],
                 )}
@@ -148,7 +153,7 @@ const ParticipantInterventionTileRenderer = ({ data, index }: Props) => {
           <Text>{formatMessage(messages.completion)} </Text>
           <Box display="flex" justify="between" align="center">
             <Box
-              bg={statusTypeToColorMap[UserInterventionStatus.READY_TO_START]}
+              bg={colors.periwinkleGray50}
               borderRadius={2}
               width="80%"
               height={4}

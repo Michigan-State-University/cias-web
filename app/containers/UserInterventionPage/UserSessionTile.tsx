@@ -158,12 +158,17 @@ const UserSessionTile = ({
       >
         <Box display="flex" justify="between" align="center">
           <Box
-            px={12}
-            py={8}
+            px={8}
+            py={4}
             bg={statusTypeToColorMap[userSessionStatus]}
             borderRadius={5}
           >
-            <Text color={statusTypeToFontColorMap[userSessionStatus]}>
+            <Text
+              color={statusTypeToFontColorMap[userSessionStatus]}
+              fontWeight="bold"
+              fontSize={12}
+              lineHeight={1.33}
+            >
               {formatMessage(userSessionStatusesMessages[userSessionStatus])}
             </Text>
           </Box>
