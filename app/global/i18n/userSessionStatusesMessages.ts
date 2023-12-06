@@ -23,6 +23,6 @@ export default defineMessages<UserSessionStatus>({
   },
   [UserSessionStatus.CLOSED]: {
     id: `${scope}.closed`,
-    defaultMessage: 'Session closed',
+    defaultMessage: 'Module closed',
   },
 });

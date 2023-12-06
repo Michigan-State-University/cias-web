@@ -1,12 +1,14 @@
 import { FormattedMessage, useIntl } from 'react-intl';
-import React from 'react';
+import React, { useMemo } from 'react';
+import { Helmet } from 'react-helmet';
 
 import { RoutePath } from 'global/constants';
 
-import Text from 'components/Text';
 import { StyledButton } from 'components/Button/StyledButton';
 import GhostLink from 'components/GhostLink';
 import Column from 'components/Column';
+import H1 from 'components/H1';
+import H2 from 'components/H2';
 
 import messages from './messages';
 import { InterventionNotAvailableReason } from './types';
@@ -22,26 +24,40 @@ export const InterventionNotAvailableInfo = ({ reason }: Props) => {
 
   const isValidReason = isValidInterventionNotAvailableReason(reason);
 
+  const pageTitle = useMemo(() => {
+    switch (reason) {
+      case InterventionNotAvailableReason.SESSION_CLOSED: {
+        return formatMessage(messages.moduleNotAvailableTitle);
+      }
+      default: {
+        return formatMessage(messages.studyNotAvailableTitle);
+      }
+    }
+  }, [reason]);
+
   return (
-    <Column height="100%" justify="center" align="center">
-      <Text fontSize={24} fontWeight="bold" textAlign="center">
-        {formatMessage(messages.studyNotAvailableTitle)}
-      </Text>
+    <>
+      <Helmet>
+        <title>{pageTitle}</title>
+      </Helmet>
+      <Column height="100%" justify="center" align="center">
+        <H1>{pageTitle}</H1>
 
-      <Text mt={10} fontSize={18} textAlign="center">
-        {isValidReason &&
-          formatMessage(
-            interventionNotAvailableReasonsMessages[
-              reason as InterventionNotAvailableReason
-            ],
-          )}
-      </Text>
+        <H2 mt={10} fontWeight="regular">
+          {isValidReason &&
+            formatMessage(
+              interventionNotAvailableReasonsMessages[
+                reason as InterventionNotAvailableReason
+              ],
+            )}
+        </H2>
 
-      <GhostLink to={RoutePath.DASHBOARD}>
-        <StyledButton mt={50} px={30}>
-          <FormattedMessage {...messages.toMainPage} />
-        </StyledButton>
-      </GhostLink>
-    </Column>
+        <GhostLink to={RoutePath.DASHBOARD}>
+          <StyledButton mt={50} px={30}>
+            <FormattedMessage {...messages.toMainPage} />
+          </StyledButton>
+        </GhostLink>
+      </Column>
+    </>
   );
 };
