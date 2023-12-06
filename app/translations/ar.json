@@ -276,6 +276,8 @@
   "app.components.InterventionNotAvailableInfo.InterventionNotAvailableReasons.INTERVENTION_CLOSED": "",
   "app.components.InterventionNotAvailableInfo.InterventionNotAvailableReasons.INTERVENTION_DRAFT": "",
   "app.components.InterventionNotAvailableInfo.InterventionNotAvailableReasons.INTERVENTION_PAUSED": "",
+  "app.components.InterventionNotAvailableInfo.InterventionNotAvailableReasons.SESSION_CLOSED": "",
+  "app.components.InterventionNotAvailableInfo.moduleNotAvailableTitle": "",
   "app.components.InterventionNotAvailableInfo.studyNotAvailableTitle": "",
   "app.components.InterventionNotAvailableInfo.toMainPage": "",
   "app.components.InterventionStatusButtons.archive": "",
