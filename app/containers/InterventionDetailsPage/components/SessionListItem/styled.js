@@ -2,7 +2,6 @@ import styled from 'styled-components';
 
 import Box from 'components/Box';
 import { colors, boxShadows, themeColors } from 'theme';
-import Row from 'components/Row';
 
 export const ToggleableBox = styled(Box)`
   width: 100%;
@@ -17,23 +16,17 @@ export const ToggleableBox = styled(Box)`
 `;
 
 export const SessionIndex = styled.div`
-  width: 30px;
-  height: 30px;
+  width: 40px;
+  height: 40px;
   border-radius: 50%;
-  background-color: ${colors.jungleGreen};
-  color: white;
+  background-color: ${({ isSessionClosed }) =>
+    isSessionClosed ? themeColors.highlight : colors.jungleGreen};
+  color: ${({ isSessionClosed }) =>
+    isSessionClosed ? themeColors.text : colors.white};
   display: flex;
   justify-content: center;
   align-items: center;
   position: relative;
   cursor: pointer;
-  min-width: 30px;
-`;
-
-export const StyledRow = styled(Row)`
-  &:hover * {
-    ${SessionIndex} {
-      color: white;
-    }
-  }
+  min-width: 40px;
 `;

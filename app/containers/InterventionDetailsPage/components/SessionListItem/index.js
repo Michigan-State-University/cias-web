@@ -10,6 +10,7 @@ import { injectIntl } from 'react-intl';
 import { Draggable } from 'react-beautiful-dnd';
 import { useHistory } from 'react-router-dom';
 import { Markup } from 'interweave';
+import dayjs from 'dayjs';
 
 import Row from 'components/Row';
 import Column from 'components/Column';
@@ -44,9 +45,10 @@ import { InterventionType } from 'models/Intervention';
 
 import SessionSchedule from '../SessionSchedule';
 import messages from './messages';
-import { ToggleableBox, StyledRow, SessionIndex } from './styled';
+import { ToggleableBox, SessionIndex } from './styled';
 import SessionBranching from '../SessionBranching';
 import { formatSessionName } from './utils';
+import { Alert, AlertType } from '../../../../components/Alert';
 
 const WCAG_ARIA_LABEL_ID = 'estimate-time-label';
 
@@ -85,6 +87,8 @@ function SessionListItem({
     variable,
     estimatedTime,
     updatedEstimatedTime,
+    autocloseEnabled,
+    autocloseAt,
   } = session || {};
 
   const {
@@ -176,6 +180,9 @@ function SessionListItem({
   const isSessionBranchingPossible =
     interventionType === InterventionType.DEFAULT;
 
+  const isSessionClosed =
+    autocloseEnabled && autocloseAt && !dayjs().isBefore(dayjs(autocloseAt));
+
   return (
     <Draggable
       isDragDisabled={disabled}
@@ -196,7 +203,7 @@ function SessionListItem({
             role="group"
             aria-label={formatMessage(messages.wcagDescription, { name })}
           >
-            <Row py={21} pl={16} pr={62} align="center" justify="between">
+            <Row pt={24} pb={16} px={24} align="center" justify="between">
               <HenryFordBranchingInfoModal />
               <CopyModal
                 visible={copyOpen}
@@ -208,7 +215,7 @@ function SessionListItem({
                 pasteText={formatMessage(messages.pasteSession)}
                 defaultView={VIEWS.INTERVENTION}
               />
-              <StyledRow align="center" justify="between" width="100%">
+              <Row align="center" justify="between" width="100%">
                 <StyledLink
                   data-cy={`enter-session-${index}`}
                   to={parametrizeRoutePath(RoutePath.EDIT_SESSION, {
@@ -220,7 +227,9 @@ function SessionListItem({
                   width="100%"
                   justify="start"
                 >
-                  <SessionIndex>{index + 1}</SessionIndex>
+                  <SessionIndex isSessionClosed={isSessionClosed}>
+                    {index + 1}
+                  </SessionIndex>
                   <Column px={15}>
                     <Markup
                       attributes={{
@@ -229,32 +238,32 @@ function SessionListItem({
                       content={formatSessionName(name)}
                       tagName={H2}
                     />
-                    <BadgeInput
-                      mt={5}
-                      disabled={disabled}
-                      textAlign="center"
-                      validator={variableNameValidator}
-                      placeholder={formatMessage(
-                        globalMessages.variableNamePlaceholder,
-                      )}
-                      value={variable}
-                      color={colors.jungleGreen}
-                      onBlur={handleUpdateVariable}
-                      onClick={preventVariableInputRedirect}
-                      autoComplete="off"
-                    />
-                    <Badge
-                      mt={5}
-                      bg={themeColors.secondary}
-                      onClick={goToReportTemplates}
-                    >
-                      {formatMessage(messages.reportsCount, {
-                        count: reportTemplatesCount ?? 0,
-                      })}
-                    </Badge>
+                    <Row marginBlockStart={5} gap={8}>
+                      <BadgeInput
+                        disabled={disabled}
+                        textAlign="center"
+                        validator={variableNameValidator}
+                        placeholder={formatMessage(
+                          globalMessages.variableNamePlaceholder,
+                        )}
+                        value={variable}
+                        color={colors.jungleGreen}
+                        onBlur={handleUpdateVariable}
+                        onClick={preventVariableInputRedirect}
+                        autoComplete="off"
+                      />
+                      <Badge
+                        bg={themeColors.secondary}
+                        onClick={goToReportTemplates}
+                      >
+                        {formatMessage(messages.reportsCount, {
+                          count: reportTemplatesCount ?? 0,
+                        })}
+                      </Badge>
+                    </Row>
                   </Column>
                 </StyledLink>
-              </StyledRow>
+              </Row>
               <Box mb={8}>
                 <Dropdown
                   id={`session-list-item-options-${id}`}
@@ -264,12 +273,28 @@ function SessionListItem({
               </Box>
             </Row>
 
-            <Row px={62} mb={20}>
+            {isSessionClosed && (
+              <Alert
+                content={formatMessage(messages.sessionClosedAlertContent)}
+                type={AlertType.WARNING_LIGHT}
+                noIcon
+                centered
+                mx={24}
+                mb={16}
+                py={8}
+                contentProps={{
+                  fontSize: 15,
+                  fontWeight: 'medium',
+                }}
+              />
+            )}
+
+            <Row px={24} mb={16}>
               <Divider />
             </Row>
 
             {interventionType !== InterventionType.DEFAULT && (
-              <Row px={62} mb={20} display="flex" align="center">
+              <Row px={24} mb={24} display="flex" align="center">
                 <Text id={WCAG_ARIA_LABEL_ID}>
                   {formatMessage(messages.estimateTime)}
                 </Text>
@@ -288,7 +313,7 @@ function SessionListItem({
               </Row>
             )}
             {isSchedulingPossible && (
-              <Row px={62}>
+              <Row px={24}>
                 <SessionSchedule
                   disabled={disabled}
                   sessionId={id}

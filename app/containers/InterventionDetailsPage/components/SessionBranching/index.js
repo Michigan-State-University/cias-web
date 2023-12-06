@@ -114,7 +114,7 @@ function SessionBranching({
 
   return (
     <>
-      <Row py={18} px={62} align="between" justify="between">
+      <Row py={18} px={24} align="between" justify="between">
         <Column xs={12} justify="center">
           <Row align="center" width="100%">
             {(status || nextSessionName) && (
@@ -142,7 +142,7 @@ function SessionBranching({
         </Column>
       </Row>
       {status && (
-        <Row mx={62} py={20}>
+        <Row mx={24} py={20}>
           <Column>
             {formulas?.length > 0 &&
               formulas.map((formula, index) => (
