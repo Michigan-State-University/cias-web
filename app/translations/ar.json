@@ -1869,6 +1869,7 @@
   "app.global.UserInterventionStatuses.paused": "",
   "app.global.UserInterventionStatuses.ready_to_start": "",
   "app.global.UserInterventionStatuses.schedule_pending": "",
+  "app.global.UserSessionStatuses.closed": "",
   "app.global.UserSessionStatuses.completed": "",
   "app.global.UserSessionStatuses.inProgress": "",
   "app.global.UserSessionStatuses.notAvailable": "",

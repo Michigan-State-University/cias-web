@@ -1869,6 +1869,7 @@
   "app.global.UserInterventionStatuses.paused": "Paused",
   "app.global.UserInterventionStatuses.ready_to_start": "Ready to start",
   "app.global.UserInterventionStatuses.schedule_pending": "Schedule session pending",
+  "app.global.UserSessionStatuses.closed": "Session closed",
   "app.global.UserSessionStatuses.completed": "Completed",
   "app.global.UserSessionStatuses.inProgress": "In progress",
   "app.global.UserSessionStatuses.notAvailable": "Not available",

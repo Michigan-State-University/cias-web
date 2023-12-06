@@ -48,6 +48,8 @@ const UserSessionTile = ({
     schedulePayload,
     scheduleAt,
     multipleFill,
+    autocloseEnabled,
+    autocloseAt,
   },
   interventionType,
   interventionId,
@@ -69,6 +71,9 @@ const UserSessionTile = ({
 
   const isFirstSession = position === 1;
 
+  const isSessionClosed =
+    autocloseEnabled && autocloseAt && !dayjs().isBefore(dayjs(autocloseAt));
+
   const isScheduledForFuture =
     !userSession ||
     !userSession.scheduledAt ||
@@ -80,14 +85,23 @@ const UserSessionTile = ({
     !isFirstSession &&
     !userSession?.finishedAt &&
     !userSession?.lastAnswerAt && // keeping lastAnswerAt check for existing user sessions
-    !userSession?.started;
+    !userSession?.started &&
+    !isSessionClosed;
 
   const userSessionStatus = useMemo(() => {
     if (isNotAvailable) return UserSessionStatus.NOT_AVAILABLE;
-    if (!userSession) return UserSessionStatus.READY_TO_START;
+    if (!userSession) {
+      return isSessionClosed
+        ? UserSessionStatus.CLOSED
+        : UserSessionStatus.READY_TO_START;
+    }
 
     const { finishedAt, lastAnswerAt, started } = userSession;
-    if (finishedAt) return UserSessionStatus.COMPLETED;
+    if (finishedAt) {
+      // keeping lastAnswerAt check for existing user sessions
+      if (lastAnswerAt || started) return UserSessionStatus.COMPLETED;
+      return UserSessionStatus.CLOSED;
+    }
 
     // keeping lastAnswerAt check for existing user sessions
     if (lastAnswerAt || started) return UserSessionStatus.IN_PROGRESS;
@@ -96,7 +110,10 @@ const UserSessionTile = ({
   }, [userSession, isNotAvailable]);
 
   const tileBackground = useMemo(() => {
-    if (userSessionStatus === UserSessionStatus.NOT_AVAILABLE)
+    if (
+      userSessionStatus === UserSessionStatus.NOT_AVAILABLE ||
+      userSessionStatus === UserSessionStatus.CLOSED
+    )
       return colors.mischka;
     if (userSessionStatus === UserSessionStatus.COMPLETED) return colors.zirkon;
     return colors.white;
@@ -104,16 +121,20 @@ const UserSessionTile = ({
 
   const disabledTile =
     !multipleFill &&
-    [UserSessionStatus.NOT_AVAILABLE, UserSessionStatus.COMPLETED].includes(
-      userSessionStatus,
-    );
+    [
+      UserSessionStatus.NOT_AVAILABLE,
+      UserSessionStatus.COMPLETED,
+      UserSessionStatus.CLOSED,
+    ].includes(userSessionStatus);
 
   const renderBottomText = () => {
     if (userSessionStatus !== UserSessionStatus.NOT_AVAILABLE) {
       return (
         <Text
           opacity={
-            UserSessionStatus.COMPLETED === userSessionStatus
+            [UserSessionStatus.COMPLETED, UserSessionStatus.CLOSED].includes(
+              userSessionStatus,
+            )
               ? DISABLED_TILE_TEXT_OPACITY
               : 1
           }
@@ -194,35 +215,37 @@ const UserSessionTile = ({
         >
           {renderBottomText()}
         </Box>
-        {multipleFill && userSessionStatus === UserSessionStatus.COMPLETED && (
-          <Box
-            display="flex"
-            justify="between"
-            align="center"
-            borderTop={`1px solid ${colors.lightGrey}`}
-            pt={15}
-            borderRadius={0}
-          >
-            {userSession?.filledOutCount && (
+        {multipleFill &&
+          userSessionStatus === UserSessionStatus.COMPLETED &&
+          !isSessionClosed && (
+            <Box
+              display="flex"
+              justify="between"
+              align="center"
+              borderTop={`1px solid ${colors.lightGrey}`}
+              pt={15}
+              borderRadius={0}
+            >
+              {userSession?.filledOutCount && (
+                <Box>
+                  <Text textOpacity={0.7} color={themeColors.text}>
+                    {formatMessage(messages.sessionFilledNTimes, {
+                      count: userSession.filledOutCount,
+                    })}
+                  </Text>
+                </Box>
+              )}
               <Box>
-                <Text textOpacity={0.7} color={themeColors.text}>
-                  {formatMessage(messages.sessionFilledNTimes, {
-                    count: userSession.filledOutCount,
-                  })}
-                </Text>
+                <Button
+                  px={20}
+                  height={33}
+                  onClick={() => history.push(sessionUrl)}
+                >
+                  {formatMessage(messages.fillAgain)}
+                </Button>
               </Box>
-            )}
-            <Box>
-              <Button
-                px={20}
-                height={33}
-                onClick={() => history.push(sessionUrl)}
-              >
-                {formatMessage(messages.fillAgain)}
-              </Button>
             </Box>
-          </Box>
-        )}
+          )}
       </TileContainer>
     </GhostLink>
   );
