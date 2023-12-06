@@ -358,6 +358,9 @@ exports[`<SessionListItem /> Should render and match the snapshot 1`] = `
   position: relative;
   cursor: pointer;
   min-width: 40px;
+  font-size: 24px;
+  font-weight: 700;
+  line-height: 1;
 }
 
 @media only screen and (min-width:768px) {

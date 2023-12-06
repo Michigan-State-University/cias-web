@@ -29,4 +29,7 @@ export const SessionIndex = styled.div`
   position: relative;
   cursor: pointer;
   min-width: 40px;
+  font-size: 24px;
+  font-weight: 700;
+  line-height: 1;
 `;
