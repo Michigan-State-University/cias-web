@@ -38,12 +38,17 @@ import { ConfirmationModal } from 'components/Modal';
 import BadgeInput from 'components/Input/BadgeInput';
 import CharacterSelector from 'components/CharacterSelector';
 import { GlobalReplacementModal } from 'components/MissingAnimationsModal';
+import { Row as GridRow } from 'components/ReactGridSystem';
+import Column from 'components/Column';
+import Row from 'components/Row';
 
 import Option from './Option';
 import messages from './messages';
 import PeedyVoiceSettings from './PeedyVoiceSettings';
 import { Input, InputContainer } from './styled';
 import { SessionSettingsForm } from './SessionSettingsForm';
+
+import { SessionSettingsColumn, SessionSettingsContainer } from '../styled';
 
 const SessionSettings = ({
   name,
@@ -179,93 +184,107 @@ const SessionSettings = ({
         onChangeNarrator={onNarratorChange}
       />
 
-      <InputContainer>
-        <H3 mb={5} fontWeight="regular">
-          {formatMessage(messages.nameLabel)}
-        </H3>
-        <Input
-          disabled={!editingPossible}
-          width="100%"
-          placeholder={formatMessage(messages.placeholder)}
-          value={name}
-          onBlur={(val) => editSession({ name: val })}
-          px={12}
-        />
-      </InputContainer>
+      <SessionSettingsContainer fluid>
+        <GridRow>
+          <SessionSettingsColumn xs={12} md={6}>
+            <Column>
+              <InputContainer>
+                <H3 mb={5} fontWeight="regular">
+                  {formatMessage(messages.nameLabel)}
+                </H3>
+                <Input
+                  disabled={!editingPossible}
+                  width="100%"
+                  placeholder={formatMessage(messages.placeholder)}
+                  value={name}
+                  onBlur={(val) => editSession({ name: val })}
+                  px={12}
+                />
+              </InputContainer>
 
-      <InputContainer style={{ marginTop: 15, marginBottom: 15 }}>
-        <H3 mb={5} fontWeight="regular">
-          {formatMessage(messages.variableLabel)}
-        </H3>
-        <BadgeInput
-          disabled={!editingPossible}
-          textAlign="center"
-          validator={variableNameValidator}
-          placeholder={formatMessage(globalMessages.variableNamePlaceholder)}
-          value={variable}
-          color={colors.jungleGreen}
-          onBlur={(val) => editSession({ variable: val })}
-          autoComplete="off"
-        />
-      </InputContainer>
+              <InputContainer style={{ marginTop: 15, marginBottom: 15 }}>
+                <H3 mb={5} fontWeight="regular">
+                  {formatMessage(messages.variableLabel)}
+                </H3>
+                <BadgeInput
+                  disabled={!editingPossible}
+                  textAlign="center"
+                  validator={variableNameValidator}
+                  placeholder={formatMessage(
+                    globalMessages.variableNamePlaceholder,
+                  )}
+                  value={variable}
+                  color={colors.jungleGreen}
+                  onBlur={(val) => editSession({ variable: val })}
+                  autoComplete="off"
+                />
+              </InputContainer>
 
-      <Option
-        disabled={!editingPossible}
-        label={formatMessage(messages.multipleFill)}
-        tooltipText={formatMessage(messages.multipleFillTooltip)}
-        value={multipleFill}
-        action={(val) => editSession({ multipleFill: val })}
-      />
+              <Option
+                disabled={!editingPossible}
+                label={formatMessage(messages.multipleFill)}
+                tooltipText={formatMessage(messages.multipleFillTooltip)}
+                value={multipleFill}
+                action={(val) => editSession({ multipleFill: val })}
+              />
 
-      <SessionSettingsForm
-        disabled={!editingPossible}
-        autofinishEnabled={autofinishEnabled}
-        autofinishDelay={autofinishDelay}
-        onSubmit={editSession}
-      />
+              <SessionSettingsForm
+                disabled={!editingPossible}
+                autofinishEnabled={autofinishEnabled}
+                autofinishDelay={autofinishDelay}
+                onSubmit={editSession}
+              />
+            </Column>
+          </SessionSettingsColumn>
 
-      <H3 mt={45} mb={20}>
-        {formatMessage(messages.narratorSettings)}
-      </H3>
+          <SessionSettingsColumn xs={12} md={6}>
+            <Column>
+              <H3 mb={20}>{formatMessage(messages.narratorSettings)}</H3>
 
-      {narratorSettings && (
-        <Option
-          disabled={!editingPossible}
-          label={formatMessage(messages.narratorActive)}
-          withBorder={isNarratorActive}
-          value={isNarratorActive}
-          action={onGlobalToggle}
-          fontWeight="bold"
-        />
-      )}
-      {isNarratorActive &&
-        map(narratorSettings, (option, index) => (
-          <Option
-            disabled={!editingPossible}
-            key={`el-option-${index}`}
-            withBorder={index !== lastKey(narratorSettings)}
-            label={formatMessage(messages[index])}
-            value={option}
-            action={onToggle(index)}
-          />
-        ))}
-      {googleTtsVoice && (
-        <PeedyVoiceSettings
-          googleTtsVoice={googleTtsVoice}
-          editSession={editSessionSettings}
-          formatMessage={formatMessage}
-          editingPossible={editingPossible}
-        />
-      )}
+              {narratorSettings && (
+                <Option
+                  disabled={!editingPossible}
+                  label={formatMessage(messages.narratorActive)}
+                  withBorder={isNarratorActive}
+                  value={isNarratorActive}
+                  action={onGlobalToggle}
+                  fontWeight="bold"
+                />
+              )}
+              {isNarratorActive &&
+                map(narratorSettings, (option, index) => (
+                  <Option
+                    disabled={!editingPossible}
+                    key={`el-option-${index}`}
+                    withBorder={index !== lastKey(narratorSettings)}
+                    label={formatMessage(messages[index])}
+                    value={option}
+                    action={onToggle(index)}
+                  />
+                ))}
+              {googleTtsVoice && (
+                <PeedyVoiceSettings
+                  googleTtsVoice={googleTtsVoice}
+                  editSession={editSessionSettings}
+                  formatMessage={formatMessage}
+                  editingPossible={editingPossible}
+                />
+              )}
 
-      <H3 mt={30} mb={20}>
-        {formatMessage(messages.defaultNarrator)}
-      </H3>
-      <CharacterSelector
-        disabled={!editingPossible}
-        onChange={setNewNarrator}
-        value={currentNarrator}
-      />
+              <H3 mt={30} mb={20}>
+                {formatMessage(messages.defaultNarrator)}
+              </H3>
+              <Row>
+                <CharacterSelector
+                  disabled={!editingPossible}
+                  onChange={setNewNarrator}
+                  value={currentNarrator}
+                />
+              </Row>
+            </Column>
+          </SessionSettingsColumn>
+        </GridRow>
+      </SessionSettingsContainer>
     </>
   );
 };

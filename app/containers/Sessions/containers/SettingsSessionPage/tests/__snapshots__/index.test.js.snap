@@ -13,6 +13,8 @@ exports[`<SettingsSessionPage /> Should render and match the snapshot 1`] = `
   display: flex;
   padding-top: 40px;
   padding-bottom: 40px;
+  padding-right: 16px;
+  padding-left: 16px;
   background-color: rgba(248,251,255,1);
   -webkit-box-pack: center;
   -webkit-justify-content: center;
@@ -29,7 +31,7 @@ exports[`<SettingsSessionPage /> Should render and match the snapshot 1`] = `
   color: unset;
 }
 
-.c17 {
+.c19 {
   width: auto;
   height: auto;
   display: block;
@@ -37,7 +39,7 @@ exports[`<SettingsSessionPage /> Should render and match the snapshot 1`] = `
   color: unset;
 }
 
-.c21 {
+.c23 {
   width: auto;
   height: auto;
   display: block;
@@ -49,7 +51,7 @@ exports[`<SettingsSessionPage /> Should render and match the snapshot 1`] = `
   color: unset;
 }
 
-.c34 {
+.c35 {
   width: auto;
   height: auto;
   display: block;
@@ -59,7 +61,7 @@ exports[`<SettingsSessionPage /> Should render and match the snapshot 1`] = `
   color: unset;
 }
 
-.c4 {
+.c6 {
   margin: 0;
   font-family: DM Sans;
   font-size: 15px;
@@ -69,7 +71,7 @@ exports[`<SettingsSessionPage /> Should render and match the snapshot 1`] = `
   color: #2F3850;
 }
 
-.c26 {
+.c28 {
   margin: 0;
   font-family: DM Sans;
   font-size: 15px;
@@ -79,17 +81,16 @@ exports[`<SettingsSessionPage /> Should render and match the snapshot 1`] = `
   color: #2F3850;
 }
 
-.c36 {
+.c37 {
   margin: 0;
   font-family: DM Sans;
   font-size: 15px;
   line-height: 150%;
-  margin-top: 45px;
   margin-bottom: 20px;
   color: #2F3850;
 }
 
-.c39 {
+.c40 {
   margin: 0;
   font-family: DM Sans;
   font-size: 15px;
@@ -99,7 +100,7 @@ exports[`<SettingsSessionPage /> Should render and match the snapshot 1`] = `
   color: #2F3850;
 }
 
-.c9 {
+.c11 {
   display: -webkit-box;
   display: -webkit-flex;
   display: -ms-flexbox;
@@ -124,7 +125,7 @@ exports[`<SettingsSessionPage /> Should render and match the snapshot 1`] = `
   padding-bottom: 15px;
 }
 
-.c10 {
+.c12 {
   display: -webkit-box;
   display: -webkit-flex;
   display: -ms-flexbox;
@@ -147,7 +148,7 @@ exports[`<SettingsSessionPage /> Should render and match the snapshot 1`] = `
   align-items: center;
 }
 
-.c16 {
+.c18 {
   display: -webkit-box;
   display: -webkit-flex;
   display: -ms-flexbox;
@@ -171,7 +172,7 @@ exports[`<SettingsSessionPage /> Should render and match the snapshot 1`] = `
   width: 100%;
 }
 
-.c19 {
+.c21 {
   display: -webkit-box;
   display: -webkit-flex;
   display: -ms-flexbox;
@@ -190,7 +191,7 @@ exports[`<SettingsSessionPage /> Should render and match the snapshot 1`] = `
   gap: 8px;
 }
 
-.c29 {
+.c30 {
   display: -webkit-box;
   display: -webkit-flex;
   display: -ms-flexbox;
@@ -199,9 +200,10 @@ exports[`<SettingsSessionPage /> Should render and match the snapshot 1`] = `
   -ms-flex-direction: row;
   flex-direction: row;
   height: auto;
+  gap: 16px;
 }
 
-.c31 {
+.c32 {
   display: -webkit-box;
   display: -webkit-flex;
   display: -ms-flexbox;
@@ -220,7 +222,7 @@ exports[`<SettingsSessionPage /> Should render and match the snapshot 1`] = `
   width: 100%;
 }
 
-.c37 {
+.c38 {
   display: -webkit-box;
   display: -webkit-flex;
   display: -ms-flexbox;
@@ -246,12 +248,36 @@ exports[`<SettingsSessionPage /> Should render and match the snapshot 1`] = `
   border-bottom: 1px solid #E9F1FB;
 }
 
-.c22 {
+.c41 {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-flex-direction: row;
+  -ms-flex-direction: row;
+  flex-direction: row;
+  height: auto;
+}
+
+.c42 {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-flex-direction: row;
+  -ms-flex-direction: row;
+  flex-direction: row;
+  height: auto;
+  gap: 16px;
+  width: 100%;
+}
+
+.c24 {
   width: auto;
   height: auto;
 }
 
-.c35 {
+.c36 {
   width: auto;
   height: auto;
   -webkit-transition: -webkit-transform 0.2s;
@@ -259,14 +285,14 @@ exports[`<SettingsSessionPage /> Should render and match the snapshot 1`] = `
   transition: transform 0.2s;
 }
 
-.c20 {
+.c22 {
   font-family: DM Sans;
   font-size: 13px;
   line-height: 130%;
   color: #2F3850;
 }
 
-.c30 {
+.c31 {
   font-family: DM Sans;
   font-size: 13px;
   line-height: 130%;
@@ -278,7 +304,7 @@ exports[`<SettingsSessionPage /> Should render and match the snapshot 1`] = `
   width: fit-content;
 }
 
-.c38 {
+.c39 {
   font-family: DM Sans;
   font-size: 13px;
   line-height: 130%;
@@ -286,7 +312,7 @@ exports[`<SettingsSessionPage /> Should render and match the snapshot 1`] = `
   color: #2F3850;
 }
 
-.c49 {
+.c51 {
   font-family: DM Sans;
   font-size: 13px;
   line-height: 130%;
@@ -294,19 +320,7 @@ exports[`<SettingsSessionPage /> Should render and match the snapshot 1`] = `
   white-space: nowrap;
 }
 
-.c1 {
-  display: -webkit-box;
-  display: -webkit-flex;
-  display: -ms-flexbox;
-  display: flex;
-  -webkit-flex-direction: column;
-  -ms-flex-direction: column;
-  flex-direction: column;
-  width: 100%;
-  height: 100%;
-}
-
-.c27 {
+.c4 {
   display: -webkit-box;
   display: -webkit-flex;
   display: -ms-flexbox;
@@ -317,7 +331,7 @@ exports[`<SettingsSessionPage /> Should render and match the snapshot 1`] = `
   width: 100%;
 }
 
-.c33 {
+.c34 {
   display: -webkit-box;
   display: -webkit-flex;
   display: -ms-flexbox;
@@ -329,7 +343,21 @@ exports[`<SettingsSessionPage /> Should render and match the snapshot 1`] = `
   margin-top: 20px;
 }
 
-.c41 {
+.c43 {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-flex-direction: column;
+  -ms-flex-direction: column;
+  flex-direction: column;
+  width: 100%;
+  -webkit-flex: 1;
+  -ms-flex: 1;
+  flex: 1;
+}
+
+.c2 {
   display: -webkit-box;
   display: -webkit-flex;
   display: -ms-flexbox;
@@ -346,14 +374,7 @@ exports[`<SettingsSessionPage /> Should render and match the snapshot 1`] = `
   align-items: flex-start;
 }
 
-.c40 {
-  max-width: 100% !important;
-  width: 100%;
-  margin: 0 !important;
-  padding: 0 !important;
-}
-
-.c5 {
+.c7 {
   padding: 12px;
   border-style: solid;
   border-width: 1px;
@@ -369,17 +390,17 @@ exports[`<SettingsSessionPage /> Should render and match the snapshot 1`] = `
   opacity: 0.5;
 }
 
-.c5:focus {
+.c7:focus {
   box-shadow: none;
   outline: none;
   border-color: #107969;
 }
 
-.c5:disabled {
+.c7:disabled {
   color: #ABBBD1;
 }
 
-.c7 {
+.c9 {
   padding: 12px;
   border-style: solid;
   border-width: 1px;
@@ -398,37 +419,38 @@ exports[`<SettingsSessionPage /> Should render and match the snapshot 1`] = `
   opacity: 0.5;
 }
 
-.c7:focus {
+.c9:focus {
   box-shadow: none;
   outline: none;
   border-color: #107969;
 }
 
-.c7:disabled {
+.c9:disabled {
   color: #ABBBD1;
 }
 
-.c32 {
+.c33 {
   padding: 12px;
   border-style: solid;
   border-width: 1px;
   border-color: #E9F1FB;
   border-radius: 5px;
+  width: 100%;
   color: #2F3850;
   opacity: 0.5;
 }
 
-.c32:focus {
+.c33:focus {
   box-shadow: none;
   outline: none;
   border-color: #107969;
 }
 
-.c32:disabled {
+.c33:disabled {
   color: #ABBBD1;
 }
 
-.c8 {
+.c10 {
   padding: 5px 10px;
   font-size: 13px;
   font-weight: 600;
@@ -438,22 +460,22 @@ exports[`<SettingsSessionPage /> Should render and match the snapshot 1`] = `
   opacity: 0.5;
 }
 
-.c8:focus {
+.c10:focus {
   box-shadow: none;
   outline: none;
   border: 1px solid transparent;
 }
 
-.c44 {
+.c46 {
   display: none;
 }
 
-.c43:disabled + label > .c47 {
+.c45:disabled + label > .c49 {
   opacity: 0.5;
   cursor: not-allowed;
 }
 
-.c46 {
+.c48 {
   width: 100%;
   display: -webkit-box;
   display: -webkit-flex;
@@ -465,27 +487,27 @@ exports[`<SettingsSessionPage /> Should render and match the snapshot 1`] = `
   align-items: center;
 }
 
-.c46:hover {
+.c48:hover {
   cursor: pointer;
 }
 
-.c43:disabled + .c45 {
+.c45:disabled + .c47 {
   opacity: 0.5;
   cursor: not-allowed;
 }
 
-.c48 {
+.c50 {
   margin-inline-start: 5px;
 }
 
-.c42 {
+.c44 {
   width: 100%;
   padding: 16px;
   border: 1px solid #E9F1FB;
   border-radius: 5px;
 }
 
-.c28 {
+.c29 {
   -webkit-flex: 1;
   -ms-flex: 1;
   flex: 1;
@@ -497,21 +519,21 @@ exports[`<SettingsSessionPage /> Should render and match the snapshot 1`] = `
   margin-bottom: 15px;
 }
 
-.c23 {
+.c25 {
   position: relative;
   display: inline-block;
   min-width: 40px;
   height: 21px;
 }
 
-.c13 {
+.c15 {
   opacity: 0;
   width: 0;
   height: 0;
   visibility: collapse;
 }
 
-.c15 {
+.c17 {
   width: 100%;
   display: -webkit-box;
   display: -webkit-flex;
@@ -523,16 +545,16 @@ exports[`<SettingsSessionPage /> Should render and match the snapshot 1`] = `
   align-items: center;
 }
 
-.c15:hover {
+.c17:hover {
   cursor: pointer;
 }
 
-.c12:disabled + .c14 {
+.c14:disabled + .c16 {
   opacity: 0.5;
   cursor: not-allowed;
 }
 
-.c25 {
+.c27 {
   position: absolute;
   top: 0;
   left: 0;
@@ -544,20 +566,20 @@ exports[`<SettingsSessionPage /> Should render and match the snapshot 1`] = `
   border-radius: 21px;
 }
 
-.c12:checked + .c14 .c24 {
+.c14:checked + .c16 .c26 {
   background-color: #B727EA;
 }
 
-.c12:focus + .c14 .c24 {
+.c14:focus + .c16 .c26 {
   box-shadow: 0 0 1px #B727EA;
 }
 
-.c12:disabled + .c14 .c24 {
+.c14:disabled + .c16 .c26 {
   opacity: 0.5;
   cursor: not-allowed;
 }
 
-.c25:before {
+.c27:before {
   position: absolute;
   content: '';
   left: 4px;
@@ -570,21 +592,21 @@ exports[`<SettingsSessionPage /> Should render and match the snapshot 1`] = `
   border-radius: 50%;
 }
 
-.c12:checked + .c14 .c24:before {
+.c14:checked + .c16 .c26:before {
   -webkit-transform: translateX(18px);
   -ms-transform: translateX(18px);
   transform: translateX(18px);
 }
 
-.c18 {
+.c20 {
   margin-right: 5px;
 }
 
-.c11 {
+.c13 {
   width: 100% !important;
 }
 
-.c6 {
+.c8 {
   border: none;
   background-color: #E9F1FB;
   outline: none;
@@ -592,11 +614,11 @@ exports[`<SettingsSessionPage /> Should render and match the snapshot 1`] = `
   max-width: none;
 }
 
-.c6:focus {
+.c8:focus {
   border: none;
 }
 
-.c3 {
+.c5 {
   display: -webkit-box;
   display: -webkit-flex;
   display: -ms-flexbox;
@@ -607,12 +629,15 @@ exports[`<SettingsSessionPage /> Should render and match the snapshot 1`] = `
   width: 100%;
 }
 
-.c2 {
-  width: 400px;
-  padding: 25px 20px;
+.c1 {
+  width: 800px;
   background-color: #FFFFFF;
   border-radius: 5px;
   box-shadow: 0px 4px 20px #E3EEFB;
+}
+
+.c3 {
+  padding-block: 25px;
 }
 
 @media only screen and (min-width:768px) {
@@ -669,573 +694,594 @@ exports[`<SettingsSessionPage /> Should render and match the snapshot 1`] = `
   width="100%"
 >
   <div
-    class="c1 c2"
-    height="100%"
+    class="c1"
+    style="box-sizing: border-box; position: relative; margin-left: auto; margin-right: auto; padding-left: 15px; padding-right: 15px;"
   >
     <div
-      class="c3"
-    >
-      <h3
-        class="c4"
-        font-weight="regular"
-      >
-        Name
-      </h3>
-      <input
-        aria-label="e-Session Name"
-        class="c5 c6"
-        dir="auto"
-        disabled=""
-        placeholder="e-Session Name"
-        type="text"
-        value="e-Session Name"
-        width="100%"
-      />
-    </div>
-    <div
-      class="c3"
-      style="margin-top: 15px; margin-bottom: 15px;"
-    >
-      <h3
-        class="c4"
-        font-weight="regular"
-      >
-        Variable
-      </h3>
-      <input
-        aria-label="Variable name..."
-        autocomplete="off"
-        class="c7 c8"
-        color="#107969"
-        dir="auto"
-        disabled=""
-        name="notASearchField-Variable name..."
-        placeholder="Variable name..."
-        type="text"
-        value=""
-        width="200px"
-      />
-    </div>
-    <div
-      class="c9"
+      class=""
+      style="margin-left: -15px; margin-right: -15px; display: flex; flex-wrap: wrap; flex-grow: 0; flex-shrink: 0; align-items: normal; justify-content: flex-start;"
     >
       <div
-        class="c10 c11"
+        align="start"
+        class="c2 c3"
+        style="box-sizing: border-box; min-height: 1px; position: relative; padding-left: 15px; padding-right: 15px; width: 50%; flex-basis: 50%; flex-grow: 0; flex-shrink: 0; max-width: 50%; margin-left: 0%;"
       >
-        <input
-          aria-checked="false"
-          aria-disabled="true"
-          class="c12 c13"
-          data-cy="branching-intervention-toggle"
-          data-testid="switch-input"
-          disabled=""
-          id="Ability to fill the session multiple times"
-          role="switch"
-          type="checkbox"
-        />
-        <label
-          class="c14 c15"
-          for="Ability to fill the session multiple times"
+        <div
+          class="c4"
         >
           <div
-            class="c16"
-            width="100%"
+            class="c5"
+          >
+            <h3
+              class="c6"
+              font-weight="regular"
+            >
+              Name
+            </h3>
+            <input
+              aria-label="e-Session Name"
+              class="c7 c8"
+              dir="auto"
+              disabled=""
+              placeholder="e-Session Name"
+              type="text"
+              value="e-Session Name"
+              width="100%"
+            />
+          </div>
+          <div
+            class="c5"
+            style="margin-top: 15px; margin-bottom: 15px;"
+          >
+            <h3
+              class="c6"
+              font-weight="regular"
+            >
+              Variable
+            </h3>
+            <input
+              aria-label="Variable name..."
+              autocomplete="off"
+              class="c9 c10"
+              color="#107969"
+              dir="auto"
+              disabled=""
+              name="notASearchField-Variable name..."
+              placeholder="Variable name..."
+              type="text"
+              value=""
+              width="200px"
+            />
+          </div>
+          <div
+            class="c11"
           >
             <div
-              class="c17 c18"
+              class="c12 c13"
             >
-              <div
-                class="c19"
+              <input
+                aria-checked="false"
+                aria-disabled="true"
+                class="c14 c15"
+                data-cy="branching-intervention-toggle"
+                data-testid="switch-input"
+                disabled=""
+                id="Ability to fill the session multiple times"
+                role="switch"
+                type="checkbox"
+              />
+              <label
+                class="c16 c17"
+                for="Ability to fill the session multiple times"
               >
-                <p
-                  class="c20"
-                >
-                  Ability to fill the session multiple times
-                </p>
                 <div
-                  class="c21"
-                  display="flex"
+                  class="c18"
+                  width="100%"
                 >
                   <div
-                    class="c17"
-                    data-for="option-tooltip-Ability to fill the session multiple times"
-                    data-tip=""
+                    class="c19 c20"
                   >
-                    <img
-                      alt="?"
-                      class="c22"
-                      src="IMAGE_MOCK"
+                    <div
+                      class="c21"
+                    >
+                      <p
+                        class="c22"
+                      >
+                        Ability to fill the session multiple times
+                      </p>
+                      <div
+                        class="c23"
+                        display="flex"
+                      >
+                        <div
+                          class="c19"
+                          data-for="option-tooltip-Ability to fill the session multiple times"
+                          data-tip=""
+                        >
+                          <img
+                            alt="?"
+                            class="c24"
+                            src="IMAGE_MOCK"
+                          />
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <div
+                    class="c25"
+                  >
+                    <span
+                      class="c26 c27"
                     />
+                  </div>
+                </div>
+              </label>
+            </div>
+          </div>
+          <h3
+            class="c28"
+          >
+            Autofinish settings
+          </h3>
+          <div
+            class="c5"
+          >
+            <div
+              class="c4"
+            >
+              <div
+                class="c12"
+              >
+                <input
+                  aria-checked="false"
+                  aria-disabled="true"
+                  class="c14 c15"
+                  data-cy="branching-intervention-toggle"
+                  data-testid="switch-input"
+                  disabled=""
+                  id="autofinishEnabled"
+                  role="switch"
+                  type="checkbox"
+                />
+                <label
+                  class="c16 c17"
+                  for="autofinishEnabled"
+                >
+                  <div
+                    class="c18"
+                    name="autofinishEnabled"
+                    width="100%"
+                  >
+                    <div
+                      class="c19 c20"
+                    >
+                      <div
+                        class="c21"
+                      >
+                        Set Autofinish timer
+                        <div
+                          class="c23"
+                          display="flex"
+                        >
+                          <div
+                            class="c19"
+                            data-for="autofinish-enabled-tooltip-info"
+                            data-tip=""
+                          >
+                            <img
+                              alt="?"
+                              class="c24"
+                              src="IMAGE_MOCK"
+                            />
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                    <div
+                      class="c25"
+                    >
+                      <span
+                        class="c26 c27"
+                      />
+                    </div>
+                  </div>
+                </label>
+              </div>
+            </div>
+            <div
+              class="c29"
+              color="#E9F1FB"
+              orientation="0"
+            />
+            <div
+              class="c30"
+            >
+              <div
+                class="c4"
+              >
+                <label
+                  for="autofinishDelay"
+                >
+                  <p
+                    class="c31"
+                    font-size="13"
+                    width="fit-content"
+                  >
+                    Autofinish delay
+                  </p>
+                </label>
+                <div
+                  class="c32"
+                  width="100%"
+                >
+                  <input
+                    class="c33"
+                    dir="auto"
+                    disabled=""
+                    id="autofinishDelay"
+                    name="autofinishDelay"
+                    type="text"
+                    value=""
+                    width="100%"
+                  />
+                </div>
+              </div>
+              <div
+                class="c34"
+              >
+                <div
+                  class="c35"
+                  cursor="not-allowed"
+                  data-testid="select"
+                  disabled=""
+                >
+                  <div
+                    class=" css-14jk2my-container"
+                  >
+                    <span
+                      aria-atomic="false"
+                      aria-live="polite"
+                      aria-relevant="additions text"
+                      class="css-1f43avz-a11yText-A11yText"
+                    />
+                    <div
+                      class=" css-vz7ypb-control"
+                    >
+                      <div
+                        class=" css-g1d714-ValueContainer"
+                      >
+                        <div
+                          class=" css-107lb6w-singleValue"
+                        >
+                          minutes
+                        </div>
+                        <div
+                          class="css-1bwsx9e-Input"
+                        >
+                          <div
+                            class=""
+                            style="display: inline-block;"
+                          >
+                            <input
+                              aria-autocomplete="list"
+                              autocapitalize="none"
+                              autocomplete="off"
+                              autocorrect="off"
+                              disabled=""
+                              id="timeUnit"
+                              spellcheck="false"
+                              style="box-sizing: content-box; width: 2px; border: 0px; opacity: 1; outline: 0; padding: 0px;"
+                              tabindex="0"
+                              type="text"
+                              value=""
+                            />
+                            <div
+                              style="position: absolute; top: 0px; left: 0px; visibility: hidden; height: 0px; overflow: scroll; white-space: pre; font-family: -webkit-small-control; letter-spacing: normal; text-transform: none;"
+                            />
+                          </div>
+                        </div>
+                      </div>
+                      <div
+                        class=" css-1hb7zxy-IndicatorsContainer"
+                      >
+                        <div
+                          aria-hidden="true"
+                          class=" css-tlfecz-indicatorContainer"
+                        >
+                          <img
+                            alt="arrow"
+                            class="c36"
+                            src="IMAGE_MOCK"
+                            transform=""
+                          />
+                        </div>
+                      </div>
+                    </div>
                   </div>
                 </div>
               </div>
             </div>
-            <div
-              class="c23"
-            >
-              <span
-                class="c24 c25"
-              />
-            </div>
           </div>
-        </label>
+        </div>
       </div>
-    </div>
-    <h3
-      class="c26"
-    >
-      Autofinish settings
-    </h3>
-    <div
-      class="c3"
-    >
       <div
-        class="c27"
+        align="start"
+        class="c2 c3"
+        style="box-sizing: border-box; min-height: 1px; position: relative; padding-left: 15px; padding-right: 15px; width: 50%; flex-basis: 50%; flex-grow: 0; flex-shrink: 0; max-width: 50%; margin-left: 0%;"
       >
         <div
-          class="c10"
+          class="c4"
         >
-          <input
-            aria-checked="false"
-            aria-disabled="true"
-            class="c12 c13"
-            data-cy="branching-intervention-toggle"
-            data-testid="switch-input"
-            disabled=""
-            id="autofinishEnabled"
-            role="switch"
-            type="checkbox"
-          />
-          <label
-            class="c14 c15"
-            for="autofinishEnabled"
+          <h3
+            class="c37"
+          >
+            Narrator Settings
+          </h3>
+          <div
+            class="c38"
           >
             <div
-              class="c16"
-              name="autofinishEnabled"
+              class="c12 c13"
+            >
+              <input
+                aria-checked="true"
+                aria-disabled="true"
+                checked=""
+                class="c14 c15"
+                data-cy="branching-intervention-toggle"
+                data-testid="switch-input"
+                disabled=""
+                id="Narrator Active"
+                role="switch"
+                type="checkbox"
+              />
+              <label
+                class="c16 c17"
+                for="Narrator Active"
+              >
+                <div
+                  class="c18"
+                  width="100%"
+                >
+                  <div
+                    class="c19 c20"
+                  >
+                    <div
+                      class="c21"
+                    >
+                      <p
+                        class="c39"
+                        font-weight="bold"
+                      >
+                        Narrator Active
+                      </p>
+                    </div>
+                  </div>
+                  <div
+                    class="c25"
+                  >
+                    <span
+                      class="c26 c27"
+                    />
+                  </div>
+                </div>
+              </label>
+            </div>
+          </div>
+          <div
+            class="c38"
+          >
+            <div
+              class="c12 c13"
+            >
+              <input
+                aria-checked="true"
+                aria-disabled="true"
+                checked=""
+                class="c14 c15"
+                data-cy="branching-intervention-toggle"
+                data-testid="switch-input"
+                disabled=""
+                id="Voice"
+                role="switch"
+                type="checkbox"
+              />
+              <label
+                class="c16 c17"
+                for="Voice"
+              >
+                <div
+                  class="c18"
+                  width="100%"
+                >
+                  <div
+                    class="c19 c20"
+                  >
+                    <div
+                      class="c21"
+                    >
+                      <p
+                        class="c22"
+                      >
+                        Voice
+                      </p>
+                    </div>
+                  </div>
+                  <div
+                    class="c25"
+                  >
+                    <span
+                      class="c26 c27"
+                    />
+                  </div>
+                </div>
+              </label>
+            </div>
+          </div>
+          <div
+            class="c11"
+          >
+            <div
+              class="c12 c13"
+            >
+              <input
+                aria-checked="true"
+                aria-disabled="true"
+                checked=""
+                class="c14 c15"
+                data-cy="branching-intervention-toggle"
+                data-testid="switch-input"
+                disabled=""
+                id="Display Narrator"
+                role="switch"
+                type="checkbox"
+              />
+              <label
+                class="c16 c17"
+                for="Display Narrator"
+              >
+                <div
+                  class="c18"
+                  width="100%"
+                >
+                  <div
+                    class="c19 c20"
+                  >
+                    <div
+                      class="c21"
+                    >
+                      <p
+                        class="c22"
+                      >
+                        Display Narrator
+                      </p>
+                    </div>
+                  </div>
+                  <div
+                    class="c25"
+                  >
+                    <span
+                      class="c26 c27"
+                    />
+                  </div>
+                </div>
+              </label>
+            </div>
+          </div>
+          <h3
+            class="c40"
+          >
+            Default narrator
+          </h3>
+          <div
+            class="c41"
+          >
+            <div
+              class="c42"
               width="100%"
             >
               <div
-                class="c17 c18"
+                class="c43"
               >
                 <div
-                  class="c19"
+                  class="c12 c44"
                 >
-                  Set Autofinish timer
-                  <div
-                    class="c21"
-                    display="flex"
+                  <input
+                    class="c45 c46"
+                    disabled=""
+                    id="character-setting-peedy"
+                    type="radio"
+                  />
+                  <label
+                    class="c47 c48"
+                    for="character-setting-peedy"
                   >
+                    <img
+                      class="c49 "
+                      src="IMAGE_MOCK"
+                    />
                     <div
-                      class="c17"
-                      data-for="autofinish-enabled-tooltip-info"
-                      data-tip=""
+                      class="c19 c50"
                     >
-                      <img
-                        alt="?"
-                        class="c22"
-                        src="IMAGE_MOCK"
-                      />
-                    </div>
-                  </div>
-                </div>
-              </div>
-              <div
-                class="c23"
-              >
-                <span
-                  class="c24 c25"
-                />
-              </div>
-            </div>
-          </label>
-        </div>
-      </div>
-      <div
-        class="c28"
-        color="#E9F1FB"
-        orientation="0"
-      />
-      <div
-        class="c29"
-      >
-        <div
-          class="c27"
-        >
-          <label
-            for="autofinishDelay"
-          >
-            <p
-              class="c30"
-              font-size="13"
-              width="fit-content"
-            >
-              Autofinish delay
-            </p>
-          </label>
-          <div
-            class="c31"
-            width="100%"
-          >
-            <input
-              class="c32"
-              dir="auto"
-              disabled=""
-              id="autofinishDelay"
-              name="autofinishDelay"
-              type="text"
-              value=""
-            />
-          </div>
-        </div>
-        <div
-          class="c33"
-        >
-          <div
-            class="c34"
-            cursor="not-allowed"
-            data-testid="select"
-            disabled=""
-          >
-            <div
-              class=" css-14jk2my-container"
-            >
-              <span
-                aria-atomic="false"
-                aria-live="polite"
-                aria-relevant="additions text"
-                class="css-1f43avz-a11yText-A11yText"
-              />
-              <div
-                class=" css-vz7ypb-control"
-              >
-                <div
-                  class=" css-g1d714-ValueContainer"
-                >
-                  <div
-                    class=" css-107lb6w-singleValue"
-                  >
-                    minutes
-                  </div>
-                  <div
-                    class="css-1bwsx9e-Input"
-                  >
-                    <div
-                      class=""
-                      style="display: inline-block;"
-                    >
-                      <input
-                        aria-autocomplete="list"
-                        autocapitalize="none"
-                        autocomplete="off"
-                        autocorrect="off"
-                        disabled=""
-                        id="timeUnit"
-                        spellcheck="false"
-                        style="box-sizing: content-box; width: 2px; border: 0px; opacity: 1; outline: 0; padding: 0px;"
-                        tabindex="0"
-                        type="text"
-                        value=""
-                      />
                       <div
-                        style="position: absolute; top: 0px; left: 0px; visibility: hidden; height: 0px; overflow: scroll; white-space: pre; font-family: -webkit-small-control; letter-spacing: normal; text-transform: none;"
-                      />
+                        class="c12"
+                      >
+                        <div
+                          class="c19"
+                        >
+                          <p
+                            class="c51"
+                          >
+                            Peedy
+                          </p>
+                        </div>
+                        <div
+                          class="c19"
+                        >
+                          <img
+                            src="IMAGE_MOCK"
+                          />
+                        </div>
+                      </div>
                     </div>
-                  </div>
+                  </label>
                 </div>
+              </div>
+              <div
+                class="c43"
+              >
                 <div
-                  class=" css-1hb7zxy-IndicatorsContainer"
+                  class="c12 c44"
                 >
-                  <div
-                    aria-hidden="true"
-                    class=" css-tlfecz-indicatorContainer"
+                  <input
+                    class="c45 c46"
+                    disabled=""
+                    id="character-setting-emmi"
+                    type="radio"
+                  />
+                  <label
+                    class="c47 c48"
+                    for="character-setting-emmi"
                   >
                     <img
-                      alt="arrow"
-                      class="c35"
+                      class="c49 "
                       src="IMAGE_MOCK"
-                      transform=""
                     />
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-    <h3
-      class="c36"
-    >
-      Narrator Settings
-    </h3>
-    <div
-      class="c37"
-    >
-      <div
-        class="c10 c11"
-      >
-        <input
-          aria-checked="true"
-          aria-disabled="true"
-          checked=""
-          class="c12 c13"
-          data-cy="branching-intervention-toggle"
-          data-testid="switch-input"
-          disabled=""
-          id="Narrator Active"
-          role="switch"
-          type="checkbox"
-        />
-        <label
-          class="c14 c15"
-          for="Narrator Active"
-        >
-          <div
-            class="c16"
-            width="100%"
-          >
-            <div
-              class="c17 c18"
-            >
-              <div
-                class="c19"
-              >
-                <p
-                  class="c38"
-                  font-weight="bold"
-                >
-                  Narrator Active
-                </p>
-              </div>
-            </div>
-            <div
-              class="c23"
-            >
-              <span
-                class="c24 c25"
-              />
-            </div>
-          </div>
-        </label>
-      </div>
-    </div>
-    <div
-      class="c37"
-    >
-      <div
-        class="c10 c11"
-      >
-        <input
-          aria-checked="true"
-          aria-disabled="true"
-          checked=""
-          class="c12 c13"
-          data-cy="branching-intervention-toggle"
-          data-testid="switch-input"
-          disabled=""
-          id="Voice"
-          role="switch"
-          type="checkbox"
-        />
-        <label
-          class="c14 c15"
-          for="Voice"
-        >
-          <div
-            class="c16"
-            width="100%"
-          >
-            <div
-              class="c17 c18"
-            >
-              <div
-                class="c19"
-              >
-                <p
-                  class="c20"
-                >
-                  Voice
-                </p>
-              </div>
-            </div>
-            <div
-              class="c23"
-            >
-              <span
-                class="c24 c25"
-              />
-            </div>
-          </div>
-        </label>
-      </div>
-    </div>
-    <div
-      class="c9"
-    >
-      <div
-        class="c10 c11"
-      >
-        <input
-          aria-checked="true"
-          aria-disabled="true"
-          checked=""
-          class="c12 c13"
-          data-cy="branching-intervention-toggle"
-          data-testid="switch-input"
-          disabled=""
-          id="Display Narrator"
-          role="switch"
-          type="checkbox"
-        />
-        <label
-          class="c14 c15"
-          for="Display Narrator"
-        >
-          <div
-            class="c16"
-            width="100%"
-          >
-            <div
-              class="c17 c18"
-            >
-              <div
-                class="c19"
-              >
-                <p
-                  class="c20"
-                >
-                  Display Narrator
-                </p>
-              </div>
-            </div>
-            <div
-              class="c23"
-            >
-              <span
-                class="c24 c25"
-              />
-            </div>
-          </div>
-        </label>
-      </div>
-    </div>
-    <h3
-      class="c39"
-    >
-      Default narrator
-    </h3>
-    <div
-      class="c40"
-      style="box-sizing: border-box; position: relative; margin-left: auto; margin-right: auto; padding-left: 15px; padding-right: 15px; max-width: 960px;"
-    >
-      <div
-        class=""
-        style="margin-left: -15px; margin-right: -15px; display: flex; flex-wrap: wrap; flex-grow: 0; flex-shrink: 0; align-items: normal; justify-content: flex-start; row-gap: 16px;"
-      >
-        <div
-          align="start"
-          class="c41"
-          style="box-sizing: border-box; min-height: 1px; position: relative; padding-left: 15px; padding-right: 15px; width: 100%; flex-basis: 0px; flex-grow: 1; flex-shrink: 0; max-width: 100%; margin-left: 0%;"
-        >
-          <div
-            class="c10 c42"
-          >
-            <input
-              class="c43 c44"
-              disabled=""
-              id="character-setting-peedy"
-              type="radio"
-            />
-            <label
-              class="c45 c46"
-              for="character-setting-peedy"
-            >
-              <img
-                class="c47 "
-                src="IMAGE_MOCK"
-              />
-              <div
-                class="c17 c48"
-              >
-                <div
-                  class="c10"
-                >
-                  <div
-                    class="c17"
-                  >
-                    <p
-                      class="c49"
+                    <div
+                      class="c19 c50"
                     >
-                      Peedy
-                    </p>
-                  </div>
-                  <div
-                    class="c17"
-                  >
-                    <img
-                      src="IMAGE_MOCK"
-                    />
-                  </div>
+                      <div
+                        class="c12"
+                      >
+                        <div
+                          class="c19"
+                        >
+                          <p
+                            class="c51"
+                          >
+                            Emmi
+                          </p>
+                        </div>
+                        <div
+                          class="c19"
+                        >
+                          <img
+                            src="IMAGE_MOCK"
+                          />
+                        </div>
+                      </div>
+                    </div>
+                  </label>
                 </div>
               </div>
-            </label>
-          </div>
-        </div>
-        <div
-          align="start"
-          class="c41"
-          style="box-sizing: border-box; min-height: 1px; position: relative; padding-left: 15px; padding-right: 15px; width: 100%; flex-basis: 0px; flex-grow: 1; flex-shrink: 0; max-width: 100%; margin-left: 0%;"
-        >
-          <div
-            class="c10 c42"
-          >
-            <input
-              class="c43 c44"
-              disabled=""
-              id="character-setting-emmi"
-              type="radio"
-            />
-            <label
-              class="c45 c46"
-              for="character-setting-emmi"
-            >
-              <img
-                class="c47 "
-                src="IMAGE_MOCK"
-              />
-              <div
-                class="c17 c48"
-              >
-                <div
-                  class="c10"
-                >
-                  <div
-                    class="c17"
-                  >
-                    <p
-                      class="c49"
-                    >
-                      Emmi
-                    </p>
-                  </div>
-                  <div
-                    class="c17"
-                  >
-                    <img
-                      src="IMAGE_MOCK"
-                    />
-                  </div>
-                </div>
-              </div>
-            </label>
+            </div>
           </div>
         </div>
       </div>
-      <span
-        style="display: table; clear: both;"
-      />
     </div>
+    <span
+      style="display: table; clear: both;"
+    />
   </div>
 </div>
 `;
