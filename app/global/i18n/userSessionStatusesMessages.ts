@@ -21,4 +21,8 @@ export default defineMessages<UserSessionStatus>({
     id: `${scope}.notAvailable`,
     defaultMessage: 'Not available',
   },
+  [UserSessionStatus.CLOSED]: {
+    id: `${scope}.closed`,
+    defaultMessage: 'Module closed',
+  },
 });

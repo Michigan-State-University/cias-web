@@ -7,6 +7,10 @@ export default defineMessages({
     id: `${scope}.studyNotAvailableTitle`,
     defaultMessage: 'Study unavailable',
   },
+  moduleNotAvailableTitle: {
+    id: `${scope}.moduleNotAvailableTitle`,
+    defaultMessage: 'Module unavailable',
+  },
   toMainPage: {
     id: `${scope}.toMainPage`,
     defaultMessage: 'Go to Main Page',

@@ -19,4 +19,8 @@ export default defineMessages<InterventionNotAvailableReason>({
     defaultMessage:
       'This study has been temporarily paused. Please try again later.',
   },
+  [InterventionNotAvailableReason.SESSION_CLOSED]: {
+    id: `${scope}.SESSION_CLOSED`,
+    defaultMessage: 'This module has been closed',
+  },
 });

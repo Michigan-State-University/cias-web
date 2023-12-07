@@ -17,7 +17,7 @@ export const InterventionOptions = styled.div`
 
 export const StatusLabel = styled.div`
   color: white;
-  padding: 7px 10px;
+  padding: 4px 8px;
   border-radius: 5px;
   background: ${(props) => statusTypeToColorMap[props.status]};
   display: flex;
@@ -25,6 +25,9 @@ export const StatusLabel = styled.div`
   justify-content: center;
   align-content: center;
   white-space: pre;
+  font-weight: bold;
+  font-size: 12px;
+  line-height: 1.33;
 `;
 
 export const DraggedTest = styled.div`
