@@ -1,6 +1,24 @@
 import { Session } from 'models/Session';
 
-export type SessionSettingsFormValues = Pick<
+import { SelectOption } from 'components/Select/types';
+
+export type SessionSettingsSubmitFormValues = Pick<
   Session,
-  'autofinishEnabled' | 'autofinishDelay'
+  'autofinishEnabled' | 'autofinishDelay' | 'autocloseEnabled' | 'autocloseAt'
 >;
+
+export type AutofinishFormValues = {
+  autofinishEnabled: boolean;
+  autofinishDelay: number;
+  timeUnit: SelectOption<AutofinishTimeUnit>;
+};
+
+export type AutocloseFormValues = {
+  autocloseEnabled: boolean;
+  autocloseAtDate: Nullable<Date>;
+};
+
+export enum AutofinishTimeUnit {
+  HOURS = 'h',
+  MINUTES = 'm',
+}
