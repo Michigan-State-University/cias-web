@@ -1357,6 +1357,7 @@
   "app.containers.SessionListItem.min": "min",
   "app.containers.SessionListItem.pasteSession": "Paste session in this intervention",
   "app.containers.SessionListItem.reportsCount": "{count} reports",
+  "app.containers.SessionListItem.sessionClosedAlertContent": "This session has been closed",
   "app.containers.SessionListItem.wcagDescription": "Tile of Session: {name}",
   "app.containers.SessionMapPage.afterPreview": "After user preview session",
   "app.containers.SessionMapPage.answersErrorToastMessage": "Could not fetch preview session answers.",

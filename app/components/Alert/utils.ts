@@ -7,6 +7,9 @@ export const getBackgroundColorByType = (type: AlertType) => {
     case AlertType.WARNING: {
       return colors.chardonnay;
     }
+    case AlertType.WARNING_LIGHT: {
+      return colors.snow;
+    }
     case AlertType.INFO:
     default: {
       return themeColors.highlight;

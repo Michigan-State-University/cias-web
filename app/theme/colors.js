@@ -101,6 +101,7 @@ const colors = {
   kleinBlue: '#5339F0',
   grandis: '#FFCC69',
   rawUmber: '#44580C',
+  snow: '#FFF0F0',
 };
 
 const themeColors = {

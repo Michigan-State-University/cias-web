@@ -28,6 +28,8 @@ export type Props = {
   onDismiss?: () => void;
   type: AlertType;
   wrap?: boolean;
+  noIcon?: boolean;
+  centered?: boolean;
 } & Partial<MarginProps & LayoutProps & PositioningProps>;
 
 export const Alert: FC<Props> = ({
@@ -36,6 +38,8 @@ export const Alert: FC<Props> = ({
   onDismiss,
   type,
   wrap = true,
+  noIcon = false,
+  centered = false,
   ...props
 }) => {
   const { formatMessage } = useIntl();
@@ -46,13 +50,13 @@ export const Alert: FC<Props> = ({
       py={12}
       px={16}
       gap={16}
-      justify="between"
+      justify={centered ? 'center' : 'between'}
       flexWrap={wrap ? 'wrap' : 'nowrap'}
       background={getBackgroundColorByType(type)}
       {...props}
     >
       <Row gap={12} align="center" flexWrap={wrap ? 'wrap' : 'nowrap'}>
-        <Icon src={WarningIcon} stroke={themeColors.text} />
+        {!noIcon && <Icon src={WarningIcon} stroke={themeColors.text} />}
         <Text fontSize={15} lineHeight={1.3} textAlign="left" {...contentProps}>
           {content}
         </Text>

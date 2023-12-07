@@ -24,8 +24,8 @@ exports[`<SessionBranching /> Should render and match the snapshot 1`] = `
   align-items: space-between;
   padding-top: 18px;
   padding-bottom: 18px;
-  padding-right: 62px;
-  padding-left: 62px;
+  padding-right: 24px;
+  padding-left: 24px;
 }
 
 .c2 {

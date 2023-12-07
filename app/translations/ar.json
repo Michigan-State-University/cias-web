@@ -1357,6 +1357,7 @@
   "app.containers.SessionListItem.min": "",
   "app.containers.SessionListItem.pasteSession": "",
   "app.containers.SessionListItem.reportsCount": "",
+  "app.containers.SessionListItem.sessionClosedAlertContent": "",
   "app.containers.SessionListItem.wcagDescription": "",
   "app.containers.SessionMapPage.afterPreview": "",
   "app.containers.SessionMapPage.answersErrorToastMessage": "",
