@@ -6,6 +6,12 @@ const ALLOWED_PREVIEW = [InterventionStatus.DRAFT];
 
 const ALLOWED_INVITING_PARTICIPANTS = [InterventionStatus.PUBLISHED];
 
+const ALLOWED_COPYING_INVITATION_LINK = [
+  InterventionStatus.DRAFT,
+  InterventionStatus.PUBLISHED,
+  InterventionStatus.PAUSED,
+];
+
 const ALLOWED_CREATING_PREDEFINED_PARTICIPANTS = [
   InterventionStatus.DRAFT,
   InterventionStatus.PUBLISHED,
@@ -45,6 +51,9 @@ export const canPreview = (interventionStatus) =>
 
 export const canInviteParticipants = (interventionStatus) =>
   ALLOWED_INVITING_PARTICIPANTS.includes(interventionStatus);
+
+export const canCopyInvitationLink = (interventionStatus) =>
+  ALLOWED_COPYING_INVITATION_LINK.includes(interventionStatus);
 
 export const canCreatePredefinedParticipants = (interventionStatus) =>
   ALLOWED_CREATING_PREDEFINED_PARTICIPANTS.includes(interventionStatus);
