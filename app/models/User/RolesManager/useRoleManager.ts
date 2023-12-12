@@ -54,11 +54,7 @@ const ALLOWED_QUICK_EXIT_USE = [
 
 const REQUIRED_NAVIGATOR_AVAILABILITY_SET = [Roles.Admin, Roles.Researcher];
 
-const ALLOWED_RESOURCES_DISPLAY = [
-  Roles.Admin,
-  Roles.Researcher,
-  Roles.Navigator,
-];
+const ALLOWED_RESOURCES_DISPLAY = [Roles.Admin, Roles.Researcher];
 
 export const canDisplayLeftSidebar = (userRoles: Roles[]) =>
   !arraysOverlap(userRoles, FORBIDDEN_LEFT_SIDEBAR_DISPLAY);
