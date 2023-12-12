@@ -57,7 +57,6 @@ const REQUIRED_NAVIGATOR_AVAILABILITY_SET = [Roles.Admin, Roles.Researcher];
 const ALLOWED_RESOURCES_DISPLAY = [
   Roles.Admin,
   Roles.Researcher,
-  Roles.ThirdParty,
   Roles.Navigator,
 ];
 
