@@ -8,6 +8,7 @@ exports[`<AppRoute /> Should render and match the snapshot 1`] = `
   height: auto;
   display: block;
   border-radius: 5px;
+  margin-inline-start: 10px;
   cursor: pointer;
   color: unset;
   cursor: pointer;
@@ -37,11 +38,19 @@ exports[`<AppRoute /> Should render and match the snapshot 1`] = `
   -ms-flex-direction: row;
   flex-direction: row;
   height: auto;
-  -webkit-box-pack: start;
-  -webkit-justify-content: flex-start;
-  -ms-flex-pack: start;
-  justify-content: flex-start;
-  justify-items: flex-start;
+  -webkit-box-pack: justify;
+  -webkit-justify-content: space-between;
+  -ms-flex-pack: justify;
+  justify-content: space-between;
+  justify-items: space-between;
+  -webkit-align-content: center;
+  -ms-flex-line-pack: center;
+  align-content: center;
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  gap: 16px;
   width: 100%;
 }
 
@@ -101,7 +110,7 @@ exports[`<AppRoute /> Should render and match the snapshot 1`] = `
   -ms-flex-align: center;
   align-items: center;
   height: 70px;
-  gap: 16px;
+  gap: 24px;
 }
 
 .c2 .user-name-info {
@@ -119,7 +128,7 @@ exports[`<AppRoute /> Should render and match the snapshot 1`] = `
   -webkit-box-align: center;
   -ms-flex-align: center;
   align-items: center;
-  gap: 32px;
+  gap: 24px;
   -webkit-flex-shrink: 0;
   -ms-flex-negative: 0;
   flex-shrink: 0;
@@ -135,7 +144,6 @@ exports[`<AppRoute /> Should render and match the snapshot 1`] = `
   -webkit-box-align: center;
   -ms-flex-align: center;
   align-items: center;
-  gap: 10px;
 }
 
 .c5 {
@@ -164,13 +172,19 @@ exports[`<AppRoute /> Should render and match the snapshot 1`] = `
 
 @media (max-width:575px) {
   .c2 {
-    gap: 0;
+    gap: 16px;
   }
 }
 
 @media (max-width:767px) {
   .c2 .user-name-info {
     display: none;
+  }
+}
+
+@media (max-width:575px) {
+  .c9 {
+    gap: 16px;
   }
 }
 

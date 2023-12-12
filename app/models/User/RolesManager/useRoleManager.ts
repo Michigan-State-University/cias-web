@@ -1,5 +1,7 @@
 import { useContext } from 'react';
+
 import { arraysOverlap } from 'utils/arrayUtils';
+
 import RolesManagerContext from './RolesManagerContext';
 import { Roles } from './UserRoles';
 
@@ -51,6 +53,13 @@ const ALLOWED_QUICK_EXIT_USE = [
 ];
 
 const REQUIRED_NAVIGATOR_AVAILABILITY_SET = [Roles.Admin, Roles.Researcher];
+
+const ALLOWED_RESOURCES_DISPLAY = [
+  Roles.Admin,
+  Roles.Researcher,
+  Roles.ThirdParty,
+  Roles.Navigator,
+];
 
 export const canDisplayLeftSidebar = (userRoles: Roles[]) =>
   !arraysOverlap(userRoles, FORBIDDEN_LEFT_SIDEBAR_DISPLAY);
@@ -112,6 +121,11 @@ export const useRoleManager = () => {
 
   const canUserUseQuickExit = canUseQuickExit(userRoles);
 
+  const canDisplayResources = arraysOverlap(
+    userRoles,
+    ALLOWED_RESOURCES_DISPLAY,
+  );
+
   const mustSetNavigatorAvailability =
     isNavigator &&
     arraysOverlap(userRoles, REQUIRED_NAVIGATOR_AVAILABILITY_SET);
@@ -135,5 +149,6 @@ export const useRoleManager = () => {
     canUserUseQuickExit,
     mustSetNavigatorAvailability,
     isPredefinedParticipant,
+    canDisplayResources,
   };
 };

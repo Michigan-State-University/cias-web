@@ -10,8 +10,7 @@ import messagePhoneIcon from 'assets/svg/message-phone.svg';
 import Text from 'components/Text';
 import Row from 'components/Row';
 import Icon from 'components/Icon';
-
-import { LinkNoUnderline } from './styled';
+import { AnchorNoUnderline } from 'components/AnchorNoUnderline';
 
 type Props = {
   phone: Nullable<PhoneAttributes>;
@@ -41,35 +40,35 @@ const ContactDetails = ({
       <Row mb={8} align="center">
         {/* @ts-ignore */}
         <Icon mr={8} src={greenPhone} alt="phone" />
-        <LinkNoUnderline href={`tel:${phone.prefix}${phone.number}`}>
+        <AnchorNoUnderline href={`tel:${phone.prefix}${phone.number}`}>
           <Text fontSize="14px" color={themeColors.primary} fontWeight="medium">
             {`${phone.prefix}${phone.number}`}
           </Text>
-        </LinkNoUnderline>
+        </AnchorNoUnderline>
       </Row>
     )}
     {messagePhone && (
       <Row mb={8} align="center">
         {/* @ts-ignore */}
         <Icon mr={8} src={messagePhoneIcon} alt="sms" />
-        <LinkNoUnderline
+        <AnchorNoUnderline
           href={`sms:${messagePhone.prefix}${messagePhone.number}`}
         >
           <Text fontSize="14px" color={themeColors.primary} fontWeight="medium">
             {`${messagePhone.prefix}${messagePhone.number}`}
           </Text>
-        </LinkNoUnderline>
+        </AnchorNoUnderline>
       </Row>
     )}
     {contactEmail && (
       <Row mb={8} align="center">
         {/* @ts-ignore */}
         <Icon mr={8} src={greenEmail} alt="email" />
-        <LinkNoUnderline target="_blank" href={`mailto:${contactEmail}`}>
+        <AnchorNoUnderline target="_blank" href={`mailto:${contactEmail}`}>
           <Text fontSize="14px" color={themeColors.primary} fontWeight="medium">
             {contactEmail}
           </Text>
-        </LinkNoUnderline>
+        </AnchorNoUnderline>
       </Row>
     )}
   </>
