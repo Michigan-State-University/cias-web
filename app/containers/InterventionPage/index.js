@@ -20,7 +20,6 @@ import { colors, fontSizes, themeColors } from 'theme';
 
 import { isInterventionExportFeatureEnabled } from 'utils/env';
 
-import { FEEDBACK_FORM_URL } from 'global/constants';
 import {
   createInterventionRequest,
   makeSelectInterventionLoader,
@@ -50,7 +49,7 @@ import { HelpIconTooltip } from 'components/HelpIconTooltip';
 
 import StatusFilter from './StatusFilter';
 import messages from './messages';
-import { InitialRow, StyledLink, StyledNotification } from './styled';
+import { InitialRow } from './styled';
 import ImportModalContent from './ImportModalContent';
 import ShareFilter from './ShareFilter';
 import { SharedFilter } from './StarredFilter';
@@ -72,7 +71,6 @@ export function InterventionPage({
   createInterventionRequest: createIntervention,
   createInterventionLoading,
   user,
-  editUser,
   resetModalState,
   changeMainDashboardFilterData,
 }) {
@@ -126,30 +124,10 @@ export function InterventionPage({
     },
   });
 
-  const handleFeedbackClick = () => {
-    editUser({ feedbackCompleted: true });
-  };
-
   const onImportIconClick = () => {
     resetModalState();
     openImportModal();
   };
-
-  const FeedbackNotification = (
-    <StyledNotification
-      title={formatMessage(messages.feedbackTitle)}
-      description={
-        <StyledLink
-          href={FEEDBACK_FORM_URL}
-          target="_blank"
-          onClick={handleFeedbackClick}
-        >
-          {formatMessage(messages.feedbackDescription)}
-        </StyledLink>
-      }
-      onClose={handleFeedbackClick}
-    />
-  );
 
   if (fetchInterventionsError)
     return <ErrorAlert errorText={fetchInterventionsError} fullPage />;
@@ -163,7 +141,6 @@ export function InterventionPage({
       pt={54}
     >
       <ImportModal />
-      {!user.feedbackCompleted && FeedbackNotification}
 
       {teamName && (
         <InitialRow fluid>
