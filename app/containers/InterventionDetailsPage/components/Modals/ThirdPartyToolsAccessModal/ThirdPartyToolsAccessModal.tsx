@@ -4,6 +4,8 @@ import isEqual from 'lodash/isEqual';
 import { useDispatch, useSelector } from 'react-redux';
 import { Formik } from 'formik';
 
+import { useRoleManager } from 'models/User/RolesManager';
+
 import { isHfhsIntegrationFeatureEnabled } from 'utils/env';
 
 import Tabs from 'components/Tabs';
@@ -15,6 +17,7 @@ import {
 } from 'models/Intervention';
 import {
   editInterventionRequest,
+  makeSelectCanCurrentUserMakeChanges,
   makeSelectInterventionLoader,
 } from 'global/reducers/intervention';
 
@@ -38,6 +41,7 @@ export type Props = {
 
 const Component = ({ modalState: intervention, closeModal }: Props) => {
   const { formatMessage } = useIntl();
+  const { isAdmin } = useRoleManager();
 
   // redux
   const dispatch = useDispatch();
@@ -45,6 +49,9 @@ const Component = ({ modalState: intervention, closeModal }: Props) => {
   // state
   const isEditing = useSelector<unknown, boolean>(
     makeSelectInterventionLoader('editIntervention'),
+  );
+  const canCurrentUserMakeChanges = useSelector(
+    makeSelectCanCurrentUserMakeChanges(),
   );
 
   // actions
@@ -96,6 +103,8 @@ const Component = ({ modalState: intervention, closeModal }: Props) => {
     [intervention],
   );
 
+  const canEdit = !isEditing && canCurrentUserMakeChanges;
+
   return (
     <Formik
       validationSchema={schema(formatMessage)}
@@ -115,12 +124,12 @@ const Component = ({ modalState: intervention, closeModal }: Props) => {
             containerProps={{ mb: 0, mt: 40 }}
           >
             {/* @ts-ignore */}
-            <div label={formatMessage(messages.catMhLabel)}>
+            <div label={formatMessage(messages.catMhLabel)} hidden={!isAdmin}>
               <CatMhAccessModalUI
                 modalData={modalData}
                 canSave={canSave}
                 isSaving={isEditing}
-                canEdit={!isEditing}
+                canEdit={canEdit}
                 onSave={handleSubmit}
                 onAccessChange={onAccessChange}
                 onLicenseInformationChange={onLicenseInformationChange}
@@ -139,6 +148,8 @@ const Component = ({ modalState: intervention, closeModal }: Props) => {
                 onSave={handleSubmit}
                 canSave={canSave}
                 isSaving={isEditing}
+                disabled={!canEdit}
+                canChangeAccess={isAdmin}
               />
             </div>
           </Tabs>
