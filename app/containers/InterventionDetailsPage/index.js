@@ -326,14 +326,13 @@ export function InterventionDetailsPage({
           },
         ]
       : []),
-    ...(isAdmin
+    ...(isAdmin || hfhsAccess
       ? [
           {
             icon: PadlockIcon,
             action: () => openThirdPartyToolsAccessModal(intervention),
             label: formatMessage(messages.thirdPartyToolsAccessModalTitle),
             id: 'thirdPartyToolsAccess',
-            disabled: !canCurrentUserMakeChanges,
           },
         ]
       : []),

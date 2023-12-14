@@ -20,7 +20,7 @@ const Tabs = ({
   ...restProps
 }) => {
   const { label: initialLabel, renderAsLink: initialRenderAsLink } =
-    children.find((child) => !child.hidden).props;
+    children.find((child) => !child.props.hidden).props;
 
   const [activeTab, setActiveTab] = useState(
     initialLabel || initialRenderAsLink.props.children,
