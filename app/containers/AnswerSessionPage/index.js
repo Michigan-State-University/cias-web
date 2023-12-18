@@ -492,6 +492,10 @@ export function AnswerSessionPage({
           if (maxLength) return numberOfDigits <= maxLength;
           return true;
         }
+        case QuestionTypes.CURRENCY: {
+          const { value } = answerBody[0] ?? {};
+          return value && !!value.match(/\d/);
+        }
         default:
           return true;
       }
