@@ -5,7 +5,7 @@ import { toast } from 'react-toastify';
 import { jsonApiToObject } from 'utils/jsonApiMapper';
 import objectToSnakeCase from 'utils/objectToSnakeCase';
 import { getObjectKeysWithoutIds } from 'utils/getObjectKeys';
-import { formatMessage } from 'utils/intlOutsideReact';
+import { formatApiErrorMessage } from 'utils/formatApiErrorMessage';
 
 import { EDIT_SECTION_REQUEST } from '../constants';
 import {
@@ -34,7 +34,7 @@ export function* editDashboardSection({
     const objectKeys = getObjectKeysWithoutIds(dashboardSection);
     yield call(
       toast.error,
-      formatMessage(messages.editSectionError, {
+      formatApiErrorMessage(error, messages.editSectionError, {
         properties: objectKeys.join(', '),
         propertiesCount: objectKeys.length,
       }),
