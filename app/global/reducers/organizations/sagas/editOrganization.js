@@ -5,7 +5,7 @@ import { toast } from 'react-toastify';
 import { jsonApiToObject } from 'utils/jsonApiMapper';
 import objectKeysToSnakeCase from 'utils/objectToSnakeCase';
 import { getObjectKeysWithoutIds } from 'utils/getObjectKeys';
-import { formatMessage } from 'utils/intlOutsideReact';
+import { formatApiErrorMessage } from 'utils/formatApiErrorMessage';
 
 import { EDIT_ORGANIZATION_REQUEST } from '../constants';
 import { editOrganizationFailure, editOrganizationSuccess } from '../actions';
@@ -28,7 +28,7 @@ export function* editOrganization({ payload: { organization } }) {
     const objectKeys = getObjectKeysWithoutIds(organization);
     yield call(
       toast.error,
-      formatMessage(messages.editEntityError, {
+      formatApiErrorMessage(error, messages.editEntityError, {
         properties: objectKeys.join(', '),
         propertiesCount: objectKeys.length,
       }),
