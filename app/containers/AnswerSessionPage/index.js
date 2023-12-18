@@ -468,6 +468,7 @@ export function AnswerSessionPage({
       currentQuestion.loading || nextQuestionLoading || answer?.loading;
 
     const isNumericQuestion = currentQuestion.type === QuestionTypes.NUMBER;
+    const isCurrencyQuestion = currentQuestion.type === QuestionTypes.CURRENCY;
 
     const isAnswered = () => {
       if (!answer) {
@@ -502,7 +503,7 @@ export function AnswerSessionPage({
     };
 
     const isButtonDisabled = () =>
-      (required || isNumericQuestion) && !isAnswered();
+      (required || isNumericQuestion || isCurrencyQuestion) && !isAnswered();
 
     const sharedProps = {
       selectAnswer: selectAnswerProp,
