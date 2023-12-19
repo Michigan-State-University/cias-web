@@ -16,6 +16,7 @@ import { Button, TextButton } from 'components/Button';
 import { FormikPhoneNumberInput } from 'components/FormikPhoneNumberInput';
 import FormikInput from 'components/FormikInput';
 import Text from 'components/Text';
+import FormikCheckbox from 'components/FormikCheckbox';
 
 import messages from './messages';
 import {
@@ -113,7 +114,7 @@ export const PredefinedParticipantForm: FC<Props> = ({
       onSubmit={onSubmit}
       enableReinitialize
     >
-      {({ isValid, dirty, handleSubmit, resetForm }) => (
+      {({ isValid, dirty, handleSubmit, resetForm, values }) => (
         <Form
           style={{
             height: '100%',
@@ -176,6 +177,20 @@ export const PredefinedParticipantForm: FC<Props> = ({
               numberKey="number"
               disabled={disabled}
             />
+            <Column gap={32} marginBlockStart={16}>
+              <FormikCheckbox
+                formikKey="emailNotification"
+                disabled={disabled || !values.email}
+              >
+                {formatMessage(messages.emailNotificationCheckboxLabel)}
+              </FormikCheckbox>
+              <FormikCheckbox
+                formikKey="smsNotification"
+                disabled={disabled || !values.number}
+              >
+                {formatMessage(messages.smsNotificationCheckboxLabel)}
+              </FormikCheckbox>
+            </Column>
           </Column>
           <Row justify="between" gap={16}>
             <Row>

@@ -181,6 +181,14 @@ export default defineMessages({
     id: `${scope}.externalIdInputLabel`,
     defaultMessage: `Participant ID`,
   },
+  emailNotificationCheckboxLabel: {
+    id: `${scope}.emailNotificationCheckboxLabel`,
+    defaultMessage: `Allow email notifications`,
+  },
+  smsNotificationCheckboxLabel: {
+    id: `${scope}.smsNotificationCheckboxLabel`,
+    defaultMessage: `Allow SMS notifications`,
+  },
   externalIdInputPlaceholder: {
     id: `${scope}.externalIdInputPlaceholder`,
     defaultMessage: `Enter participant ID`,

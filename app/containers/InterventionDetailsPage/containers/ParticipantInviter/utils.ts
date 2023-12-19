@@ -286,6 +286,8 @@ export const getPredefinedParticipantFormInitialValues = (
     lastName: participant?.lastName ?? '',
     email: participant?.email ?? '',
     externalId: participant?.externalId ?? '',
+    smsNotification: !!participant?.smsNotification,
+    emailNotification: !!participant?.emailNotification,
   };
 };
 
@@ -381,6 +383,7 @@ export const preparePredefinedParticipantData = ({
   email,
   iso,
   number,
+  ...attributes
 }: PredefinedParticipantFormValues): PredefinedParticipantData => {
   const phoneAttributes =
     number && iso ? getPhoneAttributes(number, iso) : null;
@@ -391,6 +394,7 @@ export const preparePredefinedParticipantData = ({
     externalId: externalId || null,
     email: email || null,
     phoneAttributes,
+    ...attributes,
   };
 };
 
