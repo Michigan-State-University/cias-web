@@ -197,17 +197,17 @@ export default defineMessages({
     id: `${scope}.statusColumnHeader`,
     defaultMessage: `Status`,
   },
-  smsInvitationColumnHeader: {
-    id: `${scope}.smsInvitationColumnHeader`,
-    defaultMessage: `SMS invitation`,
+  invitationColumnHeader: {
+    id: `${scope}.invitationColumnHeader`,
+    defaultMessage: `Invitation sent`,
   },
   statusColumnValue: {
     id: `${scope}.statusColumnValue`,
     defaultMessage: `{active, select, true {Active} false {Deactivated} other {}}`,
   },
-  smsInvitationColumnValue: {
-    id: `${scope}.smsInvitationColumnValue`,
-    defaultMessage: `{invitationSent, select, true {Sent} false {Not sent} other {}}`,
+  invitationColumnValue: {
+    id: `${scope}.invitationColumnValue`,
+    defaultMessage: `{invitationSent, select, true {Yes} false {No} other {}}`,
   },
   managePredefinedParticipantButtonLabel: {
     id: `${scope}.managePredefinedParticipantButtonLabel`,
