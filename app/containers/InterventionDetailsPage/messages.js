@@ -5,8 +5,6 @@
  */
 import { defineMessages } from 'react-intl';
 
-import { CatMhLicenseType } from 'models/Intervention';
-
 export const scope = 'app.containers.HomePage';
 
 export default defineMessages({
@@ -134,10 +132,7 @@ export default defineMessages({
   },
   catMhCounter: {
     id: `${scope}.catMhCounter`,
-    defaultMessage: `<bold>CAT-MH™ License</bold>: {catMhLicenseType, select,
-        ${CatMhLicenseType.LIMITED} {Limited (<counter>{used}/{initial}</counter> <space></space> tests used)}
-        ${CatMhLicenseType.UNLIMITED} {Unlimited (<counter>{used}</counter> <space></space> tests used)}
-      }`,
+    defaultMessage: `<bold>CAT-MH™ License</bold>: {catMhLicenseType, select, limited {Limited (<counter>{used}/{initial}</counter> <space></space> tests used)} unlimited {Unlimited (<counter>{used}</counter> <space></space> tests used)}}`,
   },
   catMhCountInfo: {
     id: `${scope}.catMhCountInfo`,
@@ -148,12 +143,26 @@ export default defineMessages({
     id: `${scope}.inviteToIntervention`,
     defaultMessage: 'Invite Participants',
   },
-  exportIntervention: {
-    id: `${scope}.exportIntervention`,
-    defaultMessage: 'Export Intervention',
-  },
   collaborate: {
     id: `${scope}.collaborate`,
     defaultMessage: 'Collaborate',
+  },
+  exportCsvModalTitle: {
+    id: `${scope}.exportCsvModalTitle`,
+    defaultMessage: 'Export answers',
+  },
+  exportCsvModalDescription: {
+    id: `${scope}.exportCsvModalDescription`,
+    defaultMessage:
+      'Use this button to export answers from the intervention to single CSV file. Depending on intervention size, this action may take a while. We will notify you via e-mail once this action is finished.',
+  },
+  exportCsvModalFileGeneratedDescription: {
+    id: `${scope}.exportCsvModalFileGeneratedDescription`,
+    defaultMessage:
+      'Download already generated CSV file or use update button to generate new one.',
+  },
+  exportCsvModalGenerateButtonTitle: {
+    id: `${scope}.exportCsvModalGenerateButtonTitle`,
+    defaultMessage: 'Generate CSV file with answers',
   },
 });

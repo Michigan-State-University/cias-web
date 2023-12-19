@@ -21,7 +21,7 @@ exports[`<MultipleQuestion /> Should render and match the snapshot 1`] = `
   -ms-flex-direction: row;
   flex-direction: row;
   height: auto;
-  margin-bottom: 10px;
+  margin-block-end: 10px;
 }
 
 .c3 {
@@ -52,7 +52,7 @@ exports[`<MultipleQuestion /> Should render and match the snapshot 1`] = `
 }
 
 .c9 {
-  margin-right: 5px;
+  margin-inline-end: 5px;
   border-radius: 5px;
 }
 
@@ -87,10 +87,12 @@ exports[`<MultipleQuestion /> Should render and match the snapshot 1`] = `
   height: auto;
   display: block;
   border-radius: 5px;
-  padding-top: 14px;
-  padding-bottom: 14px;
-  padding-right: 21px;
-  padding-left: 21px;
+  padding-block: 14px;
+  padding-block-start: 14px;
+  padding-block-end: 14px;
+  padding-inline: 21px;
+  padding-inline-start: 21px;
+  padding-inline-end: 21px;
   cursor: pointer;
   border-radius: 5px;
   border-radius: 5px;
@@ -114,6 +116,18 @@ exports[`<MultipleQuestion /> Should render and match the snapshot 1`] = `
 .c10 h2 {
   margin-block-start: 0;
   margin-block-end: 0.42em;
+}
+
+.c10 .ql-align-right {
+  text-align: right;
+}
+
+.c10 .ql-align-center {
+  text-align: center;
+}
+
+.c10 .ql-align-left {
+  text-align: left;
 }
 
 @media only screen and (min-width:768px) {

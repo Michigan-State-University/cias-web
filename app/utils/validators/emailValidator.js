@@ -1,7 +1,8 @@
 import * as Yup from 'yup';
 
 import { formatMessage } from 'utils/intlOutsideReact';
-import globalMessages from 'global/i18n/globalMessages';
+
+import validatorsMessages from 'global/i18n/validatorsMessages';
 
 export const csvEmailValidator = (target) => {
   const email = target.replace('\r', '');
@@ -9,12 +10,12 @@ export const csvEmailValidator = (target) => {
 };
 
 export const emailFormValidationSchema = Yup.string().email(
-  formatMessage(globalMessages.validators.email),
+  formatMessage(validatorsMessages.email),
 );
 
 export const requiredEmailFormValidationSchema =
   emailFormValidationSchema.required(
-    formatMessage(globalMessages.validators.required),
+    formatMessage(validatorsMessages.required),
   );
 
 export const emailValidator = (target) =>

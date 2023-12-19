@@ -15,10 +15,4 @@ export default defineMessages({
     id: `${scope}.branching`,
     defaultMessage: 'Branching',
   },
-  errors: {
-    duplicateVariable: {
-      id: `${scope}.duplicateVariable`,
-      defaultMessage: 'This variable name is already in use!',
-    },
-  },
 });

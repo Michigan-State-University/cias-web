@@ -3,41 +3,32 @@ import { useIntl } from 'react-intl';
 
 import { elements } from 'theme';
 
+import { QuestionTypes } from 'models/Question';
+
 import Row from 'components/Row';
 import { Button } from 'components/Button';
 
 import messages from '../messages';
 import { SkipQuestionButton } from './SkipQuestionButton';
 
-type SkipButtonProps =
-  | {
-      renderSkipQuestionButton: true;
-      onSkipQuestionClick: () => void;
-      skipQuestionButtonDisabled?: boolean;
-      skipButtonStyle?: Record<string, unknown>;
-    }
-  | {
-      renderSkipQuestionButton?: false;
-      onSkipQuestionClick?: undefined;
-      skipQuestionButtonDisabled?: undefined;
-      skipButtonStyle?: undefined;
-    };
+import { NOT_SKIPPABLE_QUESTIONS } from '../constants';
 
-type ContinueButtonProps =
-  | {
-      renderContinueButton: true;
-      onContinueClick: () => void;
-      continueButtonDisabled?: boolean;
-      continueButtonLoading?: boolean;
-      continueButtonStyle?: Record<string, unknown>;
-    }
-  | {
-      renderContinueButton?: false;
-      onContinueClick?: undefined;
-      continueButtonDisabled?: undefined;
-      continueButtonLoading?: undefined;
-      continueButtonStyle?: undefined;
-    };
+type SkipButtonProps = {
+  questionType: QuestionTypes;
+  questionRequired: boolean;
+  isCatMhSession: boolean;
+  onSkipQuestionClick?: () => void;
+  skipQuestionButtonDisabled?: boolean;
+  skipButtonStyle?: Record<string, unknown>;
+};
+
+type ContinueButtonProps = {
+  renderContinueButton: boolean;
+  continueButtonDisabled?: boolean;
+  onContinueClick?: () => void;
+  continueButtonLoading?: boolean;
+  continueButtonStyle?: Record<string, unknown>;
+};
 
 type CommonProps = {
   containerStyle?: Record<string, unknown>;
@@ -48,7 +39,9 @@ export type ActionButtonsProps = SkipButtonProps &
   CommonProps;
 
 const Component = ({
-  renderSkipQuestionButton,
+  questionType,
+  questionRequired,
+  isCatMhSession,
   skipQuestionButtonDisabled,
   onSkipQuestionClick,
   renderContinueButton,
@@ -60,6 +53,11 @@ const Component = ({
   continueButtonStyle,
 }: ActionButtonsProps) => {
   const { formatMessage } = useIntl();
+
+  const renderSkipQuestionButton =
+    !questionRequired &&
+    !isCatMhSession &&
+    !NOT_SKIPPABLE_QUESTIONS.includes(questionType);
 
   const handleSkipButtonClick = () =>
     onSkipQuestionClick && onSkipQuestionClick();

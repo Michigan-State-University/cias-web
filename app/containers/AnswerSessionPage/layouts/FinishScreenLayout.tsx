@@ -1,4 +1,4 @@
-import React, { useMemo } from 'react';
+import React, { useEffect, useMemo } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { IntlShape } from 'react-intl';
 
@@ -8,9 +8,9 @@ import { parametrizeRoutePath } from 'utils/router';
 
 import { InterventionSharedTo, InterventionType } from 'models/Intervention';
 import { FinishQuestionDTO } from 'models/Question';
-import { useRoleManager } from 'models/User/RolesManager';
 
 import { resetReducer as resetAuthReducer } from 'global/reducers/auth/actions';
+import { makeSelectInterventionFixedElementsDirection } from 'global/reducers/globalState';
 import { RoutePath } from 'global/constants';
 
 import Button, { TextButton } from 'components/Button';
@@ -33,10 +33,13 @@ type Props = {
 
 const FinishScreenLayout = ({ formatMessage, question }: Props) => {
   const isGuestUser = !LocalStorageService.getState();
-  const { isPredefinedParticipant } = useRoleManager();
 
   const dispatch = useDispatch();
   const userSession = useSelector(makeSelectUserSession());
+
+  const fixedElementsDirection = useSelector(
+    makeSelectInterventionFixedElementsDirection(),
+  );
 
   const {
     id: userSessionId,
@@ -86,9 +89,17 @@ const FinishScreenLayout = ({ formatMessage, question }: Props) => {
     dispatch(fetchOrCreateUserSessionRequest(nextSessionId));
   };
 
+  useEffect(() => {
+    if (!isGuestUser && !isModuleIntervention && !isPreview) {
+      return clearUserSession;
+      // clear answer session page reducer on unmount for logged in or
+      // predefined users after filling a session in sequential intervention
+    }
+  }, []);
+
   if (isGuestUser) {
     return (
-      <Row mt={50} justify="center" width="100%">
+      <Row mt={50} justify="center" width="100%" dir={fixedElementsDirection}>
         <Button onClick={reloadPage} px={20} width="auto">
           {formatMessage(messages.completeSession)}
         </Button>
@@ -99,7 +110,14 @@ const FinishScreenLayout = ({ formatMessage, question }: Props) => {
 
   if (showModulesButtons)
     return (
-      <Row mt={50} align="center" justify="end" width="100%" gap={15}>
+      <Row
+        mt={50}
+        align="center"
+        justify="end"
+        width="100%"
+        gap={15}
+        dir={fixedElementsDirection}
+      >
         <StyledLink
           to={parametrizeRoutePath(RoutePath.USER_INTERVENTION, {
             userInterventionId,
@@ -121,16 +139,19 @@ const FinishScreenLayout = ({ formatMessage, question }: Props) => {
 
   const getGoToDashboardButtonLink = () => {
     if (isPreview) return '#';
-    if (isPredefinedParticipant) {
-      return parametrizeRoutePath(RoutePath.USER_INTERVENTION, {
-        userInterventionId,
-      });
-    }
-    return RoutePath.DASHBOARD;
+    return parametrizeRoutePath(RoutePath.USER_INTERVENTION, {
+      userInterventionId,
+    });
   };
 
   return (
-    <Row mt={50} justify="center" width="100%" gap={15}>
+    <Row
+      mt={50}
+      justify="center"
+      width="100%"
+      gap={15}
+      dir={fixedElementsDirection}
+    >
       {isPreview && (
         <StyledLink to={sessionMapUrl}>
           <Button onClick={closeOpenerTab} px={20} inverted>

@@ -104,6 +104,7 @@ exports[`<TextBoxQuestion /> Should render and match the snapshot 1`] = `
         <textarea
           aria-labelledby="question-title question-subtitle"
           class="c3"
+          dir="auto"
           maxlength="250"
           placeholder="Enter your response here"
           rows="5"

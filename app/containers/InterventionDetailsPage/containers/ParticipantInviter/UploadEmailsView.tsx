@@ -17,7 +17,7 @@ import CsvFileExport from 'components/CsvFileExport';
 import CsvFileReader from 'components/CsvFileReader';
 import Row from 'components/Row';
 
-import { BackButton } from './BackButton';
+import { InviteParticipantsModalBackButton } from './InviteParticipantsModalBackButton';
 import {
   EmailsCsvRow,
   InviteEmailParticipantsFormValues,
@@ -115,7 +115,7 @@ export const UploadEmailsView: FC<Props> = ({
 
   return (
     <Column flex={1} overflow="auto" gap={24}>
-      <BackButton
+      <InviteParticipantsModalBackButton
         invitationType={ParticipantInvitationType.EMAIL}
         onBack={onBack}
       />

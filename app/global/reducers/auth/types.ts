@@ -11,7 +11,9 @@ export type RedirectData = {
   multipleFillSessionAvailable: boolean;
 };
 
+export type RedirectDataDTO = CamelToSnake<RedirectData>;
+
 export type VerifyUserKeyResponseDTO = {
-  redirect_data: CamelToSnake<RedirectData>;
+  redirect_data: RedirectDataDTO;
   user: Data<CamelToSnake<UserResponse>>;
 };

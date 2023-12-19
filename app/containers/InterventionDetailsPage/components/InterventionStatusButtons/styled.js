@@ -5,7 +5,6 @@ import { hexToRgb, themeColors } from 'theme';
 export const ShareButton = styled(Button)`
   font-weight: bold;
   width: 180px;
-  margin: 5px;
 
   ${({ outlined, disabled }) =>
     outlined &&

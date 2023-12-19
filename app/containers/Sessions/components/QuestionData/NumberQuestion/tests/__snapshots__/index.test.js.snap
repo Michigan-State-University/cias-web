@@ -132,6 +132,7 @@ exports[`<NumberQuestion /> Should render and match the snapshot 1`] = `
             <input
               aria-labelledby="question-title question-subtitle"
               class="c5"
+              dir="auto"
               disabled=""
               height="50"
               placeholder="ex: 1, 2, 100"

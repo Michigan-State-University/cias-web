@@ -22,6 +22,7 @@ export type Props = {
   onChange: (value: File[]) => void;
   multiple?: boolean;
   instruction?: string;
+  unlimitedFileSize?: boolean;
 } & Pick<DropzoneOptions, 'accept'>;
 
 const FileInput = ({
@@ -30,6 +31,7 @@ const FileInput = ({
   multiple,
   instruction,
   accept,
+  unlimitedFileSize = false,
 }: Props) => {
   const { formatMessage } = useIntl();
 
@@ -50,7 +52,7 @@ const FileInput = ({
     noKeyboard: true,
     accept,
     noClick: true,
-    maxSize: MAX_FILE_SIZE,
+    maxSize: unlimitedFileSize ? undefined : MAX_FILE_SIZE,
     multiple,
   });
 

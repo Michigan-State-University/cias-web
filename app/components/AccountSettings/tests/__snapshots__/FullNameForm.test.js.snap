@@ -161,6 +161,7 @@ exports[`<FullNameForm /> Should render and match the snapshot 1`] = `
       >
         <input
           class="c5"
+          dir="auto"
           height="46"
           id="firstName"
           name="firstName"
@@ -191,6 +192,7 @@ exports[`<FullNameForm /> Should render and match the snapshot 1`] = `
       >
         <input
           class="c5"
+          dir="auto"
           height="46"
           id="lastName"
           name="lastName"

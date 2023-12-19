@@ -48,6 +48,7 @@ const ImportModalContent = ({ closeModal }: Props) => {
         onChange={setFiles}
         instruction={formatMessage(messages.uploadInterventionInstruction)}
         accept=".json"
+        unlimitedFileSize
       />
       {error && <ErrorAlert errorText={error} mt={16} />}
       <Row mt={56} gap={16}>

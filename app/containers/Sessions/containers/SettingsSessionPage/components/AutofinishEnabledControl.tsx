@@ -6,6 +6,7 @@ import useDidUpdateEffect from 'utils/useDidUpdateEffect';
 
 import FormikSwitchInput from 'components/FormikSwitchInput';
 import { HelpIconTooltip } from 'components/HelpIconTooltip';
+import Column from 'components/Column';
 
 import messages from './messages';
 import { SessionSettingsFormValues } from './types';
@@ -41,7 +42,14 @@ export const AutofinishEnabledControl: React.FC<Props> = ({ disabled }) => {
     <FormikSwitchInput formikKey="autofinishEnabled" disabled={disabled}>
       <HelpIconTooltip
         id="autofinish-enabled-tooltip-info"
-        tooltipContent={formatMessage(messages.autofinishTooltip)}
+        tooltipContent={
+          <Column>
+            {formatMessage(messages.autofinishTooltipOne)}
+            <br />
+            <br />
+            {formatMessage(messages.autofinishTooltipTwo)}
+          </Column>
+        }
       >
         {formatMessage(messages.autofinishEnabledLabel)}
       </HelpIconTooltip>

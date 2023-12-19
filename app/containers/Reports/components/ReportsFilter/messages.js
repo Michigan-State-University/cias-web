@@ -21,23 +21,23 @@ export default defineMessages({
     defaultMessage: 'Show reports generated for:',
   },
   [THIRD_PARTY]: {
-    id: `${scope}.${THIRD_PARTY}`,
+    id: `${scope}.third_party`,
     defaultMessage: '3rd Party Users',
   },
   [PARTICIPANTS]: {
-    id: `${scope}.${PARTICIPANTS}`,
+    id: `${scope}.participant`,
     defaultMessage: 'Participants',
   },
   [HENRY_FORD_HEALTH]: {
-    id: `${scope}.${HENRY_FORD_HEALTH}`,
+    id: `${scope}.henry_ford_health`,
     defaultMessage: 'Henry Ford',
   },
   [SORT_BY_NEWEST]: {
-    id: `${scope}.${SORT_BY_NEWEST}`,
+    id: `${scope}.desc`,
     defaultMessage: 'Sort by Newest',
   },
   [SORT_BY_LATEST]: {
-    id: `${scope}.${SORT_BY_LATEST}`,
+    id: `${scope}.asc`,
     defaultMessage: 'Sort by Oldest',
   },
   selectorAriaLabel: {

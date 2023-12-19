@@ -21,11 +21,9 @@ import {
   draft,
   published,
   closed,
-  archived,
   statusTypeToColorMap,
 } from 'models/Status/StatusTypes';
 
-import CsvButtons from './CsvButtons';
 import messages from './messages';
 import { ShareButton } from './styled';
 
@@ -33,11 +31,6 @@ function InterventionStatusButtons({
   intl: { formatMessage },
   status,
   handleChangeStatus,
-  handleSendCsv,
-  csvGeneratedAt,
-  csvFilename,
-  interventionId,
-  canAccessCsv,
   canCurrentUserMakeChanges,
 }) {
   const CloseButton = () => (
@@ -160,30 +153,17 @@ function InterventionStatusButtons({
     </>
   );
 
-  const csvButtons = !canAccessCsv ? null : (
-    <CsvButtons
-      handleSendCsv={handleSendCsv}
-      csvGeneratedAt={csvGeneratedAt}
-      csvFilename={csvFilename}
-      interventionId={interventionId}
-    />
-  );
-
   const statuses = {
     [draft]: (
       <>
-        {csvButtons}
         <PublishButton />
       </>
     ),
     [published]: (
       <>
-        {csvButtons}
         <CloseButton />
       </>
     ),
-    [closed]: <>{csvButtons}</>,
-    [archived]: <>{csvButtons}</>,
   };
 
   const renderButtons = () => get(statuses, status, <></>);
@@ -195,9 +175,6 @@ InterventionStatusButtons.propTypes = {
   intl: PropTypes.object,
   status: PropTypes.string,
   handleChangeStatus: PropTypes.func,
-  handleSendCsv: PropTypes.func,
-  csvGeneratedAt: PropTypes.string,
-  canAccessCsv: PropTypes.bool,
   canCurrentUserMakeChanges: PropTypes.bool,
 };
 

@@ -9,6 +9,7 @@ import Select from 'components/Select';
 
 import { EFeedbackAction } from 'models/Narrator/FeedbackActions';
 import messages from '../messages';
+import feedbackActionsMessages from '../feedbackActionsMessages';
 import { updateBlockSettings } from '../../actions';
 
 const FeedbackBlock = ({
@@ -22,7 +23,9 @@ const FeedbackBlock = ({
   const selectOptions = [
     {
       value: EFeedbackAction.SHOW_SPECTRUM,
-      label: formatMessage(messages[EFeedbackAction.SHOW_SPECTRUM]),
+      label: formatMessage(
+        feedbackActionsMessages[EFeedbackAction.SHOW_SPECTRUM],
+      ),
     },
   ];
 

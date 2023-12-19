@@ -27,8 +27,7 @@ export default defineMessages({
   },
   anyoneWhoIsARegisteredParticipantHelp: {
     id: `${scope}.anyoneWhoIsARegisteredParticipantHelp`,
-    defaultMessage:
-      'Participants will need to create a CIAS account in order to access an intervention with this setting. Click <a href="https://www.cias.app/_files/ugd/afc5c9_c5c8d584dd4c4b3cae7e193a13fe51ee.pdf" target="_blank">here</a> for a step-by-step guide to participant onboarding. For more help resources, visit <a href="https://www.cias.app/resources" target="_blank">www.cias.app/resources</a>.',
+    defaultMessage: `Participants will need to create a CIAS account in order to access an intervention with this setting. Click <a href='https://www.cias.app/_files/ugd/afc5c9_c5c8d584dd4c4b3cae7e193a13fe51ee.pdf' target='_blank'>here</a> for a step-by-step guide to participant onboarding. For more help resources, visit <a href='https://www.cias.app/resources' target='_blank'>www.cias.app/resources</a>.`,
   },
   onlyInvitedRegisteredParticipantsLabel: {
     id: `${scope}.onlyInvitedRegisteredParticipantsLabel`,
@@ -52,7 +51,7 @@ export default defineMessages({
   accessGiverHeader: {
     id: `${scope}.accessGiverHeader`,
     defaultMessage:
-      'Enter emails to grant participants access to the intervention. ',
+      'Enter emails to grant participants access to the intervention.',
   },
   accessGiverHeaderNote: {
     id: `${scope}.accessGiverHeaderNote`,

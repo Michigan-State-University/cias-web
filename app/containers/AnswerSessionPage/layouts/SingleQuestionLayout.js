@@ -21,8 +21,9 @@ const SingleQuestionLayout = ({
   selectedAnswerIndex,
   isMobile,
   disabled,
+  dynamicElementsDirection,
 }) => (
-  <Column>
+  <Column dir={dynamicElementsDirection}>
     <Box>
       {data.map((questionAnswer, index) => {
         const { payload, value, hfh_value: hfhValue } = questionAnswer;
@@ -31,7 +32,7 @@ const SingleQuestionLayout = ({
         const key = `question-${questionId}-el-${index}`;
 
         return (
-          <Row key={key} mb={12} align="center">
+          <Row key={key} marginBlockEnd={12} align="center">
             {!isMobile && (
               <AudioTextPreview
                 text={htmlToPlainText(payload)}
@@ -39,8 +40,8 @@ const SingleQuestionLayout = ({
               />
             )}
             <HoverableBox
-              px={margin}
-              py={14}
+              paddingInline={margin}
+              paddingBlock={14}
               filled
               clickable
               onClick={(event) => {
@@ -79,6 +80,7 @@ SingleQuestionLayout.propTypes = {
   questionId: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
   isMobile: PropTypes.bool,
   disabled: PropTypes.bool,
+  dynamicElementsDirection: PropTypes.string,
 };
 
 export default SingleQuestionLayout;

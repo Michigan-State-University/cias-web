@@ -16,7 +16,7 @@ import { InterventionDetailsPageContext } from 'containers/InterventionDetailsPa
 import messages from '../messages';
 
 const LogoUpload = ({
-  intervention: { logoUrl, imageAlt },
+  logo,
   addImage,
   deleteImage,
   updateDescription,
@@ -25,6 +25,8 @@ const LogoUpload = ({
   const { formatMessage } = useIntl();
   const { canEdit } = useContext(InterventionDetailsPageContext);
 
+  const { url, alt } = logo ?? {};
+
   return (
     <Column>
       <H2 mb={10}>{formatMessage(messages.logoHeader)}</H2>
@@ -32,7 +34,7 @@ const LogoUpload = ({
       <Text mb={10}>{formatMessage(messages.logoText)}</Text>
 
       <ImageUpload
-        image={logoUrl}
+        image={url}
         loading={logoLoading}
         disabled={!canEdit}
         onAddImage={addImage}
@@ -40,11 +42,11 @@ const LogoUpload = ({
         acceptedFormats={['JPG', 'PNG']}
       />
 
-      {logoUrl && (
+      {url && (
         <Box mt={30} bg={colors.linkWater}>
           <ApprovableInput
             type="multiline"
-            value={imageAlt ?? ''}
+            value={alt ?? ''}
             onCheck={updateDescription}
             placeholder={formatMessage(messages.logoDescriptionPlaceholder)}
             rows="4"
@@ -57,7 +59,7 @@ const LogoUpload = ({
 };
 
 LogoUpload.propTypes = {
-  intervention: PropTypes.object,
+  logo: PropTypes.object,
   addImage: PropTypes.func,
   deleteImage: PropTypes.func,
   updateDescription: PropTypes.func,

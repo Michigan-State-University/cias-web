@@ -51,6 +51,9 @@ import {
   VERIFY_USER_KEY_REQUEST,
   VERIFY_USER_KEY_SUCCESS,
   VERIFY_USER_KEY_ERROR,
+  VERIFY_SHORT_LINK_REQUEST,
+  VERIFY_SHORT_LINK_SUCCESS,
+  VERIFY_SHORT_LINK_ERROR,
 } from './constants';
 
 export const logIn = (user) => actionBuilder(LOG_IN_USER, { user });
@@ -161,6 +164,13 @@ export const termsAcceptRequest = (fields, onSuccess) =>
 export const termsAcceptSuccess = () => actionBuilder(TERMS_ACCEPT_SUCCESS, {});
 export const termsAcceptError = (error) =>
   actionBuilder(TERMS_ACCEPT_ERROR, { error });
+
+export const verifyShortLinkRequest = (slug) =>
+  actionBuilder(VERIFY_SHORT_LINK_REQUEST, { slug });
+export const verifyShortLinkSuccess = () =>
+  actionBuilder(VERIFY_SHORT_LINK_SUCCESS, {});
+export const verifyShortLinkError = (error) =>
+  actionBuilder(VERIFY_SHORT_LINK_ERROR, { error });
 
 export const verifyUserKeyRequest = (userKey) =>
   actionBuilder(VERIFY_USER_KEY_REQUEST, { userKey });

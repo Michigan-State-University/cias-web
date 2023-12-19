@@ -11,10 +11,14 @@ import { Form, Formik, FormikConfig, FormikProps } from 'formik';
 import * as Yup from 'yup';
 import { IntlShape } from 'react-intl/src/types';
 import { CountryCode } from 'libphonenumber-js/types';
+import { useSelector } from 'react-redux';
 
 import { colors, themeColors } from 'theme';
-import globalMessages from 'global/i18n/globalMessages';
+
+import phoneTypesMessages from 'global/i18n/phoneTypesMessages';
+import validatorsMessages from 'global/i18n/validatorsMessages';
 import { zipCodeRegex } from 'global/constants';
+import sexMessages from 'global/i18n/sexMessages';
 
 import {
   HfhsPatientData,
@@ -24,11 +28,10 @@ import {
 } from 'models/HfhsPatient';
 import { ApiMessageError } from 'models/Api';
 
-import {
-  requiredValidationSchema,
-  nameValidationSchema,
-} from 'utils/validators';
+import { nameValidationSchema } from 'utils/validators';
 import { getUTCDateString } from 'utils/dateUtils';
+
+import { makeSelectInterventionFixedElementsDirection } from 'global/reducers/globalState';
 
 import Box from 'components/Box';
 import { SelectOption } from 'components/Select/types';
@@ -38,15 +41,16 @@ import FormikDatePicker from 'components/FormikDatePicker';
 import Text from 'components/Text';
 import { HelpIconTooltip } from 'components/HelpIconTooltip';
 import {
+  DEFAULT_COUNTRY_CODE,
   FormikPhoneNumberInput,
   phoneNumberSchema,
-  DEFAULT_COUNTRY_CODE,
 } from 'components/FormikPhoneNumberInput';
 
 import { formatPhoneNumberForHfhs, parsePhoneNumberFromHfhs } from '../utils';
 import { ActionButtons } from '../components/ActionButtons';
 import { ApiErrorMessage } from '../components/ApiErrorMessage';
 import messages from './messages';
+import { QuestionTypes } from '../../../models/Question';
 
 const inputStyles = {
   width: '100%',
@@ -75,34 +79,17 @@ export type PatientDataFormValues = Pick<
 const schema = (formatMessage: IntlShape['formatMessage']) =>
   Yup.object()
     .shape({
-      firstName: nameValidationSchema.concat(requiredValidationSchema),
-      lastName: nameValidationSchema.concat(requiredValidationSchema),
-      sexOption: Yup.object()
-        .required(
-          // @ts-ignore
-          formatMessage(globalMessages.validators.required),
-        )
-        .nullable(),
-      dobDate: Yup.date()
-        .required(
-          // @ts-ignore
-          formatMessage(globalMessages.validators.required),
-        )
-        .nullable(),
-      zipCode: requiredValidationSchema.matches(
-        zipCodeRegex,
-        // @ts-ignore
-        formatMessage(globalMessages.validators.zipCode),
-      ),
-      phoneTypeOption: Yup.object()
-        .required(
-          // @ts-ignore
-          formatMessage(globalMessages.validators.required),
-        )
-        .nullable(),
+      firstName: nameValidationSchema,
+      lastName: nameValidationSchema,
+      sexOption: Yup.object().nullable(),
+      dobDate: Yup.date().nullable(),
+      zipCode: Yup.string()
+        .trim()
+        .matches(zipCodeRegex, formatMessage(validatorsMessages.zipCode)),
+      phoneTypeOption: Yup.object().nullable(),
     })
     // @ts-ignore
-    .concat(phoneNumberSchema(formatMessage, true, false));
+    .concat(phoneNumberSchema(formatMessage, false, true));
 
 enum PatientDataFormError {
   BASE_DATA_VERIFICATION,
@@ -127,25 +114,29 @@ const emptyInitialValues: PatientDataFormValues = {
 export type Props = {
   forceMobile?: boolean;
   disabled?: boolean;
-  showContinueButton?: boolean;
   onSubmitPatientData?: (patientData: HfhsPatientData) => void;
   verifying?: boolean;
   verifyingError?: Nullable<ApiMessageError>;
   hfhsPatientDetail?: Nullable<HfhsPatientDetail>;
   previewMedicalNumberInput?: boolean;
+  continueButtonDisabled?: boolean;
 };
 
 const HenryFordInitialScreenLayout = ({
   forceMobile,
   disabled,
-  showContinueButton,
   onSubmitPatientData,
   verifying = false,
   verifyingError,
   hfhsPatientDetail,
   previewMedicalNumberInput,
+  continueButtonDisabled,
 }: Props) => {
   const { formatMessage } = useIntl();
+
+  const fixedElementsDirection = useSelector(
+    makeSelectInterventionFixedElementsDirection(),
+  );
 
   const columnClassMap: ScreenClassMap<number> = {
     xs: 12,
@@ -155,8 +146,7 @@ const HenryFordInitialScreenLayout = ({
   const sexSelectOptions: MutableRefObject<SelectOption<Sex>[]> = useRef(
     Object.values(Sex).map((sex) => ({
       value: sex,
-      // @ts-ignore
-      label: formatMessage(globalMessages.sex[sex]),
+      label: formatMessage(sexMessages[sex]),
     })),
   );
 
@@ -164,8 +154,7 @@ const HenryFordInitialScreenLayout = ({
     useRef(
       Object.values(PhoneType).map((phoneType) => ({
         value: phoneType,
-        // @ts-ignore
-        label: formatMessage(globalMessages.phoneType[phoneType]),
+        label: formatMessage(phoneTypesMessages[phoneType]),
       })),
     );
 
@@ -174,16 +163,18 @@ const HenryFordInitialScreenLayout = ({
     const { sex, dob, phoneNumber, phoneType, ...restValues } =
       hfhsPatientDetail;
 
-    const parsedPhone = parsePhoneNumberFromHfhs(phoneNumber);
+    const parsedPhone = phoneNumber
+      ? parsePhoneNumberFromHfhs(phoneNumber)
+      : undefined;
 
     return {
       sexOption: sexSelectOptions.current.find(({ value }) => value === sex),
-      dobDate: new Date(dob),
+      dobDate: dob ? new Date(dob) : null,
       iso: {
         value: parsedPhone?.country ?? DEFAULT_COUNTRY_CODE,
         label: '',
       },
-      number: parsedPhone?.formatNational() ?? '',
+      number: parsedPhone ? parsedPhone.formatNational() : '',
       phoneTypeOption: phoneTypeSelectOptions.current.find(
         ({ value }) => value === phoneType,
       ),
@@ -201,10 +192,13 @@ const HenryFordInitialScreenLayout = ({
 
     onSubmitPatientData({
       ...restValues,
-      sex: sexOption!.value,
-      dob: getUTCDateString(dobDate!),
-      phoneNumber: formatPhoneNumberForHfhs({ iso: iso!.value, number }),
-      phoneType: phoneTypeOption!.value,
+      sex: sexOption?.value,
+      dob: dobDate ? getUTCDateString(dobDate) : '',
+      phoneNumber:
+        iso && number
+          ? formatPhoneNumberForHfhs({ iso: iso.value, number })
+          : '',
+      phoneType: phoneTypeOption?.value,
     });
   };
 
@@ -377,16 +371,17 @@ const HenryFordInitialScreenLayout = ({
               formError === PatientDataFormError.MRN_VERIFICATION && (
                 <ApiErrorMessage error={verifyingError} />
               )}
-            {showContinueButton && (
-              <Box>
-                <ActionButtons
-                  renderContinueButton
-                  continueButtonDisabled={!isValid}
-                  continueButtonLoading={verifying}
-                  onContinueClick={handleSubmit}
-                />
-              </Box>
-            )}
+            <Box dir={fixedElementsDirection}>
+              <ActionButtons
+                questionRequired
+                questionType={QuestionTypes.HENRY_FORD_INITIAL}
+                isCatMhSession={false}
+                renderContinueButton
+                continueButtonDisabled={!isValid || continueButtonDisabled}
+                continueButtonLoading={verifying}
+                onContinueClick={handleSubmit}
+              />
+            </Box>
           </Box>
         </Form>
       )}

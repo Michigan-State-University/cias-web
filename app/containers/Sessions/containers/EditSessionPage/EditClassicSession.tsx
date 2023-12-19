@@ -71,6 +71,7 @@ import { borders, colors, themeColors } from 'theme';
 import { parametrizeRoutePath } from 'utils/router';
 import instantiateEmptyQuestion from 'utils/instantiateEmptyQuestion';
 import isNullOrUndefined from 'utils/isNullOrUndefined';
+import { formatInterventionLanguageMessage } from 'utils/intlOutsideReact';
 
 import {
   createQuestionGroupRequest,
@@ -116,6 +117,7 @@ import {
   StyledQuestionTypeChooser,
 } from './styled';
 import QuestionListGroup from '../QuestionListGroup';
+import defaultQuestionSubtitlesMessages from './defaultQuestionSubtitlesMessages';
 
 type NonReduxProps = {
   session: ClassicSession;
@@ -357,14 +359,13 @@ const EditClassicSessionPage = ({
   const onCreateQuestion = (type: string) => {
     if (type.includes(questionType)) {
       const newQuestionSubtitle =
-        // @ts-ignore
-        messages.defaultQuestionSubtitles[type] || messages.newQuestionSubtitle;
+        defaultQuestionSubtitlesMessages[type] || messages.newQuestionSubtitle;
 
       createQuestion(
         instantiateEmptyQuestion(
-          formatMessage(messages.newQuestionTitle),
+          formatInterventionLanguageMessage(messages.newQuestionTitle),
           type,
-          formatMessage(newQuestionSubtitle),
+          formatInterventionLanguageMessage(newQuestionSubtitle),
         ) as QuestionDTO,
         params.sessionId,
       );

@@ -176,11 +176,11 @@ export default defineMessages({
   },
   deactivatePredefinedParticipantError: {
     id: `${scope}.deactivatePredefinedParticipantError`,
-    defaultMessage: 'Unable to update deactivate participant',
+    defaultMessage: 'Unable to deactivate participant',
   },
   activatePredefinedParticipantError: {
-    id: `${scope}.deactivatePredefinedParticipantError`,
-    defaultMessage: 'Unable to update activate participant',
+    id: `${scope}.activatePredefinedParticipantError`,
+    defaultMessage: 'Unable to activate participant',
   },
   sendPredefinedParticipantSmsInvitationSuccess: {
     id: `${scope}.sendPredefinedParticipantSmsInvitationSuccess`,

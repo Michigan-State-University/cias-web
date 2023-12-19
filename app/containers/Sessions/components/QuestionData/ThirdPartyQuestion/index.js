@@ -32,6 +32,7 @@ const ThirdPartyQuestion = ({
   reorderAnswers,
   isNarratorTab,
   editingPossible,
+  dynamicElementsDirection,
   intl: { formatMessage },
 }) => {
   const [hoveredIndex, setHoveredIndexIndex] = useState(-1);
@@ -81,6 +82,7 @@ const ThirdPartyQuestion = ({
             canDeleteAnswer={canDeleteAnswer}
             onChange={handleChange}
             onRemove={removeAnswer}
+            dynamicElementsDirection={dynamicElementsDirection}
           />
         )}
       </DndSortable>
@@ -109,6 +111,7 @@ ThirdPartyQuestion.propTypes = {
   reorderAnswers: PropTypes.func.isRequired,
   isNarratorTab: PropTypes.bool,
   editingPossible: PropTypes.bool,
+  dynamicElementsDirection: PropTypes.string,
 };
 
 const mapStateToProps = createStructuredSelector({

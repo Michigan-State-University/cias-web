@@ -150,7 +150,7 @@ export const initialState = {
     collaborators: [],
   },
   loaders: {
-    fetchInterventionLoading: true,
+    fetchInterventionLoading: false,
     createInterventionLoading: false,
     sendCsvLoading: false,
     editIntervention: false,
@@ -287,8 +287,8 @@ export const interventionReducer = (state = initialState, action) =>
 
       case ADD_INTERVENTION_LOGO_SUCCESS:
         draft.loaders.logoLoading = false;
-        draft.intervention.logoUrl = action.payload.logoUrl;
-        draft.cache.intervention.logoUrl = action.payload.logoUrl;
+        draft.intervention.logo = action.payload.logo;
+        draft.cache.intervention.logo = action.payload.logo;
         break;
 
       case ADD_INTERVENTION_LOGO_ERROR:
@@ -297,34 +297,32 @@ export const interventionReducer = (state = initialState, action) =>
 
       case DELETE_INTERVENTION_LOGO_REQUEST:
         draft.loaders.logoLoading = true;
-        draft.intervention.logoUrl = null;
+        draft.intervention.logo = null;
         break;
 
       case DELETE_INTERVENTION_LOGO_SUCCESS:
         draft.loaders.logoLoading = false;
-        draft.cache.intervention.logoUrl = null;
-        draft.intervention.imageAlt = '';
-        draft.cache.intervention.imageAlt = '';
+        draft.cache.intervention.logo = null;
         break;
 
       case DELETE_INTERVENTION_LOGO_ERROR:
         draft.loaders.logoLoading = false;
-        draft.intervention.logoUrl = state.cache.intervention.logoUrl;
+        draft.intervention.logo = state.cache.intervention.logo;
         break;
 
       case UPDATE_INTERVENTION_LOGO_REQUEST:
         draft.loaders.logoLoading = true;
-        draft.intervention.imageAlt = action.payload.description;
+        draft.intervention.logo.alt = action.payload.description;
         break;
 
       case UPDATE_INTERVENTION_LOGO_SUCCESS:
         draft.loaders.logoLoading = false;
-        draft.cache.intervention.imageAlt = state.intervention.imageAlt;
+        draft.cache.intervention.logo.alt = state.intervention.imageAlt;
         break;
 
       case UPDATE_INTERVENTION_LOGO_ERROR:
         draft.loaders.logoLoading = false;
-        draft.intervention.imageAlt = state.cache.intervention.imageAlt;
+        draft.intervention.logo.alt = state.cache.intervention.logo.alt;
         break;
 
       case SEND_INTERVENTION_CSV_REQUEST:
@@ -581,8 +579,10 @@ export const interventionReducer = (state = initialState, action) =>
       case UPDATE_INTERVENTION_CONVERSATIONS_TRANSCRIPT:
         const { name, createdAt } = action.payload.transcript;
         if (draft.intervention) {
-          draft.intervention.conversationsTranscriptGeneratedAt = createdAt;
-          draft.intervention.conversationsTranscriptFilename = name;
+          draft.intervention.conversationsTranscript = {
+            filename: name,
+            generatedAt: createdAt,
+          };
         }
         break;
       case EXPORT_INTERVENTION_REQUEST:

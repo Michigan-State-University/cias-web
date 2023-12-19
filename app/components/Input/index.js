@@ -43,6 +43,7 @@ const Input = styled.input.attrs((props) => {
   return {
     onWheel,
     type: keyboard,
+    dir: 'auto',
     ...getAriaLabelProps(props),
     ...getAutoComplete(props),
   };
@@ -70,6 +71,7 @@ const Input = styled.input.attrs((props) => {
     hideNumberArrows &&
     css`
       /* Chrome, Safari, Edge, Opera */
+
       &::-webkit-outer-spin-button,
       &::-webkit-inner-spin-button {
         -webkit-appearance: none;

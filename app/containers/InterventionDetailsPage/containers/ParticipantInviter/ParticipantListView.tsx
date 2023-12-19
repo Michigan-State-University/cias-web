@@ -101,15 +101,16 @@ export const ParticipantListView: FC<Props> = ({
           />
         </div>
       </Tabs>
-      {invitingPossible && (
-        <CopyLinkForm
-          isModularIntervention={isModularIntervention}
-          isReportingIntervention={isReportingIntervention}
-          interventionId={interventionId}
-          sessionOptions={sessionOptions}
-          healthClinicOptions={healthClinicOptions}
-        />
-      )}
+      {invitingPossible &&
+        activeTab === formatMessage(messages.emailParticipantsTab) && (
+          <CopyLinkForm
+            isModularIntervention={isModularIntervention}
+            isReportingIntervention={isReportingIntervention}
+            interventionId={interventionId}
+            sessionOptions={sessionOptions}
+            healthClinicOptions={healthClinicOptions}
+          />
+        )}
     </>
   );
 };

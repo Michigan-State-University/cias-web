@@ -246,16 +246,18 @@ const TlfbQuestion = ({
         <>
           {listEvents && (
             <Box
-              mt={isMobile || isMobilePreview ? 15 : 0}
+              marginBlockStart={isMobile || isMobilePreview ? 15 : 0}
               display="inline-flex"
               flexWrap="wrap"
               gap="15px"
+              dir="auto"
+              width="100%"
             >
               {selectedDayEvents?.map(({ name, id }) => (
                 <Box key={id} display="flex" align="center">
                   {/* @ts-ignore */}
                   <Circle bg={colors.azureBlue} size="5px" doNotShrink />
-                  <Text ml={5}>{name}</Text>
+                  <Text marginInlineStart={5}>{name}</Text>
                 </Box>
               ))}
             </Box>
@@ -265,7 +267,7 @@ const TlfbQuestion = ({
           )}
         </>
       )}
-      <Box mb={8}>
+      <Box mb={8} dir="auto">
         <Markup content={substanceQuestion} />
       </Box>
       <TlfbConsumptionForm

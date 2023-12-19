@@ -69,6 +69,9 @@ exports[`<QuestionImage /> should match the snapshot with file 1`] = `
   -webkit-box-align: center;
   -ms-flex-align: center;
   align-items: center;
+  -webkit-flex-direction: row;
+  -ms-flex-direction: row;
+  flex-direction: row;
   gap: 15px;
   color: unset;
 }
@@ -229,6 +232,7 @@ exports[`<QuestionImage /> should match the snapshot with file 1`] = `
     >
       <div
         class="c9"
+        direction="row"
         display="flex"
       >
         <div
@@ -241,6 +245,7 @@ exports[`<QuestionImage /> should match the snapshot with file 1`] = `
             <textarea
               aria-label="Input here the text describing the image for people with disabilities"
               class="c11"
+              dir="auto"
               height="auto"
               placeholder="Input here the text describing the image for people with disabilities"
               rows="4"
@@ -282,6 +287,9 @@ exports[`<QuestionImage /> should match the snapshot without file 1`] = `
   -webkit-box-align: center;
   -ms-flex-align: center;
   align-items: center;
+  -webkit-flex-direction: row;
+  -ms-flex-direction: row;
+  flex-direction: row;
   gap: 15px;
   color: unset;
 }
@@ -509,6 +517,7 @@ exports[`<QuestionImage /> should match the snapshot without file 1`] = `
     >
       <div
         class="c10"
+        direction="row"
         display="flex"
       >
         <div
@@ -521,6 +530,7 @@ exports[`<QuestionImage /> should match the snapshot without file 1`] = `
             <textarea
               aria-label="Input here the text describing the image for people with disabilities"
               class="c12"
+              dir="auto"
               height="auto"
               placeholder="Input here the text describing the image for people with disabilities"
               rows="4"

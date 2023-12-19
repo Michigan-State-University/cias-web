@@ -1,7 +1,15 @@
 import { CSSProperties } from 'react';
-import PropTypes from 'prop-types';
 
-export type PaddingProps = Pick<CSSProperties, 'padding'> & {
+export type PaddingProps = Pick<
+  CSSProperties,
+  | 'padding'
+  | 'paddingBlock'
+  | 'paddingBlockStart'
+  | 'paddingBlockEnd'
+  | 'paddingInline'
+  | 'paddingInlineStart'
+  | 'paddingInlineEnd'
+> & {
   pt?: CSSProperties['paddingTop'];
   pb?: CSSProperties['paddingBottom'];
   pr?: CSSProperties['paddingRight'];
@@ -16,14 +24,10 @@ export const padding = (props: PaddingProps) => ({
   paddingBottom: props.py ?? props.pb ?? '',
   paddingRight: props.px ?? props.pr ?? '',
   paddingLeft: props.px ?? props.pl ?? '',
+  paddingBlock: props.paddingBlock ?? '',
+  paddingBlockStart: props.paddingBlockStart ?? props.paddingBlock ?? '',
+  paddingBlockEnd: props.paddingBlockEnd ?? props.paddingBlock ?? '',
+  paddingInline: props.paddingInline ?? '',
+  paddingInlineStart: props.paddingInlineStart ?? props.paddingInline ?? '',
+  paddingInlineEnd: props.paddingInlineEnd ?? props.paddingInline ?? '',
 });
-
-padding.propTypes = {
-  pt: PropTypes.number,
-  pb: PropTypes.number,
-  pr: PropTypes.number,
-  pl: PropTypes.number,
-  padding: PropTypes.oneOfType([PropTypes.number, PropTypes.string]),
-  px: PropTypes.number,
-  py: PropTypes.number,
-};

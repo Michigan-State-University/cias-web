@@ -36,6 +36,7 @@ const GridQuestionLayout = ({
   selectedAnswersIndex,
   questionId,
   disabled,
+  dynamicElementsDirection,
 }) => {
   const { formatMessage } = useIntl();
   const [params, containerRef] = useContainerQuery(QUERY);
@@ -51,11 +52,11 @@ const GridQuestionLayout = ({
 
     return {
       [SCROLL_FOG_BOX]: {
-        ml: elements.grid.leftPadding,
+        marginInlineStart: elements.grid.leftPadding,
         leftMargin: firstColWidth + elements.grid.leftPadding,
       },
       [FIRST_TH]: {
-        style: { position: 'sticky', left: 0 },
+        style: { position: 'sticky', insetInlineStart: 0 },
       },
     };
   }, [params, firstColWidth]);
@@ -66,11 +67,11 @@ const GridQuestionLayout = ({
   };
 
   return (
-    <Box width="100%" ref={containerRef}>
+    <Box width="100%" ref={containerRef} dir={dynamicElementsDirection}>
       <ScrollFogBox
         overflow="scroll"
-        pr={21}
-        py={14}
+        paddingInlineEnd={21}
+        paddingBlock={14}
         horizontalFogVisible
         verticalFogVisible={false}
         {...style[SCROLL_FOG_BOX]}
@@ -168,6 +169,7 @@ GridQuestionLayout.propTypes = {
   selectedAnswersIndex: PropTypes.object,
   questionId: PropTypes.string,
   disabled: PropTypes.bool,
+  dynamicElementsDirection: PropTypes.string,
 };
 
 export default memo(GridQuestionLayout);
