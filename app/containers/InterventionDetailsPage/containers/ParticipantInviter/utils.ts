@@ -3,6 +3,7 @@ import { IntlShape } from 'react-intl';
 import groupBy from 'lodash/groupBy';
 import countBy from 'lodash/countBy';
 import isNil from 'lodash/isNil';
+import dayjs from 'dayjs';
 
 import { PredefinedParticipant } from 'models/PredefinedParticipant';
 
@@ -400,3 +401,6 @@ export const preparePredefinedParticipantData = ({
 
 export const getPredefinedParticipantUrl = (slug: string): string =>
   `${WEB_HOST}/usr/${slug}`;
+
+export const formatInvitationSentAt = (invitationSentAt: Nullable<string>) =>
+  invitationSentAt && dayjs(invitationSentAt).format('L LT');

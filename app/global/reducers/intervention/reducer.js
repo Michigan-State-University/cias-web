@@ -859,10 +859,10 @@ export const interventionReducer = (state = initialState, action) =>
         break;
       }
       case SEND_PREDEFINED_PARTICIPANT_SMS_INVITATION_SUCCESS: {
-        const { participantId, invitationSentAt } = action.payload;
+        const { participantId, smsInvitationSentAt } = action.payload;
         if (draft.predefinedParticipants) {
           updateItemById(draft.predefinedParticipants, participantId, {
-            invitationSentAt,
+            smsInvitationSentAt,
           });
         }
         draft.loaders.sendPredefinedParticipantSmsInvitation = false;

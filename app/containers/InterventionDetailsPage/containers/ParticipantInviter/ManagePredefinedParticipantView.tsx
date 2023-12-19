@@ -33,6 +33,7 @@ import {
   Props as PredefinedParticipantFormProps,
 } from './PredefinedParticipantForm';
 import {
+  formatInvitationSentAt,
   getPredefinedParticipantUrl,
   preparePredefinedParticipantData,
 } from './utils';
@@ -115,6 +116,16 @@ export const ManagePredefinedParticipantView: FC<Props> = ({
     return getPredefinedParticipantUrl(participant.slug);
   }, []);
 
+  // TODO extract component showing last invitation sent at
+  // TODO add button to send email invitation
+  const formattedSmsInvitationSentAt = formatInvitationSentAt(
+    participant?.smsInvitationSentAt,
+  );
+
+  const formattedEmailInvitationSentAt = formatInvitationSentAt(
+    participant?.emailInvitationSentAt,
+  );
+
   return (
     <Column flex={1} overflow="auto" gap={24}>
       <InviteParticipantsModalBackButton
@@ -137,12 +148,12 @@ export const ManagePredefinedParticipantView: FC<Props> = ({
               {formatMessage(messages.predefinedParticipantSmsInvitationLabel)}
             </Text>
             <Text lineHeight={1.2} color={themeColors.text} textOpacity={0.7}>
-              {participant.invitationSentAt
+              {participant.smsInvitationSentAt
                 ? formatMessage(
                     messages.predefinedParticipantSmsInvitationSent,
                     {
-                      date: dayjs(participant.invitationSentAt).format(
-                        'YYYY/MM/DD HH:mm Z',
+                      date: dayjs(participant.smsInvitationSentAt).format(
+                        'L LT',
                       ),
                     },
                   )
@@ -162,7 +173,11 @@ export const ManagePredefinedParticipantView: FC<Props> = ({
                 }
               >
                 {formatMessage(
-                  messages.predefinedParticipantSendSmsInvitationButtonTitle,
+                  messages[
+                    participant.smsInvitationSentAt
+                      ? 'predefinedParticipantResendSmsInvitationButtonTitle'
+                      : 'predefinedParticipantSendSmsInvitationButtonTitle'
+                  ],
                 )}
               </Button>
             </Row>

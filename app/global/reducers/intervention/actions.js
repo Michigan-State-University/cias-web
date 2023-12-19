@@ -545,11 +545,11 @@ export const sendPredefinedParticipantSmsInvitationRequest = (
   });
 export const sendPredefinedParticipantSmsInvitationSuccess = (
   participantId,
-  invitationSentAt,
+  smsInvitationSentAt,
 ) =>
   actionBuilder(SEND_PREDEFINED_PARTICIPANT_SMS_INVITATION_SUCCESS, {
     participantId,
-    invitationSentAt,
+    smsInvitationSentAt,
   });
 export const sendPredefinedParticipantSmsInvitationError = () =>
   actionBuilder(SEND_PREDEFINED_PARTICIPANT_SMS_INVITATION_ERROR, {});

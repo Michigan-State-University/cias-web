@@ -20,20 +20,20 @@ import messages from '../messages';
 function* sendPredefinedParticipantSmsInvitation({
   payload: { interventionId, participantId },
 }: ReturnType<typeof sendPredefinedParticipantSmsInvitationRequest>) {
-  const requestURL = `v1/interventions/${interventionId}/predefined_participants/${participantId}/send_invitation`;
+  const requestURL = `v1/interventions/${interventionId}/predefined_participants/${participantId}/send_sms_invitation`;
 
   try {
     const { data } = yield call(axios.post, requestURL);
-    const { invitationSentAt } = objectToCamelCase(data);
+    const { smsInvitationSentAt } = objectToCamelCase(data);
 
-    if (!invitationSentAt) {
+    if (!smsInvitationSentAt) {
       throw new Error();
     }
 
     yield put(
       sendPredefinedParticipantSmsInvitationSuccess(
         participantId,
-        invitationSentAt,
+        smsInvitationSentAt,
       ),
     );
     yield call(

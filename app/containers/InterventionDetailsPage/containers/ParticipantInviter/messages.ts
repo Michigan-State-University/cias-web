@@ -183,7 +183,7 @@ export default defineMessages({
   },
   emailNotificationCheckboxLabel: {
     id: `${scope}.emailNotificationCheckboxLabel`,
-    defaultMessage: `Allow email notifications`,
+    defaultMessage: `Allow e-mail notifications`,
   },
   smsNotificationCheckboxLabel: {
     id: `${scope}.smsNotificationCheckboxLabel`,
@@ -243,10 +243,14 @@ export default defineMessages({
   },
   predefinedParticipantSmsInvitationNotSent: {
     id: `${scope}.predefinedParticipantSmsInvitationNotSent`,
-    defaultMessage: `This participant didn’t receive SMS invitation yet`,
+    defaultMessage: `This participant didn’t receive an invitation yet`,
   },
   predefinedParticipantSendSmsInvitationButtonTitle: {
     id: `${scope}.predefinedParticipantSendSmsInvitationButtonTitle`,
     defaultMessage: `Send SMS invitation`,
+  },
+  predefinedParticipantResendSmsInvitationButtonTitle: {
+    id: `${scope}.predefinedParticipantResendSmsInvitationButtonTitle`,
+    defaultMessage: `Resend SMS invitation`,
   },
 });
