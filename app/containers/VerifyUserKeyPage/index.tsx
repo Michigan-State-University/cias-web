@@ -15,10 +15,10 @@ import {
 } from 'global/reducers/auth';
 
 import Loader from 'components/Loader';
+import { InterventionNotAvailableInfo } from 'components/InterventionNotAvailableInfo';
 
 import ForbiddenPage from 'containers/ForbiddenPage';
-
-import { InterventionNotAvailableInfo } from './InterventionNotAvailableInfo';
+import NotFoundPage from 'containers/NotFoundPage';
 
 const VerifyUserKeyPage = () => {
   const dispatch = useDispatch();
@@ -27,24 +27,20 @@ const VerifyUserKeyPage = () => {
 
   const { userKey } = useParams<{ userKey: string }>();
 
-  const verifyUserKeyError: Nullable<ApiError> = useSelector(
+  const verifyError: Nullable<ApiError> = useSelector(
     makeSelectErrors('verifyUserKeyError'),
   );
-
-  const redirectToNotFoundPage = () => {
-    history.replace(RoutePath.NOT_FOUND);
-  };
 
   useEffect(() => {
     if (userKey) {
       dispatch(verifyUserKeyRequest(userKey));
     } else {
-      redirectToNotFoundPage();
+      history.replace(RoutePath.NOT_FOUND);
     }
   }, [userKey]);
 
-  if (verifyUserKeyError) {
-    switch (verifyUserKeyError?.response?.status) {
+  if (verifyError) {
+    switch (verifyError?.response?.status) {
       case HttpStatusCodes.UNAUTHORIZED: {
         return <ForbiddenPage />;
       }
@@ -52,7 +48,7 @@ const VerifyUserKeyPage = () => {
         return <InterventionNotAvailableInfo />;
       }
       default: {
-        redirectToNotFoundPage();
+        return <NotFoundPage />;
       }
     }
   }

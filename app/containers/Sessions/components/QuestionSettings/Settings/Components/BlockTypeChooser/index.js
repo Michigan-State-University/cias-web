@@ -8,7 +8,7 @@ import HoverableBox from 'components/Box/HoverableBox';
 import Row from 'components/Row';
 import Text from 'components/Text';
 import decideIfPassValue from 'utils/decideIfPassValue';
-import globalMessages from 'global/i18n/globalMessages';
+import blockTypesMessages from 'global/i18n/blockTypesMessages';
 import { feedbackQuestion } from 'models/Session/QuestionTypes';
 import useOutsideClick from 'utils/useOutsideClick';
 import { colors, boxShadows, borders, fontSizes } from 'theme';
@@ -107,7 +107,7 @@ const BlockTypeChooser = ({
                     <Row align="center">
                       <DotCircle mr={18} bg={blockTypeToColorMap[stepType]} />
                       <Text fontWeight="medium">
-                        {formatMessage(globalMessages.blockTypes[stepType])}
+                        {formatMessage(blockTypesMessages[stepType])}
                       </Text>
                     </Row>
                   </HoverableBox>

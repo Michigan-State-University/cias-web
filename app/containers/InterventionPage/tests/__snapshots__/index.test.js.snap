@@ -195,7 +195,7 @@ exports[`<InterventionPage /> Should render and match the snapshot with interven
 }
 
 .c25 {
-  margin-right: 5px;
+  margin-inline-end: 5px;
   border-radius: 5px;
 }
 
@@ -726,6 +726,7 @@ exports[`<InterventionPage /> Should render and match the snapshot with interven
                 <input
                   aria-label="Filter Interventions by name"
                   class="c27"
+                  dir="auto"
                   placeholder="Filter by name"
                   type="text"
                   width="100%"
@@ -969,7 +970,7 @@ exports[`<InterventionPage /> Should render and match the snapshot with loader 1
 }
 
 .c25 {
-  margin-right: 5px;
+  margin-inline-end: 5px;
   border-radius: 5px;
 }
 
@@ -1500,6 +1501,7 @@ exports[`<InterventionPage /> Should render and match the snapshot with loader 1
                 <input
                   aria-label="Filter Interventions by name"
                   class="c27"
+                  dir="auto"
                   placeholder="Filter by name"
                   type="text"
                   width="100%"
@@ -1743,7 +1745,7 @@ exports[`<InterventionPage /> Should render and match the snapshot without inter
 }
 
 .c25 {
-  margin-right: 5px;
+  margin-inline-end: 5px;
   border-radius: 5px;
 }
 
@@ -2274,6 +2276,7 @@ exports[`<InterventionPage /> Should render and match the snapshot without inter
                 <input
                   aria-label="Filter Interventions by name"
                   class="c27"
+                  dir="auto"
                   placeholder="Filter by name"
                   type="text"
                   width="100%"

@@ -7,6 +7,9 @@ import { useIntl } from 'react-intl';
 import ReorderIcon from 'assets/svg/reorder-hand.svg';
 import { selectTemplateSection } from 'global/reducers/reportTemplates';
 
+import FlexRow from 'components/Row';
+import FlexColumn from 'components/Column';
+
 import { TemplateSection } from 'models/ReportTemplate';
 
 import Img from 'components/Img';
@@ -61,7 +64,7 @@ const TemplateSectionItem = ({
             />
           </Col>
         )}
-        <Col>
+        <Col dir="auto">
           {isEmpty ? (
             <Row>
               <Col>
@@ -81,25 +84,24 @@ const TemplateSectionItem = ({
                   </Col>
                 </Row>
               )}
-              <Row nogutter>
-                <Col xs={previewCase.imageUrl ? 8 : 12}>
+              <FlexRow>
+                <FlexColumn width={previewCase.imageUrl ? '67%' : '100%'}>
                   <SectionText isSelected={isSelected || isHovered}>
                     {previewCase.content}
                   </SectionText>
-                </Col>
-                <Col xs={4}>
-                  {previewCase.imageUrl && (
+                </FlexColumn>
+                {previewCase.imageUrl && (
+                  <FlexColumn width="33%">
                     <Img
                       src={previewCase.imageUrl}
                       style={{
-                        maxWidth: '112px',
-                        height: 'auto',
-                        marginLeft: 60,
+                        objectFit: 'contain',
+                        marginInlineStart: '60px',
                       }}
                     />
-                  )}
-                </Col>
-              </Row>
+                  </FlexColumn>
+                )}
+              </FlexRow>
             </>
           )}
         </Col>

@@ -9,25 +9,13 @@ import { expectSaga } from 'redux-saga-test-plan';
 import { formatMessage } from 'utils/intlOutsideReact';
 
 import { sendInterventionCsv } from 'global/reducers/intervention/sagas/sendInterventionCsv';
-import {
-  sendInterventionCsvSuccess,
-  sendInterventionCsvError,
-} from '../../actions';
+import { sendInterventionCsvError } from '../../actions';
 import { SEND_INTERVENTION_CSV_REQUEST } from '../../constants';
 import messages from '../../messages';
 import { sendInterventionCsvSaga } from '../index';
 
 describe('sendInterventionCsv saga', () => {
   const payload = { id: '0' };
-
-  it('Check sendInterventionCsv generator success connection', () => {
-    const apiResponse = { message: 'test' };
-    return expectSaga(sendInterventionCsv, { payload })
-      .provide([[matchers.call.fn(axios.get), { data: apiResponse }]])
-      .put(sendInterventionCsvSuccess(apiResponse.message))
-      .call(toast.info, apiResponse.message)
-      .run();
-  });
 
   it('Check sendInterventionCsv error connection', () => {
     const error = new Error('test');

@@ -1,7 +1,9 @@
 import React from 'react';
 import { useSelector } from 'react-redux';
+import { useInjectSaga } from 'redux-injectors';
 
 import { makeSelectIsNarratorTab } from 'global/reducers/localState';
+import { makeSelectInterventionDynamicElementsDirection } from 'global/reducers/globalState';
 import {
   makeSelectEditingPossible,
   makeSelectInterventionSharedTo,
@@ -11,7 +13,7 @@ import {
   updateQuestionDataSaga,
   makeSelectSelectedQuestionType,
 } from 'global/reducers/questions';
-import { useInjectSaga } from 'redux-injectors';
+
 import {
   singleQuestion,
   multiQuestion,
@@ -75,6 +77,9 @@ const QuestionData = () => {
     makeSelectInterventionSharedTo(),
   );
   const editingPossible = useSelector(makeSelectEditingPossible());
+  const dynamicElementsDirection = useSelector(
+    makeSelectInterventionDynamicElementsDirection(),
+  );
 
   const commonProps: CommonQuestionProps = {
     isNarratorTab,
@@ -82,6 +87,7 @@ const QuestionData = () => {
     sharedTo,
     statusMetadata: STATUS_METADATA[interventionStatus],
     editingPossible,
+    dynamicElementsDirection,
   };
 
   switch (selectedQuestionType) {

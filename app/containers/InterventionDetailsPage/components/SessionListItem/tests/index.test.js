@@ -18,7 +18,7 @@ import configureStore from 'configureStore';
 
 import { withDroppable } from 'utils/testUtils/dndUtils';
 
-import { intlProviderConfig } from 'containers/LanguageProvider';
+import { intlProviderConfig } from 'containers/AppLanguageProvider';
 
 import SessionListItem from '../index';
 

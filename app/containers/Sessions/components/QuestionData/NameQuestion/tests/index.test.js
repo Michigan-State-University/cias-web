@@ -16,7 +16,7 @@ import { draft } from 'models/Status/StatusTypes';
 
 import { createTestStore } from 'utils/testUtils/storeUtils';
 
-import { intlProviderConfig } from 'containers/LanguageProvider';
+import { intlProviderConfig } from 'containers/AppLanguageProvider';
 
 import NameQuestion from '../index';
 

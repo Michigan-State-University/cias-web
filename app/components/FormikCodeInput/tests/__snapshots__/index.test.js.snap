@@ -150,6 +150,7 @@ exports[`<FormikCodeInput /> Should render and match the snapshot 1`] = `
         <input
           aria-labelledby="code-input-general code-input-1"
           class="c5"
+          dir="auto"
           maxlength="1"
           name="test"
           size="1"
@@ -169,6 +170,7 @@ exports[`<FormikCodeInput /> Should render and match the snapshot 1`] = `
         <input
           aria-labelledby="code-input-general code-input-2"
           class="c5"
+          dir="auto"
           maxlength="1"
           name="test"
           size="1"
@@ -188,6 +190,7 @@ exports[`<FormikCodeInput /> Should render and match the snapshot 1`] = `
         <input
           aria-labelledby="code-input-general code-input-3"
           class="c5"
+          dir="auto"
           maxlength="1"
           name="test"
           size="1"
@@ -207,6 +210,7 @@ exports[`<FormikCodeInput /> Should render and match the snapshot 1`] = `
         <input
           aria-labelledby="code-input-general code-input-4"
           class="c5"
+          dir="auto"
           maxlength="1"
           name="test"
           size="1"
@@ -226,6 +230,7 @@ exports[`<FormikCodeInput /> Should render and match the snapshot 1`] = `
         <input
           aria-labelledby="code-input-general code-input-5"
           class="c5"
+          dir="auto"
           maxlength="1"
           name="test"
           size="1"
@@ -245,6 +250,7 @@ exports[`<FormikCodeInput /> Should render and match the snapshot 1`] = `
         <input
           aria-labelledby="code-input-general code-input-6"
           class="c5"
+          dir="auto"
           maxlength="1"
           name="test"
           size="1"

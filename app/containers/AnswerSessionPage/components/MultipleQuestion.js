@@ -9,6 +9,7 @@ const MultipleQuestion = ({
   selectAnswer,
   isMobile,
   disabled,
+  dynamicElementsDirection,
 }) => {
   const [selectedAnswersIndex, setSelectedAnswersIndex] = useState([]);
 
@@ -51,6 +52,7 @@ const MultipleQuestion = ({
       selectedAnswersIndex={selectedAnswersIndex}
       isMobile={isMobile}
       disabled={disabled}
+      dynamicElementsDirection={dynamicElementsDirection}
     />
   );
 };
@@ -61,6 +63,7 @@ MultipleQuestion.propTypes = {
   selectAnswer: PropTypes.func,
   isMobile: PropTypes.bool,
   disabled: PropTypes.bool,
+  dynamicElementsDirection: PropTypes.string,
 };
 
 export default MultipleQuestion;

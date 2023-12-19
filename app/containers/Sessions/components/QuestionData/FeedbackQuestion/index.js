@@ -16,7 +16,9 @@ import Box from 'components/Box';
 import Column from 'components/Column';
 import { StyledInput } from 'components/Input/StyledInput';
 import Row from 'components/Row';
-import OriginalTextHover from 'components/OriginalTextHover';
+import OriginalTextHover, {
+  OriginalTextIconPosition,
+} from 'components/OriginalTextHover';
 
 import { makeSelectSelectedQuestion } from 'global/reducers/questions';
 import isNullOrUndefined from 'utils/isNullOrUndefined';
@@ -33,6 +35,7 @@ const FeedbackQuestion = ({
   onUpdateLabel,
   isNarratorTab,
   interventionStatus,
+  dynamicElementsDirection,
   intl: { formatMessage },
 }) => {
   const {
@@ -49,6 +52,8 @@ const FeedbackQuestion = ({
 
   const editingPossible = canEdit(interventionStatus);
 
+  const reverse = dynamicElementsDirection === 'rtl';
+
   const labels = {
     0: {
       label: (
@@ -60,7 +65,7 @@ const FeedbackQuestion = ({
           <StyledInput
             disabled={!editingPossible}
             width={120}
-            py={9}
+            paddingBlock={9}
             textAlign="center"
             placeholder={formatMessage(messages.startValue)}
             value={startValue}
@@ -72,11 +77,15 @@ const FeedbackQuestion = ({
     },
     100: {
       label: (
-        <OriginalTextHover text={originalText?.end_value} gap={5}>
+        <OriginalTextHover
+          text={originalText?.end_value}
+          gap={5}
+          iconPosition={OriginalTextIconPosition.START}
+        >
           <StyledInput
             disabled={!editingPossible}
             width={120}
-            py={9}
+            paddingBlock={9}
             textAlign="center"
             placeholder={formatMessage(messages.endValue)}
             value={endValue}
@@ -89,8 +98,8 @@ const FeedbackQuestion = ({
   };
 
   return (
-    <Column mt={10}>
-      <Box width="100%" px={21} py={30}>
+    <Column marginBlockStart={10} dir={dynamicElementsDirection}>
+      <Box width="100%" paddingInline={21} paddingBlock={30}>
         <Column>
           <Row>
             <Box width="100%">
@@ -100,6 +109,7 @@ const FeedbackQuestion = ({
                   disabled
                   showValue={!isNullOrUndefined(showNumber) && showNumber}
                   ariaLabelledByForHandle={`${QUESTION_TITLE_ID} ${QUESTION_SUBTITLE_ID}`}
+                  reverse={reverse}
                 />
               )}
               {isNarratorTab && (
@@ -107,6 +117,7 @@ const FeedbackQuestion = ({
                   startValue={startValue}
                   endValue={endValue}
                   showNumber={!isNullOrUndefined(showNumber) && showNumber}
+                  dynamicElementsDirection={dynamicElementsDirection}
                 />
               )}
             </Box>
@@ -123,6 +134,7 @@ FeedbackQuestion.propTypes = {
   onUpdateLabel: PropTypes.func.isRequired,
   isNarratorTab: PropTypes.bool,
   interventionStatus: PropTypes.string,
+  dynamicElementsDirection: PropTypes.string,
 };
 
 const mapStateToProps = createStructuredSelector({

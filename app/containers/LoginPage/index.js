@@ -94,11 +94,11 @@ export const LoginPage = ({
   useEffect(() => {
     if (has(queryObject, 'account_confirmation_success')) {
       if (queryObject.account_confirmation_success)
-        toast.success(formatMessage(messages.accountConfirmation.success), {
+        toast.success(formatMessage(messages.accountConfirmationSuccess), {
           toastId: ACCOUNT_CONFIRMATION_SUCCESS,
         });
       else
-        toast.error(formatMessage(messages.accountConfirmation.error), {
+        toast.error(formatMessage(messages.accountConfirmationError), {
           toastId: ACCOUNT_CONFIRMATION_ERROR,
         });
     }

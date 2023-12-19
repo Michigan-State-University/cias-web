@@ -35,10 +35,10 @@ const ExactDateOption = ({
         <Box>
           <ApprovableInput
             disabled={disabled}
-            width={120}
+            width={130}
             height={50}
             type="date"
-            value={getUTCTime(value ? new Date(value) : new Date())}
+            value={value ? getUTCTime(new Date(value)) : null}
             onCheck={onChange}
             fontSize={15}
             minDate={new Date()}

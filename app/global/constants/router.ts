@@ -33,7 +33,7 @@ export enum RoutePath {
   ADMIN_CONSOLE = '/admin-console',
   ACCESSIBILITY_STATEMENT = '/accessibility-statement',
   FORBIDDEN = '/no-access',
-  VERIFY_SHORT_LINK = '/int/:name',
+  VERIFY_SHORT_LINK = '/int/:slug',
   VERIFY_USER_KEY = '/usr/:userKey',
   NOT_FOUND = '/not-found-page',
 }

@@ -10,7 +10,7 @@ export default defineMessages({
   clearDataConfirmationContent: {
     id: `${scope}.clearDataConfirmationContent`,
     defaultMessage:
-      'Do you want to clear all collected data in this intervention (both user responses and generated reports)? ',
+      'Do you want to clear all collected data in this intervention (both user responses and generated reports)?',
   },
   clearDataConfirmationNote: {
     id: `${scope}.clearDataConfirmationNote`,
@@ -32,7 +32,7 @@ export default defineMessages({
   markedToRemoveContentSecond: {
     id: `${scope}.markedToRemoveContentSecond`,
     defaultMessage:
-      ' All sensitive data associated with this intervention will be deleted <primaryColorBold>{time}</primaryColorBold>.',
+      'All sensitive data associated with this intervention will be deleted <primaryColorBold>{time}</primaryColorBold>.',
   },
   removedTitle: {
     id: `${scope}.removedTitle`,
@@ -49,5 +49,14 @@ export default defineMessages({
   days: {
     id: `${scope}.days`,
     defaultMessage: 'days',
+  },
+  clearDataConfirmationTitle: {
+    id: `${scope}.clearDataConfirmationTitle`,
+    defaultMessage: 'Are you sure?',
+  },
+  clearDataConfirmationDescription: {
+    id: `${scope}.clearDataConfirmationDescription`,
+    defaultMessage:
+      'All collected data in this intervention will be cleared. This action is irreversible.',
   },
 });

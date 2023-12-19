@@ -4,11 +4,12 @@ import { useIntl } from 'react-intl';
 import { CharacterType } from 'models/Character';
 import { NarratorSettingsKey } from 'models/Narrator';
 
+import narratorSettingsMessages from 'global/i18n/narratorSettingsMessages';
+
 import { FullWidthSwitch } from 'components/Switch';
 import H3 from 'components/H3';
 
 import CharacterSelector from 'components/CharacterSelector';
-import messages from '../messages';
 
 type Props<T extends boolean | string> = {
   setting: NarratorSettingsKey;
@@ -47,8 +48,7 @@ const Component = <T extends boolean | string>({
           // @ts-ignore type narrowing not working correctly
           onToggle={onChange}
         >
-          {/* @ts-ignore */}
-          <H3>{formatMessage(messages[setting])}</H3>
+          <H3>{formatMessage(narratorSettingsMessages[setting])}</H3>
         </FullWidthSwitch>
       );
     }

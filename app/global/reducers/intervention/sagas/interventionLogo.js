@@ -38,7 +38,7 @@ export function* addInterventionLogo({
     });
 
     const mappedData = jsonApiToObject(data, 'intervention');
-    yield put(addInterventionLogoSuccess(mappedData.logoUrl));
+    yield put(addInterventionLogoSuccess(mappedData.logo));
   } catch (error) {
     yield call(
       toast.error,
@@ -77,7 +77,7 @@ export function* updateInterventionLogo({
 
   try {
     yield axios.patch(requestURL, {
-      logo: { image_alt: description },
+      logo: { alt: description },
     });
 
     yield put(updateInterventionLogoSuccess());

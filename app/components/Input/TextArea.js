@@ -8,6 +8,7 @@ import { getAriaLabelProps } from './utils';
 const TextArea = styled.textarea.attrs((props) => ({
   ...getAriaLabelProps(props),
   disabledColor: colors.casper,
+  dir: 'auto',
 }))`
   resize: none;
   padding: ${paddings.small};

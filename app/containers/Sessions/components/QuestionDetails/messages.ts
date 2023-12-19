@@ -8,10 +8,6 @@ import { defineMessages } from 'react-intl';
 export const scope = 'app.components.QuestionDetails';
 
 export default defineMessages({
-  nextQuestion: {
-    id: `${scope}.nextQuestion`,
-    defaultMessage: 'Continue',
-  },
   groupPlaceholder: {
     id: `${scope}.groupPlaceholder`,
     defaultMessage: 'Group placeholder',

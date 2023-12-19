@@ -1,4 +1,11 @@
 import { createSelector } from 'reselect';
+import { getLangDir } from 'rtl-detect';
+
+import { DEFAULT_LOCALE, isAppLanguageSupported } from 'i18n';
+
+import { makeSelectInterventionLanguageCode } from 'global/reducers/intervention';
+import { makeSelectUserSessionLanguageCode } from 'containers/AnswerSessionPage/selectors';
+
 import { initialState } from './reducer';
 
 /**
@@ -37,3 +44,27 @@ export const makeSelectFileDownloadLoading = () =>
 
 export const makeSelectNavbarHeight = () =>
   createSelector(selectGlobalStateDomain, ({ navbarHeight }) => navbarHeight);
+
+export const makeSelectInterventionElementsLanguageCode = () =>
+  createSelector(
+    makeSelectInterventionLanguageCode(),
+    makeSelectUserSessionLanguageCode(),
+    (interventionLanguageCode, userSessionLanguageCode) =>
+      interventionLanguageCode ?? userSessionLanguageCode,
+  );
+
+// Hardcoded/fixed UI elements, e.g. back, skip and continue buttons
+export const makeSelectInterventionFixedElementsDirection = () =>
+  createSelector(makeSelectInterventionElementsLanguageCode(), (languageCode) =>
+    getLangDir(
+      languageCode && isAppLanguageSupported(languageCode)
+        ? languageCode
+        : DEFAULT_LOCALE,
+    ),
+  );
+
+// Defined the by researcher, e.g. question title and subtitle, answers' labels
+export const makeSelectInterventionDynamicElementsDirection = () =>
+  createSelector(makeSelectInterventionElementsLanguageCode(), (languageCode) =>
+    getLangDir(languageCode ?? DEFAULT_LOCALE),
+  );

@@ -12,7 +12,7 @@ import { UserIntervention } from 'models/UserIntervention/UserIntervention';
 import { InterventionType } from 'models/Intervention';
 
 import { RoutePath } from 'global/constants';
-import globalMessages from 'global/i18n/globalMessages';
+import userInterventionStatusesMessages from 'global/i18n/userInterventionStatusesMessages';
 
 import { parametrizeRoutePath } from 'utils/router';
 
@@ -77,8 +77,7 @@ const ParticipantInterventionTileRenderer = ({ data, index }: Props) => {
           <Box px={12} py={8} bg={statusColor} borderRadius={5}>
             <Text>
               {formatMessage(
-                // @ts-ignore
-                globalMessages.userInterventionStatus[statusWithBlocked],
+                userInterventionStatusesMessages[statusWithBlocked],
               )}
             </Text>
           </Box>
@@ -112,6 +111,7 @@ const ParticipantInterventionTileRenderer = ({ data, index }: Props) => {
           text={interventionName}
           opacity={tileDisabled ? COMPLETED_INTERVENTION_TEXT_OPACITY : 1}
           dataFor={id}
+          dir="auto"
         />
         <Box
           visibility={

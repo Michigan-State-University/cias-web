@@ -1,10 +1,14 @@
 import React, { memo } from 'react';
 import { useIntl } from 'react-intl';
 import PropTypes from 'prop-types';
+import { useSelector } from 'react-redux';
 
-import triangleBack from 'assets/svg/triangle-back.svg';
+import TriangleForwardIcon from 'assets/svg/triangle-forward.svg';
 
 import { themeColors } from 'theme';
+
+import { makeSelectInterventionFixedElementsDirection } from 'global/reducers/globalState';
+import { LanguageDirection } from 'global/types/locale';
 
 import TextButton from 'components/Button/TextButton';
 import Text from 'components/Text';
@@ -15,6 +19,8 @@ import messages from '../messages';
 const Component = ({ onClick, disabled }) => {
   const { formatMessage } = useIntl();
 
+  const direction = useSelector(makeSelectInterventionFixedElementsDirection());
+
   return (
     <TextButton
       onClick={onClick}
@@ -23,15 +29,16 @@ const Component = ({ onClick, disabled }) => {
         display: 'flex',
         align: 'center',
         gap: 8,
+        dir: direction,
       }}
     >
       <Text color={themeColors.secondary} fontWeight="bold">
         {formatMessage(messages.skipQuestion)}
       </Text>
       <Img
-        src={triangleBack}
+        src={TriangleForwardIcon}
         alt={formatMessage(messages.skipIconAlt)}
-        transform="scaleX(-1)"
+        flipHorizontal={direction === LanguageDirection.RTL}
       />
     </TextButton>
   );

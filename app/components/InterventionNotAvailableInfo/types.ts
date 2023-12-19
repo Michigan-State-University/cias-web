@@ -1,0 +1,4 @@
+export enum InterventionNotAvailableReason {
+  INTERVENTION_DRAFT = 'INTERVENTION_DRAFT',
+  INTERVENTION_CLOSED = 'INTERVENTION_CLOSED',
+}

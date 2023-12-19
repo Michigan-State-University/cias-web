@@ -34,14 +34,14 @@ import ErrorAlert from 'components/ErrorAlert';
 import AppContainer from 'components/Container';
 import H2 from 'components/H2';
 import H3 from 'components/H3';
-import Text from 'components/Text';
-import Box from 'components/Box';
 import Divider from 'components/Divider';
 import BackButton from 'components/BackButton';
 import Img from 'components/Img';
 import { Row, Col } from 'components/ReactGridSystem';
 import { FileDisplayItem } from 'components/FileDisplayItem';
 import MarkupContainer from 'components/MarkupContainer';
+import Column from 'components/Column';
+import FlexRow from 'components/Row';
 
 import messages from './messages';
 import UserSessionTile from './UserSessionTile';
@@ -134,15 +134,14 @@ const UserInterventionPage = () => {
       <Helmet>
         <title>{interventionName}</title>
       </Helmet>
-      <Box mt={50} display="flex" justify="between" align="center">
-        <div>
-          <H2 mb={20}>{interventionName}</H2>
-          <Text> {formatMessage(messages.chooseIntervention)} </Text>
-        </div>
-        {logoUrl && (
-          <Img maxHeight={100} maxWidth={200} src={logoUrl} alt={imageAlt} />
-        )}
-      </Box>
+      <Column mt={50} gap={20}>
+        <FlexRow gap={16} dir="auto" justify="between">
+          <H2>{interventionName}</H2>
+          {logoUrl && (
+            <Img maxHeight={100} maxWidth={200} src={logoUrl} alt={imageAlt} />
+          )}
+        </FlexRow>
+      </Column>
       {additionalText && (
         <>
           <Divider width={100} my={24} />

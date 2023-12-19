@@ -6,6 +6,8 @@ import { useDispatch } from 'react-redux';
 import Draggable from 'react-draggable';
 import { useIntl } from 'react-intl';
 
+import { LanguageDirection } from 'global/types/locale';
+
 import useFeedbackHelper from 'utils/animationsHelpers/useFeedbackHelper';
 import usePauseHelper from 'utils/animationsHelpers/usePauseHelper';
 import useDidUpdateEffect from 'utils/useDidUpdateEffect';
@@ -60,6 +62,7 @@ const CharacterAnim = ({
   setFeedbackSettings,
   feedbackScreenSettings: { sliderRef },
   audioInstance,
+  dynamicElementsDirection,
 }) => {
   const { formatMessage } = useIntl();
   const [state, dispatch] = useReducer(reducer, initialState);
@@ -68,6 +71,8 @@ const CharacterAnim = ({
       type: UPDATE,
       newState,
     });
+
+  const isRtl = dynamicElementsDirection === LanguageDirection.RTL;
 
   const globalDispatch = useDispatch();
 
@@ -181,6 +186,7 @@ const CharacterAnim = ({
     sliderRef,
     animationRef.current,
     loadedAnimations,
+    isRtl,
   );
   const { animationPos, moveAnimation, fetchMoveAnimations } = useMoveHelper(
     animationContainer,
@@ -370,6 +376,7 @@ CharacterAnim.propTypes = {
   setFeedbackSettings: PropTypes.func,
   feedbackScreenSettings: PropTypes.object,
   audioInstance: PropTypes.object,
+  dynamicElementsDirection: PropTypes.string,
 };
 
 export default CharacterAnim;

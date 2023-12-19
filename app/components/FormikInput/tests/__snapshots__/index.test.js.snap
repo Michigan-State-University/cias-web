@@ -99,6 +99,7 @@ exports[`<FormikInput /> Should render and match the snapshot 1`] = `
     >
       <input
         class="c3"
+        dir="auto"
         id="test"
         name="test"
         placeholder="test"

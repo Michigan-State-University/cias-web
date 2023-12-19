@@ -30,10 +30,7 @@ export default defineMessages({
   },
   editSectionError: {
     id: `${scope}.editSectionError`,
-    defaultMessage: `Failed to edit section! Check {properties} {propertiesCount, plural,
-       one {property}
-       other {properties}
-     }.`,
+    defaultMessage: `Failed to edit section! Check {properties} {propertiesCount, plural, one {property} other {properties}}.`,
   },
   reorderError: {
     id: `${scope}.reorderError`,
