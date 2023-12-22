@@ -10,8 +10,7 @@ import {
   fetchInterventionsWithPaginationRequest,
   makeSelectInterventionCount,
 } from 'global/reducers/copyModalReducer';
-import { published } from 'models/Status/StatusTypes';
-import { Intervention } from 'models/Intervention';
+import { Intervention, InterventionStatus } from 'models/Intervention';
 
 import NoContent from 'components/NoContent';
 import Box from 'components/Box';
@@ -44,7 +43,10 @@ const InterventionView = ({ onClick }: Props) => {
     dispatch(
       fetchInterventionsWithPaginationRequest(
         { startIndex, endIndex },
-        { statuses: [published], organizationId },
+        {
+          statuses: [InterventionStatus.PUBLISHED, InterventionStatus.PAUSED],
+          organizationId,
+        },
       ),
     );
 

@@ -5,4 +5,7 @@ import { formatMessage } from './intlOutsideReact';
 export const formatApiErrorMessage = (
   error: any,
   defaultMessage: MessageDescriptor,
-) => error?.response?.data?.message ?? formatMessage(defaultMessage);
+  defaultMessageValues?: Parameters<typeof formatMessage>[1],
+) =>
+  error?.response?.data?.message ??
+  formatMessage(defaultMessage, defaultMessageValues);

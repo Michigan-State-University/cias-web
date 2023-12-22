@@ -98,14 +98,6 @@ export default defineMessages({
     defaultMessage:
       'Are you sure you want to delete this session? It will no longer be possible to recover it later.',
   },
-  interventionArchiveHeader: {
-    id: `${scope}.interventionArchiveHeader`,
-    defaultMessage: 'Archive Intervention',
-  },
-  interventionArchiveMessage: {
-    id: `${scope}.interventionArchiveMessage`,
-    defaultMessage: 'Are you sure you want to archive this Intervention?',
-  },
   interventionSettings: {
     id: `${scope}.interventionSettings`,
     defaultMessage: 'Intervention Settings',

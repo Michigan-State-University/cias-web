@@ -20,7 +20,6 @@ import Box from 'components/Box';
 
 import SessionSettings from './components/SessionSettings';
 import messages from './messages';
-import { StyledColumn } from './styled';
 
 const SettingsSessionPage = () => {
   const dispatch = useDispatch();
@@ -37,6 +36,8 @@ const SettingsSessionPage = () => {
     multipleFill,
     autofinishEnabled,
     autofinishDelay,
+    autocloseEnabled,
+    autocloseAt,
   } = session;
   useInjectReducer({ key: 'session', reducer: sessionReducer });
   useInjectSaga({ key: 'getSession', saga: getSessionSaga });
@@ -61,21 +62,22 @@ const SettingsSessionPage = () => {
         justify="center"
         align="center"
         py={40}
+        px={16}
         bg={colors.zirkon}
       >
-        <StyledColumn height="100%">
-          <SessionSettings
-            name={name}
-            variable={variable ?? ''}
-            narratorSettings={narratorSettings}
-            formatMessage={formatMessage}
-            googleTtsVoice={googleTtsVoice}
-            currentNarrator={currentNarrator}
-            multipleFill={multipleFill}
-            autofinishEnabled={autofinishEnabled}
-            autofinishDelay={autofinishDelay}
-          />
-        </StyledColumn>
+        <SessionSettings
+          name={name}
+          variable={variable ?? ''}
+          narratorSettings={narratorSettings}
+          formatMessage={formatMessage}
+          googleTtsVoice={googleTtsVoice}
+          currentNarrator={currentNarrator}
+          multipleFill={multipleFill}
+          autofinishEnabled={autofinishEnabled}
+          autofinishDelay={autofinishDelay}
+          autocloseEnabled={autocloseEnabled}
+          autocloseAt={autocloseAt}
+        />
       </Box>
     </>
   );

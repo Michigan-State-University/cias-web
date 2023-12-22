@@ -40,4 +40,8 @@ export default defineMessages({
     id: `${scope}.min`,
     defaultMessage: 'min',
   },
+  sessionClosedAlertContent: {
+    id: `${scope}.sessionClosedAlertContent`,
+    defaultMessage: 'This session has been closed',
+  },
 });

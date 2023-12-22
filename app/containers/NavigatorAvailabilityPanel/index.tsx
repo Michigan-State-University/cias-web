@@ -29,7 +29,7 @@ const NavigatorAvailabilityPanel = () => {
     setNavigatorAvailability && setNavigatorAvailability({ online: !offline });
 
   return (
-    <Row align="stretch" flexShrink={0} gap={32}>
+    <Row align="stretch" flexShrink={0} gap={24}>
       <Switch
         id="navigator-availability-switch"
         checked={!online}

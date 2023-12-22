@@ -1,8 +1,7 @@
 import React, { FC } from 'react';
 import { useIntl } from 'react-intl';
-import { colors } from 'theme';
 
-import { Alert } from 'components/Alert';
+import { Alert, AlertType } from 'components/Alert';
 
 import messages from '../../messages';
 
@@ -17,7 +16,7 @@ export const DuplicatedReportTemplateWarning: FC<Props> = ({ onDismiss }) => {
     <Alert
       content={formatMessage(messages.duplicatedReportTemplateWarning)}
       contentProps={{ maxWidth: 290 }}
-      background={colors.chardonnay}
+      type={AlertType.WARNING}
       onDismiss={onDismiss}
       mb={24}
     />

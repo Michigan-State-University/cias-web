@@ -74,6 +74,7 @@ import VerifyUserKeyPage from 'containers/VerifyUserKeyPage/Loadable';
 import AccessibilityStatementPage from 'containers/AccessibiltyStatementPage/Loadable';
 import ChatWidget from 'containers/ChatWidget';
 import NavigatorAvailabilityModal from 'containers/NavigatorAvailabilityModal';
+import InterventionNotAvailablePage from 'containers/InterventionNotAvailablePage/Loadable';
 
 import AppRoute from 'components/AppRoute';
 import IdleTimer from 'components/IdleTimer/Loadable';
@@ -569,6 +570,11 @@ export function App({ user, fetchSelfDetails }) {
           component={VerifyUserKeyPage}
         />
         <AppRoute exact path={RoutePath.NOT_FOUND} component={NotFoundPage} />
+        <AppRoute
+          exact
+          path={RoutePath.INTERVENTION_NOT_AVAILABLE}
+          component={InterventionNotAvailablePage}
+        />
         <AppRoute path={WILDCARD_PATH}>
           <Redirect to={RoutePath.NOT_FOUND} />
         </AppRoute>

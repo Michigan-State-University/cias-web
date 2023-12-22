@@ -27,6 +27,7 @@ import {
   Sex,
 } from 'models/HfhsPatient';
 import { ApiMessageError } from 'models/Api';
+import { QuestionTypes } from 'models/Question';
 
 import { nameValidationSchema } from 'utils/validators';
 import { getUTCDateString } from 'utils/dateUtils';
@@ -50,7 +51,6 @@ import { formatPhoneNumberForHfhs, parsePhoneNumberFromHfhs } from '../utils';
 import { ActionButtons } from '../components/ActionButtons';
 import { ApiErrorMessage } from '../components/ApiErrorMessage';
 import messages from './messages';
-import { QuestionTypes } from '../../../models/Question';
 
 const inputStyles = {
   width: '100%',

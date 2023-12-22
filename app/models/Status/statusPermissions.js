@@ -1,24 +1,47 @@
-import { draft, published, closed, archived } from './StatusTypes';
+import { InterventionStatus } from 'models/Intervention';
 
-const ALLOWED_EDIT = [draft];
+const ALLOWED_EDIT = [InterventionStatus.DRAFT];
 
-const ALLOWED_PREVIEW = [draft];
+const ALLOWED_PREVIEW = [InterventionStatus.DRAFT];
 
-const ALLOWED_INVITING_PARTICIPANTS = [published];
+const ALLOWED_INVITING_PARTICIPANTS = [InterventionStatus.PUBLISHED];
 
-const ALLOWED_CREATING_PREDEFINED_PARTICIPANTS = [draft, published];
+const ALLOWED_COPYING_INVITATION_LINK = [
+  InterventionStatus.DRAFT,
+  InterventionStatus.PUBLISHED,
+  InterventionStatus.PAUSED,
+];
 
-const ALLOWED_ARCHIVE = [draft, closed];
+const ALLOWED_CREATING_PREDEFINED_PARTICIPANTS = [
+  InterventionStatus.DRAFT,
+  InterventionStatus.PUBLISHED,
+  InterventionStatus.PAUSED,
+];
 
-const ALLOWED_CHANGING_ACCESS_SETTINGS = [draft];
+const ALLOWED_CHANGING_ACCESS_SETTINGS = [InterventionStatus.DRAFT];
 
-const ALLOWED_ADDING_PARTICIPANTS_TO_INTERVENTION = [draft, published];
+const ALLOWED_ADDING_PARTICIPANTS_TO_INTERVENTION = [
+  InterventionStatus.DRAFT,
+  InterventionStatus.PUBLISHED,
+  InterventionStatus.PAUSED,
+];
 
-const ALLOWED_REMOVING_PARTICIPANTS_FROM_INTERVENTION = [draft, published];
+const ALLOWED_REMOVING_PARTICIPANTS_FROM_INTERVENTION = [
+  InterventionStatus.DRAFT,
+  InterventionStatus.PUBLISHED,
+  InterventionStatus.PAUSED,
+];
 
-const ALLOWED_ENABLE_CHAT = [draft, published];
+const ALLOWED_ENABLE_CHAT = [
+  InterventionStatus.DRAFT,
+  InterventionStatus.PUBLISHED,
+  InterventionStatus.PAUSED,
+];
 
-const ALLOWED_CLEAR_INTERVENTION_DATA = [closed, archived];
+const ALLOWED_CLEAR_INTERVENTION_DATA = [
+  InterventionStatus.CLOSED,
+  InterventionStatus.ARCHIVED,
+];
 
 export const canEdit = (interventionStatus) =>
   ALLOWED_EDIT.includes(interventionStatus);
@@ -29,11 +52,11 @@ export const canPreview = (interventionStatus) =>
 export const canInviteParticipants = (interventionStatus) =>
   ALLOWED_INVITING_PARTICIPANTS.includes(interventionStatus);
 
+export const canCopyInvitationLink = (interventionStatus) =>
+  ALLOWED_COPYING_INVITATION_LINK.includes(interventionStatus);
+
 export const canCreatePredefinedParticipants = (interventionStatus) =>
   ALLOWED_CREATING_PREDEFINED_PARTICIPANTS.includes(interventionStatus);
-
-export const canArchive = (interventionStatus) =>
-  ALLOWED_ARCHIVE.includes(interventionStatus);
 
 export const canChangeAccessSettings = (interventionStatus) =>
   ALLOWED_CHANGING_ACCESS_SETTINGS.includes(interventionStatus);

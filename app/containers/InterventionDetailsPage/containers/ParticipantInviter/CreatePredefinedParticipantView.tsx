@@ -8,11 +8,9 @@ import {
   makeSelectInterventionLoader,
 } from 'global/reducers/intervention';
 
-import { themeColors } from 'theme';
-
 import Column from 'components/Column';
 import { SelectOption } from 'components/Select/types';
-import { Alert } from 'components/Alert';
+import { Alert, AlertType } from 'components/Alert';
 
 import { InviteParticipantsModalBackButton } from './InviteParticipantsModalBackButton';
 import {
@@ -73,7 +71,7 @@ export const CreatePredefinedParticipantView: FC<Props> = ({
       />
       <Alert
         content={formatMessage(messages.predefinedParticipantsInfo)}
-        background={themeColors.highlight}
+        type={AlertType.INFO}
         contentProps={{ maxWidth: 510 }}
       />
       <Column flex={1}>

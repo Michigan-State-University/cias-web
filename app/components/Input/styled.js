@@ -108,6 +108,19 @@ export const DatePickerWrapper = styled.div`
       &__month-option {
         background-color: ${colors.linkWater};
       }
+
+      &__time-list-item {
+        &:hover {
+          color: ${colors.white};
+          background-color: ${Color(colors.orchid)
+            .alpha(0.7)
+            .toString()} !important;
+        }
+
+        &--selected {
+          background-color: ${colors.orchid} !important;
+        }
+      }
     }
   }
 

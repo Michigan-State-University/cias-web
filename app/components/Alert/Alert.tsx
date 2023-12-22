@@ -1,4 +1,4 @@
-import React, { CSSProperties, FC } from 'react';
+import React, { FC } from 'react';
 import { useIntl } from 'react-intl';
 import { themeColors } from 'theme';
 
@@ -17,20 +17,29 @@ import {
   TextProps,
 } from 'components/BaseComponentStyles';
 
+import { AlertType } from './types';
+import { getBackgroundColorByType } from './utils';
+
 export type Props = {
   content: string;
   contentProps?: Partial<
     TextProps & MarginProps & LayoutProps & PositioningProps
   >;
   onDismiss?: () => void;
-  background: CSSProperties['background'];
+  type: AlertType;
+  wrap?: boolean;
+  noIcon?: boolean;
+  centered?: boolean;
 } & Partial<MarginProps & LayoutProps & PositioningProps>;
 
 export const Alert: FC<Props> = ({
   content,
   contentProps,
   onDismiss,
-  background,
+  type,
+  wrap = true,
+  noIcon = false,
+  centered = false,
   ...props
 }) => {
   const { formatMessage } = useIntl();
@@ -41,14 +50,14 @@ export const Alert: FC<Props> = ({
       py={12}
       px={16}
       gap={16}
-      justify="between"
-      flexWrap="wrap"
-      background={background}
+      justify={centered ? 'center' : 'between'}
+      flexWrap={wrap ? 'wrap' : 'nowrap'}
+      background={getBackgroundColorByType(type)}
       {...props}
     >
-      <Row gap={12} align="center" flexWrap="wrap">
-        <Icon src={WarningIcon} stroke={themeColors.text} />
-        <Text fontSize={15} lineHeight={1.3} {...contentProps}>
+      <Row gap={12} align="center" flexWrap={wrap ? 'wrap' : 'nowrap'}>
+        {!noIcon && <Icon src={WarningIcon} stroke={themeColors.text} />}
+        <Text fontSize={15} lineHeight={1.3} textAlign="left" {...contentProps}>
           {content}
         </Text>
       </Row>

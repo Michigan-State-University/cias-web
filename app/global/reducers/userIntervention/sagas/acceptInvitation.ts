@@ -1,12 +1,15 @@
 import axios from 'axios';
 import { call, takeLatest, put } from 'redux-saga/effects';
-import { push } from 'connected-react-router';
+import { push, replace } from 'connected-react-router';
 import { toast } from 'react-toastify';
 
 import { RoutePath } from 'global/constants';
 
 import { formatMessage } from 'utils/intlOutsideReact';
 import { parametrizeRoutePath } from 'utils/router';
+import { formatApiErrorMessage } from 'utils/formatApiErrorMessage';
+
+import { getInterventionNotAvailablePagePathFromApiError } from 'components/InterventionNotAvailableInfo';
 
 import { ACCEPT_INTERVENTION_INVITE } from '../constants';
 import { acceptInterventionInvite } from '../actions';
@@ -47,10 +50,20 @@ export function* acceptInvitation({
       );
     }
   } catch (error) {
+    const redirectPath = getInterventionNotAvailablePagePathFromApiError(error);
+    if (redirectPath) {
+      yield put(replace(redirectPath));
+      return;
+    }
+
     yield put(push(`/`));
-    yield call(toast.error, formatMessage(messages.acceptInvitation), {
-      toastId: ACCEPT_INTERVENTION_INVITE,
-    });
+    yield call(
+      toast.error,
+      formatApiErrorMessage(error, messages.acceptInvitation),
+      {
+        toastId: ACCEPT_INTERVENTION_INVITE,
+      },
+    );
   }
 }
 

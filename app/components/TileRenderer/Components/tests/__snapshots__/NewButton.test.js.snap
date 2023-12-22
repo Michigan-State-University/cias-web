@@ -36,12 +36,11 @@ exports[`<NewButton /> Should render and match the loading snapshot 1`] = `
   height: 160px;
   box-shadow: 0px 4px 20px #E3EEFB;
   border-radius: 8px;
-  margin-bottom: 20px;
+  margin-bottom: 10px;
   display: -webkit-box;
   display: -webkit-flex;
   display: -ms-flexbox;
   display: flex;
-  cursor: pointer;
   -webkit-flex-direction: column;
   -ms-flex-direction: column;
   flex-direction: column;
@@ -52,6 +51,7 @@ exports[`<NewButton /> Should render and match the loading snapshot 1`] = `
   -webkit-justify-content: space-between;
   -ms-flex-pack: justify;
   justify-content: space-between;
+  cursor: pointer;
   background-color: rgba(183,39,234,1);
   color: rgba(255,255,255,1);
   -webkit-box-pack: center;
@@ -66,6 +66,7 @@ exports[`<NewButton /> Should render and match the loading snapshot 1`] = `
   -webkit-box-align: center;
   -ms-flex-align: center;
   align-items: center;
+  opacity: 1;
 }
 
 <div
@@ -88,12 +89,11 @@ exports[`<NewButton /> Should render and match the snapshot 1`] = `
   height: 160px;
   box-shadow: 0px 4px 20px #E3EEFB;
   border-radius: 8px;
-  margin-bottom: 20px;
+  margin-bottom: 10px;
   display: -webkit-box;
   display: -webkit-flex;
   display: -ms-flexbox;
   display: flex;
-  cursor: pointer;
   -webkit-flex-direction: column;
   -ms-flex-direction: column;
   flex-direction: column;
@@ -104,6 +104,7 @@ exports[`<NewButton /> Should render and match the snapshot 1`] = `
   -webkit-justify-content: space-between;
   -ms-flex-pack: justify;
   justify-content: space-between;
+  cursor: pointer;
   background-color: rgba(183,39,234,1);
   color: rgba(255,255,255,1);
   -webkit-box-pack: center;
@@ -118,6 +119,7 @@ exports[`<NewButton /> Should render and match the snapshot 1`] = `
   -webkit-box-align: center;
   -ms-flex-align: center;
   align-items: center;
+  opacity: 1;
 }
 
 .c2 {

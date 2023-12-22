@@ -137,4 +137,5 @@ export const TIMEZONES = [
 
 export const defaultTimeZone = 'America/New_York';
 
-export const clientTimeZone = Intl.DateTimeFormat().resolvedOptions().timeZone;
+export const guestClientTimeZone = () =>
+  Intl.DateTimeFormat().resolvedOptions().timeZone;

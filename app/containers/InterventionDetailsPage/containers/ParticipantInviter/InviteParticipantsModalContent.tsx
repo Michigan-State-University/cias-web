@@ -6,6 +6,7 @@ import { InterventionStatus, InterventionType } from 'models/Intervention';
 import { Session } from 'models/Session';
 import { Organization } from 'models/Organization';
 import {
+  canCopyInvitationLink,
   canCreatePredefinedParticipants,
   canInviteParticipants,
 } from 'models/Status/statusPermissions';
@@ -172,6 +173,8 @@ export const InviteParticipantsModalContent: FC<Props> = ({
   };
 
   const invitingPossible = canInviteParticipants(interventionStatus);
+  const copyingInvitationLinkPossible =
+    canCopyInvitationLink(interventionStatus);
   const creatingPredefinedParticipantsPossible =
     canCreatePredefinedParticipants(interventionStatus);
 
@@ -193,6 +196,7 @@ export const InviteParticipantsModalContent: FC<Props> = ({
               interventionId={interventionId}
               interventionName={interventionName}
               invitingPossible={invitingPossible}
+              copyingInvitationLinkPossible={copyingInvitationLinkPossible}
               creatingPredefinedParticipantsPossible={
                 creatingPredefinedParticipantsPossible
               }

@@ -125,7 +125,10 @@ export const EmailParticipantsTab: FC<Props> = ({
             normalizedHealthClinicsInfos={normalizedHealthClinicsInfos}
             interventionName={interventionName}
           />
-          <UploadEmailsButton onClick={onUploadEmails} />
+          <UploadEmailsButton
+            onClick={onUploadEmails}
+            disabled={!invitingPossible}
+          />
         </Row>
       </Row>
       <Box overflow="auto" maxHeight="100%">

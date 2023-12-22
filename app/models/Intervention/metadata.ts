@@ -14,6 +14,9 @@ export const STATUS_METADATA: Record<
   [InterventionStatus.PUBLISHED]: {
     isEditable: false,
   },
+  [InterventionStatus.PAUSED]: {
+    isEditable: false,
+  },
   [InterventionStatus.CLOSED]: {
     isEditable: false,
   },

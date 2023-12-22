@@ -4,8 +4,8 @@ import { toast } from 'react-toastify';
 
 import { jsonApiToObject } from 'utils/jsonApiMapper';
 import objectKeysToSnakeCase from 'utils/objectToSnakeCase';
-import { formatMessage } from 'utils/intlOutsideReact';
 import { getObjectKeysWithoutIds } from 'utils/getObjectKeys';
+import { formatApiErrorMessage } from 'utils/formatApiErrorMessage';
 
 import { EDIT_CLINIC_REQUEST } from '../constants';
 import { editClinicFailure, editClinicSuccess } from '../actions';
@@ -30,7 +30,7 @@ export function* editClinic({ payload: { clinic } }) {
     const objectKeys = getObjectKeysWithoutIds(clinic);
     yield call(
       toast.error,
-      formatMessage(messages.editEntityError, {
+      formatApiErrorMessage(error, messages.editEntityError, {
         properties: objectKeys.join(', '),
         propertiesCount: objectKeys.length,
       }),

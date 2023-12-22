@@ -13,6 +13,10 @@ export default defineMessages<InterventionStatus>({
     id: `${scope}.published`,
     defaultMessage: 'Published',
   },
+  [InterventionStatus.PAUSED]: {
+    id: `${scope}.paused`,
+    defaultMessage: 'Paused',
+  },
   [InterventionStatus.CLOSED]: {
     id: `${scope}.closed`,
     defaultMessage: 'Closed',

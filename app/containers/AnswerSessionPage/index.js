@@ -468,6 +468,7 @@ export function AnswerSessionPage({
       currentQuestion.loading || nextQuestionLoading || answer?.loading;
 
     const isNumericQuestion = currentQuestion.type === QuestionTypes.NUMBER;
+    const isCurrencyQuestion = currentQuestion.type === QuestionTypes.CURRENCY;
 
     const isAnswered = () => {
       if (!answer) {
@@ -492,13 +493,17 @@ export function AnswerSessionPage({
           if (maxLength) return numberOfDigits <= maxLength;
           return true;
         }
+        case QuestionTypes.CURRENCY: {
+          const { value } = answerBody[0] ?? {};
+          return value && !!value.match(/\d/);
+        }
         default:
           return true;
       }
     };
 
     const isButtonDisabled = () =>
-      (required || isNumericQuestion) && !isAnswered();
+      (required || isNumericQuestion || isCurrencyQuestion) && !isAnswered();
 
     const sharedProps = {
       selectAnswer: selectAnswerProp,

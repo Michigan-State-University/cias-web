@@ -1,22 +1,25 @@
 import { colors, themeColors } from 'theme';
 
-export const draft = 'draft';
-export const published = 'published';
-export const closed = 'closed';
-export const archived = 'archived';
+import { InterventionStatus } from 'models/Intervention';
 
-export const INITIAL_STATUSES_FILTER_VALUE = [draft, published].sort();
+export const INITIAL_STATUSES_FILTER_VALUE = [
+  InterventionStatus.DRAFT,
+  InterventionStatus.PUBLISHED,
+  InterventionStatus.PAUSED,
+].sort();
 
 export const statusTypeToColorMap = {
-  [draft]: themeColors.primary,
-  [published]: colors.pistachio,
-  [closed]: colors.burntSienna,
-  [archived]: colors.black,
+  [InterventionStatus.DRAFT]: themeColors.primary,
+  [InterventionStatus.PUBLISHED]: colors.pistachio,
+  [InterventionStatus.PAUSED]: colors.rawUmber,
+  [InterventionStatus.CLOSED]: colors.burntSienna,
+  [InterventionStatus.ARCHIVED]: colors.black,
 };
 
 export const statusTypeToFontColorMap = {
-  [draft]: colors.white,
-  [published]: colors.white,
-  [closed]: colors.white,
-  [archived]: colors.white,
+  [InterventionStatus.DRAFT]: colors.white,
+  [InterventionStatus.PUBLISHED]: colors.white,
+  [InterventionStatus.PAUSED]: colors.white,
+  [InterventionStatus.CLOSED]: colors.white,
+  [InterventionStatus.ARCHIVED]: colors.white,
 };
