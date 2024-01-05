@@ -29,11 +29,7 @@ import {
 import { ApiMessageError } from 'models/Api';
 import { QuestionTypes } from 'models/Question';
 
-import {
-  nameValidationSchema,
-  requiredValidationSchema,
-  requiredDateValidationSchema,
-} from 'utils/validators';
+import { nameValidationSchema } from 'utils/validators';
 import { getUTCDateString } from 'utils/dateUtils';
 
 import { makeSelectInterventionFixedElementsDirection } from 'global/reducers/globalState';
@@ -83,22 +79,17 @@ export type PatientDataFormValues = Pick<
 const schema = (formatMessage: IntlShape['formatMessage']) =>
   Yup.object()
     .shape({
-      firstName: nameValidationSchema.concat(requiredValidationSchema),
-      lastName: nameValidationSchema.concat(requiredValidationSchema),
-      sexOption: Yup.object()
-        .required(formatMessage(validatorsMessages.required))
-        .nullable(),
-      dobDate: requiredDateValidationSchema,
-      zipCode: requiredValidationSchema.matches(
-        zipCodeRegex,
-        formatMessage(validatorsMessages.zipCode),
-      ),
-      phoneTypeOption: Yup.object()
-        .required(formatMessage(validatorsMessages.required))
-        .nullable(),
+      firstName: nameValidationSchema,
+      lastName: nameValidationSchema,
+      sexOption: Yup.object().nullable(),
+      dobDate: Yup.date().nullable(),
+      zipCode: Yup.string()
+        .trim()
+        .matches(zipCodeRegex, formatMessage(validatorsMessages.zipCode)),
+      phoneTypeOption: Yup.object().nullable(),
     })
     // @ts-ignore
-    .concat(phoneNumberSchema(formatMessage, true, false));
+    .concat(phoneNumberSchema(formatMessage, false, true));
 
 enum PatientDataFormError {
   BASE_DATA_VERIFICATION,
@@ -172,16 +163,18 @@ const HenryFordInitialScreenLayout = ({
     const { sex, dob, phoneNumber, phoneType, ...restValues } =
       hfhsPatientDetail;
 
-    const parsedPhone = parsePhoneNumberFromHfhs(phoneNumber);
+    const parsedPhone = phoneNumber
+      ? parsePhoneNumberFromHfhs(phoneNumber)
+      : undefined;
 
     return {
       sexOption: sexSelectOptions.current.find(({ value }) => value === sex),
-      dobDate: new Date(dob),
+      dobDate: dob ? new Date(dob) : null,
       iso: {
         value: parsedPhone?.country ?? DEFAULT_COUNTRY_CODE,
         label: '',
       },
-      number: parsedPhone?.formatNational() ?? '',
+      number: parsedPhone ? parsedPhone.formatNational() : '',
       phoneTypeOption: phoneTypeSelectOptions.current.find(
         ({ value }) => value === phoneType,
       ),
@@ -199,10 +192,13 @@ const HenryFordInitialScreenLayout = ({
 
     onSubmitPatientData({
       ...restValues,
-      sex: sexOption!.value,
-      dob: getUTCDateString(dobDate!),
-      phoneNumber: formatPhoneNumberForHfhs({ iso: iso!.value, number }),
-      phoneType: phoneTypeOption!.value,
+      sex: sexOption?.value,
+      dob: dobDate ? getUTCDateString(dobDate) : '',
+      phoneNumber:
+        iso && number
+          ? formatPhoneNumberForHfhs({ iso: iso.value, number })
+          : '',
+      phoneType: phoneTypeOption?.value,
     });
   };
 
