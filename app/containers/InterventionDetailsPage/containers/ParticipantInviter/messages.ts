@@ -233,16 +233,26 @@ export default defineMessages({
     id: `${scope}.activatePredefinedParticipantButtonTitle`,
     defaultMessage: `Reactivate participant`,
   },
-  predefinedParticipantSmsInvitationLabel: {
-    id: `${scope}.predefinedParticipantSmsInvitationLabel`,
-    defaultMessage: `SMS invitation`,
+  predefinedParticipantInvitationLabel: {
+    id: `${scope}.predefinedParticipantInvitationLabel`,
+    defaultMessage: `Participant invitation`,
   },
+  predefinedParticipantSmsAndEmailInvitationSent: {
+    id: `${scope}.predefinedParticipantSmsAndEmailInvitationSent`,
+    defaultMessage: `Invitation sent by SMS ({smsDate}) and e-mail ({emailDate})`,
+  },
+
   predefinedParticipantSmsInvitationSent: {
-    id: `${scope}.predefinedParticipantSmsInvitationSent`,
-    defaultMessage: `Last SMS invitation was sent on {date}`,
+    id: `${scope}.predefinedParticipantSmsAndEmailInvitationSent`,
+    defaultMessage: `Invitation sent by SMS ({smsDate})`,
   },
-  predefinedParticipantSmsInvitationNotSent: {
-    id: `${scope}.predefinedParticipantSmsInvitationNotSent`,
+
+  predefinedParticipantEmailInvitationSent: {
+    id: `${scope}.predefinedParticipantSmsAndEmailInvitationSent`,
+    defaultMessage: `Invitation sent by e-mail ({emailDate})`,
+  },
+  predefinedParticipantInvitationNotSent: {
+    id: `${scope}.predefinedParticipantInvitationNotSent`,
     defaultMessage: `This participant didn’t receive an invitation yet`,
   },
   predefinedParticipantSendSmsInvitationButtonTitle: {
@@ -252,5 +262,13 @@ export default defineMessages({
   predefinedParticipantResendSmsInvitationButtonTitle: {
     id: `${scope}.predefinedParticipantResendSmsInvitationButtonTitle`,
     defaultMessage: `Resend SMS invitation`,
+  },
+  predefinedParticipantSendEmailInvitationButtonTitle: {
+    id: `${scope}.predefinedParticipantSendEmailInvitationButtonTitle`,
+    defaultMessage: `Send e-mail invitation`,
+  },
+  predefinedParticipantResendEmailInvitationButtonTitle: {
+    id: `${scope}.predefinedParticipantResendEmailInvitationButtonTitle`,
+    defaultMessage: `Resend e-mail invitation`,
   },
 });

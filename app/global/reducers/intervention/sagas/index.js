@@ -33,6 +33,7 @@ import updatePredefinedParticipantSaga from './updatePredefinedParticipant';
 import deactivatePredefinedParticipantSaga from './deactivatePredefinedParticipant';
 import activatePredefinedParticipantSaga from './activatePredefinedParticipant';
 import sendPredefinedParticipantSmsInvitationSaga from './sendPredefinedParticipantSmsInvitation';
+import sendPredefinedParticipantEmailInvitationSaga from './sendPredefinedParticipantEmailInvitation';
 
 export * from './onCollaboratorRemovedReceive';
 export * from './refreshInterventionData';
@@ -74,6 +75,7 @@ export {
   deactivatePredefinedParticipantSaga,
   activatePredefinedParticipantSaga,
   sendPredefinedParticipantSmsInvitationSaga,
+  sendPredefinedParticipantEmailInvitationSaga,
 };
 
 export default function* allInterventionSagas() {
@@ -110,6 +112,7 @@ export default function* allInterventionSagas() {
     deactivatePredefinedParticipantSaga(),
     activatePredefinedParticipantSaga(),
     sendPredefinedParticipantSmsInvitationSaga(),
+    sendPredefinedParticipantEmailInvitationSaga(),
   ]);
 }
 

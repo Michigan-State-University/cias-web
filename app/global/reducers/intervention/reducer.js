@@ -135,6 +135,9 @@ import {
   SEND_PREDEFINED_PARTICIPANT_SMS_INVITATION_REQUEST,
   SEND_PREDEFINED_PARTICIPANT_SMS_INVITATION_SUCCESS,
   SEND_PREDEFINED_PARTICIPANT_SMS_INVITATION_ERROR,
+  SEND_PREDEFINED_PARTICIPANT_EMAIL_INVITATION_REQUEST,
+  SEND_PREDEFINED_PARTICIPANT_EMAIL_INVITATION_SUCCESS,
+  SEND_PREDEFINED_PARTICIPANT_EMAIL_INVITATION_ERROR,
 } from './constants';
 
 export const initialState = {
@@ -178,6 +181,7 @@ export const initialState = {
     deactivatePredefinedParticipant: false,
     activatePredefinedParticipant: false,
     sendPredefinedParticipantSmsInvitation: false,
+    sendPredefinedParticipantEmailInvitation: false,
   },
   errors: {
     fetchInterventionError: null,
@@ -870,6 +874,25 @@ export const interventionReducer = (state = initialState, action) =>
       }
       case SEND_PREDEFINED_PARTICIPANT_SMS_INVITATION_ERROR: {
         draft.loaders.sendPredefinedParticipantSmsInvitation = false;
+        break;
+      }
+
+      case SEND_PREDEFINED_PARTICIPANT_EMAIL_INVITATION_REQUEST: {
+        draft.loaders.sendPredefinedParticipantEmailInvitation = true;
+        break;
+      }
+      case SEND_PREDEFINED_PARTICIPANT_EMAIL_INVITATION_SUCCESS: {
+        const { participantId, emailInvitationSentAt } = action.payload;
+        if (draft.predefinedParticipants) {
+          updateItemById(draft.predefinedParticipants, participantId, {
+            emailInvitationSentAt,
+          });
+        }
+        draft.loaders.sendPredefinedParticipantEmailInvitation = false;
+        break;
+      }
+      case SEND_PREDEFINED_PARTICIPANT_EMAIL_INVITATION_ERROR: {
+        draft.loaders.sendPredefinedParticipantEmailInvitation = false;
         break;
       }
     }

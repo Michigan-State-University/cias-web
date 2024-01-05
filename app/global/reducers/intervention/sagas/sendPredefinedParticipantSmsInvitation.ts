@@ -14,6 +14,7 @@ import {
 import {
   SEND_PREDEFINED_PARTICIPANT_SMS_INVITATION_ERROR,
   SEND_PREDEFINED_PARTICIPANT_SMS_INVITATION_REQUEST,
+  SEND_PREDEFINED_PARTICIPANT_SMS_INVITATION_SUCCESS,
 } from '../constants';
 import messages from '../messages';
 
@@ -40,7 +41,7 @@ function* sendPredefinedParticipantSmsInvitation({
       toast.success,
       formatMessage(messages.sendPredefinedParticipantSmsInvitationSuccess),
       {
-        toastId: SEND_PREDEFINED_PARTICIPANT_SMS_INVITATION_ERROR,
+        toastId: SEND_PREDEFINED_PARTICIPANT_SMS_INVITATION_SUCCESS,
       },
     );
   } catch (error) {

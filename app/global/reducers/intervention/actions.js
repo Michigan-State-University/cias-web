@@ -120,6 +120,9 @@ import {
   SEND_PREDEFINED_PARTICIPANT_SMS_INVITATION_REQUEST,
   SEND_PREDEFINED_PARTICIPANT_SMS_INVITATION_SUCCESS,
   SEND_PREDEFINED_PARTICIPANT_SMS_INVITATION_ERROR,
+  SEND_PREDEFINED_PARTICIPANT_EMAIL_INVITATION_REQUEST,
+  SEND_PREDEFINED_PARTICIPANT_EMAIL_INVITATION_SUCCESS,
+  SEND_PREDEFINED_PARTICIPANT_EMAIL_INVITATION_ERROR,
 } from './constants';
 
 export const fetchInterventionRequest = (id, showLoader = false) =>
@@ -553,3 +556,22 @@ export const sendPredefinedParticipantSmsInvitationSuccess = (
   });
 export const sendPredefinedParticipantSmsInvitationError = () =>
   actionBuilder(SEND_PREDEFINED_PARTICIPANT_SMS_INVITATION_ERROR, {});
+
+export const sendPredefinedParticipantEmailInvitationRequest = (
+  interventionId,
+  participantId,
+) =>
+  actionBuilder(SEND_PREDEFINED_PARTICIPANT_EMAIL_INVITATION_REQUEST, {
+    interventionId,
+    participantId,
+  });
+export const sendPredefinedParticipantEmailInvitationSuccess = (
+  participantId,
+  emailInvitationSentAt,
+) =>
+  actionBuilder(SEND_PREDEFINED_PARTICIPANT_EMAIL_INVITATION_SUCCESS, {
+    participantId,
+    emailInvitationSentAt,
+  });
+export const sendPredefinedParticipantEmailInvitationError = () =>
+  actionBuilder(SEND_PREDEFINED_PARTICIPANT_EMAIL_INVITATION_ERROR, {});
