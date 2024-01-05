@@ -243,12 +243,12 @@ export default defineMessages({
   },
 
   predefinedParticipantSmsInvitationSent: {
-    id: `${scope}.predefinedParticipantSmsAndEmailInvitationSent`,
+    id: `${scope}.predefinedParticipantSmsInvitationSent`,
     defaultMessage: `Invitation sent by SMS ({smsDate})`,
   },
 
   predefinedParticipantEmailInvitationSent: {
-    id: `${scope}.predefinedParticipantSmsAndEmailInvitationSent`,
+    id: `${scope}.predefinedParticipantEmailInvitationSent`,
     defaultMessage: `Invitation sent by e-mail ({emailDate})`,
   },
   predefinedParticipantInvitationNotSent: {
