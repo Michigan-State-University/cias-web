@@ -244,7 +244,6 @@ const ApprovableInput = ({
             popperProps={{
               positionFixed: true,
             }}
-            strictParsing
           />
         </DatePickerWrapper>
       );
