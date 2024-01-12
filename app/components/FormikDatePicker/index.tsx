@@ -91,6 +91,7 @@ const FormikDatePicker = ({
           }}
           timeCaption={formatMessage(messages.timeCaption)}
           showTimeSelect={selectTime}
+          strictParsing
           {...datePickerProps}
         />
       </DatePickerWrapper>

@@ -1,37 +1,34 @@
-import React, { ComponentProps, forwardRef, KeyboardEventHandler } from 'react';
+import React, { ComponentProps, forwardRef, SyntheticEvent } from 'react';
 
 import { colors } from 'theme';
 
 import Input from './index';
+import { addSeparatorsToDateString } from './utils';
 
 export type Props = {} & ComponentProps<typeof Input>;
 
 export const DateInput = forwardRef<HTMLInputElement, Props>(
-  ({ disabled, onKeyUp, ...props }, ref) => {
-    const handleKeyUp: KeyboardEventHandler<HTMLInputElement> = (event) => {
-      console.log(event);
-
-      if (!['Backspace', 'Delete'].includes(event.key)) {
-        const mappedEvent = event.target as HTMLInputElement;
-        const { value } = mappedEvent;
-        const { length } = value;
-        const hyphensPositions = [2, 5];
-
-        const splitValue = value.split('-');
-
-        const endsWithHyphen = !splitValue[splitValue.length - 1];
-        const hyphensCount = splitValue.length - 1;
-
-        if (
-          !endsWithHyphen &&
-          hyphensCount < 2 &&
-          hyphensPositions.includes(length) // TODO change to checking split groups
-        ) {
-          mappedEvent.value += '-';
+  ({ disabled, onInput, ...props }, ref) => {
+    const handleInput = (
+      event: SyntheticEvent<HTMLInputElement, InputEventInit>,
+    ) => {
+      if (
+        event.nativeEvent.inputType &&
+        !['deleteContentBackward', 'deleteContentForward'].includes(
+          event.nativeEvent.inputType,
+        )
+      ) {
+        const inputElement = event.target as HTMLInputElement;
+        const modifiedValue = addSeparatorsToDateString(
+          inputElement.value,
+          '-',
+        );
+        if (modifiedValue !== inputElement.value) {
+          inputElement.value = modifiedValue;
         }
       }
 
-      onKeyUp?.(event);
+      onInput?.(event);
     };
 
     return (
@@ -42,7 +39,7 @@ export const DateInput = forwardRef<HTMLInputElement, Props>(
         textAlign="left"
         color={disabled ? colors.casper : colors.bluewood}
         {...props}
-        onKeyUp={handleKeyUp}
+        onInput={handleInput}
         ref={ref}
       />
     );
