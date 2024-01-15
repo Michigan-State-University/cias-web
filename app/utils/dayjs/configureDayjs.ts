@@ -9,12 +9,18 @@ import advancedFormat from 'dayjs/plugin/advancedFormat';
 import localizedFormat from 'dayjs/plugin/localizedFormat';
 import objectSupport from 'dayjs/plugin/objectSupport';
 
-import { DEFAULT_LOCALE } from 'i18n';
+import { DEFAULT_LOCALE, appLocales } from 'i18n';
 
 import { CustomLocalesConfig, RELATIVE_TIME_OPTIONS } from './constants';
 
-// Add imports for all new app languages here
-require('dayjs/locale/ar');
+appLocales.forEach((locale) => {
+  try {
+    // eslint-disable-next-line global-require
+    require(`dayjs/locale/${locale}.js`);
+  } catch (e) {
+    console.error(e);
+  }
+});
 
 export const configureDayjs = () => {
   // Load plugins
