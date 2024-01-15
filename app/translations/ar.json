@@ -740,7 +740,7 @@
   "app.containers.EditSessionPage.manageScreens": "",
   "app.containers.EditSessionPage.manageSlides": "",
   "app.containers.EditSessionPage.narratorVoiceType": "",
-  "app.containers.EditSessionPage.newQuestionMessage": "<p>أدخل العنوان هنا</p>",
+  "app.containers.EditSessionPage.newQuestionMessage": "<h2>أدخل العنوان هنا</h2>",
   "app.containers.EditSessionPage.newQuestionSubtitle": "<p>أدخل النص/السؤال الرئيسي للشاشة هنا</p>",
   "app.containers.EditSessionPage.noTestsData": "",
   "app.containers.EditSessionPage.pageTitle": "",
