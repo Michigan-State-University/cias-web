@@ -10,6 +10,7 @@
 
 const enTranslationMessages = require('./translations/en.json');
 const arTranslationMessages = require('./translations/ar.json');
+const esTranslationMessages = require('./translations/es.json');
 
 const DEFAULT_LOCALE = 'en';
 
@@ -17,6 +18,7 @@ const DEFAULT_LOCALE = 'en';
 const appLocales = [
   'en',
   'ar',
+  'es',
 ];
 
 const formatTranslationMessages = (locale, messages) => {
@@ -37,6 +39,7 @@ const formatTranslationMessages = (locale, messages) => {
 const translationMessages = {
   en: formatTranslationMessages('en', enTranslationMessages),
   ar: formatTranslationMessages('ar', arTranslationMessages),
+  es: formatTranslationMessages('es', esTranslationMessages),
 };
 
 const isAppLanguageSupported = (languageCode) =>
