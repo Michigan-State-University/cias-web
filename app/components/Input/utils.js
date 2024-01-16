@@ -1,5 +1,6 @@
 // eslint-disable-next-line no-unused-vars
 import ReactQuill from 'react-quill';
+import { dateStringGroupsMaxLengthsByIndex } from './constants';
 
 /**
  * Selects text in quill edit. By default selects the whole text.
@@ -36,3 +37,22 @@ export const getAriaLabelProps = ({
 }) => ({
   'aria-label': ariaLabel ?? (id || ariaLabelledBy ? undefined : placeholder),
 });
+
+export const addSeparatorsToDateString = (value, separator) => {
+  const splitGroups = value.split(separator);
+
+  const lastGroupIndex = splitGroups.length - 1;
+  const lastGroup = splitGroups[lastGroupIndex];
+  const endsWithHyphen = !lastGroup; // last group is empty string if ends with hyphen
+
+  const lastGroupMaxLength = dateStringGroupsMaxLengthsByIndex[lastGroupIndex];
+
+  const shouldAddHyphen =
+    lastGroupMaxLength != null && lastGroup.length >= lastGroupMaxLength;
+
+  if (!endsWithHyphen && shouldAddHyphen) {
+    return `${value}${separator}`;
+  }
+
+  return value;
+};
