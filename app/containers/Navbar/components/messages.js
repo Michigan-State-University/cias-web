@@ -74,6 +74,6 @@ export default defineMessages({
   },
   resourcesLinkTitle: {
     id: `${scope}.resourcesLinkTitle`,
-    defaultMessage: 'Resources',
+    defaultMessage: 'Support',
   },
 });

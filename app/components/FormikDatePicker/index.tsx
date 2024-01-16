@@ -4,12 +4,10 @@ import DatePicker, { ReactDatePickerProps } from 'react-datepicker';
 import isNil from 'lodash/isNil';
 import { useIntl } from 'react-intl';
 
-import { colors } from 'theme';
-
 import useDidUpdateEffect from 'utils/useDidUpdateEffect';
 
 import { DatePickerWrapper } from 'components/Input/styled';
-import Input from 'components/Input';
+import { DateInput, Props as DateInputProps } from 'components/Input/DateInput';
 
 import FormikControlLayout from '../FormikControlLayout';
 
@@ -21,7 +19,7 @@ export type Props = PropsWithChildren<{
   placeholder?: string;
   disabled?: boolean;
   datePickerProps?: Partial<ReactDatePickerProps>;
-  inputProps?: React.HTMLProps<HTMLButtonElement> & Record<string, unknown>;
+  inputProps?: DateInputProps;
   submitOnChange?: boolean;
   selectTime?: boolean;
 }> &
@@ -74,12 +72,8 @@ const FormikDatePicker = ({
           }
           dateFormat={selectTime ? 'MM-dd-yyyy, p' : 'MM-dd-yyyy'}
           customInput={
-            <Input
+            <DateInput
               disabled={disabled}
-              mx={0}
-              padding={12}
-              textAlign="left"
-              color={disabled ? colors.casper : colors.bluewood}
               hasError={hasError}
               {...inputProps}
             />
