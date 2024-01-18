@@ -29,6 +29,9 @@ export const InterventionNotAvailableInfo = ({ reason }: Props) => {
       case InterventionNotAvailableReason.SESSION_CLOSED: {
         return formatMessage(messages.moduleNotAvailableTitle);
       }
+      case InterventionNotAvailableReason.INTERVENTION_PAUSED: {
+        return formatMessage(messages.studyNotAvailableTemporarilyTitle);
+      }
       default: {
         return formatMessage(messages.studyNotAvailableTitle);
       }
@@ -40,10 +43,10 @@ export const InterventionNotAvailableInfo = ({ reason }: Props) => {
       <Helmet>
         <title>{pageTitle}</title>
       </Helmet>
-      <Column height="100%" justify="center" align="center">
-        <H1>{pageTitle}</H1>
+      <Column height="100%" justify="center" align="center" padding={24}>
+        <H1 textAlign="center">{pageTitle}</H1>
 
-        <H2 mt={10} fontWeight="regular">
+        <H2 mt={10} fontWeight="regular" textAlign="center">
           {isValidReason &&
             formatMessage(
               interventionNotAvailableReasonsMessages[

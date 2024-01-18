@@ -6,8 +6,6 @@ import 'react-datepicker/dist/react-datepicker.css';
 import ReactQuill from 'react-quill';
 import isNumber from 'lodash/isNumber';
 
-import { colors } from 'theme';
-
 import useOutsideClick from 'utils/useOutsideClick';
 import { formatMessage } from 'utils/intlOutsideReact';
 
@@ -18,6 +16,7 @@ import { DatePickerWrapper, QuillStyled } from './styled';
 import { TextArea } from './TextArea';
 import messages from './messages';
 import './QuillSinglelineHandler';
+import { DateInput } from './DateInput';
 
 const quillModules = {
   toolbar: {
@@ -225,12 +224,8 @@ const ApprovableInput = ({
             startDate={startDate}
             endDate={endDate}
             customInput={
-              <Input
+              <DateInput
                 disabled={disabled}
-                mx={0}
-                padding={12}
-                textAlign="left"
-                color={disabled ? colors.casper : colors.bluewood}
                 fontSize={fontSize}
                 height={height}
                 width={width}
