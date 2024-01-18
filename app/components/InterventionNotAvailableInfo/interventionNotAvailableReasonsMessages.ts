@@ -17,7 +17,7 @@ export default defineMessages<InterventionNotAvailableReason>({
   [InterventionNotAvailableReason.INTERVENTION_PAUSED]: {
     id: `${scope}.INTERVENTION_PAUSED`,
     defaultMessage:
-      'This study has been temporarily paused. Please try again later.',
+      'Please check with the research team or clinic to find out when it will resume, or try back later.',
   },
   [InterventionNotAvailableReason.SESSION_CLOSED]: {
     id: `${scope}.SESSION_CLOSED`,
