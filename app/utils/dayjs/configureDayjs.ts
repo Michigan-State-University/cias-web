@@ -13,6 +13,7 @@ import { DEFAULT_LOCALE } from 'i18n';
 
 import { CustomLocalesConfig, RELATIVE_TIME_OPTIONS } from './constants';
 
+// ! Add every used language apart from english
 require(`dayjs/locale/ar`);
 require(`dayjs/locale/es`);
 
