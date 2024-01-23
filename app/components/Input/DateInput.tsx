@@ -21,7 +21,7 @@ export const DateInput = forwardRef<HTMLInputElement, Props>(
         const inputElement = event.target as HTMLInputElement;
         const modifiedValue = addSeparatorsToDateString(
           inputElement.value,
-          '-',
+          '/',
         );
         if (modifiedValue !== inputElement.value) {
           inputElement.value = modifiedValue;
@@ -37,6 +37,8 @@ export const DateInput = forwardRef<HTMLInputElement, Props>(
         mx={0}
         padding={12}
         textAlign="left"
+        inputMode="numeric"
+        type="number"
         color={disabled ? colors.casper : colors.bluewood}
         {...props}
         onInput={handleInput}
