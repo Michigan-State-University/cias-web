@@ -217,8 +217,8 @@ const ApprovableInput = ({
             selected={value}
             onChange={(date) => onCheck(date)}
             onFocus={onFocus}
-            placeholderText={placeholder ?? 'MM-DD-YYYY'}
-            dateFormat="MM-dd-yyyy"
+            placeholderText={placeholder ?? 'MM/DD/YYYY'}
+            dateFormat="MM/dd/yyyy"
             selectsEnd={selectsEnd}
             selectsStart={selectsStart}
             startDate={startDate}
@@ -236,14 +236,7 @@ const ApprovableInput = ({
             showMonthDropdown
             showYearDropdown
             calendarClassName="schedule-date-picker"
-            popperModifiers={{
-              preventOverflow: {
-                padding: 10,
-              },
-            }}
-            popperProps={{
-              positionFixed: true,
-            }}
+            popperPlacement="bottom-start"
             strictParsing
           />
         </DatePickerWrapper>
