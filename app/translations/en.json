@@ -574,7 +574,7 @@
   "app.containers.AnswerSessionPage.RandomizationMissMatch": "Randomization was setup incorrectly and you were transitioned to next screen",
   "app.containers.AnswerSessionPage.ReflectionMissMatch": "There was a reflection error, because variables or score are not set up properly.",
   "app.containers.AnswerSessionPage.ZeroDivisionError": "Formula failed and you were transitioned to the next screen because there was division by 0.",
-  "app.containers.AnswerSessionPage.accessiBeIconAlt": "AccessiBe icon",
+  "app.containers.AnswerSessionPage.accessibilityIconAlt": "Accessibility widget icon",
   "app.containers.AnswerSessionPage.addEvent": "Add another event",
   "app.containers.AnswerSessionPage.backButton": "Back",
   "app.containers.AnswerSessionPage.backButtonDisabledCatMh": "Back navigation cannot be used in this session",
