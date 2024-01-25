@@ -97,6 +97,7 @@
     "currency-codes": "^2.1.0",
     "currency-flags": "^3.1.0",
     "dagre": "^0.8.5",
+    "date-fns": "^3.3.1",
     "dayjs": "1.10.7",
     "dompurify": "^2.4.0",
     "express": "4.16.4",
