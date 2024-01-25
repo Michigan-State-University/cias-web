@@ -44,6 +44,7 @@
   "app.components.AccountSettings.changeYourPhoneNumber": "Change your phone number",
   "app.components.AccountSettings.code": "Code from SMS",
   "app.components.AccountSettings.codeInfo": "In a moment, you should receive a text message with the code on your phone number <b>{phone}</b>. <br/> Enter the code you received into the form below to confirm the identity of the number.",
+  "app.components.AccountSettings.codeLength": "Code must consist of {length} digits",
   "app.components.AccountSettings.codeRequired": "Code is required",
   "app.components.AccountSettings.confirmCode": "Confirm your phone number",
   "app.components.AccountSettings.confirmCodeButton": "Confirm phone number",

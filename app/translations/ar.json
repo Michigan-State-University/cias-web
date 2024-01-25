@@ -44,6 +44,7 @@
   "app.components.AccountSettings.changeYourPhoneNumber": "",
   "app.components.AccountSettings.code": "",
   "app.components.AccountSettings.codeInfo": "",
+  "app.components.AccountSettings.codeLength": "",
   "app.components.AccountSettings.codeRequired": "",
   "app.components.AccountSettings.confirmCode": "",
   "app.components.AccountSettings.confirmCodeButton": "",
