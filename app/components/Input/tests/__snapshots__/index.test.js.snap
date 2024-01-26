@@ -149,6 +149,7 @@ exports[`<ApprovableInput /> Should render and match the snapshot as date input 
               dir="auto"
               font-size="14"
               height="50"
+              inputmode="numeric"
               placeholder="Placeholder"
               type="text"
               value=""
