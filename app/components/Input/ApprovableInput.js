@@ -236,7 +236,6 @@ const ApprovableInput = ({
           showMonthDropdown
           showYearDropdown
           calendarClassName="schedule-date-picker"
-          popperPlacement="bottom-start"
           strictParsing
         />
       );

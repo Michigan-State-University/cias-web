@@ -74,7 +74,6 @@ const FormikDatePicker = ({
         showMonthDropdown
         showYearDropdown
         calendarClassName="schedule-date-picker"
-        popperPlacement="bottom-start"
         timeCaption={formatMessage(messages.timeCaption)}
         showTimeSelect={selectTime}
         strictParsing

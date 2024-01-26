@@ -18,7 +18,19 @@ export const LocalizedDatePicker = (props: ReactDatePickerProps) => {
 
   return (
     <DatePickerWrapper>
-      <DatePicker locale={locale} {...props} />
+      <DatePicker<string>
+        popperModifiers={{
+          // @ts-ignore
+          preventOverflow: {
+            padding: 10,
+          },
+        }}
+        popperProps={{
+          placement: 'bottom-start',
+        }}
+        locale={locale}
+        {...props}
+      />
     </DatePickerWrapper>
   );
 };
