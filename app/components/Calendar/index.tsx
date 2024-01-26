@@ -107,6 +107,7 @@ export const Calendar = forwardRef<CalendarRef, CalendarProps>(
             calendarData={calendarData}
             disableManualDayClick={disableManualDayClick}
             orderedGroupNames={orderedGroupNames}
+            language={language}
           />
         </Container>
       </>
