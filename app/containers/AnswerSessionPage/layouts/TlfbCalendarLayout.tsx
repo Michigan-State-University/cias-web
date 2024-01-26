@@ -5,15 +5,13 @@ import { useSelector } from 'react-redux';
 
 import { TlfbConfigBody } from 'models/Question';
 import { CalendarData, DayData } from 'models/Tlfb';
-import {
-  dayNumeralFormatter,
-  fullDayOfWeekFormatter,
-  fullMonthNameFormatter,
-} from 'utils/formatters';
+import { weekdayAndDayOfMonthFormatter } from 'utils/formatters';
 import { CamelToSnake } from 'global/types/camelToSnake';
 import { makeSelectInterventionElementsLanguageCode } from 'global/reducers/globalState';
 
 import { ANSWER_SESSION_CONTAINER_ID } from 'containers/App/constants';
+import { makeSelectLocale } from 'containers/AppLanguageProvider';
+
 import Calendar from 'components/Calendar';
 import Modal, { PopoverModal } from 'components/Modal';
 import TlfbTitle from 'components/TlfbTitle';
@@ -65,6 +63,7 @@ const TlfbCalendarLayout = forwardRef<CalendarRef, Props>(
     ref,
   ) => {
     const language = useSelector(makeSelectInterventionElementsLanguageCode());
+    const appLocale = useSelector(makeSelectLocale());
 
     const onClose = () => {
       onSelectDay(undefined);
@@ -79,6 +78,13 @@ const TlfbCalendarLayout = forwardRef<CalendarRef, Props>(
     const shouldDisplayTitleRow = title || subtitle || !hideHelpingMaterials;
     const shouldDisplayLegend =
       isMobileView && some(calendarData, (day: DayData) => !!day.answer);
+
+    const mobileViewHeader = useMemo(() => {
+      if (!selectedDay) return '';
+      return `${selectedDay
+        .locale(language || appLocale)
+        .format(weekdayAndDayOfMonthFormatter)}`;
+    }, [selectedDay, language]);
 
     return (
       <TlfbContainer>
@@ -118,13 +124,7 @@ const TlfbCalendarLayout = forwardRef<CalendarRef, Props>(
             height={isMobile && !isMobilePreview ? '100vh' : '100%'}
             bg={colors.linkWater}
           >
-            <H1 fontSize={24}>
-              {selectedDay?.format(fullDayOfWeekFormatter)}
-              {', '}
-              {`${selectedDay?.format(
-                fullMonthNameFormatter,
-              )} ${selectedDay?.format(dayNumeralFormatter)}`}
-            </H1>
+            <H1 fontSize={24}>{mobileViewHeader}</H1>
             {children}
           </Modal>
         )}
