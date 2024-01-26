@@ -38,7 +38,6 @@ export const DateInput = forwardRef<HTMLInputElement, Props>(
         padding={12}
         textAlign="left"
         inputMode="numeric"
-        type="number"
         color={disabled ? colors.casper : colors.bluewood}
         {...props}
         onInput={handleInput}
