@@ -1,6 +1,7 @@
 import React, { forwardRef, useMemo } from 'react';
 import { Dayjs } from 'dayjs';
 import some from 'lodash/some';
+import { useSelector } from 'react-redux';
 
 import { TlfbConfigBody } from 'models/Question';
 import { CalendarData, DayData } from 'models/Tlfb';
@@ -10,6 +11,7 @@ import {
   fullMonthNameFormatter,
 } from 'utils/formatters';
 import { CamelToSnake } from 'global/types/camelToSnake';
+import { makeSelectInterventionElementsLanguageCode } from 'global/reducers/globalState';
 
 import { ANSWER_SESSION_CONTAINER_ID } from 'containers/App/constants';
 import Calendar from 'components/Calendar';
@@ -62,6 +64,8 @@ const TlfbCalendarLayout = forwardRef<CalendarRef, Props>(
     }: Props,
     ref,
   ) => {
+    const language = useSelector(makeSelectInterventionElementsLanguageCode());
+
     const onClose = () => {
       onSelectDay(undefined);
     };
@@ -96,6 +100,7 @@ const TlfbCalendarLayout = forwardRef<CalendarRef, Props>(
           calendarData={calendarData}
           disableManualDayClick={disableModalClose}
           orderedGroupNames={orderedGroupNames || []}
+          language={language}
         />
         {shouldDisplayLegend && (
           <Box mt={16}>
