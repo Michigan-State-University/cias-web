@@ -14,7 +14,7 @@ import { themeColors } from 'theme';
 import Checkbox from 'components/Checkbox';
 import FormikControlLayout from 'components/FormikControlLayout';
 
-function FormikCheckbox({ formikKey, children }) {
+function FormikCheckbox({ formikKey, children, ...props }) {
   const [field, meta, helpers] = useField(formikKey);
   const { value } = field;
   const { error, touched } = meta;
@@ -33,6 +33,7 @@ function FormikCheckbox({ formikKey, children }) {
         mr={10}
         checked={value}
         stroke={hasError && themeColors.warning}
+        {...props}
       >
         {children}
       </Checkbox>

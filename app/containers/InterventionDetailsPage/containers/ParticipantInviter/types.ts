@@ -77,6 +77,8 @@ export type PredefinedParticipantFormValues = {
   externalId: string;
   iso: Nullable<SelectOption<CountryCode>>;
   number: string;
+  smsNotification: boolean;
+  emailNotification: boolean;
 };
 
 export type NormalizedSessions = Record<Session['id'], Session>;
