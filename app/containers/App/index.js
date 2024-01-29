@@ -143,9 +143,7 @@ export function App({ user, fetchSelfDetails }) {
   }, [user]);
 
   useEffect(() => {
-    const appRoot = document.getElementById('app');
-
-    appRoot?.setAttribute('lang', locale);
+    document.documentElement.setAttribute('lang', locale);
   }, [locale]);
 
   const renderDashboardByRole = () => {
