@@ -36,13 +36,10 @@
 <!--  acc toolbar script -->
 <script src="https://cdn.jsdelivr.net/gh/HTD-Health/acc_toolbar@v1.0.2/acctoolbar/acctoolbar.min.js"></script>
 <script>
+  import { ACC_TOOLBAR_CONSTRUCTOR_ARGS } from './global/constants/accToolbar';
 // optional init
   window.onload = function() {
-    window.micAccessTool = new MicAccessTool({
-      reportLink: 'https://msu.co1.qualtrics.com/jfe/form/SV_6S9MV7pPpoqFwTY',
-      link: `${window.location.origin}/accessibility-statement`,
-
-    });
+    window.micAccessTool = new MicAccessTool(ACC_TOOLBAR_CONSTRUCTOR_ARGS);
   }
 </script>
 </body>

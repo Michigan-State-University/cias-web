@@ -90,6 +90,11 @@ import {
   archiveSubTabId,
 } from 'models/User/RolesManager/defaultNavbarTabs';
 
+import {
+  ACC_TOOLBAR_CONSTRUCTOR_ARGS,
+  ACC_TOOLBAR_ROOT_ID,
+} from 'global/constants/accToolbar';
+
 import { arraysOverlap } from 'utils/arrayUtils';
 
 import { MODAL_PORTAL_ID, TOOLTIP_PORTAL_ID } from './constants';
@@ -144,6 +149,11 @@ export function App({ user, fetchSelfDetails }) {
 
   useEffect(() => {
     document.documentElement.setAttribute('lang', locale);
+    const accToolbarWidget = window.micAccessTool;
+    if (accToolbarWidget) {
+      document.getElementById(ACC_TOOLBAR_ROOT_ID).remove();
+      accToolbarWidget.constructor(ACC_TOOLBAR_CONSTRUCTOR_ARGS);
+    }
   }, [locale]);
 
   const renderDashboardByRole = () => {
