@@ -68,9 +68,9 @@ const FormikDatePicker = ({
           disabled={disabled}
           selected={field.value}
           placeholderText={
-            placeholder ?? (selectTime ? 'MM-DD-YYYY, --:--' : 'MM-DD-YYYY')
+            placeholder ?? (selectTime ? 'MM/DD/YYYY, --:--' : 'MM/DD/YYYY')
           }
-          dateFormat={selectTime ? 'MM-dd-yyyy, p' : 'MM-dd-yyyy'}
+          dateFormat={selectTime ? 'MM/dd/yyyy, p' : 'MM/dd/yyyy'}
           customInput={
             <DateInput
               disabled={disabled}
@@ -87,7 +87,7 @@ const FormikDatePicker = ({
             },
           }}
           popperProps={{
-            positionFixed: true,
+            placement: 'bottom-start',
           }}
           timeCaption={formatMessage(messages.timeCaption)}
           showTimeSelect={selectTime}
