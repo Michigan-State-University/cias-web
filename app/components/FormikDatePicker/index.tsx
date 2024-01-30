@@ -61,7 +61,7 @@ const FormikDatePicker = ({
     >
       <LocalizedDatePicker
         {...field}
-        onChange={(value: string) => setValue(value)}
+        onChange={(value) => setValue(value)}
         disabled={disabled}
         selected={field.value}
         placeholderText={
