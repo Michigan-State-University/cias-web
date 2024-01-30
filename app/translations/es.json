@@ -94,7 +94,7 @@
   "app.components.AlertPhones`.SMSAlertRecipients": "",
   "app.components.AlertPhones`.addAnotherRecipient": "",
   "app.components.AlertPhones`.removeRecipient": "",
-  "app.components.AudioTextPreview.readText": "",
+  "app.components.AudioTextPreview.readText": "Lea el texto",
   "app.components.BoxCollapse.editItem": "",
   "app.components.Calendar.defaultEventName": "Evento",
   "app.components.Calendar.events": "Eventos",
