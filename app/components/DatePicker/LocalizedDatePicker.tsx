@@ -1,8 +1,6 @@
-import DatePicker, {
-  registerLocale,
-  ReactDatePickerProps,
-} from 'react-datepicker';
+import DatePicker, { registerLocale, ReactDatePicker } from 'react-datepicker';
 import { useSelector } from 'react-redux';
+import { forwardRef } from 'react';
 
 import es from 'date-fns/locale/es';
 
@@ -13,7 +11,7 @@ import { DatePickerWrapper } from './styled';
 // ! Add every used language apart from english
 registerLocale('es', es);
 
-export const LocalizedDatePicker = (props: ReactDatePickerProps) => {
+export const LocalizedDatePicker = forwardRef<ReactDatePicker>((props, ref) => {
   const locale = useSelector(makeSelectLocale());
 
   return (
@@ -30,7 +28,8 @@ export const LocalizedDatePicker = (props: ReactDatePickerProps) => {
         }}
         locale={locale}
         {...props}
+        ref={ref}
       />
     </DatePickerWrapper>
   );
-};
+});

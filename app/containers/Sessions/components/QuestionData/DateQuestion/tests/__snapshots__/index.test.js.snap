@@ -24,57 +24,6 @@ exports[`<DateQuestion /> Should render and match the snapshot 1`] = `
   width: 100%;
 }
 
-.c2 {
-  display: -webkit-box;
-  display: -webkit-flex;
-  display: -ms-flexbox;
-  display: flex;
-  -webkit-flex-direction: row;
-  -ms-flex-direction: row;
-  flex-direction: row;
-  height: auto;
-}
-
-.c3 {
-  display: -webkit-box;
-  display: -webkit-flex;
-  display: -ms-flexbox;
-  display: flex;
-  -webkit-flex-direction: row;
-  -ms-flex-direction: row;
-  flex-direction: row;
-  height: auto;
-  width: 100%;
-}
-
-.c7 {
-  padding: 12px;
-  border-style: solid;
-  border-width: 1px;
-  border-color: #E9F1FB;
-  border-radius: 5px;
-  margin-right: 10px;
-  margin-left: 10px;
-  width: 200px;
-  height: 50px;
-  padding: 12px;
-  font-size: 15px;
-  color: rgba(171,187,209,1);
-  text-align: left;
-  color: rgba(171,187,209,1);
-  opacity: 0.5;
-}
-
-.c7:focus {
-  box-shadow: none;
-  outline: none;
-  border-color: #107969;
-}
-
-.c7:disabled {
-  color: #ABBBD1;
-}
-
 .c6 .schedule-date-picker {
   font-family: DM Sans;
   background-color: #E9F1FB;
@@ -131,6 +80,57 @@ exports[`<DateQuestion /> Should render and match the snapshot 1`] = `
 
 .c6 .react-datepicker-wrapper {
   width: 100%;
+}
+
+.c2 {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-flex-direction: row;
+  -ms-flex-direction: row;
+  flex-direction: row;
+  height: auto;
+}
+
+.c3 {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-flex-direction: row;
+  -ms-flex-direction: row;
+  flex-direction: row;
+  height: auto;
+  width: 100%;
+}
+
+.c7 {
+  padding: 12px;
+  border-style: solid;
+  border-width: 1px;
+  border-color: #E9F1FB;
+  border-radius: 5px;
+  margin-right: 10px;
+  margin-left: 10px;
+  width: 200px;
+  height: 50px;
+  padding: 12px;
+  font-size: 15px;
+  color: rgba(171,187,209,1);
+  text-align: left;
+  color: rgba(171,187,209,1);
+  opacity: 0.5;
+}
+
+.c7:focus {
+  box-shadow: none;
+  outline: none;
+  border-color: #107969;
+}
+
+.c7:disabled {
+  color: #ABBBD1;
 }
 
 .c1 {
