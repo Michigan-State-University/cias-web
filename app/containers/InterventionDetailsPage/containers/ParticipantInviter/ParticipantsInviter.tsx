@@ -16,6 +16,7 @@ import { TEXT_BUTTON_PROPS } from './constants';
 export type Props = {
   interventionId: string;
   interventionName: string;
+  interventionLanguageCode: string;
   organizationId: Nullable<string>;
   interventionStatus: InterventionStatus;
   interventionType: InterventionType;

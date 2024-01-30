@@ -70,6 +70,7 @@ export const createInviteUrl = (
   interventionId: string,
   sessionId: Nullable<string>,
   healthClinicId: Nullable<string>,
+  interventionLanguageCode: string,
 ): string => {
   let url;
 
@@ -81,13 +82,16 @@ export const createInviteUrl = (
       },
     )}`;
   } else {
+    const queryParams = new URLSearchParams({
+      lang: interventionLanguageCode,
+    });
     url = `${process.env.WEB_URL}${parametrizeRoutePath(
       RoutePath.ANSWER_SESSION,
       {
         interventionId,
         sessionId: sessionId ?? '',
       },
-    )}`;
+    )}?${queryParams}`;
   }
 
   if (isReportingIntervention && healthClinicId) {

@@ -19,6 +19,7 @@ export type Props = {
   isReportingIntervention: boolean;
   interventionId: string;
   interventionName: string;
+  interventionLanguageCode: string;
   invitingPossible: boolean;
   copyingInvitationLinkPossible: boolean;
   creatingPredefinedParticipantsPossible: boolean;
@@ -38,6 +39,7 @@ export const ParticipantListView: FC<Props> = ({
   isReportingIntervention,
   interventionId,
   interventionName,
+  interventionLanguageCode,
   invitingPossible,
   copyingInvitationLinkPossible,
   creatingPredefinedParticipantsPossible,
@@ -109,6 +111,7 @@ export const ParticipantListView: FC<Props> = ({
             isModularIntervention={isModularIntervention}
             isReportingIntervention={isReportingIntervention}
             interventionId={interventionId}
+            interventionLanguageCode={interventionLanguageCode}
             sessionOptions={sessionOptions}
             healthClinicOptions={healthClinicOptions}
           />

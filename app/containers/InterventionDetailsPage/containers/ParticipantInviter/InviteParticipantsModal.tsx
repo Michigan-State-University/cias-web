@@ -20,6 +20,7 @@ import { InviteParticipantsModalContent } from './InviteParticipantsModalContent
 export type Props = {
   interventionId: string;
   interventionName: string;
+  interventionLanguageCode: string;
   organizationId: Nullable<string>;
   interventionStatus: InterventionStatus;
   interventionType: InterventionType;
@@ -31,6 +32,7 @@ export const InviteParticipantsModal: FC<Props> = ({
   onClose,
   interventionId,
   interventionName,
+  interventionLanguageCode,
   organizationId,
   interventionType,
   interventionStatus,
@@ -74,6 +76,7 @@ export const InviteParticipantsModal: FC<Props> = ({
         setCurrentView={setCurrentView}
         interventionId={interventionId}
         interventionName={interventionName}
+        interventionLanguageCode={interventionLanguageCode}
         organizationId={organizationId}
         interventionType={interventionType}
         interventionStatus={interventionStatus}
