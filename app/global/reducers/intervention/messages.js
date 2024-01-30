@@ -190,4 +190,12 @@ export default defineMessages({
     id: `${scope}.sendPredefinedParticipantSmsInvitationError`,
     defaultMessage: 'Unable to send SMS invitation.',
   },
+  sendPredefinedParticipantEmailInvitationSuccess: {
+    id: `${scope}.sendPredefinedParticipantEmailInvitationSuccess`,
+    defaultMessage: 'E-mail invitation has been successfully sent.',
+  },
+  sendPredefinedParticipantEmailInvitationError: {
+    id: `${scope}.sendPredefinedParticipantEmailInvitationError`,
+    defaultMessage: 'Unable to send e-mail invitation.',
+  },
 });

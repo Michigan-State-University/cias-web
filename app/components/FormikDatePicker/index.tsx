@@ -1,8 +1,8 @@
 import React, { PropsWithChildren } from 'react';
 import { useField, useFormikContext } from 'formik';
-import { ReactDatePickerProps } from 'react-datepicker';
 import isNil from 'lodash/isNil';
 import { useIntl } from 'react-intl';
+import { ReactDatePickerProps } from 'react-datepicker';
 
 import useDidUpdateEffect from 'utils/useDidUpdateEffect';
 
@@ -61,13 +61,13 @@ const FormikDatePicker = ({
     >
       <LocalizedDatePicker
         {...field}
-        onChange={(value) => setValue(value)}
+        onChange={(value: string) => setValue(value)}
         disabled={disabled}
         selected={field.value}
         placeholderText={
-          placeholder ?? (selectTime ? 'MM-DD-YYYY, --:--' : 'MM-DD-YYYY')
+          placeholder ?? (selectTime ? 'MM/DD/YYYY, --:--' : 'MM/DD/YYYY')
         }
-        dateFormat={selectTime ? 'MM-dd-yyyy, p' : 'MM-dd-yyyy'}
+        dateFormat={selectTime ? 'MM/dd/yyyy, p' : 'MM/dd/yyyy'}
         customInput={
           <DateInput disabled={disabled} hasError={hasError} {...inputProps} />
         }

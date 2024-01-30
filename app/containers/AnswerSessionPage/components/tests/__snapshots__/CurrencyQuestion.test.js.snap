@@ -172,13 +172,14 @@ exports[`<CurrencyQuestion /> Should render and match the snapshot 1`] = `
                 class="react-datepicker__input-container"
               >
                 <input
-                  aria-label="MM-DD-YYYY"
+                  aria-label="MM/DD/YYYY"
                   class="c6"
                   color="#2F3850"
                   dir="auto"
                   font-size="15"
                   height="50"
-                  placeholder="MM-DD-YYYY"
+                  inputmode="numeric"
+                  placeholder="MM/DD/YYYY"
                   type="text"
                   value=""
                   width="200"
