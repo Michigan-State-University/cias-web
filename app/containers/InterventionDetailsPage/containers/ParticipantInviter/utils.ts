@@ -82,16 +82,16 @@ export const createInviteUrl = (
       },
     )}`;
   } else {
-    const queryParams = new URLSearchParams({
-      lang: interventionLanguageCode,
-    });
     url = `${process.env.WEB_URL}${parametrizeRoutePath(
       RoutePath.ANSWER_SESSION,
       {
         interventionId,
         sessionId: sessionId ?? '',
       },
-    )}?${queryParams}`;
+      {
+        lang: interventionLanguageCode,
+      },
+    )}`;
   }
 
   if (isReportingIntervention && healthClinicId) {

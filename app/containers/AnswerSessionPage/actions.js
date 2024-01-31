@@ -77,11 +77,17 @@ export const startSession = () => actionBuilder(START_SESSION, {});
 export const resetSession = (sessionId) =>
   actionBuilder(RESET_SESSION, { sessionId });
 
-export const redirectToPreview = (interventionId, sessionId, questionId) =>
+export const redirectToPreview = (
+  interventionId,
+  sessionId,
+  questionId,
+  languageCode,
+) =>
   actionBuilder(REDIRECT_TO_PREVIEW, {
     interventionId,
     sessionId,
     questionId,
+    languageCode,
   });
 
 export const changePreviewMode = (previewMode) =>

@@ -46,6 +46,7 @@ import { redirectToPreview } from 'containers/AnswerSessionPage/actions';
 import {
   makeSelectCanCurrentUserAccessParticipantsData,
   makeSelectEditingPossible,
+  makeSelectInterventionLanguageCode,
   makeSelectInterventionStatus,
 } from 'global/reducers/intervention';
 import { canPreview } from 'models/Status/statusPermissions';
@@ -102,6 +103,7 @@ const InterventionNavbar = ({
   generatedReportsCount,
   canAccessParticipantsData,
   editingPossible,
+  interventionLanguageCode,
 }) => {
   const { interventionId, sessionId } = params;
 
@@ -147,7 +149,12 @@ const InterventionNavbar = ({
     textLoaders;
 
   const handleRedirect = () =>
-    redirectToPreviewAction(interventionId, sessionId, selectedQuestion);
+    redirectToPreviewAction(
+      interventionId,
+      sessionId,
+      selectedQuestion,
+      interventionLanguageCode,
+    );
 
   return (
     <Row align="center" justify="between" width="100%" mr={35}>
@@ -350,6 +357,7 @@ InterventionNavbar.propTypes = {
   generatedReportsCount: PropTypes.number,
   canAccessParticipantsData: PropTypes.bool,
   editingPossible: PropTypes.bool,
+  interventionLanguageCode: PropTypes.string,
 };
 
 const mapStateToProps = createStructuredSelector({
@@ -365,6 +373,7 @@ const mapStateToProps = createStructuredSelector({
   generatedReportsCount: makeSelectReportsSize(),
   canAccessParticipantsData: makeSelectCanCurrentUserAccessParticipantsData(),
   editingPossible: makeSelectEditingPossible(),
+  interventionLanguageCode: makeSelectInterventionLanguageCode(),
 });
 
 const mapDispatchToProps = {
