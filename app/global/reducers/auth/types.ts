@@ -9,6 +9,7 @@ export type RedirectData = {
   sessionId: Nullable<string>;
   healthClinicId: Nullable<string>;
   multipleFillSessionAvailable: boolean;
+  lang: string;
 };
 
 export type RedirectDataDTO = CamelToSnake<RedirectData>;
