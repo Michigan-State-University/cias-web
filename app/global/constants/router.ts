@@ -1,4 +1,5 @@
 export const REDIRECT_QUERY_KEY = 'redirect_to';
+export const INTERVENTION_LANGUAGE_QUERY_KEY = 'lang';
 
 export enum RoutePath {
   DASHBOARD = '/',
