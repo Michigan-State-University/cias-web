@@ -268,9 +268,9 @@ export default defineMessages({
     id: `${scope}.featureUnavailable`,
     defaultMessage: `In preview mode, you can not interact with this feature.`,
   },
-  accessiBeIconAlt: {
-    id: `${scope}.accessiBeIconAlt`,
-    defaultMessage: `AccessiBe icon`,
+  accessibilityIconAlt: {
+    id: `${scope}.accessibilityIconAlt`,
+    defaultMessage: `Accessibility widget icon`,
   },
   liveChatIconAlt: {
     id: `${scope}.liveChatIconAlt`,

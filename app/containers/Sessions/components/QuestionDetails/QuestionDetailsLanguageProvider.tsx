@@ -13,24 +13,32 @@ import {
 
 export type Props = {
   children: ReactNode;
+  keepAppLocale?: boolean;
 };
 
-const QuestionDetailsLanguageProvider = (props: Props) => {
-  const defaultLocale = useSelector(makeSelectLocale());
+const QuestionDetailsLanguageProvider = ({
+  children,
+  keepAppLocale,
+}: Props) => {
+  const appLocale = useSelector(makeSelectLocale());
   const interventionLanguageCode = useSelector(
     makeSelectInterventionLanguageCode(),
   );
-  const locale = interventionLanguageCode ?? defaultLocale;
+
+  const locale =
+    !keepAppLocale && interventionLanguageCode
+      ? interventionLanguageCode
+      : appLocale;
 
   return (
     <IntlProvider
       locale={locale}
-      defaultLocale={defaultLocale}
+      defaultLocale={appLocale}
       // @ts-ignore
       messages={translationMessages[locale]}
       {...intlProviderConfig}
     >
-      {React.Children.only(props.children)}
+      {React.Children.only(children)}
     </IntlProvider>
   );
 };
