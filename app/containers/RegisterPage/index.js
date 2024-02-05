@@ -52,6 +52,7 @@ import {
   registerFromInvitationRequest,
   clearErrors as clearErrorsAction,
 } from './actions';
+import { parseQueryToSingleValue } from './utils';
 
 const passwordLength = 8;
 
@@ -106,6 +107,7 @@ export function RegisterPage({
     intervention_id: interventionId,
     session_id: sessionId,
     cid,
+    lang,
   } = queryString.parse(location.search, { decode: false });
   const isInvite = Boolean(invitationToken) && Boolean(email);
 
@@ -132,36 +134,56 @@ export function RegisterPage({
     [interventionId, sessionId, error],
   );
 
+  const parsedLang = useMemo(() => parseQueryToSingleValue(lang), [lang]);
+  const parsedCid = useMemo(() => parseQueryToSingleValue(cid), [cid]);
+
   useEffect(() => {
     const shouldRedirect = success && isInvite && !loading;
 
     if (shouldRedirect) {
       let redirectPath;
 
+      const queryParams = {};
+      if (parsedCid) queryParams.cid = parsedCid;
+      if (parsedLang) queryParams.lang = parsedLang;
+
       if (shouldRedirectToIntervention) {
-        redirectPath = parametrizeRoutePath(RoutePath.INTERVENTION_INVITE, {
-          interventionId,
-        });
+        redirectPath = parametrizeRoutePath(
+          RoutePath.INTERVENTION_INVITE,
+          {
+            interventionId,
+          },
+          queryParams,
+        );
       }
 
       if (shouldRedirectToSession) {
-        redirectPath = parametrizeRoutePath(RoutePath.ANSWER_SESSION, {
-          interventionId,
-          sessionId,
-        });
+        redirectPath = parametrizeRoutePath(
+          RoutePath.ANSWER_SESSION,
+          {
+            interventionId,
+            sessionId,
+          },
+          queryParams,
+        );
       }
 
       if (!redirectPath) {
         redirectPath = RoutePath.DASHBOARD;
       }
 
-      if (cid) {
-        redirectPath += `?cid=${cid}`;
-      }
-
       history.replace(redirectPath);
     }
-  }, [success, loading, isInvite, interventionId, sessionId, cid, error]);
+  }, [
+    success,
+    loading,
+    isInvite,
+    interventionId,
+    sessionId,
+    parsedCid,
+    parsedLang,
+    error,
+  ]);
 
   return (
     <>

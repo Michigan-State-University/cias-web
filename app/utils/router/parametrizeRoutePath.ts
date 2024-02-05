@@ -10,7 +10,7 @@ export const parametrizeRoutePath = (
     parametrizedPath = parametrizedPath.replace(`:${param}`, value);
   });
 
-  if (queryParams) {
+  if (queryParams && Object.keys(queryParams).length > 0) {
     const urlSearchParams = new URLSearchParams(queryParams);
     return `${parametrizedPath}?${urlSearchParams}`;
   }
