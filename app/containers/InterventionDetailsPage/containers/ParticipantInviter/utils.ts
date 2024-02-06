@@ -74,12 +74,21 @@ export const createInviteUrl = (
 ): string => {
   let url;
 
+  const queryParams: Record<string, string> = {};
+  if (isReportingIntervention && healthClinicId) {
+    queryParams.cid = healthClinicId;
+  }
+  if (!isModularIntervention) {
+    queryParams.lang = interventionLanguageCode;
+  }
+
   if (isModularIntervention) {
     url = `${process.env.WEB_URL}${parametrizeRoutePath(
       RoutePath.INTERVENTION_INVITE,
       {
         interventionId,
       },
+      queryParams,
     )}`;
   } else {
     url = `${process.env.WEB_URL}${parametrizeRoutePath(
@@ -88,14 +97,8 @@ export const createInviteUrl = (
         interventionId,
         sessionId: sessionId ?? '',
       },
-      {
-        lang: interventionLanguageCode,
-      },
+      queryParams,
     )}`;
-  }
-
-  if (isReportingIntervention && healthClinicId) {
-    url = `${url}?cid=${healthClinicId}`;
   }
 
   return url;
