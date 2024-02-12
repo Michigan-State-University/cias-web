@@ -39,6 +39,7 @@ import { ManagePredefinedParticipantView } from './ManagePredefinedParticipantVi
 export type Props = {
   interventionId: string;
   interventionName: string;
+  interventionLanguageCode: string;
   organizationId: Nullable<string>;
   interventionStatus: InterventionStatus;
   interventionType: InterventionType;
@@ -50,6 +51,7 @@ export type Props = {
 export const InviteParticipantsModalContent: FC<Props> = ({
   interventionId,
   interventionName,
+  interventionLanguageCode,
   organizationId,
   interventionStatus,
   interventionType,
@@ -195,6 +197,7 @@ export const InviteParticipantsModalContent: FC<Props> = ({
               isReportingIntervention={isReportingIntervention}
               interventionId={interventionId}
               interventionName={interventionName}
+              interventionLanguageCode={interventionLanguageCode}
               invitingPossible={invitingPossible}
               copyingInvitationLinkPossible={copyingInvitationLinkPossible}
               creatingPredefinedParticipantsPossible={

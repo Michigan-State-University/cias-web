@@ -35,7 +35,11 @@ import {
   makeSelectUser,
   fetchSelfDetailsSaga,
 } from 'global/reducers/auth';
-import { RoutePath, WILDCARD_PATH } from 'global/constants';
+import {
+  INTERVENTION_LANGUAGE_QUERY_KEY,
+  RoutePath,
+  WILDCARD_PATH,
+} from 'global/constants';
 
 import AnswerSessionPage from 'containers/AnswerSessionPage/Loadable';
 import EditSessionPage from 'containers/Sessions/containers/EditSessionPage/Loadable';
@@ -148,7 +152,10 @@ export function App({ user, fetchSelfDetails }) {
   }, [user]);
 
   useEffect(() => {
-    document.documentElement.setAttribute('lang', locale);
+    document.documentElement.setAttribute(
+      INTERVENTION_LANGUAGE_QUERY_KEY,
+      locale,
+    );
     const accToolbarWidget = window.micAccessTool;
     if (accToolbarWidget) {
       document.getElementById(ACC_TOOLBAR_ROOT_ID).remove();
