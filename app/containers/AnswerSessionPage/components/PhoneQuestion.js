@@ -85,10 +85,10 @@ const PhoneQuestion = ({
   };
 
   useEffect(() => {
-    if (phone?.confirmed) {
-      saveAnswer(phone);
+    if (user?.phone?.confirmed) {
+      saveAnswer(user?.phone);
     }
-  }, [phone?.confirmed]);
+  }, [user?.phone?.confirmed]);
 
   useEffect(() => {
     if (!timezone) {
