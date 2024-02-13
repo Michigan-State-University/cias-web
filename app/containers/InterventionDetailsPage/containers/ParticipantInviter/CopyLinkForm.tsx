@@ -19,6 +19,7 @@ export type Props = {
   isModularIntervention: boolean;
   isReportingIntervention: boolean;
   interventionId: string;
+  interventionLanguageCode: string;
   sessionOptions: SelectOption<string>[];
   healthClinicOptions: SelectOption<string>[];
 };
@@ -27,6 +28,7 @@ export const CopyLinkForm: FC<Props> = ({
   isModularIntervention,
   isReportingIntervention,
   interventionId,
+  interventionLanguageCode,
   sessionOptions,
   healthClinicOptions,
 }) => {
@@ -93,6 +95,7 @@ export const CopyLinkForm: FC<Props> = ({
                 interventionId,
                 values.sessionOption?.value,
                 values.healthClinicOption?.value,
+                interventionLanguageCode,
               )}
               icon={share}
               iconAlt={formatMessage(messages.copyLinkIconAlt)}

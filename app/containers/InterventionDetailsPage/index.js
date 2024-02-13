@@ -144,6 +144,7 @@ export function InterventionDetailsPage({
   const {
     sessions,
     name,
+    languageCode,
     id,
     status,
     csv,
@@ -538,6 +539,7 @@ export function InterventionDetailsPage({
 
             <Header
               name={name}
+              languageCode={languageCode}
               interventionId={interventionId}
               canCurrentUserMakeChanges={canCurrentUserMakeChanges}
               editingPossible={editingPossible}

@@ -2,9 +2,9 @@ import { useEffect, useState } from 'react';
 import { useLocation } from 'react-router';
 
 const useQuery = (name: string): Nullable<string> => {
-  const [query, setQuery] = useState<Nullable<string>>(null);
-
   const { search } = useLocation();
+  const initialQuery = new URLSearchParams(search).get(name);
+  const [query, setQuery] = useState<Nullable<string>>(initialQuery);
 
   useEffect(() => {
     const queries = new URLSearchParams(search);

@@ -6,7 +6,7 @@ import merge from 'lodash/merge';
 
 import { AnswerType } from 'models/Answer';
 
-import { RoutePath } from 'global/constants';
+import { INTERVENTION_LANGUAGE_QUERY_KEY, RoutePath } from 'global/constants';
 
 import { mapQuestionToStateObject } from 'utils/mapResponseObjects';
 import { formatMessage } from 'utils/intlOutsideReact';
@@ -191,16 +191,20 @@ function* nextQuestion({ payload: { userSessionId, questionId } }) {
 }
 
 function* redirectToPreview({
-  payload: { interventionId, sessionId, questionId },
+  payload: { interventionId, sessionId, questionId, languageCode },
 }) {
   yield call(logInGuest, { payload: { sessionId } });
   yield call(
     window.open,
-    parametrizeRoutePath(RoutePath.PREVIEW_SESSION_FROM_INDEX, {
-      interventionId,
-      sessionId,
-      index: questionId,
-    }),
+    parametrizeRoutePath(
+      RoutePath.PREVIEW_SESSION_FROM_INDEX,
+      {
+        interventionId,
+        sessionId,
+        index: questionId,
+      },
+      { [INTERVENTION_LANGUAGE_QUERY_KEY]: languageCode },
+    ),
   );
 }
 

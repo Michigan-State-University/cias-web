@@ -26,6 +26,7 @@ import isNullOrUndefined from 'utils/isNullOrUndefined';
 import { DESKTOP_MODE, I_PHONE_8_PLUS_MODE } from 'utils/previewMode';
 import { CHARACTER_FIXED_POSITION_QUESTIONS } from 'utils/characterConstants';
 import LocalStorageService from 'utils/localStorageService';
+import useQuery from 'utils/useQuery';
 
 import {
   makeSelectAudioInstance,
@@ -51,7 +52,11 @@ import {
   chatWidgetReducerKey,
   setChatEnabled,
 } from 'global/reducers/chatWidget';
-import { RoutePath, REDIRECT_QUERY_KEY } from 'global/constants';
+import {
+  RoutePath,
+  REDIRECT_QUERY_KEY,
+  INTERVENTION_LANGUAGE_QUERY_KEY,
+} from 'global/constants';
 
 import { canPreview } from 'models/Status/statusPermissions';
 import { finishQuestion } from 'models/Session/QuestionTypes';
@@ -64,6 +69,7 @@ import {
   ANSWER_SESSION_PAGE_ID,
   ANSWER_SESSION_CONTAINER_ID,
 } from 'containers/App/constants';
+import { changeLocale as changeLocaleAction } from 'containers/AppLanguageProvider/actions';
 
 import {
   additionalBreakpoints,
@@ -228,6 +234,7 @@ export function AnswerSessionPage({
   fetchPreviousQuestion,
   fixedElementsDirection,
   dynamicElementsDirection,
+  changeLocale,
 }) {
   const { formatMessage } = useIntl();
   const history = useHistory();
@@ -311,6 +318,13 @@ export function AnswerSessionPage({
   const isCatMhSession = userSessionType === UserSessionType.CAT_MH;
 
   const location = useLocation();
+
+  const lang = useQuery(INTERVENTION_LANGUAGE_QUERY_KEY);
+  useEffect(() => {
+    if (lang) {
+      changeLocale(lang);
+    }
+  }, [lang]);
 
   const { sessionId, interventionId, index } = params;
 
@@ -996,6 +1010,7 @@ AnswerSessionPage.propTypes = {
   fetchPreviousQuestion: PropTypes.func,
   fixedElementsDirection: PropTypes.string,
   dynamicElementsDirection: PropTypes.string,
+  changeLocale: PropTypes.func,
 };
 
 const mapStateToProps = createStructuredSelector({
@@ -1025,6 +1040,7 @@ const mapDispatchToProps = {
   setLiveChatEnabled: setChatEnabled,
   saveQuickExitEvent: saveQuickExitEventRequest,
   fetchPreviousQuestion: fetchPreviousQuestionRequest,
+  changeLocale: changeLocaleAction,
 };
 
 const withConnect = connect(mapStateToProps, mapDispatchToProps);

@@ -1,10 +1,11 @@
 import { createSelector } from 'reselect';
 import { getLangDir } from 'rtl-detect';
 
-import { DEFAULT_LOCALE, isAppLanguageSupported } from 'i18n';
+import { isAppLanguageSupported } from 'i18n';
 
 import { makeSelectInterventionLanguageCode } from 'global/reducers/intervention';
 import { makeSelectUserSessionLanguageCode } from 'containers/AnswerSessionPage/selectors';
+import { makeSelectLocale } from 'containers/AppLanguageProvider';
 
 import { initialState } from './reducer';
 
@@ -55,16 +56,21 @@ export const makeSelectInterventionElementsLanguageCode = () =>
 
 // Hardcoded/fixed UI elements, e.g. back, skip and continue buttons
 export const makeSelectInterventionFixedElementsDirection = () =>
-  createSelector(makeSelectInterventionElementsLanguageCode(), (languageCode) =>
-    getLangDir(
-      languageCode && isAppLanguageSupported(languageCode)
-        ? languageCode
-        : DEFAULT_LOCALE,
-    ),
+  createSelector(
+    makeSelectInterventionElementsLanguageCode(),
+    makeSelectLocale(),
+    (languageCode, appLocale) =>
+      getLangDir(
+        languageCode && isAppLanguageSupported(languageCode)
+          ? languageCode
+          : appLocale,
+      ),
   );
 
 // Defined the by researcher, e.g. question title and subtitle, answers' labels
 export const makeSelectInterventionDynamicElementsDirection = () =>
-  createSelector(makeSelectInterventionElementsLanguageCode(), (languageCode) =>
-    getLangDir(languageCode ?? DEFAULT_LOCALE),
+  createSelector(
+    makeSelectInterventionElementsLanguageCode(),
+    makeSelectLocale(),
+    (languageCode, appLocale) => getLangDir(languageCode ?? appLocale),
   );
