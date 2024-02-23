@@ -228,9 +228,11 @@ const CharacterAnim = ({
 
       await moveAnimation({ ...blocks[0], endPosition: newPosition });
     }
-    await fetchBodyAndHeadAnimations();
-    await fetchAudioAnimations();
-    await fetchMoveAnimations();
+    await Promise.all([
+      await fetchBodyAndHeadAnimations(),
+      await fetchAudioAnimations(),
+      await fetchMoveAnimations(),
+    ]);
   };
 
   useAsync(
