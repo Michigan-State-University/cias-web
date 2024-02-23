@@ -139,6 +139,37 @@ const AnimationRefHelper = ({
 }) => {
   const animationParentRef = useRef();
   const [refState, setRefState] = useState(null);
+  const [blocksWithAudio, setBlocksWithAudio] = useState(null);
+
+  useEffect(() => {
+    const eagerLoadAudioData = async () => {
+      const { blocks } = currentQuestion.narrator;
+      if (blocks.length) {
+        const equippedBlocks = await Promise.all(
+          blocks.map(async (block) => {
+            if (block.audio_urls) {
+              const base64s = await Promise.all(
+                block.audio_urls.map(async (url) => {
+                  const file = await fetch(`${process.env.API_URL}${url}`);
+                  const contentType = file.headers.get('Content-Type');
+                  const arrayBuffer = await file.arrayBuffer();
+                  const base64String = btoa(
+                    String.fromCharCode(...new Uint8Array(arrayBuffer)),
+                  );
+                  return `data:${contentType};base64,${base64String}`;
+                }),
+              );
+
+              return { audios_base64: base64s, ...block };
+            }
+            return block;
+          }),
+        );
+        await setBlocksWithAudio(equippedBlocks);
+      }
+    };
+    eagerLoadAudioData();
+  }, []);
 
   useEffect(() => {
     setRefState(animationParentRef.current);
@@ -152,10 +183,10 @@ const AnimationRefHelper = ({
   return (
     <AnswerInterventionContent ref={animationParentRef}>
       {children}
-      {refState !== null && (
+      {refState !== null && blocksWithAudio !== null && (
         <CharacterAnim
           animationContainer={animationParentRef.current}
-          blocks={currentQuestion.narrator.blocks}
+          blocks={blocksWithAudio}
           questionId={currentQuestionId}
           settings={settings}
           previewMode={previewMode}

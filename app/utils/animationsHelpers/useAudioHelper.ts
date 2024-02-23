@@ -234,7 +234,7 @@ const useAudioHelper: TUseAudioHelper = (
         switch (currentData.type) {
           case NarratorBlockTypes.SPEECH:
           case NarratorBlockTypes.READ_QUESTION:
-            handleSpeech(currentData.audio_urls);
+            handleSpeech(currentData.audios_base64);
             break;
 
           case NarratorBlockTypes.REFLECTION_FORMULA:
@@ -242,7 +242,7 @@ const useAudioHelper: TUseAudioHelper = (
             handleSpeech(
               currentData.reflections.length
                 ? currentData.reflections[currentData.currentReflectionIndex]
-                    .audio_urls
+                    .audios_base64
                 : [],
             );
             break;
@@ -297,21 +297,18 @@ const useAudioHelper: TUseAudioHelper = (
     );
   };
 
-  const handleSpeech = (audioUrls: string[]): void => {
+  const handleSpeech = (fetchedAudios: string[]): void => {
     audioInstance.onPlay(playAnimation);
     audioInstance.onLoaded(onSpeechReady);
-    audioInstance.onEnded(() => onSpeechEnded(audioUrls));
+    audioInstance.onEnded(() => onSpeechEnded(fetchedAudios));
     audioInstance.onError(() => {
       handleAudioError();
-      onSpeechEnded(audioUrls);
+      onSpeechEnded(fetchedAudios);
     });
 
-    if (!audioUrls.length || !audioUrls[currentData.currentAudioIndex])
-      onSpeechEnded(audioUrls);
-    else
-      audioInstance.setSrc(
-        `${process.env.API_URL}${audioUrls[currentData.currentAudioIndex]}`,
-      );
+    if (!fetchedAudios.length || !fetchedAudios[currentData.currentAudioIndex])
+      onSpeechEnded(fetchedAudios);
+    else audioInstance.setSrc(`${fetchedAudios[currentData.currentAudioIndex]}`);
   };
 
   const nextBlock = (): void => {
