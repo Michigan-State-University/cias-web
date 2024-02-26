@@ -308,7 +308,8 @@ const useAudioHelper: TUseAudioHelper = (
 
     if (!fetchedAudios.length || !fetchedAudios[currentData.currentAudioIndex])
       onSpeechEnded(fetchedAudios);
-    else audioInstance.setSrc(`${fetchedAudios[currentData.currentAudioIndex]}`);
+    else
+      audioInstance.setSrc(`${fetchedAudios[currentData.currentAudioIndex]}`);
   };
 
   const nextBlock = (): void => {
