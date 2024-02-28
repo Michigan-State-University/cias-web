@@ -4,7 +4,7 @@
  *
  */
 
-import React, { memo, useEffect, useMemo, useRef, useState } from 'react';
+import React, { memo, useEffect, useMemo, useRef, useState, useCallback } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { Helmet } from 'react-helmet';
@@ -141,35 +141,36 @@ const AnimationRefHelper = ({
   const [refState, setRefState] = useState(null);
   const [blocksWithAudio, setBlocksWithAudio] = useState(null);
 
-  useEffect(() => {
-    const eagerLoadAudioData = async () => {
-      const { blocks } = currentQuestion.narrator;
-      if (blocks.length) {
-        const equippedBlocks = await Promise.all(
-          blocks.map(async (block) => {
-            if (block.audio_urls) {
-              const base64s = await Promise.all(
-                block.audio_urls.map(async (url) => {
-                  const file = await fetch(`${process.env.API_URL}${url}`);
-                  const contentType = file.headers.get('Content-Type');
-                  const arrayBuffer = await file.arrayBuffer();
-                  const base64String = btoa(
-                    String.fromCharCode(...new Uint8Array(arrayBuffer)),
-                  );
-                  return `data:${contentType};base64,${base64String}`;
-                }),
-              );
+  const eagerLoadAudioData = useCallback(async () => {
+    const { blocks } = currentQuestion.narrator;
+    if (blocks.length) {
+      const equippedBlocks = await Promise.all(
+        blocks.map(async (block) => {
+          if (block.audio_urls) {
+            const base64s = await Promise.all(
+              block.audio_urls.map(async (url) => {
+                const file = await fetch(`${process.env.API_URL}${url}`);
+                const contentType = file.headers.get('Content-Type');
+                const arrayBuffer = await file.arrayBuffer();
+                const base64String = btoa(
+                  String.fromCharCode(...new Uint8Array(arrayBuffer)),
+                );
+                return `data:${contentType};base64,${base64String}`;
+              }),
+            );
 
-              return { audios_base64: base64s, ...block };
-            }
-            return block;
-          }),
-        );
-        await setBlocksWithAudio(equippedBlocks);
-      }
-    };
-    eagerLoadAudioData();
+            return { audios_base64: base64s, ...block };
+          }
+          return block;
+        }),
+      );
+      await setBlocksWithAudio(equippedBlocks);
+    }
   }, []);
+
+  useEffect(() => {
+    eagerLoadAudioData();
+  }, [eagerLoadAudioData]);
 
   useEffect(() => {
     setRefState(animationParentRef.current);
