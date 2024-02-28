@@ -4,7 +4,14 @@
  *
  */
 
-import React, { memo, useEffect, useMemo, useRef, useState, useCallback } from 'react';
+import React, {
+  memo,
+  useEffect,
+  useMemo,
+  useRef,
+  useState,
+  useCallback,
+} from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { Helmet } from 'react-helmet';
