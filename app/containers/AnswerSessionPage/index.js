@@ -4,7 +4,14 @@
  *
  */
 
-import React, { memo, useEffect, useMemo, useRef, useState } from 'react';
+import React, {
+  memo,
+  useEffect,
+  useMemo,
+  useRef,
+  useState,
+  useCallback,
+} from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { Helmet } from 'react-helmet';
@@ -26,6 +33,7 @@ import isNullOrUndefined from 'utils/isNullOrUndefined';
 import { DESKTOP_MODE, I_PHONE_8_PLUS_MODE } from 'utils/previewMode';
 import { CHARACTER_FIXED_POSITION_QUESTIONS } from 'utils/characterConstants';
 import LocalStorageService from 'utils/localStorageService';
+import useQuery from 'utils/useQuery';
 
 import {
   makeSelectAudioInstance,
@@ -51,7 +59,11 @@ import {
   chatWidgetReducerKey,
   setChatEnabled,
 } from 'global/reducers/chatWidget';
-import { RoutePath, REDIRECT_QUERY_KEY } from 'global/constants';
+import {
+  RoutePath,
+  REDIRECT_QUERY_KEY,
+  INTERVENTION_LANGUAGE_QUERY_KEY,
+} from 'global/constants';
 
 import { canPreview } from 'models/Status/statusPermissions';
 import { finishQuestion } from 'models/Session/QuestionTypes';
@@ -64,6 +76,7 @@ import {
   ANSWER_SESSION_PAGE_ID,
   ANSWER_SESSION_CONTAINER_ID,
 } from 'containers/App/constants';
+import { changeLocale as changeLocaleAction } from 'containers/AppLanguageProvider/actions';
 
 import {
   additionalBreakpoints,
@@ -133,6 +146,38 @@ const AnimationRefHelper = ({
 }) => {
   const animationParentRef = useRef();
   const [refState, setRefState] = useState(null);
+  const [blocksWithAudio, setBlocksWithAudio] = useState(null);
+
+  const eagerLoadAudioData = useCallback(async () => {
+    const { blocks } = currentQuestion.narrator;
+    if (blocks.length) {
+      const equippedBlocks = await Promise.all(
+        blocks.map(async (block) => {
+          if (block.audio_urls) {
+            const base64s = await Promise.all(
+              block.audio_urls.map(async (url) => {
+                const file = await fetch(`${process.env.API_URL}${url}`);
+                const contentType = file.headers.get('Content-Type');
+                const arrayBuffer = await file.arrayBuffer();
+                const base64String = btoa(
+                  String.fromCharCode(...new Uint8Array(arrayBuffer)),
+                );
+                return `data:${contentType};base64,${base64String}`;
+              }),
+            );
+
+            return { audios_base64: base64s, ...block };
+          }
+          return block;
+        }),
+      );
+      await setBlocksWithAudio(equippedBlocks);
+    }
+  }, []);
+
+  useEffect(() => {
+    eagerLoadAudioData();
+  }, [eagerLoadAudioData]);
 
   useEffect(() => {
     setRefState(animationParentRef.current);
@@ -146,10 +191,10 @@ const AnimationRefHelper = ({
   return (
     <AnswerInterventionContent ref={animationParentRef}>
       {children}
-      {refState !== null && (
+      {refState !== null && blocksWithAudio !== null && (
         <CharacterAnim
           animationContainer={animationParentRef.current}
-          blocks={currentQuestion.narrator.blocks}
+          blocks={blocksWithAudio}
           questionId={currentQuestionId}
           settings={settings}
           previewMode={previewMode}
@@ -228,6 +273,7 @@ export function AnswerSessionPage({
   fetchPreviousQuestion,
   fixedElementsDirection,
   dynamicElementsDirection,
+  changeLocale,
 }) {
   const { formatMessage } = useIntl();
   const history = useHistory();
@@ -311,6 +357,13 @@ export function AnswerSessionPage({
   const isCatMhSession = userSessionType === UserSessionType.CAT_MH;
 
   const location = useLocation();
+
+  const lang = useQuery(INTERVENTION_LANGUAGE_QUERY_KEY);
+  useEffect(() => {
+    if (lang) {
+      changeLocale(lang);
+    }
+  }, [lang]);
 
   const { sessionId, interventionId, index } = params;
 
@@ -996,6 +1049,7 @@ AnswerSessionPage.propTypes = {
   fetchPreviousQuestion: PropTypes.func,
   fixedElementsDirection: PropTypes.string,
   dynamicElementsDirection: PropTypes.string,
+  changeLocale: PropTypes.func,
 };
 
 const mapStateToProps = createStructuredSelector({
@@ -1025,6 +1079,7 @@ const mapDispatchToProps = {
   setLiveChatEnabled: setChatEnabled,
   saveQuickExitEvent: saveQuickExitEventRequest,
   fetchPreviousQuestion: fetchPreviousQuestionRequest,
+  changeLocale: changeLocaleAction,
 };
 
 const withConnect = connect(mapStateToProps, mapDispatchToProps);

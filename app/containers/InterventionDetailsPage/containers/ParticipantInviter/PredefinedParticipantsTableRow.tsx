@@ -28,8 +28,16 @@ const PredefinedParticipantsTableRowComponent: FC<Props> = ({
 }) => {
   const { formatMessage } = useIntl();
 
-  const { id, fullName, externalId, active, invitationSentAt, phone, slug } =
-    predefinedParticipant;
+  const {
+    id,
+    fullName,
+    externalId,
+    active,
+    smsInvitationSentAt,
+    emailInvitationSentAt,
+    phone,
+    slug,
+  } = predefinedParticipant;
 
   return (
     <StripedTR
@@ -57,8 +65,8 @@ const PredefinedParticipantsTableRowComponent: FC<Props> = ({
       </NoMaxWidthTD>
       <NoMaxWidthTD padding={8} width="20%">
         <EllipsisText
-          text={formatMessage(messages.smsInvitationColumnValue, {
-            invitationSent: !!invitationSentAt,
+          text={formatMessage(messages.invitationColumnValue, {
+            invitationSent: !!(smsInvitationSentAt || emailInvitationSentAt),
           })}
           fontSize={15}
         />

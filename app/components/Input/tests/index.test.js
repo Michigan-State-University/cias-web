@@ -2,8 +2,10 @@ import React from 'react';
 import { render, fireEvent, waitFor, screen } from '@testing-library/react';
 import 'jest-styled-components';
 import userEvent from '@testing-library/user-event';
+import { Provider } from 'react-redux';
 
 import { testRender } from 'utils/testUtils';
+import { createTestStore } from 'utils/testUtils/storeUtils';
 
 import { act } from '@testing-library/react-hooks';
 import Input from '../index';
@@ -266,8 +268,12 @@ describe('<ApprovableInput />', () => {
     expect(container).toMatchSnapshot();
   });
   it('Should render and match the snapshot as date input', () => {
+    const store = createTestStore();
+
     const { container } = render(
-      <ApprovableInput {...defaultProps} type="date" />,
+      <Provider store={store}>
+        <ApprovableInput {...defaultProps} type="date" />,
+      </Provider>,
     );
     expect(container).toMatchSnapshot();
   });

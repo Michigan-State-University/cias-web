@@ -213,33 +213,6 @@ exports[`<SessionSchedule /> Should render and match the snapshot 1`] = `
   color: rgba(210,55,29,1);
 }
 
-.c17 {
-  padding: 12px;
-  border-style: solid;
-  border-width: 1px;
-  border-color: #E9F1FB;
-  border-radius: 5px;
-  margin-right: 0;
-  margin-left: 0;
-  width: 130px;
-  height: 50px;
-  padding: 12px;
-  font-size: 15px;
-  color: rgba(47,56,80,1);
-  text-align: left;
-  color: rgba(47,56,80,1);
-}
-
-.c17:focus {
-  box-shadow: none;
-  outline: none;
-  border-color: #107969;
-}
-
-.c17:disabled {
-  color: #ABBBD1;
-}
-
 .c16 .schedule-date-picker {
   font-family: DM Sans;
   background-color: #E9F1FB;
@@ -296,6 +269,33 @@ exports[`<SessionSchedule /> Should render and match the snapshot 1`] = `
 
 .c16 .react-datepicker-wrapper {
   width: 100%;
+}
+
+.c17 {
+  padding: 12px;
+  border-style: solid;
+  border-width: 1px;
+  border-color: #E9F1FB;
+  border-radius: 5px;
+  margin-right: 0;
+  margin-left: 0;
+  width: 130px;
+  height: 50px;
+  padding: 12px;
+  font-size: 15px;
+  color: rgba(47,56,80,1);
+  text-align: left;
+  color: rgba(47,56,80,1);
+}
+
+.c17:focus {
+  box-shadow: none;
+  outline: none;
+  border-color: #107969;
+}
+
+.c17:disabled {
+  color: #ABBBD1;
 }
 
 @media only screen and (min-width:768px) {
@@ -419,15 +419,16 @@ exports[`<SessionSchedule /> Should render and match the snapshot 1`] = `
                       class="react-datepicker__input-container"
                     >
                       <input
-                        aria-label="MM-DD-YYYY"
+                        aria-label="MM/DD/YYYY"
                         class="c17"
                         color="#2F3850"
                         dir="auto"
                         font-size="15"
                         height="50"
-                        placeholder="MM-DD-YYYY"
+                        inputmode="numeric"
+                        placeholder="MM/DD/YYYY"
                         type="text"
-                        value="12-24-2018"
+                        value="12/24/2018"
                         width="130"
                       />
                     </div>

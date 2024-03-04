@@ -20,6 +20,7 @@ export interface IAudioData {
   text?: Nullable<string[]>;
   sha256: string[];
   audio_urls: string[];
+  audios_base64: string[];
 }
 
 export interface IReflection extends IAudioData {

@@ -1,6 +1,64 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`<DateQuestion /> Should render and match the snapshot 1`] = `
+.c5 .schedule-date-picker {
+  font-family: DM Sans;
+  background-color: #E9F1FB;
+}
+
+.c5 .schedule-date-picker .react-datepicker__header {
+  background-color: #F8FBFF;
+}
+
+.c5 .schedule-date-picker .react-datepicker__day {
+  color: #2F3850;
+}
+
+.c5 .schedule-date-picker .react-datepicker__day:hover {
+  color: #FFFFFF;
+  background-color: rgba(200,102,234,0.7);
+}
+
+.c5 .schedule-date-picker .react-datepicker__day--keyboard-selected {
+  background-color: #C866EA;
+}
+
+.c5 .schedule-date-picker .react-datepicker__day--in-range,
+.c5 .schedule-date-picker .react-datepicker__day--in-selecting-range {
+  color: #2F3850;
+  background-color: rgba(200,102,234,0.1);
+}
+
+.c4 .schedule-date-picker .react-datepicker__day--selected:not(.c4 .schedule-date-picker .react-datepicker__day--in-selecting-range),
+.c5 .schedule-date-picker .react-datepicker__day--range-start:not(.c5 .schedule-date-picker .react-datepicker__day--in-selecting-range),
+.c5 .schedule-date-picker .react-datepicker__day--range-end:not(.c5 .schedule-date-picker .react-datepicker__day--in-selecting-range),
+.c5 .schedule-date-picker .react-datepicker__day--selecting-range-start,
+.c5 .schedule-date-picker .react-datepicker__day--selecting-range-end {
+  color: #FFFFFF;
+  background-color: #C866EA;
+}
+
+.c5 .schedule-date-picker .react-datepicker__year-option {
+  background-color: #E9F1FB;
+}
+
+.c5 .schedule-date-picker .react-datepicker__month-option {
+  background-color: #E9F1FB;
+}
+
+.c5 .schedule-date-picker .react-datepicker__time-list-item:hover {
+  color: #FFFFFF;
+  background-color: rgba(200,102,234,0.7) !important;
+}
+
+.c5 .schedule-date-picker .react-datepicker__time-list-item--selected {
+  background-color: #C866EA !important;
+}
+
+.c5 .react-datepicker-wrapper {
+  width: 100%;
+}
+
 .c3 {
   display: -webkit-box;
   display: -webkit-flex;
@@ -63,64 +121,6 @@ exports[`<DateQuestion /> Should render and match the snapshot 1`] = `
   color: #ABBBD1;
 }
 
-.c5 .schedule-date-picker {
-  font-family: DM Sans;
-  background-color: #E9F1FB;
-}
-
-.c5 .schedule-date-picker .react-datepicker__header {
-  background-color: #F8FBFF;
-}
-
-.c5 .schedule-date-picker .react-datepicker__day {
-  color: #2F3850;
-}
-
-.c5 .schedule-date-picker .react-datepicker__day:hover {
-  color: #FFFFFF;
-  background-color: rgba(200,102,234,0.7);
-}
-
-.c5 .schedule-date-picker .react-datepicker__day--keyboard-selected {
-  background-color: #C866EA;
-}
-
-.c5 .schedule-date-picker .react-datepicker__day--in-range,
-.c5 .schedule-date-picker .react-datepicker__day--in-selecting-range {
-  color: #2F3850;
-  background-color: rgba(200,102,234,0.1);
-}
-
-.c4 .schedule-date-picker .react-datepicker__day--selected:not(.c4 .schedule-date-picker .react-datepicker__day--in-selecting-range),
-.c5 .schedule-date-picker .react-datepicker__day--range-start:not(.c5 .schedule-date-picker .react-datepicker__day--in-selecting-range),
-.c5 .schedule-date-picker .react-datepicker__day--range-end:not(.c5 .schedule-date-picker .react-datepicker__day--in-selecting-range),
-.c5 .schedule-date-picker .react-datepicker__day--selecting-range-start,
-.c5 .schedule-date-picker .react-datepicker__day--selecting-range-end {
-  color: #FFFFFF;
-  background-color: #C866EA;
-}
-
-.c5 .schedule-date-picker .react-datepicker__year-option {
-  background-color: #E9F1FB;
-}
-
-.c5 .schedule-date-picker .react-datepicker__month-option {
-  background-color: #E9F1FB;
-}
-
-.c5 .schedule-date-picker .react-datepicker__time-list-item:hover {
-  color: #FFFFFF;
-  background-color: rgba(200,102,234,0.7) !important;
-}
-
-.c5 .schedule-date-picker .react-datepicker__time-list-item--selected {
-  background-color: #C866EA !important;
-}
-
-.c5 .react-datepicker-wrapper {
-  width: 100%;
-}
-
 .c0 {
   width: auto;
   height: auto;
@@ -172,13 +172,14 @@ exports[`<DateQuestion /> Should render and match the snapshot 1`] = `
                 class="react-datepicker__input-container"
               >
                 <input
-                  aria-label="MM-DD-YYYY"
+                  aria-label="MM/DD/YYYY"
                   class="c6"
                   color="#2F3850"
                   dir="auto"
                   font-size="15"
                   height="50"
-                  placeholder="MM-DD-YYYY"
+                  inputmode="numeric"
+                  placeholder="MM/DD/YYYY"
                   type="text"
                   value=""
                   width="200"

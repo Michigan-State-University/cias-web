@@ -1,4 +1,4 @@
-import React, { FC, useEffect, useMemo, useState } from 'react';
+import React, { FC, useMemo } from 'react';
 import { Form, Formik, FormikConfig } from 'formik';
 import { useIntl } from 'react-intl';
 
@@ -16,6 +16,7 @@ import { Button, TextButton } from 'components/Button';
 import { FormikPhoneNumberInput } from 'components/FormikPhoneNumberInput';
 import FormikInput from 'components/FormikInput';
 import Text from 'components/Text';
+import FormikCheckbox from 'components/FormikCheckbox';
 
 import messages from './messages';
 import {
@@ -36,6 +37,8 @@ const COMMON_INPUT_PROPS = {
 
 export type UpdateModeProps = {
   mode: PredefinedParticipantFormMode.UPDATE;
+  disabled: boolean;
+  setDisabled: (disabled: boolean) => void;
   participant: PredefinedParticipant;
   onDeactivate: () => void;
   deactivating: boolean;
@@ -45,6 +48,8 @@ export type UpdateModeProps = {
 
 export type CreateModeProps = {
   mode: PredefinedParticipantFormMode.CREATE;
+  disabled?: undefined;
+  setDisabled?: undefined;
   participant?: undefined;
   onDeactivate?: undefined;
   deactivating?: undefined;
@@ -63,6 +68,8 @@ export type Props = CommonProps & (CreateModeProps | UpdateModeProps);
 
 export const PredefinedParticipantForm: FC<Props> = ({
   mode,
+  disabled,
+  setDisabled,
   isReportingIntervention,
   healthClinicOptions,
   onSubmit,
@@ -76,14 +83,6 @@ export const PredefinedParticipantForm: FC<Props> = ({
   const { formatMessage } = useIntl();
 
   const isUpdateMode = mode === PredefinedParticipantFormMode.UPDATE;
-
-  const [disabled, setDisabled] = useState(isUpdateMode);
-
-  useEffect(() => {
-    if (isUpdateMode) {
-      setDisabled(true);
-    }
-  }, [isUpdateMode, participant]);
 
   const initialValues: PredefinedParticipantFormValues = useMemo(
     () =>
@@ -113,7 +112,7 @@ export const PredefinedParticipantForm: FC<Props> = ({
       onSubmit={onSubmit}
       enableReinitialize
     >
-      {({ isValid, dirty, handleSubmit, resetForm }) => (
+      {({ isValid, dirty, handleSubmit, resetForm, values }) => (
         <Form
           style={{
             height: '100%',
@@ -176,6 +175,20 @@ export const PredefinedParticipantForm: FC<Props> = ({
               numberKey="number"
               disabled={disabled}
             />
+            <Column gap={32} marginBlockStart={16}>
+              <FormikCheckbox
+                formikKey="emailNotification"
+                disabled={disabled || !values.email}
+              >
+                {formatMessage(messages.emailNotificationCheckboxLabel)}
+              </FormikCheckbox>
+              <FormikCheckbox
+                formikKey="smsNotification"
+                disabled={disabled || !values.number}
+              >
+                {formatMessage(messages.smsNotificationCheckboxLabel)}
+              </FormikCheckbox>
+            </Column>
           </Column>
           <Row justify="between" gap={16}>
             <Row>
@@ -204,7 +217,7 @@ export const PredefinedParticipantForm: FC<Props> = ({
                       type="reset"
                       onClick={() => {
                         resetForm();
-                        setDisabled(true);
+                        setDisabled?.(true);
                       }}
                       inverted
                       disabled={submitting}
@@ -232,7 +245,7 @@ export const PredefinedParticipantForm: FC<Props> = ({
                       width="auto"
                       px={24}
                       type="button"
-                      onClick={() => setDisabled(false)}
+                      onClick={() => setDisabled?.(false)}
                       disabled={deactivating}
                     >
                       {formatMessage(messages.editDetailsButtonTitle)}

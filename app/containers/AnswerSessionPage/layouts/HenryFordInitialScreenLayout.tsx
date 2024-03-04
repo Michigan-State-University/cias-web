@@ -79,8 +79,8 @@ export type PatientDataFormValues = Pick<
 const schema = (formatMessage: IntlShape['formatMessage']) =>
   Yup.object()
     .shape({
-      firstName: nameValidationSchema,
-      lastName: nameValidationSchema,
+      firstName: nameValidationSchema(formatMessage),
+      lastName: nameValidationSchema(formatMessage),
       sexOption: Yup.object().nullable(),
       dobDate: Yup.date().nullable(),
       zipCode: Yup.string()
@@ -246,7 +246,7 @@ const HenryFordInitialScreenLayout = ({
       innerRef={formRef}
     >
       {({ handleSubmit, isValid }) => (
-        <Form>
+        <Form autoComplete="off">
           <Box my={24} mx={26}>
             <Container fluid style={{ padding: 0 }}>
               <Row gutterWidth={24} style={{ rowGap: '24px' }}>

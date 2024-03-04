@@ -14,33 +14,34 @@ import {
 import {
   SEND_PREDEFINED_PARTICIPANT_SMS_INVITATION_ERROR,
   SEND_PREDEFINED_PARTICIPANT_SMS_INVITATION_REQUEST,
+  SEND_PREDEFINED_PARTICIPANT_SMS_INVITATION_SUCCESS,
 } from '../constants';
 import messages from '../messages';
 
 function* sendPredefinedParticipantSmsInvitation({
   payload: { interventionId, participantId },
 }: ReturnType<typeof sendPredefinedParticipantSmsInvitationRequest>) {
-  const requestURL = `v1/interventions/${interventionId}/predefined_participants/${participantId}/send_invitation`;
+  const requestURL = `v1/interventions/${interventionId}/predefined_participants/${participantId}/send_sms_invitation`;
 
   try {
     const { data } = yield call(axios.post, requestURL);
-    const { invitationSentAt } = objectToCamelCase(data);
+    const { smsInvitationSentAt } = objectToCamelCase(data);
 
-    if (!invitationSentAt) {
+    if (!smsInvitationSentAt) {
       throw new Error();
     }
 
     yield put(
       sendPredefinedParticipantSmsInvitationSuccess(
         participantId,
-        invitationSentAt,
+        smsInvitationSentAt,
       ),
     );
     yield call(
       toast.success,
       formatMessage(messages.sendPredefinedParticipantSmsInvitationSuccess),
       {
-        toastId: SEND_PREDEFINED_PARTICIPANT_SMS_INVITATION_ERROR,
+        toastId: SEND_PREDEFINED_PARTICIPANT_SMS_INVITATION_SUCCESS,
       },
     );
   } catch (error) {

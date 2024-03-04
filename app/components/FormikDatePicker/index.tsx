@@ -1,15 +1,14 @@
 import React, { PropsWithChildren } from 'react';
 import { useField, useFormikContext } from 'formik';
-import DatePicker, { ReactDatePickerProps } from 'react-datepicker';
 import isNil from 'lodash/isNil';
 import { useIntl } from 'react-intl';
+import { ReactDatePickerProps } from 'react-datepicker';
 
 import useDidUpdateEffect from 'utils/useDidUpdateEffect';
 
-import { DatePickerWrapper } from 'components/Input/styled';
 import { DateInput, Props as DateInputProps } from 'components/Input/DateInput';
-
-import FormikControlLayout from '../FormikControlLayout';
+import { LocalizedDatePicker } from 'components/DatePicker';
+import FormikControlLayout from 'components/FormikControlLayout';
 
 import messages from './messages';
 
@@ -60,41 +59,26 @@ const FormikDatePicker = ({
       error={error}
       {...columnStyleProps}
     >
-      <DatePickerWrapper>
-        {/* @ts-ignore */}
-        <DatePicker
-          {...field}
-          onChange={setValue}
-          disabled={disabled}
-          selected={field.value}
-          placeholderText={
-            placeholder ?? (selectTime ? 'MM-DD-YYYY, --:--' : 'MM-DD-YYYY')
-          }
-          dateFormat={selectTime ? 'MM-dd-yyyy, p' : 'MM-dd-yyyy'}
-          customInput={
-            <DateInput
-              disabled={disabled}
-              hasError={hasError}
-              {...inputProps}
-            />
-          }
-          showMonthDropdown
-          showYearDropdown
-          calendarClassName="schedule-date-picker"
-          popperModifiers={{
-            preventOverflow: {
-              padding: 10,
-            },
-          }}
-          popperProps={{
-            positionFixed: true,
-          }}
-          timeCaption={formatMessage(messages.timeCaption)}
-          showTimeSelect={selectTime}
-          strictParsing
-          {...datePickerProps}
-        />
-      </DatePickerWrapper>
+      <LocalizedDatePicker
+        {...field}
+        onChange={(value) => setValue(value)}
+        disabled={disabled}
+        selected={field.value}
+        placeholderText={
+          placeholder ?? (selectTime ? 'MM/DD/YYYY, --:--' : 'MM/DD/YYYY')
+        }
+        dateFormat={selectTime ? 'MM/dd/yyyy, p' : 'MM/dd/yyyy'}
+        customInput={
+          <DateInput disabled={disabled} hasError={hasError} {...inputProps} />
+        }
+        showMonthDropdown
+        showYearDropdown
+        calendarClassName="schedule-date-picker"
+        timeCaption={formatMessage(messages.timeCaption)}
+        showTimeSelect={selectTime}
+        strictParsing
+        {...datePickerProps}
+      />
     </FormikControlLayout>
   );
 };

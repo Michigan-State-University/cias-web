@@ -181,6 +181,14 @@ export default defineMessages({
     id: `${scope}.externalIdInputLabel`,
     defaultMessage: `Participant ID`,
   },
+  emailNotificationCheckboxLabel: {
+    id: `${scope}.emailNotificationCheckboxLabel`,
+    defaultMessage: `Allow e-mail notifications`,
+  },
+  smsNotificationCheckboxLabel: {
+    id: `${scope}.smsNotificationCheckboxLabel`,
+    defaultMessage: `Allow SMS notifications`,
+  },
   externalIdInputPlaceholder: {
     id: `${scope}.externalIdInputPlaceholder`,
     defaultMessage: `Enter participant ID`,
@@ -189,17 +197,17 @@ export default defineMessages({
     id: `${scope}.statusColumnHeader`,
     defaultMessage: `Status`,
   },
-  smsInvitationColumnHeader: {
-    id: `${scope}.smsInvitationColumnHeader`,
-    defaultMessage: `SMS invitation`,
+  invitationColumnHeader: {
+    id: `${scope}.invitationColumnHeader`,
+    defaultMessage: `Invitation sent`,
   },
   statusColumnValue: {
     id: `${scope}.statusColumnValue`,
     defaultMessage: `{active, select, true {Active} false {Deactivated} other {}}`,
   },
-  smsInvitationColumnValue: {
-    id: `${scope}.smsInvitationColumnValue`,
-    defaultMessage: `{invitationSent, select, true {Sent} false {Not sent} other {}}`,
+  invitationColumnValue: {
+    id: `${scope}.invitationColumnValue`,
+    defaultMessage: `{invitationSent, select, true {Yes} false {No} other {}}`,
   },
   managePredefinedParticipantButtonLabel: {
     id: `${scope}.managePredefinedParticipantButtonLabel`,
@@ -225,20 +233,42 @@ export default defineMessages({
     id: `${scope}.activatePredefinedParticipantButtonTitle`,
     defaultMessage: `Reactivate participant`,
   },
-  predefinedParticipantSmsInvitationLabel: {
-    id: `${scope}.predefinedParticipantSmsInvitationLabel`,
-    defaultMessage: `SMS invitation`,
+  predefinedParticipantInvitationLabel: {
+    id: `${scope}.predefinedParticipantInvitationLabel`,
+    defaultMessage: `Participant invitation`,
   },
+  predefinedParticipantSmsAndEmailInvitationSent: {
+    id: `${scope}.predefinedParticipantSmsAndEmailInvitationSent`,
+    defaultMessage: `Invitation sent by SMS ({smsDate}) and e-mail ({emailDate})`,
+  },
+
   predefinedParticipantSmsInvitationSent: {
     id: `${scope}.predefinedParticipantSmsInvitationSent`,
-    defaultMessage: `Last SMS invitation was sent on {date}`,
+    defaultMessage: `Invitation sent by SMS ({smsDate})`,
   },
-  predefinedParticipantSmsInvitationNotSent: {
-    id: `${scope}.predefinedParticipantSmsInvitationNotSent`,
-    defaultMessage: `This participant didn’t receive SMS invitation yet`,
+
+  predefinedParticipantEmailInvitationSent: {
+    id: `${scope}.predefinedParticipantEmailInvitationSent`,
+    defaultMessage: `Invitation sent by e-mail ({emailDate})`,
+  },
+  predefinedParticipantInvitationNotSent: {
+    id: `${scope}.predefinedParticipantInvitationNotSent`,
+    defaultMessage: `This participant didn’t receive an invitation yet`,
   },
   predefinedParticipantSendSmsInvitationButtonTitle: {
     id: `${scope}.predefinedParticipantSendSmsInvitationButtonTitle`,
     defaultMessage: `Send SMS invitation`,
+  },
+  predefinedParticipantResendSmsInvitationButtonTitle: {
+    id: `${scope}.predefinedParticipantResendSmsInvitationButtonTitle`,
+    defaultMessage: `Resend SMS invitation`,
+  },
+  predefinedParticipantSendEmailInvitationButtonTitle: {
+    id: `${scope}.predefinedParticipantSendEmailInvitationButtonTitle`,
+    defaultMessage: `Send e-mail invitation`,
+  },
+  predefinedParticipantResendEmailInvitationButtonTitle: {
+    id: `${scope}.predefinedParticipantResendEmailInvitationButtonTitle`,
+    defaultMessage: `Resend e-mail invitation`,
   },
 });

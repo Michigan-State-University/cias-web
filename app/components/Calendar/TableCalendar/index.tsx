@@ -2,7 +2,9 @@ import React, { memo, ReactElement } from 'react';
 import dayjs, { Dayjs } from 'dayjs';
 
 import { CalendarData } from 'models/Tlfb';
+
 import { fullDayToYearFormatter } from 'utils/formatters';
+import { getLocalizedWeekdaysShort } from 'utils/dayjs';
 
 import {
   Container,
@@ -25,6 +27,7 @@ type TableCalendarProps = {
   calendarData: CalendarData;
   disableManualDayClick?: boolean;
   orderedGroupNames: string[];
+  language?: string;
 };
 
 // prevent rerender
@@ -41,6 +44,7 @@ export const TableCalendar = ({
   calendarData,
   disableManualDayClick,
   orderedGroupNames,
+  language,
 }: TableCalendarProps) => (
   <>
     {!isDesktop && MonthSelectorComponent}
@@ -49,7 +53,7 @@ export const TableCalendar = ({
       <CalendarTable>
         <thead>
           <CalendarHeader isDesktop={isDesktop}>
-            {dayjs.weekdaysShort().map((weekday: string) => (
+            {getLocalizedWeekdaysShort(language).map((weekday: string) => (
               <th key={weekday}>{weekday}</th>
             ))}
           </CalendarHeader>
