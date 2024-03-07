@@ -305,6 +305,7 @@ export function AnswerSessionPage({
       max_length: maxLength,
     } = {},
     narrator: {
+      blocks: narratorBlocks,
       settings: {
         character,
         extra_space_for_narrator: extraSpaceForNarrator,
@@ -580,7 +581,8 @@ export function AnswerSessionPage({
 
     const isLastScreen = currentQuestion.type === finishQuestion.id;
 
-    const canSkipNarrator = narratorSkippable || !isAnimationOngoing;
+    const canSkipNarrator =
+      narratorSkippable || !isAnimationOngoing || narratorBlocks.length === 0;
 
     const shouldRenderContinueButton =
       (isNullOrUndefined(proceedButton) || proceedButton) &&
