@@ -169,23 +169,27 @@ const AnimationRefHelper = ({
             return { audios_base64: base64s, ...block };
           }
           if (block.reflections) {
-            block.reflections.map(async (reflectionBlock) => {
-              if (reflectionBlock.audio_urls) {
-                const base64s = await Promise.all(
-                  reflectionBlock.audio_urls.map(async (url) => {
-                    const file = await fetch(`${process.env.API_URL}${url}`);
-                    const contentType = file.headers.get('Content-Type');
-                    const arrayBuffer = await file.arrayBuffer();
-                    const base64String = btoa(
-                      String.fromCharCode(...new Uint8Array(arrayBuffer)),
-                    );
-                    return `data:${contentType};base64,${base64String}`;
-                  }),
-                );
+            const reflections = await Promise.all(
+              block.reflections.map(async (reflectionBlock) => {
+                if (reflectionBlock.audio_urls) {
+                  const base64s = await Promise.all(
+                    reflectionBlock.audio_urls.map(async (url) => {
+                      const file = await fetch(`${process.env.API_URL}${url}`);
+                      const contentType = file.headers.get('Content-Type');
+                      const arrayBuffer = await file.arrayBuffer();
+                      const base64String = btoa(
+                        String.fromCharCode(...new Uint8Array(arrayBuffer)),
+                      );
+                      return `data:${contentType};base64,${base64String}`;
+                    }),
+                  );
 
-                return { audios_base64: base64s, ...block };
-              }
-            });
+                  return { audios_base64: base64s, ...reflectionBlock };
+                }
+              }),
+            );
+
+            return { ...block, reflections };
           }
           return block;
         }),
