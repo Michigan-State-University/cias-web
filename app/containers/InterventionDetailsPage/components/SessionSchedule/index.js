@@ -92,6 +92,18 @@ function SessionSchedule({
   const handleChangeDate = (date) => updateDate(date, sessionId);
   const handleChangeDays = (days) => updatePayload(days, sessionId);
 
+  const shouldRenderOption = () => {
+    switch (selectedScheduleOption) {
+      case SessionScheduleEnum.AFTER_FILL:
+      case SessionScheduleEnum.IMMEDIATELY: {
+        return false;
+      }
+      default: {
+        return true;
+      }
+    }
+  };
+
   const renderOption = () => {
     switch (selectedScheduleOption) {
       case SessionScheduleEnum.DAYS_AFTER:
@@ -159,15 +171,12 @@ function SessionSchedule({
             setValue={handleChangeDate}
           />
         );
-      case SessionScheduleEnum.AFTER_FILL:
-      case SessionScheduleEnum.IMMEDIATELY:
-        return <></>;
       default:
         break;
     }
   };
   return (
-    <Column>
+    <Column pb={24}>
       <Text mb={12} textOpacity={0.6} color={colors.bluewood} fontSize={13}>
         {formatMessage(messages.info)}
       </Text>
@@ -187,8 +196,8 @@ function SessionSchedule({
           setOption={(id) => changeType(id, sessionId)}
         />
       </HelpIconTooltip>
-      {selectedScheduleOption && (
-        <Row mt={28} mb={17} align="center">
+      {selectedScheduleOption && shouldRenderOption() && (
+        <Row mt={24} align="center">
           {renderOption()}
         </Row>
       )}

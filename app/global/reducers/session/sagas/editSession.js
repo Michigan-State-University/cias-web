@@ -1,14 +1,18 @@
 import { put, takeLatest, select, call } from 'redux-saga/effects';
 import axios from 'axios';
+import { toast } from 'react-toastify';
 
 import pickFields from 'utils/pickFields';
-import { makeSelectSessionById } from 'global/reducers/intervention';
 import { jsonApiToObject } from 'utils/jsonApiMapper';
+import { formatApiErrorMessage } from 'utils/formatApiErrorMessage';
+
+import { makeSelectSessionById } from 'global/reducers/intervention';
+
 import { EDIT_SESSION_REQUEST } from '../constants';
 
 import { editSessionSuccess, editSessionError } from '../actions';
-
 import { makeSelectSession } from '../selectors';
+import messages from '../messages';
 
 export function* editSession({ fields, payload: { sessionId } } = {}) {
   const session = sessionId
@@ -28,6 +32,10 @@ export function* editSession({ fields, payload: { sessionId } } = {}) {
 
     yield put(editSessionSuccess(jsonApiToObject(data, 'session')));
   } catch (error) {
+    yield call(
+      toast.error,
+      formatApiErrorMessage(error, messages.editSessionError),
+    );
     yield put(editSessionError(error));
   }
 }

@@ -38,6 +38,7 @@ interface IBaseSpeechData extends ILoadedAudioData {
   currentAudioIndex: number;
   isLoop: boolean;
   audio_urls: string[];
+  audios_base64: string[];
   sha256: string[];
   text: string[];
 }

@@ -1,12 +1,15 @@
 import styled from 'styled-components';
 
-import Column from 'components/Column';
 import { colors, boxShadows } from 'theme';
+import { Col, Container } from 'components/ReactGridSystem';
 
-export const StyledColumn = styled(Column)`
-  width: 400px;
-  padding: 25px 20px;
+export const SessionSettingsContainer = styled(Container)`
+  width: 800px;
   background-color: ${colors.white};
   border-radius: 5px;
   box-shadow: ${boxShadows.selago};
+`;
+
+export const SessionSettingsColumn = styled(Col)`
+  padding-block: 25px;
 `;

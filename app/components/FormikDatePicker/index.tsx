@@ -1,14 +1,16 @@
 import React, { PropsWithChildren } from 'react';
-import { useField } from 'formik';
-import DatePicker, { ReactDatePickerProps } from 'react-datepicker';
+import { useField, useFormikContext } from 'formik';
 import isNil from 'lodash/isNil';
+import { useIntl } from 'react-intl';
+import { ReactDatePickerProps } from 'react-datepicker';
 
-import { colors } from 'theme';
+import useDidUpdateEffect from 'utils/useDidUpdateEffect';
 
-import { DatePickerWrapper } from 'components/Input/styled';
-import Input from 'components/Input';
+import { DateInput, Props as DateInputProps } from 'components/Input/DateInput';
+import { LocalizedDatePicker } from 'components/DatePicker';
+import FormikControlLayout from 'components/FormikControlLayout';
 
-import FormikControlLayout from '../FormikControlLayout';
+import messages from './messages';
 
 export type Props = PropsWithChildren<{
   formikKey: string;
@@ -16,7 +18,9 @@ export type Props = PropsWithChildren<{
   placeholder?: string;
   disabled?: boolean;
   datePickerProps?: Partial<ReactDatePickerProps>;
-  inputProps?: React.HTMLProps<HTMLButtonElement> & Record<string, unknown>;
+  inputProps?: DateInputProps;
+  submitOnChange?: boolean;
+  selectTime?: boolean;
 }> &
   Record<string, unknown>;
 
@@ -28,13 +32,24 @@ const FormikDatePicker = ({
   children,
   datePickerProps,
   inputProps,
+  submitOnChange,
+  selectTime,
   ...columnStyleProps
 }: Props) => {
+  const { formatMessage } = useIntl();
+  const { submitForm } = useFormikContext();
+
   const [field, meta, helpers] = useField(formikKey);
   const { error, touched } = meta;
   const { setValue } = helpers;
 
   const hasError = touched && !isNil(error);
+
+  useDidUpdateEffect(() => {
+    if (submitOnChange) {
+      submitForm();
+    }
+  }, [field.value]);
 
   return (
     <FormikControlLayout
@@ -44,40 +59,26 @@ const FormikDatePicker = ({
       error={error}
       {...columnStyleProps}
     >
-      <DatePickerWrapper>
-        {/* @ts-ignore */}
-        <DatePicker
-          {...field}
-          onChange={setValue}
-          disabled={disabled}
-          selected={field.value}
-          placeholderText={placeholder ?? 'MM-DD-YYYY'}
-          dateFormat="MM-dd-yyyy"
-          customInput={
-            <Input
-              disabled={disabled}
-              mx={0}
-              padding={12}
-              textAlign="left"
-              color={disabled ? colors.casper : colors.bluewood}
-              hasError={hasError}
-              {...inputProps}
-            />
-          }
-          showMonthDropdown
-          showYearDropdown
-          calendarClassName="schedule-date-picker"
-          popperModifiers={{
-            preventOverflow: {
-              padding: 10,
-            },
-          }}
-          popperProps={{
-            positionFixed: true,
-          }}
-          {...datePickerProps}
-        />
-      </DatePickerWrapper>
+      <LocalizedDatePicker
+        {...field}
+        onChange={(value) => setValue(value)}
+        disabled={disabled}
+        selected={field.value}
+        placeholderText={
+          placeholder ?? (selectTime ? 'MM/DD/YYYY, --:--' : 'MM/DD/YYYY')
+        }
+        dateFormat={selectTime ? 'MM/dd/yyyy, p' : 'MM/dd/yyyy'}
+        customInput={
+          <DateInput disabled={disabled} hasError={hasError} {...inputProps} />
+        }
+        showMonthDropdown
+        showYearDropdown
+        calendarClassName="schedule-date-picker"
+        timeCaption={formatMessage(messages.timeCaption)}
+        showTimeSelect={selectTime}
+        strictParsing
+        {...datePickerProps}
+      />
     </FormikControlLayout>
   );
 };

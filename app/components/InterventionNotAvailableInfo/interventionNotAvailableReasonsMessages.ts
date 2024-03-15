@@ -14,4 +14,13 @@ export default defineMessages<InterventionNotAvailableReason>({
     id: `${scope}.INTERVENTION_CLOSED`,
     defaultMessage: 'This study has been closed',
   },
+  [InterventionNotAvailableReason.INTERVENTION_PAUSED]: {
+    id: `${scope}.INTERVENTION_PAUSED`,
+    defaultMessage:
+      'Please check with the research team or clinic to find out when it will resume, or try back later.',
+  },
+  [InterventionNotAvailableReason.SESSION_CLOSED]: {
+    id: `${scope}.SESSION_CLOSED`,
+    defaultMessage: 'This module has been closed',
+  },
 });

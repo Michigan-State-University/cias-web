@@ -23,6 +23,7 @@ interface Props {
   }) => Nullable<JSX.Element>;
   itemsCountKey: string;
   noDataMessage?: string;
+  rowHeight?: number;
 }
 
 const ApiVirtualGrid = ({
@@ -31,6 +32,7 @@ const ApiVirtualGrid = ({
   renderComponent,
   itemsCountKey,
   noDataMessage,
+  rowHeight = 210,
 }: Props) => {
   const infiniteLoaderRef = useRef();
   const screenClass = useScreenClass();
@@ -98,7 +100,7 @@ const ApiVirtualGrid = ({
         ref={infiniteLoaderRef}
         columnCount={columnCount}
         rowCount={rowCount}
-        rowHeight={210}
+        rowHeight={rowHeight}
         items={elements}
         infiniteLoader={
           itemCount

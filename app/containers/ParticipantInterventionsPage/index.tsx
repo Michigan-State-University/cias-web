@@ -1,5 +1,6 @@
 import React from 'react';
 import { useIntl } from 'react-intl';
+import { elements } from 'theme';
 
 import { jsonApiToArray } from 'utils/jsonApiMapper';
 
@@ -31,6 +32,7 @@ const ParticipantInterventionsPage = () => {
           urlBase="v1/user_interventions"
           renderComponent={ParticipantInterventionTileRenderer}
           noDataMessage={formatMessage(messages.noDataMessage)}
+          rowHeight={elements.userInterventionTileHeight + 10}
         />
       </Box>
     </AppContainer>

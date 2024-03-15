@@ -1,7 +1,6 @@
 import produce from 'immer';
 import isEmpty from 'lodash/isEmpty';
 
-import { archived } from 'models/Status/StatusTypes';
 import {
   EDIT_INTERVENTION_SUCCESS,
   CREATE_INTERVENTION_SUCCESS,
@@ -11,9 +10,6 @@ import isNullOrUndefined from 'utils/isNullOrUndefined';
 import { updateItemById, updateListItemStateById } from 'utils/reduxUtils';
 
 import {
-  ARCHIVE_INTERVENTION_ERROR,
-  ARCHIVE_INTERVENTION_REQUEST,
-  ARCHIVE_INTERVENTION_SUCCESS,
   CHANGE_MAIN_DASHBOARD_FILTER_DATA,
   FETCH_INTERVENTIONS_ERROR,
   FETCH_INTERVENTIONS_REQUEST,
@@ -128,26 +124,6 @@ const interventionsReducer = (state = initialState, { type, payload }) =>
         break;
       case CREATE_INTERVENTION_SUCCESS:
         draft.interventions.unshift(payload.intervention);
-        break;
-      case ARCHIVE_INTERVENTION_REQUEST:
-        let interventionIndex = draft.interventions.findIndex(
-          ({ id }) => id === payload.interventionId,
-        );
-        draft.interventions[interventionIndex].status = archived;
-        draft.cache.archiveIntervention =
-          state.interventions[interventionIndex];
-        break;
-      case ARCHIVE_INTERVENTION_SUCCESS:
-        draft.shouldRefetch = true;
-        draft.cache.archiveIntervention = null;
-        break;
-      case ARCHIVE_INTERVENTION_ERROR:
-        interventionIndex = draft.interventions.findIndex(
-          ({ id }) => id === payload.interventionId,
-        );
-        draft.interventions[interventionIndex] =
-          state.cache.archiveIntervention;
-        draft.cache.archiveIntervention = null;
         break;
 
       case EDIT_INTERVENTION_SUCCESS:

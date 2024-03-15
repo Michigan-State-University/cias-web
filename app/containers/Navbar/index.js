@@ -137,7 +137,12 @@ export function Navbar({
               lastName={lastName}
               firstName={firstName}
             />
-            <Box className="user-name-info" clickable data-private>
+            <Box
+              marginInlineStart={10}
+              className="user-name-info"
+              clickable
+              data-private
+            >
               {displayedName}
             </Box>
           </DropDownContainer>

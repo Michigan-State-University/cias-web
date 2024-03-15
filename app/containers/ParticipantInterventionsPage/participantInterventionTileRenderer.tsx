@@ -6,6 +6,7 @@ import { colors, elements, themeColors } from 'theme';
 
 import {
   statusTypeToColorMap,
+  statusTypeToFontColorMap,
   UserInterventionStatus,
 } from 'models/UserIntervention/StatusTypes';
 import { UserIntervention } from 'models/UserIntervention/UserIntervention';
@@ -23,6 +24,11 @@ import Tooltip from 'components/Tooltip';
 import { TileContainer } from 'components/TileContainer';
 
 import messages from './messages';
+import {
+  getExtendedUserInterventionStatus,
+  isUserInterventionTileDisabled,
+} from './utils';
+import Row from '../../components/Row';
 
 const COMPLETED_INTERVENTION_TEXT_OPACITY = 0.3;
 
@@ -39,28 +45,37 @@ const ParticipantInterventionTileRenderer = ({ data, index }: Props) => {
   if (!userIntervention) return null;
 
   const {
-    status,
+    status: userInterventionStatus,
     sessionsInIntervention,
     completedSessions,
     id,
-    intervention: { name: interventionName, type: interventionType },
+    intervention: {
+      name: interventionName,
+      type: interventionType,
+      status: interventionStatus,
+    },
     blocked,
     containMultipleFillSession,
   } = userIntervention;
 
-  const statusWithBlocked = blocked ? UserInterventionStatus.NO_ACCESS : status;
+  const extendedStatus = getExtendedUserInterventionStatus(
+    blocked,
+    interventionStatus,
+    userInterventionStatus,
+  );
 
-  const statusColor = statusTypeToColorMap[statusWithBlocked];
+  const statusColor = statusTypeToColorMap[extendedStatus];
+  const statusFontColor = statusTypeToFontColorMap[extendedStatus];
 
   const userInterventionCompletionPercentage =
     sessionsInIntervention === 0
       ? '0%'
       : `${Math.round((completedSessions / sessionsInIntervention) * 100)}%`;
 
-  const tileDisabled =
-    statusWithBlocked === UserInterventionStatus.NO_ACCESS ||
-    (!containMultipleFillSession &&
-      statusWithBlocked === UserInterventionStatus.COMPLETED);
+  const tileDisabled = isUserInterventionTileDisabled(
+    extendedStatus,
+    containMultipleFillSession,
+  );
 
   return (
     <GhostLink
@@ -72,15 +87,31 @@ const ParticipantInterventionTileRenderer = ({ data, index }: Props) => {
       <TileContainer
         bg={tileDisabled ? colors.mischka : colors.white}
         height={elements.userInterventionTileHeight}
+        disabled={tileDisabled}
+        gap={12}
       >
         <Box display="flex" justify="between" align="center">
-          <Box px={12} py={8} bg={statusColor} borderRadius={5}>
-            <Text>
-              {formatMessage(
-                userInterventionStatusesMessages[statusWithBlocked],
-              )}
-            </Text>
-          </Box>
+          <Row gap={8} align="center">
+            <Box px={8} py={4} bg={statusColor} borderRadius={5}>
+              <Text
+                color={statusFontColor}
+                fontWeight="bold"
+                fontSize={12}
+                lineHeight={1.33}
+              >
+                {formatMessage(
+                  userInterventionStatusesMessages[extendedStatus],
+                )}
+              </Text>
+            </Box>
+            {extendedStatus === UserInterventionStatus.PAUSED && (
+              <Tooltip
+                id={`paused-intervention-tooltip-${id}`}
+                icon={questionMark}
+                text={formatMessage(messages.pausedInterventionTooltip)}
+              />
+            )}
+          </Row>
           {interventionType !== InterventionType.DEFAULT && !blocked && (
             <Box
               display="flex"
@@ -93,7 +124,6 @@ const ParticipantInterventionTileRenderer = ({ data, index }: Props) => {
             </Box>
           )}
           {blocked && (
-            // @ts-ignore
             <Tooltip
               id={`No-access-tooltip-${id}`}
               ml={8}
@@ -103,16 +133,18 @@ const ParticipantInterventionTileRenderer = ({ data, index }: Props) => {
           )}
         </Box>
 
-        <EllipsisText
-          fontSize="18px"
-          lineHeight="130%"
-          fontWeight="bold"
-          lines={2}
-          text={interventionName}
-          opacity={tileDisabled ? COMPLETED_INTERVENTION_TEXT_OPACITY : 1}
-          dataFor={id}
-          dir="auto"
-        />
+        <Box flex={1}>
+          <EllipsisText
+            fontSize="18px"
+            lineHeight="130%"
+            fontWeight="bold"
+            lines={2}
+            text={interventionName}
+            opacity={tileDisabled ? COMPLETED_INTERVENTION_TEXT_OPACITY : 1}
+            dataFor={id}
+            dir="auto"
+          />
+        </Box>
         <Box
           visibility={
             interventionType === InterventionType.DEFAULT || blocked
@@ -124,7 +156,7 @@ const ParticipantInterventionTileRenderer = ({ data, index }: Props) => {
           <Text>{formatMessage(messages.completion)} </Text>
           <Box display="flex" justify="between" align="center">
             <Box
-              bg={statusTypeToColorMap[UserInterventionStatus.READY_TO_START]}
+              bg={colors.periwinkleGray50}
               borderRadius={2}
               width="80%"
               height={4}

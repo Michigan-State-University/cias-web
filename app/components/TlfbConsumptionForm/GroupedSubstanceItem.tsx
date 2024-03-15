@@ -8,7 +8,7 @@ import { Substance } from 'models/Question';
 
 import { floatCharValidator, floatValidator } from 'utils/validators';
 
-import Text from 'components/Text';
+import { EllipsisText } from 'components/Text';
 import Circle from 'components/Circle';
 import { Col, Container, Row } from 'components/ReactGridSystem';
 import Box from 'components/Box';
@@ -155,7 +155,7 @@ const Component = ({
             padding={12}
             dir="auto"
           >
-            <Text>{selectedValue?.label}</Text>
+            <EllipsisText text={selectedValue?.label} />
           </Box>
         </Col>
         <Col xs={7}>

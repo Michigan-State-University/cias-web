@@ -72,4 +72,8 @@ export default defineMessages({
     id: `${scope}.closePreviewText`,
     defaultMessage: 'Close Preview',
   },
+  resourcesLinkTitle: {
+    id: `${scope}.resourcesLinkTitle`,
+    defaultMessage: 'Support',
+  },
 });

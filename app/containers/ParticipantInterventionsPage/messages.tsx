@@ -22,6 +22,10 @@ export default defineMessages({
   },
   noAccessTooltip: {
     id: `${scope}.noAccessTooltip`,
-    defaultMessage: `You got invited to intervention that you don't have access for. Contact your researcher to get access`,
+    defaultMessage: `You got invited to intervention that you don't have access for. Contact your researcher to get access.`,
+  },
+  pausedInterventionTooltip: {
+    id: `${scope}.pausedInterventionTooltip`,
+    defaultMessage: `This study has been temporarily paused. Please try again later.`,
   },
 });

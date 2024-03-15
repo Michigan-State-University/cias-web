@@ -157,44 +157,44 @@ const RenderQuestionDetails = ({
   const narratorExtraSpace = CHARACTER_CONFIGS[character].size.height;
 
   return (
-    <QuestionDetailsLanguageProvider>
-      <AnswerOuterContainer>
-        <Column width="100%" display="flex" align="center">
-          {currentGroupScope && (
-            <Row
-              mb={10}
-              width="inherit"
-              maxWidth={elements.draggableContainerSize}
-              justify="between"
-              align="center"
-            >
-              <StyledInput
-                // @ts-ignore
-                px={12}
-                value={currentGroupScope.title}
-                fontSize={18}
-                fontWeight="bold"
-                placeholder={formatMessage(messages.groupPlaceholder)}
-                maxWidth="initial"
-                onFocus={selectInputText}
-                onBlur={(val) => changeGroupName(val)}
-                disabled={!editingPossible}
+    <AnswerOuterContainer>
+      <Column width="100%" display="flex" align="center">
+        {currentGroupScope && (
+          <Row
+            mb={10}
+            width="inherit"
+            maxWidth={elements.draggableContainerSize}
+            justify="between"
+            align="center"
+          >
+            <StyledInput
+              // @ts-ignore
+              px={12}
+              value={currentGroupScope.title}
+              fontSize={18}
+              fontWeight="bold"
+              placeholder={formatMessage(messages.groupPlaceholder)}
+              maxWidth="initial"
+              onFocus={selectInputText}
+              onBlur={(val) => changeGroupName(val)}
+              disabled={!editingPossible}
+            />
+            {!isTlfbGroup && logo?.url && (
+              <Img
+                maxHeight={elements.interventionLogoSize.height}
+                maxWidth={elements.interventionLogoSize.width}
+                src={logo.url}
+                aria-label={logo.alt}
               />
-              {!isTlfbGroup && logo?.url && (
-                <Img
-                  maxHeight={elements.interventionLogoSize.height}
-                  maxWidth={elements.interventionLogoSize.width}
-                  src={logo.url}
-                  aria-label={logo.alt}
-                />
-              )}
-              {isTlfbGroup && (
-                <Text fontWeight="medium">
-                  {formatMessage(questionTypesMessages[type])}
-                </Text>
-              )}
-            </Row>
-          )}
+            )}
+            {isTlfbGroup && (
+              <Text fontWeight="medium">
+                {formatMessage(questionTypesMessages[type])}
+              </Text>
+            )}
+          </Row>
+        )}
+        <QuestionDetailsLanguageProvider keepAppLocale={isTlfbGroup}>
           <AnswerInterventionContent
             ref={animationBoundaries}
             id="quill_boundaries"
@@ -285,9 +285,9 @@ const RenderQuestionDetails = ({
               </AppContainer>
             </Row>
           </AnswerInterventionContent>
-        </Column>
-      </AnswerOuterContainer>
-    </QuestionDetailsLanguageProvider>
+        </QuestionDetailsLanguageProvider>
+      </Column>
+    </AnswerOuterContainer>
   );
 };
 

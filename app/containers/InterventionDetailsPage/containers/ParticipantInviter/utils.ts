@@ -3,6 +3,7 @@ import { IntlShape } from 'react-intl';
 import groupBy from 'lodash/groupBy';
 import countBy from 'lodash/countBy';
 import isNil from 'lodash/isNil';
+import dayjs from 'dayjs';
 
 import { PredefinedParticipant } from 'models/PredefinedParticipant';
 
@@ -69,8 +70,17 @@ export const createInviteUrl = (
   interventionId: string,
   sessionId: Nullable<string>,
   healthClinicId: Nullable<string>,
+  interventionLanguageCode: string,
 ): string => {
   let url;
+
+  const queryParams: Record<string, string> = {};
+  if (isReportingIntervention && healthClinicId) {
+    queryParams.cid = healthClinicId;
+  }
+  if (!isModularIntervention) {
+    queryParams.lang = interventionLanguageCode;
+  }
 
   if (isModularIntervention) {
     url = `${process.env.WEB_URL}${parametrizeRoutePath(
@@ -78,6 +88,7 @@ export const createInviteUrl = (
       {
         interventionId,
       },
+      queryParams,
     )}`;
   } else {
     url = `${process.env.WEB_URL}${parametrizeRoutePath(
@@ -86,11 +97,8 @@ export const createInviteUrl = (
         interventionId,
         sessionId: sessionId ?? '',
       },
+      queryParams,
     )}`;
-  }
-
-  if (isReportingIntervention && healthClinicId) {
-    url = `${url}?cid=${healthClinicId}`;
   }
 
   return url;
@@ -286,6 +294,8 @@ export const getPredefinedParticipantFormInitialValues = (
     lastName: participant?.lastName ?? '',
     email: participant?.email ?? '',
     externalId: participant?.externalId ?? '',
+    smsNotification: !!participant?.smsNotification,
+    emailNotification: !!participant?.emailNotification,
   };
 };
 
@@ -381,6 +391,7 @@ export const preparePredefinedParticipantData = ({
   email,
   iso,
   number,
+  ...attributes
 }: PredefinedParticipantFormValues): PredefinedParticipantData => {
   const phoneAttributes =
     number && iso ? getPhoneAttributes(number, iso) : null;
@@ -391,8 +402,12 @@ export const preparePredefinedParticipantData = ({
     externalId: externalId || null,
     email: email || null,
     phoneAttributes,
+    ...attributes,
   };
 };
 
 export const getPredefinedParticipantUrl = (slug: string): string =>
   `${WEB_HOST}/usr/${slug}`;
+
+export const formatInvitationSentAt = (invitationSentAt: Nullable<string>) =>
+  invitationSentAt && dayjs(invitationSentAt).format('L LT');

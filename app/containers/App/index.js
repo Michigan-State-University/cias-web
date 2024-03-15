@@ -35,7 +35,11 @@ import {
   makeSelectUser,
   fetchSelfDetailsSaga,
 } from 'global/reducers/auth';
-import { RoutePath, WILDCARD_PATH } from 'global/constants';
+import {
+  INTERVENTION_LANGUAGE_QUERY_KEY,
+  RoutePath,
+  WILDCARD_PATH,
+} from 'global/constants';
 
 import AnswerSessionPage from 'containers/AnswerSessionPage/Loadable';
 import EditSessionPage from 'containers/Sessions/containers/EditSessionPage/Loadable';
@@ -74,6 +78,7 @@ import VerifyUserKeyPage from 'containers/VerifyUserKeyPage/Loadable';
 import AccessibilityStatementPage from 'containers/AccessibiltyStatementPage/Loadable';
 import ChatWidget from 'containers/ChatWidget';
 import NavigatorAvailabilityModal from 'containers/NavigatorAvailabilityModal';
+import InterventionNotAvailablePage from 'containers/InterventionNotAvailablePage/Loadable';
 
 import AppRoute from 'components/AppRoute';
 import IdleTimer from 'components/IdleTimer/Loadable';
@@ -88,6 +93,11 @@ import {
   inboxSubTabId,
   archiveSubTabId,
 } from 'models/User/RolesManager/defaultNavbarTabs';
+
+import {
+  ACC_TOOLBAR_CONSTRUCTOR_ARGS,
+  ACC_TOOLBAR_ROOT_ID,
+} from 'global/constants/accToolbar';
 
 import { arraysOverlap } from 'utils/arrayUtils';
 
@@ -142,9 +152,15 @@ export function App({ user, fetchSelfDetails }) {
   }, [user]);
 
   useEffect(() => {
-    const appRoot = document.getElementById('app');
-
-    appRoot?.setAttribute('lang', locale);
+    document.documentElement.setAttribute(
+      INTERVENTION_LANGUAGE_QUERY_KEY,
+      locale,
+    );
+    const accToolbarWidget = window.micAccessTool;
+    if (accToolbarWidget) {
+      document.getElementById(ACC_TOOLBAR_ROOT_ID).remove();
+      accToolbarWidget.constructor(ACC_TOOLBAR_CONSTRUCTOR_ARGS);
+    }
   }, [locale]);
 
   const renderDashboardByRole = () => {
@@ -569,6 +585,11 @@ export function App({ user, fetchSelfDetails }) {
           component={VerifyUserKeyPage}
         />
         <AppRoute exact path={RoutePath.NOT_FOUND} component={NotFoundPage} />
+        <AppRoute
+          exact
+          path={RoutePath.INTERVENTION_NOT_AVAILABLE}
+          component={InterventionNotAvailablePage}
+        />
         <AppRoute path={WILDCARD_PATH}>
           <Redirect to={RoutePath.NOT_FOUND} />
         </AppRoute>

@@ -44,14 +44,6 @@ export default defineMessages({
     id: `${scope}.hideArchived`,
     defaultMessage: `Hide Archived`,
   },
-  feedbackTitle: {
-    id: `${scope}.feedbackTitle`,
-    defaultMessage: `Something went wrong? Have a new idea?`,
-  },
-  feedbackDescription: {
-    id: `${scope}.feedbackDescription`,
-    defaultMessage: `Share your thoughts here!`,
-  },
   searchInterventionsLabel: {
     id: `${scope}.searchInterventionsLabel`,
     defaultMessage: `Filter Interventions by name`,

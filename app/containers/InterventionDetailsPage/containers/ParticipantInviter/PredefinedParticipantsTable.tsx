@@ -36,7 +36,7 @@ export const PredefinedParticipantsTable: FC<Props> = ({
           </TH>
           <TH padding={8}>
             <Text textAlign="left" fontWeight="bold">
-              {formatMessage(messages.smsInvitationColumnHeader)}
+              {formatMessage(messages.invitationColumnHeader)}
             </Text>
           </TH>
           <TH width={110}></TH>

@@ -4,4 +4,5 @@ export type DropdownOption = {
   icon?: string;
   action: () => void;
   color?: string;
+  disabled?: boolean;
 };

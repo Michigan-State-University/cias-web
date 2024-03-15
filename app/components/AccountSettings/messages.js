@@ -212,6 +212,10 @@ export default defineMessages({
     id: `${scope}.codeRequired`,
     defaultMessage: 'Code is required',
   },
+  codeLength: {
+    id: `${scope}.codeLength`,
+    defaultMessage: 'Code must consist of {length} digits',
+  },
   codeInfo: {
     id: `${scope}.codeInfo`,
     defaultMessage:

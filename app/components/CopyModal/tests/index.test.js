@@ -12,12 +12,13 @@ import 'jest-styled-components';
 import { Provider } from 'react-redux';
 import { DEFAULT_LOCALE } from 'i18n';
 
+import { InterventionStatus } from 'models/Intervention';
+
 import { createTestStore } from 'utils/testUtils/storeUtils';
 import { sessionReducer } from 'global/reducers/session';
 import { localStateReducer } from 'global/reducers/localState';
 import { interventionsReducer } from 'global/reducers/interventions';
 import { interventionReducer } from 'global/reducers/intervention';
-import { draft } from 'models/Status/StatusTypes';
 
 import { copyModalReducer } from 'global/reducers/copyModalReducer';
 import CopyModal from '../index';
@@ -32,7 +33,7 @@ describe('<CopyModal />', () => {
   const mockIntervention = (suffix = 1) => ({
     id: `intervention-test-id-${suffix}`,
     name: `Intervention test title ${suffix}`,
-    status: draft,
+    status: InterventionStatus.DRAFT,
   });
 
   const mockSession = (suffix = 1) => ({

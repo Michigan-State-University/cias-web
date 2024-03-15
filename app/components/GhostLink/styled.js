@@ -6,3 +6,8 @@ export const EmptyAnchor = styled(Link)`
   width: ${(props) => props.width || 'auto'};
   cursor: ${(props) => (props.disabled ? 'not-allowed' : 'pointer')};
 `;
+
+export const DisabledLink = styled.div`
+  width: ${(props) => props.width || 'auto'};
+  cursor: not-allowed;
+`;

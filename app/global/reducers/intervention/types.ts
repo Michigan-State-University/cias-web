@@ -26,4 +26,6 @@ export type PredefinedParticipantData = {
   healthClinicId: Nullable<string>;
   externalId: Nullable<string>;
   phoneAttributes: Nullable<PhoneAttributes>;
+  emailNotification: boolean;
+  smsNotification: boolean;
 };

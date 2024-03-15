@@ -21,6 +21,7 @@ const polyfillIntl = async () => {
     // ! Add every used language
     await import('intl/locale-data/jsonp/en.js');
     await import('intl/locale-data/jsonp/ar.js');
+    await import('intl/locale-data/jsonp/es.js');
   }
 };
 
@@ -41,6 +42,7 @@ const polyfillListFormat = async () => {
     // ! Add every used language
     await import('@formatjs/intl-listformat/locale-data/en');
     await import('@formatjs/intl-listformat/locale-data/ar');
+    await import('@formatjs/intl-listformat/locale-data/es');
   }
 };
 
@@ -52,6 +54,7 @@ const polyfillDisplayNames = async () => {
     // ! Add every used language
     await import('@formatjs/intl-displaynames/locale-data/en');
     await import('@formatjs/intl-displaynames/locale-data/ar');
+    await import('@formatjs/intl-displaynames/locale-data/es');
   }
 };
 
@@ -63,6 +66,7 @@ const polyfillPluralRules = async () => {
     // ! Add every used language
     await import('@formatjs/intl-pluralrules/locale-data/en');
     await import('@formatjs/intl-pluralrules/locale-data/ar');
+    await import('@formatjs/intl-pluralrules/locale-data/es');
   }
 };
 
@@ -74,6 +78,7 @@ const polyfillNumberFormat = async () => {
     // ! Add every used language
     await import('@formatjs/intl-numberformat/locale-data/en');
     await import('@formatjs/intl-numberformat/locale-data/ar');
+    await import('@formatjs/intl-numberformat/locale-data/es');
   }
 };
 
@@ -85,6 +90,7 @@ const polyfillRelativeTimeFormat = async () => {
     // ! Add every used language
     await import('@formatjs/intl-relativetimeformat/locale-data/en');
     await import('@formatjs/intl-relativetimeformat/locale-data/ar');
+    await import('@formatjs/intl-relativetimeformat/locale-data/es');
   }
 };
 
@@ -99,6 +105,7 @@ const polyfillDateTimeFormat = async () => {
     // ! Add every used language
     dataPolyfills.push(import('@formatjs/intl-datetimeformat/locale-data/en'));
     dataPolyfills.push(import('@formatjs/intl-datetimeformat/locale-data/ar'));
+    dataPolyfills.push(import('@formatjs/intl-datetimeformat/locale-data/es'));
 
     await Promise.all(dataPolyfills);
   }

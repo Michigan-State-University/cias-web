@@ -1,23 +1,23 @@
 import React, { useState, useEffect, useRef } from 'react';
 import PropTypes from 'prop-types';
-import DatePicker from 'react-datepicker';
 import 'react-quill/dist/quill.bubble.css';
 import 'react-datepicker/dist/react-datepicker.css';
 import ReactQuill from 'react-quill';
 import isNumber from 'lodash/isNumber';
 
-import { colors } from 'theme';
-
 import useOutsideClick from 'utils/useOutsideClick';
 import { formatMessage } from 'utils/intlOutsideReact';
+
+import { LocalizedDatePicker } from 'components/DatePicker';
 
 import Column from '../Column';
 import Row from '../Row';
 import { Input } from './index';
-import { DatePickerWrapper, QuillStyled } from './styled';
+import { QuillStyled } from './styled';
 import { TextArea } from './TextArea';
 import messages from './messages';
 import './QuillSinglelineHandler';
+import { DateInput } from './DateInput';
 
 const quillModules = {
   toolbar: {
@@ -209,48 +209,35 @@ const ApprovableInput = ({
       );
     if (type === 'date')
       return (
-        <DatePickerWrapper>
-          <DatePicker
-            ref={ref}
-            disabled={disabled}
-            minDate={minDate}
-            maxDate={maxDate}
-            selected={value}
-            onChange={(date) => onCheck(date)}
-            onFocus={onFocus}
-            placeholderText={placeholder ?? 'MM-DD-YYYY'}
-            dateFormat="MM-dd-yyyy"
-            selectsEnd={selectsEnd}
-            selectsStart={selectsStart}
-            startDate={startDate}
-            endDate={endDate}
-            customInput={
-              <Input
-                disabled={disabled}
-                mx={0}
-                padding={12}
-                textAlign="left"
-                color={disabled ? colors.casper : colors.bluewood}
-                fontSize={fontSize}
-                height={height}
-                width={width}
-                {...styles}
-                ref={ref}
-              />
-            }
-            showMonthDropdown
-            showYearDropdown
-            calendarClassName="schedule-date-picker"
-            popperModifiers={{
-              preventOverflow: {
-                padding: 10,
-              },
-            }}
-            popperProps={{
-              positionFixed: true,
-            }}
-          />
-        </DatePickerWrapper>
+        <LocalizedDatePicker
+          ref={ref}
+          disabled={disabled}
+          minDate={minDate}
+          maxDate={maxDate}
+          selected={value}
+          onChange={(date) => onCheck(date)}
+          onFocus={onFocus}
+          placeholderText={placeholder ?? 'MM/DD/YYYY'}
+          dateFormat="MM/dd/yyyy"
+          selectsEnd={selectsEnd}
+          selectsStart={selectsStart}
+          startDate={startDate}
+          endDate={endDate}
+          customInput={
+            <DateInput
+              disabled={disabled}
+              fontSize={fontSize}
+              height={height}
+              width={width}
+              {...styles}
+              ref={ref}
+            />
+          }
+          showMonthDropdown
+          showYearDropdown
+          calendarClassName="schedule-date-picker"
+          strictParsing
+        />
       );
     return (
       <Input

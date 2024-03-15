@@ -11,9 +11,10 @@ import { Provider } from 'react-redux';
 import { MemoryRouter } from 'react-router-dom';
 import { DEFAULT_LOCALE } from 'i18n';
 
-import { createTestStore } from 'utils/testUtils/storeUtils';
 import { singleQuestion } from 'models/Session/QuestionTypes';
-import { draft } from 'models/Status/StatusTypes';
+import { InterventionStatus } from 'models/Intervention';
+
+import { createTestStore } from 'utils/testUtils/storeUtils';
 
 import SingleQuestion from '../index';
 
@@ -27,7 +28,7 @@ describe('<SingleQuestion />', () => {
 
   const defaultProps = {
     isNarratorTab: false,
-    interventionStatus: draft,
+    interventionStatus: InterventionStatus.DRAFT,
     ...mockedFunctions,
   };
   const initialState = {

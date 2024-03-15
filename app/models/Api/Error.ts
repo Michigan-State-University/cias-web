@@ -21,4 +21,9 @@ export interface ApiErrorResponse {
 
 export type ApiError<T = ApiErrorResponse> = AxiosError<T>;
 
-export type ApiMessageError = ApiError<{ message: string }>;
+export type ApiMessageError<Reason extends string = string> = ApiError<{
+  message: string;
+  details?: {
+    reason?: Reason;
+  };
+}>;
