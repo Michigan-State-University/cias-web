@@ -164,6 +164,7 @@ const useAudioHelper: TUseAudioHelper = (
     block: IReflectionBlock | IReflectionFormulaBlock,
   ): {
     audio_urls: string[];
+    audios_base64: string[];
     reflections: IReflection[] | IReflectionFormula[];
     sha256: string[];
   } => {
@@ -176,6 +177,7 @@ const useAudioHelper: TUseAudioHelper = (
 
     return {
       audio_urls: [],
+      audios_base64: [],
       reflections,
       sha256: [],
     };
