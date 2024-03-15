@@ -35,6 +35,7 @@ const Header = ({
   canCurrentUserMakeChanges,
   editingPossible,
   name,
+  languageCode,
   editName,
   handleChangeStatus,
   interventionId,
@@ -133,6 +134,7 @@ const Header = ({
             <ParticipantsInviter
               interventionId={interventionId}
               interventionName={name}
+              interventionLanguageCode={languageCode}
               organizationId={organizationId}
               interventionStatus={status}
               interventionType={interventionType}
@@ -214,6 +216,7 @@ Header.propTypes = {
   canCurrentUserMakeChanges: PropTypes.bool,
   editingPossible: PropTypes.bool,
   name: PropTypes.string,
+  languageCode: PropTypes.string,
   editName: PropTypes.func,
   handleChangeStatus: PropTypes.func,
   interventionId: PropTypes.string,

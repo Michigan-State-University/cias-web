@@ -36,3 +36,19 @@ export const getAriaLabelProps = ({
 }) => ({
   'aria-label': ariaLabel ?? (id || ariaLabelledBy ? undefined : placeholder),
 });
+
+export const addSeparatorsToDateString = (value, separator) => {
+  const onlyNumbers = value.replace(/\D/g, '');
+  const separatedDayMonthValue = onlyNumbers
+    .substring(0, 4)
+    .match(/.{1,2}/g)
+    .join(separator);
+
+  if (onlyNumbers.length >= 4) {
+    return `${separatedDayMonthValue}${separator}${onlyNumbers.substring(
+      4,
+      8,
+    )}`;
+  }
+  return separatedDayMonthValue;
+};

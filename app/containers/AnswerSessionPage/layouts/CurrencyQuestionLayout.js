@@ -23,7 +23,7 @@ const CurrencyQuestionLayout = ({ onChange, answerBody, disabled }) => {
   const amount = value.substring(currency.length).trim();
 
   useEffect(() => {
-    if (!currency) handleOnSelect('USD', false);
+    if (!currency) handleOnSelect('USD');
   }, []);
 
   const processAmount = (number) => {

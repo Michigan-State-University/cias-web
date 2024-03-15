@@ -21,9 +21,9 @@ export const NavbarStyled = styled.div`
   align-items: center;
   height: ${elements.navbarHeight}px;
 
-  gap: 16px;
+  gap: 24px;
   @media ${maxQueries.sm} {
-    gap: 0;
+    gap: 16px;
   }
 
   .user-name-info {
@@ -39,7 +39,10 @@ export const RightPanel = styled.div`
   margin-right: 0;
   display: flex;
   align-items: center;
-  gap: 32px;
+  gap: 24px;
+  @media ${maxQueries.sm} {
+    gap: 16px;
+  }
   flex-shrink: 0;
 `;
 
@@ -98,7 +101,6 @@ export const DropDownContainer = styled.div`
   position: relative;
   display: flex;
   align-items: center;
-  gap: 10px;
 `;
 
 export const MSULogoContainer = styled.div`

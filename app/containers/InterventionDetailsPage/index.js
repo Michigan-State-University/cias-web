@@ -9,7 +9,6 @@ import { useIntl } from 'react-intl';
 import { connect } from 'react-redux';
 import { compose } from 'redux';
 import { createStructuredSelector } from 'reselect';
-import get from 'lodash/get';
 import { DragDropContext, Droppable } from 'react-beautiful-dnd';
 import orderBy from 'lodash/orderBy';
 import { Col as GCol, Row as GRow } from 'react-grid-system';
@@ -20,7 +19,6 @@ import { colors, themeColors } from 'theme';
 
 import FileShareIcon from 'assets/svg/file-share.svg';
 import CopyIcon from 'assets/svg/copy.svg';
-import ArchiveIcon from 'assets/svg/archive.svg';
 import GearIcon from 'assets/svg/gear-wo-background.svg';
 import AddAppIcon from 'assets/svg/app-add.svg';
 import TranslateIcon from 'assets/svg/translate.svg';
@@ -31,10 +29,9 @@ import isNullOrUndefined from 'utils/isNullOrUndefined';
 import { reorder } from 'utils/reorder';
 import { isInterventionExportFeatureEnabled } from 'utils/env';
 
-import { canArchive, canEdit } from 'models/Status/statusPermissions';
+import { canEdit } from 'models/Status/statusPermissions';
 import { useRoleManager } from 'models/User/RolesManager';
 import { reorderScope } from 'models/Session/ReorderScope';
-import { archived } from 'models/Status/StatusTypes';
 import { getQuestionGroupsSaga } from 'global/reducers/questionGroups/sagas';
 import { editSessionRequest, editSessionSaga } from 'global/reducers/session';
 import { makeSelectUser } from 'global/reducers/auth';
@@ -79,11 +76,7 @@ import {
 } from 'containers/ShareExternallyModal';
 import { useClearInterventionData } from 'containers/ClearInterventionData';
 
-import Modal, {
-  ConfirmationModal,
-  ModalType,
-  useModal,
-} from 'components/Modal';
+import Modal, { ConfirmationModal } from 'components/Modal';
 import Loader from 'components/Loader';
 import Column from 'components/Column';
 import ErrorAlert from 'components/ErrorAlert';
@@ -111,7 +104,7 @@ import {
   INTERVENTION_ASSIGN_ORGANIZATION_MODAL_WIDTH,
 } from './components/Modals';
 import messages from './messages';
-import { InterventionDetailsPageContext, nextStatus } from './utils';
+import { InterventionDetailsPageContext } from './utils';
 import { INTERVENTION_SETTINGS_MODAL_WIDTH } from './constants';
 import { useExportInterventionModal } from '../ExportInterventionModal';
 
@@ -151,6 +144,7 @@ export function InterventionDetailsPage({
   const {
     sessions,
     name,
+    languageCode,
     id,
     status,
     csv,
@@ -171,7 +165,6 @@ export function InterventionDetailsPage({
   } = intervention || {};
 
   const showSessionCreateButton = canEdit(status);
-  const archivingPossible = canCurrentUserMakeChanges && canArchive(status);
 
   const [translateModalVisible, setTranslateModalVisible] = useState(false);
 
@@ -194,24 +187,10 @@ export function InterventionDetailsPage({
   const openAssignOrganizationModal = () =>
     setAssignOrganizationModalVisible(true);
   const handleCopyIntervention = () => copyIntervention({ interventionId: id });
-  const handleArchiveIntervention = () =>
-    editIntervention({
-      status: archived,
-      id: interventionId,
-    });
   const handleDeleteSession = (sessionId) => {
     deleteSession(sessionId, id);
     setDeleteConfirmationSessionId(null);
   };
-
-  const { openModal: openArchiveModal, Modal: ArchiveModal } = useModal({
-    type: ModalType.ConfirmationModal,
-    props: {
-      description: formatMessage(messages.interventionArchiveHeader),
-      content: formatMessage(messages.interventionArchiveMessage),
-      confirmAction: handleArchiveIntervention,
-    },
-  });
 
   const { openThirdPartyToolsAccessModal, ThirdPartyToolsModal } =
     useThirdPartyToolsAccessModal();
@@ -337,14 +316,6 @@ export function InterventionDetailsPage({
       action: onDuplicateHere,
       color: colors.bluewood,
     },
-    {
-      id: 'archive',
-      label: formatMessage(messages.archive),
-      icon: ArchiveIcon,
-      action: openArchiveModal,
-      color: colors.bluewood,
-      disabled: !archivingPossible,
-    },
     ...(canAssignOrganizationToIntervention
       ? [
           {
@@ -356,14 +327,13 @@ export function InterventionDetailsPage({
           },
         ]
       : []),
-    ...(isAdmin
+    ...(isAdmin || hfhsAccess
       ? [
           {
             icon: PadlockIcon,
             action: () => openThirdPartyToolsAccessModal(intervention),
             label: formatMessage(messages.thirdPartyToolsAccessModalTitle),
             id: 'thirdPartyToolsAccess',
-            disabled: !canCurrentUserMakeChanges,
           },
         ]
       : []),
@@ -410,9 +380,9 @@ export function InterventionDetailsPage({
 
   const editName = (val) => editIntervention({ name: val, id: interventionId });
 
-  const handleChangeStatus = () =>
+  const handleChangeStatus = (newStatus) =>
     editIntervention({
-      status: get(nextStatus, status, ''),
+      status: newStatus,
       id: interventionId,
     });
 
@@ -503,7 +473,6 @@ export function InterventionDetailsPage({
     <InterventionDetailsPageContext.Provider
       value={{
         canEdit: editingPossible,
-        canArchive: archivingPossible,
       }}
     >
       <Column height="100%">
@@ -513,7 +482,6 @@ export function InterventionDetailsPage({
             pageTitle={formatMessage(messages.pageTitle, { name })}
             width="100%"
           >
-            <ArchiveModal />
             <ThirdPartyToolsModal />
             <HenryFordBranchingInfoModal />
             <ConfirmationModal
@@ -571,6 +539,7 @@ export function InterventionDetailsPage({
 
             <Header
               name={name}
+              languageCode={languageCode}
               interventionId={interventionId}
               canCurrentUserMakeChanges={canCurrentUserMakeChanges}
               editingPossible={editingPossible}

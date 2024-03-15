@@ -6,6 +6,7 @@ import { Helmet } from 'react-helmet';
 import groupBy from 'lodash/groupBy';
 import { Markup } from 'interweave';
 import { useInjectReducer } from 'redux-injectors';
+import { Redirect } from 'react-router-dom';
 
 import { RoutePath } from 'global/constants';
 
@@ -17,7 +18,7 @@ import {
 } from 'models/UserIntervention/UserIntervention';
 import { Session } from 'models/Session/Session';
 import { UserSession } from 'models/UserSession/UserSession';
-import { InterventionType } from 'models/Intervention';
+import { InterventionStatus, InterventionType } from 'models/Intervention';
 import { AppFile } from 'models/File';
 
 import {
@@ -37,11 +38,15 @@ import H3 from 'components/H3';
 import Divider from 'components/Divider';
 import BackButton from 'components/BackButton';
 import Img from 'components/Img';
-import { Row, Col } from 'components/ReactGridSystem';
+import { Col, Row } from 'components/ReactGridSystem';
 import { FileDisplayItem } from 'components/FileDisplayItem';
 import MarkupContainer from 'components/MarkupContainer';
 import Column from 'components/Column';
 import FlexRow from 'components/Row';
+import {
+  getInterventionNotAvailablePagePathFromReason,
+  InterventionNotAvailableReason,
+} from 'components/InterventionNotAvailableInfo';
 
 import messages from './messages';
 import UserSessionTile from './UserSessionTile';
@@ -122,9 +127,18 @@ const UserInterventionPage = () => {
       type,
       id,
       files,
+      status,
     },
     healthClinicId,
+    containMultipleFillSession,
   } = userIntervention;
+
+  if (status === InterventionStatus.PAUSED) {
+    const redirectPath = getInterventionNotAvailablePagePathFromReason(
+      InterventionNotAvailableReason.INTERVENTION_PAUSED,
+    );
+    if (redirectPath) return <Redirect to={redirectPath} />;
+  }
 
   const filesCount = files?.length || 0;
 
@@ -150,10 +164,11 @@ const UserInterventionPage = () => {
           </MarkupContainer>
         </>
       )}
-      <Row mt={30}>
+      <Row mt={30} gutterWidth={10}>
         {filteredSessions.map((session) => (
           <Col xl={3} md={6} xs={12} key={session.id}>
             <UserSessionTile
+              containMultipleFillSession={containMultipleFillSession}
               interventionType={type}
               session={session}
               interventionId={id}

@@ -28,29 +28,6 @@ exports[`<ApprovableInput /> Should render and match the snapshot as date input 
   color: #ABBBD1;
 }
 
-.c1 {
-  display: -webkit-box;
-  display: -webkit-flex;
-  display: -ms-flexbox;
-  display: flex;
-  -webkit-flex-direction: column;
-  -ms-flex-direction: column;
-  flex-direction: column;
-  width: 100%;
-}
-
-.c0 {
-  display: -webkit-box;
-  display: -webkit-flex;
-  display: -ms-flexbox;
-  display: flex;
-  -webkit-flex-direction: row;
-  -ms-flex-direction: row;
-  flex-direction: row;
-  height: auto;
-  width: 100%;
-}
-
 .c3 .schedule-date-picker {
   font-family: DM Sans;
   background-color: #E9F1FB;
@@ -96,7 +73,39 @@ exports[`<ApprovableInput /> Should render and match the snapshot as date input 
   background-color: #E9F1FB;
 }
 
+.c3 .schedule-date-picker .react-datepicker__time-list-item:hover {
+  color: #FFFFFF;
+  background-color: rgba(200,102,234,0.7) !important;
+}
+
+.c3 .schedule-date-picker .react-datepicker__time-list-item--selected {
+  background-color: #C866EA !important;
+}
+
 .c3 .react-datepicker-wrapper {
+  width: 100%;
+}
+
+.c1 {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-flex-direction: column;
+  -ms-flex-direction: column;
+  flex-direction: column;
+  width: 100%;
+}
+
+.c0 {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-flex-direction: row;
+  -ms-flex-direction: row;
+  flex-direction: row;
+  height: auto;
   width: 100%;
 }
 
@@ -140,6 +149,7 @@ exports[`<ApprovableInput /> Should render and match the snapshot as date input 
               dir="auto"
               font-size="14"
               height="50"
+              inputmode="numeric"
               placeholder="Placeholder"
               type="text"
               value=""
@@ -150,6 +160,7 @@ exports[`<ApprovableInput /> Should render and match the snapshot as date input 
       </div>
     </div>
   </div>
+  ,
 </div>
 `;
 

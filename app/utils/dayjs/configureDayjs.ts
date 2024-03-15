@@ -13,8 +13,9 @@ import { DEFAULT_LOCALE } from 'i18n';
 
 import { CustomLocalesConfig, RELATIVE_TIME_OPTIONS } from './constants';
 
-// Add imports for all new app languages here
-require('dayjs/locale/ar');
+// ! Add every used language apart from english
+require(`dayjs/locale/ar`);
+require(`dayjs/locale/es`);
 
 export const configureDayjs = () => {
   // Load plugins

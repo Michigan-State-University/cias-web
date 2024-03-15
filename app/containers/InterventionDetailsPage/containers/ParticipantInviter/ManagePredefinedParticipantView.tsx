@@ -1,9 +1,6 @@
-import React, { FC, useMemo } from 'react';
+import React, { FC, useEffect, useMemo, useState } from 'react';
 import { useIntl } from 'react-intl';
 import { useDispatch, useSelector } from 'react-redux';
-import dayjs from 'dayjs';
-
-import { themeColors } from 'theme';
 
 import {
   PredefinedParticipantData,
@@ -13,6 +10,7 @@ import {
   deactivatePredefinedParticipantRequest,
   activatePredefinedParticipantRequest,
   sendPredefinedParticipantSmsInvitationRequest,
+  sendPredefinedParticipantEmailInvitationRequest,
 } from 'global/reducers/intervention';
 
 import { PredefinedParticipant } from 'models/PredefinedParticipant';
@@ -21,7 +19,6 @@ import Column from 'components/Column';
 import Text from 'components/Text';
 import { SelectOption } from 'components/Select/types';
 import Row from 'components/Row';
-import { Button } from 'components/Button';
 
 import { InviteParticipantsModalBackButton } from './InviteParticipantsModalBackButton';
 import {
@@ -38,6 +35,8 @@ import {
 } from './utils';
 import messages from './messages';
 import { CopyPredefinedParticipantUrlButton } from './CopyPredefinedParticipantUrlButton';
+import { SentInvitationsInfo } from './SentInvitationsInfo';
+import { SendInvitationsButtons } from './SendInvitationsButtons';
 
 export type Props = {
   participantId: string;
@@ -110,10 +109,28 @@ export const ManagePredefinedParticipantView: FC<Props> = ({
     );
   };
 
+  const sendingEmailInvitation = useSelector(
+    makeSelectInterventionLoader('sendPredefinedParticipantEmailInvitation'),
+  );
+  const handleSendEmailInvitation = () => {
+    dispatch(
+      sendPredefinedParticipantEmailInvitationRequest(
+        interventionId,
+        participantId,
+      ),
+    );
+  };
+
   const url = useMemo(() => {
     if (!participant) return '';
     return getPredefinedParticipantUrl(participant.slug);
   }, []);
+
+  const [formDisabled, setFormDisabled] = useState(true);
+
+  useEffect(() => {
+    setFormDisabled(true);
+  }, [participant]);
 
   return (
     <Column flex={1} overflow="auto" gap={24}>
@@ -132,44 +149,24 @@ export const ManagePredefinedParticipantView: FC<Props> = ({
               <CopyPredefinedParticipantUrlButton url={url} />
             </Row>
           </Column>
-          <Column gap={8}>
-            <Text fontWeight="bold" lineHeight={1.2}>
-              {formatMessage(messages.predefinedParticipantSmsInvitationLabel)}
-            </Text>
-            <Text lineHeight={1.2} color={themeColors.text} textOpacity={0.7}>
-              {participant.invitationSentAt
-                ? formatMessage(
-                    messages.predefinedParticipantSmsInvitationSent,
-                    {
-                      date: dayjs(participant.invitationSentAt).format(
-                        'YYYY/MM/DD HH:mm Z',
-                      ),
-                    },
-                  )
-                : formatMessage(
-                    messages.predefinedParticipantSmsInvitationNotSent,
-                  )}
-            </Text>
-            <Row>
-              <Button
-                width="auto"
-                px={24}
-                inverted
-                onClick={handleSendSmsInvitation}
-                loading={sendingSmsInvitation}
-                disabled={
-                  !invitingPossible || !participant.phone || !participant.active
-                }
-              >
-                {formatMessage(
-                  messages.predefinedParticipantSendSmsInvitationButtonTitle,
-                )}
-              </Button>
-            </Row>
+          <Column>
+            <SentInvitationsInfo participant={participant} />
+            {formDisabled && (
+              <SendInvitationsButtons
+                invitingPossible={invitingPossible}
+                participant={participant}
+                handleSendSmsInvitation={handleSendSmsInvitation}
+                sendingSmsInvitation={sendingSmsInvitation}
+                handleSendEmailInvitation={handleSendEmailInvitation}
+                sendingEmailInvitation={sendingEmailInvitation}
+              />
+            )}
           </Column>
           <Column flex={1}>
             <PredefinedParticipantForm
               mode={PredefinedParticipantFormMode.UPDATE}
+              disabled={formDisabled}
+              setDisabled={setFormDisabled}
               participant={participant}
               isReportingIntervention={isReportingIntervention}
               healthClinicOptions={healthClinicOptions}

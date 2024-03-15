@@ -21,6 +21,9 @@ export const CODE_INPUT_LENGTH = 4;
 export const confirmationCodeValidationSchema = (formatMessage) =>
   Yup.object().shape({
     code: Yup.string()
-      .length(CODE_INPUT_LENGTH)
+      .length(
+        CODE_INPUT_LENGTH,
+        formatMessage(messages.codeLength, { length: CODE_INPUT_LENGTH }),
+      )
       .required(formatMessage(messages.codeRequired)),
   });

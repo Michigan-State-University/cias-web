@@ -19,7 +19,9 @@ export type Props = {
   isReportingIntervention: boolean;
   interventionId: string;
   interventionName: string;
+  interventionLanguageCode: string;
   invitingPossible: boolean;
+  copyingInvitationLinkPossible: boolean;
   creatingPredefinedParticipantsPossible: boolean;
   sessionOptions: SelectOption<string>[];
   healthClinicOptions: SelectOption<string>[];
@@ -37,7 +39,9 @@ export const ParticipantListView: FC<Props> = ({
   isReportingIntervention,
   interventionId,
   interventionName,
+  interventionLanguageCode,
   invitingPossible,
+  copyingInvitationLinkPossible,
   creatingPredefinedParticipantsPossible,
   sessionOptions,
   healthClinicOptions,
@@ -101,12 +105,13 @@ export const ParticipantListView: FC<Props> = ({
           />
         </div>
       </Tabs>
-      {invitingPossible &&
+      {copyingInvitationLinkPossible &&
         activeTab === formatMessage(messages.emailParticipantsTab) && (
           <CopyLinkForm
             isModularIntervention={isModularIntervention}
             isReportingIntervention={isReportingIntervention}
             interventionId={interventionId}
+            interventionLanguageCode={interventionLanguageCode}
             sessionOptions={sessionOptions}
             healthClinicOptions={healthClinicOptions}
           />

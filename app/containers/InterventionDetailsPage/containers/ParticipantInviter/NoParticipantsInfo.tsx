@@ -44,7 +44,10 @@ export const NoParticipantsInfo: FC<Props> = ({
         </Text>
       )}
       {invitingPossible && onUploadEmails && (
-        <UploadEmailsButton onClick={onUploadEmails} />
+        <UploadEmailsButton
+          onClick={onUploadEmails}
+          disabled={!invitingPossible}
+        />
       )}
     </Column>
   );

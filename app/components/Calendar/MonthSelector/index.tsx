@@ -1,8 +1,13 @@
 import React, { memo } from 'react';
-import dayjs, { Dayjs } from 'dayjs';
+import { Dayjs } from 'dayjs';
+import { useSelector } from 'react-redux';
 
 import arrowGreyLeft from 'assets/svg/arrow-grey-left.svg';
 import arrowGreyRight from 'assets/svg/arrow-grey-right.svg';
+
+import { capitalizeFirstLetter } from 'utils/text';
+
+import { makeSelectLocale } from 'containers/AppLanguageProvider';
 
 import { Container, Month, Year, Arrow } from './styled';
 import { MONTH_SELECTOR_ID } from '../constants';
@@ -13,6 +18,7 @@ type MonthSelectorProps = {
   canGoNext?: boolean;
   canGoPrev?: boolean;
   disabled?: boolean;
+  language?: string;
 };
 
 export const MonthSelector = ({
@@ -21,9 +27,12 @@ export const MonthSelector = ({
   canGoNext,
   canGoPrev,
   disabled = false,
+  language,
 }: MonthSelectorProps) => {
   const setNextMonth = () => onSetMonth(monthDate.add(1, 'month'));
   const setPrevMonth = () => onSetMonth(monthDate.subtract(1, 'month'));
+
+  const appLocale = useSelector(makeSelectLocale());
 
   const showArrows = canGoNext || canGoPrev;
 
@@ -38,7 +47,9 @@ export const MonthSelector = ({
         />
       )}
       <Month>
-        {dayjs.months()[monthDate.month()]}
+        {capitalizeFirstLetter(
+          monthDate.locale(language || appLocale).format('MMMM'),
+        )}
         ,&nbsp;
       </Month>
       <Year>{monthDate.year()}</Year>

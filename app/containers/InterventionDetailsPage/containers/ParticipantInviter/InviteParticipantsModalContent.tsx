@@ -6,6 +6,7 @@ import { InterventionStatus, InterventionType } from 'models/Intervention';
 import { Session } from 'models/Session';
 import { Organization } from 'models/Organization';
 import {
+  canCopyInvitationLink,
   canCreatePredefinedParticipants,
   canInviteParticipants,
 } from 'models/Status/statusPermissions';
@@ -38,6 +39,7 @@ import { ManagePredefinedParticipantView } from './ManagePredefinedParticipantVi
 export type Props = {
   interventionId: string;
   interventionName: string;
+  interventionLanguageCode: string;
   organizationId: Nullable<string>;
   interventionStatus: InterventionStatus;
   interventionType: InterventionType;
@@ -49,6 +51,7 @@ export type Props = {
 export const InviteParticipantsModalContent: FC<Props> = ({
   interventionId,
   interventionName,
+  interventionLanguageCode,
   organizationId,
   interventionStatus,
   interventionType,
@@ -172,6 +175,8 @@ export const InviteParticipantsModalContent: FC<Props> = ({
   };
 
   const invitingPossible = canInviteParticipants(interventionStatus);
+  const copyingInvitationLinkPossible =
+    canCopyInvitationLink(interventionStatus);
   const creatingPredefinedParticipantsPossible =
     canCreatePredefinedParticipants(interventionStatus);
 
@@ -192,7 +197,9 @@ export const InviteParticipantsModalContent: FC<Props> = ({
               isReportingIntervention={isReportingIntervention}
               interventionId={interventionId}
               interventionName={interventionName}
+              interventionLanguageCode={interventionLanguageCode}
               invitingPossible={invitingPossible}
+              copyingInvitationLinkPossible={copyingInvitationLinkPossible}
               creatingPredefinedParticipantsPossible={
                 creatingPredefinedParticipantsPossible
               }

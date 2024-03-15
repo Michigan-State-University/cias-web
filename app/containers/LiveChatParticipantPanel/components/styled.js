@@ -23,10 +23,6 @@ export const ParticipantChatDialogContainer = styled(Column)`
   min-height: 0;
 `;
 
-export const LinkNoUnderline = styled.a`
-  text-decoration: none;
-`;
-
 export const LinkPrimaryUnderline = styled.a`
   text-decoration-color: ${themeColors.primary};
 `;
@@ -36,7 +32,7 @@ export const BoxWithUnderShadow = styled(Box)`
   background-color: ${colors.white};
   width: calc(100% - 32px);
   margin-top: 42px;
-  padding: 0 16;
+  padding: 0 16px;
   border-bottom: 1px solid ${colors.linkWater};
   border-radius: 0;
   z-index: 1;

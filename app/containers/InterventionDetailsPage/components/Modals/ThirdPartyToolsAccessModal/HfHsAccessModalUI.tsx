@@ -28,9 +28,18 @@ interface Props {
   canSave: boolean;
   isSaving: boolean;
   onSave: () => void;
+  disabled: boolean;
+  canChangeAccess: boolean;
 }
 
-const Component = ({ values, canSave, isSaving, onSave }: Props) => {
+const Component = ({
+  values,
+  canSave,
+  isSaving,
+  onSave,
+  disabled,
+  canChangeAccess,
+}: Props) => {
   const { formatMessage } = useIntl();
 
   const { hfhsAccess } = values;
@@ -46,25 +55,28 @@ const Component = ({ values, canSave, isSaving, onSave }: Props) => {
   return (
     <FlexCol minHeight={537}>
       <FlexRow flex={1} align="start" direction="column">
-        <FlexRow align="center" width="100%">
-          <Text mr={8} fontSize="15px">
-            {formatMessage(messages.hfhsRevokeAccess)}
-          </Text>
-          <FormikSwitchInput
-            formikKey="hfhsAccess"
-            labelPosition={LabelPosition.Right}
-            columnStyleProps={{
-              width: 'auto',
-            }}
-          >
-            <Text fontSize="15px" fontWeight={hfhsAccess ? 'bold' : 'normal'}>
-              {formatMessage(messages.hfhsGiveAccess)}
+        {canChangeAccess && (
+          <FlexRow align="center" width="100%">
+            <Text mr={8} fontSize="15px">
+              {formatMessage(messages.hfhsRevokeAccess)}
             </Text>
-          </FormikSwitchInput>
-        </FlexRow>
+            <FormikSwitchInput
+              formikKey="hfhsAccess"
+              labelPosition={LabelPosition.Right}
+              columnStyleProps={{
+                width: 'auto',
+              }}
+              disabled={disabled}
+            >
+              <Text fontSize="15px" fontWeight={hfhsAccess ? 'bold' : 'normal'}>
+                {formatMessage(messages.hfhsGiveAccess)}
+              </Text>
+            </FormikSwitchInput>
+          </FlexRow>
+        )}
         {hfhsAccess && (
           <>
-            <FlexRow width="100%" mt={40}>
+            <FlexRow width="100%" mt={canChangeAccess && 40}>
               <FormikApiSelect
                 formikKey="locationIds"
                 label={formatMessage(messages.clinicLocations)}
@@ -80,27 +92,30 @@ const Component = ({ values, canSave, isSaving, onSave }: Props) => {
                   isMulti: true,
                 }}
                 ref={selectRef}
+                disabled={disabled}
               />
             </FlexRow>
           </>
         )}
-        <FlexRow mt={56}>
-          <Markup
-            content={formatMessage(messages.hfhsAccessNote)}
-            attributes={{
-              fontStyle: 'italic',
-              lineHeight: '23px',
-            }}
-            tagName={Text}
-          />
-        </FlexRow>
+        {canChangeAccess && (
+          <FlexRow mt={56}>
+            <Markup
+              content={formatMessage(messages.hfhsAccessNote)}
+              attributes={{
+                fontStyle: 'italic',
+                lineHeight: '23px',
+              }}
+              tagName={Text}
+            />
+          </FlexRow>
+        )}
       </FlexRow>
       <Row align="end">
         <Col xs={4}>
           <Button
             onClick={onSave}
             loading={isSaving}
-            disabled={!canSave}
+            disabled={!canSave || disabled}
             mt={40}
             type="submit"
           >

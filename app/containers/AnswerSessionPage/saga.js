@@ -1,12 +1,12 @@
 import { takeLatest, put, select, call, takeEvery } from 'redux-saga/effects';
 import axios from 'axios';
 import { toast } from 'react-toastify';
-import { push } from 'connected-react-router';
+import { push, replace } from 'connected-react-router';
 import merge from 'lodash/merge';
 
 import { AnswerType } from 'models/Answer';
 
-import { RoutePath } from 'global/constants';
+import { INTERVENTION_LANGUAGE_QUERY_KEY, RoutePath } from 'global/constants';
 
 import { mapQuestionToStateObject } from 'utils/mapResponseObjects';
 import { formatMessage } from 'utils/intlOutsideReact';
@@ -71,6 +71,7 @@ import {
   makeSelectUserSession,
 } from './selectors';
 import messages from './messages';
+import { getInterventionNotAvailablePagePathFromApiError } from '../../components/InterventionNotAvailableInfo';
 
 function* submitAnswersAsync({
   payload: { questionId, required, type: questionType, userSessionId, skipped },
@@ -190,16 +191,20 @@ function* nextQuestion({ payload: { userSessionId, questionId } }) {
 }
 
 function* redirectToPreview({
-  payload: { interventionId, sessionId, questionId },
+  payload: { interventionId, sessionId, questionId, languageCode },
 }) {
   yield call(logInGuest, { payload: { sessionId } });
   yield call(
     window.open,
-    parametrizeRoutePath(RoutePath.PREVIEW_SESSION_FROM_INDEX, {
-      interventionId,
-      sessionId,
-      index: questionId,
-    }),
+    parametrizeRoutePath(
+      RoutePath.PREVIEW_SESSION_FROM_INDEX,
+      {
+        interventionId,
+        sessionId,
+        index: questionId,
+      },
+      { [INTERVENTION_LANGUAGE_QUERY_KEY]: languageCode },
+    ),
   );
 }
 
@@ -222,6 +227,11 @@ function* fetchUserSession({ payload: { sessionId } }) {
     yield put(fetchUserSessionSuccess(userSession));
     yield put(changeLocale(userSession.languageCode));
   } catch (error) {
+    const redirectPath = getInterventionNotAvailablePagePathFromApiError(error);
+    if (redirectPath) {
+      yield put(replace(redirectPath));
+    }
+
     yield put(fetchUserSessionError(error));
   }
 }
@@ -246,6 +256,10 @@ function* createUserSession({ payload: { sessionId } }) {
     yield put(resetPhoneNumberPreview());
     yield put(startSession());
   } catch (error) {
+    const redirectPath = getInterventionNotAvailablePagePathFromApiError(error);
+    if (redirectPath) {
+      yield put(replace(redirectPath));
+    }
     yield put(createUserSessionFailure(error));
   }
 }
@@ -269,6 +283,10 @@ function* fetchOrCreateUserSession({ payload: { sessionId } }) {
     yield put(resetPhoneNumberPreview());
     yield put(startSession());
   } catch (error) {
+    const redirectPath = getInterventionNotAvailablePagePathFromApiError(error);
+    if (redirectPath) {
+      yield put(replace(redirectPath));
+    }
     yield put(fetchOrCreateUserSessionError(error));
   }
 }

@@ -18,6 +18,7 @@ export const getPredefinedParticipantRedirectPath = (
     sessionId,
     healthClinicId,
     multipleFillSessionAvailable,
+    lang,
   } = objectToCamelCase(redirectDataDTO);
 
   if (sessionId) {
@@ -27,7 +28,9 @@ export const getPredefinedParticipantRedirectPath = (
       sessionId,
     });
 
-    const queryParams = new URLSearchParams();
+    const queryParams = new URLSearchParams({
+      lang,
+    });
     if (healthClinicId) {
       queryParams.append('cid', healthClinicId);
     }
@@ -65,9 +68,10 @@ export const getShortLinkRedirectPath = (
     sessionId,
     healthClinicId,
     multipleFillSessionAvailable,
+    lang,
   } = objectToCamelCase(redirectDataDTO);
 
-  const queryParams = new URLSearchParams();
+  const queryParams = new URLSearchParams({ lang });
   if (healthClinicId) {
     queryParams.append('cid', healthClinicId);
   }

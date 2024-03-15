@@ -28,6 +28,7 @@ type CalendarProps = {
   calendarData: CalendarData;
   disableManualDayClick?: boolean;
   orderedGroupNames: string[];
+  language: string;
 };
 
 const IS_DESKTOP = 'IS_DESKTOP';
@@ -48,6 +49,7 @@ export const Calendar = forwardRef<CalendarRef, CalendarProps>(
       calendarData,
       disableManualDayClick = false,
       orderedGroupNames,
+      language,
     }: CalendarProps,
     ref,
   ) => {
@@ -85,6 +87,7 @@ export const Calendar = forwardRef<CalendarRef, CalendarProps>(
         canGoNext={isNotLastMonth}
         canGoPrev={isNotFirstMonth}
         disabled={disableManualDayClick}
+        language={language}
       />
     );
 
@@ -104,6 +107,7 @@ export const Calendar = forwardRef<CalendarRef, CalendarProps>(
             calendarData={calendarData}
             disableManualDayClick={disableManualDayClick}
             orderedGroupNames={orderedGroupNames}
+            language={language}
           />
         </Container>
       </>

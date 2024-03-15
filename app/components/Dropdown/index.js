@@ -1,7 +1,8 @@
 import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 
-import dots from 'assets/svg/dots.svg';
+import DotsIcon from 'assets/svg/dots.svg';
+import ArrowDownWhiteIcon from 'assets/svg/arrow-down-white.svg';
 
 import { colors, boxShadows, themeColors, ZIndex } from 'theme';
 
@@ -10,7 +11,7 @@ import Box from 'components/Box';
 import Column from 'components/Column';
 import Text from 'components/Text';
 import Icon from 'components/Icon';
-import { TextButton } from 'components/Button';
+import { TextButton, Button } from 'components/Button';
 import { PopoverModal } from 'components/Modal';
 
 import { StyledComment, ImageContainer, StyledRow } from './styled';
@@ -49,10 +50,10 @@ const Dropdown = ({
     >
       {trigger === 'icon' && (
         <ImageContainer onClick={handleClick} id={id}>
-          <Img src={dots} alt="dots" />
+          <Img src={DotsIcon} alt="dots" />
         </ImageContainer>
       )}
-      {trigger === 'button' && (
+      {trigger === 'text-button' && (
         <TextButton
           buttonProps={{
             color: themeColors.secondary,
@@ -66,19 +67,36 @@ const Dropdown = ({
           {buttonTriggerTitle}
         </TextButton>
       )}
+      {trigger === 'primary-button' && (
+        <Button
+          disabled={disabled}
+          onClick={handleClick}
+          id={id}
+          loading={loading}
+          px={24}
+          display="flex"
+          align="center"
+          gap={8}
+          {...buttonTriggerProps}
+        >
+          {buttonTriggerTitle}
+          <Icon src={ArrowDownWhiteIcon} width={13} height={8} />
+        </Button>
+      )}
       {open && (
         <PopoverModal
           referenceElement={id}
           defaultPlacement="bottom"
           onClose={() => setOpen(false)}
           contentPadding="0px"
-          offsetOptions={16}
+          offsetOptions={trigger === 'primary-button' ? 6 : 16}
           modalStyle={{
             backgroundColor: colors.white,
             borderColor: 'transparent',
             borderRadius: 10,
             boxShadow: boxShadows.selago,
             width: dropdownWidth,
+            padding: 12,
           }}
           hideArrow
           zIndex={ZIndex.DROPDOWN}
@@ -89,32 +107,34 @@ const Dropdown = ({
                 {dropdownTitle}
               </Text>
             )}
-            {options.map((option) => (
-              <StyledRow
-                disabled={option.disabled}
-                key={`el-dropdown-${option.id}`}
-                padding={8}
-                onClick={() => !option.disabled && callAction(option.action)}
-                align="center"
-              >
-                {option.icon && (
-                  <Icon
-                    src={option.icon}
-                    fill={colors.greyishBlue}
-                    alt="icon"
-                    mr={12}
-                    width={18}
-                  />
-                )}
-                <StyledComment
-                  color={option.color || colors.bluewood}
-                  whiteSpace="nowrap"
-                  title={option.label}
+            <Column gap={4}>
+              {options.map((option) => (
+                <StyledRow
+                  disabled={option.disabled}
+                  key={`el-dropdown-${option.id}`}
+                  padding={8}
+                  onClick={() => !option.disabled && callAction(option.action)}
+                  align="center"
                 >
-                  {option.label}
-                </StyledComment>
-              </StyledRow>
-            ))}
+                  {option.icon && (
+                    <Icon
+                      src={option.icon}
+                      fill={colors.greyishBlue}
+                      alt="icon"
+                      mr={4}
+                      width={24}
+                    />
+                  )}
+                  <StyledComment
+                    color={option.color || colors.bluewood}
+                    whiteSpace="nowrap"
+                    title={option.label}
+                  >
+                    {option.label}
+                  </StyledComment>
+                </StyledRow>
+              ))}
+            </Column>
           </Column>
         </PopoverModal>
       )}
@@ -127,7 +147,7 @@ Dropdown.propTypes = {
   options: PropTypes.array,
   disabled: PropTypes.bool,
   dropdownWidth: PropTypes.number,
-  trigger: PropTypes.oneOf(['icon', 'button']),
+  trigger: PropTypes.oneOf(['icon', 'text-button', 'primary-button']),
   buttonTriggerTitle: PropTypes.string,
   buttonTriggerProps: PropTypes.object,
   dropdownTitle: PropTypes.string,
