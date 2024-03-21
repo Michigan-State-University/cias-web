@@ -199,7 +199,9 @@ const AnimationRefHelper = ({
                   if (targetValue.audio_urls) {
                     const base64s = await Promise.all(
                       targetValue.audio_urls.map(async (url) => {
-                        const file = await fetch(`${process.env.API_URL}${url}`);
+                        const file = await fetch(
+                          `${process.env.API_URL}${url}`,
+                        );
                         const contentType = file.headers.get('Content-Type');
                         const arrayBuffer = await file.arrayBuffer();
                         const base64String = btoa(
