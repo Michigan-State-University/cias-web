@@ -192,25 +192,43 @@ const AnimationRefHelper = ({
           }
           let targetValues = [];
           if (block.target_value) {
-            targetValues = await Promise.all(
-              block.target_value.map(async (targetValue) => {
-                if (targetValue.audio_urls) {
-                  const base64s = await Promise.all(
-                    targetValue.audio_urls.map(async (url) => {
-                      const file = await fetch(`${process.env.API_URL}${url}`);
-                      const contentType = file.headers.get('Content-Type');
-                      const arrayBuffer = await file.arrayBuffer();
-                      const base64String = btoa(
-                        String.fromCharCode(...new Uint8Array(arrayBuffer)),
-                      );
-                      return `data:${contentType};base64,${base64String}`;
-                    }),
-                  );
+            const isTargetValueArray = Array.isArray(block.target_value);
+            if (isTargetValueArray) {
+              targetValues = await Promise.all(
+                block.target_value.map(async (targetValue) => {
+                  if (targetValue.audio_urls) {
+                    const base64s = await Promise.all(
+                      targetValue.audio_urls.map(async (url) => {
+                        const file = await fetch(
+                          `${process.env.API_URL}${url}`,
+                        );
+                        const contentType = file.headers.get('Content-Type');
+                        const arrayBuffer = await file.arrayBuffer();
+                        const base64String = btoa(
+                          String.fromCharCode(...new Uint8Array(arrayBuffer)),
+                        );
+                        return `data:${contentType};base64,${base64String}`;
+                      }),
+                    );
 
-                  return { audios_base64: base64s, ...targetValue };
-                }
-              }),
-            );
+                    return { audios_base64: base64s, ...targetValue };
+                  }
+                }),
+              );
+            } else {
+              const base64s = await Promise.all(
+                block.target_value.audio_urls.map(async (url) => {
+                  const file = await fetch(`${process.env.API_URL}${url}`);
+                  const contentType = file.headers.get('Content-Type');
+                  const arrayBuffer = await file.arrayBuffer();
+                  const base64String = btoa(
+                    String.fromCharCode(...new Uint8Array(arrayBuffer)),
+                  );
+                  return `data:${contentType};base64,${base64String}`;
+                }),
+              );
+              targetValues = { audios_base64: base64s, ...block.target_value };
+            }
             return { ...block, target_value: targetValues, reflections };
           }
           return block;
