@@ -236,19 +236,25 @@ const useAudioHelper: TUseAudioHelper = (
         switch (currentData.type) {
           case NarratorBlockTypes.SPEECH:
           case NarratorBlockTypes.READ_QUESTION:
-            handleSpeech(currentData.audios_base64);
+            let urls = currentData.audios_base64
+              ? currentData.audios_base64
+              : currentData.audio_urls;
+            handleSpeech(urls);
             break;
 
           case NarratorBlockTypes.REFLECTION_FORMULA:
           case NarratorBlockTypes.REFLECTION:
-            handleSpeech(
-              currentData.reflections.length
+            urls = [];
+            if (currentData.reflections.length) {
+              urls = currentData.reflections[currentData.currentReflectionIndex]
+                .audios_base64
                 ? currentData.reflections[currentData.currentReflectionIndex]
                     .audios_base64
-                : [],
-            );
+                : currentData.reflections[currentData.currentReflectionIndex]
+                    .audio_urls;
+            }
+            handleSpeech(urls);
             break;
-
           default:
             break;
         }
@@ -310,8 +316,16 @@ const useAudioHelper: TUseAudioHelper = (
 
     if (!fetchedAudios.length || !fetchedAudios[currentData.currentAudioIndex])
       onSpeechEnded(fetchedAudios);
-    else
-      audioInstance.setSrc(`${fetchedAudios[currentData.currentAudioIndex]}`);
+    else {
+      const srcPrefix = fetchedAudios[currentData.currentAudioIndex].includes(
+        '.mp3',
+      )
+        ? process.env.API_URL
+        : '';
+      audioInstance.setSrc(
+        `${srcPrefix}${fetchedAudios[currentData.currentAudioIndex]}`,
+      );
+    }
   };
 
   const nextBlock = (): void => {
