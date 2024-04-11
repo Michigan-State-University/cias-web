@@ -314,9 +314,13 @@ const useAudioHelper: TUseAudioHelper = (
       onSpeechEnded(fetchedAudios);
     });
 
-    if (!fetchedAudios.length || !fetchedAudios[currentData.currentAudioIndex])
+    if (
+      !fetchedAudios.length ||
+      !fetchedAudios[currentData.currentAudioIndex] ||
+      shouldOmitSentence(fetchedAudios)
+    ) {
       onSpeechEnded(fetchedAudios);
-    else {
+    } else {
       const srcPrefix = fetchedAudios[currentData.currentAudioIndex].includes(
         '.mp3',
       )
@@ -327,6 +331,16 @@ const useAudioHelper: TUseAudioHelper = (
       );
     }
   };
+
+  const shouldOmitSentence = (fetchedAudios: string[]): boolean =>
+    Boolean(
+      fetchedAudios.length &&
+        currentData &&
+        currentData.text &&
+        ['.', '?', '!', ','].includes(
+          currentData.text[currentData.currentAudioIndex],
+        ),
+    );
 
   const nextBlock = (): void => {
     animationCurrent?.anim.removeEventListener('complete', nextBlock);
