@@ -131,6 +131,18 @@ export const henryFordInitialScreen = new QuestionType(
   colors.kleinBlue,
 );
 
+export const smsQuestion = new QuestionType(
+  `${questionType}Sms`,
+  'Sms Question',
+  colors.kleinBlue,
+);
+
+export const smsInformationQuestion = new QuestionType(
+  `${questionType}SmsInformation`,
+  'SmsInformation',
+  colors.kleinBlue,
+);
+
 export const QuestionTypes = [
   singleQuestion,
   multiQuestion,
@@ -153,6 +165,8 @@ export const QuestionTypes = [
   tlfbEvents,
   henryFordInitialScreen,
   henryFordQuestion,
+  smsQuestion,
+  smsInformationQuestion
 ];
 
 const notAddableQuestionTypes = [

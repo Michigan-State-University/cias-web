@@ -33,13 +33,19 @@ import {
   reportTemplatesReducer,
   reportTemplatesSaga,
 } from 'global/reducers/reportTemplates';
-import { CatSession, ClassicSession, SessionTypes } from 'models/Session';
+import {
+  CatSession,
+  ClassicSession,
+  SessionTypes,
+  SmsSession,
+} from 'models/Session';
 import { RouteComponentProps } from 'react-router-dom';
 import editInterventionPageSaga from './saga';
 
 import messages from './messages';
 import { EditSessionPageContext } from './utils';
 import EditClassicSession from './EditClassicSession';
+import EditSmsSession from './EditSmsSession';
 import EditCatSession from './EditCatSession';
 
 interface MatchParams {
@@ -59,7 +65,7 @@ interface Props extends RouteComponentProps<MatchParams> {
   fetchInterventions: () => void;
   fetchReportTemplates: (sessionId: string) => void;
   interventionStatus: string;
-  session: ClassicSession | CatSession;
+  session: ClassicSession | SmsSession | CatSession;
   editingPossible: boolean;
 }
 
@@ -109,6 +115,13 @@ const EditSessionPage = ({
           editingPossible={editingPossible}
           interventionStatus={interventionStatus}
           session={session as ClassicSession}
+        />
+      )}
+      {type === SessionTypes.SMS_SESSION && (
+        <EditSmsSession
+          editingPossible={editingPossible}
+          interventionStatus={interventionStatus}
+          session={session as SmsSession}
         />
       )}
       {type === SessionTypes.CAT_SESSION && (
