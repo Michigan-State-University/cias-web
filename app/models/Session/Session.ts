@@ -5,6 +5,7 @@ import { SessionTargetType } from './SessionTargetType';
 
 export enum SessionTypes {
   CLASSIC_SESSION = 'Session::Classic',
+  SMS_SESSION = 'Session::Sms',
   CAT_SESSION = 'Session::CatMh',
 }
 
@@ -65,6 +66,10 @@ export interface Session {
 
 export interface ClassicSession extends Session {
   type: SessionTypes.CLASSIC_SESSION;
+}
+
+export interface SmsSession extends Session {
+  type: SessionTypes.SMS_SESSION;
 }
 
 export interface CatSession extends Session {

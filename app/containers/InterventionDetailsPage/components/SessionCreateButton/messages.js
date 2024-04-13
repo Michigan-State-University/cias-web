@@ -25,6 +25,10 @@ export default defineMessages({
     id: `${scope}.classicSession`,
     defaultMessage: 'Classic session',
   },
+  smsSession: {
+    id: `${scope}.smsSession`,
+    defaultMessage: 'SMS Session',
+  },
   catSession: {
     id: `${scope}.catSession`,
     defaultMessage: 'CAT-MH™ Session',
@@ -33,6 +37,11 @@ export default defineMessages({
     id: `${scope}.classicSessionDescription`,
     defaultMessage:
       'This is a classic session in which you can arrange questions yourself, view them and edit them freely.',
+  },
+  smsSessionDescription: {
+    id: `${scope}.smscSessionDescription`,
+    defaultMessage:
+      'This is a sms session in which you can arrange sms questions yourself, view them and edit them freely.',
   },
   catSessionDescription: {
     id: `${scope}.catSessionDescription`,

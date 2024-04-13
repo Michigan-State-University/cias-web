@@ -35,11 +35,7 @@ const SessionCreateButton = ({
   const handleClose = () => setModalVisible(false);
 
   const clickWrapper = () => {
-    if (!canCreateCatSession) {
-      handleSessionCreation(SessionTypes.CLASSIC_SESSION);
-    } else {
-      setModalVisible(true);
-    }
+    setModalVisible(true);
   };
 
   const handleSessionWithTypeCreation = (sessionType: string) => {
@@ -56,7 +52,10 @@ const SessionCreateButton = ({
         onClose={handleClose}
         maxWidth={500}
       >
-        <SessionTypeChooser onCreateSession={handleSessionWithTypeCreation} />
+        <SessionTypeChooser
+          onCreateSession={handleSessionWithTypeCreation}
+          canCreateCatSession={canCreateCatSession}
+        />
       </Modal>
       <NewInterventionContainer
         data-cy="create-session-button"
