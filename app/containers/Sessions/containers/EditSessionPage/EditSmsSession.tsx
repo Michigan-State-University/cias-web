@@ -197,7 +197,7 @@ const EditSmsSessionPage = ({
   navbarHeight,
   changeGroupName,
   getQuestionGroups,
-  session: { id: sessionId, name: sessionName },
+  session: { id: sessionId, name: sessionName, type: sessionType },
   interventionStatus,
   createQuestionGroup,
 }: Props): JSX.Element => {
@@ -620,7 +620,10 @@ const EditSmsSessionPage = ({
             <Spacer />
             {editingPossible && (
               <StyledQuestionTypeChooser>
-                <QuestionTypeChooser onClick={onCreateQuestion} />
+                <QuestionTypeChooser
+                  onClick={onCreateQuestion}
+                  sessionType={sessionType}
+                />
               </StyledQuestionTypeChooser>
             )}
 

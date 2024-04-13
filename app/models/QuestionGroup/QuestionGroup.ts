@@ -3,6 +3,7 @@ import { CamelToSnakeOmitId } from 'global/types/camelToSnake';
 export enum GroupType {
   PLAIN = 'QuestionGroup::Plain',
   FINISH = 'QuestionGroup::Finish',
+  INITIAL = 'QuestionGroup::Initial',
   TLFB = 'QuestionGroup::Tlfb',
 }
 
