@@ -27,7 +27,7 @@ export default defineMessages({
   },
   smsSession: {
     id: `${scope}.smsSession`,
-    defaultMessage: 'SMS Session',
+    defaultMessage: 'SMS Campaign',
   },
   catSession: {
     id: `${scope}.catSession`,

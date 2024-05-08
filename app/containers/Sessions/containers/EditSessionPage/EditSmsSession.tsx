@@ -95,6 +95,7 @@ import {
   reorderGroupListRequest,
   reorderQuestionGroupsSaga,
   shareGroupsExternallyRequest,
+  updateQuestionGroupSettings,
 } from 'global/reducers/questionGroups';
 import {
   allCopyModalSagas,
@@ -129,6 +130,11 @@ type Props = {
   getQuestionGroups: (sessionId: string, questionToSelectId?: string) => void;
   changeGroupName: (
     newName: string,
+    sessionId: string,
+    groupId: string,
+  ) => void;
+  updateQuestionGroup: (
+    data: object,
     sessionId: string,
     groupId: string,
   ) => void;
@@ -196,6 +202,7 @@ const EditSmsSessionPage = ({
   groups,
   navbarHeight,
   changeGroupName,
+  updateQuestionGroup,
   getQuestionGroups,
   session: { id: sessionId, name: sessionName, type: sessionType },
   interventionStatus,
@@ -572,8 +579,10 @@ const EditSmsSessionPage = ({
                           index={index}
                           editingPossible={editingPossible}
                           changeGroupName={changeGroupName}
+                          updateQuestionGroup={updateQuestionGroup}
                           checkSelectedGroup={checkSelectedGroup}
                           sessionId={sessionId}
+                          sessionType={sessionType}
                           manage={manage}
                           questionGroup={questionGroup}
                           selectSlide={selectSlide}
@@ -598,8 +607,10 @@ const EditSmsSessionPage = ({
                 <QuestionListGroup
                   editingPossible={editingPossible}
                   changeGroupName={changeGroupName}
+                  updateQuestionGroup={updateQuestionGroup}
                   checkSelectedGroup={checkSelectedGroup}
                   sessionId={sessionId}
+                  sessionType={sessionType}
                   manage={manage}
                   questionGroup={finishGroup}
                   selectSlide={selectSlide}
@@ -673,6 +684,7 @@ const mapDispatchToProps = {
   groupQuestions: groupQuestionsRequest,
   shareGroupsExternally: shareGroupsExternallyRequest,
   changeGroupName: changeGroupNameRequest,
+  updateQuestionGroup: updateQuestionGroupSettings,
   getQuestionGroups: getQuestionGroupsRequest,
   selectQuestion: selectQuestionAction,
   createQuestionGroup: createQuestionGroupRequest,

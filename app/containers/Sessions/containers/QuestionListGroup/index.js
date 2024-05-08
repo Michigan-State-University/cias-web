@@ -1,4 +1,4 @@
-import React, { useEffect, useMemo } from 'react';
+import React, { useEffect, useMemo, useState } from 'react';
 import PropTypes from 'prop-types';
 import { createStructuredSelector } from 'reselect';
 import { connect } from 'react-redux';
@@ -18,6 +18,7 @@ import Box from 'components/Box';
 import arrowDown from 'assets/svg/arrow-down-black.svg';
 import arrowUp from 'assets/svg/arrow-up-black.svg';
 import reorderIcon from 'assets/svg/reorder-hand.svg';
+import settingsIcon from 'assets/svg/gear-2.svg';
 
 import { reorderScope } from 'models/Session/ReorderScope';
 import QuestionListItem from '../../components/QuestionListItem';
@@ -28,14 +29,25 @@ import {
   NON_MANAGEABLE_GROUPS,
   SCREENS_NON_DRAGGABLE_GROUPS,
 } from './constants';
+import { SessionTypes } from '../../../../models/Session';
+import { themeColors } from '../../../../theme';
+import Badge from '../../../../components/Badge';
+import { dayOfWeekAsString } from '../../../../utils/dateUtils';
+import Modal from '../../../../components/Modal';
+import { numericValidator } from '../../../../utils/validators';
+import { Input } from '../../components/QuestionSettings/Settings/Components/styled';
+import H3 from '../../../../components/H3';
 
 const QuestionListGroup = ({
   questionGroup,
+  questionGroup: { smsSchedule, formulas },
   toggleGroup,
   checkSelectedGroup,
   changeGroupName,
+  updateQuestionGroup,
   manage,
   sessionId,
+  sessionType,
   selectSlide,
   selectedSlides,
   selectedQuestion,
@@ -68,8 +80,18 @@ const QuestionListGroup = ({
     [type],
   );
 
+  const isSmsQuestionGroup = useMemo(
+    () => sessionType === SessionTypes.SMS_SESSION,
+    [sessionType],
+  );
+
+  const [modalVisible, setModalVisible] = useState(false);
+
+  const handleModalClose = () => setModalVisible(false);
+
   useEffect(() => {
-    handleToggleCollapsable(true);
+    // For Sms Session type questions should be collapsed by default, otherwise they should be expanded
+    handleToggleCollapsable(!isSmsQuestionGroup);
   }, [questions.length]);
 
   const renderQuestions = (providedGroupDroppable) => (
@@ -134,49 +156,77 @@ const QuestionListGroup = ({
         onShowImg={arrowUp}
         imgWithBackground
         label={
-          <Row align="center" justify="between" width="100%" mr={10}>
-            <Box display="flex" align="center">
-              {manage && isManageableGroup && (
-                <Checkbox
-                  id={`group-to-select-${id}`}
-                  mr={8}
-                  onChange={(_, event) => {
-                    event.stopPropagation();
-                    event.preventDefault();
-                    toggleGroup(questions);
-                  }}
-                  checked={checkSelectedGroup(questions)}
+          <div>
+            <Row align="center" justify="between" width="100%" mr={10}>
+              <Box display="flex" align="center">
+                {manage && isManageableGroup && (
+                  <Checkbox
+                    id={`group-to-select-${id}`}
+                    mr={8}
+                    onChange={(_, event) => {
+                      event.stopPropagation();
+                      event.preventDefault();
+                      toggleGroup(questions);
+                    }}
+                    checked={checkSelectedGroup(questions)}
+                  />
+                )}
+                <StyledInput
+                  px={12}
+                  py={6}
+                  value={title}
+                  fontSize={18}
+                  fontWeight="bold"
+                  placeholder={formatMessage(messages.groupPlaceholder)}
+                  width="100%"
+                  maxWidth="initial"
+                  onBlur={(val) => changeGroupName(val, sessionId, id)}
+                  onFocus={selectInputText}
+                  disabled={!editingPossible}
+                />
+              </Box>
+              {isDraggableGroup && (
+                <Img
+                  src={reorderIcon}
+                  disabled={!editingPossible}
+                  aria-label={formatMessage(globalMessages.dragHandle)}
+                  title={formatMessage(globalMessages.dragHandle)}
+                  {...providedGroupDraggable.dragHandleProps}
                 />
               )}
-              <StyledInput
-                px={12}
-                py={6}
-                value={title}
-                fontSize={18}
-                fontWeight="bold"
-                placeholder={formatMessage(messages.groupPlaceholder)}
-                width="100%"
-                maxWidth="initial"
-                onBlur={(val) => changeGroupName(val, sessionId, id)}
-                onFocus={selectInputText}
-                disabled={!editingPossible}
-              />
-            </Box>
-            {isDraggableGroup && (
-              <Img
-                src={reorderIcon}
-                disabled={!editingPossible}
-                aria-label={formatMessage(globalMessages.dragHandle)}
-                title={formatMessage(globalMessages.dragHandle)}
-                {...providedGroupDraggable.dragHandleProps}
-              />
+              {isSmsQuestionGroup && (
+                <Img
+                  src={settingsIcon}
+                  disabled={!editingPossible}
+                  aria-label={formatMessage(messages.groupSettings)}
+                  title={formatMessage(messages.groupSettings)}
+                  onClick={() => setModalVisible(true)}
+                />
+              )}
+            </Row>
+            {isSmsQuestionGroup && (
+              <Row align="center" justify="start" width="100%" mr={10} px={10}>
+                {formulas &&
+                  formulas.map((formula) => (
+                    <Badge color={themeColors.primary} bgWithOpacity mx={2}>
+                      {formula.payload + formula.patterns[0].match}
+                    </Badge>
+                  ))}
+                {smsSchedule.dayOfPeriod &&
+                  smsSchedule.dayOfPeriod.map((day) => (
+                    <Badge color={themeColors.comment} bgWithOpacity mx={2}>
+                      {dayOfWeekAsString(day)}
+                    </Badge>
+                  ))}
+              </Row>
             )}
-          </Row>
+          </div>
         }
       >
         {areDraggableScreens ? renderQuestionsWithDnd() : renderQuestions()}
       </Collapse>
       <Spacer />
+      {renderModal()}
     </Row>
   );
 
@@ -191,6 +241,38 @@ const QuestionListGroup = ({
     </Draggable>
   );
 
+  const renderModal = () => (
+    <>
+      {/* @ts-ignore */}
+      <Modal
+        visible={modalVisible}
+        title={title}
+        onClose={handleModalClose}
+        maxWidth={1500}
+      >
+        <Row justify="between" align="center" pb={15} mb={15}>
+          <H3>Days per message</H3>
+          <Input
+            placeholder="days per message"
+            type="singleline"
+            keyboard="tel"
+            value=""
+            validator={numericValidator}
+            onBlur={(v) =>
+              updateQuestionGroup(
+                { title: `Initial Group Sms ${v}` },
+                sessionId,
+                id,
+              )
+            }
+            width={300}
+            px={12}
+          />
+        </Row>
+      </Modal>
+    </>
+  );
+
   if (questions.length === 0) return <></>;
   return isDraggableGroup ? renderGroupWithDnd() : renderGroup();
 };
@@ -200,9 +282,11 @@ QuestionListGroup.propTypes = {
   toggleGroup: PropTypes.func,
   checkSelectedGroup: PropTypes.func,
   changeGroupName: PropTypes.func,
+  updateQuestionGroup: PropTypes.func,
   editingPossible: PropTypes.bool,
   manage: PropTypes.bool,
   sessionId: PropTypes.string,
+  sessionType: PropTypes.string,
   selectSlide: PropTypes.func,
   formatMessage: PropTypes.func,
   selectedSlides: PropTypes.array,
