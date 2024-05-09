@@ -26,6 +26,7 @@ import {
 import Settings from './Settings';
 import messages from './messages';
 import { SettingsBar, Container, OpenButton } from './styled';
+import { SessionTypes } from '../../../../models/Session';
 
 const QuestionSettings = ({
   settingsVisibility,
@@ -50,12 +51,14 @@ const QuestionSettings = ({
             <H2>{formatMessage(messages.header)}</H2>
           </Row>
           <Settings sessionType={sessionType} />
-          <Button
-            ml={10}
-            onClick={onGoToSessionMapClick}
-            width={175}
-            title={formatMessage(messages.goToSessionMap)}
-          />
+          {sessionType !== SessionTypes.SMS_SESSION && (
+            <Button
+              ml={10}
+              onClick={onGoToSessionMapClick}
+              width={175}
+              title={formatMessage(messages.goToSessionMap)}
+            />
+          )}
         </Box>
       </SettingsBar>
       <OpenButton
