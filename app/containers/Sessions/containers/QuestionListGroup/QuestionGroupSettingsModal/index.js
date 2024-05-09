@@ -71,7 +71,7 @@ const QuestionGroupSettingsModal = ({
         <Row justify="between" align="center" mb={8}>
           <H3>Number of Messages per day</H3>
         </Row>
-        <Row justify="between" align="center" mb={10}>
+        <Row justify="between" align="center" mb={15}>
           <Input
             placeholder="Number of messages per day"
             type="singleline"
@@ -86,7 +86,7 @@ const QuestionGroupSettingsModal = ({
         <Row justify="between" align="center" mb={8}>
           <H3>Day of Message</H3>
         </Row>
-        <Row justify="between" align="center" mb={10}>
+        <Row justify="between" align="center" mb={15}>
           {['0', '1', '2', '3', '4', '5', '6'].map((dayNumber) => (
             <Checkbox
               id={`day-of-period-${dayNumber}`}
@@ -136,7 +136,7 @@ const QuestionGroupSettingsModal = ({
           </Column>
         </Row>
         {specificQuestionsTime && (
-          <Row justify="between" align="center" mb={10}>
+          <Row justify="between" align="center" mb={15}>
             <Column>
               <label htmlFor="exact_time_picker">
                 <Text
@@ -165,7 +165,7 @@ const QuestionGroupSettingsModal = ({
           </Row>
         )}
         {randomQuestionsTime && (
-          <Row justify="between" align="center" mb={10}>
+          <Row justify="between" align="center" mb={15}>
             <Column mr={4}>
               <label htmlFor="random_from_time_picker">
                 <Text
