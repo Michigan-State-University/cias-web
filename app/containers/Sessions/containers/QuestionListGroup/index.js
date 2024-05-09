@@ -33,10 +33,7 @@ import { SessionTypes } from '../../../../models/Session';
 import { themeColors } from '../../../../theme';
 import Badge from '../../../../components/Badge';
 import { dayOfWeekAsString } from '../../../../utils/dateUtils';
-import Modal from '../../../../components/Modal';
-import { numericValidator } from '../../../../utils/validators';
-import { Input } from '../../components/QuestionSettings/Settings/Components/styled';
-import H3 from '../../../../components/H3';
+import QuestionGroupSettingsModal from './QuestionGroupSettingsModal';
 
 const QuestionListGroup = ({
   questionGroup,
@@ -226,7 +223,13 @@ const QuestionListGroup = ({
         {areDraggableScreens ? renderQuestionsWithDnd() : renderQuestions()}
       </Collapse>
       <Spacer />
-      {renderModal()}
+      <QuestionGroupSettingsModal
+        questionGroup={questionGroup}
+        updateQuestionGroup={updateQuestionGroup}
+        sessionId={sessionId}
+        modalVisible={modalVisible}
+        setModalVisible={setModalVisible}
+      />
     </Row>
   );
 
@@ -239,38 +242,6 @@ const QuestionListGroup = ({
     >
       {(providedGroupDraggable) => renderGroup(providedGroupDraggable)}
     </Draggable>
-  );
-
-  const renderModal = () => (
-    <>
-      {/* @ts-ignore */}
-      <Modal
-        visible={modalVisible}
-        title={title}
-        onClose={handleModalClose}
-        maxWidth={1500}
-      >
-        <Row justify="between" align="center" pb={15} mb={15}>
-          <H3>Days per message</H3>
-          <Input
-            placeholder="days per message"
-            type="singleline"
-            keyboard="tel"
-            value=""
-            validator={numericValidator}
-            onBlur={(v) =>
-              updateQuestionGroup(
-                { title: `Initial Group Sms ${v}` },
-                sessionId,
-                id,
-              )
-            }
-            width={300}
-            px={12}
-          />
-        </Row>
-      </Modal>
-    </>
   );
 
   if (questions.length === 0) return <></>;
