@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
 import Row from 'components/Row';
+import {mapKeys, snakeCase, update} from 'lodash';
 import Modal from '../../../../../components/Modal';
 import { numericValidator } from '../../../../../utils/validators';
 import { Input } from '../../../components/QuestionSettings/Settings/Components/styled';
@@ -18,6 +19,14 @@ const QuestionGroupSettingsModal = ({
 
   const handleModalClose = () => setModalVisible(false);
 
+  const updateSmsSchedule = (path, value) => {
+    const newSmsSchedule = update(smsSchedule, path, () => value);
+    const transformedSchedule = mapKeys(newSmsSchedule, (v, k) =>
+      snakeCase(k),
+    );
+    updateQuestionGroup({ sms_schedule: transformedSchedule }, sessionId, id);
+  };
+
   const renderModal = () => (
     <>
       {/* @ts-ignore */}
@@ -27,21 +36,17 @@ const QuestionGroupSettingsModal = ({
         onClose={handleModalClose}
         maxWidth={1500}
       >
-        <Row justify="between" align="center" pb={15} mb={15}>
-          <H3>Days per message</H3>
+        <Row justify="between" align="center" mb={2}>
+          <H3>Number of messages per day</H3>
+        </Row>
+        <Row justify="between" align="center">
           <Input
-            placeholder="days per message"
+            placeholder="Number of messages per day"
             type="singleline"
             keyboard="tel"
-            value=""
+            value={smsSchedule.questionsPerDay}
             validator={numericValidator}
-            onBlur={(v) =>
-              updateQuestionGroup(
-                { title: `Initial Group Sms ${v}` },
-                sessionId,
-                id,
-              )
-            }
+            onBlur={(v) => updateSmsSchedule('questionsPerDay', Number(v))}
             width={300}
             px={12}
           />
