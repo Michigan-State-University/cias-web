@@ -35,12 +35,15 @@ import {
   HIDE_NARRATOR_TAB_QUESTIONS,
   HIDE_SETTINGS_TAB_QUESTIONS,
 } from '../constants';
+import { SessionTypes } from '../../../../../models/Session';
+import SmsSettingsTab from './Components/Tabs/SmsSettingsTab';
 
 const Settings = ({
-  selectedQuestion: { narrator, settings, id, formulas, type } = {},
+  selectedQuestion: { narrator, settings, id, formulas, type, accepted_answers: acceptedAnswers } = {},
   intl: { formatMessage },
   tab,
   changeTab,
+  sessionType,
   setDraggable,
   interventionType,
   questionGroup,
@@ -52,6 +55,7 @@ const Settings = ({
   };
 
   const isTlfbGroup = questionGroup?.type === GroupType.TLFB;
+  const isSmsSession = sessionType === SessionTypes.SMS_SESSION;
 
   const hideSettingsTab = HIDE_SETTINGS_TAB_QUESTIONS.includes(type);
   const hideNarratorTab = HIDE_NARRATOR_TAB_QUESTIONS.includes(type);
@@ -69,13 +73,23 @@ const Settings = ({
           label={formatMessage(messages[settingsTabLabels.settings])}
           hidden={hideSettingsTab}
         >
-          <SettingsTab
-            formatMessage={formatMessage}
-            disabled={!editingPossible}
-            settings={settings}
-            type={type}
-            id={id}
-          />
+          {isSmsSession ? (
+            <SmsSettingsTab
+              formatMessage={formatMessage}
+              disabled={!editingPossible}
+              acceptedAnswers={acceptedAnswers}
+              type={type}
+              id={id}
+            />
+          ) : (
+            <SettingsTab
+              formatMessage={formatMessage}
+              disabled={!editingPossible}
+              settings={settings}
+              type={type}
+              id={id}
+            />
+          )}
         </div>
         <div
           label={formatMessage(messages[settingsTabLabels.narrator])}
@@ -120,6 +134,7 @@ Settings.propTypes = {
   tab: PropTypes.string,
   changeTab: PropTypes.func,
   setDraggable: PropTypes.func,
+  sessionType: PropTypes.string,
   interventionType: PropTypes.string,
   questionGroup: PropTypes.object,
   editingPossible: PropTypes.bool,

@@ -30,6 +30,7 @@ import { SettingsBar, Container, OpenButton } from './styled';
 const QuestionSettings = ({
   settingsVisibility,
   toggleSettings,
+  sessionType,
   intl: { formatMessage },
   questionsLength,
   onGoToSessionMapClick,
@@ -48,7 +49,7 @@ const QuestionSettings = ({
           <Row align="center" justify="between" mb={40}>
             <H2>{formatMessage(messages.header)}</H2>
           </Row>
-          <Settings />
+          <Settings sessionType={sessionType} />
           <Button
             ml={10}
             onClick={onGoToSessionMapClick}
@@ -72,6 +73,7 @@ QuestionSettings.propTypes = {
   intl: PropTypes.object.isRequired,
   settingsVisibility: PropTypes.bool,
   toggleSettings: PropTypes.func,
+  sessionType: PropTypes.string,
   questionsLength: PropTypes.number,
   onGoToSessionMapClick: PropTypes.func,
 };

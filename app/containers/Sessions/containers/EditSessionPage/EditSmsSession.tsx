@@ -638,8 +638,11 @@ const EditSmsSessionPage = ({
               currentGroupScope={currentGroupScope}
             />
             {shouldRenderSettings && (
-              // @ts-ignore
-              <QuestionSettings onGoToSessionMapClick={goToSessionMap} />
+              <QuestionSettings
+                // @ts-ignore
+                onGoToSessionMapClick={goToSessionMap}
+                sessionType={sessionType}
+              />
             )}
           </Row>
         </Column>
