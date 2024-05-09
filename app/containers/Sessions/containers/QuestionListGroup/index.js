@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import { createStructuredSelector } from 'reselect';
 import { connect } from 'react-redux';
 import { Draggable, Droppable } from 'react-beautiful-dnd';
+import { Row as GridRow, Col } from 'react-grid-system';
 
 import { makeSelectGroupQuestions } from 'global/reducers/questions/selectors';
 import globalMessages from 'global/i18n/globalMessages';
@@ -84,8 +85,6 @@ const QuestionListGroup = ({
 
   const [modalVisible, setModalVisible] = useState(false);
 
-  const handleModalClose = () => setModalVisible(false);
-
   useEffect(() => {
     // For Sms Session type questions should be collapsed by default, otherwise they should be expanded
     handleToggleCollapsable(!isSmsQuestionGroup);
@@ -153,70 +152,105 @@ const QuestionListGroup = ({
         onShowImg={arrowUp}
         imgWithBackground
         label={
-          <div>
-            <Row align="center" justify="between" width="100%" mr={10}>
-              <Box display="flex" align="center">
-                {manage && isManageableGroup && (
-                  <Checkbox
-                    id={`group-to-select-${id}`}
-                    mr={8}
-                    onChange={(_, event) => {
-                      event.stopPropagation();
-                      event.preventDefault();
-                      toggleGroup(questions);
-                    }}
-                    checked={checkSelectedGroup(questions)}
+          <div style={{ width: 275 }}>
+            <GridRow>
+              <Col xs={11} style={{ paddingRight: 0 }}>
+                <Row align="center" justify="between" width="100%">
+                  <Box display="flex" align="center">
+                    {manage && isManageableGroup && (
+                      <Checkbox
+                        id={`group-to-select-${id}`}
+                        mr={8}
+                        onChange={(_, event) => {
+                          event.stopPropagation();
+                          event.preventDefault();
+                          toggleGroup(questions);
+                        }}
+                        checked={checkSelectedGroup(questions)}
+                      />
+                    )}
+                    <StyledInput
+                      px={12}
+                      py={6}
+                      value={title}
+                      fontSize={18}
+                      fontWeight="bold"
+                      placeholder={formatMessage(messages.groupPlaceholder)}
+                      maxWidth="initial"
+                      onBlur={(val) => changeGroupName(val, sessionId, id)}
+                      onFocus={selectInputText}
+                      disabled={!editingPossible}
+                    />
+                  </Box>
+                </Row>
+                {isSmsQuestionGroup && (
+                  <Row
+                    align="center"
+                    justify="start"
+                    flexWrap="wrap"
+                    mr={10}
+                    px={10}
+                  >
+                    {formulas &&
+                      formulas.map((formula) => (
+                        <Badge
+                          color={themeColors.primary}
+                          bgWithOpacity
+                          mx={2}
+                          my={2}
+                        >
+                          {formula.payload + formula.patterns[0].match}
+                        </Badge>
+                      ))}
+                    {smsSchedule.dayOfPeriod &&
+                      smsSchedule.dayOfPeriod.map((day) => (
+                        <Badge
+                          color={themeColors.comment}
+                          bgWithOpacity
+                          mx={2}
+                          my={2}
+                        >
+                          {dayOfWeekAsString(day)}
+                        </Badge>
+                      ))}
+                  </Row>
+                )}
+              </Col>
+              <Col
+                xs={1}
+                style={{
+                  paddingLeft: 0,
+                  display: 'flex',
+                  flexDirection: 'column',
+                  justifyContent: 'space-evenly',
+                  alignItems: 'center',
+                }}
+              >
+                {isSmsQuestionGroup && (
+                  <Img
+                    src={settingsIcon}
+                    disabled={!editingPossible}
+                    aria-label={formatMessage(messages.groupSettings)}
+                    title={formatMessage(messages.groupSettings)}
+                    onClick={() => setModalVisible(true)}
+                    height="20px"
+                    width="20px"
+                    mb={5}
                   />
                 )}
-                <StyledInput
-                  px={12}
-                  py={6}
-                  value={title}
-                  fontSize={18}
-                  fontWeight="bold"
-                  placeholder={formatMessage(messages.groupPlaceholder)}
-                  width="100%"
-                  maxWidth="initial"
-                  onBlur={(val) => changeGroupName(val, sessionId, id)}
-                  onFocus={selectInputText}
-                  disabled={!editingPossible}
-                />
-              </Box>
-              {isDraggableGroup && (
-                <Img
-                  src={reorderIcon}
-                  disabled={!editingPossible}
-                  aria-label={formatMessage(globalMessages.dragHandle)}
-                  title={formatMessage(globalMessages.dragHandle)}
-                  {...providedGroupDraggable.dragHandleProps}
-                />
-              )}
-              {isSmsQuestionGroup && (
-                <Img
-                  src={settingsIcon}
-                  disabled={!editingPossible}
-                  aria-label={formatMessage(messages.groupSettings)}
-                  title={formatMessage(messages.groupSettings)}
-                  onClick={() => setModalVisible(true)}
-                />
-              )}
-            </Row>
-            {isSmsQuestionGroup && (
-              <Row align="center" justify="start" width="100%" mr={10} px={10}>
-                {formulas &&
-                  formulas.map((formula) => (
-                    <Badge color={themeColors.primary} bgWithOpacity mx={2}>
-                      {formula.payload + formula.patterns[0].match}
-                    </Badge>
-                  ))}
-                {smsSchedule.dayOfPeriod &&
-                  smsSchedule.dayOfPeriod.map((day) => (
-                    <Badge color={themeColors.comment} bgWithOpacity mx={2}>
-                      {dayOfWeekAsString(day)}
-                    </Badge>
-                  ))}
-              </Row>
-            )}
+                {isDraggableGroup && (
+                  <Img
+                    src={reorderIcon}
+                    disabled={!editingPossible}
+                    aria-label={formatMessage(globalMessages.dragHandle)}
+                    title={formatMessage(globalMessages.dragHandle)}
+                    height="20px"
+                    width="20px"
+                    {...providedGroupDraggable.dragHandleProps}
+                  />
+                )}
+              </Col>
+            </GridRow>
           </div>
         }
       >
