@@ -30,6 +30,7 @@ const SpeechInput = ({
   nameQuestionExists,
 }) => {
   const [inputValue, setInputValue] = useState(text);
+  const [addVariableClicked, setAddVariableClicked] = useState(false);
 
   const BUTTON_MARGIN = '10px';
 
@@ -37,6 +38,15 @@ const SpeechInput = ({
     if (isSpeechUpdating) return <Loader size={24} type="inline" />;
 
     return <PlayStopButton isPlaying={isPlaying} onClick={handleButtonClick} />;
+  };
+
+  const handleSpeechInputBlur = (value) => {
+    if (addVariableClicked) {
+      handleAddVariable();
+      setAddVariableClicked(false);
+    } else {
+      handleBlur(value);
+    }
   };
 
   const handleAddVariable = () => {
@@ -74,6 +84,7 @@ const SpeechInput = ({
               color={themeColors.secondary}
               clickable
               onClick={handleAddVariable}
+              onMouseDown={() => setAddVariableClicked(true)}
               disabled={isSpeechUpdating}
             >
               {formatMessage(messages.addNameVariable)}
@@ -88,7 +99,7 @@ const SpeechInput = ({
               rows="10"
               placeholder={formatMessage(messages.speechPlaceholder)}
               value={text}
-              onBlur={handleBlur}
+              onBlur={handleSpeechInputBlur}
               onFocus={() => setHasFocus(true)}
               onInput={handleInput}
             />
