@@ -1,38 +1,26 @@
-import React, {
-  useCallback,
-  useContext,
-  useEffect,
-  useLayoutEffect,
-  useMemo,
-  useRef,
-  useState,
-} from 'react';
-import { injectReducer, injectSaga } from 'redux-injectors';
-import {
-  DragDropContext,
-  DragStart,
-  Droppable,
-  DropResult,
-} from 'react-beautiful-dnd';
-import { Helmet } from 'react-helmet';
-import { compose } from 'redux';
-import { connect } from 'react-redux';
-import { useHistory, useLocation, useParams } from 'react-router-dom';
-import { createStructuredSelector } from 'reselect';
-import { FormattedMessage, useIntl } from 'react-intl';
+import React, {useCallback, useContext, useEffect, useLayoutEffect, useMemo, useRef, useState,} from 'react';
+import {injectReducer, injectSaga} from 'redux-injectors';
+import {DragDropContext, DragStart, Droppable, DropResult,} from 'react-beautiful-dnd';
+import {Helmet} from 'react-helmet';
+import {compose} from 'redux';
+import {connect} from 'react-redux';
+import {useHistory, useLocation, useParams} from 'react-router-dom';
+import {createStructuredSelector} from 'reselect';
+import {FormattedMessage, useIntl} from 'react-intl';
 import xor from 'lodash/xor';
 import keyBy from 'lodash/keyBy';
 import mapValues from 'lodash/mapValues';
 import flow from 'lodash/flow';
 import intersection from 'lodash/intersection';
+import includes from 'lodash/includes';
 
-import { reorderScope } from 'models/Session/ReorderScope';
-import { SmsSession, Session } from 'models/Session';
-import { QuestionDTO, QuestionTypes } from 'models/Question';
-import { GroupType, QuestionGroup } from 'models/QuestionGroup';
-import { questionType } from 'models/Session/QuestionTypes';
+import {reorderScope} from 'models/Session/ReorderScope';
+import {Session, SmsSession} from 'models/Session';
+import {QuestionDTO, QuestionTypes} from 'models/Question';
+import {GroupType, QuestionGroup} from 'models/QuestionGroup';
+import {questionType} from 'models/Session/QuestionTypes';
 
-import { RoutePath } from 'global/constants';
+import {RoutePath} from 'global/constants';
 
 import Box from 'components/Box';
 import Column from 'components/Column';
@@ -45,13 +33,10 @@ import Text from 'components/Text';
 import TextButton from 'components/Button/TextButton';
 import H2 from 'components/H2';
 import CopyModal from 'components/CopyModal';
-import { VIEWS } from 'components/CopyModal/Components';
+import {VIEWS} from 'components/CopyModal/Components';
 
 import GroupActionButton from 'containers/Sessions/components/GroupActionButton';
-import {
-  ShareExternallyLevel,
-  useShareExternallyModal,
-} from 'containers/ShareExternallyModal';
+import {ShareExternallyLevel, useShareExternallyModal,} from 'containers/ShareExternallyModal';
 
 import menu from 'assets/svg/triangle-back-black.svg';
 import cog from 'assets/svg/gear-selected.svg';
@@ -66,12 +51,12 @@ import groupIconActive from 'assets/svg/group-active.svg';
 import duplicateInternally from 'assets/svg/duplicate-internally.svg';
 import duplicateInternallyActive from 'assets/svg/duplicate-internally-active.svg';
 
-import { borders, colors, themeColors } from 'theme';
+import {borders, colors, themeColors} from 'theme';
 
-import { parametrizeRoutePath } from 'utils/router';
+import {parametrizeRoutePath} from 'utils/router';
 import instantiateEmptyQuestion from 'utils/instantiateEmptyQuestion';
 import isNullOrUndefined from 'utils/isNullOrUndefined';
-import { formatInterventionLanguageMessage } from 'utils/intlOutsideReact';
+import {formatInterventionLanguageMessage} from 'utils/intlOutsideReact';
 
 import {
   createQuestionGroupRequest,
@@ -97,26 +82,17 @@ import {
   shareGroupsExternallyRequest,
   updateQuestionGroupSettings,
 } from 'global/reducers/questionGroups';
-import {
-  allCopyModalSagas,
-  copyModalReducer,
-} from 'global/reducers/copyModalReducer';
-import { JumpToScreenLocationState } from 'global/types/locationState';
-import { makeSelectNavbarHeight } from 'global/reducers/globalState';
+import {allCopyModalSagas, copyModalReducer,} from 'global/reducers/copyModalReducer';
+import {JumpToScreenLocationState} from 'global/types/locationState';
+import {makeSelectNavbarHeight} from 'global/reducers/globalState';
 
 import QuestionDetails from '../../components/QuestionDetails';
 import QuestionSettings from '../../components/QuestionSettings';
 import QuestionTypeChooser from '../../components/QuestionTypeChooser';
 
 import messages from './messages';
-import { EditSessionPageContext, useLockEditSessionPageScroll } from './utils';
-import {
-  Grid,
-  QuestionsRow,
-  ShowListButton,
-  Spacer,
-  StyledQuestionTypeChooser,
-} from './styled';
+import {EditSessionPageContext, useLockEditSessionPageScroll} from './utils';
+import {Grid, QuestionsRow, ShowListButton, Spacer, StyledQuestionTypeChooser,} from './styled';
 import QuestionListGroup from '../QuestionListGroup';
 import defaultQuestionSubtitlesMessages from './defaultQuestionSubtitlesMessages';
 
@@ -497,6 +473,11 @@ const EditSmsSessionPage = ({
     changeGroupName(name, sessionId, currentGroupScope.id);
   };
 
+  const shouldRenderSettings = !includes(
+    [QuestionTypes.TLFB_CONFIG, QuestionTypes.SMS_INFORMATION_QUESTION],
+    currentQuestion?.type,
+  );
+
   return (
     <>
       <Helmet>
@@ -656,7 +637,7 @@ const EditSmsSessionPage = ({
               changeGroupName={handleGroupNameChange}
               currentGroupScope={currentGroupScope}
             />
-            {currentQuestion?.type !== QuestionTypes.TLFB_CONFIG && (
+            {shouldRenderSettings && (
               // @ts-ignore
               <QuestionSettings onGoToSessionMapClick={goToSessionMap} />
             )}
