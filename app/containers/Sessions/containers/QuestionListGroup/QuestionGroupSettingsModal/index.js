@@ -164,6 +164,74 @@ const QuestionGroupSettingsModal = ({
             </Column>
           </Row>
         )}
+        {randomQuestionsTime && (
+          <Row justify="between" align="center" mb={10}>
+            <Column mr={4}>
+              <label htmlFor="random_from_time_picker">
+                <Text
+                  mb={5}
+                  fontSize="12px"
+                  fontWeight="bold"
+                  width="fit-content"
+                >
+                  From
+                </Text>
+              </label>
+              <LocalizedDatePicker
+                selected={parseTime(smsSchedule.time.range.from)}
+                onChange={(date) =>
+                  updateSmsSchedule('time', {
+                    range: {
+                      from: getTimeString(date),
+                      to: smsSchedule.time.range.to,
+                    },
+                  })
+                }
+                showTimeSelect
+                showTimeSelectOnly
+                timeIntervals={10}
+                calendarClassName="schedule-date-picker"
+                customInput={
+                  <DateInput id="random_from_time_picker" width="100%" />
+                }
+                timeCaption="Time"
+                dateFormat="h:mm aa"
+              />
+            </Column>
+            <Column ml={4}>
+              <label htmlFor="random_to_time_picker">
+                <Text
+                  mb={5}
+                  fontSize="12px"
+                  fontWeight="bold"
+                  width="fit-content"
+                >
+                  To
+                </Text>
+              </label>
+              <LocalizedDatePicker
+                selected={parseTime(smsSchedule.time.range.to)}
+                onChange={(date) =>
+                  updateSmsSchedule('time', {
+                    range: {
+                      from: smsSchedule.time.range.from,
+                      to: getTimeString(date),
+                    },
+                  })
+                }
+                showTimeSelect
+                showTimeSelectOnly
+                timeIntervals={10}
+                calendarClassName="schedule-date-picker"
+                customInput={
+                  <DateInput id="random_to_time_picker" width="100%" />
+                }
+                timeCaption="Time"
+                dateFormat="h:mm aa"
+              />
+            </Column>
+          </Row>
+        )}
       </Modal>
     </>
   );
