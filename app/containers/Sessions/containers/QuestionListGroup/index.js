@@ -223,13 +223,15 @@ const QuestionListGroup = ({
         {areDraggableScreens ? renderQuestionsWithDnd() : renderQuestions()}
       </Collapse>
       <Spacer />
-      <QuestionGroupSettingsModal
-        questionGroup={questionGroup}
-        updateQuestionGroup={updateQuestionGroup}
-        sessionId={sessionId}
-        modalVisible={modalVisible}
-        setModalVisible={setModalVisible}
-      />
+      {isSmsQuestionGroup && (
+        <QuestionGroupSettingsModal
+          questionGroup={questionGroup}
+          updateQuestionGroup={updateQuestionGroup}
+          sessionId={sessionId}
+          modalVisible={modalVisible}
+          setModalVisible={setModalVisible}
+        />
+      )}
     </Row>
   );
 
