@@ -40,6 +40,7 @@ const QuestionListGroup = ({
   questionGroup,
   questionGroup: { smsSchedule, formulas },
   toggleGroup,
+  interventionId,
   checkSelectedGroup,
   changeGroupName,
   updateQuestionGroup,
@@ -262,6 +263,7 @@ const QuestionListGroup = ({
           questionGroup={questionGroup}
           updateQuestionGroup={updateQuestionGroup}
           sessionId={sessionId}
+          interventionId={interventionId}
           modalVisible={modalVisible}
           setModalVisible={setModalVisible}
         />
@@ -286,6 +288,7 @@ const QuestionListGroup = ({
 
 QuestionListGroup.propTypes = {
   questionGroup: PropTypes.object,
+  interventionId: PropTypes.string,
   toggleGroup: PropTypes.func,
   checkSelectedGroup: PropTypes.func,
   changeGroupName: PropTypes.func,

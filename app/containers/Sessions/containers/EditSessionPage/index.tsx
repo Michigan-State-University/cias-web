@@ -80,12 +80,13 @@ const EditSessionPage = ({
   editingPossible,
 }: Props): JSX.Element => {
   const { name: sessionName, type } = session;
+  const { interventionId } = params;
   const { formatMessage } = useIntl();
 
   const [storeInitialized, setStoreInitialized] = useState(false);
 
   useEffect(() => {
-    const { interventionId, sessionId: paramSessionId } = params;
+    const { sessionId: paramSessionId } = params;
     getSession({
       sessionId: paramSessionId,
       interventionId,
@@ -121,6 +122,7 @@ const EditSessionPage = ({
         <EditSmsSession
           editingPossible={editingPossible}
           interventionStatus={interventionStatus}
+          interventionId={interventionId}
           session={session as SmsSession}
         />
       )}
