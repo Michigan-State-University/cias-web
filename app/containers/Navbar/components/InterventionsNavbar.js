@@ -108,6 +108,7 @@ const InterventionNavbar = ({
   const { interventionId, sessionId } = params;
 
   const isClassicSession = type === SessionTypes.CLASSIC_SESSION;
+  const isSmsSession = type === SessionTypes.SMS_SESSION;
 
   useInjectSaga({ key: 'editSession', saga: editSessionSaga });
   const [tabActive, setTabActive] = useState(
@@ -215,31 +216,32 @@ const InterventionNavbar = ({
             </StyledLink>
           }
         />
-        {isClassicSession && (
-          <div
-            linkMatch={formatMessage(messages.reportTemplates)}
-            renderAsLink={
-              <StyledLink
-                to={parametrizeRoutePath(RoutePath.REPORT_TEMPLATES, {
-                  interventionId,
-                  sessionId,
-                })}
-              >
-                <Row style={{ lineHeight: 'normal' }} align="end">
-                  {formatMessage(messages.reportTemplates)}
-                  <StyledCircle
-                    bg={themeColors.secondary}
-                    size="20px"
-                    child={reportTemplatesCount ?? 0}
-                    fontSize={11}
-                    ml={5}
-                  />
-                </Row>
-              </StyledLink>
-            }
-          />
-        )}
-        {canAccessParticipantsData && isClassicSession && (
+        {isClassicSession ||
+          (isSmsSession && (
+            <div
+              linkMatch={formatMessage(messages.reportTemplates)}
+              renderAsLink={
+                <StyledLink
+                  to={parametrizeRoutePath(RoutePath.REPORT_TEMPLATES, {
+                    interventionId,
+                    sessionId,
+                  })}
+                >
+                  <Row style={{ lineHeight: 'normal' }} align="end">
+                    {formatMessage(messages.reportTemplates)}
+                    <StyledCircle
+                      bg={themeColors.secondary}
+                      size="20px"
+                      child={reportTemplatesCount ?? 0}
+                      fontSize={11}
+                      ml={5}
+                    />
+                  </Row>
+                </StyledLink>
+              }
+            />
+          ))}
+        {canAccessParticipantsData && (isClassicSession || isSmsSession) && (
           <div
             linkMatch={formatMessage(messages.generatedReports)}
             renderAsLink={
