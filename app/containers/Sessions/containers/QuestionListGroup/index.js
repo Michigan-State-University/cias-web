@@ -203,7 +203,7 @@ const QuestionListGroup = ({
                           {formula.payload + formula.patterns[0].match}
                         </Badge>
                       ))}
-                    {smsSchedule.dayOfPeriod &&
+                    {smsSchedule?.dayOfPeriod &&
                       smsSchedule.dayOfPeriod.map((day) => (
                         <Badge
                           color={themeColors.comment}

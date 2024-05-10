@@ -154,7 +154,7 @@ const SmsSettingsTab = ({
           <Input
             id="answer_if_wrong"
             type="singleline"
-            value={acceptedAnswers.answer_if_wrong}
+            value={acceptedAnswers?.answer_if_wrong}
             onBlur={(v) =>
               onQuestionToggle({
                 path: 'accepted_answers',

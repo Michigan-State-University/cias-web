@@ -100,7 +100,7 @@ const QuestionGroupSettingsModal = ({
             placeholder="Number of messages per day"
             type="singleline"
             keyboard="tel"
-            value={smsSchedule.questionsPerDay}
+            value={smsSchedule?.questionsPerDay}
             validator={numericValidator}
             onBlur={(v) => updateSmsSchedule('questionsPerDay', Number(v))}
             width="100%"
@@ -114,17 +114,17 @@ const QuestionGroupSettingsModal = ({
           {['0', '1', '2', '3', '4', '5', '6'].map((dayNumber) => (
             <Checkbox
               id={`day-of-period-${dayNumber}`}
-              checked={includes(smsSchedule.dayOfPeriod, dayNumber)}
+              checked={includes(smsSchedule?.dayOfPeriod, dayNumber)}
               onChange={(selected) =>
                 selected
                   ? updateSmsSchedule(
                       'dayOfPeriod',
-                      concat(smsSchedule.dayOfPeriod, dayNumber),
+                      concat(smsSchedule?.dayOfPeriod, dayNumber),
                     )
                   : updateSmsSchedule(
                       'dayOfPeriod',
                       filter(
-                        smsSchedule.dayOfPeriod,
+                        smsSchedule?.dayOfPeriod,
                         (item) => item !== dayNumber,
                       ),
                     )
