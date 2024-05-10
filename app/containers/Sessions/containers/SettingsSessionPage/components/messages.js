@@ -11,6 +11,10 @@ export default defineMessages({
     id: `${scope}.nameLabel`,
     defaultMessage: 'Name',
   },
+  smsCode: {
+    id: `${scope}.smsCode`,
+    defaultMessage: 'SMS Code',
+  },
   variableLabel: {
     id: `${scope}.variableLabel`,
     defaultMessage: 'Variable',

@@ -67,6 +67,7 @@ const SessionSettings = ({
   autocloseAt,
   editingPossible,
   type,
+  smsCode,
 }) => {
   useInjectReducer({ key: 'intervention', reducer: interventionReducer });
   useInjectReducer({ key: 'questions', reducer: questionsReducer });
@@ -209,6 +210,22 @@ const SessionSettings = ({
                 />
               </InputContainer>
 
+              {type === SessionTypes.SMS_SESSION && (
+                <InputContainer style={{ marginTop: 15 }}>
+                  <H3 mb={5} fontWeight="regular">
+                    {formatMessage(messages.smsCode)}
+                  </H3>
+                  <Input
+                    disabled={!editingPossible}
+                    width="100%"
+                    placeholder={formatMessage(messages.placeholder)}
+                    value={smsCode}
+                    onBlur={(val) => editSession({ smsCode: val })}
+                    px={12}
+                  />
+                </InputContainer>
+              )}
+
               <InputContainer style={{ marginTop: 15, marginBottom: 15 }}>
                 <H3 mb={5} fontWeight="regular">
                   {formatMessage(messages.variableLabel)}
@@ -332,6 +349,7 @@ SessionSettings.propTypes = {
   autocloseAt: PropTypes.string,
   editingPossible: PropTypes.bool,
   type: PropTypes.string,
+  smsCode: PropTypes.string,
 };
 
 export default compose(withConnect)(SessionSettings);
