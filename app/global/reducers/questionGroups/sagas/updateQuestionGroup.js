@@ -11,7 +11,7 @@ import {
 } from '../constants';
 import {
   updateQuestionGroupSettingsError,
-  updateQuestionGroupSettingsSuccess
+  updateQuestionGroupSettingsSuccess,
 } from '../actions';
 
 function* updateQuestionGroup({ payload: { data, sessionId, groupId } }) {

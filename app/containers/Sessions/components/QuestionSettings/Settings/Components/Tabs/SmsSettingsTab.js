@@ -16,10 +16,7 @@ import {
 } from '../../../../../../../utils/validators';
 import { Input } from '../styled';
 
-const SmsSettingsTab = ({
-  onQuestionToggle,
-  acceptedAnswers,
-}) => {
+const SmsSettingsTab = ({ onQuestionToggle, acceptedAnswers }) => {
   const predefinedAnswers = get(acceptedAnswers, 'predefined', false);
   const rangeOfAnswers = get(acceptedAnswers, 'range', false);
 

@@ -17,7 +17,10 @@ type Props = {
   canCreateCatSession: boolean;
 };
 
-const SessionTypeChooser = ({ onCreateSession, canCreateCatSession }: Props): JSX.Element => {
+const SessionTypeChooser = ({
+  onCreateSession,
+  canCreateCatSession,
+}: Props): JSX.Element => {
   const { formatMessage } = useIntl();
   const [selectedSessionType, setSelectedSessionType] = useState(
     SessionTypes.CLASSIC_SESSION,

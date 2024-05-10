@@ -29,9 +29,8 @@ import Box from '../../../../../components/Box';
 import PlusCircle from '../../../../../components/Circle/PlusCircle';
 import messages from '../../../components/QuestionSettings/Settings/Components/messages';
 import HoverableBox from '../../../../../components/Box/HoverableBox';
-import settingsIcon from "../../../../../assets/svg/gear-2.svg";
-import Img from "../../../../../components/Img";
-import binNoBg from "../../../../../assets/svg/bin-no-bg.svg";
+import Img from '../../../../../components/Img';
+import binNoBg from '../../../../../assets/svg/bin-no-bg.svg';
 
 const QuestionGroupSettingsModal = ({
   questionGroup,
@@ -57,12 +56,8 @@ const QuestionGroupSettingsModal = ({
   const updateFormulas = (index, path, value) => {
     const formula = formulas[index];
     const newFormula = update(formula, path, () => value);
-    formulas.splice(index, 1, newFormula)
-    updateQuestionGroup(
-      { formulas },
-      sessionId,
-      id,
-    );
+    formulas.splice(index, 1, newFormula);
+    updateQuestionGroup({ formulas }, sessionId, id);
   };
 
   const parseTime = (t) => {

@@ -39,7 +39,14 @@ import { SessionTypes } from '../../../../../models/Session';
 import SmsSettingsTab from './Components/Tabs/SmsSettingsTab';
 
 const Settings = ({
-  selectedQuestion: { narrator, settings, id, formulas, type, accepted_answers: acceptedAnswers } = {},
+  selectedQuestion: {
+    narrator,
+    settings,
+    id,
+    formulas,
+    type,
+    accepted_answers: acceptedAnswers,
+  } = {},
   intl: { formatMessage },
   tab,
   changeTab,
