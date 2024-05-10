@@ -125,6 +125,7 @@ type NonReduxProps = {
   session: SmsSession;
   editingPossible: boolean;
   interventionStatus: string;
+  interventionId: string;
 };
 
 type Props = {

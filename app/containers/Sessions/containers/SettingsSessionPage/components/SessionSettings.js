@@ -49,6 +49,7 @@ import { Input, InputContainer } from './styled';
 import { SessionSettingsForm } from './SessionSettingsForm';
 
 import { SessionSettingsColumn, SessionSettingsContainer } from '../styled';
+import { SessionTypes } from '../../../../../models/Session';
 
 const SessionSettings = ({
   name,
@@ -65,6 +66,7 @@ const SessionSettings = ({
   autocloseEnabled,
   autocloseAt,
   editingPossible,
+  type,
 }) => {
   useInjectReducer({ key: 'intervention', reducer: interventionReducer });
   useInjectReducer({ key: 'questions', reducer: questionsReducer });
@@ -188,7 +190,10 @@ const SessionSettings = ({
 
       <SessionSettingsContainer fluid>
         <GridRow>
-          <SessionSettingsColumn xs={12} md={6}>
+          <SessionSettingsColumn
+            xs={12}
+            md={type === SessionTypes.SMS_SESSION ? 12 : 6}
+          >
             <Column>
               <InputContainer>
                 <H3 mb={5} fontWeight="regular">
@@ -241,52 +246,54 @@ const SessionSettings = ({
             </Column>
           </SessionSettingsColumn>
 
-          <SessionSettingsColumn xs={12} md={6}>
-            <Column>
-              <H3 mb={20}>{formatMessage(messages.narratorSettings)}</H3>
+          {type !== SessionTypes.SMS_SESSION && (
+            <SessionSettingsColumn xs={12} md={6}>
+              <Column>
+                <H3 mb={20}>{formatMessage(messages.narratorSettings)}</H3>
 
-              {narratorSettings && (
-                <Option
-                  disabled={!editingPossible}
-                  label={formatMessage(messages.narratorActive)}
-                  withBorder={isNarratorActive}
-                  value={isNarratorActive}
-                  action={onGlobalToggle}
-                  fontWeight="bold"
-                />
-              )}
-              {isNarratorActive &&
-                map(narratorSettings, (option, index) => (
+                {narratorSettings && (
                   <Option
                     disabled={!editingPossible}
-                    key={`el-option-${index}`}
-                    withBorder={index !== lastKey(narratorSettings)}
-                    label={formatMessage(messages[index])}
-                    value={option}
-                    action={onToggle(index)}
+                    label={formatMessage(messages.narratorActive)}
+                    withBorder={isNarratorActive}
+                    value={isNarratorActive}
+                    action={onGlobalToggle}
+                    fontWeight="bold"
                   />
-                ))}
-              {googleTtsVoice && (
-                <PeedyVoiceSettings
-                  googleTtsVoice={googleTtsVoice}
-                  editSession={editSessionSettings}
-                  formatMessage={formatMessage}
-                  editingPossible={editingPossible}
-                />
-              )}
+                )}
+                {isNarratorActive &&
+                  map(narratorSettings, (option, index) => (
+                    <Option
+                      disabled={!editingPossible}
+                      key={`el-option-${index}`}
+                      withBorder={index !== lastKey(narratorSettings)}
+                      label={formatMessage(messages[index])}
+                      value={option}
+                      action={onToggle(index)}
+                    />
+                  ))}
+                {googleTtsVoice && (
+                  <PeedyVoiceSettings
+                    googleTtsVoice={googleTtsVoice}
+                    editSession={editSessionSettings}
+                    formatMessage={formatMessage}
+                    editingPossible={editingPossible}
+                  />
+                )}
 
-              <H3 mt={30} mb={20}>
-                {formatMessage(messages.defaultNarrator)}
-              </H3>
-              <Row>
-                <CharacterSelector
-                  disabled={!editingPossible}
-                  onChange={setNewNarrator}
-                  value={currentNarrator}
-                />
-              </Row>
-            </Column>
-          </SessionSettingsColumn>
+                <H3 mt={30} mb={20}>
+                  {formatMessage(messages.defaultNarrator)}
+                </H3>
+                <Row>
+                  <CharacterSelector
+                    disabled={!editingPossible}
+                    onChange={setNewNarrator}
+                    value={currentNarrator}
+                  />
+                </Row>
+              </Column>
+            </SessionSettingsColumn>
+          )}
         </GridRow>
       </SessionSettingsContainer>
     </>
@@ -324,6 +331,7 @@ SessionSettings.propTypes = {
   autocloseEnabled: PropTypes.bool,
   autocloseAt: PropTypes.string,
   editingPossible: PropTypes.bool,
+  type: PropTypes.string,
 };
 
 export default compose(withConnect)(SessionSettings);
