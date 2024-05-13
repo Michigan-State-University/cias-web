@@ -110,6 +110,7 @@ const QuestionGroupSettingsModal = ({
             <Checkbox
               id={`day-of-period-${dayNumber}`}
               checked={includes(smsSchedule?.dayOfPeriod, dayNumber)}
+              inlineLabel={false}
               onChange={(selected) =>
                 selected
                   ? updateSmsSchedule(

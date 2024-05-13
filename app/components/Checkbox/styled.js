@@ -17,9 +17,11 @@ export const StyledIcon = styled(Icon)`
 `;
 
 export const StyledLabel = styled.label`
-  .in-row-label {
+  ${({ inlineLabel }) =>
+    inlineLabel &&
+    `
     display: flex;
-  }
+  `}
   align-items: center;
   width: 100%;
 
