@@ -8,7 +8,7 @@ import { createStructuredSelector } from 'reselect';
 import { FormattedMessage } from 'react-intl';
 import { useInjectReducer, useInjectSaga } from 'redux-injectors';
 
-import { colors } from 'theme';
+import { colors, themeColors } from 'theme';
 
 import { variableNameValidator } from 'utils/validators';
 import lastKey from 'utils/getLastKey';
@@ -50,6 +50,7 @@ import { SessionSettingsForm } from './SessionSettingsForm';
 
 import { SessionSettingsColumn, SessionSettingsContainer } from '../styled';
 import { SessionTypes } from '../../../../../models/Session';
+import Text from '../../../../../components/Text';
 
 const SessionSettings = ({
   name,
@@ -139,6 +140,17 @@ const SessionSettings = ({
     setNewNarrator(null);
   };
 
+  const getRandomString = (length) => {
+    // Set of uppercased letters without misleading chars - 'I', 'L', 'O', '0'
+    const charSet = 'ABCDEFGHJKMNPQRSTUVWXYZ123456789_';
+    let randomString = '';
+    for (let i = 0; i < length; i++) {
+      const randomPoz = Math.floor(Math.random() * charSet.length);
+      randomString += charSet.substring(randomPoz, randomPoz + 1);
+    }
+    return randomString;
+  };
+
   const getConfirmationDescription = () => {
     if (!isConfirmationBoxVisible) return null;
     if (isAllSettingsConfirmation)
@@ -212,9 +224,24 @@ const SessionSettings = ({
 
               {type === SessionTypes.SMS_SESSION && (
                 <InputContainer style={{ marginTop: 15 }}>
-                  <H3 mb={5} fontWeight="regular">
-                    {formatMessage(messages.smsCode)}
-                  </H3>
+                  <Row justify="between" align="center">
+                    <H3 mb={5} fontWeight="regular">
+                      {formatMessage(messages.smsCode)}
+                    </H3>
+                    <Text
+                      fontWeight="bold"
+                      color={themeColors.secondary}
+                      hoverDecoration="underline"
+                      clickable
+                      onClick={() =>
+                        editSession({
+                          smsCode: getRandomString(7),
+                        })
+                      }
+                    >
+                      Randomize code
+                    </Text>
+                  </Row>
                   <Input
                     disabled={!editingPossible}
                     width="100%"
