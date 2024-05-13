@@ -185,7 +185,7 @@ const QuestionGroupSettingsModal = ({
           </Row>
         )}
         {randomQuestionsTime && (
-          <Row justify="between" align="center" mb={15}>
+          <Row justify="between" align="center" mb={8}>
             <Column mr={4}>
               <label htmlFor="random_from_time_picker">
                 <Text
@@ -252,6 +252,22 @@ const QuestionGroupSettingsModal = ({
             </Column>
           </Row>
         )}
+        {randomQuestionsTime ||
+          (specificQuestionsTime && (
+            <Row justify="between" align="center" mb={15}>
+              <Checkbox
+                id="overwrite_user_time_settings"
+                checked={smsSchedule.overwriteUserTimeSettings}
+                onChange={(selected) =>
+                  selected
+                    ? updateSmsSchedule('overwriteUserTimeSettings', true)
+                    : updateSmsSchedule('overwriteUserTimeSettings', false)
+                }
+              >
+                Overwrite participant’s preferred time
+              </Checkbox>
+            </Row>
+          ))}
         <Row justify="between" align="center" mb={8}>
           <H3>Conditions</H3>
         </Row>
