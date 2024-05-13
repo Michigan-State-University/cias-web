@@ -277,6 +277,7 @@ export const NOT_ANSWERABLE_QUESTIONS = [
   informationQuestion.id,
   finishQuestion.id,
   feedbackQuestion.id,
+  smsInformationQuestion.id,
 ];
 
 export const QUESTIONS_WITHOUT_VARIABLE = [

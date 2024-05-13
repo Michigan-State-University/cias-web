@@ -17,7 +17,7 @@ import { StyledCheckbox, StyledLabel, StyledIcon } from './styled';
 
 type Props = {
   checked: boolean;
-  labelBelow: boolean;
+  labelBelow?: boolean;
   children?: ReactNode;
   disabled?: boolean;
   id: string;
