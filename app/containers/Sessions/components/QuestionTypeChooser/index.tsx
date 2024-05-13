@@ -171,6 +171,7 @@ const QuestionTypeChooser = ({
               height={height}
               ref={containerRef}
               horizontalFogVisible={false}
+              verticalFogVisible={sessionType !== SessionTypes.SMS_SESSION}
             >
               {questionTypes.map(({ color, id }) => (
                 <NewItem
