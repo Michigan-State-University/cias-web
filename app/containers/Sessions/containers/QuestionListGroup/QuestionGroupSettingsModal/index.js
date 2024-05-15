@@ -9,6 +9,7 @@ import {
   mapKeys,
   snakeCase,
   update,
+  compact,
 } from 'lodash';
 import { FormattedMessage } from 'react-intl';
 import Modal from '../../../../../components/Modal';
@@ -115,7 +116,7 @@ const QuestionGroupSettingsModal = ({
                 selected
                   ? updateSmsSchedule(
                       'dayOfPeriod',
-                      concat(smsSchedule?.dayOfPeriod, dayNumber),
+                      compact(concat(smsSchedule?.dayOfPeriod, dayNumber)),
                     )
                   : updateSmsSchedule(
                       'dayOfPeriod',
@@ -355,16 +356,18 @@ const QuestionGroupSettingsModal = ({
             onClick={() =>
               updateQuestionGroup(
                 {
-                  formulas: concat(formulas, [
-                    {
-                      payload: '',
-                      patterns: [
-                        {
-                          match: '',
-                        },
-                      ],
-                    },
-                  ]),
+                  formulas: compact(
+                    concat(formulas, [
+                      {
+                        payload: '',
+                        patterns: [
+                          {
+                            match: '',
+                          },
+                        ],
+                      },
+                    ]),
+                  ),
                 },
                 sessionId,
                 id,
