@@ -153,7 +153,7 @@ const QuestionListGroup = ({
         onShowImg={arrowUp}
         imgWithBackground
         label={
-          <div style={{ width: 275 }}>
+          <Box width={275} >
             <GridRow>
               <Col xs={11} style={{ paddingRight: 0 }}>
                 <Row align="center" justify="between" width="100%">
@@ -252,7 +252,7 @@ const QuestionListGroup = ({
                 )}
               </Col>
             </GridRow>
-          </div>
+          </Box>
         }
       >
         {areDraggableScreens ? renderQuestionsWithDnd() : renderQuestions()}

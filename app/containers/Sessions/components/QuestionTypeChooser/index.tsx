@@ -19,13 +19,13 @@ import { makeSelectInterventionHfhsAccess } from 'global/reducers/intervention';
 
 import useOutsideClick from 'utils/useOutsideClick';
 import {
-  ClassicSessionQuestionTypes,
+  AddableToClassicSessionQuestionTypes,
   henryFordInitialScreen,
   henryFordQuestion,
   nameQuestion,
   participantReport,
   phoneQuestion,
-  SmsSessionQuestionTypes,
+  AddableToSmsSessionQuestionTypes,
 } from 'models/Session/QuestionTypes';
 import { AddableGroups } from 'models/QuestionGroup';
 import { Question } from 'models/Question';
@@ -94,8 +94,8 @@ const QuestionTypeChooser = ({
 
   const questionTypes =
     sessionType === SessionTypes.SMS_SESSION
-      ? SmsSessionQuestionTypes
-      : ClassicSessionQuestionTypes;
+      ? AddableToSmsSessionQuestionTypes
+      : AddableToClassicSessionQuestionTypes;
 
   const isVisible = visible && height;
 

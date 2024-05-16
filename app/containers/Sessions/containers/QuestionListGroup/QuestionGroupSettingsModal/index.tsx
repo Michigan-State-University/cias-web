@@ -8,7 +8,7 @@ import {
   includes,
   mapKeys,
   snakeCase,
-  update,
+  set,
   compact,
 } from 'lodash';
 
@@ -16,7 +16,10 @@ import { FormattedMessage } from 'react-intl';
 import { numericValidator } from 'utils/validators';
 import { dayOfWeekAsString } from 'utils/dateUtils';
 import binNoBg from 'assets/svg/bin-no-bg.svg';
+import { DAY_NUMBERS } from 'global/constants';
 import { themeColors } from 'theme';
+
+import { QuestionGroup } from 'models/QuestionGroup';
 
 import Modal from 'components/Modal';
 import H3 from 'components/H3';
@@ -33,9 +36,9 @@ import HoverableBox from 'components/Box/HoverableBox';
 import Img from 'components/Img';
 
 import messages from '../../../components/QuestionSettings/Settings/Components/messages';
-import VariableChooser from '../../../../VariableChooser';
 import { Input } from '../../../components/QuestionSettings/Settings/Components/styled';
-import { QuestionGroup } from '../../../../../models/QuestionGroup';
+import VariableChooser from '../../../../VariableChooser';
+import { getTimeString, parseTime } from './utils';
 
 type QuestionGroupSettingsModalProps = {
   questionGroup: QuestionGroup;
@@ -61,39 +64,54 @@ const QuestionGroupSettingsModal = ({
   const handleModalClose = () => setModalVisible(false);
 
   const updateSmsSchedule = (path: string, value: any) => {
-    const newSmsSchedule = update(smsSchedule, path, () => value);
+    const newSmsSchedule = set(smsSchedule, path, value);
     const transformedSchedule = mapKeys(newSmsSchedule, (v, k) => snakeCase(k));
     updateQuestionGroup({ sms_schedule: transformedSchedule }, sessionId, id);
   };
 
   const updateFormulas = (index: number, path: string, value: any) => {
     const formula = formulas[index];
-    const newFormula = update(formula, path, () => value);
+    const newFormula = set(formula, path, value);
     formulas.splice(index, 1, newFormula);
     updateQuestionGroup({ formulas }, sessionId, id);
-  };
-
-  const parseTime = (t: any) => {
-    const d = new Date();
-    const time = t.match(/(\d+)(?::(\d\d))?\s*(p?)/);
-    d.setHours(parseInt(time[1], 10) + (time[3] ? 12 : 0));
-    d.setMinutes(parseInt(time[2], 10) || 0);
-    return d;
-  };
-
-  const getTimeString = (date: any) => {
-    const newTime = date.toLocaleTimeString('en-US');
-    const amPm = newTime.split(' ')[1];
-    const seconds = newTime.split(':')[2].replace(amPm, '');
-    return newTime.replace(`:${seconds}`, ' ');
   };
 
   const specificQuestionsTime = get(smsSchedule, 'time.exact', false);
   const randomQuestionsTime = get(smsSchedule, 'time.range', false);
 
-  const renderModal = () => (
+  const handleAddNewFormula = () =>
+    updateQuestionGroup(
+      {
+        formulas: compact(
+          concat(formulas, [
+            {
+              payload: '',
+              patterns: [
+                {
+                  match: '',
+                },
+              ],
+            },
+          ]),
+        ),
+      },
+      sessionId,
+      id,
+    );
+
+  const handleDayCheckboxSelection = (selected: boolean, dayNumber: string) =>
+    selected
+      ? updateSmsSchedule(
+          'dayOfPeriod',
+          compact(concat(smsSchedule?.dayOfPeriod, dayNumber)),
+        )
+      : updateSmsSchedule(
+          'dayOfPeriod',
+          filter(smsSchedule?.dayOfPeriod, (item) => item !== dayNumber),
+        );
+
+  return (
     <>
-      {/* @ts-ignore */}
       <Modal
         visible={modalVisible}
         title={title}
@@ -119,24 +137,13 @@ const QuestionGroupSettingsModal = ({
           <H3>Day of Message</H3>
         </Row>
         <Row justify="between" align="center" mb={15}>
-          {['0', '1', '2', '3', '4', '5', '6'].map((dayNumber) => (
+          {DAY_NUMBERS.map((dayNumber) => (
             <Checkbox
               id={`day-of-period-${dayNumber}`}
               checked={includes(smsSchedule?.dayOfPeriod, dayNumber)}
               inlineLabel={false}
               onChange={(selected) =>
-                selected
-                  ? updateSmsSchedule(
-                      'dayOfPeriod',
-                      compact(concat(smsSchedule?.dayOfPeriod, dayNumber)),
-                    )
-                  : updateSmsSchedule(
-                      'dayOfPeriod',
-                      filter(
-                        smsSchedule?.dayOfPeriod,
-                        (item) => item !== dayNumber,
-                      ),
-                    )
+                handleDayCheckboxSelection(selected, dayNumber)
               }
             >
               {dayOfWeekAsString(Number(dayNumber))}
@@ -265,22 +272,21 @@ const QuestionGroupSettingsModal = ({
             </Column>
           </Row>
         )}
-        {(randomQuestionsTime ||
-          specificQuestionsTime) && (
-            <Row justify="between" align="center" mb={15}>
-              <Checkbox
-                id="overwrite_user_time_settings"
-                checked={smsSchedule.overwriteUserTimeSettings}
-                onChange={(selected) =>
-                  selected
-                    ? updateSmsSchedule('overwriteUserTimeSettings', true)
-                    : updateSmsSchedule('overwriteUserTimeSettings', false)
-                }
-              >
-                Overwrite participant’s preferred time
-              </Checkbox>
-            </Row>
-          )}
+        {(randomQuestionsTime || specificQuestionsTime) && (
+          <Row justify="between" align="center" mb={15}>
+            <Checkbox
+              id="overwrite_user_time_settings"
+              checked={smsSchedule.overwriteUserTimeSettings}
+              onChange={(selected) =>
+                selected
+                  ? updateSmsSchedule('overwriteUserTimeSettings', true)
+                  : updateSmsSchedule('overwriteUserTimeSettings', false)
+              }
+            >
+              Overwrite participant’s preferred time
+            </Checkbox>
+          </Row>
+        )}
         <Row justify="between" align="center" mb={8}>
           <H3>Conditions</H3>
         </Row>
@@ -368,26 +374,7 @@ const QuestionGroupSettingsModal = ({
             py={14}
             width="100%"
             style={{ display: 'flex', justifyContent: 'center' }}
-            onClick={() =>
-              updateQuestionGroup(
-                {
-                  formulas: compact(
-                    concat(formulas, [
-                      {
-                        payload: '',
-                        patterns: [
-                          {
-                            match: '',
-                          },
-                        ],
-                      },
-                    ]),
-                  ),
-                },
-                sessionId,
-                id,
-              )
-            }
+            onClick={handleAddNewFormula}
           >
             <Box>
               <Row align="center">
@@ -402,8 +389,6 @@ const QuestionGroupSettingsModal = ({
       </Modal>
     </>
   );
-
-  return renderModal();
 };
 
 QuestionGroupSettingsModal.propTypes = {

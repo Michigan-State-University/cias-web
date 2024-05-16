@@ -43,12 +43,14 @@ import { Row as GridRow } from 'components/ReactGridSystem';
 import Column from 'components/Column';
 import Row from 'components/Row';
 import Text from 'components/Text';
+import { TextButton } from 'components/Button';
 
 import Option from './Option';
 import messages from './messages';
 import PeedyVoiceSettings from './PeedyVoiceSettings';
 import { Input, InputContainer } from './styled';
 import { SessionSettingsForm } from './SessionSettingsForm';
+import { getRandomString } from './utils';
 
 import { SessionSettingsColumn, SessionSettingsContainer } from '../styled';
 
@@ -140,17 +142,6 @@ const SessionSettings = ({
     setNewNarrator(null);
   };
 
-  const getRandomString = (length) => {
-    // Set of uppercased letters without misleading chars - 'I', 'L', 'O', '0'
-    const charSet = 'ABCDEFGHJKMNPQRSTUVWXYZ123456789_';
-    let randomString = '';
-    for (let i = 0; i < length; i++) {
-      const randomPoz = Math.floor(Math.random() * charSet.length);
-      randomString += charSet.substring(randomPoz, randomPoz + 1);
-    }
-    return randomString;
-  };
-
   const getConfirmationDescription = () => {
     if (!isConfirmationBoxVisible) return null;
     if (isAllSettingsConfirmation)
@@ -223,16 +214,18 @@ const SessionSettings = ({
               </InputContainer>
 
               {type === SessionTypes.SMS_SESSION && (
-                <InputContainer style={{ marginTop: 15 }}>
+                <InputContainer mt={15}>
                   <Row justify="between" align="center">
                     <H3 mb={5} fontWeight="regular">
                       {formatMessage(messages.smsCode)}
                     </H3>
-                    <Text
+                    <TextButton
                       fontWeight="bold"
-                      color={themeColors.secondary}
                       hoverDecoration="underline"
                       clickable
+                      buttonProps={{
+                        color: themeColors.secondary,
+                      }}
                       onClick={() =>
                         editSession({
                           smsCode: getRandomString(7),
@@ -240,7 +233,7 @@ const SessionSettings = ({
                       }
                     >
                       Randomize code
-                    </Text>
+                    </TextButton>
                   </Row>
                   <Input
                     disabled={!editingPossible}
@@ -253,7 +246,7 @@ const SessionSettings = ({
                 </InputContainer>
               )}
 
-              <InputContainer style={{ marginTop: 15, marginBottom: 15 }}>
+              <InputContainer my={15}>
                 <H3 mb={5} fontWeight="regular">
                   {formatMessage(messages.variableLabel)}
                 </H3>

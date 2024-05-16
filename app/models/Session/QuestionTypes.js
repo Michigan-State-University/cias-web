@@ -181,13 +181,13 @@ const addableToSmsSessionQuestionTypes = [
   smsInformationQuestion.id,
 ];
 
-export const ClassicSessionQuestionTypes = QuestionTypes.filter(
+export const AddableToClassicSessionQuestionTypes = QuestionTypes.filter(
   ({ id }) =>
     !notAddableQuestionTypes
       .concat(addableToSmsSessionQuestionTypes)
       .includes(id),
 );
 
-export const SmsSessionQuestionTypes = QuestionTypes.filter(({ id }) =>
+export const AddableToSmsSessionQuestionTypes = QuestionTypes.filter(({ id }) =>
   addableToSmsSessionQuestionTypes.includes(id),
 );

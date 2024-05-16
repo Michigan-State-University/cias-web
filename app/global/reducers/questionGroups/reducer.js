@@ -5,7 +5,7 @@ import sortedIndexBy from 'lodash/sortedIndexBy';
 import { insertAt, removeAt } from 'utils/arrayUtils';
 import { GroupType } from 'models/QuestionGroup';
 import { ternary } from 'utils/ternary';
-import { assignDraftItems } from 'utils/reduxUtils';
+import {assignDraftItems, updateItemById} from 'utils/reduxUtils';
 import cloneDeep from 'lodash/cloneDeep';
 import merge from 'lodash/merge';
 import {
@@ -79,14 +79,8 @@ const questionGroupsReducer = (state = initialState, { type, payload }) =>
         break;
       }
       case UPDATE_QUESTION_GROUP_REQUEST: {
-        const index = state.groups.findIndex(
-          ({ id }) => id === payload.groupId,
-        );
-
-        draft.groups[index] = merge(
-          cloneDeep(state.groups[index]),
-          payload.data,
-        );
+        const { groupId, data } = payload;
+        updateItemById(draft.groups, groupId, data);
         break;
       }
       case UPDATE_QUESTION_GROUP_SUCCESS: {
