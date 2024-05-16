@@ -35,11 +35,12 @@ import { borders, boxShadows, colors, fontSizes } from 'theme';
 import { useDropdownPositionHelper } from 'utils/useDropdownPositionHelper';
 import { useChildSizeCalculator } from 'utils/useChildSizeCalculator';
 
+import { SessionTypes } from 'models/Session';
+
 import DefaultButtonComponent from './DefaultButtonComponent';
 import messages from './messages';
 import NewItem from './NewItem';
 import { ConditionalAppearanceConfig } from './types';
-import { SessionTypes } from '../../../../models/Session';
 
 type Props = {
   onClick: (type: string) => void;

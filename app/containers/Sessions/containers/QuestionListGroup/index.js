@@ -4,6 +4,8 @@ import { createStructuredSelector } from 'reselect';
 import { connect } from 'react-redux';
 import { Draggable, Droppable } from 'react-beautiful-dnd';
 import { Row as GridRow, Col } from 'react-grid-system';
+import { themeColors } from 'theme';
+import { dayOfWeekAsString } from 'utils/dateUtils';
 
 import { makeSelectGroupQuestions } from 'global/reducers/questions/selectors';
 import globalMessages from 'global/i18n/globalMessages';
@@ -15,6 +17,7 @@ import StyledInput from 'components/Input/StyledInput';
 import { selectInputText } from 'components/Input/utils';
 import Img from 'components/Img';
 import Box from 'components/Box';
+import Badge from 'components/Badge';
 
 import arrowDown from 'assets/svg/arrow-down-black.svg';
 import arrowUp from 'assets/svg/arrow-up-black.svg';
@@ -22,6 +25,7 @@ import reorderIcon from 'assets/svg/reorder-hand.svg';
 import settingsIcon from 'assets/svg/gear-2.svg';
 
 import { reorderScope } from 'models/Session/ReorderScope';
+import { SessionTypes } from 'models/Session';
 import QuestionListItem from '../../components/QuestionListItem';
 import { Spacer, DraggableContainer } from './styled';
 import messages from './messages';
@@ -30,10 +34,6 @@ import {
   NON_MANAGEABLE_GROUPS,
   SCREENS_NON_DRAGGABLE_GROUPS,
 } from './constants';
-import { SessionTypes } from '../../../../models/Session';
-import { themeColors } from '../../../../theme';
-import Badge from '../../../../components/Badge';
-import { dayOfWeekAsString } from '../../../../utils/dateUtils';
 import QuestionGroupSettingsModal from './QuestionGroupSettingsModal';
 
 const QuestionListGroup = ({

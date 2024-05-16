@@ -13,6 +13,8 @@ export interface QuestionGroup {
   title: string;
   position: number;
   type: GroupType;
+  smsSchedule: any;
+  formulas: any[];
 }
 
 export type QuestionGroupDTO = CamelToSnakeOmitId<QuestionGroup>;

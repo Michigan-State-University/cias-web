@@ -216,31 +216,30 @@ const InterventionNavbar = ({
             </StyledLink>
           }
         />
-        {isClassicSession ||
-          (isSmsSession && (
-            <div
-              linkMatch={formatMessage(messages.reportTemplates)}
-              renderAsLink={
-                <StyledLink
-                  to={parametrizeRoutePath(RoutePath.REPORT_TEMPLATES, {
-                    interventionId,
-                    sessionId,
-                  })}
-                >
-                  <Row style={{ lineHeight: 'normal' }} align="end">
-                    {formatMessage(messages.reportTemplates)}
-                    <StyledCircle
-                      bg={themeColors.secondary}
-                      size="20px"
-                      child={reportTemplatesCount ?? 0}
-                      fontSize={11}
-                      ml={5}
-                    />
-                  </Row>
-                </StyledLink>
-              }
-            />
-          ))}
+        {(isClassicSession || isSmsSession) && (
+          <div
+            linkMatch={formatMessage(messages.reportTemplates)}
+            renderAsLink={
+              <StyledLink
+                to={parametrizeRoutePath(RoutePath.REPORT_TEMPLATES, {
+                  interventionId,
+                  sessionId,
+                })}
+              >
+                <Row style={{ lineHeight: 'normal' }} align="end">
+                  {formatMessage(messages.reportTemplates)}
+                  <StyledCircle
+                    bg={themeColors.secondary}
+                    size="20px"
+                    child={reportTemplatesCount ?? 0}
+                    fontSize={11}
+                    ml={5}
+                  />
+                </Row>
+              </StyledLink>
+            }
+          />
+        )}
         {canAccessParticipantsData && (isClassicSession || isSmsSession) && (
           <div
             linkMatch={formatMessage(messages.generatedReports)}

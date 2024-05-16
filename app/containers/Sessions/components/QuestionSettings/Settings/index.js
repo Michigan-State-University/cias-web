@@ -22,6 +22,7 @@ import { makeSelectSelectedQuestionGroup } from 'global/reducers/questionGroups'
 
 import { InterventionType } from 'models/Intervention/Intervention';
 import { GroupType } from 'models/QuestionGroup';
+import { SessionTypes } from 'models/Session';
 
 import Column from 'components/Column';
 import Tabs from 'components/Tabs';
@@ -29,14 +30,14 @@ import Tabs from 'components/Tabs';
 import BranchingTab from './Components/Tabs/BranchingTab';
 import NarratorTab from './Components/Tabs/NarratorTab';
 import SettingsTab from './Components/Tabs/SettingsTab';
+import SmsSettingsTab from './Components/Tabs/SmsSettingsTab';
+
 import messages from './messages';
 import {
   HIDE_BRANCHING_TAB_QUESTIONS,
   HIDE_NARRATOR_TAB_QUESTIONS,
   HIDE_SETTINGS_TAB_QUESTIONS,
 } from '../constants';
-import { SessionTypes } from '../../../../../models/Session';
-import SmsSettingsTab from './Components/Tabs/SmsSettingsTab';
 
 const Settings = ({
   selectedQuestion: {

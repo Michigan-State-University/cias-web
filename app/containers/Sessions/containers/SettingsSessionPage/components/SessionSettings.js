@@ -14,6 +14,7 @@ import { variableNameValidator } from 'utils/validators';
 import lastKey from 'utils/getLastKey';
 
 import { getRemovedBlockForSetting } from 'models/Narrator/BlockTypes';
+import { SessionTypes } from 'models/Session';
 
 import {
   bulkEditSessionRequest,
@@ -41,6 +42,7 @@ import { GlobalReplacementModal } from 'components/MissingAnimationsModal';
 import { Row as GridRow } from 'components/ReactGridSystem';
 import Column from 'components/Column';
 import Row from 'components/Row';
+import Text from 'components/Text';
 
 import Option from './Option';
 import messages from './messages';
@@ -49,8 +51,6 @@ import { Input, InputContainer } from './styled';
 import { SessionSettingsForm } from './SessionSettingsForm';
 
 import { SessionSettingsColumn, SessionSettingsContainer } from '../styled';
-import { SessionTypes } from '../../../../../models/Session';
-import Text from '../../../../../components/Text';
 
 const SessionSettings = ({
   name,

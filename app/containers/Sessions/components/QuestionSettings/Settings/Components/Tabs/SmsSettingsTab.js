@@ -2,21 +2,21 @@ import React, { memo } from 'react';
 import PropTypes from 'prop-types';
 import { compose } from 'redux';
 import { connect } from 'react-redux';
-
 import { get, split, set } from 'lodash';
-import Row from '../../../../../../../components/Row';
-import H3 from '../../../../../../../components/H3';
-import Column from '../../../../../../../components/Column';
-import Radio from '../../../../../../../components/Radio';
-import Text from '../../../../../../../components/Text';
-import { editQuestionRequest } from '../../../../../../../global/reducers/questions';
-import {
-  arrayValidator,
-  numericValidator,
-} from '../../../../../../../utils/validators';
+
+import { arrayValidator, numericValidator } from 'utils/validators';
+
+import { editQuestionRequest } from 'global/reducers/questions';
+
+import Row from 'components/Row';
+import H3 from 'components/H3';
+import Column from 'components/Column';
+import Radio from 'components/Radio';
+import Text from 'components/Text';
+
 import { Input } from '../styled';
 
-const SmsSettingsTab = ({ onQuestionToggle, acceptedAnswers }) => {
+const SmsSettingsTab = ({ editQuestion, acceptedAnswers }) => {
   const predefinedAnswers = get(acceptedAnswers, 'predefined', false);
   const rangeOfAnswers = get(acceptedAnswers, 'range', false);
 
@@ -30,7 +30,7 @@ const SmsSettingsTab = ({ onQuestionToggle, acceptedAnswers }) => {
           <Radio
             id="specified"
             onChange={() =>
-              onQuestionToggle({
+              editQuestion({
                 path: 'accepted_answers',
                 value: { predefined: [] },
               })
@@ -42,7 +42,7 @@ const SmsSettingsTab = ({ onQuestionToggle, acceptedAnswers }) => {
           <Radio
             id="random"
             onChange={() =>
-              onQuestionToggle({
+              editQuestion({
                 path: 'accepted_answers',
                 value: {
                   range: { from: '0', to: '100' },
@@ -74,7 +74,7 @@ const SmsSettingsTab = ({ onQuestionToggle, acceptedAnswers }) => {
               value={acceptedAnswers.predefined}
               validator={arrayValidator}
               onBlur={(v) =>
-                onQuestionToggle({
+                editQuestion({
                   path: 'accepted_answers',
                   value: { predefined: v === '' ? [] : split(v, ',') },
                 })
@@ -104,9 +104,9 @@ const SmsSettingsTab = ({ onQuestionToggle, acceptedAnswers }) => {
               value={acceptedAnswers.range.from}
               validator={numericValidator()}
               onBlur={(v) =>
-                onQuestionToggle({
-                  path: 'accepted_answers',
-                  value: { range: { from: v, to: acceptedAnswers.range.to } },
+                editQuestion({
+                  path: 'accepted_answers.range.from',
+                  value: v,
                 })
               }
               width="100%"
@@ -130,9 +130,9 @@ const SmsSettingsTab = ({ onQuestionToggle, acceptedAnswers }) => {
               value={acceptedAnswers.range.to}
               validator={numericValidator()}
               onBlur={(v) =>
-                onQuestionToggle({
-                  path: 'accepted_answers',
-                  value: { range: { from: acceptedAnswers.range.from, to: v } },
+                editQuestion({
+                  path: 'accepted_answers.range.to',
+                  value: v,
                 })
               }
               width="100%"
@@ -153,7 +153,7 @@ const SmsSettingsTab = ({ onQuestionToggle, acceptedAnswers }) => {
             type="singleline"
             value={acceptedAnswers?.answer_if_wrong}
             onBlur={(v) =>
-              onQuestionToggle({
+              editQuestion({
                 path: 'accepted_answers',
                 value: set(acceptedAnswers, 'answer_if_wrong', v),
               })
@@ -168,12 +168,12 @@ const SmsSettingsTab = ({ onQuestionToggle, acceptedAnswers }) => {
 };
 
 SmsSettingsTab.propTypes = {
-  onQuestionToggle: PropTypes.func.isRequired,
+  editQuestion: PropTypes.func.isRequired,
   acceptedAnswers: PropTypes.object,
 };
 
 const mapDispatchToProps = {
-  onQuestionToggle: editQuestionRequest,
+  editQuestion: editQuestionRequest,
 };
 
 const withConnect = connect(null, mapDispatchToProps);

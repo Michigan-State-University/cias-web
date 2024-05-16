@@ -23,10 +23,11 @@ import {
   updateQuestionSettingsSaga,
 } from 'global/reducers/questions';
 
+import { SessionTypes } from 'models/Session';
+
 import Settings from './Settings';
 import messages from './messages';
 import { SettingsBar, Container, OpenButton } from './styled';
-import { SessionTypes } from '../../../../models/Session';
 
 const QuestionSettings = ({
   settingsVisibility,

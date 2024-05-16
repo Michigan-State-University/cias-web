@@ -11,57 +11,69 @@ import {
   update,
   compact,
 } from 'lodash';
+
 import { FormattedMessage } from 'react-intl';
-import Modal from '../../../../../components/Modal';
-import { numericValidator } from '../../../../../utils/validators';
-import { Input } from '../../../components/QuestionSettings/Settings/Components/styled';
-import H3 from '../../../../../components/H3';
-import Checkbox from '../../../../../components/Checkbox';
-import { dayOfWeekAsString } from '../../../../../utils/dateUtils';
-import Radio from '../../../../../components/Radio';
-import Text from '../../../../../components/Text';
-import Column from '../../../../../components/Column';
-import { LocalizedDatePicker } from '../../../../../components/DatePicker';
-import { DateInput } from '../../../../../components/Input/DateInput';
-import { themeColors } from '../../../../../theme';
-import VariableChooser from '../../../../VariableChooser';
-import InequalityChooser from '../../../../../components/InequalityChooser';
-import Box from '../../../../../components/Box';
-import PlusCircle from '../../../../../components/Circle/PlusCircle';
+import { numericValidator } from 'utils/validators';
+import { dayOfWeekAsString } from 'utils/dateUtils';
+import binNoBg from 'assets/svg/bin-no-bg.svg';
+import { themeColors } from 'theme';
+
+import Modal from 'components/Modal';
+import H3 from 'components/H3';
+import Checkbox from 'components/Checkbox';
+import Radio from 'components/Radio';
+import Text from 'components/Text';
+import Column from 'components/Column';
+import { LocalizedDatePicker } from 'components/DatePicker';
+import { DateInput } from 'components/Input/DateInput';
+import InequalityChooser from 'components/InequalityChooser';
+import Box from 'components/Box';
+import PlusCircle from 'components/Circle/PlusCircle';
+import HoverableBox from 'components/Box/HoverableBox';
+import Img from 'components/Img';
+
 import messages from '../../../components/QuestionSettings/Settings/Components/messages';
-import HoverableBox from '../../../../../components/Box/HoverableBox';
-import Img from '../../../../../components/Img';
-import binNoBg from '../../../../../assets/svg/bin-no-bg.svg';
+import VariableChooser from '../../../../VariableChooser';
+import { Input } from '../../../components/QuestionSettings/Settings/Components/styled';
+import { QuestionGroup } from '../../../../../models/QuestionGroup';
+
+type QuestionGroupSettingsModalProps = {
+  questionGroup: QuestionGroup;
+  updateQuestionGroup: any;
+  sessionId: string;
+  interventionId: string;
+  modalVisible: boolean;
+  setModalVisible: any;
+};
 
 const QuestionGroupSettingsModal = ({
   questionGroup,
-  questionGroup: { smsSchedule, formulas },
   updateQuestionGroup,
   sessionId,
   interventionId,
   modalVisible,
   setModalVisible,
-}) => {
-  const { title, id } = questionGroup;
+}: QuestionGroupSettingsModalProps) => {
+  const { title, id, smsSchedule, formulas } = questionGroup;
 
   const [isVariableChooserOpen, setIsVariableChooserOpen] = useState(false);
 
   const handleModalClose = () => setModalVisible(false);
 
-  const updateSmsSchedule = (path, value) => {
+  const updateSmsSchedule = (path: string, value: any) => {
     const newSmsSchedule = update(smsSchedule, path, () => value);
     const transformedSchedule = mapKeys(newSmsSchedule, (v, k) => snakeCase(k));
     updateQuestionGroup({ sms_schedule: transformedSchedule }, sessionId, id);
   };
 
-  const updateFormulas = (index, path, value) => {
+  const updateFormulas = (index: number, path: string, value: any) => {
     const formula = formulas[index];
     const newFormula = update(formula, path, () => value);
     formulas.splice(index, 1, newFormula);
     updateQuestionGroup({ formulas }, sessionId, id);
   };
 
-  const parseTime = (t) => {
+  const parseTime = (t: any) => {
     const d = new Date();
     const time = t.match(/(\d+)(?::(\d\d))?\s*(p?)/);
     d.setHours(parseInt(time[1], 10) + (time[3] ? 12 : 0));
@@ -69,7 +81,7 @@ const QuestionGroupSettingsModal = ({
     return d;
   };
 
-  const getTimeString = (date) => {
+  const getTimeString = (date: any) => {
     const newTime = date.toLocaleTimeString('en-US');
     const amPm = newTime.split(' ')[1];
     const seconds = newTime.split(':')[2].replace(amPm, '');
@@ -98,7 +110,7 @@ const QuestionGroupSettingsModal = ({
             keyboard="tel"
             value={smsSchedule?.questionsPerDay}
             validator={numericValidator}
-            onBlur={(v) => updateSmsSchedule('questionsPerDay', Number(v))}
+            onBlur={(v: any) => updateSmsSchedule('questionsPerDay', Number(v))}
             width="100%"
             px={12}
           />
@@ -253,8 +265,8 @@ const QuestionGroupSettingsModal = ({
             </Column>
           </Row>
         )}
-        {randomQuestionsTime ||
-          (specificQuestionsTime && (
+        {(randomQuestionsTime ||
+          specificQuestionsTime) && (
             <Row justify="between" align="center" mb={15}>
               <Checkbox
                 id="overwrite_user_time_settings"
@@ -268,12 +280,12 @@ const QuestionGroupSettingsModal = ({
                 Overwrite participant’s preferred time
               </Checkbox>
             </Row>
-          ))}
+          )}
         <Row justify="between" align="center" mb={8}>
           <H3>Conditions</H3>
         </Row>
         {formulas?.length > 0 &&
-          formulas.map((formula, index) => (
+          formulas.map((formula: any, index: number) => (
             <>
               <Row justify="between" align="center">
                 Formula
@@ -281,7 +293,7 @@ const QuestionGroupSettingsModal = ({
                   <VariableChooser
                     currentSessionId={sessionId}
                     currentInterventionId={interventionId}
-                    onClick={(value) =>
+                    onClick={(value: any) =>
                       updateFormulas(
                         index,
                         'payload',
@@ -293,6 +305,7 @@ const QuestionGroupSettingsModal = ({
                     includeAllSessions
                     includeCurrentSession
                     isMultiSession
+                    // @ts-ignore
                     selectedQuestion={null}
                     setIsOpen={setIsVariableChooserOpen}
                   >
@@ -311,7 +324,9 @@ const QuestionGroupSettingsModal = ({
                   placeholder="Enter formula here..."
                   type="singleline"
                   value={formula?.payload || ''}
-                  onBlur={(val) => updateFormulas(index, 'payload', val)}
+                  onBlur={(val: string) =>
+                    updateFormulas(index, 'payload', val)
+                  }
                   width="100%"
                   px={12}
                   forceBlur={isVariableChooserOpen}
