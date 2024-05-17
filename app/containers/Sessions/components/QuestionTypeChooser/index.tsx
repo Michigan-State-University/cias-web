@@ -183,7 +183,7 @@ const QuestionTypeChooser = ({
                   conditionalAppearanceConfig={conditionalAppearanceConfigs[id]}
                 />
               ))}
-              {sessionType === SessionTypes.CLASSIC_SESSION &&
+              {sessionType !== SessionTypes.SMS_SESSION &&
                 AddableGroups.map(({ color, id }) => (
                   <NewItem
                     key={id}
