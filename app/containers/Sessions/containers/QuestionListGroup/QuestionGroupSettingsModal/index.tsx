@@ -12,7 +12,7 @@ import {
   compact,
 } from 'lodash';
 
-import { FormattedMessage } from 'react-intl';
+import {FormattedMessage, useIntl} from 'react-intl';
 import { numericValidator } from 'utils/validators';
 import { dayOfWeekAsString } from 'utils/dateUtils';
 import binNoBg from 'assets/svg/bin-no-bg.svg';
@@ -35,7 +35,7 @@ import PlusCircle from 'components/Circle/PlusCircle';
 import HoverableBox from 'components/Box/HoverableBox';
 import Img from 'components/Img';
 
-import messages from '../../../components/QuestionSettings/Settings/Components/messages';
+import messages from './messages';
 import { Input } from '../../../components/QuestionSettings/Settings/Components/styled';
 import VariableChooser from '../../../../VariableChooser';
 import { getTimeString, parseTime } from './utils';
@@ -60,6 +60,8 @@ const QuestionGroupSettingsModal = ({
   const { title, id, smsSchedule, formulas } = questionGroup;
 
   const [isVariableChooserOpen, setIsVariableChooserOpen] = useState(false);
+
+  const { formatMessage } = useIntl();
 
   const handleModalClose = () => setModalVisible(false);
 
@@ -119,11 +121,10 @@ const QuestionGroupSettingsModal = ({
         maxWidth={1500}
       >
         <Row justify="between" align="center" mb={8}>
-          <H3>Number of Messages per day</H3>
+          <H3>{formatMessage(messages.questionsPerDay)}</H3>
         </Row>
         <Row justify="between" align="center" mb={15}>
           <Input
-            placeholder="Number of messages per day"
             type="singleline"
             keyboard="tel"
             value={smsSchedule?.questionsPerDay}
@@ -134,7 +135,7 @@ const QuestionGroupSettingsModal = ({
           />
         </Row>
         <Row justify="between" align="center" mb={8}>
-          <H3>Day of Message</H3>
+          <H3>{formatMessage(messages.dayOfPeriod)}</H3>
         </Row>
         <Row justify="between" align="center" mb={15}>
           {DAY_NUMBERS.map((dayNumber) => (
@@ -151,7 +152,7 @@ const QuestionGroupSettingsModal = ({
           ))}
         </Row>
         <Row justify="between" align="center" mb={8}>
-          <H3>Time of the Message</H3>
+          <H3>{formatMessage(messages.time)}</H3>
         </Row>
         <Row justify="between" align="center" mb={15}>
           <Column gap={12}>
@@ -160,7 +161,7 @@ const QuestionGroupSettingsModal = ({
               onChange={() => updateSmsSchedule('time', { exact: '8:00 AM' })}
               checked={specificQuestionsTime}
             >
-              <Text>Specified</Text>
+              <Text>{formatMessage(messages.timeSpecified)}</Text>
             </Radio>
             <Radio
               id="random"
@@ -171,7 +172,7 @@ const QuestionGroupSettingsModal = ({
               }
               checked={randomQuestionsTime}
             >
-              <Text>Random</Text>
+              <Text>{formatMessage(messages.timeRandom)}</Text>
             </Radio>
           </Column>
         </Row>
@@ -185,7 +186,7 @@ const QuestionGroupSettingsModal = ({
                   fontWeight="bold"
                   width="fit-content"
                 >
-                  Exact Time
+                  {formatMessage(messages.timeSpecifiedLabel)}
                 </Text>
               </label>
               <LocalizedDatePicker
@@ -214,7 +215,7 @@ const QuestionGroupSettingsModal = ({
                   fontWeight="bold"
                   width="fit-content"
                 >
-                  From
+                  {formatMessage(messages.timeRandomFrom)}
                 </Text>
               </label>
               <LocalizedDatePicker
@@ -246,7 +247,7 @@ const QuestionGroupSettingsModal = ({
                   fontWeight="bold"
                   width="fit-content"
                 >
-                  To
+                  {formatMessage(messages.timeRandomTo)}
                 </Text>
               </label>
               <LocalizedDatePicker
@@ -283,18 +284,18 @@ const QuestionGroupSettingsModal = ({
                   : updateSmsSchedule('overwriteUserTimeSettings', false)
               }
             >
-              Overwrite participant’s preferred time
+              {formatMessage(messages.overwriteUserTimeSettings)}
             </Checkbox>
           </Row>
         )}
         <Row justify="between" align="center" mb={8}>
-          <H3>Conditions</H3>
+          <H3>{formatMessage(messages.conditions)}</H3>
         </Row>
         {formulas?.length > 0 &&
           formulas.map((formula: any, index: number) => (
             <>
               <Row justify="between" align="center">
-                Formula
+                {formatMessage(messages.formula)}
                 <div>
                   <VariableChooser
                     currentSessionId={sessionId}
@@ -320,7 +321,7 @@ const QuestionGroupSettingsModal = ({
                       color={themeColors.secondary}
                       hoverDecoration="underline"
                     >
-                      + Add variable
+                      {formatMessage(messages.addVariable)}
                     </Text>
                   </VariableChooser>
                 </div>

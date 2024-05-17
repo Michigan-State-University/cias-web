@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import { compose } from 'redux';
 import { connect } from 'react-redux';
 import { get, split, set } from 'lodash';
+import { useIntl } from 'react-intl';
 
 import { arrayValidator, numericValidator } from 'utils/validators';
 
@@ -15,8 +16,10 @@ import Radio from 'components/Radio';
 import Text from 'components/Text';
 
 import { Input } from '../styled';
+import messages from './messages';
 
 const SmsSettingsTab = ({ editQuestion, acceptedAnswers }) => {
+  const { formatMessage } = useIntl();
   const predefinedAnswers = get(acceptedAnswers, 'predefined', false);
   const rangeOfAnswers = get(acceptedAnswers, 'range', false);
 
@@ -37,7 +40,7 @@ const SmsSettingsTab = ({ editQuestion, acceptedAnswers }) => {
             }
             checked={predefinedAnswers}
           >
-            <Text>Specified</Text>
+            <Text>{formatMessage(messages.specified)}</Text>
           </Radio>
           <Radio
             id="random"
@@ -51,7 +54,7 @@ const SmsSettingsTab = ({ editQuestion, acceptedAnswers }) => {
             }
             checked={rangeOfAnswers}
           >
-            <Text>Range</Text>
+            <Text>{formatMessage(messages.range)}</Text>
           </Radio>
         </Column>
       </Row>
@@ -65,7 +68,7 @@ const SmsSettingsTab = ({ editQuestion, acceptedAnswers }) => {
                 fontWeight="bold"
                 width="fit-content"
               >
-                Provide desired values divided by commas
+                {formatMessage(messages.predefinedValues)}
               </Text>
             </label>
             <Input
@@ -95,7 +98,7 @@ const SmsSettingsTab = ({ editQuestion, acceptedAnswers }) => {
                 fontWeight="bold"
                 width="fit-content"
               >
-                From
+                {formatMessage(messages.rangeFromAcceptedValues)}
               </Text>
             </label>
             <Input
@@ -121,7 +124,7 @@ const SmsSettingsTab = ({ editQuestion, acceptedAnswers }) => {
                 fontWeight="bold"
                 width="fit-content"
               >
-                To
+                {formatMessage(messages.rangeToAcceptedValues)}
               </Text>
             </label>
             <Input
@@ -145,7 +148,7 @@ const SmsSettingsTab = ({ editQuestion, acceptedAnswers }) => {
         <Column>
           <label htmlFor="answer_if_wrong">
             <Text mb={5} fontSize="12px" fontWeight="bold" width="fit-content">
-              Error message if value is not within specified range
+              {formatMessage(messages.answerIfWrong)}
             </Text>
           </label>
           <Input
