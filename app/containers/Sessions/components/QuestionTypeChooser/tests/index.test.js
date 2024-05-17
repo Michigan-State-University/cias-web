@@ -7,6 +7,7 @@ import { browserHistory } from 'react-router-dom';
 import { IntlProvider } from 'react-intl';
 import { DEFAULT_LOCALE } from 'i18n';
 import configureStore from 'configureStore';
+import { SessionTypes } from 'models/Session';
 import QuestionTypeChooser from '../index';
 
 describe('<QuestionTypeChooser />', () => {
@@ -21,7 +22,10 @@ describe('<QuestionTypeChooser />', () => {
     render(
       <Provider store={store}>
         <IntlProvider locale={DEFAULT_LOCALE}>
-          <QuestionTypeChooser onClick={jest.fn()} />
+          <QuestionTypeChooser
+            onClick={jest.fn()}
+            sessionType={SessionTypes.CLASSIC_SESSION}
+          />
         </IntlProvider>
       </Provider>,
     );
@@ -32,7 +36,10 @@ describe('<QuestionTypeChooser />', () => {
     const { container } = render(
       <Provider store={store}>
         <IntlProvider locale={DEFAULT_LOCALE}>
-          <QuestionTypeChooser onClick={jest.fn()} />
+          <QuestionTypeChooser
+            onClick={jest.fn()}
+            sessionType={SessionTypes.CLASSIC_SESSION}
+          />
         </IntlProvider>
       </Provider>,
     );
@@ -43,7 +50,10 @@ describe('<QuestionTypeChooser />', () => {
     const { container, getByText } = render(
       <Provider store={store}>
         <IntlProvider locale={DEFAULT_LOCALE}>
-          <QuestionTypeChooser onClick={jest.fn()} />
+          <QuestionTypeChooser
+            onClick={jest.fn()}
+            sessionType={SessionTypes.CLASSIC_SESSION}
+          />
         </IntlProvider>
       </Provider>,
     );
