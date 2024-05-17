@@ -42,7 +42,6 @@ import { GlobalReplacementModal } from 'components/MissingAnimationsModal';
 import { Row as GridRow } from 'components/ReactGridSystem';
 import Column from 'components/Column';
 import Row from 'components/Row';
-import Text from 'components/Text';
 import { TextButton } from 'components/Button';
 
 import Option from './Option';

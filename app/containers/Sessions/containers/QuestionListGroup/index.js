@@ -153,7 +153,7 @@ const QuestionListGroup = ({
         onShowImg={arrowUp}
         imgWithBackground
         label={
-          <Box width={275} >
+          <Box width={275}>
             <GridRow>
               <Col xs={11} style={{ paddingRight: 0 }}>
                 <Row align="center" justify="between" width="100%">

@@ -5,9 +5,7 @@ import sortedIndexBy from 'lodash/sortedIndexBy';
 import { insertAt, removeAt } from 'utils/arrayUtils';
 import { GroupType } from 'models/QuestionGroup';
 import { ternary } from 'utils/ternary';
-import {assignDraftItems, updateItemById} from 'utils/reduxUtils';
-import cloneDeep from 'lodash/cloneDeep';
-import merge from 'lodash/merge';
+import { assignDraftItems, updateItemById } from 'utils/reduxUtils';
 import {
   CHANGE_GROUP_NAME_ERROR,
   CHANGE_GROUP_NAME_REQUEST,

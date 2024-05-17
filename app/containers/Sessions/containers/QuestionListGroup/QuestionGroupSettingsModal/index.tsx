@@ -12,7 +12,7 @@ import {
   compact,
 } from 'lodash';
 
-import {FormattedMessage, useIntl} from 'react-intl';
+import { FormattedMessage, useIntl } from 'react-intl';
 import { numericValidator } from 'utils/validators';
 import { dayOfWeekAsString } from 'utils/dateUtils';
 import binNoBg from 'assets/svg/bin-no-bg.svg';
