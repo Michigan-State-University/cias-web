@@ -110,19 +110,13 @@ const EditSessionPage = ({
           {formatMessage(messages.pageTitle, { name: sessionName })}
         </title>
       </Helmet>
-      {type === SessionTypes.CLASSIC_SESSION && (
-        <EditSessionCommon
-          editingPossible={editingPossible}
-          interventionStatus={interventionStatus}
-          session={session as ClassicSession}
-        />
-      )}
-      {type === SessionTypes.SMS_SESSION && (
+      {(type === SessionTypes.SMS_SESSION ||
+        type === SessionTypes.CLASSIC_SESSION) && (
         <EditSessionCommon
           editingPossible={editingPossible}
           interventionStatus={interventionStatus}
           interventionId={interventionId}
-          session={session as SmsSession}
+          session={session}
         />
       )}
       {type === SessionTypes.CAT_SESSION && (

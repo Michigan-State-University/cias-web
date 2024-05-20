@@ -15,6 +15,7 @@ import { numericValidator } from 'utils/validators';
 import { dayOfWeekAsString } from 'utils/dateUtils';
 import binNoBg from 'assets/svg/bin-no-bg.svg';
 import { DAY_NUMBERS } from 'global/constants';
+import { CamelToSnake } from 'global/types/camelToSnake';
 import { themeColors } from 'theme';
 
 import { QuestionGroup } from 'models/QuestionGroup';
@@ -132,7 +133,9 @@ const QuestionGroupSettingsModal = ({
             keyboard="tel"
             value={smsSchedule?.questionsPerDay}
             validator={numericValidator}
-            onBlur={(v: any) => updateSmsSchedule('questionsPerDay', Number(v))}
+            onBlur={(v: string) =>
+              updateSmsSchedule('questionsPerDay', Number(v))
+            }
             width="100%"
             px={12}
           />
@@ -295,83 +298,88 @@ const QuestionGroupSettingsModal = ({
           <H3>{formatMessage(messages.conditions)}</H3>
         </Row>
         {formulas?.length > 0 &&
-          formulas.map((formula: any, index: number) => (
-            <>
-              <Row justify="between" align="center">
-                {formatMessage(messages.formula)}
-                <div>
-                  <VariableChooser
-                    currentSessionId={sessionId}
-                    currentInterventionId={interventionId}
-                    onClick={(value: any) =>
-                      updateFormulas(
-                        index,
-                        'payload',
-                        `${formula.payload}${value}`,
-                      )
-                    }
-                    includeAllVariables
-                    includeCurrentQuestion
-                    includeAllSessions
-                    includeCurrentSession
-                    isMultiSession
-                    // @ts-ignore
-                    selectedQuestion={null}
-                    setIsOpen={setIsVariableChooserOpen}
-                  >
-                    <Text
-                      fontWeight="bold"
-                      color={themeColors.secondary}
-                      hoverDecoration="underline"
+          formulas.map(
+            (
+              formula: { payload: string; patterns: Array<{ match: string }> },
+              index: number,
+            ) => (
+              <>
+                <Row justify="between" align="center">
+                  {formatMessage(messages.formula)}
+                  <div>
+                    <VariableChooser
+                      currentSessionId={sessionId}
+                      currentInterventionId={interventionId}
+                      onClick={(value: string) =>
+                        updateFormulas(
+                          index,
+                          'payload',
+                          `${formula.payload}${value}`,
+                        )
+                      }
+                      includeAllVariables
+                      includeCurrentQuestion
+                      includeAllSessions
+                      includeCurrentSession
+                      isMultiSession
+                      // @ts-ignore
+                      selectedQuestion={null}
+                      setIsOpen={setIsVariableChooserOpen}
                     >
-                      {formatMessage(messages.addVariable)}
-                    </Text>
-                  </VariableChooser>
-                </div>
-              </Row>
-              <Row justify="between" align="center" mb={8}>
-                <Input
-                  placeholder="Enter formula here..."
-                  type="singleline"
-                  value={formula?.payload || ''}
-                  onBlur={(val: string) =>
-                    updateFormulas(index, 'payload', val)
-                  }
-                  width="100%"
-                  px={12}
-                  forceBlur={isVariableChooserOpen}
-                />
-              </Row>
-              <Row justify="between" align="center" mb={15}>
-                If
-                <InequalityChooser
-                  height={50}
-                  width={200}
-                  onSuccessfulChange={(value) =>
-                    updateFormulas(index, 'patterns[0].match', value)
-                  }
-                  inequalityValue={formula.patterns[0].match}
-                />
-                <Img
-                  ml={10}
-                  src={binNoBg}
-                  onClick={() => {
-                    formulas.splice(index, 1);
-                    updateQuestionGroup(
-                      {
-                        formulas,
-                      },
-                      sessionId,
-                      id,
-                    );
-                  }}
-                  clickable
-                  width="20px"
-                  height="20px"
-                />
-              </Row>
-            </>
-          ))}
+                      <Text
+                        fontWeight="bold"
+                        color={themeColors.secondary}
+                        hoverDecoration="underline"
+                      >
+                        {formatMessage(messages.addVariable)}
+                      </Text>
+                    </VariableChooser>
+                  </div>
+                </Row>
+                <Row justify="between" align="center" mb={8}>
+                  <Input
+                    placeholder="Enter formula here..."
+                    type="singleline"
+                    value={formula?.payload || ''}
+                    onBlur={(val: string) =>
+                      updateFormulas(index, 'payload', val)
+                    }
+                    width="100%"
+                    px={12}
+                    forceBlur={isVariableChooserOpen}
+                  />
+                </Row>
+                <Row justify="between" align="center" mb={15}>
+                  If
+                  <InequalityChooser
+                    height={50}
+                    width={200}
+                    onSuccessfulChange={(value) =>
+                      updateFormulas(index, 'patterns[0].match', value)
+                    }
+                    inequalityValue={formula.patterns[0].match}
+                  />
+                  <Img
+                    ml={10}
+                    src={binNoBg}
+                    onClick={() => {
+                      formulas.splice(index, 1);
+                      updateQuestionGroup(
+                        {
+                          formulas,
+                        },
+                        sessionId,
+                        id,
+                      );
+                    }}
+                    clickable
+                    width="20px"
+                    height="20px"
+                  />
+                </Row>
+              </>
+            ),
+          )}
         <Row justify="between" align="center" mb={8}>
           <HoverableBox
             px={21}

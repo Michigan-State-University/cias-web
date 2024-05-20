@@ -13,8 +13,14 @@ export interface QuestionGroup {
   title: string;
   position: number;
   type: GroupType;
-  smsSchedule: any;
-  formulas: any[];
+  smsSchedule: {
+    overwriteUserTimeSettings: boolean;
+    questionsPerDay: number;
+    dayOfPeriod: string[];
+    time: { exact: string; range: { from: string; to: string } };
+    patterns: Array<{ match: string }>;
+  };
+  formulas: Array<{ payload: string; patterns: Array<{ match: string }> }>;
 }
 
 export type QuestionGroupDTO = CamelToSnakeOmitId<QuestionGroup>;
