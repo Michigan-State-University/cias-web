@@ -15,7 +15,6 @@ import { numericValidator } from 'utils/validators';
 import { dayOfWeekAsString } from 'utils/dateUtils';
 import binNoBg from 'assets/svg/bin-no-bg.svg';
 import { DAY_NUMBERS } from 'global/constants';
-import { CamelToSnake } from 'global/types/camelToSnake';
 import { themeColors } from 'theme';
 
 import { QuestionGroup } from 'models/QuestionGroup';
@@ -69,13 +68,16 @@ const QuestionGroupSettingsModal = ({
 
   const handleModalClose = () => setModalVisible(false);
 
-  const updateSmsSchedule = (path: string, value: any) => {
+  const updateSmsSchedule = (
+    path: string,
+    value: string[] | number | object | boolean,
+  ) => {
     const newSmsSchedule = set(smsSchedule, path, value);
     const transformedSchedule = mapKeys(newSmsSchedule, (v, k) => snakeCase(k));
     updateQuestionGroup({ sms_schedule: transformedSchedule }, sessionId, id);
   };
 
-  const updateFormulas = (index: number, path: string, value: any) => {
+  const updateFormulas = (index: number, path: string, value: string) => {
     const formula = formulas[index];
     const newFormula = set(formula, path, value);
     formulas.splice(index, 1, newFormula);
