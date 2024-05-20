@@ -189,7 +189,7 @@ type Props = {
   createQuestionGroup: (sessionId: string, groupType: string) => void;
 } & NonReduxProps;
 
-const EditSessionCommonPage = ({
+const EditSessionCommon = ({
   questions,
   selectedQuestion,
   createQuestion,
@@ -719,4 +719,4 @@ export default compose(
     saga: reorderQuestionGroupsSaga,
   }),
   withConnect,
-)(EditSessionCommonPage) as React.ComponentType<NonReduxProps>;
+)(EditSessionCommon) as React.ComponentType<NonReduxProps>;
