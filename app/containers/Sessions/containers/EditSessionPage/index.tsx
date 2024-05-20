@@ -44,8 +44,7 @@ import editInterventionPageSaga from './saga';
 
 import messages from './messages';
 import { EditSessionPageContext } from './utils';
-import EditClassicSession from './EditClassicSession';
-import EditSmsSession from './EditSmsSession';
+import EditSessionCommon from './EditSessionCommon';
 import EditCatSession from './EditCatSession';
 
 interface MatchParams {
@@ -112,14 +111,14 @@ const EditSessionPage = ({
         </title>
       </Helmet>
       {type === SessionTypes.CLASSIC_SESSION && (
-        <EditClassicSession
+        <EditSessionCommon
           editingPossible={editingPossible}
           interventionStatus={interventionStatus}
           session={session as ClassicSession}
         />
       )}
       {type === SessionTypes.SMS_SESSION && (
-        <EditSmsSession
+        <EditSessionCommon
           editingPossible={editingPossible}
           interventionStatus={interventionStatus}
           interventionId={interventionId}

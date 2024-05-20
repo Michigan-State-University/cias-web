@@ -28,7 +28,7 @@ import intersection from 'lodash/intersection';
 import includes from 'lodash/includes';
 
 import { reorderScope } from 'models/Session/ReorderScope';
-import { Session, SmsSession } from 'models/Session';
+import { ClassicSession, Session, SmsSession } from 'models/Session';
 import { QuestionDTO, QuestionTypes } from 'models/Question';
 import { GroupType, QuestionGroup } from 'models/QuestionGroup';
 import { questionType } from 'models/Session/QuestionTypes';
@@ -122,10 +122,10 @@ import QuestionListGroup from '../QuestionListGroup';
 import defaultQuestionSubtitlesMessages from './defaultQuestionSubtitlesMessages';
 
 type NonReduxProps = {
-  session: SmsSession;
+  session: ClassicSession | SmsSession;
   editingPossible: boolean;
   interventionStatus: string;
-  interventionId: string;
+  interventionId?: string;
 };
 
 type Props = {
@@ -189,7 +189,7 @@ type Props = {
   createQuestionGroup: (sessionId: string, groupType: string) => void;
 } & NonReduxProps;
 
-const EditSmsSessionPage = ({
+const EditSessionCommonPage = ({
   questions,
   selectedQuestion,
   createQuestion,
@@ -719,4 +719,4 @@ export default compose(
     saga: reorderQuestionGroupsSaga,
   }),
   withConnect,
-)(EditSmsSessionPage) as React.ComponentType<NonReduxProps>;
+)(EditSessionCommonPage) as React.ComponentType<NonReduxProps>;
