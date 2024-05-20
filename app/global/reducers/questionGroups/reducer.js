@@ -1,11 +1,11 @@
 import produce from 'immer';
 import sortBy from 'lodash/sortBy';
-import sortedIndexBy from 'lodash/sortedIndexBy';
+import { merge, cloneDeep, sortedIndexBy } from 'lodash';
 
 import { insertAt, removeAt } from 'utils/arrayUtils';
 import { GroupType } from 'models/QuestionGroup';
 import { ternary } from 'utils/ternary';
-import { assignDraftItems, updateItemById } from 'utils/reduxUtils';
+import { assignDraftItems } from 'utils/reduxUtils';
 import {
   CHANGE_GROUP_NAME_ERROR,
   CHANGE_GROUP_NAME_REQUEST,
@@ -77,8 +77,14 @@ const questionGroupsReducer = (state = initialState, { type, payload }) =>
         break;
       }
       case UPDATE_QUESTION_GROUP_REQUEST: {
-        const { groupId, data } = payload;
-        updateItemById(draft.groups, groupId, data);
+        const index = state.groups.findIndex(
+          ({ id }) => id === payload.groupId,
+        );
+
+        draft.groups[index] = merge(
+          cloneDeep(state.groups[index]),
+          payload.data,
+        );
         break;
       }
       case UPDATE_QUESTION_GROUP_SUCCESS: {
