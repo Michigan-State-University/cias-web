@@ -1497,6 +1497,7 @@
   "app.containers.Single.disabledHfhsValuesTooltip": "",
   "app.containers.Single.placeholder": "",
   "app.containers.Single.reorderIconAlt": "",
+  "app.containers.SmsSettingsTab.acceptedAnswers.acceptedAnswersLabel": "",
   "app.containers.SmsSettingsTab.acceptedAnswers.answerIfWrong": "",
   "app.containers.SmsSettingsTab.acceptedAnswers.predefinedValues": "",
   "app.containers.SmsSettingsTab.acceptedAnswers.range": "",

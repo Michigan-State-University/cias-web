@@ -1497,6 +1497,7 @@
   "app.containers.Single.disabledHfhsValuesTooltip": "The session <bold>doesn’t have an HF Initial Screen</bold>, so Henry Ford Variables are not sent to HF.",
   "app.containers.Single.placeholder": "Answer {index}",
   "app.containers.Single.reorderIconAlt": "Reorder icon {index}",
+  "app.containers.SmsSettingsTab.acceptedAnswers.acceptedAnswersLabel": "Accepted answers",
   "app.containers.SmsSettingsTab.acceptedAnswers.answerIfWrong": "Error message if value is not within specified range",
   "app.containers.SmsSettingsTab.acceptedAnswers.predefinedValues": "Provide desired values divided by commas",
   "app.containers.SmsSettingsTab.acceptedAnswers.range": "Range",

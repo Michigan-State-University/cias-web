@@ -26,7 +26,9 @@ const SmsSettingsTab = ({ editQuestion, acceptedAnswers }) => {
   return (
     <>
       <Row justify="between" align="center" mb={8}>
-        <H3>Accepted answers</H3>
+        <H3>
+          <Text>{formatMessage(messages.acceptedAnswersLabel)}</Text>
+        </H3>
       </Row>
       <Row justify="between" align="center" mb={15}>
         <Column gap={12}>

@@ -1,6 +1,5 @@
 import React, { useState } from 'react';
-import PropTypes from 'prop-types';
-import Row from 'components/Row';
+import { FormattedMessage, useIntl } from 'react-intl';
 import {
   concat,
   filter,
@@ -12,7 +11,6 @@ import {
   compact,
 } from 'lodash';
 
-import { FormattedMessage, useIntl } from 'react-intl';
 import { numericValidator } from 'utils/validators';
 import { dayOfWeekAsString } from 'utils/dateUtils';
 import binNoBg from 'assets/svg/bin-no-bg.svg';
@@ -34,6 +32,7 @@ import Box from 'components/Box';
 import PlusCircle from 'components/Circle/PlusCircle';
 import HoverableBox from 'components/Box/HoverableBox';
 import Img from 'components/Img';
+import Row from 'components/Row';
 
 import messages from './messages';
 import { Input } from '../../../components/QuestionSettings/Settings/Components/styled';
@@ -42,11 +41,15 @@ import { getTimeString, parseTime } from './utils';
 
 type QuestionGroupSettingsModalProps = {
   questionGroup: QuestionGroup;
-  updateQuestionGroup: any;
+  updateQuestionGroup: (
+    changes: object,
+    sessionId: string,
+    questionGroupId: string,
+  ) => void;
   sessionId: string;
   interventionId: string;
   modalVisible: boolean;
-  setModalVisible: any;
+  setModalVisible: (modalState: boolean) => void;
 };
 
 const QuestionGroupSettingsModal = ({
@@ -390,12 +393,6 @@ const QuestionGroupSettingsModal = ({
       </Modal>
     </>
   );
-};
-
-QuestionGroupSettingsModal.propTypes = {
-  questionGroup: PropTypes.object,
-  updateQuestionGroup: PropTypes.func,
-  sessionId: PropTypes.string,
 };
 
 export default QuestionGroupSettingsModal;

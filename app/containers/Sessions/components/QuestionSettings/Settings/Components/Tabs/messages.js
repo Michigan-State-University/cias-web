@@ -3,6 +3,10 @@ import { defineMessages } from 'react-intl';
 export const scope = 'app.containers.SmsSettingsTab.acceptedAnswers';
 
 export default defineMessages({
+  acceptedAnswersLabel: {
+    id: `${scope}.acceptedAnswersLabel`,
+    defaultMessage: 'Accepted Answers',
+  },
   specified: {
     id: `${scope}.specified`,
     defaultMessage: 'Specified',
