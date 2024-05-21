@@ -14,7 +14,7 @@ import orderBy from 'lodash/orderBy';
 import { Col as GCol, Row as GRow } from 'react-grid-system';
 import { useParams } from 'react-router-dom';
 import { injectSaga, injectReducer } from 'redux-injectors';
-import { filter } from 'lodash';
+import { filter, isEmpty } from 'lodash';
 
 import { colors, themeColors } from 'theme';
 
@@ -635,7 +635,7 @@ export function InterventionDetailsPage({
             <GRow>
               <GCol xl={6}>
                 {renderClassicSessions()}
-                {smsSessions && (
+                {!isEmpty(smsSessions) && (
                   <>
                     <Row mx={24} mt={24} mb={6}>
                       <Divider />

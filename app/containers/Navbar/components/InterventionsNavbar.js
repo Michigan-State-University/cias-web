@@ -215,7 +215,7 @@ const InterventionNavbar = ({
             </StyledLink>
           }
         />
-        {(isClassicSession) && (
+        {isClassicSession && (
           <div
             linkMatch={formatMessage(messages.reportTemplates)}
             renderAsLink={
@@ -239,7 +239,7 @@ const InterventionNavbar = ({
             }
           />
         )}
-        {(canAccessParticipantsData && isClassicSession) && (
+        {canAccessParticipantsData && isClassicSession && (
           <div
             linkMatch={formatMessage(messages.generatedReports)}
             renderAsLink={
