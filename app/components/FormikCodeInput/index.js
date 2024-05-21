@@ -113,7 +113,7 @@ function FormikCodeInput({ formikKey, label, codeLength }) {
                 width="95%"
                 maxLength="1"
                 size="1"
-                keyboard="tel"
+                inputMode="numeric"
                 onInput={handleInput}
                 onKeyUp={(e) => handleKeyUp(e, index)}
                 onChange={(e) => handleChange(e, index)}

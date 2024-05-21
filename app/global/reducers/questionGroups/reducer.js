@@ -77,6 +77,7 @@ const questionGroupsReducer = (state = initialState, { type, payload }) =>
         break;
       }
       case UPDATE_QUESTION_GROUP_REQUEST: {
+        // Intentionally not using updateById, as it causes erroneous behaviour with re-rending
         const index = state.groups.findIndex(
           ({ id }) => id === payload.groupId,
         );

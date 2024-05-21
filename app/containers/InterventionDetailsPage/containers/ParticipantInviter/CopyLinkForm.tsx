@@ -14,13 +14,14 @@ import { SelectOption } from 'components/Select/types';
 import { CopyLinkFormValues } from './types';
 import messages from './messages';
 import { createCopyLinkFormSchema, createInviteUrl } from './utils';
+import { Session } from '../../../../models/Session';
 
 export type Props = {
   isModularIntervention: boolean;
   isReportingIntervention: boolean;
   interventionId: string;
   interventionLanguageCode: string;
-  sessionOptions: SelectOption<string>[];
+  sessionOptions: Partial<Session>[];
   healthClinicOptions: SelectOption<string>[];
 };
 
@@ -49,6 +50,10 @@ export const CopyLinkForm: FC<Props> = ({
     [isModularIntervention, isReportingIntervention],
   );
 
+  const filteredSessionOptions = sessionOptions.filter(
+    (session) => session.type !== 'Session::Sms',
+  );
+
   return (
     <Formik
       initialValues={initialValues}
@@ -70,7 +75,7 @@ export const CopyLinkForm: FC<Props> = ({
                         messages.sessionSelectPlaceholder,
                       ),
                     }}
-                    options={sessionOptions}
+                    options={filteredSessionOptions}
                   />
                 )}
                 {isReportingIntervention && (

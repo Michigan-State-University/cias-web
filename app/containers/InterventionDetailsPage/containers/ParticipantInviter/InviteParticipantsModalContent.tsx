@@ -83,7 +83,11 @@ export const InviteParticipantsModalContent: FC<Props> = ({
 
   const sessionOptions: SelectOption<string>[] = useMemo(() => {
     if (isModularIntervention) return [];
-    return sessions.map(({ id, name }) => ({ value: id, label: name }));
+    return sessions.map(({ id, name, type }) => ({
+      value: id,
+      label: name,
+      type,
+    }));
   }, [isModularIntervention, sessions]);
 
   const normalizedSessions: NormalizedSessions = useMemo(() => {

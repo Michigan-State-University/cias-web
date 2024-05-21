@@ -18,9 +18,9 @@ export interface QuestionGroup {
     questionsPerDay: number;
     dayOfPeriod: string[];
     time: { exact: string; range: { from: string; to: string } };
-    patterns: Array<{ match: string }>;
+    patterns: { match: string }[];
   };
-  formulas: Array<{ payload: string; patterns: Array<{ match: string }> }>;
+  formulas: { payload: string; patterns: Array<{ match: string }> }[];
 }
 
 export type QuestionGroupDTO = CamelToSnakeOmitId<QuestionGroup>;

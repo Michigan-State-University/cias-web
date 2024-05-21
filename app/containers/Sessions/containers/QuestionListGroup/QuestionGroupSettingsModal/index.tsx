@@ -132,7 +132,7 @@ const QuestionGroupSettingsModal = ({
         <Row justify="between" align="center" mb={15}>
           <Input
             type="singleline"
-            keyboard="tel"
+            inputMode="numeric"
             value={smsSchedule?.questionsPerDay}
             validator={numericValidator}
             onBlur={(v: string) =>

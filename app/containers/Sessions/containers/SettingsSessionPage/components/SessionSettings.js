@@ -237,7 +237,7 @@ const SessionSettings = ({
                   <Input
                     disabled={!editingPossible}
                     width="100%"
-                    placeholder={formatMessage(messages.placeholder)}
+                    placeholder={formatMessage(messages.smsCode)}
                     value={smsCode}
                     onBlur={(val) => editSession({ smsCode: val })}
                     px={12}
@@ -263,22 +263,25 @@ const SessionSettings = ({
                 />
               </InputContainer>
 
-              <Option
-                disabled={!editingPossible}
-                label={formatMessage(messages.multipleFill)}
-                tooltipText={formatMessage(messages.multipleFillTooltip)}
-                value={multipleFill}
-                action={(val) => editSession({ multipleFill: val })}
-              />
-
-              <SessionSettingsForm
-                disabled={!editingPossible}
-                autofinishEnabled={autofinishEnabled}
-                autofinishDelay={autofinishDelay}
-                autocloseEnabled={autocloseEnabled}
-                autocloseAt={autocloseAt}
-                onSubmit={editSession}
-              />
+              {type !== SessionTypes.SMS_SESSION && (
+                <>
+                  <Option
+                    disabled={!editingPossible}
+                    label={formatMessage(messages.multipleFill)}
+                    tooltipText={formatMessage(messages.multipleFillTooltip)}
+                    value={multipleFill}
+                    action={(val) => editSession({ multipleFill: val })}
+                  />
+                  <SessionSettingsForm
+                    disabled={!editingPossible}
+                    autofinishEnabled={autofinishEnabled}
+                    autofinishDelay={autofinishDelay}
+                    autocloseEnabled={autocloseEnabled}
+                    autocloseAt={autocloseAt}
+                    onSubmit={editSession}
+                  />
+                </>
+              )}
             </Column>
           </SessionSettingsColumn>
 

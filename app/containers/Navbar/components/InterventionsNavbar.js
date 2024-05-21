@@ -108,7 +108,6 @@ const InterventionNavbar = ({
   const { interventionId, sessionId } = params;
 
   const isClassicSession = type === SessionTypes.CLASSIC_SESSION;
-  const isSmsSession = type === SessionTypes.SMS_SESSION;
 
   useInjectSaga({ key: 'editSession', saga: editSessionSaga });
   const [tabActive, setTabActive] = useState(
@@ -216,7 +215,7 @@ const InterventionNavbar = ({
             </StyledLink>
           }
         />
-        {(isClassicSession || isSmsSession) && (
+        {(isClassicSession) && (
           <div
             linkMatch={formatMessage(messages.reportTemplates)}
             renderAsLink={
@@ -240,7 +239,7 @@ const InterventionNavbar = ({
             }
           />
         )}
-        {canAccessParticipantsData && (isClassicSession || isSmsSession) && (
+        {(canAccessParticipantsData && isClassicSession) && (
           <div
             linkMatch={formatMessage(messages.generatedReports)}
             renderAsLink={
