@@ -104,6 +104,7 @@ const VariableChooser = ({
   sessionTypesWhiteList = [
     SessionTypes.CAT_SESSION,
     SessionTypes.CLASSIC_SESSION,
+    SessionTypes.SMS_SESSION,
   ],
   setIsOpen: propsSetOpen,
   mode = VariableChooserMode.VARIABLE,
