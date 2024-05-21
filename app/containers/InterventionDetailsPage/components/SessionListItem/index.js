@@ -25,6 +25,8 @@ import CopyModal from 'components/CopyModal';
 import Badge from 'components/Badge';
 import BadgeInput from 'components/Input/BadgeInput';
 import Input from 'components/Input/StyledInput';
+import { Alert, AlertType } from 'components/Alert';
+import Icon from 'components/Icon';
 import {
   useHenryFordBranchingInfoModal,
   HenryFordBranchingInfoType,
@@ -39,16 +41,17 @@ import { parametrizeRoutePath } from 'utils/router';
 import duplicateInternally from 'assets/svg/duplicate-internally.svg';
 import copy from 'assets/svg/copy.svg';
 import bin from 'assets/svg/bin-no-bg.svg';
+import mobileIcon from 'assets/svg/phone_message.svg';
 import { colors, themeColors } from 'theme';
 
 import { InterventionType } from 'models/Intervention';
+import { SessionTypes } from 'models/Session';
 
 import SessionSchedule from '../SessionSchedule';
 import messages from './messages';
 import { ToggleableBox, SessionIndex } from './styled';
 import SessionBranching from '../SessionBranching';
 import { formatSessionName } from './utils';
-import { Alert, AlertType } from '../../../../components/Alert';
 
 const WCAG_ARIA_LABEL_ID = 'estimate-time-label';
 
@@ -89,6 +92,7 @@ function SessionListItem({
     updatedEstimatedTime,
     autocloseEnabled,
     autocloseAt,
+    type,
   } = session || {};
 
   const {
@@ -231,13 +235,18 @@ function SessionListItem({
                     {index + 1}
                   </SessionIndex>
                   <Column px={15}>
-                    <Markup
-                      attributes={{
-                        dir: 'auto',
-                      }}
-                      content={formatSessionName(name)}
-                      tagName={H2}
-                    />
+                    <Row>
+                      <Markup
+                        attributes={{
+                          dir: 'auto',
+                        }}
+                        content={formatSessionName(name)}
+                        tagName={H2}
+                      />
+                      {type === SessionTypes.SMS_SESSION && (
+                        <Icon ml={8} src={mobileIcon} alt="sms" />
+                      )}
+                    </Row>
                     <Row marginBlockStart={5} gap={8}>
                       <BadgeInput
                         disabled={disabled}
@@ -289,51 +298,55 @@ function SessionListItem({
               />
             )}
 
-            <Row px={24} mb={16}>
-              <Divider />
-            </Row>
+            {type !== SessionTypes.SMS_SESSION && (
+              <>
+                <Row px={24} mb={16}>
+                  <Divider />
+                </Row>
 
-            {interventionType !== InterventionType.DEFAULT && (
-              <Row px={24} mb={24} display="flex" align="center">
-                <Text id={WCAG_ARIA_LABEL_ID}>
-                  {formatMessage(messages.estimateTime)}
-                </Text>
-                <Input
-                  transparent={false}
-                  aria-labelledby={WCAG_ARIA_LABEL_ID}
-                  value={estimatedTimeValue}
-                  onBlur={handleUpdateEstimatedTime}
-                  mx={5}
-                  width={60}
-                  validator={numericValidator}
-                  placeholder="0"
-                  disabled={disabled}
-                />
-                <Text>{formatMessage(messages.min)}</Text>
-              </Row>
-            )}
-            {isSchedulingPossible && (
-              <Row px={24}>
-                <SessionSchedule
-                  disabled={disabled}
-                  sessionId={id}
-                  selectedScheduleOption={schedule}
-                  scheduleAt={scheduleAt}
-                  schedulePayload={schedulePayload}
-                  daysAfterDateVariableName={daysAfterDateVariableName}
-                  session={session}
-                  sharedTo={sharedTo}
-                />
-              </Row>
-            )}
-            {isSessionBranchingPossible && (
-              <SessionBranching
-                disabled={disabled}
-                formulas={formulas}
-                session={session}
-                nextSessionName={nextSessionName}
-                status={settings.formula}
-              />
+                {interventionType !== InterventionType.DEFAULT && (
+                  <Row px={24} mb={24} display="flex" align="center">
+                    <Text id={WCAG_ARIA_LABEL_ID}>
+                      {formatMessage(messages.estimateTime)}
+                    </Text>
+                    <Input
+                      transparent={false}
+                      aria-labelledby={WCAG_ARIA_LABEL_ID}
+                      value={estimatedTimeValue}
+                      onBlur={handleUpdateEstimatedTime}
+                      mx={5}
+                      width={60}
+                      validator={numericValidator}
+                      placeholder="0"
+                      disabled={disabled}
+                    />
+                    <Text>{formatMessage(messages.min)}</Text>
+                  </Row>
+                )}
+                {isSchedulingPossible && (
+                  <Row px={24}>
+                    <SessionSchedule
+                      disabled={disabled}
+                      sessionId={id}
+                      selectedScheduleOption={schedule}
+                      scheduleAt={scheduleAt}
+                      schedulePayload={schedulePayload}
+                      daysAfterDateVariableName={daysAfterDateVariableName}
+                      session={session}
+                      sharedTo={sharedTo}
+                    />
+                  </Row>
+                )}
+                {isSessionBranchingPossible && (
+                  <SessionBranching
+                    disabled={disabled}
+                    formulas={formulas}
+                    session={session}
+                    nextSessionName={nextSessionName}
+                    status={settings.formula}
+                  />
+                )}
+              </>
             )}
           </ToggleableBox>
         </Box>
