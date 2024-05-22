@@ -62,7 +62,7 @@ export interface Session {
   autofinishDelay: number;
   autocloseEnabled: boolean;
   autocloseAt: Nullable<string>;
-  smsCode: Nullable<string>;
+  smsCodesAttributes: Array<object>;
 }
 
 export interface ClassicSession extends Session {

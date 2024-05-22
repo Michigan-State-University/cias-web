@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import map from 'lodash/map';
 import some from 'lodash/some';
+import set from 'lodash/set';
 import { compose } from 'redux';
 import { connect } from 'react-redux';
 import { createStructuredSelector } from 'reselect';
@@ -69,7 +70,7 @@ const SessionSettings = ({
   autocloseAt,
   editingPossible,
   type,
-  smsCode,
+  smsCodesAttributes,
 }) => {
   useInjectReducer({ key: 'intervention', reducer: interventionReducer });
   useInjectReducer({ key: 'questions', reducer: questionsReducer });
@@ -173,6 +174,13 @@ const SessionSettings = ({
     );
   };
 
+  const updateSmsCode = (val, index) => {
+    const updatedAttributes = set(smsCodesAttributes, `${index}.smsCode`, val);
+    editSession({
+      smsCodesAttributes: updatedAttributes,
+    });
+  };
+
   return (
     <>
       <ConfirmationModal
@@ -214,34 +222,40 @@ const SessionSettings = ({
 
               {type === SessionTypes.SMS_SESSION && (
                 <InputContainer mt={15}>
-                  <Row justify="between" align="center">
-                    <H3 mb={5} fontWeight="regular">
+                  <Row justify="between" align="center" mb={-20}>
+                    <H3 fontWeight="regular">
                       {formatMessage(messages.smsCode)}
                     </H3>
-                    <TextButton
-                      fontWeight="bold"
-                      hoverDecoration="underline"
-                      clickable
-                      buttonProps={{
-                        color: themeColors.secondary,
-                      }}
-                      onClick={() =>
-                        editSession({
-                          smsCode: getRandomString(7),
-                        })
-                      }
-                    >
-                      Randomize code
-                    </TextButton>
                   </Row>
-                  <Input
-                    disabled={!editingPossible}
-                    width="100%"
-                    placeholder={formatMessage(messages.smsCode)}
-                    value={smsCode}
-                    onBlur={(val) => editSession({ smsCode: val })}
-                    px={12}
-                  />
+                  {smsCodesAttributes.map(({ smsCode }, index) => (
+                    <>
+                      <Row justify="end" align="center">
+                        <TextButton
+                          fontWeight="bold"
+                          hoverDecoration="underline"
+                          clickable
+                          buttonProps={{
+                            color: themeColors.secondary,
+                          }}
+                          onClick={() =>
+                            updateSmsCode(getRandomString(7), index)
+                          }
+                        >
+                          Randomize code
+                        </TextButton>
+                      </Row>
+                      <Row>
+                        <Input
+                          disabled={!editingPossible}
+                          width="100%"
+                          placeholder={formatMessage(messages.smsCode)}
+                          value={smsCode}
+                          onBlur={(val) => updateSmsCode(val, index)}
+                          px={12}
+                        />
+                      </Row>
+                    </>
+                  ))}
                 </InputContainer>
               )}
 
@@ -370,7 +384,7 @@ SessionSettings.propTypes = {
   autocloseAt: PropTypes.string,
   editingPossible: PropTypes.bool,
   type: PropTypes.string,
-  smsCode: PropTypes.string,
+  smsCodesAttributes: PropTypes.array,
 };
 
 export default compose(withConnect)(SessionSettings);

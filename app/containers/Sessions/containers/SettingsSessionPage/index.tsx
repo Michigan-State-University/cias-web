@@ -39,7 +39,7 @@ const SettingsSessionPage = () => {
     autocloseEnabled,
     autocloseAt,
     type,
-    smsCode,
+    smsCodesAttributes,
   } = session;
   useInjectReducer({ key: 'session', reducer: sessionReducer });
   useInjectSaga({ key: 'getSession', saga: getSessionSaga });
@@ -80,7 +80,7 @@ const SettingsSessionPage = () => {
           autocloseEnabled={autocloseEnabled}
           autocloseAt={autocloseAt}
           type={type}
-          smsCode={smsCode}
+          smsCodesAttributes={smsCodesAttributes}
         />
       </Box>
     </>
