@@ -4,7 +4,7 @@ import { SelectOption } from 'components/Select/types';
 
 export type SessionSettingsSubmitFormValues = Pick<
   Session,
-  'autofinishEnabled' | 'autofinishDelay' | 'autocloseEnabled' | 'autocloseAt'
+  'autofinishEnabled' | 'autofinishDelay' | 'autocloseEnabled' | 'autocloseAt' | 'type'
 >;
 
 export type AutofinishFormValues = {

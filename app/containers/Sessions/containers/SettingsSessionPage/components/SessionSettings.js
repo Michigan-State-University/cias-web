@@ -264,24 +264,23 @@ const SessionSettings = ({
               </InputContainer>
 
               {type !== SessionTypes.SMS_SESSION && (
-                <>
-                  <Option
-                    disabled={!editingPossible}
-                    label={formatMessage(messages.multipleFill)}
-                    tooltipText={formatMessage(messages.multipleFillTooltip)}
-                    value={multipleFill}
-                    action={(val) => editSession({ multipleFill: val })}
-                  />
-                  <SessionSettingsForm
-                    disabled={!editingPossible}
-                    autofinishEnabled={autofinishEnabled}
-                    autofinishDelay={autofinishDelay}
-                    autocloseEnabled={autocloseEnabled}
-                    autocloseAt={autocloseAt}
-                    onSubmit={editSession}
-                  />
-                </>
+                <Option
+                  disabled={!editingPossible}
+                  label={formatMessage(messages.multipleFill)}
+                  tooltipText={formatMessage(messages.multipleFillTooltip)}
+                  value={multipleFill}
+                  action={(val) => editSession({ multipleFill: val })}
+                />
               )}
+              <SessionSettingsForm
+                disabled={!editingPossible}
+                autofinishEnabled={autofinishEnabled}
+                autofinishDelay={autofinishDelay}
+                autocloseEnabled={autocloseEnabled}
+                autocloseAt={autocloseAt}
+                onSubmit={editSession}
+                type={type}
+              />
             </Column>
           </SessionSettingsColumn>
 
