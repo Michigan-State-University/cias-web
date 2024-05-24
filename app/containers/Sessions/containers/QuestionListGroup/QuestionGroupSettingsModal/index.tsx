@@ -153,6 +153,7 @@ const QuestionGroupSettingsModal = ({
             <Checkbox
               id={`day-of-period-${dayNumber}`}
               checked={includes(smsSchedule?.dayOfPeriod, dayNumber)}
+              key={dayNumber}
               inlineLabel={false}
               disabled={disabled}
               onChange={(selected) =>
@@ -316,7 +317,7 @@ const QuestionGroupSettingsModal = ({
               index: number,
             ) => (
               <>
-                <Row justify="between" align="center">
+                <Row justify="between" align="center" key={index}>
                   {formatMessage(messages.formula)}
                   <div>
                     <VariableChooser

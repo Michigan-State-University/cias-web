@@ -429,7 +429,7 @@ export function InterventionDetailsPage({
     [sortedSessions],
   );
 
-  const classicSessions = useMemo(
+  const nonSmsSessions = useMemo(
     () =>
       sortedSessions &&
       filter(
@@ -452,33 +452,27 @@ export function InterventionDetailsPage({
               ref={providedDroppable.innerRef}
               {...providedDroppable.droppableProps}
             >
-              {classicSessions &&
-                classicSessions.map((session, index) => {
-                  const nextSession = classicSessions.find(
-                    ({ position }) => position > session.position,
-                  );
-                  return (
-                    <Row key={session.id}>
-                      <SessionListItem
-                        disabled={!editingPossible}
-                        deletionPossible={editingPossible}
-                        sharedTo={sharedTo}
-                        session={session}
-                        index={index}
-                        isSelected={index === sessionIndex}
-                        handleCopySession={handleCopySession}
-                        handleExternalCopySession={handleExternalCopySession}
-                        handleDeleteSession={(sessionId) =>
-                          setDeleteConfirmationSessionId(sessionId)
-                        }
-                        editSession={editSession}
-                        nextSessionName={nextSession ? nextSession.name : null}
-                        interventionType={type}
-                        hfhsAccess={hfhsAccess}
-                      />
-                    </Row>
-                  );
-                })}
+              {nonSmsSessions &&
+                nonSmsSessions.map((session, index) => (
+                  <Row key={session.id}>
+                    <SessionListItem
+                      disabled={!editingPossible}
+                      deletionPossible={editingPossible}
+                      sharedTo={sharedTo}
+                      session={session}
+                      index={index}
+                      isSelected={index === sessionIndex}
+                      handleCopySession={handleCopySession}
+                      handleExternalCopySession={handleExternalCopySession}
+                      handleDeleteSession={(sessionId) =>
+                        setDeleteConfirmationSessionId(sessionId)
+                      }
+                      editSession={editSession}
+                      interventionType={type}
+                      hfhsAccess={hfhsAccess}
+                    />
+                  </Row>
+                ))}
               {providedDroppable.placeholder}
             </div>
           )}
@@ -492,7 +486,7 @@ export function InterventionDetailsPage({
       <DragDropContext onDragEnd={onDragEnd}>
         <Droppable
           isDropDisabled={!editingPossible}
-          droppableId="session-list"
+          droppableId="sms-session-list"
           type={reorderScope.sessions}
         >
           {(providedDroppable) => (
@@ -637,9 +631,11 @@ export function InterventionDetailsPage({
                 {renderClassicSessions()}
                 {!isEmpty(smsSessions) && (
                   <>
-                    <Row mx={24} mt={24} mb={6}>
-                      <Divider />
-                    </Row>
+                    {!isEmpty(nonSmsSessions) && (
+                      <Row mx={24} mt={24} mb={6}>
+                        <Divider />
+                      </Row>
+                    )}
                     {renderSmsSessions()}
                   </>
                 )}

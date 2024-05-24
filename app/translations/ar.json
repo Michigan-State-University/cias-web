@@ -1480,6 +1480,7 @@
   "app.containers.SettingsSessionPage.Components.saveVoiceSettings": "",
   "app.containers.SettingsSessionPage.Components.selectUsers": "",
   "app.containers.SettingsSessionPage.Components.smsCode": "",
+  "app.containers.SettingsSessionPage.Components.smsCodeRandomize": "",
   "app.containers.SettingsSessionPage.Components.testVoice": "",
   "app.containers.SettingsSessionPage.Components.variableLabel": "",
   "app.containers.SettingsSessionPage.Components.voice": "",

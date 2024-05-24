@@ -227,9 +227,9 @@ const SessionSettings = ({
                       {formatMessage(messages.smsCode)}
                     </H3>
                   </Row>
-                  {smsCodesAttributes.map(({ smsCode }, index) => (
+                  {smsCodesAttributes.map(({ smsCode, id }, index) => (
                     <>
-                      <Row justify="end" align="center">
+                      <Row justify="end" align="center" key={id}>
                         <TextButton
                           fontWeight="bold"
                           hoverDecoration="underline"
@@ -242,7 +242,7 @@ const SessionSettings = ({
                             updateSmsCode(getRandomString(7), index)
                           }
                         >
-                          Randomize code
+                          {formatMessage(messages.smsCodeRandomize)}
                         </TextButton>
                       </Row>
                       <Row>

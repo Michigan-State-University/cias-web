@@ -15,6 +15,10 @@ export default defineMessages({
     id: `${scope}.smsCode`,
     defaultMessage: 'SMS Code',
   },
+  smsCodeRandomize: {
+    id: `${scope}.smsCodeRandomize`,
+    defaultMessage: 'Randomize code',
+  },
   variableLabel: {
     id: `${scope}.variableLabel`,
     defaultMessage: 'Variable',

@@ -235,7 +235,7 @@ function SessionListItem({
                     {index + 1}
                   </SessionIndex>
                   <Column px={15}>
-                    <Row>
+                    <Row gap={8}>
                       <Markup
                         attributes={{
                           dir: 'auto',
@@ -244,7 +244,7 @@ function SessionListItem({
                         tagName={H2}
                       />
                       {type === SessionTypes.SMS_SESSION && (
-                        <Icon ml={8} src={mobileIcon} alt="sms" />
+                        <Icon src={mobileIcon} alt="sms" />
                       )}
                     </Row>
                     <Row marginBlockStart={5} gap={8}>

@@ -4,6 +4,7 @@ import { useIntl } from 'react-intl';
 
 import share from 'assets/svg/share.svg';
 
+import { Session } from 'models/Session';
 import Column from 'components/Column';
 import Divider from 'components/Divider';
 import Row from 'components/Row';
@@ -14,7 +15,6 @@ import { SelectOption } from 'components/Select/types';
 import { CopyLinkFormValues } from './types';
 import messages from './messages';
 import { createCopyLinkFormSchema, createInviteUrl } from './utils';
-import { Session } from '../../../../models/Session';
 
 export type Props = {
   isModularIntervention: boolean;
