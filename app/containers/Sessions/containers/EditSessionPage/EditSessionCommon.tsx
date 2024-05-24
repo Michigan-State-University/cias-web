@@ -28,7 +28,12 @@ import intersection from 'lodash/intersection';
 import includes from 'lodash/includes';
 
 import { reorderScope } from 'models/Session/ReorderScope';
-import { ClassicSession, Session, SmsSession } from 'models/Session';
+import {
+  ClassicSession,
+  Session,
+  SessionTypes,
+  SmsSession,
+} from 'models/Session';
 import { QuestionDTO, QuestionTypes } from 'models/Question';
 import { GroupType, QuestionGroup } from 'models/QuestionGroup';
 import { questionType } from 'models/Session/QuestionTypes';
@@ -367,8 +372,14 @@ const EditSessionCommon = ({
 
   const onCreateQuestion = (type: string) => {
     if (type.includes(questionType)) {
+      const smsQuestionType =
+        type === QuestionTypes.SMS_QUESTION ||
+        QuestionTypes.SMS_INFORMATION_QUESTION;
       const newQuestionSubtitle =
-        defaultQuestionSubtitlesMessages[type] || messages.newQuestionSubtitle;
+        defaultQuestionSubtitlesMessages[type] ||
+        (smsQuestionType
+          ? messages.newSmsQuestionSubtitle
+          : messages.newQuestionSubtitle);
 
       createQuestion(
         instantiateEmptyQuestion(
@@ -453,7 +464,8 @@ const EditSessionCommon = ({
     duplicateGroupsInternally(selectedSlides, target.id);
 
   // @ts-ignore
-  if (questions.length === 0) return <Loader size={100} />;
+  if (questions.length === 0 && sessionType !== SessionTypes.SMS_SESSION)
+    return <Loader size={100} />;
 
   const selectSlide = (slideId: string) =>
     setSelectedSlides(xor(selectedSlides, [slideId]));

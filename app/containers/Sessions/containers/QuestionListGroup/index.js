@@ -266,6 +266,7 @@ const QuestionListGroup = ({
           interventionId={interventionId}
           modalVisible={modalVisible}
           setModalVisible={setModalVisible}
+          disabled={!editingPossible}
         />
       )}
     </Row>

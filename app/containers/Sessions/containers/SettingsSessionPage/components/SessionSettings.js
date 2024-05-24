@@ -234,6 +234,7 @@ const SessionSettings = ({
                           fontWeight="bold"
                           hoverDecoration="underline"
                           clickable
+                          disabled={!editingPossible}
                           buttonProps={{
                             color: themeColors.secondary,
                           }}

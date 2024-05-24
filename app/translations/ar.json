@@ -746,6 +746,7 @@
   "app.containers.EditSessionPage.narratorVoiceType": "",
   "app.containers.EditSessionPage.newQuestionMessage": "<h2>أدخل العنوان هنا</h2>",
   "app.containers.EditSessionPage.newQuestionSubtitle": "<p>أدخل النص/السؤال الرئيسي للشاشة هنا</p>",
+  "app.containers.EditSessionPage.newSmsQuestionSubtitle": "<p>أدخل نص الرسائل القصيرة هنا</p>",
   "app.containers.EditSessionPage.noTestsData": "",
   "app.containers.EditSessionPage.pageTitle": "",
   "app.containers.EditSessionPage.population": "",

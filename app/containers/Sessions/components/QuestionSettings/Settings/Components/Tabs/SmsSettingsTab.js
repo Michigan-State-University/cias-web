@@ -18,7 +18,7 @@ import Text from 'components/Text';
 import { Input } from '../styled';
 import messages from './messages';
 
-const SmsSettingsTab = ({ editQuestion, acceptedAnswers }) => {
+const SmsSettingsTab = ({ editQuestion, acceptedAnswers, disabled }) => {
   const { formatMessage } = useIntl();
   const predefinedAnswers = get(acceptedAnswers, 'predefined', false);
   const rangeOfAnswers = get(acceptedAnswers, 'range', false);
@@ -39,6 +39,7 @@ const SmsSettingsTab = ({ editQuestion, acceptedAnswers }) => {
               })
             }
             checked={predefinedAnswers}
+            disabled={disabled}
           >
             <Text>{formatMessage(messages.specified)}</Text>
           </Radio>
@@ -53,6 +54,7 @@ const SmsSettingsTab = ({ editQuestion, acceptedAnswers }) => {
               })
             }
             checked={rangeOfAnswers}
+            disabled={disabled}
           >
             <Text>{formatMessage(messages.range)}</Text>
           </Radio>
@@ -76,6 +78,7 @@ const SmsSettingsTab = ({ editQuestion, acceptedAnswers }) => {
               type="singleline"
               value={acceptedAnswers.predefined}
               validator={arrayValidator}
+              disabled={disabled}
               onBlur={(v) =>
                 editQuestion({
                   path: 'accepted_answers',
@@ -106,6 +109,7 @@ const SmsSettingsTab = ({ editQuestion, acceptedAnswers }) => {
               type="singleline"
               value={acceptedAnswers.range.from}
               validator={numericValidator()}
+              disabled={disabled}
               onBlur={(v) =>
                 editQuestion({
                   path: 'accepted_answers.range.from',
@@ -131,6 +135,7 @@ const SmsSettingsTab = ({ editQuestion, acceptedAnswers }) => {
               id="range_to_accepted_values"
               type="singleline"
               value={acceptedAnswers.range.to}
+              disabled={disabled}
               validator={numericValidator()}
               onBlur={(v) =>
                 editQuestion({
@@ -155,6 +160,7 @@ const SmsSettingsTab = ({ editQuestion, acceptedAnswers }) => {
             id="answer_if_wrong"
             type="singleline"
             value={acceptedAnswers?.answer_if_wrong}
+            disabled={disabled}
             onBlur={(v) =>
               editQuestion({
                 path: 'accepted_answers',
@@ -173,6 +179,7 @@ const SmsSettingsTab = ({ editQuestion, acceptedAnswers }) => {
 SmsSettingsTab.propTypes = {
   editQuestion: PropTypes.func.isRequired,
   acceptedAnswers: PropTypes.object,
+  disabled: PropTypes.bool,
 };
 
 const mapDispatchToProps = {

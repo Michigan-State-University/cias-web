@@ -746,6 +746,7 @@
   "app.containers.EditSessionPage.narratorVoiceType": "",
   "app.containers.EditSessionPage.newQuestionMessage": "<h2>Escriba aquí el título</h2>",
   "app.containers.EditSessionPage.newQuestionSubtitle": "<p>Introduzca aquí el texto principal/la pregunta para la pantalla</p>",
+  "app.containers.EditSessionPage.newSmsQuestionSubtitle": "<p>Introduzca el texto SMS aquí</p>",
   "app.containers.EditSessionPage.noTestsData": "",
   "app.containers.EditSessionPage.pageTitle": "",
   "app.containers.EditSessionPage.population": "",

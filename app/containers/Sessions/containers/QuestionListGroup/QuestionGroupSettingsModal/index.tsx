@@ -50,6 +50,7 @@ type QuestionGroupSettingsModalProps = {
   interventionId: string;
   modalVisible: boolean;
   setModalVisible: (modalState: boolean) => void;
+  disabled: boolean;
 };
 
 const QuestionGroupSettingsModal = ({
@@ -59,6 +60,7 @@ const QuestionGroupSettingsModal = ({
   interventionId,
   modalVisible,
   setModalVisible,
+  disabled,
 }: QuestionGroupSettingsModalProps) => {
   const { title, id, smsSchedule, formulas } = questionGroup;
 
@@ -135,6 +137,7 @@ const QuestionGroupSettingsModal = ({
             inputMode="numeric"
             value={smsSchedule?.questionsPerDay}
             validator={numericValidator}
+            disabled={disabled}
             onBlur={(v: string) =>
               updateSmsSchedule('questionsPerDay', Number(v))
             }
@@ -151,6 +154,7 @@ const QuestionGroupSettingsModal = ({
               id={`day-of-period-${dayNumber}`}
               checked={includes(smsSchedule?.dayOfPeriod, dayNumber)}
               inlineLabel={false}
+              disabled={disabled}
               onChange={(selected) =>
                 handleDayCheckboxSelection(selected, dayNumber)
               }
@@ -168,6 +172,7 @@ const QuestionGroupSettingsModal = ({
               id="specified"
               onChange={() => updateSmsSchedule('time', { exact: '8:00 AM' })}
               checked={specificQuestionsTime}
+              disabled={disabled}
             >
               <Text>{formatMessage(messages.timeSpecified)}</Text>
             </Radio>
@@ -179,13 +184,14 @@ const QuestionGroupSettingsModal = ({
                 })
               }
               checked={randomQuestionsTime}
+              disabled={disabled}
             >
               <Text>{formatMessage(messages.timeRandom)}</Text>
             </Radio>
           </Column>
         </Row>
         {specificQuestionsTime && (
-          <Row justify="between" align="center" mb={15}>
+          <Row justify="between" align="center" mb={8}>
             <Column>
               <label htmlFor="exact_time_picker">
                 <Text
@@ -209,6 +215,7 @@ const QuestionGroupSettingsModal = ({
                 customInput={<DateInput id="exact_time_picker" width="100%" />}
                 timeCaption="Time"
                 dateFormat="h:mm aa"
+                disabled={disabled}
               />
             </Column>
           </Row>
@@ -245,6 +252,7 @@ const QuestionGroupSettingsModal = ({
                 }
                 timeCaption="Time"
                 dateFormat="h:mm aa"
+                disabled={disabled}
               />
             </Column>
             <Column ml={4}>
@@ -277,6 +285,7 @@ const QuestionGroupSettingsModal = ({
                 }
                 timeCaption="Time"
                 dateFormat="h:mm aa"
+                disabled={disabled}
               />
             </Column>
           </Row>
@@ -286,6 +295,7 @@ const QuestionGroupSettingsModal = ({
             <Checkbox
               id="overwrite_user_time_settings"
               checked={smsSchedule.overwriteUserTimeSettings}
+              disabled={disabled}
               onChange={(selected) =>
                 selected
                   ? updateSmsSchedule('overwriteUserTimeSettings', true)
@@ -311,6 +321,7 @@ const QuestionGroupSettingsModal = ({
                   <div>
                     <VariableChooser
                       currentSessionId={sessionId}
+                      disabled={disabled}
                       currentInterventionId={interventionId}
                       onClick={(value: string) =>
                         updateFormulas(
@@ -347,6 +358,7 @@ const QuestionGroupSettingsModal = ({
                       updateFormulas(index, 'payload', val)
                     }
                     width="100%"
+                    disabled={disabled}
                     px={12}
                     forceBlur={isVariableChooserOpen}
                   />
@@ -356,6 +368,7 @@ const QuestionGroupSettingsModal = ({
                   <InequalityChooser
                     height={50}
                     width={200}
+                    disabled={disabled}
                     onSuccessfulChange={(value) =>
                       updateFormulas(index, 'patterns[0].match', value)
                     }
@@ -389,6 +402,7 @@ const QuestionGroupSettingsModal = ({
             width="100%"
             style={{ display: 'flex', justifyContent: 'center' }}
             onClick={handleAddNewFormula}
+            disabled={disabled}
           >
             <Box>
               <Row align="center">
