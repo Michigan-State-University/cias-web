@@ -40,6 +40,7 @@ import Img from 'components/Img';
 import Text from 'components/Text';
 import { HelpIconTooltip } from 'components/HelpIconTooltip';
 
+import { makeSelectSession } from 'global/reducers/session/selectors';
 import QuestionData from '../QuestionData';
 import QuestionImage from '../QuestionImage';
 import QuestionNarrator from '../QuestionNarrator';
@@ -52,6 +53,7 @@ import { AnswerInterventionContent, AnswerOuterContainer } from './styled';
 import { HIDE_NARRATOR_QUESTIONS } from './constants';
 import { variableTooltipContents } from './variableTooltipContents';
 import QuestionDetailsLanguageProvider from './QuestionDetailsLanguageProvider';
+import { Session } from '../../../../models/Session';
 
 export type QuestionDetailsProps = {
   changeGroupName: (name: string) => void;
@@ -82,6 +84,7 @@ const RenderQuestionDetails = ({
   const intervention: Nullable<Intervention> = useSelector(
     makeSelectIntervention(),
   );
+  const session: Session = useSelector(makeSelectSession());
   const editingPossible = useSelector(makeSelectEditingPossible());
 
   const isNarratorTab: boolean = useSelector(makeSelectIsNarratorTab());
@@ -119,6 +122,8 @@ const RenderQuestionDetails = ({
     settings: questionSettings,
     narrator: { settings: narratorSettings, blocks },
   } = selectedQuestion;
+
+  const { type: sessionType } = session;
 
   const {
     video,
@@ -222,7 +227,7 @@ const RenderQuestionDetails = ({
                     )}
                     {subtitle && (
                       <Row>
-                        <QuestionSubtitle />
+                        <QuestionSubtitle sessionType={sessionType} />
                       </Row>
                     )}
                     {'variable' in body && (

@@ -13,7 +13,7 @@ export default defineMessages({
   },
   newSmsQuestionSubtitle: {
     id: `${scope}.newSmsQuestionSubtitle`,
-    defaultMessage: '<p>Enter SMS text here</p>',
+    defaultMessage: 'Enter SMS text here',
   },
   manageSlides: {
     id: `${scope}.manageSlides`,

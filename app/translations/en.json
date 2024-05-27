@@ -746,7 +746,7 @@
   "app.containers.EditSessionPage.narratorVoiceType": "Narrator voice type",
   "app.containers.EditSessionPage.newQuestionMessage": "<h2>Enter title here</h2>",
   "app.containers.EditSessionPage.newQuestionSubtitle": "<p>Enter main text/question for screen here</p>",
-  "app.containers.EditSessionPage.newSMSQuestionSubtitle": "<p>Enter SMS text here</p>",
+  "app.containers.EditSessionPage.newSMSQuestionSubtitle": "Enter SMS text here",
   "app.containers.EditSessionPage.noTestsData": "Choose language, time frame and population to see available tests",
   "app.containers.EditSessionPage.pageTitle": "Session: {name}",
   "app.containers.EditSessionPage.population": "Population",
