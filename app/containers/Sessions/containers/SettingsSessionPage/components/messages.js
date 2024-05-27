@@ -11,9 +11,13 @@ export default defineMessages({
     id: `${scope}.nameLabel`,
     defaultMessage: 'Name',
   },
+  smsCodeForClinic: {
+    id: `${scope}.smsCodeForClinic`,
+    defaultMessage: 'SMS Code for {clinicName}',
+  },
   smsCode: {
     id: `${scope}.smsCode`,
-    defaultMessage: 'SMS Code for {clinicName}',
+    defaultMessage: 'SMS Code',
   },
   smsCodeRandomize: {
     id: `${scope}.smsCodeRandomize`,
