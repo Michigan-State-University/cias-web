@@ -142,7 +142,9 @@ const ApprovableInput = ({
   }, [value, onValueChange]);
 
   useLayoutEffect(() => {
-    adjustTextAreaHeight();
+    if (type === 'multiline' && !richText) {
+      adjustTextAreaHeight();
+    }
   }, []);
 
   const onInputChange = (targetValue) => {
@@ -157,7 +159,7 @@ const ApprovableInput = ({
   };
 
   const adjustTextAreaHeight = () => {
-    if (autoSize && type === 'multiline' && !richText) {
+    if (autoSize) {
       const computed = window.getComputedStyle(ref.current);
 
       ref.current.style.height = '0px';
