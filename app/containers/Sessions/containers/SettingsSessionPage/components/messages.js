@@ -13,7 +13,7 @@ export default defineMessages({
   },
   smsCode: {
     id: `${scope}.smsCode`,
-    defaultMessage: 'SMS Code',
+    defaultMessage: 'SMS Code for {clinicName}',
   },
   smsCodeRandomize: {
     id: `${scope}.smsCodeRandomize`,

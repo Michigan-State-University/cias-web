@@ -222,41 +222,43 @@ const SessionSettings = ({
 
               {type === SessionTypes.SMS_SESSION && (
                 <InputContainer mt={15}>
-                  <Row justify="between" align="center" mb={-20}>
-                    <H3 fontWeight="regular">
-                      {formatMessage(messages.smsCode)}
-                    </H3>
-                  </Row>
-                  {smsCodesAttributes.map(({ smsCode, id }, index) => (
-                    <>
-                      <Row justify="end" align="center" key={id}>
-                        <TextButton
-                          fontWeight="bold"
-                          hoverDecoration="underline"
-                          clickable
-                          disabled={!editingPossible}
-                          buttonProps={{
-                            color: themeColors.secondary,
-                          }}
-                          onClick={() =>
-                            updateSmsCode(getRandomString(7), index)
-                          }
-                        >
-                          {formatMessage(messages.smsCodeRandomize)}
-                        </TextButton>
-                      </Row>
-                      <Row>
-                        <Input
-                          disabled={!editingPossible}
-                          width="100%"
-                          placeholder={formatMessage(messages.smsCode)}
-                          value={smsCode}
-                          onBlur={(val) => updateSmsCode(val, index)}
-                          px={12}
-                        />
-                      </Row>
-                    </>
-                  ))}
+                  {smsCodesAttributes.map(
+                    ({ smsCode, id, clinic: { name: clinicName } }, index) => (
+                      <>
+                        <Row justify="between" align="center" key={id}>
+                          <Row justify="between" align="center">
+                            <H3 fontWeight="regular">
+                              {formatMessage(messages.smsCode, { clinicName })}
+                            </H3>
+                          </Row>
+                          <TextButton
+                            fontWeight="bold"
+                            hoverDecoration="underline"
+                            clickable
+                            disabled={!editingPossible}
+                            buttonProps={{
+                              color: themeColors.secondary,
+                            }}
+                            onClick={() =>
+                              updateSmsCode(getRandomString(7), index)
+                            }
+                          >
+                            {formatMessage(messages.smsCodeRandomize)}
+                          </TextButton>
+                        </Row>
+                        <Row>
+                          <Input
+                            disabled={!editingPossible}
+                            width="100%"
+                            placeholder={formatMessage(messages.smsCode)}
+                            value={smsCode}
+                            onBlur={(val) => updateSmsCode(val, index)}
+                            px={12}
+                          />
+                        </Row>
+                      </>
+                    ),
+                  )}
                 </InputContainer>
               )}
 
