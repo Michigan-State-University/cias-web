@@ -20,7 +20,10 @@ import {
 } from 'global/reducers/organizations';
 
 import Loader from 'components/Loader';
-import { SelectOption } from 'components/Select/types';
+import {
+  SelectOption,
+  SelectOptionTypeExtended,
+} from 'components/Select/types';
 
 import {
   InviteParticipantModalView,
@@ -81,7 +84,7 @@ export const InviteParticipantsModalContent: FC<Props> = ({
     }
   }, [organizationId]);
 
-  const sessionOptions: SelectOption<string>[] = useMemo(() => {
+  const sessionOptions: SelectOptionTypeExtended<string>[] = useMemo(() => {
     if (isModularIntervention) return [];
     return sessions.map(({ id, name, type }) => ({
       value: id,
@@ -188,6 +191,10 @@ export const InviteParticipantsModalContent: FC<Props> = ({
     organizationLoading ||
     (isReportingIntervention && organizationId !== organization?.id);
 
+  const filteredSessionOptions = sessionOptions.filter(
+    (session) => session.type !== 'Session::Sms',
+  );
+
   const { view } = currentView;
 
   return (
@@ -207,7 +214,7 @@ export const InviteParticipantsModalContent: FC<Props> = ({
               creatingPredefinedParticipantsPossible={
                 creatingPredefinedParticipantsPossible
               }
-              sessionOptions={sessionOptions}
+              sessionOptions={filteredSessionOptions}
               healthClinicOptions={healthClinicOptions}
               normalizedSessions={normalizedSessions}
               normalizedHealthClinicsInfos={normalizedHealthClinicsInfos}
