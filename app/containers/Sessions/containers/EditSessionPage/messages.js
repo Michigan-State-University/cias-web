@@ -11,10 +11,6 @@ export default defineMessages({
     id: `${scope}.newQuestionSubtitle`,
     defaultMessage: '<p>Enter main text/question for screen here</p>',
   },
-  newSmsQuestionSubtitle: {
-    id: `${scope}.newSmsQuestionSubtitle`,
-    defaultMessage: 'Enter SMS text here',
-  },
   manageSlides: {
     id: `${scope}.manageSlides`,
     defaultMessage: 'Manage Groups',

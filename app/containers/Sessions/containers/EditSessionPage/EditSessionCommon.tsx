@@ -376,10 +376,7 @@ const EditSessionCommon = ({
         type === QuestionTypes.SMS_QUESTION ||
         QuestionTypes.SMS_INFORMATION_QUESTION;
       const newQuestionSubtitle =
-        defaultQuestionSubtitlesMessages[type] ||
-        (smsQuestionType
-          ? messages.newSmsQuestionSubtitle
-          : messages.newQuestionSubtitle);
+        defaultQuestionSubtitlesMessages[type] || messages.newQuestionSubtitle;
 
       createQuestion(
         instantiateEmptyQuestion(
