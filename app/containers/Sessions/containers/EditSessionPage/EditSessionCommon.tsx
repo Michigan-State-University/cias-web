@@ -372,9 +372,6 @@ const EditSessionCommon = ({
 
   const onCreateQuestion = (type: string) => {
     if (type.includes(questionType)) {
-      const smsQuestionType =
-        type === QuestionTypes.SMS_QUESTION ||
-        QuestionTypes.SMS_INFORMATION_QUESTION;
       const newQuestionSubtitle =
         defaultQuestionSubtitlesMessages[type] || messages.newQuestionSubtitle;
 

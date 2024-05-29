@@ -53,7 +53,7 @@ import { AnswerInterventionContent, AnswerOuterContainer } from './styled';
 import { HIDE_NARRATOR_QUESTIONS } from './constants';
 import { variableTooltipContents } from './variableTooltipContents';
 import QuestionDetailsLanguageProvider from './QuestionDetailsLanguageProvider';
-import { Session } from '../../../../models/Session';
+import { Session, SessionTypes } from '../../../../models/Session';
 
 export type QuestionDetailsProps = {
   changeGroupName: (name: string) => void;
@@ -276,17 +276,19 @@ const RenderQuestionDetails = ({
                   <QuestionData />
                 </Row>
 
-                <Row align="center" gap={16} dir={fixedElementsDirection}>
-                  {renderBackButton && <ScreenBackButton disabled />}
-                  <ActionButtons
-                    questionType={type}
-                    questionRequired={required}
-                    isCatMhSession={false}
-                    skipQuestionButtonDisabled
-                    renderContinueButton={renderContinueButton}
-                    continueButtonDisabled
-                  />
-                </Row>
+                {sessionType !== SessionTypes.SMS_SESSION && (
+                  <Row align="center" gap={16} dir={fixedElementsDirection}>
+                    {renderBackButton && <ScreenBackButton disabled />}
+                    <ActionButtons
+                      questionType={type}
+                      questionRequired={required}
+                      isCatMhSession={false}
+                      skipQuestionButtonDisabled
+                      renderContinueButton={renderContinueButton}
+                      continueButtonDisabled
+                    />
+                  </Row>
+                )}
               </AppContainer>
             </Row>
           </AnswerInterventionContent>
