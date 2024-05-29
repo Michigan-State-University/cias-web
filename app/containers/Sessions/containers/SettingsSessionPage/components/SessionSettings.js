@@ -228,8 +228,8 @@ const SessionSettings = ({
                         ? messages.smsCodeForClinic
                         : messages.smsCode;
                       return (
-                        <>
-                          <Row justify="between" align="center" key={id}>
+                        <div key={id}>
+                          <Row justify="between" align="center">
                             <Row justify="between" align="center">
                               <H3 fontWeight="regular">
                                 {formatMessage(properMessage, { clinicName })}
@@ -260,7 +260,7 @@ const SessionSettings = ({
                               px={12}
                             />
                           </Row>
-                        </>
+                        </div>
                       );
                     },
                   )}

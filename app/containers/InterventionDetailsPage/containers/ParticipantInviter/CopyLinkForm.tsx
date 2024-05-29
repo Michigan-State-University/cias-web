@@ -9,10 +9,7 @@ import Divider from 'components/Divider';
 import Row from 'components/Row';
 import FormikSelect from 'components/FormikSelect';
 import CopyToClipboard from 'components/CopyToClipboard';
-import {
-  SelectOption,
-  SelectOptionTypeExtended,
-} from 'components/Select/types';
+import { SelectOption } from 'components/Select/types';
 
 import { CopyLinkFormValues } from './types';
 import messages from './messages';
@@ -23,7 +20,7 @@ export type Props = {
   isReportingIntervention: boolean;
   interventionId: string;
   interventionLanguageCode: string;
-  sessionOptions: SelectOptionTypeExtended<string>[];
+  sessionOptions: (SelectOption<string> & { type: string })[];
   healthClinicOptions: SelectOption<string>[];
 };
 

@@ -1,10 +1,7 @@
 import { FC } from 'react';
 import { useIntl } from 'react-intl';
 
-import {
-  SelectOption,
-  SelectOptionTypeExtended,
-} from 'components/Select/types';
+import { SelectOption } from 'components/Select/types';
 import Tabs from 'components/Tabs';
 
 import { CopyLinkForm } from './CopyLinkForm';
@@ -26,7 +23,7 @@ export type Props = {
   invitingPossible: boolean;
   copyingInvitationLinkPossible: boolean;
   creatingPredefinedParticipantsPossible: boolean;
-  sessionOptions: SelectOptionTypeExtended<string>[];
+  sessionOptions: (SelectOption<string> & { type: string })[];
   healthClinicOptions: SelectOption<string>[];
   normalizedSessions: NormalizedSessions;
   normalizedHealthClinicsInfos: NormalizedHealthClinicsInfos;

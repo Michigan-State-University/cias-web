@@ -3,7 +3,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { useIntl } from 'react-intl';
 
 import { InterventionStatus, InterventionType } from 'models/Intervention';
-import { Session } from 'models/Session';
+import { Session, SessionTypes } from 'models/Session';
 import { Organization } from 'models/Organization';
 import {
   canCopyInvitationLink,
@@ -20,10 +20,7 @@ import {
 } from 'global/reducers/organizations';
 
 import Loader from 'components/Loader';
-import {
-  SelectOption,
-  SelectOptionTypeExtended,
-} from 'components/Select/types';
+import { SelectOption } from 'components/Select/types';
 
 import {
   InviteParticipantModalView,
@@ -84,14 +81,15 @@ export const InviteParticipantsModalContent: FC<Props> = ({
     }
   }, [organizationId]);
 
-  const sessionOptions: SelectOptionTypeExtended<string>[] = useMemo(() => {
-    if (isModularIntervention) return [];
-    return sessions.map(({ id, name, type }) => ({
-      value: id,
-      label: name,
-      type,
-    }));
-  }, [isModularIntervention, sessions]);
+  const sessionOptions: (SelectOption<string> & { type: string })[] =
+    useMemo(() => {
+      if (isModularIntervention) return [];
+      return sessions.map(({ id, name, type }) => ({
+        value: id,
+        label: name,
+        type,
+      }));
+    }, [isModularIntervention, sessions]);
 
   const normalizedSessions: NormalizedSessions = useMemo(() => {
     if (isModularIntervention) return {};
@@ -192,7 +190,7 @@ export const InviteParticipantsModalContent: FC<Props> = ({
     (isReportingIntervention && organizationId !== organization?.id);
 
   const filteredSessionOptions = sessionOptions.filter(
-    (session) => session.type !== 'Session::Sms',
+    (session) => session.type !== SessionTypes.SMS_SESSION,
   );
 
   const { view } = currentView;

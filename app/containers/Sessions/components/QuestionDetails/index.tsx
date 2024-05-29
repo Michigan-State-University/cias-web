@@ -10,6 +10,7 @@ import { GroupType, QuestionGroup } from 'models/QuestionGroup';
 import { QuestionDTO, QuestionTypes } from 'models/Question';
 import { Intervention } from 'models/Intervention';
 import { CHARACTER_CONFIGS } from 'models/Character';
+import { Session, SessionTypes } from 'models/Session';
 
 import { makeSelectIsNarratorTab } from 'global/reducers/localState';
 import {
@@ -53,7 +54,6 @@ import { AnswerInterventionContent, AnswerOuterContainer } from './styled';
 import { HIDE_NARRATOR_QUESTIONS } from './constants';
 import { variableTooltipContents } from './variableTooltipContents';
 import QuestionDetailsLanguageProvider from './QuestionDetailsLanguageProvider';
-import { Session, SessionTypes } from '../../../../models/Session';
 
 export type QuestionDetailsProps = {
   changeGroupName: (name: string) => void;
