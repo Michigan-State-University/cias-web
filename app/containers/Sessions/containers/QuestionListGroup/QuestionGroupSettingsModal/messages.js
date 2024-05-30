@@ -9,7 +9,7 @@ export default defineMessages({
   },
   questionsPerDay: {
     id: `${scope}.questionsPerDay`,
-    defaultMessage: 'Number of questions per day',
+    defaultMessage: 'Number of messages per day',
   },
   dayOfPeriod: {
     id: `${scope}.dayOfPeriod`,
