@@ -63,6 +63,8 @@ export interface Session {
   autocloseEnabled: boolean;
   autocloseAt: Nullable<string>;
   smsCodesAttributes: Array<object>;
+  welcomeMessage: string;
+  defaultResponse: string;
 }
 
 export interface ClassicSession extends Session {

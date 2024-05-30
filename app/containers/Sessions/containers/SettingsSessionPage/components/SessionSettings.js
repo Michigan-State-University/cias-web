@@ -71,6 +71,8 @@ const SessionSettings = ({
   editingPossible,
   type,
   smsCodesAttributes,
+  welcomeMessage,
+  defaultResponse,
 }) => {
   useInjectReducer({ key: 'intervention', reducer: interventionReducer });
   useInjectReducer({ key: 'questions', reducer: questionsReducer });
@@ -221,50 +223,76 @@ const SessionSettings = ({
               </InputContainer>
 
               {type === SessionTypes.SMS_SESSION && (
-                <InputContainer mt={15}>
-                  {smsCodesAttributes.map(
-                    ({ smsCode, id, clinic: { name: clinicName } }, index) => {
-                      const properMessage = clinicName
-                        ? messages.smsCodeForClinic
-                        : messages.smsCode;
-                      return (
-                        <div key={id}>
-                          <Row justify="between" align="center">
+                <>
+                  <InputContainer mt={15}>
+                    {smsCodesAttributes.map(
+                      ({ smsCode, id, clinic: { name: clinicName } }, index) => {
+                        const properMessage = clinicName
+                          ? messages.smsCodeForClinic
+                          : messages.smsCode;
+                        return (
+                          <div key={id}>
                             <Row justify="between" align="center">
-                              <H3 fontWeight="regular">
-                                {formatMessage(properMessage, { clinicName })}
-                              </H3>
+                              <Row justify="between" align="center">
+                                <H3 fontWeight="regular">
+                                  {formatMessage(properMessage, { clinicName })}
+                                </H3>
+                              </Row>
+                              <TextButton
+                                fontWeight="bold"
+                                hoverDecoration="underline"
+                                clickable
+                                disabled={!editingPossible}
+                                buttonProps={{
+                                  color: themeColors.secondary,
+                                }}
+                                onClick={() =>
+                                  updateSmsCode(getRandomString(7), index)
+                                }
+                              >
+                                {formatMessage(messages.smsCodeRandomize)}
+                              </TextButton>
                             </Row>
-                            <TextButton
-                              fontWeight="bold"
-                              hoverDecoration="underline"
-                              clickable
-                              disabled={!editingPossible}
-                              buttonProps={{
-                                color: themeColors.secondary,
-                              }}
-                              onClick={() =>
-                                updateSmsCode(getRandomString(7), index)
-                              }
-                            >
-                              {formatMessage(messages.smsCodeRandomize)}
-                            </TextButton>
-                          </Row>
-                          <Row>
-                            <Input
-                              disabled={!editingPossible}
-                              width="100%"
-                              placeholder={formatMessage(messages.smsCode)}
-                              value={smsCode}
-                              onBlur={(val) => updateSmsCode(val, index)}
-                              px={12}
-                            />
-                          </Row>
-                        </div>
-                      );
-                    },
-                  )}
-                </InputContainer>
+                            <Row>
+                              <Input
+                                disabled={!editingPossible}
+                                width="100%"
+                                placeholder={formatMessage(messages.smsCode)}
+                                value={smsCode}
+                                onBlur={(val) => updateSmsCode(val, index)}
+                                px={12}
+                              />
+                            </Row>
+                          </div>
+                        );
+                      },
+                    )}
+                  </InputContainer>
+                  <InputContainer mt={15}>
+                    <H3 mb={5} fontWeight="regular">
+                      {formatMessage(messages.welcomeMessageLabel)}
+                    </H3>
+                    <Input
+                      disabled={!editingPossible}
+                      width="100%"
+                      value={welcomeMessage}
+                      onBlur={(val) => editSession({ welcomeMessage: val })}
+                      px={12}
+                    />
+                  </InputContainer>
+                  <InputContainer mt={15}>
+                    <H3 mb={5} fontWeight="regular">
+                      {formatMessage(messages.defaultResponseLabel)}
+                    </H3>
+                    <Input
+                      disabled={!editingPossible}
+                      width="100%"
+                      value={defaultResponse}
+                      onBlur={(val) => editSession({ defaultResponse: val })}
+                      px={12}
+                    />
+                  </InputContainer>
+                </>
               )}
 
               <InputContainer my={15}>
@@ -393,6 +421,8 @@ SessionSettings.propTypes = {
   editingPossible: PropTypes.bool,
   type: PropTypes.string,
   smsCodesAttributes: PropTypes.array,
+  welcomeMessage: PropTypes.string,
+  defaultResponse: PropTypes.string,
 };
 
 export default compose(withConnect)(SessionSettings);

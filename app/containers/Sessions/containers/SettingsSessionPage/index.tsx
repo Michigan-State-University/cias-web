@@ -40,6 +40,8 @@ const SettingsSessionPage = () => {
     autocloseAt,
     type,
     smsCodesAttributes,
+    welcomeMessage,
+    defaultResponse,
   } = session;
   useInjectReducer({ key: 'session', reducer: sessionReducer });
   useInjectSaga({ key: 'getSession', saga: getSessionSaga });
@@ -81,6 +83,8 @@ const SettingsSessionPage = () => {
           autocloseAt={autocloseAt}
           type={type}
           smsCodesAttributes={smsCodesAttributes}
+          welcomeMessage={welcomeMessage}
+          defaultResponse={defaultResponse}
         />
       </Box>
     </>
