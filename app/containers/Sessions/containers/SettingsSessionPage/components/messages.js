@@ -17,7 +17,7 @@ export default defineMessages({
   },
   defaultResponseLabel: {
     id: `${scope}.defaultResponseLabel`,
-    defaultMessage: 'Default response',
+    defaultMessage: 'Default response for wrong message',
   },
   smsCodeForClinic: {
     id: `${scope}.smsCodeForClinic`,
