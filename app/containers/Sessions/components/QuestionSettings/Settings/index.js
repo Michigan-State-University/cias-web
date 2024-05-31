@@ -47,6 +47,7 @@ const Settings = ({
     formulas,
     type,
     accepted_answers: acceptedAnswers,
+    sms_reminders: smsReminders,
   } = {},
   intl: { formatMessage },
   tab,
@@ -86,6 +87,7 @@ const Settings = ({
               formatMessage={formatMessage}
               disabled={!editingPossible}
               acceptedAnswers={acceptedAnswers}
+              smsReminders={smsReminders}
               type={type}
               id={id}
             />

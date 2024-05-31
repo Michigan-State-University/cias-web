@@ -31,4 +31,29 @@ export default defineMessages({
     id: `${scope}.answerIfWrong`,
     defaultMessage: 'Error message if value is not within specified range',
   },
+  remindersLabel: {
+    id: `${scope}.remindersLabel`,
+    defaultMessage: 'Reminders',
+  },
+  remindersSubLabel: {
+    id: `${scope}.remindersSubLabel`,
+    defaultMessage:
+      'Send SMS reminders when Participant does not respond to this message',
+  },
+  perHoursLabel: {
+    id: `${scope}.perHoursLabel`,
+    defaultMessage: 'Send every [X] hours',
+  },
+  numberOfDaysLabel: {
+    id: `${scope}.numberOfDaysLabel`,
+    defaultMessage: 'For [X] days',
+  },
+  fromLabel: {
+    id: `${scope}.fromLabel`,
+    defaultMessage: 'From',
+  },
+  toLabel: {
+    id: `${scope}.toLabel`,
+    defaultMessage: 'To',
+  },
 });

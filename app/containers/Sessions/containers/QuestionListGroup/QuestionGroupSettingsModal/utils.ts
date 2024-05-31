@@ -2,6 +2,9 @@ import { get } from 'lodash';
 
 // Parse US time format to Date object
 export const parseTime = (t: string) => {
+  if (!t) {
+    return null;
+  }
   const d = new Date();
   const time = t.match(/(\d+)(?::(\d\d))?\s*([Pp]?)/);
   const hours = get(time, '[1]');

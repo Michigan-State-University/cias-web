@@ -2,7 +2,7 @@ import React, { memo } from 'react';
 import PropTypes from 'prop-types';
 import { compose } from 'redux';
 import { connect } from 'react-redux';
-import { get, split, set } from 'lodash';
+import { get, split, set, isEmpty } from 'lodash';
 import { useIntl } from 'react-intl';
 
 import { arrayValidator, numericValidator } from 'utils/validators';
@@ -14,14 +14,27 @@ import H3 from 'components/H3';
 import Column from 'components/Column';
 import Radio from 'components/Radio';
 import Text from 'components/Text';
+import { DateInput } from 'components/Input/DateInput';
+import { LocalizedDatePicker } from 'components/DatePicker';
+import Checkbox from 'components/Checkbox';
 
 import { Input } from '../styled';
 import messages from './messages';
+import {
+  getTimeString,
+  parseTime,
+} from '../../../../../containers/QuestionListGroup/QuestionGroupSettingsModal/utils';
 
-const SmsSettingsTab = ({ editQuestion, acceptedAnswers, disabled }) => {
+const SmsSettingsTab = ({
+  editQuestion,
+  acceptedAnswers,
+  smsReminders,
+  disabled,
+}) => {
   const { formatMessage } = useIntl();
   const predefinedAnswers = get(acceptedAnswers, 'predefined', false);
   const rangeOfAnswers = get(acceptedAnswers, 'range', false);
+  const remindersEnabled = !isEmpty(smsReminders);
 
   return (
     <>
@@ -172,6 +185,151 @@ const SmsSettingsTab = ({ editQuestion, acceptedAnswers, disabled }) => {
           />
         </Column>
       </Row>
+      <Row justify="between" align="center" mb={8}>
+        <H3>{formatMessage(messages.remindersLabel)}</H3>
+      </Row>
+      <Row justify="between" align="center" mb={8}>
+        <Checkbox
+          id="reminders-switch"
+          checked={remindersEnabled}
+          disabled={disabled}
+          onChange={(selected) => {
+            const newSmsReminders = selected
+              ? { per_hours: '', number_of_days: '', from: '', to: '' }
+              : {};
+            editQuestion({
+              path: 'sms_reminders',
+              value: newSmsReminders,
+            });
+          }}
+        >
+          {formatMessage(messages.remindersSubLabel)}
+        </Checkbox>
+      </Row>
+      {remindersEnabled && (
+        <>
+          <Row justify="between" align="center" mb={15}>
+            <Column>
+              <label htmlFor="per_hours">
+                <Text
+                  mb={5}
+                  fontSize="12px"
+                  fontWeight="bold"
+                  width="fit-content"
+                >
+                  {formatMessage(messages.perHoursLabel)}
+                </Text>
+              </label>
+              <Input
+                id="per_hours"
+                type="singleline"
+                value={smsReminders?.per_hours}
+                validator={numericValidator}
+                disabled={disabled}
+                onBlur={(v) =>
+                  editQuestion({
+                    path: 'sms_reminders.per_hours',
+                    value: v,
+                  })
+                }
+                width="100%"
+                px={12}
+              />
+            </Column>
+          </Row>
+          <Row justify="between" align="center" mb={15}>
+            <Column>
+              <label htmlFor="number_of_days">
+                <Text
+                  mb={5}
+                  fontSize="12px"
+                  fontWeight="bold"
+                  width="fit-content"
+                >
+                  {formatMessage(messages.numberOfDaysLabel)}
+                </Text>
+              </label>
+              <Input
+                id="number_of_days"
+                type="singleline"
+                value={smsReminders?.number_of_days}
+                validator={numericValidator}
+                disabled={disabled}
+                onBlur={(v) =>
+                  editQuestion({
+                    path: 'sms_reminders.number_of_days',
+                    value: v,
+                  })
+                }
+                width="100%"
+                px={12}
+              />
+            </Column>
+          </Row>
+          <Row justify="between" align="center" mb={15} gap={8}>
+            <Column>
+              <label htmlFor="from">
+                <Text
+                  mb={5}
+                  fontSize="12px"
+                  fontWeight="bold"
+                  width="fit-content"
+                >
+                  {formatMessage(messages.fromLabel)}
+                </Text>
+              </label>
+              <LocalizedDatePicker
+                id="from"
+                selected={parseTime(smsReminders?.from)}
+                onChange={(date) =>
+                  editQuestion({
+                    path: 'sms_reminders.from',
+                    value: getTimeString(date),
+                  })
+                }
+                showTimeSelect
+                showTimeSelectOnly
+                timeIntervals={10}
+                calendarClassName="schedule-date-picker"
+                customInput={<DateInput id="exact_time_picker" width="100%" />}
+                timeCaption="Time"
+                dateFormat="h:mm aa"
+                disabled={disabled}
+              />
+            </Column>
+            <Column>
+              <label htmlFor="to">
+                <Text
+                  mb={5}
+                  fontSize="12px"
+                  fontWeight="bold"
+                  width="fit-content"
+                >
+                  {formatMessage(messages.toLabel)}
+                </Text>
+              </label>
+              <LocalizedDatePicker
+                id="to"
+                selected={parseTime(smsReminders?.to)}
+                onChange={(date) =>
+                  editQuestion({
+                    path: 'sms_reminders.to',
+                    value: getTimeString(date),
+                  })
+                }
+                showTimeSelect
+                showTimeSelectOnly
+                timeIntervals={10}
+                calendarClassName="schedule-date-picker"
+                customInput={<DateInput id="exact_time_picker" width="100%" />}
+                timeCaption="Time"
+                dateFormat="h:mm aa"
+                disabled={disabled}
+              />
+            </Column>
+          </Row>
+        </>
+      )}
     </>
   );
 };
@@ -179,6 +337,7 @@ const SmsSettingsTab = ({ editQuestion, acceptedAnswers, disabled }) => {
 SmsSettingsTab.propTypes = {
   editQuestion: PropTypes.func.isRequired,
   acceptedAnswers: PropTypes.object,
+  smsReminders: PropTypes.object,
   disabled: PropTypes.bool,
 };
 
