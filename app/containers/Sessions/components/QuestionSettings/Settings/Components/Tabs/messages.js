@@ -56,4 +56,8 @@ export default defineMessages({
     id: `${scope}.toLabel`,
     defaultMessage: 'To',
   },
+  timeLabel: {
+    id: `${scope}.timeLabel`,
+    defaultMessage: 'Time',
+  },
 });

@@ -292,7 +292,7 @@ const SmsSettingsTab = ({
                 timeIntervals={10}
                 calendarClassName="schedule-date-picker"
                 customInput={<DateInput id="exact_time_picker" width="100%" />}
-                timeCaption="Time"
+                timeCaption={formatMessage(messages.timeLabel)}
                 dateFormat="h:mm aa"
                 disabled={disabled}
               />
@@ -322,7 +322,7 @@ const SmsSettingsTab = ({
                 timeIntervals={10}
                 calendarClassName="schedule-date-picker"
                 customInput={<DateInput id="exact_time_picker" width="100%" />}
-                timeCaption="Time"
+                timeCaption={formatMessage(messages.timeLabel)}
                 dateFormat="h:mm aa"
                 disabled={disabled}
               />

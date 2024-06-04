@@ -1515,6 +1515,7 @@
   "app.containers.SmsSettingsTab.acceptedAnswers.numberOfDaysLabel": "",
   "app.containers.SmsSettingsTab.acceptedAnswers.fromLabel": "",
   "app.containers.SmsSettingsTab.acceptedAnswers.toLabel": "",
+  "app.containers.SmsSettingsTab.acceptedAnswers.timeLabel": "",
   "app.containers.SuperadminConsolePage.resetAudioButton": "",
   "app.containers.SuperadminConsolePage.resetAudioModalContent": "",
   "app.containers.SuperadminConsolePage.resetAudioModalHeader": "",

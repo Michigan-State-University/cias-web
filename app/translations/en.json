@@ -1516,6 +1516,7 @@
   "app.containers.SmsSettingsTab.acceptedAnswers.numberOfDaysLabel": "For [X] days",
   "app.containers.SmsSettingsTab.acceptedAnswers.fromLabel": "From",
   "app.containers.SmsSettingsTab.acceptedAnswers.toLabel": "To",
+  "app.containers.SmsSettingsTab.acceptedAnswers.timeLabel": "Time",
   "app.containers.SuperadminConsolePage.resetAudioButton": "Recreate All Audio",
   "app.containers.SuperadminConsolePage.resetAudioModalContent": "Are you sure you want to perform this action? The costs for recreating audio will apply.",
   "app.containers.SuperadminConsolePage.resetAudioModalHeader": "Recreate Audio",
