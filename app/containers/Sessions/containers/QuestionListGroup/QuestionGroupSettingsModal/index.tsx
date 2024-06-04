@@ -88,6 +88,7 @@ const QuestionGroupSettingsModal = ({
 
   const specificQuestionsTime = get(smsSchedule, 'time.exact', false);
   const randomQuestionsTime = get(smsSchedule, 'time.range', false);
+  const fromFirstQuestion = get(smsSchedule, 'startFromFirstQuestion', false);
 
   const handleAddNewFormula = () =>
     updateQuestionGroup(
@@ -307,6 +308,31 @@ const QuestionGroupSettingsModal = ({
             </Checkbox>
           </Row>
         )}
+        <Row justify="between" align="center" mb={8}>
+          <H3>{formatMessage(messages.sendingOrder)}</H3>
+        </Row>
+        <Row justify="between" align="center" mb={15}>
+          <Column gap={12}>
+            <Radio
+              id="fromLastAnswer"
+              onChange={() =>
+                updateSmsSchedule('startFromFirstQuestion', false)
+              }
+              checked={!fromFirstQuestion}
+              disabled={disabled}
+            >
+              <Text>{formatMessage(messages.fromLastAnswer)}</Text>
+            </Radio>
+            <Radio
+              id="fromFirstQuestion"
+              onChange={() => updateSmsSchedule('startFromFirstQuestion', true)}
+              checked={fromFirstQuestion}
+              disabled={disabled}
+            >
+              <Text>{formatMessage(messages.fromFirstQuestion)}</Text>
+            </Radio>
+          </Column>
+        </Row>
         <Row justify="between" align="center" mb={8}>
           <H3>{formatMessage(messages.conditions)}</H3>
         </Row>

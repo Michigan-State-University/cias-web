@@ -47,6 +47,18 @@ export default defineMessages({
     id: `${scope}.conditions`,
     defaultMessage: 'Conditions',
   },
+  sendingOrder: {
+    id: `${scope}.sendingOrder`,
+    defaultMessage: 'Messages sending order',
+  },
+  fromFirstQuestion: {
+    id: `${scope}.fromFirstQuestion`,
+    defaultMessage: 'Start from first message',
+  },
+  fromLastAnswer: {
+    id: `${scope}.fromLastAnswer`,
+    defaultMessage: 'Start from last message send',
+  },
   formula: {
     id: `${scope}.formula`,
     defaultMessage: 'Formula',
