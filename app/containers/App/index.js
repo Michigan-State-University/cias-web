@@ -74,6 +74,8 @@ import InboxPage from 'containers/InboxPage/Loadable';
 import ArchivePage from 'containers/ArchivePage/Loadable';
 import UserInterventionPage from 'containers/UserInterventionPage/Loadable';
 import VerifyShortLinkPage from 'containers/VerifyShortLinkPage/Loadable';
+import VerifySmsLinkPage from 'containers/VerifySmsLinkPage/Loadable';
+import UserSmsLinkPage from 'containers/UserSmsLinkPage';
 import VerifyUserKeyPage from 'containers/VerifyUserKeyPage/Loadable';
 import AccessibilityStatementPage from 'containers/AccessibiltyStatementPage/Loadable';
 import ChatWidget from 'containers/ChatWidget';
@@ -578,6 +580,16 @@ export function App({ user, fetchSelfDetails }) {
           exact
           path={RoutePath.VERIFY_SHORT_LINK}
           component={VerifyShortLinkPage}
+        />
+        <AppRoute
+          exact
+          path={RoutePath.VERIFY_SMS_LINK}
+          component={VerifySmsLinkPage}
+        />
+        <AppRoute
+          exact
+          path={RoutePath.USER_SMS_LINK}
+          component={UserSmsLinkPage}
         />
         <AppRoute
           exact
