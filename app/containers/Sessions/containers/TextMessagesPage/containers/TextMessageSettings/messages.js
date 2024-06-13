@@ -24,6 +24,10 @@ export default defineMessages({
     id: `${scope}.addVariableButton`,
     defaultMessage: '+ Add variable',
   },
+  addLinkButton: {
+    id: `${scope}.addLinkButton`,
+    defaultMessage: '+ Add link',
+  },
   deleteTextMessageHeader: {
     id: `${scope}.deleteTextMessageHeader`,
     defaultMessage: 'Delete Text Message',

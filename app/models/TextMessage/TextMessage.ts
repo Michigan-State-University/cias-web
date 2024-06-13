@@ -29,6 +29,7 @@ export type TextMessage = {
   isUsedFormula: boolean;
   noFormulaText: Nullable<string>;
   originalText: TextMessageOriginalText;
+  availableLinkVariableNumber: number;
   variants?: TextMessageVariant[];
   type: TextMessageType;
   phones?: Phone[];
