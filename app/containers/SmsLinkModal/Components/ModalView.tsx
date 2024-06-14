@@ -1,11 +1,11 @@
 import React, { memo, useState } from 'react';
 import { useIntl } from 'react-intl';
 
-import Checkbox from 'components/Checkbox';
 import { Row } from 'components/ReactGridSystem/Row';
 import Button from 'components/Button';
 import H3 from 'components/H3';
 import ApprovableInput from 'components/Input/ApprovableInput';
+import Radio from 'components/Radio';
 import ViewWrapper from './ViewWrapper';
 import messages from '../messages';
 
@@ -27,7 +27,7 @@ const ModalView = ({ onClick }: Props) => {
         <H3>{formatMessage(messages.checkboxLabel)}</H3>
       </Row>
       <Row justify="between" align="center" mb={15}>
-        <Checkbox
+        <Radio
           checked={videoCheckbox}
           id="video-checkbox"
           onChange={() => {
@@ -37,8 +37,8 @@ const ModalView = ({ onClick }: Props) => {
           }}
         >
           {formatMessage(messages.videoCheckbox)}
-        </Checkbox>
-        <Checkbox
+        </Radio>
+        <Radio
           checked={websiteCheckbox}
           id="website-checkbox"
           onChange={() => {
@@ -48,7 +48,7 @@ const ModalView = ({ onClick }: Props) => {
           }}
         >
           {formatMessage(messages.websiteCheckbox)}
-        </Checkbox>
+        </Radio>
       </Row>
       <Row justify="between" align="center" mb={8}>
         <H3>{formatMessage(messages.urlLabel)}</H3>

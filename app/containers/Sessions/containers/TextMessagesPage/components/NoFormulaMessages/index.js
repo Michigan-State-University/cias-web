@@ -38,6 +38,7 @@ import messages from './messages';
 import { TextMessagesContext } from '../../utils';
 import settingsMessages from '../../containers/TextMessageSettings/messages';
 import { TextMessageAttachment } from '../TextMessageAttachment';
+import { SmsLinksList } from '../SmsLinksList';
 
 const originalTextIconProps = {
   position: 'absolute',
@@ -151,6 +152,12 @@ const NoFormulaMessage = ({
           />
         </OriginalTextHover>
       </Box>
+      <SmsLinksList
+        smsPlanId={id}
+        availableLinkVariableNumber={
+          selectedMessage.availableLinkVariableNumber
+        }
+      />
       <TextMessageAttachment
         attachment={noFormulaAttachment}
         loading={uploadAttachmentLoading}
