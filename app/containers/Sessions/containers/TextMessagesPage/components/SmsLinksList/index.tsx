@@ -68,14 +68,6 @@ export const SmsLinksList = ({
     return links;
   }, [state.data, availableLinkVariableNumber]);
 
-  const ensureHttps = (link: string) => {
-    if (!link.startsWith('http')) {
-      return `https://${link}`;
-    }
-
-    return link;
-  };
-
   if (!smsLinks || smsLinks.length === 0) return null;
 
   const lastIndex = smsLinks.length - 1;
@@ -98,7 +90,7 @@ export const SmsLinksList = ({
           >
             <Row align="center" justify="between" margin={5}>
               {smsLink.linkType === 'video' && <Img src={player} mr={5} />}
-              <Link to={{ pathname: ensureHttps(smsLink.url) }} target="_blank">
+              <Link to={{ pathname: smsLink.url }} target="_blank">
                 <EllipsisText width={200} text={htmlToPlainText(smsLink.url)} />
               </Link>
             </Row>
