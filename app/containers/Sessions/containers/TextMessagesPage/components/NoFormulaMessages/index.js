@@ -21,9 +21,11 @@ import {
   changeNoFormulaText,
   uploadTextMessageAttachmentRequest,
   deleteTextMessageAttachmentRequest,
+  createSmsLinkRequest,
 } from 'global/reducers/textMessages';
 
 import VariableChooser from 'containers/VariableChooser';
+import SmsLinkModal from 'containers/SmsLinkModal';
 
 import { NoMarginRow } from 'components/ReactGridSystem';
 import Text from 'components/Text';
@@ -36,6 +38,7 @@ import messages from './messages';
 import { TextMessagesContext } from '../../utils';
 import settingsMessages from '../../containers/TextMessageSettings/messages';
 import { TextMessageAttachment } from '../TextMessageAttachment';
+import { SmsLinksList } from '../SmsLinksList';
 
 const originalTextIconProps = {
   position: 'absolute',
@@ -51,11 +54,17 @@ const NoFormulaMessage = ({
   changeAction,
   uploadAttachment,
   deleteAttachment,
+  addLink,
   uploadAttachmentLoading,
   uploadAttachmentError,
 }) => {
-  const { sessionId, interventionId, formatMessage, editingPossible } =
-    useContext(TextMessagesContext);
+  const {
+    selectedMessage,
+    sessionId,
+    interventionId,
+    formatMessage,
+    editingPossible,
+  } = useContext(TextMessagesContext);
 
   const handleAddVariable = (variable) => {
     const variableHelper = new VariableHelper(variable);
@@ -65,6 +74,11 @@ const NoFormulaMessage = ({
         noFormulaText ?? ''
       }${variableHelper.getFormattedVariableForDynamicInput()}`,
     );
+  };
+
+  const handleAddLink = (linkType, url) => {
+    addLink(id, linkType, url);
+    handleAddVariable(`link${selectedMessage.availableLinkVariableNumber}`);
   };
 
   const handleAddAttachment = useCallback(
@@ -82,30 +96,41 @@ const NoFormulaMessage = ({
     <Column justify="center">
       <NoMarginRow justify="between" width="100%" gap={13}>
         <Text>{formatMessage(messages.label)}</Text>
-        <VariableChooser
-          disabled={!editingPossible}
-          currentInterventionId={interventionId}
-          onClick={handleAddVariable}
-          placement="right"
-          questionTypeWhitelist={[
-            dateQuestion.id,
-            textboxQuestion.id,
-            numberQuestion.id,
-            visualAnalogueScaleQuestion.id,
-            currencyQuestion.id,
-            nameQuestion.id,
-          ]}
-          currentSessionId={sessionId}
-          includeAllVariables
-          includeCurrentSession
-          includeNonDigitVariables
-          isMultiSession
-          sessionTypesWhiteList={[SessionTypes.CLASSIC_SESSION]}
-        >
-          <Text fontWeight="bold" color={themeColors.secondary}>
-            {formatMessage(settingsMessages.addVariableButton)}
-          </Text>
-        </VariableChooser>
+        <NoMarginRow gap={20}>
+          <SmsLinkModal
+            disabled={!editingPossible}
+            placement="right"
+            onClick={handleAddLink}
+          >
+            <Text fontWeight="bold" color={themeColors.secondary}>
+              {formatMessage(settingsMessages.addLinkButton)}
+            </Text>
+          </SmsLinkModal>
+          <VariableChooser
+            disabled={!editingPossible}
+            currentInterventionId={interventionId}
+            onClick={handleAddVariable}
+            placement="right"
+            questionTypeWhitelist={[
+              dateQuestion.id,
+              textboxQuestion.id,
+              numberQuestion.id,
+              visualAnalogueScaleQuestion.id,
+              currencyQuestion.id,
+              nameQuestion.id,
+            ]}
+            currentSessionId={sessionId}
+            includeAllVariables
+            includeCurrentSession
+            includeNonDigitVariables
+            isMultiSession
+            sessionTypesWhiteList={[SessionTypes.CLASSIC_SESSION]}
+          >
+            <Text fontWeight="bold" color={themeColors.secondary}>
+              {formatMessage(settingsMessages.addVariableButton)}
+            </Text>
+          </VariableChooser>
+        </NoMarginRow>
       </NoMarginRow>
       <Box bg={colors.linkWater} width="100%" mt={10} mb={20} px={8} py={8}>
         <OriginalTextHover
@@ -127,6 +152,12 @@ const NoFormulaMessage = ({
           />
         </OriginalTextHover>
       </Box>
+      <SmsLinksList
+        smsPlanId={id}
+        availableLinkVariableNumber={
+          selectedMessage.availableLinkVariableNumber
+        }
+      />
       <TextMessageAttachment
         attachment={noFormulaAttachment}
         loading={uploadAttachmentLoading}
@@ -144,6 +175,7 @@ NoFormulaMessage.propTypes = {
   changeAction: PropTypes.func,
   uploadAttachment: PropTypes.func,
   deleteAttachment: PropTypes.func,
+  addLink: PropTypes.func,
   noFormulaText: PropTypes.string,
   noFormulaAttachment: PropTypes.object,
   originalText: PropTypes.object,
@@ -155,6 +187,7 @@ const mapDispatchToProps = {
   changeAction: changeNoFormulaText,
   uploadAttachment: uploadTextMessageAttachmentRequest,
   deleteAttachment: deleteTextMessageAttachmentRequest,
+  addLink: createSmsLinkRequest,
 };
 
 const withConnect = connect(null, mapDispatchToProps);

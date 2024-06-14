@@ -54,6 +54,9 @@ import {
   VERIFY_SHORT_LINK_REQUEST,
   VERIFY_SHORT_LINK_SUCCESS,
   VERIFY_SHORT_LINK_ERROR,
+  VERIFY_SMS_LINK_REQUEST,
+  VERIFY_SMS_LINK_SUCCESS,
+  VERIFY_SMS_LINK_ERROR,
 } from './constants';
 
 export const logIn = (user) => actionBuilder(LOG_IN_USER, { user });
@@ -178,5 +181,12 @@ export const verifyUserKeySuccess = (user) =>
   actionBuilder(VERIFY_USER_KEY_SUCCESS, { user });
 export const verifyUserKeyError = (error) =>
   actionBuilder(VERIFY_USER_KEY_ERROR, { error });
+
+export const verifySmsLinkRequest = (slug) =>
+  actionBuilder(VERIFY_SMS_LINK_REQUEST, { slug });
+export const verifySmsLinkSuccess = (data) =>
+  actionBuilder(VERIFY_SMS_LINK_SUCCESS, { data });
+export const verifySmsLinkError = (error) =>
+  actionBuilder(VERIFY_SMS_LINK_ERROR, { error });
 
 export const clearErrors = () => actionBuilder(CLEAR_ERRORS, {});

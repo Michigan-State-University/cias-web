@@ -56,6 +56,9 @@ import {
   DELETE_TEXT_MESSAGE_VARIANT_ATTACHMENT_REQUEST,
   DELETE_TEXT_MESSAGE_VARIANT_ATTACHMENT_SUCCESS,
   DELETE_TEXT_MESSAGE_VARIANT_ATTACHMENT_ERROR,
+  CREATE_SMS_LINK_REQUEST,
+  CREATE_SMS_LINK_SUCCESS,
+  CREATE_SMS_LINK_ERROR,
 } from './constants';
 
 export const fetchTextMessagesRequest = (sessionId) =>
@@ -236,3 +239,10 @@ export const setFiltersAction = (filters) =>
 
 export const setTextMessagesCount = (count) =>
   actionBuilder(SET_TEXT_MESSAGES_COUNT, { count });
+
+export const createSmsLinkRequest = (smsPlanId, linkType, url) =>
+  actionBuilder(CREATE_SMS_LINK_REQUEST, { smsPlanId, linkType, url });
+export const createSmsLinkSuccess = (smsLink) =>
+  actionBuilder(CREATE_SMS_LINK_SUCCESS, { smsLink });
+export const createSmsLinkError = (error) =>
+  actionBuilder(CREATE_SMS_LINK_ERROR, { error });
