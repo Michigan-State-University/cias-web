@@ -226,7 +226,10 @@ const SessionSettings = ({
                 <>
                   <InputContainer mt={15}>
                     {smsCodesAttributes.map(
-                      ({ smsCode, id, clinic: { name: clinicName } }, index) => {
+                      (
+                        { smsCode, id, clinic: { name: clinicName } },
+                        index,
+                      ) => {
                         const properMessage = clinicName
                           ? messages.smsCodeForClinic
                           : messages.smsCode;
