@@ -23,7 +23,7 @@ export type Props = {
   invitingPossible: boolean;
   copyingInvitationLinkPossible: boolean;
   creatingPredefinedParticipantsPossible: boolean;
-  sessionOptions: (SelectOption<string> & { type: string })[];
+  sessionOptions: SelectOption<string>[];
   healthClinicOptions: SelectOption<string>[];
   normalizedSessions: NormalizedSessions;
   normalizedHealthClinicsInfos: NormalizedHealthClinicsInfos;

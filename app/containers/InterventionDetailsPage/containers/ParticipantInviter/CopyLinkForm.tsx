@@ -20,7 +20,7 @@ export type Props = {
   isReportingIntervention: boolean;
   interventionId: string;
   interventionLanguageCode: string;
-  sessionOptions: (SelectOption<string> & { type: string })[];
+  sessionOptions: SelectOption<string>[];
   healthClinicOptions: SelectOption<string>[];
 };
 

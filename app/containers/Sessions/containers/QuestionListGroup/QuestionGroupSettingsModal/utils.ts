@@ -7,11 +7,16 @@ export const parseTime = (t: string) => {
   }
   const d = new Date();
   const time = t.match(/(\d+)(?::(\d\d))?\s*([Pp]?)/);
-  const hours = get(time, '[1]');
-  const minutes = get(time, '[2]');
+  const minutes = parseInt(get(time, '[2]'), 10);
   const ampm = get(time, '[3]');
-  d.setHours(parseInt(hours, 10) + (ampm ? 12 : 0));
-  d.setMinutes(parseInt(minutes, 10) || 0);
+  let hours = parseInt(get(time, '[1]'), 10);
+  if (hours === 12 && !ampm) {
+    hours = 0;
+  } else {
+    hours += hours < 12 && ampm ? 12 : 0;
+  }
+  d.setHours(hours);
+  d.setMinutes(minutes || 0);
   return d;
 };
 
