@@ -14,7 +14,7 @@ import orderBy from 'lodash/orderBy';
 import { Col as GCol, Row as GRow } from 'react-grid-system';
 import { useParams } from 'react-router-dom';
 import { injectSaga, injectReducer } from 'redux-injectors';
-import { filter, isEmpty } from 'lodash';
+import { filter, isEmpty, concat } from 'lodash';
 
 import { colors, themeColors } from 'theme';
 
@@ -393,7 +393,7 @@ export function InterventionDetailsPage({
     createSession(interventionId, sessions.length, sessionType);
 
   const handleReorder = (previousIndex, nextIndex) => {
-    const newList = reorder(sessions, previousIndex, nextIndex);
+    const newList = reorder(nonSmsSessions, previousIndex, nextIndex);
     let position = 0;
     const orderedNewList = newList.map((session) => {
       position += 1;
@@ -403,7 +403,7 @@ export function InterventionDetailsPage({
       };
     });
     reorderSessions({
-      reorderedList: orderedNewList,
+      reorderedList: concat(orderedNewList, smsSessions),
       interventionId,
     });
   };
@@ -485,7 +485,7 @@ export function InterventionDetailsPage({
     <DraggedTest>
       <DragDropContext onDragEnd={onDragEnd}>
         <Droppable
-          isDropDisabled={!editingPossible}
+          isDropDisabled
           droppableId="sms-session-list"
           type={reorderScope.sessions}
         >

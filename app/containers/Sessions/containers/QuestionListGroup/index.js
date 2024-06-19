@@ -89,7 +89,7 @@ const QuestionListGroup = ({
   useEffect(() => {
     // For Sms Session type questions should be collapsed by default, otherwise they should be expanded
     handleToggleCollapsable(!isSmsQuestionGroup);
-  }, [questions.length]);
+  }, []);
 
   const renderQuestions = (providedGroupDroppable) => (
     <DraggableContainer
