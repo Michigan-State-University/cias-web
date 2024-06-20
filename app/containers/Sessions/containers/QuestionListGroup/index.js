@@ -230,7 +230,6 @@ const QuestionListGroup = ({
                 {isSmsQuestionGroup && (
                   <Img
                     src={settingsIcon}
-                    disabled={!editingPossible}
                     aria-label={formatMessage(messages.groupSettings)}
                     title={formatMessage(messages.groupSettings)}
                     onClick={() => setModalVisible(true)}
