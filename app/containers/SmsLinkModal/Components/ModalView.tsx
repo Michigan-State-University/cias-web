@@ -6,11 +6,15 @@ import Button from 'components/Button';
 import H3 from 'components/H3';
 import ApprovableInput from 'components/Input/ApprovableInput';
 import Radio from 'components/Radio';
-import ViewWrapper from './ViewWrapper';
+import BadgeInput from 'components/Input/BadgeInput';
+import { variableNameValidator } from 'utils/validators';
+import globalMessages from 'global/i18n/globalMessages';
+import { colors } from 'theme/colors';
 import messages from '../messages';
+import ViewWrapper from './ViewWrapper';
 
 interface Props {
-  onClick: (linkType: string, url: string) => void;
+  onClick: (linkType: string, url: string, variable: string) => void;
 }
 
 const ModalView = ({ onClick }: Props) => {
@@ -20,6 +24,7 @@ const ModalView = ({ onClick }: Props) => {
   const [websiteCheckbox, setWebsiteCheckbox] = useState(true);
   const [linkType, setLinkType] = useState('website');
   const [url, setUrl] = useState('');
+  const [variable, setVariable] = useState('');
 
   return (
     <ViewWrapper>
@@ -50,6 +55,18 @@ const ModalView = ({ onClick }: Props) => {
           {formatMessage(messages.websiteCheckbox)}
         </Radio>
       </Row>
+      <Row justify="between" align="center" mb={15}>
+        <BadgeInput
+          textAlign="center"
+          validator={variableNameValidator}
+          placeholder={formatMessage(globalMessages.variableNamePlaceholder)}
+          color={colors.jungleGreen}
+          onBlur={(value: string) => {
+            setVariable(value);
+          }}
+          autoComplete="off"
+        />
+      </Row>
       <Row justify="between" align="center" mb={8}>
         <H3>{formatMessage(messages.urlLabel)}</H3>
       </Row>
@@ -65,7 +82,7 @@ const ModalView = ({ onClick }: Props) => {
         />
       </Row>
       <Row justify="between" align="center" mb={8}>
-        <Button onClick={() => onClick(linkType, url)}>
+        <Button onClick={() => onClick(linkType, url, variable)}>
           {formatMessage(messages.saveButton)}
         </Button>
       </Row>

@@ -15,7 +15,7 @@ import ModalView from './Components/ModalView';
 export type Props = {
   children: JSX.Element;
   disabled: boolean;
-  onClick: (linkType: string, url: string) => void;
+  onClick: (linkType: string, url: string, variable: string) => void;
   placement?: 'left' | 'right';
   topPosition?: string;
   dropdownWidth?: CSSProperties['width'];
@@ -38,8 +38,8 @@ const SmsLinkModal = ({
   useLayoutEffect(() => {}, [isOpen]);
 
   const handleOnChoose = useCallback(
-    (linkType: string, url: string) => {
-      onClick(linkType, url);
+    (linkType: string, url: string, variable: string) => {
+      onClick(linkType, url, variable);
       closeModal();
     },
     [onClick],

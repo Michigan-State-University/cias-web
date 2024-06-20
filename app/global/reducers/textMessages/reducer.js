@@ -108,6 +108,7 @@ export const initialState = {
     removePhoneError: null,
     updatePhoneError: null,
     reorderVariantsError: null,
+    createSmsLinkError: null,
   },
   cache: { textMessages: [] },
   filters: INITIAL_FILTERS,
@@ -146,7 +147,7 @@ export const textMessagesReducer = (state = initialState, action) =>
         break;
 
       case FETCH_VARIANTS_AND_PHONES_SUCCESS:
-        const { variants, phones } = action.payload;
+        const { variants, phones, smsLinks } = action.payload;
         draft.loaders.fetchVariantsAndPhonesLoading = false;
 
         if (variants.length) draft.selectedVariantId = variants[0].id;
@@ -154,6 +155,7 @@ export const textMessagesReducer = (state = initialState, action) =>
         updateItemById(draft.textMessages, state.selectedMessageId, {
           variants,
           phones,
+          smsLinks,
         });
         assignDraftItems(draft.textMessages, draft.cache.textMessages);
         break;
@@ -330,12 +332,11 @@ export const textMessagesReducer = (state = initialState, action) =>
       }
 
       case CREATE_SMS_LINK_SUCCESS: {
-        const { smsPlanId, availableVariableNumber } = payload.smsLink;
+        const { smsPlanId } = payload.smsLink;
 
         draft.loaders.updateTextMessagesLoading = false;
         updateItemById(draft.textMessages, smsPlanId, (textMessageDraft) => {
-          textMessageDraft.availableLinkVariableNumber =
-            availableVariableNumber;
+          textMessageDraft.smsLinks.push(payload.smsLink);
           return textMessageDraft;
         });
 
@@ -344,11 +345,10 @@ export const textMessagesReducer = (state = initialState, action) =>
       }
 
       case CREATE_SMS_LINK_ERROR: {
-        const { textMessageId, error } = payload;
+        const { error } = payload;
         draft.loaders.updateTextMessagesLoading = false;
-        const itemState = draft.textMessagesStates.get(textMessageId);
-        itemState.uploadAttachmentLoading = false;
-        itemState.uploadAttachmentError = error;
+        draft.errors.createSmsLinkError = error;
+        assignDraftItems(draft.cache.textMessages, draft.textMessages);
         break;
       }
 

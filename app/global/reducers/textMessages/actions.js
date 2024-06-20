@@ -72,8 +72,12 @@ export const fetchTextMessagesError = (error) =>
 
 export const fetchVariantsAndPhonesRequest = () =>
   actionBuilder(FETCH_VARIANTS_AND_PHONES_REQUEST, {});
-export const fetchVariantsAndPhonesSuccess = (variants, phones) =>
-  actionBuilder(FETCH_VARIANTS_AND_PHONES_SUCCESS, { variants, phones });
+export const fetchVariantsAndPhonesSuccess = (variants, phones, smsLinks) =>
+  actionBuilder(FETCH_VARIANTS_AND_PHONES_SUCCESS, {
+    variants,
+    phones,
+    smsLinks,
+  });
 export const fetchVariantsAndPhonesError = (error) =>
   actionBuilder(FETCH_VARIANTS_AND_PHONES_ERROR, { error });
 
@@ -240,8 +244,13 @@ export const setFiltersAction = (filters) =>
 export const setTextMessagesCount = (count) =>
   actionBuilder(SET_TEXT_MESSAGES_COUNT, { count });
 
-export const createSmsLinkRequest = (smsPlanId, linkType, url) =>
-  actionBuilder(CREATE_SMS_LINK_REQUEST, { smsPlanId, linkType, url });
+export const createSmsLinkRequest = (smsPlanId, linkType, url, variable) =>
+  actionBuilder(CREATE_SMS_LINK_REQUEST, {
+    smsPlanId,
+    linkType,
+    url,
+    variable,
+  });
 export const createSmsLinkSuccess = (smsLink) =>
   actionBuilder(CREATE_SMS_LINK_SUCCESS, { smsLink });
 export const createSmsLinkError = (error) =>

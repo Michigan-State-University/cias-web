@@ -76,9 +76,13 @@ const NoFormulaMessage = ({
     );
   };
 
-  const handleAddLink = (linkType, url) => {
-    addLink(id, linkType, url);
-    handleAddVariable(`link${selectedMessage.availableLinkVariableNumber}`);
+  const handleAddLink = (linkType, url, variable) => {
+    addLink(id, linkType, url, variable);
+
+    const text = noFormulaText ?? '';
+
+    if (variable && !text.includes(`::${variable}::`))
+      changeAction(`${text}::${variable}::`);
   };
 
   const handleAddAttachment = useCallback(
@@ -154,9 +158,7 @@ const NoFormulaMessage = ({
       </Box>
       <SmsLinksList
         smsPlanId={id}
-        availableLinkVariableNumber={
-          selectedMessage.availableLinkVariableNumber
-        }
+        availableSmsLinks={selectedMessage.smsLinks}
       />
       <TextMessageAttachment
         attachment={noFormulaAttachment}

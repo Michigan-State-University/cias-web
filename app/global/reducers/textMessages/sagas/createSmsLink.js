@@ -10,12 +10,14 @@ import { CREATE_SMS_LINK_REQUEST } from '../constants';
 import { createSmsLinkSuccess, createSmsLinkError } from '../actions';
 import messages from '../messages';
 
-export function* createSmsLink({ payload: { smsPlanId, linkType, url } } = {}) {
+export function* createSmsLink({
+  payload: { smsPlanId, linkType, url, variable },
+} = {}) {
   const requestURL = '/v1/sms_links';
 
   try {
     const { data } = yield call(axios.post, requestURL, {
-      sms_link: { sms_plan_id: smsPlanId, link_type: linkType, url },
+      sms_link: { sms_plan_id: smsPlanId, link_type: linkType, url, variable },
     });
 
     yield put(createSmsLinkSuccess(jsonApiToObject(data, 'smsLink')));

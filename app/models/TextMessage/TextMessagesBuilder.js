@@ -89,7 +89,6 @@ export class TextMessagesBuilder {
     this.isUsedFormula = textMessage.isUsedFormula;
     this.noFormulaText = textMessage.noFormulaText;
     this.originalText = textMessage.originalText;
-    this.availableLinkVariableNumber = textMessage.availableLinkVariableNumber;
     this.type = textMessage.type;
     this.includeFirstName = textMessage.includeFirstName;
     this.includeLastName = textMessage.includeLastName;
@@ -114,7 +113,6 @@ export class TextMessagesBuilder {
     isUsedFormula: this.isUsedFormula,
     noFormulaText: this.noFormulaText,
     originalText: this.originalText,
-    availableLinkVariableNumber: this.availableLinkVariableNumber,
     type: this.type,
     includeFirstName: this.includeFirstName,
     includeLastName: this.includeLastName,
