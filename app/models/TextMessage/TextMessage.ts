@@ -1,5 +1,6 @@
 import { Phone } from 'models/Phone';
 import { AppFile } from 'models/File';
+import { SmsLink } from 'models/SmsLink';
 
 import { TextMessageVariant } from './TextMessageVariant';
 import { TextMessageType } from './TextMessageType';
@@ -29,9 +30,9 @@ export type TextMessage = {
   isUsedFormula: boolean;
   noFormulaText: Nullable<string>;
   originalText: TextMessageOriginalText;
-  availableLinkVariableNumber: number;
   variants?: TextMessageVariant[];
   type: TextMessageType;
   phones?: Phone[];
+  smsLinks?: SmsLink[];
   noFormulaAttachment: Nullable<AppFile>;
 } & TextMessageIncludeOptions;

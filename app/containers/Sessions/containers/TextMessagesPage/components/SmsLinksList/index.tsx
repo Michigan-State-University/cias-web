@@ -19,19 +19,19 @@ import messages from '../NoFormulaMessages/messages';
 
 interface Props {
   smsPlanId: string;
-  availableLinkVariableNumber: number;
+  availableSmsLinks: any[];
 }
 
 interface LinksRendered {
   url: string;
-  variableNumber: number;
+  variable: string;
   linkType: string;
 }
 
 interface SmsLink {
   attributes: {
-    variable_number: number;
     url: string;
+    variable: string;
     link_type: string;
   };
 }
@@ -40,10 +40,7 @@ interface SmsLinksApiResponse {
   data: SmsLink[];
 }
 
-export const SmsLinksList = ({
-  smsPlanId,
-  availableLinkVariableNumber,
-}: Props) => {
+export const SmsLinksList = ({ smsPlanId, availableSmsLinks }: Props) => {
   const { formatMessage } = useIntl();
 
   const apiUrl = useMemo(
@@ -55,18 +52,22 @@ export const SmsLinksList = ({
     apiUrl,
     (d) => d,
     false,
-    [availableLinkVariableNumber],
+    [availableSmsLinks],
   );
 
   const smsLinks = useMemo(() => {
     const { data } = state;
     if (!data) return null;
     const links: LinksRendered[] = [];
-    data.data.forEach(({ attributes: { variable_number, url, link_type } }) =>
-      links.push({ url, variableNumber: variable_number, linkType: link_type }),
+    data.data.forEach(({ attributes: { url, link_type, variable } }) =>
+      links.push({
+        url,
+        variable,
+        linkType: link_type,
+      }),
     );
     return links;
-  }, [state.data, availableLinkVariableNumber]);
+  }, [state.data, availableSmsLinks]);
 
   if (!smsLinks || smsLinks.length === 0) return null;
 
@@ -101,7 +102,7 @@ export const SmsLinksList = ({
               margin={5}
             >
               <Text color={colors.jungleGreen}>
-                {`.:link${smsLink.variableNumber}:.`}
+                {`::${smsLink.variable}::`}
               </Text>
             </Badge>
           </Row>
