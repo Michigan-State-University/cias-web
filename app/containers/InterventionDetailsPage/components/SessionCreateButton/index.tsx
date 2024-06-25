@@ -6,7 +6,15 @@
 
 import React, { useState } from 'react';
 import { FormattedMessage, useIntl } from 'react-intl';
+import { createStructuredSelector } from 'reselect';
+import { connect } from 'react-redux';
+import { compose } from 'redux';
+import { includes } from 'lodash';
 
+import { makeSelectUser } from 'global/reducers/auth';
+
+import { SessionTypes } from 'models/Session';
+import { User } from 'models/User';
 import Row from 'components/Row';
 import Img from 'components/Img';
 import H3 from 'components/H3';
@@ -21,20 +29,36 @@ type Props = {
   handleSessionCreation: (sessionType: string) => void;
   canCreateCatSession: boolean;
   disabled: boolean;
+  user: User;
 };
 
 const SessionCreateButton = ({
   handleSessionCreation,
   canCreateCatSession,
   disabled,
+  user,
 }: Props): JSX.Element => {
   const [modalVisible, setModalVisible] = useState(false);
   const { formatMessage } = useIntl();
 
   const handleClose = () => setModalVisible(false);
 
+  const canCreateSmsSession = () => {
+    if (process.env.DISABLED_SMS_CAMPAIGN === 'true') {
+      return includes(
+        process.env.ALLOWED_USERS_FOR_SMS_CAMPAIGNS?.split(', '),
+        user.id,
+      );
+    }
+    return true;
+  };
+
   const clickWrapper = () => {
-    setModalVisible(true);
+    if (!canCreateCatSession && !canCreateSmsSession()) {
+      handleSessionCreation(SessionTypes.CLASSIC_SESSION);
+    } else {
+      setModalVisible(true);
+    }
   };
 
   const handleSessionWithTypeCreation = (sessionType: string) => {
@@ -54,6 +78,7 @@ const SessionCreateButton = ({
         <SessionTypeChooser
           onCreateSession={handleSessionWithTypeCreation}
           canCreateCatSession={canCreateCatSession}
+          canCreateSmsSession={canCreateSmsSession()}
         />
       </Modal>
       <NewInterventionContainer
@@ -73,4 +98,10 @@ const SessionCreateButton = ({
   );
 };
 
-export default SessionCreateButton;
+const mapStateToProps = createStructuredSelector({
+  user: makeSelectUser(),
+});
+
+const withConnect = connect(mapStateToProps, null);
+
+export default compose(withConnect)(SessionCreateButton);
