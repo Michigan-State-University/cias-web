@@ -17,7 +17,7 @@ function* verifySmsLinkWorker({
   payload: { slug },
 }: ReturnType<typeof verifySmsLinkRequest>) {
   const requestUrl = `/v1/sms_links/verify`;
-  const requestBody = objectToSnakeCase({ slug });
+  const requestBody = objectToSnakeCase({ sms_link: { slug } });
 
   try {
     const { data } = yield call(axios.post, requestUrl, requestBody);
