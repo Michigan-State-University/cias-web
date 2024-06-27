@@ -1,43 +1,27 @@
 import React, { useMemo } from 'react';
 import { useIntl } from 'react-intl';
+import { Link } from 'react-router-dom';
 
 import { colors } from 'theme';
 
 import player from 'assets/svg/player.svg';
+import { htmlToPlainText } from 'utils/htmlToPlainText';
+import useGet from 'utils/useGet';
 
 import Column from 'components/Column';
 import Text, { EllipsisText } from 'components/Text';
-
 import Box from 'components/Box';
 import Row from 'components/Row';
-import { htmlToPlainText } from 'utils/htmlToPlainText';
 import Badge from 'components/Badge';
-import useGet from 'utils/useGet';
 import Img from 'components/Img';
-import { Link } from 'react-router-dom';
+
+import { LinksRendered, SmsLinksApiResponse } from 'models/SmsLink';
+
 import messages from '../NoFormulaMessages/messages';
 
 interface Props {
   smsPlanId: string;
   availableSmsLinks: any[];
-}
-
-interface LinksRendered {
-  url: string;
-  variable: string;
-  linkType: string;
-}
-
-interface SmsLink {
-  attributes: {
-    url: string;
-    variable: string;
-    link_type: string;
-  };
-}
-
-interface SmsLinksApiResponse {
-  data: SmsLink[];
 }
 
 export const SmsLinksList = ({ smsPlanId, availableSmsLinks }: Props) => {
