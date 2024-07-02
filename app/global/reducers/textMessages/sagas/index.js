@@ -16,6 +16,7 @@ import uploadTextMessageAttachmentSaga from './uploadTextMessageAttachment';
 import deleteTextMessageAttachmentSaga from './deleteTextMessageAttachment';
 import uploadTextMessageVariantAttachmentSaga from './uploadTextMessageVariantAttachment';
 import deleteTextMessageVariantAttachmentSaga from './deleteTextMessageVariantAttachment';
+import createSmsLinkSaga from './createSmsLink';
 
 export function* allTextMessagesSagas() {
   yield all([
@@ -34,6 +35,7 @@ export function* allTextMessagesSagas() {
     reorderTextMessageVarians(),
     uploadTextMessageAttachmentSaga(),
     deleteTextMessageAttachmentSaga(),
+    createSmsLinkSaga(),
     uploadTextMessageVariantAttachmentSaga(),
     deleteTextMessageVariantAttachmentSaga(),
   ]);

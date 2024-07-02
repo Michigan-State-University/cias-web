@@ -67,6 +67,9 @@ import {
   DELETE_TEXT_MESSAGE_VARIANT_ATTACHMENT_REQUEST,
   DELETE_TEXT_MESSAGE_VARIANT_ATTACHMENT_SUCCESS,
   DELETE_TEXT_MESSAGE_VARIANT_ATTACHMENT_ERROR,
+  CREATE_SMS_LINK_REQUEST,
+  CREATE_SMS_LINK_SUCCESS,
+  CREATE_SMS_LINK_ERROR,
 } from './constants';
 import textMessageSettingsReducer from './settings/reducer';
 import textMessageVariantReducer from './variants/reducer';
@@ -105,6 +108,7 @@ export const initialState = {
     removePhoneError: null,
     updatePhoneError: null,
     reorderVariantsError: null,
+    createSmsLinkError: null,
   },
   cache: { textMessages: [] },
   filters: INITIAL_FILTERS,
@@ -143,7 +147,7 @@ export const textMessagesReducer = (state = initialState, action) =>
         break;
 
       case FETCH_VARIANTS_AND_PHONES_SUCCESS:
-        const { variants, phones } = action.payload;
+        const { variants, phones, smsLinks } = action.payload;
         draft.loaders.fetchVariantsAndPhonesLoading = false;
 
         if (variants.length) draft.selectedVariantId = variants[0].id;
@@ -151,6 +155,7 @@ export const textMessagesReducer = (state = initialState, action) =>
         updateItemById(draft.textMessages, state.selectedMessageId, {
           variants,
           phones,
+          smsLinks,
         });
         assignDraftItems(draft.textMessages, draft.cache.textMessages);
         break;
@@ -311,6 +316,38 @@ export const textMessagesReducer = (state = initialState, action) =>
         const { error } = payload;
         draft.loaders.updateTextMessagesLoading = false;
         draft.errors.updateTextMessagesError = error;
+        assignDraftItems(draft.cache.textMessages, draft.textMessages);
+        break;
+      }
+
+      case CREATE_SMS_LINK_REQUEST: {
+        const { smsPlanId } = payload;
+        draft.loaders.updateTextMessagesLoading = true;
+        const itemState =
+          draft.textMessagesStates.get(smsPlanId) ?? TEXT_MESSAGE_DEFAULT_STATE;
+        draft.textMessagesStates.set(smsPlanId, {
+          ...itemState,
+        });
+        break;
+      }
+
+      case CREATE_SMS_LINK_SUCCESS: {
+        const { smsPlanId } = payload.smsLink;
+
+        draft.loaders.updateTextMessagesLoading = false;
+        updateItemById(draft.textMessages, smsPlanId, (textMessageDraft) => {
+          textMessageDraft.smsLinks.push(payload.smsLink);
+          return textMessageDraft;
+        });
+
+        assignDraftItems(draft.textMessages, draft.cache.textMessages);
+        break;
+      }
+
+      case CREATE_SMS_LINK_ERROR: {
+        const { error } = payload;
+        draft.loaders.updateTextMessagesLoading = false;
+        draft.errors.createSmsLinkError = error;
         assignDraftItems(draft.cache.textMessages, draft.textMessages);
         break;
       }

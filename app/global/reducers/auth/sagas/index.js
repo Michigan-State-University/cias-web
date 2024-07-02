@@ -18,6 +18,7 @@ import termsAcceptSaga from './acceptTerms';
 
 export * from './verifyUserKey';
 export * from './verifyShortLink';
+export * from './verifySmsLink';
 
 export {
   logOutSaga,
