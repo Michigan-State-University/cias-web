@@ -7,4 +7,8 @@ export default defineMessages({
     id: `${scope}.groupPlaceholder`,
     defaultMessage: 'Group placeholder',
   },
+  groupSettings: {
+    id: `${scope}.groupSettings`,
+    defaultMessage: 'Group settings',
+  },
 });

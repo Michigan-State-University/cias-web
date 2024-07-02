@@ -5,6 +5,7 @@ export const getQuestionDataByType = (
   type: QuestionTypes,
 ): QuestionDTO['body'] => {
   switch (type) {
+    case QuestionTypes.SMS_QUESTION:
     case QuestionTypes.SINGLE:
       return {
         variable: { name: '' },
@@ -44,6 +45,7 @@ export const getQuestionDataByType = (
         ],
       };
 
+    case QuestionTypes.SMS_INFORMATION_QUESTION:
     case QuestionTypes.INFORMATION:
       return {
         data: [],

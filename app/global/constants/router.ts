@@ -36,6 +36,8 @@ export enum RoutePath {
   FORBIDDEN = '/no-access',
   VERIFY_SHORT_LINK = '/int/:slug',
   VERIFY_USER_KEY = '/usr/:userKey',
+  USER_SMS_LINK = '/user_sms_link',
+  VERIFY_SMS_LINK = '/link/:slug',
   NOT_FOUND = '/not-found-page',
   INTERVENTION_NOT_AVAILABLE = '/not-available',
 }

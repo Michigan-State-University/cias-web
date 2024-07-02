@@ -1,6 +1,7 @@
 import styled from 'styled-components';
 
 import { StyledInput } from 'components/Input/StyledInput';
+import { margin } from 'components/BaseComponentStyles';
 import { themeColors } from 'theme';
 
 export const Input = styled(StyledInput)`
@@ -18,6 +19,7 @@ export const InputContainer = styled.div`
   display: flex;
   flex-direction: column;
   width: 100%;
+  ${margin};
 `;
 
 export const HiddenInput = styled.input`

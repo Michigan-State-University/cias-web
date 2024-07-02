@@ -14,6 +14,7 @@ import orderBy from 'lodash/orderBy';
 import { Col as GCol, Row as GRow } from 'react-grid-system';
 import { useParams } from 'react-router-dom';
 import { injectSaga, injectReducer } from 'redux-injectors';
+import { filter, isEmpty, concat } from 'lodash';
 
 import { colors, themeColors } from 'theme';
 
@@ -32,6 +33,7 @@ import { isInterventionExportFeatureEnabled } from 'utils/env';
 import { canEdit } from 'models/Status/statusPermissions';
 import { useRoleManager } from 'models/User/RolesManager';
 import { reorderScope } from 'models/Session/ReorderScope';
+import { SessionTypes } from 'models/Session';
 import { getQuestionGroupsSaga } from 'global/reducers/questionGroups/sagas';
 import { editSessionRequest, editSessionSaga } from 'global/reducers/session';
 import { makeSelectUser } from 'global/reducers/auth';
@@ -83,6 +85,7 @@ import ErrorAlert from 'components/ErrorAlert';
 import Row from 'components/Row';
 import Spinner from 'components/Spinner';
 import AppContainer from 'components/Container';
+import Divider from 'components/Divider';
 import {
   useHenryFordBranchingInfoModal,
   HenryFordBranchingInfoType,
@@ -390,7 +393,7 @@ export function InterventionDetailsPage({
     createSession(interventionId, sessions.length, sessionType);
 
   const handleReorder = (previousIndex, nextIndex) => {
-    const newList = reorder(sessions, previousIndex, nextIndex);
+    const newList = reorder(nonSmsSessions, previousIndex, nextIndex);
     let position = 0;
     const orderedNewList = newList.map((session) => {
       position += 1;
@@ -400,7 +403,7 @@ export function InterventionDetailsPage({
       };
     });
     reorderSessions({
-      reorderedList: orderedNewList,
+      reorderedList: concat(orderedNewList, smsSessions),
       interventionId,
     });
   };
@@ -416,7 +419,27 @@ export function InterventionDetailsPage({
     [sessions],
   );
 
-  const renderList = () => (
+  const smsSessions = useMemo(
+    () =>
+      sortedSessions &&
+      filter(
+        sortedSessions,
+        (session) => session.type === SessionTypes.SMS_SESSION,
+      ),
+    [sortedSessions],
+  );
+
+  const nonSmsSessions = useMemo(
+    () =>
+      sortedSessions &&
+      filter(
+        sortedSessions,
+        (session) => session.type !== SessionTypes.SMS_SESSION,
+      ),
+    [sortedSessions],
+  );
+
+  const renderClassicSessions = () => (
     <DraggedTest>
       <DragDropContext onDragEnd={onDragEnd}>
         <Droppable
@@ -429,9 +452,51 @@ export function InterventionDetailsPage({
               ref={providedDroppable.innerRef}
               {...providedDroppable.droppableProps}
             >
-              {sortedSessions &&
-                sortedSessions.map((session, index) => {
-                  const nextSession = sortedSessions.find(
+              {nonSmsSessions &&
+                nonSmsSessions.map((session, index) => (
+                  <Row key={session.id}>
+                    <SessionListItem
+                      disabled={!editingPossible}
+                      deletionPossible={editingPossible}
+                      sharedTo={sharedTo}
+                      session={session}
+                      index={index}
+                      isSelected={index === sessionIndex}
+                      handleCopySession={handleCopySession}
+                      handleExternalCopySession={handleExternalCopySession}
+                      handleDeleteSession={(sessionId) =>
+                        setDeleteConfirmationSessionId(sessionId)
+                      }
+                      editSession={editSession}
+                      interventionType={type}
+                      hfhsAccess={hfhsAccess}
+                    />
+                  </Row>
+                ))}
+              {providedDroppable.placeholder}
+            </div>
+          )}
+        </Droppable>
+      </DragDropContext>
+    </DraggedTest>
+  );
+
+  const renderSmsSessions = () => (
+    <DraggedTest>
+      <DragDropContext onDragEnd={onDragEnd}>
+        <Droppable
+          isDropDisabled
+          droppableId="sms-session-list"
+          type={reorderScope.sessions}
+        >
+          {(providedDroppable) => (
+            <div
+              ref={providedDroppable.innerRef}
+              {...providedDroppable.droppableProps}
+            >
+              {smsSessions &&
+                smsSessions.map((session, index) => {
+                  const nextSession = smsSessions.find(
                     ({ position }) => position > session.position,
                   );
                   return (
@@ -563,7 +628,17 @@ export function InterventionDetailsPage({
 
             <GRow>
               <GCol xl={6}>
-                {renderList()}
+                {renderClassicSessions()}
+                {!isEmpty(smsSessions) && (
+                  <>
+                    {!isEmpty(nonSmsSessions) && (
+                      <Row mx={24} mt={24} mb={6}>
+                        <Divider />
+                      </Row>
+                    )}
+                    {renderSmsSessions()}
+                  </>
+                )}
                 {createSessionLoading && (
                   <Row my={18} align="center">
                     <Spinner color={themeColors.secondary} />

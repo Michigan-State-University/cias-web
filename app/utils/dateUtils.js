@@ -20,3 +20,6 @@ export const getDiffBetweenDatesInDays = (startDate, endDate) => {
 
 export const getUTCDateString = (date) =>
   new Date(getUTCTime(date)).toISOString().slice(0, 10);
+
+export const dayOfWeekAsString = (dayIndex) =>
+  ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'][dayIndex] || '';

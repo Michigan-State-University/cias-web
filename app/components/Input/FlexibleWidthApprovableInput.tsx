@@ -13,12 +13,16 @@ type Props = {
 const FlexibleWidthApprovableInput = ({
   emptyWidth,
   value,
+  fullWidth,
   ...restProps
 }: Props): JSX.Element => {
   const [inputValue, setInputValue] = useState(value);
 
   return (
-    <Box minWidth={htmlToPlainText(inputValue) ? null : emptyWidth}>
+    <Box
+      width={fullWidth ? '100%' : 'inherit'}
+      minWidth={htmlToPlainText(inputValue) ? null : emptyWidth}
+    >
       <ApprovableInput
         onValueChange={setInputValue}
         value={value}

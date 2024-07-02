@@ -1,6 +1,7 @@
 import React from 'react';
 import { useIntl } from 'react-intl';
 
+import { SessionTypes } from 'models/Session';
 import H3 from 'components/H3';
 
 import messages from './messages';
@@ -20,6 +21,7 @@ export const SessionSettingsForm: React.FC<Props> = ({
   autocloseEnabled,
   autocloseAt,
   onSubmit,
+  type,
 }) => {
   const { formatMessage } = useIntl();
 
@@ -35,12 +37,14 @@ export const SessionSettingsForm: React.FC<Props> = ({
         autocloseAt={autocloseAt}
         onSubmit={onSubmit}
       />
-      <AutofinishForm
-        disabled={disabled}
-        autofinishEnabled={autofinishEnabled}
-        autofinishDelay={autofinishDelay}
-        onSubmit={onSubmit}
-      />
+      {type !== SessionTypes.SMS_SESSION && (
+        <AutofinishForm
+          disabled={disabled}
+          autofinishEnabled={autofinishEnabled}
+          autofinishDelay={autofinishDelay}
+          onSubmit={onSubmit}
+        />
+      )}
     </>
   );
 };

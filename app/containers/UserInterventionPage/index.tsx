@@ -16,7 +16,7 @@ import {
   UserIntervention,
   UserInterventionDTO,
 } from 'models/UserIntervention/UserIntervention';
-import { Session } from 'models/Session/Session';
+import { Session, SessionTypes } from 'models/Session/Session';
 import { UserSession } from 'models/UserSession/UserSession';
 import { InterventionStatus, InterventionType } from 'models/Intervention';
 import { AppFile } from 'models/File';
@@ -81,10 +81,13 @@ const UserInterventionPage = () => {
   const filteredSessions = useMemo(() => {
     if (!data) return [];
     const { sessions, userIntervention } = data;
+    const nonSmsSessions = sessions.filter(
+      ({ type: sessionType }) => sessionType !== SessionTypes.SMS_SESSION,
+    );
     if (userIntervention.intervention.type !== InterventionType.DEFAULT) {
-      return sessions;
+      return nonSmsSessions;
     }
-    return sessions.filter(
+    return nonSmsSessions.filter(
       ({ id: sessionId }) => groupedUserSessions[sessionId] !== undefined,
     );
   }, [
