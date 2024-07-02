@@ -40,4 +40,12 @@ export default defineMessages({
     id: `${scope}.deleteTextMessageAttachmentError`,
     defaultMessage: "Couldn't delete SMS message attachment",
   },
+  createSmsLinkSuccess: {
+    id: `${scope}.createSmsLinkSuccess`,
+    defaultMessage: 'SMS link added',
+  },
+  createSmsLinkError: {
+    id: `${scope}.createSmsLinkError`,
+    defaultMessage: `Couldn't create SMS link`,
+  },
 });

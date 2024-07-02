@@ -113,6 +113,12 @@ export const UPDATE_PHONE_REQUEST = 'app/TextMessages/UPDATE_PHONE_REQUEST';
 export const UPDATE_PHONE_SUCCESS = 'app/TextMessages/UPDATE_PHONE_SUCCESS';
 export const UPDATE_PHONE_ERROR = 'app/TextMessages/UPDATE_PHONE_ERROR';
 
+export const CREATE_SMS_LINK_REQUEST =
+  'app/TextMessages/CREATE_SMS_LINK_REQUEST';
+export const CREATE_SMS_LINK_SUCCESS =
+  'app/TextMessages/CREATE_SMS_LINK_SUCCESS';
+export const CREATE_SMS_LINK_ERROR = 'app/TextMessages/CREATE_SMS_LINK_ERROR';
+
 export const SET_FILTERS = 'app/TextMessages/SET_FILTERS';
 
 export const PER_PAGE = 10;
